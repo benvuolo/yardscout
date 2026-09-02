@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Junkyard Hunter</title>
+<meta name="theme-color" content="#0b0d11">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Junkyard">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1><span class="icon">&#x1F527;</span> Junkyard <span class="brand-accent">Hunter</span></h1>
+  <p>Live nationwide junkyard intelligence &mdash; every Pick-n-Pull yard + Utah chains, priced part-by-part</p>
+</header>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab active" data-tab="live"><span class="tab-ico">&#x1F4E1;</span><span class="tab-label">Live</span></button>
+    <button class="tab" data-tab="database"><span class="tab-ico">&#x1F4DA;</span><span class="tab-label">Parts</span></button>
+    <button class="tab" data-tab="value"><span class="tab-ico">&#x1F4B0;</span><span class="tab-label">Values</span></button>
+    <button class="tab" data-tab="profit"><span class="tab-ico">&#x1F4B5;</span><span class="tab-label">Profit</span></button>
+    <button class="tab" data-tab="alerts" id="alerts-tab-btn"><span class="tab-ico">&#x1F514;</span><span class="tab-label">Alerts</span><span class="tab-badge" id="alerts-badge" style="display:none;">0</span></button>
+  </div>
+
+  <!-- LIVE INVENTORY TAB -->
+  <div id="tab-live" class="tab-content active">
+    <div class="zip-banner" id="zip-banner" style="display:none;">
+      <div class="zip-banner-text">
+        <strong>&#x1F4CD; Where are you?</strong>
+        <span>Enter your zip code and we'll show you what's in the junkyards near you.</span>
+      </div>
+      <div class="zip-banner-form">
+        <input type="text" id="zip-banner-input" inputmode="numeric" maxlength="5" placeholder="Zip code">
+        <button type="button" class="btn btn-primary" id="zip-banner-go">Show Me</button>
+      </div>
+      <button type="button" class="btn gps-btn" id="zip-banner-gps">&#x1F4CD; Or use my location</button>
+      <button type="button" class="zip-banner-skip" id="zip-banner-skip">Skip &mdash; show everything nationwide</button>
+    </div>
+    <div class="stats-bar" id="live-stats-bar"></div>
+    <div class="toolbar">
+      <input type="text" class="search-box" id="live-search" placeholder="&#x1F50D; Search make, model, yard, part...">
+      <button type="button" class="filter-toggle" id="live-filter-toggle">
+        <span>&#x2699;&#xFE0F;</span> Filters <span class="filter-count" id="live-filter-count" style="display:none;">0</span>
+      </button>
+    </div>
+    <div class="controls" id="live-controls">
+      <div class="ctl">
+        <label for="live-zip">Zip code</label>
+        <div style="display:flex;gap:0.4rem;">
+          <input type="text" id="live-zip" inputmode="numeric" maxlength="5" placeholder="e.g. 84101" title="Center point for distance filter" style="flex:1;min-width:0;">
+          <button type="button" class="gps-btn" id="live-gps" title="Use my current location">&#x1F4CD;</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label for="live-radius">Distance</label>
+        <select id="live-radius" title="Only show yards within this distance of the zip">
+          <option value="">Any distance</option>
+          <option value="25">&le; 25 mi</option>
+          <option value="50">&le; 50 mi</option>
+          <option value="100" selected>&le; 100 mi</option>
+          <option value="250">&le; 250 mi</option>
+          <option value="500">&le; 500 mi</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="live-filter-make">Make</label>
+        <select id="live-filter-make">
+          <option value="">All Makes</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="live-filter-location">Yard</label>
+        <select id="live-filter-location">
+          <option value="">All Yards</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="live-filter-match">Show</label>
+        <select id="live-filter-match">
+          <option value="">Every car</option>
+          <option value="match">Worth pulling only</option>
+          <option value="nomatch">Nothing flagged</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="live-sort">Sort by</label>
+        <select id="live-sort">
+          <option value="smart-profit">Best money right now</option>
+          <option value="fastest-sell">Fastest to sell</option>
+          <option value="gold-first">Best finds first</option>
+          <option value="profit-desc">Most total profit</option>
+          <option value="value-desc">Best single part</option>
+          <option value="haul-desc">Biggest haul</option>
+          <option value="date-desc">Just arrived</option>
+          <option value="date-asc">Been there longest</option>
+          <option value="year-desc">Year: newest</option>
+          <option value="year-asc">Year: oldest</option>
+          <option value="make-asc">Make A&ndash;Z</option>
+        </select>
+      </div>
+      <div class="ctl-actions">
+        <button class="btn btn-primary" id="live-refresh-btn" title="How to refresh data">&#x1F504; Refresh Data</button>
+        <button type="button" class="btn" id="live-export-csv" title="Download current filtered rows as CSV">Export CSV</button>
+        <button type="button" class="btn" id="live-export-json" title="Download current filtered rows as JSON">Export JSON</button>
+      </div>
+    </div>
+    <div class="car-grid" id="live-grid"></div>
+  </div>
+
+  <!-- PARTS DATABASE TAB -->
+  <div id="tab-database" class="tab-content">
+    <div class="stats-bar" id="stats-bar"></div>
+    <div class="toolbar">
+      <input type="text" class="search-box" id="search" placeholder="&#x1F50D; Search cars, parts, makes...">
+    </div>
+    <div class="controls open">
+      <div class="ctl">
+        <label for="filter-make">Make</label>
+        <select id="filter-make">
+          <option value="">All Makes</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="filter-category">Type</label>
+        <select id="filter-category">
+          <option value="">All Types</option>
+          <option value="Truck">Trucks</option>
+          <option value="SUV">SUVs</option>
+          <option value="Crossover">Crossovers</option>
+          <option value="Sedan">Sedans</option>
+          <option value="Hatchback">Hatchbacks</option>
+          <option value="Van">Vans / Minivans</option>
+          <option value="Sport">Sport</option>
+          <option value="Wagon">Wagons</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="filter-rarity">Rarity</label>
+        <select id="filter-rarity">
+          <option value="">All Rarities</option>
+          <option value="Legendary">Legendary</option>
+          <option value="Epic">Epic</option>
+          <option value="Rare">Rare</option>
+          <option value="Uncommon">Uncommon</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="sort-by">Sort by</label>
+        <select id="sort-by">
+          <option value="value-desc">Most $ (total value)</option>
+          <option value="best-part-desc">Best single part</option>
+          <option value="roi-desc">Best ROI first</option>
+          <option value="rarity">Rarest parts first</option>
+          <option value="parts-count">Most parts</option>
+          <option value="name-asc">Name A&ndash;Z</option>
+          <option value="value-asc">Lowest value first</option>
+        </select>
+      </div>
+    </div>
+    <div class="car-grid" id="car-grid"></div>
+  </div>
+
+  <!-- VALUE GUIDE TAB -->
+  <div id="tab-value" class="tab-content">
+    <div class="toolbar">
+      <input type="text" class="search-box" id="value-search" placeholder="&#x1F50D; Search parts...">
+    </div>
+    <div class="controls open">
+      <div class="ctl">
+        <label for="value-sort">Sort by</label>
+        <select id="value-sort">
+          <option value="roi-desc">Best ROI (bang for buck)</option>
+          <option value="high-desc">Highest resale $$$</option>
+          <option value="profit-desc">Most profit (resale &minus; cost)</option>
+          <option value="cost-asc">Cheapest to pull</option>
+          <option value="rarity-desc">Rarest first</option>
+          <option value="name-asc">Part name A&ndash;Z</option>
+          <option value="car-asc">Car A&ndash;Z</option>
+        </select>
+      </div>
+    </div>
+    <div class="value-table-wrapper">
+      <table class="value-table" id="value-table">
+        <thead>
+          <tr>
+            <th>Car</th>
+            <th>Part</th>
+            <th>Rarity</th>
+            <th>Yard Cost</th>
+            <th>Resale</th>
+            <th>Profit</th>
+            <th>ROI</th>
+            <th>Where to Sell</th>
+          </tr>
+        </thead>
+        <tbody id="value-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PROFIT BREAKDOWN TAB -->
+  <div id="tab-profit" class="tab-content">
+    <div class="stats-bar" id="profit-stats-bar"></div>
+    <div class="toolbar">
+      <input type="text" class="search-box" id="profit-search" placeholder="&#x1F50D; Search vehicle, part, yard...">
+    </div>
+    <div class="controls open" id="profit-controls">
+      <div class="ctl">
+        <label for="profit-filter-location">Yard</label>
+        <select id="profit-filter-location">
+          <option value="">All Yards</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="profit-filter-make">Make</label>
+        <select id="profit-filter-make">
+          <option value="">All Makes</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="profit-sort">Sort by</label>
+        <select id="profit-sort">
+          <option value="smart-profit">Best profit (freshness-weighted)</option>
+          <option value="fastest-sell">Fastest to sell</option>
+          <option value="profit-desc">Most profit (per vehicle)</option>
+          <option value="best-part-profit">Best single part profit</option>
+          <option value="roi-desc">Best ROI</option>
+          <option value="cheapest-pull">Cheapest total pull</option>
+          <option value="haul-desc">Biggest haul (resale)</option>
+          <option value="year-desc">Year: newest</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label>&nbsp;</label>
+        <label style="display:flex;align-items:center;gap:0.45rem;font-size:0.8rem;color:var(--text-dim);white-space:nowrap;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:600;">
+          <input type="checkbox" id="profit-match-only" checked style="width:16px;height:16px;accent-color:var(--accent);"> Matches only
+        </label>
+      </div>
+    </div>
+    <div class="profit-note">
+      <strong>Yard cost source:</strong> real price lists where available &mdash; <span class="src-pnp">PnP</span> Pick-n-Pull, <span class="src-tap">TAP</span> Tear-A-Part, <span class="src-utpap">UTPAP</span> Utah Pic-A-Part, <span class="src-est">est</span> estimated. Tear-A-Part runs 10&ndash;40% cheaper. Profit = avg resale &minus; yard cost.
+    </div>
+    <div class="value-table-wrapper">
+      <table class="value-table" id="profit-table">
+        <thead>
+          <tr>
+            <th>Vehicle</th>
+            <th>Location</th>
+            <th>Part</th>
+            <th>Rarity</th>
+            <th style="white-space:nowrap;">Yard Cost</th>
+            <th style="white-space:nowrap;">Resale (avg)</th>
+            <th style="white-space:nowrap;">Profit</th>
+            <th>ROI</th>
+            <th>Where to Sell</th>
+            <th>Freshness</th>
+          </tr>
+        </thead>
+        <tbody id="profit-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ALERTS TAB -->
+  <div id="tab-alerts" class="tab-content">
+    <div class="info-box" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div style="flex:1;min-width:250px;">
+        <h3 style="margin:0 0 0.25rem;">Vehicle Watchlist</h3>
+        <p style="margin:0;">Add vehicles you want to track. You'll get a browser notification when they show up in a yard. The scraper's <code>--watch</code> mode also sends push + email alerts.</p>
+      </div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button id="alert-notif-btn" class="btn btn-primary">Enable Notifications</button>
+        <button id="alert-export-btn" class="btn" title="Save watchlist.json for the scraper's --watch mode">Export for Scraper</button>
+      </div>
+    </div>
+
+    <div class="panel" id="ntfy-panel">
+      <h4>&#x1F4F2; Get alerts on your phone</h4>
+      <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;margin:0.4rem 0 0.8rem;">
+        Watchlist hits can push straight to your phone &mdash; even when this app is closed.
+        It uses <a href="https://ntfy.sh" target="_blank" rel="noopener" style="color:var(--accent);">ntfy</a>, a free notification service. One-time setup:
+      </p>
+      <ol style="font-size:0.85rem;color:var(--text-dim);line-height:1.8;margin:0 0 0.9rem 1.2rem;padding:0;">
+        <li>Install the free <strong>ntfy</strong> app (<a href="https://apps.apple.com/us/app/ntfy/id1625396347" target="_blank" rel="noopener" style="color:var(--accent);">iPhone</a> / <a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" target="_blank" rel="noopener" style="color:var(--accent);">Android</a>)</li>
+        <li>In the app, subscribe to your private topic below</li>
+        <li>Tap <strong>Send test</strong> here &mdash; you should feel a buzz</li>
+      </ol>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
+        <input type="text" id="ntfy-topic" placeholder="your-topic-name" style="width:240px;font-family:monospace;">
+        <button type="button" id="ntfy-test" class="btn btn-primary">Send test</button>
+        <span id="ntfy-status" style="font-size:0.8rem;color:var(--text-dim);"></span>
+      </div>
+      <p style="font-size:0.75rem;color:var(--text-dim);margin:0.7rem 0 0;line-height:1.5;">
+        Treat the topic name like a password &mdash; anyone who knows it can see your alerts.
+        The scanner sends to this topic automatically once <code>NTFY_TOPIC</code> is set as a secret on the GitHub repo running the scheduled scans.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h4>Add to Watchlist</h4>
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;">
+        <div>
+          <label for="alert-make">Make</label>
+          <input type="text" id="alert-make" placeholder="e.g. Toyota" style="width:130px;">
+        </div>
+        <div>
+          <label for="alert-model">Model (optional)</label>
+          <input type="text" id="alert-model" placeholder="e.g. Tacoma" style="width:130px;">
+        </div>
+        <div>
+          <label for="alert-yr-min">Year min</label>
+          <input type="number" id="alert-yr-min" placeholder="Any" style="width:85px;">
+        </div>
+        <div>
+          <label for="alert-yr-max">Year max</label>
+          <input type="number" id="alert-yr-max" placeholder="Any" style="width:85px;">
+        </div>
+        <div>
+          <label for="alert-match-only">Only w/ parts</label>
+          <input type="checkbox" id="alert-match-only" checked style="width:18px;height:18px;margin-top:0.4rem;accent-color:var(--accent);">
+        </div>
+        <button id="alert-add-btn" class="btn btn-primary">+ Add</button>
+      </div>
+    </div>
+
+    <div id="alert-watchlist" style="margin-top:1rem;"></div>
+
+    <div style="margin-top:1.5rem;">
+      <h4 style="margin:0 0 0.75rem;font-size:0.95rem;font-weight:800;">Current Matches in Yard</h4>
+      <div id="alert-matches-bar" class="stats-bar" style="margin-bottom:1rem;"></div>
+      <div id="alert-matches-grid" class="car-grid"></div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p><strong>Disclaimer:</strong> Resale ranges are estimates (calibrated toward typical used eBay sold pricing). Real prices depend on condition, trim, and timing. Yard pull costs use published price lists when available. This tool is for personal research only—not financial advice.</p>
+    <p style="margin-top:0.5rem;">Verify parts on the car before you buy. No warranty on inventory accuracy; data reflects the last scraper run.</p>
+  </footer>
+</div>
+
+<!-- SAVED CARS: floating pill + pull-up yard-visit sheet -->
+<button type="button" id="saved-pill" style="display:none;">&#x2764;&#xFE0F; <span id="saved-count">0</span></button>
+<div id="saved-backdrop"></div>
+<div id="saved-sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-head">
+    <h2>&#x2764;&#xFE0F; Yard Visit List</h2>
+    <button type="button" id="saved-clear">Clear all</button>
+  </div>
+  <p class="sheet-sub">Your saved cars, grouped by yard and sorted by row &mdash; work the list top to bottom when you walk in.</p>
+  <div id="saved-list"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
