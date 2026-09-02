@@ -6,7 +6,7 @@ const DATABASE = [
     years: "1996–2002",
     category: "SUV",
     frequency: "Common",
-    utahNotes: "Everywhere in Utah yards. Outdoor culture keeps demand sky-high. Parts sell in hours on T4R.org and local Facebook groups.",
+    notes: "Everywhere in yards. Off-road and overland culture keeps demand sky-high. Parts sell in hours on T4R.org and local Facebook groups.",
     parts: [
       { name: "Rear E-Locker Actuator Motor", rarity: "Legendary", priceRange: [250, 500], yardCost: 15, sellOn: "T4R.org, eBay" },
       { name: "Multi-Mode Transfer Case Shift Motor", rarity: "Epic", priceRange: [150, 350], yardCost: 15, sellOn: "eBay, Forums" },
@@ -26,7 +26,7 @@ const DATABASE = [
     years: "2003–2009",
     category: "SUV",
     frequency: "Common",
-    utahNotes: "4th gens are hitting yards now as they age out. V8 models' parts are especially sought after. Trail Edition parts are gold.",
+    notes: "4th gens are hitting yards now as they age out. V8 models' parts are especially sought after. Trail Edition parts are gold.",
     parts: [
       { name: "KDSS Sway Bar Links/Actuators", rarity: "Legendary", priceRange: [200, 500], yardCost: 20, sellOn: "T4R.org, eBay" },
       { name: "Rear E-Locker Actuator", rarity: "Epic", priceRange: [200, 400], yardCost: 20, sellOn: "T4R.org" },
@@ -45,7 +45,7 @@ const DATABASE = [
     years: "2010–2024",
     category: "SUV",
     frequency: "Occasional",
-    utahNotes: "Starting to trickle into yards (wrecks, flood). TRD Pro and Trail parts are instant money. OEM LED headlights are huge.",
+    notes: "Starting to trickle into yards (wrecks, flood). TRD Pro and Trail parts are instant money. OEM LED headlights are huge.",
     parts: [
       { name: "TRD Pro Grille (with TSS sensor)", rarity: "Legendary", priceRange: [300, 600], yardCost: 40, sellOn: "T4R.org, eBay" },
       { name: "OEM LED Headlights (pair)", rarity: "Epic", priceRange: [400, 800], yardCost: 60, sellOn: "eBay" },
@@ -64,7 +64,7 @@ const DATABASE = [
     years: "1995–2004",
     category: "Truck",
     frequency: "Occasional",
-    utahNotes: "Taco tax is absurd. Even junked ones get stripped fast. TRD parts, clean body panels, and small trim pieces all sell. Rust-free Utah beds ship to Midwest buyers.",
+    notes: "Taco tax is absurd. Even junked ones get stripped fast. TRD parts, clean body panels, and small trim pieces all sell. Rust-free beds from dry-climate yards ship to rust-belt buyers.",
     parts: [
       { name: "TRD Off-Road Decals / Badges", rarity: "Rare", priceRange: [30, 80], yardCost: 2, sellOn: "eBay" },
       { name: "OEM Fender Flares (color-matched)", rarity: "Epic", priceRange: [200, 500], yardCost: 30, sellOn: "Tacoma World, eBay" },
@@ -83,7 +83,7 @@ const DATABASE = [
     years: "2005–2015",
     category: "Truck",
     frequency: "Common",
-    utahNotes: "Most popular truck in Utah yards right now. TRD Sport and Off-Road parts have a huge aftermarket. Tons of local buyers.",
+    notes: "One of the most popular trucks in yards right now. TRD Sport and Off-Road parts have a huge aftermarket. Tons of local buyers.",
     parts: [
       { name: "TRD Off-Road/Sport Hood Scoop", rarity: "Rare", priceRange: [100, 250], yardCost: 20, sellOn: "Tacoma World, eBay" },
       { name: "OEM LED Taillights (2012+)", rarity: "Epic", priceRange: [150, 350], yardCost: 30, sellOn: "eBay" },
@@ -102,7 +102,7 @@ const DATABASE = [
     years: "2016–2023",
     category: "Truck",
     frequency: "Occasional",
-    utahNotes: "Wrecked 3rd gens are goldmines. TRD Pro parts are absolute fire sellers. Even basic trim pieces from these are worth grabbing.",
+    notes: "Wrecked 3rd gens are goldmines. TRD Pro parts are absolute fire sellers. Even basic trim pieces from these are worth grabbing.",
     parts: [
       { name: "TRD Pro Grille (matte black)", rarity: "Legendary", priceRange: [200, 450], yardCost: 30, sellOn: "Tacoma World, eBay" },
       { name: "OEM LED Headlights (pair)", rarity: "Epic", priceRange: [350, 700], yardCost: 50, sellOn: "eBay" },
@@ -120,7 +120,7 @@ const DATABASE = [
     years: "2000–2006",
     category: "Truck",
     frequency: "Common",
-    utahNotes: "Tons of these in Utah yards. Step bumpers, tailgates, and TRD bits are the targets. Full-size Toyota truck parts ship well.",
+    notes: "Tons of these in yards. Step bumpers, tailgates, and TRD bits are the targets. Full-size Toyota truck parts ship well.",
     parts: [
       { name: "Tailgate (clean, no dents)", rarity: "Rare", priceRange: [150, 350], yardCost: 30, sellOn: "Facebook, CL" },
       { name: "TRD Supercharger Intercooler", rarity: "Legendary", priceRange: [200, 500], yardCost: 25, sellOn: "TundraTalk, eBay" },
@@ -136,7 +136,7 @@ const DATABASE = [
     years: "2007–2021",
     category: "Truck",
     frequency: "Common",
-    utahNotes: "These are work trucks that get beat on. CrewMax beds are hard to find separately. TRD and Limited trim parts are premium.",
+    notes: "These are work trucks that get beat on. CrewMax beds are hard to find separately. TRD and Limited trim parts are premium.",
     parts: [
       { name: "OEM LED Headlights (2018+)", rarity: "Epic", priceRange: [300, 600], yardCost: 50, sellOn: "eBay" },
       { name: "TRD Pro Grille", rarity: "Epic", priceRange: [200, 400], yardCost: 30, sellOn: "TundraTalk, eBay" },
@@ -154,7 +154,7 @@ const DATABASE = [
     years: "2001–2022",
     category: "SUV",
     frequency: "Occasional",
-    utahNotes: "Big family haulers are Utah staples. These share tons of parts with Tundra. 3rd row seat hardware is always in demand.",
+    notes: "Big family haulers are yard staples. These share tons of parts with Tundra. 3rd row seat hardware is always in demand.",
     parts: [
       { name: "3rd Row Seat (complete, clean)", rarity: "Rare", priceRange: [200, 450], yardCost: 40, sellOn: "eBay, CL" },
       { name: "Power Liftgate Struts/Motor", rarity: "Rare", priceRange: [100, 250], yardCost: 15, sellOn: "eBay" },
@@ -170,7 +170,7 @@ const DATABASE = [
     years: "2007–2014",
     category: "SUV",
     frequency: "Rare",
-    utahNotes: "FJs rarely hit yards and when they do, the vultures circle immediately. Even small trim is gold because no one wants to scrap their FJ.",
+    notes: "FJs rarely hit yards and when they do, the vultures circle immediately. Even small trim is gold because no one wants to scrap their FJ.",
     parts: [
       { name: "OEM Roof Rack (full, with ladder)", rarity: "Legendary", priceRange: [300, 700], yardCost: 40, sellOn: "FJCruiserForums, eBay" },
       { name: "Front Grille (white or colored)", rarity: "Epic", priceRange: [150, 350], yardCost: 25, sellOn: "eBay" },
@@ -188,7 +188,7 @@ const DATABASE = [
     years: "1990–1997",
     category: "SUV",
     frequency: "Rare",
-    utahNotes: "Land Cruiser tax is insane. An 80 in a yard is a feeding frenzy. Lockers and KDSS parts alone justify the trip.",
+    notes: "Land Cruiser tax is insane. An 80 in a yard is a feeding frenzy. Lockers and KDSS parts alone justify the trip.",
     parts: [
       { name: "Factory Front & Rear Locker Actuators", rarity: "Legendary", priceRange: [300, 700], yardCost: 25, sellOn: "IH8MUD, eBay" },
       { name: "Birfield Joint / CV Axle Shafts", rarity: "Epic", priceRange: [150, 350], yardCost: 25, sellOn: "IH8MUD" },
@@ -206,7 +206,7 @@ const DATABASE = [
     years: "1998–2007",
     category: "SUV",
     frequency: "Rare",
-    utahNotes: "100 series are more common than 80s in yards but still rare. AHC suspension parts and center diff lock pieces move fast.",
+    notes: "100 series are more common than 80s in yards but still rare. AHC suspension parts and center diff lock pieces move fast.",
     parts: [
       { name: "AHC (Active Height Control) Pump", rarity: "Legendary", priceRange: [400, 900], yardCost: 40, sellOn: "IH8MUD, eBay" },
       { name: "AHC Height Sensors", rarity: "Epic", priceRange: [100, 275], yardCost: 10, sellOn: "IH8MUD" },
@@ -223,7 +223,7 @@ const DATABASE = [
     years: "1997–2024",
     category: "Sedan",
     frequency: "Common",
-    utahNotes: "Camrys are everywhere. Most parts are cheap BUT: OEM headlights (especially LED), hybrid battery modules, and clean interiors sell consistently.",
+    notes: "Camrys are everywhere. Most parts are cheap BUT: OEM headlights (especially LED), hybrid battery modules, and clean interiors sell consistently.",
     parts: [
       { name: "OEM LED Headlights (2018+, pair)", rarity: "Rare", priceRange: [250, 500], yardCost: 40, sellOn: "eBay" },
       { name: "Hybrid Battery Module (individual cells)", rarity: "Epic", priceRange: [100, 300], yardCost: 15, sellOn: "eBay, hybrid shops" },
@@ -239,7 +239,7 @@ const DATABASE = [
     years: "1998–2024",
     category: "Sedan",
     frequency: "Common",
-    utahNotes: "Most common car in any yard. Low individual part values but volume makes up for it. OEM headlights and interior switches are consistent sellers.",
+    notes: "Most common car in any yard. Low individual part values but volume makes up for it. OEM headlights and interior switches are consistent sellers.",
     parts: [
       { name: "OEM LED Headlights (2020+, pair)", rarity: "Rare", priceRange: [200, 450], yardCost: 35, sellOn: "eBay" },
       { name: "OEM Projector Headlights (pair)", rarity: "Uncommon", priceRange: [100, 225], yardCost: 25, sellOn: "eBay" },
@@ -254,7 +254,7 @@ const DATABASE = [
     years: "2001–2024",
     category: "Crossover",
     frequency: "Common",
-    utahNotes: "Family SUV staple. 3rd row parts, hybrid components, and power liftgate hardware are the money items.",
+    notes: "Family SUV staple. 3rd row parts, hybrid components, and power liftgate hardware are the money items.",
     parts: [
       { name: "3rd Row Seat (complete)", rarity: "Rare", priceRange: [200, 400], yardCost: 35, sellOn: "eBay, CL" },
       { name: "Power Liftgate Motor/Struts", rarity: "Rare", priceRange: [100, 250], yardCost: 15, sellOn: "eBay" },
@@ -270,7 +270,7 @@ const DATABASE = [
     years: "2001–2024",
     category: "Crossover",
     frequency: "Common",
-    utahNotes: "One of the best-selling crossovers nationally. Adventure/TRD trim parts are the unobtanium here. Hybrid parts are great sellers.",
+    notes: "One of the best-selling crossovers nationally. Adventure/TRD trim parts are the unobtanium here. Hybrid parts are great sellers.",
     parts: [
       { name: "Adventure/TRD Grille", rarity: "Rare", priceRange: [100, 250], yardCost: 20, sellOn: "eBay" },
       { name: "OEM LED Headlights (2019+)", rarity: "Rare", priceRange: [250, 500], yardCost: 40, sellOn: "eBay" },
@@ -286,7 +286,7 @@ const DATABASE = [
     years: "2004–2024",
     category: "Hatchback",
     frequency: "Common",
-    utahNotes: "Surprisingly lucrative. Hybrid battery cells sell individually to rebuilders. Inverters, DC-DC converters, and catalytic converters are all high-value small pulls.",
+    notes: "Surprisingly lucrative. Hybrid battery cells sell individually to rebuilders. Inverters, DC-DC converters, and catalytic converters are all high-value small pulls.",
     parts: [
       { name: "Hybrid Battery Cells (individual)", rarity: "Epic", priceRange: [20, 50], yardCost: 3, sellOn: "eBay (sell in bulk)" },
       { name: "DC-DC Converter", rarity: "Rare", priceRange: [150, 350], yardCost: 20, sellOn: "eBay" },
@@ -302,7 +302,7 @@ const DATABASE = [
     years: "2004–2024",
     category: "Van",
     frequency: "Common",
-    utahNotes: "Big Mormon family vans. Power sliding door motors are CONSTANTLY failing and in demand. SE model parts are premium.",
+    notes: "Big family vans everywhere. Power sliding door motors are CONSTANTLY failing and in demand. SE model parts are premium.",
     parts: [
       { name: "Power Sliding Door Motor", rarity: "Epic", priceRange: [150, 350], yardCost: 15, sellOn: "eBay" },
       { name: "Power Sliding Door Cable", rarity: "Rare", priceRange: [75, 200], yardCost: 10, sellOn: "eBay" },
@@ -319,7 +319,7 @@ const DATABASE = [
     years: "1984–2001",
     category: "SUV",
     frequency: "Common",
-    utahNotes: "Utah Jeep culture is massive. XJs are gateway off-roaders. Header panels, clean fenders, and small 4WD bits are instant sellers.",
+    notes: "Jeep culture is massive. XJs are gateway off-roaders. Header panels, clean fenders, and small 4WD bits are instant sellers.",
     parts: [
       { name: "Header Panel (nose piece, clean)", rarity: "Legendary", priceRange: [200, 500], yardCost: 25, sellOn: "NAXJA, eBay" },
       { name: "Clean Fenders (no rust, no flares)", rarity: "Epic", priceRange: [100, 275], yardCost: 20, sellOn: "eBay, Facebook" },
@@ -338,7 +338,7 @@ const DATABASE = [
     years: "1999–2010",
     category: "SUV",
     frequency: "Common",
-    utahNotes: "Tons of these in yards. Transfer case motors, Quadra-Drive parts, and heated seats are the pulls. Overland edition bits are premium.",
+    notes: "Tons of these in yards. Transfer case motors, Quadra-Drive parts, and heated seats are the pulls. Overland edition bits are premium.",
     parts: [
       { name: "Transfer Case Shift Motor (NP247/242)", rarity: "Rare", priceRange: [75, 200], yardCost: 10, sellOn: "JeepForum, eBay" },
       { name: "Heated Leather Seats (pair)", rarity: "Rare", priceRange: [150, 350], yardCost: 30, sellOn: "CL, Facebook" },
@@ -355,7 +355,7 @@ const DATABASE = [
     years: "1997–2006",
     category: "SUV",
     frequency: "Occasional",
-    utahNotes: "TJs don't usually get junked — they get fixed. When one DOES show up, half-doors, hardtops, and soft top hardware are instant sells.",
+    notes: "TJs don't usually get junked — they get fixed. When one DOES show up, half-doors, hardtops, and soft top hardware are instant sells.",
     parts: [
       { name: "Hardtop (full, clean)", rarity: "Legendary", priceRange: [500, 1500], yardCost: 75, sellOn: "Wrangler Forum, CL" },
       { name: "Half Doors (pair)", rarity: "Legendary", priceRange: [300, 800], yardCost: 40, sellOn: "Wrangler Forum, eBay" },
@@ -372,7 +372,7 @@ const DATABASE = [
     years: "2007–2018",
     category: "SUV",
     frequency: "Occasional",
-    utahNotes: "JKs are more common than TJs in yards now. Hardtop pieces, doors, and Rubicon-specific parts fly off the shelf.",
+    notes: "JKs are more common than TJs in yards now. Hardtop pieces, doors, and Rubicon-specific parts fly off the shelf.",
     parts: [
       { name: "Hardtop (Freedom top panels)", rarity: "Legendary", priceRange: [400, 1000], yardCost: 60, sellOn: "Wrangler Forum, CL" },
       { name: "Half Doors / Tube Doors (pair)", rarity: "Epic", priceRange: [200, 500], yardCost: 30, sellOn: "eBay, CL" },
@@ -389,7 +389,7 @@ const DATABASE = [
     years: "2000–2024",
     category: "Wagon",
     frequency: "Common",
-    utahNotes: "Subaru is basically the state car. Outbacks are in every yard. Headlights, Eyesight cameras, and roof rack parts are consistent sellers.",
+    notes: "Outbacks are in every yard, especially in snow states. Headlights, Eyesight cameras, and roof rack parts are consistent sellers.",
     parts: [
       { name: "Eyesight Camera Module", rarity: "Epic", priceRange: [200, 500], yardCost: 25, sellOn: "eBay" },
       { name: "OEM LED Headlights (2020+, pair)", rarity: "Rare", priceRange: [250, 500], yardCost: 40, sellOn: "eBay" },
@@ -406,7 +406,7 @@ const DATABASE = [
     years: "1998–2024",
     category: "Crossover",
     frequency: "Common",
-    utahNotes: "Second most common Subaru in yards. XT turbo parts cross-sell to WRX community. Wilderness edition parts are new but in demand.",
+    notes: "Second most common Subaru in yards. XT turbo parts cross-sell to WRX community. Wilderness edition parts are new but in demand.",
     parts: [
       { name: "XT Turbo Intercooler + Piping", rarity: "Epic", priceRange: [150, 350], yardCost: 20, sellOn: "NASIOC, eBay" },
       { name: "Eyesight Camera Module", rarity: "Epic", priceRange: [200, 450], yardCost: 25, sellOn: "eBay" },
@@ -423,7 +423,7 @@ const DATABASE = [
     years: "2002–2024",
     category: "Sport",
     frequency: "Occasional",
-    utahNotes: "STI parts are gold in Utah's Subaru scene. Brembo brakes, STI wings, intercoolers, and interior bits — no need to touch the engine.",
+    notes: "STI parts are gold in the Subaru scene. Brembo brakes, STI wings, intercoolers, and interior bits — no need to touch the engine.",
     parts: [
       { name: "STI Brembo Brake Calipers (set)", rarity: "Epic", priceRange: [300, 700], yardCost: 60, sellOn: "NASIOC, eBay" },
       { name: "STI Wing / Spoiler (OEM)", rarity: "Rare", priceRange: [200, 450], yardCost: 40, sellOn: "NASIOC, eBay" },
@@ -441,7 +441,7 @@ const DATABASE = [
     years: "1997–2024",
     category: "Crossover",
     frequency: "Common",
-    utahNotes: "Tons of CR-Vs in yards. 1st gen fold-out table is a cult item. Newer LED headlights and infotainment screens sell well.",
+    notes: "Tons of CR-Vs in yards. 1st gen fold-out table is a cult item. Newer LED headlights and infotainment screens sell well.",
     parts: [
       { name: "1st Gen Fold-Out Picnic Table", rarity: "Legendary", priceRange: [100, 300], yardCost: 10, sellOn: "eBay, Honda-Tech" },
       { name: "OEM LED Headlights (2017+, pair)", rarity: "Rare", priceRange: [250, 500], yardCost: 40, sellOn: "eBay" },
@@ -457,7 +457,7 @@ const DATABASE = [
     years: "2006–2024",
     category: "Sedan",
     frequency: "Common",
-    utahNotes: "Si and Type R parts cross over to a huge mod community. Even base model LED headlights sell well. Consistent volume business.",
+    notes: "Si and Type R parts cross over to a huge mod community. Even base model LED headlights sell well. Consistent volume business.",
     parts: [
       { name: "Si/Type R Seats (pair)", rarity: "Epic", priceRange: [300, 700], yardCost: 50, sellOn: "Honda-Tech, eBay" },
       { name: "OEM LED Headlights (pair)", rarity: "Rare", priceRange: [200, 450], yardCost: 35, sellOn: "eBay" },
@@ -473,7 +473,7 @@ const DATABASE = [
     years: "1998–2024",
     category: "Sedan",
     frequency: "Common",
-    utahNotes: "Always available. Sport and Touring trim parts are the play. LED headlights from 2018+ are money.",
+    notes: "Always available. Sport and Touring trim parts are the play. LED headlights from 2018+ are money.",
     parts: [
       { name: "OEM LED Headlights (2018+, pair)", rarity: "Rare", priceRange: [300, 550], yardCost: 40, sellOn: "eBay" },
       { name: "Sport Front Lip / Underbody Kit", rarity: "Rare", priceRange: [75, 200], yardCost: 12, sellOn: "eBay, Honda-Tech" },
@@ -488,7 +488,7 @@ const DATABASE = [
     years: "1999–2024",
     category: "Van",
     frequency: "Common",
-    utahNotes: "Another Utah family hauler. Power sliding door parts are ALWAYS needed. Rear entertainment systems sell well too.",
+    notes: "Another family-hauler staple. Power sliding door parts are ALWAYS needed. Rear entertainment systems sell well too.",
     parts: [
       { name: "Power Sliding Door Motor", rarity: "Epic", priceRange: [150, 350], yardCost: 15, sellOn: "eBay" },
       { name: "Power Sliding Door Latch/Cable", rarity: "Rare", priceRange: [75, 175], yardCost: 10, sellOn: "eBay" },
@@ -504,7 +504,7 @@ const DATABASE = [
     years: "2003–2011",
     category: "Crossover",
     frequency: "Occasional",
-    utahNotes: "Cult car with a devoted community. Discontinued in 2011 so parts are drying up fast. Suicide doors, roof rack, and interior bits are all gold.",
+    notes: "Cult car with a devoted community. Discontinued in 2011 so parts are drying up fast. Suicide doors, roof rack, and interior bits are all gold.",
     parts: [
       { name: "Rear Suicide Door Latch/Hinge", rarity: "Epic", priceRange: [75, 200], yardCost: 10, sellOn: "eBay, Element Owners Club" },
       { name: "OEM Roof Rack (full)", rarity: "Epic", priceRange: [150, 350], yardCost: 25, sellOn: "eBay" },
@@ -521,7 +521,7 @@ const DATABASE = [
     years: "1997–2024",
     category: "Truck",
     frequency: "Common",
-    utahNotes: "Best-selling truck in America. Yards are full of them. Power-fold tow mirrors, FX4 bits, tailgates, and LED headlights are the money parts.",
+    notes: "Best-selling truck in America. Yards are full of them. Power-fold tow mirrors, FX4 bits, tailgates, and LED headlights are the money parts.",
     parts: [
       { name: "Power-Fold Tow Mirrors (pair)", rarity: "Epic", priceRange: [250, 550], yardCost: 40, sellOn: "eBay, F150Forum" },
       { name: "OEM LED Headlights (2015+, pair)", rarity: "Epic", priceRange: [300, 600], yardCost: 50, sellOn: "eBay" },
@@ -540,7 +540,7 @@ const DATABASE = [
     years: "1980–1996",
     category: "SUV",
     frequency: "Occasional",
-    utahNotes: "OBS Broncos are collector vehicles now. Utah's dry climate means rust-free body panels ship to rust-belt buyers for serious money.",
+    notes: "OBS Broncos are collector vehicles now. Rust-free body panels from dry-climate yards ship to rust-belt buyers for serious money.",
     parts: [
       { name: "Removable Hardtop (full, clean)", rarity: "Legendary", priceRange: [1000, 3000], yardCost: 150, sellOn: "Bronco forums, eBay" },
       { name: "Tailgate (complete, no rust)", rarity: "Epic", priceRange: [300, 700], yardCost: 40, sellOn: "Forums, CL" },
@@ -556,7 +556,7 @@ const DATABASE = [
     years: "2002–2019",
     category: "SUV",
     frequency: "Common",
-    utahNotes: "Police interceptor parts cross-sell to the civilian Explorer market. 3rd row seats, tow packages, and brake parts from cop cars are great pulls.",
+    notes: "Police interceptor parts cross-sell to the civilian Explorer market. 3rd row seats, tow packages, and brake parts from cop cars are great pulls.",
     parts: [
       { name: "3rd Row Seat (complete)", rarity: "Rare", priceRange: [150, 350], yardCost: 30, sellOn: "eBay, CL" },
       { name: "Police Interceptor Brake Calipers", rarity: "Rare", priceRange: [100, 225], yardCost: 15, sellOn: "eBay" },
@@ -572,7 +572,7 @@ const DATABASE = [
     years: "1993–2024",
     category: "Truck",
     frequency: "Common",
-    utahNotes: "Compact trucks are getting popular again. FX4 parts, Tremor bits, and clean body panels are the items to target.",
+    notes: "Compact trucks are getting popular again. FX4 parts, Tremor bits, and clean body panels are the items to target.",
     parts: [
       { name: "FX4 Skid Plates", rarity: "Rare", priceRange: [75, 175], yardCost: 12, sellOn: "TheRangerStation, eBay" },
       { name: "Flareside Bed Panels (clean)", rarity: "Rare", priceRange: [100, 250], yardCost: 20, sellOn: "Facebook, CL" },
@@ -588,7 +588,7 @@ const DATABASE = [
     years: "2005–2024",
     category: "Sport",
     frequency: "Common",
-    utahNotes: "Mustangs crash a lot. GT/Shelby parts are premium. Brembo brakes, Performance Pack bits, and body panels are easy sells.",
+    notes: "Mustangs crash a lot. GT/Shelby parts are premium. Brembo brakes, Performance Pack bits, and body panels are easy sells.",
     parts: [
       { name: "GT Brembo Brake Calipers (set)", rarity: "Epic", priceRange: [300, 600], yardCost: 50, sellOn: "Mustang6G, eBay" },
       { name: "GT350/PP2 Front Splitter", rarity: "Epic", priceRange: [200, 450], yardCost: 25, sellOn: "Mustang6G, eBay" },
@@ -605,7 +605,7 @@ const DATABASE = [
     years: "1988–1998",
     category: "Truck",
     frequency: "Common",
-    utahNotes: "OBS scene is exploding. Clean rust-free body panels from Utah are worth shipping nationwide. Interior parts and trim are in high demand.",
+    notes: "OBS scene is exploding. Clean rust-free body panels from dry-climate yards are worth shipping nationwide. Interior parts and trim are in high demand.",
     parts: [
       { name: "Rust-Free Cab Corners / Rocker Panels", rarity: "Epic", priceRange: [150, 400], yardCost: 20, sellOn: "eBay (ship to rust belt)" },
       { name: "454 SS Badges / Trim", rarity: "Legendary", priceRange: [100, 300], yardCost: 5, sellOn: "eBay" },
@@ -623,7 +623,7 @@ const DATABASE = [
     years: "1999–2024",
     category: "Truck",
     frequency: "Common",
-    utahNotes: "Always available. Power-fold mirrors, Z71 parts, tailgates with cameras, and LED headlights are the consistent money items.",
+    notes: "Always available. Power-fold mirrors, Z71 parts, tailgates with cameras, and LED headlights are the consistent money items.",
     parts: [
       { name: "Power-Fold Tow Mirrors (pair)", rarity: "Epic", priceRange: [200, 450], yardCost: 30, sellOn: "eBay" },
       { name: "OEM LED Headlights (2019+, pair)", rarity: "Epic", priceRange: [300, 600], yardCost: 50, sellOn: "eBay" },
@@ -641,7 +641,7 @@ const DATABASE = [
     years: "1995–2024",
     category: "SUV",
     frequency: "Common",
-    utahNotes: "Utah's big-family vehicle of choice. 3rd row parts, rear air suspension, and AutoRide components are great pulls.",
+    notes: "The big-family vehicle of choice. 3rd row parts, rear air suspension, and AutoRide components are great pulls.",
     parts: [
       { name: "AutoRide Rear Shocks (pair)", rarity: "Epic", priceRange: [150, 350], yardCost: 20, sellOn: "eBay" },
       { name: "Rear Air Suspension Compressor", rarity: "Rare", priceRange: [100, 250], yardCost: 15, sellOn: "eBay" },
@@ -659,7 +659,7 @@ const DATABASE = [
     years: "2010–2024",
     category: "Sport",
     frequency: "Common",
-    utahNotes: "Camaros crash plenty. SS Brembo brakes, 1LE/ZL1 aero parts, and Recaro seats are the targets. No need to mess with the drivetrain.",
+    notes: "Camaros crash plenty. SS Brembo brakes, 1LE/ZL1 aero parts, and Recaro seats are the targets. No need to mess with the drivetrain.",
     parts: [
       { name: "SS Brembo Brake Calipers (set)", rarity: "Epic", priceRange: [300, 600], yardCost: 50, sellOn: "eBay, CamaroSix" },
       { name: "1LE/ZL1 Front Splitter", rarity: "Epic", priceRange: [200, 500], yardCost: 25, sellOn: "eBay, CamaroSix" },
@@ -675,7 +675,7 @@ const DATABASE = [
     years: "2009–2024",
     category: "Truck",
     frequency: "Common",
-    utahNotes: "Rams are everywhere. The 12\" Uconnect screens are goldmines. Power-fold mirrors, tow packages, and air suspension parts are big sellers.",
+    notes: "Rams are everywhere. The 12\" Uconnect screens are goldmines. Power-fold mirrors, tow packages, and air suspension parts are big sellers.",
     parts: [
       { name: "12\" Uconnect Touchscreen (5th gen)", rarity: "Epic", priceRange: [400, 800], yardCost: 50, sellOn: "eBay" },
       { name: "Power-Fold Tow Mirrors (pair)", rarity: "Epic", priceRange: [250, 500], yardCost: 35, sellOn: "eBay" },
@@ -693,7 +693,7 @@ const DATABASE = [
     years: "2004–2024",
     category: "SUV",
     frequency: "Common",
-    utahNotes: "Family hauler that gets driven hard. R/T and SRT parts have crossover appeal. 3rd row and tow parts are consistent.",
+    notes: "Family hauler that gets driven hard. R/T and SRT parts have crossover appeal. 3rd row and tow parts are consistent.",
     parts: [
       { name: "SRT/R/T Brembo Brakes", rarity: "Epic", priceRange: [250, 500], yardCost: 40, sellOn: "eBay" },
       { name: "3rd Row Seat (complete)", rarity: "Rare", priceRange: [150, 350], yardCost: 30, sellOn: "CL, eBay" },
@@ -709,7 +709,7 @@ const DATABASE = [
     years: "1998–2024",
     category: "Truck",
     frequency: "Common",
-    utahNotes: "Budget truck that gets worked hard. PRO-4X parts and clean body panels are the play here.",
+    notes: "Budget truck that gets worked hard. PRO-4X parts and clean body panels are the play here.",
     parts: [
       { name: "PRO-4X Off-Road Skid Plates", rarity: "Rare", priceRange: [100, 225], yardCost: 15, sellOn: "ClubFrontier, eBay" },
       { name: "Bilstein Shocks (PRO-4X, set)", rarity: "Rare", priceRange: [150, 300], yardCost: 30, sellOn: "eBay" },
@@ -725,7 +725,7 @@ const DATABASE = [
     years: "2000–2015",
     category: "SUV",
     frequency: "Occasional",
-    utahNotes: "Discontinued so parts are drying up. Overlanding crowd loves Xterras. Roof rack, bumper steps, and PRO-4X bits are prime targets.",
+    notes: "Discontinued so parts are drying up. Overlanding crowd loves Xterras. Roof rack, bumper steps, and PRO-4X bits are prime targets.",
     parts: [
       { name: "OEM Roof Rack (full, tube-style)", rarity: "Epic", priceRange: [150, 350], yardCost: 25, sellOn: "TheNewX, eBay" },
       { name: "PRO-4X Bilstein Shocks (set)", rarity: "Rare", priceRange: [150, 300], yardCost: 30, sellOn: "eBay" },
@@ -741,7 +741,7 @@ const DATABASE = [
     years: "1996–2012",
     category: "SUV",
     frequency: "Common",
-    utahNotes: "Solid off-road platform that shares parts with the Xterra/Frontier platform. Body panels and 4WD components are in demand.",
+    notes: "Solid off-road platform that shares parts with the Xterra/Frontier platform. Body panels and 4WD components are in demand.",
     parts: [
       { name: "Rear Diff Locker Actuator", rarity: "Rare", priceRange: [75, 175], yardCost: 10, sellOn: "eBay" },
       { name: "Running Boards (OEM)", rarity: "Uncommon", priceRange: [50, 125], yardCost: 10, sellOn: "eBay" },
@@ -756,7 +756,7 @@ const DATABASE = [
     years: "2010–2024",
     category: "Crossover",
     frequency: "Common",
-    utahNotes: "Tons of these now due to engine recall junkers. Headlights, infotainment, and body panels from non-recalled models sell well as replacements.",
+    notes: "Tons of these now due to engine recall junkers. Headlights, infotainment, and body panels from non-recalled models sell well as replacements.",
     parts: [
       { name: "OEM LED Headlights (pair)", rarity: "Rare", priceRange: [200, 400], yardCost: 30, sellOn: "eBay" },
       { name: "Touchscreen Infotainment (10.25\")", rarity: "Rare", priceRange: [200, 400], yardCost: 25, sellOn: "eBay" },
@@ -772,7 +772,7 @@ const DATABASE = [
     years: "2007–2024",
     category: "SUV",
     frequency: "Common",
-    utahNotes: "Growing junkyard presence. Same engine recall issues mean bodies show up with good parts. 3rd row seats and infotainment are targets.",
+    notes: "Growing junkyard presence. Same engine recall issues mean bodies show up with good parts. 3rd row seats and infotainment are targets.",
     parts: [
       { name: "3rd Row Seat (complete)", rarity: "Rare", priceRange: [150, 300], yardCost: 25, sellOn: "eBay" },
       { name: "OEM LED Headlights (pair)", rarity: "Rare", priceRange: [200, 400], yardCost: 30, sellOn: "eBay" },
@@ -787,7 +787,7 @@ const DATABASE = [
     years: "2000–2018",
     category: "Hatchback",
     frequency: "Common",
-    utahNotes: "59 in Utah yards right now. Most are base models, but ST and RS trims are goldmines. ST3 HID headlights, Recaro seats, and intercoolers cross-sell to a huge mod community. Even base model SYNC screens sell.",
+    notes: "Common in yards. Most are base models, but ST and RS trims are goldmines. ST3 HID headlights, Recaro seats, and intercoolers cross-sell to a huge mod community. Even base model SYNC screens sell.",
     parts: [
       { name: "ST3/RS HID Headlights (pair)", rarity: "Epic", priceRange: [250, 500], yardCost: 45, sellOn: "FocusST.org, eBay" },
       { name: "Recaro Seats (pair, ST/RS)", rarity: "Epic", priceRange: [400, 900], yardCost: 71, sellOn: "FocusST.org, eBay" },
@@ -805,7 +805,7 @@ const DATABASE = [
     years: "2006–2020",
     category: "Sedan",
     frequency: "Common",
-    utahNotes: "42 in Utah yards. Titanium and Sport trims have the money parts. SYNC 3 screens, LED headlights, and front bumpers with parking sensor holes are consistent sellers.",
+    notes: "Common in yards. Titanium and Sport trims have the money parts. SYNC 3 screens, LED headlights, and front bumpers with parking sensor holes are consistent sellers.",
     parts: [
       { name: "OEM LED Headlights (2017+, pair)", rarity: "Rare", priceRange: [250, 500], yardCost: 45, sellOn: "eBay" },
       { name: "SYNC 3 Touchscreen (8\")", rarity: "Rare", priceRange: [150, 350], yardCost: 45, sellOn: "eBay" },
@@ -822,7 +822,7 @@ const DATABASE = [
     years: "2001–2023",
     category: "Sedan",
     frequency: "Common",
-    utahNotes: "38 in Utah yards. Engine recall junkers mean lots of good body/electrical parts on otherwise trashed cars. Sport and N parts have cross-appeal to the Kia Forte tuner crowd.",
+    notes: "Common in yards. Engine recall junkers mean lots of good body/electrical parts on otherwise trashed cars. Sport and N parts have cross-appeal to the Kia Forte tuner crowd.",
     parts: [
       { name: "OEM LED Headlights (2017+, pair)", rarity: "Rare", priceRange: [200, 400], yardCost: 45, sellOn: "eBay" },
       { name: "N/Sport Front Bumper Assembly", rarity: "Epic", priceRange: [200, 450], yardCost: 73, sellOn: "eBay" },
@@ -839,7 +839,7 @@ const DATABASE = [
     years: "1996–2020",
     category: "Van",
     frequency: "Common",
-    utahNotes: "37 in Utah yards. Big Utah family hauler like the Sienna. Power sliding door motors CONSTANTLY fail and owners need replacements. Stow-N-Go seats and rear entertainment systems are easy money.",
+    notes: "Common in yards. Big family hauler like the Sienna. Power sliding door motors CONSTANTLY fail and owners need replacements. Stow-N-Go seats and rear entertainment systems are easy money.",
     parts: [
       { name: "Power Sliding Door Motor", rarity: "Epic", priceRange: [125, 300], yardCost: 47, sellOn: "eBay" },
       { name: "Power Sliding Door Control Module", rarity: "Rare", priceRange: [75, 200], yardCost: 29, sellOn: "eBay" },
@@ -856,7 +856,7 @@ const DATABASE = [
     years: "1999–2023",
     category: "Sedan",
     frequency: "Common",
-    utahNotes: "37 in Utah yards. Like the Elantra, engine recall junkers with perfectly good electronics and body parts. 2020+ touchscreens and LED headlights are big sellers. HUD modules from Limited trims are rare finds.",
+    notes: "Common in yards. Like the Elantra, engine recall junkers with perfectly good electronics and body parts. 2020+ touchscreens and LED headlights are big sellers. HUD modules from Limited trims are rare finds.",
     parts: [
       { name: "OEM LED Headlights (2018+, pair)", rarity: "Rare", priceRange: [250, 500], yardCost: 45, sellOn: "eBay" },
       { name: "Touchscreen Infotainment (10.25\")", rarity: "Rare", priceRange: [200, 450], yardCost: 60, sellOn: "eBay" },
@@ -873,7 +873,7 @@ const DATABASE = [
     years: "1973–1991",
     category: "SUV",
     frequency: "Occasional",
-    utahNotes: "These are collector trucks now. The removable top alone can pay for your yard admission 20x over. All trim and body parts have big value.",
+    notes: "These are collector trucks now. The removable top alone can pay for your yard admission 20x over. All trim and body parts have big value.",
     parts: [
       { name: "Removable Fiberglass Top (clean)", rarity: "Legendary", priceRange: [1500, 4000], yardCost: 150, sellOn: "K5Blazer.com, eBay" },
       { name: "Clean Dash Pad (uncracked)", rarity: "Epic", priceRange: [100, 300], yardCost: 10, sellOn: "eBay, K5Blazer.com" },
@@ -889,7 +889,7 @@ const DATABASE = [
     years: "2006–2024",
     category: "Hatchback",
     frequency: "Occasional",
-    utahNotes: "GTI/R parts have a devoted mod community. Brakes, seats, and lighting upgrades from R models swap onto base GTIs.",
+    notes: "GTI/R parts have a devoted mod community. Brakes, seats, and lighting upgrades from R models swap onto base GTIs.",
     parts: [
       { name: "Golf R Brake Calipers (set)", rarity: "Epic", priceRange: [200, 450], yardCost: 30, sellOn: "VWVortex, eBay" },
       { name: "Leather/Plaid Seats (GTI, pair)", rarity: "Rare", priceRange: [200, 450], yardCost: 35, sellOn: "VWVortex, eBay" },
@@ -905,7 +905,7 @@ const DATABASE = [
     years: "2006–2024",
     category: "Sedan",
     frequency: "Common",
-    utahNotes: "BMWs end up in yards when repair costs exceed value. M-Sport bumpers, iDrive screens, and adaptive headlights are all premium parts.",
+    notes: "BMWs end up in yards when repair costs exceed value. M-Sport bumpers, iDrive screens, and adaptive headlights are all premium parts.",
     parts: [
       { name: "M-Sport Front Bumper (complete)", rarity: "Epic", priceRange: [200, 500], yardCost: 30, sellOn: "eBay, Bimmerpost" },
       { name: "Adaptive LED Headlights (pair)", rarity: "Epic", priceRange: [300, 700], yardCost: 50, sellOn: "eBay" },
@@ -921,7 +921,7 @@ const DATABASE = [
     years: "2009–2024",
     category: "Sedan / SUV",
     frequency: "Occasional",
-    utahNotes: "Strong eBay market for MMI screens, Virtual Cockpit, matrix LEDs, and B&O amps. Quattro/Haldex modules move when priced right.",
+    notes: "Strong eBay market for MMI screens, Virtual Cockpit, matrix LEDs, and B&O amps. Quattro/Haldex modules move when priced right.",
     parts: [
       { name: "Matrix / LED Headlights (pair)", rarity: "Epic", priceRange: [400, 1000], yardCost: 55, sellOn: "eBay, Audi forums" },
       { name: "MMI / Virtual Cockpit Assembly", rarity: "Epic", priceRange: [250, 700], yardCost: 42, sellOn: "eBay" },
@@ -936,7 +936,7 @@ const DATABASE = [
     years: "2003–2024",
     category: "SUV",
     frequency: "Occasional",
-    utahNotes: "GXs are the overlanding darlings. They share the Land Cruiser Prado platform. KDSS parts, AHC components, and OEM bumper bits are all hot.",
+    notes: "GXs are the overlanding darlings. They share the Land Cruiser Prado platform. KDSS parts, AHC components, and OEM bumper bits are all hot.",
     parts: [
       { name: "KDSS Hydraulic Actuators", rarity: "Legendary", priceRange: [300, 700], yardCost: 30, sellOn: "IH8MUD, GXOR, eBay" },
       { name: "AHC Height Control Pump", rarity: "Epic", priceRange: [200, 500], yardCost: 25, sellOn: "GXOR, eBay" },
@@ -953,7 +953,7 @@ const DATABASE = [
     years: "1998–2021",
     category: "SUV",
     frequency: "Rare",
-    utahNotes: "Luxury Land Cruiser. Extremely rare in yards. AHC parts, Mark Levinson audio, and interior bits are premium. Cross-references with 100/200 series Cruiser.",
+    notes: "Luxury Land Cruiser. Extremely rare in yards. AHC parts, Mark Levinson audio, and interior bits are premium. Cross-references with 100/200 series Cruiser.",
     parts: [
       { name: "AHC Height Control Pump + Sensors", rarity: "Legendary", priceRange: [400, 900], yardCost: 40, sellOn: "IH8MUD, eBay" },
       { name: "Mark Levinson Full Audio System", rarity: "Epic", priceRange: [300, 700], yardCost: 40, sellOn: "eBay" },
@@ -965,22 +965,6 @@ const DATABASE = [
   },
 ];
 
-const UTAH_JUNKYARDS = [
-  { name: "Pick-n-Pull", locations: ["Salt Lake City", "Ogden", "West Valley City"], url: "https://www.picknpull.com", hasOnlineInventory: true, note: "Best online inventory — check daily for new additions. Search by make/model/year." },
-  { name: "Tear-A-Part", locations: ["Salt Lake City (3 locations)"], url: "https://www.tearapart.com", hasOnlineInventory: true, note: "Family-owned Utah chain. Good online inventory. New cars added weekly." },
-  { name: "Utah Pic-A-Part", locations: ["Ogden", "Orem"], url: "https://utpap.com", hasOnlineInventory: true, note: "Self-service. Inventory scraped from utpap.com XML (standard + premium lot; premium labeled in live data)." },
-  { name: "Pull & Save", locations: ["West Valley City", "Magna"], url: "https://pullandsave.com", hasOnlineInventory: true, note: "Self-service. Check website for current lot vehicles." },
-  { name: "Ecology Auto Parts", locations: ["Murray"], url: "https://www.ecologyautoparts.com", hasOnlineInventory: false, note: "Full-service yard. Call for specific vehicles. Good for older stuff." },
-  { name: "Standard Auto Wrecking", locations: ["Salt Lake City"], url: null, hasOnlineInventory: false, note: "Old-school yard. No website but great for vintage/classic truck parts." },
-  { name: "ICON Auto Salvage", locations: ["West Jordan"], url: null, hasOnlineInventory: false, note: "Mixed inventory. Good for domestic trucks and SUVs." },
-  { name: "Ken Garff Auto Recycling", locations: ["Tooele"], url: null, hasOnlineInventory: false, note: "Late-model cars and trucks. Ken Garff dealer network feed." },
-  { name: "Jester's U-Pull-It", locations: ["Logan"], url: null, hasOnlineInventory: false, note: "Northern Utah. Less picked over than SLC yards." },
-  { name: "Ivans Auto Recycling", locations: ["Moab"], url: "https://www.hilltopautoworks.com", hasOnlineInventory: false, note: "Moab — full-service yard, no online inventory. 76 S Main St, 435-259-4457. M–F 8–5. Call ahead." },
-  { name: "Berts Auto Supply", locations: ["Moab"], url: "https://www.autobodysmartparts.com", hasOnlineInventory: false, note: "Moab — used auto parts, shipping available. 2591 S Hwy 191, 435-259-7736. M–F 8–5. Call/email for specific parts." },
-  { name: "Trade Center Auto Recycling", locations: ["Grand Junction, CO"], url: null, hasOnlineInventory: false, note: "Grand Junction (~110 mi from Moab) — self-service since 1984. 2236 US-6, 970-243-1579. M–F 8–4:30. Engines, transmissions, body panels, brakes." },
-  { name: "Grand Junction Auto Recyclers", locations: ["Grand Junction, CO"], url: null, hasOnlineInventory: false, note: "Grand Junction — self-service, BYO tools. 690 S 6th St, 970-986-9155. M–F 11–4:30 (Wed til 5)." },
-  { name: "Jeeps Unlimited", locations: ["Grand Junction, CO"], url: null, hasOnlineInventory: false, note: "Grand Junction — Jeep specialist + general salvage. 3061 US-50, 303-666-9020. M–Th 9–4. Call for hard-to-find Jeep parts." },
-];
 
 /* ===== Utility functions ===== */
 function maxPartValue(car) { return Math.max(...car.parts.map(p => p.priceRange[1])); }

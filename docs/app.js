@@ -1,85 +1,94 @@
 /* Junkyard Hunter — application logic (loading, filtering, rendering, saved list, alerts). */
-/* ===== YARD PRICING MAPS ===== */
+/* ===== YARD PRICING MAPS =====
+ * One map per chain, each built ONLY from that chain's published price list.
+ * pypPricing / papPricing are keyed by yard display name (prices differ per yard).
+ * There is deliberately NO estimated-cost fallback: if a part isn't on the
+ * yard's own price list, we show "check yard price list" instead of a guess. */
 let pnpPricing = {};
 let tapPricing = {};
 let utpapPricing = {};
+let pypPricing = {};   // { "Pick Your Part - Orlando": { "HEADLIGHT": {price, core}, ... } }
+let papPricing = {};   // { "Pull-A-Part - Charlotte": { "BRAKE CALIPER": {price, core}, ... } }
 
-/* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page) */
+/* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page)
+ * pyp = exact "Description" from pyp.com per-location PriceList API
+ * pap = exact "partname" from Pull-A-Part's per-location pricing API */
 const PART_KEYWORD_MAP = [
-  { kw: 'hid headlight',       pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG' },
-  { kw: 'led headlight',       pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG' },
-  { kw: 'headlight',           pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG' },
-  { kw: 'headlamp',            pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG' },
-  { kw: 'recaro seat',         pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC' },
-  { kw: 'stow-n-go 2nd',      pnp: 'SEAT-BUCK(EA)W/TRK (MAN)',     tap: 'BUCKET SEAT', utpap: 'BUCKET SEAT ELCTRIC' },
-  { kw: 'stow-n-go 3rd',      pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC' },
-  { kw: 'stow-n-go',          pnp: 'SEAT-BUCK(EA)W/TRK (MAN)',     tap: 'BUCKET SEAT', utpap: 'BUCKET SEAT ELCTRIC' },
-  { kw: '3rd row seat',        pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC' },
-  { kw: 'rear seat',           pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC' },
-  { kw: 'bench seat',          pnp: 'SEAT-BENCH W/TRK',             tap: 'SEAT BENCH', utpap: 'BENCH SEAT ELECTRIC' },
-  { kw: 'bucket seat',         pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC' },
-  { kw: 'seat',                pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC' },
-  { kw: 'intercooler',         pnp: 'INTERCOOLER',                  tap: 'TURBO INTERCOOLER', utpap: 'TURBO INNER COOLER' },
-  { kw: 'heads-up display',    pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL' },
-  { kw: 'touchscreen',         pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL' },
-  { kw: 'infotainment',        pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL' },
-  { kw: 'navigation',          pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'NAVIGATION UNIT', utpap: 'TOUCH SCREEN RDO DBL' },
-  { kw: 'display',             pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL' },
-  { kw: 'head unit',           pnp: 'RADIO',                        tap: 'RADIO', utpap: 'RADIO CD PLAYER' },
-  { kw: 'radio',               pnp: 'RADIO',                        tap: 'RADIO', utpap: 'RADIO CD PLAYER' },
-  { kw: 'front bumper',        pnp: 'BUMPER COMP',                  tap: 'BUMPR CVER W/RENFORC', utpap: 'BUMPER' },
-  { kw: 'bumper cover',        pnp: 'BUMPER COVER (PLAST/RUBR)',    tap: 'BUMPER COVER', utpap: 'BUMPER' },
-  { kw: 'bumper',              pnp: 'BUMPER COMP',                  tap: 'BUMPR CVER W/RENFORC', utpap: 'BUMPER' },
-  { kw: 'steering wheel',      pnp: 'STEERING WHEEL',               tap: 'STEERNG WHL W/SWITCH', utpap: 'STEERING WHEEL' },
-  { kw: 'spoiler',             pnp: 'SPOILERS - BOLT ON (EA)',      tap: 'SPOILER', utpap: 'SPOILER' },
-  { kw: 'fog light',           pnp: 'FOG LAMPS EACH',               tap: 'HEADLIGHT COMP BULB', utpap: 'FOG LIGHT' },
-  { kw: 'fog lamp',            pnp: 'FOG LAMPS EACH',               tap: 'HEADLIGHT COMP BULB', utpap: 'FOG LIGHT' },
-  { kw: 'brake caliper',       pnp: 'BRAKE CALIPER',                tap: 'BRAKE CALIPER', utpap: 'BRAKE CALIPER 2-4 PI' },
-  { kw: 'caliper',             pnp: 'BRAKE CALIPER',                tap: 'BRAKE CALIPER', utpap: 'BRAKE CALIPER 2-4 PI' },
-  { kw: 'mirror',              pnp: 'MIRROR-DOOR OUTSIDE(ELEC)',    tap: 'POWER MIRROR - DOOR', utpap: 'DOOR POWER MIRROR' },
-  { kw: 'amplifier',           pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER' },
-  { kw: 'amp',                 pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER' },
-  { kw: 'speaker',             pnp: 'SPEAKER EACH',                 tap: 'SPEAKER', utpap: 'RADIO SPEAKER' },
-  { kw: 'panoramic sunroof',   pnp: 'SUN ROOF ASSY',               tap: 'SUNROOF ASSY+MOTOR', utpap: 'SUNROOF/T-TOP' },
-  { kw: 'sunroof',             pnp: 'SUN ROOF ASSY',               tap: 'SUN ROOF ASSEMBLY', utpap: 'SUNROOF/T-TOP' },
-  { kw: 'sliding door motor',  pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'ELECTRIC MODULE' },
-  { kw: 'door motor',          pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'ELECTRIC MODULE' },
-  { kw: 'liftgate',            pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'TAIL GATE/ ENDGATE' },
-  { kw: 'sliding door control', pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER' },
-  { kw: 'control module',      pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER' },
-  { kw: 'radar',               pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER' },
-  { kw: 'camera',              pnp: 'CONTROL MODULE',              tap: 'REVERSE CAMERA', utpap: 'COMPUTER' },
-  { kw: 'module',              pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER' },
-  { kw: 'roof rack',           pnp: 'LUGGAGE/SKI RACK',            tap: 'LUGGAGE RACK', utpap: 'LUGGAGE RACK' },
-  { kw: 'crossbar',            pnp: 'LUGGAGE/SKI RACK',            tap: 'CARGO RACK', utpap: 'LUGGAGE RACK' },
-  { kw: 'grille',              pnp: 'GRILLE',                      tap: 'GRILLE', utpap: 'GRILLE LRG' },
-  { kw: 'running board',       pnp: 'RUNNING BOARDS (EACH)',       tap: 'RUNNING BOARD (EACH)', utpap: 'RUNNING BOARD' },
-  { kw: 'fender flare',        pnp: 'FENDER FLARE (EA)',           tap: 'FENDER TRIM/FLARES', utpap: 'FENDER EXTENSION' },
-  { kw: 'window regulator',    pnp: 'WINDOW REG W/MOTOR ELEC',    tap: 'WINDOW REG W/MOTOR', utpap: 'WINDOW REGULATOR' },
-  { kw: 'tail light',          pnp: 'TAILLIGHT',                   tap: 'TAIL LIGHT ASSY ANY', utpap: 'TAIL LIGHT ASSY LRG' },
-  { kw: 'taillight',           pnp: 'TAILLIGHT',                   tap: 'TAIL LIGHT ASSY ANY', utpap: 'TAIL LIGHT ASSY LRG' },
-  { kw: 'wireless charging',   pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'ELECTRIC MODULE' },
-  { kw: 'charging pad',        pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'ELECTRIC MODULE' },
-  { kw: 'entertainment',       pnp: 'LRG MULTIFUNCT DISPLAY',      tap: 'DVD PLAYER', utpap: 'RADIO CD PLAYER' },
-  { kw: 'dvd',                 pnp: 'LRG MULTIFUNCT DISPLAY',      tap: 'DVD PLAYER', utpap: 'RADIO CD PLAYER' },
-  { kw: 'cable',               pnp: 'CABLE/PUSH-PULL',             tap: 'CABLE (ANY)', utpap: 'SHIFTER CABLE' },
-  { kw: 'track',               pnp: 'SEAT TRACK ELEC W/MOTOR (EA)', tap: 'SEAT TRACKSET+MOTOR', utpap: 'SEAT TRACK ELECTRIC' },
-  { kw: 'dash pad',            pnp: 'DASH PAD',                    tap: 'DASH PAD', utpap: 'DASH PAD' },
-  { kw: 'console lid',         pnp: 'CONSOLE LID',                 tap: 'CONSOLE LID', utpap: 'CONSOLE LID' },
-  { kw: 'console',             pnp: 'CONSOLE',                     tap: 'CONSOLE (ANY)', utpap: 'CONSOLE BARE' },
-  { kw: 'mudflap',             pnp: 'MUDFLAP',                     tap: 'MUDFLAP', utpap: 'MUD FLAP' },
-  { kw: 'emblem',              pnp: 'EMBLEM',                      tap: 'EMBLEM (ANY)', utpap: 'EMBLEM' },
-  { kw: 'wiper motor',         pnp: 'WIPER MOTOR',                 tap: 'WIPER MOTOR', utpap: 'WIPER MOTOR' },
-  { kw: 'actuator',            pnp: 'ACTUATOR',                    tap: 'ACTUATOR', utpap: 'DOOR LOCK ACTUATOR' },
-  { kw: 'transfer case motor', pnp: 'TRANSFER CASE MOTOR',         tap: 'TRANSFER CASE MOTOR', utpap: 'TRANSFERCAS ACTUATOR' },
+  { kw: 'hid headlight',       pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT LED OR HID LAMP ASSEMBLY W/BALLAST' },
+  { kw: 'led headlight',       pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT LED OR HID LAMP ASSEMBLY W/BALLAST' },
+  { kw: 'headlight',           pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT ASSEMBLY (NON-HID/BALLAST)' },
+  { kw: 'headlamp',            pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT ASSEMBLY (NON-HID/BALLAST)' },
+  { kw: 'recaro seat',         pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT WITH AIR BAG FRONT', pap: 'SEAT, BUCKET W/ POWER TRACK (LEATHER)' },
+  { kw: 'stow-n-go 2nd',      pnp: 'SEAT-BUCK(EA)W/TRK (MAN)',     tap: 'BUCKET SEAT', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT NO AIR BAG FRONT', pap: 'SEAT, BUCKET W/ MANUAL TRACK' },
+  { kw: 'stow-n-go 3rd',      pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT REAR', pap: 'SEAT, BENCH/3RD ROW MANUAL TRACK' },
+  { kw: 'stow-n-go',          pnp: 'SEAT-BUCK(EA)W/TRK (MAN)',     tap: 'BUCKET SEAT', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT NO AIR BAG FRONT', pap: 'SEAT, BUCKET W/ MANUAL TRACK' },
+  { kw: '3rd row seat',        pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT THIRD ROW', pap: 'SEAT, BENCH/3RD ROW MANUAL TRACK' },
+  { kw: 'rear seat',           pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT REAR', pap: 'SEAT, REAR - EACH SECTION (CLOTH)' },
+  { kw: 'bench seat',          pnp: 'SEAT-BENCH W/TRK',             tap: 'SEAT BENCH', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT REAR', pap: 'SEAT, BENCH W/ POWER TRACK (LEATHER)' },
+  { kw: 'bucket seat',         pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT WITH AIR BAG FRONT', pap: 'SEAT, BUCKET W/ POWER TRACK (LEATHER)' },
+  { kw: 'seat',                pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT WITH AIR BAG FRONT', pap: 'SEAT, BUCKET W/ POWER TRACK (LEATHER)' },
+  { kw: 'intercooler',         pnp: 'INTERCOOLER',                  tap: 'TURBO INTERCOOLER', utpap: 'TURBO INNER COOLER', pyp: 'INTERCOOLER', pap: 'TURBO INTERCOOLER' },
+  { kw: 'heads-up display',    pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
+  { kw: 'touchscreen',         pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
+  { kw: 'infotainment',        pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
+  { kw: 'navigation',          pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'NAVIGATION UNIT', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
+  { kw: 'display',             pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
+  { kw: 'head unit',           pnp: 'RADIO',                        tap: 'RADIO', utpap: 'RADIO CD PLAYER', pyp: 'RADIO WITH DISPLAY', pap: 'RADIO  - W/CD OR MEDIA PLAYER' },
+  { kw: 'radio',               pnp: 'RADIO',                        tap: 'RADIO', utpap: 'RADIO CD PLAYER', pyp: 'RADIO WITH DISPLAY', pap: 'RADIO  - W/CD OR MEDIA PLAYER' },
+  { kw: 'front bumper',        pnp: 'BUMPER COMP',                  tap: 'BUMPR CVER W/RENFORC', utpap: 'BUMPER', pyp: 'FRONT BUMPER (STEEL)', pap: 'BUMPER COVER ASSEMBLY' },
+  { kw: 'bumper cover',        pnp: 'BUMPER COVER (PLAST/RUBR)',    tap: 'BUMPER COVER', utpap: 'BUMPER', pyp: 'BUMPER COVER, FRONT', pap: 'BUMPER COVER' },
+  { kw: 'bumper',              pnp: 'BUMPER COMP',                  tap: 'BUMPR CVER W/RENFORC', utpap: 'BUMPER', pyp: 'FRONT BUMPER (STEEL)', pap: 'BUMPER STEEL OR ALUMINUM' },
+  { kw: 'steering wheel',      pnp: 'STEERING WHEEL',               tap: 'STEERNG WHL W/SWITCH', utpap: 'STEERING WHEEL', pyp: 'STEERING WHEEL', pap: 'STEERING WHEEL' },
+  { kw: 'spoiler',             pnp: 'SPOILERS - BOLT ON (EA)',      tap: 'SPOILER', utpap: 'SPOILER', pyp: 'SPOILER REAR', pap: 'SPOILER - BOLT ON (EACH)' },
+  { kw: 'fog light',           pnp: 'FOG LAMPS EACH',               tap: 'HEADLIGHT COMP BULB', utpap: 'FOG LIGHT', pyp: 'FRONT LAMP (FOG/PARKING/TURN/MARKER)', pap: 'FOG LAMP (EACH)' },
+  { kw: 'fog lamp',            pnp: 'FOG LAMPS EACH',               tap: 'HEADLIGHT COMP BULB', utpap: 'FOG LIGHT', pyp: 'FRONT LAMP (FOG/PARKING/TURN/MARKER)', pap: 'FOG LAMP (EACH)' },
+  { kw: 'brake caliper',       pnp: 'BRAKE CALIPER',                tap: 'BRAKE CALIPER', utpap: 'BRAKE CALIPER 2-4 PI', pyp: 'BRAKE CALIPER', pap: 'BRAKE CALIPER' },
+  { kw: 'caliper',             pnp: 'BRAKE CALIPER',                tap: 'BRAKE CALIPER', utpap: 'BRAKE CALIPER 2-4 PI', pyp: 'BRAKE CALIPER', pap: 'BRAKE CALIPER' },
+  { kw: 'mirror',              pnp: 'MIRROR-DOOR OUTSIDE(ELEC)',    tap: 'POWER MIRROR - DOOR', utpap: 'DOOR POWER MIRROR', pyp: 'MIRROR (SIDE VIEW)', pap: 'DOOR MIRROR, OUTSIDE ELECTRIC REMOTE' },
+  { kw: 'amplifier',           pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER' },
+  { kw: 'amp',                 pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER' },
+  { kw: 'speaker',             pnp: 'SPEAKER EACH',                 tap: 'SPEAKER', utpap: 'RADIO SPEAKER', pyp: 'RADIO SPEAKER', pap: 'SPEAKER (ANY)' },
+  { kw: 'panoramic sunroof',   pnp: 'SUN ROOF ASSY',               tap: 'SUNROOF ASSY+MOTOR', utpap: 'SUNROOF/T-TOP', pyp: 'ROOF GLASS (SUN ROOF)', pap: 'SUNROOF/COVER/SHADE ASSEMBLY W/MOTOR' },
+  { kw: 'sunroof',             pnp: 'SUN ROOF ASSY',               tap: 'SUN ROOF ASSEMBLY', utpap: 'SUNROOF/T-TOP', pyp: 'ROOF GLASS (SUN ROOF)', pap: 'SUNROOF/COVER/SHADE ASSEMBLY W/MOTOR' },
+  { kw: 'sliding door motor',  pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'ELECTRIC MODULE', pyp: 'SLIDING DOOR MOTOR', pap: 'DOOR/HATCH MOTOR, (SLIDING VAN/SUV)' },
+  { kw: 'door motor',          pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'ELECTRIC MODULE', pyp: 'SLIDING DOOR MOTOR', pap: 'DOOR/HATCH MOTOR, (SLIDING VAN/SUV)' },
+  { kw: 'liftgate',            pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'TAIL GATE/ ENDGATE', pyp: 'DECKLID/TAILGATE (BARE)', pap: 'DOOR/HATCH MOTOR, (SLIDING VAN/SUV)' },
+  { kw: 'sliding door control', pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
+  { kw: 'control module',      pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
+  { kw: 'radar',               pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
+  { kw: 'camera',              pnp: 'CONTROL MODULE',              tap: 'REVERSE CAMERA', utpap: 'COMPUTER', pyp: 'SENSOR CAMERAS', pap: 'CAMERA, ON BOARD OR BACK UP' },
+  { kw: 'module',              pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
+  { kw: 'roof rack',           pnp: 'LUGGAGE/SKI RACK',            tap: 'LUGGAGE RACK', utpap: 'LUGGAGE RACK', pyp: 'ROOF RACK ASSEMBLY', pap: 'LUGGAGE RACK' },
+  { kw: 'crossbar',            pnp: 'LUGGAGE/SKI RACK',            tap: 'CARGO RACK', utpap: 'LUGGAGE RACK', pyp: 'ROOF RACK RAIL/ CROSS BAR (EACH)', pap: 'LUGGAGE RACK CROSS BAR' },
+  { kw: 'grille',              pnp: 'GRILLE',                      tap: 'GRILLE', utpap: 'GRILLE LRG', pyp: 'GRILLE', pap: 'GRILLE PLASTIC (BARE) - ANY' },
+  { kw: 'running board',       pnp: 'RUNNING BOARDS (EACH)',       tap: 'RUNNING BOARD (EACH)', utpap: 'RUNNING BOARD', pyp: 'RUNNING BOARD', pap: 'RUNNING BOARD (EACH)' },
+  { kw: 'fender flare',        pnp: 'FENDER FLARE (EA)',           tap: 'FENDER TRIM/FLARES', utpap: 'FENDER EXTENSION', pyp: 'FENDER EXTENSION', pap: 'FENDER FLARE OR SKIRT' },
+  { kw: 'window regulator',    pnp: 'WINDOW REG W/MOTOR ELEC',    tap: 'WINDOW REG W/MOTOR', utpap: 'WINDOW REGULATOR', pyp: 'WINDOW REGULATOR FRONT (ELECTRIC)', pap: 'WINDOW REGULATOR W/MOTOR' },
+  { kw: 'tail light',          pnp: 'TAILLIGHT',                   tap: 'TAIL LIGHT ASSY ANY', utpap: 'TAIL LIGHT ASSY LRG', pyp: 'TAILLIGHT (QUARTER MOUNTED)', pap: 'TAILLIGHT ASSEMBLY - SINGLE SIDE' },
+  { kw: 'taillight',           pnp: 'TAILLIGHT',                   tap: 'TAIL LIGHT ASSY ANY', utpap: 'TAIL LIGHT ASSY LRG', pyp: 'TAILLIGHT (QUARTER MOUNTED)', pap: 'TAILLIGHT ASSEMBLY - SINGLE SIDE' },
+  { kw: 'wireless charging',   pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'ELECTRIC MODULE', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
+  { kw: 'charging pad',        pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'ELECTRIC MODULE', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
+  { kw: 'entertainment',       pnp: 'LRG MULTIFUNCT DISPLAY',      tap: 'DVD PLAYER', utpap: 'RADIO CD PLAYER', pyp: 'GPS TV SCREEN', pap: 'VIDEO SCREEN' },
+  { kw: 'dvd',                 pnp: 'LRG MULTIFUNCT DISPLAY',      tap: 'DVD PLAYER', utpap: 'RADIO CD PLAYER', pyp: 'GPS TV SCREEN', pap: 'VIDEO SCREEN' },
+  { kw: 'cable',               pnp: 'CABLE/PUSH-PULL',             tap: 'CABLE (ANY)', utpap: 'SHIFTER CABLE', pyp: 'CABLE', pap: 'CABLE - BRAKE/CLUTCH/SHIFTER/THROTTLE/RELEASE' },
+  { kw: 'track',               pnp: 'SEAT TRACK ELEC W/MOTOR (EA)', tap: 'SEAT TRACKSET+MOTOR', utpap: 'SEAT TRACK ELECTRIC', pyp: 'SEAT TRACK, (ELECTRIC)', pap: 'SEAT TRACK, ELECTRIC W/MOTOR' },
+  { kw: 'dash pad',            pnp: 'DASH PAD',                    tap: 'DASH PAD', utpap: 'DASH PAD', pyp: 'DASH PAD', pap: 'DASH PAD (OVER 24in LENGTH)' },
+  { kw: 'console lid',         pnp: 'CONSOLE LID',                 tap: 'CONSOLE LID', utpap: 'CONSOLE LID', pyp: 'CENTER CONSOLE', pap: 'CONSOLE LID' },
+  { kw: 'console',             pnp: 'CONSOLE',                     tap: 'CONSOLE (ANY)', utpap: 'CONSOLE BARE', pyp: 'CENTER CONSOLE', pap: 'CONSOLE (OVER 16in LENGTH)' },
+  { kw: 'mudflap',             pnp: 'MUDFLAP',                     tap: 'MUDFLAP', utpap: 'MUD FLAP', pyp: 'MUD FLAP/SPLASH GUARD', pap: 'MUD FLAP OR SPLASH GUARD' },
+  { kw: 'emblem',              pnp: 'EMBLEM',                      tap: 'EMBLEM (ANY)', utpap: 'EMBLEM', pyp: 'EMBLEMS', pap: 'EMBLEM' },
+  { kw: 'wiper motor',         pnp: 'WIPER MOTOR',                 tap: 'WIPER MOTOR', utpap: 'WIPER MOTOR', pyp: 'ELECTRIC WIPER MOTOR, WINDSHIELD', pap: 'WINDSHIELD WIPER MOTOR' },
+  { kw: 'actuator',            pnp: 'ACTUATOR',                    tap: 'ACTUATOR', utpap: 'DOOR LOCK ACTUATOR', pyp: 'ACTUATOR', pap: 'ACTUATOR' },
+  { kw: 'transfer case motor', pnp: 'TRANSFER CASE MOTOR',         tap: 'TRANSFER CASE MOTOR', utpap: 'TRANSFERCAS ACTUATOR', pyp: 'TRANSFER CASE MOTOR', pap: '4 WHEEL DRIVE ACTUATOR VACUUM OR ELECTRIC' },
 ];
 
+/* Strict provenance: each chain's price list applies ONLY to that chain's own
+ * yards, and there is no estimated fallback. Returns {cost:null, source:'none'}
+ * whenever the yard's real price list doesn't cover the part — callers then
+ * show "check yard price list" and compute resale-only ranges. */
 function lookupYardCost(partName, location) {
   const lower = partName.toLowerCase();
   const loc = (location || '').toLowerCase();
-  const isTap = loc.includes('tear');
-  const isPnp = loc.includes('pick');
-  const isUtpap = loc.includes('pic-a-part');
   let bestMatch = null;
   let bestLen = 0;
   for (const entry of PART_KEYWORD_MAP) {
@@ -88,28 +97,33 @@ function lookupYardCost(partName, location) {
       bestLen = entry.kw.length;
     }
   }
-  if (!bestMatch) return { cost: null, source: 'none', yardName: null };
+  const none = { cost: null, source: 'none', yardName: null };
+  if (!bestMatch) return none;
 
-  if (isTap) {
-    const tapEntry = tapPricing[bestMatch.tap];
-    if (tapEntry) return { cost: parseFloat(tapEntry.price), source: 'tap', yardName: tapEntry.description };
+  if (loc.startsWith('tear-a-part')) {
+    const t = tapPricing[bestMatch.tap];
+    return t ? { cost: parseFloat(t.price), source: 'tap', yardName: t.description } : none;
   }
-  if (isPnp) {
-    const pnpEntry = pnpPricing[bestMatch.pnp];
-    if (pnpEntry) return { cost: parseFloat(pnpEntry.price), source: 'pnp', yardName: pnpEntry.description };
+  if (loc.startsWith('pick-n-pull')) {
+    const p = pnpPricing[bestMatch.pnp];
+    return p ? { cost: parseFloat(p.price), source: 'pnp', yardName: p.description } : none;
   }
-  if (isUtpap) {
+  if (loc.startsWith('utah pic-a-part')) {
     const u = utpapPricing[bestMatch.utpap];
-    if (u) return { cost: parseFloat(u.price), source: 'utpap', yardName: u.description };
-    return { cost: null, source: 'none', yardName: null };
+    return u ? { cost: parseFloat(u.price), source: 'utpap', yardName: u.description } : none;
   }
-  const fallback = isTap ? tapPricing[bestMatch.tap] : pnpPricing[bestMatch.pnp];
-  if (fallback) return { cost: parseFloat(fallback.price), source: isTap ? 'tap' : 'pnp', yardName: fallback.description };
-  return { cost: null, source: 'none', yardName: null };
+  if (loc.startsWith('pick your part')) {
+    const yard = pypPricing[location];
+    const e = yard && bestMatch.pyp ? yard[bestMatch.pyp] : null;
+    return e ? { cost: parseFloat(e.price), source: 'pyp', yardName: bestMatch.pyp } : none;
+  }
+  if (loc.startsWith('pull-a-part')) {
+    const yard = papPricing[location];
+    const e = yard && bestMatch.pap ? yard[bestMatch.pap] : null;
+    return e ? { cost: parseFloat(e.price), source: 'pap', yardName: bestMatch.pap } : none;
+  }
+  return none;
 }
-
-// Backward compat wrapper
-function lookupPnpCost(partName) { return lookupYardCost(partName, 'Pick-n-Pull'); }
 
 /* ===== LIVE INVENTORY ===== */
 let liveInventory = [];
@@ -249,6 +263,14 @@ async function loadAllPricing() {
       data.forEach(p => { tapPricing[p.description] = p; });
     }
   } catch (e) { /* TAP pricing not available */ }
+  try {
+    const resp = await fetch('data/pyp_pricing.json');
+    if (resp.ok) pypPricing = await resp.json();
+  } catch (e) { /* PYP pricing not available */ }
+  try {
+    const resp = await fetch('data/pap_pricing.json');
+    if (resp.ok) papPricing = await resp.json();
+  } catch (e) { /* PAP pricing not available */ }
 }
 
 async function loadLiveInventory() {
@@ -306,7 +328,7 @@ async function loadLiveInventory() {
         <h3>No Live Inventory Yet</h3>
         <p>The live inventory file wasn't found. Run the scraper to generate it:</p>
         <code>python scraper/junkyard_scraper.py --save --all</code>
-        <p style="margin-top:1rem;">This will check Utah junkyards for vehicles and cross-reference them against the parts database. The output file <strong>inventory_live.json</strong> will appear in this directory.</p>
+        <p style="margin-top:1rem;">This scans the supported junkyard chains and cross-references every vehicle against the parts database. The output file <strong>inventory_live.json</strong> will appear in this directory.</p>
         <p style="margin-top:0.75rem;"><strong>Tip:</strong> Open this page via a local server (not <code>file://</code>), or the browser cannot load the JSON. <strong>cd into the folder that contains</strong> <code>index.html</code> (the <code>junkyard-hunter</code> project folder), then run <code>cd docs && python3 -m http.server 8765</code> and open <code>http://localhost:8765/index.html</code>. If you see 404, the server was started in the wrong directory.</p>
       </div>`;
   }
@@ -428,16 +450,19 @@ function toggleSaved(key) {
 
 function savedRange(s) {
   if (!s.topParts || !s.topParts.length) return null;
-  let lo = 0, hi = 0;
+  // Only subtract pull costs that come from the yard's real price list; when a
+  // part isn't covered we don't invent a cost — the range is flagged resale-only.
+  let lo = 0, hi = 0, unknownCost = false;
   s.topParts.forEach(p => {
     const lk = lookupYardCost(p.name, s.location);
-    const cost = lk.cost != null ? lk.cost : p.cost;
+    const cost = lk.cost != null ? lk.cost : 0;
+    if (lk.cost == null) unknownCost = true;
     lo += p.low - cost;
     hi += p.high - cost;
   });
   // Same freshness discount the live cards apply, so the numbers agree.
   const fm = freshnessMultiplier(s.dateAdded);
-  return { lo: Math.max(0, Math.round(lo * fm)), hi: Math.round(hi * fm) };
+  return { lo: Math.max(0, Math.round(lo * fm)), hi: Math.round(hi * fm), unknownCost };
 }
 
 function updateSavedPill() {
@@ -478,7 +503,7 @@ function renderSavedSheet() {
                 <div class="saved-item-name">${s.year} ${s.make} ${s.model}</div>
                 <div class="saved-item-sub">${best ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '') : 'No flagged parts'}</div>
               </div>
-              ${range && range.hi > 0 ? `<div class="saved-item-profit" title="Estimated range if parts are good">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}</div>` : ''}
+              ${range && range.hi > 0 ? `<div class="saved-item-profit" title="${range.unknownCost ? 'Resale estimate — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated range if parts are good, after this yard\u2019s list pull costs'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">resale</small>' : ''}</div>` : ''}
               <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">&#x1F5D1;&#xFE0F;</button>
             </div>`;
         }).join('')}
@@ -578,7 +603,8 @@ function getFilteredLive() {
     if (!v.topParts || !v.topParts.length) return 0;
     return v.topParts.reduce((sum, p) => {
       const lookup = lookupYardCost(p.name, v.location);
-      const yc = lookup.cost != null ? lookup.cost : p.cost;
+      // No fabricated costs: subtract only real price-list costs (0 when unknown).
+      const yc = lookup.cost != null ? lookup.cost : 0;
       return sum + ((p.low + p.high) / 2 - yc);
     }, 0);
   }
@@ -661,7 +687,26 @@ function renderLive() {
   `;
 
   if (!vehicles.length) {
-    document.getElementById('live-grid').innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No matches</h3><p>Try adjusting your filters.</p></div>';
+    // If the radius filter is what emptied the grid, say so helpfully: name the
+    // closest yard and how far it is instead of showing a blank wall.
+    const radiusMi = parseFloat(document.getElementById('live-radius').value) || null;
+    let msg = '<h3>No matches</h3><p>Try adjusting your filters.</p>';
+    if (activeZipCoords && radiusMi) {
+      let closest = null;
+      const seenYards = new Set();
+      for (const v of liveInventory) {
+        if (v.lat == null || v.lng == null || !v.location || seenYards.has(v.location)) continue;
+        seenYards.add(v.location);
+        const d = haversineMiles(activeZipCoords.lat, activeZipCoords.lng, v.lat, v.lng);
+        if (!closest || d < closest.d) closest = { d, name: v.location, city: v.city, state: v.state };
+      }
+      if (closest && closest.d > radiusMi) {
+        msg = `<h3>No yards within ${radiusMi} miles of you yet</h3>
+          <p>The closest scanned yard is <strong>${escapeHtml(closest.name)}</strong>${closest.city ? ' in ' + escapeHtml(closest.city) + (closest.state ? ', ' + escapeHtml(closest.state) : '') : ''} — about <strong>${Math.round(closest.d)} miles</strong> away.</p>
+          <p style="margin-top:0.5rem;">Widen the distance filter to see it, or clear the zip to browse everything. Coverage today: Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part yards (strongest in the West, South, and Midwest — more chains coming).</p>`;
+      }
+    }
+    document.getElementById('live-grid').innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;
     return;
   }
 
@@ -682,14 +727,22 @@ function renderLive() {
     let cardStyle = '', profitLine = '', partsBlock = '';
     if (isMatch && v.topParts && v.topParts.length) {
       let totalCost = 0, lowSum = 0, highSum = 0, bestPart = null, bestHigh = -Infinity;
+      let anyUnknownCost = false;
       const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
       let demandRk = 0;
+      const chainLabel = { pnp: 'PnP list', tap: 'TAP list', utpap: 'UTPAP list', pyp: 'PYP list', pap: 'PAP list' };
+      const chainTitle = {
+        pnp: 'Pick-n-Pull published price',
+        tap: 'Tear-A-Part published price',
+        utpap: 'Utah Pic-A-Part published price',
+        pyp: 'This Pick Your Part yard\u2019s published price',
+        pap: 'This Pull-A-Part yard\u2019s published price',
+      };
       const partRows = v.topParts.map(p => {
         const lookup = lookupYardCost(p.name, v.location);
-        const yardCost = lookup.cost != null ? lookup.cost : p.cost;
-        const costLabel = lookup.source === 'pnp' ? 'PnP' : lookup.source === 'tap' ? 'TAP' : lookup.source === 'utpap' ? 'UTPAP' : 'est';
-        const costTitle = lookup.source === 'pnp' ? 'Real Pick-n-Pull price' : lookup.source === 'tap' ? 'Real Tear-A-Part price' : lookup.source === 'utpap' ? 'Utah Pic-A-Part list price' : 'Estimated';
-        const pLow = Math.max(0, Math.round(p.low - yardCost));
+        const hasCost = lookup.cost != null;
+        const yardCost = hasCost ? lookup.cost : 0;
+        if (!hasCost) anyUnknownCost = true;
         const pHigh = Math.round(p.high - yardCost);
         totalCost += yardCost;
         lowSum += p.low - yardCost;
@@ -698,21 +751,28 @@ function renderLive() {
         demandRk = Math.max(demandRk, speedRk(p.sell_speed));
         const sellSpd = p.sell_speed || '';
         const sellCls = sellSpd === 'Fast' ? 'sell-fast' : sellSpd === 'Slow' ? 'sell-slow' : 'sell-medium';
+        const costHtml = hasCost
+          ? `<span class="part-cost" title="${chainTitle[lookup.source]}: ${lookup.yardName || ''}">${formatPrice(yardCost)} <small style="opacity:0.65">${chainLabel[lookup.source]}</small></span>`
+          : `<span class="part-cost" title="This part isn\u2019t on the yard\u2019s published price list — ask at the counter" style="opacity:0.75;"><small>check yard price list</small></span>`;
+        const localNote = /\bFB\b|Facebook/i.test(p.sell_at || '')
+          ? ' <span class="sell-tip" title="Facebook Marketplace is a local market — prices vary by area">FB prices vary by area</span>' : '';
         return `
           <li class="part-item" style="flex-wrap:wrap;">
             <span class="part-name">${p.name}</span>
             <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
-            <span class="part-cost" title="${costTitle}: ${lookup.yardName || 'N/A'}">${formatPrice(yardCost)} <small style="opacity:0.65">${costLabel}</small></span>
-            <span class="part-price" title="Typical eBay sold range, working condition">sells ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
+            ${costHtml}
+            <span class="part-price" title="Typical eBay sold range (national), working condition">sells ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
             ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
               <span class="sell-badge ${sellCls}">${sellSpd === 'Fast' ? 'Sells fast' : sellSpd === 'Slow' ? 'Slow mover' : 'Steady seller'}</span>
-              <span class="sell-channel">Sell on: ${p.sell_at}</span>
+              <span class="sell-channel">Sell on: ${p.sell_at}</span>${localNote}
               ${p.sell_notes ? '<span class="sell-tip">' + displaySellNotes(p.sell_notes, v.make) + '</span>' : ''}
             </div>` : ''}
           </li>`;
       }).join('');
 
       // Demand is the primary signal; dollars are a supporting range, never a promise.
+      // Only real price-list pull costs are subtracted — when any part isn't on
+      // the yard's list, the range is labeled resale-only instead of guessing.
       const rangeLow = Math.max(0, Math.round(lowSum * fm));
       const rangeHigh = Math.round(highSum * fm);
       const demand = demandRk === 3
@@ -721,10 +781,13 @@ function renderLive() {
         ? { cls: 'demand-slow', label: 'Slow mover' }
         : { cls: 'demand-steady', label: 'Steady seller' };
       cardStyle = `--tier-color:var(--${demandRk === 3 ? 'demand-fast' : demandRk === 1 ? 'demand-slow' : 'demand-steady'});`;
+      const rangeText = anyUnknownCost
+        ? `resale ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; pull cost: check yard price list`
+        : `e.g. ${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
       profitLine = rangeHigh > 0 ? `
         <div class="profit-line">
           <span class="demand-badge ${demand.cls}">${demand.label}</span>
-          <span class="range-text">e.g. ${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull</span>
+          <span class="range-text">${rangeText}</span>
         </div>` : '';
       partsBlock = `
         <details class="parts-details">
@@ -849,13 +912,13 @@ function renderCarGrid(cars) {
         </div>
       </div>
       <div class="car-body">
-        <div class="car-notes">${car.utahNotes}</div>
+        <div class="car-notes">${car.notes}</div>
         <ul class="parts-list">
           ${car.parts.map(p => `
             <li class="part-item">
               <span class="part-name">${p.name}</span>
               <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
-              <span class="part-cost">${formatPrice(p.yardCost)} pull</span>
+              <span class="part-cost" title="Typical self-service yard price — actual price comes from your yard's own price list">~${formatPrice(p.yardCost)} typical pull</span>
               <span class="part-price">${formatPrice(p.priceRange[0])}–${formatPrice(p.priceRange[1])}</span>
             </li>
           `).join('')}
@@ -888,7 +951,7 @@ function getFilteredCars() {
     if (catFilter && car.category !== catFilter) return false;
     if (rarityFilter && !car.parts.some(p => p.rarity === rarityFilter)) return false;
     if (search) {
-      const hay = (car.name + ' ' + car.make + ' ' + car.years + ' ' + car.category + ' ' + car.utahNotes + ' ' + car.parts.map(p => p.name + ' ' + p.sellOn).join(' ')).toLowerCase();
+      const hay = (car.name + ' ' + car.make + ' ' + car.years + ' ' + car.category + ' ' + car.notes + ' ' + car.parts.map(p => p.name + ' ' + p.sellOn).join(' ')).toLowerCase();
       return hay.includes(search);
     }
     return true;
