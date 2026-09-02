@@ -72,9 +72,13 @@ except ImportError:
     HAS_RICH = False
 
 SCRIPT_DIR = Path(__file__).parent
+REPO_ROOT = SCRIPT_DIR.parent
+# Generated JSONs live under docs/data so GitHub Pages serves them to the web app.
+DATA_DIR = REPO_ROOT / "docs" / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 CACHE_DIR = SCRIPT_DIR / ".cache"
 SEEN_FILE = CACHE_DIR / "seen_vehicles.json"
-LIVE_FILE = SCRIPT_DIR / "inventory_live.json"
+LIVE_FILE = DATA_DIR / "inventory_live.json"
 
 PNP_API = "https://www.picknpull.com/api"
 SLC_ZIP = "84101"
@@ -3143,7 +3147,7 @@ def refresh_utpap_pricing_file() -> Path:
             "corePrice": core,
             "totalPrice": f"{tp:.2f}",
         })
-    out = SCRIPT_DIR / "utpap_pricing.json"
+    out = DATA_DIR / "utpap_pricing.json"
     out.write_text(json.dumps(rows, indent=2))
     return out
 

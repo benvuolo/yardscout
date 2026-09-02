@@ -1,7 +1,7 @@
 # Runs every 6 hours: national Pick-n-Pull + Utah chains, updates inventory_live.json,
 # records history to inventory_history.db, sends push (ntfy) + email digest on watchlist hits.
 # Repo secrets: NTFY_TOPIC (phone push), SMTP_USER / SMTP_PASS / ALERT_EMAIL (email, optional).
-# Commit watchlist.json to the repo for CI alerts to fire.
+# Commit scraper/watchlist.json to the repo for CI alerts to fire.
 
 name: Junkyard Scan
 
@@ -35,8 +35,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            inventory_history.db
-            watch_alerted.json
+            scraper/inventory_history.db
+            scraper/watch_alerted.json
           key: scan-state-${{ github.run_id }}
           restore-keys: scan-state-
 
@@ -49,13 +49,13 @@ jobs:
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-        run: python junkyard_scraper.py --save --all --national
+        run: python scraper/junkyard_scraper.py --save --all --national
 
       - name: Commit and push inventory
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add inventory_live.json
+          git add docs/data/inventory_live.json
           if git diff --staged --quiet; then
             echo "No inventory changes."
           else

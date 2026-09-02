@@ -14,21 +14,27 @@ No engines. No transmissions. Just parts you can carry out.
 
 Inventory auto-refreshes every 6 hours via GitHub Actions (see `.github/workflows/scan.yml`).
 
-## What's in the box
+## Repo layout
 
 ```
 junkyard-hunter/
-├── index.html                # Single-file web app (HTML/CSS/JS, no build step)
-├── junkyard_scraper.py       # Python scraper + unobtanium database
-├── inventory_live.json       # Latest scrape: `{schemaVersion, scrapedAt (UTC ISO), vehicles[]}` (older runs may be a bare array)
-├── picknpull_pricing.json    # Real Pick-n-Pull part prices (472 parts)
-├── tearapart_pricing.json    # Real Tear-A-Part part prices (503 parts)
-├── utpap_pricing.json        # Utah Pic-A-Part list prices (from utpap.com/1064Carpricelist.php; refresh with --refresh-utpap-pricing)
-├── tearapart_inventory.json  # Cached Tear-A-Part raw inventory
-├── inventory_data.json       # Cached raw inventory snapshot
-├── watchlist.json            # Your alert rules (export from UI or hand-edit; commit for CI)
-├── watch_alerted.json        # Dedupe state for email alerts in GitHub Actions (auto-created in CI)
-└── .cache/                   # Local alert dedupe + seen-vehicle tracking (auto-created)
+├── docs/                       # Web app — served by GitHub Pages
+│   ├── index.html              # App shell (markup only; no build step)
+│   ├── styles.css              # All styling
+│   ├── data.js                 # Static datasets: parts database, yard directory
+│   ├── app.js                  # App logic: loading, filtering, rendering, saved list, alerts
+│   ├── sw.js                   # Service worker (offline + instant launch)
+│   ├── manifest.webmanifest    # PWA manifest + icons (icon-*.png, apple-touch-icon.png)
+│   └── data/                   # Generated JSONs the app fetches
+│       ├── inventory_live.json     # Latest scrape (schema v2: compact rows + lookup tables)
+│       ├── picknpull_pricing.json  # Real Pick-n-Pull part prices (472 parts)
+│       ├── tearapart_pricing.json  # Real Tear-A-Part part prices (503 parts)
+│       └── utpap_pricing.json      # Utah Pic-A-Part list prices (--refresh-utpap-pricing)
+├── scraper/
+│   ├── junkyard_scraper.py     # Python scraper + unobtanium parts database
+│   ├── db.py                   # SQLite history tracking (inventory_history.db, gitignored)
+│   └── watchlist.json          # Your alert rules (export from UI or hand-edit; commit for CI)
+└── .github/workflows/scan.yml  # Auto-scan every 6 hours, commits fresh inventory
 ```
 
 ## Quick start
@@ -41,7 +47,7 @@ Copy the entire `junkyard-hunter/` folder to your personal machine. All you need
 - `junkyard_scraper.py`
 - `picknpull_pricing.json`
 - `tearapart_pricing.json`
-- `utpap_pricing.json` (optional; run `python junkyard_scraper.py --refresh-utpap-pricing` to update from [Parts Pricelist](https://utpap.com/ogden-prices/))
+- `utpap_pricing.json` (optional; run `python scraper/junkyard_scraper.py --refresh-utpap-pricing` to update from [Parts Pricelist](https://utpap.com/ogden-prices/))
 
 The JSON inventory files are regenerated every time you run the scraper.
 
@@ -65,30 +71,30 @@ pip install requests beautifulsoup4 rich
 
 ```bash
 # Scan both yards, output to terminal (rich table)
-python junkyard_scraper.py
+python scraper/junkyard_scraper.py
 
 # Scan and save JSON for the web app (include ALL vehicles)
-python junkyard_scraper.py --json --all > inventory_live.json
+python scraper/junkyard_scraper.py --json --all > inventory_live.json
 
 # Watch mode — rescan every 6 hours
-python junkyard_scraper.py --watch --save --all
+python scraper/junkyard_scraper.py --watch --save --all
 
 # Just list all tracked unobtanium parts
-python junkyard_scraper.py --list-parts
+python scraper/junkyard_scraper.py --list-parts
 
 # Filter by make
-python junkyard_scraper.py --list-parts --make toyota
+python scraper/junkyard_scraper.py --list-parts --make toyota
 
 # Optional: NHTSA VPIC VIN decode for trim-aware matching (slower; one HTTP per unique VIN)
-python junkyard_scraper.py --json --all --decode-vins > inventory_live.json
+python scraper/junkyard_scraper.py --json --all --decode-vins > inventory_live.json
 # Same via env: JUNKYARD_DECODE_VINS=1
 # Optional: VPIC_WORKERS=8 (default) parallel NHTSA calls; VPIC_DELAY_SEC=0 (default) or add delay if needed
 # Decode only the highest carry-profit rows (after matching), not every VIN in the fleet:
-# python junkyard_scraper.py --save --all --decode-vins-profit-top 10
+# python scraper/junkyard_scraper.py --save --all --decode-vins-profit-top 10
 
 # NATIONAL scan — every Pick-n-Pull yard in the US + Canada (~49 yards), one API call per make.
 # Tear-A-Part and Utah Pic-A-Part are Utah-only chains and are always included as-is.
-python junkyard_scraper.py --save --all --national --decode-vins-profit-top 10
+python scraper/junkyard_scraper.py --save --all --national --decode-vins-profit-top 10
 ```
 
 ### Phone push notifications (ntfy — free, no account)
@@ -139,14 +145,14 @@ When you run the scraper (especially in `--watch` mode), it reads `watchlist.jso
 export SMTP_USER="you@gmail.com"
 export SMTP_PASS="xxxx xxxx xxxx xxxx"   # Gmail App Password, not your login password
 export ALERT_EMAIL="you@gmail.com"       # where to receive alerts (can match SMTP_USER)
-python junkyard_scraper.py --save --all
+python scraper/junkyard_scraper.py --save --all
 ```
 
 Optional: `SMTP_HOST` (default `smtp.gmail.com`), `SMTP_PORT` (default `587`).
 
 ```bash
 # Watch mode with alerts — checks every 6 hours, notifies on new finds
-python junkyard_scraper.py --watch --save --all
+python scraper/junkyard_scraper.py --watch --save --all
 ```
 
 You can also hand-edit `watchlist.json`:
@@ -177,7 +183,7 @@ You do **not** need to be logged into GitHub or Gmail on the machine where you d
 
 4. **Commit `watchlist.json`** to the repo (export from the Alerts tab or create by hand). Without it, the workflow still updates inventory but sends no watchlist emails.
 
-5. The workflow [`.github/workflows/scan.yml`](.github/workflows/scan.yml) runs **every 6 hours** and on **manual dispatch**. It runs `python junkyard_scraper.py --save --all`, commits `inventory_live.json` (and `watch_alerted.json` when present) if anything changed, and sends email when new watchlist matches appear. Alert dedupe in Actions is stored in `watch_alerted.json` at the repo root so you do not get repeat emails for the same vehicle.
+5. The workflow [`.github/workflows/scan.yml`](.github/workflows/scan.yml) runs **every 6 hours** and on **manual dispatch**. It runs `python scraper/junkyard_scraper.py --save --all`, commits `inventory_live.json` (and `watch_alerted.json` when present) if anything changed, and sends email when new watchlist matches appear. Alert dedupe in Actions is stored in `watch_alerted.json` at the repo root so you do not get repeat emails for the same vehicle.
 
 **Manual run:** GitHub → **Actions** → **Junkyard Scan** → **Run workflow**.
 
@@ -282,7 +288,7 @@ git clone git@github.com:YOUR_USERNAME/junkyard-hunter.git
 cd junkyard-hunter
 python3 -m venv .venv && source .venv/bin/activate
 pip install requests beautifulsoup4 rich
-python junkyard_scraper.py --json --all > inventory_live.json
+python scraper/junkyard_scraper.py --json --all > inventory_live.json
 python3 -m http.server 8765
 ```
 
