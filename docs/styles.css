@@ -1,47 +1,50 @@
   /* ============================================================
-     JUNKYARD HUNTER — dark garage design system
+     JUNKYARD HUNTER — design system
+     Restrained dark theme: neutral surfaces, one indigo accent,
+     muted status colors. Premium tool, not a game.
      ============================================================ */
   :root {
-    --bg: #0b0d11;
-    --surface: #14181f;
-    --surface2: #1c222c;
-    --surface3: #242b37;
-    --border: #262d39;
-    --border-dark: #333c4b;
-    --text: #f2f5f9;
-    --text-dim: #94a0b3;
-    --accent: #ff6b35;
-    --accent-hover: #ff824f;
-    --accent-soft: rgba(255, 107, 53, 0.14);
-    --accent2: #3ddc97;
-    --green-soft: rgba(61, 220, 151, 0.12);
-    --red: #ff7070;
-    --red-soft: rgba(255, 112, 112, 0.12);
-    --blue: #6aabff;
-    --blue-soft: rgba(106, 171, 255, 0.12);
-    --purple: #b294ff;
-    --purple-soft: rgba(178, 148, 255, 0.12);
-    --cyan: #38d6f5;
-    --pink: #f472b6;
-    --orange: #ffa94d;
-    --gold: #ffd166;
-    --gold-soft: rgba(255, 209, 102, 0.12);
-    --gold-glow: rgba(255, 209, 102, 0.08);
-    --gold-border: rgba(255, 209, 102, 0.35);
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.45);
-    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
-    --radius: 14px;
-    --radius-sm: 9px;
+    --bg: #0e0f12;
+    --surface: #16171b;
+    --surface2: #1d1e24;
+    --surface3: #25262e;
+    --border: #26272f;
+    --border-dark: #35363f;
+    --text: #f4f5f7;
+    --text-dim: #9a9ea9;
+    --accent: #6c7cff;
+    --accent-hover: #8591ff;
+    --accent-soft: rgba(108, 124, 255, 0.13);
+    --accent2: #34c98e;
+    --green-soft: rgba(52, 201, 142, 0.12);
+    --red: #e5726d;
+    --red-soft: rgba(229, 114, 109, 0.12);
+    --blue: #6c7cff;
+    --blue-soft: rgba(108, 124, 255, 0.12);
+    --purple: #9d8cff;
+    --purple-soft: rgba(157, 140, 255, 0.12);
+    --cyan: #5fc3de;
+    --pink: #d789b4;
+    --orange: #c99863;
+    --gold: #d9b36a;
+    --gold-soft: rgba(217, 179, 106, 0.11);
+    --gold-glow: rgba(217, 179, 106, 0.07);
+    --gold-border: rgba(217, 179, 106, 0.3);
+    --demand-fast: #34c98e;
+    --demand-steady: #8a92a6;
+    --demand-slow: #c99863;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+    --radius: 12px;
+    --radius-sm: 8px;
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --nav-h: 58px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: var(--font-ui);
-    background:
-      radial-gradient(1200px 500px at 50% -200px, rgba(255, 107, 53, 0.07), transparent 60%),
-      var(--bg);
+    background: var(--bg);
     color: var(--text);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -76,10 +79,11 @@
     display: inline-grid;
     place-items: center;
     width: 30px; height: 30px;
-    background: linear-gradient(135deg, var(--accent), #ff9147);
+    background: var(--surface2);
+    border: 1px solid var(--border-dark);
     border-radius: 9px;
     font-size: 0.95rem;
-    box-shadow: 0 3px 10px rgba(255, 107, 53, 0.35);
+    box-shadow: none;
   }
   header h1 .brand-accent { color: var(--accent); }
   header p {
@@ -126,12 +130,13 @@
     transition: color 0.15s, background 0.15s;
     position: relative;
   }
-  .tab .tab-ico { font-size: 1rem; line-height: 1; }
+  .tab .tab-ico { display: inline-grid; place-items: center; line-height: 1; }
+  .tab .tab-ico svg { display: block; }
   .tab:hover { color: var(--text); background: var(--surface2); }
   .tab.active {
     color: #fff;
-    background: linear-gradient(135deg, var(--accent), #ff8a4d);
-    box-shadow: 0 3px 12px rgba(255, 107, 53, 0.35);
+    background: var(--accent);
+    box-shadow: 0 2px 10px rgba(108, 124, 255, 0.28);
   }
   .tab-badge {
     background: var(--red);
@@ -164,7 +169,7 @@
       font-size: 0.6rem;
       font-weight: 600;
     }
-    .tab .tab-ico { font-size: 1.25rem; }
+    .tab .tab-ico svg { width: 20px; height: 20px; }
     .tab.active {
       background: transparent;
       color: var(--accent);
@@ -182,8 +187,8 @@
 
   /* ---------- First-run zip banner ---------- */
   .zip-banner {
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.12), rgba(255, 145, 71, 0.05));
-    border: 1px solid rgba(255, 107, 53, 0.35);
+    background: var(--accent-soft);
+    border: 1px solid rgba(108, 124, 255, 0.35);
     border-radius: var(--radius);
     padding: 1.1rem;
     margin-bottom: 0.9rem;
@@ -395,12 +400,12 @@
   }
   .btn:hover { background: var(--surface3); border-color: var(--border-dark); }
   .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #ff8a4d);
+    background: var(--accent);
     border-color: transparent;
     color: #fff;
-    box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 2px 10px rgba(108, 124, 255, 0.25);
   }
-  .btn-primary:hover { background: linear-gradient(135deg, var(--accent-hover), #ff9a63); }
+  .btn-primary:hover { background: var(--accent-hover); }
 
   /* ---------- Vehicle cards ---------- */
   .car-grid {
@@ -479,18 +484,27 @@
 
   .profit-line {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.6rem;
     flex-wrap: wrap;
     margin-top: 0.65rem;
   }
-  .live-card-value {
-    font-size: 1.25rem;
-    font-weight: 900;
-    color: var(--accent2);
-    letter-spacing: -0.03em;
+  /* Demand-first: how sellable the parts are leads; dollars are supporting info. */
+  .demand-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
   }
-  .profit-sub { font-size: 0.72rem; color: var(--text-dim); font-weight: 500; }
+  .demand-badge.demand-fast { background: var(--green-soft); color: var(--demand-fast); }
+  .demand-badge.demand-steady { background: rgba(138, 146, 166, 0.14); color: var(--demand-steady); }
+  .demand-badge.demand-slow { background: var(--gold-soft); color: var(--demand-slow); }
+  .range-text { font-size: 0.78rem; color: var(--text-dim); font-weight: 500; }
+  .stat-card .value.accent { color: var(--accent); }
 
   /* parts inside <details> */
   .parts-details { margin-top: 0.55rem; border-top: 1px solid var(--border); }
