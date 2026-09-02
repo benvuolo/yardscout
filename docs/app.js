@@ -295,9 +295,7 @@ async function loadLiveInventory() {
     annotateVinDuplicates(liveInventory);
     liveLoaded = true;
     populateLiveMakeFilter();
-    populateProfitFilters();
     renderLive();
-    renderProfitTab();
     checkAndNotify();
     updateAlertsBadge();
   } catch (e) {
@@ -428,14 +426,18 @@ function toggleSaved(key) {
   renderSavedSheet();
 }
 
-function savedProfit(s) {
-  if (!s.topParts || !s.topParts.length) return 0;
-  const raw = s.topParts.reduce((sum, p) => {
+function savedRange(s) {
+  if (!s.topParts || !s.topParts.length) return null;
+  let lo = 0, hi = 0;
+  s.topParts.forEach(p => {
     const lk = lookupYardCost(p.name, s.location);
-    return sum + ((p.low + p.high) / 2 - (lk.cost != null ? lk.cost : p.cost));
-  }, 0);
+    const cost = lk.cost != null ? lk.cost : p.cost;
+    lo += p.low - cost;
+    hi += p.high - cost;
+  });
   // Same freshness discount the live cards apply, so the numbers agree.
-  return Math.round(raw * freshnessMultiplier(s.dateAdded));
+  const fm = freshnessMultiplier(s.dateAdded);
+  return { lo: Math.max(0, Math.round(lo * fm)), hi: Math.round(hi * fm) };
 }
 
 function updateSavedPill() {
@@ -467,7 +469,7 @@ function renderSavedSheet() {
       <div class="saved-yard-group">
         <div class="saved-yard-name">${yard} &middot; ${items.length} car${items.length > 1 ? 's' : ''}</div>
         ${items.map(([key, s]) => {
-          const profit = savedProfit(s);
+          const range = savedRange(s);
           const best = (s.topParts && s.topParts[0]) ? s.topParts[0].name : '';
           return `
             <div class="saved-item">
@@ -476,7 +478,7 @@ function renderSavedSheet() {
                 <div class="saved-item-name">${s.year} ${s.make} ${s.model}</div>
                 <div class="saved-item-sub">${best ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '') : 'No flagged parts'}</div>
               </div>
-              ${profit > 0 ? `<div class="saved-item-profit">+${formatPrice(profit)}</div>` : ''}
+              ${range && range.hi > 0 ? `<div class="saved-item-profit" title="Estimated range if parts are good">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}</div>` : ''}
               <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">&#x1F5D1;&#xFE0F;</button>
             </div>`;
         }).join('')}
@@ -633,14 +635,6 @@ function updateLiveFilterCount() {
   el.textContent = n;
 }
 
-function vehicleAdjProfit(v) {
-  if (!v.hasMatch || !v.topParts || !v.topParts.length) return 0;
-  return v.topParts.reduce((s, p) => {
-    const lk = lookupYardCost(p.name, v.location);
-    return s + ((p.low + p.high) / 2 - (lk.cost != null ? lk.cost : p.cost));
-  }, 0) * freshnessMultiplier(v.dateAdded);
-}
-
 function renderLive() {
   if (!liveLoaded) return;
   const vehicles = getFilteredLive();
@@ -650,7 +644,7 @@ function renderLive() {
   const nearLabel = activeZipCoords && document.getElementById('live-radius').value ? 'Cars Near You' : 'Cars';
   const worthPulling = vehicles.filter(v => v.hasMatch).length;
   const newThisWeek = vehicles.filter(v => isNew(v.dateAdded)).length;
-  const bestFind = vehicles.length ? Math.max(0, ...vehicles.map(vehicleAdjProfit)) : 0;
+  const fastSellers = vehicles.filter(v => v.hasMatch && (v.topParts || []).some(p => p.sell_speed === 'Fast')).length;
   const scrapedLabel = liveScrapedAt
     ? new Date(liveScrapedAt).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
     : '—';
@@ -659,34 +653,17 @@ function renderLive() {
   updateZipBanner();
 
   document.getElementById('live-stats-bar').innerHTML = `
-    <div class="stat-card"><div class="label">${nearLabel}</div><div class="value blue">${vehicles.length.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">Worth Pulling</div><div class="value gold">${worthPulling.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">New This Week</div><div class="value green">${newThisWeek.toLocaleString()}</div></div>
-    ${bestFind > 0 ? `<div class="stat-card"><div class="label">Best Find</div><div class="value green">+${formatPrice(Math.round(bestFind))}</div></div>` : ''}
-    <div class="stat-card"><div class="label">Updated</div><div class="value orange" style="font-size:0.85rem;line-height:1.5;">${scrapedLabel}</div></div>
+    <div class="stat-card"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">Worth Pulling</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">Fast Sellers</div><div class="value green">${fastSellers.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">New This Week</div><div class="value">${newThisWeek.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">Updated</div><div class="value" style="font-size:0.85rem;line-height:1.5;">${scrapedLabel}</div></div>
   `;
 
   if (!vehicles.length) {
     document.getElementById('live-grid').innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No matches</h3><p>Try adjusting your filters.</p></div>';
     return;
   }
-
-  function tierColor(profit, maxP) {
-    if (profit <= 0) return 'var(--red)';
-    const t = maxP > 0 ? Math.min(profit / maxP, 1) : 0;
-    if (t > 0.7) return 'var(--accent2)';
-    if (t > 0.4) return '#8ee6b8';
-    if (t > 0.15) return 'var(--gold)';
-    return 'var(--orange)';
-  }
-
-  const maxProfit = Math.max(1, ...vehicles.filter(v => v.hasMatch).map(v => {
-    if (!v.topParts || !v.topParts.length) return 0;
-    return v.topParts.reduce((s, p) => {
-      const lk = lookupYardCost(p.name, v.location);
-      return s + ((p.low + p.high) / 2 - (lk.cost != null ? lk.cost : p.cost));
-    }, 0) * freshnessMultiplier(v.dateAdded);
-  }));
 
   // National scans can be 45k+ vehicles — rendering all as DOM cards freezes the
   // browser. Cap the grid; filters/search still run against the full dataset.
@@ -704,18 +681,21 @@ function renderLive() {
 
     let cardStyle = '', profitLine = '', partsBlock = '';
     if (isMatch && v.topParts && v.topParts.length) {
-      const haul = v.topParts.reduce((s, p) => s + p.high, 0);
-      let totalCost = 0, totalProfit = 0, bestPart = null, bestProfit = -Infinity;
+      let totalCost = 0, lowSum = 0, highSum = 0, bestPart = null, bestHigh = -Infinity;
+      const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
+      let demandRk = 0;
       const partRows = v.topParts.map(p => {
         const lookup = lookupYardCost(p.name, v.location);
         const yardCost = lookup.cost != null ? lookup.cost : p.cost;
         const costLabel = lookup.source === 'pnp' ? 'PnP' : lookup.source === 'tap' ? 'TAP' : lookup.source === 'utpap' ? 'UTPAP' : 'est';
         const costTitle = lookup.source === 'pnp' ? 'Real Pick-n-Pull price' : lookup.source === 'tap' ? 'Real Tear-A-Part price' : lookup.source === 'utpap' ? 'Utah Pic-A-Part list price' : 'Estimated';
-        const avgResale = (p.low + p.high) / 2;
-        const profit = Math.round(avgResale - yardCost);
+        const pLow = Math.max(0, Math.round(p.low - yardCost));
+        const pHigh = Math.round(p.high - yardCost);
         totalCost += yardCost;
-        totalProfit += avgResale - yardCost;
-        if (profit > bestProfit) { bestProfit = profit; bestPart = p.name; }
+        lowSum += p.low - yardCost;
+        highSum += p.high - yardCost;
+        if (pHigh > bestHigh) { bestHigh = pHigh; bestPart = p.name; }
+        demandRk = Math.max(demandRk, speedRk(p.sell_speed));
         const sellSpd = p.sell_speed || '';
         const sellCls = sellSpd === 'Fast' ? 'sell-fast' : sellSpd === 'Slow' ? 'sell-slow' : 'sell-medium';
         return `
@@ -723,26 +703,32 @@ function renderLive() {
             <span class="part-name">${p.name}</span>
             <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
             <span class="part-cost" title="${costTitle}: ${lookup.yardName || 'N/A'}">${formatPrice(yardCost)} <small style="opacity:0.65">${costLabel}</small></span>
-            <span class="part-price">${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
-            <span class="part-profit" style="color:${profit > 100 ? 'var(--accent2)' : profit > 0 ? 'var(--orange)' : 'var(--red)'};font-weight:800;font-size:0.78rem;min-width:55px;text-align:right;">+${formatPrice(profit)}</span>
+            <span class="part-price" title="Typical eBay sold range, working condition">sells ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
             ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
-              <span class="sell-badge ${sellCls}">${sellSpd}</span>
+              <span class="sell-badge ${sellCls}">${sellSpd === 'Fast' ? 'Sells fast' : sellSpd === 'Slow' ? 'Slow mover' : 'Steady seller'}</span>
               <span class="sell-channel">Sell on: ${p.sell_at}</span>
               ${p.sell_notes ? '<span class="sell-tip">' + displaySellNotes(p.sell_notes, v.make) + '</span>' : ''}
             </div>` : ''}
           </li>`;
       }).join('');
 
-      const adjProfit = Math.round(totalProfit * fm);
-      cardStyle = `--tier-color:${tierColor(totalProfit * fm, maxProfit)};`;
-      profitLine = `
+      // Demand is the primary signal; dollars are a supporting range, never a promise.
+      const rangeLow = Math.max(0, Math.round(lowSum * fm));
+      const rangeHigh = Math.round(highSum * fm);
+      const demand = demandRk === 3
+        ? { cls: 'demand-fast', label: 'Sells fast' }
+        : demandRk === 1
+        ? { cls: 'demand-slow', label: 'Slow mover' }
+        : { cls: 'demand-steady', label: 'Steady seller' };
+      cardStyle = `--tier-color:var(--${demandRk === 3 ? 'demand-fast' : demandRk === 1 ? 'demand-slow' : 'demand-steady'});`;
+      profitLine = rangeHigh > 0 ? `
         <div class="profit-line">
-          <span class="live-card-value">+${formatPrice(adjProfit)}</span>
-          <span class="profit-sub">est. profit &middot; ${formatPrice(haul)} resale &middot; ${formatPrice(Math.round(totalCost))} to pull</span>
-        </div>`;
+          <span class="demand-badge ${demand.cls}">${demand.label}</span>
+          <span class="range-text">e.g. ${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull</span>
+        </div>` : '';
       partsBlock = `
         <details class="parts-details">
-          <summary>&#x1F9F0; ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} &middot; best: ${bestPart} +${formatPrice(bestProfit)} <span class="chev">&#x25BC;</span></summary>
+          <summary>${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} flagged &middot; top: ${bestPart} <span class="chev">&#x25BC;</span></summary>
           <div class="car-body"><ul class="parts-list">${partRows}</ul></div>
         </details>`;
     }
@@ -941,56 +927,6 @@ function updateDatabase() {
   renderCarGrid(cars);
 }
 
-/* ===== VALUE GUIDE ===== */
-function renderValueTable() {
-  const search = document.getElementById('value-search').value.toLowerCase();
-  const sortBy = document.getElementById('value-sort').value;
-  let rows = [];
-  DATABASE.forEach(car => {
-    car.parts.forEach(p => {
-      const avgResale = (p.priceRange[0] + p.priceRange[1]) / 2;
-      const roi = avgResale / p.yardCost;
-      rows.push({ carName: car.name, make: car.make, part: p, avgResale, roi, category: car.category });
-    });
-  });
-  if (search) rows = rows.filter(r => (r.carName + ' ' + r.make + ' ' + r.part.name + ' ' + r.part.sellOn).toLowerCase().includes(search));
-  rows.sort((a, b) => {
-    switch (sortBy) {
-      case 'high-desc': return b.part.priceRange[1] - a.part.priceRange[1];
-      case 'roi-desc': return b.roi - a.roi;
-      case 'profit-desc': return (b.avgResale - b.part.yardCost) - (a.avgResale - a.part.yardCost);
-      case 'cost-asc': {
-        const cd = a.part.yardCost - b.part.yardCost;
-        if (cd !== 0) return cd;
-        return b.roi - a.roi;
-      }
-      case 'rarity-desc': {
-        const rd = rarityRank(b.part.rarity) - rarityRank(a.part.rarity);
-        if (rd !== 0) return rd;
-        return b.part.priceRange[1] - a.part.priceRange[1];
-      }
-      case 'name-asc': return a.part.name.localeCompare(b.part.name);
-      case 'car-asc': return a.carName.localeCompare(b.carName);
-      default: return 0;
-    }
-  });
-  document.getElementById('value-tbody').innerHTML = rows.map(r => {
-    const roiLabel = r.roi >= 10 ? 'HIGH' : r.roi >= 5 ? 'MED' : 'LOW';
-    const roiCls = r.roi >= 10 ? 'roi-high' : r.roi >= 5 ? 'roi-medium' : 'roi-low';
-    const profit = Math.round(r.avgResale - r.part.yardCost);
-    return `<tr>
-      <td>${r.carName}</td>
-      <td>${r.part.name}</td>
-      <td><span class="part-rarity ${rarityClass(r.part.rarity)}">${r.part.rarity}</span></td>
-      <td>${formatPrice(r.part.yardCost)}</td>
-      <td style="font-weight:700;color:var(--accent2);">${formatPrice(r.part.priceRange[0])}–${formatPrice(r.part.priceRange[1])}</td>
-      <td style="font-weight:700;color:var(--accent);">${formatPrice(profit)}</td>
-      <td><span class="roi-badge ${roiCls}">${Math.round(r.roi)}x ${roiLabel}</span></td>
-      <td style="font-size:0.8rem;color:var(--text-dim);">${r.part.sellOn}</td>
-    </tr>`;
-  }).join('');
-}
-
 /* ===== PROFIT BREAKDOWN ===== */
 /** Baked sell_notes can mention Lexus for any "Mark Levinson" part; donor make may differ. */
 function displaySellNotes(notes, vehicleMake) {
@@ -1002,142 +938,6 @@ function displaySellNotes(notes, vehicleMake) {
   return notes;
 }
 
-function populateProfitFilters() {
-  if (!liveLoaded) return;
-  const locations = [...new Set(liveInventory.map(v => v.location).filter(Boolean))].sort();
-  const makes = [...new Set(liveInventory.filter(v => v.hasMatch).map(v => v.make))].sort();
-  const locSel = document.getElementById('profit-filter-location');
-  locSel.innerHTML = '<option value="">All Yards</option>' + locations.map(l => `<option value="${l}">${l}</option>`).join('');
-  const makeSel = document.getElementById('profit-filter-make');
-  makeSel.innerHTML = '<option value="">All Makes</option>' + makes.map(m => `<option value="${m}">${m}</option>`).join('');
-}
-
-function renderProfitTab() {
-  if (!liveLoaded) {
-    document.getElementById('profit-tbody').innerHTML = '<tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--text-dim);">Load live inventory first (run scraper with --save --all)</td></tr>';
-    return;
-  }
-  const search = document.getElementById('profit-search').value.toLowerCase();
-  const filterLoc = document.getElementById('profit-filter-location').value;
-  const filterMake = document.getElementById('profit-filter-make').value;
-  const sortBy = document.getElementById('profit-sort').value;
-  const matchOnly = document.getElementById('profit-match-only').checked;
-
-  let vehicles = liveInventory.filter(v => {
-    if (matchOnly && !v.hasMatch) return false;
-    if (!v.topParts || !v.topParts.length) return false;
-    if (filterLoc && v.location !== filterLoc) return false;
-    if (filterMake && v.make !== filterMake) return false;
-    if (search) {
-      const blob = `${v.year} ${v.make} ${v.model} ${v.location} ${v.vin || ''} ${v.topParts.map(p=>p.name).join(' ')}`.toLowerCase();
-      if (!blob.includes(search)) return false;
-    }
-    return true;
-  });
-
-  vehicles.forEach(v => {
-    v._profitParts = v.topParts.map(p => {
-      const lookup = lookupYardCost(p.name, v.location);
-      const yardCost = lookup.cost != null ? lookup.cost : p.cost;
-      const costSource = lookup.source === 'pnp' ? 'PnP' : lookup.source === 'tap' ? 'TAP' : lookup.source === 'utpap' ? 'UTPAP' : 'est';
-      const avgResale = (p.low + p.high) / 2;
-      const profit = avgResale - yardCost;
-      const roi = yardCost > 0 ? avgResale / yardCost : 0;
-      return { ...p, yardCost, costSource, avgResale, profit, roi, yardPartName: lookup.yardName };
-    });
-    v._totalProfit = v._profitParts.reduce((s, p) => s + p.profit, 0);
-    v._totalCost = v._profitParts.reduce((s, p) => s + p.yardCost, 0);
-    v._totalResale = v._profitParts.reduce((s, p) => s + p.avgResale, 0);
-    v._bestPartProfit = Math.max(...v._profitParts.map(p => p.profit));
-    v._avgRoi = v._totalCost > 0 ? v._totalResale / v._totalCost : 0;
-    v._freshness = freshnessMultiplier(v.dateAdded);
-    v._smartProfit = v._totalProfit * v._freshness;
-  });
-
-  vehicles.sort((a, b) => {
-    switch (sortBy) {
-      case 'smart-profit': return b._smartProfit - a._smartProfit;
-      case 'profit-desc': return b._totalProfit - a._totalProfit;
-      case 'best-part-profit': return b._bestPartProfit - a._bestPartProfit;
-      case 'roi-desc': return b._avgRoi - a._avgRoi;
-      case 'cheapest-pull': return a._totalCost - b._totalCost;
-      case 'haul-desc': return b._totalResale - a._totalResale;
-      case 'year-desc': return b.year - a.year;
-      default: return 0;
-    }
-  });
-
-  const grandProfit = vehicles.reduce((s, v) => s + v._totalProfit, 0);
-  const grandCost = vehicles.reduce((s, v) => s + v._totalCost, 0);
-  const avgProfit = vehicles.length ? grandProfit / vehicles.length : 0;
-  const pnpCount = vehicles.filter(v => v.location && v.location.toLowerCase().includes('pick')).length;
-  const tapCount = vehicles.filter(v => v.location && v.location.toLowerCase().includes('tear')).length;
-  const utpapCount = vehicles.filter(v => v.location && v.location.toLowerCase().includes('pic-a-part')).length;
-
-  const profitScraped = liveScrapedAt
-    ? new Date(liveScrapedAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })
-    : '—';
-
-  document.getElementById('profit-stats-bar').innerHTML = `
-    <div class="stat-card"><div class="label">Vehicles w/ Parts</div><div class="value blue">${vehicles.length}</div></div>
-    <div class="stat-card"><div class="label">Total Profit Potential</div><div class="value green">${formatPrice(Math.round(grandProfit))}</div></div>
-    <div class="stat-card"><div class="label">Total Pull Cost</div><div class="value orange">${formatPrice(Math.round(grandCost))}</div></div>
-    <div class="stat-card"><div class="label">Avg Profit / Vehicle</div><div class="value gold">${formatPrice(Math.round(avgProfit))}</div></div>
-    <div class="stat-card"><div class="label">PnP / TAP / UTPAP</div><div class="value purple">${pnpCount} / ${tapCount} / ${utpapCount}</div></div>
-    <div class="stat-card"><div class="label">Inventory scraped</div><div class="value" style="font-size:0.85rem;">${profitScraped}</div></div>
-  `;
-
-  let rows = [];
-  vehicles.forEach(v => {
-    v._profitParts.forEach(p => {
-      rows.push({ v, p });
-    });
-  });
-
-  const sellSpeedRank = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
-  if (sortBy === 'fastest-sell') rows.sort((a, b) => {
-    const diff = sellSpeedRank(b.p.sell_speed) - sellSpeedRank(a.p.sell_speed);
-    return diff !== 0 ? diff : b.p.profit - a.p.profit;
-  });
-  else if (sortBy === 'best-part-profit') rows.sort((a, b) => b.p.profit - a.p.profit);
-  else if (sortBy === 'roi-desc') rows.sort((a, b) => b.p.roi - a.p.roi);
-  else if (sortBy === 'cheapest-pull') rows.sort((a, b) => a.p.yardCost - b.p.yardCost);
-
-  const showing = rows.slice(0, 500);
-  document.getElementById('profit-tbody').innerHTML = showing.map(({v, p}) => {
-    const roiLabel = p.roi >= 10 ? 'HIGH' : p.roi >= 5 ? 'MED' : p.roi >= 3 ? 'OK' : 'LOW';
-    const roiCls = p.roi >= 10 ? 'roi-high' : p.roi >= 5 ? 'roi-medium' : 'roi-low';
-    const profitColor = p.profit > 150 ? 'var(--accent2)' : p.profit > 50 ? 'var(--accent)' : p.profit > 0 ? 'var(--text)' : 'var(--red)';
-    const costBadge = p.costSource === 'PnP'
-      ? '<span class="src-pnp" style="margin-left:4px;" title="Real Pick-n-Pull price">PnP</span>'
-      : p.costSource === 'TAP'
-      ? '<span class="src-tap" style="margin-left:4px;" title="Real Tear-A-Part price">TAP</span>'
-      : p.costSource === 'UTPAP'
-      ? '<span class="src-utpap" style="margin-left:4px;" title="Utah Pic-A-Part list price">UTPAP</span>'
-      : '<span class="src-est" style="margin-left:4px;" title="Estimated">est</span>';
-    const sellSpd = p.sell_speed || '';
-    const sellCls = sellSpd === 'Fast' ? 'sell-fast' : sellSpd === 'Slow' ? 'sell-slow' : 'sell-medium';
-    return `<tr>
-      <td style="white-space:nowrap;">${v.year} ${v.make} ${v.model}${v.row ? '<br><small style="color:var(--text-dim)">Row '+v.row+'</small>' : ''}</td>
-      <td style="font-size:0.78rem;">${v.location}</td>
-      <td>${p.name}</td>
-      <td><span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span></td>
-      <td style="white-space:nowrap;">${formatPrice(p.yardCost)}${costBadge}</td>
-      <td style="white-space:nowrap;font-weight:600;">${formatPrice(Math.round(p.avgResale))}</td>
-      <td style="white-space:nowrap;font-weight:700;color:${profitColor};">+${formatPrice(Math.round(p.profit))}</td>
-      <td><span class="roi-badge ${roiCls}">${Math.round(p.roi)}x ${roiLabel}</span></td>
-      <td style="font-size:0.75rem;min-width:120px;">${p.sell_at ? `<span class="sell-badge ${sellCls}">${sellSpd}</span> ${p.sell_at}${p.sell_notes ? '<br><span class="sell-tip">' + displaySellNotes(p.sell_notes, v.make) + '</span>' : ''}` : '<span style="color:var(--text-dim);">—</span>'}</td>
-      <td style="white-space:nowrap;font-size:0.78rem;"><span style="color:${v._freshness >= 0.75 ? 'var(--accent2)' : v._freshness >= 0.5 ? 'var(--orange)' : 'var(--red)'};font-weight:600;">${Math.round(v._freshness * 100)}%</span> <span style="color:var(--text-dim);">${Math.round(daysSinceAdded(v.dateAdded))}d</span></td>
-    </tr>`;
-  }).join('') + (rows.length > 500 ? `<tr><td colspan="10" style="text-align:center;padding:1rem;color:var(--text-dim);">Showing 500 of ${rows.length} rows — filter to narrow down</td></tr>` : '');
-}
-
-document.getElementById('profit-search').addEventListener('input', renderProfitTab);
-document.getElementById('profit-filter-location').addEventListener('change', renderProfitTab);
-document.getElementById('profit-filter-make').addEventListener('change', renderProfitTab);
-document.getElementById('profit-sort').addEventListener('change', renderProfitTab);
-document.getElementById('profit-match-only').addEventListener('change', renderProfitTab);
-
 /* ===== TABS ===== */
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
@@ -1146,9 +946,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     tab.classList.add('active');
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
     if (tab.dataset.tab === 'database') updateDatabase();
-    if (tab.dataset.tab === 'value') renderValueTable();
     if (tab.dataset.tab === 'live') renderLive();
-    if (tab.dataset.tab === 'profit') { populateProfitFilters(); renderProfitTab(); }
     if (tab.dataset.tab === 'alerts') renderAlerts();
   });
 });
@@ -1158,8 +956,6 @@ document.getElementById('filter-make').addEventListener('change', updateDatabase
 document.getElementById('filter-category').addEventListener('change', updateDatabase);
 document.getElementById('filter-rarity').addEventListener('change', updateDatabase);
 document.getElementById('sort-by').addEventListener('change', updateDatabase);
-document.getElementById('value-search').addEventListener('input', renderValueTable);
-document.getElementById('value-sort').addEventListener('change', renderValueTable);
 
 /* ===== ALERTS / WATCHLIST ===== */
 const WATCHLIST_KEY = 'junkyard_hunter_watchlist';
@@ -1342,11 +1138,11 @@ function requestNotifPermission() {
     if (perm === 'granted') {
       btn.textContent = 'Notifications Enabled';
       btn.style.background = 'var(--accent2)';
-      btn.style.color = '#0b0d11';
+      btn.style.color = 'var(--bg)';
     } else {
       btn.textContent = 'Notifications Blocked';
       btn.style.background = 'var(--red)';
-      btn.style.color = '#0b0d11';
+      btn.style.color = 'var(--bg)';
     }
   });
 }
@@ -1434,7 +1230,7 @@ document.getElementById('alert-export-btn').addEventListener('click', exportWatc
     const btn = document.getElementById('alert-notif-btn');
     btn.textContent = 'Notifications Enabled';
     btn.style.background = 'var(--accent2)';
-    btn.style.color = '#0b0d11';
+    btn.style.color = 'var(--bg)';
   }
 })();
 
