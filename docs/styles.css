@@ -860,6 +860,17 @@
   }
   .saved-empty { text-align: center; color: var(--text-dim); padding: 2rem 0; font-size: 0.9rem; }
 
+  .ghost-note {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+    background: var(--surface2);
+    border-left: 3px solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.7rem;
+    margin: 0.35rem 0 0.6rem;
+  }
+
   /* ===== Pro (fake door) ===== */
   .pro-pill {
     margin-left: 0.35rem;

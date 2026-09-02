@@ -3441,6 +3441,43 @@ def fetch_pyp_inventory() -> list[dict]:
     return unique
 
 
+def refresh_pnp_pricing_file(store_id: int = 74) -> Path:
+    """Refresh Pick-n-Pull's published price list -> picknpull_pricing.json.
+
+    PnP's parts API is a prefix search (api/parts/list/{store}?partKeyword=X),
+    so iterate a-z/0-9 and dedupe by itemNumber. The list is chain-wide
+    standard pricing; store 74 is used as the reference store. The existing
+    file is only overwritten when the fetch looks complete (>300 parts), so a
+    partial/failed run never clobbers good data."""
+    seen: dict[str, dict] = {}
+    for kw in "abcdefghijklmnopqrstuvwxyz0123456789":
+        try:
+            r = requests.get(
+                f"{PNP_API}/parts/list/{store_id}",
+                params={"language": "english", "partKeyword": kw},
+                headers=HEADERS,
+                timeout=30,
+            )
+            r.raise_for_status()
+            for p in r.json() or []:
+                item = p.get("itemNumber")
+                if item and item not in seen:
+                    seen[item] = p
+        except Exception as e:
+            print(f"  [PnP pricing] keyword '{kw}': {e}", file=sys.stderr)
+        time.sleep(0.2)
+    path = DATA_DIR / "picknpull_pricing.json"
+    if len(seen) > 300:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [PnP pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(
+            f"  [PnP pricing] only {len(seen)} parts fetched — keeping existing file",
+            file=sys.stderr,
+        )
+    return path
+
+
 def refresh_pyp_pricing_file(stores: list[dict] | None = None) -> Path:
     """Per-yard PYP price lists -> pyp_pricing.json, keyed by yard display name.
     Only the keyword-mapped part descriptions are kept."""
@@ -4252,7 +4289,7 @@ def main():
     parser.add_argument(
         "--refresh-chain-pricing",
         action="store_true",
-        help="Fetch per-yard price lists for LKQ Pick Your Part + Pull-A-Part and write pyp_pricing.json / pap_pricing.json, then exit",
+        help="Fetch chain price lists (Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part) and write picknpull_pricing.json / pyp_pricing.json / pap_pricing.json, then exit",
     )
     parser.add_argument(
         "--decode-vins",
@@ -4280,6 +4317,7 @@ def main():
         return
 
     if args.refresh_chain_pricing:
+        refresh_pnp_pricing_file()
         refresh_pyp_pricing_file()
         refresh_pap_pricing_file()
         return

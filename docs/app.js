@@ -823,7 +823,7 @@ function renderLive() {
 
   document.getElementById('live-stats-bar').innerHTML = `
     <div class="stat-card"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">Worth Pulling</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">Worth a Look</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
     <div class="stat-card"><div class="label">Fast Sellers</div><div class="value green">${fastSellers.toLocaleString()}</div></div>
     <div class="stat-card"><div class="label">New This Week</div><div class="value">${newThisWeek.toLocaleString()}</div></div>
     <div class="stat-card"><div class="label">Updated</div><div class="value" style="font-size:0.85rem;line-height:1.5;">${scrapedLabel}</div></div>
@@ -959,8 +959,11 @@ function renderLive() {
         : '';
       partsBlock = `
         <details class="parts-details">
-          <summary>${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} flagged &middot; top: ${bestPart} <span class="chev">&#x25BC;</span></summary>
-          <div class="car-body"><ul class="parts-list">${partRows}</ul></div>
+          <summary>Came with ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart} <span class="chev">&#x25BC;</span></summary>
+          <div class="car-body">
+            <div class="ghost-note">These are parts this car <strong>originally came with</strong> &mdash; yards track cars, not remaining parts, so some may already be pulled. Newer arrivals are more likely intact, which is why estimates shrink the longer a car sits.</div>
+            <ul class="parts-list">${partRows}</ul>
+          </div>
         </details>`;
     }
 
@@ -976,7 +979,7 @@ function renderLive() {
             <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${vehicleKey(v)}" title="Save for your yard visit">&#x2764;&#xFE0F;</button>
             ${isNewVehicle ? '<span class="badge badge-new">NEW</span>' : ''}
             ${isMatch
-              ? '<span class="badge" style="background:' + (fm >= 0.75 ? 'var(--green-soft)' : fm >= 0.5 ? 'var(--gold-soft)' : 'var(--red-soft)') + ';color:' + fl.color + ';">' + fl.text + '</span>'
+              ? '<span class="badge" title="Time on the lot — older arrivals are more likely already picked over, so value estimates are discounted" style="background:' + (fm >= 0.75 ? 'var(--green-soft)' : fm >= 0.5 ? 'var(--gold-soft)' : 'var(--red-soft)') + ';color:' + fl.color + ';">' + fl.text + '</span>'
               : '<span class="badge" style="background:var(--surface3);color:var(--text-dim);">No parts</span>'}
           </div>
         </div>
@@ -1055,7 +1058,7 @@ function renderStats(cars) {
     <div class="stat-card"><div class="label">Vehicles</div><div class="value blue">${cars.length}</div></div>
     <div class="stat-card"><div class="label">Parts Tracked</div><div class="value purple">${allParts.length}</div></div>
     <div class="stat-card"><div class="label">Legendary Parts</div><div class="value gold">${allParts.filter(p => p.rarity === 'Legendary').length}</div></div>
-    <div class="stat-card"><div class="label">Best Single Part</div><div class="value green">${formatPrice(Math.max(...allParts.map(p => p.priceRange[1])))}</div></div>
+    <div class="stat-card"><div class="label">Makes Covered</div><div class="value green">${new Set(cars.map(c => c.make)).size}</div></div>
     <div class="stat-card"><div class="label">Toyota Vehicles</div><div class="value orange">${cars.filter(c => c.make === 'Toyota').length}</div></div>
   `;
 }
@@ -1087,7 +1090,7 @@ function renderCarGrid(cars) {
               <span class="part-name">${p.name}</span>
               <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
               <span class="part-cost" title="Typical self-service yard price — actual price comes from your yard's own price list">~${formatPrice(p.yardCost)} typical pull</span>
-              <span class="part-price">${formatPrice(p.priceRange[0])}–${formatPrice(p.priceRange[1])}</span>
+              <span class="part-price" title="Typical eBay sold range for working parts — a curated estimate, not a live quote">est. ${formatPrice(p.priceRange[0])}–${formatPrice(p.priceRange[1])}</span>
             </li>
           `).join('')}
         </ul>
