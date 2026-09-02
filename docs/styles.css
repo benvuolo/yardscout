@@ -860,6 +860,43 @@
   }
   .saved-empty { text-align: center; color: var(--text-dim); padding: 2rem 0; font-size: 0.9rem; }
 
+  .lot-clock {
+    margin-top: 0.25rem;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+  .lot-clock-soon { color: var(--orange); }
+  .badge-soon {
+    background: var(--gold-soft);
+    color: var(--orange);
+  }
+  .share-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 0.2rem 0.3rem;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.15s;
+  }
+  .share-btn:hover { color: var(--accent); }
+  .focus-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    background: var(--accent-soft);
+    border: 1px solid rgba(79, 95, 232, 0.25);
+    border-radius: var(--radius);
+    padding: 0.7rem 1rem;
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+
   .trim-badge {
     display: inline-block;
     padding: 0.1rem 0.45rem;
