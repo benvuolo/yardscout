@@ -2942,20 +2942,6 @@ def _vpic_trim_quality(trim: str) -> str:
     return "usable"
 
 
-def _trim_haystack(model_lower: str, vin_decode: dict | None) -> str:
-    """Model string plus VPIC trim/series when trim is reliable enough to match on."""
-    parts = [model_lower]
-    if vin_decode:
-        if vin_decode.get("trimQuality") == "usable":
-            t = (vin_decode.get("trim") or "").strip().lower()
-            if t:
-                parts.append(t)
-        ser = (vin_decode.get("series") or "").strip().lower()
-        if ser:
-            parts.append(ser)
-    return " ".join(parts)
-
-
 def fetch_vpic_decode(vin: str) -> dict | None:
     """Decode VIN via NHTSA decodevinvaluesextended; cached per process. Returns None on failure."""
     vin = _normalize_vin(vin)
@@ -2984,6 +2970,10 @@ def fetch_vpic_decode(vin: str) -> dict | None:
         "driveType": (row.get("DriveType") or "").strip(),
         "trimQuality": _vpic_trim_quality(trim),
         "bodyClass": (row.get("BodyClass") or "").strip(),
+        # Factory identity per the VIN — used to cross-check the yard listing.
+        "modelYear": (row.get("ModelYear") or "").strip(),
+        "make": (row.get("Make") or "").strip(),
+        "model": (row.get("Model") or "").strip(),
     }
     _VPIC_CACHE[vin] = dec
     if _VPIC_DELAY_SEC > 0:
@@ -3002,11 +2992,26 @@ def _decode_vpic_unique_parallel(unique_vins: list[str]) -> list[dict | None]:
 
 def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = None) -> list[dict]:
     """Match a vehicle against the unobtanium database, filtering parts by
-    year range and trim requirements.  Attaches sell-channel info to each part."""
+    year range and trim requirements.  Attaches sell-channel info to each part.
+
+    Trim-gated parts carry a "trim_status" honesty flag:
+      - "listing":     the yard's own listing title names the trim
+      - "vin":         a usable (single-trim) vPIC decode confirms the trim
+      - "unconfirmed": trim unknown/ambiguous — part listed as "if equipped"
+    When a USABLE decode names a different trim (and series doesn't match
+    either), the part is excluded — that's the only case where we're confident
+    the car doesn't have it. Ambiguous/empty decodes never gate parts."""
     model_lower = model.lower()
     make_lower = make.lower()
-    trim_hay = _trim_haystack(model_lower, vin_decode)
     matches = []
+    vin_usable = bool(vin_decode and vin_decode.get("trimQuality") == "usable")
+    vin_tokens = ""
+    if vin_decode:
+        if vin_usable:
+            vin_tokens += " " + (vin_decode.get("trim") or "").strip().lower()
+        ser = (vin_decode.get("series") or "").strip().lower()
+        if ser:
+            vin_tokens += " " + ser
     for keyword, info in UNOBTANIUM_DB.items():
         if keyword in model_lower or keyword in f"{make_lower} {model_lower}":
             low, high = info["year_range"]
@@ -3017,11 +3022,23 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                         continue
                     if "yr_max" in p and year > p["yr_max"]:
                         continue
+                    trim_status = None
                     if "trim" in p:
-                        if not any(t.lower() in trim_hay for t in p["trim"]):
+                        trims = [t.lower() for t in p["trim"]]
+                        if any(t in model_lower for t in trims):
+                            trim_status = "listing"
+                        elif vin_tokens and any(t in vin_tokens for t in trims):
+                            trim_status = "vin"
+                        elif vin_usable:
+                            # Decode is specific and names a different trim:
+                            # confident the car doesn't have this part.
                             continue
+                        else:
+                            trim_status = "unconfirmed"
                     cl, ch = _resale_sold_calibrate(p["low"], p["high"], p["name"], year)
                     enriched = {**p, "low": cl, "high": ch, **_lookup_sell_info(p["name"], make)}
+                    if trim_status:
+                        enriched["trim_status"] = trim_status
                     filtered_parts.append(enriched)
                 if filtered_parts:
                     max_val = max(p["high"] for p in filtered_parts)
@@ -3639,18 +3656,69 @@ def refresh_pap_pricing_file(locations: list[dict] | None = None) -> Path:
     return path
 
 
+def _vpic_mismatch_msg(v: dict, vin_dec: dict | None) -> str | None:
+    """Cross-check the VIN's factory decode against the yard listing.
+
+    The yard listing is what a visitor sees on the lot sign, so we never
+    silently override it — but when the VIN clearly disagrees, the VIN wins
+    for matching and the discrepancy is flagged in the data. Conservative on
+    purpose: only year (exact int compare) and make (no substring relation
+    either way) are checked; model strings vary too much across feeds to
+    compare without false alarms."""
+    if not vin_dec:
+        return None
+    msgs = []
+    try:
+        vin_year = int(vin_dec.get("modelYear") or 0)
+    except (TypeError, ValueError):
+        vin_year = 0
+    listed_year = v.get("year") or 0
+    if vin_year and listed_year and vin_year != listed_year:
+        msgs.append(f"VIN decodes as {vin_year} (listed {listed_year})")
+    vin_make = (vin_dec.get("make") or "").strip().lower()
+    listed_make = (v.get("make") or "").strip().lower()
+    if vin_make and listed_make and vin_make not in listed_make and listed_make not in vin_make:
+        # NHTSA reports some sub-brands under the parent make (e.g. every Scion
+        # VIN decodes as make "Toyota"). Same company, correctly-labeled lot
+        # sign — not a mismatch.
+        _BRAND_FAMILIES = [
+            {"scion", "toyota"}, {"datsun", "nissan"}, {"geo", "chevrolet"},
+            {"ram", "dodge"}, {"genesis", "hyundai"}, {"plymouth", "chrysler"},
+            {"eagle", "chrysler"}, {"saturn", "chevrolet"},
+        ]
+        same_family = any(vin_make in fam and listed_make in fam for fam in _BRAND_FAMILIES)
+        if not same_family:
+            msgs.append(f"VIN decodes as {(vin_dec.get('make') or '').title()} (listed {v.get('make')})")
+    return "; ".join(msgs) or None
+
+
 def enrich_vehicles(
     vehicles: list[dict],
     *,
     decode_vins: bool = False,
     decode_vins_profit_top: int = 0,
+    decode_vins_incremental: bool = False,
 ) -> list[dict]:
     """Add unobtanium match data. Optionally decode VINs via NHTSA VPIC (all unique VINs, or top-N-by-profit only)."""
     allowed_vins: set[str] | None = None
 
     def _apply_match(v: dict, vin_dec: dict | None) -> None:
+        mismatch = _vpic_mismatch_msg(v, vin_dec)
+        if mismatch:
+            v["_vpic_mismatch"] = mismatch
+        match_year = v.get("year", 0)
+        if vin_dec:
+            # Trust the VIN over the lot sign for the model year used in
+            # matching (year gates which parts apply); display keeps the
+            # listing year plus the mismatch flag.
+            try:
+                vy = int(vin_dec.get("modelYear") or 0)
+            except (TypeError, ValueError):
+                vy = 0
+            if vy:
+                match_year = vy
         v["_matches"] = match_vehicle(
-            v.get("year", 0), v.get("make", ""), v.get("model", ""),
+            match_year, v.get("make", ""), v.get("model", ""),
             vin_decode=vin_dec,
         )
         if v["_matches"]:
@@ -3662,7 +3730,61 @@ def enrich_vehicles(
             v["_top_parts"] = []
             v["_display"] = f"{v.get('make', '')} {v.get('model', '')}"
 
-    if decode_vins_profit_top > 0:
+    if decode_vins_incremental:
+        # Incremental pipeline: every previously-seen VIN comes from the
+        # persistent SQLite cache with zero API calls; only never-seen VINs
+        # are decoded, newest arrivals first, capped per run so the initial
+        # backlog drains across scheduled scans without blowing up CI time.
+        try:
+            import db as _db
+        except ImportError:
+            from scraper import db as _db  # pragma: no cover
+        _db.import_vin_decodes_gz(DATA_DIR / "vin_decodes.json.gz")
+        cached = _db.load_vin_decodes()
+        _VPIC_CACHE.update(cached)
+
+        vin_newest: dict[str, str] = {}
+        for v in vehicles:
+            vn = _normalize_vin(v.get("vin", ""))
+            if vn:
+                d = str(v.get("dateAdded", "") or "")
+                if d > vin_newest.get(vn, ""):
+                    vin_newest[vn] = d
+        uncached = [vn for vn in vin_newest if vn not in cached]
+        uncached.sort(key=lambda vn: vin_newest[vn], reverse=True)
+        cap = max(0, int(os.environ.get("VPIC_MAX_PER_RUN", "5000")))
+        todo = uncached[:cap]
+        print(
+            f"  NHTSA VPIC incremental: {len(vin_newest)} unique VINs in scan, "
+            f"{len(cached)} cached, {len(uncached)} new; decoding {len(todo)} this run "
+            f"(cap {cap}, newest first, {_VPIC_WORKERS} workers)...",
+            file=sys.stderr,
+        )
+        if todo:
+            _decode_vpic_unique_parallel(todo)
+            fresh = {vn: _VPIC_CACHE[vn] for vn in todo if _VPIC_CACHE.get(vn) is not None}
+            failed = len(todo) - len(fresh)
+            added = _db.store_vin_decodes(fresh, _iso_utc_z())
+            print(
+                f"  VPIC incremental: {added} decodes cached this run"
+                + (f", {failed} failed (will retry next run)" if failed else ""),
+                file=sys.stderr,
+            )
+            # Disaster-insurance export to git (only when grown enough — see db.py).
+            if _db.export_vin_decodes_gz(DATA_DIR / "vin_decodes.json.gz"):
+                print("  VPIC incremental: refreshed docs/data/vin_decodes.json.gz backup", file=sys.stderr)
+        remaining = max(0, len(uncached) - len(todo))
+        if remaining:
+            print(f"  VPIC incremental: {remaining} VINs still queued for future runs", file=sys.stderr)
+        for v in vehicles:
+            vn = _normalize_vin(v.get("vin", ""))
+            # Cache-only lookup: never trigger a network call here, so vehicles
+            # beyond this run's cap simply match without VIN data until a
+            # later run decodes them.
+            vin_dec = _VPIC_CACHE.get(vn) if vn else None
+            v["_vpic"] = vin_dec
+            _apply_match(v, vin_dec)
+    elif decode_vins_profit_top > 0:
         for v in vehicles:
             v["_vpic"] = None
             _apply_match(v, None)
@@ -3749,7 +3871,7 @@ def enrich_vehicles(
             v["_vpic"] = None
             _apply_match(v, None)
 
-    if decode_vins or decode_vins_profit_top:
+    if decode_vins or decode_vins_profit_top or decode_vins_incremental:
         n_decode_well = sum(
             1 for v in vehicles
             if isinstance(v.get("_vpic"), dict) and v["_vpic"].get("trimQuality") == "usable"
@@ -3832,6 +3954,7 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                     "sell_at": p.get("sell_at", ""),
                     "sell_speed": p.get("sell_speed", ""),
                     "sell_notes": p.get("sell_notes", ""),
+                    **({"trim_status": p["trim_status"]} if p.get("trim_status") else {}),
                 }
                 for p in v.get("_top_parts", [])
             ],
@@ -3846,6 +3969,8 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                 entry["vpicSeries"] = vp["series"]
             if vp.get("driveType"):
                 entry["vpicDriveType"] = vp["driveType"]
+        if v.get("_vpic_mismatch"):
+            entry["vpicMismatch"] = v["_vpic_mismatch"]
         output.append(entry)
     return output
 
@@ -3899,12 +4024,17 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
             e.get("maxValue", 0),
             1 if e.get("utpapPremium") else 0,
         ])
-        if e.get("vpicTrim") or e.get("vpicTrimQuality"):
+        # Only rows with UI-relevant decode data get a side-table entry; empty
+        # decodes (no trim/series/drive and no mismatch) would bloat the file
+        # now that every cached VIN carries a decode.
+        if (e.get("vpicTrim") or e.get("vpicSeries") or e.get("vpicDriveType")
+                or e.get("vpicMismatch") or e.get("vpicTrimQuality") == "ambiguous"):
             vpic[str(row_i)] = [
                 e.get("vpicTrim", ""),
                 e.get("vpicTrimQuality", ""),
                 e.get("vpicSeries", ""),
                 e.get("vpicDriveType", ""),
+                e.get("vpicMismatch", ""),
             ]
 
     return {
@@ -4297,6 +4427,13 @@ def main():
         help="NHTSA VPIC decode per VIN for trim-aware matching (parallel; tune VPIC_WORKERS / VPIC_DELAY_SEC)",
     )
     parser.add_argument(
+        "--decode-vins-incremental",
+        action="store_true",
+        help="Trim-aware matching using the persistent VIN decode cache (inventory_history.db): "
+             "cached VINs cost zero API calls; only never-seen VINs are decoded, newest arrivals "
+             "first, capped per run by VPIC_MAX_PER_RUN (default 5000)",
+    )
+    parser.add_argument(
         "--decode-vins-profit-top",
         type=int,
         default=0,
@@ -4367,11 +4504,15 @@ def main():
         return
 
     decode_vins_profit_top = max(0, int(args.decode_vins_profit_top or 0))
+    decode_vins_incremental = bool(args.decode_vins_incremental) or (
+        os.environ.get("JUNKYARD_DECODE_INCREMENTAL", "").strip().lower() in ("1", "true", "yes")
+    )
     decode_vins = (
         (bool(args.decode_vins) or os.environ.get("JUNKYARD_DECODE_VINS", "").strip().lower() in (
             "1", "true", "yes",
         ))
         and decode_vins_profit_top == 0
+        and not decode_vins_incremental
     )
 
     def do_scan():
@@ -4401,6 +4542,7 @@ def main():
             all_vehicles,
             decode_vins=decode_vins,
             decode_vins_profit_top=decode_vins_profit_top,
+            decode_vins_incremental=decode_vins_incremental,
         )
         print(f"  Total: {len(all_vehicles)} vehicles combined", file=sys.stderr)
         return all_vehicles

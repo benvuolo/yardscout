@@ -179,7 +179,11 @@ function vinMetaHtml(v) {
       vpic = ` <span class="badge" style="background:var(--surface3);color:var(--text-dim);font-size:0.62rem;" title="${escapeHtml(ambTitle)}">VPIC: multi-trim</span>`;
     }
   }
-  return ` &middot; VIN: <strong class="mono-vin">${escapeHtml(show)}</strong>${copyBtn}${dup}${vpic}`;
+  let mismatch = '';
+  if (v.vpicMismatch) {
+    mismatch = ` <span class="badge" style="background:var(--gold-soft);color:var(--orange);font-size:0.62rem;" title="The VIN's factory decode disagrees with the yard listing — the lot sign may be mislabeled. The VIN is used for matching; verify at the yard.">&#9888; ${escapeHtml(v.vpicMismatch)}</span>`;
+  }
+  return ` &middot; VIN: <strong class="mono-vin">${escapeHtml(show)}</strong>${copyBtn}${dup}${vpic}${mismatch}`;
 }
 
 function csvEscapeCell(val) {
@@ -300,6 +304,7 @@ async function loadLiveInventory() {
           v.vpicDecodeWell = vp[1] === 'usable';
           if (vp[2]) v.vpicSeries = vp[2];
           if (vp[3]) v.vpicDriveType = vp[3];
+          if (vp[4]) v.vpicMismatch = vp[4];
         }
         return v;
       });
@@ -598,8 +603,14 @@ function savedRange(s) {
     const lk = lookupYardCost(p.name, s.location);
     const cost = lk.cost != null ? lk.cost : 0;
     if (lk.cost == null) unknownCost = true;
-    lo += p.low - cost;
-    hi += p.high - cost;
+    // "If equipped" (trim-unconfirmed) parts only raise the high end; the low
+    // end assumes the car doesn't have them.
+    if (p.trim_status === 'unconfirmed') {
+      hi += p.high - cost;
+    } else {
+      lo += p.low - cost;
+      hi += p.high - cost;
+    }
   });
   // Same freshness discount the live cards apply, so the numbers agree.
   const fm = freshnessMultiplier(s.dateAdded);
@@ -892,9 +903,17 @@ function renderLive() {
         const yardCost = hasCost ? lookup.cost : 0;
         if (!hasCost) anyUnknownCost = true;
         const pHigh = Math.round(p.high - yardCost);
-        totalCost += yardCost;
-        lowSum += p.low - yardCost;
-        highSum += p.high - yardCost;
+        // Trim-unconfirmed parts ("if equipped") only contribute to the HIGH
+        // end of the range — the low end assumes the car doesn't have them,
+        // so the range never overstates a car whose trim we can't verify.
+        const ifEquipped = p.trim_status === 'unconfirmed';
+        if (ifEquipped) {
+          highSum += p.high - yardCost;
+        } else {
+          totalCost += yardCost;
+          lowSum += p.low - yardCost;
+          highSum += p.high - yardCost;
+        }
         if (pHigh > bestHigh) { bestHigh = pHigh; bestPart = p.name; }
         demandRk = Math.max(demandRk, speedRk(p.sell_speed));
         const sellSpd = p.sell_speed || '';
@@ -904,13 +923,20 @@ function renderLive() {
           : `<span class="part-cost" title="This part isn\u2019t on the yard\u2019s published price list — ask at the counter" style="opacity:0.75;"><small>check yard price list</small></span>`;
         const localNote = /\bFB\b|Facebook/i.test(p.sell_at || '')
           ? ' <span class="sell-tip" title="Facebook Marketplace is a local market — prices vary by area">FB prices vary by area</span>' : '';
+        // Trim-honesty marker: shown to everyone (it's about whether the part
+        // exists on the car, not its value).
+        const trimMark = p.trim_status === 'vin'
+          ? ' <span class="trim-badge trim-vin" title="This car\u2019s VIN decode names the trim that carries this part">VIN-confirmed</span>'
+          : ifEquipped
+          ? ' <span class="trim-badge trim-unknown" title="This part is trim-specific and the trim couldn\u2019t be confirmed from the VIN or the yard listing — check the car at the yard">if equipped &mdash; trim unconfirmed</span>'
+          : '';
         // Free tier: part names/rarity/channels stay visible, but dollar values
         // and demand speed are blurred placeholders (real numbers never render).
         if (!isPro()) {
           return `
             <li class="part-item" style="flex-wrap:wrap;">
               <span class="part-name">${p.name}</span>
-              <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
+              <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>${trimMark}
               <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">$28 list</span>
               <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">sells $250&ndash;$600</span>
               ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
@@ -922,7 +948,7 @@ function renderLive() {
         return `
           <li class="part-item" style="flex-wrap:wrap;">
             <span class="part-name">${p.name}</span>
-            <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
+            <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>${trimMark}
             ${costHtml}
             <span class="part-price" title="Typical eBay sold range (national), working condition">sells ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
             ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
