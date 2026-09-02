@@ -90,6 +90,8 @@ HEADERS = {
 
 # NHTSA vPIC — no API key. Unique VINs are decoded in parallel (VPIC_WORKERS); no per-VIN sleep.
 VPIC_DECODEVIN_EXTENDED = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/{vin}"
+VPIC_BATCH_URL = "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/"
+VPIC_BATCH_SIZE = 50
 _VPIC_CACHE: dict[str, dict | None] = {}
 def _vpic_workers() -> int:
     try:
@@ -2962,11 +2964,18 @@ def fetch_vpic_decode(vin: str) -> dict | None:
     except Exception:
         _VPIC_CACHE[vin] = None
         return None
+    dec = _vpic_row_to_decode(row)
+    _VPIC_CACHE[vin] = dec
+    if _VPIC_DELAY_SEC > 0:
+        time.sleep(_VPIC_DELAY_SEC)
+    return dec
+
+
+def _vpic_row_to_decode(row: dict) -> dict:
     trim = (row.get("Trim") or "").strip()
-    series = (row.get("Series") or "").strip()
-    dec = {
+    return {
         "trim": trim,
-        "series": series,
+        "series": (row.get("Series") or "").strip(),
         "driveType": (row.get("DriveType") or "").strip(),
         "trimQuality": _vpic_trim_quality(trim),
         "bodyClass": (row.get("BodyClass") or "").strip(),
@@ -2975,10 +2984,41 @@ def fetch_vpic_decode(vin: str) -> dict | None:
         "make": (row.get("Make") or "").strip(),
         "model": (row.get("Model") or "").strip(),
     }
-    _VPIC_CACHE[vin] = dec
-    if _VPIC_DELAY_SEC > 0:
-        time.sleep(_VPIC_DELAY_SEC)
-    return dec
+
+
+def _decode_vpic_batch(vins: list[str]) -> None:
+    """Decode via vPIC's DecodeVINValuesBatch POST (50 VINs per call) into
+    _VPIC_CACHE. ~50x fewer HTTP requests than per-VIN GETs — the per-VIN
+    flood gets throttled hard on CI runner IPs (observed 98% failures), while
+    batch calls are the API's intended bulk path. VINs in failed batches stay
+    uncached, so a later run retries them."""
+    errors: dict[str, int] = {}
+    ok_batches = 0
+    for i in range(0, len(vins), VPIC_BATCH_SIZE):
+        chunk = vins[i:i + VPIC_BATCH_SIZE]
+        try:
+            r = requests.post(
+                VPIC_BATCH_URL,
+                data={"format": "json", "data": ";".join(chunk)},
+                headers=HEADERS,
+                timeout=60,
+            )
+            r.raise_for_status()
+            results = r.json().get("Results") or []
+        except Exception as e:
+            status = getattr(getattr(e, "response", None), "status_code", "")
+            key = f"{type(e).__name__} {status}".strip()
+            errors[key] = errors.get(key, 0) + 1
+            time.sleep(2.0)
+            continue
+        for row in results:
+            rvin = _normalize_vin(row.get("VIN") or "")
+            if rvin:
+                _VPIC_CACHE[rvin] = _vpic_row_to_decode(row)
+        ok_batches += 1
+        time.sleep(0.3)
+    if errors:
+        print(f"  VPIC batch: {ok_batches} batches OK, errors: {errors}", file=sys.stderr)
 
 
 def _decode_vpic_unique_parallel(unique_vins: list[str]) -> list[dict | None]:
@@ -3757,11 +3797,11 @@ def enrich_vehicles(
         print(
             f"  NHTSA VPIC incremental: {len(vin_newest)} unique VINs in scan, "
             f"{len(cached)} cached, {len(uncached)} new; decoding {len(todo)} this run "
-            f"(cap {cap}, newest first, {_VPIC_WORKERS} workers)...",
+            f"(cap {cap}, newest first, batches of {VPIC_BATCH_SIZE})...",
             file=sys.stderr,
         )
         if todo:
-            _decode_vpic_unique_parallel(todo)
+            _decode_vpic_batch(todo)
             fresh = {vn: _VPIC_CACHE[vn] for vn in todo if _VPIC_CACHE.get(vn) is not None}
             failed = len(todo) - len(fresh)
             added = _db.store_vin_decodes(fresh, _iso_utc_z())
