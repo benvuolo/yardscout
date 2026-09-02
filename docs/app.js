@@ -316,6 +316,7 @@ async function loadLiveInventory() {
     }
     annotateVinDuplicates(liveInventory);
     liveLoaded = true;
+    updateCoverageCounts();
     populateLiveMakeFilter();
     renderLive();
     checkAndNotify();
@@ -332,6 +333,30 @@ async function loadLiveInventory() {
         <p style="margin-top:0.75rem;"><strong>Tip:</strong> Open this page via a local server (not <code>file://</code>), or the browser cannot load the JSON. <strong>cd into the folder that contains</strong> <code>index.html</code> (the <code>junkyard-hunter</code> project folder), then run <code>cd docs && python3 -m http.server 8765</code> and open <code>http://localhost:8765/index.html</code>. If you see 404, the server was started in the wrong directory.</p>
       </div>`;
   }
+}
+
+/* Coverage transparency: the yard count shown in the zip banner / footer is
+ * computed from the live data, never hardcoded. */
+function coverageYardCount() {
+  return new Set(liveInventory.map(v => v.location).filter(Boolean)).size;
+}
+function updateCoverageCounts() {
+  const n = coverageYardCount();
+  if (!n) return;
+  document.querySelectorAll('.coverage-count').forEach(el => { el.textContent = n; });
+}
+
+/* One-tap actions for the out-of-range empty state. */
+function jhWidenRadius(mi) {
+  const sel = document.getElementById('live-radius');
+  const opts = [...sel.options].map(o => parseFloat(o.value)).filter(v => !isNaN(v));
+  const fit = opts.find(v => v >= mi);
+  sel.value = fit != null ? String(fit) : '';
+  renderLive();
+}
+function jhShowNationwide() {
+  document.getElementById('live-radius').value = '';
+  renderLive();
 }
 
 function populateLiveMakeFilter() {
@@ -701,9 +726,14 @@ function renderLive() {
         if (!closest || d < closest.d) closest = { d, name: v.location, city: v.city, state: v.state };
       }
       if (closest && closest.d > radiusMi) {
-        msg = `<h3>No yards within ${radiusMi} miles of you yet</h3>
-          <p>The closest scanned yard is <strong>${escapeHtml(closest.name)}</strong>${closest.city ? ' in ' + escapeHtml(closest.city) + (closest.state ? ', ' + escapeHtml(closest.state) : '') : ''} — about <strong>${Math.round(closest.d)} miles</strong> away.</p>
-          <p style="margin-top:0.5rem;">Widen the distance filter to see it, or clear the zip to browse everything. Coverage today: Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part yards (strongest in the West, South, and Midwest — more chains coming).</p>`;
+        const where = closest.city ? ' in ' + escapeHtml(closest.city) + (closest.state ? ', ' + escapeHtml(closest.state) : '') : '';
+        msg = `<h3>No covered yards within ${radiusMi} miles of you</h3>
+          <p>The closest is <strong>${escapeHtml(closest.name)}</strong>${where} — about <strong>${Math.round(closest.d)} miles</strong> away.</p>
+          <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;">
+            <button type="button" class="btn btn-primary" onclick="jhWidenRadius(${Math.ceil(closest.d)})">Widen radius to include it</button>
+            <button type="button" class="btn" onclick="jhShowNationwide()">Show everything nationwide</button>
+          </div>
+          <p style="margin-top:1rem;font-size:0.72rem;">We track every major self-service chain — LKQ Pick Your Part, Pick-n-Pull, and Pull-A-Part — <span class="coverage-count">${coverageYardCount()}</span> yards nationwide. Independent local yards aren't covered yet.</p>`;
       }
     }
     document.getElementById('live-grid').innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;

@@ -1,41 +1,42 @@
   /* ============================================================
      JUNKYARD HUNTER — design system
-     Restrained dark theme: neutral surfaces, one indigo accent,
-     muted status colors. Premium tool, not a game.
+     Light-first theme: soft off-white surfaces, one indigo accent,
+     muted status colors, generous whitespace. Premium tool, not a
+     game. All colors meet WCAG AA on their backgrounds.
      ============================================================ */
   :root {
-    --bg: #0e0f12;
-    --surface: #16171b;
-    --surface2: #1d1e24;
-    --surface3: #25262e;
-    --border: #26272f;
-    --border-dark: #35363f;
-    --text: #f4f5f7;
-    --text-dim: #9a9ea9;
-    --accent: #6c7cff;
-    --accent-hover: #8591ff;
-    --accent-soft: rgba(108, 124, 255, 0.13);
-    --accent2: #34c98e;
-    --green-soft: rgba(52, 201, 142, 0.12);
-    --red: #e5726d;
-    --red-soft: rgba(229, 114, 109, 0.12);
-    --blue: #6c7cff;
-    --blue-soft: rgba(108, 124, 255, 0.12);
-    --purple: #9d8cff;
-    --purple-soft: rgba(157, 140, 255, 0.12);
-    --cyan: #5fc3de;
-    --pink: #d789b4;
-    --orange: #c99863;
-    --gold: #d9b36a;
-    --gold-soft: rgba(217, 179, 106, 0.11);
-    --gold-glow: rgba(217, 179, 106, 0.07);
-    --gold-border: rgba(217, 179, 106, 0.3);
-    --demand-fast: #34c98e;
-    --demand-steady: #8a92a6;
-    --demand-slow: #c99863;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.35);
-    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+    --bg: #f5f6f8;
+    --surface: #ffffff;
+    --surface2: #f2f3f6;
+    --surface3: #e9ebf0;
+    --border: #e4e6eb;
+    --border-dark: #cfd3db;
+    --text: #1a1d23;
+    --text-dim: #5b626e;
+    --accent: #4f5fe8;
+    --accent-hover: #3d4dd6;
+    --accent-soft: rgba(79, 95, 232, 0.09);
+    --accent2: #0f8a5a;
+    --green-soft: rgba(15, 138, 90, 0.1);
+    --red: #c23934;
+    --red-soft: rgba(194, 57, 52, 0.09);
+    --blue: #4f5fe8;
+    --blue-soft: rgba(79, 95, 232, 0.09);
+    --purple: #6f4fd0;
+    --purple-soft: rgba(111, 79, 208, 0.09);
+    --cyan: #0e7f9c;
+    --pink: #b8437f;
+    --orange: #9c6215;
+    --gold: #906c14;
+    --gold-soft: rgba(158, 120, 28, 0.1);
+    --gold-glow: rgba(158, 120, 28, 0.06);
+    --gold-border: rgba(158, 120, 28, 0.3);
+    --demand-fast: #0f8a5a;
+    --demand-steady: #5b626e;
+    --demand-slow: #9c6215;
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+    --shadow-md: 0 4px 14px rgba(16, 24, 40, 0.09);
+    --shadow-lg: 0 12px 32px rgba(16, 24, 40, 0.14);
     --radius: 12px;
     --radius-sm: 8px;
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -57,7 +58,7 @@
     top: 0;
     z-index: 100;
     padding: calc(0.8rem + env(safe-area-inset-top)) 1.25rem 0.8rem;
-    background: rgba(11, 13, 17, 0.82);
+    background: rgba(255, 255, 255, 0.85);
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border);
@@ -136,11 +137,11 @@
   .tab.active {
     color: #fff;
     background: var(--accent);
-    box-shadow: 0 2px 10px rgba(108, 124, 255, 0.28);
+    box-shadow: 0 2px 10px rgba(79, 95, 232, 0.22);
   }
   .tab-badge {
     background: var(--red);
-    color: #16181d;
+    color: #fff;
     font-size: 0.62rem;
     font-weight: 800;
     padding: 0.08rem 0.38rem;
@@ -156,7 +157,7 @@
       border-radius: 0;
       border: none;
       border-top: 1px solid var(--border);
-      background: rgba(15, 18, 24, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
       padding: 0.35rem 0.5rem calc(0.35rem + env(safe-area-inset-bottom));
@@ -188,7 +189,7 @@
   /* ---------- First-run zip banner ---------- */
   .zip-banner {
     background: var(--accent-soft);
-    border: 1px solid rgba(108, 124, 255, 0.35);
+    border: 1px solid rgba(79, 95, 232, 0.28);
     border-radius: var(--radius);
     padding: 1.1rem;
     margin-bottom: 0.9rem;
@@ -199,6 +200,8 @@
   .zip-banner-text { display: flex; flex-direction: column; gap: 0.2rem; }
   .zip-banner-text strong { font-size: 1rem; letter-spacing: -0.01em; }
   .zip-banner-text span { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
+  .zip-banner-coverage { font-size: 0.72rem !important; opacity: 0.85; margin-top: 0.15rem; }
+  .zip-banner-coverage strong { color: var(--text); }
   .zip-banner-form { display: flex; gap: 0.5rem; }
   .zip-banner-form input {
     flex: 1;
@@ -214,8 +217,8 @@
   }
   .zip-banner-form input:focus { border-color: var(--accent); }
   .gps-btn {
-    background: var(--surface-2, rgba(255,255,255,0.06));
-    border: 1px solid var(--border, rgba(255,255,255,0.12));
+    background: var(--surface2);
+    border: 1px solid var(--border);
     color: var(--text);
     border-radius: 10px;
     padding: 0.55rem 0.8rem;
@@ -370,7 +373,7 @@
     transition: border-color 0.15s;
   }
   select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2394a0b3' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235b626e' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.7rem center;
     padding-right: 1.8rem;
@@ -403,7 +406,7 @@
     background: var(--accent);
     border-color: transparent;
     color: #fff;
-    box-shadow: 0 2px 10px rgba(108, 124, 255, 0.25);
+    box-shadow: 0 2px 10px rgba(79, 95, 232, 0.2);
   }
   .btn-primary:hover { background: var(--accent-hover); }
 
@@ -501,7 +504,7 @@
     white-space: nowrap;
   }
   .demand-badge.demand-fast { background: var(--green-soft); color: var(--demand-fast); }
-  .demand-badge.demand-steady { background: rgba(138, 146, 166, 0.14); color: var(--demand-steady); }
+  .demand-badge.demand-steady { background: rgba(91, 98, 110, 0.1); color: var(--demand-steady); }
   .demand-badge.demand-slow { background: var(--gold-soft); color: var(--demand-slow); }
   .range-text { font-size: 0.78rem; color: var(--text-dim); font-weight: 500; }
   .stat-card .value.accent { color: var(--accent); }
@@ -611,7 +614,7 @@
   .cat-hatchback { background: var(--green-soft); color: var(--accent2); }
   .cat-van { background: var(--gold-soft); color: var(--gold); }
   .cat-sport { background: var(--red-soft); color: var(--red); }
-  .cat-wagon { background: rgba(56, 214, 245, 0.12); color: var(--cyan); }
+  .cat-wagon { background: rgba(14, 127, 156, 0.1); color: var(--cyan); }
 
   /* ---------- Tables ---------- */
   .value-table-wrapper {
@@ -670,7 +673,7 @@
   .profit-note strong { color: var(--text); }
   .src-pnp { background: var(--green-soft); color: var(--accent2); padding: 1px 6px; border-radius: 4px; font-weight: 700; font-size: 0.68rem; }
   .src-tap { background: var(--blue-soft); color: var(--blue); padding: 1px 6px; border-radius: 4px; font-weight: 700; font-size: 0.68rem; }
-  .src-utpap { background: rgba(244, 114, 182, 0.12); color: var(--pink); padding: 1px 6px; border-radius: 4px; font-weight: 700; font-size: 0.68rem; }
+  .src-utpap { background: rgba(184, 67, 127, 0.1); color: var(--pink); padding: 1px 6px; border-radius: 4px; font-weight: 700; font-size: 0.68rem; }
   .src-est { background: var(--gold-soft); color: var(--gold); padding: 1px 6px; border-radius: 4px; font-weight: 700; font-size: 0.68rem; }
 
   /* ---------- Alerts / watchlist ---------- */
@@ -779,20 +782,20 @@
     right: 1rem;
     bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
     z-index: 150;
-    background: var(--surface, #171a21);
-    border: 1px solid var(--border, rgba(255,255,255,0.14));
+    background: var(--surface);
+    border: 1px solid var(--border-dark);
     color: var(--text);
     border-radius: 999px;
     padding: 0.6rem 1rem;
     font-size: 0.95rem;
     font-weight: 800;
     cursor: pointer;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 18px rgba(16, 24, 40, 0.18);
   }
   #saved-pill span { color: var(--accent); }
   #saved-backdrop {
     position: fixed; inset: 0; z-index: 300;
-    background: rgba(0,0,0,0.55);
+    background: rgba(15, 18, 25, 0.4);
     opacity: 0; pointer-events: none;
     transition: opacity 0.2s;
   }
@@ -804,8 +807,8 @@
     max-height: 78vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    background: var(--surface, #171a21);
-    border-top: 1px solid var(--border, rgba(255,255,255,0.14));
+    background: var(--surface);
+    border-top: 1px solid var(--border);
     border-radius: 18px 18px 0 0;
     padding: 0.5rem 1rem calc(1.25rem + env(safe-area-inset-bottom, 0px));
     transform: translateY(105%);
@@ -814,7 +817,7 @@
   #saved-sheet.open { transform: translateY(0); }
   .sheet-handle {
     width: 42px; height: 5px; border-radius: 3px;
-    background: var(--border, rgba(255,255,255,0.2));
+    background: var(--border-dark);
     margin: 0.4rem auto 0.75rem;
   }
   .sheet-head { display: flex; align-items: center; justify-content: space-between; }
@@ -829,19 +832,19 @@
     font-size: 0.8rem; font-weight: 800; letter-spacing: 0.04em;
     text-transform: uppercase; color: var(--accent);
     padding-bottom: 0.35rem; margin-bottom: 0.4rem;
-    border-bottom: 1px solid var(--border, rgba(255,255,255,0.1));
+    border-bottom: 1px solid var(--border);
   }
   .saved-item {
     display: flex; align-items: center; gap: 0.7rem;
     padding: 0.55rem 0.2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid var(--border);
   }
   .saved-row-badge {
     flex-shrink: 0;
     min-width: 3.1rem;
     text-align: center;
-    background: var(--surface-2, rgba(255,255,255,0.07));
-    border: 1px solid var(--border, rgba(255,255,255,0.14));
+    background: var(--surface2);
+    border: 1px solid var(--border);
     border-radius: 10px;
     padding: 0.35rem 0.4rem;
     font-weight: 900; font-size: 0.95rem;
@@ -850,7 +853,7 @@
   .saved-item-info { flex: 1; min-width: 0; }
   .saved-item-name { font-weight: 700; font-size: 0.92rem; }
   .saved-item-sub { font-size: 0.75rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .saved-item-profit { font-weight: 800; color: var(--accent2, #3ddc84); font-size: 0.9rem; flex-shrink: 0; }
+  .saved-item-profit { font-weight: 800; color: var(--accent2); font-size: 0.9rem; flex-shrink: 0; }
   .saved-remove {
     background: none; border: none; font-size: 1.1rem; cursor: pointer;
     filter: none; padding: 0.2rem; flex-shrink: 0;
