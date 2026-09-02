@@ -446,6 +446,118 @@ function useMyLocation() {
 document.getElementById('live-gps').addEventListener('click', useMyLocation);
 document.getElementById('zip-banner-gps').addEventListener('click', useMyLocation);
 
+/* ===== PRO (fake door) =====
+ * Freemium gating with NO real payments yet: locked touchpoints open a single
+ * upgrade sheet with a waitlist email form, so demand can be measured before
+ * building auth/payment infrastructure. Client-side gating is intentionally
+ * bypassable in this phase (?pro=1 / 7 taps on the footer version string).
+ *
+ * Waitlist signups: POSTed to the ntfy topic below (subscribe to it in the
+ * ntfy app to get each signup as a push; ntfy.sh only caches ~12h, so keep the
+ * phone subscribed, or poll: curl -s "https://ntfy.sh/<topic>/json?poll=1").
+ * Signups are ALSO stored in this browser's localStorage under
+ * "jh_waitlist_log" as a backup. Swap in a Formspree endpoint here later for
+ * durable server-side storage. */
+const WAITLIST_NTFY_TOPIC = 'jh-pro-waitlist-7g4kx2m';
+const FREE_SAVE_CAP = 5;
+
+// Dev escape hatch: ?pro=1 unlocks, ?pro=0 relocks (persisted in localStorage).
+(() => {
+  const qp = new URLSearchParams(location.search).get('pro');
+  if (qp === '1') localStorage.setItem('jh_pro', '1');
+  if (qp === '0') localStorage.removeItem('jh_pro');
+})();
+function isPro() { return localStorage.getItem('jh_pro') === '1'; }
+
+let upgradeTrigger = 'unknown';
+function openUpgradeSheet(trigger) {
+  upgradeTrigger = trigger || 'unknown';
+  // Returning waitlist members see the thank-you state, not the form again.
+  const done = localStorage.getItem('jh_waitlist_email');
+  document.getElementById('upgrade-form-wrap').style.display = done ? 'none' : '';
+  document.getElementById('upgrade-thanks').style.display = done ? '' : 'none';
+  document.getElementById('upgrade-sheet').classList.add('open');
+  document.getElementById('upgrade-backdrop').classList.add('open');
+}
+function closeUpgradeSheet() {
+  document.getElementById('upgrade-sheet').classList.remove('open');
+  document.getElementById('upgrade-backdrop').classList.remove('open');
+}
+
+async function submitWaitlist() {
+  const input = document.getElementById('waitlist-email');
+  const email = input.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    input.style.borderColor = 'var(--red)';
+    setTimeout(() => { input.style.borderColor = ''; }, 1500);
+    return;
+  }
+  const btn = document.getElementById('waitlist-submit');
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  const entry = { email, trigger: upgradeTrigger, at: new Date().toISOString() };
+  // Local backup log (survives even if the ntfy POST fails).
+  try {
+    const log = JSON.parse(localStorage.getItem('jh_waitlist_log') || '[]');
+    log.push(entry);
+    localStorage.setItem('jh_waitlist_log', JSON.stringify(log));
+  } catch (e) { /* ignore */ }
+  try {
+    await fetch('https://ntfy.sh/' + WAITLIST_NTFY_TOPIC, {
+      method: 'POST',
+      body: `${email} | trigger: ${entry.trigger} | ${entry.at}`,
+      headers: { 'Title': 'Junkyard Hunter Pro signup', 'Tags': 'moneybag' },
+    });
+  } catch (e) { /* local log still has it */ }
+  localStorage.setItem('jh_waitlist_email', email);
+  btn.disabled = false;
+  btn.textContent = 'Notify Me';
+  document.getElementById('upgrade-form-wrap').style.display = 'none';
+  document.getElementById('upgrade-thanks').style.display = '';
+}
+
+/* Re-apply every gate; called at startup and whenever pro state flips. */
+function applyProGates() {
+  const pro = isPro();
+  const pill = document.getElementById('pro-pill');
+  if (pill) {
+    pill.textContent = pro ? 'Pro \u2713' : 'Pro';
+    pill.classList.toggle('active', pro);
+  }
+  const setup = document.getElementById('ntfy-setup');
+  const locked = document.getElementById('ntfy-locked');
+  if (setup && locked) {
+    setup.style.display = pro ? '' : 'none';
+    locked.style.display = pro ? 'none' : '';
+  }
+}
+
+function toggleProDev() {
+  if (isPro()) localStorage.removeItem('jh_pro');
+  else localStorage.setItem('jh_pro', '1');
+  applyProGates();
+  renderLive();
+  renderSavedSheet();
+  alert('Pro mode ' + (isPro() ? 'ON' : 'OFF') + ' (dev toggle)');
+}
+
+document.getElementById('upgrade-backdrop').addEventListener('click', closeUpgradeSheet);
+document.getElementById('upgrade-close').addEventListener('click', closeUpgradeSheet);
+document.getElementById('waitlist-submit').addEventListener('click', submitWaitlist);
+document.getElementById('waitlist-email').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitWaitlist();
+});
+document.getElementById('pro-pill').addEventListener('click', () => openUpgradeSheet('header-pill'));
+// Demo/dev escape hatch #2: 7 quick taps on the footer version string.
+let _verTaps = 0, _verTimer = null;
+document.getElementById('jh-version').addEventListener('click', () => {
+  _verTaps++;
+  clearTimeout(_verTimer);
+  _verTimer = setTimeout(() => { _verTaps = 0; }, 1600);
+  if (_verTaps >= 7) { _verTaps = 0; toggleProDev(); }
+});
+applyProGates();
+
 /* ===== SAVED CARS (hearts + yard-visit sheet) ===== */
 let savedCars = {};
 try { savedCars = JSON.parse(localStorage.getItem('jh_saved') || '{}'); } catch (e) { savedCars = {}; }
@@ -458,6 +570,10 @@ function toggleSaved(key) {
   if (savedCars[key]) {
     delete savedCars[key];
   } else {
+    if (!isPro() && Object.keys(savedCars).length >= FREE_SAVE_CAP) {
+      openUpgradeSheet('saved-cap');
+      return;
+    }
     const v = liveInventory.find(x => vehicleKey(x) === key);
     if (!v) return;
     // Snapshot the vehicle so the list survives the car leaving inventory.
@@ -528,7 +644,9 @@ function renderSavedSheet() {
                 <div class="saved-item-name">${s.year} ${s.make} ${s.model}</div>
                 <div class="saved-item-sub">${best ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '') : 'No flagged parts'}</div>
               </div>
-              ${range && range.hi > 0 ? `<div class="saved-item-profit" title="${range.unknownCost ? 'Resale estimate — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated range if parts are good, after this yard\u2019s list pull costs'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">resale</small>' : ''}</div>` : ''}
+              ${range && range.hi > 0 ? (isPro()
+                ? `<div class="saved-item-profit" title="${range.unknownCost ? 'Resale estimate — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated range if parts are good, after this yard\u2019s list pull costs'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">resale</small>' : ''}</div>`
+                : `<div class="saved-item-profit locked-blur" role="button" onclick="openUpgradeSheet('saved-value')">$400&ndash;$900</div>`) : ''}
               <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">&#x1F5D1;&#xFE0F;</button>
             </div>`;
         }).join('')}
@@ -786,6 +904,21 @@ function renderLive() {
           : `<span class="part-cost" title="This part isn\u2019t on the yard\u2019s published price list — ask at the counter" style="opacity:0.75;"><small>check yard price list</small></span>`;
         const localNote = /\bFB\b|Facebook/i.test(p.sell_at || '')
           ? ' <span class="sell-tip" title="Facebook Marketplace is a local market — prices vary by area">FB prices vary by area</span>' : '';
+        // Free tier: part names/rarity/channels stay visible, but dollar values
+        // and demand speed are blurred placeholders (real numbers never render).
+        if (!isPro()) {
+          return `
+            <li class="part-item" style="flex-wrap:wrap;">
+              <span class="part-name">${p.name}</span>
+              <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
+              <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">$28 list</span>
+              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">sells $250&ndash;$600</span>
+              ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
+                <span class="sell-badge sell-medium locked-blur" role="button" onclick="openUpgradeSheet('part-value')">Steady seller</span>
+                <span class="sell-channel">Sell on: ${p.sell_at}</span>${localNote}
+              </div>` : ''}
+            </li>`;
+        }
         return `
           <li class="part-item" style="flex-wrap:wrap;">
             <span class="part-name">${p.name}</span>
@@ -814,11 +947,16 @@ function renderLive() {
       const rangeText = anyUnknownCost
         ? `resale ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; pull cost: check yard price list`
         : `e.g. ${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
-      profitLine = rangeHigh > 0 ? `
+      profitLine = rangeHigh > 0
+        ? (isPro() ? `
         <div class="profit-line">
           <span class="demand-badge ${demand.cls}">${demand.label}</span>
           <span class="range-text">${rangeText}</span>
-        </div>` : '';
+        </div>` : `
+        <div class="profit-line">
+          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">&#128274; See what this is worth &mdash; Pro</button>
+        </div>`)
+        : '';
       partsBlock = `
         <details class="parts-details">
           <summary>${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} flagged &middot; top: ${bestPart} <span class="chev">&#x25BC;</span></summary>

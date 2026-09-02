@@ -25,6 +25,7 @@
       </svg>
     </span>
     Junkyard <span class="brand-accent">Hunter</span>
+    <button type="button" id="pro-pill" class="pro-pill" title="Junkyard Hunter Pro">Pro</button>
   </h1>
   <p>Live inventory from ~150 self-service yards &mdash; Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part &amp; more &mdash; checked against real part prices</p>
 </header>
@@ -190,7 +191,7 @@
     <div class="info-box" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
       <div style="flex:1;min-width:250px;">
         <h3 style="margin:0 0 0.25rem;">Vehicle Watchlist</h3>
-        <p style="margin:0;">Add vehicles you want to track. You'll get a browser notification when they show up in a yard. The scraper's <code>--watch</code> mode also sends push + email alerts.</p>
+        <p style="margin:0;">Add vehicles you want to track &mdash; watching is free. You'll get a browser notification when they show up in a yard while the app is open. Free accounts will get a <strong>weekly digest email</strong> (coming soon); <strong>instant push alerts</strong> are a Pro feature.</p>
       </div>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
         <button id="alert-notif-btn" class="btn btn-primary">Enable Notifications</button>
@@ -199,7 +200,16 @@
     </div>
 
     <div class="panel" id="ntfy-panel">
-      <h4>&#x1F4F2; Get alerts on your phone</h4>
+      <h4>&#x1F4F2; Instant push alerts <span class="pro-tag">Pro</span></h4>
+      <div id="ntfy-locked" style="display:none;">
+        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;margin:0.4rem 0 0.8rem;">
+          Get a push notification on your phone the moment a watched vehicle hits any yard
+          &mdash; even when this app is closed. Instant push is part of <strong>Pro</strong>.
+          Free accounts will get a weekly digest email (coming soon).
+        </p>
+        <button type="button" class="btn btn-primary" onclick="openUpgradeSheet('alerts-push')">&#128274; Unlock instant alerts &mdash; see Pro</button>
+      </div>
+      <div id="ntfy-setup">
       <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;margin:0.4rem 0 0.8rem;">
         Watchlist hits can push straight to your phone &mdash; even when this app is closed.
         It uses <a href="https://ntfy.sh" target="_blank" rel="noopener" style="color:var(--accent);">ntfy</a>, a free notification service. One-time setup:
@@ -218,6 +228,7 @@
         Treat the topic name like a password &mdash; anyone who knows it can see your alerts.
         The scanner sends to this topic automatically once <code>NTFY_TOPIC</code> is set as a secret on the GitHub repo running the scheduled scans.
       </p>
+      </div>
     </div>
 
     <div class="panel">
@@ -260,6 +271,7 @@
     <p><strong>About the numbers:</strong> All dollar figures are ranges based on typical eBay sold prices (a national market) for used parts in working condition. Facebook Marketplace and local classifieds are local markets &mdash; prices vary by area, so check your own market before pulling. Condition dominates: a cracked, faded, or non-working part may be worth little or nothing, and none of these figures are a guarantee. Pull costs are shown only when they come from that yard's own published price list; otherwise you'll see &ldquo;check yard price list&rdquo; and the estimate is resale-only.</p>
     <p style="margin-top:0.5rem;"><strong>About coverage:</strong> Junkyard Hunter tracks every major self-service chain with online inventory &mdash; Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part (including former U-Pull-&amp;-Pay yards) &mdash; <span class="coverage-count">~150</span> yards nationwide, plus Utah's Tear-A-Part and Utah Pic-A-Part. Independent local yards aren't tracked yet.</p>
     <p style="margin-top:0.5rem;">Always inspect a part on the car before you buy. Inventory reflects the last scan and yards sell or crush cars daily.</p>
+    <p style="margin-top:0.5rem;">Junkyard Hunter <span id="jh-version" style="user-select:none;">v2.1</span></p>
   </footer>
 </div>
 
@@ -274,6 +286,49 @@
   </div>
   <p class="sheet-sub">Your saved cars, grouped by yard and sorted by row &mdash; work the list top to bottom when you walk in.</p>
   <div id="saved-list"></div>
+</div>
+
+<!-- PRO UPGRADE SHEET (fake door: waitlist only, no payments yet) -->
+<div id="upgrade-backdrop"></div>
+<div id="upgrade-sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-head">
+    <h2>Junkyard Hunter <span class="brand-accent">Pro</span></h2>
+    <button type="button" id="upgrade-close">Close</button>
+  </div>
+  <p class="sheet-sub">Know what every car is worth before you drive to the yard. Pro hasn't launched yet &mdash; join the waitlist and you'll be first in when it does.</p>
+
+  <div class="tier-card">
+    <div class="tier-head"><span class="tier-name">Pro</span><span class="tier-price">$9.99<small>/mo</small></span></div>
+    <ul class="tier-list">
+      <li>Full value data &mdash; resale ranges, pull costs, demand speed on every car</li>
+      <li>Unlimited saved cars</li>
+      <li>Unlimited search radius</li>
+      <li>Weekly watchlist digest email</li>
+    </ul>
+  </div>
+  <div class="tier-card tier-plus">
+    <div class="tier-head"><span class="tier-name">Pro+</span><span class="tier-price">$19.99<small>/mo</small></span></div>
+    <ul class="tier-list">
+      <li>Everything in Pro</li>
+      <li>Instant push alerts the moment a watched car hits a yard</li>
+      <li>Nationwide search across all <span class="coverage-count">~150</span> yards</li>
+      <li>Yard history &amp; days-on-lot trends <em>(coming soon)</em></li>
+    </ul>
+  </div>
+
+  <div id="upgrade-form-wrap" class="waitlist-form">
+    <strong>Get early access &mdash; Pro launches soon</strong>
+    <div class="waitlist-row">
+      <input type="email" id="waitlist-email" inputmode="email" autocomplete="email" placeholder="you@email.com">
+      <button type="button" id="waitlist-submit" class="btn btn-primary">Notify Me</button>
+    </div>
+    <span class="waitlist-note">Waitlist only &mdash; no charge, no card, just a heads-up when Pro is ready.</span>
+  </div>
+  <div id="upgrade-thanks" class="waitlist-thanks" style="display:none;">
+    <strong>&#x2705; You're on the list!</strong>
+    <span>We'll email you when Pro launches. Everything free stays free in the meantime.</span>
+  </div>
 </div>
 
 <script src="data.js"></script>
