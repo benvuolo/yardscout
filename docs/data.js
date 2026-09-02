@@ -45,7 +45,7 @@ const DATABASE = [
     years: "2010–2024",
     category: "SUV",
     frequency: "Occasional",
-    notes: "Starting to trickle into yards (wrecks, flood). TRD Pro and Trail parts are instant money. OEM LED headlights are huge.",
+    notes: "Starting to trickle into yards (wrecks, flood). TRD Pro and Trail parts are in heavy demand. OEM LED headlights are huge.",
     parts: [
       { name: "TRD Pro Grille (with TSS sensor)", rarity: "Legendary", priceRange: [300, 600], yardCost: 40, sellOn: "T4R.org, eBay" },
       { name: "OEM LED Headlights (pair)", rarity: "Epic", priceRange: [400, 800], yardCost: 60, sellOn: "eBay" },
@@ -102,7 +102,7 @@ const DATABASE = [
     years: "2016–2023",
     category: "Truck",
     frequency: "Occasional",
-    notes: "Wrecked 3rd gens are goldmines. TRD Pro parts are absolute fire sellers. Even basic trim pieces from these are worth grabbing.",
+    notes: "Wrecked 3rd gens came with many high-demand parts. TRD Pro parts sell very quickly. Even basic trim pieces from these are worth grabbing.",
     parts: [
       { name: "TRD Pro Grille (matte black)", rarity: "Legendary", priceRange: [200, 450], yardCost: 30, sellOn: "Tacoma World, eBay" },
       { name: "OEM LED Headlights (pair)", rarity: "Epic", priceRange: [350, 700], yardCost: 50, sellOn: "eBay" },
@@ -254,7 +254,7 @@ const DATABASE = [
     years: "2001–2024",
     category: "Crossover",
     frequency: "Common",
-    notes: "Family SUV staple. 3rd row parts, hybrid components, and power liftgate hardware are the money items.",
+    notes: "Family SUV staple. 3rd row parts, hybrid components, and power liftgate hardware are the most sought-after items.",
     parts: [
       { name: "3rd Row Seat (complete)", rarity: "Rare", priceRange: [200, 400], yardCost: 35, sellOn: "eBay, CL" },
       { name: "Power Liftgate Motor/Struts", rarity: "Rare", priceRange: [100, 250], yardCost: 15, sellOn: "eBay" },
@@ -319,7 +319,7 @@ const DATABASE = [
     years: "1984–2001",
     category: "SUV",
     frequency: "Common",
-    notes: "Jeep culture is massive. XJs are gateway off-roaders. Header panels, clean fenders, and small 4WD bits are instant sellers.",
+    notes: "Jeep culture is massive. XJs are gateway off-roaders. Header panels, clean fenders, and small 4WD bits sell quickly.",
     parts: [
       { name: "Header Panel (nose piece, clean)", rarity: "Legendary", priceRange: [200, 500], yardCost: 25, sellOn: "NAXJA, eBay" },
       { name: "Clean Fenders (no rust, no flares)", rarity: "Epic", priceRange: [100, 275], yardCost: 20, sellOn: "eBay, Facebook" },
@@ -355,7 +355,7 @@ const DATABASE = [
     years: "1997–2006",
     category: "SUV",
     frequency: "Occasional",
-    notes: "TJs don't usually get junked — they get fixed. When one DOES show up, half-doors, hardtops, and soft top hardware are instant sells.",
+    notes: "TJs don't usually get junked — they get fixed. When one DOES show up, half-doors, hardtops, and soft top hardware sell quickly.",
     parts: [
       { name: "Hardtop (full, clean)", rarity: "Legendary", priceRange: [500, 1500], yardCost: 75, sellOn: "Wrangler Forum, CL" },
       { name: "Half Doors (pair)", rarity: "Legendary", priceRange: [300, 800], yardCost: 40, sellOn: "Wrangler Forum, eBay" },
@@ -473,7 +473,7 @@ const DATABASE = [
     years: "1998–2024",
     category: "Sedan",
     frequency: "Common",
-    notes: "Always available. Sport and Touring trim parts are the play. LED headlights from 2018+ are money.",
+    notes: "Common in yards. Sport and Touring trim parts are the most sought-after. LED headlights from 2018+ see steady demand.",
     parts: [
       { name: "OEM LED Headlights (2018+, pair)", rarity: "Rare", priceRange: [300, 550], yardCost: 40, sellOn: "eBay" },
       { name: "Sport Front Lip / Underbody Kit", rarity: "Rare", priceRange: [75, 200], yardCost: 12, sellOn: "eBay, Honda-Tech" },
@@ -521,7 +521,7 @@ const DATABASE = [
     years: "1997–2024",
     category: "Truck",
     frequency: "Common",
-    notes: "Best-selling truck in America. Yards are full of them. Power-fold tow mirrors, FX4 bits, tailgates, and LED headlights are the money parts.",
+    notes: "Best-selling truck in America. Yards are full of them. Power-fold tow mirrors, FX4 bits, tailgates, and LED headlights are the most in-demand parts.",
     parts: [
       { name: "Power-Fold Tow Mirrors (pair)", rarity: "Epic", priceRange: [250, 550], yardCost: 40, sellOn: "eBay, F150Forum" },
       { name: "OEM LED Headlights (2015+, pair)", rarity: "Epic", priceRange: [300, 600], yardCost: 50, sellOn: "eBay" },
@@ -540,7 +540,7 @@ const DATABASE = [
     years: "1980–1996",
     category: "SUV",
     frequency: "Occasional",
-    notes: "OBS Broncos are collector vehicles now. Rust-free body panels from dry-climate yards ship to rust-belt buyers for serious money.",
+    notes: "OBS Broncos are collector vehicles now. Rust-free body panels from dry-climate yards see strong demand from rust-belt buyers.",
     parts: [
       { name: "Removable Hardtop (full, clean)", rarity: "Legendary", priceRange: [1000, 3000], yardCost: 150, sellOn: "Bronco forums, eBay" },
       { name: "Tailgate (complete, no rust)", rarity: "Epic", priceRange: [300, 700], yardCost: 40, sellOn: "Forums, CL" },
@@ -588,7 +588,7 @@ const DATABASE = [
     years: "2005–2024",
     category: "Sport",
     frequency: "Common",
-    notes: "Mustangs crash a lot. GT/Shelby parts are premium. Brembo brakes, Performance Pack bits, and body panels are easy sells.",
+    notes: "Mustangs crash a lot. GT/Shelby parts are premium. Brembo brakes, Performance Pack bits, and body panels sell consistently.",
     parts: [
       { name: "GT Brembo Brake Calipers (set)", rarity: "Epic", priceRange: [300, 600], yardCost: 50, sellOn: "Mustang6G, eBay" },
       { name: "GT350/PP2 Front Splitter", rarity: "Epic", priceRange: [200, 450], yardCost: 25, sellOn: "Mustang6G, eBay" },
@@ -623,7 +623,7 @@ const DATABASE = [
     years: "1999–2024",
     category: "Truck",
     frequency: "Common",
-    notes: "Always available. Power-fold mirrors, Z71 parts, tailgates with cameras, and LED headlights are the consistent money items.",
+    notes: "Common in yards. Power-fold mirrors, Z71 parts, tailgates with cameras, and LED headlights are consistently in demand.",
     parts: [
       { name: "Power-Fold Tow Mirrors (pair)", rarity: "Epic", priceRange: [200, 450], yardCost: 30, sellOn: "eBay" },
       { name: "OEM LED Headlights (2019+, pair)", rarity: "Epic", priceRange: [300, 600], yardCost: 50, sellOn: "eBay" },
@@ -675,7 +675,7 @@ const DATABASE = [
     years: "2009–2024",
     category: "Truck",
     frequency: "Common",
-    notes: "Rams are everywhere. The 12\" Uconnect screens are goldmines. Power-fold mirrors, tow packages, and air suspension parts are big sellers.",
+    notes: "Rams are everywhere. The 12\" Uconnect screens are in high demand. Power-fold mirrors, tow packages, and air suspension parts are big sellers.",
     parts: [
       { name: "12\" Uconnect Touchscreen (5th gen)", rarity: "Epic", priceRange: [400, 800], yardCost: 50, sellOn: "eBay" },
       { name: "Power-Fold Tow Mirrors (pair)", rarity: "Epic", priceRange: [250, 500], yardCost: 35, sellOn: "eBay" },
@@ -787,7 +787,7 @@ const DATABASE = [
     years: "2000–2018",
     category: "Hatchback",
     frequency: "Common",
-    notes: "Common in yards. Most are base models, but ST and RS trims are goldmines. ST3 HID headlights, Recaro seats, and intercoolers cross-sell to a huge mod community. Even base model SYNC screens sell.",
+    notes: "Common in yards. Most are base models, but ST and RS trims carry the high-demand parts. ST3 HID headlights, Recaro seats, and intercoolers cross-sell to a huge mod community. Even base model SYNC screens sell.",
     parts: [
       { name: "ST3/RS HID Headlights (pair)", rarity: "Epic", priceRange: [250, 500], yardCost: 45, sellOn: "FocusST.org, eBay" },
       { name: "Recaro Seats (pair, ST/RS)", rarity: "Epic", priceRange: [400, 900], yardCost: 71, sellOn: "FocusST.org, eBay" },
@@ -805,7 +805,7 @@ const DATABASE = [
     years: "2006–2020",
     category: "Sedan",
     frequency: "Common",
-    notes: "Common in yards. Titanium and Sport trims have the money parts. SYNC 3 screens, LED headlights, and front bumpers with parking sensor holes are consistent sellers.",
+    notes: "Common in yards. Titanium and Sport trims have the most sought-after parts. SYNC 3 screens, LED headlights, and front bumpers with parking sensor holes are consistent sellers.",
     parts: [
       { name: "OEM LED Headlights (2017+, pair)", rarity: "Rare", priceRange: [250, 500], yardCost: 45, sellOn: "eBay" },
       { name: "SYNC 3 Touchscreen (8\")", rarity: "Rare", priceRange: [150, 350], yardCost: 45, sellOn: "eBay" },
@@ -839,7 +839,7 @@ const DATABASE = [
     years: "1996–2020",
     category: "Van",
     frequency: "Common",
-    notes: "Common in yards. Big family hauler like the Sienna. Power sliding door motors CONSTANTLY fail and owners need replacements. Stow-N-Go seats and rear entertainment systems are easy money.",
+    notes: "Common in yards. Big family hauler like the Sienna. Power sliding door motors CONSTANTLY fail and owners need replacements. Stow-N-Go seats and rear entertainment systems sell steadily.",
     parts: [
       { name: "Power Sliding Door Motor", rarity: "Epic", priceRange: [125, 300], yardCost: 47, sellOn: "eBay" },
       { name: "Power Sliding Door Control Module", rarity: "Rare", priceRange: [75, 200], yardCost: 29, sellOn: "eBay" },
