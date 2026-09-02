@@ -55,6 +55,17 @@ CREATE TABLE IF NOT EXISTS scans (
     new_arrivals INTEGER,
     departures  INTEGER
 );
+
+-- NHTSA vPIC decode cache. VINs are immutable, so entries never expire; only
+-- successful decodes are stored (transient network failures are retried on a
+-- later run). This is what makes decoding incremental: each scan only calls
+-- the API for VINs it has never seen.
+CREATE TABLE IF NOT EXISTS vin_decodes (
+    vin          TEXT PRIMARY KEY,
+    payload      TEXT NOT NULL,      -- JSON decode dict (trim, series, modelYear, ...)
+    trim_quality TEXT,
+    decoded_at   TEXT NOT NULL
+);
 """
 
 
@@ -149,6 +160,95 @@ def record_scan(entries: list[dict], scraped_at: str) -> dict:
     conn.commit()
     conn.close()
     return {"total": len(entries), "new_arrivals": new_arrivals, "departures": len(missing)}
+
+
+def load_vin_decodes() -> dict:
+    """All cached VIN decodes as {vin: decode_dict}."""
+    conn = _connect()
+    rows = conn.execute("SELECT vin, payload FROM vin_decodes").fetchall()
+    conn.close()
+    out = {}
+    for vin, payload in rows:
+        try:
+            out[vin] = json.loads(payload)
+        except (json.JSONDecodeError, TypeError):
+            continue
+    return out
+
+
+def store_vin_decodes(decodes: dict, decoded_at: str) -> int:
+    """Insert new {vin: decode_dict} entries. Existing VINs are left untouched
+    (VINs are immutable — first successful decode wins). Returns rows added."""
+    if not decodes:
+        return 0
+    conn = _connect()
+    cur = conn.cursor()
+    added = 0
+    for vin, dec in decodes.items():
+        if not isinstance(dec, dict):
+            continue
+        cur.execute(
+            "INSERT OR IGNORE INTO vin_decodes (vin, payload, trim_quality, decoded_at) VALUES (?,?,?,?)",
+            (vin, json.dumps(dec, separators=(",", ":")), dec.get("trimQuality", ""), decoded_at),
+        )
+        added += cur.rowcount
+    conn.commit()
+    conn.close()
+    return added
+
+
+def vin_decode_count() -> int:
+    conn = _connect()
+    n = conn.execute("SELECT COUNT(*) FROM vin_decodes").fetchone()[0]
+    conn.close()
+    return n
+
+
+def import_vin_decodes_gz(path: Path) -> int:
+    """Merge a committed vin_decodes.json.gz backup into the SQLite cache.
+    Safety net for GitHub Actions cache eviction: the DB normally persists via
+    the Actions cache, but if that's ever lost, this restores the bulk of the
+    decode history from git instead of re-hitting the vPIC API 100k+ times."""
+    import gzip
+    if not path.exists():
+        return 0
+    try:
+        data = json.loads(gzip.decompress(path.read_bytes()))
+    except Exception:
+        return 0
+    if not isinstance(data, dict):
+        return 0
+    decoded_at = data.get("_exportedAt", "import")
+    entries = {k: v for k, v in data.items() if isinstance(v, dict)}
+    return store_vin_decodes(entries, decoded_at)
+
+
+def export_vin_decodes_gz(path: Path, min_new: int = 20000) -> bool:
+    """Write the full decode cache to a gzipped JSON committed to the repo.
+
+    Skipped unless the cache has grown by >= min_new entries since the last
+    export — committing a multi-MB gz blob every 6-hour run would bloat git
+    history, and the Actions cache already persists the DB between runs. The
+    export is disaster insurance, refreshed at coarse intervals; if the Actions
+    cache is evicted, at most the last < min_new decodes re-fetch from vPIC."""
+    import gzip
+    from datetime import datetime, timezone
+    total = vin_decode_count()
+    if path.exists():
+        try:
+            existing = json.loads(gzip.decompress(path.read_bytes()))
+            prev = len([k for k in existing if not k.startswith("_")])
+        except Exception:
+            prev = 0
+        if total - prev < min_new:
+            return False
+    elif total == 0:
+        return False
+    payload = load_vin_decodes()
+    payload["_exportedAt"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    path.write_bytes(gzip.compress(
+        json.dumps(payload, separators=(",", ":")).encode(), mtime=0))
+    return True
 
 
 def summary() -> str:

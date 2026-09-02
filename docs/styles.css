@@ -860,6 +860,26 @@
   }
   .saved-empty { text-align: center; color: var(--text-dim); padding: 2rem 0; font-size: 0.9rem; }
 
+  .trim-badge {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .trim-badge.trim-vin {
+    background: var(--green-soft);
+    color: var(--accent2);
+  }
+  .trim-badge.trim-unknown {
+    background: var(--surface3);
+    color: var(--text-dim);
+    font-weight: 600;
+    font-style: italic;
+  }
+
   .ghost-note {
     font-size: 0.72rem;
     color: var(--text-dim);
