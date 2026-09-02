@@ -1,0 +1,42 @@
+[
+  {
+    "make": "Toyota",
+    "model": "Pickup",
+    "yrMin": 1984,
+    "yrMax": 1995,
+    "matchOnly": false,
+    "note": "22RE-era (verify engine in yard). Add \"states\": [\"UT\"] to scope alerts."
+  },
+  {
+    "make": "Toyota",
+    "model": "4Runner",
+    "yrMin": 1984,
+    "yrMax": 1995,
+    "matchOnly": false,
+    "note": "22RE-era (verify)"
+  },
+  {
+    "make": "Toyota",
+    "model": "Tacoma",
+    "yrMin": 1995,
+    "yrMax": 2004,
+    "matchOnly": false,
+    "note": "3RZ common on 4cyl (verify)"
+  },
+  {
+    "make": "Toyota",
+    "model": "4Runner",
+    "yrMin": 1996,
+    "yrMax": 2002,
+    "matchOnly": false,
+    "note": "3RZ common (verify)"
+  },
+  {
+    "make": "Toyota",
+    "model": "T100",
+    "yrMin": 1995,
+    "yrMax": 2000,
+    "matchOnly": false,
+    "note": "3RZ (verify)"
+  }
+]

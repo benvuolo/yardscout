@@ -1,0 +1,18 @@
+# Local-only state: 31MB+ and grows every scan — persisted via Actions cache in CI instead
+inventory_history.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.cache/
+
+# Scraper intermediates / logs
+scraper_err.log
+inventory_data.json
+tearapart_inventory.json
+watch_alerted.json
+seen_finds.json
+
+# OS
+.DS_Store

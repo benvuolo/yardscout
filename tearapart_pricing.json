@@ -1,0 +1,3523 @@
+[
+  {
+    "description": "5 QUARTS OIL",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "5TH WHEEL HITCH",
+    "price": "169.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "169.99"
+  },
+  {
+    "description": "A/C BLOWER MOTOR",
+    "price": "29.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "29.39"
+  },
+  {
+    "description": "A/C CAN/RESIVOIR",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "A/C CLUTCH",
+    "price": "26.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "26.24"
+  },
+  {
+    "description": "A/C COMPRESSOR",
+    "price": "57.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "57.74"
+  },
+  {
+    "description": "A/C CONDENSER",
+    "price": "38.84",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "43.83"
+  },
+  {
+    "description": "A/C EVAPORATOR",
+    "price": "33.59",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "38.58"
+  },
+  {
+    "description": "A/C PRESSURE LINE",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "18.89"
+  },
+  {
+    "description": "A/C SUITCASE HOUSING",
+    "price": "29.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "29.39"
+  },
+  {
+    "description": "ABS CONTROL MODULE",
+    "price": "51.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "51.44"
+  },
+  {
+    "description": "ABS PUMP",
+    "price": "101.84",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "106.83"
+  },
+  {
+    "description": "ACCESSORY HANDLE",
+    "price": "6.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.29"
+  },
+  {
+    "description": "ACTUATOR",
+    "price": "17.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.84"
+  },
+  {
+    "description": "AIR BAG CNTRL MOD",
+    "price": "28.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "28.34"
+  },
+  {
+    "description": "AIR CLEANER HOUS(LG)",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "AIR CLEANER HOUS(SM)",
+    "price": "28.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "28.34"
+  },
+  {
+    "description": "AIR CLEANER LID",
+    "price": "14.69",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "14.69"
+  },
+  {
+    "description": "AIR FILTER",
+    "price": "4.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "4.19"
+  },
+  {
+    "description": "AIR FLOW SENSOR",
+    "price": "44.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "44.09"
+  },
+  {
+    "description": "AIR RIDE PUMP",
+    "price": "41.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "41.99"
+  },
+  {
+    "description": "ALTERNATOR",
+    "price": "35.69",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "40.68"
+  },
+  {
+    "description": "AMPLIFIER",
+    "price": "35.69",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "35.69"
+  },
+  {
+    "description": "ANTENNA",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "ANTENNA/POWER",
+    "price": "34.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "34.64"
+  },
+  {
+    "description": "ANTIFREEZE",
+    "price": "5.76",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.76"
+  },
+  {
+    "description": "ARM REST",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "ASH TRAY",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "AXLE ASSY FRONT 4X2",
+    "price": "209.99",
+    "per": "Each",
+    "corePrice": "8.99",
+    "totalPrice": "218.98"
+  },
+  {
+    "description": "AXLE ASSY FRONT 4X4",
+    "price": "272.99",
+    "per": "Each",
+    "corePrice": "8.99",
+    "totalPrice": "281.98"
+  },
+  {
+    "description": "AXLE DISCONNECT HSNG",
+    "price": "104.99",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "109.98"
+  },
+  {
+    "description": "AXLE DROPOUT",
+    "price": "104.99",
+    "per": "Each",
+    "corePrice": "3.99",
+    "totalPrice": "108.98"
+  },
+  {
+    "description": "AXLE FRNT/REAR NO HU",
+    "price": "209.99",
+    "per": "Each",
+    "corePrice": "8.99",
+    "totalPrice": "218.98"
+  },
+  {
+    "description": "AXLE SHAFT SOLID TYP",
+    "price": "31.4",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "34.39"
+  },
+  {
+    "description": "AXLE SHAFT WITH HUB",
+    "price": "48.3",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "50.29"
+  },
+  {
+    "description": "BACK GLASS (SOLID)",
+    "price": "47.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "47.24"
+  },
+  {
+    "description": "BACK GLASS-MANL SLDG",
+    "price": "52.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "52.49"
+  },
+  {
+    "description": "BACK GLASS-PWER SLDG",
+    "price": "125.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "125.99"
+  },
+  {
+    "description": "BALL JOINT",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "BATTERY (USED)",
+    "price": "46.78",
+    "per": "Each",
+    "corePrice": "5.0",
+    "totalPrice": "51.78"
+  },
+  {
+    "description": "BATTERY BOX",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "BATTERY CABLE",
+    "price": "5.76",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.76"
+  },
+  {
+    "description": "BATTERY CAPACITOR",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "BCM/BT MODULE",
+    "price": "49.34",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "51.33"
+  },
+  {
+    "description": "BEARNG/BUSHNG (ANY)",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "BED CAP",
+    "price": "20.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "20.99"
+  },
+  {
+    "description": "BED LINER",
+    "price": "57.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "57.74"
+  },
+  {
+    "description": "BELLHOUSING",
+    "price": "47.24",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "50.23"
+  },
+  {
+    "description": "BELT TENSIONER",
+    "price": "24.14",
+    "per": "Each",
+    "corePrice": "1.0",
+    "totalPrice": "25.14"
+  },
+  {
+    "description": "BENCH SEAT SECTION",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "BLOW OFF VALVE",
+    "price": "52.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "52.49"
+  },
+  {
+    "description": "BLUETOOTH MODULE",
+    "price": "38.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "38.84"
+  },
+  {
+    "description": "BMPR RINFRCMNT FBRGL",
+    "price": "29.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "29.39"
+  },
+  {
+    "description": "BMPR RINFRCMNT MTL",
+    "price": "29.39",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "31.38"
+  },
+  {
+    "description": "BRACKET (ANY)",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "BRAKE BACKING PLATE",
+    "price": "20.99",
+    "per": "Each",
+    "corePrice": "1.0",
+    "totalPrice": "21.99"
+  },
+  {
+    "description": "BRAKE CALIPER",
+    "price": "29.39",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "32.38"
+  },
+  {
+    "description": "BRAKE DRUM W/HUB",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "34.48"
+  },
+  {
+    "description": "BRAKE DRUM (NO HUB)",
+    "price": "28.34",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "31.33"
+  },
+  {
+    "description": "BRAKE FLUID RESEVOIR",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "BRAKE LINE/HOSE",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "BRAKE MASTER CYLINDR",
+    "price": "34.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "34.64"
+  },
+  {
+    "description": "BRAKE PROPORTIONING",
+    "price": "17.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.84"
+  },
+  {
+    "description": "BRAKE PWR/HYDRO BSTR",
+    "price": "41.99",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "44.98"
+  },
+  {
+    "description": "BRAKE ROTOR (NO HUB)",
+    "price": "26.24",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "28.23"
+  },
+  {
+    "description": "BRAKE ROTOR W/HUB",
+    "price": "36.74",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "39.73"
+  },
+  {
+    "description": "BRAKE SHOE/PAD (EA)",
+    "price": "4.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "4.19"
+  },
+  {
+    "description": "BRAKE WHEEL CYLINDER",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "BUCKET SEAT",
+    "price": "48.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "48.29"
+  },
+  {
+    "description": "BUCKET SEAT POWER",
+    "price": "54.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "54.59"
+  },
+  {
+    "description": "BUG DEFLECTOR",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "BULB PLACEMENT UNIT",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "BULBS",
+    "price": "2.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "2.09"
+  },
+  {
+    "description": "BUMPER COVER",
+    "price": "65.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "65.09"
+  },
+  {
+    "description": "BUMPER END CAP",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "BUMPER FILLER",
+    "price": "16.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "16.79"
+  },
+  {
+    "description": "BUMPER GUARD",
+    "price": "12.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "12.59"
+  },
+  {
+    "description": "BUMPER METAL BARE",
+    "price": "73.49",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "76.48"
+  },
+  {
+    "description": "BUMPER PUSH BAR",
+    "price": "52.49",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "54.48"
+  },
+  {
+    "description": "BUMPER SHOCK",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "18.89"
+  },
+  {
+    "description": "BUMPR CVER W/RENFORC",
+    "price": "68.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "68.24"
+  },
+  {
+    "description": "C-V AXLE FRNT DRIVE",
+    "price": "47.24",
+    "per": "Each",
+    "corePrice": "5.99",
+    "totalPrice": "53.23"
+  },
+  {
+    "description": "C-V STUB JOINT",
+    "price": "33.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "33.59"
+  },
+  {
+    "description": "CAB ONLY BARE",
+    "price": "335.99",
+    "per": "Each",
+    "corePrice": "14.99",
+    "totalPrice": "350.98"
+  },
+  {
+    "description": "CABLE (ANY)",
+    "price": "20.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "20.99"
+  },
+  {
+    "description": "CAM SHAFT",
+    "price": "37.79",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "39.78"
+  },
+  {
+    "description": "CAMPER SHELL",
+    "price": "167.99",
+    "per": "Each",
+    "corePrice": "5.99",
+    "totalPrice": "173.98"
+  },
+  {
+    "description": "CAR MANUAL",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "CARBURETOR",
+    "price": "54.59",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "56.58"
+  },
+  {
+    "description": "CARD- GATE FEE",
+    "price": "2.0",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "2.0"
+  },
+  {
+    "description": "CARGO CARRIER",
+    "price": "94.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "94.49"
+  },
+  {
+    "description": "CARGO NET",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "CARGO RACK",
+    "price": "73.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "73.49"
+  },
+  {
+    "description": "CARPET",
+    "price": "36.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "36.74"
+  },
+  {
+    "description": "CARRIER BEARING",
+    "price": "17.84",
+    "per": "Each",
+    "corePrice": "1.5",
+    "totalPrice": "19.34"
+  },
+  {
+    "description": "CARRIER HOUSING",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "33.48"
+  },
+  {
+    "description": "CD CHANGER",
+    "price": "45.14",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "45.14"
+  },
+  {
+    "description": "CD MAGAZINE",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "CD PLAYER FACEPLATE",
+    "price": "24.14",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "24.14"
+  },
+  {
+    "description": "CD/BT PLAYER",
+    "price": "47.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "47.24"
+  },
+  {
+    "description": "CD/TEMP CONTROL CMBO",
+    "price": "73.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "73.49"
+  },
+  {
+    "description": "CENTER CAP",
+    "price": "5.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.24"
+  },
+  {
+    "description": "CENTRAL LOCKING PUMP",
+    "price": "49.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "49.34"
+  },
+  {
+    "description": "CHARCOAL CANISTER",
+    "price": "22.04",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "22.04"
+  },
+  {
+    "description": "CHARITY",
+    "price": "15.41",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.41"
+  },
+  {
+    "description": "CIGARETTE LIGHTER",
+    "price": "4.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "4.19"
+  },
+  {
+    "description": "CLOCK",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "CLUTCH DISC",
+    "price": "24.14",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "24.14"
+  },
+  {
+    "description": "CLUTCH FORK",
+    "price": "23.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.09"
+  },
+  {
+    "description": "CLUTCH MSTR CYLINDER",
+    "price": "23.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.09"
+  },
+  {
+    "description": "COIL",
+    "price": "16.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "16.79"
+  },
+  {
+    "description": "COIL PACK",
+    "price": "48.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "48.29"
+  },
+  {
+    "description": "COIL SPRING",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "1.0",
+    "totalPrice": "19.89"
+  },
+  {
+    "description": "COLD AIR INTAKE SYS",
+    "price": "26.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "26.24"
+  },
+  {
+    "description": "COMPUTER ECU (AS-IS)",
+    "price": "57.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "57.74"
+  },
+  {
+    "description": "CONSOLE (ANY)",
+    "price": "34.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "34.64"
+  },
+  {
+    "description": "CONSOLE LID",
+    "price": "7.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "7.34"
+  },
+  {
+    "description": "CONSOLE POWER",
+    "price": "45.14",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "45.14"
+  },
+  {
+    "description": "CONTROL ARM",
+    "price": "36.74",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "39.73"
+  },
+  {
+    "description": "CONVERTIBLE TOP",
+    "price": "73.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "73.49"
+  },
+  {
+    "description": "CONVERTIBLE TOP MOD",
+    "price": "49.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "49.34"
+  },
+  {
+    "description": "CRANKSHAFT",
+    "price": "57.74",
+    "per": "Each",
+    "corePrice": "3.99",
+    "totalPrice": "61.73"
+  },
+  {
+    "description": "CRUISE CTRL MODULE",
+    "price": "26.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "26.24"
+  },
+  {
+    "description": "CUP HOLDER",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "DASH (BARE)",
+    "price": "94.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "94.49"
+  },
+  {
+    "description": "DASH PAD",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "DC INVERTOR CONVERT",
+    "price": "327.4",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "327.4"
+  },
+  {
+    "description": "DIESEL ENG NOACC 4-6",
+    "price": "598.49",
+    "per": "Each",
+    "corePrice": "39.99",
+    "totalPrice": "638.48"
+  },
+  {
+    "description": "DIESEL INJCTN PUMP",
+    "price": "136.49",
+    "per": "Each",
+    "corePrice": "5.99",
+    "totalPrice": "142.48"
+  },
+  {
+    "description": "DIESL ENG NOACC 8-10",
+    "price": "682.49",
+    "per": "Each",
+    "corePrice": "39.99",
+    "totalPrice": "722.48"
+  },
+  {
+    "description": "DIFFERENTIAL",
+    "price": "199.49",
+    "per": "Each",
+    "corePrice": "8.99",
+    "totalPrice": "208.48"
+  },
+  {
+    "description": "DIGITAL DISPLAY SCRN",
+    "price": "41.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "41.99"
+  },
+  {
+    "description": "DIPSTICK/TUBE",
+    "price": "6.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.29"
+  },
+  {
+    "description": "DISTR CAP/NO MODULE",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "DISTR W/COIL IGNITOR",
+    "price": "57.74",
+    "per": "Each",
+    "corePrice": "1.29",
+    "totalPrice": "59.03"
+  },
+  {
+    "description": "DISTRIBUTOR",
+    "price": "37.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "37.79"
+  },
+  {
+    "description": "DOME LIGHT",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "DOMELIGHT CONSOLE/LG",
+    "price": "41.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "41.99"
+  },
+  {
+    "description": "DOMELIGHT CONSOLE/SM",
+    "price": "36.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "36.74"
+  },
+  {
+    "description": "DONUT SPARE TIRE",
+    "price": "20.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "20.99"
+  },
+  {
+    "description": "DOOR",
+    "price": "73.49",
+    "per": "Each",
+    "corePrice": "3.99",
+    "totalPrice": "77.48"
+  },
+  {
+    "description": "DOOR GLASS",
+    "price": "36.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "36.74"
+  },
+  {
+    "description": "DOOR HANDLE OUTSIDE",
+    "price": "14.69",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "14.69"
+  },
+  {
+    "description": "DOOR SKIN",
+    "price": "44.09",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "46.08"
+  },
+  {
+    "description": "DRAG LINK",
+    "price": "28.34",
+    "per": "Each",
+    "corePrice": "1.5",
+    "totalPrice": "29.84"
+  },
+  {
+    "description": "DRIVE SHAFT",
+    "price": "49.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "49.34"
+  },
+  {
+    "description": "DRIVE SHAFT 2 PIECES",
+    "price": "78.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "78.74"
+  },
+  {
+    "description": "DROPOUT GEARS",
+    "price": "62.99",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "65.98"
+  },
+  {
+    "description": "DUAL CLUTCH",
+    "price": "41.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "41.99"
+  },
+  {
+    "description": "DUAL FAN/ASSY/SHROUD",
+    "price": "62.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "62.99"
+  },
+  {
+    "description": "DUAL RESEVOIR",
+    "price": "13.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "13.64"
+  },
+  {
+    "description": "DUMP UNIT W/PUMP",
+    "price": "283.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "283.49"
+  },
+  {
+    "description": "DVD PLAYER",
+    "price": "57.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "57.74"
+  },
+  {
+    "description": "EGR VALVE (EACH)",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "ELC PWR STEERING PMP",
+    "price": "94.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "94.49"
+  },
+  {
+    "description": "ELEC. PARK BRAKE",
+    "price": "53.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "53.54"
+  },
+  {
+    "description": "ELECT. SHIFT ASSMBLY",
+    "price": "93.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "93.44"
+  },
+  {
+    "description": "ELECTRONIC PEDAL",
+    "price": "30.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "30.44"
+  },
+  {
+    "description": "EMBLEM (ANY)",
+    "price": "6.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.29"
+  },
+  {
+    "description": "EMBLEM LETTER",
+    "price": "2.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "2.09"
+  },
+  {
+    "description": "ENGINE (NO ACC) 3-6",
+    "price": "283.49",
+    "per": "Each",
+    "corePrice": "45.99",
+    "totalPrice": "329.48"
+  },
+  {
+    "description": "ENGINE (NO ACC) 8-10",
+    "price": "314.99",
+    "per": "Each",
+    "corePrice": "45.99",
+    "totalPrice": "360.98"
+  },
+  {
+    "description": "ENGINE BLOCK",
+    "price": "138.65",
+    "per": "Each",
+    "corePrice": "24.99",
+    "totalPrice": "163.64"
+  },
+  {
+    "description": "ENGINE COVER",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "18.89"
+  },
+  {
+    "description": "ENGINE CRADLE",
+    "price": "73.49",
+    "per": "Each",
+    "corePrice": "3.99",
+    "totalPrice": "77.48"
+  },
+  {
+    "description": "ENGINE MOUNT",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "1.0",
+    "totalPrice": "12.54"
+  },
+  {
+    "description": "EXHAUST MANI/NO SENS",
+    "price": "36.74",
+    "per": "Each",
+    "corePrice": "1.25",
+    "totalPrice": "37.99"
+  },
+  {
+    "description": "EXST HEAT SHIELD LRG",
+    "price": "35.69",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "35.69"
+  },
+  {
+    "description": "EXST HEAT SHIELD SM",
+    "price": "23.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.09"
+  },
+  {
+    "description": "FAN ASSY. ELECTRIC",
+    "price": "48.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "48.29"
+  },
+  {
+    "description": "FAN BELT",
+    "price": "5.76",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.76"
+  },
+  {
+    "description": "FAN BLADE",
+    "price": "13.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "13.64"
+  },
+  {
+    "description": "FAN CLUTCH",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "18.89"
+  },
+  {
+    "description": "FAN ELECTRIC MOTOR",
+    "price": "22.04",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "22.04"
+  },
+  {
+    "description": "FAN SHROUD",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "18.89"
+  },
+  {
+    "description": "FENDER ASSEMBLY",
+    "price": "68.24",
+    "per": "Each",
+    "corePrice": "2.0",
+    "totalPrice": "70.24"
+  },
+  {
+    "description": "FENDER BARE",
+    "price": "59.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "59.84"
+  },
+  {
+    "description": "FENDER TRIM/FLARES",
+    "price": "17.31",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.31"
+  },
+  {
+    "description": "FLAT BED 10-12W/LOAD",
+    "price": "578.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "578.54"
+  },
+  {
+    "description": "FLAT BED 6-9 W/LOAD",
+    "price": "500.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "500.84"
+  },
+  {
+    "description": "FLOOR MAT",
+    "price": "3.83",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "3.83"
+  },
+  {
+    "description": "FLOOR MAT (SET OF 4)",
+    "price": "12.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "12.59"
+  },
+  {
+    "description": "FLYWHEEL/FLEX PLATE",
+    "price": "40.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "40.94"
+  },
+  {
+    "description": "FRAME COMPLETE",
+    "price": "362.24",
+    "per": "Each",
+    "corePrice": "25.99",
+    "totalPrice": "388.23"
+  },
+  {
+    "description": "FRAME SECTION",
+    "price": "19.94",
+    "per": "Feet",
+    "corePrice": "0.0",
+    "totalPrice": "19.94"
+  },
+  {
+    "description": "FREE ANTIFREEZE W/PU",
+    "price": "5.46",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.46"
+  },
+  {
+    "description": "FREE T SHIRT W/PURCH",
+    "price": "17.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.61"
+  },
+  {
+    "description": "FRONT VALANCE",
+    "price": "34.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "34.64"
+  },
+  {
+    "description": "FSWITCH TURN SIGNAL",
+    "price": "27.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "27.29"
+  },
+  {
+    "description": "FUEL DIVERTER VALVE",
+    "price": "28.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "28.34"
+  },
+  {
+    "description": "FUEL FILTER",
+    "price": "5.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.24"
+  },
+  {
+    "description": "FUEL INJECTION RAIL",
+    "price": "19.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "19.94"
+  },
+  {
+    "description": "FUEL INJECTOR (EACH)",
+    "price": "13.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "13.64"
+  },
+  {
+    "description": "FUEL LINE",
+    "price": "6.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.29"
+  },
+  {
+    "description": "FUEL NECK",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "FUEL PRESS/REG",
+    "price": "12.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "12.59"
+  },
+  {
+    "description": "FUEL PUMP (MECH)",
+    "price": "25.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "25.19"
+  },
+  {
+    "description": "FUEL PUMP ELECTRIC",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "FUEL TANK FILL DOOR",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "FUEL TANK SEND UNIT",
+    "price": "29.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "29.39"
+  },
+  {
+    "description": "FUEL TANK STRAP",
+    "price": "12.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "12.59"
+  },
+  {
+    "description": "FUEL TANK/AS IS",
+    "price": "48.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "48.29"
+  },
+  {
+    "description": "FUELSEND/PMP/AS/IS",
+    "price": "54.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "54.59"
+  },
+  {
+    "description": "FUSE",
+    "price": "0.21",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "0.21"
+  },
+  {
+    "description": "FUSE BOX (BARE)",
+    "price": "23.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.09"
+  },
+  {
+    "description": "FUSE BOX (LOADED)",
+    "price": "34.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "34.64"
+  },
+  {
+    "description": "FUSE BOX COVER",
+    "price": "9.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.44"
+  },
+  {
+    "description": "GAS/OIL CAP",
+    "price": "5.76",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.76"
+  },
+  {
+    "description": "GASKET",
+    "price": "4.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "4.19"
+  },
+  {
+    "description": "GAUGE SINGLE",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "GLASS HATCH",
+    "price": "58.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "58.79"
+  },
+  {
+    "description": "GLOVE BOX DOOR",
+    "price": "15.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.39"
+  },
+  {
+    "description": "GLOVEBOX ASSY",
+    "price": "28.86",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "28.86"
+  },
+  {
+    "description": "GLOVEBOX INSERT",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.61"
+  },
+  {
+    "description": "GRILLE",
+    "price": "44.1",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "44.1"
+  },
+  {
+    "description": "GRILLE (SMALL)",
+    "price": "26.25",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "26.25"
+  },
+  {
+    "description": "GRILLE GUARD",
+    "price": "90.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "90.29"
+  },
+  {
+    "description": "GRILLE W/ BEZELS",
+    "price": "47.25",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "47.25"
+  },
+  {
+    "description": "HARMONIC BALANCER",
+    "price": "38.51",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "40.5"
+  },
+  {
+    "description": "HATCH NO GLASS",
+    "price": "58.79",
+    "per": "Each",
+    "corePrice": "3.99",
+    "totalPrice": "62.78"
+  },
+  {
+    "description": "HATCH WITH GLASS",
+    "price": "99.74",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "104.73"
+  },
+  {
+    "description": "HEAD (ALUMINUM NO CA",
+    "price": "74.54",
+    "per": "Each",
+    "corePrice": "9.99",
+    "totalPrice": "84.53"
+  },
+  {
+    "description": "HEAD ALUMN W/ CAM",
+    "price": "104.99",
+    "per": "Each",
+    "corePrice": "9.99",
+    "totalPrice": "114.98"
+  },
+  {
+    "description": "HEAD CAST IRON W/CAM",
+    "price": "73.49",
+    "per": "Each",
+    "corePrice": "5.99",
+    "totalPrice": "79.48"
+  },
+  {
+    "description": "HEAD CASTIRON NO CAM",
+    "price": "52.49",
+    "per": "Each",
+    "corePrice": "5.99",
+    "totalPrice": "58.48"
+  },
+  {
+    "description": "HEAD DUALCAM",
+    "price": "116.54",
+    "per": "Each",
+    "corePrice": "9.99",
+    "totalPrice": "126.53"
+  },
+  {
+    "description": "HEAD LINER",
+    "price": "32.72",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "32.72"
+  },
+  {
+    "description": "HEADERPANEL FIBERGLA",
+    "price": "61.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "61.94"
+  },
+  {
+    "description": "HEADERPANEL STEEL BA",
+    "price": "47.24",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "50.23"
+  },
+  {
+    "description": "HEADERS EXHS",
+    "price": "77.69",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "82.68"
+  },
+  {
+    "description": "HEADLGHT SEALED BEAM",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.61"
+  },
+  {
+    "description": "HEADLIGHT BEZEL",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.61"
+  },
+  {
+    "description": "HEADLIGHT COMP BULB",
+    "price": "6.81",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.81"
+  },
+  {
+    "description": "HEADLIGHT COMPOSITE",
+    "price": "41.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "41.99"
+  },
+  {
+    "description": "HEADLIGHT DOOR EA",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "HEADLIGHT DOOR MOTOR",
+    "price": "25.02",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "25.02"
+  },
+  {
+    "description": "HEADLIGHT RING",
+    "price": "4.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "4.19"
+  },
+  {
+    "description": "HEADLIGHT WIPER MOTR",
+    "price": "29.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "29.39"
+  },
+  {
+    "description": "HEADLIGHT(OLD STYLE)",
+    "price": "30.81",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "30.81"
+  },
+  {
+    "description": "HEADREST",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "HEADREST W/LCD",
+    "price": "47.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "47.24"
+  },
+  {
+    "description": "HEATER CONTROL VALVE",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.61"
+  },
+  {
+    "description": "HEATER CORE",
+    "price": "25.02",
+    "per": "Each",
+    "corePrice": "1.25",
+    "totalPrice": "26.27"
+  },
+  {
+    "description": "HEATER RESISTER",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "HINGE",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "HOOD",
+    "price": "62.99",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "65.98"
+  },
+  {
+    "description": "HOOD LINER",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "HOOD PROP ANY",
+    "price": "4.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "4.19"
+  },
+  {
+    "description": "HOOD RELEASE CABLE",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "HOOD/TRUNK SHOCKS",
+    "price": "9.96",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.96"
+  },
+  {
+    "description": "HORN",
+    "price": "9.96",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.96"
+  },
+  {
+    "description": "HORN BUTTON",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.61"
+  },
+  {
+    "description": "HOSE",
+    "price": "0.68",
+    "per": "Inches",
+    "corePrice": "0.0",
+    "totalPrice": "0.68"
+  },
+  {
+    "description": "HUB",
+    "price": "25.19",
+    "per": "Each",
+    "corePrice": "1.5",
+    "totalPrice": "26.69"
+  },
+  {
+    "description": "HUB CAP/WHEEL COVER",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "HUB LOCKING TYPE 4X4",
+    "price": "24.14",
+    "per": "Each",
+    "corePrice": "1.5",
+    "totalPrice": "25.64"
+  },
+  {
+    "description": "HYBRID TRANSMISSION",
+    "price": "283.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "283.49"
+  },
+  {
+    "description": "HYDRA/PUMP UNIT",
+    "price": "134.8",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "137.79"
+  },
+  {
+    "description": "IDLER ARM",
+    "price": "23.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.09"
+  },
+  {
+    "description": "IGNITION COIL",
+    "price": "16.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "16.79"
+  },
+  {
+    "description": "IGNITION SWITCH",
+    "price": "26.2",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "26.2"
+  },
+  {
+    "description": "IGNITOR",
+    "price": "34.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "34.64"
+  },
+  {
+    "description": "INJECTION SPIDER",
+    "price": "20.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "20.99"
+  },
+  {
+    "description": "INNER FENDER",
+    "price": "20.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "20.99"
+  },
+  {
+    "description": "INSTR CLUSTR BEZEL",
+    "price": "21.0",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "21.0"
+  },
+  {
+    "description": "INSTR LENS",
+    "price": "6.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.29"
+  },
+  {
+    "description": "INSTRUMENT CLUSTER",
+    "price": "47.25",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "47.25"
+  },
+  {
+    "description": "INT DOOR HANDLE",
+    "price": "9.96",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.96"
+  },
+  {
+    "description": "INT DOOR PANEL",
+    "price": "21.17",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "21.17"
+  },
+  {
+    "description": "INTAKE MANIFOLD",
+    "price": "38.51",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "40.5"
+  },
+  {
+    "description": "INTAKE MANIFOLD ADJ",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "INTAKE PLENUM",
+    "price": "41.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "41.99"
+  },
+  {
+    "description": "JACK ANY",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "JACK HANDLE",
+    "price": "3.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "3.84"
+  },
+  {
+    "description": "JUMPER CABLES",
+    "price": "7.7",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "7.7"
+  },
+  {
+    "description": "KEYFOB TRNSMTR AS/IS",
+    "price": "9.65",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.65"
+  },
+  {
+    "description": "KNUCKLE/HUB PRESSED",
+    "price": "53.54",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "55.53"
+  },
+  {
+    "description": "KNUCKLE/SPINDLE",
+    "price": "47.25",
+    "per": "Each",
+    "corePrice": "1.5",
+    "totalPrice": "48.75"
+  },
+  {
+    "description": "LADDER RACK",
+    "price": "116.54",
+    "per": "Pair",
+    "corePrice": "0.0",
+    "totalPrice": "116.54"
+  },
+  {
+    "description": "LATCH",
+    "price": "13.47",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "13.47"
+  },
+  {
+    "description": "LATCH ELECTRIC",
+    "price": "35.69",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "35.69"
+  },
+  {
+    "description": "LCD AUDIO/VIDEO PLYR",
+    "price": "47.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "47.24"
+  },
+  {
+    "description": "LEAF SPRING - LARGE",
+    "price": "61.94",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "64.93"
+  },
+  {
+    "description": "LEAF SPRING SMALL",
+    "price": "34.64",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "36.63"
+  },
+  {
+    "description": "LED LIGHT BAR 29IN<",
+    "price": "38.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "38.84"
+  },
+  {
+    "description": "LED LIGHT BAR 30IN>",
+    "price": "77.69",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "77.69"
+  },
+  {
+    "description": "LED LIGHT BULB",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "LIFT GATE",
+    "price": "260.39",
+    "per": "Each",
+    "corePrice": "5.0",
+    "totalPrice": "265.39"
+  },
+  {
+    "description": "LIFTER",
+    "price": "10.5",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.5"
+  },
+  {
+    "description": "LIGHT LENS ONLY",
+    "price": "2.09",
+    "per": "Inches",
+    "corePrice": "0.0",
+    "totalPrice": "2.09"
+  },
+  {
+    "description": "LOCK TUMBLER",
+    "price": "13.47",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "13.47"
+  },
+  {
+    "description": "LUGGAGE RACK",
+    "price": "57.75",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "57.75"
+  },
+  {
+    "description": "MANUAL MIRROR-DOOR",
+    "price": "24.15",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "24.15"
+  },
+  {
+    "description": "MIRROR INT+SWICTHES",
+    "price": "24.14",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "24.14"
+  },
+  {
+    "description": "MIRROR INTERIOR",
+    "price": "9.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.44"
+  },
+  {
+    "description": "MODULE",
+    "price": "23.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.09"
+  },
+  {
+    "description": "MOLDING EXTERIOR",
+    "price": "0.79",
+    "per": "Inches",
+    "corePrice": "0.0",
+    "totalPrice": "0.79"
+  },
+  {
+    "description": "MOLDING INTERIOR",
+    "price": "0.79",
+    "per": "Inches",
+    "corePrice": "0.0",
+    "totalPrice": "0.79"
+  },
+  {
+    "description": "MUDFLAP",
+    "price": "7.7",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "7.7"
+  },
+  {
+    "description": "MUFFLER (ANY)",
+    "price": "25.02",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "27.01"
+  },
+  {
+    "description": "MUFFLER PIPE LONG",
+    "price": "30.81",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "30.81"
+  },
+  {
+    "description": "MUFFLER PIPE SHORT",
+    "price": "15.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.39"
+  },
+  {
+    "description": "MUFFLER W/RESONATOR",
+    "price": "29.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "29.39"
+  },
+  {
+    "description": "NAVIGATION UNIT",
+    "price": "78.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "78.74"
+  },
+  {
+    "description": "NO WARRANTY",
+    "price": "0.0",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "0.0"
+  },
+  {
+    "description": "OIL",
+    "price": "1.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "1.94"
+  },
+  {
+    "description": "OIL COOLER",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "1.25",
+    "totalPrice": "20.14"
+  },
+  {
+    "description": "OIL FILTER",
+    "price": "7.7",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "7.7"
+  },
+  {
+    "description": "OIL FILTER ADAPTER",
+    "price": "17.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.84"
+  },
+  {
+    "description": "OIL LEVEL SENSOR",
+    "price": "24.14",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "24.14"
+  },
+  {
+    "description": "OIL PAN",
+    "price": "35.18",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "37.17"
+  },
+  {
+    "description": "OIL PUMP",
+    "price": "25.02",
+    "per": "Each",
+    "corePrice": "1.0",
+    "totalPrice": "26.02"
+  },
+  {
+    "description": "P.P.I. RELEASE",
+    "price": "183.75",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "183.75"
+  },
+  {
+    "description": "PARK BRAKE ASSEMBLY",
+    "price": "28.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "28.34"
+  },
+  {
+    "description": "PARK/TURNLAMP ASSY",
+    "price": "2.09",
+    "per": "Inches",
+    "corePrice": "0.0",
+    "totalPrice": "2.09"
+  },
+  {
+    "description": "PARK/TURNLAMP LENS",
+    "price": "2.09",
+    "per": "Inches",
+    "corePrice": "0.0",
+    "totalPrice": "2.09"
+  },
+  {
+    "description": "PCV VALVE",
+    "price": "7.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "7.34"
+  },
+  {
+    "description": "PEDAL (EACH)",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.61"
+  },
+  {
+    "description": "PEDAL ASSY",
+    "price": "35.69",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "35.69"
+  },
+  {
+    "description": "PISTON AND ROD ASSY",
+    "price": "26.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "26.24"
+  },
+  {
+    "description": "PITMAN ARM",
+    "price": "17.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.84"
+  },
+  {
+    "description": "POP UP HEADLIGHT",
+    "price": "37.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "37.79"
+  },
+  {
+    "description": "POWER MIRROR - DOOR",
+    "price": "36.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "36.74"
+  },
+  {
+    "description": "POWER STEER RESEVOIR",
+    "price": "9.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.44"
+  },
+  {
+    "description": "POWER STEERING MOTOR",
+    "price": "78.74",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "81.73"
+  },
+  {
+    "description": "POWER STEERING PUMP",
+    "price": "37.79",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "40.78"
+  },
+  {
+    "description": "PRESSURE PLATE",
+    "price": "25.19",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "27.18"
+  },
+  {
+    "description": "PS PUMP/RESV ASSMBLY",
+    "price": "54.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "54.59"
+  },
+  {
+    "description": "PULLEY BARE",
+    "price": "12.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "12.59"
+  },
+  {
+    "description": "PUSH TO START BUTTON",
+    "price": "19.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "19.94"
+  },
+  {
+    "description": "PWR STEERING PRSR LN",
+    "price": "12.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "12.59"
+  },
+  {
+    "description": "QUARTER GLASS",
+    "price": "42.36",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "42.36"
+  },
+  {
+    "description": "QUARTER PANEL",
+    "price": "96.27",
+    "per": "Each",
+    "corePrice": "3.99",
+    "totalPrice": "100.26"
+  },
+  {
+    "description": "RACK AND PINION",
+    "price": "61.64",
+    "per": "Each",
+    "corePrice": "3.99",
+    "totalPrice": "65.63"
+  },
+  {
+    "description": "RADIATOR",
+    "price": "62.99",
+    "per": "Each",
+    "corePrice": "8.49",
+    "totalPrice": "71.48"
+  },
+  {
+    "description": "RADIATOR BOTTLE",
+    "price": "9.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.44"
+  },
+  {
+    "description": "RADIATOR SUPPORT BAR",
+    "price": "41.99",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "43.98"
+  },
+  {
+    "description": "RADIO",
+    "price": "23.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.09"
+  },
+  {
+    "description": "RADIO CABLE/SPEAKER",
+    "price": "3.83",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "3.83"
+  },
+  {
+    "description": "REAR AXLE LOADED",
+    "price": "241.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "241.49"
+  },
+  {
+    "description": "REAR END HOUSING BAR",
+    "price": "52.49",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "57.48"
+  },
+  {
+    "description": "REAR END PINION&RING",
+    "price": "52.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "52.49"
+  },
+  {
+    "description": "REAR I-BEAM/NO HUB",
+    "price": "125.99",
+    "per": "Each",
+    "corePrice": "6.99",
+    "totalPrice": "132.98"
+  },
+  {
+    "description": "REAR WINDOW GUARD",
+    "price": "83.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "83.99"
+  },
+  {
+    "description": "RECEIVER DRIER",
+    "price": "26.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "26.24"
+  },
+  {
+    "description": "RELAY (EACH)",
+    "price": "5.76",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.76"
+  },
+  {
+    "description": "RELAY BOX",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "RESONATOR EXHAUST",
+    "price": "17.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.84"
+  },
+  {
+    "description": "REVERSE CAMERA",
+    "price": "47.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "47.24"
+  },
+  {
+    "description": "ROCKER ARM",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "ROCKER PANEL",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "ROLL BAR NO-LIGHTS",
+    "price": "68.24",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "70.23"
+  },
+  {
+    "description": "ROOF CUT OFF",
+    "price": "154.34",
+    "per": "Each",
+    "corePrice": "5.99",
+    "totalPrice": "160.33"
+  },
+  {
+    "description": "RUNNING BOARD (EACH)",
+    "price": "36.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "36.74"
+  },
+  {
+    "description": "RUNNING BOARD-POWER",
+    "price": "58.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "58.79"
+  },
+  {
+    "description": "SCREWS/BOLTS",
+    "price": "0.48",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "0.48"
+  },
+  {
+    "description": "SEAT BELT CLIP",
+    "price": "7.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "7.34"
+  },
+  {
+    "description": "SEAT BELT MOTOR",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "SEAT BELT TRACK",
+    "price": "19.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "19.94"
+  },
+  {
+    "description": "SEAT BELT/RETRACTOR",
+    "price": "22.04",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "22.04"
+  },
+  {
+    "description": "SEAT BENCH",
+    "price": "50.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "50.39"
+  },
+  {
+    "description": "SEAT BENCH COMBO N/P",
+    "price": "67.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "67.19"
+  },
+  {
+    "description": "SEAT BENCH POWER",
+    "price": "59.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "59.84"
+  },
+  {
+    "description": "SEAT BNCH COMBO PWR",
+    "price": "76.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "76.64"
+  },
+  {
+    "description": "SEAT COVER (EACH)",
+    "price": "5.76",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.76"
+  },
+  {
+    "description": "SEAT MOTOR",
+    "price": "16.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "16.79"
+  },
+  {
+    "description": "SEAT SECTION",
+    "price": "25.02",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "25.02"
+  },
+  {
+    "description": "SEAT TRACK SINGLE",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "SEAT TRACKSET",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "SEAT TRACKSET+MOTOR",
+    "price": "39.36",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "39.36"
+  },
+  {
+    "description": "SENSOR (EMMISSIONS)",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "SENSOR (OIL/WATER)",
+    "price": "6.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.29"
+  },
+  {
+    "description": "SENSOR MISC.",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "SHIFT KNOB",
+    "price": "6.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.29"
+  },
+  {
+    "description": "SHIFT KNOB W/ SWITCH",
+    "price": "6.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.29"
+  },
+  {
+    "description": "SHIFT MODULE",
+    "price": "26.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "26.24"
+  },
+  {
+    "description": "SHIFT SOLENOID",
+    "price": "16.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "16.79"
+  },
+  {
+    "description": "SHIFTER BOOT",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "SHIFTER COLMN COLLAR",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "18.89"
+  },
+  {
+    "description": "SHIFTER LEVER ASSY",
+    "price": "37.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "37.79"
+  },
+  {
+    "description": "SHOCK",
+    "price": "15.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.39"
+  },
+  {
+    "description": "SIDE DOOR SLIDE MTR",
+    "price": "93.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "93.44"
+  },
+  {
+    "description": "SIDE SKIRT",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "SLAVE CYLINDER",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "SMOG PUMP",
+    "price": "32.55",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "34.54"
+  },
+  {
+    "description": "SNOW CHAIN",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "SNOWPLOW",
+    "price": "308.15",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "308.15"
+  },
+  {
+    "description": "SOLENOID",
+    "price": "14.69",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "14.69"
+  },
+  {
+    "description": "SPARE TIRE CARRIER",
+    "price": "26.96",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "26.96"
+  },
+  {
+    "description": "SPARE TIRE COVER",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "SPARE TIRE SWNG AWAY",
+    "price": "40.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "40.94"
+  },
+  {
+    "description": "SPARK PLUG/WIRE",
+    "price": "2.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "2.09"
+  },
+  {
+    "description": "SPEAKER",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.61"
+  },
+  {
+    "description": "SPEAKER (PREMIUM)",
+    "price": "15.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.39"
+  },
+  {
+    "description": "SPEAKER BOX NO SPEAK",
+    "price": "25.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "25.19"
+  },
+  {
+    "description": "SPEAKER TWEETER",
+    "price": "9.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.44"
+  },
+  {
+    "description": "SPEAKER WIRE",
+    "price": "5.76",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.76"
+  },
+  {
+    "description": "SPEEDOMETER CABLE",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "SPINDLE KNUCKLE ASSY",
+    "price": "121.32",
+    "per": "Each",
+    "corePrice": "2.0",
+    "totalPrice": "123.32"
+  },
+  {
+    "description": "SPOILER",
+    "price": "37.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "37.79"
+  },
+  {
+    "description": "SPOILER+LIGHT",
+    "price": "40.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "40.94"
+  },
+  {
+    "description": "STABILIZER LINK",
+    "price": "8.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "STARTER",
+    "price": "32.72",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "37.71"
+  },
+  {
+    "description": "STEERING COLUMN",
+    "price": "94.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "94.49"
+  },
+  {
+    "description": "STEERING COLUMN LINK",
+    "price": "19.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "19.94"
+  },
+  {
+    "description": "STEERING COLUMN MOD",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "STEERING GEARBOX ANY",
+    "price": "80.02",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "80.02"
+  },
+  {
+    "description": "STEERING WHEEL",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "18.89"
+  },
+  {
+    "description": "STEERING WHEEL COVER",
+    "price": "7.86",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "7.86"
+  },
+  {
+    "description": "STEERNG WHL W/SWITCH",
+    "price": "25.19",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "25.19"
+  },
+  {
+    "description": "STRUT AND SPRING",
+    "price": "41.67",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "41.67"
+  },
+  {
+    "description": "STRUT NO SPRING",
+    "price": "19.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "19.94"
+  },
+  {
+    "description": "SUN ROOF ASSEMBLY",
+    "price": "52.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "52.49"
+  },
+  {
+    "description": "SUN VISOR",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "SUNROOF ASSY+MOTOR",
+    "price": "85.04",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "85.04"
+  },
+  {
+    "description": "SUNROOF/T-TOP",
+    "price": "43.04",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "43.04"
+  },
+  {
+    "description": "SUPERCHARGER",
+    "price": "116.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "116.54"
+  },
+  {
+    "description": "SUSP. AIR BAG",
+    "price": "51.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "51.44"
+  },
+  {
+    "description": "SWAY BAR",
+    "price": "28.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "28.34"
+  },
+  {
+    "description": "SWITCH COMBO",
+    "price": "23.1",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.1"
+  },
+  {
+    "description": "SWITCH SINGLE",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "TAIL GATE",
+    "price": "81.89",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "84.88"
+  },
+  {
+    "description": "TAIL GATE W/ GLASS",
+    "price": "64.04",
+    "per": "Each",
+    "corePrice": "3.99",
+    "totalPrice": "68.03"
+  },
+  {
+    "description": "TAIL LIGHT ASSY ANY",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "TAIL LIGHT BAR",
+    "price": "38.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "38.84"
+  },
+  {
+    "description": "TAILGATE CABLE",
+    "price": "7.86",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "7.86"
+  },
+  {
+    "description": "TAILLIGHT CIRC BOARD",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "TEMP. CNTRL ELECTRIC",
+    "price": "36.57",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "36.57"
+  },
+  {
+    "description": "TEMP. CNTRL MANUAL",
+    "price": "21.17",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "21.17"
+  },
+  {
+    "description": "TEMP. CNTRL W/CASS",
+    "price": "54.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "54.59"
+  },
+  {
+    "description": "THERMOSTAT",
+    "price": "3.15",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "3.15"
+  },
+  {
+    "description": "THERMOSTAT HOUSING",
+    "price": "10.5",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.5"
+  },
+  {
+    "description": "THROTTLE BODY",
+    "price": "60.89",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "60.89"
+  },
+  {
+    "description": "TIE ROD EACH",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "33.48"
+  },
+  {
+    "description": "TIE ROD END",
+    "price": "10.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "10.49"
+  },
+  {
+    "description": "TIMING CHAIN",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.61"
+  },
+  {
+    "description": "TIMING GEAR",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "1.0",
+    "totalPrice": "10.61"
+  },
+  {
+    "description": "TIMING GEAR COVER",
+    "price": "27.29",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "29.28"
+  },
+  {
+    "description": "TIRE (AS-IS) 15<",
+    "price": "34.64",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "34.64"
+  },
+  {
+    "description": "TIRE (AS-IS) 16>",
+    "price": "37.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "37.79"
+  },
+  {
+    "description": "TIRE PRESSURE SENSOR",
+    "price": "19.25",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "19.25"
+  },
+  {
+    "description": "TOOLBOX METAL",
+    "price": "85.04",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "85.04"
+  },
+  {
+    "description": "TOOLBOX PLASTIC",
+    "price": "64.04",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "64.04"
+  },
+  {
+    "description": "TORQUE CONVERTER",
+    "price": "40.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "40.94"
+  },
+  {
+    "description": "TORSION BAR",
+    "price": "31.49",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "31.49"
+  },
+  {
+    "description": "TOW BALL",
+    "price": "5.82",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.82"
+  },
+  {
+    "description": "TOW BALL MOUNT",
+    "price": "17.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.84"
+  },
+  {
+    "description": "TRAILER HITCH",
+    "price": "77.69",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "77.69"
+  },
+  {
+    "description": "TRAILER HITCH SWITCH",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "TRANS CONTROL MODULE",
+    "price": "77.69",
+    "per": "Each",
+    "corePrice": "4.99",
+    "totalPrice": "82.68"
+  },
+  {
+    "description": "TRANS CROSS MEMBER",
+    "price": "47.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "47.24"
+  },
+  {
+    "description": "TRANS DUST COVER",
+    "price": "11.54",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "11.54"
+  },
+  {
+    "description": "TRANS EXT HOUSING",
+    "price": "19.94",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "22.93"
+  },
+  {
+    "description": "TRANS SOLENOID PACK",
+    "price": "54.59",
+    "per": "Each",
+    "corePrice": "2.99",
+    "totalPrice": "57.58"
+  },
+  {
+    "description": "TRANS VALVE BODY",
+    "price": "66.14",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "68.13"
+  },
+  {
+    "description": "TRANSFER CASE (4X4)",
+    "price": "152.24",
+    "per": "Each",
+    "corePrice": "24.99",
+    "totalPrice": "177.23"
+  },
+  {
+    "description": "TRANSFER CASE MOTOR",
+    "price": "28.34",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "28.34"
+  },
+  {
+    "description": "TRANSMISSION",
+    "price": "199.49",
+    "per": "Each",
+    "corePrice": "24.99",
+    "totalPrice": "224.48"
+  },
+  {
+    "description": "TRANSMISSION GEAR",
+    "price": "100.79",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "100.79"
+  },
+  {
+    "description": "TRANSMISSION MOUNT",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "TRNK LID NO LGHT/LNS",
+    "price": "54.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "54.59"
+  },
+  {
+    "description": "TRUCK BED BARE",
+    "price": "313.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "313.94"
+  },
+  {
+    "description": "TRUCKBED CVR SFT/HRD",
+    "price": "117.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "117.59"
+  },
+  {
+    "description": "TURBO CHARGER",
+    "price": "99.75",
+    "per": "Each",
+    "corePrice": "9.99",
+    "totalPrice": "109.74"
+  },
+  {
+    "description": "TURBO INTERCOOLER",
+    "price": "52.5",
+    "per": "Each",
+    "corePrice": "3.99",
+    "totalPrice": "56.49"
+  },
+  {
+    "description": "TURN/CRUISE/WIPER/CO",
+    "price": "48.29",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "48.29"
+  },
+  {
+    "description": "U-BOLT",
+    "price": "4.83",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "4.83"
+  },
+  {
+    "description": "UNDER ENGINE GUARD",
+    "price": "28.86",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "28.86"
+  },
+  {
+    "description": "UTILITY TRUCK BED",
+    "price": "419.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "419.99"
+  },
+  {
+    "description": "VACUUM ACTUATOR",
+    "price": "17.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.84"
+  },
+  {
+    "description": "VACUUM LINE",
+    "price": "2.09",
+    "per": "Feet",
+    "corePrice": "0.0",
+    "totalPrice": "2.09"
+  },
+  {
+    "description": "VACUUM PUMP",
+    "price": "33.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "33.59"
+  },
+  {
+    "description": "VALVE COVER",
+    "price": "22.04",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "24.03"
+  },
+  {
+    "description": "VENT (INTERIOR)",
+    "price": "5.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.24"
+  },
+  {
+    "description": "VENT GLASS",
+    "price": "18.89",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "18.89"
+  },
+  {
+    "description": "VENT GLASS ASSY",
+    "price": "43.04",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "43.04"
+  },
+  {
+    "description": "VENT PANEL (COWL)",
+    "price": "17.84",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.84"
+  },
+  {
+    "description": "WASHER BOTTLE",
+    "price": "14.7",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "14.7"
+  },
+  {
+    "description": "WASHER BOTTLE MOTOR",
+    "price": "9.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.44"
+  },
+  {
+    "description": "WASHER FLUID",
+    "price": "3.66",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "3.66"
+  },
+  {
+    "description": "WATER PUMP",
+    "price": "17.85",
+    "per": "Each",
+    "corePrice": "1.99",
+    "totalPrice": "19.84"
+  },
+  {
+    "description": "WATER PUMP (ELECTRIC",
+    "price": "40.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "40.94"
+  },
+  {
+    "description": "WEATHER STRIPPING",
+    "price": "2.09",
+    "per": "Feet",
+    "corePrice": "0.0",
+    "totalPrice": "2.09"
+  },
+  {
+    "description": "WHEEL ALUMINUM",
+    "price": "36.74",
+    "per": "Each",
+    "corePrice": "8.25",
+    "totalPrice": "44.99"
+  },
+  {
+    "description": "WHEEL SPACER",
+    "price": "15.74",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.74"
+  },
+  {
+    "description": "WHEEL STEEL",
+    "price": "22.04",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "22.04"
+  },
+  {
+    "description": "WINCH",
+    "price": "146.99",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "146.99"
+  },
+  {
+    "description": "WINDOW CRANK HANDLE",
+    "price": "4.46",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "4.46"
+  },
+  {
+    "description": "WINDOW CURTAIN",
+    "price": "9.61",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "9.61"
+  },
+  {
+    "description": "WINDOW HINGE",
+    "price": "7.7",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "7.7"
+  },
+  {
+    "description": "WINDOW MOTOR",
+    "price": "24.14",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "24.14"
+  },
+  {
+    "description": "WINDOW REG W/MOTOR",
+    "price": "44.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "44.09"
+  },
+  {
+    "description": "WINDOW REGULATOR",
+    "price": "23.09",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.09"
+  },
+  {
+    "description": "WINDOW TRUNK CURTAIN",
+    "price": "19.27",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "19.27"
+  },
+  {
+    "description": "WINDSHIELD",
+    "price": "54.59",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "54.59"
+  },
+  {
+    "description": "WIPER ARM",
+    "price": "6.71",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "6.71"
+  },
+  {
+    "description": "WIPER BLADE",
+    "price": "1.94",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "1.94"
+  },
+  {
+    "description": "WIPER MOTOR",
+    "price": "30.44",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "30.44"
+  },
+  {
+    "description": "WIPER TRANSMISSION",
+    "price": "17.06",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "17.06"
+  },
+  {
+    "description": "WIRE HARENESS",
+    "price": "8.39",
+    "per": "Feet",
+    "corePrice": "0.0",
+    "totalPrice": "8.39"
+  },
+  {
+    "description": "WIRE PIGTAIL",
+    "price": "5.24",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "5.24"
+  },
+  {
+    "description": "Y PIPE EXHAUST",
+    "price": "23.1",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "23.1"
+  },
+  {
+    "description": "YOKE",
+    "price": "15.39",
+    "per": "Each",
+    "corePrice": "0.0",
+    "totalPrice": "15.39"
+  }
+]

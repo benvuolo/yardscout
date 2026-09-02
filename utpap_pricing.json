@@ -1,0 +1,3182 @@
+[
+  {
+    "description": "TIMING GEAR",
+    "price": "10.29",
+    "corePrice": "0.00",
+    "totalPrice": "10.29"
+  },
+  {
+    "description": "TURBO INNER COOLER",
+    "price": "51.76",
+    "corePrice": "15.00",
+    "totalPrice": "66.76"
+  },
+  {
+    "description": "ENGINE LONG BLOCK",
+    "price": "276.32",
+    "corePrice": "25.00",
+    "totalPrice": "301.32"
+  },
+  {
+    "description": "HEAD (NON OH CAM)",
+    "price": "68.00",
+    "corePrice": "10.00",
+    "totalPrice": "78.00"
+  },
+  {
+    "description": "TURBO/SUPER CHARGER",
+    "price": "84.62",
+    "corePrice": "10.00",
+    "totalPrice": "94.62"
+  },
+  {
+    "description": "BELT TENSIONER",
+    "price": "14.71",
+    "corePrice": "1.00",
+    "totalPrice": "15.71"
+  },
+  {
+    "description": "OIL PAN",
+    "price": "28.82",
+    "corePrice": "1.00",
+    "totalPrice": "29.82"
+  },
+  {
+    "description": "DIPSTICK/TUBE",
+    "price": "5.52",
+    "corePrice": "0.00",
+    "totalPrice": "5.52"
+  },
+  {
+    "description": "CAM SHAFT",
+    "price": "33.85",
+    "corePrice": "2.00",
+    "totalPrice": "35.85"
+  },
+  {
+    "description": "CRANKSHAFT",
+    "price": "52.94",
+    "corePrice": "3.00",
+    "totalPrice": "55.94"
+  },
+  {
+    "description": "ENGINE BLOCK BARE",
+    "price": "110.00",
+    "corePrice": "20.00",
+    "totalPrice": "130.00"
+  },
+  {
+    "description": "OIL PUMP",
+    "price": "19.41",
+    "corePrice": "1.00",
+    "totalPrice": "20.41"
+  },
+  {
+    "description": "HARMONIC BALANCER",
+    "price": "27.50",
+    "corePrice": "1.00",
+    "totalPrice": "28.50"
+  },
+  {
+    "description": "ENGINE MOUNT",
+    "price": "10.88",
+    "corePrice": "1.00",
+    "totalPrice": "11.88"
+  },
+  {
+    "description": "VACUUM PUMP",
+    "price": "21.47",
+    "corePrice": "5.00",
+    "totalPrice": "26.47"
+  },
+  {
+    "description": "TIMING COVER STEEL",
+    "price": "15.00",
+    "corePrice": "1.00",
+    "totalPrice": "16.00"
+  },
+  {
+    "description": "VALVE COVER",
+    "price": "12.94",
+    "corePrice": "1.00",
+    "totalPrice": "13.94"
+  },
+  {
+    "description": "PCV VALVE",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "PISTON AND ROD ASSY",
+    "price": "20.38",
+    "corePrice": "1.00",
+    "totalPrice": "21.38"
+  },
+  {
+    "description": "ROCKER ARM",
+    "price": "4.41",
+    "corePrice": "0.00",
+    "totalPrice": "4.41"
+  },
+  {
+    "description": "SMOG PUMP",
+    "price": "25.88",
+    "corePrice": "5.00",
+    "totalPrice": "30.88"
+  },
+  {
+    "description": "THERMOSTAT HOUSING",
+    "price": "8.10",
+    "corePrice": "0.00",
+    "totalPrice": "8.10"
+  },
+  {
+    "description": "TIMING CHAIN",
+    "price": "9.68",
+    "corePrice": "0.00",
+    "totalPrice": "9.68"
+  },
+  {
+    "description": "TRANSMISSION",
+    "price": "182.35",
+    "corePrice": "25.00",
+    "totalPrice": "207.35"
+  },
+  {
+    "description": "TRANSFER CASE ( 4X4)",
+    "price": "137.50",
+    "corePrice": "25.00",
+    "totalPrice": "162.50"
+  },
+  {
+    "description": "TORQUE CONVERTER",
+    "price": "29.33",
+    "corePrice": "2.00",
+    "totalPrice": "31.33"
+  },
+  {
+    "description": "TRANS OIL COOLER",
+    "price": "16.50",
+    "corePrice": "5.00",
+    "totalPrice": "21.50"
+  },
+  {
+    "description": "SHIFTER  ASSY AUTO",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "SHIFTER BOOT",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "TRANS MOUNT",
+    "price": "13.53",
+    "corePrice": "0.00",
+    "totalPrice": "13.53"
+  },
+  {
+    "description": "FLYWHEEL MANUAL",
+    "price": "27.50",
+    "corePrice": "1.00",
+    "totalPrice": "28.50"
+  },
+  {
+    "description": "TRANS BELL HOUSING",
+    "price": "42.00",
+    "corePrice": "2.00",
+    "totalPrice": "44.00"
+  },
+  {
+    "description": "TRANS DUST COVER",
+    "price": "9.65",
+    "corePrice": "0.00",
+    "totalPrice": "9.65"
+  },
+  {
+    "description": "TRANS HOUSING BARE",
+    "price": "82.50",
+    "corePrice": "10.00",
+    "totalPrice": "92.50"
+  },
+  {
+    "description": "TRANS VALVE BODY",
+    "price": "76.47",
+    "corePrice": "1.00",
+    "totalPrice": "77.47"
+  },
+  {
+    "description": "TRANS CROSS MEMBER",
+    "price": "27.50",
+    "corePrice": "0.00",
+    "totalPrice": "27.50"
+  },
+  {
+    "description": "BUMPER",
+    "price": "82.35",
+    "corePrice": "0.00",
+    "totalPrice": "82.35"
+  },
+  {
+    "description": "HEADERPANEL BARE",
+    "price": "55.00",
+    "corePrice": "2.00",
+    "totalPrice": "57.00"
+  },
+  {
+    "description": "FENDER BARE",
+    "price": "46.95",
+    "corePrice": "3.00",
+    "totalPrice": "49.95"
+  },
+  {
+    "description": "BUMPER REINFORCEMENT",
+    "price": "27.50",
+    "corePrice": "0.00",
+    "totalPrice": "27.50"
+  },
+  {
+    "description": "GRILLE LRG",
+    "price": "39.29",
+    "corePrice": "0.00",
+    "totalPrice": "39.29"
+  },
+  {
+    "description": "HEADLAMP MOTOR",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "HEADLAMP BEZEL",
+    "price": "6.89",
+    "corePrice": "0.00",
+    "totalPrice": "6.89"
+  },
+  {
+    "description": "FENDER EXTENSION",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "BUMPER VALANCE",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "BUMPER PUSH BAR SML",
+    "price": "27.50",
+    "corePrice": "0.00",
+    "totalPrice": "27.50"
+  },
+  {
+    "description": "BUMPER SHOCK",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "INNER FENDER STEEL",
+    "price": "13.00",
+    "corePrice": "0.00",
+    "totalPrice": "13.00"
+  },
+  {
+    "description": "CORE SUPPORT",
+    "price": "55.00",
+    "corePrice": "2.00",
+    "totalPrice": "57.00"
+  },
+  {
+    "description": "BUMPER END CAP",
+    "price": "12.94",
+    "corePrice": "0.00",
+    "totalPrice": "12.94"
+  },
+  {
+    "description": "DOOR SHELL",
+    "price": "66.00",
+    "corePrice": "0.00",
+    "totalPrice": "66.00"
+  },
+  {
+    "description": "DOOR COMPLETE",
+    "price": "110.00",
+    "corePrice": "3.00",
+    "totalPrice": "113.00"
+  },
+  {
+    "description": "WINDOW CRANK HANDLE",
+    "price": "4.91",
+    "corePrice": "0.00",
+    "totalPrice": "4.91"
+  },
+  {
+    "description": "INTERIOR DOOR PANEL",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "HATCH NO GLASS",
+    "price": "82.50",
+    "corePrice": "2.00",
+    "totalPrice": "84.50"
+  },
+  {
+    "description": "HATCH WITH GLASS",
+    "price": "110.00",
+    "corePrice": "3.00",
+    "totalPrice": "113.00"
+  },
+  {
+    "description": "DOOR MANUAL MIRROR",
+    "price": "15.94",
+    "corePrice": "0.00",
+    "totalPrice": "15.94"
+  },
+  {
+    "description": "DOOR POWER MIRROR",
+    "price": "30.00",
+    "corePrice": "0.00",
+    "totalPrice": "30.00"
+  },
+  {
+    "description": "DOOR HANDLE OUTSIDE",
+    "price": "12.69",
+    "corePrice": "0.00",
+    "totalPrice": "12.69"
+  },
+  {
+    "description": "DOOR LOCK ACTUATOR",
+    "price": "11.50",
+    "corePrice": "0.00",
+    "totalPrice": "11.50"
+  },
+  {
+    "description": "ALTERNATOR",
+    "price": "32.35",
+    "corePrice": "10.00",
+    "totalPrice": "42.35"
+  },
+  {
+    "description": "STARTER",
+    "price": "29.22",
+    "corePrice": "10.00",
+    "totalPrice": "39.22"
+  },
+  {
+    "description": "COMPUTER",
+    "price": "41.18",
+    "corePrice": "5.00",
+    "totalPrice": "46.18"
+  },
+  {
+    "description": "ELECTRIC MODULE",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "ANTENNA/POWER",
+    "price": "22.00",
+    "corePrice": "1.00",
+    "totalPrice": "23.00"
+  },
+  {
+    "description": "ANTENNA/MANUAL",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "RADIO CD PLAYER",
+    "price": "29.33",
+    "corePrice": "0.00",
+    "totalPrice": "29.33"
+  },
+  {
+    "description": "WIPER MOTOR",
+    "price": "19.41",
+    "corePrice": "1.00",
+    "totalPrice": "20.41"
+  },
+  {
+    "description": "COIL IGNITION",
+    "price": "9.38",
+    "corePrice": "1.00",
+    "totalPrice": "10.38"
+  },
+  {
+    "description": "COIL PACK",
+    "price": "32.35",
+    "corePrice": "1.00",
+    "totalPrice": "33.35"
+  },
+  {
+    "description": "HORN",
+    "price": "6.76",
+    "corePrice": "0.00",
+    "totalPrice": "6.76"
+  },
+  {
+    "description": "HORN BUTTON",
+    "price": "6.15",
+    "corePrice": "0.00",
+    "totalPrice": "6.15"
+  },
+  {
+    "description": "BATTERY (USED)",
+    "price": "45.97",
+    "corePrice": "13.00",
+    "totalPrice": "58.97"
+  },
+  {
+    "description": "GAUGE SINGLE",
+    "price": "11.18",
+    "corePrice": "0.00",
+    "totalPrice": "11.18"
+  },
+  {
+    "description": "FUSE BOX (BARE)",
+    "price": "20.33",
+    "corePrice": "1.00",
+    "totalPrice": "21.33"
+  },
+  {
+    "description": "SENSOR (OIL/WATER)",
+    "price": "7.86",
+    "corePrice": "0.00",
+    "totalPrice": "7.86"
+  },
+  {
+    "description": "WIRE PIGTAIL",
+    "price": "8.25",
+    "corePrice": "0.00",
+    "totalPrice": "8.25"
+  },
+  {
+    "description": "RADIO SPEAKER",
+    "price": "10.00",
+    "corePrice": "0.00",
+    "totalPrice": "10.00"
+  },
+  {
+    "description": "SUBWOOFER",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "DISTRIBUTOR",
+    "price": "34.71",
+    "corePrice": "2.00",
+    "totalPrice": "36.71"
+  },
+  {
+    "description": "AIR CLEANER HOUSING",
+    "price": "9.58",
+    "corePrice": "0.00",
+    "totalPrice": "9.58"
+  },
+  {
+    "description": "AIR CLEANER LID",
+    "price": "9.25",
+    "corePrice": "0.00",
+    "totalPrice": "9.25"
+  },
+  {
+    "description": "AIR FLOW METER",
+    "price": "24.75",
+    "corePrice": "5.00",
+    "totalPrice": "29.75"
+  },
+  {
+    "description": "FUEL INJECTOR (EACH)",
+    "price": "12.06",
+    "corePrice": "0.00",
+    "totalPrice": "12.06"
+  },
+  {
+    "description": "THROTTLE BODY",
+    "price": "40.12",
+    "corePrice": "5.00",
+    "totalPrice": "45.12"
+  },
+  {
+    "description": "FUEL PUMP MANUAL",
+    "price": "14.86",
+    "corePrice": "0.00",
+    "totalPrice": "14.86"
+  },
+  {
+    "description": "FUEL INJECTION RAIL",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "CARBURETOR",
+    "price": "38.82",
+    "corePrice": "5.00",
+    "totalPrice": "43.82"
+  },
+  {
+    "description": "INTAKE MANIFOLD",
+    "price": "36.45",
+    "corePrice": "2.00",
+    "totalPrice": "38.45"
+  },
+  {
+    "description": "FUEL SEND UNIT",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "FUEL PUMP ELEC ASSEM",
+    "price": "38.50",
+    "corePrice": "1.00",
+    "totalPrice": "39.50"
+  },
+  {
+    "description": "FUEL FILTER",
+    "price": "3.87",
+    "corePrice": "0.00",
+    "totalPrice": "3.87"
+  },
+  {
+    "description": "FUEL FILLER DOOR",
+    "price": "7.35",
+    "corePrice": "0.00",
+    "totalPrice": "7.35"
+  },
+  {
+    "description": "AIR FILTER",
+    "price": "4.51",
+    "corePrice": "0.00",
+    "totalPrice": "4.51"
+  },
+  {
+    "description": "WINDSHIELD",
+    "price": "55.00",
+    "corePrice": "0.00",
+    "totalPrice": "55.00"
+  },
+  {
+    "description": "BACK GLASS",
+    "price": "47.65",
+    "corePrice": "0.00",
+    "totalPrice": "47.65"
+  },
+  {
+    "description": "DOOR GLASS",
+    "price": "38.50",
+    "corePrice": "0.00",
+    "totalPrice": "38.50"
+  },
+  {
+    "description": "WINDOW MOTOR",
+    "price": "18.84",
+    "corePrice": "1.00",
+    "totalPrice": "19.84"
+  },
+  {
+    "description": "WINDOW REGULATOR",
+    "price": "19.41",
+    "corePrice": "1.00",
+    "totalPrice": "20.41"
+  },
+  {
+    "description": "QUARTER GLASS LRG",
+    "price": "38.50",
+    "corePrice": "0.00",
+    "totalPrice": "38.50"
+  },
+  {
+    "description": "VENT GLASS",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "VENT GLASS ASSY",
+    "price": "27.50",
+    "corePrice": "0.00",
+    "totalPrice": "27.50"
+  },
+  {
+    "description": "GLASS HATCH",
+    "price": "55.00",
+    "corePrice": "0.00",
+    "totalPrice": "55.00"
+  },
+  {
+    "description": "SUNROOF/T-TOP",
+    "price": "56.45",
+    "corePrice": "0.00",
+    "totalPrice": "56.45"
+  },
+  {
+    "description": "DOOR RUBBER",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "A/C COMPRESSOR",
+    "price": "49.00",
+    "corePrice": "10.00",
+    "totalPrice": "59.00"
+  },
+  {
+    "description": "A/C CONDENSER",
+    "price": "38.50",
+    "corePrice": "10.00",
+    "totalPrice": "48.50"
+  },
+  {
+    "description": "HEATER CONTRL (MAN.)",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "HEATER CNTRL (ELEC.)",
+    "price": "25.25",
+    "corePrice": "0.00",
+    "totalPrice": "25.25"
+  },
+  {
+    "description": "HEATER HOUSING",
+    "price": "21.87",
+    "corePrice": "0.00",
+    "totalPrice": "21.87"
+  },
+  {
+    "description": "HEATER BLOWER MOTOR",
+    "price": "17.21",
+    "corePrice": "1.00",
+    "totalPrice": "18.21"
+  },
+  {
+    "description": "A/C EVAPORATOR",
+    "price": "22.00",
+    "corePrice": "5.00",
+    "totalPrice": "27.00"
+  },
+  {
+    "description": "HEATER CORE",
+    "price": "13.50",
+    "corePrice": "5.00",
+    "totalPrice": "18.50"
+  },
+  {
+    "description": "A/C SUITCASE",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "BUCKET SEAT ELCTRIC",
+    "price": "64.71",
+    "corePrice": "0.00",
+    "totalPrice": "64.71"
+  },
+  {
+    "description": "BENCH SEAT ELECTRIC",
+    "price": "75.00",
+    "corePrice": "0.00",
+    "totalPrice": "75.00"
+  },
+  {
+    "description": "CLOCK",
+    "price": "6.76",
+    "corePrice": "0.00",
+    "totalPrice": "6.76"
+  },
+  {
+    "description": "SEAT BELT",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "BENCH SEAT MANUAL",
+    "price": "65.00",
+    "corePrice": "0.00",
+    "totalPrice": "65.00"
+  },
+  {
+    "description": "SEAT TRACK ELECTRIC",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "SEAT MOTOR",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "DOME LIGHT",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "SEAT SECTION",
+    "price": "23.38",
+    "corePrice": "0.00",
+    "totalPrice": "23.38"
+  },
+  {
+    "description": "ASHTRAY",
+    "price": "4.94",
+    "corePrice": "0.00",
+    "totalPrice": "4.94"
+  },
+  {
+    "description": "CUP HOLDER",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "CONSOLE BARE",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "ARM REST",
+    "price": "9.82",
+    "corePrice": "0.00",
+    "totalPrice": "9.82"
+  },
+  {
+    "description": "CARPET",
+    "price": "30.00",
+    "corePrice": "0.00",
+    "totalPrice": "30.00"
+  },
+  {
+    "description": "FLOOR MAT",
+    "price": "4.41",
+    "corePrice": "0.00",
+    "totalPrice": "4.41"
+  },
+  {
+    "description": "GLOVE BOX DOOR",
+    "price": "10.33",
+    "corePrice": "0.00",
+    "totalPrice": "10.33"
+  },
+  {
+    "description": "CONSOLE LID",
+    "price": "10.00",
+    "corePrice": "0.00",
+    "totalPrice": "10.00"
+  },
+  {
+    "description": "HEAD LINER",
+    "price": "20.63",
+    "corePrice": "0.00",
+    "totalPrice": "20.63"
+  },
+  {
+    "description": "MIRROR INTERIOR",
+    "price": "11.36",
+    "corePrice": "0.00",
+    "totalPrice": "11.36"
+  },
+  {
+    "description": "SEAT COVER (EACH)",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "DASH (BARE)",
+    "price": "56.47",
+    "corePrice": "0.00",
+    "totalPrice": "56.47"
+  },
+  {
+    "description": "INSTRUMENT CLUSTER",
+    "price": "38.50",
+    "corePrice": "1.00",
+    "totalPrice": "39.50"
+  },
+  {
+    "description": "INSTR CLUSTER BEZEL",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "PEDAL (EACH)",
+    "price": "16.92",
+    "corePrice": "0.00",
+    "totalPrice": "16.92"
+  },
+  {
+    "description": "WASHER BOTTLE",
+    "price": "10.29",
+    "corePrice": "0.00",
+    "totalPrice": "10.29"
+  },
+  {
+    "description": "WASHER BOTTLE PUMP",
+    "price": "7.64",
+    "corePrice": "0.00",
+    "totalPrice": "7.64"
+  },
+  {
+    "description": "WIPER ARM",
+    "price": "5.64",
+    "corePrice": "0.00",
+    "totalPrice": "5.64"
+  },
+  {
+    "description": "WIPER BLADE",
+    "price": "2.10",
+    "corePrice": "0.00",
+    "totalPrice": "2.10"
+  },
+  {
+    "description": "MANI EXHST (NO SENS)",
+    "price": "33.53",
+    "corePrice": "2.00",
+    "totalPrice": "35.53"
+  },
+  {
+    "description": "MUFFLER",
+    "price": "20.88",
+    "corePrice": "0.00",
+    "totalPrice": "20.88"
+  },
+  {
+    "description": "EXHAUST PIPE",
+    "price": "13.50",
+    "corePrice": "0.00",
+    "totalPrice": "13.50"
+  },
+  {
+    "description": "CHARCOAL CANISTER",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "EGR VALVE (EACH)",
+    "price": "14.09",
+    "corePrice": "0.00",
+    "totalPrice": "14.09"
+  },
+  {
+    "description": "HEADLAMP COMPOSITE",
+    "price": "28.13",
+    "corePrice": "0.00",
+    "totalPrice": "28.13"
+  },
+  {
+    "description": "HEADLAMP SEALED BEAM",
+    "price": "8.10",
+    "corePrice": "0.00",
+    "totalPrice": "8.10"
+  },
+  {
+    "description": "HEADLAMP COMP BULB",
+    "price": "3.10",
+    "corePrice": "0.00",
+    "totalPrice": "3.10"
+  },
+  {
+    "description": "HEADLAMP DOOR (EACH)",
+    "price": "8.10",
+    "corePrice": "0.00",
+    "totalPrice": "8.10"
+  },
+  {
+    "description": "TAIL LIGHT ASSY LRG",
+    "price": "32.93",
+    "corePrice": "0.00",
+    "totalPrice": "32.93"
+  },
+  {
+    "description": "HEADLAMP BUCKET",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "3RD BRAKE LIGHT",
+    "price": "8.59",
+    "corePrice": "0.00",
+    "totalPrice": "8.59"
+  },
+  {
+    "description": "JACK BOTTLE/SCREW",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "PULLEY BARE",
+    "price": "9.32",
+    "corePrice": "0.00",
+    "totalPrice": "9.32"
+  },
+  {
+    "description": "AIR CLEANER HOSE",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "DOOR LATCH",
+    "price": "13.82",
+    "corePrice": "0.00",
+    "totalPrice": "13.82"
+  },
+  {
+    "description": "MOLDING",
+    "price": "18.25",
+    "corePrice": "0.00",
+    "totalPrice": "18.25"
+  },
+  {
+    "description": "WIRE HARENESS COMPLE",
+    "price": "44.00",
+    "corePrice": "3.00",
+    "totalPrice": "47.00"
+  },
+  {
+    "description": "SCREWS/BOLTS",
+    "price": "1.50",
+    "corePrice": "0.00",
+    "totalPrice": "1.50"
+  },
+  {
+    "description": "HOOD HINGE",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "RADIATOR",
+    "price": "50.32",
+    "corePrice": "8.00",
+    "totalPrice": "58.32"
+  },
+  {
+    "description": "FAN CLUTCH",
+    "price": "14.67",
+    "corePrice": "1.00",
+    "totalPrice": "15.67"
+  },
+  {
+    "description": "FAN SHROUD",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "FAN BLADE",
+    "price": "10.92",
+    "corePrice": "1.00",
+    "totalPrice": "11.92"
+  },
+  {
+    "description": "WATER PUMP",
+    "price": "14.71",
+    "corePrice": "2.00",
+    "totalPrice": "16.71"
+  },
+  {
+    "description": "RADIATOR BOTTLE",
+    "price": "9.12",
+    "corePrice": "0.00",
+    "totalPrice": "9.12"
+  },
+  {
+    "description": "FAN BELT",
+    "price": "4.78",
+    "corePrice": "0.00",
+    "totalPrice": "4.78"
+  },
+  {
+    "description": "FAN ELECTRIC DUAL",
+    "price": "55.00",
+    "corePrice": "2.00",
+    "totalPrice": "57.00"
+  },
+  {
+    "description": "CARRIER BEARING",
+    "price": "17.75",
+    "corePrice": "1.00",
+    "totalPrice": "18.75"
+  },
+  {
+    "description": "CLUTCH DISC",
+    "price": "13.75",
+    "corePrice": "1.00",
+    "totalPrice": "14.75"
+  },
+  {
+    "description": "CLUTCH FORK",
+    "price": "9.48",
+    "corePrice": "0.00",
+    "totalPrice": "9.48"
+  },
+  {
+    "description": "CLUTCH MSTR CYLINDER",
+    "price": "18.09",
+    "corePrice": "5.00",
+    "totalPrice": "23.09"
+  },
+  {
+    "description": "SLAVE CYLINDER",
+    "price": "12.94",
+    "corePrice": "1.00",
+    "totalPrice": "13.94"
+  },
+  {
+    "description": "PRESSURE PLATE",
+    "price": "15.94",
+    "corePrice": "1.00",
+    "totalPrice": "16.94"
+  },
+  {
+    "description": "DRIVE SHAFT YOKE",
+    "price": "11.00",
+    "corePrice": "1.00",
+    "totalPrice": "12.00"
+  },
+  {
+    "description": "DRIVE SHAFT",
+    "price": "41.76",
+    "corePrice": "1.00",
+    "totalPrice": "42.76"
+  },
+  {
+    "description": "AXLE CARRIER",
+    "price": "55.00",
+    "corePrice": "25.00",
+    "totalPrice": "80.00"
+  },
+  {
+    "description": "TRUCK BED BARE",
+    "price": "275.00",
+    "corePrice": "15.00",
+    "totalPrice": "290.00"
+  },
+  {
+    "description": "BED LINER",
+    "price": "38.50",
+    "corePrice": "0.00",
+    "totalPrice": "38.50"
+  },
+  {
+    "description": "TRUCK CAB BARE",
+    "price": "247.79",
+    "corePrice": "0.00",
+    "totalPrice": "247.79"
+  },
+  {
+    "description": "CAMPER SHELL",
+    "price": "110.00",
+    "corePrice": "0.00",
+    "totalPrice": "110.00"
+  },
+  {
+    "description": "TAIL GATE/ ENDGATE",
+    "price": "82.50",
+    "corePrice": "3.00",
+    "totalPrice": "85.50"
+  },
+  {
+    "description": "ROLL BAR NO-LIGHTS",
+    "price": "64.71",
+    "corePrice": "0.00",
+    "totalPrice": "64.71"
+  },
+  {
+    "description": "TRAILERHITCH RECEIVE",
+    "price": "28.50",
+    "corePrice": "0.00",
+    "totalPrice": "28.50"
+  },
+  {
+    "description": "ENG SUB FRAME",
+    "price": "64.71",
+    "corePrice": "2.00",
+    "totalPrice": "66.71"
+  },
+  {
+    "description": "FRAME HORN",
+    "price": "65.00",
+    "corePrice": "2.00",
+    "totalPrice": "67.00"
+  },
+  {
+    "description": "CONVERTIBLE W/FRAME",
+    "price": "115.00",
+    "corePrice": "2.00",
+    "totalPrice": "117.00"
+  },
+  {
+    "description": "AXLE SHAFT SOLID TYP",
+    "price": "55.00",
+    "corePrice": "10.00",
+    "totalPrice": "65.00"
+  },
+  {
+    "description": "FRONT AXLE ASSY 4X4",
+    "price": "161.76",
+    "corePrice": "25.00",
+    "totalPrice": "186.76"
+  },
+  {
+    "description": "C-V AXLE FRNT  DRIVE",
+    "price": "36.75",
+    "corePrice": "10.00",
+    "totalPrice": "46.75"
+  },
+  {
+    "description": "QUARTER PANEL",
+    "price": "86.67",
+    "corePrice": "3.00",
+    "totalPrice": "89.67"
+  },
+  {
+    "description": "DECK LID NO LIGHTS",
+    "price": "49.50",
+    "corePrice": "0.00",
+    "totalPrice": "49.50"
+  },
+  {
+    "description": "SPOILER",
+    "price": "24.71",
+    "corePrice": "0.00",
+    "totalPrice": "24.71"
+  },
+  {
+    "description": "STEERING BOX POWER",
+    "price": "65.00",
+    "corePrice": "10.00",
+    "totalPrice": "75.00"
+  },
+  {
+    "description": "POWER STEERING PUMP",
+    "price": "30.50",
+    "corePrice": "10.00",
+    "totalPrice": "40.50"
+  },
+  {
+    "description": "TIE ROD ASSEMBLY",
+    "price": "32.35",
+    "corePrice": "0.00",
+    "totalPrice": "32.35"
+  },
+  {
+    "description": "TIE ROD END",
+    "price": "8.25",
+    "corePrice": "0.00",
+    "totalPrice": "8.25"
+  },
+  {
+    "description": "SPINDLE W/AXLE FWD",
+    "price": "58.24",
+    "corePrice": "10.00",
+    "totalPrice": "68.24"
+  },
+  {
+    "description": "PITMAN ARM",
+    "price": "12.22",
+    "corePrice": "1.00",
+    "totalPrice": "13.22"
+  },
+  {
+    "description": "RACK AND PINION",
+    "price": "48.86",
+    "corePrice": "10.00",
+    "totalPrice": "58.86"
+  },
+  {
+    "description": "IDLER ARM",
+    "price": "9.17",
+    "corePrice": "1.00",
+    "totalPrice": "10.17"
+  },
+  {
+    "description": "STEERING COLUMN TILT",
+    "price": "82.50",
+    "corePrice": "1.00",
+    "totalPrice": "83.50"
+  },
+  {
+    "description": "STEERING WHEEL",
+    "price": "17.86",
+    "corePrice": "0.00",
+    "totalPrice": "17.86"
+  },
+  {
+    "description": "STRUT ASSEMBLY",
+    "price": "32.00",
+    "corePrice": "1.00",
+    "totalPrice": "33.00"
+  },
+  {
+    "description": "CONTROL ARM",
+    "price": "32.35",
+    "corePrice": "2.00",
+    "totalPrice": "34.35"
+  },
+  {
+    "description": "HUB 8 LUG",
+    "price": "25.88",
+    "corePrice": "0.00",
+    "totalPrice": "25.88"
+  },
+  {
+    "description": "HUB 4-6 LUG",
+    "price": "16.92",
+    "corePrice": "1.00",
+    "totalPrice": "17.92"
+  },
+  {
+    "description": "SHOCK",
+    "price": "12.94",
+    "corePrice": "0.00",
+    "totalPrice": "12.94"
+  },
+  {
+    "description": "COIL SPRING",
+    "price": "14.86",
+    "corePrice": "1.00",
+    "totalPrice": "15.86"
+  },
+  {
+    "description": "LEAF SPRING",
+    "price": "37.65",
+    "corePrice": "3.00",
+    "totalPrice": "40.65"
+  },
+  {
+    "description": "AIR SHOCK PUMP",
+    "price": "38.50",
+    "corePrice": "0.00",
+    "totalPrice": "38.50"
+  },
+  {
+    "description": "REAR AXLE ASSM 4-6LU",
+    "price": "180.00",
+    "corePrice": "25.00",
+    "totalPrice": "205.00"
+  },
+  {
+    "description": "REAR END HOUSING BAR",
+    "price": "62.50",
+    "corePrice": "3.00",
+    "totalPrice": "65.50"
+  },
+  {
+    "description": "REAR END PINION/RING",
+    "price": "62.25",
+    "corePrice": "1.00",
+    "totalPrice": "63.25"
+  },
+  {
+    "description": "SWAY BAR",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "TORSION BAR",
+    "price": "18.64",
+    "corePrice": "1.00",
+    "totalPrice": "19.64"
+  },
+  {
+    "description": "DRAG LINK",
+    "price": "25.88",
+    "corePrice": "0.00",
+    "totalPrice": "25.88"
+  },
+  {
+    "description": "WINDOW SWITCH MASTER",
+    "price": "15.00",
+    "corePrice": "0.00",
+    "totalPrice": "15.00"
+  },
+  {
+    "description": "WINDOW SWITCH POWER",
+    "price": "8.46",
+    "corePrice": "0.00",
+    "totalPrice": "8.46"
+  },
+  {
+    "description": "TURN SIGNALSWITCH",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "RELAY (EACH)",
+    "price": "3.82",
+    "corePrice": "0.00",
+    "totalPrice": "3.82"
+  },
+  {
+    "description": "DOOR LOCK CYLINDER",
+    "price": "2.75",
+    "corePrice": "0.00",
+    "totalPrice": "2.75"
+  },
+  {
+    "description": "STARTER SOLENOID",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "WHL ALUM/CHRO 4-6LUG",
+    "price": "36.00",
+    "corePrice": "5.00",
+    "totalPrice": "41.00"
+  },
+  {
+    "description": "WHEEL STEEL 4-6 LUG",
+    "price": "16.00",
+    "corePrice": "1.00",
+    "totalPrice": "17.00"
+  },
+  {
+    "description": "HUB CAP/WHEEL COVER",
+    "price": "6.15",
+    "corePrice": "0.00",
+    "totalPrice": "6.15"
+  },
+  {
+    "description": "TIRE/WHL ALUM 225 SM",
+    "price": "50.00",
+    "corePrice": "5.00",
+    "totalPrice": "55.00"
+  },
+  {
+    "description": "BRAKE PAD/SHOE (EA)",
+    "price": "2.94",
+    "corePrice": "0.00",
+    "totalPrice": "2.94"
+  },
+  {
+    "description": "BRAKE MASTER CYLINDR",
+    "price": "17.65",
+    "corePrice": "5.00",
+    "totalPrice": "22.65"
+  },
+  {
+    "description": "BRAKE HYDRO BSTR",
+    "price": "55.00",
+    "corePrice": "5.00",
+    "totalPrice": "60.00"
+  },
+  {
+    "description": "BRAKE ABS CONTROLLER",
+    "price": "55.00",
+    "corePrice": "10.00",
+    "totalPrice": "65.00"
+  },
+  {
+    "description": "BRAKE PROPORTIONING",
+    "price": "12.94",
+    "corePrice": "0.00",
+    "totalPrice": "12.94"
+  },
+  {
+    "description": "BRAKE ROTOR",
+    "price": "25.29",
+    "corePrice": "1.00",
+    "totalPrice": "26.29"
+  },
+  {
+    "description": "BRAKE D/R W/HUB 8 LU",
+    "price": "55.00",
+    "corePrice": "2.00",
+    "totalPrice": "57.00"
+  },
+  {
+    "description": "BRAKE DRUM 8 LUG",
+    "price": "38.50",
+    "corePrice": "2.00",
+    "totalPrice": "40.50"
+  },
+  {
+    "description": "BRAKE D/R W/HUB 4-6L",
+    "price": "27.50",
+    "corePrice": "2.00",
+    "totalPrice": "29.50"
+  },
+  {
+    "description": "BRAKE CALIPER 2-4 PI",
+    "price": "38.50",
+    "corePrice": "5.00",
+    "totalPrice": "43.50"
+  },
+  {
+    "description": "SPARE TIRE COVER MET",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "SPARE TIRE CARRIER C",
+    "price": "18.75",
+    "corePrice": "0.00",
+    "totalPrice": "18.75"
+  },
+  {
+    "description": "SPARE TIRE SWNG AWAY",
+    "price": "27.50",
+    "corePrice": "2.00",
+    "totalPrice": "29.50"
+  },
+  {
+    "description": "BRAKE FLUID RESEVOIR",
+    "price": "9.17",
+    "corePrice": "0.00",
+    "totalPrice": "9.17"
+  },
+  {
+    "description": "BATTERY TRAY",
+    "price": "6.50",
+    "corePrice": "0.00",
+    "totalPrice": "6.50"
+  },
+  {
+    "description": "DISTR CAP BARE",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "SPARK PLUG/WIRE",
+    "price": "2.10",
+    "corePrice": "0.00",
+    "totalPrice": "2.10"
+  },
+  {
+    "description": "HEADLAMP BULBS",
+    "price": "3.24",
+    "corePrice": "0.00",
+    "totalPrice": "3.24"
+  },
+  {
+    "description": "GAS/OIL CAP",
+    "price": "3.23",
+    "corePrice": "0.00",
+    "totalPrice": "3.23"
+  },
+  {
+    "description": "ANTIFREEZE",
+    "price": "4.69",
+    "corePrice": "0.00",
+    "totalPrice": "4.69"
+  },
+  {
+    "description": "CIGARETTE LIGHTER",
+    "price": "4.20",
+    "corePrice": "0.00",
+    "totalPrice": "4.20"
+  },
+  {
+    "description": "EMBLEM",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "JUMPER CABLES",
+    "price": "9.32",
+    "corePrice": "0.00",
+    "totalPrice": "9.32"
+  },
+  {
+    "description": "LUGGAGE RACK",
+    "price": "29.41",
+    "corePrice": "0.00",
+    "totalPrice": "29.41"
+  },
+  {
+    "description": "RUNNING BOARD",
+    "price": "27.50",
+    "corePrice": "1.00",
+    "totalPrice": "28.50"
+  },
+  {
+    "description": "GATE FEE",
+    "price": "2.00",
+    "corePrice": "0.00",
+    "totalPrice": "2.00"
+  },
+  {
+    "description": "ACCELERATOR CABLE",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "TRAILER BALL",
+    "price": "4.74",
+    "corePrice": "0.00",
+    "totalPrice": "4.74"
+  },
+  {
+    "description": "TRAILING ARM",
+    "price": "12.94",
+    "corePrice": "0.00",
+    "totalPrice": "12.94"
+  },
+  {
+    "description": "FRONT AXLE SHAFT 4X4",
+    "price": "55.00",
+    "corePrice": "10.00",
+    "totalPrice": "65.00"
+  },
+  {
+    "description": "AXLE TAG",
+    "price": "110.00",
+    "corePrice": "6.00",
+    "totalPrice": "116.00"
+  },
+  {
+    "description": "REAR AXLE ASSM 8 LUG",
+    "price": "210.00",
+    "corePrice": "25.00",
+    "totalPrice": "235.00"
+  },
+  {
+    "description": "ALXE DIF COVER",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "REAR END 3RD MEMBER",
+    "price": "82.50",
+    "corePrice": "10.00",
+    "totalPrice": "92.50"
+  },
+  {
+    "description": "TRAILER AXLE",
+    "price": "110.00",
+    "corePrice": "10.00",
+    "totalPrice": "120.00"
+  },
+  {
+    "description": "BACKING PLATE BARE",
+    "price": "15.00",
+    "corePrice": "0.00",
+    "totalPrice": "15.00"
+  },
+  {
+    "description": "BRAKE ADJUSTER",
+    "price": "2.75",
+    "corePrice": "0.00",
+    "totalPrice": "2.75"
+  },
+  {
+    "description": "BRAKE BOOSTER",
+    "price": "38.19",
+    "corePrice": "10.00",
+    "totalPrice": "48.19"
+  },
+  {
+    "description": "BRAKE CABLE",
+    "price": "13.41",
+    "corePrice": "0.00",
+    "totalPrice": "13.41"
+  },
+  {
+    "description": "BRAKE CALIPER 1 PIST",
+    "price": "19.41",
+    "corePrice": "5.00",
+    "totalPrice": "24.41"
+  },
+  {
+    "description": "BRAKE DRUM 4-6 LUG",
+    "price": "25.88",
+    "corePrice": "1.00",
+    "totalPrice": "26.88"
+  },
+  {
+    "description": "BRAKE EMERGCY ASSY",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "BRAKE HOSE/LINE",
+    "price": "7.43",
+    "corePrice": "0.00",
+    "totalPrice": "7.43"
+  },
+  {
+    "description": "MASTER CYL W/ PLAST",
+    "price": "27.50",
+    "corePrice": "5.00",
+    "totalPrice": "32.50"
+  },
+  {
+    "description": "BRAKE PEDAL",
+    "price": "12.94",
+    "corePrice": "0.00",
+    "totalPrice": "12.94"
+  },
+  {
+    "description": "BRAKE WHEEL CYL",
+    "price": "5.98",
+    "corePrice": "0.00",
+    "totalPrice": "5.98"
+  },
+  {
+    "description": "COWL",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "DASH PAD",
+    "price": "24.32",
+    "corePrice": "0.00",
+    "totalPrice": "24.32"
+  },
+  {
+    "description": "GLOVE BOX",
+    "price": "12.94",
+    "corePrice": "0.00",
+    "totalPrice": "12.94"
+  },
+  {
+    "description": "GLOVE BOX LOCK",
+    "price": "4.12",
+    "corePrice": "0.00",
+    "totalPrice": "4.12"
+  },
+  {
+    "description": "SPEEDOMETER",
+    "price": "23.57",
+    "corePrice": "0.00",
+    "totalPrice": "23.57"
+  },
+  {
+    "description": "SPEEDOMETER CABLE",
+    "price": "8.21",
+    "corePrice": "0.00",
+    "totalPrice": "8.21"
+  },
+  {
+    "description": "TACHOMETER",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "TURN SIGNAL LEVER",
+    "price": "9.38",
+    "corePrice": "0.00",
+    "totalPrice": "9.38"
+  },
+  {
+    "description": "STEERING CLMN NOTILT",
+    "price": "55.00",
+    "corePrice": "1.00",
+    "totalPrice": "56.00"
+  },
+  {
+    "description": "DOOR HANDLE INSIDE",
+    "price": "9.71",
+    "corePrice": "0.00",
+    "totalPrice": "9.71"
+  },
+  {
+    "description": "DOOR HINGE",
+    "price": "11.22",
+    "corePrice": "0.00",
+    "totalPrice": "11.22"
+  },
+  {
+    "description": "DOOR MIRROR HANGING",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "DOOR REAR NO GLASS",
+    "price": "57.00",
+    "corePrice": "0.00",
+    "totalPrice": "57.00"
+  },
+  {
+    "description": "DOOR REAR W/GLASS",
+    "price": "100.00",
+    "corePrice": "0.00",
+    "totalPrice": "100.00"
+  },
+  {
+    "description": "DOOR SLIDING VAN",
+    "price": "82.50",
+    "corePrice": "2.00",
+    "totalPrice": "84.50"
+  },
+  {
+    "description": "STRIKER",
+    "price": "2.75",
+    "corePrice": "0.00",
+    "totalPrice": "2.75"
+  },
+  {
+    "description": "CLUTCH CABLE",
+    "price": "18.64",
+    "corePrice": "0.00",
+    "totalPrice": "18.64"
+  },
+  {
+    "description": "CLUTCH PEDAL ASSY",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "THROW OUT BEARING",
+    "price": "7.53",
+    "corePrice": "0.00",
+    "totalPrice": "7.53"
+  },
+  {
+    "description": "U JOINT",
+    "price": "6.89",
+    "corePrice": "0.00",
+    "totalPrice": "6.89"
+  },
+  {
+    "description": "BATTERY CABLE",
+    "price": "5.50",
+    "corePrice": "1.00",
+    "totalPrice": "6.50"
+  },
+  {
+    "description": "CRUISE CONTROL LEVER",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "CRUISE CONTROL SERVO",
+    "price": "15.71",
+    "corePrice": "0.00",
+    "totalPrice": "15.71"
+  },
+  {
+    "description": "CRUSE CONTROL BRAIN",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "IGNITION SWITCH",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "SOLENOID (LOCK)",
+    "price": "16.18",
+    "corePrice": "0.00",
+    "totalPrice": "16.18"
+  },
+  {
+    "description": "VOLTAGE REGULATOR",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "DISTRIBUTOR MODULE",
+    "price": "21.15",
+    "corePrice": "0.00",
+    "totalPrice": "21.15"
+  },
+  {
+    "description": "GLOW PLUG",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "SPARKPLUG",
+    "price": "1.87",
+    "corePrice": "0.00",
+    "totalPrice": "1.87"
+  },
+  {
+    "description": "LIFTER",
+    "price": "6.11",
+    "corePrice": "0.00",
+    "totalPrice": "6.11"
+  },
+  {
+    "description": "PUSH ROD",
+    "price": "3.89",
+    "corePrice": "0.00",
+    "totalPrice": "3.89"
+  },
+  {
+    "description": "ROCKER SHAFT ASSY",
+    "price": "29.41",
+    "corePrice": "0.00",
+    "totalPrice": "29.41"
+  },
+  {
+    "description": "TIMING COVER ALUM",
+    "price": "19.41",
+    "corePrice": "2.00",
+    "totalPrice": "21.41"
+  },
+  {
+    "description": "TIMING COVER PLASTIC",
+    "price": "12.65",
+    "corePrice": "0.00",
+    "totalPrice": "12.65"
+  },
+  {
+    "description": "AIR CLEANER BOX PLAS",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "AIR FILTER AFTERMARK",
+    "price": "6.29",
+    "corePrice": "0.00",
+    "totalPrice": "6.29"
+  },
+  {
+    "description": "SMOG PUMP TUBES",
+    "price": "9.48",
+    "corePrice": "0.00",
+    "totalPrice": "9.48"
+  },
+  {
+    "description": "GULP VALVE",
+    "price": "10.19",
+    "corePrice": "0.00",
+    "totalPrice": "10.19"
+  },
+  {
+    "description": "HEAD (OH CAM)",
+    "price": "82.50",
+    "corePrice": "10.00",
+    "totalPrice": "92.50"
+  },
+  {
+    "description": "DIPSTICK",
+    "price": "5.17",
+    "corePrice": "0.00",
+    "totalPrice": "5.17"
+  },
+  {
+    "description": "ENGINE COMPLETE",
+    "price": "438.46",
+    "corePrice": "25.00",
+    "totalPrice": "463.46"
+  },
+  {
+    "description": "ENGINE COVER",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "ENGINE SHORT BLOCK",
+    "price": "187.50",
+    "corePrice": "20.00",
+    "totalPrice": "207.50"
+  },
+  {
+    "description": "INTAKE MANIFOLD AFTE",
+    "price": "55.00",
+    "corePrice": "5.00",
+    "totalPrice": "60.00"
+  },
+  {
+    "description": "OIL COOLER",
+    "price": "16.50",
+    "corePrice": "5.00",
+    "totalPrice": "21.50"
+  },
+  {
+    "description": "EGR PLATE",
+    "price": "7.75",
+    "corePrice": "0.00",
+    "totalPrice": "7.75"
+  },
+  {
+    "description": "EXHAUST HEADERS TUBE",
+    "price": "27.50",
+    "corePrice": "0.00",
+    "totalPrice": "27.50"
+  },
+  {
+    "description": "EXHAUST HEAT PIPE",
+    "price": "3.95",
+    "corePrice": "0.00",
+    "totalPrice": "3.95"
+  },
+  {
+    "description": "EXHAUST HEAT SHIELD",
+    "price": "7.86",
+    "corePrice": "0.00",
+    "totalPrice": "7.86"
+  },
+  {
+    "description": "MUFFLER AFTERMARKET",
+    "price": "27.50",
+    "corePrice": "0.00",
+    "totalPrice": "27.50"
+  },
+  {
+    "description": "OXYGEN SENSOR",
+    "price": "11.47",
+    "corePrice": "1.00",
+    "totalPrice": "12.47"
+  },
+  {
+    "description": "BUMPER BRACKET",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "FENDER SKIRT",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "GRILLE SML",
+    "price": "19.64",
+    "corePrice": "0.00",
+    "totalPrice": "19.64"
+  },
+  {
+    "description": "HOOD",
+    "price": "70.59",
+    "corePrice": "3.00",
+    "totalPrice": "73.59"
+  },
+  {
+    "description": "HOOD LATCH",
+    "price": "12.94",
+    "corePrice": "0.00",
+    "totalPrice": "12.94"
+  },
+  {
+    "description": "HOOD ORNAMENT",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "HOOD RELEASE CABLE",
+    "price": "7.33",
+    "corePrice": "0.00",
+    "totalPrice": "7.33"
+  },
+  {
+    "description": "BALL JOINT",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "CARB BASE PLATE",
+    "price": "8.46",
+    "corePrice": "0.00",
+    "totalPrice": "8.46"
+  },
+  {
+    "description": "FUEL DISTRIBUTOR",
+    "price": "39.62",
+    "corePrice": "0.00",
+    "totalPrice": "39.62"
+  },
+  {
+    "description": "FUEL INJECTION PUMP",
+    "price": "64.71",
+    "corePrice": "5.00",
+    "totalPrice": "69.71"
+  },
+  {
+    "description": "FUEL LINE",
+    "price": "9.17",
+    "corePrice": "0.00",
+    "totalPrice": "9.17"
+  },
+  {
+    "description": "FUEL PUMP ELECTRIC",
+    "price": "28.08",
+    "corePrice": "1.00",
+    "totalPrice": "29.08"
+  },
+  {
+    "description": "FUEL TANK",
+    "price": "38.50",
+    "corePrice": "0.00",
+    "totalPrice": "38.50"
+  },
+  {
+    "description": "TANK SWITCH",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "FILLER NECK HOSE",
+    "price": "7.86",
+    "corePrice": "0.00",
+    "totalPrice": "7.86"
+  },
+  {
+    "description": "SHOCK HOOD/LID",
+    "price": "9.72",
+    "corePrice": "0.00",
+    "totalPrice": "9.72"
+  },
+  {
+    "description": "THROTTLE CABLE",
+    "price": "11.36",
+    "corePrice": "0.00",
+    "totalPrice": "11.36"
+  },
+  {
+    "description": "DOOR MIRROR GLASS",
+    "price": "7.75",
+    "corePrice": "0.00",
+    "totalPrice": "7.75"
+  },
+  {
+    "description": "QUARTER GLASS SML",
+    "price": "32.35",
+    "corePrice": "0.00",
+    "totalPrice": "32.35"
+  },
+  {
+    "description": "TAILGATE GLASS",
+    "price": "55.00",
+    "corePrice": "0.00",
+    "totalPrice": "55.00"
+  },
+  {
+    "description": "WINDSHIELD RUBBER",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "WIPER GRILL",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "COMPRESSOR CLUTCH",
+    "price": "11.25",
+    "corePrice": "1.00",
+    "totalPrice": "12.25"
+  },
+  {
+    "description": "A/C DRYER",
+    "price": "11.00",
+    "corePrice": "1.00",
+    "totalPrice": "12.00"
+  },
+  {
+    "description": "A/C HOSE DOUBLE",
+    "price": "25.00",
+    "corePrice": "1.00",
+    "totalPrice": "26.00"
+  },
+  {
+    "description": "A/C HOSE SINGLE",
+    "price": "18.64",
+    "corePrice": "1.00",
+    "totalPrice": "19.64"
+  },
+  {
+    "description": "A/C UNDER DASH UNIT",
+    "price": "55.00",
+    "corePrice": "5.00",
+    "totalPrice": "60.00"
+  },
+  {
+    "description": "HEAT RISER",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "HEATER ASSEMBLY",
+    "price": "55.00",
+    "corePrice": "5.00",
+    "totalPrice": "60.00"
+  },
+  {
+    "description": "HEATER CONTROL CABLE",
+    "price": "2.75",
+    "corePrice": "0.00",
+    "totalPrice": "2.75"
+  },
+  {
+    "description": "HEATER CONTROL VALVE",
+    "price": "9.12",
+    "corePrice": "0.00",
+    "totalPrice": "9.12"
+  },
+  {
+    "description": "HEATER HOSE",
+    "price": "2.75",
+    "corePrice": "0.00",
+    "totalPrice": "2.75"
+  },
+  {
+    "description": "CARPET VAN",
+    "price": "32.00",
+    "corePrice": "0.00",
+    "totalPrice": "32.00"
+  },
+  {
+    "description": "TRIM PANNEL",
+    "price": "9.75",
+    "corePrice": "0.00",
+    "totalPrice": "9.75"
+  },
+  {
+    "description": "LIGHTER SOCKET",
+    "price": "4.58",
+    "corePrice": "0.00",
+    "totalPrice": "4.58"
+  },
+  {
+    "description": "SUN VISOR",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "FOG LIGHT",
+    "price": "11.57",
+    "corePrice": "0.00",
+    "totalPrice": "11.57"
+  },
+  {
+    "description": "HEADLAMP ASSY POP U",
+    "price": "26.47",
+    "corePrice": "0.00",
+    "totalPrice": "26.47"
+  },
+  {
+    "description": "HEADLAMP SWITCH",
+    "price": "12.94",
+    "corePrice": "0.00",
+    "totalPrice": "12.94"
+  },
+  {
+    "description": "MARKER LIGHT",
+    "price": "7.50",
+    "corePrice": "0.00",
+    "totalPrice": "7.50"
+  },
+  {
+    "description": "TAIL LIGHT ASSY SML",
+    "price": "21.47",
+    "corePrice": "0.00",
+    "totalPrice": "21.47"
+  },
+  {
+    "description": "TAIL LIGHT LENS",
+    "price": "8.46",
+    "corePrice": "0.00",
+    "totalPrice": "8.46"
+  },
+  {
+    "description": "HOOD SCOOP",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "HOOD LOUVERS",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "ROOF/FLOOR",
+    "price": "110.00",
+    "corePrice": "3.00",
+    "totalPrice": "113.00"
+  },
+  {
+    "description": "ROOF VISOR",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "SUNROOF ASSY",
+    "price": "76.47",
+    "corePrice": "0.00",
+    "totalPrice": "76.47"
+  },
+  {
+    "description": "BRACKET",
+    "price": "9.95",
+    "corePrice": "0.00",
+    "totalPrice": "9.95"
+  },
+  {
+    "description": "CONVERTIBLE TOP MOTO",
+    "price": "39.29",
+    "corePrice": "0.00",
+    "totalPrice": "39.29"
+  },
+  {
+    "description": "CROSSMEMBER",
+    "price": "27.50",
+    "corePrice": "1.00",
+    "totalPrice": "28.50"
+  },
+  {
+    "description": "FLOOR JACK",
+    "price": "16.92",
+    "corePrice": "0.00",
+    "totalPrice": "16.92"
+  },
+  {
+    "description": "LADDER",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "LICENSE FRAME",
+    "price": "2.75",
+    "corePrice": "0.00",
+    "totalPrice": "2.75"
+  },
+  {
+    "description": "LUG NUT",
+    "price": "0.49",
+    "corePrice": "0.00",
+    "totalPrice": "0.49"
+  },
+  {
+    "description": "LUG WRENCH",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "FRAME BARE BY SECTIO",
+    "price": "364.71",
+    "corePrice": "10.00",
+    "totalPrice": "374.71"
+  },
+  {
+    "description": "TAILGATE W/ GLASS",
+    "price": "110.00",
+    "corePrice": "3.00",
+    "totalPrice": "113.00"
+  },
+  {
+    "description": "TRUCK BED SIDE",
+    "price": "137.50",
+    "corePrice": "5.00",
+    "totalPrice": "142.50"
+  },
+  {
+    "description": "FAN MOTOR",
+    "price": "18.33",
+    "corePrice": "1.00",
+    "totalPrice": "19.33"
+  },
+  {
+    "description": "FAN ELECTRIC SINGLE",
+    "price": "32.35",
+    "corePrice": "2.00",
+    "totalPrice": "34.35"
+  },
+  {
+    "description": "RADIATOR HOSE",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "THERMOSTAT",
+    "price": "3.24",
+    "corePrice": "0.00",
+    "totalPrice": "3.24"
+  },
+  {
+    "description": "ANTENNA MAST",
+    "price": "5.79",
+    "corePrice": "0.00",
+    "totalPrice": "5.79"
+  },
+  {
+    "description": "SPEAKER BOX",
+    "price": "24.00",
+    "corePrice": "0.00",
+    "totalPrice": "24.00"
+  },
+  {
+    "description": "TWEETER",
+    "price": "5.51",
+    "corePrice": "0.00",
+    "totalPrice": "5.51"
+  },
+  {
+    "description": "DECK LID HINGE",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "DECK LID LATCH",
+    "price": "13.75",
+    "corePrice": "0.00",
+    "totalPrice": "13.75"
+  },
+  {
+    "description": "DECK LID LATCH ELECT",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "QUATER EXTENSION",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "REAR QUARTER EXTENSI",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "AIR BAG SUSPENSION",
+    "price": "32.35",
+    "corePrice": "0.00",
+    "totalPrice": "32.35"
+  },
+  {
+    "description": "SWAY BAR END LINK",
+    "price": "4.91",
+    "corePrice": "0.00",
+    "totalPrice": "4.91"
+  },
+  {
+    "description": "U BOLT",
+    "price": "4.77",
+    "corePrice": "0.00",
+    "totalPrice": "4.77"
+  },
+  {
+    "description": "U BOLT PLATE",
+    "price": "6.89",
+    "corePrice": "0.00",
+    "totalPrice": "6.89"
+  },
+  {
+    "description": "BUCKET SEAT MANUAL",
+    "price": "49.41",
+    "corePrice": "0.00",
+    "totalPrice": "49.41"
+  },
+  {
+    "description": "HEADREST",
+    "price": "9.92",
+    "corePrice": "0.00",
+    "totalPrice": "9.92"
+  },
+  {
+    "description": "SEAT SWITCH PWR",
+    "price": "9.32",
+    "corePrice": "0.00",
+    "totalPrice": "9.32"
+  },
+  {
+    "description": "SEAT TRACK MANUAL",
+    "price": "15.88",
+    "corePrice": "0.00",
+    "totalPrice": "15.88"
+  },
+  {
+    "description": "HUB W/ SPINDLE FWD",
+    "price": "32.35",
+    "corePrice": "2.00",
+    "totalPrice": "34.35"
+  },
+  {
+    "description": "IDLER PULLEY W/ BRAC",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "POWER STEERING HOSE",
+    "price": "9.38",
+    "corePrice": "0.00",
+    "totalPrice": "9.38"
+  },
+  {
+    "description": "POWER STEERING LINKA",
+    "price": "7.75",
+    "corePrice": "0.00",
+    "totalPrice": "7.75"
+  },
+  {
+    "description": "POWER STEERING RAM",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "SPINDLE 1 TON",
+    "price": "55.00",
+    "corePrice": "2.00",
+    "totalPrice": "57.00"
+  },
+  {
+    "description": "STEERING BOX MANUAL",
+    "price": "58.00",
+    "corePrice": "10.00",
+    "totalPrice": "68.00"
+  },
+  {
+    "description": "STEERING CENTER LINK",
+    "price": "18.03",
+    "corePrice": "0.00",
+    "totalPrice": "18.03"
+  },
+  {
+    "description": "STR CONTROL VALVE",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "STEERING COUPLER",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "STEERING SHAFT",
+    "price": "12.09",
+    "corePrice": "0.00",
+    "totalPrice": "12.09"
+  },
+  {
+    "description": "FLYWHEEL AUTO",
+    "price": "21.76",
+    "corePrice": "1.00",
+    "totalPrice": "22.76"
+  },
+  {
+    "description": "SHIFTER ARM MANUAL",
+    "price": "18.10",
+    "corePrice": "0.00",
+    "totalPrice": "18.10"
+  },
+  {
+    "description": "SHIFTER CABLE",
+    "price": "12.22",
+    "corePrice": "0.00",
+    "totalPrice": "12.22"
+  },
+  {
+    "description": "SHIFTER COLLAR",
+    "price": "12.94",
+    "corePrice": "0.00",
+    "totalPrice": "12.94"
+  },
+  {
+    "description": "SHIFTER KNOB",
+    "price": "4.71",
+    "corePrice": "0.00",
+    "totalPrice": "4.71"
+  },
+  {
+    "description": "TRANS OIL LINE",
+    "price": "7.33",
+    "corePrice": "0.00",
+    "totalPrice": "7.33"
+  },
+  {
+    "description": "TIRE/WHL ALUM 235 LG",
+    "price": "56.00",
+    "corePrice": "5.00",
+    "totalPrice": "61.00"
+  },
+  {
+    "description": "TIRE/WHL STL 225 SM",
+    "price": "26.00",
+    "corePrice": "0.00",
+    "totalPrice": "26.00"
+  },
+  {
+    "description": "TIRE/WHL STL 235 LRG",
+    "price": "36.00",
+    "corePrice": "0.00",
+    "totalPrice": "36.00"
+  },
+  {
+    "description": "TIRE 225 OR SMALLER",
+    "price": "26.00",
+    "corePrice": "0.00",
+    "totalPrice": "26.00"
+  },
+  {
+    "description": "TIRE 235 LARGER",
+    "price": "36.00",
+    "corePrice": "0.00",
+    "totalPrice": "36.00"
+  },
+  {
+    "description": "SPRE TIRE COVER VINY",
+    "price": "10.78",
+    "corePrice": "0.00",
+    "totalPrice": "10.78"
+  },
+  {
+    "description": "TRIM RING",
+    "price": "5.61",
+    "corePrice": "0.00",
+    "totalPrice": "5.61"
+  },
+  {
+    "description": "WHL ALUM/CHROM 2 TON",
+    "price": "48.50",
+    "corePrice": "10.00",
+    "totalPrice": "58.50"
+  },
+  {
+    "description": "WHL ALUM/CHROM 8 LUG",
+    "price": "48.50",
+    "corePrice": "5.00",
+    "totalPrice": "53.50"
+  },
+  {
+    "description": "WHEEL STL 1 TON",
+    "price": "35.00",
+    "corePrice": "1.00",
+    "totalPrice": "36.00"
+  },
+  {
+    "description": "WHEEL STL 8 LUG",
+    "price": "18.00",
+    "corePrice": "1.00",
+    "totalPrice": "19.00"
+  },
+  {
+    "description": "GATE TAX",
+    "price": "0.15",
+    "corePrice": "0.00",
+    "totalPrice": "0.15"
+  },
+  {
+    "description": "HOOD RELEASE LEVER",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "SPEEDOMETER GEAR ASY",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "MASTER CYL COVER",
+    "price": "1.10",
+    "corePrice": "0.00",
+    "totalPrice": "1.10"
+  },
+  {
+    "description": "ELECTRIC SWITCH",
+    "price": "5.18",
+    "corePrice": "0.00",
+    "totalPrice": "5.18"
+  },
+  {
+    "description": "HEATER VENTS",
+    "price": "6.03",
+    "corePrice": "0.00",
+    "totalPrice": "6.03"
+  },
+  {
+    "description": "BELT",
+    "price": "3.82",
+    "corePrice": "0.00",
+    "totalPrice": "3.82"
+  },
+  {
+    "description": "DONUT SPARE TIRE",
+    "price": "17.65",
+    "corePrice": "0.00",
+    "totalPrice": "17.65"
+  },
+  {
+    "description": "INSTRUMENT LENS",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "KEY FOB",
+    "price": "8.25",
+    "corePrice": "0.00",
+    "totalPrice": "8.25"
+  },
+  {
+    "description": "VENT (INTERIOR)",
+    "price": "4.41",
+    "corePrice": "0.00",
+    "totalPrice": "4.41"
+  },
+  {
+    "description": "VENT PANNEL (COWL)",
+    "price": "8.53",
+    "corePrice": "0.00",
+    "totalPrice": "8.53"
+  },
+  {
+    "description": "VACUUM LINE",
+    "price": "2.75",
+    "corePrice": "0.00",
+    "totalPrice": "2.75"
+  },
+  {
+    "description": "WASHER FLUID",
+    "price": "2.47",
+    "corePrice": "0.00",
+    "totalPrice": "2.47"
+  },
+  {
+    "description": "TRANSFERCAS ACTUATOR",
+    "price": "11.00",
+    "corePrice": "2.00",
+    "totalPrice": "13.00"
+  },
+  {
+    "description": "REAR END SPIDER GEAR",
+    "price": "11.40",
+    "corePrice": "0.00",
+    "totalPrice": "11.40"
+  },
+  {
+    "description": "CALIPER BRACKET",
+    "price": "7.75",
+    "corePrice": "0.00",
+    "totalPrice": "7.75"
+  },
+  {
+    "description": "DASH CLOTH COVER",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "FUSE",
+    "price": "0.29",
+    "corePrice": "0.00",
+    "totalPrice": "0.29"
+  },
+  {
+    "description": "INNER FENDER PLASTIC",
+    "price": "11.79",
+    "corePrice": "0.00",
+    "totalPrice": "11.79"
+  },
+  {
+    "description": "SKID PLATE",
+    "price": "20.00",
+    "corePrice": "0.00",
+    "totalPrice": "20.00"
+  },
+  {
+    "description": "SEAT BUCKEL MALE",
+    "price": "7.86",
+    "corePrice": "0.00",
+    "totalPrice": "7.86"
+  },
+  {
+    "description": "SEAT BUCKLE FEMALE",
+    "price": "7.86",
+    "corePrice": "0.00",
+    "totalPrice": "7.86"
+  },
+  {
+    "description": "STEERING WHEEL COVER",
+    "price": "3.57",
+    "corePrice": "0.00",
+    "totalPrice": "3.57"
+  },
+  {
+    "description": "WHEEL CENTER CAP",
+    "price": "3.43",
+    "corePrice": "0.00",
+    "totalPrice": "3.43"
+  },
+  {
+    "description": "WIRE HARNESS SECTION",
+    "price": "16.50",
+    "corePrice": "2.00",
+    "totalPrice": "18.50"
+  },
+  {
+    "description": "WIRE HARNESS W/FUSE",
+    "price": "60.00",
+    "corePrice": "3.00",
+    "totalPrice": "63.00"
+  },
+  {
+    "description": "FUEL REGULATOR",
+    "price": "10.62",
+    "corePrice": "0.00",
+    "totalPrice": "10.62"
+  },
+  {
+    "description": "BATTERY CABLE LRG",
+    "price": "11.00",
+    "corePrice": "2.00",
+    "totalPrice": "13.00"
+  },
+  {
+    "description": "TIMING CHAIN TENSION",
+    "price": "9.32",
+    "corePrice": "0.00",
+    "totalPrice": "9.32"
+  },
+  {
+    "description": "RUBBER HOSE SML",
+    "price": "3.75",
+    "corePrice": "0.00",
+    "totalPrice": "3.75"
+  },
+  {
+    "description": "REPAIR MANUAL",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "OWNERS MANUAL",
+    "price": "4.49",
+    "corePrice": "0.00",
+    "totalPrice": "4.49"
+  },
+  {
+    "description": "TIRE SET",
+    "price": "1.00",
+    "corePrice": "0.00",
+    "totalPrice": "1.00"
+  },
+  {
+    "description": "TRANS PUMP",
+    "price": "27.50",
+    "corePrice": "0.00",
+    "totalPrice": "27.50"
+  },
+  {
+    "description": "TRANS GEARS",
+    "price": "55.00",
+    "corePrice": "0.00",
+    "totalPrice": "55.00"
+  },
+  {
+    "description": "TRANS DRUM",
+    "price": "55.00",
+    "corePrice": "0.00",
+    "totalPrice": "55.00"
+  },
+  {
+    "description": "TRANS CLUTCH PACK",
+    "price": "38.50",
+    "corePrice": "0.00",
+    "totalPrice": "38.50"
+  },
+  {
+    "description": "VACUUM SOLENOID",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "HEAD GASKET",
+    "price": "3.14",
+    "corePrice": "0.00",
+    "totalPrice": "3.14"
+  },
+  {
+    "description": "HOOD PROP",
+    "price": "3.83",
+    "corePrice": "0.00",
+    "totalPrice": "3.83"
+  },
+  {
+    "description": "QUARTER GLASS HINGE",
+    "price": "2.75",
+    "corePrice": "0.00",
+    "totalPrice": "2.75"
+  },
+  {
+    "description": "AIR FLOW METER SENSO",
+    "price": "24.12",
+    "corePrice": "0.00",
+    "totalPrice": "24.12"
+  },
+  {
+    "description": "AMPLIFIER",
+    "price": "29.33",
+    "corePrice": "0.00",
+    "totalPrice": "29.33"
+  },
+  {
+    "description": "CLOCK SPRING",
+    "price": "19.23",
+    "corePrice": "0.00",
+    "totalPrice": "19.23"
+  },
+  {
+    "description": "SENSOR (MAP/IAC)",
+    "price": "10.71",
+    "corePrice": "0.00",
+    "totalPrice": "10.71"
+  },
+  {
+    "description": "TRAC BAR",
+    "price": "11.00",
+    "corePrice": "0.00",
+    "totalPrice": "11.00"
+  },
+  {
+    "description": "TRANSFERCASE ADAPTER",
+    "price": "22.00",
+    "corePrice": "2.00",
+    "totalPrice": "24.00"
+  },
+  {
+    "description": "ABS SENSOR",
+    "price": "7.86",
+    "corePrice": "0.00",
+    "totalPrice": "7.86"
+  },
+  {
+    "description": "STRUT TOP",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "MISC. INTERIOR",
+    "price": "5.50",
+    "corePrice": "0.00",
+    "totalPrice": "5.50"
+  },
+  {
+    "description": "CYLINDER HEAD VALVES",
+    "price": "2.75",
+    "corePrice": "0.00",
+    "totalPrice": "2.75"
+  },
+  {
+    "description": "DUAL FUEL RAIL",
+    "price": "29.41",
+    "corePrice": "0.00",
+    "totalPrice": "29.41"
+  },
+  {
+    "description": "CONVERTIBLE TOP CANV",
+    "price": "88.24",
+    "corePrice": "0.00",
+    "totalPrice": "88.24"
+  },
+  {
+    "description": "VEHICLE SPEED SENSOR",
+    "price": "16.50",
+    "corePrice": "0.00",
+    "totalPrice": "16.50"
+  },
+  {
+    "description": "SERPENTINE BELT",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "AXLE BOOT",
+    "price": "7.29",
+    "corePrice": "0.00",
+    "totalPrice": "7.29"
+  },
+  {
+    "description": "FUSE BOX COVER",
+    "price": "7.09",
+    "corePrice": "0.00",
+    "totalPrice": "7.09"
+  },
+  {
+    "description": "DUAL COIL PACK",
+    "price": "22.45",
+    "corePrice": "0.00",
+    "totalPrice": "22.45"
+  },
+  {
+    "description": "TRANS SOLENIOD",
+    "price": "23.40",
+    "corePrice": "0.00",
+    "totalPrice": "23.40"
+  },
+  {
+    "description": "DUAL STL WHEEL/TIRE",
+    "price": "44.00",
+    "corePrice": "0.00",
+    "totalPrice": "44.00"
+  },
+  {
+    "description": "DUAL ALUM WHEEL/TIRE",
+    "price": "65.00",
+    "corePrice": "0.00",
+    "totalPrice": "65.00"
+  },
+  {
+    "description": "FRONT AXLE 8 LUG",
+    "price": "165.00",
+    "corePrice": "25.00",
+    "totalPrice": "190.00"
+  },
+  {
+    "description": "GRILL LIGHT TO LIGHT",
+    "price": "55.00",
+    "corePrice": "0.00",
+    "totalPrice": "55.00"
+  },
+  {
+    "description": "CLUTCH ASSEMBLY",
+    "price": "29.46",
+    "corePrice": "0.00",
+    "totalPrice": "29.46"
+  },
+  {
+    "description": "MIRROR INTERIOR ELEC",
+    "price": "14.58",
+    "corePrice": "0.00",
+    "totalPrice": "14.58"
+  },
+  {
+    "description": "HEADLAMP W/ TURN SIG",
+    "price": "27.00",
+    "corePrice": "0.00",
+    "totalPrice": "27.00"
+  },
+  {
+    "description": "HEAD LINER VAN",
+    "price": "29.41",
+    "corePrice": "0.00",
+    "totalPrice": "29.41"
+  },
+  {
+    "description": "LADDER RACK",
+    "price": "110.00",
+    "corePrice": "0.00",
+    "totalPrice": "110.00"
+  },
+  {
+    "description": "BRASS RADIATOR",
+    "price": "55.00",
+    "corePrice": "20.00",
+    "totalPrice": "75.00"
+  },
+  {
+    "description": "PREMI WHEEL/TIRE SET",
+    "price": "150.00",
+    "corePrice": "0.00",
+    "totalPrice": "150.00"
+  },
+  {
+    "description": "PREMIUM TIRE SET",
+    "price": "100.00",
+    "corePrice": "0.00",
+    "totalPrice": "100.00"
+  },
+  {
+    "description": "MONSTER ENERGY DRINK",
+    "price": "3.00",
+    "corePrice": "0.00",
+    "totalPrice": "3.00"
+  },
+  {
+    "description": "HAT",
+    "price": "20.00",
+    "corePrice": "0.00",
+    "totalPrice": "20.00"
+  },
+  {
+    "description": "FB COOLANT",
+    "price": "3.99",
+    "corePrice": "0.00",
+    "totalPrice": "3.99"
+  },
+  {
+    "description": "INTAKE RUNNER VALVE",
+    "price": "19.41",
+    "corePrice": "0.00",
+    "totalPrice": "19.41"
+  },
+  {
+    "description": "ELECTRIC PEDAL",
+    "price": "27.31",
+    "corePrice": "0.00",
+    "totalPrice": "27.31"
+  },
+  {
+    "description": "TRANS TAIL SHAFT",
+    "price": "30.56",
+    "corePrice": "2.00",
+    "totalPrice": "32.56"
+  },
+  {
+    "description": "ELEC PWR STEER PUMP",
+    "price": "55.00",
+    "corePrice": "10.00",
+    "totalPrice": "65.00"
+  },
+  {
+    "description": "ROLL PAN",
+    "price": "55.00",
+    "corePrice": "10.00",
+    "totalPrice": "65.00"
+  },
+  {
+    "description": "PLANETARY GEAR",
+    "price": "65.00",
+    "corePrice": "5.00",
+    "totalPrice": "70.00"
+  },
+  {
+    "description": "TIRE.WHEEL ALUM 8LUG",
+    "price": "65.00",
+    "corePrice": "10.00",
+    "totalPrice": "75.00"
+  },
+  {
+    "description": "TOW MIRRORS",
+    "price": "25.38",
+    "corePrice": "0.00",
+    "totalPrice": "25.38"
+  },
+  {
+    "description": "TOUCH SCREEN RDO DBL",
+    "price": "45.29",
+    "corePrice": "0.00",
+    "totalPrice": "45.29"
+  },
+  {
+    "description": "TRANSMISSION CARRIER",
+    "price": "50.00",
+    "corePrice": "1.00",
+    "totalPrice": "51.00"
+  },
+  {
+    "description": "TRANS CONTROL SOLENO",
+    "price": "55.00",
+    "corePrice": "0.00",
+    "totalPrice": "55.00"
+  },
+  {
+    "description": "PREPULLED TIRE 225S",
+    "price": "26.00",
+    "corePrice": "0.00",
+    "totalPrice": "26.00"
+  },
+  {
+    "description": "PREPULLED TIRE 235L",
+    "price": "36.00",
+    "corePrice": "0.00",
+    "totalPrice": "36.00"
+  },
+  {
+    "description": "WIPER MTR W/ BRACKET",
+    "price": "27.50",
+    "corePrice": "5.00",
+    "totalPrice": "32.50"
+  },
+  {
+    "description": "PREMIUM SUBW/BOX",
+    "price": "55.00",
+    "corePrice": "0.00",
+    "totalPrice": "55.00"
+  },
+  {
+    "description": "PREMIUM AMPLIFIER",
+    "price": "65.00",
+    "corePrice": "0.00",
+    "totalPrice": "65.00"
+  },
+  {
+    "description": "MUD FLAP",
+    "price": "6.47",
+    "corePrice": "0.00",
+    "totalPrice": "6.47"
+  },
+  {
+    "description": "SUNROOF TRACK",
+    "price": "38.50",
+    "corePrice": "0.00",
+    "totalPrice": "38.50"
+  },
+  {
+    "description": "WIPER SWITCH",
+    "price": "22.00",
+    "corePrice": "0.00",
+    "totalPrice": "22.00"
+  },
+  {
+    "description": "COOLING TOWEL",
+    "price": "5.00",
+    "corePrice": "0.00",
+    "totalPrice": "5.00"
+  },
+  {
+    "description": "BAG OF FUSES",
+    "price": "2.50",
+    "corePrice": "0.00",
+    "totalPrice": "2.50"
+  }
+]
