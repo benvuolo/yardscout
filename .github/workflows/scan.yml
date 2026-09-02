@@ -1,5 +1,6 @@
-# Runs every 6 hours: national Pick-n-Pull + Utah chains, updates inventory_live.json,
-# records history to inventory_history.db, sends push (ntfy) + email digest on watchlist hits.
+# Runs every 6 hours: national Pick-n-Pull + LKQ Pick Your Part + Pull-A-Part +
+# Utah chains, updates inventory_live.json (+ per-yard price lists), records
+# history to inventory_history.db, sends push (ntfy) + email digest on watchlist hits.
 # Repo secrets: NTFY_TOPIC (phone push), SMTP_USER / SMTP_PASS / ALERT_EMAIL (email, optional).
 # Commit scraper/watchlist.json to the repo for CI alerts to fire.
 
@@ -43,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: pip install requests beautifulsoup4 rich
 
+      - name: Refresh per-yard price lists
+        run: python scraper/junkyard_scraper.py --refresh-chain-pricing
+
       - name: Run scraper (national)
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
@@ -55,7 +59,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/inventory_live.json
+          git add docs/data/inventory_live.json docs/data/pyp_pricing.json docs/data/pap_pricing.json
           if git diff --staged --quiet; then
             echo "No inventory changes."
           else
