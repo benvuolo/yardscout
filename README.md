@@ -2,7 +2,7 @@
 
 **Live app: https://benvuolo.github.io/junkyard-hunter/**
 
-Find valuable "unobtanium" parts on common junkyard cars and flip them for profit. Scrapes live inventory from **~150 self-service yards across four national/regional chains**:
+Spot the valuable "unobtanium" parts that common junkyard cars originally came with, and see typical resale ranges before you drive to the yard. This is an information tool — estimates, not income promises: parts may already be pulled, and condition decides everything. Scrapes live inventory from **~150 self-service yards across four national/regional chains**:
 
 | Chain | Yards | Coverage |
 |---|---|---|
@@ -234,7 +234,7 @@ Pull costs are shown **only** when they come from that yard's own published pric
 - **Pull-A-Part**: per-yard price lists from their pricing API (~40 tracked parts × 35 yards)
 - **Tear-A-Part / Utah Pic-A-Part**: published price lists
 
-If no real price list covers a part, the app shows "check yard price list" and the profit estimate becomes a resale-only range — it never invents a pull cost.
+If no real price list covers a part, the app shows "check yard price list" and the value estimate becomes a resale-only range — it never invents a pull cost.
 
 ### Freshness scoring
 
