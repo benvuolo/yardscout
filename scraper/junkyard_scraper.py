@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Junkyard Hunter — Utah Inventory Scraper
+Junkyard Hunter — Self-Service Junkyard Inventory Scraper
 =========================================
 Pulls LIVE inventory from Pick-n-Pull (SLC), Tear-A-Part (SLC + Ogden), and
 Utah Pic-A-Part (Ogden + Orem) via public XML inventory feeds, cross-references
@@ -123,6 +123,139 @@ TAP_MAKES = [
     "GMC", "CHRYSLER", "MAZDA", "MITSUBISHI", "MERCURY", "LINCOLN",
     "BUICK", "CADILLAC", "INFINITI", "ACURA", "LAND ROVER", "GENESIS", "SCION",
 ]
+
+# LKQ Pick Your Part — rebranded to pyp.com in 2026 (~60 self-service yards:
+# CA/TX/FL heavy, plus MD/NC/SC/GA/TN/OH/IN/IL/WI/MI/KS/OK/CO/AL). Inventory is
+# server-rendered HTML, 20 rows per page per store; store list (with lat/lng and
+# state) is embedded in the /inventory/ page. Per-location price lists are JSON.
+PYP_BASE = "https://www.pyp.com"
+PYP_INVENTORY_API = f"{PYP_BASE}/DesktopModules/pyp_vehicleInventory/getVehicleInventory.aspx"
+PYP_PRICELIST_API = f"{PYP_BASE}/DesktopModules/pyp_api/api/PriceList/"
+PYP_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "Accept": "text/html, application/json, */*; q=0.01",
+    "X-Requested-With": "XMLHttpRequest",
+    "Referer": f"{PYP_BASE}/inventory/",
+}
+PYP_PAGE_SIZE = 20  # server-fixed; pageSize param is ignored
+def _pyp_workers() -> int:
+    try:
+        return max(1, int(os.environ.get("PYP_WORKERS", "6")))
+    except ValueError:
+        return 6
+
+US_STATE_ABBREV = {
+    "alabama": "AL", "alaska": "AK", "arizona": "AZ", "arkansas": "AR",
+    "california": "CA", "colorado": "CO", "connecticut": "CT", "delaware": "DE",
+    "florida": "FL", "georgia": "GA", "hawaii": "HI", "idaho": "ID",
+    "illinois": "IL", "indiana": "IN", "iowa": "IA", "kansas": "KS",
+    "kentucky": "KY", "louisiana": "LA", "maine": "ME", "maryland": "MD",
+    "massachusetts": "MA", "michigan": "MI", "minnesota": "MN", "mississippi": "MS",
+    "missouri": "MO", "montana": "MT", "nebraska": "NE", "nevada": "NV",
+    "new hampshire": "NH", "new jersey": "NJ", "new mexico": "NM", "new york": "NY",
+    "north carolina": "NC", "north dakota": "ND", "ohio": "OH", "oklahoma": "OK",
+    "oregon": "OR", "pennsylvania": "PA", "rhode island": "RI", "south carolina": "SC",
+    "south dakota": "SD", "tennessee": "TN", "texas": "TX", "utah": "UT",
+    "vermont": "VT", "virginia": "VA", "washington": "WA", "west virginia": "WV",
+    "wisconsin": "WI", "wyoming": "WY", "district of columbia": "DC",
+}
+
+# Makes whose names are two words — needed to split "2004 LAND ROVER DISCOVERY".
+TWO_WORD_MAKES = {"LAND ROVER", "ALFA ROMEO", "ASTON MARTIN", "AMERICAN MOTORS"}
+
+# Chains disagree on make casing (FORD vs Ford, Bmw vs BMW) — normalize at output
+# so the web UI's make filter doesn't show duplicates.
+MAKE_ACRONYMS = {"BMW", "GMC", "AMC", "MG", "MINI"}
+def _canon_make(s: str) -> str:
+    s = (s or "").strip()
+    if not s:
+        return s
+    if s.upper() in MAKE_ACRONYMS:
+        return s.upper()
+    return " ".join(
+        w.upper() if w.upper() in MAKE_ACRONYMS else w.title() for w in s.split()
+    )
+
+# Pull-A-Part — 36 yards (Southeast/Gulf/Midwest + former U-Pull-&-Pay yards in
+# AZ/NM/CO after the two chains merged; upullandpay.com now redirects here).
+# Clean JSON microservices: anonymous website tokens, then one Vehicle/Search
+# POST per make across every location at once.
+PAP_SITE = "https://www.pullapart.com"
+PAP_TOKEN_URL = f"{PAP_SITE}/api/internal/gettoken/"
+PAP_INVENTORY_API = "https://inventoryservice.pullapart.com"
+PAP_ENTERPRISE_API = "https://enterpriseservice.pullapart.com"
+# Their location API has no coordinates; these are geocoded from each yard's zip.
+PAP_COORDS = {
+    3: (33.6369, -84.3371),    # Atlanta South, GA 30288
+    4: (33.9381, -84.1972),    # Atlanta North, GA 30071
+    5: (33.5594, -86.8153),    # Birmingham, AL 35207
+    6: (36.1546, -86.8602),    # Nashville, TN 37209
+    7: (35.2836, -80.7638),    # Charlotte, NC 28213
+    8: (38.1593, -85.778),     # Louisville, KY 40214
+    9: (33.4601, -81.973),     # Augusta, GA 30901
+    10: (36.032, -83.8021),    # Knoxville, TN 37924
+    11: (41.4342, -81.8044),   # Cleveland West, OH 44135
+    12: (30.2077, -92.0656),   # Lafayette, LA 70506
+    13: (32.3257, -86.3104),   # Montgomery, AL 36105
+    14: (29.8725, -90.0673),   # New Orleans West, LA 70058
+    15: (32.2435, -90.2612),   # Jackson, MS 39212
+    16: (30.4848, -91.0689),   # Baton Rouge, LA 70814
+    17: (35.0514, -89.9265),   # Memphis, TN 38118
+    18: (39.8082, -86.1014),   # Indianapolis, IN 46218
+    19: (36.144, -80.2376),    # Winston-Salem, NC 27105
+    20: (34.0635, -81.0265),   # Columbia, SC 29203
+    21: (33.7356, -84.1009),   # Atlanta East, GA 30058
+    24: (40.7598, -81.35),     # Canton, OH 44707
+    25: (41.0479, -81.4916),   # Akron, OH 44306
+    27: (32.1707, -110.9719),  # Tucson, AZ 85714
+    29: (31.7677, -106.3016),  # El Paso, TX 79936
+    30: (27.7762, -97.4271),   # Corpus Christi, TX 78405
+    33: (26.6644, -80.1741),   # West Palm Beach, FL 33411
+    34: (28.3932, -81.3622),   # Orlando, FL 32824
+    35: (39.2003, -84.4859),   # Cincinnati, OH 45216
+    36: (35.0448, -106.6893),  # Albuquerque, NM 87105
+    37: (33.4564, -112.1284),  # Phoenix, AZ 85009
+    38: (38.7902, -104.8199),  # Colorado Springs, CO 80906
+    39: (39.7378, -104.8152),  # Aurora, CO 80011
+    40: (39.838, -104.9988),   # Denver, CO 80221
+    41: (29.6223, -95.26),     # Houston, TX 77075
+    42: (40.4598, -79.8224),   # Pittsburgh, PA 15235
+    43: (26.6466, -81.8429),   # Fort Myers, FL 33916
+}
+
+# Part descriptions worth carrying into per-yard price files (keyword-mapped by
+# the web UI). Everything else in the chains' 400-800 row price lists is noise.
+PYP_PRICE_DESCRIPTIONS = {
+    "HEADLIGHT", "SEAT WITH AIR BAG FRONT", "SEAT NO AIR BAG FRONT", "SEAT REAR",
+    "SEAT THIRD ROW", "INTERCOOLER", "GPS TV SCREEN", "RADIO WITH DISPLAY",
+    "FRONT BUMPER (STEEL)", "BUMPER COVER, FRONT", "STEERING WHEEL", "SPOILER REAR",
+    "FRONT LAMP (FOG/PARKING/TURN/MARKER)", "BRAKE CALIPER", "MIRROR (SIDE VIEW)",
+    "AMPLIFIER", "RADIO SPEAKER", "SPEAKER (SUB-WOOFER)", "ROOF GLASS (SUN ROOF)",
+    "SLIDING DOOR MOTOR", "DECKLID/TAILGATE (BARE)", "CHASSIS CONTROL MODULE",
+    "SENSOR CAMERAS", "ROOF RACK ASSEMBLY", "ROOF RACK RAIL/ CROSS BAR (EACH)",
+    "GRILLE", "RUNNING BOARD", "FENDER EXTENSION", "WINDOW REGULATOR FRONT (ELECTRIC)",
+    "TAILLIGHT (QUARTER MOUNTED)", "TAILLIGHT TRUNK LID/HATCH MOUNTED", "CABLE",
+    "SEAT TRACK, (ELECTRIC)", "DASH PAD", "CENTER CONSOLE", "MUD FLAP/SPLASH GUARD",
+    "EMBLEMS", "ELECTRIC WIPER MOTOR, WINDSHIELD", "ACTUATOR", "TRANSFER CASE MOTOR",
+}
+PAP_PRICE_PARTNAMES = {
+    "HEADLIGHT ASSEMBLY (NON-HID/BALLAST)", "HEADLIGHT LED OR HID LAMP ASSEMBLY W/BALLAST",
+    "SEAT, BUCKET W/ POWER TRACK (LEATHER)", "SEAT, BUCKET W/ MANUAL TRACK",
+    "SEAT, REAR - EACH SECTION (CLOTH)", "SEAT, BENCH/3RD ROW MANUAL TRACK",
+    "SEAT, BENCH W/ POWER TRACK (LEATHER)", "TURBO INTERCOOLER", "RADIO W/NAV DISPLAY",
+    "RADIO  - W/CD OR MEDIA PLAYER", "BUMPER COVER ASSEMBLY", "BUMPER COVER",
+    "BUMPER STEEL OR ALUMINUM", "STEERING WHEEL", "SPOILER - BOLT ON (EACH)",
+    "FOG LAMP (EACH)", "BRAKE CALIPER", "DOOR MIRROR, OUTSIDE ELECTRIC REMOTE",
+    "AMPLIFIER", "SPEAKER (ANY)", "SUNROOF/COVER/SHADE ASSEMBLY W/MOTOR",
+    "DOOR/HATCH MOTOR, (SLIDING VAN/SUV)", "MODULE - BODY / CHASSIS / GATEWAY/ FUEL",
+    "CAMERA, ON BOARD OR BACK UP", "LUGGAGE RACK", "LUGGAGE RACK CROSS BAR",
+    "GRILLE PLASTIC (BARE) - ANY", "RUNNING BOARD (EACH)", "FENDER FLARE OR SKIRT",
+    "WINDOW REGULATOR W/MOTOR", "TAILLIGHT ASSEMBLY - SINGLE SIDE", "VIDEO SCREEN",
+    "CABLE - BRAKE/CLUTCH/SHIFTER/THROTTLE/RELEASE", "SEAT TRACK, ELECTRIC W/MOTOR",
+    "DASH PAD (OVER 24in LENGTH)", "CONSOLE LID", "CONSOLE (OVER 16in LENGTH)",
+    "MUD FLAP OR SPLASH GUARD", "EMBLEM", "WINDSHIELD WIPER MOTOR", "ACTUATOR",
+    "4 WHEEL DRIVE ACTUATOR VACUUM OR ELECTRIC",
+}
 
 # ---------------------------------------------------------------------------
 # Unobtanium DB — parts you can carry out. No engines, no transmissions.
@@ -659,7 +792,7 @@ UNOBTANIUM_DB = {
             {"name": "Wireless Charging Pad Module", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 29, "yr_min": 2019},
         ],
     },
-    # --- TOP NO-MATCH MODELS (Utah inventory) + easy flips ---
+    # --- TOP NO-MATCH MODELS + easy flips ---
     "altima": {
         "display": "Nissan Altima",
         "make": "Nissan",
@@ -2577,28 +2710,28 @@ UNOBTANIUM_DB = {
 # "notes" = colour for the UI / helpful context.
 # ---------------------------------------------------------------------------
 SELL_GUIDE = [
-    # --- Toyota off-road (huge UT community → KSL/forums) ---
-    {"kw": "e-locker actuator",        "sell_at": "KSL / T4R.org",       "speed": "Fast",   "notes": "Huge 3rd-gen community in UT, sells in days"},
-    {"kw": "trd pro grille",           "sell_at": "KSL / T4R.org",       "speed": "Fast",   "notes": "Very sought-after, post w/ photos"},
+    # --- Toyota off-road (huge community → forums/local classifieds) ---
+    {"kw": "e-locker actuator",        "sell_at": "T4R.org / local classifieds",       "speed": "Fast",   "notes": "Huge 3rd-gen community, sells in days"},
+    {"kw": "trd pro grille",           "sell_at": "T4R.org / local classifieds",       "speed": "Fast",   "notes": "Very sought-after, post w/ photos"},
     {"kw": "kdss sway bar",            "sell_at": "eBay / T4R.org",      "speed": "Medium", "notes": "Niche but high-value, national market"},
-    {"kw": "roof rack crossbars",      "sell_at": "KSL / FB Marketplace","speed": "Fast",   "notes": "Local pickup saves $70+ shipping"},
-    {"kw": "roof rack",                "sell_at": "KSL / FB Marketplace","speed": "Fast",   "notes": "Local pickup saves shipping"},
-    {"kw": "roof rails",               "sell_at": "KSL / FB Marketplace","speed": "Medium", "notes": "Local pickup preferred"},
+    {"kw": "roof rack crossbars",      "sell_at": "FB Marketplace / local classifieds","speed": "Fast",   "notes": "Local pickup saves $70+ shipping"},
+    {"kw": "roof rack",                "sell_at": "FB Marketplace / local classifieds","speed": "Fast",   "notes": "Local pickup saves shipping"},
+    {"kw": "roof rails",               "sell_at": "FB Marketplace / local classifieds","speed": "Medium", "notes": "Local pickup preferred"},
     {"kw": "transfer case shift",      "sell_at": "eBay",                "speed": "Medium", "notes": "National market, $90-200 real sold"},
-    {"kw": "center console lid",       "sell_at": "T4R.org / KSL",       "speed": "Medium", "notes": "Condition is everything—must be uncracked"},
-    {"kw": "heated side mirror",       "sell_at": "eBay / KSL",          "speed": "Medium", "notes": "Pair sells better than singles"},
+    {"kw": "center console lid",       "sell_at": "T4R.org / local classifieds",       "speed": "Medium", "notes": "Condition is everything—must be uncracked"},
+    {"kw": "heated side mirror",       "sell_at": "eBay / local classifieds",          "speed": "Medium", "notes": "Pair sells better than singles"},
     {"kw": "ahc height control",       "sell_at": "eBay / IH8MUD",       "speed": "Medium", "notes": "Land Cruiser forums pay premium"},
     {"kw": "factory locker",           "sell_at": "eBay / IH8MUD",       "speed": "Medium", "notes": "LC community is global"},
     {"kw": "uncracked dash",           "sell_at": "IH8MUD / eBay",       "speed": "Fast",   "notes": "Every LC owner needs this, instant sell"},
     # --- FJ Cruiser ---
-    {"kw": "swing-out tire",           "sell_at": "KSL / FJ forums",     "speed": "Fast",   "notes": "FJ community almost as strong as 4Runner"},
+    {"kw": "swing-out tire",           "sell_at": "FJ forums / local classifieds",     "speed": "Fast",   "notes": "FJ community almost as strong as 4Runner"},
     # --- Wrangler ---
-    {"kw": "hardtop",                  "sell_at": "KSL / FB Marketplace","speed": "Fast",   "notes": "Wrangler hardtops sell same-day in UT"},
-    {"kw": "half doors",               "sell_at": "KSL / FB Marketplace","speed": "Fast",   "notes": "Huge Jeep community, summer demand"},
-    {"kw": "rubicon locker",           "sell_at": "KSL / JeepForum",     "speed": "Medium", "notes": "Jeep forums pay fair prices"},
+    {"kw": "hardtop",                  "sell_at": "FB Marketplace / local classifieds","speed": "Fast",   "notes": "Wrangler hardtops often sell same-day locally"},
+    {"kw": "half doors",               "sell_at": "FB Marketplace / local classifieds","speed": "Fast",   "notes": "Huge Jeep community, summer demand"},
+    {"kw": "rubicon locker",           "sell_at": "JeepForum / local classifieds",     "speed": "Medium", "notes": "Jeep forums pay fair prices"},
     # --- XJ Cherokee ---
-    {"kw": "xj header panel",          "sell_at": "KSL / FB (XJ groups)","speed": "Fast",   "notes": "XJ parts are gold, rust-free = premium"},
-    {"kw": "clean fenders",            "sell_at": "KSL / FB (XJ groups)","speed": "Fast",   "notes": "Rust-free fenders are rare nationally"},
+    {"kw": "xj header panel",          "sell_at": "FB XJ groups / local classifieds","speed": "Fast",   "notes": "XJ parts are gold, rust-free = premium"},
+    {"kw": "clean fenders",            "sell_at": "FB XJ groups / local classifieds","speed": "Fast",   "notes": "Rust-free fenders are rare nationally"},
     # --- Minivan sliding doors (national eBay play) ---
     {"kw": "power sliding door motor", "sell_at": "eBay",                "speed": "Fast",   "notes": "Common failure item, high-volume $65-80 real"},
     {"kw": "sliding door control",     "sell_at": "eBay",                "speed": "Medium", "notes": "Steady demand, $100-165 real sold"},
@@ -2615,7 +2748,7 @@ SELL_GUIDE = [
     # --- LED Headlights (universal eBay) ---
     {"kw": "led headlight",            "sell_at": "eBay",                "speed": "Medium", "notes": "Always in demand, verify not hazed/cracked"},
     {"kw": "hid headlight",            "sell_at": "eBay",                "speed": "Medium", "notes": "HID assemblies sell well complete"},
-    {"kw": "headlights (clear",        "sell_at": "eBay / KSL",          "speed": "Medium", "notes": "Only if truly clear, not yellowed"},
+    {"kw": "headlights (clear",        "sell_at": "eBay / local classifieds",          "speed": "Medium", "notes": "Only if truly clear, not yellowed"},
     {"kw": "headlight",                "sell_at": "eBay",                "speed": "Medium", "notes": "Check condition carefully"},
     # --- Touchscreens / Infotainment ---
     {"kw": "uconnect touchscreen",     "sell_at": "eBay",                "speed": "Medium", "notes": "Verify it powers on before pulling"},
@@ -2626,11 +2759,11 @@ SELL_GUIDE = [
     # --- Rear entertainment ---
     {"kw": "rear entertainment",       "sell_at": "eBay / FB Marketplace","speed": "Slow",  "notes": "Niche market, families w/ kids"},
     # --- Tow mirrors ---
-    {"kw": "tow mirror",               "sell_at": "eBay / KSL",          "speed": "Fast",   "notes": "Truck owners always need these"},
-    {"kw": "power-fold tow",           "sell_at": "eBay / KSL",          "speed": "Fast",   "notes": "Power-fold command premium"},
+    {"kw": "tow mirror",               "sell_at": "eBay / local classifieds",          "speed": "Fast",   "notes": "Truck owners always need these"},
+    {"kw": "power-fold tow",           "sell_at": "eBay / local classifieds",          "speed": "Fast",   "notes": "Power-fold command premium"},
     # --- Tailgates ---
-    {"kw": "tailgate",                 "sell_at": "KSL / FB Marketplace","speed": "Medium", "notes": "Local preferred—heavy to ship"},
-    {"kw": "multipro tailgate",        "sell_at": "eBay / KSL",          "speed": "Medium", "notes": "GM MultiPro in demand"},
+    {"kw": "tailgate",                 "sell_at": "FB Marketplace / local classifieds","speed": "Medium", "notes": "Local preferred—heavy to ship"},
+    {"kw": "multipro tailgate",        "sell_at": "eBay / local classifieds",          "speed": "Medium", "notes": "GM MultiPro in demand"},
     # --- Hybrid parts ---
     {"kw": "dc-dc converter",          "sell_at": "eBay",                "speed": "Medium", "notes": "Prius owners DIY, good eBay market"},
     {"kw": "hybrid inverter",          "sell_at": "eBay",                "speed": "Medium", "notes": "Verify part number before listing"},
@@ -2639,9 +2772,9 @@ SELL_GUIDE = [
     {"kw": "air suspension",           "sell_at": "eBay",                "speed": "Medium", "notes": "Common failure, steady demand"},
     {"kw": "autoride",                 "sell_at": "eBay",                "speed": "Medium", "notes": "GM AutoRide always failing"},
     # --- 3rd row seats ---
-    {"kw": "3rd row seat",             "sell_at": "FB Marketplace / KSL","speed": "Slow",   "notes": "Heavy, sell local to avoid shipping"},
+    {"kw": "3rd row seat",             "sell_at": "FB Marketplace / local classifieds","speed": "Slow",   "notes": "Heavy, sell local to avoid shipping"},
     # --- Skid plates ---
-    {"kw": "skid plate",               "sell_at": "KSL / eBay",          "speed": "Medium", "notes": "Off-road crowd, local is easier"},
+    {"kw": "skid plate",               "sell_at": "eBay / local classifieds",          "speed": "Medium", "notes": "Off-road crowd, local is easier"},
     # --- Wings / spoilers ---
     {"kw": "wing",                     "sell_at": "eBay / Enthusiast FB","speed": "Medium", "notes": "STI wing is iconic, easy to ship"},
     {"kw": "spoiler",                  "sell_at": "eBay",                "speed": "Slow",   "notes": "Niche, make sure no cracks"},
@@ -2657,20 +2790,20 @@ SELL_GUIDE = [
     # --- Eyesight cameras ---
     {"kw": "eyesight camera",          "sell_at": "eBay",                "speed": "Fast",   "notes": "Subaru Eyesight repairs are expensive at dealer"},
     # --- Running boards ---
-    {"kw": "running board",            "sell_at": "KSL / eBay",          "speed": "Medium", "notes": "Power retractable = premium"},
+    {"kw": "running board",            "sell_at": "eBay / local classifieds",          "speed": "Medium", "notes": "Power retractable = premium"},
     # --- Smart cruise / radar ---
     {"kw": "smart cruise",             "sell_at": "eBay",                "speed": "Medium", "notes": "Part of ADAS system, verify P/N"},
     {"kw": "radar module",             "sell_at": "eBay",                "speed": "Medium", "notes": "Part of ADAS system, verify P/N"},
     # --- Catch-all ---
-    {"kw": "mirror",                   "sell_at": "eBay / KSL",          "speed": "Medium", "notes": "Heated/power mirrors sell best"},
+    {"kw": "mirror",                   "sell_at": "eBay / local classifieds",          "speed": "Medium", "notes": "Heated/power mirrors sell best"},
     {"kw": "seat",                     "sell_at": "eBay / FB Marketplace","speed": "Medium", "notes": "Heavy—local pickup preferred"},
     {"kw": "fog light",                "sell_at": "eBay",                "speed": "Slow",   "notes": "Low margin, bundle with other parts"},
     {"kw": "steering wheel",           "sell_at": "eBay",                "speed": "Medium", "notes": "Leather w/ controls = higher value"},
     {"kw": "charging pad",             "sell_at": "eBay",                "speed": "Slow",   "notes": "Low value, only if already pulling other stuff"},
     {"kw": "sunroof",                  "sell_at": "eBay",                "speed": "Slow",   "notes": "Fragile to ship, local preferred"},
     {"kw": "liftgate",                 "sell_at": "eBay",                "speed": "Medium", "notes": "Power liftgate motors fail often"},
-    {"kw": "fender",                   "sell_at": "KSL / FB Marketplace","speed": "Medium", "notes": "Body panels sell local, no shipping"},
-    {"kw": "bumper",                   "sell_at": "KSL / FB Marketplace","speed": "Medium", "notes": "Local pickup, heavy to ship"},
+    {"kw": "fender",                   "sell_at": "FB Marketplace / local classifieds","speed": "Medium", "notes": "Body panels sell local, no shipping"},
+    {"kw": "bumper",                   "sell_at": "FB Marketplace / local classifieds","speed": "Medium", "notes": "Local pickup, heavy to ship"},
 ]
 
 # Sort SELL_GUIDE by keyword length descending for longest-match-first
@@ -2917,11 +3050,16 @@ def fetch_pnp_inventory(make_ids: list[int] | None = None, *, national: bool = F
                 timeout=60 if national else 15,
             )
             for loc_data in r.json():
-                loc = loc_data.get("location", {})
+                loc = loc_data.get("location") or {}
+                # The API occasionally returns a location stub with null
+                # name/city/state — skip those groups rather than emitting a
+                # phantom "None" yard; the vehicles come back on the next scan.
+                if not loc.get("name"):
+                    continue
                 for v in loc_data.get("vehicles", []):
-                    v["_location"] = loc.get("name", "Unknown")
-                    v["_city"] = loc.get("city", "")
-                    v["_state"] = loc.get("state", "")
+                    v["_location"] = loc.get("name")
+                    v["_city"] = loc.get("city") or ""
+                    v["_state"] = loc.get("state") or ""
                     v["_lat"] = loc.get("mapLatitude")
                     v["_lng"] = loc.get("mapLongitude")
                     all_vehicles.append(v)
@@ -3152,6 +3290,318 @@ def refresh_utpap_pricing_file() -> Path:
     return out
 
 
+# ---------------------------------------------------------------------------
+# LKQ Pick Your Part (pyp.com)
+# ---------------------------------------------------------------------------
+
+def fetch_pyp_stores() -> list[dict]:
+    """Store list (code, name, state, lat, lng) embedded in pyp.com/inventory/."""
+    r = requests.get(f"{PYP_BASE}/inventory/", headers=PYP_HEADERS, timeout=30)
+    r.raise_for_status()
+    stores = []
+    for m in re.finditer(
+        r'option value="(\d+)" data-state="([^"]+)" data-lat="([^"]+)" '
+        r'data-lng="([^"]+)" data-name="([^"]+)"',
+        r.text,
+    ):
+        code, state_full, lat, lng, name = m.groups()
+        city = name.split(" - ", 1)[1] if " - " in name else name
+        stores.append({
+            "code": code,
+            "name": name.strip(),
+            "city": city.strip(),
+            "state": US_STATE_ABBREV.get(state_full.strip().lower(), state_full.strip()),
+            "lat": float(lat),
+            "lng": float(lng),
+        })
+    return stores
+
+
+def _split_ymm(ymm: str) -> tuple[int, str, str]:
+    """'2004 LAND ROVER DISCOVERY' -> (2004, 'Land Rover', 'Discovery')."""
+    parts = ymm.split()
+    if not parts:
+        return 0, "", ""
+    try:
+        year = int(parts[0])
+        parts = parts[1:]
+    except ValueError:
+        year = 0
+    rest = " ".join(parts)
+    make, model = (parts[0] if parts else ""), " ".join(parts[1:])
+    for twm in TWO_WORD_MAKES:
+        if rest.upper().startswith(twm):
+            make = rest[: len(twm)]
+            model = rest[len(twm):].strip()
+            break
+    return year, _utpap_format_label(make), _utpap_format_label(model)
+
+
+def _fetch_pyp_store_inventory(store: dict, session: requests.Session) -> list[dict]:
+    """Paginate one store's inventory (20 rows/page, server-fixed)."""
+    vehicles: list[dict] = []
+    page = 0
+    while page < 200:  # hard stop: no store holds 4,000 cars
+        try:
+            r = session.get(
+                PYP_INVENTORY_API,
+                params={"page": page, "filter": "", "store": store["code"]},
+                headers=PYP_HEADERS,
+                timeout=30,
+            )
+            r.raise_for_status()
+        except Exception:
+            break
+        if not HAS_BS4:
+            break
+        soup = BeautifulSoup(r.text, "html.parser")
+        rows = soup.select(".pypvi_resultRow")
+        if not rows:
+            break
+        for row in rows:
+            ymm_el = row.select_one(".pypvi_ymm")
+            year, make, model = _split_ymm(ymm_el.get_text(" ", strip=True) if ymm_el else "")
+            vin = ""
+            for det in row.select(".pypvi_detailItem"):
+                txt = det.get_text(" ", strip=True)
+                if txt.upper().startswith("VIN"):
+                    vin = txt[3:].strip()
+                    break
+            date_iso = ""
+            t = row.select_one(".pypvi_available time")
+            if t is not None and t.get("datetime"):
+                date_iso = str(t["datetime"])[:10]
+            section = row_no = space = ""
+            for td in row.select("table.locate td"):
+                label_el, val_el = td.select_one("span"), td.select_one("b")
+                label = label_el.get_text(strip=True).lower() if label_el else ""
+                val = val_el.get_text(strip=True) if val_el else ""
+                if label == "section":
+                    section = val
+                elif label == "row":
+                    row_no = val
+                elif label == "space":
+                    space = val
+            row_label = row_no or ""
+            if section and row_no:
+                row_label = f"{section}-{row_no}"
+            vehicles.append({
+                "id": row.get("id", ""),  # "1134-55524" — store code + stock
+                "vin": vin,
+                "year": year,
+                "make": make,
+                "model": model,
+                "row": row_label,
+                "space": space,
+                "dateAdded": date_iso,
+                "_location": store["name"],
+                "_city": store["city"],
+                "_state": store["state"],
+                "_lat": store["lat"],
+                "_lng": store["lng"],
+                "_source": "pyp",
+            })
+        if len(rows) < PYP_PAGE_SIZE:
+            break
+        page += 1
+        time.sleep(0.15)  # be gentle: ~6 req/s across the whole worker pool
+    return vehicles
+
+
+def fetch_pyp_inventory() -> list[dict]:
+    """Fetch live inventory from every LKQ Pick Your Part yard (pyp.com)."""
+    try:
+        stores = fetch_pyp_stores()
+    except Exception as e:
+        print(f"  [Pick Your Part] store list failed: {e}", file=sys.stderr)
+        return []
+    if not stores:
+        print("  [Pick Your Part] no stores found on inventory page", file=sys.stderr)
+        return []
+
+    all_vehicles: list[dict] = []
+    workers = _pyp_workers()
+    print(f"  [Pick Your Part] {len(stores)} yards, {workers} workers...", file=sys.stderr)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
+        def _one(store: dict) -> list[dict]:
+            session = requests.Session()
+            return _fetch_pyp_store_inventory(store, session)
+        for res in pool.map(_one, stores):
+            all_vehicles.extend(res)
+
+    # Dedupe by id (store-code + stock number)
+    seen: set[str] = set()
+    unique = []
+    for v in all_vehicles:
+        vid = v.get("id") or ""
+        if vid and vid not in seen:
+            seen.add(vid)
+            unique.append(v)
+    print(f"  [Pick Your Part] {len(unique)} vehicles", file=sys.stderr)
+    return unique
+
+
+def refresh_pyp_pricing_file(stores: list[dict] | None = None) -> Path:
+    """Per-yard PYP price lists -> pyp_pricing.json, keyed by yard display name.
+    Only the keyword-mapped part descriptions are kept."""
+    if stores is None:
+        stores = fetch_pyp_stores()
+    out: dict[str, dict] = {}
+    for store in stores:
+        try:
+            r = requests.get(
+                PYP_PRICELIST_API,
+                params={"locationCode": store["code"]},
+                headers=PYP_HEADERS,
+                timeout=30,
+            )
+            r.raise_for_status()
+            rows = r.json()
+        except Exception as e:
+            print(f"  [PYP pricing] {store['name']}: {e}", file=sys.stderr)
+            continue
+        prices = {}
+        for p in rows:
+            desc = (p.get("Description") or "").strip()
+            if desc in PYP_PRICE_DESCRIPTIONS and p.get("Price"):
+                prices[desc] = {"price": p["Price"], "core": p.get("Core") or 0}
+        if prices:
+            out[store["name"]] = prices
+        time.sleep(0.15)
+    path = DATA_DIR / "pyp_pricing.json"
+    path.write_text(json.dumps(out, separators=(",", ":")))
+    print(f"  [PYP pricing] wrote {len(out)} yard price lists", file=sys.stderr)
+    return path
+
+
+# ---------------------------------------------------------------------------
+# Pull-A-Part (pullapart.com — includes former U-Pull-&-Pay yards)
+# ---------------------------------------------------------------------------
+
+def _pap_token(scope: str) -> str:
+    r = requests.get(PAP_TOKEN_URL, params={"scope": scope}, headers=HEADERS, timeout=20)
+    r.raise_for_status()
+    data = r.json()
+    if isinstance(data, str):  # endpoint double-encodes the JSON payload
+        data = json.loads(data)
+    return data["access_token"]
+
+
+def fetch_pap_locations() -> list[dict]:
+    tok = _pap_token("EnterpriseService.External")
+    r = requests.get(
+        f"{PAP_ENTERPRISE_API}/Location",
+        params={"siteTypeID": -1},
+        headers={**HEADERS, "Authorization": f"Bearer {tok}"},
+        timeout=30,
+    )
+    r.raise_for_status()
+    return r.json()
+
+
+def fetch_pap_inventory() -> list[dict]:
+    """Fetch live inventory from every Pull-A-Part yard.
+
+    One Vehicle/Search POST per make covers all ~36 locations at once, so a full
+    national pull is only ~80 requests."""
+    try:
+        locations = fetch_pap_locations()
+        inv_tok = _pap_token("InventoryService.External")
+        auth = {**HEADERS, "Authorization": f"Bearer {inv_tok}",
+                "Content-Type": "application/json", "Origin": PAP_SITE}
+        makes_r = requests.get(f"{PAP_INVENTORY_API}/Make", headers=auth, timeout=30)
+        makes_r.raise_for_status()
+        makes = makes_r.json()
+    except Exception as e:
+        print(f"  [Pull-A-Part] setup failed: {e}", file=sys.stderr)
+        return []
+
+    loc_by_id = {l["locationID"]: l for l in locations}
+    loc_ids = sorted(loc_by_id)
+    all_vehicles: list[dict] = []
+    print(f"  [Pull-A-Part] {len(loc_ids)} yards, {len(makes)} makes...", file=sys.stderr)
+    for mk in makes:
+        try:
+            r = requests.post(
+                f"{PAP_INVENTORY_API}/Vehicle/Search",
+                json={"Locations": loc_ids, "MakeID": mk["makeID"], "Models": [], "Years": []},
+                headers=auth,
+                timeout=60,
+            )
+            r.raise_for_status()
+            groups = r.json()
+        except Exception:
+            continue
+        for grp in groups if isinstance(groups, list) else []:
+            for item in (grp.get("exact") or []):
+                loc = loc_by_id.get(item.get("locID")) or {}
+                coords = PAP_COORDS.get(item.get("locID"))
+                all_vehicles.append({
+                    "id": f"pap-{item.get('locID')}-{item.get('ticketID')}-{item.get('lineID')}",
+                    "vin": item.get("vin") or "",
+                    "year": int(item.get("modelYear") or 0),
+                    "make": _utpap_format_label(item.get("makeName") or ""),
+                    "model": _utpap_format_label(item.get("modelName") or ""),
+                    "row": str(item.get("row") or ""),
+                    "dateAdded": str(item.get("dateYardOn") or "")[:10],
+                    "_location": f"Pull-A-Part - {item.get('locName') or loc.get('locationName', '')}",
+                    "_city": loc.get("cityName") or "",
+                    "_state": loc.get("stateName") or "",
+                    "_lat": coords[0] if coords else None,
+                    "_lng": coords[1] if coords else None,
+                    "_source": "pap",
+                })
+        time.sleep(0.2)
+
+    seen: set[str] = set()
+    unique = []
+    for v in all_vehicles:
+        if v["id"] not in seen:
+            seen.add(v["id"])
+            unique.append(v)
+    print(f"  [Pull-A-Part] {len(unique)} vehicles", file=sys.stderr)
+    return unique
+
+
+def refresh_pap_pricing_file(locations: list[dict] | None = None) -> Path:
+    """Per-yard Pull-A-Part price lists -> pap_pricing.json, keyed by yard
+    display name (matches _location on inventory rows)."""
+    if locations is None:
+        locations = fetch_pap_locations()
+    tok = _pap_token("EnterpriseService.External")
+    auth = {**HEADERS, "Authorization": f"Bearer {tok}"}
+    out: dict[str, dict] = {}
+    for loc in locations:
+        lid = loc["locationID"]
+        try:
+            r = requests.get(
+                f"{PAP_ENTERPRISE_API}/partprice/GetPartsTermSearch/{lid}/",
+                params={"exact": 0, "searchTerm": ""},
+                headers=auth,
+                timeout=45,
+            )
+            r.raise_for_status()
+            rows = r.json()
+        except Exception as e:
+            print(f"  [PAP pricing] {loc.get('locationName')}: {e}", file=sys.stderr)
+            continue
+        prices = {}
+        for p in rows if isinstance(rows, list) else []:
+            name = (p.get("partname") or "").strip()
+            if name in PAP_PRICE_PARTNAMES and p.get("price"):
+                # Keep the cheapest variant when duplicate names appear.
+                prev = prices.get(name)
+                if prev is None or p["price"] < prev["price"]:
+                    prices[name] = {"price": p["price"], "core": p.get("corePrice") or 0}
+        if prices:
+            out[f"Pull-A-Part - {loc.get('locationName', '')}"] = prices
+        time.sleep(0.2)
+    path = DATA_DIR / "pap_pricing.json"
+    path.write_text(json.dumps(out, separators=(",", ":")))
+    print(f"  [PAP pricing] wrote {len(out)} yard price lists", file=sys.stderr)
+    return path
+
+
 def enrich_vehicles(
     vehicles: list[dict],
     *,
@@ -3325,7 +3775,7 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
             "id": v.get("id"),
             "vin": v.get("vin", ""),
             "year": v.get("year"),
-            "make": v.get("make", ""),
+            "make": _canon_make(v.get("make", "")),
             "model": v.get("model", ""),
             "row": v.get("row", ""),
             "dateAdded": v.get("dateAdded", ""),
@@ -3442,8 +3892,8 @@ def print_rich(vehicles: list[dict], show_all: bool = False):
     console = Console()
     console.print()
     console.print(Panel.fit(
-        "[bold yellow]Junkyard Hunter[/] — Live Utah Inventory Scan\n"
-        "[dim]Pick-n-Pull + Tear-A-Part + Utah Pic-A-Part | No engines, no trans — carryable parts only[/]",
+        "[bold yellow]Junkyard Hunter[/] — Live Inventory Scan\n"
+        "[dim]Pick-n-Pull + Pick Your Part + Pull-A-Part + Utah chains | No engines, no trans — carryable parts only[/]",
         border_style="yellow",
     ))
 
@@ -3496,7 +3946,7 @@ def print_plain(vehicles: list[dict]):
     hits = [v for v in vehicles if v.get("_matches")]
     hits.sort(key=lambda v: v.get("_max_value", 0), reverse=True)
     print(f"\n{'='*60}")
-    print(f"  JUNKYARD HUNTER — Live Utah Scan")
+    print(f"  JUNKYARD HUNTER — Live Scan")
     print(f"  {len(vehicles)} vehicles | {len(hits)} matches")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print(f"{'='*60}\n")
@@ -3786,7 +4236,7 @@ def _record_scan_to_db(vehicles: list[dict], scraped_at: str) -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Junkyard Hunter — Live Utah Scan")
+    parser = argparse.ArgumentParser(description="Junkyard Hunter — live self-service junkyard scan")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--all", action="store_true", help="Include non-matching vehicles in output")
     parser.add_argument("--watch", action="store_true")
@@ -3798,6 +4248,11 @@ def main():
         "--refresh-utpap-pricing",
         action="store_true",
         help="Fetch utpap.com pricelist (1064Carpricelist.php) and write utpap_pricing.json, then exit",
+    )
+    parser.add_argument(
+        "--refresh-chain-pricing",
+        action="store_true",
+        help="Fetch per-yard price lists for LKQ Pick Your Part + Pull-A-Part and write pyp_pricing.json / pap_pricing.json, then exit",
     )
     parser.add_argument(
         "--decode-vins",
@@ -3814,7 +4269,7 @@ def main():
     parser.add_argument(
         "--national",
         action="store_true",
-        help="Pick-n-Pull: scan the entire US+Canada network (~49 yards) instead of Utah radius. Tear-A-Part/Utah Pic-A-Part are Utah-only chains and stay as-is.",
+        help="Scan every supported chain nationwide: Pick-n-Pull US+Canada, LKQ Pick Your Part (~60 yards), Pull-A-Part (~36 yards incl. former U-Pull-&-Pay). Without this flag, only the SLC-radius chains are scanned.",
     )
     args = parser.parse_args()
 
@@ -3822,6 +4277,11 @@ def main():
         path = refresh_utpap_pricing_file()
         n = len(json.loads(path.read_text()))
         print(f"Wrote {n} price rows to {path}", file=sys.stderr)
+        return
+
+    if args.refresh_chain_pricing:
+        refresh_pyp_pricing_file()
+        refresh_pap_pricing_file()
         return
 
     if args.list_parts:
@@ -3889,7 +4349,16 @@ def main():
         print("Scanning Utah Pic-A-Part (Ogden + Orem)...", file=sys.stderr)
         utpap_vehicles = fetch_utpap_inventory()
 
-        all_vehicles = pnp_vehicles + tap_vehicles + utpap_vehicles
+        pyp_vehicles: list[dict] = []
+        pap_vehicles: list[dict] = []
+        if args.national:
+            # National-only chains: no yards near SLC, so skip on local scans.
+            print("Scanning LKQ Pick Your Part (pyp.com, ~60 yards)...", file=sys.stderr)
+            pyp_vehicles = fetch_pyp_inventory()
+            print("Scanning Pull-A-Part (incl. former U-Pull-&-Pay yards)...", file=sys.stderr)
+            pap_vehicles = fetch_pap_inventory()
+
+        all_vehicles = pnp_vehicles + tap_vehicles + utpap_vehicles + pyp_vehicles + pap_vehicles
         all_vehicles = enrich_vehicles(
             all_vehicles,
             decode_vins=decode_vins,
