@@ -59,7 +59,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/inventory_live.json docs/data/pyp_pricing.json docs/data/pap_pricing.json
+          git add docs/data/inventory_live.json docs/data/picknpull_pricing.json docs/data/pyp_pricing.json docs/data/pap_pricing.json
           if git diff --staged --quiet; then
             echo "No inventory changes."
           else

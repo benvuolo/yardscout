@@ -104,7 +104,7 @@
         <label for="live-filter-match">Show</label>
         <select id="live-filter-match">
           <option value="">Every car</option>
-          <option value="match">Worth pulling only</option>
+          <option value="match">Worth a look only</option>
           <option value="nomatch">Nothing flagged</option>
         </select>
       </div>
@@ -173,9 +173,9 @@
       <div class="ctl">
         <label for="sort-by">Sort by</label>
         <select id="sort-by">
-          <option value="value-desc">Most $ (total value)</option>
+          <option value="value-desc">Highest estimated value</option>
           <option value="best-part-desc">Best single part</option>
-          <option value="roi-desc">Best ROI first</option>
+          <option value="roi-desc">Value vs. pull cost</option>
           <option value="rarity">Rarest parts first</option>
           <option value="parts-count">Most parts</option>
           <option value="name-asc">Name A&ndash;Z</option>
@@ -270,6 +270,7 @@
   <footer class="app-footer">
     <p><strong>About the numbers:</strong> All dollar figures are ranges based on typical eBay sold prices (a national market) for used parts in working condition. Facebook Marketplace and local classifieds are local markets &mdash; prices vary by area, so check your own market before pulling. Condition dominates: a cracked, faded, or non-working part may be worth little or nothing, and none of these figures are a guarantee. Pull costs are shown only when they come from that yard's own published price list; otherwise you'll see &ldquo;check yard price list&rdquo; and the estimate is resale-only.</p>
     <p style="margin-top:0.5rem;"><strong>About coverage:</strong> Junkyard Hunter tracks every major self-service chain with online inventory &mdash; Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part (including former U-Pull-&amp;-Pay yards) &mdash; <span class="coverage-count">~150</span> yards nationwide, plus Utah's Tear-A-Part and Utah Pic-A-Part. Independent local yards aren't tracked yet.</p>
+    <p style="margin-top:0.5rem;"><strong>About freshness:</strong> Inventory is re-scanned every 6 hours &mdash; the &ldquo;Updated&rdquo; stat above shows the last scan time. Parts listed on a car are what it <em>originally came with</em>; yards track cars, not remaining parts, so a part may already be pulled by the time you visit. Yard pull costs come from each chain's own published price sheet, refreshed with the scans. Resale ranges are curated estimates from typical eBay sold prices &mdash; not live quotes.</p>
     <p style="margin-top:0.5rem;">Always inspect a part on the car before you buy. Inventory reflects the last scan and yards sell or crush cars daily.</p>
     <p style="margin-top:0.5rem;">Junkyard Hunter <span id="jh-version" style="user-select:none;">v2.1</span></p>
   </footer>
@@ -296,7 +297,7 @@
     <h2>Junkyard Hunter <span class="brand-accent">Pro</span></h2>
     <button type="button" id="upgrade-close">Close</button>
   </div>
-  <p class="sheet-sub">Know what every car is worth before you drive to the yard. Pro hasn't launched yet &mdash; join the waitlist and you'll be first in when it does.</p>
+  <p class="sheet-sub">Know which cars are worth your time before you drive to the yard. Pro hasn't launched yet &mdash; join the waitlist and you'll be first in when it does.</p>
 
   <div class="tier-card">
     <div class="tier-head"><span class="tier-name">Pro</span><span class="tier-price">$9.99<small>/mo</small></span></div>
