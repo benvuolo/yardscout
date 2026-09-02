@@ -1,8 +1,18 @@
 # Junkyard Hunter
 
-Find valuable "unobtanium" parts on common junkyard cars in Utah and flip them for profit. Scrapes live inventory from **Pick-n-Pull (SLC)**, **Tear-A-Part (SLC + Ogden)**, and **Utah Pic-A-Part (Ogden + Orem)** (XML feeds covering standard and premium lot rows, with VINs), cross-references against a curated database of rare/valuable parts, and shows you exactly what to pull, what it costs, what it sells for, and where to sell it.
+**Live app: https://benvuolo.github.io/junkyard-hunter/**
+
+Find valuable "unobtanium" parts on common junkyard cars and flip them for profit. Scrapes live inventory from **every US/Canada Pick-n-Pull** plus Utah's **Tear-A-Part (SLC + Ogden)** and **Utah Pic-A-Part (Ogden + Orem)**, cross-references against a curated database of rare/valuable parts, and shows you exactly what to pull, what it costs, what it sells for, and where to sell it.
 
 No engines. No transmissions. Just parts you can carry out.
+
+## Install on your phone
+
+1. Open **https://benvuolo.github.io/junkyard-hunter/** in Safari (iPhone) or Chrome (Android)
+2. iPhone: tap the Share button, then **Add to Home Screen**. Android: tap the menu, then **Install app**
+3. Launch it from your home screen — it runs full-screen like a native app and keeps working offline with the last-loaded inventory
+
+Inventory auto-refreshes every 6 hours via GitHub Actions (see `.github/workflows/scan.yml`).
 
 ## What's in the box
 

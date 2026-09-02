@@ -60,5 +60,7 @@ jobs:
             echo "No inventory changes."
           else
             git commit -m "chore: auto-scan inventory (national)"
+            # Rebase in case anything landed on main while the scan was running.
+            git pull --rebase origin main
             git push
           fi
