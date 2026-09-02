@@ -731,7 +731,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "ST3/RS HID Headlights (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 45, "trim": ["ST", "RS"]},
             {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 71, "trim": ["ST", "RS"]},
-            {"name": "ST/RS Intercooler", "rarity": "Rare", "low": 100, "high": 250, "cost": 95, "trim": ["ST", "RS"]},
+            {"name": "ST/RS Intercooler", "rarity": "Rare", "low": 60, "high": 160, "cost": 95, "trim": ["ST", "RS"]},
             {"name": "ST/RS Steering Wheel", "rarity": "Rare", "low": 100, "high": 225, "cost": 37, "trim": ["ST", "RS"]},
             {"name": "RS Brake Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 28, "trim": ["RS"]},
             {"name": "SYNC 3 Touchscreen (8\")", "rarity": "Rare", "low": 150, "high": 350, "cost": 45, "yr_min": 2015},
@@ -746,7 +746,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 250, "high": 500, "cost": 45, "yr_min": 2017},
             {"name": "SYNC 3 Touchscreen (8\")", "rarity": "Rare", "low": 150, "high": 350, "cost": 45, "yr_min": 2016},
-            {"name": "Sport Twin-Turbo Intercooler", "rarity": "Epic", "low": 150, "high": 350, "cost": 95, "trim": ["Sport"]},
+            {"name": "Sport Twin-Turbo Intercooler", "rarity": "Epic", "low": 100, "high": 250, "cost": 95, "trim": ["Sport"]},
             {"name": "Power Heated Mirrors (BSM, pair)", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 42, "yr_min": 2013},
             {"name": "Heated/Cooled Seat Module", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 29, "yr_min": 2013},
             {"name": "Sony Audio Amp + Speakers", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 44},
@@ -1673,7 +1673,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED Headlights (pair)", "rarity": "Rare", "low": 250, "high": 550, "cost": 45, "yr_min": 2019},
             {"name": "MIB / Composition Touchscreen", "rarity": "Rare", "low": 180, "high": 400, "cost": 45, "yr_min": 2016},
-            {"name": "GLI Brembo Calipers (set)", "rarity": "Epic", "low": 350, "high": 750, "cost": 50, "trim": ["GLI"]},
+            {"name": "GLI Brembo Calipers (set)", "rarity": "Epic", "low": 175, "high": 500, "cost": 50, "trim": ["GLI"]},
         ],
     },
     "g70": {
@@ -4019,11 +4019,73 @@ def _iso_utc_z() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+LIFESPAN_MIN_N = 30  # departures needed before a yard/chain average is trusted
+
+
+def _yard_lifespan_lookup() -> dict[str, tuple[int, str]]:
+    """{location: (avg_days, basis)} for the crush-risk signal, resolved with a
+    minimum-sample guard: a yard's own average needs >= LIFESPAN_MIN_N departed
+    vehicles; otherwise fall back to its chain's average, then the global one.
+    The basis ("yard" / "chain" / "all") ships to the UI so the copy can say
+    which average it's quoting. Empty dict when the history DB is missing or
+    has no usable departures yet — the UI simply shows nothing."""
+    try:
+        try:
+            import db as _db
+        except ImportError:
+            from scraper import db as _db  # pragma: no cover
+        stats = _db.lifespan_stats()
+    except Exception as e:
+        print(f"  [lifespan] history DB unavailable ({e}) — skipping crush-risk data", file=sys.stderr)
+        return {}
+    g_avg, g_n = stats["global"]
+    out: dict[str, tuple[int, str]] = {}
+    # Resolve for every yard the DB knows; the payload builder only reads the
+    # ones present in the current scan.
+    known_locs = set(stats["yards"]) | set()
+    def resolve(loc: str) -> tuple[int, str] | None:
+        y = stats["yards"].get(loc)
+        if y and y[1] >= LIFESPAN_MIN_N:
+            return round(y[0]), "yard"
+        chain = loc.split(" - ")[0].strip()
+        c = stats["chains"].get(chain)
+        if c and c[1] >= LIFESPAN_MIN_N:
+            return round(c[0]), "chain"
+        if g_n >= LIFESPAN_MIN_N:
+            return round(g_avg), "all"
+        return None
+    for loc in known_locs:
+        r = resolve(loc)
+        if r:
+            out[loc] = r
+    n_yard = sum(1 for v in out.values() if v[1] == "yard")
+    print(
+        f"  [lifespan] global avg {round(g_avg, 1)}d over {g_n} departures; "
+        f"{n_yard} yard(s) have their own average (n>={LIFESPAN_MIN_N})",
+        file=sys.stderr,
+    )
+    out["__global__"] = (round(g_avg), "all") if g_n >= LIFESPAN_MIN_N else None
+    out["__chains__"] = {k: (round(a), "chain") for k, (a, n) in stats["chains"].items() if n >= LIFESPAN_MIN_N}
+    return out
+
+
 def compact_inventory_v2(entries: list[dict]) -> dict:
     """Schema v2: dedupe yards + part lists into lookup tables and store vehicles
     as flat arrays. Identical part lists repeat across every vehicle of the same
     model (~13 MB of the v1 file), and yard name/city/state/coords repeat per
     vehicle, so v2 is roughly 5x smaller before gzip."""
+    lifespans = _yard_lifespan_lookup()
+    ls_global = lifespans.pop("__global__", None)
+    ls_chains = lifespans.pop("__chains__", {})
+
+    def yard_lifespan(loc: str) -> tuple[int, str] | None:
+        if loc in lifespans:
+            return lifespans[loc]
+        chain = loc.split(" - ")[0].strip()
+        if chain in ls_chains:
+            return ls_chains[chain]
+        return ls_global
+
     yards: list[list] = []
     yard_idx: dict[tuple, int] = {}
     part_sets: list[list[dict]] = []
@@ -4038,7 +4100,11 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
         if yi is None:
             yi = len(yards)
             yard_idx[ykey] = yi
-            yards.append([ykey[0], ykey[1], ykey[2], ykey[3], ykey[4]])
+            ls = yard_lifespan(ykey[0]) if ykey[0] else None
+            # Columns 5/6: avg lot lifespan (days) + basis ("yard"/"chain"/"all")
+            # for the crush-risk signal; null when there's no usable history.
+            yards.append([ykey[0], ykey[1], ykey[2], ykey[3], ykey[4],
+                          ls[0] if ls else None, ls[1] if ls else None])
 
         parts = e.get("topParts") or []
         pi = -1
@@ -4082,7 +4148,7 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
         "scrapedAt": _iso_utc_z(),
         "fields": ["id", "vin", "year", "make", "model", "row", "dateAdded",
                    "yard", "partSet", "maxValue", "premium"],
-        "yardFields": ["location", "city", "state", "lat", "lng"],
+        "yardFields": ["location", "city", "state", "lat", "lng", "avgLifespanDays", "lifespanBasis"],
         "yards": yards,
         "partSets": part_sets,
         "vpic": vpic,

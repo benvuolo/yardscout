@@ -298,6 +298,7 @@ async function loadLiveInventory() {
           hasMatch: parts.length > 0, maxValue: r[9] || 0,
           displayName: `${r[3]} ${r[4]}`.trim(), topParts: parts,
         };
+        if (y[5] != null) { v.yardAvgLifespan = y[5]; v.yardLifespanBasis = y[6] || 'all'; }
         const vp = vpic[String(i)];
         if (vp) {
           v.vpicTrim = vp[0]; v.vpicTrimQuality = vp[1];
@@ -323,6 +324,7 @@ async function loadLiveInventory() {
     liveLoaded = true;
     updateCoverageCounts();
     populateLiveMakeFilter();
+    applyShareHash();
     renderLive();
     checkAndNotify();
     updateAlertsBadge();
@@ -691,6 +693,12 @@ document.getElementById('saved-list').addEventListener('click', e => {
   renderLive();
 });
 document.getElementById('live-grid').addEventListener('click', e => {
+  const share = e.target.closest('.share-btn');
+  if (share) {
+    e.preventDefault();
+    shareVehicle(share.dataset.vkey);
+    return;
+  }
   const btn = e.target.closest('.heart-btn');
   if (!btn) return;
   e.preventDefault();
@@ -699,9 +707,65 @@ document.getElementById('live-grid').addEventListener('click', e => {
 });
 updateSavedPill();
 
+/* ===== SHAREABLE FINDS (deep links) ===== */
+let focusedCarKey = null;
+
+function applyShareHash() {
+  const m = location.hash.match(/#car=([^&]+)/);
+  focusedCarKey = m ? decodeURIComponent(m[1]) : null;
+}
+window.addEventListener('hashchange', () => {
+  applyShareHash();
+  if (liveLoaded) {
+    renderLive();
+    if (focusedCarKey) window.scrollTo({ top: 0 });
+  }
+});
+
+function jhClearFocus() {
+  focusedCarKey = null;
+  history.replaceState(null, '', location.pathname + location.search);
+  renderLive();
+}
+
+function shareUrlFor(v) {
+  return location.origin + location.pathname + '#car=' + encodeURIComponent(vehicleKey(v));
+}
+
+async function shareVehicle(key) {
+  const v = liveInventory.find(x => vehicleKey(x) === key);
+  if (!v) return;
+  const added = v.dateAdded ? new Date(v.dateAdded) : null;
+  const arrived = added
+    ? added.toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric',
+        ...(added.getFullYear() !== new Date().getFullYear() ? { year: 'numeric' } : {}),
+      }) : '';
+  const bits = [`${v.year} ${v.make} ${v.model}`];
+  if (v.row) bits.push(`Row ${v.row}`);
+  const text = `${bits.join(' — ')} at ${v.location}${arrived ? ', arrived ' + arrived : ''}`;
+  const url = shareUrlFor(v);
+  if (navigator.share) {
+    try { await navigator.share({ title: 'Junkyard Hunter find', text, url }); return; } catch (e) { /* cancelled/unsupported -> fall through */ }
+  }
+  try {
+    await navigator.clipboard.writeText(`${text}\n${url}`);
+    const btn = document.querySelector(`.share-btn[data-vkey="${CSS.escape(key)}"]`);
+    if (btn) {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<small style="font-size:0.6rem;">Copied</small>';
+      setTimeout(() => { btn.innerHTML = orig; }, 1400);
+    }
+  } catch (e) {
+    prompt('Copy this link:', url);
+  }
+}
+
 /* First-run banner: ask for a zip once, in plain language. */
 function updateZipBanner() {
-  const show = !localStorage.getItem('jh_zip') && !localStorage.getItem('jh_gps')
+  // A shared deep link should land on the car, not the onboarding banner.
+  const show = !focusedCarKey
+    && !localStorage.getItem('jh_zip') && !localStorage.getItem('jh_gps')
     && localStorage.getItem('jh_zip_skipped') !== '1';
   document.getElementById('zip-banner').style.display = show ? '' : 'none';
 }
@@ -724,6 +788,12 @@ document.getElementById('zip-banner-skip').addEventListener('click', () => {
 });
 
 function getFilteredLive() {
+  // Focused shared-find view: show exactly that car, ignoring all filters, so
+  // a deep link works for someone with no zip/radius state at all.
+  if (focusedCarKey) {
+    const v = liveInventory.find(x => vehicleKey(x) === focusedCarKey);
+    if (v) return [v];
+  }
   const search = document.getElementById('live-search').value.toLowerCase();
   const makeFilter = document.getElementById('live-filter-make').value;
   const matchFilter = document.getElementById('live-filter-match').value;
@@ -789,6 +859,19 @@ function getFilteredLive() {
       case 'profit-desc': return totalProfit(b) - totalProfit(a);
       case 'value-desc': return (b.maxValue || 0) - (a.maxValue || 0);
       case 'haul-desc': return totalHaul(b) - totalHaul(a);
+      case 'leaving-soonest': {
+        // Days-on-lot as a share of the yard's historical average. Cars past
+        // 2x the average have already defied it (the average predicts nothing
+        // for them), so they rank below the genuine 0.8-2x leaving window;
+        // cars without lifespan data sort last.
+        const urgency = v => {
+          if (!v.yardAvgLifespan || !v.dateAdded) return -1;
+          const r = daysSinceAdded(v.dateAdded) / v.yardAvgLifespan;
+          return r > 2 ? 0.75 : r;
+        };
+        const d = urgency(b) - urgency(a);
+        return d !== 0 ? d : new Date(a.dateAdded) - new Date(b.dateAdded);
+      }
       case 'date-desc': return new Date(b.dateAdded) - new Date(a.dateAdded);
       case 'date-asc': return new Date(a.dateAdded) - new Date(b.dateAdded);
       case 'year-desc': return (b.year || 0) - (a.year || 0);
@@ -840,6 +923,21 @@ function renderLive() {
     <div class="stat-card"><div class="label">Updated</div><div class="value" style="font-size:0.85rem;line-height:1.5;">${scrapedLabel}</div></div>
   `;
 
+  // Shared-link landing: focused single-car view, or an honest message when
+  // the shared car has left the inventory.
+  if (focusedCarKey) {
+    const found = liveInventory.find(x => vehicleKey(x) === focusedCarKey);
+    if (!found) {
+      document.getElementById('live-grid').innerHTML = `
+        <div class="empty-state" style="grid-column:1/-1;">
+          <h3>That car isn't in the current inventory</h3>
+          <p>It may have been pulled or crushed since the link was shared &mdash; yards turn over daily.</p>
+          <button type="button" class="btn btn-primary" style="margin-top:0.8rem;" onclick="jhClearFocus()">See all cars</button>
+        </div>`;
+      return;
+    }
+  }
+
   if (!vehicles.length) {
     // If the radius filter is what emptied the grid, say so helpfully: name the
     // closest yard and how far it is instead of showing a blank wall.
@@ -875,13 +973,38 @@ function renderLive() {
   const overflow = vehicles.length > RENDER_CAP ? vehicles.length - RENDER_CAP : 0;
   const vehiclesToRender = overflow ? vehicles.slice(0, RENDER_CAP) : vehicles;
 
-  document.getElementById('live-grid').innerHTML = vehiclesToRender.map(v => {
+  const focusBanner = focusedCarKey ? `
+    <div class="focus-banner" style="grid-column:1/-1;">
+      <span>Shared find &mdash; showing this car from the latest scan.</span>
+      <button type="button" class="btn" onclick="jhClearFocus()">See all cars</button>
+    </div>` : '';
+
+  document.getElementById('live-grid').innerHTML = focusBanner + vehiclesToRender.map(v => {
     const isMatch = v.hasMatch;
     const isNewVehicle = isNew(v.dateAdded);
     const dateStr = new Date(v.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     const cardClass = isMatch ? 'match-card' : 'dim-card';
     const fm = freshnessMultiplier(v.dateAdded);
     const fl = freshnessLabel(v.dateAdded);
+
+    // Crush-risk signal from yard departure history: factual day count vs the
+    // yard's historical average — an estimate, never a prediction.
+    const daysOn = v.dateAdded ? Math.floor(daysSinceAdded(v.dateAdded)) : null;
+    let lotClock = '', leavingSoon = false;
+    if (v.yardAvgLifespan && daysOn != null) {
+      const basisTxt = v.yardLifespanBasis === 'yard' ? 'at this yard'
+        : v.yardLifespanBasis === 'chain' ? 'for this chain' : 'across covered yards';
+      const avg = v.yardAvgLifespan;
+      const title = `Compared to the average time departed vehicles spent on the lot (historical average ${basisTxt} — an estimate, not a schedule)`;
+      if (daysOn > 2 * avg) {
+        // Long-timers have already outlived the average — claiming "leaving
+        // soon" would be false urgency, so just state the facts.
+        lotClock = `<div class="lot-clock" title="${title}">On the lot ${daysOn} days &mdash; past the ~${avg}-day typical ${basisTxt}</div>`;
+      } else {
+        leavingSoon = daysOn >= 0.8 * avg;
+        lotClock = `<div class="lot-clock${leavingSoon ? ' lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} of ~${avg} typical ${basisTxt}</div>`;
+      }
+    }
 
     let cardStyle = '', profitLine = '', partsBlock = '';
     if (isMatch && v.topParts && v.topParts.length) {
@@ -1000,9 +1123,12 @@ function renderLive() {
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
             <div class="live-card-location">&#x1F4CD; ${v.location}${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span style="color:var(--blue);font-weight:700;">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}</div>
             <div class="car-meta">Added ${dateStr}${vinMetaHtml(v)}</div>
+            ${lotClock}
           </div>
           <div class="car-badges">
+            <button type="button" class="share-btn" data-vkey="${vehicleKey(v)}" title="Share this find"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></button>
             <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${vehicleKey(v)}" title="Save for your yard visit">&#x2764;&#xFE0F;</button>
+            ${leavingSoon ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon (est.)</span>' : ''}
             ${isNewVehicle ? '<span class="badge badge-new">NEW</span>' : ''}
             ${isMatch
               ? '<span class="badge" title="Time on the lot — older arrivals are more likely already picked over, so value estimates are discounted" style="background:' + (fm >= 0.75 ? 'var(--green-soft)' : fm >= 0.5 ? 'var(--gold-soft)' : 'var(--red-soft)') + ';color:' + fl.color + ';">' + fl.text + '</span>'
