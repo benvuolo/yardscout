@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Junkyard Hunter</title>
-<meta name="theme-color" content="#0b0d11">
+<meta name="theme-color" content="#0e0f12">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,17 +18,32 @@
 <body>
 
 <header>
-  <h1><span class="icon">&#x1F527;</span> Junkyard <span class="brand-accent">Hunter</span></h1>
-  <p>Live nationwide junkyard intelligence &mdash; every Pick-n-Pull yard + Utah chains, priced part-by-part</p>
+  <h1>
+    <span class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="var(--accent)" fill-rule="evenodd">
+        <path d="M12 3.2 19.6 7.6 v8.8 L12 20.8 4.4 16.4 V7.6 Z M12 8.9 a3.1 3.1 0 1 0 0 6.2 a3.1 3.1 0 0 0 0 -6.2 Z"/>
+      </svg>
+    </span>
+    Junkyard <span class="brand-accent">Hunter</span>
+  </h1>
+  <p>Live inventory from every Pick-n-Pull yard + Utah chains, checked against real part prices</p>
 </header>
 
 <div class="container">
   <div class="tabs">
-    <button class="tab active" data-tab="live"><span class="tab-ico">&#x1F4E1;</span><span class="tab-label">Live</span></button>
-    <button class="tab" data-tab="database"><span class="tab-ico">&#x1F4DA;</span><span class="tab-label">Parts</span></button>
-    <button class="tab" data-tab="value"><span class="tab-ico">&#x1F4B0;</span><span class="tab-label">Values</span></button>
-    <button class="tab" data-tab="profit"><span class="tab-ico">&#x1F4B5;</span><span class="tab-label">Profit</span></button>
-    <button class="tab" data-tab="alerts" id="alerts-tab-btn"><span class="tab-ico">&#x1F514;</span><span class="tab-label">Alerts</span><span class="tab-badge" id="alerts-badge" style="display:none;">0</span></button>
+    <button class="tab active" data-tab="live">
+      <span class="tab-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/></svg></span>
+      <span class="tab-label">Live</span>
+    </button>
+    <button class="tab" data-tab="database">
+      <span class="tab-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" fill-rule="evenodd"><path d="M12 3.2 19.6 7.6 v8.8 L12 20.8 4.4 16.4 V7.6 Z M12 8.9 a3.1 3.1 0 1 0 0 6.2 a3.1 3.1 0 0 0 0 -6.2 Z"/></svg></span>
+      <span class="tab-label">Parts</span>
+    </button>
+    <button class="tab" data-tab="alerts" id="alerts-tab-btn">
+      <span class="tab-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg></span>
+      <span class="tab-label">Alerts</span>
+      <span class="tab-badge" id="alerts-badge" style="display:none;">0</span>
+    </button>
   </div>
 
   <!-- LIVE INVENTORY TAB -->
@@ -47,9 +62,9 @@
     </div>
     <div class="stats-bar" id="live-stats-bar"></div>
     <div class="toolbar">
-      <input type="text" class="search-box" id="live-search" placeholder="&#x1F50D; Search make, model, yard, part...">
+      <input type="text" class="search-box" id="live-search" placeholder="Search make, model, yard, part...">
       <button type="button" class="filter-toggle" id="live-filter-toggle">
-        <span>&#x2699;&#xFE0F;</span> Filters <span class="filter-count" id="live-filter-count" style="display:none;">0</span>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.4"/><circle cx="7" cy="17" r="2.4"/></svg> Filters <span class="filter-count" id="live-filter-count" style="display:none;">0</span>
       </button>
     </div>
     <div class="controls" id="live-controls">
@@ -94,14 +109,14 @@
       <div class="ctl">
         <label for="live-sort">Sort by</label>
         <select id="live-sort">
-          <option value="smart-profit">Best money right now</option>
-          <option value="fastest-sell">Fastest to sell</option>
-          <option value="gold-first">Best finds first</option>
-          <option value="profit-desc">Most total profit</option>
+          <option value="smart-profit">Recommended (value &times; freshness)</option>
+          <option value="fastest-sell">Fastest-selling parts</option>
+          <option value="gold-first">Highest-value parts</option>
+          <option value="profit-desc">Highest estimated value</option>
           <option value="value-desc">Best single part</option>
-          <option value="haul-desc">Biggest haul</option>
-          <option value="date-desc">Just arrived</option>
-          <option value="date-asc">Been there longest</option>
+          <option value="haul-desc">Highest total resale</option>
+          <option value="date-desc">Newest arrivals</option>
+          <option value="date-asc">Longest on the lot</option>
           <option value="year-desc">Year: newest</option>
           <option value="year-asc">Year: oldest</option>
           <option value="make-asc">Make A&ndash;Z</option>
@@ -120,7 +135,7 @@
   <div id="tab-database" class="tab-content">
     <div class="stats-bar" id="stats-bar"></div>
     <div class="toolbar">
-      <input type="text" class="search-box" id="search" placeholder="&#x1F50D; Search cars, parts, makes...">
+      <input type="text" class="search-box" id="search" placeholder="Search cars, parts, makes...">
     </div>
     <div class="controls open">
       <div class="ctl">
@@ -167,107 +182,6 @@
       </div>
     </div>
     <div class="car-grid" id="car-grid"></div>
-  </div>
-
-  <!-- VALUE GUIDE TAB -->
-  <div id="tab-value" class="tab-content">
-    <div class="toolbar">
-      <input type="text" class="search-box" id="value-search" placeholder="&#x1F50D; Search parts...">
-    </div>
-    <div class="controls open">
-      <div class="ctl">
-        <label for="value-sort">Sort by</label>
-        <select id="value-sort">
-          <option value="roi-desc">Best ROI (bang for buck)</option>
-          <option value="high-desc">Highest resale $$$</option>
-          <option value="profit-desc">Most profit (resale &minus; cost)</option>
-          <option value="cost-asc">Cheapest to pull</option>
-          <option value="rarity-desc">Rarest first</option>
-          <option value="name-asc">Part name A&ndash;Z</option>
-          <option value="car-asc">Car A&ndash;Z</option>
-        </select>
-      </div>
-    </div>
-    <div class="value-table-wrapper">
-      <table class="value-table" id="value-table">
-        <thead>
-          <tr>
-            <th>Car</th>
-            <th>Part</th>
-            <th>Rarity</th>
-            <th>Yard Cost</th>
-            <th>Resale</th>
-            <th>Profit</th>
-            <th>ROI</th>
-            <th>Where to Sell</th>
-          </tr>
-        </thead>
-        <tbody id="value-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- PROFIT BREAKDOWN TAB -->
-  <div id="tab-profit" class="tab-content">
-    <div class="stats-bar" id="profit-stats-bar"></div>
-    <div class="toolbar">
-      <input type="text" class="search-box" id="profit-search" placeholder="&#x1F50D; Search vehicle, part, yard...">
-    </div>
-    <div class="controls open" id="profit-controls">
-      <div class="ctl">
-        <label for="profit-filter-location">Yard</label>
-        <select id="profit-filter-location">
-          <option value="">All Yards</option>
-        </select>
-      </div>
-      <div class="ctl">
-        <label for="profit-filter-make">Make</label>
-        <select id="profit-filter-make">
-          <option value="">All Makes</option>
-        </select>
-      </div>
-      <div class="ctl">
-        <label for="profit-sort">Sort by</label>
-        <select id="profit-sort">
-          <option value="smart-profit">Best profit (freshness-weighted)</option>
-          <option value="fastest-sell">Fastest to sell</option>
-          <option value="profit-desc">Most profit (per vehicle)</option>
-          <option value="best-part-profit">Best single part profit</option>
-          <option value="roi-desc">Best ROI</option>
-          <option value="cheapest-pull">Cheapest total pull</option>
-          <option value="haul-desc">Biggest haul (resale)</option>
-          <option value="year-desc">Year: newest</option>
-        </select>
-      </div>
-      <div class="ctl">
-        <label>&nbsp;</label>
-        <label style="display:flex;align-items:center;gap:0.45rem;font-size:0.8rem;color:var(--text-dim);white-space:nowrap;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:600;">
-          <input type="checkbox" id="profit-match-only" checked style="width:16px;height:16px;accent-color:var(--accent);"> Matches only
-        </label>
-      </div>
-    </div>
-    <div class="profit-note">
-      <strong>Yard cost source:</strong> real price lists where available &mdash; <span class="src-pnp">PnP</span> Pick-n-Pull, <span class="src-tap">TAP</span> Tear-A-Part, <span class="src-utpap">UTPAP</span> Utah Pic-A-Part, <span class="src-est">est</span> estimated. Tear-A-Part runs 10&ndash;40% cheaper. Profit = avg resale &minus; yard cost.
-    </div>
-    <div class="value-table-wrapper">
-      <table class="value-table" id="profit-table">
-        <thead>
-          <tr>
-            <th>Vehicle</th>
-            <th>Location</th>
-            <th>Part</th>
-            <th>Rarity</th>
-            <th style="white-space:nowrap;">Yard Cost</th>
-            <th style="white-space:nowrap;">Resale (avg)</th>
-            <th style="white-space:nowrap;">Profit</th>
-            <th>ROI</th>
-            <th>Where to Sell</th>
-            <th>Freshness</th>
-          </tr>
-        </thead>
-        <tbody id="profit-tbody"></tbody>
-      </table>
-    </div>
   </div>
 
   <!-- ALERTS TAB -->
@@ -342,8 +256,8 @@
   </div>
 
   <footer class="app-footer">
-    <p><strong>Disclaimer:</strong> Resale ranges are estimates (calibrated toward typical used eBay sold pricing). Real prices depend on condition, trim, and timing. Yard pull costs use published price lists when available. This tool is for personal research only—not financial advice.</p>
-    <p style="margin-top:0.5rem;">Verify parts on the car before you buy. No warranty on inventory accuracy; data reflects the last scraper run.</p>
+    <p><strong>About the numbers:</strong> All dollar figures are ranges based on typical eBay sold prices for used parts in working condition. Condition dominates: a cracked, faded, or non-working part may be worth little or nothing, and none of these figures are a guarantee. Yard pull costs use published price lists where available, estimates otherwise.</p>
+    <p style="margin-top:0.5rem;">Always inspect a part on the car before you buy. Inventory reflects the last scan and yards sell or crush cars daily.</p>
   </footer>
 </div>
 
