@@ -251,6 +251,42 @@ def export_vin_decodes_gz(path: Path, min_new: int = 20000) -> bool:
     return True
 
 
+def lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict:
+    """Average lot lifespan (days) of departed vehicles, grouped three ways:
+    per yard, per chain (leading "Chain - City" location prefix), and global.
+
+    Lifespan = departed_at - date_added (yard-reported arrival; falls back to
+    first_seen when the feed gave no date). Absurd values are filtered — a
+    negative or >400-day lifespan is a data glitch, not a signal. Returns
+    {"yards": {loc: (avg, n)}, "chains": {chain: (avg, n)}, "global": (avg, n)}
+    with counts so callers can enforce their own minimum-sample guard."""
+    conn = _connect()
+    rows = conn.execute(
+        """SELECT location,
+                  julianday(departed_at) - julianday(COALESCE(NULLIF(date_added, ''), first_seen))
+           FROM vehicles
+           WHERE departed_at IS NOT NULL AND location != ''"""
+    ).fetchall()
+    conn.close()
+    yards: dict[str, list[float]] = {}
+    chains: dict[str, list[float]] = {}
+    all_spans: list[float] = []
+    for loc, span in rows:
+        if span is None or not (min_days <= span <= max_days):
+            continue
+        yards.setdefault(loc, []).append(span)
+        chain = loc.split(" - ")[0].strip()
+        if chain:
+            chains.setdefault(chain, []).append(span)
+        all_spans.append(span)
+    agg = lambda spans: (sum(spans) / len(spans), len(spans))
+    return {
+        "yards": {k: agg(v) for k, v in yards.items()},
+        "chains": {k: agg(v) for k, v in chains.items()},
+        "global": agg(all_spans) if all_spans else (0.0, 0),
+    }
+
+
 def summary() -> str:
     """Quick human-readable DB status."""
     conn = _connect()
