@@ -2,7 +2,16 @@
 
 **Live app: https://benvuolo.github.io/junkyard-hunter/**
 
-Find valuable "unobtanium" parts on common junkyard cars and flip them for profit. Scrapes live inventory from **every US/Canada Pick-n-Pull** plus Utah's **Tear-A-Part (SLC + Ogden)** and **Utah Pic-A-Part (Ogden + Orem)**, cross-references against a curated database of rare/valuable parts, and shows you exactly what to pull, what it costs, what it sells for, and where to sell it.
+Find valuable "unobtanium" parts on common junkyard cars and flip them for profit. Scrapes live inventory from **~150 self-service yards across four national/regional chains**:
+
+| Chain | Yards | Coverage |
+|---|---|---|
+| **Pick-n-Pull** | ~48 | West Coast heavy (CA/WA/OR/NV), plus TX, MO, IL, IN, OH, VA, RI, Canada |
+| **LKQ Pick Your Part** (pyp.com) | ~60 | CA, TX, FL, plus MD, NC, SC, GA, TN, OH, IN, IL, WI, MI, KS, OK, CO, AL |
+| **Pull-A-Part** (incl. former U-Pull-&-Pay yards) | ~36 | Southeast/Gulf (GA/AL/TN/LA/MS/NC/SC/KY/FL), OH, IN, PA, TX, AZ, NM, CO |
+| **Tear-A-Part + Utah Pic-A-Part** | 4 | Utah (SLC, Ogden, Orem) |
+
+It cross-references every car against a curated database of rare/valuable parts and shows you exactly what to pull, what it costs (when the yard publishes a real price list), what it sells for, and where to sell it.
 
 No engines. No transmissions. Just parts you can carry out.
 
@@ -28,6 +37,8 @@ junkyard-hunter/
 │   └── data/                   # Generated JSONs the app fetches
 │       ├── inventory_live.json     # Latest scrape (schema v2: compact rows + lookup tables)
 │       ├── picknpull_pricing.json  # Real Pick-n-Pull part prices (472 parts)
+│       ├── pyp_pricing.json        # Real LKQ Pick Your Part prices, per yard (--refresh-chain-pricing)
+│       ├── pap_pricing.json        # Real Pull-A-Part prices, per yard (--refresh-chain-pricing)
 │       ├── tearapart_pricing.json  # Real Tear-A-Part part prices (503 parts)
 │       └── utpap_pricing.json      # Utah Pic-A-Part list prices (--refresh-utpap-pricing)
 ├── scraper/
@@ -70,7 +81,7 @@ pip install requests beautifulsoup4 rich
 ### 3. Run the scraper
 
 ```bash
-# Scan both yards, output to terminal (rich table)
+# Scan the SLC-radius yards, output to terminal (rich table); add --national for all chains
 python scraper/junkyard_scraper.py
 
 # Scan and save JSON for the web app (include ALL vehicles)
@@ -92,9 +103,13 @@ python scraper/junkyard_scraper.py --json --all --decode-vins > inventory_live.j
 # Decode only the highest carry-profit rows (after matching), not every VIN in the fleet:
 # python scraper/junkyard_scraper.py --save --all --decode-vins-profit-top 10
 
-# NATIONAL scan — every Pick-n-Pull yard in the US + Canada (~49 yards), one API call per make.
-# Tear-A-Part and Utah Pic-A-Part are Utah-only chains and are always included as-is.
+# NATIONAL scan — every supported yard: Pick-n-Pull US+Canada, LKQ Pick Your Part
+# (~60 yards), and Pull-A-Part (~36 yards). Utah chains are always included.
 python scraper/junkyard_scraper.py --save --all --national --decode-vins-profit-top 10
+
+# Refresh per-yard price lists for Pick Your Part + Pull-A-Part (writes
+# pyp_pricing.json / pap_pricing.json; the 6-hour CI scan does this automatically)
+python scraper/junkyard_scraper.py --refresh-chain-pricing
 ```
 
 ### Phone push notifications (ntfy — free, no account)
@@ -199,24 +214,27 @@ You do **not** need to be logged into GitHub or Gmail on the machine where you d
 
 | Tab | What it shows |
 |---|---|
-| **Live Inventory** | Every vehicle in both yards, color-coded green→red by profit potential. Sortable by profit, freshness, sell speed, etc. |
-| **Profit Breakdown** | Per-part profit table with real yard costs (PnP + TAP), resale estimates, ROI, freshness decay, and where to sell each part. |
-| **Value Database** | The full unobtanium database — every tracked vehicle and its valuable parts. |
-| **Part Explorer** | Search/filter individual parts across all vehicles. |
-| **Alerts** | Vehicle watchlist; browser notifications; macOS alerts; optional **email** (Gmail) + **GitHub Actions** every 6 hours. |
+| **Live** | Every vehicle across all scanned yards, demand-first cards with resale ranges. Filter by zip + radius, GPS, make, yard. |
+| **Parts** | The full unobtanium database — every tracked vehicle and its valuable parts. |
+| **Alerts** | Vehicle watchlist; browser notifications; phone push via ntfy; optional **email** (Gmail) + **GitHub Actions** every 6 hours. |
 
 ### Sell channel intelligence
 
 Every part includes:
-- **Where to sell** — KSL Classifieds, eBay, Facebook Marketplace, T4R.org, IH8MUD, NASIOC, etc.
+- **Where to sell** — eBay, Facebook Marketplace, model-specific forums (T4R.org, IH8MUD, NASIOC), local classifieds
 - **Speed rating** — Fast / Medium / Slow (how quickly it typically sells)
-- **Tips** — e.g., "Local pickup saves $70+ shipping" or "Huge 3rd-gen community in UT, sells in days"
+- **Tips** — e.g., "Local pickup saves $70+ shipping". eBay ranges are national; Facebook Marketplace prices vary by area — check your local market.
 
-### Pricing sources
+### Pricing sources — real price lists only
 
-- **Pick-n-Pull**: Real prices pulled from their API (472 parts)
-- **Tear-A-Part**: Real prices from their published price list (503 parts)
-- Parts not found in either list show an estimated cost with an "est" badge
+Pull costs are shown **only** when they come from that yard's own published price list, and each chain's list is applied only to that chain's yards:
+
+- **Pick-n-Pull**: real prices from their API (472 parts)
+- **LKQ Pick Your Part**: per-yard price lists from pyp.com (~40 tracked parts × 60 yards)
+- **Pull-A-Part**: per-yard price lists from their pricing API (~40 tracked parts × 35 yards)
+- **Tear-A-Part / Utah Pic-A-Part**: published price lists
+
+If no real price list covers a part, the app shows "check yard price list" and the profit estimate becomes a resale-only range — it never invents a pull cost.
 
 ### Freshness scoring
 
@@ -306,12 +324,17 @@ Everything else is generated by the scraper. AirDrop those 4 files, run the scra
 
 | Source | Method | Notes |
 |---|---|---|
-| Pick-n-Pull SLC | JSON API (`picknpull.com/api/vehicle/search`) | Public, no auth needed |
+| Pick-n-Pull | JSON API (`picknpull.com/api/vehicle/search`) | Public, no auth needed; `distance=0` = national |
+| LKQ Pick Your Part | Server-rendered inventory pages (`pyp.com`) | 20 rows/page per store; store list + coords embedded on /inventory/ |
+| Pull-A-Part | JSON microservices (`inventoryservice.pullapart.com`) | Anonymous website token; one search per make covers all yards |
+| U-Pull-&-Pay | — merged into Pull-A-Part | Former UPAP yards (Albuquerque, Denver, Aurora, Colorado Springs, Cincinnati, ...) are in the Pull-A-Part feed |
 | Tear-A-Part SLC + Ogden | WordPress AJAX (`tearapart.com/wp-admin/admin-ajax.php`) | Requires a nonce token (auto-fetched) |
-| PnP part pricing | JSON API (`picknpull.com/api/parts/list/{storeId}`) | Store 74 = SLC |
+| PnP part pricing | JSON API (`picknpull.com/api/parts/list/{storeId}`) | |
+| PYP part pricing | JSON API (`pyp.com/DesktopModules/pyp_api/api/PriceList/`) | Per-location price lists |
+| PAP part pricing | JSON API (`enterpriseservice.pullapart.com/partprice/...`) | Per-location price lists |
 | TAP part pricing | Static price list (bundled in `tearapart_pricing.json`) | Manually sourced |
 | Resale estimates | eBay sold listings research + community pricing | Validated March 2026 |
-| Sell channels | KSL, eBay, FB Marketplace, T4R.org, IH8MUD, etc. | Based on real market research |
+| Sell channels | eBay, FB Marketplace, T4R.org, IH8MUD, etc. | eBay national; FB Marketplace varies by local market |
 
 ## Requirements
 
