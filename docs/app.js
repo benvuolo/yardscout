@@ -310,6 +310,13 @@ async function loadLiveInventory() {
         return v;
       });
       liveScrapedAt = raw.scrapedAt || null;
+      if (raw.pricesLastReviewed) {
+        const d = new Date(raw.pricesLastReviewed + 'T12:00:00Z');
+        if (!isNaN(d)) {
+          document.getElementById('prices-reviewed').textContent =
+            ` Value ranges last reviewed ${d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}.`;
+        }
+      }
     } else if (Array.isArray(raw)) {
       liveInventory = raw;
       liveScrapedAt = null;
