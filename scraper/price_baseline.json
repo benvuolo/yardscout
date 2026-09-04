@@ -1,0 +1,556 @@
+{
+ "audit_date": "2026-09-02",
+ "source": "scraper/price_validation_report.md (manual audit, PR #11) \u2014 evidence from recycler listed prices, enthusiast-forum sold threads, new-OEM upper bounds. eBay sold listings were bot-blocked.",
+ "entries": [
+  {
+   "part": "Recaro Seats (pair)",
+   "vehicle": "Ford Focus ST/RS",
+   "displayed_low": 350,
+   "displayed_high": 685,
+   "obs_low": 950,
+   "obs_high": 2000,
+   "confidence": "good",
+   "note": "$950\u20132,000"
+  },
+  {
+   "part": "Si/Type R Seats (pair)",
+   "vehicle": "Honda Civic",
+   "displayed_low": 265,
+   "displayed_high": 530,
+   "obs_low": 240,
+   "obs_high": 750,
+   "confidence": "good",
+   "note": "$240\u2013750"
+  },
+  {
+   "part": "3rd Row Seat",
+   "vehicle": "Chevy Tahoe",
+   "displayed_low": 175,
+   "displayed_high": 340,
+   "obs_low": 300,
+   "obs_high": 600,
+   "confidence": "good",
+   "note": "$300\u2013600 (07\u201314 gen)"
+  },
+  {
+   "part": "3rd Row Seat",
+   "vehicle": "Ford Expedition",
+   "displayed_low": 175,
+   "displayed_high": 340,
+   "obs_low": 190,
+   "obs_high": 600,
+   "confidence": "thin",
+   "note": "proxy: Tahoe/Explorer $190\u2013600"
+  },
+  {
+   "part": "Raptor Grille",
+   "vehicle": "Ford F-150",
+   "displayed_low": 175,
+   "displayed_high": 390,
+   "obs_low": 525,
+   "obs_high": 600,
+   "confidence": "good",
+   "note": "$525\u2013600"
+  },
+  {
+   "part": "RS Brake Calipers (set)",
+   "vehicle": "Ford Focus RS",
+   "displayed_low": 265,
+   "displayed_high": 455,
+   "obs_low": 400,
+   "obs_high": 910,
+   "confidence": "good",
+   "note": "$400\u2013910/set"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Toyota Camry",
+   "displayed_low": 40,
+   "displayed_high": 80,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "good",
+   "note": "$28\u2013180/side (halogen)"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Chevy Silverado",
+   "displayed_low": 40,
+   "displayed_high": 80,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "3rd Row Seat",
+   "vehicle": "Honda Pilot",
+   "displayed_low": 130,
+   "displayed_high": 265,
+   "obs_low": 189,
+   "obs_high": 246,
+   "confidence": "good",
+   "note": "$189\u2013246"
+  },
+  {
+   "part": "3rd Row Seat",
+   "vehicle": "Ford Explorer",
+   "displayed_low": 130,
+   "displayed_high": 265,
+   "obs_low": 192,
+   "obs_high": 392,
+   "confidence": "good",
+   "note": "$192\u2013392"
+  },
+  {
+   "part": "Power-Fold Tow Mirrors (pair)",
+   "vehicle": "Ford F-150",
+   "displayed_low": 225,
+   "displayed_high": 430,
+   "obs_low": 450,
+   "obs_high": 1200,
+   "confidence": "good",
+   "note": "$450\u20131,200 (2021+); older gens lower"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Honda Accord",
+   "displayed_low": 40,
+   "displayed_high": 90,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "good",
+   "note": "halogen $28\u2013180"
+  },
+  {
+   "part": "Stow-N-Go 2nd Row (each)",
+   "vehicle": "Dodge Grand Caravan",
+   "displayed_low": 175,
+   "displayed_high": 340,
+   "obs_low": 135,
+   "obs_high": 1000,
+   "confidence": "good",
+   "note": "$135\u2013500/seat ($600\u20131,000/pair kits)"
+  },
+  {
+   "part": "Stow-N-Go 2nd Row (each)",
+   "vehicle": "Chrysler T&C",
+   "displayed_low": 175,
+   "displayed_high": 340,
+   "obs_low": null,
+   "obs_high": null,
+   "confidence": "good",
+   "note": "same as above"
+  },
+  {
+   "part": "GLI Brembo Calipers (set)",
+   "vehicle": "VW Jetta",
+   "displayed_low": 155,
+   "displayed_high": 380,
+   "obs_low": 135,
+   "obs_high": 450,
+   "confidence": "good",
+   "note": "$135\u2013450/set"
+  },
+  {
+   "part": "Tailgate (clean)",
+   "vehicle": "Dodge Ram 1500",
+   "displayed_low": 130,
+   "displayed_high": 305,
+   "obs_low": 50,
+   "obs_high": 900,
+   "confidence": "good",
+   "note": "$50 (rough) \u2013 $900+ (2017+ grade A)"
+  },
+  {
+   "part": "Power Sliding Door Motor",
+   "vehicle": "Toyota Sienna",
+   "displayed_low": 135,
+   "displayed_high": 275,
+   "obs_low": 245,
+   "obs_high": 400,
+   "confidence": "good",
+   "note": "$245\u2013400"
+  },
+  {
+   "part": "Power Sliding Door Motor",
+   "vehicle": "Honda Odyssey",
+   "displayed_low": 135,
+   "displayed_high": 275,
+   "obs_low": 245,
+   "obs_high": 400,
+   "confidence": "good",
+   "note": "$245\u2013400"
+  },
+  {
+   "part": "Sport Seats (pair)",
+   "vehicle": "BMW 3-Series E90",
+   "displayed_low": 265,
+   "displayed_high": 530,
+   "obs_low": 360,
+   "obs_high": 700,
+   "confidence": "good",
+   "note": "$360\u2013700"
+  },
+  {
+   "part": "Sport Front Lip",
+   "vehicle": "Honda Accord",
+   "displayed_low": 70,
+   "displayed_high": 155,
+   "obs_low": 50,
+   "obs_high": 296,
+   "confidence": "**thin**",
+   "note": "new OEM lip $95; used likely $50\u2013120; underbody spoiler new $296+"
+  },
+  {
+   "part": "ST3/RS HID Headlights (pair)",
+   "vehicle": "Ford Focus",
+   "displayed_low": 220,
+   "displayed_high": 340,
+   "obs_low": 400,
+   "obs_high": 1300,
+   "confidence": "good",
+   "note": "$400\u20131,300/pair"
+  },
+  {
+   "part": "SRT/Scat Brembo Calipers (set)",
+   "vehicle": "Dodge Charger",
+   "displayed_low": 350,
+   "displayed_high": 685,
+   "obs_low": 600,
+   "obs_high": 1900,
+   "confidence": "good",
+   "note": "$600\u2013775/set (to $1,900 w/ rotors)"
+  },
+  {
+   "part": "Sport Twin-Turbo Intercooler",
+   "vehicle": "Ford Fusion",
+   "displayed_low": 85,
+   "displayed_high": 185,
+   "obs_low": 100,
+   "obs_high": 245,
+   "confidence": "good",
+   "note": "used ~$100; new OEM $204\u2013245"
+  },
+  {
+   "part": "N/Sport Front Bumper Assembly",
+   "vehicle": "Hyundai Elantra",
+   "displayed_low": 175,
+   "displayed_high": 350,
+   "obs_low": 265,
+   "obs_high": 774,
+   "confidence": "good",
+   "note": "used assemblies $625\u2013774; new aftermarket $265\u2013300"
+  },
+  {
+   "part": "Gauge Cluster / IPC",
+   "vehicle": "Honda Accord",
+   "displayed_low": 50,
+   "displayed_high": 120,
+   "obs_low": 75,
+   "obs_high": 185,
+   "confidence": "good",
+   "note": "$75\u2013185"
+  },
+  {
+   "part": "ST/RS Intercooler",
+   "vehicle": "Ford Focus",
+   "displayed_low": 50,
+   "displayed_high": 120,
+   "obs_low": 20,
+   "obs_high": 230,
+   "confidence": "good",
+   "note": "forum sold $20\u2013100; retail \u2264$230"
+  },
+  {
+   "part": "Heated Leather Front Seats (pair)",
+   "vehicle": "Chevy Impala",
+   "displayed_low": 130,
+   "displayed_high": 265,
+   "obs_low": 156,
+   "obs_high": 524,
+   "confidence": "good",
+   "note": "$156\u2013524/seat (recycler ask)"
+  },
+  {
+   "part": "ST/RS Steering Wheel",
+   "vehicle": "Ford Focus",
+   "displayed_low": 90,
+   "displayed_high": 165,
+   "obs_low": 75,
+   "obs_high": 241,
+   "confidence": "good",
+   "note": "$75\u2013241"
+  },
+  {
+   "part": "Si Front Lip (OEM)",
+   "vehicle": "Honda Civic",
+   "displayed_low": 70,
+   "displayed_high": 135,
+   "obs_low": 130,
+   "obs_high": 225,
+   "confidence": "good",
+   "note": "$130\u2013225 (HFP, forum sold ~$130\u2013200)"
+  },
+  {
+   "part": "Comfort Seats / Multi-Contour (pair)",
+   "vehicle": "BMW 5-Series",
+   "displayed_low": 310,
+   "displayed_high": 685,
+   "obs_low": 494,
+   "obs_high": 900,
+   "confidence": "good",
+   "note": "$494\u2013900"
+  },
+  {
+   "part": "SHO Turbo / Intercooler Parts",
+   "vehicle": "Ford Taurus",
+   "displayed_low": 170,
+   "displayed_high": 370,
+   "obs_low": 225,
+   "obs_high": 1050,
+   "confidence": "thin",
+   "note": "used turbos ~$225/ea; new pair $580\u20131,050; reman $780+/ea"
+  },
+  {
+   "part": "Brembo Calipers (set)",
+   "vehicle": "Cadillac CTS-V",
+   "displayed_low": 350,
+   "displayed_high": 685,
+   "obs_low": 575,
+   "obs_high": 1300,
+   "confidence": "good",
+   "note": "$575\u20131,300/set"
+  },
+  {
+   "part": "Instrument Cluster",
+   "vehicle": "Honda Civic",
+   "displayed_low": 45,
+   "displayed_high": 110,
+   "obs_low": 75,
+   "obs_high": 185,
+   "confidence": "thin",
+   "note": "proxy: Accord clusters $75\u2013185"
+  },
+  {
+   "part": "Panoramic Sunroof Glass",
+   "vehicle": "Hyundai Sonata",
+   "displayed_low": 135,
+   "displayed_high": 275,
+   "obs_low": 125,
+   "obs_high": 800,
+   "confidence": "good",
+   "note": "$125 (11\u201315 gen) \u2013 $275\u2013800 (2020+)"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Ford Explorer (\u22642005)",
+   "displayed_low": 40,
+   "displayed_high": 85,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Ford Explorer (06\u201310)",
+   "displayed_low": 40,
+   "displayed_high": 85,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Nissan Altima",
+   "displayed_low": 40,
+   "displayed_high": 85,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "Power Window Master Switch",
+   "vehicle": "Honda Accord",
+   "displayed_low": 30,
+   "displayed_high": 85,
+   "obs_low": 45,
+   "obs_high": 150,
+   "confidence": "good",
+   "note": "$45\u2013150 (typ. $58\u201392)"
+  },
+  {
+   "part": "iDrive / Navigation Head Unit",
+   "vehicle": "BMW 3-Series",
+   "displayed_low": 180,
+   "displayed_high": 405,
+   "obs_low": 120,
+   "obs_high": 443,
+   "confidence": "good",
+   "note": "$120\u2013443 (CIC sets ~$295)"
+  },
+  {
+   "part": "Brembo Front Calipers (Type-S)",
+   "vehicle": "Acura TL",
+   "displayed_low": 220,
+   "displayed_high": 455,
+   "obs_low": 240,
+   "obs_high": 390,
+   "confidence": "good",
+   "note": "$240\u2013390/pair"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Honda Civic",
+   "displayed_low": 35,
+   "displayed_high": 75,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Nissan Sentra",
+   "displayed_low": 35,
+   "displayed_high": 75,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "Brembo Calipers (set, sport pkg)",
+   "vehicle": "Infiniti G35",
+   "displayed_low": 265,
+   "displayed_high": 530,
+   "obs_low": 509,
+   "obs_high": 1100,
+   "confidence": "good",
+   "note": "$509\u2013650 calipers-only; $750\u20131,100 kits"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Chevy Equinox",
+   "displayed_low": 50,
+   "displayed_high": 100,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Ford Escape",
+   "displayed_low": 50,
+   "displayed_high": 100,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Kia Optima",
+   "displayed_low": 50,
+   "displayed_high": 100,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "OEM HID Headlights",
+   "vehicle": "Infiniti G35",
+   "displayed_low": 125,
+   "displayed_high": 225,
+   "obs_low": 130,
+   "obs_high": 350,
+   "confidence": "good",
+   "note": "$130\u2013350/side"
+  },
+  {
+   "part": "Gauge Cluster",
+   "vehicle": "Dodge Ram",
+   "displayed_low": 70,
+   "displayed_high": 150,
+   "obs_low": 35,
+   "obs_high": 250,
+   "confidence": "good",
+   "note": "$35\u2013148 (98\u201305); $125\u2013250 (2013+)"
+  },
+  {
+   "part": "Sony Audio Amp + Speakers",
+   "vehicle": "Ford Fusion",
+   "displayed_low": 70,
+   "displayed_high": 135,
+   "obs_low": 100,
+   "obs_high": 203,
+   "confidence": "good",
+   "note": "amp alone $120\u2013203; sub $100"
+  },
+  {
+   "part": "Headlights (clear)",
+   "vehicle": "Subaru Legacy",
+   "displayed_low": 45,
+   "displayed_high": 95,
+   "obs_low": 28,
+   "obs_high": 180,
+   "confidence": "thin",
+   "note": "generic halogen $28\u2013180"
+  },
+  {
+   "part": "Recaro Seats (PP/GT350)",
+   "vehicle": "Ford Mustang",
+   "displayed_low": 440,
+   "displayed_high": 910,
+   "obs_low": 350,
+   "obs_high": 3500,
+   "confidence": "good",
+   "note": "$1,750\u20133,500 (one $350 take-off outlier)"
+  },
+  {
+   "part": "MyLink Touchscreen",
+   "vehicle": "Chevy Cruze",
+   "displayed_low": 90,
+   "displayed_high": 165,
+   "obs_low": 80,
+   "obs_high": 300,
+   "confidence": "good",
+   "note": "$80\u2013300"
+  },
+  {
+   "part": "MyLink Touchscreen",
+   "vehicle": "Chevy Sonic",
+   "displayed_low": 90,
+   "displayed_high": 165,
+   "obs_low": 80,
+   "obs_high": 300,
+   "confidence": "thin",
+   "note": "proxy: Cruze $80\u2013300"
+  },
+  {
+   "part": "Turbo Intercooler + Pipes",
+   "vehicle": "Chevy Cruze",
+   "displayed_low": 70,
+   "displayed_high": 150,
+   "obs_low": 120,
+   "obs_high": 350,
+   "confidence": "good",
+   "note": "$120\u2013350 (recycler)"
+  },
+  {
+   "part": "Stow-N-Go 3rd Row",
+   "vehicle": "Dodge Grand Caravan",
+   "displayed_low": 90,
+   "displayed_high": 190,
+   "obs_low": 145,
+   "obs_high": 380,
+   "confidence": "good",
+   "note": "$145\u2013380"
+  }
+ ]
+}
