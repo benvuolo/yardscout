@@ -1,0 +1,112 @@
+# Quarterly price re-validation: re-ranks the highest-exposure parts against
+# the reviewed evidence baseline (scraper/price_baseline.json) and regenerates
+# scraper/price_validation_report.md. If any part classifies INFLATED, or the
+# report changed materially (new entrants, verdict changes, DB drift), it opens
+# a review PR. It NEVER merges and NEVER edits prices — the PR is a prompt for
+# the owner's decision.
+
+name: Quarterly Price Review
+
+on:
+  schedule:
+    - cron: "0 14 1 1,4,7,10 *"   # 1st of Jan/Apr/Jul/Oct, 14:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: price-review
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run price validator
+        run: python scraper/validate_prices.py --top 50 --summary /tmp/price_summary.json
+
+      - name: Decide whether a review PR is needed
+        id: decide
+        run: |
+          INFLATED=$(python -c "import json; print(json.load(open('/tmp/price_summary.json'))['inflated'])")
+          echo "inflated=$INFLATED" >> "$GITHUB_OUTPUT"
+          # Material change = anything beyond the report's Date line.
+          if git diff -I'^\*\*Date:\*\*' --quiet -- scraper/price_validation_report.md; then
+            CHANGED=0
+          else
+            CHANGED=1
+          fi
+          echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
+          if [ "$INFLATED" -gt 0 ] || [ "$CHANGED" -eq 1 ]; then
+            echo "pr=1" >> "$GITHUB_OUTPUT"
+            echo "Review PR needed (inflated=$INFLATED, material change=$CHANGED)."
+          else
+            echo "pr=0" >> "$GITHUB_OUTPUT"
+            echo "No material change and nothing inflated — no PR needed."
+          fi
+
+      - name: Open review PR
+        if: steps.decide.outputs.pr == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          DATE=$(date -u +%Y-%m-%d)
+          BRANCH="chore/price-review-$DATE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add scraper/price_validation_report.md
+          git commit -m "chore: quarterly price validation report ($DATE)"
+          git push -u origin "$BRANCH" --force
+          python - <<'PYEOF'
+          import json, re
+          s = json.load(open("/tmp/price_summary.json"))
+          report = open("scraper/price_validation_report.md").read()
+          def rows(tag):
+              found = [l for l in report.splitlines() if f"**{tag}**" in l and l.startswith("|")]
+              if not found:
+                  return "_none_"
+              header = "| Part | Models | ~Freq | Displayed | Evidence | Source | Verdict |\n|---|---|---|---|---|---|---|"
+              return header + "\n" + "\n".join(found)
+          body = f"""Automated quarterly re-validation of the top-{s['total']} highest-exposure resale ranges (see `scraper/validate_prices.py`). **Nothing is auto-merged or auto-edited — this PR is a review prompt.**
+
+          ## Verdict counts
+          | Classification | Count |
+          |---|---|
+          | ACCURATE | {s['accurate']} |
+          | UNDERSTATED | {s['understated']} |
+          | INFLATED | {s['inflated']} |
+          | UNVERIFIABLE | {s['unverifiable']} |
+
+          Evidence baseline: manual audit of {s['baseline_date']}; fresh eBay data used for {s['fresh_used']} part(s) this run.
+
+          ## INFLATED rows (need a pricing decision)
+          {rows('INFLATED')}
+
+          ## UNVERIFIABLE rows (new high-exposure parts with no reviewed evidence — spot-check manually)
+          {rows('UNVERIFIABLE')}
+
+          ## When accepting corrections
+          1. Edit the raw anchors in `UNOBTANIUM_DB` (`scraper/junkyard_scraper.py`).
+          2. Add/refresh the affected entries in `scraper/price_baseline.json` with the new evidence.
+          3. **Bump `PRICES_LAST_REVIEWED`** in `scraper/junkyard_scraper.py` so the app's footer shows the new review date."""
+          body = re.sub(r"^ {10}", "", body, flags=re.M)
+          open("/tmp/pr_body.md", "w").write(body)
+          PYEOF
+          gh pr create --base main --head "$BRANCH" \
+            --title "Quarterly price review: $DATE" \
+            --body-file /tmp/pr_body.md

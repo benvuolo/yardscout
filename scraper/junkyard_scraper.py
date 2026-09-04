@@ -91,6 +91,12 @@ HEADERS = {
 # NHTSA vPIC — no API key. Unique VINs are decoded in parallel (VPIC_WORKERS); no per-VIN sleep.
 VPIC_DECODEVIN_EXTENDED = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/{vin}"
 VPIC_BATCH_URL = "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/"
+
+# Date the UNOBTANIUM_DB resale ranges were last human-reviewed against market
+# evidence (see scraper/price_validation_report.md). Bump when accepting
+# corrections from a quarterly price-review PR. Exported to the v2 JSON and
+# shown in the web app's pricing-transparency footer.
+PRICES_LAST_REVIEWED = "2026-09-02"
 VPIC_BATCH_SIZE = 50
 _VPIC_CACHE: dict[str, dict | None] = {}
 def _vpic_workers() -> int:
@@ -4146,6 +4152,7 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
     return {
         "schemaVersion": 2,
         "scrapedAt": _iso_utc_z(),
+        "pricesLastReviewed": PRICES_LAST_REVIEWED,
         "fields": ["id", "vin", "year", "make", "model", "row", "dateAdded",
                    "yard", "partSet", "maxValue", "premium"],
         "yardFields": ["location", "city", "state", "lat", "lng", "avgLifespanDays", "lifespanBasis"],
