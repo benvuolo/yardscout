@@ -62,7 +62,14 @@
       <button type="button" class="btn gps-btn" id="zip-banner-gps">&#x1F4CD; Or use my location</button>
       <button type="button" class="zip-banner-skip" id="zip-banner-skip">Skip &mdash; show everything nationwide</button>
     </div>
-    <div class="stats-bar" id="live-stats-bar"></div>
+    <!-- Skeleton placeholders paint immediately and are replaced by the first
+         render once the inventory JSON arrives. -->
+    <div class="stats-bar" id="live-stats-bar">
+      <div class="skel-chip skeleton"></div>
+      <div class="skel-chip skeleton"></div>
+      <div class="skel-chip skeleton"></div>
+      <div class="skel-chip skeleton"></div>
+    </div>
     <div class="toolbar">
       <input type="text" class="search-box" id="live-search" placeholder="Search make, model, yard, part...">
       <button type="button" class="filter-toggle" id="live-filter-toggle">
@@ -131,7 +138,15 @@
         <button type="button" class="btn" id="live-export-json" title="Download current filtered rows as JSON">Export JSON</button>
       </div>
     </div>
-    <div class="car-grid" id="live-grid"></div>
+    <div class="car-grid" id="live-grid">
+      <div class="skel-note" style="grid-column:1/-1;">Loading live inventory&hellip;</div>
+      <div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>
+      <div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>
+      <div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>
+      <div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>
+      <div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>
+      <div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>
+    </div>
   </div>
 
   <!-- PARTS DATABASE TAB -->

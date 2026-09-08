@@ -860,6 +860,47 @@
   }
   .saved-empty { text-align: center; color: var(--text-dim); padding: 2rem 0; font-size: 0.9rem; }
 
+  /* ===== Loading skeleton (first paint before the inventory JSON lands) ===== */
+  .skeleton {
+    background: linear-gradient(90deg, var(--surface2) 25%, #ecedf3 37%, var(--surface2) 63%);
+    background-size: 400% 100%;
+    animation: skel-shimmer 1.4s ease infinite;
+    border-radius: var(--radius-sm);
+  }
+  @keyframes skel-shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: 0 0; }
+  }
+  .skel-chip {
+    height: 3.4rem;
+    flex: 1;
+    min-width: 7rem;
+    border: 1px solid var(--border);
+  }
+  .skel-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .skel-line { height: 0.85rem; }
+  .skel-line.w30 { width: 30%; }
+  .skel-line.w40 { width: 40%; }
+  .skel-line.w60 { width: 60%; }
+  .skel-line.w80 { width: 80%; }
+  .skel-note {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    padding: 0.4rem 0 0.2rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton { animation: none; }
+  }
+
   .lot-clock {
     margin-top: 0.25rem;
     font-size: 0.68rem;
