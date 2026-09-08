@@ -86,7 +86,20 @@ const PART_KEYWORD_MAP = [
  * yards, and there is no estimated fallback. Returns {cost:null, source:'none'}
  * whenever the yard's real price list doesn't cover the part — callers then
  * show "check yard price list" and compute resale-only ranges. */
+/* Memoized: called O(vehicles x parts) during sorting/rendering; the distinct
+ * (part, location) pairs number only a few thousand. Cleared when price lists
+ * finish loading so early misses don't stick. */
+const _yardCostMemo = new Map();
 function lookupYardCost(partName, location) {
+  const memoKey = partName + '|' + (location || '');
+  const hit = _yardCostMemo.get(memoKey);
+  if (hit !== undefined) return hit;
+  const result = _lookupYardCostUncached(partName, location);
+  _yardCostMemo.set(memoKey, result);
+  return result;
+}
+
+function _lookupYardCostUncached(partName, location) {
   const lower = partName.toLowerCase();
   const loc = (location || '').toLowerCase();
   let bestMatch = null;
@@ -246,43 +259,47 @@ function exportLiveJson() {
 }
 
 async function loadAllPricing() {
-  try {
-    const resp = await fetch('data/picknpull_pricing.json');
-    if (resp.ok) {
-      const data = await resp.json();
-      data.forEach(p => { pnpPricing[p.description] = p; });
-    }
-  } catch (e) { /* PnP pricing not available */ }
-  try {
-    const resp = await fetch('data/utpap_pricing.json');
-    if (resp.ok) {
-      const data = await resp.json();
-      data.forEach(p => { utpapPricing[p.description] = p; });
-    }
-  } catch (e) { /* Utah Pic-A-Part pricing not available */ }
-  try {
-    const resp = await fetch('data/tearapart_pricing.json');
-    if (resp.ok) {
-      const data = await resp.json();
-      data.forEach(p => { tapPricing[p.description] = p; });
-    }
-  } catch (e) { /* TAP pricing not available */ }
-  try {
-    const resp = await fetch('data/pyp_pricing.json');
-    if (resp.ok) pypPricing = await resp.json();
-  } catch (e) { /* PYP pricing not available */ }
-  try {
-    const resp = await fetch('data/pap_pricing.json');
-    if (resp.ok) papPricing = await resp.json();
-  } catch (e) { /* PAP pricing not available */ }
+  // All five price lists fetch in parallel (this used to be a serial
+  // waterfall queued in front of the big inventory fetch). Each is optional.
+  const grab = async (url, apply) => {
+    try {
+      const resp = await fetch(url);
+      if (resp.ok) apply(await resp.json());
+    } catch (e) { /* price list not available */ }
+  };
+  await Promise.all([
+    grab('data/picknpull_pricing.json', d => d.forEach(p => { pnpPricing[p.description] = p; })),
+    grab('data/utpap_pricing.json', d => d.forEach(p => { utpapPricing[p.description] = p; })),
+    grab('data/tearapart_pricing.json', d => d.forEach(p => { tapPricing[p.description] = p; })),
+    grab('data/pyp_pricing.json', d => { pypPricing = d; }),
+    grab('data/pap_pricing.json', d => { papPricing = d; }),
+  ]);
+  _yardCostMemo.clear();
 }
 
-async function loadLiveInventory() {
-  await loadAllPricing();
-  try {
-    const resp = await fetch('data/inventory_live.json');
-    if (!resp.ok) throw new Error('not found');
-    const raw = await resp.json();
+/* Expand a fetched inventory payload into app state + render. `quiet` is the
+ * background-refresh path after cached data was already shown: state is
+ * swapped, but the grid only re-renders immediately if the user is still near
+ * the top and hasn't opened anything — otherwise the fresh data shows on
+ * their next interaction (every control calls renderLive). */
+function applyInventory(raw, { quiet = false } = {}) {
+  parseInventoryPayload(raw);
+  annotateVinDuplicates(liveInventory);
+  liveLoaded = true;
+  updateCoverageCounts();
+  populateLiveMakeFilter();
+  if (!quiet) {
+    applyShareHash();
+    renderLive();
+    checkAndNotify();
+    updateAlertsBadge();
+  } else if (window.scrollY < 400 && !document.querySelector('#live-grid details[open]')) {
+    renderLive();
+  }
+}
+
+function parseInventoryPayload(raw) {
+  {
     if (raw && raw.schemaVersion === 2 && Array.isArray(raw.vehicles)) {
       // v2 compact format: expand lookup-table rows into full vehicle objects.
       const yards = raw.yards || [];
@@ -327,15 +344,46 @@ async function loadLiveInventory() {
       liveInventory = [];
       liveScrapedAt = null;
     }
-    annotateVinDuplicates(liveInventory);
-    liveLoaded = true;
-    updateCoverageCounts();
-    populateLiveMakeFilter();
-    applyShareHash();
-    renderLive();
-    checkAndNotify();
-    updateAlertsBadge();
+  }
+}
+
+const DATA_CACHE = 'jh-data-v1';
+const INVENTORY_URL = 'data/inventory_live.json';
+
+async function loadLiveInventory() {
+  // Pricing files load concurrently with the inventory (they used to be a
+  // serial waterfall in front of the 4MB fetch). Rendering needs them for
+  // pull costs, so each render path awaits this promise before first paint
+  // of cards.
+  const pricingReady = loadAllPricing();
+
+  // Repeat visits: render instantly from the Cache API copy, then revalidate
+  // in the background. (The service worker deliberately skips this file.)
+  let shownScrapedAt = null;
+  let cache = null;
+  try {
+    if ('caches' in window) {
+      cache = await caches.open(DATA_CACHE);
+      const hit = await cache.match(INVENTORY_URL);
+      if (hit) {
+        const raw = await hit.json();
+        await pricingReady;
+        applyInventory(raw);
+        shownScrapedAt = raw.scrapedAt || 'unknown';
+      }
+    }
+  } catch (e) { /* cached copy unreadable — fall through to network */ }
+
+  try {
+    const resp = await fetch(INVENTORY_URL, shownScrapedAt ? { cache: 'no-cache' } : {});
+    if (!resp.ok) throw new Error('not found');
+    if (cache) { try { await cache.put(INVENTORY_URL, resp.clone()); } catch (e) { /* quota */ } }
+    const raw = await resp.json();
+    if (shownScrapedAt && (raw.scrapedAt || 'unknown') === shownScrapedAt) return; // nothing new
+    await pricingReady;
+    applyInventory(raw, { quiet: !!shownScrapedAt });
   } catch (e) {
+    if (shownScrapedAt) return; // cached data already on screen — stay quiet
     liveLoaded = false;
     document.getElementById('live-stats-bar').innerHTML = '';
     document.getElementById('live-grid').innerHTML = `
@@ -843,54 +891,54 @@ function getFilteredLive() {
     return totalProfit(v) * freshnessMultiplier(v.dateAdded);
   }
 
-  filtered.sort((a, b) => {
-    switch (sortBy) {
-      case 'smart-profit': {
-        const diff = smartProfit(b) - smartProfit(a);
-        if (diff !== 0) return diff;
-        return new Date(b.dateAdded) - new Date(a.dateAdded);
-      }
-      case 'gold-first': {
-        const matchDiff = (b.hasMatch ? 1 : 0) - (a.hasMatch ? 1 : 0);
-        if (matchDiff !== 0) return matchDiff;
-        const valDiff = (b.maxValue || 0) - (a.maxValue || 0);
-        if (valDiff !== 0) return valDiff;
-        return new Date(b.dateAdded) - new Date(a.dateAdded);
-      }
-      case 'fastest-sell': {
-        const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
-        const bestSpeed = v => v.topParts && v.topParts.length ? Math.max(...v.topParts.map(p => speedRk(p.sell_speed))) : 0;
-        const sd = bestSpeed(b) - bestSpeed(a);
-        return sd !== 0 ? sd : totalProfit(b) - totalProfit(a);
-      }
-      case 'profit-desc': return totalProfit(b) - totalProfit(a);
-      case 'value-desc': return (b.maxValue || 0) - (a.maxValue || 0);
-      case 'haul-desc': return totalHaul(b) - totalHaul(a);
-      case 'leaving-soonest': {
-        // Days-on-lot as a share of the yard's historical average. Cars past
-        // 2x the average have already defied it (the average predicts nothing
-        // for them), so they rank below the genuine 0.8-2x leaving window;
-        // cars without lifespan data sort last.
-        const urgency = v => {
-          if (!v.yardAvgLifespan || !v.dateAdded) return -1;
-          const r = daysSinceAdded(v.dateAdded) / v.yardAvgLifespan;
-          return r > 2 ? 0.75 : r;
-        };
-        const d = urgency(b) - urgency(a);
-        return d !== 0 ? d : new Date(a.dateAdded) - new Date(b.dateAdded);
-      }
-      case 'date-desc': return new Date(b.dateAdded) - new Date(a.dateAdded);
-      case 'date-asc': return new Date(a.dateAdded) - new Date(b.dateAdded);
-      case 'year-desc': return (b.year || 0) - (a.year || 0);
-      case 'year-asc': return (a.year || 0) - (b.year || 0);
-      case 'make-asc': {
-        const mk = (a.make || '').localeCompare(b.make || '');
-        if (mk !== 0) return mk;
-        return (a.model || '').localeCompare(b.model || '');
-      }
-      default: return 0;
-    }
-  });
+  /* Decorate-sort-undecorate: sort keys are computed ONCE per vehicle (O(n)),
+   * never inside the comparator. The old comparators recomputed profit (with
+   * per-part yard-cost lookups) and re-parsed dates on every comparison --
+   * ~3M comparator calls on 163k rows cost multiple SECONDS of main-thread
+   * time and froze first paint. */
+  const tsOf = v => {
+    if (v._ts === undefined) v._ts = Date.parse(v.dateAdded) || 0;
+    return v._ts;
+  };
+  const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
+  const bestSpeed = v => v.topParts && v.topParts.length ? Math.max(...v.topParts.map(p => speedRk(p.sell_speed))) : 0;
+  // Days-on-lot as a share of the yard's historical average. Cars past 2x the
+  // average have already defied it (the average predicts nothing for them),
+  // so they rank below the genuine 0.8-2x leaving window; cars without
+  // lifespan data sort last.
+  const urgency = v => {
+    if (!v.yardAvgLifespan || !v.dateAdded) return -1;
+    const r = daysSinceAdded(v.dateAdded) / v.yardAvgLifespan;
+    return r > 2 ? 0.75 : r;
+  };
+
+  if (sortBy === 'make-asc') {
+    filtered.sort((a, b) => (a.make || '').localeCompare(b.make || '')
+      || (a.model || '').localeCompare(b.model || ''));
+    return filtered;
+  }
+  let keyFn = null, asc = false, tieAsc = false;
+  switch (sortBy) {
+    case 'smart-profit': keyFn = smartProfit; break;
+    // composite keys preserve the old multi-level tie-breaks: values stay well
+    // below each 1e9/1e12 band, so bands never collide
+    case 'gold-first': keyFn = v => (v.hasMatch ? 1e12 : 0) + (v.maxValue || 0); break;
+    case 'fastest-sell': keyFn = v => bestSpeed(v) * 1e9 + totalProfit(v); break;
+    case 'leaving-soonest': keyFn = urgency; tieAsc = true; break;
+    case 'profit-desc': keyFn = totalProfit; break;
+    case 'value-desc': keyFn = v => v.maxValue || 0; break;
+    case 'haul-desc': keyFn = totalHaul; break;
+    case 'date-desc': keyFn = tsOf; break;
+    case 'date-asc': keyFn = tsOf; asc = true; break;
+    case 'year-desc': keyFn = v => v.year || 0; break;
+    case 'year-asc': keyFn = v => v.year || 0; asc = true; break;
+  }
+  if (keyFn) {
+    const dec = filtered.map(v => [keyFn(v), tsOf(v), v]);
+    dec.sort((x, y) => (asc ? x[0] - y[0] : y[0] - x[0])
+      || (tieAsc ? x[1] - y[1] : y[1] - x[1]));
+    filtered = dec.map(d => d[2]);
+  }
   return filtered;
 }
 
@@ -1629,6 +1677,10 @@ document.getElementById('alert-export-btn').addEventListener('click', exportWatc
 
 /* ===== INIT ===== */
 populateMakeFilter();
+// The onboarding zip banner doesn't depend on inventory data — show it (or a
+// shared-find suppression) immediately instead of after the 4MB fetch.
+applyShareHash();
+updateZipBanner();
 loadLiveInventory();
 
 // Offline + instant-launch cache. Needs a secure context (HTTPS or localhost) —
