@@ -394,17 +394,29 @@ const DATA_CACHE = 'jh-data-v1';
  * data/vehicle_extras.json maps vehicle id -> [photoCode, color, engine, trans].
  * It loads in parallel with the inventory and is never on the critical path:
  * cards render photo-less first if it hasn't arrived, then hydrate.
- * Photos are hotlinked from the chains' own CDNs (never rehosted). */
+ *
+ * PHOTO POLICY: a photo renders ONLY when the chain whose car it is hosts the
+ * image itself (same-chain, hotlinked — their server serves it, we never
+ * download/rehost/proxy). Each chain has a kill switch below so photos can be
+ * turned off with one flag if a chain ever objects. Pick-n-Pull photo codes
+ * ("r..." — Row52-hosted, Row52-watermarked, a competitor's assets) are never
+ * rendered even if present in older data. */
+const PHOTO_SOURCES = {
+  // LKQ hosts these on its own CDN (cdn.pypapps.com) with LKQ's PYP watermark.
+  pyp: {
+    enabled: true,
+    label: 'Photo: LKQ Pick Your Part',
+    url: id => 'https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_' + id
+      + '_front_left_corner.jpg?quality=70&w=640&h=427&mode=crop&format=webp',
+  },
+};
 let vehicleExtras = null;
 
-function photoUrl(code) {
-  if (!code) return '';
-  if (code[0] === 'r') return 'https://cdn.row52.com/images/' + code.slice(1);
-  if (code[0] === 'p') {
-    return 'https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_' + code.slice(1)
-      + '_front_left_corner.jpg?quality=70&w=640&h=427&mode=crop&format=webp';
-  }
-  return '';
+function photoInfo(code) {
+  if (!code || code[0] !== 'p') return null; // 'r' (Row52) codes: excluded by policy
+  const src = PHOTO_SOURCES.pyp;
+  if (!src || !src.enabled) return null;
+  return { url: src.url(code.slice(1)), label: src.label };
 }
 function extrasFor(v) {
   return (vehicleExtras && vehicleExtras[String(v.id)]) || null;
@@ -424,12 +436,14 @@ function hydratePhotos() {
   document.querySelectorAll('#live-grid .car-card[data-eid]').forEach(card => {
     if (card.querySelector('.car-photo-wrap')) return;
     const ex = vehicleExtras && vehicleExtras[card.dataset.eid];
-    const url = ex && ex[0] ? photoUrl(ex[0]) : '';
-    if (!url) return;
+    const info = ex && ex[0] ? photoInfo(ex[0]) : null;
+    if (!info) return;
     const wrap = document.createElement('div');
     wrap.className = 'car-photo-wrap';
-    wrap.innerHTML = '<img class="car-photo" loading="lazy" alt="" onerror="this.parentNode.remove()">';
-    wrap.querySelector('img').src = url;
+    wrap.innerHTML = '<img class="car-photo" loading="lazy" alt="" onerror="this.parentNode.remove()">'
+      + '<span class="photo-credit"></span>';
+    wrap.querySelector('img').src = info.url;
+    wrap.querySelector('.photo-credit').textContent = info.label;
     card.prepend(wrap);
   });
 }
@@ -1274,11 +1288,11 @@ function renderLive() {
       ? ` &middot; <span title="Time on the lot — older arrivals are more likely already picked over, so value estimates are discounted">${fl.text.toLowerCase()}</span>`
       : '';
     const ex = extrasFor(v);
-    const photo = ex && ex[0] ? photoUrl(ex[0]) : '';
+    const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
     const specBits = ex ? [ex[1], ex[2], ex[3]].filter(Boolean) : [];
     return `
       <div class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}">
-        ${photo ? `<div class="car-photo-wrap"><img class="car-photo" loading="lazy" src="${photo}" alt="" onerror="this.parentNode.remove()"></div>` : ''}
+        ${photo ? `<div class="car-photo-wrap"><img class="car-photo" loading="lazy" src="${photo.url}" alt="" onerror="this.parentNode.remove()"><span class="photo-credit">${escapeHtml(photo.label)}</span></div>` : ''}
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
