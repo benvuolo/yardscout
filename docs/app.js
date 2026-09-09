@@ -215,11 +215,14 @@ function csvEscapeCell(val) {
 function exportLiveCsv() {
   if (!liveLoaded) return alert('No inventory loaded.');
   const rows = getFilteredLive();
-  const header = ['year', 'make', 'model', 'vin', 'location', 'row', 'hasMatch', 'maxValue', 'dateAdded', 'displayName', 'vpicDecodeWell', 'vpicTrim', 'vpicTrimQuality', 'vpicSeries', 'partsSummary'];
+  // Value data (ranges, maxValue) exports only for Pro — free CSV is the
+  // inventory itself, same as what free cards show.
+  const pro = isPro();
+  const header = ['year', 'make', 'model', 'vin', 'location', 'row', 'hasMatch', 'dateAdded', 'displayName', 'vpicDecodeWell', 'vpicTrim', 'vpicTrimQuality', 'vpicSeries', 'partsFlagged'];
+  if (pro) header.push('maxValue', 'partsSummary');
   const lines = [header.join(',')];
   for (const v of rows) {
-    const partsSummary = (v.topParts || []).map(p => p.name + ':' + p.low + '-' + p.high).join('; ');
-    lines.push([
+    const cells = [
       csvEscapeCell(v.year),
       csvEscapeCell(v.make),
       csvEscapeCell(v.model),
@@ -227,15 +230,19 @@ function exportLiveCsv() {
       csvEscapeCell(v.location),
       csvEscapeCell(v.row),
       csvEscapeCell(v.hasMatch),
-      csvEscapeCell(v.maxValue),
       csvEscapeCell(v.dateAdded),
       csvEscapeCell(v.displayName),
       csvEscapeCell(v.vpicDecodeWell),
       csvEscapeCell(v.vpicTrim),
       csvEscapeCell(v.vpicTrimQuality),
       csvEscapeCell(v.vpicSeries),
-      csvEscapeCell(partsSummary),
-    ].join(','));
+      csvEscapeCell((v.topParts || []).map(p => p.name).join('; ')),
+    ];
+    if (pro) {
+      cells.push(csvEscapeCell(v.maxValue));
+      cells.push(csvEscapeCell((v.topParts || []).map(p => p.name + ':' + p.low + '-' + p.high).join('; ')));
+    }
+    lines.push(cells.join(','));
   }
   const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
@@ -249,12 +256,17 @@ function exportLiveCsv() {
 function exportLiveJson() {
   if (!liveLoaded) return alert('No inventory loaded.');
   const rows = getFilteredLive();
+  // Free JSON export mirrors the free UI: part names yes, dollar values no.
+  const vehicles = isPro() ? rows : rows.map(v => {
+    const { maxValue, topParts, ...rest } = v;
+    return { ...rest, partsFlagged: (topParts || []).map(p => p.name) };
+  });
   const payload = {
     schemaVersion: 1,
     sourceScrapedAt: liveScrapedAt,
     exportedAt: new Date().toISOString(),
-    note: 'Filtered rows only (current Live tab filters)',
-    vehicles: rows,
+    note: 'Filtered rows only (current Live tab filters)' + (isPro() ? '' : ' — value data is Pro'),
+    vehicles,
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -300,6 +312,7 @@ function applyInventory(raw, { quiet = false } = {}) {
     renderLive();
     checkAndNotify();
     updateAlertsBadge();
+    if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
   } else if (window.scrollY < 400 && !document.querySelector('#live-grid details[open]')) {
     renderLive();
   }
@@ -492,7 +505,7 @@ function vehicleDistanceMi(v) {
 function useMyLocation() {
   if (!navigator.geolocation) { alert('Your browser does not support location.'); return; }
   const btns = [document.getElementById('live-gps'), document.getElementById('zip-banner-gps')].filter(Boolean);
-  btns.forEach(b => { b.disabled = true; b.dataset.orig = b.innerHTML; b.innerHTML = '&#x23F3;'; });
+  btns.forEach(b => { b.disabled = true; b.dataset.orig = b.innerHTML; b.innerHTML = '&hellip;'; });
   navigator.geolocation.getCurrentPosition(
     pos => {
       activeZipCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
@@ -500,7 +513,7 @@ function useMyLocation() {
       localStorage.removeItem('jh_zip');
       const zipEl = document.getElementById('live-zip');
       zipEl.value = '';
-      zipEl.placeholder = '\u{1F4CD} Using your location';
+      zipEl.placeholder = 'Using your location';
       btns.forEach(b => { b.disabled = false; b.innerHTML = b.dataset.orig; });
       updateZipBanner();
       renderLive();
@@ -1271,115 +1284,122 @@ document.getElementById('tab-live').addEventListener('click', (e) => {
   }).catch(() => {});
 });
 
-/* ===== PARTS DATABASE ===== */
-function renderStats(cars) {
-  const allParts = cars.flatMap(c => c.parts);
-  document.getElementById('stats-bar').innerHTML = `
-    <div class="stat-card"><div class="label">Vehicles</div><div class="value">${cars.length}</div></div>
-    <div class="stat-card"><div class="label">Parts tracked</div><div class="value">${allParts.length}</div></div>
-    <div class="stat-card"><div class="label">Legendary parts</div><div class="value accent">${allParts.filter(p => p.rarity === 'Legendary').length}</div></div>
-    <div class="stat-card"><div class="label">Makes covered</div><div class="value">${new Set(cars.map(c => c.make)).size}</div></div>
-    <div class="stat-card"><div class="label">Toyota vehicles</div><div class="value">${cars.filter(c => c.make === 'Toyota').length}</div></div>
-  `;
+/* ===== YARDS DIRECTORY ===== */
+/* Built entirely from the live inventory (yard rows + per-yard lifespan from
+ * the history DB). Free-tier friendly by design: counts and freshness only,
+ * no part values anywhere on this tab. */
+const CHAIN_PRICE_PAGES = [
+  [/^pick[\s-]*n[\s-]*pull/i, 'https://www.picknpull.com/parts-pricing', 'Pick-n-Pull'],
+  [/^pull[\s-]*a[\s-]*part/i, 'https://www.pullapart.com/used-auto-parts/parts-pricing/', 'Pull-A-Part'],
+  [/^tear[\s-]*a[\s-]*part/i, 'https://tearapart.com/price-list/', 'Tear-A-Part'],
+  [/pic[\s-]*a[\s-]*part/i, 'https://utpap.com/ogden-prices/', 'Utah Pic-A-Part'],
+  // LKQ Pick Your Part publishes prices per location inside its site/app with
+  // no stable public price-list URL, so those yards get no link.
+];
+
+function buildYardDirectory() {
+  const byLoc = new Map();
+  for (const v of liveInventory) {
+    if (!v.location) continue;
+    let y = byLoc.get(v.location);
+    if (!y) {
+      y = {
+        location: v.location, city: v.city || '', state: v.state || '',
+        lat: v.lat, lng: v.lng, count: 0, newCount: 0,
+        avgLifespan: v.yardAvgLifespan || null,
+        lifespanBasis: v.yardLifespanBasis || null,
+      };
+      byLoc.set(v.location, y);
+    }
+    y.count++;
+    if (isNew(v.dateAdded)) y.newCount++;
+  }
+  return [...byLoc.values()];
 }
 
-function renderCarGrid(cars) {
-  const grid = document.getElementById('car-grid');
-  if (!cars.length) {
-    grid.innerHTML = '<div class="empty-state"><h3>No matches found</h3><p>Try adjusting your search or filters.</p></div>';
+function renderYards() {
+  const grid = document.getElementById('yards-grid');
+  if (!liveLoaded) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><p>Loading live inventory&hellip;</p></div>';
+    document.getElementById('yards-stats-bar').innerHTML = '';
     return;
   }
-  grid.innerHTML = cars.map(car => `
-    <div class="car-card">
-      <div class="car-header">
-        <div>
-          <div class="car-name">${car.name}</div>
-          <div class="car-years">${car.years}</div>
-          <div class="car-make">${car.make}</div>
-        </div>
-        <div class="car-badges">
-          <span class="badge ${categoryClass(car.category)}">${car.category}</span>
-          <span class="freq-badge freq-${car.frequency.toLowerCase()}">${car.frequency}</span>
-        </div>
-      </div>
-      <div class="car-body">
-        <div class="car-notes">${car.notes}</div>
-        <ul class="parts-list">
-          ${car.parts.map(p => `
-            <li class="part-item">
-              <span class="part-name">${p.name}</span>
-              <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
-              <span class="part-cost" title="Typical self-service yard price — actual price comes from your yard's own price list">~${formatPrice(p.yardCost)} typical pull</span>
-              <span class="part-price" title="Typical eBay sold range for working parts — a curated estimate, not a live quote">est. ${formatPrice(p.priceRange[0])}–${formatPrice(p.priceRange[1])}</span>
-            </li>
-          `).join('')}
-        </ul>
-      </div>
-    </div>
-  `).join('');
-}
+  let yards = buildYardDirectory();
+  const allCount = yards.length;
+  const states = new Set(yards.map(y => y.state).filter(Boolean));
+  const q = (document.getElementById('yards-search').value || '').trim().toLowerCase();
+  if (q) yards = yards.filter(y => (y.location + ' ' + y.city + ' ' + y.state).toLowerCase().includes(q));
 
-function populateMakeFilter() {
-  const makes = [...new Set(DATABASE.map(c => c.make))].sort();
-  const sel = document.getElementById('filter-make');
-  makes.forEach(m => {
-    const opt = document.createElement('option');
-    opt.value = m;
-    opt.textContent = m + ' (' + DATABASE.filter(c => c.make === m).length + ')';
-    sel.appendChild(opt);
+  yards.forEach(y => {
+    y.dist = (activeZipCoords && y.lat != null && y.lng != null)
+      ? haversineMiles(activeZipCoords.lat, activeZipCoords.lng, y.lat, y.lng) : null;
   });
-}
-
-function getFilteredCars() {
-  const search = document.getElementById('search').value.toLowerCase();
-  const makeFilter = document.getElementById('filter-make').value;
-  const catFilter = document.getElementById('filter-category').value;
-  const rarityFilter = document.getElementById('filter-rarity').value;
-  const sortBy = document.getElementById('sort-by').value;
-
-  let filtered = DATABASE.filter(car => {
-    if (makeFilter && car.make !== makeFilter) return false;
-    if (catFilter && car.category !== catFilter) return false;
-    if (rarityFilter && !car.parts.some(p => p.rarity === rarityFilter)) return false;
-    if (search) {
-      const hay = (car.name + ' ' + car.make + ' ' + car.years + ' ' + car.category + ' ' + car.notes + ' ' + car.parts.map(p => p.name + ' ' + p.sellOn).join(' ')).toLowerCase();
-      return hay.includes(search);
-    }
-    return true;
-  });
-
-  if (rarityFilter) {
-    filtered = filtered.map(car => ({ ...car, parts: car.parts.filter(p => p.rarity === rarityFilter) }));
+  if (activeZipCoords) {
+    yards.sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
+  } else {
+    yards.sort((a, b) => (a.state || 'ZZ').localeCompare(b.state || 'ZZ') || a.location.localeCompare(b.location));
   }
 
-  filtered.sort((a, b) => {
-    switch (sortBy) {
-      case 'value-desc': return totalPotentialValue(b) - totalPotentialValue(a);
-      case 'best-part-desc': return maxPartValue(b) - maxPartValue(a);
-      case 'value-asc': return totalPotentialValue(a) - totalPotentialValue(b);
-      case 'name-asc': return a.name.localeCompare(b.name);
-      case 'rarity': {
-        const rd = Math.max(...b.parts.map(p => rarityRank(p.rarity))) - Math.max(...a.parts.map(p => rarityRank(p.rarity)));
-        if (rd !== 0) return rd;
-        return totalPotentialValue(b) - totalPotentialValue(a);
-      }
-      case 'roi-desc': return avgROI(b) - avgROI(a);
-      case 'parts-count': {
-        const cd = b.parts.length - a.parts.length;
-        if (cd !== 0) return cd;
-        return totalPotentialValue(b) - totalPotentialValue(a);
-      }
-      default: return 0;
-    }
-  });
-  return filtered;
+  document.getElementById('yards-stats-bar').innerHTML = `
+    <div class="stat-card"><div class="label">Yards tracked</div><div class="value">${allCount}</div></div>
+    <div class="stat-card"><div class="label">States + provinces</div><div class="value">${states.size}</div></div>
+    <div class="stat-card"><div class="label">Cars on lots</div><div class="value">${liveInventory.length.toLocaleString()}</div></div>
+  `;
+
+  if (!yards.length) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No yards match</h3><p>Try a different name, city, or state.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = yards.map(y => {
+    const chain = CHAIN_PRICE_PAGES.find(c => c[0].test(y.location));
+    const place = [y.city, y.state].filter(Boolean).join(', ');
+    const distTxt = y.dist != null ? ` <span class="dist">&middot; ${Math.round(y.dist)} mi</span>` : '';
+    const life = y.avgLifespan
+      ? `Cars typically last ~${y.avgLifespan} days here` +
+        (y.lifespanBasis === 'chain' ? ' (chain average)' : y.lifespanBasis === 'all' ? ' (all-yards average)' : '')
+      : 'Not enough departure history yet for a typical-lifespan estimate';
+    return `
+      <div class="car-card yard-card" data-loc="${escapeHtml(y.location)}" role="button" tabindex="0"
+           aria-label="View cars at ${escapeHtml(y.location)}">
+        <div class="car-header">
+          <div style="min-width:0;">
+            <div class="car-name">${escapeHtml(y.location)}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(place) || 'Location unknown'}</span>${distTxt}</div>
+            <div class="car-meta">${y.count.toLocaleString()} cars on the lot &middot; ${y.newCount.toLocaleString()} new this week</div>
+            <div class="lot-clock" title="Based on historical arrival-to-departure data — an estimate, not a schedule">${life}</div>
+          </div>
+        </div>
+        <div class="yard-actions">
+          <button type="button" class="btn yard-view-btn">View cars</button>
+          ${chain ? `<a class="yard-price-link" href="${chain[1]}" target="_blank" rel="noopener">${chain[2]} price list</a>` : '<span class="yard-price-none">Prices posted at the yard</span>'}
+        </div>
+      </div>`;
+  }).join('');
 }
 
-function updateDatabase() {
-  const cars = getFilteredCars();
-  renderStats(cars);
-  renderCarGrid(cars);
+/* Tap a yard -> Live tab filtered to it. Distance is cleared for the session
+ * so a far-away yard isn't immediately hidden by the radius filter. */
+function viewYardInLive(loc) {
+  const sel = document.getElementById('live-filter-location');
+  sel.value = loc;
+  if (sel.value !== loc) return; // option missing (shouldn't happen — same data)
+  document.getElementById('live-radius').value = '';
+  document.querySelector('.tab[data-tab="live"]').click();
+  window.scrollTo({ top: 0 });
 }
+
+document.getElementById('yards-grid').addEventListener('click', e => {
+  if (e.target.closest('a')) return; // price-list link navigates normally
+  const card = e.target.closest('.yard-card');
+  if (card) viewYardInLive(card.dataset.loc);
+});
+document.getElementById('yards-grid').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const card = e.target.closest('.yard-card');
+  if (card) viewYardInLive(card.dataset.loc);
+});
+document.getElementById('yards-search').addEventListener('input', () => renderYards());
 
 /* ===== PROFIT BREAKDOWN ===== */
 /** Baked sell_notes can mention Lexus for any "Mark Levinson" part; donor make may differ. */
@@ -1399,17 +1419,12 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
-    if (tab.dataset.tab === 'database') updateDatabase();
+    if (tab.dataset.tab === 'yards') renderYards();
     if (tab.dataset.tab === 'live') renderLive();
     if (tab.dataset.tab === 'alerts') renderAlerts();
   });
 });
 
-document.getElementById('search').addEventListener('input', updateDatabase);
-document.getElementById('filter-make').addEventListener('change', updateDatabase);
-document.getElementById('filter-category').addEventListener('change', updateDatabase);
-document.getElementById('filter-rarity').addEventListener('change', updateDatabase);
-document.getElementById('sort-by').addEventListener('change', updateDatabase);
 
 /* ===== ALERTS / WATCHLIST ===== */
 const WATCHLIST_KEY = 'junkyard_hunter_watchlist';
@@ -1530,7 +1545,9 @@ function renderAlerts() {
                   <li class="part-item">
                     <span class="part-name">${p.name}</span>
                     <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
-                    <span class="part-price">${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
+                    ${isPro()
+                      ? `<span class="part-price">${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>`
+                      : `<span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('alerts-value')">$100&ndash;$400</span>`}
                   </li>
                 `).join('')}
               </ul>
@@ -1688,7 +1705,6 @@ document.getElementById('alert-export-btn').addEventListener('click', exportWatc
 })();
 
 /* ===== INIT ===== */
-populateMakeFilter();
 // The onboarding zip banner doesn't depend on inventory data — show it (or a
 // shared-find suppression) immediately instead of after the 4MB fetch.
 applyShareHash();

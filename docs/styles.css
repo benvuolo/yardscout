@@ -1169,3 +1169,36 @@
   }
   .waitlist-thanks strong { font-size: 0.875rem; }
   .waitlist-thanks span { font-size: 0.8125rem; color: var(--text-dim); line-height: 1.5; }
+
+  /* ===== Yards directory ===== */
+  .yards-hint {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin: -0.15rem 0 0.75rem;
+    line-height: 1.5;
+  }
+  .yard-card { cursor: pointer; }
+  .yard-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .yard-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--border);
+  }
+  .yard-actions .btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+  .yard-price-link {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-dim);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .yard-price-link:hover { color: var(--accent); }
+  .yard-price-none {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-dim);
+    opacity: 0.75;
+  }
