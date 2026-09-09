@@ -1,4 +1,24 @@
 /* YardScout — application logic (loading, filtering, rendering, saved list, alerts). */
+
+/* ===== ANALYTICS — GoatCounter (privacy-friendly: no cookies, anonymous) =====
+ * Set the site code after creating a (free) account at goatcounter.com.
+ * While GOATCOUNTER_CODE is null every track() call is a no-op. */
+const GOATCOUNTER_CODE = null; // e.g. 'yardscout' for https://yardscout.goatcounter.com
+function track(event) {
+  if (!GOATCOUNTER_CODE) return;
+  try {
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({ path: event, title: event, event: true });
+    }
+  } catch (e) { /* analytics must never break the app */ }
+}
+if (GOATCOUNTER_CODE) {
+  window.goatcounter = { endpoint: 'https://' + GOATCOUNTER_CODE + '.goatcounter.com/count' };
+  const gcScript = document.createElement('script');
+  gcScript.async = true;
+  gcScript.src = 'https://gc.zgo.at/count.js';
+  document.head.appendChild(gcScript);
+}
 /* ===== YARD PRICING MAPS =====
  * One map per chain, each built ONLY from that chain's published price list.
  * pypPricing / papPricing are keyed by yard display name (prices differ per yard).
@@ -307,6 +327,7 @@ function applyInventory(raw, { quiet = false } = {}) {
   liveLoaded = true;
   updateCoverageCounts();
   populateLiveMakeFilter();
+  updateStaleBanner();
   if (!quiet) {
     applyShareHash();
     renderLive();
@@ -485,6 +506,7 @@ async function setZipCenter(zip) {
       localStorage.setItem('jh_zip_coords', JSON.stringify(zipCoordsCache));
     }
     activeZipCoords = zipCoordsCache[zip];
+    track('zip-entered');
     localStorage.setItem('jh_zip', zip);
     localStorage.removeItem('jh_gps');
     document.getElementById('live-zip').placeholder = 'e.g. 84101';
@@ -509,6 +531,7 @@ function useMyLocation() {
   navigator.geolocation.getCurrentPosition(
     pos => {
       activeZipCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      track('gps-used');
       localStorage.setItem('jh_gps', JSON.stringify(activeZipCoords));
       localStorage.removeItem('jh_zip');
       const zipEl = document.getElementById('live-zip');
@@ -555,6 +578,7 @@ function isPro() { return localStorage.getItem('jh_pro') === '1'; }
 let upgradeTrigger = 'unknown';
 function openUpgradeSheet(trigger) {
   upgradeTrigger = trigger || 'unknown';
+  track('pro-lock/' + upgradeTrigger);
   // Returning waitlist members see the thank-you state, not the form again.
   const done = localStorage.getItem('jh_waitlist_email');
   document.getElementById('upgrade-form-wrap').style.display = done ? 'none' : '';
@@ -593,6 +617,7 @@ async function submitWaitlist() {
     });
   } catch (e) { /* local log still has it */ }
   localStorage.setItem('jh_waitlist_email', email);
+  track('waitlist-submitted');
   btn.disabled = false;
   btn.textContent = 'Notify Me';
   document.getElementById('upgrade-form-wrap').style.display = 'none';
@@ -821,6 +846,7 @@ async function shareVehicle(key) {
   if (v.row) bits.push(`Row ${v.row}`);
   const text = `${bits.join(' — ')} at ${v.location}${arrived ? ', arrived ' + arrived : ''}`;
   const url = shareUrlFor(v);
+  track('share-used');
   if (navigator.share) {
     try { await navigator.share({ title: 'YardScout find', text, url }); return; } catch (e) { /* cancelled/unsupported -> fall through */ }
   }
@@ -1188,6 +1214,7 @@ function renderLive() {
           <div class="car-body">
             <div class="ghost-note">These are parts this car <strong>originally came with</strong> &mdash; yards track cars, not remaining parts, so some may already be pulled. Newer arrivals are more likely intact, which is why estimates shrink the longer a car sits.</div>
             <ul class="parts-list">${partRows}</ul>
+            <a class="feedback-link" href="https://github.com/benvuolo/yardscout/issues/new" target="_blank" rel="noopener">Spot a wrong price or bug? Tell us</a>
           </div>
         </details>`;
     }
@@ -1323,6 +1350,25 @@ function buildYardDirectory() {
   return [...byLoc.values()];
 }
 
+/* ===== STALE-DATA GUARD =====
+ * The scan runs every 6 hours; if the newest data is older than a day,
+ * say so instead of quietly presenting stale inventory as live.
+ * Test hook: ?stale=<hours> forces an age for screenshots/QA. */
+function updateStaleBanner() {
+  const el = document.getElementById('stale-banner');
+  if (!el) return;
+  const forced = parseFloat(new URLSearchParams(location.search).get('stale'));
+  let hours = null;
+  if (!isNaN(forced)) hours = forced;
+  else if (liveScrapedAt) hours = (Date.now() - new Date(liveScrapedAt).getTime()) / 3600000;
+  if (hours == null || hours < 24) { el.style.display = 'none'; return; }
+  const days = Math.floor(hours / 24);
+  const ago = days >= 2 ? `${days} days` : `${Math.round(hours)} hours`;
+  el.textContent = `Inventory last updated ${ago} ago — new arrivals may be missing.`;
+  el.classList.toggle('severe', hours >= 72);
+  el.style.display = '';
+}
+
 function renderYards() {
   const grid = document.getElementById('yards-grid');
   const statsBar = document.getElementById('yards-stats-bar');
@@ -1441,6 +1487,7 @@ function renderYards() {
 /* Tap a yard -> Live tab filtered to it. Distance is cleared for the session
  * so a far-away yard isn't immediately hidden by the radius filter. */
 function viewYardInLive(loc) {
+  track('yard-opened');
   const sel = document.getElementById('live-filter-location');
   sel.value = loc;
   if (sel.value !== loc) return; // option missing (shouldn't happen — same data)
@@ -1781,3 +1828,22 @@ loadLiveInventory();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
+
+/* ===== iOS INSTALL HINT =====
+ * Safari-on-iPhone users get a one-time tip to add the app to the home
+ * screen. Skipped when already installed (standalone) or dismissed.
+ * Test hook: ?installhint=1 forces it for QA. */
+(function installHint() {
+  const forced = new URLSearchParams(location.search).get('installhint') === '1';
+  const isIOS = /iphone|ipod|ipad/i.test(navigator.userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPadOS
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  if (!forced && (!isIOS || standalone || localStorage.getItem('ys_install_hint') === '1')) return;
+  const el = document.getElementById('install-hint');
+  if (!el) return;
+  el.style.display = '';
+  document.getElementById('install-hint-close').addEventListener('click', () => {
+    localStorage.setItem('ys_install_hint', '1');
+    el.style.display = 'none';
+  });
+})();

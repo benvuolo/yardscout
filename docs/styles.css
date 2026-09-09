@@ -1202,3 +1202,89 @@
     color: var(--text-dim);
     opacity: 0.75;
   }
+
+  /* ===== Doc pages (privacy / terms) ===== */
+  .doc-page { max-width: 720px; padding-bottom: 3rem; }
+  .doc-page h2 {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 1.75rem 0 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .doc-page p { font-size: 0.875rem; line-height: 1.65; margin: 0.5rem 0; color: var(--text); }
+  .doc-page a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  .doc-updated {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 1rem 0 1.25rem !important;
+  }
+  .doc-back { margin-top: 2rem !important; }
+
+  /* ===== Stale-data banner ===== */
+  #stale-banner {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  #stale-banner.severe {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    font-weight: 700;
+    font-size: 0.8125rem;
+  }
+
+  /* ===== iOS install hint ===== */
+  #install-hint {
+    position: fixed;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 0.75rem);
+    z-index: 60;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: var(--text);
+    color: var(--bg);
+    border: 1px solid var(--text);
+    padding: 0.75rem 0.9rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .install-hint-text { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.8125rem; line-height: 1.5; }
+  .install-hint-text .ico { vertical-align: -3px; }
+  #install-hint-close {
+    background: none;
+    border: none;
+    color: var(--bg);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.1rem 0.25rem;
+    flex-shrink: 0;
+  }
+  @media (min-width: 768px) {
+    #install-hint { bottom: 1rem; }
+  }
+
+  /* ===== Feedback + footer links ===== */
+  .feedback-link {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-dim);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .feedback-link:hover { color: var(--accent); }
+  .parts-details .feedback-link { display: inline-block; margin-top: 0.6rem; }
+  .footer-links a { color: var(--text-dim); text-decoration: underline; text-underline-offset: 2px; }
+  .footer-links a:hover { color: var(--accent); }
