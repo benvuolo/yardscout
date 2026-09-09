@@ -403,8 +403,12 @@ const DATA_CACHE = 'jh-data-v1';
  * rendered even if present in older data. */
 const PHOTO_SOURCES = {
   // LKQ hosts these on its own CDN (cdn.pypapps.com) with LKQ's PYP watermark.
+  // 2026-09 owner decision (legal caution): ALL chain-sourced photos are OFF —
+  // LKQ's watermark prompted a blanket no-chain-photos call. URL capture and
+  // this rendering plumbing stay intact so we can revisit (e.g. user-submitted
+  // photos); flipping `enabled` back on is the only change needed.
   pyp: {
-    enabled: true,
+    enabled: false,
     label: 'Photo: LKQ Pick Your Part',
     url: id => 'https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_' + id
       + '_front_left_corner.jpg?quality=70&w=640&h=427&mode=crop&format=webp',
@@ -420,6 +424,14 @@ function photoInfo(code) {
 }
 function extrasFor(v) {
   return (vehicleExtras && vehicleExtras[String(v.id)]) || null;
+}
+/* Confirmed manual transmission — from the VIN decode (or a chain feed's trans
+ * field) carried in the extras shard. Honest rule: only ever true when the
+ * data says "Manual"; never inferred, and automatics get no badge at all. */
+function isConfirmedManual(v) {
+  const ex = extrasFor(v);
+  const t = ex && ex[3] ? String(ex[3]) : '';
+  return /manual/i.test(t) && !/automated/i.test(t);
 }
 
 fetch('data/vehicle_extras.json')
@@ -970,9 +982,13 @@ function getFilteredLive() {
     }
     if (matchFilter === 'match' && !v.hasMatch) return false;
     if (matchFilter === 'nomatch' && v.hasMatch) return false;
+    // Confirmed from the VIN decode only — cars with unknown transmission are
+    // excluded rather than guessed at.
+    if (matchFilter === 'manual' && !isConfirmedManual(v)) return false;
     if (search) {
       const hay = [v.year, v.make, v.model, v.location, v.city, v.displayName, v.vin,
         v.vpicDecodeWell, v.vpicTrim, v.vpicSeries, v.vpicDriveType,
+        isConfirmedManual(v) ? 'manual' : '',
         ...(v.topParts || []).map(p => p.name)].join(' ').toLowerCase();
       return hay.includes(search);
     }
@@ -1209,9 +1225,9 @@ function renderLive() {
         // Trim-honesty marker: shown to everyone (it's about whether the part
         // exists on the car, not its value).
         const trimMark = p.trim_status === 'vin'
-          ? ' <span class="trim-badge trim-vin" title="This car\u2019s VIN decode names the trim that carries this part">VIN-confirmed</span>'
+          ? ' <span class="trim-badge trim-vin" title="This car\u2019s VIN decode confirms the trim, drivetrain, or transmission that carries this part">VIN-confirmed</span>'
           : ifEquipped
-          ? ' <span class="trim-badge trim-unknown" title="This part is trim-specific and the trim couldn\u2019t be confirmed from the VIN or the yard listing — check the car at the yard">if equipped &mdash; trim unconfirmed</span>'
+          ? ' <span class="trim-badge trim-unknown" title="This part is specific to a trim, drivetrain, or transmission that couldn\u2019t be confirmed from the VIN or the yard listing — check the car at the yard">if equipped &mdash; unconfirmed</span>'
           : '';
         // Free tier: part names/rarity/channels stay visible, but dollar values
         // and demand speed are blurred placeholders (real numbers never render).
@@ -1302,6 +1318,7 @@ function renderLive() {
             ${lotClock}
           </div>
           <div class="car-badges">
+            ${isConfirmedManual(v) ? '<span class="badge badge-manual" title="Manual transmission, confirmed from this car\u2019s VIN decode \u2014 never inferred">Manual</span>' : ''}
             ${statusBadge}
             <button type="button" class="share-btn" data-vkey="${vehicleKey(v)}" title="Share this find">${ICON.share}</button>
             <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${vehicleKey(v)}" title="Save for your yard visit">${ICON.heart}</button>

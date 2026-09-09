@@ -1320,3 +1320,13 @@
     background: rgba(20, 18, 14, 0.55);
     padding: 0.1rem 0.4rem;
   }
+
+  /* Manual-transmission tag — confirmed from VIN decode only, never inferred */
+  .badge-manual {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border-strong, var(--border));
+    font-family: var(--mono, ui-monospace, monospace);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
