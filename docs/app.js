@@ -389,6 +389,50 @@ function parseInventoryPayload(raw) {
 }
 
 const DATA_CACHE = 'jh-data-v1';
+
+/* ===== PHOTO / SPEC ENRICHMENT (lazy shard) =====
+ * data/vehicle_extras.json maps vehicle id -> [photoCode, color, engine, trans].
+ * It loads in parallel with the inventory and is never on the critical path:
+ * cards render photo-less first if it hasn't arrived, then hydrate.
+ * Photos are hotlinked from the chains' own CDNs (never rehosted). */
+let vehicleExtras = null;
+
+function photoUrl(code) {
+  if (!code) return '';
+  if (code[0] === 'r') return 'https://cdn.row52.com/images/' + code.slice(1);
+  if (code[0] === 'p') {
+    return 'https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_' + code.slice(1)
+      + '_front_left_corner.jpg?quality=70&w=640&h=427&mode=crop&format=webp';
+  }
+  return '';
+}
+function extrasFor(v) {
+  return (vehicleExtras && vehicleExtras[String(v.id)]) || null;
+}
+
+fetch('data/vehicle_extras.json')
+  .then(r => (r.ok ? r.json() : null))
+  .then(d => {
+    if (!d || !d.extras) return;
+    vehicleExtras = d.extras;
+    hydratePhotos();
+  })
+  .catch(() => { /* enrichment is optional */ });
+
+/* Insert photos into already-rendered cards (extras arrived after render). */
+function hydratePhotos() {
+  document.querySelectorAll('#live-grid .car-card[data-eid]').forEach(card => {
+    if (card.querySelector('.car-photo-wrap')) return;
+    const ex = vehicleExtras && vehicleExtras[card.dataset.eid];
+    const url = ex && ex[0] ? photoUrl(ex[0]) : '';
+    if (!url) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'car-photo-wrap';
+    wrap.innerHTML = '<img class="car-photo" loading="lazy" alt="" onerror="this.parentNode.remove()">';
+    wrap.querySelector('img').src = url;
+    card.prepend(wrap);
+  });
+}
 const INVENTORY_URL = 'data/inventory_live.json';
 
 async function loadLiveInventory() {
@@ -1229,13 +1273,18 @@ function renderLive() {
     const freshNote = isMatch
       ? ` &middot; <span title="Time on the lot — older arrivals are more likely already picked over, so value estimates are discounted">${fl.text.toLowerCase()}</span>`
       : '';
+    const ex = extrasFor(v);
+    const photo = ex && ex[0] ? photoUrl(ex[0]) : '';
+    const specBits = ex ? [ex[1], ex[2], ex[3]].filter(Boolean) : [];
     return `
-      <div class="car-card ${cardClass}" style="${cardStyle}">
+      <div class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}">
+        ${photo ? `<div class="car-photo-wrap"><img class="car-photo" loading="lazy" src="${photo}" alt="" onerror="this.parentNode.remove()"></div>` : ''}
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}</div>
             <div class="car-meta">Added ${dateStr}${freshNote}${vinMetaHtml(v)}</div>
+            ${specBits.length ? `<div class="car-meta car-specs">${specBits.map(escapeHtml).join(' &middot; ')}</div>` : ''}
             ${lotClock}
           </div>
           <div class="car-badges">
