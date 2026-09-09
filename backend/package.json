@@ -1,0 +1,15 @@
+{
+  "name": "yardscout-api",
+  "private": true,
+  "description": "YardScout monetization backend — Cloudflare Worker + D1",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "deploy": "wrangler deploy",
+    "migrate:local": "wrangler d1 migrations apply yardscout-db --local",
+    "migrate:remote": "wrangler d1 migrations apply yardscout-db --remote",
+    "test:e2e": "bash test/e2e.sh"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

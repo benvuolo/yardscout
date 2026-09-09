@@ -398,6 +398,25 @@ async function loadLiveInventory() {
   // of cards.
   const pricingReady = loadAllPricing();
 
+  // API mode (scaffold, OFF by default — see api.js): load tier-aware,
+  // radius-filtered inventory from the backend instead of the public file.
+  // Any API failure falls straight through to the static-file path below.
+  if (window.YSApi && YSApi.enabled()) {
+    let raw = null;
+    try {
+      raw = await YSApi.fetchInventory();
+    } catch (e) {
+      console.warn('YardScout API unavailable — falling back to the static inventory file.', e);
+    }
+    if (raw) {
+      // Outside the try: a rendering bug must surface, not silently swap the
+      // tier-filtered API data for the full public file.
+      await pricingReady;
+      applyInventory(raw);
+      return;
+    }
+  }
+
   // Repeat visits: render instantly from the Cache API copy, then revalidate
   // in the background. (The service worker deliberately skips this file.)
   let shownScrapedAt = null;
@@ -1847,3 +1866,25 @@ if ('serviceWorker' in navigator) {
     el.style.display = 'none';
   });
 })();
+
+/* ===== ACCOUNT / API SESSION (scaffold — active only in API mode, see api.js) =====
+ * When the backend session reports a paid tier, the existing jh_pro gate is
+ * driven by the ACCOUNT (and the server refuses to send value data to free
+ * sessions anyway — the client gate becomes cosmetic, not the enforcement). */
+if (window.YSApi) {
+  YSApi.init({
+    onAuthChange(me) {
+      const paid = !!(me && me.tier && me.tier !== 'free');
+      if (paid) {
+        localStorage.setItem('jh_pro', '1');
+        localStorage.setItem('jh_pro_source', 'account');
+      } else if (localStorage.getItem('jh_pro_source') === 'account') {
+        // Only claw back Pro that an account granted — never the dev toggle.
+        localStorage.removeItem('jh_pro');
+        localStorage.removeItem('jh_pro_source');
+      }
+      applyProGates();
+      if (liveLoaded) renderLive();
+    },
+  });
+}

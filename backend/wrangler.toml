@@ -1,0 +1,42 @@
+# YardScout API — Cloudflare Worker configuration.
+#
+# Owner setup (see README-BACKEND.md for the full walkthrough):
+#   1. npx wrangler login
+#   2. npx wrangler d1 create yardscout-db
+#      → paste the printed database_id below (replace the placeholder)
+#   3. npx wrangler d1 migrations apply yardscout-db --remote
+#   4. Set secrets (never in this file!):
+#        npx wrangler secret put UPLOAD_TOKEN
+#        npx wrangler secret put ADMIN_SECRET
+#        npx wrangler secret put RESEND_API_KEY
+#      (optional, for Apple IAP later: npx wrangler secret put REVENUECAT_WEBHOOK_SECRET)
+#   5. npm run deploy
+
+name = "yardscout-api"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "yardscout-db"
+# Placeholder is fine for local dev (`wrangler dev` uses a local SQLite file).
+# For deploys, replace with the id printed by `npx wrangler d1 create yardscout-db`.
+database_id = "00000000-0000-0000-0000-000000000000"
+
+[vars]
+# Comma-separated list of browser origins allowed to call this API (CORS).
+APP_ORIGINS = "https://benvuolo.github.io,http://localhost:8765,http://127.0.0.1:8765"
+# Where the magic-link callback redirects back to (the PWA).
+APP_URL = "https://benvuolo.github.io/yardscout/"
+# Sender for magic-link emails. Resend's shared onboarding sender works out of
+# the box for testing; switch to a verified domain sender for real users.
+EMAIL_FROM = "YardScout <onboarding@resend.dev>"
+# "1" = magic links are logged + returned in the API response instead of
+# emailed. NEVER enable in production. (.dev.vars sets this for local dev.)
+DEV_MODE = "0"
+
+# Secrets expected at runtime (set via `wrangler secret put`, or .dev.vars locally):
+#   UPLOAD_TOKEN              — bearer for the scan workflow's inventory pushes
+#   ADMIN_SECRET              — protects /v1/admin/* (grant Pro, list users)
+#   RESEND_API_KEY            — Resend API key for magic-link emails
+#   REVENUECAT_WEBHOOK_SECRET — (later) RevenueCat webhook authorization value

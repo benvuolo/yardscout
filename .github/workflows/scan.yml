@@ -75,3 +75,19 @@ jobs:
             git pull --rebase origin main
             git push
           fi
+
+      # Push the same build to the API backend (Cloudflare Worker + D1) so the
+      # tier-aware API serves identical data. No-op until the owner configures
+      # the YS_API_URL repo *variable* and YS_UPLOAD_TOKEN repo *secret*
+      # (see README-BACKEND.md). The public docs/data file above remains the
+      # live site's source of truth until the explicit API cutover.
+      - name: Push inventory to API backend
+        env:
+          YS_API_URL: ${{ vars.YS_API_URL }}
+          YS_UPLOAD_TOKEN: ${{ secrets.YS_UPLOAD_TOKEN }}
+        run: |
+          if [ -z "$YS_API_URL" ] || [ -z "$YS_UPLOAD_TOKEN" ]; then
+            echo "YS_API_URL / YS_UPLOAD_TOKEN not configured — skipping API push."
+            exit 0
+          fi
+          python scraper/push_inventory.py --file docs/data/inventory_live.json

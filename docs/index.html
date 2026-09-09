@@ -322,6 +322,24 @@
     <strong>You're on the list.</strong>
     <span>We'll email you when Pro launches. Everything free stays free in the meantime.</span>
   </div>
+
+  <!-- Account sign-in (backend API mode only — stays hidden until the API is
+       enabled; see api.js). Magic-link email auth, no passwords. -->
+  <div id="account-wrap" class="account-wrap" style="display:none;">
+    <div class="account-signedout">
+      <strong>TestFlight tester or already Pro?</strong>
+      <div class="waitlist-row">
+        <input type="email" id="account-email" inputmode="email" autocomplete="email" placeholder="you@email.com">
+        <button type="button" id="account-send-link" class="btn btn-primary">Email sign-in link</button>
+      </div>
+      <span class="waitlist-note">No password &mdash; we email you a one-time sign-in link.</span>
+      <span id="account-status" class="account-status" role="status"></span>
+    </div>
+    <div class="account-signedin" style="display:none;">
+      <span>Signed in as <strong id="account-user"></strong> &middot; <span id="account-tier"></span></span>
+      <button type="button" id="account-logout" class="btn">Sign out</button>
+    </div>
+  </div>
 </div>
 
 <div id="install-hint" style="display:none;" role="status">
@@ -333,6 +351,7 @@
 </div>
 
 <script src="data.js"></script>
+<script src="api.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

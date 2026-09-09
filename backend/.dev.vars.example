@@ -1,0 +1,8 @@
+# Local development secrets for `wrangler dev`.
+# Copy to `.dev.vars` (gitignored) and edit. NEVER commit real values.
+DEV_MODE = "1"
+UPLOAD_TOKEN = "dev-upload-token-change-me"
+ADMIN_SECRET = "dev-admin-secret-change-me"
+# Leave unset locally — DEV_MODE=1 logs magic links instead of emailing.
+# RESEND_API_KEY = ""
+# REVENUECAT_WEBHOOK_SECRET = ""
