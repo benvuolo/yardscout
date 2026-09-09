@@ -79,6 +79,10 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 CACHE_DIR = SCRIPT_DIR / ".cache"
 SEEN_FILE = CACHE_DIR / "seen_vehicles.json"
 LIVE_FILE = DATA_DIR / "inventory_live.json"
+# Photo/spec enrichment shard — lazy-loaded by the UI so the main inventory
+# payload (the critical rendering path) stays exactly as small as before.
+EXTRAS_FILE = DATA_DIR / "vehicle_extras.json"
+ROW52_CDN = "https://cdn.row52.com/images/"
 
 PNP_API = "https://www.picknpull.com/api"
 SLC_ZIP = "84101"
@@ -2979,12 +2983,33 @@ def fetch_vpic_decode(vin: str) -> dict | None:
 
 def _vpic_row_to_decode(row: dict) -> dict:
     trim = (row.get("Trim") or "").strip()
+    # Compact engine/transmission summaries (e.g. "3.7L 6-cyl", "6-spd Automatic").
+    # Only present on decodes made after this shipped; older cache entries
+    # backfill naturally as inventory turns over (~45-day lot lifespans).
+    eng_bits = []
+    disp = (row.get("DisplacementL") or "").strip()
+    if disp:
+        try:
+            eng_bits.append(f"{float(disp):.1f}L")
+        except ValueError:
+            pass
+    cyl = (row.get("EngineCylinders") or "").strip()
+    if cyl:
+        eng_bits.append(f"{cyl}-cyl")
+    fuel = (row.get("FuelTypePrimary") or "").strip()
+    if fuel and fuel.lower() != "gasoline":
+        eng_bits.append(fuel)
+    tstyle = (row.get("TransmissionStyle") or "").strip()
+    tspeed = (row.get("TransmissionSpeeds") or "").strip()
+    trans = ((f"{tspeed}-spd " if tspeed else "") + tstyle).strip()
     return {
         "trim": trim,
         "series": (row.get("Series") or "").strip(),
         "driveType": (row.get("DriveType") or "").strip(),
         "trimQuality": _vpic_trim_quality(trim),
         "bodyClass": (row.get("BodyClass") or "").strip(),
+        "engine": " ".join(eng_bits),
+        "transmission": trans,
         # Factory identity per the VIN — used to cross-check the yard listing.
         "modelYear": (row.get("ModelYear") or "").strip(),
         "make": (row.get("Make") or "").strip(),
@@ -3120,6 +3145,20 @@ def fetch_pnp_inventory(make_ids: list[int] | None = None, *, national: bool = F
                 if not loc.get("name"):
                     continue
                 for v in loc_data.get("vehicles", []):
+                    # PnP's API is backed by Row52: ~99% of cars carry photo
+                    # URLs on cdn.row52.com. Keep only the 600x400 image's
+                    # guid+ext ("r<guid>.JPG"); the UI rebuilds the URL.
+                    # (Hotlinked, never downloaded — see PR notes.)
+                    img = (v.get("imageName") or "").strip()
+                    if img.startswith(ROW52_CDN):
+                        v["_photo"] = "r" + img[len(ROW52_CDN):]
+                    # Spec fields exist in the schema but are null in every
+                    # observed response; captured defensively if they appear.
+                    for src, dst in (("color", "_color"), ("engine", "_engine"),
+                                     ("transmission", "_trans")):
+                        val = (v.get(src) or "").strip() if isinstance(v.get(src), str) else ""
+                        if val:
+                            v[dst] = val
                     v["_location"] = loc.get("name")
                     v["_city"] = loc.get("city") or ""
                     v["_state"] = loc.get("state") or ""
@@ -3425,11 +3464,25 @@ def _fetch_pyp_store_inventory(store: dict, session: requests.Session) -> list[d
             ymm_el = row.select_one(".pypvi_ymm")
             year, make, model = _split_ymm(ymm_el.get_text(" ", strip=True) if ymm_el else "")
             vin = ""
+            color = ""
             for det in row.select(".pypvi_detailItem"):
                 txt = det.get_text(" ", strip=True)
                 if txt.upper().startswith("VIN"):
                     vin = txt[3:].strip()
-                    break
+                elif "\u00b7" in txt and not color:
+                    # First detail item reads "Silver · 1134-55851" (color · stock)
+                    cand = txt.split("\u00b7")[0].strip()
+                    if cand and len(cand) <= 20 and not cand[0].isdigit():
+                        color = cand
+            # Each row carries one CDN photo whose URL is derived from a
+            # numeric image id — store just the id ("p<id>").
+            photo = ""
+            img_el = row.select_one("img")
+            if img_el is not None:
+                m = re.search(r"/carbuy/CAR-FRONT-LEFT_(\d+)_front_left_corner\.jpg",
+                              img_el.get("src") or "")
+                if m:
+                    photo = "p" + m.group(1)
             date_iso = ""
             t = row.select_one(".pypvi_available time")
             if t is not None and t.get("datetime"):
@@ -3457,6 +3510,8 @@ def _fetch_pyp_store_inventory(store: dict, session: requests.Session) -> list[d
                 "row": row_label,
                 "space": space,
                 "dateAdded": date_iso,
+                "_photo": photo,
+                "_color": color,
                 "_location": store["name"],
                 "_city": store["city"],
                 "_state": store["state"],
@@ -4005,8 +4060,17 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                 for p in v.get("_top_parts", [])
             ],
         }
+        entry["photo"] = v.get("_photo", "")
+        entry["color"] = v.get("_color", "")
+        entry["engine"] = v.get("_engine", "")
+        entry["trans"] = v.get("_trans", "")
         vp = v.get("_vpic")
         if isinstance(vp, dict) and vp:
+            # Chain feeds rarely carry specs; the VIN decode fills them in.
+            if not entry["engine"]:
+                entry["engine"] = vp.get("engine", "")
+            if not entry["trans"]:
+                entry["trans"] = vp.get("transmission", "")
             entry["vpicTrim"] = vp.get("trim", "")
             entry["vpicTrimQuality"] = vp.get("trimQuality", "")
             # True when VPIC returned a specific trim string we trust for trim-gated parts (not OEM "all trims" blobs).
@@ -4093,6 +4157,7 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
         return ls_global
 
     yards: list[list] = []
+    extras: dict[str, list] = {}
     yard_idx: dict[tuple, int] = {}
     part_sets: list[list[dict]] = []
     part_set_idx: dict[str, int] = {}
@@ -4121,6 +4186,15 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
                 pi = len(part_sets)
                 part_set_idx[pkey] = pi
                 part_sets.append(parts)
+
+        # Photo/color/engine/trans ride in a separate lazy shard keyed by
+        # vehicle id — the main payload stays byte-identical for cars
+        # without enrichment.
+        ex = [e.get("photo", ""), e.get("color", ""), e.get("engine", ""), e.get("trans", "")]
+        while ex and not ex[-1]:
+            ex.pop()
+        if ex:
+            extras[str(e.get("id"))] = ex
 
         row_i = len(rows)
         rows.append([
@@ -4160,6 +4234,7 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
         "partSets": part_sets,
         "vpic": vpic,
         "vehicles": rows,
+        "_extras": extras,
     }
 
 
@@ -4666,9 +4741,15 @@ def main():
             vehicles = do_scan()
             if args.json or args.save:
                 payload = build_inventory_json_payload(vehicles, only_matches=not args.all)
+                extras = payload.pop("_extras", {})
                 if args.save:
                     LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
+                    EXTRAS_FILE.write_text(json.dumps(
+                        {"version": 1, "scrapedAt": payload["scrapedAt"],
+                         "extraFields": ["photo", "color", "engine", "trans"],
+                         "extras": extras}, separators=(",", ":")))
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})")
+                    print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}")
                     _record_scan_to_db(vehicles, payload["scrapedAt"])
                 if args.json:
                     print(json.dumps(payload, separators=(",", ":")))
@@ -4698,10 +4779,16 @@ def main():
         print_engine_hunt_report(vehicles)
         if args.json or args.save:
             payload = build_inventory_json_payload(vehicles, only_matches=not args.all)
+            extras = payload.pop("_extras", {})
             if args.save:
                 LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
+                EXTRAS_FILE.write_text(json.dumps(
+                    {"version": 1, "scrapedAt": payload["scrapedAt"],
+                     "extraFields": ["photo", "color", "engine", "trans"],
+                     "extras": extras}, separators=(",", ":")))
                 if not args.json:
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})", file=sys.stderr)
+                    print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}", file=sys.stderr)
                 _record_scan_to_db(vehicles, payload["scrapedAt"])
             if args.json:
                 print(json.dumps(payload, separators=(",", ":")))
