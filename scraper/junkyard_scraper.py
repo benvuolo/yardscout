@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Junkyard Hunter — Self-Service Junkyard Inventory Scraper
+YardScout — Self-Service Junkyard Inventory Scraper
 =========================================
 Pulls LIVE inventory from Pick-n-Pull (SLC), Tear-A-Part (SLC + Ogden), and
 Utah Pic-A-Part (Ogden + Orem) via public XML inventory feeds, cross-references
@@ -4172,7 +4172,7 @@ def print_rich(vehicles: list[dict], show_all: bool = False):
     console = Console()
     console.print()
     console.print(Panel.fit(
-        "[bold yellow]Junkyard Hunter[/] — Live Inventory Scan\n"
+        "[bold yellow]YardScout[/] — Live Inventory Scan\n"
         "[dim]Pick-n-Pull + Pick Your Part + Pull-A-Part + Utah chains | No engines, no trans — carryable parts only[/]",
         border_style="yellow",
     ))
@@ -4226,7 +4226,7 @@ def print_plain(vehicles: list[dict]):
     hits = [v for v in vehicles if v.get("_matches")]
     hits.sort(key=lambda v: v.get("_max_value", 0), reverse=True)
     print(f"\n{'='*60}")
-    print(f"  JUNKYARD HUNTER — Live Scan")
+    print(f"  YARDSCOUT — Live Scan")
     print(f"  {len(vehicles)} vehicles | {len(hits)} matches")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print(f"{'='*60}\n")
@@ -4333,7 +4333,7 @@ def _ntfy_configured() -> bool:
 
 def send_push_alert(title: str, message: str, priority: str = "default") -> bool:
     """Phone push via ntfy.sh — free, no account. Set NTFY_TOPIC env var to a
-    hard-to-guess topic name (e.g. junkyard-hunter-bv-8k2j) and subscribe to
+    hard-to-guess topic name (e.g. yardscout-bv-8k2j) and subscribe to
     the same topic in the ntfy iOS/Android app. Works from laptop or CI."""
     topic = os.environ.get("NTFY_TOPIC", "").strip()
     if not topic:
@@ -4462,9 +4462,9 @@ def check_watchlist_alerts(vehicles: list[dict]):
     # macOS banners: first few only
     for v in hits[:5]:
         has_parts = " — has unobtanium!" if v.get("_matches") else ""
-        _macos_notify("Junkyard Hunter", f"{_vname(v)} at {_vloc(v)}{has_parts}")
+        _macos_notify("YardScout", f"{_vname(v)} at {_vloc(v)}{has_parts}")
     if len(hits) > 5:
-        _macos_notify("Junkyard Hunter", f"...and {len(hits) - 5} more watchlist hits")
+        _macos_notify("YardScout", f"...and {len(hits) - 5} more watchlist hits")
 
     # Phone push: individual up to 12, otherwise one summary
     if _ntfy_configured():
@@ -4490,8 +4490,8 @@ def check_watchlist_alerts(vehicles: list[dict]):
     if _smtp_configured():
         bodies = [_format_vehicle_email_body(v) for v in hits]
         digest = f"{len(hits)} new watchlist hit(s):\n\n" + "\n\n---\n\n".join(bodies)
-        subj = (f"Junkyard Alert: {_vname(hits[0])} at {_vloc(hits[0])}"
-                if len(hits) == 1 else f"Junkyard Alert: {len(hits)} new watchlist hits")
+        subj = (f"YardScout alert: {_vname(hits[0])} at {_vloc(hits[0])}"
+                if len(hits) == 1 else f"YardScout alert: {len(hits)} new watchlist hits")
         if send_email_alert(subj, digest):
             print(f"  📧 Digest email sent ({len(hits)} vehicles)", file=sys.stderr)
 
@@ -4516,7 +4516,7 @@ def _record_scan_to_db(vehicles: list[dict], scraped_at: str) -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Junkyard Hunter — live self-service junkyard scan")
+    parser = argparse.ArgumentParser(description="YardScout — live self-service junkyard scan")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--all", action="store_true", help="Include non-matching vehicles in output")
     parser.add_argument("--watch", action="store_true")

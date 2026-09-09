@@ -4,7 +4,7 @@
 # Repo secrets: NTFY_TOPIC (phone push), SMTP_USER / SMTP_PASS / ALERT_EMAIL (email, optional).
 # Commit scraper/watchlist.json to the repo for CI alerts to fire.
 
-name: Junkyard Scan
+name: YardScout Scan
 
 on:
   schedule:

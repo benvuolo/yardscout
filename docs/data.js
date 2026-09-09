@@ -1,4 +1,4 @@
-/* Junkyard Hunter — static datasets: parts database, yard directory. */
+/* YardScout — static datasets: parts database, yard directory. */
 const DATABASE = [
   {
     name: "Toyota 4Runner (3rd Gen)",

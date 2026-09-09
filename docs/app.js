@@ -1,4 +1,4 @@
-/* Junkyard Hunter — application logic (loading, filtering, rendering, saved list, alerts). */
+/* YardScout — application logic (loading, filtering, rendering, saved list, alerts). */
 /* ===== YARD PRICING MAPS =====
  * One map per chain, each built ONLY from that chain's published price list.
  * pypPricing / papPricing are keyed by yard display name (prices differ per yard).
@@ -248,7 +248,7 @@ function exportLiveCsv() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'junkyard-hunter-live-' + new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-') + '.csv';
+  a.download = 'yardscout-live-' + new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-') + '.csv';
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -272,7 +272,7 @@ function exportLiveJson() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'junkyard-hunter-live-' + new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-') + '.json';
+  a.download = 'yardscout-live-' + new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-') + '.json';
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -412,7 +412,7 @@ async function loadLiveInventory() {
         <p>The live inventory file wasn't found. Run the scraper to generate it:</p>
         <code>python scraper/junkyard_scraper.py --save --all</code>
         <p style="margin-top:1rem;">This scans the supported junkyard chains and cross-references every vehicle against the parts database. The output file <strong>inventory_live.json</strong> will appear in this directory.</p>
-        <p style="margin-top:0.75rem;"><strong>Tip:</strong> Open this page via a local server (not <code>file://</code>), or the browser cannot load the JSON. <strong>cd into the folder that contains</strong> <code>index.html</code> (the <code>junkyard-hunter</code> project folder), then run <code>cd docs && python3 -m http.server 8765</code> and open <code>http://localhost:8765/index.html</code>. If you see 404, the server was started in the wrong directory.</p>
+        <p style="margin-top:0.75rem;"><strong>Tip:</strong> Open this page via a local server (not <code>file://</code>), or the browser cannot load the JSON. <strong>cd into the folder that contains</strong> <code>index.html</code> (the <code>yardscout</code> project folder), then run <code>cd docs && python3 -m http.server 8765</code> and open <code>http://localhost:8765/index.html</code>. If you see 404, the server was started in the wrong directory.</p>
       </div>`;
   }
 }
@@ -517,6 +517,7 @@ function useMyLocation() {
       btns.forEach(b => { b.disabled = false; b.innerHTML = b.dataset.orig; });
       updateZipBanner();
       renderLive();
+      if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
     },
     () => {
       btns.forEach(b => { b.disabled = false; b.innerHTML = b.dataset.orig; });
@@ -588,7 +589,7 @@ async function submitWaitlist() {
     await fetch('https://ntfy.sh/' + WAITLIST_NTFY_TOPIC, {
       method: 'POST',
       body: `${email} | trigger: ${entry.trigger} | ${entry.at}`,
-      headers: { 'Title': 'Junkyard Hunter Pro signup', 'Tags': 'moneybag' },
+      headers: { 'Title': 'YardScout Pro signup', 'Tags': 'moneybag' },
     });
   } catch (e) { /* local log still has it */ }
   localStorage.setItem('jh_waitlist_email', email);
@@ -821,7 +822,7 @@ async function shareVehicle(key) {
   const text = `${bits.join(' — ')} at ${v.location}${arrived ? ', arrived ' + arrived : ''}`;
   const url = shareUrlFor(v);
   if (navigator.share) {
-    try { await navigator.share({ title: 'Junkyard Hunter find', text, url }); return; } catch (e) { /* cancelled/unsupported -> fall through */ }
+    try { await navigator.share({ title: 'YardScout find', text, url }); return; } catch (e) { /* cancelled/unsupported -> fall through */ }
   }
   try {
     await navigator.clipboard.writeText(`${text}\n${url}`);
@@ -1252,7 +1253,12 @@ document.getElementById('live-radius').addEventListener('change', () => {
 // Restore saved zip/radius/GPS center across visits
 (() => {
   const savedZip = localStorage.getItem('jh_zip') || '';
-  const savedRadius = localStorage.getItem('jh_radius');
+  let savedRadius = localStorage.getItem('jh_radius');
+  // Radius is capped at 250 mi now; migrate any older saved value down.
+  if (savedRadius !== null && parseInt(savedRadius, 10) > 250) {
+    savedRadius = '250';
+    localStorage.setItem('jh_radius', savedRadius);
+  }
   if (savedRadius !== null) document.getElementById('live-radius').value = savedRadius;
   if (savedZip) {
     document.getElementById('live-zip').value = savedZip;
@@ -1319,39 +1325,93 @@ function buildYardDirectory() {
 
 function renderYards() {
   const grid = document.getElementById('yards-grid');
+  const statsBar = document.getElementById('yards-stats-bar');
   if (!liveLoaded) {
     grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><p>Loading live inventory&hellip;</p></div>';
-    document.getElementById('yards-stats-bar').innerHTML = '';
+    statsBar.innerHTML = '';
     return;
   }
+
+  // The Yards tab reflects the same vicinity as Live: it needs a center.
+  if (!activeZipCoords) {
+    statsBar.innerHTML = '';
+    grid.innerHTML = `
+      <div class="empty-state yards-locate" style="grid-column:1/-1;">
+        <h3>Where are you?</h3>
+        <p>Yards are listed by distance from you. Set a zip code or use your location to see the yards nearby.</p>
+        <div class="zip-banner-form" style="justify-content:center;">
+          <input type="text" id="yards-zip-input" inputmode="numeric" maxlength="5" placeholder="Zip code">
+          <button type="button" class="btn btn-primary" id="yards-zip-go">Show yards</button>
+        </div>
+        <button type="button" class="btn gps-btn" id="yards-gps" style="margin-top:0.6rem;">${ICON.pin} Or use my location</button>
+      </div>`;
+    const go = () => {
+      const zip = document.getElementById('yards-zip-input').value.trim();
+      if (/^\d{5}$/.test(zip)) {
+        document.getElementById('live-zip').value = zip;
+        setZipCenter(zip).then(() => { updateZipBanner(); renderYards(); });
+      }
+    };
+    document.getElementById('yards-zip-go').addEventListener('click', go);
+    document.getElementById('yards-zip-input').addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+    document.getElementById('yards-gps').addEventListener('click', useMyLocation);
+    return;
+  }
+
   let yards = buildYardDirectory();
   const allCount = yards.length;
   const states = new Set(yards.map(y => y.state).filter(Boolean));
-  const q = (document.getElementById('yards-search').value || '').trim().toLowerCase();
-  if (q) yards = yards.filter(y => (y.location + ' ' + y.city + ' ' + y.state).toLowerCase().includes(q));
 
   yards.forEach(y => {
-    y.dist = (activeZipCoords && y.lat != null && y.lng != null)
+    y.dist = (y.lat != null && y.lng != null)
       ? haversineMiles(activeZipCoords.lat, activeZipCoords.lng, y.lat, y.lng) : null;
   });
-  if (activeZipCoords) {
-    yards.sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
-  } else {
-    yards.sort((a, b) => (a.state || 'ZZ').localeCompare(b.state || 'ZZ') || a.location.localeCompare(b.location));
-  }
+  yards.sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
 
-  document.getElementById('yards-stats-bar').innerHTML = `
-    <div class="stat-card"><div class="label">Yards tracked</div><div class="value">${allCount}</div></div>
-    <div class="stat-card"><div class="label">States + provinces</div><div class="value">${states.size}</div></div>
-    <div class="stat-card"><div class="label">Cars on lots</div><div class="value">${liveInventory.length.toLocaleString()}</div></div>
+  // Same radius as the Live tab (capped at 250 mi). "Any distance" shows all,
+  // still nearest-first.
+  const radius = parseInt(document.getElementById('live-radius').value, 10) || null;
+  const inRange = radius ? yards.filter(y => y.dist != null && y.dist <= radius) : yards;
+
+  const q = (document.getElementById('yards-search').value || '').trim().toLowerCase();
+  const shown = q ? inRange.filter(y => (y.location + ' ' + y.city + ' ' + y.state).toLowerCase().includes(q)) : inRange;
+
+  statsBar.innerHTML = `
+    <div class="stat-card"><div class="label">Yards near you</div><div class="value">${inRange.length}</div></div>
+    <div class="stat-card"><div class="label">Within</div><div class="value-sm">${radius ? radius + ' mi' : 'any distance'}</div></div>
+    <div class="stat-card"><div class="label">Tracked nationwide</div><div class="value">${allCount}</div></div>
   `;
 
-  if (!yards.length) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No yards match</h3><p>Try a different name, city, or state.</p></div>';
+  if (!shown.length) {
+    if (!inRange.length) {
+      const nearest = yards.find(y => y.dist != null);
+      const nearestTxt = nearest
+        ? `The nearest yard we track is <strong>${escapeHtml(nearest.location)}</strong> in ${escapeHtml([nearest.city, nearest.state].filter(Boolean).join(', '))} &mdash; ${Math.round(nearest.dist)} mi away.`
+        : '';
+      grid.innerHTML = `
+        <div class="empty-state" style="grid-column:1/-1;">
+          <h3>No yards within ${radius} mi</h3>
+          <p>${nearestTxt}</p>
+          <div style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.75rem;">
+            ${radius < 250 ? '<button type="button" class="btn" id="yards-widen">Widen to 250 mi</button>' : ''}
+            <button type="button" class="btn" id="yards-any">Show all yards nearest-first</button>
+          </div>
+        </div>`;
+      const setRadius = v => {
+        document.getElementById('live-radius').value = v;
+        localStorage.setItem('jh_radius', v);
+        renderYards();
+      };
+      const widen = document.getElementById('yards-widen');
+      if (widen) widen.addEventListener('click', () => setRadius('250'));
+      document.getElementById('yards-any').addEventListener('click', () => setRadius(''));
+    } else {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No yards match</h3><p>Try a different name, city, or state.</p></div>';
+    }
     return;
   }
 
-  grid.innerHTML = yards.map(y => {
+  grid.innerHTML = shown.map(y => {
     const chain = CHAIN_PRICE_PAGES.find(c => c[0].test(y.location));
     const place = [y.city, y.state].filter(Boolean).join(', ');
     const distTxt = y.dist != null ? ` <span class="dist">&middot; ${Math.round(y.dist)} mi</span>` : '';
@@ -1384,7 +1444,6 @@ function viewYardInLive(loc) {
   const sel = document.getElementById('live-filter-location');
   sel.value = loc;
   if (sel.value !== loc) return; // option missing (shouldn't happen — same data)
-  document.getElementById('live-radius').value = '';
   document.querySelector('.tab[data-tab="live"]').click();
   window.scrollTo({ top: 0 });
 }
@@ -1427,8 +1486,14 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 
 /* ===== ALERTS / WATCHLIST ===== */
-const WATCHLIST_KEY = 'junkyard_hunter_watchlist';
-const ALERTED_KEY = 'junkyard_hunter_alerted';
+const WATCHLIST_KEY = 'yardscout_watchlist';
+const ALERTED_KEY = 'yardscout_alerted';
+// One-time migration from the pre-rebrand keys.
+for (const [oldK, newK] of [['junkyard_hunter_watchlist', WATCHLIST_KEY], ['junkyard_hunter_alerted', ALERTED_KEY]]) {
+  const v = localStorage.getItem(oldK);
+  if (v !== null && localStorage.getItem(newK) === null) localStorage.setItem(newK, v);
+  if (v !== null) localStorage.removeItem(oldK);
+}
 
 function loadWatchlist() {
   try { return JSON.parse(localStorage.getItem(WATCHLIST_KEY)) || []; }
@@ -1630,7 +1695,7 @@ function checkAndNotify() {
         alerted[key] = new Date().toISOString();
         newHits++;
         const label = [r.entry.make, r.entry.model].filter(Boolean).join(' ');
-        new Notification('Junkyard Hunter Alert', {
+        new Notification('YardScout alert', {
           body: `${v.year} ${v.make} ${v.model} at ${v.location}${v.vin && String(v.vin).replace(/[^A-Z0-9]/gi, '').length === 17 ? ' · VIN ' + String(v.vin).trim() : ''}${v.hasMatch ? ' — has flagged parts' : ''}`,
           icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">🔔</text></svg>',
           tag: key,
@@ -1677,7 +1742,7 @@ document.getElementById('alert-notif-btn').addEventListener('click', requestNoti
       const r = await fetch('https://ntfy.sh/' + encodeURIComponent(t), {
         method: 'POST',
         body: 'Test received. Watchlist alerts will look like this.',
-        headers: { 'Title': 'Junkyard Hunter test', 'Tags': 'wrench' },
+        headers: { 'Title': 'YardScout test', 'Tags': 'wrench' },
       });
       statusEl.textContent = r.ok
         ? 'Sent — check your phone (make sure the ntfy app is subscribed to "' + t + '").'

@@ -1,9 +1,9 @@
-/* Junkyard Hunter service worker — instant launches + works offline in the yard.
+/* YardScout service worker — instant launches + works offline in the yard.
    Strategy: network-first with cache fallback for everything same-origin, so the
    app is always fresh when online but still opens (with the last-seen inventory)
    when cell signal dies between the rows of cars. */
 
-const CACHE = 'jh-v15';
+const CACHE = 'jh-v16';
 const SHELL = [
   './',
   './index.html',

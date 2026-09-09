@@ -1,7 +1,7 @@
 {
-  "name": "Junkyard Hunter",
-  "short_name": "Junkyard",
-  "description": "Live junkyard inventory with part-value intelligence",
+  "name": "YardScout",
+  "short_name": "YardScout",
+  "description": "Live self-service junkyard inventory with part-value intelligence",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#efece4",
