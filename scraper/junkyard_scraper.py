@@ -81,8 +81,16 @@ SEEN_FILE = CACHE_DIR / "seen_vehicles.json"
 LIVE_FILE = DATA_DIR / "inventory_live.json"
 # Photo/spec enrichment shard — lazy-loaded by the UI so the main inventory
 # payload (the critical rendering path) stays exactly as small as before.
+#
+# PHOTO POLICY (owner directive, Sep 2026): photos are captured ONLY when the
+# chain itself hosts them (e.g. LKQ photos on LKQ's cdn.pypapps.com, carrying
+# LKQ's own PYP watermark). Pick-n-Pull's API returns photo URLs, but they
+# live on cdn.row52.com with a Row52 watermark — Row52 is PnP's inventory/
+# photo partner and a direct competitor, so those images are never captured,
+# hotlinked, or referenced. (PnP's "own" API at picknpull.com/api is in fact
+# Row52-powered under the hood — responses carry Row52 account ids and CDN
+# URLs. The factual inventory data from it is fine to use; the images are not.)
 EXTRAS_FILE = DATA_DIR / "vehicle_extras.json"
-ROW52_CDN = "https://cdn.row52.com/images/"
 
 PNP_API = "https://www.picknpull.com/api"
 SLC_ZIP = "84101"
@@ -3145,15 +3153,13 @@ def fetch_pnp_inventory(make_ids: list[int] | None = None, *, national: bool = F
                 if not loc.get("name"):
                     continue
                 for v in loc_data.get("vehicles", []):
-                    # PnP's API is backed by Row52: ~99% of cars carry photo
-                    # URLs on cdn.row52.com. Keep only the 600x400 image's
-                    # guid+ext ("r<guid>.JPG"); the UI rebuilds the URL.
-                    # (Hotlinked, never downloaded — see PR notes.)
-                    img = (v.get("imageName") or "").strip()
-                    if img.startswith(ROW52_CDN):
-                        v["_photo"] = "r" + img[len(ROW52_CDN):]
+                    # NOTE: the feed carries photo URLs, but they are Row52
+                    # assets (cdn.row52.com, Row52 watermark) — deliberately
+                    # NOT captured. See PHOTO POLICY at EXTRAS_FILE.
                     # Spec fields exist in the schema but are null in every
-                    # observed response; captured defensively if they appear.
+                    # observed response; captured defensively if they appear —
+                    # facts aren't copyrightable, so these are fine regardless
+                    # of where the photos live.
                     for src, dst in (("color", "_color"), ("engine", "_engine"),
                                      ("transmission", "_trans")):
                         val = (v.get(src) or "").strip() if isinstance(v.get(src), str) else ""
