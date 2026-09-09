@@ -170,33 +170,40 @@ function annotateVinDuplicates(vehicles) {
 }
 
 /** Full VIN in UI when present (yards often provide 17 chars). */
+/* Single inline SVG icon set — one stroke weight, currentColor, sized by
+ * font-size via the .ico class. No emoji in the interface. */
+const ICON = {
+  pin: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  heart: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.46 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.04 3 5.5l7 7Z"/></svg>',
+  copy: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+  check: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
+  x: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+  lock: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+  chev: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+  share: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>',
+};
+
 function vinMetaHtml(v) {
   if (!v.vin || !String(v.vin).trim()) return '';
   const show = String(v.vin).trim();
+  // Quiet metadata, not badge soup: VIN + icon copy button, then plain dim
+  // text notes. Only a genuine warning (VIN/listing mismatch) gets color.
   const dup = v.vinDuplicate
-    ? ' <span class="badge" style="background:var(--blue-soft);color:var(--blue);font-size:0.62rem;" title="Same VIN appears at more than one yard in this file">Also at another yard</span>'
+    ? ' <span class="meta-note" title="Same VIN appears at more than one yard in this file">also at another yard</span>'
     : '';
   const copyBtn = show.length >= 11
-    ? `<button type="button" class="btn-copy-vin" data-vin="${escapeHtml(show)}" title="Copy VIN">Copy</button>`
+    ? `<button type="button" class="btn-copy-vin" data-vin="${escapeHtml(show)}" title="Copy VIN">${ICON.copy}</button>`
     : '';
   let vpic = '';
   const vt = v.vpicTrim != null ? String(v.vpicTrim).trim() : '';
-  const decodeWell = v.vpicDecodeWell === true;
-  if (vt) {
-    const q = v.vpicTrimQuality;
-    const ambTitle = 'NHTSA returned a multi-trim list for this model; matching uses yard title, not this blob';
-    const okTitle = 'VIN decoded well: specific trim from NHTSA VPIC (used for trim-gated parts)';
-    if (q === 'usable' || decodeWell) {
-      vpic = ` <span class="badge" style="background:var(--green-soft);color:var(--accent2);font-size:0.62rem;" title="${escapeHtml(okTitle)}">VIN trim OK</span> <span class="badge" style="background:var(--purple-soft);color:var(--purple);font-size:0.62rem;" title="${escapeHtml(okTitle)}">${escapeHtml(vt)}</span>`;
-    } else if (q === 'ambiguous') {
-      vpic = ` <span class="badge" style="background:var(--surface3);color:var(--text-dim);font-size:0.62rem;" title="${escapeHtml(ambTitle)}">VPIC: multi-trim</span>`;
-    }
+  if (vt && (v.vpicTrimQuality === 'usable' || v.vpicDecodeWell === true)) {
+    vpic = ` <span class="meta-note" title="Specific trim decoded from the VIN via NHTSA VPIC — used to confirm trim-gated parts">trim: ${escapeHtml(vt)} (VIN-confirmed)</span>`;
   }
   let mismatch = '';
   if (v.vpicMismatch) {
-    mismatch = ` <span class="badge" style="background:var(--gold-soft);color:var(--orange);font-size:0.62rem;" title="The VIN's factory decode disagrees with the yard listing — the lot sign may be mislabeled. The VIN is used for matching; verify at the yard.">&#9888; ${escapeHtml(v.vpicMismatch)}</span>`;
+    mismatch = ` <span class="meta-warn" title="The VIN's factory decode disagrees with the yard listing — the lot sign may be mislabeled. The VIN is used for matching; verify at the yard.">${escapeHtml(v.vpicMismatch)}</span>`;
   }
-  return ` &middot; VIN: <strong class="mono-vin">${escapeHtml(show)}</strong>${copyBtn}${dup}${vpic}${mismatch}`;
+  return ` &middot; VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}${dup}${vpic}${mismatch}`;
 }
 
 function csvEscapeCell(val) {
@@ -686,7 +693,7 @@ function renderSavedSheet() {
   const list = document.getElementById('saved-list');
   const entries = Object.entries(savedCars);
   if (!entries.length) {
-    list.innerHTML = '<div class="saved-empty">Tap the &#x2764;&#xFE0F; on any car to build your pull list.</div>';
+    list.innerHTML = '<div class="saved-empty">Tap the heart on any car to build your pull list.</div>';
     return;
   }
   // Group by yard; inside each yard sort by row number so the list matches a
@@ -715,7 +722,7 @@ function renderSavedSheet() {
               ${range && range.hi > 0 ? (isPro()
                 ? `<div class="saved-item-profit" title="${range.unknownCost ? 'Resale estimate — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated range if parts are good, after this yard\u2019s list pull costs'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">resale</small>' : ''}</div>`
                 : `<div class="saved-item-profit locked-blur" role="button" onclick="openUpgradeSheet('saved-value')">$400&ndash;$900</div>`) : ''}
-              <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">&#x1F5D1;&#xFE0F;</button>
+              <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">${ICON.x}</button>
             </div>`;
         }).join('')}
       </div>`;
@@ -808,7 +815,7 @@ async function shareVehicle(key) {
     const btn = document.querySelector(`.share-btn[data-vkey="${CSS.escape(key)}"]`);
     if (btn) {
       const orig = btn.innerHTML;
-      btn.innerHTML = '<small style="font-size:0.6rem;">Copied</small>';
+      btn.innerHTML = '<small style="font-size: 0.6875rem;">Copied</small>';
       setTimeout(() => { btn.innerHTML = orig; }, 1400);
     }
   } catch (e) {
@@ -972,10 +979,10 @@ function renderLive() {
 
   document.getElementById('live-stats-bar').innerHTML = `
     <div class="stat-card"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">Worth a Look</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">Fast Sellers</div><div class="value green">${fastSellers.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">New This Week</div><div class="value">${newThisWeek.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">Updated</div><div class="value" style="font-size:0.85rem;line-height:1.5;">${scrapedLabel}</div></div>
+    <div class="stat-card"><div class="label">Worth a look</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">Fast sellers</div><div class="value">${fastSellers.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">New this week</div><div class="value">${newThisWeek.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">Updated</div><div class="value value-sm">${scrapedLabel}</div></div>
   `;
 
   // Shared-link landing: focused single-car view, or an honest message when
@@ -1015,7 +1022,7 @@ function renderLive() {
             <button type="button" class="btn btn-primary" onclick="jhWidenRadius(${Math.ceil(closest.d)})">Widen radius to include it</button>
             <button type="button" class="btn" onclick="jhShowNationwide()">Show everything nationwide</button>
           </div>
-          <p style="margin-top:1rem;font-size:0.72rem;">We track every major self-service chain — LKQ Pick Your Part, Pick-n-Pull, and Pull-A-Part — <span class="coverage-count">${coverageYardCount()}</span> yards nationwide. Independent local yards aren't covered yet.</p>`;
+          <p style="margin-top:1rem;font-size: 0.75rem;">We track every major self-service chain — LKQ Pick Your Part, Pick-n-Pull, and Pull-A-Part — <span class="coverage-count">${coverageYardCount()}</span> yards nationwide. Independent local yards aren't covered yet.</p>`;
       }
     }
     document.getElementById('live-grid').innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;
@@ -1158,12 +1165,12 @@ function renderLive() {
           <span class="range-text">${rangeText}</span>
         </div>` : `
         <div class="profit-line">
-          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">&#128274; See what this is worth &mdash; Pro</button>
+          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} See what this is worth &mdash; Pro</button>
         </div>`)
         : '';
       partsBlock = `
         <details class="parts-details">
-          <summary>Came with ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart} <span class="chev">&#x25BC;</span></summary>
+          <summary>Came with ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart} <span class="chev">${ICON.chev}</span></summary>
           <div class="car-body">
             <div class="ghost-note">These are parts this car <strong>originally came with</strong> &mdash; yards track cars, not remaining parts, so some may already be pulled. Newer arrivals are more likely intact, which is why estimates shrink the longer a car sits.</div>
             <ul class="parts-list">${partRows}</ul>
@@ -1171,23 +1178,29 @@ function renderLive() {
         </details>`;
     }
 
+    // One status badge per card, by priority — never a row of colored pills.
+    const statusBadge = isNewVehicle
+      ? '<span class="badge badge-new">New</span>'
+      : leavingSoon
+      ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon</span>'
+      : '';
+    // Freshness is context, not an alert: quiet text in the metadata line.
+    const freshNote = isMatch
+      ? ` &middot; <span title="Time on the lot — older arrivals are more likely already picked over, so value estimates are discounted">${fl.text.toLowerCase()}</span>`
+      : '';
     return `
       <div class="car-card ${cardClass}" style="${cardStyle}">
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
-            <div class="live-card-location">&#x1F4CD; ${v.location}${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span style="color:var(--blue);font-weight:700;">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}</div>
-            <div class="car-meta">Added ${dateStr}${vinMetaHtml(v)}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">&middot; Row ' + v.row + '</span>' : ''}</div>
+            <div class="car-meta">Added ${dateStr}${freshNote}${vinMetaHtml(v)}</div>
             ${lotClock}
           </div>
           <div class="car-badges">
-            <button type="button" class="share-btn" data-vkey="${vehicleKey(v)}" title="Share this find"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></button>
-            <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${vehicleKey(v)}" title="Save for your yard visit">&#x2764;&#xFE0F;</button>
-            ${leavingSoon ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon (est.)</span>' : ''}
-            ${isNewVehicle ? '<span class="badge badge-new">NEW</span>' : ''}
-            ${isMatch
-              ? '<span class="badge" title="Time on the lot — older arrivals are more likely already picked over, so value estimates are discounted" style="background:' + (fm >= 0.75 ? 'var(--green-soft)' : fm >= 0.5 ? 'var(--gold-soft)' : 'var(--red-soft)') + ';color:' + fl.color + ';">' + fl.text + '</span>'
-              : '<span class="badge" style="background:var(--surface3);color:var(--text-dim);">No parts</span>'}
+            ${statusBadge}
+            <button type="button" class="share-btn" data-vkey="${vehicleKey(v)}" title="Share this find">${ICON.share}</button>
+            <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${vehicleKey(v)}" title="Save for your yard visit">${ICON.heart}</button>
           </div>
         </div>
         ${profitLine}
@@ -1236,7 +1249,7 @@ document.getElementById('live-radius').addEventListener('change', () => {
     if (gps) {
       try {
         activeZipCoords = JSON.parse(gps);
-        document.getElementById('live-zip').placeholder = '\u{1F4CD} Using your location';
+        document.getElementById('live-zip').placeholder = 'Using your location';
       } catch (e) { localStorage.removeItem('jh_gps'); }
     }
   }
@@ -1252,9 +1265,9 @@ document.getElementById('tab-live').addEventListener('click', (e) => {
   if (!btn || !btn.dataset.vin) return;
   e.preventDefault();
   navigator.clipboard.writeText(btn.dataset.vin).then(() => {
-    const t = btn.textContent;
-    btn.textContent = 'Copied';
-    setTimeout(() => { btn.textContent = t || 'Copy'; }, 1200);
+    btn.innerHTML = ICON.check;
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerHTML = ICON.copy; btn.classList.remove('copied'); }, 1200);
   }).catch(() => {});
 });
 
@@ -1262,11 +1275,11 @@ document.getElementById('tab-live').addEventListener('click', (e) => {
 function renderStats(cars) {
   const allParts = cars.flatMap(c => c.parts);
   document.getElementById('stats-bar').innerHTML = `
-    <div class="stat-card"><div class="label">Vehicles</div><div class="value blue">${cars.length}</div></div>
-    <div class="stat-card"><div class="label">Parts Tracked</div><div class="value purple">${allParts.length}</div></div>
-    <div class="stat-card"><div class="label">Legendary Parts</div><div class="value gold">${allParts.filter(p => p.rarity === 'Legendary').length}</div></div>
-    <div class="stat-card"><div class="label">Makes Covered</div><div class="value green">${new Set(cars.map(c => c.make)).size}</div></div>
-    <div class="stat-card"><div class="label">Toyota Vehicles</div><div class="value orange">${cars.filter(c => c.make === 'Toyota').length}</div></div>
+    <div class="stat-card"><div class="label">Vehicles</div><div class="value">${cars.length}</div></div>
+    <div class="stat-card"><div class="label">Parts tracked</div><div class="value">${allParts.length}</div></div>
+    <div class="stat-card"><div class="label">Legendary parts</div><div class="value accent">${allParts.filter(p => p.rarity === 'Legendary').length}</div></div>
+    <div class="stat-card"><div class="label">Makes covered</div><div class="value">${new Set(cars.map(c => c.make)).size}</div></div>
+    <div class="stat-card"><div class="label">Toyota vehicles</div><div class="value">${cars.filter(c => c.make === 'Toyota').length}</div></div>
   `;
 }
 
@@ -1468,9 +1481,9 @@ function renderAlerts() {
   results.forEach(r => r.hits.forEach(v => uniqueHits.add(v.id || v.vin || `${v.year}${v.make}${v.model}`)));
 
   document.getElementById('alert-matches-bar').innerHTML = `
-    <div class="stat-card"><div class="label">Watchlist Items</div><div class="value blue">${watchlist.length}</div></div>
-    <div class="stat-card"><div class="label">Vehicles Found</div><div class="value ${uniqueHits.size > 0 ? 'green' : 'orange'}">${uniqueHits.size}</div></div>
-    <div class="stat-card"><div class="label">Total Hits</div><div class="value gold">${totalHits}</div></div>
+    <div class="stat-card"><div class="label">Watchlist items</div><div class="value">${watchlist.length}</div></div>
+    <div class="stat-card"><div class="label">Vehicles found</div><div class="value accent">${uniqueHits.size}</div></div>
+    <div class="stat-card"><div class="label">Total hits</div><div class="value">${totalHits}</div></div>
   `;
 
   const allHitVehicles = [];
@@ -1497,21 +1510,20 @@ function renderAlerts() {
       [e.make, e.model].filter(Boolean).join(' ') || 'Any'
     );
     return `
-      <div class="car-card match-card" style="--tier-color:var(--blue);">
+      <div class="car-card match-card" style="--tier-color:var(--accent);">
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
-            <div class="live-card-location">&#x1F4CD; ${v.location}${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span style="color:var(--blue);font-weight:700;">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}</div>
-            <div class="car-meta">Added ${dateStr}${vinMetaHtml(v)}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">&middot; Row ' + v.row + '</span>' : ''}</div>
+            <div class="car-meta">Added ${dateStr}${vinMetaHtml(v)} &middot; matched: ${matchedRules.join(', ')}</div>
           </div>
           <div class="car-badges">
-            <span class="badge" style="background:var(--blue-soft);color:var(--blue);">&#x1F514; ${matchedRules.join(', ')}</span>
-            ${isMatch ? '<span class="badge" style="background:var(--gold-soft);color:var(--gold);">&#x2B50; Has parts</span>' : ''}
+            <span class="badge badge-new">Watchlist hit</span>
           </div>
         </div>
         ${isMatch && v.topParts && v.topParts.length ? `
           <details class="parts-details">
-            <summary>&#x1F9F0; ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} <span class="chev">&#x25BC;</span></summary>
+            <summary>Came with ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} <span class="chev">${ICON.chev}</span></summary>
             <div class="car-body">
               <ul class="parts-list">
                 ${v.topParts.slice(0, 5).map(p => `
@@ -1602,7 +1614,7 @@ function checkAndNotify() {
         newHits++;
         const label = [r.entry.make, r.entry.model].filter(Boolean).join(' ');
         new Notification('Junkyard Hunter Alert', {
-          body: `${v.year} ${v.make} ${v.model} at ${v.location}${v.vin && String(v.vin).replace(/[^A-Z0-9]/gi, '').length === 17 ? ' · VIN ' + String(v.vin).trim() : ''}${v.hasMatch ? ' — has unobtanium parts!' : ''}`,
+          body: `${v.year} ${v.make} ${v.model} at ${v.location}${v.vin && String(v.vin).replace(/[^A-Z0-9]/gi, '').length === 17 ? ' · VIN ' + String(v.vin).trim() : ''}${v.hasMatch ? ' — has flagged parts' : ''}`,
           icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">🔔</text></svg>',
           tag: key,
         });
@@ -1647,11 +1659,11 @@ document.getElementById('alert-notif-btn').addEventListener('click', requestNoti
     try {
       const r = await fetch('https://ntfy.sh/' + encodeURIComponent(t), {
         method: 'POST',
-        body: 'It works! Watchlist alerts will show up like this.',
+        body: 'Test received. Watchlist alerts will look like this.',
         headers: { 'Title': 'Junkyard Hunter test', 'Tags': 'wrench' },
       });
       statusEl.textContent = r.ok
-        ? 'Sent! Check your phone (make sure the ntfy app is subscribed to "' + t + '").'
+        ? 'Sent — check your phone (make sure the ntfy app is subscribed to "' + t + '").'
         : 'ntfy.sh returned an error — try a different topic name.';
     } catch (e) {
       statusEl.textContent = "Couldn't reach ntfy.sh — check your connection.";
