@@ -1193,7 +1193,7 @@ function renderLive() {
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">&middot; Row ' + v.row + '</span>' : ''}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}</div>
             <div class="car-meta">Added ${dateStr}${freshNote}${vinMetaHtml(v)}</div>
             ${lotClock}
           </div>
@@ -1514,7 +1514,7 @@ function renderAlerts() {
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">&middot; Row ' + v.row + '</span>' : ''}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}</div>
             <div class="car-meta">Added ${dateStr}${vinMetaHtml(v)} &middot; matched: ${matchedRules.join(', ')}</div>
           </div>
           <div class="car-badges">
