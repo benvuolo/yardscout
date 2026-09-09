@@ -1,6 +1,6 @@
-# Junkyard Hunter
+# YardScout
 
-**Live app: https://benvuolo.github.io/junkyard-hunter/**
+**Live app: https://benvuolo.github.io/yardscout/**
 
 Spot the valuable "unobtanium" parts that common junkyard cars originally came with, and see typical resale ranges before you drive to the yard. This is an information tool — estimates, not income promises: parts may already be pulled, and condition decides everything. Scrapes live inventory from **~150 self-service yards across four national/regional chains**:
 
@@ -17,7 +17,7 @@ No engines. No transmissions. Just parts you can carry out.
 
 ## Install on your phone
 
-1. Open **https://benvuolo.github.io/junkyard-hunter/** in Safari (iPhone) or Chrome (Android)
+1. Open **https://benvuolo.github.io/yardscout/** in Safari (iPhone) or Chrome (Android)
 2. iPhone: tap the Share button, then **Add to Home Screen**. Android: tap the menu, then **Install app**
 3. Launch it from your home screen — it runs full-screen like a native app and keeps working offline with the last-loaded inventory
 
@@ -26,7 +26,7 @@ Inventory auto-refreshes every 6 hours via GitHub Actions (see `.github/workflow
 ## Repo layout
 
 ```
-junkyard-hunter/
+yardscout/
 ├── docs/                       # Web app — served by GitHub Pages
 │   ├── index.html              # App shell (markup only; no build step)
 │   ├── styles.css              # All styling
@@ -52,7 +52,7 @@ junkyard-hunter/
 
 ### 1. Clone / copy the folder
 
-Copy the entire `junkyard-hunter/` folder to your personal machine. All you need is:
+Copy the entire `yardscout/` folder to your personal machine. All you need is:
 
 - `index.html`
 - `junkyard_scraper.py`
@@ -67,7 +67,7 @@ The JSON inventory files are regenerated every time you run the scraper.
 Requires **Python 3.10+** (tested on 3.13).
 
 ```bash
-cd junkyard-hunter
+cd yardscout
 
 # Create a virtual environment
 python3 -m venv .venv
@@ -115,8 +115,8 @@ python scraper/junkyard_scraper.py --refresh-chain-pricing
 ### Phone push notifications (ntfy — free, no account)
 
 1. Install the **ntfy** app ([iOS](https://apps.apple.com/us/app/ntfy/id1625396347) / Android).
-2. Pick a hard-to-guess topic name, e.g. `junkyard-hunter-bv-8k2j`, and **subscribe** to it in the app.
-3. Run the scraper with `NTFY_TOPIC=junkyard-hunter-bv-8k2j` in the environment
+2. Pick a hard-to-guess topic name, e.g. `yardscout-bv-8k2j`, and **subscribe** to it in the app.
+3. Run the scraper with `NTFY_TOPIC=yardscout-bv-8k2j` in the environment
    (locally or as a GitHub Actions secret `NTFY_TOPIC`).
 
 Watchlist hits then push straight to your phone. Up to 12 hits are sent as
@@ -137,8 +137,8 @@ VPIC uses the public [decodevinvaluesextended](https://vpic.nhtsa.dot.gov/api/) 
 The app loads `inventory_live.json` via `fetch()`, so you need a local HTTP server (browsers block `fetch` from `file://` URLs).
 
 ```bash
-# Must run from the junkyard-hunter folder (where index.html lives), or you get 404
-cd junkyard-hunter
+# Must run from the yardscout folder (where index.html lives), or you get 404
+cd yardscout
 
 python3 -m http.server 8765
 
@@ -150,7 +150,7 @@ That's it. No npm, no webpack, no build step.
 
 ### 5. Set up alerts (optional)
 
-Add vehicles to your watchlist in the Alerts tab of the web app, then click "Export for Scraper" to download a `watchlist.json` file. Place it in the `junkyard-hunter/` folder next to the scraper.
+Add vehicles to your watchlist in the Alerts tab of the web app, then click "Export for Scraper" to download a `watchlist.json` file. Place it in the `yardscout/` folder next to the scraper.
 
 When you run the scraper (especially in `--watch` mode), it reads `watchlist.json` and sends **macOS desktop notifications** when a watched vehicle appears.
 
@@ -200,7 +200,7 @@ You do **not** need to be logged into GitHub or Gmail on the machine where you d
 
 5. The workflow [`.github/workflows/scan.yml`](.github/workflows/scan.yml) runs **every 6 hours** and on **manual dispatch**. It runs `python scraper/junkyard_scraper.py --save --all`, commits `inventory_live.json` (and `watch_alerted.json` when present) if anything changed, and sends email when new watchlist matches appear. Alert dedupe in Actions is stored in `watch_alerted.json` at the repo root so you do not get repeat emails for the same vehicle.
 
-**Manual run:** GitHub → **Actions** → **Junkyard Scan** → **Run workflow**.
+**Manual run:** GitHub → **Actions** → **YardScout Scan** → **Run workflow**.
 
 ### 7. GitHub Pages (optional — open the app on your phone)
 
@@ -277,10 +277,10 @@ options:
 ```bash
 # From this machine
 cd /path/to/admin
-zip -r junkyard-hunter.zip junkyard-hunter/ \
-  -x "junkyard-hunter/.venv/*" \
-  -x "junkyard-hunter/.cache/*" \
-  -x "junkyard-hunter/scraper_err.log"
+zip -r yardscout.zip yardscout/ \
+  -x "yardscout/.venv/*" \
+  -x "yardscout/.cache/*" \
+  -x "yardscout/scraper_err.log"
 
 # Transfer the zip however you like (AirDrop, USB, email, etc.)
 # On the new machine, unzip and follow Quick Start above
@@ -289,21 +289,21 @@ zip -r junkyard-hunter.zip junkyard-hunter/ \
 **Option B — git (recommended if you want to keep it updated):**
 ```bash
 # Initialize a standalone repo
-cd junkyard-hunter
+cd yardscout
 git init
 # .gitignore is already in this project; or: echo -e ".venv/\n.cache/\n*.log\n..." > .gitignore
 git add -A
-git commit -m "Initial commit — Junkyard Hunter"
+git commit -m "Initial commit — YardScout"
 
 # Push to your personal GitHub
-gh repo create junkyard-hunter --private --source=. --push
+gh repo create yardscout --private --source=. --push
 # OR
-git remote add origin git@github.com:YOUR_USERNAME/junkyard-hunter.git
+git remote add origin git@github.com:YOUR_USERNAME/yardscout.git
 git push -u origin main
 
 # On the new machine
-git clone git@github.com:YOUR_USERNAME/junkyard-hunter.git
-cd junkyard-hunter
+git clone git@github.com:YOUR_USERNAME/yardscout.git
+cd yardscout
 python3 -m venv .venv && source .venv/bin/activate
 pip install requests beautifulsoup4 rich
 python scraper/junkyard_scraper.py --json --all > inventory_live.json

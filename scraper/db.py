@@ -1,5 +1,5 @@
 """
-Junkyard Hunter — inventory history database (SQLite).
+YardScout — inventory history database (SQLite).
 
 Keeps every vehicle ever seen, when it arrived (first_seen), when we last saw
 it (last_seen), and when it disappeared from the yard feed (departed_at —

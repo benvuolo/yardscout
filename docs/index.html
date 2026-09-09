@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Junkyard Hunter</title>
+<title>YardScout</title>
 <meta name="theme-color" content="#efece4">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Junkyard">
+<meta name="apple-mobile-web-app-title" content="YardScout">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -22,12 +22,14 @@
     <h1>
       <span class="icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="var(--accent)" fill-rule="evenodd">
-          <path d="M12 3.2 19.6 7.6 v8.8 L12 20.8 4.4 16.4 V7.6 Z M12 8.9 a3.1 3.1 0 1 0 0 6.2 a3.1 3.1 0 0 0 0 -6.2 Z"/>
+          <path d="M6.2 2 H14.8 L18.8 6 V20.9 A1.1 1.1 0 0 1 17.7 22 H7.3 A1.1 1.1 0 0 1 6.2 20.9 Z
+                   M12.5 4.2 a1.55 1.55 0 1 0 0 3.1 a1.55 1.55 0 0 0 0 -3.1 Z
+                   M12.5 9.8 L16.1 16.8 H13.55 V19.4 H11.45 V16.8 H8.9 Z"/>
         </svg>
       </span>
-      Junkyard Hunter
+      YardScout
     </h1>
-    <button type="button" id="pro-pill" class="pro-pill" title="Junkyard Hunter Pro">Pro</button>
+    <button type="button" id="pro-pill" class="pro-pill" title="YardScout Pro">Pro</button>
   </div>
   <p>Live inventory from ~150 self-service yards, checked against real part prices</p>
 </header>
@@ -94,7 +96,6 @@
           <option value="50">&le; 50 mi</option>
           <option value="100" selected>&le; 100 mi</option>
           <option value="250">&le; 250 mi</option>
-          <option value="500">&le; 500 mi</option>
         </select>
       </div>
       <div class="ctl">
@@ -157,7 +158,7 @@
     <div class="toolbar">
       <input type="text" class="search-box" id="yards-search" placeholder="Search yard name, city, state&hellip;">
     </div>
-    <p class="yards-hint">Every yard we track, nearest first when you've set a location. Tap a yard to see its cars.</p>
+    <p class="yards-hint">Yards within your search radius, nearest first. Tap a yard to see its cars.</p>
     <div class="car-grid" id="yards-grid"></div>
   </div>
 
@@ -244,10 +245,10 @@
 
   <footer class="app-footer">
     <p><strong>About the numbers:</strong> All dollar figures are ranges based on typical eBay sold prices (a national market) for used parts in working condition. Facebook Marketplace and local classifieds are local markets &mdash; prices vary by area, so check your own market before pulling. Condition dominates: a cracked, faded, or non-working part may be worth little or nothing, and none of these figures are a guarantee. Pull costs are shown only when they come from that yard's own published price list; otherwise you'll see &ldquo;check yard price list&rdquo; and the estimate is resale-only.<span id="prices-reviewed"></span></p>
-    <p style="margin-top:0.5rem;"><strong>About coverage:</strong> Junkyard Hunter tracks every major self-service chain with online inventory &mdash; Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part (including former U-Pull-&amp;-Pay yards) &mdash; <span class="coverage-count">~150</span> yards nationwide, plus Utah's Tear-A-Part and Utah Pic-A-Part. Independent local yards aren't tracked yet.</p>
+    <p style="margin-top:0.5rem;"><strong>About coverage:</strong> YardScout tracks every major self-service chain with online inventory &mdash; Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part (including former U-Pull-&amp;-Pay yards) &mdash; <span class="coverage-count">~150</span> yards nationwide, plus Utah's Tear-A-Part and Utah Pic-A-Part. Independent local yards aren't tracked yet.</p>
     <p style="margin-top:0.5rem;"><strong>About freshness:</strong> Inventory is re-scanned every 6 hours &mdash; the &ldquo;Updated&rdquo; stat above shows the last scan time. Parts listed on a car are what it <em>originally came with</em>; yards track cars, not remaining parts, so a part may already be pulled by the time you visit. Yard pull costs come from each chain's own published price sheet, refreshed with the scans. Resale ranges are curated estimates from typical eBay sold prices &mdash; not live quotes.</p>
     <p style="margin-top:0.5rem;">Always inspect a part on the car before you buy. Inventory reflects the last scan and yards sell or crush cars daily.</p>
-    <p style="margin-top:0.5rem;">Junkyard Hunter <span id="jh-version" style="user-select:none;">v2.1</span></p>
+    <p style="margin-top:0.5rem;">YardScout <span id="jh-version" style="user-select:none;">v2.1</span></p>
   </footer>
 </div>
 
@@ -269,7 +270,7 @@
 <div id="upgrade-sheet">
   <div class="sheet-handle"></div>
   <div class="sheet-head">
-    <h2>Junkyard Hunter Pro</h2>
+    <h2>YardScout Pro</h2>
     <button type="button" id="upgrade-close">Close</button>
   </div>
   <p class="sheet-sub">Know which cars are worth your time before you drive to the yard. Pro hasn't launched yet &mdash; join the waitlist and you'll be first in when it does.</p>

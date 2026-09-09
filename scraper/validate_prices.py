@@ -49,7 +49,7 @@ INVENTORY = ROOT / "docs" / "data" / "inventory_live.json"
 BASELINE = ROOT / "scraper" / "price_baseline.json"
 DEFAULT_REPORT = ROOT / "scraper" / "price_validation_report.md"
 
-UA = {"User-Agent": "junkyard-hunter price validator (github.com/benvuolo/junkyard-hunter)"}
+UA = {"User-Agent": "yardscout price validator (github.com/benvuolo/yardscout)"}
 INFLATION_TOLERANCE = 1.5  # displayed high may sit up to 1.5x the observed ceiling
 
 
