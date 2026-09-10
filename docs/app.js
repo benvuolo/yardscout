@@ -1234,13 +1234,18 @@ function renderLive() {
           : ifEquipped
           ? ' <span class="trim-badge trim-unknown" title="This part is specific to a trim, drivetrain, or transmission that couldn\u2019t be confirmed from the VIN or the yard listing — check the car at the yard">if equipped &mdash; unconfirmed</span>'
           : '';
+        // Generation provenance: which model years this part actually fits
+        // (from the generation-specific DB entry) — shown to everyone.
+        const fitsMark = p.fits
+          ? ` <span class="fits-badge" title="Model years this part fits — prices are specific to this generation">fits ${p.fits}</span>`
+          : '';
         // Free tier: part names/rarity/channels stay visible, but dollar values
         // and demand speed are blurred placeholders (real numbers never render).
         if (!isPro()) {
           return `
             <li class="part-item" style="flex-wrap:wrap;">
               <span class="part-name">${p.name}</span>
-              <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>${trimMark}
+              <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>${trimMark}${fitsMark}
               <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">$28 list</span>
               <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">sells $250&ndash;$600</span>
               ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
@@ -1252,7 +1257,7 @@ function renderLive() {
         return `
           <li class="part-item" style="flex-wrap:wrap;">
             <span class="part-name">${p.name}</span>
-            <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>${trimMark}
+            <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>${trimMark}${fitsMark}
             ${costHtml}
             <span class="part-price" title="Typical eBay sold range (national), working condition">sells ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
             ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">

@@ -108,7 +108,7 @@ VPIC_BATCH_URL = "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/"
 # evidence (see scraper/price_validation_report.md). Bump when accepting
 # corrections from a quarterly price-review PR. Exported to the v2 JSON and
 # shown in the web app's pricing-transparency footer.
-PRICES_LAST_REVIEWED = "2026-09-02"
+PRICES_LAST_REVIEWED = "2026-09-09"
 VPIC_BATCH_SIZE = 50
 _VPIC_CACHE: dict[str, dict | None] = {}
 def _vpic_workers() -> int:
@@ -325,7 +325,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_min": 2018},
             {"name": "TRD Pro Grille", "rarity": "Epic", "low": 200, "high": 400, "cost": 30, "yr_min": 2014},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 200, "high": 400, "cost": 30, "yr_min": 2007},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2007},
             {"name": "Tailgate (w/ camera)", "rarity": "Rare", "low": 200, "high": 450, "cost": 40, "yr_min": 2014},
             {"name": "JBL Speakers + Amp", "rarity": "Rare", "low": 150, "high": 350, "cost": 25},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20, "yr_max": 2013},
@@ -467,6 +467,9 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "F-Sport Brake Calipers", "rarity": "Epic", "low": 200, "high": 450, "cost": 30, "trim": ["F Sport", "F-Sport", "350", "500"]},
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 250, "high": 500, "cost": 40, "yr_min": 2014},
+            # Base cars pre-2014 previously had zero un-gated parts.
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 22, "yr_max": 2013},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
         ],
     },
     # --- HONDA ---
@@ -668,7 +671,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35, "yr_min": 2014},
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_min": 2019},
-            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 200, "high": 450, "cost": 30, "yr_min": 2007},
+            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30, "yr_min": 2007},
             {"name": "MultiPro Tailgate Steps", "rarity": "Epic", "low": 200, "high": 500, "cost": 30, "yr_min": 2019},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20, "yr_max": 2018},
         ],
@@ -747,8 +750,10 @@ UNOBTANIUM_DB = {
         "make": "Ford",
         "year_range": (2000, 2018),
         "top_parts": [
-            {"name": "ST3/RS HID Headlights (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 45, "trim": ["ST", "RS"]},
-            {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 71, "trim": ["ST", "RS"]},
+            # Both bands RAISED per the 2026-09 audit (UNDERSTATED verdicts):
+            # ST3/RS HID pairs sold $400-1,300; ST/RS Recaro pairs $950-2,000.
+            {"name": "ST3/RS HID Headlights (pair)", "rarity": "Epic", "low": 500, "high": 1600, "cost": 45, "trim": ["ST", "RS"]},
+            {"name": "Recaro Seats (pair, ST/RS)", "rarity": "Epic", "low": 1100, "high": 2600, "cost": 71, "trim": ["ST", "RS"]},
             {"name": "ST/RS Intercooler", "rarity": "Rare", "low": 60, "high": 160, "cost": 95, "trim": ["ST", "RS"]},
             {"name": "ST/RS Steering Wheel", "rarity": "Rare", "low": 100, "high": 225, "cost": 37, "trim": ["ST", "RS"]},
             {"name": "RS Brake Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 28, "trim": ["RS"]},
@@ -828,11 +833,13 @@ UNOBTANIUM_DB = {
     "maxima": {
         "display": "Nissan Maxima",
         "make": "Nissan",
-        "year_range": (2000, 2024),
+        "year_range": (1995, 2024),
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 250, "high": 500, "cost": 45, "yr_min": 2016},
             {"name": "Bose Subwoofer + Amp", "rarity": "Rare", "low": 100, "high": 250, "cost": 35},
             {"name": "Panoramic Sunroof Motor", "rarity": "Rare", "low": 100, "high": 220, "cost": 22, "yr_min": 2009},
+            # A32/A33 VQ30 era (floor extended from 2000).
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20, "yr_max": 1999},
             {"name": "Adaptive Cruise Radar", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 22, "yr_min": 2016},
         ],
     },
@@ -932,7 +939,7 @@ UNOBTANIUM_DB = {
         "make": "Ford",
         "year_range": (1997, 2024),
         "top_parts": [
-            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 200, "high": 450, "cost": 35, "yr_min": 2007},
+            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 35, "yr_min": 2007},
             {"name": "SYNC 3 / Large Touchscreen", "rarity": "Rare", "low": 250, "high": 500, "cost": 50, "yr_min": 2015},
             {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 40},
         ],
@@ -1020,7 +1027,9 @@ UNOBTANIUM_DB = {
     "ranger": {
         "display": "Ford Ranger",
         "make": "Ford",
-        "year_range": (1993, 2024),
+        # Floor extended to 1983 — first-gen Rangers show up at yards steadily
+        # and the tailgate/headlight parts below apply unchanged.
+        "year_range": (1983, 2024),
         "top_parts": [
             {"name": "Tailgate (clean)", "rarity": "Rare", "low": 200, "high": 450, "cost": 35},
             {"name": "SYNC / Touchscreen Head Unit", "rarity": "Uncommon", "low": 200, "high": 450, "cost": 45, "yr_min": 2019},
@@ -1390,17 +1399,8 @@ UNOBTANIUM_DB = {
     "audi rs q8": {
         "display": "Audi RS Q8",
         "make": "Audi",
-        "year_range": (2020, 2024),
-        "top_parts": [
-            {"name": "OEM Laser / Matrix Headlights (pair)", "rarity": "Legendary", "low": 1200, "high": 2800, "cost": 95, "yr_min": 2020},
-            {"name": "Carbon Ceramic Brakes (set)", "rarity": "Legendary", "low": 5000, "high": 12000, "cost": 450, "yr_min": 2020},
-            {"name": "RS Sport Seats (pair)", "rarity": "Legendary", "low": 2200, "high": 5000, "cost": 200, "yr_min": 2020},
-        ],
-    },
-    # Yards often list without space: RSQ8
-    "rsq8": {
-        "display": "Audi RS Q8",
-        "make": "Audi",
+        # Yards often list without the space ("RSQ8") — one entry, two spellings.
+        "match": ["rs q8", "rsq8"],
         "year_range": (2020, 2024),
         "top_parts": [
             {"name": "OEM Laser / Matrix Headlights (pair)", "rarity": "Legendary", "low": 1200, "high": 2800, "cost": 95, "yr_min": 2020},
@@ -1514,8 +1514,12 @@ UNOBTANIUM_DB = {
     "x5": {
         "display": "BMW X5",
         "make": "BMW",
-        "year_range": (2001, 2024),
+        # E53 launched as MY2000 — floor extended from 2001.
+        "year_range": (2000, 2024),
         "top_parts": [
+            # E53/E70 self-leveling rear air suspension — same failure-driven
+            # demand and band as the audited Quadra-Lift/Explorer compressors.
+            {"name": "Rear Air Suspension Compressor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_max": 2013},
             {"name": "Headlight assemblies (pair, E70 xenon/halogen)", "rarity": "Rare", "low": 140, "high": 420, "cost": 45, "yr_min": 2007, "yr_max": 2013},
             {"name": "Headlight assemblies (pair, F15 LED adaptive)", "rarity": "Epic", "low": 260, "high": 680, "cost": 58, "yr_min": 2014, "yr_max": 2018},
             {"name": "Headlight assemblies (pair, G05+ LED / laser)", "rarity": "Epic", "low": 420, "high": 1100, "cost": 65, "yr_min": 2019},
@@ -1712,6 +1716,8 @@ UNOBTANIUM_DB = {
             {"name": "Cue / Infotainment Touchscreen", "rarity": "Epic", "low": 200, "high": 500, "cost": 45, "yr_min": 2013},
             {"name": "Magnetic Ride Shocks (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 50, "trim": ["V", "V-Sport"]},
             {"name": "Brembo Calipers (set)", "rarity": "Epic", "low": 400, "high": 900, "cost": 55, "trim": ["V"]},
+            # Base pre-2013 cars previously had zero un-gated parts.
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
         ],
     },
     "ats": {
@@ -2236,7 +2242,7 @@ UNOBTANIUM_DB = {
         "year_range": (1999, 2024),
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 250, "high": 600, "cost": 50, "yr_min": 2016},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 200, "high": 450, "cost": 30, "yr_min": 2014},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2014},
             {"name": "Tailgate (w/ camera)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "yr_min": 2014},
             {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
             {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
@@ -2289,7 +2295,7 @@ UNOBTANIUM_DB = {
         "year_range": (1980, 2024),
         "top_parts": [
             {"name": "7.3L Powerstroke Parts (turbo, HPOP — verify engine)", "rarity": "Legendary", "low": 250, "high": 700, "cost": 50, "yr_min": 1994, "yr_max": 2003},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 200, "high": 450, "cost": 30, "yr_min": 2008},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2008},
             {"name": "Tailgate (w/ step)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "yr_min": 2008},
             {"name": "Crew Cab Rear Bench", "rarity": "Uncommon", "low": 80, "high": 225, "cost": 25},
         ],
@@ -2300,7 +2306,7 @@ UNOBTANIUM_DB = {
         "year_range": (1980, 2024),
         "top_parts": [
             {"name": "7.3L Powerstroke Parts (turbo, HPOP — verify engine)", "rarity": "Legendary", "low": 250, "high": 700, "cost": 50, "yr_min": 1994, "yr_max": 2003},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 200, "high": 450, "cost": 30, "yr_min": 2008},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2008},
             {"name": "Dually Fenders / Bed Parts", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
         ],
     },
@@ -2650,6 +2656,9 @@ UNOBTANIUM_DB = {
     "genesis coupe": {
         "display": "Hyundai Genesis Coupe",
         "make": "Hyundai",
+        # Longer keyword listed first so its hit contains "hyundai genesis" and
+        # the sedan entry is substring-dropped on coupe listings.
+        "match": ["hyundai genesis coupe", "genesis coupe"],
         "year_range": (2010, 2016),
         "top_parts": [
             {"name": "Brembo Calipers (set, Track/R-Spec)", "rarity": "Epic", "low": 250, "high": 600, "cost": 55, "trim": ["Track", "R-Spec", "Ultimate"]},
@@ -2856,6 +2865,9 @@ UNOBTANIUM_DB.update({
     },
     "armada": {
         "display": "Nissan Armada", "make": "Nissan", "year_range": (2004, 2024),
+        # 2004-2007 titles say "Pathfinder Armada" — the longer keyword makes
+        # the plain pathfinder entry a substring casualty on those.
+        "match": ["pathfinder armada", "armada"],  # longer first so its hit substring-drops "pathfinder"
         "top_parts": [
             {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35},
             {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15},
@@ -2933,6 +2945,8 @@ UNOBTANIUM_DB.update({
             {"name": "G-body Trim + Emblems (78-88)", "rarity": "Epic", "low": 60, "high": 200, "cost": 15, "yr_max": 1988},
             {"name": "SS Spoiler + Badging", "rarity": "Rare", "low": 60, "high": 180, "cost": 15, "trim": ["SS"]},
             {"name": "Dash Pad (uncracked, G-body)", "rarity": "Epic", "low": 100, "high": 300, "cost": 20, "yr_max": 1988},
+            # W-body era (1995+) base cars previously had zero un-gated parts.
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1995},
         ],
     },
     "cutlass": {
@@ -3385,6 +3399,806 @@ for _alias, _key in (
     UNOBTANIUM_DB[_alias] = UNOBTANIUM_DB[_key]
 
 # ---------------------------------------------------------------------------
+# 2026-09 GENERATION SPLITS
+#
+# Audit finding: single entries spanning several generations of a model carried
+# ONE price band and parts list across generations with very different markets
+# (a 1996-2002 3rd-gen 4Runner and a 2003-2009 4th-gen share almost no
+# valuable parts; a Fox-body Mustang and an S550 share none). Worse, some
+# parts were gated to the wrong generation entirely (KDSS listed for the
+# 2003-2009 4Runner — that's GX470/5th-gen Trail hardware; "Air Suspension
+# Compressor" on 2005-2010 Grand Cherokees — Quadra-Lift arrived with the
+# 2011 WK2).
+#
+# Each split below replaces one entry with per-generation entries that share a
+# "match" keyword but carry disjoint year ranges, so any vehicle hits exactly
+# one. Generation break years are the accepted US-market ones. Price bands are
+# carried over from the audited entry unless market evidence said otherwise —
+# every changed band cites its basis in a comment and, for the significant
+# ones, in scraper/price_baseline.json.
+# ---------------------------------------------------------------------------
+
+
+def _split_generations(base_key: str, *, display: str, make: str,
+                       gens: list[dict], match: list[str] | None = None,
+                       drop_keys: tuple = ()) -> None:
+    """Replace UNOBTANIUM_DB[base_key] with one entry per generation."""
+    for k in (base_key, *drop_keys):
+        UNOBTANIUM_DB.pop(k, None)
+    keywords = match or [base_key]
+    for g in gens:
+        lo, hi = g["years"]
+        UNOBTANIUM_DB[f"{base_key} {lo}-{hi}"] = {
+            "display": f"{display} ({g['label']})",
+            "make": make,
+            "gen": g["label"],
+            "match": keywords,
+            "year_range": (lo, hi),
+            "top_parts": g["parts"],
+        }
+
+
+_split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
+    {"label": "1st/2nd gen", "years": (1984, 1995), "parts": [
+        {"name": "Manual Locking Hubs (pair)", "rarity": "Epic", "low": 80, "high": 200, "cost": 20, "drive": ["4wd"]},
+        {"name": "Rear Liftgate Glass + Regulator (works)", "rarity": "Epic", "low": 100, "high": 300, "cost": 30},
+        {"name": "Corner/Marker Lights (pair, uncracked)", "rarity": "Rare", "low": 40, "high": 120, "cost": 12},
+        {"name": "Manual Shifter + Knob (5-spd)", "rarity": "Rare", "low": 40, "high": 120, "cost": 12, "manual": True},
+        {"name": "Bucket Seats (clean pair)", "rarity": "Uncommon", "low": 80, "high": 250, "cost": 40},
+        {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]},
+    {"label": "3rd gen", "years": (1996, 2002), "parts": [
+        # Factory rear e-locker is a 3rd-gen option — previously claimed for ALL years.
+        {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15},
+        {"name": "Rear Liftgate Glass + Regulator (works)", "rarity": "Epic", "low": 100, "high": 300, "cost": 30},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
+        {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
+        {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 175, "cost": 15},
+        {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
+        {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
+        {"name": "Manual Shifter + Knob (5-spd)", "rarity": "Rare", "low": 40, "high": 120, "cost": 12, "manual": True},
+        {"name": "Bucket Seats (clean pair)", "rarity": "Uncommon", "low": 80, "high": 250, "cost": 40},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]},
+    {"label": "4th gen", "years": (2003, 2009), "parts": [
+        # 4th gen ran X-REAS (not KDSS — that was a GX470/5th-gen-Trail thing);
+        # band aligned with other electronic-shock pairs (AutoRide evidence).
+        {"name": "X-REAS Suspension Shocks (pair)", "rarity": "Epic", "low": 150, "high": 350, "cost": 20},
+        {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
+        {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
+        {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 175, "cost": 15},
+        {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
+        {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
+    ]},
+    {"label": "5th gen", "years": (2010, 2024), "parts": [
+        {"name": "TRD Pro Grille", "rarity": "Legendary", "low": 300, "high": 600, "cost": 40, "yr_min": 2014},
+        {"name": "OEM LED Headlights", "rarity": "Epic", "low": 400, "high": 800, "cost": 60, "yr_min": 2014},
+        # KDSS moved here from the mis-gated 2003-2009 range — Trail/TRD Off-Road only.
+        {"name": "KDSS Sway Bar Actuators", "rarity": "Legendary", "low": 200, "high": 500, "cost": 20, "trim": ["Trail", "TRD Off-Road", "TRD Pro"]},
+        {"name": "Rear E-Locker Actuator Motor", "rarity": "Epic", "low": 200, "high": 450, "cost": 15, "trim": ["Trail", "TRD Off-Road", "TRD Pro"]},
+        {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
+        {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 175, "cost": 15},
+        {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
+        {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
+    ]},
+])
+
+_split_generations("tacoma", display="Toyota Tacoma", make="Toyota", gens=[
+    {"label": "1st gen", "years": (1995, 2004), "parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
+        {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 30},
+        {"name": "Manual Shifter + Knob (5-spd)", "rarity": "Rare", "low": 40, "high": 120, "cost": 12, "manual": True},
+    ]},
+    {"label": "2nd gen", "years": (2005, 2015), "parts": [
+        {"name": "TRD Skid Plate", "rarity": "Epic", "low": 150, "high": 350, "cost": 25},
+        {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 30},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
+    ]},
+    {"label": "3rd gen", "years": (2016, 2024), "parts": [
+        {"name": "TRD Pro Grille", "rarity": "Legendary", "low": 200, "high": 450, "cost": 30},
+        {"name": "OEM LED Headlights", "rarity": "Epic", "low": 350, "high": 700, "cost": 50},
+        {"name": "OEM Fender Flares (color-matched)", "rarity": "Epic", "low": 200, "high": 500, "cost": 30},
+        {"name": "TRD Skid Plate", "rarity": "Epic", "low": 150, "high": 350, "cost": 25},
+        {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 30},
+    ]},
+])
+
+_split_generations("civic", display="Honda Civic", make="Honda", gens=[
+    # New coverage: EG/EH (5th gen) — big enthusiast market, previously below
+    # the entry's 1996 floor and matched nothing.
+    {"label": "5th gen EG", "years": (1992, 1995), "parts": [
+        {"name": "Si Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 50, "trim": ["Si"]},
+        {"name": "Instrument Cluster", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 18},
+        {"name": "OEM Radio / Climate Panel", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 22},
+    ]},
+    {"label": "6th gen EK", "years": (1996, 2000), "parts": [
+        {"name": "Si/Type R Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 50, "trim": ["Si", "Type R", "Type-R"]},
+        {"name": "Si Front Lip (OEM)", "rarity": "Rare", "low": 75, "high": 175, "cost": 12, "trim": ["Si"]},
+        {"name": "Instrument Cluster", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 18},
+        {"name": "OEM Radio / Climate Panel", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 22},
+    ]},
+    {"label": "7th gen", "years": (2001, 2005), "parts": [
+        {"name": "Si/Type R Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 50, "trim": ["Si", "Type R", "Type-R"]},
+        {"name": "Instrument Cluster", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 18},
+        {"name": "OEM Radio / Climate Panel", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 22},
+    ]},
+    {"label": "8th gen", "years": (2006, 2011), "parts": [
+        {"name": "Si/Type R Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 50, "trim": ["Si", "Type R", "Type-R"]},
+        {"name": "Si Front Lip (OEM)", "rarity": "Rare", "low": 75, "high": 175, "cost": 12, "trim": ["Si"]},
+        {"name": "Power Side Mirror (heated)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 30},
+        {"name": "Instrument Cluster", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 18},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 22},
+        {"name": "OEM Radio / Climate Panel", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    {"label": "9th gen", "years": (2012, 2015), "parts": [
+        {"name": "Si Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 50, "trim": ["Si"]},
+        {"name": "Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 35, "yr_min": 2014},
+        {"name": "Power Side Mirror (heated)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 30},
+        {"name": "Instrument Cluster", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 18},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 22},
+    ]},
+    {"label": "10th/11th gen", "years": (2016, 2024), "parts": [
+        {"name": "Si/Type R Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 50, "trim": ["Si", "Type R", "Type-R"]},
+        {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 450, "cost": 35},
+        {"name": "Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 35},
+        {"name": "Power Side Mirror (heated)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 30},
+        {"name": "Instrument Cluster", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 18},
+    ]},
+])
+
+_split_generations("accord", display="Honda Accord", make="Honda", gens=[
+    {"label": "1990-1997 (CB/CD)", "years": (1990, 1997), "parts": [
+        {"name": "Manual Shifter Assembly + Knob", "rarity": "Rare", "low": 40, "high": 130, "cost": 12, "manual": True},
+        {"name": "Gauge Cluster / IPC", "rarity": "Uncommon", "low": 55, "high": 160, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 25},
+    ]},
+    {"label": "6th gen", "years": (1998, 2002), "parts": [
+        {"name": "Manual Shifter Assembly + Knob", "rarity": "Rare", "low": 40, "high": 130, "cost": 12, "manual": True},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 25},
+        {"name": "Power Window Master Switch", "rarity": "Uncommon", "low": 35, "high": 110, "cost": 18},
+        {"name": "Gauge Cluster / IPC", "rarity": "Uncommon", "low": 55, "high": 160, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]},
+    {"label": "7th/8th gen", "years": (2003, 2012), "parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 25},
+        {"name": "Power Window Master Switch", "rarity": "Uncommon", "low": 35, "high": 110, "cost": 18},
+        {"name": "Gauge Cluster / IPC", "rarity": "Uncommon", "low": 55, "high": 160, "cost": 20},
+        {"name": "Manual Shifter Assembly + Knob", "rarity": "Rare", "low": 40, "high": 130, "cost": 12, "manual": True},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]},
+    {"label": "9th gen", "years": (2013, 2017), "parts": [
+        {"name": "Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 35},
+        {"name": "Sport Front Lip", "rarity": "Rare", "low": 75, "high": 200, "cost": 12, "trim": ["Sport"]},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 25},
+        {"name": "Power Window Master Switch", "rarity": "Uncommon", "low": 35, "high": 110, "cost": 18},
+        {"name": "Gauge Cluster / IPC", "rarity": "Uncommon", "low": 55, "high": 160, "cost": 20},
+    ]},
+    {"label": "10th/11th gen", "years": (2018, 2024), "parts": [
+        {"name": "OEM LED Headlights", "rarity": "Rare", "low": 300, "high": 550, "cost": 40},
+        {"name": "Sport Front Lip", "rarity": "Rare", "low": 75, "high": 200, "cost": 12, "trim": ["Sport"]},
+        {"name": "Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 35},
+        {"name": "Power Window Master Switch", "rarity": "Uncommon", "low": 35, "high": 110, "cost": 18},
+    ]},
+])
+
+_split_generations("mustang", display="Ford Mustang", make="Ford", gens=[
+    {"label": "Fox body", "years": (1979, 1993), "parts": [
+        {"name": "Fox Dash Pad (uncracked)", "rarity": "Epic", "low": 100, "high": 300, "cost": 20},
+        {"name": "Manual Pedal Assembly (clutch swap gold)", "rarity": "Epic", "low": 80, "high": 220, "cost": 20, "manual": True},
+        {"name": "Rear Seat (clean)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 25},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 20},
+    ]},
+    {"label": "SN95/New Edge", "years": (1994, 2004), "parts": [
+        {"name": "Manual Pedal Assembly (clutch swap gold)", "rarity": "Epic", "low": 80, "high": 220, "cost": 20, "manual": True},
+        {"name": "Rear Seat (clean)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 25},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 20},
+    ]},
+    {"label": "S197", "years": (2005, 2014), "parts": [
+        {"name": "GT Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_min": 2007, "trim": ["GT"]},
+        {"name": "Recaro Seats (Boss/GT500)", "rarity": "Epic", "low": 500, "high": 1200, "cost": 75, "yr_min": 2012, "trim": ["GT500", "Shelby", "Boss"]},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 20},
+    ]},
+    {"label": "S550/S650", "years": (2015, 2024), "parts": [
+        {"name": "Recaro Seats (PP/GT350)", "rarity": "Epic", "low": 500, "high": 1200, "cost": 75, "trim": ["GT350", "GT500", "Shelby", "Mach 1"]},
+        {"name": "GT Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "trim": ["GT"]},
+        {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 450, "cost": 40},
+    ]},
+])
+
+_split_generations("f-150", display="Ford F-150", make="Ford",
+                   match=["f-150", "f150"], drop_keys=("f150",), gens=[
+    {"label": "OBS", "years": (1980, 1996), "parts": [
+        {"name": "OBS Grille + Headlight Bezels", "rarity": "Epic", "low": 80, "high": 250, "cost": 20},
+        {"name": "Tailgate (straight, rust-free)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+        {"name": "Bench Seat (uncracked)", "rarity": "Uncommon", "low": 60, "high": 200, "cost": 30},
+    ]},
+    {"label": "10th gen", "years": (1997, 2003), "parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
+        # Same audited tailgate market as Ram/Ranger ($50-900 sold, condition-driven).
+        {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+    ]},
+    {"label": "11th/12th gen", "years": (2004, 2014), "parts": [
+        # RAISED from 250-550: 2026-09 audit found real sold pairs at $450-1,200
+        # (UNDERSTATED verdict in price_validation_report.md).
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 500, "high": 1300, "cost": 40},
+        # RAISED from 200-500: audited sold evidence $525-600.
+        {"name": "Raptor Grille", "rarity": "Legendary", "low": 550, "high": 750, "cost": 25, "yr_min": 2010, "trim": ["Raptor"]},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
+        {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+    ]},
+    {"label": "13th/14th gen", "years": (2015, 2024), "parts": [
+        {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 300, "high": 700, "cost": 40},
+        {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 500, "high": 1300, "cost": 40},
+        {"name": "Raptor Grille", "rarity": "Legendary", "low": 550, "high": 750, "cost": 25, "trim": ["Raptor"]},
+    ]},
+])
+
+_split_generations("silverado", display="Chevy Silverado", make="Chevrolet", gens=[
+    {"label": "GMT800", "years": (1999, 2006), "parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
+        {"name": "Tow Mirrors (manual, pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+        {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+    ]},
+    {"label": "GMT900", "years": (2007, 2013), "parts": [
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
+        {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+    ]},
+    {"label": "K2XX", "years": (2014, 2018), "parts": [
+        {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
+    ]},
+    {"label": "T1XX", "years": (2019, 2024), "parts": [
+        {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50},
+        {"name": "Multi-Flex Tailgate Steps", "rarity": "Epic", "low": 200, "high": 500, "cost": 30},
+        {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30},
+    ]},
+])
+
+_split_generations("sierra", display="GMC Sierra (Silverado twin)", make="GMC", gens=[
+    {"label": "GMT800", "years": (1999, 2006), "parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
+        {"name": "Tow Mirrors (manual, pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+        {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+        {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
+    ]},
+    {"label": "GMT900", "years": (2007, 2013), "parts": [
+        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
+        {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
+        {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
+    ]},
+    {"label": "K2XX", "years": (2014, 2018), "parts": [
+        {"name": "OEM LED Headlights", "rarity": "Epic", "low": 250, "high": 600, "cost": 50, "yr_min": 2016},
+        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30},
+        {"name": "Tailgate (w/ camera)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
+        {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
+        {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
+    ]},
+    {"label": "T1XX", "years": (2019, 2024), "parts": [
+        {"name": "OEM LED Headlights", "rarity": "Epic", "low": 250, "high": 600, "cost": 50},
+        {"name": "MultiPro Tailgate Steps", "rarity": "Epic", "low": 200, "high": 500, "cost": 30},
+        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30},
+        {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
+        {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
+    ]},
+])
+
+_split_generations("ram", display="Ram / Dodge Ram Truck", make="Ram", gens=[
+    {"label": "2nd gen", "years": (1994, 2001), "parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 25},
+        {"name": "Gauge Cluster", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 20},
+        {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
+    ]},
+    {"label": "3rd gen", "years": (2002, 2008), "parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 25},
+        {"name": "Gauge Cluster", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 20},
+        {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
+    ]},
+    {"label": "4th gen", "years": (2009, 2018), "parts": [
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35},
+        {"name": "Uconnect 8.4 Touchscreen", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 45, "yr_min": 2013},
+        {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
+    ]},
+    {"label": "5th gen", "years": (2019, 2024), "parts": [
+        {"name": "12\" Uconnect Touchscreen", "rarity": "Epic", "low": 400, "high": 800, "cost": 50},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35},
+        {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
+    ]},
+])
+
+_split_generations("explorer", display="Ford Explorer", make="Ford", gens=[
+    {"label": "1st/2nd gen", "years": (1991, 2001), "parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    {"label": "3rd/4th gen", "years": (2002, 2010), "parts": [
+        {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
+        {"name": "Rear Air Suspension Compressor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 2006},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_max": 2005},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 55, "high": 150, "cost": 25, "yr_min": 2006},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    {"label": "5th gen", "years": (2011, 2019), "parts": [
+        {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
+        {"name": "SYNC / MyFord Touch Screen", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 45},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    {"label": "6th gen", "years": (2020, 2024), "parts": [
+        {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
+        {"name": "OEM LED Headlights", "rarity": "Rare", "low": 250, "high": 500, "cost": 40},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+])
+
+_split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
+    {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
+        {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
+        # RAISED from 150-350: WJ pairs sold $175-500 (forums/recyclers, 2026-09).
+        {"name": "Heated Leather Seats (pair)", "rarity": "Rare", "low": 175, "high": 450, "cost": 30, "yr_min": 1999},
+    ]},
+    {"label": "WK", "years": (2005, 2010), "parts": [
+        # NOTE: no air suspension this gen — Quadra-Lift arrived with the 2011
+        # WK2; the old entry wrongly claimed it from 2005.
+        {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
+        {"name": "Heated Leather Seats (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
+    ]},
+    {"label": "WK2", "years": (2011, 2021), "parts": [
+        {"name": "Air Suspension Compressor (Quadra-Lift)", "rarity": "Rare", "low": 100, "high": 250, "cost": 15},
+        {"name": "Heated Leather Seats (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
+        {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
+    ]},
+    {"label": "WL", "years": (2022, 2024), "parts": [
+        {"name": "Air Suspension Compressor (Quadra-Lift)", "rarity": "Rare", "low": 100, "high": 250, "cost": 15},
+        {"name": "Heated Leather Seats (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
+    ]},
+])
+
+_split_generations("wrangler", display="Jeep Wrangler", make="Jeep", gens=[
+    # Hardtop bands per generation from tracked FB/Craigslist/forum sales
+    # (YJ $300-900, TJ $600-1,400, JK $1,000-2,000, JL $1,200-2,800) — the old
+    # single 400-1500 band understated JK/JL and overstated YJ.
+    {"label": "YJ", "years": (1987, 1995), "parts": [
+        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 350, "high": 900, "cost": 60},
+        {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
+    ]},
+    {"label": "TJ", "years": (1996, 2006), "parts": [
+        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 700, "high": 1600, "cost": 60},
+        {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
+        {"name": "Rubicon Locker Actuators", "rarity": "Epic", "low": 100, "high": 275, "cost": 10, "yr_min": 2003, "trim": ["Rubicon"]},
+    ]},
+    {"label": "JK", "years": (2007, 2017), "parts": [
+        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 1100, "high": 2400, "cost": 60},
+        {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
+        {"name": "Rubicon Locker Actuators", "rarity": "Epic", "low": 100, "high": 275, "cost": 10, "trim": ["Rubicon"]},
+    ]},
+    {"label": "JL", "years": (2018, 2024), "parts": [
+        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 1400, "high": 3300, "cost": 60},
+        {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
+        {"name": "Rubicon Locker Actuators", "rarity": "Epic", "low": 100, "high": 275, "cost": 10, "trim": ["Rubicon"]},
+        {"name": "OEM LED Headlights", "rarity": "Rare", "low": 300, "high": 600, "cost": 50, "trim": ["Sahara", "Rubicon", "High Altitude", "Moab"]},
+    ]},
+])
+
+_split_generations("tahoe", display="Chevy Tahoe", make="Chevrolet", gens=[
+    {"label": "GMT400/800", "years": (1995, 2006), "parts": [
+        # LOWERED from 150-350: used electronic AutoRide shocks have a thin
+        # market (bladder-failure risk) — forum pairs move around $100.
+        {"name": "AutoRide Rear Shocks (pair)", "rarity": "Epic", "low": 100, "high": 250, "cost": 20, "yr_min": 2000},
+        # 3rd row arrived with the 2000 GMT800 — the old entry claimed it for 1995+.
+        {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 35, "yr_min": 2000},
+        {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]},
+    {"label": "GMT900", "years": (2007, 2014), "parts": [
+        {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 35},
+        {"name": "AutoRide Rear Shocks (pair)", "rarity": "Epic", "low": 100, "high": 250, "cost": 20},
+        {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]},
+    {"label": "K2XX/T1XX", "years": (2015, 2024), "parts": [
+        {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 35},
+        {"name": "Power Liftgate Motor", "rarity": "Rare", "low": 80, "high": 225, "cost": 15},
+        {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+    ]},
+])
+
+_split_generations("cherokee", display="Jeep Cherokee", make="Jeep", gens=[
+    {"label": "XJ", "years": (1984, 2001), "parts": [
+        {"name": "XJ Header Panel (clean)", "rarity": "Legendary", "low": 200, "high": 500, "cost": 25},
+        {"name": "Clean Fenders (no rust)", "rarity": "Epic", "low": 100, "high": 275, "cost": 20},
+        {"name": "Overhead Console (digital)", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
+    ]},
+    # KL (2014+) — previously inside the XJ entry's year range but every part
+    # was gated pre-2002, so these matched NOTHING. Modest commuter parts only.
+    {"label": "KL", "years": (2014, 2024), "parts": [
+        {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15},
+        {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 18},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]},
+])
+
+_split_generations("camaro", display="Chevy Camaro", make="Chevrolet", gens=[
+    # 3rd/4th gen were previously uncovered (entry floor was 2010).
+    # T-top basis: used glass sets list/sell $75-300 (3rd gen) and $195-350
+    # (4th gen); specialty retail singles run $450 (2026-09 search).
+    {"label": "3rd gen", "years": (1982, 1992), "parts": [
+        {"name": "T-Top Glass Panels (pair)", "rarity": "Epic", "low": 150, "high": 350, "cost": 30},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]},
+    {"label": "4th gen", "years": (1993, 2002), "parts": [
+        {"name": "T-Top Glass Panels (pair)", "rarity": "Epic", "low": 250, "high": 450, "cost": 30},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]},
+    {"label": "5th gen", "years": (2010, 2015), "parts": [
+        {"name": "SS Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "trim": ["SS", "ZL1", "Z28", "1LE"]},
+        {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SS", "ZL1", "1LE"]},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
+    ]},
+    {"label": "6th gen", "years": (2016, 2024), "parts": [
+        {"name": "SS Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "trim": ["SS", "ZL1", "Z28", "1LE"]},
+        {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SS", "ZL1", "1LE"]},
+        {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 400, "cost": 40},
+    ]},
+])
+
+_split_generations("scion xb", display="Scion xB", make="Scion", gens=[
+    {"label": "1st gen", "years": (2004, 2006), "parts": [
+        {"name": "Gen1 Bumpers / Body Panels (straight)", "rarity": "Rare", "low": 80, "high": 250, "cost": 25},
+        {"name": "Gen1 Interior Trim / Cluster", "rarity": "Rare", "low": 60, "high": 175, "cost": 10},
+    ]},
+    # 2nd gen (2008-2015) sat inside the old entry's range with zero un-gated
+    # parts, so those cars matched nothing. Commuter-band coverage only.
+    {"label": "2nd gen", "years": (2008, 2015), "parts": [
+        {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 35, "high": 90, "cost": 18},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+])
+
+# Twin/derivative entries lost parts to the new specificity guard — give the
+# specific entries the generic parts they genuinely share with the base model.
+_extend_entry("ram 2500", parts=[
+    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2010},
+    {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
+])
+_extend_entry("ram 3500", parts=[
+    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2010},
+    {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
+])
+_extend_entry("sentra se-r", parts=[
+    {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+])
+_extend_entry("lancer evolution", parts=[
+    {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+])
+
+# ---------------------------------------------------------------------------
+# 2026-09 COVERAGE EXPANSION — feed-name misses and uncovered volume models
+#
+# The offline rematch (scraper/dry_run_match.py) over the cached national scan
+# showed these as the highest-frequency zero-match make/models with genuine
+# resale demand. Bands reuse audited cross-model bands for the same part
+# category unless a fresh basis is cited.
+# ---------------------------------------------------------------------------
+
+# Mercedes feeds name cars "C300"/"E320"/"Ml350", never "C-Class"/"E-Class".
+# Numeric tokens are make-qualified ("benz c250") so GM C/K truck names like
+# "Suburban C2500" can't collide.
+UNOBTANIUM_DB["c-class"]["match"] = ["c-class"] + [
+    f"benz {t}" for t in ("c230", "c240", "c250", "c280", "c300", "c320", "c350", "c400", "c43", "c63")]
+UNOBTANIUM_DB["e-class"]["match"] = ["e-class"] + [
+    f"benz {t}" for t in ("e300", "e320", "e350", "e400", "e420", "e430", "e500", "e550", "e55", "e63")]
+# Ford van feeds say "E-150"/"E-250"/"E-350", not "Econoline".
+UNOBTANIUM_DB["econoline"]["match"] = [
+    "econoline", "e-series", "e-150", "e-250", "e-350",
+    "ford e150", "ford e250", "ford e350"]
+# Chevy feeds spell it "S-10".
+UNOBTANIUM_DB["s10"]["match"] = ["s10", "s-10"]
+# DTS is the DeVille's 2006-2011 successor — same parts market.
+UNOBTANIUM_DB["deville"]["match"] = ["deville", "dts"]
+UNOBTANIUM_DB["deville"]["display"] = "Cadillac DeVille / DTS"
+UNOBTANIUM_DB["deville"]["year_range"] = (1994, 2011)
+# B5/B6 A4s (1996-2001) were below the old floor; 1.8T-era swap parts sell.
+UNOBTANIUM_DB["audi a4"]["year_range"] = (1996, 2024)
+UNOBTANIUM_DB["audi a4"]["top_parts"].append(
+    {"name": "Manual Shift Assembly + Pedals (swap gold)", "rarity": "Rare", "low": 60, "high": 180, "cost": 20, "yr_max": 2005, "manual": True})
+# Gen1/2 Taurus SHO (1989-1999) was below the old floor; SHO trim gate applies.
+UNOBTANIUM_DB["taurus"]["year_range"] = (1990, 2019)
+
+UNOBTANIUM_DB.update({
+    "new beetle": {
+        "display": "VW New Beetle / Beetle", "make": "Volkswagen",
+        # Shares the "beetle" keyword with the air-cooled entry — disjoint
+        # year ranges keep them from double-matching.
+        "match": ["beetle"], "year_range": (1998, 2019),
+        "top_parts": [
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+            {"name": "Turbo Parts (1.8T/2.0T — verify engine)", "rarity": "Rare", "low": 100, "high": 250, "cost": 30},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "lexus es": {
+        "display": "Lexus ES", "make": "Lexus", "year_range": (1992, 2024),
+        "top_parts": [
+            {"name": "Mark Levinson Amp/Speakers", "rarity": "Rare", "low": 150, "high": 350, "cost": 25, "yr_min": 2007},
+            {"name": "OEM LED Headlights", "rarity": "Rare", "low": 250, "high": 500, "cost": 40, "yr_min": 2013},
+            {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20, "yr_max": 2012},
+        ],
+    },
+    "m-class": {
+        "display": "Mercedes-Benz M-Class (ML)", "make": "Mercedes-Benz",
+        "match": ["m-class", "ml250", "ml320", "ml350", "ml430", "ml500", "ml550", "ml55", "ml63"],
+        "year_range": (1998, 2015),
+        "top_parts": [
+            {"name": "Xenon/HID Headlights (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+            {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 170, "cost": 25},
+            {"name": "Running Boards (pair)", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 25},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        ],
+    },
+    "flex": {
+        "display": "Ford Flex", "make": "Ford", "year_range": (2009, 2019),
+        "top_parts": [
+            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35},
+            {"name": "SYNC / MyFord Touch Screen", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 45, "yr_min": 2011},
+            {"name": "EcoBoost Turbo Intercooler (verify engine)", "rarity": "Rare", "low": 85, "high": 185, "cost": 25},
+            {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15},
+        ],
+    },
+    "honda fit": {
+        "display": "Honda Fit", "make": "Honda", "year_range": (2007, 2020),
+        "top_parts": [
+            # Complete assemblies from dismantlers; new OEM cushion pads alone
+            # run $340-480, so a working used rear seat holds real value.
+            {"name": "Magic Seat (rear, complete)", "rarity": "Uncommon", "low": 80, "high": 250, "cost": 30},
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 140, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "9-3": {
+        "display": "Saab 9-3", "make": "Saab", "year_range": (1999, 2011),
+        "top_parts": [
+            {"name": "Aero Front Bumper / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 30, "trim": ["Aero", "Viggen"]},
+            {"name": "Leather Seats (pair)", "rarity": "Uncommon", "low": 80, "high": 220, "cost": 40},
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        ],
+    },
+    "ion": {
+        "display": "Saturn ION (Redline hunt)", "make": "Saturn", "year_range": (2003, 2007),
+        "top_parts": [
+            # Forum sales of front+rear Recaro sets: $75-400 (2026-09 search).
+            {"name": "Redline Recaro Seats (set)", "rarity": "Epic", "low": 150, "high": 450, "cost": 40, "trim": ["Redline", "Red Line"]},
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 18},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 15},
+        ],
+    },
+    "solara": {
+        "display": "Toyota Camry Solara", "make": "Toyota", "year_range": (1999, 2008),
+        # "camry solara" makes the plain camry entry a substring casualty on
+        # "Camry Solara" listings — the coupe/convertible entry should win.
+        "match": ["camry solara", "solara"],  # longer first so its hit substring-drops "camry"
+        "top_parts": [
+            # Recycler-listed used units $75-345 (2026-09 search).
+            {"name": "Convertible Top Motor/Pump", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "yr_min": 2000},
+            {"name": "JBL Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20},
+            {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 120, "cost": 20},
+        ],
+    },
+    "mountaineer": {
+        "display": "Mercury Mountaineer (Explorer twin)", "make": "Mercury", "year_range": (1997, 2010),
+        "top_parts": [
+            {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_min": 2002},
+            {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "sable": {
+        "display": "Mercury Sable (Taurus twin)", "make": "Mercury", "year_range": (1992, 2009),
+        "top_parts": [
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+            {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "mariner": {
+        "display": "Mercury Mariner (Escape twin)", "make": "Mercury", "year_range": (2005, 2011),
+        "top_parts": [
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "tribute": {
+        "display": "Mazda Tribute (Escape twin)", "make": "Mazda", "year_range": (2001, 2011),
+        "top_parts": [
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "nitro": {
+        "display": "Dodge Nitro", "make": "Dodge", "year_range": (2007, 2012),
+        "top_parts": [
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 20},
+            {"name": "Roof Rack Crossbars", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 15},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "outlander": {
+        "display": "Mitsubishi Outlander", "make": "Mitsubishi", "year_range": (2003, 2024),
+        "top_parts": [
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20, "yr_max": 2015},
+            {"name": "Roof Rails + Crossbars", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 15},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "transit connect": {
+        "display": "Ford Transit Connect", "make": "Ford", "year_range": (2010, 2023),
+        "top_parts": [
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+            {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "ford transit": {
+        "display": "Ford Transit (vanlife)", "make": "Ford",
+        # "transit" would also hit Transit Connect — the specificity guard
+        # prefers the longer "transit connect" keyword on those.
+        "match": ["transit"], "year_range": (2015, 2024),
+        "top_parts": [
+            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+            {"name": "Bench Seats (rear rows)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 25},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "tiguan": {
+        "display": "VW Tiguan", "make": "Volkswagen", "year_range": (2009, 2024),
+        "top_parts": [
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20, "yr_max": 2017},
+            {"name": "Roof Rails + Crossbars", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 15},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "volkswagen cc": {
+        "display": "VW CC", "make": "Volkswagen",
+        "match": ["volkswagen cc", "vw cc"], "year_range": (2009, 2017),
+        "top_parts": [
+            {"name": "Xenon/LED Headlights (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "acura rl": {
+        "display": "Acura RL", "make": "Acura", "year_range": (1996, 2012),
+        "top_parts": [
+            {"name": "OEM HID Headlights", "rarity": "Rare", "low": 125, "high": 225, "cost": 30, "yr_min": 2005},
+            {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "m35": {
+        "display": "Infiniti M (M35/M45/M37/M56)", "make": "Infiniti",
+        "match": ["m35", "m45", "m37", "m56"], "year_range": (2003, 2013),
+        "top_parts": [
+            {"name": "OEM HID Headlights", "rarity": "Rare", "low": 125, "high": 225, "cost": 30},
+            {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "cx-7": {
+        "display": "Mazda CX-7", "make": "Mazda", "year_range": (2007, 2012),
+        "top_parts": [
+            {"name": "Turbo Intercooler (2.3 DISI)", "rarity": "Rare", "low": 85, "high": 185, "cost": 25},
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    # These next models previously "matched" only via substring accidents
+    # ("srx"→"rx", "fx35"→"x3", "qx56"→"x5") and were being priced with the
+    # WRONG model's parts. Honest entries of their own:
+    "srx": {
+        "display": "Cadillac SRX", "make": "Cadillac", "year_range": (2004, 2016),
+        "top_parts": [
+            {"name": "Xenon/HID Headlights (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+            {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        ],
+    },
+    "infiniti fx": {
+        "display": "Infiniti FX", "make": "Infiniti",
+        "match": ["fx35", "fx45", "fx37", "fx50"], "year_range": (2003, 2013),
+        "top_parts": [
+            {"name": "OEM HID Headlights", "rarity": "Rare", "low": 125, "high": 225, "cost": 30},
+            {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "qx56": {
+        "display": "Infiniti QX56/QX80", "make": "Infiniti",
+        "match": ["qx56", "qx80"], "year_range": (2004, 2024),
+        "top_parts": [
+            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35},
+            {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15},
+        ],
+    },
+    "hyundai genesis": {
+        # Sedan only — the make-qualified keyword avoids the coupe entry,
+        # which substring-drops this one on "Genesis Coupe" listings.
+        "display": "Hyundai Genesis Sedan", "make": "Hyundai",
+        "match": ["hyundai genesis"], "year_range": (2009, 2016),
+        "top_parts": [
+            {"name": "Lexicon Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 170, "cost": 25},
+            {"name": "OEM HID Headlights", "rarity": "Rare", "low": 125, "high": 225, "cost": 30},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "ridgeline": {
+        "display": "Honda Ridgeline", "make": "Honda", "year_range": (2006, 2024),
+        "top_parts": [
+            {"name": "Dual-Action Tailgate (clean)", "rarity": "Rare", "low": 100, "high": 280, "cost": 30},
+            {"name": "In-Bed Trunk Lid", "rarity": "Rare", "low": 75, "high": 200, "cost": 15},
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 140, "cost": 20},
+        ],
+    },
+    "xc70": {
+        "display": "Volvo XC70 / V70 Cross Country", "make": "Volvo", "year_range": (1998, 2016),
+        "top_parts": [
+            {"name": "Roof Rails + Crossbars", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 15},
+            {"name": "Cargo Cover / Dog Gate", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 10},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "protege": {
+        "display": "Mazda Protege", "make": "Mazda", "year_range": (1990, 2003),
+        "top_parts": [
+            {"name": "Mazdaspeed/MP3 Seats + Trim", "rarity": "Epic", "low": 150, "high": 400, "cost": 40, "trim": ["Mazdaspeed", "MP3"]},
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 18},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 15},
+        ],
+    },
+    "milan": {
+        "display": "Mercury Milan (Fusion twin)", "make": "Mercury", "year_range": (2006, 2011),
+        "top_parts": [
+            {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "volvo s80": {
+        "display": "Volvo S80", "make": "Volvo",
+        "match": ["s80"], "year_range": (1999, 2016),
+        "top_parts": [
+            {"name": "Xenon/HID Headlights (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+        ],
+    },
+    "cadillac sts": {
+        "display": "Cadillac STS", "make": "Cadillac",
+        "match": ["sts", "cadillac seville"], "year_range": (1992, 2011),
+        "top_parts": [
+            {"name": "Xenon/HID Headlights (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30, "yr_min": 2005},
+            {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        ],
+    },
+})
+
+# ---------------------------------------------------------------------------
 # Sell-channel guide — where each part actually moves and how fast.
 # Keyed by lowercase substring found in part name.  Checked longest-match-first.
 # "sell_at" = best channel(s), "speed" = Fast/Medium/Slow,
@@ -3449,6 +4263,11 @@ SELL_GUIDE = [
     {"kw": "shift knob",               "sell_at": "eBay",                "speed": "Medium", "notes": "OEM knobs ship cheap, sell steadily"},
     {"kw": "liftgate glass",           "sell_at": "local classifieds",   "speed": "Medium", "notes": "Glass = local pickup only"},
     {"kw": "dash pad",                 "sell_at": "eBay / forums",       "speed": "Medium", "notes": "Uncracked pads are scarce for older trucks"},
+    # --- 2026-09 generation-split additions ---
+    {"kw": "t-top",                    "sell_at": "FB Marketplace / local classifieds", "speed": "Medium", "notes": "Glass — local pickup; check for delamination"},
+    {"kw": "convertible top motor",    "sell_at": "eBay",                "speed": "Medium", "notes": "Common failure on Solara/convertibles, test if possible"},
+    {"kw": "magic seat",               "sell_at": "eBay / FB Marketplace", "speed": "Slow",  "notes": "Heavy — local pickup preferred"},
+    {"kw": "x-reas",                   "sell_at": "eBay / T4R.org",      "speed": "Medium", "notes": "Sport-package owners replace failed units in pairs"},
     # --- Tow mirrors ---
     {"kw": "tow mirror",               "sell_at": "eBay / local classifieds",          "speed": "Fast",   "notes": "Truck owners always need these"},
     {"kw": "power-fold tow",           "sell_at": "eBay / local classifieds",          "speed": "Fast",   "notes": "Power-fold command premium"},
@@ -3740,9 +4559,35 @@ def _decode_vpic_unique_parallel(unique_vins: list[str]) -> list[dict | None]:
         return list(pool.map(fetch_vpic_decode, unique_vins))
 
 
+# Keyword-match regexes, compiled once per keyword. A keyword hits only when it
+# starts at a word boundary: "rx" still matches "RX350" / "RX 350" but no longer
+# fires inside "WRX", and "blazer" no longer fires inside "TrailBlazer".
+_KW_RE: dict[str, re.Pattern] = {}
+
+
+def _kw_pattern(kw: str) -> re.Pattern:
+    pat = _KW_RE.get(kw)
+    if pat is None:
+        pat = re.compile(r"(?<![a-z0-9])" + re.escape(kw))
+        _KW_RE[kw] = pat
+    return pat
+
+
 def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = None) -> list[dict]:
     """Match a vehicle against the unobtanium database, filtering parts by
     year range and trim requirements.  Attaches sell-channel info to each part.
+
+    Matching rules:
+      - An entry's keywords are its dict key, or the "match" list when present
+        (generation-split entries share one keyword with disjoint year ranges,
+        so a vehicle hits exactly one of them).
+      - Keywords must start at a word boundary in "make model" (see _kw_pattern).
+      - Entries stored under several alias keys (same dict object) match once.
+      - When two entries match and one's keyword is a substring of the other's
+        ("cherokee" vs "grand cherokee", "ram" vs "ram 2500"), the less
+        specific entry is dropped — it belongs to a different vehicle.
+      - Every matched part carries a "fits" year range (entry generation range
+        intersected with the part's own year gates) for UI provenance.
 
     Trim-gated parts carry a "trim_status" honesty flag:
       - "listing":     the yard's own listing title names the trim
@@ -3770,77 +4615,99 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
     is_manual = "manual" in trans_str and "automated" not in trans_str
     is_definitely_auto = bool(trans_str) and not is_manual and any(
         t in trans_str for t in ("automatic", "cvt", "dual-clutch", "automated"))
+    haystack = f"{make_lower} {model_lower}"
+    seen_entries: set[int] = set()
+    candidates: list[tuple[str, dict]] = []
     for keyword, info in UNOBTANIUM_DB.items():
-        if keyword in model_lower or keyword in f"{make_lower} {model_lower}":
-            low, high = info["year_range"]
-            if low <= year <= high:
-                filtered_parts = []
-                for p in info["top_parts"]:
-                    if "yr_min" in p and year < p["yr_min"]:
+        if id(info) in seen_entries:
+            continue  # alias key pointing at an entry object we already tested
+        keywords = info.get("match") or (keyword,)
+        hit = next((k for k in keywords if _kw_pattern(k).search(haystack)), None)
+        if hit is None:
+            continue
+        seen_entries.add(id(info))
+        lo, hi = info["year_range"]
+        if lo <= year <= hi:
+            candidates.append((hit, info))
+    # Specificity guard: when "grand cherokee" matched, the plain "cherokee"
+    # (XJ) entry is a different vehicle — drop any candidate whose keyword is
+    # a proper substring of another candidate's keyword.
+    matched_kws = [kw for kw, _ in candidates]
+    for keyword, info in candidates:
+        if any(keyword != other and keyword in other for other in matched_kws):
+            continue
+        low, high = info["year_range"]
+        filtered_parts = []
+        for p in info["top_parts"]:
+            if "yr_min" in p and year < p["yr_min"]:
+                continue
+            if "yr_max" in p and year > p["yr_max"]:
+                continue
+            trim_status = None
+            if "trim" in p:
+                trims = [t.lower() for t in p["trim"]]
+                if any(t in model_lower for t in trims):
+                    trim_status = "listing"
+                elif vin_tokens and any(t in vin_tokens for t in trims):
+                    trim_status = "vin"
+                elif vin_usable:
+                    # Decode is specific and names a different trim:
+                    # confident the car doesn't have this part.
+                    continue
+                else:
+                    trim_status = "unconfirmed"
+            if p.get("manual"):
+                # Manual-transmission-only part (shifters, pedal boxes...).
+                if is_manual:
+                    trim_status = "vin"
+                elif is_definitely_auto:
+                    continue  # decode is definite: automatic, part absent
+                elif "manual" in model_lower or " 5-speed" in model_lower:
+                    trim_status = "listing"
+                else:
+                    trim_status = trim_status or "unconfirmed"
+            if "drive" in p:
+                # Drivetrain-gated part; gate tokens like ["4wd", "awd"].
+                DRIVE_SYNONYMS = {
+                    "4wd": ("4wd", "4x4", "four-wheel"),
+                    "awd": ("awd", "all-wheel"),
+                    "rwd": ("rwd", "rear-wheel"),
+                    "fwd": ("fwd", "front-wheel"),
+                }
+                gate_tokens = []
+                for g in p["drive"]:
+                    gate_tokens += DRIVE_SYNONYMS.get(g.lower(), (g.lower(),))
+                if drive_str and any(t in drive_str for t in gate_tokens):
+                    trim_status = "vin"
+                elif any(t in model_lower for t in gate_tokens):
+                    trim_status = "listing"
+                elif drive_str:
+                    # vPIC drive strings are synonym lists for ONE
+                    # class ("FWD/Front-Wheel Drive"). Exclude only
+                    # when the decode names exactly one class and it
+                    # isn't in the gate; a string spanning classes
+                    # (e.g. "2WD/4WD") stays unconfirmed.
+                    classes = {c for c, toks in DRIVE_SYNONYMS.items()
+                               if any(t in drive_str for t in toks)}
+                    if "2wd" in drive_str:
+                        classes.add("2wd")
+                    if len(classes) == 1:
                         continue
-                    if "yr_max" in p and year > p["yr_max"]:
-                        continue
-                    trim_status = None
-                    if "trim" in p:
-                        trims = [t.lower() for t in p["trim"]]
-                        if any(t in model_lower for t in trims):
-                            trim_status = "listing"
-                        elif vin_tokens and any(t in vin_tokens for t in trims):
-                            trim_status = "vin"
-                        elif vin_usable:
-                            # Decode is specific and names a different trim:
-                            # confident the car doesn't have this part.
-                            continue
-                        else:
-                            trim_status = "unconfirmed"
-                    if p.get("manual"):
-                        # Manual-transmission-only part (shifters, pedal boxes...).
-                        if is_manual:
-                            trim_status = "vin"
-                        elif is_definitely_auto:
-                            continue  # decode is definite: automatic, part absent
-                        elif "manual" in model_lower or " 5-speed" in model_lower:
-                            trim_status = "listing"
-                        else:
-                            trim_status = trim_status or "unconfirmed"
-                    if "drive" in p:
-                        # Drivetrain-gated part; gate tokens like ["4wd", "awd"].
-                        DRIVE_SYNONYMS = {
-                            "4wd": ("4wd", "4x4", "four-wheel"),
-                            "awd": ("awd", "all-wheel"),
-                            "rwd": ("rwd", "rear-wheel"),
-                            "fwd": ("fwd", "front-wheel"),
-                        }
-                        gate_tokens = []
-                        for g in p["drive"]:
-                            gate_tokens += DRIVE_SYNONYMS.get(g.lower(), (g.lower(),))
-                        if drive_str and any(t in drive_str for t in gate_tokens):
-                            trim_status = "vin"
-                        elif any(t in model_lower for t in gate_tokens):
-                            trim_status = "listing"
-                        elif drive_str:
-                            # vPIC drive strings are synonym lists for ONE
-                            # class ("FWD/Front-Wheel Drive"). Exclude only
-                            # when the decode names exactly one class and it
-                            # isn't in the gate; a string spanning classes
-                            # (e.g. "2WD/4WD") stays unconfirmed.
-                            classes = {c for c, toks in DRIVE_SYNONYMS.items()
-                                       if any(t in drive_str for t in toks)}
-                            if "2wd" in drive_str:
-                                classes.add("2wd")
-                            if len(classes) == 1:
-                                continue
-                            trim_status = trim_status or "unconfirmed"
-                        else:
-                            trim_status = trim_status or "unconfirmed"
-                    cl, ch = _resale_sold_calibrate(p["low"], p["high"], p["name"], year)
-                    enriched = {**p, "low": cl, "high": ch, **_lookup_sell_info(p["name"], make)}
-                    if trim_status:
-                        enriched["trim_status"] = trim_status
-                    filtered_parts.append(enriched)
-                if filtered_parts:
-                    max_val = max(p["high"] for p in filtered_parts)
-                    matches.append({**info, "top_parts": filtered_parts, "max_value": max_val})
+                    trim_status = trim_status or "unconfirmed"
+                else:
+                    trim_status = trim_status or "unconfirmed"
+            cl, ch = _resale_sold_calibrate(p["low"], p["high"], p["name"], year)
+            enriched = {**p, "low": cl, "high": ch, **_lookup_sell_info(p["name"], make)}
+            # Provenance: the model years this part actually fits — the
+            # entry's (generation) year range narrowed by the part's own
+            # yr_min/yr_max gates. Shipped to the UI as "fits 1996–2002".
+            enriched["fits"] = f"{max(low, p.get('yr_min', low))}–{min(high, p.get('yr_max', high))}"
+            if trim_status:
+                enriched["trim_status"] = trim_status
+            filtered_parts.append(enriched)
+        if filtered_parts:
+            max_val = max(p["high"] for p in filtered_parts)
+            matches.append({**info, "top_parts": filtered_parts, "max_value": max_val})
     return matches
 
 
@@ -4780,6 +5647,7 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                     "sell_at": p.get("sell_at", ""),
                     "sell_speed": p.get("sell_speed", ""),
                     "sell_notes": p.get("sell_notes", ""),
+                    **({"fits": p["fits"]} if p.get("fits") else {}),
                     **({"trim_status": p["trim_status"]} if p.get("trim_status") else {}),
                 }
                 for p in v.get("_top_parts", [])

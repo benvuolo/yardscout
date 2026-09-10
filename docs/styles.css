@@ -1010,6 +1010,19 @@
     font-style: italic;
   }
 
+  /* Generation provenance ("fits 1996–2002") on part rows */
+  .fits-badge {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    vertical-align: middle;
+    background: var(--surface3);
+    color: var(--text-dim);
+  }
+
   .ghost-note {
     font-size: 0.75rem;
     color: var(--text-dim);
