@@ -23,6 +23,14 @@ Classification vs. an evidence range [obs_low, obs_high]:
   ACCURATE     ranges overlap (includes deliberately conservative bands)
   UNVERIFIABLE no evidence available for this part
 
+New-part ceiling check (2026-09-10 audit): each part is also compared against
+the going NEW price of an OEM-quality equivalent (baseline "new_ceilings" —
+category patterns with researched prices, sources, dates). A used displayed
+high above 80% of the new OEM-quality price is a CEILING VIOLATION; an
+acceptable-quality new-aftermarket price at or under the used displayed low is
+a DEAD FLIP (nobody buys used when new is cheaper). Ceilings compare against
+OEM-quality new parts (e.g. Aisin hubs), never the cheapest knockoff.
+
 Usage:
   python scraper/validate_prices.py [--top 50] [--report PATH] [--summary PATH]
                                     [--no-fresh]
@@ -51,6 +59,7 @@ DEFAULT_REPORT = ROOT / "scraper" / "price_validation_report.md"
 
 UA = {"User-Agent": "yardscout price validator (github.com/benvuolo/yardscout)"}
 INFLATION_TOLERANCE = 1.5  # displayed high may sit up to 1.5x the observed ceiling
+NEW_CEILING_FRACTION = 0.8  # used high must stay under this fraction of new OEM-quality price
 
 
 # ---------------------------------------------------------------- exposure --
@@ -178,6 +187,39 @@ class FreshSource:
             return []
 
 
+# ------------------------------------------------------- new-part ceilings --
+
+def match_ceiling(part: dict, ceilings: list[dict]) -> dict | None:
+    """First ceiling record whose pattern is a substring of the part name and
+    whose optional vehicles filter matches a model token. The baseline list is
+    ordered most-specific-first, so vehicle-scoped records win over generics."""
+    name = part["name"].lower()
+    model_toks = _tokens(" ".join(part["models"]))
+    for c in ceilings:
+        if c["pattern"] not in name:
+            continue
+        vehicles = c.get("vehicles")
+        if vehicles and not any(v.replace("-", "") in {t.replace("-", "") for t in model_toks}
+                                or any(v in t for t in model_toks) for v in vehicles):
+            continue
+        return c
+    return None
+
+
+def check_ceiling(part: dict, c: dict | None) -> tuple[str, str]:
+    """Returns (status, detail). Status: OK / VIOLATION / DEAD FLIP / NO DATA."""
+    if not c:
+        return "NO DATA", ""
+    limit = int(c["new_oem"] * NEW_CEILING_FRACTION)
+    if c.get("budget_acceptable") and c.get("new_budget") is not None and c["new_budget"] <= part["low"]:
+        return ("DEAD FLIP",
+                f"acceptable new aftermarket ${c['new_budget']} undercuts used low ${part['low']} — {c['new_oem_desc']}")
+    if part["high"] > limit:
+        return ("VIOLATION",
+                f"used high ${part['high']} > ${limit} (80% of ${c['new_oem']} new: {c['new_oem_desc']})")
+    return "OK", f"under 80% of ${c['new_oem']} new ({c['new_oem_desc']})"
+
+
 # ----------------------------------------------------------- classification --
 
 def classify(low: int, high: int, obs_low: int, obs_high: int) -> str:
@@ -191,6 +233,7 @@ def classify(low: int, high: int, obs_low: int, obs_high: int) -> str:
 def validate(top_n: int, use_fresh: bool) -> dict:
     parts = top_exposure_parts(top_n)
     baseline = load_baseline()
+    ceilings = baseline.get("new_ceilings", [])
     fresh = FreshSource(enabled=use_fresh)
     fresh_used = 0
 
@@ -221,6 +264,7 @@ def validate(top_n: int, use_fresh: bool) -> dict:
                 note = b.get("note", "")
         else:
             verdict, note = "UNVERIFIABLE", "no reviewed evidence — new high-exposure entrant, needs a manual look"
+        ceiling_status, ceiling_detail = check_ceiling(part, match_ceiling(part, ceilings))
         results.append({
             "name": part["name"],
             "models": ", ".join(top_models),
@@ -229,13 +273,18 @@ def validate(top_n: int, use_fresh: bool) -> dict:
             "evidence": evidence, "source": source,
             "verdict": verdict,
             "note": note,
+            "ceiling": ceiling_status,
+            "ceiling_detail": ceiling_detail,
         })
 
     counts = Counter(r["verdict"] for r in results)
+    ceiling_counts = Counter(r["ceiling"] for r in results)
     return {
         "results": results,
         "counts": dict(counts),
+        "ceiling_counts": dict(ceiling_counts),
         "baseline_date": baseline["audit_date"],
+        "ceilings_date": baseline.get("new_ceilings_date"),
         "fresh_used": fresh_used,
         "fresh_blocked": fresh.enabled and fresh.failures >= 2,
     }
@@ -291,6 +340,29 @@ def write_report(v: dict, path: Path) -> None:
         lines += ["", "## Flagged rows — detail", ""]
         for r in notes:
             lines.append(f"- **{r['name']}** ({r['models']}): {r['verdict']} — {r['note']}")
+
+    cc = v.get("ceiling_counts", {})
+    lines += [
+        "",
+        "## New-part ceiling check",
+        "",
+        f"Used highs vs. the going NEW price of an OEM-quality equivalent "
+        f"(`price_baseline.json` new_ceilings, researched {v.get('ceilings_date') or 'n/a'}). "
+        f"Rule: used high ≤ {int(NEW_CEILING_FRACTION * 100)}% of new OEM-quality; acceptable "
+        "new-aftermarket under the used low = dead flip. OEM-quality means Aisin-grade, "
+        "not the cheapest knockoff.",
+        "",
+        "| Status | Count |",
+        "|---|---|",
+    ]
+    for k in ("OK", "VIOLATION", "DEAD FLIP", "NO DATA"):
+        lines.append(f"| {k} | {cc.get(k, 0)} |")
+    flagged = [r for r in sorted(v["results"], key=lambda r: (r["name"].lower(), r["models"].lower()))
+               if r["ceiling"] in ("VIOLATION", "DEAD FLIP")]
+    if flagged:
+        lines += ["", "### Ceiling violations (need a pricing decision)", ""]
+        for r in flagged:
+            lines.append(f"- **{r['name']}** ({r['models']}): {r['ceiling']} — {r['ceiling_detail']}")
     lines.append("")
     path.write_text("\n".join(lines))
 
@@ -306,8 +378,11 @@ def main() -> int:
     v = validate(args.top, use_fresh=not args.no_fresh)
     write_report(v, args.report)
     c = v["counts"]
+    cc = v["ceiling_counts"]
     print(f"Validated top {len(v['results'])} parts: "
           + ", ".join(f"{k.lower()} {c.get(k, 0)}" for k in ("ACCURATE", "UNDERSTATED", "INFLATED", "UNVERIFIABLE")))
+    print("New-part ceiling: "
+          + ", ".join(f"{k.lower()} {cc.get(k, 0)}" for k in ("OK", "VIOLATION", "DEAD FLIP", "NO DATA")))
     print(f"Report written to {args.report}")
     if args.summary:
         args.summary.write_text(json.dumps({
@@ -316,6 +391,7 @@ def main() -> int:
             "understated": c.get("UNDERSTATED", 0),
             "inflated": c.get("INFLATED", 0),
             "unverifiable": c.get("UNVERIFIABLE", 0),
+            "ceiling_violations": cc.get("VIOLATION", 0) + cc.get("DEAD FLIP", 0),
             "fresh_used": v["fresh_used"],
             "baseline_date": v["baseline_date"],
         }, indent=1))

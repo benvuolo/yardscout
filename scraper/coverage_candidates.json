@@ -1,0 +1,4049 @@
+{
+ "date": "2026-09-10",
+ "gaps": [
+  {
+   "make": "Nissan",
+   "model": "Altima",
+   "year_band": "2005-2009",
+   "vehicle_count": 1714,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 1028.4
+  },
+  {
+   "make": "Toyota",
+   "model": "Camry",
+   "year_band": "2005-2009",
+   "vehicle_count": 1554,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 932.4
+  },
+  {
+   "make": "Toyota",
+   "model": "Camry",
+   "year_band": "2000-2004",
+   "vehicle_count": 1505,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 903.0
+  },
+  {
+   "make": "Toyota",
+   "model": "Camry",
+   "year_band": "1995-1999",
+   "vehicle_count": 741,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 444.6
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Malibu",
+   "year_band": "2005-2009",
+   "vehicle_count": 686,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 411.6
+  },
+  {
+   "make": "Ford",
+   "model": "Escape",
+   "year_band": "2005-2009",
+   "vehicle_count": 625,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 375.0
+  },
+  {
+   "make": "Toyota",
+   "model": "Corolla",
+   "year_band": "2000-2004",
+   "vehicle_count": 625,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 375.0
+  },
+  {
+   "make": "Nissan",
+   "model": "Versa",
+   "year_band": "2010-2014",
+   "vehicle_count": 620,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 372.0
+  },
+  {
+   "make": "Nissan",
+   "model": "Sentra",
+   "year_band": "2005-2009",
+   "vehicle_count": 619,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 371.4
+  },
+  {
+   "make": "Toyota",
+   "model": "Camry",
+   "year_band": "2010-2014",
+   "vehicle_count": 572,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "BSM Side Mirror (heated, power fold)",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 343.2
+  },
+  {
+   "make": "Nissan",
+   "model": "Xterra",
+   "year_band": "2000-2004",
+   "vehicle_count": 335,
+   "match_rate": 1.0,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "Xterra",
+   "matched_parts": [
+    "OEM Roof Rack (tube-style)",
+    "Rear Diff Locker Switch"
+   ],
+   "score": 335.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Equinox",
+   "year_band": "2005-2009",
+   "vehicle_count": 420,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 252.0
+  },
+  {
+   "make": "Ford",
+   "model": "Taurus",
+   "year_band": "2000-2004",
+   "vehicle_count": 374,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 224.4
+  },
+  {
+   "make": "Nissan",
+   "model": "Xterra",
+   "year_band": "2005-2009",
+   "vehicle_count": 218,
+   "match_rate": 1.0,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "Xterra",
+   "matched_parts": [
+    "OEM Roof Rack (tube-style)",
+    "Rear Diff Locker Switch"
+   ],
+   "score": 218.0
+  },
+  {
+   "make": "Ford",
+   "model": "Taurus",
+   "year_band": "2005-2009",
+   "vehicle_count": 347,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 208.2
+  },
+  {
+   "make": "Honda",
+   "model": "CR-V",
+   "year_band": "2005-2009",
+   "vehicle_count": 335,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Rear Cargo Cover",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 201.0
+  },
+  {
+   "make": "Subaru",
+   "model": "Impreza",
+   "year_band": "2005-2009",
+   "vehicle_count": 164,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": "WRX/STI",
+   "matched_parts": [
+    "OEM Headlights (clear)"
+   ],
+   "score": 196.8
+  },
+  {
+   "make": "Nissan",
+   "model": "Altima",
+   "year_band": "2000-2004",
+   "vehicle_count": 327,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 196.2
+  },
+  {
+   "make": "Toyota",
+   "model": "Corolla",
+   "year_band": "1995-1999",
+   "vehicle_count": 321,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 192.6
+  },
+  {
+   "make": "Nissan",
+   "model": "Versa",
+   "year_band": "2005-2009",
+   "vehicle_count": 319,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 191.4
+  },
+  {
+   "make": "Buick",
+   "model": "Lesabre",
+   "year_band": "2000-2004",
+   "vehicle_count": 309,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)"
+   ],
+   "score": 185.4
+  },
+  {
+   "make": "Subaru",
+   "model": "Impreza",
+   "year_band": "2010-2014",
+   "vehicle_count": 174,
+   "match_rate": 1.0,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "WRX/STI",
+   "matched_parts": [
+    "Eyesight Camera Module",
+    "OEM Headlights (clear)",
+    "Roof Rails"
+   ],
+   "score": 174.0
+  },
+  {
+   "make": "Hyundai",
+   "model": "Accent",
+   "year_band": "2010-2014",
+   "vehicle_count": 276,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 165.6
+  },
+  {
+   "make": "Nissan",
+   "model": "Rogue",
+   "year_band": "2005-2009",
+   "vehicle_count": 274,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (heated, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 164.4
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Uplander",
+   "year_band": "2005-2009",
+   "vehicle_count": 162,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 162.0
+  },
+  {
+   "make": "Ford",
+   "model": "Explorer",
+   "year_band": "1995-1999",
+   "vehicle_count": 265,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 159.0
+  },
+  {
+   "make": "Buick",
+   "model": "Century",
+   "year_band": "2000-2004",
+   "vehicle_count": 258,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 154.8
+  },
+  {
+   "make": "Nissan",
+   "model": "Versa",
+   "year_band": "2015-2019",
+   "vehicle_count": 258,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 154.8
+  },
+  {
+   "make": "BMW",
+   "model": "328I",
+   "year_band": "2005-2009",
+   "vehicle_count": 148,
+   "match_rate": 1.0,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "E30/E36/E46 3-Series",
+   "matched_parts": [
+    "Harman Kardon Amp + Speakers",
+    "Sport Seats (pair)",
+    "iDrive / Navigation Head Unit"
+   ],
+   "score": 148.0
+  },
+  {
+   "make": "Buick",
+   "model": "Lacrosse",
+   "year_band": "2010-2014",
+   "vehicle_count": 241,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "OEM HID/LED Headlights",
+    "Side Mirrors (heated, pair)"
+   ],
+   "score": 144.6
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Captiva Sport",
+   "year_band": "2010-2014",
+   "vehicle_count": 142,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 142.0
+  },
+  {
+   "make": "Ford",
+   "model": "Escape",
+   "year_band": "2000-2004",
+   "vehicle_count": 221,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 132.6
+  },
+  {
+   "make": "Kia",
+   "model": "Spectra",
+   "year_band": "2005-2009",
+   "vehicle_count": 217,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear pair)"
+   ],
+   "score": 130.2
+  },
+  {
+   "make": "Ford",
+   "model": "Freestyle",
+   "year_band": "2005-2009",
+   "vehicle_count": 129,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 129.0
+  },
+  {
+   "make": "Jeep",
+   "model": "Compass",
+   "year_band": "2010-2014",
+   "vehicle_count": 213,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)"
+   ],
+   "score": 127.8
+  },
+  {
+   "make": "Buick",
+   "model": "Lacrosse",
+   "year_band": "2005-2009",
+   "vehicle_count": 212,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (heated, pair)"
+   ],
+   "score": 127.2
+  },
+  {
+   "make": "Nissan",
+   "model": "Sentra",
+   "year_band": "2000-2004",
+   "vehicle_count": 212,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 127.2
+  },
+  {
+   "make": "Buick",
+   "model": "Lucerne",
+   "year_band": "2005-2009",
+   "vehicle_count": 211,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (heated, pair)"
+   ],
+   "score": 126.6
+  },
+  {
+   "make": "Saturn",
+   "model": "AURA",
+   "year_band": "2005-2009",
+   "vehicle_count": 121,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 121.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Malibu",
+   "year_band": "2000-2004",
+   "vehicle_count": 191,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 114.6
+  },
+  {
+   "make": "Ford",
+   "model": "Five Hundred",
+   "year_band": "2005-2009",
+   "vehicle_count": 191,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 114.6
+  },
+  {
+   "make": "Kia",
+   "model": "Sorento",
+   "year_band": "2005-2009",
+   "vehicle_count": 188,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (heated, pair)"
+   ],
+   "score": 112.8
+  },
+  {
+   "make": "Subaru",
+   "model": "Legacy",
+   "year_band": "2010-2014",
+   "vehicle_count": 176,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 105.6
+  },
+  {
+   "make": "Ford",
+   "model": "Windstar",
+   "year_band": "2000-2004",
+   "vehicle_count": 105,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 105.0
+  },
+  {
+   "make": "Oldsmobile",
+   "model": "Alero",
+   "year_band": "2000-2004",
+   "vehicle_count": 104,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 104.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Venture",
+   "year_band": "2000-2004",
+   "vehicle_count": 101,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 101.0
+  },
+  {
+   "make": "Hyundai",
+   "model": "Accent",
+   "year_band": "2005-2009",
+   "vehicle_count": 164,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 98.4
+  },
+  {
+   "make": "Lincoln",
+   "model": "MKX",
+   "year_band": "2005-2009",
+   "vehicle_count": 93,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 93.0
+  },
+  {
+   "make": "Pontiac",
+   "model": "Torrent",
+   "year_band": "2005-2009",
+   "vehicle_count": 91,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 91.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Spark",
+   "year_band": "2010-2014",
+   "vehicle_count": 89,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 89.0
+  },
+  {
+   "make": "Hyundai",
+   "model": "Accent",
+   "year_band": "2015-2019",
+   "vehicle_count": 144,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 86.4
+  },
+  {
+   "make": "Hyundai",
+   "model": "Tucson",
+   "year_band": "2005-2009",
+   "vehicle_count": 144,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (heated, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 86.4
+  },
+  {
+   "make": "Kia",
+   "model": "Sportage",
+   "year_band": "2005-2009",
+   "vehicle_count": 142,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (heated, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 85.2
+  },
+  {
+   "make": "Nissan",
+   "model": "JUKE",
+   "year_band": "2010-2014",
+   "vehicle_count": 84,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 84.0
+  },
+  {
+   "make": "Pontiac",
+   "model": "Grand Am",
+   "year_band": "2000-2004",
+   "vehicle_count": 137,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 82.2
+  },
+  {
+   "make": "Saturn",
+   "model": "Outlook",
+   "year_band": "2005-2009",
+   "vehicle_count": 82,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 82.0
+  },
+  {
+   "make": "Fiat",
+   "model": "500",
+   "year_band": "2010-2014",
+   "vehicle_count": 80,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 80.0
+  },
+  {
+   "make": "Kia",
+   "model": "Rondo",
+   "year_band": "2005-2009",
+   "vehicle_count": 80,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 80.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "AVEO",
+   "year_band": "2005-2009",
+   "vehicle_count": 130,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 78.0
+  },
+  {
+   "make": "Chrysler",
+   "model": "Aspen",
+   "year_band": "2005-2009",
+   "vehicle_count": 78,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 78.0
+  },
+  {
+   "make": "Ford",
+   "model": "Transit Connect",
+   "year_band": "2010-2014",
+   "vehicle_count": 128,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 76.8
+  },
+  {
+   "make": "Toyota",
+   "model": "Camry",
+   "year_band": "1990-1994",
+   "vehicle_count": 128,
+   "match_rate": 0.805,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 76.8
+  },
+  {
+   "make": "Buick",
+   "model": "Encore",
+   "year_band": "2015-2019",
+   "vehicle_count": 76,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 76.0
+  },
+  {
+   "make": "Dodge",
+   "model": "Stratus",
+   "year_band": "2000-2004",
+   "vehicle_count": 76,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 76.0
+  },
+  {
+   "make": "Mazda",
+   "model": "MPV",
+   "year_band": "2000-2004",
+   "vehicle_count": 76,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 76.0
+  },
+  {
+   "make": "Nissan",
+   "model": "Versa Note",
+   "year_band": "2015-2019",
+   "vehicle_count": 125,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 75.0
+  },
+  {
+   "make": "Lincoln",
+   "model": "MKZ",
+   "year_band": "2010-2014",
+   "vehicle_count": 72,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 72.0
+  },
+  {
+   "make": "Ford",
+   "model": "Freestar",
+   "year_band": "2005-2009",
+   "vehicle_count": 71,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 71.0
+  },
+  {
+   "make": "Volkswagen",
+   "model": "Passat",
+   "year_band": "2005-2009",
+   "vehicle_count": 117,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, OEM)"
+   ],
+   "score": 70.2
+  },
+  {
+   "make": "Lincoln",
+   "model": "MKZ",
+   "year_band": "2005-2009",
+   "vehicle_count": 68,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 68.0
+  },
+  {
+   "make": "Mercury",
+   "model": "Mariner",
+   "year_band": "2005-2009",
+   "vehicle_count": 113,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 67.8
+  },
+  {
+   "make": "Infiniti",
+   "model": "JX35",
+   "year_band": "2010-2014",
+   "vehicle_count": 67,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 67.0
+  },
+  {
+   "make": "Lexus",
+   "model": "Es300",
+   "year_band": "2000-2004",
+   "vehicle_count": 111,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 66.6
+  },
+  {
+   "make": "Buick",
+   "model": "Regal",
+   "year_band": "2010-2014",
+   "vehicle_count": 110,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)"
+   ],
+   "score": 66.0
+  },
+  {
+   "make": "Subaru",
+   "model": "Legacy",
+   "year_band": "2005-2009",
+   "vehicle_count": 110,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 66.0
+  },
+  {
+   "make": "Volkswagen",
+   "model": "CC",
+   "year_band": "2010-2014",
+   "vehicle_count": 110,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Tail Lights (pair, uncracked)",
+    "Xenon/LED Headlights (pair)"
+   ],
+   "score": 66.0
+  },
+  {
+   "make": "Ford",
+   "model": "Escort",
+   "year_band": "1995-1999",
+   "vehicle_count": 65,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 65.0
+  },
+  {
+   "make": "Lincoln",
+   "model": "MKX",
+   "year_band": "2010-2014",
+   "vehicle_count": 65,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 65.0
+  },
+  {
+   "make": "Pontiac",
+   "model": "G5",
+   "year_band": "2005-2009",
+   "vehicle_count": 65,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 65.0
+  },
+  {
+   "make": "Pontiac",
+   "model": "Sunfire",
+   "year_band": "2000-2004",
+   "vehicle_count": 65,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 65.0
+  },
+  {
+   "make": "Buick",
+   "model": "Lesabre",
+   "year_band": "1995-1999",
+   "vehicle_count": 105,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)"
+   ],
+   "score": 63.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "TRAX",
+   "year_band": "2015-2019",
+   "vehicle_count": 63,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 63.0
+  },
+  {
+   "make": "GMC",
+   "model": "Canyon",
+   "year_band": "2005-2009",
+   "vehicle_count": 63,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 63.0
+  },
+  {
+   "make": "Dodge",
+   "model": "Stratus",
+   "year_band": "2005-2009",
+   "vehicle_count": 62,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 62.0
+  },
+  {
+   "make": "Saturn",
+   "model": "S-Series",
+   "year_band": "1995-1999",
+   "vehicle_count": 62,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 62.0
+  },
+  {
+   "make": "Volvo",
+   "model": "S40",
+   "year_band": "2005-2009",
+   "vehicle_count": 62,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 62.0
+  },
+  {
+   "make": "Toyota",
+   "model": "RAV4",
+   "year_band": "2005-2009",
+   "vehicle_count": 103,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (power, pair)",
+    "Spare Tire Cover (hard shell)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 61.8
+  },
+  {
+   "make": "Jeep",
+   "model": "Renegade",
+   "year_band": "2015-2019",
+   "vehicle_count": 61,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 61.0
+  },
+  {
+   "make": "Lincoln",
+   "model": "LS",
+   "year_band": "2000-2004",
+   "vehicle_count": 60,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 60.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Lumina",
+   "year_band": "1995-1999",
+   "vehicle_count": 59,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 59.0
+  },
+  {
+   "make": "Kia",
+   "model": "RIO",
+   "year_band": "2010-2014",
+   "vehicle_count": 98,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)"
+   ],
+   "score": 58.8
+  },
+  {
+   "make": "Buick",
+   "model": "Park Avenue",
+   "year_band": "2000-2004",
+   "vehicle_count": 57,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 57.0
+  },
+  {
+   "make": "Mitsubishi",
+   "model": "Galant",
+   "year_band": "2000-2004",
+   "vehicle_count": 95,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 57.0
+  },
+  {
+   "make": "Volvo",
+   "model": "XC60",
+   "year_band": "2010-2014",
+   "vehicle_count": 56,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 56.0
+  },
+  {
+   "make": "Subaru",
+   "model": "Impreza",
+   "year_band": "2000-2004",
+   "vehicle_count": 46,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": "WRX/STI",
+   "matched_parts": [
+    "OEM Headlights (clear)"
+   ],
+   "score": 55.2
+  },
+  {
+   "make": "Jaguar",
+   "model": "S-Type",
+   "year_band": "2000-2004",
+   "vehicle_count": 55,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 55.0
+  },
+  {
+   "make": "Jeep",
+   "model": "Compass",
+   "year_band": "2005-2009",
+   "vehicle_count": 89,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)"
+   ],
+   "score": 53.4
+  },
+  {
+   "make": "Hummer",
+   "model": "H3",
+   "year_band": "2005-2009",
+   "vehicle_count": 53,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 53.0
+  },
+  {
+   "make": "Lincoln",
+   "model": "MKS",
+   "year_band": "2010-2014",
+   "vehicle_count": 53,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 53.0
+  },
+  {
+   "make": "Mitsubishi",
+   "model": "Endeavor",
+   "year_band": "2005-2009",
+   "vehicle_count": 53,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 53.0
+  },
+  {
+   "make": "Honda",
+   "model": "CR-V",
+   "year_band": "2010-2014",
+   "vehicle_count": 88,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Rear Cargo Cover",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 52.8
+  },
+  {
+   "make": "Mazda",
+   "model": "Mazda5",
+   "year_band": "2005-2009",
+   "vehicle_count": 52,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 52.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Spark",
+   "year_band": "2015-2019",
+   "vehicle_count": 51,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 51.0
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "S-Class",
+   "year_band": "2000-2004",
+   "vehicle_count": 51,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 51.0
+  },
+  {
+   "make": "Mazda",
+   "model": "Tribute",
+   "year_band": "2000-2004",
+   "vehicle_count": 84,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 50.4
+  },
+  {
+   "make": "Buick",
+   "model": "Park Avenue",
+   "year_band": "1995-1999",
+   "vehicle_count": 50,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 50.0
+  },
+  {
+   "make": "Nissan",
+   "model": "Sentra",
+   "year_band": "1995-1999",
+   "vehicle_count": 50,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 50.0
+  },
+  {
+   "make": "Mercury",
+   "model": "Milan",
+   "year_band": "2005-2009",
+   "vehicle_count": 82,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 49.2
+  },
+  {
+   "make": "Toyota",
+   "model": "Corolla",
+   "year_band": "1990-1994",
+   "vehicle_count": 82,
+   "match_rate": 0.561,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 49.2
+  },
+  {
+   "make": "Buick",
+   "model": "Encore",
+   "year_band": "2010-2014",
+   "vehicle_count": 49,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 49.0
+  },
+  {
+   "make": "Hyundai",
+   "model": "Azera",
+   "year_band": "2005-2009",
+   "vehicle_count": 49,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 49.0
+  },
+  {
+   "make": "Mazda",
+   "model": "Mazda5",
+   "year_band": "2010-2014",
+   "vehicle_count": 49,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 49.0
+  },
+  {
+   "make": "Mercury",
+   "model": "Montego",
+   "year_band": "2005-2009",
+   "vehicle_count": 49,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 49.0
+  },
+  {
+   "make": "Mazda",
+   "model": "Tribute",
+   "year_band": "2005-2009",
+   "vehicle_count": 81,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 48.6
+  },
+  {
+   "make": "Acura",
+   "model": "RDX",
+   "year_band": "2005-2009",
+   "vehicle_count": 48,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 48.0
+  },
+  {
+   "make": "Mercury",
+   "model": "Sable",
+   "year_band": "2000-2004",
+   "vehicle_count": 80,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 48.0
+  },
+  {
+   "make": "Pontiac",
+   "model": "Montana",
+   "year_band": "2000-2004",
+   "vehicle_count": 48,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 48.0
+  },
+  {
+   "make": "Subaru",
+   "model": "Legacy Wagon",
+   "year_band": "1995-1999",
+   "vehicle_count": 79,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 47.4
+  },
+  {
+   "make": "Mitsubishi",
+   "model": "Galant",
+   "year_band": "2005-2009",
+   "vehicle_count": 78,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 46.8
+  },
+  {
+   "make": "Toyota",
+   "model": "RAV4",
+   "year_band": "2000-2004",
+   "vehicle_count": 78,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (power, pair)",
+    "Spare Tire Cover (hard shell)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 46.8
+  },
+  {
+   "make": "Volkswagen",
+   "model": "Passat",
+   "year_band": "2000-2004",
+   "vehicle_count": 78,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, OEM)"
+   ],
+   "score": 46.8
+  },
+  {
+   "make": "Nissan",
+   "model": "Altima",
+   "year_band": "1995-1999",
+   "vehicle_count": 77,
+   "match_rate": 0.701,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 46.2
+  },
+  {
+   "make": "Honda",
+   "model": "Insight",
+   "year_band": "2010-2014",
+   "vehicle_count": 46,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 46.0
+  },
+  {
+   "make": "Subaru",
+   "model": "B9 Tribeca",
+   "year_band": "2005-2009",
+   "vehicle_count": 46,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 46.0
+  },
+  {
+   "make": "Dodge",
+   "model": "Intrepid",
+   "year_band": "2000-2004",
+   "vehicle_count": 45,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 45.0
+  },
+  {
+   "make": "Toyota",
+   "model": "Rav4",
+   "year_band": "2000-2004",
+   "vehicle_count": 75,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (power, pair)",
+    "Spare Tire Cover (hard shell)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 45.0
+  },
+  {
+   "make": "Volkswagen",
+   "model": "Rabbit",
+   "year_band": "2005-2009",
+   "vehicle_count": 45,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 45.0
+  },
+  {
+   "make": "Nissan",
+   "model": "Versa Note",
+   "year_band": "2010-2014",
+   "vehicle_count": 74,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 44.4
+  },
+  {
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "year_band": "2005-2009",
+   "vehicle_count": 74,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 44.4
+  },
+  {
+   "make": "Jaguar",
+   "model": "X-Type",
+   "year_band": "2000-2004",
+   "vehicle_count": 44,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 44.0
+  },
+  {
+   "make": "Saturn",
+   "model": "L-Series",
+   "year_band": "2000-2004",
+   "vehicle_count": 44,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 44.0
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "Gl450",
+   "year_band": "2010-2014",
+   "vehicle_count": 43,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 43.0
+  },
+  {
+   "make": "Ford",
+   "model": "Freestar",
+   "year_band": "2000-2004",
+   "vehicle_count": 42,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 42.0
+  },
+  {
+   "make": "Volvo",
+   "model": "V70",
+   "year_band": "2000-2004",
+   "vehicle_count": 42,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 42.0
+  },
+  {
+   "make": "Acura",
+   "model": "CL",
+   "year_band": "2000-2004",
+   "vehicle_count": 41,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 41.0
+  },
+  {
+   "make": "Chrysler",
+   "model": "300M",
+   "year_band": "2000-2004",
+   "vehicle_count": 41,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 41.0
+  },
+  {
+   "make": "Mazda",
+   "model": "5",
+   "year_band": "2005-2009",
+   "vehicle_count": 41,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 41.0
+  },
+  {
+   "make": "Buick",
+   "model": "Regal",
+   "year_band": "2000-2004",
+   "vehicle_count": 67,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)"
+   ],
+   "score": 40.2
+  },
+  {
+   "make": "GMC",
+   "model": "Savana",
+   "year_band": "2000-2004",
+   "vehicle_count": 40,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 40.0
+  },
+  {
+   "make": "Mazda",
+   "model": "5",
+   "year_band": "2010-2014",
+   "vehicle_count": 40,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 40.0
+  },
+  {
+   "make": "Infiniti",
+   "model": "I35",
+   "year_band": "2000-2004",
+   "vehicle_count": 39,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 39.0
+  },
+  {
+   "make": "Infiniti",
+   "model": "QX60",
+   "year_band": "2010-2014",
+   "vehicle_count": 39,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 39.0
+  },
+  {
+   "make": "Kia",
+   "model": "RIO",
+   "year_band": "2005-2009",
+   "vehicle_count": 65,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)"
+   ],
+   "score": 39.0
+  },
+  {
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "year_band": "2015-2019",
+   "vehicle_count": 39,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 39.0
+  },
+  {
+   "make": "Toyota",
+   "model": "Rav4",
+   "year_band": "2005-2009",
+   "vehicle_count": 65,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (power, pair)",
+    "Spare Tire Cover (hard shell)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 39.0
+  },
+  {
+   "make": "Volkswagen",
+   "model": "Touareg",
+   "year_band": "2005-2009",
+   "vehicle_count": 39,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 39.0
+  },
+  {
+   "make": "Scion",
+   "model": "XB",
+   "year_band": "2010-2014",
+   "vehicle_count": 64,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 38.4
+  },
+  {
+   "make": "Acura",
+   "model": "RDX",
+   "year_band": "2010-2014",
+   "vehicle_count": 38,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 38.0
+  },
+  {
+   "make": "Kia",
+   "model": "Amanti",
+   "year_band": "2005-2009",
+   "vehicle_count": 38,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 38.0
+  },
+  {
+   "make": "Pontiac",
+   "model": "Bonneville",
+   "year_band": "2000-2004",
+   "vehicle_count": 38,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 38.0
+  },
+  {
+   "make": "Saturn",
+   "model": "SL",
+   "year_band": "2000-2004",
+   "vehicle_count": 38,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 38.0
+  },
+  {
+   "make": "Subaru",
+   "model": "Impreza",
+   "year_band": "2015-2019",
+   "vehicle_count": 38,
+   "match_rate": 1.0,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "WRX/STI",
+   "matched_parts": [
+    "Eyesight Camera Module",
+    "OEM Headlights (clear)",
+    "Roof Rails"
+   ],
+   "score": 38.0
+  },
+  {
+   "make": "Kia",
+   "model": "Sportage",
+   "year_band": "2010-2014",
+   "vehicle_count": 63,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (heated, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 37.8
+  },
+  {
+   "make": "Lexus",
+   "model": "Es 300",
+   "year_band": "2000-2004",
+   "vehicle_count": 63,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 37.8
+  },
+  {
+   "make": "Dodge",
+   "model": "NEON",
+   "year_band": "2005-2009",
+   "vehicle_count": 37,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 37.0
+  },
+  {
+   "make": "Ford",
+   "model": "Windstar",
+   "year_band": "1995-1999",
+   "vehicle_count": 37,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 37.0
+  },
+  {
+   "make": "Hyundai",
+   "model": "Entourage",
+   "year_band": "2005-2009",
+   "vehicle_count": 37,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 37.0
+  },
+  {
+   "make": "Infiniti",
+   "model": "QX60",
+   "year_band": "2015-2019",
+   "vehicle_count": 37,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 37.0
+  },
+  {
+   "make": "Lincoln",
+   "model": "Aviator",
+   "year_band": "2000-2004",
+   "vehicle_count": 37,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 37.0
+  },
+  {
+   "make": "Nissan",
+   "model": "CUBE",
+   "year_band": "2010-2014",
+   "vehicle_count": 37,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 37.0
+  },
+  {
+   "make": "Volkswagen",
+   "model": "Routan",
+   "year_band": "2010-2014",
+   "vehicle_count": 37,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 37.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Classic",
+   "year_band": "2005-2009",
+   "vehicle_count": 36,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 36.0
+  },
+  {
+   "make": "Geo",
+   "model": "Prizm",
+   "year_band": "1995-1999",
+   "vehicle_count": 36,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 36.0
+  },
+  {
+   "make": "Infiniti",
+   "model": "I30",
+   "year_band": "2000-2004",
+   "vehicle_count": 36,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 36.0
+  },
+  {
+   "make": "Mazda",
+   "model": "Mazda2",
+   "year_band": "2010-2014",
+   "vehicle_count": 36,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 36.0
+  },
+  {
+   "make": "Saturn",
+   "model": "S-Series",
+   "year_band": "2000-2004",
+   "vehicle_count": 36,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 36.0
+  },
+  {
+   "make": "Toyota",
+   "model": "Tacoma",
+   "year_band": "1995-1999",
+   "vehicle_count": 36,
+   "match_rate": 1.0,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "Tacoma (solid resale)",
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Manual Shifter + Knob (5-spd)",
+    "Tailgate (clean)"
+   ],
+   "score": 36.0
+  },
+  {
+   "make": "Hyundai",
+   "model": "Tucson",
+   "year_band": "2010-2014",
+   "vehicle_count": 59,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (heated, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 35.4
+  },
+  {
+   "make": "Lexus",
+   "model": "ES 300",
+   "year_band": "2000-2004",
+   "vehicle_count": 59,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 35.4
+  },
+  {
+   "make": "Lincoln",
+   "model": "MKT",
+   "year_band": "2010-2014",
+   "vehicle_count": 35,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 35.0
+  },
+  {
+   "make": "Toyota",
+   "model": "Tacoma",
+   "year_band": "2000-2004",
+   "vehicle_count": 35,
+   "match_rate": 1.0,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "Tacoma (solid resale)",
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Manual Shifter + Knob (5-spd)",
+    "Tailgate (clean)"
+   ],
+   "score": 35.0
+  },
+  {
+   "make": "Volvo",
+   "model": "S80",
+   "year_band": "2005-2009",
+   "vehicle_count": 58,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Tail Lights (pair, uncracked)",
+    "Xenon/HID Headlights (pair)"
+   ],
+   "score": 34.8
+  },
+  {
+   "make": "Buick",
+   "model": "Century",
+   "year_band": "1995-1999",
+   "vehicle_count": 57,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 34.2
+  },
+  {
+   "make": "Ford",
+   "model": "Escape Hybrid",
+   "year_band": "2005-2009",
+   "vehicle_count": 57,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 34.2
+  },
+  {
+   "make": "Ford",
+   "model": "Explorer",
+   "year_band": "1990-1994",
+   "vehicle_count": 57,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 34.2
+  },
+  {
+   "make": "Kia",
+   "model": "Sorento",
+   "year_band": "2000-2004",
+   "vehicle_count": 57,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (heated, pair)"
+   ],
+   "score": 34.2
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "S550",
+   "year_band": "2005-2009",
+   "vehicle_count": 34,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 34.0
+  },
+  {
+   "make": "Scion",
+   "model": "XD",
+   "year_band": "2005-2009",
+   "vehicle_count": 34,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 34.0
+  },
+  {
+   "make": "Suzuki",
+   "model": "Forenza",
+   "year_band": "2005-2009",
+   "vehicle_count": 34,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 34.0
+  },
+  {
+   "make": "Volkswagen",
+   "model": "GTI",
+   "year_band": "2005-2009",
+   "vehicle_count": 34,
+   "match_rate": 0.941,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "Golf GTI / R",
+   "matched_parts": [
+    "Fender / Dynaudio Amp + Sub",
+    "GTI Recaro Seats (pair)"
+   ],
+   "score": 34.0
+  },
+  {
+   "make": "Toyota",
+   "model": "RAV4",
+   "year_band": "2010-2014",
+   "vehicle_count": 56,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 33.6
+  },
+  {
+   "make": "Buick",
+   "model": "Lesabre",
+   "year_band": "2005-2009",
+   "vehicle_count": 55,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)"
+   ],
+   "score": 33.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "AVEO",
+   "year_band": "2010-2014",
+   "vehicle_count": 55,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 33.0
+  },
+  {
+   "make": "Hyundai",
+   "model": "Veracruz",
+   "year_band": "2005-2009",
+   "vehicle_count": 33,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 33.0
+  },
+  {
+   "make": "Kia",
+   "model": "Sportage",
+   "year_band": "2000-2004",
+   "vehicle_count": 33,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 33.0
+  },
+  {
+   "make": "Mitsubishi",
+   "model": "Galant",
+   "year_band": "2010-2014",
+   "vehicle_count": 55,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 33.0
+  },
+  {
+   "make": "Saturn",
+   "model": "SL",
+   "year_band": "1995-1999",
+   "vehicle_count": 33,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 33.0
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "E320",
+   "year_band": "1995-1999",
+   "vehicle_count": 32,
+   "match_rate": 0.969,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "W123/W124 Mercedes",
+   "matched_parts": [
+    "Harman Kardon Amp + Speakers",
+    "Wood Trim Set (unbroken)"
+   ],
+   "score": 32.0
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "S-Class",
+   "year_band": "2005-2009",
+   "vehicle_count": 32,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 32.0
+  },
+  {
+   "make": "Toyota",
+   "model": "Tercel",
+   "year_band": "1995-1999",
+   "vehicle_count": 32,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 32.0
+  },
+  {
+   "make": "Lexus",
+   "model": "Es300",
+   "year_band": "1995-1999",
+   "vehicle_count": 53,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 31.8
+  },
+  {
+   "make": "Subaru",
+   "model": "Legacy",
+   "year_band": "1995-1999",
+   "vehicle_count": 53,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 31.8
+  },
+  {
+   "make": "Kia",
+   "model": "RIO",
+   "year_band": "2015-2019",
+   "vehicle_count": 52,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)"
+   ],
+   "score": 31.2
+  },
+  {
+   "make": "Land Rover",
+   "model": "LR2",
+   "year_band": "2010-2014",
+   "vehicle_count": 31,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 31.0
+  },
+  {
+   "make": "Nissan",
+   "model": "Juke",
+   "year_band": "2010-2014",
+   "vehicle_count": 31,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 31.0
+  },
+  {
+   "make": "Nissan",
+   "model": "Xterra",
+   "year_band": "2010-2014",
+   "vehicle_count": 31,
+   "match_rate": 1.0,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "Xterra",
+   "matched_parts": [
+    "OEM Roof Rack (tube-style)",
+    "Rear Diff Locker Switch"
+   ],
+   "score": 31.0
+  },
+  {
+   "make": "Suzuki",
+   "model": "Grand Vitara",
+   "year_band": "2005-2009",
+   "vehicle_count": 31,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 31.0
+  },
+  {
+   "make": "Volkswagen",
+   "model": "Golf",
+   "year_band": "2000-2004",
+   "vehicle_count": 31,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 31.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "VOLT",
+   "year_band": "2010-2014",
+   "vehicle_count": 30,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 30.0
+  },
+  {
+   "make": "Hyundai",
+   "model": "Tucson",
+   "year_band": "2015-2019",
+   "vehicle_count": 50,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "OEM LED Headlights",
+    "Side Mirrors (heated, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 30.0
+  },
+  {
+   "make": "Mazda",
+   "model": "626",
+   "year_band": "2000-2004",
+   "vehicle_count": 30,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 30.0
+  },
+  {
+   "make": "Scion",
+   "model": "XA",
+   "year_band": "2005-2009",
+   "vehicle_count": 30,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 30.0
+  },
+  {
+   "make": "Subaru",
+   "model": "Impreza Wagon",
+   "year_band": "2005-2009",
+   "vehicle_count": 25,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": "WRX/STI",
+   "matched_parts": [
+    "OEM Headlights (clear)"
+   ],
+   "score": 30.0
+  },
+  {
+   "make": "Hyundai",
+   "model": "Accent",
+   "year_band": "2000-2004",
+   "vehicle_count": 49,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 29.4
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Trax",
+   "year_band": "2015-2019",
+   "vehicle_count": 29,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 29.0
+  },
+  {
+   "make": "Ford",
+   "model": "C-Max",
+   "year_band": "2010-2014",
+   "vehicle_count": 29,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 29.0
+  },
+  {
+   "make": "Ford",
+   "model": "Police Interceptor Utility",
+   "year_band": "2015-2019",
+   "vehicle_count": 29,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 29.0
+  },
+  {
+   "make": "GMC",
+   "model": "Savana",
+   "year_band": "2005-2009",
+   "vehicle_count": 29,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 29.0
+  },
+  {
+   "make": "Infiniti",
+   "model": "Q50",
+   "year_band": "2015-2019",
+   "vehicle_count": 29,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 29.0
+  },
+  {
+   "make": "Nissan",
+   "model": "D21",
+   "year_band": "1990-1994",
+   "vehicle_count": 29,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 29.0
+  },
+  {
+   "make": "Lexus",
+   "model": "ES 300",
+   "year_band": "1995-1999",
+   "vehicle_count": 48,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 28.8
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Malibu",
+   "year_band": "1995-1999",
+   "vehicle_count": 47,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 28.2
+  },
+  {
+   "make": "Ford",
+   "model": "Escort",
+   "year_band": "2000-2004",
+   "vehicle_count": 28,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 28.0
+  },
+  {
+   "make": "Honda",
+   "model": "Accord",
+   "year_band": "pre-1990",
+   "vehicle_count": 28,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 28.0
+  },
+  {
+   "make": "Kia",
+   "model": "Borrego",
+   "year_band": "2005-2009",
+   "vehicle_count": 28,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 28.0
+  },
+  {
+   "make": "Land Rover",
+   "model": "LR2",
+   "year_band": "2005-2009",
+   "vehicle_count": 28,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 28.0
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "Clk320",
+   "year_band": "2000-2004",
+   "vehicle_count": 28,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 28.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Classic",
+   "year_band": "2000-2004",
+   "vehicle_count": 27,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 27.0
+  },
+  {
+   "make": "Ford",
+   "model": "Thunderbird",
+   "year_band": "1995-1999",
+   "vehicle_count": 27,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 27.0
+  },
+  {
+   "make": "Jaguar",
+   "model": "XF",
+   "year_band": "2010-2014",
+   "vehicle_count": 27,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 27.0
+  },
+  {
+   "make": "Lincoln",
+   "model": "Zephyr",
+   "year_band": "2005-2009",
+   "vehicle_count": 27,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 27.0
+  },
+  {
+   "make": "Mazda",
+   "model": "B-Series",
+   "year_band": "1990-1994",
+   "vehicle_count": 27,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 27.0
+  },
+  {
+   "make": "Mazda",
+   "model": "MPV",
+   "year_band": "2005-2009",
+   "vehicle_count": 27,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 27.0
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "S500",
+   "year_band": "2000-2004",
+   "vehicle_count": 27,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 27.0
+  },
+  {
+   "make": "Mercury",
+   "model": "Villager",
+   "year_band": "1995-1999",
+   "vehicle_count": 27,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 27.0
+  },
+  {
+   "make": "Saturn",
+   "model": "Astra",
+   "year_band": "2005-2009",
+   "vehicle_count": 27,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 27.0
+  },
+  {
+   "make": "Toyota",
+   "model": "Camry",
+   "year_band": "2015-2019",
+   "vehicle_count": 45,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "BSM Side Mirror (heated, power fold)",
+    "Headlights (clear, non-hazed)",
+    "OEM LED Headlights",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 27.0
+  },
+  {
+   "make": "Fiat",
+   "model": "500L",
+   "year_band": "2010-2014",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Ford",
+   "model": "Escort",
+   "year_band": "1990-1994",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Honda",
+   "model": "Civic",
+   "year_band": "pre-1990",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Infiniti",
+   "model": "M",
+   "year_band": "2005-2009",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Lincoln",
+   "model": "Continental",
+   "year_band": "1995-1999",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "S430",
+   "year_band": "2000-2004",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Mercury",
+   "model": "Cougar",
+   "year_band": "1995-1999",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "year_band": "2000-2004",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Oldsmobile",
+   "model": "Cutlass Ciera",
+   "year_band": "1990-1994",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Oldsmobile",
+   "model": "Intrigue",
+   "year_band": "1995-1999",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Subaru",
+   "model": "Xv Crosstrek",
+   "year_band": "2010-2014",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Suzuki",
+   "model": "Grand Vitara",
+   "year_band": "2000-2004",
+   "vehicle_count": 26,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 26.0
+  },
+  {
+   "make": "Buick",
+   "model": "Regal",
+   "year_band": "1995-1999",
+   "vehicle_count": 43,
+   "match_rate": 0.651,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)"
+   ],
+   "score": 25.8
+  },
+  {
+   "make": "Toyota",
+   "model": "RAV4",
+   "year_band": "1995-1999",
+   "vehicle_count": 43,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (power, pair)",
+    "Spare Tire Cover (hard shell)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 25.8
+  },
+  {
+   "make": "Vw",
+   "model": "Passat",
+   "year_band": "2005-2009",
+   "vehicle_count": 43,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, OEM)"
+   ],
+   "score": 25.8
+  },
+  {
+   "make": "Lexus",
+   "model": "Es330",
+   "year_band": "2005-2009",
+   "vehicle_count": 42,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 25.2
+  },
+  {
+   "make": "BMW",
+   "model": "335I",
+   "year_band": "2005-2009",
+   "vehicle_count": 25,
+   "match_rate": 1.0,
+   "gap_kind": "thin-enthusiast",
+   "enthusiast": "E30/E36/E46 3-Series",
+   "matched_parts": [
+    "Harman Kardon Amp + Speakers",
+    "Sport Seats (pair)",
+    "iDrive / Navigation Head Unit"
+   ],
+   "score": 25.0
+  },
+  {
+   "make": "Cadillac",
+   "model": "Eldorado",
+   "year_band": "2000-2004",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Ford",
+   "model": "Contour",
+   "year_band": "1995-1999",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Geo",
+   "model": "Prizm",
+   "year_band": "1990-1994",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Infiniti",
+   "model": "EX35",
+   "year_band": "2005-2009",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Infiniti",
+   "model": "FX",
+   "year_band": "2005-2009",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Jaguar",
+   "model": "S-Type",
+   "year_band": "2005-2009",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Land Rover",
+   "model": "LR4",
+   "year_band": "2010-2014",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Lincoln",
+   "model": "MKS",
+   "year_band": "2005-2009",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Oldsmobile",
+   "model": "Intrigue",
+   "year_band": "2000-2004",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Pontiac",
+   "model": "Sunfire",
+   "year_band": "2005-2009",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Smart",
+   "model": "Fortwo",
+   "year_band": "2005-2009",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Volvo",
+   "model": "S40",
+   "year_band": "2000-2004",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Volvo",
+   "model": "S70",
+   "year_band": "1995-1999",
+   "vehicle_count": 25,
+   "match_rate": 0.0,
+   "gap_kind": "zero-match",
+   "enthusiast": null,
+   "matched_parts": [],
+   "score": 25.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Aveo5",
+   "year_band": "2005-2009",
+   "vehicle_count": 40,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 24.0
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Aveo",
+   "year_band": "2005-2009",
+   "vehicle_count": 39,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Window Regulator + Motor (front)"
+   ],
+   "score": 23.4
+  },
+  {
+   "make": "Buick",
+   "model": "Lucerne",
+   "year_band": "2010-2014",
+   "vehicle_count": 37,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (heated, pair)"
+   ],
+   "score": 22.2
+  },
+  {
+   "make": "Kia",
+   "model": "Sportage",
+   "year_band": "2015-2019",
+   "vehicle_count": 37,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "OEM LED Headlights",
+    "Side Mirrors (heated, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 22.2
+  },
+  {
+   "make": "Subaru",
+   "model": "Legacy",
+   "year_band": "2000-2004",
+   "vehicle_count": 36,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 21.6
+  },
+  {
+   "make": "Kia",
+   "model": "Spectra",
+   "year_band": "2000-2004",
+   "vehicle_count": 35,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear pair)"
+   ],
+   "score": 21.0
+  },
+  {
+   "make": "Lexus",
+   "model": "Es 300",
+   "year_band": "1995-1999",
+   "vehicle_count": 35,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 21.0
+  },
+  {
+   "make": "Nissan",
+   "model": "Altima Hybrid",
+   "year_band": "2005-2009",
+   "vehicle_count": 35,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 21.0
+  },
+  {
+   "make": "Volvo",
+   "model": "S80",
+   "year_band": "2000-2004",
+   "vehicle_count": 35,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Tail Lights (pair, uncracked)",
+    "Xenon/HID Headlights (pair)"
+   ],
+   "score": 21.0
+  },
+  {
+   "make": "Mercury",
+   "model": "Sable",
+   "year_band": "2005-2009",
+   "vehicle_count": 34,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 20.4
+  },
+  {
+   "make": "Toyota",
+   "model": "Rav4",
+   "year_band": "1995-1999",
+   "vehicle_count": 34,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Side Mirrors (power, pair)",
+    "Spare Tire Cover (hard shell)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 20.4
+  },
+  {
+   "make": "Buick",
+   "model": "Century",
+   "year_band": "2005-2009",
+   "vehicle_count": 33,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 19.8
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Malibu Maxx",
+   "year_band": "2005-2009",
+   "vehicle_count": 32,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 19.2
+  },
+  {
+   "make": "Ford",
+   "model": "Taurus X",
+   "year_band": "2005-2009",
+   "vehicle_count": 32,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 19.2
+  },
+  {
+   "make": "Kia",
+   "model": "Rio",
+   "year_band": "2010-2014",
+   "vehicle_count": 32,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)"
+   ],
+   "score": 19.2
+  },
+  {
+   "make": "Lexus",
+   "model": "Es330",
+   "year_band": "2000-2004",
+   "vehicle_count": 32,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)"
+   ],
+   "score": 19.2
+  },
+  {
+   "make": "Pontiac",
+   "model": "Grand Am",
+   "year_band": "1995-1999",
+   "vehicle_count": 32,
+   "match_rate": 0.875,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 19.2
+  },
+  {
+   "make": "Vw",
+   "model": "CC",
+   "year_band": "2010-2014",
+   "vehicle_count": 31,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Tail Lights (pair, uncracked)",
+    "Xenon/LED Headlights (pair)"
+   ],
+   "score": 18.6
+  },
+  {
+   "make": "Kia",
+   "model": "Rio",
+   "year_band": "2005-2009",
+   "vehicle_count": 30,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)"
+   ],
+   "score": 18.0
+  },
+  {
+   "make": "Mercury",
+   "model": "Sable",
+   "year_band": "1995-1999",
+   "vehicle_count": 30,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 18.0
+  },
+  {
+   "make": "Vw",
+   "model": "Passat",
+   "year_band": "2000-2004",
+   "vehicle_count": 30,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, OEM)"
+   ],
+   "score": 18.0
+  },
+  {
+   "make": "Mercury",
+   "model": "Milan",
+   "year_band": "2010-2014",
+   "vehicle_count": 29,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 17.4
+  },
+  {
+   "make": "Ford",
+   "model": "Transit Connect",
+   "year_band": "2015-2019",
+   "vehicle_count": 27,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Side Mirrors (power, pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 16.2
+  },
+  {
+   "make": "Kia",
+   "model": "Spectra5",
+   "year_band": "2005-2009",
+   "vehicle_count": 27,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Alternator (spin-test at yard)",
+    "Headlights (clear pair)"
+   ],
+   "score": 16.2
+  },
+  {
+   "make": "Buick",
+   "model": "Century",
+   "year_band": "1990-1994",
+   "vehicle_count": 26,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 15.6
+  },
+  {
+   "make": "Mercury",
+   "model": "Mountaineer",
+   "year_band": "1995-1999",
+   "vehicle_count": 25,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, non-hazed)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 15.0
+  },
+  {
+   "make": "Scion",
+   "model": "xB",
+   "year_band": "2010-2014",
+   "vehicle_count": 25,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear pair)",
+    "Tail Lights (pair, uncracked)"
+   ],
+   "score": 15.0
+  },
+  {
+   "make": "Volkswagen",
+   "model": "Passat Wagon",
+   "year_band": "2000-2004",
+   "vehicle_count": 25,
+   "match_rate": 1.0,
+   "gap_kind": "generic-only",
+   "enthusiast": null,
+   "matched_parts": [
+    "Headlights (clear, OEM)"
+   ],
+   "score": 15.0
+  }
+ ],
+ "mined": [
+  {
+   "group": {
+    "make": "Nissan",
+    "model": "Altima",
+    "year_band": "2005-2009",
+    "vehicle_count": 1714,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Tail Lights (pair, uncracked)"
+    ],
+    "score": 1028.4
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "2007 Nissan Altima seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "2007 Nissan Altima tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "2007 Nissan Altima headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "2007 Nissan Altima grille"
+    }
+   },
+   "skeleton": {
+    "key": "altima",
+    "display": "Nissan Altima",
+    "make": "Nissan",
+    "year_range": [
+     2005,
+     2009
+    ],
+    "top_parts": []
+   }
+  },
+  {
+   "group": {
+    "make": "Toyota",
+    "model": "Camry",
+    "year_band": "2005-2009",
+    "vehicle_count": 1554,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Alternator (spin-test at yard)",
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Tail Lights (pair, uncracked)"
+    ],
+    "score": 932.4
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "2007 Toyota Camry seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "2007 Toyota Camry tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "2007 Toyota Camry headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "2007 Toyota Camry grille"
+    }
+   },
+   "skeleton": {
+    "key": "camry",
+    "display": "Toyota Camry",
+    "make": "Toyota",
+    "year_range": [
+     2005,
+     2009
+    ],
+    "top_parts": []
+   }
+  },
+  {
+   "group": {
+    "make": "Toyota",
+    "model": "Camry",
+    "year_band": "2000-2004",
+    "vehicle_count": 1505,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Alternator (spin-test at yard)",
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Tail Lights (pair, uncracked)"
+    ],
+    "score": 903.0
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "2002 Toyota Camry seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "2002 Toyota Camry tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "2002 Toyota Camry headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "2002 Toyota Camry grille"
+    }
+   },
+   "skeleton": {
+    "key": "camry",
+    "display": "Toyota Camry",
+    "make": "Toyota",
+    "year_range": [
+     2000,
+     2004
+    ],
+    "top_parts": []
+   }
+  },
+  {
+   "group": {
+    "make": "Toyota",
+    "model": "Camry",
+    "year_band": "1995-1999",
+    "vehicle_count": 741,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Alternator (spin-test at yard)",
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Tail Lights (pair, uncracked)"
+    ],
+    "score": 444.6
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "1997 Toyota Camry seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "1997 Toyota Camry tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "1997 Toyota Camry headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "1997 Toyota Camry grille"
+    }
+   },
+   "skeleton": {
+    "key": "camry",
+    "display": "Toyota Camry",
+    "make": "Toyota",
+    "year_range": [
+     1995,
+     1999
+    ],
+    "top_parts": []
+   }
+  },
+  {
+   "group": {
+    "make": "Chevrolet",
+    "model": "Malibu",
+    "year_band": "2005-2009",
+    "vehicle_count": 686,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Tail Lights (pair, uncracked)"
+    ],
+    "score": 411.6
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "2007 Chevrolet Malibu seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "2007 Chevrolet Malibu tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "2007 Chevrolet Malibu headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "2007 Chevrolet Malibu grille"
+    }
+   },
+   "skeleton": {
+    "key": "malibu",
+    "display": "Chevrolet Malibu",
+    "make": "Chevrolet",
+    "year_range": [
+     2005,
+     2009
+    ],
+    "top_parts": []
+   }
+  },
+  {
+   "group": {
+    "make": "Ford",
+    "model": "Escape",
+    "year_band": "2005-2009",
+    "vehicle_count": 625,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Tail Lights (pair, uncracked)"
+    ],
+    "score": 375.0
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "2007 Ford Escape seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "2007 Ford Escape tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "2007 Ford Escape headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "2007 Ford Escape grille"
+    }
+   },
+   "skeleton": {
+    "key": "escape",
+    "display": "Ford Escape",
+    "make": "Ford",
+    "year_range": [
+     2005,
+     2009
+    ],
+    "top_parts": []
+   }
+  },
+  {
+   "group": {
+    "make": "Toyota",
+    "model": "Corolla",
+    "year_band": "2000-2004",
+    "vehicle_count": 625,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Tail Lights (pair, uncracked)"
+    ],
+    "score": 375.0
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "2002 Toyota Corolla seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "2002 Toyota Corolla tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "2002 Toyota Corolla headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "2002 Toyota Corolla grille"
+    }
+   },
+   "skeleton": {
+    "key": "corolla",
+    "display": "Toyota Corolla",
+    "make": "Toyota",
+    "year_range": [
+     2000,
+     2004
+    ],
+    "top_parts": []
+   }
+  },
+  {
+   "group": {
+    "make": "Nissan",
+    "model": "Versa",
+    "year_band": "2010-2014",
+    "vehicle_count": 620,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Window Regulator + Motor (front)"
+    ],
+    "score": 372.0
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "2012 Nissan Versa seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "2012 Nissan Versa tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "2012 Nissan Versa headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "2012 Nissan Versa grille"
+    }
+   },
+   "skeleton": {
+    "key": "versa",
+    "display": "Nissan Versa",
+    "make": "Nissan",
+    "year_range": [
+     2010,
+     2014
+    ],
+    "top_parts": []
+   }
+  },
+  {
+   "group": {
+    "make": "Nissan",
+    "model": "Sentra",
+    "year_band": "2005-2009",
+    "vehicle_count": 619,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Tail Lights (pair, uncracked)"
+    ],
+    "score": 371.4
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "2007 Nissan Sentra seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "2007 Nissan Sentra tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "2007 Nissan Sentra headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "2007 Nissan Sentra grille"
+    }
+   },
+   "skeleton": {
+    "key": "sentra",
+    "display": "Nissan Sentra",
+    "make": "Nissan",
+    "year_range": [
+     2005,
+     2009
+    ],
+    "top_parts": []
+   }
+  },
+  {
+   "group": {
+    "make": "Toyota",
+    "model": "Camry",
+    "year_band": "2010-2014",
+    "vehicle_count": 572,
+    "match_rate": 1.0,
+    "gap_kind": "generic-only",
+    "enthusiast": null,
+    "matched_parts": [
+     "Alternator (spin-test at yard)",
+     "BSM Side Mirror (heated, power fold)",
+     "Headlights (clear, non-hazed)",
+     "Side Mirrors (power, pair)",
+     "Tail Lights (pair, uncracked)"
+    ],
+    "score": 343.2
+   },
+   "evidence": {
+    "seats": {
+     "status": "fetch-failed",
+     "query": "2012 Toyota Camry seats"
+    },
+    "tail lights": {
+     "status": "fetch-failed",
+     "query": "2012 Toyota Camry tail lights"
+    },
+    "headlights": {
+     "status": "fetch-failed",
+     "query": "2012 Toyota Camry headlights"
+    },
+    "grille": {
+     "status": "fetch-failed",
+     "query": "2012 Toyota Camry grille"
+    }
+   },
+   "skeleton": {
+    "key": "camry",
+    "display": "Toyota Camry",
+    "make": "Toyota",
+    "year_range": [
+     2010,
+     2014
+    ],
+    "top_parts": []
+   }
+  }
+ ]
+}
