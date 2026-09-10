@@ -289,12 +289,18 @@ UNOBTANIUM_DB = {
     # Parts use optional yr_min/yr_max to restrict by generation, and
     # optional "trim" list — if present, vehicle model must contain one of
     # those strings (case-insensitive) or the part is skipped.
+    # Optional "option": True marks factory OPTIONS (tow packages, sunroofs,
+    # hardtops...) that year/model/trim can never determine and vPIC never
+    # decodes — match_vehicle() forces those to trim_status "unconfirmed"
+    # (shown as "if equipped") and they contribute $0 to ranking value.
     "4runner": {
         "display": "Toyota 4Runner",
         "make": "Toyota",
         "year_range": (1990, 2024),
         "top_parts": [
-            {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15},
+            # Factory rear e-locker was an option package, never standard (3rd-gen option;
+            # 5th-gen TRD trims are trim-gated in the gen-split entries).
+            {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15, "option": True},
             {"name": "TRD Pro Grille", "rarity": "Legendary", "low": 300, "high": 600, "cost": 40, "yr_min": 2014},
             {"name": "KDSS Sway Bar Actuators", "rarity": "Legendary", "low": 200, "high": 500, "cost": 20, "yr_min": 2003, "yr_max": 2009},
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 400, "high": 800, "cost": 60, "yr_min": 2014},
@@ -325,7 +331,10 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_min": 2018},
             {"name": "TRD Pro Grille", "rarity": "Epic", "low": 200, "high": 400, "cost": 30, "yr_min": 2014},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2007},
+            # Tow mirrors (all entries below, every truck/van line) are a towing-package
+            # option — never standard equipment, never VIN-decodable, and present on maybe a
+            # third of trucks. Option flag = honest 'if equipped'.
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2007, "option": True},
             {"name": "Tailgate (w/ camera)", "rarity": "Rare", "low": 200, "high": 450, "cost": 40, "yr_min": 2014},
             {"name": "JBL Speakers + Amp", "rarity": "Rare", "low": 150, "high": 350, "cost": 25},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20, "yr_max": 2013},
@@ -336,8 +345,10 @@ UNOBTANIUM_DB = {
         "make": "Toyota",
         "year_range": (2001, 2024),
         "top_parts": [
+            # 3rd row NOT option-flagged: standard on Sequoia (8-passenger std).
             {"name": "3rd Row Seat (complete)", "rarity": "Rare", "low": 200, "high": 450, "cost": 40},
-            {"name": "Rear Air Suspension Bags", "rarity": "Epic", "low": 150, "high": 350, "cost": 20, "yr_min": 2008},
+            # Rear load-leveling air springs were optional (std only on Platinum).
+            {"name": "Rear Air Suspension Bags", "rarity": "Epic", "low": 150, "high": 350, "cost": 20, "yr_min": 2008, "option": True},
             {"name": "Power Liftgate Motor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 2008},
         ],
     },
@@ -346,7 +357,9 @@ UNOBTANIUM_DB = {
         "make": "Toyota",
         "year_range": (2001, 2024),
         "top_parts": [
-            {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 400, "cost": 35},
+            # Highlander 3rd row was optional most years (plenty of 5-seat examples) — unlike
+            # Tahoe/Suburban/minivans where it's effectively universal.
+            {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 400, "cost": 35, "option": True},
             {"name": "Power Liftgate Motor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 2008},
         ],
     },
@@ -379,7 +392,8 @@ UNOBTANIUM_DB = {
             {"name": "Power Sliding Door Motor", "rarity": "Epic", "low": 150, "high": 350, "cost": 15},
             {"name": "Power Sliding Door Cable", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
             {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
-            {"name": "Rear Entertainment Screen", "rarity": "Rare", "low": 75, "high": 200, "cost": 15, "yr_min": 2007},
+            # Rear DVD/entertainment is a textbook option package everywhere it appears.
+            {"name": "Rear Entertainment Screen", "rarity": "Rare", "low": 75, "high": 200, "cost": 15, "yr_min": 2007, "option": True},
         ],
     },
     "prius": {
@@ -407,7 +421,8 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM Roof Rack (full)", "rarity": "Legendary", "low": 300, "high": 700, "cost": 40},
             {"name": "Rear Swing-Out Tire Carrier", "rarity": "Epic", "low": 200, "high": 450, "cost": 30},
-            {"name": "Rear Diff Locker Actuator", "rarity": "Epic", "low": 150, "high": 300, "cost": 15},
+            # Rear locker std on 6MT FJs but optional on autos — most FJs are autos.
+            {"name": "Rear Diff Locker Actuator", "rarity": "Epic", "low": 150, "high": 300, "cost": 15, "option": True},
         ],
     },
     "land cruiser": {
@@ -416,7 +431,9 @@ UNOBTANIUM_DB = {
         "year_range": (1990, 2024),
         "top_parts": [
             {"name": "AHC Height Control Pump", "rarity": "Legendary", "low": 400, "high": 900, "cost": 40, "yr_min": 1998},
-            {"name": "Factory Locker Actuators", "rarity": "Legendary", "low": 300, "high": 700, "cost": 25},
+            # Factory triple-locker pkg was a rare OPTION on US 80/100-series — most Land
+            # Cruisers don't have it.
+            {"name": "Factory Locker Actuators", "rarity": "Legendary", "low": 300, "high": 700, "cost": 25, "option": True},
             {"name": "Uncracked Dash Pad", "rarity": "Epic", "low": 150, "high": 350, "cost": 15, "yr_max": 2007},
         ],
     },
@@ -534,7 +551,8 @@ UNOBTANIUM_DB = {
         "year_range": (2003, 2024),
         "top_parts": [
             {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
-            {"name": "OEM Running Boards", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 15},
+            # Factory/dealer accessory, not standard.
+            {"name": "OEM Running Boards", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 15, "option": True},
         ],
     },
     # --- SUBARU ---
@@ -608,7 +626,8 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
             {"name": "Heated Leather Seats (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_min": 1999},
-            {"name": "Air Suspension Compressor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 2005},
+            # Quadra-Lift air is optional on most Grand Cherokee trims.
+            {"name": "Air Suspension Compressor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 2005, "option": True},
         ],
     },
     "wrangler": {
@@ -616,7 +635,9 @@ UNOBTANIUM_DB = {
         "make": "Jeep",
         "year_range": (1987, 2024),
         "top_parts": [
-            {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 400, "high": 1500, "cost": 60},
+            # Soft top was standard on every Wrangler generation — the hardtop is an option
+            # (dual-top group etc.), so it can never be assumed present.
+            {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 400, "high": 1500, "cost": 60, "option": True},
             {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
             {"name": "Rubicon Locker Actuators", "rarity": "Epic", "low": 100, "high": 275, "cost": 10, "trim": ["Rubicon"]},
         ],
@@ -627,9 +648,11 @@ UNOBTANIUM_DB = {
         "make": "Ford",
         "year_range": (1997, 2024),
         "top_parts": [
-            {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 300, "high": 700, "cost": 40, "yr_min": 2015},
+            # Power-retract boards std only on Limited/Platinum-tier trims, optional elsewhere
+            # (same for every power-board entry below).
+            {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 300, "high": 700, "cost": 40, "yr_min": 2015, "option": True},
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_min": 2015},
-            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 550, "cost": 40, "yr_min": 2004},
+            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 550, "cost": 40, "yr_min": 2004, "option": True},
             {"name": "Raptor Grille", "rarity": "Legendary", "low": 200, "high": 500, "cost": 25, "trim": ["Raptor"]},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20, "yr_max": 2014},
         ],
@@ -639,7 +662,7 @@ UNOBTANIUM_DB = {
         "make": "Ford",
         "year_range": (1997, 2024),
         "top_parts": [
-            {"name": "Power-Fold Tow Mirrors", "rarity": "Epic", "low": 250, "high": 550, "cost": 40, "yr_min": 2004},
+            {"name": "Power-Fold Tow Mirrors", "rarity": "Epic", "low": 250, "high": 550, "cost": 40, "yr_min": 2004, "option": True},
         ],
     },
     "explorer": {
@@ -647,8 +670,9 @@ UNOBTANIUM_DB = {
         "make": "Ford",
         "year_range": (1991, 2024),
         "top_parts": [
-            {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_min": 2002},
-            {"name": "Rear Air Suspension Compressor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 2006},
+            # 3rd row optional on 2002-2010 Explorers (std from 2011).
+            {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_min": 2002, "option": True},
+            {"name": "Rear Air Suspension Compressor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 2006, "option": True},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_max": 2005},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 55, "high": 150, "cost": 25, "yr_min": 2006, "yr_max": 2010},
         ],
@@ -669,9 +693,9 @@ UNOBTANIUM_DB = {
         "make": "Chevrolet",
         "year_range": (1999, 2024),
         "top_parts": [
-            {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35, "yr_min": 2014},
+            {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35, "yr_min": 2014, "option": True},
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_min": 2019},
-            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30, "yr_min": 2007},
+            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30, "yr_min": 2007, "option": True},
             {"name": "MultiPro Tailgate Steps", "rarity": "Epic", "low": 200, "high": 500, "cost": 30, "yr_min": 2019},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20, "yr_max": 2018},
         ],
@@ -682,6 +706,7 @@ UNOBTANIUM_DB = {
         "year_range": (1995, 2024),
         "top_parts": [
             {"name": "AutoRide Rear Shocks (pair)", "rarity": "Epic", "low": 150, "high": 350, "cost": 20, "yr_min": 2000},
+            # 3rd row NOT option-flagged: near-universal take rate on Tahoe/Suburban/Yukon.
             {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 35},
         ],
     },
@@ -690,6 +715,7 @@ UNOBTANIUM_DB = {
         "make": "Chevrolet",
         "year_range": (1992, 2024),
         "top_parts": [
+            # 3rd row NOT option-flagged: effectively standard on Suburban.
             {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 35},
         ],
     },
@@ -710,7 +736,7 @@ UNOBTANIUM_DB = {
         "year_range": (1994, 2024),
         "top_parts": [
             {"name": "12\" Uconnect Touchscreen", "rarity": "Epic", "low": 400, "high": 800, "cost": 50, "yr_min": 2019},
-            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2009},
+            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2009, "option": True},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 25, "yr_max": 2008},
             {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
             {"name": "Gauge Cluster", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 20, "yr_max": 2010},
@@ -798,7 +824,7 @@ UNOBTANIUM_DB = {
             {"name": "Power Sliding Door Control Module", "rarity": "Rare", "low": 100, "high": 165, "cost": 29},
             {"name": "Stow-N-Go 2nd Row Seat (each)", "rarity": "Rare", "low": 200, "high": 450, "cost": 55, "yr_min": 2005},
             {"name": "Stow-N-Go 3rd Row Seat", "rarity": "Rare", "low": 100, "high": 250, "cost": 34, "yr_min": 2005},
-            {"name": "Rear Entertainment Screen + DVD", "rarity": "Rare", "low": 75, "high": 200, "cost": 60, "yr_min": 2008},
+            {"name": "Rear Entertainment Screen + DVD", "rarity": "Rare", "low": 75, "high": 200, "cost": 60, "yr_min": 2008, "option": True},
             {"name": "Power Sliding Door Cable/Track", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 29},
             {"name": "Uconnect Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 45, "yr_min": 2011},
         ],
@@ -811,7 +837,9 @@ UNOBTANIUM_DB = {
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 250, "high": 500, "cost": 45, "yr_min": 2018},
             {"name": "Touchscreen Infotainment", "rarity": "Rare", "low": 200, "high": 450, "cost": 60, "yr_min": 2015},
             {"name": "Heads-Up Display Module", "rarity": "Epic", "low": 300, "high": 700, "cost": 60, "yr_min": 2020, "trim": ["Limited"]},
-            {"name": "Panoramic Sunroof Glass", "rarity": "Rare", "low": 150, "high": 350, "cost": 44, "yr_min": 2011},
+            # Sunroof/moonroof entries (here and below): factory option on virtually every
+            # non-luxury model, never decodable from the VIN.
+            {"name": "Panoramic Sunroof Glass", "rarity": "Rare", "low": 150, "high": 350, "cost": 44, "yr_min": 2011, "option": True},
             {"name": "Bose/Infinity Amp + Speakers", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 44},
             {"name": "Smart Cruise Radar Module", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 22, "yr_min": 2018},
             {"name": "Wireless Charging Pad Module", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 29, "yr_min": 2019},
@@ -837,7 +865,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 250, "high": 500, "cost": 45, "yr_min": 2016},
             {"name": "Bose Subwoofer + Amp", "rarity": "Rare", "low": 100, "high": 250, "cost": 35},
-            {"name": "Panoramic Sunroof Motor", "rarity": "Rare", "low": 100, "high": 220, "cost": 22, "yr_min": 2009},
+            {"name": "Panoramic Sunroof Motor", "rarity": "Rare", "low": 100, "high": 220, "cost": 22, "yr_min": 2009, "option": True},
             # A32/A33 VQ30 era (floor extended from 2000).
             {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20, "yr_max": 1999},
             {"name": "Adaptive Cruise Radar", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 22, "yr_min": 2016},
@@ -939,8 +967,9 @@ UNOBTANIUM_DB = {
         "make": "Ford",
         "year_range": (1997, 2024),
         "top_parts": [
-            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 35, "yr_min": 2007},
+            {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 35, "yr_min": 2007, "option": True},
             {"name": "SYNC 3 / Large Touchscreen", "rarity": "Rare", "low": 250, "high": 500, "cost": 50, "yr_min": 2015},
+            # 3rd row NOT option-flagged: std on Expedition since 2003, near-universal before.
             {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 40},
         ],
     },
@@ -950,7 +979,8 @@ UNOBTANIUM_DB = {
         "year_range": (1998, 2024),
         "top_parts": [
             {"name": "Uconnect 8.4\" Touchscreen", "rarity": "Rare", "low": 250, "high": 500, "cost": 50, "yr_min": 2014},
-            {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 40},
+            # Durango 3rd row genuinely optional across gens (plenty of 2-row SXTs).
+            {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 40, "option": True},
             {"name": "Tow Hitch + Wiring Harness", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 25},
         ],
     },
@@ -970,7 +1000,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "Power Sliding Door Motor", "rarity": "Rare", "low": 65, "high": 85, "cost": 47},
             {"name": "Stow-N-Go 2nd Row Seat (each)", "rarity": "Rare", "low": 200, "high": 450, "cost": 55, "yr_min": 2005},
-            {"name": "Rear Entertainment Screen + DVD", "rarity": "Rare", "low": 75, "high": 200, "cost": 60, "yr_min": 2008},
+            {"name": "Rear Entertainment Screen + DVD", "rarity": "Rare", "low": 75, "high": 200, "cost": 60, "yr_min": 2008, "option": True},
             {"name": "Uconnect Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 45, "yr_min": 2011},
         ],
     },
@@ -1011,7 +1041,9 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 28},
             {"name": "Touchscreen / UVO Head Unit", "rarity": "Uncommon", "low": 120, "high": 280, "cost": 45, "yr_min": 2014},
-            {"name": "Panoramic Sunroof Assembly", "rarity": "Rare", "low": 200, "high": 450, "cost": 44, "yr_min": 2014, "trim": ["Exclaim", "GT-Line"]},
+            # Optional even within Exclaim/GT-Line — trim gate limits availability, option
+            # flag keeps it 'if equipped'.
+            {"name": "Panoramic Sunroof Assembly", "rarity": "Rare", "low": 200, "high": 450, "cost": 44, "yr_min": 2014, "trim": ["Exclaim", "GT-Line"], "option": True},
         ],
     },
     "optima": {
@@ -1111,7 +1143,8 @@ UNOBTANIUM_DB = {
         "year_range": (1990, 2024),
         "top_parts": [
             {"name": "OEM Soft Top (clean)", "rarity": "Epic", "low": 200, "high": 500, "cost": 40},
-            {"name": "OEM Hardtop (ND)", "rarity": "Legendary", "low": 800, "high": 1800, "cost": 100, "yr_min": 2016},
+            # Removable hardtop was a dealer option/accessory, never standard.
+            {"name": "OEM Hardtop (ND)", "rarity": "Legendary", "low": 800, "high": 1800, "cost": 100, "yr_min": 2016, "option": True},
             {"name": "BBS / Club Wheels (set)", "rarity": "Epic", "low": 600, "high": 1400, "cost": 90, "trim": ["Club", "Grand Touring"]},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35, "yr_min": 2006},
         ],
@@ -1230,6 +1263,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED Headlights (pair)", "rarity": "Epic", "low": 600, "high": 1350, "cost": 68, "yr_min": 2013},
             {"name": "MMI / Virtual Cockpit", "rarity": "Epic", "low": 380, "high": 900, "cost": 48, "yr_min": 2013},
+            # S-tuned adaptive air suspension is STANDARD on the US S6 — no option flag.
             {"name": "Air Suspension Compressor", "rarity": "Legendary", "low": 380, "high": 950, "cost": 44, "yr_min": 2013},
             {"name": "B&O Advanced Audio", "rarity": "Epic", "low": 450, "high": 1050, "cost": 48, "trim": ["Prestige"]},
         ],
@@ -1241,6 +1275,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED / Matrix Headlights (pair)", "rarity": "Epic", "low": 650, "high": 1450, "cost": 72, "yr_min": 2012},
             {"name": "MMI / Dual Touchscreens", "rarity": "Epic", "low": 400, "high": 950, "cost": 50, "yr_min": 2012},
+            # Standard on US S7 — no option flag.
             {"name": "Sport Air Suspension Valve Block", "rarity": "Legendary", "low": 400, "high": 1000, "cost": 45, "yr_min": 2012},
         ],
     },
@@ -1272,7 +1307,9 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED / Matrix Headlights (pair)", "rarity": "Epic", "low": 550, "high": 1300, "cost": 70, "yr_min": 2012},
             {"name": "MMI Touch / Dual Screen Assembly", "rarity": "Epic", "low": 350, "high": 850, "cost": 48, "yr_min": 2012},
-            {"name": "Air Suspension Compressor / Valve Block", "rarity": "Legendary", "low": 300, "high": 850, "cost": 40, "yr_min": 2012},
+            # Air suspension only exists on the S6 here (standard there, never fitted to a
+            # plain A6) — listings rarely distinguish S6 from A6, so option flag.
+            {"name": "Air Suspension Compressor / Valve Block", "rarity": "Legendary", "low": 300, "high": 850, "cost": 40, "yr_min": 2012, "option": True},
             {"name": "Bang & Olufsen 3D / Advanced Sound", "rarity": "Epic", "low": 400, "high": 1000, "cost": 48, "trim": ["Prestige"]},
             {"name": "Heated / Ventilated Seats (pair)", "rarity": "Rare", "low": 400, "high": 1000, "cost": 55, "yr_min": 2012},
         ],
@@ -1294,7 +1331,8 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED / HD Matrix Headlights (pair)", "rarity": "Epic", "low": 600, "high": 1400, "cost": 72, "yr_min": 2012},
             {"name": "MMI / Pop-Up Screen + Controller", "rarity": "Epic", "low": 300, "high": 750, "cost": 45, "yr_min": 2012},
-            {"name": "Air Suspension Module", "rarity": "Legendary", "low": 350, "high": 900, "cost": 42, "yr_min": 2012},
+            # Same as A6/S6: only the S7 carries air (std there), plain A7 never.
+            {"name": "Air Suspension Module", "rarity": "Legendary", "low": 350, "high": 900, "cost": 42, "yr_min": 2012, "option": True},
             {"name": "B&O Advanced Sound", "rarity": "Epic", "low": 450, "high": 1100, "cost": 50, "trim": ["Prestige"]},
         ],
     },
@@ -1315,6 +1353,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED / Laser Headlights (pair)", "rarity": "Legendary", "low": 800, "high": 2000, "cost": 88, "yr_min": 2011},
             {"name": "Rear Seat Entertainment / Screens", "rarity": "Epic", "low": 400, "high": 1000, "cost": 35, "yr_min": 2011},
+            # Adaptive air std on every A8/S8 — no option flag.
             {"name": "Air Suspension Compressor / Struts", "rarity": "Legendary", "low": 400, "high": 1100, "cost": 45, "yr_min": 2004},
             {"name": "Bang & Olufsen Advanced Sound", "rarity": "Epic", "low": 600, "high": 1500, "cost": 55, "trim": ["L", "Prestige"]},
             {"name": "Night Vision / Thermal Camera", "rarity": "Legendary", "low": 500, "high": 1200, "cost": 40, "yr_min": 2011},
@@ -1327,7 +1366,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED Headlights (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 55, "yr_min": 2015},
             {"name": "MMI / Virtual Cockpit", "rarity": "Epic", "low": 250, "high": 600, "cost": 42, "yr_min": 2015},
-            {"name": "Panoramic Sunroof Motor", "rarity": "Rare", "low": 150, "high": 400, "cost": 28, "yr_min": 2015},
+            {"name": "Panoramic Sunroof Motor", "rarity": "Rare", "low": 150, "high": 400, "cost": 28, "yr_min": 2015, "option": True},
         ],
     },
     "audi q4": {
@@ -1370,7 +1409,8 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED Headlights (pair)", "rarity": "Epic", "low": 550, "high": 1300, "cost": 68, "yr_min": 2011},
             {"name": "MMI / Virtual Cockpit + Rear Tablets", "rarity": "Epic", "low": 350, "high": 900, "cost": 48, "yr_min": 2017},
-            {"name": "Air Suspension Compressor", "rarity": "Legendary", "low": 350, "high": 950, "cost": 42, "yr_min": 2011},
+            # Optional adaptive-chassis pkg on Q7 (std on the SQ7 entry below).
+            {"name": "Air Suspension Compressor", "rarity": "Legendary", "low": 350, "high": 950, "cost": 42, "yr_min": 2011, "option": True},
             {"name": "Third Row / Power Seat Motors", "rarity": "Rare", "low": 200, "high": 550, "cost": 32, "yr_min": 2015},
             {"name": "B&O 3D Sound", "rarity": "Epic", "low": 500, "high": 1200, "cost": 50, "trim": ["Prestige"]},
         ],
@@ -1393,7 +1433,9 @@ UNOBTANIUM_DB = {
             {"name": "OEM HD Matrix LED (pair)", "rarity": "Legendary", "low": 900, "high": 2200, "cost": 85, "yr_min": 2019},
             {"name": "MMI Touch Response / Dual Screens", "rarity": "Epic", "low": 450, "high": 1000, "cost": 52, "yr_min": 2019},
             {"name": "B&O Advanced 3D Audio", "rarity": "Epic", "low": 600, "high": 1400, "cost": 55, "trim": ["Prestige"]},
-            {"name": "Air Suspension + Roll Stabilization Module", "rarity": "Legendary", "low": 500, "high": 1300, "cost": 48, "yr_min": 2019},
+            # 2019+ Q8: air suspension is the $2,750 Adaptive Chassis Package, optional on
+            # every trim (std setup is steel + adaptive dampers).
+            {"name": "Air Suspension + Roll Stabilization Module", "rarity": "Legendary", "low": 500, "high": 1300, "cost": 48, "yr_min": 2019, "option": True},
         ],
     },
     "audi rs q8": {
@@ -1493,7 +1535,7 @@ UNOBTANIUM_DB = {
         "year_range": (2004, 2024),
         "top_parts": [
             {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 400, "high": 950, "cost": 60, "yr_min": 2011},
-            {"name": "Panoramic Sunroof Motor + Tracks", "rarity": "Rare", "low": 150, "high": 400, "cost": 28, "yr_min": 2011},
+            {"name": "Panoramic Sunroof Motor + Tracks", "rarity": "Rare", "low": 150, "high": 400, "cost": 28, "yr_min": 2011, "option": True},
             {"name": "iDrive / CIC / NBT Navigation Unit", "rarity": "Epic", "low": 220, "high": 580, "cost": 45, "yr_min": 2007},
             {"name": "Harman Kardon Amp + Speakers", "rarity": "Rare", "low": 140, "high": 380, "cost": 32, "yr_min": 2007},
             {"name": "Transfer Case Actuator (common failure)", "rarity": "Epic", "low": 200, "high": 500, "cost": 25, "yr_min": 2004},
@@ -1525,7 +1567,9 @@ UNOBTANIUM_DB = {
             {"name": "Headlight assemblies (pair, G05+ LED / laser)", "rarity": "Epic", "low": 420, "high": 1100, "cost": 65, "yr_min": 2019},
             {"name": "Air Suspension Compressor / Valve Block", "rarity": "Legendary", "low": 250, "high": 700, "cost": 35, "yr_min": 2007},
             {"name": "iDrive / Navigation (CIC/NBT)", "rarity": "Epic", "low": 220, "high": 600, "cost": 45, "yr_min": 2007},
-            {"name": "Third Row / Power Seat Motors (if equipped)", "rarity": "Rare", "low": 150, "high": 450, "cost": 30, "yr_min": 2014},
+            # X5 3rd row is a genuine (rare) option — old '(if equipped)' name suffix
+            # normalized to the option flag.
+            {"name": "Third Row / Power Seat Motors", "rarity": "Rare", "low": 150, "high": 450, "cost": 30, "yr_min": 2014, "option": True},
             {"name": "Harman Kardon / Logic7 Amp + Speakers", "rarity": "Rare", "low": 150, "high": 420, "cost": 35, "yr_min": 2004},
             {"name": "Transfer Case / XDrive Actuator", "rarity": "Epic", "low": 180, "high": 480, "cost": 28, "yr_min": 2004},
         ],
@@ -1628,7 +1672,9 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 55, "yr_min": 2009},
             {"name": "iDrive / Navigation (E89/G29)", "rarity": "Epic", "low": 200, "high": 550, "cost": 40, "yr_min": 2009},
-            {"name": "Retractable Hardtop Motor / Hydraulics", "rarity": "Legendary", "low": 500, "high": 1400, "cost": 60, "yr_min": 2006},
+            # Retractable hardtop = E89 (2009+) only, where it's standard; 2006-08 E85
+            # roadsters were soft-top (year fix, no option flag needed).
+            {"name": "Retractable Hardtop Motor / Hydraulics", "rarity": "Legendary", "low": 500, "high": 1400, "cost": 60, "yr_min": 2009},
             {"name": "Harman Kardon Audio", "rarity": "Rare", "low": 150, "high": 400, "cost": 32, "yr_min": 2006},
         ],
     },
@@ -1780,7 +1826,7 @@ UNOBTANIUM_DB = {
             {"name": "GT-S Seats (pair)", "rarity": "Epic", "low": 200, "high": 450, "cost": 40, "yr_min": 2000},
             {"name": "TRD/Action Package Body Pieces", "rarity": "Epic", "low": 150, "high": 400, "cost": 25, "yr_min": 2000},
             {"name": "Pop-Up Headlight Assemblies (pair)", "rarity": "Epic", "low": 150, "high": 350, "cost": 25, "yr_max": 1993},
-            {"name": "Sunroof Assembly (complete)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
+            {"name": "Sunroof Assembly (complete)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20, "option": True},
             {"name": "Rear Spoiler", "rarity": "Rare", "low": 75, "high": 200, "cost": 15},
         ],
     },
@@ -1812,7 +1858,8 @@ UNOBTANIUM_DB = {
         "year_range": (1991, 1997),
         "top_parts": [
             {"name": "Supercharger (S/C models)", "rarity": "Legendary", "low": 200, "high": 500, "cost": 30, "yr_min": 1994},
-            {"name": "Middle Captain Chairs (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 40},
+            # Captain chairs were an LE-package option.
+            {"name": "Middle Captain Chairs (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 40, "option": True},
             {"name": "Ice Maker / Cooler Console", "rarity": "Epic", "low": 100, "high": 250, "cost": 10},
             {"name": "AWD (All-Trac) Driveline Components", "rarity": "Rare", "low": 80, "high": 250, "cost": 30},
         ],
@@ -2019,7 +2066,7 @@ UNOBTANIUM_DB = {
             {"name": "4G63T Turbo Drivetrain Parts (1G/2G DSM)", "rarity": "Legendary", "low": 200, "high": 600, "cost": 40, "yr_max": 1999},
             {"name": "AWD Rear Diff + Driveshaft (GSX)", "rarity": "Legendary", "low": 200, "high": 500, "cost": 60, "yr_max": 1999},
             {"name": "OEM Seats (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 40},
-            {"name": "Sunroof / Spoiler", "rarity": "Rare", "low": 60, "high": 175, "cost": 15},
+            {"name": "Sunroof / Spoiler", "rarity": "Rare", "low": 60, "high": 175, "cost": 15, "option": True},
         ],
     },
     "lancer evolution": {
@@ -2045,7 +2092,8 @@ UNOBTANIUM_DB = {
         "make": "Mitsubishi",
         "year_range": (1989, 2006),
         "top_parts": [
-            {"name": "Rear Diff Locker Components (Gen2/2.5)", "rarity": "Legendary", "low": 200, "high": 500, "cost": 30, "yr_max": 2000},
+            # Factory rear locker was an option on Gen2/2.5 Montero.
+            {"name": "Rear Diff Locker Components (Gen2/2.5)", "rarity": "Legendary", "low": 200, "high": 500, "cost": 30, "yr_max": 2000, "option": True},
             {"name": "Super Select Transfer Case Shifter/Motor", "rarity": "Epic", "low": 100, "high": 300, "cost": 20},
             {"name": "OEM Roof Rack", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
             {"name": "Inclinometer Gauge Pod", "rarity": "Epic", "low": 80, "high": 200, "cost": 8},
@@ -2100,6 +2148,7 @@ UNOBTANIUM_DB = {
             {"name": "H22 Intake / Accessories", "rarity": "Epic", "low": 100, "high": 300, "cost": 20, "yr_min": 1992},
             {"name": "OEM Seats (pair)", "rarity": "Epic", "low": 150, "high": 400, "cost": 40},
             {"name": "5MT Shifter / Pedal Assembly", "rarity": "Rare", "low": 80, "high": 200, "cost": 10},
+            # NOT option-flagged: power moonroof was standard on nearly every US Prelude.
             {"name": "Sunroof Assembly", "rarity": "Rare", "low": 60, "high": 175, "cost": 20},
         ],
     },
@@ -2142,7 +2191,7 @@ UNOBTANIUM_DB = {
             {"name": "Tailgate (straight)", "rarity": "Epic", "low": 100, "high": 300, "cost": 30},
             {"name": "Front Grille + Bezels (chrome)", "rarity": "Rare", "low": 80, "high": 250, "cost": 15},
             {"name": "Bench Seat (60/40, uncracked)", "rarity": "Rare", "low": 100, "high": 300, "cost": 25},
-            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 60, "high": 150, "cost": 15},
+            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 60, "high": 150, "cost": 15, "option": True},
             {"name": "Interior Trim / Dash Pieces (clean)", "rarity": "Rare", "low": 50, "high": 175, "cost": 10},
         ],
     },
@@ -2242,7 +2291,7 @@ UNOBTANIUM_DB = {
         "year_range": (1999, 2024),
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 250, "high": 600, "cost": 50, "yr_min": 2016},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2014},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2014, "option": True},
             {"name": "Tailgate (w/ camera)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "yr_min": 2014},
             {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
             {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
@@ -2295,7 +2344,7 @@ UNOBTANIUM_DB = {
         "year_range": (1980, 2024),
         "top_parts": [
             {"name": "7.3L Powerstroke Parts (turbo, HPOP — verify engine)", "rarity": "Legendary", "low": 250, "high": 700, "cost": 50, "yr_min": 1994, "yr_max": 2003},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2008},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2008, "option": True},
             {"name": "Tailgate (w/ step)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "yr_min": 2008},
             {"name": "Crew Cab Rear Bench", "rarity": "Uncommon", "low": 80, "high": 225, "cost": 25},
         ],
@@ -2306,7 +2355,7 @@ UNOBTANIUM_DB = {
         "year_range": (1980, 2024),
         "top_parts": [
             {"name": "7.3L Powerstroke Parts (turbo, HPOP — verify engine)", "rarity": "Legendary", "low": 250, "high": 700, "cost": 50, "yr_min": 1994, "yr_max": 2003},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2008},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2008, "option": True},
             {"name": "Dually Fenders / Bed Parts", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
         ],
     },
@@ -2356,7 +2405,7 @@ UNOBTANIUM_DB = {
         "year_range": (1994, 2024),
         "top_parts": [
             {"name": "Cummins Parts (injectors, turbo — verify engine)", "rarity": "Legendary", "low": 250, "high": 700, "cost": 50},
-            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_min": 2010},
+            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_min": 2010, "option": True},
             {"name": "Tailgate (straight)", "rarity": "Rare", "low": 120, "high": 300, "cost": 40},
         ],
     },
@@ -2443,7 +2492,9 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "Transfer Case (crawler gold)", "rarity": "Legendary", "low": 200, "high": 500, "cost": 50},
             {"name": "Axles (front/rear)", "rarity": "Epic", "low": 150, "high": 400, "cost": 60},
-            {"name": "Hardtop / Doors", "rarity": "Epic", "low": 150, "high": 450, "cost": 30},
+            # Samurai sold both soft-top and tin-top — hardtop presence is a coin flip and not
+            # decodable (same for Sidekick/Tracker below).
+            {"name": "Hardtop / Doors", "rarity": "Epic", "low": 150, "high": 450, "cost": 30, "option": True},
         ],
     },
     "sidekick": {
@@ -2452,7 +2503,7 @@ UNOBTANIUM_DB = {
         "year_range": (1989, 1998),
         "top_parts": [
             {"name": "Transfer Case + 4x4 Parts", "rarity": "Epic", "low": 100, "high": 300, "cost": 40},
-            {"name": "Hardtop / Soft Top Frame", "rarity": "Rare", "low": 80, "high": 250, "cost": 25},
+            {"name": "Hardtop / Soft Top Frame", "rarity": "Rare", "low": 80, "high": 250, "cost": 25, "option": True},
         ],
     },
     "tracker": {
@@ -2461,7 +2512,7 @@ UNOBTANIUM_DB = {
         "year_range": (1989, 2004),
         "top_parts": [
             {"name": "Transfer Case + 4x4 Parts", "rarity": "Epic", "low": 100, "high": 300, "cost": 40},
-            {"name": "Hardtop / Soft Top Frame", "rarity": "Rare", "low": 80, "high": 250, "cost": 25},
+            {"name": "Hardtop / Soft Top Frame", "rarity": "Rare", "low": 80, "high": 250, "cost": 25, "option": True},
         ],
     },
     "trooper": {
@@ -2595,7 +2646,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "Supercharger (R53 Cooper S — verify)", "rarity": "Legendary", "low": 250, "high": 600, "cost": 40, "yr_max": 2006},
             {"name": "Xenon Headlights", "rarity": "Rare", "low": 120, "high": 300, "cost": 25},
-            {"name": "Panoramic Sunroof Parts", "rarity": "Rare", "low": 80, "high": 225, "cost": 20},
+            {"name": "Panoramic Sunroof Parts", "rarity": "Rare", "low": 80, "high": 225, "cost": 20, "option": True},
         ],
     },
     "discovery": {
@@ -2613,8 +2664,10 @@ UNOBTANIUM_DB = {
         "make": "Land Rover",
         "year_range": (2005, 2009),
         "top_parts": [
+            # NOT option-flagged: air suspension std on nearly all LR3s (coil base V6 rare).
             {"name": "Air Suspension Compressor", "rarity": "Rare", "low": 100, "high": 250, "cost": 20},
-            {"name": "Rear Locking Diff (if equipped)", "rarity": "Epic", "low": 150, "high": 400, "cost": 50},
+            # Optional rear e-diff — '(if equipped)' name suffix normalized to the flag.
+            {"name": "Rear Locking Diff", "rarity": "Epic", "low": 150, "high": 400, "cost": 50, "option": True},
         ],
     },
     "range rover": {
@@ -2622,6 +2675,7 @@ UNOBTANIUM_DB = {
         "make": "Land Rover",
         "year_range": (1995, 2020),
         "top_parts": [
+            # NOT option-flagged: air suspension is standard on Range Rover.
             {"name": "Air Suspension Compressor + Struts", "rarity": "Rare", "low": 120, "high": 350, "cost": 25},
             {"name": "OEM Wheels (set)", "rarity": "Rare", "low": 200, "high": 500, "cost": 80},
             {"name": "Front Seats (leather, heated/cooled)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
@@ -2664,7 +2718,9 @@ UNOBTANIUM_DB = {
             {"name": "Brembo Calipers (set, Track/R-Spec)", "rarity": "Epic", "low": 250, "high": 600, "cost": 55, "trim": ["Track", "R-Spec", "Ultimate"]},
             {"name": "Turbo + 2.0T Parts", "rarity": "Epic", "low": 150, "high": 400, "cost": 30},
             {"name": "OEM Seats (pair)", "rarity": "Rare", "low": 120, "high": 300, "cost": 40},
-            {"name": "Rear LSD Diff (if equipped)", "rarity": "Epic", "low": 150, "high": 400, "cost": 50},
+            # LSD std only on Track/R-Spec/Ultimate but listings rarely say — '(if equipped)'
+            # name suffix normalized to the option flag.
+            {"name": "Rear LSD Diff", "rarity": "Epic", "low": 150, "high": 400, "cost": 50, "option": True},
         ],
     },
     "tiburon": {
@@ -2725,7 +2781,7 @@ UNOBTANIUM_DB = {
         "make": "Ford",
         "year_range": (1992, 2014),
         "top_parts": [
-            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20},
+            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20, "option": True},
             {"name": "Bench Seats (rear rows)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 25},
             {"name": "7.3L Powerstroke Parts (verify engine)", "rarity": "Epic", "low": 200, "high": 600, "cost": 50, "yr_max": 2003},
         ],
@@ -2812,11 +2868,11 @@ _extend_entry("rav4", parts=[
     {"name": "Spare Tire Cover (hard shell)", "rarity": "Uncommon", "low": 30, "high": 90, "cost": 10, "yr_max": 2005},
 ])
 _extend_entry("tahoe", parts=[
-    {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+    {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},
     {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
 ])
 _extend_entry("suburban", parts=[
-    {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+    {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},
     {"name": "Rear Barn Door Glass + Hardware", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20, "yr_max": 2006},
 ])
 # Evergreen commuter parts for high-volume entries whose old years matched thin
@@ -2858,7 +2914,7 @@ UNOBTANIUM_DB.update({
     "titan": {
         "display": "Nissan Titan", "make": "Nissan", "year_range": (2004, 2024),
         "top_parts": [
-            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 220, "cost": 25},
+            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 220, "cost": 25, "option": True},
             {"name": "Tailgate (straight)", "rarity": "Uncommon", "low": 100, "high": 280, "cost": 30},
             {"name": "Rockford Fosgate Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
         ],
@@ -2871,7 +2927,7 @@ UNOBTANIUM_DB.update({
         "top_parts": [
             {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35},
             {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15},
-            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 70, "high": 180, "cost": 25},
+            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 70, "high": 180, "cost": 25, "option": True},
         ],
     },
     "quest": {
@@ -2888,7 +2944,7 @@ UNOBTANIUM_DB.update({
             {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35},
             {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15},
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 450, "cost": 40, "yr_min": 2018},
-            {"name": "Rear Entertainment Screen", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 15},
+            {"name": "Rear Entertainment Screen", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 15, "option": True},
         ],
     },
     "acadia": {
@@ -2912,7 +2968,7 @@ UNOBTANIUM_DB.update({
         "top_parts": [
             {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 20},
             {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
-            {"name": "Sunroof Motor + Glass", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Sunroof Motor + Glass", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20, "option": True},
         ],
     },
     "hhr": {
@@ -2934,7 +2990,7 @@ UNOBTANIUM_DB.update({
     "express": {
         "display": "Chevrolet Express", "make": "Chevrolet", "year_range": (1996, 2024),
         "top_parts": [
-            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20, "option": True},
             {"name": "Rear Barn Door Glass (pair)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 20},
             {"name": "Bench Seats (rear rows)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 25},
         ],
@@ -3023,7 +3079,8 @@ UNOBTANIUM_DB.update({
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 700, "cost": 60, "yr_min": 2015},
             {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 320, "cost": 35},
-            {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 40, "yr_min": 2007},
+            # Power-retract steps optional on most Escalade years.
+            {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 40, "yr_min": 2007, "option": True},
             {"name": "Bose/AKG Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 180, "cost": 25},
         ],
     },
@@ -3032,7 +3089,9 @@ UNOBTANIUM_DB.update({
         "top_parts": [
             {"name": "GXP Front Fascia + Spoiler", "rarity": "Rare", "low": 80, "high": 220, "cost": 25, "trim": ["GXP", "GTP"]},
             {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
-            {"name": "Hardtop-Convertible Roof Motor", "rarity": "Rare", "low": 80, "high": 220, "cost": 25},
+            # Convertible body style only — body style isn't decodable here and most G6s are
+            # coupes/sedans.
+            {"name": "Hardtop-Convertible Roof Motor", "rarity": "Rare", "low": 80, "high": 220, "cost": 25, "option": True},
         ],
     },
     "grand prix": {
@@ -3055,7 +3114,8 @@ UNOBTANIUM_DB.update({
         "display": "Dodge Journey", "make": "Dodge", "year_range": (2009, 2020),
         "top_parts": [
             {"name": "Uconnect Touchscreen Head Unit", "rarity": "Uncommon", "low": 70, "high": 180, "cost": 40},
-            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 100, "high": 260, "cost": 30},
+            # Journey 3rd row optional (5-seat versions very common).
+            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 100, "high": 260, "cost": 30, "option": True},
             {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
         ],
     },
@@ -3063,7 +3123,7 @@ UNOBTANIUM_DB.update({
         "display": "Dodge Dakota", "make": "Dodge", "year_range": (1987, 2011),
         "top_parts": [
             {"name": "Tailgate (straight)", "rarity": "Uncommon", "low": 80, "high": 220, "cost": 30},
-            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20, "option": True},
             {"name": "Manual Shifter Assembly", "rarity": "Rare", "low": 40, "high": 120, "cost": 15, "manual": True},
             {"name": "R/T Badging + Trim", "rarity": "Rare", "low": 50, "high": 150, "cost": 12, "trim": ["R/T"]},
         ],
@@ -3114,7 +3174,7 @@ UNOBTANIUM_DB.update({
             {"name": "SYNC 3 Touchscreen + APIM", "rarity": "Rare", "low": 100, "high": 260, "cost": 40, "yr_min": 2016},
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 180, "high": 420, "cost": 40, "yr_min": 2015},
             {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15},
-            {"name": "Panoramic Sunroof Glass", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30, "yr_min": 2011},
+            {"name": "Panoramic Sunroof Glass", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30, "yr_min": 2011, "option": True},
         ],
     },
     "fiesta": {
@@ -3130,7 +3190,9 @@ UNOBTANIUM_DB.update({
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 250, "high": 600, "cost": 55, "yr_min": 2015},
             {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35},
-            {"name": "Power Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 40, "yr_min": 2007},
+            # Optional on Navigator until ~2018.
+            {"name": "Power Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 40, "yr_min": 2007, "option": True},
+            # NOT option-flagged: air std on Navigator (4-corner '98-'06, rear after).
             {"name": "Air Suspension Compressor", "rarity": "Rare", "low": 80, "high": 220, "cost": 25},
         ],
     },
@@ -3139,7 +3201,8 @@ UNOBTANIUM_DB.update({
         "display": "Kia Sorento", "make": "Kia", "year_range": (2003, 2024),
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 180, "high": 420, "cost": 40, "yr_min": 2016},
-            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 100, "high": 260, "cost": 30, "yr_min": 2011},
+            # Sorento sold in 5- and 7-seat configs — 3rd row optional.
+            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 100, "high": 260, "cost": 30, "yr_min": 2011, "option": True},
             {"name": "Side Mirrors (heated, pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
         ],
     },
@@ -3327,7 +3390,7 @@ UNOBTANIUM_DB.update({
         "display": "Chevrolet Avalanche", "make": "Chevrolet", "year_range": (2002, 2013),
         "top_parts": [
             {"name": "Bed Cover Panels (set of 3)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
-            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},
             {"name": "Midgate Glass + Hardware", "rarity": "Rare", "low": 80, "high": 220, "cost": 25},
         ],
     },
@@ -3336,7 +3399,7 @@ UNOBTANIUM_DB.update({
         "top_parts": [
             {"name": "Tailgate (straight)", "rarity": "Uncommon", "low": 100, "high": 280, "cost": 30},
             {"name": "Z71/ZR2 Trim + Skid Plates", "rarity": "Rare", "low": 80, "high": 250, "cost": 25, "trim": ["Z71", "ZR2"]},
-            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20, "option": True},
         ],
     },
     "pacifica": {
@@ -3344,14 +3407,16 @@ UNOBTANIUM_DB.update({
         "top_parts": [
             {"name": "Power Sliding Door Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15, "yr_min": 2017},
             {"name": "Uconnect Touchscreen", "rarity": "Rare", "low": 100, "high": 250, "cost": 40, "yr_min": 2017},
-            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 30},
+            # Optional on the 2004-08 Pacifica crossover (5/6-seat common); std on the 2017+
+            # minivan — flag errs honest for the junkyard-age fleet.
+            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 30, "option": True},
         ],
     },
     "commander": {
         "display": "Jeep Commander", "make": "Jeep", "year_range": (2006, 2010),
         "top_parts": [
             {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 90, "high": 240, "cost": 30},
-            {"name": "Sunroof Glass (front/rear)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
+            {"name": "Sunroof Glass (front/rear)", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20, "option": True},
         ],
     },
     "aveo": {
@@ -3379,7 +3444,8 @@ UNOBTANIUM_DB.update({
         "display": "Buick Rendezvous", "make": "Buick", "year_range": (2002, 2007),
         "top_parts": [
             {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 35, "high": 90, "cost": 18},
-            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30},
+            # Optional (sold as 5- or 7-seat).
+            {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30, "option": True},
         ],
     },
 })
@@ -3450,7 +3516,7 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
     ]},
     {"label": "3rd gen", "years": (1996, 2002), "parts": [
         # Factory rear e-locker is a 3rd-gen option — previously claimed for ALL years.
-        {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15},
+        {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15, "option": True},
         {"name": "Rear Liftgate Glass + Regulator (works)", "rarity": "Epic", "low": 100, "high": 300, "cost": 30},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
         {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
@@ -3465,7 +3531,8 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
         # 4th gen ran X-REAS (not KDSS — that was a GX470/5th-gen-Trail thing);
         # band aligned with other electronic-shock pairs (AutoRide evidence).
         {"name": "X-REAS Suspension Shocks (pair)", "rarity": "Epic", "low": 150, "high": 350, "cost": 20},
-        {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35},
+        # 3rd row was a rare option on the 4th-gen 4Runner.
+        {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35, "option": True},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
         {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
         {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 175, "cost": 15},
@@ -3630,16 +3697,16 @@ _split_generations("f-150", display="Ford F-150", make="Ford",
     {"label": "11th/12th gen", "years": (2004, 2014), "parts": [
         # RAISED from 250-550: 2026-09 audit found real sold pairs at $450-1,200
         # (UNDERSTATED verdict in price_validation_report.md).
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 500, "high": 1300, "cost": 40},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 500, "high": 1300, "cost": 40, "option": True},
         # RAISED from 200-500: audited sold evidence $525-600.
         {"name": "Raptor Grille", "rarity": "Legendary", "low": 550, "high": 750, "cost": 25, "yr_min": 2010, "trim": ["Raptor"]},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
         {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
     ]},
     {"label": "13th/14th gen", "years": (2015, 2024), "parts": [
-        {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 300, "high": 700, "cost": 40},
+        {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 300, "high": 700, "cost": 40, "option": True},
         {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50},
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 500, "high": 1300, "cost": 40},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 500, "high": 1300, "cost": 40, "option": True},
         {"name": "Raptor Grille", "rarity": "Legendary", "low": 550, "high": 750, "cost": 25, "trim": ["Raptor"]},
     ]},
 ])
@@ -3647,43 +3714,43 @@ _split_generations("f-150", display="Ford F-150", make="Ford",
 _split_generations("silverado", display="Chevy Silverado", make="Chevrolet", gens=[
     {"label": "GMT800", "years": (1999, 2006), "parts": [
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
-        {"name": "Tow Mirrors (manual, pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+        {"name": "Tow Mirrors (manual, pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},
         {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
     ]},
     {"label": "GMT900", "years": (2007, 2013), "parts": [
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30, "option": True},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
         {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
     ]},
     {"label": "K2XX", "years": (2014, 2018), "parts": [
-        {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35},
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35, "option": True},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30, "option": True},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
     ]},
     {"label": "T1XX", "years": (2019, 2024), "parts": [
         {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50},
         {"name": "Multi-Flex Tailgate Steps", "rarity": "Epic", "low": 200, "high": 500, "cost": 30},
-        {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35},
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35, "option": True},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30, "option": True},
     ]},
 ])
 
 _split_generations("sierra", display="GMC Sierra (Silverado twin)", make="GMC", gens=[
     {"label": "GMT800", "years": (1999, 2006), "parts": [
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
-        {"name": "Tow Mirrors (manual, pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+        {"name": "Tow Mirrors (manual, pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},
         {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
         {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
     ]},
     {"label": "GMT900", "years": (2007, 2013), "parts": [
-        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "option": True},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
         {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
         {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
     ]},
     {"label": "K2XX", "years": (2014, 2018), "parts": [
         {"name": "OEM LED Headlights", "rarity": "Epic", "low": 250, "high": 600, "cost": 50, "yr_min": 2016},
-        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "option": True},
         {"name": "Tailgate (w/ camera)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
         {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
         {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
@@ -3691,7 +3758,7 @@ _split_generations("sierra", display="GMC Sierra (Silverado twin)", make="GMC", 
     {"label": "T1XX", "years": (2019, 2024), "parts": [
         {"name": "OEM LED Headlights", "rarity": "Epic", "low": 250, "high": 600, "cost": 50},
         {"name": "MultiPro Tailgate Steps", "rarity": "Epic", "low": 200, "high": 500, "cost": 30},
-        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "option": True},
         {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
         {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
     ]},
@@ -3709,13 +3776,13 @@ _split_generations("ram", display="Ram / Dodge Ram Truck", make="Ram", gens=[
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
     ]},
     {"label": "4th gen", "years": (2009, 2018), "parts": [
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "option": True},
         {"name": "Uconnect 8.4 Touchscreen", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 45, "yr_min": 2013},
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
     ]},
     {"label": "5th gen", "years": (2019, 2024), "parts": [
         {"name": "12\" Uconnect Touchscreen", "rarity": "Epic", "low": 400, "high": 800, "cost": 50},
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "option": True},
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
     ]},
 ])
@@ -3727,14 +3794,16 @@ _split_generations("explorer", display="Ford Explorer", make="Ford", gens=[
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
     ]},
     {"label": "3rd/4th gen", "years": (2002, 2010), "parts": [
-        {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
-        {"name": "Rear Air Suspension Compressor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 2006},
+        # Optional on 2002-2010 Explorers; std from 2011, so later gens unflagged.
+        {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "option": True},
+        {"name": "Rear Air Suspension Compressor", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 2006, "option": True},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_max": 2005},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 55, "high": 150, "cost": 25, "yr_min": 2006},
         {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
     ]},
     {"label": "5th gen", "years": (2011, 2019), "parts": [
+        # 3rd row std on 2011+ Explorer — no option flag from here on.
         {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
         {"name": "SYNC / MyFord Touch Screen", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 45},
         {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
@@ -3760,12 +3829,13 @@ _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep",
         {"name": "Heated Leather Seats (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
     ]},
     {"label": "WK2", "years": (2011, 2021), "parts": [
-        {"name": "Air Suspension Compressor (Quadra-Lift)", "rarity": "Rare", "low": 100, "high": 250, "cost": 15},
+        # Quadra-Lift optional on most WK2 trims.
+        {"name": "Air Suspension Compressor (Quadra-Lift)", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "option": True},
         {"name": "Heated Leather Seats (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
     ]},
     {"label": "WL", "years": (2022, 2024), "parts": [
-        {"name": "Air Suspension Compressor (Quadra-Lift)", "rarity": "Rare", "low": 100, "high": 250, "cost": 15},
+        {"name": "Air Suspension Compressor (Quadra-Lift)", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "option": True},
         {"name": "Heated Leather Seats (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30},
     ]},
 ])
@@ -3775,21 +3845,22 @@ _split_generations("wrangler", display="Jeep Wrangler", make="Jeep", gens=[
     # (YJ $300-900, TJ $600-1,400, JK $1,000-2,000, JL $1,200-2,800) — the old
     # single 400-1500 band understated JK/JL and overstated YJ.
     {"label": "YJ", "years": (1987, 1995), "parts": [
-        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 350, "high": 900, "cost": 60},
+        # Soft top std every Wrangler gen — hardtop is an option (all gens flagged).
+        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 350, "high": 900, "cost": 60, "option": True},
         {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
     ]},
     {"label": "TJ", "years": (1996, 2006), "parts": [
-        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 700, "high": 1600, "cost": 60},
+        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 700, "high": 1600, "cost": 60, "option": True},
         {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
         {"name": "Rubicon Locker Actuators", "rarity": "Epic", "low": 100, "high": 275, "cost": 10, "yr_min": 2003, "trim": ["Rubicon"]},
     ]},
     {"label": "JK", "years": (2007, 2017), "parts": [
-        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 1100, "high": 2400, "cost": 60},
+        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 1100, "high": 2400, "cost": 60, "option": True},
         {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
         {"name": "Rubicon Locker Actuators", "rarity": "Epic", "low": 100, "high": 275, "cost": 10, "trim": ["Rubicon"]},
     ]},
     {"label": "JL", "years": (2018, 2024), "parts": [
-        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 1400, "high": 3300, "cost": 60},
+        {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 1400, "high": 3300, "cost": 60, "option": True},
         {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
         {"name": "Rubicon Locker Actuators", "rarity": "Epic", "low": 100, "high": 275, "cost": 10, "trim": ["Rubicon"]},
         {"name": "OEM LED Headlights", "rarity": "Rare", "low": 300, "high": 600, "cost": 50, "trim": ["Sahara", "Rubicon", "High Altitude", "Moab"]},
@@ -3802,20 +3873,21 @@ _split_generations("tahoe", display="Chevy Tahoe", make="Chevrolet", gens=[
         # market (bladder-failure risk) — forum pairs move around $100.
         {"name": "AutoRide Rear Shocks (pair)", "rarity": "Epic", "low": 100, "high": 250, "cost": 20, "yr_min": 2000},
         # 3rd row arrived with the 2000 GMT800 — the old entry claimed it for 1995+.
+        # 3rd row NOT option-flagged on Tahoe — near-universal take rate.
         {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 35, "yr_min": 2000},
-        {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+        {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
     ]},
     {"label": "GMT900", "years": (2007, 2014), "parts": [
         {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 35},
         {"name": "AutoRide Rear Shocks (pair)", "rarity": "Epic", "low": 100, "high": 250, "cost": 20},
-        {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+        {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
     ]},
     {"label": "K2XX/T1XX", "years": (2015, 2024), "parts": [
         {"name": "3rd Row Seat", "rarity": "Rare", "low": 200, "high": 450, "cost": 35},
         {"name": "Power Liftgate Motor", "rarity": "Rare", "low": 80, "high": 225, "cost": 15},
-        {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+        {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},
     ]},
 ])
 
@@ -3874,11 +3946,11 @@ _split_generations("scion xb", display="Scion xB", make="Scion", gens=[
 # Twin/derivative entries lost parts to the new specificity guard — give the
 # specific entries the generic parts they genuinely share with the base model.
 _extend_entry("ram 2500", parts=[
-    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2010},
+    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2010, "option": True},
     {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
 ])
 _extend_entry("ram 3500", parts=[
-    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2010},
+    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2010, "option": True},
     {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
 ])
 _extend_entry("sentra se-r", parts=[
@@ -3950,7 +4022,8 @@ UNOBTANIUM_DB.update({
         "top_parts": [
             {"name": "Xenon/HID Headlights (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
             {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 170, "cost": 25},
-            {"name": "Running Boards (pair)", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 25},
+            # Optional accessory on the ML.
+            {"name": "Running Boards (pair)", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 25, "option": True},
             {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
         ],
     },
@@ -4005,7 +4078,8 @@ UNOBTANIUM_DB.update({
     "mountaineer": {
         "display": "Mercury Mountaineer (Explorer twin)", "make": "Mercury", "year_range": (1997, 2010),
         "top_parts": [
-            {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_min": 2002},
+            # Same optional 3rd row as the 2002-2010 Explorer it twins.
+            {"name": "3rd Row Seat", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_min": 2002, "option": True},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22},
             {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
         ],
@@ -4062,7 +4136,7 @@ UNOBTANIUM_DB.update({
         # prefers the longer "transit connect" keyword on those.
         "match": ["transit"], "year_range": (2015, 2024),
         "top_parts": [
-            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+            {"name": "Tow Mirrors (pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},
             {"name": "Bench Seats (rear rows)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 25},
             {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
         ],
@@ -4573,6 +4647,22 @@ def _kw_pattern(kw: str) -> re.Pattern:
     return pat
 
 
+# Generic tokens that would false-hint an option part from a listing title
+# (e.g. "manual" in "F-150 5-speed manual" must not confirm manual tow mirrors).
+_OPTION_HINT_STOPWORDS = {
+    "pair", "power", "fold", "oem", "full", "clean", "front", "rear", "middle",
+    "assembly", "complete", "motor", "motors", "glass", "seat", "seats", "parts",
+    "manual", "with", "set", "components",
+}
+
+
+def _option_hint_tokens(name: str) -> list[str]:
+    """Distinctive words of an option part's name ("tow", "sunroof",
+    "hardtop"...) used to spot the rare yard listing that names the option."""
+    return [t for t in re.split(r"[^a-z0-9]+", name.lower())
+            if len(t) >= 3 and t not in _OPTION_HINT_STOPWORDS]
+
+
 def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = None) -> list[dict]:
     """Match a vehicle against the unobtanium database, filtering parts by
     year range and trim requirements.  Attaches sell-channel info to each part.
@@ -4595,7 +4685,15 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
       - "unconfirmed": trim unknown/ambiguous — part listed as "if equipped"
     When a USABLE decode names a different trim (and series doesn't match
     either), the part is excluded — that's the only case where we're confident
-    the car doesn't have it. Ambiguous/empty decodes never gate parts."""
+    the car doesn't have it. Ambiguous/empty decodes never gate parts.
+
+    Parts flagged "option": True are factory options whose presence no VIN
+    decode or trim can confirm — they land "unconfirmed" even when the trim
+    is known, unless the yard listing itself names the part (rare).
+    Each match's "max_value" counts CONFIRMED parts only (trim_status of
+    None/"vin"/"listing"): an unconfirmed part still ships to the UI as
+    "if equipped" but contributes $0, so a base Focus can't outrank real
+    finds on Recaro seats it probably doesn't have."""
     model_lower = model.lower()
     make_lower = make.lower()
     matches = []
@@ -4696,6 +4794,18 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                     trim_status = trim_status or "unconfirmed"
                 else:
                     trim_status = trim_status or "unconfirmed"
+            if p.get("option"):
+                # Factory-option gate: an option package (or accessory) whose
+                # presence can't be determined from year/model/trim — and vPIC
+                # never decodes option content. This overrides trim/VIN
+                # confirmation: knowing the trim still doesn't tell you the
+                # box was ticked. Only the yard's own listing naming the part
+                # (rare — e.g. "... w/ tow mirrors") counts as confirmation.
+                hinted = any(
+                    re.search(rf"\b{re.escape(t)}\b", model_lower)
+                    for t in _option_hint_tokens(p["name"])
+                )
+                trim_status = "listing" if hinted else "unconfirmed"
             cl, ch = _resale_sold_calibrate(p["low"], p["high"], p["name"], year)
             enriched = {**p, "low": cl, "high": ch, **_lookup_sell_info(p["name"], make)}
             # Provenance: the model years this part actually fits — the
@@ -4706,7 +4816,14 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                 enriched["trim_status"] = trim_status
             filtered_parts.append(enriched)
         if filtered_parts:
-            max_val = max(p["high"] for p in filtered_parts)
+            # Ranking value counts only parts we can stand behind: ungated,
+            # VIN-confirmed, or named by the listing. "If equipped" parts
+            # still ship to the UI but contribute $0 — a match whose parts
+            # are ALL unconfirmed keeps max_value 0 (still "worth a look",
+            # it just can't outrank confirmed cars in value sorts).
+            confirmed = [p for p in filtered_parts
+                         if p.get("trim_status") != "unconfirmed"]
+            max_val = max((p["high"] for p in confirmed), default=0)
             matches.append({**info, "top_parts": filtered_parts, "max_value": max_val})
     return matches
 
