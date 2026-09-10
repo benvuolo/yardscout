@@ -4364,7 +4364,12 @@ _GEN_SENSITIVE_RE = re.compile(
     r"|door panel|barn door|dutch door|\bglass\b"
     r"|soft top|hardtop|targa|t-top"
     r"|\bamp\b|speaker|audio"
-    r"|steering wheel",
+    r"|steering wheel"
+    # Wheel SETS are generation-styled (design, offset, TPMS) even when the
+    # bolt pattern carries over — a C4 Corvette sawblade is not a C6 wheel.
+    # "wheels" (plural) avoids wheel bearings / flywheels / steering wheel
+    # (already matched above).
+    r"|wheels \(|wheels\b",
     re.IGNORECASE,
 )
 # ...but never electric/mechanical assemblies that happen to share those words
