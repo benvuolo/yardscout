@@ -226,89 +226,9 @@ function vinMetaHtml(v) {
   return ` &middot; VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}${dup}${vpic}${mismatch}`;
 }
 
-function csvEscapeCell(val) {
-  const s = String(val ?? '');
-  if (/[",\r\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
-  return s;
-}
-
-/* Exports exist to take YOUR trip plan to a spreadsheet — never to dump the
- * dataset. Even for Pro they are radius-scoped and row-capped: the inventory
- * itself goes stale in days, but the part values attached to every row don't,
- * and a subscribe-export-cancel cycle shouldn't walk away with them. */
-const EXPORT_ROW_CAP = 500;
-function exportRows(kind) {
-  if (!isPro()) { openUpgradeSheet('export-' + kind); return null; }
-  if (!liveLoaded) { alert('No inventory loaded.'); return null; }
-  if (!activeZipCoords) {
-    alert('Exports cover your local search only — enter a zip or use your location first.');
-    return null;
-  }
-  if (!effectiveRadiusMi()) {
-    alert('Exports cover a local radius only — pick a distance (not "Any distance") first.');
-    return null;
-  }
-  const all = getFilteredLive();
-  if (all.length > EXPORT_ROW_CAP) {
-    alert('Exporting the top ' + EXPORT_ROW_CAP + ' of ' + all.length.toLocaleString() + ' cars (current sort). Narrow the radius or filters to export a specific set.');
-    return all.slice(0, EXPORT_ROW_CAP);
-  }
-  return all;
-}
-
-function exportLiveCsv() {
-  const rows = exportRows('csv');
-  if (!rows) return;
-  const header = ['year', 'make', 'model', 'vin', 'location', 'row', 'hasMatch', 'dateAdded', 'displayName', 'vpicDecodeWell', 'vpicTrim', 'vpicTrimQuality', 'vpicSeries', 'partsFlagged', 'maxValue', 'partsSummary'];
-  const lines = [header.join(',')];
-  for (const v of rows) {
-    const cells = [
-      csvEscapeCell(v.year),
-      csvEscapeCell(v.make),
-      csvEscapeCell(v.model),
-      csvEscapeCell(v.vin),
-      csvEscapeCell(v.location),
-      csvEscapeCell(v.row),
-      csvEscapeCell(v.hasMatch),
-      csvEscapeCell(v.dateAdded),
-      csvEscapeCell(v.displayName),
-      csvEscapeCell(v.vpicDecodeWell),
-      csvEscapeCell(v.vpicTrim),
-      csvEscapeCell(v.vpicTrimQuality),
-      csvEscapeCell(v.vpicSeries),
-      csvEscapeCell((v.topParts || []).map(p => p.name).join('; ')),
-      csvEscapeCell(v.maxValue),
-      csvEscapeCell((v.topParts || []).map(p => p.name + ':' + p.low + '-' + p.high).join('; ')),
-    ];
-    lines.push(cells.join(','));
-  }
-  const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'yardscout-live-' + new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-') + '.csv';
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-function exportLiveJson() {
-  const vehicles = exportRows('json');
-  if (!vehicles) return;
-  const payload = {
-    schemaVersion: 1,
-    sourceScrapedAt: liveScrapedAt,
-    exportedAt: new Date().toISOString(),
-    note: 'Local search export (radius-scoped, max ' + EXPORT_ROW_CAP + ' rows)',
-    vehicles,
-  };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'yardscout-live-' + new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-') + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
-}
+/* No bulk export at any tier: inventory goes stale in days, but the part
+ * values attached to every row don't — a one-click download of them is a
+ * permanent copy of the product. Deliberate decision, not an oversight. */
 
 async function loadAllPricing() {
   // All five price lists fetch in parallel (this used to be a serial
@@ -814,8 +734,6 @@ function applyProGates() {
   if (skipBtn) skipBtn.innerHTML = pro ? 'Skip &mdash; show everything nationwide' : 'Nationwide browsing is a Pro feature &rarr;';
   const anyOpt = document.querySelector('#live-radius option[value=""]');
   if (anyOpt) anyOpt.innerHTML = pro ? 'Any distance' : 'Any distance &mdash; Pro';
-  // Export buttons carry a small "Pro" tag for free users only.
-  document.querySelectorAll('.export-pro-tag').forEach(t => { t.style.display = pro ? 'none' : ''; });
   // Value-intelligence sorts are Pro: a free user sorting by value would get
   // the ranking (the actual product) with the dollar signs merely hidden.
   const sortSel = document.getElementById('live-sort');
@@ -1539,9 +1457,6 @@ updateFilterAvailability();   // filters stay disabled until a location exists
 document.getElementById('live-refresh-btn').addEventListener('click', () => {
   alert('To refresh live inventory data, run this in your terminal:\n\npython scraper/junkyard_scraper.py --save --all\n\nThen reload this page.');
 });
-document.getElementById('live-export-csv').addEventListener('click', exportLiveCsv);
-document.getElementById('live-export-json').addEventListener('click', exportLiveJson);
-
 document.getElementById('tab-live').addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-copy-vin');
   if (!btn || !btn.dataset.vin) return;
