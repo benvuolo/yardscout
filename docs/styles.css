@@ -444,6 +444,9 @@
     flex-direction: column;
     gap: 0.25rem;
   }
+  /* Wide control: spans the full grid row (capped) so long option labels
+   * like "Recommended (value × freshness)" aren't truncated. */
+  .controls .ctl-wide { grid-column: 1 / -1; max-width: 420px; }
   .controls .ctl label {
     font-family: var(--font-mono);
     font-size: 0.625rem;
