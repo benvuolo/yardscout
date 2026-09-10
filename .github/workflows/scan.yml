@@ -72,6 +72,14 @@ jobs:
           else
             git commit -m "chore: auto-scan inventory (national)"
             # Rebase in case anything landed on main while the scan was running.
-            git pull --rebase origin main
+            # The committed files are all GENERATED from this scan, so on any
+            # conflict the scan's version wins ("theirs" during a rebase = the
+            # commit being replayed, i.e. ours). Without this, a code merge
+            # that touched inventory_live.json mid-scan fails the whole run.
+            if ! git pull --rebase origin main; then
+              git checkout --theirs -- docs/data/
+              git add docs/data/
+              GIT_EDITOR=true git rebase --continue
+            fi
             git push
           fi
