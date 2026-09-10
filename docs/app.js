@@ -233,13 +233,12 @@ function csvEscapeCell(val) {
 }
 
 function exportLiveCsv() {
+  // Exports are Pro: a bulk download of the dataset is exactly the thing the
+  // free tier shouldn't hand out.
+  if (!isPro()) { openUpgradeSheet('export-csv'); return; }
   if (!liveLoaded) return alert('No inventory loaded.');
   const rows = getFilteredLive();
-  // Value data (ranges, maxValue) exports only for Pro — free CSV is the
-  // inventory itself, same as what free cards show.
-  const pro = isPro();
-  const header = ['year', 'make', 'model', 'vin', 'location', 'row', 'hasMatch', 'dateAdded', 'displayName', 'vpicDecodeWell', 'vpicTrim', 'vpicTrimQuality', 'vpicSeries', 'partsFlagged'];
-  if (pro) header.push('maxValue', 'partsSummary');
+  const header = ['year', 'make', 'model', 'vin', 'location', 'row', 'hasMatch', 'dateAdded', 'displayName', 'vpicDecodeWell', 'vpicTrim', 'vpicTrimQuality', 'vpicSeries', 'partsFlagged', 'maxValue', 'partsSummary'];
   const lines = [header.join(',')];
   for (const v of rows) {
     const cells = [
@@ -257,11 +256,9 @@ function exportLiveCsv() {
       csvEscapeCell(v.vpicTrimQuality),
       csvEscapeCell(v.vpicSeries),
       csvEscapeCell((v.topParts || []).map(p => p.name).join('; ')),
+      csvEscapeCell(v.maxValue),
+      csvEscapeCell((v.topParts || []).map(p => p.name + ':' + p.low + '-' + p.high).join('; ')),
     ];
-    if (pro) {
-      cells.push(csvEscapeCell(v.maxValue));
-      cells.push(csvEscapeCell((v.topParts || []).map(p => p.name + ':' + p.low + '-' + p.high).join('; ')));
-    }
     lines.push(cells.join(','));
   }
   const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' });
@@ -274,18 +271,14 @@ function exportLiveCsv() {
 }
 
 function exportLiveJson() {
+  if (!isPro()) { openUpgradeSheet('export-json'); return; }
   if (!liveLoaded) return alert('No inventory loaded.');
-  const rows = getFilteredLive();
-  // Free JSON export mirrors the free UI: part names yes, dollar values no.
-  const vehicles = isPro() ? rows : rows.map(v => {
-    const { maxValue, topParts, ...rest } = v;
-    return { ...rest, partsFlagged: (topParts || []).map(p => p.name) };
-  });
+  const vehicles = getFilteredLive();
   const payload = {
     schemaVersion: 1,
     sourceScrapedAt: liveScrapedAt,
     exportedAt: new Date().toISOString(),
-    note: 'Filtered rows only (current Live tab filters)' + (isPro() ? '' : ' — value data is Pro'),
+    note: 'Filtered rows only (current Live tab filters)',
     vehicles,
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
@@ -548,7 +541,7 @@ function effectiveRadiusMi() {
 function populateLiveMakeFilter() {
   const makes = [...new Set(liveInventory.map(v => v.make))].sort();
   const sel = document.getElementById('live-filter-make');
-  sel.innerHTML = '<option value="">All Makes</option>';
+  sel.innerHTML = '<option value="">All makes</option>';
   makes.forEach(m => {
     const opt = document.createElement('option');
     opt.value = m;
@@ -557,7 +550,7 @@ function populateLiveMakeFilter() {
   });
   const locations = [...new Set(liveInventory.map(v => v.location).filter(Boolean))].sort();
   const locSel = document.getElementById('live-filter-location');
-  locSel.innerHTML = '<option value="">All Yards</option>';
+  locSel.innerHTML = '<option value="">All yards in range</option>';
   locations.forEach(l => {
     const opt = document.createElement('option');
     opt.value = l;
@@ -732,6 +725,8 @@ function applyProGates() {
   if (skipBtn) skipBtn.innerHTML = pro ? 'Skip &mdash; show everything nationwide' : 'Nationwide browsing is a Pro feature &rarr;';
   const anyOpt = document.querySelector('#live-radius option[value=""]');
   if (anyOpt) anyOpt.innerHTML = pro ? 'Any distance' : 'Any distance &mdash; Pro';
+  // Export buttons carry a small "Pro" tag for free users only.
+  document.querySelectorAll('.export-pro-tag').forEach(t => { t.style.display = pro ? 'none' : ''; });
 }
 
 function toggleProDev() {
@@ -1017,7 +1012,6 @@ function getFilteredLive() {
       if (d == null || d > radiusMi) return false;
     }
     if (matchFilter === 'match' && !v.hasMatch) return false;
-    if (matchFilter === 'nomatch' && v.hasMatch) return false;
     // Confirmed from the VIN decode only — cars with unknown transmission are
     // excluded rather than guessed at.
     if (matchFilter === 'manual' && !isConfirmedManual(v)) return false;
@@ -1031,10 +1025,6 @@ function getFilteredLive() {
     return true;
   });
 
-  function totalHaul(v) {
-    if (!v.topParts || !v.topParts.length) return 0;
-    return v.topParts.reduce((sum, p) => sum + p.high, 0);
-  }
   function totalProfit(v) {
     if (!v.topParts || !v.topParts.length) return 0;
     return v.topParts.reduce((sum, p) => {
@@ -1069,11 +1059,6 @@ function getFilteredLive() {
     return r > 2 ? 0.75 : r;
   };
 
-  if (sortBy === 'make-asc') {
-    filtered.sort((a, b) => (a.make || '').localeCompare(b.make || '')
-      || (a.model || '').localeCompare(b.model || ''));
-    return filtered;
-  }
   let keyFn = null, asc = false, tieAsc = false;
   switch (sortBy) {
     case 'smart-profit': keyFn = smartProfit; break;
@@ -1082,12 +1067,8 @@ function getFilteredLive() {
     case 'gold-first': keyFn = v => (v.hasMatch ? 1e12 : 0) + (v.maxValue || 0); break;
     case 'fastest-sell': keyFn = v => bestSpeed(v) * 1e9 + totalProfit(v); break;
     case 'leaving-soonest': keyFn = urgency; tieAsc = true; break;
-    case 'profit-desc': keyFn = totalProfit; break;
-    case 'value-desc': keyFn = v => v.maxValue || 0; break;
-    case 'haul-desc': keyFn = totalHaul; break;
     case 'date-desc': keyFn = tsOf; break;
     case 'date-asc': keyFn = tsOf; asc = true; break;
-    case 'year-desc': keyFn = v => v.year || 0; break;
     case 'year-asc': keyFn = v => v.year || 0; asc = true; break;
   }
   if (keyFn) {
@@ -1839,18 +1820,7 @@ function removeWatchItem(idx) {
   saveWatchlistFile();
 }
 
-function exportWatchlistFile() {
-  const watchlist = loadWatchlist();
-  if (!watchlist.length) return alert('Watchlist is empty — add vehicles first.');
-  const blob = new Blob([JSON.stringify(watchlist, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'watchlist.json';
-  a.click();
-  URL.revokeObjectURL(url);
-}
-function saveWatchlistFile() { /* auto-exports are handled by Export button */ }
+function saveWatchlistFile() { /* watchlist lives in localStorage; nothing to write */ }
 
 function requestNotifPermission() {
   if (!('Notification' in window)) {
@@ -1941,8 +1911,6 @@ document.getElementById('alert-notif-btn').addEventListener('click', requestNoti
     }
   });
 })();
-document.getElementById('alert-export-btn').addEventListener('click', exportWatchlistFile);
-
 ['alert-make', 'alert-model', 'alert-yr-min', 'alert-yr-max'].forEach(id => {
   document.getElementById(id).addEventListener('keydown', e => {
     if (e.key === 'Enter') addWatchItem();

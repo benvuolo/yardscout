@@ -361,15 +361,37 @@
   /* ---------- Filter panel ---------- */
   .controls {
     display: none;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 0.8rem;
     margin-bottom: 0.9rem;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 0.8rem;
   }
-  .controls.open { display: grid; }
+  .controls.open { display: flex; }
+  .ctl-group-title {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+  .ctl-group-title::after {
+    content: '';
+    flex: 1;
+    border-top: 1px dashed var(--border);
+  }
+  .ctl-group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 0.5rem;
+  }
   .controls .ctl {
     display: flex;
     flex-direction: column;
@@ -406,11 +428,10 @@
   }
   select:focus, .controls input:focus, #live-zip:focus { border-color: var(--accent); }
   .controls .ctl-actions {
-    grid-column: 1 / -1;
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
-    padding-top: 0.25rem;
+    padding-top: 0.55rem;
     border-top: 1px dashed var(--border);
   }
 
