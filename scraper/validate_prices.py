@@ -122,7 +122,11 @@ def match_baseline(part: dict, entries: list[dict]) -> dict | None:
             et = _tokens(e["part"])
             if not et or not name_toks:
                 return False
-            return len(et & name_toks) / min(len(et), len(name_toks)) >= 0.75
+            # Identical token sets only (word-order/punctuation differences).
+            # A looser >=0.75 overlap used to let "Side Mirrors (power, pair)"
+            # and "Tow Mirrors (pair)" borrow the "Power-Fold Tow Mirrors"
+            # evidence — a $450-1,200 band applied to $30 flat-glass mirrors.
+            return et == name_toks
         fuzzy = [e for e in entries if name_close(e) and _tokens(e["vehicle"]) & model_toks]
         if not fuzzy:
             return None

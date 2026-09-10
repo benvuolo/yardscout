@@ -1,7 +1,127 @@
 {
- "audit_date": "2026-09-02",
- "source": "scraper/price_validation_report.md (manual audit, PR #11) \u2014 evidence from recycler listed prices, enthusiast-forum sold threads, new-OEM upper bounds. eBay sold listings were bot-blocked.",
+ "audit_date": "2026-09-09",
+ "source": "scraper/price_validation_report.md (manual audit, PR #11) \u2014 evidence from recycler listed prices, enthusiast-forum sold threads, new-OEM upper bounds. eBay sold listings were bot-blocked. 2026-09-09: generation-split audit \u2014 UNDERSTATED bands from the 09-02 audit fixed in UNOBTANIUM_DB (F-150 tow mirrors/Raptor grille, Focus ST/RS Recaros + HIDs); per-generation evidence appended below.",
  "entries": [
+  {
+   "part": "Hardtop (full, clean)",
+   "vehicle": "Jeep Wrangler YJ",
+   "displayed_low": 350,
+   "displayed_high": 900,
+   "obs_low": 300,
+   "obs_high": 900,
+   "confidence": "good",
+   "note": "FB/Craigslist/forum tracked sales $300\u2013900; old single 400\u20131500 band spanned all gens"
+  },
+  {
+   "part": "Hardtop (full, clean)",
+   "vehicle": "Jeep Wrangler TJ",
+   "displayed_low": 700,
+   "displayed_high": 1600,
+   "obs_low": 600,
+   "obs_high": 1400,
+   "confidence": "good",
+   "note": "$600\u20131,400 tracked sales"
+  },
+  {
+   "part": "Hardtop (full, clean)",
+   "vehicle": "Jeep Wrangler JK",
+   "displayed_low": 1100,
+   "displayed_high": 2400,
+   "obs_low": 1000,
+   "obs_high": 2000,
+   "confidence": "good",
+   "note": "$1,000\u20132,000 tracked sales"
+  },
+  {
+   "part": "Hardtop (full, clean)",
+   "vehicle": "Jeep Wrangler JL",
+   "displayed_low": 1400,
+   "displayed_high": 3300,
+   "obs_low": 1200,
+   "obs_high": 2800,
+   "confidence": "good",
+   "note": "$1,200\u20132,800 tracked sales"
+  },
+  {
+   "part": "Heated Leather Seats (pair)",
+   "vehicle": "Jeep Grand Cherokee WJ",
+   "displayed_low": 175,
+   "displayed_high": 450,
+   "obs_low": 175,
+   "obs_high": 500,
+   "confidence": "thin",
+   "note": "forum/recycler pairs $175\u2013500 (2026-09); raised from 150\u2013350"
+  },
+  {
+   "part": "AutoRide Rear Shocks (pair)",
+   "vehicle": "Chevy Tahoe",
+   "displayed_low": 100,
+   "displayed_high": 250,
+   "obs_low": 80,
+   "obs_high": 250,
+   "confidence": "thin",
+   "note": "LOWERED from 150\u2013350: thin used market (bladder-failure risk), forum pairs ~$100"
+  },
+  {
+   "part": "T-Top Glass Panels (pair)",
+   "vehicle": "Chevy Camaro 3rd gen",
+   "displayed_low": 150,
+   "displayed_high": 350,
+   "obs_low": 75,
+   "obs_high": 450,
+   "confidence": "thin",
+   "note": "used sets list/sell $75\u2013300; specialty retail singles $450 (2026-09)"
+  },
+  {
+   "part": "T-Top Glass Panels (pair)",
+   "vehicle": "Chevy Camaro 4th gen",
+   "displayed_low": 250,
+   "displayed_high": 450,
+   "obs_low": 195,
+   "obs_high": 450,
+   "confidence": "thin",
+   "note": "used sets $195\u2013350; specialty retail $450"
+  },
+  {
+   "part": "Redline Recaro Seats (set)",
+   "vehicle": "Saturn ION",
+   "displayed_low": 150,
+   "displayed_high": 450,
+   "obs_low": 75,
+   "obs_high": 400,
+   "confidence": "thin",
+   "note": "forum sales of front+rear sets $75\u2013400 (2026-09)"
+  },
+  {
+   "part": "Convertible Top Motor/Pump",
+   "vehicle": "Toyota Solara",
+   "displayed_low": 100,
+   "displayed_high": 300,
+   "obs_low": 75,
+   "obs_high": 345,
+   "confidence": "good",
+   "note": "recycler-listed used units $75\u2013345 (2026-09)"
+  },
+  {
+   "part": "Power-Fold Tow Mirrors (pair)",
+   "vehicle": "Chevy Silverado",
+   "displayed_low": 270,
+   "displayed_high": 470,
+   "obs_low": 450,
+   "obs_high": 700,
+   "confidence": "good",
+   "note": "used OEM $225/side (recycler ask, K2XX HD); new aftermarket pairs $530\u2013700 (2026-09)"
+  },
+  {
+   "part": "Magic Seat (rear, complete)",
+   "vehicle": "Honda Fit",
+   "displayed_low": 80,
+   "displayed_high": 250,
+   "obs_low": null,
+   "obs_high": null,
+   "confidence": "thin",
+   "note": "dismantler assemblies; new OEM cushion pads alone $340\u2013480 set the ceiling"
+  },
   {
    "part": "Recaro Seats (pair)",
    "vehicle": "Ford Focus ST/RS",
