@@ -29,77 +29,184 @@ let tapPricing = {};
 let utpapPricing = {};
 let pypPricing = {};   // { "Pick Your Part - Orlando": { "HEADLIGHT": {price, core}, ... } }
 let papPricing = {};   // { "Pull-A-Part - Charlotte": { "BRAKE CALIPER": {price, core}, ... } }
+let wapPricing = {};   // { "Wrench-A-Part - Austin": { "ALTERNATOR": {price, core}, ... } } (per yard)
+let upullrPricing = {}; // U-Pull-R Parts: one chain-wide flat-rate list, keyed by description
 
 /* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page)
  * pyp = exact "Description" from pyp.com per-location PriceList API
- * pap = exact "partname" from Pull-A-Part's per-location pricing API */
+ * pap = exact "partname" from Pull-A-Part's per-location pricing API
+ * wap = exact "name" from Wrench-A-Part's per-location price-list API (api.wrenchapart.com/price-list)
+ * upullr = exact title from upullrparts.com/part-pricing/ (chain-wide flat-rate list)
+ *
+ * Matching: lowercase substring, LONGEST matching keyword wins (see
+ * _lookupYardCostUncached), so specific keywords beat generic ones regardless
+ * of table order. A chain column is omitted when that chain's published list
+ * has no unambiguous item for the part — those stay "check yard price list"
+ * honestly. An entry with a kw and no chain columns deliberately pins an
+ * ambiguous part name to "unmapped" so a shorter generic keyword can't
+ * mis-price it. */
 const PART_KEYWORD_MAP = [
-  { kw: 'hid headlight',       pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT LED OR HID LAMP ASSEMBLY W/BALLAST' },
-  { kw: 'led headlight',       pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT LED OR HID LAMP ASSEMBLY W/BALLAST' },
-  { kw: 'headlight',           pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT ASSEMBLY (NON-HID/BALLAST)' },
-  { kw: 'headlamp',            pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT ASSEMBLY (NON-HID/BALLAST)' },
-  { kw: 'recaro seat',         pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT WITH AIR BAG FRONT', pap: 'SEAT, BUCKET W/ POWER TRACK (LEATHER)' },
-  { kw: 'stow-n-go 2nd',      pnp: 'SEAT-BUCK(EA)W/TRK (MAN)',     tap: 'BUCKET SEAT', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT NO AIR BAG FRONT', pap: 'SEAT, BUCKET W/ MANUAL TRACK' },
-  { kw: 'stow-n-go 3rd',      pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT REAR', pap: 'SEAT, BENCH/3RD ROW MANUAL TRACK' },
-  { kw: 'stow-n-go',          pnp: 'SEAT-BUCK(EA)W/TRK (MAN)',     tap: 'BUCKET SEAT', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT NO AIR BAG FRONT', pap: 'SEAT, BUCKET W/ MANUAL TRACK' },
-  { kw: '3rd row seat',        pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT THIRD ROW', pap: 'SEAT, BENCH/3RD ROW MANUAL TRACK' },
-  { kw: 'rear seat',           pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT REAR', pap: 'SEAT, REAR - EACH SECTION (CLOTH)' },
-  { kw: 'bench seat',          pnp: 'SEAT-BENCH W/TRK',             tap: 'SEAT BENCH', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT REAR', pap: 'SEAT, BENCH W/ POWER TRACK (LEATHER)' },
-  { kw: 'bucket seat',         pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT WITH AIR BAG FRONT', pap: 'SEAT, BUCKET W/ POWER TRACK (LEATHER)' },
-  { kw: 'seat',                pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT WITH AIR BAG FRONT', pap: 'SEAT, BUCKET W/ POWER TRACK (LEATHER)' },
-  { kw: 'intercooler',         pnp: 'INTERCOOLER',                  tap: 'TURBO INTERCOOLER', utpap: 'TURBO INNER COOLER', pyp: 'INTERCOOLER', pap: 'TURBO INTERCOOLER' },
-  { kw: 'heads-up display',    pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
-  { kw: 'touchscreen',         pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
-  { kw: 'infotainment',        pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
-  { kw: 'navigation',          pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'NAVIGATION UNIT', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
-  { kw: 'display',             pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY' },
-  { kw: 'head unit',           pnp: 'RADIO',                        tap: 'RADIO', utpap: 'RADIO CD PLAYER', pyp: 'RADIO WITH DISPLAY', pap: 'RADIO  - W/CD OR MEDIA PLAYER' },
-  { kw: 'radio',               pnp: 'RADIO',                        tap: 'RADIO', utpap: 'RADIO CD PLAYER', pyp: 'RADIO WITH DISPLAY', pap: 'RADIO  - W/CD OR MEDIA PLAYER' },
-  { kw: 'front bumper',        pnp: 'BUMPER COMP',                  tap: 'BUMPR CVER W/RENFORC', utpap: 'BUMPER', pyp: 'FRONT BUMPER (STEEL)', pap: 'BUMPER COVER ASSEMBLY' },
-  { kw: 'bumper cover',        pnp: 'BUMPER COVER (PLAST/RUBR)',    tap: 'BUMPER COVER', utpap: 'BUMPER', pyp: 'BUMPER COVER, FRONT', pap: 'BUMPER COVER' },
-  { kw: 'bumper',              pnp: 'BUMPER COMP',                  tap: 'BUMPR CVER W/RENFORC', utpap: 'BUMPER', pyp: 'FRONT BUMPER (STEEL)', pap: 'BUMPER STEEL OR ALUMINUM' },
-  { kw: 'steering wheel',      pnp: 'STEERING WHEEL',               tap: 'STEERNG WHL W/SWITCH', utpap: 'STEERING WHEEL', pyp: 'STEERING WHEEL', pap: 'STEERING WHEEL' },
-  { kw: 'spoiler',             pnp: 'SPOILERS - BOLT ON (EA)',      tap: 'SPOILER', utpap: 'SPOILER', pyp: 'SPOILER REAR', pap: 'SPOILER - BOLT ON (EACH)' },
-  { kw: 'fog light',           pnp: 'FOG LAMPS EACH',               tap: 'HEADLIGHT COMP BULB', utpap: 'FOG LIGHT', pyp: 'FRONT LAMP (FOG/PARKING/TURN/MARKER)', pap: 'FOG LAMP (EACH)' },
-  { kw: 'fog lamp',            pnp: 'FOG LAMPS EACH',               tap: 'HEADLIGHT COMP BULB', utpap: 'FOG LIGHT', pyp: 'FRONT LAMP (FOG/PARKING/TURN/MARKER)', pap: 'FOG LAMP (EACH)' },
-  { kw: 'brake caliper',       pnp: 'BRAKE CALIPER',                tap: 'BRAKE CALIPER', utpap: 'BRAKE CALIPER 2-4 PI', pyp: 'BRAKE CALIPER', pap: 'BRAKE CALIPER' },
-  { kw: 'caliper',             pnp: 'BRAKE CALIPER',                tap: 'BRAKE CALIPER', utpap: 'BRAKE CALIPER 2-4 PI', pyp: 'BRAKE CALIPER', pap: 'BRAKE CALIPER' },
-  { kw: 'mirror',              pnp: 'MIRROR-DOOR OUTSIDE(ELEC)',    tap: 'POWER MIRROR - DOOR', utpap: 'DOOR POWER MIRROR', pyp: 'MIRROR (SIDE VIEW)', pap: 'DOOR MIRROR, OUTSIDE ELECTRIC REMOTE' },
-  { kw: 'amplifier',           pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER' },
-  { kw: 'amp',                 pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER' },
-  { kw: 'speaker',             pnp: 'SPEAKER EACH',                 tap: 'SPEAKER', utpap: 'RADIO SPEAKER', pyp: 'RADIO SPEAKER', pap: 'SPEAKER (ANY)' },
-  { kw: 'panoramic sunroof',   pnp: 'SUN ROOF ASSY',               tap: 'SUNROOF ASSY+MOTOR', utpap: 'SUNROOF/T-TOP', pyp: 'ROOF GLASS (SUN ROOF)', pap: 'SUNROOF/COVER/SHADE ASSEMBLY W/MOTOR' },
-  { kw: 'sunroof',             pnp: 'SUN ROOF ASSY',               tap: 'SUN ROOF ASSEMBLY', utpap: 'SUNROOF/T-TOP', pyp: 'ROOF GLASS (SUN ROOF)', pap: 'SUNROOF/COVER/SHADE ASSEMBLY W/MOTOR' },
-  { kw: 'sliding door motor',  pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'ELECTRIC MODULE', pyp: 'SLIDING DOOR MOTOR', pap: 'DOOR/HATCH MOTOR, (SLIDING VAN/SUV)' },
-  { kw: 'door motor',          pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'ELECTRIC MODULE', pyp: 'SLIDING DOOR MOTOR', pap: 'DOOR/HATCH MOTOR, (SLIDING VAN/SUV)' },
+  // --- lighting ---
+  { kw: 'hid headlight',       pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT LED OR HID LAMP ASSEMBLY W/BALLAST', wap: 'HEADLAMP COMP HID', upullr: 'HEADLAMP HID' },
+  { kw: 'led headlight',       pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT LED OR HID LAMP ASSEMBLY W/BALLAST', wap: 'HEADLAMP COMP HID', upullr: 'HEADLAMP HID' },
+  { kw: 'headlight',           pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT ASSEMBLY (NON-HID/BALLAST)', wap: 'HEADLAMP COMPOSITE NO HID', upullr: 'HEADLAMP' },
+  { kw: 'headlamp',            pnp: 'HEADLIGHT COMP',               tap: 'HEADLIGHT COMPOSITE', utpap: 'HEADLAMP W/ TURN SIG', pyp: 'HEADLIGHT', pap: 'HEADLIGHT ASSEMBLY (NON-HID/BALLAST)', wap: 'HEADLAMP COMPOSITE NO HID', upullr: 'HEADLAMP' },
+  { kw: 'tail light',          pnp: 'TAILLIGHT ASSY',               tap: 'TAIL LIGHT ASSY ANY', utpap: 'TAIL LIGHT ASSY LRG', pyp: 'TAILLIGHT (QUARTER MOUNTED)', pap: 'TAILLIGHT ASSEMBLY - SINGLE SIDE', wap: 'TAIL LIGHT SMALL', upullr: 'TAILLIGHT' },
+  { kw: 'taillight',           pnp: 'TAILLIGHT ASSY',               tap: 'TAIL LIGHT ASSY ANY', utpap: 'TAIL LIGHT ASSY LRG', pyp: 'TAILLIGHT (QUARTER MOUNTED)', pap: 'TAILLIGHT ASSEMBLY - SINGLE SIDE', wap: 'TAIL LIGHT SMALL', upullr: 'TAILLIGHT' },
+  { kw: 'fog light',           pnp: 'FOG LAMPS EACH',               tap: 'HEADLIGHT COMP BULB', utpap: 'FOG LIGHT', pyp: 'FRONT LAMP (FOG/PARKING/TURN/MARKER)', pap: 'FOG LAMP (EACH)', wap: 'FOG LIGHT', upullr: 'FOG LIGHT' },
+  { kw: 'fog lamp',            pnp: 'FOG LAMPS EACH',               tap: 'HEADLIGHT COMP BULB', utpap: 'FOG LIGHT', pyp: 'FRONT LAMP (FOG/PARKING/TURN/MARKER)', pap: 'FOG LAMP (EACH)', wap: 'FOG LIGHT', upullr: 'FOG LIGHT' },
+  // --- seats ---
+  { kw: 'recaro seat',         pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT WITH AIR BAG FRONT', pap: 'SEAT, BUCKET W/ POWER TRACK (LEATHER)', upullr: 'SEATS BUCKET' },
+  { kw: 'stow-n-go 2nd',      pnp: 'SEAT-BUCK(EA)W/TRK (MAN)',     tap: 'BUCKET SEAT', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT NO AIR BAG FRONT', pap: 'SEAT, BUCKET W/ MANUAL TRACK', upullr: 'SEATS BUCKET' },
+  { kw: 'stow-n-go 3rd',      pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT REAR', pap: 'SEAT, BENCH/3RD ROW MANUAL TRACK', wap: 'BENCH SEAT', upullr: 'SEATS BENCH' },
+  { kw: 'stow-n-go',          pnp: 'SEAT-BUCK(EA)W/TRK (MAN)',     tap: 'BUCKET SEAT', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT NO AIR BAG FRONT', pap: 'SEAT, BUCKET W/ MANUAL TRACK', upullr: 'SEATS BUCKET' },
+  { kw: '3rd row seat',        pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT THIRD ROW', pap: 'SEAT, BENCH/3RD ROW MANUAL TRACK', wap: 'BENCH SEAT', upullr: 'SEATS BENCH' },
+  { kw: 'rear seat',           pnp: 'SEAT-REAR (EA)',               tap: 'SEAT SECTION', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT REAR', pap: 'SEAT, REAR - EACH SECTION (CLOTH)', wap: 'BENCH SEAT', upullr: 'SEAT RR SECTION-CAR' },
+  { kw: 'bench seat',          pnp: 'SEAT-BENCH W/TRK',             tap: 'SEAT BENCH', utpap: 'BENCH SEAT ELECTRIC', pyp: 'SEAT REAR', pap: 'SEAT, BENCH W/ POWER TRACK (LEATHER)', wap: 'BENCH SEAT', upullr: 'SEATS BENCH' },
+  { kw: 'bench',               pnp: 'SEAT-BENCH W/TRK',             tap: 'SEAT BENCH', utpap: 'BENCH SEAT MANUAL', pyp: 'SEAT REAR', pap: 'SEAT, BENCH/3RD ROW MANUAL TRACK', wap: 'BENCH SEAT', upullr: 'SEATS BENCH' },
+  { kw: 'bucket seat',         pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT WITH AIR BAG FRONT', pap: 'SEAT, BUCKET W/ POWER TRACK (LEATHER)', upullr: 'SEATS BUCKET' },
+  { kw: 'seat',                pnp: 'SEAT-BUCK(EA)W/TRK (PWR)',     tap: 'BUCKET SEAT POWER', utpap: 'BUCKET SEAT ELCTRIC', pyp: 'SEAT WITH AIR BAG FRONT', pap: 'SEAT, BUCKET W/ POWER TRACK (LEATHER)', upullr: 'SEATS BUCKET' },
+  { kw: 'track',               pnp: 'SEAT TRACK ELEC W/MOTOR (EA)', tap: 'SEAT TRACKSET+MOTOR', utpap: 'SEAT TRACK ELECTRIC', pyp: 'SEAT TRACK, (ELECTRIC)', pap: 'SEAT TRACK, ELECTRIC W/MOTOR', wap: 'SEAT TRACK ELECTRIC', upullr: 'SEAT TRACK-ELECTRIC' },
+  // --- gauges / clusters ---
+  { kw: 'digital dash',        pnp: 'INSTRUMENT CLUSTER ASSY',      tap: 'INSTRUMENT CLUSTER', utpap: 'INSTRUMENT CLUSTER', pyp: 'INSTRUMENT CLUSTER', pap: 'INSTRUMENT CLUSTER ASSEMBLY', wap: 'INSTRUMENT CLUSTER DIGITAL', upullr: 'INSTRUMENT CLUSTER' },
+  { kw: 'digital cluster',     pnp: 'INSTRUMENT CLUSTER ASSY',      tap: 'INSTRUMENT CLUSTER', utpap: 'INSTRUMENT CLUSTER', pyp: 'INSTRUMENT CLUSTER', pap: 'INSTRUMENT CLUSTER ASSEMBLY', wap: 'INSTRUMENT CLUSTER DIGITAL', upullr: 'INSTRUMENT CLUSTER' },
+  { kw: 'cluster',             pnp: 'INSTRUMENT CLUSTER ASSY',      tap: 'INSTRUMENT CLUSTER', utpap: 'INSTRUMENT CLUSTER', pyp: 'INSTRUMENT CLUSTER', pap: 'INSTRUMENT CLUSTER ASSEMBLY', wap: 'INSTRUMENT CLUSTER ANALOG', upullr: 'INSTRUMENT CLUSTER' },
+  { kw: 'speedometer',         pnp: 'SPEEDOMETER OR TACHOMETER',    tap: 'GAUGE SINGLE', utpap: 'SPEEDOMETER', pyp: 'GAUGES', pap: 'SPEEDOMETER OR TACHOMETER', upullr: 'GAUGE SINGLE' },
+  { kw: 'gauge',               pnp: 'CLOCK/ SMALL GAUGES EACH',     tap: 'GAUGE SINGLE', utpap: 'GAUGE SINGLE', pyp: 'GAUGES', pap: 'CLOCK OR SMALL GAUGES (EACH)', wap: 'GAUGE (SINGLE/MISC)', upullr: 'GAUGE SINGLE' },
+  // --- charging / hybrid ---
+  { kw: 'alternator',          pnp: 'ALTERNATOR',                   tap: 'ALTERNATOR', utpap: 'ALTERNATOR', pyp: 'ALTERNATOR', pap: 'ALTERNATOR (NON HYBRID)', wap: 'ALTERNATOR', upullr: 'ALTERNATOR' },
+  { kw: 'hybrid battery',      pnp: 'BATTERY HYBRID/ELECTRICAL',    pyp: 'BATTERY (HYBRID BATTERY)', pap: 'HYBRID BATTERY ANY', wap: 'HYBRID BATTERY' },
+  { kw: 'battery cells',       pnp: 'BATTERY HYBRID/ELECTRICAL',    pyp: 'BATTERY (HYBRID BATTERY)', pap: 'HYBRID BATTERY ANY', wap: 'HYBRID BATTERY' },
+  { kw: 'inverter pump',       pnp: 'WATER PUMP',                   tap: 'WATER PUMP (ELECTRIC', utpap: 'WATER PUMP', pyp: 'WATER PUMP', pap: 'AUXILIARY WATER PUMP', wap: 'WATER PUMP', upullr: 'WATER PUMP' },
+  { kw: 'dc-dc',               pnp: 'POWER VOLTAGE INVERTER',       pyp: 'DC CONVERTER (HYBRID/ELECTRIC)', pap: 'HYBRID POWER CONTROL MODULE/INVERTER', wap: 'INVERTER HYBRID', upullr: 'HYBRID INVERTER/CONV' },
+  { kw: 'dc converter',        pnp: 'POWER VOLTAGE INVERTER',       pyp: 'DC CONVERTER (HYBRID/ELECTRIC)', pap: 'HYBRID POWER CONTROL MODULE/INVERTER', wap: 'INVERTER HYBRID', upullr: 'HYBRID INVERTER/CONV' },
+  { kw: 'inverter',            pnp: 'POWER VOLTAGE INVERTER',       pyp: 'DC CONVERTER (HYBRID/ELECTRIC)', pap: 'HYBRID POWER CONTROL MODULE/INVERTER', wap: 'INVERTER HYBRID', upullr: 'HYBRID INVERTER/CONV' },
+  // --- audio / infotainment ---
+  { kw: 'amplifier',           pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER', wap: 'AMPLIFIER OEM', upullr: 'AMPLIFIER/EQUALIZER' },
+  { kw: 'amp',                 pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER', wap: 'AMPLIFIER OEM', upullr: 'AMPLIFIER/EQUALIZER' },
+  { kw: 'audio',               pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER', wap: 'AMPLIFIER OEM', upullr: 'AMPLIFIER/EQUALIZER' },
+  { kw: 'bose',                pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER', wap: 'AMPLIFIER OEM', upullr: 'AMPLIFIER/EQUALIZER' },
+  { kw: 'harman',              pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER', wap: 'AMPLIFIER OEM', upullr: 'AMPLIFIER/EQUALIZER' },
+  { kw: 'jbl',                 pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER', wap: 'AMPLIFIER OEM', upullr: 'AMPLIFIER/EQUALIZER' },
+  { kw: 'logic7',              pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER', wap: 'AMPLIFIER OEM', upullr: 'AMPLIFIER/EQUALIZER' },
+  { kw: 'b&o',                 pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER', wap: 'AMPLIFIER OEM', upullr: 'AMPLIFIER/EQUALIZER' },
+  { kw: 'bang & olufsen',      pnp: 'AMPLIFIER / EQ - AUDIO',      tap: 'AMPLIFIER', utpap: 'AMPLIFIER', pyp: 'AMPLIFIER', pap: 'AMPLIFIER', wap: 'AMPLIFIER OEM', upullr: 'AMPLIFIER/EQUALIZER' },
+  { kw: 'speaker',             pnp: 'SPEAKER EACH',                 tap: 'SPEAKER', utpap: 'RADIO SPEAKER', pyp: 'RADIO SPEAKER', pap: 'SPEAKER (ANY)', wap: 'SPEAKER 0-5.9"', upullr: 'SPEAKER' },
+  { kw: 'heads-up display',    pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY', wap: 'RADIO (SCREEN)', upullr: 'INFORMATION SCREEN' },
+  { kw: 'touchscreen',         pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY', wap: 'RADIO (SCREEN)', upullr: 'INFORMATION SCREEN' },
+  { kw: 'infotainment',        pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY', wap: 'RADIO (SCREEN)', upullr: 'INFORMATION SCREEN' },
+  { kw: 'navigation',          pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'NAVIGATION UNIT', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY', wap: 'RADIO (SCREEN)', upullr: 'NAVIGATION UNIT' },
+  { kw: 'display',             pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY', wap: 'RADIO (SCREEN)', upullr: 'INFORMATION SCREEN' },
+  { kw: 'sync',                pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY', wap: 'RADIO (SCREEN)', upullr: 'INFORMATION SCREEN' },
+  { kw: 'myford',              pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY', wap: 'RADIO (SCREEN)', upullr: 'INFORMATION SCREEN' },
+  { kw: 'mmi',                 pnp: 'LRG MULTIFUNCT DISPLAY',       tap: 'DIGITAL DISPLAY SCRN', utpap: 'TOUCH SCREEN RDO DBL', pyp: 'GPS TV SCREEN', pap: 'RADIO W/NAV DISPLAY', wap: 'RADIO (SCREEN)', upullr: 'INFORMATION SCREEN' },
+  { kw: 'head unit',           pnp: 'RADIO',                        tap: 'RADIO', utpap: 'RADIO CD PLAYER', pyp: 'RADIO WITH DISPLAY', pap: 'RADIO  - W/CD OR MEDIA PLAYER', wap: 'RADIO (NO SCREEN)', upullr: 'RADIO' },
+  { kw: 'radio',               pnp: 'RADIO',                        tap: 'RADIO', utpap: 'RADIO CD PLAYER', pyp: 'RADIO WITH DISPLAY', pap: 'RADIO  - W/CD OR MEDIA PLAYER', wap: 'RADIO (NO SCREEN)', upullr: 'RADIO' },
+  { kw: 'entertainment',       pnp: 'LRG MULTIFUNCT DISPLAY',      tap: 'DVD PLAYER', utpap: 'RADIO CD PLAYER', pyp: 'GPS TV SCREEN', pap: 'VIDEO SCREEN', wap: 'HEADREST SCREEN', upullr: 'MEDIA PLAYER' },
+  { kw: 'dvd',                 pnp: 'LRG MULTIFUNCT DISPLAY',      tap: 'DVD PLAYER', utpap: 'RADIO CD PLAYER', pyp: 'GPS TV SCREEN', pap: 'VIDEO SCREEN', wap: 'HEADREST SCREEN', upullr: 'MEDIA PLAYER' },
+  // --- body / exterior ---
+  { kw: 'front bumper',        pnp: 'BUMPER COMP',                  tap: 'BUMPR CVER W/RENFORC', utpap: 'BUMPER', pyp: 'FRONT BUMPER (STEEL)', pap: 'BUMPER COVER ASSEMBLY', wap: 'BUMPER ASSEMBLY FRONT CAR', upullr: 'BUMPER (BARE)' },
+  { kw: 'bumper cover',        pnp: 'BUMPER COVER (PLAST/RUBR)',    tap: 'BUMPER COVER', utpap: 'BUMPER', pyp: 'BUMPER COVER, FRONT', pap: 'BUMPER COVER', wap: 'BUMPER COVER FRONT (BARE)', upullr: 'BUMPER (BARE)' },
+  { kw: 'bumper',              pnp: 'BUMPER COMP',                  tap: 'BUMPR CVER W/RENFORC', utpap: 'BUMPER', pyp: 'FRONT BUMPER (STEEL)', pap: 'BUMPER STEEL OR ALUMINUM', wap: 'BUMPER ASSEMBLY FRONT CAR', upullr: 'BUMPER (BARE)' },
+  { kw: 'tailgate',            pnp: 'GATE-PU/VAN',                  tap: 'TAIL GATE', utpap: 'TAIL GATE/ ENDGATE', pyp: 'DECKLID/TAILGATE (BARE)', pap: 'TRUCK GATE FOR BED', wap: 'TAILGATE BARE', upullr: 'TAIL GATE-TRUCK' },
+  { kw: 'rear gate',           pnp: 'GATE-PU/VAN',                  tap: 'TAIL GATE W/ GLASS', utpap: 'TAILGATE W/ GLASS', pyp: 'DECKLID/TAILGATE (BARE)', pap: 'TRUCK GATE FOR BED', wap: 'TAILGATE BARE', upullr: 'TAIL GATE-SUV/VAN' },
+  { kw: 'spoiler',             pnp: 'SPOILERS - BOLT ON (EA)',      tap: 'SPOILER', utpap: 'SPOILER', pyp: 'SPOILER REAR', pap: 'SPOILER - BOLT ON (EACH)', wap: 'SPOILER NO LIGHT', upullr: 'SPOILER' },
+  { kw: 'grille',              pnp: 'GRILL PLASTIC',               tap: 'GRILLE', utpap: 'GRILLE LRG', pyp: 'GRILLE', pap: 'GRILLE PLASTIC (BARE) - ANY', wap: 'GRILLE 19-48"', upullr: 'GRILLE' },
+  { kw: 'running board',       pnp: 'RUNNING BOARD',               tap: 'RUNNING BOARD (EACH)', utpap: 'RUNNING BOARD', pyp: 'RUNNING BOARD', pap: 'RUNNING BOARD (EACH)', wap: 'RUNNING BOARD NON-ELECTRIC', upullr: 'RUNNING BOARD' },
+  { kw: 'fender flare',        pnp: 'FENDER EXT/FLARE (FRT/RR)',   tap: 'FENDER TRIM/FLARES', utpap: 'FENDER EXTENSION', pyp: 'FENDER EXTENSION', pap: 'FENDER FLARE OR SKIRT', wap: 'FENDER TRIM/ FLARES', upullr: 'FENDER FLARE/TRIM' },
+  { kw: 'mudflap',             pnp: 'MUD FLAP (EA)',               tap: 'MUDFLAP', utpap: 'MUD FLAP', pyp: 'MUD FLAP/SPLASH GUARD', pap: 'MUD FLAP OR SPLASH GUARD' },
+  { kw: 'emblem',              pnp: 'EMBLEM',                      tap: 'EMBLEM (ANY)', utpap: 'EMBLEM', pyp: 'EMBLEMS', pap: 'EMBLEM', wap: 'EMBLEM (SMALL)', upullr: 'EMBLEM (ANY)' },
+  { kw: 'skid plate',          utpap: 'SKID PLATE',                 pyp: 'SKID PLATE', pap: 'SKID PLATE', wap: 'SKID PLATE', upullr: 'SKID PLATE' },
+  { kw: 'mirror',              pnp: 'MIRROR-DOOR OUTSIDE(ELEC)',    tap: 'POWER MIRROR - DOOR', utpap: 'DOOR POWER MIRROR', pyp: 'MIRROR (SIDE VIEW)', pap: 'DOOR MIRROR, OUTSIDE ELECTRIC REMOTE', wap: 'DOOR MIRROR POWER REGULAR', upullr: 'MIRROR-DOOR' },
+  // --- racks / rails / towing ---
+  { kw: 'roof rack',           pnp: 'LUGGAGE RACK',                tap: 'LUGGAGE RACK', utpap: 'LUGGAGE RACK', pyp: 'ROOF RACK ASSEMBLY', pap: 'LUGGAGE RACK', wap: 'LUGGAGE RACK', upullr: 'LUGGAGE/LADDER RACK' },
+  { kw: 'roof rail',           pnp: 'LUGGAGE RACK',                tap: 'LUGGAGE RACK', utpap: 'LUGGAGE RACK', pyp: 'ROOF RACK RAIL/ CROSS BAR (EACH)', pap: 'LUGGAGE RACK', wap: 'LUGGAGE RACK', upullr: 'LUGGAGE/LADDER RACK' },
+  { kw: 'crossbar',            pnp: 'LUGGAGE RACK',                tap: 'CARGO RACK', utpap: 'LUGGAGE RACK', pyp: 'ROOF RACK RAIL/ CROSS BAR (EACH)', pap: 'LUGGAGE RACK CROSS BAR', upullr: 'LUGGAGE RACH CROSS BAR' },
+  { kw: 'cargo rail',          tap: 'CARGO RACK',                   pap: 'TRUCK BED RAIL (EACH)' },
+  { kw: 'cargo cover',         pyp: 'CARGO COVER',                  pap: 'CARGO COVER, SHADE TYPE', wap: 'CARGO COVER RETRACTABLE', upullr: 'CARGO COVER' },
+  { kw: 'spare tire cover',    pnp: 'SPARE TIRE COVER',             tap: 'SPARE TIRE COVER', utpap: 'SPARE TIRE COVER MET', pap: 'SPARE TIRE COVER', wap: 'FLOOR MAT/ SPARE TIRE COVER', upullr: 'SPARE TIRE COVER' },
+  { kw: 'hitch',               pnp: 'TRAILER HITCH W/O BALL',       tap: 'TRAILER HITCH', utpap: 'TRAILERHITCH RECEIVE', pyp: 'TRAILER HITCH', pap: 'TRAILER HITCH RECEIVER', wap: 'TRAILERHITCH RECEIVER', upullr: 'TRAILER HITCH' },
+  // --- glass / roofs ---
+  { kw: 'panoramic sunroof',   pnp: 'SUN ROOF ASSY',               tap: 'SUNROOF ASSY+MOTOR', utpap: 'SUNROOF/T-TOP', pyp: 'ROOF GLASS PANORAMIC (FULL GLASS ROOF ASSEMBLY)', pap: 'TOP - SUNROOF FRAME WITH GLASS', wap: 'SUNROOF ASSEMBLY ELECTRIC', upullr: 'SUNROOF ASSEMBLY' },
+  { kw: 'panoramic',           pnp: 'SUN ROOF ASSY',               tap: 'SUNROOF ASSY+MOTOR', utpap: 'SUNROOF ASSY', pyp: 'ROOF GLASS PANORAMIC (FULL GLASS ROOF ASSEMBLY)', pap: 'TOP - SUNROOF FRAME WITH GLASS', wap: 'SUNROOF ASSEMBLY ELECTRIC', upullr: 'SUNROOF ASSEMBLY' },
+  { kw: 'sunroof motor',       pnp: 'SUN ROOF MOTOR',               pap: 'TOP MOTOR, SUNROOF' },
+  { kw: 'panoramic roof motor', pnp: 'SUN ROOF MOTOR',              pap: 'TOP MOTOR, SUNROOF' },
+  { kw: 'sunroof glass',       pyp: 'ROOF GLASS (SUN ROOF)',        pap: 'TOP - SUNROOF GLASS ONLY', wap: 'SUNROOF GLASS ONLY', upullr: 'SUNROOF GLASS ONLY' },
+  { kw: 'sunroof',             pnp: 'SUN ROOF ASSY',               tap: 'SUN ROOF ASSEMBLY', utpap: 'SUNROOF/T-TOP', pyp: 'ROOF GLASS (SUN ROOF)', pap: 'SUNROOF/COVER/SHADE ASSEMBLY W/MOTOR', wap: 'SUNROOF ASSEMBLY ELECTRIC', upullr: 'SUNROOF ASSEMBLY' },
+  { kw: 'targa',               pnp: 'T-TOP (EACH)',                 tap: 'SUNROOF/T-TOP', utpap: 'SUNROOF/T-TOP', pyp: 'ROOF GLASS (T-TOP)', pap: 'TOP, T-TOP (EACH)', upullr: 'T-TOPS' },
+  { kw: 't-top',               pnp: 'T-TOP (EACH)',                 tap: 'SUNROOF/T-TOP', utpap: 'SUNROOF/T-TOP', pyp: 'ROOF GLASS (T-TOP)', pap: 'TOP, T-TOP (EACH)', upullr: 'T-TOPS' },
+  { kw: 'hardtop motor',       pnp: 'TOP-CONVERTIBLE MOTOR',        utpap: 'CONVERTIBLE TOP MOTO', pyp: 'CONVERTIBLE TOP MOTOR', pap: 'TOP - CONVERTIBLE TOP MOTOR', wap: 'CONVERTIBLE TOP MOTOR', upullr: 'CONVERTIBLE TOP OR SLIDING DOOR MOTOR' },
+  { kw: 'roof motor',          pnp: 'TOP-CONVERTIBLE MOTOR',        utpap: 'CONVERTIBLE TOP MOTO', pyp: 'CONVERTIBLE TOP MOTOR', pap: 'TOP - CONVERTIBLE TOP MOTOR', wap: 'CONVERTIBLE TOP MOTOR', upullr: 'CONVERTIBLE TOP OR SLIDING DOOR MOTOR' },
+  { kw: 'convertible top motor', pnp: 'TOP-CONVERTIBLE MOTOR',      utpap: 'CONVERTIBLE TOP MOTO', pyp: 'CONVERTIBLE TOP MOTOR', pap: 'TOP - CONVERTIBLE TOP MOTOR', wap: 'CONVERTIBLE TOP MOTOR', upullr: 'CONVERTIBLE TOP OR SLIDING DOOR MOTOR' },
+  { kw: 'convertible top',     pnp: 'TOP-CONVERTIBLE (NO RAMS)',    tap: 'CONVERTIBLE TOP', utpap: 'CONVERTIBLE TOP CANV', pap: 'TOP - CONVERTIBLE (NO RAMS)', wap: 'CONVERTIBLE TOP ASSEMBLY', upullr: 'CONVERTIBLE TOP' },
+  { kw: 'soft top',            pnp: 'TOP-CONVERTIBLE (NO RAMS)',    tap: 'CONVERTIBLE TOP', utpap: 'CONVERTIBLE TOP CANV', pap: 'TOP - CONVERTIBLE (NO RAMS)', wap: 'CONVERTIBLE TOP CLOTH ONLY', upullr: 'CONVERTIBLE TOP' },
+  { kw: 'hardtop',             pap: 'HARDTOP W/O DOORS' },
+  { kw: 'barn door',           pnp: 'GLASS DOOR (BARE)',            tap: 'DOOR GLASS', utpap: 'DOOR GLASS', pyp: 'GLASS DOOR REAR', pap: 'DOOR GLASS (BARE)', wap: 'DOOR GLASS TRUCK', upullr: 'BACK GLASS' },
+  { kw: 'dutch door',          pnp: 'GLASS DOOR (BARE)',            tap: 'DOOR GLASS', utpap: 'DOOR GLASS', pyp: 'GLASS DOOR REAR', pap: 'DOOR GLASS (BARE)', wap: 'DOOR GLASS TRUCK', upullr: 'BACK GLASS' },
+  { kw: 'midgate',             pnp: 'GLASS BACK (ONLY)',            tap: 'BACK GLASS (SOLID)', utpap: 'BACK GLASS', pyp: 'GLASS BACK', wap: 'BACK GLASS TRUCK', upullr: 'BACK GLASS' },
+  { kw: 'liftgate glass',      pnp: 'GLASS BACK (ONLY)',            tap: 'GLASS HATCH', utpap: 'GLASS HATCH', pyp: 'GLASS BACK', wap: 'BACK GLASS HATCH', upullr: 'BACK GLASS' },
+  { kw: 'hatch glass',         pnp: 'GLASS BACK (ONLY)',            tap: 'GLASS HATCH', utpap: 'GLASS HATCH', pyp: 'GLASS BACK', wap: 'BACK GLASS HATCH', upullr: 'BACK GLASS' },
+  // --- doors / windows ---
+  { kw: 'sliding door motor',  pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'ELECTRIC MODULE', pyp: 'SLIDING DOOR MOTOR', pap: 'DOOR/HATCH MOTOR, (SLIDING VAN/SUV)', upullr: 'SLIDING DOOR MOTOR' },
+  { kw: 'door motor',          pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'ELECTRIC MODULE', pyp: 'SLIDING DOOR MOTOR', pap: 'DOOR/HATCH MOTOR, (SLIDING VAN/SUV)', upullr: 'SLIDING DOOR MOTOR' },
   { kw: 'liftgate',            pnp: 'DOOR/GATE MOTOR',             tap: 'SIDE DOOR SLIDE MTR', utpap: 'TAIL GATE/ ENDGATE', pyp: 'DECKLID/TAILGATE (BARE)', pap: 'DOOR/HATCH MOTOR, (SLIDING VAN/SUV)' },
-  { kw: 'sliding door control', pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
-  { kw: 'control module',      pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
-  { kw: 'radar',               pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
-  { kw: 'camera',              pnp: 'CONTROL MODULE',              tap: 'REVERSE CAMERA', utpap: 'COMPUTER', pyp: 'SENSOR CAMERAS', pap: 'CAMERA, ON BOARD OR BACK UP' },
-  { kw: 'module',              pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
-  { kw: 'roof rack',           pnp: 'LUGGAGE/SKI RACK',            tap: 'LUGGAGE RACK', utpap: 'LUGGAGE RACK', pyp: 'ROOF RACK ASSEMBLY', pap: 'LUGGAGE RACK' },
-  { kw: 'crossbar',            pnp: 'LUGGAGE/SKI RACK',            tap: 'CARGO RACK', utpap: 'LUGGAGE RACK', pyp: 'ROOF RACK RAIL/ CROSS BAR (EACH)', pap: 'LUGGAGE RACK CROSS BAR' },
-  { kw: 'grille',              pnp: 'GRILLE',                      tap: 'GRILLE', utpap: 'GRILLE LRG', pyp: 'GRILLE', pap: 'GRILLE PLASTIC (BARE) - ANY' },
-  { kw: 'running board',       pnp: 'RUNNING BOARDS (EACH)',       tap: 'RUNNING BOARD (EACH)', utpap: 'RUNNING BOARD', pyp: 'RUNNING BOARD', pap: 'RUNNING BOARD (EACH)' },
-  { kw: 'fender flare',        pnp: 'FENDER FLARE (EA)',           tap: 'FENDER TRIM/FLARES', utpap: 'FENDER EXTENSION', pyp: 'FENDER EXTENSION', pap: 'FENDER FLARE OR SKIRT' },
-  { kw: 'window regulator',    pnp: 'WINDOW REG W/MOTOR ELEC',    tap: 'WINDOW REG W/MOTOR', utpap: 'WINDOW REGULATOR', pyp: 'WINDOW REGULATOR FRONT (ELECTRIC)', pap: 'WINDOW REGULATOR W/MOTOR' },
-  { kw: 'tail light',          pnp: 'TAILLIGHT',                   tap: 'TAIL LIGHT ASSY ANY', utpap: 'TAIL LIGHT ASSY LRG', pyp: 'TAILLIGHT (QUARTER MOUNTED)', pap: 'TAILLIGHT ASSEMBLY - SINGLE SIDE' },
-  { kw: 'taillight',           pnp: 'TAILLIGHT',                   tap: 'TAIL LIGHT ASSY ANY', utpap: 'TAIL LIGHT ASSY LRG', pyp: 'TAILLIGHT (QUARTER MOUNTED)', pap: 'TAILLIGHT ASSEMBLY - SINGLE SIDE' },
-  { kw: 'wireless charging',   pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'ELECTRIC MODULE', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
-  { kw: 'charging pad',        pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'ELECTRIC MODULE', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL' },
-  { kw: 'entertainment',       pnp: 'LRG MULTIFUNCT DISPLAY',      tap: 'DVD PLAYER', utpap: 'RADIO CD PLAYER', pyp: 'GPS TV SCREEN', pap: 'VIDEO SCREEN' },
-  { kw: 'dvd',                 pnp: 'LRG MULTIFUNCT DISPLAY',      tap: 'DVD PLAYER', utpap: 'RADIO CD PLAYER', pyp: 'GPS TV SCREEN', pap: 'VIDEO SCREEN' },
-  { kw: 'cable',               pnp: 'CABLE/PUSH-PULL',             tap: 'CABLE (ANY)', utpap: 'SHIFTER CABLE', pyp: 'CABLE', pap: 'CABLE - BRAKE/CLUTCH/SHIFTER/THROTTLE/RELEASE' },
-  { kw: 'track',               pnp: 'SEAT TRACK ELEC W/MOTOR (EA)', tap: 'SEAT TRACKSET+MOTOR', utpap: 'SEAT TRACK ELECTRIC', pyp: 'SEAT TRACK, (ELECTRIC)', pap: 'SEAT TRACK, ELECTRIC W/MOTOR' },
-  { kw: 'dash pad',            pnp: 'DASH PAD',                    tap: 'DASH PAD', utpap: 'DASH PAD', pyp: 'DASH PAD', pap: 'DASH PAD (OVER 24in LENGTH)' },
-  { kw: 'console lid',         pnp: 'CONSOLE LID',                 tap: 'CONSOLE LID', utpap: 'CONSOLE LID', pyp: 'CENTER CONSOLE', pap: 'CONSOLE LID' },
-  { kw: 'console',             pnp: 'CONSOLE',                     tap: 'CONSOLE (ANY)', utpap: 'CONSOLE BARE', pyp: 'CENTER CONSOLE', pap: 'CONSOLE (OVER 16in LENGTH)' },
-  { kw: 'mudflap',             pnp: 'MUDFLAP',                     tap: 'MUDFLAP', utpap: 'MUD FLAP', pyp: 'MUD FLAP/SPLASH GUARD', pap: 'MUD FLAP OR SPLASH GUARD' },
-  { kw: 'emblem',              pnp: 'EMBLEM',                      tap: 'EMBLEM (ANY)', utpap: 'EMBLEM', pyp: 'EMBLEMS', pap: 'EMBLEM' },
-  { kw: 'wiper motor',         pnp: 'WIPER MOTOR',                 tap: 'WIPER MOTOR', utpap: 'WIPER MOTOR', pyp: 'ELECTRIC WIPER MOTOR, WINDSHIELD', pap: 'WINDSHIELD WIPER MOTOR' },
-  { kw: 'actuator',            pnp: 'ACTUATOR',                    tap: 'ACTUATOR', utpap: 'DOOR LOCK ACTUATOR', pyp: 'ACTUATOR', pap: 'ACTUATOR' },
-  { kw: 'transfer case motor', pnp: 'TRANSFER CASE MOTOR',         tap: 'TRANSFER CASE MOTOR', utpap: 'TRANSFERCAS ACTUATOR', pyp: 'TRANSFER CASE MOTOR', pap: '4 WHEEL DRIVE ACTUATOR VACUUM OR ELECTRIC' },
+  { kw: 'window regulator',    pnp: 'WINDOW REGULATOR W/MOTOR',   tap: 'WINDOW REG W/MOTOR', utpap: 'WINDOW REGULATOR', pyp: 'WINDOW REGULATOR FRONT (ELECTRIC)', pap: 'WINDOW REGULATOR W/MOTOR', wap: 'WINDOW REGULATOR W/ MOTOR', upullr: 'WINDOW REGULATOR POWER' },
+  { kw: 'master switch',       pnp: 'SWITCH POWER WINDOW(MULTI)',   tap: 'SWITCH COMBO', utpap: 'WINDOW SWITCH MASTER', pyp: 'DOOR ELECTRICAL SWITCH (MULTI)', pap: 'SWITCH, POWER WINDOW (MULTIPLE) ONLY', wap: 'SWITCH, MASTER WINDOW', upullr: 'SWITCH-MULTI' },
+  { kw: 'window switch',       pnp: 'SWITCH POWER WINDOW(MULTI)',   tap: 'SWITCH COMBO', utpap: 'WINDOW SWITCH MASTER', pyp: 'DOOR ELECTRICAL SWITCH (MULTI)', pap: 'SWITCH, POWER WINDOW (MULTIPLE) ONLY', wap: 'SWITCH, MASTER WINDOW', upullr: 'SWITCH-MULTI' },
+  { kw: 'door panel',          pnp: 'DOOR TRIM PANEL',              tap: 'INT DOOR PANEL', utpap: 'INTERIOR DOOR PANEL', pyp: 'DOOR PANEL FRONT (BARE)', pap: 'INTERIOR TRIM PANEL (OVER 8IN LONG)', wap: 'TRIM LARGE 18"+', upullr: 'DOOR TRIM PANEL' },
+  // --- interior ---
+  { kw: 'wood trim',           utpap: 'TRIM PANNEL',                pap: 'INTERIOR TRIM PANEL (OVER 8IN LONG)', wap: 'TRIM MEDIUM 9-18"' },
+  { kw: 'interior trim',       utpap: 'TRIM PANNEL',                pap: 'INTERIOR TRIM PANEL (OVER 8IN LONG)', wap: 'TRIM MEDIUM 9-18"' },
+  // ambiguous grab-bag names — pinned unmapped so shorter generic keywords
+  // ('shifter', 'targa', ...) can't mis-price them
+  { kw: 'chrome accessories' },
+  { kw: 'whole car' },
+  { kw: 'dash pad',            pnp: 'DASH PAD',                    tap: 'DASH PAD', utpap: 'DASH PAD', pyp: 'DASH PAD', pap: 'DASH PAD (OVER 24in LENGTH)', wap: 'DASH PAD', upullr: 'DASH PANEL OR PAD' },
+  { kw: 'console lid',         pnp: 'CONSOLE COVER',               tap: 'CONSOLE LID', utpap: 'CONSOLE LID', pyp: 'CENTER CONSOLE', pap: 'CONSOLE LID', wap: 'CONSOLE LID', upullr: 'CONSOLE LID' },
+  { kw: 'console',             pnp: 'CONSOLE',                     tap: 'CONSOLE (ANY)', utpap: 'CONSOLE BARE', pyp: 'CENTER CONSOLE', pap: 'CONSOLE (OVER 16in LENGTH)', wap: 'CONSOLE LG 17"+', upullr: 'CONSOLE (ANY)' },
+  // --- drivetrain / shifters ---
+  { kw: 'shift assembly',      pnp: 'TRANS FLOOR SHIFTER',          tap: 'SHIFTER LEVER ASSY', utpap: 'SHIFTER ARM MANUAL', pyp: 'SHIFT ASSEMBLY', pap: 'TRANSMISSION FLOOR SHIFTER', wap: 'SHIFTER LEVER ASSY', upullr: 'SHIFTER' },
+  { kw: 'shifter',             pnp: 'TRANS FLOOR SHIFTER',          tap: 'SHIFTER LEVER ASSY', utpap: 'SHIFTER ARM MANUAL', pyp: 'SHIFT ASSEMBLY', pap: 'TRANSMISSION FLOOR SHIFTER', wap: 'SHIFTER LEVER ASSY', upullr: 'SHIFTER' },
+  { kw: 'pedal',               pnp: 'PEDAL BRAKE/CLUTCH ASSY',      tap: 'PEDAL ASSY', utpap: 'CLUTCH PEDAL ASSY', pyp: 'BRAKE/CLUTCH PEDAL BOX', pap: 'PEDAL, BRAKE & CLUTCH ASSEMBLY', wap: 'PEDAL ASSEMBLY', upullr: 'PEDAL(ANY)' },
+  { kw: 'transfer case shift motor', pnp: 'TRANSFER CASE MOTOR',    tap: 'TRANSFER CASE MOTOR', utpap: 'TRANSFERCAS ACTUATOR', pyp: 'TRANSFER CASE MOTOR', pap: '4 WHEEL DRIVE ACTUATOR VACUUM OR ELECTRIC', wap: 'TRANSFER CASE MOTOR', upullr: 'TRANSFER CASE SHIFT MOTOR' },
+  { kw: 'transfer case motor', pnp: 'TRANSFER CASE MOTOR',         tap: 'TRANSFER CASE MOTOR', utpap: 'TRANSFERCAS ACTUATOR', pyp: 'TRANSFER CASE MOTOR', pap: '4 WHEEL DRIVE ACTUATOR VACUUM OR ELECTRIC', wap: 'TRANSFER CASE MOTOR', upullr: 'TRANSFER CASE SHIFT MOTOR' },
+  { kw: 'awd transfer case',   pnp: 'TRANSFER CASE 4X4',           tap: 'TRANSFER CASE (4X4)', utpap: 'TRANSFER CASE ( 4X4)', pyp: 'TRANSFER CASE', pap: 'TRANSFER CASE, 4X4', wap: 'TRANSFER CASE ASSEMBLY', upullr: 'TRANSFER CASE ( 4X4)' },
+  { kw: '4wd selector',        pnp: 'SWITCH MISC',                  tap: 'SWITCH SINGLE', utpap: 'ELECTRIC SWITCH', pyp: 'TRANSFER CASE SWITCH (4X4)', pap: 'SWITCH, MISC.', wap: 'SWITCH, SINGLE', upullr: 'SWITCH SINGLE' },
+  { kw: 'differential controller', pnp: 'CONTROL MODULE',           tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL', wap: 'MODULE, BODY CONTROL', upullr: 'ELECT MODULE OTHER THAN ECM' },
+  { kw: 'diff',                pnp: 'REAR END CARRIER ASSEMBLY',    tap: 'DIFFERENTIAL', utpap: 'AXLE CARRIER', pyp: 'CARRIER ASSEMBLY', pap: 'DIFFERENTIAL (FRONT, REAR OR 3RD MEMBER DROP-OUT)', wap: 'DIFFERENTIAL CARRIER W/ GEARS', upullr: 'DIFFERENTIAL CARRIER' },
+  { kw: 'plenum',              pnp: 'MANIFOLD INTAKE',              tap: 'INTAKE PLENUM', utpap: 'INTAKE MANIFOLD', pyp: 'INTAKE MANIFOLD', pap: 'INTAKE PLENUM, UPPER', wap: 'INTAKE MANIFOLD OEM', upullr: 'INTAKE/EXH MANIFOLD' },
+  { kw: 'intake',              pnp: 'MANIFOLD INTAKE',              tap: 'INTAKE MANIFOLD', utpap: 'INTAKE MANIFOLD', pyp: 'INTAKE MANIFOLD', wap: 'INTAKE MANIFOLD OEM', upullr: 'INTAKE/EXH MANIFOLD' },
+  { kw: 'intercooler',         pnp: 'INTERCOOLER',                  tap: 'TURBO INTERCOOLER', utpap: 'TURBO INNER COOLER', pyp: 'INTERCOOLER', pap: 'TURBO INTERCOOLER', wap: 'INTERCOOLER', upullr: 'TURBO INTER COOLER' },
+  // --- suspension ---
+  { kw: 'suspension compressor', pnp: "AIR COMPRESSOR(AIR SUSP'N)", utpap: 'AIR SHOCK PUMP', pyp: 'SUSPENSION COMPRESSOR/PUMP', pap: 'AIR COMPRESSOR (AIR SUSPENSION)', upullr: 'AIR RIDE PUMP' },
+  { kw: 'air suspension',      pnp: "AIR COMPRESSOR(AIR SUSP'N)", utpap: 'AIR SHOCK PUMP', pyp: 'SUSPENSION COMPRESSOR/PUMP', pap: 'AIR COMPRESSOR (AIR SUSPENSION)', upullr: 'AIR RIDE PUMP' },
+  { kw: 'air spring',          pyp: 'STRUT (AIR)',                  pap: 'SHOCK ABSORBER AIR OR AIRBAG TYPE', wap: 'SUSPENSION AIR BAG', upullr: 'STRUT-AIR BAG TYPE' },
+  { kw: 'hood shock',          pnp: 'HATCH OR HOOD SHOCK',          tap: 'HOOD/TRUNK SHOCKS', utpap: 'SHOCK HOOD/LID', pap: 'HATCH OR HOOD SHOCK (MANUAL)', wap: 'HOOD SHOCK', upullr: 'GAS STRUTS' },
+  { kw: 'hatch shock',         pnp: 'HATCH OR HOOD SHOCK',          tap: 'HOOD/TRUNK SHOCKS', utpap: 'SHOCK HOOD/LID', pap: 'HATCH OR HOOD SHOCK (MANUAL)', wap: 'HATCH SHOCK', upullr: 'GAS STRUTS' },
+  { kw: 'air shock',           pnp: 'SHOCK ABSORBER',               tap: 'SHOCK', utpap: 'SHOCK', pyp: 'SHOCK ABSORBER', pap: 'SHOCK ABSORBER AIR OR AIRBAG TYPE', wap: 'AIR SHOCK ONLY', upullr: 'SHOCK' },
+  { kw: 'autoride',            pnp: 'SHOCK ABSORBER',               tap: 'SHOCK', utpap: 'SHOCK', pyp: 'SHOCK ABSORBER', pap: 'SHOCK ABSORBER AIR OR AIRBAG TYPE', wap: 'AIR SHOCK ONLY', upullr: 'SHOCK' },
+  { kw: 'shock',               pnp: 'SHOCK ABSORBER',               tap: 'SHOCK', utpap: 'SHOCK', pyp: 'SHOCK ABSORBER', pap: 'SHOCK ABSORBER (REGULAR)', wap: 'SHOCK ABSORBER NO SPRING', upullr: 'SHOCK' },
+  // --- wheels ---
+  { kw: 'wheels (set',         pnp: 'WHEEL & TIRE CUSTOM SET 4',    utpap: 'PREMI WHEEL/TIRE SET', pyp: 'TIRE/WHEEL SET' },
+  // --- brakes ---
+  { kw: 'brembo',              pnp: 'BRAKE CALIPER',                tap: 'BRAKE CALIPER', utpap: 'BRAKE CALIPER 2-4 PI', pyp: 'BRAKE CALIPER', pap: 'BRAKE CALIPER', wap: 'CALIPER 4 PISTON', upullr: 'BRAKE CALIPER' },
+  { kw: 'brake caliper',       pnp: 'BRAKE CALIPER',                tap: 'BRAKE CALIPER', utpap: 'BRAKE CALIPER 2-4 PI', pyp: 'BRAKE CALIPER', pap: 'BRAKE CALIPER', wap: 'CALIPER 1 PISTON', upullr: 'BRAKE CALIPER' },
+  { kw: 'caliper',             pnp: 'BRAKE CALIPER',                tap: 'BRAKE CALIPER', utpap: 'BRAKE CALIPER 2-4 PI', pyp: 'BRAKE CALIPER', pap: 'BRAKE CALIPER', wap: 'CALIPER 1 PISTON', upullr: 'BRAKE CALIPER' },
+  // --- steering ---
+  { kw: 'steering wheel',      pnp: 'STEERING WHEEL',               tap: 'STEERNG WHL W/SWITCH', utpap: 'STEERING WHEEL', pyp: 'STEERING WHEEL', pap: 'STEERING WHEEL', wap: 'STEERING WHEEL NO AIR BAG', upullr: 'STEERING WHEEL' },
+  // --- modules / electronics ---
+  { kw: 'sliding door control', pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL', wap: 'MODULE, BODY CONTROL', upullr: 'ELECT MODULE OTHER THAN ECM' },
+  { kw: 'control module',      pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL', wap: 'MODULE, BODY CONTROL', upullr: 'ELECT MODULE OTHER THAN ECM' },
+  { kw: 'radar',               pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL', wap: 'MODULE, BODY CONTROL', upullr: 'ELECT MODULE OTHER THAN ECM' },
+  { kw: 'camera',              pnp: 'CONTROL MODULE',              tap: 'REVERSE CAMERA', utpap: 'COMPUTER', pyp: 'SENSOR CAMERAS', pap: 'CAMERA, ON BOARD OR BACK UP', wap: 'CAMERA', upullr: 'BACKUP CAMERA' },
+  { kw: 'module',              pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'COMPUTER', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL', wap: 'MODULE, BODY CONTROL', upullr: 'ELECT MODULE OTHER THAN ECM' },
+  { kw: 'wireless charging',   pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'ELECTRIC MODULE', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL', wap: 'MODULE, BODY CONTROL', upullr: 'ELECT MODULE OTHER THAN ECM' },
+  { kw: 'charging pad',        pnp: 'CONTROL MODULE',              tap: 'MODULE', utpap: 'ELECTRIC MODULE', pyp: 'CHASSIS CONTROL MODULE', pap: 'MODULE - BODY / CHASSIS / GATEWAY/ FUEL', wap: 'MODULE, BODY CONTROL', upullr: 'ELECT MODULE OTHER THAN ECM' },
+  // --- misc ---
+  { kw: 'cable',               tap: 'CABLE (ANY)',                  utpap: 'SHIFTER CABLE', pyp: 'CABLE', pap: 'CABLE - BRAKE/CLUTCH/SHIFTER/THROTTLE/RELEASE', wap: 'CABLE (MISCELLANEOUS)', upullr: 'MISC CABLES' },
+  { kw: 'wiper motor',         pnp: 'WINDSHIELD WIPER MOTOR',      tap: 'WIPER MOTOR', utpap: 'WIPER MOTOR', pyp: 'ELECTRIC WIPER MOTOR, WINDSHIELD', pap: 'WINDSHIELD WIPER MOTOR', wap: 'WIPER MOTOR', upullr: 'ELECTRIC MOTORS' },
+  { kw: 'actuator',            pnp: 'ACUATOR (4X4)',               tap: 'ACTUATOR', utpap: 'TRANSFERCAS ACTUATOR', pyp: 'ACTUATOR', pap: 'ACTUATOR', wap: '4X4 ACTUATOR' },
+  { kw: 'switch',              pnp: 'SWITCH MISC',                  tap: 'SWITCH SINGLE', utpap: 'ELECTRIC SWITCH', pap: 'SWITCH, MISC.', wap: 'SWITCH, SINGLE', upullr: 'SWITCH SINGLE' },
 ];
 
 /* Strict provenance: each chain's price list applies ONLY to that chain's own
@@ -154,6 +261,17 @@ function _lookupYardCostUncached(partName, location) {
     const yard = papPricing[location];
     const e = yard && bestMatch.pap ? yard[bestMatch.pap] : null;
     return e ? { cost: parseFloat(e.price), source: 'pap', yardName: bestMatch.pap } : none;
+  }
+  // Wrench-A-Part yard names aren't all prefix-consistent ("Primo Wrench-A-Part
+  // - Del Valle", "Roosevelt Wrench-A-Part - San Antonio"), so match anywhere.
+  if (loc.includes('wrench-a-part')) {
+    const yard = wapPricing[location];
+    const e = yard && bestMatch.wap ? yard[bestMatch.wap] : null;
+    return e ? { cost: parseFloat(e.price), source: 'wap', yardName: bestMatch.wap } : none;
+  }
+  if (loc.startsWith('u-pull-r')) {
+    const u = bestMatch.upullr ? upullrPricing[bestMatch.upullr] : null;
+    return u ? { cost: parseFloat(u.price), source: 'upullr', yardName: u.description } : none;
   }
   return none;
 }
@@ -231,7 +349,7 @@ function vinMetaHtml(v) {
  * permanent copy of the product. Deliberate decision, not an oversight. */
 
 async function loadAllPricing() {
-  // All five price lists fetch in parallel (this used to be a serial
+  // All chain price lists fetch in parallel (this used to be a serial
   // waterfall queued in front of the big inventory fetch). Each is optional.
   const grab = async (url, apply) => {
     try {
@@ -245,6 +363,8 @@ async function loadAllPricing() {
     grab('data/tearapart_pricing.json', d => d.forEach(p => { tapPricing[p.description] = p; })),
     grab('data/pyp_pricing.json', d => { pypPricing = d; }),
     grab('data/pap_pricing.json', d => { papPricing = d; }),
+    grab('data/wap_pricing.json', d => { wapPricing = d; }),
+    grab('data/upullr_pricing.json', d => d.forEach(p => { upullrPricing[p.description] = p; })),
   ]);
   _yardCostMemo.clear();
 }
@@ -1291,13 +1411,15 @@ function renderLive() {
       let anyUnknownCost = false;
       const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
       let demandRk = 0;
-      const chainLabel = { pnp: 'PnP list', tap: 'TAP list', utpap: 'UTPAP list', pyp: 'PYP list', pap: 'PAP list' };
+      const chainLabel = { pnp: 'PnP list', tap: 'TAP list', utpap: 'UTPAP list', pyp: 'PYP list', pap: 'PAP list', wap: 'WAP list', upullr: 'UPR list' };
       const chainTitle = {
         pnp: 'Pick-n-Pull published price',
         tap: 'Tear-A-Part published price',
         utpap: 'Utah Pic-A-Part published price',
         pyp: 'This Pick Your Part yard\u2019s published price',
         pap: 'This Pull-A-Part yard\u2019s published price',
+        wap: 'This Wrench-A-Part yard\u2019s published price',
+        upullr: 'U-Pull-R Parts published price',
       };
       const partRows = v.topParts.map(p => {
         const lookup = lookupYardCost(p.name, v.location);
@@ -1561,6 +1683,10 @@ const CHAIN_PRICE_PAGES = [
   [/^pull[\s-]*a[\s-]*part/i, 'https://www.pullapart.com/used-auto-parts/parts-pricing/', 'Pull-A-Part'],
   [/^tear[\s-]*a[\s-]*part/i, 'https://tearapart.com/price-list/', 'Tear-A-Part'],
   [/pic[\s-]*a[\s-]*part/i, 'https://utpap.com/ogden-prices/', 'Utah Pic-A-Part'],
+  // Wrench-A-Part publishes per-location lists; every page carries the same
+  // location picker, so the Austin URL works as the chain-wide entry point.
+  [/wrench[\s-]*a[\s-]*part/i, 'https://wrenchapart.com/austin-price-list', 'Wrench-A-Part'],
+  [/^u[\s-]*pull[\s-]*r/i, 'https://upullrparts.com/part-pricing/', 'U-Pull-R Parts'],
   // LKQ Pick Your Part publishes prices per location inside its site/app with
   // no stable public price-list URL, so those yards get no link.
 ];

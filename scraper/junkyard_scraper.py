@@ -257,6 +257,16 @@ PYP_PRICE_DESCRIPTIONS = {
     "TAILLIGHT (QUARTER MOUNTED)", "TAILLIGHT TRUNK LID/HATCH MOUNTED", "CABLE",
     "SEAT TRACK, (ELECTRIC)", "DASH PAD", "CENTER CONSOLE", "MUD FLAP/SPLASH GUARD",
     "EMBLEMS", "ELECTRIC WIPER MOTOR, WINDSHIELD", "ACTUATOR", "TRANSFER CASE MOTOR",
+    # coverage expansion (2026-09): clusters, tailgates, shifters, hybrid,
+    # glass, suspension, tops — every name verified against the live PriceList API.
+    "ALTERNATOR", "INSTRUMENT CLUSTER", "GAUGES", "SHIFT ASSEMBLY",
+    "DOOR ELECTRICAL SWITCH (MULTI)", "TRANSFER CASE SWITCH (4X4)", "CARGO COVER",
+    "SKID PLATE", "DC CONVERTER (HYBRID/ELECTRIC)", "BATTERY (HYBRID BATTERY)",
+    "TRAILER HITCH", "GLASS DOOR REAR", "GLASS BACK", "ROOF GLASS (T-TOP)",
+    "ROOF GLASS PANORAMIC (FULL GLASS ROOF ASSEMBLY)", "CONVERTIBLE TOP MOTOR",
+    "TIRE/WHEEL SET", "SHOCK ABSORBER", "STRUT (AIR)", "SUSPENSION COMPRESSOR/PUMP",
+    "INTAKE MANIFOLD", "BRAKE/CLUTCH PEDAL BOX", "CARRIER ASSEMBLY", "WATER PUMP",
+    "DOOR PANEL FRONT (BARE)", "TRANSFER CASE",
 }
 PAP_PRICE_PARTNAMES = {
     "HEADLIGHT ASSEMBLY (NON-HID/BALLAST)", "HEADLIGHT LED OR HID LAMP ASSEMBLY W/BALLAST",
@@ -275,6 +285,21 @@ PAP_PRICE_PARTNAMES = {
     "DASH PAD (OVER 24in LENGTH)", "CONSOLE LID", "CONSOLE (OVER 16in LENGTH)",
     "MUD FLAP OR SPLASH GUARD", "EMBLEM", "WINDSHIELD WIPER MOTOR", "ACTUATOR",
     "4 WHEEL DRIVE ACTUATOR VACUUM OR ELECTRIC",
+    # coverage expansion (2026-09) — verified against GetPartsTermSearch.
+    "TRUCK GATE FOR BED", "ALTERNATOR (NON HYBRID)", "INSTRUMENT CLUSTER ASSEMBLY",
+    "CLOCK OR SMALL GAUGES (EACH)", "SPEEDOMETER OR TACHOMETER",
+    "TRANSMISSION FLOOR SHIFTER", "SWITCH, POWER WINDOW (MULTIPLE) ONLY",
+    "SWITCH, MISC.", "SKID PLATE", "CARGO COVER, SHADE TYPE",
+    "HYBRID POWER CONTROL MODULE/INVERTER", "HYBRID BATTERY ANY",
+    "TRAILER HITCH RECEIVER", "DOOR GLASS (BARE)", "SHOCK ABSORBER (REGULAR)",
+    "SHOCK ABSORBER AIR OR AIRBAG TYPE", "HATCH OR HOOD SHOCK (MANUAL)",
+    "AIR COMPRESSOR (AIR SUSPENSION)", "TOP, T-TOP (EACH)", "HARDTOP W/O DOORS",
+    "TOP - CONVERTIBLE TOP MOTOR", "TOP - CONVERTIBLE (NO RAMS)",
+    "TOP - SUNROOF FRAME WITH GLASS", "TOP - SUNROOF GLASS ONLY",
+    "TOP MOTOR, SUNROOF", "INTAKE PLENUM, UPPER",
+    "INTERIOR TRIM PANEL (OVER 8IN LONG)", "PEDAL, BRAKE & CLUTCH ASSEMBLY",
+    "DIFFERENTIAL (FRONT, REAR OR 3RD MEMBER DROP-OUT)", "TRUCK BED RAIL (EACH)",
+    "AUXILIARY WATER PUMP", "TRANSFER CASE, 4X4", "SPARE TIRE COVER",
 }
 
 # ---------------------------------------------------------------------------
@@ -5966,6 +5991,86 @@ def fetch_wrenchapart_inventory() -> list[dict]:
     return unique
 
 
+# Wrench-A-Part publishes a real per-location price list through the same API
+# their Svelte price-list pages use (wrenchapart.com/{slug}-price-list).
+# Prices genuinely differ per yard, and each item carries one or more price
+# groups: STANDARD at the regular yards, PREMIUM at Primo (late-model yard) —
+# prefer STANDARD, fall back to PREMIUM.
+WAP_PRICELIST_API = "https://api.wrenchapart.com/price-list"
+
+# Part names worth carrying into the per-yard price file (keyword-mapped by the
+# web UI) — same size-control convention as PYP_PRICE_DESCRIPTIONS above.
+WAP_PRICE_PARTNAMES = {
+    "HEADLAMP COMP HID", "HEADLAMP COMPOSITE NO HID", "TAIL LIGHT SMALL",
+    "FOG LIGHT", "BENCH SEAT", "SEAT TRACK ELECTRIC", "INSTRUMENT CLUSTER DIGITAL",
+    "INSTRUMENT CLUSTER ANALOG", "GAUGE (SINGLE/MISC)", "ALTERNATOR",
+    "HYBRID BATTERY", "WATER PUMP", "INVERTER HYBRID", "AMPLIFIER OEM",
+    'SPEAKER 0-5.9"', "RADIO (SCREEN)", "RADIO (NO SCREEN)", "HEADREST SCREEN",
+    "BUMPER ASSEMBLY FRONT CAR", "BUMPER COVER FRONT (BARE)", "TAILGATE BARE",
+    "SPOILER NO LIGHT", 'GRILLE 19-48"', "RUNNING BOARD NON-ELECTRIC",
+    "FENDER TRIM/ FLARES", "EMBLEM (SMALL)", "SKID PLATE",
+    "DOOR MIRROR POWER REGULAR", "LUGGAGE RACK", "CARGO COVER RETRACTABLE",
+    "TRAILERHITCH RECEIVER", "SUNROOF ASSEMBLY ELECTRIC", "SUNROOF GLASS ONLY",
+    "CONVERTIBLE TOP MOTOR", "CONVERTIBLE TOP ASSEMBLY", "CONVERTIBLE TOP CLOTH ONLY",
+    "DOOR GLASS TRUCK", "BACK GLASS TRUCK", "BACK GLASS HATCH",
+    "WINDOW REGULATOR W/ MOTOR", "SWITCH, MASTER WINDOW", 'TRIM LARGE 18"+',
+    'TRIM MEDIUM 9-18"', "DASH PAD", "CONSOLE LID", 'CONSOLE LG 17"+',
+    "SHIFTER LEVER ASSY", "PEDAL ASSEMBLY", "TRANSFER CASE MOTOR",
+    "SWITCH, SINGLE", "DIFFERENTIAL CARRIER W/ GEARS", "INTAKE MANIFOLD OEM",
+    "INTERCOOLER", "SUSPENSION AIR BAG", "HOOD SHOCK", "HATCH SHOCK",
+    "AIR SHOCK ONLY", "SHOCK ABSORBER NO SPRING", "CALIPER 4 PISTON",
+    "CALIPER 1 PISTON", "STEERING WHEEL NO AIR BAG", "MODULE, BODY CONTROL",
+    "CAMERA", "CABLE (MISCELLANEOUS)", "WIPER MOTOR", "4X4 ACTUATOR",
+    "TRANSFER CASE ASSEMBLY", "FLOOR MAT/ SPARE TIRE COVER",
+}
+
+
+def refresh_wap_pricing_file() -> Path:
+    """Per-yard Wrench-A-Part price lists -> wap_pricing.json, keyed by yard
+    display name (matches _location on inventory rows)."""
+    out: dict[str, dict] = {}
+    for yard_id, yard in WAP_YARDS.items():
+        try:
+            r = requests.get(
+                WAP_PRICELIST_API,
+                params={"locationId": str(yard_id)},
+                headers=HEADERS,
+                timeout=30,
+            )
+            r.raise_for_status()
+            rows = r.json()
+        except Exception as e:
+            print(f"  [WAP pricing] {yard['name']}: {e}", file=sys.stderr)
+            continue
+        prices = {}
+        for p in rows if isinstance(rows, list) else []:
+            name = (p.get("name") or "").strip()
+            if name not in WAP_PRICE_PARTNAMES:
+                continue
+            # Group names vary by yard ("STANDARD", "Standard", "PREMIUM" at
+            # the Primo late-model yard) — prefer standard, else take any.
+            groups = {k.upper(): v for k, v in (p.get("prices") or {}).items()}
+            entry = groups.get("STANDARD") or groups.get("PREMIUM") or next(iter(groups.values()), None)
+            if not entry:
+                continue
+            try:
+                price = float(entry.get("price"))
+            except (TypeError, ValueError):
+                continue
+            try:
+                core = float(entry.get("core"))
+            except (TypeError, ValueError):
+                core = 0.0  # the API uses "-" for no core charge
+            prices[name] = {"price": price, "core": core}
+        if prices:
+            out[yard["name"]] = prices
+        time.sleep(0.2)
+    path = DATA_DIR / "wap_pricing.json"
+    path.write_text(json.dumps(out, separators=(",", ":")))
+    print(f"  [WAP pricing] wrote {len(out)} yard price lists", file=sys.stderr)
+    return path
+
+
 # U-Pull-R Parts (Rosemount + East Bethel MN, Toledo OH) — WordPress
 # admin-ajax gateway (action=doApiCall) returning clean JSON; robots.txt
 # explicitly allows admin-ajax.php. Same vendor plugin family as Pull-N-Save
@@ -6071,6 +6176,75 @@ def fetch_upullr_inventory() -> list[dict]:
     print(f"  [U-Pull-R] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
+
+
+# U-Pull-R publishes one chain-wide flat-rate price list (same prices at all
+# three yards) at upullrparts.com/part-pricing/ — standard Elementor price-list
+# widgets, parsed with a regex. Stored flat like tearapart/utpap pricing.
+UPR_PRICING_URL = "https://upullrparts.com/part-pricing/"
+
+# The page's hidden style-template widget contains placeholder rows.
+_UPR_PLACEHOLDER_ROWS = {
+    "do not delete this list widget",
+    "it is used to style the main list",
+    "second item on the list",
+    "third item on the list",
+}
+
+
+def refresh_upullr_pricing_file() -> Path:
+    """Refresh U-Pull-R's published price list -> upullr_pricing.json.
+
+    The existing file is only overwritten when the fetch looks complete
+    (>200 parts), so a partial/failed run never clobbers good data."""
+    import html as html_mod
+
+    try:
+        r = requests.get(UPR_PRICING_URL, headers=HEADERS, timeout=30)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [U-Pull-R pricing] fetch failed: {e}", file=sys.stderr)
+        return DATA_DIR / "upullr_pricing.json"
+
+    rows = re.findall(
+        r'elementor-price-list-title">([^<]+)</span>.*?'
+        r'elementor-price-list-price">\$?\s*([0-9][0-9.,]*)</span>\s*</div>'
+        r'(?:<p class="elementor-price-list-description">([^<]*)</p>)?',
+        page,
+        re.S,
+    )
+    seen: dict[str, dict] = {}
+    for name, price, desc in rows:
+        name = html_mod.unescape(name).strip()
+        if not name or name.lower() in _UPR_PLACEHOLDER_ROWS:
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+        except ValueError:
+            continue
+        core = 0.0
+        m = re.search(r"Core Price:\s*\$?\s*([0-9.]+)", desc or "")
+        if m:
+            core = float(m.group(1))
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core:.2f}",
+                "totalPrice": f"{price_f + core:.2f}",
+            }
+
+    path = DATA_DIR / "upullr_pricing.json"
+    if len(seen) > 200:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [U-Pull-R pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(
+            f"  [U-Pull-R pricing] only {len(seen)} parts parsed — keeping existing file",
+            file=sys.stderr,
+        )
+    return path
 
 
 def fetch_independent_inventory() -> list[dict]:
@@ -6975,6 +7149,8 @@ def main():
         refresh_pnp_pricing_file()
         refresh_pyp_pricing_file()
         refresh_pap_pricing_file()
+        refresh_wap_pricing_file()
+        refresh_upullr_pricing_file()
         return
 
     if args.list_parts:
