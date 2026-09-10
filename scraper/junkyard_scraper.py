@@ -108,7 +108,7 @@ VPIC_BATCH_URL = "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/"
 # evidence (see scraper/price_validation_report.md). Bump when accepting
 # corrections from a quarterly price-review PR. Exported to the v2 JSON and
 # shown in the web app's pricing-transparency footer.
-PRICES_LAST_REVIEWED = "2026-09-09"
+PRICES_LAST_REVIEWED = "2026-09-10"  # new-part ceiling audit (see price_baseline.json new_ceilings)
 VPIC_BATCH_SIZE = 50
 _VPIC_CACHE: dict[str, dict | None] = {}
 def _vpic_workers() -> int:
@@ -325,10 +325,10 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_min": 2018},
             {"name": "TRD Pro Grille", "rarity": "Epic", "low": 200, "high": 400, "cost": 30, "yr_min": 2014},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2007},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 420, "cost": 30, "yr_min": 2007},  # new quality aftermarket pairs ~$400-450 — 80% ceiling (2026-09)
             {"name": "Tailgate (w/ camera)", "rarity": "Rare", "low": 200, "high": 450, "cost": 40, "yr_min": 2014},
             {"name": "JBL Speakers + Amp", "rarity": "Rare", "low": 150, "high": 350, "cost": 25},
-            {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20, "yr_max": 2013},
+            {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 70, "high": 170, "cost": 20, "yr_max": 2013},  # new DEPO/TYC pairs ~$110-160 — 80% ceiling (2026-09)
         ],
     },
     "sequoia": {
@@ -356,7 +356,7 @@ UNOBTANIUM_DB = {
         "year_range": (1997, 2024),
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 250, "high": 500, "cost": 40, "yr_min": 2018},
-            {"name": "BSM Side Mirror (heated, power fold)", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 15, "yr_min": 2012},
+            {"name": "BSM Side Mirror (heated, power fold)", "rarity": "Uncommon", "low": 75, "high": 150, "cost": 15, "yr_min": 2012},  # new aftermarket BSM-capable units ~$140-180 each — 80% ceiling (2026-09)
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20, "yr_max": 2017},
         ],
     },
@@ -1009,7 +1009,7 @@ UNOBTANIUM_DB = {
         "make": "Kia",
         "year_range": (2010, 2024),
         "top_parts": [
-            {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 28},
+            {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 28},  # new TYC/DEPO pairs ~$100-140 — 80% ceiling; old band beat new price (2026-09)
             {"name": "Touchscreen / UVO Head Unit", "rarity": "Uncommon", "low": 120, "high": 280, "cost": 45, "yr_min": 2014},
             {"name": "Panoramic Sunroof Assembly", "rarity": "Rare", "low": 200, "high": 450, "cost": 44, "yr_min": 2014, "trim": ["Exclaim", "GT-Line"]},
         ],
@@ -1041,7 +1041,7 @@ UNOBTANIUM_DB = {
         "make": "Volkswagen",
         "year_range": (1998, 2024),
         "top_parts": [
-            {"name": "Headlights (clear, OEM)", "rarity": "Uncommon", "low": 90, "high": 240, "cost": 35},
+            {"name": "Headlights (clear, OEM)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 35},  # new DEPO pairs ~$140-200 — 80% ceiling caps used high (2026-09)
             {"name": "Touchscreen / MIB Unit", "rarity": "Uncommon", "low": 150, "high": 350, "cost": 50, "yr_min": 2012},
         ],
     },
@@ -1051,7 +1051,7 @@ UNOBTANIUM_DB = {
         "year_range": (2011, 2017),
         "top_parts": [
             {"name": "Uconnect Touchscreen", "rarity": "Uncommon", "low": 120, "high": 280, "cost": 45, "yr_min": 2012},
-            {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 28},
+            {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 28},  # new TYC/DEPO pairs ~$90-130 — 80% ceiling; old band beat new price (2026-09)
         ],
     },
     "sonic": {
@@ -2295,7 +2295,7 @@ UNOBTANIUM_DB = {
         "year_range": (1980, 2024),
         "top_parts": [
             {"name": "7.3L Powerstroke Parts (turbo, HPOP — verify engine)", "rarity": "Legendary", "low": 250, "high": 700, "cost": 50, "yr_min": 1994, "yr_max": 2003},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2008},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 420, "cost": 30, "yr_min": 2008},  # new Super Duty pairs $415-515 (AmericanTrucks/BoostAuto) — 80% ceiling (2026-09)
             {"name": "Tailgate (w/ step)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "yr_min": 2008},
             {"name": "Crew Cab Rear Bench", "rarity": "Uncommon", "low": 80, "high": 225, "cost": 25},
         ],
@@ -2306,7 +2306,7 @@ UNOBTANIUM_DB = {
         "year_range": (1980, 2024),
         "top_parts": [
             {"name": "7.3L Powerstroke Parts (turbo, HPOP — verify engine)", "rarity": "Legendary", "low": 250, "high": 700, "cost": 50, "yr_min": 1994, "yr_max": 2003},
-            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30, "yr_min": 2008},
+            {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 420, "cost": 30, "yr_min": 2008},  # new Super Duty pairs $415-515 (AmericanTrucks/BoostAuto) — 80% ceiling (2026-09)
             {"name": "Dually Fenders / Bed Parts", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
         ],
     },
@@ -2356,7 +2356,7 @@ UNOBTANIUM_DB = {
         "year_range": (1994, 2024),
         "top_parts": [
             {"name": "Cummins Parts (injectors, turbo — verify engine)", "rarity": "Legendary", "low": 250, "high": 700, "cost": 50},
-            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_min": 2010},
+            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 150, "high": 280, "cost": 30, "yr_min": 2010},  # new quality manual-fold tow pairs ~$280-350 — 80% ceiling (2026-09)
             {"name": "Tailgate (straight)", "rarity": "Rare", "low": 120, "high": 300, "cost": 40},
         ],
     },
@@ -2858,7 +2858,7 @@ UNOBTANIUM_DB.update({
     "titan": {
         "display": "Nissan Titan", "make": "Nissan", "year_range": (2004, 2024),
         "top_parts": [
-            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 220, "cost": 25},
+            {"name": "Tow Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 200, "cost": 25},  # new quality tow pairs ~$200-260 — 80% ceiling (2026-09)
             {"name": "Tailgate (straight)", "rarity": "Uncommon", "low": 100, "high": 280, "cost": 30},
             {"name": "Rockford Fosgate Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 20},
         ],
@@ -3440,6 +3440,7 @@ def _split_generations(base_key: str, *, display: str, make: str,
 
 _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
     {"label": "1st/2nd gen", "years": (1984, 1995), "parts": [
+        # new Aisin FHT-018 ~$101-149/hub ($200-300 pair, newparts/yotashop); cheap clones ~$60-120 — OEM premium real, used OEM sold $120-220, ceiling 0.8x$250 OK (2026-09)
         {"name": "Manual Locking Hubs (pair)", "rarity": "Epic", "low": 80, "high": 200, "cost": 20, "drive": ["4wd"]},
         {"name": "Rear Liftgate Glass + Regulator (works)", "rarity": "Epic", "low": 100, "high": 300, "cost": 30},
         {"name": "Corner/Marker Lights (pair, uncracked)", "rarity": "Rare", "low": 40, "high": 120, "cost": 12},
@@ -3452,9 +3453,9 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
         # Factory rear e-locker is a 3rd-gen option — previously claimed for ALL years.
         {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15},
         {"name": "Rear Liftgate Glass + Regulator (works)", "rarity": "Epic", "low": 100, "high": 300, "cost": 30},
-        {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 180, "cost": 20},  # new DEPO/TYC pair $148-172 (HeadlightsDepot 2026-09) — 80% ceiling caps used high
         {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
-        {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 175, "cost": 15},
+        {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 130, "cost": 15},  # new heated power pairs (Dorman/Kool Vue) ~$100-160 — 80% ceiling ~$104 displayed (2026-09)
         {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
         {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
         {"name": "Manual Shifter + Knob (5-spd)", "rarity": "Rare", "low": 40, "high": 120, "cost": 12, "manual": True},
@@ -3468,7 +3469,7 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
         {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
         {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
-        {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 175, "cost": 15},
+        {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 130, "cost": 15},  # new heated power pairs ~$100-160 — 80% ceiling (2026-09)
         {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
         {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
     ]},
@@ -3479,7 +3480,7 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
         {"name": "KDSS Sway Bar Actuators", "rarity": "Legendary", "low": 200, "high": 500, "cost": 20, "trim": ["Trail", "TRD Off-Road", "TRD Pro"]},
         {"name": "Rear E-Locker Actuator Motor", "rarity": "Epic", "low": 200, "high": 450, "cost": 15, "trim": ["Trail", "TRD Off-Road", "TRD Pro"]},
         {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
-        {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 175, "cost": 15},
+        {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 130, "cost": 15},  # new heated power pairs ~$120-180 (Kool Vue) — 80% ceiling (2026-09)
         {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
         {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
     ]},
@@ -3487,14 +3488,14 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
 
 _split_generations("tacoma", display="Toyota Tacoma", make="Toyota", gens=[
     {"label": "1st gen", "years": (1995, 2004), "parts": [
-        {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 30, "high": 80, "cost": 20},  # DEAD-FLIP tier: new DEPO pairs $74-84 (HeadlightsDepot/Amazon 2026-09) — used can only be scrap-cheap
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 30},
         {"name": "Manual Shifter + Knob (5-spd)", "rarity": "Rare", "low": 40, "high": 120, "cost": 12, "manual": True},
     ]},
     {"label": "2nd gen", "years": (2005, 2015), "parts": [
         {"name": "TRD Skid Plate", "rarity": "Epic", "low": 150, "high": 350, "cost": 25},
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 30},
-        {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 50, "high": 140, "cost": 20},  # new DEPO/TYC pairs ~$85-160 — 80% ceiling caps used high (2026-09)
     ]},
     {"label": "3rd gen", "years": (2016, 2024), "parts": [
         {"name": "TRD Pro Grille", "rarity": "Legendary", "low": 200, "high": 450, "cost": 30},
@@ -3628,9 +3629,9 @@ _split_generations("f-150", display="Ford F-150", make="Ford",
         {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
     ]},
     {"label": "11th/12th gen", "years": (2004, 2014), "parts": [
-        # RAISED from 250-550: 2026-09 audit found real sold pairs at $450-1,200
-        # (UNDERSTATED verdict in price_validation_report.md).
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 500, "high": 1300, "cost": 40},
+        # LOWERED from 500-1300: the $450-1,200 sold evidence was 2021+ trucks (camera/BLIS);
+        # 09-14 quality aftermarket pairs are $400-550 new — 80% ceiling caps used (2026-09).
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 450, "cost": 40},
         # RAISED from 200-500: audited sold evidence $525-600.
         {"name": "Raptor Grille", "rarity": "Legendary", "low": 550, "high": 750, "cost": 25, "yr_min": 2010, "trim": ["Raptor"]},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
@@ -3651,20 +3652,20 @@ _split_generations("silverado", display="Chevy Silverado", make="Chevrolet", gen
         {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
     ]},
     {"label": "GMT900", "years": (2007, 2013), "parts": [
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 420, "cost": 30},  # new quality aftermarket pairs ~$360-420 — 80% ceiling (2026-09)
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
         {"name": "Tailgate (straight)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
     ]},
     {"label": "K2XX", "years": (2014, 2018), "parts": [
         {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35},
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 420, "cost": 30},  # new power-fold pairs $410 (AmericanTrucks 14-18) — 80% ceiling $328 displayed (2026-09)
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
     ]},
     {"label": "T1XX", "years": (2019, 2024), "parts": [
         {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50},
         {"name": "Multi-Flex Tailgate Steps", "rarity": "Epic", "low": 200, "high": 500, "cost": 30},
         {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 250, "high": 600, "cost": 35},
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 300, "high": 520, "cost": 30},  # new pairs $515 (AmericanTrucks 19-26) — 80% ceiling $412 displayed (2026-09)
     ]},
 ])
 
@@ -3676,14 +3677,14 @@ _split_generations("sierra", display="GMC Sierra (Silverado twin)", make="GMC", 
         {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
     ]},
     {"label": "GMT900", "years": (2007, 2013), "parts": [
-        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 420, "cost": 30},  # new quality aftermarket pairs ~$360-420 — 80% ceiling (2026-09)
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
         {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
         {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
     ]},
     {"label": "K2XX", "years": (2014, 2018), "parts": [
         {"name": "OEM LED Headlights", "rarity": "Epic", "low": 250, "high": 600, "cost": 50, "yr_min": 2016},
-        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 420, "cost": 30},  # new power-fold pairs $410 (AmericanTrucks 14-18) — 80% ceiling (2026-09)
         {"name": "Tailgate (w/ camera)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
         {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
         {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
@@ -3691,7 +3692,7 @@ _split_generations("sierra", display="GMC Sierra (Silverado twin)", make="GMC", 
     {"label": "T1XX", "years": (2019, 2024), "parts": [
         {"name": "OEM LED Headlights", "rarity": "Epic", "low": 250, "high": 600, "cost": 50},
         {"name": "MultiPro Tailgate Steps", "rarity": "Epic", "low": 200, "high": 500, "cost": 30},
-        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 600, "cost": 30},
+        {"name": "Power Fold Tow Mirrors (pair)", "rarity": "Rare", "low": 300, "high": 520, "cost": 30},  # new pairs $515 (AmericanTrucks 19-26) — 80% ceiling (2026-09)
         {"name": "Denali Grille / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "trim": ["Denali"]},
         {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 175, "cost": 20},
     ]},
@@ -3709,13 +3710,13 @@ _split_generations("ram", display="Ram / Dodge Ram Truck", make="Ram", gens=[
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
     ]},
     {"label": "4th gen", "years": (2009, 2018), "parts": [
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 450, "cost": 35},  # new Ram power-fold pairs ~$450-550 — 80% ceiling (2026-09)
         {"name": "Uconnect 8.4 Touchscreen", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 45, "yr_min": 2013},
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
     ]},
     {"label": "5th gen", "years": (2019, 2024), "parts": [
         {"name": "12\" Uconnect Touchscreen", "rarity": "Epic", "low": 400, "high": 800, "cost": 50},
-        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35},
+        {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 450, "cost": 35},  # new Ram power-fold pairs ~$450-550 — 80% ceiling (2026-09)
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
     ]},
 ])
@@ -3874,11 +3875,11 @@ _split_generations("scion xb", display="Scion xB", make="Scion", gens=[
 # Twin/derivative entries lost parts to the new specificity guard — give the
 # specific entries the generic parts they genuinely share with the base model.
 _extend_entry("ram 2500", parts=[
-    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2010},
+    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 450, "cost": 35, "yr_min": 2010},  # new Ram power-fold pairs ~$450-550 — 80% ceiling (2026-09)
     {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
 ])
 _extend_entry("ram 3500", parts=[
-    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 500, "cost": 35, "yr_min": 2010},
+    {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 250, "high": 450, "cost": 35, "yr_min": 2010},  # new Ram power-fold pairs ~$450-550 — 80% ceiling (2026-09)
     {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35},
 ])
 _extend_entry("sentra se-r", parts=[
