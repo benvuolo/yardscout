@@ -1,7 +1,260 @@
 {
  "audit_date": "2026-09-09",
- "source": "scraper/price_validation_report.md (manual audit, PR #11) \u2014 evidence from recycler listed prices, enthusiast-forum sold threads, new-OEM upper bounds. eBay sold listings were bot-blocked. 2026-09-09: generation-split audit \u2014 UNDERSTATED bands from the 09-02 audit fixed in UNOBTANIUM_DB (F-150 tow mirrors/Raptor grille, Focus ST/RS Recaros + HIDs); per-generation evidence appended below.",
+ "source": "scraper/price_validation_report.md (manual audit, PR #11) \u2014 evidence from recycler listed prices, enthusiast-forum sold threads, new-OEM upper bounds. eBay sold listings were bot-blocked. 2026-09-09: generation-split audit \u2014 UNDERSTATED bands from the 09-02 audit fixed in UNOBTANIUM_DB (F-150 tow mirrors/Raptor grille, Focus ST/RS Recaros + HIDs); per-generation evidence appended below. 2026-09-10: new-part ceiling audit \u2014 see new_ceilings.",
+ "new_ceilings_date": "2026-09-10",
+ "new_ceilings_rule": "A used part's displayed high must not exceed 80% of the going NEW price for an OEM-quality equivalent (new_oem). If an acceptable-quality new aftermarket part (new_budget with budget_acceptable=true) sells under the used displayed low, the part is a dead flip \u2014 remove it or drop to scrap-tier numbers. Ceilings compare against OEM-quality new parts, never the cheapest knockoff: enthusiasts pay a premium for OEM (e.g. Aisin hubs over clones). Patterns are lowercase substrings matched against part names, most specific first; optional vehicles list restricts by model token.",
+ "new_ceilings": [
+  {
+   "pattern": "manual locking hubs",
+   "new_oem": 260,
+   "new_oem_desc": "Aisin FHT-018 pair $202-298 ($101 newparts.com, $135 209yota1.com, $149 yotashop.com per hub)",
+   "new_budget": 95,
+   "new_budget_desc": "no-name clone pairs $60-120 (Amazon)",
+   "budget_acceptable": false,
+   "note": "solid-axle crowd pays the OEM premium; clones are not a substitute",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "headlights (clear",
+   "vehicles": ["tacoma"],
+   "new_oem": 130,
+   "new_oem_desc": "DEPO/TYC pairs $74-84 (1st gen 97-04, HeadlightsDepot/Amazon) / ~$120-160 (2nd gen 05-11)",
+   "new_budget": 74,
+   "budget_acceptable": true,
+   "note": "1st-gen band already dropped to dead-flip scrap tier in UNOBTANIUM_DB (new pairs undercut used)",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "headlights (clear",
+   "vehicles": ["4runner"],
+   "new_oem": 148,
+   "new_oem_desc": "DEPO/TYC pairs $148 (96-98) / $172 (99-02) HeadlightsDepot/PartsNGo",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "headlights (clear",
+   "vehicles": ["tundra"],
+   "new_oem": 140,
+   "new_oem_desc": "DEPO/TYC pairs ~$110-160 (halogen, pre-2014)",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "headlights (clear",
+   "new_oem": 150,
+   "new_oem_desc": "generic commuter halogen: DEPO/TYC certified pairs $75-180 new",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "power-fold tow mirrors",
+   "vehicles": ["f-150", "expedition"],
+   "new_oem": 735,
+   "new_oem_desc": "Trail Ridge power-fold pairs $735 (15-18 F-150, AmericanTrucks); 2021+ OEM camera/BLIS pairs $1,600-2,200 new justify the 13th/14th-gen band",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "fold tow mirrors",
+   "vehicles": ["silverado", "sierra", "tahoe", "suburban"],
+   "new_oem": 410,
+   "new_oem_desc": "power-fold pairs $410 (14-18) / $515 (19+) AmericanTrucks",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "fold tow mirrors",
+   "vehicles": ["f-250", "f-350", "super"],
+   "new_oem": 415,
+   "new_oem_desc": "Super Duty pairs $415 (manual-fold, AmericanTrucks) / $515+ (BoostAuto)",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "fold tow mirrors",
+   "vehicles": ["ram"],
+   "new_oem": 450,
+   "new_oem_desc": "Ram power-fold pairs ~$450-550",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "fold tow mirrors",
+   "new_oem": 415,
+   "new_oem_desc": "quality power-fold pairs $410-735 across platforms; conservative floor",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "tow mirrors",
+   "new_oem": 200,
+   "new_oem_desc": "quality manual/telescoping replacement pairs $140-280 (K-Source/Longview/Trail Ridge)",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "heated side mirrors",
+   "new_oem": 130,
+   "new_oem_desc": "heated power replacement pairs $100-160 (Dorman/Kool Vue)",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "bsm side mirror",
+   "new_oem": 160,
+   "new_oem_desc": "single BSM-capable heated power-fold units $140-180 new",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "side mirrors (power",
+   "new_oem": 110,
+   "new_oem_desc": "power replacement pairs $80-140 (Dorman/TYC/Kool Vue)",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "side mirrors (heated",
+   "new_oem": 130,
+   "new_oem_desc": "heated power replacement pairs $100-160",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "tail lights (pair",
+   "new_oem": 120,
+   "new_oem_desc": "DEPO/TYC pairs $70-160 new",
+   "source": "web 2026-09-10"
+  },
+  {
+   "pattern": "window regulator",
+   "new_oem": 85,
+   "new_oem_desc": "TYC $85 / Dorman $87 (older Sentra, RockAuto); Dorman OE $180-198 for 2013+ ",
+   "new_budget": 85,
+   "budget_acceptable": true,
+   "note": "used band $27-58 displayed still clears \u2014 flip survives on price gap",
+   "source": "web 2026-09-10"
+  }
+ ],
  "entries": [
+  {
+   "part": "Manual Locking Hubs (pair)",
+   "vehicle": "Toyota 4Runner",
+   "displayed_low": 70,
+   "displayed_high": 155,
+   "obs_low": 120,
+   "obs_high": 220,
+   "confidence": "good",
+   "note": "used OEM Aisin sold $120-220; new Aisin pair $202-298, clones $60-120 rejected by buyers (2026-09)"
+  },
+  {
+   "part": "Headlights (clear, non-hazed)",
+   "vehicle": "Toyota Tacoma",
+   "displayed_low": 25,
+   "displayed_high": 50,
+   "obs_low": 20,
+   "obs_high": 60,
+   "confidence": "good",
+   "note": "dead-flip tier: new DEPO pairs $74-84 \u2014 used can only be scrap-cheap (2026-09)"
+  },
+  {
+   "part": "Headlights (clear, non-hazed)",
+   "vehicle": "Toyota 4Runner",
+   "displayed_low": 70,
+   "displayed_high": 115,
+   "obs_low": 40,
+   "obs_high": 118,
+   "confidence": "good",
+   "note": "capped at 80% of $148 new DEPO pair (2026-09)"
+  },
+  {
+   "part": "Headlights (clear, non-hazed)",
+   "vehicle": "Toyota Tundra",
+   "displayed_low": 60,
+   "displayed_high": 115,
+   "obs_low": 40,
+   "obs_high": 112,
+   "confidence": "thin",
+   "note": "capped at 80% of ~$140 new DEPO/TYC pair (2026-09)"
+  },
+  {
+   "part": "Heated Side Mirrors (pair)",
+   "vehicle": "Toyota 4Runner",
+   "displayed_low": 70,
+   "displayed_high": 100,
+   "obs_low": 40,
+   "obs_high": 104,
+   "confidence": "thin",
+   "note": "capped at 80% of ~$130 new heated power pair (2026-09)"
+  },
+  {
+   "part": "BSM Side Mirror (heated, power fold)",
+   "vehicle": "Toyota Camry",
+   "displayed_low": 70,
+   "displayed_high": 115,
+   "obs_low": 60,
+   "obs_high": 128,
+   "confidence": "thin",
+   "note": "capped at 80% of ~$160 new BSM-capable unit (2026-09)"
+  },
+  {
+   "part": "Headlights (clear, non-hazed)",
+   "vehicle": "Kia Soul",
+   "displayed_low": 35,
+   "displayed_high": 75,
+   "obs_low": 28,
+   "obs_high": 96,
+   "confidence": "thin",
+   "note": "old 80-200 band beat the ~$120 new TYC pair; dropped to commuter tier (2026-09)"
+  },
+  {
+   "part": "Headlights (clear, non-hazed)",
+   "vehicle": "Chrysler 200",
+   "displayed_low": 35,
+   "displayed_high": 75,
+   "obs_low": 28,
+   "obs_high": 88,
+   "confidence": "thin",
+   "note": "old 80-200 band beat the ~$110 new TYC pair; dropped to commuter tier (2026-09)"
+  },
+  {
+   "part": "Headlights (clear, OEM)",
+   "vehicle": "Volkswagen Passat",
+   "displayed_low": 80,
+   "displayed_high": 135,
+   "obs_low": 60,
+   "obs_high": 136,
+   "confidence": "thin",
+   "note": "capped at 80% of ~$170 new DEPO pair (2026-09)"
+  },
+  {
+   "part": "Power-Fold Tow Mirrors (pair)",
+   "vehicle": "Ram 2500",
+   "displayed_low": 225,
+   "displayed_high": 350,
+   "obs_low": 200,
+   "obs_high": 360,
+   "confidence": "thin",
+   "note": "capped at 80% of ~$450 new power-fold pair (2026-09)"
+  },
+  {
+   "part": "Power Fold Tow Mirrors (pair)",
+   "vehicle": "Ford F-250",
+   "displayed_low": 270,
+   "displayed_high": 330,
+   "obs_low": 200,
+   "obs_high": 332,
+   "confidence": "thin",
+   "note": "capped at 80% of $415 new Super Duty pair (2026-09)"
+  },
+  {
+   "part": "Power-Fold Tow Mirrors (pair)",
+   "vehicle": "Ford F-150 (04-14)",
+   "displayed_low": 225,
+   "displayed_high": 350,
+   "obs_low": 200,
+   "obs_high": 440,
+   "confidence": "good",
+   "note": "LOWERED from 500-1300: the $450-1,200 sold evidence was 2021+ trucks; 09-14 aftermarket pairs $400-550 new cap used at ~$440 (2026-09)"
+  },
+  {
+   "part": "Tow Mirrors (pair)",
+   "vehicle": "Ram 2500",
+   "displayed_low": 135,
+   "displayed_high": 220,
+   "obs_low": 100,
+   "obs_high": 224,
+   "confidence": "thin",
+   "note": "capped at 80% of ~$280 new quality manual-fold pair (2026-09)"
+  },
   {
    "part": "Hardtop (full, clean)",
    "vehicle": "Jeep Wrangler YJ",
@@ -106,11 +359,11 @@
    "part": "Power-Fold Tow Mirrors (pair)",
    "vehicle": "Chevy Silverado",
    "displayed_low": 270,
-   "displayed_high": 470,
-   "obs_low": 450,
-   "obs_high": 700,
+   "displayed_high": 330,
+   "obs_low": 225,
+   "obs_high": 328,
    "confidence": "good",
-   "note": "used OEM $225/side (recycler ask, K2XX HD); new aftermarket pairs $530\u2013700 (2026-09)"
+   "note": "2026-09-10 ceiling audit: quality new pairs $410 (14-18) / $515 (19+) \u2014 prior 450-700 obs mixed HD recycler asks with new prices; used must undercut new by 20%"
   },
   {
    "part": "Magic Seat (rear, complete)",
@@ -225,12 +478,12 @@
   {
    "part": "Power-Fold Tow Mirrors (pair)",
    "vehicle": "Ford F-150",
-   "displayed_low": 225,
-   "displayed_high": 430,
+   "displayed_low": 450,
+   "displayed_high": 1015,
    "obs_low": 450,
    "obs_high": 1200,
    "confidence": "good",
-   "note": "$450\u20131,200 (2021+); older gens lower"
+   "note": "$450\u20131,200 sold (2021+ camera/BLIS; new OEM pairs $1,600-2,200 keep the ceiling clear); 04-14 gen carries its own lower entry"
   },
   {
    "part": "Headlights (clear)",
