@@ -42,7 +42,9 @@ jobs:
         id: decide
         run: |
           INFLATED=$(python -c "import json; print(json.load(open('/tmp/price_summary.json'))['inflated'])")
+          CEILV=$(python -c "import json; print(json.load(open('/tmp/price_summary.json')).get('ceiling_violations', 0))")
           echo "inflated=$INFLATED" >> "$GITHUB_OUTPUT"
+          echo "ceiling=$CEILV" >> "$GITHUB_OUTPUT"
           # Material change = anything beyond the report's Date line.
           if git diff -I'^\*\*Date:\*\*' --quiet -- scraper/price_validation_report.md; then
             CHANGED=0
@@ -50,12 +52,12 @@ jobs:
             CHANGED=1
           fi
           echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
-          if [ "$INFLATED" -gt 0 ] || [ "$CHANGED" -eq 1 ]; then
+          if [ "$INFLATED" -gt 0 ] || [ "$CEILV" -gt 0 ] || [ "$CHANGED" -eq 1 ]; then
             echo "pr=1" >> "$GITHUB_OUTPUT"
-            echo "Review PR needed (inflated=$INFLATED, material change=$CHANGED)."
+            echo "Review PR needed (inflated=$INFLATED, ceiling violations=$CEILV, material change=$CHANGED)."
           else
             echo "pr=0" >> "$GITHUB_OUTPUT"
-            echo "No material change and nothing inflated — no PR needed."
+            echo "No material change, nothing inflated, no ceiling violations — no PR needed."
           fi
 
       - name: Open review PR
@@ -91,8 +93,9 @@ jobs:
           | UNDERSTATED | {s['understated']} |
           | INFLATED | {s['inflated']} |
           | UNVERIFIABLE | {s['unverifiable']} |
+          | New-part ceiling violations | {s.get('ceiling_violations', 0)} |
 
-          Evidence baseline: manual audit of {s['baseline_date']}; fresh eBay data used for {s['fresh_used']} part(s) this run.
+          Evidence baseline: manual audit of {s['baseline_date']}; fresh eBay data used for {s['fresh_used']} part(s) this run. Ceiling rule: used high must stay under 80% of the new OEM-quality price (`new_ceilings` in `scraper/price_baseline.json`) — see the report's "New-part ceiling check" section for flagged rows.
 
           ## INFLATED rows (need a pricing decision)
           {rows('INFLATED')}
