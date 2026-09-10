@@ -432,11 +432,9 @@ async function loadLiveInventory() {
     document.getElementById('live-stats-bar').innerHTML = '';
     document.getElementById('live-grid').innerHTML = `
       <div class="empty-state" style="grid-column: 1/-1;">
-        <h3>No Live Inventory Yet</h3>
-        <p>The live inventory file wasn't found. Run the scraper to generate it:</p>
-        <code>python scraper/junkyard_scraper.py --save --all</code>
-        <p style="margin-top:1rem;">This scans the supported junkyard chains and cross-references every vehicle against the parts database. The output file <strong>inventory_live.json</strong> will appear in this directory.</p>
-        <p style="margin-top:0.75rem;"><strong>Tip:</strong> Open this page via a local server (not <code>file://</code>), or the browser cannot load the JSON. <strong>cd into the folder that contains</strong> <code>index.html</code> (the <code>yardscout</code> project folder), then run <code>cd docs && python3 -m http.server 8765</code> and open <code>http://localhost:8765/index.html</code>. If you see 404, the server was started in the wrong directory.</p>
+        <h3>Couldn't load inventory</h3>
+        <p>The inventory data didn't load. Check your connection and pull to refresh (or tap Refresh data in Filters).</p>
+        <p style="margin-top:0.75rem;">If this keeps happening, the latest scan may still be publishing &mdash; try again in a few minutes.</p>
       </div>`;
   }
 }
@@ -1459,8 +1457,27 @@ document.getElementById('live-radius').addEventListener('change', () => {
   }
 })();
 updateFilterAvailability();   // filters stay disabled until a location exists
-document.getElementById('live-refresh-btn').addEventListener('click', () => {
-  alert('To refresh live inventory data, run this in your terminal:\n\npython scraper/junkyard_scraper.py --save --all\n\nThen reload this page.');
+/* Yards are re-scanned automatically every ~6 hours; this button re-checks
+ * for a newer published scan (no-cache fetch + background revalidate). */
+document.getElementById('live-refresh-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('live-refresh-btn');
+  const prev = liveScrapedAt;
+  btn.disabled = true;
+  const orig = btn.innerHTML;
+  btn.innerHTML = 'Checking&hellip;';
+  try { await loadLiveInventory(); } catch (e) { /* handled inside */ }
+  btn.disabled = false;
+  btn.innerHTML = orig;
+  if (liveScrapedAt && liveScrapedAt !== prev) return; // new data rendered
+  let age = '';
+  const ts = Date.parse(liveScrapedAt || '');
+  if (ts) {
+    const hrs = Math.max(0, Math.round((Date.now() - ts) / 3600000));
+    age = hrs < 1 ? ' Last scan: under an hour ago.'
+      : hrs < 48 ? ` Last scan: ${hrs}h ago.`
+      : ` Last scan: ${Math.round(hrs / 24)} days ago.`;
+  }
+  alert("You're already seeing the latest scan. Yards are re-scanned automatically about every 6 hours." + age);
 });
 document.getElementById('tab-live').addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-copy-vin');
