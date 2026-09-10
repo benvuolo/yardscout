@@ -91,7 +91,9 @@ export async function handleCommit(req, env) {
 
 /* ===== Account administration ===== */
 
-const VALID_TIERS = new Set(['free', 'pro', 'pro_plus']);
+// Single paid tier ($12.99/mo). Schema keeps a free-form tier column;
+// legacy 'pro_plus' rows are collapsed to pro at read time in resolveTier().
+const VALID_TIERS = new Set(['free', 'pro']);
 
 /** Manual tier grant — the TestFlight path before payments exist:
  *   curl -X POST $API/v1/admin/grant -H "x-admin-secret: ..." \
@@ -106,7 +108,7 @@ export async function handleGrant(req, env) {
   const tier = String(body.tier || '').trim();
   const expiresAt = body.expires_at ? String(body.expires_at) : null;
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return err(400, 'bad_email', 'Valid email required.');
-  if (!VALID_TIERS.has(tier)) return err(400, 'bad_tier', 'tier must be free, pro, or pro_plus.');
+  if (!VALID_TIERS.has(tier)) return err(400, 'bad_tier', 'tier must be free or pro.');
   if (expiresAt && isNaN(new Date(expiresAt).getTime())) return err(400, 'bad_expiry', 'expires_at must be ISO 8601.');
 
   let user = await env.DB.prepare('SELECT id FROM users WHERE email = ?1').bind(email).first();
@@ -171,10 +173,10 @@ export async function handleRevenueCatWebhook(req, env) {
 
   const ACTIVATE = new Set(['INITIAL_PURCHASE', 'RENEWAL', 'UNCANCELLATION', 'PRODUCT_CHANGE', 'NON_RENEWING_PURCHASE']);
   const DEACTIVATE = new Set(['EXPIRATION', 'REFUND']);
-  // Product → tier mapping; product ids chosen when the App Store products are
-  // created (README documents the convention: contains "plus" → pro_plus).
-  const productId = String(ev.product_id || '').toLowerCase();
-  const paidTier = productId.includes('plus') ? 'pro_plus' : 'pro';
+  // Single paid tier: every YardScout subscription product maps to 'pro'
+  // ($12.99/mo at launch). product_id still lands in entitlement_events for
+  // auditing, so a future second product wouldn't lose information.
+  const paidTier = 'pro';
 
   let tier = null;
   let expiresAt = null;

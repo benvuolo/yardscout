@@ -107,7 +107,7 @@ stored SHA-256-hashed server-side and revocable.
 
 Tier data contract (matches the app's existing free UI):
 
-| | Free / anonymous | Pro / Pro+ |
+| | Free / anonymous | Pro |
 |---|---|---|
 | Vehicles, VINs, arrival dates, yard/row | ✓ | ✓ |
 | Part names, rarity, trim status, sell channel | ✓ | ✓ |
@@ -277,9 +277,10 @@ iOS app never talks to Apple receipts directly.
 1. iOS wrapper app (or PWA-in-WKWebView) signs the user in via the same
    magic-link flow, then calls `Purchases.logIn(<user id from /v1/me>)` —
    RevenueCat's `app_user_id` becomes the YardScout user id.
-2. Create App Store subscription products; include `plus` in the Pro+ product
-   id (the webhook maps product ids containing "plus" → `pro_plus`, otherwise
-   `pro`).
+2. Create the App Store subscription product (single Pro tier, $12.99/mo —
+   the Pro/Pro+ split was collapsed in Sep 2026). The webhook maps every
+   subscription product to `pro`; the product id is still recorded in
+   `entitlement_events` for auditing.
 3. In RevenueCat: add a webhook → `https://<api>/v1/iap/revenuecat`, set an
    Authorization header value, and store the same value as the Worker secret:
    `npx wrangler secret put REVENUECAT_WEBHOOK_SECRET`.

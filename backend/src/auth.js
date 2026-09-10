@@ -158,11 +158,13 @@ export function resolveTier(user) {
   if (tier !== 'free' && user.tier_expires_at && new Date(user.tier_expires_at).getTime() < Date.now()) {
     tier = 'free';
   }
-  return ['free', 'pro', 'pro_plus'].includes(tier) ? tier : 'free';
+  // 2026-09: single paid tier. The tier column stays flexible; any legacy
+  // 'pro_plus' rows (pre-collapse grants) resolve as plain pro.
+  if (tier === 'pro_plus') tier = 'pro';
+  return ['free', 'pro'].includes(tier) ? tier : 'free';
 }
 
-/** Which pre-computed shard variant a tier reads. pro_plus sees pro data
- * (its extras — instant alerts, digests — are features, not data fields). */
+/** Which pre-computed shard variant a tier reads (single paid tier). */
 export function variantFor(tier) {
   return tier === 'free' ? 'free' : 'pro';
 }

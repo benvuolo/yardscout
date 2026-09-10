@@ -7,7 +7,7 @@
 CREATE TABLE users (
   id              TEXT PRIMARY KEY,             -- uuid
   email           TEXT NOT NULL UNIQUE,         -- lowercased
-  tier            TEXT NOT NULL DEFAULT 'free', -- free | pro | pro_plus
+  tier            TEXT NOT NULL DEFAULT 'free', -- free | pro (single paid tier; legacy pro_plus collapses to pro at read)
   tier_source     TEXT,                         -- manual | revenuecat | apple_iap
   tier_expires_at TEXT,                         -- NULL = does not expire
   created_at      TEXT NOT NULL,
