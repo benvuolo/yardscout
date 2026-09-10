@@ -103,3 +103,27 @@ Used highs vs. the going NEW price of an OEM-quality equivalent (`price_baseline
 | VIOLATION | 0 |
 | DEAD FLIP | 0 |
 | NO DATA | 36 |
+
+## Recycler benchmark — car-part.com (manual, quarterly)
+
+Spot-check the rows below at <https://car-part.com>: search the part for a
+representative model/year, note the typical ask across a few listed
+recyclers, and fill in the last column. Expected: our used high is
+**below** the common recycler ask (they include pull labor + warranty).
+A recycler ask at or under our displayed high means our range is inflated
+— treat it like a ceiling violation and correct the DB entry.
+
+| Part | Models | Displayed | Recycler ask (fill in) |
+|---|---|---|---|
+| Tail Lights (pair, uncracked) | Nissan Altima, Toyota Camry | $30–75 | |
+| Side Mirrors (power, pair) | Nissan Altima, Toyota Camry | $30–80 | |
+| 3rd Row Seat | Ford Expedition, Chevrolet Tahoe | $175–340 | |
+| Tailgate (straight) | Ford F-150, Chevrolet Silverado 1500 | $85–230 | |
+| Headlights (clear, non-hazed) | Toyota Camry, Ford F-150 | $40–80 | |
+| 3rd Row Seat | Ford Explorer, Honda Pilot | $130–265 | |
+| Tail Lights (pair, uncracked) | Honda Accord, Nissan Rogue | $35–85 | |
+| Stow-N-Go 2nd Row Seat (each) | Dodge Grand Caravan, Chrysler Town & Country | $175–340 | |
+| Headlights (clear, non-hazed) | Honda Accord, Nissan Altima | $40–90 | |
+| Power-Fold Tow Mirrors (pair) | Ford F-150, Ram 1500 | $225–350 | |
+| Power Sliding Door Motor | Honda Odyssey, Toyota Sienna | $135–275 | |
+| 3rd Row Seat | Chevrolet Traverse, GMC Acadia | $105–230 | |
