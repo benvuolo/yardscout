@@ -524,12 +524,25 @@ function jhWidenRadius(mi) {
   const sel = document.getElementById('live-radius');
   const opts = [...sel.options].map(o => parseFloat(o.value)).filter(v => !isNaN(v));
   const fit = opts.find(v => v >= mi);
+  // Nothing wide enough means "any distance", which is nationwide — Pro only.
+  if (fit == null && !isPro()) { openUpgradeSheet('widen-radius-nationwide'); return; }
   sel.value = fit != null ? String(fit) : '';
   renderLive();
 }
 function jhShowNationwide() {
+  if (!isPro()) { openUpgradeSheet('nationwide-browse'); return; }
   document.getElementById('live-radius').value = '';
   renderLive();
+}
+
+/* Free tier is always radius-scoped: no location means no cars, and "Any
+ * distance" (nationwide) is a Pro feature. Pro gets the raw select value,
+ * where empty = unlimited. */
+const FREE_MAX_RADIUS_MI = 250;
+function effectiveRadiusMi() {
+  const raw = parseFloat(document.getElementById('live-radius').value) || null;
+  if (isPro()) return raw;
+  return raw ? Math.min(raw, FREE_MAX_RADIUS_MI) : FREE_MAX_RADIUS_MI;
 }
 
 function populateLiveMakeFilter() {
@@ -713,13 +726,21 @@ function applyProGates() {
     setup.style.display = pro ? '' : 'none';
     locked.style.display = pro ? 'none' : '';
   }
+  // Nationwide browsing is Pro: the zip-banner skip and the "Any distance"
+  // radius option say so honestly for free users, and work normally for Pro.
+  const skipBtn = document.getElementById('zip-banner-skip');
+  if (skipBtn) skipBtn.innerHTML = pro ? 'Skip &mdash; show everything nationwide' : 'Nationwide browsing is a Pro feature &rarr;';
+  const anyOpt = document.querySelector('#live-radius option[value=""]');
+  if (anyOpt) anyOpt.innerHTML = pro ? 'Any distance' : 'Any distance &mdash; Pro';
 }
 
 function toggleProDev() {
   if (isPro()) localStorage.removeItem('jh_pro');
   else localStorage.setItem('jh_pro', '1');
   applyProGates();
+  updateZipBanner();
   renderLive();
+  if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
   renderSavedSheet();
   alert('Pro mode ' + (isPro() ? 'ON' : 'OFF') + ' (dev toggle)');
 }
@@ -941,9 +962,11 @@ async function shareVehicle(key) {
 /* First-run banner: ask for a zip once, in plain language. */
 function updateZipBanner() {
   // A shared deep link should land on the car, not the onboarding banner.
+  // The skip flag only counts for Pro — free users can't dismiss their way
+  // into the national list, so the banner stays until they set a location.
   const show = !focusedCarKey
     && !localStorage.getItem('jh_zip') && !localStorage.getItem('jh_gps')
-    && localStorage.getItem('jh_zip_skipped') !== '1';
+    && !(isPro() && localStorage.getItem('jh_zip_skipped') === '1');
   document.getElementById('zip-banner').style.display = show ? '' : 'none';
 }
 document.getElementById('zip-banner-go').addEventListener('click', () => {
@@ -960,8 +983,11 @@ document.getElementById('zip-banner-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') document.getElementById('zip-banner-go').click();
 });
 document.getElementById('zip-banner-skip').addEventListener('click', () => {
+  // Free users don't get a nationwide skip — honest Pro pitch instead.
+  if (!isPro()) { openUpgradeSheet('zip-banner-nationwide'); return; }
   localStorage.setItem('jh_zip_skipped', '1');
   updateZipBanner();
+  renderLive();
 });
 
 function getFilteredLive() {
@@ -971,12 +997,17 @@ function getFilteredLive() {
     const v = liveInventory.find(x => vehicleKey(x) === focusedCarKey);
     if (v) return [v];
   }
+  // Free tier requires a location: with no center there's no radius to scope
+  // to, and the unscoped national list is Pro-only. (Shared deep links above
+  // still work — they show exactly one car.)
+  if (!isPro() && !activeZipCoords) return [];
+
   const search = document.getElementById('live-search').value.toLowerCase();
   const makeFilter = document.getElementById('live-filter-make').value;
   const matchFilter = document.getElementById('live-filter-match').value;
   const locationFilter = document.getElementById('live-filter-location').value;
   const sortBy = document.getElementById('live-sort').value;
-  const radiusMi = parseFloat(document.getElementById('live-radius').value) || null;
+  const radiusMi = effectiveRadiusMi();
 
   let filtered = liveInventory.filter(v => {
     if (makeFilter && v.make !== makeFilter) return false;
@@ -1085,7 +1116,7 @@ function renderLive() {
 
   // KPIs describe what the user is LOOKING AT (their zip/filters), not the
   // whole national database — that's what a parts hunter actually cares about.
-  const nearLabel = activeZipCoords && document.getElementById('live-radius').value ? 'Cars Near You' : 'Cars';
+  const nearLabel = activeZipCoords && effectiveRadiusMi() ? 'Cars Near You' : 'Cars';
   const worthPulling = vehicles.filter(v => v.hasMatch).length;
   const newThisWeek = vehicles.filter(v => isNew(v.dateAdded)).length;
   const fastSellers = vehicles.filter(v => v.hasMatch && (v.topParts || []).some(p => p.sell_speed === 'Fast')).length;
@@ -1122,9 +1153,15 @@ function renderLive() {
   if (!vehicles.length) {
     // If the radius filter is what emptied the grid, say so helpfully: name the
     // closest yard and how far it is instead of showing a blank wall.
-    const radiusMi = parseFloat(document.getElementById('live-radius').value) || null;
+    const radiusMi = effectiveRadiusMi();
     let msg = '<h3>No matches</h3><p>Try adjusting your filters.</p>';
-    if (activeZipCoords && radiusMi) {
+    if (!isPro() && !activeZipCoords) {
+      // Free tier with no location set: point at the zip banner, and be honest
+      // that skipping straight to the national list is a Pro feature.
+      msg = `<h3>Enter your zip to see cars near you</h3>
+        <p>YardScout shows the self-service inventory within ${FREE_MAX_RADIUS_MI} miles of you &mdash; free. Use the zip box or location button above.</p>
+        <button type="button" class="btn" style="margin-top:0.8rem;" onclick="openUpgradeSheet('no-zip-empty-state')">Nationwide browsing is a Pro feature &rarr;</button>`;
+    } else if (activeZipCoords && radiusMi) {
       let closest = null;
       const seenYards = new Set();
       for (const v of liveInventory) {
@@ -1139,7 +1176,7 @@ function renderLive() {
           <p>The closest is <strong>${escapeHtml(closest.name)}</strong>${where} — about <strong>${Math.round(closest.d)} miles</strong> away.</p>
           <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;">
             <button type="button" class="btn btn-primary" onclick="jhWidenRadius(${Math.ceil(closest.d)})">Widen radius to include it</button>
-            <button type="button" class="btn" onclick="jhShowNationwide()">Show everything nationwide</button>
+            <button type="button" class="btn" onclick="jhShowNationwide()">${isPro() ? 'Show everything nationwide' : 'Nationwide search &mdash; Pro'}</button>
           </div>
           <p style="margin-top:1rem;font-size: 0.75rem;">We track every major self-service chain — LKQ Pick Your Part, Pick-n-Pull, and Pull-A-Part — <span class="coverage-count">${coverageYardCount()}</span> yards nationwide. Independent local yards aren't covered yet.</p>`;
       }
@@ -1359,7 +1396,16 @@ document.getElementById('live-sort').addEventListener('change', renderLive);
 document.getElementById('live-filter-match').addEventListener('change', renderLive);
 document.getElementById('live-zip').addEventListener('input', e => setZipCenter(e.target.value.trim()));
 document.getElementById('live-radius').addEventListener('change', () => {
-  localStorage.setItem('jh_radius', document.getElementById('live-radius').value);
+  const sel = document.getElementById('live-radius');
+  // "Any distance" (empty value) is nationwide — Pro only. Snap free users
+  // back to their previous radius and pitch the upgrade instead.
+  if (sel.value === '' && !isPro()) {
+    const prev = localStorage.getItem('jh_radius');
+    sel.value = prev && prev !== '' ? prev : String(FREE_MAX_RADIUS_MI);
+    openUpgradeSheet('radius-any-distance');
+    return;
+  }
+  localStorage.setItem('jh_radius', sel.value);
   renderLive();
 });
 // Restore saved zip/radius/GPS center across visits
@@ -1369,6 +1415,12 @@ document.getElementById('live-radius').addEventListener('change', () => {
   // Radius is capped at 250 mi now; migrate any older saved value down.
   if (savedRadius !== null && parseInt(savedRadius, 10) > 250) {
     savedRadius = '250';
+    localStorage.setItem('jh_radius', savedRadius);
+  }
+  // Legacy "any distance" ('' = nationwide) is Pro-only now; migrate free
+  // users down to the widest free radius.
+  if (savedRadius === '' && !isPro()) {
+    savedRadius = String(FREE_MAX_RADIUS_MI);
     localStorage.setItem('jh_radius', savedRadius);
   }
   if (savedRadius !== null) document.getElementById('live-radius').value = savedRadius;
@@ -1500,8 +1552,9 @@ function renderYards() {
   yards.sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
 
   // Same radius as the Live tab (capped at 250 mi). "Any distance" shows all,
-  // still nearest-first.
-  const radius = parseInt(document.getElementById('live-radius').value, 10) || null;
+  // still nearest-first — but the full national yard list is Pro-only, so
+  // free users are always clamped to the widest free radius.
+  const radius = effectiveRadiusMi();
   const inRange = radius ? yards.filter(y => y.dist != null && y.dist <= radius) : yards;
 
   const q = (document.getElementById('yards-search').value || '').trim().toLowerCase();
@@ -1525,7 +1578,7 @@ function renderYards() {
           <p>${nearestTxt}</p>
           <div style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.75rem;">
             ${radius < 250 ? '<button type="button" class="btn" id="yards-widen">Widen to 250 mi</button>' : ''}
-            <button type="button" class="btn" id="yards-any">Show all yards nearest-first</button>
+            <button type="button" class="btn" id="yards-any">${isPro() ? 'Show all yards nearest-first' : 'See every yard nationwide &mdash; Pro'}</button>
           </div>
         </div>`;
       const setRadius = v => {
@@ -1535,7 +1588,11 @@ function renderYards() {
       };
       const widen = document.getElementById('yards-widen');
       if (widen) widen.addEventListener('click', () => setRadius('250'));
-      document.getElementById('yards-any').addEventListener('click', () => setRadius(''));
+      document.getElementById('yards-any').addEventListener('click', () => {
+        // The unscoped national yard list is Pro-only.
+        if (!isPro()) { openUpgradeSheet('yards-show-all'); return; }
+        setRadius('');
+      });
     } else {
       grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No yards match</h3><p>Try a different name, city, or state.</p></div>';
     }
