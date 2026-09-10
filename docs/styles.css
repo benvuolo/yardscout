@@ -141,7 +141,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: opacity 0.26s ease, transform 0.26s ease;
   }
+  /* Mid-swap state for the rotating data-plate facts: the old value slides
+   * down and fades like a counter wheel turning, then the next one lands. */
+  .head-spec.spec-swap { opacity: 0; transform: translateY(3px); }
   /* Caution-stripe rule under the header: thin, low-contrast, unmistakably
    * "yard" without shouting. */
   header::after {

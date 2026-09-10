@@ -448,20 +448,58 @@ function updateCoverageCounts() {
   const n = coverageYardCount();
   if (!n) return;
   document.querySelectorAll('.coverage-count').forEach(el => { el.textContent = n; });
-  // Header data plate: the spec line under the wordmark carries real numbers
-  // (yard count + scan age), like the stamped fields on an equipment plate.
-  const spec = document.getElementById('head-spec');
-  if (spec) {
-    let age = '';
-    const ts = Date.parse(liveScrapedAt || '');
-    if (ts) {
-      const hrs = Math.max(0, Math.round((Date.now() - ts) / 3600000));
-      age = hrs < 1 ? ' \u00b7 SCAN <1H AGO'
-        : hrs < 48 ? ` \u00b7 SCAN ${hrs}H AGO`
-        : ` \u00b7 SCAN ${Math.round(hrs / 24)}D AGO`;
-    }
-    spec.textContent = `${n} YARDS${age}`;
+  startHeadTicker();
+}
+
+/* Header data plate: instead of one static line, the spec line under the
+ * wordmark stamps through a rotation of real numbers pulled from the live
+ * data — like reading fields off an equipment plate one at a time. Every
+ * fact is computed, never hardcoded. */
+let _headTickerTimer = null;
+let _headTickerIdx = 0;
+function headTickerFacts() {
+  const facts = [];
+  const cars = liveInventory.length;
+  const n = coverageYardCount();
+  if (cars) facts.push(`${cars.toLocaleString()} CARS ON ROW`);
+  if (n) facts.push(`${n} YARDS COAST TO COAST`);
+  const weekAgo = Date.now() - 7 * 86400000;
+  const fresh = liveInventory.reduce((k, v) => k + ((Date.parse(v.dateAdded) || 0) >= weekAgo ? 1 : 0), 0);
+  if (fresh) facts.push(`${fresh.toLocaleString()} SET OUT THIS WEEK`);
+  if (activeZipCoords) {
+    const r = effectiveRadiusMi();
+    const near = new Set(liveInventory
+      .filter(v => v.lat != null && haversineMiles(activeZipCoords.lat, activeZipCoords.lng, v.lat, v.lng) <= r)
+      .map(v => v.location)).size;
+    if (near) facts.push(`${near} YARD${near === 1 ? '' : 'S'} IN YOUR RANGE`);
   }
+  const ts = Date.parse(liveScrapedAt || '');
+  if (ts) {
+    const hrs = Math.max(0, Math.round((Date.now() - ts) / 3600000));
+    facts.push(hrs < 1 ? 'SCANNED UNDER AN HOUR AGO'
+      : hrs < 48 ? `SCANNED ${hrs}H AGO`
+      : `SCANNED ${Math.round(hrs / 24)}D AGO`);
+  }
+  return facts;
+}
+function startHeadTicker() {
+  const spec = document.getElementById('head-spec');
+  if (!spec) return;
+  const show = () => {
+    const facts = headTickerFacts();
+    if (!facts.length) return;
+    _headTickerIdx = _headTickerIdx % facts.length;
+    spec.classList.add('spec-swap');
+    setTimeout(() => {
+      spec.textContent = facts[_headTickerIdx];
+      spec.classList.remove('spec-swap');
+      _headTickerIdx += 1;
+    }, 260);
+  };
+  if (_headTickerTimer) return;         // already running; facts refresh per tick
+  const facts = headTickerFacts();
+  if (facts.length) { spec.textContent = facts[0]; _headTickerIdx = 1; }
+  _headTickerTimer = setInterval(show, 5000);
 }
 
 /* One-tap actions for the out-of-range empty state. */
