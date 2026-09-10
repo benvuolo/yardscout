@@ -562,7 +562,8 @@ UNOBTANIUM_DB = {
         "year_range": (2000, 2024),
         "top_parts": [
             {"name": "Eyesight Camera Module", "rarity": "Epic", "low": 200, "high": 500, "cost": 25, "yr_min": 2013},
-            {"name": "Wilderness Grille/Cladding", "rarity": "Epic", "low": 150, "high": 350, "cost": 25, "trim": ["Wilderness"]},
+            # Wilderness trim didn't exist before MY2022 — row used to claim 2000-2024.
+            {"name": "Wilderness Grille/Cladding", "rarity": "Epic", "low": 150, "high": 350, "cost": 25, "yr_min": 2022, "trim": ["Wilderness"]},
             {"name": "Roof Rails + Crossbars", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 20},
         ],
     },
@@ -778,11 +779,13 @@ UNOBTANIUM_DB = {
         "top_parts": [
             # Both bands RAISED per the 2026-09 audit (UNDERSTATED verdicts):
             # ST3/RS HID pairs sold $400-1,300; ST/RS Recaro pairs $950-2,000.
-            {"name": "ST3/RS HID Headlights (pair)", "rarity": "Epic", "low": 500, "high": 1600, "cost": 45, "trim": ["ST", "RS"]},
-            {"name": "Recaro Seats (pair, ST/RS)", "rarity": "Epic", "low": 1100, "high": 2600, "cost": 71, "trim": ["ST", "RS"]},
-            {"name": "ST/RS Intercooler", "rarity": "Rare", "low": 60, "high": 160, "cost": 95, "trim": ["ST", "RS"]},
-            {"name": "ST/RS Steering Wheel", "rarity": "Rare", "low": 100, "high": 225, "cost": 37, "trim": ["ST", "RS"]},
-            {"name": "RS Brake Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 28, "trim": ["RS"]},
+            # Generation-fits: the US Focus ST launched 2013, RS 2016 — these
+            # are gen-3 parts only; the old rows claimed fits 2000-2018.
+            {"name": "ST3/RS HID Headlights (pair)", "rarity": "Epic", "low": 500, "high": 1600, "cost": 45, "yr_min": 2013, "trim": ["ST", "RS"]},
+            {"name": "Recaro Seats (pair, ST/RS)", "rarity": "Epic", "low": 1100, "high": 2600, "cost": 71, "yr_min": 2013, "trim": ["ST", "RS"]},
+            {"name": "ST/RS Intercooler", "rarity": "Rare", "low": 60, "high": 160, "cost": 95, "yr_min": 2013, "trim": ["ST", "RS"]},
+            {"name": "ST/RS Steering Wheel", "rarity": "Rare", "low": 100, "high": 225, "cost": 37, "yr_min": 2013, "trim": ["ST", "RS"]},
+            {"name": "RS Brake Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 28, "yr_min": 2016, "trim": ["RS"]},  # RS sold 2016-2018 only
             {"name": "SYNC 3 Touchscreen (8\")", "rarity": "Rare", "low": 150, "high": 350, "cost": 45, "yr_min": 2015},
             {"name": "OEM Fog Lights + Bezels", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 22, "yr_min": 2008},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 35},
@@ -806,9 +809,11 @@ UNOBTANIUM_DB = {
         "make": "Hyundai",
         "year_range": (2001, 2023),
         "top_parts": [
-            {"name": "N/Sport Front Bumper Assembly", "rarity": "Epic", "low": 200, "high": 450, "cost": 73, "trim": ["N", "Sport", "N Line"]},
-            {"name": "N Line Steering Wheel", "rarity": "Rare", "low": 100, "high": 225, "cost": 37, "trim": ["N", "N Line"]},
-            {"name": "Sport/N Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 40, "trim": ["N", "Sport", "N Line"]},
+            # Generation-fits: Elantra Sport (1.6T) arrived with the 2017 AD,
+            # N Line/N with the 2021 CN7 — these rows used to claim 2001-2023.
+            {"name": "N/Sport Front Bumper Assembly", "rarity": "Epic", "low": 200, "high": 450, "cost": 73, "yr_min": 2017, "trim": ["N", "Sport", "N Line"]},
+            {"name": "N Line Steering Wheel", "rarity": "Rare", "low": 100, "high": 225, "cost": 37, "yr_min": 2017, "trim": ["N", "N Line"]},
+            {"name": "Sport/N Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 40, "yr_min": 2017, "trim": ["N", "Sport", "N Line"]},
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 400, "cost": 45, "yr_min": 2017},
             {"name": "Touchscreen Infotainment", "rarity": "Rare", "low": 200, "high": 400, "cost": 60, "yr_min": 2017},
             {"name": "Smart Cruise Radar Module", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 22, "yr_min": 2017},
@@ -840,7 +845,8 @@ UNOBTANIUM_DB = {
             # Sunroof/moonroof entries (here and below): factory option on virtually every
             # non-luxury model, never decodable from the VIN.
             {"name": "Panoramic Sunroof Glass", "rarity": "Rare", "low": 150, "high": 350, "cost": 44, "yr_min": 2011, "option": True},
-            {"name": "Bose/Infinity Amp + Speakers", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 44},
+            # Infinity premium audio started with the 2006 NF Sonata — was claiming 1999+.
+            {"name": "Bose/Infinity Amp + Speakers", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 44, "yr_min": 2006},
             {"name": "Smart Cruise Radar Module", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 22, "yr_min": 2018},
             {"name": "Wireless Charging Pad Module", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 29, "yr_min": 2019},
         ],
@@ -1052,7 +1058,8 @@ UNOBTANIUM_DB = {
         "year_range": (2001, 2020),
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 220, "high": 480, "cost": 42, "yr_min": 2016},
-            {"name": "Infinity Audio + Amp", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30},
+            # Infinity audio arrived with the 2011 gen-3 (TF) Optima — was claiming 2001+.
+            {"name": "Infinity Audio + Amp", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30, "yr_min": 2011},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 55, "high": 150, "cost": 25, "yr_max": 2015},
         ],
     },
@@ -1486,14 +1493,33 @@ UNOBTANIUM_DB = {
         "display": "BMW 3 Series",
         "make": "BMW",
         "year_range": (1999, 2024),
+        # 2026-09 generation-fits audit: clusters, iDrive units, lights and
+        # seats don't interchange across E36/E46/E90/F30/G20 — one wide band
+        # produced "fits 1992-2024" badges. Split per generation:
+        # E36 1992-1998, E46 1999-2005, E90 2006-2011, F30 2012-2018, G20 2019+.
         "top_parts": [
-            # E36/E46 (pre-iDrive): still common in yards; no yr_min so 1999–2005 matches get parts
-            {"name": "OEM Headlight Assembly (pair, halogen/xenon)", "rarity": "Rare", "low": 120, "high": 350, "cost": 30, "yr_max": 2005},
-            {"name": "Instrument Cluster (M3 / sport clusters worth more)", "rarity": "Rare", "low": 100, "high": 400, "cost": 20, "yr_max": 2006},
-            {"name": "iDrive / Navigation Head Unit", "rarity": "Epic", "low": 200, "high": 550, "cost": 50, "yr_min": 2006},
-            {"name": "OEM LED Headlights (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 65, "yr_min": 2012},
-            {"name": "Harman Kardon Amp + Speakers", "rarity": "Rare", "low": 150, "high": 400, "cost": 35, "yr_min": 2006},
-            {"name": "Sport Seats (pair)", "rarity": "Rare", "low": 300, "high": 700, "cost": 55, "trim": ["M Sport", "335i", "340i"]},
+            # E36 (1992-1998) — enthusiast/drift demand keeps interior + lights moving
+            {"name": "Headlights (E36, pair)", "rarity": "Rare", "low": 80, "high": 220, "cost": 25, "yr_max": 1998},
+            {"name": "Instrument Cluster (E36, M3/sport worth more)", "rarity": "Rare", "low": 80, "high": 280, "cost": 20, "yr_max": 1998},
+            {"name": "Sport Seats (E36 Vaders top the range, pair)", "rarity": "Rare", "low": 250, "high": 700, "cost": 55, "yr_max": 1998, "trim": ["M Sport", "328", "M3"]},
+            # E46 (1999-2005) — the volume yard 3-series; angel-eye xenons sell on sight
+            {"name": "OEM Headlight Assembly (E46 halogen/xenon, pair)", "rarity": "Rare", "low": 120, "high": 350, "cost": 30, "yr_min": 1999, "yr_max": 2005},
+            {"name": "Instrument Cluster (E46, M3/sport worth more)", "rarity": "Rare", "low": 100, "high": 400, "cost": 20, "yr_min": 1999, "yr_max": 2005},
+            {"name": "Sport Seats (E46, pair)", "rarity": "Rare", "low": 300, "high": 700, "cost": 55, "yr_min": 1999, "yr_max": 2005, "trim": ["M Sport", "330", "M3"]},
+            # E90 (2006-2011) — first iDrive cars; CCC screens die, working pulls move fast
+            {"name": "iDrive Head Unit (E90 CCC/CIC)", "rarity": "Rare", "low": 120, "high": 320, "cost": 40, "yr_min": 2006, "yr_max": 2011},
+            {"name": "Harman Kardon / Logic7 Amp + Speakers (E90)", "rarity": "Rare", "low": 120, "high": 320, "cost": 35, "yr_min": 2006, "yr_max": 2011},
+            {"name": "Sport Seats (E90, pair)", "rarity": "Rare", "low": 300, "high": 700, "cost": 55, "yr_min": 2006, "yr_max": 2011, "trim": ["M Sport", "335i"]},
+            # F30 (2012-2018) — NBT iDrive > the old CCC; LED/adaptive xenon pairs
+            {"name": "iDrive Head Unit (F30 NBT)", "rarity": "Epic", "low": 200, "high": 500, "cost": 50, "yr_min": 2012, "yr_max": 2018},
+            {"name": "OEM LED/Adaptive Headlights (F30, pair)", "rarity": "Epic", "low": 350, "high": 800, "cost": 65, "yr_min": 2012, "yr_max": 2018},
+            {"name": "Harman Kardon Amp + Speakers (F30)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35, "yr_min": 2012, "yr_max": 2018},
+            {"name": "Sport Seats (F30, pair)", "rarity": "Rare", "low": 300, "high": 700, "cost": 55, "yr_min": 2012, "yr_max": 2018, "trim": ["M Sport", "335i", "340i"]},
+            # G20 (2019+) — MGU touch iDrive + full-LED/laser lights top the 3er range
+            {"name": "iDrive Touch Head Unit (G20 MGU)", "rarity": "Epic", "low": 250, "high": 600, "cost": 50, "yr_min": 2019},
+            {"name": "OEM LED/Laser Headlights (G20, pair)", "rarity": "Epic", "low": 450, "high": 1000, "cost": 65, "yr_min": 2019},
+            {"name": "Harman Kardon Amp + Speakers (G20)", "rarity": "Rare", "low": 180, "high": 450, "cost": 35, "yr_min": 2019},
+            {"name": "Sport Seats (G20, pair)", "rarity": "Rare", "low": 350, "high": 750, "cost": 55, "yr_min": 2019, "trim": ["M Sport", "330i", "M340i"]},
         ],
     },
     "bmw m3": {
@@ -1624,12 +1650,35 @@ UNOBTANIUM_DB = {
         "display": "BMW 5 Series",
         "make": "BMW",
         "year_range": (1997, 2024),
+        # 2026-09 generation-fits audit: every electronics/lighting/seat part
+        # below used one 2004-2024 band, but an E60 cluster, F10 cluster and
+        # G30 cluster are entirely different parts (same for CCC/CIC vs NBT vs
+        # EVO iDrive, xenon vs LED vs laser lights). Split per generation:
+        # E39 1997-2003, E60 2004-2010, F10 2011-2016, G30 2017-2023 (+G60 '24).
         "top_parts": [
-            {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 400, "high": 950, "cost": 58, "yr_min": 2004},
-            {"name": "iDrive / CIC / NBT Head Unit", "rarity": "Epic", "low": 220, "high": 600, "cost": 45, "yr_min": 2004},
-            {"name": "Harman Kardon / Logic7 System", "rarity": "Rare", "low": 150, "high": 420, "cost": 35, "yr_min": 2004},
-            {"name": "Comfort Seats / Multi-Contour (pair)", "rarity": "Rare", "low": 350, "high": 900, "cost": 55, "trim": ["M Sport", "535", "540", "550"]},
-            {"name": "Instrument Cluster (HUD clusters worth more)", "rarity": "Rare", "low": 180, "high": 500, "cost": 28, "yr_min": 2004},
+            # E39 (1997-2003) — angel-eye halogen/xenon pairs sell steadily to the enthusiast crowd
+            {"name": "Headlights (E39 halo, pair)", "rarity": "Rare", "low": 100, "high": 280, "cost": 30, "yr_max": 2003},
+            {"name": "Instrument Cluster (E39, pixel-perfect worth more)", "rarity": "Rare", "low": 60, "high": 160, "cost": 20, "yr_max": 2003},
+            {"name": "DSP Amp + Speakers (E39)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 25, "yr_max": 2003},
+            {"name": "Comfort Seats (E39, pair)", "rarity": "Rare", "low": 200, "high": 500, "cost": 50, "yr_max": 2003, "trim": ["540", "530", "M Sport"]},
+            # E60 (2004-2010) — xenon pairs cheaper than the later LED stuff; CCC/CIC units age poorly
+            {"name": "OEM Xenon Headlights (E60, pair)", "rarity": "Rare", "low": 150, "high": 400, "cost": 45, "yr_min": 2004, "yr_max": 2010},
+            {"name": "iDrive Head Unit (E60 CCC/CIC)", "rarity": "Rare", "low": 100, "high": 280, "cost": 40, "yr_min": 2004, "yr_max": 2010},
+            {"name": "Harman Kardon / Logic7 System (E60)", "rarity": "Rare", "low": 100, "high": 280, "cost": 35, "yr_min": 2004, "yr_max": 2010},
+            {"name": "Comfort Seats / Multi-Contour (E60, pair)", "rarity": "Rare", "low": 300, "high": 700, "cost": 55, "yr_min": 2004, "yr_max": 2010, "trim": ["M Sport", "535", "540", "550"]},
+            {"name": "Instrument Cluster (E60)", "rarity": "Rare", "low": 80, "high": 220, "cost": 25, "yr_min": 2004, "yr_max": 2010},
+            # F10 (2011-2016) — adaptive xenon/LED; NBT retrofits keep head-unit demand strong
+            {"name": "OEM Adaptive Xenon/LED Headlights (F10, pair)", "rarity": "Epic", "low": 250, "high": 600, "cost": 55, "yr_min": 2011, "yr_max": 2016},
+            {"name": "iDrive Head Unit (F10 CIC/NBT — NBT worth more)", "rarity": "Epic", "low": 180, "high": 450, "cost": 45, "yr_min": 2011, "yr_max": 2016},
+            {"name": "Harman Kardon System (F10)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35, "yr_min": 2011, "yr_max": 2016},
+            {"name": "Comfort Seats / Multi-Contour (F10, pair)", "rarity": "Rare", "low": 350, "high": 850, "cost": 55, "yr_min": 2011, "yr_max": 2016, "trim": ["M Sport", "535", "540", "550"]},
+            {"name": "Instrument Cluster (F10, HUD cars worth more)", "rarity": "Rare", "low": 120, "high": 320, "cost": 28, "yr_min": 2011, "yr_max": 2016},
+            # G30 (2017+) — full-LED/laser lights and EVO touch iDrive command the top of the range
+            {"name": "OEM LED/Laser Headlights (G30, pair)", "rarity": "Epic", "low": 400, "high": 950, "cost": 60, "yr_min": 2017},
+            {"name": "iDrive Touch Head Unit (G30 EVO)", "rarity": "Epic", "low": 250, "high": 600, "cost": 48, "yr_min": 2017},
+            {"name": "Harman Kardon / B&W System (G30)", "rarity": "Rare", "low": 180, "high": 450, "cost": 38, "yr_min": 2017},
+            {"name": "Comfort Seats / Multi-Contour (G30, pair)", "rarity": "Rare", "low": 400, "high": 900, "cost": 55, "yr_min": 2017, "trim": ["M Sport", "535", "540", "550"]},
+            {"name": "Digital Instrument Cluster (G30 Live Cockpit)", "rarity": "Epic", "low": 200, "high": 500, "cost": 30, "yr_min": 2017},
         ],
     },
     "bmw 6": {
@@ -3180,7 +3229,8 @@ UNOBTANIUM_DB.update({
     "fiesta": {
         "display": "Ford Fiesta", "make": "Ford", "year_range": (2011, 2019),
         "top_parts": [
-            {"name": "ST Recaro Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 75, "trim": ["ST"]},
+            # US Fiesta ST launched 2014 — row used to claim 2011+.
+            {"name": "ST Recaro Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 75, "yr_min": 2014, "trim": ["ST"]},
             {"name": "SYNC Touchscreen", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 35, "yr_min": 2014},
             {"name": "Manual Shifter Assembly", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "manual": True},
         ],
@@ -3240,7 +3290,8 @@ UNOBTANIUM_DB.update({
         "display": "Hyundai Santa Fe", "make": "Hyundai", "year_range": (2001, 2024),
         "top_parts": [
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 180, "high": 420, "cost": 40, "yr_min": 2017},
-            {"name": "Infinity Amp + Speakers", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 20},
+            # Infinity audio first offered on the 2007 CM Santa Fe — was claiming 2001+.
+            {"name": "Infinity Amp + Speakers", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 20, "yr_min": 2007},
             {"name": "Side Mirrors (heated, pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
             {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15, "yr_min": 2013},
         ],
@@ -3706,9 +3757,15 @@ _split_generations("f-150", display="Ford F-150", make="Ford",
     ]},
     {"label": "13th/14th gen", "years": (2015, 2024), "parts": [
         {"name": "Power Retractable Running Boards", "rarity": "Epic", "low": 300, "high": 700, "cost": 40, "option": True},
-        {"name": "OEM LED Headlights", "rarity": "Epic", "low": 300, "high": 600, "cost": 50},
+        # Generation-fits: 13th-gen (15-20) and 14th-gen (21+) lights/grilles
+        # don't interchange; 21+ LED assemblies (zone lighting, BLIS wiring)
+        # pull noticeably more.
+        {"name": "OEM LED Headlights (13th gen)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_max": 2020},
+        {"name": "OEM LED Headlights (14th gen)", "rarity": "Epic", "low": 350, "high": 750, "cost": 55, "yr_min": 2021},
         {"name": "Power-Fold Tow Mirrors (pair)", "rarity": "Epic", "low": 500, "high": 1300, "cost": 40, "option": True},
-        {"name": "Raptor Grille", "rarity": "Legendary", "low": 550, "high": 750, "cost": 25, "trim": ["Raptor"]},
+        # Gen-2 Raptor arrived 2017 (no 15-16 Raptor); gen-3 grille differs.
+        {"name": "Raptor Grille (gen 2)", "rarity": "Legendary", "low": 550, "high": 750, "cost": 25, "yr_min": 2017, "yr_max": 2020, "trim": ["Raptor"]},
+        {"name": "Raptor Grille (gen 3)", "rarity": "Legendary", "low": 550, "high": 800, "cost": 25, "yr_min": 2021, "trim": ["Raptor"]},
     ]},
 ])
 
@@ -4272,6 +4329,337 @@ UNOBTANIUM_DB.update({
         ],
     },
 })
+
+# ---------------------------------------------------------------------------
+# 2026-09 GENERATION-FITS AUDIT — interchange-sensitive parts must never carry
+# a fits badge spanning vehicle generations.
+#
+# Problem: many parts carried one wide year band across several generations of
+# a model even though the part doesn't physically interchange (an E60 5-series
+# cluster is not an F10 cluster; a gen-3 CR-V tail light doesn't fit a gen-4).
+# The value-differentiated cases (BMW 3/5 iDrive/clusters/lights, F-150 LEDs,
+# Focus ST/RS, Elantra N, ...) are hand-split in their entries above with
+# per-generation prices. Everything else is handled here mechanically: each
+# base model gets its accepted US-market generation breakpoints (the first
+# model year of each new generation), and _apply_generation_bounds() splits any
+# interchange-sensitive part whose effective span crosses a breakpoint into
+# per-generation rows with yr_min/yr_max bounds. Prices/rarity/flags are
+# carried over unchanged — these are the parts whose used value is roughly
+# flat across generations; only the fits badge needed correcting.
+#
+# Mechanical/carry-over parts (alternators, actuators, motors, hitches,
+# roof racks, mirrors...) are deliberately NOT split — many genuinely
+# interchange or sell on function, not body fitment.
+# ---------------------------------------------------------------------------
+
+# Interchange-sensitive part names: body panels, lighting, glass/tops, seats,
+# clusters, head units, audio systems, steering wheels.
+_GEN_SENSITIVE_RE = re.compile(
+    r"cluster|digital dash|cockpit"
+    r"|head unit|touchscreen|infotainment|navigation|radio|idrive|\bmmi\b"
+    r"|\bsync\b|uconnect|mylink|entune|starlink|nissanconnect|\buvo\b|\bcue\b"
+    r"|entertainment scree|video screen|display"
+    r"|headlight|tail light|taillight|marker light|corner light|fog light"
+    r"|seat|bumper|grille|fender|hood|tailgate|spoiler|dash pad"
+    r"|door panel|barn door|dutch door|\bglass\b"
+    r"|soft top|hardtop|targa|t-top"
+    r"|\bamp\b|speaker|audio"
+    r"|steering wheel",
+    re.IGNORECASE,
+)
+# ...but never electric/mechanical assemblies that happen to share those words
+# (power liftgate MOTORS, seat track motors, sliding-door cables, etc.).
+_GEN_MECH_EXCLUDE_RE = re.compile(r"motor|cable|regulator|compressor|actuator|pump", re.IGNORECASE)
+
+# First model year of each new US-market generation (interior breakpoints only;
+# the entry's own year_range provides the outer bounds). Models absent from
+# this table are left untouched — single-generation entries, or long-tail
+# entries whose spans were audited as acceptable.
+GENERATION_BREAKS = {
+    # --- Toyota / Lexus / Scion ---
+    "4runner": [1990, 1996, 2003, 2010],
+    "tacoma": [2005, 2016],
+    "tundra": [2007, 2014, 2022],
+    "sequoia": [2008, 2023],
+    "highlander": [2008, 2014, 2020],
+    "camry": [1997, 2002, 2007, 2012, 2018],
+    "corolla": [1998, 2003, 2009, 2014, 2020],
+    "sienna": [2004, 2011, 2021],
+    "rav4": [2001, 2006, 2013, 2019],
+    "land cruiser": [1998, 2008],          # 80 -> 100 -> 200 series
+    "avalon": [2000, 2005, 2013, 2019],
+    "matrix": [2009],
+    "yaris": [2012, 2019],
+    "solara": [2004],
+    "celica": [1990, 1994, 2000],
+    "mr2": [1990, 2000],
+    "supra": [1982, 1986, 1993],
+    "cressida": [1985, 1989],
+    "toyota pickup": [1984, 1989],
+    "gt86": [2017],                        # facelift swapped lights + head unit
+    "rx": [2004, 2010, 2016, 2023],
+    "gx": [2010],
+    "lexus is": [2006, 2014, 2021],
+    "lexus es": [1997, 2002, 2007, 2013, 2019],
+    "lexus ls": [1995, 2001],
+    "lexus gs": [1998, 2006, 2013],
+    "scion xb": [2008],
+    # --- Honda / Acura ---
+    "civic": [1996, 2001, 2006, 2012, 2016, 2022],
+    "accord": [1994, 1998, 2003, 2008, 2013, 2018, 2023],
+    "cr-v": [2002, 2007, 2012, 2017, 2023],
+    "odyssey": [2005, 2011, 2018],
+    "pilot": [2009, 2016, 2023],
+    "honda fit": [2009, 2015],
+    "ridgeline": [2017],
+    "prelude": [1992, 1997],
+    "integra": [1994],
+    "legend": [1991],
+    "acura tl": [2004, 2009],
+    "acura tsx": [2009],
+    "acura rl": [2005],
+    "mdx": [2007, 2014, 2022],
+    # --- Nissan / Infiniti ---
+    "altima": [2002, 2007, 2013, 2019],
+    "sentra": [2007, 2013, 2020],
+    "sentra se-r": [1995, 2000],
+    "maxima": [2000, 2004, 2009, 2016],
+    "murano": [2009, 2015],
+    "rogue": [2014, 2021],
+    "versa": [2012, 2020],
+    "frontier": [2005, 2022],
+    "titan": [2017],
+    "armada": [2017],
+    "quest": [2004, 2011],
+    "pathfinder": [2005, 2013, 2022],
+    "240sx": [1995],
+    "300zx": [1990],
+    "nissan pickup": [1987],               # 720 -> D21 Hardbody
+    "infiniti fx": [2009],
+    "m35": [2006, 2011],
+    "qx56": [2011, 2017],
+    # --- Ford / Lincoln / Mercury ---
+    "f-150": [1987, 1992, 1997, 2004, 2009, 2015, 2021],
+    "f-250": [1999, 2008, 2017, 2023],
+    "f-350": [1999, 2008, 2017, 2023],
+    "ranger": [1993, 1998, 2019],
+    "explorer": [1995, 2002, 2006, 2011, 2020],
+    "expedition": [2003, 2007, 2018],
+    "escape": [2008, 2013, 2020],
+    "fusion": [2013],
+    "focus": [2008, 2012],
+    "taurus": [1992, 1996, 2000, 2008, 2010],
+    "mustang": [1994, 1999, 2005, 2010, 2015],
+    "crown victoria": [1998],
+    "grand marquis": [1998],
+    "town car": [1998, 2003],
+    "bronco": [1978, 1980],
+    "ford edge": [2015],
+    "transit connect": [2014],
+    "navigator": [2003, 2007, 2018],
+    "mountaineer": [2002, 2006],
+    "sable": [1996, 2000, 2008],
+    "tribute": [2008],
+    # --- GM ---
+    "silverado": [2007, 2014, 2019],
+    "sierra": [2007, 2014, 2019],
+    "tahoe": [2000, 2007, 2015, 2021],
+    "suburban": [2000, 2007, 2015, 2021],
+    "yukon": [2000, 2007, 2015, 2021],
+    "escalade": [2002, 2007, 2015, 2021],
+    "equinox": [2010, 2018],
+    "traverse": [2018],
+    "acadia": [2017],
+    "terrain": [2018],
+    "enclave": [2018],
+    "impala": [2006, 2014],
+    "malibu": [2004, 2008, 2013, 2016],
+    "cruze": [2016],
+    "monte carlo": [1995, 2000],
+    "trailblazer": [2021],                 # 02-09 SUV vs 21+ crossover revival
+    "colorado": [2015, 2023],
+    "avalanche": [2007],
+    "astro": [1995],
+    "safari": [1995],
+    "express": [2003],
+    "s10": [1994],
+    "sonoma": [1994],
+    "blazer": [1992, 1995],
+    "jimmy": [1992, 1995],
+    "c/k": [1988],                         # squarebody -> OBS
+    "corvette": [1984, 1997, 2005],        # C3 -> C4 -> C5 -> C6
+    "camaro": [1993, 2010, 2016],
+    "firebird": [1993],
+    "grand prix": [2004],
+    "grand am": [1999],
+    "lesabre": [2000],
+    "lacrosse": [2010, 2017],
+    "century": [1997],
+    "regal": [1988, 1997, 2011, 2018],
+    "deville": [2000, 2006],
+    "srx": [2010],
+    "cadillac cts": [2008, 2014],
+    "cadillac sts": [1998, 2005],
+    "vue": [2008],
+    # --- Chrysler / Dodge / Jeep / Ram ---
+    "ram": [2002, 2009, 2019],
+    "ram 2500": [2003, 2010, 2019],
+    "ram 3500": [2003, 2010, 2019],
+    "dakota": [1997, 2005],
+    "durango": [2004, 2011],
+    "charger": [2011],
+    "challenger": [2015],                  # facelift swapped the Uconnect unit
+    "chrysler 300": [2011],
+    "grand caravan": [2001, 2008],
+    "town & country": [2008],
+    "pacifica": [2017],                    # 04-08 crossover vs 17+ minivan
+    "sebring": [2001, 2007],
+    "neon": [2000],
+    "liberty": [2008],
+    "compass": [2017],
+    "cherokee": [2002, 2014],              # XJ vs KL (no US Cherokee between)
+    "grand cherokee": [1999, 2005, 2011, 2022],
+    "wrangler": [1997, 2007, 2018],
+    # --- Hyundai / Kia ---
+    "sonata": [2006, 2011, 2015, 2020],
+    "elantra": [2007, 2011, 2017, 2021],
+    "santa fe": [2007, 2013, 2019],
+    "tucson": [2010, 2016, 2022],
+    "accent": [2006, 2012, 2018],
+    "veloster": [2019],
+    "tiburon": [2003],
+    "optima": [2007, 2011, 2016],
+    "sorento": [2011, 2016, 2021],
+    "sportage": [2011, 2017, 2023],
+    "sedona": [2006, 2015],
+    "soul": [2014, 2020],
+    "forte": [2014, 2019],
+    "kia rio": [2006, 2012, 2018],
+    "spectra": [2005],
+    # --- Subaru ---
+    "outback": [2005, 2010, 2015, 2020],
+    "forester": [2003, 2009, 2014, 2019],
+    "impreza": [2002, 2008, 2012, 2017, 2024],
+    "legacy": [2000, 2005, 2010, 2015, 2020],
+    "wrx": [2008, 2015, 2022],
+    "brz": [2022],
+    # --- Mazda / Mitsubishi ---
+    "mazda3": [2010, 2014, 2019],
+    "mazda6": [2009, 2014],
+    "cx-5": [2017],
+    "cx-9": [2016],
+    "mx-5": [1999, 2006, 2016],            # NA -> NB -> NC -> ND
+    "rx-7": [1986, 1993],
+    "protege": [1995, 1999],
+    "outlander": [2007, 2014, 2022],
+    "lancer": [2008],
+    "lancer evolution": [2008],            # Evo 8/9 -> Evo X
+    "galant": [2004],
+    "eclipse": [1995, 2000, 2006],
+    # --- VW / Audi ---
+    "jetta": [1993, 1999, 2006, 2011, 2019],
+    "passat": [2006, 2012, 2020],
+    "golf": [2006, 2010, 2015, 2022],
+    "gti": [2006, 2010, 2015, 2022],
+    "new beetle": [2012],
+    "tiguan": [2018],
+    "audi a3": [2015, 2022],
+    "audi s3": [2022],
+    "audi a4": [2002, 2009, 2017],
+    "audi s4": [2010, 2018],
+    "audi a5": [2018],
+    "audi s5": [2018],
+    "audi a6": [2005, 2012, 2019],
+    "audi s6": [2012, 2020],
+    "audi a7": [2019],
+    "audi s7": [2020],
+    "audi a8": [2011, 2019],
+    "audi s8": [2013, 2020],
+    "audi rs5": [2018],
+    "audi rs7": [2021],
+    "audi q3": [2019],
+    "audi q5": [2018],
+    "audi sq5": [2018],
+    "audi q7": [2017],
+    "audi tt": [2008, 2016],
+    # --- BMW ---
+    "bmw 1": [2014],                       # US 1-series ended 2013 (2-series after)
+    "bmw 3": [1999, 2006, 2012, 2019],     # E36/E46/E90/F30/G20
+    "bmw 4": [2021],
+    "bmw 5": [2004, 2011, 2017, 2024],     # E39/E60/F10/G30/G60
+    "bmw 6": [2012],
+    "bmw 7": [2009, 2016, 2023],
+    "bmw m3": [2008, 2015, 2021],
+    "bmw m5": [2006, 2012, 2018],
+    "x1": [2016, 2023],
+    "x3": [2011, 2018],
+    "x4": [2019],
+    "x5": [2007, 2014, 2019],
+    "x6": [2015, 2020],
+    "z4": [2009, 2019],
+    "mini cooper": [2007],
+    # --- Mercedes / Volvo / other Euro ---
+    "c-class": [2001, 2008, 2015, 2022],
+    "e-class": [2003, 2010, 2017, 2024],
+    "m-class": [2006, 2012],
+    "benz 300": [1986],                    # W123 -> W124
+    "volvo s60": [2011, 2019],
+    "volvo s80": [2007],
+    "xc90": [2016],
+    "xc70": [2008],
+    "9-3": [2003],
+    "discovery": [1999],
+    "range rover": [2003, 2013],
+    "cayenne": [2011, 2019],
+    "trooper": [1992],
+    "sidekick": [1996],
+    "tracker": [1999],
+    "rodeo": [1998],
+    "scion tc": [2011],
+}
+
+
+def _apply_generation_bounds() -> None:
+    """Split interchange-sensitive parts so no fits badge spans a generation.
+
+    For every entry with known generation breakpoints, any sensitive part
+    whose effective year span (entry year_range narrowed by its own
+    yr_min/yr_max) crosses a breakpoint is replaced by one copy per
+    generation segment, each bounded with yr_min/yr_max. All other fields
+    (price band, rarity, cost, trim/option/manual/drive gates) carry over.
+    """
+    seen: set[int] = set()
+    for key, e in list(UNOBTANIUM_DB.items()):
+        if id(e) in seen:
+            continue  # feed-spelling alias of an entry already processed
+        seen.add(id(e))
+        # Generation-split entries are keyed "<base> <lo>-<hi>".
+        base = re.sub(r" \d{4}-\d{4}$", "", key)
+        breaks = GENERATION_BREAKS.get(base)
+        if not breaks:
+            continue
+        lo, hi = e["year_range"]
+        new_parts: list[dict] = []
+        for p in e["top_parts"]:
+            plo = max(lo, p.get("yr_min", lo))
+            phi = min(hi, p.get("yr_max", hi))
+            name = p["name"]
+            if (plo > phi or not _GEN_SENSITIVE_RE.search(name)
+                    or _GEN_MECH_EXCLUDE_RE.search(name)):
+                new_parts.append(p)
+                continue
+            cuts = [b for b in breaks if plo < b <= phi]
+            if not cuts:
+                new_parts.append(p)
+                continue
+            for seg_lo, seg_hi_excl in zip([plo] + cuts, cuts + [phi + 1]):
+                q = dict(p)
+                q["yr_min"], q["yr_max"] = seg_lo, seg_hi_excl - 1
+                new_parts.append(q)
+        e["top_parts"] = new_parts
+
+
+_apply_generation_bounds()
 
 # ---------------------------------------------------------------------------
 # Sell-channel guide — where each part actually moves and how fast.
