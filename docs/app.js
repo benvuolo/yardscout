@@ -826,17 +826,14 @@ function savedRange(s) {
   // part isn't covered we don't invent a cost — the range is flagged resale-only.
   let lo = 0, hi = 0, unknownCost = false;
   s.topParts.forEach(p => {
+    // "If equipped" (trim/option-unconfirmed) parts contribute $0 — the saved
+    // list shows confirmed value only, same as the live cards and sorts.
+    if (p.trim_status === 'unconfirmed') return;
     const lk = lookupYardCost(p.name, s.location);
     const cost = lk.cost != null ? lk.cost : 0;
     if (lk.cost == null) unknownCost = true;
-    // "If equipped" (trim-unconfirmed) parts only raise the high end; the low
-    // end assumes the car doesn't have them.
-    if (p.trim_status === 'unconfirmed') {
-      hi += p.high - cost;
-    } else {
-      lo += p.low - cost;
-      hi += p.high - cost;
-    }
+    lo += p.low - cost;
+    hi += p.high - cost;
   });
   // Same freshness discount the live cards apply, so the numbers agree.
   const fm = freshnessMultiplier(s.dateAdded);
@@ -1063,6 +1060,9 @@ function getFilteredLive() {
   function totalProfit(v) {
     if (!v.topParts || !v.topParts.length) return 0;
     return v.topParts.reduce((sum, p) => {
+      // "If equipped" (trim/option-unconfirmed) parts contribute $0 to all
+      // sorting and totals — the car probably doesn't have them.
+      if (p.trim_status === 'unconfirmed') return sum;
       const lookup = lookupYardCost(p.name, v.location);
       // No fabricated costs: subtract only real price-list costs (0 when unknown).
       const yc = lookup.cost != null ? lookup.cost : 0;
@@ -1083,7 +1083,12 @@ function getFilteredLive() {
     return v._ts;
   };
   const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
-  const bestSpeed = v => v.topParts && v.topParts.length ? Math.max(...v.topParts.map(p => speedRk(p.sell_speed))) : 0;
+  // Fastest-sell ranks by CONFIRMED parts only — an unconfirmed hardtop that
+  // "sells fast" (if it exists) must not put the car in the fast band.
+  const bestSpeed = v => {
+    const conf = (v.topParts || []).filter(p => p.trim_status !== 'unconfirmed');
+    return conf.length ? Math.max(...conf.map(p => speedRk(p.sell_speed))) : 0;
+  };
   // Days-on-lot as a share of the yard's historical average. Cars past 2x the
   // average have already defied it (the average predicts nothing for them),
   // so they rank below the genuine 0.8-2x leaving window; cars without
@@ -1244,7 +1249,7 @@ function renderLive() {
 
     let cardStyle = '', profitLine = '', partsBlock = '';
     if (isMatch && v.topParts && v.topParts.length) {
-      let totalCost = 0, lowSum = 0, highSum = 0, bestPart = null, bestHigh = -Infinity;
+      let totalCost = 0, lowSum = 0, highSum = 0, unconfirmedHigh = 0, bestPart = null, bestHigh = -Infinity;
       let anyUnknownCost = false;
       const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
       let demandRk = 0;
@@ -1262,12 +1267,12 @@ function renderLive() {
         const yardCost = hasCost ? lookup.cost : 0;
         if (!hasCost) anyUnknownCost = true;
         const pHigh = Math.round(p.high - yardCost);
-        // Trim-unconfirmed parts ("if equipped") only contribute to the HIGH
-        // end of the range — the low end assumes the car doesn't have them,
-        // so the range never overstates a car whose trim we can't verify.
+        // Trim/option-unconfirmed parts ("if equipped") are excluded from the
+        // headline range entirely — they're tallied separately and shown as a
+        // muted "+ up to $X more if equipped" note, never as promised dollars.
         const ifEquipped = p.trim_status === 'unconfirmed';
         if (ifEquipped) {
-          highSum += p.high - yardCost;
+          unconfirmedHigh += p.high - yardCost;
         } else {
           totalCost += yardCost;
           lowSum += p.low - yardCost;
@@ -1328,6 +1333,7 @@ function renderLive() {
       // the yard's list, the range is labeled resale-only instead of guessing.
       const rangeLow = Math.max(0, Math.round(lowSum * fm));
       const rangeHigh = Math.round(highSum * fm);
+      const extraHigh = Math.round(unconfirmedHigh * fm);
       const demand = demandRk === 3
         ? { cls: 'demand-fast', label: 'Sells fast' }
         : demandRk === 1
@@ -1337,12 +1343,16 @@ function renderLive() {
       const rangeText = anyUnknownCost
         ? `resale ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; pull cost: check yard price list`
         : `e.g. ${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
-      profitLine = rangeHigh > 0
+      // Upside stays visible without misleading: unconfirmed ("if equipped")
+      // parts never inflate the headline range — they get a muted second line.
+      const extraNote = extraHigh > 0 ? `
+        <div class="range-extra" title="Parts specific to a trim or factory option that couldn\u2019t be confirmed for this car &mdash; they add nothing to its ranking or headline value">+ up to ${formatPrice(extraHigh)}${rangeHigh > 0 ? ' more' : ''} if equipped (unconfirmed &mdash; check at the yard)</div>` : '';
+      profitLine = (rangeHigh > 0 || extraHigh > 0)
         ? (isPro() ? `
         <div class="profit-line">
           <span class="demand-badge ${demand.cls}">${demand.label}</span>
-          <span class="range-text">${rangeText}</span>
-        </div>` : `
+          ${rangeHigh > 0 ? `<span class="range-text">${rangeText}</span>` : ''}
+        </div>${extraNote}` : `
         <div class="profit-line">
           <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} See what this is worth &mdash; Pro</button>
         </div>`)
