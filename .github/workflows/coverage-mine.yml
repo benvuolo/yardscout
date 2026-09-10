@@ -1,0 +1,77 @@
+# Monthly coverage-gap mining: ranks (make, model, year-band) groups with zero
+# or generic-only part coverage, gathers eBay sold-price evidence for the top
+# groups (polite HTML fetches; fails soft when bot-blocked), and refreshes
+# scraper/coverage_candidates.md + .json on a fixed branch with a review PR.
+# The miner PROPOSES entries only — it never edits UNOBTANIUM_DB. Zero LLM tokens.
+
+name: Monthly Coverage Mining
+
+on:
+  schedule:
+    - cron: "0 15 8 * *"   # 8th of each month, 15:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: coverage-mine
+  cancel-in-progress: false
+
+jobs:
+  mine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run coverage miner
+        # 15 groups x 8 categories at ~2s/request ≈ 4 min when eBay lets us in;
+        # seconds when it 403s (fails soft to inventory-side analysis).
+        run: python scraper/mine_coverage_gaps.py --top 15 --categories 8
+
+      - name: Push candidates branch + open/refresh review PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- scraper/coverage_candidates.md scraper/coverage_candidates.json; then
+            echo "No changes to coverage candidates."
+            exit 0
+          fi
+          DATE=$(date -u +%Y-%m-%d)
+          BRANCH="chore/coverage-candidates"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add scraper/coverage_candidates.md scraper/coverage_candidates.json
+          git commit -m "chore: monthly coverage-gap mining ($DATE)"
+          # Fixed branch, force-pushed: successive months refresh the same PR.
+          git push -u origin "$BRANCH" --force
+          if gh pr list --head "$BRANCH" --state open --json number --jq length | grep -q '^0$'; then
+            gh pr create --base main --head "$BRANCH" \
+              --title "Coverage candidates: automated gap mining ($DATE)" \
+              --body "$(cat <<'EOF'
+          Monthly automated coverage-gap mining (`scraper/mine_coverage_gaps.py`) — ranked
+          inventory groups with zero/generic-only part coverage plus eBay sold-price evidence
+          where collection succeeded. See `scraper/coverage_candidates.md` for the review
+          report and entry skeletons.
+
+          **Nothing is auto-merged and `UNOBTANIUM_DB` is never auto-edited** — accept a
+          candidate by hand-curating its skeleton into `scraper/junkyard_scraper.py` with the
+          usual pricing discipline (sold-price calibration + the new-part ceiling rule), then
+          close or refresh this PR.
+          EOF
+          )"
+          else
+            gh pr comment "$BRANCH" --body "Refreshed by the $DATE mining run."
+          fi
