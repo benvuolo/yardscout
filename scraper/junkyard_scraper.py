@@ -5467,6 +5467,227 @@ def refresh_pap_pricing_file(locations: list[dict] | None = None) -> Path:
     return path
 
 
+# ---------------------------------------------------------------------------
+# Independent / regional yards — opt-in via --independents (or
+# JUNKYARD_INDEPENDENTS=1) so the scheduled scan enables them deliberately.
+# Registry + research: scraper/independent_yards_registry.json and
+# scraper/INDEPENDENT_YARDS.md. No photos are captured from any independent
+# (chain-wide owner policy), and nothing here touches Row52 (competitor;
+# Row52 is Pick-n-Pull-exclusive since their acquisition anyway).
+# ---------------------------------------------------------------------------
+
+INDEP_CACHE_DIR = CACHE_DIR / "independents"
+
+
+def _indep_cache_raw(name: str, content: bytes) -> None:
+    """Cache the raw upstream response (dev aid + parser forensics). Best-effort;
+    the dir is gitignored with the rest of .cache."""
+    try:
+        INDEP_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        (INDEP_CACHE_DIR / name).write_bytes(content)
+    except OSError:
+        pass
+
+
+# Wrench-A-Part (7 self-service yards, all TX) — public JSON API used by their
+# own Svelte inventory page (wrenchapart.com/vehicle-search.html). One
+# unauthenticated GET returns the ENTIRE multi-yard inventory (~11k vehicles);
+# robots.txt allows everything. Yard ids come from their
+# /api/closest-location?all=1 endpoint; coords geocoded once via Nominatim and
+# hardcoded (same convention as YARD_COORDS). The feed's photo field is
+# deliberately ignored (no-photos policy).
+WAP_VEHICLES_API = "https://api.wrenchapart.com/v1/vehicles"
+WAP_YARDS = {
+    2: {"name": "Wrench-A-Part - Austin", "city": "Del Valle", "state": "TX",
+        "lat": 30.1888, "lng": -97.5654},
+    3: {"name": "Wrench-A-Part - Lubbock", "city": "Lubbock", "state": "TX",
+        "lat": 33.5170, "lng": -101.7780},
+    4: {"name": "Wrench-A-Part - Belton", "city": "Belton", "state": "TX",
+        "lat": 31.0517, "lng": -97.5176},
+    5: {"name": "Wrench-A-Part - San Antonio", "city": "San Antonio", "state": "TX",
+        "lat": 29.4379, "lng": -98.3753},
+    8: {"name": "Wrench-A-Part - Holland", "city": "Holland", "state": "TX",
+        "lat": 30.9184, "lng": -97.3639},
+    9: {"name": "Primo Wrench-A-Part - Del Valle", "city": "Del Valle", "state": "TX",
+        "lat": 30.1892, "lng": -97.5648},
+    10: {"name": "Roosevelt Wrench-A-Part - San Antonio", "city": "San Antonio",
+         "state": "TX", "lat": 29.3120, "lng": -98.4745},
+}
+
+
+def fetch_wrenchapart_inventory() -> list[dict]:
+    """Fetch live inventory from every Wrench-A-Part yard (single request)."""
+    try:
+        r = requests.get(WAP_VEHICLES_API, headers=HEADERS, timeout=120)
+        r.raise_for_status()
+        _indep_cache_raw("wrenchapart_vehicles.json", r.content)
+        rows = r.json()
+    except Exception as e:
+        print(f"  [Wrench-A-Part] inventory fetch failed: {e}", file=sys.stderr)
+        return []
+
+    vehicles: list[dict] = []
+    unknown_yards: set = set()
+    for item in rows if isinstance(rows, list) else []:
+        yard = WAP_YARDS.get(item.get("yard"))
+        if yard is None:
+            unknown_yards.add(item.get("yard"))
+            continue
+        stock = (item.get("stockNumber") or "").strip()
+        if not stock:
+            continue
+        make_s = ((item.get("make") or {}).get("name") or "").strip()
+        model_s = ((item.get("model") or {}).get("name") or "").strip()
+        # Their UI displays row.id as the row number; lat/lng on the row object
+        # is usually null so the hardcoded yard coords are used instead.
+        row_obj = item.get("row") or {}
+        row_s = str(row_obj.get("id") or "")
+        vehicles.append({
+            "id": f"wap-{stock}",
+            "vin": (item.get("vin") or "").strip(),
+            "year": int(item.get("modelYear") or 0),
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": row_s,
+            "dateAdded": str(item.get("dateAdded") or "")[:10],
+            "_color": (item.get("color") or "").strip().title(),
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "wrenchapart",
+        })
+    if unknown_yards:
+        print(f"  [Wrench-A-Part] skipped unknown yard id(s): {sorted(unknown_yards)} "
+              "— update WAP_YARDS/registry", file=sys.stderr)
+
+    seen: set[str] = set()
+    unique = []
+    for v in vehicles:
+        if v["id"] not in seen:
+            seen.add(v["id"])
+            unique.append(v)
+    print(f"  [Wrench-A-Part] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
+# U-Pull-R Parts (Rosemount + East Bethel MN, Toledo OH) — WordPress
+# admin-ajax gateway (action=doApiCall) returning clean JSON; robots.txt
+# explicitly allows admin-ajax.php. Same vendor plugin family as Pull-N-Save
+# ("gm_vehicle_search" — see INDEPENDENT_YARDS.md). The scan is one getVehicles
+# request per make with site=0 (all three stores in one response). A single
+# makes=0 request would be cheaper, but its rows carry no make: Model is just
+# "MALIBU"/"CIVIC" except for ~15% of literal DB names like "FORD F150 PICKUP",
+# so per-make queries (the same flow their own search UI uses) are the only
+# reliable source of the make.
+UPR_AJAX = "https://upullrparts.com/wp-admin/admin-ajax.php"
+UPR_STORES = {
+    1: {"name": "U-Pull-R Parts - Rosemount", "city": "Rosemount", "state": "MN",
+        "lat": 44.7185, "lng": -93.1261},
+    2: {"name": "U-Pull-R Parts - East Bethel", "city": "East Bethel", "state": "MN",
+        "lat": 45.3887, "lng": -93.2341},
+    3: {"name": "U-Pull-R Parts - Toledo", "city": "Toledo", "state": "OH",
+        "lat": 41.7188, "lng": -83.5380},
+}
+UPR_DELAY_SEC = 2.0  # ~1 request / 2s per host
+UPR_HEADERS = {
+    **HEADERS,
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Referer": "https://upullrparts.com/inventory/",
+    "Origin": "https://upullrparts.com",
+}
+
+
+def fetch_upullr_inventory() -> list[dict]:
+    """Fetch live inventory from U-Pull-R Parts (2 MN yards + Toledo OH).
+
+    One getVehicles POST per make (site=0 = every store), ~2s apart — the same
+    request their own search UI issues, ~50 requests / ~2 min per scan."""
+    session = requests.Session()
+
+    def _post(api_action: str, **extra) -> requests.Response:
+        return session.post(
+            UPR_AJAX,
+            data={"action": "doApiCall", "apiAction": api_action, **extra},
+            headers=UPR_HEADERS,
+            timeout=60,
+        )
+
+    try:
+        r = _post("getMakes")
+        r.raise_for_status()
+        makes = json.loads(r.text) if r.text else []
+    except Exception as e:
+        print(f"  [U-Pull-R] getMakes failed: {e}", file=sys.stderr)
+        return []
+    makes = [m.strip() for m in makes if isinstance(m, str) and m.strip()]
+
+    all_vehicles: list[dict] = []
+    for make_name in makes:
+        time.sleep(UPR_DELAY_SEC)
+        try:
+            r = _post("getVehicles", site="0", makes=make_name, models="0",
+                      years="0", beginDate="", endDate="")
+            r.raise_for_status()
+            rows = json.loads(r.text) if r.text.strip() else []
+        except Exception as e:
+            print(f"  [U-Pull-R] make {make_name!r} fetch failed: {e}", file=sys.stderr)
+            continue
+        if not isinstance(rows, list):
+            continue
+        _indep_cache_raw(f"upullr_{re.sub(r'[^A-Za-z0-9]+', '_', make_name)}.json",
+                         r.content)
+        for item in rows:
+            stock = str(item.get("StockNumber") or "").strip()
+            if not stock:
+                continue
+            store = UPR_STORES.get(item.get("Store"))
+            if store is None:
+                continue
+            # Some DB model names repeat the make ("MAZDA 6", "FORD F150
+            # PICKUP") — strip it so the UI doesn't show "Mazda Mazda 6".
+            model_s = str(item.get("Model") or "").strip()
+            if model_s.upper().startswith(make_name.upper() + " "):
+                model_s = model_s[len(make_name):].strip()
+            color = str(item.get("Color") or "").strip().title()
+            all_vehicles.append({
+                "id": f"upullr-{item.get('Store')}-{stock}",
+                "vin": str(item.get("VIN") or "").strip(),
+                "year": int(item.get("Year") or 0),
+                "make": _utpap_format_label(make_name),
+                "model": _utpap_format_label(model_s),
+                "row": str(item.get("Row") or ""),
+                "dateAdded": str(item.get("DateSetData") or "")[:10],
+                "_color": "" if color.lower() == "unknown" else color,
+                "_location": store["name"],
+                "_city": store["city"],
+                "_state": store["state"],
+                "_lat": store["lat"],
+                "_lng": store["lng"],
+                "_source": "upullr",
+            })
+
+    seen: set[str] = set()
+    unique = []
+    for v in all_vehicles:
+        if v["id"] not in seen:
+            seen.add(v["id"])
+            unique.append(v)
+    print(f"  [U-Pull-R] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
+def fetch_independent_inventory() -> list[dict]:
+    """All enabled independent-yard adapters (registry status: adapter-built)."""
+    vehicles = fetch_wrenchapart_inventory()
+    time.sleep(2)  # different hosts, but keep the overall cadence gentle
+    vehicles += fetch_upullr_inventory()
+    return vehicles
+
+
 def _vpic_mismatch_msg(v: dict, vin_dec: dict | None) -> str | None:
     """Cross-check the VIN's factory decode against the yard listing.
 
@@ -6344,6 +6565,11 @@ def main():
         action="store_true",
         help="Scan every supported chain nationwide: Pick-n-Pull US+Canada, LKQ Pick Your Part (~60 yards), Pull-A-Part (~36 yards incl. former U-Pull-&-Pay). Without this flag, only the SLC-radius chains are scanned.",
     )
+    parser.add_argument(
+        "--independents",
+        action="store_true",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+    )
     args = parser.parse_args()
 
     if args.refresh_utpap_pricing:
@@ -6414,6 +6640,10 @@ def main():
         and not decode_vins_incremental
     )
 
+    scan_independents = bool(args.independents) or (
+        os.environ.get("JUNKYARD_INDEPENDENTS", "").strip().lower() in ("1", "true", "yes")
+    )
+
     def do_scan():
         scope = "NATIONAL (all US+Canada yards)" if args.national else "SLC"
         print(f"Scanning Pick-n-Pull {scope}...", file=sys.stderr)
@@ -6436,7 +6666,13 @@ def main():
             print("Scanning Pull-A-Part (incl. former U-Pull-&-Pay yards)...", file=sys.stderr)
             pap_vehicles = fetch_pap_inventory()
 
-        all_vehicles = pnp_vehicles + tap_vehicles + utpap_vehicles + pyp_vehicles + pap_vehicles
+        indep_vehicles: list[dict] = []
+        if scan_independents:
+            print("Scanning independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH)...", file=sys.stderr)
+            indep_vehicles = fetch_independent_inventory()
+
+        all_vehicles = (pnp_vehicles + tap_vehicles + utpap_vehicles
+                        + pyp_vehicles + pap_vehicles + indep_vehicles)
         all_vehicles = enrich_vehicles(
             all_vehicles,
             decode_vins=decode_vins,

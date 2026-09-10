@@ -1,0 +1,243 @@
+{
+  "version": 1,
+  "updated": "2026-09-10",
+  "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
+  "chains": [
+    {
+      "name": "Wrench-A-Part",
+      "status": "adapter-built",
+      "platform": "custom-svelte-api",
+      "inventory_url": "https://wrenchapart.com/vehicle-search.html",
+      "api": {
+        "endpoint": "https://api.wrenchapart.com/v1/vehicles",
+        "method": "GET",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": 1,
+        "notes": "Single unauthenticated GET returns entire multi-yard inventory (~11k vehicles, ~4.4 MB). Fields: yard(id), modelYear, make.name, model.name, vin, color, stockNumber, dateAdded(ISO), row.id (displayed as the row number on their site). robots.txt allows all."
+      },
+      "update_freshness": "live (dateAdded timestamps observed same-day)",
+      "robots": "allow all, no crawl-delay",
+      "tos_flags": "none found",
+      "locations": [
+        {"yard_id": 2, "name": "Wrench-A-Part - Austin", "city": "Del Valle", "state": "TX", "lat": 30.1888, "lng": -97.5654},
+        {"yard_id": 3, "name": "Wrench-A-Part - Lubbock", "city": "Lubbock", "state": "TX", "lat": 33.517, "lng": -101.778},
+        {"yard_id": 4, "name": "Wrench-A-Part - Belton", "city": "Belton", "state": "TX", "lat": 31.0517, "lng": -97.5176},
+        {"yard_id": 5, "name": "Wrench-A-Part - San Antonio", "city": "San Antonio", "state": "TX", "lat": 29.4379, "lng": -98.3753},
+        {"yard_id": 8, "name": "Wrench-A-Part - Holland", "city": "Holland", "state": "TX", "lat": 30.9184, "lng": -97.3639},
+        {"yard_id": 9, "name": "Primo Wrench-A-Part - Del Valle", "city": "Del Valle", "state": "TX", "lat": 30.1892, "lng": -97.5648},
+        {"yard_id": 10, "name": "Roosevelt Wrench-A-Part - San Antonio", "city": "San Antonio", "state": "TX", "lat": 29.312, "lng": -98.4745}
+      ]
+    },
+    {
+      "name": "U-Pull-R Parts",
+      "status": "adapter-built",
+      "platform": "gm-vehicle-search-wp (JSON gateway variant)",
+      "inventory_url": "https://upullrparts.com/inventory/",
+      "api": {
+        "endpoint": "https://upullrparts.com/wp-admin/admin-ajax.php",
+        "method": "POST",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": "~50 (one per make, site=0 = all stores; 2s apart)",
+        "notes": "POST action=doApiCall&apiAction=getVehicles&site=0&makes={Make}&models=0&years=0 returns all three stores' rows for that make as JSON. Per-make queries are required: with makes=0 the rows carry no make (Model is just 'MALIBU'/'CIVIC', except ~15% literal DB names like 'FORD F150 PICKUP'). Make list via apiAction=getMakes. Fields: Year, Model, Color, StockNumber, Row, DateSetData, Store, VIN, Odometer. robots.txt explicitly allows /wp-admin/admin-ajax.php."
+      },
+      "update_freshness": "live (same-day DateSet values observed)",
+      "robots": "explicitly allows admin-ajax.php",
+      "tos_flags": "none found",
+      "locations": [
+        {"store_id": 1, "name": "U-Pull-R Parts - Rosemount", "city": "Rosemount", "state": "MN", "lat": 44.7185, "lng": -93.1261},
+        {"store_id": 2, "name": "U-Pull-R Parts - East Bethel", "city": "East Bethel", "state": "MN", "lat": 45.3887, "lng": -93.2341},
+        {"store_id": 3, "name": "U-Pull-R Parts - Toledo", "city": "Toledo", "state": "OH", "lat": 41.7188, "lng": -83.538}
+      ]
+    },
+    {
+      "name": "Pull-N-Save",
+      "status": "candidate",
+      "platform": "gm-vehicle-search-wp (HTML variant)",
+      "inventory_url": "https://www.pullnsave.com/inventory-search/",
+      "api": {
+        "endpoint": "https://pullnsave.com/wp-admin/admin-ajax.php",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table (json for getStores/getMakes)",
+        "requests_per_scan": "~45 (one per make with store=0), or 8 (one per store with makes=0, but the table has no Make column)",
+        "notes": "Same WP plugin family as U-Pull-R (footable + 'glennForm' fingerprints; plugin dirs PnsV1_3.3 / gm_vehicle_search). action=getStores returns JSON store list; action=getVehicles&makes={Make}&models=0&store=0 returns an HTML table (Year/Model/Date/Row/Store/Color/Stock/VIN) across all stores. Vehicle photos hosted at app.pullnsaveapp.com (own app, not Row52) but photos are not captured per policy. robots.txt Crawl-delay: 10 - honor it, so a full scan is ~45 requests x 10s = ~8 min."
+      },
+      "update_freshness": "live",
+      "robots": "Crawl-delay: 10",
+      "tos_flags": "none found",
+      "locations": [
+        {"store_id": 1, "name": "Pull-N-Save - Salt Lake City", "city": "Salt Lake City", "state": "UT"},
+        {"store_id": 2, "name": "Pull-N-Save - Phoenix South", "city": "Phoenix", "state": "AZ"},
+        {"store_id": 3, "name": "Pull-N-Save - Glendale", "city": "Glendale", "state": "AZ"},
+        {"store_id": 4, "name": "Pull-N-Save - Phoenix North", "city": "Phoenix", "state": "AZ"},
+        {"store_id": 5, "name": "Pull-N-Save - Gilbert", "city": "Gilbert", "state": "AZ"},
+        {"store_id": 6, "name": "Pull-N-Save - Springville", "city": "Springville", "state": "UT"},
+        {"store_id": 7, "name": "Pull-N-Save - Tucson", "city": "Tucson", "state": "AZ"},
+        {"store_id": 9, "name": "Pull-N-Save - Riverside", "city": "Riverside", "state": "CA"}
+      ]
+    },
+    {
+      "name": "Parts Galore",
+      "status": "candidate",
+      "platform": "static-embedded-table",
+      "inventory_url": "https://parts-galore.com/",
+      "api": {
+        "endpoint": "https://parts-galore.com/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html-embedded-table",
+        "requests_per_scan": 1,
+        "notes": "Entire inventory (~1,050 vehicles) is embedded server-side in table#alldata on the homepage; client JS only filters. Columns: Year, Make, Model, VIN, Color, Date, Row. Detroit metro (4.3M) - current MI coverage is a single yard. Need to confirm whether the table covers one or both of their Detroit locations before building."
+      },
+      "update_freshness": "appears current (2026 dates in table)",
+      "robots": "no restrictions found",
+      "tos_flags": "none found",
+      "locations": [
+        {"name": "Parts Galore - Detroit", "city": "Detroit", "state": "MI"}
+      ]
+    },
+    {
+      "name": "Kenny U-Pull",
+      "status": "candidate",
+      "platform": "wordpress-archive (custom AIM build)",
+      "inventory_url": "https://kennyupull.com/auto-parts/our-inventory/",
+      "api": {
+        "endpoint": "https://kennyupull.com/auto-parts/our-inventory/page/{n}/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html",
+        "requests_per_scan": "~1,600 pages unfiltered; per-branch/make filters exist and would cut this down",
+        "notes": "28 branches (AIM division): mostly Quebec/Ontario/Maritimes, plus US yards in ME (Bangor, Lewiston) and reportedly NY/VT/NH - US branches were NOT found in the main site branch list, so US inventory visibility is unverified. Paginated HTML archive is heavy (~19k vehicles at 12/page). Worth a follow-up to find branch-filtered queries and whether US yards publish inventory at all."
+      },
+      "update_freshness": "refreshed daily (per site copy)",
+      "robots": "not yet reviewed in detail",
+      "tos_flags": "none found",
+      "locations": [
+        {"name": "Kenny U-Pull - Bangor", "city": "Bangor", "state": "ME"},
+        {"name": "Kenny U-Pull - Lewiston", "city": "Lewiston", "state": "ME"},
+        {"name": "Kenny U-Pull (Canada) - 25+ branches", "city": "", "state": "QC/ON/NB/NS"}
+      ]
+    },
+    {
+      "name": "Go Pull-It",
+      "status": "candidate",
+      "platform": "wordpress + CRUSH (S3 Software) web form",
+      "inventory_url": "https://gopullit.com/inventory/",
+      "api": {
+        "endpoint": "https://gopullit.com/inventory/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html (WP custom post type 'inventory')",
+        "requests_per_scan": "unknown - archive is location-gated ('Please select a location above')",
+        "notes": "Florida self-service yards (Jacksonville, Tampa). Site loads static.crushsoftware.com/js/crush-web-form.js (CRUSH by S3 Software Solutions - car-buying form). Inventory archive requires a location query parameter not yet reverse-engineered; needs a follow-up session with browser devtools."
+      },
+      "update_freshness": "unknown",
+      "robots": "not yet reviewed",
+      "tos_flags": "none found",
+      "locations": [
+        {"name": "Go Pull-It - Jacksonville", "city": "Jacksonville", "state": "FL"},
+        {"name": "Go Pull-It - Tampa", "city": "Tampa", "state": "FL"}
+      ]
+    },
+    {
+      "name": "Sturtevant Auto",
+      "status": "candidate",
+      "platform": "custom inventory subdomain",
+      "inventory_url": "https://inventory.sturtevantauto.com/",
+      "api": {
+        "endpoint": "https://inventory.sturtevantauto.com/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "1+",
+        "notes": "Single yard near Milwaukee (Sturtevant, WI). Dedicated inventory app with YEAR/MAKE/MODEL/STOCK/ROW/COLOR/ARRIVAL DATE table (plus /Home/Interchange and /Home/PartPrices routes). Small but easy; WI currently has one covered yard."
+      },
+      "update_freshness": "unknown",
+      "robots": "not yet reviewed",
+      "tos_flags": "none found",
+      "locations": [
+        {"name": "Sturtevant Auto", "city": "Sturtevant", "state": "WI"}
+      ]
+    },
+    {
+      "name": "Ace Pick-A-Part",
+      "status": "candidate",
+      "platform": "wordpress (inventory mechanism unidentified)",
+      "inventory_url": "https://acepickapart.com/",
+      "api": {
+        "endpoint": null,
+        "notes": "Jacksonville FL self-service yard. WP site with admin-ajax present but the inventory page path/mechanism was not identified in this pass."
+      },
+      "update_freshness": "unknown",
+      "robots": "not yet reviewed",
+      "tos_flags": "none found",
+      "locations": [
+        {"name": "Ace Pick-A-Part", "city": "Jacksonville", "state": "FL"}
+      ]
+    },
+    {
+      "name": "Harry's U-Pull-It",
+      "status": "blocked",
+      "platform": "unknown (Sucuri WAF JS challenge)",
+      "inventory_url": "https://wegotused.com/",
+      "api": {
+        "endpoint": null,
+        "notes": "PA yards (Hazleton, Allentown, Pennsburg) - big Northeast target (~22,500 vehicles/yr processed), but the site sits behind a Sucuri JavaScript challenge that blocks plain HTTP clients. Would require a headless browser; revisit only if policy allows."
+      },
+      "update_freshness": "unknown",
+      "robots": "unreachable without JS",
+      "tos_flags": "WAF actively blocks non-browser clients",
+      "locations": [
+        {"name": "Harry's U-Pull-It - Hazleton", "city": "Hazle Township", "state": "PA"},
+        {"name": "Harry's U-Pull-It - Allentown", "city": "Allentown", "state": "PA"},
+        {"name": "Harry's U-Pull-It - Pennsburg", "city": "Pennsburg", "state": "PA"}
+      ]
+    },
+    {
+      "name": "ABC U-Pull-It",
+      "status": "blocked",
+      "platform": "unknown",
+      "inventory_url": "https://abcupullit.com/",
+      "api": {"endpoint": null, "notes": "Lincoln NE. Site returned HTTP 400 to polite plain-UA requests in this pass."},
+      "update_freshness": "unknown",
+      "robots": "unreachable",
+      "tos_flags": "unknown",
+      "locations": [{"name": "ABC U-Pull-It", "city": "Lincoln", "state": "NE"}]
+    },
+    {
+      "name": "Ecology Auto Parts",
+      "status": "blocked",
+      "platform": "unknown",
+      "inventory_url": "https://ecologyautoparts.com/",
+      "api": {"endpoint": null, "notes": "Large CA self-service chain (~10 yards). Domain unreachable during this pass (DNS/connection failure) - retry later, possibly under a different domain."},
+      "update_freshness": "unknown",
+      "robots": "unreachable",
+      "tos_flags": "unknown",
+      "locations": [{"name": "Ecology Auto Parts (multiple)", "city": "", "state": "CA"}]
+    },
+    {
+      "name": "Jalopy Jungle",
+      "status": "blocked",
+      "platform": "unknown",
+      "inventory_url": "https://jalopyjungle.com/",
+      "api": {"endpoint": null, "notes": "Idaho chain (Boise, Nampa, Caldwell, Twin Falls). Connection failed/empty response in this pass; retry later."},
+      "update_freshness": "unknown",
+      "robots": "unreachable",
+      "tos_flags": "unknown",
+      "locations": [{"name": "Jalopy Jungle (multiple)", "city": "Boise", "state": "ID"}]
+    },
+    {
+      "name": "U-Pull-&-Pay",
+      "status": "retired",
+      "platform": "n/a",
+      "inventory_url": "https://www.upullandpay.com/",
+      "api": {"endpoint": null, "notes": "Merged into Pull-A-Part; upullandpay.com redirects to pullapart.com and the former UPAP yards (AZ/NM/CO) are already covered by the existing Pull-A-Part adapter."},
+      "update_freshness": "n/a",
+      "robots": "n/a",
+      "tos_flags": "n/a",
+      "locations": []
+    }
+  ]
+}
