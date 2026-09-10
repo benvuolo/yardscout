@@ -612,6 +612,15 @@
   .demand-badge.demand-steady { background: rgba(91, 98, 110, 0.1); color: var(--demand-steady); }
   .demand-badge.demand-slow { background: var(--gold-soft); color: var(--demand-slow); }
   .range-text { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); font-weight: 500; }
+  /* Unconfirmed ("if equipped") upside: quieter than the confirmed range —
+     visible, but clearly not promised dollars. */
+  .range-extra {
+    margin-top: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-dim);
+    opacity: 0.75;
+  }
   .stat-card .value.accent { color: var(--accent); }
 
   /* parts inside <details> */
