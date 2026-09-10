@@ -363,6 +363,30 @@ def write_report(v: dict, path: Path) -> None:
         lines += ["", "### Ceiling violations (need a pricing decision)", ""]
         for r in flagged:
             lines.append(f"- **{r['name']}** ({r['models']}): {r['ceiling']} — {r['ceiling_detail']}")
+
+    # Recycler benchmark: car-part.com asks are what professional full-service
+    # yards charge (part pulled, warrantied, dealer-paid data). A self-service
+    # puller undercuts them, so our displayed HIGH should sit comfortably under
+    # the typical recycler ask; if recyclers ask LESS than our high, our number
+    # is inflated. car-part.com is form-driven (no deep links) and scraping it
+    # is off-limits, so this stays a ~10-minute manual spot check per quarter.
+    bench = sorted(v["results"], key=lambda r: -(r["high"] * r["freq_bucket"]))[:12]
+    lines += [
+        "",
+        "## Recycler benchmark — car-part.com (manual, quarterly)",
+        "",
+        "Spot-check the rows below at <https://car-part.com>: search the part for a",
+        "representative model/year, note the typical ask across a few listed",
+        "recyclers, and fill in the last column. Expected: our used high is",
+        "**below** the common recycler ask (they include pull labor + warranty).",
+        "A recycler ask at or under our displayed high means our range is inflated",
+        "— treat it like a ceiling violation and correct the DB entry.",
+        "",
+        "| Part | Models | Displayed | Recycler ask (fill in) |",
+        "|---|---|---|---|",
+    ]
+    for r in bench:
+        lines.append(f"| {r['name']} | {r['models']} | ${r['low']:,}–{r['high']:,} | |")
     lines.append("")
     path.write_text("\n".join(lines))
 
