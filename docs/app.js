@@ -703,6 +703,22 @@ const FREE_SAVE_CAP = 5;
 })();
 function isPro() { return localStorage.getItem('jh_pro') === '1'; }
 
+/* Plan picker (fake door): Pro subscription vs one-time Weekend Pass. The
+ * selection is recorded with each waitlist signup so real demand for the two
+ * price shapes is measurable before any payment code exists. */
+let selectedPlan = 'pro';
+function selectPlan(plan) {
+  selectedPlan = plan;
+  document.querySelectorAll('#upgrade-sheet .plan-option').forEach(c => {
+    c.classList.toggle('selected', c.dataset.plan === plan);
+  });
+  track('plan-selected/' + plan);
+}
+document.querySelectorAll('#upgrade-sheet .plan-option').forEach(c => {
+  c.addEventListener('click', () => selectPlan(c.dataset.plan));
+  c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectPlan(c.dataset.plan); } });
+});
+
 let upgradeTrigger = 'unknown';
 function openUpgradeSheet(trigger) {
   upgradeTrigger = trigger || 'unknown';
@@ -730,12 +746,13 @@ async function submitWaitlist() {
   const btn = document.getElementById('waitlist-submit');
   btn.disabled = true;
   btn.textContent = 'Saving...';
-  // Record the price the user actually saw (single source of truth: the tier
-  // card in the DOM) so future price changes can be compared against signups
-  // without building an A/B system.
-  const priceEl = document.querySelector('#upgrade-sheet .tier-card');
+  // Record the plan the user picked and the price they actually saw (single
+  // source of truth: the selected card in the DOM) so signups stay comparable
+  // across future price changes without building an A/B system.
+  const priceEl = document.querySelector('#upgrade-sheet .plan-option.selected')
+    || document.querySelector('#upgrade-sheet .tier-card');
   const shownPrice = (priceEl && priceEl.dataset.price) || '';
-  const entry = { email, trigger: upgradeTrigger, price: shownPrice, at: new Date().toISOString() };
+  const entry = { email, plan: selectedPlan, trigger: upgradeTrigger, price: shownPrice, at: new Date().toISOString() };
   // Local backup log (survives even if the ntfy POST fails).
   try {
     const log = JSON.parse(localStorage.getItem('jh_waitlist_log') || '[]');
@@ -745,12 +762,12 @@ async function submitWaitlist() {
   try {
     await fetch('https://ntfy.sh/' + WAITLIST_NTFY_TOPIC, {
       method: 'POST',
-      body: `${email} | trigger: ${entry.trigger} | price: $${entry.price} | ${entry.at}`,
+      body: `${email} | plan: ${entry.plan} | trigger: ${entry.trigger} | price: $${entry.price} | ${entry.at}`,
       headers: { 'Title': 'YardScout Pro signup', 'Tags': 'moneybag' },
     });
   } catch (e) { /* local log still has it */ }
   localStorage.setItem('jh_waitlist_email', email);
-  track('waitlist-submitted');
+  track('waitlist-submitted/' + selectedPlan);
   btn.disabled = false;
   btn.textContent = 'Notify Me';
   document.getElementById('upgrade-form-wrap').style.display = 'none';

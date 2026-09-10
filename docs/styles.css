@@ -1151,6 +1151,32 @@
     margin-bottom: 0.6rem;
   }
   .tier-card.tier-plus { border-color: var(--accent); background: var(--accent-soft); }
+  .plan-option { cursor: pointer; transition: border-color 0.15s; }
+  .plan-option:hover { border-color: var(--text-dim); }
+  .plan-option.selected { border-color: var(--accent); background: var(--accent-soft); }
+  .plan-option.selected .tier-name::after {
+    content: '\2713 selected';
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-left: 0.5rem;
+  }
+  .pass-badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.1rem 0.35rem;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
   .tier-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 0.4rem; }
   .tier-name { font-size: 0.875rem; font-weight: 800; letter-spacing: -0.01em; }
   .tier-price { font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: var(--accent); }
