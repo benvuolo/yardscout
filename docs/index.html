@@ -95,65 +95,73 @@
       </button>
     </div>
     <div class="controls" id="live-controls">
-      <div class="ctl">
-        <label for="live-zip">Zip code</label>
-        <div style="display:flex;gap:0.4rem;">
-          <input type="text" id="live-zip" inputmode="numeric" maxlength="5" placeholder="e.g. 84101" title="Center point for distance filter" style="flex:1;min-width:0;">
-          <button type="button" class="gps-btn" id="live-gps" title="Use my current location"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></button>
+      <div class="ctl-group">
+        <div class="ctl-group-title">Where</div>
+        <div class="ctl-group-grid">
+          <div class="ctl">
+            <label for="live-zip">Zip code</label>
+            <div style="display:flex;gap:0.4rem;">
+              <input type="text" id="live-zip" inputmode="numeric" maxlength="5" placeholder="e.g. 84101" title="Center point for distance filter" style="flex:1;min-width:0;">
+              <button type="button" class="gps-btn" id="live-gps" title="Use my current location"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></button>
+            </div>
+          </div>
+          <div class="ctl">
+            <label for="live-radius">Within</label>
+            <select id="live-radius" title="Only show yards within this distance of the zip">
+              <option value="">Any distance &mdash; Pro</option>
+              <option value="25">&le; 25 mi</option>
+              <option value="50">&le; 50 mi</option>
+              <option value="100" selected>&le; 100 mi</option>
+              <option value="250">&le; 250 mi</option>
+            </select>
+          </div>
+          <div class="ctl">
+            <label for="live-filter-location">Yard</label>
+            <select id="live-filter-location">
+              <option value="">All yards in range</option>
+            </select>
+          </div>
         </div>
       </div>
-      <div class="ctl">
-        <label for="live-radius">Distance</label>
-        <select id="live-radius" title="Only show yards within this distance of the zip">
-          <option value="">Any distance &mdash; Pro</option>
-          <option value="25">&le; 25 mi</option>
-          <option value="50">&le; 50 mi</option>
-          <option value="100" selected>&le; 100 mi</option>
-          <option value="250">&le; 250 mi</option>
-        </select>
+      <div class="ctl-group">
+        <div class="ctl-group-title">Which cars</div>
+        <div class="ctl-group-grid">
+          <div class="ctl">
+            <label for="live-filter-make">Make</label>
+            <select id="live-filter-make">
+              <option value="">All makes</option>
+            </select>
+          </div>
+          <div class="ctl">
+            <label for="live-filter-match">Show</label>
+            <select id="live-filter-match">
+              <option value="">All cars</option>
+              <option value="match">Only cars with valuable parts</option>
+              <option value="manual">Manual transmission (VIN-confirmed)</option>
+            </select>
+          </div>
+        </div>
       </div>
-      <div class="ctl">
-        <label for="live-filter-make">Make</label>
-        <select id="live-filter-make">
-          <option value="">All Makes</option>
-        </select>
-      </div>
-      <div class="ctl">
-        <label for="live-filter-location">Yard</label>
-        <select id="live-filter-location">
-          <option value="">All Yards</option>
-        </select>
-      </div>
-      <div class="ctl">
-        <label for="live-filter-match">Show</label>
-        <select id="live-filter-match">
-          <option value="">Every car</option>
-          <option value="match">Worth a look only</option>
-          <option value="manual">Manual transmission (confirmed)</option>
-          <option value="nomatch">Nothing flagged</option>
-        </select>
-      </div>
-      <div class="ctl">
-        <label for="live-sort">Sort by</label>
-        <select id="live-sort">
-          <option value="smart-profit">Recommended (value &times; freshness)</option>
-          <option value="fastest-sell">Fastest-selling parts</option>
-          <option value="gold-first">Highest-value parts</option>
-          <option value="profit-desc">Highest estimated value</option>
-          <option value="value-desc">Best single part</option>
-          <option value="haul-desc">Highest total resale</option>
-          <option value="date-desc">Newest arrivals</option>
-          <option value="leaving-soonest">Leaving soonest (est.)</option>
-          <option value="date-asc">Longest on the lot</option>
-          <option value="year-desc">Year: newest</option>
-          <option value="year-asc">Year: oldest</option>
-          <option value="make-asc">Make A&ndash;Z</option>
-        </select>
+      <div class="ctl-group">
+        <div class="ctl-group-title">Order by</div>
+        <div class="ctl-group-grid">
+          <div class="ctl">
+            <select id="live-sort" aria-label="Sort order">
+              <option value="smart-profit">Recommended (value &times; freshness)</option>
+              <option value="gold-first">Most valuable first</option>
+              <option value="fastest-sell">Fastest-selling parts first</option>
+              <option value="date-desc">Newest arrivals</option>
+              <option value="leaving-soonest">Leaving soonest (est.)</option>
+              <option value="date-asc">Longest on the lot</option>
+              <option value="year-asc">Oldest vehicles first</option>
+            </select>
+          </div>
+        </div>
       </div>
       <div class="ctl-actions">
         <button class="btn btn-primary" id="live-refresh-btn" title="How to refresh data"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg> Refresh data</button>
-        <button type="button" class="btn" id="live-export-csv" title="Download current filtered rows as CSV">Export CSV</button>
-        <button type="button" class="btn" id="live-export-json" title="Download current filtered rows as JSON">Export JSON</button>
+        <button type="button" class="btn" id="live-export-csv" title="Download current filtered rows as CSV">Export CSV <span class="pro-tag export-pro-tag">Pro</span></button>
+        <button type="button" class="btn" id="live-export-json" title="Download current filtered rows as JSON">Export JSON <span class="pro-tag export-pro-tag">Pro</span></button>
       </div>
     </div>
     <div class="car-grid" id="live-grid">
@@ -186,7 +194,6 @@
       </div>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
         <button id="alert-notif-btn" class="btn btn-primary">Enable notifications</button>
-        <button id="alert-export-btn" class="btn" title="Save watchlist.json for the scraper's --watch mode">Export for scraper</button>
       </div>
     </div>
 
@@ -300,6 +307,7 @@
       <li>Unlimited saved cars</li>
       <li>Unlimited radius + nationwide search across all <span class="coverage-count">~150</span> yards</li>
       <li>Yard history, days-on-lot &amp; leaving-soon signals</li>
+      <li>CSV / JSON export of any search</li>
     </ul>
   </div>
 
