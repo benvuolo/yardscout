@@ -232,12 +232,33 @@ function csvEscapeCell(val) {
   return s;
 }
 
+/* Exports exist to take YOUR trip plan to a spreadsheet — never to dump the
+ * dataset. Even for Pro they are radius-scoped and row-capped: the inventory
+ * itself goes stale in days, but the part values attached to every row don't,
+ * and a subscribe-export-cancel cycle shouldn't walk away with them. */
+const EXPORT_ROW_CAP = 500;
+function exportRows(kind) {
+  if (!isPro()) { openUpgradeSheet('export-' + kind); return null; }
+  if (!liveLoaded) { alert('No inventory loaded.'); return null; }
+  if (!activeZipCoords) {
+    alert('Exports cover your local search only — enter a zip or use your location first.');
+    return null;
+  }
+  if (!effectiveRadiusMi()) {
+    alert('Exports cover a local radius only — pick a distance (not "Any distance") first.');
+    return null;
+  }
+  const all = getFilteredLive();
+  if (all.length > EXPORT_ROW_CAP) {
+    alert('Exporting the top ' + EXPORT_ROW_CAP + ' of ' + all.length.toLocaleString() + ' cars (current sort). Narrow the radius or filters to export a specific set.');
+    return all.slice(0, EXPORT_ROW_CAP);
+  }
+  return all;
+}
+
 function exportLiveCsv() {
-  // Exports are Pro: a bulk download of the dataset is exactly the thing the
-  // free tier shouldn't hand out.
-  if (!isPro()) { openUpgradeSheet('export-csv'); return; }
-  if (!liveLoaded) return alert('No inventory loaded.');
-  const rows = getFilteredLive();
+  const rows = exportRows('csv');
+  if (!rows) return;
   const header = ['year', 'make', 'model', 'vin', 'location', 'row', 'hasMatch', 'dateAdded', 'displayName', 'vpicDecodeWell', 'vpicTrim', 'vpicTrimQuality', 'vpicSeries', 'partsFlagged', 'maxValue', 'partsSummary'];
   const lines = [header.join(',')];
   for (const v of rows) {
@@ -271,14 +292,13 @@ function exportLiveCsv() {
 }
 
 function exportLiveJson() {
-  if (!isPro()) { openUpgradeSheet('export-json'); return; }
-  if (!liveLoaded) return alert('No inventory loaded.');
-  const vehicles = getFilteredLive();
+  const vehicles = exportRows('json');
+  if (!vehicles) return;
   const payload = {
     schemaVersion: 1,
     sourceScrapedAt: liveScrapedAt,
     exportedAt: new Date().toISOString(),
-    note: 'Filtered rows only (current Live tab filters)',
+    note: 'Local search export (radius-scoped, max ' + EXPORT_ROW_CAP + ' rows)',
     vehicles,
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
