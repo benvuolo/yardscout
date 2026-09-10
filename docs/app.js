@@ -672,7 +672,12 @@ async function submitWaitlist() {
   const btn = document.getElementById('waitlist-submit');
   btn.disabled = true;
   btn.textContent = 'Saving...';
-  const entry = { email, trigger: upgradeTrigger, at: new Date().toISOString() };
+  // Record the price the user actually saw (single source of truth: the tier
+  // card in the DOM) so future price changes can be compared against signups
+  // without building an A/B system.
+  const priceEl = document.querySelector('#upgrade-sheet .tier-card');
+  const shownPrice = (priceEl && priceEl.dataset.price) || '';
+  const entry = { email, trigger: upgradeTrigger, price: shownPrice, at: new Date().toISOString() };
   // Local backup log (survives even if the ntfy POST fails).
   try {
     const log = JSON.parse(localStorage.getItem('jh_waitlist_log') || '[]');
@@ -682,7 +687,7 @@ async function submitWaitlist() {
   try {
     await fetch('https://ntfy.sh/' + WAITLIST_NTFY_TOPIC, {
       method: 'POST',
-      body: `${email} | trigger: ${entry.trigger} | ${entry.at}`,
+      body: `${email} | trigger: ${entry.trigger} | price: $${entry.price} | ${entry.at}`,
       headers: { 'Title': 'YardScout Pro signup', 'Tags': 'moneybag' },
     });
   } catch (e) { /* local log still has it */ }
