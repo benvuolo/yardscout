@@ -57,7 +57,7 @@ jobs:
           # ~40-160k backlog drains across successive 6-hour runs, newest
           # arrivals first; steady-state runs only decode the day's arrivals.
           VPIC_MAX_PER_RUN: "5000"
-        run: python scraper/junkyard_scraper.py --save --all --national --decode-vins-incremental
+        run: python scraper/junkyard_scraper.py --save --all --national --independents --decode-vins-incremental
 
       - name: Commit and push inventory
         run: |
