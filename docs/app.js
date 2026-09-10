@@ -226,76 +226,9 @@ function vinMetaHtml(v) {
   return ` &middot; VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}${dup}${vpic}${mismatch}`;
 }
 
-function csvEscapeCell(val) {
-  const s = String(val ?? '');
-  if (/[",\r\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
-  return s;
-}
-
-function exportLiveCsv() {
-  if (!liveLoaded) return alert('No inventory loaded.');
-  const rows = getFilteredLive();
-  // Value data (ranges, maxValue) exports only for Pro — free CSV is the
-  // inventory itself, same as what free cards show.
-  const pro = isPro();
-  const header = ['year', 'make', 'model', 'vin', 'location', 'row', 'hasMatch', 'dateAdded', 'displayName', 'vpicDecodeWell', 'vpicTrim', 'vpicTrimQuality', 'vpicSeries', 'partsFlagged'];
-  if (pro) header.push('maxValue', 'partsSummary');
-  const lines = [header.join(',')];
-  for (const v of rows) {
-    const cells = [
-      csvEscapeCell(v.year),
-      csvEscapeCell(v.make),
-      csvEscapeCell(v.model),
-      csvEscapeCell(v.vin),
-      csvEscapeCell(v.location),
-      csvEscapeCell(v.row),
-      csvEscapeCell(v.hasMatch),
-      csvEscapeCell(v.dateAdded),
-      csvEscapeCell(v.displayName),
-      csvEscapeCell(v.vpicDecodeWell),
-      csvEscapeCell(v.vpicTrim),
-      csvEscapeCell(v.vpicTrimQuality),
-      csvEscapeCell(v.vpicSeries),
-      csvEscapeCell((v.topParts || []).map(p => p.name).join('; ')),
-    ];
-    if (pro) {
-      cells.push(csvEscapeCell(v.maxValue));
-      cells.push(csvEscapeCell((v.topParts || []).map(p => p.name + ':' + p.low + '-' + p.high).join('; ')));
-    }
-    lines.push(cells.join(','));
-  }
-  const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'yardscout-live-' + new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-') + '.csv';
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-function exportLiveJson() {
-  if (!liveLoaded) return alert('No inventory loaded.');
-  const rows = getFilteredLive();
-  // Free JSON export mirrors the free UI: part names yes, dollar values no.
-  const vehicles = isPro() ? rows : rows.map(v => {
-    const { maxValue, topParts, ...rest } = v;
-    return { ...rest, partsFlagged: (topParts || []).map(p => p.name) };
-  });
-  const payload = {
-    schemaVersion: 1,
-    sourceScrapedAt: liveScrapedAt,
-    exportedAt: new Date().toISOString(),
-    note: 'Filtered rows only (current Live tab filters)' + (isPro() ? '' : ' — value data is Pro'),
-    vehicles,
-  };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'yardscout-live-' + new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-') + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
-}
+/* No bulk export at any tier: inventory goes stale in days, but the part
+ * values attached to every row don't — a one-click download of them is a
+ * permanent copy of the product. Deliberate decision, not an oversight. */
 
 async function loadAllPricing() {
   // All five price lists fetch in parallel (this used to be a serial
@@ -548,22 +481,74 @@ function effectiveRadiusMi() {
 function populateLiveMakeFilter() {
   const makes = [...new Set(liveInventory.map(v => v.make))].sort();
   const sel = document.getElementById('live-filter-make');
-  sel.innerHTML = '<option value="">All Makes</option>';
+  sel.innerHTML = '<option value="">All makes</option>';
   makes.forEach(m => {
     const opt = document.createElement('option');
     opt.value = m;
     opt.textContent = m + ' (' + liveInventory.filter(v => v.make === m).length + ')';
     sel.appendChild(opt);
   });
-  const locations = [...new Set(liveInventory.map(v => v.location).filter(Boolean))].sort();
+}
+
+/* The Yard dropdown only ever lists yards inside the chosen radius of the
+ * current center, nearest first — a national wall of yard names is useless
+ * and leaks coverage the free tier shouldn't browse. Rebuilds only when the
+ * center or radius actually changes. */
+let _yardScopeKey = null;
+function populateYardFilter() {
   const locSel = document.getElementById('live-filter-location');
-  locSel.innerHTML = '<option value="">All Yards</option>';
-  locations.forEach(l => {
+  const radius = effectiveRadiusMi();
+  const key = activeZipCoords
+    ? activeZipCoords.lat + ',' + activeZipCoords.lng + ',' + (radius || 'any')
+    : 'none';
+  if (key === _yardScopeKey) return;
+  _yardScopeKey = key;
+  const prev = locSel.value;
+
+  const yards = new Map();
+  for (const v of liveInventory) {
+    if (!v.location) continue;
+    let y = yards.get(v.location);
+    if (!y) { y = { count: 0, lat: null, lng: null }; yards.set(v.location, y); }
+    y.count++;
+    if (y.lat == null && v.lat != null) { y.lat = v.lat; y.lng = v.lng; }
+  }
+  let rows = [...yards.entries()].map(([name, y]) => ({
+    name,
+    count: y.count,
+    dist: (activeZipCoords && y.lat != null)
+      ? haversineMiles(activeZipCoords.lat, activeZipCoords.lng, y.lat, y.lng)
+      : null,
+  }));
+  if (activeZipCoords) {
+    // Radius-scoped, nearest first. Empty radius = "Any distance" (Pro).
+    if (radius) rows = rows.filter(r => r.dist != null && r.dist <= radius);
+    rows.sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
+  } else {
+    rows = [];  // no center — the select is disabled anyway
+  }
+  locSel.innerHTML = '<option value="">All yards in range</option>';
+  rows.forEach(r => {
     const opt = document.createElement('option');
-    opt.value = l;
-    opt.textContent = l + ' (' + liveInventory.filter(v => v.location === l).length + ')';
+    opt.value = r.name;
+    opt.textContent = r.name
+      + (r.dist != null ? ' \u2014 ' + Math.round(r.dist) + ' mi' : '')
+      + ' (' + r.count + ' cars)';
     locSel.appendChild(opt);
   });
+  // Keep the selection only if that yard is still in range.
+  locSel.value = (prev && rows.some(r => r.name === prev)) ? prev : '';
+}
+
+/* A location anchors every other filter: with no center there's nothing to
+ * scope the yard list or radius to, so everything except zip/GPS stays
+ * disabled until one is set. */
+function updateFilterAvailability() {
+  const hasLoc = !!activeZipCoords;
+  ['live-radius', 'live-filter-make', 'live-filter-location', 'live-filter-match', 'live-sort']
+    .forEach(id => { const el = document.getElementById(id); if (el) el.disabled = !hasLoc; });
+  const hint = document.getElementById('filters-need-zip');
+  if (hint) hint.style.display = hasLoc ? 'none' : '';
 }
 
 /* ===== ZIP + RADIUS FILTER ===== */
@@ -658,6 +643,22 @@ const FREE_SAVE_CAP = 5;
 })();
 function isPro() { return localStorage.getItem('jh_pro') === '1'; }
 
+/* Plan picker (fake door): Pro subscription vs one-time Weekend Pass. The
+ * selection is recorded with each waitlist signup so real demand for the two
+ * price shapes is measurable before any payment code exists. */
+let selectedPlan = 'pro';
+function selectPlan(plan) {
+  selectedPlan = plan;
+  document.querySelectorAll('#upgrade-sheet .plan-option').forEach(c => {
+    c.classList.toggle('selected', c.dataset.plan === plan);
+  });
+  track('plan-selected/' + plan);
+}
+document.querySelectorAll('#upgrade-sheet .plan-option').forEach(c => {
+  c.addEventListener('click', () => selectPlan(c.dataset.plan));
+  c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectPlan(c.dataset.plan); } });
+});
+
 let upgradeTrigger = 'unknown';
 function openUpgradeSheet(trigger) {
   upgradeTrigger = trigger || 'unknown';
@@ -685,12 +686,13 @@ async function submitWaitlist() {
   const btn = document.getElementById('waitlist-submit');
   btn.disabled = true;
   btn.textContent = 'Saving...';
-  // Record the price the user actually saw (single source of truth: the tier
-  // card in the DOM) so future price changes can be compared against signups
-  // without building an A/B system.
-  const priceEl = document.querySelector('#upgrade-sheet .tier-card');
+  // Record the plan the user picked and the price they actually saw (single
+  // source of truth: the selected card in the DOM) so signups stay comparable
+  // across future price changes without building an A/B system.
+  const priceEl = document.querySelector('#upgrade-sheet .plan-option.selected')
+    || document.querySelector('#upgrade-sheet .tier-card');
   const shownPrice = (priceEl && priceEl.dataset.price) || '';
-  const entry = { email, trigger: upgradeTrigger, price: shownPrice, at: new Date().toISOString() };
+  const entry = { email, plan: selectedPlan, trigger: upgradeTrigger, price: shownPrice, at: new Date().toISOString() };
   // Local backup log (survives even if the ntfy POST fails).
   try {
     const log = JSON.parse(localStorage.getItem('jh_waitlist_log') || '[]');
@@ -700,12 +702,12 @@ async function submitWaitlist() {
   try {
     await fetch('https://ntfy.sh/' + WAITLIST_NTFY_TOPIC, {
       method: 'POST',
-      body: `${email} | trigger: ${entry.trigger} | price: $${entry.price} | ${entry.at}`,
+      body: `${email} | plan: ${entry.plan} | trigger: ${entry.trigger} | price: $${entry.price} | ${entry.at}`,
       headers: { 'Title': 'YardScout Pro signup', 'Tags': 'moneybag' },
     });
   } catch (e) { /* local log still has it */ }
   localStorage.setItem('jh_waitlist_email', email);
-  track('waitlist-submitted');
+  track('waitlist-submitted/' + selectedPlan);
   btn.disabled = false;
   btn.textContent = 'Notify Me';
   document.getElementById('upgrade-form-wrap').style.display = 'none';
@@ -732,7 +734,20 @@ function applyProGates() {
   if (skipBtn) skipBtn.innerHTML = pro ? 'Skip &mdash; show everything nationwide' : 'Nationwide browsing is a Pro feature &rarr;';
   const anyOpt = document.querySelector('#live-radius option[value=""]');
   if (anyOpt) anyOpt.innerHTML = pro ? 'Any distance' : 'Any distance &mdash; Pro';
+  // Value-intelligence sorts are Pro: a free user sorting by value would get
+  // the ranking (the actual product) with the dollar signs merely hidden.
+  const sortSel = document.getElementById('live-sort');
+  [...sortSel.options].forEach(o => {
+    if (!o.dataset.base) o.dataset.base = o.textContent;
+    o.textContent = (!pro && PRO_SORTS.has(o.value)) ? o.dataset.base + ' \u2014 Pro' : o.dataset.base;
+  });
+  if (!pro && PRO_SORTS.has(sortSel.value)) sortSel.value = FREE_DEFAULT_SORT;
 }
+
+/* Sorting BY value hands out the value ranking even with prices blurred, so
+ * those sorts ride with the Pro value data. Free sorts are the neutral ones. */
+const PRO_SORTS = new Set(['smart-profit', 'gold-first', 'fastest-sell', 'leaving-soonest']);
+const FREE_DEFAULT_SORT = 'date-desc';
 
 function toggleProDev() {
   if (isPro()) localStorage.removeItem('jh_pro');
@@ -1006,7 +1021,10 @@ function getFilteredLive() {
   const makeFilter = document.getElementById('live-filter-make').value;
   const matchFilter = document.getElementById('live-filter-match').value;
   const locationFilter = document.getElementById('live-filter-location').value;
-  const sortBy = document.getElementById('live-sort').value;
+  let sortBy = document.getElementById('live-sort').value;
+  // Belt & suspenders: value sorts never apply for free even if the select
+  // was tampered with.
+  if (!isPro() && PRO_SORTS.has(sortBy)) sortBy = FREE_DEFAULT_SORT;
   const radiusMi = effectiveRadiusMi();
 
   let filtered = liveInventory.filter(v => {
@@ -1017,7 +1035,6 @@ function getFilteredLive() {
       if (d == null || d > radiusMi) return false;
     }
     if (matchFilter === 'match' && !v.hasMatch) return false;
-    if (matchFilter === 'nomatch' && v.hasMatch) return false;
     // Confirmed from the VIN decode only — cars with unknown transmission are
     // excluded rather than guessed at.
     if (matchFilter === 'manual' && !isConfirmedManual(v)) return false;
@@ -1031,10 +1048,6 @@ function getFilteredLive() {
     return true;
   });
 
-  function totalHaul(v) {
-    if (!v.topParts || !v.topParts.length) return 0;
-    return v.topParts.reduce((sum, p) => sum + p.high, 0);
-  }
   function totalProfit(v) {
     if (!v.topParts || !v.topParts.length) return 0;
     return v.topParts.reduce((sum, p) => {
@@ -1069,11 +1082,6 @@ function getFilteredLive() {
     return r > 2 ? 0.75 : r;
   };
 
-  if (sortBy === 'make-asc') {
-    filtered.sort((a, b) => (a.make || '').localeCompare(b.make || '')
-      || (a.model || '').localeCompare(b.model || ''));
-    return filtered;
-  }
   let keyFn = null, asc = false, tieAsc = false;
   switch (sortBy) {
     case 'smart-profit': keyFn = smartProfit; break;
@@ -1082,12 +1090,8 @@ function getFilteredLive() {
     case 'gold-first': keyFn = v => (v.hasMatch ? 1e12 : 0) + (v.maxValue || 0); break;
     case 'fastest-sell': keyFn = v => bestSpeed(v) * 1e9 + totalProfit(v); break;
     case 'leaving-soonest': keyFn = urgency; tieAsc = true; break;
-    case 'profit-desc': keyFn = totalProfit; break;
-    case 'value-desc': keyFn = v => v.maxValue || 0; break;
-    case 'haul-desc': keyFn = totalHaul; break;
     case 'date-desc': keyFn = tsOf; break;
     case 'date-asc': keyFn = tsOf; asc = true; break;
-    case 'year-desc': keyFn = v => v.year || 0; break;
     case 'year-asc': keyFn = v => v.year || 0; asc = true; break;
   }
   if (keyFn) {
@@ -1111,7 +1115,9 @@ function updateLiveFilterCount() {
 }
 
 function renderLive() {
+  updateFilterAvailability();
   if (!liveLoaded) return;
+  populateYardFilter();
   const vehicles = getFilteredLive();
 
   // KPIs describe what the user is LOOKING AT (their zip/filters), not the
@@ -1392,7 +1398,17 @@ document.getElementById('live-search').addEventListener('input', () => {
 });
 document.getElementById('live-filter-make').addEventListener('change', renderLive);
 document.getElementById('live-filter-location').addEventListener('change', renderLive);
-document.getElementById('live-sort').addEventListener('change', renderLive);
+let _lastFreeSort = FREE_DEFAULT_SORT;
+document.getElementById('live-sort').addEventListener('change', e => {
+  const val = e.target.value;
+  if (PRO_SORTS.has(val) && !isPro()) {
+    e.target.value = _lastFreeSort;   // snap back, pitch honestly
+    openUpgradeSheet('sort-' + val);
+    return;
+  }
+  if (!PRO_SORTS.has(val)) _lastFreeSort = val;
+  renderLive();
+});
 document.getElementById('live-filter-match').addEventListener('change', renderLive);
 document.getElementById('live-zip').addEventListener('input', e => setZipCenter(e.target.value.trim()));
 document.getElementById('live-radius').addEventListener('change', () => {
@@ -1437,12 +1453,10 @@ document.getElementById('live-radius').addEventListener('change', () => {
     }
   }
 })();
+updateFilterAvailability();   // filters stay disabled until a location exists
 document.getElementById('live-refresh-btn').addEventListener('click', () => {
   alert('To refresh live inventory data, run this in your terminal:\n\npython scraper/junkyard_scraper.py --save --all\n\nThen reload this page.');
 });
-document.getElementById('live-export-csv').addEventListener('click', exportLiveCsv);
-document.getElementById('live-export-json').addEventListener('click', exportLiveJson);
-
 document.getElementById('tab-live').addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-copy-vin');
   if (!btn || !btn.dataset.vin) return;
@@ -1839,18 +1853,7 @@ function removeWatchItem(idx) {
   saveWatchlistFile();
 }
 
-function exportWatchlistFile() {
-  const watchlist = loadWatchlist();
-  if (!watchlist.length) return alert('Watchlist is empty — add vehicles first.');
-  const blob = new Blob([JSON.stringify(watchlist, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'watchlist.json';
-  a.click();
-  URL.revokeObjectURL(url);
-}
-function saveWatchlistFile() { /* auto-exports are handled by Export button */ }
+function saveWatchlistFile() { /* watchlist lives in localStorage; nothing to write */ }
 
 function requestNotifPermission() {
   if (!('Notification' in window)) {
@@ -1941,8 +1944,6 @@ document.getElementById('alert-notif-btn').addEventListener('click', requestNoti
     }
   });
 })();
-document.getElementById('alert-export-btn').addEventListener('click', exportWatchlistFile);
-
 ['alert-make', 'alert-model', 'alert-yr-min', 'alert-yr-max'].forEach(id => {
   document.getElementById(id).addEventListener('keydown', e => {
     if (e.key === 'Enter') addWatchItem();
