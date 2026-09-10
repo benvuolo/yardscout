@@ -148,6 +148,7 @@ check "pro partsets: dollar fields present" "$(echo "$PS_PRO" | jq '.[0][0] | ha
 
 USERS=$(curl -s -H "x-admin-secret: $ADMIN_SECRET" "$API/v1/admin/users")
 check "admin user list shows the tester as pro" "$(echo "$USERS" | jq -r '.users[] | select(.email=="tester@example.com") | .tier')" "pro"
+check "admin user list includes the grant note" "$(echo "$USERS" | jq -r '.users[] | select(.email=="tester@example.com") | .note')" "e2e"
 
 # expired grants resolve back to free
 curl -s -X POST -H "x-admin-secret: $ADMIN_SECRET" -H 'content-type: application/json' \
@@ -156,6 +157,10 @@ curl -s -X POST -H "x-admin-secret: $ADMIN_SECRET" -H 'content-type: application
 check "expired grant resolves to free" "$(curl -s -H "authorization: Bearer $SESSION" "$API/v1/me" | jq -r '.tier')" "free"
 curl -s -X POST -H "x-admin-secret: $ADMIN_SECRET" -H 'content-type: application/json' \
   -d '{"email":"tester@example.com","tier":"pro"}' "$API/v1/admin/grant" >/dev/null
+
+# note column: later no-note grants don't erase the last meaningful note
+USERS2=$(curl -s -H "x-admin-secret: $ADMIN_SECRET" "$API/v1/admin/users")
+check "note is latest non-empty manual note" "$(echo "$USERS2" | jq -r '.users[] | select(.email=="tester@example.com") | .note')" "e2e"
 
 # ── vehicle detail (deep links) ─────────────────────────────────────────────
 echo "── vehicle detail"

@@ -37,6 +37,10 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== self.location.origin) return;
+  // The admin console (grants Pro with the admin secret) must never be served
+  // from — or written to — the offline cache: not precached above, and
+  // bypassed here so the runtime network-first handler can't cache it either.
+  if (url.pathname.endsWith('/admin.html')) return;
   // The big inventory file is managed by the app itself (Cache API,
   // cache-first + background revalidate in app.js) — network-first here would
   // make every repeat visit wait on the full 4MB download and store a

@@ -128,9 +128,15 @@ export async function handleGrant(req, env) {
 }
 
 export async function handleListUsers(req, env) {
+  // note = the most recent manual-grant note for the user (from the
+  // entitlement_events audit trail) — shown by the admin page so grants
+  // stay identifiable ("TestFlight tester", "press", ...).
   const rows = (await env.DB.prepare(
-    `SELECT email, tier, tier_source, tier_expires_at, created_at, last_login_at
-       FROM users ORDER BY created_at DESC LIMIT 500`
+    `SELECT u.email, u.tier, u.tier_source, u.tier_expires_at, u.created_at, u.last_login_at,
+            (SELECT e.note FROM entitlement_events e
+              WHERE e.user_id = u.id AND e.source = 'manual' AND e.note IS NOT NULL AND e.note != ''
+              ORDER BY e.id DESC LIMIT 1) AS note
+       FROM users u ORDER BY u.created_at DESC LIMIT 500`
   ).all()).results || [];
   return json({ users: rows, count: rows.length });
 }
