@@ -448,6 +448,20 @@ function updateCoverageCounts() {
   const n = coverageYardCount();
   if (!n) return;
   document.querySelectorAll('.coverage-count').forEach(el => { el.textContent = n; });
+  // Header data plate: the spec line under the wordmark carries real numbers
+  // (yard count + scan age), like the stamped fields on an equipment plate.
+  const spec = document.getElementById('head-spec');
+  if (spec) {
+    let age = '';
+    const ts = Date.parse(liveScrapedAt || '');
+    if (ts) {
+      const hrs = Math.max(0, Math.round((Date.now() - ts) / 3600000));
+      age = hrs < 1 ? ' \u00b7 SCAN <1H AGO'
+        : hrs < 48 ? ` \u00b7 SCAN ${hrs}H AGO`
+        : ` \u00b7 SCAN ${Math.round(hrs / 24)}D AGO`;
+    }
+    spec.textContent = `${n} YARDS${age}`;
+  }
 }
 
 /* One-tap actions for the out-of-range empty state. */

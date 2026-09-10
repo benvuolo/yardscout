@@ -107,25 +107,54 @@
     gap: 0.5rem;
     white-space: nowrap;
   }
-  header h1 .icon {
+  /* Row-marker plate logo: the numbered sign at the end of every yard row.
+   * Mounting screws are two radial gradients; letters are "stamped" with a
+   * hairline top-shadow inset. */
+  .row-plate {
     display: inline-grid;
     place-items: center;
-    width: 30px; height: 30px;
+    width: 34px; height: 30px;
     background: var(--text);
-    border: none;
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
     border-radius: var(--radius-sm);
-    font-size: 0.875rem;
+    box-shadow: inset 0 1px 0 rgba(250, 248, 242, 0.22);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+    background-image:
+      radial-gradient(circle 1.6px at 5px 5px,  #6f695b 0 1.6px, transparent 1.7px),
+      radial-gradient(circle 1.6px at 29px 25px, #6f695b 0 1.6px, transparent 1.7px);
+    flex-shrink: 0;
   }
-  header p {
+  .wordmark { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  /* Live spec line under the name — reads like the stamped fields on an
+   * equipment data plate. Populated with real yard count + scan age. */
+  .head-spec {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: var(--text-dim);
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-align: right;
-    line-height: 1.35;
-    max-width: 20rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  @media (max-width: 720px) {
-    header p { display: none; }
+  /* Caution-stripe rule under the header: thin, low-contrast, unmistakably
+   * "yard" without shouting. */
+  header::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 3px;
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(191, 74, 8, 0.5) 0 7px,
+      transparent 7px 14px
+    );
+    pointer-events: none;
   }
 
   .container { max-width: 1480px; margin: 0 auto; padding: 1rem 1.25rem; }
@@ -1070,9 +1099,14 @@
   }
 
   /* ===== Pro (fake door) ===== */
+  /* Header Pro button styled as a punched inspection tag: string hole on the
+   * left, clipped corner top-right. */
   .pro-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     margin-left: 0.35rem;
-    padding: 0.18rem 0.6rem;
+    padding: 0.22rem 0.65rem 0.22rem 0.5rem;
     background: var(--surface);
     border: 1px solid var(--accent);
     color: var(--accent);
@@ -1085,6 +1119,14 @@
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
     vertical-align: middle;
+    clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%);
+  }
+  .pro-pill::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    flex-shrink: 0;
   }
   .pro-pill:hover { background: var(--accent); color: #fff; }
   .pro-pill.active { background: var(--accent); color: #fff; }
