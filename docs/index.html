@@ -85,7 +85,6 @@
       <div class="skel-chip skeleton"></div>
     </div>
     <div class="toolbar">
-      <input type="text" class="search-box" id="live-search" placeholder="Search make, model, yard, part&hellip;">
       <button type="button" class="filter-toggle" id="live-filter-toggle">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.4"/><circle cx="7" cy="17" r="2.4"/></svg> Filters <span class="filter-count" id="live-filter-count" style="display:none;">0</span>
       </button>
@@ -130,12 +129,38 @@
             </select>
           </div>
           <div class="ctl">
+            <label for="live-filter-model">Model</label>
+            <select id="live-filter-model" disabled title="Pick a make first">
+              <option value="">All models</option>
+            </select>
+          </div>
+          <div class="ctl">
+            <label for="live-filter-year-min">Years (optional)</label>
+            <div style="display:flex;gap:0.4rem;align-items:center;">
+              <select id="live-filter-year-min" style="flex:1;min-width:0;" title="Oldest model year to include">
+                <option value="">From</option>
+              </select>
+              <span style="color:var(--text-dim);">&ndash;</span>
+              <select id="live-filter-year-max" style="flex:1;min-width:0;" title="Newest model year to include">
+                <option value="">To</option>
+              </select>
+            </div>
+          </div>
+          <div class="ctl">
             <label for="live-filter-match">Show</label>
             <select id="live-filter-match">
               <option value="">All cars</option>
               <option value="match">Only cars with valuable parts</option>
               <option value="manual">Manual transmission (VIN-confirmed)</option>
             </select>
+          </div>
+        </div>
+      </div>
+      <div class="ctl-group">
+        <div class="ctl-group-title">Keyword <span style="text-transform:none;letter-spacing:0;">(optional)</span></div>
+        <div class="ctl-group-grid">
+          <div class="ctl ctl-wide">
+            <input type="text" class="search-box" id="live-search" placeholder="VIN, part name, trim &mdash; e.g. 22RE, Recaro&hellip;">
           </div>
         </div>
       </div>
