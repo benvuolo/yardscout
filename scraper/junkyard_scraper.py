@@ -6291,6 +6291,96 @@ def _vpic_mismatch_msg(v: dict, vin_dec: dict | None) -> str | None:
     return "; ".join(msgs) or None
 
 
+# ---------------------------------------------------------------------------
+# Model-name normalization. Yard feeds spell the same model many ways
+# ("F150"/"F-150", "4 Runner"/"4Runner", "EDGE"/"Edge", "Es300"/"ES 300").
+# Distinct spellings split the UI's model dropdown into duplicate entries and
+# can miss UNOBTANIUM_DB keyword matches outright ("toyota 4 runner" never
+# contains "4runner"). Canonical spelling is applied once at scan time.
+# Table generated from a collision audit of the live inventory (2026-09-12),
+# keyed by squashed lowercase alphanumerics, hand-corrected to brand styling.
+# ---------------------------------------------------------------------------
+_MODEL_CANON = {
+    "1series": "1 Series", "3series": "3 Series", "5series": "5 Series",
+    "6series": "6 Series", "7series": "7 Series",
+    "200sx": "200SX", "280zx": "280ZX", "300zx": "300ZX", "3000gt": "3000GT",
+    "4runner": "4Runner", "aura": "Aura", "aveo": "Aveo",
+    "b3000": "B3000", "b4000": "B4000", "baja": "Baja", "broncoii": "Bronco II",
+    "chevyvan": "Chevy Van", "clclass": "CL-Class", "clkclass": "CLK-Class",
+    "clsclass": "CLS-Class", "glclass": "GL-Class", "glkclass": "GLK-Class",
+    "slclass": "SL-Class",
+    "crv": "CR-V", "ct200h": "CT 200h", "cts": "CTS", "cube": "Cube",
+    "cx7": "CX-7", "cx9": "CX-9", "dart": "Dart", "dts": "DTS",
+    "echo": "Echo", "edge": "Edge", "eightyeight": "Eighty-Eight",
+    "elantragt": "Elantra GT", "eos": "Eos", "escaladeext": "Escalade EXT",
+    "fit": "Fit", "fjcruiser": "FJ Cruiser", "flex": "Flex", "fox": "Fox",
+    "fx35": "FX35", "golf": "Golf", "golfiii": "Golf III", "gs450h": "GS 450h",
+    "hhr": "HHR", "hs250h": "HS 250h", "ion": "ION", "jettaiii": "Jetta III",
+    "juke": "Juke", "leaf": "Leaf", "lebaron": "LeBaron", "lseries": "L-Series",
+    "ltdcrownvictoria": "LTD Crown Victoria", "luminaapv": "Lumina APV",
+    "luv": "LUV", "marklt": "Mark LT", "markvi": "Mark VI",
+    "markvii": "Mark VII", "markviii": "Mark VIII", "mazdaspeed3": "Mazdaspeed3",
+    "mdx": "MDX", "mkx": "MKX", "mkz": "MKZ", "mkzhybrid": "MKZ Hybrid",
+    "montanasv6": "Montana SV6", "mpv": "MPV", "mx5miata": "MX-5 Miata",
+    "neon": "Neon", "ninetyeight": "Ninety-Eight", "nova": "Nova",
+    "nv2500": "NV2500", "ptcruiser": "PT Cruiser", "pulsarnx": "Pulsar NX",
+    "ramcharger": "Ramcharger", "rav4": "RAV4", "reno": "Reno",
+    "rio": "Rio", "rio5": "Rio5", "rx400h": "RX 400h",
+    "s10": "S-10", "s10blazer": "S-10 Blazer", "s15": "S-15",
+    "s15jimmy": "S-15 Jimmy",
+    "sierra1500hd": "Sierra 1500HD", "sierra2500hd": "Sierra 2500HD",
+    "sierra3500hd": "Sierra 3500HD", "silverado2500hd": "Silverado 2500HD",
+    "silverado2500hdclassic": "Silverado 2500HD Classic",
+    "silverado3500hd": "Silverado 3500HD",
+    "sl2": "SL2", "soul": "Soul", "sportvan": "Sportvan", "srx": "SRX",
+    "sseries": "S-Series", "stype": "S-Type", "swift": "Swift",
+    "sx4crossover": "SX4 Crossover", "t100": "T100",
+    "tc": "tC", "xa": "xA", "xb": "xB", "xd": "xD",
+    "tl": "TL", "towncar": "Town Car", "trax": "Trax", "trooperii": "Trooper II",
+    "tsx": "TSX", "tt": "TT", "van": "Van", "vibe": "Vibe", "volt": "Volt",
+    "vue": "VUE", "xg300": "XG300", "xg350": "XG350",
+    "xj12": "XJ12", "xjseries": "XJ-Series",
+    "xkseries": "XK-Series", "xl7": "XL-7", "xtype": "X-Type",
+    "yukonxl": "Yukon XL",
+}
+
+# Pattern rules are MAKE-SCOPED: "E350" is a Ford van (E-350) but a Mercedes
+# sedan (E350), and "Es300" is Lexus-styled "ES 300" while "Ml350" is
+# Mercedes-styled "ML350". A make-blind rule broke Mercedes matches.
+_BMW_SUFFIX_RE = re.compile(r"^(\d{3})\s*(i|is|ci|xi|si|d|e)$", re.IGNORECASE)
+_FE_SERIES_RE = re.compile(r"^([FE])\s*-?\s*(\d{2,3})$", re.IGNORECASE)
+_TWO_LETTER_NUM_RE = re.compile(r"^([A-Za-z]{2})\s*-?\s*(\d{3})$")
+_MB_ALNUM_RE = re.compile(r"^([A-Za-z]{1,3})\s*-?\s*(\d{2,3})$")
+
+
+def normalize_model(model: str, make: str = "") -> str:
+    """Canonical display spelling for a feed-supplied model name."""
+    m = re.sub(r"\s+", " ", (model or "").strip().lstrip("&/ ").strip())
+    if not m:
+        return m
+    key = re.sub(r"[^a-z0-9]", "", m.lower())
+    if key in _MODEL_CANON:
+        return _MODEL_CANON[key]
+    mk = (make or "").lower()
+    if "ford" in mk:
+        r = _FE_SERIES_RE.match(m)       # F150 / E 350 -> F-150 / E-350
+        if r:
+            return f"{r.group(1).upper()}-{r.group(2)}"
+    elif "bmw" in mk:
+        r = _BMW_SUFFIX_RE.match(m)      # 328I -> 328i
+        if r:
+            return f"{r.group(1)}{r.group(2).lower()}"
+    elif "lexus" in mk:
+        r = _TWO_LETTER_NUM_RE.match(m)  # Es300 / Rx 350 -> ES 300
+        if r:
+            return f"{r.group(1).upper()} {r.group(2)}"
+    elif "mercedes" in mk:
+        r = _MB_ALNUM_RE.match(m)        # Ml350 / e320 -> ML350 / E320
+        if r:
+            return f"{r.group(1).upper()}{r.group(2)}"
+    return m
+
+
 def enrich_vehicles(
     vehicles: list[dict],
     *,
@@ -6299,6 +6389,10 @@ def enrich_vehicles(
     decode_vins_incremental: bool = False,
 ) -> list[dict]:
     """Add unobtanium match data. Optionally decode VINs via NHTSA VPIC (all unique VINs, or top-N-by-profit only)."""
+    # Canonical model spelling before anything else — matching, display, and
+    # the UI's model dropdown all key off this field.
+    for v in vehicles:
+        v["model"] = normalize_model(v.get("model") or "", v.get("make") or "")
     allowed_vins: set[str] | None = None
 
     def _apply_match(v: dict, vin_dec: dict | None) -> None:

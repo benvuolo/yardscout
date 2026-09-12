@@ -43,6 +43,8 @@ def main() -> None:
     was_matched = now_matched = 0
 
     for i, row in enumerate(data["vehicles"]):
+        # Canonical model spelling (same normalization the live scan applies).
+        row[mdi] = js.normalize_model(row[mdi] or "", row[mki] or "")
         if row[psi] is not None and row[psi] >= 0:
             was_matched += 1
         dec = None
