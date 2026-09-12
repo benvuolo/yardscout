@@ -413,10 +413,14 @@
     border-radius: var(--radius-sm);
     padding: 0.5rem 0.7rem;
   }
-  .controls select:disabled {
+  .controls select:disabled,
+  .controls input:disabled {
     opacity: 0.45;
     cursor: not-allowed;
   }
+  /* With the keyword box moved into the panel, the toolbar holds only the
+   * Filters toggle — let it span full width as the panel's drawer handle. */
+  .toolbar .filter-toggle { flex: 1; justify-content: center; }
   .ctl-group-title {
     font-family: var(--font-mono);
     font-size: 0.625rem;

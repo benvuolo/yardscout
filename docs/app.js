@@ -658,6 +658,50 @@ function populateLiveMakeFilter() {
     opt.textContent = m + ' (' + liveInventory.filter(v => v.make === m).length + ')';
     sel.appendChild(opt);
   });
+  populateModelFilter();
+  populateYearFilters();
+}
+
+/* Model cascade: the Model select only ever lists the chosen make's models —
+ * picked from real inventory so there's nothing to misspell. Disabled (with
+ * "All models") until a make is chosen. */
+function populateModelFilter() {
+  const make = document.getElementById('live-filter-make').value;
+  const sel = document.getElementById('live-filter-model');
+  const prev = sel.value;
+  sel.innerHTML = '<option value="">All models</option>';
+  if (!make) { sel.disabled = true; return; }
+  sel.disabled = false;
+  const counts = new Map();
+  for (const v of liveInventory) {
+    if (v.make === make && v.model) counts.set(v.model, (counts.get(v.model) || 0) + 1);
+  }
+  [...counts.keys()].sort().forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m;
+    opt.textContent = m + ' (' + counts.get(m) + ')';
+    sel.appendChild(opt);
+  });
+  // Keep the selection when it survives a make change (it won't, usually).
+  sel.value = counts.has(prev) ? prev : '';
+}
+
+/* Optional year range, populated from the years actually in inventory
+ * (newest first) — no typing, no typos. */
+function populateYearFilters() {
+  const years = [...new Set(liveInventory.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
+  for (const [id, label] of [['live-filter-year-min', 'From'], ['live-filter-year-max', 'To']]) {
+    const sel = document.getElementById(id);
+    const prev = sel.value;
+    sel.innerHTML = `<option value="">${label}</option>`;
+    years.forEach(y => {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      sel.appendChild(opt);
+    });
+    sel.value = prev && years.includes(+prev) ? prev : '';
+  }
 }
 
 /* The Yard dropdown only ever lists yards inside the chosen radius of the
@@ -715,8 +759,12 @@ function populateYardFilter() {
  * disabled until one is set. */
 function updateFilterAvailability() {
   const hasLoc = !!activeZipCoords;
-  ['live-radius', 'live-filter-make', 'live-filter-location', 'live-filter-match', 'live-sort']
+  ['live-radius', 'live-filter-make', 'live-filter-location', 'live-filter-match', 'live-sort',
+   'live-filter-year-min', 'live-filter-year-max', 'live-search']
     .forEach(id => { const el = document.getElementById(id); if (el) el.disabled = !hasLoc; });
+  // Model stays a cascade: enabled only when a location AND a make are set.
+  const modelSel = document.getElementById('live-filter-model');
+  if (modelSel) modelSel.disabled = !hasLoc || !document.getElementById('live-filter-make').value;
   const hint = document.getElementById('filters-need-zip');
   if (hint) hint.style.display = hasLoc ? 'none' : '';
 }
@@ -1186,6 +1234,9 @@ function getFilteredLive() {
 
   const search = document.getElementById('live-search').value.toLowerCase();
   const makeFilter = document.getElementById('live-filter-make').value;
+  const modelFilter = document.getElementById('live-filter-model').value;
+  const yearMin = parseInt(document.getElementById('live-filter-year-min').value, 10) || null;
+  const yearMax = parseInt(document.getElementById('live-filter-year-max').value, 10) || null;
   const matchFilter = document.getElementById('live-filter-match').value;
   const locationFilter = document.getElementById('live-filter-location').value;
   let sortBy = document.getElementById('live-sort').value;
@@ -1196,6 +1247,9 @@ function getFilteredLive() {
 
   let filtered = liveInventory.filter(v => {
     if (makeFilter && v.make !== makeFilter) return false;
+    if (modelFilter && v.model !== modelFilter) return false;
+    if (yearMin && (!v.year || v.year < yearMin)) return false;
+    if (yearMax && (!v.year || v.year > yearMax)) return false;
     if (locationFilter && v.location !== locationFilter) return false;
     if (activeZipCoords && radiusMi) {
       const d = vehicleDistanceMi(v);
@@ -1281,6 +1335,10 @@ function getFilteredLive() {
 function updateLiveFilterCount() {
   let n = 0;
   if (document.getElementById('live-filter-make').value) n++;
+  if (document.getElementById('live-filter-model').value) n++;
+  if (document.getElementById('live-filter-year-min').value
+      || document.getElementById('live-filter-year-max').value) n++;
+  if (document.getElementById('live-search').value.trim()) n++;
   if (document.getElementById('live-filter-location').value) n++;
   if (document.getElementById('live-filter-match').value) n++;
   if (activeZipCoords && document.getElementById('live-radius').value) n++;
@@ -1583,7 +1641,24 @@ document.getElementById('live-search').addEventListener('input', () => {
   clearTimeout(_searchDebounce);
   _searchDebounce = setTimeout(renderLive, 180);
 });
-document.getElementById('live-filter-make').addEventListener('change', renderLive);
+document.getElementById('live-filter-make').addEventListener('change', () => {
+  populateModelFilter();   // cascade: model list follows the make
+  renderLive();
+});
+document.getElementById('live-filter-model').addEventListener('change', renderLive);
+document.getElementById('live-filter-year-min').addEventListener('change', () => {
+  // Keep the range sane: from > to snaps "to" up to match.
+  const lo = document.getElementById('live-filter-year-min');
+  const hi = document.getElementById('live-filter-year-max');
+  if (lo.value && hi.value && +lo.value > +hi.value) hi.value = lo.value;
+  renderLive();
+});
+document.getElementById('live-filter-year-max').addEventListener('change', () => {
+  const lo = document.getElementById('live-filter-year-min');
+  const hi = document.getElementById('live-filter-year-max');
+  if (lo.value && hi.value && +hi.value < +lo.value) lo.value = hi.value;
+  renderLive();
+});
 document.getElementById('live-filter-location').addEventListener('change', renderLive);
 let _lastFreeSort = FREE_DEFAULT_SORT;
 document.getElementById('live-sort').addEventListener('change', e => {
