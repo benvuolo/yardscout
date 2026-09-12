@@ -379,7 +379,8 @@ function applyInventory(raw, { quiet = false } = {}) {
   annotateVinDuplicates(liveInventory);
   liveLoaded = true;
   updateCoverageCounts();
-  populateLiveMakeFilter();
+  _makeScopeKey = null;   // data changed — force the scoped rebuild
+  refreshScopedInventory();
   updateStaleBanner();
   if (!quiet) {
     applyShareHash();
@@ -648,23 +649,57 @@ function effectiveRadiusMi() {
   return raw ? Math.min(raw, FREE_MAX_RADIUS_MI) : FREE_MAX_RADIUS_MI;
 }
 
+/* Feed placeholder pseudo-makes that would look broken in a picker
+ * ("Misc" rows are Pull-A-Part's "1977 CAR" / "Commercial Truck" stubs).
+ * The cars stay browsable under "All makes"; they just don't get a
+ * dropdown entry. */
+const JUNK_MAKES = new Set(['misc', 'miscellaneous', 'unknown', 'other', '']);
+
+/* Vehicles inside the current center+radius — the population for the Make
+ * and Model dropdowns, so the picker never offers a brand with zero cars
+ * near you. Cached per scope, same pattern as the yard filter. */
+let _makeScopeKey = null;
+let _scopedVehicles = [];
+function refreshScopedInventory() {
+  const radius = effectiveRadiusMi();
+  const key = activeZipCoords
+    ? activeZipCoords.lat + ',' + activeZipCoords.lng + ',' + (radius || 'any')
+    : 'none';
+  if (key === _makeScopeKey) return;
+  _makeScopeKey = key;
+  _scopedVehicles = !activeZipCoords ? [] : liveInventory.filter(v => {
+    if (!radius) return true;   // "Any distance" (Pro) = nationwide
+    const d = vehicleDistanceMi(v);
+    return d != null && d <= radius;
+  });
+  populateLiveMakeFilter();
+}
+
 function populateLiveMakeFilter() {
-  const makes = [...new Set(liveInventory.map(v => v.make))].sort();
   const sel = document.getElementById('live-filter-make');
+  const prev = sel.value;
+  const counts = new Map();
+  for (const v of _scopedVehicles) {
+    if (!v.make || JUNK_MAKES.has(v.make.toLowerCase())) continue;
+    counts.set(v.make, (counts.get(v.make) || 0) + 1);
+  }
   sel.innerHTML = '<option value="">All makes</option>';
-  makes.forEach(m => {
+  const pro = isPro();
+  [...counts.keys()].sort().forEach(m => {
     const opt = document.createElement('option');
     opt.value = m;
-    opt.textContent = m + ' (' + liveInventory.filter(v => v.make === m).length + ')';
+    // Inventory counts are intel — Pro sees them, free gets a clean list.
+    opt.textContent = pro ? m + ' (' + counts.get(m) + ')' : m;
     sel.appendChild(opt);
   });
+  sel.value = counts.has(prev) ? prev : '';
   populateModelFilter();
   populateYearFilters();
 }
 
-/* Model cascade: the Model select only ever lists the chosen make's models —
- * picked from real inventory so there's nothing to misspell. Disabled (with
- * "All models") until a make is chosen. */
+/* Model cascade: the Model select only ever lists the chosen make's models
+ * that exist within the current radius — picked from real inventory so
+ * there's nothing to misspell. Disabled until a make is chosen. */
 function populateModelFilter() {
   const make = document.getElementById('live-filter-make').value;
   const sel = document.getElementById('live-filter-model');
@@ -673,13 +708,14 @@ function populateModelFilter() {
   if (!make) { sel.disabled = true; return; }
   sel.disabled = false;
   const counts = new Map();
-  for (const v of liveInventory) {
+  for (const v of _scopedVehicles) {
     if (v.make === make && v.model) counts.set(v.model, (counts.get(v.model) || 0) + 1);
   }
+  const pro = isPro();
   [...counts.keys()].sort().forEach(m => {
     const opt = document.createElement('option');
     opt.value = m;
-    opt.textContent = m + ' (' + counts.get(m) + ')';
+    opt.textContent = pro ? m + ' (' + counts.get(m) + ')' : m;
     sel.appendChild(opt);
   });
   // Keep the selection when it survives a make change (it won't, usually).
@@ -935,6 +971,8 @@ async function submitWaitlist() {
 /* Re-apply every gate; called at startup and whenever pro state flips. */
 function applyProGates() {
   const pro = isPro();
+  // Dropdown inventory counts are Pro-only — rebuild the lists on tier change.
+  if (liveLoaded) populateLiveMakeFilter();
   const pill = document.getElementById('pro-pill');
   if (pill) {
     pill.textContent = pro ? 'Pro \u2713' : 'Pro';
@@ -1351,6 +1389,7 @@ function renderLive() {
   updateFilterAvailability();
   if (!liveLoaded) return;
   populateYardFilter();
+  refreshScopedInventory();   // make/model dropdowns follow the radius too
   const vehicles = getFilteredLive();
 
   // KPIs describe what the user is LOOKING AT (their zip/filters), not the
