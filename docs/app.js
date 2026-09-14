@@ -321,12 +321,18 @@ const ICON = {
   share: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>',
 };
 
-// Placeholder part names rendered under the blur for locked rows — plausible
-// shapes and lengths, never this car's real data.
+// Masks rendered under the blur for locked rows. Deliberately NOT plausible
+// fake data: if someone strips the blur in dev tools they see obvious bullet
+// masks, not made-up part names/prices that could read as faked data.
 const LOCKED_PART_PLACEHOLDERS = [
-  'Headlights (pair)', 'Front Seats (set)', 'Infotainment Unit',
-  'Tailgate Assembly', 'Alternator', 'Center Console',
+  '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022\u2022 (\u2022\u2022\u2022\u2022)',
+  '\u2022\u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022',
+  '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022',
+  '\u2022\u2022\u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022\u2022\u2022\u2022 (\u2022\u2022\u2022)',
+  '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022',
+  '\u2022\u2022\u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022\u2022\u2022\u2022',
 ];
+const LOCKED_PRICE_MASK = '$\u2022\u2022\u2022&ndash;$\u2022\u2022\u2022';
 
 function vinMetaHtml(v) {
   if (!v.vin || !String(v.vin).trim()) return '';
@@ -1176,7 +1182,7 @@ function renderSavedSheet() {
               </div>
               ${range && range.hi > 0 ? (isPro()
                 ? `<div class="saved-item-profit" title="${range.unknownCost ? 'Resale estimate — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated range if parts are good, after this yard\u2019s list pull costs'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">resale</small>' : ''}</div>`
-                : `<div class="saved-item-profit locked-blur" role="button" onclick="openUpgradeSheet('saved-value')">$400&ndash;$900</div>`) : ''}
+                : `<div class="saved-item-profit locked-blur" role="button" onclick="openUpgradeSheet('saved-value')">${LOCKED_PRICE_MASK}</div>`) : ''}
               <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">${ICON.x}</button>
             </div>`;
         }).join('')}
@@ -1624,8 +1630,8 @@ function renderLive() {
           return `
             <li class="part-item" style="flex-wrap:wrap;">
               <span class="part-name locked-blur" role="button" onclick="openUpgradeSheet('part-name')">${ph}</span>
-              <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">$28 list</span>
-              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">sells $250&ndash;$600</span>
+              <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">$\u2022\u2022 list</span>
+              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">sells ${LOCKED_PRICE_MASK}</span>
             </li>`;
         }
         return `
@@ -2195,7 +2201,7 @@ function renderAlerts() {
                     
                     ${isPro()
                       ? `<span class="part-price">${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>`
-                      : `<span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('alerts-value')">$100&ndash;$400</span>`}
+                      : `<span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('alerts-value')">${LOCKED_PRICE_MASK}</span>`}
                   </li>
                 `).join('')}
               </ul>
