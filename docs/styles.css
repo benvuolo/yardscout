@@ -1149,6 +1149,21 @@
     border-radius: var(--radius-sm);
     vertical-align: middle;
   }
+  /* Free-sample tag on the one unlocked card */
+  .sample-note {
+    display: inline-block;
+    margin-top: 0.65rem;
+    padding: 0.18rem 0.5rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
   .lock-chip {
     display: inline-flex;
     align-items: center;
