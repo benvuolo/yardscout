@@ -220,6 +220,23 @@
       </div>
     </div>
 
+    <!-- Cloud alerts (API mode): real Web Push from the account backend.
+         Shown instead of the ntfy panel once an API base is configured. -->
+    <div class="panel" id="cloud-alerts-panel" style="display:none;">
+      <h4>Push alerts <span class="pro-tag">Pro</span></h4>
+      <p style="font-size:0.8125rem;color:var(--text-dim);line-height:1.6;margin:0.4rem 0 0.8rem;">
+        Your watchlist syncs to your account. When a scan finds a matching arrival, this
+        device gets a real notification &mdash; no extra apps.
+        <strong>iPhone:</strong> add YardScout to your home screen first (Share &rarr; Add to
+        Home Screen), then enable push from the installed app.
+      </p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
+        <button type="button" id="cloud-push-enable" class="btn btn-primary">Enable alerts on this device</button>
+        <button type="button" id="cloud-push-test" class="btn" style="display:none;">Send test</button>
+        <span id="cloud-alerts-status" style="font-size:0.8125rem;color:var(--text-dim);"></span>
+      </div>
+    </div>
+
     <div class="panel" id="ntfy-panel">
       <h4>Instant push alerts <span class="pro-tag">Pro</span></h4>
       <div id="ntfy-locked" style="display:none;">
