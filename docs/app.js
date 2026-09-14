@@ -529,6 +529,19 @@ async function loadLiveInventory() {
   // of cards.
   const pricingReady = loadAllPricing();
 
+  // API mode (feature-flagged, see api.js): load tier-aware shards from the
+  // backend instead of the public static file. Falls back to static on error.
+  if (window.YSApi && YSApi.enabled()) {
+    try {
+      const raw = await YSApi.fetchInventory();
+      await pricingReady;
+      applyInventory(raw);
+      return;
+    } catch (e) {
+      console.log('API inventory failed, falling back to static:', e && e.message);
+    }
+  }
+
   // Repeat visits: render instantly from the Cache API copy, then revalidate
   // in the background. (The service worker deliberately skips this file.)
   let shownScrapedAt = null;
@@ -924,10 +937,17 @@ let upgradeTrigger = 'unknown';
 function openUpgradeSheet(trigger) {
   upgradeTrigger = trigger || 'unknown';
   track('pro-lock/' + upgradeTrigger);
-  // Returning waitlist members see the thank-you state, not the form again.
-  const done = localStorage.getItem('jh_waitlist_email');
-  document.getElementById('upgrade-form-wrap').style.display = done ? 'none' : '';
-  document.getElementById('upgrade-thanks').style.display = done ? '' : 'none';
+  const apiMode = window.YSApi && YSApi.enabled();
+  if (apiMode) {
+    // Real billing: the waitlist form gives way to sign-in + checkout.
+    document.getElementById('upgrade-form-wrap').style.display = 'none';
+    document.getElementById('upgrade-thanks').style.display = 'none';
+  } else {
+    // Fake-door mode: returning waitlist members see the thank-you state.
+    const done = localStorage.getItem('jh_waitlist_email');
+    document.getElementById('upgrade-form-wrap').style.display = done ? 'none' : '';
+    document.getElementById('upgrade-thanks').style.display = done ? '' : 'none';
+  }
   document.getElementById('upgrade-sheet').classList.add('open');
   document.getElementById('upgrade-backdrop').classList.add('open');
 }
@@ -2354,3 +2374,42 @@ if ('serviceWorker' in navigator) {
     el.style.display = 'none';
   });
 })();
+
+/* ===== ACCOUNT / API SESSION (active only in API mode — see api.js) =====
+ * When the backend session reports a paid tier, the jh_pro gate is driven by
+ * the ACCOUNT — and once inventory loads through the API, the server refuses
+ * value data to free sessions anyway, so the client gate stops being the
+ * enforcement and becomes presentation. */
+if (window.YSApi) {
+  YSApi.init({
+    onAuthChange(me) {
+      const paid = !!(me && me.tier && me.tier !== 'free');
+      if (paid) {
+        localStorage.setItem('jh_pro', '1');
+        localStorage.setItem('jh_pro_source', 'account');
+      } else if (localStorage.getItem('jh_pro_source') === 'account') {
+        // Only claw back Pro that an account granted — never the dev toggle.
+        localStorage.removeItem('jh_pro');
+        localStorage.removeItem('jh_pro_source');
+      }
+      applyProGates();
+      if (liveLoaded) renderLive();
+    },
+  });
+  // "Continue to payment" starts Stripe Checkout for whichever plan card is
+  // selected. Not signed in yet → the sheet's sign-in form is right above.
+  const co = document.getElementById('account-checkout');
+  if (co) co.addEventListener('click', async () => {
+    track('checkout-start/' + selectedPlan);
+    co.disabled = true;
+    try {
+      await YSApi.checkout(selectedPlan);
+    } catch (e) {
+      YSApi.setStatus(e.code === 401
+        ? 'Sign in first (link above) — your purchase needs an account to stick to.'
+        : (e.message || 'Could not start checkout.'), true);
+    } finally {
+      co.disabled = false;
+    }
+  });
+}

@@ -1482,3 +1482,21 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
+
+  /* ===== Account sign-in + billing (API mode only — hidden until enabled) ===== */
+  .account-wrap {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .account-signedout { display: flex; flex-direction: column; gap: 0.5rem; }
+  .account-signedout strong { font-size: 0.875rem; }
+  .account-status { font-size: 0.75rem; color: var(--text-dim); min-height: 1em; display: block; margin-top: 0.3rem; }
+  .account-signedin {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    font-size: 0.875rem;
+  }
