@@ -597,6 +597,12 @@ UNOBTANIUM_DB = {
         "make": "Subaru",
         "year_range": (1998, 2024),
         "top_parts": [
+            # XT = the turbo Forester; scoop is trim-confirmable from VIN decode.
+            {"name": "XT Hood Scoop", "rarity": "Rare", "low": 80, "high": 200, "cost": 15, "trim": ["XT"]},
+            {"name": "Panoramic Sunroof Assembly", "rarity": "Rare", "low": 120, "high": 300, "cost": 30, "option": True},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15},
+            # Manual Foresters carry a viscous rear LSD — swap fodder for lifted builds.
+            {"name": "Rear Viscous LSD Diff", "rarity": "Rare", "low": 100, "high": 250, "cost": 40, "manual": True},
             {"name": "Eyesight Camera Module", "rarity": "Epic", "low": 200, "high": 450, "cost": 25, "yr_min": 2014},
             {"name": "XT Turbo Intercooler + Piping", "rarity": "Epic", "low": 150, "high": 350, "cost": 20, "trim": ["XT"]},
             {"name": "Roof Rails + Crossbars", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 20},
@@ -661,6 +667,9 @@ UNOBTANIUM_DB = {
         "make": "Jeep",
         "year_range": (1987, 2024),
         "top_parts": [
+            # YJ/TJ full steel doors are chronically stripped — strong national demand.
+            {"name": "Full Steel Doors (pair)", "rarity": "Epic", "low": 200, "high": 500, "cost": 40, "yr_max": 2006},
+            {"name": "Tailgate", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 20},
             # Soft top was standard on every Wrangler generation — the hardtop is an option
             # (dual-top group etc.), so it can never be assumed present.
             {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 400, "high": 1500, "cost": 60, "option": True},
@@ -750,6 +759,10 @@ UNOBTANIUM_DB = {
         "make": "Chevrolet",
         "year_range": (2010, 2024),
         "top_parts": [
+            {"name": "IROC-Z / Z28 Wheels (set)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "yr_max": 1992, "trim": ["IROC", "Z28"]},
+            {"name": "Digital Dash Cluster", "rarity": "Rare", "low": 100, "high": 280, "cost": 20, "yr_max": 1989, "option": True},
+            {"name": "SS/Z28 Rear Spoiler", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 20, "yr_min": 1993, "yr_max": 2002, "trim": ["SS", "Z28"]},
+            {"name": "LS1 Intake + Accessories", "rarity": "Rare", "low": 100, "high": 300, "cost": 30, "yr_min": 1998, "yr_max": 2002, "trim": ["SS", "Z28"]},
             {"name": "SS Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "trim": ["SS", "ZL1", "Z28", "1LE"]},
             {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SS", "ZL1", "1LE"]},
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 400, "cost": 40, "yr_min": 2016},
@@ -774,6 +787,9 @@ UNOBTANIUM_DB = {
         "make": "Nissan",
         "year_range": (1998, 2024),
         "top_parts": [
+            {"name": "Utili-track Bed Rails + Cleats", "rarity": "Rare", "low": 80, "high": 200, "cost": 25, "option": True},
+            {"name": "Bed Extender", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15, "option": True},
+            {"name": "Roof Rack Crossbars", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15, "option": True},
             {"name": "PRO-4X Skid Plates", "rarity": "Rare", "low": 100, "high": 225, "cost": 15, "trim": ["PRO-4X", "Pro-4X"]},
             {"name": "Bilstein Shocks (PRO-4X)", "rarity": "Rare", "low": 150, "high": 300, "cost": 30, "trim": ["PRO-4X", "Pro-4X"]},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
@@ -784,6 +800,9 @@ UNOBTANIUM_DB = {
         "make": "Nissan",
         "year_range": (2000, 2015),
         "top_parts": [
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15},
+            {"name": "Side Steps / Rock Rails (pair)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20},
+            {"name": "Center Console (lid intact)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12},
             {"name": "OEM Roof Rack (tube-style)", "rarity": "Epic", "low": 150, "high": 350, "cost": 25},
             {"name": "Rear Diff Locker Switch", "rarity": "Rare", "low": 50, "high": 125, "cost": 5, "trim": ["PRO-4X", "Off-Road"]},
         ],
@@ -1144,6 +1163,9 @@ UNOBTANIUM_DB = {
         "make": "Scion",
         "year_range": (2013, 2016),
         "top_parts": [
+            {"name": "Front Seats (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 40},
+            # Torsen LSD was standard equipment on the FR-S.
+            {"name": "Torsen Rear Diff", "rarity": "Rare", "low": 150, "high": 400, "cost": 50},
             {"name": "OEM Headlights (pair)", "rarity": "Rare", "low": 250, "high": 550, "cost": 45},
             {"name": "Touchscreen Head Unit", "rarity": "Uncommon", "low": 150, "high": 350, "cost": 40},
             {"name": "TRD / Performance Exhaust Mid-Pipe", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 25, "trim": ["TRD"]},
@@ -1174,6 +1196,10 @@ UNOBTANIUM_DB = {
         "make": "Mazda",
         "year_range": (1990, 2024),
         "top_parts": [
+            # NA/NB removable hardtops are the single most demanded Miata part.
+            {"name": "OEM Removable Hardtop", "rarity": "Legendary", "low": 500, "high": 1200, "cost": 60, "yr_max": 2005, "option": True},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15},
+            {"name": "Nardi Steering Wheel + Knob", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "option": True},
             {"name": "OEM Soft Top (clean)", "rarity": "Epic", "low": 200, "high": 500, "cost": 40},
             # Removable hardtop was a dealer option/accessory, never standard.
             {"name": "OEM Hardtop (ND)", "rarity": "Legendary", "low": 800, "high": 1800, "cost": 100, "yr_min": 2016, "option": True},
@@ -1781,6 +1807,8 @@ UNOBTANIUM_DB = {
         "make": "Dodge",
         "year_range": (2008, 2024),
         "top_parts": [
+            {"name": "R/T Shaker Hood + Intake", "rarity": "Epic", "low": 300, "high": 700, "cost": 60, "option": True},
+            {"name": "HID/LED Headlights (pair)", "rarity": "Rare", "low": 150, "high": 400, "cost": 30, "option": True},
             {"name": "Uconnect 8.4\" Touchscreen", "rarity": "Epic", "low": 250, "high": 550, "cost": 45, "yr_min": 2011},
             {"name": "SRT / Hellcat Hood (composite)", "rarity": "Epic", "low": 400, "high": 1000, "cost": 55, "trim": ["SRT", "Hellcat", "Demon", "Redeye"]},
             {"name": "SRT Brembo Calipers (set)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SRT", "Hellcat"]},
@@ -2178,6 +2206,7 @@ UNOBTANIUM_DB = {
         "make": "Mitsubishi",
         "year_range": (1991, 1999),
         "top_parts": [
+            {"name": "Pop-Up Headlights (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "yr_max": 1993},
             {"name": "VR-4 Twin Turbo / AWD Parts", "rarity": "Legendary", "low": 300, "high": 800, "cost": 60, "trim": ["VR-4", "VR4", "R/T Turbo"]},
             {"name": "OEM Seats (pair)", "rarity": "Rare", "low": 120, "high": 350, "cost": 40},
             {"name": "Active Aero Spoiler", "rarity": "Epic", "low": 100, "high": 300, "cost": 15},
@@ -2768,6 +2797,9 @@ UNOBTANIUM_DB = {
         "make": "Scion",
         "year_range": (2005, 2016),
         "top_parts": [
+            {"name": "OEM Alloy Wheels (set)", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 40},
+            {"name": "Pioneer Premium Head Unit", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12},
+            {"name": "Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 15, "option": True},
             {"name": "Panoramic Roof Glass", "rarity": "Rare", "low": 100, "high": 250, "cost": 25},
             {"name": "TRD Parts (springs, exhaust bits)", "rarity": "Rare", "low": 80, "high": 225, "cost": 20},
         ],
@@ -2777,6 +2809,10 @@ UNOBTANIUM_DB = {
         "make": "Scion",
         "year_range": (2004, 2015),
         "top_parts": [
+            # Gen1 center-dash cluster is the classic xB failure/theft piece.
+            {"name": "Center Dash Gauge Cluster", "rarity": "Rare", "low": 60, "high": 160, "cost": 12, "yr_max": 2006},
+            {"name": "OEM Roof Spoiler", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15, "option": True},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 50, "high": 120, "cost": 15, "yr_min": 2008},
             {"name": "Gen1 Bumpers / Body Panels (straight)", "rarity": "Rare", "low": 80, "high": 250, "cost": 25, "yr_max": 2006},
             {"name": "Gen1 Interior Trim / Cluster", "rarity": "Rare", "low": 60, "high": 175, "cost": 10, "yr_max": 2006},
         ],
@@ -2802,6 +2838,8 @@ UNOBTANIUM_DB = {
         "make": "Hyundai",
         "year_range": (1997, 2008),
         "top_parts": [
+            {"name": "Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15},
+            {"name": "Infinity Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15, "option": True},
             {"name": "GT V6 6MT Parts (shifter, pedals)", "rarity": "Rare", "low": 80, "high": 225, "cost": 15, "trim": ["GT"]},
             {"name": "OEM Seats (pair)", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 40},
         ],
@@ -2811,6 +2849,9 @@ UNOBTANIUM_DB = {
         "make": "Hyundai",
         "year_range": (2012, 2022),
         "top_parts": [
+            {"name": "Panoramic Sunroof Assembly", "rarity": "Rare", "low": 120, "high": 300, "cost": 30, "option": True},
+            {"name": "Turbo Front Bumper + Grille", "rarity": "Rare", "low": 100, "high": 250, "cost": 25, "trim": ["Turbo"]},
+            {"name": "Dimension Premium Amp", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12, "option": True},
             {"name": "Turbo Parts (1.6T)", "rarity": "Rare", "low": 120, "high": 300, "cost": 30, "trim": ["Turbo", "N"]},
             {"name": "3rd Door / Hatch Glass", "rarity": "Rare", "low": 80, "high": 225, "cost": 25},
         ],
@@ -3254,6 +3295,9 @@ UNOBTANIUM_DB.update({
     "fiesta": {
         "display": "Ford Fiesta", "make": "Ford", "year_range": (2011, 2019),
         "top_parts": [
+            {"name": "ST Steering Wheel", "rarity": "Rare", "low": 70, "high": 170, "cost": 12, "trim": ["ST"]},
+            {"name": "ST Rear Spoiler", "rarity": "Rare", "low": 60, "high": 150, "cost": 15, "trim": ["ST"]},
+            {"name": "Heated Side Mirrors (pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12, "option": True},
             # US Fiesta ST launched 2014 — row used to claim 2011+.
             {"name": "ST Recaro Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 75, "yr_min": 2014, "trim": ["ST"]},
             {"name": "SYNC Touchscreen", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 35, "yr_min": 2014},
@@ -4110,6 +4154,23 @@ UNOBTANIUM_DB.update({
             {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
         ],
     },
+    "s-class": {
+        # Depreciation-trap flagship: yards are full of $100k cars whose gadgets
+        # still sell. Most toys were standard on the S, so few option gates.
+        "display": "Mercedes-Benz S-Class", "make": "Mercedes-Benz",
+        "match": ["s-class", "s320", "s350", "s400", "s420", "s430", "s500", "s550", "s560", "s600", "s63", "s65"],
+        "year_range": (1992, 2020),
+        "top_parts": [
+            {"name": "Xenon/LED Headlights (pair)", "rarity": "Epic", "low": 200, "high": 550, "cost": 30},
+            {"name": "Soft-Close Door Motors (each)", "rarity": "Rare", "low": 80, "high": 220, "cost": 20},
+            {"name": "Airmatic Suspension Compressor", "rarity": "Rare", "low": 100, "high": 260, "cost": 25, "yr_min": 2000},
+            {"name": "COMAND Screen / Head Unit", "rarity": "Rare", "low": 100, "high": 300, "cost": 20, "yr_min": 2000},
+            {"name": "Harman Kardon / Burmester Amp", "rarity": "Rare", "low": 80, "high": 250, "cost": 25},
+            {"name": "Front Seats (heated/vented, pair)", "rarity": "Rare", "low": 200, "high": 500, "cost": 60},
+            # Distronic radar cruise was an option box even on the S.
+            {"name": "Distronic Radar Module", "rarity": "Rare", "low": 100, "high": 280, "cost": 20, "yr_min": 2000, "option": True},
+        ],
+    },
     "flex": {
         "display": "Ford Flex", "make": "Ford", "year_range": (2009, 2019),
         "top_parts": [
@@ -4132,6 +4193,10 @@ UNOBTANIUM_DB.update({
     "9-3": {
         "display": "Saab 9-3", "make": "Saab", "year_range": (1999, 2011),
         "top_parts": [
+            # SID pixel failure is universal — working displays sell on sight.
+            {"name": "SID Info Display (good pixels)", "rarity": "Rare", "low": 60, "high": 160, "cost": 12},
+            {"name": "Xenon Headlights (pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 30, "option": True},
+            {"name": "Convertible Top Hydraulic Pump", "rarity": "Rare", "low": 100, "high": 240, "cost": 25, "option": True},
             {"name": "Aero Front Bumper / Trim", "rarity": "Rare", "low": 100, "high": 300, "cost": 30, "trim": ["Aero", "Viggen"]},
             {"name": "Leather Seats (pair)", "rarity": "Uncommon", "low": 80, "high": 220, "cost": 40},
             {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
