@@ -1023,6 +1023,17 @@ function toggleProDev() {
   alert('Pro mode ' + (isPro() ? 'ON' : 'OFF') + ' (dev toggle)');
 }
 
+// First-run honesty note: shown until dismissed, then never again.
+(() => {
+  const note = document.getElementById('first-run-note');
+  if (!note) return;
+  if (!localStorage.getItem('jh_honesty_ack')) note.style.display = '';
+  document.getElementById('first-run-dismiss').addEventListener('click', () => {
+    localStorage.setItem('jh_honesty_ack', '1');
+    note.style.display = 'none';
+  });
+})();
+
 document.getElementById('upgrade-backdrop').addEventListener('click', closeUpgradeSheet);
 document.getElementById('upgrade-close').addEventListener('click', closeUpgradeSheet);
 document.getElementById('waitlist-submit').addEventListener('click', submitWaitlist);
