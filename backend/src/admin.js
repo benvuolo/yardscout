@@ -208,3 +208,34 @@ export async function handleRevenueCatWebhook(req, env) {
 
   return json({ ok: true, matched: true, applied: tier || 'none' });
 }
+
+/* ===== Waitlist (public join + admin export) =====
+ * Durable home for pre-launch signups — the ntfy push is convenient but its
+ * ~12h message cache made it the only copy, which meant lost leads. */
+
+const WAITLIST_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export async function handleWaitlistJoin(req, env) {
+  let body;
+  try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
+  const email = String(body.email || '').trim().toLowerCase();
+  if (!WAITLIST_EMAIL_RE.test(email) || email.length > 254) {
+    return err(400, 'bad_email', 'Enter a valid email address.');
+  }
+  const clip = (v) => String(v == null ? '' : v).slice(0, 64);
+  await env.DB.prepare(
+    `INSERT INTO waitlist (email, plan, price, trigger, created_at, updated_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?5)
+     ON CONFLICT (email) DO UPDATE SET
+       plan = excluded.plan, price = excluded.price,
+       trigger = excluded.trigger, updated_at = excluded.updated_at`
+  ).bind(email, clip(body.plan), clip(body.price), clip(body.trigger), isoNow()).run();
+  return json({ ok: true });
+}
+
+export async function handleWaitlistList(req, env) {
+  const rows = (await env.DB.prepare(
+    'SELECT email, plan, price, trigger, created_at, updated_at FROM waitlist ORDER BY created_at DESC LIMIT 5000'
+  ).all()).results || [];
+  return json({ waitlist: rows, count: rows.length });
+}

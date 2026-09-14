@@ -30,6 +30,7 @@ import {
 import {
   requireUpload, requireAdmin, handleManifest, handlePutShard, handleCommit,
   handleGrant, handleListUsers, handleRevenueCatWebhook,
+  handleWaitlistJoin, handleWaitlistList,
 } from './admin.js';
 import { handleCheckout, handlePortal, handleStripeWebhook } from './billing.js';
 
@@ -93,6 +94,12 @@ async function route(req, env, url) {
     if (m) return handleVehicleDetail(req, env, user, decodeURIComponent(m[1]));
   }
 
+  /* ----- waitlist (public join, tight rate limit) ----- */
+  if (method === 'POST' && path === '/v1/waitlist') {
+    if (!rateLimit('wl:ip:' + ip, 10, 3600_000)) return err(429, 'rate_limited', 'Slow down.');
+    return handleWaitlistJoin(req, env);
+  }
+
   /* ----- billing (Stripe) ----- */
   if (method === 'POST' && path === '/v1/billing/checkout') return handleCheckout(req, env);
   if (method === 'POST' && path === '/v1/billing/portal') return handlePortal(req, env);
@@ -111,11 +118,12 @@ async function route(req, env, url) {
   }
 
   /* ----- admin (x-admin-secret) ----- */
-  if (path === '/v1/admin/grant' || path === '/v1/admin/users') {
+  if (path === '/v1/admin/grant' || path === '/v1/admin/users' || path === '/v1/admin/waitlist') {
     const denied = await requireAdmin(req, env);
     if (denied) return denied;
     if (method === 'POST' && path === '/v1/admin/grant') return handleGrant(req, env);
     if (method === 'GET' && path === '/v1/admin/users') return handleListUsers(req, env);
+    if (method === 'GET' && path === '/v1/admin/waitlist') return handleWaitlistList(req, env);
   }
 
   /* ----- IAP webhook (own auth) ----- */
