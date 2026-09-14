@@ -816,7 +816,7 @@ function populateYardFilter() {
 function updateFilterAvailability() {
   const hasLoc = !!activeZipCoords;
   ['live-radius', 'live-filter-make', 'live-filter-location', 'live-filter-match', 'live-sort',
-   'live-filter-year-min', 'live-filter-year-max', 'live-search']
+   'live-filter-year-min', 'live-filter-year-max']
     .forEach(id => { const el = document.getElementById(id); if (el) el.disabled = !hasLoc; });
   // Model stays a cascade: enabled only when a location AND a make are set.
   const modelSel = document.getElementById('live-filter-model');
@@ -1310,7 +1310,6 @@ function getFilteredLive() {
   // still work — they show exactly one car.)
   if (!isPro() && !activeZipCoords) return [];
 
-  const search = document.getElementById('live-search').value.toLowerCase();
   const makeFilter = document.getElementById('live-filter-make').value;
   const modelFilter = document.getElementById('live-filter-model').value;
   const yearMin = parseInt(document.getElementById('live-filter-year-min').value, 10) || null;
@@ -1337,15 +1336,6 @@ function getFilteredLive() {
     // Confirmed from the VIN decode only — cars with unknown transmission are
     // excluded rather than guessed at.
     if (matchFilter === 'manual' && !isConfirmedManual(v)) return false;
-    if (search) {
-      // Part names are premium data: free keyword search covers the car
-      // itself (year/make/model/VIN/trim), not what's valuable on it.
-      const hay = [v.year, v.make, v.model, v.location, v.city, v.displayName, v.vin,
-        v.vpicDecodeWell, v.vpicTrim, v.vpicSeries, v.vpicDriveType,
-        isConfirmedManual(v) ? 'manual' : '',
-        ...(isPro() ? (v.topParts || []).map(p => p.name) : [])].join(' ').toLowerCase();
-      return hay.includes(search);
-    }
     return true;
   });
 
@@ -1418,7 +1408,6 @@ function updateLiveFilterCount() {
   if (document.getElementById('live-filter-model').value) n++;
   if (document.getElementById('live-filter-year-min').value
       || document.getElementById('live-filter-year-max').value) n++;
-  if (document.getElementById('live-search').value.trim()) n++;
   if (document.getElementById('live-filter-location').value) n++;
   if (document.getElementById('live-filter-match').value) n++;
   if (activeZipCoords && document.getElementById('live-radius').value) n++;
@@ -1735,11 +1724,6 @@ if (localStorage.getItem('jh_filters_open') === '1') {
   document.getElementById('live-controls').classList.add('open');
   document.getElementById('live-filter-toggle').classList.add('open');
 }
-let _searchDebounce = null;
-document.getElementById('live-search').addEventListener('input', () => {
-  clearTimeout(_searchDebounce);
-  _searchDebounce = setTimeout(renderLive, 180);
-});
 document.getElementById('live-filter-make').addEventListener('change', () => {
   populateModelFilter();   // cascade: model list follows the make
   renderLive();
