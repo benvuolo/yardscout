@@ -321,6 +321,13 @@ const ICON = {
   share: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>',
 };
 
+// Placeholder part names rendered under the blur for locked rows — plausible
+// shapes and lengths, never this car's real data.
+const LOCKED_PART_PLACEHOLDERS = [
+  'Headlights (pair)', 'Front Seats (set)', 'Infotainment Unit',
+  'Tailgate Assembly', 'Alternator', 'Center Console',
+];
+
 function vinMetaHtml(v) {
   if (!v.vin || !String(v.vin).trim()) return '';
   const show = String(v.vin).trim();
@@ -1120,7 +1127,9 @@ function renderSavedSheet() {
               <div class="saved-row-badge">${s.row || '?'}<small>row</small></div>
               <div class="saved-item-info">
                 <div class="saved-item-name">${s.year} ${s.make} ${s.model}</div>
-                <div class="saved-item-sub">${best ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '') : 'No flagged parts'}</div>
+                <div class="saved-item-sub">${!best ? 'No flagged parts' : isPro()
+                  ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '')
+                  : s.topParts.length + ' flagged part' + (s.topParts.length > 1 ? 's' : '') + ' \u2014 names with Pro'}</div>
               </div>
               ${range && range.hi > 0 ? (isPro()
                 ? `<div class="saved-item-profit" title="${range.unknownCost ? 'Resale estimate — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated range if parts are good, after this yard\u2019s list pull costs'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">resale</small>' : ''}</div>`
@@ -1298,10 +1307,12 @@ function getFilteredLive() {
     // excluded rather than guessed at.
     if (matchFilter === 'manual' && !isConfirmedManual(v)) return false;
     if (search) {
+      // Part names are premium data: free keyword search covers the car
+      // itself (year/make/model/VIN/trim), not what's valuable on it.
       const hay = [v.year, v.make, v.model, v.location, v.city, v.displayName, v.vin,
         v.vpicDecodeWell, v.vpicTrim, v.vpicSeries, v.vpicDriveType,
         isConfirmedManual(v) ? 'manual' : '',
-        ...(v.topParts || []).map(p => p.name)].join(' ').toLowerCase();
+        ...(isPro() ? (v.topParts || []).map(p => p.name) : [])].join(' ').toLowerCase();
       return hay.includes(search);
     }
     return true;
@@ -1469,6 +1480,19 @@ function renderLive() {
   const overflow = vehicles.length > RENDER_CAP ? vehicles.length - RENDER_CAP : 0;
   const vehiclesToRender = overflow ? vehicles.slice(0, RENDER_CAP) : vehicles;
 
+  // Free sample: fully unlock the single best find in the current view so free
+  // users see exactly what Pro shows — one car per view, never the database.
+  let sampleKey = null;
+  if (!isPro() && !focusedCarKey) {
+    let bestScore = 0;
+    for (const sv of vehiclesToRender) {
+      if (!sv.hasMatch || !sv.topParts || !sv.topParts.length) continue;
+      const score = sv.topParts.reduce((k, sp) =>
+        k + (sp.trim_status === 'unconfirmed' ? 0 : (sp.high || 0)), 0) * freshnessMultiplier(sv.dateAdded);
+      if (score > bestScore) { bestScore = score; sampleKey = vehicleKey(sv); }
+    }
+  }
+
   const focusBanner = focusedCarKey ? `
     <div class="focus-banner" style="grid-column:1/-1;">
       <span>Shared find &mdash; showing this car from the latest scan.</span>
@@ -1476,6 +1500,9 @@ function renderLive() {
     </div>` : '';
 
   document.getElementById('live-grid').innerHTML = focusBanner + vehiclesToRender.map(v => {
+    // Pro sees everything; free users get exactly one fully-unlocked sample card.
+    const unlocked = isPro() || (sampleKey !== null && vehicleKey(v) === sampleKey);
+    const isSampleCard = unlocked && !isPro();
     const isMatch = v.hasMatch;
     const isNewVehicle = isNew(v.dateAdded);
     const dateStr = new Date(v.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
@@ -1518,7 +1545,7 @@ function renderLive() {
         wap: 'This Wrench-A-Part yard\u2019s published price',
         upullr: 'U-Pull-R Parts published price',
       };
-      const partRows = v.topParts.map(p => {
+      const partRows = v.topParts.map((p, pi) => {
         const lookup = lookupYardCost(p.name, v.location);
         const hasCost = lookup.cost != null;
         const yardCost = hasCost ? lookup.cost : 0;
@@ -1556,19 +1583,17 @@ function renderLive() {
         const fitsMark = p.fits
           ? ` <span class="fits-badge" title="Model years this part fits — prices are specific to this generation">fits ${p.fits}</span>`
           : '';
-        // Free tier: part names/rarity/channels stay visible, but dollar values
-        // and demand speed are blurred placeholders (real numbers never render).
-        if (!isPro()) {
+        // Free tier: everything the parts database produces is blurred —
+        // names, fits, values, channels. Real strings never reach the DOM;
+        // rows render plausible placeholders so the blur has a shape. The
+        // free tease is the count, the demand word, and one sample card.
+        if (!unlocked) {
+          const ph = LOCKED_PART_PLACEHOLDERS[pi % LOCKED_PART_PLACEHOLDERS.length];
           return `
             <li class="part-item" style="flex-wrap:wrap;">
-              <span class="part-name">${p.name}</span>
-              ${trimMark}${fitsMark}
+              <span class="part-name locked-blur" role="button" onclick="openUpgradeSheet('part-name')">${ph}</span>
               <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">$28 list</span>
               <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">sells $250&ndash;$600</span>
-              ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
-                <span class="sell-badge sell-medium locked-blur" role="button" onclick="openUpgradeSheet('part-value')">Steady seller</span>
-                <span class="sell-channel">Sell on: ${p.sell_at}</span>${localNote}
-              </div>` : ''}
             </li>`;
         }
         return `
@@ -1605,18 +1630,22 @@ function renderLive() {
       const extraNote = extraHigh > 0 ? `
         <div class="range-extra" title="Parts specific to a trim or factory option that couldn\u2019t be confirmed for this car &mdash; they add nothing to its ranking or headline value">+ up to ${formatPrice(extraHigh)}${rangeHigh > 0 ? ' more' : ''} if equipped (unconfirmed &mdash; check at the yard)</div>` : '';
       profitLine = (rangeHigh > 0 || extraHigh > 0)
-        ? (isPro() ? `
+        ? (unlocked ? `
+        ${isSampleCard ? '<div class="sample-note" role="button" onclick="openUpgradeSheet(\'sample-note\')">Free sample &mdash; Pro shows this for every car</div>' : ''}
         <div class="profit-line">
           <span class="demand-badge ${demand.cls}">${demand.label}</span>
           ${rangeHigh > 0 ? `<span class="range-text">${rangeText}</span>` : ''}
         </div>${extraNote}` : `
         <div class="profit-line">
-          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} See what this is worth &mdash; Pro</button>
+          <span class="demand-badge ${demand.cls}" title="How quickly this car's flagged parts typically sell">${demand.label}</span>
+          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} See parts &amp; values &mdash; Pro</button>
         </div>`)
         : '';
       partsBlock = `
         <details class="parts-details">
-          <summary>Came with ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart} <span class="chev">${ICON.chev}</span></summary>
+          <summary>${unlocked
+            ? `Came with ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart}`
+            : `${v.topParts.length} valuable part${v.topParts.length > 1 ? 's' : ''} spotted &middot; names &amp; values are Pro`} <span class="chev">${ICON.chev}</span></summary>
           <div class="car-body">
             <div class="ghost-note">These are parts this car <strong>originally came with</strong> &mdash; yards track cars, not remaining parts, so some may already be pulled. Newer arrivals are more likely intact, which is why estimates shrink the longer a car sits.</div>
             <ul class="parts-list">${partRows}</ul>
