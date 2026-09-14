@@ -2220,8 +2220,10 @@ function addWatchItem() {
   const yrMax = parseInt(document.getElementById('alert-yr-max').value) || null;
   const matchOnly = document.getElementById('alert-match-only').checked;
   const watchlist = loadWatchlist();
-  watchlist.push({ make, model, yrMin, yrMax, matchOnly, addedAt: new Date().toISOString() });
+  const entry = { make, model, yrMin, yrMax, matchOnly, addedAt: new Date().toISOString() };
+  watchlist.push(entry);
   saveWatchlist(watchlist);
+  syncWatchToServer(entry);
   document.getElementById('alert-make').value = '';
   document.getElementById('alert-model').value = '';
   document.getElementById('alert-yr-min').value = '';
@@ -2233,10 +2235,79 @@ function addWatchItem() {
 
 function removeWatchItem(idx) {
   const watchlist = loadWatchlist();
-  watchlist.splice(idx, 1);
+  const [removed] = watchlist.splice(idx, 1);
   saveWatchlist(watchlist);
+  if (removed && removed.serverId && window.YSApi && YSApi.enabled()) {
+    YSApi.deleteWatch(removed.serverId).catch(() => { /* gone next sync */ });
+  }
   renderAlerts();
   saveWatchlistFile();
+}
+
+/* ===== Cloud alerts (API mode): server-side watches + real web push =====
+ * The local watchlist stays the editor; entries mirror to the account so the
+ * backend can push even when the app is closed. serverId on each local entry
+ * links the two. */
+function canCloudSync() {
+  const me = window.YSApi && YSApi.enabled() && YSApi.getMe();
+  return !!(me && me.tier === 'pro');
+}
+
+async function syncWatchToServer(entry) {
+  if (!canCloudSync() || entry.serverId) return;
+  try {
+    const w = {
+      make: entry.make || null, model: entry.model || null,
+      yearMin: entry.yrMin || null, yearMax: entry.yrMax || null,
+    };
+    // Scope the watch to the user's current search area when one is set —
+    // "near me" is almost always what a watch means.
+    if (activeZipCoords) {
+      w.lat = activeZipCoords.lat; w.lng = activeZipCoords.lng;
+      w.radiusMi = effectiveRadiusMi() || 100;
+    }
+    const res = await YSApi.createWatch(w);
+    entry.serverId = res.id;
+    const list = loadWatchlist();
+    const match = list.find(e => e.addedAt === entry.addedAt);
+    if (match) { match.serverId = res.id; saveWatchlist(list); }
+  } catch (e) { /* offline or lapsed Pro — retried on next auth change */ }
+}
+
+async function syncAllWatchesToServer() {
+  if (!canCloudSync()) return;
+  for (const entry of loadWatchlist()) await syncWatchToServer(entry);
+}
+
+async function updateCloudAlertsUi() {
+  const panel = document.getElementById('cloud-alerts-panel');
+  if (!panel) return;
+  const apiMode = window.YSApi && YSApi.enabled();
+  panel.style.display = apiMode ? '' : 'none';
+  // ntfy is the self-hosted fallback — hide it once real push is available.
+  const ntfy = document.getElementById('ntfy-panel');
+  if (ntfy) ntfy.style.display = apiMode ? 'none' : '';
+  if (!apiMode) return;
+  const me = YSApi.getMe();
+  const status = document.getElementById('cloud-alerts-status');
+  const enableBtn = document.getElementById('cloud-push-enable');
+  const testBtn = document.getElementById('cloud-push-test');
+  if (!me) {
+    status.textContent = 'Sign in (in the Pro sheet) to get alerts even when the app is closed.';
+    enableBtn.style.display = 'none'; testBtn.style.display = 'none';
+    return;
+  }
+  if (me.tier !== 'pro') {
+    status.textContent = 'Push alerts are part of Pro.';
+    enableBtn.style.display = 'none'; testBtn.style.display = 'none';
+    return;
+  }
+  const on = await YSApi.pushEnabled();
+  enableBtn.style.display = on ? 'none' : '';
+  testBtn.style.display = on ? '' : 'none';
+  status.textContent = on
+    ? 'This device gets a push when a watched car hits a yard \u2014 even with the app closed.'
+    : 'Watches sync to your account. Enable push on this device to get alerts with the app closed.';
 }
 
 function saveWatchlistFile() { /* watchlist lives in localStorage; nothing to write */ }
@@ -2396,7 +2467,38 @@ if (window.YSApi) {
       }
       applyProGates();
       if (liveLoaded) renderLive();
+      // Cloud alerts: mirror local watches to the account + refresh panel state.
+      syncAllWatchesToServer();
+      updateCloudAlertsUi();
     },
+  });
+  updateCloudAlertsUi();
+  const pushEnableBtn = document.getElementById('cloud-push-enable');
+  if (pushEnableBtn) pushEnableBtn.addEventListener('click', async () => {
+    pushEnableBtn.disabled = true;
+    const status = document.getElementById('cloud-alerts-status');
+    try {
+      await YSApi.enablePush();
+      track('push-enabled');
+      await updateCloudAlertsUi();
+    } catch (e) {
+      status.textContent = e.message || 'Could not enable push.';
+    } finally {
+      pushEnableBtn.disabled = false;
+    }
+  });
+  const pushTestBtn = document.getElementById('cloud-push-test');
+  if (pushTestBtn) pushTestBtn.addEventListener('click', async () => {
+    pushTestBtn.disabled = true;
+    const status = document.getElementById('cloud-alerts-status');
+    try {
+      const r = await YSApi.testPush();
+      status.textContent = `Test sent to ${r.sent} device${r.sent === 1 ? '' : 's'} — you should feel a buzz.`;
+    } catch (e) {
+      status.textContent = e.message || 'Test failed.';
+    } finally {
+      pushTestBtn.disabled = false;
+    }
   });
   // "Continue to payment" starts Stripe Checkout for whichever plan card is
   // selected. Not signed in yet → the sheet's sign-in form is right above.

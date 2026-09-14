@@ -11,3 +11,8 @@ ADMIN_SECRET = "dev-admin-secret-change-me"
 # endpoint's signing secret (or `stripe listen --print-secret`).
 STRIPE_SECRET_KEY="sk_test_..."
 STRIPE_WEBHOOK_SECRET="whsec_..."
+
+# Web Push: run `node scripts/gen-vapid.mjs` and paste the two values.
+VAPID_PUBLIC_KEY=""
+VAPID_PRIVATE_JWK=''
+VAPID_SUBJECT="mailto:you@example.com"

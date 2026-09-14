@@ -3,13 +3,14 @@
    app is always fresh when online but still opens (with the last-seen inventory)
    when cell signal dies between the rows of cars. */
 
-const CACHE = 'jh-v36';
+const CACHE = 'jh-v37';
 const SHELL = [
   './',
   './index.html',
   './styles.css',
   './data.js',
   './app.js',
+  './api.js',
   './privacy.html',
   './terms.html',
   './manifest.webmanifest',
@@ -52,4 +53,30 @@ self.addEventListener('fetch', (e) => {
       })
       .catch(() => caches.match(e.request, { ignoreSearch: true }))
   );
+});
+
+/* ===== Web Push (watchlist alerts) =====
+ * Payloads are JSON {title, body, url} encrypted end-to-end by the backend
+ * (backend/src/push.js) — the push service in the middle can't read them. */
+self.addEventListener('push', (e) => {
+  let data = {};
+  try { data = e.data ? e.data.json() : {}; } catch (err) { data = { body: e.data && e.data.text() }; }
+  e.waitUntil(self.registration.showNotification(data.title || 'YardScout', {
+    body: data.body || 'A watched car just hit the yard.',
+    icon: './icon-192.png',
+    badge: './icon-192.png',
+    tag: 'yardscout-alert',      // collapse repeats into one banner
+    data: { url: data.url || './' },
+  }));
+});
+
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  const target = new URL(e.notification.data && e.notification.data.url || './', self.location.href).href;
+  e.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then((wins) => {
+    for (const w of wins) {
+      if (w.url.startsWith(self.registration.scope) && 'focus' in w) return w.focus();
+    }
+    return clients.openWindow(target);
+  }));
 });

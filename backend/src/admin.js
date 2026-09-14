@@ -7,6 +7,7 @@
  */
 
 import { json, err, sha256Hex, isoNow, timingSafeEqual } from './util.js';
+import { dispatchAlerts } from './alerts.js';
 
 async function checkSecret(req, env, header, envKey) {
   const expected = env[envKey];
@@ -65,10 +66,10 @@ export async function handlePutShard(req, env, kind, key, variant) {
 /** Finalize an upload: store the directory + manifest, prune shards that are
  * no longer referenced (e.g. a yard closed). Readers switch to the new
  * directory within ~30s (isolate cache TTL in inventory.js). */
-export async function handleCommit(req, env) {
+export async function handleCommit(req, env, ctx) {
   let body;
   try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
-  const { directory, manifest } = body || {};
+  const { directory, manifest, newArrivals } = body || {};
   if (!directory || !Array.isArray(directory.yards) || !directory.scrapedAt || !manifest) {
     return err(400, 'bad_commit', 'Body must include {directory:{yards,scrapedAt,...}, manifest}.');
   }
@@ -86,7 +87,20 @@ export async function handleCommit(req, env) {
     await env.DB.prepare('DELETE FROM inv_shards WHERE kind = ?1 AND key = ?2 AND variant = ?3')
       .bind(o.kind, o.key, o.variant).run();
   }
-  return json({ ok: true, shards: keep.size, pruned: orphans.length, scrapedAt: directory.scrapedAt });
+  // Alert dispatch runs after the response goes out — the scan workflow
+  // shouldn't wait on (or fail because of) notification sends.
+  if (Array.isArray(newArrivals) && newArrivals.length && ctx) {
+    ctx.waitUntil(
+      dispatchAlerts(env, newArrivals)
+        .then((r) => console.log(`alerts: ${r.users} users notified, ${r.sends} sends`))
+        .catch((e) => console.log('alert dispatch failed:', e && e.message))
+    );
+  }
+
+  return json({
+    ok: true, shards: keep.size, pruned: orphans.length,
+    scrapedAt: directory.scrapedAt, arrivals: (newArrivals || []).length,
+  });
 }
 
 /* ===== Account administration ===== */

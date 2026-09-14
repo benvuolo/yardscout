@@ -35,6 +35,11 @@ EMAIL_FROM = "YardScout <onboarding@resend.dev>"
 # emailed. NEVER enable in production. (.dev.vars sets this for local dev.)
 DEV_MODE = "0"
 
+# Web Push (VAPID) — generate once with `node backend/scripts/gen-vapid.mjs`.
+# The public key is safe to commit; the private JWK is a secret (below).
+VAPID_PUBLIC_KEY = ""
+VAPID_SUBJECT = "mailto:change-me@example.com"
+
 # Stripe price IDs (create in the Stripe dashboard, then paste here):
 #   Pro    — recurring monthly price ($12.99/mo)
 #   Pass   — one-time price ($6.99, grants 72h of Pro)
@@ -47,4 +52,5 @@ STRIPE_PRICE_PASS = ""
 #   RESEND_API_KEY            — Resend API key for magic-link emails
 #   STRIPE_SECRET_KEY         — Stripe secret key (sk_test_... then sk_live_...)
 #   STRIPE_WEBHOOK_SECRET     — signing secret for the /v1/stripe/webhook endpoint
+#   VAPID_PRIVATE_JWK         — Web Push private key JSON (from gen-vapid.mjs)
 #   REVENUECAT_WEBHOOK_SECRET — (later) RevenueCat webhook authorization value

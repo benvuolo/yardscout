@@ -46,6 +46,14 @@ VINDEX_MOD = 64  # must match vindexBucket() in backend/src/util.js
 #   0=id 1=vin 2=year 3=make 4=model 5=row 6=dateAdded 7=yard 8=partSet
 #   9=maxValue 10=premium
 IDX_ID, IDX_VIN, IDX_YARD, IDX_PARTSET, IDX_MAXVALUE, IDX_PREMIUM = 0, 1, 7, 8, 9, 10
+IDX_YEAR, IDX_MAKE, IDX_MODEL, IDX_ROW, IDX_DATE = 2, 3, 4, 5, 6
+
+# Vehicles listed within this many days ride along in the commit as
+# "newArrivals" for the Worker's per-user alert dispatch. Generous on purpose:
+# the Worker dedupes per (user, vehicle), so overlap never double-alerts, but
+# a missed scan never silently drops an arrival either.
+ARRIVAL_WINDOW_DAYS = 3
+MAX_ARRIVALS = 4000
 
 # Free tier matches the app's existing free contract (see the card renderer in
 # docs/app.js): part names, rarity, trim caveat, and sell channel stay visible;
@@ -135,6 +143,40 @@ def build_shards(data: dict, max_yards: int | None = None) -> tuple[dict, dict]:
     return directory, shards
 
 
+def build_arrivals(data: dict) -> list[dict]:
+    """Recent arrivals expanded into self-contained dicts (with yard coords)
+    for the Worker's watch matching — it never has to parse shards."""
+    from datetime import datetime, timedelta, timezone
+
+    yards = data["yards"]
+    yf = data.get("yardFields", [])
+    yi = {name: i for i, name in enumerate(yf)}
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=ARRIVAL_WINDOW_DAYS)).strftime("%Y-%m-%d")
+
+    recent = [r for r in data["vehicles"] if str(r[IDX_DATE] or "") >= cutoff]
+    # When the window overflows the cap, keep the NEWEST arrivals — those are
+    # the ones nobody has been alerted about yet.
+    recent.sort(key=lambda r: str(r[IDX_DATE] or ""), reverse=True)
+
+    out: list[dict] = []
+    for row in recent[:MAX_ARRIVALS]:
+        yard = yards[row[IDX_YARD]]
+        out.append({
+            "id": row[IDX_ID],
+            "year": row[IDX_YEAR],
+            "make": row[IDX_MAKE],
+            "model": row[IDX_MODEL],
+            "row": row[IDX_ROW],
+            "dateAdded": str(row[IDX_DATE] or ""),
+            "location": yard[yi["location"]] if "location" in yi else None,
+            "city": yard[yi["city"]] if "city" in yi else None,
+            "state": yard[yi["state"]] if "state" in yi else None,
+            "lat": yard[yi["lat"]] if "lat" in yi else None,
+            "lng": yard[yi["lng"]] if "lng" in yi else None,
+        })
+    return out
+
+
 def _request(url: str, method: str, headers: dict, body: bytes | None, attempts: int = 4):
     last = None
     for attempt in range(attempts):
@@ -222,10 +264,13 @@ def main() -> int:
             print(f"  FAILED {key}: {msg}", file=sys.stderr)
         raise SystemExit(f"FATAL: {len(failed)} shard uploads failed — not committing")
 
+    arrivals = build_arrivals(data)
+    print(f"{len(arrivals)} arrivals in the last {ARRIVAL_WINDOW_DAYS} days ride along for alert dispatch")
+
     result = _request(
         f"{api}/v1/admin/inventory/commit", "POST",
         {**auth, "content-type": "application/json"},
-        canonical({"directory": directory, "manifest": manifest}),
+        canonical({"directory": directory, "manifest": manifest, "newArrivals": arrivals}),
     )
     print(f"Committed: {result.get('shards')} shards live, {result.get('pruned', 0)} pruned, "
           f"scrapedAt {result.get('scrapedAt')}")

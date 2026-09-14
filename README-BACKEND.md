@@ -229,7 +229,37 @@ Weekend Pass = the `pro` tier with a 72-hour expiry; subscriptions get a
 3-day grace past each period end so a flaky card retry doesn't lock a paying
 user out.
 
-### 6. Grant Pro to TestFlight testers (before payments exist)
+### 6. Push alerts (Web Push — the Pro killer feature)
+
+One-time key setup:
+
+```bash
+node backend/scripts/gen-vapid.mjs
+# paste VAPID_PUBLIC_KEY + VAPID_SUBJECT (your real email) into wrangler.toml [vars]
+npx wrangler secret put VAPID_PRIVATE_JWK   # paste the JSON line
+npm run deploy
+```
+
+How it works end to end: users add watches in the Alerts tab (synced to their
+account), tap "Enable alerts on this device," and every 6-hour scan's commit
+carries its recent arrivals to the Worker, which matches them against all Pro
+users' watches and sends one digest push per device — even with the app
+closed. Users with watches but no push device get an email digest instead
+(Resend). A vehicle only ever alerts a user once, and dead subscriptions are
+pruned automatically.
+
+Platform notes: on iPhone (iOS 16.4+) push requires the app to be **added to
+the home screen** first — the in-app copy walks users through it. Android and
+desktop work directly from the browser. The Workers free plan allows ~50
+outbound sends per commit; past a few dozen alert-heavy users, upgrade the
+Worker to the $5/mo paid plan (1,000 per request).
+
+Test it yourself after deploy: sign in on your phone (grant yourself Pro),
+add a watch for something common (e.g. make=Toyota), enable push, then tap
+"Send test" — you should feel the buzz. The real alert arrives after the next
+scheduled scan.
+
+### 7. Grant Pro to TestFlight testers (before payments exist)
 
 ```bash
 curl -X POST "$API/v1/admin/grant" \

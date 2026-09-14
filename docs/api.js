@@ -126,6 +126,56 @@ window.YSApi = (() => {
     location.href = data.url;
   }
 
+  /* ===== alerts: server-side watches + web push ===== */
+
+  async function jsonOrThrow(r) {
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) { const e = new Error(data.message || 'Request failed.'); e.code = r.status; throw e; }
+    return data;
+  }
+
+  const listWatches = () => api('/v1/watches').then(jsonOrThrow);
+  const createWatch = (w) => api('/v1/watches', {
+    method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(w),
+  }).then(jsonOrThrow);
+  const deleteWatch = (id) => api('/v1/watches/' + id, { method: 'DELETE' }).then(jsonOrThrow);
+  const testPush = () => api('/v1/push/test', { method: 'POST' }).then(jsonOrThrow);
+
+  /** Register this browser/device for push. Requires the PWA to be installed
+   * on iOS (16.4+); on Android/desktop it works from the browser directly. */
+  async function enablePush() {
+    if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+      throw new Error('This browser does not support push. On iPhone: add the app to your home screen first, then enable here.');
+    }
+    const perm = await Notification.requestPermission();
+    if (perm !== 'granted') throw new Error('Notifications were blocked — allow them in Settings to get alerts.');
+    const { publicKey } = await api('/v1/push/vapid').then(jsonOrThrow);
+    const reg = await navigator.serviceWorker.ready;
+    const sub = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: (() => {
+        const s = publicKey.replace(/-/g, '+').replace(/_/g, '/');
+        const bin = atob(s + '='.repeat((4 - s.length % 4) % 4));
+        const out = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+        return out;
+      })(),
+    });
+    await api('/v1/push/subscribe', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ subscription: sub.toJSON() }),
+    }).then(jsonOrThrow);
+    return true;
+  }
+
+  async function pushEnabled() {
+    try {
+      if (!('serviceWorker' in navigator) || !('PushManager' in window)) return false;
+      const reg = await navigator.serviceWorker.ready;
+      return !!(await reg.pushManager.getSubscription());
+    } catch (e) { return false; }
+  }
+
   /* ===== inventory ===== */
 
   function savedCenter() {
@@ -306,5 +356,9 @@ window.YSApi = (() => {
   }
 
   const getMe = () => currentMe;
-  return { enabled, base, init, me, getMe, requestLink, logout, checkout, portal, fetchInventory, getToken, setStatus };
+  return {
+    enabled, base, init, me, getMe, requestLink, logout, checkout, portal,
+    fetchInventory, getToken, setStatus,
+    listWatches, createWatch, deleteWatch, enablePush, pushEnabled, testPush,
+  };
 })();
