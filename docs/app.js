@@ -987,6 +987,18 @@ async function submitWaitlist() {
       headers: { 'Title': 'YardScout Pro signup', 'Tags': 'moneybag' },
     });
   } catch (e) { /* local log still has it */ }
+  // Durable copy: ntfy only caches ~12h, so when an API base is configured the
+  // signup also lands in the backend's waitlist table (works even before the
+  // full ?api=1 cutover — durability shouldn't wait for it).
+  try {
+    if (window.YSApi && YSApi.base()) {
+      await fetch(YSApi.base() + '/v1/waitlist', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, plan: entry.plan, price: String(entry.price), trigger: entry.trigger }),
+      });
+    }
+  } catch (e) { /* ntfy + local log still have it */ }
   localStorage.setItem('jh_waitlist_email', email);
   track('waitlist-submitted/' + selectedPlan);
   btn.disabled = false;
