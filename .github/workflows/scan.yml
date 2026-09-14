@@ -99,3 +99,20 @@ jobs:
             exit 0
           fi
           python scraper/push_inventory.py --file docs/data/inventory_live.json
+
+      # Owner alert on failure: the app tells USERS when data goes stale, but
+      # nothing told the owner the scan broke. Reuses the watchlist NTFY_TOPIC
+      # secret — same phone subscription, no extra setup.
+      - name: Alert owner on failure
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          if [ -z "$NTFY_TOPIC" ]; then
+            echo "NTFY_TOPIC not configured — cannot alert."
+            exit 0
+          fi
+          curl -s -X POST "https://ntfy.sh/$NTFY_TOPIC" \
+            -H "Title: YardScout scan FAILED" \
+            -H "Priority: high" -H "Tags: rotating_light" \
+            -d "The scheduled inventory scan failed. Inventory will go stale in ~24h if the next runs also fail. Logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
