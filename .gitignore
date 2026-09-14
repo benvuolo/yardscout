@@ -19,3 +19,8 @@ seen_finds.json
 
 # OS
 .DS_Store
+
+# Backend local artifacts
+backend/node_modules/
+backend/.wrangler/
+backend/test/.out/

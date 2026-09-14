@@ -1562,7 +1562,7 @@ function renderLive() {
           return `
             <li class="part-item" style="flex-wrap:wrap;">
               <span class="part-name">${p.name}</span>
-              <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>${trimMark}${fitsMark}
+              ${trimMark}${fitsMark}
               <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">$28 list</span>
               <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">sells $250&ndash;$600</span>
               ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
@@ -1574,7 +1574,7 @@ function renderLive() {
         return `
           <li class="part-item" style="flex-wrap:wrap;">
             <span class="part-name">${p.name}</span>
-            <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>${trimMark}${fitsMark}
+            ${trimMark}${fitsMark}
             ${costHtml}
             <span class="part-price" title="Typical eBay sold range (national), working condition">sells ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
             ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
@@ -2136,7 +2136,7 @@ function renderAlerts() {
                 ${v.topParts.slice(0, 5).map(p => `
                   <li class="part-item">
                     <span class="part-name">${p.name}</span>
-                    <span class="part-rarity ${rarityClass(p.rarity)}">${p.rarity}</span>
+                    
                     ${isPro()
                       ? `<span class="part-price">${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>`
                       : `<span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('alerts-value')">$100&ndash;$400</span>`}
