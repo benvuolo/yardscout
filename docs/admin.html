@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>YardScout — Admin</title>
+<style>
+  /* Matches the app's paper/ink industrial theme (docs/styles.css):
+     flat surfaces, hairline borders, squared corners, safety-orange accent,
+     mono data voice. Self-contained on purpose — no external assets. */
+  :root {
+    --bg: #efece4; --surface: #faf8f2; --surface2: #eae6da;
+    --border: #d8d2c2; --border-dark: #a89f8a;
+    --text: #1b1913; --text-dim: #5f594a;
+    --accent: #bf4a08; --accent-hover: #a03d06; --accent-soft: rgba(191, 74, 8, 0.08);
+    --green: #3f6c33; --green-soft: rgba(63, 108, 51, 0.11);
+    --red: #b03429; --red-soft: rgba(176, 52, 41, 0.09);
+    --radius: 4px; --radius-sm: 2px;
+    --font-ui: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+    --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-ui); background: var(--bg); color: var(--text);
+    min-height: 100vh; -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums; padding: 1rem;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  header { display: flex; align-items: baseline; gap: 0.6rem; margin: 0.5rem 0 1rem; }
+  h1 { font-size: 1.05rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+  h1 .tag {
+    font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 500;
+    color: var(--accent); border: 1px solid var(--accent); padding: 0.1rem 0.35rem;
+    border-radius: var(--radius-sm); vertical-align: 2px; margin-left: 0.4rem;
+  }
+  .warn {
+    background: var(--red-soft); border: 1px solid var(--red); color: var(--text);
+    border-radius: var(--radius); padding: 0.6rem 0.75rem; font-size: 0.8125rem;
+    line-height: 1.5; margin-bottom: 1rem;
+  }
+  .panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 0.9rem; margin-bottom: 1rem;
+  }
+  .panel h2 {
+    font-size: 0.75rem; font-weight: 800; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.7rem;
+  }
+  label { display: block; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--text-dim); margin: 0 0 0.25rem; }
+  input, select {
+    width: 100%; font: inherit; font-size: 0.875rem; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm); padding: 0.55rem 0.6rem; outline: none;
+  }
+  input:focus { border-color: var(--accent); }
+  .row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .row > div { flex: 1 1 180px; min-width: 0; margin-bottom: 0.6rem; }
+  .btn {
+    font: inherit; font-size: 0.8125rem; font-weight: 700; cursor: pointer;
+    border: 1px solid var(--border-dark); background: var(--surface2); color: var(--text);
+    border-radius: var(--radius-sm); padding: 0.55rem 0.9rem;
+  }
+  .btn:hover { border-color: var(--text); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn-danger { color: var(--red); border-color: var(--red); background: var(--red-soft); }
+  .btn:disabled { opacity: 0.5; cursor: wait; }
+  .btn-sm { padding: 0.3rem 0.55rem; font-size: 0.75rem; }
+  .status { font-family: var(--font-mono); font-size: 0.75rem; margin-top: 0.5rem; min-height: 1.1em; }
+  .status.ok { color: var(--green); }
+  .status.err { color: var(--red); }
+  .muted { color: var(--text-dim); font-size: 0.75rem; line-height: 1.5; }
+  .conn-line { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
+  .conn-line code {
+    font-family: var(--font-mono); font-size: 0.75rem; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.2rem 0.4rem;
+    word-break: break-all;
+  }
+  /* Users list: table on wide screens, stacked cards on phones. */
+  table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+  th { text-align: left; font-size: 0.6563rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-dim); padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--border-dark); }
+  td { padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  td.mono, .mono { font-family: var(--font-mono); font-size: 0.75rem; }
+  .tier {
+    font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 700;
+    padding: 0.1rem 0.4rem; border-radius: var(--radius-sm); white-space: nowrap;
+  }
+  .tier-pro { color: var(--green); background: var(--green-soft); border: 1px solid var(--green); }
+  .tier-free { color: var(--text-dim); background: var(--surface2); border: 1px solid var(--border-dark); }
+  .tier-expired { color: var(--red); background: var(--red-soft); border: 1px solid var(--red); }
+  .cardlist { display: none; }
+  @media (max-width: 640px) {
+    body { padding: 0.6rem; }
+    table { display: none; }
+    .cardlist { display: block; }
+    .ucard { border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg); padding: 0.6rem; margin-bottom: 0.6rem; }
+    .ucard .email { font-weight: 700; font-size: 0.875rem; word-break: break-all; }
+    .ucard .meta { font-family: var(--font-mono); font-size: 0.6875rem;
+      color: var(--text-dim); margin: 0.3rem 0; line-height: 1.6; }
+    .ucard .actions { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>YardScout <span class="tag">ADMIN</span></h1></header>
+
+  <div class="warn">
+    <strong>Heads up:</strong> anyone who has the admin secret can grant or revoke Pro
+    for any account. Treat it like a password: only open this page on your own device,
+    don't share screenshots of it, and rotate the secret
+    (<span class="mono">wrangler secret put ADMIN_SECRET</span>) if you think it leaked.
+    The secret is stored only in this browser's localStorage — never in this file.
+  </div>
+
+  <!-- ============ CONNECTION (API base + secret) ============ -->
+  <div class="panel" id="setup-panel">
+    <h2>Connect</h2>
+    <div class="row">
+      <div>
+        <label for="api-base">API base URL</label>
+        <input type="url" id="api-base" placeholder="https://yardscout-api.<you>.workers.dev" autocomplete="off">
+      </div>
+      <div>
+        <label for="admin-secret">Admin secret</label>
+        <input type="password" id="admin-secret" placeholder="x-admin-secret value" autocomplete="off">
+      </div>
+    </div>
+    <div class="row">
+      <div style="flex:0 0 auto;"><button type="button" class="btn btn-primary" id="connect-btn">Connect</button></div>
+    </div>
+    <p class="muted">Both values are kept in this browser's localStorage so you only enter them once per device.</p>
+    <div class="status" id="setup-status"></div>
+  </div>
+
+  <div class="panel" id="conn-panel" style="display:none;">
+    <h2>Connected</h2>
+    <div class="conn-line">
+      <code id="conn-api"></code>
+      <span class="mono muted">secret: saved &#x2713;</span>
+      <button type="button" class="btn btn-sm" id="forget-btn" title="Remove the API URL and secret from this browser">Forget credentials</button>
+    </div>
+  </div>
+
+  <!-- ============ GRANT ============ -->
+  <div class="panel" id="grant-panel" style="display:none;">
+    <h2>Grant Pro</h2>
+    <div class="row">
+      <div style="flex:2 1 220px;">
+        <label for="grant-email">Email</label>
+        <input type="email" id="grant-email" inputmode="email" placeholder="tester@example.com" autocomplete="off">
+      </div>
+      <div>
+        <label for="grant-note">Note (optional)</label>
+        <input type="text" id="grant-note" placeholder="e.g. TestFlight tester" autocomplete="off">
+      </div>
+      <div style="flex:0 1 170px;">
+        <label for="grant-expiry">Expires (optional)</label>
+        <input type="date" id="grant-expiry">
+      </div>
+    </div>
+    <div class="row">
+      <div style="flex:0 0 auto;"><button type="button" class="btn btn-primary" id="grant-btn">Grant Pro</button></div>
+    </div>
+    <p class="muted">Grants work even before the person has signed in — the tier is waiting when they first log in. Expiry is end-of-day UTC on the chosen date.</p>
+    <div class="status" id="grant-status"></div>
+  </div>
+
+  <!-- ============ USERS ============ -->
+  <div class="panel" id="users-panel" style="display:none;">
+    <h2 style="display:flex;justify-content:space-between;align-items:center;">
+      <span>Users &amp; grants <span class="mono" id="user-count"></span></span>
+      <button type="button" class="btn btn-sm" id="refresh-btn">Refresh</button>
+    </h2>
+    <table id="users-table">
+      <thead><tr>
+        <th>Email</th><th>Tier</th><th>Expires</th><th>Note</th><th>Created</th><th>Last login</th><th></th>
+      </tr></thead>
+      <tbody id="users-tbody"></tbody>
+    </table>
+    <div class="cardlist" id="users-cards"></div>
+    <div class="status" id="users-status"></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+/* Storage keys are scoped to the admin page. The secret is only protection —
+ * see the warning above. Never bake it into this file. */
+const K_API = 'ys_admin_api_base';
+const K_SECRET = 'ys_admin_secret';
+
+const $ = (id) => document.getElementById(id);
+const apiBase = () => (localStorage.getItem(K_API) || '').replace(/\/+$/, '');
+const secret = () => localStorage.getItem(K_SECRET) || '';
+const connected = () => !!(apiBase() && secret());
+
+function setStatus(id, msg, cls) {
+  const el = $(id);
+  el.textContent = msg || '';
+  el.className = 'status' + (cls ? ' ' + cls : '');
+}
+
+async function api(path, opts = {}) {
+  const resp = await fetch(apiBase() + path, {
+    ...opts,
+    headers: { 'x-admin-secret': secret(), ...(opts.headers || {}) },
+  });
+  let body = null;
+  try { body = await resp.json(); } catch (e) { /* non-JSON error page */ }
+  if (!resp.ok) {
+    const msg = (body && (body.message || body.error)) || ('HTTP ' + resp.status);
+    throw new Error(msg);
+  }
+  return body;
+}
+
+/* ---------- connect / forget ---------- */
+function syncPanels() {
+  const on = connected();
+  $('setup-panel').style.display = on ? 'none' : '';
+  $('conn-panel').style.display = on ? '' : 'none';
+  $('grant-panel').style.display = on ? '' : 'none';
+  $('users-panel').style.display = on ? '' : 'none';
+  if (on) $('conn-api').textContent = apiBase();
+}
+
+$('connect-btn').addEventListener('click', async () => {
+  const base = $('api-base').value.trim().replace(/\/+$/, '');
+  const sec = $('admin-secret').value.trim();
+  if (!/^https?:\/\//.test(base)) { setStatus('setup-status', 'API base must be a full https:// URL.', 'err'); return; }
+  if (!sec) { setStatus('setup-status', 'Admin secret is required.', 'err'); return; }
+  localStorage.setItem(K_API, base);
+  localStorage.setItem(K_SECRET, sec);
+  $('connect-btn').disabled = true;
+  setStatus('setup-status', 'Checking credentials…');
+  try {
+    await api('/v1/admin/users');
+    setStatus('setup-status', '');
+    $('admin-secret').value = '';
+    syncPanels();
+    loadUsers();
+  } catch (e) {
+    localStorage.removeItem(K_SECRET); // don't keep a bad secret around
+    setStatus('setup-status', 'Failed: ' + e.message, 'err');
+  }
+  $('connect-btn').disabled = false;
+});
+
+$('forget-btn').addEventListener('click', () => {
+  localStorage.removeItem(K_API);
+  localStorage.removeItem(K_SECRET);
+  $('users-tbody').innerHTML = '';
+  $('users-cards').innerHTML = '';
+  syncPanels();
+  setStatus('setup-status', 'Credentials removed from this browser.', 'ok');
+});
+
+/* ---------- grant / revoke ---------- */
+async function grant(email, tier, note, expiresAt, statusId) {
+  setStatus(statusId, (tier === 'pro' ? 'Granting…' : 'Revoking…'));
+  const payload = { email, tier, note: note || '' };
+  if (expiresAt) payload.expires_at = expiresAt;
+  await api('/v1/admin/grant', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  setStatus(statusId, (tier === 'pro' ? 'Pro granted to ' : 'Reverted to free: ') + email, 'ok');
+  loadUsers();
+}
+
+$('grant-btn').addEventListener('click', async () => {
+  const email = $('grant-email').value.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setStatus('grant-status', 'Enter a valid email.', 'err'); return; }
+  const note = $('grant-note').value.trim();
+  const d = $('grant-expiry').value; // yyyy-mm-dd or ''
+  const expiresAt = d ? d + 'T23:59:59Z' : null;
+  $('grant-btn').disabled = true;
+  try {
+    await grant(email, 'pro', note, expiresAt, 'grant-status');
+    $('grant-email').value = ''; $('grant-note').value = ''; $('grant-expiry').value = '';
+  } catch (e) {
+    setStatus('grant-status', 'Failed: ' + e.message, 'err');
+  }
+  $('grant-btn').disabled = false;
+});
+
+/* ---------- users list ---------- */
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return isNaN(d) ? esc(iso) : d.toLocaleDateString(undefined, { year: '2-digit', month: 'short', day: 'numeric' });
+}
+function tierChip(u) {
+  const expired = u.tier_expires_at && new Date(u.tier_expires_at).getTime() < Date.now();
+  if (u.tier === 'pro' && expired) return '<span class="tier tier-expired">PRO · EXPIRED</span>';
+  if (u.tier === 'pro') return '<span class="tier tier-pro">PRO</span>';
+  return '<span class="tier tier-free">FREE</span>';
+}
+
+async function loadUsers() {
+  setStatus('users-status', 'Loading…');
+  let data;
+  try {
+    data = await api('/v1/admin/users');
+  } catch (e) {
+    setStatus('users-status', 'Failed: ' + e.message, 'err');
+    return;
+  }
+  const users = data.users || [];
+  $('user-count').textContent = '(' + users.length + ')';
+  setStatus('users-status', users.length ? '' : 'No users yet.');
+
+  $('users-tbody').innerHTML = users.map((u, i) => `
+    <tr>
+      <td class="mono">${esc(u.email)}</td>
+      <td>${tierChip(u)}</td>
+      <td class="mono">${fmtDate(u.tier_expires_at)}</td>
+      <td>${esc(u.note || '')}</td>
+      <td class="mono">${fmtDate(u.created_at)}</td>
+      <td class="mono">${fmtDate(u.last_login_at)}</td>
+      <td>${u.tier === 'pro'
+        ? `<button type="button" class="btn btn-sm btn-danger" data-revoke="${esc(u.email)}">Revoke</button>`
+        : `<button type="button" class="btn btn-sm" data-grant="${esc(u.email)}">Grant Pro</button>`}</td>
+    </tr>`).join('');
+
+  $('users-cards').innerHTML = users.map((u) => `
+    <div class="ucard">
+      <div class="email">${esc(u.email)}</div>
+      <div class="meta">
+        expires ${fmtDate(u.tier_expires_at)} · created ${fmtDate(u.created_at)} · last login ${fmtDate(u.last_login_at)}
+        ${u.note ? '<br>note: ' + esc(u.note) : ''}
+      </div>
+      <div class="actions">
+        ${tierChip(u)}
+        ${u.tier === 'pro'
+          ? `<button type="button" class="btn btn-sm btn-danger" data-revoke="${esc(u.email)}">Revoke</button>`
+          : `<button type="button" class="btn btn-sm" data-grant="${esc(u.email)}">Grant Pro</button>`}
+      </div>
+    </div>`).join('');
+}
+
+/* Row buttons (delegated so refresh doesn't rebind). Revoke = grant tier:free,
+ * which the backend records in the entitlement_events audit trail. */
+document.addEventListener('click', async (e) => {
+  const revoke = e.target.closest('[data-revoke]');
+  const grantBtn = e.target.closest('[data-grant]');
+  if (!revoke && !grantBtn) return;
+  const email = revoke ? revoke.dataset.revoke : grantBtn.dataset.grant;
+  const tier = revoke ? 'free' : 'pro';
+  if (revoke && !confirm('Revoke Pro for ' + email + '?')) return;
+  e.target.disabled = true;
+  try {
+    await grant(email, tier, revoke ? 'revoked via admin page' : 'granted via admin page', null, 'users-status');
+  } catch (err2) {
+    setStatus('users-status', 'Failed: ' + err2.message, 'err');
+    e.target.disabled = false;
+  }
+});
+
+$('refresh-btn').addEventListener('click', loadUsers);
+
+/* ---------- boot ---------- */
+// If a service worker from the main app controls this scope, make sure this
+// page is never served stale: sw.js bypasses admin.html by design (belt),
+// and we don't register anything here (suspenders).
+syncPanels();
+if (connected()) loadUsers();
+</script>
+</body>
+</html>
