@@ -666,21 +666,6 @@
   }
   .part-item:last-child { border-bottom: none; }
   .part-name { flex: 1; min-width: 130px; font-weight: 600; line-height: 1.35; }
-  .part-rarity {
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    font-weight: 700;
-    padding: 0.14rem 0.42rem;
-    border-radius: var(--radius-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-  }
-  /* Rarity ladder: one warm accent for the top tier, neutrals below. */
-  .rarity-legendary { background: var(--gold-soft); color: var(--gold); border: 1px solid var(--gold-border); }
-  .rarity-epic { background: var(--accent-soft); color: var(--accent); }
-  .rarity-rare { background: var(--surface3); color: var(--text); }
-  .rarity-uncommon { background: var(--surface3); color: var(--text-dim); }
   .part-cost { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-dim); white-space: nowrap; }
   .part-price { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--text); white-space: nowrap; }
   .part-profit { white-space: nowrap; }
