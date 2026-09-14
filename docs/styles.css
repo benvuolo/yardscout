@@ -303,6 +303,22 @@
   }
   .zip-banner-skip:hover { color: var(--text); }
 
+  /* One-time first-run explainer */
+  .first-run-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border-dark, var(--border));
+    border-left: 3px solid var(--accent);
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+  .first-run-note p { margin: 0; flex: 1; }
+  .first-run-note .btn { flex-shrink: 0; }
+
   /* ---------- Stat chips ---------- */
   .stats-bar {
     display: flex;

@@ -76,6 +76,16 @@
       <button type="button" class="btn gps-btn" id="zip-banner-gps"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Or use my location</button>
       <button type="button" class="zip-banner-skip" id="zip-banner-skip">Nationwide browsing is a Pro feature &rarr;</button>
     </div>
+    <!-- One-time honesty explainer: ghost inventory and estimate caveats live
+         in the footer and inside expanded cards, but a first-time user can
+         browse ranges without ever meeting them — so say it once, up front. -->
+    <div class="first-run-note" id="first-run-note" style="display:none;">
+      <p><strong>How to read this:</strong> yards list whole cars, not parts. We flag what each car
+      <em>came from the factory with</em> &mdash; by the time you visit, some parts may already be
+      pulled. Values are typical eBay sold ranges for working parts, never a promise. Newer
+      arrivals are your best odds.</p>
+      <button type="button" class="btn" id="first-run-dismiss">Got it</button>
+    </div>
     <!-- Skeleton placeholders paint immediately and are replaced by the first
          render once the inventory JSON arrives. -->
     <div class="stats-bar" id="live-stats-bar">
