@@ -1210,7 +1210,7 @@ UNOBTANIUM_DB = {
             {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 350, "high": 800, "cost": 55, "yr_min": 2015},
             {"name": "MMI / Virtual Cockpit Module", "rarity": "Epic", "low": 200, "high": 550, "cost": 42, "yr_min": 2015},
             {"name": "Bang & Olufsen / Premium Audio", "rarity": "Rare", "low": 180, "high": 450, "cost": 38, "trim": ["S3", "Prestige", "Premium Plus"]},
-            {"name": "Quattro / Haldex Differential (rear)", "rarity": "Rare", "low": 150, "high": 400, "cost": 28, "yr_min": 2006},
+            {"name": "Quattro / Haldex Differential (rear)", "rarity": "Rare", "low": 150, "high": 400, "cost": 28, "yr_min": 2006, "drive": ["awd"]},
         ],
     },
     "audi s3": {
@@ -1252,7 +1252,7 @@ UNOBTANIUM_DB = {
         "year_range": (2004, 2024),
         "top_parts": [
             {"name": "OEM LED Headlights (pair)", "rarity": "Epic", "low": 500, "high": 1150, "cost": 65, "yr_min": 2010},
-            {"name": "Sport Differential / Quattro Controller", "rarity": "Epic", "low": 400, "high": 950, "cost": 45, "yr_min": 2010},
+            {"name": "Sport Differential / Quattro Controller", "rarity": "Epic", "low": 400, "high": 950, "cost": 45, "yr_min": 2010, "option": True},
             {"name": "B&O / Premium Audio", "rarity": "Rare", "low": 220, "high": 550, "cost": 38, "yr_min": 2010},
             {"name": "S Sport Seats (pair)", "rarity": "Rare", "low": 450, "high": 1000, "cost": 58, "yr_min": 2010},
         ],
@@ -1283,7 +1283,7 @@ UNOBTANIUM_DB = {
         "year_range": (2008, 2024),
         "top_parts": [
             {"name": "OEM LED Headlights (pair)", "rarity": "Epic", "low": 500, "high": 1100, "cost": 62, "yr_min": 2008},
-            {"name": "Sport Differential / Drive Controller", "rarity": "Epic", "low": 380, "high": 900, "cost": 42, "yr_min": 2012},
+            {"name": "Sport Differential / Drive Controller", "rarity": "Epic", "low": 380, "high": 900, "cost": 42, "yr_min": 2012, "option": True},
             {"name": "B&O Sound System", "rarity": "Rare", "low": 240, "high": 580, "cost": 38, "yr_min": 2008},
             {"name": "S Sport Seats (pair)", "rarity": "Rare", "low": 480, "high": 1050, "cost": 55, "yr_min": 2008},
         ],
@@ -1429,7 +1429,7 @@ UNOBTANIUM_DB = {
         "year_range": (2014, 2024),
         "top_parts": [
             {"name": "OEM LED / Matrix Headlights (pair)", "rarity": "Epic", "low": 550, "high": 1250, "cost": 65, "yr_min": 2014},
-            {"name": "Sport Differential / Adaptive Damper Module", "rarity": "Epic", "low": 450, "high": 1000, "cost": 52, "yr_min": 2014},
+            {"name": "Sport Differential / Adaptive Damper Module", "rarity": "Epic", "low": 450, "high": 1000, "cost": 52, "yr_min": 2014, "option": True},
             {"name": "B&O / Premium Audio", "rarity": "Rare", "low": 260, "high": 620, "cost": 40, "yr_min": 2014},
             {"name": "S Sport Seats (pair)", "rarity": "Rare", "low": 500, "high": 1100, "cost": 58, "yr_min": 2014},
         ],
@@ -1805,7 +1805,7 @@ UNOBTANIUM_DB = {
             {"name": "OEM LED Headlights (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "yr_min": 2015},
             {"name": "Discover Pro / MIB Touchscreen", "rarity": "Epic", "low": 250, "high": 550, "cost": 50, "yr_min": 2015},
             {"name": "Fender / Dynaudio Amp + Sub", "rarity": "Rare", "low": 150, "high": 350, "cost": 35},
-            {"name": "GTI Recaro Seats (pair)", "rarity": "Epic", "low": 500, "high": 1100, "cost": 75},
+            {"name": "GTI Recaro Seats (pair)", "rarity": "Epic", "low": 500, "high": 1100, "cost": 75, "option": True},
         ],
     },
     "jetta": {
@@ -2038,11 +2038,11 @@ UNOBTANIUM_DB = {
         "year_range": (2003, 2008),
         "top_parts": [
             {"name": "VQ35DE Intake/Plenum/Accessories (350Z twin)", "rarity": "Epic", "low": 100, "high": 300, "cost": 20},
-            {"name": "Brembo Calipers (set, sport pkg)", "rarity": "Legendary", "low": 300, "high": 700, "cost": 55},
+            {"name": "Brembo Calipers (set, sport pkg)", "rarity": "Legendary", "low": 300, "high": 700, "cost": 55, "option": True},
             {"name": "6MT Shifter + Pedal Assembly", "rarity": "Epic", "low": 100, "high": 250, "cost": 15},
             {"name": "Coupe Seats (pair)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
             {"name": "OEM HID Headlights", "rarity": "Rare", "low": 150, "high": 350, "cost": 25},
-            {"name": "Viscous LSD Rear Diff", "rarity": "Epic", "low": 150, "high": 400, "cost": 50},
+            {"name": "Viscous LSD Rear Diff", "rarity": "Epic", "low": 150, "high": 400, "cost": 50, "option": True},
         ],
     },
     "g37": {
@@ -2050,7 +2050,7 @@ UNOBTANIUM_DB = {
         "make": "Infiniti",
         "year_range": (2008, 2015),
         "top_parts": [
-            {"name": "Sport Pkg Brembo/Akebono Calipers (set)", "rarity": "Epic", "low": 250, "high": 600, "cost": 55},
+            {"name": "Sport Pkg Brembo/Akebono Calipers (set)", "rarity": "Epic", "low": 250, "high": 600, "cost": 55, "option": True},
             {"name": "OEM HID Headlights", "rarity": "Rare", "low": 150, "high": 400, "cost": 25},
             {"name": "Coupe Seats (pair)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
             {"name": "Bose Amp + Speakers", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
@@ -2081,7 +2081,7 @@ UNOBTANIUM_DB = {
         "make": "Infiniti",
         "year_range": (1997, 2003),
         "top_parts": [
-            {"name": "Rear LSD Differential", "rarity": "Epic", "low": 150, "high": 350, "cost": 50},
+            {"name": "Rear LSD Differential", "rarity": "Epic", "low": 150, "high": 350, "cost": 50, "option": True},
             {"name": "Front Seats (leather, heated)", "rarity": "Rare", "low": 100, "high": 250, "cost": 40},
             {"name": "OEM Roof Rack", "rarity": "Rare", "low": 60, "high": 150, "cost": 15},
         ],
@@ -2138,7 +2138,7 @@ UNOBTANIUM_DB = {
         "year_range": (1990, 2012),
         "top_parts": [
             {"name": "4G63T Turbo Drivetrain Parts (1G/2G DSM)", "rarity": "Legendary", "low": 200, "high": 600, "cost": 40, "yr_max": 1999},
-            {"name": "AWD Rear Diff + Driveshaft (GSX)", "rarity": "Legendary", "low": 200, "high": 500, "cost": 60, "yr_max": 1999},
+            {"name": "AWD Rear Diff + Driveshaft (GSX)", "rarity": "Legendary", "low": 200, "high": 500, "cost": 60, "yr_max": 1999, "drive": ["awd"]},
             {"name": "OEM Seats (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 40},
             {"name": "Sunroof / Spoiler", "rarity": "Rare", "low": 60, "high": 175, "cost": 15, "option": True},
         ],
@@ -2208,7 +2208,7 @@ UNOBTANIUM_DB = {
         "make": "Mazda",
         "year_range": (2004, 2011),
         "top_parts": [
-            {"name": "Rear Diff (Torsen LSD — Miata swap favorite)", "rarity": "Epic", "low": 200, "high": 450, "cost": 50},
+            {"name": "Rear Diff (Torsen LSD — Miata swap favorite)", "rarity": "Epic", "low": 200, "high": 450, "cost": 50, "manual": True},
             {"name": "Front Seats (pair, leather/Recaro)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40},
             {"name": "OEM HID Headlights", "rarity": "Rare", "low": 120, "high": 300, "cost": 25},
             {"name": "Ignition Coils (set, low-mile)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 10},
@@ -2604,7 +2604,7 @@ UNOBTANIUM_DB = {
         "make": "Isuzu",
         "year_range": (1991, 2004),
         "top_parts": [
-            {"name": "4x4 Transfer Case / Diff Parts", "rarity": "Rare", "low": 80, "high": 250, "cost": 40},
+            {"name": "4x4 Transfer Case / Diff Parts", "rarity": "Rare", "low": 80, "high": 250, "cost": 40, "drive": ["4wd"]},
             {"name": "Rear Gate + Glass", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 20},
         ],
     },
@@ -2613,7 +2613,7 @@ UNOBTANIUM_DB = {
         "make": "Honda",
         "year_range": (1994, 2002),
         "top_parts": [
-            {"name": "4x4 Transfer Case / Diff Parts", "rarity": "Rare", "low": 80, "high": 250, "cost": 40},
+            {"name": "4x4 Transfer Case / Diff Parts", "rarity": "Rare", "low": 80, "high": 250, "cost": 40, "drive": ["4wd"]},
         ],
     },
     "baja": {
