@@ -33,16 +33,20 @@ import {
   handleWaitlistJoin, handleWaitlistList,
 } from './admin.js';
 import { handleCheckout, handlePortal, handleStripeWebhook } from './billing.js';
+import {
+  handleWatchesList, handleWatchCreate, handleWatchDelete,
+  handleVapidKey, handlePushSubscribe, handlePushUnsubscribe, handlePushTest,
+} from './alerts.js';
 
 export default {
-  async fetch(req, env) {
+  async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const cors = corsHeaders(env, req.headers.get('origin'));
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
 
     let resp;
     try {
-      resp = await route(req, env, url);
+      resp = await route(req, env, url, ctx);
     } catch (e) {
       console.log('unhandled error:', e && (e.stack || e.message || e));
       resp = err(500, 'internal', 'Internal error.');
@@ -53,7 +57,7 @@ export default {
   },
 };
 
-async function route(req, env, url) {
+async function route(req, env, url, ctx) {
   const path = url.pathname.replace(/\/+$/, '') || '/';
   const method = req.method;
   const ip = clientIp(req);
@@ -100,6 +104,16 @@ async function route(req, env, url) {
     return handleWaitlistJoin(req, env);
   }
 
+  /* ----- alerts: watches + web push (session-scoped) ----- */
+  if (path === '/v1/watches' && method === 'GET') return handleWatchesList(req, env);
+  if (path === '/v1/watches' && method === 'POST') return handleWatchCreate(req, env);
+  let wm = path.match(/^\/v1\/watches\/([0-9a-f-]{36})$/);
+  if (wm && method === 'DELETE') return handleWatchDelete(req, env, wm[1]);
+  if (path === '/v1/push/vapid' && method === 'GET') return handleVapidKey(env);
+  if (path === '/v1/push/subscribe' && method === 'POST') return handlePushSubscribe(req, env);
+  if (path === '/v1/push/unsubscribe' && method === 'POST') return handlePushUnsubscribe(req, env);
+  if (path === '/v1/push/test' && method === 'POST') return handlePushTest(req, env);
+
   /* ----- billing (Stripe) ----- */
   if (method === 'POST' && path === '/v1/billing/checkout') return handleCheckout(req, env);
   if (method === 'POST' && path === '/v1/billing/portal') return handlePortal(req, env);
@@ -114,7 +128,7 @@ async function route(req, env, url) {
     if (method === 'PUT' && m) {
       return handlePutShard(req, env, decodeURIComponent(m[1]), decodeURIComponent(m[2]), decodeURIComponent(m[3]));
     }
-    if (method === 'POST' && path === '/v1/admin/inventory/commit') return handleCommit(req, env);
+    if (method === 'POST' && path === '/v1/admin/inventory/commit') return handleCommit(req, env, ctx);
   }
 
   /* ----- admin (x-admin-secret) ----- */
