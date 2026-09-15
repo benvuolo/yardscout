@@ -314,6 +314,7 @@ const ICON = {
   pin: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
   heart: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.46 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.04 3 5.5l7 7Z"/></svg>',
   copy: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+  bell: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
   check: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
   x: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>',
   lock: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
@@ -1217,6 +1218,15 @@ document.getElementById('saved-list').addEventListener('click', e => {
   renderLive();
 });
 document.getElementById('live-grid').addEventListener('click', e => {
+  const watch = e.target.closest('.watch-btn');
+  if (watch) {
+    e.preventDefault();
+    // One-tap watch is a Pro convenience: free users build watches in the
+    // Alerts tab (their radius tops out anyway), Pro watches from any card.
+    if (!isPro()) { openUpgradeSheet('watch-card'); return; }
+    watchFromCard(watch);
+    return;
+  }
   const share = e.target.closest('.share-btn');
   if (share) {
     e.preventDefault();
@@ -1720,6 +1730,7 @@ function renderLive() {
           <div class="car-badges">
             ${isConfirmedManual(v) ? '<span class="badge badge-manual" title="Manual transmission, confirmed from this car\u2019s VIN decode \u2014 never inferred">Manual</span>' : ''}
             ${statusBadge}
+            <button type="button" class="watch-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Already on your watchlist' : 'Watch this model — get alerted when another shows up'}">${ICON.bell}</button>
             <button type="button" class="share-btn" data-vkey="${vehicleKey(v)}" title="Share this find">${ICON.share}</button>
             <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${vehicleKey(v)}" title="Save for your yard visit">${ICON.heart}</button>
           </div>
@@ -2104,6 +2115,11 @@ function watchlistMatches(entry, v) {
   if (entry.yrMin && v.year < entry.yrMin) return false;
   if (entry.yrMax && v.year > entry.yrMax) return false;
   if (entry.matchOnly && !v.hasMatch) return false;
+  // Radius-scoped watches (center snapshotted when the watch was created).
+  if (entry.radiusMi && entry.lat != null && entry.lng != null) {
+    if (v.lat == null || v.lng == null) return false;
+    if (haversineMiles(entry.lat, entry.lng, v.lat, v.lng) > entry.radiusMi) return false;
+  }
   return true;
 }
 
@@ -2132,11 +2148,14 @@ function renderAlerts() {
       const yrLabel = e.yrMin || e.yrMax
         ? (e.yrMin || 'any') + '–' + (e.yrMax || 'any')
         : 'All years';
+      // Legacy watches (no radiusMi key) predate radius scoping — say nothing.
+      const radLabel = !('radiusMi' in e) ? ''
+        : e.radiusMi ? ` &middot; within ${e.radiusMi} mi` : ' &middot; anywhere';
       const hitCount = r.hits.length;
       return `<div class="watchlist-item">
         <div class="wl-info">
           <span class="wl-name">${label}</span>
-          <span class="wl-detail">${yrLabel}${e.matchOnly ? ' &middot; Parts only' : ''}</span>
+          <span class="wl-detail">${yrLabel}${radLabel}${e.matchOnly ? ' &middot; Parts only' : ''}</span>
           <span class="wl-count ${hitCount > 0 ? 'has-hits' : 'no-hits'}">${hitCount} in yard now</span>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;">
@@ -2213,6 +2232,42 @@ function renderAlerts() {
   }).join('');
 }
 
+/* True when an existing watch already covers this make+model (an "any model"
+ * watch on the make counts). Drives the bell state on car cards. */
+function hasWatchFor(make, model) {
+  if (!make) return false;
+  return loadWatchlist().some(e =>
+    (e.make || '').toLowerCase() === make.toLowerCase() &&
+    (!e.model || (e.model || '').toLowerCase() === (model || '').toLowerCase()));
+}
+
+/* One-tap watch from a Live card (Pro): make+model, all years, any condition.
+ * Idempotent — tapping an already-watched card just confirms. */
+function watchFromCard(btn) {
+  const make = btn.dataset.make, model = btn.dataset.model;
+  if (!make) return;
+  if (!hasWatchFor(make, model)) {
+    // Pro one-tap watch is nationwide by design — the card may be states away.
+    const entry = { make, model, yrMin: null, yrMax: null, matchOnly: false, radiusMi: null, addedAt: new Date().toISOString() };
+    const watchlist = loadWatchlist();
+    watchlist.push(entry);
+    saveWatchlist(watchlist);
+    syncWatchToServer(entry);
+    renderAlerts();
+    checkAndNotify();
+  }
+  // Flash confirmation on every matching bell currently rendered.
+  document.querySelectorAll('.watch-btn').forEach(b => {
+    if (b.dataset.make === make && b.dataset.model === model) {
+      b.classList.add('watching');
+      b.title = 'Already on your watchlist';
+    }
+  });
+  const orig = btn.innerHTML;
+  btn.innerHTML = ICON.check;
+  setTimeout(() => { btn.innerHTML = orig; }, 1200);
+}
+
 /* Watchlist pickers mirror the Live filters, with one intentional difference:
  * they draw from the FULL national inventory, not the current radius — you
  * watch for cars that aren't near you *yet*. Values are exact scraper strings,
@@ -2274,14 +2329,20 @@ function addWatchItem() {
   const yrMin = parseInt(document.getElementById('alert-yr-min').value) || null;
   const yrMax = parseInt(document.getElementById('alert-yr-max').value) || null;
   if (yrMin && yrMax && yrMin > yrMax) return alert('Year min is after year max.');
+  const radiusMi = parseInt(document.getElementById('alert-radius').value) || null;
+  if (radiusMi && !activeZipCoords) {
+    return alert('Set a ZIP (or use "near me") in the Live tab first, so the radius has a center.');
+  }
   const matchOnly = document.getElementById('alert-match-only').checked;
   const watchlist = loadWatchlist();
   const dupe = watchlist.some(e =>
     (e.make || '') === make && (e.model || '') === model &&
     (e.yrMin || null) === yrMin && (e.yrMax || null) === yrMax &&
+    (e.radiusMi || null) === radiusMi &&
     !!e.matchOnly === matchOnly);
   if (dupe) return alert('Already on your watchlist.');
-  const entry = { make, model, yrMin, yrMax, matchOnly, addedAt: new Date().toISOString() };
+  const entry = { make, model, yrMin, yrMax, matchOnly, radiusMi, addedAt: new Date().toISOString() };
+  if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
   watchlist.push(entry);
   saveWatchlist(watchlist);
   syncWatchToServer(entry);
@@ -2309,9 +2370,12 @@ function removeWatchItem(idx) {
  * The local watchlist stays the editor; entries mirror to the account so the
  * backend can push even when the app is closed. serverId on each local entry
  * links the two. */
+/* Any signed-in account syncs watches now: free watches feed the weekly
+ * digest email, Pro adds instant push. The server enforces free limits
+ * (radius required, 250 mi cap, 5 watches). */
 function canCloudSync() {
   const me = window.YSApi && YSApi.enabled() && YSApi.getMe();
-  return !!(me && me.tier === 'pro');
+  return !!me;
 }
 
 async function syncWatchToServer(entry) {
@@ -2321,9 +2385,12 @@ async function syncWatchToServer(entry) {
       make: entry.make || null, model: entry.model || null,
       yearMin: entry.yrMin || null, yearMax: entry.yrMax || null,
     };
-    // Scope the watch to the user's current search area when one is set —
-    // "near me" is almost always what a watch means.
-    if (activeZipCoords) {
+    if (entry.radiusMi && entry.lat != null && entry.lng != null) {
+      // Explicit per-watch radius, chosen when the watch was created.
+      w.lat = entry.lat; w.lng = entry.lng; w.radiusMi = entry.radiusMi;
+    } else if (!('radiusMi' in entry) && activeZipCoords) {
+      // Legacy watches (pre radius picker): scope to the current search area,
+      // matching the old behavior. New "Anywhere" watches send no center.
       w.lat = activeZipCoords.lat; w.lng = activeZipCoords.lng;
       w.radiusMi = effectiveRadiusMi() || 100;
     }
@@ -2359,7 +2426,7 @@ async function updateCloudAlertsUi() {
     return;
   }
   if (me.tier !== 'pro') {
-    status.textContent = 'Push alerts are part of Pro.';
+    status.textContent = 'Your watches sync to your account — matches arrive in a weekly email digest. Instant push alerts are part of Pro.';
     enableBtn.style.display = 'none'; testBtn.style.display = 'none';
     return;
   }
@@ -2463,6 +2530,14 @@ document.getElementById('alert-notif-btn').addEventListener('click', requestNoti
   });
 })();
 document.getElementById('alert-make').addEventListener('change', populateWatchModelOptions);
+// "Anywhere" watches are the Pro tier of alerts — free radius tops out at 250 mi
+// (mirrors the Live tab's distance cap). Snap back and pitch honestly.
+document.getElementById('alert-radius').addEventListener('change', e => {
+  if (!e.target.value && !isPro()) {
+    e.target.value = '250';
+    openUpgradeSheet('watch-anywhere');
+  }
+});
 ['alert-make', 'alert-model', 'alert-yr-min', 'alert-yr-max'].forEach(id => {
   document.getElementById(id).addEventListener('keydown', e => {
     if (e.key === 'Enter') addWatchItem();

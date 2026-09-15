@@ -259,6 +259,19 @@ add a watch for something common (e.g. make=Toyota), enable push, then tap
 "Send test" — you should feel the buzz. The real alert arrives after the next
 scheduled scan.
 
+**Free tier: weekly digest email.** Free signed-in users can sync up to 5
+radius-scoped watches (250 mi cap; "anywhere" watches are Pro). Every commit
+snapshots its arrivals into D1, and a Monday cron (defined in `wrangler.toml
+[triggers]`, deploys automatically) emails each free user one digest of the
+week's matches via Resend. It shares the same sent-log as instant push, so
+someone upgrading mid-week never hears about the same car twice. Trigger it
+manually anytime:
+
+```bash
+curl -X POST "$API/v1/admin/digest/run" -H "x-admin-secret: <ADMIN_SECRET>"
+# → {"users":3,"emails":3,"arrivals":812}
+```
+
 ### 7. Grant Pro to TestFlight testers (before payments exist)
 
 ```bash

@@ -213,7 +213,7 @@
     <div class="info-box" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
       <div style="flex:1;min-width:250px;">
         <h3 style="margin:0 0 0.25rem;">Vehicle watchlist</h3>
-        <p style="margin:0;">Add vehicles you want to track &mdash; watching is free. You'll get a browser notification when they show up in a yard while the app is open. Free accounts will get a <strong>weekly digest email</strong> (coming soon); <strong>instant push alerts</strong> are a Pro feature.</p>
+        <p style="margin:0;">Add vehicles you want to track &mdash; watching is free. You'll get a browser notification when they show up in a yard while the app is open. Signed-in free accounts get a <strong>weekly digest email</strong> of matches; <strong>instant push alerts</strong> are a Pro feature.</p>
       </div>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
         <button id="alert-notif-btn" class="btn btn-primary">Enable notifications</button>
@@ -292,6 +292,16 @@
           <select id="alert-yr-max" style="width:95px;"><option value="">Any</option></select>
         </div>
         <div>
+          <label for="alert-radius" title="Alerts only fire for arrivals inside this distance of your search ZIP">Alert radius</label>
+          <select id="alert-radius" style="width:150px;">
+            <option value="25">Within 25 mi</option>
+            <option value="50">Within 50 mi</option>
+            <option value="100">Within 100 mi</option>
+            <option value="250" selected>Within 250 mi</option>
+            <option value="">Anywhere &mdash; Pro</option>
+          </select>
+        </div>
+        <div>
           <label for="alert-match-only">With parts only</label>
           <input type="checkbox" id="alert-match-only" checked style="width:18px;height:18px;margin-top:0.4rem;accent-color:var(--accent);">
         </div>
@@ -347,6 +357,7 @@
     <ul class="tier-list">
       <li>Full value data &mdash; resale ranges, pull costs, demand speed on every car</li>
       <li>Instant push alerts the moment a watched car hits a yard</li>
+      <li>Nationwide watches &mdash; one-tap "watch this" from any car, alerts from any yard in the country</li>
       <li>Unlimited saved cars</li>
       <li>Unlimited radius + nationwide search across all <span class="coverage-count">~150</span> yards</li>
       <li>Yard history, days-on-lot &amp; leaving-soon signals</li>
