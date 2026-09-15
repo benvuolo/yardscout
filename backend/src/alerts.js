@@ -16,8 +16,11 @@ import { getSessionUser, resolveTier } from './auth.js';
 import { sendWebPush, pushConfigured } from './push.js';
 
 const MAX_WATCHES_PER_USER = 20;
+const MAX_WATCHES_FREE = 5;
 const MAX_VEHICLES_PER_DIGEST = 6;   // keep the notification readable
 const MAX_SENDS_PER_COMMIT = 35;     // subrequest budget (free plan: 50/req)
+const MAX_WEEKLY_EMAILS = 40;        // cron invocations get their own budget
+const ARRIVALS_RETENTION_DAYS = 10;
 
 /* ===== watches CRUD (session + Pro) ===== */
 
@@ -33,9 +36,7 @@ export async function handleWatchesList(req, env) {
 export async function handleWatchCreate(req, env) {
   const user = await getSessionUser(req, env);
   if (!user) return err(401, 'auth_required', 'Sign in first.');
-  if (resolveTier(user) !== 'pro') {
-    return err(403, 'pro_required', 'Alerts are a Pro feature.');
-  }
+  const tier = resolveTier(user);
   let body;
   try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
 
@@ -46,13 +47,27 @@ export async function handleWatchCreate(req, env) {
   const yearMax = Number.isFinite(+body.yearMax) && +body.yearMax > 1900 ? Math.floor(+body.yearMax) : null;
   const lat = Number.isFinite(+body.lat) ? +body.lat : null;
   const lng = Number.isFinite(+body.lng) ? +body.lng : null;
-  const radiusMi = Number.isFinite(+body.radiusMi) && +body.radiusMi > 0
+  let radiusMi = Number.isFinite(+body.radiusMi) && +body.radiusMi > 0
     ? Math.min(Math.floor(+body.radiusMi), 3000) : null;
 
+  // Free watches feed the weekly digest email; instant push stays Pro (the
+  // subscribe + dispatch paths check tier). Free watches must be
+  // radius-scoped — "anywhere" is the Pro tier of alerts — and free radius
+  // caps at 250 mi, mirroring the app's search radius.
+  if (tier !== 'pro') {
+    if (!radiusMi || lat == null || lng == null) {
+      return err(403, 'pro_required', 'Nationwide watches are a Pro feature — free watches need a home ZIP and radius.');
+    }
+    radiusMi = Math.min(radiusMi, 250);
+  }
+
+  const maxWatches = tier === 'pro' ? MAX_WATCHES_PER_USER : MAX_WATCHES_FREE;
   const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM watches WHERE user_id = ?1')
     .bind(user.id).first();
-  if ((n?.n || 0) >= MAX_WATCHES_PER_USER) {
-    return err(400, 'too_many', `Max ${MAX_WATCHES_PER_USER} watches — remove one first.`);
+  if ((n?.n || 0) >= maxWatches) {
+    return err(400, 'too_many', tier === 'pro'
+      ? `Max ${MAX_WATCHES_PER_USER} watches — remove one first.`
+      : `Free accounts get ${MAX_WATCHES_FREE} watches — remove one first, or Pro raises the cap to ${MAX_WATCHES_PER_USER}.`);
   }
 
   const id = crypto.randomUUID();
@@ -160,20 +175,36 @@ function digestText(matches) {
   return lines.join('\n');
 }
 
-async function emailDigest(env, email, matches) {
-  if (!env.RESEND_API_KEY) return false;
+async function emailDigest(env, email, matches, { weekly = false } = {}) {
+  if (!env.RESEND_API_KEY) {
+    // Local dev has no Resend key — log-and-succeed so e2e tests can assert
+    // the dedupe bookkeeping. Production without a key correctly reports
+    // undelivered (false) so nothing is marked as sent.
+    if (env.DEV_MODE === '1') {
+      console.log(`DEV email → ${email} (${weekly ? 'weekly' : 'instant'}): ${matches.length} matches`);
+      return true;
+    }
+    return false;
+  }
   const n = matches.length;
+  const subject = weekly
+    ? `Your week at the yards — ${n} watched car${n === 1 ? '' : 's'} arrived`
+    : `${n} watched car${n === 1 ? '' : 's'} just hit the yard`;
+  const intro = weekly
+    ? 'Arrivals from the past week matching your YardScout watches:'
+    : 'New arrivals matching your YardScout watches:';
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { authorization: 'Bearer ' + env.RESEND_API_KEY, 'content-type': 'application/json' },
     body: JSON.stringify({
       from: env.EMAIL_FROM || 'YardScout <onboarding@resend.dev>',
       to: [email],
-      subject: `${n} watched car${n === 1 ? '' : 's'} just hit the yard`,
+      subject,
       text:
-        `New arrivals matching your YardScout watches:\n\n${digestText(matches)}\n\n` +
+        `${intro}\n\n${digestText(matches)}\n\n` +
         `Open the app for rows, VINs, and part details:\n${(env.APP_URL || '').trim()}\n\n` +
-        `Yards crush cars within weeks — fresh arrivals are the best odds.`,
+        `Yards crush cars within weeks — fresh arrivals are the best odds.` +
+        (weekly ? `\n\nWant to hear the moment a watched car arrives, not a week later? Instant push alerts are part of Pro.` : ''),
     }),
   });
   if (!r.ok) console.log('alert email failed:', r.status, (await r.text()).slice(0, 200));
@@ -259,4 +290,91 @@ export async function dispatchAlerts(env, arrivals) {
     .bind(new Date(Date.now() - 90 * 86400_000).toISOString()).run();
 
   return { users: usersAlerted, sends };
+}
+
+/* ===== weekly digest (free tier) =====
+ * Pro hears instantly via dispatchAlerts above; free users get one email a
+ * week. Arrivals are snapshotted into D1 on every commit so the cron has a
+ * week of history to match against. */
+
+/** Called from handleCommit (via ctx.waitUntil). Upserts the commit's
+ * arrivals into the rolling window and prunes old rows. */
+export async function storeArrivals(env, arrivals) {
+  if (!Array.isArray(arrivals) || !arrivals.length) return { stored: 0 };
+  const now = isoNow();
+  const stmt = env.DB.prepare(
+    `INSERT INTO arrivals (vehicle_id, year, make, model, row, location, city, state, lat, lng, date_added, seen_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)
+     ON CONFLICT (vehicle_id) DO NOTHING`   // first sighting wins — keeps seen_at honest
+  );
+  // D1 batches keep this to one round trip per chunk (a commit can carry
+  // a few thousand arrivals).
+  const CHUNK = 80;
+  let stored = 0;
+  for (let i = 0; i < arrivals.length; i += CHUNK) {
+    const batch = arrivals.slice(i, i + CHUNK).map((v) => stmt.bind(
+      String(v.id), v.year ?? null, v.make ?? null, v.model ?? null,
+      v.row ?? null, v.location ?? null, v.city ?? null, v.state ?? null,
+      v.lat ?? null, v.lng ?? null, v.dateAdded ?? null, now,
+    ));
+    await env.DB.batch(batch);
+    stored += batch.length;
+  }
+  await env.DB.prepare('DELETE FROM arrivals WHERE seen_at < ?1')
+    .bind(new Date(Date.now() - ARRIVALS_RETENTION_DAYS * 86400_000).toISOString()).run();
+  return { stored };
+}
+
+/** Cron entry point (see wrangler.toml [triggers]): one digest email per
+ * free user whose watches matched anything this week. Shares the
+ * alerts_sent dedupe with instant alerts, so a user upgraded mid-week never
+ * hears about the same car twice. */
+export async function sendWeeklyDigests(env) {
+  const since = new Date(Date.now() - 7 * 86400_000).toISOString();
+  const arrivals = ((await env.DB.prepare(
+    'SELECT vehicle_id, year, make, model, row, location, lat, lng FROM arrivals WHERE seen_at >= ?1'
+  ).bind(since).all()).results || []).map((r) => ({
+    id: r.vehicle_id, year: r.year, make: r.make, model: r.model,
+    row: r.row, location: r.location, lat: r.lat, lng: r.lng,
+  }));
+  if (!arrivals.length) return { users: 0, emails: 0, arrivals: 0 };
+
+  const rows = (await env.DB.prepare(
+    `SELECT w.make, w.model, w.year_min, w.year_max, w.lat, w.lng, w.radius_mi,
+            u.id AS user_id, u.email, u.tier, u.tier_expires_at
+       FROM watches w JOIN users u ON u.id = w.user_id`
+  ).all()).results || [];
+
+  const byUser = new Map();
+  for (const r of rows) {
+    if (resolveTier(r) === 'pro') continue;   // Pro already heard instantly
+    if (!byUser.has(r.user_id)) byUser.set(r.user_id, { email: r.email, watches: [] });
+    byUser.get(r.user_id).watches.push(r);
+  }
+
+  let emails = 0, usersMatched = 0;
+  for (const [userId, { email, watches }] of byUser) {
+    if (emails >= MAX_WEEKLY_EMAILS) { console.log('digest email budget hit — remaining users deferred to next week'); break; }
+    const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
+    if (!matched.length) continue;
+    const fresh = [];
+    for (const v of matched) {
+      const seen = await env.DB.prepare(
+        'SELECT 1 AS x FROM alerts_sent WHERE user_id = ?1 AND vehicle_id = ?2'
+      ).bind(userId, String(v.id)).first();
+      if (!seen) fresh.push(v);
+    }
+    if (!fresh.length) continue;
+    usersMatched++;
+    emails++;
+    const delivered = await emailDigest(env, email, fresh, { weekly: true });
+    if (delivered) {
+      for (const v of fresh) {
+        await env.DB.prepare(
+          'INSERT OR IGNORE INTO alerts_sent (user_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
+        ).bind(userId, String(v.id), isoNow()).run();
+      }
+    }
+  }
+  return { users: usersMatched, emails, arrivals: arrivals.length };
 }

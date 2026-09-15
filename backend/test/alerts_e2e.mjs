@@ -126,6 +126,34 @@ const { data: wl } = await api('/v1/watches', { headers: AUTH });
 r = await api('/v1/watches/' + wl.watches[0].id, { method: 'DELETE', headers: AUTH });
 check('watch deleted', r.status === 200);
 
+/* ---- 8. weekly digest: free user with a radius watch ---- */
+({ data } = await api('/v1/auth/request-link', { method: 'POST', ...J({ email: 'freebie@test.dev' }) }));
+const token2 = new URL(data.dev_link).searchParams.get('token');
+const cb2 = await fetch(`${BASE}/v1/auth/callback?token=${token2}`, { redirect: 'manual' });
+const AUTH2 = { authorization: 'Bearer ' + decodeURIComponent(cb2.headers.get('location').split('#session=')[1]) };
+
+/* nationwide watch (no radius) still Pro-only for free accounts */
+r = await api('/v1/watches', { method: 'POST', headers: { ...AUTH2, 'content-type': 'application/json' },
+  body: JSON.stringify({ make: 'Toyota' }) });
+check('free nationwide watch rejected (403)', r.status === 403 && r.data.error === 'pro_required');
+
+/* radius watch is allowed — feeds the weekly digest */
+r = await api('/v1/watches', { method: 'POST', headers: { ...AUTH2, 'content-type': 'application/json' },
+  body: JSON.stringify({ make: 'Toyota', model: '4Runner', lat: 40.76, lng: -111.89, radiusMi: 100 }) });
+check('free radius watch accepted', r.status === 200 && r.data.id);
+
+/* arrivals were snapshotted by the commits in step 3/5 — run the digest.
+ * The Ogden 4Runner (id 111) matches; Sacramento is outside the radius and
+ * the Civic is the wrong car. */
+r = await api('/v1/admin/digest/run', { method: 'POST', headers: ADMIN });
+check('digest matches exactly the in-radius 4Runner user', r.status === 200 && r.data.users === 1 && r.data.emails === 1,
+  JSON.stringify(r.data));
+check('digest saw stored arrivals', r.data.arrivals === 3, `arrivals=${r.data.arrivals}`);
+
+/* dedupe: a second run sends nothing (DEV_MODE marks the email delivered) */
+r = await api('/v1/admin/digest/run', { method: 'POST', headers: ADMIN });
+check('digest rerun sends nothing (dedupe)', r.data.users === 0 && r.data.emails === 0, JSON.stringify(r.data));
+
 catcher.close();
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);
