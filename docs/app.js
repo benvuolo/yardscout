@@ -394,6 +394,7 @@ function applyInventory(raw, { quiet = false } = {}) {
   updateCoverageCounts();
   _makeScopeKey = null;   // data changed — force the scoped rebuild
   refreshScopedInventory();
+  populateWatchOptions();
   updateStaleBanner();
   if (!quiet) {
     applyShareHash();
@@ -2212,20 +2213,80 @@ function renderAlerts() {
   }).join('');
 }
 
+/* Watchlist pickers mirror the Live filters, with one intentional difference:
+ * they draw from the FULL national inventory, not the current radius — you
+ * watch for cars that aren't near you *yet*. Values are exact scraper strings,
+ * so both local and server-side alert matching hit reliably (no typos). */
+function populateWatchOptions() {
+  const makeSel = document.getElementById('alert-make');
+  if (!makeSel || !liveLoaded) return;
+  const prevMake = makeSel.value;
+  const makes = new Set();
+  for (const v of liveInventory) {
+    if (v.make && !JUNK_MAKES.has(v.make.toLowerCase())) makes.add(v.make);
+  }
+  makeSel.innerHTML = '<option value="">Select make&hellip;</option>';
+  [...makes].sort().forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m; opt.textContent = m;
+    makeSel.appendChild(opt);
+  });
+  makeSel.value = makes.has(prevMake) ? prevMake : '';
+  populateWatchModelOptions();
+
+  const years = [...new Set(liveInventory.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
+  for (const id of ['alert-yr-min', 'alert-yr-max']) {
+    const sel = document.getElementById(id);
+    const prev = sel.value;
+    sel.innerHTML = '<option value="">Any</option>';
+    years.forEach(y => {
+      const opt = document.createElement('option');
+      opt.value = y; opt.textContent = y;
+      sel.appendChild(opt);
+    });
+    sel.value = prev && years.includes(+prev) ? prev : '';
+  }
+}
+
+function populateWatchModelOptions() {
+  const make = document.getElementById('alert-make').value;
+  const sel = document.getElementById('alert-model');
+  const prev = sel.value;
+  sel.innerHTML = '<option value="">Any model</option>';
+  if (!make) { sel.disabled = true; return; }
+  sel.disabled = false;
+  const models = new Set();
+  for (const v of liveInventory) {
+    if (v.make === make && v.model) models.add(v.model);
+  }
+  [...models].sort().forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m; opt.textContent = m;
+    sel.appendChild(opt);
+  });
+  sel.value = models.has(prev) ? prev : '';
+}
+
 function addWatchItem() {
-  const make = document.getElementById('alert-make').value.trim();
-  const model = document.getElementById('alert-model').value.trim();
-  if (!make && !model) return alert('Enter at least a make or model.');
+  const make = document.getElementById('alert-make').value;
+  const model = document.getElementById('alert-model').value;
+  if (!make) return alert('Pick a make first.');
   const yrMin = parseInt(document.getElementById('alert-yr-min').value) || null;
   const yrMax = parseInt(document.getElementById('alert-yr-max').value) || null;
+  if (yrMin && yrMax && yrMin > yrMax) return alert('Year min is after year max.');
   const matchOnly = document.getElementById('alert-match-only').checked;
   const watchlist = loadWatchlist();
+  const dupe = watchlist.some(e =>
+    (e.make || '') === make && (e.model || '') === model &&
+    (e.yrMin || null) === yrMin && (e.yrMax || null) === yrMax &&
+    !!e.matchOnly === matchOnly);
+  if (dupe) return alert('Already on your watchlist.');
   const entry = { make, model, yrMin, yrMax, matchOnly, addedAt: new Date().toISOString() };
   watchlist.push(entry);
   saveWatchlist(watchlist);
   syncWatchToServer(entry);
   document.getElementById('alert-make').value = '';
-  document.getElementById('alert-model').value = '';
+  populateWatchModelOptions();   // resets + disables the model select
   document.getElementById('alert-yr-min').value = '';
   document.getElementById('alert-yr-max').value = '';
   renderAlerts();
@@ -2401,6 +2462,7 @@ document.getElementById('alert-notif-btn').addEventListener('click', requestNoti
     }
   });
 })();
+document.getElementById('alert-make').addEventListener('change', populateWatchModelOptions);
 ['alert-make', 'alert-model', 'alert-yr-min', 'alert-yr-max'].forEach(id => {
   document.getElementById(id).addEventListener('keydown', e => {
     if (e.key === 'Enter') addWatchItem();
