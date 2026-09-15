@@ -271,22 +271,25 @@
 
     <div class="panel">
       <h4>Add to watchlist</h4>
+      <p style="font-size:0.75rem;color:var(--text-dim);margin:0.3rem 0 0.7rem;">
+        Pick from vehicles that actually cycle through yards nationwide &mdash; no typing, no typos.
+      </p>
       <div style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;">
         <div>
           <label for="alert-make">Make</label>
-          <input type="text" id="alert-make" placeholder="e.g. Toyota" style="width:130px;">
+          <select id="alert-make" style="width:150px;"><option value="">Select make&hellip;</option></select>
         </div>
         <div>
-          <label for="alert-model">Model (optional)</label>
-          <input type="text" id="alert-model" placeholder="e.g. Tacoma" style="width:130px;">
+          <label for="alert-model">Model</label>
+          <select id="alert-model" style="width:150px;" disabled><option value="">Any model</option></select>
         </div>
         <div>
           <label for="alert-yr-min">Year min</label>
-          <input type="number" id="alert-yr-min" placeholder="Any" style="width:85px;">
+          <select id="alert-yr-min" style="width:95px;"><option value="">Any</option></select>
         </div>
         <div>
           <label for="alert-yr-max">Year max</label>
-          <input type="number" id="alert-yr-max" placeholder="Any" style="width:85px;">
+          <select id="alert-yr-max" style="width:95px;"><option value="">Any</option></select>
         </div>
         <div>
           <label for="alert-match-only">With parts only</label>
