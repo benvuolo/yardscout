@@ -63,14 +63,18 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # vin_decodes.json.gz is the decode cache's disaster-insurance backup;
-          # the scraper only rewrites it after ~20k new decodes, so most runs
-          # see no change here.
-          git add docs/data/inventory_live.json docs/data/vehicle_extras.json docs/data/picknpull_pricing.json docs/data/pyp_pricing.json docs/data/pap_pricing.json docs/data/vin_decodes.json.gz
+          # Stage the WHOLE data dir: the scraper refreshes per-chain pricing
+          # files (tearapart, utpap, wap, upullr, ...) beyond the big six, and
+          # any tracked-but-unstaged leftover makes `git pull --rebase` below
+          # fail with "You have unstaged changes" (broke 3 scans on 2026-09-15).
+          git add docs/data/
           if git diff --staged --quiet; then
             echo "No inventory changes."
           else
             git commit -m "chore: auto-scan inventory (national)"
+            # Belt & suspenders: drop any stray tracked modifications outside
+            # docs/data/ so the rebase always starts from a clean tree.
+            git checkout -- . 2>/dev/null || true
             # Rebase in case anything landed on main while the scan was running.
             # The committed files are all GENERATED from this scan, so on any
             # conflict the scan's version wins ("theirs" during a rebase = the
