@@ -2247,8 +2247,12 @@ function watchFromCard(btn) {
   const make = btn.dataset.make, model = btn.dataset.model;
   if (!make) return;
   if (!hasWatchFor(make, model)) {
-    // Pro one-tap watch is nationwide by design — the card may be states away.
-    const entry = { make, model, yrMin: null, yrMax: null, matchOnly: false, radiusMi: null, addedAt: new Date().toISOString() };
+    // One-tap watch follows the current search scope: "watch this near me."
+    // Radius = whatever the Live tab is set to right now (null = Pro's "Any
+    // distance" = nationwide). Tighter or wider is an Alerts-tab edit away.
+    const radiusMi = activeZipCoords ? (effectiveRadiusMi() || null) : null;
+    const entry = { make, model, yrMin: null, yrMax: null, matchOnly: false, radiusMi, addedAt: new Date().toISOString() };
+    if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
     const watchlist = loadWatchlist();
     watchlist.push(entry);
     saveWatchlist(watchlist);
