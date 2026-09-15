@@ -1061,6 +1061,20 @@
     transition: color 0.15s;
   }
   .share-btn:hover { color: var(--accent); }
+  .watch-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 0.2rem 0.3rem;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.15s, transform 0.1s;
+  }
+  .watch-btn:hover { color: var(--accent); }
+  .watch-btn.watching { color: var(--accent); }
+  .watch-btn:active { transform: scale(1.15); }
   .focus-banner {
     display: flex;
     align-items: center;

@@ -7,7 +7,7 @@
  */
 
 import { json, err, sha256Hex, isoNow, timingSafeEqual } from './util.js';
-import { dispatchAlerts } from './alerts.js';
+import { dispatchAlerts, storeArrivals } from './alerts.js';
 
 async function checkSecret(req, env, header, envKey) {
   const expected = env[envKey];
@@ -94,6 +94,12 @@ export async function handleCommit(req, env, ctx) {
       dispatchAlerts(env, newArrivals)
         .then((r) => console.log(`alerts: ${r.users} users notified, ${r.sends} sends`))
         .catch((e) => console.log('alert dispatch failed:', e && e.message))
+    );
+    // Snapshot arrivals for the weekly free-tier digest cron.
+    ctx.waitUntil(
+      storeArrivals(env, newArrivals)
+        .then((r) => console.log(`arrivals stored: ${r.stored}`))
+        .catch((e) => console.log('arrival store failed:', e && e.message))
     );
   }
 

@@ -17,6 +17,7 @@
  *   POST /v1/admin/inventory/commit               x-upload-token
  *   POST /v1/admin/grant                          x-admin-secret
  *   GET  /v1/admin/users                          x-admin-secret
+ *   POST /v1/admin/digest/run                     x-admin-secret (manual weekly-digest trigger)
  *   POST /v1/iap/revenuecat                       RevenueCat webhook auth
  */
 
@@ -36,9 +37,21 @@ import { handleCheckout, handlePortal, handleStripeWebhook } from './billing.js'
 import {
   handleWatchesList, handleWatchCreate, handleWatchDelete,
   handleVapidKey, handlePushSubscribe, handlePushUnsubscribe, handlePushTest,
+  sendWeeklyDigests,
 } from './alerts.js';
 
 export default {
+  /* Cron (wrangler.toml [triggers]): weekly digest email for free users
+   * whose watches matched arrivals this week. Pro users hear instantly via
+   * dispatchAlerts on each inventory commit and are skipped here. */
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(
+      sendWeeklyDigests(env)
+        .then((r) => console.log(`weekly digest: ${r.users} users, ${r.emails} emails, ${r.arrivals} arrivals in window`))
+        .catch((e) => console.log('weekly digest failed:', e && (e.stack || e.message)))
+    );
+  },
+
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const cors = corsHeaders(env, req.headers.get('origin'));
@@ -132,12 +145,18 @@ async function route(req, env, url, ctx) {
   }
 
   /* ----- admin (x-admin-secret) ----- */
-  if (path === '/v1/admin/grant' || path === '/v1/admin/users' || path === '/v1/admin/waitlist') {
+  if (path === '/v1/admin/grant' || path === '/v1/admin/users' || path === '/v1/admin/waitlist'
+      || path === '/v1/admin/digest/run') {
     const denied = await requireAdmin(req, env);
     if (denied) return denied;
     if (method === 'POST' && path === '/v1/admin/grant') return handleGrant(req, env);
     if (method === 'GET' && path === '/v1/admin/users') return handleListUsers(req, env);
     if (method === 'GET' && path === '/v1/admin/waitlist') return handleWaitlistList(req, env);
+    // Manual digest trigger — same code path as the Monday cron. Handy for
+    // ops ("did anyone match this week?") and exercised by the e2e test.
+    if (method === 'POST' && path === '/v1/admin/digest/run') {
+      return json(await sendWeeklyDigests(env));
+    }
   }
 
   /* ----- IAP webhook (own auth) ----- */
