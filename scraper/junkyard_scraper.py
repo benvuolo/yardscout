@@ -7305,11 +7305,21 @@ def main():
         return
 
     if args.refresh_chain_pricing:
-        refresh_pnp_pricing_file()
-        refresh_pyp_pricing_file()
-        refresh_pap_pricing_file()
-        refresh_wap_pricing_file()
-        refresh_upullr_pricing_file()
+        # Each chain refreshes independently: one chain's website being down
+        # (e.g. Pull-A-Part serving its 500 page, which killed the 2026-09-16
+        # 03:10 UTC scan) must not abort the others or fail the workflow —
+        # yesterday's cached prices are strictly better than no scan at all.
+        failures = []
+        for fn in (refresh_pnp_pricing_file, refresh_pyp_pricing_file,
+                   refresh_pap_pricing_file, refresh_wap_pricing_file,
+                   refresh_upullr_pricing_file):
+            try:
+                fn()
+            except Exception as e:  # noqa: BLE001 — upstream sites, anything goes
+                failures.append(f"{fn.__name__}: {e}")
+                print(f"WARNING: {fn.__name__} failed ({e}) — keeping previous price file", file=sys.stderr)
+        if failures:
+            print(f"{len(failures)} of 5 chain price refreshes failed; previous files kept.", file=sys.stderr)
         return
 
     if args.list_parts:

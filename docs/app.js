@@ -725,29 +725,60 @@ function populateLiveMakeFilter() {
   populateYearFilters();
 }
 
-/* Model cascade: the Model select only ever lists the chosen make's models
- * that exist within the current radius — picked from real inventory so
- * there's nothing to misspell. Disabled until a make is chosen. */
+/* Model cascade, multi-select: the panel only ever lists the chosen make's
+ * models that exist within the current radius — picked from real inventory so
+ * there's nothing to misspell. Check any number of models (e.g. Tacoma +
+ * 4Runner + Land Cruiser); empty selection = all models. Disabled until a
+ * make is chosen. */
+let selectedModels = new Set();
+
 function populateModelFilter() {
   const make = document.getElementById('live-filter-make').value;
-  const sel = document.getElementById('live-filter-model');
-  const prev = sel.value;
-  sel.innerHTML = '<option value="">All models</option>';
-  if (!make) { sel.disabled = true; return; }
-  sel.disabled = false;
+  const btn = document.getElementById('live-filter-model-btn');
+  if (!make) {
+    selectedModels.clear();
+    btn.disabled = true;
+    closeModelPanel();
+    updateModelBtnLabel();
+    return;
+  }
+  btn.disabled = false;   // location gate lives in updateFilterAvailability
   const counts = new Map();
   for (const v of _scopedVehicles) {
     if (v.make === make && v.model) counts.set(v.model, (counts.get(v.model) || 0) + 1);
   }
+  // Drop selections that no longer exist in scope (make change, radius change).
+  for (const m of [...selectedModels]) if (!counts.has(m)) selectedModels.delete(m);
+  renderModelList(counts);
+  updateModelBtnLabel();
+}
+
+let _modelCounts = new Map();
+function renderModelList(counts) {
+  if (counts) _modelCounts = counts;
+  const list = document.getElementById('live-filter-model-list');
+  const q = (document.getElementById('live-filter-model-search').value || '').trim().toLowerCase();
   const pro = isPro();
-  [...counts.keys()].sort().forEach(m => {
-    const opt = document.createElement('option');
-    opt.value = m;
-    opt.textContent = pro ? m + ' (' + counts.get(m) + ')' : m;
-    sel.appendChild(opt);
-  });
-  // Keep the selection when it survives a make change (it won't, usually).
-  sel.value = counts.has(prev) ? prev : '';
+  const models = [...(_modelCounts).keys()].sort()
+    .filter(m => !q || m.toLowerCase().includes(q));
+  list.innerHTML = models.length ? models.map(m => `
+    <label class="multi-select-row">
+      <input type="checkbox" data-model="${escapeHtml(m)}" ${selectedModels.has(m) ? 'checked' : ''}>
+      <span>${escapeHtml(m)}${pro ? ` <small>(${_modelCounts.get(m)})</small>` : ''}</span>
+    </label>`).join('')
+    : '<div class="multi-select-empty">No models match</div>';
+}
+
+function updateModelBtnLabel() {
+  const btn = document.getElementById('live-filter-model-btn');
+  btn.textContent = !selectedModels.size ? 'All models'
+    : selectedModels.size === 1 ? [...selectedModels][0]
+    : `${selectedModels.size} models`;
+  btn.classList.toggle('has-selection', selectedModels.size > 0);
+}
+
+function closeModelPanel() {
+  document.getElementById('live-filter-model-panel').style.display = 'none';
 }
 
 /* Optional year range, populated from the years actually in inventory
@@ -827,8 +858,11 @@ function updateFilterAvailability() {
    'live-filter-year-min', 'live-filter-year-max']
     .forEach(id => { const el = document.getElementById(id); if (el) el.disabled = !hasLoc; });
   // Model stays a cascade: enabled only when a location AND a make are set.
-  const modelSel = document.getElementById('live-filter-model');
-  if (modelSel) modelSel.disabled = !hasLoc || !document.getElementById('live-filter-make').value;
+  const modelBtn = document.getElementById('live-filter-model-btn');
+  if (modelBtn) {
+    modelBtn.disabled = !hasLoc || !document.getElementById('live-filter-make').value;
+    if (modelBtn.disabled) closeModelPanel();
+  }
   const hint = document.getElementById('filters-need-zip');
   if (hint) hint.style.display = hasLoc ? 'none' : '';
 }
@@ -1340,7 +1374,7 @@ function getFilteredLive() {
   if (!isPro() && !activeZipCoords) return [];
 
   const makeFilter = document.getElementById('live-filter-make').value;
-  const modelFilter = document.getElementById('live-filter-model').value;
+  const modelFilter = makeFilter ? selectedModels : null;   // empty set = all models
   const yearMin = parseInt(document.getElementById('live-filter-year-min').value, 10) || null;
   const yearMax = parseInt(document.getElementById('live-filter-year-max').value, 10) || null;
   const matchFilter = document.getElementById('live-filter-match').value;
@@ -1353,7 +1387,7 @@ function getFilteredLive() {
 
   let filtered = liveInventory.filter(v => {
     if (makeFilter && v.make !== makeFilter) return false;
-    if (modelFilter && v.model !== modelFilter) return false;
+    if (modelFilter && modelFilter.size && !modelFilter.has(v.model)) return false;
     if (yearMin && (!v.year || v.year < yearMin)) return false;
     if (yearMax && (!v.year || v.year > yearMax)) return false;
     if (locationFilter && v.location !== locationFilter) return false;
@@ -1434,7 +1468,7 @@ function getFilteredLive() {
 function updateLiveFilterCount() {
   let n = 0;
   if (document.getElementById('live-filter-make').value) n++;
-  if (document.getElementById('live-filter-model').value) n++;
+  if (selectedModels.size) n++;
   if (document.getElementById('live-filter-year-min').value
       || document.getElementById('live-filter-year-max').value) n++;
   if (document.getElementById('live-filter-location').value) n++;
@@ -1755,10 +1789,43 @@ if (localStorage.getItem('jh_filters_open') === '1') {
   document.getElementById('live-filter-toggle').classList.add('open');
 }
 document.getElementById('live-filter-make').addEventListener('change', () => {
+  selectedModels.clear();  // a new make invalidates the old model picks
   populateModelFilter();   // cascade: model list follows the make
   renderLive();
 });
-document.getElementById('live-filter-model').addEventListener('change', renderLive);
+/* Multi-select model panel: open/close, search, toggle, clear. */
+document.getElementById('live-filter-model-btn').addEventListener('click', e => {
+  e.stopPropagation();
+  const panel = document.getElementById('live-filter-model-panel');
+  const opening = panel.style.display === 'none';
+  panel.style.display = opening ? '' : 'none';
+  if (opening) {
+    const search = document.getElementById('live-filter-model-search');
+    search.value = '';
+    renderModelList();
+    // Mobile keyboards jumping open on tap are worse than one extra tap to
+    // search — only autofocus where there's a physical keyboard.
+    if (matchMedia('(pointer: fine)').matches) search.focus();
+  }
+});
+document.getElementById('live-filter-model-panel').addEventListener('click', e => e.stopPropagation());
+document.addEventListener('click', () => closeModelPanel());
+document.getElementById('live-filter-model-search').addEventListener('input', () => renderModelList());
+document.getElementById('live-filter-model-list').addEventListener('change', e => {
+  const cb = e.target.closest('input[type="checkbox"]');
+  if (!cb) return;
+  if (cb.checked) selectedModels.add(cb.dataset.model);
+  else selectedModels.delete(cb.dataset.model);
+  updateModelBtnLabel();
+  renderLive();
+});
+document.getElementById('live-filter-model-clear').addEventListener('click', () => {
+  selectedModels.clear();
+  renderModelList();
+  updateModelBtnLabel();
+  renderLive();
+});
+document.getElementById('live-filter-model-done').addEventListener('click', () => closeModelPanel());
 document.getElementById('live-filter-year-min').addEventListener('change', () => {
   // Keep the range sane: from > to snaps "to" up to match.
   const lo = document.getElementById('live-filter-year-min');
