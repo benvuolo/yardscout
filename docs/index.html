@@ -140,10 +140,18 @@
             </select>
           </div>
           <div class="ctl">
-            <label for="live-filter-model">Model</label>
-            <select id="live-filter-model" disabled title="Pick a make first">
-              <option value="">All models</option>
-            </select>
+            <label for="live-filter-model-btn">Model</label>
+            <div class="multi-select" id="live-filter-model-wrap">
+              <button type="button" id="live-filter-model-btn" class="multi-select-btn" disabled title="Pick a make first">All models</button>
+              <div class="multi-select-panel" id="live-filter-model-panel" style="display:none;">
+                <input type="text" id="live-filter-model-search" placeholder="Search models&hellip;" autocomplete="off">
+                <div class="multi-select-list" id="live-filter-model-list"></div>
+                <div class="multi-select-actions">
+                  <button type="button" id="live-filter-model-clear">Clear</button>
+                  <button type="button" id="live-filter-model-done">Done</button>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ctl">
             <label for="live-filter-year-min">Years (optional)</label>
