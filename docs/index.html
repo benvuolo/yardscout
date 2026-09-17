@@ -288,8 +288,18 @@
           <select id="alert-make" style="width:150px;"><option value="">Select make&hellip;</option></select>
         </div>
         <div>
-          <label for="alert-model">Model</label>
-          <select id="alert-model" style="width:150px;" disabled><option value="">Any model</option></select>
+          <label for="alert-model-btn">Models</label>
+          <div class="multi-select" style="width:170px;">
+            <button type="button" id="alert-model-btn" class="multi-select-btn" disabled title="Pick a make first">Any model</button>
+            <div class="multi-select-panel" id="alert-model-panel" style="display:none;">
+              <input type="text" id="alert-model-search" placeholder="Search models&hellip;" autocomplete="off">
+              <div class="multi-select-list" id="alert-model-list"></div>
+              <div class="multi-select-actions">
+                <button type="button" id="alert-model-clear">Clear</button>
+                <button type="button" id="alert-model-done">Done</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div>
           <label for="alert-yr-min">Year min</label>
