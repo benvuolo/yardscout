@@ -137,18 +137,31 @@ r = await api('/v1/watches', { method: 'POST', headers: { ...AUTH2, 'content-typ
   body: JSON.stringify({ make: 'Toyota' }) });
 check('free nationwide watch rejected (403)', r.status === 403 && r.data.error === 'pro_required');
 
-/* radius watch is allowed — feeds the weekly digest */
+/* radius watch is allowed — feeds the weekly digest. The commits in steps
+ * 3/5 already stored arrivals, and watches only alert on FUTURE arrivals:
+ * creating the watch seeds the sent-log with the in-radius 4Runner (111). */
 r = await api('/v1/watches', { method: 'POST', headers: { ...AUTH2, 'content-type': 'application/json' },
   body: JSON.stringify({ make: 'Toyota', model: '4Runner', lat: 40.76, lng: -111.89, radiusMi: 100 }) });
 check('free radius watch accepted', r.status === 200 && r.data.id);
+check('watch creation seeds current matches as already-alerted', r.data.seeded === 1, `seeded=${r.data.seeded}`);
 
-/* arrivals were snapshotted by the commits in step 3/5 — run the digest.
- * The Ogden 4Runner (id 111) matches; Sacramento is outside the radius and
- * the Civic is the wrong car. */
+/* digest sends nothing — every matching car predates the watch */
 r = await api('/v1/admin/digest/run', { method: 'POST', headers: ADMIN });
-check('digest matches exactly the in-radius 4Runner user', r.status === 200 && r.data.users === 1 && r.data.emails === 1,
+check('digest skips cars that predate the watch', r.status === 200 && r.data.users === 0 && r.data.emails === 0,
   JSON.stringify(r.data));
-check('digest saw stored arrivals', r.data.arrivals === 3, `arrivals=${r.data.arrivals}`);
+
+/* a NEW arrival after the watch exists is fair game */
+const commit2 = { directory: { yards: [], scrapedAt: new Date().toISOString() }, manifest: {}, newArrivals: [
+  { id: 444, year: 1999, make: 'Toyota', model: '4Runner', row: '7', dateAdded: '2026-09-15',
+    location: 'Utah Pick-A-Part - Ogden', city: 'Ogden', state: 'UT', lat: 41.19, lng: -111.94 },
+] };
+r = await api('/v1/admin/inventory/commit', { method: 'POST', headers: { ...UPLOAD, 'content-type': 'application/json' }, body: JSON.stringify(commit2) });
+check('second commit accepted', r.status === 200);
+await new Promise((res) => setTimeout(res, 1500)); // waitUntil stores the arrival
+
+r = await api('/v1/admin/digest/run', { method: 'POST', headers: ADMIN });
+check('digest emails the post-watch arrival only', r.data.users === 1 && r.data.emails === 1, JSON.stringify(r.data));
+check('digest window has all 4 arrivals', r.data.arrivals === 4, `arrivals=${r.data.arrivals}`);
 
 /* dedupe: a second run sends nothing (DEV_MODE marks the email delivered) */
 r = await api('/v1/admin/digest/run', { method: 'POST', headers: ADMIN });

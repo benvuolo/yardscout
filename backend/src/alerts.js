@@ -78,7 +78,31 @@ export async function handleWatchCreate(req, env) {
          (lat != null && lng != null) ? lat : null,
          (lat != null && lng != null) ? lng : null,
          radiusMi, isoNow()).run();
-  return json({ ok: true, id });
+
+  // Watches alert on FUTURE arrivals only: seed the sent-log with every
+  // current match in the arrivals window (a 10-day superset of the 3-day
+  // dispatch window) so the next commit/digest doesn't "alert" the user
+  // about cars that were already on the lot when they created the watch.
+  const w = {
+    make, model, year_min: yearMin, year_max: yearMax,
+    lat: (lat != null && lng != null) ? lat : null,
+    lng: (lat != null && lng != null) ? lng : null,
+    radius_mi: radiusMi,
+  };
+  const existing = (await env.DB.prepare(
+    'SELECT vehicle_id, year, make, model, lat, lng FROM arrivals'
+  ).all()).results || [];
+  const seedStmt = env.DB.prepare(
+    'INSERT OR IGNORE INTO alerts_sent (user_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
+  );
+  const now = isoNow();
+  const seeds = existing.filter((v) => watchMatches(w, v))
+    .map((v) => seedStmt.bind(user.id, String(v.vehicle_id), now));
+  for (let i = 0; i < seeds.length; i += 80) {
+    await env.DB.batch(seeds.slice(i, i + 80));
+  }
+
+  return json({ ok: true, id, seeded: seeds.length });
 }
 
 export async function handleWatchDelete(req, env, watchId) {
