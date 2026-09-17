@@ -2318,11 +2318,15 @@ function watchFromCard(btn) {
     // Radius = whatever the Live tab is set to right now (null = Pro's "Any
     // distance" = nationwide). Tighter or wider is an Alerts-tab edit away.
     const radiusMi = activeZipCoords ? (effectiveRadiusMi() || null) : null;
-    const entry = { make, model, yrMin: null, yrMax: null, matchOnly: false, radiusMi, addedAt: new Date().toISOString() };
+    const entry = { make, model, yrMin: null, yrMax: null, matchOnly: false, radiusMi,
+      addedAt: new Date().toISOString() + '~' + Math.random().toString(36).slice(2, 8) };
     if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
     const watchlist = loadWatchlist();
     watchlist.push(entry);
     saveWatchlist(watchlist);
+    // The car you tapped (and its lot-mates) are already known to you —
+    // alert only on arrivals from here on.
+    seedAlertedForEntry(entry);
     syncWatchToServer(entry);
     renderAlerts();
     checkAndNotify();
@@ -2374,28 +2378,72 @@ function populateWatchOptions() {
   }
 }
 
+/* Watch models: same multi-select panel as the Live filter — check several
+ * models under one make and one Add creates a watch per model. Empty
+ * selection = any model of the make. */
+let watchSelectedModels = new Set();
+let _watchModelCounts = new Map();
+
 function populateWatchModelOptions() {
   const make = document.getElementById('alert-make').value;
-  const sel = document.getElementById('alert-model');
-  const prev = sel.value;
-  sel.innerHTML = '<option value="">Any model</option>';
-  if (!make) { sel.disabled = true; return; }
-  sel.disabled = false;
-  const models = new Set();
-  for (const v of liveInventory) {
-    if (v.make === make && v.model) models.add(v.model);
+  const btn = document.getElementById('alert-model-btn');
+  watchSelectedModels.clear();
+  if (!make) {
+    btn.disabled = true;
+    document.getElementById('alert-model-panel').style.display = 'none';
+    updateWatchModelBtnLabel();
+    return;
   }
-  [...models].sort().forEach(m => {
-    const opt = document.createElement('option');
-    opt.value = m; opt.textContent = m;
-    sel.appendChild(opt);
-  });
-  sel.value = models.has(prev) ? prev : '';
+  btn.disabled = false;
+  _watchModelCounts = new Map();
+  for (const v of liveInventory) {
+    if (v.make === make && v.model) {
+      _watchModelCounts.set(v.model, (_watchModelCounts.get(v.model) || 0) + 1);
+    }
+  }
+  renderWatchModelList();
+  updateWatchModelBtnLabel();
+}
+
+function renderWatchModelList() {
+  const list = document.getElementById('alert-model-list');
+  const q = (document.getElementById('alert-model-search').value || '').trim().toLowerCase();
+  const models = [..._watchModelCounts.keys()].sort()
+    .filter(m => !q || m.toLowerCase().includes(q));
+  list.innerHTML = models.length ? models.map(m => `
+    <label class="multi-select-row">
+      <input type="checkbox" data-model="${escapeHtml(m)}" ${watchSelectedModels.has(m) ? 'checked' : ''}>
+      <span>${escapeHtml(m)}</span>
+    </label>`).join('')
+    : '<div class="multi-select-empty">No models match</div>';
+}
+
+function updateWatchModelBtnLabel() {
+  const btn = document.getElementById('alert-model-btn');
+  btn.textContent = !watchSelectedModels.size ? 'Any model'
+    : watchSelectedModels.size === 1 ? [...watchSelectedModels][0]
+    : `${watchSelectedModels.size} models`;
+  btn.classList.toggle('has-selection', watchSelectedModels.size > 0);
+}
+
+/* Watches alert on FUTURE arrivals, never the cars already sitting on the
+ * lot when the watch was created — mark every current match as
+ * already-alerted so only genuinely new arrivals notify. The backend does
+ * the same for push/email (see handleWatchCreate). */
+function seedAlertedForEntry(entry) {
+  if (!liveLoaded) return;
+  const alerted = loadAlerted();
+  let n = 0;
+  for (const v of liveInventory) {
+    if (!watchlistMatches(entry, v)) continue;
+    const key = `${v.id || v.vin || ''}:${v.year}:${v.make}:${v.model}`;
+    if (!alerted[key]) { alerted[key] = new Date().toISOString(); n++; }
+  }
+  if (n) saveAlerted(alerted);
 }
 
 function addWatchItem() {
   const make = document.getElementById('alert-make').value;
-  const model = document.getElementById('alert-model').value;
   if (!make) return alert('Pick a make first.');
   const yrMin = parseInt(document.getElementById('alert-yr-min').value) || null;
   const yrMax = parseInt(document.getElementById('alert-yr-max').value) || null;
@@ -2406,19 +2454,30 @@ function addWatchItem() {
   }
   const matchOnly = document.getElementById('alert-match-only').checked;
   const watchlist = loadWatchlist();
-  const dupe = watchlist.some(e =>
-    (e.make || '') === make && (e.model || '') === model &&
-    (e.yrMin || null) === yrMin && (e.yrMax || null) === yrMax &&
-    (e.radiusMi || null) === radiusMi &&
-    !!e.matchOnly === matchOnly);
-  if (dupe) return alert('Already on your watchlist.');
-  const entry = { make, model, yrMin, yrMax, matchOnly, radiusMi, addedAt: new Date().toISOString() };
-  if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
-  watchlist.push(entry);
+  // One watch per checked model; no models checked = one any-model watch.
+  const models = watchSelectedModels.size ? [...watchSelectedModels] : [''];
+  let added = 0;
+  for (const model of models) {
+    const dupe = watchlist.some(e =>
+      (e.make || '') === make && (e.model || '') === model &&
+      (e.yrMin || null) === yrMin && (e.yrMax || null) === yrMax &&
+      (e.radiusMi || null) === radiusMi &&
+      !!e.matchOnly === matchOnly);
+    if (dupe) continue;
+    // addedAt doubles as the local↔server sync key — the random suffix keeps
+    // it unique when several models are added in the same millisecond.
+    const entry = { make, model, yrMin, yrMax, matchOnly, radiusMi,
+      addedAt: new Date().toISOString() + '~' + Math.random().toString(36).slice(2, 8) };
+    if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
+    watchlist.push(entry);
+    seedAlertedForEntry(entry);
+    syncWatchToServer(entry);
+    added++;
+  }
+  if (!added) return alert('Already on your watchlist.');
   saveWatchlist(watchlist);
-  syncWatchToServer(entry);
   document.getElementById('alert-make').value = '';
-  populateWatchModelOptions();   // resets + disables the model select
+  populateWatchModelOptions();   // resets + disables the model picker
   document.getElementById('alert-yr-min').value = '';
   document.getElementById('alert-yr-max').value = '';
   renderAlerts();
@@ -2609,10 +2668,43 @@ document.getElementById('alert-radius').addEventListener('change', e => {
     openUpgradeSheet('watch-anywhere');
   }
 });
-['alert-make', 'alert-model', 'alert-yr-min', 'alert-yr-max'].forEach(id => {
+['alert-make', 'alert-yr-min', 'alert-yr-max'].forEach(id => {
   document.getElementById(id).addEventListener('keydown', e => {
     if (e.key === 'Enter') addWatchItem();
   });
+});
+/* Watch-model multi-select panel: open/close, search, toggle, clear. */
+document.getElementById('alert-model-btn').addEventListener('click', e => {
+  e.stopPropagation();
+  const panel = document.getElementById('alert-model-panel');
+  const opening = panel.style.display === 'none';
+  panel.style.display = opening ? '' : 'none';
+  if (opening) {
+    const search = document.getElementById('alert-model-search');
+    search.value = '';
+    renderWatchModelList();
+    if (matchMedia('(pointer: fine)').matches) search.focus();
+  }
+});
+document.getElementById('alert-model-panel').addEventListener('click', e => e.stopPropagation());
+document.addEventListener('click', () => {
+  document.getElementById('alert-model-panel').style.display = 'none';
+});
+document.getElementById('alert-model-search').addEventListener('input', renderWatchModelList);
+document.getElementById('alert-model-list').addEventListener('change', e => {
+  const cb = e.target.closest('input[type="checkbox"]');
+  if (!cb) return;
+  if (cb.checked) watchSelectedModels.add(cb.dataset.model);
+  else watchSelectedModels.delete(cb.dataset.model);
+  updateWatchModelBtnLabel();
+});
+document.getElementById('alert-model-clear').addEventListener('click', () => {
+  watchSelectedModels.clear();
+  renderWatchModelList();
+  updateWatchModelBtnLabel();
+});
+document.getElementById('alert-model-done').addEventListener('click', () => {
+  document.getElementById('alert-model-panel').style.display = 'none';
 });
 
 (function initNotifBtn() {
