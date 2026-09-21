@@ -1895,6 +1895,13 @@ UNOBTANIUM_DB = {
             {"name": "Rear Steel Bumper (straight)", "rarity": "Rare", "low": 60, "high": 150, "cost": 15},
             {"name": "Gauge Cluster w/ Tach", "rarity": "Epic", "low": 100, "high": 250, "cost": 10},
             {"name": "Sliding Rear Window", "rarity": "Rare", "low": 60, "high": 150, "cost": 10},
+            # Vintage-EFI electronics (2026-09-21 audit): used OEM 22RE AFMs ask
+            # ~$175 and sell out (importapart); new OEM Denso runs $600-1,200
+            # where it exists at all. Band kept conservative vs asking prices.
+            {"name": "22RE AFM (Air Flow Meter)", "rarity": "Epic", "low": 80, "high": 180, "cost": 10, "yr_min": 1984},
+            # NLA fragile interior: heater/climate panels crack and knobs walk
+            # off — asks $80-250 for working units (2026-09-21).
+            {"name": "Climate Control Panel (works, knobs intact)", "rarity": "Rare", "low": 40, "high": 100, "cost": 10},
         ],
     },
     "t100": {
@@ -3634,6 +3641,9 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
         {"name": "Bucket Seats (clean pair)", "rarity": "Uncommon", "low": 80, "high": 250, "cost": 40},
         {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        # used OEM 22RE/3VZE AFMs ask ~$175 and sell out; new OEM $600-1,200 & near-NLA (2026-09-21)
+        {"name": "AFM (Air Flow Meter, 22RE/3.0)", "rarity": "Epic", "low": 80, "high": 180, "cost": 10},
+        {"name": "Climate Control Panel (works, knobs intact)", "rarity": "Rare", "low": 40, "high": 100, "cost": 10},
     ]},
     {"label": "3rd gen", "years": (1996, 2002), "parts": [
         # Factory rear e-locker is a 3rd-gen option — previously claimed for ALL years.
@@ -3647,6 +3657,10 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
         {"name": "Manual Shifter + Knob (5-spd)", "rarity": "Rare", "low": 40, "high": 120, "cost": 12, "manual": True},
         {"name": "Bucket Seats (clean pair)", "rarity": "Uncommon", "low": 80, "high": 250, "cost": 40},
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+        # fragile-interior adds (2026-09-21): working climate units ask $100-250,
+        # master window switches $50-160 — bands conservative vs asks
+        {"name": "Climate Control Unit (works)", "rarity": "Rare", "low": 40, "high": 110, "cost": 12},
+        {"name": "Window Master Switch", "rarity": "Uncommon", "low": 30, "high": 90, "cost": 10},
     ]},
     {"label": "4th gen", "years": (2003, 2009), "parts": [
         # 4th gen ran X-REAS (not KDSS — that was a GX470/5th-gen-Trail thing);
@@ -3659,6 +3673,7 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
         {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 130, "cost": 15},  # new heated power pairs ~$100-160 — 80% ceiling (2026-09)
         {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
         {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
+        {"name": "Window Master Switch", "rarity": "Uncommon", "low": 30, "high": 90, "cost": 10},
     ]},
     {"label": "5th gen", "years": (2010, 2024), "parts": [
         {"name": "TRD Pro Grille", "rarity": "Legendary", "low": 300, "high": 600, "cost": 40, "yr_min": 2014},
@@ -3678,11 +3693,16 @@ _split_generations("tacoma", display="Toyota Tacoma", make="Toyota", gens=[
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 30, "high": 80, "cost": 20},  # DEAD-FLIP tier: new DEPO pairs $74-84 (HeadlightsDepot/Amazon 2026-09) — used can only be scrap-cheap
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 30},
         {"name": "Manual Shifter + Knob (5-spd)", "rarity": "Rare", "low": 40, "high": 120, "cost": 12, "manual": True},
+        # fragile-interior adds (2026-09-21): working 01-04 climate units ask
+        # $100-250, master window switches $50-160 — bands conservative vs asks
+        {"name": "Climate Control Unit (works)", "rarity": "Rare", "low": 40, "high": 110, "cost": 12},
+        {"name": "Window Master Switch", "rarity": "Uncommon", "low": 30, "high": 80, "cost": 10},
     ]},
     {"label": "2nd gen", "years": (2005, 2015), "parts": [
         {"name": "TRD Skid Plate", "rarity": "Epic", "low": 150, "high": 350, "cost": 25},
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 30},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 50, "high": 140, "cost": 20},  # new DEPO/TYC pairs ~$85-160 — 80% ceiling caps used high (2026-09)
+        {"name": "Window Master Switch", "rarity": "Uncommon", "low": 30, "high": 80, "cost": 10},
     ]},
     {"label": "3rd gen", "years": (2016, 2024), "parts": [
         {"name": "TRD Pro Grille", "rarity": "Legendary", "low": 200, "high": 450, "cost": 30},
@@ -3690,6 +3710,8 @@ _split_generations("tacoma", display="Toyota Tacoma", make="Toyota", gens=[
         {"name": "OEM Fender Flares (color-matched)", "rarity": "Epic", "low": 200, "high": 500, "cost": 30},
         {"name": "TRD Skid Plate", "rarity": "Epic", "low": 150, "high": 350, "cost": 25},
         {"name": "Tailgate (clean)", "rarity": "Rare", "low": 150, "high": 400, "cost": 30},
+        # 16-21 master switch (84820-04080) asks $160 used (2026-09-21) — conservative band
+        {"name": "Window Master Switch", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 10},
     ]},
 ])
 
