@@ -1,8 +1,8 @@
 {
  "audit_date": "2026-09-09",
- "source": "scraper/price_validation_report.md (manual audit, PR #11) — evidence from recycler listed prices, enthusiast-forum sold threads, new-OEM upper bounds. eBay sold listings were bot-blocked. 2026-09-09: generation-split audit — UNDERSTATED bands from the 09-02 audit fixed in UNOBTANIUM_DB (F-150 tow mirrors/Raptor grille, Focus ST/RS Recaros + HIDs); per-generation evidence appended below. 2026-09-10: new-part ceiling audit — see new_ceilings.",
+ "source": "scraper/price_validation_report.md (manual audit, PR #11) \u2014 evidence from recycler listed prices, enthusiast-forum sold threads, new-OEM upper bounds. eBay sold listings were bot-blocked. 2026-09-09: generation-split audit \u2014 UNDERSTATED bands from the 09-02 audit fixed in UNOBTANIUM_DB (F-150 tow mirrors/Raptor grille, Focus ST/RS Recaros + HIDs); per-generation evidence appended below. 2026-09-10: new-part ceiling audit \u2014 see new_ceilings.",
  "new_ceilings_date": "2026-09-10",
- "new_ceilings_rule": "A used part's displayed high must not exceed 80% of the going NEW price for an OEM-quality equivalent (new_oem). If an acceptable-quality new aftermarket part (new_budget with budget_acceptable=true) sells under the used displayed low, the part is a dead flip — remove it or drop to scrap-tier numbers. Ceilings compare against OEM-quality new parts, never the cheapest knockoff: enthusiasts pay a premium for OEM (e.g. Aisin hubs over clones). Patterns are lowercase substrings matched against part names, most specific first; optional vehicles list restricts by model token.",
+ "new_ceilings_rule": "A used part's displayed high must not exceed 80% of the going NEW price for an OEM-quality equivalent (new_oem). If an acceptable-quality new aftermarket part (new_budget with budget_acceptable=true) sells under the used displayed low, the part is a dead flip \u2014 remove it or drop to scrap-tier numbers. Ceilings compare against OEM-quality new parts, never the cheapest knockoff: enthusiasts pay a premium for OEM (e.g. Aisin hubs over clones). Patterns are lowercase substrings matched against part names, most specific first; optional vehicles list restricts by model token.",
  "new_ceilings": [
   {
    "pattern": "manual locking hubs",
@@ -140,7 +140,7 @@
    "new_oem_desc": "TYC $85 / Dorman $87 (older Sentra, RockAuto); Dorman OE $180-198 for 2013+ ",
    "new_budget": 85,
    "budget_acceptable": true,
-   "note": "used band $27-58 displayed still clears — flip survives on price gap",
+   "note": "used band $27-58 displayed still clears \u2014 flip survives on price gap",
    "source": "web 2026-09-10"
   }
  ],
@@ -163,7 +163,7 @@
    "obs_low": 20,
    "obs_high": 60,
    "confidence": "good",
-   "note": "dead-flip tier: new DEPO pairs $74-84 — used can only be scrap-cheap (2026-09)"
+   "note": "dead-flip tier: new DEPO pairs $74-84 \u2014 used can only be scrap-cheap (2026-09)"
   },
   {
    "part": "Headlights (clear, non-hazed)",
@@ -283,7 +283,7 @@
    "obs_low": 300,
    "obs_high": 900,
    "confidence": "good",
-   "note": "FB/Craigslist/forum tracked sales $300–900; old single 400–1500 band spanned all gens"
+   "note": "FB/Craigslist/forum tracked sales $300\u2013900; old single 400\u20131500 band spanned all gens"
   },
   {
    "part": "Hardtop (full, clean)",
@@ -293,7 +293,7 @@
    "obs_low": 600,
    "obs_high": 1400,
    "confidence": "good",
-   "note": "$600–1,400 tracked sales"
+   "note": "$600\u20131,400 tracked sales"
   },
   {
    "part": "Hardtop (full, clean)",
@@ -303,7 +303,7 @@
    "obs_low": 1000,
    "obs_high": 2000,
    "confidence": "good",
-   "note": "$1,000–2,000 tracked sales"
+   "note": "$1,000\u20132,000 tracked sales"
   },
   {
    "part": "Hardtop (full, clean)",
@@ -313,7 +313,7 @@
    "obs_low": 1200,
    "obs_high": 2800,
    "confidence": "good",
-   "note": "$1,200–2,800 tracked sales"
+   "note": "$1,200\u20132,800 tracked sales"
   },
   {
    "part": "Heated Leather Seats (pair)",
@@ -323,7 +323,7 @@
    "obs_low": 175,
    "obs_high": 500,
    "confidence": "thin",
-   "note": "forum/recycler pairs $175–500 (2026-09); raised from 150–350"
+   "note": "forum/recycler pairs $175\u2013500 (2026-09); raised from 150\u2013350"
   },
   {
    "part": "AutoRide Rear Shocks (pair)",
@@ -333,7 +333,7 @@
    "obs_low": 80,
    "obs_high": 250,
    "confidence": "thin",
-   "note": "LOWERED from 150–350: thin used market (bladder-failure risk), forum pairs ~$100"
+   "note": "LOWERED from 150\u2013350: thin used market (bladder-failure risk), forum pairs ~$100"
   },
   {
    "part": "T-Top Glass Panels (pair)",
@@ -343,7 +343,7 @@
    "obs_low": 75,
    "obs_high": 450,
    "confidence": "thin",
-   "note": "used sets list/sell $75–300; specialty retail singles $450 (2026-09)"
+   "note": "used sets list/sell $75\u2013300; specialty retail singles $450 (2026-09)"
   },
   {
    "part": "T-Top Glass Panels (pair)",
@@ -353,7 +353,7 @@
    "obs_low": 195,
    "obs_high": 450,
    "confidence": "thin",
-   "note": "used sets $195–350; specialty retail $450"
+   "note": "used sets $195\u2013350; specialty retail $450"
   },
   {
    "part": "Redline Recaro Seats (set)",
@@ -363,7 +363,7 @@
    "obs_low": 75,
    "obs_high": 400,
    "confidence": "thin",
-   "note": "forum sales of front+rear sets $75–400 (2026-09)"
+   "note": "forum sales of front+rear sets $75\u2013400 (2026-09)"
   },
   {
    "part": "Convertible Top Motor/Pump",
@@ -373,7 +373,7 @@
    "obs_low": 75,
    "obs_high": 345,
    "confidence": "good",
-   "note": "recycler-listed used units $75–345 (2026-09)"
+   "note": "recycler-listed used units $75\u2013345 (2026-09)"
   },
   {
    "part": "Power-Fold Tow Mirrors (pair)",
@@ -383,7 +383,7 @@
    "obs_low": 225,
    "obs_high": 328,
    "confidence": "good",
-   "note": "2026-09-10 ceiling audit: quality new pairs $410 (14-18) / $515 (19+) — prior 450-700 obs mixed HD recycler asks with new prices; used must undercut new by 20%"
+   "note": "2026-09-10 ceiling audit: quality new pairs $410 (14-18) / $515 (19+) \u2014 prior 450-700 obs mixed HD recycler asks with new prices; used must undercut new by 20%"
   },
   {
    "part": "Magic Seat (rear, complete)",
@@ -393,7 +393,7 @@
    "obs_low": null,
    "obs_high": null,
    "confidence": "thin",
-   "note": "dismantler assemblies; new OEM cushion pads alone $340–480 set the ceiling"
+   "note": "dismantler assemblies; new OEM cushion pads alone $340\u2013480 set the ceiling"
   },
   {
    "part": "Recaro Seats (pair)",
@@ -403,7 +403,7 @@
    "obs_low": 950,
    "obs_high": 2000,
    "confidence": "good",
-   "note": "$950–2,000"
+   "note": "$950\u20132,000"
   },
   {
    "part": "Si/Type R Seats (pair)",
@@ -413,7 +413,7 @@
    "obs_low": 240,
    "obs_high": 750,
    "confidence": "good",
-   "note": "$240–750"
+   "note": "$240\u2013750"
   },
   {
    "part": "3rd Row Seat",
@@ -423,7 +423,7 @@
    "obs_low": 300,
    "obs_high": 600,
    "confidence": "good",
-   "note": "$300–600 (07–14 gen)"
+   "note": "$300\u2013600 (07\u201314 gen)"
   },
   {
    "part": "3rd Row Seat",
@@ -433,7 +433,7 @@
    "obs_low": 190,
    "obs_high": 600,
    "confidence": "thin",
-   "note": "proxy: Tahoe/Explorer $190–600"
+   "note": "proxy: Tahoe/Explorer $190\u2013600"
   },
   {
    "part": "Raptor Grille",
@@ -443,7 +443,7 @@
    "obs_low": 525,
    "obs_high": 600,
    "confidence": "good",
-   "note": "$525–600"
+   "note": "$525\u2013600"
   },
   {
    "part": "RS Brake Calipers (set)",
@@ -453,7 +453,7 @@
    "obs_low": 400,
    "obs_high": 910,
    "confidence": "good",
-   "note": "$400–910/set"
+   "note": "$400\u2013910/set"
   },
   {
    "part": "Headlights (clear)",
@@ -463,7 +463,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "good",
-   "note": "$28–180/side (halogen)"
+   "note": "$28\u2013180/side (halogen)"
   },
   {
    "part": "Headlights (clear)",
@@ -473,7 +473,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "3rd Row Seat",
@@ -483,7 +483,7 @@
    "obs_low": 189,
    "obs_high": 246,
    "confidence": "good",
-   "note": "$189–246"
+   "note": "$189\u2013246"
   },
   {
    "part": "3rd Row Seat",
@@ -493,7 +493,7 @@
    "obs_low": 192,
    "obs_high": 392,
    "confidence": "good",
-   "note": "$192–392"
+   "note": "$192\u2013392"
   },
   {
    "part": "Power-Fold Tow Mirrors (pair)",
@@ -503,7 +503,7 @@
    "obs_low": 450,
    "obs_high": 1200,
    "confidence": "good",
-   "note": "$450–1,200 sold (2021+ camera/BLIS; new OEM pairs $1,600-2,200 keep the ceiling clear); 04-14 gen carries its own lower entry"
+   "note": "$450\u20131,200 sold (2021+ camera/BLIS; new OEM pairs $1,600-2,200 keep the ceiling clear); 04-14 gen carries its own lower entry"
   },
   {
    "part": "Headlights (clear)",
@@ -513,7 +513,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "good",
-   "note": "halogen $28–180"
+   "note": "halogen $28\u2013180"
   },
   {
    "part": "Stow-N-Go 2nd Row (each)",
@@ -523,7 +523,7 @@
    "obs_low": 135,
    "obs_high": 1000,
    "confidence": "good",
-   "note": "$135–500/seat ($600–1,000/pair kits)"
+   "note": "$135\u2013500/seat ($600\u20131,000/pair kits)"
   },
   {
    "part": "Stow-N-Go 2nd Row (each)",
@@ -543,7 +543,7 @@
    "obs_low": 135,
    "obs_high": 450,
    "confidence": "good",
-   "note": "$135–450/set"
+   "note": "$135\u2013450/set"
   },
   {
    "part": "Tailgate (clean)",
@@ -553,7 +553,7 @@
    "obs_low": 50,
    "obs_high": 900,
    "confidence": "good",
-   "note": "$50 (rough) – $900+ (2017+ grade A)"
+   "note": "$50 (rough) \u2013 $900+ (2017+ grade A)"
   },
   {
    "part": "Power Sliding Door Motor",
@@ -563,7 +563,7 @@
    "obs_low": 245,
    "obs_high": 400,
    "confidence": "good",
-   "note": "$245–400"
+   "note": "$245\u2013400"
   },
   {
    "part": "Power Sliding Door Motor",
@@ -573,7 +573,7 @@
    "obs_low": 245,
    "obs_high": 400,
    "confidence": "good",
-   "note": "$245–400"
+   "note": "$245\u2013400"
   },
   {
    "part": "Sport Seats (pair)",
@@ -583,7 +583,7 @@
    "obs_low": 360,
    "obs_high": 700,
    "confidence": "good",
-   "note": "$360–700"
+   "note": "$360\u2013700"
   },
   {
    "part": "Sport Front Lip",
@@ -593,7 +593,7 @@
    "obs_low": 50,
    "obs_high": 296,
    "confidence": "**thin**",
-   "note": "new OEM lip $95; used likely $50–120; underbody spoiler new $296+"
+   "note": "new OEM lip $95; used likely $50\u2013120; underbody spoiler new $296+"
   },
   {
    "part": "ST3/RS HID Headlights (pair)",
@@ -603,7 +603,7 @@
    "obs_low": 400,
    "obs_high": 1300,
    "confidence": "good",
-   "note": "$400–1,300/pair"
+   "note": "$400\u20131,300/pair"
   },
   {
    "part": "SRT/Scat Brembo Calipers (set)",
@@ -613,7 +613,7 @@
    "obs_low": 600,
    "obs_high": 1900,
    "confidence": "good",
-   "note": "$600–775/set (to $1,900 w/ rotors)"
+   "note": "$600\u2013775/set (to $1,900 w/ rotors)"
   },
   {
    "part": "Sport Twin-Turbo Intercooler",
@@ -623,7 +623,7 @@
    "obs_low": 100,
    "obs_high": 245,
    "confidence": "good",
-   "note": "used ~$100; new OEM $204–245"
+   "note": "used ~$100; new OEM $204\u2013245"
   },
   {
    "part": "N/Sport Front Bumper Assembly",
@@ -633,7 +633,7 @@
    "obs_low": 265,
    "obs_high": 774,
    "confidence": "good",
-   "note": "used assemblies $625–774; new aftermarket $265–300"
+   "note": "used assemblies $625\u2013774; new aftermarket $265\u2013300"
   },
   {
    "part": "Gauge Cluster / IPC",
@@ -643,7 +643,7 @@
    "obs_low": 75,
    "obs_high": 185,
    "confidence": "good",
-   "note": "$75–185"
+   "note": "$75\u2013185"
   },
   {
    "part": "ST/RS Intercooler",
@@ -653,7 +653,7 @@
    "obs_low": 20,
    "obs_high": 230,
    "confidence": "good",
-   "note": "forum sold $20–100; retail ≤$230"
+   "note": "forum sold $20\u2013100; retail \u2264$230"
   },
   {
    "part": "Heated Leather Front Seats (pair)",
@@ -663,7 +663,7 @@
    "obs_low": 156,
    "obs_high": 524,
    "confidence": "good",
-   "note": "$156–524/seat (recycler ask)"
+   "note": "$156\u2013524/seat (recycler ask)"
   },
   {
    "part": "ST/RS Steering Wheel",
@@ -673,7 +673,7 @@
    "obs_low": 75,
    "obs_high": 241,
    "confidence": "good",
-   "note": "$75–241"
+   "note": "$75\u2013241"
   },
   {
    "part": "Si Front Lip (OEM)",
@@ -683,7 +683,7 @@
    "obs_low": 130,
    "obs_high": 225,
    "confidence": "good",
-   "note": "$130–225 (HFP, forum sold ~$130–200)"
+   "note": "$130\u2013225 (HFP, forum sold ~$130\u2013200)"
   },
   {
    "part": "Comfort Seats / Multi-Contour (pair)",
@@ -693,7 +693,7 @@
    "obs_low": 494,
    "obs_high": 900,
    "confidence": "good",
-   "note": "$494–900"
+   "note": "$494\u2013900"
   },
   {
    "part": "SHO Turbo / Intercooler Parts",
@@ -703,7 +703,7 @@
    "obs_low": 225,
    "obs_high": 1050,
    "confidence": "thin",
-   "note": "used turbos ~$225/ea; new pair $580–1,050; reman $780+/ea"
+   "note": "used turbos ~$225/ea; new pair $580\u20131,050; reman $780+/ea"
   },
   {
    "part": "Brembo Calipers (set)",
@@ -713,7 +713,7 @@
    "obs_low": 575,
    "obs_high": 1300,
    "confidence": "good",
-   "note": "$575–1,300/set"
+   "note": "$575\u20131,300/set"
   },
   {
    "part": "Instrument Cluster",
@@ -723,7 +723,7 @@
    "obs_low": 75,
    "obs_high": 185,
    "confidence": "thin",
-   "note": "proxy: Accord clusters $75–185"
+   "note": "proxy: Accord clusters $75\u2013185"
   },
   {
    "part": "Panoramic Sunroof Glass",
@@ -733,27 +733,27 @@
    "obs_low": 125,
    "obs_high": 800,
    "confidence": "good",
-   "note": "$125 (11–15 gen) – $275–800 (2020+)"
+   "note": "$125 (11\u201315 gen) \u2013 $275\u2013800 (2020+)"
   },
   {
    "part": "Headlights (clear)",
-   "vehicle": "Ford Explorer (≤2005)",
+   "vehicle": "Ford Explorer (\u22642005)",
    "displayed_low": 40,
    "displayed_high": 85,
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "Headlights (clear)",
-   "vehicle": "Ford Explorer (06–10)",
+   "vehicle": "Ford Explorer (06\u201310)",
    "displayed_low": 40,
    "displayed_high": 85,
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "Headlights (clear)",
@@ -763,7 +763,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "Power Window Master Switch",
@@ -773,7 +773,7 @@
    "obs_low": 45,
    "obs_high": 150,
    "confidence": "good",
-   "note": "$45–150 (typ. $58–92)"
+   "note": "$45\u2013150 (typ. $58\u201392)"
   },
   {
    "part": "iDrive / Navigation Head Unit",
@@ -783,7 +783,7 @@
    "obs_low": 120,
    "obs_high": 443,
    "confidence": "good",
-   "note": "$120–443 (CIC sets ~$295)"
+   "note": "$120\u2013443 (CIC sets ~$295)"
   },
   {
    "part": "Brembo Front Calipers (Type-S)",
@@ -793,7 +793,7 @@
    "obs_low": 240,
    "obs_high": 390,
    "confidence": "good",
-   "note": "$240–390/pair"
+   "note": "$240\u2013390/pair"
   },
   {
    "part": "Headlights (clear)",
@@ -803,7 +803,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "Headlights (clear)",
@@ -813,7 +813,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "Brembo Calipers (set, sport pkg)",
@@ -823,7 +823,7 @@
    "obs_low": 509,
    "obs_high": 1100,
    "confidence": "good",
-   "note": "$509–650 calipers-only; $750–1,100 kits"
+   "note": "$509\u2013650 calipers-only; $750\u20131,100 kits"
   },
   {
    "part": "Headlights (clear)",
@@ -833,7 +833,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "Headlights (clear)",
@@ -843,7 +843,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "Headlights (clear)",
@@ -853,7 +853,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "OEM HID Headlights",
@@ -863,7 +863,7 @@
    "obs_low": 130,
    "obs_high": 350,
    "confidence": "good",
-   "note": "$130–350/side"
+   "note": "$130\u2013350/side"
   },
   {
    "part": "Gauge Cluster",
@@ -873,7 +873,7 @@
    "obs_low": 35,
    "obs_high": 250,
    "confidence": "good",
-   "note": "$35–148 (98–05); $125–250 (2013+)"
+   "note": "$35\u2013148 (98\u201305); $125\u2013250 (2013+)"
   },
   {
    "part": "Sony Audio Amp + Speakers",
@@ -883,7 +883,7 @@
    "obs_low": 100,
    "obs_high": 203,
    "confidence": "good",
-   "note": "amp alone $120–203; sub $100"
+   "note": "amp alone $120\u2013203; sub $100"
   },
   {
    "part": "Headlights (clear)",
@@ -893,7 +893,7 @@
    "obs_low": 28,
    "obs_high": 180,
    "confidence": "thin",
-   "note": "generic halogen $28–180"
+   "note": "generic halogen $28\u2013180"
   },
   {
    "part": "Recaro Seats (PP/GT350)",
@@ -903,7 +903,7 @@
    "obs_low": 350,
    "obs_high": 3500,
    "confidence": "good",
-   "note": "$1,750–3,500 (one $350 take-off outlier)"
+   "note": "$1,750\u20133,500 (one $350 take-off outlier)"
   },
   {
    "part": "MyLink Touchscreen",
@@ -913,7 +913,7 @@
    "obs_low": 80,
    "obs_high": 300,
    "confidence": "good",
-   "note": "$80–300"
+   "note": "$80\u2013300"
   },
   {
    "part": "MyLink Touchscreen",
@@ -923,7 +923,7 @@
    "obs_low": 80,
    "obs_high": 300,
    "confidence": "thin",
-   "note": "proxy: Cruze $80–300"
+   "note": "proxy: Cruze $80\u2013300"
   },
   {
    "part": "Turbo Intercooler + Pipes",
@@ -933,7 +933,7 @@
    "obs_low": 120,
    "obs_high": 350,
    "confidence": "good",
-   "note": "$120–350 (recycler)"
+   "note": "$120\u2013350 (recycler)"
   },
   {
    "part": "Stow-N-Go 3rd Row",
@@ -943,7 +943,7 @@
    "obs_low": 145,
    "obs_high": 380,
    "confidence": "good",
-   "note": "$145–380"
+   "note": "$145\u2013380"
   },
   {
    "part": "22RE AFM (Air Flow Meter)",
@@ -963,7 +963,7 @@
    "obs_low": 80,
    "obs_high": 180,
    "confidence": "fair",
-   "note": "same evidence as Pickup 22RE AFM — shared 22250-350xx family (web 2026-09-21)"
+   "note": "same evidence as Pickup 22RE AFM \u2014 shared 22250-350xx family (web 2026-09-21)"
   },
   {
    "part": "Climate Control Unit (works)",
@@ -1014,6 +1014,56 @@
    "obs_high": 160,
    "confidence": "fair",
    "note": "GX460/4Runner master switches ask $60-160 (web 2026-09-21)"
+  },
+  {
+   "part": "ABS/DSC Hydraulic Module (E46)",
+   "vehicle": "BMW 3 Series",
+   "displayed_low": 80,
+   "displayed_high": 220,
+   "obs_low": 59,
+   "obs_high": 250,
+   "confidence": "good",
+   "note": "used tested units $249.99 (ozsgarage) / EUR 59-225 (autoriven, abs-pump.eu); new OEM $2,030 (bmwpartsdeal). Rebuilder core demand adds a floor (web 2026-09-21)"
+  },
+  {
+   "part": "ABS/DSC Hydraulic Module (E39)",
+   "vehicle": "BMW 5 Series",
+   "displayed_low": 80,
+   "displayed_high": 220,
+   "obs_low": 59,
+   "obs_high": 250,
+   "confidence": "good",
+   "note": "same hydraulic unit family as E46/E53 (34516763959 fits E46+E39+X5) \u2014 same evidence (web 2026-09-21)"
+  },
+  {
+   "part": "MAF (OEM Siemens/VDO, M54)",
+   "vehicle": "BMW 3 Series",
+   "displayed_low": 40,
+   "displayed_high": 90,
+   "obs_low": 27,
+   "obs_high": 120,
+   "confidence": "fair",
+   "note": "new OEM VDO/Continental $171-272; cheap aftermarket ~GBP 27 exists but clone MAFs are notorious lemons, BMW buyers pay OEM premium. Band conservative (web 2026-09-21)"
+  },
+  {
+   "part": "SBC Brake Hydraulic Unit (W211)",
+   "vehicle": "Mercedes-Benz E-Class",
+   "displayed_low": 150,
+   "displayed_high": 400,
+   "obs_low": 150,
+   "obs_high": 528,
+   "confidence": "good",
+   "note": "tested used EUR 449 (pieces-okaz) / GBP 528 (r129.co); reman $400-600; new OEM $4,716 + $550 core (mbdirectparts). Untested yard pulls sell as cores at the low end \u2014 band conservative (web 2026-09-21)"
+  },
+  {
+   "part": "Hood w/ Scoop (Sport/Highlander pkg)",
+   "vehicle": "Toyota 4Runner",
+   "displayed_low": 200,
+   "displayed_high": 400,
+   "obs_low": 300,
+   "obs_high": 395,
+   "confidence": "good",
+   "note": "documented junkyard pulls sold $300-350 (r/3rdGen4Runner), clean painted example $395 (4runners.com FS thread); repro+insert+paint ~$500 all-in sets ceiling. Local-sale item, freight otherwise (web 2026-09-21)"
   }
  ]
 }
