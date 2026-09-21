@@ -1079,6 +1079,10 @@ function applyProGates() {
     o.textContent = (!pro && PRO_SORTS.has(o.value)) ? o.dataset.base + ' \u2014 Pro' : o.dataset.base;
   });
   if (!pro && PRO_SORTS.has(sortSel.value)) sortSel.value = FREE_DEFAULT_SORT;
+  // Tier-appropriate default: a Pro who never picked a sort gets Best flips
+  // (that's what they paid for); free default stays Newest arrivals. An
+  // explicit choice (jh_sort) always wins and is restored at boot.
+  if (pro && !localStorage.getItem('jh_sort')) sortSel.value = 'smart-profit';
 }
 
 /* Sorting BY value hands out the value ranking even with prices blurred, so
@@ -1123,6 +1127,13 @@ document.getElementById('jh-version').addEventListener('click', () => {
   _verTimer = setTimeout(() => { _verTaps = 0; }, 1600);
   if (_verTaps >= 7) { _verTaps = 0; toggleProDev(); }
 });
+// Restore the remembered sort BEFORE the pro gates run: gates snap Pro-only
+// values back for free users, so an invalid saved choice self-heals here.
+(() => {
+  const saved = localStorage.getItem('jh_sort');
+  const sel = document.getElementById('live-sort');
+  if (saved && [...sel.options].some(o => o.value === saved)) sel.value = saved;
+})();
 applyProGates();
 
 /* ===== SAVED CARS (hearts + yard-visit sheet) ===== */
@@ -1840,7 +1851,10 @@ document.getElementById('live-filter-year-max').addEventListener('change', () =>
   renderLive();
 });
 document.getElementById('live-filter-location').addEventListener('change', renderLive);
-let _lastFreeSort = FREE_DEFAULT_SORT;
+let _lastFreeSort = (() => {
+  const s = localStorage.getItem('jh_sort');
+  return (s && !PRO_SORTS.has(s)) ? s : FREE_DEFAULT_SORT;
+})();
 document.getElementById('live-sort').addEventListener('change', e => {
   const val = e.target.value;
   if (PRO_SORTS.has(val) && !isPro()) {
@@ -1849,6 +1863,7 @@ document.getElementById('live-sort').addEventListener('change', e => {
     return;
   }
   if (!PRO_SORTS.has(val)) _lastFreeSort = val;
+  localStorage.setItem('jh_sort', val);   // explicit choice, remembered
   renderLive();
 });
 document.getElementById('live-filter-match').addEventListener('change', renderLive);
