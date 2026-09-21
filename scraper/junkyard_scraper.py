@@ -1557,6 +1557,12 @@ UNOBTANIUM_DB = {
             {"name": "OEM Headlight Assembly (E46 halogen/xenon, pair)", "rarity": "Rare", "low": 120, "high": 350, "cost": 30, "yr_min": 1999, "yr_max": 2005},
             {"name": "Instrument Cluster (E46, M3/sport worth more)", "rarity": "Rare", "low": 100, "high": 400, "cost": 20, "yr_min": 1999, "yr_max": 2005},
             {"name": "Sport Seats (E46, pair)", "rarity": "Rare", "low": 300, "high": 700, "cost": 55, "yr_min": 1999, "yr_max": 2005, "trim": ["M Sport", "330", "M3"]},
+            # German-sensor adds (2026-09-21 audit): used tested E46 DSC hydraulic
+            # modules $250 US / €59-225 EU vs $2,030 new OEM — rebuilders and
+            # owners both buy. MAF: new OEM VDO $171-272; cheap clones exist but
+            # BMW buyers pay the OEM premium (clone MAFs are a known lemon).
+            {"name": "ABS/DSC Hydraulic Module (E46)", "rarity": "Epic", "low": 80, "high": 220, "cost": 15, "yr_min": 1999, "yr_max": 2005},
+            {"name": "MAF (OEM Siemens/VDO, M54)", "rarity": "Uncommon", "low": 40, "high": 90, "cost": 10, "yr_min": 1999, "yr_max": 2005},
             # E90 (2006-2011) — first iDrive cars; CCC screens die, working pulls move fast
             {"name": "iDrive Head Unit (E90 CCC/CIC)", "rarity": "Rare", "low": 120, "high": 320, "cost": 40, "yr_min": 2006, "yr_max": 2011},
             {"name": "Harman Kardon / Logic7 Amp + Speakers (E90)", "rarity": "Rare", "low": 120, "high": 320, "cost": 35, "yr_min": 2006, "yr_max": 2011},
@@ -1712,6 +1718,8 @@ UNOBTANIUM_DB = {
             {"name": "Instrument Cluster (E39, pixel-perfect worth more)", "rarity": "Rare", "low": 60, "high": 160, "cost": 20, "yr_max": 2003},
             {"name": "DSP Amp + Speakers (E39)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 25, "yr_max": 2003},
             {"name": "Comfort Seats (E39, pair)", "rarity": "Rare", "low": 200, "high": 500, "cost": 50, "yr_max": 2003, "trim": ["540", "530", "M Sport"]},
+            # shares the E46-family DSC hydraulic unit — same evidence (2026-09-21)
+            {"name": "ABS/DSC Hydraulic Module (E39)", "rarity": "Epic", "low": 80, "high": 220, "cost": 15, "yr_max": 2003},
             # E60 (2004-2010) — xenon pairs cheaper than the later LED stuff; CCC/CIC units age poorly
             {"name": "OEM Xenon Headlights (E60, pair)", "rarity": "Rare", "low": 150, "high": 400, "cost": 45, "yr_min": 2004, "yr_max": 2010},
             {"name": "iDrive Head Unit (E60 CCC/CIC)", "rarity": "Rare", "low": 100, "high": 280, "cost": 40, "yr_min": 2004, "yr_max": 2010},
@@ -1898,7 +1906,8 @@ UNOBTANIUM_DB = {
             # Vintage-EFI electronics (2026-09-21 audit): used OEM 22RE AFMs ask
             # ~$175 and sell out (importapart); new OEM Denso runs $600-1,200
             # where it exists at all. Band kept conservative vs asking prices.
-            {"name": "22RE AFM (Air Flow Meter)", "rarity": "Epic", "low": 80, "high": 180, "cost": 10, "yr_min": 1984},
+            # yr_min 1985: EFI (22R-E) arrived MY1985 — earlier trucks are carbureted 22R, no AFM.
+            {"name": "22RE AFM (Air Flow Meter)", "rarity": "Epic", "low": 80, "high": 180, "cost": 10, "yr_min": 1985},
             # NLA fragile interior: heater/climate panels crack and knobs walk
             # off — asks $80-250 for working units (2026-09-21).
             {"name": "Climate Control Panel (works, knobs intact)", "rarity": "Rare", "low": 40, "high": 100, "cost": 10},
@@ -3451,6 +3460,10 @@ UNOBTANIUM_DB.update({
             {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 170, "cost": 25},
             {"name": "Wood Trim Set (unbroken)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 15},
             {"name": "AMG Trim + Badging", "rarity": "Rare", "low": 80, "high": 240, "cost": 20, "trim": ["AMG"]},
+            # SBC era only: W211 E-Class 2003-2006 (facelift dropped SBC). Used
+            # tested units €449-£528, reman $400-600, new OEM $4,716 + $550 core
+            # — rebuilders buy untested pulls as cores (2026-09-21)
+            {"name": "SBC Brake Hydraulic Unit (W211)", "rarity": "Epic", "low": 150, "high": 400, "cost": 20, "yr_min": 2003, "yr_max": 2006},
         ],
     },
     # -- Jeep compact volume --
@@ -3641,16 +3654,22 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
         {"name": "Bucket Seats (clean pair)", "rarity": "Uncommon", "low": 80, "high": 250, "cost": 40},
         {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
-        # used OEM 22RE/3VZE AFMs ask ~$175 and sell out; new OEM $600-1,200 & near-NLA (2026-09-21)
-        {"name": "AFM (Air Flow Meter, 22RE/3.0)", "rarity": "Epic", "low": 80, "high": 180, "cost": 10},
+        # used OEM 22RE/3VZE AFMs ask ~$175 and sell out; new OEM $600-1,200 & near-NLA (2026-09-21).
+        # yr_min 1985: EFI (22R-E) arrived MY1985 — '84s are carbureted 22R, no AFM.
+        {"name": "AFM (Air Flow Meter, 22RE/3.0)", "rarity": "Epic", "low": 80, "high": 180, "cost": 10, "yr_min": 1985},
         {"name": "Climate Control Panel (works, knobs intact)", "rarity": "Rare", "low": 40, "high": 100, "cost": 10},
     ]},
     {"label": "3rd gen", "years": (1996, 2002), "parts": [
         # Factory rear e-locker is a 3rd-gen option — previously claimed for ALL years.
         {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15, "option": True},
+        # Sport/Highlander scooped hood (1999-2002 only): documented junkyard
+        # pulls sold $300-350, clean painted example $395; repro hood + scoop
+        # insert + paint runs ~$500 all-in. Sell local — shipping is freight. (2026-09-21)
+        {"name": "Hood w/ Scoop (Sport/Highlander pkg)", "rarity": "Epic", "low": 200, "high": 400, "cost": 45, "yr_min": 1999, "option": True},
         {"name": "Rear Liftgate Glass + Regulator (works)", "rarity": "Epic", "low": 100, "high": 300, "cost": 30},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 180, "cost": 20},  # new DEPO/TYC pair $148-172 (HeadlightsDepot 2026-09) — 80% ceiling caps used high
-        {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
+        # electric t-case shift is Limited multi-mode gear; SR5s use a lever (2026-09-21 audit)
+        {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15, "drive": ["4wd"], "option": True},
         {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 130, "cost": 15},  # new heated power pairs (Dorman/Kool Vue) ~$100-160 — 80% ceiling ~$104 displayed (2026-09)
         {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
         {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
@@ -3665,11 +3684,13 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
     {"label": "4th gen", "years": (2003, 2009), "parts": [
         # 4th gen ran X-REAS (not KDSS — that was a GX470/5th-gen-Trail thing);
         # band aligned with other electronic-shock pairs (AutoRide evidence).
-        {"name": "X-REAS Suspension Shocks (pair)", "rarity": "Epic", "low": 150, "high": 350, "cost": 20},
+        # Sport/Limited equipment, not on SR5 — flag as option (2026-09-21 audit).
+        {"name": "X-REAS Suspension Shocks (pair)", "rarity": "Epic", "low": 150, "high": 350, "cost": 20, "option": True},
         # 3rd row was a rare option on the 4th-gen 4Runner.
         {"name": "3rd Row Seat", "rarity": "Uncommon", "low": 120, "high": 300, "cost": 35, "option": True},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Rare", "low": 80, "high": 200, "cost": 20},
-        {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
+        # electric shift = V8/full-time cars; V6 SR5s use a lever (2026-09-21 audit)
+        {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15, "drive": ["4wd"], "option": True},
         {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 130, "cost": 15},  # new heated power pairs ~$100-160 — 80% ceiling (2026-09)
         {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
         {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
@@ -3681,7 +3702,8 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
         # KDSS moved here from the mis-gated 2003-2009 range — Trail/TRD Off-Road only.
         {"name": "KDSS Sway Bar Actuators", "rarity": "Legendary", "low": 200, "high": 500, "cost": 20, "trim": ["Trail", "TRD Off-Road", "TRD Pro"]},
         {"name": "Rear E-Locker Actuator Motor", "rarity": "Epic", "low": 200, "high": 450, "cost": 15, "trim": ["Trail", "TRD Off-Road", "TRD Pro"]},
-        {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15},
+        # electric shift = Limited full-time 4WD; SR5/TRD use a lever (2026-09-21 audit)
+        {"name": "Transfer Case Shift Motor", "rarity": "Epic", "low": 90, "high": 200, "cost": 15, "drive": ["4wd"], "option": True},
         {"name": "Heated Side Mirrors (pair)", "rarity": "Rare", "low": 80, "high": 130, "cost": 15},  # new heated power pairs ~$120-180 (Kool Vue) — 80% ceiling (2026-09)
         {"name": "Roof Rack Crossbars", "rarity": "Rare", "low": 84, "high": 250, "cost": 20},
         {"name": "Center Console Lid (uncracked)", "rarity": "Rare", "low": 50, "high": 250, "cost": 8},
