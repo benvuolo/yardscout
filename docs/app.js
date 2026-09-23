@@ -311,6 +311,7 @@ function annotateVinDuplicates(vehicles) {
 /* Single inline SVG icon set — one stroke weight, currentColor, sized by
  * font-size via the .ico class. No emoji in the interface. */
 const ICON = {
+  tag: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>',
   pin: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
   heart: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.46 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.04 3 5.5l7 7Z"/></svg>',
   copy: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
@@ -511,6 +512,99 @@ fetch('data/vehicle_extras.json')
     hydratePhotos();
   })
   .catch(() => { /* enrichment is optional */ });
+
+/* ===== SALE DAYS (chain sale calendars -> data/sale_events.json) =====
+ * Events come from each chain's own published calendar (Pick-n-Pull events
+ * API, PYP deals pages) plus hand-verified manual entries. An event with
+ * yard=null is chain-wide. Free feature for everyone — sale days are when
+ * normal people plan yard trips, not a value leak. */
+let saleEvents = [];
+fetch('data/sale_events.json')
+  .then(r => (r.ok ? r.json() : null))
+  .then(d => {
+    if (!d || !d.events || !d.events.length) return;
+    saleEvents = d.events;
+    if (liveLoaded) {
+      renderLive();
+      if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
+    }
+  })
+  .catch(() => { /* sale calendar is optional enrichment */ });
+
+const SALE_LOOKAHEAD_DAYS = 14;
+
+/** Active or upcoming (≤14d) sale for a yard, else null. */
+function saleForYard(location) {
+  if (!saleEvents.length || !location) return null;
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const horizon = new Date(today.getTime() + SALE_LOOKAHEAD_DAYS * 86400000);
+  let best = null;
+  for (const ev of saleEvents) {
+    const start = new Date(ev.start + 'T00:00:00');
+    const end = new Date(ev.end + 'T23:59:59');
+    if (end < today || start > horizon) continue;
+    if (ev.yard ? ev.yard !== location : !location.startsWith(ev.chain)) continue;
+    if (!best || start < new Date(best.start + 'T00:00:00')) best = ev;
+  }
+  return best;
+}
+
+function saleDateLabel(ev) {
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const start = new Date(ev.start + 'T00:00:00');
+  const end = new Date(ev.end + 'T00:00:00');
+  const fmt = d => d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  // same-month ranges collapse: "Sep 25–27", not "Sep 25–Sep 27"
+  const fmtEnd = d => d.getMonth() === start.getMonth()
+    ? d.toLocaleDateString(undefined, { day: 'numeric' }) : fmt(d);
+  if (start <= today && end >= today) {
+    return +start === +end ? 'today' : `now &ndash; ${fmt(end)}`;
+  }
+  return +start === +end ? fmt(start) : `${fmt(start)}&ndash;${fmtEnd(end)}`;
+}
+
+function saleBadgeHtml(location) {
+  const ev = saleForYard(location);
+  if (!ev) return '';
+  const label = (ev.pct ? ev.pct + '% off ' : 'Sale ') + saleDateLabel(ev);
+  return ` <span class="sale-pill" title="${escapeHtml(ev.title || 'Sale')} &mdash; from the chain's published sale calendar">${ICON.tag}${label}</span>`;
+}
+
+/** Live-tab strip: sales at yards inside the current radius. */
+function renderSaleStrip() {
+  const strip = document.getElementById('sale-strip');
+  if (!strip) return;
+  if (!saleEvents.length || !liveLoaded || !activeZipCoords) { strip.style.display = 'none'; return; }
+  const radius = effectiveRadiusMi();
+  const rows = [];
+  const seen = new Set();
+  for (const y of buildYardDirectory()) {
+    const ev = saleForYard(y.location);
+    if (!ev) continue;
+    const d = (y.lat != null && y.lng != null)
+      ? haversineMiles(activeZipCoords.lat, activeZipCoords.lng, y.lat, y.lng) : null;
+    if (radius && (d == null || d > radius)) continue;
+    const key = y.location + ev.start;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    rows.push({ y, ev, d });
+  }
+  if (!rows.length) { strip.style.display = 'none'; return; }
+  rows.sort((a, b) => (a.ev.start < b.ev.start ? -1 : 1) || ((a.d ?? 1e9) - (b.d ?? 1e9)));
+  const shown = rows.slice(0, 3);
+  strip.innerHTML = shown.map(({ y, ev, d }) =>
+    `<button type="button" class="sale-strip-row" data-loc="${escapeHtml(y.location)}">
+       <span class="sale-pill">${ev.pct ? ev.pct + '% off' : 'Sale'}</span>
+       <span class="sale-strip-yard">${escapeHtml(y.location)}</span>
+       <span class="sale-strip-when">${saleDateLabel(ev)}${d != null ? ' &middot; ' + Math.round(d) + ' mi' : ''}</span>
+     </button>`).join('')
+    + (rows.length > shown.length ? `<div class="sale-strip-more">+${rows.length - shown.length} more sale${rows.length - shown.length > 1 ? 's' : ''} in range</div>` : '');
+  strip.style.display = '';
+}
+document.getElementById('sale-strip').addEventListener('click', e => {
+  const row = e.target.closest('.sale-strip-row');
+  if (row) viewYardInLive(row.dataset.loc);
+});
 
 /* Insert photos into already-rendered cards (extras arrived after render). */
 function hydratePhotos() {
@@ -1509,6 +1603,7 @@ function renderLive() {
 
   updateLiveFilterCount();
   updateZipBanner();
+  renderSaleStrip();
 
   document.getElementById('live-stats-bar').innerHTML = `
     <div class="stat-card"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
@@ -1767,7 +1862,7 @@ function renderLive() {
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
             <div class="car-meta">Added ${dateStr}${freshNote}${vinMetaHtml(v)}</div>
             ${specBits.length ? `<div class="car-meta car-specs">${specBits.map(escapeHtml).join(' &middot; ')}</div>` : ''}
             ${lotClock}
@@ -2107,7 +2202,7 @@ function renderYards() {
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${escapeHtml(y.location)}</div>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(place) || 'Location unknown'}</span>${distTxt}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(place) || 'Location unknown'}</span>${distTxt}${saleBadgeHtml(y.location)}</div>
             <div class="car-meta">${y.count.toLocaleString()} cars on the lot &middot; ${y.newCount.toLocaleString()} new this week</div>
             <div class="lot-clock" title="Based on historical arrival-to-departure data — an estimate, not a schedule">${life}</div>
           </div>
@@ -2285,7 +2380,7 @@ function renderAlerts() {
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
             <div class="car-meta">Added ${dateStr}${vinMetaHtml(v)} &middot; matched: ${matchedRules.join(', ')}</div>
           </div>
           <div class="car-badges">

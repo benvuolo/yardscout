@@ -1,0 +1,4 @@
+{
+  "_readme": "Hand-entered sale events (e.g. seen on a chain's Facebook page or in-yard signage). They merge into docs/data/sale_events.json on every scan. Fields: chain (must match inventory chain prefix, e.g. 'Pull-A-Part'), yard (full yard name, or null for chain-wide), title, start/end (YYYY-MM-DD), pct (number or null). Scraped events win over manual ones with the same chain+yard+start.",
+  "events": []
+}

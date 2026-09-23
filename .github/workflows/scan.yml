@@ -47,6 +47,11 @@ jobs:
       - name: Refresh per-yard price lists
         run: python scraper/junkyard_scraper.py --refresh-chain-pricing
 
+      # Sale-day calendar (PnP events API + PYP deals pages + manual file).
+      # Non-fatal: a promo-page hiccup must not kill the inventory scan.
+      - name: Refresh sale events
+        run: python scraper/sale_events.py || echo "sale-events refresh failed (non-fatal)"
+
       - name: Run scraper (national, incremental VIN decode)
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
