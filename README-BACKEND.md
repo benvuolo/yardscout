@@ -272,6 +272,17 @@ curl -X POST "$API/v1/admin/digest/run" -H "x-admin-secret: <ADMIN_SECRET>"
 # → {"users":3,"emails":3,"arrivals":812}
 ```
 
+**Sale-day alerts.** Every scan also scrapes each chain's published sale
+calendar (`scraper/sale_events.py` → `docs/data/sale_events.json`; hand-add
+Facebook-only sales to `scraper/sale_events_manual.json`) and the commit
+carries the events, pre-expanded per yard with coordinates. Pro users with a
+push device get an instant "50% off sale near you" push for sales at yards
+inside any of their watch radii (once per sale, `sale_alerts_sent` dedupe);
+free users get upcoming sales folded into the weekly digest email. Nationwide
+watches deliberately don't trigger sale pushes — a chain-wide sale would
+blast every yard in the country. Everyone sees sale badges in the app itself
+for free.
+
 ### 7. Grant Pro to TestFlight testers (before payments exist)
 
 ```bash

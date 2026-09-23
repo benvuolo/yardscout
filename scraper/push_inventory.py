@@ -177,6 +177,52 @@ def build_arrivals(data: dict) -> list[dict]:
     return out
 
 
+def build_sale_events(data: dict, inventory_path: str) -> list[dict]:
+    """Sale-day events expanded per yard with coords, for the Worker's
+    distance-based sale alerts. Chain-wide events (yard=null in
+    sale_events.json) become one entry per yard of that chain."""
+    sale_path = os.path.join(os.path.dirname(os.path.abspath(inventory_path)), "sale_events.json")
+    if not os.path.exists(sale_path):
+        return []
+    try:
+        with open(sale_path) as f:
+            raw = json.load(f).get("events", [])
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"WARN sale_events.json unreadable ({e}) — skipping sales", file=sys.stderr)
+        return []
+    if not raw:
+        return []
+
+    yf = data.get("yardFields", [])
+    yi = {name: i for i, name in enumerate(yf)}
+    yards = []
+    for y in data["yards"]:
+        yards.append({
+            "location": y[yi["location"]] if "location" in yi else None,
+            "lat": y[yi["lat"]] if "lat" in yi else None,
+            "lng": y[yi["lng"]] if "lng" in yi else None,
+        })
+    by_name = {y["location"]: y for y in yards if y["location"]}
+
+    out, seen = [], set()
+    for ev in raw:
+        targets = ([by_name[ev["yard"]]] if ev.get("yard") in by_name
+                   else [] if ev.get("yard")
+                   else [y for y in yards if y["location"] and y["location"].startswith(ev["chain"])])
+        for y in targets:
+            key = (y["location"], ev["start"])
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({
+                "chain": ev.get("chain"), "yard": y["location"],
+                "title": ev.get("title"), "start": ev["start"],
+                "end": ev.get("end", ev["start"]), "pct": ev.get("pct"),
+                "lat": y["lat"], "lng": y["lng"],
+            })
+    return out[:500]
+
+
 def _request(url: str, method: str, headers: dict, body: bytes | None, attempts: int = 4):
     last = None
     for attempt in range(attempts):
@@ -266,11 +312,14 @@ def main() -> int:
 
     arrivals = build_arrivals(data)
     print(f"{len(arrivals)} arrivals in the last {ARRIVAL_WINDOW_DAYS} days ride along for alert dispatch")
+    sale_events = build_sale_events(data, args.file)
+    print(f"{len(sale_events)} per-yard sale events ride along for sale alerts")
 
     result = _request(
         f"{api}/v1/admin/inventory/commit", "POST",
         {**auth, "content-type": "application/json"},
-        canonical({"directory": directory, "manifest": manifest, "newArrivals": arrivals}),
+        canonical({"directory": directory, "manifest": manifest, "newArrivals": arrivals,
+                   "saleEvents": sale_events}),
     )
     print(f"Committed: {result.get('shards')} shards live, {result.get('pruned', 0)} pruned, "
           f"scrapedAt {result.get('scrapedAt')}")

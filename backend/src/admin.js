@@ -7,7 +7,7 @@
  */
 
 import { json, err, sha256Hex, isoNow, timingSafeEqual } from './util.js';
-import { dispatchAlerts, storeArrivals } from './alerts.js';
+import { dispatchAlerts, dispatchSaleAlerts, storeArrivals } from './alerts.js';
 
 async function checkSecret(req, env, header, envKey) {
   const expected = env[envKey];
@@ -69,7 +69,7 @@ export async function handlePutShard(req, env, kind, key, variant) {
 export async function handleCommit(req, env, ctx) {
   let body;
   try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
-  const { directory, manifest, newArrivals } = body || {};
+  const { directory, manifest, newArrivals, saleEvents } = body || {};
   if (!directory || !Array.isArray(directory.yards) || !directory.scrapedAt || !manifest) {
     return err(400, 'bad_commit', 'Body must include {directory:{yards,scrapedAt,...}, manifest}.');
   }
@@ -102,10 +102,20 @@ export async function handleCommit(req, env, ctx) {
         .catch((e) => console.log('arrival store failed:', e && e.message))
     );
   }
+  // Sale-day snapshot + instant sale pushes (Pro). An empty array still
+  // commits — it clears expired sales from the table.
+  if (Array.isArray(saleEvents) && ctx) {
+    ctx.waitUntil(
+      dispatchSaleAlerts(env, saleEvents)
+        .then((r) => console.log(`sales: ${r.stored} stored, ${r.users} users pushed, ${r.sends} sends`))
+        .catch((e) => console.log('sale-alert dispatch failed:', e && e.message))
+    );
+  }
 
   return json({
     ok: true, shards: keep.size, pruned: orphans.length,
     scrapedAt: directory.scrapedAt, arrivals: (newArrivals || []).length,
+    sales: Array.isArray(saleEvents) ? saleEvents.length : 0,
   });
 }
 

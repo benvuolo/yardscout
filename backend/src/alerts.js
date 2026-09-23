@@ -199,24 +199,30 @@ function digestText(matches) {
   return lines.join('\n');
 }
 
-async function emailDigest(env, email, matches, { weekly = false } = {}) {
+async function emailDigest(env, email, matches, { weekly = false, sales = [] } = {}) {
   if (!env.RESEND_API_KEY) {
     // Local dev has no Resend key — log-and-succeed so e2e tests can assert
     // the dedupe bookkeeping. Production without a key correctly reports
     // undelivered (false) so nothing is marked as sent.
     if (env.DEV_MODE === '1') {
-      console.log(`DEV email → ${email} (${weekly ? 'weekly' : 'instant'}): ${matches.length} matches`);
+      console.log(`DEV email → ${email} (${weekly ? 'weekly' : 'instant'}): ${matches.length} matches, ${sales.length} sales`);
       return true;
     }
     return false;
   }
   const n = matches.length;
-  const subject = weekly
-    ? `Your week at the yards — ${n} watched car${n === 1 ? '' : 's'} arrived`
-    : `${n} watched car${n === 1 ? '' : 's'} just hit the yard`;
+  const subject = n
+    ? (weekly
+      ? `Your week at the yards — ${n} watched car${n === 1 ? '' : 's'} arrived`
+      : `${n} watched car${n === 1 ? '' : 's'} just hit the yard`)
+    : `Sale days coming up at ${sales.length} yard${sales.length === 1 ? '' : 's'} near you`;
   const intro = weekly
     ? 'Arrivals from the past week matching your YardScout watches:'
     : 'New arrivals matching your YardScout watches:';
+  const salesTxt = sales.length
+    ? `\n\nSale days at yards near your watches:\n` + sales.slice(0, 6).map((s) =>
+        `${s.yard} — ${fmtSaleRange(s.start_date, s.end_date)}${s.pct ? ` (${s.pct}% off)` : ''}`).join('\n')
+    : '';
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { authorization: 'Bearer ' + env.RESEND_API_KEY, 'content-type': 'application/json' },
@@ -225,7 +231,8 @@ async function emailDigest(env, email, matches, { weekly = false } = {}) {
       to: [email],
       subject,
       text:
-        `${intro}\n\n${digestText(matches)}\n\n` +
+        (n ? `${intro}\n\n${digestText(matches)}` : 'Nothing new matched your watches this week, but:') +
+        salesTxt + `\n\n` +
         `Open the app for rows, VINs, and part details:\n${(env.APP_URL || '').trim()}\n\n` +
         `Yards crush cars within weeks — fresh arrivals are the best odds.` +
         (weekly ? `\n\nWant to hear the moment a watched car arrives, not a week later? Instant push alerts are part of Pro.` : ''),
@@ -388,17 +395,163 @@ export async function sendWeeklyDigests(env) {
       ).bind(userId, String(v.id)).first();
       if (!seen) fresh.push(v);
     }
-    if (!fresh.length) continue;
+    // Upcoming sale days at yards inside this user's watch radii ride along
+    // in the same email (dedupe shared with the instant sale pushes).
+    const sales = await salesForWatches(env, watches);
+    const freshSales = [];
+    for (const s of sales) {
+      const seen = await env.DB.prepare(
+        'SELECT 1 AS x FROM sale_alerts_sent WHERE user_id = ?1 AND event_key = ?2'
+      ).bind(userId, s.event_key).first();
+      if (!seen) freshSales.push(s);
+    }
+    if (!fresh.length && !freshSales.length) continue;
     usersMatched++;
     emails++;
-    const delivered = await emailDigest(env, email, fresh, { weekly: true });
+    const delivered = await emailDigest(env, email, fresh, { weekly: true, sales: freshSales });
     if (delivered) {
       for (const v of fresh) {
         await env.DB.prepare(
           'INSERT OR IGNORE INTO alerts_sent (user_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
         ).bind(userId, String(v.id), isoNow()).run();
       }
+      for (const s of freshSales) {
+        await env.DB.prepare(
+          'INSERT OR IGNORE INTO sale_alerts_sent (user_id, event_key, sent_at) VALUES (?1, ?2, ?3)'
+        ).bind(userId, s.event_key, isoNow()).run();
+      }
     }
   }
   return { users: usersMatched, emails, arrivals: arrivals.length };
+}
+
+/* ===== sale-day alerts (chain sale calendars) =====
+ * Events arrive on every commit already expanded per-yard with coords
+ * (see scraper/sale_events.py + push_inventory.py). Pro users with a push
+ * subscription hear about sales at yards inside any of their watch radii;
+ * free users get them folded into the weekly digest email above. */
+
+const SALE_PUSH_LOOKAHEAD_DAYS = 10;
+const MAX_SALE_YARDS_PER_PUSH = 3;
+
+function fmtSaleRange(startIso, endIso) {
+  const opts = { month: 'short', day: 'numeric' };
+  const s = new Date(startIso + 'T00:00:00');
+  const e = new Date(endIso + 'T00:00:00');
+  if (startIso === endIso) return s.toLocaleDateString('en-US', opts);
+  const eTxt = e.getMonth() === s.getMonth()
+    ? e.toLocaleDateString('en-US', { day: 'numeric' })
+    : e.toLocaleDateString('en-US', opts);
+  return `${s.toLocaleDateString('en-US', opts)}\u2013${eTxt}`;
+}
+
+/** Replace the sale_events table with this commit's snapshot. */
+export async function storeSaleEvents(env, events) {
+  if (!Array.isArray(events)) return { stored: 0 };
+  await env.DB.prepare('DELETE FROM sale_events').run();
+  if (!events.length) return { stored: 0 };
+  const now = isoNow();
+  const stmt = env.DB.prepare(
+    `INSERT OR REPLACE INTO sale_events
+       (event_key, chain, yard, title, start_date, end_date, pct, lat, lng, stored_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)`
+  );
+  const batch = events.slice(0, 500).map((s) => stmt.bind(
+    `${s.yard}|${s.start}`, s.chain ?? null, String(s.yard), s.title ?? null,
+    String(s.start), String(s.end || s.start), s.pct ?? null,
+    s.lat ?? null, s.lng ?? null, now,
+  ));
+  await env.DB.batch(batch);
+  // Dedupe log outlives events by design; prune at 60 days.
+  await env.DB.prepare('DELETE FROM sale_alerts_sent WHERE sent_at < ?1')
+    .bind(new Date(Date.now() - 60 * 86400_000).toISOString()).run();
+  return { stored: batch.length };
+}
+
+/** Active/upcoming stored sales inside any of the user's radius watches.
+ * Nationwide watches (no center) are deliberately excluded — a chain-wide
+ * sale would blast every yard in the country at them. */
+async function salesForWatches(env, watches) {
+  const centers = watches.filter((w) => w.lat != null && w.lng != null && w.radius_mi);
+  if (!centers.length) return [];
+  const today = new Date().toISOString().slice(0, 10);
+  const horizon = new Date(Date.now() + SALE_PUSH_LOOKAHEAD_DAYS * 86400_000)
+    .toISOString().slice(0, 10);
+  const rows = (await env.DB.prepare(
+    `SELECT event_key, yard, title, start_date, end_date, pct, lat, lng
+       FROM sale_events WHERE end_date >= ?1 AND start_date <= ?2`
+  ).bind(today, horizon).all()).results || [];
+  const out = [];
+  for (const s of rows) {
+    if (s.lat == null || s.lng == null) continue;
+    const d = Math.min(...centers.map((w) => haversineMiles(w.lat, w.lng, s.lat, s.lng)));
+    const within = centers.some((w) => haversineMiles(w.lat, w.lng, s.lat, s.lng) <= w.radius_mi);
+    if (within) out.push({ ...s, dist: Math.round(d) });
+  }
+  out.sort((a, b) => (a.start_date < b.start_date ? -1 : 1) || a.dist - b.dist);
+  return out;
+}
+
+/** Called from handleCommit (via ctx.waitUntil) with the commit's saleEvents. */
+export async function dispatchSaleAlerts(env, events) {
+  const stored = await storeSaleEvents(env, events);
+  if (!stored.stored || !pushConfigured(env)) return { ...stored, users: 0, sends: 0 };
+
+  const rows = (await env.DB.prepare(
+    `SELECT w.lat, w.lng, w.radius_mi,
+            u.id AS user_id, u.email, u.tier, u.tier_expires_at
+       FROM watches w JOIN users u ON u.id = w.user_id
+      WHERE w.lat IS NOT NULL AND w.radius_mi IS NOT NULL`
+  ).all()).results || [];
+  const byUser = new Map();
+  for (const r of rows) {
+    if (resolveTier(r) !== 'pro') continue;   // free tier hears via the digest
+    if (!byUser.has(r.user_id)) byUser.set(r.user_id, []);
+    byUser.get(r.user_id).push(r);
+  }
+
+  let sends = 0, users = 0;
+  for (const [userId, watches] of byUser) {
+    if (sends >= MAX_SENDS_PER_COMMIT) { console.log('sale-alert send budget hit'); break; }
+    const sales = await salesForWatches(env, watches);
+    const fresh = [];
+    for (const s of sales) {
+      const seen = await env.DB.prepare(
+        'SELECT 1 AS x FROM sale_alerts_sent WHERE user_id = ?1 AND event_key = ?2'
+      ).bind(userId, s.event_key).first();
+      if (!seen) fresh.push(s);
+    }
+    if (!fresh.length) continue;
+
+    const shown = fresh.slice(0, MAX_SALE_YARDS_PER_PUSH);
+    const top = shown[0];
+    const payload = {
+      title: top.pct ? `${top.pct}% off sale near you` : 'Yard sale day near you',
+      body: shown.map((s) =>
+        `${s.yard} — ${fmtSaleRange(s.start_date, s.end_date)}${s.pct ? ` (${s.pct}% off)` : ''}`
+      ).join('\n') + (fresh.length > shown.length ? `\n…and ${fresh.length - shown.length} more` : ''),
+      url: '/',
+    };
+    const subs = (await env.DB.prepare(
+      'SELECT endpoint, p256dh, auth FROM push_subscriptions WHERE user_id = ?1 LIMIT 3'
+    ).bind(userId).all()).results || [];
+    let delivered = false;
+    for (const sub of subs) {
+      if (sends >= MAX_SENDS_PER_COMMIT) break;
+      sends++;
+      const res = await sendWebPush(env, sub, payload);
+      if (res.gone) {
+        await env.DB.prepare('DELETE FROM push_subscriptions WHERE endpoint = ?1').bind(sub.endpoint).run();
+      } else if (res.ok) delivered = true;
+    }
+    if (delivered) {
+      users++;
+      for (const s of fresh) {
+        await env.DB.prepare(
+          'INSERT OR IGNORE INTO sale_alerts_sent (user_id, event_key, sent_at) VALUES (?1, ?2, ?3)'
+        ).bind(userId, s.event_key, isoNow()).run();
+      }
+    }
+  }
+  return { ...stored, users, sends };
 }
