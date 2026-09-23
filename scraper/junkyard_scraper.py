@@ -37,6 +37,7 @@ Set JUNKYARD_RAW_PRICES=1 to disable adjustment (raw DB numbers).
 """
 
 import argparse
+import base64
 import concurrent.futures
 import hashlib
 import json
@@ -6356,11 +6357,304 @@ def refresh_upullr_pricing_file() -> Path:
     return path
 
 
+# Fenix U-Pull (fenixupull.com) — 3 upstate-NY yards + Belleville MI (Detroit
+# metro) + Moultrie GA. First Northeast (NY) coverage in the app.
+# WordPress/Divi, but /recent-inventory/
+# server-renders the entire multi-yard list as a plain HTML table, 50 rows a
+# page (?pg=N, newest-first), ~130 pages / ~6,500 rows. robots.txt allows all
+# (an orphaned Crawl-delay:10 sits above the UA group; we pace at 2s like the
+# other independents). Coords geocoded once via Nominatim (same convention as
+# YARD_COORDS). No photo capture (chain-wide owner policy).
+FENIX_INVENTORY_URL = "https://fenixupull.com/recent-inventory/"
+FENIX_DELAY_SEC = 2.0
+FENIX_MAX_PAGES = 250  # hard stop; ~130 pages observed 2026-09
+FENIX_YARDS = {
+    # keyed by the inventory table's "Location" column, lowercased
+    "binghamton, ny": {"name": "Fenix U-Pull - Binghamton", "city": "Binghamton",
+                       "state": "NY", "lat": 42.1095, "lng": -75.8218},
+    "east syracuse, ny": {"name": "Fenix U-Pull - East Syracuse", "city": "East Syracuse",
+                          "state": "NY", "lat": 43.0939, "lng": -76.0391},
+    "elmira, ny": {"name": "Fenix U-Pull - Elmira", "city": "Elmira",
+                   "state": "NY", "lat": 42.1561, "lng": -76.8627},
+    "moultrie, ga": {"name": "Fenix U-Pull - Moultrie", "city": "Moultrie",
+                     "state": "GA", "lat": 31.1759, "lng": -83.7494},
+    "belleville, mi": {"name": "Fenix U-Pull - Belleville", "city": "Belleville",
+                       "state": "MI", "lat": 42.1726, "lng": -83.5419},
+}
+
+_FENIX_ROW_RE = re.compile(r"<tr>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+_FENIX_TD_RE = re.compile(r"<td[^>]*>(.*?)</td>", re.S)
+
+
+def _fenix_parse_page(page: str) -> list[list[str]]:
+    """Rows of stripped cell text from a /recent-inventory/ page."""
+    rows = []
+    for block in _FENIX_ROW_RE.findall(page):
+        cells = [re.sub(r"<[^>]+>", "", c).strip() for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) >= 8:
+            rows.append(cells)
+    return rows
+
+
+def fetch_fenix_inventory() -> list[dict]:
+    """Fetch live inventory from every Fenix U-Pull yard (paged HTML table).
+
+    Columns: date placed (MM/DD/YY), make, model, year, row, VIN, stock number,
+    location ("City, ST"), image, more-info link."""
+    session = requests.Session()
+    base_params = {"sort_column": "date_placed", "sort_direction": "DESC"}
+
+    all_vehicles: list[dict] = []
+    unknown_yards: set = set()
+    total_pages = FENIX_MAX_PAGES
+    pg = 1
+    while pg <= min(total_pages, FENIX_MAX_PAGES):
+        page = None
+        for attempt in (1, 2):
+            try:
+                r = session.get(FENIX_INVENTORY_URL, params={**base_params, "pg": pg},
+                                headers={**HEADERS, "Accept": "text/html"}, timeout=45)
+                r.raise_for_status()
+                page = r.text
+                break
+            except Exception as e:
+                print(f"  [Fenix] page {pg} attempt {attempt} failed: {e}", file=sys.stderr)
+                time.sleep(5)
+        if page is None:
+            break
+        if pg == 1:
+            _indep_cache_raw("fenix_page1.html", r.content)
+            pg_links = [int(n) for n in re.findall(r"pg=(\d+)", page)]
+            if pg_links:
+                total_pages = max(pg_links)
+        rows = _fenix_parse_page(page)
+        if not rows:
+            break
+        for cells in rows:
+            date_raw, make, model, year_s = cells[0], cells[1], cells[2], cells[3]
+            row_n = cells[4] if len(cells) > 4 else ""
+            vin = cells[5] if len(cells) > 5 else ""
+            stock = cells[6] if len(cells) > 6 else ""
+            loc_raw = cells[7] if len(cells) > 7 else ""
+            yard = FENIX_YARDS.get(loc_raw.strip().lower())
+            if yard is None:
+                unknown_yards.add(loc_raw)
+                continue
+            if not stock:
+                continue
+            m = re.match(r"(\d{2})/(\d{2})/(\d{2,4})", date_raw)
+            date_iso = ""
+            if m:
+                yy = m.group(3)
+                date_iso = f"{yy if len(yy) == 4 else '20' + yy}-{m.group(1)}-{m.group(2)}"
+            try:
+                year_i = int(year_s)
+            except ValueError:
+                year_i = 0
+            all_vehicles.append({
+                "id": f"fenix-{stock}",
+                "vin": vin.strip(),
+                "year": year_i,
+                "make": _utpap_format_label(make),
+                "model": _utpap_format_label(model),
+                "row": row_n,
+                "dateAdded": date_iso,
+                "_location": yard["name"],
+                "_city": yard["city"],
+                "_state": yard["state"],
+                "_lat": yard["lat"],
+                "_lng": yard["lng"],
+                "_source": "fenix",
+            })
+        pg += 1
+        time.sleep(FENIX_DELAY_SEC)
+
+    if unknown_yards:
+        print(f"  [Fenix] unknown Location values skipped: {sorted(unknown_yards)}",
+              file=sys.stderr)
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Fenix] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
+# Harry's U-Pull-It (wegotused.com) — 3 large eastern-PA yards (Hazle Township,
+# Allentown, Pennsburg). Site sits behind Sucuri CloudProxy's JS cookie
+# challenge: the response is a small page whose base64 payload builds a
+# sucuri_cloudproxy_uuid_* cookie out of string concatenation, then reloads.
+# _sucuri_solve() evaluates that concatenation in pure Python (no JS engine);
+# the cookie is UA-bound and lasts 24h. Past the challenge, /our-inventory/
+# server-renders 15 rows a page (?inv[page]=N), ~285 pages / ~4,300 rows.
+# robots.txt allows all. Coords geocoded once via Nominatim.
+HARRYS_INVENTORY_URL = "https://wegotused.com/our-inventory/"
+HARRYS_DELAY_SEC = 1.0
+HARRYS_MAX_PAGES = 400  # hard stop; ~285 pages observed 2026-09
+HARRYS_YARDS = {
+    # keyed by the inventory table's "Yard City" column, uppercased
+    "HAZLE TOWNSHIP": {"name": "Harry's U-Pull-It - Hazle Township", "city": "Hazle Township",
+                       "state": "PA", "lat": 40.9564, "lng": -76.0113},
+    "ALLENTOWN": {"name": "Harry's U-Pull-It - Allentown", "city": "Allentown",
+                  "state": "PA", "lat": 40.6314, "lng": -75.4346},
+    "PENNSBURG": {"name": "Harry's U-Pull-It - Pennsburg", "city": "Pennsburg",
+                  "state": "PA", "lat": 40.3813, "lng": -75.4622},
+}
+
+
+def _sucuri_solve(page: str) -> str | None:
+    """Solve a Sucuri CloudProxy JS challenge page -> 'name=value' cookie.
+
+    The decoded payload is only ever string concatenation of quoted literals
+    and String.fromCharCode(n) assigned to a variable, then a document.cookie
+    line that concatenates the cookie name, '=', the variable, and attributes.
+    Anything unexpected returns None (the caller skips the chain this scan)."""
+    m = re.search(r"S='([^']+)'", page)
+    if not m:
+        return None
+    try:
+        js = base64.b64decode(m.group(1)).decode("utf-8", "replace")
+        assign, cookie_part = js.split(";document.cookie=", 1)
+        var_name, var_expr = assign.split("=", 1)
+    except Exception:
+        return None
+
+    token_re = re.compile(
+        r"String\.fromCharCode\((\d+)\)|'((?:[^'\\]|\\.)*)'|\"((?:[^\"\\]|\\.)*)\"|([A-Za-z_]\w*)"
+    )
+
+    def concat(expr: str, env: dict) -> str:
+        out = []
+        for t in token_re.finditer(expr):
+            if t.group(1):
+                out.append(chr(int(t.group(1))))
+            elif t.group(4):
+                out.append(env.get(t.group(4), ""))
+            else:
+                out.append(t.group(2) if t.group(2) is not None else (t.group(3) or ""))
+        return "".join(out)
+
+    val = concat(var_expr, {})
+    cookie = concat(cookie_part, {var_name.strip(): val}).split(";")[0]
+    return cookie if "=" in cookie and len(cookie) > 10 else None
+
+
+_HARRYS_TR_RE = re.compile(r"<tr>\s*((?:<!--.*?-->\s*)?(?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+_HARRYS_TOTAL_RE = re.compile(r"of\s+([\d,]+)\s+records")
+
+
+def fetch_harrys_inventory() -> list[dict]:
+    """Fetch live inventory from every Harry's U-Pull-It yard (paged HTML)."""
+    session = requests.Session()
+    session.headers.update({**HEADERS, "Accept": "text/html"})
+    cookie: str | None = None
+
+    def get_page(n: int) -> str | None:
+        nonlocal cookie
+        for attempt in (1, 2, 3):
+            try:
+                hdrs = {"Cookie": cookie} if cookie else {}
+                r = session.get(HARRYS_INVENTORY_URL,
+                                params={"inv[yard]": "all", "inv[page]": str(n)},
+                                headers=hdrs, timeout=45)
+                page = r.text
+            except Exception as e:
+                print(f"  [Harry's] page {n} attempt {attempt} failed: {e}",
+                      file=sys.stderr)
+                time.sleep(5 * attempt)
+                continue
+            if "sucuri_cloudproxy" not in page:
+                return page
+            cookie = _sucuri_solve(page)
+            if cookie is None:
+                print("  [Harry's] unrecognized Sucuri challenge — skipping this scan",
+                      file=sys.stderr)
+                return None
+        return None
+
+    first = get_page(1)
+    if first is None:
+        return []
+    _indep_cache_raw("harrys_page1.html", first.encode())
+    m = _HARRYS_TOTAL_RE.search(first)
+    total = int(m.group(1).replace(",", "")) if m else 0
+    pages = min(HARRYS_MAX_PAGES, max(1, -(-total // 15))) if total else 1
+
+    all_vehicles: list[dict] = []
+    unknown_yards: set = set()
+
+    def parse(page: str) -> None:
+        for block in _HARRYS_TR_RE.findall(page):
+            cells = [re.sub(r"<[^>]+>", "", c).strip()
+                     for c in _FENIX_TD_RE.findall(block)]
+            # Drop the hidden Laravel-blade yard_name cell and the contact-
+            # button cell; remaining order: Yard City, Year, Make, Model,
+            # Manufacturer, Color, Yard Date (MM/DD/YYYY), Row, VIN.
+            cells = [c for c in cells if not c.startswith("{{")]
+            if len(cells) < 9:
+                continue
+            yard_city, year_s, make, model = cells[0], cells[1], cells[2], cells[3]
+            color, date_raw, row_n, vin = cells[5], cells[6], cells[7], cells[8]
+            yard = HARRYS_YARDS.get(yard_city.strip().upper())
+            if yard is None:
+                unknown_yards.add(yard_city.strip())
+                continue
+            vin = vin.strip().upper()
+            if not vin:
+                continue
+            m2 = re.match(r"(\d{2})/(\d{2})/(\d{4})", date_raw)
+            date_iso = f"{m2.group(3)}-{m2.group(1)}-{m2.group(2)}" if m2 else ""
+            try:
+                year_i = int(year_s)
+            except ValueError:
+                year_i = 0
+            color_t = color.strip().title()
+            all_vehicles.append({
+                "id": f"harrys-{vin}",
+                "vin": vin,
+                "year": year_i,
+                "make": _utpap_format_label(make),
+                "model": _utpap_format_label(model),
+                "row": row_n,
+                "dateAdded": date_iso,
+                "_color": "" if color_t.lower() in ("", "unknown") else color_t,
+                "_location": yard["name"],
+                "_city": yard["city"],
+                "_state": yard["state"],
+                "_lat": yard["lat"],
+                "_lng": yard["lng"],
+                "_source": "harrys",
+            })
+
+    parse(first)
+    for n in range(2, pages + 1):
+        time.sleep(HARRYS_DELAY_SEC)
+        page = get_page(n)
+        if page is None:
+            break
+        before = len(all_vehicles)
+        parse(page)
+        if len(all_vehicles) == before:  # ran off the end
+            break
+
+    if unknown_yards:
+        print(f"  [Harry's] unknown Yard City values skipped: {sorted(unknown_yards)}",
+              file=sys.stderr)
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Harry's] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
 def fetch_independent_inventory() -> list[dict]:
     """All enabled independent-yard adapters (registry status: adapter-built)."""
     vehicles = fetch_wrenchapart_inventory()
     time.sleep(2)  # different hosts, but keep the overall cadence gentle
     vehicles += fetch_upullr_inventory()
+    time.sleep(2)
+    vehicles += fetch_fenix_inventory()
+    time.sleep(2)
+    vehicles += fetch_harrys_inventory()
     return vehicles
 
 
@@ -7338,7 +7632,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -7450,7 +7744,7 @@ def main():
 
         indep_vehicles: list[dict] = []
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH)...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA)...", file=sys.stderr)
             indep_vehicles = fetch_independent_inventory()
 
         all_vehicles = (pnp_vehicles + tap_vehicles + utpap_vehicles

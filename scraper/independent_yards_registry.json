@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-10",
+  "updated": "2026-09-21",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -179,20 +179,48 @@
     },
     {
       "name": "Harry's U-Pull-It",
-      "status": "blocked",
-      "platform": "unknown (Sucuri WAF JS challenge)",
-      "inventory_url": "https://wegotused.com/",
+      "status": "adapter-built",
+      "platform": "custom Angular-on-server-HTML behind Sucuri CloudProxy",
+      "inventory_url": "https://wegotused.com/our-inventory/",
       "api": {
-        "endpoint": null,
-        "notes": "PA yards (Hazleton, Allentown, Pennsburg) - big Northeast target (~22,500 vehicles/yr processed), but the site sits behind a Sucuri JavaScript challenge that blocks plain HTTP clients. Would require a headless browser; revisit only if policy allows."
+        "endpoint": "https://wegotused.com/our-inventory/?inv[yard]=all&inv[page]=N",
+        "method": "GET",
+        "auth": "Sucuri CloudProxy cookie (JS challenge solved in pure Python; UA-bound, 24h TTL)",
+        "format": "server-rendered HTML table, 15 rows/page (~285 pages)",
+        "requests_per_scan": "~286 (1s apart)",
+        "notes": "The Sucuri challenge turned out to be plain string concatenation in a base64 payload (no real JS needed) - see _sucuri_solve() in junkyard_scraper.py. Columns: Yard City, Year, Make, Model, Manufacturer, Color, Yard Date (MM/DD/YYYY), Row, VIN. A hidden first cell carries an unrendered Laravel-blade template ({{ $row->yard_name }}) - skipped. VIN used as the stable id. If Sucuri changes the challenge format, the adapter logs and skips the chain for that scan (non-fatal)."
       },
-      "update_freshness": "unknown",
-      "robots": "unreachable without JS",
-      "tos_flags": "WAF actively blocks non-browser clients",
+      "update_freshness": "live (Yard Date values observed same-week)",
+      "robots": "allow all",
+      "tos_flags": "WAF challenge only; robots.txt permissive, no ToS scraping clause found",
       "locations": [
-        {"name": "Harry's U-Pull-It - Hazleton", "city": "Hazle Township", "state": "PA"},
-        {"name": "Harry's U-Pull-It - Allentown", "city": "Allentown", "state": "PA"},
-        {"name": "Harry's U-Pull-It - Pennsburg", "city": "Pennsburg", "state": "PA"}
+        {"name": "Harry's U-Pull-It - Hazle Township", "city": "Hazle Township", "state": "PA", "lat": 40.9564, "lng": -76.0113},
+        {"name": "Harry's U-Pull-It - Allentown", "city": "Allentown", "state": "PA", "lat": 40.6314, "lng": -75.4346},
+        {"name": "Harry's U-Pull-It - Pennsburg", "city": "Pennsburg", "state": "PA", "lat": 40.3813, "lng": -75.4622}
+      ]
+    },
+    {
+      "name": "Fenix U-Pull",
+      "status": "adapter-built",
+      "platform": "WordPress/Divi custom template (server-rendered table)",
+      "inventory_url": "https://fenixupull.com/recent-inventory/",
+      "api": {
+        "endpoint": "https://fenixupull.com/recent-inventory/?sort_column=date_placed&sort_direction=DESC&pg=N",
+        "method": "GET",
+        "auth": "none",
+        "format": "server-rendered HTML table, 50 rows/page (~130 pages)",
+        "requests_per_scan": "~130 (2s apart)",
+        "notes": "First Northeast coverage: Binghamton, East Syracuse and Elmira NY (plus Moultrie GA and Belleville MI - Detroit metro, second MI yard). Columns: date placed (MM/DD/YY), make, model, year, row, VIN, stock number, location ('City, ST'), image, more-info. Stock number used as id. The inventory CPT is not exposed via WP REST; only a getModels helper exists at /wp-json/api/. robots.txt allows all but carries an orphaned Crawl-delay:10 above the UA group - we pace at 2s (~130 requests / 4 scans a day)."
+      },
+      "update_freshness": "live (date_placed values observed same-day)",
+      "robots": "allow all (orphaned crawl-delay line not attached to a UA group)",
+      "tos_flags": "none found",
+      "locations": [
+        {"name": "Fenix U-Pull - Binghamton", "city": "Binghamton", "state": "NY", "lat": 42.1095, "lng": -75.8218},
+        {"name": "Fenix U-Pull - East Syracuse", "city": "East Syracuse", "state": "NY", "lat": 43.0939, "lng": -76.0391},
+        {"name": "Fenix U-Pull - Elmira", "city": "Elmira", "state": "NY", "lat": 42.1561, "lng": -76.8627},
+        {"name": "Fenix U-Pull - Moultrie", "city": "Moultrie", "state": "GA", "lat": 31.1759, "lng": -83.7494},
+        {"name": "Fenix U-Pull - Belleville", "city": "Belleville", "state": "MI", "lat": 42.1726, "lng": -83.5419}
       ]
     },
     {

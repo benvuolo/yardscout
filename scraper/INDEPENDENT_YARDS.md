@@ -47,11 +47,12 @@ holes), (c) scrape reliability.
 | 2 | **U-Pull-R Parts** | 3 | Minneapolis–St. Paul ×2 (3.7M, first MN coverage), Toledo OH (0.6M) | gm-vehicle-search WP (JSON) | **adapter built** |
 | 3 | Pull-N-Save | 8 | Phoenix ×4 + Tucson (5.7M; AZ currently has only 2 covered yards), SLC ×2, Riverside CA | gm-vehicle-search WP (HTML) | candidate — next build |
 | 4 | Parts Galore | 1–2 | Detroit (4.3M; MI has 1 covered yard) | full table embedded in homepage | candidate |
-| 5 | Kenny U-Pull | 2 US (+25 CAN) | Bangor + Lewiston ME; only real Northeast play found | WP archive, ~1,600 pages | candidate (heavy) |
+| 5 | Kenny U-Pull | 2 US (+25 CAN) | Bangor + Lewiston ME | WP archive, ~1,600 pages | candidate (heavy) |
 | 6 | Go Pull-It | 2 | Jacksonville + Tampa FL | WP + CRUSH form; archive is location-gated | candidate (needs devtools pass) |
 | 7 | Sturtevant Auto | 1 | Milwaukee WI | custom inventory subdomain, HTML table | candidate |
 | 8 | Ace Pick-A-Part | 1 | Jacksonville FL | WP, mechanism unidentified | candidate |
-| 9 | Harry's U-Pull-It | 3 | Hazleton/Allentown/Pennsburg PA (huge NE yards) | behind Sucuri JS challenge | **blocked** |
+| 9 | **Harry's U-Pull-It** | 3 | Hazle Township/Allentown/Pennsburg PA (huge NE yards) | Sucuri challenge solved in pure Python; paged HTML | **adapter built** |
+| 10 | **Fenix U-Pull** | 5 | Binghamton/East Syracuse/Elmira NY (first NY coverage) + Belleville MI (Detroit metro) + Moultrie GA | WP server-rendered table, 50 rows/page | **adapter built** |
 | — | ABC U-Pull-It (Lincoln NE), Ecology Auto Parts (CA), Jalopy Jungle (ID) | | | unreachable this pass | blocked/retry |
 | — | U-Pull-&-Pay | — | — | merged into Pull-A-Part (already covered) | retired |
 
@@ -125,6 +126,18 @@ holes), (c) scrape reliability.
    reverse-engineered, just needs the HTML-variant parser + 10s pacing.
 2. **Parts Galore** — one GET, fills Detroit.
 3. **Kenny U-Pull** — needs a devtools session to find branch-filtered queries and
-   verify US-yard visibility; would open the Northeast.
+   verify US-yard visibility; would extend Northeast coverage into Maine.
 4. Retry Ecology Auto Parts / Jalopy Jungle / ABC U-Pull-It domains; verify
    Sturtevant and Ace mechanisms.
+
+## 2026-09-21 Northeast pass
+
+Harry's U-Pull-It (3 eastern-PA yards) and Fenix U-Pull (3 upstate-NY yards +
+Moultrie GA) are now adapter-built — the app's first NY and eastern-PA
+coverage. Two findings unblocked Harry's: (a) the Sucuri CloudProxy "JS
+challenge" is just base64-wrapped string concatenation, evaluable in pure
+Python (`_sucuri_solve`); (b) robots.txt is fully permissive once past the
+WAF. Fenix was never in the original survey — found via its server-rendered
+`/recent-inventory/` table (the inventory CPT isn't in WP REST). New England
+proper (MA/CT/NJ) still has no self-serve chain with public online inventory;
+Kenny U-Pull (ME) remains the nearest candidate.
