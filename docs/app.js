@@ -2052,6 +2052,8 @@ const CHAIN_PRICE_PAGES = [
   // location picker, so the Austin URL works as the chain-wide entry point.
   [/wrench[\s-]*a[\s-]*part/i, 'https://wrenchapart.com/austin-price-list', 'Wrench-A-Part'],
   [/^u[\s-]*pull[\s-]*r/i, 'https://upullrparts.com/part-pricing/', 'U-Pull-R Parts'],
+  [/^fenix[\s-]*u[\s-]*pull/i, 'https://fenixupull.com/parts-prices/', 'Fenix U-Pull'],
+  [/^harry'?s[\s-]*u[\s-]*pull/i, 'https://wegotused.com/price-list/', "Harry's U-Pull-It"],
   // LKQ Pick Your Part publishes prices per location inside its site/app with
   // no stable public price-list URL, so those yards get no link.
 ];
