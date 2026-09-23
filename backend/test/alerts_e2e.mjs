@@ -167,6 +167,43 @@ check('digest window has all 4 arrivals', r.data.arrivals === 4, `arrivals=${r.d
 r = await api('/v1/admin/digest/run', { method: 'POST', headers: ADMIN });
 check('digest rerun sends nothing (dedupe)', r.data.users === 0 && r.data.emails === 0, JSON.stringify(r.data));
 
+/* ---- 9. sale-day alerts ---- */
+/* Pro user gets a radius watch back (step 7 deleted theirs). */
+r = await api('/v1/watches', { method: 'POST', headers: { ...AUTH, 'content-type': 'application/json' },
+  body: JSON.stringify({ make: 'Toyota', lat: 40.76, lng: -111.89, radiusMi: 100 }) });
+check('pro radius watch recreated', r.status === 200);
+
+const today = new Date().toISOString().slice(0, 10);
+const inTwoDays = new Date(Date.now() + 2 * 86400_000).toISOString().slice(0, 10);
+const saleEvents = [
+  { chain: 'Utah Pick-A-Part', yard: 'Utah Pick-A-Part - Ogden', title: '50% Off Weekend',
+    start: today, end: inTwoDays, pct: 50, lat: 41.19, lng: -111.94 },          // in radius
+  { chain: 'Pick-n-Pull', yard: 'Pick-n-Pull - Sacramento', title: '50% Off Weekend',
+    start: today, end: inTwoDays, pct: 50, lat: 38.5, lng: -121.4 },            // 470 mi away
+];
+const saleCommit = { directory: { yards: [], scrapedAt: new Date().toISOString() }, manifest: {}, saleEvents };
+const baseline = received.length;
+r = await api('/v1/admin/inventory/commit', { method: 'POST', headers: { ...UPLOAD, 'content-type': 'application/json' }, body: JSON.stringify(saleCommit) });
+check('sale commit accepted', r.status === 200 && r.data.sales === 2, JSON.stringify(r.data));
+await new Promise((res) => setTimeout(res, 2500));
+check('one sale push delivered (radius filter applied)', received.length === baseline + 1, `got ${received.length - baseline}`);
+if (received.length > baseline) {
+  // Payload is encrypted; title/body correctness is covered by the decrypt
+  // loop in step 4 — here the radius filter is the thing under test.
+  check('sale push has aes128gcm encoding', received[received.length - 1].headers['content-encoding'] === 'aes128gcm');
+}
+
+/* dedupe: the same sale in the next commit must not push again */
+r = await api('/v1/admin/inventory/commit', { method: 'POST', headers: { ...UPLOAD, 'content-type': 'application/json' }, body: JSON.stringify(saleCommit) });
+await new Promise((res) => setTimeout(res, 2000));
+check('repeat sale commit sends nothing (dedupe)', received.length === baseline + 1, `got ${received.length - baseline}`);
+
+/* free user's weekly digest picks the sale up (their watch covers Ogden) */
+r = await api('/v1/admin/digest/run', { method: 'POST', headers: ADMIN });
+check('digest includes sale for free user', r.data.users === 1 && r.data.emails === 1, JSON.stringify(r.data));
+r = await api('/v1/admin/digest/run', { method: 'POST', headers: ADMIN });
+check('digest sale dedupe holds', r.data.users === 0 && r.data.emails === 0, JSON.stringify(r.data));
+
 catcher.close();
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);
