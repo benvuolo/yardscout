@@ -51,7 +51,7 @@ APNS_KEY_ID = "53ZHWL335J"
 APNS_BUNDLE_ID = "com.benvuolo.yardscout"
 # Dev/TestFlight builds talk to the sandbox gateway; App Store builds use
 # production. Flip to "production" at launch.
-APNS_ENV = "sandbox"
+APNS_ENV = "production"
 
 # Stripe price IDs (create in the Stripe dashboard, then paste here):
 #   Pro    — recurring monthly price ($12.99/mo)
