@@ -55,7 +55,7 @@ the 512px PWA icon upscaled to 1024 — replace `assets/icon-only.png` with true
 
 - **Pro purchase**: no IAP yet — natives see the waitlist. Ship StoreKit
   (RevenueCat is the fast path) before marketing Pro on iOS. Requires the
-  $9.99/mo auto-renewable subscription created in App Store Connect first.
+  $8.99/mo auto-renewable subscription created in App Store Connect first.
 - **Push alerts**: web push does not exist inside the wrapper. Watches +
   weekly email digest work; instant push on iOS needs the Capacitor
   Push Notifications plugin + APNs key + backend APNs sender (the Worker
