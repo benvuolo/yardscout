@@ -5216,6 +5216,15 @@ VERIFY_HINTS = [
     ("utili-track", "Metal rails inset along the bed walls/floor with sliding tie-down cleats."),
     ("roof rack", "Crossbars mounted on the roof rails — check that end caps and locks are intact."),
     ("transfer case shift motor", "Only on 4WD units — look for a 4WD badge, floor shift lever, or dash selector switch."),
+    # No VIN database records factory lockers (tested: Toyota's own build record
+    # lists both locker and non-locker diff carriers for the same VIN — the
+    # locker lives in the door-jamb AXLE code, not the VIN). Physical check is
+    # the only proof, so these hints carry the whole feature.
+    ("e-locker", "The proof is under the truck: an electric actuator motor with a wiring pigtail bolted to the rear diff housing — open diffs are bare metal. Cross-check the RR DIFF LOCK dash switch and the AXLE code on the driver door-jamb sticker. No motor on the diff = no e-locker, whatever the trim says."),
+    ("locker", "Crawl to the rear diff: factory lockers have an electric actuator motor (wiring pigtail attached) bolted to the housing — an open diff has none. A diff-lock switch in the cab supports it, but the motor on the axle is the ground truth."),
+    ("locker actuator", "Crawl to the rear diff: factory lockers have an electric actuator motor (wiring pigtail attached) bolted to the housing — an open diff has none. A diff-lock switch in the cab supports it, but the motor on the axle is the ground truth."),
+    ("locking diff", "Look at the rear diff housing for an electric actuator motor with a wiring pigtail — that motor IS the locker. No motor means an open diff, regardless of badges or switches."),
+    ("diff lock", "Dash/console switch labeled DIFF LOCK plus a wired actuator on the diff or transfer case — check both ends of that wire before pulling."),
     ("winch", "Check behind the front bumper cover for the winch drum and fairlead."),
     ("headlight washer", "Small spray nozzle caps in the front bumper below each headlight."),
 ]
