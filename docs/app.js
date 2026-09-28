@@ -1121,8 +1121,14 @@ function openUpgradeSheet(trigger) {
     document.getElementById('upgrade-form-wrap').style.display = 'none';
     document.getElementById('upgrade-thanks').style.display = 'none';
     if (proState) proState.style.display = 'none';
+  } else if (IS_NATIVE) {
+    // Native: Pro is purchasable in-app — never show the web waitlist.
+    // refreshNativeIapUi (below) reveals the StoreKit subscribe flow.
+    document.getElementById('upgrade-form-wrap').style.display = 'none';
+    document.getElementById('upgrade-thanks').style.display = 'none';
+    if (proState) proState.style.display = 'none';
   } else {
-    // Fake-door mode: returning waitlist members see the thank-you state.
+    // Web fake-door mode: returning waitlist members see the thank-you state.
     const done = localStorage.getItem('jh_waitlist_email');
     document.getElementById('upgrade-form-wrap').style.display = done ? 'none' : '';
     document.getElementById('upgrade-thanks').style.display = done ? '' : 'none';
@@ -3342,27 +3348,33 @@ function revokeNativePro() {
   });
 })();
 
-/* Swap the upgrade sheet's waitlist for the StoreKit flow whenever the App
- * Store product is actually loadable (real build with ASC config, or Xcode
- * running with the Products.storekit test configuration). */
+/* Native upgrade sheet: the StoreKit subscribe flow IS the offer — no
+ * waitlist, ever. If the App Store product can't load right now, the button
+ * stays (with its baked-in price) and a status line says to retry; the
+ * purchase call does its own product lookup, so a tap can still succeed the
+ * moment connectivity returns. */
 async function refreshNativeIapUi() {
   if (!IS_NATIVE) return;
   if (isPro()) return;   // already Pro — the sheet shows the Pro state instead
   const P = nativePlugin('Purchases');
   const wrap = document.getElementById('native-iap');
   if (!P || !wrap) return;
+  wrap.style.display = '';
+  const sheetSub = document.querySelector('#upgrade-sheet .sheet-sub');
+  if (sheetSub) sheetSub.textContent = 'Finding cars near you is free and stays free. '
+    + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
+    + 'and instant push alerts. Subscribe through the App Store; cancel anytime.';
+  const status = document.getElementById('iap-status');
   try {
     const p = await P.getProduct({ productId: IAP_PRODUCT_ID });
     if (p && p.available) {
-      wrap.style.display = '';
-      document.getElementById('upgrade-form-wrap').style.display = 'none';
-      document.getElementById('upgrade-thanks').style.display = 'none';
       const sub = document.getElementById('iap-subscribe');
       if (sub && p.price) sub.textContent = 'Subscribe — ' + p.price + '/mo';
-      const sheetSub = document.querySelector('#upgrade-sheet .sheet-sub');
-      if (sheetSub) sheetSub.textContent = 'Finding cars near you is free and stays free. '
-        + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
-        + 'and instant push alerts. Subscribe through the App Store; cancel anytime.';
+      if (status) status.textContent = '';
+    } else if (status) {
+      status.textContent = 'Can\u2019t reach the App Store right now — try again in a minute.';
     }
-  } catch (e) { /* product not available — waitlist stays */ }
+  } catch (e) {
+    if (status) status.textContent = 'Can\u2019t reach the App Store right now — try again in a minute.';
+  }
 }
