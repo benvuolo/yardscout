@@ -82,5 +82,7 @@ receive one weekly recap push; Pro receives instant per-arrival pushes.
 Inventory data is public information scraped from the yards' own published
 inventory pages.
 
-## Before the release build (not TestFlight)
-- backend/wrangler.toml: flip APNS_ENV "sandbox" -> "production", npm run deploy.
+## APNs environment (done 2026-09-28)
+APNS_ENV is "production" — correct for BOTH TestFlight and the App Store (they
+share the production push gateway; "sandbox" is only for builds run directly
+from Xcode onto a device).
