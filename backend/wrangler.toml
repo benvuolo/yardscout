@@ -24,13 +24,11 @@ crons = ["0 15 * * 1"]
 [[d1_databases]]
 binding = "DB"
 database_name = "yardscout-db"
-# Placeholder is fine for local dev (`wrangler dev` uses a local SQLite file).
-# For deploys, replace with the id printed by `npx wrangler d1 create yardscout-db`.
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "b81475d5-a998-4ede-8d43-b0932f8e236a"
 
 [vars]
 # Comma-separated list of browser origins allowed to call this API (CORS).
-APP_ORIGINS = "https://benvuolo.github.io,http://localhost:8765,http://127.0.0.1:8765"
+APP_ORIGINS = "https://benvuolo.github.io,capacitor://localhost,http://localhost:8765,http://127.0.0.1:8765"
 # Where the magic-link callback redirects back to (the PWA).
 APP_URL = "https://benvuolo.github.io/yardscout/"
 # Sender for magic-link emails. Resend's shared onboarding sender works out of
