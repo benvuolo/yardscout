@@ -2135,6 +2135,10 @@ function renderYards() {
     return;
   }
 
+  // Compare needs a center too — hide the bar until a ZIP is set so the
+  // fresh-visitor view is just the locate prompt.
+  document.getElementById('price-compare-bar').style.display = activeZipCoords ? '' : 'none';
+
   // The Yards tab reflects the same vicinity as Live: it needs a center.
   if (!activeZipCoords) {
     statsBar.innerHTML = '';
