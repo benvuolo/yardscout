@@ -38,7 +38,7 @@ the 512px PWA icon upscaled to 1024 — replace `assets/icon-only.png` with true
 ## App Store submission checklist (human steps)
 
 1. Xcode > App target > Signing & Capabilities: select your Apple Developer
-   team. Bundle ID is `com.yardscout.app` (change here + `capacitor.config.json`
+   team. Bundle ID is `com.benvuolo.yardscout` (change here + `capacitor.config.json`
    together if needed).
 2. App Store Connect (appstoreconnect.apple.com): My Apps > "+" > New App —
    name "YardScout", bundle ID from step 1, SKU anything.
