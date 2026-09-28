@@ -2848,9 +2848,13 @@ async function updateCloudAlertsUi() {
   if (!panel) return;
   const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
   panel.style.display = apiMode ? '' : 'none';
-  // ntfy is the self-hosted fallback — hide it once real push is available.
+  // ntfy is the self-hosted fallback — hide it once real push is available,
+  // and always in the native app (no "install another app" setup in the App
+  // Store build; APNs push replaces it there).
   const ntfy = document.getElementById('ntfy-panel');
-  if (ntfy) ntfy.style.display = apiMode ? 'none' : '';
+  if (ntfy) ntfy.style.display = (apiMode || IS_NATIVE) ? 'none' : '';
+  const nativeNote = document.getElementById('native-alerts-note');
+  if (nativeNote) nativeNote.style.display = IS_NATIVE ? '' : 'none';
   if (!apiMode) return;
   const me = YSApi.getMe();
   const status = document.getElementById('cloud-alerts-status');
@@ -2930,6 +2934,15 @@ function updateAlertsBadge() {
 
 document.getElementById('alert-add-btn').addEventListener('click', addWatchItem);
 document.getElementById('alert-notif-btn').addEventListener('click', requestNotifPermission);
+// Native app: the web Notification API doesn't exist in the WKWebView — hide
+// the dead button and swap the intro copy (no "browser notification" talk).
+if (IS_NATIVE) {
+  document.getElementById('alert-notif-btn').style.display = 'none';
+  const intro = document.getElementById('alerts-intro-copy');
+  if (intro) intro.innerHTML = 'Add vehicles you want to track &mdash; watching is free, '
+    + 'no signup needed. Matches light up right here whenever fresh inventory lands. '
+    + '<strong>Instant push alerts</strong> the moment a car hits the yard are a Pro feature.';
+}
 
 /* ===== NTFY PHONE PUSH ===== */
 (() => {
