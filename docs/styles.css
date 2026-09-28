@@ -789,13 +789,17 @@
   .sell-medium { background: var(--surface3); color: var(--text-dim); }
   .sell-slow { background: var(--gold-soft); color: var(--demand-slow); }
   .sell-channel { font-size: 0.6875rem; color: var(--text-dim); }
-  .sell-tip { font-size: 0.6875rem; color: var(--text-dim); font-style: italic; opacity: 0.85; }
+  /* padding-right keeps the last italic glyph's slant inside the opacity
+   * layer's paint bounds — without it WebKit clips the final letter. */
+  .sell-tip { font-size: 0.6875rem; color: var(--text-dim); font-style: italic; opacity: 0.85; padding-right: 0.2em; }
 
+  /* The VIN never splits across lines: the whole "VIN XXXX [copy]" chunk
+   * wraps to a new line as one unit instead of breaking mid-string. */
+  .vin-chunk { display: inline-block; white-space: nowrap; max-width: 100%; }
   .mono-vin {
     font-family: ui-monospace, 'SF Mono', Menlo, monospace;
     font-size: 0.6875rem;
     letter-spacing: 0.03em;
-    word-break: break-all;
     color: var(--text);
   }
   /* Icon-only copy button: the title attribute carries the label. */
