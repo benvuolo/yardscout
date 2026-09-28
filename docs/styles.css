@@ -1653,3 +1653,70 @@
 }
 .sale-strip-when { margin-left: auto; color: var(--text-dim, #666); white-space: nowrap; font-size: 0.85rem; }
 .sale-strip-more { font-size: 0.8rem; color: var(--text-dim, #666); padding-left: 0.2rem; }
+
+/* ===== YARD PRICE LISTS & COMPARE ===== */
+#prices-backdrop {
+  position: fixed; inset: 0; z-index: 320;
+  background: rgba(15, 18, 25, 0.4);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s;
+}
+#prices-backdrop.open { opacity: 1; pointer-events: auto; }
+#prices-sheet {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 321;
+  max-height: 88vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 0.5rem 1.15rem calc(1.4rem + env(safe-area-inset-bottom, 0px));
+  transform: translateY(105%);
+  transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+  max-width: 560px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-lg);
+}
+#prices-sheet.open { transform: translateY(0); }
+#prices-sheet .sheet-head h2 {
+  font-size: 1.1rem; letter-spacing: -0.02em;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#prices-sheet .sheet-head button {
+  background: none; border: none; color: var(--text-dim);
+  font-size: 0.8125rem; cursor: pointer; text-decoration: underline;
+  font-family: var(--font-ui);
+}
+.price-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0.15rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+.price-row:last-child { border-bottom: none; }
+.price-part { min-width: 0; overflow-wrap: anywhere; }
+.price-amt { white-space: nowrap; font-weight: 600; font-variant-numeric: tabular-nums; }
+.price-core { font-weight: 400; color: var(--text-dim); font-size: 0.78rem; white-space: nowrap; }
+.prices-footnote { color: var(--text-dim); font-size: 0.75rem; margin-top: 0.9rem; line-height: 1.45; }
+.compare-row { cursor: pointer; }
+.compare-row:hover { background: var(--surface2); }
+.compare-detail { color: var(--text-dim); font-size: 0.78rem; }
+.price-compare-bar {
+  display: flex; gap: 0.5rem; align-items: center;
+  margin: 0.35rem 0 0.6rem;
+}
+.price-compare-bar .search-box { flex: 1; min-width: 0; }
+.yard-prices-btn svg { width: 13px; height: 13px; vertical-align: -2px; }
+
+/* VIN spec chip + option "spot it" hints */
+.lock-chip-sm { font-size: 0.72rem; padding: 0.1rem 0.45rem; }
+.verify-note {
+  width: 100%;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  margin-top: 0.15rem;
+  line-height: 1.4;
+}

@@ -217,7 +217,11 @@
     <div class="toolbar">
       <input type="text" class="search-box" id="yards-search" placeholder="Search yard name, city, state&hellip;">
     </div>
-    <p class="yards-hint">Yards within your search radius, nearest first. Tap a yard to see its cars.</p>
+    <div class="price-compare-bar" id="price-compare-bar">
+      <input type="text" class="search-box" id="compare-input" placeholder="Compare a part price across yards &mdash; e.g. alternator">
+      <button type="button" class="btn btn-primary" id="compare-go">Compare</button>
+    </div>
+    <p class="yards-hint">Yards within your search radius, nearest first. Tap a yard to see its cars, or open its full price list &mdash; no need to dig through junkyard websites.</p>
     <div class="car-grid" id="yards-grid"></div>
   </div>
 
@@ -365,6 +369,22 @@
   <div id="saved-list"></div>
 </div>
 
+<!-- YARD PRICE LIST / PRICE COMPARE: pull-up sheet -->
+<div id="prices-backdrop"></div>
+<div id="prices-sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-head">
+    <h2 id="prices-title">Price list</h2>
+    <button type="button" id="prices-close">Close</button>
+  </div>
+  <p class="sheet-sub" id="prices-sub"></p>
+  <div class="toolbar" id="prices-search-wrap" style="margin-bottom:0.5rem;">
+    <input type="text" class="search-box" id="prices-search" placeholder="Search parts&hellip;">
+  </div>
+  <div id="prices-body"></div>
+  <p class="prices-footnote">Prices come from each chain's own published price list and are per part category. Entry fees, taxes, core charges (refundable deposits, shown where the chain lists them) and environmental fees vary by yard.</p>
+</div>
+
 <!-- PRO UPGRADE SHEET (fake door: waitlist only, no payments yet) -->
 <div id="upgrade-backdrop"></div>
 <div id="upgrade-sheet">
@@ -373,25 +393,19 @@
     <h2>YardScout Pro</h2>
     <button type="button" id="upgrade-close">Close</button>
   </div>
-  <p class="sheet-sub">Finding cars near you is free and stays free. Pro adds the money layer &mdash; what parts sell for, what they cost to pull, how fast they move. Neither plan has launched yet &mdash; tap the one you'd use and join the waitlist, and you'll be first in when they're live.</p>
+  <p class="sheet-sub">Finding cars near you is free and stays free. Pro adds the money layer &mdash; what parts sell for, what they cost to pull, how fast they move, and instant alerts. Pro hasn't launched yet &mdash; join the waitlist and you'll be first in when it's live.</p>
 
-  <div class="tier-card plan-option selected" data-plan="pro" data-price="12.99" role="button" tabindex="0">
-    <div class="tier-head"><span class="tier-name">Pro</span><span class="tier-price">$12.99<small>/mo</small></span></div>
+  <div class="tier-card plan-option selected" data-plan="pro" data-price="9.99" role="button" tabindex="0">
+    <div class="tier-head"><span class="tier-name">Pro</span><span class="tier-price">$9.99<small>/mo</small></span></div>
     <ul class="tier-list">
       <li>Full value data &mdash; resale ranges, pull costs, demand speed on every car</li>
-      <li>Instant push alerts the moment a watched car hits a yard</li>
+      <li>Instant push alerts the moment a watched car hits a yard &mdash; including sale-day alerts</li>
+      <li>Compare part prices across every yard near you &mdash; find the cheapest alternator in one search</li>
       <li>One-tap "watch this" from any car + nationwide watches (alerts from any yard in the country)</li>
       <li>Unlimited saved cars</li>
       <li>Unlimited radius + nationwide search across all <span class="coverage-count">~150</span> yards</li>
       <li>Yard history, days-on-lot &amp; leaving-soon signals</li>
       <li>Value sorting &mdash; best flips, most valuable, fastest-selling &amp; leaving-soonest first</li>
-    </ul>
-  </div>
-  <div class="tier-card plan-option" data-plan="pass" data-price="6.99" role="button" tabindex="0">
-    <div class="tier-head"><span class="tier-name">Weekend Pass <span class="pass-badge">one-time</span></span><span class="tier-price">$6.99</span></div>
-    <ul class="tier-list">
-      <li>Everything in Pro for 7 days &mdash; no subscription, nothing renews</li>
-      <li>Planning one yard trip? One decent pull pays for the pass many times over</li>
     </ul>
   </div>
 
