@@ -377,8 +377,8 @@ function vinMetaHtml(v) {
       : /rwd|rear/i.test(d) ? 'RWD' : /fwd|front/i.test(d) ? 'FWD' : '';
     if (short) specBits.push(short);
   }
-  const ex = extrasFor(v);
-  if (ex && ex[2]) specBits.push(escapeHtml(String(ex[2])));
+  // (Engine deliberately NOT included here — it already renders on the
+  // card's spec line below; repeating it read as a bug.)
   if (specBits.length) {
     vpic = isPro()
       ? ` <span class="meta-note" title="Factory build — trim/drivetrain decoded from the VIN via NHTSA VPIC, engine from the VIN or the yard's own feed — so you know what to look for before walking over">${specBits.join(' &middot; ')} (factory spec)</span>`
@@ -1110,15 +1110,23 @@ function openUpgradeSheet(trigger) {
   // Native builds never enter Stripe billing mode — Pro purchase on iOS will
   // go through StoreKit IAP when it ships; until then natives see the waitlist.
   const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
-  if (apiMode) {
+  const proState = document.getElementById('upgrade-pro-state');
+  if (isPro()) {
+    // Already Pro: no waitlist, no "launches soon" — just confirmation.
+    document.getElementById('upgrade-form-wrap').style.display = 'none';
+    document.getElementById('upgrade-thanks').style.display = 'none';
+    if (proState) proState.style.display = '';
+  } else if (apiMode) {
     // Real billing: the waitlist form gives way to sign-in + checkout.
     document.getElementById('upgrade-form-wrap').style.display = 'none';
     document.getElementById('upgrade-thanks').style.display = 'none';
+    if (proState) proState.style.display = 'none';
   } else {
     // Fake-door mode: returning waitlist members see the thank-you state.
     const done = localStorage.getItem('jh_waitlist_email');
     document.getElementById('upgrade-form-wrap').style.display = done ? 'none' : '';
     document.getElementById('upgrade-thanks').style.display = done ? '' : 'none';
+    if (proState) proState.style.display = 'none';
   }
   document.getElementById('upgrade-sheet').classList.add('open');
   document.getElementById('upgrade-backdrop').classList.add('open');
@@ -1773,7 +1781,16 @@ function renderLive() {
         wap: 'This Wrench-A-Part yard\u2019s published price',
         upullr: 'U-Pull-R Parts published price',
       };
-      const partRows = v.topParts.map((p, pi) => {
+      // Transmission honesty: the parts DB is model-generation-level, so a
+      // manual-only part (shifter, clutch, pedal box) can list on a car that
+      // left the factory as an automatic. If this car's own data confirms
+      // "Automatic", drop manual-only parts entirely; if the transmission is
+      // simply unknown, force them into the "if equipped" bucket.
+      const exTrans = (extrasFor(v) || [])[3] ? String(extrasFor(v)[3]) : '';
+      const confirmedAuto = /automatic/i.test(exTrans) && !/manual/i.test(exTrans);
+      const manualOnly = (p) => /\bmanual\b|clutch/i.test(p.name || '');
+      const shownParts = v.topParts.filter((p) => !(confirmedAuto && manualOnly(p)));
+      const partRows = shownParts.map((p, pi) => {
         const lookup = lookupYardCost(p.name, v.location);
         const hasCost = lookup.cost != null;
         const yardCost = hasCost ? lookup.cost : 0;
@@ -1782,7 +1799,8 @@ function renderLive() {
         // Trim/option-unconfirmed parts ("if equipped") are excluded from the
         // headline range entirely — they're tallied separately and shown as a
         // muted "+ up to $X more if equipped" note, never as promised dollars.
-        const ifEquipped = p.trim_status === 'unconfirmed';
+        const ifEquipped = p.trim_status === 'unconfirmed'
+          || (manualOnly(p) && !isConfirmedManual(v));
         if (ifEquipped) {
           unconfirmedHigh += p.high - yardCost;
         } else {
@@ -1878,12 +1896,12 @@ function renderLive() {
       partsBlock = `
         <details class="parts-details">
           <summary>${unlocked
-            ? `Came with ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart}`
-            : `${v.topParts.length} valuable part${v.topParts.length > 1 ? 's' : ''} spotted &middot; names &amp; values are Pro`} <span class="chev">${ICON.chev}</span></summary>
+            ? `Up to ${shownParts.length} part${shownParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart}`
+            : `${shownParts.length} valuable part${shownParts.length > 1 ? 's' : ''} spotted &middot; names &amp; values are Pro`} <span class="chev">${ICON.chev}</span></summary>
           <div class="car-body">
-            <div class="ghost-note">These are parts this car <strong>originally came with</strong> &mdash; yards track cars, not remaining parts, so some may already be pulled. Newer arrivals are more likely intact, which is why estimates shrink the longer a car sits.</div>
+            <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can't be confirmed from the VIN are marked "if equipped." Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
             <ul class="parts-list">${partRows}</ul>
-            <a class="feedback-link" href="https://github.com/benvuolo/yardscout/issues/new" target="_blank" rel="noopener">Spot a wrong price or bug? Tell us</a>
+            <a class="feedback-link" href="mailto:benvuolo123@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a>
           </div>
         </details>`;
     }
@@ -2592,7 +2610,7 @@ function renderAlerts() {
         </div>
         ${isMatch && v.topParts && v.topParts.length ? `
           <details class="parts-details">
-            <summary>Came with ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} <span class="chev">${ICON.chev}</span></summary>
+            <summary>Up to ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} to check <span class="chev">${ICON.chev}</span></summary>
             <div class="car-body">
               <ul class="parts-list">
                 ${v.topParts.slice(0, 5).map(p => `
@@ -3329,6 +3347,7 @@ function revokeNativePro() {
  * running with the Products.storekit test configuration). */
 async function refreshNativeIapUi() {
   if (!IS_NATIVE) return;
+  if (isPro()) return;   // already Pro — the sheet shows the Pro state instead
   const P = nativePlugin('Purchases');
   const wrap = document.getElementById('native-iap');
   if (!P || !wrap) return;
