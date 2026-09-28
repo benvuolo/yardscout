@@ -20,7 +20,7 @@ YardScout: freemium junkyard-inventory app for people who pull their own parts.
 
 ## Product/monetization state
 
-- One plan: **Pro, $9.99/mo**. Free tier: browse everything with locks on VIN
+- One plan: **Pro, $8.99/mo**. Free tier: browse everything with locks on VIN
   factory specs, per-car part values, cross-yard price compare, instant alerts.
 - Pro is currently unlocked client-side by `localStorage jh_pro === '1'`
   (useful for QA: set it in the JS console to preview Pro UI).
@@ -116,7 +116,7 @@ native model: free tier = weekly recap push, Pro = instant push.
   purchase / restore / isEntitled). Registered via `MainViewController.swift`
   (Main.storyboard points at it). Product id: `yardscout_pro_monthly`.
 - JS (bottom of `docs/app.js`, `nativeIapInit` + `refreshNativeIapUi`): the
-  upgrade sheet swaps its waitlist for "Subscribe — $9.99/mo" + "Restore
+  upgrade sheet swaps its waitlist for "Subscribe — $8.99/mo" + "Restore
   purchases" whenever the product loads; purchase/restore set the Pro gate
   (`jh_pro_source='iap'`); entitlement re-derived from StoreKit every launch.
   If the product can't load the waitlist returns automatically.
@@ -125,7 +125,7 @@ native model: free tier = weekly recap push, Pro = instant push.
   with fake money, before App Store Connect exists.
 - OWNER STEP: App Store Connect > (app) > Subscriptions: create group "Pro",
   auto-renewable subscription with product id EXACTLY `yardscout_pro_monthly`,
-  $9.99/mo. Without it, real builds show the waitlist (by design).
+  $8.99/mo. Without it, real builds show the waitlist (by design).
 
 **Native push (APNs):**
 - Client: `@capacitor/push-notifications` + aps-environment entitlement +
