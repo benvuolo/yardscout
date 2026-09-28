@@ -1134,6 +1134,14 @@ function openUpgradeSheet(trigger) {
     document.getElementById('upgrade-thanks').style.display = done ? '' : 'none';
     if (proState) proState.style.display = 'none';
   }
+  // Native: the sheet intro never mentions the web waitlist — Pro is a real
+  // purchase here (and for Pro users, a real subscription they already have).
+  if (IS_NATIVE) {
+    const sheetSub = document.querySelector('#upgrade-sheet .sheet-sub');
+    if (sheetSub) sheetSub.textContent = 'Finding cars near you is free and stays free. '
+      + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
+      + 'and instant push alerts. Subscribe through the App Store; cancel anytime.';
+  }
   document.getElementById('upgrade-sheet').classList.add('open');
   document.getElementById('upgrade-backdrop').classList.add('open');
   // Native app: swap the waitlist for the StoreKit subscribe flow when the
@@ -3360,10 +3368,6 @@ async function refreshNativeIapUi() {
   const wrap = document.getElementById('native-iap');
   if (!P || !wrap) return;
   wrap.style.display = '';
-  const sheetSub = document.querySelector('#upgrade-sheet .sheet-sub');
-  if (sheetSub) sheetSub.textContent = 'Finding cars near you is free and stays free. '
-    + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
-    + 'and instant push alerts. Subscribe through the App Store; cancel anytime.';
   const status = document.getElementById('iap-status');
   try {
     const p = await P.getProduct({ productId: IAP_PRODUCT_ID });
