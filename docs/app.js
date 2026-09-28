@@ -3158,7 +3158,7 @@ if (window.YSApi) {
  * anonymous device model (/v1/device/register). Free = weekly recap push,
  * Pro = instant. Watches mirror to the server on every change. */
 
-const NATIVE_API_BASE = '';   // set to the deployed Worker URL at cutover
+const NATIVE_API_BASE = 'https://yardscout-api.yardscout.workers.dev';
 const IAP_PRODUCT_ID = 'yardscout_pro_monthly';
 
 function nativePlugin(name) {
