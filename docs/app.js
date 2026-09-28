@@ -1907,7 +1907,7 @@ function renderLive() {
           <div class="car-body">
             <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can't be confirmed from the VIN are marked "if equipped." Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
             <ul class="parts-list">${partRows}</ul>
-            <a class="feedback-link" href="mailto:benvuolo123@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a>
+            <a class="feedback-link" href="mailto:yardscout.io@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a>
           </div>
         </details>`;
     }

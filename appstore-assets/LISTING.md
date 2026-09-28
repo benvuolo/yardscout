@@ -48,7 +48,7 @@ Terms of use: https://benvuolo.github.io/yardscout/terms.html
 junkyard,salvage,pick a part,u pull,used auto parts,lkq,car parts,wrecking,self service,vin
 
 ## URLs
-- Support URL: https://github.com/benvuolo/yardscout/issues
+- Support URL: https://benvuolo.github.io/yardscout/support.html
 - Marketing URL (optional): https://benvuolo.github.io/yardscout/
 - Privacy Policy URL: https://benvuolo.github.io/yardscout/privacy.html
 
