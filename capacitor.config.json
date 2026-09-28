@@ -1,5 +1,5 @@
 {
-  "appId": "com.yardscout.app",
+  "appId": "com.benvuolo.yardscout",
   "appName": "YardScout",
   "webDir": "native/www",
   "ios": {

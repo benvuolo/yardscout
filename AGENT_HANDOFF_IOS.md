@@ -34,7 +34,7 @@ YardScout: freemium junkyard-inventory app for people who pull their own parts.
 
 ## iOS wrapper architecture (read `native/README.md` too)
 
-- Capacitor 8, Swift Package Manager (no CocoaPods). App ID `com.yardscout.app`,
+- Capacitor 8, Swift Package Manager (no CocoaPods). App ID `com.benvuolo.yardscout`,
   name "YardScout".
 - The app bundles only the ~540KB shell. The ~36MB `data/` directory is
   deliberately NOT bundled: `IS_NATIVE` (top of `docs/app.js`) makes the app
@@ -92,7 +92,7 @@ All four passed on the last validated commit.
 2. Run on Simulator — smoke-test the checks above plus tab navigation and the
    prices sheet on a yard card.
 3. App Store Connect > My Apps > New App: name "YardScout", bundle
-   `com.yardscout.app`. If the name is taken, decide a suffix ("YardScout —
+   `com.benvuolo.yardscout`. If the name is taken, decide a suffix ("YardScout —
    Junkyard Finder" style) — owner's call.
 4. Privacy questionnaire: no accounts, no tracking, no third-party analytics
    (GoatCounter is OFF — `GOATCOUNTER_CODE` is null). Location: ZIP is typed or
