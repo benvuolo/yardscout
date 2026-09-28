@@ -138,18 +138,21 @@ native model: free tier = weekly recap push, Pro = instant push.
   every inventory commit + sale-day pushes; free devices get one weekly recap
   push from the Monday cron. Smoke-tested locally end-to-end minus actual APNs
   delivery (needs the key + a real device).
-- OWNER STEPS to switch push on:
+- DEPLOYED 2026-09-28: Worker live at
+  `https://yardscout-api.yardscout.workers.dev` (account benvuolo123@gmail.com,
+  D1 `yardscout-db`, all migrations applied). `NATIVE_API_BASE` in docs/app.js
+  points at it; `capacitor://localhost` is in the CORS allow-list. GitHub repo
+  has `YS_API_URL` (variable) + `YS_UPLOAD_TOKEN` (secret) so every scan pushes
+  inventory → instant alerts fire. UPLOAD_TOKEN/ADMIN_SECRET are in the
+  gitignored `backend/.dev.vars.production` AND set on the Worker.
+- REMAINING OWNER STEPS to switch push delivery on:
   1. developer.apple.com > Keys > new key with "Apple Push Notifications
-     service" > download the .p8, note the Key ID + Team ID.
-  2. `cd backend && npx wrangler login` (browser approval), then follow the
-     wrangler.toml header: d1 create + paste database_id, migrations apply
-     --remote, secrets (incl. `npx wrangler secret put APNS_P8` with the .p8
-     contents), fill APNS_TEAM_ID/APNS_KEY_ID in wrangler.toml [vars],
-     `npm run deploy`.
-  3. Set `NATIVE_API_BASE` (bottom of `docs/app.js`) to the deployed Worker
-     URL, restage + resync + rebuild. Until then the app honestly says "push
-     coming in the next update" and hides the enable button.
-  4. APNS_ENV stays "sandbox" for Xcode/TestFlight builds; flip to
+     service" > download the .p8, note the Key ID + Team ID (G23Z9MSBUG).
+  2. Fill APNS_TEAM_ID/APNS_KEY_ID in wrangler.toml [vars],
+     `npx wrangler secret put APNS_P8` (paste .p8 contents), `npm run deploy`.
+     Until then devices register fine but pushes silently don't send
+     (`/v1/device/test` answers push_off).
+  3. APNS_ENV stays "sandbox" for Xcode/TestFlight builds; flip to
      "production" for the App Store release build.
 
 ## Remaining risks
