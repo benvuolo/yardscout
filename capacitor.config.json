@@ -1,0 +1,11 @@
+{
+  "appId": "com.yardscout.app",
+  "appName": "YardScout",
+  "webDir": "native/www",
+  "ios": {
+    "contentInset": "automatic"
+  },
+  "server": {
+    "allowNavigation": []
+  }
+}

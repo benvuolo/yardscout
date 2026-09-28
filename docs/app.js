@@ -1,5 +1,16 @@
 /* YardScout — application logic (loading, filtering, rendering, saved list, alerts). */
 
+/* ===== NATIVE SHELL (Capacitor iOS wrapper) =====
+ * The App Store build bundles this app's shell (HTML/JS/CSS) but NOT the
+ * ~36MB data/ directory — instead the native app fetches live data from the
+ * web deployment, so inventory stays fresh without shipping app updates.
+ * IS_NATIVE also disables web-only machinery (service worker, iOS install
+ * hint) and keeps Stripe checkout out of the native build entirely (Apple
+ * guideline 3.1.1 — digital subscriptions in-app must use StoreKit). */
+const IS_NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform
+  && window.Capacitor.isNativePlatform());
+const DATA_BASE = IS_NATIVE ? 'https://benvuolo.github.io/yardscout/' : '';
+
 /* ===== ANALYTICS — GoatCounter (privacy-friendly: no cookies, anonymous) =====
  * Set the site code after creating a (free) account at goatcounter.com.
  * While GOATCOUNTER_CODE is null every track() call is a no-op. */
@@ -389,7 +400,7 @@ async function loadAllPricing() {
   // waterfall queued in front of the big inventory fetch). Each is optional.
   const grab = async (url, apply) => {
     try {
-      const resp = await fetch(url);
+      const resp = await fetch(DATA_BASE + url);
       if (resp.ok) apply(await resp.json());
     } catch (e) { /* price list not available */ }
   };
@@ -527,7 +538,7 @@ function isConfirmedManual(v) {
   return /manual/i.test(t) && !/automated/i.test(t);
 }
 
-fetch('data/vehicle_extras.json')
+fetch(DATA_BASE + 'data/vehicle_extras.json')
   .then(r => (r.ok ? r.json() : null))
   .then(d => {
     if (!d || !d.extras) return;
@@ -542,7 +553,7 @@ fetch('data/vehicle_extras.json')
  * yard=null is chain-wide. Free feature for everyone — sale days are when
  * normal people plan yard trips, not a value leak. */
 let saleEvents = [];
-fetch('data/sale_events.json')
+fetch(DATA_BASE + 'data/sale_events.json')
   .then(r => (r.ok ? r.json() : null))
   .then(d => {
     if (!d || !d.events || !d.events.length) return;
@@ -645,7 +656,7 @@ function hydratePhotos() {
     card.prepend(wrap);
   });
 }
-const INVENTORY_URL = 'data/inventory_live.json';
+const INVENTORY_URL = DATA_BASE + 'data/inventory_live.json';
 
 async function loadLiveInventory() {
   // Pricing files load concurrently with the inventory (they used to be a
@@ -656,7 +667,7 @@ async function loadLiveInventory() {
 
   // API mode (feature-flagged, see api.js): load tier-aware shards from the
   // backend instead of the public static file. Falls back to static on error.
-  if (window.YSApi && YSApi.enabled()) {
+  if (!IS_NATIVE && window.YSApi && YSApi.enabled()) {
     try {
       const raw = await YSApi.fetchInventory();
       await pricingReady;
@@ -1096,7 +1107,9 @@ let upgradeTrigger = 'unknown';
 function openUpgradeSheet(trigger) {
   upgradeTrigger = trigger || 'unknown';
   track('pro-lock/' + upgradeTrigger);
-  const apiMode = window.YSApi && YSApi.enabled();
+  // Native builds never enter Stripe billing mode — Pro purchase on iOS will
+  // go through StoreKit IAP when it ships; until then natives see the waitlist.
+  const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
   if (apiMode) {
     // Real billing: the waitlist form gives way to sign-in + checkout.
     document.getElementById('upgrade-form-wrap').style.display = 'none';
@@ -2833,7 +2846,7 @@ async function syncAllWatchesToServer() {
 async function updateCloudAlertsUi() {
   const panel = document.getElementById('cloud-alerts-panel');
   if (!panel) return;
-  const apiMode = window.YSApi && YSApi.enabled();
+  const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
   panel.style.display = apiMode ? '' : 'none';
   // ntfy is the self-hosted fallback — hide it once real push is available.
   const ntfy = document.getElementById('ntfy-panel');
@@ -3018,7 +3031,7 @@ loadLiveInventory();
 
 // Offline + instant-launch cache. Needs a secure context (HTTPS or localhost) —
 // silently skipped when served over plain LAN IP, active once on GitHub Pages.
-if ('serviceWorker' in navigator) {
+if (!IS_NATIVE && 'serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 
@@ -3031,6 +3044,7 @@ if ('serviceWorker' in navigator) {
   const isIOS = /iphone|ipod|ipad/i.test(navigator.userAgent)
     || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPadOS
   const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  if (IS_NATIVE) return; // already the installed app
   if (!forced && (!isIOS || standalone || localStorage.getItem('ys_install_hint') === '1')) return;
   const el = document.getElementById('install-hint');
   if (!el) return;
