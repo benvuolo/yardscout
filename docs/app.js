@@ -388,7 +388,7 @@ function vinMetaHtml(v) {
   if (v.vpicMismatch) {
     mismatch = ` <span class="meta-warn" title="The VIN's factory decode disagrees with the yard listing — the lot sign may be mislabeled. The VIN is used for matching; verify at the yard.">${escapeHtml(v.vpicMismatch)}</span>`;
   }
-  return ` &middot; VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}${dup}${vpic}${mismatch}`;
+  return ` &middot; <span class="vin-chunk">VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}</span>${dup}${vpic}${mismatch}`;
 }
 
 /* No bulk export at any tier: inventory goes stale in days, but the part
