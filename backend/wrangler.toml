@@ -9,7 +9,7 @@
 #        npx wrangler secret put UPLOAD_TOKEN
 #        npx wrangler secret put ADMIN_SECRET
 #        npx wrangler secret put RESEND_API_KEY
-#      (optional, for Apple IAP later: npx wrangler secret put REVENUECAT_WEBHOOK_SECRET)
+#        npx wrangler secret put APNS_P8      (paste the whole AuthKey_*.p8 file)
 #   5. npm run deploy
 
 name = "yardscout-api"
@@ -45,6 +45,16 @@ DEV_MODE = "0"
 VAPID_PUBLIC_KEY = ""
 VAPID_SUBJECT = "mailto:change-me@example.com"
 
+# APNs (native iOS push) — all four required before native push turns on.
+# Create the key at developer.apple.com > Certificates, IDs & Profiles > Keys
+# (Apple Push Notifications service). Team id is on the membership page.
+APNS_TEAM_ID = ""
+APNS_KEY_ID = ""
+APNS_BUNDLE_ID = "com.yardscout.app"
+# Dev/TestFlight builds talk to the sandbox gateway; App Store builds use
+# production. Flip to "production" at launch.
+APNS_ENV = "sandbox"
+
 # Stripe price IDs (create in the Stripe dashboard, then paste here):
 #   Pro    — recurring monthly price ($12.99/mo)
 #   Pass   — one-time price ($6.99, grants 72h of Pro)
@@ -58,4 +68,5 @@ STRIPE_PRICE_PASS = ""
 #   STRIPE_SECRET_KEY         — Stripe secret key (sk_test_... then sk_live_...)
 #   STRIPE_WEBHOOK_SECRET     — signing secret for the /v1/stripe/webhook endpoint
 #   VAPID_PRIVATE_JWK         — Web Push private key JSON (from gen-vapid.mjs)
+#   APNS_P8                   — contents of the AuthKey_<KEY_ID>.p8 file (native push)
 #   REVENUECAT_WEBHOOK_SECRET — (later) RevenueCat webhook authorization value
