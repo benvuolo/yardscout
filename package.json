@@ -1,0 +1,32 @@
+{
+  "name": "junkyard-hunter",
+  "version": "1.0.0",
+  "description": "**Live app: https://benvuolo.github.io/yardscout/**",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benvuolo/yardscout.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/benvuolo/yardscout/issues"
+  },
+  "homepage": "https://github.com/benvuolo/yardscout#readme",
+  "dependencies": {
+    "@capacitor/core": "^8.5.2",
+    "@capacitor/ios": "^8.5.2"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.5.2"
+  }
+}

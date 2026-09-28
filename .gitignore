@@ -24,3 +24,7 @@ seen_finds.json
 backend/node_modules/
 backend/.wrangler/
 backend/test/.out/
+
+# Native iOS wrapper (Capacitor)
+node_modules/
+native/www/
