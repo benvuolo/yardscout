@@ -251,7 +251,7 @@ export async function sendWeeklyDevicePushes(env) {
         ? `Your week at the yards — ${fresh.length} watched car${fresh.length === 1 ? '' : 's'} arrived`
         : 'Sale days coming up near you',
       body: (fresh.length
-        ? digestText(fresh) + '\nPro members heard about each of these the moment it landed.'
+        ? digestText(fresh) + '\nPro members heard about each of these within hours of it landing.'
         : '') + salesLine,
     });
     if (res.gone) {

@@ -10,7 +10,7 @@ YardScout: Junkyard Parts
 Find cars at self-serve yards
 
 ## Promotional text (170 chars, changeable without review)
-Fresh inventory from 167 self-serve yards, updated daily. Watch a vehicle and get a push the moment one hits a yard near you.
+Fresh inventory from 167 self-serve yards, updated daily. Watch a vehicle and get a push within hours of one hitting a yard near you.
 
 ## Description
 YardScout tracks the live inventory of self-service salvage yards across the
@@ -23,14 +23,14 @@ FIND THE CAR BEFORE YOU DRIVE
 - Factory spec decode on every VIN — engine, trim, drivetrain
 
 KNOW WHAT IT'S WORTH (PRO)
-- Resale ranges and pull costs on every car
+- Resale ranges and demand speed on nearly every car
 - Cross-yard price compare — find the cheapest alternator near you
 - Value sorting: best flips, fastest sellers, leaving-soonest first
 - Yard history and days-on-lot signals
 
 NEVER MISS THE CAR (PRO)
-- Watch any make/model/years and get a push notification the moment one
-  arrives at a yard in your radius — before the weekend crowd strips it
+- Watch any make/model/years and get a push within hours of one arriving
+  at a yard in your radius — before the weekend crowd strips it
 - Sale-day alerts when a yard near you runs a half-off sale
 - Free members get a weekly recap push of everything that arrived
 

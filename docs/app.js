@@ -2966,7 +2966,7 @@ if (IS_NATIVE) {
   const intro = document.getElementById('alerts-intro-copy');
   if (intro) intro.innerHTML = 'Add vehicles you want to track &mdash; watching is free, '
     + 'no signup, no email. Free watches get a <strong>weekly recap push</strong>; '
-    + '<strong>instant push alerts</strong> the moment a car hits the yard are Pro.';
+    + '<strong>instant push alerts</strong> within hours of a car hitting the yard are Pro.';
 }
 
 /* ===== NTFY PHONE PUSH ===== */
@@ -3233,7 +3233,7 @@ async function syncDeviceRegistration(freshToken) {
     await syncDeviceRegistration(t.value);
     btn.style.display = 'none';
     if (status) status.textContent = isPro()
-      ? 'Push is on — you\u2019ll hear the moment a watched car lands.'
+      ? 'Push is on — you\u2019ll hear within hours of a watched car landing.'
       : 'Push is on — your weekly recap arrives Monday morning.';
   });
   PN.addListener('registrationError', (e) => {

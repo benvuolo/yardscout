@@ -217,7 +217,7 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [] } =
       : `${n} watched car${n === 1 ? '' : 's'} just hit the yard`)
     : `Sale days coming up at ${sales.length} yard${sales.length === 1 ? '' : 's'} near you`;
   const intro = weekly
-    ? 'Arrivals from the past week matching your YardScout watches — Pro members were pushed each of these the moment it hit the yard, up to a week ago:'
+    ? 'Arrivals from the past week matching your YardScout watches — Pro members were pushed each of these within hours of it hitting the yard, up to a week ago:'
     : 'New arrivals matching your YardScout watches:';
   const salesTxt = sales.length
     ? `\n\nSale days at yards near your watches:\n` + sales.slice(0, 6).map((s) =>
@@ -235,7 +235,7 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [] } =
         salesTxt + `\n\n` +
         `Open the app for rows, VINs, and part details:\n${(env.APP_URL || '').trim()}\n\n` +
         `Yards crush cars within weeks — fresh arrivals are the best odds.` +
-        (weekly ? `\n\nWant to hear the moment a watched car arrives, not a week later? Instant push alerts are part of Pro.` : ''),
+        (weekly ? `\n\nWant to hear within hours of a watched car arriving, not a week later? Instant push alerts are part of Pro.` : ''),
     }),
   });
   if (!r.ok) console.log('alert email failed:', r.status, (await r.text()).slice(0, 200));
