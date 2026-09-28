@@ -179,7 +179,7 @@ export async function handlePushTest(req, env) {
 
 /* ===== dispatch on inventory commit ===== */
 
-function watchMatches(w, v) {
+export function watchMatches(w, v) {
   if (w.make && String(v.make || '').toLowerCase() !== w.make.toLowerCase()) return false;
   if (w.model && String(v.model || '').toLowerCase() !== w.model.toLowerCase()) return false;
   if (w.year_min && (!v.year || v.year < w.year_min)) return false;
@@ -191,7 +191,7 @@ function watchMatches(w, v) {
   return true;
 }
 
-function digestText(matches) {
+export function digestText(matches) {
   const lines = matches.slice(0, MAX_VEHICLES_PER_DIGEST).map((v) =>
     `${v.year || ''} ${v.make} ${v.model} — ${v.location}${v.row ? ` (row ${v.row})` : ''}`.trim());
   const more = matches.length - MAX_VEHICLES_PER_DIGEST;
@@ -434,7 +434,7 @@ export async function sendWeeklyDigests(env) {
 const SALE_PUSH_LOOKAHEAD_DAYS = 10;
 const MAX_SALE_YARDS_PER_PUSH = 3;
 
-function fmtSaleRange(startIso, endIso) {
+export function fmtSaleRange(startIso, endIso) {
   const opts = { month: 'short', day: 'numeric' };
   const s = new Date(startIso + 'T00:00:00');
   const e = new Date(endIso + 'T00:00:00');
@@ -471,7 +471,7 @@ export async function storeSaleEvents(env, events) {
 /** Active/upcoming stored sales inside any of the user's radius watches.
  * Nationwide watches (no center) are deliberately excluded — a chain-wide
  * sale would blast every yard in the country at them. */
-async function salesForWatches(env, watches) {
+export async function salesForWatches(env, watches) {
   const centers = watches.filter((w) => w.lat != null && w.lng != null && w.radius_mi);
   if (!centers.length) return [];
   const today = new Date().toISOString().slice(0, 10);

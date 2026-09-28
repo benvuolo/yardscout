@@ -106,22 +106,57 @@ All four passed on the last validated commit.
    the chains' own published lists. Free tier is fully functional; paid tier is
    not yet purchasable in-app (waitlist only)."
 
-## Known risks & queued work
+## IAP + native push — BUILT (2026-09-28), needs owner config to switch on
 
-- **Guideline 4.2 "minimum functionality"**: the main rejection risk for wrapped
-  web apps. Strongest mitigation: add native push before first review (below).
-  If rejected on 4.2, that's the answer, not a rewrite.
-- **Native push (queued)**: web push doesn't exist inside the wrapper. Watches +
-  weekly email digest still work. Instant Pro alerts on iOS need:
-  `@capacitor/push-notifications` plugin, APNs key from the dev account, and an
-  APNs sender in the Cloudflare Worker (`backend/src/alerts.js` currently
-  speaks web push only). Design decision needed: store APNs device tokens in D1
-  alongside the existing push subscriptions.
-- **StoreKit IAP (queued, before marketing Pro on iOS)**: create the $9.99/mo
-  auto-renewable subscription in App Store Connect; RevenueCat is the fast
-  integration path. Server-side: Pro entitlement should become account/receipt
-  based (today it's a localStorage flag; the Worker's D1 already has a users
-  table from the dormant billing work — see `README-BACKEND.md`).
+Both are code-complete, compiled, and validated. No email anywhere in the
+native model: free tier = weekly recap push, Pro = instant push.
+
+**IAP (StoreKit 2, no third-party service):**
+- `ios/App/App/PurchasesPlugin.swift` — custom Capacitor plugin (getProduct /
+  purchase / restore / isEntitled). Registered via `MainViewController.swift`
+  (Main.storyboard points at it). Product id: `yardscout_pro_monthly`.
+- JS (bottom of `docs/app.js`, `nativeIapInit` + `refreshNativeIapUi`): the
+  upgrade sheet swaps its waitlist for "Subscribe — $9.99/mo" + "Restore
+  purchases" whenever the product loads; purchase/restore set the Pro gate
+  (`jh_pro_source='iap'`); entitlement re-derived from StoreKit every launch.
+  If the product can't load the waitlist returns automatically.
+- Local testing: `ios/App/Products.storekit` is wired into the shared Xcode
+  scheme — Run from Xcode and the full purchase flow works in the Simulator
+  with fake money, before App Store Connect exists.
+- OWNER STEP: App Store Connect > (app) > Subscriptions: create group "Pro",
+  auto-renewable subscription with product id EXACTLY `yardscout_pro_monthly`,
+  $9.99/mo. Without it, real builds show the waitlist (by design).
+
+**Native push (APNs):**
+- Client: `@capacitor/push-notifications` + aps-environment entitlement +
+  AppDelegate forwarding. Alerts tab has "Enable push notifications"; watches
+  mirror to the Worker on every change (`syncDeviceRegistration`).
+- Backend: `backend/src/apns.js` (ES256 JWT sender, no libraries),
+  `backend/src/devices.js` (anonymous device model — deviceId + APNs token +
+  watches JSON, no account), migration `0007_devices.sql`, routes
+  `/v1/device/register` + `/v1/device/test`. Pro devices get instant pushes on
+  every inventory commit + sale-day pushes; free devices get one weekly recap
+  push from the Monday cron. Smoke-tested locally end-to-end minus actual APNs
+  delivery (needs the key + a real device).
+- OWNER STEPS to switch push on:
+  1. developer.apple.com > Keys > new key with "Apple Push Notifications
+     service" > download the .p8, note the Key ID + Team ID.
+  2. `cd backend && npx wrangler login` (browser approval), then follow the
+     wrangler.toml header: d1 create + paste database_id, migrations apply
+     --remote, secrets (incl. `npx wrangler secret put APNS_P8` with the .p8
+     contents), fill APNS_TEAM_ID/APNS_KEY_ID in wrangler.toml [vars],
+     `npm run deploy`.
+  3. Set `NATIVE_API_BASE` (bottom of `docs/app.js`) to the deployed Worker
+     URL, restage + resync + rebuild. Until then the app honestly says "push
+     coming in the next update" and hides the enable button.
+  4. APNS_ENV stays "sandbox" for Xcode/TestFlight builds; flip to
+     "production" for the App Store release build.
+
+## Remaining risks
+
+- **Guideline 4.2 "minimum functionality"**: native push + IAP shipping in the
+  first build is the strongest mitigation. If rejected on 4.2 anyway, respond
+  with the native feature list, don't rewrite.
 - **Custom domain**: yardscout.io purchase was planned (Cloudflare Registrar).
   If the site moves off benvuolo.github.io, update `DATA_BASE` in
   `docs/app.js` AND restage/resync/re-release the app. Consider doing the

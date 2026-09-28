@@ -39,6 +39,9 @@ import {
   handleVapidKey, handlePushSubscribe, handlePushUnsubscribe, handlePushTest,
   sendWeeklyDigests,
 } from './alerts.js';
+import {
+  handleDeviceRegister, handleDeviceTest, sendWeeklyDevicePushes,
+} from './devices.js';
 
 export default {
   /* Cron (wrangler.toml [triggers]): weekly digest email for free users
@@ -49,6 +52,13 @@ export default {
       sendWeeklyDigests(env)
         .then((r) => console.log(`weekly digest: ${r.users} users, ${r.emails} emails, ${r.arrivals} arrivals in window`))
         .catch((e) => console.log('weekly digest failed:', e && (e.stack || e.message)))
+    );
+    // Native devices: weekly summary PUSH for the free tier (no email exists
+    // in the device model — this replaced the digest email entirely there).
+    ctx.waitUntil(
+      sendWeeklyDevicePushes(env)
+        .then((r) => console.log(`weekly device push: ${r.devices} devices, ${r.sends} sends, ${r.arrivals} arrivals in window`))
+        .catch((e) => console.log('weekly device push failed:', e && (e.stack || e.message)))
     );
   },
 
@@ -122,6 +132,16 @@ async function route(req, env, url, ctx) {
   if (path === '/v1/watches' && method === 'POST') return handleWatchCreate(req, env);
   let wm = path.match(/^\/v1\/watches\/([0-9a-f-]{36})$/);
   if (wm && method === 'DELETE') return handleWatchDelete(req, env, wm[1]);
+  /* ----- native devices (anonymous, APNs) ----- */
+  if (path === '/v1/device/register' && method === 'POST') {
+    if (!rateLimit('dev:ip:' + ip, 30, 60_000)) return err(429, 'rate_limited', 'Slow down.');
+    return handleDeviceRegister(req, env);
+  }
+  if (path === '/v1/device/test' && method === 'POST') {
+    if (!rateLimit('devtest:ip:' + ip, 5, 3600_000)) return err(429, 'rate_limited', 'Slow down.');
+    return handleDeviceTest(req, env);
+  }
+
   if (path === '/v1/push/vapid' && method === 'GET') return handleVapidKey(env);
   if (path === '/v1/push/subscribe' && method === 'POST') return handlePushSubscribe(req, env);
   if (path === '/v1/push/unsubscribe' && method === 'POST') return handlePushUnsubscribe(req, env);

@@ -8,6 +8,7 @@
 
 import { json, err, sha256Hex, isoNow, timingSafeEqual } from './util.js';
 import { dispatchAlerts, dispatchSaleAlerts, storeArrivals } from './alerts.js';
+import { dispatchDeviceAlerts, dispatchDeviceSaleAlerts } from './devices.js';
 
 async function checkSecret(req, env, header, envKey) {
   const expected = env[envKey];
@@ -95,6 +96,12 @@ export async function handleCommit(req, env, ctx) {
         .then((r) => console.log(`alerts: ${r.users} users notified, ${r.sends} sends`))
         .catch((e) => console.log('alert dispatch failed:', e && e.message))
     );
+    // Native devices (iOS app): instant APNs push for Pro devices.
+    ctx.waitUntil(
+      dispatchDeviceAlerts(env, newArrivals)
+        .then((r) => console.log(`device alerts: ${r.devices} devices pushed, ${r.sends} sends`))
+        .catch((e) => console.log('device alert dispatch failed:', e && e.message))
+    );
     // Snapshot arrivals for the weekly free-tier digest cron.
     ctx.waitUntil(
       storeArrivals(env, newArrivals)
@@ -107,7 +114,13 @@ export async function handleCommit(req, env, ctx) {
   if (Array.isArray(saleEvents) && ctx) {
     ctx.waitUntil(
       dispatchSaleAlerts(env, saleEvents)
-        .then((r) => console.log(`sales: ${r.stored} stored, ${r.users} users pushed, ${r.sends} sends`))
+        // Device sale pushes run AFTER storeSaleEvents (inside dispatchSaleAlerts)
+        // so the sale_events table is current when devices are matched.
+        .then(async (r) => {
+          console.log(`sales: ${r.stored} stored, ${r.users} users pushed, ${r.sends} sends`);
+          const d = await dispatchDeviceSaleAlerts(env);
+          console.log(`device sales: ${d.devices} devices pushed, ${d.sends} sends`);
+        })
         .catch((e) => console.log('sale-alert dispatch failed:', e && e.message))
     );
   }

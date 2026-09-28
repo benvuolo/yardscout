@@ -1122,6 +1122,9 @@ function openUpgradeSheet(trigger) {
   }
   document.getElementById('upgrade-sheet').classList.add('open');
   document.getElementById('upgrade-backdrop').classList.add('open');
+  // Native app: swap the waitlist for the StoreKit subscribe flow when the
+  // App Store product is loadable (defined later in the native module).
+  if (IS_NATIVE && typeof refreshNativeIapUi === 'function') refreshNativeIapUi();
 }
 function closeUpgradeSheet() {
   document.getElementById('upgrade-sheet').classList.remove('open');
@@ -2473,7 +2476,11 @@ function loadWatchlist() {
   try { return JSON.parse(localStorage.getItem(WATCHLIST_KEY)) || []; }
   catch { return []; }
 }
-function saveWatchlist(list) { localStorage.setItem(WATCHLIST_KEY, JSON.stringify(list)); }
+function saveWatchlist(list) {
+  localStorage.setItem(WATCHLIST_KEY, JSON.stringify(list));
+  // Native app: mirror watches to the alert backend (no-op until push enabled).
+  if (IS_NATIVE && typeof syncDeviceRegistration === 'function') syncDeviceRegistration();
+}
 function loadAlerted() {
   try { return JSON.parse(localStorage.getItem(ALERTED_KEY)) || {}; }
   catch { return {}; }
@@ -2940,8 +2947,8 @@ if (IS_NATIVE) {
   document.getElementById('alert-notif-btn').style.display = 'none';
   const intro = document.getElementById('alerts-intro-copy');
   if (intro) intro.innerHTML = 'Add vehicles you want to track &mdash; watching is free, '
-    + 'no signup needed. Matches light up right here whenever fresh inventory lands. '
-    + '<strong>Instant push alerts</strong> the moment a car hits the yard are a Pro feature.';
+    + 'no signup, no email. Free watches get a <strong>weekly recap push</strong>; '
+    + '<strong>instant push alerts</strong> the moment a car hits the yard are Pro.';
 }
 
 /* ===== NTFY PHONE PUSH ===== */
@@ -3136,4 +3143,207 @@ if (window.YSApi) {
       co.disabled = false;
     }
   });
+}
+
+/* ===== NATIVE (iOS app only): StoreKit IAP + APNs push alerts =====
+ * Everything below is inert on the web (IS_NATIVE false).
+ *
+ * IAP: custom StoreKit 2 plugin (ios/App/App/PurchasesPlugin.swift). Apple is
+ * the account — subscribe with Face ID, restore on any device, no signup.
+ * The upgrade sheet swaps its waitlist for a real Subscribe button whenever
+ * the App Store product loads (so a build without App Store Connect config
+ * degrades back to the waitlist automatically).
+ *
+ * Push: official @capacitor/push-notifications plugin + the Worker's
+ * anonymous device model (/v1/device/register). Free = weekly recap push,
+ * Pro = instant. Watches mirror to the server on every change. */
+
+const NATIVE_API_BASE = '';   // set to the deployed Worker URL at cutover
+const IAP_PRODUCT_ID = 'yardscout_pro_monthly';
+
+function nativePlugin(name) {
+  return (IS_NATIVE && window.Capacitor && window.Capacitor.Plugins
+    && window.Capacitor.Plugins[name]) || null;
+}
+
+function deviceId() {
+  let id = localStorage.getItem('ys_device_id');
+  if (!id) { id = crypto.randomUUID(); localStorage.setItem('ys_device_id', id); }
+  return id;
+}
+
+/* Mirror local watches to the Worker keyed by device id + APNs token. */
+async function syncDeviceRegistration(freshToken) {
+  if (!IS_NATIVE || !NATIVE_API_BASE) return;
+  const token = freshToken || localStorage.getItem('ys_apns_token');
+  if (!token) return;   // nothing to sync until push is enabled
+  try {
+    await fetch(NATIVE_API_BASE + '/v1/device/register', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        deviceId: deviceId(),
+        apnsToken: token,
+        platform: 'ios',
+        tier: isPro() ? 'pro' : 'free',
+        watches: loadWatchlist().map((w) => ({
+          make: w.make, model: w.model, yearMin: w.yrMin, yearMax: w.yrMax,
+          lat: w.lat, lng: w.lng, radiusMi: w.radiusMi,
+        })),
+      }),
+    });
+  } catch (e) { /* re-synced on next change/launch */ }
+}
+
+/* ---- push enable flow (native Alerts tab) ---- */
+(function nativePushInit() {
+  if (!IS_NATIVE) return;
+  const btn = document.getElementById('native-push-enable');
+  const status = document.getElementById('native-push-status');
+  const PN = nativePlugin('PushNotifications');
+  if (!btn) return;
+  if (!PN || !NATIVE_API_BASE) {
+    // Plugin missing or backend not deployed yet — honest "coming soon".
+    btn.style.display = 'none';
+    if (status) status.textContent = 'Push alerts are coming in the next update — watches still light up in-app.';
+    return;
+  }
+
+  PN.addListener('registration', async (t) => {
+    localStorage.setItem('ys_apns_token', t.value);
+    localStorage.setItem('ys_push_on', '1');
+    await syncDeviceRegistration(t.value);
+    btn.style.display = 'none';
+    if (status) status.textContent = isPro()
+      ? 'Push is on — you\u2019ll hear the moment a watched car lands.'
+      : 'Push is on — your weekly recap arrives Monday morning.';
+  });
+  PN.addListener('registrationError', (e) => {
+    if (status) status.textContent = 'Could not register for push — try again later.';
+    console.log('push registration error', e);
+  });
+  PN.addListener('pushNotificationActionPerformed', () => {
+    // Notification tap: land on the Alerts tab where the matches are.
+    try { document.querySelector('.tab[data-tab="alerts"]').click(); } catch (e) { /* boot race */ }
+  });
+
+  btn.addEventListener('click', async () => {
+    track('native-push-enable');
+    try {
+      let perm = await PN.checkPermissions();
+      if (perm.receive !== 'granted') perm = await PN.requestPermissions();
+      if (perm.receive !== 'granted') {
+        if (status) status.textContent = 'Notifications are off for YardScout in iOS Settings.';
+        return;
+      }
+      await PN.register();
+    } catch (e) {
+      if (status) status.textContent = 'Push setup failed — try again later.';
+    }
+  });
+
+  // Already enabled previously: refresh the token + mirror watches silently.
+  if (localStorage.getItem('ys_push_on') === '1') {
+    btn.style.display = 'none';
+    if (status) status.textContent = 'Push alerts are on for this device.';
+    PN.register().catch(() => {});
+  }
+})();
+
+/* ---- IAP: entitlement on launch + upgrade sheet flow ---- */
+function grantNativePro() {
+  localStorage.setItem('jh_pro', '1');
+  localStorage.setItem('jh_pro_source', 'iap');
+  applyProGates();
+  if (typeof liveLoaded !== 'undefined' && liveLoaded) renderLive();
+  syncDeviceRegistration();
+}
+
+function revokeNativePro() {
+  if (localStorage.getItem('jh_pro_source') !== 'iap') return; // never touch dev toggle
+  localStorage.removeItem('jh_pro');
+  localStorage.removeItem('jh_pro_source');
+  applyProGates();
+  if (typeof liveLoaded !== 'undefined' && liveLoaded) renderLive();
+  syncDeviceRegistration();
+}
+
+(async function nativeIapInit() {
+  if (!IS_NATIVE) return;
+  const P = nativePlugin('Purchases');
+  if (!P) return;
+  // Subscription state is re-derived from StoreKit on every launch: renewals
+  // extend it, cancellations lapse at period end, refunds revoke.
+  try {
+    const r = await P.isEntitled({ productId: IAP_PRODUCT_ID });
+    if (r && r.entitled) grantNativePro();
+    else revokeNativePro();
+  } catch (e) { /* offline: keep last known state */ }
+
+  const subBtn = document.getElementById('iap-subscribe');
+  const restoreBtn = document.getElementById('iap-restore');
+  const status = document.getElementById('iap-status');
+  if (subBtn) subBtn.addEventListener('click', async () => {
+    track('iap-subscribe/' + upgradeTrigger);
+    subBtn.disabled = true;
+    if (status) status.textContent = '';
+    try {
+      const r = await P.purchase({ productId: IAP_PRODUCT_ID });
+      if (r && r.entitled) {
+        grantNativePro();
+        track('iap-purchased');
+        closeUpgradeSheet();
+      } else if (r && r.pending) {
+        if (status) status.textContent = 'Purchase pending approval — Pro unlocks automatically once approved.';
+      } else if (status && !(r && r.cancelled)) {
+        status.textContent = 'Purchase did not complete.';
+      }
+    } catch (e) {
+      if (status) status.textContent = e.message || 'Purchase failed.';
+    } finally {
+      subBtn.disabled = false;
+    }
+  });
+  if (restoreBtn) restoreBtn.addEventListener('click', async () => {
+    track('iap-restore');
+    restoreBtn.disabled = true;
+    try {
+      const r = await P.restore();
+      if (r && r.entitled) {
+        grantNativePro();
+        if (status) status.textContent = 'Pro restored on this device.';
+        closeUpgradeSheet();
+      } else if (status) {
+        status.textContent = 'No active subscription found on this Apple account.';
+      }
+    } catch (e) {
+      if (status) status.textContent = e.message || 'Restore failed.';
+    } finally {
+      restoreBtn.disabled = false;
+    }
+  });
+})();
+
+/* Swap the upgrade sheet's waitlist for the StoreKit flow whenever the App
+ * Store product is actually loadable (real build with ASC config, or Xcode
+ * running with the Products.storekit test configuration). */
+async function refreshNativeIapUi() {
+  if (!IS_NATIVE) return;
+  const P = nativePlugin('Purchases');
+  const wrap = document.getElementById('native-iap');
+  if (!P || !wrap) return;
+  try {
+    const p = await P.getProduct({ productId: IAP_PRODUCT_ID });
+    if (p && p.available) {
+      wrap.style.display = '';
+      document.getElementById('upgrade-form-wrap').style.display = 'none';
+      document.getElementById('upgrade-thanks').style.display = 'none';
+      const sub = document.getElementById('iap-subscribe');
+      if (sub && p.price) sub.textContent = 'Subscribe — ' + p.price + '/mo';
+      const sheetSub = document.querySelector('#upgrade-sheet .sheet-sub');
+      if (sheetSub) sheetSub.textContent = 'Finding cars near you is free and stays free. '
+        + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
+        + 'and instant push alerts. Subscribe through the App Store; cancel anytime.';
+    }
+  } catch (e) { /* product not available — waitlist stays */ }
 }
