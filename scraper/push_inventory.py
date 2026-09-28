@@ -227,7 +227,12 @@ def _request(url: str, method: str, headers: dict, body: bytes | None, attempts:
     last = None
     for attempt in range(attempts):
         try:
-            req = urllib.request.Request(url, data=body, method=method, headers=headers)
+            # Cloudflare's Browser Integrity Check 403s (error 1010) the default
+            # Python-urllib user agent at the edge, before the Worker ever runs.
+            req = urllib.request.Request(
+                url, data=body, method=method,
+                headers={"User-Agent": "yardscout-push/1.0", **headers},
+            )
             with urllib.request.urlopen(req, timeout=60) as resp:
                 return json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
