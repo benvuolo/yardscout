@@ -31,6 +31,8 @@ let pypPricing = {};   // { "Pick Your Part - Orlando": { "HEADLIGHT": {price, c
 let papPricing = {};   // { "Pull-A-Part - Charlotte": { "BRAKE CALIPER": {price, core}, ... } }
 let wapPricing = {};   // { "Wrench-A-Part - Austin": { "ALTERNATOR": {price, core}, ... } } (per yard)
 let upullrPricing = {}; // U-Pull-R Parts: one chain-wide flat-rate list, keyed by description
+let fenixPricing = {};  // { "Fenix U-Pull - Elmira": { "ALTERNATOR": {price, core}, ... } } (per yard)
+let harrysPricing = {}; // Harry's U-Pull-It: one chain-wide list, keyed by description
 
 /* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page)
  * pyp = exact "Description" from pyp.com per-location PriceList API
@@ -347,10 +349,29 @@ function vinMetaHtml(v) {
   const copyBtn = show.length >= 11
     ? `<button type="button" class="btn-copy-vin" data-vin="${escapeHtml(show)}" title="Copy VIN">${ICON.copy}</button>`
     : '';
+  // Factory specs decoded from the VIN (trim, drivetrain, engine) are a Pro
+  // feature; the mismatch warning stays free — it's a data-honesty flag, not
+  // a value signal.
   let vpic = '';
+  const specBits = [];
   const vt = v.vpicTrim != null ? String(v.vpicTrim).trim() : '';
   if (vt && (v.vpicTrimQuality === 'usable' || v.vpicDecodeWell === true)) {
-    vpic = ` <span class="meta-note" title="Specific trim decoded from the VIN via NHTSA VPIC — used to confirm trim-gated parts">trim: ${escapeHtml(vt)} (VIN-confirmed)</span>`;
+    specBits.push(`trim: ${escapeHtml(vt)}`);
+  } else if (v.vpicSeries) {
+    specBits.push(`series: ${escapeHtml(String(v.vpicSeries).trim())}`);
+  }
+  if (v.vpicDriveType) {
+    const d = String(v.vpicDriveType);
+    const short = /4wd|4x4|four/i.test(d) ? '4WD' : /awd|all/i.test(d) ? 'AWD'
+      : /rwd|rear/i.test(d) ? 'RWD' : /fwd|front/i.test(d) ? 'FWD' : '';
+    if (short) specBits.push(short);
+  }
+  const ex = extrasFor(v);
+  if (ex && ex[2]) specBits.push(escapeHtml(String(ex[2])));
+  if (specBits.length) {
+    vpic = isPro()
+      ? ` <span class="meta-note" title="Factory build — trim/drivetrain decoded from the VIN via NHTSA VPIC, engine from the VIN or the yard's own feed — so you know what to look for before walking over">${specBits.join(' &middot; ')} (factory spec)</span>`
+      : ` <button type="button" class="lock-chip lock-chip-sm" onclick="event.stopPropagation();openUpgradeSheet('vin-specs')">${ICON.lock} VIN specs &mdash; Pro</button>`;
   }
   let mismatch = '';
   if (v.vpicMismatch) {
@@ -380,6 +401,8 @@ async function loadAllPricing() {
     grab('data/pap_pricing.json', d => { papPricing = d; }),
     grab('data/wap_pricing.json', d => { wapPricing = d; }),
     grab('data/upullr_pricing.json', d => d.forEach(p => { upullrPricing[p.description] = p; })),
+    grab('data/fenix_pricing.json', d => { fenixPricing = d; }),
+    grab('data/harrys_pricing.json', d => d.forEach(p => { harrysPricing[p.description] = p; })),
   ]);
   _yardCostMemo.clear();
 }
@@ -1785,12 +1808,18 @@ function renderLive() {
               <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">sells ${LOCKED_PRICE_MASK}</span>
             </li>`;
         }
+        // "Spot it" tell for unconfirmed option parts — the VIN can't confirm
+        // an option box was ticked, but nearly every option has a physical
+        // tell you can check from outside the car.
+        const verifyNote = ifEquipped && p.verify
+          ? `<div class="verify-note">Spot it: ${escapeHtml(p.verify)}</div>` : '';
         return `
           <li class="part-item" style="flex-wrap:wrap;">
             <span class="part-name">${p.name}</span>
             ${trimMark}${fitsMark}
             ${costHtml}
             <span class="part-price" title="Typical eBay sold range (national), working condition">sells ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
+            ${verifyNote}
             ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
               <span class="sell-badge ${sellCls}">${sellSpd === 'Fast' ? 'Sells fast' : sellSpd === 'Slow' ? 'Slow mover' : 'Steady seller'}</span>
               <span class="sell-channel">Sell on: ${p.sell_at}</span>${localNote}
@@ -2211,7 +2240,9 @@ function renderYards() {
         </div>
         <div class="yard-actions">
           <button type="button" class="btn yard-view-btn">View cars</button>
-          ${chain ? `<a class="yard-price-link" href="${chain[1]}" target="_blank" rel="noopener">${chain[2]} price list</a>` : '<span class="yard-price-none">Prices posted at the yard</span>'}
+          ${yardPriceList(y.location)
+            ? '<button type="button" class="btn yard-prices-btn">' + ICON.tag + ' Price list</button>'
+            : (chain ? `<a class="yard-price-link" href="${chain[1]}" target="_blank" rel="noopener">${chain[2]} price list</a>` : '<span class="yard-price-none">Prices posted at the yard</span>')}
         </div>
       </div>`;
   }).join('');
@@ -2231,7 +2262,9 @@ function viewYardInLive(loc) {
 document.getElementById('yards-grid').addEventListener('click', e => {
   if (e.target.closest('a')) return; // price-list link navigates normally
   const card = e.target.closest('.yard-card');
-  if (card) viewYardInLive(card.dataset.loc);
+  if (!card) return;
+  if (e.target.closest('.yard-prices-btn')) { openYardPrices(card.dataset.loc); return; }
+  viewYardInLive(card.dataset.loc);
 });
 document.getElementById('yards-grid').addEventListener('keydown', e => {
   if (e.key !== 'Enter') return;
@@ -2239,6 +2272,150 @@ document.getElementById('yards-grid').addEventListener('keydown', e => {
   if (card) viewYardInLive(card.dataset.loc);
 });
 document.getElementById('yards-search').addEventListener('input', () => renderYards());
+
+/* ===== YARD PRICE LISTS & CROSS-YARD COMPARE =====
+ * Every chain's published price list, browsable in-app so nobody has to dig
+ * through nine junkyard websites. Per-yard list is free (it's public data);
+ * comparing a part across every yard near you is the Pro feature. */
+
+/** Normalized [{part, price, core}] for a yard, or null when the chain
+ *  doesn't publish a scrapeable list (e.g. LKQ posts prices in-store only). */
+function yardPriceList(location) {
+  const loc = (location || '').toLowerCase();
+  const fromList = obj => Object.values(obj).map(p => ({
+    part: p.description, price: parseFloat(p.price), core: parseFloat(p.corePrice || 0),
+  }));
+  const fromDict = d => d ? Object.entries(d).map(([k, v]) => ({
+    part: k, price: v.price, core: v.core || 0,
+  })) : null;
+  let rows = null;
+  if (loc.startsWith('pick-n-pull')) rows = fromList(pnpPricing);
+  else if (loc.startsWith('tear-a-part')) rows = fromList(tapPricing);
+  else if (loc.startsWith('utah pic-a-part')) rows = fromList(utpapPricing);
+  else if (loc.startsWith('u-pull-r')) rows = fromList(upullrPricing);
+  else if (loc.startsWith("harry's u-pull-it")) rows = fromList(harrysPricing);
+  else if (loc.startsWith('pick your part')) rows = fromDict(pypPricing[location]);
+  else if (loc.startsWith('pull-a-part')) rows = fromDict(papPricing[location]);
+  else if (loc.includes('wrench-a-part')) rows = fromDict(wapPricing[location]);
+  else if (loc.startsWith('fenix u-pull')) rows = fromDict(fenixPricing[location]);
+  if (!rows || !rows.length) return null;
+  rows = rows.filter(r => r.part && isFinite(r.price));
+  rows.sort((a, b) => a.part.localeCompare(b.part));
+  return rows.length ? rows : null;
+}
+
+let pricesSheetRows = null;   // rows currently in the sheet (yard mode)
+let pricesSheetMode = 'yard'; // 'yard' | 'compare'
+
+function priceRowHtml(r) {
+  const core = r.core > 0
+    ? ` <span class="price-core" title="Refundable core deposit — bring the old part back to get it refunded">+ $${r.core.toFixed(2)} core</span>` : '';
+  return `<div class="price-row"><span class="price-part">${escapeHtml(r.part)}</span><span class="price-amt">$${r.price.toFixed(2)}${core}</span></div>`;
+}
+
+function renderPricesSheetRows() {
+  const body = document.getElementById('prices-body');
+  const q = (document.getElementById('prices-search').value || '').trim().toLowerCase();
+  const rows = q ? pricesSheetRows.filter(r => r.part.toLowerCase().includes(q)) : pricesSheetRows;
+  body.innerHTML = rows.length
+    ? rows.map(priceRowHtml).join('')
+    : '<div class="empty-state"><p>No parts match. The chain may list it under a different name &mdash; try a shorter word.</p></div>';
+}
+
+function openYardPrices(location) {
+  const rows = yardPriceList(location);
+  if (!rows) return;
+  track('price-list-opened');
+  pricesSheetMode = 'yard';
+  pricesSheetRows = rows;
+  document.getElementById('prices-title').textContent = location;
+  const chain = CHAIN_PRICE_PAGES.find(c => c[0].test(location));
+  document.getElementById('prices-sub').innerHTML =
+    `${rows.length} parts on the published list.` +
+    (chain ? ` <a href="${chain[1]}" target="_blank" rel="noopener">View on ${escapeHtml(chain[2])}'s site</a>` : '');
+  document.getElementById('prices-search-wrap').style.display = '';
+  document.getElementById('prices-search').value = '';
+  renderPricesSheetRows();
+  document.getElementById('prices-sheet').classList.add('open');
+  document.getElementById('prices-backdrop').classList.add('open');
+}
+
+/** Pro: one search, every nearby yard's price for that part, cheapest first. */
+function openPriceCompare(query) {
+  if (!isPro()) { openUpgradeSheet('price-compare'); return; }
+  if (!activeZipCoords) { alert('Set a zip code first so we know which yards are near you.'); return; }
+  const q = query.trim().toLowerCase();
+  if (q.length < 3) return;
+  track('price-compare');
+
+  const radius = effectiveRadiusMi();
+  const results = [];
+  for (const y of buildYardDirectory()) {
+    if (y.lat == null || y.lng == null) continue;
+    const dist = haversineMiles(activeZipCoords.lat, activeZipCoords.lng, y.lat, y.lng);
+    if (radius && dist > radius) continue;
+    const rows = yardPriceList(y.location);
+    if (!rows) continue;
+    // Best (cheapest) match at this yard — a part search like "alternator"
+    // can hit several list rows; the cheapest is what a flipper acts on.
+    let best = null;
+    for (const r of rows) {
+      if (r.part.toLowerCase().includes(q) && (!best || r.price < best.price)) best = r;
+    }
+    if (best) results.push({ yard: y.location, dist, ...best });
+  }
+  results.sort((a, b) => a.price - b.price);
+  // UTPAP's premium-row sections appear as separate "(Premium)" yards in the
+  // directory but share the base yard's price list — keep one per real yard.
+  const seenYards = new Set();
+  const deduped = results.filter(r => {
+    const key = r.yard.replace(/\s*\(premium\)\s*$/i, '');
+    if (seenYards.has(key)) return false;
+    seenYards.add(key);
+    return true;
+  });
+  results.length = 0;
+  results.push(...deduped);
+
+  pricesSheetMode = 'compare';
+  document.getElementById('prices-title').textContent = `"${query.trim()}" near you`;
+  document.getElementById('prices-sub').textContent = results.length
+    ? `Cheapest first, across ${results.length} yard${results.length === 1 ? '' : 's'} in range with a published price.`
+    : '';
+  document.getElementById('prices-search-wrap').style.display = 'none';
+  const body = document.getElementById('prices-body');
+  body.innerHTML = results.length
+    ? results.map(r => {
+        const core = r.core > 0 ? ` <span class="price-core">+ $${r.core.toFixed(2)} core</span>` : '';
+        return `<div class="price-row compare-row" data-loc="${escapeHtml(r.yard)}" role="button" tabindex="0">
+          <span class="price-part"><strong>${escapeHtml(r.yard)}</strong><br>
+            <span class="compare-detail">${escapeHtml(r.part)} &middot; ${Math.round(r.dist)} mi</span></span>
+          <span class="price-amt">$${r.price.toFixed(2)}${core}</span>
+        </div>`;
+      }).join('')
+    : '<div class="empty-state"><p>No published price for that part at yards in range. Chains list parts under category names &mdash; try a broader word like "seat" or "door".</p></div>';
+  document.getElementById('prices-sheet').classList.add('open');
+  document.getElementById('prices-backdrop').classList.add('open');
+}
+
+function closePricesSheet() {
+  document.getElementById('prices-sheet').classList.remove('open');
+  document.getElementById('prices-backdrop').classList.remove('open');
+}
+document.getElementById('prices-close').addEventListener('click', closePricesSheet);
+document.getElementById('prices-backdrop').addEventListener('click', closePricesSheet);
+document.getElementById('prices-search').addEventListener('input', () => {
+  if (pricesSheetMode === 'yard') renderPricesSheetRows();
+});
+document.getElementById('prices-body').addEventListener('click', e => {
+  const row = e.target.closest('.compare-row');
+  if (row) { closePricesSheet(); viewYardInLive(row.dataset.loc); }
+});
+document.getElementById('compare-go').addEventListener('click', () =>
+  openPriceCompare(document.getElementById('compare-input').value));
+document.getElementById('compare-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') openPriceCompare(e.target.value);
+});
 
 /* ===== PROFIT BREAKDOWN ===== */
 /** Baked sell_notes can mention Lexus for any "Mark Levinson" part; donor make may differ. */

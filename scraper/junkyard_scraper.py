@@ -5192,6 +5192,45 @@ def _option_hint_tokens(name: str) -> list[str]:
             if len(t) >= 3 and t not in _OPTION_HINT_STOPWORDS]
 
 
+# "How to spot it" hints for option-gated parts — the VIN can't confirm a
+# ticked option box, but almost every option has a physical tell you can see
+# from outside the car. Keyword-matched against the part name (longest match
+# wins); a DB entry's own "verify" field overrides. Shipped to the UI as the
+# "spot it" note on "if equipped" parts.
+VERIFY_HINTS = [
+    ("tow mirror", "Telescoping heads that pull/fold outward — visibly deeper than standard mirrors; power-fold switch on the driver door panel."),
+    ("running board", "Boards tucked up under the rocker panels with a visible motor/linkage — they deploy when a door opens (no power needed to see the hinge arms)."),
+    ("air suspension", "Rubber air bladders instead of coil springs at the rear axle; compressor pump mounted near the spare tire well."),
+    ("x-reas", "Yellow-bodied shocks with braided crossover lines running diagonally between corners."),
+    ("hood w/ scoop", "Just look at the hood — the scoop is molded in, not bolted on."),
+    ("scoop", "Visible from the front of the car — factory scoops are molded into the hood panel."),
+    ("3rd row", "Look through the rear glass for the extra seat row or its floor anchor points if folded/removed."),
+    ("third row", "Look through the rear glass for the extra seat row or its floor anchor points if folded/removed."),
+    ("sunroof", "Visible glass panel in the roof — check the headliner switch too."),
+    ("rear entertainment", "Screen folded into the headliner or seatbacks; look for headphone jacks in the rear trim."),
+    ("subwoofer", "Check the trunk sidewall, under-floor well, or under a front seat for the sub enclosure and amp."),
+    ("amp", "Amp is usually mounted in the trunk sidewall, under the rear deck, or under a front seat."),
+    ("digital dash", "Look through the windshield — the cluster face shows segmented LCD panels instead of needle gauges."),
+    ("hardtop", "Visible — verify all latches/hinge points are present and the glass isn't cracked."),
+    ("bed extender", "Folding cage clipped inside the tailgate opening — visible in the bed."),
+    ("utili-track", "Metal rails inset along the bed walls/floor with sliding tie-down cleats."),
+    ("roof rack", "Crossbars mounted on the roof rails — check that end caps and locks are intact."),
+    ("transfer case shift motor", "Only on 4WD units — look for a 4WD badge, floor shift lever, or dash selector switch."),
+    ("winch", "Check behind the front bumper cover for the winch drum and fairlead."),
+    ("headlight washer", "Small spray nozzle caps in the front bumper below each headlight."),
+]
+
+
+def _verify_hint(name: str) -> str:
+    lower = name.lower()
+    best = ""
+    best_len = 0
+    for kw, hint in VERIFY_HINTS:
+        if kw in lower and len(kw) > best_len:
+            best, best_len = hint, len(kw)
+    return best
+
+
 def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = None) -> list[dict]:
     """Match a vehicle against the unobtanium database, filtering parts by
     year range and trim requirements.  Attaches sell-channel info to each part.
@@ -5343,6 +5382,12 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
             enriched["fits"] = f"{max(low, p.get('yr_min', low))}–{min(high, p.get('yr_max', high))}"
             if trim_status:
                 enriched["trim_status"] = trim_status
+            # "Spot it" hint for unconfirmed option parts: the entry's own
+            # verify text wins, else the keyword table's physical tell.
+            if trim_status == "unconfirmed" and not enriched.get("verify"):
+                hint = _verify_hint(p["name"])
+                if hint:
+                    enriched["verify"] = hint
             filtered_parts.append(enriched)
         if filtered_parts:
             # Ranking value counts only parts we can stand behind: ungated,
@@ -6479,6 +6524,71 @@ def fetch_fenix_inventory() -> list[dict]:
     return unique
 
 
+# Fenix publishes a per-location price list on /parts-prices/ — the location
+# is selected via an fnx_location cookie (1=Elmira, 2=Binghamton,
+# 3=East Syracuse, 4=Moultrie; Belleville has no list yet — their own JS
+# resets its id). Server-rendered <table class="fnx-table"> rows:
+# <td>PART</td><td>Price: $X.XX</br>Core: $Y.YY</td>. Stored per-yard like
+# wap_pricing.json since the GA list differs from the NY ones.
+FENIX_PRICE_URL = "https://fenixupull.com/parts-prices/"
+FENIX_PRICE_LOCATIONS = {
+    1: "Fenix U-Pull - Elmira",
+    2: "Fenix U-Pull - Binghamton",
+    3: "Fenix U-Pull - East Syracuse",
+    4: "Fenix U-Pull - Moultrie",
+}
+_FENIX_PRICE_ROW_RE = re.compile(
+    r"<td>([^<]+)</td>\s*<td>\s*Price:\s*\$\s*([\d.,]+)\s*(?:</?br/?>\s*Core:\s*\$\s*([\d.,]+))?",
+    re.S,
+)
+
+
+def refresh_fenix_pricing_file() -> Path:
+    """Refresh Fenix U-Pull's per-location price lists -> fenix_pricing.json.
+
+    Only overwrites when every location parsed non-trivially (>200 parts each),
+    so a partial/failed run never clobbers good data."""
+    import html as html_mod
+
+    out: dict[str, dict] = {}
+    for loc_id, yard_name in FENIX_PRICE_LOCATIONS.items():
+        try:
+            r = requests.get(FENIX_PRICE_URL,
+                             headers={**HEADERS, "Accept": "text/html",
+                                      "Cookie": f"fnx_location={loc_id}"},
+                             timeout=30)
+            r.raise_for_status()
+            page = r.text
+        except Exception as e:
+            print(f"  [Fenix pricing] location {loc_id} fetch failed: {e}",
+                  file=sys.stderr)
+            return DATA_DIR / "fenix_pricing.json"
+        parts: dict[str, dict] = {}
+        for name, price, core in _FENIX_PRICE_ROW_RE.findall(page):
+            name = html_mod.unescape(name).strip().upper()
+            if not name:
+                continue
+            try:
+                parts.setdefault(name, {
+                    "price": float(price.replace(",", "")),
+                    "core": float(core.replace(",", "")) if core else 0.0,
+                })
+            except ValueError:
+                continue
+        if len(parts) < 200:
+            print(f"  [Fenix pricing] only {len(parts)} parts for {yard_name} — "
+                  "keeping existing file", file=sys.stderr)
+            return DATA_DIR / "fenix_pricing.json"
+        out[yard_name] = parts
+        time.sleep(FENIX_DELAY_SEC)
+
+    path = DATA_DIR / "fenix_pricing.json"
+    path.write_text(json.dumps(out, separators=(",", ":")))
+    print(f"  [Fenix pricing] wrote {sum(len(v) for v in out.values())} rows "
+          f"across {len(out)} yards", file=sys.stderr)
+    return path
+
+
 # Harry's U-Pull-It (wegotused.com) — 3 large eastern-PA yards (Hazle Township,
 # Allentown, Pennsburg). Site sits behind Sucuri CloudProxy's JS cookie
 # challenge: the response is a small page whose base64 payload builds a
@@ -6644,6 +6754,76 @@ def fetch_harrys_inventory() -> list[dict]:
     print(f"  [Harry's] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
+
+
+# Harry's publishes one chain-wide price list (same prices at all three PA
+# yards) at /price-list/, behind the same Sucuri cookie as the inventory.
+# Plain table: <td>Part</td><td>$Price</td><td>Core</td>. Stored flat like
+# tearapart/utpap pricing.
+HARRYS_PRICE_URL = "https://wegotused.com/price-list/"
+_HARRYS_PRICE_ROW_RE = re.compile(
+    r"<td>([^<]+)</td>\s*<td>\s*\$\s*([\d.,]+)\s*</td>\s*<td>\s*(?:\$\s*([\d.,]+))?\s*</td>",
+    re.S,
+)
+
+
+def refresh_harrys_pricing_file() -> Path:
+    """Refresh Harry's U-Pull-It's chain-wide price list -> harrys_pricing.json.
+
+    Only overwritten when the fetch looks complete (>150 parts), so a
+    partial/failed run never clobbers good data."""
+    import html as html_mod
+
+    cookie: str | None = None
+    page = None
+    for attempt in (1, 2, 3):
+        try:
+            hdrs = {**HEADERS, "Accept": "text/html"}
+            if cookie:
+                hdrs["Cookie"] = cookie
+            r = requests.get(HARRYS_PRICE_URL, headers=hdrs, timeout=45)
+            text = r.text
+        except Exception as e:
+            print(f"  [Harry's pricing] attempt {attempt} failed: {e}", file=sys.stderr)
+            time.sleep(5 * attempt)
+            continue
+        if "sucuri_cloudproxy" not in text:
+            page = text
+            break
+        cookie = _sucuri_solve(text)
+        if cookie is None:
+            print("  [Harry's pricing] unrecognized Sucuri challenge — keeping existing file",
+                  file=sys.stderr)
+            return DATA_DIR / "harrys_pricing.json"
+    if page is None:
+        return DATA_DIR / "harrys_pricing.json"
+
+    seen: dict[str, dict] = {}
+    for name, price, core in _HARRYS_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(name).strip()
+        if not name:
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+
+    path = DATA_DIR / "harrys_pricing.json"
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Harry's pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Harry's pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
 
 
 def fetch_independent_inventory() -> list[dict]:
@@ -7052,6 +7232,7 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                     "sell_notes": p.get("sell_notes", ""),
                     **({"fits": p["fits"]} if p.get("fits") else {}),
                     **({"trim_status": p["trim_status"]} if p.get("trim_status") else {}),
+                    **({"verify": p["verify"]} if p.get("verify") else {}),
                 }
                 for p in v.get("_top_parts", [])
             ],
@@ -7648,16 +7829,18 @@ def main():
         # 03:10 UTC scan) must not abort the others or fail the workflow —
         # yesterday's cached prices are strictly better than no scan at all.
         failures = []
-        for fn in (refresh_pnp_pricing_file, refresh_pyp_pricing_file,
-                   refresh_pap_pricing_file, refresh_wap_pricing_file,
-                   refresh_upullr_pricing_file):
+        fns = (refresh_pnp_pricing_file, refresh_pyp_pricing_file,
+               refresh_pap_pricing_file, refresh_wap_pricing_file,
+               refresh_upullr_pricing_file, refresh_fenix_pricing_file,
+               refresh_harrys_pricing_file)
+        for fn in fns:
             try:
                 fn()
             except Exception as e:  # noqa: BLE001 — upstream sites, anything goes
                 failures.append(f"{fn.__name__}: {e}")
                 print(f"WARNING: {fn.__name__} failed ({e}) — keeping previous price file", file=sys.stderr)
         if failures:
-            print(f"{len(failures)} of 5 chain price refreshes failed; previous files kept.", file=sys.stderr)
+            print(f"{len(failures)} of {len(fns)} chain price refreshes failed; previous files kept.", file=sys.stderr)
         return
 
     if args.list_parts:

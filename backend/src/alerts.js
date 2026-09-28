@@ -217,7 +217,7 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [] } =
       : `${n} watched car${n === 1 ? '' : 's'} just hit the yard`)
     : `Sale days coming up at ${sales.length} yard${sales.length === 1 ? '' : 's'} near you`;
   const intro = weekly
-    ? 'Arrivals from the past week matching your YardScout watches:'
+    ? 'Arrivals from the past week matching your YardScout watches — Pro members were pushed each of these the moment it hit the yard, up to a week ago:'
     : 'New arrivals matching your YardScout watches:';
   const salesTxt = sales.length
     ? `\n\nSale days at yards near your watches:\n` + sales.slice(0, 6).map((s) =>
