@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- maximum-scale=1 stops iOS auto-zooming the whole app when an input under
+     16px gets focus (zip field). Safari still allows pinch-zoom regardless. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>YardScout</title>
 <meta name="description" content="Live inventory from every major self-service junkyard chain — Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part — checked against real part prices. Free, no signup.">
 <meta name="theme-color" content="#efece4">
