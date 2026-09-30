@@ -3,7 +3,7 @@
   "appName": "YardScout",
   "webDir": "native/www",
   "ios": {
-    "contentInset": "automatic"
+    "contentInset": "never"
   },
   "server": {
     "allowNavigation": []
