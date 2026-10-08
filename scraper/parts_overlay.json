@@ -1,0 +1,25 @@
+{
+  "_readme": "Append-only extension of UNOBTANIUM_DB. Merged at scraper load by _merge_parts_overlay(). Entries match existing DB rows by make + match keyword (parts carry their own yr_min/yr_max, so generation-split rows stay honest); unknown models create new rows. Written by hand (owner tips) and by scraper/research_parts.py (weekly LLM research run). 'researched' tracks which coverage groups the researcher already handled.",
+  "researched": {},
+  "entries": [
+    {
+      "make": "Toyota",
+      "match": ["4runner"],
+      "parts": [
+        {
+          "name": "Wood Dash Trim Kit (Limited)",
+          "rarity": "Rare",
+          "low": 60,
+          "high": 180,
+          "cost": 10,
+          "yr_min": 1996,
+          "yr_max": 2002,
+          "trim": ["limited"],
+          "option": true,
+          "source": "owner-tip",
+          "added": "2026-10-08"
+        }
+      ]
+    }
+  ]
+}

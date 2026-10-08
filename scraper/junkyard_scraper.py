@@ -4801,6 +4801,78 @@ def _apply_generation_bounds() -> None:
 
 _apply_generation_bounds()
 
+
+def _merge_parts_overlay() -> None:
+    """Merge scraper/parts_overlay.json into UNOBTANIUM_DB (append-only).
+
+    The overlay is the self-growing half of the knowledge base: owner tips and
+    the weekly research_parts.py run land there instead of editing this file.
+    Matching mirrors match_vehicle(): an overlay entry applies to every DB row
+    with the same make whose keyword set contains one of the entry's match
+    terms. Generation-split rows all receive the part — each part's own
+    yr_min/yr_max plus the row's year_range intersection keeps display honest.
+    Match terms with no existing row create a new row (no gen-splitting; the
+    part-level year gates do that work). Malformed overlay content is skipped,
+    never fatal — a bad auto-research commit must not take down the scan.
+    """
+    path = Path(__file__).resolve().parent / "parts_overlay.json"
+    if not path.exists():
+        return
+    try:
+        data = json.loads(path.read_text())
+    except Exception as exc:  # pragma: no cover
+        print(f"[overlay] parts_overlay.json unreadable, skipping: {exc}")
+        return
+    allowed = ("name", "rarity", "low", "high", "cost", "yr_min", "yr_max", "trim", "option")
+    for ent in data.get("entries", []):
+        make = (ent.get("make") or "").strip()
+        terms = [str(t).lower().strip() for t in (ent.get("match") or []) if str(t).strip()]
+        clean = []
+        for p in ent.get("parts") or []:
+            try:
+                name = str(p["name"]).strip()
+                low, high = int(p["low"]), int(p["high"])
+            except (KeyError, TypeError, ValueError):
+                continue
+            if not name or not (0 < low <= high):
+                continue
+            q = {k: p[k] for k in allowed if k in p}
+            q["name"], q["low"], q["high"] = name, low, high
+            q.setdefault("rarity", "Rare")
+            q.setdefault("cost", 10)
+            clean.append(q)
+        if not (make and terms and clean):
+            continue
+        seen_ids: set[int] = set()
+        hit = False
+        for key, info in UNOBTANIUM_DB.items():
+            if id(info) in seen_ids:
+                continue
+            seen_ids.add(id(info))
+            if (info.get("make") or "").lower() != make.lower():
+                continue
+            kws = [str(k).lower() for k in (info.get("match") or (key,))]
+            if not any(t in kws for t in terms):
+                continue
+            hit = True
+            have = {pp["name"].lower() for pp in info["top_parts"]}
+            info["top_parts"].extend(pp for pp in clean if pp["name"].lower() not in have)
+        if not hit:
+            new_key = terms[0]
+            if new_key in UNOBTANIUM_DB:
+                continue  # keyword collision with another make — leave alone
+            yr = ent.get("year_range") or [1990, 2026]
+            UNOBTANIUM_DB[new_key] = {
+                "display": ent.get("display") or f"{make} {terms[0].title()}",
+                "make": make,
+                "match": terms,
+                "year_range": (int(yr[0]), int(yr[1])),
+                "top_parts": clean,
+            }
+
+
+_merge_parts_overlay()
+
 # ---------------------------------------------------------------------------
 # Sell-channel guide — where each part actually moves and how fast.
 # Keyed by lowercase substring found in part name.  Checked longest-match-first.
