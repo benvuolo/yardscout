@@ -13,8 +13,10 @@ Find cars at self-serve yards
 Fresh inventory from 167 self-serve yards, updated daily. Watch a vehicle and get a push within hours of one hitting a yard near you.
 
 ## Description
-YardScout tracks the live inventory of self-service salvage yards across the
-country, so you stop driving to yards on a maybe.
+(IMPORTANT: every paragraph and bullet below is ONE line — paste as-is into ASC.
+Never hard-wrap this text; ASC renders the line breaks literally.)
+
+YardScout tracks the live inventory of self-service salvage yards across the country, so you stop driving to yards on a maybe.
 
 FIND THE CAR BEFORE YOU DRIVE
 - Live inventory from 167 self-serve yards, refreshed daily
@@ -29,8 +31,7 @@ KNOW WHAT IT'S WORTH (PRO)
 - Yard history and days-on-lot signals
 
 NEVER MISS THE CAR (PRO)
-- Watch any make/model/years and get a push within hours of one arriving
-  at a yard in your radius — before the weekend crowd strips it
+- Watch any make/model/years and get a push within hours of one arriving at a yard in your radius — before the weekend crowd strips it
 - Sale-day alerts when a yard near you runs a half-off sale
 - Free members get a weekly recap push of everything that arrived
 
@@ -38,8 +39,7 @@ NO ACCOUNT, NO EMAIL
 - The whole app works without signing up
 - Alerts use an anonymous device ID — we never ask who you are
 
-YardScout Pro is $8.99/month through your App Store account, auto-renews
-monthly, cancel anytime in Settings. Finding cars is free forever.
+YardScout Pro is $8.99/month through your App Store account, auto-renews monthly, cancel anytime in Settings. Finding cars is free forever.
 
 Privacy policy: https://benvuolo.github.io/yardscout/privacy.html
 Terms of use: https://benvuolo.github.io/yardscout/terms.html
