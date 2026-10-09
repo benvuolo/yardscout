@@ -25,7 +25,24 @@
     "Volkswagen|Eos|2005-2009": "2026-10-09",
     "Lexus|LS 460|2005-2009": "2026-10-09",
     "Lexus|ES 300|2000-2004": "2026-10-09",
-    "Lexus|ES 330|2005-2009": "2026-10-09"
+    "Lexus|ES 330|2005-2009": "2026-10-09",
+    "Subaru|Legacy|2010-2014": "2026-10-09",
+    "Subaru|Legacy|2005-2009": "2026-10-09",
+    "BMW|328i|2005-2009": "2026-10-09",
+    "Lexus|ES 300|1995-1999": "2026-10-09",
+    "Volkswagen|Passat|2005-2009": "2026-10-09",
+    "Volkswagen|Passat|2000-2004": "2026-10-09",
+    "Volkswagen|CC|2010-2014": "2026-10-09",
+    "Subaru|Impreza|2000-2004": "2026-10-09",
+    "Subaru|Impreza|2015-2019": "2026-10-09",
+    "Subaru|B9 Tribeca|2005-2009": "2026-10-09",
+    "Volkswagen|Rabbit|2005-2009": "2026-10-09",
+    "Volkswagen|Routan|2010-2014": "2026-10-09",
+    "Honda|CR-V|2005-2009": "2026-10-09",
+    "Chevrolet|Equinox|2005-2009": "2026-10-09",
+    "Buick|Lesabre|2000-2004": "2026-10-09",
+    "Hyundai|Accent|2010-2014": "2026-10-09",
+    "Ford|Taurus|2005-2009": "2026-10-09"
   },
   "entries": [
     {
@@ -568,6 +585,223 @@
           "yr_min": 2002,
           "yr_max": 2009,
           "option": true,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Toyota",
+      "match": [
+        "tacoma"
+      ],
+      "display": "Toyota Tacoma",
+      "parts": [
+        {
+          "name": "Rear E-Locker Actuator Motor",
+          "rarity": "Legendary",
+          "low": 250,
+          "high": 500,
+          "cost": 15,
+          "yr_min": 2005,
+          "option": true,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Tow Package Hitch + 7-Pin Wiring",
+          "low": 60,
+          "high": 150,
+          "cost": 25,
+          "yr_min": 2005,
+          "option": true,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "JBL Amp + Speakers",
+          "low": 60,
+          "high": 150,
+          "cost": 15,
+          "yr_min": 2016,
+          "option": true,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "TRD Supercharger (complete)",
+          "rarity": "Legendary",
+          "low": 500,
+          "high": 1200,
+          "cost": 80,
+          "yr_min": 1995,
+          "yr_max": 2015,
+          "option": true,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Toyota",
+      "match": [
+        "4runner"
+      ],
+      "display": "Toyota 4Runner",
+      "parts": [
+        {
+          "name": "JBL Amp + Speakers",
+          "low": 60,
+          "high": 150,
+          "cost": 15,
+          "yr_min": 2003,
+          "option": true,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Subaru",
+      "match": [
+        "legacy"
+      ],
+      "display": "Subaru Legacy",
+      "parts": [
+        {
+          "name": "GT Turbo + Top-Mount Intercooler",
+          "rarity": "Epic",
+          "low": 150,
+          "high": 400,
+          "cost": 40,
+          "yr_min": 2005,
+          "yr_max": 2012,
+          "trim": [
+            "gt",
+            "spec"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "GT Hood Scoop",
+          "rarity": "Epic",
+          "low": 60,
+          "high": 150,
+          "cost": 15,
+          "yr_min": 2005,
+          "yr_max": 2012,
+          "trim": [
+            "gt",
+            "spec"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Lexus",
+      "match": [
+        "lexus is"
+      ],
+      "display": "Lexus IS",
+      "parts": [
+        {
+          "name": "Manual Shift Assembly (IS300 swap demand)",
+          "rarity": "Epic",
+          "low": 80,
+          "high": 200,
+          "cost": 15,
+          "yr_min": 2001,
+          "yr_max": 2005,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "IS F Brembo Calipers (set)",
+          "rarity": "Legendary",
+          "low": 300,
+          "high": 650,
+          "cost": 40,
+          "yr_min": 2008,
+          "yr_max": 2014,
+          "trim": [
+            "is f",
+            "isf",
+            "is-f"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Mercedes-Benz",
+      "match": [
+        "e-class",
+        "benz e320",
+        "benz e350",
+        "benz e500"
+      ],
+      "display": "Mercedes-Benz E-Class",
+      "parts": [
+        {
+          "name": "Airmatic Suspension Compressor",
+          "rarity": "Epic",
+          "low": 100,
+          "high": 250,
+          "cost": 20,
+          "yr_min": 2003,
+          "yr_max": 2016,
+          "option": true,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Mercedes-Benz",
+      "match": [
+        "c-class",
+        "benz c300",
+        "benz c250"
+      ],
+      "display": "Mercedes-Benz C-Class",
+      "parts": [
+        {
+          "name": "Harman Kardon Amp + Speakers",
+          "low": 60,
+          "high": 160,
+          "cost": 15,
+          "yr_min": 2008,
+          "yr_max": 2021,
+          "option": true,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Audi",
+      "match": [
+        "audi a4"
+      ],
+      "display": "Audi A4",
+      "parts": [
+        {
+          "name": "Bose Amp + Speakers",
+          "low": 50,
+          "high": 120,
+          "cost": 15,
+          "yr_min": 2002,
+          "yr_max": 2008,
+          "option": true,
+          "rarity": "Rare",
           "source": "agent-research",
           "added": "2026-10-09"
         }
