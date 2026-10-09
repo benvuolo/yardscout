@@ -1,10 +1,38 @@
 {
   "_readme": "Append-only extension of UNOBTANIUM_DB. Merged at scraper load by _merge_parts_overlay(). Entries match existing DB rows by make + match keyword (parts carry their own yr_min/yr_max, so generation-split rows stay honest); unknown models create new rows. Written by hand (owner tips) and by scraper/research_parts.py (weekly LLM research run). 'researched' tracks which coverage groups the researcher already handled.",
-  "researched": {},
+  "researched": {
+    "Nissan|Altima|2005-2009": "2026-10-09",
+    "Toyota|Camry|2005-2009": "2026-10-09",
+    "Toyota|Camry|2000-2004": "2026-10-09",
+    "Hyundai|Elantra|2005-2009": "2026-10-09",
+    "Toyota|Camry|1995-1999": "2026-10-09",
+    "Chevrolet|Malibu|2005-2009": "2026-10-09",
+    "Ford|Escape|2005-2009": "2026-10-09",
+    "Toyota|Corolla|2000-2004": "2026-10-09",
+    "Toyota|Camry|2010-2014": "2026-10-09",
+    "Nissan|Versa|2010-2014": "2026-10-09",
+    "Nissan|Sentra|2005-2009": "2026-10-09",
+    "Ford|Taurus|2000-2004": "2026-10-09",
+    "Subaru|Impreza|2005-2009": "2026-10-09",
+    "Subaru|Impreza|2010-2014": "2026-10-09",
+    "Toyota|Corolla|1995-1999": "2026-10-09",
+    "Nissan|Altima|2000-2004": "2026-10-09",
+    "Nissan|Versa|2005-2009": "2026-10-09",
+    "Saturn|Aura|2005-2009": "2026-10-09",
+    "Dodge|Caliber|2005-2009": "2026-10-09",
+    "Nissan|Versa|2015-2019": "2026-10-09",
+    "Volkswagen|Touareg|2005-2009": "2026-10-09",
+    "Volkswagen|Eos|2005-2009": "2026-10-09",
+    "Lexus|LS 460|2005-2009": "2026-10-09",
+    "Lexus|ES 300|2000-2004": "2026-10-09",
+    "Lexus|ES 330|2005-2009": "2026-10-09"
+  },
   "entries": [
     {
       "make": "Toyota",
-      "match": ["4runner"],
+      "match": [
+        "4runner"
+      ],
       "parts": [
         {
           "name": "Wood Dash Trim Kit (Limited)",
@@ -14,10 +42,534 @@
           "cost": 10,
           "yr_min": 1996,
           "yr_max": 2002,
-          "trim": ["limited"],
+          "trim": [
+            "limited"
+          ],
           "option": true,
           "source": "owner-tip",
           "added": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "make": "Nissan",
+      "match": [
+        "altima"
+      ],
+      "display": "Nissan Altima",
+      "parts": [
+        {
+          "name": "Window Regulator + Motor (front)",
+          "low": 35,
+          "high": 75,
+          "cost": 10,
+          "yr_min": 2005,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Bose Amp + Speakers",
+          "low": 40,
+          "high": 90,
+          "cost": 15,
+          "yr_min": 2005,
+          "yr_max": 2009,
+          "option": true,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Electronic Steering Column Lock (ESCL)",
+          "low": 45,
+          "high": 110,
+          "cost": 12,
+          "yr_min": 2009,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Toyota",
+      "match": [
+        "camry"
+      ],
+      "display": "Toyota Camry",
+      "parts": [
+        {
+          "name": "Window Regulator + Motor (front)",
+          "low": 35,
+          "high": 75,
+          "cost": 10,
+          "yr_min": 2000,
+          "yr_max": 2014,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "JBL Amp + Speakers",
+          "low": 40,
+          "high": 100,
+          "cost": 15,
+          "yr_min": 2002,
+          "yr_max": 2014,
+          "option": true,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Hybrid Battery Pack (test modules first)",
+          "rarity": "Epic",
+          "low": 150,
+          "high": 400,
+          "cost": 100,
+          "yr_min": 2007,
+          "yr_max": 2014,
+          "trim": [
+            "hybrid"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Hyundai",
+      "match": [
+        "elantra"
+      ],
+      "display": "Hyundai Elantra",
+      "parts": [
+        {
+          "name": "Headlights (clear, non-hazed)",
+          "low": 40,
+          "high": 100,
+          "cost": 20,
+          "yr_min": 2005,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Side Mirrors (power, pair)",
+          "low": 30,
+          "high": 75,
+          "cost": 12,
+          "yr_min": 2005,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Tail Lights (pair, uncracked)",
+          "low": 40,
+          "high": 90,
+          "cost": 15,
+          "yr_min": 2005,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Window Regulator + Motor (front)",
+          "low": 35,
+          "high": 75,
+          "cost": 10,
+          "yr_min": 2005,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Chevrolet",
+      "match": [
+        "malibu"
+      ],
+      "display": "Chevrolet Malibu",
+      "parts": [
+        {
+          "name": "Window Regulator + Motor (front)",
+          "low": 30,
+          "high": 70,
+          "cost": 10,
+          "yr_min": 2005,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Ford",
+      "match": [
+        "escape"
+      ],
+      "display": "Ford Escape",
+      "parts": [
+        {
+          "name": "Hybrid Battery Pack (test modules first)",
+          "rarity": "Epic",
+          "low": 150,
+          "high": 400,
+          "cost": 100,
+          "yr_min": 2005,
+          "yr_max": 2012,
+          "trim": [
+            "hybrid"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Tow Package Hitch + Wiring",
+          "low": 60,
+          "high": 140,
+          "cost": 25,
+          "yr_min": 2005,
+          "yr_max": 2012,
+          "option": true,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Toyota",
+      "match": [
+        "corolla"
+      ],
+      "display": "Toyota Corolla",
+      "parts": [
+        {
+          "name": "Window Regulator + Motor (front)",
+          "low": 35,
+          "high": 75,
+          "cost": 10,
+          "yr_min": 1995,
+          "yr_max": 2013,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Nissan",
+      "match": [
+        "versa"
+      ],
+      "display": "Nissan Versa",
+      "parts": [
+        {
+          "name": "CVT Transmission (low-mile donor, test first)",
+          "rarity": "Epic",
+          "low": 300,
+          "high": 650,
+          "cost": 200,
+          "yr_min": 2007,
+          "yr_max": 2019,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Nissan",
+      "match": [
+        "sentra"
+      ],
+      "display": "Nissan Sentra",
+      "parts": [
+        {
+          "name": "SE-R / Spec V Front Seats (pair)",
+          "rarity": "Epic",
+          "low": 120,
+          "high": 300,
+          "cost": 40,
+          "yr_min": 2002,
+          "yr_max": 2012,
+          "trim": [
+            "se-r",
+            "spec"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Saturn",
+      "match": [
+        "aura"
+      ],
+      "display": "Saturn Aura",
+      "parts": [
+        {
+          "name": "Headlights (clear, non-hazed)",
+          "low": 40,
+          "high": 95,
+          "cost": 20,
+          "yr_min": 2007,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Side Mirrors (power, pair)",
+          "low": 30,
+          "high": 70,
+          "cost": 12,
+          "yr_min": 2007,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Tail Lights (pair, uncracked)",
+          "low": 40,
+          "high": 90,
+          "cost": 15,
+          "yr_min": 2007,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Dodge",
+      "match": [
+        "caliber"
+      ],
+      "display": "Dodge Caliber",
+      "parts": [
+        {
+          "name": "SRT-4 Turbocharger",
+          "rarity": "Legendary",
+          "low": 150,
+          "high": 350,
+          "cost": 40,
+          "yr_min": 2008,
+          "yr_max": 2009,
+          "trim": [
+            "srt"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Subaru",
+      "match": [
+        "impreza"
+      ],
+      "display": "Subaru Impreza",
+      "parts": [
+        {
+          "name": "WRX Hood Scoop",
+          "rarity": "Epic",
+          "low": 70,
+          "high": 180,
+          "cost": 15,
+          "yr_min": 2002,
+          "yr_max": 2014,
+          "trim": [
+            "wrx",
+            "sti"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "STI Rear Wing",
+          "rarity": "Legendary",
+          "low": 150,
+          "high": 400,
+          "cost": 25,
+          "yr_min": 2004,
+          "yr_max": 2014,
+          "trim": [
+            "sti"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "WRX Top-Mount Intercooler",
+          "rarity": "Epic",
+          "low": 80,
+          "high": 200,
+          "cost": 25,
+          "yr_min": 2002,
+          "yr_max": 2014,
+          "trim": [
+            "wrx",
+            "sti"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "WRX / STI Front Seats (pair)",
+          "rarity": "Epic",
+          "low": 200,
+          "high": 500,
+          "cost": 50,
+          "yr_min": 2002,
+          "yr_max": 2014,
+          "trim": [
+            "wrx",
+            "sti"
+          ],
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Volkswagen",
+      "match": [
+        "touareg"
+      ],
+      "display": "Volkswagen Touareg",
+      "parts": [
+        {
+          "name": "Air Suspension Compressor",
+          "rarity": "Epic",
+          "low": 120,
+          "high": 280,
+          "cost": 25,
+          "yr_min": 2004,
+          "yr_max": 2010,
+          "option": true,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Xenon Headlights (pair)",
+          "rarity": "Epic",
+          "low": 120,
+          "high": 300,
+          "cost": 40,
+          "yr_min": 2004,
+          "yr_max": 2010,
+          "option": true,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Side Mirrors (power-fold, pair)",
+          "low": 60,
+          "high": 150,
+          "cost": 15,
+          "yr_min": 2004,
+          "yr_max": 2010,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Volkswagen",
+      "match": [
+        "eos"
+      ],
+      "display": "Volkswagen Eos",
+      "parts": [
+        {
+          "name": "Hardtop Roof Hydraulic Pump",
+          "rarity": "Epic",
+          "low": 150,
+          "high": 350,
+          "cost": 25,
+          "yr_min": 2007,
+          "yr_max": 2015,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Lexus",
+      "match": [
+        "ls 460"
+      ],
+      "display": "Lexus LS 460",
+      "parts": [
+        {
+          "name": "AFS Xenon Headlight (each)",
+          "rarity": "Epic",
+          "low": 150,
+          "high": 400,
+          "cost": 40,
+          "yr_min": 2007,
+          "yr_max": 2012,
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Power Trunk Motor",
+          "low": 80,
+          "high": 180,
+          "cost": 15,
+          "yr_min": 2007,
+          "yr_max": 2012,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        }
+      ]
+    },
+    {
+      "make": "Lexus",
+      "match": [
+        "es 300",
+        "es 330"
+      ],
+      "display": "Lexus ES",
+      "parts": [
+        {
+          "name": "Window Regulator + Motor (front)",
+          "low": 35,
+          "high": 80,
+          "cost": 10,
+          "yr_min": 1995,
+          "yr_max": 2009,
+          "rarity": "Rare",
+          "source": "agent-research",
+          "added": "2026-10-09"
+        },
+        {
+          "name": "Mark Levinson Amp + Speakers",
+          "rarity": "Epic",
+          "low": 80,
+          "high": 200,
+          "cost": 20,
+          "yr_min": 2002,
+          "yr_max": 2009,
+          "option": true,
+          "source": "agent-research",
+          "added": "2026-10-09"
         }
       ]
     }
