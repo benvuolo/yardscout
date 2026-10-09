@@ -114,7 +114,14 @@ errors. REMEMBER: browser mocks can't catch native plugin registration issues
 ## Post-launch queue (in rough priority order)
 
 1. Sandbox-test the $8.99 purchase on device (agreement is Active, works now).
-2. Buy yardscout.io (Cloudflare Registrar), CNAME GitHub Pages, update
+2. Name-privacy sequence (git history already scrubbed to YardScout authorship
+   Oct 9 — local `backup-pre-scrub` branch keeps the old history, never push it):
+   buy yardscout.io → set as GitHub Pages custom domain (old github.io URLs then
+   301-redirect, shipped builds keep working) → update ASC privacy/terms/support
+   URLs → transfer repo to a GitHub org (e.g. yardscout-app) → THEN optionally
+   split source into a private repo (Cloudflare Pages deploy) leaving the public
+   repo as a data-only mirror; requires a 1.2 build with new DATA_BASE first.
+3. Buy yardscout.io (Cloudflare Registrar), CNAME GitHub Pages, update
    `DATA_BASE` in docs/app.js + ASC URLs, restage/resync/re-release.
 3. Strip Pro values from the public repo data (README-BACKEND cutover) once
    there are paying subscribers.
