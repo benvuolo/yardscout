@@ -91,7 +91,10 @@ Serve `ios/App/App/public` over HTTP; in Playwright `add_init_script`:
 Plugins: { Purchases: {...mock}, PushNotifications: {...mock} } }` plus
 localStorage staging (`jh_zip`, `jh_honesty_ack`, watches). Check: inventory
 loads, cards render, upgrade sheet shows "Subscribe — $8.99/mo" + Restore for
-non-Pro, "You're Pro ✓" for Pro (`jh_pro=1`, no `jh_pro_source`), zero console
+non-Pro, "You're Pro ✓" for Pro. IMPORTANT: a boot integrity check revokes
+`jh_pro` unless `jh_pro_source` is 'iap' or 'account' — to stage Pro you MUST
+set BOTH `jh_pro=1` AND `jh_pro_source='iap'` (and mock `isEntitled: true`
+in the Purchases plugin or `refreshNativeIapUi` will revoke it anyway), zero console
 errors. REMEMBER: browser mocks can't catch native plugin registration issues
 (gotcha #2) — device-test anything touching plugins.
 
@@ -111,20 +114,20 @@ errors. REMEMBER: browser mocks can't catch native plugin registration issues
 ## Post-launch queue (in rough priority order)
 
 1. Sandbox-test the $8.99 purchase on device (agreement is Active, works now).
-2. Retire the web waitlist → replace with App Store link once live.
-3. Buy yardscout.io (Cloudflare Registrar), CNAME GitHub Pages, update
+2. Buy yardscout.io (Cloudflare Registrar), CNAME GitHub Pages, update
    `DATA_BASE` in docs/app.js + ASC URLs, restage/resync/re-release.
-4. Strip Pro values from the public repo data (README-BACKEND cutover) once
+3. Strip Pro values from the public repo data (README-BACKEND cutover) once
    there are paying subscribers.
-5. Replace the upscaled 1024px icon with true art.
-6. Maybe: ChatGPT-app/GPT wrapper on the free inventory API as top-of-funnel
+4. Replace the upscaled 1024px icon with true art.
+5. Maybe: ChatGPT-app/GPT wrapper on the free inventory API as top-of-funnel
    (free tier data only, rate-limited, no purchase links).
 
 ## Device/debug notes
 
 - Owner's iPhone device row in prod D1: id `802bcb85-5d4e-46fb-9596-0216da88cf7a`
   (tier can be flipped to `pro` via D1 for instant-alert testing).
-- Dev toggle: 7 taps on the header wordmark toggles `jh_pro` locally
-  (`toggleProDev` in docs/app.js) — survives IAP revocation on purpose.
+- There is NO dev toggle or `?pro=1` hatch anymore (removed Oct 9 — they were
+  revenue holes in shipped builds). To test Pro on a real device, flip the
+  device's tier to `pro` in prod D1, or sandbox-purchase.
 - Query prod D1: `cd backend && npx wrangler d1 execute yardscout-db --remote
   --command "SELECT ..."`.
