@@ -1064,26 +1064,21 @@ function useMyLocation() {
 document.getElementById('live-gps').addEventListener('click', useMyLocation);
 document.getElementById('zip-banner-gps').addEventListener('click', useMyLocation);
 
-/* ===== PRO (fake door) =====
- * Freemium gating with NO real payments yet: locked touchpoints open a single
- * upgrade sheet with a waitlist email form, so demand can be measured before
- * building auth/payment infrastructure. Client-side gating is intentionally
- * bypassable in this phase (?pro=1 / 7 taps on the footer version string).
- *
- * Waitlist signups: POSTed to the ntfy topic below (subscribe to it in the
- * ntfy app to get each signup as a push; ntfy.sh only caches ~12h, so keep the
- * phone subscribed, or poll: curl -s "https://ntfy.sh/<topic>/json?poll=1").
- * Signups are ALSO stored in this browser's localStorage under
- * "jh_waitlist_log" as a backup. Swap in a Formspree endpoint here later for
- * durable server-side storage. */
-const WAITLIST_NTFY_TOPIC = 'jh-pro-waitlist-7g4kx2m';
+/* ===== PRO =====
+ * Pro is sold exclusively through the iOS app (StoreKit, $8.99/mo). Web
+ * touchpoints open the same upgrade sheet; its CTA links to the App Store. */
 const FREE_SAVE_CAP = 5;
 
-// Dev escape hatch: ?pro=1 unlocks, ?pro=0 relocks (persisted in localStorage).
+// Pro is a PAID product (App Store subscription). The only legitimate Pro
+// sources are a StoreKit entitlement ('iap') or an account tier ('account').
+// Anything else — the old ?pro=1 URL hatch, the old 7-tap dev toggle, a
+// hand-edited localStorage — is revoked at boot. Real subscribers are
+// re-granted moments later when the native launch entitlement check runs.
 (() => {
-  const qp = new URLSearchParams(location.search).get('pro');
-  if (qp === '1') localStorage.setItem('jh_pro', '1');
-  if (qp === '0') localStorage.removeItem('jh_pro');
+  const src = localStorage.getItem('jh_pro_source');
+  if (localStorage.getItem('jh_pro') === '1' && src !== 'iap' && src !== 'account') {
+    localStorage.removeItem('jh_pro');
+  }
 })();
 function isPro() { return localStorage.getItem('jh_pro') === '1'; }
 
@@ -1128,10 +1123,9 @@ function openUpgradeSheet(trigger) {
     document.getElementById('upgrade-thanks').style.display = 'none';
     if (proState) proState.style.display = 'none';
   } else {
-    // Web fake-door mode: returning waitlist members see the thank-you state.
-    const done = localStorage.getItem('jh_waitlist_email');
-    document.getElementById('upgrade-form-wrap').style.display = done ? 'none' : '';
-    document.getElementById('upgrade-thanks').style.display = done ? '' : 'none';
+    // Web: Pro is live in the iOS app — the sheet's CTA links to the App Store.
+    document.getElementById('upgrade-form-wrap').style.display = '';
+    document.getElementById('upgrade-thanks').style.display = 'none';
     if (proState) proState.style.display = 'none';
   }
   // Native: the sheet intro never mentions the web waitlist — Pro is a real
@@ -1153,57 +1147,6 @@ function closeUpgradeSheet() {
   document.getElementById('upgrade-backdrop').classList.remove('open');
 }
 
-async function submitWaitlist() {
-  const input = document.getElementById('waitlist-email');
-  const email = input.value.trim();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    input.style.borderColor = 'var(--red)';
-    setTimeout(() => { input.style.borderColor = ''; }, 1500);
-    return;
-  }
-  const btn = document.getElementById('waitlist-submit');
-  btn.disabled = true;
-  btn.textContent = 'Saving...';
-  // Record the plan the user picked and the price they actually saw (single
-  // source of truth: the selected card in the DOM) so signups stay comparable
-  // across future price changes without building an A/B system.
-  const priceEl = document.querySelector('#upgrade-sheet .plan-option.selected')
-    || document.querySelector('#upgrade-sheet .tier-card');
-  const shownPrice = (priceEl && priceEl.dataset.price) || '';
-  const entry = { email, plan: selectedPlan, trigger: upgradeTrigger, price: shownPrice, at: new Date().toISOString() };
-  // Local backup log (survives even if the ntfy POST fails).
-  try {
-    const log = JSON.parse(localStorage.getItem('jh_waitlist_log') || '[]');
-    log.push(entry);
-    localStorage.setItem('jh_waitlist_log', JSON.stringify(log));
-  } catch (e) { /* ignore */ }
-  try {
-    await fetch('https://ntfy.sh/' + WAITLIST_NTFY_TOPIC, {
-      method: 'POST',
-      body: `${email} | plan: ${entry.plan} | trigger: ${entry.trigger} | price: $${entry.price} | ${entry.at}`,
-      headers: { 'Title': 'YardScout Pro signup', 'Tags': 'moneybag' },
-    });
-  } catch (e) { /* local log still has it */ }
-  // Durable copy: ntfy only caches ~12h, so when an API base is configured the
-  // signup also lands in the backend's waitlist table (works even before the
-  // full ?api=1 cutover — durability shouldn't wait for it).
-  try {
-    if (window.YSApi && YSApi.base()) {
-      await fetch(YSApi.base() + '/v1/waitlist', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email, plan: entry.plan, price: String(entry.price), trigger: entry.trigger }),
-      });
-    }
-  } catch (e) { /* ntfy + local log still have it */ }
-  localStorage.setItem('jh_waitlist_email', email);
-  track('waitlist-submitted/' + selectedPlan);
-  btn.disabled = false;
-  btn.textContent = 'Notify Me';
-  document.getElementById('upgrade-form-wrap').style.display = 'none';
-  document.getElementById('upgrade-thanks').style.display = '';
-}
-
 /* Re-apply every gate; called at startup and whenever pro state flips. */
 function applyProGates() {
   const pro = isPro();
@@ -1213,12 +1156,6 @@ function applyProGates() {
   if (pill) {
     pill.textContent = pro ? 'Pro \u2713' : 'Pro';
     pill.classList.toggle('active', pro);
-  }
-  const setup = document.getElementById('ntfy-setup');
-  const locked = document.getElementById('ntfy-locked');
-  if (setup && locked) {
-    setup.style.display = pro ? '' : 'none';
-    locked.style.display = pro ? 'none' : '';
   }
   // Nationwide browsing is Pro: the zip-banner skip and the "Any distance"
   // radius option say so honestly for free users, and work normally for Pro.
@@ -1245,17 +1182,6 @@ function applyProGates() {
 const PRO_SORTS = new Set(['smart-profit', 'gold-first', 'fastest-sell', 'leaving-soonest']);
 const FREE_DEFAULT_SORT = 'date-desc';
 
-function toggleProDev() {
-  if (isPro()) localStorage.removeItem('jh_pro');
-  else localStorage.setItem('jh_pro', '1');
-  applyProGates();
-  updateZipBanner();
-  renderLive();
-  if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
-  renderSavedSheet();
-  alert('Pro mode ' + (isPro() ? 'ON' : 'OFF') + ' (dev toggle)');
-}
-
 // First-run honesty note: shown until dismissed, then never again.
 (() => {
   const note = document.getElementById('first-run-note');
@@ -1269,19 +1195,7 @@ function toggleProDev() {
 
 document.getElementById('upgrade-backdrop').addEventListener('click', closeUpgradeSheet);
 document.getElementById('upgrade-close').addEventListener('click', closeUpgradeSheet);
-document.getElementById('waitlist-submit').addEventListener('click', submitWaitlist);
-document.getElementById('waitlist-email').addEventListener('keydown', e => {
-  if (e.key === 'Enter') submitWaitlist();
-});
 document.getElementById('pro-pill').addEventListener('click', () => openUpgradeSheet('header-pill'));
-// Demo/dev escape hatch #2: 7 quick taps on the footer version string.
-let _verTaps = 0, _verTimer = null;
-document.getElementById('jh-version').addEventListener('click', () => {
-  _verTaps++;
-  clearTimeout(_verTimer);
-  _verTimer = setTimeout(() => { _verTaps = 0; }, 1600);
-  if (_verTaps >= 7) { _verTaps = 0; toggleProDev(); }
-});
 // Restore the remembered sort BEFORE the pro gates run: gates snap Pro-only
 // values back for free users, so an invalid saved choice self-heals here.
 (() => {
@@ -2887,11 +2801,10 @@ async function updateCloudAlertsUi() {
   if (!panel) return;
   const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
   panel.style.display = apiMode ? '' : 'none';
-  // ntfy is the self-hosted fallback — hide it once real push is available,
-  // and always in the native app (no "install another app" setup in the App
-  // Store build; APNs push replaces it there).
-  const ntfy = document.getElementById('ntfy-panel');
-  if (ntfy) ntfy.style.display = (apiMode || IS_NATIVE) ? 'none' : '';
+  // Web visitors get pointed at the iOS app for real push; the native app
+  // has its own APNs panel instead.
+  const webPush = document.getElementById('appstore-alerts-panel');
+  if (webPush) webPush.style.display = (apiMode || IS_NATIVE) ? 'none' : '';
   const nativeNote = document.getElementById('native-alerts-note');
   if (nativeNote) nativeNote.style.display = IS_NATIVE ? '' : 'none';
   if (!apiMode) return;
@@ -2983,40 +2896,6 @@ if (IS_NATIVE) {
     + '<strong>instant push alerts</strong> within hours of a car hitting the yard are Pro.';
 }
 
-/* ===== NTFY PHONE PUSH ===== */
-(() => {
-  const topicEl = document.getElementById('ntfy-topic');
-  const statusEl = document.getElementById('ntfy-status');
-  // Suggest a private-ish random topic on first visit; remember whatever they use.
-  let topic = localStorage.getItem('jh_ntfy_topic');
-  if (!topic) {
-    topic = 'junkyard-' + Math.random().toString(36).slice(2, 8);
-    localStorage.setItem('jh_ntfy_topic', topic);
-  }
-  topicEl.value = topic;
-  topicEl.addEventListener('change', () => {
-    const t = topicEl.value.trim().replace(/[^a-zA-Z0-9_-]/g, '');
-    topicEl.value = t;
-    if (t) localStorage.setItem('jh_ntfy_topic', t);
-  });
-  document.getElementById('ntfy-test').addEventListener('click', async () => {
-    const t = topicEl.value.trim();
-    if (!t) { statusEl.textContent = 'Enter a topic name first.'; return; }
-    statusEl.textContent = 'Sending…';
-    try {
-      const r = await fetch('https://ntfy.sh/' + encodeURIComponent(t), {
-        method: 'POST',
-        body: 'Test received. Watchlist alerts will look like this.',
-        headers: { 'Title': 'YardScout test', 'Tags': 'wrench' },
-      });
-      statusEl.textContent = r.ok
-        ? 'Sent — check your phone (make sure the ntfy app is subscribed to "' + t + '").'
-        : 'ntfy.sh returned an error — try a different topic name.';
-    } catch (e) {
-      statusEl.textContent = "Couldn't reach ntfy.sh — check your connection.";
-    }
-  });
-})();
 document.getElementById('alert-make').addEventListener('change', populateWatchModelOptions);
 // "Anywhere" watches are the Pro tier of alerts — free radius tops out at 250 mi
 // (mirrors the Live tab's distance cap). Snap back and pitch honestly.
