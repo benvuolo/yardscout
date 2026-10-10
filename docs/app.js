@@ -9,7 +9,7 @@
  * guideline 3.1.1 — digital subscriptions in-app must use StoreKit). */
 const IS_NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform
   && window.Capacitor.isNativePlatform());
-const DATA_BASE = IS_NATIVE ? 'https://benvuolo.github.io/yardscout/' : '';
+const DATA_BASE = IS_NATIVE ? 'https://yardscout.io/' : '';
 
 /* ===== ANALYTICS — GoatCounter (privacy-friendly: no cookies, anonymous) =====
  * Set the site code after creating a (free) account at goatcounter.com.

@@ -23,5 +23,5 @@ NO ACCOUNT, NO EMAIL
 
 YardScout Pro is $8.99/month through your App Store account, auto-renews monthly, cancel anytime in Settings. Finding cars is free forever.
 
-Privacy policy: https://benvuolo.github.io/yardscout/privacy.html
-Terms of use: https://benvuolo.github.io/yardscout/terms.html
+Privacy policy: https://yardscout.io/privacy.html
+Terms of use: https://yardscout.io/terms.html

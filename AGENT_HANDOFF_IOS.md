@@ -25,7 +25,7 @@ Free = browse everything + weekly recap push; Pro = part values, pull costs,
 price compare, value sorting, instant per-arrival push.
 
 - **Web app (live)**: `docs/` — vanilla JS PWA on GitHub Pages:
-  https://benvuolo.github.io/yardscout/. Pushing to `main` deploys it.
+  https://yardscout.io/. Pushing to `main` deploys it.
 - **Scraper (live)**: `scraper/junkyard_scraper.py`, runs in GitHub Actions
   every 6h (`.github/workflows/scan.yml`), commits data + pushes shards to the
   Worker (`scraper/push_inventory.py`; custom User-Agent required — Cloudflare

@@ -86,7 +86,7 @@ export async function handleRequestLink(req, env) {
 }
 
 export async function handleCallback(req, env) {
-  const appUrl = env.APP_URL || 'https://benvuolo.github.io/yardscout/';
+  const appUrl = env.APP_URL || 'https://yardscout.io/';
   const fail = (reason) => redirect(appUrl + '#login_error=' + encodeURIComponent(reason));
 
   const token = new URL(req.url).searchParams.get('token') || '';

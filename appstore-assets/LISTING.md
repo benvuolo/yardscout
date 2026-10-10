@@ -41,16 +41,16 @@ NO ACCOUNT, NO EMAIL
 
 YardScout Pro is $8.99/month through your App Store account, auto-renews monthly, cancel anytime in Settings. Finding cars is free forever.
 
-Privacy policy: https://benvuolo.github.io/yardscout/privacy.html
-Terms of use: https://benvuolo.github.io/yardscout/terms.html
+Privacy policy: https://yardscout.io/privacy.html
+Terms of use: https://yardscout.io/terms.html
 
 ## Keywords (100 chars max, comma-separated, no spaces after commas)
 junkyard,salvage,pick a part,u pull,used auto parts,lkq,car parts,wrecking,self service,vin
 
 ## URLs
-- Support URL: https://benvuolo.github.io/yardscout/support.html
-- Marketing URL (optional): https://benvuolo.github.io/yardscout/
-- Privacy Policy URL: https://benvuolo.github.io/yardscout/privacy.html
+- Support URL: https://yardscout.io/support.html
+- Marketing URL (optional): https://yardscout.io/
+- Privacy Policy URL: https://yardscout.io/privacy.html
 
 ## Category
 Primary: Utilities. Secondary: Shopping.

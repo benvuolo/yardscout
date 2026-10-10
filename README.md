@@ -1,6 +1,6 @@
 # YardScout
 
-**Live app: https://benvuolo.github.io/yardscout/**
+**Live app: https://yardscout.io/**
 
 Spot the valuable "unobtanium" parts that common junkyard cars originally came with, and see typical resale ranges before you drive to the yard. This is an information tool — estimates, not income promises: parts may already be pulled, and condition decides everything. Scrapes live inventory from **~150 self-service yards across four national/regional chains**:
 
@@ -17,7 +17,7 @@ No engines. No transmissions. Just parts you can carry out.
 
 ## Install on your phone
 
-1. Open **https://benvuolo.github.io/yardscout/** in Safari (iPhone) or Chrome (Android)
+1. Open **https://yardscout.io/** in Safari (iPhone) or Chrome (Android)
 2. iPhone: tap the Share button, then **Add to Home Screen**. Android: tap the menu, then **Install app**
 3. Launch it from your home screen — it runs full-screen like a native app and keeps working offline with the last-loaded inventory
 
