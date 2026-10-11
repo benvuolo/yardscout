@@ -2035,7 +2035,7 @@ document.getElementById('tab-live').addEventListener('click', (e) => {
  * the history DB). Free-tier friendly by design: counts and freshness only,
  * no part values anywhere on this tab. */
 const CHAIN_PRICE_PAGES = [
-  [/^pick[\s-]*n[\s-]*pull/i, 'https://www.picknpull.com/parts-pricing', 'Pick-n-Pull'],
+  [/^pick[\s-]*n[\s-]*pull/i, 'https://www.picknpull.com/part-pricing', 'Pick-n-Pull'],
   [/^pull[\s-]*a[\s-]*part/i, 'https://www.pullapart.com/used-auto-parts/parts-pricing/', 'Pull-A-Part'],
   [/^tear[\s-]*a[\s-]*part/i, 'https://tearapart.com/price-list/', 'Tear-A-Part'],
   [/pic[\s-]*a[\s-]*part/i, 'https://utpap.com/ogden-prices/', 'Utah Pic-A-Part'],

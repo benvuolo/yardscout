@@ -1,0 +1,8 @@
+name = "yardscout-site"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+routes = [
+  { pattern = "yardscout.io/*", zone_name = "yardscout.io" },
+  { pattern = "www.yardscout.io/*", zone_name = "yardscout.io" },
+]
