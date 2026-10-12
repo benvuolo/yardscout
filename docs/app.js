@@ -2384,12 +2384,17 @@ document.getElementById('compare-input').addEventListener('keydown', e => {
 });
 
 /* ===== PROFIT BREAKDOWN ===== */
-/** Baked sell_notes can mention Lexus for any "Mark Levinson" part; donor make may differ. */
+/** Baked sell_notes can carry another make's flavor text (keyword-matched at
+ *  scan time): "Mark Levinson" notes say Lexus, "hardtop" notes say Wrangler.
+ *  Rewrite them when the donor car's make doesn't match. */
 function displaySellNotes(notes, vehicleMake) {
   if (!notes) return '';
   const m = (vehicleMake || '').toLowerCase();
   if (!m.includes('lexus') && /lexus\s+audio/i.test(notes)) {
     return 'Premium OEM audio — strong eBay market';
+  }
+  if (!m.includes('jeep') && /wrangler|jeep/i.test(notes)) {
+    return 'Removable hardtops are in strong local demand — often sell same-day in summer';
   }
   return notes;
 }

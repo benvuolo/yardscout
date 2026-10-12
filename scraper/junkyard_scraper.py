@@ -5005,9 +5005,13 @@ def _lookup_sell_info(part_name: str, vehicle_make: str | None = None) -> dict:
     for entry in SELL_GUIDE:
         if entry["kw"] in lower:
             notes = entry["notes"]
-            if entry["kw"] == "mark levinson" and vehicle_make:
-                if vehicle_make.strip().lower() == "lexus":
-                    notes = "Lexus audio buyers pay well on eBay"
+            make = (vehicle_make or "").strip().lower()
+            if entry["kw"] == "mark levinson" and make == "lexus":
+                notes = "Lexus audio buyers pay well on eBay"
+            # "hardtop" matches far more than Wranglers (Miata, SLK, Z4,
+            # Bronco, K5, Samurai...) — only Jeeps get the Jeep-flavored note.
+            if entry["kw"] == "hardtop" and make != "jeep":
+                notes = "Removable hardtops are in strong local demand — often sell same-day in summer"
             return {"sell_at": entry["sell_at"], "sell_speed": entry["speed"], "sell_notes": notes}
     return {"sell_at": "eBay / FB Marketplace", "sell_speed": "Medium", "sell_notes": ""}
 
