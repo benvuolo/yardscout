@@ -46,7 +46,11 @@ jobs:
         run: |
           git config user.name "yardscout-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add scraper/parts_overlay.json scraper/parts_research_log.md
+          # --ignore-errors isn't enough for nonexistent paths; add only what exists
+          # (no-key runs produce neither file change nor a log).
+          for f in scraper/parts_overlay.json scraper/parts_research_log.md; do
+            [ -e "$f" ] && git add "$f"
+          done
           if git diff --staged --quiet; then
             echo "No new parts this run."
             exit 0
