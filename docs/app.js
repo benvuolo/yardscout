@@ -1035,31 +1035,46 @@ function vehicleDistanceMi(v) {
   return haversineMiles(activeZipCoords.lat, activeZipCoords.lng, v.lat, v.lng);
 }
 
-/* GPS "near me": browser geolocation sets the center directly (needs HTTPS). */
-function useMyLocation() {
-  if (!navigator.geolocation) { alert('Your browser does not support location.'); return; }
+/* GPS "near me". Native: Capacitor Geolocation plugin, so iOS shows the real
+ * system prompt ("YardScout would like to use your location") instead of the
+ * WKWebView one that says "localhost". Web: browser geolocation (needs HTTPS). */
+async function useMyLocation() {
   const btns = [document.getElementById('live-gps'), document.getElementById('zip-banner-gps')].filter(Boolean);
-  btns.forEach(b => { b.disabled = true; b.dataset.orig = b.innerHTML; b.innerHTML = '&hellip;'; });
+  const busy = on => btns.forEach(b => {
+    if (on) { b.disabled = true; b.dataset.orig = b.innerHTML; b.innerHTML = '&hellip;'; }
+    else { b.disabled = false; b.innerHTML = b.dataset.orig; }
+  });
+  const onPos = (lat, lng) => {
+    activeZipCoords = { lat, lng };
+    track('gps-used');
+    localStorage.setItem('jh_gps', JSON.stringify(activeZipCoords));
+    localStorage.removeItem('jh_zip');
+    const zipEl = document.getElementById('live-zip');
+    zipEl.value = '';
+    zipEl.placeholder = 'Using your location';
+    busy(false);
+    updateZipBanner();
+    renderLive();
+    if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
+  };
+  const onErr = () => {
+    busy(false);
+    alert("Couldn't get your location. Check that location access is allowed for YardScout, or enter a zip code instead.");
+  };
+  const opts = { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 };
+  const nativeGeo = IS_NATIVE && window.Capacitor?.Plugins?.Geolocation;
+  if (nativeGeo) {
+    busy(true);
+    try {
+      const pos = await nativeGeo.getCurrentPosition(opts);
+      onPos(pos.coords.latitude, pos.coords.longitude);
+    } catch (e) { onErr(); }
+    return;
+  }
+  if (!navigator.geolocation) { alert('Your browser does not support location.'); return; }
+  busy(true);
   navigator.geolocation.getCurrentPosition(
-    pos => {
-      activeZipCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-      track('gps-used');
-      localStorage.setItem('jh_gps', JSON.stringify(activeZipCoords));
-      localStorage.removeItem('jh_zip');
-      const zipEl = document.getElementById('live-zip');
-      zipEl.value = '';
-      zipEl.placeholder = 'Using your location';
-      btns.forEach(b => { b.disabled = false; b.innerHTML = b.dataset.orig; });
-      updateZipBanner();
-      renderLive();
-      if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
-    },
-    () => {
-      btns.forEach(b => { b.disabled = false; b.innerHTML = b.dataset.orig; });
-      alert("Couldn't get your location. Check that location access is allowed for this site, or enter a zip code instead.");
-    },
-    { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
-  );
+    pos => onPos(pos.coords.latitude, pos.coords.longitude), onErr, opts);
 }
 document.getElementById('live-gps').addEventListener('click', useMyLocation);
 document.getElementById('zip-banner-gps').addEventListener('click', useMyLocation);

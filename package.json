@@ -23,6 +23,7 @@
   "homepage": "https://github.com/benvuolo/yardscout#readme",
   "dependencies": {
     "@capacitor/core": "^8.5.2",
+    "@capacitor/geolocation": "^8.2.3",
     "@capacitor/ios": "^8.5.2",
     "@capacitor/push-notifications": "^8.1.2"
   },
