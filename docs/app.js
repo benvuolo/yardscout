@@ -2034,6 +2034,25 @@ document.getElementById('tab-live').addEventListener('click', (e) => {
 /* Built entirely from the live inventory (yard rows + per-yard lifespan from
  * the history DB). Free-tier friendly by design: counts and freshness only,
  * no part values anywhere on this tab. */
+/* Chain-published tool rules (researched from each chain's official yard-rules
+ * page, Oct 2026). Chain policy, not location gospel — franchises vary, so the
+ * UI always carries a "confirm at the gate" tooltip. Every chain bans torches
+ * and jacks; the useful differences are cutting tools. */
+const CHAIN_TOOL_POLICY = [
+  [/^pick[\s-]*n[\s-]*pull/i, 'Hand & battery tools \u2014 NO sawzalls/body saws'],
+  [/pick your part/i, 'Cordless tools incl. sawzall OK \u2014 no grinders or gas tools'],
+  [/^pull[\s-]*a[\s-]*part/i, 'Battery tools & small generators OK \u2014 no grinders'],
+  [/^tear[\s-]*a[\s-]*part/i, 'Hand & battery tools \u2014 NO sawzalls; compressors OK'],
+  [/^fenix[\s-]*u[\s-]*pull/i, 'Battery tools incl. sawzall OK \u2014 no grinders/cutting wheels'],
+  [/wrench[\s-]*a[\s-]*part/i, 'Hand & battery tools incl. sawzall OK \u2014 no grinders'],
+  [/^harry'?s[\s-]*u[\s-]*pull/i, 'Hand tools only \u2014 NO sawzalls or grinders'],
+];
+
+function chainToolPolicy(location) {
+  const hit = CHAIN_TOOL_POLICY.find(c => c[0].test(location));
+  return hit ? hit[1] : 'Tool rules unpublished \u2014 call before bringing power tools';
+}
+
 const CHAIN_PRICE_PAGES = [
   [/^pick[\s-]*n[\s-]*pull/i, 'https://www.picknpull.com/part-pricing', 'Pick-n-Pull'],
   [/^pull[\s-]*a[\s-]*part/i, 'https://www.pullapart.com/used-auto-parts/parts-pricing/', 'Pull-A-Part'],
@@ -2202,6 +2221,7 @@ function renderYards() {
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(place) || 'Location unknown'}</span>${distTxt}${saleBadgeHtml(y.location)}</div>
             <div class="car-meta">${y.count.toLocaleString()} cars on the lot &middot; ${y.newCount.toLocaleString()} new this week</div>
             <div class="lot-clock" title="Based on historical arrival-to-departure data — an estimate, not a schedule">${life}</div>
+            <div class="lot-clock" title="Chain-published rule — individual locations can differ; torches and jacks are banned everywhere. Confirm at the gate before a long drive.">${ICON.tag} Tools: ${chainToolPolicy(y.location)}</div>
           </div>
         </div>
         <div class="yard-actions">
