@@ -382,7 +382,7 @@ function vinMetaHtml(v) {
   if (specBits.length) {
     vpic = isPro()
       ? ` <span class="meta-note" title="Factory build — trim/drivetrain decoded from the VIN via NHTSA VPIC, engine from the VIN or the yard's own feed — so you know what to look for before walking over">${specBits.join(' &middot; ')} (factory spec)</span>`
-      : ` <button type="button" class="lock-chip lock-chip-sm" onclick="event.stopPropagation();openUpgradeSheet('vin-specs')">${ICON.lock} VIN specs &mdash; Pro</button>`;
+      : ` <button type="button" class="lock-chip lock-chip-sm" onclick="event.stopPropagation();openUpgradeSheet('vin-specs')" title="Factory trim, drivetrain, and engine decoded from the VIN &mdash; a Pro feature">${ICON.lock} VIN specs</button>`;
   }
   let mismatch = '';
   if (v.vpicMismatch) {
@@ -1840,7 +1840,7 @@ function renderLive() {
         <details class="parts-details">
           <summary>${unlocked
             ? `Up to ${shownParts.length} part${shownParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart}`
-            : `${shownParts.length} valuable part${shownParts.length > 1 ? 's' : ''} spotted &middot; names &amp; values are Pro`} <span class="chev">${ICON.chev}</span></summary>
+            : `${shownParts.length} valuable part${shownParts.length > 1 ? 's' : ''} spotted`} <span class="chev">${ICON.chev}</span></summary>
           <div class="car-body">
             <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can't be confirmed from the VIN are marked "if equipped." Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
             <ul class="parts-list">${partRows}</ul>
