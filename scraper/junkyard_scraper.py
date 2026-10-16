@@ -7072,6 +7072,166 @@ def refresh_indy_pricing_file() -> Path:
     return path
 
 
+# U-Pull-It (upullitne.com) — 4-yard chain: Des Moines IA, Omaha North/South
+# and Lincoln NE. First Iowa AND first Nebraska coverage (user-requested via
+# Reddit, 2026-10-16). WordPress + "TAP Inventory Search System" plugin backed
+# by the Crush yard-management platform (s3clientid/crush_version in rows):
+# POST admin-ajax.php action=sif_search_products with a nonce scraped from
+# /search-inventory/ returns the ENTIRE chain's inventory as one JSON response
+# (~2,500 rows): yard name/city/state, year, make, model, row, color, VIN
+# (98.5% real 17-char), unique stock number, set date MM-DD-YYYY. All rows are
+# istatus=0/location=YARD (on the lot). robots.txt: allow all (Yoast default).
+# Two requests per scan: nonce GET + search POST. Not to be confused with the
+# registry's blocked "ABC U-Pull-It" (also Lincoln NE — different company) or
+# U-Pull-R Parts MN/OH. Coordinates geocoded once via Nominatim (YARD_COORDS
+# convention).
+UPULLITNE_SEARCH_URL = "https://upullitne.com/search-inventory/"
+UPULLITNE_AJAX_URL = "https://upullitne.com/wp-admin/admin-ajax.php"
+_UPULLITNE_NONCE_RE = re.compile(r'"sif_ajax_nonce"\s*:\s*"([0-9a-f]+)"')
+UPULLITNE_YARDS = {
+    "U PULL IT IA": {"name": "U-Pull-It - Des Moines", "city": "Des Moines",
+                     "state": "IA", "lat": 41.6405, "lng": -93.5988},
+    "U-PULL-IT INC OMAHA SOUTH": {"name": "U-Pull-It - Omaha South", "city": "Omaha",
+                                  "state": "NE", "lat": 41.2045, "lng": -96.0048},
+    "U-PULL-IT INC OMAHA NORTH": {"name": "U-Pull-It - Omaha North", "city": "Omaha",
+                                  "state": "NE", "lat": 41.2768, "lng": -95.9364},
+    "U-PULL-IT INC LINCOLN": {"name": "U-Pull-It - Lincoln", "city": "Lincoln",
+                              "state": "NE", "lat": 40.8702, "lng": -96.6245},
+}
+
+
+def fetch_upullitne_inventory() -> list[dict]:
+    """Fetch U-Pull-It's (IA/NE) 4-yard chain inventory (nonce GET + one POST)."""
+    try:
+        r = requests.get(UPULLITNE_SEARCH_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        m = _UPULLITNE_NONCE_RE.search(r.text)
+        if not m:
+            print("  [U-Pull-It IA/NE] nonce not found — site layout changed?",
+                  file=sys.stderr)
+            return []
+        resp = requests.post(
+            UPULLITNE_AJAX_URL,
+            headers={**HEADERS, "Accept": "application/json",
+                     "Referer": UPULLITNE_SEARCH_URL},
+            data={"action": "sif_search_products", "sif_verify_request": m.group(1),
+                  "make": "Any", "model": "Any", "location": "Any",
+                  "year_start": "", "year_end": "", "sorting": "0"},
+            timeout=120,
+        )
+        resp.raise_for_status()
+        payload = resp.json()
+    except Exception as e:
+        print(f"  [U-Pull-It IA/NE] fetch failed: {e}", file=sys.stderr)
+        return []
+    if not payload.get("success"):
+        print(f"  [U-Pull-It IA/NE] search returned success=false: "
+              f"{str(payload.get('message'))[:120]}", file=sys.stderr)
+        return []
+    products = payload.get("products") or []
+    _indep_cache_raw("upullitne_inventory.json", resp.content)
+
+    vehicles: list[dict] = []
+    unknown_yards: set[str] = set()
+    for p in products:
+        yard = UPULLITNE_YARDS.get((p.get("yard_name") or "").strip())
+        if yard is None:
+            unknown_yards.add((p.get("yard_name") or "?").strip())
+            continue
+        make = (p.get("make") or "").strip()
+        model = (p.get("model") or "").strip()
+        if not make or not model:
+            continue
+        date_iso = ""
+        dm = re.match(r"(\d{2})-(\d{2})-(\d{4})", (p.get("yard_date") or "").strip())
+        if dm:
+            date_iso = f"{dm.group(3)}-{dm.group(1)}-{dm.group(2)}"
+        try:
+            year_i = int(p.get("iyear") or 0)
+        except ValueError:
+            year_i = 0
+        stock = (p.get("stocknumber") or "").strip()
+        if not stock:  # never seen, but ids must stay stable and unique
+            stock = hashlib.sha1(
+                f"{year_i}|{make}|{model}|{p.get('vin')}|{p.get('vehicle_row')}"
+                .lower().encode()).hexdigest()[:12]
+        vin = (p.get("vin") or "").strip().upper()
+        vehicles.append({
+            "id": f"upullitne-{stock.lower()}",
+            "vin": vin if len(vin) == 17 else "",
+            "year": year_i,
+            "make": _utpap_format_label(make),
+            "model": _utpap_format_label(model),
+            "row": (p.get("vehicle_row") or "").strip(),
+            "dateAdded": date_iso,
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "upullitne",
+        })
+    if unknown_yards:
+        print(f"  [U-Pull-It IA/NE] skipped rows from unmapped yard(s): "
+              f"{sorted(unknown_yards)}", file=sys.stderr)
+    print(f"  [U-Pull-It IA/NE] {len(vehicles)} vehicles across "
+          f"{len({v['_location'] for v in vehicles})} yards", file=sys.stderr)
+    return vehicles
+
+
+# U-Pull-It (IA/NE) publishes one chain-wide price list on /parts-pricelist/ —
+# a server-rendered 4-column table (Part Name, Price, Core, Labor; Labor is
+# $0.00 across the board today and is ignored). Same harrys-style output shape.
+UPULLITNE_PRICE_URL = "https://upullitne.com/parts-pricelist/"
+_UPULLITNE_PRICE_ROW_RE = re.compile(
+    r"<tr[^>]*>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>"
+    r"\s*<td[^>]*>\s*(?:\$\s*([\d.,]+))?\s*</td>",
+    re.S,
+)
+
+
+def refresh_upullitne_pricing_file() -> Path:
+    """Refresh U-Pull-It's (IA/NE) price list -> upullitne_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "upullitne_pricing.json"
+    try:
+        r = requests.get(UPULLITNE_PRICE_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [U-Pull-It IA/NE pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+
+    seen: dict[str, dict] = {}
+    for name_html, price, core in _UPULLITNE_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(re.sub(r"<[^>]+>", "", name_html)).strip()
+        if not name or name.lower() == "part name":
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [U-Pull-It IA/NE pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [U-Pull-It IA/NE pricing] only {len(seen)} parts parsed — "
+              f"keeping existing file", file=sys.stderr)
+    return path
+
+
 def fetch_independent_inventory() -> list[dict]:
     """All enabled independent-yard adapters (registry status: adapter-built)."""
     vehicles = fetch_wrenchapart_inventory()
@@ -7083,6 +7243,8 @@ def fetch_independent_inventory() -> list[dict]:
     vehicles += fetch_harrys_inventory()
     time.sleep(2)
     vehicles += fetch_indyupullit_inventory()
+    time.sleep(2)
+    vehicles += fetch_upullitne_inventory()
     return vehicles
 
 
@@ -8061,7 +8223,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -8080,7 +8242,8 @@ def main():
         fns = (refresh_pnp_pricing_file, refresh_pyp_pricing_file,
                refresh_pap_pricing_file, refresh_wap_pricing_file,
                refresh_upullr_pricing_file, refresh_fenix_pricing_file,
-               refresh_harrys_pricing_file, refresh_indy_pricing_file)
+               refresh_harrys_pricing_file, refresh_indy_pricing_file,
+               refresh_upullitne_pricing_file)
         for fn in fns:
             try:
                 fn()

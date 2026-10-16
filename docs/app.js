@@ -50,6 +50,7 @@ let upullrPricing = {}; // U-Pull-R Parts: one chain-wide flat-rate list, keyed 
 let fenixPricing = {};  // { "Fenix U-Pull - Elmira": { "ALTERNATOR": {price, core}, ... } } (per yard)
 let harrysPricing = {}; // Harry's U-Pull-It: one chain-wide list, keyed by description
 let indyPricing = {};   // Indy-U-Pull-It (Indianapolis): one yard-wide list, keyed by description
+let upullitnePricing = {}; // U-Pull-It (Des Moines IA / Omaha / Lincoln NE): one chain-wide list
 
 /* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page)
  * pyp = exact "Description" from pyp.com per-location PriceList API
@@ -421,6 +422,7 @@ async function loadAllPricing() {
     grab('data/fenix_pricing.json', d => { fenixPricing = d; }),
     grab('data/harrys_pricing.json', d => d.forEach(p => { harrysPricing[p.description] = p; })),
     grab('data/indy_pricing.json', d => d.forEach(p => { indyPricing[p.description] = p; })),
+    grab('data/upullitne_pricing.json', d => d.forEach(p => { upullitnePricing[p.description] = p; })),
   ]);
   _yardCostMemo.clear();
 }
@@ -2340,6 +2342,7 @@ function yardPriceList(location) {
   else if (loc.startsWith('u-pull-r')) rows = fromList(upullrPricing);
   else if (loc.startsWith("harry's u-pull-it")) rows = fromList(harrysPricing);
   else if (loc.startsWith('indy-u-pull-it')) rows = fromList(indyPricing);
+  else if (loc.startsWith('u-pull-it')) rows = fromList(upullitnePricing);
   else if (loc.startsWith('pick your part')) rows = fromDict(pypPricing[location]);
   else if (loc.startsWith('pull-a-part')) rows = fromDict(papPricing[location]);
   else if (loc.includes('wrench-a-part')) rows = fromDict(wapPricing[location]);

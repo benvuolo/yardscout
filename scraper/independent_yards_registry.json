@@ -512,6 +512,53 @@
           "lng": -86.176
         }
       ]
+    },
+    {
+      "name": "U-Pull-It (IA/NE)",
+      "status": "adapter-built",
+      "platform": "wordpress-tap-inventory-search-system (Crush yard-management backend)",
+      "inventory_url": "https://upullitne.com/search-inventory/",
+      "robots": "allow all (Yoast default), no crawl-delay",
+      "tos_flags": "none found",
+      "update_freshness": "live (lastupdate timestamps show nightly Crush sync)",
+      "locations": [
+        {
+          "name": "U-Pull-It - Des Moines",
+          "city": "Des Moines",
+          "state": "IA",
+          "lat": 41.6405,
+          "lng": -93.5988
+        },
+        {
+          "name": "U-Pull-It - Omaha South",
+          "city": "Omaha",
+          "state": "NE",
+          "lat": 41.2045,
+          "lng": -96.0048
+        },
+        {
+          "name": "U-Pull-It - Omaha North",
+          "city": "Omaha",
+          "state": "NE",
+          "lat": 41.2768,
+          "lng": -95.9364
+        },
+        {
+          "name": "U-Pull-It - Lincoln",
+          "city": "Lincoln",
+          "state": "NE",
+          "lat": 40.8702,
+          "lng": -96.6245
+        }
+      ],
+      "api": {
+        "endpoint": "https://upullitne.com/wp-admin/admin-ajax.php",
+        "method": "POST",
+        "format": "json",
+        "auth": "nonce (sif_ajax_nonce scraped from /search-inventory/ page JS object)",
+        "requests_per_scan": 2,
+        "notes": "action=sif_search_products&make=Any&model=Any&location=Any returns the ENTIRE 4-yard chain's inventory in one JSON response (~2,500 rows): yard_name/city/state, iyear, make, model, vehicle_row, yard_date (MM-DD-YYYY set date), color, VIN (98.5% real 17-char), unique stocknumber (id basis: upullitne-{stocknumber}), mileage, image_url. All rows istatus=0/location=YARD. Rows carry crush_version/s3clientid = Crush platform. Chain-wide price list at /parts-pricelist/ is a 4-column table (part, price, core, labor=all $0) -> upullitne_pricing.json. First IA and NE coverage; user-requested via Reddit 2026-10-16. NOT the same company as blocked ABC U-Pull-It (also Lincoln NE)."
+      }
     }
   ]
 }

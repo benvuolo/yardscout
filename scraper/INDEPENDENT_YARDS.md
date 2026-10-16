@@ -151,3 +151,22 @@ WAF. Fenix was never in the original survey — found via its server-rendered
 `/recent-inventory/` table (the inventory CPT isn't in WP REST). New England
 proper (MA/CT/NJ) still has no self-serve chain with public online inventory;
 Kenny U-Pull (ME) remains the nearest candidate.
+
+## 2026-10-16 — U-Pull-It IA/NE (first Iowa + Nebraska coverage)
+
+Second user-requested onboard (Reddit comment asking for Iowa, same day as
+Indy). `upullitne.com` — 4 yards: Des Moines IA (~800 cars), Lincoln NE
+(~870), Omaha South (~440), Omaha North (~420); ~2,500 vehicles total.
+WordPress running the "TAP Inventory Search System" plugin over the Crush
+yard-management platform. One POST to `admin-ajax.php`
+(`action=sif_search_products`, nonce scraped from `/search-inventory/`)
+returns the entire chain as JSON: unique stock numbers (our id basis), 98.5%
+real VINs, rows, colors, set dates, even mileage and photo URLs (photos
+unused — no-photos policy). Chain-wide 522-part price list at
+`/parts-pricelist/` -> `upullitne_pricing.json`. robots.txt allow-all. Two
+requests per scan, by far the cheapest adapter per vehicle. Easiest build to
+date (~30 min); no WAF encountered from a residential IP — first CI scan will
+confirm datacenter egress isn't blocked (Indy's SiteGround lesson).
+Distinct company from the blocked ABC U-Pull-It in Lincoln.
+This fills the Plains hole: previously nearest yards to Des Moines were ~178
+mi (Kansas City).
