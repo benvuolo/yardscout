@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-21",
+  "updated": "2026-10-16",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -20,13 +20,62 @@
       "robots": "allow all, no crawl-delay",
       "tos_flags": "none found",
       "locations": [
-        {"yard_id": 2, "name": "Wrench-A-Part - Austin", "city": "Del Valle", "state": "TX", "lat": 30.1888, "lng": -97.5654},
-        {"yard_id": 3, "name": "Wrench-A-Part - Lubbock", "city": "Lubbock", "state": "TX", "lat": 33.517, "lng": -101.778},
-        {"yard_id": 4, "name": "Wrench-A-Part - Belton", "city": "Belton", "state": "TX", "lat": 31.0517, "lng": -97.5176},
-        {"yard_id": 5, "name": "Wrench-A-Part - San Antonio", "city": "San Antonio", "state": "TX", "lat": 29.4379, "lng": -98.3753},
-        {"yard_id": 8, "name": "Wrench-A-Part - Holland", "city": "Holland", "state": "TX", "lat": 30.9184, "lng": -97.3639},
-        {"yard_id": 9, "name": "Primo Wrench-A-Part - Del Valle", "city": "Del Valle", "state": "TX", "lat": 30.1892, "lng": -97.5648},
-        {"yard_id": 10, "name": "Roosevelt Wrench-A-Part - San Antonio", "city": "San Antonio", "state": "TX", "lat": 29.312, "lng": -98.4745}
+        {
+          "yard_id": 2,
+          "name": "Wrench-A-Part - Austin",
+          "city": "Del Valle",
+          "state": "TX",
+          "lat": 30.1888,
+          "lng": -97.5654
+        },
+        {
+          "yard_id": 3,
+          "name": "Wrench-A-Part - Lubbock",
+          "city": "Lubbock",
+          "state": "TX",
+          "lat": 33.517,
+          "lng": -101.778
+        },
+        {
+          "yard_id": 4,
+          "name": "Wrench-A-Part - Belton",
+          "city": "Belton",
+          "state": "TX",
+          "lat": 31.0517,
+          "lng": -97.5176
+        },
+        {
+          "yard_id": 5,
+          "name": "Wrench-A-Part - San Antonio",
+          "city": "San Antonio",
+          "state": "TX",
+          "lat": 29.4379,
+          "lng": -98.3753
+        },
+        {
+          "yard_id": 8,
+          "name": "Wrench-A-Part - Holland",
+          "city": "Holland",
+          "state": "TX",
+          "lat": 30.9184,
+          "lng": -97.3639
+        },
+        {
+          "yard_id": 9,
+          "name": "Primo Wrench-A-Part - Del Valle",
+          "city": "Del Valle",
+          "state": "TX",
+          "lat": 30.1892,
+          "lng": -97.5648
+        },
+        {
+          "yard_id": 10,
+          "name": "Roosevelt Wrench-A-Part - San Antonio",
+          "city": "San Antonio",
+          "state": "TX",
+          "lat": 29.312,
+          "lng": -98.4745
+        }
       ]
     },
     {
@@ -46,9 +95,30 @@
       "robots": "explicitly allows admin-ajax.php",
       "tos_flags": "none found",
       "locations": [
-        {"store_id": 1, "name": "U-Pull-R Parts - Rosemount", "city": "Rosemount", "state": "MN", "lat": 44.7185, "lng": -93.1261},
-        {"store_id": 2, "name": "U-Pull-R Parts - East Bethel", "city": "East Bethel", "state": "MN", "lat": 45.3887, "lng": -93.2341},
-        {"store_id": 3, "name": "U-Pull-R Parts - Toledo", "city": "Toledo", "state": "OH", "lat": 41.7188, "lng": -83.538}
+        {
+          "store_id": 1,
+          "name": "U-Pull-R Parts - Rosemount",
+          "city": "Rosemount",
+          "state": "MN",
+          "lat": 44.7185,
+          "lng": -93.1261
+        },
+        {
+          "store_id": 2,
+          "name": "U-Pull-R Parts - East Bethel",
+          "city": "East Bethel",
+          "state": "MN",
+          "lat": 45.3887,
+          "lng": -93.2341
+        },
+        {
+          "store_id": 3,
+          "name": "U-Pull-R Parts - Toledo",
+          "city": "Toledo",
+          "state": "OH",
+          "lat": 41.7188,
+          "lng": -83.538
+        }
       ]
     },
     {
@@ -68,14 +138,54 @@
       "robots": "Crawl-delay: 10",
       "tos_flags": "none found",
       "locations": [
-        {"store_id": 1, "name": "Pull-N-Save - Salt Lake City", "city": "Salt Lake City", "state": "UT"},
-        {"store_id": 2, "name": "Pull-N-Save - Phoenix South", "city": "Phoenix", "state": "AZ"},
-        {"store_id": 3, "name": "Pull-N-Save - Glendale", "city": "Glendale", "state": "AZ"},
-        {"store_id": 4, "name": "Pull-N-Save - Phoenix North", "city": "Phoenix", "state": "AZ"},
-        {"store_id": 5, "name": "Pull-N-Save - Gilbert", "city": "Gilbert", "state": "AZ"},
-        {"store_id": 6, "name": "Pull-N-Save - Springville", "city": "Springville", "state": "UT"},
-        {"store_id": 7, "name": "Pull-N-Save - Tucson", "city": "Tucson", "state": "AZ"},
-        {"store_id": 9, "name": "Pull-N-Save - Riverside", "city": "Riverside", "state": "CA"}
+        {
+          "store_id": 1,
+          "name": "Pull-N-Save - Salt Lake City",
+          "city": "Salt Lake City",
+          "state": "UT"
+        },
+        {
+          "store_id": 2,
+          "name": "Pull-N-Save - Phoenix South",
+          "city": "Phoenix",
+          "state": "AZ"
+        },
+        {
+          "store_id": 3,
+          "name": "Pull-N-Save - Glendale",
+          "city": "Glendale",
+          "state": "AZ"
+        },
+        {
+          "store_id": 4,
+          "name": "Pull-N-Save - Phoenix North",
+          "city": "Phoenix",
+          "state": "AZ"
+        },
+        {
+          "store_id": 5,
+          "name": "Pull-N-Save - Gilbert",
+          "city": "Gilbert",
+          "state": "AZ"
+        },
+        {
+          "store_id": 6,
+          "name": "Pull-N-Save - Springville",
+          "city": "Springville",
+          "state": "UT"
+        },
+        {
+          "store_id": 7,
+          "name": "Pull-N-Save - Tucson",
+          "city": "Tucson",
+          "state": "AZ"
+        },
+        {
+          "store_id": 9,
+          "name": "Pull-N-Save - Riverside",
+          "city": "Riverside",
+          "state": "CA"
+        }
       ]
     },
     {
@@ -95,7 +205,11 @@
       "robots": "no restrictions found",
       "tos_flags": "none found",
       "locations": [
-        {"name": "Parts Galore - Detroit", "city": "Detroit", "state": "MI"}
+        {
+          "name": "Parts Galore - Detroit",
+          "city": "Detroit",
+          "state": "MI"
+        }
       ]
     },
     {
@@ -115,9 +229,21 @@
       "robots": "not yet reviewed in detail",
       "tos_flags": "none found",
       "locations": [
-        {"name": "Kenny U-Pull - Bangor", "city": "Bangor", "state": "ME"},
-        {"name": "Kenny U-Pull - Lewiston", "city": "Lewiston", "state": "ME"},
-        {"name": "Kenny U-Pull (Canada) - 25+ branches", "city": "", "state": "QC/ON/NB/NS"}
+        {
+          "name": "Kenny U-Pull - Bangor",
+          "city": "Bangor",
+          "state": "ME"
+        },
+        {
+          "name": "Kenny U-Pull - Lewiston",
+          "city": "Lewiston",
+          "state": "ME"
+        },
+        {
+          "name": "Kenny U-Pull (Canada) - 25+ branches",
+          "city": "",
+          "state": "QC/ON/NB/NS"
+        }
       ]
     },
     {
@@ -137,8 +263,16 @@
       "robots": "not yet reviewed",
       "tos_flags": "none found",
       "locations": [
-        {"name": "Go Pull-It - Jacksonville", "city": "Jacksonville", "state": "FL"},
-        {"name": "Go Pull-It - Tampa", "city": "Tampa", "state": "FL"}
+        {
+          "name": "Go Pull-It - Jacksonville",
+          "city": "Jacksonville",
+          "state": "FL"
+        },
+        {
+          "name": "Go Pull-It - Tampa",
+          "city": "Tampa",
+          "state": "FL"
+        }
       ]
     },
     {
@@ -158,7 +292,11 @@
       "robots": "not yet reviewed",
       "tos_flags": "none found",
       "locations": [
-        {"name": "Sturtevant Auto", "city": "Sturtevant", "state": "WI"}
+        {
+          "name": "Sturtevant Auto",
+          "city": "Sturtevant",
+          "state": "WI"
+        }
       ]
     },
     {
@@ -174,7 +312,11 @@
       "robots": "not yet reviewed",
       "tos_flags": "none found",
       "locations": [
-        {"name": "Ace Pick-A-Part", "city": "Jacksonville", "state": "FL"}
+        {
+          "name": "Ace Pick-A-Part",
+          "city": "Jacksonville",
+          "state": "FL"
+        }
       ]
     },
     {
@@ -194,9 +336,27 @@
       "robots": "allow all",
       "tos_flags": "WAF challenge only; robots.txt permissive, no ToS scraping clause found",
       "locations": [
-        {"name": "Harry's U-Pull-It - Hazle Township", "city": "Hazle Township", "state": "PA", "lat": 40.9564, "lng": -76.0113},
-        {"name": "Harry's U-Pull-It - Allentown", "city": "Allentown", "state": "PA", "lat": 40.6314, "lng": -75.4346},
-        {"name": "Harry's U-Pull-It - Pennsburg", "city": "Pennsburg", "state": "PA", "lat": 40.3813, "lng": -75.4622}
+        {
+          "name": "Harry's U-Pull-It - Hazle Township",
+          "city": "Hazle Township",
+          "state": "PA",
+          "lat": 40.9564,
+          "lng": -76.0113
+        },
+        {
+          "name": "Harry's U-Pull-It - Allentown",
+          "city": "Allentown",
+          "state": "PA",
+          "lat": 40.6314,
+          "lng": -75.4346
+        },
+        {
+          "name": "Harry's U-Pull-It - Pennsburg",
+          "city": "Pennsburg",
+          "state": "PA",
+          "lat": 40.3813,
+          "lng": -75.4622
+        }
       ]
     },
     {
@@ -216,11 +376,41 @@
       "robots": "allow all (orphaned crawl-delay line not attached to a UA group)",
       "tos_flags": "none found",
       "locations": [
-        {"name": "Fenix U-Pull - Binghamton", "city": "Binghamton", "state": "NY", "lat": 42.1095, "lng": -75.8218},
-        {"name": "Fenix U-Pull - East Syracuse", "city": "East Syracuse", "state": "NY", "lat": 43.0939, "lng": -76.0391},
-        {"name": "Fenix U-Pull - Elmira", "city": "Elmira", "state": "NY", "lat": 42.1561, "lng": -76.8627},
-        {"name": "Fenix U-Pull - Moultrie", "city": "Moultrie", "state": "GA", "lat": 31.1759, "lng": -83.7494},
-        {"name": "Fenix U-Pull - Belleville", "city": "Belleville", "state": "MI", "lat": 42.1726, "lng": -83.5419}
+        {
+          "name": "Fenix U-Pull - Binghamton",
+          "city": "Binghamton",
+          "state": "NY",
+          "lat": 42.1095,
+          "lng": -75.8218
+        },
+        {
+          "name": "Fenix U-Pull - East Syracuse",
+          "city": "East Syracuse",
+          "state": "NY",
+          "lat": 43.0939,
+          "lng": -76.0391
+        },
+        {
+          "name": "Fenix U-Pull - Elmira",
+          "city": "Elmira",
+          "state": "NY",
+          "lat": 42.1561,
+          "lng": -76.8627
+        },
+        {
+          "name": "Fenix U-Pull - Moultrie",
+          "city": "Moultrie",
+          "state": "GA",
+          "lat": 31.1759,
+          "lng": -83.7494
+        },
+        {
+          "name": "Fenix U-Pull - Belleville",
+          "city": "Belleville",
+          "state": "MI",
+          "lat": 42.1726,
+          "lng": -83.5419
+        }
       ]
     },
     {
@@ -228,44 +418,100 @@
       "status": "blocked",
       "platform": "unknown",
       "inventory_url": "https://abcupullit.com/",
-      "api": {"endpoint": null, "notes": "Lincoln NE. Site returned HTTP 400 to polite plain-UA requests in this pass."},
+      "api": {
+        "endpoint": null,
+        "notes": "Lincoln NE. Site returned HTTP 400 to polite plain-UA requests in this pass."
+      },
       "update_freshness": "unknown",
       "robots": "unreachable",
       "tos_flags": "unknown",
-      "locations": [{"name": "ABC U-Pull-It", "city": "Lincoln", "state": "NE"}]
+      "locations": [
+        {
+          "name": "ABC U-Pull-It",
+          "city": "Lincoln",
+          "state": "NE"
+        }
+      ]
     },
     {
       "name": "Ecology Auto Parts",
       "status": "blocked",
       "platform": "unknown",
       "inventory_url": "https://ecologyautoparts.com/",
-      "api": {"endpoint": null, "notes": "Large CA self-service chain (~10 yards). Domain unreachable during this pass (DNS/connection failure) - retry later, possibly under a different domain."},
+      "api": {
+        "endpoint": null,
+        "notes": "Large CA self-service chain (~10 yards). Domain unreachable during this pass (DNS/connection failure) - retry later, possibly under a different domain."
+      },
       "update_freshness": "unknown",
       "robots": "unreachable",
       "tos_flags": "unknown",
-      "locations": [{"name": "Ecology Auto Parts (multiple)", "city": "", "state": "CA"}]
+      "locations": [
+        {
+          "name": "Ecology Auto Parts (multiple)",
+          "city": "",
+          "state": "CA"
+        }
+      ]
     },
     {
       "name": "Jalopy Jungle",
       "status": "blocked",
       "platform": "unknown",
       "inventory_url": "https://jalopyjungle.com/",
-      "api": {"endpoint": null, "notes": "Idaho chain (Boise, Nampa, Caldwell, Twin Falls). Connection failed/empty response in this pass; retry later."},
+      "api": {
+        "endpoint": null,
+        "notes": "Idaho chain (Boise, Nampa, Caldwell, Twin Falls). Connection failed/empty response in this pass; retry later."
+      },
       "update_freshness": "unknown",
       "robots": "unreachable",
       "tos_flags": "unknown",
-      "locations": [{"name": "Jalopy Jungle (multiple)", "city": "Boise", "state": "ID"}]
+      "locations": [
+        {
+          "name": "Jalopy Jungle (multiple)",
+          "city": "Boise",
+          "state": "ID"
+        }
+      ]
     },
     {
       "name": "U-Pull-&-Pay",
       "status": "retired",
       "platform": "n/a",
       "inventory_url": "https://www.upullandpay.com/",
-      "api": {"endpoint": null, "notes": "Merged into Pull-A-Part; upullandpay.com redirects to pullapart.com and the former UPAP yards (AZ/NM/CO) are already covered by the existing Pull-A-Part adapter."},
+      "api": {
+        "endpoint": null,
+        "notes": "Merged into Pull-A-Part; upullandpay.com redirects to pullapart.com and the former UPAP yards (AZ/NM/CO) are already covered by the existing Pull-A-Part adapter."
+      },
       "update_freshness": "n/a",
       "robots": "n/a",
       "tos_flags": "n/a",
       "locations": []
+    },
+    {
+      "name": "Indy-U-Pull-It",
+      "status": "adapter-built",
+      "platform": "wordpress-elementor-static-table",
+      "inventory_url": "https://indyupullit.com/vehicle-inventory/",
+      "api": {
+        "endpoint": "https://indyupullit.com/vehicle-inventory/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html",
+        "requests_per_scan": 1,
+        "notes": "Entire inventory server-rendered as one DataTables <table id=\"vehicles\"> (~1,250 rows). Columns: Year, Make, Model, Color, Engine, Row, Arrival Date (MM/DD/YY, 01/01/70 = unknown). No VIN, no stock number \u2014 ids are a stable hash of the identifying fields. Price list at /price-list/ is a 3-column table (part, price, core) -> indy_pricing.json. First user-requested yard (feedback email 2026-10-16)."
+      },
+      "update_freshness": "live (same-day Arrival Date values observed)",
+      "robots": "allow all, no crawl-delay",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Indy-U-Pull-It - Indianapolis",
+          "city": "Indianapolis",
+          "state": "IN",
+          "lat": 39.7961,
+          "lng": -86.176
+        }
+      ]
     }
   ]
 }

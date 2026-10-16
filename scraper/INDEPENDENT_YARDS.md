@@ -130,6 +130,16 @@ holes), (c) scrape reliability.
 4. Retry Ecology Auto Parts / Jalopy Jungle / ABC U-Pull-It domains; verify
    Sturtevant and Ace mechanisms.
 
+## 2026-10-16 Indy-U-Pull-It (first user-requested yard)
+
+A feedback email (the app's in-app feedback link) requested Indy-U-Pull-It,
+Indianapolis IN — adapter built same day. WordPress/Elementor site;
+`/vehicle-inventory/` server-renders the entire ~1,250-row inventory as one
+DataTables table (Year, Make, Model, Color, Engine, Row, Arrival Date; no VIN,
+no stock number — ids are hashes of the identifying fields). `/price-list/` is
+a clean 3-column table (~470 parts with core charges) → `indy_pricing.json`.
+robots.txt allow-all, one GET per scan each. First IN coverage.
+
 ## 2026-09-21 Northeast pass
 
 Harry's U-Pull-It (3 eastern-PA yards) and Fenix U-Pull (3 upstate-NY yards +

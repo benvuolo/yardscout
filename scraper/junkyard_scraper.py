@@ -6911,6 +6911,142 @@ def refresh_harrys_pricing_file() -> Path:
     return path
 
 
+# Indy-U-Pull-It (indyupullit.com) — single independent yard, Indianapolis IN.
+# First user-requested yard (feedback email, 2026-10-16). WordPress/Elementor;
+# /vehicle-inventory/ server-renders the whole inventory as one DataTables
+# <table id="vehicles"> (~1,250 rows). Columns: Year, Make, Model, Color,
+# Engine, Row, Arrival Date (MM/DD/YY; the epoch placeholder 01/01/70 means
+# unknown). No VIN and no stock number anywhere, so ids are a stable hash of
+# the identifying fields, with an ordinal suffix for exact duplicates (two
+# identical cars in the same row added the same day stay distinct, and ids
+# only shift within that identical group). robots.txt: allow all. One GET per
+# scan. Address: 940 W 16th St (geocoded once via Nominatim, YARD_COORDS
+# convention).
+INDY_INVENTORY_URL = "https://indyupullit.com/vehicle-inventory/"
+INDY_YARD = {"name": "Indy-U-Pull-It - Indianapolis", "city": "Indianapolis",
+             "state": "IN", "lat": 39.7961, "lng": -86.1760}
+
+_INDY_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+
+
+def fetch_indyupullit_inventory() -> list[dict]:
+    """Fetch Indy-U-Pull-It's inventory (one server-rendered table, one GET)."""
+    import html as html_mod
+    page = r = None
+    for attempt in (1, 2):
+        try:
+            r = requests.get(INDY_INVENTORY_URL,
+                             headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+            r.raise_for_status()
+            page = r.text
+            break
+        except Exception as e:
+            print(f"  [Indy] attempt {attempt} failed: {e}", file=sys.stderr)
+            time.sleep(5)
+    if page is None:
+        return []
+    _indep_cache_raw("indy_inventory.html", r.content)
+    m = re.search(r'<table[^>]*id="vehicles"[^>]*>(.*?)</table>', page, re.S)
+    if not m:
+        print("  [Indy] table#vehicles not found — site layout changed?", file=sys.stderr)
+        return []
+    vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    for block in _INDY_ROW_RE.findall(m.group(1)):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 7:
+            continue
+        year_s, make, model, color, engine, row_n, date_raw = cells[:7]
+        if not make or not model:
+            continue
+        date_iso = ""
+        dm = re.match(r"(\d{2})/(\d{2})/(\d{2,4})", date_raw)
+        if dm and date_raw != "01/01/70":
+            yy = dm.group(3)
+            date_iso = f"{yy if len(yy) == 4 else '20' + yy}-{dm.group(1)}-{dm.group(2)}"
+        try:
+            year_i = int(year_s)
+        except ValueError:
+            year_i = 0
+        base = f"{year_s}|{make}|{model}|{color}|{engine}|{row_n}|{date_iso}".lower()
+        h = hashlib.sha1(base.encode()).hexdigest()[:12]
+        dupes[h] = dupes.get(h, 0) + 1
+        vehicles.append({
+            "id": f"indy-{h}" if dupes[h] == 1 else f"indy-{h}-{dupes[h]}",
+            "vin": "",
+            "year": year_i,
+            "make": _utpap_format_label(make),
+            "model": _utpap_format_label(model),
+            "row": row_n,
+            "dateAdded": date_iso,
+            "_location": INDY_YARD["name"],
+            "_city": INDY_YARD["city"],
+            "_state": INDY_YARD["state"],
+            "_lat": INDY_YARD["lat"],
+            "_lng": INDY_YARD["lng"],
+            "_source": "indy",
+        })
+    print(f"  [Indy] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
+# Indy-U-Pull-It publishes a single yard-wide price list on /price-list/ —
+# a server-rendered 3-column table (part, price, core charge). Same shape as
+# Harry's: one chain-wide list keyed by description.
+INDY_PRICE_URL = "https://indyupullit.com/price-list/"
+_INDY_PRICE_ROW_RE = re.compile(
+    r"<tr[^>]*>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>"
+    r"\s*<td[^>]*>\s*(?:\$\s*([\d.,]+))?\s*</td>",
+    re.S,
+)
+
+
+def refresh_indy_pricing_file() -> Path:
+    """Refresh Indy-U-Pull-It's price list -> indy_pricing.json."""
+    import html as html_mod
+    page = None
+    for attempt in (1, 2):
+        try:
+            r = requests.get(INDY_PRICE_URL,
+                             headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+            r.raise_for_status()
+            page = r.text
+            break
+        except Exception as e:
+            print(f"  [Indy pricing] attempt {attempt} failed: {e}", file=sys.stderr)
+            time.sleep(5)
+    if page is None:
+        return DATA_DIR / "indy_pricing.json"
+
+    seen: dict[str, dict] = {}
+    for name_html, price, core in _INDY_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(re.sub(r"<[^>]+>", "", name_html)).strip()
+        if not name:
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+
+    path = DATA_DIR / "indy_pricing.json"
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Indy pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Indy pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
 def fetch_independent_inventory() -> list[dict]:
     """All enabled independent-yard adapters (registry status: adapter-built)."""
     vehicles = fetch_wrenchapart_inventory()
@@ -6920,6 +7056,8 @@ def fetch_independent_inventory() -> list[dict]:
     vehicles += fetch_fenix_inventory()
     time.sleep(2)
     vehicles += fetch_harrys_inventory()
+    time.sleep(2)
+    vehicles += fetch_indyupullit_inventory()
     return vehicles
 
 
@@ -7898,7 +8036,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -7917,7 +8055,7 @@ def main():
         fns = (refresh_pnp_pricing_file, refresh_pyp_pricing_file,
                refresh_pap_pricing_file, refresh_wap_pricing_file,
                refresh_upullr_pricing_file, refresh_fenix_pricing_file,
-               refresh_harrys_pricing_file)
+               refresh_harrys_pricing_file, refresh_indy_pricing_file)
         for fn in fns:
             try:
                 fn()
