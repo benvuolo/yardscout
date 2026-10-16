@@ -1690,7 +1690,7 @@ function renderLive() {
             <button type="button" class="btn btn-primary" onclick="jhWidenRadius(${Math.ceil(closest.d)})">Widen radius to include it</button>
             <button type="button" class="btn" onclick="jhShowNationwide()">${isPro() ? 'Show everything nationwide' : 'Nationwide search &mdash; Pro'}</button>
           </div>
-          <p style="margin-top:1rem;font-size: 0.75rem;">We track every major self-service chain — LKQ Pick Your Part, Pick-n-Pull, and Pull-A-Part — <span class="coverage-count">${coverageYardCount()}</span> yards nationwide. Independent local yards aren't covered yet.</p>`;
+          <p style="margin-top:1rem;font-size: 0.75rem;">We track every major self-service chain — LKQ Pick Your Part, Pick-n-Pull, and Pull-A-Part — plus a growing set of independents: <span class="coverage-count">${coverageYardCount()}</span> yards nationwide. Missing your local yard? <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">Tell us</a>.</p>`;
       }
     }
     document.getElementById('live-grid').innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;
