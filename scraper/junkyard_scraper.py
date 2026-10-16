@@ -6923,30 +6923,63 @@ def refresh_harrys_pricing_file() -> Path:
 # scan. Address: 940 W 16th St (geocoded once via Nominatim, YARD_COORDS
 # convention).
 INDY_INVENTORY_URL = "https://indyupullit.com/vehicle-inventory/"
+# indyupullit.com's host hard-blocks GitHub Actions' Azure IP ranges
+# (connection resets / WAF challenge pages) while serving residential and
+# Cloudflare egress normally — so the scan falls back to a fixed-allowlist
+# mirror route on the yardscout-site Worker (backend/site-proxy), which
+# fetches the same URL from Cloudflare's network and caches it 1h.
+INDY_INVENTORY_MIRROR = "https://yardscout.io/_upstream/indy-inventory"
 INDY_YARD = {"name": "Indy-U-Pull-It - Indianapolis", "city": "Indianapolis",
              "state": "IN", "lat": 39.7961, "lng": -86.1760}
 
 _INDY_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+_INDY_TABLE_RE = re.compile(r'<table[^>]*id="vehicles"[^>]*>(.*?)</table>', re.S)
+
+
+def _indy_get_with_mirror(direct_url: str, mirror_url: str, marker_re,
+                          snapshot_name: str) -> str | None:
+    """GET direct_url; on failure retry the Worker mirror; on failure fall back
+    to the committed snapshot (scraper/snapshots/, pushed daily from a
+    residential IP by scraper/update_indy_snapshot.sh — SiteGround blocks both
+    GitHub Actions and Cloudflare egress). Returns the first page whose
+    content matches marker_re."""
+    for label, u in (("direct", direct_url), ("mirror", mirror_url)):
+        try:
+            r = requests.get(u, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+            r.raise_for_status()
+            if marker_re.search(r.text):
+                if label == "mirror":
+                    print("  [Indy] direct fetch blocked — used Worker mirror", file=sys.stderr)
+                return r.text
+            print(f"  [Indy] {label} fetch returned page without expected content "
+                  f"({len(r.content)} bytes)", file=sys.stderr)
+        except Exception as e:
+            print(f"  [Indy] {label} fetch failed: {e}", file=sys.stderr)
+        time.sleep(3)
+    snap = Path(__file__).parent / "snapshots" / snapshot_name
+    if snap.exists():
+        import gzip as gzip_mod
+        try:
+            text = gzip_mod.decompress(snap.read_bytes()).decode("utf-8", "replace")
+            if marker_re.search(text):
+                print(f"  [Indy] live fetches blocked — using committed snapshot "
+                      f"{snapshot_name}", file=sys.stderr)
+                return text
+        except Exception as e:
+            print(f"  [Indy] snapshot {snapshot_name} unreadable: {e}", file=sys.stderr)
+    return None
 
 
 def fetch_indyupullit_inventory() -> list[dict]:
     """Fetch Indy-U-Pull-It's inventory (one server-rendered table, one GET)."""
     import html as html_mod
-    page = r = None
-    for attempt in (1, 2):
-        try:
-            r = requests.get(INDY_INVENTORY_URL,
-                             headers={**HEADERS, "Accept": "text/html"}, timeout=60)
-            r.raise_for_status()
-            page = r.text
-            break
-        except Exception as e:
-            print(f"  [Indy] attempt {attempt} failed: {e}", file=sys.stderr)
-            time.sleep(5)
+    page = _indy_get_with_mirror(INDY_INVENTORY_URL, INDY_INVENTORY_MIRROR, _INDY_TABLE_RE,
+                                 "indy_inventory.html.gz")
     if page is None:
+        print("  [Indy] inventory unreachable via direct and mirror — skipping", file=sys.stderr)
         return []
-    _indep_cache_raw("indy_inventory.html", r.content)
-    m = re.search(r'<table[^>]*id="vehicles"[^>]*>(.*?)</table>', page, re.S)
+    _indep_cache_raw("indy_inventory.html", page.encode())
+    m = _INDY_TABLE_RE.search(page)
     if not m:
         print("  [Indy] table#vehicles not found — site layout changed?", file=sys.stderr)
         return []
@@ -6995,6 +7028,7 @@ def fetch_indyupullit_inventory() -> list[dict]:
 # a server-rendered 3-column table (part, price, core charge). Same shape as
 # Harry's: one chain-wide list keyed by description.
 INDY_PRICE_URL = "https://indyupullit.com/price-list/"
+INDY_PRICE_MIRROR = "https://yardscout.io/_upstream/indy-prices"
 _INDY_PRICE_ROW_RE = re.compile(
     r"<tr[^>]*>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>"
     r"\s*<td[^>]*>\s*(?:\$\s*([\d.,]+))?\s*</td>",
@@ -7005,17 +7039,8 @@ _INDY_PRICE_ROW_RE = re.compile(
 def refresh_indy_pricing_file() -> Path:
     """Refresh Indy-U-Pull-It's price list -> indy_pricing.json."""
     import html as html_mod
-    page = None
-    for attempt in (1, 2):
-        try:
-            r = requests.get(INDY_PRICE_URL,
-                             headers={**HEADERS, "Accept": "text/html"}, timeout=60)
-            r.raise_for_status()
-            page = r.text
-            break
-        except Exception as e:
-            print(f"  [Indy pricing] attempt {attempt} failed: {e}", file=sys.stderr)
-            time.sleep(5)
+    page = _indy_get_with_mirror(INDY_PRICE_URL, INDY_PRICE_MIRROR, _INDY_PRICE_ROW_RE,
+                                 "indy_prices.html.gz")
     if page is None:
         return DATA_DIR / "indy_pricing.json"
 
