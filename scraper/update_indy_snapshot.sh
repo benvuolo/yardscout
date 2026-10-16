@@ -14,9 +14,9 @@ cd "$(dirname "$0")/.."
 UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 mkdir -p scraper/snapshots
 
-INV=$(curl -s --max-time 90 -A "$UA" "https://indyupullit.com/vehicle-inventory/")
+INV=$(curl -s --http1.1 --max-time 90 -A "$UA" "https://indyupullit.com/vehicle-inventory/")
 echo "$INV" | grep -q 'id="vehicles"' || { echo "inventory marker missing — not snapshotting"; exit 1; }
-PRC=$(curl -s --max-time 90 -A "$UA" "https://indyupullit.com/price-list/")
+PRC=$(curl -s --http1.1 --max-time 90 -A "$UA" "https://indyupullit.com/price-list/")
 [ "$(echo "$PRC" | grep -c '<td')" -gt 300 ] || { echo "price table too small — not snapshotting"; exit 1; }
 
 # gzip -n: no timestamp in the header, so unchanged content = unchanged file.
