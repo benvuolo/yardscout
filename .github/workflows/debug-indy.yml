@@ -1,0 +1,22 @@
+
+# TEMPORARY — diagnose what indyupullit.com serves to GitHub runner IPs.
+# Delete after the Indy adapter works in CI.
+name: Debug Indy fetch
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Probe inventory page
+        run: |
+          curl -sv --max-time 60 "https://indyupullit.com/vehicle-inventory/" \
+            -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36" \
+            -o /tmp/indy.html 2> >(grep -i "^< HTTP\|^< server\|^< cf-\|^< x-sucuri\|^< location" >&2) || true
+          echo "=== bytes: $(wc -c < /tmp/indy.html)"
+          echo "=== head ==="
+          head -c 1500 /tmp/indy.html
+          echo
+          echo "=== table marker ==="
+          grep -c 'id="vehicles"' /tmp/indy.html || echo "NO TABLE"
+          grep -io "sucuri\|cloudflare\|wordfence\|captcha\|access denied\|challenge" /tmp/indy.html | sort | uniq -c | head
