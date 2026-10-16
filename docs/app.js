@@ -9,6 +9,11 @@
  * guideline 3.1.1 — digital subscriptions in-app must use StoreKit). */
 const IS_NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform
   && window.Capacitor.isNativePlatform());
+// Android ships free-tier-first: StoreKit (iOS IAP) and APNs push don't exist
+// there, and Google Play policy forbids steering to an external purchase — so
+// Android sees honest "coming soon" states instead of iOS purchase copy.
+const IS_ANDROID = IS_NATIVE && window.Capacitor.getPlatform
+  && window.Capacitor.getPlatform() === 'android';
 const DATA_BASE = IS_NATIVE ? 'https://yardscout.io/' : '';
 
 /* ===== ANALYTICS — GoatCounter (privacy-friendly: no cookies, anonymous) =====
@@ -1182,9 +1187,13 @@ function openUpgradeSheet(trigger) {
   // purchase here (and for Pro users, a real subscription they already have).
   if (IS_NATIVE) {
     const sheetSub = document.querySelector('#upgrade-sheet .sheet-sub');
-    if (sheetSub) sheetSub.textContent = 'Finding cars near you is free and stays free. '
-      + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
-      + 'and instant push alerts. Subscribe through the App Store; cancel anytime.';
+    if (sheetSub) sheetSub.textContent = IS_ANDROID
+      ? 'Finding cars near you is free and stays free. Pro adds the money layer — '
+        + 'part values, pull costs, cross-yard price compare, and instant alerts. '
+        + 'Pro subscriptions are coming to Android soon.'
+      : 'Finding cars near you is free and stays free. '
+        + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
+        + 'and instant push alerts. Subscribe through the App Store; cancel anytime.';
   }
   document.getElementById('upgrade-sheet').classList.add('open');
   document.getElementById('upgrade-backdrop').classList.add('open');
@@ -3196,6 +3205,13 @@ async function syncDeviceRegistration(freshToken) {
   const status = document.getElementById('native-push-status');
   const PN = nativePlugin('PushNotifications');
   if (!btn) return;
+  if (IS_ANDROID) {
+    // The plugin class exists on Android but there's no FCM project yet —
+    // don't offer a button that would end in a registration error.
+    btn.style.display = 'none';
+    if (status) status.textContent = 'Push alerts are coming to Android soon — watches still light up in-app.';
+    return;
+  }
   if (!PN || !NATIVE_API_BASE) {
     // Plugin missing or backend not deployed yet — honest "coming soon".
     btn.style.display = 'none';
