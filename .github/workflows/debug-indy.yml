@@ -8,21 +8,21 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Probe inventory page
+      - name: Probe over HTTP/1.1 like python-requests
         run: |
           set +e
-          curl -v --max-time 60 "https://indyupullit.com/vehicle-inventory/" \
-            -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36" \
-            -o /tmp/indy.html 2>/tmp/indy_err.txt
-          echo "curl exit: $?"
-          echo "=== stderr (headers) ==="
-          grep -v "^{.*}$" /tmp/indy_err.txt | tail -40
-          echo "=== bytes ==="
-          wc -c /tmp/indy.html 2>/dev/null || echo "no file"
-          echo "=== head ==="
-          head -c 1200 /tmp/indy.html 2>/dev/null
-          echo
-          echo "=== markers ==="
-          grep -c 'id="vehicles"' /tmp/indy.html 2>/dev/null
-          grep -io "sucuri\|cloudflare\|wordfence\|captcha\|access denied\|challenge" /tmp/indy.html 2>/dev/null | sort | uniq -c | head
+          python3 - <<'EOF'
+          import requests
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"}
+          for url in ("https://indyupullit.com/vehicle-inventory/", "https://indyupullit.com/price-list/"):
+              try:
+                  r = requests.get(url, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+                  print("===", url)
+                  print("status:", r.status_code, "| bytes:", len(r.content), "| server:", r.headers.get("server"), "| via:", r.headers.get("via"), "| x-sucuri-id:", r.headers.get("x-sucuri-id"))
+                  body = r.text
+                  print("has table:", 'id="vehicles"' in body, "| has tds:", body.count("<td"))
+                  print("head:", body[:800].replace("\n", " ")[:800])
+              except Exception as e:
+                  print("===", url, "FAILED:", e)
+          EOF
           true
