@@ -860,6 +860,36 @@ function populateLiveMakeFilter() {
  * make is chosen. */
 let selectedModels = new Set();
 
+/* Yard inventory systems disagree on model naming — most still file the WRX
+ * as an Impreza trim (true until 2015), so the same car shows up as "WRX",
+ * "Impreza WRX", or "Impreza" depending on the yard. This table merges the
+ * *spellings* into one filter entry per real model. It can't catch cars
+ * filed under the plain parent name (a 2016 WRX typed as "Impreza") — that
+ * needs the VIN decode and is a separate project. Keys are lowercase. */
+const MODEL_ALIASES = {
+  subaru: {
+    'impreza wrx': 'WRX',
+    'wrx': 'WRX',
+    'impreza wrx sti': 'WRX STI',
+    'impreza sti': 'WRX STI',
+    'wrx sti': 'WRX STI',
+    'xv crosstrek': 'Crosstrek',
+    'crosstrek': 'Crosstrek',
+  },
+  mazda: {
+    'mx-5 miata': 'Miata (MX-5)',
+    'mx-5': 'Miata (MX-5)',
+    'mx5': 'Miata (MX-5)',
+    'miata': 'Miata (MX-5)',
+  },
+};
+
+function canonicalModel(make, model) {
+  const table = MODEL_ALIASES[String(make || '').toLowerCase()];
+  if (!table) return model;
+  return table[String(model || '').trim().toLowerCase()] || model;
+}
+
 function populateModelFilter() {
   const make = document.getElementById('live-filter-make').value;
   const btn = document.getElementById('live-filter-model-btn');
@@ -873,7 +903,10 @@ function populateModelFilter() {
   btn.disabled = false;   // location gate lives in updateFilterAvailability
   const counts = new Map();
   for (const v of _scopedVehicles) {
-    if (v.make === make && v.model) counts.set(v.model, (counts.get(v.model) || 0) + 1);
+    if (v.make === make && v.model) {
+      const m = canonicalModel(make, v.model);
+      counts.set(m, (counts.get(m) || 0) + 1);
+    }
   }
   // Drop selections that no longer exist in scope (make change, radius change).
   for (const m of [...selectedModels]) if (!counts.has(m)) selectedModels.delete(m);
@@ -1482,7 +1515,7 @@ function getFilteredLive() {
 
   let filtered = liveInventory.filter(v => {
     if (makeFilter && v.make !== makeFilter) return false;
-    if (modelFilter && modelFilter.size && !modelFilter.has(v.model)) return false;
+    if (modelFilter && modelFilter.size && !modelFilter.has(canonicalModel(v.make, v.model))) return false;
     if (yearMin && (!v.year || v.year < yearMin)) return false;
     if (yearMax && (!v.year || v.year > yearMax)) return false;
     if (locationFilter && v.location !== locationFilter) return false;
@@ -2477,7 +2510,14 @@ function watchlistMatches(entry, v) {
   const makeLow = (entry.make || '').toLowerCase();
   const modelLow = (entry.model || '').toLowerCase();
   if (makeLow && !(v.make || '').toLowerCase().includes(makeLow)) return false;
-  if (modelLow && !(v.model || '').toLowerCase().includes(modelLow)) return false;
+  if (modelLow) {
+    // Match raw yard spelling OR the canonical alias (so a watch for "WRX"
+    // catches a car a yard filed as "Impreza WRX", and vice versa).
+    const rawMatch = (v.model || '').toLowerCase().includes(modelLow);
+    const canonMatch = String(canonicalModel(v.make, v.model) || '').toLowerCase()
+      === String(canonicalModel(entry.make, entry.model) || '').toLowerCase();
+    if (!rawMatch && !canonMatch) return false;
+  }
   if (entry.yrMin && v.year < entry.yrMin) return false;
   if (entry.yrMax && v.year > entry.yrMax) return false;
   if (entry.matchOnly && !v.hasMatch) return false;
