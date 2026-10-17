@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-16",
+  "updated": "2026-10-17",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -123,7 +123,7 @@
     },
     {
       "name": "Pull-N-Save",
-      "status": "candidate",
+      "status": "adapter-built",
       "platform": "gm-vehicle-search-wp (HTML variant)",
       "inventory_url": "https://www.pullnsave.com/inventory-search/",
       "api": {
@@ -131,8 +131,8 @@
         "method": "POST",
         "auth": "none",
         "format": "html-table (json for getStores/getMakes)",
-        "requests_per_scan": "~45 (one per make with store=0), or 8 (one per store with makes=0, but the table has no Make column)",
-        "notes": "Same WP plugin family as U-Pull-R (footable + 'glennForm' fingerprints; plugin dirs PnsV1_3.3 / gm_vehicle_search). action=getStores returns JSON store list; action=getVehicles&makes={Make}&models=0&store=0 returns an HTML table (Year/Model/Date/Row/Store/Color/Stock/VIN) across all stores. Vehicle photos hosted at app.pullnsaveapp.com (own app, not Row52) but photos are not captured per policy. robots.txt Crawl-delay: 10 - honor it, so a full scan is ~45 requests x 10s = ~8 min."
+        "requests_per_scan": "~46 (getMakes + one getVehicles per make with store=0; 10s apart per robots crawl-delay \u2248 8 min)",
+        "notes": "Same WP plugin family as U-Pull-R (footable + 'glennForm' fingerprints; plugin dirs PnsV1_3.3 / gm_vehicle_search). action=getStores returns JSON store list; action=getMakes returns <option> HTML; action=getVehicles&makes={Make}&models=0&store=0 returns an HTML footable (img, Year, Model, Date Received with ISO data-value, Row, Store display name, Color, Stock#, VIN) across all stores. Stock numbers (STK#) are chain-unique (id basis: pns-{stock}). Chain-wide price list at /parts-pricing/ (~810 unique parts) -> pns_pricing.json. Vehicle photos hosted at app.pullnsaveapp.com (own app, not Row52) but photos are not captured per policy. robots.txt Crawl-delay: 10 - honored (PNS_DELAY_SEC), full scan ~46 requests x 10s = ~8 min."
       },
       "update_freshness": "live",
       "robots": "Crawl-delay: 10",
@@ -142,55 +142,71 @@
           "store_id": 1,
           "name": "Pull-N-Save - Salt Lake City",
           "city": "Salt Lake City",
-          "state": "UT"
+          "state": "UT",
+          "lat": 40.726,
+          "lng": -112.0343
         },
         {
           "store_id": 2,
           "name": "Pull-N-Save - Phoenix South",
           "city": "Phoenix",
-          "state": "AZ"
+          "state": "AZ",
+          "lat": 33.4432,
+          "lng": -112.1195
         },
         {
           "store_id": 3,
           "name": "Pull-N-Save - Glendale",
           "city": "Glendale",
-          "state": "AZ"
+          "state": "AZ",
+          "lat": 33.5521,
+          "lng": -112.2065
         },
         {
           "store_id": 4,
           "name": "Pull-N-Save - Phoenix North",
           "city": "Phoenix",
-          "state": "AZ"
+          "state": "AZ",
+          "lat": 33.4451,
+          "lng": -112.1207
         },
         {
           "store_id": 5,
           "name": "Pull-N-Save - Gilbert",
           "city": "Gilbert",
-          "state": "AZ"
+          "state": "AZ",
+          "lat": 33.3613,
+          "lng": -111.8052
         },
         {
           "store_id": 6,
           "name": "Pull-N-Save - Springville",
           "city": "Springville",
-          "state": "UT"
+          "state": "UT",
+          "lat": 40.1445,
+          "lng": -111.6447
         },
         {
           "store_id": 7,
           "name": "Pull-N-Save - Tucson",
           "city": "Tucson",
-          "state": "AZ"
+          "state": "AZ",
+          "lat": 32.1341,
+          "lng": -110.8529
         },
         {
           "store_id": 9,
           "name": "Pull-N-Save - Riverside",
           "city": "Riverside",
-          "state": "CA"
+          "state": "CA",
+          "lat": 33.9902,
+          "lng": -117.3533
         }
       ]
     },
     {
       "name": "Parts Galore",
-      "status": "candidate",
+      "status": "adapter-built",
       "platform": "static-embedded-table",
       "inventory_url": "https://parts-galore.com/",
       "api": {
@@ -199,7 +215,7 @@
         "auth": "none",
         "format": "html-embedded-table",
         "requests_per_scan": 1,
-        "notes": "Entire inventory (~1,050 vehicles) is embedded server-side in table#alldata on the homepage; client JS only filters. Columns: Year, Make, Model, VIN, Color, Date, Row. Detroit metro (4.3M) - current MI coverage is a single yard. Need to confirm whether the table covers one or both of their Detroit locations before building."
+        "notes": "Entire inventory (~1,050 vehicles) is embedded server-side in table#alldata on the homepage; client JS only filters. Columns: Year, Make, Model, VIN, Color, Yard Date (ISO), Row. No location column, so this ships as ONE yard even though Parts Galore operates multiple Detroit locations - rows cannot be attributed to a specific lot; main address 11360 E 8 Mile Rd used. VIN is the id basis (hash fallback for VIN-less rows, ordinal suffixes for dupes). Yard-wide price list at /parts-price-list/ (~475 parts) -> partsgalore_pricing.json. One GET per scan each."
       },
       "update_freshness": "appears current (2026 dates in table)",
       "robots": "no restrictions found",
@@ -208,7 +224,9 @@
         {
           "name": "Parts Galore - Detroit",
           "city": "Detroit",
-          "state": "MI"
+          "state": "MI",
+          "lat": 42.4486,
+          "lng": -83.0088
         }
       ]
     },
@@ -257,7 +275,7 @@
         "auth": "none",
         "format": "html (WP custom post type 'inventory')",
         "requests_per_scan": "unknown - archive is location-gated ('Please select a location above')",
-        "notes": "Florida self-service yards (Jacksonville, Tampa). Site loads static.crushsoftware.com/js/crush-web-form.js (CRUSH by S3 Software Solutions - car-buying form). Inventory archive requires a location query parameter not yet reverse-engineered; needs a follow-up session with browser devtools."
+        "notes": "Florida self-service yards (Jacksonville, Tampa). Site loads static.crushsoftware.com/js/crush-web-form.js (CRUSH by S3 Software - car-buying form). Inventory archive is location-gated by a query parameter not yet reverse-engineered; finding the search endpoint needs a browser devtools session, and the sitemap-crawl alternative needs a ~14h backfill. PARKED 2026-10-17 (not built in the 7-chain onboarding pass for these reasons)."
       },
       "update_freshness": "unknown",
       "robots": "not yet reviewed",
@@ -277,45 +295,53 @@
     },
     {
       "name": "Sturtevant Auto",
-      "status": "candidate",
-      "platform": "custom inventory subdomain",
+      "status": "adapter-built",
+      "platform": "CRUSH-platform ASP.NET inventory app (dedicated subdomain)",
       "inventory_url": "https://inventory.sturtevantauto.com/",
       "api": {
         "endpoint": "https://inventory.sturtevantauto.com/",
-        "method": "GET",
+        "method": "POST",
         "auth": "none",
         "format": "html-table",
-        "requests_per_scan": "1+",
-        "notes": "Single yard near Milwaukee (Sturtevant, WI). Dedicated inventory app with YEAR/MAKE/MODEL/STOCK/ROW/COLOR/ARRIVAL DATE table (plus /Home/Interchange and /Home/PartPrices routes). Small but easy; WI currently has one covered yard."
+        "requests_per_scan": "~47 (make list GET + one tokenless POST per make, 2s apart)",
+        "notes": "POST / with form VehicleMake={MAKE}&VehicleModel= (urlencoded, no token) returns the full table per make: Image, Year, Make, Model, Color, Reference (engine), Stock # (STK#, id basis: sturtevant-{stock}), Row, Arrival Date (MM/DD/YYYY). Make list server-rendered on the landing page (~46 makes). Price list at /Home/PartPrices (~168 parts, you-pull-it column) -> sturtevant_pricing.json. No robots.txt (404)."
       },
-      "update_freshness": "unknown",
-      "robots": "not yet reviewed",
+      "update_freshness": "live (same-week Arrival Date values observed)",
+      "robots": "no robots.txt (404)",
       "tos_flags": "none found",
       "locations": [
         {
-          "name": "Sturtevant Auto",
+          "name": "Sturtevant Auto - Sturtevant",
           "city": "Sturtevant",
-          "state": "WI"
+          "state": "WI",
+          "lat": 42.6981,
+          "lng": -87.8945
         }
       ]
     },
     {
       "name": "Ace Pick-A-Part",
-      "status": "candidate",
-      "platform": "wordpress (inventory mechanism unidentified)",
-      "inventory_url": "https://acepickapart.com/",
+      "status": "adapter-built",
+      "platform": "wordpress (jupiter theme ajax.php search)",
+      "inventory_url": "https://acepickapart.com/search-inventory/",
       "api": {
-        "endpoint": null,
-        "notes": "Jacksonville FL self-service yard. WP site with admin-ajax present but the inventory page path/mechanism was not identified in this pass."
+        "endpoint": "https://www.acepickapart.com/wp-content/themes/jupiter/ajax.php",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "~43 (search page GET for the make list + one POST per make, 2s apart)",
+        "notes": "POST ajax.php?inner_search=true&make={MAKE} (no auth) returns an HTML table per make: Image, Year, Make, Model, Exterior, Interior, Engine, Trans, Stock # (id basis: ace-{stock}), Row, Date In Yard (M/D/YYYY; ~17% blank). Empty make returns nothing, so the scan loops the ~42 makes server-rendered in select#search_make on /search-inventory/. Behind Cloudflare but no challenge observed from residential or datacenter egress; if CI gets challenged the adapter logs and skips (Indy-style snapshot fallback can come later). Yard-wide price list at /prices/ (~590 parts) -> ace_pricing.json. First Florida coverage."
       },
-      "update_freshness": "unknown",
-      "robots": "not yet reviewed",
+      "update_freshness": "live (same-week Date In Yard values observed)",
+      "robots": "allow all",
       "tos_flags": "none found",
       "locations": [
         {
-          "name": "Ace Pick-A-Part",
+          "name": "Ace Pick-A-Part - Jacksonville",
           "city": "Jacksonville",
-          "state": "FL"
+          "state": "FL",
+          "lat": 30.456,
+          "lng": -81.6424
         }
       ]
     },
@@ -559,6 +585,165 @@
         "requests_per_scan": 2,
         "notes": "action=sif_search_products&make=Any&model=Any&location=Any returns the ENTIRE 4-yard chain's inventory in one JSON response (~2,500 rows): yard_name/city/state, iyear, make, model, vehicle_row, yard_date (MM-DD-YYYY set date), color, VIN (98.5% real 17-char), unique stocknumber (id basis: upullitne-{stocknumber}), mileage, image_url. All rows istatus=0/location=YARD. Rows carry crush_version/s3clientid = Crush platform. Chain-wide price list at /parts-pricelist/ is a 4-column table (part, price, core, labor=all $0) -> upullitne_pricing.json. First IA and NE coverage; user-requested via Reddit 2026-10-16. NOT the same company as blocked ABC U-Pull-It (also Lincoln NE)."
       }
+    },
+    {
+      "name": "Rupert's U-Pull-It",
+      "status": "adapter-built",
+      "platform": "wordpress-yardconnect-pro (server-rendered table)",
+      "inventory_url": "https://rupertsupullit.com/search-our-inventory/",
+      "api": {
+        "endpoint": "https://rupertsupullit.com/search-our-inventory/?make=all&model=all&year_start=1963&year_end=2026",
+        "method": "GET",
+        "auth": "none",
+        "format": "html",
+        "requests_per_scan": 1,
+        "notes": "The all-makes query server-renders the ENTIRE inventory as one table (~830 rows, ~6.7 MB): Make, Model, Year, Body Style, Engine, Yard Row, Date Set (MM/DD/YY). Each row's thumbnail <img> carries a unique data-stock-number (id basis: ruperts-{stock}). CAVEAT: the query takes ~35-45s server-side - adapter uses timeout=120 + one retry. Owned by M&M Auto Parts. Yard-wide price list at /parts-list/ (~470 parts: name, price, core, labor-ignored) -> ruperts_pricing.json. First mainland-VA coverage; user-requested via Reddit (NoVA) 2026-10-16."
+      },
+      "update_freshness": "live (same-week Date Set values observed)",
+      "robots": "Crawl-Delay: 3, no disallows (one request per scan)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Rupert's U-Pull-It - Fredericksburg",
+          "city": "Fredericksburg",
+          "state": "VA",
+          "lat": 38.2453,
+          "lng": -77.4653
+        }
+      ]
+    },
+    {
+      "name": "Chesterfield Auto Parts",
+      "status": "adapter-built",
+      "platform": "asp.net-core (token-gated search + tokenless newest-cars page)",
+      "inventory_url": "https://chesterfieldauto.com/search-our-inventory-by-location",
+      "api": {
+        "endpoint": "https://chesterfieldauto.com/search-our-inventory-by-location (full) + /newest-cars (incremental)",
+        "method": "GET+POST",
+        "auth": "__RequestVerificationToken + cookie scraped per make page (full search only; /newest-cars is tokenless)",
+        "format": "html",
+        "requests_per_scan": "incremental: 1 (/newest-cars, ~120 newest arrivals chain-wide); weekly full: ~74 make GETs + ~900 make-x-model POSTs at 2s \u2248 80 min measured",
+        "notes": "Full search requires SelectedMake.Id + BasicSearch.ModelId (REQUIRED - 0 returns nothing) + BeginYear=1900/EndYear=2030; model ids are server-rendered per make page. Results columns: Store, Make, Model, Year, Color, Body, Engine, Yard Row, Set date (M/D/YYYY). No VIN/stock - ids are stable hashes of the identifying fields (chesterfield-{sha1-12}, ordinal dupe suffixes). HYBRID SCAN: the ~80 min make-x-model loop is too slow for every-6h scans, so normal scans merge /newest-cars into the previous result set persisted in docs/data/chesterfield_inventory.json (committed by the scan workflow with the rest of docs/data/); a full refresh runs when JUNKYARD_CHESTERFIELD_FULL=1 or the cache's last_full stamp exceeds 6.5 days (\u2248 weekly). Cars crushed mid-week linger until that refresh. Store names map Richmond / Southside (Midlothian, Genito Rd) / Fort Lee (Prince George, Puddledock Rd). Chain-wide price list at /price-list (~540 parts) -> chesterfield_pricing.json."
+      },
+      "update_freshness": "live (newest-cars shows same-day Set dates)",
+      "robots": "all allowed except /cgi-bin/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Chesterfield Auto Parts - Richmond",
+          "city": "Richmond",
+          "state": "VA",
+          "lat": 37.5067,
+          "lng": -77.4912
+        },
+        {
+          "name": "Chesterfield Auto Parts - Southside",
+          "city": "Midlothian",
+          "state": "VA",
+          "lat": 37.4367,
+          "lng": -77.6046
+        },
+        {
+          "name": "Chesterfield Auto Parts - Fort Lee",
+          "city": "Prince George",
+          "state": "VA",
+          "lat": 37.2465,
+          "lng": -77.3674
+        }
+      ]
+    },
+    {
+      "name": "iPull-uPull",
+      "status": "adapter-built",
+      "platform": "wordpress + custom ipullupull-catalog plugin (CSV export endpoint)",
+      "inventory_url": "https://ipullupull.com/inventory-pricing/",
+      "api": {
+        "endpoint": "https://ipullupull.com/wp-admin/admin-ajax.php",
+        "method": "POST",
+        "auth": "_ajax_nonce scraped from any catalog page's ipullCatalog JS object",
+        "format": "csv",
+        "requests_per_scan": 2,
+        "notes": "action=ipull_export_catalog&slug=inventory&type=inventory&format=csv&export_action=download returns the ENTIRE 4-yard chain as one CSV (~4,100 rows): Stock Number (city-prefixed FRE/POM/SAC/STK, unique; id basis: ipull-{stock}), Status (Available kept; a handful 'Sold (n unsold parts)' skipped), Yard Date (ISO), Yard City, Year, Make, Model, Vehicle Row, Color, Vin (98%+ real 17-char). Any non-make slug exports everything; make-filtered slugs like inventory-ford filter. Per-yard CSVs also exist at /{city}.csv but lack color. No parts price list published (the 'Inventory & Pricing' page is the vehicle catalog). First CA independent chain (Fresno, Sacramento, Stockton, Pomona)."
+      },
+      "update_freshness": "live (same-day Yard Date values observed)",
+      "robots": "Yoast allow-all with a few page disallows; admin-ajax.php and /inventory/ allowed",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "iPull-uPull - Fresno",
+          "city": "Fresno",
+          "state": "CA",
+          "lat": 36.6852,
+          "lng": -119.7475
+        },
+        {
+          "name": "iPull-uPull - Pomona",
+          "city": "Pomona",
+          "state": "CA",
+          "lat": 34.0556,
+          "lng": -117.7248
+        },
+        {
+          "name": "iPull-uPull - Sacramento",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.4812,
+          "lng": -121.4246
+        },
+        {
+          "name": "iPull-uPull - Stockton",
+          "city": "Stockton",
+          "state": "CA",
+          "lat": 37.9525,
+          "lng": -121.224
+        }
+      ]
+    },
+    {
+      "name": "St. Cloud U Pull",
+      "status": "adapter-built",
+      "platform": "CRUSH-platform ASP.NET inventory app (same family as Sturtevant)",
+      "inventory_url": "https://stccrush.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://stccrush.com/Home/Inventory",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "~29 (make list GET + one multipart POST per make, 2s apart)",
+        "notes": "Multipart POST (the form is enctype=multipart/form-data) with VehicleMake={MAKE}, VehicleModel empty returns the table per make: Photo, Year, Make, Model, Color, Reference (engine), Stock # (STK#, id basis: stcloud-{stock}), Row, Yard Date (MM/DD/YYYY). ~28 makes server-rendered on the page. ~230 vehicles (small/newer yard). No published price list found on stccrush.com or stcloudupull.com. Found during the 2026-10-17 Minnesota coverage research - first MN yard beyond U-Pull-R Rosemount/East Bethel. Main site stcloudupull.com."
+      },
+      "update_freshness": "appears current (2026 Yard Date values)",
+      "robots": "no robots.txt (404)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "St. Cloud U Pull - St. Cloud",
+          "city": "St. Cloud",
+          "state": "MN",
+          "lat": 45.5519,
+          "lng": -94.1169
+        }
+      ]
+    },
+    {
+      "name": "Pick-A-Part VA",
+      "status": "candidate",
+      "platform": "unknown (Cloudflare TLS-fingerprint challenge)",
+      "inventory_url": "https://pickapartva.com/",
+      "api": {
+        "endpoint": null,
+        "notes": "Virginia self-service yard. Cloudflare's TLS-fingerprint challenge blocks our plain-requests fetch layer entirely (challenge page on every route). PARKED 2026-10-17: would need a TLS-impersonating client or browser session, neither of which fits the current fetch conventions. Revisit if their WAF posture changes."
+      },
+      "update_freshness": "unknown",
+      "robots": "unreachable past the challenge",
+      "tos_flags": "unknown",
+      "locations": [
+        {
+          "name": "Pick-A-Part VA",
+          "city": "",
+          "state": "VA"
+        }
+      ]
     }
   ]
 }

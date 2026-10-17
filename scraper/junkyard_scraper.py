@@ -7232,6 +7232,1182 @@ def refresh_upullitne_pricing_file() -> Path:
     return path
 
 
+# Rupert's U-Pull-It (rupertsupullit.com) — single yard, Fredericksburg VA.
+# First mainland-Virginia yard (user-requested via Reddit, Northern VA,
+# 2026-10-16). WordPress running the "yardconnect-pro" plugin (owned by M&M
+# Auto Parts). GET /search-our-inventory/?make=all&... server-renders the
+# ENTIRE inventory as one table (~830 rows, ~6.7 MB): Make, Model, Year, Body
+# Style, Engine, Yard Row, Date Set (MM/DD/YY). Each row's thumbnail <img>
+# carries a unique data-stock-number (the id basis). CAVEAT: the all-makes
+# query takes ~35-45s server-side — timeout=120 with one retry. robots.txt:
+# Crawl-Delay 3, no disallows; one request per scan. Price list at
+# /parts-list/ (~470 parts: name, price, core, labor-ignored). Address:
+# 11000 Houser Dr, Fredericksburg VA 22408 (Nominatim resolves the 22408
+# centroid; Houser Dr itself is not in OSM).
+RUPERTS_INVENTORY_URL = ("https://rupertsupullit.com/search-our-inventory/"
+                         "?make=all&model=all&year_start=1963&year_end=2026")
+RUPERTS_YARD = {"name": "Rupert's U-Pull-It - Fredericksburg", "city": "Fredericksburg",
+                "state": "VA", "lat": 38.2453, "lng": -77.4653}
+
+_RUPERTS_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+_RUPERTS_STOCK_RE = re.compile(r'data-stock-number="([^"]+)"')
+
+
+def fetch_ruperts_inventory() -> list[dict]:
+    """Fetch Rupert's U-Pull-It inventory (one slow server-rendered GET)."""
+    import html as html_mod
+    page = None
+    for attempt in (1, 2):  # the ~40s query occasionally times out — one retry
+        try:
+            r = requests.get(RUPERTS_INVENTORY_URL,
+                             headers={**HEADERS, "Accept": "text/html"}, timeout=120)
+            r.raise_for_status()
+            if "data-stock-number" in r.text:
+                page = r.text
+                break
+            print(f"  [Rupert's] attempt {attempt} returned page without inventory "
+                  f"({len(r.content)} bytes)", file=sys.stderr)
+        except Exception as e:
+            print(f"  [Rupert's] attempt {attempt} failed: {e}", file=sys.stderr)
+        time.sleep(5)
+    if page is None:
+        print("  [Rupert's] inventory unreachable — skipping", file=sys.stderr)
+        return []
+    _indep_cache_raw("ruperts_inventory.html", page.encode())
+
+    vehicles: list[dict] = []
+    for block in _RUPERTS_ROW_RE.findall(page):
+        cells = _FENIX_TD_RE.findall(block)
+        if len(cells) < 8:
+            continue
+        sm = _RUPERTS_STOCK_RE.search(cells[0])
+        if not sm:
+            continue  # header or non-vehicle row
+        stock = sm.group(1).strip()
+        make, model, year_s, _body, _engine, row_n, date_raw = [
+            html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip() for c in cells[1:8]]
+        if not make or not model or not stock:
+            continue
+        date_iso = ""
+        dm = re.match(r"(\d{2})/(\d{2})/(\d{2})$", date_raw)
+        if dm:
+            date_iso = f"20{dm.group(3)}-{dm.group(1)}-{dm.group(2)}"
+        try:
+            year_i = int(year_s)
+        except ValueError:
+            year_i = 0
+        vehicles.append({
+            "id": f"ruperts-{stock.lower()}",
+            "vin": "",
+            "year": year_i,
+            "make": _utpap_format_label(make),
+            "model": _utpap_format_label(model),
+            "row": row_n,
+            "dateAdded": date_iso,
+            "_location": RUPERTS_YARD["name"],
+            "_city": RUPERTS_YARD["city"],
+            "_state": RUPERTS_YARD["state"],
+            "_lat": RUPERTS_YARD["lat"],
+            "_lng": RUPERTS_YARD["lng"],
+            "_source": "ruperts",
+        })
+    seen: set[str] = set()
+    unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Rupert's] {len(unique)} vehicles", file=sys.stderr)
+    return unique
+
+
+# Rupert's publishes one yard-wide price list at /parts-list/ — a
+# server-rendered 4-column table (Part Name, Price, Core, Labor; labor is the
+# we-pull-it charge and is ignored). Harrys-style output shape.
+RUPERTS_PRICE_URL = "https://rupertsupullit.com/parts-list/"
+_RUPERTS_PRICE_ROW_RE = re.compile(
+    r"<tr[^>]*>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>"
+    r"\s*<td[^>]*>\s*(?:\$\s*([\d.,]+))?\s*</td>",
+    re.S,
+)
+
+
+def refresh_ruperts_pricing_file() -> Path:
+    """Refresh Rupert's U-Pull-It price list -> ruperts_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "ruperts_pricing.json"
+    try:
+        r = requests.get(RUPERTS_PRICE_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Rupert's pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for name_html, price, core in _RUPERTS_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(re.sub(r"<[^>]+>", "", name_html)).strip()
+        if not name or name.lower() == "part name":
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Rupert's pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Rupert's pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# Pull-N-Save (pullnsave.com) — 8-yard chain: Salt Lake City + Springville UT,
+# Phoenix North/South + Glendale + Gilbert + Tucson AZ, Riverside CA. Biggest
+# single-chain metro win to date (Phoenix ×4). Same "gm_vehicle_search" WP
+# plugin family as U-Pull-R, but getVehicles returns an HTML footable instead
+# of JSON: img, Year, Model, Date Received (ISO in data-value), Row, Store
+# (display name), Color, Stock#, VIN. action=getMakes returns <option> HTML.
+# One POST per make with store=0 (all stores). robots.txt mandates
+# Crawl-delay: 10 — honored via PNS_DELAY_SEC, so a full scan is ~45 requests
+# x 10s ≈ 8 min (the scan workflow has no job timeout; default 6h). Chain-wide
+# price list at /parts-pricing/ (~810 unique parts). Store coords geocoded
+# once via Nominatim (YARD_COORDS convention); vehicle photos at
+# app.pullnsaveapp.com are ignored (no-photos policy).
+PNS_AJAX = "https://pullnsave.com/wp-admin/admin-ajax.php"
+PNS_DELAY_SEC = 10.0  # robots.txt Crawl-delay: 10 — do not lower
+PNS_HEADERS = {
+    **HEADERS,
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Referer": "https://www.pullnsave.com/inventory-search/",
+    "Origin": "https://www.pullnsave.com",
+}
+PNS_STORES = {  # keyed by the vehicle table's Store display name (== getStores StoreName)
+    "Salt Lake City": {"name": "Pull-N-Save - Salt Lake City", "city": "Salt Lake City",
+                       "state": "UT", "lat": 40.7260, "lng": -112.0343},
+    "Springville": {"name": "Pull-N-Save - Springville", "city": "Springville",
+                    "state": "UT", "lat": 40.1445, "lng": -111.6447},
+    "Phoenix - North": {"name": "Pull-N-Save - Phoenix North", "city": "Phoenix",
+                        "state": "AZ", "lat": 33.4451, "lng": -112.1207},
+    "Phoenix - South": {"name": "Pull-N-Save - Phoenix South", "city": "Phoenix",
+                        "state": "AZ", "lat": 33.4432, "lng": -112.1195},
+    "Glendale": {"name": "Pull-N-Save - Glendale", "city": "Glendale",
+                 "state": "AZ", "lat": 33.5521, "lng": -112.2065},
+    "Gilbert": {"name": "Pull-N-Save - Gilbert", "city": "Gilbert",
+                "state": "AZ", "lat": 33.3613, "lng": -111.8052},
+    "Tucson": {"name": "Pull-N-Save - Tucson", "city": "Tucson",
+               "state": "AZ", "lat": 32.1341, "lng": -110.8529},
+    "Riverside": {"name": "Pull-N-Save - Riverside", "city": "Riverside",
+                  "state": "CA", "lat": 33.9902, "lng": -117.3533},
+}
+_PNS_OPTION_RE = re.compile(r"<option value='([^']+)'")
+_PNS_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+_PNS_DATE_RE = re.compile(r"data-value='(\d{4}-\d{2}-\d{2})'")
+
+
+def fetch_pns_inventory() -> list[dict]:
+    """Fetch Pull-N-Save's 8-yard inventory (one getVehicles POST per make,
+    10s apart per their robots.txt crawl-delay — ~8 min per scan)."""
+    import html as html_mod
+    session = requests.Session()
+    try:
+        r = session.post(PNS_AJAX, data={"action": "getMakes"}, headers=PNS_HEADERS,
+                         timeout=60)
+        r.raise_for_status()
+        makes = [m for m in _PNS_OPTION_RE.findall(r.text) if m != "0"]
+    except Exception as e:
+        print(f"  [Pull-N-Save] getMakes failed: {e}", file=sys.stderr)
+        return []
+    if not makes:
+        print("  [Pull-N-Save] getMakes returned no makes — site layout changed?",
+              file=sys.stderr)
+        return []
+
+    all_vehicles: list[dict] = []
+    unknown_stores: set[str] = set()
+    for make_name in makes:
+        time.sleep(PNS_DELAY_SEC)
+        try:
+            r = session.post(PNS_AJAX,
+                             data={"action": "getVehicles", "makes": make_name,
+                                   "models": "0", "store": "0"},
+                             headers=PNS_HEADERS, timeout=90)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"  [Pull-N-Save] make {make_name!r} fetch failed: {e}", file=sys.stderr)
+            continue
+        _indep_cache_raw(f"pns_{re.sub(r'[^A-Za-z0-9]+', '_', make_name)}.html", r.content)
+        for block in _PNS_ROW_RE.findall(r.text):
+            raw_cells = _FENIX_TD_RE.findall(block)
+            if len(raw_cells) < 9:
+                continue
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in raw_cells]
+            _img, year_s, model_s, _date_txt, row_n, store_s, color, stock, vin = cells[:9]
+            if not stock or not model_s:
+                continue
+            store = PNS_STORES.get(store_s)
+            if store is None:
+                unknown_stores.add(store_s or "?")
+                continue
+            # data-value sits on the date <td>'s tag (not in the cell text),
+            # so search the whole row block — each row carries exactly one.
+            dm = _PNS_DATE_RE.search(block)
+            date_iso = dm.group(1) if dm else ""
+            try:
+                year_i = int(year_s)
+            except ValueError:
+                year_i = 0
+            vin = vin.strip().upper()
+            color = color.strip().title()
+            all_vehicles.append({
+                "id": f"pns-{stock.lower()}",
+                "vin": vin if len(vin) == 17 else "",
+                "year": year_i,
+                "make": _utpap_format_label(make_name),
+                "model": _utpap_format_label(model_s),
+                "row": row_n,
+                "dateAdded": date_iso,
+                "_color": color,
+                "_location": store["name"],
+                "_city": store["city"],
+                "_state": store["state"],
+                "_lat": store["lat"],
+                "_lng": store["lng"],
+                "_source": "pns",
+            })
+    if unknown_stores:
+        print(f"  [Pull-N-Save] skipped rows from unmapped store(s): "
+              f"{sorted(unknown_stores)} — update PNS_STORES/registry", file=sys.stderr)
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Pull-N-Save] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
+# Pull-N-Save publishes one chain-wide price list at /parts-pricing/ — a huge
+# (~6 MB) server-rendered table repeated per store tab; rows are
+# (description, long name, type, item cost, enviro fee, core, warranty,
+# total). We keep description + item cost + core (first occurrence wins —
+# prices are identical across the repeats), harrys-style shape.
+PNS_PRICE_URL = "https://www.pullnsave.com/parts-pricing/"
+
+
+def refresh_pns_pricing_file() -> Path:
+    """Refresh Pull-N-Save's chain-wide price list -> pns_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "pns_pricing.json"
+    try:
+        r = requests.get(PNS_PRICE_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=120)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Pull-N-Save pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for block in _PNS_ROW_RE.findall(page):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 8 or not cells[0] or "$" not in cells[3]:
+            continue
+        name = cells[0]
+        try:
+            price_f = float(cells[3].replace("$", "").replace(",", ""))
+            core_f = float(cells[5].replace("$", "").replace(",", ""))
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Pull-N-Save pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Pull-N-Save pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# Parts Galore (parts-galore.com) — Detroit MI. First Michigan self-serve
+# metro yard besides Fenix Belleville. The homepage embeds the ENTIRE
+# inventory server-side as <table id="alldata"> (~1,050 rows; client JS only
+# filters it): Year, Make, Model, VIN, Color, Yard Date (ISO), Row. One GET
+# per scan. The table has no location column, so this ships as ONE yard even
+# though Parts Galore operates multiple Detroit locations (noted in the
+# registry) — main address 11360 E 8 Mile Rd. No stock number; the VIN (not
+# always 17-char on pre-1981 cars) is the id basis, falling back to a hash of
+# the identifying fields, with ordinal suffixes for exact dupes (Indy
+# convention). Price list at /parts-price-list/ (~520 parts). robots: none.
+PG_HOME_URL = "https://parts-galore.com/"
+PG_YARD = {"name": "Parts Galore - Detroit", "city": "Detroit",
+           "state": "MI", "lat": 42.4486, "lng": -83.0088}
+_PG_TABLE_RE = re.compile(r'<table[^>]*id="alldata"[^>]*>(.*?)</table>', re.S)
+_PG_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+
+
+def fetch_partsgalore_inventory() -> list[dict]:
+    """Fetch Parts Galore's inventory (embedded in the homepage, one GET)."""
+    import html as html_mod
+    try:
+        r = requests.get(PG_HOME_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Parts Galore] fetch failed: {e}", file=sys.stderr)
+        return []
+    m = _PG_TABLE_RE.search(page)
+    if not m:
+        print("  [Parts Galore] table#alldata not found — site layout changed?",
+              file=sys.stderr)
+        return []
+    _indep_cache_raw("partsgalore_home.html", page.encode())
+
+    vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    for block in _PG_ROW_RE.findall(m.group(1)):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 7:
+            continue
+        year_s, make, model, vin, color, date_raw, row_n = cells[:7]
+        if not make or not model:
+            continue
+        try:
+            year_i = int(year_s)
+        except ValueError:
+            year_i = 0
+        vin = vin.strip().upper()
+        date_iso = date_raw if re.match(r"\d{4}-\d{2}-\d{2}$", date_raw) else ""
+        if vin:
+            base = vin.lower()
+        else:
+            base = hashlib.sha1(
+                f"{year_s}|{make}|{model}|{color}|{row_n}|{date_iso}".lower().encode()
+            ).hexdigest()[:12]
+        dupes[base] = dupes.get(base, 0) + 1
+        vehicles.append({
+            "id": f"pg-{base}" if dupes[base] == 1 else f"pg-{base}-{dupes[base]}",
+            "vin": vin if len(vin) == 17 else "",
+            "year": year_i,
+            "make": _utpap_format_label(make),
+            "model": _utpap_format_label(model),
+            "row": row_n,
+            "dateAdded": date_iso,
+            "_color": color.title(),
+            "_location": PG_YARD["name"],
+            "_city": PG_YARD["city"],
+            "_state": PG_YARD["state"],
+            "_lat": PG_YARD["lat"],
+            "_lng": PG_YARD["lng"],
+            "_source": "partsgalore",
+        })
+    print(f"  [Parts Galore] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
+# Parts Galore publishes one yard-wide price list at /parts-price-list/ —
+# a 3-column table (description, price with 45-day exchange, core).
+PG_PRICE_URL = "https://parts-galore.com/parts-price-list/"
+_PG_PRICE_ROW_RE = re.compile(
+    r"<tr[^>]*>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>"
+    r"\s*<td[^>]*>\s*(?:\$?\s*([\d.,]+))?\s*</td>",
+    re.S,
+)
+
+
+def refresh_partsgalore_pricing_file() -> Path:
+    """Refresh Parts Galore's price list -> partsgalore_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "partsgalore_pricing.json"
+    try:
+        r = requests.get(PG_PRICE_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Parts Galore pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for name_html, price, core in _PG_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(re.sub(r"<[^>]+>", "", name_html)).strip()
+        if not name or name.lower().startswith("parts description"):
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Parts Galore pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Parts Galore pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# Chesterfield Auto Parts (chesterfieldauto.com) — 3-yard chain, Richmond
+# metro VA: Richmond (5111 Old Midlothian Tpke), Southside (12910 Genito Rd,
+# Midlothian) and Fort Lee (4855 Puddledock Rd, Prince George). ASP.NET site:
+# the full search needs a __RequestVerificationToken + cookie scraped per
+# make page, then one POST per make×model (BasicSearch.ModelId is REQUIRED —
+# 0 returns nothing), ~74 makes / ~900 models at 2s pacing ≈ 80 min measured. That's
+# too slow for every-6h scans, so this adapter is HYBRID:
+#   - normal scans GET /newest-cars (no token; ~120 newest arrivals across
+#     all 3 stores) and merge into the previous scan's rows persisted in
+#     docs/data/chesterfield_inventory.json — the scan workflow already
+#     commits docs/data/ every run, so the cache travels with the repo and CI
+#     never needs a cold-start full crawl;
+#   - a FULL make×model refresh runs when JUNKYARD_CHESTERFIELD_FULL=1, when
+#     the cache is missing/unreadable, or when the cache's last_full stamp is
+#     older than 6.5 days (≈ weekly on the every-6h schedule). Cars crushed
+#     mid-week linger in the data until that weekly refresh — acceptable
+#     staleness, documented in the registry.
+# Results columns: Store, Make, Model, Year, Color, Body, Engine, Yard Row,
+# Set date (M/D/YYYY). No VIN or stock number — ids are stable hashes of the
+# identifying fields with ordinal dupe suffixes (Indy convention). Chain-wide
+# price list at /price-list (~540 parts). robots.txt: all allowed except
+# /cgi-bin/.
+CHESTERFIELD_BASE = "https://chesterfieldauto.com"
+CHESTERFIELD_SEARCH_URL = CHESTERFIELD_BASE + "/search-our-inventory-by-location"
+CHESTERFIELD_NEWEST_URL = CHESTERFIELD_BASE + "/newest-cars"
+CHESTERFIELD_CACHE_FILE = DATA_DIR / "chesterfield_inventory.json"
+CHESTERFIELD_FULL_EVERY_SEC = 6.5 * 86400
+CHESTERFIELD_DELAY_SEC = 2.0
+CHESTERFIELD_STORES = {  # keyed by the results table's Store column
+    "Richmond": {"name": "Chesterfield Auto Parts - Richmond", "city": "Richmond",
+                 "state": "VA", "lat": 37.5067, "lng": -77.4912},
+    "Southside": {"name": "Chesterfield Auto Parts - Southside", "city": "Midlothian",
+                  "state": "VA", "lat": 37.4367, "lng": -77.6046},
+    "Fort Lee": {"name": "Chesterfield Auto Parts - Fort Lee", "city": "Prince George",
+                 "state": "VA", "lat": 37.2465, "lng": -77.3674},
+}
+_CHESTERFIELD_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+_CHESTERFIELD_TOKEN_RE = re.compile(
+    r'name="__RequestVerificationToken"[^>]*value="([^"]+)"')
+_CHESTERFIELD_MAKE_RE = re.compile(
+    r'name="SelectedMake"[^>]*>(.*?)</select>', re.S)
+_CHESTERFIELD_MODEL_RE = re.compile(
+    r'(?:name="BasicSearch\.ModelId"|id="selected-model")[^>]*>(.*?)</select>', re.S)
+_CHESTERFIELD_OPTION_RE = re.compile(r'<option[^>]*value="(\d+)"[^>]*>\s*([^<]+)')
+
+
+def _chesterfield_parse_rows(page: str) -> list[dict]:
+    """Parse the shared results-table shape (newest-cars AND search results):
+    Pics, Store, Make, Model, Year, Color, Body, Engine, Yard Row, Set."""
+    import html as html_mod
+    out = []
+    unknown_stores: set[str] = set()
+    for block in _CHESTERFIELD_ROW_RE.findall(page):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 10:
+            continue
+        _pics, store_s, make, model, year_s, color, body, engine, row_n, date_raw = cells[:10]
+        if not make or not model or store_s not in CHESTERFIELD_STORES:
+            if store_s and make and store_s not in CHESTERFIELD_STORES:
+                unknown_stores.add(store_s)
+            continue
+        store = CHESTERFIELD_STORES[store_s]
+        date_iso = ""
+        dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})$", date_raw)
+        if dm:
+            date_iso = f"{dm.group(3)}-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}"
+        try:
+            year_i = int(year_s)
+        except ValueError:
+            year_i = 0
+        base = (f"{store_s}|{make}|{model}|{year_s}|{color}|{body}|{engine}"
+                f"|{row_n}|{date_iso}").lower()
+        out.append({
+            "_hash": hashlib.sha1(base.encode()).hexdigest()[:12],
+            "vin": "",
+            "year": year_i,
+            "make": _utpap_format_label(make),
+            "model": _utpap_format_label(model),
+            "row": row_n,
+            "dateAdded": date_iso,
+            "_color": color.title(),
+            "_location": store["name"],
+            "_city": store["city"],
+            "_state": store["state"],
+            "_lat": store["lat"],
+            "_lng": store["lng"],
+            "_source": "chesterfield",
+        })
+    if unknown_stores:
+        print(f"  [Chesterfield] skipped rows from unmapped store(s): "
+              f"{sorted(unknown_stores)} — update CHESTERFIELD_STORES/registry",
+              file=sys.stderr)
+    # Stable ids: hash of identifying fields + ordinal suffix for exact dupes.
+    dupes: dict[str, int] = {}
+    for v in out:
+        h = v.pop("_hash")
+        dupes[h] = dupes.get(h, 0) + 1
+        v["id"] = f"chesterfield-{h}" if dupes[h] == 1 else f"chesterfield-{h}-{dupes[h]}"
+    return out
+
+
+def _chesterfield_full_scan() -> list[dict]:
+    """Weekly full crawl: per-make GET (token + server-rendered model list),
+    then one search POST per make×model, 2s apart (~80 min measured)."""
+    session = requests.Session()
+    try:
+        r = session.get(CHESTERFIELD_SEARCH_URL,
+                        headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+        r.raise_for_status()
+        mk = _CHESTERFIELD_MAKE_RE.search(r.text)
+        makes = [(mid, name.strip()) for mid, name in
+                 _CHESTERFIELD_OPTION_RE.findall(mk.group(1))] if mk else []
+        makes = [(mid, name) for mid, name in makes if mid != "0"]
+    except Exception as e:
+        print(f"  [Chesterfield] make-list fetch failed: {e}", file=sys.stderr)
+        return []
+    if not makes:
+        print("  [Chesterfield] no makes parsed — site layout changed?", file=sys.stderr)
+        return []
+    rows: list[dict] = []
+    for make_id, make_name in makes:
+        time.sleep(CHESTERFIELD_DELAY_SEC)
+        try:
+            r = session.get(CHESTERFIELD_SEARCH_URL,
+                            params={"SelectedMake.Id": make_id},
+                            headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+            r.raise_for_status()
+            tok = _CHESTERFIELD_TOKEN_RE.search(r.text)
+            mm = _CHESTERFIELD_MODEL_RE.search(r.text)
+            models = [(mid, name.strip()) for mid, name in
+                      _CHESTERFIELD_OPTION_RE.findall(mm.group(1))] if mm else []
+            models = [(mid, name) for mid, name in models if mid != "0"]
+        except Exception as e:
+            print(f"  [Chesterfield] make {make_name!r} page failed: {e}", file=sys.stderr)
+            continue
+        if not tok or not models:
+            continue
+        for model_id, _model_name in models:
+            time.sleep(CHESTERFIELD_DELAY_SEC)
+            try:
+                r = session.post(
+                    CHESTERFIELD_SEARCH_URL,
+                    data={"__RequestVerificationToken": tok.group(1),
+                          "SelectedMake.Id": make_id,
+                          "BasicSearch.ModelId": model_id,
+                          "BasicSearch.BeginYear": "1900",
+                          "BasicSearch.EndYear": "2030"},
+                    headers={**HEADERS, "Accept": "text/html",
+                             "Referer": CHESTERFIELD_SEARCH_URL},
+                    timeout=60,
+                )
+                r.raise_for_status()
+                rows.extend(_chesterfield_parse_rows(r.text))
+            except Exception as e:
+                print(f"  [Chesterfield] {make_name} model {model_id} search failed: {e}",
+                      file=sys.stderr)
+    return rows
+
+
+def fetch_chesterfield_inventory() -> list[dict]:
+    """Fetch Chesterfield Auto Parts (3 Richmond-metro yards) — hybrid: weekly
+    full make×model crawl, otherwise /newest-cars merged with the persisted
+    previous result set (docs/data/chesterfield_inventory.json)."""
+    cache: dict = {}
+    try:
+        cache = json.loads(CHESTERFIELD_CACHE_FILE.read_text())
+    except (OSError, ValueError):
+        pass
+    cached_vehicles = cache.get("vehicles") or []
+    last_full = cache.get("last_full") or ""
+    try:
+        last_full_age = time.time() - datetime.fromisoformat(last_full).timestamp()
+    except ValueError:
+        last_full_age = float("inf")
+    force = os.environ.get("JUNKYARD_CHESTERFIELD_FULL", "").strip().lower() in (
+        "1", "true", "yes")
+    do_full = force or not cached_vehicles or last_full_age > CHESTERFIELD_FULL_EVERY_SEC
+
+    if do_full:
+        print("  [Chesterfield] running FULL make×model crawl (~80 min, weekly)",
+              file=sys.stderr)
+        vehicles = _chesterfield_full_scan()
+        if not vehicles:  # upstream hiccup — keep last good data, retry next scan
+            print("  [Chesterfield] full crawl returned nothing — keeping cached rows",
+                  file=sys.stderr)
+            vehicles = list(cached_vehicles)
+        else:
+            cache = {"last_full": datetime.now(timezone.utc).isoformat(),
+                     "vehicles": vehicles}
+    else:
+        try:
+            r = requests.get(CHESTERFIELD_NEWEST_URL,
+                             headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+            r.raise_for_status()
+            newest = _chesterfield_parse_rows(r.text)
+        except Exception as e:
+            print(f"  [Chesterfield] newest-cars fetch failed: {e}", file=sys.stderr)
+            newest = []
+        merged = {v["id"]: v for v in cached_vehicles}
+        for v in newest:
+            merged[v["id"]] = v
+        vehicles = list(merged.values())
+        cache["vehicles"] = vehicles
+        print(f"  [Chesterfield] incremental: {len(newest)} newest arrivals merged "
+              f"into {len(cached_vehicles)} cached rows", file=sys.stderr)
+    try:
+        CHESTERFIELD_CACHE_FILE.write_text(json.dumps(cache, separators=(",", ":")))
+    except OSError as e:
+        print(f"  [Chesterfield] cache write failed: {e}", file=sys.stderr)
+    print(f"  [Chesterfield] {len(vehicles)} vehicles across "
+          f"{len({v['_location'] for v in vehicles})} yards", file=sys.stderr)
+    return vehicles
+
+
+# Chesterfield publishes one chain-wide price list at /price-list — a clean
+# 3-column table (Part Name, Price, Core). Harrys-style output shape.
+CHESTERFIELD_PRICE_URL = CHESTERFIELD_BASE + "/price-list"
+_CHESTERFIELD_PRICE_ROW_RE = re.compile(
+    r"<tr[^>]*>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>"
+    r"\s*<td[^>]*>\s*(?:\$\s*([\d.,]+))?\s*</td>",
+    re.S,
+)
+
+
+def refresh_chesterfield_pricing_file() -> Path:
+    """Refresh Chesterfield Auto Parts' price list -> chesterfield_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "chesterfield_pricing.json"
+    try:
+        r = requests.get(CHESTERFIELD_PRICE_URL,
+                         headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Chesterfield pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for name_html, price, core in _CHESTERFIELD_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(re.sub(r"<[^>]+>", "", name_html)).strip()
+        if not name or name.lower() == "part name":
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Chesterfield pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Chesterfield pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# Ace Pick-A-Part (acepickapart.com) — single yard, Jacksonville FL. FIRST
+# FLORIDA COVERAGE. WordPress (jupiter theme); the search page server-renders
+# the make list (select#search_make) and an unauthenticated POST to the
+# theme's ajax.php per make returns an HTML table: Image, Year, Make, Model,
+# Exterior, Interior, Engine, Trans, Stock #, Row, Date In Yard (M/D/YYYY).
+# An empty make returns nothing, so the scan is one POST per make (~42, 2s
+# apart). Stock numbers ("F271121") are the id basis. Behind Cloudflare but
+# no challenge observed from either residential or datacenter egress — if CI
+# gets challenged the adapter logs and skips (snapshot fallback can come
+# later, Indy-style). Yard-wide price list at /prices/ (~2,100 parts).
+# robots.txt: allow all. Address: 9152 N Main St (Nominatim resolves the
+# 32218 zip centroid; the exact parcel is not in OSM).
+ACE_SEARCH_URL = "https://acepickapart.com/search-inventory/"
+ACE_AJAX_URL = "https://www.acepickapart.com/wp-content/themes/jupiter/ajax.php"
+ACE_DELAY_SEC = 2.0
+ACE_YARD = {"name": "Ace Pick-A-Part - Jacksonville", "city": "Jacksonville",
+            "state": "FL", "lat": 30.4560, "lng": -81.6424}
+_ACE_MAKES_RE = re.compile(r'<select[^>]*id="search_make"[^>]*>(.*?)</select>', re.S)
+_ACE_OPTION_RE = re.compile(r'<option value="([^"]+)"')
+_ACE_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+
+
+def fetch_ace_inventory() -> list[dict]:
+    """Fetch Ace Pick-A-Part's inventory (one ajax.php POST per make)."""
+    import html as html_mod
+    try:
+        r = requests.get(ACE_SEARCH_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        m = _ACE_MAKES_RE.search(r.text)
+        makes = _ACE_OPTION_RE.findall(m.group(1)) if m else []
+    except Exception as e:
+        print(f"  [Ace] make-list fetch failed: {e}", file=sys.stderr)
+        return []
+    if not makes:
+        print("  [Ace] no makes parsed — site layout changed (or Cloudflare challenge)?",
+              file=sys.stderr)
+        return []
+
+    all_vehicles: list[dict] = []
+    for make_name in makes:
+        time.sleep(ACE_DELAY_SEC)
+        try:
+            r = requests.post(ACE_AJAX_URL,
+                              params={"inner_search": "true", "make": make_name},
+                              headers={**HEADERS, "Accept": "text/html",
+                                       "Referer": ACE_SEARCH_URL},
+                              timeout=60)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"  [Ace] make {make_name!r} fetch failed: {e}", file=sys.stderr)
+            continue
+        for block in _ACE_ROW_RE.findall(r.text):
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in _FENIX_TD_RE.findall(block)]
+            if len(cells) < 10:
+                continue
+            # The image cell nests extra markup; the data is the LAST 10 cells.
+            year_s, make, model, color, _interior, _engine, _trans, stock, row_n, date_raw = cells[-10:]
+            if not stock or not make or not model:
+                continue
+            if not year_s.isdigit():  # the header row uses <td class="head-td">
+                continue
+            date_iso = ""
+            dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})$", date_raw)
+            if dm:
+                date_iso = f"{dm.group(3)}-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}"
+            try:
+                year_i = int(year_s)
+            except ValueError:
+                year_i = 0
+            all_vehicles.append({
+                "id": f"ace-{stock.lower()}",
+                "vin": "",
+                "year": year_i,
+                "make": _utpap_format_label(make),
+                "model": _utpap_format_label(model),
+                "row": row_n,
+                "dateAdded": date_iso,
+                "_color": color.title(),
+                "_location": ACE_YARD["name"],
+                "_city": ACE_YARD["city"],
+                "_state": ACE_YARD["state"],
+                "_lat": ACE_YARD["lat"],
+                "_lng": ACE_YARD["lng"],
+                "_source": "ace",
+            })
+    _indep_cache_raw("ace_last_make.html", r.content if makes else b"")
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Ace] {len(unique)} vehicles", file=sys.stderr)
+    return unique
+
+
+# Ace publishes one yard-wide price list at /prices/ — a 3-column table
+# (Description, Price, Core Charge), repeated for mobile/desktop variants
+# (first occurrence wins). Harrys-style output shape.
+ACE_PRICE_URL = "https://acepickapart.com/prices/"
+_ACE_PRICE_ROW_RE = re.compile(
+    r"<tr[^>]*>\s*(?:<td[^>]*>\s*</td>\s*)?<td[^>]*>(.*?)</td>\s*"
+    r"<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>\s*<td[^>]*>\s*(?:\$\s*([\d.,]+))?\s*</td>",
+    re.S,
+)
+
+
+def refresh_ace_pricing_file() -> Path:
+    """Refresh Ace Pick-A-Part's price list -> ace_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "ace_pricing.json"
+    try:
+        r = requests.get(ACE_PRICE_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Ace pricing] fetch failed: {e} — keeping existing file", file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for name_html, price, core in _ACE_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(re.sub(r"<[^>]+>", "", name_html)).strip()
+        if not name or name.lower() == "description":
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Ace pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Ace pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# Sturtevant Auto (inventory.sturtevantauto.com) — single yard, Sturtevant WI
+# (Milwaukee metro; second WI coverage). Dedicated ASP.NET inventory app on
+# the CRUSH platform (/Home/* routes): the landing page server-renders the
+# make list and a tokenless POST per make (VehicleMake=X&VehicleModel=)
+# returns the full table: Image, Year, Make, Model, Color, Reference
+# (engine), Stock # ("STK048287"), Row, Arrival Date (MM/DD/YYYY). ~46 makes
+# at 2s pacing. Price list at /Home/PartPrices (~168 parts; the you-pull-it
+# column). No robots.txt (404) — default pacing conventions apply.
+# Coordinates: Nominatim resolves the Sturtevant village centroid (2145 NE
+# Frontage Rd itself is not in OSM).
+STURTEVANT_URL = "https://inventory.sturtevantauto.com/"
+STURTEVANT_DELAY_SEC = 2.0
+STURTEVANT_YARD = {"name": "Sturtevant Auto - Sturtevant", "city": "Sturtevant",
+                   "state": "WI", "lat": 42.6981, "lng": -87.8945}
+_STURTEVANT_MAKES_RE = re.compile(r"<select[^>]*>(.*?)</select>", re.S)
+_STURTEVANT_OPTION_RE = re.compile(r'<option value="([^"]+)"')
+_STURTEVANT_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+
+
+def fetch_sturtevant_inventory() -> list[dict]:
+    """Fetch Sturtevant Auto's inventory (one tokenless POST per make)."""
+    import html as html_mod
+    try:
+        r = requests.get(STURTEVANT_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        m = _STURTEVANT_MAKES_RE.search(r.text)
+        makes = [v for v in (_STURTEVANT_OPTION_RE.findall(m.group(1)) if m else []) if v]
+    except Exception as e:
+        print(f"  [Sturtevant] make-list fetch failed: {e}", file=sys.stderr)
+        return []
+    if not makes:
+        print("  [Sturtevant] no makes parsed — site layout changed?", file=sys.stderr)
+        return []
+
+    all_vehicles: list[dict] = []
+    for make_name in makes:
+        time.sleep(STURTEVANT_DELAY_SEC)
+        try:
+            r = requests.post(STURTEVANT_URL,
+                              data={"VehicleMake": make_name, "VehicleModel": ""},
+                              headers={**HEADERS, "Accept": "text/html",
+                                       "Content-Type": "application/x-www-form-urlencoded",
+                                       "Referer": STURTEVANT_URL},
+                              timeout=60)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"  [Sturtevant] make {make_name!r} fetch failed: {e}", file=sys.stderr)
+            continue
+        for block in _STURTEVANT_ROW_RE.findall(r.text):
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in _FENIX_TD_RE.findall(block)]
+            if len(cells) < 9:
+                continue
+            _img, year_s, make, model, color, engine, stock, row_n, date_raw = cells[-9:]
+            if not stock or not make or not model:
+                continue
+            date_iso = ""
+            dm = re.match(r"(\d{2})/(\d{2})/(\d{4})$", date_raw)
+            if dm:
+                date_iso = f"{dm.group(3)}-{dm.group(1)}-{dm.group(2)}"
+            try:
+                year_i = int(year_s)
+            except ValueError:
+                year_i = 0
+            all_vehicles.append({
+                "id": f"sturtevant-{stock.lower()}",
+                "vin": "",
+                "year": year_i,
+                "make": _utpap_format_label(make),
+                "model": _utpap_format_label(model),
+                "row": row_n,
+                "dateAdded": date_iso,
+                "_color": color.title(),
+                "_location": STURTEVANT_YARD["name"],
+                "_city": STURTEVANT_YARD["city"],
+                "_state": STURTEVANT_YARD["state"],
+                "_lat": STURTEVANT_YARD["lat"],
+                "_lng": STURTEVANT_YARD["lng"],
+                "_source": "sturtevant",
+            })
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Sturtevant] {len(unique)} vehicles", file=sys.stderr)
+    return unique
+
+
+# Sturtevant publishes a price list at /Home/PartPrices — a 7-column table
+# (PART DESCRIPTION, YOU PULL IT, BASIS, CORE, WE PULL IT, BASIS, CORE). The
+# you-pull-it price + its core are kept. NOTE: the list is ~168 parts, close
+# to the 150-part safety threshold — if they trim the published list the
+# refresh keeps the existing file rather than clobbering it.
+STURTEVANT_PRICE_URL = "https://inventory.sturtevantauto.com/Home/PartPrices"
+_STURTEVANT_PRICE_ROW_RE = re.compile(
+    r"<tr[^>]*>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>"
+    r"\s*<td[^>]*>.*?</td>\s*<td[^>]*>\s*(?:\$\s*([\d.,]+))?\s*</td>",
+    re.S,
+)
+
+
+def refresh_sturtevant_pricing_file() -> Path:
+    """Refresh Sturtevant Auto's price list -> sturtevant_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "sturtevant_pricing.json"
+    try:
+        r = requests.get(STURTEVANT_PRICE_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Sturtevant pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for name_html, price, core in _STURTEVANT_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(re.sub(r"<[^>]+>", "", name_html)).strip()
+        if not name or name.lower() == "part description":
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Sturtevant pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Sturtevant pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# iPull-uPull (ipullupull.com) — 4-yard CA chain: Fresno, Sacramento,
+# Stockton, Pomona. WordPress with a custom "ipullupull-catalog" plugin whose
+# export endpoint returns the ENTIRE chain as one CSV: POST admin-ajax.php
+# action=ipull_export_catalog with an _ajax_nonce scraped from any catalog
+# page's ipullCatalog JS object. Any non-make-filtered slug (we send
+# "inventory") exports everything (~4,100 rows): Stock Number
+# (city-prefixed, unique), Status, Yard Date (ISO), Yard City, Year, Make,
+# Model, Vehicle Row, Color, Vin (98%+ real 17-char). Only
+# Status == "Available" rows are kept (a handful are "Sold (n unsold
+# parts)"). Two requests per scan. No parts price list published (the
+# "Inventory & Pricing" page is the vehicle catalog). robots.txt: Yoast
+# allow-all plus a few page disallows — admin-ajax and /inventory/ are
+# allowed. Coordinates geocoded once via Nominatim (Stockton resolves the
+# 95215 zip centroid; the Frontage Rd parcel is not in OSM).
+IPULL_NONCE_URL = "https://ipullupull.com/inventory-pricing/"
+IPULL_AJAX_URL = "https://ipullupull.com/wp-admin/admin-ajax.php"
+_IPULL_NONCE_RE = re.compile(r'ipullCatalog\s*=\s*\{[^{}]*?"nonce"\s*:\s*"([0-9a-f]+)"')
+IPULL_YARDS = {  # keyed by the CSV's "Yard City" column
+    "FRESNO": {"name": "iPull-uPull - Fresno", "city": "Fresno",
+               "state": "CA", "lat": 36.6852, "lng": -119.7475},
+    "POMONA": {"name": "iPull-uPull - Pomona", "city": "Pomona",
+               "state": "CA", "lat": 34.0556, "lng": -117.7248},
+    "SACRAMENTO": {"name": "iPull-uPull - Sacramento", "city": "Sacramento",
+                   "state": "CA", "lat": 38.4812, "lng": -121.4246},
+    "STOCKTON": {"name": "iPull-uPull - Stockton", "city": "Stockton",
+                 "state": "CA", "lat": 37.9525, "lng": -121.2240},
+}
+
+
+def fetch_ipull_inventory() -> list[dict]:
+    """Fetch iPull-uPull's 4-yard chain inventory (nonce GET + one CSV POST)."""
+    import csv
+    import io
+    try:
+        r = requests.get(IPULL_NONCE_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        m = _IPULL_NONCE_RE.search(r.text)
+        if not m:
+            print("  [iPull-uPull] ipullCatalog nonce not found — site layout changed?",
+                  file=sys.stderr)
+            return []
+        resp = requests.post(
+            IPULL_AJAX_URL,
+            headers={**HEADERS, "Accept": "text/csv,*/*",
+                     "Referer": IPULL_NONCE_URL},
+            data={"action": "ipull_export_catalog", "slug": "inventory",
+                  "type": "inventory", "format": "csv",
+                  "export_action": "download", "_ajax_nonce": m.group(1)},
+            timeout=120,
+        )
+        resp.raise_for_status()
+        if not resp.text.startswith('"Stock Number"'):
+            print(f"  [iPull-uPull] export did not return the CSV "
+                  f"({resp.text[:80]!r})", file=sys.stderr)
+            return []
+    except Exception as e:
+        print(f"  [iPull-uPull] fetch failed: {e}", file=sys.stderr)
+        return []
+    _indep_cache_raw("ipull_inventory.csv", resp.content)
+
+    vehicles: list[dict] = []
+    unknown_yards: set[str] = set()
+    for row in csv.DictReader(io.StringIO(resp.text)):
+        stock = (row.get("Stock Number") or "").strip()
+        make = (row.get("Make") or "").strip()
+        model = (row.get("Model") or "").strip()
+        if not stock or not make or not model:
+            continue
+        if (row.get("Status") or "").strip().lower() != "available":
+            continue
+        yard = IPULL_YARDS.get((row.get("Yard City") or "").strip().upper())
+        if yard is None:
+            unknown_yards.add((row.get("Yard City") or "?").strip())
+            continue
+        date_raw = (row.get("Yard Date") or "").strip()
+        date_iso = date_raw[:10] if re.match(r"\d{4}-\d{2}-\d{2}", date_raw) else ""
+        try:
+            year_i = int(row.get("Year") or 0)
+        except ValueError:
+            year_i = 0
+        vin = (row.get("Vin") or "").strip().upper()
+        vehicles.append({
+            "id": f"ipull-{stock.lower()}",
+            "vin": vin if len(vin) == 17 else "",
+            "year": year_i,
+            "make": _utpap_format_label(make),
+            "model": _utpap_format_label(model),
+            "row": (row.get("Vehicle Row") or "").strip(),
+            "dateAdded": date_iso,
+            "_color": (row.get("Color") or "").strip().title(),
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "ipull",
+        })
+    if unknown_yards:
+        print(f"  [iPull-uPull] skipped rows from unmapped yard(s): "
+              f"{sorted(unknown_yards)}", file=sys.stderr)
+    seen: set[str] = set()
+    unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [iPull-uPull] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
+# St. Cloud U Pull (stccrush.com) — single yard, St. Cloud MN. Found during
+# the 2026-10-17 Minnesota coverage research (first new MN yard beyond
+# U-Pull-R Rosemount/East Bethel). Same CRUSH-platform ASP.NET app family as
+# Sturtevant (/Home/* routes): GET /Home/Inventory server-renders the make
+# list; one multipart POST per make (VehicleMake=X, VehicleModel empty — the
+# form is enctype=multipart/form-data) returns the table: Photo, Year, Make,
+# Model, Color, Reference (engine), Stock # ("STK000031"), Row, Yard Date
+# (MM/DD/YYYY). ~28 makes at 2s pacing. No published price list found on
+# stccrush.com or stcloudupull.com. No robots.txt (404). Address: 2333 12th
+# St SE, St. Cloud MN 56304 (geocoded via Nominatim).
+STCLOUD_URL = "https://stccrush.com/Home/Inventory"
+STCLOUD_DELAY_SEC = 2.0
+STCLOUD_YARD = {"name": "St. Cloud U Pull - St. Cloud", "city": "St. Cloud",
+                "state": "MN", "lat": 45.5519, "lng": -94.1169}
+_STCLOUD_MAKES_RE = re.compile(r"<select[^>]*>(.*?)</select>", re.S)
+_STCLOUD_OPTION_RE = re.compile(r'<option value="([^"]+)"')
+_STCLOUD_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
+
+
+def fetch_stcloud_inventory() -> list[dict]:
+    """Fetch St. Cloud U Pull's inventory (one multipart POST per make)."""
+    import html as html_mod
+    try:
+        r = requests.get(STCLOUD_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        m = _STCLOUD_MAKES_RE.search(r.text)
+        makes = [v for v in (_STCLOUD_OPTION_RE.findall(m.group(1)) if m else []) if v]
+    except Exception as e:
+        print(f"  [St. Cloud] make-list fetch failed: {e}", file=sys.stderr)
+        return []
+    if not makes:
+        print("  [St. Cloud] no makes parsed — site layout changed?", file=sys.stderr)
+        return []
+
+    all_vehicles: list[dict] = []
+    for make_name in makes:
+        time.sleep(STCLOUD_DELAY_SEC)
+        try:
+            r = requests.post(STCLOUD_URL,
+                              files={"VehicleMake": (None, make_name),
+                                     "VehicleModel": (None, "")},
+                              headers={**HEADERS, "Accept": "text/html",
+                                       "Referer": STCLOUD_URL},
+                              timeout=60)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"  [St. Cloud] make {make_name!r} fetch failed: {e}", file=sys.stderr)
+            continue
+        for block in _STCLOUD_ROW_RE.findall(r.text):
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in _FENIX_TD_RE.findall(block)]
+            if len(cells) < 9:
+                continue
+            _photo, year_s, make, model, color, engine, stock, row_n, date_raw = cells[-9:]
+            if not stock or not make or not model:
+                continue
+            date_iso = ""
+            dm = re.match(r"(\d{2})/(\d{2})/(\d{4})$", date_raw)
+            if dm:
+                date_iso = f"{dm.group(3)}-{dm.group(1)}-{dm.group(2)}"
+            try:
+                year_i = int(year_s)
+            except ValueError:
+                year_i = 0
+            all_vehicles.append({
+                "id": f"stcloud-{stock.lower()}",
+                "vin": "",
+                "year": year_i,
+                "make": _utpap_format_label(make),
+                "model": _utpap_format_label(model),
+                "row": row_n,
+                "dateAdded": date_iso,
+                "_color": color.title(),
+                "_location": STCLOUD_YARD["name"],
+                "_city": STCLOUD_YARD["city"],
+                "_state": STCLOUD_YARD["state"],
+                "_lat": STCLOUD_YARD["lat"],
+                "_lng": STCLOUD_YARD["lng"],
+                "_source": "stcloud",
+            })
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [St. Cloud] {len(unique)} vehicles", file=sys.stderr)
+    return unique
+
+
 def fetch_independent_inventory() -> list[dict]:
     """All enabled independent-yard adapters (registry status: adapter-built)."""
     vehicles = fetch_wrenchapart_inventory()
@@ -7245,6 +8421,22 @@ def fetch_independent_inventory() -> list[dict]:
     vehicles += fetch_indyupullit_inventory()
     time.sleep(2)
     vehicles += fetch_upullitne_inventory()
+    time.sleep(2)
+    vehicles += fetch_ruperts_inventory()
+    time.sleep(2)
+    vehicles += fetch_pns_inventory()
+    time.sleep(2)
+    vehicles += fetch_partsgalore_inventory()
+    time.sleep(2)
+    vehicles += fetch_chesterfield_inventory()
+    time.sleep(2)
+    vehicles += fetch_ace_inventory()
+    time.sleep(2)
+    vehicles += fetch_sturtevant_inventory()
+    time.sleep(2)
+    vehicles += fetch_ipull_inventory()
+    time.sleep(2)
+    vehicles += fetch_stcloud_inventory()
     return vehicles
 
 
@@ -8223,7 +9415,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -8243,7 +9435,10 @@ def main():
                refresh_pap_pricing_file, refresh_wap_pricing_file,
                refresh_upullr_pricing_file, refresh_fenix_pricing_file,
                refresh_harrys_pricing_file, refresh_indy_pricing_file,
-               refresh_upullitne_pricing_file)
+               refresh_upullitne_pricing_file, refresh_ruperts_pricing_file,
+               refresh_pns_pricing_file, refresh_partsgalore_pricing_file,
+               refresh_chesterfield_pricing_file, refresh_ace_pricing_file,
+               refresh_sturtevant_pricing_file)
         for fn in fns:
             try:
                 fn()
@@ -8338,7 +9533,7 @@ def main():
 
         indep_vehicles: list[dict] = []
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA)...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud)...", file=sys.stderr)
             indep_vehicles = fetch_independent_inventory()
 
         all_vehicles = (pnp_vehicles + tap_vehicles + utpap_vehicles

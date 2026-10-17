@@ -170,3 +170,83 @@ confirm datacenter egress isn't blocked (Indy's SiteGround lesson).
 Distinct company from the blocked ABC U-Pull-It in Lincoln.
 This fills the Plains hole: previously nearest yards to Des Moines were ~178
 mi (Kansas City).
+
+## 2026-10-17 — Seven-chain onboarding pass (+ Minnesota research)
+
+Largest single onboarding to date: **8 chains / 19 yards** built in one pass
+(all mechanisms pre-verified by the 2026-10-16 feasibility sweep, re-probed
+during the build).
+
+1. **Rupert's U-Pull-It** — Fredericksburg VA (1 yard, ~830 cars). First
+   mainland-VA coverage; user-requested via Reddit (NoVA). WordPress
+   "yardconnect-pro" (M&M Auto Parts). One ~40s server-rendered all-makes GET
+   per scan (timeout=120 + retry); `data-stock-number` on row thumbnails is
+   the id. robots Crawl-Delay 3. Price list `/parts-list/` (472 parts).
+2. **Pull-N-Save** — 8 yards UT/AZ/CA (~9,000 cars!): Salt Lake City,
+   Springville, Phoenix North/South, Glendale, Gilbert, Tucson, Riverside.
+   Same gm_vehicle_search plugin family as U-Pull-R but HTML-footable variant;
+   one getVehicles POST per make, 10s pacing per robots (≈8 min/scan).
+   Biggest metro win of the pass (Phoenix ×4 + first SoCal independents).
+   Chain-wide price list `/parts-pricing/` (809 parts).
+3. **Parts Galore** — Detroit MI (~1,050 cars). Entire inventory embedded in
+   the homepage `table#alldata`; one GET. Ships as ONE yard (no location
+   column; they operate multiple Detroit lots). VIN-based ids. Price list
+   `/parts-price-list/` (474 parts).
+4. **Chesterfield Auto Parts** — 3 Richmond-metro VA yards (Richmond,
+   Southside/Midlothian, Fort Lee/Prince George; ~4,800 cars). ASP.NET
+   token-gated make×model search is ~80 min (measured) — too slow for every-6h scans, so
+   the adapter is HYBRID: normal scans merge the tokenless `/newest-cars`
+   page (~120 arrivals) into the previous result set persisted in
+   `docs/data/chesterfield_inventory.json` (the scan workflow already commits
+   docs/data/, so the cache travels with the repo); a full make×model crawl
+   re-baselines weekly (cache `last_full` > 6.5 days) or on
+   `JUNKYARD_CHESTERFIELD_FULL=1`. Crushed cars linger ≤1 week by design.
+   Chain price list `/price-list` (538 parts).
+5. **Ace Pick-A-Part** — Jacksonville FL (~2,500 cars). FIRST FLORIDA
+   COVERAGE. Theme-level `ajax.php?inner_search=true&make=X` POST per make
+   (~42 makes, 2s pacing). Cloudflare-fronted but no challenge observed —
+   first CI scan will confirm datacenter egress. Price list `/prices/`
+   (586 parts).
+6. **Sturtevant Auto** — Sturtevant WI, Milwaukee metro (~740 cars). CRUSH
+   ASP.NET app; tokenless urlencoded POST per make (~46). Price list
+   `/Home/PartPrices` (168 parts — close to the 150 safety threshold, noted
+   in the refresher).
+7. **iPull-uPull** — 4 CA yards (Fresno, Sacramento, Stockton, Pomona;
+   ~4,100 cars). The catalog plugin's CSV export returns the whole chain in
+   ONE request (nonce from the `ipullCatalog` JS object + one POST) — the
+   sweep's per-make-slug plan (~16 requests) turned out to be unnecessary:
+   any non-make slug exports everything. 98%+ real VINs. No parts price list
+   (their "Inventory & Pricing" page is the vehicle catalog).
+
+### Minnesota research (user request: more MN coverage)
+
+Already tracked: U-Pull-R Parts Rosemount + East Bethel (Twin Cities).
+Findings:
+
+- **St. Cloud U Pull (stccrush.com) — BUILT** (8th adapter of this pass,
+  ~230 cars). Same CRUSH ASP.NET app family as Sturtevant; multipart POST
+  per make (~28). First MN yard beyond U-Pull-R. No published price list.
+- **Chesney Auto Salvage (Duluth)** — full-service yard with a parts-
+  interchange search (make/model/year → part listings), not self-serve
+  vehicle-row inventory; DIY pulling allowed but no vehicle inventory to
+  scrape. Out of scope.
+- **Rochester / other metros** — only staffed full-service recyclers found
+  (Automotive Recyclers Rochester etc.); no self-serve yard with public
+  vehicle inventory. Like the Hawaii finding: documented honestly, nothing
+  feasible to build beyond the above.
+
+### Parked (unchanged status: candidate)
+
+- **Go Pull-It** (FL) — search endpoint still needs a browser devtools
+  session; sitemap backfill ≈14h. Not worth it this pass.
+- **Pick-A-Part VA** — Cloudflare TLS-fingerprint challenge blocks the fetch
+  layer on every route; added to the registry as candidate with notes.
+
+### Conventions kept
+
+- All probing ≤1 request/~2s per host (10s for Pull-N-Save per robots),
+  browser-equivalent UA, raw responses cached to `scraper/.cache/independents/`.
+- Nominatim geocoding, 1.2s pacing; four addresses missing from OSM fell back
+  to the nearest resolvable centroid (Rupert's 22408 zip, Ace 32218 zip,
+  Sturtevant village, iPull Stockton 95215 zip) — close enough for the map pin.
+- No photos captured anywhere; no Row52 assets touched.

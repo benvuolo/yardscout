@@ -51,6 +51,12 @@ let fenixPricing = {};  // { "Fenix U-Pull - Elmira": { "ALTERNATOR": {price, co
 let harrysPricing = {}; // Harry's U-Pull-It: one chain-wide list, keyed by description
 let indyPricing = {};   // Indy-U-Pull-It (Indianapolis): one yard-wide list, keyed by description
 let upullitnePricing = {}; // U-Pull-It (Des Moines IA / Omaha / Lincoln NE): one chain-wide list
+let rupertsPricing = {};   // Rupert's U-Pull-It (Fredericksburg VA): one yard-wide list
+let pnsPricing = {};       // Pull-N-Save (UT/AZ/CA): one chain-wide list
+let partsgalorePricing = {}; // Parts Galore (Detroit MI): one yard-wide list
+let chesterfieldPricing = {}; // Chesterfield Auto Parts (Richmond metro VA): one chain-wide list
+let acePricing = {};       // Ace Pick-A-Part (Jacksonville FL): one yard-wide list
+let sturtevantPricing = {}; // Sturtevant Auto (Sturtevant WI): one yard-wide list
 
 /* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page)
  * pyp = exact "Description" from pyp.com per-location PriceList API
@@ -423,6 +429,12 @@ async function loadAllPricing() {
     grab('data/harrys_pricing.json', d => d.forEach(p => { harrysPricing[p.description] = p; })),
     grab('data/indy_pricing.json', d => d.forEach(p => { indyPricing[p.description] = p; })),
     grab('data/upullitne_pricing.json', d => d.forEach(p => { upullitnePricing[p.description] = p; })),
+    grab('data/ruperts_pricing.json', d => d.forEach(p => { rupertsPricing[p.description] = p; })),
+    grab('data/pns_pricing.json', d => d.forEach(p => { pnsPricing[p.description] = p; })),
+    grab('data/partsgalore_pricing.json', d => d.forEach(p => { partsgalorePricing[p.description] = p; })),
+    grab('data/chesterfield_pricing.json', d => d.forEach(p => { chesterfieldPricing[p.description] = p; })),
+    grab('data/ace_pricing.json', d => d.forEach(p => { acePricing[p.description] = p; })),
+    grab('data/sturtevant_pricing.json', d => d.forEach(p => { sturtevantPricing[p.description] = p; })),
   ]);
   _yardCostMemo.clear();
 }
@@ -2342,7 +2354,13 @@ function yardPriceList(location) {
   else if (loc.startsWith('u-pull-r')) rows = fromList(upullrPricing);
   else if (loc.startsWith("harry's u-pull-it")) rows = fromList(harrysPricing);
   else if (loc.startsWith('indy-u-pull-it')) rows = fromList(indyPricing);
+  else if (loc.startsWith("rupert's u-pull-it")) rows = fromList(rupertsPricing);
   else if (loc.startsWith('u-pull-it')) rows = fromList(upullitnePricing);
+  else if (loc.startsWith('pull-n-save')) rows = fromList(pnsPricing);
+  else if (loc.startsWith('parts galore')) rows = fromList(partsgalorePricing);
+  else if (loc.startsWith('chesterfield auto parts')) rows = fromList(chesterfieldPricing);
+  else if (loc.startsWith('ace pick-a-part')) rows = fromList(acePricing);
+  else if (loc.startsWith('sturtevant auto')) rows = fromList(sturtevantPricing);
   else if (loc.startsWith('pick your part')) rows = fromDict(pypPricing[location]);
   else if (loc.startsWith('pull-a-part')) rows = fromDict(papPricing[location]);
   else if (loc.includes('wrench-a-part')) rows = fromDict(wapPricing[location]);
