@@ -250,3 +250,54 @@ Findings:
   to the nearest resolvable centroid (Rupert's 22408 zip, Ace 32218 zip,
   Sturtevant village, iPull Stockton 95215 zip) — close enough for the map pin.
 - No photos captured anywhere; no Row52 assets touched.
+
+## 2026-10-17 — Post-deploy fixes, U-Pull-R outage repair, Nevada Pic-A-Part
+
+Follow-up pass after the seven-chain deploy (first scan shipped 11 of 19 new
+yards; this pass fixed the rest and added a 9th build).
+
+### CI failures diagnosed (scan runs 2026-10-17)
+
+- **Ace Pick-A-Part** — Cloudflare returns 403 on the `/search-inventory/`
+  HTML page from GitHub Actions datacenter IPs (works fine residential, both
+  scan runs failed identically). Fix: `ACE_FALLBACK_MAKES` — the verified
+  42-make dropdown snapshot — is used when the page GET fails, so the
+  `ajax.php` POSTs still run. If Cloudflare blocks those too, the adapter
+  logs and skips; next escalation would be an Indy-style committed-snapshot
+  or mirror fallback.
+- **Pull-N-Save** — `getMakes` intermittently returns an empty body in CI
+  (failed in the 20:02 UTC scheduled run, worked in the dispatched run 2.5h
+  earlier and 3/3 locally). Fix: 3 attempts at crawl-delay (10s) pacing,
+  logging HTTP status + body head on empty responses.
+
+### U-Pull-R Parts outage (plugin upgrade ~2026-10-13, repaired)
+
+The gm_vehicle_search plugin upgrade silently zeroed ALL U-Pull-R coverage
+(Rosemount + East Bethel MN, Toledo OH) for ~4 days:
+
+- AJAX action renamed `doApiCall` → `doAaaApiCall` (old action: HTTP 400
+  body `'0'`, which the adapter logged as a JSON parse error).
+- `site=0` (all stores) no longer valid — the adapter now loops `site=1`
+  (returns BOTH MN stores, rows tagged Store 1/2) and `site=3` (Toledo).
+- `getMakes` takes a `ModelYear` param (empty = all years; 56 makes).
+- ~113 requests/scan at 2s pacing; response fields unchanged (new ignorable
+  extras: InterchangeModelNm, StockId, YardRow, DateSet*, TagStoreNumber).
+
+**Hardening added:** `fetch_independent_inventory()` now checks every
+onboarded chain's `_source` tag against `INDEPENDENT_EXPECTED_SOURCES` and
+prints a prominent `WARNING:` line for any chain returning 0 vehicles, so a
+silent breakage shows up in the next scan log instead of days later.
+
+### Nevada Pic-A-Part (nvpap.com) — BUILT (9th adapter, user email request)
+
+2 yards — Las Vegas (5100 N Lamb Blvd, North Las Vegas) + Henderson (110 W
+Rolly St) — first Las Vegas-metro coverage, ~3,100 vehicles. WordPress with
+a custom PT1 plugin (same vendor family as U-Pull-R): unauthenticated POST
+`/wp-json/pt1/v1/vehicle-stock` per make (`store=0` = both yards, ~57
+requests/scan); make list from `Manufacturers.json` (56); responses are a
+numeric count prefix + HTML (`products-body-search__*` classes,
+`data-pt1-vin` / `data-pt1-stock-number` — stock is the id basis, L/H
+prefixed by store). Chain-wide parts DB at
+`/json_datasets/parts_database_en.json` (533 parts → `nvpap_pricing.json`;
+price/core columns verified against published totals). robots allow-all.
+Both addresses geocoded exactly via Nominatim.

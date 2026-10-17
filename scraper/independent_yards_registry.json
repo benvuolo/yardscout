@@ -88,8 +88,8 @@
         "method": "POST",
         "auth": "none",
         "format": "json",
-        "requests_per_scan": "~50 (one per make, site=0 = all stores; 2s apart)",
-        "notes": "POST action=doApiCall&apiAction=getVehicles&site=0&makes={Make}&models=0&years=0 returns all three stores' rows for that make as JSON. Per-make queries are required: with makes=0 the rows carry no make (Model is just 'MALIBU'/'CIVIC', except ~15% literal DB names like 'FORD F150 PICKUP'). Make list via apiAction=getMakes. Fields: Year, Model, Color, StockNumber, Row, DateSetData, Store, VIN, Odometer. robots.txt explicitly allows /wp-admin/admin-ajax.php."
+        "requests_per_scan": "~113 (getMakes + one getVehicles per make x site; site=1 covers both MN stores, site=3 Toledo; 2s apart)",
+        "notes": "PLUGIN UPGRADE ~2026-10-13 (broke the original adapter silently for 4 days; fixed 2026-10-17): the AJAX action was renamed doApiCall -> doAaaApiCall (the old action returns HTTP 400 body '0'), site=0 is no longer valid - site=1 returns BOTH MN stores (rows tagged Store 1 Rosemount / Store 2 East Bethel) and site=3 Toledo - and getMakes takes a ModelYear param (empty string = all, 56 makes). POST action=doAaaApiCall&apiAction=getVehicles&site={1|3}&makes={Make}&models=0&years=0 returns JSON rows for that make/site. Per-make queries are still required: with makes=0 the rows carry no make (Model is just 'MALIBU'/'CIVIC', except ~15% literal DB names like 'FORD F150 PICKUP'). Fields: Year, Model, Color, StockNumber, Row, DateSetData, Store, VIN, Odometer (plus new ignorable extras: InterchangeModelNm, StockId, YardRow, DateSet, DateSetSort, TagStoreNumber). robots.txt explicitly allows /wp-admin/admin-ajax.php."
       },
       "update_freshness": "live (same-day DateSet values observed)",
       "robots": "explicitly allows admin-ajax.php",
@@ -330,7 +330,7 @@
         "auth": "none",
         "format": "html-table",
         "requests_per_scan": "~43 (search page GET for the make list + one POST per make, 2s apart)",
-        "notes": "POST ajax.php?inner_search=true&make={MAKE} (no auth) returns an HTML table per make: Image, Year, Make, Model, Exterior, Interior, Engine, Trans, Stock # (id basis: ace-{stock}), Row, Date In Yard (M/D/YYYY; ~17% blank). Empty make returns nothing, so the scan loops the ~42 makes server-rendered in select#search_make on /search-inventory/. Behind Cloudflare but no challenge observed from residential or datacenter egress; if CI gets challenged the adapter logs and skips (Indy-style snapshot fallback can come later). Yard-wide price list at /prices/ (~590 parts) -> ace_pricing.json. First Florida coverage."
+        "notes": "POST ajax.php?inner_search=true&make={MAKE} (no auth) returns an HTML table per make: Image, Year, Make, Model, Exterior, Interior, Engine, Trans, Stock # (id basis: ace-{stock}), Row, Date In Yard (M/D/YYYY; ~17% blank). Empty make returns nothing, so the scan loops the ~42 makes server-rendered in select#search_make on /search-inventory/. Behind Cloudflare but no challenge observed from residential or datacenter egress; if CI gets challenged the adapter logs and skips (Indy-style snapshot fallback can come later). Yard-wide price list at /prices/ (~590 parts) -> ace_pricing.json. First Florida coverage. CI CAVEAT (2026-10-17): Cloudflare 403s the /search-inventory/ HTML page from GitHub Actions datacenter IPs (fine from residential). The adapter falls back to ACE_FALLBACK_MAKES (the verified 42-make dropdown snapshot) and still attempts the ajax.php POSTs; if those are also blocked it logs and skips (next step would be an Indy-style committed-snapshot/mirror fallback)."
       },
       "update_freshness": "live (same-week Date In Yard values observed)",
       "robots": "allow all",
@@ -742,6 +742,39 @@
           "name": "Pick-A-Part VA",
           "city": "",
           "state": "VA"
+        }
+      ]
+    },
+    {
+      "name": "Nevada Pic-A-Part",
+      "status": "adapter-built",
+      "platform": "wordpress + custom PT1 plugin (WP REST vehicle search; same vendor family as U-Pull-R)",
+      "inventory_url": "https://www.nvpap.com/used-car-inventory.html",
+      "api": {
+        "endpoint": "https://www.nvpap.com/wp-json/pt1/v1/vehicle-stock",
+        "method": "POST",
+        "auth": "none",
+        "format": "html (numeric result-count prefix before the first '<' is stripped)",
+        "requests_per_scan": "~57 (Manufacturers.json GET + one vehicle-stock POST per make with store=0 = both yards; 2s apart)",
+        "notes": "POST body makes={Make}&models=0&years=0&beginDate=&store=0. Vehicle divs carry products-body-search__year / __model (combined 'Subaru Legacy' - make prefix stripped per upullr convention) / __row ('Row 706') / __store ('Las Vegas'|'Henderson') / __color / __stock / __date ('Oct 16, 2026' set date) plus data-pt1-vin and data-pt1-stock-number (chain-unique, L=Las Vegas / H=Henderson prefix; id basis: nvpap-{stock}). Make list: GET /json_datasets/vehicles_lookup_cache/Manufacturers.json -> {manufacturers:[...56...]}. Chain-wide parts price DB at /json_datasets/parts_database_en.json (533 rows: [id, name, price, tax, core, env, warranty, total, aliases, blurb]) -> nvpap_pricing.json. First Las Vegas-metro coverage (~3,100 vehicles); user-requested by email 2026-10-17."
+      },
+      "update_freshness": "live (same-day __date values observed)",
+      "robots": "allow all, no crawl-delay",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Nevada Pic-A-Part - Las Vegas",
+          "city": "North Las Vegas",
+          "state": "NV",
+          "lat": 36.2531,
+          "lng": -115.0799
+        },
+        {
+          "name": "Nevada Pic-A-Part - Henderson",
+          "city": "Henderson",
+          "state": "NV",
+          "lat": 36.0564,
+          "lng": -115.004
         }
       ]
     }

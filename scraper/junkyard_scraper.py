@@ -6312,14 +6312,20 @@ def refresh_wap_pricing_file() -> Path:
 
 
 # U-Pull-R Parts (Rosemount + East Bethel MN, Toledo OH) — WordPress
-# admin-ajax gateway (action=doApiCall) returning clean JSON; robots.txt
-# explicitly allows admin-ajax.php. Same vendor plugin family as Pull-N-Save
-# ("gm_vehicle_search" — see INDEPENDENT_YARDS.md). The scan is one getVehicles
-# request per make with site=0 (all three stores in one response). A single
-# makes=0 request would be cheaper, but its rows carry no make: Model is just
-# "MALIBU"/"CIVIC" except for ~15% of literal DB names like "FORD F150 PICKUP",
-# so per-make queries (the same flow their own search UI uses) are the only
-# reliable source of the make.
+# admin-ajax gateway returning clean JSON; robots.txt explicitly allows
+# admin-ajax.php. Same vendor plugin family as Pull-N-Save
+# ("gm_vehicle_search" — see INDEPENDENT_YARDS.md). The scan is getVehicles
+# per make × site. A single makes=0 request would be cheaper, but its rows
+# carry no make: Model is just "MALIBU"/"CIVIC" except for ~15% of literal DB
+# names like "FORD F150 PICKUP", so per-make queries (the same flow their own
+# search UI uses) are the only reliable source of the make.
+# PLUGIN UPGRADE 2026-10-13 (silently broke the adapter for 4 days; fixed
+# 2026-10-17): the AJAX action was renamed doApiCall → doAaaApiCall (the old
+# one returns HTTP 400 body '0'), site=0 is no longer valid — site=1 returns
+# BOTH MN stores (rows tagged Store 1 Rosemount / 2 East Bethel) and site=3
+# Toledo — and getMakes takes a ModelYear param (empty = all, 56 makes).
+# Response fields are unchanged apart from ignorable extras. ~112 requests
+# per scan (56 makes × 2 sites) at 2s pacing.
 UPR_AJAX = "https://upullrparts.com/wp-admin/admin-ajax.php"
 UPR_STORES = {
     1: {"name": "U-Pull-R Parts - Rosemount", "city": "Rosemount", "state": "MN",
@@ -6341,20 +6347,21 @@ UPR_HEADERS = {
 def fetch_upullr_inventory() -> list[dict]:
     """Fetch live inventory from U-Pull-R Parts (2 MN yards + Toledo OH).
 
-    One getVehicles POST per make (site=0 = every store), ~2s apart — the same
-    request their own search UI issues, ~50 requests / ~2 min per scan."""
+    One getVehicles POST per make × site (site=1 = both MN stores, site=3 =
+    Toledo), ~2s apart — the same flow their own search UI issues since the
+    2026-10 plugin upgrade; ~112 requests / ~4 min per scan."""
     session = requests.Session()
 
     def _post(api_action: str, **extra) -> requests.Response:
         return session.post(
             UPR_AJAX,
-            data={"action": "doApiCall", "apiAction": api_action, **extra},
+            data={"action": "doAaaApiCall", "apiAction": api_action, **extra},
             headers=UPR_HEADERS,
             timeout=60,
         )
 
     try:
-        r = _post("getMakes")
+        r = _post("getMakes", ModelYear="")
         r.raise_for_status()
         makes = json.loads(r.text) if r.text else []
     except Exception as e:
@@ -6364,19 +6371,24 @@ def fetch_upullr_inventory() -> list[dict]:
 
     all_vehicles: list[dict] = []
     for make_name in makes:
-        time.sleep(UPR_DELAY_SEC)
-        try:
-            r = _post("getVehicles", site="0", makes=make_name, models="0",
-                      years="0", beginDate="", endDate="")
-            r.raise_for_status()
-            rows = json.loads(r.text) if r.text.strip() else []
-        except Exception as e:
-            print(f"  [U-Pull-R] make {make_name!r} fetch failed: {e}", file=sys.stderr)
-            continue
-        if not isinstance(rows, list):
+        rows = []
+        for site in ("1", "3"):  # 1 = Rosemount + East Bethel, 3 = Toledo
+            time.sleep(UPR_DELAY_SEC)
+            try:
+                r = _post("getVehicles", site=site, makes=make_name, models="0",
+                          years="0", beginDate="", endDate="")
+                r.raise_for_status()
+                site_rows = json.loads(r.text) if r.text.strip() else []
+            except Exception as e:
+                print(f"  [U-Pull-R] make {make_name!r} site {site} fetch failed: {e}",
+                      file=sys.stderr)
+                continue
+            if isinstance(site_rows, list):
+                rows.extend(site_rows)
+        if not rows:
             continue
         _indep_cache_raw(f"upullr_{re.sub(r'[^A-Za-z0-9]+', '_', make_name)}.json",
-                         r.content)
+                         json.dumps(rows).encode())
         for item in rows:
             stock = str(item.get("StockNumber") or "").strip()
             if not stock:
@@ -7415,16 +7427,26 @@ def fetch_pns_inventory() -> list[dict]:
     10s apart per their robots.txt crawl-delay — ~8 min per scan)."""
     import html as html_mod
     session = requests.Session()
-    try:
-        r = session.post(PNS_AJAX, data={"action": "getMakes"}, headers=PNS_HEADERS,
-                         timeout=60)
-        r.raise_for_status()
-        makes = [m for m in _PNS_OPTION_RE.findall(r.text) if m != "0"]
-    except Exception as e:
-        print(f"  [Pull-N-Save] getMakes failed: {e}", file=sys.stderr)
-        return []
+    # getMakes is intermittently empty from CI (killed the whole chain in the
+    # 2026-10-17 20:02 UTC run while the same call worked 2.5h earlier) — retry
+    # a few times at crawl-delay pacing and log what came back on failure.
+    makes: list[str] = []
+    for attempt in (1, 2, 3):
+        try:
+            r = session.post(PNS_AJAX, data={"action": "getMakes"}, headers=PNS_HEADERS,
+                             timeout=60)
+            r.raise_for_status()
+            makes = [m for m in _PNS_OPTION_RE.findall(r.text) if m != "0"]
+            if makes:
+                break
+            print(f"  [Pull-N-Save] getMakes attempt {attempt} returned no makes "
+                  f"(HTTP {r.status_code}, {len(r.content)}b: {r.text[:80]!r})",
+                  file=sys.stderr)
+        except Exception as e:
+            print(f"  [Pull-N-Save] getMakes attempt {attempt} failed: {e}", file=sys.stderr)
+        time.sleep(PNS_DELAY_SEC)
     if not makes:
-        print("  [Pull-N-Save] getMakes returned no makes — site layout changed?",
+        print("  [Pull-N-Save] getMakes returned no makes after 3 attempts — skipping",
               file=sys.stderr)
         return []
 
@@ -7937,15 +7959,28 @@ def refresh_chesterfield_pricing_file() -> Path:
 # theme's ajax.php per make returns an HTML table: Image, Year, Make, Model,
 # Exterior, Interior, Engine, Trans, Stock #, Row, Date In Yard (M/D/YYYY).
 # An empty make returns nothing, so the scan is one POST per make (~42, 2s
-# apart). Stock numbers ("F271121") are the id basis. Behind Cloudflare but
-# no challenge observed from either residential or datacenter egress — if CI
-# gets challenged the adapter logs and skips (snapshot fallback can come
-# later, Indy-style). Yard-wide price list at /prices/ (~2,100 parts).
-# robots.txt: allow all. Address: 9152 N Main St (Nominatim resolves the
-# 32218 zip centroid; the exact parcel is not in OSM).
+# apart). Stock numbers ("F271121") are the id basis. CLOUDFLARE: residential
+# egress is clean, but CI's datacenter IPs get 403'd on the HTML search page
+# (both 2026-10-17 runs) — the make-list GET falls back to ACE_FALLBACK_MAKES
+# (the dropdown snapshot) so the ajax.php POSTs still get attempted; if those
+# are 403'd too the adapter logs and skips (an Indy-style Worker-mirror or
+# committed-snapshot fallback is the next step if so). Yard-wide price list
+# at /prices/ (~590 parts). robots.txt: allow all. Address: 9152 N Main St
+# (Nominatim resolves the 32218 zip centroid; the exact parcel is not in OSM).
 ACE_SEARCH_URL = "https://acepickapart.com/search-inventory/"
 ACE_AJAX_URL = "https://www.acepickapart.com/wp-content/themes/jupiter/ajax.php"
 ACE_DELAY_SEC = 2.0
+# select#search_make snapshot, verified 2026-10-17 — used when the search page
+# itself is WAF-blocked. New makes appear in the dropdown rarely; the snapshot
+# is refreshed whenever the live list is reachable and differs.
+ACE_FALLBACK_MAKES = (
+    "ACURA", "AUDI", "BMW", "BUICK", "CADILLAC", "CHEVROLET", "CHRYSLER",
+    "DODGE", "FIAT", "FORD", "GEO", "GMC", "HONDA", "HUMMER", "HYUNDAI",
+    "INFINITI", "ISUZU", "JAGUAR", "JEEP", "KIA", "LAND ROVER", "LEXUS",
+    "LINCOLN", "MAZDA", "MERCEDES", "MERCURY", "MINI", "MITSUBISHI", "NISSAN",
+    "OLDSMOBILE", "PLYMOUTH", "PONTIAC", "PORSCHE", "RAM", "SAAB", "SATURN",
+    "SCION", "SUBARU", "SUZUKI", "TOYOTA", "VOLKSWAGEN", "VOLVO",
+)
 ACE_YARD = {"name": "Ace Pick-A-Part - Jacksonville", "city": "Jacksonville",
             "state": "FL", "lat": 30.4560, "lng": -81.6424}
 _ACE_MAKES_RE = re.compile(r'<select[^>]*id="search_make"[^>]*>(.*?)</select>', re.S)
@@ -7956,6 +7991,7 @@ _ACE_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
 def fetch_ace_inventory() -> list[dict]:
     """Fetch Ace Pick-A-Part's inventory (one ajax.php POST per make)."""
     import html as html_mod
+    makes: list[str] = []
     try:
         r = requests.get(ACE_SEARCH_URL, headers={**HEADERS, "Accept": "text/html"},
                          timeout=60)
@@ -7964,11 +8000,12 @@ def fetch_ace_inventory() -> list[dict]:
         makes = _ACE_OPTION_RE.findall(m.group(1)) if m else []
     except Exception as e:
         print(f"  [Ace] make-list fetch failed: {e}", file=sys.stderr)
-        return []
     if not makes:
-        print("  [Ace] no makes parsed — site layout changed (or Cloudflare challenge)?",
+        # Cloudflare 403s the HTML page from datacenter IPs — the ajax.php
+        # endpoint may still answer, so proceed with the snapshot make list.
+        print(f"  [Ace] falling back to the {len(ACE_FALLBACK_MAKES)}-make snapshot list",
               file=sys.stderr)
-        return []
+        makes = list(ACE_FALLBACK_MAKES)
 
     all_vehicles: list[dict] = []
     for make_name in makes:
@@ -8018,7 +8055,6 @@ def fetch_ace_inventory() -> list[dict]:
                 "_lng": ACE_YARD["lng"],
                 "_source": "ace",
             })
-    _indep_cache_raw("ace_last_make.html", r.content if makes else b"")
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
     print(f"  [Ace] {len(unique)} vehicles", file=sys.stderr)
@@ -8408,6 +8444,205 @@ def fetch_stcloud_inventory() -> list[dict]:
     return unique
 
 
+# Nevada Pic-A-Part (nvpap.com) — 2-yard chain: Las Vegas (5100 N Lamb Blvd,
+# North Las Vegas) + Henderson (110 W Rolly St). FIRST LAS VEGAS-METRO
+# COVERAGE (~3,100 vehicles); user-requested by email 2026-10-17. WordPress
+# with a custom "PT1" plugin exposing an unauthenticated WP REST search (same
+# vendor family as U-Pull-R): POST /wp-json/pt1/v1/vehicle-stock with
+# makes={Make}&models=0&years=0&beginDate=&store=0 returns BOTH yards per
+# make. The response is a short numeric prefix then HTML — everything before
+# the first '<' is stripped. Vehicle divs carry products-body-search__year /
+# __model (combined "Subaru Legacy" — make prefix stripped per the upullr
+# convention) / __row ("Row 706") / __store ("Las Vegas"|"Henderson") /
+# __color / __stock / __date ("Oct 16, 2026" set date) plus data-pt1-vin and
+# data-pt1-stock-number (chain-unique, L/H prefixed — the id basis). Make
+# list: GET /json_datasets/vehicles_lookup_cache/Manufacturers.json (56).
+# Parts price DB: /json_datasets/parts_database_en.json (533 rows:
+# [id, name, price, tax, core, env, warranty, total, aliases, blurb]).
+# robots.txt allow-all, no crawl-delay; ~57 requests/scan at 2s pacing.
+# Coords geocoded once via Nominatim (exact house numbers resolved).
+NVPAP_STOCK_URL = "https://www.nvpap.com/wp-json/pt1/v1/vehicle-stock"
+NVPAP_MAKES_URL = "https://www.nvpap.com/json_datasets/vehicles_lookup_cache/Manufacturers.json"
+NVPAP_DELAY_SEC = 2.0
+NVPAP_HEADERS = {
+    **HEADERS,
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Referer": "https://www.nvpap.com/",
+    "Origin": "https://www.nvpap.com",
+}
+NVPAP_YARDS = {  # keyed by the __store display name
+    "Las Vegas": {"name": "Nevada Pic-A-Part - Las Vegas", "city": "North Las Vegas",
+                  "state": "NV", "lat": 36.2531, "lng": -115.0799},
+    "Henderson": {"name": "Nevada Pic-A-Part - Henderson", "city": "Henderson",
+                  "state": "NV", "lat": 36.0564, "lng": -115.0040},
+}
+_NVPAP_ITEM_RE = re.compile(
+    r'<div class="products-body-search__item"[^>]*>(.*?)'
+    r'(?=<div class="products-body-search__item"|$)', re.S)
+_NVPAP_FIELD_RES = {
+    "stock": re.compile(r'data-pt1-stock-number="([^"]+)"'),
+    "year": re.compile(r'__year">\s*(\d+)\s*<'),
+    "model": re.compile(r'__model">\s*([^<]+?)\s*<'),
+    "row": re.compile(r'__row">(?:\s*<span>)?\s*([^<]*?)\s*(?:</span>)?\s*<'),
+    "store": re.compile(r'__store">\s*([^<]+?)\s*<'),
+    "color": re.compile(r'__color">(?:<span[^>]*>\s*</span>)?\s*([^<]*?)\s*<'),
+    "vin": re.compile(r'data-pt1-vin="([^"]*)"'),
+    "date": re.compile(r'__date">\s*([^<]+?)\s*<'),
+}
+
+
+def fetch_nvpap_inventory() -> list[dict]:
+    """Fetch Nevada Pic-A-Part's 2-yard inventory (one REST POST per make)."""
+    import html as html_mod
+    try:
+        r = requests.get(NVPAP_MAKES_URL, headers=HEADERS, timeout=60)
+        r.raise_for_status()
+        makes = [m.strip() for m in (r.json().get("manufacturers") or [])
+                 if isinstance(m, str) and m.strip()]
+    except Exception as e:
+        print(f"  [Nevada Pic-A-Part] make-list fetch failed: {e}", file=sys.stderr)
+        return []
+    if not makes:
+        print("  [Nevada Pic-A-Part] no makes parsed — site layout changed?",
+              file=sys.stderr)
+        return []
+
+    all_vehicles: list[dict] = []
+    unknown_stores: set[str] = set()
+    for make_name in makes:
+        time.sleep(NVPAP_DELAY_SEC)
+        try:
+            r = requests.post(NVPAP_STOCK_URL,
+                              data={"makes": make_name, "models": "0", "years": "0",
+                                    "beginDate": "", "store": "0"},
+                              headers=NVPAP_HEADERS, timeout=60)
+            r.raise_for_status()
+            page = r.text
+        except Exception as e:
+            print(f"  [Nevada Pic-A-Part] make {make_name!r} fetch failed: {e}",
+                  file=sys.stderr)
+            continue
+        lt = page.find("<")  # numeric result-count prefix before the HTML
+        if lt < 0:
+            continue
+        page = page[lt:]
+        for block in _NVPAP_ITEM_RE.findall(page):
+            f = {k: (rx.search(block).group(1).strip() if rx.search(block) else "")
+                 for k, rx in _NVPAP_FIELD_RES.items()}
+            if not f["stock"] or not f["model"]:
+                continue
+            store = NVPAP_YARDS.get(f["store"])
+            if store is None:
+                unknown_stores.add(f["store"] or "?")
+                continue
+            model_s = html_mod.unescape(f["model"])
+            if model_s.upper().startswith(make_name.upper() + " "):
+                model_s = model_s[len(make_name):].strip()
+            date_iso = ""
+            try:
+                date_iso = datetime.strptime(f["date"], "%b %d, %Y").strftime("%Y-%m-%d")
+            except ValueError:
+                pass
+            try:
+                year_i = int(f["year"])
+            except ValueError:
+                year_i = 0
+            vin = f["vin"].upper()
+            all_vehicles.append({
+                "id": f"nvpap-{f['stock'].lower()}",
+                "vin": vin if len(vin) == 17 else "",
+                "year": year_i,
+                "make": _utpap_format_label(make_name),
+                "model": _utpap_format_label(model_s),
+                "row": re.sub(r"(?i)^row\s+", "", f["row"]),
+                "dateAdded": date_iso,
+                "_color": f["color"].title(),
+                "_location": store["name"],
+                "_city": store["city"],
+                "_state": store["state"],
+                "_lat": store["lat"],
+                "_lng": store["lng"],
+                "_source": "nvpap",
+            })
+    if unknown_stores:
+        print(f"  [Nevada Pic-A-Part] skipped rows from unmapped store(s): "
+              f"{sorted(unknown_stores)} — update NVPAP_YARDS/registry", file=sys.stderr)
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Nevada Pic-A-Part] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
+# Nevada Pic-A-Part publishes one chain-wide parts price database as JSON
+# (the /auto-part-prices.html page renders it client-side). Row layout:
+# [id, NAME, price, tax, core, env fee, warranty, total, aliases, blurb] —
+# the component sums were verified against the published totals.
+NVPAP_PARTS_URL = "https://www.nvpap.com/json_datasets/parts_database_en.json"
+
+
+def refresh_nvpap_pricing_file() -> Path:
+    """Refresh Nevada Pic-A-Part's parts price DB -> nvpap_pricing.json."""
+    path = DATA_DIR / "nvpap_pricing.json"
+    try:
+        r = requests.get(NVPAP_PARTS_URL, headers=HEADERS, timeout=60)
+        r.raise_for_status()
+        rows = r.json()
+    except Exception as e:
+        print(f"  [Nevada Pic-A-Part pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for row in rows if isinstance(rows, list) else []:
+        if not isinstance(row, list) or len(row) < 8:
+            continue
+        name = str(row[1]).strip()
+        if not name:
+            continue
+        try:
+            price_f = float(row[2])
+            core_f = float(row[4])
+        except (TypeError, ValueError):
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Nevada Pic-A-Part pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Nevada Pic-A-Part pricing] only {len(seen)} parts parsed — "
+              f"keeping existing file", file=sys.stderr)
+    return path
+
+
+# Chains the scan EXPECTS to return vehicles (source tag -> display name).
+# After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
+# days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
+# a prominent warning in the scan log.
+INDEPENDENT_EXPECTED_SOURCES = {
+    "wrenchapart": "Wrench-A-Part",
+    "upullr": "U-Pull-R Parts",
+    "fenix": "Fenix U-Pull",
+    "harrys": "Harry's U-Pull-It",
+    "indy": "Indy-U-Pull-It",
+    "upullitne": "U-Pull-It (IA/NE)",
+    "ruperts": "Rupert's U-Pull-It",
+    "pns": "Pull-N-Save",
+    "partsgalore": "Parts Galore",
+    "chesterfield": "Chesterfield Auto Parts",
+    "ace": "Ace Pick-A-Part",
+    "sturtevant": "Sturtevant Auto",
+    "ipull": "iPull-uPull",
+    "stcloud": "St. Cloud U Pull",
+    "nvpap": "Nevada Pic-A-Part",
+}
+
+
 def fetch_independent_inventory() -> list[dict]:
     """All enabled independent-yard adapters (registry status: adapter-built)."""
     vehicles = fetch_wrenchapart_inventory()
@@ -8437,6 +8672,18 @@ def fetch_independent_inventory() -> list[dict]:
     vehicles += fetch_ipull_inventory()
     time.sleep(2)
     vehicles += fetch_stcloud_inventory()
+    time.sleep(2)
+    vehicles += fetch_nvpap_inventory()
+
+    # Loud zero-vehicle alarm: a chain that silently returns [] (WAF change,
+    # plugin upgrade, layout change) must be visible in the scan log, not
+    # discovered by users days later (see U-Pull-R, 2026-10-13..17).
+    got_sources = {v.get("_source") for v in vehicles}
+    for src, label in INDEPENDENT_EXPECTED_SOURCES.items():
+        if src not in got_sources:
+            print(f"  WARNING: independent chain {label!r} returned 0 vehicles — "
+                  f"adapter broken or site blocking? Investigate before it goes stale.",
+                  file=sys.stderr)
     return vehicles
 
 
@@ -9415,7 +9662,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -9438,7 +9685,7 @@ def main():
                refresh_upullitne_pricing_file, refresh_ruperts_pricing_file,
                refresh_pns_pricing_file, refresh_partsgalore_pricing_file,
                refresh_chesterfield_pricing_file, refresh_ace_pricing_file,
-               refresh_sturtevant_pricing_file)
+               refresh_sturtevant_pricing_file, refresh_nvpap_pricing_file)
         for fn in fns:
             try:
                 fn()
@@ -9533,7 +9780,7 @@ def main():
 
         indep_vehicles: list[dict] = []
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud)...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part)...", file=sys.stderr)
             indep_vehicles = fetch_independent_inventory()
 
         all_vehicles = (pnp_vehicles + tap_vehicles + utpap_vehicles
