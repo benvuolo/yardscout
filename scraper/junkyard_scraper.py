@@ -7960,12 +7960,16 @@ def refresh_chesterfield_pricing_file() -> Path:
 # Exterior, Interior, Engine, Trans, Stock #, Row, Date In Yard (M/D/YYYY).
 # An empty make returns nothing, so the scan is one POST per make (~42, 2s
 # apart). Stock numbers ("F271121") are the id basis. CLOUDFLARE: residential
-# egress is clean, but CI's datacenter IPs get 403'd on the HTML search page
-# (both 2026-10-17 runs) — the make-list GET falls back to ACE_FALLBACK_MAKES
-# (the dropdown snapshot) so the ajax.php POSTs still get attempted; if those
-# are 403'd too the adapter logs and skips (an Indy-style Worker-mirror or
-# committed-snapshot fallback is the next step if so). Yard-wide price list
-# at /prices/ (~590 parts). robots.txt: allow all. Address: 9152 N Main St
+# egress is clean, but CI's datacenter IPs get a blanket 403 on EVERYTHING —
+# the HTML search page AND every ajax.php POST (confirmed in the 2026-10-17
+# and 10-18 scan runs; the ACE_FALLBACK_MAKES retry below is kept for the
+# day the WAF rule relaxes, but it currently can't help). So, Indy-style:
+# scraper/update_ace_snapshot.sh runs daily on the dev Mac via launchd
+# (io.yardscout.ace-snapshot, 08:25) from a residential IP, commits the
+# normalized inventory to scraper/snapshots/ace_inventory.json.gz (and
+# refreshes ace_pricing.json), and the adapter falls back to that snapshot
+# whenever the live crawl yields zero vehicles. Yard-wide price list at
+# /prices/ (~590 parts). robots.txt: allow all. Address: 9152 N Main St
 # (Nominatim resolves the 32218 zip centroid; the exact parcel is not in OSM).
 ACE_SEARCH_URL = "https://acepickapart.com/search-inventory/"
 ACE_AJAX_URL = "https://www.acepickapart.com/wp-content/themes/jupiter/ajax.php"
@@ -8057,6 +8061,20 @@ def fetch_ace_inventory() -> list[dict]:
             })
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    if not unique:
+        # Cloudflare blanket-403s CI's datacenter IPs — fall back to the
+        # committed snapshot pushed daily from a residential IP (see header).
+        snap = Path(__file__).parent / "snapshots" / "ace_inventory.json.gz"
+        if snap.exists():
+            import gzip as gzip_mod
+            try:
+                data = json.loads(gzip_mod.decompress(snap.read_bytes()))
+                unique = data.get("vehicles", [])
+                print(f"  [Ace] live crawl blocked — using committed snapshot "
+                      f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
+                      file=sys.stderr)
+            except Exception as e:
+                print(f"  [Ace] snapshot unreadable: {e}", file=sys.stderr)
     print(f"  [Ace] {len(unique)} vehicles", file=sys.stderr)
     return unique
 

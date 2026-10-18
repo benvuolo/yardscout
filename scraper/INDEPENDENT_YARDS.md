@@ -301,3 +301,15 @@ prefixed by store). Chain-wide parts DB at
 `/json_datasets/parts_database_en.json` (533 parts → `nvpap_pricing.json`;
 price/core columns verified against published totals). robots allow-all.
 Both addresses geocoded exactly via Nominatim.
+
+### Ace Pick-A-Part escalation (2026-10-18)
+
+The 42-make fallback wasn't enough: Cloudflare 403s CI's datacenter IPs on
+`ajax.php` too (every POST in the 10-18 run), not just the search page. Fix
+is the full Indy pattern: `scraper/update_ace_snapshot.sh` runs the real
+adapter daily from the dev Mac's residential IP via launchd
+(`io.yardscout.ace-snapshot`, 08:25, logs to /tmp/yardscout_ace_snapshot.log),
+commits `scraper/snapshots/ace_inventory.json.gz` (normalized vehicles +
+fetched_at stamp; refuses crawls under 500 vehicles) and a fresh
+`ace_pricing.json`, then pushes. The CI adapter falls back to the snapshot
+whenever its live crawl yields zero vehicles and logs the snapshot's age.
