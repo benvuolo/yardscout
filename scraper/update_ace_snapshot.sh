@@ -16,7 +16,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-PY="${YARDSCOUT_PYTHON:-$HOME/.asdf/shims/python3}"
+# NOT the asdf shim — launchd's bare PATH has no `asdf` and the shim exec fails (127).
+PY="${YARDSCOUT_PYTHON:-$HOME/.asdf/installs/python/3.14.3t/bin/python3}"
 mkdir -p scraper/snapshots
 
 "$PY" - <<'EOF'
