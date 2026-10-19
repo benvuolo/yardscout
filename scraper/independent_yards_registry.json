@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-18",
+  "updated": "2026-10-19",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -747,7 +747,7 @@
         "auth": "none (but requires a Chrome TLS fingerprint)",
         "format": "html (500 cards/page, ~15 pages)",
         "requests_per_scan": "~16 at 2s",
-        "notes": "UN-PARKED 2026-10-18: Cloudflare's TLS-fingerprint challenge blocks plain requests from everywhere, so the adapter tries plain requests first then falls back to curl_cffi with impersonate=chrome (lazy import; installed in scan.yml). Cards carry Stock (PAP######, id basis), Year, combined Make/Model (YardSmart style, make often repeated), VIN, Location (Fredericksburg|Stafford), Row (often blank), Set Date (ISO). robots.txt allow-all."
+        "notes": "UN-PARKED 2026-10-18: Cloudflare's TLS-fingerprint challenge blocks plain requests from everywhere, so the adapter tries plain requests first then falls back to curl_cffi with impersonate=chrome (lazy import; installed in scan.yml). Cards carry Stock (PAP######, id basis), Year, combined Make/Model (YardSmart style, make often repeated), VIN, Location (Fredericksburg|Stafford), Row (often blank), Set Date (ISO). robots.txt allow-all. CI CAVEAT (2026-10-19): GitHub Actions gets HTTP 521 even through curl_cffi (residential is clean) \u2014 scraper/update_papva_snapshot.sh pushes a daily committed snapshot (launchd io.yardscout.papva-snapshot, 08:35) and the adapter falls back to it on an empty crawl, Ace pattern."
       },
       "update_freshness": "live (same-day set dates observed)",
       "robots": "allow all (wp-admin excepted)",

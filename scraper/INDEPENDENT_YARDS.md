@@ -355,3 +355,14 @@ Six chains built in one pass (all mechanisms verified live during the build):
 Geocoding: 14 of 19 new addresses resolved exactly/street-level in OSM;
 Lexington KY, Savannah TN, Maiden NC, Mobile AL and Flagstaff AZ fell back
 to zip/town/road centroids (documented per entry in the registry).
+
+### Pick-A-Part VA CI escalation + Ace snapshot guard (2026-10-19)
+
+First scan with the six new chains: 16 of 18 yards landed. Pick-A-Part VA
+got HTTP 521 in CI even through curl_cffi impersonate=chrome (clean 200s
+residential) → same remedy as Ace: `update_papva_snapshot.sh` + launchd
+(`io.yardscout.papva-snapshot`, 08:35) committing
+`scraper/snapshots/papva_inventory.json.gz`, adapter falls back on an empty
+crawl. Also hardened both snapshot scripts after a partial Ace crawl (807 of
+~2,500) slipped past the flat 500-vehicle floor: snapshots now also require
+>= 60% of the previous snapshot's count.

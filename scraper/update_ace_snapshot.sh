@@ -27,9 +27,19 @@ sys.path.insert(0, "scraper")
 import junkyard_scraper as js
 
 vehicles = js.fetch_ace_inventory()
-# Refuse to snapshot a failed/suspiciously small crawl (yard runs ~2,500 cars).
-if len(vehicles) < 500:
-    print(f"only {len(vehicles)} vehicles — not snapshotting", file=sys.stderr)
+# Refuse to snapshot a failed/suspiciously small crawl (yard runs ~2,500 cars;
+# a partial crawl of 807 slipped past a flat floor on 2026-10-19, so also
+# require >= 60% of the previous snapshot's count).
+prev = 0
+snap_path = "scraper/snapshots/ace_inventory.json.gz"
+try:
+    prev = len(json.loads(gzip.decompress(open(snap_path, "rb").read()))["vehicles"])
+except Exception:
+    pass
+floor = max(500, int(prev * 0.6))
+if len(vehicles) < floor:
+    print(f"only {len(vehicles)} vehicles (floor {floor}, prev {prev}) — not snapshotting",
+          file=sys.stderr)
     sys.exit(1)
 payload = {"fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
            "vehicles": vehicles}

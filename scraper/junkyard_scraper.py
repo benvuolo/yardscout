@@ -8893,6 +8893,21 @@ def fetch_papva_inventory() -> list[dict]:
               f"{sorted(unknown_locs)}", file=sys.stderr)
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    if not unique:
+        # CI gets HTTP 521 even through curl_cffi (2026-10-19 scan) while
+        # residential works — same remedy as Ace: committed snapshot pushed
+        # daily by scraper/update_papva_snapshot.sh (launchd).
+        snap = Path(__file__).parent / "snapshots" / "papva_inventory.json.gz"
+        if snap.exists():
+            import gzip as gzip_mod
+            try:
+                data = json.loads(gzip_mod.decompress(snap.read_bytes()))
+                unique = data.get("vehicles", [])
+                print(f"  [Pick-A-Part VA] live crawl blocked — using committed snapshot "
+                      f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
+                      file=sys.stderr)
+            except Exception as e:
+                print(f"  [Pick-A-Part VA] snapshot unreadable: {e}", file=sys.stderr)
     print(f"  [Pick-A-Part VA] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
