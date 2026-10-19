@@ -21,7 +21,7 @@ AAB to upload: `android/app/build/outputs/bundle/release/app-release.aab`
 ## Short description (80 chars max)
 
 ```
-Live inventory from 165 self-service junkyards. Find the car before you drive.
+Live inventory from 210+ self-service junkyards. Find the car before you drive.
 ```
 (78 chars)
 
@@ -31,7 +31,7 @@ Live inventory from 165 self-service junkyards. Find the car before you drive.
 YardScout tracks the live inventory of self-service salvage yards across the country, so you stop driving to yards on a maybe.
 
 FIND THE CAR BEFORE YOU DRIVE
-• Live inventory from 165 self-serve yards — every major chain (Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part) plus a growing set of independents — refreshed throughout the day
+• Live inventory from 210+ self-serve yards — every major chain (Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part) plus a growing set of independents — refreshed throughout the day
 • Search by make, model, and year range around your ZIP
 • See the row number, arrival date, and VIN before you leave the house
 • Model search understands yard naming quirks — searching WRX finds every spelling
@@ -107,5 +107,5 @@ Upload screenshots in that order (minimum 2 required, we have 4).
 ## Release notes (first release)
 
 ```
-First Android release. Live inventory from 165 self-service junkyards, yard price lists, and a vehicle watchlist — free, no account needed.
+First Android release. Live inventory from 210+ self-service junkyards, yard price lists, and a vehicle watchlist — free, no account needed.
 ```
