@@ -58,6 +58,7 @@ let chesterfieldPricing = {}; // Chesterfield Auto Parts (Richmond metro VA): on
 let acePricing = {};       // Ace Pick-A-Part (Jacksonville FL): one yard-wide list
 let sturtevantPricing = {}; // Sturtevant Auto (Sturtevant WI): one yard-wide list
 let nvpapPricing = {};     // Nevada Pic-A-Part (Las Vegas/Henderson NV): one chain-wide list
+let barrysPricing = {};    // Barry's U Pull It (Mobile AL): one yard-wide list
 
 /* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page)
  * pyp = exact "Description" from pyp.com per-location PriceList API
@@ -437,6 +438,7 @@ async function loadAllPricing() {
     grab('data/ace_pricing.json', d => d.forEach(p => { acePricing[p.description] = p; })),
     grab('data/sturtevant_pricing.json', d => d.forEach(p => { sturtevantPricing[p.description] = p; })),
     grab('data/nvpap_pricing.json', d => d.forEach(p => { nvpapPricing[p.description] = p; })),
+    grab('data/barrys_pricing.json', d => d.forEach(p => { barrysPricing[p.description] = p; })),
   ]);
   _yardCostMemo.clear();
 }
@@ -2364,6 +2366,7 @@ function yardPriceList(location) {
   else if (loc.startsWith('ace pick-a-part')) rows = fromList(acePricing);
   else if (loc.startsWith('sturtevant auto')) rows = fromList(sturtevantPricing);
   else if (loc.startsWith('nevada pic-a-part')) rows = fromList(nvpapPricing);
+  else if (loc.startsWith("barry's u pull it")) rows = fromList(barrysPricing);
   else if (loc.startsWith('pick your part')) rows = fromDict(pypPricing[location]);
   else if (loc.startsWith('pull-a-part')) rows = fromDict(papPricing[location]);
   else if (loc.includes('wrench-a-part')) rows = fromDict(wapPricing[location]);

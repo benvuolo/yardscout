@@ -266,30 +266,41 @@
     },
     {
       "name": "Go Pull-It",
-      "status": "candidate",
-      "platform": "wordpress + CRUSH (S3 Software) web form",
+      "status": "adapter-built",
+      "platform": "wordpress/divi custom theme (gpi-app.js) with server-rendered inventory table",
       "inventory_url": "https://gopullit.com/inventory/",
       "api": {
-        "endpoint": "https://gopullit.com/inventory/",
+        "endpoint": "https://gopullit.com/inventory/?location={slug}&make={MAKE}&model={MODEL}",
         "method": "GET",
-        "auth": "none",
-        "format": "html (WP custom post type 'inventory')",
-        "requests_per_scan": "unknown - archive is location-gated ('Please select a location above')",
-        "notes": "Florida self-service yards (Jacksonville, Tampa). Site loads static.crushsoftware.com/js/crush-web-form.js (CRUSH by S3 Software - car-buying form). Inventory archive is location-gated by a query parameter not yet reverse-engineered; finding the search endpoint needs a browser devtools session, and the sitemap-crawl alternative needs a ~14h backfill. PARKED 2026-10-17 (not built in the 7-chain onboarding pass for these reasons)."
+        "auth": "none (gpi_location cookie 1/2/3 selects the yard alongside the location param)",
+        "format": "html table (Make, Model, Year, Row, VIN, Stock, Date Placed MM/DD/YY, Location)",
+        "requests_per_scan": "~150-300 at 10s (robots Crawl-delay 10) = 30-50 min",
+        "notes": "Registry's old Tampa location was STALE \u2014 the three live yards are Jacksonville FL, Atlanta East (Norcross GA) and Gainesville GA. HARD 50-ROW CAP with no working pagination (/inventory/page/N/ echoes page 1; capped pages show 'More results available... narrow your search'), so the adapter queries per make and drills into per-model queries (model list from GET /wp-json/api/getModels?make=X, location-independent) only when capped; a still-capped make+model is logged as partial. Stock prefixes GPI*/ATL*. The old devtools-session/sitemap-backfill notes are obsolete."
       },
-      "update_freshness": "unknown",
-      "robots": "not yet reviewed",
+      "update_freshness": "live (same-week set dates observed)",
+      "robots": "allow all with orphaned Crawl-delay 10 (honored)",
       "tos_flags": "none found",
       "locations": [
         {
           "name": "Go Pull-It - Jacksonville",
           "city": "Jacksonville",
-          "state": "FL"
+          "state": "FL",
+          "lat": 30.3373,
+          "lng": -81.7697
         },
         {
-          "name": "Go Pull-It - Tampa",
-          "city": "Tampa",
-          "state": "FL"
+          "name": "Go Pull-It - Atlanta East",
+          "city": "Norcross",
+          "state": "GA",
+          "lat": 33.9631,
+          "lng": -84.1803
+        },
+        {
+          "name": "Go Pull-It - Gainesville",
+          "city": "Gainesville",
+          "state": "GA",
+          "lat": 34.281,
+          "lng": -83.786
         }
       ]
     },
@@ -727,21 +738,34 @@
     },
     {
       "name": "Pick-A-Part VA",
-      "status": "candidate",
-      "platform": "unknown (Cloudflare TLS-fingerprint challenge)",
-      "inventory_url": "https://pickapartva.com/",
+      "status": "adapter-built",
+      "platform": "wordpress + iis-pro-upull plugin (server-rendered card deck) behind Cloudflare TLS fingerprinting",
+      "inventory_url": "https://pickapartva.com/inventory/ANY/ANY/?k=1",
       "api": {
-        "endpoint": null,
-        "notes": "Virginia self-service yard. Cloudflare's TLS-fingerprint challenge blocks our plain-requests fetch layer entirely (challenge page on every route). PARKED 2026-10-17: would need a TLS-impersonating client or browser session, neither of which fits the current fetch conventions. Revisit if their WAF posture changes."
+        "endpoint": "https://pickapartva.com/inventory/ANY/ANY/?k=1&pagenum={n}",
+        "method": "GET",
+        "auth": "none (but requires a Chrome TLS fingerprint)",
+        "format": "html (500 cards/page, ~15 pages)",
+        "requests_per_scan": "~16 at 2s",
+        "notes": "UN-PARKED 2026-10-18: Cloudflare's TLS-fingerprint challenge blocks plain requests from everywhere, so the adapter tries plain requests first then falls back to curl_cffi with impersonate=chrome (lazy import; installed in scan.yml). Cards carry Stock (PAP######, id basis), Year, combined Make/Model (YardSmart style, make often repeated), VIN, Location (Fredericksburg|Stafford), Row (often blank), Set Date (ISO). robots.txt allow-all."
       },
-      "update_freshness": "unknown",
-      "robots": "unreachable past the challenge",
-      "tos_flags": "unknown",
+      "update_freshness": "live (same-day set dates observed)",
+      "robots": "allow all (wp-admin excepted)",
+      "tos_flags": "none found",
       "locations": [
         {
-          "name": "Pick-A-Part VA",
-          "city": "",
-          "state": "VA"
+          "name": "Pick-A-Part VA - Fredericksburg",
+          "city": "Fredericksburg",
+          "state": "VA",
+          "lat": 38.2714,
+          "lng": -77.4927
+        },
+        {
+          "name": "Pick-A-Part VA - Stafford",
+          "city": "Stafford",
+          "state": "VA",
+          "lat": 38.4612,
+          "lng": -77.3635
         }
       ]
     },
@@ -775,6 +799,192 @@
           "state": "NV",
           "lat": 36.0564,
           "lng": -115.004
+        }
+      ]
+    },
+    {
+      "name": "Road Tested Parts (VinPlus)",
+      "status": "adapter-built",
+      "platform": "VinPlus multi-tenant React SPA (vinplus.texnrewards.com) over unauthenticated Cloud Run JSON API; source system YardSmart",
+      "inventory_url": "https://vinplus.texnrewards.com/road-tested-parts",
+      "api": {
+        "endpoint": "https://inventory-search-api-581547763015.us-central1.run.app/searchVehicleHttp",
+        "method": "POST",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": "~245 shared with the Pickers tenant (49 makes x 9 locations + year-bucket splits) at 2s",
+        "notes": "Shared fetch_vinplus_inventory adapter, tenant yard_id=road_tested_parts. GET /api/yard-info/{tenant} lists locations; GET /api/vehicle-groups is the global 49-make catalog. Results CAP AT 100/query \u2014 the adapter queries per make per location_id and recursively bisects year ranges on exactly-100 responses. Rows: year, make, model, vin, stock (id basis, location-code qualified), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. NOTE: utah-pic-a-part and ipull-upull are also VinPlus tenants (covered by their own adapters) \u2014 a periodic tenant-slug sweep is worth doing for new yards. Addresses from upullandsave.com/roadtestedparts.com; Lexington/Savannah/Maiden parcels not in OSM (zip/town centroids)."
+      },
+      "update_freshness": "live (daysInYard present; fresh dateAdded values)",
+      "robots": "vinplus.texnrewards.com: allow all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Bessler's U Pull & Save - Hebron",
+          "city": "Hebron",
+          "state": "KY",
+          "lat": 39.0685,
+          "lng": -84.7193
+        },
+        {
+          "name": "Bessler's U Pull & Save - Louisville",
+          "city": "Louisville",
+          "state": "KY",
+          "lat": 38.1816,
+          "lng": -85.7551
+        },
+        {
+          "name": "Bluegrass U Pull & Save - Lexington",
+          "city": "Lexington",
+          "state": "KY",
+          "lat": 38.0439,
+          "lng": -84.4995
+        },
+        {
+          "name": "Raceway Pik-A-Part - Savannah",
+          "city": "Savannah",
+          "state": "TN",
+          "lat": 35.1979,
+          "lng": -88.2014
+        },
+        {
+          "name": "RTP Pick-A-Part - Maiden",
+          "city": "Maiden",
+          "state": "NC",
+          "lat": 35.5766,
+          "lng": -81.2139
+        }
+      ]
+    },
+    {
+      "name": "Pickers / Pipes U-Pull-It (VinPlus)",
+      "status": "adapter-built",
+      "platform": "VinPlus multi-tenant React SPA (same as Road Tested Parts); business name Tri-State Iron & Metal",
+      "inventory_url": "https://vinplus.texnrewards.com/pickers-longview",
+      "api": {
+        "endpoint": "https://inventory-search-api-581547763015.us-central1.run.app/searchVehicleHttp",
+        "method": "POST",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": "shared with Road Tested Parts (one fetch_vinplus_inventory pass)",
+        "notes": "SEARCH yard_id=tri_state_iron_metal (the business name) \u2014 the pickers_longview URL slug works for yard-info but silently returns zero matches on searchVehicleHttp. 4 locations. NOTE: the API lists Texarkana as TX but the yard is at 5512 E 9th St on the ARKANSAS side (pickerstxk.com) \u2014 we record AR. Addresses from pickerslongview.com / pickerstxk.com / pickersreno.com / pipesupullit.net."
+      },
+      "update_freshness": "live",
+      "robots": "vinplus.texnrewards.com: allow all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Pickers - Longview",
+          "city": "Longview",
+          "state": "TX",
+          "lat": 32.513,
+          "lng": -94.8262
+        },
+        {
+          "name": "Pickers - Texarkana",
+          "city": "Texarkana",
+          "state": "AR",
+          "lat": 33.43,
+          "lng": -93.976
+        },
+        {
+          "name": "Pickers - Reno",
+          "city": "Reno",
+          "state": "TX",
+          "lat": 33.6634,
+          "lng": -95.4537
+        },
+        {
+          "name": "Pipes U-Pull-It - Shreveport",
+          "city": "Shreveport",
+          "state": "LA",
+          "lat": 32.529,
+          "lng": -93.7721
+        }
+      ]
+    },
+    {
+      "name": "U-Pick-It AZ",
+      "status": "adapter-built",
+      "platform": "wordpress + yardconnect-pro v2.3 plugin (NEW plugin family; YardSmart backend, photos on api.yardsmartapp.com \u2014 fingerprint: wp-content/plugins/yardconnect-pro/)",
+      "inventory_url": "https://upickitaz.com/",
+      "api": {
+        "endpoint": "https://upickitaz.com/wp-admin/admin-ajax.php",
+        "method": "POST",
+        "auth": "nonce from `var yardconnectPublic = {...\"nonce\":...}` on any page (even the 404 page)",
+        "format": "html fragment (one tbody, whole lot unpaginated with view=table)",
+        "requests_per_scan": "~3 at 2s",
+        "notes": "User-requested from Reddit (Flagstaff, zip 86015). action=yardconnect_search_vehicles&lot={Flagstaff|Prescott Valley}&make=all&model=all&engine=&year_start=1949&year_end=2026&view=table \u2014 view=table is CRITICAL (grid view paginates ~20/page). Columns: Image, Make, Model, Year, Color, Body Style, Engine, Yard Row, Date Set MM/DD/YY. data-stock-number only on rows with photos (~45%) \u2192 stock ids else sha1-hash ids with ordinal dupes. No VIN. Expired nonce self-heals: 403 body is JSON {data:{nonce}} \u2014 retry once. robots.txt explicitly allows admin-ajax.php. No parts price list found. Flagstaff parcel not in OSM \u2192 Leupp Road centroid."
+      },
+      "update_freshness": "live (same-month set dates)",
+      "robots": "allow all; admin-ajax.php explicitly allowed",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "U-Pick-It AZ - Flagstaff",
+          "city": "Flagstaff",
+          "state": "AZ",
+          "lat": 35.2872,
+          "lng": -111.3546
+        },
+        {
+          "name": "U-Pick-It AZ - Prescott Valley",
+          "city": "Prescott Valley",
+          "state": "AZ",
+          "lat": 34.5836,
+          "lng": -112.2791
+        }
+      ]
+    },
+    {
+      "name": "Barry's U Pull It",
+      "status": "adapter-built",
+      "platform": "wordpress; entire inventory server-rendered as one DataTable (Indy pattern). NOTE: barrysupullit.com is a parked lander \u2014 real site is barrysupullit.net",
+      "inventory_url": "https://barrysupullit.net/vehicle-inventory-2/",
+      "api": {
+        "endpoint": "https://barrysupullit.net/vehicle-inventory-2/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html table#vehicles (~700 rows: Year, Make, Model, Engine, Color, VIN, Stock# STK######, Row#, Arrival Date MM/DD/YY)",
+        "requests_per_scan": "1 (+1 for /part-pricing/, ~425 parts -> barrys_pricing.json)",
+        "notes": "TWO physical yards (Mobile/Theodore AL at 5385 Barry Dr; Pass Christian MS at 8270 Firetower Rd) but ONE blended inventory table with no location column and no per-yard page (sitemap checked) \u2014 mapped to a single 'Barry's U Pull It - Mobile' yard, Parts Galore precedent. Split if they ever expose per-yard inventory. Neither parcel in OSM \u2192 zip centroids (Mobile 36582 used for the pin; Pass Christian 39571 recorded here: 30.3786,-89.2610)."
+      },
+      "update_freshness": "live (recent arrival dates)",
+      "robots": "allow all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Barry's U Pull It - Mobile",
+          "city": "Mobile",
+          "state": "AL",
+          "lat": 30.5391,
+          "lng": -88.1828
+        }
+      ]
+    },
+    {
+      "name": "Prestige Pull-Your-Part",
+      "status": "adapter-built",
+      "platform": "wordpress running BOTH gm_inventory_search and the newer art-inventory plugin (art-inventory is live)",
+      "inventory_url": "https://prestigepullyourpart.com/vehicle-search/",
+      "api": {
+        "endpoint": "https://prestigepullyourpart.com/wp-admin/admin-ajax.php",
+        "method": "POST",
+        "auth": "nonce from `art_inventory_sf_ajax = {...,\"nonce\":...}` on /vehicle-search/",
+        "format": "json (whole yard in one response)",
+        "requests_per_scan": "2 at 2s",
+        "notes": "action=art_inventory_get_yard_assets&security={nonce}&yard=0&make=0&model=0&year=0 returns the ENTIRE yard (~1,250 rows) \u2014 the '0' values are required (named/empty values return []). Rows: stock_number (PRE######, id basis), iyear, make, model, vehicle_row, yard_date, color, vin (often truncated; only 17-char kept), yard_name/city/state. Houston parcel not in OSM \u2192 E Mount Houston Rd centroid."
+      },
+      "update_freshness": "live (same-week yard_date values)",
+      "robots": "allow all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Prestige Pull-Your-Part - Houston",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.8912,
+          "lng": -95.3
         }
       ]
     }

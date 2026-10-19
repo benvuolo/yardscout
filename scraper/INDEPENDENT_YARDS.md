@@ -313,3 +313,45 @@ commits `scraper/snapshots/ace_inventory.json.gz` (normalized vehicles +
 fetched_at stamp; refuses crawls under 500 vehicles) and a fresh
 `ace_pricing.json`, then pushes. The CI adapter falls back to the snapshot
 whenever its live crawl yields zero vehicles and logs the snapshot's age.
+
+## 2026-10-18 — Discovery-sweep build round (+16 yards, past 200)
+
+Six chains built in one pass (all mechanisms verified live during the build):
+
+1. **VinPlus platform — Road Tested Parts + Pickers/Pipes (9 yards,
+   ~6,000 cars)**. One adapter, two tenants of the vinplus.texnrewards.com
+   React SPA (unauthenticated Cloud Run JSON API, YardSmart source). RTP:
+   Bessler's Hebron + Louisville KY, Bluegrass Lexington KY, Raceway
+   Pik-A-Part Savannah TN, RTP Pick-A-Part Maiden NC. Tri-State: Pickers
+   Longview/Reno TX + Texarkana (the API says TX, the yard is physically in
+   AR — recorded as AR), Pipes U-Pull-It Shreveport LA. 100-row cap per
+   query → per-make × per-location with recursive year-bucket splitting.
+   utah-pic-a-part and ipull-upull are also tenants (already covered) — a
+   periodic tenant-slug sweep is worth doing.
+2. **Pick-A-Part VA (2 yards, ~7,200 cars — biggest single add)**. UN-PARKED:
+   Cloudflare TLS fingerprinting beat plain requests, so the fetch helper
+   tries requests first then curl_cffi impersonate=chrome (lazy import;
+   added to scan.yml pip install). 500 cards/page × ~15 pages.
+3. **Go Pull-It (3 yards, FL/GA)**. UN-PARKED and registry's stale Tampa
+   location fixed (real yards: Jacksonville, Atlanta East/Norcross,
+   Gainesville GA). Hard 50-row cap, no working pagination — per-make
+   queries with per-model drill-down (getModels REST) only when capped.
+   Honors the orphaned Crawl-delay 10 → ~30-50 min of the scan.
+4. **U-Pick-It AZ (2 yards, ~2,900 cars)** — Reddit request (Flagstaff).
+   NEW plugin family: yardconnect-pro v2.3 (YardSmart backend, photos on
+   api.yardsmartapp.com — useful detection fingerprint). One nonce + one
+   view=table POST per lot returns the whole lot unpaginated. Stock numbers
+   only on photo rows (~45%) → hash-id fallback for the rest. No VIN.
+5. **Barry's U Pull It (Mobile AL, ~700 cars)**. Real domain is
+   barrysupullit.net (.com is a parked lander). One Indy-style table. Two
+   physical yards but ONE blended inventory with no location column
+   (sitemap checked) → single blended Mobile yard, Parts Galore precedent.
+   /part-pricing/ table → barrys_pricing.json (~425 parts).
+6. **Prestige Pull-Your-Part (Houston TX, ~1,250 cars)**. The 15-minute
+   probe found gold: the art-inventory plugin's
+   art_inventory_get_yard_assets action with all-"0" params returns the
+   entire yard as JSON in one POST (named/empty params return []).
+
+Geocoding: 14 of 19 new addresses resolved exactly/street-level in OSM;
+Lexington KY, Savannah TN, Maiden NC, Mobile AL and Flagstaff AZ fell back
+to zip/town/road centroids (documented per entry in the registry).

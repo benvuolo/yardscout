@@ -42,7 +42,7 @@ jobs:
           restore-keys: scan-state-
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 rich
+        run: pip install requests beautifulsoup4 rich curl_cffi
 
       - name: Refresh per-yard price lists
         run: python scraper/junkyard_scraper.py --refresh-chain-pricing

@@ -8462,6 +8462,148 @@ def fetch_stcloud_inventory() -> list[dict]:
     return unique
 
 
+# VinPlus platform (vinplus.texnrewards.com) — multi-tenant React SPA over an
+# unauthenticated Cloud Run JSON API (source system: YardSmart). One adapter,
+# two tenants, 9 yards:
+#   road_tested_parts — Road Tested Parts network: Bessler's U Pull & Save
+#     (Hebron KY + Louisville KY), Bluegrass U Pull & Save (Lexington KY),
+#     Raceway Pik-A-Part (Savannah TN), RTP Pick-A-Part (Maiden NC)
+#   pickers_longview — Tri-State Iron & Metal network: Pickers (Longview TX,
+#     Texarkana AR — the API says TX but the yard is at 5512 E 9th St on the
+#     Arkansas side — and Reno TX), Pipes U-Pull-It (Shreveport LA)
+# GET /api/yard-info/{tenant} → business name + locations (location_id).
+# CAREFUL: the Pickers tenant's SEARCH yard_id is tri_state_iron_metal (the
+# business name), not the pickers_longview URL slug — the slug silently
+# returns zero matches.
+# GET /api/vehicle-groups → global 49-make catalog (the SPA's make dropdown).
+# POST /searchVehicleHttp {"yard_id","make","model","year_min","year_max",
+# "location_id"} → rows with year/make/model/vin/stock/vehicleRow/color/
+# engine/dateAdded (ISO tz)/yardLocation/daysInYard. RESULTS CAP AT 100 — the
+# scan loops make × location and recursively bisects year ranges on any
+# exactly-100 response. ~441 base requests at 2s ≈ 15 min. Stock numbers
+# ("000000109811") are the id basis, location-code qualified. NOTE:
+# utah-pic-a-part and ipull-upull are ALSO VinPlus tenants (already covered
+# by their own adapters) — a periodic tenant-slug sweep is worth doing.
+# robots.txt (vinplus.texnrewards.com): allow all. Addresses from the
+# tenants' sites; Lexington/Savannah/Maiden parcels missing from OSM →
+# zip/town centroids.
+VINPLUS_API = "https://inventory-search-api-581547763015.us-central1.run.app"
+VINPLUS_DELAY_SEC = 2.0
+VINPLUS_TENANTS = {
+    "road_tested_parts": {
+        "bessler_s_hebron": {"code": "hebron", "name": "Bessler's U Pull & Save - Hebron",
+                             "city": "Hebron", "state": "KY", "lat": 39.0685, "lng": -84.7193},
+        "bessler_s_louisville": {"code": "louisville", "name": "Bessler's U Pull & Save - Louisville",
+                                 "city": "Louisville", "state": "KY", "lat": 38.1816, "lng": -85.7551},
+        "bluegrass_lexington": {"code": "lex", "name": "Bluegrass U Pull & Save - Lexington",
+                                "city": "Lexington", "state": "KY", "lat": 38.0439, "lng": -84.4995},
+        "raceway": {"code": "savannah", "name": "Raceway Pik-A-Part - Savannah",
+                    "city": "Savannah", "state": "TN", "lat": 35.1979, "lng": -88.2014},
+        "road_tested_parts_maiden_nc": {"code": "maiden", "name": "RTP Pick-A-Part - Maiden",
+                                        "city": "Maiden", "state": "NC", "lat": 35.5766, "lng": -81.2139},
+    },
+    # NOTE: the SEARCH yard_id is the business name, NOT the URL slug
+    # (vinplus.texnrewards.com/pickers-longview + /api/yard-info/pickers_longview
+    # both work, but searchVehicleHttp wants tri_state_iron_metal — a slug
+    # yard_id silently returns match_count 0).
+    "tri_state_iron_metal": {
+        "pickers_longview": {"code": "longview", "name": "Pickers - Longview",
+                             "city": "Longview", "state": "TX", "lat": 32.5130, "lng": -94.8262},
+        "pickers_texarkana": {"code": "texarkana", "name": "Pickers - Texarkana",
+                              "city": "Texarkana", "state": "AR", "lat": 33.4300, "lng": -93.9760},
+        "pickers_reno": {"code": "reno", "name": "Pickers - Reno",
+                         "city": "Reno", "state": "TX", "lat": 33.6634, "lng": -95.4537},
+        "pipes_shreveport": {"code": "shreveport", "name": "Pipes U-Pull-It - Shreveport",
+                             "city": "Shreveport", "state": "LA", "lat": 32.5290, "lng": -93.7721},
+    },
+}
+
+
+def _vinplus_search(tenant: str, make: str, location_id: str,
+                    year_min: int | None = None, year_max: int | None = None,
+                    depth: int = 0) -> list[dict]:
+    """One searchVehicleHttp query; recursively bisect year ranges when the
+    100-row cap is hit (cap responses have match_count == 100 exactly)."""
+    time.sleep(VINPLUS_DELAY_SEC)
+    try:
+        r = requests.post(f"{VINPLUS_API}/searchVehicleHttp",
+                          json={"yard_id": tenant, "make": make, "model": None,
+                                "year_min": year_min, "year_max": year_max,
+                                "location_id": location_id},
+                          headers=HEADERS, timeout=60)
+        r.raise_for_status()
+        d = r.json()
+    except Exception as e:
+        print(f"  [VinPlus] {tenant}/{location_id} make {make!r} "
+              f"({year_min}-{year_max}) fetch failed: {e}", file=sys.stderr)
+        return []
+    rows = d.get("matches") or []
+    if len(rows) >= 100:
+        y0 = year_min if year_min is not None else 1900
+        y1 = year_max if year_max is not None else 2035
+        if y1 > y0 and depth < 8:
+            mid = (y0 + y1) // 2
+            return (_vinplus_search(tenant, make, location_id, y0, mid, depth + 1)
+                    + _vinplus_search(tenant, make, location_id, mid + 1, y1, depth + 1))
+        print(f"  [VinPlus] {tenant}/{location_id} {make} {y0}-{y1}: still capped "
+              f"at 100 on a leaf range — accepting partial", file=sys.stderr)
+    return rows
+
+
+def fetch_vinplus_inventory() -> list[dict]:
+    """Fetch both VinPlus tenants' inventories (make x location loop)."""
+    try:
+        r = requests.get(f"{VINPLUS_API}/api/vehicle-groups", headers=HEADERS, timeout=60)
+        r.raise_for_status()
+        makes = sorted((r.json().get("data") or {}).keys())
+    except Exception as e:
+        print(f"  [VinPlus] vehicle-groups fetch failed: {e}", file=sys.stderr)
+        return []
+    if not makes:
+        print("  [VinPlus] no makes in vehicle-groups — API changed?", file=sys.stderr)
+        return []
+
+    all_vehicles: list[dict] = []
+    for tenant, locations in VINPLUS_TENANTS.items():
+        for loc_id, yard in locations.items():
+            loc_rows: list[dict] = []
+            for make_name in makes:
+                loc_rows.extend(_vinplus_search(tenant, make_name, loc_id))
+            _indep_cache_raw(f"vinplus_{yard['code']}.json",
+                             json.dumps(loc_rows).encode())
+            for row in loc_rows:
+                stock = str(row.get("stock") or "").strip()
+                if not stock:
+                    continue
+                vin = str(row.get("vin") or "").strip().upper()
+                date_s = str(row.get("dateAdded") or "")[:10]
+                try:
+                    year_i = int(row.get("year") or 0)
+                except (TypeError, ValueError):
+                    year_i = 0
+                all_vehicles.append({
+                    "id": f"vinplus-{yard['code']}-{stock.lower()}",
+                    "vin": vin if len(vin) == 17 else "",
+                    "year": year_i,
+                    "make": _utpap_format_label(str(row.get("make") or "")),
+                    "model": _utpap_format_label(str(row.get("model") or "")),
+                    "row": str(row.get("vehicleRow") or "").strip(),
+                    "dateAdded": date_s,
+                    "_color": str(row.get("color") or "").strip().title(),
+                    "_location": yard["name"],
+                    "_city": yard["city"],
+                    "_state": yard["state"],
+                    "_lat": yard["lat"],
+                    "_lng": yard["lng"],
+                    "_source": "vinplus",
+                })
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [VinPlus] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
 # Nevada Pic-A-Part (nvpap.com) — 2-yard chain: Las Vegas (5100 N Lamb Blvd,
 # North Las Vegas) + Henderson (110 W Rolly St). FIRST LAS VEGAS-METRO
 # COVERAGE (~3,100 vehicles); user-requested by email 2026-10-17. WordPress
@@ -8638,6 +8780,618 @@ def refresh_nvpap_pricing_file() -> Path:
     return path
 
 
+# Pick-A-Part VA (pickapartva.com) — 2 yards: Fredericksburg (9001 Patriot
+# Hwy, ~5,300 cards) + Stafford (164 Norman Rd, ~2,000), ~7,300 vehicles.
+# WordPress + "iis-pro-upull" plugin; GET /inventory/ANY/ANY/?k=1&pagenum=N
+# returns 500 server-rendered cards per page (~15 pages). Card fields:
+# Stock (PAP######, the id basis), Year, Make/Model (combined, YardSmart
+# style with the make often repeated — "SATURN SATURN S SERIES"), Vin,
+# Location (Fredericksburg|Stafford), Row (often blank), Set Date (ISO).
+# CLOUDFLARE: TLS-fingerprint challenge blocks plain requests (residential
+# AND datacenter) — _papva_get() tries plain requests first (in case the WAF
+# posture relaxes) then falls back to curl_cffi with impersonate="chrome"
+# (lazy import; CI installs curl_cffi in scan.yml). This un-parks the chain
+# registered as candidate on 2026-10-17. robots.txt: allow all (wp-admin
+# excepted). ~16 requests/scan at 2s pacing. Both addresses geocode exactly.
+PAPVA_PAGE_URL = "https://pickapartva.com/inventory/ANY/ANY/?k=1&pagenum={n}"
+PAPVA_DELAY_SEC = 2.0
+PAPVA_MAX_PAGES = 40
+PAPVA_YARDS = {  # keyed by the card's Location value
+    "Fredericksburg": {"name": "Pick-A-Part VA - Fredericksburg", "city": "Fredericksburg",
+                       "state": "VA", "lat": 38.2714, "lng": -77.4927},
+    "Stafford": {"name": "Pick-A-Part VA - Stafford", "city": "Stafford",
+                 "state": "VA", "lat": 38.4612, "lng": -77.3635},
+}
+_PAPVA_CARD_RE = re.compile(
+    r'<b>Stock:</b>\s*([^<]*)<br/>\s*<b>Year:</b>\s*([^<]*)<br/>\s*'
+    r'<b>Make/Model :</b>\s*([^<]*)<br/>\s*<b>Vin :</b>\s*([^<]*)<br/>\s*'
+    r'<b>Location: </b>\s*([^<]*)<br/>\s*<b>Row: </b>\s*([^<]*)<br/>'
+    r'<b>Set Date: </b>\s*([^<]*)<br/>', re.S)
+_PAPVA_TWO_WORD_MAKES = ("LAND ROVER", "ALFA ROMEO", "ASTON MARTIN")
+
+
+def _papva_get(url: str) -> str | None:
+    """GET through Cloudflare: plain requests first, curl_cffi fallback."""
+    try:
+        r = requests.get(url, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+        r.raise_for_status()
+        if "iis-uPull" in r.text or "car-details-uPull" in r.text:
+            return r.text
+    except Exception:
+        pass
+    try:
+        from curl_cffi import requests as cffi_requests
+    except ImportError:
+        print("  [Pick-A-Part VA] plain fetch challenged and curl_cffi not "
+              "installed — skipping", file=sys.stderr)
+        return None
+    try:
+        r = cffi_requests.get(url, impersonate="chrome", timeout=60)
+        if r.status_code == 200:
+            return r.text
+        print(f"  [Pick-A-Part VA] curl_cffi got HTTP {r.status_code}", file=sys.stderr)
+    except Exception as e:
+        print(f"  [Pick-A-Part VA] curl_cffi fetch failed: {e}", file=sys.stderr)
+    return None
+
+
+def fetch_papva_inventory() -> list[dict]:
+    """Fetch Pick-A-Part VA's 2-yard inventory (paginated card deck)."""
+    import html as html_mod
+    all_vehicles: list[dict] = []
+    unknown_locs: set[str] = set()
+    for n in range(1, PAPVA_MAX_PAGES + 1):
+        if n > 1:
+            time.sleep(PAPVA_DELAY_SEC)
+        page = _papva_get(PAPVA_PAGE_URL.format(n=n))
+        if page is None:
+            break
+        cards = _PAPVA_CARD_RE.findall(page)
+        if not cards:
+            break
+        if n == 1:
+            _indep_cache_raw("papva_page1.html", page.encode())
+        for stock_s, year_s, mm_s, vin_s, loc_s, row_s, date_s in cards:
+            stock = stock_s.strip()
+            mm = html_mod.unescape(mm_s).strip()
+            if not stock or not mm:
+                continue
+            yard = PAPVA_YARDS.get(loc_s.strip())
+            if yard is None:
+                unknown_locs.add(loc_s.strip() or "?")
+                continue
+            mm_up = mm.upper()
+            make_s = next((p for p in _PAPVA_TWO_WORD_MAKES if mm_up.startswith(p + " ")),
+                          mm.split()[0])
+            model_s = mm[len(make_s):].strip()
+            if model_s.upper().startswith(make_s.upper() + " "):
+                model_s = model_s[len(make_s):].strip()  # "SATURN SATURN S SERIES"
+            vin = vin_s.strip().upper()
+            try:
+                year_i = int(year_s.strip())
+            except ValueError:
+                year_i = 0
+            all_vehicles.append({
+                "id": f"papva-{stock.lower()}",
+                "vin": vin if len(vin) == 17 else "",
+                "year": year_i,
+                "make": _utpap_format_label(make_s),
+                "model": _utpap_format_label(model_s),
+                "row": row_s.strip(),
+                "dateAdded": date_s.strip(),
+                "_location": yard["name"],
+                "_city": yard["city"],
+                "_state": yard["state"],
+                "_lat": yard["lat"],
+                "_lng": yard["lng"],
+                "_source": "papva",
+            })
+        if len(cards) < 500:  # short page = last page
+            break
+    if unknown_locs:
+        print(f"  [Pick-A-Part VA] skipped cards from unmapped location(s): "
+              f"{sorted(unknown_locs)}", file=sys.stderr)
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Pick-A-Part VA] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
+# Go Pull-It (gopullit.com) — 3 yards: Jacksonville FL (7282 Commonwealth
+# Ave), Atlanta East (4600 Buford Hwy, Norcross GA), Gainesville GA (2156
+# Athens Hwy). Un-parks the registry's candidate entry (whose Tampa location
+# was stale). WordPress/Divi custom theme; the gpi_location cookie (1/2/3)
+# selects the yard and plain GET /inventory/?location={slug}&make={MAKE}&
+# model= returns a server-rendered table: Make, Model, Year, Row, VIN, Stock
+# Number, Date Placed (MM/DD/YY), Location, Images. HARD 50-ROW CAP with NO
+# working pagination (/inventory/page/N/ echoes page 1; capped pages show
+# "More results available. Please select a model to narrow your search.") —
+# so the scan queries per make and drills into per-model queries (model list
+# from GET /wp-json/api/getModels?make=X — location-independent, cached per
+# make) only when the cap message appears. A make+model query that is STILL
+# capped is logged as partial (no further filter exists). Stock numbers
+# (GPI*/ATL* prefixes) are the id basis, hash fallback. robots.txt has an
+# orphaned Crawl-delay 10 (honored, like Fenix): ~150-300 requests ≈ 30-50
+# min/scan. All three addresses geocode (Atlanta East is even an OSM POI).
+GPI_BASE = "https://gopullit.com"
+GPI_DELAY_SEC = 10.0
+GPI_YARDS = {  # slug -> (cookie value, yard record)
+    "jacksonville-fl": {"cookie": "1", "name": "Go Pull-It - Jacksonville",
+                        "city": "Jacksonville", "state": "FL", "lat": 30.3373, "lng": -81.7697},
+    "atlanta-east": {"cookie": "2", "name": "Go Pull-It - Atlanta East",
+                     "city": "Norcross", "state": "GA", "lat": 33.9631, "lng": -84.1803},
+    "gainesville-ga": {"cookie": "3", "name": "Go Pull-It - Gainesville",
+                       "city": "Gainesville", "state": "GA", "lat": 34.2810, "lng": -83.7860},
+}
+_GPI_MAKES_RE = re.compile(r'<select name="make" id="js-input-make".*?</select>', re.S)
+_GPI_OPTION_RE = re.compile(r'<option value="([^"]+)"')
+_GPI_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+_GPI_MORE_MSG = "More results available"
+
+
+def fetch_gopullit_inventory() -> list[dict]:
+    """Fetch Go Pull-It's 3-yard inventory (per-make queries, model drill-down)."""
+    import hashlib
+    import html as html_mod
+    import urllib.parse
+
+    def _get(url: str, cookie: str):
+        time.sleep(GPI_DELAY_SEC)
+        r = requests.get(url, headers={**HEADERS, "Accept": "text/html",
+                                       "Cookie": f"gpi_location={cookie}"}, timeout=60)
+        r.raise_for_status()
+        return r.text
+
+    def _parse_rows(page: str, yard: dict, out: list, dupes: dict):
+        for block in _GPI_ROW_RE.findall(page):
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in _FENIX_TD_RE.findall(block)]
+            if len(cells) < 8:
+                continue
+            make_s, model_s, year_s, row_s, vin_s, stock_s, date_s = cells[:7]
+            if not year_s.isdigit():  # header row (th cells don't match, but be safe)
+                continue
+            date_iso = ""
+            m = re.match(r"(\d{2})/(\d{2})/(\d{2})$", date_s.strip())
+            if m:
+                date_iso = f"20{m.group(3)}-{m.group(1)}-{m.group(2)}"
+            stock = stock_s.strip()
+            if stock:
+                vid = f"gopullit-{stock.lower()}"
+            else:
+                basis = "|".join((yard["name"], make_s, model_s, year_s, row_s,
+                                  vin_s, date_s)).lower()
+                vid = "gopullit-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+                n = dupes.get(vid, 0) + 1
+                dupes[vid] = n
+                if n > 1:
+                    vid = f"{vid}-{n}"
+            vin = vin_s.strip().upper()
+            out.append({
+                "id": vid,
+                "vin": vin if len(vin) == 17 else "",
+                "year": int(year_s),
+                "make": _utpap_format_label(make_s),
+                "model": _utpap_format_label(model_s),
+                "row": row_s.strip(),
+                "dateAdded": date_iso,
+                "_location": yard["name"],
+                "_city": yard["city"],
+                "_state": yard["state"],
+                "_lat": yard["lat"],
+                "_lng": yard["lng"],
+                "_source": "gopullit",
+            })
+
+    all_vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    models_cache: dict[str, list[str]] = {}
+    for slug, yard in GPI_YARDS.items():
+        try:
+            page = _get(f"{GPI_BASE}/inventory/?location={slug}", yard["cookie"])
+        except Exception as e:
+            print(f"  [Go Pull-It] {slug} landing fetch failed: {e}", file=sys.stderr)
+            continue
+        m = _GPI_MAKES_RE.search(page)
+        makes = [v for v in _GPI_OPTION_RE.findall(m.group(0)) if v not in ("-1", "")] if m else []
+        if not makes:
+            print(f"  [Go Pull-It] {slug}: no makes parsed — layout changed?", file=sys.stderr)
+            continue
+        cached = False
+        for make_name in makes:
+            q = urllib.parse.quote_plus(make_name)
+            try:
+                page = _get(f"{GPI_BASE}/inventory/?location={slug}&make={q}&model=",
+                            yard["cookie"])
+            except Exception as e:
+                print(f"  [Go Pull-It] {slug}/{make_name} fetch failed: {e}", file=sys.stderr)
+                continue
+            if not cached and "tr" in page:
+                _indep_cache_raw(f"gopullit_{slug}.html", page.encode())
+                cached = True
+            if _GPI_MORE_MSG not in page:
+                _parse_rows(page, yard, all_vehicles, dupes)
+                continue
+            # capped at 50 — drill into per-model queries
+            if make_name not in models_cache:
+                try:
+                    r = requests.get(f"{GPI_BASE}/wp-json/api/getModels?make={q}",
+                                     headers=HEADERS, timeout=60)
+                    r.raise_for_status()
+                    models_cache[make_name] = [str(x) for x in r.json() if str(x).strip()]
+                except Exception as e:
+                    print(f"  [Go Pull-It] getModels {make_name} failed: {e} — "
+                          f"keeping capped 50 rows", file=sys.stderr)
+                    models_cache[make_name] = []
+                time.sleep(GPI_DELAY_SEC)
+            if not models_cache[make_name]:
+                _parse_rows(page, yard, all_vehicles, dupes)
+                continue
+            for model_name in models_cache[make_name]:
+                mq = urllib.parse.quote_plus(model_name)
+                try:
+                    page = _get(f"{GPI_BASE}/inventory/?location={slug}&make={q}&model={mq}",
+                                yard["cookie"])
+                except Exception as e:
+                    print(f"  [Go Pull-It] {slug}/{make_name}/{model_name} fetch failed: {e}",
+                          file=sys.stderr)
+                    continue
+                if _GPI_MORE_MSG in page:
+                    print(f"  [Go Pull-It] {slug}/{make_name}/{model_name}: still capped "
+                          f"at 50 — accepting partial (no further filter)", file=sys.stderr)
+                _parse_rows(page, yard, all_vehicles, dupes)
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Go Pull-It] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
+# U-Pick-It AZ (upickitaz.com) — 2 yards: Flagstaff (7320 Leupp Rd) +
+# Prescott Valley (10440 E Valley Rd), ~2,900 vehicles. User-requested from
+# Reddit (Flagstaff, zip 86015). WordPress + yardconnect-pro v2.3 plugin — a
+# NEW plugin family over a YardSmart backend (photos on api.yardsmartapp.com;
+# fingerprint for platform detection: wp-content/plugins/yardconnect-pro/).
+# Mechanism: regex the nonce from `var yardconnectPublic = {... "nonce":...}`
+# on any site page (even their 404 page carries it — don't raise on status),
+# then ONE POST per lot to admin-ajax.php with
+# action=yardconnect_search_vehicles&lot={Lot}&make=all&model=all&engine=&
+# year_start=1949&year_end=2026&view=table. view=table is CRITICAL: it
+# returns the whole lot unpaginated (1.5-2.8 MB fragment); grid view is
+# paginated ~20/page. Columns: Image, Make, Model, Year, Color, Body Style,
+# Engine, Yard Row, Date Set (MM/DD/YY). Stock number only exists on rows
+# with photos (data-stock-number in the thumbnail cell; ~45% of rows) → ids
+# are upickitaz-{stock} when present else the sha1-hash convention with
+# ordinal dupe suffixes. No VIN anywhere. Expired nonce self-heals: HTTP 403
+# returns JSON {data:{nonce:"<fresh>"}} — retry once with that. ~3 requests/
+# scan. robots.txt explicitly allows admin-ajax.php. No parts price list
+# found. Flagstaff's parcel is missing from OSM → Leupp Road centroid;
+# Prescott Valley geocodes exactly.
+UPICKIT_SITE = "https://upickitaz.com"
+UPICKIT_AJAX = f"{UPICKIT_SITE}/wp-admin/admin-ajax.php"
+UPICKIT_DELAY_SEC = 2.0
+UPICKIT_YARDS = {  # keyed by the `lot` param value
+    "Flagstaff": {"name": "U-Pick-It AZ - Flagstaff", "city": "Flagstaff",
+                  "state": "AZ", "lat": 35.2872, "lng": -111.3546},
+    "Prescott Valley": {"name": "U-Pick-It AZ - Prescott Valley", "city": "Prescott Valley",
+                        "state": "AZ", "lat": 34.5836, "lng": -112.2791},
+}
+_UPICKIT_NONCE_RE = re.compile(r'yardconnectPublic\s*=\s*{[^}]*"nonce"\s*:\s*"([0-9a-f]+)"')
+_UPICKIT_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+_UPICKIT_STOCK_RE = re.compile(r'data-stock-number="([^"]+)"')
+
+
+def fetch_upickitaz_inventory() -> list[dict]:
+    """Fetch U-Pick-It AZ's 2-yard inventory (one table-view POST per lot)."""
+    import hashlib
+    import html as html_mod
+    session = requests.Session()
+    nonce = ""
+    for path in ("/", "/inventory/"):
+        try:
+            r = session.get(UPICKIT_SITE + path, headers={**HEADERS, "Accept": "text/html"},
+                            timeout=60)  # no raise_for_status: their 404 page has the nonce
+            m = _UPICKIT_NONCE_RE.search(r.text)
+            if m:
+                nonce = m.group(1)
+                break
+        except Exception as e:
+            print(f"  [U-Pick-It AZ] nonce page {path} fetch failed: {e}", file=sys.stderr)
+    if not nonce:
+        print("  [U-Pick-It AZ] no yardconnectPublic nonce found — plugin changed?",
+              file=sys.stderr)
+        return []
+
+    all_vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    for lot, yard in UPICKIT_YARDS.items():
+        time.sleep(UPICKIT_DELAY_SEC)
+        page = None
+        for attempt in (1, 2):
+            try:
+                r = session.post(UPICKIT_AJAX,
+                                 data={"action": "yardconnect_search_vehicles",
+                                       "nonce": nonce, "lot": lot, "make": "all",
+                                       "model": "all", "engine": "", "year_start": "1949",
+                                       "year_end": "2026", "view": "table"},
+                                 headers=HEADERS, timeout=120)
+                if r.status_code == 403 and attempt == 1:
+                    try:  # expired nonce self-heal: fresh one in the 403 body
+                        nonce = r.json()["data"]["nonce"]
+                        print("  [U-Pick-It AZ] nonce expired — retrying with fresh one",
+                              file=sys.stderr)
+                        continue
+                    except Exception:
+                        pass
+                r.raise_for_status()
+                page = r.text
+            except Exception as e:
+                print(f"  [U-Pick-It AZ] lot {lot!r} fetch failed: {e}", file=sys.stderr)
+            break
+        if page is None:
+            continue
+        _indep_cache_raw(f"upickitaz_{lot.split()[0].lower()}.html", page.encode())
+        if "No vehicles found" in page:
+            print(f"  [U-Pick-It AZ] lot {lot!r}: no vehicles", file=sys.stderr)
+            continue
+        for block in _UPICKIT_ROW_RE.findall(page):
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in _FENIX_TD_RE.findall(block)]
+            if len(cells) < 9:
+                continue
+            _, make_s, model_s, year_s, color_s, body_s, engine_s, row_s, date_s = cells[-9:]
+            if not year_s.isdigit():  # header row
+                continue
+            date_iso = ""
+            m = re.match(r"(\d{2})/(\d{2})/(\d{2})$", date_s)
+            if m:
+                date_iso = f"20{m.group(3)}-{m.group(1)}-{m.group(2)}"
+            sm = _UPICKIT_STOCK_RE.search(block)
+            if sm:
+                vid = f"upickitaz-{sm.group(1).lower()}"
+            else:  # ~55% of rows have no photo and no stock number
+                basis = "|".join((lot, make_s, model_s, year_s, color_s, body_s,
+                                  engine_s, row_s, date_s)).lower()
+                vid = "upickitaz-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+                n = dupes.get(vid, 0) + 1
+                dupes[vid] = n
+                if n > 1:
+                    vid = f"{vid}-{n}"
+            all_vehicles.append({
+                "id": vid,
+                "vin": "",
+                "year": int(year_s),
+                "make": _utpap_format_label(make_s),
+                "model": _utpap_format_label(model_s),
+                "row": re.sub(r"(?i)^yard\s+", "", row_s),
+                "dateAdded": date_iso,
+                "_color": color_s.title(),
+                "_location": yard["name"],
+                "_city": yard["city"],
+                "_state": yard["state"],
+                "_lat": yard["lat"],
+                "_lng": yard["lng"],
+                "_source": "upickitaz",
+            })
+    seen: set[str] = set()
+    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [U-Pick-It AZ] {len(unique)} vehicles across "
+          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+    return unique
+
+
+# Barry's U Pull It (barrysupullit.net — NOTE: .com is a parked lander) —
+# two physical yards (Mobile/Theodore AL at 5385 Barry Dr; Pass Christian MS
+# at 8270 Firetower Rd) but ONE blended inventory: the entire site has a
+# single /vehicle-inventory-2/ page server-rendering one <table id=
+# "vehicles"> (~700 rows; Year, Make, Model, Engine, Color, VIN, Stock#,
+# Row#, Arrival Date MM/DD/YY) with NO location column and no per-yard page
+# (sitemap checked). Following the Parts Galore precedent the adapter maps
+# everything to "Barry's U Pull It - Mobile" with a registry note; split if
+# they ever expose per-yard inventory. Stock numbers (STK######) are the id
+# basis. Indy-style one GET/scan. /part-pricing/ table (~425 parts: desc,
+# price, unit, core) -> barrys_pricing.json. robots.txt: allow all. Neither
+# parcel is in OSM → zip centroids (36582 Mobile; 39571 recorded in registry
+# for the MS yard).
+BARRYS_INVENTORY_URL = "https://barrysupullit.net/vehicle-inventory-2/"
+BARRYS_PRICES_URL = "https://barrysupullit.net/part-pricing/"
+BARRYS_YARD = {"name": "Barry's U Pull It - Mobile", "city": "Mobile",
+               "state": "AL", "lat": 30.5391, "lng": -88.1828}
+_BARRYS_TABLE_RE = re.compile(r'<table[^>]*id="vehicles"[^>]*>(.*?)</table>', re.S)
+_BARRYS_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+
+
+def fetch_barrys_inventory() -> list[dict]:
+    """Fetch Barry's U Pull It's blended inventory (one server-rendered table)."""
+    import hashlib
+    import html as html_mod
+    try:
+        r = requests.get(BARRYS_INVENTORY_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=120)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Barry's] inventory fetch failed: {e}", file=sys.stderr)
+        return []
+    m = _BARRYS_TABLE_RE.search(page)
+    if not m:
+        print("  [Barry's] table#vehicles not found — site layout changed?", file=sys.stderr)
+        return []
+    _indep_cache_raw("barrys_inventory.html", page.encode())
+    vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    for block in _BARRYS_ROW_RE.findall(m.group(1)):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 9:
+            continue
+        year_s, make_s, model_s, engine_s, color_s, vin_s, stock_s, row_s, date_s = cells[:9]
+        if not year_s.isdigit():
+            continue
+        date_iso = ""
+        dm = re.match(r"(\d{2})/(\d{2})/(\d{2})$", date_s)
+        if dm:
+            date_iso = f"20{dm.group(3)}-{dm.group(1)}-{dm.group(2)}"
+        stock = stock_s.strip()
+        if stock:
+            vid = f"barrys-{stock.lower()}"
+        else:
+            basis = "|".join((make_s, model_s, year_s, color_s, vin_s, row_s, date_s)).lower()
+            vid = "barrys-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+            n = dupes.get(vid, 0) + 1
+            dupes[vid] = n
+            if n > 1:
+                vid = f"{vid}-{n}"
+        vin = vin_s.strip().upper()
+        vehicles.append({
+            "id": vid,
+            "vin": vin if len(vin) == 17 else "",
+            "year": int(year_s),
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": row_s.strip(),
+            "dateAdded": date_iso,
+            "_color": color_s.title(),
+            "_location": BARRYS_YARD["name"],
+            "_city": BARRYS_YARD["city"],
+            "_state": BARRYS_YARD["state"],
+            "_lat": BARRYS_YARD["lat"],
+            "_lng": BARRYS_YARD["lng"],
+            "_source": "barrys",
+        })
+    seen: set[str] = set()
+    unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Barry's] {len(unique)} vehicles", file=sys.stderr)
+    return unique
+
+
+def refresh_barrys_pricing_file() -> Path:
+    """Refresh Barry's U Pull It's /part-pricing/ table -> barrys_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "barrys_pricing.json"
+    try:
+        r = requests.get(BARRYS_PRICES_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  [Barry's pricing] fetch failed: {e} — keeping existing file", file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for block in _BARRYS_ROW_RE.findall(r.text):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 4:
+            continue
+        desc, price_s, _unit, core_s = cells[:4]
+        try:
+            price_f = float(price_s.replace("$", "").replace(",", ""))
+            core_f = float(core_s.replace("$", "").replace(",", "")) if core_s else 0.0
+        except ValueError:
+            continue
+        if desc and desc not in seen:
+            seen[desc] = {
+                "description": desc,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Barry's pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Barry's pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# Prestige Pull-Your-Part (prestigepullyourpart.com) — single Houston TX yard
+# (7615 E Mount Houston Rd, ~1,250 vehicles). WordPress running BOTH the
+# gm_inventory_search family plugin AND a newer "art-inventory" plugin — the
+# live search uses art-inventory: regex the nonce from
+# `art_inventory_sf_ajax = {"url":..., "nonce":"..."}` on /vehicle-search/,
+# then ONE POST to admin-ajax.php with action=art_inventory_get_yard_assets&
+# security={nonce}&yard=0&make=0&model=0&year=0 → the ENTIRE yard as JSON
+# ("0" params are the magic; named/empty values return []). Rows carry
+# stock_number (PRE######, the id basis), iyear, make, model, vehicle_row,
+# yard_date ("YYYY-MM-DD HH:MM:SS"), color, vin (often truncated — only
+# 17-char values kept), yard_name/city/state. 2 requests/scan. robots.txt:
+# allow all. Street geocodes to road centroid (parcel not in OSM).
+PRESTIGE_SEARCH_URL = "https://prestigepullyourpart.com/vehicle-search/"
+PRESTIGE_AJAX = "https://prestigepullyourpart.com/wp-admin/admin-ajax.php"
+PRESTIGE_YARD = {"name": "Prestige Pull-Your-Part - Houston", "city": "Houston",
+                 "state": "TX", "lat": 29.8912, "lng": -95.3000}
+_PRESTIGE_NONCE_RE = re.compile(r'art_inventory_sf_ajax\s*=\s*{[^}]*"nonce":"([0-9a-f]+)"')
+
+
+def fetch_prestige_inventory() -> list[dict]:
+    """Fetch Prestige Pull-Your-Part's inventory (one all-yard JSON POST)."""
+    session = requests.Session()
+    try:
+        r = session.get(PRESTIGE_SEARCH_URL, headers={**HEADERS, "Accept": "text/html"},
+                        timeout=60)
+        r.raise_for_status()
+        m = _PRESTIGE_NONCE_RE.search(r.text)
+        if not m:
+            print("  [Prestige] art_inventory nonce not found — plugin changed?",
+                  file=sys.stderr)
+            return []
+        nonce = m.group(1)
+    except Exception as e:
+        print(f"  [Prestige] search page fetch failed: {e}", file=sys.stderr)
+        return []
+    time.sleep(2)
+    try:
+        r = session.post(PRESTIGE_AJAX,
+                         data={"action": "art_inventory_get_yard_assets",
+                               "security": nonce, "yard": "0", "make": "0",
+                               "model": "0", "year": "0"},
+                         headers={**HEADERS, "Referer": PRESTIGE_SEARCH_URL}, timeout=120)
+        r.raise_for_status()
+        rows = r.json()
+    except Exception as e:
+        print(f"  [Prestige] yard-assets fetch failed: {e}", file=sys.stderr)
+        return []
+    if not isinstance(rows, list) or not rows:
+        print("  [Prestige] yard-assets returned no rows", file=sys.stderr)
+        return []
+    _indep_cache_raw("prestige_assets.json", r.content)
+    vehicles: list[dict] = []
+    for row in rows:
+        stock = str(row.get("stock_number") or "").strip()
+        make_s = str(row.get("make") or "").strip()
+        if not stock or not make_s:
+            continue
+        model_s = str(row.get("model") or "").strip()
+        if model_s.upper().startswith(make_s.upper() + " "):
+            model_s = model_s[len(make_s):].strip()
+        vin = str(row.get("vin") or "").strip().upper()
+        try:
+            year_i = int(row.get("iyear") or 0)
+        except (TypeError, ValueError):
+            year_i = 0
+        vehicles.append({
+            "id": f"prestige-{stock.lower()}",
+            "vin": vin if len(vin) == 17 else "",
+            "year": year_i,
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": str(row.get("vehicle_row") or "").strip(),
+            "dateAdded": str(row.get("yard_date") or "")[:10],
+            "_color": str(row.get("color") or "").strip().title(),
+            "_location": PRESTIGE_YARD["name"],
+            "_city": PRESTIGE_YARD["city"],
+            "_state": PRESTIGE_YARD["state"],
+            "_lat": PRESTIGE_YARD["lat"],
+            "_lng": PRESTIGE_YARD["lng"],
+            "_source": "prestige",
+        })
+    seen: set[str] = set()
+    unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Prestige] {len(unique)} vehicles", file=sys.stderr)
+    return unique
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -8658,6 +9412,12 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "ipull": "iPull-uPull",
     "stcloud": "St. Cloud U Pull",
     "nvpap": "Nevada Pic-A-Part",
+    "vinplus": "VinPlus (RTP KY/TN/NC + Pickers TX/AR/LA)",
+    "papva": "Pick-A-Part VA",
+    "upickitaz": "U-Pick-It AZ",
+    "gopullit": "Go Pull-It",
+    "barrys": "Barry's U Pull It",
+    "prestige": "Prestige Pull-Your-Part",
 }
 
 
@@ -8692,6 +9452,18 @@ def fetch_independent_inventory() -> list[dict]:
     vehicles += fetch_stcloud_inventory()
     time.sleep(2)
     vehicles += fetch_nvpap_inventory()
+    time.sleep(2)
+    vehicles += fetch_vinplus_inventory()
+    time.sleep(2)
+    vehicles += fetch_papva_inventory()
+    time.sleep(2)
+    vehicles += fetch_upickitaz_inventory()
+    time.sleep(2)
+    vehicles += fetch_gopullit_inventory()
+    time.sleep(2)
+    vehicles += fetch_barrys_inventory()
+    time.sleep(2)
+    vehicles += fetch_prestige_inventory()
 
     # Loud zero-vehicle alarm: a chain that silently returns [] (WAF change,
     # plugin upgrade, layout change) must be visible in the scan log, not
@@ -9680,7 +10452,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes), Pick-A-Part VA, U-Pick-It AZ, Go Pull-It FL/GA, Barry's U Pull It AL, Prestige Pull-Your-Part TX — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -9703,7 +10475,8 @@ def main():
                refresh_upullitne_pricing_file, refresh_ruperts_pricing_file,
                refresh_pns_pricing_file, refresh_partsgalore_pricing_file,
                refresh_chesterfield_pricing_file, refresh_ace_pricing_file,
-               refresh_sturtevant_pricing_file, refresh_nvpap_pricing_file)
+               refresh_sturtevant_pricing_file, refresh_nvpap_pricing_file,
+               refresh_barrys_pricing_file)
         for fn in fns:
             try:
                 fn()
@@ -9798,7 +10571,7 @@ def main():
 
         indep_vehicles: list[dict] = []
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part)...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x9, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige)...", file=sys.stderr)
             indep_vehicles = fetch_independent_inventory()
 
         all_vehicles = (pnp_vehicles + tap_vehicles + utpap_vehicles
