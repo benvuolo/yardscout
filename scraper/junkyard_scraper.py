@@ -638,7 +638,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "Eyesight Camera Module", "rarity": "Epic", "low": 200, "high": 450, "cost": 25, "yr_min": 2015},
             {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 55, "high": 150, "cost": 25, "yr_max": 2014},
-            {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30, "yr_min": 2015, "trim": ["Limited", "Sport", "GT"]},
+            {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30, "yr_min": 2015, "trim": ["Limited", "Sport", "GT"], "option": True},
         ],
     },
     # --- JEEP ---
@@ -718,7 +718,7 @@ UNOBTANIUM_DB = {
         "make": "Ford",
         "year_range": (2005, 2024),
         "top_parts": [
-            {"name": "Recaro Seats (PP/GT350)", "rarity": "Epic", "low": 500, "high": 1200, "cost": 75, "yr_min": 2012, "trim": ["GT350", "GT500", "Shelby", "Mach 1"]},
+            {"name": "Recaro Seats (PP/GT350)", "rarity": "Epic", "low": 500, "high": 1200, "cost": 75, "yr_min": 2012, "trim": ["GT350", "GT500", "Shelby", "Mach 1"], "option": True},
             {"name": "GT Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_min": 2007, "trim": ["GT"]},
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 450, "cost": 40, "yr_min": 2015},
         ],
@@ -765,7 +765,7 @@ UNOBTANIUM_DB = {
             {"name": "SS/Z28 Rear Spoiler", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 20, "yr_min": 1993, "yr_max": 2002, "trim": ["SS", "Z28"]},
             {"name": "LS1 Intake + Accessories", "rarity": "Rare", "low": 100, "high": 300, "cost": 30, "yr_min": 1998, "yr_max": 2002, "trim": ["SS", "Z28"]},
             {"name": "SS Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "trim": ["SS", "ZL1", "Z28", "1LE"]},
-            {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SS", "ZL1", "1LE"]},
+            {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SS", "ZL1", "1LE"], "option": True},
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 400, "cost": 40, "yr_min": 2016},
         ],
     },
@@ -826,8 +826,11 @@ UNOBTANIUM_DB = {
             # ST3/RS HID pairs sold $400-1,300; ST/RS Recaro pairs $950-2,000.
             # Generation-fits: the US Focus ST launched 2013, RS 2016 — these
             # are gen-3 parts only; the old rows claimed fits 2000-2018.
-            {"name": "ST3/RS HID Headlights (pair)", "rarity": "Epic", "low": 500, "high": 1600, "cost": 45, "yr_min": 2013, "trim": ["ST", "RS"]},
-            {"name": "Recaro Seats (pair, ST/RS)", "rarity": "Epic", "low": 1100, "high": 2600, "cost": 71, "yr_min": 2013, "trim": ["ST", "RS"]},
+            # HIDs were ST3-package-only pre-facelift (ST2+ 2017-18); branded
+            # Recaros were ST2/ST3 package content (ST1 = unbranded cloth).
+            # Both std on RS — "option" under-claims RS, which is acceptable.
+            {"name": "ST3/RS HID Headlights (pair)", "rarity": "Epic", "low": 500, "high": 1600, "cost": 45, "yr_min": 2013, "trim": ["ST", "RS"], "option": True},
+            {"name": "Recaro Seats (pair, ST/RS)", "rarity": "Epic", "low": 1100, "high": 2600, "cost": 71, "yr_min": 2013, "trim": ["ST", "RS"], "option": True},
             {"name": "ST/RS Intercooler", "rarity": "Rare", "low": 60, "high": 160, "cost": 95, "yr_min": 2013, "trim": ["ST", "RS"]},
             {"name": "ST/RS Steering Wheel", "rarity": "Rare", "low": 100, "high": 225, "cost": 37, "yr_min": 2013, "trim": ["ST", "RS"]},
             {"name": "RS Brake Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 28, "yr_min": 2016, "trim": ["RS"]},  # RS sold 2016-2018 only
@@ -858,7 +861,7 @@ UNOBTANIUM_DB = {
             # N Line/N with the 2021 CN7 — these rows used to claim 2001-2023.
             {"name": "N/Sport Front Bumper Assembly", "rarity": "Epic", "low": 200, "high": 450, "cost": 73, "yr_min": 2017, "trim": ["N", "Sport", "N Line"]},
             {"name": "N Line Steering Wheel", "rarity": "Rare", "low": 100, "high": 225, "cost": 37, "yr_min": 2017, "trim": ["N", "N Line"]},
-            {"name": "Sport/N Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 40, "yr_min": 2017, "trim": ["N", "Sport", "N Line"]},
+            {"name": "Sport/N Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 40, "yr_min": 2021, "trim": ["N", "N Line"]},  # 2017-20 Sport sedan had no factory spoiler; std on 2021+ N/N Line
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 400, "cost": 45, "yr_min": 2017},
             {"name": "Touchscreen Infotainment", "rarity": "Rare", "low": 200, "high": 400, "cost": 60, "yr_min": 2017},
             {"name": "Smart Cruise Radar Module", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 22, "yr_min": 2017},
@@ -1236,7 +1239,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 350, "high": 800, "cost": 55, "yr_min": 2015},
             {"name": "MMI / Virtual Cockpit Module", "rarity": "Epic", "low": 200, "high": 550, "cost": 42, "yr_min": 2015},
-            {"name": "Bang & Olufsen / Premium Audio", "rarity": "Rare", "low": 180, "high": 450, "cost": 38, "trim": ["S3", "Prestige", "Premium Plus"]},
+            {"name": "Bang & Olufsen / Premium Audio", "rarity": "Rare", "low": 180, "high": 450, "cost": 38, "trim": ["S3", "Prestige", "Premium Plus"], "option": True},
             {"name": "Quattro / Haldex Differential (rear)", "rarity": "Rare", "low": 150, "high": 400, "cost": 28, "yr_min": 2006, "drive": ["awd"]},
         ],
     },
@@ -1269,7 +1272,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 400, "high": 950, "cost": 58, "yr_min": 2009},
             {"name": "MMI / MMI Touch / Screen Assembly", "rarity": "Epic", "low": 220, "high": 600, "cost": 45, "yr_min": 2009},
-            {"name": "Bang & Olufsen / B&O Sound System", "rarity": "Rare", "low": 200, "high": 520, "cost": 40, "trim": ["Prestige", "Premium Plus"]},
+            {"name": "Bang & Olufsen / B&O Sound System", "rarity": "Rare", "low": 200, "high": 520, "cost": 40, "trim": ["Prestige", "Premium Plus"], "option": True},
             {"name": "Instrument Cluster (virtual cockpit)", "rarity": "Epic", "low": 350, "high": 850, "cost": 45, "yr_min": 2017},
         ],
     },
@@ -1324,7 +1327,7 @@ UNOBTANIUM_DB = {
             {"name": "MMI / Virtual Cockpit", "rarity": "Epic", "low": 380, "high": 900, "cost": 48, "yr_min": 2013},
             # S-tuned adaptive air suspension is STANDARD on the US S6 — no option flag.
             {"name": "Air Suspension Compressor", "rarity": "Legendary", "low": 380, "high": 950, "cost": 44, "yr_min": 2013},
-            {"name": "B&O Advanced Audio", "rarity": "Epic", "low": 450, "high": 1050, "cost": 48, "trim": ["Prestige"]},
+            {"name": "B&O Advanced Audio", "rarity": "Epic", "low": 450, "high": 1050, "cost": 48, "trim": ["Prestige"], "option": True},
         ],
     },
     "audi s7": {
@@ -1345,7 +1348,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM Laser / LED Headlights (pair)", "rarity": "Legendary", "low": 900, "high": 2100, "cost": 85, "yr_min": 2013},
             {"name": "Carbon Ceramic Brakes (set)", "rarity": "Legendary", "low": 3500, "high": 8500, "cost": 350, "yr_min": 2013},
-            {"name": "B&O Advanced Sound", "rarity": "Epic", "low": 650, "high": 1500, "cost": 52, "yr_min": 2013},
+            {"name": "B&O Advanced Sound", "rarity": "Epic", "low": 650, "high": 1500, "cost": 52, "yr_min": 2013, "option": True},
         ],
     },
     "audi a5": {
@@ -1355,7 +1358,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 450, "high": 1000, "cost": 60, "yr_min": 2008},
             {"name": "MMI / Virtual Cockpit", "rarity": "Epic", "low": 280, "high": 700, "cost": 46, "yr_min": 2013},
-            {"name": "B&O Premium Audio", "rarity": "Rare", "low": 220, "high": 560, "cost": 40, "trim": ["Prestige", "Premium Plus"]},
+            {"name": "B&O Premium Audio", "rarity": "Rare", "low": 220, "high": 560, "cost": 40, "trim": ["Prestige", "Premium Plus"], "option": True},
             {"name": "Convertible Top Motor (Cabriolet)", "rarity": "Legendary", "low": 500, "high": 1300, "cost": 60, "trim": ["Cabriolet", "Convertible"]},
         ],
     },
@@ -1369,7 +1372,7 @@ UNOBTANIUM_DB = {
             # Air suspension only exists on the S6 here (standard there, never fitted to a
             # plain A6) — listings rarely distinguish S6 from A6, so option flag.
             {"name": "Air Suspension Compressor / Valve Block", "rarity": "Legendary", "low": 300, "high": 850, "cost": 40, "yr_min": 2012, "option": True},
-            {"name": "Bang & Olufsen 3D / Advanced Sound", "rarity": "Epic", "low": 400, "high": 1000, "cost": 48, "trim": ["Prestige"]},
+            {"name": "Bang & Olufsen 3D / Advanced Sound", "rarity": "Epic", "low": 400, "high": 1000, "cost": 48, "trim": ["Prestige"], "option": True},
             {"name": "Heated / Ventilated Seats (pair)", "rarity": "Rare", "low": 400, "high": 1000, "cost": 55, "yr_min": 2012},
         ],
     },
@@ -1392,7 +1395,7 @@ UNOBTANIUM_DB = {
             {"name": "MMI / Pop-Up Screen + Controller", "rarity": "Epic", "low": 300, "high": 750, "cost": 45, "yr_min": 2012},
             # Same as A6/S6: only the S7 carries air (std there), plain A7 never.
             {"name": "Air Suspension Module", "rarity": "Legendary", "low": 350, "high": 900, "cost": 42, "yr_min": 2012, "option": True},
-            {"name": "B&O Advanced Sound", "rarity": "Epic", "low": 450, "high": 1100, "cost": 50, "trim": ["Prestige"]},
+            {"name": "B&O Advanced Sound", "rarity": "Epic", "low": 450, "high": 1100, "cost": 50, "trim": ["Prestige"], "option": True},
         ],
     },
     "audi rs7": {
@@ -1414,7 +1417,7 @@ UNOBTANIUM_DB = {
             {"name": "Rear Seat Entertainment / Screens", "rarity": "Epic", "low": 400, "high": 1000, "cost": 35, "yr_min": 2011},
             # Adaptive air std on every A8/S8 — no option flag.
             {"name": "Air Suspension Compressor / Struts", "rarity": "Legendary", "low": 400, "high": 1100, "cost": 45, "yr_min": 2004},
-            {"name": "Bang & Olufsen Advanced Sound", "rarity": "Epic", "low": 600, "high": 1500, "cost": 55, "trim": ["L", "Prestige"]},
+            {"name": "Bang & Olufsen Advanced Sound", "rarity": "Epic", "low": 600, "high": 1500, "cost": 55, "trim": ["L", "Prestige"], "option": True},
             {"name": "Night Vision / Thermal Camera", "rarity": "Legendary", "low": 500, "high": 1200, "cost": 40, "yr_min": 2011},
         ],
     },
@@ -1445,7 +1448,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 450, "high": 1050, "cost": 60, "yr_min": 2009},
             {"name": "MMI / MMI Touch + Screen", "rarity": "Epic", "low": 280, "high": 700, "cost": 45, "yr_min": 2009},
-            {"name": "Bang & Olufsen / B&O Audio", "rarity": "Rare", "low": 220, "high": 560, "cost": 38, "trim": ["Premium Plus", "Prestige"]},
+            {"name": "Bang & Olufsen / B&O Audio", "rarity": "Rare", "low": 220, "high": 560, "cost": 38, "trim": ["Premium Plus", "Prestige"], "option": True},
             {"name": "Panoramic Roof Motor / Tracks", "rarity": "Rare", "low": 180, "high": 480, "cost": 32, "yr_min": 2009},
             {"name": "Quattro / Differential Controller", "rarity": "Rare", "low": 200, "high": 500, "cost": 30, "yr_min": 2009},
         ],
@@ -1471,7 +1474,7 @@ UNOBTANIUM_DB = {
             # Optional adaptive-chassis pkg on Q7 (std on the SQ7 entry below).
             {"name": "Air Suspension Compressor", "rarity": "Legendary", "low": 350, "high": 950, "cost": 42, "yr_min": 2011, "option": True},
             {"name": "Third Row / Power Seat Motors", "rarity": "Rare", "low": 200, "high": 550, "cost": 32, "yr_min": 2015},
-            {"name": "B&O 3D Sound", "rarity": "Epic", "low": 500, "high": 1200, "cost": 50, "trim": ["Prestige"]},
+            {"name": "B&O 3D Sound", "rarity": "Epic", "low": 500, "high": 1200, "cost": 50, "trim": ["Prestige"], "option": True},
         ],
     },
     "audi sq7": {
@@ -1491,7 +1494,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM HD Matrix LED (pair)", "rarity": "Legendary", "low": 900, "high": 2200, "cost": 85, "yr_min": 2019},
             {"name": "MMI Touch Response / Dual Screens", "rarity": "Epic", "low": 450, "high": 1000, "cost": 52, "yr_min": 2019},
-            {"name": "B&O Advanced 3D Audio", "rarity": "Epic", "low": 600, "high": 1400, "cost": 55, "trim": ["Prestige"]},
+            {"name": "B&O Advanced 3D Audio", "rarity": "Epic", "low": 600, "high": 1400, "cost": 55, "trim": ["Prestige"]},  # KEEP trim-gated: B&O Premium 3D std on Q8 Prestige (2019+)
             # 2019+ Q8: air suspension is the $2,750 Adaptive Chassis Package, optional on
             # every trim (std setup is steel + adaptive dampers).
             {"name": "Air Suspension + Roll Stabilization Module", "rarity": "Legendary", "low": 500, "high": 1300, "cost": 48, "yr_min": 2019, "option": True},
@@ -1516,7 +1519,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM HD Matrix LED (pair)", "rarity": "Legendary", "low": 950, "high": 2300, "cost": 88, "yr_min": 2020},
             {"name": "Sport Air Suspension Module", "rarity": "Legendary", "low": 550, "high": 1350, "cost": 50, "yr_min": 2020},
-            {"name": "B&O Advanced Audio", "rarity": "Epic", "low": 650, "high": 1450, "cost": 54, "yr_min": 2020},
+            {"name": "B&O Advanced Audio", "rarity": "Epic", "low": 650, "high": 1450, "cost": 54, "yr_min": 2020, "option": True},
         ],
     },
     "audi tt": {
@@ -1599,7 +1602,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM LED / Xenon Headlights (pair)", "rarity": "Epic", "low": 350, "high": 800, "cost": 55, "yr_min": 2016},
             {"name": "iDrive / Navigation Module (CIC/NBT)", "rarity": "Epic", "low": 200, "high": 500, "cost": 40, "yr_min": 2013},
-            {"name": "Harman Kardon Amp + Speakers", "rarity": "Rare", "low": 120, "high": 320, "cost": 30, "yr_min": 2013},
+            {"name": "Harman Kardon Amp + Speakers", "rarity": "Rare", "low": 120, "high": 320, "cost": 30, "yr_min": 2013, "option": True},
             {"name": "Power Liftgate Motor + Struts", "rarity": "Rare", "low": 100, "high": 280, "cost": 22, "yr_min": 2016},
         ],
     },
@@ -1621,7 +1624,7 @@ UNOBTANIUM_DB = {
             {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 400, "high": 950, "cost": 60, "yr_min": 2011},
             {"name": "Panoramic Sunroof Motor + Tracks", "rarity": "Rare", "low": 150, "high": 400, "cost": 28, "yr_min": 2011, "option": True},
             {"name": "iDrive / CIC / NBT Navigation Unit", "rarity": "Epic", "low": 220, "high": 580, "cost": 45, "yr_min": 2007},
-            {"name": "Harman Kardon Amp + Speakers", "rarity": "Rare", "low": 140, "high": 380, "cost": 32, "yr_min": 2007},
+            {"name": "Harman Kardon Amp + Speakers", "rarity": "Rare", "low": 140, "high": 380, "cost": 32, "yr_min": 2007, "option": True},
             {"name": "Transfer Case Actuator (common failure)", "rarity": "Epic", "low": 200, "high": 500, "cost": 25, "yr_min": 2004},
             {"name": "Power Liftgate Motor", "rarity": "Rare", "low": 120, "high": 320, "cost": 22, "yr_min": 2011},
         ],
@@ -1677,7 +1680,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "OEM Laser / LED Headlights (pair)", "rarity": "Legendary", "low": 800, "high": 2200, "cost": 90, "yr_min": 2019},
             {"name": "Curved Display / iDrive 8 Module", "rarity": "Legendary", "low": 500, "high": 1200, "cost": 60, "yr_min": 2019},
-            {"name": "Bowers & Wilkins / Premium Audio", "rarity": "Epic", "low": 400, "high": 1000, "cost": 50, "trim": ["Bowers"]},
+            {"name": "Bowers & Wilkins / Premium Audio", "rarity": "Epic", "low": 400, "high": 1000, "cost": 50, "option": True},
             {"name": "Air Suspension Compressor", "rarity": "Epic", "low": 350, "high": 900, "cost": 40, "yr_min": 2019},
         ],
     },
@@ -1689,7 +1692,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "iDrive / Business Navigation", "rarity": "Rare", "low": 150, "high": 400, "cost": 35, "yr_min": 2008},
             {"name": "OEM Xenon / LED Headlights (pair)", "rarity": "Epic", "low": 300, "high": 750, "cost": 50, "yr_min": 2012},
-            {"name": "Harman Kardon Amp + Speakers", "rarity": "Rare", "low": 120, "high": 320, "cost": 28, "yr_min": 2012},
+            {"name": "Harman Kardon Amp + Speakers", "rarity": "Rare", "low": 120, "high": 320, "cost": 28, "yr_min": 2012, "option": True},
             {"name": "Sport / M Sport Seats (pair)", "rarity": "Rare", "low": 250, "high": 600, "cost": 45, "trim": ["M Sport", "135", "128"]},
         ],
     },
@@ -1760,7 +1763,7 @@ UNOBTANIUM_DB = {
             {"name": "OEM LED / Laser Headlights (pair)", "rarity": "Legendary", "low": 700, "high": 1800, "cost": 85, "yr_min": 2009},
             {"name": "Rear Seat Entertainment Screens", "rarity": "Epic", "low": 300, "high": 800, "cost": 35, "yr_min": 2006},
             {"name": "Air Suspension Compressor / Valve", "rarity": "Legendary", "low": 300, "high": 850, "cost": 38, "yr_min": 2002},
-            {"name": "Bowers & Wilkins / Premium Audio", "rarity": "Epic", "low": 400, "high": 1100, "cost": 48, "trim": ["Bowers"]},
+            {"name": "Bowers & Wilkins / Premium Audio", "rarity": "Epic", "low": 400, "high": 1100, "cost": 48, "option": True},
             {"name": "iDrive / Curved Display Module", "rarity": "Epic", "low": 400, "high": 1000, "cost": 55, "yr_min": 2016},
         ],
     },
@@ -1831,7 +1834,7 @@ UNOBTANIUM_DB = {
             {"name": "OEM LED Headlights (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "yr_min": 2015},
             {"name": "Discover Pro / MIB Touchscreen", "rarity": "Epic", "low": 250, "high": 550, "cost": 50, "yr_min": 2015},
             {"name": "Fender / Dynaudio Amp + Sub", "rarity": "Rare", "low": 150, "high": 350, "cost": 35, "trim": ["GTI", "R", "Autobahn"]},
-            {"name": "GTI/R Recaro Seats (pair)", "rarity": "Epic", "low": 500, "high": 1100, "cost": 75, "trim": ["GTI", "R", "Clubsport"]},
+            {"name": "GTI/R Recaro Seats (pair)", "rarity": "Epic", "low": 500, "high": 1100, "cost": 75, "trim": ["GTI", "R", "Clubsport"], "option": True},
         ],
     },
     "gti": {
@@ -1884,7 +1887,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "Cue Touchscreen / Cluster", "rarity": "Epic", "low": 200, "high": 500, "cost": 45},
             {"name": "Bose / Premium Audio Amp", "rarity": "Rare", "low": 120, "high": 280, "cost": 30},
-            {"name": "ATS-V Recaro Seats (pair)", "rarity": "Epic", "low": 800, "high": 1800, "cost": 100, "trim": ["V"]},
+            {"name": "ATS-V Recaro Seats (pair)", "rarity": "Epic", "low": 800, "high": 1800, "cost": 100, "trim": ["V"], "option": True},
         ],
     },
     # =====================================================================
@@ -2202,7 +2205,7 @@ UNOBTANIUM_DB = {
         "year_range": (2002, 2017),
         "top_parts": [
             {"name": "Ralliart Turbo / TC-SST Parts", "rarity": "Epic", "low": 200, "high": 500, "cost": 40, "trim": ["Ralliart"]},
-            {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 50, "trim": ["Ralliart", "Evolution", "GTS"]},
+            {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 50, "trim": ["Ralliart", "Evolution", "GTS"], "option": True},
             {"name": "OEM Spoiler", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 15},
         ],
     },
@@ -2564,7 +2567,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "T-Top Panels (pair)", "rarity": "Legendary", "low": 250, "high": 700, "cost": 40},
             {"name": "OEM Seats (pair)", "rarity": "Epic", "low": 150, "high": 400, "cost": 40},
-            {"name": "WS6 Hood / Spoiler", "rarity": "Epic", "low": 150, "high": 450, "cost": 30, "trim": ["WS6", "Trans Am"]},
+            {"name": "WS6 Hood / Spoiler", "rarity": "Epic", "low": 150, "high": 450, "cost": 30, "trim": ["WS6", "Trans Am"], "option": True, "verify": "Twin-nostril Ram Air hood = WS6 package"},
             {"name": "LS1 Accessories (98-02)", "rarity": "Epic", "low": 100, "high": 300, "cost": 25, "yr_min": 1998},
         ],
     },
@@ -3219,7 +3222,7 @@ UNOBTANIUM_DB.update({
     "pontiac g6": {
         "display": "Pontiac G6", "make": "Pontiac", "year_range": (2005, 2010),
         "top_parts": [
-            {"name": "GXP Front Fascia + Spoiler", "rarity": "Rare", "low": 80, "high": 220, "cost": 25, "trim": ["GXP", "GTP"]},
+            {"name": "GXP Front Fascia + Spoiler", "rarity": "Rare", "low": 80, "high": 220, "cost": 25, "trim": ["GXP"]},  # GTP (2005-07) never had the GXP fascia
             {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
             # Convertible body style only — body style isn't decodable here and most G6s are
             # coupes/sedans.
@@ -3316,7 +3319,7 @@ UNOBTANIUM_DB.update({
             {"name": "ST Rear Spoiler", "rarity": "Rare", "low": 60, "high": 150, "cost": 15, "trim": ["ST"]},
             {"name": "Heated Side Mirrors (pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12, "option": True},
             # US Fiesta ST launched 2014 — row used to claim 2011+.
-            {"name": "ST Recaro Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 75, "yr_min": 2014, "trim": ["ST"]},
+            {"name": "ST Recaro Seats (pair)", "rarity": "Epic", "low": 300, "high": 700, "cost": 75, "yr_min": 2014, "trim": ["ST"], "option": True},
             {"name": "SYNC Touchscreen", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 35, "yr_min": 2014},
             {"name": "Manual Shifter Assembly", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "manual": True},
         ],
@@ -3458,7 +3461,7 @@ UNOBTANIUM_DB.update({
         "display": "Mercedes-Benz E-Class", "make": "Mercedes-Benz", "year_range": (1996, 2024),
         "top_parts": [
             {"name": "OEM LED/Xenon Headlights", "rarity": "Epic", "low": 200, "high": 550, "cost": 55, "yr_min": 2010},
-            {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 170, "cost": 25},
+            {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 170, "cost": 25, "option": True},
             {"name": "Wood Trim Set (unbroken)", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 15},
             {"name": "AMG Trim + Badging", "rarity": "Rare", "low": 80, "high": 240, "cost": 20, "trim": ["AMG"]},
             # SBC era only: W211 E-Class 2003-2006 (facelift dropped SBC). Used
@@ -3838,11 +3841,11 @@ _split_generations("mustang", display="Ford Mustang", make="Ford", gens=[
     ]},
     {"label": "S197", "years": (2005, 2014), "parts": [
         {"name": "GT Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "yr_min": 2007, "trim": ["GT"]},
-        {"name": "Recaro Seats (Boss/GT500)", "rarity": "Epic", "low": 500, "high": 1200, "cost": 75, "yr_min": 2012, "trim": ["GT500", "Shelby", "Boss"]},
+        {"name": "Recaro Seats (Boss/GT500)", "rarity": "Epic", "low": 500, "high": 1200, "cost": 75, "yr_min": 2012, "trim": ["GT500", "Shelby", "Boss"], "option": True},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 20},
     ]},
     {"label": "S550/S650", "years": (2015, 2024), "parts": [
-        {"name": "Recaro Seats (PP/GT350)", "rarity": "Epic", "low": 500, "high": 1200, "cost": 75, "trim": ["GT350", "GT500", "Shelby", "Mach 1"]},
+        {"name": "Recaro Seats (PP/GT350)", "rarity": "Epic", "low": 500, "high": 1200, "cost": 75, "trim": ["GT350", "GT500", "Shelby", "Mach 1"], "option": True},
         {"name": "GT Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "trim": ["GT"]},
         {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 450, "cost": 40},
     ]},
@@ -4035,7 +4038,7 @@ _split_generations("wrangler", display="Jeep Wrangler", make="Jeep", gens=[
         {"name": "Hardtop (full, clean)", "rarity": "Legendary", "low": 1400, "high": 3300, "cost": 60, "option": True},
         {"name": "Half Doors (pair)", "rarity": "Legendary", "low": 200, "high": 800, "cost": 40},
         {"name": "Rubicon Locker Actuators", "rarity": "Epic", "low": 100, "high": 275, "cost": 10, "trim": ["Rubicon"]},
-        {"name": "OEM LED Headlights", "rarity": "Rare", "low": 300, "high": 600, "cost": 50, "trim": ["Sahara", "Rubicon", "High Altitude", "Moab"]},
+        {"name": "OEM LED Headlights", "rarity": "Rare", "low": 300, "high": 600, "cost": 50, "trim": ["Sahara", "Rubicon", "High Altitude", "Moab"], "option": True},
     ]},
 ])
 
@@ -4092,12 +4095,12 @@ _split_generations("camaro", display="Chevy Camaro", make="Chevrolet", gens=[
     ]},
     {"label": "5th gen", "years": (2010, 2015), "parts": [
         {"name": "SS Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "trim": ["SS", "ZL1", "Z28", "1LE"]},
-        {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SS", "ZL1", "1LE"]},
+        {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SS", "ZL1", "1LE"], "option": True},
         {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20},
     ]},
     {"label": "6th gen", "years": (2016, 2024), "parts": [
         {"name": "SS Brembo Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 50, "trim": ["SS", "ZL1", "Z28", "1LE"]},
-        {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SS", "ZL1", "1LE"]},
+        {"name": "Recaro Seats (pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 60, "trim": ["SS", "ZL1", "1LE"], "option": True},
         {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 400, "cost": 40},
     ]},
 ])
@@ -4193,7 +4196,7 @@ UNOBTANIUM_DB.update({
         "year_range": (1998, 2015),
         "top_parts": [
             {"name": "Xenon/HID Headlights (pair)", "rarity": "Rare", "low": 100, "high": 300, "cost": 30},
-            {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 170, "cost": 25},
+            {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 60, "high": 170, "cost": 25, "option": True},
             # Optional accessory on the ML.
             {"name": "Running Boards (pair)", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 25, "option": True},
             {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
