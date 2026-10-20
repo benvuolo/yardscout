@@ -1,0 +1,8 @@
+# Local dev secrets for `npx wrangler dev` (copy to .dev.vars — gitignored).
+# test/e2e.sh writes its own .dev.vars automatically.
+DEV_MODE=1
+STRIPE_SECRET_KEY=sk_test_replace_me
+STRIPE_WEBHOOK_SECRET=whsec_replace_me
+RESEND_API_KEY=
+# Test-only Apple root override for verify-ios (see test/make-test-jws.mjs).
+APPLE_ROOT_CA_B64_TEST=

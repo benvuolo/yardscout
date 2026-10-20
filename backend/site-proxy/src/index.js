@@ -14,6 +14,10 @@
  */
 const UPSTREAM = 'https://benvuolo.github.io/yardscout';
 
+// Pro entitlements API (account-less, email-anchored) — see entitlements.js.
+// Lives here (not in yardscout-api) so the web app talks same-origin.
+import { handleEntitlements } from './entitlements.js';
+
 // Fixed-allowlist upstream mirror for the scan workflow. Some independent
 // yards' hosts (first case: indyupullit.com) hard-block GitHub Actions'
 // Azure IP ranges while allowing Cloudflare egress, so the scraper falls
@@ -28,8 +32,9 @@ const MIRROR_UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
 export default {
-  async fetch(req) {
+  async fetch(req, env) {
     const url = new URL(req.url);
+    if (url.pathname.startsWith('/api/ent/')) return handleEntitlements(req, env, url);
     const mirror = MIRRORS[url.pathname];
     if (mirror) {
       if (req.method !== 'GET') return new Response('GET only', { status: 405 });

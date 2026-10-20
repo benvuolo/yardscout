@@ -6,3 +6,32 @@ routes = [
   { pattern = "yardscout.io/*", zone_name = "yardscout.io" },
   { pattern = "www.yardscout.io/*", zone_name = "yardscout.io" },
 ]
+
+# ── Pro entitlements (account-less, email-anchored — src/entitlements.js) ──
+#
+# Secrets (set once with `npx wrangler secret put <NAME>` from this directory):
+#   STRIPE_SECRET_KEY      sk_test_… then sk_live_… at launch
+#   STRIPE_WEBHOOK_SECRET  whsec_… for the /api/ent/stripe-webhook endpoint
+#   RESEND_API_KEY         re_… (unlock-code emails)
+# Until the Stripe secrets exist the endpoints answer 503 and the web UI
+# falls back to App-Store-only copy — safe to deploy ahead of Stripe setup.
+
+[[kv_namespaces]]
+binding = "ENTITLEMENTS"
+id = "deb0d4c244fb4eb09a109050000d0e1b"
+
+[vars]
+# Where Stripe Checkout redirects back to.
+ENT_APP_URL = "https://yardscout.io/"
+# Stripe price id for Pro — $8.99/month recurring (mirrors the iOS product).
+# Create in the Stripe dashboard, then paste the price id (price_…) here.
+STRIPE_PRICE_PRO = ""
+# iOS StoreKit expectations for /api/ent/verify-ios.
+IOS_BUNDLE_ID = "com.benvuolo.yardscout"
+IOS_PRODUCT_ID = "yardscout_pro_monthly"
+# Sender for unlock-code emails. The resend.dev onboarding sender works for
+# testing; switch to a verified yardscout.io sender for real users.
+EMAIL_FROM = "YardScout <onboarding@resend.dev>"
+# "1" = codes are returned in API responses instead of relying on email, and
+# a test Apple root CA may be injected. NEVER enable in production.
+DEV_MODE = "0"
