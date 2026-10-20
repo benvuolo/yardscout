@@ -31,7 +31,7 @@ IOS_BUNDLE_ID = "com.benvuolo.yardscout"
 IOS_PRODUCT_ID = "yardscout_pro_monthly"
 # Sender for unlock-code emails. The resend.dev onboarding sender works for
 # testing; switch to a verified yardscout.io sender for real users.
-EMAIL_FROM = "YardScout <onboarding@resend.dev>"
+EMAIL_FROM = "YardScout <codes@yardscout.io>"
 # "1" = codes are returned in API responses instead of relying on email, and
 # a test Apple root CA may be injected. NEVER enable in production.
 DEV_MODE = "0"
