@@ -3409,6 +3409,86 @@ async function refreshNativeIapUi() {
   }
 }
 
+/* ===== iOS → EVERYWHERE: optional email link (SHIPS WITH 1.4) =====
+ * After a verified StoreKit purchase, "Use Pro on other devices" lets the
+ * user link an email: the app sends its StoreKit 2 signed transaction (JWS,
+ * via Purchases.getTransactionJws — new in the 1.4 native build) to the
+ * entitlement API, which verifies it offline against Apple's root cert and
+ * makes that email redeemable anywhere via a 6-digit code.
+ *
+ * Always optional — never required to buy or to use Pro in this app. The UI
+ * mentions no prices and links nowhere (App Review guideline 3.1.1/3.1.3).
+ * iOS-only for now: the Android build will reuse this block once its
+ * Play-token verification endpoint is live. */
+(() => {
+  if (!IS_NATIVE || IS_ANDROID) return;
+  const ENT_API = 'https://yardscout.io/api/ent';
+  const wrap = () => document.getElementById('ios-link');
+  const status = () => document.getElementById('ios-link-status');
+
+  function refreshIosLinkUi() {
+    const el = wrap();
+    if (!el) return;
+    // Only for a real StoreKit entitlement on THIS device (never the
+    // email-code path — that email is already linked by definition).
+    const show = isPro() && localStorage.getItem('jh_pro_source') === 'iap';
+    el.style.display = show ? '' : 'none';
+    if (!show) return;
+    const P = nativePlugin('Purchases');
+    if (!P || typeof P.getTransactionJws !== 'function') {
+      // Pre-1.4 native shell under a newer web bundle: stay hidden.
+      el.style.display = 'none';
+      return;
+    }
+    const linked = localStorage.getItem('ys_ios_linked_email');
+    if (linked) {
+      document.getElementById('ios-link-email').value = linked;
+      status().textContent = 'Linked to ' + linked + ' — use "Already have Pro?" with that email on any other device.';
+    }
+  }
+  // The sheet re-renders on every open; keep this block in sync then too.
+  document.getElementById('pro-pill').addEventListener('click', refreshIosLinkUi);
+  setTimeout(refreshIosLinkUi, 1500); // after the launch entitlement check
+
+  const btn = document.getElementById('ios-link-btn');
+  if (btn) btn.addEventListener('click', async () => {
+    const email = (document.getElementById('ios-link-email').value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status().textContent = 'Enter a valid email address.';
+      return;
+    }
+    const P = nativePlugin('Purchases');
+    if (!P) return;
+    track('ios-link-email');
+    btn.disabled = true;
+    status().textContent = 'Linking\u2026';
+    try {
+      const t = await P.getTransactionJws({ productId: IAP_PRODUCT_ID });
+      if (!t || !t.entitled || !t.jws) {
+        status().textContent = 'No active subscription found on this device.';
+        return;
+      }
+      const r = await fetch(ENT_API + '/verify-ios', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, jws: t.jws }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (r.ok && data.linked) {
+        localStorage.setItem('ys_ios_linked_email', email);
+        status().textContent = 'Linked to ' + email + ' — on any other device, choose "Already have Pro?" and enter this email.';
+        track('ios-link-done');
+      } else {
+        status().textContent = data.message || 'Could not link right now — try again later.';
+      }
+    } catch (e) {
+      status().textContent = 'Could not reach the server — check your connection.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+
 /* ===== WEB PRO (account-less entitlements) =====
  * Backend: the yardscout.io site Worker (backend/site-proxy/src/entitlements.js).
  * No accounts or passwords — the email given at Stripe Checkout IS the

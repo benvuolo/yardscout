@@ -7,10 +7,11 @@ import StoreKit
 /// right level of enforcement for an app whose Pro gate is client-side anyway.
 ///
 /// JS surface (window.Capacitor.Plugins.Purchases):
-///   getProduct({ productId })  -> { available, price?, displayName?, period? }
-///   purchase({ productId })    -> { entitled }
-///   restore()                  -> { entitled }
-///   isEntitled({ productId })  -> { entitled }
+///   getProduct({ productId })        -> { available, price?, displayName?, period? }
+///   purchase({ productId })          -> { entitled }
+///   restore()                        -> { entitled }
+///   isEntitled({ productId })        -> { entitled }
+///   getTransactionJws({ productId }) -> { entitled, jws? }   (ships with 1.4)
 @objc(PurchasesPlugin)
 public class PurchasesPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "PurchasesPlugin"
@@ -20,6 +21,7 @@ public class PurchasesPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "purchase", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "restore", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "isEntitled", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getTransactionJws", returnType: CAPPluginReturnPromise),
     ]
 
     private func productId(from call: CAPPluginCall) -> String {
@@ -98,6 +100,25 @@ public class PurchasesPlugin: CAPPlugin, CAPBridgedPlugin {
         Task {
             let entitled = await Self.checkEntitled(productId: id)
             call.resolve(["entitled": entitled])
+        }
+    }
+
+    /// The raw StoreKit 2 signed transaction (JWS) for the current Pro
+    /// entitlement. The app sends it to the entitlement API's /verify-ios,
+    /// which verifies it OFFLINE against Apple's root certificate — that's
+    /// how "Use Pro on other devices" links an email without any account.
+    @objc func getTransactionJws(_ call: CAPPluginCall) {
+        let id = productId(from: call)
+        Task {
+            for await entitlement in Transaction.currentEntitlements {
+                if case .verified(let transaction) = entitlement,
+                   transaction.productID == id,
+                   transaction.revocationDate == nil {
+                    call.resolve(["entitled": true, "jws": entitlement.jwsRepresentation])
+                    return
+                }
+            }
+            call.resolve(["entitled": false])
         }
     }
 
