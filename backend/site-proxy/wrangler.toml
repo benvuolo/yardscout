@@ -25,7 +25,7 @@ id = "deb0d4c244fb4eb09a109050000d0e1b"
 ENT_APP_URL = "https://yardscout.io/"
 # Stripe price id for Pro — $8.99/month recurring (mirrors the iOS product).
 # Create in the Stripe dashboard, then paste the price id (price_…) here.
-STRIPE_PRICE_PRO = ""
+STRIPE_PRICE_PRO = "price_1UShwjITsj7pDGFWNBNeEXR8"
 # iOS StoreKit expectations for /api/ent/verify-ios.
 IOS_BUNDLE_ID = "com.benvuolo.yardscout"
 IOS_PRODUCT_ID = "yardscout_pro_monthly"
