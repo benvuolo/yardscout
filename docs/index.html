@@ -399,7 +399,7 @@
     <div class="tier-head"><span class="tier-name">Pro</span><span class="tier-price">$8.99<small>/mo</small></span></div>
     <ul class="tier-list">
       <li>Full value data &mdash; resale ranges &amp; demand speed on nearly every car, pull costs where yards publish prices</li>
-      <li>Push alerts within hours of a watched car hitting a yard &mdash; including sale-day alerts</li>
+      <li id="tier-alerts-li">Push alerts within hours of a watched car hitting a yard &mdash; including sale-day alerts</li>
       <li>Compare part prices across every yard near you &mdash; find the cheapest alternator in one search</li>
       <li>One-tap "watch this" from any car + nationwide watches (alerts from any yard in the country)</li>
       <li>Unlimited saved cars</li>
@@ -424,15 +424,15 @@
     <strong>You're Pro &#10003;</strong>
     <span>Everything above is unlocked on this device.</span>
   </div>
-  <!-- Native IAP (iOS app only): StoreKit subscribe + restore. Replaces the
-       waitlist when the App Store subscription product is available. -->
+  <!-- Native IAP (iOS + Android): StoreKit / Play Billing subscribe + restore.
+       Replaces the waitlist when the store subscription product is available. -->
   <div id="native-iap" style="display:none;">
     <button type="button" id="iap-subscribe" class="btn btn-primary" style="width:100%;font-size:1rem;padding:0.8rem;">Subscribe &mdash; $8.99/mo</button>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.6rem;gap:0.5rem;flex-wrap:wrap;">
       <button type="button" id="iap-restore" class="btn" style="font-size:0.8125rem;">Restore purchases</button>
       <span id="iap-status" style="font-size:0.8125rem;color:var(--text-dim);"></span>
     </div>
-    <span class="waitlist-note">Auto-renews monthly through your App Store account &mdash; cancel anytime in iOS Settings. <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">terms</a>.</span>
+    <span class="waitlist-note" id="iap-note">Auto-renews monthly through your App Store account &mdash; cancel anytime in iOS Settings. <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">terms</a>.</span>
   </div>
   <!-- Account sign-in (backend API mode only — stays hidden until the API is
        enabled; see api.js). Magic-link email auth, no passwords. -->

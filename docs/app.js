@@ -9,9 +9,10 @@
  * guideline 3.1.1 — digital subscriptions in-app must use StoreKit). */
 const IS_NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform
   && window.Capacitor.isNativePlatform());
-// Android ships free-tier-first: StoreKit (iOS IAP) and APNs push don't exist
-// there, and Google Play policy forbids steering to an external purchase — so
-// Android sees honest "coming soon" states instead of iOS purchase copy.
+// Android has its own Purchases plugin (Google Play Billing — see
+// android/.../PurchasesPlugin.java) with the same JS surface as iOS StoreKit,
+// so the IAP flow below is platform-agnostic. Push is still iOS-only (no FCM
+// project yet) — Android keeps the honest "coming soon" state for alerts.
 const IS_ANDROID = IS_NATIVE && window.Capacitor.getPlatform
   && window.Capacitor.getPlatform() === 'android';
 const DATA_BASE = IS_NATIVE ? 'https://yardscout.io/' : '';
@@ -1205,10 +1206,12 @@ function openUpgradeSheet(trigger) {
   // purchase here (and for Pro users, a real subscription they already have).
   if (IS_NATIVE) {
     const sheetSub = document.querySelector('#upgrade-sheet .sheet-sub');
+    // Android says "instant alerts" (in-app watches — push isn't live there
+    // yet); iOS says "instant push alerts". Keep the copy honest per platform.
     if (sheetSub) sheetSub.textContent = IS_ANDROID
       ? 'Finding cars near you is free and stays free. Pro adds the money layer — '
         + 'part values, pull costs, cross-yard price compare, and instant alerts. '
-        + 'Pro subscriptions are coming to Android soon.'
+        + 'Subscribe through Google Play; cancel anytime.'
       : 'Finding cars near you is free and stays free. '
         + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
         + 'and instant push alerts. Subscribe through the App Store; cancel anytime.';
@@ -3175,21 +3178,27 @@ if (window.YSApi) {
   });
 }
 
-/* ===== NATIVE (iOS app only): StoreKit IAP + APNs push alerts =====
+/* ===== NATIVE (iOS + Android): store IAP + push alerts (iOS only) =====
  * Everything below is inert on the web (IS_NATIVE false).
  *
- * IAP: custom StoreKit 2 plugin (ios/App/App/PurchasesPlugin.swift). Apple is
- * the account — subscribe with Face ID, restore on any device, no signup.
- * The upgrade sheet swaps its waitlist for a real Subscribe button whenever
- * the App Store product loads (so a build without App Store Connect config
- * degrades back to the waitlist automatically).
+ * IAP: both platforms expose the SAME Capacitor plugin surface as
+ * window.Capacitor.Plugins.Purchases — StoreKit 2 on iOS
+ * (ios/App/App/PurchasesPlugin.swift), Google Play Billing on Android
+ * (android/app/src/main/java/com/benvuolo/yardscout/PurchasesPlugin.java).
+ * The store is the account — subscribe with Face ID / Play auth, restore on
+ * any device, no signup. The upgrade sheet shows a real Subscribe button
+ * whenever the store product loads (so a build without store-console config
+ * degrades to a "can't reach the store" status automatically).
  *
  * Push: official @capacitor/push-notifications plugin + the Worker's
  * anonymous device model (/v1/device/register). Free = weekly recap push,
  * Pro = instant. Watches mirror to the server on every change. */
 
 const NATIVE_API_BASE = 'https://yardscout-api.yardscout.workers.dev';
+// Same product id on both stores: App Store subscription + Play subscription.
 const IAP_PRODUCT_ID = 'yardscout_pro_monthly';
+const STORE_NAME = IS_ANDROID ? 'Google Play' : 'the App Store';
+const STORE_ACCOUNT = IS_ANDROID ? 'Google account' : 'Apple account';
 
 function nativePlugin(name) {
   return (IS_NATIVE && window.Capacitor && window.Capacitor.Plugins
@@ -3320,6 +3329,18 @@ function revokeNativePro() {
   const subBtn = document.getElementById('iap-subscribe');
   const restoreBtn = document.getElementById('iap-restore');
   const status = document.getElementById('iap-status');
+  // The static fine print is written for iOS; reword for Play on Android.
+  if (IS_ANDROID) {
+    const note = document.getElementById('iap-note');
+    if (note) note.innerHTML = 'Auto-renews monthly through your Google Play account &mdash; '
+      + 'cancel anytime in Play Store subscriptions. '
+      + '<a href="privacy.html">Privacy</a> &middot; <a href="terms.html">terms</a>.';
+    // Honest copy: push isn't live on Android yet — watches light up in-app
+    // within hours of a scan, but nothing is "pushed". Never promise push.
+    const alertsLi = document.getElementById('tier-alerts-li');
+    if (alertsLi) alertsLi.textContent = 'In-app alerts within hours of a watched car '
+      + 'hitting a yard — including sale-day alerts (push coming to Android soon)';
+  }
   if (subBtn) subBtn.addEventListener('click', async () => {
     track('iap-subscribe/' + upgradeTrigger);
     subBtn.disabled = true;
@@ -3351,7 +3372,7 @@ function revokeNativePro() {
         if (status) status.textContent = 'Pro restored on this device.';
         closeUpgradeSheet();
       } else if (status) {
-        status.textContent = 'No active subscription found on this Apple account.';
+        status.textContent = 'No active subscription found on this ' + STORE_ACCOUNT + '.';
       }
     } catch (e) {
       if (status) status.textContent = e.message || 'Restore failed.';
@@ -3381,9 +3402,9 @@ async function refreshNativeIapUi() {
       if (sub && p.price) sub.textContent = 'Subscribe — ' + p.price + '/mo';
       if (status) status.textContent = '';
     } else if (status) {
-      status.textContent = 'Can\u2019t reach the App Store right now — try again in a minute.';
+      status.textContent = 'Can\u2019t reach ' + STORE_NAME + ' right now — try again in a minute.';
     }
   } catch (e) {
-    if (status) status.textContent = 'Can\u2019t reach the App Store right now — try again in a minute.';
+    if (status) status.textContent = 'Can\u2019t reach ' + STORE_NAME + ' right now — try again in a minute.';
   }
 }
