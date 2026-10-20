@@ -3408,3 +3408,251 @@ async function refreshNativeIapUi() {
     if (status) status.textContent = 'Can\u2019t reach ' + STORE_NAME + ' right now — try again in a minute.';
   }
 }
+
+/* ===== WEB PRO (account-less entitlements) =====
+ * Backend: the yardscout.io site Worker (backend/site-proxy/src/entitlements.js).
+ * No accounts or passwords — the email given at Stripe Checkout IS the
+ * entitlement, and a 6-digit email code unlocks it on any other device.
+ * Everything here is WEB ONLY (inert on native — Apple guideline 3.1.1 keeps
+ * Stripe out of the app; the native build buys through StoreKit/Play instead).
+ *
+ * localStorage:
+ *   ys_ent_token  device token minted by the Worker (re-validation + billing portal)
+ *   ys_ent_email  the entitlement email (display only)
+ *   ys_ent_src    'stripe' | 'apple_iap' (portal button is stripe-only)
+ *   ys_ent_checked  last successful re-validation (ms epoch)
+ * Pro gate: jh_pro='1' + jh_pro_source='account' (accepted by the boot
+ * honesty-check alongside the native 'iap' source). */
+(() => {
+  if (IS_NATIVE) return;
+
+  // Same-origin on yardscout.io; absolute from github.io / localhost.
+  // Dev override: ?entbase=http://127.0.0.1:8799 (persisted; ?entbase= clears).
+  const ENT_BASE = (() => {
+    try {
+      const qp = new URLSearchParams(location.search);
+      const b = qp.get('entbase');
+      if (b) localStorage.setItem('ys_ent_base', b.replace(/\/+$/, ''));
+      if (b === '') localStorage.removeItem('ys_ent_base');
+    } catch (e) { /* ignore */ }
+    return localStorage.getItem('ys_ent_base')
+      || (location.hostname === 'yardscout.io' ? '' : 'https://yardscout.io');
+  })();
+
+  async function entApi(path, opts) {
+    const r = await fetch(ENT_BASE + '/api/ent/' + path, opts);
+    const data = await r.json().catch(() => ({}));
+    return { ok: r.ok, status: r.status, data };
+  }
+  const postJson = (path, body) => entApi(path, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+
+  const $id = (x) => document.getElementById(x);
+  function setMsg(el, msg, isError) {
+    if (!el) return;
+    el.textContent = msg || '';
+    el.style.color = isError ? 'var(--red)' : '';
+  }
+
+  /* Show/hide the Pro-state extras (manage billing) for web entitlements. */
+  function refreshProActions() {
+    const wrap = $id('ent-pro-actions');
+    if (!wrap) return;
+    const token = localStorage.getItem('ys_ent_token');
+    const hasWebEnt = !!token && localStorage.getItem('jh_pro_source') === 'account';
+    wrap.style.display = hasWebEnt ? '' : 'none';
+    const portal = $id('ent-portal');
+    if (portal) portal.style.display = (hasWebEnt && localStorage.getItem('ys_ent_src') === 'stripe') ? '' : 'none';
+    const email = localStorage.getItem('ys_ent_email');
+    if (hasWebEnt && email) setMsg($id('ent-pro-status'), 'Pro is linked to ' + email + '.');
+  }
+
+  function grantWebPro({ email, token, source, note }) {
+    localStorage.setItem('jh_pro', '1');
+    localStorage.setItem('jh_pro_source', 'account');
+    if (token) localStorage.setItem('ys_ent_token', token);
+    if (email) localStorage.setItem('ys_ent_email', email);
+    if (source) localStorage.setItem('ys_ent_src', source);
+    localStorage.setItem('ys_ent_checked', String(Date.now()));
+    applyProGates();
+    if (typeof liveLoaded !== 'undefined' && liveLoaded) renderLive();
+    refreshProActions();
+    if (note) setMsg($id('ent-pro-status'), note);
+  }
+
+  function revokeWebPro() {
+    if (localStorage.getItem('jh_pro_source') !== 'account') return;
+    localStorage.removeItem('jh_pro');
+    localStorage.removeItem('jh_pro_source');
+    localStorage.removeItem('ys_ent_token');
+    localStorage.removeItem('ys_ent_src');
+    localStorage.removeItem('ys_ent_checked');
+    applyProGates();
+    if (typeof liveLoaded !== 'undefined' && liveLoaded) renderLive();
+    refreshProActions();
+  }
+
+  /* ---- purchase button: shown only once the Worker reports billing live ---- */
+  (async () => {
+    try {
+      const { ok, data } = await entApi('config');
+      if (ok && data.billing) {
+        const buy = $id('ent-buy');
+        if (buy) buy.style.display = '';
+        const head = $id('ent-appstore-head');
+        if (head) head.textContent = 'Prefer the app?';
+      }
+    } catch (e) { /* worker unreachable → App-Store-only copy stands */ }
+  })();
+
+  const checkoutBtn = $id('ent-checkout');
+  if (checkoutBtn) checkoutBtn.addEventListener('click', async () => {
+    track('ent-checkout-start');
+    checkoutBtn.disabled = true;
+    setMsg($id('ent-checkout-status'), 'Opening secure checkout\u2026');
+    try {
+      const { ok, status, data } = await postJson('checkout', {});
+      if (ok && data.url) { location.href = data.url; return; }
+      setMsg($id('ent-checkout-status'), status === 503
+        ? 'Web checkout isn\u2019t live quite yet — Pro is available in the iOS app.'
+        : (data.message || 'Could not start checkout — try again.'), true);
+    } catch (e) {
+      setMsg($id('ent-checkout-status'), 'Could not reach checkout — check your connection.', true);
+    } finally {
+      checkoutBtn.disabled = false;
+    }
+  });
+
+  /* ---- returning from Stripe: ?entco=<session id> (or =cancel) ----
+   * The Worker re-confirms payment with Stripe server-side; the URL param
+   * alone grants nothing. */
+  (async () => {
+    let id = null;
+    try {
+      const qp = new URLSearchParams(location.search);
+      id = qp.get('entco');
+      if (id !== null) {
+        qp.delete('entco');
+        const qs = qp.toString();
+        history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+      }
+    } catch (e) { /* ignore */ }
+    if (!id || id === 'cancel') {
+      if (id === 'cancel') track('ent-checkout-cancel');
+      return;
+    }
+    track('ent-checkout-return');
+    openUpgradeSheet('checkout-return');
+    setMsg($id('ent-status'), 'Payment received — activating Pro\u2026');
+    // The webhook usually lands within seconds; poll the confirm endpoint a few times.
+    for (let i = 0; i < 8; i++) {
+      try {
+        const { ok, data } = await entApi('checkout-session?id=' + encodeURIComponent(id));
+        if (ok && data.pro) {
+          grantWebPro({ email: data.email, token: data.token, source: 'stripe',
+            note: 'Payment received — Pro is unlocked on this device and linked to ' + data.email + '.' });
+          track('ent-purchased');
+          openUpgradeSheet('checkout-done'); // re-render: now shows the Pro state
+          return;
+        }
+      } catch (e) { /* retry */ }
+      await new Promise((res) => setTimeout(res, 2500));
+    }
+    setMsg($id('ent-status'),
+      'Payment received. Activation can take a minute — use "Already have Pro?" with your checkout email if it doesn\u2019t unlock shortly.', true);
+  })();
+
+  /* ---- "Already have Pro?" — email a 6-digit code, redeem it here ---- */
+  const sendBtn = $id('ent-send-code');
+  if (sendBtn) sendBtn.addEventListener('click', async () => {
+    const email = ($id('ent-email').value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setMsg($id('ent-status'), 'Enter a valid email address.', true);
+      return;
+    }
+    track('ent-code-request');
+    sendBtn.disabled = true;
+    setMsg($id('ent-status'), 'Sending\u2026');
+    try {
+      const { ok, data } = await postJson('request-code', { email });
+      if (ok) {
+        $id('ent-code-row').style.display = '';
+        $id('ent-code').focus();
+        setMsg($id('ent-status'), data.message || 'Check your email for the 6-digit code (expires in 10 minutes).');
+      } else {
+        setMsg($id('ent-status'), data.message || 'Could not send the code — try again.', true);
+      }
+    } catch (e) {
+      setMsg($id('ent-status'), 'Could not reach the server — check your connection.', true);
+    } finally {
+      sendBtn.disabled = false;
+    }
+  });
+
+  const redeemBtn = $id('ent-redeem-btn');
+  if (redeemBtn) redeemBtn.addEventListener('click', async () => {
+    const email = ($id('ent-email').value || '').trim();
+    const code = ($id('ent-code').value || '').trim();
+    if (!/^\d{6}$/.test(code)) { setMsg($id('ent-status'), 'Enter the 6-digit code from the email.', true); return; }
+    redeemBtn.disabled = true;
+    setMsg($id('ent-status'), 'Checking\u2026');
+    try {
+      const { ok, data } = await postJson('redeem-code', { email, code });
+      if (ok && data.pro) {
+        grantWebPro({ email, token: data.token, source: data.source,
+          note: 'Pro is unlocked on this device — linked to ' + email + '.' });
+        track('ent-code-redeemed');
+        openUpgradeSheet('code-redeemed'); // re-render into the Pro state
+      } else {
+        setMsg($id('ent-status'), data.message || 'That code didn\u2019t work — request a new one.', true);
+      }
+    } catch (e) {
+      setMsg($id('ent-status'), 'Could not reach the server — check your connection.', true);
+    } finally {
+      redeemBtn.disabled = false;
+    }
+  });
+  const codeInput = $id('ent-code');
+  if (codeInput) codeInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') redeemBtn.click(); });
+  const emailInput = $id('ent-email');
+  if (emailInput) emailInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendBtn.click(); });
+
+  /* ---- manage billing (Stripe customer portal; token-gated) ---- */
+  const portalBtn = $id('ent-portal');
+  if (portalBtn) portalBtn.addEventListener('click', async () => {
+    portalBtn.disabled = true;
+    try {
+      const { ok, data } = await postJson('portal', { token: localStorage.getItem('ys_ent_token') || '' });
+      if (ok && data.url) { location.href = data.url; return; }
+      setMsg($id('ent-pro-status'), data.message || 'Could not open billing.', true);
+    } catch (e) {
+      setMsg($id('ent-pro-status'), 'Could not reach the server.', true);
+    } finally {
+      portalBtn.disabled = false;
+    }
+  });
+
+  /* ---- daily re-validation: subscriptions lapse honestly ----
+   * Only a definitive server "not pro" revokes; network failures keep the
+   * last known state (the yard has bad cell signal — don't punish that). */
+  (async () => {
+    if (localStorage.getItem('jh_pro_source') !== 'account') { refreshProActions(); return; }
+    const token = localStorage.getItem('ys_ent_token');
+    refreshProActions();
+    if (!token) return;
+    const last = Number(localStorage.getItem('ys_ent_checked') || 0);
+    if (Date.now() - last < 24 * 3600 * 1000) return;
+    try {
+      const { ok, data } = await entApi('status?token=' + encodeURIComponent(token));
+      if (!ok) return;
+      if (data.pro) {
+        localStorage.setItem('ys_ent_checked', String(Date.now()));
+      } else {
+        revokeWebPro();
+      }
+    } catch (e) { /* offline — keep last known state */ }
+  })();
+})();

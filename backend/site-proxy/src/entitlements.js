@@ -509,12 +509,22 @@ async function handlePortal(req, env) {
   return json({ url: session.url });
 }
 
+/* GET /api/ent/config → {billing} — lets the web UI show the purchase button
+ * only once Stripe is actually configured (no broken button pre-launch). */
+function handleConfig(env) {
+  const billing = !!(env.STRIPE_SECRET_KEY && env.STRIPE_PRICE_PRO);
+  return new Response(JSON.stringify({ billing }), {
+    headers: { 'content-type': 'application/json', 'cache-control': 'public, max-age=300', ...CORS },
+  });
+}
+
 /* ---------- router ---------- */
 
 export async function handleEntitlements(req, env, url) {
   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
   const route = url.pathname.replace(/^\/api\/ent\//, '');
   try {
+    if (req.method === 'GET' && route === 'config') return handleConfig(env);
     if (req.method === 'POST' && route === 'checkout') return await handleCheckout(req, env);
     if (req.method === 'GET' && route === 'checkout-session') return await handleCheckoutSession(req, env, url);
     if (req.method === 'POST' && route === 'stripe-webhook') return await handleStripeWebhook(req, env);

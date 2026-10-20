@@ -410,11 +410,34 @@
   </div>
 
   <div id="upgrade-form-wrap" class="waitlist-form">
-    <strong>Pro is live in the iOS app</strong>
+    <!-- Web purchase (Stripe Checkout) — account-less: the email given at
+         checkout IS the entitlement. Hidden behind JS until the entitlement
+         API reports billing is live; until then the App Store CTA leads. -->
+    <div id="ent-buy" style="display:none;">
+      <button type="button" id="ent-checkout" class="btn btn-primary" style="width:100%;font-size:1rem;padding:0.8rem;">Get Pro &mdash; $8.99/mo</button>
+      <span id="ent-checkout-status" class="account-status" role="status"></span>
+      <span class="waitlist-note">$8.99/month, cancel anytime &mdash; no account or password, just the email you check out with. Secure payment by Stripe.</span>
+    </div>
+    <strong id="ent-appstore-head" style="margin-top:0.4rem;">Pro is also in the iOS app</strong>
     <div class="waitlist-row" style="margin-top:0.5rem;">
-      <a class="btn btn-primary" href="https://apps.apple.com/app/id6817126581" target="_blank" rel="noopener" style="text-decoration:none;">Get YardScout on the App Store</a>
+      <a class="btn" id="ent-appstore-link" href="https://apps.apple.com/app/id6817126581" target="_blank" rel="noopener" style="text-decoration:none;">Get YardScout on the App Store</a>
     </div>
     <span class="waitlist-note">$8.99/month through your App Store account &mdash; auto-renews monthly, cancel anytime in iOS Settings. Finding cars stays free here and in the app &mdash; <a href="privacy.html">privacy</a> &middot; <a href="terms.html">terms</a>.</span>
+    <!-- Cross-device unlock: never required to buy or to use Pro where it was
+         bought — only for bringing an existing Pro to this device. -->
+    <div id="ent-redeem" style="margin-top:1rem;padding-top:0.9rem;border-top:1px solid var(--border);">
+      <strong>Already have Pro?</strong>
+      <span class="waitlist-note" style="display:block;margin-top:0.2rem;">Enter the email from your purchase (or the one you linked in the app) and we&rsquo;ll send a 6-digit code that unlocks Pro on this device.</span>
+      <div class="waitlist-row" style="margin-top:0.55rem;">
+        <input type="email" id="ent-email" inputmode="email" autocomplete="email" placeholder="you@email.com">
+        <button type="button" id="ent-send-code" class="btn">Email&nbsp;code</button>
+      </div>
+      <div class="waitlist-row" id="ent-code-row" style="display:none;margin-top:0.55rem;">
+        <input type="text" id="ent-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
+        <button type="button" id="ent-redeem-btn" class="btn btn-primary">Unlock</button>
+      </div>
+      <span id="ent-status" class="account-status" role="status"></span>
+    </div>
   </div>
   <div id="upgrade-thanks" class="waitlist-thanks" style="display:none;">
     <strong>You're on the list.</strong>
@@ -423,6 +446,11 @@
   <div id="upgrade-pro-state" class="waitlist-thanks" style="display:none;">
     <strong>You're Pro &#10003;</strong>
     <span>Everything above is unlocked on this device.</span>
+    <!-- Web-subscription extras (JS shows what applies; all hidden on native). -->
+    <div id="ent-pro-actions" style="display:none;margin-top:0.6rem;">
+      <button type="button" id="ent-portal" class="btn" style="display:none;">Manage billing</button>
+      <span id="ent-pro-status" class="account-status" role="status"></span>
+    </div>
   </div>
   <!-- Native IAP (iOS + Android): StoreKit / Play Billing subscribe + restore.
        Replaces the waitlist when the store subscription product is available. -->
