@@ -5090,6 +5090,521 @@ if _gate_problems:
     raise ValueError(
         "UNOBTANIUM_DB gate-token lint failed:\n  " + "\n  ".join(_gate_problems))
 
+
+# ---------------------------------------------------------------------------
+# PLATFORM FAMILIES — hand-curated interchange groups.
+#
+# Badge-engineered twins and platform-mates share physical units: a Sierra
+# tailgate IS a Silverado tailgate, a Commander transfer-case motor IS a WK
+# Grand Cherokee motor.  Each family below encodes a small set of *verified*
+# shared parts (forum/part-number sourced — citations in the curation notes of
+# the interchange PR).  House rule: under-claim.  Every group carries a terse
+# caveat, and anything gated by trim/drive is never copied to a sibling
+# without an explicit copy_gates flag.
+#
+# Schema per family:
+#   display  — family name (report/debug only, not shipped)
+#   members  — {UNOBTANIUM_DB key: short display label used in provenance}
+#   shared   — list of groups:
+#       part    — canonical row name
+#       names   — optional {member key: row name} when a twin spells the row
+#                 differently ("Autoride Rear Air Shocks" vs
+#                 "AutoRide Rear Shocks (pair)")
+#       members — {member key: (yr_lo, yr_hi)} interchange window per member
+#       copy_to — member keys that DON'T have the row yet: the engine copies
+#                 the canonical row (with the member's window) onto them.
+#                 Members not in copy_to MUST already carry the row — the
+#                 lint errors either way, so the data stays self-auditing.
+#       note    — honesty caveat appended to the provenance string (keep
+#                 terse: it ships in the payload per part-set)
+#       copy_gates — allow copying a trim/drive-gated row (default: refuse)
+#
+# _apply_platform_families() attaches p["sharedWith"] = "Label 2007–13 ·
+# Label 2003–09 — caveat" to each member's row (each member keeps its OWN
+# pricing) and runs at import, right after this table.  match_vehicle()
+# forwards sharedWith automatically via its {**p} enrichment.
+
+PLATFORM_FAMILIES: dict[str, dict] = {
+    # ------------------------------------------------------------------ GM
+    "gmt800-truck": {
+        "display": "GM full-size trucks (GMT800)",
+        "members": {"silverado 1999-2006": "Silverado",
+                    "sierra 1999-2006": "Sierra"},
+        "shared": [
+            {"part": "Tailgate (straight)",
+             "members": {"silverado 1999-2006": (1999, 2006),
+                         "sierra 1999-2006": (1999, 2006)},
+             "note": "same fleetside box incl. 2007 Classic; Avalanche differs"},
+            {"part": "Tow Mirrors (manual, pair)",
+             "members": {"silverado 1999-2006": (1999, 2006),
+                         "sierra 1999-2006": (1999, 2006)},
+             "note": "manual tow mirrors only; 03+ power versions differ"},
+        ],
+    },
+    "gmt900-truck": {
+        "display": "GM full-size trucks (GMT900)",
+        "members": {"silverado 2007-2013": "Silverado",
+                    "sierra 2007-2013": "Sierra"},
+        "shared": [
+            {"part": "Power-Fold Tow Mirrors (pair)",
+             "names": {"sierra 2007-2013": "Power Fold Tow Mirrors (pair)"},
+             "members": {"silverado 2007-2013": (2007, 2013),
+                         "sierra 2007-2013": (2007, 2013)},
+             "note": "new-body 07+ only — 2007 Classic uses GMT800 mirrors"},
+            {"part": "Tailgate (straight)",
+             "members": {"silverado 2007-2013": (2007, 2013),
+                         "sierra 2007-2013": (2007, 2013)},
+             "copy_to": ["sierra 2007-2013"],
+             "note": "Chevy/GMC share the bed; camera/step tailgates differ"},
+        ],
+    },
+    "gmt800-suv": {
+        "display": "GM full-size SUVs (GMT800, short wheelbase)",
+        "members": {"tahoe 1995-2006": "Tahoe",
+                    "yukon": "Yukon",
+                    "escalade": "Escalade"},
+        "shared": [
+            {"part": "3rd Row Seat",
+             "names": {"yukon": "3rd Row Seat (complete)"},
+             "members": {"tahoe 1995-2006": (2000, 2006),
+                         "yukon": (2000, 2006),
+                         "escalade": (2002, 2006)},
+             "note": "SWB seats only — Suburban/Yukon XL differ; match color"},
+            {"part": "AutoRide Rear Shocks (pair)",
+             "names": {"yukon": "Autoride Rear Air Shocks"},
+             "members": {"tahoe 1995-2006": (2000, 2006),
+                         "yukon": (2000, 2006)},
+             "note": "RPO Z55 Autoride; verify connector style"},
+        ],
+    },
+    "gmt900-suv": {
+        "display": "GM full-size SUVs (GMT900, short wheelbase)",
+        "members": {"tahoe 2007-2014": "Tahoe",
+                    "yukon": "Yukon",
+                    "escalade": "Escalade"},
+        "shared": [
+            {"part": "3rd Row Seat",
+             "names": {"yukon": "3rd Row Seat (complete)"},
+             "members": {"tahoe 2007-2014": (2007, 2014),
+                         "yukon": (2007, 2014),
+                         "escalade": (2007, 2014)},
+             "note": "SWB seats; manual vs power-fold NOT interchangeable"},
+            {"part": "AutoRide Rear Shocks (pair)",
+             "names": {"yukon": "Autoride Rear Air Shocks"},
+             "members": {"tahoe 2007-2014": (2007, 2014),
+                         "yukon": (2007, 2014)},
+             "note": "RPO Z55 Autoride; verify connector style"},
+        ],
+    },
+    "k2xx-suv": {
+        "display": "GM full-size SUVs (K2XX, short wheelbase)",
+        "members": {"tahoe 2015-2024": "Tahoe",
+                    "yukon": "Yukon",
+                    "escalade": "Escalade"},
+        "shared": [
+            {"part": "3rd Row Seat",
+             "names": {"yukon": "3rd Row Seat (complete)"},
+             "members": {"tahoe 2015-2024": (2015, 2020),
+                         "yukon": (2015, 2020),
+                         "escalade": (2015, 2020)},
+             "note": "K2XX 15–20 only (21+ T1XX differs); Suburban/XL/ESV differ"},
+            {"part": "Power Liftgate Motor",
+             "members": {"tahoe 2015-2024": (2015, 2020),
+                         "yukon": (2015, 2020)},
+             "note": "K2XX 15–20 gate motor; 21+ T1XX differs"},
+        ],
+    },
+    "lambda": {
+        "display": "GM Lambda crossovers (1st gen)",
+        "members": {"traverse": "Traverse",
+                    "acadia": "Acadia",
+                    "enclave": "Enclave"},
+        "shared": [
+            {"part": "3rd Row Seat",
+             "members": {"traverse": (2009, 2017),
+                         "acadia": (2007, 2016),
+                         "enclave": (2008, 2017)},
+             "note": "Lambda platform; manual vs power-fold NOT interchangeable"},
+            {"part": "Power Liftgate Motor",
+             "members": {"traverse": (2009, 2017),
+                         "acadia": (2007, 2016),
+                         "enclave": (2008, 2017)},
+             "note": "1st-gen Lambda; verify connector"},
+        ],
+    },
+    "s10-sonoma": {
+        "display": "GM compact trucks (S10/Sonoma)",
+        "members": {"s10": "S10", "sonoma": "Sonoma"},
+        "shared": [
+            {"part": "Tailgate (straight)",
+             "members": {"s10": (1982, 1993), "sonoma": (1991, 1993)},
+             "note": "1st-gen beds identical Chevy/GMC"},
+            {"part": "Tailgate (straight)",
+             "members": {"s10": (1994, 2004), "sonoma": (1994, 2004)},
+             "note": "2nd-gen beds identical Chevy/GMC"},
+        ],
+    },
+    # ---------------------------------------------------------------- Ford
+    "panther": {
+        "display": "Ford Panther platform",
+        "members": {"crown victoria": "Crown Vic",
+                    "grand marquis": "Grand Marquis",
+                    "town car": "Town Car"},
+        "shared": [
+            {"part": "Rear Air Springs / Watts Link Parts",
+             "names": {"town car": "Rear Air Springs + Compressor"},
+             "members": {"crown victoria": (1992, 2011),
+                         "grand marquis": (1992, 2011),
+                         "town car": (1992, 2011)},
+             "copy_to": ["grand marquis"],
+             "note": "Panther rear air springs interchange; check bag age"},
+        ],
+    },
+    "ford-superduty": {
+        "display": "Ford Super Duty",
+        "members": {"f-250": "F-250", "f-350": "F-350",
+                    "excursion": "Excursion"},
+        "shared": [
+            {"part": "7.3L Powerstroke Parts (turbo, HPOP — verify engine)",
+             "names": {"excursion": "7.3L Powerstroke Parts (verify engine)"},
+             "members": {"f-250": (1994, 2003), "f-350": (1994, 2003),
+                         "excursion": (2000, 2003)},
+             "note": "same 7.3 PSD; turbo/HPOP are year-specific — verify"},
+            {"part": "Power Fold Tow Mirrors (pair)",
+             "members": {"f-250": (2008, 2016), "f-350": (2008, 2016)},
+             "note": "Super Duty mirrors; match power/heat/signal options"},
+            {"part": "Tailgate (w/ step)",
+             "members": {"f-250": (2008, 2016), "f-350": (2008, 2016)},
+             "copy_to": ["f-350"],
+             "note": "F-250/F-350 share the box; step/camera options vary"},
+        ],
+    },
+    "explorer-mountaineer": {
+        "display": "Ford Explorer / Mercury Mountaineer",
+        "members": {"explorer 2002-2010": "Explorer",
+                    "mountaineer": "Mountaineer"},
+        "shared": [
+            {"part": "3rd Row Seat",
+             "members": {"explorer 2002-2010": (2002, 2005),
+                         "mountaineer": (2002, 2005)},
+             "note": "U152 twins, 02–05 gen; match color"},
+            {"part": "3rd Row Seat",
+             "members": {"explorer 2002-2010": (2006, 2010),
+                         "mountaineer": (2006, 2010)},
+             "note": "U251 twins, 06–10 gen; match color"},
+        ],
+    },
+    "escape-cd2": {
+        "display": "Ford Escape / Mazda Tribute / Mercury Mariner",
+        "members": {"escape": "Escape", "tribute": "Tribute",
+                    "mariner": "Mariner"},
+        "shared": [
+            {"part": "Side Mirrors (power, pair)",
+             "members": {"escape": (2001, 2011), "tribute": (2001, 2011),
+                         "mariner": (2005, 2011)},
+             "copy_to": ["tribute", "mariner"],
+             "note": "CD2 triplets share doors; match heated/signal type"},
+        ],
+    },
+    "f150-expedition": {
+        "display": "Ford F-150 / Expedition (PN96 front end)",
+        "members": {"f-150 1997-2003": "F-150",
+                    "expedition": "Expedition"},
+        "shared": [
+            {"part": "Headlights (clear, non-hazed)",
+             "members": {"f-150 1997-2003": (1997, 2002),
+                         "expedition": (1997, 2002)},
+             "copy_to": ["expedition"],
+             "note": "same front clip 97–02; 03+ Expedition differs"},
+        ],
+    },
+    # -------------------------------------------------------------- Mopar
+    "mopar-lx": {
+        "display": "Mopar LX/LD platform",
+        "members": {"charger": "Charger", "chrysler 300": "300",
+                    "challenger": "Challenger"},
+        "shared": [
+            {"part": 'Uconnect 8.4" Touchscreen',
+             "names": {"chrysler 300": "Uconnect 8.4 Touchscreen"},
+             "members": {"charger": (2011, 2014), "chrysler 300": (2011, 2014),
+                         "challenger": (2011, 2014)},
+             "note": "RE2/RB5 swap across LX 11–14; dealer PIN + your bezel; 15+ differs"},
+            {"part": "SRT / Scat Brembo Calipers (set)",
+             "names": {"challenger": "SRT Brembo Calipers (set)"},
+             "members": {"charger": (2006, 2024), "challenger": (2008, 2024)},
+             "note": "verify 4- vs 6-piston and rotor size by year"},
+        ],
+    },
+    "jeep-wk-xk": {
+        "display": "Jeep WK Grand Cherokee / XK Commander",
+        "members": {"grand cherokee 2005-2010": "Grand Cherokee",
+                    "commander": "Commander"},
+        "shared": [
+            {"part": "Transfer Case Shift Motor",
+             "members": {"grand cherokee 2005-2010": (2005, 2010),
+                         "commander": (2006, 2010)},
+             "copy_to": ["commander"],
+             "note": "WK/XK shared driveline; verify NV140 vs NV245 case"},
+        ],
+    },
+    "chrysler-rt-vans": {
+        "display": "Chrysler RT minivans",
+        "members": {"grand caravan": "Grand Caravan",
+                    "town & country": "Town & Country"},
+        "shared": [
+            {"part": "Stow-N-Go 2nd Row Seat (each)",
+             "members": {"grand caravan": (2005, 2007),
+                         "town & country": (2005, 2007)},
+             "note": "05–07 gen only — won't fit 08+; match color"},
+            {"part": "Stow-N-Go 2nd Row Seat (each)",
+             "members": {"grand caravan": (2008, 2016),
+                         "town & country": (2008, 2016)},
+             "note": "08+ gen only — won't fit 05–07; match color"},
+            {"part": "Power Sliding Door Motor",
+             "members": {"grand caravan": (2008, 2016),
+                         "town & country": (2008, 2016)},
+             "note": "RT vans share door hardware"},
+            {"part": "Uconnect Touchscreen Head Unit",
+             "members": {"grand caravan": (2011, 2016),
+                         "town & country": (2011, 2016)},
+             "note": "match RB/RE unit type; dealer PIN to activate"},
+        ],
+    },
+    # ------------------------------------------------------------- Toyota
+    "toyota-elocker": {
+        "display": "Toyota 8-inch rear e-locker",
+        "members": {"4runner 1996-2002": "4Runner",
+                    "tacoma 1995-2004": "Tacoma",
+                    "tacoma 2005-2015": "Tacoma"},
+        "shared": [
+            {"part": "Rear E-Locker Actuator Motor",
+             "members": {"4runner 1996-2002": (1996, 2002),
+                         "tacoma 1995-2004": (1996, 2004),
+                         "tacoma 2005-2015": (2005, 2015)},
+             "copy_to": ["tacoma 1995-2004"],
+             "note": "8\" diff actuators (SAT-008/009); plug & vent routing differ — verify"},
+        ],
+    },
+    "tundra-sequoia": {
+        "display": "Toyota Tundra / Sequoia (1st gen)",
+        "members": {"tundra": "Tundra", "sequoia": "Sequoia"},
+        "shared": [
+            {"part": "JBL Speakers + Amp",
+             "members": {"tundra": (2000, 2006), "sequoia": (2001, 2007)},
+             "copy_to": ["sequoia"],
+             "note": "1st-gen JBL option; verify amp P/N and connectors"},
+        ],
+    },
+    # -------------------------------------------------------------- Honda
+    "honda-eg-dc": {
+        "display": "Honda Civic / Acura Integra seat swap",
+        "members": {"civic 1992-1995": "Civic",
+                    "civic 1996-2000": "Civic",
+                    "integra": "Integra"},
+        "shared": [
+            {"part": "OEM Seats (pair, unshredded)",
+             "names": {"civic 1992-1995": "Si Seats (pair)",
+                       "civic 1996-2000": "Si/Type R Seats (pair)"},
+             "members": {"integra": (1994, 2001),
+                         "civic 1992-1995": (1992, 1995),
+                         "civic 1996-2000": (1996, 2000)},
+             "note": "rails bolt up across EG/EK/DC — seats differ by trim, mounts swap"},
+        ],
+    },
+    # ------------------------------------------------------------- Subaru
+    "subaru-ej-turbo": {
+        "display": "Subaru EJ turbo (TMIC)",
+        "members": {"wrx": "WRX", "forester": "Forester XT",
+                    "baja": "Baja Turbo"},
+        "shared": [
+            {"part": "Turbo Intercooler (TMIC)",
+             "names": {"forester": "XT Turbo Intercooler + Piping",
+                       "baja": "Turbo Parts (04-06 Baja Turbo)"},
+             "members": {"wrx": (2002, 2014), "forester": (2004, 2013),
+                         "baja": (2004, 2006)},
+             "note": "06–08 FXT = 06–07 WRX TMIC (same P/N); earlier BPV mount differs; Baja needs WRX brackets"},
+        ],
+    },
+    # ----------------------------------------------------------- VW/Audi
+    "vw-mk7": {
+        "display": "VW Golf MK7 family",
+        "members": {"golf": "Golf/R", "gti": "GTI"},
+        "shared": [
+            {"part": "Discover Pro / MIB Touchscreen",
+             "members": {"golf": (2015, 2021), "gti": (2015, 2021)},
+             "note": "MK7 MIB2 units; component protection — needs coding to car"},
+            {"part": "OEM LED Headlights (pair)",
+             "members": {"golf": (2015, 2021), "gti": (2015, 2021)},
+             "note": "MK7 Golf/GTI/R share housings; match halogen vs LED"},
+        ],
+    },
+    "pl71": {
+        "display": "VW/Porsche PL71 SUVs",
+        "members": {"touareg": "Touareg", "cayenne": "Cayenne"},
+        "shared": [
+            {"part": "Air Suspension Compressor",
+             "members": {"touareg": (2004, 2010), "cayenne": (2003, 2010)},
+             "copy_to": ["cayenne"],
+             "note": "shared WABCO unit (Q7 4L variant differs) — verify P/N, replace relay"},
+        ],
+    },
+    "audi-b8": {
+        "display": "Audi B8 platform MMI",
+        "members": {"audi a4": "A4", "audi a5": "A5", "audi q5": "Q5"},
+        "shared": [
+            {"part": "MMI / MMI Touch / Screen Assembly",
+             "names": {"audi a5": "MMI / Virtual Cockpit",
+                       "audi q5": "MMI / MMI Touch + Screen"},
+             "members": {"audi a4": (2009, 2016), "audi a5": (2013, 2016),
+                         "audi q5": (2009, 2017)},
+             "note": "B8 MMI 3G vs 3G+ must match — check P/N and nav version"},
+        ],
+    },
+    # ---------------------------------------------------------------- BMW
+    "bmw-e8x-e9x": {
+        "display": "BMW E8x/E9x iDrive",
+        "members": {"bmw 1": "1 Series", "bmw 3": "3 Series"},
+        "shared": [
+            {"part": "iDrive Head Unit (E90 CCC/CIC)",
+             "names": {"bmw 1": "iDrive / Business Navigation"},
+             "members": {"bmw 3": (2006, 2011), "bmw 1": (2008, 2013)},
+             "note": "CCC vs CIC generations must match; coding to VIN required"},
+        ],
+    },
+    # -------------------------------------------------------------- Nissan
+    "titan-armada": {
+        "display": "Nissan Titan / Armada (1st gen)",
+        "members": {"titan": "Titan", "armada": "Armada"},
+        "shared": [
+            {"part": "Tow Mirrors (pair)",
+             "members": {"titan": (2004, 2015), "armada": (2004, 2015)},
+             "note": "shared cab/doors 04–15; match power/heat harness"},
+        ],
+    },
+}
+
+
+def _year_label(lo: int, hi: int) -> str:
+    """'2007–13' — terse year span for provenance strings."""
+    hi_s = str(hi)
+    if str(lo)[:2] == hi_s[:2]:
+        hi_s = hi_s[2:]
+    return f"{lo}\u2013{hi_s}"
+
+
+def _apply_platform_families() -> list[str]:
+    """Attach sharedWith provenance to family rows; copy rows onto members
+    listed in copy_to.  Returns problem strings (empty = clean).  Mutates
+    UNOBTANIUM_DB in place, replacing touched part dicts with copies so a
+    row shared between generation-split entries never leaks a sharedWith
+    meant for one sibling onto another."""
+    problems: list[str] = []
+    for fam_id, fam in PLATFORM_FAMILIES.items():
+        entries: dict[str, dict] = {}
+        for key in fam["members"]:
+            info = UNOBTANIUM_DB.get(key)
+            if info is None:
+                problems.append(f"{fam_id}: unknown member key {key!r}")
+            else:
+                entries[key] = info
+        for grp in fam["shared"]:
+            gmembers: dict[str, tuple] = grp["members"]
+            copy_to = set(grp.get("copy_to", ()))
+            bad = [k for k in gmembers if k not in fam["members"]]
+            bad += [k for k in copy_to if k not in gmembers]
+            if bad or len(gmembers) < 2:
+                problems.append(
+                    f"{fam_id}: group {grp['part']!r} bad member refs {bad}")
+                continue
+            if any(k not in entries for k in gmembers):
+                continue  # unknown key already reported above
+
+            def row_name(k: str) -> str:
+                return grp.get("names", {}).get(k, grp["part"])
+
+            # Locate each member's row: the name-matching row whose year
+            # window overlaps the group window the most (gen-split entries
+            # carry several same-named rows).
+            rows: dict[str, dict | None] = {}
+            canonical_key = None
+            for k, (lo, hi) in gmembers.items():
+                want = row_name(k).lower()
+                best, best_ov = None, 0
+                for p in entries[k]["top_parts"]:
+                    if p["name"].lower() != want:
+                        continue
+                    plo = max(p.get("yr_min", lo), lo)
+                    phi = min(p.get("yr_max", hi), hi)
+                    ov = phi - plo + 1
+                    if ov > best_ov:
+                        best, best_ov = p, ov
+                rows[k] = best
+                if k in copy_to:
+                    if best is not None:
+                        problems.append(
+                            f"{fam_id}: {k!r} already has {row_name(k)!r} — "
+                            "drop it from copy_to")
+                elif best is None:
+                    problems.append(
+                        f"{fam_id}: {k!r} missing row {row_name(k)!r} "
+                        f"overlapping {gmembers[k]} (add to copy_to?)")
+            canonical_key = next(
+                (k for k in gmembers if k not in copy_to and rows[k]), None)
+            if canonical_key is None:
+                problems.append(
+                    f"{fam_id}: group {grp['part']!r} has no source row")
+                continue
+            canonical = rows[canonical_key]
+            if copy_to and not grp.get("copy_gates") and (
+                    canonical.get("trim") or canonical.get("drive")):
+                problems.append(
+                    f"{fam_id}: refusing to copy trim/drive-gated "
+                    f"{grp['part']!r} (set copy_gates if intended)")
+                continue
+
+            for k, (lo, hi) in gmembers.items():
+                others = [m for m in gmembers if m != k]
+                label = " \u00b7 ".join(
+                    f"{fam['members'][m]} {_year_label(*gmembers[m])}"
+                    for m in others)
+                shared_txt = label + (
+                    f" \u2014 {grp['note']}" if grp.get("note") else "")
+                row = rows[k]
+                top = entries[k]["top_parts"]
+                if row is None:  # copy_to member
+                    row = dict(canonical)
+                    row["yr_min"], row["yr_max"] = lo, hi
+                    row["sharedWith"] = shared_txt
+                    row["sharedYears"] = (lo, hi)
+                    top.append(row)
+                    continue
+                # Replace with a copy: part dicts can be shared across
+                # gen-split entries, so never mutate the original in place.
+                new = dict(row)
+                new["sharedWith"] = (
+                    new["sharedWith"] + " \u00b7 " + shared_txt
+                    if new.get("sharedWith") else shared_txt)
+                # Widest window across this row's groups: match_vehicle drops
+                # the provenance for vehicle years outside it.
+                old_sy = new.get("sharedYears")
+                new["sharedYears"] = (
+                    (min(old_sy[0], lo), max(old_sy[1], hi)) if old_sy
+                    else (lo, hi))
+                top[top.index(row)] = new
+                rows[k] = new
+                if row is canonical:
+                    canonical = new
+    return problems
+
+
+# Fail fast at import, same contract as the gate lint: a family referencing a
+# missing row or silently copying a gated part is a data bug, not a runtime
+# condition.
+_family_problems = _apply_platform_families()
+if _family_problems:
+    raise ValueError(
+        "PLATFORM_FAMILIES lint failed:\n  " + "\n  ".join(_family_problems))
+
 # ---------------------------------------------------------------------------
 # Sell-channel guide — where each part actually moves and how fast.
 # Keyed by lowercase substring found in part name.  Checked longest-match-first.
@@ -5691,6 +6206,15 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
             enriched["fits"] = f"{max(low, p.get('yr_min', low))}–{min(high, p.get('yr_max', high))}"
             if trim_status:
                 enriched["trim_status"] = trim_status
+            # Interchange provenance is scoped to the family group's year
+            # window, which can be narrower than the row's own fit range
+            # (e.g. LX Uconnect: row runs 2011+, interchange claim is 11–14).
+            # Outside the window the claim doesn't apply — drop it.
+            sy = enriched.get("sharedYears")
+            if sy is not None:
+                enriched.pop("sharedYears", None)
+                if not (sy[0] <= year <= sy[1]):
+                    enriched.pop("sharedWith", None)
             # "Spot it" hint for unconfirmed option parts: the entry's own
             # verify text wins, else the keyword table's physical tell.
             if trim_status == "unconfirmed" and not enriched.get("verify"):
@@ -11700,6 +12224,7 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                     **({"fits": p["fits"]} if p.get("fits") else {}),
                     **({"trim_status": p["trim_status"]} if p.get("trim_status") else {}),
                     **({"verify": p["verify"]} if p.get("verify") else {}),
+                    **({"sharedWith": p["sharedWith"]} if p.get("sharedWith") else {}),
                 }
                 for p in v.get("_top_parts", [])
             ],
