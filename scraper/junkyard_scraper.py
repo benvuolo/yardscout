@@ -441,6 +441,21 @@ UNOBTANIUM_DB = {
             {"name": "DC-DC Converter", "rarity": "Rare", "low": 150, "high": 350, "cost": 20},
             {"name": "Hybrid Inverter Pump", "rarity": "Rare", "low": 100, "high": 275, "cost": 20},
             {"name": "Hybrid Battery Cells (bulk)", "rarity": "Epic", "low": 20, "high": 50, "cost": 3},
+            # Gen-2/gen-3 split: packs, meters and inverters are the classic
+            # Prius junkyard pulls (PriusChat-documented failure items).
+            {"name": "Hybrid Battery Pack (complete)", "rarity": "Epic", "low": 250, "high": 550, "cost": 100,
+             "yr_min": 2004, "yr_max": 2009,
+             "verify": "Load-test or log cell voltages before reselling — packs sit dead at yards"},
+            {"name": "Hybrid Battery Pack (complete)", "rarity": "Epic", "low": 300, "high": 600, "cost": 100,
+             "yr_min": 2010, "yr_max": 2015,
+             "verify": "Load-test or log cell voltages before reselling — packs sit dead at yards"},
+            {"name": "Combination Meter (dash display)", "rarity": "Rare", "low": 60, "high": 150, "cost": 10,
+             "yr_min": 2004, "yr_max": 2009,
+             "verify": "Known failure item — dead displays strand working cars; grab even untested"},
+            {"name": "Inverter Assembly (complete)", "rarity": "Rare", "low": 150, "high": 350, "cost": 40,
+             "yr_min": 2004, "yr_max": 2009},
+            {"name": "Inverter Assembly (complete)", "rarity": "Rare", "low": 175, "high": 400, "cost": 40,
+             "yr_min": 2010, "yr_max": 2015},
         ],
     },
     "rav4": {
@@ -5117,6 +5132,12 @@ if _gate_problems:
 #       note    — honesty caveat appended to the provenance string (keep
 #                 terse: it ships in the payload per part-set)
 #       copy_gates — allow copying a trim/drive-gated row (default: refuse)
+#       donor   — one-way swap provenance ("Integra arms bolt into 92-00
+#                 Civics"). The note ships verbatim as the row's sharedWith;
+#                 no member labels, no copies, single-member groups allowed.
+#                 Use when the swap TARGET isn't the car carrying the part —
+#                 a Civic never carries Integra trailing arms, so a two-way
+#                 group would lie.
 #
 # _apply_platform_families() attaches p["sharedWith"] = "Label 2007–13 ·
 # Label 2003–09 — caveat" to each member's row (each member keeps its OWN
@@ -5414,14 +5435,252 @@ PLATFORM_FAMILIES: dict[str, dict] = {
     "subaru-ej-turbo": {
         "display": "Subaru EJ turbo (TMIC)",
         "members": {"wrx": "WRX", "forester": "Forester XT",
-                    "baja": "Baja Turbo"},
+                    "baja": "Baja Turbo", "impreza": "Impreza WRX"},
         "shared": [
             {"part": "Turbo Intercooler (TMIC)",
              "names": {"forester": "XT Turbo Intercooler + Piping",
-                       "baja": "Turbo Parts (04-06 Baja Turbo)"},
+                       "baja": "Turbo Parts (04-06 Baja Turbo)",
+                       "impreza": "WRX Top-Mount Intercooler"},
              "members": {"wrx": (2002, 2014), "forester": (2004, 2013),
-                         "baja": (2004, 2006)},
+                         "baja": (2004, 2006), "impreza": (2002, 2014)},
              "note": "06–08 FXT = 06–07 WRX TMIC (same P/N); earlier BPV mount differs; Baja needs WRX brackets"},
+        ],
+    },
+    "subaru-swap-donors": {
+        "display": "Subaru swap donors",
+        "members": {"impreza": "Impreza", "forester": "Forester"},
+        "shared": [
+            # NASIOC seat-swap threads: GD rails interchange 02-07; the
+            # 08+ (GR/GH) seat-base bracket does NOT fit 02-07 cars.
+            {"donor": True, "part": "WRX / STI Front Seats (pair)",
+             "members": {"impreza": (2002, 2007)},
+             "note": "02–07 rails swap across Impreza; bolt into 03–08 Forester (keep Forester base for height); 08+ rails differ — check airbag plugs"},
+            # R160 diff swap culture: ratio must match the transmission.
+            {"donor": True, "part": "Rear Viscous LSD Diff",
+             "members": {"forester": (1998, 2008)},
+             "note": "R160 LSD swaps into Impreza/Legacy rears — MATCH final-drive ratio (4.11 vs 4.44) to the trans"},
+        ],
+    },
+    "legacy-outback": {
+        "display": "Subaru Legacy / Outback / Baja",
+        "members": {"legacy": "Legacy", "outback": "Outback",
+                    "baja": "Baja"},
+        "shared": [
+            # 84001AE15A/14A housing: Outback + Baja share the Legacy GT
+            # lamp; the base-Legacy housing (84001AE13A) differs.
+            {"part": "Headlights (clear, non-hazed)",
+             "members": {"legacy": (2000, 2004), "outback": (2000, 2004),
+                         "baja": (2003, 2006)},
+             "copy_to": ["outback", "baja"],
+             "note": "Legacy GT housing only (84001AE14A/15A) — base Legacy lamp differs; verify P/N"},
+            {"part": "Headlights (clear, non-hazed)",
+             "members": {"legacy": (2005, 2007), "outback": (2005, 2007)},
+             "copy_to": ["outback"],
+             "note": "05–07 halogen housings shared — HID and the 08–09 facelift differ"},
+        ],
+    },
+    # --------------------------------------------------------- Toyota deep
+    "toyota-1mz-alt": {
+        "display": "Toyota/Lexus 1MZ V6 alternator",
+        "members": {"camry": "Camry V6", "avalon": "Avalon",
+                    "solara": "Solara V6", "sienna": "Sienna",
+                    "highlander": "Highlander V6", "lexus es": "ES300",
+                    "rx": "RX300"},
+        "shared": [
+            # Denso 101211-7440/7450 = Toyota 27060-20230 / 27060-0A070,
+            # 100A 6-groove, shared across the 1MZ-FE family (ToyotaNation
+            # + Denso catalog). 130A tow-package variant differs; 04+ 3MZ
+            # uses a different harness plug.
+            {"part": "Alternator (spin-test at yard)",
+             "members": {"camry": (1994, 2003), "avalon": (1995, 2003),
+                         "solara": (1999, 2003), "sienna": (1998, 2003),
+                         "highlander": (2001, 2003),
+                         "lexus es": (1994, 2003), "rx": (1999, 2003)},
+             "copy_to": ["avalon", "solara", "sienna", "highlander",
+                         "lexus es", "rx"],
+             "note": "V6 (1MZ) Denso unit only — 4-cyl differs; match plug & amps (100A vs 130A tow pkg); 04+ 3MZ plug differs"},
+        ],
+    },
+    "toyota-22re": {
+        "display": "Toyota Pickup / 4Runner (22RE era)",
+        "members": {"toyota pickup": "Toyota Pickup",
+                    "4runner 1984-1995": "4Runner"},
+        "shared": [
+            # Same 22RE engine in both; the 3.0 V6 (3VZ-E) AFM differs
+            # (22RE Performance / YotaTech).
+            {"part": "22RE AFM (Air Flow Meter)",
+             "names": {"4runner 1984-1995": "AFM (Air Flow Meter, 22RE/3.0)"},
+             "members": {"toyota pickup": (1985, 1995),
+                         "4runner 1984-1995": (1985, 1995)},
+             "note": "same 22RE AFM across truck & 4Runner — 3.0 V6 AFM differs, match engine"},
+            {"part": "22RE EFI Intake/Throttle Body",
+             "members": {"toyota pickup": (1985, 1995),
+                         "4runner 1984-1995": (1985, 1995)},
+             "copy_to": ["4runner 1984-1995"],
+             "note": "same 22RE EFI across truck & 4Runner — 4-cyl only"},
+            # ToyotaNation: 84-88 truck = 84-89 4Runner dash era; 89-95
+            # truck = 90-95 4Runner. Two eras that don't cross.
+            {"part": "Climate Control Panel (works, knobs intact)",
+             "members": {"toyota pickup": (1984, 1995),
+                         "4runner 1984-1995": (1984, 1995)},
+             "note": "84–88 truck = 84–89 4Runner, 89–95 truck = 90–95 4Runner — two eras, don't mix"},
+            {"part": "Gauge Cluster w/ Tach",
+             "members": {"toyota pickup": (1984, 1995),
+                         "4runner 1984-1995": (1984, 1995)},
+             "copy_to": ["4runner 1984-1995"],
+             "note": "same clusters by era (84–88 / 89–95); cable vs electronic speedo (~'92) and senders must match"},
+            {"part": "Manual Locking Hubs (pair)",
+             "names": {"toyota pickup": "Manual Locking Hubs (pair)"},
+             "members": {"4runner 1984-1995": (1984, 1995),
+                         "toyota pickup": (1984, 1995)},
+             "copy_to": ["toyota pickup"], "copy_gates": True,
+             "note": "Aisin hubs interchange across 79–95 Toyota 4x4s — match spline count"},
+        ],
+    },
+    "matrix-vibe": {
+        "display": "Toyota Matrix / Pontiac Vibe (NUMMI twins)",
+        "members": {"matrix": "Matrix", "vibe": "Vibe"},
+        "shared": [
+            # Jointly built twins: mechanically identical, different
+            # sheet metal/trim/HVAC (Wikipedia, GenVibe).
+            {"part": "Rear Cargo Rail System",
+             "members": {"vibe": (2003, 2008), "matrix": (2003, 2008)},
+             "copy_to": ["matrix"],
+             "note": "NUMMI twins — mechanicals identical; nose/tail styling & HVAC trim differ"},
+            {"donor": True, "part": "GT (2ZZ) Engine Accessories",
+             "members": {"vibe": (2003, 2006)},
+             "note": "2ZZ-GE shared with Celica GT-S, Matrix XRS & Corolla XRS — manifolds/mounts differ by car"},
+        ],
+    },
+    "toyota-swap-donors": {
+        "display": "Toyota swap donors",
+        "members": {"land cruiser": "Land Cruiser", "prius": "Prius"},
+        "shared": [
+            # IH8MUD: LX470 is the 100-series twin; AHC standard on LX.
+            {"donor": True, "part": "AHC Height Control Pump",
+             "members": {"land cruiser": (1998, 2007)},
+             "note": "100-series AHC = Lexus LX470 (standard on LX) — pump & globes interchange"},
+            # IH8MUD: 80-series actuators retrofit into 100-series rears
+            # with a connector splice + shaft-length mod.
+            {"donor": True, "part": "Factory Locker Actuators",
+             "members": {"land cruiser": (1990, 2007)},
+             "note": "80↔100-series actuators retrofit (LX450/LX470 too) — plug & shaft length differ, easy mods"},
+            # PriusChat: the 28 NiMH modules interchange across every
+            # 04-15 pack; the cases do not.
+            {"donor": True, "part": "Hybrid Battery Pack (complete)",
+             "members": {"prius": (2004, 2009)},
+             "note": "NiMH modules interchange across ALL 04–15 packs — swap all 28 into your case, match capacity; cases & Li-ion do NOT"},
+            {"donor": True, "part": "Hybrid Battery Pack (complete)",
+             "members": {"prius": (2010, 2015)},
+             "note": "NiMH modules interchange across ALL 04–15 packs — swap all 28 into your case, match capacity; cases & Li-ion do NOT"},
+            {"donor": True, "part": "Hybrid Battery Cells (bulk)",
+             "members": {"prius": (2004, 2015)},
+             "note": "NiMH modules interchange across ALL 04–15 packs — match capacity, never mix with Li-ion"},
+        ],
+    },
+    # ---------------------------------------------------------- Honda deep
+    "honda-swap-donors": {
+        "display": "Honda/Acura swap donors",
+        "members": {"integra": "Integra", "prelude": "Prelude",
+                    "rsx": "RSX", "crx": "CRX", "acura tl": "TL"},
+        "shared": [
+            # Honda-Tech: trailing arms identical minus hub across
+            # Integra 94-01 / Civic 92-00 / del Sol.
+            {"donor": True,
+             "part": "Rear Disc Brake Conversion Parts (trailing arms)",
+             "members": {"integra": (1994, 2001)},
+             "note": "bolt-in rear-disc swap for 92–00 Civic/del Sol — skip 5-lug Type R; grab prop valve & e-brake cables too"},
+            {"donor": True,
+             "part": "B18 Engine Accessories / Intake Manifold",
+             "members": {"integra": (1994, 2001)},
+             "note": "B-series swap staple for 88–00 Civic/CRX/del Sol — mounts & axles differ by chassis"},
+            {"donor": True, "part": "H22 Intake / Accessories",
+             "members": {"prelude": (1992, 2001)},
+             "note": "H22 swaps into 90–97 Accord — use donor mounts & wiring"},
+            {"donor": True, "part": "K20 Intake Manifold / Throttle Body",
+             "members": {"rsx": (2002, 2006)},
+             "note": "K-swap staple; RSX-S (K20A2) parts upgrade the EP3 Civic Si's K20A3"},
+            {"donor": True, "part": "Si Seats / Sunroof / Glass Hatch",
+             "members": {"crx": (1988, 1991)},
+             "note": "EF-chassis seats bolt into 88–91 Civic"},
+            # Honda-Tech: NOT a caliper-only bolt-on for TSX/Accord —
+            # needs the complete TL-S knuckles + outer tie-rod ends.
+            {"donor": True, "part": "Brembo Front Calipers (Type-S)",
+             "members": {"acura tl": (2004, 2008)},
+             "note": "popular TSX/Accord big-brake donor — take the complete TL-S knuckles + outer tie-rod ends; calipers alone don't bolt on"},
+        ],
+    },
+    # ------------------------------------------------------ older favorites
+    "jeep-yj-tj": {
+        "display": "Jeep Wrangler YJ / TJ",
+        "members": {"wrangler 1987-1995": "Wrangler YJ",
+                    "wrangler 1996-2006": "Wrangler TJ"},
+        "shared": [
+            # Door openings identical 87-06; strikers differ (YJ pin vs
+            # TJ hoop). Full doors & hardtops do NOT cross (JeepForum).
+            {"part": "Half Doors (pair)",
+             "members": {"wrangler 1987-1995": (1987, 1995),
+                         "wrangler 1996-2006": (1997, 2006)},
+             "note": "87–06 lower halves interchange; swap latch/striker (YJ pin vs TJ hoop); full doors & tops do NOT cross"},
+        ],
+    },
+    "gm-classic-trucks": {
+        "display": "GM square-body / OBS trucks",
+        "members": {"blazer": "K5 Blazer", "jimmy": "Jimmy",
+                    "c/k": "C/K", "k1500": "K1500"},
+        "shared": [
+            # CK5 forum: 76-91 half-cab tops interchange; 73-75 full
+            # convertible tops do not; tailgates same 73-91.
+            {"part": "K5 Removable Hardtop Parts",
+             "names": {"jimmy": "Full-Size Hardtop/Tailgate Parts"},
+             "members": {"blazer": (1976, 1991), "jimmy": (1976, 1991)},
+             "note": "76–91 half-cab tops swap K5↔Jimmy; 73–75 full tops differ; tailgates same 73–91"},
+            {"part": "Front Grille + Bezels",
+             "names": {"c/k": "Front Grille + Bezels (chrome)"},
+             "members": {"blazer": (1973, 1987), "c/k": (1973, 1987)},
+             "note": "K5 shares the square-body truck front clip by facelift era — Chevy vs GMC grilles differ"},
+            {"part": "Tailgate (straight)",
+             "members": {"c/k": (1988, 1998), "k1500": (1988, 1998)},
+             "note": "88–98 Fleetside tailgates interchange; Stepside & 99–00 'classic' differ"},
+        ],
+    },
+    "gbody": {
+        "display": "GM G-body",
+        "members": {"monte carlo": "Monte Carlo", "cutlass": "Cutlass",
+                    "regal": "Regal"},
+        "shared": [
+            {"part": "Dash Pad (uncracked, G-body)",
+             "names": {"regal": "G-body Dash Pad (uncracked)"},
+             "members": {"monte carlo": (1978, 1988),
+                         "cutlass": (1978, 1988), "regal": (1978, 1987)},
+             "note": "A/G-body pads interchange — match color & A/C vs non-A/C dash"},
+            {"part": "G-body Trim + Emblems (78-88)",
+             "names": {"cutlass": "G-body Trim + Emblems"},
+             "members": {"monte carlo": (1978, 1988),
+                         "cutlass": (1978, 1988)},
+             "note": "shared brightwork; marque emblems & clips differ"},
+        ],
+    },
+    "w-body-l67": {
+        "display": "GM W-body L67",
+        "members": {"grand prix": "Grand Prix GTP"},
+        "shared": [
+            # 3800Pro/ZZP: Gen-3 M90 shared 97-03 GTP / Regal GS /
+            # Bonneville SSEi + 04-05 Impala SS / Monte SS; 04+ GTP is
+            # the Gen-5 Series III; GXP is the V8.
+            {"donor": True,
+             "part": "GTP Supercharger Accessories (pulleys/brackets)",
+             "members": {"grand prix": (1997, 2003)},
+             "note": "Gen-3 M90/L67 bits also fit Regal GS, Bonneville SSEi & 04–05 Impala/Monte SS; 04+ GTP is Gen-5 — GXP is the V8"},
+        ],
+    },
+    "s197-brembo": {
+        "display": "Mustang S197 Brembo",
+        "members": {"mustang 2005-2014": "Mustang"},
+        "shared": [
+            {"donor": True, "part": "GT Brembo Calipers (set)",
+             "members": {"mustang 2005-2014": (2007, 2014)},
+             "note": "GT500/track-pack Brembos bolt to any 05–14 Mustang spindle — pair with 14-in rotors; needs 18-in+ wheels"},
         ],
     },
     # ----------------------------------------------------------- VW/Audi
@@ -5509,9 +5768,15 @@ def _apply_platform_families() -> list[str]:
         for grp in fam["shared"]:
             gmembers: dict[str, tuple] = grp["members"]
             copy_to = set(grp.get("copy_to", ()))
+            donor = bool(grp.get("donor"))
             bad = [k for k in gmembers if k not in fam["members"]]
             bad += [k for k in copy_to if k not in gmembers]
-            if bad or len(gmembers) < 2:
+            if donor and (copy_to or not grp.get("note")):
+                problems.append(
+                    f"{fam_id}: donor group {grp['part']!r} must have a note "
+                    "and no copy_to")
+                continue
+            if bad or len(gmembers) < (1 if donor else 2):
                 problems.append(
                     f"{fam_id}: group {grp['part']!r} bad member refs {bad}")
                 continue
@@ -5549,6 +5814,26 @@ def _apply_platform_families() -> list[str]:
                         f"overlapping {gmembers[k]} (add to copy_to?)")
             canonical_key = next(
                 (k for k in gmembers if k not in copy_to and rows[k]), None)
+            if donor:
+                # One-way provenance: the note ships verbatim, nothing is
+                # copied, and every listed member must already carry the row
+                # (missing rows were reported above).
+                for k, (lo, hi) in gmembers.items():
+                    row = rows[k]
+                    if row is None:
+                        continue
+                    new = dict(row)
+                    new["sharedWith"] = (
+                        new["sharedWith"] + " \u00b7 " + grp["note"]
+                        if new.get("sharedWith") else grp["note"])
+                    old_sy = new.get("sharedYears")
+                    new["sharedYears"] = (
+                        (min(old_sy[0], lo), max(old_sy[1], hi)) if old_sy
+                        else (lo, hi))
+                    top = entries[k]["top_parts"]
+                    top[top.index(row)] = new
+                    rows[k] = new
+                continue
             if canonical_key is None:
                 problems.append(
                     f"{fam_id}: group {grp['part']!r} has no source row")
