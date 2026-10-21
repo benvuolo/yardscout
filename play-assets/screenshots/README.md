@@ -23,13 +23,19 @@ the approved iOS set (CSS width 432 vs iOS 440).
 
 ## Android-specific honesty notes
 
-- **Shot 4 (alerts)** reproduces what the shipped Android app actually renders,
-  not the web page: the native intro copy (no "iOS app" mention), the web
-  Notification-API button and "Get the iOS app" panel removed, the web-only
-  email-alerts panel hidden, and the native Push alerts panel showing the
-  honest Android status — "Push alerts are coming to Android soon — watches
-  still light up in-app" (no FCM project yet; see `nativePushInit` in
-  `docs/app.js`).
+- **Shot 4 (alerts)** — re-captured 2026-10-21 (owner call): **no push
+  wording at all** while Android has no push (FCM is being built for 1.2).
+  The capture hides every push surface (web Notification-API button, native
+  `#native-alerts-note` push panel, web-only "Get the iOS app" and
+  email-alerts panels) and renders in-app-only copy: "Watched cars light up
+  right here the moment they arrive at a yard in your radius." The Pro
+  tier-comparison row renders "In-app alerts within hours…" without the
+  app's "(push coming to Android soon)" parenthetical. The capture asserts
+  zero visible "push"/"coming soon" strings before shooting.
+  - **When FCM ships in 1.2:** restore the push-state rendering of
+    `alerts_shot` in `_capture_android.py` from git
+    (`git show b66d882:play-assets/_capture_android.py`), re-capture
+    `--alerts-only`, and swap the slide in the Play listing.
 - **Shot 5 (Pro)** follows the house rules from the iOS review: a yard with
   real published prices (every part row carries a concrete UTPAP list price —
   no "check yard price list" fallbacks) and no option-dependent
