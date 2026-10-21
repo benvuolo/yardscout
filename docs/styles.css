@@ -1815,3 +1815,49 @@
   margin-top: 0.15rem;
   line-height: 1.4;
 }
+
+/* Interchange provenance on part rows ("Swaps with: Sierra 2007–13 — …").
+ * Same muted voice as .verify-note: it's honesty copy, not a sales pitch. */
+.shared-note {
+  width: 100%;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  margin-top: 0.15rem;
+  line-height: 1.4;
+}
+.shared-note .shared-badge {
+  display: inline-block;
+  padding: 0.05rem 0.4rem;
+  margin-right: 0.3rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background: var(--surface3);
+  color: var(--accent2);
+  white-space: nowrap;
+}
+
+/* Part-first search (live toolbar) */
+.part-search-wrap { position: relative; flex: 1; min-width: 0; }
+.part-search-wrap .search-box { width: 100%; margin: 0; padding-right: 2rem; }
+.part-search-clear {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+.part-search-clear:hover { color: var(--text); }
+/* Rows whose part matched the active search */
+.part-item.part-hit {
+  background: var(--accent-soft);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding-left: 0.4rem;
+}

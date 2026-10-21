@@ -1985,6 +1985,15 @@ document.getElementById('zip-banner-skip').addEventListener('click', () => {
   renderLive();
 });
 
+// Part-first search: lowercase query typed in the live-tab toolbar. Filters
+// the grid to cars carrying a matching part (name or interchange provenance).
+let activePartQuery = '';
+
+function partQueryHit(p, q) {
+  return p.name.toLowerCase().includes(q)
+    || (p.sharedWith || '').toLowerCase().includes(q);
+}
+
 function getFilteredLive() {
   // Focused shared-find view: show exactly that car, ignoring all filters, so
   // a deep link works for someone with no zip/radius state at all.
@@ -2029,6 +2038,8 @@ function getFilteredLive() {
     // unknown transmission are excluded rather than guessed at (the inline
     // hint under the control says so).
     if (matchFilter === 'manual' && !isConfirmedManual(v)) return false;
+    if (activePartQuery
+        && !(v.topParts || []).some(p => partQueryHit(p, activePartQuery))) return false;
     return true;
   });
 
@@ -2086,10 +2097,26 @@ function getFilteredLive() {
     case 'date-asc': keyFn = tsOf; asc = true; break;
     case 'year-asc': keyFn = v => v.year || 0; asc = true; break;
   }
+  // Part-first search overrides the sort for Pro: rank by the best MATCHING
+  // confirmed part's resale high (unconfirmed parts count $0 — same honesty
+  // rule as every other ranking), with distance as the tie-break when a zip
+  // is set. Free users keep their neutral sorts — value ordering is the Pro
+  // value data in disguise.
+  let tieFn = tsOf, tieAscEff = tieAsc;
+  if (activePartQuery && isPro()) {
+    keyFn = v => Math.max(0, ...(v.topParts || [])
+      .filter(p => partQueryHit(p, activePartQuery))
+      .map(p => p.trim_status === 'unconfirmed' ? 0 : (p.high || 0)));
+    asc = false;
+    if (activeZipCoords) {
+      tieFn = v => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; };
+      tieAscEff = true;
+    }
+  }
   if (keyFn) {
-    const dec = filtered.map(v => [keyFn(v), tsOf(v), v]);
+    const dec = filtered.map(v => [keyFn(v), tieFn(v), v]);
     dec.sort((x, y) => (asc ? x[0] - y[0] : y[0] - x[0])
-      || (tieAsc ? x[1] - y[1] : y[1] - x[1]));
+      || (tieAscEff ? x[1] - y[1] : y[1] - x[1]));
     filtered = dec.map(d => d[2]);
   }
   return filtered;
@@ -2158,6 +2185,13 @@ function renderLive() {
     // closest yard and how far it is instead of showing a blank wall.
     const radiusMi = effectiveRadiusMi();
     let msg = '<h3>No matches</h3><p>Try adjusting your filters.</p>';
+    if (activePartQuery) {
+      // Part search emptied the grid: say so, with the query shown, instead
+      // of making the user guess which filter did it.
+      msg = `<h3>No cars here carry a part matching &ldquo;${escapeHtml(activePartQuery)}&rdquo;</h3>
+        <p>Try a shorter word (&ldquo;tailgate&rdquo;, &ldquo;3rd row&rdquo;), widen the radius, or clear the part search.</p>
+        <button type="button" class="btn" style="margin-top:0.8rem;" onclick="document.getElementById('live-part-search-clear').click()">Clear part search</button>`;
+    }
     if (!isPro() && !activeZipCoords) {
       // Free tier with no location set: point at the zip banner, and be honest
       // that skipping straight to the national list is a Pro feature.
@@ -2309,6 +2343,10 @@ function renderLive() {
         const fitsMark = p.fits
           ? ` <span class="fits-badge" title="Model years this part fits — prices are specific to this generation">fits ${p.fits}</span>`
           : '';
+        // Part-search highlight: mark the row(s) that satisfied the query so
+        // the eye lands on why this car is in the results.
+        const hitCls = unlocked && activePartQuery && partQueryHit(p, activePartQuery)
+          ? ' part-hit' : '';
         // Free tier: everything the parts database produces is blurred —
         // names, fits, values, channels. Real strings never reach the DOM;
         // rows render plausible placeholders so the blur has a shape. The
@@ -2327,13 +2365,18 @@ function renderLive() {
         // tell you can check from outside the car.
         const verifyNote = ifEquipped && p.verify
           ? `<div class="verify-note">Spot it: ${escapeHtml(p.verify)}</div>` : '';
+        // Interchange provenance: the same unit (or a bolt-up swap) appears
+        // on sibling models — widens the donor pool for buyers searching the
+        // sibling's name. The caveat ships verbatim; never trimmed to fit.
+        const sharedNote = p.sharedWith
+          ? `<div class="shared-note"><span class="shared-badge" title="Platform interchange: hand-verified shared unit across sibling models. Read the caveat and verify part numbers before buying.">swaps with</span>${escapeHtml(p.sharedWith)}</div>` : '';
         return `
-          <li class="part-item" style="flex-wrap:wrap;">
+          <li class="part-item${hitCls}" style="flex-wrap:wrap;">
             <span class="part-name">${p.name}</span>
             ${trimMark}${fitsMark}
             ${costHtml}
             <span class="part-price" title="Typical sold prices for working parts (eBay, national)">worth ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
-            ${verifyNote}
+            ${verifyNote}${sharedNote}
             ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
               <span class="sell-badge ${sellCls}">${sellSpd === 'Fast' ? 'Goes fast' : sellSpd === 'Slow' ? 'Slow mover' : 'Steady mover'}</span>
               <span class="sell-channel">Spares sell on: ${p.sell_at}</span>${localNote}
@@ -2520,6 +2563,29 @@ document.getElementById('live-filter-match').addEventListener('change', (e) => {
   if (hint) hint.style.display = e.target.value === 'manual' ? '' : 'none';
   renderLive();
 });
+// Part-first search: debounced so the 400-card grid doesn't re-render per
+// keystroke. Free users get the search as a filter too — part values on the
+// results stay blurred like everywhere else.
+(() => {
+  const inp = document.getElementById('live-part-search');
+  const clr = document.getElementById('live-part-search-clear');
+  let timer = null;
+  inp.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      activePartQuery = inp.value.trim().toLowerCase();
+      clr.style.display = activePartQuery ? '' : 'none';
+      renderLive();
+    }, 180);
+  });
+  clr.addEventListener('click', () => {
+    inp.value = '';
+    activePartQuery = '';
+    clr.style.display = 'none';
+    renderLive();
+    inp.focus();
+  });
+})();
 document.getElementById('live-zip').addEventListener('input', e => setZipCenter(e.target.value.trim()));
 document.getElementById('live-radius').addEventListener('change', () => {
   const sel = document.getElementById('live-radius');
