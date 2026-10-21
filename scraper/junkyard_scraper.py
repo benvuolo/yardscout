@@ -5491,11 +5491,14 @@ PLATFORM_FAMILIES: dict[str, dict] = {
             # 100A 6-groove, shared across the 1MZ-FE family (ToyotaNation
             # + Denso catalog). 130A tow-package variant differs; 04+ 3MZ
             # uses a different harness plug.
+            # Windows start at the 97+ Denso unit — Hollander spot-check
+            # (601-58691) crosses Camry V6 97-01 = ES300 97-01; earlier
+            # 1MZ cars used a different alternator.
             {"part": "Alternator (spin-test at yard)",
-             "members": {"camry": (1994, 2003), "avalon": (1995, 2003),
+             "members": {"camry": (1997, 2003), "avalon": (1997, 2003),
                          "solara": (1999, 2003), "sienna": (1998, 2003),
                          "highlander": (2001, 2003),
-                         "lexus es": (1994, 2003), "rx": (1999, 2003)},
+                         "lexus es": (1997, 2003), "rx": (1999, 2003)},
              "copy_to": ["avalon", "solara", "sienna", "highlander",
                          "lexus es", "rx"],
              "note": "V6 (1MZ) Denso unit only — 4-cyl differs; match plug & amps (100A vs 130A tow pkg); 04+ 3MZ plug differs"},
