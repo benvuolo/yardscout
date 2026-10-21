@@ -780,7 +780,7 @@ function headTickerFacts() {
   if (cars) facts.push(`${cars.toLocaleString()} CARS ON ROW`);
   if (nDisp) facts.push(`${nDisp} YARDS COAST TO COAST`);
   const weekAgo = Date.now() - 7 * 86400000;
-  const fresh = liveInventory.reduce((k, v) => k + ((Date.parse(v.dateAdded) || 0) >= weekAgo ? 1 : 0), 0);
+  const fresh = liveInventory.reduce((k, v) => k + (yardDateMs(v.dateAdded) >= weekAgo ? 1 : 0), 0);
   if (fresh) facts.push(`${fresh.toLocaleString()} SET OUT THIS WEEK`);
   if (activeZipCoords) {
     const r = effectiveRadiusMi();
@@ -1492,7 +1492,7 @@ function shareUrlFor(v) {
 async function shareVehicle(key) {
   const v = liveInventory.find(x => vehicleKey(x) === key);
   if (!v) return;
-  const added = v.dateAdded ? new Date(v.dateAdded) : null;
+  const added = parseYardDate(v.dateAdded);
   const arrived = added
     ? added.toLocaleDateString('en-US', {
         month: 'short', day: 'numeric',
@@ -1500,7 +1500,7 @@ async function shareVehicle(key) {
       }) : '';
   const bits = [`${v.year} ${v.make} ${v.model}`];
   if (v.row) bits.push(`Row ${v.row}`);
-  const text = `${bits.join(' — ')} at ${v.location}${arrived ? ', arrived ' + arrived : ''}`;
+  const text = `${bits.join(' — ')} at ${v.location}${arrived ? ', set out ' + arrived : ''}`;
   const url = shareUrlFor(v);
   track('share-used');
   if (navigator.share) {
@@ -1615,7 +1615,7 @@ function getFilteredLive() {
    * ~3M comparator calls on 163k rows cost multiple SECONDS of main-thread
    * time and froze first paint. */
   const tsOf = v => {
-    if (v._ts === undefined) v._ts = Date.parse(v.dateAdded) || 0;
+    if (v._ts === undefined) v._ts = yardDateMs(v.dateAdded);
     return v._ts;
   };
   const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
@@ -1780,7 +1780,8 @@ function renderLive() {
     const isSampleCard = unlocked && !isPro();
     const isMatch = v.hasMatch;
     const isNewVehicle = isNew(v.dateAdded);
-    const dateStr = new Date(v.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const setOutDate = parseYardDate(v.dateAdded);
+    const dateStr = setOutDate ? setOutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
     const cardClass = isMatch ? 'match-card' : 'dim-card';
     const fm = freshnessMultiplier(v.dateAdded);
     const fl = freshnessLabel(v.dateAdded);
@@ -1965,7 +1966,7 @@ function renderLive() {
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
-            <div class="car-meta">Added ${dateStr}${freshNote}${vinMetaHtml(v)}</div>
+            <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${freshNote}${vinMetaHtml(v)}</div>
             ${specBits.length ? `<div class="car-meta car-specs">${specBits.map(escapeHtml).join(' &middot; ')}</div>` : ''}
             ${lotClock}
           </div>
@@ -2669,7 +2670,7 @@ function renderAlerts() {
       allHitVehicles.push(v);
     }
   }));
-  allHitVehicles.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+  allHitVehicles.sort((a, b) => yardDateMs(b.dateAdded) - yardDateMs(a.dateAdded));
 
   const grid = document.getElementById('alert-matches-grid');
   if (!allHitVehicles.length) {
@@ -2679,7 +2680,8 @@ function renderAlerts() {
 
   grid.innerHTML = allHitVehicles.slice(0, 100).map(v => {
     const isMatch = v.hasMatch;
-    const dateStr = new Date(v.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const setOutDate = parseYardDate(v.dateAdded);
+    const dateStr = setOutDate ? setOutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
     const matchedRules = watchlist.filter(e => watchlistMatches(e, v)).map(e =>
       [e.make, e.model].filter(Boolean).join(' ') || 'Any'
     );
@@ -2689,7 +2691,7 @@ function renderAlerts() {
           <div style="min-width:0;">
             <div class="car-name">${v.year} ${v.make} ${v.model}</div>
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
-            <div class="car-meta">Added ${dateStr}${vinMetaHtml(v)} &middot; matched: ${matchedRules.join(', ')}</div>
+            <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${vinMetaHtml(v)} &middot; matched: ${matchedRules.join(', ')}</div>
           </div>
           <div class="car-badges">
             <span class="badge badge-new">Watchlist hit</span>

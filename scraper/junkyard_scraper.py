@@ -5568,37 +5568,64 @@ def fetch_pnp_inventory(make_ids: list[int] | None = None, *, national: bool = F
         except Exception:
             continue
 
-    # Second pass: recover vehicles the national query truncated away. One
-    # query per (capped make x yard postal code) at a small radius; vehicles
-    # already seen are skipped, so overlapping radii are harmless.
-    if national and capped_make_ids and yard_zips:
+    # Second pass: the national query is not just row-capped (see
+    # PNP_NATIONAL_CAP) — its per-yard index also LAGS the per-zip search that
+    # picknpull.com itself uses, by DAYS. Diagnosed 2026-10-21: SLC's national
+    # slice was byte-identical for 6+ consecutive scans while the yard's site
+    # showed fresh arrivals, and 256 Toyotas with set-out dates back to Oct 15
+    # were missing nationally even though Toyota (~4.2k rows) never hit the
+    # cap — that lag hid a watched Oct-20 4Runner for two days. So ALWAYS
+    # re-sweep every yard zip with one make-less query (returns that area's
+    # full, fresh inventory — observed 1.1-4.1k rows/zip) and union by id.
+    # Guard: if a dense zip's make-less response itself comes back at the cap,
+    # fall back to one query per make for that zip.
+    if national and capped_make_ids:
+        print(f"  [PnP] makeId(s) {capped_make_ids} hit the {PNP_NATIONAL_CAP}-row "
+              f"national cap (recovered by the per-zip sweep below)", file=sys.stderr)
+    if national and yard_zips:
         seen_ids = {str(v.get("id")) for v in all_vehicles}
-        for mid in capped_make_ids:
-            recovered = 0
-            for pc in sorted(yard_zips):
-                try:
-                    r = requests.get(
-                        f"{PNP_API}/vehicle/search",
-                        params={"makeId": mid, "distance": PNP_SWEEP_RADIUS, "zip": pc},
-                        headers=HEADERS,
-                        timeout=60,
-                    )
-                    groups = r.json()
-                except Exception:
-                    continue
-                rows: list[dict] = []
-                for loc_data in groups:
-                    _pnp_ingest_group(loc_data, rows)
-                for v in rows:
-                    vid = str(v.get("id"))
-                    if vid in seen_ids:
-                        continue
+        recovered = 0
+        capped_zips: list[str] = []
+
+        def _sweep(pc: str, mid: int | None) -> list[dict] | None:
+            params: dict = {"distance": PNP_SWEEP_RADIUS, "zip": pc}
+            if mid is not None:
+                params["makeId"] = mid
+            try:
+                r = requests.get(f"{PNP_API}/vehicle/search", params=params,
+                                 headers=HEADERS, timeout=60)
+                groups = r.json()
+            except Exception:
+                return None
+            rows: list[dict] = []
+            for loc_data in groups:
+                _pnp_ingest_group(loc_data, rows)
+            return rows
+
+        def _union(rows: list[dict]) -> int:
+            n = 0
+            for v in rows:
+                vid = str(v.get("id"))
+                if vid not in seen_ids:
                     seen_ids.add(vid)
                     all_vehicles.append(v)
-                    recovered += 1
-            print(f"  [PnP] makeId {mid} hit the {PNP_NATIONAL_CAP}-row national cap — "
-                  f"per-yard sweep over {len(yard_zips)} zips recovered {recovered} "
-                  f"truncated vehicles", file=sys.stderr)
+                    n += 1
+            return n
+
+        for pc in sorted(yard_zips):
+            rows = _sweep(pc, None)
+            if rows is None:
+                continue
+            if len(rows) >= PNP_NATIONAL_CAP:
+                capped_zips.append(pc)
+                continue
+            recovered += _union(rows)
+        for pc in capped_zips:
+            for mid in make_ids:
+                recovered += _union(_sweep(pc, mid) or [])
+        print(f"  [PnP] per-zip freshness sweep over {len(yard_zips)} zips "
+              f"({len(capped_zips)} dense zip(s) re-swept per make) recovered "
+              f"{recovered} vehicles the national index was missing", file=sys.stderr)
 
     return all_vehicles
 
@@ -10409,6 +10436,81 @@ def build_inventory_json_payload(vehicles: list[dict], only_matches: bool) -> di
     return compact_inventory_v2(output_json(vehicles, only_matches=only_matches))
 
 
+YARD_HEALTH_FILE = DATA_DIR / "yard_health.json"
+# A yard whose vehicle set is byte-identical for this many CONSECUTIVE scans
+# (~1 day at the 4h cadence) while its source keeps serving 200s is almost
+# always upstream index lag or a silently-broken adapter, not a quiet yard:
+# the PnP SLC national-index freeze of 2026-10-19..21 served an identical
+# 964-car set for 6 straight scans and hid a watched 4Runner for two days.
+YARD_STALE_SCANS = 6
+# Drop vanished yards from the health file after this many scans missing
+# (closed/renamed yards shouldn't haunt the report forever).
+YARD_MISSING_DROP = 30
+
+
+def _update_yard_health(payload: dict) -> None:
+    """Per-yard change tracking -> docs/data/yard_health.json (committed by the
+    scan workflow along with the rest of docs/data/). Compares each yard's
+    vehicle-set fingerprint against the previous scan's and shouts in the scan
+    log when a yard has been frozen for YARD_STALE_SCANS+ scans or has
+    disappeared from the scrape entirely."""
+    prev: dict = {}
+    try:
+        prev = json.loads(YARD_HEALTH_FILE.read_text()).get("yards", {})
+    except Exception:
+        pass
+
+    names = [y[0] for y in payload["yards"]]
+    per_yard: dict[str, list[str]] = {n: [] for n in names}
+    for row in payload["vehicles"]:
+        # id + dateAdded: catches adds, removals AND date corrections.
+        per_yard[names[row[7]]].append(f"{row[0]}|{row[6]}")
+
+    now = payload["scrapedAt"]
+    yards_out: dict[str, dict] = {}
+    stale: list[tuple[int, str, int]] = []
+    for n in names:
+        fp = hashlib.sha1("\n".join(sorted(per_yard[n])).encode()).hexdigest()[:16]
+        p = prev.get(n) or {}
+        if p.get("fingerprint") == fp:
+            unchanged = int(p.get("unchangedScans", 0)) + 1
+            last_changed = p.get("lastChangedAt") or now
+        else:
+            unchanged = 0
+            last_changed = now
+        yards_out[n] = {"count": len(per_yard[n]), "fingerprint": fp,
+                        "unchangedScans": unchanged, "lastChangedAt": last_changed}
+        if unchanged >= YARD_STALE_SCANS:
+            stale.append((unchanged, n, len(per_yard[n])))
+
+    missing: list[tuple[int, str]] = []
+    for n, p in prev.items():
+        if n in yards_out:
+            continue
+        miss = int(p.get("missingScans", 0)) + 1
+        if miss > YARD_MISSING_DROP:
+            continue
+        yards_out[n] = {**{k: p[k] for k in ("count", "fingerprint", "lastChangedAt") if k in p},
+                        "unchangedScans": int(p.get("unchangedScans", 0)),
+                        "missingScans": miss}
+        missing.append((miss, n))
+
+    YARD_HEALTH_FILE.write_text(json.dumps(
+        {"schemaVersion": 1, "scrapedAt": now, "staleAfterScans": YARD_STALE_SCANS,
+         "yards": yards_out}, separators=(",", ":"), sort_keys=True))
+
+    for unchanged, n, ct in sorted(stale, reverse=True):
+        print(f"  ⚠️  STALE YARD: {n} — identical {ct}-vehicle set for "
+              f"{unchanged + 1} consecutive scans (since {yards_out[n]['lastChangedAt']}); "
+              f"source may be serving a lagging index", file=sys.stderr)
+    for miss, n in sorted(missing, reverse=True):
+        print(f"  ⚠️  MISSING YARD: {n} — absent from the last {miss} scan(s); "
+              f"adapter may be silently failing", file=sys.stderr)
+    if stale or missing:
+        print(f"  ⚠️  yard health: {len(stale)} stale, {len(missing)} missing — "
+              f"see docs/data/yard_health.json", file=sys.stderr)
+
+
 def print_rich(vehicles: list[dict], show_all: bool = False):
     console = Console()
     console.print()
@@ -10950,6 +11052,7 @@ def main():
                          "extras": extras}, separators=(",", ":")))
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})")
                     print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}")
+                    _update_yard_health(payload)
                     _record_scan_to_db(vehicles, payload["scrapedAt"])
                 if args.json:
                     print(json.dumps(payload, separators=(",", ":")))
@@ -10989,6 +11092,7 @@ def main():
                 if not args.json:
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})", file=sys.stderr)
                     print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}", file=sys.stderr)
+                _update_yard_health(payload)
                 _record_scan_to_db(vehicles, payload["scrapedAt"])
             if args.json:
                 print(json.dumps(payload, separators=(",", ":")))

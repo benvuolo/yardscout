@@ -977,16 +977,37 @@ function rarityRank(r) { return { Legendary: 4, Epic: 3, Rare: 2, Uncommon: 1 }[
 function categoryClass(cat) { return 'cat-' + cat.toLowerCase(); }
 function rarityClass(r) { return 'rarity-' + r.toLowerCase(); }
 function formatPrice(n) { return '$' + n.toLocaleString(); }
-function isNew(dateStr) {
-  if (!dateStr) return false;
+/* Parse a yard-published date for display. dateAdded is the yard's set-out
+   date as a bare calendar date ('YYYY-MM-DD', no timezone). new Date() reads
+   that as UTC MIDNIGHT, and toLocaleDateString() anywhere west of Greenwich
+   then renders the PREVIOUS day — an Oct 5 set-out displayed as "Oct 4" in
+   Utah (owner-reported 2026-10-21). Parse it as a LOCAL date so the app shows
+   the same calendar date the yard publishes. Returns null when unparseable. */
+function parseYardDate(dateStr) {
+  if (!dateStr) return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(dateStr);
+  if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
   const d = new Date(dateStr);
-  const now = new Date();
-  return (now - d) / 86400000 <= 7;
+  return isNaN(d.getTime()) ? null : d;
+}
+
+/* Epoch ms of the yard's set-out date (local midnight), 0 when unknown —
+   for sorts and freshness math that previously used Date.parse(). */
+function yardDateMs(dateStr) {
+  const d = parseYardDate(dateStr);
+  return d ? d.getTime() : 0;
+}
+
+function isNew(dateStr) {
+  const d = parseYardDate(dateStr);
+  if (!d) return false;
+  return (new Date() - d) / 86400000 <= 7;
 }
 
 function daysSinceAdded(dateStr) {
-  if (!dateStr) return 999;
-  return Math.max(0, (new Date() - new Date(dateStr)) / 86400000);
+  const d = parseYardDate(dateStr);
+  if (!d) return 999;
+  return Math.max(0, (new Date() - d) / 86400000);
 }
 
 function freshnessMultiplier(dateStr) {
