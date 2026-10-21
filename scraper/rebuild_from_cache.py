@@ -68,6 +68,8 @@ def main() -> None:
                 "sell_notes": p.get("sell_notes", ""),
                 **({"fits": p["fits"]} if p.get("fits") else {}),
                 **({"trim_status": p["trim_status"]} if p.get("trim_status") else {}),
+                **({"verify": p["verify"]} if p.get("verify") else {}),
+                **({"sharedWith": p["sharedWith"]} if p.get("sharedWith") else {}),
             }
             for p in matches[0]["top_parts"]
         ]
