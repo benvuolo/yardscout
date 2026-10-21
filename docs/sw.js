@@ -75,7 +75,13 @@ self.addEventListener('notificationclick', (e) => {
   const target = new URL(e.notification.data && e.notification.data.url || './', self.location.href).href;
   e.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then((wins) => {
     for (const w of wins) {
-      if (w.url.startsWith(self.registration.scope) && 'focus' in w) return w.focus();
+      if (w.url.startsWith(self.registration.scope) && 'focus' in w) {
+        // Tell the already-open app which car the alert was about — it
+        // refetches fresh inventory and focuses the card (app.js
+        // 'open-alert' handler). Navigating instead would reload the app.
+        w.postMessage({ type: 'open-alert', url: target });
+        return w.focus();
+      }
     }
     return clients.openWindow(target);
   }));

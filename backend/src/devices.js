@@ -203,6 +203,10 @@ export async function dispatchDeviceAlerts(env, arrivals) {
     const res = await sendDevicePush(env, d, {
       title: `${fresh.length} watched car${fresh.length === 1 ? '' : 's'} just hit the yard`,
       body: digestText(fresh),
+      // Deep link to the (first) alerted car: the app bypasses its inventory
+      // cache on alert entry and opens the car's card (#alert= routes there).
+      // Backward-compatible — shipped app versions ignore the url key.
+      url: '/#alert=' + encodeURIComponent(String(fresh[0].id)),
     });
     if (res.ok) {
       devices++;
@@ -299,6 +303,8 @@ export async function sendWeeklyDevicePushes(env) {
       body: (fresh.length
         ? digestText(fresh) + '\nPro members heard about each of these within hours of it landing.'
         : '') + salesLine,
+      // Same deep-link contract as the instant path when there are arrivals.
+      ...(fresh.length ? { url: '/#alert=' + encodeURIComponent(String(fresh[0].id)) } : {}),
     });
     if (res.ok) {
       devices++;

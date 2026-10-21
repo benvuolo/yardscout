@@ -83,6 +83,8 @@ check('free device NOT pushed instantly', freeSends.length === 0, `got ${freeSen
 if (proSends.length) {
   check('push names the matching car only', /4Runner/.test(proSends[0].body) && !/Civic/.test(proSends[0].body), proSends[0].body);
   check('push carries a deep-link url in data', typeof proSends[0].data.url === 'string');
+  check('deep link is the alert form with the vehicle id (#alert=<id>)',
+    /^\/#alert=9001$/.test(proSends[0].data.url), proSends[0].data.url);
 }
 
 /* ---- 3. dedupe: same commit again → no second push ---- */
@@ -98,6 +100,8 @@ sent = await sentList();
 const freeWeekly = sent.filter((s) => s.token === freeToken);
 check('free device got the weekly recap', freeWeekly.length === 1, `got ${freeWeekly.length}`);
 check('weekly recap is a digest, not an instant alert', /week/i.test(freeWeekly[0]?.title || ''), freeWeekly[0]?.title);
+check('weekly recap deep-links to the first arrival (#alert=<id>)',
+  /^\/#alert=9001$/.test(freeWeekly[0]?.data?.url || ''), freeWeekly[0]?.data?.url);
 check('pro device skipped by weekly digest', sent.filter((s) => s.token === proToken).length === 1);
 
 r = await api('/v1/admin/device-digest/run', { method: 'POST', headers: ADMIN });

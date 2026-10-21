@@ -687,7 +687,24 @@ function hydratePhotos() {
 }
 const INVENTORY_URL = DATA_BASE + 'data/inventory_live.json';
 
-async function loadLiveInventory() {
+/* In-flight guard: the boot load, the resume self-heal, an alert-tap entry,
+ * and the manual refresh button can all ask at once — piggyback on the
+ * running fetch instead of stacking multi-MB downloads. */
+let _invInFlight = null;
+function loadLiveInventory(opts = {}) {
+  if (_invInFlight) return _invInFlight;
+  _invInFlight = _loadLiveInventory(opts).finally(() => { _invInFlight = null; });
+  return _invInFlight;
+}
+
+/* opts.fresh — bypass the HTTP cache outright (cache:'reload'); used when we
+ *   KNOW a newer scan exists (the user arrived from a push alert that the
+ *   scan commit itself triggered).
+ * opts.quiet — override the apply mode: false forces a full re-render (alert
+ *   entry must show the alerted car), true keeps a background refresh
+ *   unobtrusive (resume self-heal). Default: quiet iff data was already on
+ *   screen (the original behavior). */
+async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
   // Pricing files load concurrently with the inventory (they used to be a
   // serial waterfall in front of the 4MB fetch). Rendering needs them for
   // pull costs, so each render path awaits this promise before first paint
@@ -709,29 +726,39 @@ async function loadLiveInventory() {
 
   // Repeat visits: render instantly from the Cache API copy, then revalidate
   // in the background. (The service worker deliberately skips this file.)
-  let shownScrapedAt = null;
+  // Mid-session refetches (resume self-heal, alert entry, refresh button)
+  // skip the cache re-apply — what's on screen IS the cached copy — and go
+  // straight to the conditional network fetch.
+  let shownScrapedAt = liveLoaded ? (liveScrapedAt || 'unknown') : null;
   let cache = null;
   try {
     if ('caches' in window) {
       cache = await caches.open(DATA_CACHE);
-      const hit = await cache.match(INVENTORY_URL);
-      if (hit) {
-        const raw = await hit.json();
-        await pricingReady;
-        applyInventory(raw);
-        shownScrapedAt = raw.scrapedAt || 'unknown';
+      if (!shownScrapedAt) {
+        const hit = await cache.match(INVENTORY_URL);
+        if (hit) {
+          const raw = await hit.json();
+          await pricingReady;
+          applyInventory(raw);
+          shownScrapedAt = raw.scrapedAt || 'unknown';
+        }
       }
     }
   } catch (e) { /* cached copy unreadable — fall through to network */ }
 
   try {
-    const resp = await fetch(INVENTORY_URL, shownScrapedAt ? { cache: 'no-cache' } : {});
+    // 'reload' bypasses the HTTP cache outright (alert entry — the push
+    // proves a newer scan is published); 'no-cache' is a conditional
+    // revalidation (GitHub Pages serves ETags, so it costs one 304 round
+    // trip when nothing changed).
+    const resp = await fetch(INVENTORY_URL,
+      fresh ? { cache: 'reload' } : (shownScrapedAt ? { cache: 'no-cache' } : {}));
     if (!resp.ok) throw new Error('not found');
     if (cache) { try { await cache.put(INVENTORY_URL, resp.clone()); } catch (e) { /* quota */ } }
     const raw = await resp.json();
     if (shownScrapedAt && (raw.scrapedAt || 'unknown') === shownScrapedAt) return; // nothing new
     await pricingReady;
-    applyInventory(raw, { quiet: !!shownScrapedAt });
+    applyInventory(raw, { quiet: quiet != null ? quiet : !!shownScrapedAt });
   } catch (e) {
     if (shownScrapedAt) return; // cached data already on screen — stay quiet
     liveLoaded = false;
@@ -744,6 +771,33 @@ async function loadLiveInventory() {
       </div>`;
   }
 }
+
+/* ===== RESUME SELF-HEAL =====
+ * The inventory only revalidated at launch, so an app resumed after hours in
+ * the background kept presenting a superseded scan as live. On resume, if
+ * the loaded scan is over an hour old, revalidate in the background: a
+ * conditional request (ETag) when nothing changed, a quiet in-place swap
+ * when a newer scan published. Keeps the "SCANNED xH AGO" fact chips honest. There is deliberately NO
+ * periodic timer — launch + resume + alert entry + the manual refresh button
+ * cover every way stale data meets eyeballs, without idle-drain. */
+const RESUME_STALE_MS = 60 * 60 * 1000;          // scans publish every ~4-6h
+const RESUME_THROTTLE_MS = 5 * 60 * 1000;        // visibility flaps; don't hammer
+let _lastResumeRefresh = 0;
+
+function refreshIfStale() {
+  if (!liveLoaded || !liveScrapedAt) return;     // boot path owns the first load
+  const age = Date.now() - new Date(liveScrapedAt).getTime();
+  if (!isFinite(age) || age < RESUME_STALE_MS) return;
+  if (Date.now() - _lastResumeRefresh < RESUME_THROTTLE_MS) return;
+  _lastResumeRefresh = Date.now();
+  loadLiveInventory({ quiet: true }).catch(() => { /* retried on next resume */ });
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') refreshIfStale();
+});
+// Capacitor/Cordova fire a document 'resume' event on app foreground; where
+// it never fires, the visibilitychange above covers the same transition.
+document.addEventListener('resume', refreshIfStale);
 
 /* Coverage transparency: the yard count shown in the zip banner / footer is
  * computed from the live data, never hardcoded. */
@@ -1468,16 +1522,52 @@ updateSavedPill();
 let focusedCarKey = null;
 
 function applyShareHash() {
-  const m = location.hash.match(/#car=([^&]+)/);
+  // #car= is the share-link form; #alert= is the push-payload form (same key,
+  // but it additionally signals "bypass caches" — see openFromAlert).
+  const m = location.hash.match(/#(?:car|alert)=([^&]+)/);
   focusedCarKey = m ? decodeURIComponent(m[1]) : null;
 }
 window.addEventListener('hashchange', () => {
+  const alertId = (location.hash.match(/#alert=([^&]+)/) || [])[1];
+  if (alertId) { openFromAlert(decodeURIComponent(alertId)); return; }
   applyShareHash();
   if (liveLoaded) {
     renderLive();
     if (focusedCarKey) window.scrollTo({ top: 0 });
   }
 });
+
+/* ===== ALERT ENTRY (push-tap deep links) =====
+ * A push alert PROVES a newer scan exists than whatever this session has
+ * loaded — the alert fired from that scan's commit. The 19:44 incident:
+ * push arrives, owner opens the app, and the watched 4Runner isn't there
+ * because the app is still showing pre-scan cache. So entering from a
+ * notification always bypasses the inventory caches, then lands on the
+ * alerted car's card. Reached from: the native notification-tap listener
+ * (iOS + Android), the service worker's web-push tap message, and any
+ * #alert=<id> url (cold launches route through the boot loader instead). */
+function openFromAlert(vehicleId) {
+  track('alert-open' + (vehicleId ? '/car' : ''));
+  if (vehicleId) {
+    try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
+    history.replaceState(null, '',
+      location.pathname + location.search + '#car=' + encodeURIComponent(vehicleId));
+    applyShareHash();
+    if (liveLoaded) { renderLive(); window.scrollTo({ top: 0 }); }
+  } else {
+    // Payload without a vehicle id (sale-day alerts, pre-update payloads):
+    // the Alerts tab is where the matches are — the old behavior.
+    try { document.querySelector('.tab[data-tab="alerts"]').click(); } catch (e) { /* boot race */ }
+  }
+  loadLiveInventory({ fresh: true, quiet: false })
+    .then(() => {
+      // "Nothing new" returns without rendering — but the focused view may be
+      // showing the honest "isn't in the current inventory" state from before
+      // the fetch settled. One final render pins the true outcome.
+      if (liveLoaded && focusedCarKey) renderLive();
+    })
+    .catch(() => { /* load error path already rendered its message */ });
+}
 
 function jhClearFocus() {
   focusedCarKey = null;
@@ -2117,7 +2207,8 @@ document.getElementById('live-refresh-btn').addEventListener('click', async () =
   btn.disabled = true;
   const orig = btn.innerHTML;
   btn.innerHTML = 'Checking&hellip;';
-  try { await loadLiveInventory(); } catch (e) { /* handled inside */ }
+  // quiet:false — the user explicitly asked; render whatever arrives.
+  try { await loadLiveInventory({ quiet: false }); } catch (e) { /* handled inside */ }
   btn.disabled = false;
   btn.innerHTML = orig;
   if (liveScrapedAt && liveScrapedAt !== prev) return; // new data rendered
@@ -3119,12 +3210,27 @@ document.getElementById('alert-model-done').addEventListener('click', () => {
 // shared-find suppression) immediately instead of after the 4MB fetch.
 applyShareHash();
 updateZipBanner();
-loadLiveInventory();
+// Launched via an alert deep link (#alert=<id> in web-push / FCM / APNs
+// payload urls): normalize to the #car= focus form and make the first fetch
+// bypass the HTTP cache — the alert exists because a newer scan published.
+const _bootAlertId = (location.hash.match(/#alert=([^&]+)/) || [])[1] || null;
+if (_bootAlertId) {
+  history.replaceState(null, '', location.pathname + location.search + '#car=' + _bootAlertId);
+}
+loadLiveInventory({ fresh: !!_bootAlertId });
 
 // Offline + instant-launch cache. Needs a secure context (HTTPS or localhost) —
 // silently skipped when served over plain LAN IP, active once on GitHub Pages.
 if (!IS_NATIVE && 'serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
+  // Web-push tap while the app is already open: sw.js focuses this window
+  // and posts the alert url (navigating would reload the whole app).
+  navigator.serviceWorker.addEventListener('message', (e) => {
+    const url = e.data && e.data.type === 'open-alert' && e.data.url;
+    if (!url) return;
+    const m = String(url).match(/#(?:alert|car)=([^&]+)/);
+    openFromAlert(m ? decodeURIComponent(m[1]) : null);
+  });
 }
 
 /* ===== iOS INSTALL HINT =====
@@ -3323,9 +3429,16 @@ async function syncDeviceRegistration(freshToken) {
     if (status) status.textContent = 'Could not register for push — try again later.';
     console.log('push registration error', e);
   });
-  PN.addListener('pushNotificationActionPerformed', () => {
-    // Notification tap: land on the Alerts tab where the matches are.
-    try { document.querySelector('.tab[data-tab="alerts"]').click(); } catch (e) { /* boot race */ }
+  PN.addListener('pushNotificationActionPerformed', (action) => {
+    // Notification tap. New payloads carry url:'/#alert=<vehicleId>' — a
+    // top-level key in the APNs JSON, data.url in FCM; the plugin surfaces
+    // both as notification.data.url (iOS: full userInfo; Android: intent
+    // extras, warm AND cold start — BridgeActivity replays the launch
+    // intent). openFromAlert refetches fresh inventory and lands on the
+    // car's card. Old payloads without a url fall back to the Alerts tab.
+    const data = (action && action.notification && action.notification.data) || {};
+    const m = String(data.url || '').match(/#(?:alert|car)=([^&]+)/);
+    openFromAlert(m ? decodeURIComponent(m[1]) : null);
   });
 
   // Permission is requested HERE, on the user's explicit "enable alerts" tap —

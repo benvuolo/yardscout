@@ -283,7 +283,9 @@ export async function dispatchAlerts(env, arrivals) {
     const payload = {
       title: `${fresh.length} watched car${fresh.length === 1 ? '' : 's'} just hit the yard`,
       body: digestText(fresh),
-      url: '/',
+      // Deep link to the (first) alerted car — the app/PWA bypasses its
+      // inventory cache on #alert= entry and focuses the card.
+      url: '/#alert=' + encodeURIComponent(String(fresh[0].id)),
     };
 
     const subs = (await env.DB.prepare(
