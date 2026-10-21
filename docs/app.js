@@ -3577,6 +3577,10 @@ async function refreshNativeIapUi() {
     if (hasWebEnt && email) setMsg($id('ent-pro-status'), 'Pro is linked to ' + email + '.');
   }
 
+  // Exposed for the email-alerts panel's inline link flow (same grant path
+  // as checkout-return and code-redeem; see the EMAIL ALERTS section).
+  window.ysGrantWebPro = (args) => grantWebPro(args);
+
   function grantWebPro({ email, token, source, note }) {
     localStorage.setItem('jh_pro', '1');
     localStorage.setItem('jh_pro_source', 'account');
@@ -3835,18 +3839,27 @@ async function refreshNativeIapUi() {
     panel.style.display = '';   // web always sees the panel (perk visibility)
     const toggleWrap = $id('email-alerts-toggle-wrap');
     const upgradeBtn = $id('email-alerts-upgrade');
+    const linkWrap = $id('email-alerts-link');
     const token = entToken();
 
     if (!token) {
-      // Free (or Pro not linked on this device): honest Pro pitch, no toggle.
       toggleWrap.style.display = 'none';
-      upgradeBtn.style.display = '';
-      setStatus(isPro()
-        ? 'Unlock Pro on this device (Pro sheet → "Already have Pro?") to turn on email alerts.'
-        : '');
+      if (isPro()) {
+        // Pro on this browser but no entitlement token (account-session Pro,
+        // or Pro granted before email linking existed): the upgrade sheet
+        // would only say "You're Pro ✓", so link the email right here.
+        upgradeBtn.style.display = 'none';
+        linkWrap.style.display = '';
+      } else {
+        // Free: honest Pro-perk pitch.
+        upgradeBtn.style.display = '';
+        linkWrap.style.display = 'none';
+      }
+      setStatus('');
       return;
     }
     upgradeBtn.style.display = 'none';
+    linkWrap.style.display = 'none';
     toggleWrap.style.display = 'flex';
     const toggle = $id('email-alerts-toggle');
     toggle.checked = localStorage.getItem(ENABLED_KEY) === '1';
@@ -3895,6 +3908,84 @@ async function refreshNativeIapUi() {
       toggleEl.disabled = false;
     }
   });
+
+  /* ---- inline email-link flow (Pro without an entitlement token) ----
+   * Same account-less request-code / redeem-code endpoints as the Pro
+   * sheet's "Already have Pro?" — but that section is unreachable for a
+   * user the sheet already considers Pro, so it lives here too. */
+  const ENT_LINK_BASE = localStorage.getItem('ys_ent_base')
+    || (location.hostname === 'yardscout.io' ? '' : 'https://yardscout.io');
+  // No content-type header on purpose: keeps the request CORS-"simple"
+  // (no preflight), matching every other entitlement call in this file.
+  const entPost = async (path, body) => {
+    const r = await fetch(ENT_LINK_BASE + '/api/ent/' + path, { method: 'POST', body: JSON.stringify(body) });
+    return { ok: r.ok, data: await r.json().catch(() => ({})) };
+  };
+  const setLinkStatus = (msg, isError) => {
+    const el = $id('email-alerts-link-status');
+    if (!el) return;
+    el.textContent = msg || '';
+    el.style.color = isError ? 'var(--red)' : '';
+  };
+
+  const linkSendBtn = $id('email-alerts-link-send');
+  if (linkSendBtn) linkSendBtn.addEventListener('click', async () => {
+    const email = ($id('email-alerts-link-email').value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setLinkStatus('Enter a valid email address.', true);
+      return;
+    }
+    track('email-alerts-link-request');
+    linkSendBtn.disabled = true;
+    setLinkStatus('Sending\u2026');
+    try {
+      const { ok, data } = await entPost('request-code', { email });
+      if (ok) {
+        $id('email-alerts-link-code-row').style.display = '';
+        $id('email-alerts-link-code').focus();
+        setLinkStatus(data.message || 'Check your email for the 6-digit code (expires in 10 minutes).');
+      } else {
+        setLinkStatus(data.message || 'Could not send the code — try again.', true);
+      }
+    } catch (e) {
+      setLinkStatus('Could not reach the server — check your connection.', true);
+    } finally {
+      linkSendBtn.disabled = false;
+    }
+  });
+
+  const linkBtn = $id('email-alerts-link-btn');
+  if (linkBtn) linkBtn.addEventListener('click', async () => {
+    const email = ($id('email-alerts-link-email').value || '').trim();
+    const code = ($id('email-alerts-link-code').value || '').trim();
+    if (!/^\d{6}$/.test(code)) { setLinkStatus('Enter the 6-digit code from the email.', true); return; }
+    linkBtn.disabled = true;
+    setLinkStatus('Checking\u2026');
+    try {
+      const { ok, data } = await entPost('redeem-code', { email, code });
+      if (ok && data.pro) {
+        // Same grant path as the Pro sheet — sets ys_ent_token/email/src.
+        if (window.ysGrantWebPro) window.ysGrantWebPro({ email, token: data.token, source: data.source });
+        track('email-alerts-linked');
+        // The user linked from the EMAIL ALERTS panel — their intent is to
+        // turn alerts on, so do that now rather than making them find a toggle.
+        const res = await postSync(true);
+        if (res && res.ok) localStorage.setItem(ENABLED_KEY, '1');
+        window.refreshEmailAlertsUi();
+        setStatus('Linked — alert emails go to ' + email + '. One email per scan with new matches (scans run about every 6 hours).');
+      } else {
+        setLinkStatus(data.message || 'That code didn\u2019t work — request a new one.', true);
+      }
+    } catch (e) {
+      setLinkStatus('Could not reach the server — check your connection.', true);
+    } finally {
+      linkBtn.disabled = false;
+    }
+  });
+  const linkCodeInput = $id('email-alerts-link-code');
+  if (linkCodeInput) linkCodeInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') linkBtn.click(); });
+  const linkEmailInput = $id('email-alerts-link-email');
+  if (linkEmailInput) linkEmailInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') linkSendBtn.click(); });
 
   // Initial paint (the Alerts tab may be the landing tab via deep link).
   window.refreshEmailAlertsUi();

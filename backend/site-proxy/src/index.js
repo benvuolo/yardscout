@@ -65,6 +65,18 @@ export default {
     });
     const h = new Headers(r.headers);
     h.set('access-control-allow-origin', '*');
+    // App-shell files must revalidate on every load. Without this, the zone's
+    // 4-hour browser TTL (max-age=14400) meant a deploy could be invisible to
+    // returning visitors for hours (owner-reported: new Alerts-tab feature
+    // missing on a browser that had the site cached). ETags pass through from
+    // GitHub Pages, so revalidation is a cheap 304 — and the edge cache above
+    // (cacheTtl 300) still shields the origin. The big /data/ inventory files
+    // keep their long cache deliberately: the app refreshes those itself
+    // (cache-first + background revalidate in its jh-data store).
+    const p = url.pathname;
+    if (!p.startsWith('/data/') && (p === '/' || /\.(html|js|css|webmanifest)$/.test(p))) {
+      h.set('cache-control', 'no-cache');
+    }
     return new Response(r.body, { status: r.status, headers: h });
   },
 };

@@ -277,6 +277,24 @@
           onclick="openUpgradeSheet('email-alerts')">See Pro</button>
         <span id="email-alerts-status" style="font-size:0.8125rem;color:var(--text-dim);"></span>
       </div>
+      <!-- Pro on this browser but no entitlement token yet (e.g. Pro came from
+           an account session or earlier testing): link the Pro email right
+           here — same request-code/redeem-code flow as "Already have Pro?". -->
+      <div id="email-alerts-link" style="display:none;margin-top:0.8rem;">
+        <span class="waitlist-note" style="display:block;margin-bottom:0.45rem;">
+          Your Pro isn&rsquo;t linked to an email on this browser yet. Enter the email your
+          Pro is under and we&rsquo;ll send a 6-digit code &mdash; linking turns email alerts on.
+        </span>
+        <div class="waitlist-row">
+          <input type="email" id="email-alerts-link-email" inputmode="email" autocomplete="email" placeholder="you@email.com">
+          <button type="button" id="email-alerts-link-send" class="btn">Email&nbsp;code</button>
+        </div>
+        <div class="waitlist-row" id="email-alerts-link-code-row" style="display:none;margin-top:0.55rem;">
+          <input type="text" id="email-alerts-link-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
+          <button type="button" id="email-alerts-link-btn" class="btn btn-primary">Link &amp; turn on</button>
+        </div>
+        <span id="email-alerts-link-status" class="account-status" role="status"></span>
+      </div>
     </div>
 
     <!-- Native app (Capacitor): shown instead of the ntfy panel — no third-party
