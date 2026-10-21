@@ -524,7 +524,8 @@ function parseInventoryPayload(raw) {
 const DATA_CACHE = 'jh-data-v1';
 
 /* ===== PHOTO / SPEC ENRICHMENT (lazy shard) =====
- * data/vehicle_extras.json maps vehicle id -> [photoCode, color, engine, trans].
+ * data/vehicle_extras.json maps vehicle id ->
+ * [photoCode, color, engine, trans, transSrc('listing'|'vin')].
  * It loads in parallel with the inventory and is never on the critical path:
  * cards render photo-less first if it hasn't arrived, then hydrate.
  *
