@@ -747,10 +747,20 @@ async function loadLiveInventory() {
 function coverageYardCount() {
   return new Set(liveInventory.map(v => v.location).filter(Boolean)).size;
 }
-function updateCoverageCounts() {
+/* Marketing surfaces (zip banner, header ticker, about copy) show a rounded
+ * tier that auto-scales with coverage — floored to the nearest 10 with a
+ * plus ("210+" at 212 yards, "250+" when we get there) so nobody maintains
+ * an exact number in copy. Analytical surfaces (Yards tab stat cards) keep
+ * the exact count. */
+function yardCountDisplay() {
   const n = coverageYardCount();
-  if (!n) return;
-  document.querySelectorAll('.coverage-count').forEach(el => { el.textContent = n; });
+  if (!n) return '';
+  return n >= 10 ? `${Math.floor(n / 10) * 10}+` : String(n);
+}
+function updateCoverageCounts() {
+  const disp = yardCountDisplay();
+  if (!disp) return;
+  document.querySelectorAll('.coverage-count').forEach(el => { el.textContent = disp; });
   startHeadTicker();
 }
 
@@ -763,9 +773,9 @@ let _headTickerIdx = 0;
 function headTickerFacts() {
   const facts = [];
   const cars = liveInventory.length;
-  const n = coverageYardCount();
+  const nDisp = yardCountDisplay();
   if (cars) facts.push(`${cars.toLocaleString()} CARS ON ROW`);
-  if (n) facts.push(`${n} YARDS COAST TO COAST`);
+  if (nDisp) facts.push(`${nDisp} YARDS COAST TO COAST`);
   const weekAgo = Date.now() - 7 * 86400000;
   const fresh = liveInventory.reduce((k, v) => k + ((Date.parse(v.dateAdded) || 0) >= weekAgo ? 1 : 0), 0);
   if (fresh) facts.push(`${fresh.toLocaleString()} SET OUT THIS WEEK`);
@@ -1731,7 +1741,7 @@ function renderLive() {
             <button type="button" class="btn btn-primary" onclick="jhWidenRadius(${Math.ceil(closest.d)})">Widen radius to include it</button>
             <button type="button" class="btn" onclick="jhShowNationwide()">${isPro() ? 'Show everything nationwide' : 'Nationwide search &mdash; Pro'}</button>
           </div>
-          <p style="margin-top:1rem;font-size: 0.75rem;">We track every major self-service chain — LKQ Pick Your Part, Pick-n-Pull, and Pull-A-Part — plus a growing set of independents: <span class="coverage-count">${coverageYardCount()}</span> yards nationwide. Missing your local yard? <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">Tell us</a>.</p>`;
+          <p style="margin-top:1rem;font-size: 0.75rem;">We track every major self-service chain — LKQ Pick Your Part, Pick-n-Pull, and Pull-A-Part — plus a growing set of independents: <span class="coverage-count">${yardCountDisplay()}</span> yards nationwide. Missing your local yard? <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">Tell us</a>.</p>`;
       }
     }
     document.getElementById('live-grid').innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;
