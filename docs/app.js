@@ -1116,9 +1116,27 @@ async function useMyLocation() {
     renderLive();
     if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
   };
-  const onErr = () => {
+  /* Honest errors: if location permission is denied (e.g. "Don't allow" was
+   * tapped once — Android 11+ then silently rejects every later request with
+   * NO system prompt), telling the user to "check access" without saying
+   * where is useless. Point them at Settings explicitly. */
+  const DENIED_MSG = IS_NATIVE
+    ? "Location is turned off for YardScout. To use this, open your phone's Settings > Apps > YardScout > Permissions and allow Location — or enter a zip code instead."
+    : "Location is blocked for this site. Allow location access in your browser's site settings, or enter a zip code instead.";
+  const GENERIC_MSG = "Couldn't get your location. Check that location access is allowed for YardScout, or enter a zip code instead.";
+  const onErr = async (e) => {
     busy(false);
-    alert("Couldn't get your location. Check that location access is allowed for YardScout, or enter a zip code instead.");
+    // Native plugin rejects permission denials with OS-PLUG-GLOC-0003 (both
+    // iOS and Android); web GeolocationPositionError uses code 1. As a
+    // fallback, ask the plugin for the current permission state.
+    let denied = e && (e.code === 'OS-PLUG-GLOC-0003' || e.code === 1);
+    if (!denied && nativeGeo) {
+      try {
+        const st = await nativeGeo.checkPermissions();
+        denied = st.location === 'denied' && st.coarseLocation === 'denied';
+      } catch (_) { /* best effort — fall through to generic message */ }
+    }
+    alert(denied ? DENIED_MSG : GENERIC_MSG);
   };
   const opts = { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 };
   const nativeGeo = IS_NATIVE && window.Capacitor?.Plugins?.Geolocation;
@@ -1127,7 +1145,7 @@ async function useMyLocation() {
     try {
       const pos = await nativeGeo.getCurrentPosition(opts);
       onPos(pos.coords.latitude, pos.coords.longitude);
-    } catch (e) { onErr(); }
+    } catch (e) { onErr(e); }
     return;
   }
   if (!navigator.geolocation) { alert('Your browser does not support location.'); return; }
