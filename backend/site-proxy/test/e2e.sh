@@ -48,7 +48,20 @@ for i in $(seq 1 60); do
   if ! kill -0 $WPID 2>/dev/null; then echo "wrangler dev died:"; tail -20 "$OUT/wrangler.log"; exit 1; fi
 done
 
-post() { curl -s -X POST "$BASE/api/ent/$1" -H 'content-type: application/json' -d "$2"; }
+# NO content-type on purpose: real clients post "simple" requests (no CORS
+# preflight); the Worker must parse JSON bodies regardless of content-type.
+post() { curl -s -X POST "$BASE/api/ent/$1" -d "$2"; }
+
+echo "── CORS: preflight + origin echo for the native app (case-insensitive hdrs)"
+R=$(curl -s -i -X OPTIONS "$BASE/api/ent/verify-ios" -H 'Origin: capacitor://localhost' \
+  -H 'Access-Control-Request-Method: POST' -H 'Access-Control-Request-Headers: content-type' \
+  | tr 'A-Z' 'a-z')
+assert "ACAO echoes capacitor origin" "$R" "access-control-allow-origin: capacitor://localhost"
+assert "preflight cached a day" "$R" "access-control-max-age: 86400"
+R=$(curl -s -i -X POST "$BASE/api/ent/request-code" -H 'Origin: capacitor://localhost' \
+  -H 'content-type: application/json' -d '{"email":"cors@example.com"}' | tr 'A-Z' 'a-z')
+assert "1.4-style JSON content-type still accepted" "$R" "on its way"
+assert "POST response echoes origin too" "$R" "access-control-allow-origin: capacitor://localhost"
 
 echo "── unknown endpoint + Android stub"
 R=$(post verify-android '{"purchaseToken":"x"}'); assert "verify-android is a 501 stub" "$R" "not_implemented"

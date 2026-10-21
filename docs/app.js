@@ -3435,11 +3435,13 @@ async function refreshNativeIapUi() {
     el.style.display = show ? '' : 'none';
     if (!show) return;
     const P = nativePlugin('Purchases');
-    if (!P || typeof P.getTransactionJws !== 'function') {
-      // Pre-1.4 native shell under a newer web bundle: stay hidden.
+    if (!P) {
       el.style.display = 'none';
       return;
     }
+    // NOTE: Capacitor's plugin proxy returns a function for ANY method name,
+    // so `typeof P.getTransactionJws` can't detect a pre-1.4 shell. The click
+    // handler catches the "not implemented" rejection honestly instead.
     const linked = localStorage.getItem('ys_ios_linked_email');
     if (linked) {
       document.getElementById('ios-link-email').value = linked;
@@ -3462,15 +3464,31 @@ async function refreshNativeIapUi() {
     track('ios-link-email');
     btn.disabled = true;
     status().textContent = 'Linking\u2026';
+    // Two separate try/catches so a StoreKit/plugin problem is never
+    // misreported as a network problem (and vice versa).
+    let t = null;
     try {
-      const t = await P.getTransactionJws({ productId: IAP_PRODUCT_ID });
+      t = await P.getTransactionJws({ productId: IAP_PRODUCT_ID });
+    } catch (e) {
+      // Plugin call rejected — e.g. an older native shell without the
+      // method ("not implemented") or a StoreKit hiccup.
+      status().textContent = /implemented/i.test((e && e.message) || '')
+        ? 'This needs the latest YardScout update — update the app and try again.'
+        : 'Could not read your subscription from the App Store — try again in a minute.';
+      btn.disabled = false;
+      return;
+    }
+    try {
       if (!t || !t.entitled || !t.jws) {
         status().textContent = 'No active subscription found on this device.';
         return;
       }
+      // NOTE: no content-type header on purpose — that keeps this a CORS
+      // "simple request" (no OPTIONS preflight from capacitor://localhost),
+      // which is one less round trip that can fail in the yard. The Worker
+      // parses the JSON body regardless of content-type.
       const r = await fetch(ENT_API + '/verify-ios', {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ email, jws: t.jws }),
       });
       const data = await r.json().catch(() => ({}));
@@ -3479,10 +3497,10 @@ async function refreshNativeIapUi() {
         status().textContent = 'Linked to ' + email + ' — on any other device, choose "Already have Pro?" and enter this email.';
         track('ios-link-done');
       } else {
-        status().textContent = data.message || 'Could not link right now — try again later.';
+        status().textContent = data.message || ('Could not link right now (error ' + r.status + ') — try again later.');
       }
     } catch (e) {
-      status().textContent = 'Could not reach the server — check your connection.';
+      status().textContent = 'Could not reach the server — check your connection and try again.';
     } finally {
       btn.disabled = false;
     }
@@ -3524,9 +3542,11 @@ async function refreshNativeIapUi() {
     const data = await r.json().catch(() => ({}));
     return { ok: r.ok, status: r.status, data };
   }
+  // Deliberately NO content-type header: the request stays CORS-"simple"
+  // (no OPTIONS preflight — matters from github.io and the native WebView);
+  // the Worker parses the JSON body regardless of content-type.
   const postJson = (path, body) => entApi(path, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body),
   });
 

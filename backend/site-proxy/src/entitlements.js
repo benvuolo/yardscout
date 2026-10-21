@@ -45,22 +45,39 @@ const SUB_PROVISIONAL_MS = 35 * 24 * 3600 * 1000; // until the first webhook lan
 
 /* ---------- tiny helpers ---------- */
 
-const CORS = {
-  'access-control-allow-origin': '*',
-  'access-control-allow-methods': 'GET, POST, OPTIONS',
-  'access-control-allow-headers': 'content-type',
-};
+/* CORS: echo the caller's Origin rather than a bare wildcard. The native app
+ * fetches from Origin `capacitor://localhost` (WKWebView); explicit echo +
+ * Vary is the same battle-tested shape yardscout-api has used since 1.3 and
+ * is the most compatible across WebKit versions. Requests carry no cookies,
+ * so echoing any origin grants nothing. `access-control-max-age` caches the
+ * preflight so the shipped 1.4 binary (which sends content-type JSON and
+ * therefore preflights) does at most one OPTIONS round trip a day. */
+let REQ_ORIGIN = null; // set per-request in handleEntitlements
+let REQ_ACRH = null;
+
+function corsHeaders() {
+  return {
+    'access-control-allow-origin': REQ_ORIGIN || '*',
+    'access-control-allow-methods': 'GET, POST, OPTIONS',
+    'access-control-allow-headers': REQ_ACRH || 'content-type',
+    'access-control-max-age': '86400',
+    vary: 'Origin',
+  };
+}
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { 'content-type': 'application/json', 'cache-control': 'no-store', ...CORS },
+    headers: { 'content-type': 'application/json', 'cache-control': 'no-store', ...corsHeaders() },
   });
 }
 const err = (status, code, message) => json({ error: code, message }, status);
 
+/* Parse a JSON body regardless of content-type. Clients deliberately POST
+ * without a content-type header: that keeps the request CORS-"simple" so the
+ * native WebView (capacitor://localhost) never needs an OPTIONS preflight. */
 async function readJson(req) {
-  try { return await req.json(); } catch { return null; }
+  try { return JSON.parse(await req.text()); } catch { return null; }
 }
 
 function normEmail(v) {
@@ -514,14 +531,16 @@ async function handlePortal(req, env) {
 function handleConfig(env) {
   const billing = !!(env.STRIPE_SECRET_KEY && env.STRIPE_PRICE_PRO);
   return new Response(JSON.stringify({ billing }), {
-    headers: { 'content-type': 'application/json', 'cache-control': 'public, max-age=300', ...CORS },
+    headers: { 'content-type': 'application/json', 'cache-control': 'public, max-age=300', ...corsHeaders() },
   });
 }
 
 /* ---------- router ---------- */
 
 export async function handleEntitlements(req, env, url) {
-  if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
+  REQ_ORIGIN = req.headers.get('origin');
+  REQ_ACRH = req.headers.get('access-control-request-headers');
+  if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders() });
   const route = url.pathname.replace(/^\/api\/ent\//, '');
   try {
     if (req.method === 'GET' && route === 'config') return handleConfig(env);
