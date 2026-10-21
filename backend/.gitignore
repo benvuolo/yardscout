@@ -5,4 +5,6 @@ node_modules/
 !.dev.vars.example
 package-lock.json
 test/.out/
+test/.out-email/
+test/.out-alerts/
 site-proxy/test/.out/

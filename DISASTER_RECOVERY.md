@@ -66,7 +66,13 @@ Secrets (full list in `backend/wrangler.toml` comments): `UPLOAD_TOKEN` (must
 match the GitHub Actions secret `YS_UPLOAD_TOKEN`), `ADMIN_SECRET`,
 `RESEND_API_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`,
 `VAPID_PRIVATE_JWK` (regenerate with `node backend/scripts/gen-vapid.mjs`,
-also updates `VAPID_PUBLIC_KEY` var), `APNS_P8` (the .p8 above).
+also updates `VAPID_PUBLIC_KEY` var), `APNS_P8` (the .p8 above),
+`EMAIL_UNSUB_SECRET` (HMAC key for one-click unsubscribe links in Pro alert
+emails — any strong random value; rotating it only invalidates unsubscribe
+links in ALREADY-SENT emails, new sends re-sign automatically).
+The yardscout-api Worker also binds the site Worker's `ENTITLEMENTS` KV
+namespace (read-only in practice) so email-alert dispatch can check Pro at
+send time.
 D1 schema rebuilds from `backend/migrations/` via
 `npx wrangler d1 migrations apply yardscout-db --remote`.
 

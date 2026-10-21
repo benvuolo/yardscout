@@ -261,8 +261,14 @@ async function sendAlertEmail(env, email, matches) {
       },
     }),
   });
-  if (!r.ok) console.log('alert email failed:', r.status, (await r.text()).slice(0, 200));
-  return r.ok;
+  if (!r.ok) {
+    console.log('alert email failed:', r.status, (await r.text()).slice(0, 200));
+    return false;
+  }
+  // Log the Resend id — lets ops cross-check a send in the Resend dashboard.
+  const sent = await r.json().catch(() => ({}));
+  console.log(`alert email sent to ${email}: ${n} cars, resend id ${sent.id || '?'}`);
+  return true;
 }
 
 /** One digest email per subscriber whose watches matched this commit's new
