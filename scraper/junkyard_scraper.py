@@ -9410,6 +9410,274 @@ def fetch_prestige_inventory() -> list[dict]:
     return unique
 
 
+# Budget U-Pull-It (FL) — owner-requested (Austin Rutherford email, Oct 2026:
+# "all of our vehicle inventory and price lists are updated daily and
+# published on our website"). TWO self-serve yards on TWO separate inventory
+# systems (a third location, Auburndale, is full-service pre-pulled parts
+# with no self-serve inventory — not listed):
+#  - Winter Garden (881 S 9th St, 25 acres): budgetupullit.com, WordPress.
+#    /current-inventory/?make={MAKE}&model= server-renders that make's full
+#    list — make MUST be a specific make (empty/ALL return nothing), so one
+#    GET per make (~40/scan), makes scraped from the page's own <select>.
+#    Cells (quoted data-label): Year, Make, Model, Stock# (STK#####, the id
+#    basis), Row, Vin, Date (DOT-separated MM.DD.YY — the /search-vehicles/
+#    New Arrivals table uses slashes, this one uses dots). Pin from the
+#    site's own footer map (parcel not in OSM; Census: no match).
+#  - Bartow (2715 E State Rd 60, 12 acres): budgetupullit
+#    .s3softwaresolutions.com/inventory.aspx — classic ASP.NET WebForms
+#    postbacks (S3 Software Solutions; first of this platform here, linked
+#    as the official inventory from budgetupullitbartow.com): GET for
+#    VIEWSTATE + make list, __doPostBack ddlMake -> model list, postback
+#    ddlModel -> rows (Year, Make, Model, Row #, Arrival Date MM/DD/YYYY).
+#    Hidden fields re-chained from each response. NO stock# and NO VIN ->
+#    sha1-hash ids with ordinal dupe suffixes (upickitaz convention).
+#    1 + makes + Σmodels requests (~250-300/scan at 0.5s pacing). Pin from
+#    the u-pull-it.com directory listing (parcel not in OSM).
+# Both yards publish clean price lists (WG /used-car-part-prices/: PART
+# DESCRIPTION/PRICE/PER/CORE; Bartow /partspricelist.aspx: Description/
+# Price/Basis/Core, ~670 parts) -> budget_pricing.json keyed by yard display
+# name (wap_pricing shape — the two lists differ). robots.txt:
+# budgetupullit.com allow all (Yoast); s3softwaresolutions none (404);
+# budgetupullitbartow.com allow all.
+BUDGET_WG_SITE = "https://budgetupullit.com"
+BUDGET_WG_INVENTORY_URL = f"{BUDGET_WG_SITE}/current-inventory/"
+BUDGET_WG_PRICES_URL = f"{BUDGET_WG_SITE}/used-car-part-prices/"
+BUDGET_BARTOW_INVENTORY_URL = "http://budgetupullit.s3softwaresolutions.com/inventory.aspx"
+BUDGET_BARTOW_PRICES_URL = "http://budgetupullit.s3softwaresolutions.com/partspricelist.aspx"
+BUDGET_WG_DELAY_SEC = 1.5
+BUDGET_BARTOW_DELAY_SEC = 0.5
+BUDGET_YARDS = {
+    "wg": {"name": "Budget U-Pull-It - Winter Garden", "city": "Winter Garden",
+           "state": "FL", "lat": 28.5539, "lng": -81.5750},
+    "bartow": {"name": "Budget U-Pull-It - Bartow", "city": "Bartow",
+               "state": "FL", "lat": 27.9031, "lng": -81.8087},
+}
+# WG's WordPress form: single-quoted option values in <select name="make">.
+_BUDGET_WG_MAKE_SELECT_RE = re.compile(r'<select[^>]*name="make"[^>]*>(.*?)</select>', re.S)
+_BUDGET_WG_OPTION_RE = re.compile(r"<option value='([^']*)'")
+_BUDGET_WG_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+# Bartow's ASP.NET page: double-quoted everywhere.
+_BUDGET_BARTOW_HIDDEN_RE = re.compile(
+    r'<input type="hidden" name="(__[A-Z0-9]+)" id="[^"]*" value="([^"]*)"')
+_BUDGET_BARTOW_SELECT_RE = r'<select[^>]*name="{name}"[^>]*>(.*?)</select>'
+_BUDGET_BARTOW_OPTION_RE = re.compile(r'<option(?: selected="selected")? value="([^"]*)"')
+
+
+def _budget_wg_vehicles(session: "requests.Session") -> list[dict]:
+    """Winter Garden: one GET per make against /current-inventory/."""
+    import html as html_mod
+    yard = BUDGET_YARDS["wg"]
+    try:
+        r = session.get(BUDGET_WG_INVENTORY_URL, headers={**HEADERS, "Accept": "text/html"},
+                        timeout=60)
+        r.raise_for_status()
+        m = _BUDGET_WG_MAKE_SELECT_RE.search(r.text)
+        makes = _BUDGET_WG_OPTION_RE.findall(m.group(1)) if m else []
+    except Exception as e:
+        print(f"  [Budget WG] make-list fetch failed: {e}", file=sys.stderr)
+        return []
+    if not makes:
+        print("  [Budget WG] no makes parsed from form — layout changed?", file=sys.stderr)
+        return []
+    vehicles: list[dict] = []
+    for make_name in makes:
+        time.sleep(BUDGET_WG_DELAY_SEC)
+        try:
+            r = session.get(BUDGET_WG_INVENTORY_URL,
+                            params={"make": make_name, "model": ""},
+                            headers={**HEADERS, "Accept": "text/html"}, timeout=90)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"  [Budget WG] make {make_name!r} fetch failed: {e}", file=sys.stderr)
+            continue
+        _indep_cache_raw(f"budget_wg_{re.sub(r'[^A-Za-z0-9]+', '_', make_name)}.html",
+                         r.content)
+        for block in _BUDGET_WG_ROW_RE.findall(r.text):
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in _FENIX_TD_RE.findall(block)]
+            # Year, Make, Model, Stock#, Row#, VIN, Yard Date
+            if len(cells) != 7 or not cells[0].isdigit():
+                continue
+            year_s, make_s, model_s, stock_s, row_s, vin_s, date_s = cells
+            stock = stock_s.strip()
+            if not stock:
+                continue
+            date_iso = ""
+            dm = re.match(r"(\d{2})\.(\d{2})\.(\d{2})$", date_s)
+            if dm:
+                date_iso = f"20{dm.group(3)}-{dm.group(1)}-{dm.group(2)}"
+            vin = vin_s.strip().upper()
+            vehicles.append({
+                "id": f"budget-{stock.lower()}",
+                "vin": vin if len(vin) == 17 else "",
+                "year": int(year_s),
+                "make": _utpap_format_label(make_s),
+                "model": _utpap_format_label(model_s),
+                "row": row_s.strip(),
+                "dateAdded": date_iso,
+                "_location": yard["name"],
+                "_city": yard["city"],
+                "_state": yard["state"],
+                "_lat": yard["lat"],
+                "_lng": yard["lng"],
+                "_source": "budget",
+            })
+    return vehicles
+
+
+def _budget_bartow_options(page: str, name: str) -> list[str]:
+    import html as html_mod
+    m = re.search(_BUDGET_BARTOW_SELECT_RE.format(name=name), page, re.S)
+    if not m:
+        return []
+    # unescape: "TOWN &amp; COUNTRY" must POST back as "TOWN & COUNTRY"
+    # (the escaped form draws an HTTP 500 from the ASP.NET event validator)
+    return [html_mod.unescape(v) for v in _BUDGET_BARTOW_OPTION_RE.findall(m.group(1))
+            if v and not v.startswith("SELECT ")]
+
+
+def _budget_bartow_vehicles(session: "requests.Session") -> list[dict]:
+    """Bartow: ASP.NET make->model postback chain on s3softwaresolutions.com."""
+    import hashlib
+    import html as html_mod
+    yard = BUDGET_YARDS["bartow"]
+
+    def postback(page: str, target: str, make: str, model: str) -> str | None:
+        data = dict(_BUDGET_BARTOW_HIDDEN_RE.findall(page))
+        data.update({"__EVENTTARGET": target, "__EVENTARGUMENT": "", "__LASTFOCUS": "",
+                     "ddlMake": make, "ddlModel": model})
+        try:
+            r = session.post(BUDGET_BARTOW_INVENTORY_URL, data=data,
+                             headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+            r.raise_for_status()
+            return r.text
+        except Exception as e:
+            print(f"  [Budget Bartow] postback {make}/{model} failed: {e}", file=sys.stderr)
+            return None
+
+    try:
+        r = session.get(BUDGET_BARTOW_INVENTORY_URL,
+                        headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+        r.raise_for_status()
+        base = r.text
+    except Exception as e:
+        print(f"  [Budget Bartow] inventory.aspx fetch failed: {e}", file=sys.stderr)
+        return []
+    _indep_cache_raw("budget_bartow_base.html", base.encode())
+    makes = _budget_bartow_options(base, "ddlMake")
+    if not makes:
+        print("  [Budget Bartow] no makes in ddlMake — page changed?", file=sys.stderr)
+        return []
+    vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    for make_name in makes:
+        time.sleep(BUDGET_BARTOW_DELAY_SEC)
+        make_page = postback(base, "ddlMake", make_name, "SELECT MODEL")
+        if make_page is None:
+            continue
+        page = make_page
+        for model_name in _budget_bartow_options(make_page, "ddlModel"):
+            time.sleep(BUDGET_BARTOW_DELAY_SEC)
+            resp = postback(page, "ddlModel", make_name, model_name)
+            if resp is None:
+                continue
+            page = resp  # re-chain VIEWSTATE from the latest response
+            for block in _BUDGET_WG_ROW_RE.findall(resp):
+                cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                         for c in _FENIX_TD_RE.findall(block)]
+                # Year, Make, Model, Row #, Arrival Date — no stock#, no VIN
+                if len(cells) != 5 or not cells[0].isdigit():
+                    continue
+                year_s, make_s, model_s, row_s, date_s = cells
+                date_iso = ""
+                dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})$", date_s)
+                if dm:
+                    date_iso = f"{dm.group(3)}-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}"
+                basis = "|".join(("bartow", make_s, model_s, year_s, row_s, date_s)).lower()
+                vid = "budget-bartow-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+                n = dupes.get(vid, 0) + 1
+                dupes[vid] = n
+                if n > 1:
+                    vid = f"{vid}-{n}"
+                vehicles.append({
+                    "id": vid,
+                    "vin": "",
+                    "year": int(year_s),
+                    "make": _utpap_format_label(make_s),
+                    "model": _utpap_format_label(model_s),
+                    "row": row_s.strip(),
+                    "dateAdded": date_iso,
+                    "_location": yard["name"],
+                    "_city": yard["city"],
+                    "_state": yard["state"],
+                    "_lat": yard["lat"],
+                    "_lng": yard["lng"],
+                    "_source": "budget",
+                })
+    return vehicles
+
+
+def fetch_budget_inventory() -> list[dict]:
+    """Fetch Budget U-Pull-It's two FL yards (separate inventory systems)."""
+    session = requests.Session()
+    vehicles = _budget_wg_vehicles(session)
+    n_wg = len(vehicles)
+    time.sleep(2)
+    vehicles += _budget_bartow_vehicles(session)
+    seen: set[str] = set()
+    unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    print(f"  [Budget U-Pull-It] {len(unique)} vehicles "
+          f"(Winter Garden {n_wg}, Bartow {len(unique) - n_wg})", file=sys.stderr)
+    return unique
+
+
+def refresh_budget_pricing_file() -> Path:
+    """Both Budget U-Pull-It price lists -> budget_pricing.json, keyed by yard
+    display name (wap_pricing shape — WG and Bartow lists differ)."""
+    import html as html_mod
+    path = DATA_DIR / "budget_pricing.json"
+    out: dict[str, dict] = {}
+    for slug, url in (("wg", BUDGET_WG_PRICES_URL), ("bartow", BUDGET_BARTOW_PRICES_URL)):
+        yard_name = BUDGET_YARDS[slug]["name"]
+        try:
+            r = requests.get(url, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"  [Budget pricing] {yard_name}: {e}", file=sys.stderr)
+            continue
+        prices: dict[str, dict] = {}
+        for block in _BUDGET_WG_ROW_RE.findall(r.text):
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in _FENIX_TD_RE.findall(block)]
+            # WG: PART DESCRIPTION, PRICE, PER, CORE; Bartow: Description,
+            # Price, Basis, Core ("$40.00" style) — same 4-cell shape.
+            if len(cells) < 4:
+                continue
+            desc, price_s, _unit, core_s = cells[:4]
+            if not desc or desc in (".", "Description", "PART DESCRIPTION") or desc in prices:
+                continue
+            try:
+                price_f = float(price_s.replace("$", "").replace(",", ""))
+                core_f = float(core_s.replace("$", "").replace(",", "")) if core_s else 0.0
+            except ValueError:
+                continue
+            prices[desc] = {"price": price_f, "core": core_f}
+        if len(prices) > 150:
+            out[yard_name] = prices
+        else:
+            print(f"  [Budget pricing] {yard_name}: only {len(prices)} parts parsed — "
+                  f"skipping this yard's list", file=sys.stderr)
+        time.sleep(1)
+    if len(out) == len(BUDGET_YARDS):
+        path.write_text(json.dumps(out, separators=(",", ":")))
+        print(f"  [Budget pricing] wrote {sum(len(v) for v in out.values())} parts "
+              f"across {len(out)} yards", file=sys.stderr)
+    else:
+        print(f"  [Budget pricing] only {len(out)}/{len(BUDGET_YARDS)} yards parsed — "
+              f"keeping existing file", file=sys.stderr)
+    return path
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -9436,6 +9704,7 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "gopullit": "Go Pull-It",
     "barrys": "Barry's U Pull It",
     "prestige": "Prestige Pull-Your-Part",
+    "budget": "Budget U-Pull-It (FL)",
 }
 
 
@@ -9482,6 +9751,8 @@ def fetch_independent_inventory() -> list[dict]:
     vehicles += fetch_barrys_inventory()
     time.sleep(2)
     vehicles += fetch_prestige_inventory()
+    time.sleep(2)
+    vehicles += fetch_budget_inventory()
 
     # Loud zero-vehicle alarm: a chain that silently returns [] (WAF change,
     # plugin upgrade, layout change) must be visible in the scan log, not
@@ -10470,7 +10741,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes), Pick-A-Part VA, U-Pick-It AZ, Go Pull-It FL/GA, Barry's U Pull It AL, Prestige Pull-Your-Part TX — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes), Pick-A-Part VA, U-Pick-It AZ, Go Pull-It FL/GA, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -10494,7 +10765,7 @@ def main():
                refresh_pns_pricing_file, refresh_partsgalore_pricing_file,
                refresh_chesterfield_pricing_file, refresh_ace_pricing_file,
                refresh_sturtevant_pricing_file, refresh_nvpap_pricing_file,
-               refresh_barrys_pricing_file)
+               refresh_barrys_pricing_file, refresh_budget_pricing_file)
         for fn in fns:
             try:
                 fn()
@@ -10589,7 +10860,7 @@ def main():
 
         indep_vehicles: list[dict] = []
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x9, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige)...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x9, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige, Budget)...", file=sys.stderr)
             indep_vehicles = fetch_independent_inventory()
 
         all_vehicles = (pnp_vehicles + tap_vehicles + utpap_vehicles

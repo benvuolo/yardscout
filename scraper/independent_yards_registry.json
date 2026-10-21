@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-19",
+  "updated": "2026-10-21",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -985,6 +985,39 @@
           "state": "TX",
           "lat": 29.8912,
           "lng": -95.3
+        }
+      ]
+    },
+    {
+      "name": "Budget U-Pull-It",
+      "status": "adapter-built",
+      "platform": "TWO systems: Winter Garden on WordPress (server-rendered /current-inventory/ per-make GET); Bartow on S3 Software Solutions (ASP.NET WebForms postbacks at budgetupullit.s3softwaresolutions.com \u2014 first of this platform)",
+      "inventory_url": "https://budgetupullit.com/current-inventory/",
+      "api": {
+        "endpoint": "https://budgetupullit.com/current-inventory/?make={MAKE}&model= (WG, ~40 GETs) + http://budgetupullit.s3softwaresolutions.com/inventory.aspx (Bartow: GET then ddlMake/ddlModel __doPostBack chain, ~250-300 POSTs)",
+        "method": "GET (WG) / POST postbacks (Bartow)",
+        "auth": "none (Bartow needs VIEWSTATE/EVENTVALIDATION re-chained from each response; option values must be HTML-unescaped before postback or the server 500s)",
+        "format": "WG: html rows Year, Make, Model, Stock# STK#####, Row#, VIN, Yard Date MM.DD.YY (dots). Bartow: html rows Year, Make, Model, Row #, Arrival Date MM/DD/YYYY \u2014 NO stock#/VIN, sha1 ids",
+        "requests_per_scan": "~40 (WG) + ~250-300 (Bartow) at 1.5s/0.5s pacing (+2 for the two price lists -> budget_pricing.json)",
+        "notes": "Owner-requested (Austin Rutherford email, Oct 2026). Chain has a THIRD location (Auburndale, 324 Recker Hwy: full-service pre-pulled parts, no self-serve inventory) \u2014 not listed. Bartow's official site is budgetupullitbartow.com (hibu builder), which links the s3softwaresolutions inventory + partspricelist.aspx. Neither parcel in OSM/Census: WG pin from the site's own footer map, Bartow pin from the u-pull-it.com directory listing. Price lists DIFFER per yard (e.g. alternator core $5 WG vs $8 Bartow) -> per-yard dict, wap_pricing shape."
+      },
+      "update_freshness": "live (site banner: 'Inventory Updated' same-day; owner states daily updates)",
+      "robots": "budgetupullit.com: allow all (Yoast); s3softwaresolutions.com: no robots.txt; budgetupullitbartow.com: allow all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Budget U-Pull-It - Winter Garden",
+          "city": "Winter Garden",
+          "state": "FL",
+          "lat": 28.5539,
+          "lng": -81.575
+        },
+        {
+          "name": "Budget U-Pull-It - Bartow",
+          "city": "Bartow",
+          "state": "FL",
+          "lat": 27.9031,
+          "lng": -81.8087
         }
       ]
     }

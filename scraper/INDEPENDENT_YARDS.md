@@ -366,3 +366,40 @@ residential) → same remedy as Ace: `update_papva_snapshot.sh` + launchd
 crawl. Also hardened both snapshot scripts after a partial Ace crawl (807 of
 ~2,500) slipped past the flat 500-vehicle floor: snapshots now also require
 >= 60% of the previous snapshot's count.
+
+## 2026-10-21 — Budget U-Pull-It FL (owner-requested, 2 yards, ~2,400 cars)
+
+Owner email (Austin Rutherford): "all of our vehicle inventory and price
+lists are updated daily and published on our website." Confirmed — and it's
+TWO separate inventory systems behind one brand (plus a third location,
+Auburndale, that's full-service pre-pulled parts with no self-serve
+inventory — not listed):
+
+1. **Winter Garden (881 S 9th St, 25 acres, ~1,600 cars)** —
+   budgetupullit.com (WordPress). `/current-inventory/?make={MAKE}&model=`
+   server-renders that make's full list; empty/ALL make returns nothing, so
+   one GET per make (~40/scan), makes scraped from the page's own select.
+   Full columns incl. Stock# (STK#####, id basis) and VIN. Yard Date is
+   DOT-separated MM.DD.YY (the /search-vehicles/ New Arrivals table uses
+   slashes — don't mix the parsers up).
+2. **Bartow (2715 E State Rd 60, 12 acres, ~830 cars)** —
+   budgetupullit.s3softwaresolutions.com/inventory.aspx, a classic ASP.NET
+   WebForms postback chain. NEW PLATFORM for us: **S3 Software Solutions**
+   (fingerprint: `*.s3softwaresolutions.com` + ddlMake/ddlModel
+   `__doPostBack`). GET for VIEWSTATE → ddlMake postback fills ddlModel →
+   one ddlModel postback per model renders rows. Hidden fields re-chained
+   from each response; option values MUST be HTML-unescaped before posting
+   ("TOWN &amp; COUNTRY" → HTTP 500 — cost 17 Town & Countrys in the first
+   test run). No stock#, no VIN → sha1 ids (upickitaz convention).
+   ~250-300 requests/scan at 0.5s pacing. Bartow's own site
+   (budgetupullitbartow.com, hibu builder) links this inventory +
+   partspricelist.aspx, confirming it's the official feed.
+
+Both yards publish clean 4-column price lists (desc/price/per-or-basis/
+core) and they genuinely differ (alternator core $5 WG vs $8 Bartow) →
+`budget_pricing.json` keyed by yard display name (wap_pricing shape), wired
+into the app's price sheet + cross-yard compare.
+
+Geocoding: neither parcel in OSM and Census had no address match — WG pin
+taken from the site's own footer-map coordinates, Bartow from the
+u-pull-it.com directory listing.
