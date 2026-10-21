@@ -13,8 +13,15 @@ routes = [
 #   STRIPE_SECRET_KEY      sk_test_… then sk_live_… at launch
 #   STRIPE_WEBHOOK_SECRET  whsec_… for the /api/ent/stripe-webhook endpoint
 #   RESEND_API_KEY         re_… (unlock-code emails)
+#   GOOGLE_SA_EMAIL        Play service account client_email
+#                          (…@….iam.gserviceaccount.com) for /api/ent/verify-android
+#   GOOGLE_SA_KEY          that service account's private_key — paste the
+#                          PKCS#8 PEM from the JSON key file (literal "\n"
+#                          escapes are fine; google-play.js normalizes them)
 # Until the Stripe secrets exist the endpoints answer 503 and the web UI
 # falls back to App-Store-only copy — safe to deploy ahead of Stripe setup.
+# Same for the Google pair: verify-android answers 503 not_configured until
+# both exist (Pro still works on-device; only the email link waits).
 
 [[kv_namespaces]]
 binding = "ENTITLEMENTS"
@@ -29,6 +36,11 @@ STRIPE_PRICE_PRO = "price_1UShwjITsj7pDGFWNBNeEXR8"
 # iOS StoreKit expectations for /api/ent/verify-ios.
 IOS_BUNDLE_ID = "com.benvuolo.yardscout"
 IOS_PRODUCT_ID = "yardscout_pro_monthly"
+# Google Play expectations for /api/ent/verify-android. The Play applicationId
+# (android/app/build.gradle) differs from the iOS bundle id on purpose —
+# io.yardscout.app is what Play knows the app as.
+ANDROID_PACKAGE_NAME = "io.yardscout.app"
+ANDROID_PRODUCT_ID = "yardscout_pro_monthly"
 # Sender for unlock-code emails. The resend.dev onboarding sender works for
 # testing; switch to a verified yardscout.io sender for real users.
 EMAIL_FROM = "YardScout <codes@yardscout.io>"

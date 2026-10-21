@@ -492,10 +492,12 @@
       <button type="button" id="ent-portal" class="btn" style="display:none;">Manage billing</button>
       <span id="ent-pro-status" class="account-status" role="status"></span>
     </div>
-    <!-- iOS only, optional (ships with 1.4): after a verified StoreKit
-         purchase, link an email so Pro can be unlocked on other devices via
-         a 6-digit email code. Never required to buy or to use Pro in this
-         app. Deliberately mentions no pricing and links nowhere (3.1.1). -->
+    <!-- Native only (iOS 1.4+, Android 1.1+), always optional: after a
+         verified StoreKit / Play Billing purchase, link an email so Pro can
+         be unlocked on other devices via a 6-digit email code. Never required
+         to buy or to use Pro in this app. Deliberately mentions no pricing
+         and links nowhere (3.1.1 / Play anti-steering equivalent). The
+         "ios-link" ids predate Android and are shared by both platforms. -->
     <div id="ios-link" style="display:none;margin-top:0.9rem;padding-top:0.8rem;border-top:1px solid var(--border);text-align:left;">
       <strong style="font-size:0.875rem;">Use Pro on other devices</strong>
       <span class="waitlist-note" style="display:block;margin-top:0.2rem;">Optional: link an email address and you can unlock your Pro on any other device with a one-time code sent to that email. No account, no password &mdash; we only use it for unlock codes.</span>

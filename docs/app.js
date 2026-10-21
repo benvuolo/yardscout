@@ -3416,27 +3416,32 @@ async function refreshNativeIapUi() {
   }
 }
 
-/* ===== iOS → EVERYWHERE: optional email link (SHIPS WITH 1.4) =====
- * After a verified StoreKit purchase, "Use Pro on other devices" lets the
- * user link an email: the app sends its StoreKit 2 signed transaction (JWS,
- * via Purchases.getTransactionJws — new in the 1.4 native build) to the
- * entitlement API, which verifies it offline against Apple's root cert and
- * makes that email redeemable anywhere via a 6-digit code.
+/* ===== NATIVE → EVERYWHERE: optional email link (iOS 1.4, Android 1.1) =====
+ * After a verified store purchase, "Use Pro on other devices" lets the user
+ * link an email. Both platforms hand their proof-of-purchase to the
+ * entitlement API, which verifies it server-side and makes the email
+ * redeemable anywhere via a 6-digit code:
+ *   iOS:     StoreKit 2 signed transaction (Purchases.getTransactionJws) →
+ *            /verify-ios (offline JWS check against Apple's root cert)
+ *   Android: Play Billing purchase token (Purchases.getPurchaseToken) →
+ *            /verify-android (server-to-server Play Developer API check)
  *
  * Always optional — never required to buy or to use Pro in this app. The UI
- * mentions no prices and links nowhere (App Review guideline 3.1.1/3.1.3).
- * iOS-only for now: the Android build will reuse this block once its
- * Play-token verification endpoint is live. */
+ * mentions no prices and links nowhere (App Review guideline 3.1.1/3.1.3 and
+ * the Play equivalent — anti-steering copy stays intact on both platforms). */
 (() => {
-  if (!IS_NATIVE || IS_ANDROID) return;
+  if (!IS_NATIVE) return;
   const ENT_API = 'https://yardscout.io/api/ent';
+  // Separate keys per store: a device only ever has one store, but the name
+  // records WHICH subscription the email is pinned to.
+  const LINK_KEY = IS_ANDROID ? 'ys_play_linked_email' : 'ys_ios_linked_email';
   const wrap = () => document.getElementById('ios-link');
   const status = () => document.getElementById('ios-link-status');
 
-  function refreshIosLinkUi() {
+  function refreshLinkUi() {
     const el = wrap();
     if (!el) return;
-    // Only for a real StoreKit entitlement on THIS device (never the
+    // Only for a real store entitlement on THIS device (never the
     // email-code path — that email is already linked by definition).
     const show = isPro() && localStorage.getItem('jh_pro_source') === 'iap';
     el.style.display = show ? '' : 'none';
@@ -3447,17 +3452,33 @@ async function refreshNativeIapUi() {
       return;
     }
     // NOTE: Capacitor's plugin proxy returns a function for ANY method name,
-    // so `typeof P.getTransactionJws` can't detect a pre-1.4 shell. The click
+    // so `typeof P.getTransactionJws` can't detect an older shell. The click
     // handler catches the "not implemented" rejection honestly instead.
-    const linked = localStorage.getItem('ys_ios_linked_email');
+    const linked = localStorage.getItem(LINK_KEY);
     if (linked) {
       document.getElementById('ios-link-email').value = linked;
       status().textContent = 'Linked to ' + linked + ' — use "Already have Pro?" with that email on any other device.';
     }
   }
   // The sheet re-renders on every open; keep this block in sync then too.
-  document.getElementById('pro-pill').addEventListener('click', refreshIosLinkUi);
-  setTimeout(refreshIosLinkUi, 1500); // after the launch entitlement check
+  document.getElementById('pro-pill').addEventListener('click', refreshLinkUi);
+  setTimeout(refreshLinkUi, 1500); // after the launch entitlement check
+
+  /* Platform proof-of-purchase → the request body for its verify endpoint.
+   * Returns null (with a status message set) when there's nothing to send. */
+  async function buildVerifyRequest(P, email) {
+    if (IS_ANDROID) {
+      const t = await P.getPurchaseToken({ productId: IAP_PRODUCT_ID });
+      if (!t || !t.entitled || !t.purchaseToken) return null;
+      return {
+        path: '/verify-android',
+        body: { email, purchaseToken: t.purchaseToken, productId: IAP_PRODUCT_ID },
+      };
+    }
+    const t = await P.getTransactionJws({ productId: IAP_PRODUCT_ID });
+    if (!t || !t.entitled || !t.jws) return null;
+    return { path: '/verify-ios', body: { email, jws: t.jws } };
+  }
 
   const btn = document.getElementById('ios-link-btn');
   if (btn) btn.addEventListener('click', async () => {
@@ -3468,25 +3489,25 @@ async function refreshNativeIapUi() {
     }
     const P = nativePlugin('Purchases');
     if (!P) return;
-    track('ios-link-email');
+    track(IS_ANDROID ? 'android-link-email' : 'ios-link-email');
     btn.disabled = true;
     status().textContent = 'Linking\u2026';
-    // Two separate try/catches so a StoreKit/plugin problem is never
+    // Two separate try/catches so a store/plugin problem is never
     // misreported as a network problem (and vice versa).
-    let t = null;
+    let reqSpec = null;
     try {
-      t = await P.getTransactionJws({ productId: IAP_PRODUCT_ID });
+      reqSpec = await buildVerifyRequest(P, email);
     } catch (e) {
       // Plugin call rejected — e.g. an older native shell without the
-      // method ("not implemented") or a StoreKit hiccup.
+      // method ("not implemented") or a store hiccup.
       status().textContent = /implemented/i.test((e && e.message) || '')
         ? 'This needs the latest YardScout update — update the app and try again.'
-        : 'Could not read your subscription from the App Store — try again in a minute.';
+        : 'Could not read your subscription from ' + STORE_NAME + ' — try again in a minute.';
       btn.disabled = false;
       return;
     }
     try {
-      if (!t || !t.entitled || !t.jws) {
+      if (!reqSpec) {
         status().textContent = 'No active subscription found on this device.';
         return;
       }
@@ -3494,15 +3515,15 @@ async function refreshNativeIapUi() {
       // "simple request" (no OPTIONS preflight from capacitor://localhost),
       // which is one less round trip that can fail in the yard. The Worker
       // parses the JSON body regardless of content-type.
-      const r = await fetch(ENT_API + '/verify-ios', {
+      const r = await fetch(ENT_API + reqSpec.path, {
         method: 'POST',
-        body: JSON.stringify({ email, jws: t.jws }),
+        body: JSON.stringify(reqSpec.body),
       });
       const data = await r.json().catch(() => ({}));
       if (r.ok && data.linked) {
-        localStorage.setItem('ys_ios_linked_email', email);
+        localStorage.setItem(LINK_KEY, email);
         status().textContent = 'Linked to ' + email + ' — on any other device, choose "Already have Pro?" and enter this email.';
-        track('ios-link-done');
+        track(IS_ANDROID ? 'android-link-done' : 'ios-link-done');
       } else {
         status().textContent = data.message || ('Could not link right now (error ' + r.status + ') — try again later.');
       }

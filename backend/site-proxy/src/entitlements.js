@@ -14,11 +14,12 @@
  *   - iOS purchase → web: the app sends its StoreKit 2 signed transaction
  *     (JWS) + an email; we verify the JWS offline (apple-jws.js) and the email
  *     becomes redeemable anywhere. No license keys (Apple prohibits them).
- *   - Android (LATER — being built in a separate repo): POST
- *     /api/ent/verify-android is the extension point. It receives a Google
- *     Play purchase token; the implementation will verify it via the Play
- *     Developer API (purchases.subscriptions.get) and then call the same
- *     grantEntitlement() used by Stripe and Apple.
+ *   - Android purchase → web: the app sends its Play purchase token + an
+ *     email; we verify server-side via the Play Developer API
+ *     (purchases.subscriptionsv2.get with a service-account JWT — see
+ *     google-play.js) and the email becomes redeemable anywhere. Until the
+ *     Google secrets exist the endpoint answers a clear 503 not_configured
+ *     (Pro still works on-device via Play Billing; only the email link waits).
  *
  * KV layout:
  *   ent:<email>     entitlement record (source of truth)
@@ -27,15 +28,20 @@
  *   code:<email>    pending 6-digit code {hash, attempts}, 10-min TTL
  *   cust:<id>       Stripe customer id → email (webhook lookups)
  *   appletx:<id>    Apple originalTransactionId → email (one email per sub)
+ *   gptok:<sha256>  Google Play purchaseToken hash → email (one email per
+ *                   sub — hashed because tokens are long-lived credentials)
+ *   gauth:v1        cached Google service-account access token (~1h TTL)
  *   rl:<bucket>     rate-limit counters (TTL'd)
  *
  * Env vars (wrangler.toml):  ENT_APP_URL, STRIPE_PRICE_PRO, IOS_PRODUCT_ID,
- *                            IOS_BUNDLE_ID, EMAIL_FROM, DEV_MODE
+ *                            IOS_BUNDLE_ID, ANDROID_PACKAGE_NAME,
+ *                            ANDROID_PRODUCT_ID, EMAIL_FROM, DEV_MODE
  * Secrets (wrangler secret put): STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET,
- *                            RESEND_API_KEY
+ *                            RESEND_API_KEY, GOOGLE_SA_EMAIL, GOOGLE_SA_KEY
  */
 
 import { verifyStoreKitJws } from './apple-jws.js';
+import { googlePlayConfigured, getSubscriptionV2 } from './google-play.js';
 
 const CODE_TTL_S = 600;          // 6-digit codes live 10 minutes
 const CODE_MAX_ATTEMPTS = 6;     // then the code is burned
@@ -479,16 +485,96 @@ async function handleVerifyIos(req, env) {
   return json({ linked: true, email, expiresAt: ent.expiresAt });
 }
 
-/* POST /api/ent/verify-android — EXTENSION POINT for the Android build.
- * Expected body: {purchaseToken, productId, email}. Implementation will:
- *   1. verify purchaseToken via the Google Play Developer API
- *      (purchases.subscriptionsv2.get with a service-account JWT),
- *   2. check productId/package name + expiryTime,
- *   3. call grantEntitlement(env, email, {source:'google_play', …}) exactly
- *      like the Stripe/Apple paths above. */
-async function handleVerifyAndroid() {
-  return err(501, 'not_implemented',
-    'Google Play verification ships with the Android release — this endpoint is reserved for it.');
+/* POST /api/ent/verify-android {purchaseToken, email, productId?} → {linked}
+ * The Android app sends the Play Billing purchase token + the email the user
+ * wants Pro linked to. We verify server-side with the Play Developer API
+ * (purchases.subscriptionsv2.get — google-play.js); Google is the source of
+ * truth, the client is never trusted. One email per Play subscription
+ * (re-linking moves it) — the exact mirror of verify-ios above. */
+
+/* subscriptionsv2 states that mean "entitled until expiryTime": ACTIVE,
+ * grace period (payment retrying — matches our 3-day house grace), and
+ * CANCELED (auto-renew off but the paid period hasn't ended). ON_HOLD,
+ * PAUSED, EXPIRED, PENDING etc. are NOT entitled regardless of expiry. */
+const PLAY_ENTITLED_STATES = [
+  'SUBSCRIPTION_STATE_ACTIVE',
+  'SUBSCRIPTION_STATE_IN_GRACE_PERIOD',
+  'SUBSCRIPTION_STATE_CANCELED',
+];
+
+async function handleVerifyAndroid(req, env) {
+  const body = (await readJson(req)) || {};
+  const email = normEmail(body.email);
+  if (!email) return err(400, 'bad_email', 'Enter a valid email address.');
+  const purchaseToken = String(body.purchaseToken || '');
+  // Play tokens are opaque url-safe strings (observed 24–200 chars); bound
+  // generously but reject anything that can't possibly be one.
+  if (!/^[A-Za-z0-9._-]{16,600}$/.test(purchaseToken)) {
+    return err(400, 'bad_token', 'Missing or malformed purchase token.');
+  }
+  if (!googlePlayConfigured(env)) {
+    return err(503, 'not_configured',
+      'Google Play verification is not set up yet — Pro still works on this device; linking an email will be available soon.');
+  }
+  if (await rateLimited(env, 'and:' + clientIp(req), 20, 3600)) {
+    return err(429, 'slow_down', 'Too many attempts — try again in an hour.');
+  }
+
+  let sub;
+  try {
+    sub = await getSubscriptionV2(env, purchaseToken);
+  } catch (e) {
+    console.log('verify-android failed:', e.code, e.message);
+    if (e.code === 'bad_token') {
+      return err(400, 'verify_failed', 'That Google Play purchase could not be verified.');
+    }
+    return err(502, 'google_error', 'Could not reach Google Play — try again in a minute.');
+  }
+
+  const wantProduct = env.ANDROID_PRODUCT_ID || 'yardscout_pro_monthly';
+  const line = (Array.isArray(sub.lineItems) ? sub.lineItems : [])
+    .find((li) => li && li.productId === wantProduct);
+  if (!line) return err(400, 'wrong_product', 'Purchase is for a different product.');
+
+  // License-tester purchases carry testPurchase — same gate as iOS Sandbox.
+  if (sub.testPurchase && env.DEV_MODE !== '1' && env.ALLOW_SANDBOX_IAP !== '1') {
+    return err(400, 'sandbox', 'Test purchases are not accepted.');
+  }
+
+  const state = String(sub.subscriptionState || '');
+  const expiresMs = Date.parse(line.expiryTime || '') || 0;
+  if (!PLAY_ENTITLED_STATES.includes(state) || !expiresMs || expiresMs + SUB_GRACE_MS < Date.now()) {
+    return err(410, 'lapsed', 'That subscription has expired or is paused.');
+  }
+
+  // One email per Play subscription: re-linking moves Pro to the new email
+  // (mirror of the appletx: pinning). Keyed on a hash — purchase tokens are
+  // long-lived credentials and never belong in KV keys in the clear.
+  const tokHash = await sha256hex('gp:' + purchaseToken);
+  const prevEmail = await env.ENTITLEMENTS.get('gptok:' + tokHash);
+  if (prevEmail && prevEmail !== email) {
+    const prevEnt = await getEnt(env, prevEmail);
+    if (prevEnt && prevEnt.source === 'google_play' && prevEnt.googleTokenHash === tokHash) {
+      await grantEntitlement(env, prevEmail, { pro: false, expiresAt: isoNow() },
+        'moved to another email (re-link)');
+    }
+  }
+  await env.ENTITLEMENTS.put('gptok:' + tokHash, email);
+  // Resubscribe/plan-change mints a NEW token pointing at the old one —
+  // retire the old pin so a dead token can't be re-linked later.
+  if (sub.linkedPurchaseToken) {
+    await env.ENTITLEMENTS.delete('gptok:' + await sha256hex('gp:' + sub.linkedPurchaseToken));
+  }
+
+  const ent = await grantEntitlement(env, email, {
+    source: 'google_play',
+    productId: wantProduct,
+    expiresAt: new Date(expiresMs + SUB_GRACE_MS).toISOString(),
+    googleTokenHash: tokHash,
+    googleOrderId: sub.latestOrderId || null,
+  }, 'verify-android (subscriptionsv2 ' + state.replace('SUBSCRIPTION_STATE_', '') + ')');
+
+  return json({ linked: true, email, expiresAt: ent.expiresAt });
 }
 
 /* GET /api/ent/status?token=… → {pro, expiresAt, source}

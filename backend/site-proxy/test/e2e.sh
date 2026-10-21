@@ -2,10 +2,14 @@
 # End-to-end test of the entitlements API against a local `wrangler dev`.
 # Covers: the full Stripe-webhook → request-code → redeem-code → status round
 # trip, rate/attempt limits, offline StoreKit JWS verification (happy path +
-# tamper + wrong product), the Android stub, and webhook signature rejection.
+# tamper + wrong product), Google Play verify-android (unconfigured 503, then
+# every subscriptionsv2 state against a mocked androidpublisher — the Worker
+# is restarted with the Google test vars for that phase), and webhook
+# signature rejection.
 #
 # Usage: bash test/e2e.sh        (from backend/site-proxy/)
-# Needs: node, openssl, curl, python3. Spawns wrangler dev on port 8799.
+# Needs: node, openssl, curl, python3. Spawns wrangler dev on port 8799 and
+# the Play mock (test/mock-play.mjs) on port 8798.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -63,9 +67,17 @@ R=$(curl -s -i -X POST "$BASE/api/ent/request-code" -H 'Origin: capacitor://loca
 assert "1.4-style JSON content-type still accepted" "$R" "on its way"
 assert "POST response echoes origin too" "$R" "access-control-allow-origin: capacitor://localhost"
 
-echo "── unknown endpoint + Android stub"
-R=$(post verify-android '{"purchaseToken":"x"}'); assert "verify-android is a 501 stub" "$R" "not_implemented"
+echo "── unknown endpoint + verify-android input checks / unconfigured 503"
 R=$(curl -s "$BASE/api/ent/nope"); assert "unknown route → 404" "$R" "not_found"
+# Input validation fires before the config check (bad requests stay 400s
+# even on an unconfigured deploy); with no GOOGLE_* secrets in this phase,
+# a well-formed request gets the honest not_configured 503.
+R=$(post verify-android '{"purchaseToken":"tok-active-0000000000","email":"nope"}')
+assert "bad email → bad_email" "$R" "bad_email"
+R=$(post verify-android '{"purchaseToken":"x","email":"and@example.com"}')
+assert "malformed token → bad_token" "$R" "bad_token"
+R=$(post verify-android '{"purchaseToken":"tok-active-0000000000","email":"and@example.com"}')
+assert "no Google secrets → not_configured" "$R" "not_configured"
 
 echo "── checkout without Stripe configured"
 R=$(post checkout '{}'); assert "checkout → billing_off 503" "$R" "billing_off"
@@ -163,6 +175,89 @@ CODE=$(echo "$R" | python3 -c 'import sys,json;print(json.load(sys.stdin)["dev_c
 R=$(post redeem-code "{\"email\":\"$IOS_EMAIL\",\"code\":\"$CODE\"}")
 assert "redeem for iOS-linked email → pro" "$R" '"pro":true'
 assert "source is apple_iap" "$R" '"source":"apple_iap"'
+
+# ────────────────────────────────────────────────────────────────────────
+# Phase 2: verify-android against a mocked androidpublisher. The mock mints
+# a real RSA keypair and verifies the Worker's RS256 service-account JWT, so
+# the whole auth path (WebCrypto signing → oauth swap → bearer GET) runs for
+# real. Wrangler is restarted because .dev.vars is read once at boot; KV
+# state is kept (the earlier grants/limits don't collide with these emails).
+# ────────────────────────────────────────────────────────────────────────
+AND_EMAIL="androiduser@example.com"
+AND_EMAIL2="androiduser2@example.com"
+MOCKPORT=${MOCKPORT:-8798}
+
+echo "── starting the Play mock on :$MOCKPORT + restarting wrangler with Google vars"
+node test/mock-play.mjs $MOCKPORT "$OUT" > "$OUT/mock-play.log" 2>&1 &
+MPID=$!
+trap 'kill $WPID $MPID 2>/dev/null || true' EXIT
+for i in $(seq 1 20); do
+  sleep 0.5
+  if curl -s -o /dev/null "http://127.0.0.1:$MOCKPORT/ping"; then break; fi
+  if ! kill -0 $MPID 2>/dev/null; then echo "mock-play died:"; cat "$OUT/mock-play.log"; exit 1; fi
+done
+
+# GOOGLE_SA_KEY goes in as one line with literal \n escapes — exactly how a
+# pasted JSON-key private_key arrives in production; google-play.js normalizes.
+SA_KEY_ONELINE=$(awk 'BEGIN{ORS="\\n"} {print}' "$OUT/sa_key.pem")
+cat >> .dev.vars <<EOF
+GOOGLE_SA_EMAIL=test-sa@yardscout-test.iam.gserviceaccount.com
+GOOGLE_SA_KEY=$SA_KEY_ONELINE
+GOOGLE_TOKEN_URL_TEST=http://127.0.0.1:$MOCKPORT/token
+GOOGLE_PLAY_API_URL_TEST=http://127.0.0.1:$MOCKPORT
+EOF
+kill $WPID 2>/dev/null || true; wait $WPID 2>/dev/null || true
+npx wrangler dev --port $PORT --local > "$OUT/wrangler2.log" 2>&1 &
+WPID=$!
+trap 'kill $WPID $MPID 2>/dev/null || true' EXIT
+for i in $(seq 1 60); do
+  sleep 1
+  if curl -s -o /dev/null "$BASE/api/ent/status?token=$(printf '0%.0s' {1..64})"; then break; fi
+  if ! kill -0 $WPID 2>/dev/null; then echo "wrangler dev died:"; tail -20 "$OUT/wrangler2.log"; exit 1; fi
+done
+
+echo "── verify-android: ACTIVE links the email (real JWT → oauth → GET)"
+R=$(post verify-android "{\"purchaseToken\":\"tok-active-0000000000\",\"email\":\"$AND_EMAIL\"}")
+assert "active sub links" "$R" '"linked":true'
+R=$(post verify-android "{\"purchaseToken\":\"tok-active-0000000000\",\"email\":\"$AND_EMAIL\"}")
+assert "re-verification is idempotent" "$R" '"linked":true'
+
+echo "── android-linked email works in the code flow (source google_play)"
+R=$(post request-code "{\"email\":\"$AND_EMAIL\"}")
+CODE=$(echo "$R" | python3 -c 'import sys,json;print(json.load(sys.stdin)["dev_code"])')
+R=$(post redeem-code "{\"email\":\"$AND_EMAIL\",\"code\":\"$CODE\"}")
+assert "redeem for Play-linked email → pro" "$R" '"pro":true'
+assert "source is google_play" "$R" '"source":"google_play"'
+AND_TOKEN=$(echo "$R" | python3 -c 'import sys,json;print(json.load(sys.stdin)["token"])')
+
+# State tests use their own email so AND_EMAIL's entitlement stays pinned to
+# tok-active (the re-link test below depends on that pin being intact).
+AND_EMAIL_STATES="androidstates@example.com"
+echo "── subscriptionsv2 states: grace + canceled entitle, expired/on-hold don't"
+R=$(post verify-android "{\"purchaseToken\":\"tok-grace-00000000000\",\"email\":\"$AND_EMAIL_STATES\"}")
+assert "grace period (expiry -1d, house 3d grace) links" "$R" '"linked":true'
+R=$(post verify-android "{\"purchaseToken\":\"tok-canceled-00000000\",\"email\":\"$AND_EMAIL_STATES\"}")
+assert "canceled-but-not-expired links" "$R" '"linked":true'
+R=$(post verify-android "{\"purchaseToken\":\"tok-expired-000000000\",\"email\":\"$AND_EMAIL_STATES\"}")
+assert "expired → lapsed" "$R" "lapsed"
+R=$(post verify-android "{\"purchaseToken\":\"tok-onhold-0000000000\",\"email\":\"$AND_EMAIL_STATES\"}")
+assert "on-hold (future expiry!) → lapsed" "$R" "lapsed"
+
+echo "── wrong product / bogus token / license-tester gate"
+R=$(post verify-android "{\"purchaseToken\":\"tok-wrongproduct-0000\",\"email\":\"$AND_EMAIL_STATES\"}")
+assert "wrong product rejected" "$R" "wrong_product"
+R=$(post verify-android "{\"purchaseToken\":\"tok-bogus-00000000000\",\"email\":\"$AND_EMAIL_STATES\"}")
+assert "unknown token → verify_failed" "$R" "verify_failed"
+# testPurchase is accepted here ONLY because DEV_MODE=1 — the same gate as
+# iOS Sandbox (prod needs ALLOW_SANDBOX_IAP=1 for license-tester validation).
+R=$(post verify-android "{\"purchaseToken\":\"tok-testpurchase-0000\",\"email\":\"$AND_EMAIL_STATES\"}")
+assert "license-tester purchase allowed under DEV_MODE" "$R" '"linked":true'
+
+echo "── one email per Play subscription: re-link moves Pro"
+R=$(post verify-android "{\"purchaseToken\":\"tok-active-0000000000\",\"email\":\"$AND_EMAIL2\"}")
+assert "re-link to a new email works" "$R" '"linked":true'
+R=$(curl -s "$BASE/api/ent/status?token=$AND_TOKEN")
+assert "old email lost Pro after re-link" "$R" '"pro":false'
 
 echo
 echo "RESULT: $PASS passed, $FAIL failed"

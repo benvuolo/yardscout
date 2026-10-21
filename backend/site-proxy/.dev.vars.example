@@ -6,3 +6,10 @@ STRIPE_WEBHOOK_SECRET=whsec_replace_me
 RESEND_API_KEY=
 # Test-only Apple root override for verify-ios (see test/make-test-jws.mjs).
 APPLE_ROOT_CA_B64_TEST=
+# Google Play service account for verify-android (prod: wrangler secrets).
+# GOOGLE_SA_KEY accepts the JSON key file's private_key as-is (literal \n ok).
+GOOGLE_SA_EMAIL=
+GOOGLE_SA_KEY=
+# Test-only endpoint overrides pointing at test/mock-play.mjs (DEV_MODE=1 only).
+GOOGLE_TOKEN_URL_TEST=
+GOOGLE_PLAY_API_URL_TEST=

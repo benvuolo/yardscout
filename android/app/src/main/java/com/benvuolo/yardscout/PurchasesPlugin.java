@@ -12,6 +12,7 @@ import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
+import com.android.billingclient.api.QueryProductDetailsResult;
 import com.android.billingclient.api.QueryPurchasesParams;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -31,6 +32,10 @@ import java.util.List;
  *   purchase({ productId })    -> { entitled } (+ cancelled / pending flags)
  *   restore()                  -> { entitled }
  *   isEntitled({ productId })  -> { entitled }
+ *   getPurchaseToken({ productId }) -> { entitled, purchaseToken?, orderId? }
+ *       (the Play twin of iOS getTransactionJws — hands the JS layer the
+ *        proof-of-purchase it POSTs to /api/ent/verify-android to link an
+ *        email; the server re-verifies with Google, never trusts the client)
  *
  * Entitlement is re-derived from Play's purchase cache on every launch (same
  * strategy as iOS: renewals extend, cancellations lapse at period end, refunds
@@ -113,7 +118,11 @@ public class PurchasesPlugin extends Plugin implements PurchasesUpdatedListener 
                     .setProductType(BillingClient.ProductType.SUBS)
                     .build()))
             .build();
-        billingClient.queryProductDetailsAsync(params, (result, products) -> {
+        // Billing 8.x: the listener receives a QueryProductDetailsResult
+        // (products + unfetched list) instead of a bare List<ProductDetails>.
+        billingClient.queryProductDetailsAsync(params, (result, detailsResult) -> {
+            List<ProductDetails> products =
+                detailsResult != null ? detailsResult.getProductDetailsList() : null;
             if (result.getResponseCode() == BillingClient.BillingResponseCode.OK
                     && products != null && !products.isEmpty()) {
                 cb.onResult(products.get(0), null);
@@ -299,5 +308,45 @@ public class PurchasesPlugin extends Plugin implements PurchasesUpdatedListener 
         // which Play keeps synced — the Android analog of AppStore.sync().
         String id = productId(call);
         withConnection(call, () -> checkEntitled(call, id));
+    }
+
+    /** Proof-of-purchase for the cross-device email link (the Android analog
+     *  of getTransactionJws on iOS): the current purchase token for the Pro
+     *  subscription, straight from Play's purchase records. The token is only
+     *  useful server-side — the entitlement API re-verifies it with Google's
+     *  Play Developer API before linking anything. */
+    @PluginMethod
+    public void getPurchaseToken(PluginCall call) {
+        String id = productId(call);
+        withConnection(call, () -> billingClient.queryPurchasesAsync(
+            QueryPurchasesParams.newBuilder()
+                .setProductType(BillingClient.ProductType.SUBS)
+                .build(),
+            (result, purchases) -> {
+                if (result.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+                    call.reject(billingMessage(result));
+                    return;
+                }
+                Purchase match = null;
+                for (Purchase p : purchases) {
+                    if (p.getProducts().contains(id)
+                            && p.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
+                        match = p;
+                        break;
+                    }
+                }
+                JSObject out = new JSObject();
+                if (match == null) {
+                    out.put("entitled", false);
+                    call.resolve(out);
+                    return;
+                }
+                acknowledgeIfNeeded(match);
+                out.put("entitled", true);
+                out.put("purchaseToken", match.getPurchaseToken());
+                String orderId = match.getOrderId();
+                if (orderId != null) out.put("orderId", orderId);
+                call.resolve(out);
+            }));
     }
 }
