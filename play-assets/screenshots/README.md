@@ -23,19 +23,15 @@ the approved iOS set (CSS width 432 vs iOS 440).
 
 ## Android-specific honesty notes
 
-- **Shot 4 (alerts)** — re-captured 2026-10-21 (owner call): **no push
-  wording at all** while Android has no push (FCM is being built for 1.2).
-  The capture hides every push surface (web Notification-API button, native
-  `#native-alerts-note` push panel, web-only "Get the iOS app" and
-  email-alerts panels) and renders in-app-only copy: "Watched cars light up
-  right here the moment they arrive at a yard in your radius." The Pro
-  tier-comparison row renders "In-app alerts within hours…" without the
-  app's "(push coming to Android soon)" parenthetical. The capture asserts
-  zero visible "push"/"coming soon" strings before shooting.
-  - **When FCM ships in 1.2:** restore the push-state rendering of
-    `alerts_shot` in `_capture_android.py` from git
-    (`git show b66d882:play-assets/_capture_android.py`), re-capture
-    `--alerts-only`, and swap the slide in the Play listing.
+- **Shot 4 (alerts)** — re-captured 2026-10-21 after **1.2 (vc6) with FCM
+  push was published**: now renders the unified native push state that the
+  shipped Android app shows — native intro ("weekly recap push" free,
+  "instant push alerts" Pro) and the Push alerts panel with its live
+  "Enable push notifications" button. app.js dropped its Android-only
+  "coming soon" branches in the FCM release, so iOS and Android share this
+  copy. The capture still asserts no "coming soon"/iOS-specific strings in
+  the alerts tab before shooting. (History: the interim no-push honest
+  version lived at `5281bb1`; the pre-FCM push-hedged version at `b66d882`.)
 - **Shot 5 (Pro)** follows the house rules from the iOS review: a yard with
   real published prices (every part row carries a concrete UTPAP list price —
   no "check yard price list" fallbacks) and no option-dependent

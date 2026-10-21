@@ -10,14 +10,14 @@ house rules, Play-compliant geometry:
     set instead of squashing those renders.
   * Android Chrome user agent; the iOS-install-hint never fires off-iOS but
     ys_install_hint stays pre-set anyway (belt and braces).
-  * Shot 4 (alerts) renders the honest Android watchlist state with NO push
-    wording at all (owner call, 2026-10-21): Android has no push today (FCM
-    lands in 1.2), and the listing must not promise it or say "coming soon".
-    So the capture hides every push surface — the web #alert-notif-btn, the
-    native #native-alerts-note panel, and the web-only #appstore-alerts-panel
-    ("Get the iOS app") — and swaps #alerts-intro-copy to in-app-only wording
-    in the app's own voice. When FCM ships in 1.2, restore the previous
-    native-state rendering (see git history / screenshots README).
+  * Shot 4 (alerts) renders the REAL Android 1.2 state: FCM push shipped
+    (vc6 published 2026-10-21), and app.js dropped its Android-only "coming
+    soon" branches — iOS and Android now share the native alerts copy. The
+    capture reproduces that unified IS_NATIVE state: native intro (weekly
+    recap push free / instant push alerts Pro), #native-alerts-note shown
+    with its live "Enable push notifications" button, web-only panels
+    (#appstore-alerts-panel, email alerts, #alert-notif-btn) hidden. A
+    zero-"coming soon" assertion still guards the shot.
   * Shot 5 (Pro) keeps the audited house rules: every part row must carry a
     concrete yard list price (UTPAP/wired-pricing yards — never the "check
     yard price list" fallback) and no option-dependent VIN-confirmed badges.
@@ -87,53 +87,53 @@ def load_with_zip(page):
     page.wait_for_timeout(4000)  # stats chips, fonts, images settle
 
 def alerts_shot(page):
-    # ---------- Shot 4: alerts tab, honest Android state (no push copy) -----
+    # ---------- Shot 4: alerts tab, Android 1.2 state (FCM push is live) ----
     page.click('.tab[data-tab="alerts"]')
     page.wait_for_timeout(3000)
-    # Owner call (2026-10-21): Android has no push today (FCM lands in 1.2),
-    # so the listing shot must carry NO push promise and no "coming soon":
+    # Reproduce app.js's unified IS_NATIVE alerts state — since 1.2 (vc6,
+    # FCM shipped) Android renders the same push copy as iOS:
     #   - drop the web-only "Get the iOS app" panel (#appstore-alerts-panel)
     #   - hide the web Notification-API button (#alert-notif-btn)
-    #   - hide the native push panel (#native-alerts-note) entirely
-    #   - swap #alerts-intro-copy to in-app-only wording (the app's own
-    #     muted voice; matches the listing's "watched cars light up" line)
+    #   - swap #alerts-intro-copy to the native wording (IS_NATIVE branch,
+    #     app.js ~3050 — push promises are now true on Android)
+    #   - show #native-alerts-note with its real "Enable push notifications"
+    #     button, as a fresh 1.2 install renders it (no status text)
     #   - hide the web-only Pro email-alerts panel (native never shows it)
-    # When FCM ships in 1.2, restore the previous native-state rendering
-    # (git show b66d882^:play-assets/_capture_android.py).
     state = page.evaluate("""() => {
         document.getElementById('appstore-alerts-panel')?.remove();
         const email = document.getElementById('email-alerts-panel');
         if (email) email.style.display = 'none';
         const btn = document.getElementById('alert-notif-btn');
         if (btn) btn.style.display = 'none';
-        const note = document.getElementById('native-alerts-note');
-        if (note) note.remove();
         const intro = document.getElementById('alerts-intro-copy');
         if (intro) intro.innerHTML =
             'Add vehicles you want to track &mdash; watching is free, '
-            + 'no signup, no email. Watched cars <strong>light up right '
-            + 'here</strong> the moment they arrive at a yard in your radius.';
-        // Tier-comparison Pro row: the Android build renders "In-app alerts
-        // ... (push coming to Android soon)" (app.js ~3376). Drop the
-        // parenthetical — in-app alerts are the honest today-truth.
-        const tierLi = document.getElementById('tier-alerts-li');
-        if (tierLi) tierLi.textContent = 'In-app alerts within hours of a '
-            + 'watched car hitting a yard \\u2014 including sale-day alerts';
-        const tab = document.querySelector('.tab-panel.active, body');
+            + 'no signup, no email. Free watches get a <strong>weekly recap '
+            + 'push</strong>; <strong>instant push alerts</strong> within '
+            + 'hours of a car hitting the yard are Pro.';
+        const note = document.getElementById('native-alerts-note');
+        if (note) note.style.display = '';
+        const pushBtn = document.getElementById('native-push-enable');
+        if (pushBtn) pushBtn.style.display = '';
+        const status = document.getElementById('native-push-status');
+        if (status) status.textContent = '';
+        const tab = document.getElementById('tab-alerts');
         return {
             iosPanelGone: !document.getElementById('appstore-alerts-panel'),
-            pushPanelGone: !document.getElementById('native-alerts-note'),
+            noteShown: !!note && note.style.display !== 'none',
+            enableBtnShown: !!pushBtn && pushBtn.style.display !== 'none',
             emailPanelHidden: !email || email.style.display === 'none',
-            pushMentions: (tab.innerText.match(/push/gi) || []).length,
-            comingSoon: /coming/i.test(tab.innerText),
+            comingSoon: /coming soon|coming to android/i.test(tab.innerText),
+            iosMention: /ios app|iphone|app store/i.test(tab.innerText),
         };
     }""")
     page.wait_for_timeout(500)
     log(f"shot4 android alerts state: {state}")
-    assert state["iosPanelGone"] and state["pushPanelGone"] \
-        and state["emailPanelHidden"], "push/web-only panels still visible"
-    assert state["pushMentions"] == 0 and not state["comingSoon"], \
-        f"push/coming-soon copy still rendered: {state}"
+    assert state["iosPanelGone"] and state["emailPanelHidden"] \
+        and state["noteShown"] and state["enableBtnShown"], \
+        f"wrong panel state: {state}"
+    assert not state["comingSoon"] and not state["iosMention"], \
+        f"stale/iOS copy rendered: {state}"
     shoot(page, "screen_4_alerts.png")
 
 def free_shots(page, alerts_only=False):
