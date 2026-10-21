@@ -96,6 +96,16 @@ EXTRAS_FILE = DATA_DIR / "vehicle_extras.json"
 PNP_API = "https://www.picknpull.com/api"
 SLC_ZIP = "84101"
 SEARCH_RADIUS = 100
+# The national search (distance=0) silently TRUNCATES at exactly 5,000 rows
+# per make. Ford / Chevrolet / Honda exceed that (Toyota and Nissan are close),
+# and WHICH 5,000 you get is arbitrary — diagnosed 2026-10-21 when a scan that
+# ran hours after Pick-n-Pull SLC posted new arrivals was still missing 161 of
+# the yard's 1,103 cars (91 Fords, 40 Chevys, some dating back to August).
+# When a make's national response comes back at exactly the cap, re-sweep that
+# make with one query per yard postal code (radius below) and union by id —
+# validated to recover Ford 5,000 -> 7,077 in ~25s.
+PNP_NATIONAL_CAP = 5000
+PNP_SWEEP_RADIUS = 25
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
     "Accept": "application/json",
@@ -5490,18 +5500,52 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
     return matches
 
 
+def _pnp_ingest_group(loc_data: dict, out: list[dict]) -> None:
+    """Enrich and append one search-response location group's vehicles."""
+    loc = loc_data.get("location") or {}
+    # The API occasionally returns a location stub with null
+    # name/city/state — skip those groups rather than emitting a
+    # phantom "None" yard; the vehicles come back on the next scan.
+    if not loc.get("name"):
+        return
+    for v in loc_data.get("vehicles", []):
+        # NOTE: the feed carries photo URLs, but they are Row52
+        # assets (cdn.row52.com, Row52 watermark) — deliberately
+        # NOT captured. See PHOTO POLICY at EXTRAS_FILE.
+        # Spec fields exist in the schema but are null in every
+        # observed response; captured defensively if they appear —
+        # facts aren't copyrightable, so these are fine regardless
+        # of where the photos live.
+        for src, dst in (("color", "_color"), ("engine", "_engine"),
+                         ("transmission", "_trans")):
+            val = (v.get(src) or "").strip() if isinstance(v.get(src), str) else ""
+            if val:
+                v[dst] = val
+        v["_location"] = loc.get("name")
+        v["_city"] = loc.get("city") or ""
+        v["_state"] = loc.get("state") or ""
+        v["_lat"] = loc.get("mapLatitude")
+        v["_lng"] = loc.get("mapLongitude")
+        out.append(v)
+
+
 def fetch_pnp_inventory(make_ids: list[int] | None = None, *, national: bool = False) -> list[dict]:
     """Fetch live inventory from Pick-n-Pull API.
 
     national=True uses distance=0, which the PnP API treats as unlimited —
-    one request per make returns every yard in the US + Canada network."""
+    one request per make returns every yard in the US + Canada network.
+    CAVEAT: unlimited in radius, NOT in rows — national responses truncate at
+    PNP_NATIONAL_CAP rows per make, so any make that comes back at exactly the
+    cap is re-swept per yard postal code and unioned by id (see constant)."""
     if make_ids is None:
         makes_resp = requests.get(f"{PNP_API}/vehicle/makes", headers=HEADERS, timeout=15)
         all_makes = makes_resp.json()
         make_ids = [m["id"] for m in all_makes]
 
     distance = 0 if national else SEARCH_RADIUS
-    all_vehicles = []
+    all_vehicles: list[dict] = []
+    capped_make_ids: list[int] = []
+    yard_zips: set[str] = set()
     for mid in make_ids:
         try:
             r = requests.get(
@@ -5510,34 +5554,51 @@ def fetch_pnp_inventory(make_ids: list[int] | None = None, *, national: bool = F
                 headers=HEADERS,
                 timeout=60 if national else 15,
             )
-            for loc_data in r.json():
+            groups = r.json()
+            raw_rows = 0
+            for loc_data in groups:
+                raw_rows += len(loc_data.get("vehicles") or [])
                 loc = loc_data.get("location") or {}
-                # The API occasionally returns a location stub with null
-                # name/city/state — skip those groups rather than emitting a
-                # phantom "None" yard; the vehicles come back on the next scan.
-                if not loc.get("name"):
-                    continue
-                for v in loc_data.get("vehicles", []):
-                    # NOTE: the feed carries photo URLs, but they are Row52
-                    # assets (cdn.row52.com, Row52 watermark) — deliberately
-                    # NOT captured. See PHOTO POLICY at EXTRAS_FILE.
-                    # Spec fields exist in the schema but are null in every
-                    # observed response; captured defensively if they appear —
-                    # facts aren't copyrightable, so these are fine regardless
-                    # of where the photos live.
-                    for src, dst in (("color", "_color"), ("engine", "_engine"),
-                                     ("transmission", "_trans")):
-                        val = (v.get(src) or "").strip() if isinstance(v.get(src), str) else ""
-                        if val:
-                            v[dst] = val
-                    v["_location"] = loc.get("name")
-                    v["_city"] = loc.get("city") or ""
-                    v["_state"] = loc.get("state") or ""
-                    v["_lat"] = loc.get("mapLatitude")
-                    v["_lng"] = loc.get("mapLongitude")
-                    all_vehicles.append(v)
+                pc = (loc.get("postalCode") or "").strip()
+                if pc:
+                    yard_zips.add(pc)
+                _pnp_ingest_group(loc_data, all_vehicles)
+            if national and raw_rows >= PNP_NATIONAL_CAP:
+                capped_make_ids.append(mid)
         except Exception:
             continue
+
+    # Second pass: recover vehicles the national query truncated away. One
+    # query per (capped make x yard postal code) at a small radius; vehicles
+    # already seen are skipped, so overlapping radii are harmless.
+    if national and capped_make_ids and yard_zips:
+        seen_ids = {str(v.get("id")) for v in all_vehicles}
+        for mid in capped_make_ids:
+            recovered = 0
+            for pc in sorted(yard_zips):
+                try:
+                    r = requests.get(
+                        f"{PNP_API}/vehicle/search",
+                        params={"makeId": mid, "distance": PNP_SWEEP_RADIUS, "zip": pc},
+                        headers=HEADERS,
+                        timeout=60,
+                    )
+                    groups = r.json()
+                except Exception:
+                    continue
+                rows: list[dict] = []
+                for loc_data in groups:
+                    _pnp_ingest_group(loc_data, rows)
+                for v in rows:
+                    vid = str(v.get("id"))
+                    if vid in seen_ids:
+                        continue
+                    seen_ids.add(vid)
+                    all_vehicles.append(v)
+                    recovered += 1
+            print(f"  [PnP] makeId {mid} hit the {PNP_NATIONAL_CAP}-row national cap — "
+                  f"per-yard sweep over {len(yard_zips)} zips recovered {recovered} "
+                  f"truncated vehicles", file=sys.stderr)
 
     return all_vehicles
 

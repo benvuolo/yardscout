@@ -1,4 +1,6 @@
-# Runs every 6 hours: national Pick-n-Pull + LKQ Pick Your Part + Pull-A-Part +
+# Runs every 4 hours (public repo — Actions minutes are free; the concurrency
+# group below serializes runs, so even a ~3h scan can never overlap the next):
+# national Pick-n-Pull + LKQ Pick Your Part + Pull-A-Part +
 # Utah chains, updates inventory_live.json (+ per-yard price lists), records
 # history to inventory_history.db, sends push (ntfy) + email digest on watchlist hits.
 # Repo secrets: NTFY_TOPIC (phone push), SMTP_USER / SMTP_PASS / ALERT_EMAIL (email, optional).
@@ -8,7 +10,7 @@ name: YardScout Scan
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 */4 * * *"
   workflow_dispatch:
 
 permissions:
