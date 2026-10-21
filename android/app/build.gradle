@@ -16,7 +16,7 @@ android {
         applicationId "io.yardscout.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
+        versionCode 3
         versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
@@ -58,9 +58,10 @@ dependencies {
     implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
     implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
     // Google Play Billing for the Pro subscription (PurchasesPlugin.java).
-    // Pinned to 7.x: meets Play's Billing 7+ requirement; 8.x changes the
-    // queryProductDetailsAsync callback signature.
-    implementation "com.android.billingclient:billing:7.1.1"
+    // 8.0.0+ required by Play Console as of Oct 2026 (new releases are
+    // rejected on 7.x). 8.x changed queryProductDetailsAsync to return a
+    // QueryProductDetailsResult — handled in PurchasesPlugin.queryProduct.
+    implementation "com.android.billingclient:billing:8.0.0"
     implementation project(':capacitor-android')
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
