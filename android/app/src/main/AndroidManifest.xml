@@ -35,4 +35,8 @@
     <!-- One-shot "find yards near me" lookup (@capacitor/geolocation). -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- FCM push alerts (@capacitor/push-notifications). Android 13+ runtime
+         permission — requested when the user taps "Enable push alerts" on the
+         Alerts tab, never at app open (see nativePushInit in app.js). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 </manifest>

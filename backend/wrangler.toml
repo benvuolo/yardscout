@@ -66,6 +66,14 @@ APNS_BUNDLE_ID = "com.benvuolo.yardscout"
 # production. Flip to "production" at launch.
 APNS_ENV = "production"
 
+# FCM (native Android push, HTTP v1) — all three required (third is the
+# FCM_SA_KEY secret below). The service account is yardscout-fcm-sender in
+# the yardscout-play GCP project, role "Firebase Cloud Messaging API Admin"
+# only (console.cloud.google.com > IAM > Service Accounts). Rotating the key
+# = mint a new JSON key there and re-put the secret.
+FCM_PROJECT_ID = "yardscout-play"
+FCM_SA_EMAIL = "yardscout-fcm-sender@yardscout-play.iam.gserviceaccount.com"
+
 # Stripe price IDs (create in the Stripe dashboard, then paste here):
 #   Pro    — recurring monthly price ($12.99/mo)
 #   Pass   — one-time price ($6.99, grants 72h of Pro)
@@ -79,6 +87,8 @@ STRIPE_PRICE_PASS = ""
 #   STRIPE_SECRET_KEY         — Stripe secret key (sk_test_... then sk_live_...)
 #   STRIPE_WEBHOOK_SECRET     — signing secret for the /v1/stripe/webhook endpoint
 #   VAPID_PRIVATE_JWK         — Web Push private key JSON (from gen-vapid.mjs)
-#   APNS_P8                   — contents of the AuthKey_<KEY_ID>.p8 file (native push)
+#   APNS_P8                   — contents of the AuthKey_<KEY_ID>.p8 file (native iOS push)
+#   FCM_SA_KEY                — the FCM service account's private_key (PKCS#8 PEM from
+#                               the JSON key file; literal "\n" escapes accepted) (Android push)
 #   EMAIL_UNSUB_SECRET        — HMAC key signing one-click unsubscribe links in alert emails
 #   REVENUECAT_WEBHOOK_SECRET — (later) RevenueCat webhook authorization value

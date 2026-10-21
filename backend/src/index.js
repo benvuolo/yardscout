@@ -41,6 +41,7 @@ import {
 } from './alerts.js';
 import {
   handleDeviceRegister, handleDeviceTest, sendWeeklyDevicePushes,
+  handleDeviceAlertsDispatchRun, handleDeviceDigestRun,
 } from './devices.js';
 import {
   handleEmailAlertsSync, handleEmailAlertsStatus, handleEmailAlertsUnsubscribe,
@@ -185,6 +186,7 @@ async function route(req, env, url, ctx) {
   /* ----- admin (x-admin-secret) ----- */
   if (path === '/v1/admin/grant' || path === '/v1/admin/users' || path === '/v1/admin/waitlist'
       || path === '/v1/admin/digest/run' || path === '/v1/admin/email-alerts/dispatch'
+      || path === '/v1/admin/device-alerts/dispatch' || path === '/v1/admin/device-digest/run'
       || path === '/v1/admin/test/ent') {
     const denied = await requireAdmin(req, env);
     if (denied) return denied;
@@ -200,6 +202,13 @@ async function route(req, env, url, ctx) {
     // arrivals) — used by e2e and for ops smoke tests.
     if (method === 'POST' && path === '/v1/admin/email-alerts/dispatch') {
       return handleEmailAlertsDispatchRun(req, env);
+    }
+    // Manual native-device dispatch + weekly push (APNs/FCM) — same contract.
+    if (method === 'POST' && path === '/v1/admin/device-alerts/dispatch') {
+      return handleDeviceAlertsDispatchRun(req, env);
+    }
+    if (method === 'POST' && path === '/v1/admin/device-digest/run') {
+      return handleDeviceDigestRun(req, env);
     }
     // DEV ONLY (404s in prod): seed a test entitlement into local KV.
     if (method === 'POST' && path === '/v1/admin/test/ent') {

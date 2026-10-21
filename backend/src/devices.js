@@ -1,19 +1,24 @@
-/* Anonymous native devices (iOS app): APNs push alerts with zero signup.
+/* Anonymous native devices (iOS + Android apps): push alerts with zero signup.
  *
- * The app registers {deviceId, apnsToken, tier, watches[]} and re-registers
- * whenever watches or tier change. No email, no account:
+ * The app registers {deviceId, apnsToken|fcmToken, tier, watches[]} and
+ * re-registers whenever watches or tier change. No email, no account:
  *   - Pro devices  → instant push on every inventory commit (arrivals) and
  *                    sale-day pushes, mirroring the account-based Pro path.
  *   - Free devices → ONE weekly summary push from the Monday cron ("Your
  *                    watches matched N arrivals this week"), replacing the
  *                    old weekly digest email.
  *
+ * Channels: APNs for iOS (apns.js), FCM HTTP v1 for Android (fcm.js). A
+ * device has exactly one platform, so exactly one token column is set;
+ * sendDevicePush picks the channel and prunes dead tokens uniformly.
+ *
  * Tier is client-claimed for now — the whole app is client-gated, so this is
- * consistent; App Store receipt validation can harden it later.
+ * consistent; store receipt validation can harden it later.
  */
 
 import { json, err, isoNow } from './util.js';
 import { sendApns, apnsConfigured } from './apns.js';
+import { sendFcm, fcmConfigured } from './fcm.js';
 import { watchMatches, digestText, salesForWatches, fmtSaleRange } from './alerts.js';
 
 const MAX_WATCHES_PER_DEVICE = 20;
@@ -22,6 +27,36 @@ const FREE_RADIUS_CAP_MI = 250;
 const MAX_SENDS_PER_COMMIT = 25;    // shares the commit's subrequest budget
 const MAX_WEEKLY_PUSHES = 40;
 const MAX_SALE_YARDS_PER_PUSH = 3;
+
+/** True when at least one native push channel can send. */
+export function devicePushConfigured(env) {
+  return apnsConfigured(env) || fcmConfigured(env);
+}
+
+/** Send one push to a device row via whichever channel it registered.
+ * Returns {ok}. Dead tokens (uninstall / rotation) are cleared in-place so
+ * every dispatch path prunes identically — the APNs feedback contract,
+ * extended to FCM 404/UNREGISTERED. */
+async function sendDevicePush(env, d, payload) {
+  if (d.apns_token && apnsConfigured(env)) {
+    const res = await sendApns(env, d.apns_token, payload);
+    if (res.gone) {
+      await env.DB.prepare('UPDATE devices SET apns_token = NULL WHERE id = ?1').bind(d.id).run();
+    }
+    return { ok: res.ok };
+  }
+  if (d.fcm_token && fcmConfigured(env)) {
+    const res = await sendFcm(env, d.fcm_token, payload);
+    if (res.gone) {
+      await env.DB.prepare('UPDATE devices SET fcm_token = NULL WHERE id = ?1').bind(d.id).run();
+    }
+    return { ok: res.ok };
+  }
+  return { ok: false };
+}
+
+// Devices that can currently receive a push (either channel).
+const PUSHABLE = '(apns_token IS NOT NULL OR fcm_token IS NOT NULL)';
 
 function sanitizeWatches(raw, tier) {
   if (!Array.isArray(raw)) return [];
@@ -52,8 +87,9 @@ function sanitizeWatches(raw, tier) {
   return out;
 }
 
-/** POST /v1/device/register — {deviceId, apnsToken?, platform?, tier?, watches?}.
- * Idempotent upsert; called on push-enable and on every watch/tier change. */
+/** POST /v1/device/register — {deviceId, apnsToken?|fcmToken?, platform?,
+ * tier?, watches?}. Idempotent upsert; called on push-enable and on every
+ * watch/tier change. iOS sends apnsToken, Android sends fcmToken. */
 export async function handleDeviceRegister(req, env) {
   let body;
   try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
@@ -61,22 +97,33 @@ export async function handleDeviceRegister(req, env) {
   if (!/^[0-9a-f-]{36}$/i.test(deviceId)) return err(400, 'bad_device', 'deviceId must be a uuid.');
   const apnsToken = /^[0-9a-f]{32,200}$/i.test(String(body.apnsToken || ''))
     ? String(body.apnsToken).toLowerCase() : null;
+  // FCM registration tokens: opaque, longer, and case-sensitive — typically
+  // "<instance-id>:APA91b…" (~140-180 chars). Accept the documented charset,
+  // never lowercase.
+  const fcmToken = /^[A-Za-z0-9_:-]{80,512}$/.test(String(body.fcmToken || ''))
+    ? String(body.fcmToken) : null;
   const tier = body.tier === 'pro' ? 'pro' : 'free';
   const watches = sanitizeWatches(body.watches, tier);
   const now = isoNow();
 
-  // The APNs token must be unique — steal it from any stale row (reinstall
-  // generates a fresh deviceId but Apple may hand back the same token).
+  // Push tokens must be unique — steal them from any stale row (reinstall
+  // generates a fresh deviceId but the store may hand back the same token).
   if (apnsToken) {
     await env.DB.prepare('UPDATE devices SET apns_token = NULL WHERE apns_token = ?1 AND id != ?2')
       .bind(apnsToken, deviceId).run();
   }
+  if (fcmToken) {
+    await env.DB.prepare('UPDATE devices SET fcm_token = NULL WHERE fcm_token = ?1 AND id != ?2')
+      .bind(fcmToken, deviceId).run();
+  }
+  const defaultPlatform = fcmToken ? 'android' : 'ios';
   await env.DB.prepare(
-    `INSERT INTO devices (id, apns_token, platform, tier, watches_json, created_at, updated_at)
-     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?6)
+    `INSERT INTO devices (id, apns_token, fcm_token, platform, tier, watches_json, created_at, updated_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?7)
      ON CONFLICT (id) DO UPDATE SET
-       apns_token = COALESCE(?2, apns_token), tier = ?4, watches_json = ?5, updated_at = ?6`
-  ).bind(deviceId, apnsToken, String(body.platform || 'ios').slice(0, 12), tier,
+       apns_token = COALESCE(?2, apns_token), fcm_token = COALESCE(?3, fcm_token),
+       tier = ?5, watches_json = ?6, updated_at = ?7`
+  ).bind(deviceId, apnsToken, fcmToken, String(body.platform || defaultPlatform).slice(0, 12), tier,
          JSON.stringify(watches), now).run();
 
   // New watches alert on FUTURE arrivals: seed dedupe with current matches.
@@ -90,18 +137,21 @@ export async function handleDeviceRegister(req, env) {
     .map((v) => stmt.bind(deviceId, String(v.vehicle_id), now));
   for (let i = 0; i < seeds.length; i += 80) await env.DB.batch(seeds.slice(i, i + 80));
 
-  return json({ ok: true, watches: watches.length, push: !!apnsToken && apnsConfigured(env) });
+  const push = (!!apnsToken && apnsConfigured(env)) || (!!fcmToken && fcmConfigured(env));
+  return json({ ok: true, watches: watches.length, push });
 }
 
 /** POST /v1/device/test — {deviceId}: one test push to that device. */
 export async function handleDeviceTest(req, env) {
-  if (!apnsConfigured(env)) return err(503, 'push_off', 'Native push is not configured yet.');
+  if (!devicePushConfigured(env)) return err(503, 'push_off', 'Native push is not configured yet.');
   let body;
   try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
-  const d = await env.DB.prepare('SELECT apns_token FROM devices WHERE id = ?1')
+  const d = await env.DB.prepare('SELECT id, apns_token, fcm_token FROM devices WHERE id = ?1')
     .bind(String(body.deviceId || '')).first();
-  if (!d || !d.apns_token) return err(404, 'no_token', 'Device has no push token registered.');
-  const res = await sendApns(env, d.apns_token, {
+  if (!d || (!d.apns_token && !d.fcm_token)) {
+    return err(404, 'no_token', 'Device has no push token registered.');
+  }
+  const res = await sendDevicePush(env, d, {
     title: 'YardScout test', body: 'Push alerts are working on this device.',
   });
   return json({ ok: res.ok });
@@ -135,11 +185,11 @@ async function markSent(env, deviceId, fresh) {
 /** Instant arrivals push for PRO devices — called from handleCommit alongside
  * dispatchAlerts. Same shape of arrivals array. */
 export async function dispatchDeviceAlerts(env, arrivals) {
-  if (!apnsConfigured(env) || !Array.isArray(arrivals) || !arrivals.length) {
+  if (!devicePushConfigured(env) || !Array.isArray(arrivals) || !arrivals.length) {
     return { devices: 0, sends: 0 };
   }
   const rows = (await env.DB.prepare(
-    "SELECT id, apns_token, watches_json FROM devices WHERE tier = 'pro' AND apns_token IS NOT NULL"
+    `SELECT id, apns_token, fcm_token, watches_json FROM devices WHERE tier = 'pro' AND ${PUSHABLE}`
   ).all()).results || [];
   let sends = 0, devices = 0;
   for (const d of rows) {
@@ -150,13 +200,11 @@ export async function dispatchDeviceAlerts(env, arrivals) {
     const fresh = await freshOnly(env, d.id, matched);
     if (!fresh.length) continue;
     sends++;
-    const res = await sendApns(env, d.apns_token, {
+    const res = await sendDevicePush(env, d, {
       title: `${fresh.length} watched car${fresh.length === 1 ? '' : 's'} just hit the yard`,
       body: digestText(fresh),
     });
-    if (res.gone) {
-      await env.DB.prepare('UPDATE devices SET apns_token = NULL WHERE id = ?1').bind(d.id).run();
-    } else if (res.ok) {
+    if (res.ok) {
       devices++;
       await markSent(env, d.id, fresh);
     }
@@ -167,9 +215,9 @@ export async function dispatchDeviceAlerts(env, arrivals) {
 /** Instant sale-day push for PRO devices — called from handleCommit after
  * storeSaleEvents (dispatchSaleAlerts stores them first). */
 export async function dispatchDeviceSaleAlerts(env) {
-  if (!apnsConfigured(env)) return { devices: 0, sends: 0 };
+  if (!devicePushConfigured(env)) return { devices: 0, sends: 0 };
   const rows = (await env.DB.prepare(
-    "SELECT id, apns_token, watches_json FROM devices WHERE tier = 'pro' AND apns_token IS NOT NULL"
+    `SELECT id, apns_token, fcm_token, watches_json FROM devices WHERE tier = 'pro' AND ${PUSHABLE}`
   ).all()).results || [];
   let sends = 0, devices = 0;
   for (const d of rows) {
@@ -187,15 +235,13 @@ export async function dispatchDeviceSaleAlerts(env) {
     if (!fresh.length) continue;
     const shown = fresh.slice(0, MAX_SALE_YARDS_PER_PUSH);
     sends++;
-    const res = await sendApns(env, d.apns_token, {
+    const res = await sendDevicePush(env, d, {
       title: shown[0].pct ? `${shown[0].pct}% off sale near you` : 'Yard sale day near you',
       body: shown.map((s) =>
         `${s.yard} — ${fmtSaleRange(s.start_date, s.end_date)}${s.pct ? ` (${s.pct}% off)` : ''}`
       ).join('\n') + (fresh.length > shown.length ? `\n…and ${fresh.length - shown.length} more` : ''),
     });
-    if (res.gone) {
-      await env.DB.prepare('UPDATE devices SET apns_token = NULL WHERE id = ?1').bind(d.id).run();
-    } else if (res.ok) {
+    if (res.ok) {
       devices++;
       for (const s of fresh) {
         await env.DB.prepare(
@@ -211,7 +257,7 @@ export async function dispatchDeviceSaleAlerts(env) {
  * digest email; no email exists in the device model at all). One push per
  * device: arrivals matched this week + upcoming sale days in watch radii. */
 export async function sendWeeklyDevicePushes(env) {
-  if (!apnsConfigured(env)) return { devices: 0, sends: 0, arrivals: 0 };
+  if (!devicePushConfigured(env)) return { devices: 0, sends: 0, arrivals: 0 };
   const since = new Date(Date.now() - 7 * 86400_000).toISOString();
   const arrivals = ((await env.DB.prepare(
     'SELECT vehicle_id, year, make, model, row, location, lat, lng FROM arrivals WHERE seen_at >= ?1'
@@ -221,7 +267,7 @@ export async function sendWeeklyDevicePushes(env) {
   }));
 
   const rows = (await env.DB.prepare(
-    "SELECT id, apns_token, watches_json FROM devices WHERE tier != 'pro' AND apns_token IS NOT NULL"
+    `SELECT id, apns_token, fcm_token, watches_json FROM devices WHERE tier != 'pro' AND ${PUSHABLE}`
   ).all()).results || [];
   let sends = 0, devices = 0;
   for (const d of rows) {
@@ -246,7 +292,7 @@ export async function sendWeeklyDevicePushes(env) {
           `${s.yard} ${fmtSaleRange(s.start_date, s.end_date)}`).join(', ')
       : '';
     sends++;
-    const res = await sendApns(env, d.apns_token, {
+    const res = await sendDevicePush(env, d, {
       title: fresh.length
         ? `Your week at the yards — ${fresh.length} watched car${fresh.length === 1 ? '' : 's'} arrived`
         : 'Sale days coming up near you',
@@ -254,9 +300,7 @@ export async function sendWeeklyDevicePushes(env) {
         ? digestText(fresh) + '\nPro members heard about each of these within hours of it landing.'
         : '') + salesLine,
     });
-    if (res.gone) {
-      await env.DB.prepare('UPDATE devices SET apns_token = NULL WHERE id = ?1').bind(d.id).run();
-    } else if (res.ok) {
+    if (res.ok) {
       devices++;
       await markSent(env, d.id, fresh);
       for (const s of freshSales) {
@@ -271,4 +315,24 @@ export async function sendWeeklyDevicePushes(env) {
   await env.DB.prepare('DELETE FROM device_alerts_sent WHERE sent_at < ?1').bind(cutoff).run();
   await env.DB.prepare('DELETE FROM device_sale_alerts_sent WHERE sent_at < ?1').bind(cutoff).run();
   return { devices, sends, arrivals: arrivals.length };
+}
+
+/* ===== test/ops helpers (x-admin-secret; same pattern as email_alerts) ===== */
+
+/** POST /v1/admin/device-alerts/dispatch {arrivals:[...]} — manual dispatch
+ * trigger. Runs the EXACT production path (matching, dedupe, channel pick,
+ * token pruning) against caller-supplied arrivals without touching the
+ * inventory tables. Used by the e2e test and for ops smoke tests (e.g.
+ * verifying a real push lands on a device). */
+export async function handleDeviceAlertsDispatchRun(req, env) {
+  let body;
+  try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
+  const r = await dispatchDeviceAlerts(env, Array.isArray(body.arrivals) ? body.arrivals : []);
+  return json(r);
+}
+
+/** POST /v1/admin/device-digest/run — manual weekly device push trigger;
+ * same code path as the Monday cron (mirrors /v1/admin/digest/run). */
+export async function handleDeviceDigestRun(req, env) {
+  return json(await sendWeeklyDevicePushes(env));
 }

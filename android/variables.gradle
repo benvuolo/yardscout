@@ -13,4 +13,7 @@ ext {
     androidxJunitVersion = '1.3.0'
     androidxEspressoCoreVersion = '3.7.0'
     cordovaAndroidVersion = '14.0.1'
+    // FCM push (@capacitor/push-notifications). Pinned to the plugin's own
+    // default so the bundled firebase-messaging never drifts silently.
+    firebaseMessagingVersion = '25.0.1'
 }

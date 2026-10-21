@@ -11,8 +11,9 @@ const IS_NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform
   && window.Capacitor.isNativePlatform());
 // Android has its own Purchases plugin (Google Play Billing — see
 // android/.../PurchasesPlugin.java) with the same JS surface as iOS StoreKit,
-// so the IAP flow below is platform-agnostic. Push is still iOS-only (no FCM
-// project yet) — Android keeps the honest "coming soon" state for alerts.
+// so the IAP flow below is platform-agnostic. Push is too since 1.2: the
+// same @capacitor/push-notifications surface yields an APNs token on iOS
+// and an FCM token on Android (see the NATIVE section's push init).
 const IS_ANDROID = IS_NATIVE && window.Capacitor.getPlatform
   && window.Capacitor.getPlatform() === 'android';
 const DATA_BASE = IS_NATIVE ? 'https://yardscout.io/' : '';
@@ -1236,15 +1237,13 @@ function openUpgradeSheet(trigger) {
   // purchase here (and for Pro users, a real subscription they already have).
   if (IS_NATIVE) {
     const sheetSub = document.querySelector('#upgrade-sheet .sheet-sub');
-    // Android says "instant alerts" (in-app watches — push isn't live there
-    // yet); iOS says "instant push alerts". Keep the copy honest per platform.
-    if (sheetSub) sheetSub.textContent = IS_ANDROID
-      ? 'Finding cars near you is free and stays free. Pro adds the money layer — '
-        + 'part values, pull costs, cross-yard price compare, and instant alerts. '
-        + 'Subscribe through Google Play; cancel anytime.'
-      : 'Finding cars near you is free and stays free. '
-        + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
-        + 'and instant push alerts. Subscribe through the App Store; cancel anytime.';
+    // Both platforms have real push now (APNs on iOS, FCM on Android since
+    // 1.2) — same honest copy, only the store name differs.
+    if (sheetSub) sheetSub.textContent =
+      'Finding cars near you is free and stays free. '
+      + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
+      + 'and instant push alerts. Subscribe through '
+      + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
   }
   document.getElementById('upgrade-sheet').classList.add('open');
   document.getElementById('upgrade-backdrop').classList.add('open');
@@ -3230,7 +3229,9 @@ if (window.YSApi) {
  *
  * Push: official @capacitor/push-notifications plugin + the Worker's
  * anonymous device model (/v1/device/register). Free = weekly recap push,
- * Pro = instant. Watches mirror to the server on every change. */
+ * Pro = instant. Watches mirror to the server on every change. The plugin's
+ * 'registration' event hands back an APNs token on iOS and an FCM token on
+ * Android — the only platform difference below is which field carries it. */
 
 const NATIVE_API_BASE = 'https://yardscout-api.yardscout.workers.dev';
 // Same product id on both stores: App Store subscription + Play subscription.
@@ -3249,25 +3250,33 @@ function deviceId() {
   return id;
 }
 
-/* Mirror local watches to the Worker keyed by device id + APNs token. */
+/* Mirror local watches to the Worker keyed by device id + push token
+ * (APNs on iOS, FCM on Android). 'ys_apns_token' is the legacy iOS
+ * storage key — kept as a read fallback so existing installs don't
+ * re-prompt; new writes land in 'ys_push_token'. */
+function storedPushToken() {
+  return localStorage.getItem('ys_push_token') || localStorage.getItem('ys_apns_token');
+}
+
 async function syncDeviceRegistration(freshToken) {
   if (!IS_NATIVE || !NATIVE_API_BASE) return;
-  const token = freshToken || localStorage.getItem('ys_apns_token');
+  const token = freshToken || storedPushToken();
   if (!token) return;   // nothing to sync until push is enabled
   try {
+    const body = {
+      deviceId: deviceId(),
+      platform: IS_ANDROID ? 'android' : 'ios',
+      tier: isPro() ? 'pro' : 'free',
+      watches: loadWatchlist().map((w) => ({
+        make: w.make, model: w.model, yearMin: w.yrMin, yearMax: w.yrMax,
+        lat: w.lat, lng: w.lng, radiusMi: w.radiusMi,
+      })),
+    };
+    body[IS_ANDROID ? 'fcmToken' : 'apnsToken'] = token;
     await fetch(NATIVE_API_BASE + '/v1/device/register', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        deviceId: deviceId(),
-        apnsToken: token,
-        platform: 'ios',
-        tier: isPro() ? 'pro' : 'free',
-        watches: loadWatchlist().map((w) => ({
-          make: w.make, model: w.model, yearMin: w.yrMin, yearMax: w.yrMax,
-          lat: w.lat, lng: w.lng, radiusMi: w.radiusMi,
-        })),
-      }),
+      body: JSON.stringify(body),
     });
   } catch (e) { /* re-synced on next change/launch */ }
 }
@@ -3279,13 +3288,6 @@ async function syncDeviceRegistration(freshToken) {
   const status = document.getElementById('native-push-status');
   const PN = nativePlugin('PushNotifications');
   if (!btn) return;
-  if (IS_ANDROID) {
-    // The plugin class exists on Android but there's no FCM project yet —
-    // don't offer a button that would end in a registration error.
-    btn.style.display = 'none';
-    if (status) status.textContent = 'Push alerts are coming to Android soon — watches still light up in-app.';
-    return;
-  }
   if (!PN || !NATIVE_API_BASE) {
     // Plugin missing or backend not deployed yet — honest "coming soon".
     btn.style.display = 'none';
@@ -3294,7 +3296,7 @@ async function syncDeviceRegistration(freshToken) {
   }
 
   PN.addListener('registration', async (t) => {
-    localStorage.setItem('ys_apns_token', t.value);
+    localStorage.setItem('ys_push_token', t.value);
     localStorage.setItem('ys_push_on', '1');
     await syncDeviceRegistration(t.value);
     btn.style.display = 'none';
@@ -3311,13 +3313,17 @@ async function syncDeviceRegistration(freshToken) {
     try { document.querySelector('.tab[data-tab="alerts"]').click(); } catch (e) { /* boot race */ }
   });
 
+  // Permission is requested HERE, on the user's explicit "enable alerts" tap —
+  // never at app open. On Android 13+ requestPermissions() surfaces the
+  // POST_NOTIFICATIONS runtime prompt; on iOS it's the APNs dialog.
   btn.addEventListener('click', async () => {
     track('native-push-enable');
     try {
       let perm = await PN.checkPermissions();
       if (perm.receive !== 'granted') perm = await PN.requestPermissions();
       if (perm.receive !== 'granted') {
-        if (status) status.textContent = 'Notifications are off for YardScout in iOS Settings.';
+        if (status) status.textContent = 'Notifications are off for YardScout in '
+          + (IS_ANDROID ? 'Android' : 'iOS') + ' Settings.';
         return;
       }
       await PN.register();
@@ -3373,11 +3379,8 @@ function revokeNativePro() {
     if (note) note.innerHTML = 'Auto-renews monthly through your Google Play account &mdash; '
       + 'cancel anytime in Play Store subscriptions. '
       + '<a href="privacy.html">Privacy</a> &middot; <a href="terms.html">terms</a>.';
-    // Honest copy: push isn't live on Android yet — watches light up in-app
-    // within hours of a scan, but nothing is "pushed". Never promise push.
-    const alertsLi = document.getElementById('tier-alerts-li');
-    if (alertsLi) alertsLi.textContent = 'In-app alerts within hours of a watched car '
-      + 'hitting a yard — including sale-day alerts (push coming to Android soon)';
+    // Push is live on Android as of 1.2 (FCM) — the static "Push alerts
+    // within hours" copy is now honest on both platforms, no override needed.
   }
   if (subBtn) subBtn.addEventListener('click', async () => {
     track('iap-subscribe/' + upgradeTrigger);

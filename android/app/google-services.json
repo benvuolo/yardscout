@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "849944790585",
+    "project_id": "yardscout-play",
+    "storage_bucket": "yardscout-play.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849944790585:android:b4ab1a05c12970dc2defe8",
+        "android_client_info": {
+          "package_name": "io.yardscout.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBmXMtpnN1V63XttTs9kmCAUDLIvJtytY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
