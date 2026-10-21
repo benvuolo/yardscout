@@ -1690,7 +1690,10 @@ function getFilteredLive() {
       const d = vehicleDistanceMi(v);
       if (d == null || d > radiusMi) return false;
     }
-    if (matchFilter === 'match' && !v.hasMatch) return false;
+    // 'manual' is the only Show option besides All cars. (The old 'valuable
+    // parts' option was removed in the Oct 2026 needs-first copy rework —
+    // a profit-first filter was flip-framing baked into the UI; value info
+    // stays on the cards and in the sorts, where it reads as context.)
     // Confirmed from the VIN decode or the yard's own listing — cars with
     // unknown transmission are excluded rather than guessed at (the inline
     // hint under the control says so).
@@ -2169,6 +2172,14 @@ document.getElementById('live-sort').addEventListener('change', e => {
   localStorage.setItem('jh_sort', val);   // explicit choice, remembered
   renderLive();
 });
+/* Self-heal, same pattern as the jh_sort restore above: a browser's form
+ * restore (or an old WebView's saved state) can re-select the removed
+ * 'valuable parts' option, leaving the select with no valid choice and the
+ * grid filtered by nothing the UI can show. Snap back to All cars. */
+(() => {
+  const sel = document.getElementById('live-filter-match');
+  if (sel.selectedIndex < 0 || ![...sel.options].some(o => o.value === sel.value)) sel.value = '';
+})();
 document.getElementById('live-filter-match').addEventListener('change', (e) => {
   // The manual option under-counts by design (confirmed-only) — say so right
   // where the choice is made, not in a hover-only tooltip phones never see.
