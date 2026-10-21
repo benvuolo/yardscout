@@ -45,17 +45,17 @@ WATCH FOR THE RIGHT CAR
 • Build a watchlist of makes, models, and years — picked from vehicles that actually cycle through yards, so no typos
 • Watched cars light up in the app the moment they arrive at a yard in your radius
 
-PRO (coming to Android soon)
+YARDSCOUT PRO
 • Resale value ranges and demand speed on nearly every car
 • Cross-yard price compare — find the cheapest alternator near you
-• Instant push alerts within hours of a watched car arriving — before the weekend crowd strips it
+• In-app arrival alerts within hours of a watched car hitting a yard in your radius — before the weekend crowd strips it (push notifications coming soon)
 • Sale-day alerts when a yard near you runs a half-off sale
 
 NO ACCOUNT, NO EMAIL
 • The whole app works without signing up
 • We never ask who you are
 
-Finding cars is free forever.
+YardScout Pro is $8.99/month through your Google Play account, auto-renews monthly, cancel anytime in Play Store → Subscriptions. Finding cars is free forever.
 
 Privacy policy: https://yardscout.io/privacy.html
 Terms of use: https://yardscout.io/terms.html
