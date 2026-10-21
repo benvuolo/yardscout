@@ -97,6 +97,74 @@ check("output_json ships sharedWith", bool(shared))
 check("output_json never ships sharedYears",
       all("sharedYears" not in tp for tp in row["topParts"]))
 
+# --- phase-3 families: Toyota deep ----------------------------------------
+p = parts_for(2002, "Toyota", "Camry").get("Alternator (spin-test at yard)", {})
+check("2002 Camry alternator cites 1MZ family w/ V6 caveat",
+      "ES300" in p.get("sharedWith", "") and "V6" in p.get("sharedWith", ""),
+      p.get("sharedWith", ""))
+p = parts_for(2005, "Toyota", "Camry").get("Alternator (spin-test at yard)", {})
+check("2005 Camry (3MZ era) drops the claim", "sharedWith" not in p, str(p))
+p = parts_for(2001, "Lexus", "RX 300").get("Alternator (spin-test at yard)", {})
+check("RX300 gains copied 1MZ alternator row",
+      "Camry V6" in p.get("sharedWith", ""), str(p))
+p = parts_for(1990, "Toyota", "4Runner").get("22RE EFI Intake/Throttle Body", {})
+check("4Runner gains copied 22RE intake row",
+      "Toyota Pickup" in p.get("sharedWith", ""), str(p))
+p = parts_for(1990, "Toyota", "4Runner").get(
+    "Climate Control Panel (works, knobs intact)", {})
+check("4Runner climate panel carries two-era caveat",
+      "don't mix" in p.get("sharedWith", ""), p.get("sharedWith", ""))
+
+# --- phase-3: donor notes ship verbatim (no member labels) ----------------
+p = parts_for(2006, "Toyota", "Prius").get("Hybrid Battery Pack (complete)", {})
+check("gen2 Prius pack carries NiMH module donor note",
+      p.get("sharedWith", "").startswith("NiMH modules interchange"),
+      p.get("sharedWith", ""))
+p = parts_for(2018, "Toyota", "Prius").get("Hybrid Battery Cells (bulk)", {})
+check("2018 Prius (Li-ion era) drops the module claim",
+      "sharedWith" not in p, str(p.get("sharedWith")))
+p = parts_for(1998, "Acura", "Integra").get(
+    "Rear Disc Brake Conversion Parts (trailing arms)", {})
+check("Integra rear-disc donor note warns about Type R 5-lug",
+      "5-lug Type R" in p.get("sharedWith", ""), p.get("sharedWith", ""))
+p = parts_for(2007, "Acura", "TL").get("Brembo Front Calipers (Type-S)", {})
+check("TL-S Brembo donor note demands knuckles",
+      "knuckles" in p.get("sharedWith", ""), p.get("sharedWith", ""))
+p = parts_for(2000, "Pontiac", "Grand Prix").get(
+    "GTP Supercharger Accessories (pulleys/brackets)", {})
+check("L67 donor note scoped to Gen-3 era",
+      "Regal GS" in p.get("sharedWith", ""), p.get("sharedWith", ""))
+p = parts_for(2005, "Pontiac", "Grand Prix").get(
+    "GTP Supercharger Accessories (pulleys/brackets)", {})
+check("2005 GTP (Gen-5) drops the L67 claim", "sharedWith" not in p, str(p))
+
+# --- phase-3: Subaru + classics -------------------------------------------
+p = parts_for(2005, "Subaru", "Impreza").get("WRX Top-Mount Intercooler", {})
+check("Impreza TMIC joins EJ-turbo family",
+      "Forester XT" in p.get("sharedWith", ""), p.get("sharedWith", ""))
+p = parts_for(2003, "Subaru", "Baja").get("Headlights (clear, non-hazed)", {})
+check("Baja gains Legacy GT headlight row w/ base-lamp caveat",
+      "base Legacy lamp differs" in p.get("sharedWith", ""),
+      p.get("sharedWith", ""))
+p = parts_for(2006, "Subaru", "Outback").get("Headlights (clear, non-hazed)", {})
+check("2006 Outback cites the 05–07 halogen group (not 00–04)",
+      "2005\u201307" in p.get("sharedWith", ""), p.get("sharedWith", ""))
+p = parts_for(1999, "Jeep", "Wrangler").get("Half Doors (pair)", {})
+check("TJ half doors cite YJ w/ striker caveat",
+      "YJ pin vs TJ hoop" in p.get("sharedWith", ""), p.get("sharedWith", ""))
+p = parts_for(1985, "Chevrolet", "Blazer").get("K5 Removable Hardtop Parts", {})
+check("K5 hardtop excludes 73–75 full tops",
+      "73\u201375 full tops differ" in p.get("sharedWith", ""),
+      p.get("sharedWith", ""))
+p = parts_for(1995, "Chevrolet", "K1500").get("Tailgate (straight)", {})
+check("OBS K1500 tailgate cites C/K 88–98",
+      "C/K 1988\u201398" in p.get("sharedWith", ""), p.get("sharedWith", ""))
+p = parts_for(1980, "Chevrolet", "Monte Carlo").get(
+    "Dash Pad (uncracked, G-body)", {})
+check("G-body dash pad cites Cutlass + Regal",
+      "Cutlass" in p.get("sharedWith", "")
+      and "Regal" in p.get("sharedWith", ""), p.get("sharedWith", ""))
+
 # --- family engine data hygiene ------------------------------------------
 seen, gated_copies = set(), []
 for key, info in js.UNOBTANIUM_DB.items():
