@@ -467,6 +467,15 @@
   /* Wide control: spans the full grid row (capped) so long option labels
    * like "Recommended (value × freshness)" aren't truncated. */
   .controls .ctl-wide { grid-column: 1 / -1; max-width: 420px; }
+  /* Muted inline honesty note under a control (e.g. the confirmed-manual
+   * filter's under-count disclosure) — visible on touch, unlike a tooltip. */
+  .controls .ctl-hint {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    line-height: 1.5;
+    color: var(--text-dim);
+    padding-left: 2px;
+  }
   .controls .ctl label {
     font-family: var(--font-mono);
     font-size: 0.625rem;

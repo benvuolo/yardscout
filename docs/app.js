@@ -558,13 +558,26 @@ function photoInfo(code) {
 function extrasFor(v) {
   return (vehicleExtras && vehicleExtras[String(v.id)]) || null;
 }
-/* Confirmed manual transmission — from the VIN decode (or a chain feed's trans
- * field) carried in the extras shard. Honest rule: only ever true when the
- * data says "Manual"; never inferred, and automatics get no badge at all. */
+/* Confirmed manual transmission — from the VIN decode or the yard's own
+ * listing text, carried in the extras shard. Honest rule: only ever true when
+ * the data says "Manual"; never inferred, and automatics get no badge at all.
+ * Most cars have NEITHER signal (vPIC leaves TransmissionStyle blank for most
+ * makes, and most yard listings don't say) — those stay unknown, so a real
+ * manual that nothing confirms simply won't carry the badge or pass the
+ * filter. The copy around this must never claim otherwise. */
 function isConfirmedManual(v) {
   const ex = extrasFor(v);
   const t = ex && ex[3] ? String(ex[3]) : '';
   return /manual/i.test(t) && !/automated/i.test(t);
+}
+/* Which data source confirmed the transmission: 'listing' (the yard's own
+ * feed/table) or 'vin' (the VIN decode) — same vocabulary as parts'
+ * trim_status. Older extras shards predate the source column; everything in
+ * them came from the VIN decode, so that's the fallback. */
+function transSource(v) {
+  const ex = extrasFor(v);
+  if (!ex || !ex[3]) return null;
+  return ex[4] === 'listing' ? 'listing' : 'vin';
 }
 
 fetch(DATA_BASE + 'data/vehicle_extras.json')
@@ -1677,8 +1690,9 @@ function getFilteredLive() {
       if (d == null || d > radiusMi) return false;
     }
     if (matchFilter === 'match' && !v.hasMatch) return false;
-    // Confirmed from the VIN decode only — cars with unknown transmission are
-    // excluded rather than guessed at.
+    // Confirmed from the VIN decode or the yard's own listing — cars with
+    // unknown transmission are excluded rather than guessed at (the inline
+    // hint under the control says so).
     if (matchFilter === 'manual' && !isConfirmedManual(v)) return false;
     return true;
   });
@@ -2061,7 +2075,7 @@ function renderLive() {
             ${lotClock}
           </div>
           <div class="car-badges">
-            ${isConfirmedManual(v) ? '<span class="badge badge-manual" title="Manual transmission, confirmed from this car\u2019s VIN decode \u2014 never inferred">Manual</span>' : ''}
+            ${isConfirmedManual(v) ? `<span class="badge badge-manual" title="${transSource(v) === 'listing' ? 'Manual transmission, from the yard\u2019s own listing \u2014 never inferred' : 'Manual transmission, confirmed from this car\u2019s VIN decode \u2014 never inferred'}">Manual</span>` : ''}
             ${statusBadge}
             <button type="button" class="watch-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Already on your watchlist' : 'Watch this model — get alerted when another shows up'}">${ICON.bell}</button>
             <button type="button" class="share-btn" data-vkey="${vehicleKey(v)}" title="Share this find">${ICON.share}</button>
@@ -2154,7 +2168,13 @@ document.getElementById('live-sort').addEventListener('change', e => {
   localStorage.setItem('jh_sort', val);   // explicit choice, remembered
   renderLive();
 });
-document.getElementById('live-filter-match').addEventListener('change', renderLive);
+document.getElementById('live-filter-match').addEventListener('change', (e) => {
+  // The manual option under-counts by design (confirmed-only) — say so right
+  // where the choice is made, not in a hover-only tooltip phones never see.
+  const hint = document.getElementById('manual-filter-hint');
+  if (hint) hint.style.display = e.target.value === 'manual' ? '' : 'none';
+  renderLive();
+});
 document.getElementById('live-zip').addEventListener('input', e => setZipCenter(e.target.value.trim()));
 document.getElementById('live-radius').addEventListener('change', () => {
   const sel = document.getElementById('live-radius');

@@ -8082,6 +8082,28 @@ _ACE_MAKES_RE = re.compile(r'<select[^>]*id="search_make"[^>]*>(.*?)</select>', 
 _ACE_OPTION_RE = re.compile(r'<option value="([^"]+)"')
 _ACE_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
 
+# Listing transmission cells arrive in yard shorthand ("MANUAL 5SP",
+# "AUTO 4SP", "AUTO CVT"). The app's manual/automatic checks are written
+# against the VIN-decode display format ("5-spd Manual", "6-spd Automatic"),
+# so normalize to that here. Anything unparseable or explicitly unknown
+# returns "" — the transmission stays unknown, never guessed.
+_LISTING_TRANS_SPEED_RE = re.compile(r"(\d+)\s*-?\s*SP(?:D|EED)?\b")
+
+
+def _normalize_listing_trans(raw: str) -> str:
+    t = (raw or "").strip().upper()
+    if not t or t in {"UNKNOWN", "UNK", "N/A", "NA", "-", "NONE"}:
+        return ""
+    m = _LISTING_TRANS_SPEED_RE.search(t)
+    speed = f"{m.group(1)}-spd " if m else ""
+    if "MANUAL" in t or re.search(r"\bMAN\b", t):
+        return f"{speed}Manual"
+    if "CVT" in t:
+        return f"{speed}Automatic (CVT)"
+    if "AUTO" in t:
+        return f"{speed}Automatic"
+    return ""
+
 
 def fetch_ace_inventory() -> list[dict]:
     """Fetch Ace Pick-A-Part's inventory (one ajax.php POST per make)."""
@@ -8121,7 +8143,7 @@ def fetch_ace_inventory() -> list[dict]:
             if len(cells) < 10:
                 continue
             # The image cell nests extra markup; the data is the LAST 10 cells.
-            year_s, make, model, color, _interior, _engine, _trans, stock, row_n, date_raw = cells[-10:]
+            year_s, make, model, color, _interior, _engine, trans_raw, stock, row_n, date_raw = cells[-10:]
             if not stock or not make or not model:
                 continue
             if not year_s.isdigit():  # the header row uses <td class="head-td">
@@ -8134,6 +8156,9 @@ def fetch_ace_inventory() -> list[dict]:
                 year_i = int(year_s)
             except ValueError:
                 year_i = 0
+            # Ace cars carry no VINs, so the listing's own transmission cell
+            # is the only transmission signal they will ever have.
+            trans_norm = _normalize_listing_trans(trans_raw)
             all_vehicles.append({
                 "id": f"ace-{stock.lower()}",
                 "vin": "",
@@ -8142,6 +8167,7 @@ def fetch_ace_inventory() -> list[dict]:
                 "model": _utpap_format_label(model),
                 "row": row_n,
                 "dateAdded": date_iso,
+                **({"_trans": trans_norm} if trans_norm else {}),
                 "_color": color.title(),
                 "_location": ACE_YARD["name"],
                 "_city": ACE_YARD["city"],
@@ -10257,6 +10283,10 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
         entry["color"] = v.get("_color", "")
         entry["engine"] = v.get("_engine", "")
         entry["trans"] = v.get("_trans", "")
+        # Transmission provenance, same vocabulary as parts' trim_status:
+        # "listing" = the yard's own feed/table said so, "vin" = the VIN
+        # decode said so. Shipped so the UI can say which one it's quoting.
+        entry["transSrc"] = "listing" if entry["trans"] else ""
         vp = v.get("_vpic")
         if isinstance(vp, dict) and vp:
             # Chain feeds rarely carry specs; the VIN decode fills them in.
@@ -10264,6 +10294,8 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                 entry["engine"] = vp.get("engine", "")
             if not entry["trans"]:
                 entry["trans"] = vp.get("transmission", "")
+                if entry["trans"]:
+                    entry["transSrc"] = "vin"
             entry["vpicTrim"] = vp.get("trim", "")
             entry["vpicTrimQuality"] = vp.get("trimQuality", "")
             # True when VPIC returned a specific trim string we trust for trim-gated parts (not OEM "all trims" blobs).
@@ -10380,10 +10412,12 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
                 part_set_idx[pkey] = pi
                 part_sets.append(parts)
 
-        # Photo/color/engine/trans ride in a separate lazy shard keyed by
-        # vehicle id — the main payload stays byte-identical for cars
-        # without enrichment.
-        ex = [e.get("photo", ""), e.get("color", ""), e.get("engine", ""), e.get("trans", "")]
+        # Photo/color/engine/trans(+src) ride in a separate lazy shard keyed
+        # by vehicle id — the main payload stays byte-identical for cars
+        # without enrichment. transSrc is non-empty exactly when trans is,
+        # so the trailing-empty trim below never strands it.
+        ex = [e.get("photo", ""), e.get("color", ""), e.get("engine", ""),
+              e.get("trans", ""), e.get("transSrc", "")]
         while ex and not ex[-1]:
             ex.pop()
         if ex:
@@ -11048,7 +11082,7 @@ def main():
                     LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                     EXTRAS_FILE.write_text(json.dumps(
                         {"version": 1, "scrapedAt": payload["scrapedAt"],
-                         "extraFields": ["photo", "color", "engine", "trans"],
+                         "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
                          "extras": extras}, separators=(",", ":")))
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})")
                     print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}")
@@ -11087,7 +11121,7 @@ def main():
                 LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                 EXTRAS_FILE.write_text(json.dumps(
                     {"version": 1, "scrapedAt": payload["scrapedAt"],
-                     "extraFields": ["photo", "color", "engine", "trans"],
+                     "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
                      "extras": extras}, separators=(",", ":")))
                 if not args.json:
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})", file=sys.stderr)

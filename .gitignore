@@ -28,3 +28,4 @@ backend/test/.out/
 # Native iOS wrapper (Capacitor)
 node_modules/
 native/www/
+scraper/.out-show-filter/
