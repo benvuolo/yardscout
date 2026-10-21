@@ -37,7 +37,9 @@ id = "deb0d4c244fb4eb09a109050000d0e1b"
 
 [vars]
 # Comma-separated list of browser origins allowed to call this API (CORS).
-APP_ORIGINS = "https://yardscout.io,https://benvuolo.github.io,capacitor://localhost,http://localhost:8765,http://127.0.0.1:8765"
+# capacitor://localhost = the iOS app's webview; https://localhost = the
+# ANDROID app's webview (Capacitor's androidScheme default differs by OS).
+APP_ORIGINS = "https://yardscout.io,https://benvuolo.github.io,capacitor://localhost,https://localhost,http://localhost:8765,http://127.0.0.1:8765"
 # Where the magic-link callback redirects back to (the PWA).
 APP_URL = "https://yardscout.io/"
 # Sender for magic-link emails. Resend's shared onboarding sender works out of

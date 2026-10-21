@@ -3296,8 +3296,21 @@ async function syncDeviceRegistration(freshToken) {
   }
 
   PN.addListener('registration', async (t) => {
+    // iOS fires this only after register(); Android ALSO fires it at app
+    // start (FCM mints tokens eagerly via onNewToken) — before the user
+    // asked for anything. Only treat it as "push is on" when the user
+    // explicitly enabled alerts AND the OS display permission is granted
+    // (Android 13+ POST_NOTIFICATIONS; silently-dropped pushes are worse
+    // than no pushes).
+    const wanted = localStorage.getItem('ys_push_on') === '1'
+      || localStorage.getItem('ys_push_intent') === '1';
+    if (!wanted) return;
+    let perm = { receive: 'granted' };
+    try { perm = await PN.checkPermissions(); } catch (e) { /* assume ok */ }
+    if (perm.receive !== 'granted') return;
     localStorage.setItem('ys_push_token', t.value);
     localStorage.setItem('ys_push_on', '1');
+    localStorage.removeItem('ys_push_intent');
     await syncDeviceRegistration(t.value);
     btn.style.display = 'none';
     if (status) status.textContent = isPro()
@@ -3318,10 +3331,12 @@ async function syncDeviceRegistration(freshToken) {
   // POST_NOTIFICATIONS runtime prompt; on iOS it's the APNs dialog.
   btn.addEventListener('click', async () => {
     track('native-push-enable');
+    localStorage.setItem('ys_push_intent', '1');   // registration listener checks this
     try {
       let perm = await PN.checkPermissions();
       if (perm.receive !== 'granted') perm = await PN.requestPermissions();
       if (perm.receive !== 'granted') {
+        localStorage.removeItem('ys_push_intent');
         if (status) status.textContent = 'Notifications are off for YardScout in '
           + (IS_ANDROID ? 'Android' : 'iOS') + ' Settings.';
         return;
@@ -3332,11 +3347,22 @@ async function syncDeviceRegistration(freshToken) {
     }
   });
 
-  // Already enabled previously: refresh the token + mirror watches silently.
+  // Already enabled previously: refresh the token + mirror watches silently —
+  // but re-verify the display permission first (revocable in OS settings,
+  // and pre-fix Android builds could set ys_push_on without it).
   if (localStorage.getItem('ys_push_on') === '1') {
-    btn.style.display = 'none';
-    if (status) status.textContent = 'Push alerts are on for this device.';
-    PN.register().catch(() => {});
+    (async () => {
+      try {
+        const perm = await PN.checkPermissions();
+        if (perm.receive !== 'granted') {
+          localStorage.removeItem('ys_push_on');   // button stays visible
+          return;
+        }
+        btn.style.display = 'none';
+        if (status) status.textContent = 'Push alerts are on for this device.';
+        await PN.register();
+      } catch (e) { /* retried next launch */ }
+    })();
   }
 })();
 
