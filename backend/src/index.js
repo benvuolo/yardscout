@@ -42,6 +42,10 @@ import {
 import {
   handleDeviceRegister, handleDeviceTest, sendWeeklyDevicePushes,
 } from './devices.js';
+import {
+  handleEmailAlertsSync, handleEmailAlertsStatus, handleEmailAlertsUnsubscribe,
+  handleEmailAlertsDispatchRun, handleTestEntitlement,
+} from './email_alerts.js';
 
 export default {
   /* Cron (wrangler.toml [triggers]): weekly digest email for free users
@@ -142,6 +146,20 @@ async function route(req, env, url, ctx) {
     return handleDeviceTest(req, env);
   }
 
+  /* ----- email alerts for web Pro members (entitlement-token gated) ----- */
+  if (path === '/v1/email-alerts/sync' && method === 'POST') {
+    if (!rateLimit('eas:ip:' + ip, 30, 60_000)) return err(429, 'rate_limited', 'Slow down.');
+    return handleEmailAlertsSync(req, env);
+  }
+  if (path === '/v1/email-alerts/status' && method === 'GET') {
+    return handleEmailAlertsStatus(req, env, url);
+  }
+  // Signed one-click unsubscribe: GET renders a confirmation page (link in the
+  // email body), POST is the RFC 8058 List-Unsubscribe-Post hook.
+  if (path === '/v1/email-alerts/unsubscribe' && (method === 'GET' || method === 'POST')) {
+    return handleEmailAlertsUnsubscribe(req, env, url);
+  }
+
   if (path === '/v1/push/vapid' && method === 'GET') return handleVapidKey(env);
   if (path === '/v1/push/subscribe' && method === 'POST') return handlePushSubscribe(req, env);
   if (path === '/v1/push/unsubscribe' && method === 'POST') return handlePushUnsubscribe(req, env);
@@ -166,7 +184,8 @@ async function route(req, env, url, ctx) {
 
   /* ----- admin (x-admin-secret) ----- */
   if (path === '/v1/admin/grant' || path === '/v1/admin/users' || path === '/v1/admin/waitlist'
-      || path === '/v1/admin/digest/run') {
+      || path === '/v1/admin/digest/run' || path === '/v1/admin/email-alerts/dispatch'
+      || path === '/v1/admin/test/ent') {
     const denied = await requireAdmin(req, env);
     if (denied) return denied;
     if (method === 'POST' && path === '/v1/admin/grant') return handleGrant(req, env);
@@ -176,6 +195,15 @@ async function route(req, env, url, ctx) {
     // ops ("did anyone match this week?") and exercised by the e2e test.
     if (method === 'POST' && path === '/v1/admin/digest/run') {
       return json(await sendWeeklyDigests(env));
+    }
+    // Manual email-alert dispatch (exact production path, caller-supplied
+    // arrivals) — used by e2e and for ops smoke tests.
+    if (method === 'POST' && path === '/v1/admin/email-alerts/dispatch') {
+      return handleEmailAlertsDispatchRun(req, env);
+    }
+    // DEV ONLY (404s in prod): seed a test entitlement into local KV.
+    if (method === 'POST' && path === '/v1/admin/test/ent') {
+      return handleTestEntitlement(req, env);
     }
   }
 

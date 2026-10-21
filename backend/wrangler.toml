@@ -26,6 +26,15 @@ binding = "DB"
 database_name = "yardscout-db"
 database_id = "b81475d5-a998-4ede-8d43-b0932f8e236a"
 
+# Pro entitlements KV — the SAME namespace the yardscout-site Worker owns
+# (backend/site-proxy/wrangler.toml). Bound here so email-alert sync can
+# resolve device tokens (tok:<token> → email) and dispatch can re-check the
+# entitlement (ent:<email>) at send time. This Worker treats it as read-only
+# in production paths (the DEV-only test seam writes to the local emulator).
+[[kv_namespaces]]
+binding = "ENTITLEMENTS"
+id = "deb0d4c244fb4eb09a109050000d0e1b"
+
 [vars]
 # Comma-separated list of browser origins allowed to call this API (CORS).
 APP_ORIGINS = "https://yardscout.io,https://benvuolo.github.io,capacitor://localhost,http://localhost:8765,http://127.0.0.1:8765"
@@ -34,6 +43,10 @@ APP_URL = "https://yardscout.io/"
 # Sender for magic-link emails. Resend's shared onboarding sender works out of
 # the box for testing; switch to a verified domain sender for real users.
 EMAIL_FROM = "YardScout <onboarding@resend.dev>"
+# Sender for Pro email alerts (yardscout.io is verified in Resend).
+EMAIL_ALERTS_FROM = "YardScout Alerts <alerts@yardscout.io>"
+# Public URL of THIS Worker — unsubscribe links in alert emails point here.
+API_PUBLIC_URL = "https://yardscout-api.yardscout.workers.dev"
 # "1" = magic links are logged + returned in the API response instead of
 # emailed. NEVER enable in production. (.dev.vars sets this for local dev.)
 DEV_MODE = "0"
@@ -67,4 +80,5 @@ STRIPE_PRICE_PASS = ""
 #   STRIPE_WEBHOOK_SECRET     — signing secret for the /v1/stripe/webhook endpoint
 #   VAPID_PRIVATE_JWK         — Web Push private key JSON (from gen-vapid.mjs)
 #   APNS_P8                   — contents of the AuthKey_<KEY_ID>.p8 file (native push)
+#   EMAIL_UNSUB_SECRET        — HMAC key signing one-click unsubscribe links in alert emails
 #   REVENUECAT_WEBHOOK_SECRET — (later) RevenueCat webhook authorization value
