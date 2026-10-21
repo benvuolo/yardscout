@@ -5017,6 +5017,78 @@ def _merge_parts_overlay() -> None:
 
 _merge_parts_overlay()
 
+
+# Gate-token regexes (trim/drive/transmission gates), compiled once per token.
+# Unlike model keywords (where "rx" must still hit "RX350"), gate tokens match
+# only as whole words: trim "st" hits "Fiesta ST" but never the inside of
+# "Fiesta", and "n" hits "Elantra N Line" but never "Elantra". This is the
+# word-boundary fix for the substring trim-matching bug — substring gates
+# silently VIN-confirmed trim parts on every car of the model.
+_GATE_RE: dict[str, re.Pattern] = {}
+
+
+def _gate_pattern(tok: str) -> re.Pattern:
+    pat = _GATE_RE.get(tok)
+    if pat is None:
+        pat = re.compile(r"(?<![a-z0-9])" + re.escape(tok) + r"(?![a-z0-9])")
+        _GATE_RE[tok] = pat
+    return pat
+
+
+def _gate_hit(tokens, text: str) -> bool:
+    """True when any gate token appears as a whole word in text.
+
+    The single chokepoint for trim/drive/manual gate matching — match_vehicle
+    and lint_gate_tokens() both route through here, so a regression back to
+    substring matching trips the lint immediately."""
+    return any(_gate_pattern(t).search(text) for t in tokens)
+
+
+def lint_gate_tokens() -> list[str]:
+    """DB lint: no trim/drive gate token may 'confirm' itself from the bare
+    model name.  The substring-matching bug this guards against: trim "st"
+    matched inside "fiesta", so every Fiesta shipped VIN-confirmed ST Recaros.
+
+    Routes through the same _gate_hit() used by match_vehicle(), so a
+    regression back to substring matching fails this lint instantly.  Tokens
+    that are a whole WORD of the entry's own keyword ("se-r" in "sentra se-r")
+    are intended self-matches — that model name IS the trim — and are skipped.
+    Returns a list of problem strings; empty means clean."""
+    problems: list[str] = []
+    seen: set[int] = set()
+    for key, info in UNOBTANIUM_DB.items():
+        if id(info) in seen:
+            continue
+        seen.add(id(info))
+        kws = [str(x).lower() for x in (info.get("match") or (key,))]
+        for p in info["top_parts"]:
+            tokens = [str(t).lower() for t in p.get("trim", [])]
+            tokens += [str(t).lower() for t in p.get("drive", [])]
+            for t in tokens:
+                if not t.strip():
+                    problems.append(f"{key}: empty gate token on {p['name']!r}")
+                    continue
+                for kw in kws:
+                    # Whole-word membership = keyword deliberately names the
+                    # trim; checked WITHOUT regex so it can't mask a matching
+                    # regression below.
+                    if t in re.split(r"[^a-z0-9-]+", kw):
+                        continue
+                    haystack = f"{(info.get('make') or '').lower()} {kw}"
+                    if _gate_hit([t], haystack):
+                        problems.append(
+                            f"{key}: gate token {t!r} self-triggers on bare "
+                            f"model listing {haystack!r} ({p['name']})")
+    return problems
+
+
+# Fail fast at import: a self-triggering gate silently confirms trim parts on
+# every car of that model — worse than crashing any tool that loads the DB.
+_gate_problems = lint_gate_tokens()
+if _gate_problems:
+    raise ValueError(
+        "UNOBTANIUM_DB gate-token lint failed:\n  " + "\n  ".join(_gate_problems))
+
 # ---------------------------------------------------------------------------
 # Sell-channel guide — where each part actually moves and how fast.
 # Keyed by lowercase substring found in part name.  Checked longest-match-first.
@@ -5548,9 +5620,9 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
             trim_status = None
             if "trim" in p:
                 trims = [t.lower() for t in p["trim"]]
-                if any(t in model_lower for t in trims):
+                if _gate_hit(trims, model_lower):
                     trim_status = "listing"
-                elif vin_tokens and any(t in vin_tokens for t in trims):
+                elif vin_tokens and _gate_hit(trims, vin_tokens):
                     trim_status = "vin"
                 elif vin_usable:
                     # Decode is specific and names a different trim:
@@ -5564,7 +5636,7 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                     trim_status = "vin"
                 elif is_definitely_auto:
                     continue  # decode is definite: automatic, part absent
-                elif "manual" in model_lower or " 5-speed" in model_lower:
+                elif _gate_hit(("manual", "5-speed"), model_lower):
                     trim_status = "listing"
                 else:
                     trim_status = trim_status or "unconfirmed"
@@ -5579,9 +5651,9 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                 gate_tokens = []
                 for g in p["drive"]:
                     gate_tokens += DRIVE_SYNONYMS.get(g.lower(), (g.lower(),))
-                if drive_str and any(t in drive_str for t in gate_tokens):
+                if drive_str and _gate_hit(gate_tokens, drive_str):
                     trim_status = "vin"
-                elif any(t in model_lower for t in gate_tokens):
+                elif _gate_hit(gate_tokens, model_lower):
                     trim_status = "listing"
                 elif drive_str:
                     # vPIC drive strings are synonym lists for ONE
@@ -5590,8 +5662,8 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                     # isn't in the gate; a string spanning classes
                     # (e.g. "2WD/4WD") stays unconfirmed.
                     classes = {c for c, toks in DRIVE_SYNONYMS.items()
-                               if any(t in drive_str for t in toks)}
-                    if "2wd" in drive_str:
+                               if _gate_hit(toks, drive_str)}
+                    if _gate_hit(("2wd",), drive_str):
                         classes.add("2wd")
                     if len(classes) == 1:
                         continue
