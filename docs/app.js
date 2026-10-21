@@ -1524,8 +1524,10 @@ document.getElementById('zip-banner-skip').addEventListener('click', () => {
 function getFilteredLive() {
   // Focused shared-find view: show exactly that car, ignoring all filters, so
   // a deep link works for someone with no zip/radius state at all.
+  // Matches the share key (vin || id) OR the bare id — alert emails link by
+  // id (the scan's arrivals don't carry VINs).
   if (focusedCarKey) {
-    const v = liveInventory.find(x => vehicleKey(x) === focusedCarKey);
+    const v = liveInventory.find(x => vehicleKey(x) === focusedCarKey || String(x.id) === focusedCarKey);
     if (v) return [v];
   }
   // Free tier requires a location: with no center there's no radius to scope
@@ -1671,7 +1673,7 @@ function renderLive() {
   // Shared-link landing: focused single-car view, or an honest message when
   // the shared car has left the inventory.
   if (focusedCarKey) {
-    const found = liveInventory.find(x => vehicleKey(x) === focusedCarKey);
+    const found = liveInventory.find(x => vehicleKey(x) === focusedCarKey || String(x.id) === focusedCarKey);
     if (!found) {
       document.getElementById('live-grid').innerHTML = `
         <div class="empty-state" style="grid-column:1/-1;">
@@ -2541,6 +2543,9 @@ function saveWatchlist(list) {
   localStorage.setItem(WATCHLIST_KEY, JSON.stringify(list));
   // Native app: mirror watches to the alert backend (no-op until push enabled).
   if (IS_NATIVE && typeof syncDeviceRegistration === 'function') syncDeviceRegistration();
+  // Web Pro members with email alerts on: mirror watches for email dispatch
+  // (no-op for free users / alerts off — see the EMAIL ALERTS section).
+  if (!IS_NATIVE && typeof syncEmailAlertWatches === 'function') syncEmailAlertWatches();
 }
 function loadAlerted() {
   try { return JSON.parse(localStorage.getItem(ALERTED_KEY)) || {}; }
@@ -2585,6 +2590,8 @@ function getWatchlistHits() {
 function renderAlerts() {
   const watchlist = loadWatchlist();
   const results = getWatchlistHits();
+  // Email-alerts panel state (web only; defined in the EMAIL ALERTS section).
+  if (typeof refreshEmailAlertsUi === 'function') refreshEmailAlertsUi();
 
   const wlContainer = document.getElementById('alert-watchlist');
   if (!watchlist.length) {
@@ -3580,6 +3587,7 @@ async function refreshNativeIapUi() {
     applyProGates();
     if (typeof liveLoaded !== 'undefined' && liveLoaded) renderLive();
     refreshProActions();
+    if (typeof refreshEmailAlertsUi === 'function') refreshEmailAlertsUi();
     if (note) setMsg($id('ent-pro-status'), note);
   }
 
@@ -3593,6 +3601,7 @@ async function refreshNativeIapUi() {
     applyProGates();
     if (typeof liveLoaded !== 'undefined' && liveLoaded) renderLive();
     refreshProActions();
+    if (typeof refreshEmailAlertsUi === 'function') refreshEmailAlertsUi();
   }
 
   /* ---- purchase button: shown only once the Worker reports billing live ---- */
@@ -3755,4 +3764,138 @@ async function refreshNativeIapUi() {
       }
     } catch (e) { /* offline — keep last known state */ }
   })();
+})();
+
+/* ===== EMAIL ALERTS (web Pro members) =====
+ * The web counterpart of native push: a Pro member's watchlist mirrors to the
+ * backend (yardscout-api) keyed by their entitlement email; every inventory
+ * scan that finds new matches sends ONE digest email (see
+ * backend/src/email_alerts.js). WEB ONLY — IS_NATIVE exits immediately so the
+ * panel never appears in the App Store build (same anti-steering pattern as
+ * #upgrade-form-wrap); native keeps its push-based story.
+ *
+ * Exposed on window (called from saveWatchlist / renderAlerts / grantWebPro):
+ *   refreshEmailAlertsUi()   — render the Alerts-tab panel for the current state
+ *   syncEmailAlertWatches()  — debounced mirror of the local watchlist */
+(() => {
+  if (IS_NATIVE) return;
+  const API_BASE = 'https://yardscout-api.yardscout.workers.dev';
+  const ENABLED_KEY = 'ys_email_alerts_on';   // last known server state (UI cache)
+  const $id = (x) => document.getElementById(x);
+
+  const entToken = () =>
+    localStorage.getItem('jh_pro_source') === 'account'
+      ? localStorage.getItem('ys_ent_token') : null;
+
+  function serverWatches() {
+    // Local entries use yrMin/yrMax; the API takes yearMin/yearMax (same
+    // sanitizer as native device registration). matchOnly is a local-display
+    // filter with no server meaning — dropped deliberately.
+    return loadWatchlist().map((e) => ({
+      make: e.make || null, model: e.model || null,
+      yearMin: e.yrMin || null, yearMax: e.yrMax || null,
+      lat: e.lat != null ? e.lat : null, lng: e.lng != null ? e.lng : null,
+      radiusMi: e.radiusMi || null,
+    }));
+  }
+
+  async function postSync(enabled) {
+    const token = entToken();
+    if (!token) return null;
+    const r = await fetch(API_BASE + '/v1/email-alerts/sync', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ token, watches: serverWatches(), enabled }),
+    });
+    const data = await r.json().catch(() => ({}));
+    return { ok: r.ok, status: r.status, data };
+  }
+
+  /* Watchlist changed: if alerts are on, mirror silently (debounced — adding
+   * several models in one tap burst is one request). */
+  let syncTimer = null;
+  window.syncEmailAlertWatches = () => {
+    if (!entToken() || localStorage.getItem(ENABLED_KEY) !== '1') return;
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(() => {
+      postSync(true).catch(() => { /* offline — next change or toggle retries */ });
+    }, 1500);
+  };
+
+  function setStatus(msg, isError) {
+    const el = $id('email-alerts-status');
+    if (!el) return;
+    el.textContent = msg || '';
+    el.style.color = isError ? 'var(--red)' : '';
+  }
+
+  window.refreshEmailAlertsUi = function refreshEmailAlertsUi() {
+    const panel = $id('email-alerts-panel');
+    if (!panel) return;
+    panel.style.display = '';   // web always sees the panel (perk visibility)
+    const toggleWrap = $id('email-alerts-toggle-wrap');
+    const upgradeBtn = $id('email-alerts-upgrade');
+    const token = entToken();
+
+    if (!token) {
+      // Free (or Pro not linked on this device): honest Pro pitch, no toggle.
+      toggleWrap.style.display = 'none';
+      upgradeBtn.style.display = '';
+      setStatus(isPro()
+        ? 'Unlock Pro on this device (Pro sheet → "Already have Pro?") to turn on email alerts.'
+        : '');
+      return;
+    }
+    upgradeBtn.style.display = 'none';
+    toggleWrap.style.display = 'flex';
+    const toggle = $id('email-alerts-toggle');
+    toggle.checked = localStorage.getItem(ENABLED_KEY) === '1';
+    const email = localStorage.getItem('ys_ent_email');
+    setStatus(toggle.checked && email ? 'Alert emails go to ' + email + '.' : '');
+
+    // Confirm against the server once per render of the Alerts tab (cheap,
+    // and catches "unsubscribed from the email link" done elsewhere).
+    fetch(API_BASE + '/v1/email-alerts/status?token=' + encodeURIComponent(token))
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (!data) return;
+        localStorage.setItem(ENABLED_KEY, data.enabled ? '1' : '0');
+        toggle.checked = !!data.enabled;
+        if (data.enabled) {
+          setStatus('Alert emails go to ' + (data.email || email) + '. One email per scan with new matches — scans run about every 6 hours.');
+        }
+      })
+      .catch(() => { /* offline — cached state stands */ });
+  };
+
+  const toggleEl = $id('email-alerts-toggle');
+  if (toggleEl) toggleEl.addEventListener('change', async () => {
+    const on = toggleEl.checked;
+    toggleEl.disabled = true;
+    setStatus(on ? 'Turning on…' : 'Turning off…');
+    try {
+      const res = await postSync(on);
+      if (res && res.ok) {
+        localStorage.setItem(ENABLED_KEY, on ? '1' : '0');
+        track(on ? 'email-alerts-on' : 'email-alerts-off');
+        setStatus(on
+          ? 'On — alert emails go to ' + (res.data.email || localStorage.getItem('ys_ent_email') || 'your Pro email')
+            + '. You get one email per scan that finds new matches (scans run about every 6 hours).'
+          : 'Email alerts are off. Your watchlist still works right here.');
+      } else {
+        toggleEl.checked = !on;
+        setStatus(res && res.status === 403
+          ? 'Your Pro has lapsed — renew to use email alerts.'
+          : 'Could not update email alerts — try again.', true);
+      }
+    } catch (e) {
+      toggleEl.checked = !on;
+      setStatus('Could not reach the server — check your connection.', true);
+    } finally {
+      toggleEl.disabled = false;
+    }
+  });
+
+  // Initial paint (the Alerts tab may be the landing tab via deep link).
+  window.refreshEmailAlertsUi();
 })();

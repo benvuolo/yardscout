@@ -9,6 +9,7 @@
 import { json, err, sha256Hex, isoNow, timingSafeEqual } from './util.js';
 import { dispatchAlerts, dispatchSaleAlerts, storeArrivals } from './alerts.js';
 import { dispatchDeviceAlerts, dispatchDeviceSaleAlerts } from './devices.js';
+import { dispatchEmailAlerts } from './email_alerts.js';
 
 async function checkSecret(req, env, header, envKey) {
   const expected = env[envKey];
@@ -101,6 +102,12 @@ export async function handleCommit(req, env, ctx) {
       dispatchDeviceAlerts(env, newArrivals)
         .then((r) => console.log(`device alerts: ${r.devices} devices pushed, ${r.sends} sends`))
         .catch((e) => console.log('device alert dispatch failed:', e && e.message))
+    );
+    // Web Pro members with email alerts on: one digest email per user.
+    ctx.waitUntil(
+      dispatchEmailAlerts(env, newArrivals)
+        .then((r) => console.log(`email alerts: ${r.users} users emailed, ${r.emails} attempts`))
+        .catch((e) => console.log('email alert dispatch failed:', e && e.message))
     );
     // Snapshot arrivals for the weekly free-tier digest cron.
     ctx.waitUntil(

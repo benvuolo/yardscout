@@ -256,6 +256,29 @@
       </div>
     </div>
 
+    <!-- Email alerts (web only — native has its own push story and this panel
+         must never leak into the App Store build; app.js keeps it hidden when
+         IS_NATIVE, same pattern as #upgrade-form-wrap). For web Pro members
+         linked via entitlement, watches mirror to the backend and each
+         inventory scan that finds new matches sends ONE digest email. -->
+    <div class="panel" id="email-alerts-panel" style="display:none;">
+      <h4>Email alerts <span class="pro-tag">Pro</span></h4>
+      <p id="email-alerts-copy" style="font-size:0.8125rem;color:var(--text-dim);line-height:1.6;margin:0.4rem 0 0.8rem;">
+        Get an email the same day a watched car hits any yard. Scans run about every
+        6 hours &mdash; when one finds new matches, you get a single email listing all
+        of them (never one email per car).
+      </p>
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:center;">
+        <label id="email-alerts-toggle-wrap" style="display:none;align-items:center;gap:0.45rem;cursor:pointer;font-size:0.875rem;">
+          <input type="checkbox" id="email-alerts-toggle" style="width:1.1rem;height:1.1rem;accent-color:var(--accent);">
+          <span id="email-alerts-toggle-label">Email alerts</span>
+        </label>
+        <button type="button" id="email-alerts-upgrade" class="btn btn-primary" style="display:none;"
+          onclick="openUpgradeSheet('email-alerts')">See Pro</button>
+        <span id="email-alerts-status" style="font-size:0.8125rem;color:var(--text-dim);"></span>
+      </div>
+    </div>
+
     <!-- Native app (Capacitor): shown instead of the ntfy panel — no third-party
          app setup in the App Store build. Real APNs push is the queued upgrade. -->
     <div class="panel" id="native-alerts-note" style="display:none;">
