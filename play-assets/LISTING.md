@@ -46,9 +46,9 @@ WATCH FOR THE RIGHT CAR
 • Watched cars light up in the app the moment they arrive at a yard in your radius
 
 YARDSCOUT PRO
-• Resale value ranges and demand speed on nearly every car
+• Value ranges on nearly every car — know what a part is worth before you drive
 • Cross-yard price compare — find the cheapest alternator near you
-• In-app arrival alerts within hours of a watched car hitting a yard in your radius — before the weekend crowd strips it (push notifications coming soon)
+• Push alerts within hours of a watched car hitting a yard in your radius — before the weekend crowd strips the part you need
 • Sale-day alerts when a yard near you runs a half-off sale
 
 NO ACCOUNT, NO EMAIL

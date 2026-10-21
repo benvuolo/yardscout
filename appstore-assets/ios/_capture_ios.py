@@ -199,12 +199,12 @@ def scan_candidates(page, limit=None, verbose=True):
         }))""")
     passing = []
     for i, c in enumerate(cards):
-        priced = sum(1 for r in c["rows"] if "sells $" in r["price"])
+        priced = sum(1 for r in c["rows"] if "worth $" in r["price"])
         bad = [r["name"] for r in c["rows"]
                if r["vin"] and RISKY_VIN_PART.search(r["name"])]
         nocost = [r["name"] for r in c["rows"] if "$" not in r["cost"]]
         if not bad and not nocost and priced >= 4:
-            # top resale high, e.g. 'sells $270–$700' -> 700
+            # top value high, e.g. 'worth $270–$700' -> 700
             highs = [int(m.group(1).replace(",", ""))
                      for r in c["rows"]
                      for m in [re.search(r"\$[\d,]+\u2013\$([\d,]+)", r["price"])]
@@ -248,7 +248,7 @@ def capture_card(page, card_index, filename):
     page.wait_for_timeout(400)
 
 def pro_shot(page):
-    # ---------- Shot 5: Pro state, expanded card with part resale values ----
+    # ---------- Shot 5: Pro state, expanded card with part values ----------
     setup_pro_live(page)
     passing = scan_candidates(page, limit=40)
     if not passing:
@@ -291,7 +291,7 @@ def pro_options(page):
     for bucket, rx in BUCKETS:
         pool = [c for c in passing
                 if rx.search(c["title"]) and model_key(c["title"]) not in used_models]
-        # Favor impressive top resale (> $400), then scan order (gold-first).
+        # Favor impressive top part value (> $400), then scan order (gold-first).
         pool.sort(key=lambda c: (c["top_high"] <= 400, c["index"]))
         if pool:
             picks.append((bucket, pool[0]))

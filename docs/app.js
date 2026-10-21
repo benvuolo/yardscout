@@ -1280,8 +1280,8 @@ function applyProGates() {
     o.textContent = (!pro && PRO_SORTS.has(o.value)) ? o.dataset.base + ' \u2014 Pro' : o.dataset.base;
   });
   if (!pro && PRO_SORTS.has(sortSel.value)) sortSel.value = FREE_DEFAULT_SORT;
-  // Tier-appropriate default: a Pro who never picked a sort gets Best flips
-  // (that's what they paid for); free default stays Newest arrivals. An
+  // Tier-appropriate default: a Pro who never picked a sort gets Worth the
+  // trip (that's what they paid for); free default stays Newest arrivals. An
   // explicit choice (jh_sort) always wins and is restored at boot.
   if (pro && !localStorage.getItem('jh_sort')) sortSel.value = 'smart-profit';
 }
@@ -1406,7 +1406,7 @@ function renderSavedSheet() {
                   : s.topParts.length + ' flagged part' + (s.topParts.length > 1 ? 's' : '') + ' \u2014 names with Pro'}</div>
               </div>
               ${range && range.hi > 0 ? (isPro()
-                ? `<div class="saved-item-profit" title="${range.unknownCost ? 'Resale estimate — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated range if parts are good, after this yard\u2019s list pull costs'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">resale</small>' : ''}</div>`
+                ? `<div class="saved-item-profit" title="${range.unknownCost ? 'Estimated part value — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated range if parts are good, after this yard\u2019s list pull costs'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">value</small>' : ''}</div>`
                 : `<div class="saved-item-profit locked-blur" role="button" onclick="openUpgradeSheet('saved-value')">${LOCKED_PRICE_MASK}</div>`) : ''}
               <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">${ICON.x}</button>
             </div>`;
@@ -1694,7 +1694,7 @@ function renderLive() {
   document.getElementById('live-stats-bar').innerHTML = `
     <div class="stat-card"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
     <div class="stat-card"><div class="label">Worth a look</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">Fast sellers</div><div class="value">${fastSellers.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">Going fast</div><div class="value">${fastSellers.toLocaleString()}</div></div>
     <div class="stat-card"><div class="label">New this week</div><div class="value">${newThisWeek.toLocaleString()}</div></div>
     <div class="stat-card"><div class="label">Updated</div><div class="value value-sm">${scrapedLabel}</div></div>
   `;
@@ -1878,7 +1878,7 @@ function renderLive() {
             <li class="part-item" style="flex-wrap:wrap;">
               <span class="part-name locked-blur" role="button" onclick="openUpgradeSheet('part-name')">${ph}</span>
               <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">$\u2022\u2022 list</span>
-              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">sells ${LOCKED_PRICE_MASK}</span>
+              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">worth ${LOCKED_PRICE_MASK}</span>
             </li>`;
         }
         // "Spot it" tell for unconfirmed option parts — the VIN can't confirm
@@ -1891,11 +1891,11 @@ function renderLive() {
             <span class="part-name">${p.name}</span>
             ${trimMark}${fitsMark}
             ${costHtml}
-            <span class="part-price" title="Typical eBay sold range (national), working condition">sells ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
+            <span class="part-price" title="Typical sold prices for working parts (eBay, national)">worth ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
             ${verifyNote}
             ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
-              <span class="sell-badge ${sellCls}">${sellSpd === 'Fast' ? 'Sells fast' : sellSpd === 'Slow' ? 'Slow mover' : 'Steady seller'}</span>
-              <span class="sell-channel">Sell on: ${p.sell_at}</span>${localNote}
+              <span class="sell-badge ${sellCls}">${sellSpd === 'Fast' ? 'Goes fast' : sellSpd === 'Slow' ? 'Slow mover' : 'Steady mover'}</span>
+              <span class="sell-channel">Spares sell on: ${p.sell_at}</span>${localNote}
               ${p.sell_notes ? '<span class="sell-tip">' + displaySellNotes(p.sell_notes, v.make) + '</span>' : ''}
             </div>` : ''}
           </li>`;
@@ -1908,13 +1908,13 @@ function renderLive() {
       const rangeHigh = Math.round(highSum * fm);
       const extraHigh = Math.round(unconfirmedHigh * fm);
       const demand = demandRk === 3
-        ? { cls: 'demand-fast', label: 'Sells fast' }
+        ? { cls: 'demand-fast', label: 'Goes fast' }
         : demandRk === 1
         ? { cls: 'demand-slow', label: 'Slow mover' }
-        : { cls: 'demand-steady', label: 'Steady seller' };
+        : { cls: 'demand-steady', label: 'Steady mover' };
       cardStyle = `--tier-color:var(--${demandRk === 3 ? 'demand-fast' : demandRk === 1 ? 'demand-slow' : 'demand-steady'});`;
       const rangeText = anyUnknownCost
-        ? `resale ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; pull cost: check yard price list`
+        ? `worth ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; pull cost: check yard price list`
         : `e.g. ${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
       // Upside stays visible without misleading: unconfirmed ("if equipped")
       // parts never inflate the headline range — they get a muted second line.
@@ -1928,7 +1928,7 @@ function renderLive() {
           ${rangeHigh > 0 ? `<span class="range-text">${rangeText}</span>` : ''}
         </div>${extraNote}` : `
         <div class="profit-line">
-          <span class="demand-badge ${demand.cls}" title="How quickly this car's flagged parts typically sell">${demand.label}</span>
+          <span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>
           <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} See parts &amp; values &mdash; Pro</button>
         </div>`)
         : '';
@@ -2465,7 +2465,7 @@ function openPriceCompare(query) {
     const rows = yardPriceList(y.location);
     if (!rows) continue;
     // Best (cheapest) match at this yard — a part search like "alternator"
-    // can hit several list rows; the cheapest is what a flipper acts on.
+    // can hit several list rows; the cheapest is what you'd pay at the counter.
     let best = null;
     for (const r of rows) {
       if (r.part.toLowerCase().includes(q) && (!best || r.price < best.price)) best = r;
@@ -2533,10 +2533,10 @@ function displaySellNotes(notes, vehicleMake) {
   if (!notes) return '';
   const m = (vehicleMake || '').toLowerCase();
   if (!m.includes('lexus') && /lexus\s+audio/i.test(notes)) {
-    return 'Premium OEM audio — strong eBay market';
+    return 'Premium OEM audio — sought after, goes fast';
   }
   if (!m.includes('jeep') && /wrangler|jeep/i.test(notes)) {
-    return 'Removable hardtops are in strong local demand — often sell same-day in summer';
+    return 'Removable hardtops go fast in summer — often claimed the same day';
   }
   return notes;
 }

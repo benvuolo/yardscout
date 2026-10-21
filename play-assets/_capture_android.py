@@ -251,7 +251,7 @@ def scan_candidates(page, limit=None, verbose=True):
     exists even while collapsed). Returns cards that pass every rule:
     >= 4 priced parts, no risky VIN-confirmed badge, and a concrete yard list
     price on every row (never the 'check yard price list' fallback — the
-    shot's point is the buy-low/sell-high contrast)."""
+    shot's point is the pull-cost-vs-part-value contrast)."""
     slice_js = f".slice(0, {limit})" if limit else ""
     cards = page.evaluate("""() =>
         [...document.querySelectorAll('#live-grid .car-card')]""" + slice_js + """
@@ -268,12 +268,12 @@ def scan_candidates(page, limit=None, verbose=True):
         }))""")
     passing = []
     for i, c in enumerate(cards):
-        priced = sum(1 for r in c["rows"] if "sells $" in r["price"])
+        priced = sum(1 for r in c["rows"] if "worth $" in r["price"])
         bad = [r["name"] for r in c["rows"]
                if r["vin"] and RISKY_VIN_PART.search(r["name"])]
         nocost = [r["name"] for r in c["rows"] if "$" not in r["cost"]]
         if not bad and not nocost and priced >= 4:
-            # top resale high, e.g. 'sells $270–$700' -> 700
+            # top value high, e.g. 'worth $270–$700' -> 700
             highs = [int(m.group(1).replace(",", ""))
                      for r in c["rows"]
                      for m in [re.search(r"\$[\d,]+\u2013\$([\d,]+)", r["price"])]
@@ -317,7 +317,7 @@ def capture_card(page, card_index, filename):
     page.wait_for_timeout(400)
 
 def pro_shot(page):
-    # ---------- Shot 5: Pro state, expanded card with part resale values ----
+    # ---------- Shot 5: Pro state, expanded card with part values ----------
     setup_pro_live(page)
     passing = scan_candidates(page)
     if not passing:
