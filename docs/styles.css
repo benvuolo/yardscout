@@ -1861,3 +1861,99 @@
   border-radius: var(--radius-sm);
   padding-left: 0.4rem;
 }
+
+/* ===== PART-FIRST SEARCH ("I need a part") =====
+ * Industrial card above the Live grid. Mobile-first: single column at
+ * 360px, the grid widens on desktop. Confidence tiers are the headline —
+ * verified (green ledger ink) vs likely (muted), never an unqualified
+ * "fits". */
+.part-finder {
+  background: var(--surface);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius);
+  margin: 0.6rem 0;
+}
+.pf-head {
+  display: flex; align-items: center; gap: 0.6rem; width: 100%;
+  padding: 0.65rem 0.8rem; background: none; border: none; cursor: pointer;
+  text-align: left; color: var(--text); font-family: var(--font-ui);
+}
+.pf-head .ico { width: 18px; height: 18px; flex: none; color: var(--accent); }
+.pf-head-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
+.pf-head-text strong { font-size: 0.9rem; letter-spacing: 0.01em; }
+.pf-sub { font-size: 0.72rem; color: var(--text-dim); line-height: 1.45; }
+.pf-head .chev { color: var(--text-dim); transition: transform 0.18s; flex: none; }
+.pf-head[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.pf-body { padding: 0 0.8rem 0.8rem; border-top: 1px solid var(--border); }
+.pf-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 0.6rem;
+  padding-top: 0.7rem;
+}
+.pf-ctl { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+.pf-ctl label {
+  font-family: var(--font-mono); font-size: 0.625rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-dim);
+}
+.pf-ctl select, .pf-ctl .search-box { width: 100%; }
+.pf-ctl-part { grid-column: 1 / -1; }
+.pf-part-wrap { position: relative; }
+@media (min-width: 720px) {
+  .pf-grid { grid-template-columns: 2fr 0.8fr 1fr 1.2fr; }
+  .pf-ctl-part { grid-column: auto; }
+}
+.pf-engine {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;
+  margin-top: 0.65rem;
+}
+.pf-engine-label {
+  flex-basis: 100%; font-size: 0.75rem; color: var(--text-dim); line-height: 1.5;
+}
+.pf-chip {
+  background: var(--surface2); border: 1px solid var(--border-dark);
+  border-radius: 999px; padding: 0.35rem 0.8rem; font-size: 0.78rem;
+  color: var(--text); cursor: pointer; font-family: var(--font-ui);
+}
+.pf-chip.active { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+.pf-actions { display: flex; align-items: center; gap: 0.7rem; margin-top: 0.7rem; flex-wrap: wrap; }
+.pf-status { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
+.pf-results { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.45rem; }
+.pf-results-head {
+  font-size: 0.78rem; color: var(--text-dim); line-height: 1.55;
+  padding: 0.1rem 0.1rem 0.25rem;
+}
+.pf-results-head strong { color: var(--text); }
+.pf-caveat {
+  font-size: 0.72rem; color: var(--text-dim); line-height: 1.5;
+  background: var(--surface2); border-left: 2px solid var(--border-dark);
+  border-radius: var(--radius-sm); padding: 0.45rem 0.6rem;
+}
+.pf-row-card {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); padding: 0.55rem 0.65rem;
+  display: flex; flex-direction: column; gap: 0.22rem;
+}
+.pf-row-card.pf-verified { border-left: 3px solid var(--accent2); }
+.pf-row-card.pf-likely { border-left: 3px solid var(--border-dark); }
+.pf-car-line { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+.pf-car-name { font-weight: 600; font-size: 0.85rem; }
+.pf-tier {
+  font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.07em; border-radius: 2px;
+  padding: 0.12rem 0.4rem; white-space: nowrap;
+}
+.pf-tier-verified { background: var(--green-soft); color: var(--accent2); }
+.pf-tier-likely { background: var(--surface3); color: var(--text-dim); }
+.pf-meta { font-size: 0.72rem; color: var(--text-dim); line-height: 1.5; }
+.pf-meta .dist { color: var(--text); font-weight: 600; }
+.pf-value { font-size: 0.75rem; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: baseline; }
+.pf-yard-price { font-family: var(--font-mono); font-weight: 600; }
+.pf-ebay { color: var(--text-dim); }
+.pf-warn {
+  font-size: 0.7rem; color: var(--orange); line-height: 1.45;
+}
+.pf-note { font-size: 0.7rem; color: var(--text-dim); line-height: 1.45; }
+.pf-empty {
+  font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;
+  padding: 0.6rem 0.2rem;
+}
+.pf-more { font-size: 0.75rem; color: var(--text-dim); padding: 0.3rem 0.1rem; }

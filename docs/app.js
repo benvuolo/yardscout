@@ -483,6 +483,10 @@ function applyInventory(raw, { quiet = false } = {}) {
   annotateVinDuplicates(liveInventory);
   liveLoaded = true;
   updateCoverageCounts();
+  // Part-first pickers draw from the inventory; refresh them if the panel
+  // opened before the data arrived (function declarations hoist, so this
+  // forward reference is safe).
+  if (document.getElementById('pf-body').style.display !== 'none') pfPopulatePickers();
   _makeScopeKey = null;   // data changed — force the scoped rebuild
   refreshScopedInventory();
   populateWatchOptions();
@@ -3557,6 +3561,425 @@ compareInput.addEventListener('keydown', e => {
 });
 compareInput.addEventListener('blur', () => setTimeout(hideCompareSuggest, 150));
 document.getElementById('compare-go').addEventListener('click', resolveAndCompare);
+
+/* ===== PART-FIRST SEARCH ("I need an alternator") =====
+ * Inverts the Live grid: the user names a PART and THEIR car; we list every
+ * donor vehicle in range carrying a part that fits, each row wearing an
+ * honest confidence tier:
+ *   "Verified fit"  — the family's part application was cross-checked against
+ *                     public part-number fitment data (research notes in the
+ *                     repo), AND this donor's engine is confirmed (VIN decode
+ *                     or the model only ever came with the family engine).
+ *   "Likely fit"    — same engine family / same generation, so it very likely
+ *                     carries over — but either the application or this
+ *                     donor's engine wasn't individually verified. The row
+ *                     says what's missing. NEVER an unqualified "fits".
+ * Data: docs/data/interchange.json (engine families + platform groups built
+ * by the scraper), plus each donor's own part rows for generation windows.
+ * Free vs Pro: search is free inside the free radius; the existing gates
+ * (distance cap, blurred eBay values) apply unchanged. */
+let interchangeData = null;
+let _interchangeFetch = null;
+function loadInterchange() {
+  if (interchangeData) return Promise.resolve(interchangeData);
+  if (!_interchangeFetch) {
+    _interchangeFetch = fetch(DATA_BASE + 'data/interchange.json')
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { interchangeData = d; return d; })
+      .catch(() => null);
+  }
+  return _interchangeFetch;
+}
+
+/* Mirrors the scraper's _squash_model: lowercase alphanumerics, leading make
+ * token dropped, trailing "pickup" dropped when something remains. */
+function pfSquash(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+function pfSquashModel(model, make) {
+  let sm = pfSquash(model);
+  const mk = pfSquash(make);
+  if (mk && sm.startsWith(mk) && sm.length > mk.length) sm = sm.slice(mk.length);
+  if (sm.endsWith('pickup') && sm.length > 'pickup'.length) sm = sm.slice(0, -'pickup'.length);
+  return sm;
+}
+/* app = [make, model, yrLo, yrHi, sole, ambigNote] (engine families) or
+ * [make, model, yrLo, yrHi] (platform groups). Model may end in "*". */
+function pfAppMatches(app, year, make, model) {
+  if (!(app[2] <= year && year <= app[3])) return false;
+  const mk = String(make || '').toLowerCase();
+  if (!app[0].toLowerCase().split('|').includes(mk)) return false;
+  const sm = pfSquashModel(model, make);
+  const prefix = app[1].endsWith('*');
+  const am = pfSquash(prefix ? app[1].slice(0, -1) : app[1]);
+  return prefix ? sm.startsWith(am) : sm === am;
+}
+function pfParseEngine(s) {
+  if (!s) return { l: null, cyl: null };
+  const sl = String(s).toLowerCase();
+  const lm = sl.match(/(\d+\.\d+)\s*l/);
+  const cm = sl.match(/(\d+)[\s-]*cyl/);
+  return { l: lm ? parseFloat(lm[1]) : null, cyl: cm ? parseInt(cm[1], 10) : null };
+}
+/* true = decode confirms the family engine; false = denies; null = no data. */
+function pfEngineVerdict(engineStr, fam) {
+  if (engineStr && /diesel/i.test(engineStr)) return false;
+  const { l, cyl } = pfParseEngine(engineStr);
+  if (l == null) return null;
+  if (!fam.liters.some(want => Math.abs(l - want) < 0.05)) return false;
+  if (cyl != null && fam.cyl != null && cyl !== fam.cyl) return false;
+  return true;
+}
+/* "2004–2008" (part-row fits provenance) -> [2004, 2008] or null. */
+function pfParseFits(fits) {
+  const m = String(fits || '').match(/(\d{4})\s*[–-]\s*(\d{4})/);
+  return m ? [parseInt(m[1], 10), parseInt(m[2], 10)] : null;
+}
+function pfPartRow(v, cat) {
+  for (const p of v.topParts || []) {
+    const nl = p.name.toLowerCase();
+    if (cat.tokens.some(t => nl.includes(t))) return p;
+  }
+  return null;
+}
+function pfDateLabel(dateAdded) {
+  const d = new Date(String(dateAdded || '').slice(0, 10) + 'T12:00:00');
+  return isNaN(d) ? '' : d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+
+let pfCat = null;        // chosen category object
+let pfChosenFam = null;  // chosen engine family id when the model had several
+
+function pfSaveState() {
+  try {
+    localStorage.setItem('jh_pf', JSON.stringify({
+      cat: pfCat ? pfCat.id : '', year: document.getElementById('pf-year').value,
+      make: document.getElementById('pf-make').value,
+      model: document.getElementById('pf-model').value,
+    }));
+  } catch (e) { /* storage full/blocked — state restore is a nicety */ }
+}
+
+/* Pickers: makes/models come from the live inventory UNSCOPED (your car is
+ * wherever you are), merged with the interchange table's own applications so
+ * a car no yard currently has (e.g. MR2 Spyder) is still pickable. */
+function pfPopulatePickers() {
+  const ySel = document.getElementById('pf-year');
+  if (!ySel.options.length) {
+    const now = new Date().getFullYear() + 1;
+    ySel.innerHTML = '<option value="">Year</option>' + Array.from(
+      { length: now - 1979 }, (_, i) => `<option>${now - i}</option>`).join('');
+  }
+  const mSel = document.getElementById('pf-make');
+  const prev = mSel.value;
+  const makes = new Set();
+  for (const v of liveInventory) {
+    if (v.make && !JUNK_MAKES.has(v.make.toLowerCase())) makes.add(canonicalMake(v.make));
+  }
+  if (interchangeData) {
+    for (const f of interchangeData.engineFamilies) {
+      for (const a of f.apps) a[0].split('|').forEach(mk => makes.add(mk));
+    }
+  }
+  mSel.innerHTML = '<option value="">Make</option>' +
+    [...makes].sort().map(m => `<option>${escapeHtml(m)}</option>`).join('');
+  if (prev && makes.has(prev)) mSel.value = prev;
+  pfPopulateModels();
+}
+function pfPopulateModels() {
+  const make = document.getElementById('pf-make').value;
+  const mSel = document.getElementById('pf-model');
+  const prev = mSel.value;
+  if (!make) {
+    mSel.innerHTML = '<option value="">Model</option>';
+    mSel.disabled = true;
+    return;
+  }
+  const models = new Map(); // squashed -> display
+  for (const v of liveInventory) {
+    if (canonicalMake(v.make) !== make || !v.model) continue;
+    const disp = canonicalModel(v.make, v.model);
+    const key = pfSquashModel(disp, make);
+    if (key && !models.has(key)) models.set(key, disp);
+  }
+  if (interchangeData) {
+    const pools = [...interchangeData.engineFamilies,
+                   ...interchangeData.platformGroups.map(g => ({ apps: g.apps }))];
+    for (const f of pools) {
+      for (const a of f.apps) {
+        if (!a[0].split('|').includes(make) || a[1].endsWith('*')) continue;
+        const key = pfSquash(a[1]);
+        if (key && !models.has(key)) models.set(key, a[1]);
+      }
+    }
+  }
+  mSel.innerHTML = '<option value="">Model</option>' +
+    [...models.values()].sort((a, b) => a.localeCompare(b))
+      .map(m => `<option>${escapeHtml(m)}</option>`).join('');
+  mSel.disabled = false;
+  if (prev && [...models.values()].includes(prev)) mSel.value = prev;
+}
+
+/* Part combobox: tap-to-browse the full category list, type to narrow —
+ * same pattern as the price-compare input. */
+const pfPartInput = document.getElementById('pf-part');
+const pfPartSuggest = document.getElementById('pf-part-suggest');
+function pfRenderPartSuggest() {
+  if (!interchangeData) return;
+  const q = pfPartInput.value.trim().toLowerCase();
+  const cats = interchangeData.categories.filter(c =>
+    !q || c.label.toLowerCase().includes(q) || c.tokens.some(t => t.includes(q)));
+  pfPartSuggest.innerHTML = cats.length
+    ? cats.map(c => `<div class="compare-suggest-item" role="option" data-cat="${c.id}">
+        <span>${escapeHtml(c.label)}</span>
+        <span class="csi-count">${c.kind === 'engine' ? 'engine-driven' : 'body / interior'}</span>
+      </div>`).join('')
+    : '<div class="compare-suggest-empty">No matching part — interchange currently covers the parts in this list. More families land as they\u2019re verified.</div>';
+  pfPartSuggest.style.display = '';
+  pfPartInput.setAttribute('aria-expanded', 'true');
+}
+function pfHidePartSuggest() {
+  pfPartSuggest.style.display = 'none';
+  pfPartInput.setAttribute('aria-expanded', 'false');
+}
+pfPartInput.addEventListener('focus', () => { loadInterchange().then(pfRenderPartSuggest); });
+pfPartInput.addEventListener('input', () => {
+  pfCat = null;  // typed text invalidates the picked category until re-chosen
+  pfRenderPartSuggest();
+});
+pfPartInput.addEventListener('blur', () => setTimeout(pfHidePartSuggest, 150));
+pfPartSuggest.addEventListener('mousedown', e => {
+  const item = e.target.closest('.compare-suggest-item');
+  if (!item) return;
+  e.preventDefault();
+  pfCat = interchangeData.categories.find(c => c.id === item.dataset.cat) || null;
+  pfPartInput.value = pfCat ? pfCat.label : '';
+  pfChosenFam = null;
+  pfHidePartSuggest();
+  pfMaybeSearch();
+});
+
+/* Engine-family chooser chips: a model that offered several family engines
+ * in that year can't be guessed at — the seeker tells us which engine. */
+function pfRenderEngineChips(fams) {
+  const wrap = document.getElementById('pf-engine');
+  if (!fams || fams.length <= 1) {
+    wrap.style.display = 'none';
+    wrap.innerHTML = '';
+    return;
+  }
+  wrap.style.display = '';
+  // The escape hatch matters as much as the chips: these are only the
+  // engines we have interchange data FOR — a model could carry an engine we
+  // don't cover yet (e.g. a 2005 Camry 3.0 V6). Picking the wrong family
+  // sends someone on a wasted drive, so "not listed" is always offered.
+  wrap.innerHTML =
+    '<span class="pf-engine-label">This model came with more than one engine — which one is in YOUR car? (Check the emissions sticker or engine cover; guessing wrong wastes the drive.)</span>'
+    + fams.map(f => `<button type="button" class="pf-chip ${pfChosenFam === f.id ? 'active' : ''}" data-fam="${f.id}">${escapeHtml(f.label)}</button>`).join('')
+    + `<button type="button" class="pf-chip ${pfChosenFam === '__none__' ? 'active' : ''}" data-fam="__none__">My engine isn\u2019t listed</button>`;
+}
+document.getElementById('pf-engine').addEventListener('click', e => {
+  const chip = e.target.closest('.pf-chip');
+  if (!chip) return;
+  pfChosenFam = chip.dataset.fam;
+  pfRunSearch();
+});
+
+function pfSeeker() {
+  return {
+    year: parseInt(document.getElementById('pf-year').value, 10) || 0,
+    make: document.getElementById('pf-make').value,
+    model: document.getElementById('pf-model').value,
+  };
+}
+function pfMaybeSearch() {
+  const s = pfSeeker();
+  if (pfCat && s.year && s.make && s.model) pfRunSearch();
+}
+
+function pfTierChip(tier) {
+  return tier === 'verified'
+    ? '<span class="pf-tier pf-tier-verified" title="This part application was cross-checked against public part-number fitment data, and this donor\u2019s engine is confirmed. Still match the part number at the yard.">Verified fit</span>'
+    : '<span class="pf-tier pf-tier-likely" title="Same engine family / same generation, so it very likely fits — but this exact pairing wasn\u2019t individually verified. Verify the part number before driving out.">Likely fit &mdash; verify part #</span>';
+}
+
+function pfRunSearch() {
+  const out = document.getElementById('pf-results');
+  const status = document.getElementById('pf-status');
+  const s = pfSeeker();
+  if (!pfCat) { status.textContent = 'Pick a part first.'; return; }
+  if (!s.year || !s.make || !s.model) { status.textContent = 'Tell us your car — year, make, model.'; return; }
+  if (!activeZipCoords) {
+    out.innerHTML = '<div class="pf-empty">Set a zip code (or use your location) up top so we know which yards are near you — distances drive this whole list.</div>';
+    return;
+  }
+  if (!interchangeData) { loadInterchange().then(() => pfRunSearch()); return; }
+  status.textContent = '';
+  track('part-first-search');
+  pfSaveState();
+
+  const radius = effectiveRadiusMi();
+  const results = new Map();  // vehicle id -> result row (verified wins)
+  let famNote = '';
+  let groupNotes = [];
+
+  if (pfCat.kind === 'engine') {
+    // A family offers the part to this seeker only when the part's own
+    // (possibly narrower) researched year window also covers the seeker —
+    // e.g. the 1MZ alternator claim is 97–03 even though the engine ran
+    // 94–06. Outside the window we'd be guessing; we don't.
+    const partOk = f => {
+      const p = f.parts[pfCat.id];
+      return p && (!p.years || (s.year >= p.years[0] && s.year <= p.years[1]));
+    };
+    const fams = interchangeData.engineFamilies.filter(f =>
+      partOk(f) && f.apps.some(a => pfAppMatches(a, s.year, s.make, s.model)));
+    pfRenderEngineChips(fams);
+    if (!fams.length) {
+      out.innerHTML = `<div class="pf-empty">No interchange data yet for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())}. We only list fits we can stand behind — this car's engine family isn't in the verified table yet, so we'd rather show nothing than guess.</div>`;
+      return;
+    }
+    if (pfChosenFam === '__none__') {
+      out.innerHTML = `<div class="pf-empty">We don't have interchange data for your engine yet — only the engines listed above are in the verified table. We'd rather show nothing than guess a fit that wastes your drive.</div>`;
+      return;
+    }
+    let fam = fams.length === 1 ? fams[0] : fams.find(f => f.id === pfChosenFam);
+    if (!fam) {
+      out.innerHTML = '<div class="pf-empty">Pick your engine above and we\u2019ll list the donors.</div>';
+      return;
+    }
+    pfChosenFam = fam.id;
+    pfRenderEngineChips(fams);  // repaint active state
+    const part = fam.parts[pfCat.id];
+    famNote = `${fam.label} — ${part.note}`;
+    const seekerApp = fam.apps.find(a => pfAppMatches(a, s.year, s.make, s.model));
+    const seekerAmbig = seekerApp && seekerApp[5];
+    if (seekerAmbig) groupNotes.push('Your car: ' + seekerAmbig);
+    for (const v of liveInventory) {
+      if (part.years && (v.year < part.years[0] || v.year > part.years[1])) continue;
+      const app = fam.apps.find(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model));
+      if (!app) continue;
+      const d = vehicleDistanceMi(v);
+      if (radius && (d == null || d > radius)) continue;
+      const ex = extrasFor(v);
+      const verdict = pfEngineVerdict(ex ? ex[2] : '', fam);
+      if (verdict === false) continue;  // decode says a different engine — out
+      const engineOk = verdict === true || (verdict === null && !!app[4] && !app[5]);
+      const warns = [];
+      if (!engineOk) {
+        warns.push(`engine not confirmed — this ${escapeHtml(v.model)} also came with other engines; check under the hood before pulling`);
+      }
+      if (app[5]) warns.push(escapeHtml(app[5]));
+      const tier = part.tier === 'verified' && engineOk && !app[5] ? 'verified' : 'likely';
+      results.set(v.id, { v, d, tier, warns });
+    }
+  } else {
+    pfRenderEngineChips(null);
+    // Verified cross-model groups (hand-curated platform families).
+    for (const g of interchangeData.platformGroups) {
+      if (g.cat !== pfCat.id) continue;
+      if (!g.apps.some(a => pfAppMatches(a, s.year, s.make, s.model))) continue;
+      groupNotes.push(`${g.label}: ${g.note}`);
+      for (const v of liveInventory) {
+        if (!g.apps.some(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model))) continue;
+        const d = vehicleDistanceMi(v);
+        if (radius && (d == null || d > radius)) continue;
+        results.set(v.id, { v, d, tier: 'verified', warns: [escapeHtml(g.note)] });
+      }
+    }
+    // Same model, same generation window — the donor's own part row says
+    // which years it fits; the seeker's year must sit inside it.
+    const sKey = pfSquashModel(s.model, s.make);
+    for (const v of liveInventory) {
+      if (results.has(v.id)) continue;  // verified group row already won
+      if (canonicalMake(v.make) !== s.make) continue;
+      if (pfSquashModel(canonicalModel(v.make, v.model), v.make) !== sKey) continue;
+      const row = pfPartRow(v, pfCat);
+      if (!row) continue;
+      const win = pfParseFits(row.fits);
+      if (!win || s.year < win[0] || s.year > win[1]) continue;
+      const d = vehicleDistanceMi(v);
+      if (radius && (d == null || d > radius)) continue;
+      results.set(v.id, {
+        v, d, tier: 'likely',
+        warns: [`same ${escapeHtml(s.make)} ${escapeHtml(s.model)} generation (${row.fits}) — trim and options still vary, verify part number`],
+      });
+    }
+    if (!groupNotes.length) famNote = 'Same-generation donors of your own model' + (pfCat ? ` — ${pfCat.label.toLowerCase()}s rarely cross model lines without a verified platform group` : '');
+  }
+
+  const rows = [...results.values()].sort((a, b) =>
+    (a.d ?? 1e9) - (b.d ?? 1e9)
+    || (a.tier === b.tier ? 0 : a.tier === 'verified' ? -1 : 1));
+  const nVer = rows.filter(r => r.tier === 'verified').length;
+  if (!rows.length) {
+    out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly — add a watch on the Alerts tab, or widen the radius.</div>`;
+    return;
+  }
+  const CAP = 120;
+  const unlocked = isPro();
+  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &middot; ${nVer} verified, ${rows.length - nVer} likely &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>`
+    + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
+    + groupNotes.map(n => `<div class="pf-caveat">${n}</div>`).join('');
+  out.innerHTML = head + rows.slice(0, CAP).map(r => {
+    const v = r.v;
+    const quote = yardPartQuote(v.location, pfCat.priceTokens.map(t => t.toLowerCase()));
+    const priceHtml = quote.status === 'priced'
+      ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard's own published price list">$${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+      : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
+    const partRow = pfPartRow(v, pfCat);
+    const ebayHtml = partRow
+      ? (unlocked
+        ? `<span class="pf-ebay" title="Typical sold prices for working parts (eBay, national)">worth ${formatPrice(partRow.low)}&ndash;${formatPrice(partRow.high)}</span>`
+        : `<span class="pf-ebay locked-blur" role="button" onclick="openUpgradeSheet('pf-value')">worth ${LOCKED_PRICE_MASK}</span>`)
+      : '';
+    const dateLbl = pfDateLabel(v.dateAdded);
+    return `<div class="pf-row-card ${r.tier === 'verified' ? 'pf-verified' : 'pf-likely'}">
+      <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model)}</span>${pfTierChip(r.tier)}</div>
+      <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
+      <div class="pf-value">${priceHtml}${ebayHtml}</div>
+      ${r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
+    </div>`;
+  }).join('') + (rows.length > CAP
+    ? `<div class="pf-more">Showing the ${CAP} nearest of ${rows.length.toLocaleString()} donors — tighten the radius to narrow.</div>`
+    : '');
+}
+
+document.getElementById('pf-go').addEventListener('click', pfRunSearch);
+['pf-year', 'pf-make', 'pf-model'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => {
+    if (id === 'pf-make') pfPopulateModels();
+    pfChosenFam = null;
+    pfMaybeSearch();
+  });
+});
+document.getElementById('pf-toggle').addEventListener('click', () => {
+  const body = document.getElementById('pf-body');
+  const btn = document.getElementById('pf-toggle');
+  const opening = body.style.display === 'none';
+  body.style.display = opening ? '' : 'none';
+  btn.setAttribute('aria-expanded', opening ? 'true' : 'false');
+  localStorage.setItem('jh_pf_open', opening ? '1' : '0');
+  if (opening) {
+    track('part-finder-open');
+    loadInterchange().then(() => {
+      pfPopulatePickers();
+      // Restore the last search so a returning user is one tap from results.
+      try {
+        const saved = JSON.parse(localStorage.getItem('jh_pf') || 'null');
+        if (saved && !pfCat) {
+          const cat = (interchangeData ? interchangeData.categories : []).find(c => c.id === saved.cat);
+          if (cat) { pfCat = cat; pfPartInput.value = cat.label; }
+          if (saved.year) document.getElementById('pf-year').value = saved.year;
+          if (saved.make) { document.getElementById('pf-make').value = saved.make; pfPopulateModels(); }
+          if (saved.model) document.getElementById('pf-model').value = saved.model;
+        }
+      } catch (e) { /* corrupt saved state — start clean */ }
+    });
+  }
+});
+if (localStorage.getItem('jh_pf_open') === '1') {
+  // Re-open on load for users who had it open; data loads lazily as above.
+  document.getElementById('pf-toggle').click();
+}
 document.getElementById('yards-filter-chain').addEventListener('change', renderYards);
 document.getElementById('yards-filter-state').addEventListener('change', renderYards);
 
