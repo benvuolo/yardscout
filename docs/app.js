@@ -2186,8 +2186,8 @@ document.getElementById('live-sort').addEventListener('change', e => {
   renderLive();
 });
 /* Self-heal, same pattern as the jh_sort restore above: a browser's form
- * restore (or an old WebView's saved state) can re-select the removed
- * 'valuable parts' option, leaving the select with no valid choice and the
+ * restore (or an old WebView's saved state) can re-select a match option
+ * that no longer exists, leaving the select with no valid choice and the
  * grid filtered by nothing the UI can show. Snap back to All cars. */
 (() => {
   const sel = document.getElementById('live-filter-match');
