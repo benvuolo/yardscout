@@ -9,5 +9,18 @@
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "io.yardscout.app",
+      "url": "https://play.google.com/store/apps/details?id=io.yardscout.app"
+    },
+    {
+      "platform": "itunes",
+      "id": "6817126581",
+      "url": "https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581"
+    }
   ]
 }
