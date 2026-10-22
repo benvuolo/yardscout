@@ -6049,8 +6049,11 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Lexus", "RX 300", 1999, 2003, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "V6 (1MZ) Denso unit, 97+ — match plug & amps (100A vs 130A tow pkg)"},
+            # Window mirrors the hand-researched platform family above:
+            # Hollander 601-58691 crosses the 97+ Denso unit; earlier 1MZ
+            # cars used a different alternator, and the 04+ 3MZ plug differs.
+            "alternator": {"tier": "likely", "years": (1997, 2003),
+                           "note": "V6 (1MZ) Denso unit, 97–03 window — match plug & amps (100A vs 130A tow pkg)"},
             "starter": {"tier": "likely", "note": _STR_NOTE},
         },
     },
@@ -7127,12 +7130,22 @@ def _app_flags(app: tuple) -> dict:
     return app[4] if len(app) > 4 else {}
 
 
-def engine_families_for(year: int, make: str, model: str) -> list[tuple[str, dict, tuple]]:
+def engine_families_for(year: int, make: str, model: str,
+                        part: str | None = None) -> list[tuple[str, dict, tuple]]:
     """All (family_id, family, matching app) for a seeker's car. More than one
     result means the model offered several family engines in that year — the
-    UI must ask which engine the seeker has."""
+    UI must ask which engine the seeker has. With `part`, families that don't
+    offer the part for the seeker's year (missing, or outside the part's own
+    researched window) are dropped — the same rule the client applies."""
     out = []
     for fam_id, fam in ENGINE_FAMILIES.items():
+        if part is not None:
+            p = fam["parts"].get(part)
+            if p is None:
+                continue
+            yrs = p.get("years")
+            if yrs is not None and not (yrs[0] <= year <= yrs[1]):
+                continue
         for app in fam["apps"]:
             if _app_matches(app, year, make, model):
                 out.append((fam_id, fam, app))
@@ -7196,6 +7209,10 @@ def _lint_engine_families() -> list[str]:
             if p.get("tier") == "verified" and len(p.get("evidence", "")) < 20:
                 problems.append(
                     f"{fam_id}: {cat} verified without evidence citation")
+            yrs = p.get("years")
+            if yrs is not None and not (
+                    len(yrs) == 2 and 1950 <= yrs[0] <= yrs[1] <= 2027):
+                problems.append(f"{fam_id}: {cat} bad part window {yrs!r}")
     return problems
 
 
@@ -7266,7 +7283,8 @@ def build_interchange_payload() -> dict:
                 for a in fam["apps"]
             ],
             "parts": {
-                cat: {"tier": p["tier"], "note": p["note"]}
+                cat: {"tier": p["tier"], "note": p["note"],
+                      **({"years": list(p["years"])} if p.get("years") else {})}
                 for cat, p in fam["parts"].items()
             },
         })
