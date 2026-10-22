@@ -626,15 +626,15 @@
     {
       "name": "Chesterfield Auto Parts",
       "status": "adapter-built",
-      "platform": "asp.net-core (token-gated search + tokenless newest-cars page)",
+      "platform": "VinPlus multi-tenant React SPA (vinplus.texnrewards.com) over unauthenticated Cloud Run JSON API; source system yardsmart",
       "inventory_url": "https://chesterfieldauto.com/search-our-inventory-by-location",
       "api": {
-        "endpoint": "https://chesterfieldauto.com/search-our-inventory-by-location (full) + /newest-cars (incremental)",
-        "method": "GET+POST",
-        "auth": "__RequestVerificationToken + cookie scraped per make page (full search only; /newest-cars is tokenless)",
-        "format": "html",
-        "requests_per_scan": "incremental: 1 (/newest-cars, ~120 newest arrivals chain-wide); weekly full: ~74 make GETs + ~900 make-x-model POSTs at 2s \u2248 80 min measured",
-        "notes": "Full search requires SelectedMake.Id + BasicSearch.ModelId (REQUIRED - 0 returns nothing) + BeginYear=1900/EndYear=2030; model ids are server-rendered per make page. Results columns: Store, Make, Model, Year, Color, Body, Engine, Yard Row, Set date (M/D/YYYY). No VIN/stock - ids are stable hashes of the identifying fields (chesterfield-{sha1-12}, ordinal dupe suffixes). HYBRID SCAN: the ~80 min make-x-model loop is too slow for every-6h scans, so normal scans merge /newest-cars into the previous result set persisted in docs/data/chesterfield_inventory.json (committed by the scan workflow with the rest of docs/data/); a full refresh runs when JUNKYARD_CHESTERFIELD_FULL=1 or the cache's last_full stamp exceeds 6.5 days (\u2248 weekly). Cars crushed mid-week linger until that refresh. Store names map Richmond / Southside (Midlothian, Genito Rd) / Fort Lee (Prince George, Puddledock Rd). Chain-wide price list at /price-list (~540 parts) -> chesterfield_pricing.json."
+        "endpoint": "https://inventory-search-api-581547763015.us-central1.run.app/searchVehicleHttp",
+        "method": "POST",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": "~147+ (49 makes x 3 locations + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
+        "notes": "MIGRATED 2026-10-22 from the retired ASP.NET hybrid adapter (weekly ~80-min token-gated make-x-model crawl + /newest-cars incremental merges persisted in docs/data/chesterfield_inventory.json). Shared fetch_vinplus_inventory adapter, tenant yard_id=chesterfield_auto_parts, location_ids richmond/southside/fort_lee. The API serves MORE than the crawl did: full 17-char VINs (99.5% of rows), real chain-unique stock numbers (ids are now chesterfield-{stock}; the crawl had neither - ids were field hashes), engine strings, and no weekly staleness window. Cutover verification: API 2,240 rows vs 2,486 cached crawl rows, 1,982 tuple-matched on (store, year, make, model, row) - the crawl surplus was stale rows from the 10-17 full crawl. Chain-wide price list still scraped from chesterfieldauto.com/price-list (~540 parts) -> chesterfield_pricing.json."
       },
       "update_freshness": "live (newest-cars shows same-day Set dates)",
       "robots": "all allowed except /cgi-bin/",
@@ -661,7 +661,8 @@
           "lat": 37.2465,
           "lng": -77.3674
         }
-      ]
+      ],
+      "vinplus_spa_url": "https://vinplus.texnrewards.com/chesterfield-auto-parts"
     },
     {
       "name": "iPull-uPull",

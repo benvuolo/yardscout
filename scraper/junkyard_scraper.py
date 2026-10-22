@@ -7798,217 +7798,20 @@ def refresh_partsgalore_pricing_file() -> Path:
 
 # Chesterfield Auto Parts (chesterfieldauto.com) — 3-yard chain, Richmond
 # metro VA: Richmond (5111 Old Midlothian Tpke), Southside (12910 Genito Rd,
-# Midlothian) and Fort Lee (4855 Puddledock Rd, Prince George). ASP.NET site:
-# the full search needs a __RequestVerificationToken + cookie scraped per
-# make page, then one POST per make×model (BasicSearch.ModelId is REQUIRED —
-# 0 returns nothing), ~74 makes / ~900 models at 2s pacing ≈ 80 min measured. That's
-# too slow for every-6h scans, so this adapter is HYBRID:
-#   - normal scans GET /newest-cars (no token; ~120 newest arrivals across
-#     all 3 stores) and merge into the previous scan's rows persisted in
-#     docs/data/chesterfield_inventory.json — the scan workflow already
-#     commits docs/data/ every run, so the cache travels with the repo and CI
-#     never needs a cold-start full crawl;
-#   - a FULL make×model refresh runs when JUNKYARD_CHESTERFIELD_FULL=1, when
-#     the cache is missing/unreadable, or when the cache's last_full stamp is
-#     older than 6.5 days (≈ weekly on the every-6h schedule). Cars crushed
-#     mid-week linger in the data until that weekly refresh — acceptable
-#     staleness, documented in the registry.
-# Results columns: Store, Make, Model, Year, Color, Body, Engine, Yard Row,
-# Set date (M/D/YYYY). No VIN or stock number — ids are stable hashes of the
-# identifying fields with ordinal dupe suffixes (Indy convention). Chain-wide
-# price list at /price-list (~540 parts). robots.txt: all allowed except
-# /cgi-bin/.
+# Midlothian) and Fort Lee (4855 Puddledock Rd, Prince George).
+# MIGRATED TO THE VINPLUS API (2026-10-22): the old ASP.NET hybrid adapter
+# (weekly ~80-min token-gated make×model crawl + /newest-cars incremental
+# merges persisted in docs/data/chesterfield_inventory.json) is retired —
+# the chain is a VinPlus tenant (yard_id chesterfield_auto_parts, sourceSystem
+# yardsmart) and the API serves MORE than the crawl ever did: full 17-char
+# VINs (99.5% of rows), real chain-unique stock numbers (the crawl had
+# neither — ids were field hashes), engine strings, and no weekly staleness
+# window (crushed cars used to linger in the cache up to 6.5 days). Verified
+# before cutover: API 2,240 rows vs 2,486 cached crawl rows, 1,982
+# tuple-matched on (store, year, make, model, row) — the crawl surplus was
+# stale rows from the 10-17 full crawl. See VINPLUS_TENANTS. Only the price
+# list is still scraped from chesterfieldauto.com below.
 CHESTERFIELD_BASE = "https://chesterfieldauto.com"
-CHESTERFIELD_SEARCH_URL = CHESTERFIELD_BASE + "/search-our-inventory-by-location"
-CHESTERFIELD_NEWEST_URL = CHESTERFIELD_BASE + "/newest-cars"
-CHESTERFIELD_CACHE_FILE = DATA_DIR / "chesterfield_inventory.json"
-CHESTERFIELD_FULL_EVERY_SEC = 6.5 * 86400
-CHESTERFIELD_DELAY_SEC = 2.0
-CHESTERFIELD_STORES = {  # keyed by the results table's Store column
-    "Richmond": {"name": "Chesterfield Auto Parts - Richmond", "city": "Richmond",
-                 "state": "VA", "lat": 37.5067, "lng": -77.4912},
-    "Southside": {"name": "Chesterfield Auto Parts - Southside", "city": "Midlothian",
-                  "state": "VA", "lat": 37.4367, "lng": -77.6046},
-    "Fort Lee": {"name": "Chesterfield Auto Parts - Fort Lee", "city": "Prince George",
-                 "state": "VA", "lat": 37.2465, "lng": -77.3674},
-}
-_CHESTERFIELD_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
-_CHESTERFIELD_TOKEN_RE = re.compile(
-    r'name="__RequestVerificationToken"[^>]*value="([^"]+)"')
-_CHESTERFIELD_MAKE_RE = re.compile(
-    r'name="SelectedMake"[^>]*>(.*?)</select>', re.S)
-_CHESTERFIELD_MODEL_RE = re.compile(
-    r'(?:name="BasicSearch\.ModelId"|id="selected-model")[^>]*>(.*?)</select>', re.S)
-_CHESTERFIELD_OPTION_RE = re.compile(r'<option[^>]*value="(\d+)"[^>]*>\s*([^<]+)')
-
-
-def _chesterfield_parse_rows(page: str) -> list[dict]:
-    """Parse the shared results-table shape (newest-cars AND search results):
-    Pics, Store, Make, Model, Year, Color, Body, Engine, Yard Row, Set."""
-    import html as html_mod
-    out = []
-    unknown_stores: set[str] = set()
-    for block in _CHESTERFIELD_ROW_RE.findall(page):
-        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
-                 for c in _FENIX_TD_RE.findall(block)]
-        if len(cells) < 10:
-            continue
-        _pics, store_s, make, model, year_s, color, body, engine, row_n, date_raw = cells[:10]
-        if not make or not model or store_s not in CHESTERFIELD_STORES:
-            if store_s and make and store_s not in CHESTERFIELD_STORES:
-                unknown_stores.add(store_s)
-            continue
-        store = CHESTERFIELD_STORES[store_s]
-        date_iso = ""
-        dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})$", date_raw)
-        if dm:
-            date_iso = f"{dm.group(3)}-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}"
-        try:
-            year_i = int(year_s)
-        except ValueError:
-            year_i = 0
-        base = (f"{store_s}|{make}|{model}|{year_s}|{color}|{body}|{engine}"
-                f"|{row_n}|{date_iso}").lower()
-        out.append({
-            "_hash": hashlib.sha1(base.encode()).hexdigest()[:12],
-            "vin": "",
-            "year": year_i,
-            "make": _utpap_format_label(make),
-            "model": _utpap_format_label(model),
-            "row": row_n,
-            "dateAdded": date_iso,
-            "_color": color.title(),
-            "_location": store["name"],
-            "_city": store["city"],
-            "_state": store["state"],
-            "_lat": store["lat"],
-            "_lng": store["lng"],
-            "_source": "chesterfield",
-        })
-    if unknown_stores:
-        print(f"  [Chesterfield] skipped rows from unmapped store(s): "
-              f"{sorted(unknown_stores)} — update CHESTERFIELD_STORES/registry",
-              file=sys.stderr)
-    # Stable ids: hash of identifying fields + ordinal suffix for exact dupes.
-    dupes: dict[str, int] = {}
-    for v in out:
-        h = v.pop("_hash")
-        dupes[h] = dupes.get(h, 0) + 1
-        v["id"] = f"chesterfield-{h}" if dupes[h] == 1 else f"chesterfield-{h}-{dupes[h]}"
-    return out
-
-
-def _chesterfield_full_scan() -> list[dict]:
-    """Weekly full crawl: per-make GET (token + server-rendered model list),
-    then one search POST per make×model, 2s apart (~80 min measured)."""
-    session = requests.Session()
-    try:
-        r = session.get(CHESTERFIELD_SEARCH_URL,
-                        headers={**HEADERS, "Accept": "text/html"}, timeout=60)
-        r.raise_for_status()
-        mk = _CHESTERFIELD_MAKE_RE.search(r.text)
-        makes = [(mid, name.strip()) for mid, name in
-                 _CHESTERFIELD_OPTION_RE.findall(mk.group(1))] if mk else []
-        makes = [(mid, name) for mid, name in makes if mid != "0"]
-    except Exception as e:
-        print(f"  [Chesterfield] make-list fetch failed: {e}", file=sys.stderr)
-        return []
-    if not makes:
-        print("  [Chesterfield] no makes parsed — site layout changed?", file=sys.stderr)
-        return []
-    rows: list[dict] = []
-    for make_id, make_name in makes:
-        time.sleep(CHESTERFIELD_DELAY_SEC)
-        try:
-            r = session.get(CHESTERFIELD_SEARCH_URL,
-                            params={"SelectedMake.Id": make_id},
-                            headers={**HEADERS, "Accept": "text/html"}, timeout=60)
-            r.raise_for_status()
-            tok = _CHESTERFIELD_TOKEN_RE.search(r.text)
-            mm = _CHESTERFIELD_MODEL_RE.search(r.text)
-            models = [(mid, name.strip()) for mid, name in
-                      _CHESTERFIELD_OPTION_RE.findall(mm.group(1))] if mm else []
-            models = [(mid, name) for mid, name in models if mid != "0"]
-        except Exception as e:
-            print(f"  [Chesterfield] make {make_name!r} page failed: {e}", file=sys.stderr)
-            continue
-        if not tok or not models:
-            continue
-        for model_id, _model_name in models:
-            time.sleep(CHESTERFIELD_DELAY_SEC)
-            try:
-                r = session.post(
-                    CHESTERFIELD_SEARCH_URL,
-                    data={"__RequestVerificationToken": tok.group(1),
-                          "SelectedMake.Id": make_id,
-                          "BasicSearch.ModelId": model_id,
-                          "BasicSearch.BeginYear": "1900",
-                          "BasicSearch.EndYear": "2030"},
-                    headers={**HEADERS, "Accept": "text/html",
-                             "Referer": CHESTERFIELD_SEARCH_URL},
-                    timeout=60,
-                )
-                r.raise_for_status()
-                rows.extend(_chesterfield_parse_rows(r.text))
-            except Exception as e:
-                print(f"  [Chesterfield] {make_name} model {model_id} search failed: {e}",
-                      file=sys.stderr)
-    return rows
-
-
-def fetch_chesterfield_inventory() -> list[dict]:
-    """Fetch Chesterfield Auto Parts (3 Richmond-metro yards) — hybrid: weekly
-    full make×model crawl, otherwise /newest-cars merged with the persisted
-    previous result set (docs/data/chesterfield_inventory.json)."""
-    cache: dict = {}
-    try:
-        cache = json.loads(CHESTERFIELD_CACHE_FILE.read_text())
-    except (OSError, ValueError):
-        pass
-    cached_vehicles = cache.get("vehicles") or []
-    last_full = cache.get("last_full") or ""
-    try:
-        last_full_age = time.time() - datetime.fromisoformat(last_full).timestamp()
-    except ValueError:
-        last_full_age = float("inf")
-    force = os.environ.get("JUNKYARD_CHESTERFIELD_FULL", "").strip().lower() in (
-        "1", "true", "yes")
-    do_full = force or not cached_vehicles or last_full_age > CHESTERFIELD_FULL_EVERY_SEC
-
-    if do_full:
-        print("  [Chesterfield] running FULL make×model crawl (~80 min, weekly)",
-              file=sys.stderr)
-        vehicles = _chesterfield_full_scan()
-        if not vehicles:  # upstream hiccup — keep last good data, retry next scan
-            print("  [Chesterfield] full crawl returned nothing — keeping cached rows",
-                  file=sys.stderr)
-            vehicles = list(cached_vehicles)
-        else:
-            cache = {"last_full": datetime.now(timezone.utc).isoformat(),
-                     "vehicles": vehicles}
-    else:
-        try:
-            r = requests.get(CHESTERFIELD_NEWEST_URL,
-                             headers={**HEADERS, "Accept": "text/html"}, timeout=60)
-            r.raise_for_status()
-            newest = _chesterfield_parse_rows(r.text)
-        except Exception as e:
-            print(f"  [Chesterfield] newest-cars fetch failed: {e}", file=sys.stderr)
-            newest = []
-        merged = {v["id"]: v for v in cached_vehicles}
-        for v in newest:
-            merged[v["id"]] = v
-        vehicles = list(merged.values())
-        cache["vehicles"] = vehicles
-        print(f"  [Chesterfield] incremental: {len(newest)} newest arrivals merged "
-              f"into {len(cached_vehicles)} cached rows", file=sys.stderr)
-    try:
-        CHESTERFIELD_CACHE_FILE.write_text(json.dumps(cache, separators=(",", ":")))
-    except OSError as e:
-        print(f"  [Chesterfield] cache write failed: {e}", file=sys.stderr)
-    print(f"  [Chesterfield] {len(vehicles)} vehicles across "
-          f"{len({v['_location'] for v in vehicles})} yards", file=sys.stderr)
-    return vehicles
 
 
 # Chesterfield publishes one chain-wide price list at /price-list — a clean
@@ -8683,6 +8486,21 @@ VINPLUS_TENANTS = {
     "pick_ur_part": {
         "": {"code": "pickurpart", "name": "Pick Ur Part Auto Salvage",
              "city": "Lubbock", "state": "TX", "lat": 33.5200, "lng": -101.7805},
+    },
+    # --- migrated from the retired ASP.NET hybrid adapter (2026-10-22) ---
+    # source stays "chesterfield" so the zero-vehicle alarm keeps its own
+    # label; id_prefix drops the location code because stock numbers are
+    # chain-unique (verified: 2,240 stocks, 2,240 unique).
+    "chesterfield_auto_parts": {
+        "richmond": {"code": "cfrichmond", "name": "Chesterfield Auto Parts - Richmond",
+                     "city": "Richmond", "state": "VA", "lat": 37.5067, "lng": -77.4912,
+                     "source": "chesterfield", "id_prefix": "chesterfield-"},
+        "southside": {"code": "cfsouthside", "name": "Chesterfield Auto Parts - Southside",
+                      "city": "Midlothian", "state": "VA", "lat": 37.4367, "lng": -77.6046,
+                      "source": "chesterfield", "id_prefix": "chesterfield-"},
+        "fort_lee": {"code": "cffortlee", "name": "Chesterfield Auto Parts - Fort Lee",
+                     "city": "Prince George", "state": "VA", "lat": 37.2465, "lng": -77.3674,
+                     "source": "chesterfield", "id_prefix": "chesterfield-"},
     },
 }
 
@@ -10180,7 +9998,6 @@ INDEPENDENT_FETCHERS: list = [
     ("Rupert's", fetch_ruperts_inventory),
     ("Pull-N-Save", fetch_pns_inventory),
     ("Parts Galore", fetch_partsgalore_inventory),
-    ("Chesterfield", fetch_chesterfield_inventory),
     ("Ace", fetch_ace_inventory),
     ("Sturtevant", fetch_sturtevant_inventory),
     ("iPull-uPull", fetch_ipull_inventory),
@@ -10203,7 +10020,7 @@ def fetch_independent_inventory() -> list[dict]:
     independents the dominant term in scan wall-clock (~3h of a ~3.2h scan)
     even though every adapter talks to a DIFFERENT host. Each adapter stays
     strictly sequential INSIDE (its per-host *_DELAY_SEC politeness is
-    untouched; VinPlus, the only adapter whose 9 yards share one API host,
+    untouched; VinPlus, the only adapter whose yards share one API host,
     was already serial internally), so no single yard's site ever sees
     concurrent requests from us — we only overlap waits across hosts.
     The old inter-adapter 2s courtesy sleeps were cross-host cadence and are
@@ -11681,7 +11498,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part), Pick-A-Part VA, U-Pick-It AZ, Go Pull-It FL/GA, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, Chesterfield Auto Parts), Pick-A-Part VA, U-Pick-It AZ, Go Pull-It FL/GA, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -11786,7 +11603,7 @@ def main():
         indep_fut = None
         indep_pool = None
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x13, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige, Budget) in the background, overlapped with the chain scans...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x16 incl. Chesterfield, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige, Budget) in the background, overlapped with the chain scans...", file=sys.stderr)
             indep_pool = concurrent.futures.ThreadPoolExecutor(
                 max_workers=1, thread_name_prefix="indep-main")
             indep_fut = indep_pool.submit(fetch_independent_inventory)
