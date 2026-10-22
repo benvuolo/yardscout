@@ -15,8 +15,11 @@ from playwright.async_api import async_playwright
 
 ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs")
 PORT = 8477
-BASE = f"http://127.0.0.1:{PORT}/index.html"
-SHOTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_app_promo_shots")
+# YS_BASE=https://yardscout.io/index.html runs the same suite against prod.
+BASE = os.environ.get("YS_BASE") or f"http://127.0.0.1:{PORT}/index.html"
+LOCAL = "127.0.0.1" in BASE
+SHOTS = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                     "_app_promo_shots" if LOCAL else "_app_promo_shots_prod")
 os.makedirs(SHOTS, exist_ok=True)
 
 IPHONE_UA = ("Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 "
@@ -121,11 +124,14 @@ async def main():
 
         await browser.close()
 
-handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=ROOT)
-httpd = http.server.ThreadingHTTPServer(("127.0.0.1", PORT), handler)
-threading.Thread(target=httpd.serve_forever, daemon=True).start()
+httpd = None
+if LOCAL:
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=ROOT)
+    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", PORT), handler)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
 asyncio.run(main())
-httpd.shutdown()
+if httpd:
+    httpd.shutdown()
 fails = [r for r in results if not r[1]]
 print(f"\n{len(results) - len(fails)}/{len(results)} passed")
 sys.exit(1 if fails else 0)
