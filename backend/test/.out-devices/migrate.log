@@ -1,0 +1,248 @@
+
+ ⛅️ wrangler 4.130.0
+────────────────────
+Resource location: local 
+
+Use --remote if you want to access the remote instance.
+
+Migrations to be applied:
+┌───────────────────────┐
+│ name                  │
+├───────────────────────┤
+│ 0001_init.sql         │
+├───────────────────────┤
+│ 0002_stripe.sql       │
+├───────────────────────┤
+│ 0003_waitlist.sql     │
+├───────────────────────┤
+│ 0004_alerts.sql       │
+├───────────────────────┤
+│ 0005_digest.sql       │
+├───────────────────────┤
+│ 0006_sale_events.sql  │
+├───────────────────────┤
+│ 0007_devices.sql      │
+├───────────────────────┤
+│ 0008_email_alerts.sql │
+├───────────────────────┤
+│ 0009_fcm_devices.sql  │
+└───────────────────────┘
+? About to apply 9 migration(s)
+Your database may not be available to serve requests during the migration, continue?
+🤖 Using fallback value in non-interactive context: yes
+🌀 Executing on local database yardscout-db (b81475d5-a998-4ede-8d43-b0932f8e236a) from ./test/.out-devices/wrangler-state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 9 commands executed successfully.
+┌───────────────────────┬────────┐
+│ name                  │ status │
+├───────────────────────┼────────┤
+│ 0001_init.sql         │ ✅     │
+├───────────────────────┼────────┤
+│ 0002_stripe.sql       │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0003_waitlist.sql     │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0004_alerts.sql       │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0005_digest.sql       │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0006_sale_events.sql  │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0007_devices.sql      │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0008_email_alerts.sql │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0009_fcm_devices.sql  │ 🕒️    │
+└───────────────────────┴────────┘
+🌀 Executing on local database yardscout-db (b81475d5-a998-4ede-8d43-b0932f8e236a) from ./test/.out-devices/wrangler-state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 3 commands executed successfully.
+┌───────────────────────┬────────┐
+│ name                  │ status │
+├───────────────────────┼────────┤
+│ 0001_init.sql         │ ✅     │
+├───────────────────────┼────────┤
+│ 0002_stripe.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0003_waitlist.sql     │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0004_alerts.sql       │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0005_digest.sql       │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0006_sale_events.sql  │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0007_devices.sql      │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0008_email_alerts.sql │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0009_fcm_devices.sql  │ 🕒️    │
+└───────────────────────┴────────┘
+🌀 Executing on local database yardscout-db (b81475d5-a998-4ede-8d43-b0932f8e236a) from ./test/.out-devices/wrangler-state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 2 commands executed successfully.
+┌───────────────────────┬────────┐
+│ name                  │ status │
+├───────────────────────┼────────┤
+│ 0001_init.sql         │ ✅     │
+├───────────────────────┼────────┤
+│ 0002_stripe.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0003_waitlist.sql     │ ✅     │
+├───────────────────────┼────────┤
+│ 0004_alerts.sql       │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0005_digest.sql       │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0006_sale_events.sql  │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0007_devices.sql      │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0008_email_alerts.sql │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0009_fcm_devices.sql  │ 🕒️    │
+└───────────────────────┴────────┘
+🌀 Executing on local database yardscout-db (b81475d5-a998-4ede-8d43-b0932f8e236a) from ./test/.out-devices/wrangler-state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 7 commands executed successfully.
+┌───────────────────────┬────────┐
+│ name                  │ status │
+├───────────────────────┼────────┤
+│ 0001_init.sql         │ ✅     │
+├───────────────────────┼────────┤
+│ 0002_stripe.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0003_waitlist.sql     │ ✅     │
+├───────────────────────┼────────┤
+│ 0004_alerts.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0005_digest.sql       │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0006_sale_events.sql  │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0007_devices.sql      │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0008_email_alerts.sql │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0009_fcm_devices.sql  │ 🕒️    │
+└───────────────────────┴────────┘
+🌀 Executing on local database yardscout-db (b81475d5-a998-4ede-8d43-b0932f8e236a) from ./test/.out-devices/wrangler-state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 3 commands executed successfully.
+┌───────────────────────┬────────┐
+│ name                  │ status │
+├───────────────────────┼────────┤
+│ 0001_init.sql         │ ✅     │
+├───────────────────────┼────────┤
+│ 0002_stripe.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0003_waitlist.sql     │ ✅     │
+├───────────────────────┼────────┤
+│ 0004_alerts.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0005_digest.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0006_sale_events.sql  │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0007_devices.sql      │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0008_email_alerts.sql │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0009_fcm_devices.sql  │ 🕒️    │
+└───────────────────────┴────────┘
+🌀 Executing on local database yardscout-db (b81475d5-a998-4ede-8d43-b0932f8e236a) from ./test/.out-devices/wrangler-state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 4 commands executed successfully.
+┌───────────────────────┬────────┐
+│ name                  │ status │
+├───────────────────────┼────────┤
+│ 0001_init.sql         │ ✅     │
+├───────────────────────┼────────┤
+│ 0002_stripe.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0003_waitlist.sql     │ ✅     │
+├───────────────────────┼────────┤
+│ 0004_alerts.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0005_digest.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0006_sale_events.sql  │ ✅     │
+├───────────────────────┼────────┤
+│ 0007_devices.sql      │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0008_email_alerts.sql │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0009_fcm_devices.sql  │ 🕒️    │
+└───────────────────────┴────────┘
+🌀 Executing on local database yardscout-db (b81475d5-a998-4ede-8d43-b0932f8e236a) from ./test/.out-devices/wrangler-state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 7 commands executed successfully.
+┌───────────────────────┬────────┐
+│ name                  │ status │
+├───────────────────────┼────────┤
+│ 0001_init.sql         │ ✅     │
+├───────────────────────┼────────┤
+│ 0002_stripe.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0003_waitlist.sql     │ ✅     │
+├───────────────────────┼────────┤
+│ 0004_alerts.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0005_digest.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0006_sale_events.sql  │ ✅     │
+├───────────────────────┼────────┤
+│ 0007_devices.sql      │ ✅     │
+├───────────────────────┼────────┤
+│ 0008_email_alerts.sql │ 🕒️    │
+├───────────────────────┼────────┤
+│ 0009_fcm_devices.sql  │ 🕒️    │
+└───────────────────────┴────────┘
+🌀 Executing on local database yardscout-db (b81475d5-a998-4ede-8d43-b0932f8e236a) from ./test/.out-devices/wrangler-state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 4 commands executed successfully.
+┌───────────────────────┬────────┐
+│ name                  │ status │
+├───────────────────────┼────────┤
+│ 0001_init.sql         │ ✅     │
+├───────────────────────┼────────┤
+│ 0002_stripe.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0003_waitlist.sql     │ ✅     │
+├───────────────────────┼────────┤
+│ 0004_alerts.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0005_digest.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0006_sale_events.sql  │ ✅     │
+├───────────────────────┼────────┤
+│ 0007_devices.sql      │ ✅     │
+├───────────────────────┼────────┤
+│ 0008_email_alerts.sql │ ✅     │
+├───────────────────────┼────────┤
+│ 0009_fcm_devices.sql  │ 🕒️    │
+└───────────────────────┴────────┘
+🌀 Executing on local database yardscout-db (b81475d5-a998-4ede-8d43-b0932f8e236a) from ./test/.out-devices/wrangler-state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 3 commands executed successfully.
+┌───────────────────────┬────────┐
+│ name                  │ status │
+├───────────────────────┼────────┤
+│ 0001_init.sql         │ ✅     │
+├───────────────────────┼────────┤
+│ 0002_stripe.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0003_waitlist.sql     │ ✅     │
+├───────────────────────┼────────┤
+│ 0004_alerts.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0005_digest.sql       │ ✅     │
+├───────────────────────┼────────┤
+│ 0006_sale_events.sql  │ ✅     │
+├───────────────────────┼────────┤
+│ 0007_devices.sql      │ ✅     │
+├───────────────────────┼────────┤
+│ 0008_email_alerts.sql │ ✅     │
+├───────────────────────┼────────┤
+│ 0009_fcm_devices.sql  │ ✅     │
+└───────────────────────┴────────┘

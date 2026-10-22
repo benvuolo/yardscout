@@ -1,0 +1,65 @@
+
+ ⛅️ wrangler 4.130.0 (update available 4.151.3)
+───────────────────────────────────────────────
+Using secrets defined in .dev.vars.e2e-devices
+Your Worker has access to the following bindings:
+Binding                                                                  Resource                  Mode
+env.ENTITLEMENTS (deb0d4c244fb4eb09a109050000d0e1b)                      KV Namespace              local
+env.DB (yardscout-db)                                                    D1 Database               local
+env.APP_ORIGINS ("https://yardscout.io,https://benvuolo...")             Environment Variable      local
+env.APP_URL ("https://yardscout.io/")                                    Environment Variable      local
+env.EMAIL_FROM ("YardScout <onboarding@resend.dev>")                     Environment Variable      local
+env.EMAIL_ALERTS_FROM ("YardScout Alerts <alerts@yardscout.io>")         Environment Variable      local
+env.API_PUBLIC_URL ("https://yardscout-api.yardscout.worke...")          Environment Variable      local
+env.DEV_MODE ("(hidden)")                                                Environment Variable      local
+env.VAPID_PUBLIC_KEY ("")                                                Environment Variable      local
+env.VAPID_SUBJECT ("mailto:change-me@example.com")                       Environment Variable      local
+env.APNS_TEAM_ID ("G23Z9MSBUG")                                          Environment Variable      local
+env.APNS_KEY_ID ("53ZHWL335J")                                           Environment Variable      local
+env.APNS_BUNDLE_ID ("com.benvuolo.yardscout")                            Environment Variable      local
+env.APNS_ENV ("production")                                              Environment Variable      local
+env.FCM_PROJECT_ID ("(hidden)")                                          Environment Variable      local
+env.FCM_SA_EMAIL ("(hidden)")                                            Environment Variable      local
+env.STRIPE_PRICE_PRO ("")                                                Environment Variable      local
+env.STRIPE_PRICE_PASS ("")                                               Environment Variable      local
+env.UPLOAD_TOKEN ("(hidden)")                                            Environment Variable      local
+env.ADMIN_SECRET ("(hidden)")                                            Environment Variable      local
+env.FCM_SA_KEY ("(hidden)")                                              Environment Variable      local
+env.FCM_TOKEN_URL_TEST ("(hidden)")                                      Environment Variable      local
+env.FCM_API_URL_TEST ("(hidden)")                                        Environment Variable      local
+
+⎔ Starting local server...
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mScheduled Workers are not automatically triggered during local development.[0m
+
+  To manually trigger a scheduled event, run:
+    curl "http://localhost:8794/cdn-cgi/local/scheduled"
+  For more details, see [4mhttps://developers.cloudflare.com/workers/configuration/cron-triggers/#test-cron-triggers-locally[0m
+
+
+[wrangler:info] Ready on http://localhost:8794
+[wrangler:info] GET /v1/health 200 OK (8ms)
+[wrangler:info] POST /v1/device/register 200 OK (7ms)
+[wrangler:info] POST /v1/device/register 200 OK (3ms)
+[wrangler:info] POST /v1/device/register 200 OK (2ms)
+[wrangler:info] POST /v1/device/register 200 OK (3ms)
+[wrangler:info] POST /v1/admin/inventory/commit 200 OK (4ms)
+alerts: 0 users notified, 0 sends
+email alerts: 0 users emailed, 0 attempts
+arrivals stored: 2
+device alerts: 1 devices pushed, 1 sends
+[wrangler:info] POST /v1/admin/inventory/commit 200 OK (5ms)
+alerts: 0 users notified, 0 sends
+device alerts: 0 devices pushed, 0 sends
+email alerts: 0 users emailed, 0 attempts
+arrivals stored: 1
+[wrangler:info] POST /v1/admin/device-digest/run 200 OK (15ms)
+[wrangler:info] POST /v1/admin/device-digest/run 200 OK (7ms)
+[wrangler:info] POST /v1/device/register 200 OK (9ms)
+[wrangler:info] POST /v1/device/test 200 OK (5ms)
+[wrangler:info] POST /v1/device/test 404 Not Found (3ms)
+[wrangler:info] POST /v1/device/test 200 OK (2ms)
+[wrangler:info] POST /v1/admin/device-alerts/dispatch 200 OK (4ms)
+[wrangler:info] POST /v1/admin/device-alerts/dispatch 200 OK (2ms)
+[wrangler:info] POST /v1/device/register 200 OK (3ms)
+[wrangler:info] POST /v1/device/test 404 Not Found (2ms)
+[wrangler:info] POST /v1/device/test 200 OK (2ms)
