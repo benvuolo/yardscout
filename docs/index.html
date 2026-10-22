@@ -216,14 +216,24 @@
   <!-- YARDS DIRECTORY TAB -->
   <div id="tab-yards" class="tab-content">
     <div class="stats-bar" id="yards-stats-bar"></div>
-    <div class="toolbar">
+    <div class="toolbar yards-toolbar">
       <input type="text" class="search-box" id="yards-search" placeholder="Search yard name, city, state&hellip;">
+      <select id="yards-filter-chain" title="Only show yards from this chain">
+        <option value="">All chains</option>
+      </select>
+      <select id="yards-filter-state" title="Only show yards in this state">
+        <option value="">All states</option>
+      </select>
     </div>
     <div class="price-compare-bar" id="price-compare-bar">
-      <input type="text" class="search-box" id="compare-input" placeholder="Compare a part price across yards &mdash; e.g. alternator">
+      <div class="compare-input-wrap">
+        <input type="text" class="search-box" id="compare-input" autocomplete="off"
+               placeholder="Compare a part price across the yards below &mdash; try alternator">
+        <div class="compare-suggest" id="compare-suggest" style="display:none;" role="listbox"></div>
+      </div>
       <button type="button" class="btn btn-primary" id="compare-go">Compare</button>
     </div>
-    <p class="yards-hint">Yards within your search radius, nearest first. Tap a yard to see its cars, or open its full price list &mdash; no need to dig through junkyard websites.</p>
+    <p class="yards-hint">Yards within your search radius, nearest first. Filter by chain or state, tap a yard to see its cars, or pick a part above to compare what the yards in view charge for it &mdash; prices from each yard's own published price list.</p>
     <div class="car-grid" id="yards-grid"></div>
   </div>
 
@@ -422,6 +432,11 @@
   <div class="toolbar" id="prices-search-wrap" style="margin-bottom:0.5rem;">
     <input type="text" class="search-box" id="prices-search" placeholder="Search parts&hellip;">
   </div>
+  <div class="prices-sort" id="prices-sort-wrap" style="display:none;">
+    <span class="prices-sort-label">Sort</span>
+    <button type="button" class="sort-chip active" id="prices-sort-price">Cheapest first</button>
+    <button type="button" class="sort-chip" id="prices-sort-dist">Nearest first</button>
+  </div>
   <div id="prices-body"></div>
   <p class="prices-footnote">Prices come from each chain's own published price list and are per part category. Entry fees, taxes, core charges (refundable deposits, shown where the chain lists them) and environmental fees vary by yard.</p>
 </div>
@@ -441,7 +456,6 @@
     <ul class="tier-list">
       <li>Full value data &mdash; what parts are worth &amp; which go fast on nearly every car, pull costs where yards publish prices</li>
       <li id="tier-alerts-li">Push alerts within hours of a watched car hitting a yard &mdash; including sale-day alerts</li>
-      <li>Compare part prices across every yard near you &mdash; find the cheapest alternator in one search</li>
       <li>One-tap "watch this" from any car + nationwide watches (alerts from any yard in the country)</li>
       <li>Unlimited saved cars</li>
       <li>Unlimited radius + nationwide search across all <span class="coverage-count">210+</span> yards</li>

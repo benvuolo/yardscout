@@ -457,6 +457,10 @@ async function loadAllPricing() {
     grab('data/budget_pricing.json', d => { budgetPricing = d; }),
   ]);
   _yardCostMemo.clear();
+  // Compare/type-ahead caches may have been built against empty lists.
+  _partQuoteMemo.clear();
+  _partIndex = null;
+  _partIndexSig = '';
 }
 
 /* Expand a fetched inventory payload into app state + render. `quiet` is the
@@ -1321,7 +1325,7 @@ function openUpgradeSheet(trigger) {
     // 1.2) — same honest copy, only the store name differs.
     if (sheetSub) sheetSub.textContent =
       'Finding cars near you is free and stays free. '
-      + 'Pro adds the money layer — part values, pull costs, cross-yard price compare, '
+      + 'Pro adds the money layer — part values, pull costs, '
       + 'and instant push alerts. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
   }
@@ -2469,6 +2473,64 @@ function updateStaleBanner() {
   el.style.display = '';
 }
 
+/** Chain display name for a yard ("Pick-n-Pull - Salt Lake City" -> "Pick-n-Pull").
+ *  The Wrench-A-Part family trades under per-yard prefixes (Primo, Roosevelt,
+ *  ...) but shares one brand, site, and price-list source — group them. */
+function yardChainName(location) {
+  if (/wrench[\s-]*a[\s-]*part/i.test(location)) return 'Wrench-A-Part family';
+  const i = location.indexOf(' - ');
+  return i > 0 ? location.slice(0, i) : location;
+}
+
+/** One source of truth for "the yards you're looking at": distance-sorted
+ *  directory, radius cap, then this tab's chain/state/text filters. The yard
+ *  grid, the part type-ahead, and the cross-yard price compare all read the
+ *  same view — compare answers "across the yards I care about", not the world.
+ *  Requires activeZipCoords (callers check). */
+function getYardsView() {
+  const yards = buildYardDirectory();
+  const allCount = yards.length;
+  yards.forEach(y => {
+    y.dist = (y.lat != null && y.lng != null)
+      ? haversineMiles(activeZipCoords.lat, activeZipCoords.lng, y.lat, y.lng) : null;
+  });
+  yards.sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
+  // Same radius as the Live tab (capped at 250 mi). "Any distance" shows all,
+  // still nearest-first — but the full national yard list is Pro-only, so
+  // free users are always clamped to the widest free radius.
+  const radius = effectiveRadiusMi();
+  const inRange = radius ? yards.filter(y => y.dist != null && y.dist <= radius) : yards;
+  const chain = document.getElementById('yards-filter-chain').value;
+  const state = document.getElementById('yards-filter-state').value;
+  const q = (document.getElementById('yards-search').value || '').trim().toLowerCase();
+  let shown = inRange;
+  if (chain) shown = shown.filter(y => yardChainName(y.location) === chain);
+  if (state) shown = shown.filter(y => y.state === state);
+  if (q) shown = shown.filter(y => (y.location + ' ' + y.city + ' ' + y.state).toLowerCase().includes(q));
+  return { yards, allCount, radius, inRange, shown, filtered: !!(chain || state || q) };
+}
+
+/* Chain/state options reflect the yards in range; the current selection is
+ * kept when still present so re-renders don't wipe an active filter. */
+function populateYardFilters(inRange) {
+  const chains = new Map();
+  const states = new Map();
+  for (const y of inRange) {
+    const c = yardChainName(y.location);
+    chains.set(c, (chains.get(c) || 0) + 1);
+    if (y.state) states.set(y.state, (states.get(y.state) || 0) + 1);
+  }
+  const rebuild = (id, map, allLabel) => {
+    const sel = document.getElementById(id);
+    const prev = sel.value;
+    sel.innerHTML = `<option value="">${allLabel}</option>` + [...map.keys()].sort()
+      .map(k => `<option value="${escapeHtml(k)}">${escapeHtml(k)} (${map.get(k)})</option>`).join('');
+    if (prev && map.has(prev)) sel.value = prev;
+  };
+  rebuild('yards-filter-chain', chains, 'All chains');
+  rebuild('yards-filter-state', states, 'All states');
+}
+
 function renderYards() {
   const grid = document.getElementById('yards-grid');
   const statsBar = document.getElementById('yards-stats-bar');
@@ -2508,34 +2570,25 @@ function renderYards() {
     return;
   }
 
-  let yards = buildYardDirectory();
-  const allCount = yards.length;
-  const states = new Set(yards.map(y => y.state).filter(Boolean));
-
-  yards.forEach(y => {
-    y.dist = (y.lat != null && y.lng != null)
-      ? haversineMiles(activeZipCoords.lat, activeZipCoords.lng, y.lat, y.lng) : null;
-  });
-  yards.sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
-
-  // Same radius as the Live tab (capped at 250 mi). "Any distance" shows all,
-  // still nearest-first — but the full national yard list is Pro-only, so
-  // free users are always clamped to the widest free radius.
-  const radius = effectiveRadiusMi();
-  const inRange = radius ? yards.filter(y => y.dist != null && y.dist <= radius) : yards;
-
-  const q = (document.getElementById('yards-search').value || '').trim().toLowerCase();
-  const shown = q ? inRange.filter(y => (y.location + ' ' + y.city + ' ' + y.state).toLowerCase().includes(q)) : inRange;
+  let view = getYardsView();
+  // Rebuilding the filter options can drop a selection whose chain/state left
+  // the radius — recompute the view so the grid matches the (reset) selects.
+  const fChain = document.getElementById('yards-filter-chain');
+  const fState = document.getElementById('yards-filter-state');
+  const prevChain = fChain.value, prevState = fState.value;
+  populateYardFilters(view.inRange);
+  if (fChain.value !== prevChain || fState.value !== prevState) view = getYardsView();
+  const { allCount, radius, inRange, shown } = view;
 
   statsBar.innerHTML = `
-    <div class="stat-card"><div class="label">Yards near you</div><div class="value">${inRange.length}</div></div>
+    <div class="stat-card"><div class="label">${view.filtered ? 'Yards in view' : 'Yards near you'}</div><div class="value">${view.filtered ? shown.length : inRange.length}</div></div>
     <div class="stat-card"><div class="label">Within</div><div class="value-sm">${radius ? radius + ' mi' : 'any distance'}</div></div>
     <div class="stat-card"><div class="label">Tracked nationwide</div><div class="value">${allCount}</div></div>
   `;
 
   if (!shown.length) {
     if (!inRange.length) {
-      const nearest = yards.find(y => y.dist != null);
+      const nearest = view.yards.find(y => y.dist != null);
       const nearestTxt = nearest
         ? `The nearest yard we track is <strong>${escapeHtml(nearest.location)}</strong> in ${escapeHtml([nearest.city, nearest.state].filter(Boolean).join(', '))} &mdash; ${Math.round(nearest.dist)} mi away.`
         : '';
@@ -2561,7 +2614,7 @@ function renderYards() {
         setRadius('');
       });
     } else {
-      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No yards match</h3><p>Try a different name, city, or state.</p></div>';
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No yards match</h3><p>Try a different name, or clear the chain/state filters above.</p></div>';
     }
     return;
   }
@@ -2623,8 +2676,9 @@ document.getElementById('yards-search').addEventListener('input', () => renderYa
 
 /* ===== YARD PRICE LISTS & CROSS-YARD COMPARE =====
  * Every chain's published price list, browsable in-app so nobody has to dig
- * through nine junkyard websites. Per-yard list is free (it's public data);
- * comparing a part across every yard near you is the Pro feature. */
+ * through nine junkyard websites. Both the per-yard list AND the cross-yard
+ * compare are free: it's the yards' own published data, and the compare only
+ * reads the same lists the free Price list buttons already show. */
 
 /** Normalized [{part, price, core}] for a yard, or null when the chain
  *  doesn't publish a scrapeable list (e.g. LKQ posts prices in-store only). */
@@ -2693,69 +2747,129 @@ function openYardPrices(location) {
     `${rows.length} parts on the published list.` +
     (chain ? ` <a href="${chain[1]}" target="_blank" rel="noopener">View on ${escapeHtml(chain[2])}'s site</a>` : '');
   document.getElementById('prices-search-wrap').style.display = '';
+  document.getElementById('prices-sort-wrap').style.display = 'none';
   document.getElementById('prices-search').value = '';
   renderPricesSheetRows();
   document.getElementById('prices-sheet').classList.add('open');
   document.getElementById('prices-backdrop').classList.add('open');
 }
 
-/** Pro: one search, every nearby yard's price for that part, cheapest first. */
+/** One yard's take on a part query: the cheapest list row whose name contains
+ *  the query — a search like "alternator" can hit several rows; the cheapest
+ *  is what you'd pay at the counter — else the PART_KEYWORD_MAP mapping, so a
+ *  common word ("headlight") still lands on chains that spell it differently
+ *  ("HEADLAMP COMPOSITE"). Memoized: the type-ahead counts call this a lot. */
+const _partQuoteMemo = new Map();
+function yardPartQuote(location, q) {
+  const key = q + '|' + location;
+  let hit = _partQuoteMemo.get(key);
+  if (hit === undefined) {
+    hit = _yardPartQuoteUncached(location, q);
+    _partQuoteMemo.set(key, hit);
+  }
+  return hit;
+}
+function _yardPartQuoteUncached(location, q) {
+  const rows = yardPriceList(location);
+  if (!rows) return { status: 'no-list' };
+  let best = null;
+  for (const r of rows) {
+    if (r.part.toLowerCase().includes(q) && (!best || r.price < best.price)) best = r;
+  }
+  if (!best) {
+    const kw = lookupYardCost(q, location);
+    if (kw.cost != null) {
+      // Recover the full row (core charge) behind the keyword-map name.
+      best = rows.find(r => r.part === kw.yardName) || { part: kw.yardName, price: kw.cost, core: 0 };
+    }
+  }
+  return best
+    ? { status: 'priced', part: best.part, price: best.price, core: best.core || 0 }
+    : { status: 'not-listed' };
+}
+
+/* Compare state: results re-sort client-side (cheapest/nearest toggle). */
+let compareResults = [];
+let compareMissing = [];  // yards with a published list but no row for the query
+let compareNoList = 0;    // yards in view with no published list at all
+let compareSort = 'price';
+
+function renderCompareResults() {
+  const sorted = [...compareResults].sort(compareSort === 'dist'
+    ? (a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9)
+    : (a, b) => a.price - b.price);
+  const rows = sorted.map(r => {
+    const core = r.core > 0 ? ` <span class="price-core" title="Refundable core deposit — bring the old part back to get it refunded">+ $${r.core.toFixed(2)} core</span>` : '';
+    const dist = r.dist != null ? ` &middot; ${Math.round(r.dist)} mi` : '';
+    return `<div class="price-row compare-row" data-loc="${escapeHtml(r.yard)}" role="button" tabindex="0">
+      <span class="price-part"><strong>${escapeHtml(r.yard)}</strong><br>
+        <span class="compare-detail">${escapeHtml(r.part)}${dist}</span></span>
+      <span class="price-amt">$${r.price.toFixed(2)}${core}</span>
+    </div>`;
+  }).join('');
+  let extra = '';
+  if (compareMissing.length) {
+    const names = compareMissing.slice(0, 8).map(y =>
+      y.dist != null ? `${escapeHtml(y.location)} (${Math.round(y.dist)} mi)` : escapeHtml(y.location));
+    const more = compareMissing.length > 8 ? ` +${compareMissing.length - 8} more` : '';
+    extra += `<div class="compare-missing">Not on the published list at ${names.join(', ')}${more} &mdash; ask at the counter.</div>`;
+  }
+  if (compareNoList) {
+    extra += `<div class="compare-missing">${compareNoList} yard${compareNoList === 1 ? '' : 's'} in view post${compareNoList === 1 ? 's' : ''} prices at the yard only &mdash; no published list to read.</div>`;
+  }
+  document.getElementById('prices-body').innerHTML =
+    (rows || '<div class="empty-state"><p>No published price for that part at the yards in view. Chains list parts under category names &mdash; try a broader word like "seat" or "door", or clear a chain/state filter.</p></div>') + extra;
+}
+
+/** Free: one search, every visible yard's published price for that part.
+ *  Respects the tab's chain/state/text filters and the distance control —
+ *  "compare across the yards YOU care about", reading only the same published
+ *  price lists the free Price list buttons already show. */
 function openPriceCompare(query) {
-  if (!isPro()) { openUpgradeSheet('price-compare'); return; }
   if (!activeZipCoords) { alert('Set a zip code first so we know which yards are near you.'); return; }
   const q = query.trim().toLowerCase();
   if (q.length < 3) return;
   track('price-compare');
 
-  const radius = effectiveRadiusMi();
-  const results = [];
-  for (const y of buildYardDirectory()) {
-    if (y.lat == null || y.lng == null) continue;
-    const dist = haversineMiles(activeZipCoords.lat, activeZipCoords.lng, y.lat, y.lng);
-    if (radius && dist > radius) continue;
-    const rows = yardPriceList(y.location);
-    if (!rows) continue;
-    // Best (cheapest) match at this yard — a part search like "alternator"
-    // can hit several list rows; the cheapest is what you'd pay at the counter.
-    let best = null;
-    for (const r of rows) {
-      if (r.part.toLowerCase().includes(q) && (!best || r.price < best.price)) best = r;
-    }
-    if (best) results.push({ yard: y.location, dist, ...best });
-  }
-  results.sort((a, b) => a.price - b.price);
+  const { shown } = getYardsView();
   // UTPAP's premium-row sections appear as separate "(Premium)" yards in the
   // directory but share the base yard's price list — keep one per real yard.
-  const seenYards = new Set();
-  const deduped = results.filter(r => {
-    const key = r.yard.replace(/\s*\(premium\)\s*$/i, '');
-    if (seenYards.has(key)) return false;
-    seenYards.add(key);
-    return true;
-  });
-  results.length = 0;
-  results.push(...deduped);
+  const seen = new Set();
+  compareResults = []; compareMissing = []; compareNoList = 0;
+  for (const y of shown) {
+    const key = y.location.replace(/\s*\(premium\)\s*$/i, '');
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const quote = yardPartQuote(y.location, q);
+    if (quote.status === 'priced') {
+      compareResults.push({ yard: y.location, dist: y.dist, part: quote.part, price: quote.price, core: quote.core });
+    } else if (quote.status === 'not-listed') {
+      compareMissing.push(y);
+    } else {
+      compareNoList++;
+    }
+  }
 
   pricesSheetMode = 'compare';
-  document.getElementById('prices-title').textContent = `"${query.trim()}" near you`;
-  document.getElementById('prices-sub').textContent = results.length
-    ? `Cheapest first, across ${results.length} yard${results.length === 1 ? '' : 's'} in range with a published price.`
+  document.getElementById('prices-title').textContent = `"${query.trim()}" across yards in view`;
+  document.getElementById('prices-sub').textContent = compareResults.length
+    ? `Prices from each yard's own published price list \u2014 ${compareResults.length} of ${seen.size} yard${seen.size === 1 ? '' : 's'} in view publish${compareResults.length === 1 ? 'es' : ''} this part.`
     : '';
   document.getElementById('prices-search-wrap').style.display = 'none';
-  const body = document.getElementById('prices-body');
-  body.innerHTML = results.length
-    ? results.map(r => {
-        const core = r.core > 0 ? ` <span class="price-core">+ $${r.core.toFixed(2)} core</span>` : '';
-        return `<div class="price-row compare-row" data-loc="${escapeHtml(r.yard)}" role="button" tabindex="0">
-          <span class="price-part"><strong>${escapeHtml(r.yard)}</strong><br>
-            <span class="compare-detail">${escapeHtml(r.part)} &middot; ${Math.round(r.dist)} mi</span></span>
-          <span class="price-amt">$${r.price.toFixed(2)}${core}</span>
-        </div>`;
-      }).join('')
-    : '<div class="empty-state"><p>No published price for that part at yards in range. Chains list parts under category names &mdash; try a broader word like "seat" or "door".</p></div>';
+  document.getElementById('prices-sort-wrap').style.display = compareResults.length > 1 ? '' : 'none';
+  renderCompareResults();
   document.getElementById('prices-sheet').classList.add('open');
   document.getElementById('prices-backdrop').classList.add('open');
 }
+
+function setCompareSort(s) {
+  compareSort = s;
+  document.getElementById('prices-sort-price').classList.toggle('active', s === 'price');
+  document.getElementById('prices-sort-dist').classList.toggle('active', s === 'dist');
+  renderCompareResults();
+}
+document.getElementById('prices-sort-price').addEventListener('click', () => setCompareSort('price'));
+document.getElementById('prices-sort-dist').addEventListener('click', () => setCompareSort('dist'));
 
 function closePricesSheet() {
   document.getElementById('prices-sheet').classList.remove('open');
@@ -2770,11 +2884,121 @@ document.getElementById('prices-body').addEventListener('click', e => {
   const row = e.target.closest('.compare-row');
   if (row) { closePricesSheet(); viewYardInLive(row.dataset.loc); }
 });
-document.getElementById('compare-go').addEventListener('click', () =>
-  openPriceCompare(document.getElementById('compare-input').value));
-document.getElementById('compare-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') openPriceCompare(e.target.value);
+/* ===== PART TYPE-AHEAD =====
+ * Suggestions come from two pools: every part name on the visible yards'
+ * published lists, plus the canonical PART_KEYWORD_MAP keywords (so 'headlight'
+ * suggests even when every chain spells it 'HEADLAMP ...'). Each suggestion
+ * shows how many visible yards publish it. Rebuilt lazily when the yard view
+ * (filters / radius / zip) changes. */
+let _partIndex = null;
+let _partIndexSig = '';
+
+function titleCasePart(s) {
+  return s.toLowerCase().replace(/(^|[^a-z0-9])([a-z])/g, (m, pre, c) => pre + c.toUpperCase());
+}
+
+function getPartIndex() {
+  const { shown } = getYardsView();
+  const sig = shown.map(y => y.location).join('|');
+  if (_partIndex && sig === _partIndexSig) return _partIndex;
+  const baseName = loc => loc.replace(/\s*\(premium\)\s*$/i, '');
+  const map = new Map(); // lower part name -> { display, yards: Set<base yard> }
+  for (const y of shown) {
+    const rows = yardPriceList(y.location);
+    if (!rows) continue;
+    const base = baseName(y.location);
+    for (const r of rows) {
+      const k = r.part.toLowerCase();
+      let e = map.get(k);
+      if (!e) { e = { display: titleCasePart(r.part), yards: new Set() }; map.set(k, e); }
+      e.yards.add(base);
+    }
+  }
+  for (const entry of PART_KEYWORD_MAP) {
+    if (map.has(entry.kw)) continue;
+    const yards = new Set();
+    for (const y of shown) {
+      const base = baseName(y.location);
+      if (yards.has(base)) continue;
+      if (yardPartQuote(y.location, entry.kw).status === 'priced') yards.add(base);
+    }
+    if (yards.size) map.set(entry.kw, { display: titleCasePart(entry.kw), yards });
+  }
+  _partIndex = map;
+  _partIndexSig = sig;
+  return map;
+}
+
+const compareInput = document.getElementById('compare-input');
+const compareSuggest = document.getElementById('compare-suggest');
+let suggestItems = [];
+let suggestActive = -1;
+
+function hideCompareSuggest() {
+  compareSuggest.style.display = 'none';
+  suggestItems = [];
+  suggestActive = -1;
+}
+
+function renderCompareSuggest() {
+  const q = compareInput.value.trim().toLowerCase();
+  if (q.length < 2 || !activeZipCoords || !liveLoaded) { hideCompareSuggest(); return; }
+  const starts = [], contains = [];
+  for (const [k, e] of getPartIndex()) {
+    if (k.startsWith(q)) starts.push(e);
+    else if (k.includes(q)) contains.push(e);
+  }
+  const byCount = (a, b) => b.yards.size - a.yards.size || a.display.localeCompare(b.display);
+  starts.sort(byCount);
+  contains.sort(byCount);
+  suggestItems = [...starts, ...contains].slice(0, 10);
+  if (!suggestItems.length) { hideCompareSuggest(); return; }
+  suggestActive = -1;
+  compareSuggest.innerHTML = suggestItems.map((e, i) =>
+    `<div class="compare-suggest-item" role="option" data-i="${i}">
+       <span class="csi-name">${escapeHtml(e.display)}</span>
+       <span class="csi-count">${e.yards.size} yard${e.yards.size === 1 ? '' : 's'}</span>
+     </div>`).join('');
+  compareSuggest.style.display = '';
+}
+
+function pickSuggestion(i) {
+  const item = suggestItems[i];
+  if (!item) return;
+  compareInput.value = item.display;
+  hideCompareSuggest();
+  openPriceCompare(item.display);
+}
+
+compareInput.addEventListener('input', renderCompareSuggest);
+compareInput.addEventListener('focus', renderCompareSuggest);
+// mousedown (not click) so the pick wins the race against the input's blur.
+compareSuggest.addEventListener('mousedown', e => {
+  const item = e.target.closest('.compare-suggest-item');
+  if (item) { e.preventDefault(); pickSuggestion(+item.dataset.i); }
 });
+compareInput.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    if (!suggestItems.length) { renderCompareSuggest(); if (!suggestItems.length) return; }
+    e.preventDefault();
+    const d = e.key === 'ArrowDown' ? 1 : -1;
+    suggestActive = (suggestActive + d + suggestItems.length) % suggestItems.length;
+    [...compareSuggest.children].forEach((el, i) => el.classList.toggle('active', i === suggestActive));
+  } else if (e.key === 'Enter') {
+    if (suggestActive >= 0) { pickSuggestion(suggestActive); return; }
+    hideCompareSuggest();
+    openPriceCompare(e.target.value);
+  } else if (e.key === 'Escape') {
+    hideCompareSuggest();
+  }
+});
+compareInput.addEventListener('blur', () => setTimeout(hideCompareSuggest, 150));
+document.getElementById('compare-go').addEventListener('click', () => {
+  hideCompareSuggest();
+  openPriceCompare(compareInput.value);
+});
+document.getElementById('yards-filter-chain').addEventListener('change', renderYards);
+document.getElementById('yards-filter-state').addEventListener('change', renderYards);
 
 /* ===== PROFIT BREAKDOWN ===== */
 /** Baked sell_notes can carry another make's flavor text (keyword-matched at
