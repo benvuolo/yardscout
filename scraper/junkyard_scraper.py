@@ -6025,6 +6025,36 @@ ENGINE_FAMILIES: dict[str, dict] = {
             "starter": {"note": _STR_NOTE},
         },
     },
+    "toyota-rz": {
+        # 2RZ-FE (2.4) and 3RZ-FE (2.7) share alternator part numbers in
+        # every Denso catalog year row, so one family covers both — a 2.4
+        # Tacoma donor genuinely serves a 2.7 seeker for these parts.
+        "display": "Toyota 2RZ/3RZ-FE 2.4/2.7 I4",
+        "engine": {"liters": [2.4, 2.7], "cyl": 4},
+        "apps": [
+            ("Toyota", "Tacoma", 1995, 2004),
+            ("Toyota", "4Runner", 1996, 2000),
+            ("Toyota", "T100", 1994, 1998),
+        ],
+        "parts": {
+            "alternator": {"note": "2RZ and 3RZ share the same published units in every year — the 3.4 V6 unit differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "toyota-5vz": {
+        "display": "Toyota 5VZ-FE 3.4 V6",
+        "engine": {"liters": [3.4], "cyl": 6},
+        "apps": [
+            ("Toyota", "Tacoma", 1995, 2004),
+            ("Toyota", "4Runner", 1996, 2002),
+            ("Toyota", "T100", 1995, 1998),
+            ("Toyota", "Tundra", 2000, 2004),
+        ],
+        "parts": {
+            "alternator": {"note": "3.4 (5VZ) unit — 60/70/80A revisions across the years, match amps and part number; the 2.4/2.7 I4 unit differs"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
     "toyota-5s": {
         "display": "Toyota 5S-FE 2.2 I4",
         "engine": {"liters": [2.2], "cyl": 4},
@@ -6213,6 +6243,28 @@ ENGINE_FAMILIES: dict[str, dict] = {
         },
     },
     # -------------------------------------------------------- Honda/Acura
+    "honda-a20": {
+        "display": "Honda A20 2.0 I4",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Honda", "Accord", 1986, 1989, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "carbureted (A20A1) and fuel-injected (A20A3) cars use different units across the same years — check which yours is before buying"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "honda-f22": {
+        "display": "Honda F22 2.2 I4",
+        "engine": {"liters": [2.2], "cyl": 4},
+        "apps": [
+            ("Honda", "Accord", 1990, 1997),
+        ],
+        "parts": {
+            "alternator": {"note": "94-97 splits VTEC (F22B1, 90A) vs non-VTEC (F22B2, 80A) — match the part number; the 95-97 2.7 V6 unit differs"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
     "honda-d16": {
         "display": "Honda D16 1.6 SOHC I4",
         "engine": {"liters": [1.6], "cyl": 4},
@@ -6389,7 +6441,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [3.5], "cyl": 6},
         "apps": [
             ("Nissan", "Altima", 2002, 2006),
-            ("Nissan", "Maxima", 2002, 2008, {"sole": True}),
+            ("Nissan", "Maxima", 2002, 2014, {"sole": True}),
             ("Nissan", "Murano", 2003, 2014, {"sole": True}),
             ("Nissan", "Pathfinder", 2001, 2004),
             ("Nissan", "Quest", 2004, 2009, {"sole": True}),
@@ -6413,6 +6465,31 @@ ENGINE_FAMILIES: dict[str, dict] = {
         ],
         "parts": {
             "alternator": {"note": "VQ40 unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "nissan-mr20": {
+        "display": "Nissan MR20DE 2.0 I4",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Nissan", "Sentra", 2007, 2012),
+        ],
+        "parts": {
+            "alternator": {"note": "base 2.0 (MR20DE) unit — the SE-R 2.5 differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "nissan-vk56": {
+        "display": "Nissan VK56DE 5.6 V8",
+        "engine": {"liters": [5.6], "cyl": 8},
+        "apps": [
+            ("Nissan", "Titan", 2004, 2015, {"sole": True}),
+            ("Nissan", "Armada", 2005, 2015, {"sole": True}),
+            ("Nissan", "Pathfinder Armada", 2004, 2004, {"sole": True}),
+            ("Infiniti", "QX56", 2004, 2010, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "VK56DE unit; " + _ALT_NOTE},
             "starter": {"note": _STR_NOTE},
         },
     },
@@ -6520,11 +6597,16 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "Ford/Mazda MZR-Duratec 2.0/2.3/2.5 I4",
         "engine": {"liters": [2.0, 2.3, 2.5], "cyl": 4},
         "apps": [
-            ("Ford", "Fusion", 2006, 2012),
+            # Fusion 2.5 carried into the 2013-14 refresh — the 210-0615
+            # list spans the 2.5 AND the 2.0T those years (shared unit).
+            ("Ford", "Fusion", 2006, 2014),
             ("Ford", "Escape", 2005, 2012),
             ("Ford", "Focus", 2005, 2011),
-            ("Mazda", "Mazda3", 2004, 2013),
-            ("Mazda", "Mazda6", 2003, 2013),
+            # Bare "3"/"6" match every feed spelling ("3", "Mazda3",
+            # "Mazda 3") via the make-stripped squash; "Mazda3" did not.
+            ("Mazda", "3", 2004, 2013),
+            ("Mazda", "5", 2006, 2010),
+            ("Mazda", "6", 2003, 2013),
             ("Mercury", "Milan", 2006, 2011),
             ("Mercury", "Mariner", 2005, 2011),
             ("Mazda", "Tribute", 2005, 2011),
@@ -6584,6 +6666,73 @@ ENGINE_FAMILIES: dict[str, dict] = {
         },
     },
     # ------------------------------------------------------------------ GM
+    "ford-escape-16eb": {
+        "display": "Ford Escape 1.6 EcoBoost I4",
+        "engine": {"liters": [1.6], "cyl": 4},
+        "apps": [
+            ("Ford", "Escape", 2013, 2016),
+        ],
+        "parts": {
+            "alternator": {"note": "1.6 EcoBoost unit — the 2.0 and 2.5 Escapes use different units; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "ford-escape-20eb": {
+        "display": "Ford Escape 2.0 EcoBoost I4",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Ford", "Escape", 2013, 2016),
+        ],
+        "parts": {
+            "alternator": {"note": "2.0 EcoBoost unit — the 1.6 and 2.5 Escapes use different units; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "gm-vortec43": {
+        "display": "GM Vortec 4.3 V6",
+        "engine": {"liters": [4.3], "cyl": 6},
+        "apps": [
+            ("Chevrolet", "S-10*", 1994, 2004),
+            ("GMC", "Sonoma", 1994, 2004),
+            ("Chevrolet", "Blazer*", 1995, 2005, {"sole": True}),
+            ("GMC", "Jimmy*", 1995, 2001, {"sole": True}),
+            ("Chevrolet", "Astro*", 1994, 2005, {"sole": True}),
+            ("GMC", "Safari*", 1994, 2005, {"sole": True}),
+            ("Oldsmobile", "Bravada", 1996, 2001, {"sole": True}),
+            ("Chevrolet", "Express*", 1996, 2008),
+            ("GMC", "Savana*", 1996, 2008),
+        ],
+        "parts": {
+            "alternator": {"note": "4.3 Vortec CS130/AD-series units — several amp and case revisions across the years, match the part number; 2000 S-trucks split mid-year by VIN"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "gm-vortec-van": {
+        "display": "Chevy/GMC Vortec V8 van (Express/Savana)",
+        "engine": {"liters": [4.8, 5.0, 5.3, 5.7, 6.0], "cyl": 8},
+        "apps": [
+            ("Chevrolet", "Express*", 1996, 2010),
+            ("GMC", "Savana*", 1996, 2010),
+        ],
+        "parts": {
+            "alternator": {"note": "the published lists span the 5.0/5.7 (96-00) and 4.8/5.3/6.0 (05-10) together — two case styles exist, match the rear-cover style and part number; 01-04 vans left unverified"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "cadillac-northstar": {
+        "display": "Cadillac Northstar 4.6 V8",
+        "engine": {"liters": [4.6], "cyl": 8},
+        "apps": [
+            ("Cadillac", "Deville", 1994, 2005, {"sole": True}),
+            ("Cadillac", "Eldorado", 1994, 2002, {"sole": True}),
+            ("Cadillac", "Seville", 1994, 2004, {"sole": True}),
+            ("Cadillac", "DTS", 2006, 2011, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "Northstar unit — buried under the intake side; limousine/hearse builds use a higher-amp unit, " + _ALT_NOTE},
+            "starter": {"note": "under-intake starter on Northstar — " + _STR_NOTE},
+        },
+    },
     "gm-ecotec22": {
         "display": "GM Ecotec 2.2 I4 (L61)",
         "engine": {"liters": [2.2], "cyl": 4},
@@ -6595,6 +6744,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Saturn", "ION", 2003, 2007),
             ("Pontiac", "G5", 2007, 2009),
             ("Pontiac", "Sunfire", 2002, 2005),
+            ("Saturn", "VUE", 2002, 2007),
         ],
         "parts": {
             "alternator": {"note": "L61 Ecotec unit; " + _ALT_NOTE},
@@ -6612,6 +6762,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("GMC", "Terrain", 2010, 2017),
             ("Pontiac", "G6", 2006, 2009),
             ("Chevrolet", "Captiva Sport", 2012, 2015),
+            ("Saturn", "VUE", 2008, 2010),
         ],
         "parts": {
             "alternator": {"note": "Ecotec 2.4 unit — direct-injection (LEA/LUK) era plugs can differ; " + _ALT_NOTE},
@@ -6740,7 +6891,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         },
     },
     "gm-llt36": {
-        "display": "GM 3.6 DI V6 (LLT/LFX)",
+        "display": "GM 3.6 V6 (LY7/LLT/LFX high-feature)",
         "engine": {"liters": [3.6], "cyl": 6},
         "apps": [
             ("Chevrolet", "Traverse", 2009, 2017, {"sole": True}),
@@ -6752,9 +6903,12 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chevrolet", "Equinox", 2013, 2017),
             ("GMC", "Terrain", 2013, 2017),
             ("Buick", "Lacrosse", 2010, 2016),
+            ("Cadillac", "CTS", 2004, 2014),
+            ("Cadillac", "SRX", 2004, 2016),
+            ("Cadillac", "STS", 2005, 2011),
         ],
         "parts": {
-            "alternator": {"note": "LLT vs LFX bracket/plug can differ by year — match part number"},
+            "alternator": {"note": "LY7 vs LLT vs LFX bracket/plug can differ by year — match part number"},
             "starter": {"note": _STR_NOTE},
         },
     },
@@ -6765,6 +6919,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "apps": [
             ("Dodge", "Grand Caravan", 2011, 2020, {"sole": True}),
             ("Chrysler", "Town & Country", 2011, 2016, {"sole": True}),
+            # The live feed spells it out — "&" squashes away, "And" doesn't.
+            ("Chrysler", "Town And Country", 2011, 2016, {"sole": True}),
             ("Dodge", "Journey", 2011, 2020),
             ("Dodge", "Avenger", 2011, 2014),
             ("Chrysler", "200", 2011, 2017),
@@ -6805,6 +6961,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Dodge", "Caravan", 1996, 2007),
             ("Dodge", "Grand Caravan", 1996, 2010),
             ("Chrysler", "Town & Country", 1996, 2010),
+            ("Chrysler", "Town And Country", 1996, 2010),
             ("Plymouth|Chrysler", "Voyager", 1996, 2003),
             ("Jeep", "Wrangler", 2007, 2011),
         ],
@@ -6893,6 +7050,28 @@ ENGINE_FAMILIES: dict[str, dict] = {
         },
     },
     # ---------------------------------------------------------- Hyundai/Kia
+    "mopar-pt24": {
+        "display": "Chrysler PT Cruiser 2.4 I4",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Chrysler", "PT Cruiser", 2001, 2010, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "non-turbo 100A unit — the GT/Turbo (03-09) takes a different 130-145A unit, check which yours is; 2001 cars left unverified"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "mopar-dart": {
+        "display": "Dodge Dart 1.4T/2.0/2.4 I4",
+        "engine": {"liters": [1.4, 2.0, 2.4], "cyl": 4},
+        "apps": [
+            ("Dodge", "Dart*", 2013, 2016, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "120A and 160A options across all three engines — match amperage; 2016 cars left unverified"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
     "hk-theta-mpi": {
         "display": "Hyundai/Kia Theta 2.4 MPI I4",
         "engine": {"liters": [2.4], "cyl": 4},
@@ -6933,6 +7112,31 @@ ENGINE_FAMILIES: dict[str, dict] = {
         ],
         "parts": {
             "alternator": {"note": "Nu family — 1.8 MPI vs 2.0 GDI variants; match part number"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "hk-alpha": {
+        "display": "Hyundai Alpha 1.5/1.6 I4",
+        "engine": {"liters": [1.5, 1.6], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Accent", 1995, 2011, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "Mando and Valeo units overlap 2003-2009 — match the part number on the donor; 2012+ Accents are the Gamma 1.6 (separate family)"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "hk-mu-lambda": {
+        "display": "Hyundai 2.7/3.3/3.8 V6 (Mu/Lambda)",
+        "engine": {"liters": [2.7, 3.3, 3.8], "cyl": 6},
+        "apps": [
+            ("Hyundai", "Santa Fe", 2007, 2009, {"sole": True}),
+            ("Hyundai", "Azera", 2006, 2011, {"sole": True}),
+            ("Hyundai", "Veracruz", 2007, 2012, {"sole": True}),
+            ("Hyundai", "Entourage", 2007, 2008, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "one Denso 130A unit spans the 2.7/3.3/3.8 in 07-08 — 2009+ builds split Denso vs non-Denso vendors, match the part number"},
             "starter": {"note": _STR_NOTE},
         },
     },
@@ -7031,6 +7235,18 @@ ENGINE_FAMILIES: dict[str, dict] = {
         ],
         "parts": {
             "alternator": {"note": "FA20DIT unit — the NA FA20 (BRZ) and FB engines differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    # ---------------------------------------------------------------- Euro
+    "mini-r50": {
+        "display": "MINI Cooper 1.6 (R50/R52/R53)",
+        "engine": {"liters": [1.6], "cyl": 4},
+        "apps": [
+            ("MINI", "Cooper", 2002, 2006),
+        ],
+        "parts": {
+            "alternator": {"note": "W10 (base) and W11 (supercharged S) use different units — check which yours is; 2007+ hardtops are the newer N-series engine (not this family)"},
             "starter": {"note": _STR_NOTE},
         },
     },
@@ -7148,6 +7364,146 @@ def engine_matches_family(engine_str: str, fam: dict) -> bool | None:
 # inner list — the evidence string cites where each list was retrieved.
 # Research notes with full citations live in scraper/interchange_research.md.
 _ALT_VERIFIED: dict = {
+    "toyota-rz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), identical units for the 2.4 (2RZFE) and 2.7 (3RZFE) in every year row: 210-0448 (60A) Tacoma 1995-1996, T100 2.7 1994-1996; 210-0188 (70A) Tacoma 1997-1999, T100 2.7 1997-1998, 4Runner 2.7 1996-1999; 210-0390 (80A) Tacoma 2000-2004, 4Runner 2.7 2000 (the same list runs to the 2005 base-2.7 Tacoma, outside this family's years).",
+        "groups": [
+            [("Toyota", "Tacoma", 1995, 1996),
+             ("Toyota", "T100", 1994, 1996)],
+            [("Toyota", "Tacoma", 1997, 1999),
+             ("Toyota", "T100", 1997, 1998),
+             ("Toyota", "4Runner", 1996, 1999)],
+            [("Toyota", "Tacoma", 2000, 2004),
+             ("Toyota", "4Runner", 2000, 2000)],
+        ],
+    },
+    "toyota-5vz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows engine-coded 5VZFE 3.4: 210-0447 (60A) Tacoma 1995-1996 and 1998-1999, T100 1995-1998, 4Runner 1998, Tundra 2000 std; 210-0180 (70A) 4Runner 1996-1998, T100 1997-1998, Tacoma 1997-1999, Tundra 2000-2002; 210-0434 (80A) 4Runner 1999-2002, Tacoma 2000-2004, Tundra 2001-2002 and 2000 opt; 210-0513 (80A) Tundra 2003-2004.",
+        "groups": [
+            [("Toyota", "Tacoma", 1995, 1996),
+             ("Toyota", "Tacoma", 1998, 1999),
+             ("Toyota", "T100", 1995, 1998),
+             ("Toyota", "4Runner", 1998, 1998),
+             ("Toyota", "Tundra", 2000, 2000)],
+            [("Toyota", "4Runner", 1996, 1998),
+             ("Toyota", "T100", 1997, 1998),
+             ("Toyota", "Tacoma", 1997, 1999),
+             ("Toyota", "Tundra", 2000, 2002)],
+            [("Toyota", "4Runner", 1999, 2002),
+             ("Toyota", "Tacoma", 2000, 2004),
+             ("Toyota", "Tundra", 2000, 2002)],
+            [("Toyota", "Tundra", 2003, 2004)],
+        ],
+    },
+    "honda-a20": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0233 (65A) Accord 2.0 A20A3 w/ fuel injection 1986-1989 and 210-0389 (65A) Accord 2.0 A20A1 carbureted 1986-1989 — both published lists span the same four years; match FI vs carb when pulling.",
+        "groups": [[("Honda", "Accord", 1986, 1989)]],
+    },
+    "honda-f22": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0216 (90A) Accord 2.2 F22A1/A6 1990-1993; 210-0208 (80A) Accord 2.2 F22B2 1994-1997 and 210-0209 (90A) Accord 2.2 F22B1 VTEC 1994-1997 — the 94-97 lists split by VTEC trim but each spans all four years.",
+        "groups": [
+            [("Honda", "Accord", 1990, 1993)],
+            [("Honda", "Accord", 1994, 1997)],
+        ],
+    },
+    "nissan-mr20": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4301 (110A) Sentra 2.0 MR20DE 2007-2010 (the same list serves the Versa 1.8 and NV200). 2011-2012 Sentra 2.0 keeps the MR20DE but is past this catalog edition — left at likely.",
+        "groups": [[("Nissan", "Sentra", 2007, 2010)]],
+    },
+    "nissan-vk56": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3160 (130A) engine-coded VK56DE — Titan 2004-2006, Armada 2005-2006, Pathfinder Armada 2004. Later VK56DE years are past this catalog edition — left at likely.",
+        "groups": [[("Nissan", "Titan", 2004, 2006),
+                    ("Nissan", "Armada", 2005, 2006),
+                    ("Nissan", "Pathfinder Armada", 2004, 2004)]],
+    },
+    "ford-escape-16eb": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0604 (170A) Escape 1.6 2013-2014. 2015-2016 1.6 cars are past this catalog edition — left at likely.",
+        "groups": [[("Ford", "Escape", 2013, 2014)]],
+    },
+    "ford-escape-20eb": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4202 (135A) Escape 2.0 2013-2014. 2015-2016 2.0 cars are past this catalog edition — left at likely.",
+        "groups": [[("Ford", "Escape", 2013, 2014)]],
+    },
+    "gm-vortec43": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), 4.3 V6 rows: 210-5112 (100A) S10 1994-1995, Sonoma 1994-1995, Blazer 1995; 210-5111 (105A) Astro and Safari 1994-1995; 210-5119 (105A) S10/Sonoma/Blazer/Jimmy 1996-1997, Astro/Safari 1996-1999, Express/Savana 4.3 1996-2000 (w/ black plastic rear cover — the w/o-cover vans take 210-5190, same vehicle list); 210-5120 (105A) S10/Blazer 1998-1999, Sonoma/Jimmy 1998-2000, Astro/Safari 2000; 210-5159 (100A) S10/Sonoma/Blazer 2001-2004, Jimmy 2001; 210-5384 (145A) Express/Savana 4.3 2005-2008. The 2000 S10/Blazer split mid-year by VIN — excluded from verified.",
+        "groups": [
+            [("Chevrolet", "S-10*", 1994, 1995),
+             ("GMC", "Sonoma", 1994, 1995),
+             ("Chevrolet", "Blazer*", 1995, 1995)],
+            [("Chevrolet", "Astro*", 1994, 1995),
+             ("GMC", "Safari*", 1994, 1995)],
+            [("Chevrolet", "S-10*", 1996, 1997),
+             ("GMC", "Sonoma", 1996, 1997),
+             ("Chevrolet", "Blazer*", 1996, 1997),
+             ("GMC", "Jimmy*", 1996, 1997),
+             ("Chevrolet", "Astro*", 1996, 1999),
+             ("GMC", "Safari*", 1996, 1999),
+             ("Chevrolet", "Express*", 1996, 2000),
+             ("GMC", "Savana*", 1996, 2000)],
+            [("Chevrolet", "S-10*", 1998, 1999),
+             ("Chevrolet", "Blazer*", 1998, 1999),
+             ("GMC", "Sonoma", 1998, 2000),
+             ("GMC", "Jimmy*", 1998, 2000),
+             ("Chevrolet", "Astro*", 2000, 2000),
+             ("GMC", "Safari*", 2000, 2000)],
+            [("Chevrolet", "S-10*", 2001, 2004),
+             ("GMC", "Sonoma", 2001, 2004),
+             ("Chevrolet", "Blazer*", 2001, 2004),
+             ("GMC", "Jimmy*", 2001, 2001)],
+            [("Chevrolet", "Express*", 2005, 2008),
+             ("GMC", "Savana*", 2005, 2008)],
+        ],
+    },
+    "gm-vortec-van": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5190 (124A, w/o black plastic rear cover) Express/Savana 5.0 and 5.7 1996-2000 across 1500/2500/3500 (the w/-cover vans take 210-5119, same vehicle list — match the case style); 210-5384 (145A Delco) Express/Savana 4.8/5.3/6.0 2005-2008 across 1500/2500/3500. The 2001-2004 vans and 2009-2010 case-size splits are left at likely.",
+        "groups": [
+            [("Chevrolet", "Express*", 1996, 2000),
+             ("GMC", "Savana*", 1996, 2000)],
+            [("Chevrolet", "Express*", 2005, 2008),
+             ("GMC", "Savana*", 2005, 2008)],
+        ],
+    },
+    "cadillac-northstar": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), 4.6 Northstar rows: 210-5184 (140A) Deville, Eldorado and Seville 1997 (unqualified; the 1994-1996 rows carry a 'w/o heated windshield' qualifier — excluded); 210-5185 (140A) Deville and Eldorado 1998-1999; 210-0467 (140A) Deville 2001-2005 and Seville 2001-2003, exc. limousine; 210-0639 (150A) DTS 2006-2011 exc. limousine (limos take 220A 210-0676).",
+        "groups": [
+            [("Cadillac", "Deville", 1997, 1997),
+             ("Cadillac", "Eldorado", 1997, 1997),
+             ("Cadillac", "Seville", 1997, 1997)],
+            [("Cadillac", "Deville", 1998, 1999),
+             ("Cadillac", "Eldorado", 1998, 1999)],
+            [("Cadillac", "Deville", 2001, 2005),
+             ("Cadillac", "Seville", 2001, 2003)],
+            [("Cadillac", "DTS", 2006, 2011)],
+        ],
+    },
+    "mopar-pt24": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), non-turbo rows: 210-4177 (120A) PT Cruiser 2002; 210-4201 (100A) PT Cruiser 2003-2005; 210-4228 (100A) PT Cruiser 2006-2010. GT/Turbo takes separate 130-145A units (210-0558/0559/0803) — noted, and 2001 is not in this edition — left at likely.",
+        "groups": [
+            [("Chrysler", "PT Cruiser", 2002, 2002)],
+            [("Chrysler", "PT Cruiser", 2003, 2005)],
+            [("Chrysler", "PT Cruiser", 2006, 2010)],
+        ],
+    },
+    "mopar-dart": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4237 (120A) Dart 1.4T 2013-2014, 2.0 2013-2015, 2.4 2014-2015; 210-4239 (160A) Dart 2.0/2.4 2013-2015 — every 2013-2015 engine/year pairing sits inside at least the 120A list. 2016 is past this edition — left at likely.",
+        "groups": [[("Dodge", "Dart*", 2013, 2015)]],
+    },
+    "hk-alpha": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 211-6012 (90A) Accent 1.5 1995-1999; 211-6005 (90A) Accent 1.5 2000-2003 and 1.6 2001-2002 (the 2003-2005 1.6 rows carry a Mando-unit qualifier — excluded); 211-6016 (90A) Accent 1.6 2010-2011. The 2006-2009 rows are Mando-qualified — left at likely.",
+        "groups": [
+            [("Hyundai", "Accent", 1995, 1999)],
+            [("Hyundai", "Accent", 2000, 2002)],
+            [("Hyundai", "Accent", 2010, 2011)],
+        ],
+    },
+    "hk-mu-lambda": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0712 (130A) Santa Fe 2.7 2007-2009 and 3.3 2007-2008, Azera 3.3 2007-2009 and 3.8 2007-2008 (the 2009+ rows carry Denso-unit vendor qualifiers — group capped at 2008).",
+        "groups": [[("Hyundai", "Santa Fe", 2007, 2008),
+                    ("Hyundai", "Azera", 2007, 2008)]],
+    },
+    "mini-r50": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0844 (105A) Cooper W10 2002-2004 plus 2005 coupe and convertible rows; the supercharged S (W11, 210-0524) spans 2002-2006 — match trim. Group capped at 2002-2005 where both published lists cover every body style.",
+        "groups": [[("MINI", "Cooper", 2002, 2005)]],
+    },
     "subaru-fa20dit": {
         "evidence": "Subaru OEM 23700AA911 (replaces AA910) fitment (subarupartsdeal.com, retrieved 2026-10-22): WRX 2.0 turbo 2015-2020. The Forester 2.0XT shares its unit with the FB25 Forester (23700AB030), not the WRX — left at likely.",
         "groups": [[("Subaru", "WRX", 2015, 2020)]],
@@ -7215,12 +7571,13 @@ _ALT_VERIFIED: dict = {
                     ("Chevrolet", "Monte Carlo", 2006, 2007)]],
     },
     "gm-ecotec22": {
-        "evidence": "Lester 11265 (Valeo, GM 15828450/22762984) application list (am-autoparts.com + maniacelectricmotors.com, retrieved 2026-10-22): Cobalt 2008-2010, Malibu 2.4 2008-2012, G5 2008-2009, Saturn Aura/Sky/Vue 2008-2010. Denso unit Lester 11140: Cobalt 2.2/2.4 2006-2007. Earlier Cavalier/Sunfire/ION use other units — left at likely.",
+        "evidence": "Lester 11265 (Valeo, GM 15828450/22762984) application list (am-autoparts.com + maniacelectricmotors.com, retrieved 2026-10-22): Cobalt 2008-2010, Malibu 2.4 2008-2012, G5 2008-2009, Saturn Aura/Sky/Vue 2008-2010. Denso unit Lester 11140: Cobalt 2.2/2.4 2006-2007. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0546 (110A) Saturn Vue 2.2 2004-2007 (the same unit also serves the 2.4 and Honda-3.5 Vues those years). Earlier Cavalier/Sunfire/ION use other units — left at likely.",
         "groups": [
             [("Chevrolet", "Cobalt", 2008, 2010),
              ("Chevrolet", "Malibu", 2008, 2012),
              ("Pontiac", "G5", 2008, 2009)],
             [("Chevrolet", "Cobalt", 2006, 2007)],
+            [("Saturn", "VUE", 2004, 2007)],
         ],
     },
     "toyota-22re": {
@@ -7476,21 +7833,28 @@ _ALT_VERIFIED: dict = {
                     ("GMC", "Sierra*", 2007, 2010)]],
     },
     "gm-ecotec24": {
-        "evidence": "TYC 2-11459 application table (tycamericas.com, retrieved 2026-10-22; Lester 11459, GM 13512759): Equinox 2.4 2010-2017, Terrain 2.4 2010-2017. Cobalt/Malibu/G6-era LE5 uses a different unit — left at likely.",
+        "evidence": "TYC 2-11459 application table (tycamericas.com, retrieved 2026-10-22; Lester 11459, GM 13512759): Equinox 2.4 2010-2017, Terrain 2.4 2010-2017. Lester 11265 (Valeo, GM 15828450/22762984) application list (am-autoparts.com, retrieved 2026-10-22) includes Saturn Vue 2.4 2008-2010. Cobalt/Malibu/G6-era LE5 uses a different unit — left at likely.",
         "groups": [[("Chevrolet", "Equinox", 2010, 2017),
-                    ("GMC", "Terrain", 2010, 2017)]],
+                    ("GMC", "Terrain", 2010, 2017)],
+                   [("Saturn", "VUE", 2008, 2010)]],
     },
     "gm-llt36": {
-        "evidence": "BBB Industries 11252 fitment table (partcatalog.com) + Brillman Denso 170A listing (GM 25815839/23105717, retrieved 2026-10-22): Traverse 2009-2017, Acadia 2007-2016, Enclave 2008-2017, Outlook 2007-2010.",
+        "evidence": "BBB Industries 11252 fitment table (partcatalog.com) + Brillman Denso 170A listing (GM 25815839/23105717, retrieved 2026-10-22): Traverse 2009-2017, Acadia 2007-2016, Enclave 2008-2017, Outlook 2007-2010. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0531 (130A) CTS 3.6 2004-2005 (also the 2.8); 210-0641 (145A) CTS 3.6 2008-2009; 210-0765 (150A) CTS 3.0/3.6 2010-2013; 210-0576 (150A) SRX 3.6 2004-2009 and STS 3.6 2005-2011. SRX 2010+ rows carry pulley qualifiers — left at likely.",
         "groups": [[("Chevrolet", "Traverse", 2009, 2017),
                     ("GMC", "Acadia", 2007, 2016),
                     ("Buick", "Enclave", 2008, 2017),
-                    ("Saturn", "Outlook", 2007, 2010)]],
+                    ("Saturn", "Outlook", 2007, 2010)],
+                   [("Cadillac", "CTS", 2004, 2005)],
+                   [("Cadillac", "CTS", 2008, 2009)],
+                   [("Cadillac", "CTS", 2010, 2013)],
+                   [("Cadillac", "SRX", 2004, 2009),
+                    ("Cadillac", "STS", 2005, 2011)]],
     },
     "mopar-pentastar": {
         "evidence": "TYC 2-11570 fitment list (finditparts.com) + BBB 11570 table (partcatalog.com; Chrysler 68272108AD, Denso 421000-0770, retrieved 2026-10-22): Grand Caravan 2011-2020, Town & Country 2011-2016, Journey 3.6 2011-2019, Avenger 3.6 2011-2014, 200 3.6 2011-2014.",
         "groups": [[("Dodge", "Grand Caravan", 2011, 2020),
                     ("Chrysler", "Town & Country", 2011, 2016),
+                    ("Chrysler", "Town And Country", 2011, 2016),
                     ("Dodge", "Journey", 2011, 2019),
                     ("Dodge", "Avenger", 2011, 2014),
                     ("Chrysler", "200", 2011, 2014)]],
@@ -7501,13 +7865,15 @@ _ALT_VERIFIED: dict = {
                     ("Kia", "Optima", 2011, 2013)]],
     },
     "nissan-vq35de": {
-        "evidence": "OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit.",
+        "evidence": "OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely.",
         "groups": [
             [("Nissan", "Altima", 2002, 2006),
              ("Nissan", "Maxima", 2002, 2003),
              ("Nissan", "Murano", 2003, 2007),
              ("Infiniti", "I35", 2002, 2004)],
             [("Nissan", "Maxima", 2004, 2008)],
+            [("Nissan", "Maxima", 2009, 2010),
+             ("Nissan", "Murano", 2009, 2009)],
         ],
     },
     "honda-k24a": {
@@ -7524,9 +7890,15 @@ _ALT_VERIFIED: dict = {
                     ("Chevrolet", "Trax", 2015, 2021)]],
     },
     "ford-mzr": {
-        "evidence": "Lester 11172 application table (cautop.com; Mitsubishi A3TJ0891, Ford 6E5Z-10346-AA, retrieved 2026-10-22): Fusion 2.3 2006-2009, Milan 2.3 2006-2009. Mazda6 2.3 uses Lester 11168 — a different unit, left at likely.",
+        "evidence": "Lester 11172 application table (cautop.com; Mitsubishi A3TJ0891, Ford 6E5Z-10346-AA, retrieved 2026-10-22): Fusion 2.3 2006-2009, Milan 2.3 2006-2009. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4214 (90A) Mazda3 2.0 2004-2009, Mazda3 2.3 2004-2006 and non-turbo 2007-2009, Mazda5 2.3 2006-2007; 210-4303 (100A) Mazda3 2.0 2010-2011; 210-4327 (110A) Mazda5 2.3 2008-2010; 210-4238 (100A) Mazda6 2.3 2008 and 2.5 2009; 210-0615 (170A) Fusion 2.5 AND 2.0 Turbo 2013-2014 (one unit spans both engines). Mazda6 2.3 03-05 splits by transmission and Mazdaspeed turbos differ — left at likely.",
         "groups": [[("Ford", "Fusion", 2006, 2009),
-                    ("Mercury", "Milan", 2006, 2009)]],
+                    ("Mercury", "Milan", 2006, 2009)],
+                   [("Mazda", "3", 2004, 2009),
+                    ("Mazda", "5", 2006, 2007)],
+                   [("Mazda", "3", 2010, 2011)],
+                   [("Mazda", "5", 2008, 2010)],
+                   [("Mazda", "6", 2008, 2009)],
+                   [("Ford", "Fusion", 2013, 2014)]],
     },
     "ford-cyclone": {
         "evidence": "DSS/TRQ Lester 11273 application table (Ford 7T4Z-10346-A, Mitsubishi A3TJ1291, retrieved 2026-10-22): Edge 2007-2014, Taurus 3.5 2008-2012. Quality-Built 11271 175A (Ford 8A4Z-10346-A, partshawk.com): Taurus 2008-2012, Flex 2009-2012, Edge 2011-2013, Explorer 2011-2012.",

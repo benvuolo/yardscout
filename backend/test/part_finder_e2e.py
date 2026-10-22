@@ -58,6 +58,10 @@ CARS = [
     ("camry05", "2005", "Toyota", ["Camry"], "2AZ", True),
     ("f150_99", "1999", "Ford", ["F-150", "F150 Pickup", "F150"], "5.4", True),
     ("wrx16", "2016", "Subaru", ["WRX"], None, True),
+    # The owner's preview repro: a 1998 4Runner used to answer "no
+    # interchange data" — the 3RZ/5VZ truck families now cover it. The
+    # 3.4 chip exercises toyota-5vz (2.4/2.7 chip is toyota-rz).
+    ("runner98", "1998", "Toyota", ["4Runner"], "3.4", True),
 ]
 
 
