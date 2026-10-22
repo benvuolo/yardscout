@@ -47,7 +47,7 @@ import smtplib
 import sys
 import time
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
 
@@ -6629,6 +6629,26 @@ def _fenix_parse_page(page: str) -> list[list[str]]:
     return rows
 
 
+def _fenix_parse_date(date_raw: str) -> str:
+    """MM/DD/YY(YY) from the Fenix inventory table -> 'YYYY-MM-DD' or ''.
+
+    Two-digit years are windowed, not blindly '20'-prefixed: Fenix's feed
+    carries Unix-epoch placeholder rows dated 01/01/70 (seen at Moultrie,
+    2026-10; garbage VINs too), which '20'+yy turned into 2070-01-01 — the
+    app then showed them as 'Set out Jan 1 · fresh' with a NEW badge.
+    yy >= 69 is read as 19yy, so the placeholders become 1970-01-01 and the
+    global _sanitize_date_added() clamp drops them as implausibly old."""
+    m = re.match(r"(\d{2})/(\d{2})/(\d{2,4})", date_raw.strip())
+    if not m:
+        return ""
+    yy = m.group(3)
+    if len(yy) == 4:
+        year = yy
+    else:
+        year = ("19" + yy) if int(yy) >= 69 else ("20" + yy)
+    return f"{year}-{m.group(1)}-{m.group(2)}"
+
+
 def fetch_fenix_inventory() -> list[dict]:
     """Fetch live inventory from every Fenix U-Pull yard (paged HTML table).
 
@@ -6675,11 +6695,7 @@ def fetch_fenix_inventory() -> list[dict]:
                 continue
             if not stock:
                 continue
-            m = re.match(r"(\d{2})/(\d{2})/(\d{2,4})", date_raw)
-            date_iso = ""
-            if m:
-                yy = m.group(3)
-                date_iso = f"{yy if len(yy) == 4 else '20' + yy}-{m.group(1)}-{m.group(2)}"
+            date_iso = _fenix_parse_date(date_raw)
             try:
                 year_i = int(year_s)
             except ValueError:
@@ -10006,6 +10022,34 @@ def normalize_model(model: str, make: str = "") -> str:
     return m
 
 
+_DATE_ADDED_MAX_AGE_DAYS = 15 * 365  # ~15 years; nothing sits on a U-pull lot that long
+
+
+def _sanitize_date_added(date_s: str, today_utc=None) -> str:
+    """Clamp a vehicle's dateAdded to plausible values; '' = unknown date.
+
+    The app's convention for a missing set-out date is the empty string
+    (renders 'Set-out date unknown', never 'fresh'/NEW). Yard feeds ship
+    placeholder/epoch garbage — Fenix's 01/01/70 rows (-> 2070 via naive
+    2-digit-year expansion), Pull-N-Save's 0000-00-00 — so anything that
+    isn't a real calendar date within [today-15y, today+1d] becomes ''.
+    today+1 is legitimate: East Coast yards date in UTC, which can be a
+    day ahead of the scanner's clock."""
+    s = str(date_s or "").strip()[:10]
+    if not s:
+        return ""
+    try:
+        d = datetime.strptime(s, "%Y-%m-%d").date()
+    except ValueError:
+        return ""
+    today = today_utc or datetime.now(timezone.utc).date()
+    if d > today + timedelta(days=1):
+        return ""
+    if d < today - timedelta(days=_DATE_ADDED_MAX_AGE_DAYS):
+        return ""
+    return s
+
+
 def enrich_vehicles(
     vehicles: list[dict],
     *,
@@ -10018,6 +10062,9 @@ def enrich_vehicles(
     # the UI's model dropdown all key off this field.
     for v in vehicles:
         v["model"] = normalize_model(v.get("model") or "", v.get("make") or "")
+        # Global date sanity clamp: every adapter's dateAdded funnels through
+        # here before matching, output_json, the history DB, and alerts.
+        v["dateAdded"] = _sanitize_date_added(v.get("dateAdded", ""))
     allowed_vins: set[str] | None = None
 
     def _apply_match(v: dict, vin_dec: dict | None) -> None:
