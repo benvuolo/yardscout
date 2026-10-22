@@ -1521,6 +1521,7 @@ document.getElementById('saved-list').addEventListener('click', e => {
   renderLive();
 });
 document.getElementById('live-grid').addEventListener('click', e => {
+  if (e.target.closest('.yard-site-link')) { track('yard-site-link'); return; } // anchor navigates normally
   const watch = e.target.closest('.watch-btn');
   if (watch) {
     e.preventDefault();
@@ -2101,6 +2102,7 @@ function renderLive() {
         </div>
         ${profitLine}
         ${partsBlock}
+        ${yardSiteLinkHtml(v)}
       </div>`;
   }).join('') + (overflow
     ? `<div class="empty-state" style="grid-column:1/-1;padding:1rem;"><p>Showing first ${RENDER_CAP} of ${vehicles.length.toLocaleString()} vehicles &mdash; narrow with search or filters (results stay fully sorted).</p></div>`
@@ -2315,6 +2317,118 @@ const CHAIN_PRICE_PAGES = [
   // LKQ Pick Your Part publishes prices per location inside its site/app with
   // no stable public price-list URL, so those yards get no link.
 ];
+
+/* ===== PER-CAR YARD-SITE LINKS (free feature) =====
+ * Every car card links to the yard's own site, best-available first:
+ *   tier 1 — the exact car's page (photos!): Wrench-A-Part family, Fenix,
+ *            Go Pull-It. Verified against live stock/VINs 2026-10.
+ *   tier 2 — the yard site's search, pre-filtered to this make/model:
+ *            Pick-A-Part VA (path-based), Rupert's (query params). Both
+ *            server-rendered GETs, verified 2026-10.
+ *   tier 3 — the yard's inventory page (generated map below) so every card
+ *            links somewhere sensible.
+ *
+ * BUSINESS DECISION — Pick-n-Pull: Row52 hosts per-car pages for PnP yards,
+ * but Row52 is a direct competitor to this app. PnP deliberately stays tier 3
+ * on picknpull.com. Do not "helpfully" add Row52 links.
+ * Harry's is tier 3 only: their stock ids get recycled and there are no
+ * per-car photos, so a per-car link would routinely show the wrong car. */
+/* GEN:YARD_INVENTORY_PAGES:BEGIN (gen_yard_site_links.py) */
+const YARD_INVENTORY_PAGES = [
+  [/^utah pic-a-part - ogden \(premium\)/i, 'https://utpap.com/ogden-premium-inventory/'],
+  [/^utah pic-a-part - ogden/i, 'https://utpap.com/ogden-inventory/'],
+  [/^utah pic-a-part - orem \(premium\)/i, 'https://utpap.com/orem-premium-inventory/'],
+  [/^utah pic-a-part - orem/i, 'https://utpap.com/orem-inventory/'],
+  [/^budget u-pull-it - bartow/i, 'http://budgetupullit.s3softwaresolutions.com/inventory.aspx'],
+  [/^pick[\s-]*n[\s-]*pull/i, 'https://www.picknpull.com/check-inventory'],
+  [/^pick your part/i, 'https://www.pyp.com/inventory/'],
+  [/^pull[\s-]*a[\s-]*part/i, 'https://www.pullapart.com/used-auto-parts/search-car-inventory/'],
+  [/^tear[\s-]*a[\s-]*part/i, 'https://tearapart.com/inventory/'],
+  [/wrench[\s-]*a[\s-]*part/i, 'https://wrenchapart.com/vehicle-search.html'],
+  [/^fenix/i, 'https://fenixupull.com/recent-inventory/'],
+  [/^go pull[\s-]*it/i, 'https://gopullit.com/inventory/'],
+  [/^pull[\s-]*n[\s-]*save/i, 'https://www.pullnsave.com/inventory-search/'],
+  [/^parts galore/i, 'https://parts-galore.com/'],
+  [/^sturtevant/i, 'https://inventory.sturtevantauto.com/'],
+  [/^ace pick/i, 'https://acepickapart.com/search-inventory/'],
+  [/^harry'?s/i, 'https://wegotused.com/our-inventory/'],
+  [/^indy[\s-]*u[\s-]*pull/i, 'https://indyupullit.com/vehicle-inventory/'],
+  [/^u[\s-]*pull[\s-]*it\b/i, 'https://upullitne.com/search-inventory/'],
+  [/^rupert/i, 'https://rupertsupullit.com/search-our-inventory/'],
+  [/^chesterfield/i, 'https://chesterfieldauto.com/search-our-inventory-by-location'],
+  [/^ipull/i, 'https://ipullupull.com/inventory-pricing/'],
+  [/^st\.?\s*cloud/i, 'https://stccrush.com/Home/Inventory'],
+  [/^pick-a-part va/i, 'https://pickapartva.com/inventory/ANY/ANY/?k=1'],
+  [/^nevada pic/i, 'https://www.nvpap.com/'],
+  [/^bessler/i, 'https://vinplus.texnrewards.com/road-tested-parts'],
+  [/^bluegrass/i, 'https://vinplus.texnrewards.com/road-tested-parts'],
+  [/^raceway/i, 'https://vinplus.texnrewards.com/road-tested-parts'],
+  [/^rtp\b/i, 'https://vinplus.texnrewards.com/road-tested-parts'],
+  [/^pickers\b/i, 'https://vinplus.texnrewards.com/pickers-longview'],
+  [/^pipes\b/i, 'https://vinplus.texnrewards.com/pickers-longview'],
+  [/^u[\s-]*pick[\s-]*it az/i, 'https://upickitaz.com/'],
+  [/^barry'?s/i, 'https://barrysupullit.net/vehicle-inventory-2/'],
+  [/^prestige/i, 'https://prestigepullyourpart.com/vehicle-search/'],
+  [/^budget/i, 'https://budgetupullit.com/current-inventory/'],
+];
+/* GEN:YARD_INVENTORY_PAGES:END */
+
+/** Best link into the yard's own site for this car: {url, tier} (never null
+ *  for a yard the scraper covers — tier 3 is validated against every yard). */
+function yardPageUrl(v) {
+  const loc = v.location || '';
+  const id = String(v.id || '');
+  // Tier 1 — per-car pages. Fenix/Go Pull-It ids are "chain-{stock}" where
+  // {stock} is the yard site's own URL key; Wrench-A-Part keys photos by VIN.
+  if (/wrench[\s-]*a[\s-]*part/i.test(loc) && v.vin) {
+    return { url: `https://wrenchapart.com/vehicle-search?photo=${encodeURIComponent(v.vin)}`, tier: 1 };
+  }
+  if (id.startsWith('fenix-')) {
+    // ?setLocation={city-state} is what the site's own location-gate buttons
+    // use — without it, first-time visitors get a "select your location"
+    // interstitial that drops the deep link (verified 2026-10).
+    const slug = (v.city && v.state)
+      ? `?setLocation=${encodeURIComponent(v.city.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + v.state.toLowerCase())}`
+      : '';
+    return { url: `https://fenixupull.com/inventory/${encodeURIComponent(id.slice(6))}/${slug}`, tier: 1 };
+  }
+  if (id.startsWith('gopullit-')) {
+    return { url: `https://gopullit.com/inventory/${encodeURIComponent(id.slice(9))}/`, tier: 1 };
+  }
+  // Tier 2 — make-filtered search on the yard's site. Deliberately make-ONLY:
+  // our model strings are canonicalized (normalize_model in the scraper, e.g.
+  // F150 -> F-150, SSERIES -> S-Series) and no longer match these sites'
+  // native model names exactly, so a model-filtered link can land on a
+  // misleading "no results" page. A make-filtered list always shows the car.
+  if (/^pick-a-part va/i.test(loc) && v.make) {
+    return {
+      url: `https://pickapartva.com/inventory/${encodeURIComponent(v.make.toUpperCase())}/ANY/?k=1`,
+      tier: 2,
+    };
+  }
+  if (/^rupert/i.test(loc) && v.make) {
+    return {
+      url: `https://rupertsupullit.com/search-our-inventory/?make=${encodeURIComponent(v.make.toUpperCase())}&model=all&year_start=1963&year_end=2026`,
+      tier: 2,
+    };
+  }
+  // Tier 3 — the yard's inventory page.
+  const hit = YARD_INVENTORY_PAGES.find(c => c[0].test(loc));
+  return hit ? { url: hit[1], tier: 3 } : null;
+}
+
+/** The quiet link line at the bottom of a car card ('' when yard unknown). */
+function yardSiteLinkHtml(v) {
+  const link = yardPageUrl(v);
+  if (!link) return '';
+  const label = link.tier === 1 ? "View on yard's site" : "Find it on the yard's site";
+  const title = link.tier === 1
+    ? 'Opens this exact car on the yard\u2019s own website'
+    : link.tier === 2
+    ? 'Opens the yard\u2019s website, searched for this make and model'
+    : 'Opens the yard\u2019s own inventory page';
+  return `<div class="yard-site-line"><a class="yard-site-link" href="${escapeHtml(link.url)}" target="_blank" rel="noopener" title="${title}">${label} &#8599;</a></div>`;
+}
 
 function buildYardDirectory() {
   const byLoc = new Map();
@@ -2851,6 +2965,7 @@ function renderAlerts() {
             </div>
           </details>
         ` : ''}
+        ${yardSiteLinkHtml(v)}
       </div>`;
   }).join('');
 }

@@ -1463,6 +1463,16 @@
     text-underline-offset: 2px;
   }
   .yard-price-link:hover { color: var(--accent); }
+  /* Per-car link to the yard's own site — quiet, bottom of every car card. */
+  .yard-site-line { margin-top: 0.55rem; }
+  .yard-site-link {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-dim);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .yard-site-link:hover { color: var(--accent); }
   .yard-price-none {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
