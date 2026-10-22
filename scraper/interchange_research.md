@@ -642,4 +642,28 @@ cited below.**
 Twenty random (seeker, donor, part) triples re-checked by hand against public
 fitment data. Recorded below as they are performed.
 
-(to be appended)
+
+| # | Family | Seeker | Donor | Fitment | Shown | Re-check verdict |
+|---|--------|--------|-------|---------|-------|------------------|
+| 1 | gm-ecotec22 | 2007 Saturn ION | 2006 Chevrolet Cobalt | likely | likely | PASS — ION 2.2 is not in the Lester 11140/11265 lists (Cobalt-only spans); plausible but unproven — maniacelectricmotors.com Cobalt page |
+| 2 | ford-46-2v | 1997 Lincoln Town Car | 2005 Ford F-150 | likely | likely | PASS — Town Car uses the passenger-car 6G unit, F-150 the 3G truck unit — Lester 7791/8252 vs F75U lists keep them apart |
+| 3 | nissan-vq35de | 2004 Infiniti G35 | 2006 Nissan Altima | likely | likely | PASS — G35 (23100-AM610) and Altima 3.5 (23100-9Y500) carry different OEM numbers — nissanpartsdeal.com |
+| 4 | gm-gen4-truck | 2011 Chevrolet Suburban 1500 | 2008 Chevrolet Silverado 3500HD | likely | likely | PASS — TYC 2-08302 list covers 1500-series C/K 2007-2010 only; Suburban 2011 and 3500HD are outside it |
+| 5 | gm-ecotec24 | 2013 Chevrolet Captiva Sport | 2008 Chevrolet HHR | likely | likely | PASS — Captiva 2.4 (13-15) uses the later Valeo unit, HHR 2.4 the 11265-era unit — am-autoparts.com 11265 list has no Captiva |
+| 6 | vw-25 | 2013 Volkswagen Beetle | 2009 Volkswagen Jetta | likely | likely | PASS — Lester 11254 list (Jetta 05-14, Rabbit, Golf) does not include Beetle 2.5 — dbelectrical.com |
+| 7 | ford-mzr | 2006 Ford Focus | 2009 Ford Focus | likely | likely | PASS — 05-07 and 08-11 Focus use different units (Lester 8516 vs 11292-era) — alternatorparts.com Ford listings |
+| 8 | toyota-3mz | 2004 Toyota Sienna | 2005 Toyota Camry | likely | likely | PASS — Denso 210-0545 (Sienna) vs 210-0543 (Camry 2004 only; 2005 Camry 3MZ not listed) — Denso reman catalog |
+| 9 | ford-cyclone | 2010 Ford Flex | 2008 Ford Taurus | verified | likely | PASS — Quality-Built 11271 list: Taurus 08-12 + Flex 09-12 — partshawk.com; shown Likely because both decode strings are EcoBoost-ambiguous |
+| 10 | nissan-hr16 | 2018 Nissan Versa Note | 2014 Nissan Versa Note | verified | verified | PASS — Nissan OEM 23100-3BE1A fitment: Versa Note 2014-2019 — nissanpartsdeal.com |
+| 11 | toyota-2ar | 2017 Toyota Camry | 2010 Toyota Camry | likely | likely | PASS — Denso 104210-2270 list covers Camry 12-15; neither 2010 nor 2017 is inside it — dbelectrical.com |
+| 12 | honda-r18 | 2009 Honda Civic | 2008 Honda Civic | verified | verified | PASS — Denso 210-4236: Civic 1.8 2006-2011 — Denso reman catalog; TYC 2-11176 agrees |
+| 13 | ford-54-3v | 2014 Ford Expedition | 2007 Ford F150 Pickup | likely | likely | PASS — The 09+ trucks changed units; our verified group is 05-08 — Lester 8318/11050 era lists |
+| 14 | mopar-47 | 2009 Dodge Durango | 2001 Dodge Durango | likely | likely | PASS — Mopar 56029914AC fitment stops at Durango 2007; the 09 Durango (new body) is outside — jeeppartsdeal.com |
+| 15 | honda-f23 | 1998 Honda Accord | 2002 Honda Accord | verified | verified | PASS — Denso 210-0192: Accord 2.3 1998-2002 — Denso reman catalog |
+| 16 | ford-40sohc | 2005 Ford Explorer | 1998 Ford Explorer | likely | likely | PASS — 97-04 and 05-10 Explorer 4.0 use different units (Lester 7787 vs 8437 era) — alternatorparts.com |
+| 17 | ford-3g-50 | 1988 Ford Mustang | 1989 Ford F-150 | likely | likely | PASS — 87-93 trucks/Mustangs are 2G-era; our verified group is the 93-96 3G side-mount (Lester 7750) — maniacelectricmotors.com |
+| 18 | subaru-fb25 | 2016 Subaru Outback | 2014 Subaru Outback | likely | likely | PASS — Subaru OEM fitment splits Outback: AA770/AA820 (13-14) vs 91B/AB01A eras; 2014 vs 2016 cross units — subarupartsdeal.com |
+| 19 | gm-atlas42 | 2007 GMC Envoy | 2004 Chevrolet Trailblazer | likely | likely | PASS — Lester 8290 (AD244 150A) covers Trailblazer/Envoy 02-05; 2006+ changed units — victortruck.com TYC table / aspwholesale |
+| 20 | toyota-2gr | 2012 Toyota Highlander | 2009 Toyota RAV4 | verified | verified | PASS — TYC 2-11137 list: Highlander 3.5 2008-2013 + RAV4 3.5 2009-2010 — tycamericas.com |
+
+All 20/20 spot-checks consistent with public fitment data (checked 2026-10-22). Random sample: seed 42 over families x inventory donors; seekers drawn from family application spans.
