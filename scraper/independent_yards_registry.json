@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-21",
+  "updated": "2026-10-22",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -900,6 +900,118 @@
           "state": "LA",
           "lat": 32.529,
           "lng": -93.7721
+        }
+      ]
+    },
+    {
+      "name": "Joliet U-Pull-It (VinPlus)",
+      "status": "adapter-built",
+      "platform": "VinPlus multi-tenant React SPA (vinplus.texnrewards.com) over unauthenticated Cloud Run JSON API; source system crush",
+      "inventory_url": "https://www.jolietupullit.com/inventory",
+      "api": {
+        "endpoint": "https://inventory-search-api-581547763015.us-central1.run.app/searchVehicleHttp",
+        "method": "POST",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": "~49+ (49 makes x 1 location + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
+        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=joliet_u_pull_it, sourceSystem=crush. Results CAP AT 100/query \u2014 per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. First Chicago-metro independent (~3,000 vehicles; 1014 E Washington St, Joliet IL 60433 \u2014 exact OSM parcel). Own Wix site also renders inventory at /inventory."
+      },
+      "update_freshness": "live (daysInYard present; fresh dateAdded values)",
+      "robots": "vinplus.texnrewards.com: allow all",
+      "tos_flags": "none found",
+      "price_list": "https://www.jolietupullit.com/auto-part-prices (Wix page, only ~14 popular prices embedded server-side \u2014 link-only, not parseable into a structured list)",
+      "vinplus_spa_url": "https://vinplus.texnrewards.com/joliet",
+      "locations": [
+        {
+          "name": "Joliet U-Pull-It",
+          "city": "Joliet",
+          "state": "IL",
+          "lat": 41.5231,
+          "lng": -88.0575
+        }
+      ]
+    },
+    {
+      "name": "San Antonio Pick-N-Pull (Independent) (VinPlus)",
+      "status": "adapter-built",
+      "platform": "VinPlus multi-tenant React SPA (vinplus.texnrewards.com) over unauthenticated Cloud Run JSON API; source system crush",
+      "inventory_url": "https://www.picknpullsa.com/inventory",
+      "api": {
+        "endpoint": "https://inventory-search-api-581547763015.us-central1.run.app/searchVehicleHttp",
+        "method": "POST",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": "~49+ (49 makes x 1 location + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
+        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=pick_n_pull_san_antonio, sourceSystem=crush. Results CAP AT 100/query \u2014 per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. INDEPENDENT yard trading as 'Pick-N-Pull San Antonio' (picknpullsa.com; 11795 Applewhite Rd, San Antonio TX 78224 \u2014 exact OSM parcel). NOT the national Pick-n-Pull chain: the app display name deliberately does not start with 'Pick-N-Pull' because app.js/db.py dispatch the chain's pricing/links/tool rules on that name prefix. Rows include pre-2019 dateAdded values \u2014 the global _sanitize_date_added clamp handles them."
+      },
+      "update_freshness": "live (daysInYard present; fresh dateAdded values)",
+      "robots": "vinplus.texnrewards.com: allow all",
+      "tos_flags": "none found",
+      "price_list": "https://www.picknpullsa.com/price-list (clean Part/Price/Core table, ~980 rows) -> pnpsa_pricing.json",
+      "vinplus_spa_url": "https://vinplus.texnrewards.com/pnpsa",
+      "locations": [
+        {
+          "name": "San Antonio Pick-N-Pull (Independent)",
+          "city": "San Antonio",
+          "state": "TX",
+          "lat": 29.2989,
+          "lng": -98.5474
+        }
+      ]
+    },
+    {
+      "name": "195 Used Auto Parts (VinPlus)",
+      "status": "adapter-built",
+      "platform": "VinPlus multi-tenant React SPA (vinplus.texnrewards.com) over unauthenticated Cloud Run JSON API; source system crush",
+      "inventory_url": "https://www.195usedautoparts.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://inventory-search-api-581547763015.us-central1.run.app/searchVehicleHttp",
+        "method": "POST",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": "~49+ (49 makes x 1 location + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
+        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=195_used_auto_parts, sourceSystem=crush. Results CAP AT 100/query \u2014 per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. 12077 State Highway 195, Killeen TX 76542 \u2014 parcel missing from OSM, zip-centroid coords. Own site runs the CRUSH MVC app (/Home/Inventory, /Home/PartPrices)."
+      },
+      "update_freshness": "live (daysInYard present; fresh dateAdded values)",
+      "robots": "vinplus.texnrewards.com: allow all",
+      "tos_flags": "none found",
+      "price_list": "https://www.195usedautoparts.com/Home/PartPrices (clean 3-column table, ~700 rows) -> p195_pricing.json",
+      "vinplus_spa_url": "https://vinplus.texnrewards.com/195-used-auto-parts",
+      "locations": [
+        {
+          "name": "195 Used Auto Parts",
+          "city": "Killeen",
+          "state": "TX",
+          "lat": 31.0647,
+          "lng": -97.7219
+        }
+      ]
+    },
+    {
+      "name": "Pick Ur Part Auto Salvage (VinPlus)",
+      "status": "adapter-built",
+      "platform": "VinPlus multi-tenant React SPA (vinplus.texnrewards.com) over unauthenticated Cloud Run JSON API; source system yardsmart",
+      "inventory_url": "https://pickurpart.com/inventory/",
+      "api": {
+        "endpoint": "https://inventory-search-api-581547763015.us-central1.run.app/searchVehicleHttp",
+        "method": "POST",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": "~49+ (49 makes x 1 location + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
+        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=pick_ur_part, sourceSystem=yardsmart. Results CAP AT 100/query \u2014 per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. 4125 E Slaton Rd, Lubbock TX 79404 \u2014 house number missing from OSM, road-level coords. Opened Feb 2026, growing fast (~870 vehicles). Also runs yardconnect-pro on its own WordPress site; VinPlus is the cheaper path."
+      },
+      "update_freshness": "live (daysInYard present; fresh dateAdded values)",
+      "robots": "vinplus.texnrewards.com: allow all",
+      "tos_flags": "none found",
+      "price_list": "none published ('call for prices')",
+      "vinplus_spa_url": "https://vinplus.texnrewards.com/pick-ur-part",
+      "locations": [
+        {
+          "name": "Pick Ur Part Auto Salvage",
+          "city": "Lubbock",
+          "state": "TX",
+          "lat": 33.52,
+          "lng": -101.7805
         }
       ]
     },

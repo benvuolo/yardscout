@@ -8596,15 +8596,29 @@ def fetch_stcloud_inventory() -> list[dict]:
 
 
 # VinPlus platform (vinplus.texnrewards.com) — multi-tenant React SPA over an
-# unauthenticated Cloud Run JSON API (source system: YardSmart). One adapter,
-# two tenants, 9 yards:
+# unauthenticated Cloud Run JSON API. VinPlus fronts MULTIPLE backend YMSs
+# (sourceSystem: yardsmart AND crush observed), so it keeps absorbing yards
+# regardless of their back office. One adapter, these tenants:
 #   road_tested_parts — Road Tested Parts network: Bessler's U Pull & Save
 #     (Hebron KY + Louisville KY), Bluegrass U Pull & Save (Lexington KY),
 #     Raceway Pik-A-Part (Savannah TN), RTP Pick-A-Part (Maiden NC)
 #   pickers_longview — Tri-State Iron & Metal network: Pickers (Longview TX,
 #     Texarkana AR — the API says TX but the yard is at 5512 E 9th St on the
 #     Arkansas side — and Reno TX), Pipes U-Pull-It (Shreveport LA)
+#   joliet_u_pull_it — Joliet U-Pull-It (Joliet IL, 1014 E Washington St) —
+#     first Chicago-metro independent (2026-10-22 expansion pass)
+#   pick_n_pull_san_antonio — INDEPENDENT yard at 11795 Applewhite Rd, San
+#     Antonio TX (picknpullsa.com). NOT the national Pick-n-Pull chain: the
+#     display name deliberately does NOT start with "Pick-N-Pull" because the
+#     app (and db.py) dispatch the chain's pricing/links/tool rules on that
+#     name prefix.
+#   195_used_auto_parts — 195 Used Auto Parts (12077 State Highway 195,
+#     Killeen TX; zip-centroid coords, parcel missing from OSM)
+#   pick_ur_part — Pick Ur Part Auto Salvage (4125 E Slaton Rd, Lubbock TX;
+#     road-level coords, house number missing from OSM; opened Feb 2026)
 # GET /api/yard-info/{tenant} → business name + locations (location_id).
+# Single-location tenants report locations: [] — their location key below is
+# "" and searchVehicleHttp gets location_id null (verified 2026-10-22).
 # CAREFUL: the Pickers tenant's SEARCH yard_id is tri_state_iron_metal (the
 # business name), not the pickers_longview URL slug — the slug silently
 # returns zero matches.
@@ -8613,10 +8627,14 @@ def fetch_stcloud_inventory() -> list[dict]:
 # "location_id"} → rows with year/make/model/vin/stock/vehicleRow/color/
 # engine/dateAdded (ISO tz)/yardLocation/daysInYard. RESULTS CAP AT 100 — the
 # scan loops make × location and recursively bisects year ranges on any
-# exactly-100 response. ~441 base requests at 2s ≈ 15 min. Stock numbers
-# ("000000109811") are the id basis, location-code qualified. NOTE:
-# utah-pic-a-part and ipull-upull are ALSO VinPlus tenants (already covered
-# by their own adapters) — a periodic tenant-slug sweep is worth doing.
+# exactly-100 response. Base requests = 49 makes × locations at 2s pacing,
+# all serial on the one API host. Stock numbers ("000000109811", "STK076062")
+# are the id basis, location-code qualified (override with "id_prefix" when a
+# migrated chain must keep its historical id scheme). Per-location "source"
+# overrides _source so migrated chains keep their zero-vehicle alarm label.
+# NOTE: utah-pic-a-part and ipull-upull are ALSO VinPlus tenants (already
+# covered by their own adapters) — a periodic tenant-slug sweep is worth
+# doing; /api/yard-info/{slug} is a free validity oracle.
 # robots.txt (vinplus.texnrewards.com): allow all. Addresses from the
 # tenants' sites; Lexington/Savannah/Maiden parcels missing from OSM →
 # zip/town centroids.
@@ -8648,6 +8666,23 @@ VINPLUS_TENANTS = {
                          "city": "Reno", "state": "TX", "lat": 33.6634, "lng": -95.4537},
         "pipes_shreveport": {"code": "shreveport", "name": "Pipes U-Pull-It - Shreveport",
                              "city": "Shreveport", "state": "LA", "lat": 32.5290, "lng": -93.7721},
+    },
+    # --- 2026-10-22 expansion pass (single-location tenants; location_id null) ---
+    "joliet_u_pull_it": {
+        "": {"code": "joliet", "name": "Joliet U-Pull-It",
+             "city": "Joliet", "state": "IL", "lat": 41.5231, "lng": -88.0575},
+    },
+    "pick_n_pull_san_antonio": {
+        "": {"code": "pnpsa", "name": "San Antonio Pick-N-Pull (Independent)",
+             "city": "San Antonio", "state": "TX", "lat": 29.2989, "lng": -98.5474},
+    },
+    "195_used_auto_parts": {
+        "": {"code": "hwy195", "name": "195 Used Auto Parts",
+             "city": "Killeen", "state": "TX", "lat": 31.0647, "lng": -97.7219},
+    },
+    "pick_ur_part": {
+        "": {"code": "pickurpart", "name": "Pick Ur Part Auto Salvage",
+             "city": "Lubbock", "state": "TX", "lat": 33.5200, "lng": -101.7805},
     },
 }
 
@@ -8684,7 +8719,7 @@ def _vinplus_search(tenant: str, make: str, location_id: str,
 
 
 def fetch_vinplus_inventory() -> list[dict]:
-    """Fetch both VinPlus tenants' inventories (make x location loop)."""
+    """Fetch every VinPlus tenant's inventory (make x location loop)."""
     try:
         r = requests.get(f"{VINPLUS_API}/api/vehicle-groups", headers=HEADERS, timeout=60)
         r.raise_for_status()
@@ -8701,9 +8736,12 @@ def fetch_vinplus_inventory() -> list[dict]:
         for loc_id, yard in locations.items():
             loc_rows: list[dict] = []
             for make_name in makes:
-                loc_rows.extend(_vinplus_search(tenant, make_name, loc_id))
+                # Single-location tenants (locations: [] in yard-info) key
+                # their one yard as "" here and search with location_id null.
+                loc_rows.extend(_vinplus_search(tenant, make_name, loc_id or None))
             _indep_cache_raw(f"vinplus_{yard['code']}.json",
                              json.dumps(loc_rows).encode())
+            id_prefix = yard.get("id_prefix") or f"vinplus-{yard['code']}-"
             for row in loc_rows:
                 stock = str(row.get("stock") or "").strip()
                 if not stock:
@@ -8714,8 +8752,9 @@ def fetch_vinplus_inventory() -> list[dict]:
                     year_i = int(row.get("year") or 0)
                 except (TypeError, ValueError):
                     year_i = 0
+                engine = str(row.get("engine") or "").strip()
                 all_vehicles.append({
-                    "id": f"vinplus-{yard['code']}-{stock.lower()}",
+                    "id": f"{id_prefix}{stock.lower()}",
                     "vin": vin if len(vin) == 17 else "",
                     "year": year_i,
                     "make": _utpap_format_label(str(row.get("make") or "")),
@@ -8723,12 +8762,13 @@ def fetch_vinplus_inventory() -> list[dict]:
                     "row": str(row.get("vehicleRow") or "").strip(),
                     "dateAdded": date_s,
                     "_color": str(row.get("color") or "").strip().title(),
+                    **({"_engine": engine} if engine else {}),
                     "_location": yard["name"],
                     "_city": yard["city"],
                     "_state": yard["state"],
                     "_lat": yard["lat"],
                     "_lng": yard["lng"],
-                    "_source": "vinplus",
+                    "_source": yard.get("source", "vinplus"),
                 })
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
@@ -10014,7 +10054,8 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "ipull": "iPull-uPull",
     "stcloud": "St. Cloud U Pull",
     "nvpap": "Nevada Pic-A-Part",
-    "vinplus": "VinPlus (RTP KY/TN/NC + Pickers TX/AR/LA)",
+    "vinplus": "VinPlus (RTP KY/TN/NC, Pickers TX/AR/LA, Joliet IL, "
+               "San Antonio PnP TX, 195 TX, Pick Ur Part TX)",
     "papva": "Pick-A-Part VA",
     "upickitaz": "U-Pick-It AZ",
     "gopullit": "Go Pull-It",
@@ -11538,7 +11579,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes), Pick-A-Part VA, U-Pick-It AZ, Go Pull-It FL/GA, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Chesterfield Auto Parts VA, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part), Pick-A-Part VA, U-Pick-It AZ, Go Pull-It FL/GA, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -11642,7 +11683,7 @@ def main():
         indep_fut = None
         indep_pool = None
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x9, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige, Budget) in the background, overlapped with the chain scans...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x13, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige, Budget) in the background, overlapped with the chain scans...", file=sys.stderr)
             indep_pool = concurrent.futures.ThreadPoolExecutor(
                 max_workers=1, thread_name_prefix="indep-main")
             indep_fut = indep_pool.submit(fetch_independent_inventory)
