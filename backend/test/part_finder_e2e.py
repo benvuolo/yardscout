@@ -106,8 +106,12 @@ with sync_playwright() as pw:
                            timeout=30000)
     page.click("#live-filter-toggle")
 
-    page.click("#pf-toggle")
-    page.wait_for_selector("#pf-body", state="visible")
+    # The finder lives on its own Parts tab now (Live / Yards / Parts /
+    # Alerts) — enter the way a user does.
+    page.click(".tab[data-tab='parts']")
+    page.wait_for_selector("#tab-parts.active #pf-body", state="visible")
+    check("Parts tab activates and shows the finder",
+          page.locator("#tab-parts.active").count() == 1)
 
     for slug, year, make, models, engine_chip, expect_verified in CARS:
         model = pf_search(page, year, make, models, engine_chip)
@@ -144,6 +148,77 @@ with sync_playwright() as pw:
         print(f"     ver={n_ver} lik={n_lik} — "
               f"shot pf_{slug}_alternator.png")
 
+    # ---- tab bar + cross-link + regression sweep --------------------------
+    # Four tabs must fit the dock; labels must not wrap or clip.
+    tabs = page.eval_on_selector_all(
+        ".tabs .tab", """els => els.map(e => ({
+          label: e.querySelector('.tab-label').textContent,
+          w: e.getBoundingClientRect().width,
+          clipped: e.scrollWidth > e.clientWidth + 1}))""")
+    check("tab bar has 4 tabs (Live/Yards/Parts/Alerts)",
+          [t["label"] for t in tabs] == ["Live", "Yards", "Parts", "Alerts"],
+          str(tabs))
+    check("no tab label clips at 390px", not any(t["clipped"] for t in tabs),
+          str(tabs))
+    page.screenshot(path=str(SHOTS / "parts_tab_mobile_390.png"))
+
+    # Quiet cross-link hands off to the Yards price comparison with the
+    # selected part prefilled.
+    page.click("#pf-compare-link")
+    page.wait_for_timeout(600)
+    check("compare link lands on the Yards tab",
+          page.locator("#tab-yards.active").count() == 1)
+    cmp_val = page.input_value("#compare-input")
+    check("compare combobox prefilled with the part",
+          "alternator" in cmp_val.lower(), cmp_val)
+    check("compare sheet opened from the hand-off",
+          page.locator("#prices-sheet.open").count() == 1)
+    page.screenshot(path=str(SHOTS / "parts_compare_handoff.png"))
+    page.click("#prices-close")
+    page.wait_for_timeout(300)
+
+    # Other tabs still render (no layout/JS regressions from the move).
+    for t in ("live", "alerts", "parts"):
+        page.click(f".tab[data-tab='{t}']")
+        page.wait_for_timeout(300)
+        check(f"{t} tab renders after the move",
+              page.locator(f"#tab-{t}.active").count() == 1)
+    check("Live tab carries no leftover finder markup",
+          page.locator("#tab-live .part-finder").count() == 0)
+    ctx.close()
+
+    def boot(viewport, mobile):
+        c = browser.new_context(
+            viewport=viewport, device_scale_factor=3 if mobile else 1,
+            is_mobile=mobile, has_touch=mobile)
+        p = c.new_page()
+        p.add_init_script(PRO_BOOT)
+        p.goto(f"http://127.0.0.1:{PORT}/index.html",
+               wait_until="domcontentloaded")
+        p.click("#live-filter-toggle")
+        p.fill("#live-zip", "85003")
+        p.wait_for_selector("#live-grid .match-card, #live-grid .dim-card",
+                            timeout=30000)
+        p.click("#live-filter-toggle")
+        p.click(".tab[data-tab='parts']")
+        p.wait_for_timeout(400)
+        return c, p
+
+    # ---- 360px: the narrowest supported phone ----------------------------
+    ctx, page = boot({"width": 360, "height": 780}, True)
+    tabs = page.eval_on_selector_all(
+        ".tabs .tab", "els => els.map(e => e.scrollWidth > e.clientWidth + 1)")
+    check("no tab label clips at 360px", not any(tabs), str(tabs))
+    page.screenshot(path=str(SHOTS / "parts_tab_mobile_360.png"))
+    ctx.close()
+
+    # ---- desktop: tab active with a real search on screen -----------------
+    ctx, page = boot({"width": 1280, "height": 900}, False)
+    model = pf_search(page, "2005", "Toyota", ["Camry"], "2AZ")
+    check("desktop: Camry search renders on the Parts tab",
+          model is not None
+          and page.locator("#pf-results .pf-row-card").count() > 0)
+    page.screenshot(path=str(SHOTS / "parts_tab_desktop.png"))
     ctx.close()
     browser.close()
 

@@ -483,10 +483,10 @@ function applyInventory(raw, { quiet = false } = {}) {
   annotateVinDuplicates(liveInventory);
   liveLoaded = true;
   updateCoverageCounts();
-  // Part-first pickers draw from the inventory; refresh them if the panel
-  // opened before the data arrived (function declarations hoist, so this
-  // forward reference is safe).
-  if (document.getElementById('pf-body').style.display !== 'none') pfPopulatePickers();
+  // Part-first pickers draw from the inventory; refresh them if the Parts
+  // tab was visited before the data arrived (function declarations hoist,
+  // so this forward reference is safe).
+  if (pfInited) pfPopulatePickers();
   _makeScopeKey = null;   // data changed — force the scoped rebuild
   refreshScopedInventory();
   populateWatchOptions();
@@ -3965,35 +3965,39 @@ document.getElementById('pf-go').addEventListener('click', pfRunSearch);
     pfMaybeSearch();
   });
 });
-document.getElementById('pf-toggle').addEventListener('click', () => {
-  const body = document.getElementById('pf-body');
-  const btn = document.getElementById('pf-toggle');
-  const opening = body.style.display === 'none';
-  body.style.display = opening ? '' : 'none';
-  btn.setAttribute('aria-expanded', opening ? 'true' : 'false');
-  localStorage.setItem('jh_pf_open', opening ? '1' : '0');
-  if (opening) {
-    track('part-finder-open');
-    loadInterchange().then(() => {
-      pfPopulatePickers();
-      // Restore the last search so a returning user is one tap from results.
-      try {
-        const saved = JSON.parse(localStorage.getItem('jh_pf') || 'null');
-        if (saved && !pfCat) {
-          const cat = (interchangeData ? interchangeData.categories : []).find(c => c.id === saved.cat);
-          if (cat) { pfCat = cat; pfPartInput.value = cat.label; }
-          if (saved.year) document.getElementById('pf-year').value = saved.year;
-          if (saved.make) { document.getElementById('pf-make').value = saved.make; pfPopulateModels(); }
-          if (saved.model) document.getElementById('pf-model').value = saved.model;
-        }
-      } catch (e) { /* corrupt saved state — start clean */ }
-    });
+/* The Parts tab owns the finder now: data loads lazily on first visit, and
+ * the last search is restored so a returning user is one tap from results. */
+let pfInited = false;
+function initPartsTab() {
+  if (pfInited) return;
+  pfInited = true;
+  track('part-finder-open');
+  loadInterchange().then(() => {
+    pfPopulatePickers();
+    try {
+      const saved = JSON.parse(localStorage.getItem('jh_pf') || 'null');
+      if (saved && !pfCat) {
+        const cat = (interchangeData ? interchangeData.categories : []).find(c => c.id === saved.cat);
+        if (cat) { pfCat = cat; pfPartInput.value = cat.label; }
+        if (saved.year) document.getElementById('pf-year').value = saved.year;
+        if (saved.make) { document.getElementById('pf-make').value = saved.make; pfPopulateModels(); }
+        if (saved.model) document.getElementById('pf-model').value = saved.model;
+      }
+    } catch (e) { /* corrupt saved state — start clean */ }
+  });
+}
+// Quiet hand-off to the Yards price comparison — the compare feature lives
+// there; we just carry the chosen part across and let its combobox resolve.
+document.getElementById('pf-compare-link').addEventListener('click', () => {
+  const label = pfCat ? pfCat.label : '';
+  document.querySelector('.tab[data-tab="yards"]').click();
+  if (label) {
+    compareInput.value = label;
+    document.getElementById('compare-go').click();
+  } else {
+    compareInput.focus();
   }
 });
-if (localStorage.getItem('jh_pf_open') === '1') {
-  // Re-open on load for users who had it open; data loads lazily as above.
-  document.getElementById('pf-toggle').click();
-}
 document.getElementById('yards-filter-chain').addEventListener('change', renderYards);
 document.getElementById('yards-filter-state').addEventListener('change', renderYards);
 
@@ -4022,6 +4026,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
     if (tab.dataset.tab === 'yards') renderYards();
     if (tab.dataset.tab === 'live') renderLive();
+    if (tab.dataset.tab === 'parts') initPartsTab();
     if (tab.dataset.tab === 'alerts') renderAlerts();
   });
 });
