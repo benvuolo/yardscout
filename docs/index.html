@@ -125,6 +125,7 @@
               <option value="50">&le; 50 mi</option>
               <option value="100" selected>&le; 100 mi</option>
               <option value="250">&le; 250 mi</option>
+              <option value="500">&le; 500 mi &mdash; Pro</option>
             </select>
           </div>
           <div class="ctl">
@@ -218,12 +219,14 @@
     <div class="stats-bar" id="yards-stats-bar"></div>
     <div class="toolbar yards-toolbar">
       <input type="text" class="search-box" id="yards-search" placeholder="Search yard name, city, state&hellip;">
+      <input type="text" class="search-box yards-zip" id="yards-zip" inputmode="numeric" maxlength="5" placeholder="Zip code" title="Re-center distances on a different zip code">
       <select id="yards-radius" title="Only show yards within this distance of your zip">
         <option value="">Any distance &mdash; Pro</option>
         <option value="25">&le; 25 mi</option>
         <option value="50">&le; 50 mi</option>
         <option value="100" selected>&le; 100 mi</option>
         <option value="250">&le; 250 mi</option>
+        <option value="500">&le; 500 mi &mdash; Pro</option>
       </select>
       <select id="yards-filter-chain" title="Only show yards from this chain">
         <option value="">All chains</option>

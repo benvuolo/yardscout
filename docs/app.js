@@ -905,9 +905,11 @@ function startHeadTicker() {
 /* One-tap actions for the out-of-range empty state. */
 function jhWidenRadius(mi) {
   const sel = document.getElementById('live-radius');
-  const opts = [...sel.options].map(o => parseFloat(o.value)).filter(v => !isNaN(v));
+  // Free users can only widen to free tiers (≤ 250 mi); 500 mi and "any
+  // distance" are Pro, so nothing wide enough gets the honest pitch instead.
+  const opts = [...sel.options].map(o => parseFloat(o.value))
+    .filter(v => !isNaN(v) && (isPro() || v <= FREE_MAX_RADIUS_MI));
   const fit = opts.find(v => v >= mi);
-  // Nothing wide enough means "any distance", which is nationwide — Pro only.
   if (fit == null && !isPro()) { openUpgradeSheet('widen-radius-nationwide'); return; }
   sel.value = fit != null ? String(fit) : '';
   renderLive();
@@ -2237,12 +2239,14 @@ document.getElementById('live-filter-match').addEventListener('change', (e) => {
 document.getElementById('live-zip').addEventListener('input', e => setZipCenter(e.target.value.trim()));
 document.getElementById('live-radius').addEventListener('change', () => {
   const sel = document.getElementById('live-radius');
-  // "Any distance" (empty value) is nationwide — Pro only. Snap free users
-  // back to their previous radius and pitch the upgrade instead.
-  if (sel.value === '' && !isPro()) {
+  // Widths beyond the free cap ("any distance" and 500 mi) are Pro only.
+  // Snap free users back to their previous radius and pitch the upgrade.
+  if (!isPro() && (sel.value === '' || parseFloat(sel.value) > FREE_MAX_RADIUS_MI)) {
+    const trigger = sel.value === '' ? 'radius-any-distance' : 'radius-' + sel.value + 'mi';
     const prev = localStorage.getItem('jh_radius');
-    sel.value = prev && prev !== '' ? prev : String(FREE_MAX_RADIUS_MI);
-    openUpgradeSheet('radius-any-distance');
+    sel.value = prev && prev !== '' && parseFloat(prev) <= FREE_MAX_RADIUS_MI
+      ? prev : String(FREE_MAX_RADIUS_MI);
+    openUpgradeSheet(trigger);
     return;
   }
   localStorage.setItem('jh_radius', sel.value);
@@ -2252,14 +2256,15 @@ document.getElementById('live-radius').addEventListener('change', () => {
 (() => {
   const savedZip = localStorage.getItem('jh_zip') || '';
   let savedRadius = localStorage.getItem('jh_radius');
-  // Radius is capped at 250 mi now; migrate any older saved value down.
-  if (savedRadius !== null && parseInt(savedRadius, 10) > 250) {
-    savedRadius = '250';
+  // The widest numeric tier is 500 mi now; migrate any older saved value down.
+  if (savedRadius !== null && parseInt(savedRadius, 10) > 500) {
+    savedRadius = '500';
     localStorage.setItem('jh_radius', savedRadius);
   }
-  // Legacy "any distance" ('' = nationwide) is Pro-only now; migrate free
-  // users down to the widest free radius.
-  if (savedRadius === '' && !isPro()) {
+  // Pro-only widths ('' = any distance, 500 mi) migrate down to the widest
+  // free radius for free users.
+  if (savedRadius !== null && !isPro()
+      && (savedRadius === '' || parseInt(savedRadius, 10) > FREE_MAX_RADIUS_MI)) {
     savedRadius = String(FREE_MAX_RADIUS_MI);
     localStorage.setItem('jh_radius', savedRadius);
   }
@@ -2562,9 +2567,16 @@ function populateYardFilters(inRange) {
 function renderYards() {
   const grid = document.getElementById('yards-grid');
   const statsBar = document.getElementById('yards-stats-bar');
-  // This tab's Within select mirrors the Live tab's (one stored radius, one
-  // free cap, one Pro gate) — resync here so the two can never disagree.
+  // This tab's Within select and zip mirror the Live tab's (one stored
+  // radius/center, one free cap, one Pro gate) — resync so they never
+  // disagree. The zip is left alone while the user is typing in it.
   document.getElementById('yards-radius').value = document.getElementById('live-radius').value;
+  const yz = document.getElementById('yards-zip');
+  const lz = document.getElementById('live-zip');
+  if (document.activeElement !== yz) {
+    yz.value = lz.value;
+    yz.placeholder = lz.placeholder === 'Using your location' ? 'Using your location' : 'Zip code';
+  }
   if (!liveLoaded) {
     grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><p>Loading live inventory&hellip;</p></div>';
     statsBar.innerHTML = '';
@@ -2709,15 +2721,25 @@ document.getElementById('yards-search').addEventListener('input', () => renderYa
  * free users back and pitches honestly, identical trigger and prompt. */
 document.getElementById('yards-radius').addEventListener('change', e => {
   const sel = e.target;
-  if (sel.value === '' && !isPro()) {
+  if (!isPro() && (sel.value === '' || parseFloat(sel.value) > FREE_MAX_RADIUS_MI)) {
+    const trigger = sel.value === '' ? 'radius-any-distance' : 'radius-' + sel.value + 'mi';
     // Snap back to the radius actually in effect (the Live select is the
     // source of truth), so the two selects and the stats bar keep agreeing.
     sel.value = document.getElementById('live-radius').value || String(FREE_MAX_RADIUS_MI);
-    openUpgradeSheet('radius-any-distance');
+    openUpgradeSheet(trigger);
     return;
   }
   document.getElementById('live-radius').value = sel.value;
   localStorage.setItem('jh_radius', sel.value);
+  renderYards();
+});
+/* Yards-tab zip: the same geocoder and stored center as the Live tab's zip
+ * input (setZipCenter) — one implementation, two entry points. */
+document.getElementById('yards-zip').addEventListener('input', async e => {
+  const v = e.target.value.trim();
+  document.getElementById('live-zip').value = v;
+  await setZipCenter(v);
+  updateZipBanner();
   renderYards();
 });
 
@@ -2801,33 +2823,38 @@ function openYardPrices(location) {
   document.getElementById('prices-backdrop').classList.add('open');
 }
 
-/** One yard's take on a part query: the cheapest list row whose name contains
- *  the query — a search like "alternator" can hit several rows; the cheapest
+/** One yard's take on a part: the cheapest list row whose name contains any
+ *  of the query's name variants (merged spellings like "tail light" /
+ *  "taillight" travel together) — a part can hit several rows; the cheapest
  *  is what you'd pay at the counter — else the PART_KEYWORD_MAP mapping, so a
  *  common word ("headlight") still lands on chains that spell it differently
- *  ("HEADLAMP COMPOSITE"). Memoized: the type-ahead counts call this a lot. */
+ *  ("HEADLAMP COMPOSITE"). Memoized: the combobox counts call this a lot. */
 const _partQuoteMemo = new Map();
-function yardPartQuote(location, q) {
-  const key = q + '|' + location;
+function yardPartQuote(location, variants) {
+  const key = variants.join('\u0001') + '|' + location;
   let hit = _partQuoteMemo.get(key);
   if (hit === undefined) {
-    hit = _yardPartQuoteUncached(location, q);
+    hit = _yardPartQuoteUncached(location, variants);
     _partQuoteMemo.set(key, hit);
   }
   return hit;
 }
-function _yardPartQuoteUncached(location, q) {
+function _yardPartQuoteUncached(location, variants) {
   const rows = yardPriceList(location);
   if (!rows) return { status: 'no-list' };
   let best = null;
   for (const r of rows) {
-    if (r.part.toLowerCase().includes(q) && (!best || r.price < best.price)) best = r;
+    const pl = r.part.toLowerCase();
+    if (variants.some(v => pl.includes(v)) && (!best || r.price < best.price)) best = r;
   }
   if (!best) {
-    const kw = lookupYardCost(q, location);
-    if (kw.cost != null) {
-      // Recover the full row (core charge) behind the keyword-map name.
-      best = rows.find(r => r.part === kw.yardName) || { part: kw.yardName, price: kw.cost, core: 0 };
+    for (const v of variants) {
+      const kw = lookupYardCost(v, location);
+      if (kw.cost != null) {
+        // Recover the full row (core charge) behind the keyword-map name.
+        best = rows.find(r => r.part === kw.yardName) || { part: kw.yardName, price: kw.cost, core: 0 };
+        break;
+      }
     }
   }
   return best
@@ -2879,6 +2906,10 @@ function openPriceCompare(query) {
   track('price-compare');
 
   const { shown } = getYardsView();
+  // Merged spelling variants compare as one part: a pick of "Tail Light"
+  // must still price yards whose list spells it "TAILLIGHT".
+  const entry = getPartIndex().byName.get(q);
+  const variants = entry ? entry.names : [q];
   // UTPAP's premium-row sections appear as separate "(Premium)" yards in the
   // directory but share the base yard's price list — keep one per real yard.
   const seen = new Set();
@@ -2887,7 +2918,7 @@ function openPriceCompare(query) {
     const key = y.location.replace(/\s*\(premium\)\s*$/i, '');
     if (seen.has(key)) continue;
     seen.add(key);
-    const quote = yardPartQuote(y.location, q);
+    const quote = yardPartQuote(y.location, variants);
     if (quote.status === 'priced') {
       compareResults.push({ yard: y.location, dist: y.dist, part: quote.part, price: quote.price, core: quote.core });
     } else if (quote.status === 'not-listed') {
@@ -2947,36 +2978,83 @@ function titleCasePart(s) {
     .toLowerCase().replace(/(^|[^a-z0-9])([a-z])/g, (m, pre, c) => pre + c.toUpperCase());
 }
 
+/* Scraper parse artifacts: a handful of price-list rows ship the PRICE as the
+ * part name ("5.00" — Barry's U Pull It list). Pure numeric / price-looking
+ * names are dropped from the picker entirely. */
+const JUNK_PART_NAME = /^[\s\d.,$-]+$/;
+
+/** Merge key for true spelling variants of the same part: punctuation and
+ *  spacing collapse ("tail light" = "taillight", "a-frame" = "a frame"), and
+ *  a simple trailing-s fold merges singular/plural. Vendor-specific rows like
+ *  "Bracket - Alum" vs "Bracket - Tin" keep distinct keys — they're real
+ *  distinct items, only the spelling-level variants fold together. */
+function partMergeKey(name) {
+  let k = name.toLowerCase().replace(/[^a-z0-9]+/g, '');
+  if (k.length > 3 && k.endsWith('s') && !k.endsWith('ss')) k = k.slice(0, -1);
+  return k;
+}
+
 function getPartIndex() {
   const { shown } = getYardsView();
   const sig = shown.map(y => y.location).join('|');
   if (_partIndex && sig === _partIndexSig) return _partIndex;
   const baseName = loc => loc.replace(/\s*\(premium\)\s*$/i, '');
-  const map = new Map(); // lower part name -> { display, yards: Set<base yard> }
+
+  // Pass 1 — every (cleaned) part name on the visible yards' published lists.
+  const raw = new Map(); // lower raw name -> { display, yards: Set<base yard> }
   for (const y of shown) {
     const rows = yardPriceList(y.location);
     if (!rows) continue;
     const base = baseName(y.location);
     for (const r of rows) {
+      if (JUNK_PART_NAME.test(r.part)) continue;
       const k = r.part.toLowerCase();
-      let e = map.get(k);
-      if (!e) { e = { display: titleCasePart(r.part), yards: new Set() }; map.set(k, e); }
+      let e = raw.get(k);
+      if (!e) { e = { display: titleCasePart(r.part), yards: new Set() }; raw.set(k, e); }
       e.yards.add(base);
     }
   }
+  // Canonical keywords ('headlight', ...) that reach chain lists through the
+  // keyword map, so the common word exists even when no chain spells it so.
   for (const entry of PART_KEYWORD_MAP) {
-    if (map.has(entry.kw)) continue;
+    if (raw.has(entry.kw)) continue;
     const yards = new Set();
     for (const y of shown) {
       const base = baseName(y.location);
       if (yards.has(base)) continue;
-      if (yardPartQuote(y.location, entry.kw).status === 'priced') yards.add(base);
+      if (yardPartQuote(y.location, [entry.kw]).status === 'priced') yards.add(base);
     }
-    if (yards.size) map.set(entry.kw, { display: titleCasePart(entry.kw), yards });
+    if (yards.size) raw.set(entry.kw, { display: titleCasePart(entry.kw), yards });
   }
-  _partIndex = map;
+
+  // Pass 2 — fold spelling variants into one entry; the best-covered variant
+  // names the group, and all variant spellings stay searchable/matchable.
+  const groups = new Map(); // merge key -> { display, repCoverage, yards, names }
+  for (const [k, e] of raw) {
+    const mk = partMergeKey(k);
+    let g = groups.get(mk);
+    if (!g) {
+      g = { display: e.display, repCoverage: e.yards.size, yards: new Set(), names: [] };
+      groups.set(mk, g);
+    }
+    if (e.yards.size > g.repCoverage
+        || (e.yards.size === g.repCoverage && e.display.length < g.display.length)) {
+      g.display = e.display;
+      g.repCoverage = e.yards.size;
+    }
+    g.names.push(k);
+    e.yards.forEach(b => g.yards.add(b));
+  }
+
+  const entries = [...groups.values()];
+  const byName = new Map();
+  for (const g of entries) {
+    byName.set(g.display.toLowerCase(), g);
+    for (const n of g.names) byName.set(n, g);
+  }
+  _partIndex = { entries, byName };
   _partIndexSig = sig;
-  return map;
+  return _partIndex;
 }
 
 const compareInput = document.getElementById('compare-input');
@@ -2997,19 +3075,21 @@ function hideCompareSuggest() {
 function renderCompareSuggest() {
   if (!activeZipCoords || !liveLoaded) { hideCompareSuggest(); return; }
   const q = compareInput.value.trim().toLowerCase();
+  const { entries } = getPartIndex();
+  const byCount = (a, b) => b.yards.size - a.yards.size || a.display.localeCompare(b.display);
   if (q) {
+    // Any spelling variant matches; prefix hits rank above substring hits.
     const starts = [], contains = [];
-    for (const [k, e] of getPartIndex()) {
-      if (k.startsWith(q)) starts.push(e);
-      else if (k.includes(q)) contains.push(e);
+    for (const e of entries) {
+      if (e.names.some(n => n.startsWith(q)) || e.display.toLowerCase().startsWith(q)) starts.push(e);
+      else if (e.names.some(n => n.includes(q)) || e.display.toLowerCase().includes(q)) contains.push(e);
     }
-    const byCount = (a, b) => b.yards.size - a.yards.size || a.display.localeCompare(b.display);
     starts.sort(byCount);
     contains.sort(byCount);
     suggestItems = [...starts, ...contains];
   } else {
-    suggestItems = [...getPartIndex().values()]
-      .sort((a, b) => a.display.localeCompare(b.display));
+    // Browse mode: best-covered parts first, single-yard oddities sink.
+    suggestItems = [...entries].sort(byCount);
   }
   suggestActive = -1;
   compareSuggest.innerHTML = suggestItems.length
@@ -3037,7 +3117,7 @@ function resolveAndCompare() {
   const q = compareInput.value.trim().toLowerCase();
   if (!q) { renderCompareSuggest(); return; }
   if (suggestActive >= 0) { pickSuggestion(suggestActive); return; }
-  const exact = getPartIndex().get(q);
+  const exact = getPartIndex().byName.get(q);
   if (exact) {
     compareInput.value = exact.display;
     hideCompareSuggest();
