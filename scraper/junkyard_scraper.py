@@ -5500,7 +5500,9 @@ PLATFORM_FAMILIES: dict[str, dict] = {
                          "solara": (1999, 2003), "sienna": (1998, 2003),
                          "highlander": (2001, 2003),
                          "lexus es": (1997, 2003), "rx": (1999, 2003)},
-             "copy_to": ["avalon", "solara", "sienna", "highlander",
+             # sienna gets its alternator row from the consensus-evergreen
+             # expansion (6e37bcf) — it takes provenance, not a copy.
+             "copy_to": ["avalon", "solara", "highlander",
                          "lexus es", "rx"],
              "note": "V6 (1MZ) Denso unit only — 4-cyl differs; match plug & amps (100A vs 130A tow pkg); 04+ 3MZ plug differs"},
         ],
