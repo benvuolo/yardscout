@@ -5917,13 +5917,18 @@ if _family_problems:
 # Honesty contract (owner directive 2026-10-22: "I need accuracy, and
 # breadth" — a false positive sends someone on a wasted drive):
 #   - Two confidence tiers ship to the UI and nothing else:
-#       "verified" — the specific part application was cross-checked against
-#                    public aftermarket fitment data (part-number cross
-#                    spanning the family's vehicles). Citation REQUIRED, in
-#                    scraper/interchange_research.md under the family id.
+#       "verified" — the SEEKER and the DONOR both sit inside one published
+#                    part-number application list (a "verified group" below —
+#                    e.g. TYC 2-11034's fitment table spans 04–06 Camry,
+#                    04–07 Highlander 2.4, 04–05 RAV4, 04–08 Solara, 05–10
+#                    tC: any pairing inside that list is a verified fit).
+#                    Citation REQUIRED, in scraper/interchange_research.md
+#                    under the family id. Research (2026-10-22) showed
+#                    family-wide verified flags overstate: the 2AZ family
+#                    alone spans at least three distinct alternator units.
 #       "likely"   — same engine family, so the part very likely carries
-#                    over, but the specific application wasn't individually
-#                    verified. UI must say "verify part number".
+#                    over, but this exact pairing isn't inside a verified
+#                    application list. UI must say "verify part number".
 #   - An app marked sole=False means the model also came with other engines;
 #     a donor without a usable engine decode can only ever be "likely" with
 #     an "engine unverified" warning. sole=True (every US example of those
@@ -6017,9 +6022,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Toyota", "4Runner", 1985, 1995),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "22RE only — the 3.0 V6 (3VZ-E) unit differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "22RE only — the 3.0 V6 (3VZ-E) unit differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "toyota-5s": {
@@ -6032,9 +6036,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Toyota", "MR2", 1991, 1995),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "4-cyl (5S-FE) unit — the V6 Camry unit differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "4-cyl (5S-FE) unit — the V6 Camry unit differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "toyota-1mz": {
@@ -6053,9 +6056,14 @@ ENGINE_FAMILIES: dict[str, dict] = {
             # Window mirrors the hand-researched platform family above:
             # Hollander 601-58691 crosses the 97+ Denso unit; earlier 1MZ
             # cars used a different alternator, and the 04+ 3MZ plug differs.
-            "alternator": {"tier": "likely", "years": (1997, 2003),
-                           "note": "V6 (1MZ) Denso unit, 97–03 window — match plug & amps (100A vs 130A tow pkg)"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"years": (1997, 2003),
+                           "note": "V6 (1MZ) Denso unit, 97–03 window — match plug & amps (100A vs 130A tow pkg)",
+                           "verified": {
+                               "evidence": "Hollander interchange 601-58691 crosses Camry V6 97-01 = ES 300 97-01 (spot-check recorded on this branch, 2026-10); Denso 101211-7440/7450 = Toyota 27060-20230 100A across the 1MZ family per Denso catalog + ToyotaNation cross-reference",
+                               "groups": [[("Toyota", "Camry", 1997, 2001),
+                                           ("Lexus", "ES 300", 1997, 2001)]],
+                           }},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "toyota-3mz": {
@@ -6070,9 +6078,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Lexus", "RX 330", 2004, 2006, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "3.3 (3MZ) unit — the older 1MZ plug differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "3.3 (3MZ) unit — the older 1MZ plug differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "toyota-2gr": {
@@ -6089,9 +6096,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Lexus", "RX 350", 2007, 2015, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "2GR-FE unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "2GR-FE unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "toyota-2az": {
@@ -6108,9 +6114,23 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Toyota", "Corolla", 2009, 2010),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "2AZ-FE unit — 4-cyl only, the V6 differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            # Three distinct Denso units inside one engine family — the
+            # reason tiers are computed per verified GROUP, never family-wide.
+            "alternator": {"note": "2AZ-FE unit — 4-cyl only, the V6 differs; at least 3 distinct units across the family's years, match part number",
+                           "verified": {
+                               "evidence": "TYC 2-11034 fitment table (standardautopart.com, retrieved 2026-10-22): Camry 2.4 04-06, Highlander 2.4 04-07, RAV4 04-05, Solara 2.4 04-08 + DB Electrical AND0288 adds tC 05-10 (Toyota 27060-0H100/28260/28270). Toyota 27060-0H111-84 OEM listing (toyota.oempartsonline.com, retrieved 2026-10-22): Camry 2.4 07-09, Matrix 2.4 09-13, Corolla 2.4 09-10.",
+                               "groups": [
+                                   [("Toyota", "Camry", 2004, 2006),
+                                    ("Toyota", "Highlander", 2004, 2007),
+                                    ("Toyota", "RAV4", 2004, 2005),
+                                    ("Toyota", "Solara", 2004, 2008),
+                                    ("Scion", "tC", 2005, 2010)],
+                                   [("Toyota", "Camry", 2007, 2009),
+                                    ("Toyota", "Matrix", 2009, 2013),
+                                    ("Toyota", "Corolla", 2009, 2010)],
+                               ],
+                           }},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "toyota-2ar": {
@@ -6123,9 +6143,14 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Scion", "tC", 2011, 2016, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "2AR-FE unit — hybrid Camrys have no belt alternator; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "2AR-FE unit — hybrid Camrys have no belt alternator; the 10–11 XV40 Camry unit differs from the 12+ one, match part number",
+                           "verified": {
+                               "evidence": "Denso 104210-2270/-2340 (Toyota 27060-36010/36011, Lester 11402) application tables (dcalltech.com + rareelectrical.com, retrieved 2026-10-22): Scion tC 2.5 2011-16, Camry 2.5 2012-15, RAV4 2.5 2009-12.",
+                               "groups": [[("Scion", "tC", 2011, 2016),
+                                           ("Toyota", "Camry", 2012, 2015),
+                                           ("Toyota", "RAV4", 2009, 2012)]],
+                           }},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "toyota-1zz": {
@@ -6139,9 +6164,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Toyota", "MR2 Spyder", 2000, 2005, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "1ZZ-FE unit — the 2ZZ (Celica GT-S/XRS) differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "1ZZ-FE unit — the 2ZZ (Celica GT-S/XRS) differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "toyota-2zr": {
@@ -6155,9 +6179,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Scion", "xD", 2008, 2014, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "2ZR-FE unit — Prius 1.8 (2ZR-FXE hybrid) has no belt alternator; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "2ZR-FE unit — Prius 1.8 (2ZR-FXE hybrid) has no belt alternator; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "toyota-2uz": {
@@ -6172,10 +6195,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Lexus", "LX 470", 1998, 2007, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "2UZ unit — 05+ VVT-i brackets can differ, verify; " + _ALT_NOTE},
-            "starter": {"tier": "likely",
-                        "note": "under-intake starter on 2UZ — " + _STR_NOTE},
+            "alternator": {"note": "2UZ unit — 05+ VVT-i brackets can differ, verify; " + _ALT_NOTE},
+            "starter": {"note": "under-intake starter on 2UZ — " + _STR_NOTE},
         },
     },
     "toyota-1gr": {
@@ -6188,9 +6209,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Toyota", "FJ Cruiser", 2007, 2014, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "1GR unit — 2010+ dual-VVT-i revision, verify bracket/plug; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "1GR unit — 2010+ dual-VVT-i revision, verify bracket/plug; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     # -------------------------------------------------------- Honda/Acura
@@ -6202,9 +6222,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Honda", "Civic del Sol", 1996, 1997),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "D16Y-era unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "D16Y-era unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "honda-d17": {
@@ -6214,9 +6233,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Honda", "Civic", 2001, 2005),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "D17 unit — hybrid & Si (2.0) differ; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "D17 unit — hybrid & Si (2.0) differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "honda-r18": {
@@ -6227,9 +6245,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Honda", "Civic", 2012, 2015),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "R18A (06–11) vs R18Z (12–15) — stay inside your window or match part number; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "R18A (06–11) vs R18Z (12–15) — stay inside your window or match part number; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "honda-f23": {
@@ -6240,9 +6257,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Acura", "CL", 1998, 1999),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "F23A unit — the V6 Accord unit differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "F23A unit — the V6 Accord unit differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "honda-k24a": {
@@ -6255,9 +6271,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Acura", "TSX", 2004, 2008, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "K24A-era Denso unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "K24A-era Denso unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "honda-k24z": {
@@ -6271,9 +6286,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Acura", "TSX", 2009, 2014, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "K24Z-era unit — earlier K24A plug/bracket can differ; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "K24Z-era unit — earlier K24A plug/bracket can differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "honda-j30": {
@@ -6285,9 +6299,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Acura", "CL", 1997, 1999),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "J30A unit — 98–02 vs 03–07 generations differ, stay in your window; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "J30A unit — 98–02 vs 03–07 generations differ, stay in your window; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "honda-j35-early": {
@@ -6299,9 +6312,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Acura", "MDX", 2001, 2006, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "J35A unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "J35A unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "honda-j35-mid": {
@@ -6313,9 +6325,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Honda", "Ridgeline", 2006, 2008, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "VCM-era J35A6/A7/A9 — match part number across VCM vs non-VCM; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "VCM-era J35A6/A7/A9 — match part number across VCM vs non-VCM; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "honda-j35-z": {
@@ -6329,9 +6340,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Honda", "Crosstour", 2010, 2015),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "J35Z-era unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "J35Z-era unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "acura-j32": {
@@ -6342,9 +6352,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Acura", "CL", 2001, 2003, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "J32A unit — 99–03 vs 04–08 TL generations differ, stay in your window; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "J32A unit — 99–03 vs 04–08 TL generations differ, stay in your window; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     # -------------------------------------------------------------- Nissan
@@ -6358,9 +6367,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Xterra", 2000, 2004),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "KA24DE unit — truck vs car brackets can differ, verify; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "KA24DE unit — truck vs car brackets can differ, verify; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "nissan-qr25": {
@@ -6373,9 +6381,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Frontier", 2005, 2019),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "QR25 unit — 02–06 vs 07+ plugs differ, stay in your window or match part number"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "QR25 unit — 02–06 vs 07+ plugs differ, stay in your window or match part number"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "nissan-vq35de": {
@@ -6393,9 +6400,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Infiniti", "FX35", 2003, 2008, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "VQ35DE unit — 07+ HR-block cars differ; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "VQ35DE unit — 07+ HR-block cars differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "nissan-vq40": {
@@ -6407,9 +6413,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Xterra", 2005, 2015, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "VQ40 unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "VQ40 unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "nissan-mr18": {
@@ -6420,9 +6425,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Cube", 2009, 2014, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "MR18 unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "MR18 unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "nissan-hr16": {
@@ -6433,9 +6437,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Versa Note", 2014, 2019, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "HR16 unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "HR16 unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     # ---------------------------------------------------------------- Ford
@@ -6452,9 +6455,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "Explorer", 2002, 2005),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "truck vs Panther vs Mustang brackets/plugs differ by era — match part number"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "truck vs Panther vs Mustang brackets/plugs differ by era — match part number"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "ford-54-2v": {
@@ -6465,9 +6467,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "Expedition", 1997, 2004),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "shared with the 4.6 truck unit in most years — match plug & amps"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "shared with the 4.6 truck unit in most years — match plug & amps"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "ford-54-3v": {
@@ -6478,9 +6479,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "Expedition", 2005, 2014),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "3V-era unit — the 97–03 2V unit differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "3V-era unit — the 97–03 2V unit differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "ford-vulcan30": {
@@ -6494,9 +6494,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "Ranger", 1991, 2008),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "pushrod Vulcan unit — Duratec DOHC 3.0 does NOT interchange; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "pushrod Vulcan unit — Duratec DOHC 3.0 does NOT interchange; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "ford-duratec30": {
@@ -6514,9 +6513,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
              {"ambig": "Taurus 3.0s split Vulcan (pushrod) vs Duratec (DOHC) — same decode string; confirm DOHC before buying"}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "DOHC Duratec unit — Vulcan pushrod 3.0 does NOT interchange; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "DOHC Duratec unit — Vulcan pushrod 3.0 does NOT interchange; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "ford-mzr": {
@@ -6534,9 +6532,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "Ranger", 2001, 2011),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "MZR family — displacement variants share accessories in most years, but verify plug & pulley; turbo (Mazdaspeed/EcoBoost) differs"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "MZR family — displacement variants share accessories in most years, but verify plug & pulley; turbo (Mazdaspeed/EcoBoost) differs"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "ford-cyclone": {
@@ -6554,9 +6551,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "F-150", 2011, 2014),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "non-turbo Cyclone unit — EcoBoost accessories differ; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "non-turbo Cyclone unit — EcoBoost accessories differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "ford-40sohc": {
@@ -6571,9 +6567,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "Mustang", 2005, 2010),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "SOHC unit — the older OHV 4.0 differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "SOHC unit — the older OHV 4.0 differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "ford-3g-50": {
@@ -6585,9 +6580,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "Bronco", 1987, 1996),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "2G/3G era — many swap UP to the 130A 3G; match case style & plug"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "2G/3G era — many swap UP to the 130A 3G; match case style & plug"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     # ------------------------------------------------------------------ GM
@@ -6604,9 +6598,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Pontiac", "Sunfire", 2002, 2005),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "L61 Ecotec unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "L61 Ecotec unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "gm-ecotec24": {
@@ -6622,9 +6615,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chevrolet", "Captiva Sport", 2012, 2015),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "Ecotec 2.4 unit — direct-injection (LEA/LUK) era plugs can differ; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "Ecotec 2.4 unit — direct-injection (LEA/LUK) era plugs can differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "gm-14t": {
@@ -6637,9 +6629,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chevrolet", "Trax", 2013, 2021),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "gen-1 1.4T unit — the 16+ Cruze (LE2) differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "gen-1 1.4T unit — the 16+ Cruze (LE2) differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "gm-gen3-truck": {
@@ -6655,9 +6646,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Cadillac", "Escalade*", 2002, 2006),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "4.8/5.3/6.0 share brackets — match amps (105 vs 145) & plug; diesel/8.1 differ"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "4.8/5.3/6.0 share brackets — match amps (105 vs 145) & plug; diesel/8.1 differ"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "gm-gen4-truck": {
@@ -6673,9 +6663,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Cadillac", "Escalade*", 2007, 2014),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "GMT900-era unit — match amps & 2-pin plug; the 07 'Classic' body keeps Gen III parts"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "GMT900-era unit — match amps & 2-pin plug; the 07 'Classic' body keeps Gen III parts"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "gm-atlas42": {
@@ -6690,9 +6679,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Isuzu", "Ascender", 2003, 2008),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "LL8 unit shared across the GMT360 twins; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "LL8 unit shared across the GMT360 twins; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "gm-3800": {
@@ -6710,9 +6698,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Buick", "Lacrosse", 2005, 2009),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "NA 3800 unit — supercharged (GTP/SSEi) accessories differ; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "NA 3800 unit — supercharged (GTP/SSEi) accessories differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "gm-60deg": {
@@ -6733,9 +6720,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Pontiac", "Torrent", 2006, 2009),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "3.1/3.4 60° family shares mounts in most years — match plug & amps"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "3.1/3.4 60° family shares mounts in most years — match plug & amps"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "gm-hv-v6": {
@@ -6750,9 +6736,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Buick", "Terraza", 2005, 2007),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "LZ-series unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "LZ-series unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "gm-llt36": {
@@ -6770,9 +6755,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Buick", "Lacrosse", 2010, 2016),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "LLT vs LFX bracket/plug can differ by year — match part number"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "LLT vs LFX bracket/plug can differ by year — match part number"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     # ------------------------------------------------------- Chrysler/Jeep
@@ -6794,9 +6778,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Dodge|Ram", "Ram*", 2013, 2024),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "Pentastar unit — 160/180/220A variants and RWD vs FWD brackets; match part number"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "Pentastar unit — 160/180/220A variants and RWD vs FWD brackets; match part number"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "mopar-world24": {
@@ -6812,9 +6795,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chrysler", "Sebring", 2007, 2010),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "GEMA 2.4 unit — the 15+ Tigershark 2.4 (200/Dart/Cherokee) differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "GEMA 2.4 unit — the 15+ Tigershark 2.4 (200/Dart/Cherokee) differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "mopar-minivan": {
@@ -6828,9 +6810,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Jeep", "Wrangler", 2007, 2011),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "3.3/3.8 share accessories in most years — match plug & amps; JK Wrangler bracket same engine"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "3.3/3.8 share accessories in most years — match plug & amps; JK Wrangler bracket same engine"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "mopar-47": {
@@ -6845,9 +6826,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chrysler", "Aspen", 2007, 2009),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "4.7 PowerTech unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "4.7 PowerTech unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "mopar-37": {
@@ -6862,9 +6842,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Jeep", "Commander", 2006, 2010),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "3.7 PowerTech unit (shares architecture with the 4.7); " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "3.7 PowerTech unit (shares architecture with the 4.7); " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "jeep-40": {
@@ -6877,9 +6856,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Jeep", "Comanche", 1991, 1992),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "4.0 HO era — 91–98 vs 99–06 units differ, stay in your window; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "4.0 HO era — 91–98 vs 99–06 units differ, stay in your window; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "mopar-hemi57": {
@@ -6897,9 +6875,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chrysler", "Aspen", 2007, 2009),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "03–08 vs 09+ Eagle HEMI accessories differ — stay in your window & match part number"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "03–08 vs 09+ Eagle HEMI accessories differ — stay in your window & match part number"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "mopar-magnum": {
@@ -6912,9 +6889,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Jeep", "Grand Cherokee", 1993, 1998),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "5.2/5.9 Magnum V8 only — the 5.9 Cummins (6-cyl) is a different world; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "5.2/5.9 Magnum V8 only — the 5.9 Cummins (6-cyl) is a different world; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     # ---------------------------------------------------------- Hyundai/Kia
@@ -6927,9 +6903,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Kia", "Rondo", 2007, 2010),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "port-injected Theta — the 11+ GDI unit differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "port-injected Theta — the 11+ GDI unit differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "hk-theta-gdi": {
@@ -6944,9 +6919,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Hyundai", "Tucson", 2010, 2015),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "GDI-era Theta II — port-injected 06–10 unit differs; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "GDI-era Theta II — port-injected 06–10 unit differs; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "hk-nu": {
@@ -6959,9 +6933,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Hyundai", "Tucson", 2016, 2021),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "Nu family — 1.8 MPI vs 2.0 GDI variants; match part number"},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "Nu family — 1.8 MPI vs 2.0 GDI variants; match part number"},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "hk-gamma16": {
@@ -6974,9 +6947,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Hyundai", "Veloster", 2012, 2017),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "Gamma GDI unit — turbo Veloster accessories differ; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "Gamma GDI unit — turbo Veloster accessories differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "hk-beta20": {
@@ -6989,9 +6961,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Kia", "Sportage", 2005, 2010),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "Beta II unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "Beta II unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     # --------------------------------------------------------------- Subaru
@@ -7011,9 +6982,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
              {"ambig": "Baja Turbo shares the 2.5 decode string; confirm non-turbo"}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "NA SOHC EJ25 unit — turbo cars route differently; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "NA SOHC EJ25 unit — turbo cars route differently; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "subaru-ej25t": {
@@ -7034,9 +7004,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
              {"ambig": "only Baja Turbo is turbo — confirm before buying"}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "turbo EJ unit; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "turbo EJ unit; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "subaru-fb25": {
@@ -7049,9 +7018,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Subaru", "Legacy", 2013, 2019, {"sole": True}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "FB25 unit — the EJ-era unit does NOT carry over; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "FB25 unit — the EJ-era unit does NOT carry over; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     "subaru-fa20dit": {
@@ -7063,9 +7031,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
              {"ambig": "only 2.0XT trims carry the FA20DIT — base Foresters are the 2.5 FB; confirm turbo"}),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "FA20DIT unit — the NA FA20 (BRZ) and FB engines differ; " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "FA20DIT unit — the NA FA20 (BRZ) and FB engines differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
     # ------------------------------------------------------------------ VW
@@ -7080,9 +7047,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Volkswagen", "Passat", 2012, 2014),
         ],
         "parts": {
-            "alternator": {"tier": "likely",
-                           "note": "5-cyl unit (the decode's '5-cyl' is the tell); " + _ALT_NOTE},
-            "starter": {"tier": "likely", "note": _STR_NOTE},
+            "alternator": {"note": "5-cyl unit (the decode's '5-cyl' is the tell); " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
         },
     },
 }
@@ -7122,9 +7088,14 @@ def _app_matches(app: tuple, year: int, make: str, model: str) -> bool:
     mk = (make or "").lower()
     if mk not in (m.lower() for m in a_make.split("|")):
         return False
-    sm = _squash_model(model, make)
+    # Try both the make-stripped squash and the raw squash: 'Ram Ram 2500'
+    # needs the strip, while a 'Ram 2500' under make 'Ram' must NOT lose its
+    # leading 'ram' or the 'Ram*' pattern can never match it.
+    candidates = {_squash_model(model, make), _squash_model(model)}
     am = re.sub(r"[^a-z0-9]", "", a_model.rstrip("*").lower())
-    return sm.startswith(am) if a_model.endswith("*") else sm == am
+    if a_model.endswith("*"):
+        return any(sm.startswith(am) for sm in candidates)
+    return am in candidates
 
 
 def _app_flags(app: tuple) -> dict:
@@ -7172,6 +7143,165 @@ def engine_matches_family(engine_str: str, fam: dict) -> bool | None:
     return True
 
 
+# --- Verified alternator application groups -------------------------------
+# Each entry is keyed by family id and merged into that family's alternator
+# part below. "groups" lists one published part number's application list per
+# inner list — the evidence string cites where each list was retrieved.
+# Research notes with full citations live in scraper/interchange_research.md.
+_ALT_VERIFIED: dict = {
+    "nissan-qr25": {
+        "evidence": "TYC 2-13939 application table (tycamericas.com, retrieved 2026-10-22) + DB Electrical 400-44053 (Lester 13939, Hitachi LR1110-726): Altima 2.5 2002-2006, Sentra 2.5 (SE-R/Spec V) 2002-2006.",
+        "groups": [[("Nissan", "Altima", 2002, 2006),
+                    ("Nissan", "Sentra", 2002, 2006)]],
+    },
+    "ford-46-2v": {
+        "evidence": "OEG/PartsPlayer listing for Ford F75U-10300-CA/CB 130A 3G (amazon.com, retrieved 2026-10-22): F-150 4.6/5.4 1997-2003, Expedition 5.4 1997-2002. TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-08252 Mustang 4.6 SOHC 99-04 is its own 6G unit; 2-07776 Crown Victoria 95-99; 2-07795 Grand Marquis 98-02.",
+        "groups": [
+            [("Ford", "F-150", 1997, 2003),
+             ("Ford", "Expedition", 1997, 2002)],
+            [("Ford", "Mustang", 1999, 2004)],
+            [("Ford", "Crown Victoria", 1995, 1999)],
+            [("Mercury", "Grand Marquis", 1998, 2002)],
+        ],
+    },
+    "ford-54-2v": {
+        "evidence": "OEG/PartsPlayer listing for Ford F75U-10300-CA/CB 130A 3G (amazon.com, retrieved 2026-10-22): F-150 4.6/5.4 1997-2003, Expedition 5.4 1997-2002 share one unit.",
+        "groups": [[("Ford", "F-150", 1997, 2003),
+                    ("Ford", "Expedition", 1997, 2002)]],
+    },
+    "ford-54-3v": {
+        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-08318 (Ford 6L3Z-10346-AA) F-150 5.4 2004-2008. Lester 11292 (Ford 9L3Z-10346-C) application table (everychina.com/koeep.com, retrieved 2026-10-22): F-150 4.6/5.4 2009-2010 + Expedition 5.4 2009-2014.",
+        "groups": [
+            [("Ford", "F-150", 2004, 2008)],
+            [("Ford", "F-150", 2009, 2010),
+             ("Ford", "Expedition", 2009, 2014)],
+        ],
+    },
+    "gm-gen3-truck": {
+        "evidence": "CarQuest weblink part 8292A (Lester 8292, Delco AD244 145A) application summary + aspwholesale.com table (retrieved 2026-10-22): Silverado/Sierra 2003-2006, Tahoe 2003-2004, Yukon 2003-2006, Suburban 2003-2006, Avalanche 2003-2006, Escalade 2003-2005. Earlier 99-02 trucks use the AD230-era unit — left at likely.",
+        "groups": [[("Chevrolet", "Silverado*", 2003, 2006),
+                    ("GMC", "Sierra*", 2003, 2006),
+                    ("Chevrolet", "Tahoe", 2003, 2004),
+                    ("GMC", "Yukon*", 2003, 2006),
+                    ("Chevrolet", "Suburban*", 2003, 2006),
+                    ("Chevrolet", "Avalanche", 2003, 2006),
+                    ("Cadillac", "Escalade*", 2003, 2005)]],
+    },
+    "gm-gen4-truck": {
+        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-08302 (GM 15225927) C/K pickup 4.8/5.3 2005-2010 — clipped to this family's 2007+ window.",
+        "groups": [[("Chevrolet", "Silverado*", 2007, 2010),
+                    ("GMC", "Sierra*", 2007, 2010)]],
+    },
+    "gm-ecotec24": {
+        "evidence": "TYC 2-11459 application table (tycamericas.com, retrieved 2026-10-22; Lester 11459, GM 13512759): Equinox 2.4 2010-2017, Terrain 2.4 2010-2017. Cobalt/Malibu/G6-era LE5 uses a different unit — left at likely.",
+        "groups": [[("Chevrolet", "Equinox", 2010, 2017),
+                    ("GMC", "Terrain", 2010, 2017)]],
+    },
+    "gm-llt36": {
+        "evidence": "BBB Industries 11252 fitment table (partcatalog.com) + Brillman Denso 170A listing (GM 25815839/23105717, retrieved 2026-10-22): Traverse 2009-2017, Acadia 2007-2016, Enclave 2008-2017, Outlook 2007-2010.",
+        "groups": [[("Chevrolet", "Traverse", 2009, 2017),
+                    ("GMC", "Acadia", 2007, 2016),
+                    ("Buick", "Enclave", 2008, 2017),
+                    ("Saturn", "Outlook", 2007, 2010)]],
+    },
+    "mopar-pentastar": {
+        "evidence": "TYC 2-11570 fitment list (finditparts.com) + BBB 11570 table (partcatalog.com; Chrysler 68272108AD, Denso 421000-0770, retrieved 2026-10-22): Grand Caravan 2011-2020, Town & Country 2011-2016, Journey 3.6 2011-2019, Avenger 3.6 2011-2014, 200 3.6 2011-2014.",
+        "groups": [[("Dodge", "Grand Caravan", 2011, 2020),
+                    ("Chrysler", "Town & Country", 2011, 2016),
+                    ("Dodge", "Journey", 2011, 2019),
+                    ("Dodge", "Avenger", 2011, 2014),
+                    ("Chrysler", "200", 2011, 2014)]],
+    },
+    "hk-theta-gdi": {
+        "evidence": "Hyundai 37300-2G150 (Lester 11491/11492, Valeo TG11C087) listings (rareelectrical.com + amazon.com, retrieved 2026-10-22): Sonata 2.4 2011-2013, Optima 2.4 2011-2013. The 2.0T and 2014+ units differ — left at likely.",
+        "groups": [[("Hyundai", "Sonata", 2011, 2013),
+                    ("Kia", "Optima", 2011, 2013)]],
+    },
+    "nissan-vq35de": {
+        "evidence": "OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit.",
+        "groups": [
+            [("Nissan", "Altima", 2002, 2006),
+             ("Nissan", "Maxima", 2002, 2003),
+             ("Nissan", "Murano", 2003, 2007),
+             ("Infiniti", "I35", 2002, 2004)],
+            [("Nissan", "Maxima", 2004, 2008)],
+        ],
+    },
+    "honda-k24a": {
+        "evidence": "TYC 2-13980 application table (tycamericas.com, retrieved 2026-10-22; Honda 31100-RAA-A05, Lester 13980): Accord 2.4 2003-2007, Element 2003-2011, TSX 2004-2008, CR-V 2007-2011. CR-V 2002-2006 is NOT in this unit's list — left at likely.",
+        "groups": [[("Honda", "Accord", 2003, 2007),
+                    ("Honda", "Element", 2003, 2011),
+                    ("Acura", "TSX", 2004, 2008),
+                    ("Honda", "CR-V", 2007, 2011)]],
+    },
+    "gm-14t": {
+        "evidence": "Rareelectrical FG12S031/Lester 11399 listing (GM 13577154/13597226, retrieved 2026-10-22): Cruze 1.4T 2011 ONLY, Encore 2013-2021, Trax 2015-2021. 2012-2016 Cruze 1.4 uses a different unit — left at likely.",
+        "groups": [[("Chevrolet", "Cruze", 2011, 2011),
+                    ("Buick", "Encore", 2013, 2021),
+                    ("Chevrolet", "Trax", 2015, 2021)]],
+    },
+    "ford-mzr": {
+        "evidence": "Lester 11172 application table (cautop.com; Mitsubishi A3TJ0891, Ford 6E5Z-10346-AA, retrieved 2026-10-22): Fusion 2.3 2006-2009, Milan 2.3 2006-2009. Mazda6 2.3 uses Lester 11168 — a different unit, left at likely.",
+        "groups": [[("Ford", "Fusion", 2006, 2009),
+                    ("Mercury", "Milan", 2006, 2009)]],
+    },
+    "ford-cyclone": {
+        "evidence": "DSS/TRQ Lester 11273 application table (Ford 7T4Z-10346-A, Mitsubishi A3TJ1291, retrieved 2026-10-22): Edge 2007-2014, Taurus 3.5 2008-2012. Quality-Built 11271 175A (Ford 8A4Z-10346-A, partshawk.com): Taurus 2008-2012, Flex 2009-2012, Edge 2011-2013, Explorer 2011-2012.",
+        "groups": [
+            [("Ford", "Edge", 2007, 2014),
+             ("Ford", "Taurus", 2008, 2012)],
+            [("Ford", "Taurus", 2008, 2012),
+             ("Ford", "Flex", 2009, 2012),
+             ("Ford", "Edge", 2011, 2013),
+             ("Ford", "Explorer", 2011, 2012)],
+        ],
+    },
+    "gm-atlas42": {
+        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-08290 (GM 19151920) Trailblazer/Envoy 4.2 L6 2002-2006.",
+        "groups": [[("Chevrolet", "Trailblazer", 2002, 2006),
+                    ("GMC", "Envoy", 2002, 2006)]],
+    },
+    "ford-40sohc": {
+        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-07787 (Ford 1L2Z-10346-AB) Explorer 4.0 1997-2003 (97-01 SOHC, 02-03 all); 2-08258 (1L5Z-10346-BA) Ranger 4.0 2001-2005; 2-08437 (6R3Z-10346-A) Mustang 4.0 2005-2008.",
+        "groups": [
+            [("Ford", "Explorer", 1997, 2003)],
+            [("Ford", "Ranger", 2001, 2005)],
+            [("Ford", "Mustang", 2005, 2008)],
+        ],
+    },
+    "ford-vulcan30": {
+        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-08263 (YF1Z-10V346-FA) Taurus/Sable 3.0 OHV 2000-2001; 2-08268 (3F1Z-10346-AB) Taurus/Sable 3.0 OHV 2002-2006. Fitment data exists, but the Vulcan/Duratec decode ambiguity keeps every pair at likely in the app.",
+        "groups": [
+            [("Ford", "Taurus", 2000, 2001),
+             ("Mercury", "Sable", 2000, 2001)],
+            [("Ford", "Taurus", 2002, 2006),
+             ("Mercury", "Sable", 2002, 2005)],
+        ],
+    },
+    "ford-duratec30": {
+        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-08259 (1L8Z-10V346-CCRM) Escape 3.0 2001-2004; 2-08403 (ZZC2-18-300) Escape 3.0 2005-2006; 2-08269 (2F1Z-10346-BA) Taurus 3.0 DOHC 2002-2005; 2-08442 (6F9Z-10346-AA) Five Hundred 3.0 2005-2007.",
+        "groups": [
+            [("Ford", "Escape", 2001, 2004)],
+            [("Ford", "Escape", 2005, 2006)],
+            [("Ford", "Taurus", 2002, 2005)],
+            [("Ford", "Five Hundred", 2005, 2007)],
+        ],
+    },
+    "mopar-minivan": {
+        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-11295 (Chrysler 4801304AC) Caravan 3.3/3.8 2008-2010.",
+        "groups": [[("Dodge", "Grand Caravan", 2008, 2010)]],
+    },
+    "mopar-hemi57": {
+        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-11298 (Chrysler 5602869, Denso 7S) Ram 5.7 2007-2008.",
+        "groups": [[("Dodge|Ram", "Ram*", 2007, 2008)]],
+    },
+}
+
+for _fid, _v in _ALT_VERIFIED.items():
+    ENGINE_FAMILIES[_fid]["parts"]["alternator"]["verified"] = _v
+del _fid, _v
+
+
 def _lint_engine_families() -> list[str]:
     problems: list[str] = []
     for fam_id, fam in ENGINE_FAMILIES.items():
@@ -7203,18 +7333,58 @@ def _lint_engine_families() -> list[str]:
             pc = INTERCHANGE_PART_CATEGORIES.get(cat)
             if not pc or pc["kind"] != "engine":
                 problems.append(f"{fam_id}: {cat!r} is not an engine part category")
-            if p.get("tier") not in ("verified", "likely"):
-                problems.append(f"{fam_id}: {cat} bad tier {p.get('tier')!r}")
+            if "tier" in p:
+                problems.append(
+                    f"{fam_id}: {cat} carries a 'tier' — tiers are computed "
+                    "from verified groups now, never declared")
             if not p.get("note"):
                 problems.append(f"{fam_id}: {cat} missing honesty note")
-            if p.get("tier") == "verified" and len(p.get("evidence", "")) < 20:
-                problems.append(
-                    f"{fam_id}: {cat} verified without evidence citation")
             yrs = p.get("years")
             if yrs is not None and not (
                     len(yrs) == 2 and 1950 <= yrs[0] <= yrs[1] <= 2027):
                 problems.append(f"{fam_id}: {cat} bad part window {yrs!r}")
+            ver = p.get("verified")
+            if ver is not None:
+                if len(ver.get("evidence", "")) < 20:
+                    problems.append(
+                        f"{fam_id}: {cat} verified groups without a real "
+                        "evidence citation")
+                groups = ver.get("groups") or []
+                if not groups:
+                    problems.append(f"{fam_id}: {cat} verified with no groups")
+                for g in groups:
+                    if not g:
+                        problems.append(f"{fam_id}: {cat} empty verified group")
+                    for span in g:
+                        if (len(span) != 4 or not span[0] or not span[1]
+                                or not (1950 <= span[2] <= span[3] <= 2027)):
+                            problems.append(
+                                f"{fam_id}: {cat} bad verified span {span!r}")
     return problems
+
+
+def interchange_tier(fam: dict, cat: str, seeker: tuple, donor: tuple) -> str | None:
+    """'verified' when seeker (year, make, model) and donor (year, make,
+    model) both sit inside one of the part's verified-group application
+    lists; 'likely' when both merely match the family's apps; None when
+    either car isn't a family application at all. Callers still apply the
+    engine-confirmation and ambig downgrades on top — this is fitment only."""
+    p = fam["parts"].get(cat)
+    if p is None:
+        return None
+    yrs = p.get("years")
+    for who in (seeker, donor):
+        if yrs is not None and not (yrs[0] <= who[0] <= yrs[1]):
+            return None
+        if not any(_app_matches(a, *who) for a in fam["apps"]):
+            return None
+    ver = p.get("verified")
+    if ver:
+        for g in ver["groups"]:
+            if (any(_app_matches((s[0], s[1], s[2], s[3]), *seeker) for s in g)
+                    and any(_app_matches((s[0], s[1], s[2], s[3]), *donor) for s in g)):
+                return "verified"
+    return "likely"
 
 
 _engine_family_problems = _lint_engine_families()
@@ -7284,8 +7454,13 @@ def build_interchange_payload() -> dict:
                 for a in fam["apps"]
             ],
             "parts": {
-                cat: {"tier": p["tier"], "note": p["note"],
-                      **({"years": list(p["years"])} if p.get("years") else {})}
+                cat: {"note": p["note"],
+                      **({"years": list(p["years"])} if p.get("years") else {}),
+                      # vg: verified groups — each a published part-number
+                      # application list; seeker+donor inside one = verified.
+                      **({"vg": [[list(s) for s in g]
+                                 for g in p["verified"]["groups"]]}
+                         if p.get("verified") else {})}
                 for cat, p in fam["parts"].items()
             },
         })

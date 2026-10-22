@@ -3607,10 +3607,12 @@ function pfAppMatches(app, year, make, model) {
   if (!(app[2] <= year && year <= app[3])) return false;
   const mk = String(make || '').toLowerCase();
   if (!app[0].toLowerCase().split('|').includes(mk)) return false;
-  const sm = pfSquashModel(model, make);
+  // Try both the make-stripped and raw squashes: a 'Ram 2500' under make
+  // 'Ram' must keep its leading 'ram' or the 'Ram*' pattern never matches.
+  const cands = [pfSquashModel(model, make), pfSquashModel(model, '')];
   const prefix = app[1].endsWith('*');
   const am = pfSquash(prefix ? app[1].slice(0, -1) : app[1]);
-  return prefix ? sm.startsWith(am) : sm === am;
+  return prefix ? cands.some(sm => sm.startsWith(am)) : cands.includes(am);
 }
 function pfParseEngine(s) {
   if (!s) return { l: null, cyl: null };
@@ -3868,7 +3870,19 @@ function pfRunSearch() {
         warns.push(`engine not confirmed — this ${escapeHtml(v.model)} also came with other engines; check under the hood before pulling`);
       }
       if (app[5]) warns.push(escapeHtml(app[5]));
-      const tier = part.tier === 'verified' && engineOk && !app[5] ? 'verified' : 'likely';
+      // Verified only when seeker AND donor sit inside ONE published
+      // part-number application list (a verified group) — a family can span
+      // several distinct units, so family membership alone is never enough.
+      let tier = 'likely';
+      if (engineOk && !app[5] && !seekerAmbig && part.vg) {
+        for (const g of part.vg) {
+          if (g.some(sp => pfAppMatches(sp, s.year, s.make, s.model))
+              && g.some(sp => pfAppMatches(sp, v.year, canonicalMake(v.make), v.model))) {
+            tier = 'verified';
+            break;
+          }
+        }
+      }
       results.set(v.id, { v, d, tier, warns });
     }
   } else {
