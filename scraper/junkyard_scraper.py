@@ -8487,6 +8487,27 @@ VINPLUS_TENANTS = {
         "": {"code": "pickurpart", "name": "Pick Ur Part Auto Salvage",
              "city": "Lubbock", "state": "TX", "lat": 33.5200, "lng": -101.7805},
     },
+    # --- migrated from the retired WordPress crawl (2026-10-22) ---
+    # source stays "gopullit" for the zero-vehicle alarm; id_prefix keeps the
+    # historical gopullit-{stock} scheme (stocks carry per-yard GPI*/ATL*/
+    # GVL*/TAL* prefixes, chain-unique) because app.js builds tier-1 per-car
+    # links from it: gopullit.com/inventory/{stock}/.
+    "go_pull_it": {
+        "jacksonville": {"code": "gpijax", "name": "Go Pull-It - Jacksonville",
+                         "city": "Jacksonville", "state": "FL", "lat": 30.3373, "lng": -81.7697,
+                         "source": "gopullit", "id_prefix": "gopullit-"},
+        "atlanta_east": {"code": "gpiatl", "name": "Go Pull-It - Atlanta East",
+                         "city": "Norcross", "state": "GA", "lat": 33.9631, "lng": -84.1803,
+                         "source": "gopullit", "id_prefix": "gopullit-"},
+        "gainesville": {"code": "gpigvl", "name": "Go Pull-It - Gainesville",
+                        "city": "Gainesville", "state": "GA", "lat": 34.2810, "lng": -83.7860,
+                        "source": "gopullit", "id_prefix": "gopullit-"},
+        # NEW with the migration — the crawl never covered Tallahassee
+        # (3900 Woodville Hwy, Tallahassee FL 32305; exact OSM parcel).
+        "tallahassee": {"code": "gpital", "name": "Go Pull-It - Tallahassee",
+                        "city": "Tallahassee", "state": "FL", "lat": 30.3870, "lng": -84.2752,
+                        "source": "gopullit", "id_prefix": "gopullit-"},
+    },
     # --- migrated from the retired ASP.NET hybrid adapter (2026-10-22) ---
     # source stays "chesterfield" so the zero-vehicle alarm keeps its own
     # label; id_prefix drops the location code because stock numbers are
@@ -9006,315 +9027,22 @@ def fetch_papva_inventory() -> list[dict]:
     return unique
 
 
-# Go Pull-It (gopullit.com) — 3 yards: Jacksonville FL (7282 Commonwealth
-# Ave), Atlanta East (4600 Buford Hwy, Norcross GA), Gainesville GA (2156
-# Athens Hwy). Un-parks the registry's candidate entry (whose Tampa location
-# was stale). WordPress/Divi custom theme; the gpi_location cookie (1/2/3)
-# selects the yard and plain GET /inventory/?location={slug}&make={MAKE}&
-# model= returns a server-rendered table: Make, Model, Year, Row, VIN, Stock
-# Number, Date Placed (MM/DD/YY), Location, Images. HARD 50-ROW CAP with NO
-# working pagination (/inventory/page/N/ echoes page 1; capped pages show
-# "More results available. Please select a model to narrow your search.") —
-# so the scan queries per make and drills into per-model queries (model list
-# from GET /wp-json/api/getModels?make=X — location-independent, cached per
-# make) only when the cap message appears. A make+model query that is STILL
-# capped is logged as partial (no further filter exists). Stock numbers
-# (GPI*/ATL* prefixes) are the id basis, hash fallback. robots.txt has an
-# orphaned Crawl-delay 10 (honored, like Fenix): ~150-300 requests ≈ 30-50
-# min/scan. All three addresses geocode (Atlanta East is even an OSM POI).
-GPI_BASE = "https://gopullit.com"
-GPI_DELAY_SEC = 10.0
-GPI_YARDS = {  # slug -> (cookie value, yard record)
-    "jacksonville-fl": {"cookie": "1", "name": "Go Pull-It - Jacksonville",
-                        "city": "Jacksonville", "state": "FL", "lat": 30.3373, "lng": -81.7697},
-    "atlanta-east": {"cookie": "2", "name": "Go Pull-It - Atlanta East",
-                     "city": "Norcross", "state": "GA", "lat": 33.9631, "lng": -84.1803},
-    "gainesville-ga": {"cookie": "3", "name": "Go Pull-It - Gainesville",
-                       "city": "Gainesville", "state": "GA", "lat": 34.2810, "lng": -83.7860},
-}
-_GPI_MAKES_RE = re.compile(r'<select name="make" id="js-input-make".*?</select>', re.S)
-_GPI_OPTION_RE = re.compile(r'<option value="([^"]+)"')
-_GPI_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
-_GPI_MORE_MSG = "More results available"
-
-# --- Go Pull-It request-budget state (2026-10-22) -----------------------------
-# The naive scan (query every make at every yard, drill EVERY global model of
-# every capped make) had grown to ~730 requests x the honored 10s crawl-delay
-# ≈ 2h — the single longest fetch of the whole scan, on one host, so thread
-# parallelism can't help. Two observations fix it without touching the 10s
-# per-host cadence:
-#   1. The make page's 50 rows are the NEWEST 50 of that make (date-descending),
-#      so every arrival since the last 4h-ago scan is visible there — model
-#      drill-down exists purely to re-verify the OLDER rows (departures).
-#   2. getModels is GLOBAL (location-blind, verified 2026-10-22), so most of
-#      the old per-model queries hit (yard, model) pairs with zero vehicles.
-# The scan therefore keeps per-yard state (committed to docs/data/ by the scan
-# workflow like everything else) and, per capped (yard, make):
-#   - prunes drill queries to models actually PRESENT at that yard last scan
-#     (plus any model on today's make page — new models always self-reveal);
-#   - fully re-drills on a deterministic 3-phase rotation (sha1(yard|make) vs
-#     the 4h scan-period index), so departures of older-than-page-horizon
-#     vehicles are detected within <=12h (arrivals are never delayed);
-#   - on the off-rotation scans, carries the state's vehicles for that make,
-#     overlaid with today's page rows (fresher row/date wins by id).
-# Safety valves: no state => full getModels drill (bootstrap); page sharing NO
-# ids with state (>50 arrivals of one make in 4h, or id scheme drift) => full
-# getModels drill. Steady state: ~130 make pages + ~130 pruned model drills
-# ≈ 45 min instead of ~2h. Yard-level failure semantics are unchanged (a dead
-# landing page still yields nothing and is caught by apply_stale_keep).
-GPI_STATE_FILE = DATA_DIR / "gopullit_state.json.gz"
-GPI_DRILL_PHASES = 3          # each capped (yard, make) fully re-drilled every 3rd scan
-GPI_SCAN_PERIOD_SEC = 4 * 3600  # the scheduled scan cadence; drives the rotation index
-
-
-def _gpi_drill_phase(slug: str, make: str) -> int:
-    """Deterministic rotation phase for a (yard, make) pair — stable across
-    runs (sha1, not hash()) so the drill load self-staggers evenly."""
-    basis = f"{slug}|{make.upper()}".encode()
-    return int(hashlib.sha1(basis).hexdigest()[:8], 16) % GPI_DRILL_PHASES
-
-
-def _gpi_load_state() -> dict:
-    """{slug: {"models": {MAKE: [MODEL, ...]}, "vehicles": [...]}} from the
-    previous scan's committed state file; {} when absent/unreadable (every
-    capped make then takes the full-drill bootstrap path)."""
-    import gzip as gzip_mod
-    try:
-        with gzip_mod.open(GPI_STATE_FILE, "rt", encoding="utf-8") as fh:
-            d = json.load(fh)
-        if d.get("version") != 1:
-            return {}
-        return d.get("yards") or {}
-    except Exception:
-        return {}
-
-
-def _gpi_save_state(yards: dict) -> None:
-    import gzip as gzip_mod
-    try:
-        payload = json.dumps({"version": 1, "updatedAt": _iso_utc_z(), "yards": yards},
-                             separators=(",", ":"), sort_keys=True)
-        GPI_STATE_FILE.write_bytes(gzip_mod.compress(payload.encode(), mtime=0))
-    except Exception as e:  # never let bookkeeping kill the scan
-        print(f"  [Go Pull-It] state save failed: {e}", file=sys.stderr)
-
-
-def fetch_gopullit_inventory() -> list[dict]:
-    """Fetch Go Pull-It's 3-yard inventory (per-make queries; state-pruned,
-    rotation-scheduled model drill-down for capped makes — see the block
-    comment above GPI_STATE_FILE)."""
-    import html as html_mod
-    import urllib.parse
-
-    n_requests = 0
-
-    def _get(url: str, cookie: str):
-        nonlocal n_requests
-        time.sleep(GPI_DELAY_SEC)
-        n_requests += 1
-        r = requests.get(url, headers={**HEADERS, "Accept": "text/html",
-                                       "Cookie": f"gpi_location={cookie}"}, timeout=60)
-        r.raise_for_status()
-        return r.text
-
-    def _parse_rows(page: str, yard: dict, out: list, dupes: dict,
-                    raw_models: set | None = None):
-        for block in _GPI_ROW_RE.findall(page):
-            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
-                     for c in _FENIX_TD_RE.findall(block)]
-            if len(cells) < 8:
-                continue
-            make_s, model_s, year_s, row_s, vin_s, stock_s, date_s = cells[:7]
-            if not year_s.isdigit():  # header row (th cells don't match, but be safe)
-                continue
-            if raw_models is not None:
-                raw_models.add(model_s.strip().upper())
-            date_iso = ""
-            m = re.match(r"(\d{2})/(\d{2})/(\d{2})$", date_s.strip())
-            if m:
-                date_iso = f"20{m.group(3)}-{m.group(1)}-{m.group(2)}"
-            stock = stock_s.strip()
-            if stock:
-                vid = f"gopullit-{stock.lower()}"
-            else:
-                basis = "|".join((yard["name"], make_s, model_s, year_s, row_s,
-                                  vin_s, date_s)).lower()
-                vid = "gopullit-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
-                n = dupes.get(vid, 0) + 1
-                dupes[vid] = n
-                if n > 1:
-                    vid = f"{vid}-{n}"
-            vin = vin_s.strip().upper()
-            out.append({
-                "id": vid,
-                "vin": vin if len(vin) == 17 else "",
-                "year": int(year_s),
-                "make": _utpap_format_label(make_s),
-                "model": _utpap_format_label(model_s),
-                "row": row_s.strip(),
-                "dateAdded": date_iso,
-                "_location": yard["name"],
-                "_city": yard["city"],
-                "_state": yard["state"],
-                "_lat": yard["lat"],
-                "_lng": yard["lng"],
-                "_source": "gopullit",
-            })
-
-    prev_state = _gpi_load_state()
-    new_state: dict = dict(prev_state)  # slugs that fail this scan keep old entries
-    rotation_idx = int(time.time() // GPI_SCAN_PERIOD_SEC) % GPI_DRILL_PHASES
-    n_drilled = n_carried = 0
-
-    all_vehicles: list[dict] = []
-    dupes: dict[str, int] = {}
-    models_cache: dict[str, list[str]] = {}
-
-    def _get_models(make_name: str, q: str) -> list[str]:
-        nonlocal n_requests
-        if make_name not in models_cache:
-            try:
-                r = requests.get(f"{GPI_BASE}/wp-json/api/getModels?make={q}",
-                                 headers=HEADERS, timeout=60)
-                r.raise_for_status()
-                models_cache[make_name] = [str(x) for x in r.json() if str(x).strip()]
-            except Exception as e:
-                print(f"  [Go Pull-It] getModels {make_name} failed: {e} — "
-                      f"keeping capped 50 rows", file=sys.stderr)
-                models_cache[make_name] = []
-            n_requests += 1
-            time.sleep(GPI_DELAY_SEC)
-        return models_cache[make_name]
-
-    for slug, yard in GPI_YARDS.items():
-        try:
-            page = _get(f"{GPI_BASE}/inventory/?location={slug}", yard["cookie"])
-        except Exception as e:
-            print(f"  [Go Pull-It] {slug} landing fetch failed: {e}", file=sys.stderr)
-            continue
-        m = _GPI_MAKES_RE.search(page)
-        makes = [v for v in _GPI_OPTION_RE.findall(m.group(0)) if v not in ("-1", "")] if m else []
-        if not makes:
-            print(f"  [Go Pull-It] {slug}: no makes parsed — layout changed?", file=sys.stderr)
-            continue
-
-        prev_yard = prev_state.get(slug) or {}
-        prev_vehicles: list[dict] = prev_yard.get("vehicles") or []
-        prev_models_map: dict = prev_yard.get("models") or {}
-        prev_by_make: dict[str, list[dict]] = {}
-        for v in prev_vehicles:
-            prev_by_make.setdefault(str(v.get("make", "")).upper(), []).append(v)
-
-        yard_vehicles: list[dict] = []
-        yard_models_map: dict[str, list[str]] = {}
-        cached = False
-        for make_name in makes:
-            mk = make_name.strip().upper()
-            q = urllib.parse.quote_plus(make_name)
-            prev_make_vehicles = prev_by_make.get(mk, [])
-            prev_models = {str(x).upper() for x in (prev_models_map.get(mk) or [])}
-            # Belt-and-braces: if the models map entry is missing/empty but we
-            # DO hold vehicles for the make (e.g. a prior transient-failure
-            # carry), derive presence from them — otherwise a rotation drill
-            # would prune to page-visible models only and shed older rows.
-            if not prev_models and prev_make_vehicles:
-                prev_models = {str(v.get("model", "")).upper() for v in prev_make_vehicles}
-            try:
-                page = _get(f"{GPI_BASE}/inventory/?location={slug}&make={q}&model=",
-                            yard["cookie"])
-            except Exception as e:
-                # Transient per-make failure: carrying the make's previous rows
-                # (loudly) beats silently dropping a whole make of vehicles.
-                print(f"  [Go Pull-It] {slug}/{make_name} fetch failed: {e} — "
-                      f"carrying {len(prev_make_vehicles)} previous row(s)", file=sys.stderr)
-                yard_vehicles.extend(prev_make_vehicles)
-                if prev_models:  # already backfilled from vehicles when map was empty
-                    yard_models_map[mk] = sorted(prev_models)
-                continue
-            if not cached and "tr" in page:
-                _indep_cache_raw(f"gopullit_{slug}.html", page.encode())
-                cached = True
-
-            page_rows: list[dict] = []
-            page_models: set[str] = set()
-            _parse_rows(page, yard, page_rows, dupes, raw_models=page_models)
-
-            if _GPI_MORE_MSG not in page:
-                # Uncapped: the single page IS the make's full inventory.
-                yard_vehicles.extend(page_rows)
-                yard_models_map[mk] = sorted(page_models)
-                continue
-
-            # Capped at 50 (newest-first). Decide: full drill, pruned drill,
-            # or carry-with-page-overlay (see block comment above GPI_STATE_FILE).
-            page_ids = {v["id"] for v in page_rows}
-            prev_ids = {v.get("id") for v in prev_make_vehicles}
-            bootstrap = not prev_make_vehicles and not prev_models
-            overflow = bool(prev_ids) and not (page_ids & prev_ids)
-            rotation_due = _gpi_drill_phase(slug, make_name) == rotation_idx
-
-            if not (bootstrap or overflow or rotation_due):
-                # Carry: previous rows (in stored order), today's page rows
-                # overriding by id, genuinely new arrivals appended in page order.
-                n_carried += 1
-                page_by_id = {v["id"]: v for v in page_rows}
-                merged = [page_by_id.pop(v["id"], None) or v for v in prev_make_vehicles]
-                merged += [v for v in page_rows if v["id"] in page_by_id]
-                yard_vehicles.extend(merged)
-                yard_models_map[mk] = sorted(prev_models | page_models)
-                continue
-
-            all_models = _get_models(make_name, q)
-            if not all_models:
-                # getModels down: the capped 50 newest are all we can get.
-                yard_vehicles.extend(page_rows)
-                yard_models_map[mk] = sorted(prev_models | page_models)
-                continue
-            if bootstrap or overflow:
-                drill_models = list(all_models)  # no trustworthy presence info
-            else:
-                known = prev_models | page_models
-                drill_models = [x for x in all_models if x.upper() in known]
-                if not drill_models:
-                    drill_models = list(all_models)
-            n_drilled += 1
-
-            drilled_rows: list[dict] = []
-            drilled_models_u = {x.upper() for x in drill_models}
-            drill_seen_models: set[str] = set()
-            for model_name in drill_models:
-                mq = urllib.parse.quote_plus(model_name)
-                try:
-                    page = _get(f"{GPI_BASE}/inventory/?location={slug}&make={q}&model={mq}",
-                                yard["cookie"])
-                except Exception as e:
-                    print(f"  [Go Pull-It] {slug}/{make_name}/{model_name} fetch failed: {e}",
-                          file=sys.stderr)
-                    continue
-                if _GPI_MORE_MSG in page:
-                    print(f"  [Go Pull-It] {slug}/{make_name}/{model_name}: still capped "
-                          f"at 50 — accepting partial (no further filter)", file=sys.stderr)
-                _parse_rows(page, yard, drilled_rows, dupes, raw_models=drill_seen_models)
-            # Safety net: page rows whose model getModels didn't cover can't
-            # appear in any drill result — keep them (disjoint, so no dupes).
-            extra = [v for v in page_rows
-                     if str(v.get("model", "")).upper() not in drilled_models_u]
-            yard_vehicles.extend(drilled_rows + extra)
-            yard_models_map[mk] = sorted(
-                drill_seen_models | {str(v.get("model", "")).upper() for v in extra})
-
-        all_vehicles.extend(yard_vehicles)
-        new_state[slug] = {"models": yard_models_map, "vehicles": yard_vehicles}
-
-    seen: set[str] = set()
-    unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
-    print(f"  [Go Pull-It] {len(unique)} vehicles across "
-          f"{len({v['_location'] for v in unique})} yards "
-          f"({n_requests} requests; {n_drilled} capped make(s) drilled, "
-          f"{n_carried} carried on rotation {rotation_idx}/{GPI_DRILL_PHASES})",
-          file=sys.stderr)
-    _gpi_save_state(new_state)
-    return unique
+# Go Pull-It (gopullit.com) — 4 yards: Jacksonville FL, Atlanta East
+# (Norcross GA), Gainesville GA and Tallahassee FL (NEW with the migration).
+# MIGRATED TO THE VINPLUS API (2026-10-22): the old WordPress crawl (hard
+# 50-row cap, honored 10s crawl-delay, state-pruned rotation drill-down from
+# the 2026-10-22 request-budget rework — ~45 min steady state, 30-50 min
+# before) is retired. The chain is a VinPlus tenant (yard_id go_pull_it,
+# sourceSystem crush) and one API pass serves all 4 locations in the shared
+# VinPlus make x location loop. Verified before cutover: per-yard id overlap
+# 99%+ (Jacksonville 2,269/2,276, Atlanta East 888/891, Gainesville 795/796)
+# with the API seeing fresher arrivals, VINs on ~99% of rows, stock/date/row
+# on 100%, and the SAME gopullit-{stock} id scheme (stocks GPI*/ATL*/GVL*/
+# TAL* come straight from the API), so the app's tier-1 per-car links
+# (gopullit.com/inventory/{stock}/ — verified live for GPI and TAL stocks)
+# keep working. The drill-state machinery (GPI_STATE_FILE, rotation phases,
+# docs/data/gopullit_state.json.gz, test_gopullit_state.py) went with it.
+# See VINPLUS_TENANTS.
 
 
 # U-Pick-It AZ (upickitaz.com) — 2 yards: Flagstaff (7320 Leupp Rd) +
@@ -10006,7 +9734,6 @@ INDEPENDENT_FETCHERS: list = [
     ("VinPlus", fetch_vinplus_inventory),
     ("Pick-A-Part VA", fetch_papva_inventory),
     ("U-Pick-It AZ", fetch_upickitaz_inventory),
-    ("Go Pull-It", fetch_gopullit_inventory),
     ("Barry's", fetch_barrys_inventory),
     ("Prestige", fetch_prestige_inventory),
     ("Budget U-Pull-It", fetch_budget_inventory),
@@ -11498,7 +11225,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, Chesterfield Auto Parts), Pick-A-Part VA, U-Pick-It AZ, Go Pull-It FL/GA, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA/FL/GA (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, Chesterfield Auto Parts, Go Pull-It), Pick-A-Part VA, U-Pick-It AZ, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -11603,7 +11330,7 @@ def main():
         indep_fut = None
         indep_pool = None
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x16 incl. Chesterfield, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige, Budget) in the background, overlapped with the chain scans...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x20 incl. Chesterfield + Go Pull-It, Pick-A-Part VA, U-Pick-It AZ, Barry's, Prestige, Budget) in the background, overlapped with the chain scans...", file=sys.stderr)
             indep_pool = concurrent.futures.ThreadPoolExecutor(
                 max_workers=1, thread_name_prefix="indep-main")
             indep_fut = indep_pool.submit(fetch_independent_inventory)

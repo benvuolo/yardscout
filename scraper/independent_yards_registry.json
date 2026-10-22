@@ -267,15 +267,15 @@
     {
       "name": "Go Pull-It",
       "status": "adapter-built",
-      "platform": "wordpress/divi custom theme (gpi-app.js) with server-rendered inventory table",
+      "platform": "VinPlus multi-tenant React SPA (vinplus.texnrewards.com) over unauthenticated Cloud Run JSON API; source system crush",
       "inventory_url": "https://gopullit.com/inventory/",
       "api": {
-        "endpoint": "https://gopullit.com/inventory/?location={slug}&make={MAKE}&model={MODEL}",
-        "method": "GET",
-        "auth": "none (gpi_location cookie 1/2/3 selects the yard alongside the location param)",
-        "format": "html table (Make, Model, Year, Row, VIN, Stock, Date Placed MM/DD/YY, Location)",
-        "requests_per_scan": "~150-300 at 10s (robots Crawl-delay 10) = 30-50 min",
-        "notes": "Registry's old Tampa location was STALE \u2014 the three live yards are Jacksonville FL, Atlanta East (Norcross GA) and Gainesville GA. HARD 50-ROW CAP with no working pagination (/inventory/page/N/ echoes page 1; capped pages show 'More results available... narrow your search'), so the adapter queries per make and drills into per-model queries (model list from GET /wp-json/api/getModels?make=X, location-independent) only when capped; a still-capped make+model is logged as partial. Stock prefixes GPI*/ATL*. The old devtools-session/sitemap-backfill notes are obsolete."
+        "endpoint": "https://inventory-search-api-581547763015.us-central1.run.app/searchVehicleHttp",
+        "method": "POST",
+        "auth": "none",
+        "format": "json",
+        "requests_per_scan": "~196+ (49 makes x 4 locations + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
+        "notes": "MIGRATED 2026-10-22 from the retired WordPress crawl (hard 50-row cap, honored 10s crawl-delay, state-pruned rotation drill-down - ~45 min steady state). Shared fetch_vinplus_inventory adapter, tenant yard_id=go_pull_it, location_ids jacksonville/atlanta_east/gainesville/tallahassee - Tallahassee (3900 Woodville Hwy, FL 32305) is NEW coverage the crawl never had. Cutover verification: per-yard id overlap 99%+ (Jacksonville 2,269/2,276, Atlanta East 888/891, Gainesville 795/796) with the API seeing fresher arrivals; VINs on ~99% of rows, stock/date/row on 100%. Ids keep the historical gopullit-{stock} scheme (stocks GPI*/ATL*/GVL*/TAL* come straight from the API) so app.js tier-1 per-car links (gopullit.com/inventory/{stock}/, verified live for GPI and TAL stocks) keep working. The old drill-state machinery (docs/data/gopullit_state.json.gz, test_gopullit_state.py) is retired. Chain price list at gopullit.com/parts-price-list/ renders client-side only - link-only in the app."
       },
       "update_freshness": "live (same-week set dates observed)",
       "robots": "allow all with orphaned Crawl-delay 10 (honored)",
@@ -301,8 +301,16 @@
           "state": "GA",
           "lat": 34.281,
           "lng": -83.786
+        },
+        {
+          "name": "Go Pull-It - Tallahassee",
+          "city": "Tallahassee",
+          "state": "FL",
+          "lat": 30.387,
+          "lng": -84.2752
         }
-      ]
+      ],
+      "vinplus_spa_url": "https://vinplus.texnrewards.com/go-pull-it"
     },
     {
       "name": "Sturtevant Auto",
