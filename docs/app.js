@@ -2287,7 +2287,7 @@ document.getElementById('live-radius').addEventListener('change', () => {
   }
 })();
 updateFilterAvailability();   // filters stay disabled until a location exists
-/* Yards are re-scanned automatically every ~6 hours; this button re-checks
+/* Yards are re-scanned automatically every ~4 hours; this button re-checks
  * for a newer published scan (no-cache fetch + background revalidate). */
 document.getElementById('live-refresh-btn').addEventListener('click', async () => {
   const btn = document.getElementById('live-refresh-btn');
@@ -2308,7 +2308,7 @@ document.getElementById('live-refresh-btn').addEventListener('click', async () =
       : hrs < 48 ? ` Last scan: ${hrs}h ago.`
       : ` Last scan: ${Math.round(hrs / 24)} days ago.`;
   }
-  alert("You're already seeing the latest scan. Yards are re-scanned automatically about every 6 hours." + age);
+  alert("You're already seeing the latest scan. Yards are re-scanned automatically about every 4 hours." + age);
 });
 document.getElementById('tab-live').addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-copy-vin');
@@ -2504,7 +2504,7 @@ function buildYardDirectory() {
 }
 
 /* ===== STALE-DATA GUARD =====
- * The scan runs every 6 hours; if the newest data is older than a day,
+ * The scan runs every 4 hours; if the newest data is older than a day,
  * say so instead of quietly presenting stale inventory as live.
  * Test hook: ?stale=<hours> forces an age for screenshots/QA. */
 function updateStaleBanner() {
@@ -4675,7 +4675,7 @@ async function refreshNativeIapUi() {
         localStorage.setItem(ENABLED_KEY, data.enabled ? '1' : '0');
         toggle.checked = !!data.enabled;
         if (data.enabled) {
-          setStatus('Alert emails go to ' + (data.email || email) + '. One email per scan with new matches — scans run about every 6 hours.');
+          setStatus('Alert emails go to ' + (data.email || email) + '. One email per scan with new matches — scans run about every 4 hours.');
         }
       })
       .catch(() => { /* offline — cached state stands */ });
@@ -4693,7 +4693,7 @@ async function refreshNativeIapUi() {
         track(on ? 'email-alerts-on' : 'email-alerts-off');
         setStatus(on
           ? 'On — alert emails go to ' + (res.data.email || localStorage.getItem('ys_ent_email') || 'your Pro email')
-            + '. You get one email per scan that finds new matches (scans run about every 6 hours).'
+            + '. You get one email per scan that finds new matches (scans run about every 4 hours).'
           : 'Email alerts are off. Your watchlist still works right here.');
       } else {
         toggleEl.checked = !on;
@@ -4772,7 +4772,7 @@ async function refreshNativeIapUi() {
         const res = await postSync(true);
         if (res && res.ok) localStorage.setItem(ENABLED_KEY, '1');
         window.refreshEmailAlertsUi();
-        setStatus('Linked — alert emails go to ' + email + '. One email per scan with new matches (scans run about every 6 hours).');
+        setStatus('Linked — alert emails go to ' + email + '. One email per scan with new matches (scans run about every 4 hours).');
       } else {
         setLinkStatus(data.message || 'That code didn\u2019t work — request a new one.', true);
       }
