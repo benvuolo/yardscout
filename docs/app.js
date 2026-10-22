@@ -1013,6 +1013,34 @@ function canonicalModel(make, model) {
   return table[String(model || '').trim().toLowerCase()] || model;
 }
 
+/* Make aliases — mirror of the scraper's _MAKE_ALIASES (2026-10 dropdown
+ * dedupe: MINI Cooper/MINI, Alfa-Romeo, Fiat-Lancia, Vw, Mercedes, Rover).
+ * The inventory ships already-canonical makes; this map exists so WATCHES
+ * users saved BEFORE the merge (localStorage + synced backend copies, e.g.
+ * make "MINI Cooper" or "Vw") still match at comparison time — simpler and
+ * safer than migrating every stored watch. Keys are squashed lowercase
+ * alphanumerics. */
+const MAKE_ALIASES = {
+  minicooper: 'MINI',
+  alfaromeo: 'Alfa Romeo',
+  fiatlancia: 'Fiat',
+  mercedes: 'Mercedes-Benz',
+  mercedesbenz: 'Mercedes-Benz',
+  vw: 'Volkswagen',
+  volkswagon: 'Volkswagen',
+  chevy: 'Chevrolet',
+  chev: 'Chevrolet',
+  rover: 'Land Rover',
+  landrover: 'Land Rover',
+  rangerover: 'Land Rover',
+  infinity: 'Infiniti',
+};
+
+function canonicalMake(make) {
+  const key = String(make || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  return MAKE_ALIASES[key] || String(make || '');
+}
+
 function populateModelFilter() {
   const make = document.getElementById('live-filter-make').value;
   const btn = document.getElementById('live-filter-model-btn');
@@ -3059,9 +3087,11 @@ function loadAlerted() {
 function saveAlerted(obj) { localStorage.setItem(ALERTED_KEY, JSON.stringify(obj)); }
 
 function watchlistMatches(entry, v) {
-  const makeLow = (entry.make || '').toLowerCase();
+  // Canonicalize BOTH makes: a watch saved as "MINI Cooper" or "Vw" before
+  // the 2026-10 make merge must keep matching the merged inventory.
+  const makeLow = canonicalMake(entry.make).toLowerCase();
   const modelLow = (entry.model || '').toLowerCase();
-  if (makeLow && !(v.make || '').toLowerCase().includes(makeLow)) return false;
+  if (makeLow && !canonicalMake(v.make).toLowerCase().includes(makeLow)) return false;
   if (modelLow) {
     // Match raw yard spelling OR the canonical alias (so a watch for "WRX"
     // catches a car a yard filed as "Impreza WRX", and vice versa).
@@ -3198,8 +3228,10 @@ function renderAlerts() {
  * watch on the make counts). Drives the bell state on car cards. */
 function hasWatchFor(make, model) {
   if (!make) return false;
+  // canonicalMake on both sides: a pre-merge watch saved as "MINI Cooper"
+  // still lights the bell on a (now-canonical) MINI card.
   return loadWatchlist().some(e =>
-    (e.make || '').toLowerCase() === make.toLowerCase() &&
+    canonicalMake(e.make).toLowerCase() === canonicalMake(make).toLowerCase() &&
     (!e.model || (e.model || '').toLowerCase() === (model || '').toLowerCase()));
 }
 

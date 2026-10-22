@@ -179,8 +179,34 @@ export async function handlePushTest(req, env) {
 
 /* ===== dispatch on inventory commit ===== */
 
+/* Make aliases — mirror of the scraper's _MAKE_ALIASES (2026-10 make-name
+ * merge: MINI Cooper->MINI, Vw->Volkswagen, ...). Arrivals now carry
+ * canonical makes, but watches saved BEFORE the merge still hold the old
+ * spellings in D1 — canonicalize both sides at comparison time instead of
+ * migrating stored rows. Keys are squashed lowercase alphanumerics. */
+const MAKE_ALIASES = {
+  minicooper: 'mini',
+  alfaromeo: 'alfa romeo',
+  fiatlancia: 'fiat',
+  mercedes: 'mercedes-benz',
+  mercedesbenz: 'mercedes-benz',
+  vw: 'volkswagen',
+  volkswagon: 'volkswagen',
+  chevy: 'chevrolet',
+  chev: 'chevrolet',
+  rover: 'land rover',
+  landrover: 'land rover',
+  rangerover: 'land rover',
+  infinity: 'infiniti',
+};
+
+function canonMakeLow(s) {
+  const low = String(s || '').toLowerCase();
+  return MAKE_ALIASES[low.replace(/[^a-z0-9]/g, '')] || low;
+}
+
 export function watchMatches(w, v) {
-  if (w.make && String(v.make || '').toLowerCase() !== w.make.toLowerCase()) return false;
+  if (w.make && canonMakeLow(v.make) !== canonMakeLow(w.make)) return false;
   if (w.model && String(v.model || '').toLowerCase() !== w.model.toLowerCase()) return false;
   if (w.year_min && (!v.year || v.year < w.year_min)) return false;
   if (w.year_max && (!v.year || v.year > w.year_max)) return false;
