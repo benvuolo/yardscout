@@ -7149,6 +7149,174 @@ def engine_matches_family(engine_str: str, fam: dict) -> bool | None:
 # inner list — the evidence string cites where each list was retrieved.
 # Research notes with full citations live in scraper/interchange_research.md.
 _ALT_VERIFIED: dict = {
+    "subaru-fa20dit": {
+        "evidence": "Subaru OEM 23700AA911 (replaces AA910) fitment (subarupartsdeal.com, retrieved 2026-10-22): WRX 2.0 turbo 2015-2020. The Forester 2.0XT shares its unit with the FB25 Forester (23700AB030), not the WRX — left at likely.",
+        "groups": [[("Subaru", "WRX", 2015, 2020)]],
+    },
+    "subaru-ej25t": {
+        "evidence": "Mitsubishi A3TG0491 / Subaru 23700-AA520/AA521/AA570 application list (maniacelectricmotors.com + HC-Cargo 115453, retrieved 2026-10-22): Forester XT 2006-2010, Impreza WRX/STI 2006-2010, Legacy GT 2005, Outback XT 2005, Saab 9-2X 2006. Subaru OEM 23700AA871 (subarupartsdeal.com): Forester XT 2011-2013, Impreza WRX/STI 2011-2014, WRX/WRX STI 2.5 turbo 2015-2020.",
+        "groups": [
+            [("Subaru", "Forester", 2006, 2010),
+             ("Subaru", "Impreza", 2006, 2010),
+             ("Subaru", "Impreza WRX", 2006, 2010),
+             ("Subaru", "Legacy", 2005, 2005),
+             ("Subaru", "Outback", 2005, 2005)],
+            [("Subaru", "Forester", 2011, 2013),
+             ("Subaru", "Impreza", 2011, 2014),
+             ("Subaru", "Impreza WRX", 2011, 2014),
+             ("Subaru", "WRX", 2011, 2014)],
+        ],
+    },
+    "subaru-fb25": {
+        "evidence": "Subaru OEM fitment (subarupartsdeal.com, retrieved 2026-10-22): 23700AB030 (replaces 23700AA760/AA761) Forester 2014-2018 (2.5i and 2.0XT trims); 23700AA91B Legacy 2.5i 2015-2017; 23700AB01A Legacy/Outback 2.5i 2018-2019.",
+        "groups": [
+            [("Subaru", "Forester", 2014, 2018)],
+            [("Subaru", "Legacy", 2015, 2017)],
+            [("Subaru", "Legacy", 2018, 2019),
+             ("Subaru", "Outback", 2018, 2019)],
+        ],
+    },
+    "mopar-47": {
+        "evidence": "Mopar OEM 56029914AC (160A Denso, replaces 56029914AA) fitment (jeeppartsdeal.com, retrieved 2026-10-22): Durango 3.7/4.7 2001-2007, Grand Cherokee 3.7/4.7 2005-2006; Denso 421000-0040 vendor table adds Commander 3.7/4.7 2006-2010. Mopar RL041120AC (Ram 1500 3.7/4.7 2002-2007) and 56029700AD (Ram 1500 2008) cover the trucks.",
+        "groups": [
+            [("Dodge", "Durango", 2001, 2007),
+             ("Jeep", "Grand Cherokee", 2005, 2006),
+             ("Jeep", "Commander", 2006, 2009)],
+            [("Dodge|Ram", "Ram*", 2002, 2008)],
+        ],
+    },
+    "mopar-37": {
+        "evidence": "Mopar OEM 56029914AC fitment (jeeppartsdeal.com, retrieved 2026-10-22): Liberty 3.7 2002-2005, Grand Cherokee 3.7 2005-2006; Denso 421000-0040 vendor table: Commander 3.7 2006-2010. Mopar RL041120AC/56029700AD: Ram 3.7 2002-2008 (same units as the 4.7 trucks).",
+        "groups": [
+            [("Jeep", "Liberty", 2002, 2005),
+             ("Jeep", "Grand Cherokee", 2005, 2006),
+             ("Jeep", "Commander", 2006, 2010)],
+            [("Dodge|Ram", "Ram*", 2002, 2008)],
+        ],
+    },
+    "mopar-magnum": {
+        "evidence": "Lester 13354 (Denso 121000-3530, Chrysler 56027912) application list (maniacelectricmotors.com + aspwholesale.com, retrieved 2026-10-22): Dakota 1992-1998, Ram 1500/2500/3500 1994-1998, Durango 1998, Grand Cherokee 5.2/5.9 1993-1998, Ramcharger 1992-1993. Corroborated by Lester 13742 (Chrysler 56027913, 136A) with the same spans. Lester 13920/13914 (Bosch/Denso 136A, Chrysler 56028237) application table (dssautoparts.com): Ram 1999-2003, Durango 5.9 2001-2003.",
+        "groups": [
+            [("Dodge|Ram", "Ram*", 1994, 1998),
+             ("Dodge", "Dakota", 1992, 1998),
+             ("Dodge", "Durango", 1998, 1998),
+             ("Jeep", "Grand Cherokee", 1993, 1998)],
+            [("Dodge|Ram", "Ram*", 1999, 2001),
+             ("Dodge", "Durango", 2001, 2003)],
+        ],
+    },
+    "gm-60deg": {
+        "evidence": "Lester 13993 (GM 10317647/10440635, Valeo SG10S029) application list (dbelectrical.com 400-40079, retrieved 2026-10-22): Venture 3.4 2002-2005, Montana 3.4 2002-2005, Silhouette 3.4 2002-2004. Grand Am/Alero/Impala/Malibu 3.4 use CS130D-era Delco units with multiple amp options — left at likely.",
+        "groups": [[("Chevrolet", "Venture", 2002, 2005),
+                    ("Pontiac", "Montana", 2002, 2005)]],
+    },
+    "gm-hv-v6": {
+        "evidence": "Lester 11185 (Bosch 0-124-425-032, GM 20911162) application list (TYC 2-11185 via finditparts.com + maniacelectricmotors.com, retrieved 2026-10-22): Impala 3.5/3.9 2006-2011, Monte Carlo 3.5/3.9 2006-2007. Malibu/G6/Uplander use different units — left at likely.",
+        "groups": [[("Chevrolet", "Impala", 2006, 2011),
+                    ("Chevrolet", "Monte Carlo", 2006, 2007)]],
+    },
+    "gm-ecotec22": {
+        "evidence": "Lester 11265 (Valeo, GM 15828450/22762984) application list (am-autoparts.com + maniacelectricmotors.com, retrieved 2026-10-22): Cobalt 2008-2010, Malibu 2.4 2008-2012, G5 2008-2009, Saturn Aura/Sky/Vue 2008-2010. Denso unit Lester 11140: Cobalt 2.2/2.4 2006-2007. Earlier Cavalier/Sunfire/ION use other units — left at likely.",
+        "groups": [
+            [("Chevrolet", "Cobalt", 2008, 2010),
+             ("Chevrolet", "Malibu", 2008, 2012),
+             ("Pontiac", "G5", 2008, 2009)],
+            [("Chevrolet", "Cobalt", 2006, 2007)],
+        ],
+    },
+    "toyota-22re": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0116 (60A) Pickup 22RE 1994-1995 and 1993 std; same unit listed for 4Runner 22RE w/ M/T only, while A/T trucks take 210-0297/0299 — transmission splits the unit, so only the unqualified Pickup 1994-1995 span is treated as verified.",
+        "groups": [[("Toyota", "Pickup", 1994, 1995)]],
+    },
+    "toyota-5s": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0187 (80A) Camry 5SFE 1997-2001 and Solara 5SFE 1999 and 2001. Celica/MR2 5S use earlier units — left at likely.",
+        "groups": [[("Toyota", "Camry", 1997, 2001),
+                    ("Toyota", "Solara", 1999, 2001)]],
+    },
+    "toyota-3mz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0543 (100A std) Lexus ES330 2004-2006, RX330 2004-2006 (Japan-built std), Camry 3.3 2004, Highlander 3.3 2004-2007; 210-0545 (130A opt) RX330 2004-2006 (US-built opt) and Sienna 3.3 2004-2006. Amp option splits noted in research notes.",
+        "groups": [
+            [("Lexus", "ES 330", 2004, 2006),
+             ("Lexus", "RX 330", 2004, 2006),
+             ("Toyota", "Camry", 2004, 2004),
+             ("Toyota", "Highlander", 2004, 2007)],
+            [("Lexus", "RX 330", 2004, 2006),
+             ("Toyota", "Sienna", 2004, 2006)],
+        ],
+    },
+    "toyota-2zr": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0699 (100A clutch pulley) Scion xD 1.8 2008-2009 and Corolla 1.8 2009 (Japan-built). Later 2ZR Corolla/Matrix years use successor units — left at likely.",
+        "groups": [[("Scion", "xD", 2008, 2009),
+                    ("Toyota", "Corolla", 2009, 2009)]],
+    },
+    "honda-d16": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4134 (70A) Civic 1.6 D16Y5/D16Y7/D16Y8/D16B5 1996-2000 (exc Canada/Si) and Civic del Sol 1.6 1996-1997. Corroborated by Lester 13649 (Honda 31100-P2E-A01) listings.",
+        "groups": [[("Honda", "Civic", 1996, 2000),
+                    ("Honda", "Civic del Sol", 1996, 1997)]],
+    },
+    "honda-d17": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4148 (70A) Civic 1.7 D17A1/A2/A6/A7 2001-2005 (exc Canada). Corroborated by Lester 13893 (Honda 31100-PLM-A02) listings incl. Acura EL 1.7.",
+        "groups": [[("Honda", "Civic", 2001, 2005)]],
+    },
+    "honda-r18": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4236 (90A) Civic 1.8 R18A1 2006-2011. Corroborated by TYC 2-11176 / Lester 11176 (Honda 31100-RNA-A01) listings. 2012-2015 R18Z Civic uses a different unit — left at likely.",
+        "groups": [[("Honda", "Civic", 2006, 2011)]],
+    },
+    "honda-f23": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0192 (80A) Accord 2.3 1998-2002 (coupe/ULEV splits) and 210-0193 (80A) Accord 2.3 sedan exc-ULEV 1998-2001 + Acura CL 2.3 1998-1999. Both units cover the Accord span; the CL pairs via 210-0193.",
+        "groups": [
+            [("Honda", "Accord", 1998, 2002)],
+            [("Honda", "Accord", 1998, 2001),
+             ("Acura", "CL", 1998, 1999)],
+        ],
+    },
+    "acura-j32": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0675 (105A) CL 3.2 2001-2003 (exc Type S; Type S w/ M/T 2003) and TL 3.2 2000-2003; Type S w/ A/T uses 210-0453 (120A) in both models 2001-2003. TL 2004-2008 (J32A3) uses 210-0580 — left at likely.",
+        "groups": [[("Acura", "CL", 2001, 2003),
+                    ("Acura", "TL", 2000, 2003)]],
+    },
+    "nissan-ka24": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3146 (100A) Altima KA24DE 1998-2001; 210-3156 (70A) Frontier and Xterra KA24DE 2002-2004; 210-3118 (70A) Frontier 1998-2000 and Xterra 2000. 240SX/early Altima use other units — left at likely.",
+        "groups": [
+            [("Nissan", "Altima", 1998, 2001)],
+            [("Nissan", "Frontier", 2002, 2004),
+             ("Nissan", "Xterra", 2002, 2004)],
+            [("Nissan", "Frontier", 1998, 2000),
+             ("Nissan", "Xterra", 2000, 2000)],
+        ],
+    },
+    "nissan-mr18": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4301 (110A) Versa MR18DE 2007-2009 (to 09/2008) and Cube MR18DE 2009; 210-4329 (110A, 7-groove) Cube 2010-2012.",
+        "groups": [
+            [("Nissan", "Versa", 2007, 2009),
+             ("Nissan", "Cube", 2009, 2009)],
+            [("Nissan", "Cube", 2010, 2012)],
+        ],
+    },
+    "nissan-hr16": {
+        "evidence": "Nissan OEM 23100-3BE1A fitment (nissanpartsdeal.com, retrieved 2026-10-22): Versa 1.6 HR16DE 2012-2019, Versa Note 1.6 2014-2019. Cross-referenced Lester 11547 / Mitsubishi A2TJ1791 vendor tables show identical spans.",
+        "groups": [[("Nissan", "Versa", 2012, 2019),
+                    ("Nissan", "Versa Note", 2014, 2019)]],
+    },
+    "hk-gamma16": {
+        "evidence": "Lester 13209 (Hyundai/Kia 37300-2B300/2B500/2B510, Valeo) application lists (dbelectrical.com 400-40153 + mymromarts.com, retrieved 2026-10-22): Accent 1.6 2012-2017, Veloster 1.6 2012-2017, Rio 1.6 2012-2013. Soul 1.6 uses 37300-2B760 (Lester 11609) — left at likely.",
+        "groups": [[("Hyundai", "Accent", 2012, 2017),
+                    ("Hyundai", "Veloster", 2012, 2017),
+                    ("Kia", "Rio", 2012, 2013)]],
+    },
+    "hk-beta20": {
+        "evidence": "Lester 13973 (Hyundai/Kia 37300-23600, Mando AB190147) application lists (qpselectric.com + partshawk.com, retrieved 2026-10-22): Elantra 2.0 2001-2006, Tiburon 2.0 2003-2004 and 2007-2008 (w/ Mando unit), Tucson 2.0 2005, Sportage 2.0 2005-2006.",
+        "groups": [[("Hyundai", "Elantra", 2001, 2006),
+                    ("Hyundai", "Tiburon", 2003, 2004),
+                    ("Hyundai", "Tiburon", 2007, 2008),
+                    ("Hyundai", "Tucson", 2005, 2005),
+                    ("Kia", "Sportage", 2005, 2006)]],
+    },
+    "ford-3g-50": {
+        "evidence": "Lester 7750 (Ford F07U-10300, 3G 95A side-mount) application list (maniacelectricmotors.com, retrieved 2026-10-22): F-150/F-250 5.0/5.8 1993-1996, Bronco 5.0/5.8 1993-1996, E-150 5.0/5.8 1993-1996. Mustang 5.0 1994-1995 uses the pivot-mount 3G and 1987-93 trucks the 2G — both left at likely.",
+        "groups": [[("Ford", "F-150", 1993, 1996),
+                    ("Ford", "Bronco", 1993, 1996)]],
+    },
     "honda-j30": {
         "evidence": "Lester 8220 (Delco CS130D, Honda 31100-P8A-A01/P8C-A02) application lists (alternatorparts.com + thewrenchmonkey.ca, retrieved 2026-10-22): Accord 3.0 1998-2002, Acura CL 3.0 1997-1999. The 03-07 Accord V6 uses a Denso unit — left at likely.",
         "groups": [[("Honda", "Accord", 1998, 2002),
