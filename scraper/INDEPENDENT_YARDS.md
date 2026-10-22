@@ -403,3 +403,17 @@ into the app's price sheet + cross-yard compare.
 Geocoding: neither parcel in OSM and Census had no address match — WG pin
 taken from the site's own footer-map coordinates, Bartow from the
 u-pull-it.com directory listing.
+
+**Same-day follow-up (owner asked to confirm parts PRICES flow through):**
+the first pass wired `budget_pricing.json` into the price *sheet* only —
+part rows still said "check yard price list" because
+`PART_KEYWORD_MAP`/`_lookupYardCostUncached` had no Budget columns. Now
+wired UTPAP-style with TWO columns (`bwg` Winter Garden, `bba` Bartow —
+only 421 of ~660 names are spelled identically across the yards' lists,
+e.g. `HEADLIGHT COMPOSITE` vs `HEADLAMP COMPOSITE`), routed per yard inside
+one `budget u-pull-it` branch. 129 of 142 keyword rows mapped; audit
+(`_audit_pullcost_map.py`, now budget-aware): 94.8% of part instances at
+the two yards resolve to a real published price — on par with PnP/PYP.
+Unmapped stays honest ("check yard price list"): hybrid batteries, cameras,
+transfer-case motors etc. aren't on Budget's lists; Bartow's list has no
+amplifier or hybrid-inverter line items (WG's does).

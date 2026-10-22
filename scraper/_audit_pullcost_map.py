@@ -72,6 +72,7 @@ def load_pricing() -> dict:
         "pyp": per_yard(DATA / "pyp_pricing.json"),      # keyed by yard name
         "pap": per_yard(DATA / "pap_pricing.json"),      # keyed by yard name
         "wap": per_yard(DATA / "wap_pricing.json"),      # keyed by yard name
+        "budget": per_yard(DATA / "budget_pricing.json"),  # keyed by yard name
     }
 
 
@@ -91,6 +92,8 @@ def chain_for_location(loc_lower: str) -> str | None:
         return "wap"
     if loc_lower.startswith("u-pull-r"):
         return "upullr"
+    if loc_lower.startswith("budget u-pull-it"):
+        return "budget"
     return None
 
 
@@ -98,6 +101,12 @@ def is_mapped(entry: dict | None, chain: str | None, location: str,
               pricing: dict) -> bool:
     if not entry or not chain:
         return False
+    if chain == "budget":
+        # Two published lists behind one brand: column picked by yard.
+        col = "bwg" if "winter garden" in location.lower() else "bba"
+        item = entry.get(col)
+        yard = pricing[chain].get(location)
+        return bool(item and yard and item in yard)
     item = entry.get(chain)
     if not item:
         return False
