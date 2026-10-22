@@ -2710,8 +2710,9 @@ document.getElementById('yards-search').addEventListener('input', () => renderYa
 document.getElementById('yards-radius').addEventListener('change', e => {
   const sel = e.target;
   if (sel.value === '' && !isPro()) {
-    const prev = localStorage.getItem('jh_radius');
-    sel.value = prev && prev !== '' ? prev : String(FREE_MAX_RADIUS_MI);
+    // Snap back to the radius actually in effect (the Live select is the
+    // source of truth), so the two selects and the stats bar keep agreeing.
+    sel.value = document.getElementById('live-radius').value || String(FREE_MAX_RADIUS_MI);
     openUpgradeSheet('radius-any-distance');
     return;
   }
@@ -2940,7 +2941,10 @@ let _partIndex = null;
 let _partIndexSig = '';
 
 function titleCasePart(s) {
-  return s.toLowerCase().replace(/(^|[^a-z0-9])([a-z])/g, (m, pre, c) => pre + c.toUpperCase());
+  // Some chains' raw lists carry stray leading punctuation ('.VALVE COVER-');
+  // clean it for display so junk doesn't sort to the top of the browse list.
+  return s.replace(/^[^a-zA-Z0-9]+/, '').replace(/\s+/g, ' ').trim()
+    .toLowerCase().replace(/(^|[^a-z0-9])([a-z])/g, (m, pre, c) => pre + c.toUpperCase());
 }
 
 function getPartIndex() {
