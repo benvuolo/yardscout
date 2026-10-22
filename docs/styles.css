@@ -1746,9 +1746,13 @@
 .compare-input-wrap .search-box { flex: 1; min-width: 0; }
 .compare-suggest {
   position: absolute; top: calc(100% + 4px); left: 0; right: 0;
-  z-index: 70; max-height: 290px; overflow-y: auto;
+  z-index: 70; max-height: min(340px, 48vh); overflow-y: auto;
   background: var(--surface); border: 1px solid var(--border-dark);
   border-radius: var(--radius-sm); box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.compare-suggest-empty {
+  padding: 0.65rem 0.8rem; font-size: 0.78rem; line-height: 1.5;
+  color: var(--text-dim);
 }
 .compare-suggest-item {
   display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem;

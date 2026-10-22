@@ -218,6 +218,13 @@
     <div class="stats-bar" id="yards-stats-bar"></div>
     <div class="toolbar yards-toolbar">
       <input type="text" class="search-box" id="yards-search" placeholder="Search yard name, city, state&hellip;">
+      <select id="yards-radius" title="Only show yards within this distance of your zip">
+        <option value="">Any distance &mdash; Pro</option>
+        <option value="25">&le; 25 mi</option>
+        <option value="50">&le; 50 mi</option>
+        <option value="100" selected>&le; 100 mi</option>
+        <option value="250">&le; 250 mi</option>
+      </select>
       <select id="yards-filter-chain" title="Only show yards from this chain">
         <option value="">All chains</option>
       </select>
@@ -228,7 +235,7 @@
     <div class="price-compare-bar" id="price-compare-bar">
       <div class="compare-input-wrap">
         <input type="text" class="search-box" id="compare-input" autocomplete="off"
-               placeholder="Compare a part price across the yards below &mdash; try alternator">
+               placeholder="Compare a part price &mdash; tap to browse parts, or type to filter">
         <div class="compare-suggest" id="compare-suggest" style="display:none;" role="listbox"></div>
       </div>
       <button type="button" class="btn btn-primary" id="compare-go">Compare</button>

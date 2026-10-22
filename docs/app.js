@@ -2562,6 +2562,9 @@ function populateYardFilters(inRange) {
 function renderYards() {
   const grid = document.getElementById('yards-grid');
   const statsBar = document.getElementById('yards-stats-bar');
+  // This tab's Within select mirrors the Live tab's (one stored radius, one
+  // free cap, one Pro gate) — resync here so the two can never disagree.
+  document.getElementById('yards-radius').value = document.getElementById('live-radius').value;
   if (!liveLoaded) {
     grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><p>Loading live inventory&hellip;</p></div>';
     statsBar.innerHTML = '';
@@ -2701,6 +2704,21 @@ document.getElementById('yards-grid').addEventListener('keydown', e => {
   if (card) viewYardInLive(card.dataset.loc);
 });
 document.getElementById('yards-search').addEventListener('input', () => renderYards());
+/* Yards-tab distance control: same stored value, same free 250 mi cap, and
+ * the same Pro gate as the Live tab's radius select — "any distance" snaps
+ * free users back and pitches honestly, identical trigger and prompt. */
+document.getElementById('yards-radius').addEventListener('change', e => {
+  const sel = e.target;
+  if (sel.value === '' && !isPro()) {
+    const prev = localStorage.getItem('jh_radius');
+    sel.value = prev && prev !== '' ? prev : String(FREE_MAX_RADIUS_MI);
+    openUpgradeSheet('radius-any-distance');
+    return;
+  }
+  document.getElementById('live-radius').value = sel.value;
+  localStorage.setItem('jh_radius', sel.value);
+  renderYards();
+});
 
 /* ===== YARD PRICE LISTS & CROSS-YARD COMPARE =====
  * Every chain's published price list, browsable in-app so nobody has to dig
@@ -2968,25 +2986,35 @@ function hideCompareSuggest() {
   suggestActive = -1;
 }
 
+/* Combobox, not plain type-ahead: tapping the empty field browses the FULL
+ * parts list for the visible yards (alphabetical); typing filters it live
+ * (best matches first). Comparisons only ever run against a real entry, so
+ * free text can't dead-end on an empty sheet. */
 function renderCompareSuggest() {
+  if (!activeZipCoords || !liveLoaded) { hideCompareSuggest(); return; }
   const q = compareInput.value.trim().toLowerCase();
-  if (q.length < 2 || !activeZipCoords || !liveLoaded) { hideCompareSuggest(); return; }
-  const starts = [], contains = [];
-  for (const [k, e] of getPartIndex()) {
-    if (k.startsWith(q)) starts.push(e);
-    else if (k.includes(q)) contains.push(e);
+  if (q) {
+    const starts = [], contains = [];
+    for (const [k, e] of getPartIndex()) {
+      if (k.startsWith(q)) starts.push(e);
+      else if (k.includes(q)) contains.push(e);
+    }
+    const byCount = (a, b) => b.yards.size - a.yards.size || a.display.localeCompare(b.display);
+    starts.sort(byCount);
+    contains.sort(byCount);
+    suggestItems = [...starts, ...contains];
+  } else {
+    suggestItems = [...getPartIndex().values()]
+      .sort((a, b) => a.display.localeCompare(b.display));
   }
-  const byCount = (a, b) => b.yards.size - a.yards.size || a.display.localeCompare(b.display);
-  starts.sort(byCount);
-  contains.sort(byCount);
-  suggestItems = [...starts, ...contains].slice(0, 10);
-  if (!suggestItems.length) { hideCompareSuggest(); return; }
   suggestActive = -1;
-  compareSuggest.innerHTML = suggestItems.map((e, i) =>
-    `<div class="compare-suggest-item" role="option" data-i="${i}">
-       <span class="csi-name">${escapeHtml(e.display)}</span>
-       <span class="csi-count">${e.yards.size} yard${e.yards.size === 1 ? '' : 's'}</span>
-     </div>`).join('');
+  compareSuggest.innerHTML = suggestItems.length
+    ? suggestItems.map((e, i) =>
+        `<div class="compare-suggest-item" role="option" data-i="${i}">
+           <span class="csi-name">${escapeHtml(e.display)}</span>
+           <span class="csi-count">${e.yards.size} yard${e.yards.size === 1 ? '' : 's'}</span>
+         </div>`).join('')
+    : '<div class="compare-suggest-empty">No matching part on the visible yards\u2019 published lists \u2014 try a shorter word, or widen the filters above.</div>';
   compareSuggest.style.display = '';
 }
 
@@ -2996,6 +3024,24 @@ function pickSuggestion(i) {
   compareInput.value = item.display;
   hideCompareSuggest();
   openPriceCompare(item.display);
+}
+
+/** Enter / the Compare button resolve to a real entry: the highlighted one,
+ *  an exact name match, else the best current suggestion. Nothing matching
+ *  keeps the "no matching part" row up instead of opening an empty sheet. */
+function resolveAndCompare() {
+  const q = compareInput.value.trim().toLowerCase();
+  if (!q) { renderCompareSuggest(); return; }
+  if (suggestActive >= 0) { pickSuggestion(suggestActive); return; }
+  const exact = getPartIndex().get(q);
+  if (exact) {
+    compareInput.value = exact.display;
+    hideCompareSuggest();
+    openPriceCompare(exact.display);
+    return;
+  }
+  renderCompareSuggest();
+  if (suggestItems.length) pickSuggestion(0);
 }
 
 compareInput.addEventListener('input', renderCompareSuggest);
@@ -3012,19 +3058,16 @@ compareInput.addEventListener('keydown', e => {
     const d = e.key === 'ArrowDown' ? 1 : -1;
     suggestActive = (suggestActive + d + suggestItems.length) % suggestItems.length;
     [...compareSuggest.children].forEach((el, i) => el.classList.toggle('active', i === suggestActive));
+    const active = compareSuggest.children[suggestActive];
+    if (active) active.scrollIntoView({ block: 'nearest' });
   } else if (e.key === 'Enter') {
-    if (suggestActive >= 0) { pickSuggestion(suggestActive); return; }
-    hideCompareSuggest();
-    openPriceCompare(e.target.value);
+    resolveAndCompare();
   } else if (e.key === 'Escape') {
     hideCompareSuggest();
   }
 });
 compareInput.addEventListener('blur', () => setTimeout(hideCompareSuggest, 150));
-document.getElementById('compare-go').addEventListener('click', () => {
-  hideCompareSuggest();
-  openPriceCompare(compareInput.value);
-});
+document.getElementById('compare-go').addEventListener('click', resolveAndCompare);
 document.getElementById('yards-filter-chain').addEventListener('change', renderYards);
 document.getElementById('yards-filter-state').addEventListener('change', renderYards);
 
