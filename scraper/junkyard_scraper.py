@@ -9253,6 +9253,12 @@ def fetch_gopullit_inventory() -> list[dict]:
             q = urllib.parse.quote_plus(make_name)
             prev_make_vehicles = prev_by_make.get(mk, [])
             prev_models = {str(x).upper() for x in (prev_models_map.get(mk) or [])}
+            # Belt-and-braces: if the models map entry is missing/empty but we
+            # DO hold vehicles for the make (e.g. a prior transient-failure
+            # carry), derive presence from them — otherwise a rotation drill
+            # would prune to page-visible models only and shed older rows.
+            if not prev_models and prev_make_vehicles:
+                prev_models = {str(v.get("model", "")).upper() for v in prev_make_vehicles}
             try:
                 page = _get(f"{GPI_BASE}/inventory/?location={slug}&make={q}&model=",
                             yard["cookie"])
@@ -9262,7 +9268,7 @@ def fetch_gopullit_inventory() -> list[dict]:
                 print(f"  [Go Pull-It] {slug}/{make_name} fetch failed: {e} — "
                       f"carrying {len(prev_make_vehicles)} previous row(s)", file=sys.stderr)
                 yard_vehicles.extend(prev_make_vehicles)
-                if prev_models:
+                if prev_models:  # already backfilled from vehicles when map was empty
                     yard_models_map[mk] = sorted(prev_models)
                 continue
             if not cached and "tr" in page:
