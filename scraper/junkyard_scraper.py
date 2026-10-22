@@ -10470,6 +10470,159 @@ def build_inventory_json_payload(vehicles: list[dict], only_matches: bool) -> di
     return compact_inventory_v2(output_json(vehicles, only_matches=only_matches))
 
 
+# --- Stale-keep: never publish a vanished yard -------------------------------
+# 2026-10-21 incident: one scan hit transient source failures (Pull-N-Save's
+# makes API down, Budget Winter Garden serving an unparseable page) and the
+# published inventory silently dropped 9 yards / 13k vehicles — including a
+# yard the owner was actively pitching. A yard that fetched fine 3 hours
+# earlier must not vanish from the app because of one bad fetch: carry the
+# previously published rows forward (loudly) until the source recovers or the
+# carry cap is hit.
+STALE_KEEP_FLOOR = 0.40      # carry forward when a yard returns <40% of its previous count
+STALE_KEEP_MIN_PREV = 25     # ignore tiny yards (legit fluctuation, not failure signal)
+STALE_KEEP_MAX_SCANS = 30    # stop carrying after ~30 consecutive frozen scans (~5 days @4h)
+
+
+def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
+                             yard_names: list[str],
+                             new_extras: dict | None = None,
+                             prev_extras: dict | None = None) -> dict[str, int]:
+    """Replace/insert the given yards in new_payload with their rows from
+    prev_payload (the last published inventory). Mutates new_payload (and
+    new_extras when given) in place; returns {yard_name: carried_row_count}.
+
+    Handles the compact v2 format's cross-references: yard + partSet indices
+    are remapped, vpic entries (keyed by ROW index) are reindexed when
+    existing rows are removed, and extras (keyed by vehicle id) follow their
+    vehicles."""
+    f = new_payload["fields"]
+    if f != prev_payload["fields"]:
+        raise ValueError("field layout changed between payloads — cannot carry forward")
+    i_id, i_yard, i_pset = f.index("id"), f.index("yard"), f.index("partSet")
+    targets = set(yard_names)
+    new_names = [y[0] for y in new_payload["yards"]]
+    prev_names = [y[0] for y in prev_payload["yards"]]
+
+    # 1) Drop any rows the fresh scan DID produce for the target yards (the
+    #    <40% collapse case), reindexing vpic keys around the removals.
+    target_idx_new = {i for i, n in enumerate(new_names) if n in targets}
+    kept_rows: list[list] = []
+    row_map: dict[int, int] = {}
+    removed_ids: set[str] = set()
+    for old_i, row in enumerate(new_payload["vehicles"]):
+        if row[i_yard] in target_idx_new:
+            removed_ids.add(str(row[i_id]))
+            continue
+        row_map[old_i] = len(kept_rows)
+        kept_rows.append(row)
+    new_payload["vehicles"] = kept_rows
+    new_payload["vpic"] = {str(row_map[int(k)]): v
+                           for k, v in (new_payload.get("vpic") or {}).items()
+                           if int(k) in row_map}
+    if new_extras is not None:
+        for rid in removed_ids:
+            new_extras.pop(rid, None)
+
+    # 2) Append the previous payload's rows for each target yard.
+    pset_idx = {json.dumps(p, sort_keys=True): i
+                for i, p in enumerate(new_payload["partSets"])}
+    name_to_new_yard = {n: i for i, n in enumerate(new_names)}
+    prev_vpic = prev_payload.get("vpic") or {}
+    carried: dict[str, int] = {}
+    for yname in yard_names:
+        if yname not in prev_names:
+            continue
+        prev_yi = prev_names.index(yname)
+        if yname in name_to_new_yard:
+            new_yi = name_to_new_yard[yname]
+            new_payload["yards"][new_yi] = prev_payload["yards"][prev_yi]
+        else:
+            new_yi = len(new_payload["yards"])
+            new_payload["yards"].append(prev_payload["yards"][prev_yi])
+            name_to_new_yard[yname] = new_yi
+        n = 0
+        for prev_i, row in enumerate(prev_payload["vehicles"]):
+            if row[i_yard] != prev_yi:
+                continue
+            new_row = list(row)
+            new_row[i_yard] = new_yi
+            pi = row[i_pset]
+            if pi is not None and pi >= 0:
+                pkey = json.dumps(prev_payload["partSets"][pi], sort_keys=True)
+                npi = pset_idx.get(pkey)
+                if npi is None:
+                    npi = len(new_payload["partSets"])
+                    pset_idx[pkey] = npi
+                    new_payload["partSets"].append(prev_payload["partSets"][pi])
+                new_row[i_pset] = npi
+            new_ri = len(new_payload["vehicles"])
+            new_payload["vehicles"].append(new_row)
+            pv = prev_vpic.get(str(prev_i))
+            if pv is not None:
+                new_payload["vpic"][str(new_ri)] = pv
+            if new_extras is not None and prev_extras:
+                pe = prev_extras.get(str(new_row[i_id]))
+                if pe is not None:
+                    new_extras[str(new_row[i_id])] = pe
+            n += 1
+        carried[yname] = n
+    return carried
+
+
+def apply_stale_keep(payload: dict, extras: dict) -> None:
+    """Compare the fresh payload against the last published LIVE_FILE and carry
+    forward any yard that vanished or collapsed below STALE_KEEP_FLOOR of its
+    previous count. Mutates payload/extras in place. Loud by design."""
+    try:
+        prev = json.loads(LIVE_FILE.read_text())
+    except Exception:
+        return
+    try:
+        prev_extras = json.loads(EXTRAS_FILE.read_text()).get("extras", {})
+    except Exception:
+        prev_extras = {}
+    try:
+        health = json.loads(YARD_HEALTH_FILE.read_text()).get("yards", {})
+    except Exception:
+        health = {}
+
+    i_yard = payload["fields"].index("yard")
+    def _counts(p):
+        names = [y[0] for y in p["yards"]]
+        c: dict[str, int] = {}
+        for row in p["vehicles"]:
+            n = names[row[i_yard]]
+            c[n] = c.get(n, 0) + 1
+        return c
+    prev_counts, new_counts = _counts(prev), _counts(payload)
+
+    to_carry: list[str] = []
+    for name, pc in sorted(prev_counts.items()):
+        if pc < STALE_KEEP_MIN_PREV:
+            continue
+        nc = new_counts.get(name, 0)
+        if nc >= STALE_KEEP_FLOOR * pc:
+            continue
+        frozen = int((health.get(name) or {}).get("unchangedScans", 0))
+        if frozen >= STALE_KEEP_MAX_SCANS:
+            print(f"  ⚠️  STALE-KEEP GIVING UP: {name} — frozen for {frozen} scans "
+                  f"(cap {STALE_KEEP_MAX_SCANS}); publishing the fetched count ({nc}) as-is",
+                  file=sys.stderr)
+            continue
+        to_carry.append(name)
+
+    if not to_carry:
+        return
+    carried = merge_carryforward_yards(payload, prev, to_carry,
+                                       new_extras=extras, prev_extras=prev_extras)
+    for name in to_carry:
+        print(f"  ⚠️  STALE-KEEP: {name} fetched {new_counts.get(name, 0)} vehicles "
+              f"(previously {prev_counts[name]}) — carrying forward {carried.get(name, 0)} "
+              f"previously published rows; fix the adapter/source", file=sys.stderr)
+    print(f"  ⚠️  stale-keep carried {len(to_carry)} yard(s); "
+          f"see docs/data/yard_health.json", file=sys.stderr)
+
+
 YARD_HEALTH_FILE = DATA_DIR / "yard_health.json"
 # A yard whose vehicle set is byte-identical for this many CONSECUTIVE scans
 # (~1 day at the 4h cadence) while its source keeps serving 200s is almost
@@ -11079,6 +11232,7 @@ def main():
                 payload = build_inventory_json_payload(vehicles, only_matches=not args.all)
                 extras = payload.pop("_extras", {})
                 if args.save:
+                    apply_stale_keep(payload, extras)
                     LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                     EXTRAS_FILE.write_text(json.dumps(
                         {"version": 1, "scrapedAt": payload["scrapedAt"],
@@ -11118,6 +11272,7 @@ def main():
             payload = build_inventory_json_payload(vehicles, only_matches=not args.all)
             extras = payload.pop("_extras", {})
             if args.save:
+                apply_stale_keep(payload, extras)
                 LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                 EXTRAS_FILE.write_text(json.dumps(
                     {"version": 1, "scrapedAt": payload["scrapedAt"],
