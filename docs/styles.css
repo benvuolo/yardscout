@@ -1521,36 +1521,49 @@
     font-size: 0.8125rem;
   }
 
-  /* ===== iOS install hint ===== */
-  #install-hint {
+  /* ===== Native-app promo (replaces the old iOS install hint) ===== */
+  #app-promo {
     position: fixed;
     left: 0.75rem;
     right: 0.75rem;
     bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 0.75rem);
     z-index: 60;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.75rem;
-    background: var(--text);
-    color: var(--bg);
-    border: 1px solid var(--text);
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border-dark);
+    box-shadow: 0 2px 10px rgba(27, 25, 19, 0.12);
     padding: 0.75rem 0.9rem;
     max-width: 480px;
     margin: 0 auto;
   }
-  .install-hint-text { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.8125rem; line-height: 1.5; }
-  .install-hint-text .ico { vertical-align: -3px; }
-  #install-hint-close {
+  .app-promo-text { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.8125rem; line-height: 1.5; flex: 1; }
+  .app-promo-text span { color: var(--text-dim); }
+  .app-promo-btn {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    padding: 0.45rem 0.7rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  #app-promo-close {
     background: none;
     border: none;
-    color: var(--bg);
+    color: var(--text-dim);
     font-size: 1rem;
     cursor: pointer;
     padding: 0.1rem 0.25rem;
     flex-shrink: 0;
   }
   @media (min-width: 768px) {
-    #install-hint { bottom: 1rem; }
+    #app-promo { bottom: 1rem; }
   }
 
   /* ===== Feedback + footer links ===== */

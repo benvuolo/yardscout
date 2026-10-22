@@ -25,6 +25,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="YardScout">
+<!-- iOS Safari Smart App Banner — system-rendered, dismissible, points at the
+     native App Store build. Inert everywhere else: WKWebView (the native shell
+     staged from this same file) and installed PWAs never render it. -->
+<meta name="apple-itunes-app" content="app-id=6817126581">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -598,12 +602,16 @@
   </div>
 </div>
 
-<div id="install-hint" style="display:none;" role="status">
-  <div class="install-hint-text">
-    <strong>Add YardScout to your home screen</strong>
-    <span>Tap <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Share"><path d="M12 3v13M8 7l4-4 4 4"/><path d="M5 11v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/></svg> in Safari, then &ldquo;Add to Home Screen&rdquo; &mdash; instant launches, works offline in the yard.</span>
+<!-- Native-app promo: shown once to mobile-browser visitors (store link filled
+     in per platform by app.js). Never shown in the native shells or installed
+     PWAs; dismissal sticks via localStorage. -->
+<div id="app-promo" style="display:none;" role="status">
+  <div class="app-promo-text">
+    <strong>YardScout is now a native app</strong>
+    <span id="app-promo-copy">Real push alerts, faster launches, works offline in the yard.</span>
   </div>
-  <button type="button" id="install-hint-close" aria-label="Dismiss">&#x2715;</button>
+  <a id="app-promo-link" class="app-promo-btn" href="https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581" target="_blank" rel="noopener">Get&nbsp;the&nbsp;app</a>
+  <button type="button" id="app-promo-close" aria-label="Dismiss">&#x2715;</button>
 </div>
 
 <script src="data.js"></script>

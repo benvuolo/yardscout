@@ -4,8 +4,8 @@
  * The App Store build bundles this app's shell (HTML/JS/CSS) but NOT the
  * ~36MB data/ directory — instead the native app fetches live data from the
  * web deployment, so inventory stays fresh without shipping app updates.
- * IS_NATIVE also disables web-only machinery (service worker, iOS install
- * hint) and keeps Stripe checkout out of the native build entirely (Apple
+ * IS_NATIVE also disables web-only machinery (service worker, native-app
+ * promo banner) and keeps Stripe checkout out of the native build entirely (Apple
  * guideline 3.1.1 — digital subscriptions in-app must use StoreKit). */
 const IS_NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform
   && window.Capacitor.isNativePlatform());
@@ -3822,22 +3822,37 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
   });
 }
 
-/* ===== iOS INSTALL HINT =====
- * Safari-on-iPhone users get a one-time tip to add the app to the home
- * screen. Skipped when already installed (standalone) or dismissed.
- * Test hook: ?installhint=1 forces it for QA. */
-(function installHint() {
-  const forced = new URLSearchParams(location.search).get('installhint') === '1';
+/* ===== NATIVE APP PROMO =====
+ * Replaces the old add-to-home-screen hint now that the native apps are live.
+ * Mobile-browser visitors get a one-time, dismissible pointer at the store
+ * for their platform (App Store / Google Play). Never shown in the native
+ * shells (IS_NATIVE — the same bundle ships into them via native/stage.sh),
+ * in an installed PWA (standalone display-mode), or on desktop. iOS Safari
+ * additionally gets the system Smart App Banner via the apple-itunes-app
+ * meta tag in index.html; Android Chrome gets the native Play-install offer
+ * via related_applications in manifest.webmanifest.
+ * Test hook: ?appbanner=ios|android forces the platform for QA. */
+(function appPromo() {
+  const APP_STORE_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
+  const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
+  if (IS_NATIVE) return; // already inside the native app — never promote
+  const qs = new URLSearchParams(location.search).get('appbanner');
+  const forced = (qs === 'ios' || qs === 'android') ? qs : null;
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
   const isIOS = /iphone|ipod|ipad/i.test(navigator.userAgent)
     || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPadOS
-  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  if (IS_NATIVE) return; // already the installed app
-  if (!forced && (!isIOS || standalone || localStorage.getItem('ys_install_hint') === '1')) return;
-  const el = document.getElementById('install-hint');
+  const isAndroid = /android/i.test(navigator.userAgent);
+  const platform = forced || (isIOS ? 'ios' : (isAndroid ? 'android' : null));
+  if (!platform) return; // desktop: unchanged
+  if (!forced && (standalone || localStorage.getItem('ys_app_promo') === '1')) return;
+  const el = document.getElementById('app-promo');
   if (!el) return;
+  const link = document.getElementById('app-promo-link');
+  link.href = platform === 'android' ? PLAY_URL : APP_STORE_URL;
+  link.textContent = platform === 'android' ? 'Google Play' : 'App Store';
   el.style.display = '';
-  document.getElementById('install-hint-close').addEventListener('click', () => {
-    localStorage.setItem('ys_install_hint', '1');
+  document.getElementById('app-promo-close').addEventListener('click', () => {
+    localStorage.setItem('ys_app_promo', '1');
     el.style.display = 'none';
   });
 })();
