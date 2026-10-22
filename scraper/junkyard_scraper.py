@@ -119,7 +119,7 @@ VPIC_BATCH_URL = "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/"
 # evidence (see scraper/price_validation_report.md). Bump when accepting
 # corrections from a quarterly price-review PR. Exported to the v2 JSON and
 # shown in the web app's pricing-transparency footer.
-PRICES_LAST_REVIEWED = "2026-09-10"  # new-part ceiling audit (see price_baseline.json new_ceilings)
+PRICES_LAST_REVIEWED = "2026-10-22"  # consensus-evergreens expansion: new category bands researched + baseline evidence added (see scraper/consensus_parts_research.md)
 VPIC_BATCH_SIZE = 50
 _VPIC_CACHE: dict[str, dict | None] = {}
 def _vpic_workers() -> int:
@@ -4479,6 +4479,136 @@ UNOBTANIUM_DB.update({
 })
 
 # ---------------------------------------------------------------------------
+# 2026-10 CONSENSUS EVERGREENS — closing the taxonomy's commodity-seller gap.
+#
+# Every public flipper source we cross-checked (self-service-chain buying
+# guides, parts-flipper blogs, several creators' publicly stated lists, eBay
+# sold-comp guidance, r/Flipping threads) agrees on a core set of used parts
+# that sell reliably off ANY high-population vehicle: alternators, starters,
+# gauge clusters, climate control panels, power window regulators + master
+# switches, and engine/body control modules. Pre-expansion the taxonomy
+# covered those on a handful of models (alternator: 3 of 385 entries) — a
+# base Focus matched nothing but headlights while carrying four consensus
+# sellers. Per-category source trail (3+ independent public sources each) and
+# sold-comp bases: scraper/consensus_parts_research.md. No single creator's
+# list or wording is reproduced — facts are synthesized across sources
+# (owner/legal directive, 2026-10).
+#
+# Honesty rules carried over: bands are conservative working-pull resale
+# anchors (calibrated down toward eBay sold by _resale_sold_calibrate like
+# every other part); cluster/module caveats (mileage disclosure, programming)
+# ride in SELL_GUIDE notes. AIRBAGS ARE DELIBERATELY ABSENT from this entire
+# DB: eBay prohibits all airbag / inflator / airbag-cover listings sitewide
+# (policy effective 2026-09-24) and the federal render-inoperative rule
+# (49 U.S.C. 30122) puts used SRS parts out of bounds — steering wheels are
+# listed only for pre-airbag-era trucks, where the wheel ships bare.
+#
+# Applied only to high-population entries (ranked against the 2026-10 national
+# scan) so low-volume classic/exotic entries keep their curated, model-
+# specific lists. A category an entry already tracks is skipped (token dedupe
+# in _apply_consensus_evergreens), so hand-tuned bands always win.
+# ---------------------------------------------------------------------------
+
+# (part def, dedupe tokens): the part is skipped when the entry already has a
+# part whose name contains any token.
+_EVERGREEN_PARTS: tuple[tuple[dict, tuple[str, ...]], ...] = (
+    ({"name": "Alternator (spin-test at yard)", "rarity": "Uncommon", "low": 35, "high": 90, "cost": 20},
+     ("alternator",)),  # used OEM sold $35-80; quality reman new $90-180 — reuses the audited Camry band (2026-10)
+    ({"name": "Starter (verify part number)", "rarity": "Uncommon", "low": 30, "high": 75, "cost": 18},
+     ("starter",)),  # used OEM sold $30-65; quality new reman $80-150 (2026-10)
+    ({"name": "Gauge Cluster", "rarity": "Uncommon", "low": 50, "high": 140, "cost": 15},
+     ("cluster", "gauge", "speedometer", "digital dash", "cockpit")),  # used sold $40-150 on commuters, tach/digital higher; new often dealer-only $400+ (2026-10)
+    ({"name": "Climate Control Panel (works, knobs intact)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12},
+     ("climate",)),  # used sold mostly $40-120 — matches the existing hand-entered bands (2026-10)
+    ({"name": "Window Regulator + Motor (front)", "rarity": "Uncommon", "low": 30, "high": 75, "cost": 12, "yr_min": 1994},
+     ("window regulator",)),  # used OEM sold $35-85; audited band reused; yr_min: power windows weren't near-universal before the mid-90s (2026-10)
+    ({"name": "Power Window Master Switch", "rarity": "Uncommon", "low": 30, "high": 90, "cost": 10, "yr_min": 1994},
+     ("master switch", "window switch")),  # used sold $25-80; audited band reused (2026-10)
+    ({"name": "Engine/Body Control Module (match part #)", "rarity": "Uncommon", "low": 40, "high": 140, "cost": 15},
+     ("control module", "ecm", "ecu", "bcm", "engine computer")),  # used sold $40-150 on high-population apps; programming caveat disclosed via SELL_GUIDE (2026-10)
+)
+
+# High-population entries from the 2026-10 national scan (volume-ranked; each
+# dict key named exactly once — gen-split rows listed per generation).
+_EVERGREEN_TARGET_KEYS: tuple[str, ...] = (
+    # sedans / hatches
+    "acura tl", "altima", "accent", "accord 1990-1997", "accord 1998-2002",
+    "accord 2003-2012", "accord 2013-2017", "accord 2018-2024", "avenger",
+    "camry", "century", "charger", "chrysler 200", "chrysler 300",
+    "civic 1996-2000", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015",
+    "civic 2016-2024", "cobalt", "corolla", "cruze", "elantra", "fiesta",
+    # ("aura" lives in parts_overlay.json, which merges AFTER this section —
+    #  overlay-created rows can't be targeted here.)
+    "focus", "fusion", "galant", "hhr", "impala", "jetta", "lacrosse",
+    "lesabre", "lucerne", "malibu", "maxima", "mazda3", "optima", "passat",
+    "pontiac g6", "regal", "sentra", "sonata", "taurus", "verano", "versa",
+    # SUVs / CUVs / vans
+    "acadia", "cr-v", "durango", "enclave", "equinox", "escape", "expedition",
+    "explorer 1991-2001", "explorer 2002-2010", "explorer 2011-2019",
+    "explorer 2020-2024", "ford edge", "forester", "grand caravan",
+    "grand cherokee 1993-2004", "grand cherokee 2005-2010",
+    "grand cherokee 2011-2021", "journey", "liberty", "murano", "odyssey",
+    "outback", "pathfinder", "patriot", "pilot", "rav4", "rendezvous",
+    "rogue", "santa fe", "sienna", "sorento", "soul", "suburban",
+    "tahoe 1995-2006", "tahoe 2007-2014", "tahoe 2015-2024",
+    "town & country", "trailblazer", "traverse", "vue", "yukon",
+    # trucks / work vans
+    "colorado", "dakota", "econoline", "f-150 1980-1996", "f-150 1997-2003",
+    "f-150 2004-2014", "f-150 2015-2024", "f-250", "frontier", "ranger",
+    "ram 1994-2001", "ram 2002-2008", "ram 2009-2018", "ram 2019-2024",
+    "sierra 1999-2006", "sierra 2007-2013", "sierra 2014-2018",
+    "sierra 2019-2024", "silverado 1999-2006", "silverado 2007-2013",
+    "silverado 2014-2018", "silverado 2019-2024", "tacoma 1995-2004",
+    "tacoma 2005-2015", "tacoma 2016-2024", "titan", "tundra",
+)
+
+
+def _apply_consensus_evergreens() -> None:
+    """Append the consensus commodity sellers to each high-volume entry.
+
+    A missing key fails loud (KeyError) rather than silently skipping — if an
+    entry is renamed, this list must follow. Each part is copied so later
+    generation-splitting can set per-copy year bounds safely."""
+    for key in _EVERGREEN_TARGET_KEYS:
+        info = UNOBTANIUM_DB[key]
+        have = " | ".join(p["name"].lower() for p in info["top_parts"])
+        for part, tokens in _EVERGREEN_PARTS:
+            if any(t in have for t in tokens):
+                continue  # entry already tracks this category with a hand-tuned band
+            info["top_parts"].append(dict(part))
+
+
+_apply_consensus_evergreens()
+
+# 90s-2000s full-size trucks: manual/telescoping tow mirrors were the one
+# high-consensus truck category still missing on pre-power-fold generations
+# (the power-fold rows only start when that option did). Option-flagged like
+# every other tow-mirror row: towing packages were never standard and never
+# VIN-decodable. Band mirrors the audited Silverado/Sierra GMT800 row.
+for _k in ("f-150 1980-1996", "f-150 1997-2003", "ram 1994-2001",
+           "ram 2002-2008", "c1500"):
+    _extend_entry(_k, parts=[
+        {"name": "Tow Mirrors (manual, pair)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25, "option": True},  # used pairs sold $60-150; new quality pairs $140-280 — 80% ceiling (2026-10)
+    ])
+
+# Pre-airbag truck steering wheels — the one steering-wheel market multiple
+# sources agree on (old Ford/Chevy work trucks). Year-gated to model years
+# BEFORE driver airbags arrived (Ford/Dodge trucks 1994, GM C/K 1995), so the
+# wheel ships bare and no SRS part ever changes hands through this app.
+_extend_entry("f-150 1980-1996", parts=[
+    {"name": "Steering Wheel (pre-airbag era)", "rarity": "Rare", "low": 50, "high": 150, "cost": 12, "yr_max": 1993},  # used sold $50-150; most OEM wheels NLA new (2026-10)
+])
+_extend_entry("c/k", parts=[
+    {"name": "Steering Wheel (pre-airbag era)", "rarity": "Rare", "low": 50, "high": 150, "cost": 12, "yr_max": 1994},
+])
+_extend_entry("c1500", parts=[
+    {"name": "Steering Wheel (pre-airbag era)", "rarity": "Rare", "low": 50, "high": 150, "cost": 12, "yr_max": 1994},
+])
+_extend_entry("dakota", parts=[
+    {"name": "Steering Wheel (pre-airbag era)", "rarity": "Rare", "low": 50, "high": 150, "cost": 12, "yr_max": 1993},
+])
+
+# ---------------------------------------------------------------------------
 # 2026-09 GENERATION-FITS AUDIT — interchange-sensitive parts must never carry
 # a fits badge spanning vehicle generations.
 #
@@ -4945,6 +5075,13 @@ SELL_GUIDE = [
     {"kw": "tail lights",              "sell_at": "eBay / FB Marketplace", "speed": "Medium", "notes": "Uncracked lenses only — check for moisture"},
     {"kw": "window regulator",         "sell_at": "eBay",                "speed": "Medium", "notes": "Common failure part, steady demand"},
     {"kw": "alternator",               "sell_at": "eBay / FB Marketplace", "speed": "Medium", "notes": "Spin-test at the yard; sell as tested-pull"},
+    # --- 2026-10 consensus evergreens (see scraper/consensus_parts_research.md) ---
+    {"kw": "starter",                  "sell_at": "eBay / FB Marketplace", "speed": "Medium", "notes": "Dead-battery returns are common — tell buyers how to rule out the battery first"},
+    {"kw": "gauge cluster",            "sell_at": "eBay",                "speed": "Medium", "notes": "Disclose the mileage shown; many 2000s+ cars need the cluster programmed to the car"},
+    {"kw": "climate control",          "sell_at": "eBay",                "speed": "Medium", "notes": "Quick pull, steady demand — test every button and knob before pulling"},
+    {"kw": "master switch",            "sell_at": "eBay",                "speed": "Medium", "notes": "Common spill/wear failure — test every window from the driver seat first"},
+    {"kw": "control module",           "sell_at": "eBay",                "speed": "Medium", "notes": "Match the OEM part number exactly; many need programming — say so in the listing"},
+    {"kw": "steering wheel (pre-airbag", "sell_at": "eBay / FB Marketplace", "speed": "Medium", "notes": "Wheel only — airbags can't be resold (eBay ban + federal SRS rules)"},
     {"kw": "manual shifter",           "sell_at": "eBay / enthusiast forums", "speed": "Medium", "notes": "Swap crowd buys these steadily"},
     {"kw": "manual pedal",             "sell_at": "eBay / enthusiast forums", "speed": "Medium", "notes": "Auto-to-manual swappers need the whole box"},
     {"kw": "manual locking hubs",      "sell_at": "eBay / forums",       "speed": "Medium", "notes": "Solid-axle crowd pays for clean hubs"},

@@ -66,6 +66,9 @@ GENERIC_PART_TOKENS = (
     "headlight", "tail light", "taillight", "side mirror", "window regulator",
     "alternator", "wiper", "cargo cover", "door handle", "power window master",
     "spare tire cover", "corner/marker",
+    # 2026-10 consensus evergreens — near-universal commodity sellers; their
+    # presence alone must not make a group look richly covered.
+    "starter", "gauge cluster", "climate control", "control module",
 )
 
 # Known enthusiast platforms: (label, make substring, model regex, optional
