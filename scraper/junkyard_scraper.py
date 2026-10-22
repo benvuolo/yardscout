@@ -8777,6 +8777,108 @@ def fetch_vinplus_inventory() -> list[dict]:
     return unique
 
 
+# 195 Used Auto Parts publishes a price list at /Home/PartPrices (their own
+# site runs the CRUSH MVC app) — a clean 3-column table (name, $price, $core),
+# ~700 rows. Chesterfield-style parse/output shape.
+P195_PRICE_URL = "https://www.195usedautoparts.com/Home/PartPrices"
+_P195_PRICE_ROW_RE = re.compile(
+    r"<tr[^>]*>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>"
+    r"\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>",
+    re.S,
+)
+
+
+def refresh_p195_pricing_file() -> Path:
+    """Refresh 195 Used Auto Parts' price list -> p195_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "p195_pricing.json"
+    try:
+        r = requests.get(P195_PRICE_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [195 pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for name_html, price, core in _P195_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(re.sub(r"<[^>]+>", "", name_html)).strip()
+        if not name or name.lower() in ("part", "part name", "part description"):
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [195 pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [195 pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# San Antonio Pick-N-Pull (Independent) publishes a price list at /price-list —
+# ~980 rows of <span class="pl-part">/<span class="pl-desc"> (abbreviated +
+# optional expanded name; the expanded one is kept when present) with
+# td.pl-price / td.pl-core cells (core is an em-dash when absent).
+PNPSA_PRICE_URL = "https://www.picknpullsa.com/price-list"
+_PNPSA_PRICE_ROW_RE = re.compile(
+    r'<span class="pl-part">(.*?)</span>\s*(?:<span class="pl-desc">(.*?)</span>)?'
+    r'\s*</td>\s*<td class="pl-price">\s*\$?\s*([\d.,]+)\s*</td>'
+    r'\s*<td class="pl-core[^"]*">\s*\$?\s*([\d.,]*)',
+    re.S,
+)
+
+
+def refresh_pnpsa_pricing_file() -> Path:
+    """Refresh San Antonio Pick-N-Pull's (independent) price list -> pnpsa_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "pnpsa_pricing.json"
+    try:
+        r = requests.get(PNPSA_PRICE_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [PnPSA pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for short_html, desc_html, price, core in _PNPSA_PRICE_ROW_RE.findall(page):
+        name = html_mod.unescape(re.sub(r"<[^>]+>", "", desc_html or short_html)).strip()
+        if not name:
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+            core_f = float(core.replace(",", "")) if core else 0.0
+        except ValueError:
+            continue
+        if name not in seen:
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [PnPSA pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [PnPSA pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
 # Nevada Pic-A-Part (nvpap.com) — 2-yard chain: Las Vegas (5100 N Lamb Blvd,
 # North Las Vegas) + Henderson (110 W Rolly St). FIRST LAS VEGAS-METRO
 # COVERAGE (~3,100 vehicles); user-requested by email 2026-10-17. WordPress
@@ -11603,7 +11705,8 @@ def main():
                refresh_pns_pricing_file, refresh_partsgalore_pricing_file,
                refresh_chesterfield_pricing_file, refresh_ace_pricing_file,
                refresh_sturtevant_pricing_file, refresh_nvpap_pricing_file,
-               refresh_barrys_pricing_file, refresh_budget_pricing_file)
+               refresh_barrys_pricing_file, refresh_budget_pricing_file,
+               refresh_p195_pricing_file, refresh_pnpsa_pricing_file)
         for fn in fns:
             try:
                 fn()

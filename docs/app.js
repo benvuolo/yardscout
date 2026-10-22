@@ -62,6 +62,8 @@ let sturtevantPricing = {}; // Sturtevant Auto (Sturtevant WI): one yard-wide li
 let nvpapPricing = {};     // Nevada Pic-A-Part (Las Vegas/Henderson NV): one chain-wide list
 let barrysPricing = {};    // Barry's U Pull It (Mobile AL): one yard-wide list
 let budgetPricing = {};    // Budget U-Pull-It (FL): per-yard lists keyed by location (WG and Bartow differ)
+let p195Pricing = {};      // 195 Used Auto Parts (Killeen TX): one yard-wide list
+let pnpsaPricing = {};     // San Antonio Pick-N-Pull (Independent, TX): one yard-wide list
 
 /* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page)
  * pyp = exact "Description" from pyp.com per-location PriceList API
@@ -455,6 +457,8 @@ async function loadAllPricing() {
     grab('data/nvpap_pricing.json', d => d.forEach(p => { nvpapPricing[p.description] = p; })),
     grab('data/barrys_pricing.json', d => d.forEach(p => { barrysPricing[p.description] = p; })),
     grab('data/budget_pricing.json', d => { budgetPricing = d; }),
+    grab('data/p195_pricing.json', d => d.forEach(p => { p195Pricing[p.description] = p; })),
+    grab('data/pnpsa_pricing.json', d => d.forEach(p => { pnpsaPricing[p.description] = p; })),
   ]);
   _yardCostMemo.clear();
   // Compare/type-ahead caches may have been built against empty lists.
@@ -2351,6 +2355,14 @@ const CHAIN_PRICE_PAGES = [
   [/^u[\s-]*pull[\s-]*r/i, 'https://upullrparts.com/part-pricing/', 'U-Pull-R Parts'],
   [/^fenix[\s-]*u[\s-]*pull/i, 'https://fenixupull.com/parts-prices/', 'Fenix U-Pull'],
   [/^harry'?s[\s-]*u[\s-]*pull/i, 'https://wegotused.com/price-list/', "Harry's U-Pull-It"],
+  // Joliet's Wix price page only embeds a handful of "popular" prices
+  // server-side, so it's link-only (no structured list to parse).
+  [/^joliet u[\s-]*pull[\s-]*it/i, 'https://www.jolietupullit.com/auto-part-prices', 'Joliet U-Pull-It'],
+  // Go Pull-It's chain list renders client-side only — link-only too.
+  [/^go pull[\s-]*it/i, 'https://gopullit.com/parts-price-list/', 'Go Pull-It'],
+  [/^195 used auto parts/i, 'https://www.195usedautoparts.com/Home/PartPrices', '195 Used Auto Parts'],
+  // The independent San Antonio yard (picknpullsa.com) — NOT picknpull.com.
+  [/^san antonio pick[\s-]*n[\s-]*pull/i, 'https://www.picknpullsa.com/price-list', 'San Antonio Pick-N-Pull'],
   // LKQ Pick Your Part publishes prices per location inside its site/app with
   // no stable public price-list URL, so those yards get no link.
 ];
@@ -2403,6 +2415,10 @@ const YARD_INVENTORY_PAGES = [
   [/^rtp\b/i, 'https://vinplus.texnrewards.com/road-tested-parts'],
   [/^pickers\b/i, 'https://vinplus.texnrewards.com/pickers-longview'],
   [/^pipes\b/i, 'https://vinplus.texnrewards.com/pickers-longview'],
+  [/^joliet u[\s-]*pull[\s-]*it/i, 'https://www.jolietupullit.com/inventory'],
+  [/^san antonio pick[\s-]*n[\s-]*pull/i, 'https://www.picknpullsa.com/inventory'],
+  [/^195 used auto parts/i, 'https://www.195usedautoparts.com/Home/Inventory'],
+  [/^pick ur part/i, 'https://pickurpart.com/inventory/'],
   [/^u[\s-]*pick[\s-]*it az/i, 'https://upickitaz.com/'],
   [/^barry'?s/i, 'https://barrysupullit.net/vehicle-inventory-2/'],
   [/^prestige/i, 'https://prestigepullyourpart.com/vehicle-search/'],
@@ -2775,6 +2791,10 @@ function yardPriceList(location) {
   else if (loc.startsWith('sturtevant auto')) rows = fromList(sturtevantPricing);
   else if (loc.startsWith('nevada pic-a-part')) rows = fromList(nvpapPricing);
   else if (loc.startsWith("barry's u pull it")) rows = fromList(barrysPricing);
+  else if (loc.startsWith('195 used auto parts')) rows = fromList(p195Pricing);
+  // The independent San Antonio yard — NOT the Pick-n-Pull chain (whose
+  // startsWith('pick-n-pull') branch above can never match this name).
+  else if (loc.startsWith('san antonio pick-n-pull')) rows = fromList(pnpsaPricing);
   else if (loc.startsWith('budget u-pull-it')) rows = fromDict(budgetPricing[location]);
   else if (loc.startsWith('pick your part')) rows = fromDict(pypPricing[location]);
   else if (loc.startsWith('pull-a-part')) rows = fromDict(papPricing[location]);

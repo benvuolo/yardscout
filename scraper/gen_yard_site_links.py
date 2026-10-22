@@ -99,6 +99,17 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^rtp\b", "Road Tested Parts (VinPlus)", None, ""),
     (r"^pickers\b", "Pickers / Pipes U-Pull-It (VinPlus)", None, ""),
     (r"^pipes\b", "Pickers / Pipes U-Pull-It (VinPlus)", None, ""),
+    (r"^joliet u[\s-]*pull[\s-]*it", "Joliet U-Pull-It (VinPlus)", None,
+     "own Wix site renders the same inventory the VinPlus API serves"),
+    (r"^san antonio pick[\s-]*n[\s-]*pull",
+     "San Antonio Pick-N-Pull (Independent) (VinPlus)", None,
+     "independent yard (picknpullsa.com) — NOT the Pick-n-Pull chain; the "
+     "display name never starts with 'Pick-N-Pull' so the chain entries above "
+     "can't shadow this one"),
+    (r"^195 used auto parts", "195 Used Auto Parts (VinPlus)", None,
+     "own site runs the CRUSH MVC app"),
+    (r"^pick ur part", "Pick Ur Part Auto Salvage (VinPlus)", None,
+     "yardconnect-pro inventory on their own WordPress site"),
     (r"^u[\s-]*pick[\s-]*it az", "U-Pick-It AZ", None, ""),
     (r"^barry'?s", "Barry's U Pull It", None, ""),
     (r"^prestige", "Prestige Pull-Your-Part", None, ""),
