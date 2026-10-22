@@ -1862,29 +1862,26 @@
   padding-left: 0.4rem;
 }
 
-/* ===== PART-FIRST SEARCH ("I need a part") =====
- * Industrial card above the Live grid. Mobile-first: single column at
- * 360px, the grid widens on desktop. Confidence tiers are the headline —
- * verified (green ledger ink) vs likely (muted), never an unqualified
- * "fits". */
+/* ===== PARTS TAB ("I need a part") =====
+ * The part-first finder is the tab's primary content — an industrial card,
+ * full width. Mobile-first: single column at 360px, the grid widens on
+ * desktop. Confidence tiers are the headline — verified (green ledger ink)
+ * vs likely (muted), never an unqualified "fits". */
 .part-finder {
   background: var(--surface);
   border: 1px solid var(--border-dark);
   border-radius: var(--radius);
   margin: 0.6rem 0;
 }
-.pf-head {
-  display: flex; align-items: center; gap: 0.6rem; width: 100%;
-  padding: 0.65rem 0.8rem; background: none; border: none; cursor: pointer;
-  text-align: left; color: var(--text); font-family: var(--font-ui);
+.pf-body { padding: 0 0.8rem 0.8rem; }
+/* Quiet hand-off to the Yards price comparison. */
+.pf-compare-cta { margin: 0.8rem 0 0.4rem; text-align: center; }
+.pf-compare-link {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-ui); font-size: 0.78rem; font-weight: 600;
+  color: var(--text-dim); padding: 0.4rem 0.6rem;
 }
-.pf-head .ico { width: 18px; height: 18px; flex: none; color: var(--accent); }
-.pf-head-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
-.pf-head-text strong { font-size: 0.9rem; letter-spacing: 0.01em; }
-.pf-sub { font-size: 0.72rem; color: var(--text-dim); line-height: 1.45; }
-.pf-head .chev { color: var(--text-dim); transition: transform 0.18s; flex: none; }
-.pf-head[aria-expanded="true"] .chev { transform: rotate(180deg); }
-.pf-body { padding: 0 0.8rem 0.8rem; border-top: 1px solid var(--border); }
+.pf-compare-link:hover { color: var(--text); text-decoration: underline; }
 .pf-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 0.6rem;
   padding-top: 0.7rem;
