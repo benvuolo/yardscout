@@ -9077,21 +9077,88 @@ _GPI_OPTION_RE = re.compile(r'<option value="([^"]+)"')
 _GPI_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
 _GPI_MORE_MSG = "More results available"
 
+# --- Go Pull-It request-budget state (2026-10-22) -----------------------------
+# The naive scan (query every make at every yard, drill EVERY global model of
+# every capped make) had grown to ~730 requests x the honored 10s crawl-delay
+# ≈ 2h — the single longest fetch of the whole scan, on one host, so thread
+# parallelism can't help. Two observations fix it without touching the 10s
+# per-host cadence:
+#   1. The make page's 50 rows are the NEWEST 50 of that make (date-descending),
+#      so every arrival since the last 4h-ago scan is visible there — model
+#      drill-down exists purely to re-verify the OLDER rows (departures).
+#   2. getModels is GLOBAL (location-blind, verified 2026-10-22), so most of
+#      the old per-model queries hit (yard, model) pairs with zero vehicles.
+# The scan therefore keeps per-yard state (committed to docs/data/ by the scan
+# workflow like everything else) and, per capped (yard, make):
+#   - prunes drill queries to models actually PRESENT at that yard last scan
+#     (plus any model on today's make page — new models always self-reveal);
+#   - fully re-drills on a deterministic 3-phase rotation (sha1(yard|make) vs
+#     the 4h scan-period index), so departures of older-than-page-horizon
+#     vehicles are detected within <=12h (arrivals are never delayed);
+#   - on the off-rotation scans, carries the state's vehicles for that make,
+#     overlaid with today's page rows (fresher row/date wins by id).
+# Safety valves: no state => full getModels drill (bootstrap); page sharing NO
+# ids with state (>50 arrivals of one make in 4h, or id scheme drift) => full
+# getModels drill. Steady state: ~130 make pages + ~130 pruned model drills
+# ≈ 45 min instead of ~2h. Yard-level failure semantics are unchanged (a dead
+# landing page still yields nothing and is caught by apply_stale_keep).
+GPI_STATE_FILE = DATA_DIR / "gopullit_state.json.gz"
+GPI_DRILL_PHASES = 3          # each capped (yard, make) fully re-drilled every 3rd scan
+GPI_SCAN_PERIOD_SEC = 4 * 3600  # the scheduled scan cadence; drives the rotation index
+
+
+def _gpi_drill_phase(slug: str, make: str) -> int:
+    """Deterministic rotation phase for a (yard, make) pair — stable across
+    runs (sha1, not hash()) so the drill load self-staggers evenly."""
+    basis = f"{slug}|{make.upper()}".encode()
+    return int(hashlib.sha1(basis).hexdigest()[:8], 16) % GPI_DRILL_PHASES
+
+
+def _gpi_load_state() -> dict:
+    """{slug: {"models": {MAKE: [MODEL, ...]}, "vehicles": [...]}} from the
+    previous scan's committed state file; {} when absent/unreadable (every
+    capped make then takes the full-drill bootstrap path)."""
+    import gzip as gzip_mod
+    try:
+        with gzip_mod.open(GPI_STATE_FILE, "rt", encoding="utf-8") as fh:
+            d = json.load(fh)
+        if d.get("version") != 1:
+            return {}
+        return d.get("yards") or {}
+    except Exception:
+        return {}
+
+
+def _gpi_save_state(yards: dict) -> None:
+    import gzip as gzip_mod
+    try:
+        payload = json.dumps({"version": 1, "updatedAt": _iso_utc_z(), "yards": yards},
+                             separators=(",", ":"), sort_keys=True)
+        GPI_STATE_FILE.write_bytes(gzip_mod.compress(payload.encode(), mtime=0))
+    except Exception as e:  # never let bookkeeping kill the scan
+        print(f"  [Go Pull-It] state save failed: {e}", file=sys.stderr)
+
 
 def fetch_gopullit_inventory() -> list[dict]:
-    """Fetch Go Pull-It's 3-yard inventory (per-make queries, model drill-down)."""
-    import hashlib
+    """Fetch Go Pull-It's 3-yard inventory (per-make queries; state-pruned,
+    rotation-scheduled model drill-down for capped makes — see the block
+    comment above GPI_STATE_FILE)."""
     import html as html_mod
     import urllib.parse
 
+    n_requests = 0
+
     def _get(url: str, cookie: str):
+        nonlocal n_requests
         time.sleep(GPI_DELAY_SEC)
+        n_requests += 1
         r = requests.get(url, headers={**HEADERS, "Accept": "text/html",
                                        "Cookie": f"gpi_location={cookie}"}, timeout=60)
         r.raise_for_status()
         return r.text
 
-    def _parse_rows(page: str, yard: dict, out: list, dupes: dict):
+    def _parse_rows(page: str, yard: dict, out: list, dupes: dict,
+                    raw_models: set | None = None):
         for block in _GPI_ROW_RE.findall(page):
             cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
                      for c in _FENIX_TD_RE.findall(block)]
@@ -9100,6 +9167,8 @@ def fetch_gopullit_inventory() -> list[dict]:
             make_s, model_s, year_s, row_s, vin_s, stock_s, date_s = cells[:7]
             if not year_s.isdigit():  # header row (th cells don't match, but be safe)
                 continue
+            if raw_models is not None:
+                raw_models.add(model_s.strip().upper())
             date_iso = ""
             m = re.match(r"(\d{2})/(\d{2})/(\d{2})$", date_s.strip())
             if m:
@@ -9132,9 +9201,31 @@ def fetch_gopullit_inventory() -> list[dict]:
                 "_source": "gopullit",
             })
 
+    prev_state = _gpi_load_state()
+    new_state: dict = dict(prev_state)  # slugs that fail this scan keep old entries
+    rotation_idx = int(time.time() // GPI_SCAN_PERIOD_SEC) % GPI_DRILL_PHASES
+    n_drilled = n_carried = 0
+
     all_vehicles: list[dict] = []
     dupes: dict[str, int] = {}
     models_cache: dict[str, list[str]] = {}
+
+    def _get_models(make_name: str, q: str) -> list[str]:
+        nonlocal n_requests
+        if make_name not in models_cache:
+            try:
+                r = requests.get(f"{GPI_BASE}/wp-json/api/getModels?make={q}",
+                                 headers=HEADERS, timeout=60)
+                r.raise_for_status()
+                models_cache[make_name] = [str(x) for x in r.json() if str(x).strip()]
+            except Exception as e:
+                print(f"  [Go Pull-It] getModels {make_name} failed: {e} — "
+                      f"keeping capped 50 rows", file=sys.stderr)
+                models_cache[make_name] = []
+            n_requests += 1
+            time.sleep(GPI_DELAY_SEC)
+        return models_cache[make_name]
+
     for slug, yard in GPI_YARDS.items():
         try:
             page = _get(f"{GPI_BASE}/inventory/?location={slug}", yard["cookie"])
@@ -9146,37 +9237,86 @@ def fetch_gopullit_inventory() -> list[dict]:
         if not makes:
             print(f"  [Go Pull-It] {slug}: no makes parsed — layout changed?", file=sys.stderr)
             continue
+
+        prev_yard = prev_state.get(slug) or {}
+        prev_vehicles: list[dict] = prev_yard.get("vehicles") or []
+        prev_models_map: dict = prev_yard.get("models") or {}
+        prev_by_make: dict[str, list[dict]] = {}
+        for v in prev_vehicles:
+            prev_by_make.setdefault(str(v.get("make", "")).upper(), []).append(v)
+
+        yard_vehicles: list[dict] = []
+        yard_models_map: dict[str, list[str]] = {}
         cached = False
         for make_name in makes:
+            mk = make_name.strip().upper()
             q = urllib.parse.quote_plus(make_name)
+            prev_make_vehicles = prev_by_make.get(mk, [])
+            prev_models = {str(x).upper() for x in (prev_models_map.get(mk) or [])}
             try:
                 page = _get(f"{GPI_BASE}/inventory/?location={slug}&make={q}&model=",
                             yard["cookie"])
             except Exception as e:
-                print(f"  [Go Pull-It] {slug}/{make_name} fetch failed: {e}", file=sys.stderr)
+                # Transient per-make failure: carrying the make's previous rows
+                # (loudly) beats silently dropping a whole make of vehicles.
+                print(f"  [Go Pull-It] {slug}/{make_name} fetch failed: {e} — "
+                      f"carrying {len(prev_make_vehicles)} previous row(s)", file=sys.stderr)
+                yard_vehicles.extend(prev_make_vehicles)
+                if prev_models:
+                    yard_models_map[mk] = sorted(prev_models)
                 continue
             if not cached and "tr" in page:
                 _indep_cache_raw(f"gopullit_{slug}.html", page.encode())
                 cached = True
+
+            page_rows: list[dict] = []
+            page_models: set[str] = set()
+            _parse_rows(page, yard, page_rows, dupes, raw_models=page_models)
+
             if _GPI_MORE_MSG not in page:
-                _parse_rows(page, yard, all_vehicles, dupes)
+                # Uncapped: the single page IS the make's full inventory.
+                yard_vehicles.extend(page_rows)
+                yard_models_map[mk] = sorted(page_models)
                 continue
-            # capped at 50 — drill into per-model queries
-            if make_name not in models_cache:
-                try:
-                    r = requests.get(f"{GPI_BASE}/wp-json/api/getModels?make={q}",
-                                     headers=HEADERS, timeout=60)
-                    r.raise_for_status()
-                    models_cache[make_name] = [str(x) for x in r.json() if str(x).strip()]
-                except Exception as e:
-                    print(f"  [Go Pull-It] getModels {make_name} failed: {e} — "
-                          f"keeping capped 50 rows", file=sys.stderr)
-                    models_cache[make_name] = []
-                time.sleep(GPI_DELAY_SEC)
-            if not models_cache[make_name]:
-                _parse_rows(page, yard, all_vehicles, dupes)
+
+            # Capped at 50 (newest-first). Decide: full drill, pruned drill,
+            # or carry-with-page-overlay (see block comment above GPI_STATE_FILE).
+            page_ids = {v["id"] for v in page_rows}
+            prev_ids = {v.get("id") for v in prev_make_vehicles}
+            bootstrap = not prev_make_vehicles and not prev_models
+            overflow = bool(prev_ids) and not (page_ids & prev_ids)
+            rotation_due = _gpi_drill_phase(slug, make_name) == rotation_idx
+
+            if not (bootstrap or overflow or rotation_due):
+                # Carry: previous rows (in stored order), today's page rows
+                # overriding by id, genuinely new arrivals appended in page order.
+                n_carried += 1
+                page_by_id = {v["id"]: v for v in page_rows}
+                merged = [page_by_id.pop(v["id"], None) or v for v in prev_make_vehicles]
+                merged += [v for v in page_rows if v["id"] in page_by_id]
+                yard_vehicles.extend(merged)
+                yard_models_map[mk] = sorted(prev_models | page_models)
                 continue
-            for model_name in models_cache[make_name]:
+
+            all_models = _get_models(make_name, q)
+            if not all_models:
+                # getModels down: the capped 50 newest are all we can get.
+                yard_vehicles.extend(page_rows)
+                yard_models_map[mk] = sorted(prev_models | page_models)
+                continue
+            if bootstrap or overflow:
+                drill_models = list(all_models)  # no trustworthy presence info
+            else:
+                known = prev_models | page_models
+                drill_models = [x for x in all_models if x.upper() in known]
+                if not drill_models:
+                    drill_models = list(all_models)
+            n_drilled += 1
+
+            drilled_rows: list[dict] = []
+            drilled_models_u = {x.upper() for x in drill_models}
+            drill_seen_models: set[str] = set()
+            for model_name in drill_models:
                 mq = urllib.parse.quote_plus(model_name)
                 try:
                     page = _get(f"{GPI_BASE}/inventory/?location={slug}&make={q}&model={mq}",
@@ -9188,11 +9328,26 @@ def fetch_gopullit_inventory() -> list[dict]:
                 if _GPI_MORE_MSG in page:
                     print(f"  [Go Pull-It] {slug}/{make_name}/{model_name}: still capped "
                           f"at 50 — accepting partial (no further filter)", file=sys.stderr)
-                _parse_rows(page, yard, all_vehicles, dupes)
+                _parse_rows(page, yard, drilled_rows, dupes, raw_models=drill_seen_models)
+            # Safety net: page rows whose model getModels didn't cover can't
+            # appear in any drill result — keep them (disjoint, so no dupes).
+            extra = [v for v in page_rows
+                     if str(v.get("model", "")).upper() not in drilled_models_u]
+            yard_vehicles.extend(drilled_rows + extra)
+            yard_models_map[mk] = sorted(
+                drill_seen_models | {str(v.get("model", "")).upper() for v in extra})
+
+        all_vehicles.extend(yard_vehicles)
+        new_state[slug] = {"models": yard_models_map, "vehicles": yard_vehicles}
+
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
     print(f"  [Go Pull-It] {len(unique)} vehicles across "
-          f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
+          f"{len({v['_location'] for v in unique})} yards "
+          f"({n_requests} requests; {n_drilled} capped make(s) drilled, "
+          f"{n_carried} carried on rotation {rotation_idx}/{GPI_DRILL_PHASES})",
+          file=sys.stderr)
+    _gpi_save_state(new_state)
     return unique
 
 
@@ -9863,51 +10018,62 @@ INDEPENDENT_EXPECTED_SOURCES = {
 }
 
 
+# Canonical adapter order. The parallel fetch below concatenates results in
+# THIS order, so the combined vehicle list (and therefore the saved payload's
+# row order) is byte-identical to what the old sequential loop produced.
+INDEPENDENT_FETCHERS: list = [
+    ("Wrench-A-Part", fetch_wrenchapart_inventory),
+    ("U-Pull-R", fetch_upullr_inventory),
+    ("Fenix", fetch_fenix_inventory),
+    ("Harry's", fetch_harrys_inventory),
+    ("Indy", fetch_indyupullit_inventory),
+    ("U-Pull-It IA/NE", fetch_upullitne_inventory),
+    ("Rupert's", fetch_ruperts_inventory),
+    ("Pull-N-Save", fetch_pns_inventory),
+    ("Parts Galore", fetch_partsgalore_inventory),
+    ("Chesterfield", fetch_chesterfield_inventory),
+    ("Ace", fetch_ace_inventory),
+    ("Sturtevant", fetch_sturtevant_inventory),
+    ("iPull-uPull", fetch_ipull_inventory),
+    ("St. Cloud", fetch_stcloud_inventory),
+    ("Nevada Pic-A-Part", fetch_nvpap_inventory),
+    ("VinPlus", fetch_vinplus_inventory),
+    ("Pick-A-Part VA", fetch_papva_inventory),
+    ("U-Pick-It AZ", fetch_upickitaz_inventory),
+    ("Go Pull-It", fetch_gopullit_inventory),
+    ("Barry's", fetch_barrys_inventory),
+    ("Prestige", fetch_prestige_inventory),
+    ("Budget U-Pull-It", fetch_budget_inventory),
+]
+
+
 def fetch_independent_inventory() -> list[dict]:
-    """All enabled independent-yard adapters (registry status: adapter-built)."""
-    vehicles = fetch_wrenchapart_inventory()
-    time.sleep(2)  # different hosts, but keep the overall cadence gentle
-    vehicles += fetch_upullr_inventory()
-    time.sleep(2)
-    vehicles += fetch_fenix_inventory()
-    time.sleep(2)
-    vehicles += fetch_harrys_inventory()
-    time.sleep(2)
-    vehicles += fetch_indyupullit_inventory()
-    time.sleep(2)
-    vehicles += fetch_upullitne_inventory()
-    time.sleep(2)
-    vehicles += fetch_ruperts_inventory()
-    time.sleep(2)
-    vehicles += fetch_pns_inventory()
-    time.sleep(2)
-    vehicles += fetch_partsgalore_inventory()
-    time.sleep(2)
-    vehicles += fetch_chesterfield_inventory()
-    time.sleep(2)
-    vehicles += fetch_ace_inventory()
-    time.sleep(2)
-    vehicles += fetch_sturtevant_inventory()
-    time.sleep(2)
-    vehicles += fetch_ipull_inventory()
-    time.sleep(2)
-    vehicles += fetch_stcloud_inventory()
-    time.sleep(2)
-    vehicles += fetch_nvpap_inventory()
-    time.sleep(2)
-    vehicles += fetch_vinplus_inventory()
-    time.sleep(2)
-    vehicles += fetch_papva_inventory()
-    time.sleep(2)
-    vehicles += fetch_upickitaz_inventory()
-    time.sleep(2)
-    vehicles += fetch_gopullit_inventory()
-    time.sleep(2)
-    vehicles += fetch_barrys_inventory()
-    time.sleep(2)
-    vehicles += fetch_prestige_inventory()
-    time.sleep(2)
-    vehicles += fetch_budget_inventory()
+    """All enabled independent-yard adapters (registry status: adapter-built).
+
+    Adapters run CONCURRENTLY (2026-10-22): the sequential loop made the
+    independents the dominant term in scan wall-clock (~3h of a ~3.2h scan)
+    even though every adapter talks to a DIFFERENT host. Each adapter stays
+    strictly sequential INSIDE (its per-host *_DELAY_SEC politeness is
+    untouched; VinPlus, the only adapter whose 9 yards share one API host,
+    was already serial internally), so no single yard's site ever sees
+    concurrent requests from us — we only overlap waits across hosts.
+    The old inter-adapter 2s courtesy sleeps were cross-host cadence and are
+    meaningless once adapters overlap, so they're gone.
+
+    An adapter that raises still aborts the scan, exactly like the
+    sequential version did (fetch errors are caught inside each adapter;
+    an uncaught exception means a bug worth failing loudly on)."""
+    workers = max(1, int(os.environ.get(
+        "INDEP_FETCH_WORKERS", str(len(INDEPENDENT_FETCHERS)))))
+    results: list[list[dict] | None] = [None] * len(INDEPENDENT_FETCHERS)
+    with concurrent.futures.ThreadPoolExecutor(
+            max_workers=workers, thread_name_prefix="indep") as pool:
+        futs = {pool.submit(fn): i for i, (_label, fn) in enumerate(INDEPENDENT_FETCHERS)}
+        for fut in concurrent.futures.as_completed(futs):
+            results[futs[fut]] = fut.result()
+    vehicles: list[dict] = []
+    for rows in results:
+        vehicles += rows or []
 
     # Loud zero-vehicle alarm: a chain that silently returns [] (WAF change,
     # plugin upgrade, layout change) must be visible in the scan log, not
@@ -11462,6 +11628,19 @@ def main():
     )
 
     def do_scan():
+        # The independents (~22 adapters, all on hosts distinct from the big
+        # chains) are the slowest fetch by far, so they start FIRST in a
+        # background thread and the chain scans run on top of them: total
+        # fetch wall-clock = max(chains, independents) instead of the sum.
+        # Output order is unchanged — independents are still appended last.
+        indep_fut = None
+        indep_pool = None
+        if scan_independents:
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x9, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige, Budget) in the background, overlapped with the chain scans...", file=sys.stderr)
+            indep_pool = concurrent.futures.ThreadPoolExecutor(
+                max_workers=1, thread_name_prefix="indep-main")
+            indep_fut = indep_pool.submit(fetch_independent_inventory)
+
         scope = "NATIONAL (all US+Canada yards)" if args.national else "SLC"
         print(f"Scanning Pick-n-Pull {scope}...", file=sys.stderr)
         pnp_vehicles = fetch_pnp_inventory(national=args.national)
@@ -11484,9 +11663,9 @@ def main():
             pap_vehicles = fetch_pap_inventory()
 
         indep_vehicles: list[dict] = []
-        if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Chesterfield, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x9, Pick-A-Part VA, U-Pick-It AZ, Go Pull-It, Barry's, Prestige, Budget)...", file=sys.stderr)
-            indep_vehicles = fetch_independent_inventory()
+        if indep_fut is not None:
+            indep_vehicles = indep_fut.result()
+            indep_pool.shutdown()
 
         all_vehicles = (pnp_vehicles + tap_vehicles + utpap_vehicles
                         + pyp_vehicles + pap_vehicles + indep_vehicles)
