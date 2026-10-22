@@ -2591,8 +2591,9 @@ function renderYards() {
   const lz = document.getElementById('live-zip');
   if (document.activeElement !== yz) {
     yz.value = lz.value;
-    yz.placeholder = lz.placeholder === 'Using your location' ? 'Using your location' : 'Zip code';
+    yz.placeholder = lz.placeholder;   // carries 'Using your location' when GPS is the center
   }
+  updateYardsFilterCount();
   if (!liveLoaded) {
     grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><p>Loading live inventory&hellip;</p></div>';
     statsBar.innerHTML = '';
@@ -2732,6 +2733,31 @@ document.getElementById('yards-grid').addEventListener('keydown', e => {
   if (card) viewYardInLive(card.dataset.loc);
 });
 document.getElementById('yards-search').addEventListener('input', () => renderYards());
+/* Filters drawer — same handle/panel mechanics as the Live tab, with its own
+ * remembered open state. Default is CLOSED on first paint (no half-open
+ * illusion in the iOS webview — see the Live tab's 'Show' filter saga). */
+document.getElementById('yards-filter-toggle').addEventListener('click', () => {
+  const panel = document.getElementById('yards-controls');
+  const btn = document.getElementById('yards-filter-toggle');
+  const open = panel.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  localStorage.setItem('jh_yards_filters_open', open ? '1' : '0');
+});
+if (localStorage.getItem('jh_yards_filters_open') === '1') {
+  document.getElementById('yards-controls').classList.add('open');
+  document.getElementById('yards-filter-toggle').classList.add('open');
+}
+/* Active-filter badge on the drawer handle — mirrors updateLiveFilterCount. */
+function updateYardsFilterCount() {
+  let n = 0;
+  if (document.getElementById('yards-search').value.trim()) n++;
+  if (document.getElementById('yards-filter-chain').value) n++;
+  if (document.getElementById('yards-filter-state').value) n++;
+  if (activeZipCoords && document.getElementById('yards-radius').value) n++;
+  const el = document.getElementById('yards-filter-count');
+  el.style.display = n ? 'inline-grid' : 'none';
+  el.textContent = n;
+}
 /* Yards-tab distance control: same stored value, same free 250 mi cap, and
  * the same Pro gate as the Live tab's radius select — "any distance" snaps
  * free users back and pitches honestly, identical trigger and prompt. */

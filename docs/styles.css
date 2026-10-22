@@ -1733,16 +1733,6 @@
 }
 .price-compare-bar .search-box { flex: 1; min-width: 0; }
 
-/* Yards-tab zip + distance + chain/state filters */
-.yards-toolbar { flex-wrap: wrap; }
-.yards-toolbar select { width: auto; flex: 0 1 auto; max-width: 190px; }
-.yards-toolbar .yards-zip { flex: 0 0 110px; }
-@media (max-width: 640px) {
-  .yards-toolbar #yards-search { flex: 1 1 100%; }
-  .yards-toolbar select { flex: 1 1 0; max-width: none; min-width: 0; }
-  .yards-toolbar .yards-zip { flex: 1 1 26%; min-width: 0; }
-}
-
 /* Part compare type-ahead */
 .compare-input-wrap { position: relative; flex: 1; min-width: 0; display: flex; }
 .compare-input-wrap .search-box { flex: 1; min-width: 0; }

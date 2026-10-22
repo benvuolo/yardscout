@@ -217,23 +217,56 @@
   <!-- YARDS DIRECTORY TAB -->
   <div id="tab-yards" class="tab-content">
     <div class="stats-bar" id="yards-stats-bar"></div>
-    <div class="toolbar yards-toolbar">
-      <input type="text" class="search-box" id="yards-search" placeholder="Search yard name, city, state&hellip;">
-      <input type="text" class="search-box yards-zip" id="yards-zip" inputmode="numeric" maxlength="5" placeholder="Zip code" title="Re-center distances on a different zip code">
-      <select id="yards-radius" title="Only show yards within this distance of your zip">
-        <option value="">Any distance &mdash; Pro</option>
-        <option value="25">&le; 25 mi</option>
-        <option value="50">&le; 50 mi</option>
-        <option value="100" selected>&le; 100 mi</option>
-        <option value="250">&le; 250 mi</option>
-        <option value="500">&le; 500 mi &mdash; Pro</option>
-      </select>
-      <select id="yards-filter-chain" title="Only show yards from this chain">
-        <option value="">All chains</option>
-      </select>
-      <select id="yards-filter-state" title="Only show yards in this state">
-        <option value="">All states</option>
-      </select>
+    <!-- Same drawer pattern as the Live tab: a full-width Filters handle +
+         a labeled .controls panel, so the two tabs feel identical and the
+         controls stack instead of truncating at phone widths. -->
+    <div class="toolbar">
+      <button type="button" class="filter-toggle" id="yards-filter-toggle">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.4"/><circle cx="7" cy="17" r="2.4"/></svg> Filters <span class="filter-count" id="yards-filter-count" style="display:none;">0</span>
+      </button>
+    </div>
+    <div class="controls" id="yards-controls">
+      <div class="ctl-group">
+        <div class="ctl-group-title">Where</div>
+        <div class="ctl-group-grid">
+          <div class="ctl">
+            <label for="yards-zip">Zip code</label>
+            <input type="text" id="yards-zip" inputmode="numeric" maxlength="5" placeholder="e.g. 84101" title="Re-center distances on a different zip code">
+          </div>
+          <div class="ctl">
+            <label for="yards-radius">Within</label>
+            <select id="yards-radius" title="Only show yards within this distance of your zip">
+              <option value="">Any distance &mdash; Pro</option>
+              <option value="25">&le; 25 mi</option>
+              <option value="50">&le; 50 mi</option>
+              <option value="100" selected>&le; 100 mi</option>
+              <option value="250">&le; 250 mi</option>
+              <option value="500">&le; 500 mi &mdash; Pro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="ctl-group">
+        <div class="ctl-group-title">Which yards</div>
+        <div class="ctl-group-grid">
+          <div class="ctl">
+            <label for="yards-search">Search</label>
+            <input type="text" id="yards-search" placeholder="Yard name, city, state&hellip;">
+          </div>
+          <div class="ctl">
+            <label for="yards-filter-chain">Chain</label>
+            <select id="yards-filter-chain" title="Only show yards from this chain">
+              <option value="">All chains</option>
+            </select>
+          </div>
+          <div class="ctl">
+            <label for="yards-filter-state">State</label>
+            <select id="yards-filter-state" title="Only show yards in this state">
+              <option value="">All states</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="price-compare-bar" id="price-compare-bar">
       <div class="compare-input-wrap">
