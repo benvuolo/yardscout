@@ -10022,6 +10022,197 @@ def normalize_model(model: str, make: str = "") -> str:
     return m
 
 
+# ---------------------------------------------------------------------------
+# Make-name normalization. 27 chains spell makes their own way, and the raw
+# strings shipped straight into the UI's make dropdown: "MINI (756)" next to
+# "MINI Cooper (52)", "Alfa Romeo" next to "Alfa-Romeo", "Vw" next to
+# "Volkswagen" (owner-reported 2026-10-21). Canonicalized once here, at enrich
+# time, so every adapter benefits — same pattern as _sanitize_date_added.
+#
+# Alias table policy: EVIDENCE-DRIVEN and conservative. Keys are squashed
+# lowercase alphanumerics (same keying as _MODEL_CANON), values are canonical
+# display names. Only marques that are provably the SAME company belong here —
+# merging wrong is worse than a duplicate dropdown entry. Deliberately NOT
+# merged: Datsun/Nissan, Geo/Chevrolet, GMC/Chevrolet, Genesis/Hyundai,
+# Scion/Toyota, Ram/Dodge (distinct marques users search by); Miles (a real
+# 1-row 2009 Miles ZX40ST — Miles Electric Vehicles was a genuine US LSV
+# maker); Mitsubishi Fuso (a real FE84D cabover — Fuso is Daimler's truck
+# marque, not Mitsubishi Motors); "Sprinter (Dodge Or Freightliner)" (the
+# feed itself can't tell; no VIN to break the tie).
+_MAKE_ALIASES = {
+    "minicooper": "MINI",            # Pull-N-Save files MINIs under "Mini Cooper"
+    "alfaromeo": "Alfa Romeo",       # catches the hyphenated "Alfa-Romeo" spelling
+    "fiatlancia": "Fiat",            # Pull-N-Save's combined "Fiat-Lancia" bucket
+                                     # (audit 2026-10: all 24 rows are Fiat 500s /
+                                     # 124 Spiders — zero actual Lancias)
+    "mercedes": "Mercedes-Benz",     # Wrench-A-Part / Ace spell it short
+    "mercedesbenz": "Mercedes-Benz",
+    "vw": "Volkswagen",              # Pull-A-Part's "Vw" (830 rows)
+    "volkswagon": "Volkswagen",      # common feed misspelling
+    "chevy": "Chevrolet",
+    "chev": "Chevrolet",
+    "rover": "Land Rover",           # audit 2026-10: all 28 "Rover" rows carry
+                                     # SAL* VINs / Land Rover models (Range Rover
+                                     # Sport, LR3, Freelander...) — the British
+                                     # Rover marque never appears in these feeds
+    "landrover": "Land Rover",
+    "rangerover": "Land Rover",      # Range Rover is a Land Rover model line
+    "infinity": "Infiniti",          # misspelling — Infinity is not a marque
+}
+
+# "General Motors" (3,046 rows: Pull-N-Save + Nevada Pic-A-Part label every GM
+# car with the corporation, not the division). Resolve to the real marque only
+# when the evidence is unambiguous; rows that stay ambiguous keep "General
+# Motors" rather than guessing.
+#
+# Evidence order:
+#   1. VIN WMI — GM's own division coding: positions 1-3 of a [1-3|6]G? VIN
+#      name the division in the 3rd character. Audit of the 3,007 VIN-bearing
+#      rows cross-tabbed perfectly against models (Acadia/Yukon under GMC,
+#      G6/Grand Prix under Pontiac, Alero under Oldsmobile, ...).
+#   2. Model's first word is itself a division name ("Chevrolet 20 Pickup",
+#      "Gmc Terrain", "Oldsmobile Bravada", "Hummer H3", "Saturn Vue").
+#   3. A division-exclusive model name (Equinox -> Chevrolet, Vibe -> Pontiac,
+#      Rendezvous -> Buick...), year-gated where a nameplate crossed brands
+#      (Metro/Prizm/Tracker were Geo through 1997, Chevrolet after; Suburban
+#      was both Chevy AND GMC through 1999 so only 2000+ resolves).
+_GM_WMI_DIVISION = {  # 3rd VIN char when chars 1-2 match [1-3|6]G (US/CA/MX/AU builds)
+    "1": "Chevrolet", "2": "Pontiac", "3": "Oldsmobile", "4": "Buick",
+    "6": "Cadillac", "8": "Saturn",
+    "B": "Chevrolet", "C": "Chevrolet", "N": "Chevrolet",   # trucks/SUVs/incomplete
+    "D": "GMC", "K": "GMC", "T": "GMC",
+    "M": "Pontiac", "Y": "Cadillac",
+}
+_GM_WMI_FULL = {  # whole-WMI entries outside the division scheme
+    "KL1": "Chevrolet", "KL7": "Chevrolet", "KL8": "Chevrolet",  # GM Korea (Aveo/Spark)
+    "KL4": "Buick",                                              # GM Korea (Encore)
+    "W04": "Buick", "W06": "Cadillac",                           # Opel-built (Regal/Catera)
+    "5GA": "Buick", "5GZ": "Saturn",                             # Lansing Delta (Enclave/Outlook)
+    "5GR": "Hummer", "5GT": "Hummer",                            # H2 / H3
+    "5Y2": "Pontiac", "2CK": "Pontiac",                          # NUMMI Vibe / CAMI Torrent
+    "2CT": "GMC",                                                # CAMI Terrain
+    "3N6": "Chevrolet",                                          # City Express (Nissan-built)
+}
+_GM_DIVISION_NAMES = {
+    "chevrolet": "Chevrolet", "pontiac": "Pontiac", "oldsmobile": "Oldsmobile",
+    "buick": "Buick", "cadillac": "Cadillac", "saturn": "Saturn", "gmc": "GMC",
+    "hummer": "Hummer", "geo": "Geo", "olds": "Oldsmobile", "chevy": "Chevrolet",
+}
+_GM_MODEL_DIVISION = {  # division-exclusive nameplates only (squashed keys)
+    # Chevrolet
+    "equinox": "Chevrolet", "cobalt": "Chevrolet", "cruze": "Chevrolet",
+    "sonic": "Chevrolet", "impala": "Chevrolet", "malibu": "Chevrolet",
+    "tahoe": "Chevrolet", "traverse": "Chevrolet", "camaro": "Chevrolet",
+    "corvette": "Chevrolet", "volt": "Chevrolet", "montecarlo": "Chevrolet",
+    "cavalier": "Chevrolet", "venture": "Chevrolet", "uplander": "Chevrolet",
+    "captivasport": "Chevrolet", "cityexpress": "Chevrolet", "astro": "Chevrolet",
+    "avalanche": "Chevrolet", "aveo": "Chevrolet", "hhr": "Chevrolet",
+    "caprice": "Chevrolet", "corsica": "Chevrolet", "celebrity": "Chevrolet",
+    "lumina": "Chevrolet", "luminaapv": "Chevrolet", "spark": "Chevrolet",
+    "trailblazer": "Chevrolet", "trailblazerext": "Chevrolet",
+    "express1500van": "Chevrolet", "express2500van": "Chevrolet",
+    "express3500van": "Chevrolet",
+    # Pontiac
+    "g5": "Pontiac", "g6": "Pontiac", "g8": "Pontiac", "grandprix": "Pontiac",
+    "grandam": "Pontiac", "bonneville": "Pontiac", "sunfire": "Pontiac",
+    "sunbird": "Pontiac", "aztek": "Pontiac", "vibe": "Pontiac",
+    "montana": "Pontiac", "montanasv6": "Pontiac", "torrent": "Pontiac",
+    "firebird": "Pontiac", "solstice": "Pontiac", "gto": "Pontiac",
+    "fiero": "Pontiac", "transam": "Pontiac",
+    # Buick
+    "rendezvous": "Buick", "lesabre": "Buick", "lacrosse": "Buick",
+    "century": "Buick", "enclave": "Buick", "regal": "Buick",
+    "lucerne": "Buick", "verano": "Buick", "parkavenue": "Buick",
+    "rainier": "Buick", "terraza": "Buick", "encore": "Buick",
+    "roadmaster": "Buick", "riviera": "Buick", "skylark": "Buick",
+    # Oldsmobile
+    "alero": "Oldsmobile", "intrigue": "Oldsmobile", "aurora": "Oldsmobile",
+    "achieva": "Oldsmobile", "toronado": "Oldsmobile", "bravada": "Oldsmobile",
+    "silhouette": "Oldsmobile", "eightyeight": "Oldsmobile",
+    "ninetyeight": "Oldsmobile", "cutlass": "Oldsmobile",
+    "cutlasssupreme": "Oldsmobile", "cutlassciera": "Oldsmobile",
+    # Cadillac
+    "cts": "Cadillac", "ctsv": "Cadillac", "srx": "Cadillac",
+    "deville": "Cadillac", "dts": "Cadillac", "sts": "Cadillac",
+    "ats": "Cadillac", "xts": "Cadillac", "escalade": "Cadillac",
+    "escaladeext": "Cadillac", "escaladeesv": "Cadillac",
+    "eldorado": "Cadillac", "seville": "Cadillac", "fleetwood": "Cadillac",
+    "catera": "Cadillac", "allante": "Cadillac",
+    # Saturn
+    "vue": "Saturn", "ion": "Saturn", "aura": "Saturn", "outlook": "Saturn",
+    "sky": "Saturn", "relay": "Saturn", "astra": "Saturn", "l300": "Saturn",
+    "sl1": "Saturn", "sl2": "Saturn", "sc1": "Saturn", "sc2": "Saturn",
+    # GMC
+    "acadia": "GMC", "envoy": "GMC", "envoyxl": "GMC", "terrain": "GMC",
+    "savana": "GMC", "sonoma": "GMC", "jimmy": "GMC", "canyon": "GMC",
+    "yukon": "GMC", "yukonxl": "GMC", "yukonxl1500": "GMC", "yukonxl2500": "GMC",
+    # Hummer / Geo-exclusive
+    "h1": "Hummer", "h2": "Hummer", "h3": "Hummer", "h3t": "Hummer",
+    "storm": "Geo",
+}
+# Nameplates that crossed brands on a known year boundary.
+_GM_MODEL_YEAR_GATED = {
+    # Geo through 1997, Chevrolet from the 1998 rebrand on.
+    "metro": lambda y: "Geo" if y <= 1997 else "Chevrolet",
+    "prizm": lambda y: "Geo" if y <= 1997 else "Chevrolet",
+    "tracker": lambda y: "Geo" if y <= 1997 else "Chevrolet",
+    # GMC sold Suburbans too until the 2000 Yukon XL rename — only 2000+ is
+    # unambiguously Chevrolet. (Pre-2000 rows resolve via VIN when present.)
+    "suburban": lambda y: "Chevrolet" if y >= 2000 else None,
+    "suburban1500": lambda y: "Chevrolet" if y >= 2000 else None,
+    "suburban2500": lambda y: "Chevrolet" if y >= 2000 else None,
+}
+
+_MAKE_SQUASH_RE = re.compile(r"[^a-z0-9]")
+
+
+def _make_key(s: str) -> str:
+    return _MAKE_SQUASH_RE.sub("", (s or "").lower())
+
+
+def _resolve_general_motors(model: str, vin: str, year: int) -> str | None:
+    """Real GM division for a 'General Motors' row, or None when ambiguous."""
+    vin = (vin or "").strip().upper()
+    if len(vin) >= 3:
+        w = vin[:3]
+        if w in _GM_WMI_FULL:
+            return _GM_WMI_FULL[w]
+        if w[0] in "1236" and w[1] == "G":
+            div = _GM_WMI_DIVISION.get(w[2])
+            if div:
+                return div
+    words = (model or "").strip().split()
+    if words:
+        div = _GM_DIVISION_NAMES.get(words[0].lower())
+        if div:
+            return div
+    mkey = _make_key(model)
+    if mkey in _GM_MODEL_DIVISION:
+        return _GM_MODEL_DIVISION[mkey]
+    gate = _GM_MODEL_YEAR_GATED.get(mkey)
+    if gate:
+        try:
+            y = int(year or 0)
+        except (TypeError, ValueError):
+            y = 0
+        if y:
+            return gate(y)
+    return None
+
+
+def normalize_make(make: str, model: str = "", vin: str = "", year: int = 0) -> str:
+    """Canonical display name for a feed-supplied make. Idempotent.
+
+    Casing first (_canon_make: FORD -> Ford, mini -> MINI), then the alias
+    table, then corporate-blob resolution for 'General Motors'/'GM' rows via
+    VIN WMI / model evidence (ambiguous rows keep 'General Motors')."""
+    s = _canon_make(make)
+    key = _make_key(s)
+    if key in ("generalmotors", "gm"):
+        return _resolve_general_motors(model, vin, year) or "General Motors"
+    return _MAKE_ALIASES.get(key, s)
+
+
 _DATE_ADDED_MAX_AGE_DAYS = 15 * 365  # ~15 years; nothing sits on a U-pull lot that long
 
 
@@ -10058,9 +10249,15 @@ def enrich_vehicles(
     decode_vins_incremental: bool = False,
 ) -> list[dict]:
     """Add unobtanium match data. Optionally decode VINs via NHTSA VPIC (all unique VINs, or top-N-by-profit only)."""
-    # Canonical model spelling before anything else — matching, display, and
-    # the UI's model dropdown all key off this field.
+    # Canonical make, then model spelling, before anything else — matching,
+    # display, and the UI's make/model dropdowns all key off these fields.
+    # Make goes first so normalize_model's make-scoped rules see the
+    # canonical name ('Mercedes-Benz', not 'Mercedes').
     for v in vehicles:
+        v["make"] = normalize_make(
+            v.get("make") or "", model=v.get("model") or "",
+            vin=v.get("vin") or "", year=v.get("year") or 0,
+        )
         v["model"] = normalize_model(v.get("model") or "", v.get("make") or "")
         # Global date sanity clamp: every adapter's dateAdded funnels through
         # here before matching, output_json, the history DB, and alerts.
@@ -10299,7 +10496,10 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
             "id": v.get("id"),
             "vin": v.get("vin", ""),
             "year": v.get("year"),
-            "make": _canon_make(v.get("make", "")),
+            # Already canonical after enrich_vehicles; normalize_make here is
+            # an idempotent belt-and-braces for any path that skips enrich.
+            "make": normalize_make(v.get("make", ""), model=v.get("model", ""),
+                                   vin=v.get("vin", ""), year=v.get("year") or 0),
             "model": v.get("model", ""),
             "row": v.get("row", ""),
             "dateAdded": v.get("dateAdded", ""),
@@ -10994,7 +11194,10 @@ def check_watchlist_alerts(vehicles: list[dict]):
     hits: list[dict] = []
 
     for entry in watchlist:
-        make_low = (entry.get("make") or "").lower()
+        # Vehicles are already make-normalized by enrich_vehicles; run the
+        # watch entry through the same aliasing so a watch saved as "Vw" or
+        # "MINI Cooper" still hits post-merge inventory.
+        make_low = normalize_make(entry.get("make") or "").lower()
         model_low = (entry.get("model") or "").lower()
         yr_min = entry.get("yrMin")
         yr_max = entry.get("yrMax")
