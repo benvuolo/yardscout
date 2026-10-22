@@ -7149,6 +7149,122 @@ def engine_matches_family(engine_str: str, fam: dict) -> bool | None:
 # inner list — the evidence string cites where each list was retrieved.
 # Research notes with full citations live in scraper/interchange_research.md.
 _ALT_VERIFIED: dict = {
+    "honda-j30": {
+        "evidence": "Lester 8220 (Delco CS130D, Honda 31100-P8A-A01/P8C-A02) application lists (alternatorparts.com + thewrenchmonkey.ca, retrieved 2026-10-22): Accord 3.0 1998-2002, Acura CL 3.0 1997-1999. The 03-07 Accord V6 uses a Denso unit — left at likely.",
+        "groups": [[("Honda", "Accord", 1998, 2002),
+                    ("Acura", "CL", 1997, 1999)]],
+    },
+    "honda-j35-mid": {
+        "evidence": "TYC 2-11151 fitment (partshawk.com; Honda 31100-RJA-A02 OEM list on hondapartsnow.com, retrieved 2026-10-22): Odyssey 2005-2007, Pilot 2005-2008, Ridgeline 2006-2008 (+ MDX/TL/RL). Honda 31100-RGW-A01 (CSF92, hondapartsconnection.com): Odyssey 2008-2011 is the follow-on unit.",
+        "groups": [
+            [("Honda", "Odyssey", 2005, 2007),
+             ("Honda", "Pilot", 2005, 2008),
+             ("Honda", "Ridgeline", 2006, 2008)],
+            [("Honda", "Odyssey", 2008, 2010)],
+        ],
+    },
+    "honda-j35-z": {
+        "evidence": "Honda 31100-RGW-A01 (CSF92, Denso) OEM listing (hondapartsconnection.com, retrieved 2026-10-22): Odyssey/Pilot/Ridgeline 2008-2011 share one unit — clipped to this family's 2009+ apps.",
+        "groups": [[("Honda", "Pilot", 2009, 2011),
+                    ("Honda", "Ridgeline", 2009, 2011)]],
+    },
+    "honda-j35-early": {
+        "evidence": "TYC 2-13918 fitment (partshawk.com + a-premium.com; Honda 31100-PGK-A01/A03, Denso 104210-3090, retrieved 2026-10-22): MDX 2001-2002, Odyssey 3.5 2002-2004, Pilot 2003-2004. The 99-01 Odyssey unit differs — left at likely.",
+        "groups": [[("Acura", "MDX", 2001, 2002),
+                    ("Honda", "Odyssey", 2002, 2004),
+                    ("Honda", "Pilot", 2003, 2004)]],
+    },
+    "honda-k24z": {
+        "evidence": "Lester 11390 (Honda 31100-R40-A01, Denso 104210-5890) application tables (dssautoparts.com + FVP/autofactsdb.com + DB Electrical 400-52394, retrieved 2026-10-22): Accord 2.4 2008-2012, TSX 2.4 2009-2014.",
+        "groups": [[("Honda", "Accord", 2008, 2012),
+                    ("Acura", "TSX", 2009, 2014)]],
+    },
+    "mopar-world24": {
+        "evidence": "Lester 11231 (Chrysler 4801323AC, Mitsubishi A2TJ0481) application tables (qpselectric.com + thenthgear.com + TYC 2-11231, retrieved 2026-10-22): Sebring 2.4 2007-2010, 200 2.4 2011-2013, Avenger 2.4 2008-2013, Caliber 2007-2012, Compass 2007-2017, Patriot 2007-2017. Journey uses a different unit — left at likely.",
+        "groups": [[("Chrysler", "Sebring", 2007, 2010),
+                    ("Chrysler", "200", 2011, 2013),
+                    ("Dodge", "Avenger", 2008, 2013),
+                    ("Dodge", "Caliber", 2007, 2012),
+                    ("Jeep", "Compass", 2007, 2017),
+                    ("Jeep", "Patriot", 2007, 2017)]],
+    },
+    "jeep-40": {
+        "evidence": "TYC 2-13341 fitment (partshawk.com; Chrysler 56005685AB, Denso 121000-3440, retrieved 2026-10-22): Cherokee 1991-1998, Comanche 1991-1992, Wrangler 1991-1998, Grand Cherokee 1993-1998. TYC 2-13876 (Jeep 56041864AB, standardautopart.com): Wrangler 4.0 2001-2006 is its own unit.",
+        "groups": [
+            [("Jeep", "Cherokee", 1991, 1998),
+             ("Jeep", "Comanche", 1991, 1992),
+             ("Jeep", "Wrangler", 1991, 1998),
+             ("Jeep", "Grand Cherokee", 1993, 1998)],
+            [("Jeep", "Wrangler", 2001, 2006)],
+        ],
+    },
+    "hk-theta-mpi": {
+        "evidence": "Lester 11189 (Hyundai/Kia 37300-25201, Valeo TG11C076) fitment (WAI 11189N partshawk.com + DB Electrical 400-40062, retrieved 2026-10-22): Sonata 2.4 2006-2010, Optima 2.4 2006-2010, Rondo 2.4 2007-2010.",
+        "groups": [[("Hyundai", "Sonata", 2006, 2010),
+                    ("Kia", "Optima", 2006, 2010),
+                    ("Kia", "Rondo", 2007, 2010)]],
+    },
+    "hk-nu": {
+        "evidence": "Lester 11610 (Hyundai 37300-2E200, Valeo FG10T011) fitment (TYC 2-11610 finditparts.com + dahkee.com + thenthgear.com, retrieved 2026-10-22): Elantra 1.8/2.0 2011-2016, Forte 2014-2016, Soul 2.0 2012-2013.",
+        "groups": [[("Hyundai", "Elantra", 2011, 2016),
+                    ("Kia", "Forte", 2014, 2016),
+                    ("Kia", "Soul", 2012, 2013)]],
+    },
+    "subaru-ej25na": {
+        "evidence": "Subaru OEM 23700-AA31A/AA37A/AA430 listing (LEESENEVO/amazon.com, retrieved 2026-10-22): Legacy 2.5 2005-2009, Outback 2.5 2005-2009. Forester/Impreza 2.5 use 23700-AA52x — a different unit, left at likely.",
+        "groups": [[("Subaru", "Legacy", 2005, 2009),
+                    ("Subaru", "Outback", 2005, 2009)]],
+    },
+    "vw-25": {
+        "evidence": "Lester 11254 (VW 07K903023A, Bosch 0-124-525-062) fitment (A-Premium APALT130 + miamialternators.com, retrieved 2026-10-22): Jetta 2.5 2005-2014, Rabbit 2.5 2006-2009, Golf 2.5 2010-2014.",
+        "groups": [[("Volkswagen", "Jetta", 2005, 2014),
+                    ("Volkswagen", "Rabbit", 2006, 2009),
+                    ("Volkswagen", "Golf", 2010, 2014)]],
+    },
+    "nissan-vq40": {
+        "evidence": "Nissan OEM 23100-EA20B fitment (nissanpartsdeal.com, retrieved 2026-10-22): Frontier/Pathfinder/Xterra 4.0 2005-2008 (110A). Nissan 23100-ZH00D (130A): Frontier 4.0 2007-2019. Match amperage — both units appear in the 07-08 overlap.",
+        "groups": [
+            [("Nissan", "Frontier", 2005, 2008),
+             ("Nissan", "Pathfinder", 2005, 2008),
+             ("Nissan", "Xterra", 2005, 2008)],
+            [("Nissan", "Frontier", 2007, 2019)],
+        ],
+    },
+    "gm-3800": {
+        "evidence": "Lester 8245 listing (OCPTY/amazon.com, GM 10464439/10480411, retrieved 2026-10-22): LeSabre 3.8 2000-2004, Bonneville 3.8 2000-2004. W-body 3800s (Grand Prix/Impala/Monte Carlo/Regal) use different mounting-era units — left at likely.",
+        "groups": [[("Buick", "Lesabre", 2000, 2004),
+                    ("Pontiac", "Bonneville", 2000, 2004)]],
+    },
+    "toyota-2gr": {
+        "evidence": "TYC 2-11137 application table (tycamericas.com, retrieved 2026-10-22; Toyota 27060-31111-84, Lester 11137, 130A): Camry 3.5 2007-2017, Avalon 2005-2018, Highlander 3.5 2008-2013, RAV4 3.5 2009-2010, Venza 3.5 2009-2015, ES 350 2007-2018, RX 350 2007-2009. Sienna and RAV4 06-08 are NOT in this unit — left at likely.",
+        "groups": [[("Toyota", "Camry", 2007, 2017),
+                    ("Toyota", "Avalon", 2005, 2018),
+                    ("Toyota", "Highlander", 2008, 2013),
+                    ("Toyota", "RAV4", 2009, 2010),
+                    ("Toyota", "Venza", 2009, 2015),
+                    ("Lexus", "ES 350", 2007, 2018),
+                    ("Lexus", "RX 350", 2007, 2009)]],
+    },
+    "toyota-1zz": {
+        "evidence": "TYC 2-13878 application table (tycamericas.com) + discountstarterandalternator.com VIN-qualified list (Lester 13878, Toyota 27060-22040, retrieved 2026-10-22): Corolla 1ZZ 2003-2008, Matrix 2003-2008 (excl XRS), Vibe 2003-2008 (excl GT), Celica GT 2000-2005, MR2 Spyder 2000-2005. 1998-2002 Corolla uses an earlier unit — left at likely.",
+        "groups": [[("Toyota", "Corolla", 2003, 2008),
+                    ("Toyota", "Matrix", 2003, 2008),
+                    ("Pontiac", "Vibe", 2003, 2008),
+                    ("Toyota", "Celica", 2000, 2005),
+                    ("Toyota", "MR2 Spyder", 2000, 2005)]],
+    },
+    "toyota-2uz": {
+        "evidence": "Lester 13994 application list (aspwholesale.com, retrieved 2026-10-22; Denso 104210-3380, Toyota 27060-0F040): Tundra 4.7 2003-2009, Sequoia 4.7 2003-2009. Toyota lists a separate OEM number (27060-50320-84) for the 4.7 4Runner — kept out of the group.",
+        "groups": [[("Toyota", "Tundra", 2003, 2009),
+                    ("Toyota", "Sequoia", 2003, 2009)]],
+    },
+    "toyota-1gr": {
+        "evidence": "Lester 13984 listings (txasap.com: 4Runner 4.0 2003-2009; OEG amazon.com: Tacoma 4.0 2005-2015; Eagle High: FJ Cruiser 2007-2010, Tundra 4.0 2006-2010; Toyota 27060-31020/31021, Denso 104210-3470/4870, retrieved 2026-10-22).",
+        "groups": [[("Toyota", "Tacoma", 2005, 2015),
+                    ("Toyota", "4Runner", 2003, 2009),
+                    ("Toyota", "FJ Cruiser", 2007, 2010),
+                    ("Toyota", "Tundra", 2006, 2010)]],
+    },
     "nissan-qr25": {
         "evidence": "TYC 2-13939 application table (tycamericas.com, retrieved 2026-10-22) + DB Electrical 400-44053 (Lester 13939, Hitachi LR1110-726): Altima 2.5 2002-2006, Sentra 2.5 (SE-R/Spec V) 2002-2006.",
         "groups": [[("Nissan", "Altima", 2002, 2006),
