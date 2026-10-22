@@ -9414,19 +9414,23 @@ def fetch_barrys_inventory() -> list[dict]:
     return unique
 
 
-def refresh_barrys_pricing_file() -> Path:
-    """Refresh Barry's U Pull It's /part-pricing/ table -> barrys_pricing.json."""
+# Barry's /part-pricing/ table ships a handful of TOOLS-section rows with the
+# PRICE in the description cell (source HTML is literally
+# <td>5.00</td><td>5.00</td><td>Each</td><td>0.00</td> — a data-entry hole on
+# their site, not a parse slip). A price can never be a part name, so
+# numeric/price-punctuation-only descriptions are dropped at parse time
+# (2026-10-22; the frontend had been filtering them display-side since
+# 535c604 — the data itself must be clean).
+_PRICE_AS_NAME_RE = re.compile(r"^[\s\d.,$-]+$")
+
+
+def _barrys_parse_pricing_rows(page: str) -> list[dict]:
+    """Parse the /part-pricing/ HTML table into pricing entries, dropping
+    rows whose description is a price-like string (no recoverable name)."""
     import html as html_mod
-    path = DATA_DIR / "barrys_pricing.json"
-    try:
-        r = requests.get(BARRYS_PRICES_URL, headers={**HEADERS, "Accept": "text/html"},
-                         timeout=60)
-        r.raise_for_status()
-    except Exception as e:
-        print(f"  [Barry's pricing] fetch failed: {e} — keeping existing file", file=sys.stderr)
-        return path
     seen: dict[str, dict] = {}
-    for block in _BARRYS_ROW_RE.findall(r.text):
+    dropped = 0
+    for block in _BARRYS_ROW_RE.findall(page):
         cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
                  for c in _FENIX_TD_RE.findall(block)]
         if len(cells) < 4:
@@ -9437,6 +9441,9 @@ def refresh_barrys_pricing_file() -> Path:
             core_f = float(core_s.replace("$", "").replace(",", "")) if core_s else 0.0
         except ValueError:
             continue
+        if desc and _PRICE_AS_NAME_RE.match(desc):
+            dropped += 1
+            continue
         if desc and desc not in seen:
             seen[desc] = {
                 "description": desc,
@@ -9444,6 +9451,24 @@ def refresh_barrys_pricing_file() -> Path:
                 "corePrice": f"{core_f:.2f}",
                 "totalPrice": f"{price_f + core_f:.2f}",
             }
+    if dropped:
+        print(f"  [Barry's pricing] dropped {dropped} row(s) with a price-like "
+              f"description (source data-entry holes)", file=sys.stderr)
+    return list(seen.values())
+
+
+def refresh_barrys_pricing_file() -> Path:
+    """Refresh Barry's U Pull It's /part-pricing/ table -> barrys_pricing.json."""
+    path = DATA_DIR / "barrys_pricing.json"
+    try:
+        r = requests.get(BARRYS_PRICES_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  [Barry's pricing] fetch failed: {e} — keeping existing file", file=sys.stderr)
+        return path
+    parts = _barrys_parse_pricing_rows(r.text)
+    seen = {p["description"]: p for p in parts}
     if len(seen) > 150:
         path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
         print(f"  [Barry's pricing] wrote {len(seen)} parts", file=sys.stderr)
