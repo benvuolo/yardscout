@@ -176,6 +176,141 @@ for key, info in js.UNOBTANIUM_DB.items():
             gated_copies.append(f"{key}: newline in sharedWith")
 check("sharedWith strings are single-line", not gated_copies, str(gated_copies[:3]))
 
+# =========================================================================
+# Part-first interchange v2: verified-groups quality bar
+# =========================================================================
+import itertools
+import json
+import os
+import random
+
+EF = js.ENGINE_FAMILIES
+
+# --- every family carries at least one verified alternator group ----------
+_no_group = [fid for fid, f in EF.items()
+             if not f["parts"].get("alternator", {}).get("verified")]
+check("every family has >=1 verified alternator group", not _no_group,
+      str(_no_group[:5]))
+
+# --- evidence strings are real citations (length + retrieval date) --------
+_bad_ev = []
+for fid, f in EF.items():
+    for cat, p in f["parts"].items():
+        v = p.get("verified")
+        if not v:
+            continue
+        ev = v.get("evidence", "")
+        if len(ev) < 20 or "retrieved" not in ev:
+            _bad_ev.append(f"{fid}/{cat}")
+        if not v.get("groups"):
+            _bad_ev.append(f"{fid}/{cat}: empty groups")
+check("every verified block cites evidence w/ retrieval date", not _bad_ev,
+      str(_bad_ev[:5]))
+
+# --- group spans are well-formed and anchored to the family ----------------
+_bad_span = []
+for fid, f in EF.items():
+    for cat, p in f["parts"].items():
+        for g in p.get("verified", {}).get("groups", []):
+            if len(g) < 1:
+                _bad_span.append(f"{fid}/{cat}: empty group")
+            for s in g:
+                if len(s) != 4 or not (1900 < s[2] <= s[3] < 2035):
+                    _bad_span.append(f"{fid}/{cat}: {s}")
+        v = p.get("verified")
+        if v and not any(
+                a[0] == s[0] and s[2] <= a[3] and a[2] <= s[3]
+                for g in v["groups"] for s in g for a in f["apps"]):
+            _bad_span.append(f"{fid}/{cat}: no group span overlaps family apps")
+check("verified group spans well-formed + overlap family apps", not _bad_span,
+      str(_bad_span[:5]))
+
+# --- research notes: every family id documented ----------------------------
+_notes_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "interchange_research.md")
+check("interchange_research.md exists", os.path.exists(_notes_path))
+_notes = open(_notes_path).read() if os.path.exists(_notes_path) else ""
+_undoc = [fid for fid in EF if f"### {fid} " not in _notes]
+check("every family has a research-notes section", not _undoc, str(_undoc[:5]))
+
+# --- symmetric consistency: tier(A,B) == tier(B,A) --------------------------
+random.seed(20261022)
+_asym = []
+for fid, f in EF.items():
+    cars = []
+    for a in f["apps"]:
+        make = a[0].split("|")[0]
+        model = a[1].rstrip("*") + (" 1500" if a[1].endswith("*") else "")
+        for yr in {a[2], a[3], (a[2] + a[3]) // 2}:
+            cars.append((yr, make, model))
+    for s, d in itertools.islice(itertools.combinations(cars, 2), 40):
+        for cat in f["parts"]:
+            t1 = js.interchange_tier(f, cat, s, d)
+            t2 = js.interchange_tier(f, cat, d, s)
+            if t1 != t2:
+                _asym.append(f"{fid}/{cat}: {s}->{d} {t1} vs {t2}")
+check("interchange_tier is symmetric", not _asym, str(_asym[:3]))
+
+# --- verified tier actually reachable where groups are unambiguous ---------
+def _famb(f, yr, mk, md):
+    """True when (yr, mk, md) hits an ambig-flagged family app."""
+    for a in f["apps"]:
+        if js._app_matches(a, yr, mk, md) and len(a) > 4 and a[4].get("ambig"):
+            return True
+    return False
+
+_unreach = []
+for fid, f in EF.items():
+    v = f["parts"]["alternator"].get("verified")
+    hit = None
+    for g in v["groups"]:
+        cars = []
+        for s in g:
+            mk = s[0].split("|")[0]
+            md = s[1].rstrip("*") + (" 1500" if s[1].endswith("*") else "")
+            cars.append((s[2], mk, md))
+            cars.append((s[3], mk, md))
+        for a, b in itertools.combinations(cars, 2):
+            if _famb(f, *a) or _famb(f, *b):
+                continue
+            if js.interchange_tier(f, "alternator", a, b) == "verified":
+                hit = (a, b)
+                break
+        if hit:
+            break
+    all_ambig = all(
+        _famb(f, s[2], s[0].split("|")[0], s[1].rstrip("*"))
+        for g in v["groups"] for s in g)
+    if hit is None and not all_ambig:
+        _unreach.append(fid)
+check("verified tier reachable in every non-ambig family", not _unreach,
+      str(_unreach[:5]))
+
+# --- payload: vg groups shipped for every family ----------------------------
+_payload_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "..", "docs", "data", "interchange.json")
+_payload = json.load(open(_payload_path))
+_pf = _payload["engineFamilies"]
+check("payload family count matches module", len(_pf) == len(EF),
+      f"{len(_pf)} vs {len(EF)}")
+_no_vg = [pf["id"] for pf in _pf
+          if not pf["parts"].get("alternator", {}).get("vg")]
+check("payload ships vg for every family alternator", not _no_vg,
+      str(_no_vg[:5]))
+_bad_vg = []
+for pf in _pf:
+    for cat, pp in pf["parts"].items():
+        for g in pp.get("vg", []):
+            for s in g:
+                if len(s) != 4 or not isinstance(s[0], str) \
+                        or not isinstance(s[2], int):
+                    _bad_vg.append(f"{pf['id']}/{cat}")
+check("payload vg spans are [make, model, lo, hi]", not _bad_vg,
+      str(_bad_vg[:5]))
+_tiers = [pf for pf in _pf
+          for pp in pf["parts"].values() if "tier" in pp]
+check("payload never ships a declared tier key", not _tiers)
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILURE(S):", *FAILS, sep="\n  - ")

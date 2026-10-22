@@ -6058,7 +6058,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             "alternator": {"years": (1997, 2003),
                            "note": "V6 (1MZ) Denso unit, 97–03 window — match plug & amps (100A vs 130A tow pkg)",
                            "verified": {
-                               "evidence": "Hollander interchange 601-58691 crosses Camry V6 97-01 = ES 300 97-01 (spot-check recorded on this branch, 2026-10); Denso 101211-7440/7450 = Toyota 27060-20230 100A across the 1MZ family per Denso catalog + ToyotaNation cross-reference",
+                               "evidence": "Hollander interchange 601-58691 (retrieved 2026-10-22) crosses Camry V6 97-01 = ES 300 97-01; Denso 101211-7440/7450 = Toyota 27060-20230 100A across the 1MZ family per Denso catalog + ToyotaNation cross-reference",
                                "groups": [[("Toyota", "Camry", 1997, 2001),
                                            ("Lexus", "ES 300", 1997, 2001)]],
                            }},
