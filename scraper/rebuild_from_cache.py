@@ -87,6 +87,7 @@ def main() -> None:
     data["partSets"] = part_sets
     data["pricesLastReviewed"] = js.PRICES_LAST_REVIEWED
     args.out.write_text(json.dumps(data, separators=(",", ":")) + "\n")
+    js.write_interchange_payload()  # part-first table follows every DB edit
     print(f"rows: {len(data['vehicles'])}  matched before: {was_matched}  "
           f"after: {now_matched}  partSets: {len(part_sets)}  -> {args.out}")
 

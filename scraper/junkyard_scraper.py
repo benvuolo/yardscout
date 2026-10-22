@@ -5895,6 +5895,1428 @@ if _family_problems:
     raise ValueError(
         "PLATFORM_FAMILIES lint failed:\n  " + "\n  ".join(_family_problems))
 
+
+# ===========================================================================
+# PART-FIRST INTERCHANGE (v2) — "I need an alternator" search.
+#
+# PLATFORM_FAMILIES (above) answers "this car on the lot shares part X with
+# its siblings" — card provenance. The part-first flow inverts the question:
+# the USER names a part and THEIR car, and we list every donor vehicle in
+# nearby yards carrying a part that fits. Two data sources answer it:
+#
+#   1. ENGINE_FAMILIES — engine-driven parts (alternator, starter) follow the
+#      ENGINE, not the model: a 2AZ-FE alternator from a Scion tC fits a
+#      Camry 2.4. Each family lists the US-market vehicles/years that carried
+#      the engine; the VIN-decode engine string ("2.4L 4-cyl") confirms a
+#      donor actually has it.
+#   2. PLATFORM_FAMILIES two-way groups — body/interior parts (clusters,
+#      regulators, lights) follow the platform/generation; the hand-verified
+#      groups above are exported as-is. (One-way "donor" groups stay card
+#      provenance only — they describe swaps INTO cars we can't enumerate.)
+#
+# Honesty contract (owner directive 2026-10-22: "I need accuracy, and
+# breadth" — a false positive sends someone on a wasted drive):
+#   - Two confidence tiers ship to the UI and nothing else:
+#       "verified" — the specific part application was cross-checked against
+#                    public aftermarket fitment data (part-number cross
+#                    spanning the family's vehicles). Citation REQUIRED, in
+#                    scraper/interchange_research.md under the family id.
+#       "likely"   — same engine family, so the part very likely carries
+#                    over, but the specific application wasn't individually
+#                    verified. UI must say "verify part number".
+#   - An app marked sole=False means the model also came with other engines;
+#     a donor without a usable engine decode can only ever be "likely" with
+#     an "engine unverified" warning. sole=True (every US example of those
+#     model-years carried a family engine) lets a decode-less donor stay at
+#     the part's own tier.
+#   - ambig: the model offered ANOTHER engine with the SAME displacement/
+#     cylinder count in these years (Vulcan vs Duratec 3.0, NA vs turbo EJ25,
+#     NA vs EcoBoost 3.5) — the decode string cannot tell them apart, so
+#     donors from this app are ALWAYS capped at "likely" and the ambig note
+#     ships verbatim. Accuracy > coverage.
+#
+# Deliberate exclusions (accuracy forced them — see research notes):
+#   - ECM/BCM: calibration/part-number specific even within one model-year.
+#   - Diesel engines (Cummins/Powerstroke/Duramax): different accessory
+#     ecosystems; cylinder-count/displacement guards exclude them.
+#   - One-way swap-culture groups (B-series, H22...): not enumerable donors.
+#
+# App tuple: (make, model, yr_lo, yr_hi[, flags]) — flags: {"sole": True} /
+# {"ambig": "note"}. model may end with "*" for prefix match ("Silverado*"
+# catches Silverado / Silverado 1500 / 2500 spellings; the engine check keeps
+# wrong-engine donors out). make may be "A|B" when feeds split a marque
+# (Dodge|Ram). Years are the US model years the family engine was OFFERED in
+# that model — not the model's full run.
+# ===========================================================================
+
+INTERCHANGE_PART_CATEGORIES: dict[str, dict] = {
+    # kind "engine": matched through ENGINE_FAMILIES only.
+    # kind "body":   matched through same-model generation windows (client
+    #                side, via each part row's "fits" range) + exported
+    #                PLATFORM_FAMILIES groups.
+    # tokens:      lowercase substrings locating the part row in a vehicle's
+    #              part set (for eBay-value display).
+    # priceTokens: substrings for the yards' published price lists.
+    "alternator": {
+        "label": "Alternator", "kind": "engine",
+        "tokens": ["alternator"], "priceTokens": ["alternator"]},
+    "starter": {
+        "label": "Starter", "kind": "engine",
+        "tokens": ["starter"], "priceTokens": ["starter"]},
+    "gauge-cluster": {
+        "label": "Gauge cluster", "kind": "body",
+        "tokens": ["cluster"],
+        "priceTokens": ["instrument cluster", "speedometer", "cluster"]},
+    "climate-control": {
+        "label": "Climate control panel", "kind": "body",
+        "tokens": ["climate control"],
+        "priceTokens": ["climate control", "heater control", "temperature control"]},
+    "window-regulator": {
+        "label": "Window regulator + motor", "kind": "body",
+        "tokens": ["window regulator"],
+        "priceTokens": ["window regulator"]},
+    "window-switch": {
+        "label": "Power window switch", "kind": "body",
+        "tokens": ["master switch", "window switch"],
+        "priceTokens": ["window switch", "master switch"]},
+    "tail-lights": {
+        "label": "Tail lights", "kind": "body",
+        "tokens": ["tail light"],
+        "priceTokens": ["tail light", "taillight", "tail lamp", "taillamp"]},
+    "headlights": {
+        "label": "Headlights", "kind": "body",
+        "tokens": ["headlight"],
+        "priceTokens": ["headlight", "headlamp"]},
+    "side-mirrors": {
+        "label": "Side mirrors", "kind": "body",
+        "tokens": ["side mirror"],
+        "priceTokens": ["door mirror", "side mirror", "mirror"]},
+    "tow-mirrors": {
+        "label": "Tow mirrors", "kind": "body",
+        "tokens": ["tow mirror"], "priceTokens": ["mirror"]},
+    "third-row-seat": {
+        "label": "3rd row seat", "kind": "body",
+        "tokens": ["3rd row"], "priceTokens": ["third", "3rd", "seat"]},
+    "tailgate": {
+        "label": "Tailgate", "kind": "body",
+        "tokens": ["tailgate"], "priceTokens": ["tailgate"]},
+}
+
+# Default caveat lines — families override where the family has a sharper one.
+_ALT_NOTE = ("match amperage, pulley and plug before buying — options "
+             "packages used higher-amp units")
+_STR_NOTE = "match the part number — nose cone / tooth count can differ"
+
+ENGINE_FAMILIES: dict[str, dict] = {
+    # ------------------------------------------------------------- Toyota
+    "toyota-22re": {
+        "display": "Toyota 22RE 2.4 I4 (EFI)",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Toyota", "Pickup", 1985, 1995),
+            ("Toyota", "4Runner", 1985, 1995),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "22RE only — the 3.0 V6 (3VZ-E) unit differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "toyota-5s": {
+        "display": "Toyota 5S-FE 2.2 I4",
+        "engine": {"liters": [2.2], "cyl": 4},
+        "apps": [
+            ("Toyota", "Camry", 1992, 2001),
+            ("Toyota", "Celica", 1994, 1999),
+            ("Toyota", "Solara", 1999, 2001),
+            ("Toyota", "MR2", 1991, 1995),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "4-cyl (5S-FE) unit — the V6 Camry unit differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "toyota-1mz": {
+        "display": "Toyota/Lexus 1MZ-FE 3.0 V6",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Toyota", "Camry", 1994, 2006),
+            ("Toyota", "Avalon", 1995, 2004, {"sole": True}),
+            ("Toyota", "Solara", 1999, 2003),
+            ("Toyota", "Sienna", 1998, 2003, {"sole": True}),
+            ("Toyota", "Highlander", 2001, 2003),
+            ("Lexus", "ES 300", 1994, 2003, {"sole": True}),
+            ("Lexus", "RX 300", 1999, 2003, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "V6 (1MZ) Denso unit, 97+ — match plug & amps (100A vs 130A tow pkg)"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "toyota-3mz": {
+        "display": "Toyota/Lexus 3MZ-FE 3.3 V6",
+        "engine": {"liters": [3.3], "cyl": 6},
+        "apps": [
+            ("Toyota", "Camry", 2004, 2006),
+            ("Toyota", "Solara", 2004, 2008),
+            ("Toyota", "Sienna", 2004, 2006, {"sole": True}),
+            ("Toyota", "Highlander", 2004, 2007),
+            ("Lexus", "ES 330", 2004, 2006, {"sole": True}),
+            ("Lexus", "RX 330", 2004, 2006, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "3.3 (3MZ) unit — the older 1MZ plug differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "toyota-2gr": {
+        "display": "Toyota/Lexus 2GR-FE 3.5 V6",
+        "engine": {"liters": [3.5], "cyl": 6},
+        "apps": [
+            ("Toyota", "Camry", 2007, 2017),
+            ("Toyota", "Avalon", 2005, 2018, {"sole": True}),
+            ("Toyota", "Sienna", 2007, 2016),
+            ("Toyota", "Highlander", 2008, 2016),
+            ("Toyota", "RAV4", 2006, 2012),
+            ("Toyota", "Venza", 2009, 2015),
+            ("Lexus", "ES 350", 2007, 2018, {"sole": True}),
+            ("Lexus", "RX 350", 2007, 2015, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "2GR-FE unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "toyota-2az": {
+        "display": "Toyota/Scion 2AZ-FE 2.4 I4",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Toyota", "Camry", 2002, 2009),
+            ("Toyota", "Solara", 2004, 2008),
+            ("Toyota", "RAV4", 2004, 2008),
+            ("Toyota", "Highlander", 2001, 2007),
+            ("Scion", "tC", 2005, 2010, {"sole": True}),
+            ("Scion", "xB", 2008, 2015, {"sole": True}),
+            ("Toyota", "Matrix", 2009, 2013),
+            ("Toyota", "Corolla", 2009, 2010),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "2AZ-FE unit — 4-cyl only, the V6 differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "toyota-2ar": {
+        "display": "Toyota/Scion 2AR-FE 2.5 I4",
+        "engine": {"liters": [2.5], "cyl": 4},
+        "apps": [
+            ("Toyota", "Camry", 2010, 2017),
+            ("Toyota", "RAV4", 2009, 2012),
+            ("Toyota", "RAV4", 2013, 2018, {"sole": True}),
+            ("Scion", "tC", 2011, 2016, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "2AR-FE unit — hybrid Camrys have no belt alternator; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "toyota-1zz": {
+        "display": "Toyota/Pontiac 1ZZ-FE 1.8 I4",
+        "engine": {"liters": [1.8], "cyl": 4},
+        "apps": [
+            ("Toyota", "Corolla", 1998, 2008, {"sole": True}),
+            ("Toyota", "Matrix", 2003, 2008),
+            ("Pontiac", "Vibe", 2003, 2008),
+            ("Toyota", "Celica", 2000, 2005),
+            ("Toyota", "MR2 Spyder", 2000, 2005, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "1ZZ-FE unit — the 2ZZ (Celica GT-S/XRS) differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "toyota-2zr": {
+        "display": "Toyota/Scion 2ZR-FE 1.8 I4",
+        "engine": {"liters": [1.8], "cyl": 4},
+        "apps": [
+            ("Toyota", "Corolla", 2009, 2010),
+            ("Toyota", "Corolla", 2011, 2019, {"sole": True}),
+            ("Toyota", "Matrix", 2009, 2013),
+            ("Pontiac", "Vibe", 2009, 2010),
+            ("Scion", "xD", 2008, 2014, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "2ZR-FE unit — Prius 1.8 (2ZR-FXE hybrid) has no belt alternator; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "toyota-2uz": {
+        "display": "Toyota/Lexus 2UZ-FE 4.7 V8",
+        "engine": {"liters": [4.7], "cyl": 8},
+        "apps": [
+            ("Toyota", "Tundra", 2000, 2009),
+            ("Toyota", "Sequoia", 2001, 2009),
+            ("Toyota", "Land Cruiser", 1998, 2007, {"sole": True}),
+            ("Toyota", "4Runner", 2003, 2009),
+            ("Lexus", "GX 470", 2003, 2009, {"sole": True}),
+            ("Lexus", "LX 470", 1998, 2007, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "2UZ unit — 05+ VVT-i brackets can differ, verify; " + _ALT_NOTE},
+            "starter": {"tier": "likely",
+                        "note": "under-intake starter on 2UZ — " + _STR_NOTE},
+        },
+    },
+    "toyota-1gr": {
+        "display": "Toyota 1GR-FE 4.0 V6",
+        "engine": {"liters": [4.0], "cyl": 6},
+        "apps": [
+            ("Toyota", "Tacoma", 2005, 2015),
+            ("Toyota", "4Runner", 2003, 2021),
+            ("Toyota", "Tundra", 2005, 2010),
+            ("Toyota", "FJ Cruiser", 2007, 2014, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "1GR unit — 2010+ dual-VVT-i revision, verify bracket/plug; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    # -------------------------------------------------------- Honda/Acura
+    "honda-d16": {
+        "display": "Honda D16 1.6 SOHC I4",
+        "engine": {"liters": [1.6], "cyl": 4},
+        "apps": [
+            ("Honda", "Civic", 1996, 2000),
+            ("Honda", "Civic del Sol", 1996, 1997),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "D16Y-era unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "honda-d17": {
+        "display": "Honda D17 1.7 I4",
+        "engine": {"liters": [1.7], "cyl": 4},
+        "apps": [
+            ("Honda", "Civic", 2001, 2005),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "D17 unit — hybrid & Si (2.0) differ; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "honda-r18": {
+        "display": "Honda R18 1.8 I4",
+        "engine": {"liters": [1.8], "cyl": 4},
+        "apps": [
+            ("Honda", "Civic", 2006, 2011),
+            ("Honda", "Civic", 2012, 2015),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "R18A (06–11) vs R18Z (12–15) — stay inside your window or match part number; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "honda-f23": {
+        "display": "Honda F23 2.3 I4",
+        "engine": {"liters": [2.3], "cyl": 4},
+        "apps": [
+            ("Honda", "Accord", 1998, 2002),
+            ("Acura", "CL", 1998, 1999),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "F23A unit — the V6 Accord unit differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "honda-k24a": {
+        "display": "Honda/Acura K24 2.4 I4 (02–09 era)",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Honda", "Accord", 2003, 2007),
+            ("Honda", "CR-V", 2002, 2009, {"sole": True}),
+            ("Honda", "Element", 2003, 2011, {"sole": True}),
+            ("Acura", "TSX", 2004, 2008, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "K24A-era Denso unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "honda-k24z": {
+        "display": "Honda/Acura K24Z 2.4 I4 (08–15 era)",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Honda", "Accord", 2008, 2012),
+            ("Honda", "CR-V", 2010, 2014, {"sole": True}),
+            ("Honda", "Civic", 2012, 2015),
+            ("Honda", "Crosstour", 2012, 2015),
+            ("Acura", "TSX", 2009, 2014, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "K24Z-era unit — earlier K24A plug/bracket can differ; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "honda-j30": {
+        "display": "Honda/Acura J30 3.0 V6 (Accord)",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Honda", "Accord", 1998, 2002),
+            ("Honda", "Accord", 2003, 2007),
+            ("Acura", "CL", 1997, 1999),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "J30A unit — 98–02 vs 03–07 generations differ, stay in your window; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "honda-j35-early": {
+        "display": "Honda J35 3.5 V6 (99–04 era)",
+        "engine": {"liters": [3.5], "cyl": 6},
+        "apps": [
+            ("Honda", "Odyssey", 1999, 2004, {"sole": True}),
+            ("Honda", "Pilot", 2003, 2005, {"sole": True}),
+            ("Acura", "MDX", 2001, 2006, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "J35A unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "honda-j35-mid": {
+        "display": "Honda J35 3.5 V6 (05–10 era)",
+        "engine": {"liters": [3.5], "cyl": 6},
+        "apps": [
+            ("Honda", "Odyssey", 2005, 2010, {"sole": True}),
+            ("Honda", "Pilot", 2006, 2008, {"sole": True}),
+            ("Honda", "Ridgeline", 2006, 2008, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "VCM-era J35A6/A7/A9 — match part number across VCM vs non-VCM; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "honda-j35-z": {
+        "display": "Honda J35Z/Y 3.5 V6 (08–17 era)",
+        "engine": {"liters": [3.5], "cyl": 6},
+        "apps": [
+            ("Honda", "Accord", 2008, 2012),
+            ("Honda", "Odyssey", 2011, 2017, {"sole": True}),
+            ("Honda", "Pilot", 2009, 2015, {"sole": True}),
+            ("Honda", "Ridgeline", 2009, 2014, {"sole": True}),
+            ("Honda", "Crosstour", 2010, 2015),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "J35Z-era unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "acura-j32": {
+        "display": "Acura J32 3.2 V6 (TL/CL)",
+        "engine": {"liters": [3.2], "cyl": 6},
+        "apps": [
+            ("Acura", "TL", 1999, 2008, {"sole": True}),
+            ("Acura", "CL", 2001, 2003, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "J32A unit — 99–03 vs 04–08 TL generations differ, stay in your window; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    # -------------------------------------------------------------- Nissan
+    "nissan-ka24": {
+        "display": "Nissan KA24DE 2.4 I4",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Nissan", "Altima", 1993, 2001, {"sole": True}),
+            ("Nissan", "240SX", 1991, 1998, {"sole": True}),
+            ("Nissan", "Frontier", 1998, 2004),
+            ("Nissan", "Xterra", 2000, 2004),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "KA24DE unit — truck vs car brackets can differ, verify; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "nissan-qr25": {
+        "display": "Nissan QR25DE 2.5 I4",
+        "engine": {"liters": [2.5], "cyl": 4},
+        "apps": [
+            ("Nissan", "Altima", 2002, 2018),
+            ("Nissan", "Sentra", 2002, 2006),
+            ("Nissan", "Rogue", 2008, 2020, {"sole": True}),
+            ("Nissan", "Frontier", 2005, 2019),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "QR25 unit — 02–06 vs 07+ plugs differ, stay in your window or match part number"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "nissan-vq35de": {
+        "display": "Nissan/Infiniti VQ35DE 3.5 V6",
+        "engine": {"liters": [3.5], "cyl": 6},
+        "apps": [
+            ("Nissan", "Altima", 2002, 2006),
+            ("Nissan", "Maxima", 2002, 2008, {"sole": True}),
+            ("Nissan", "Murano", 2003, 2014, {"sole": True}),
+            ("Nissan", "Pathfinder", 2001, 2004),
+            ("Nissan", "Quest", 2004, 2009, {"sole": True}),
+            ("Nissan", "350Z", 2003, 2006, {"sole": True}),
+            ("Infiniti", "G35", 2003, 2006, {"sole": True}),
+            ("Infiniti", "I35", 2002, 2004, {"sole": True}),
+            ("Infiniti", "FX35", 2003, 2008, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "VQ35DE unit — 07+ HR-block cars differ; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "nissan-vq40": {
+        "display": "Nissan VQ40DE 4.0 V6",
+        "engine": {"liters": [4.0], "cyl": 6},
+        "apps": [
+            ("Nissan", "Pathfinder", 2005, 2012),
+            ("Nissan", "Frontier", 2005, 2019),
+            ("Nissan", "Xterra", 2005, 2015, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "VQ40 unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "nissan-mr18": {
+        "display": "Nissan MR18DE 1.8 I4",
+        "engine": {"liters": [1.8], "cyl": 4},
+        "apps": [
+            ("Nissan", "Versa", 2007, 2012),
+            ("Nissan", "Cube", 2009, 2014, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "MR18 unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "nissan-hr16": {
+        "display": "Nissan HR16DE 1.6 I4",
+        "engine": {"liters": [1.6], "cyl": 4},
+        "apps": [
+            ("Nissan", "Versa", 2012, 2019),
+            ("Nissan", "Versa Note", 2014, 2019, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "HR16 unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    # ---------------------------------------------------------------- Ford
+    "ford-46-2v": {
+        "display": "Ford 4.6 2V Modular V8",
+        "engine": {"liters": [4.6], "cyl": 8},
+        "apps": [
+            ("Ford", "F-150", 1997, 2008),
+            ("Ford", "Expedition", 1997, 2004),
+            ("Ford", "Crown Victoria", 1992, 2011, {"sole": True}),
+            ("Mercury", "Grand Marquis", 1992, 2011, {"sole": True}),
+            ("Lincoln", "Town Car", 1991, 2011, {"sole": True}),
+            ("Ford", "Mustang", 1996, 2004),
+            ("Ford", "Explorer", 2002, 2005),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "truck vs Panther vs Mustang brackets/plugs differ by era — match part number"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "ford-54-2v": {
+        "display": "Ford 5.4 2V Triton V8",
+        "engine": {"liters": [5.4], "cyl": 8},
+        "apps": [
+            ("Ford", "F-150", 1997, 2003),
+            ("Ford", "Expedition", 1997, 2004),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "shared with the 4.6 truck unit in most years — match plug & amps"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "ford-54-3v": {
+        "display": "Ford 5.4 3V Triton V8",
+        "engine": {"liters": [5.4], "cyl": 8},
+        "apps": [
+            ("Ford", "F-150", 2004, 2010),
+            ("Ford", "Expedition", 2005, 2014),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "3V-era unit — the 97–03 2V unit differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "ford-vulcan30": {
+        "display": "Ford 3.0 Vulcan V6",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Ford", "Taurus", 1986, 2007,
+             {"ambig": "Taurus also offered DOHC 3.0 V6s (Duratec) — same decode string; confirm which 3.0 before buying"}),
+            ("Mercury", "Sable", 1986, 2005,
+             {"ambig": "Sable also offered the Duratec 3.0 — same decode string; confirm which 3.0"}),
+            ("Ford", "Ranger", 1991, 2008),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "pushrod Vulcan unit — Duratec DOHC 3.0 does NOT interchange; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "ford-duratec30": {
+        "display": "Ford/Mazda Duratec 3.0 DOHC V6",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Ford", "Fusion", 2006, 2012),
+            ("Ford", "Escape", 2001, 2012),
+            ("Mercury", "Milan", 2006, 2011),
+            ("Mercury", "Mariner", 2005, 2011),
+            ("Mazda", "Tribute", 2001, 2011),
+            ("Ford", "Five Hundred", 2005, 2007, {"sole": True}),
+            ("Mercury", "Montego", 2005, 2007, {"sole": True}),
+            ("Ford", "Taurus", 1996, 2007,
+             {"ambig": "Taurus 3.0s split Vulcan (pushrod) vs Duratec (DOHC) — same decode string; confirm DOHC before buying"}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "DOHC Duratec unit — Vulcan pushrod 3.0 does NOT interchange; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "ford-mzr": {
+        "display": "Ford/Mazda MZR-Duratec 2.0/2.3/2.5 I4",
+        "engine": {"liters": [2.0, 2.3, 2.5], "cyl": 4},
+        "apps": [
+            ("Ford", "Fusion", 2006, 2012),
+            ("Ford", "Escape", 2005, 2012),
+            ("Ford", "Focus", 2005, 2011),
+            ("Mazda", "Mazda3", 2004, 2013),
+            ("Mazda", "Mazda6", 2003, 2013),
+            ("Mercury", "Milan", 2006, 2011),
+            ("Mercury", "Mariner", 2005, 2011),
+            ("Mazda", "Tribute", 2005, 2011),
+            ("Ford", "Ranger", 2001, 2011),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "MZR family — displacement variants share accessories in most years, but verify plug & pulley; turbo (Mazdaspeed/EcoBoost) differs"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "ford-cyclone": {
+        "display": "Ford 3.5/3.7 Cyclone V6 (non-turbo)",
+        "engine": {"liters": [3.5, 3.7], "cyl": 6},
+        "apps": [
+            ("Ford", "Edge", 2007, 2014),
+            ("Ford", "Taurus", 2008, 2019,
+             {"ambig": "SHO is the 3.5 EcoBoost twin-turbo — same decode string; confirm non-turbo"}),
+            ("Ford", "Explorer", 2011, 2019,
+             {"ambig": "Explorer Sport/Platinum is 3.5 EcoBoost — same decode string; confirm non-turbo"}),
+            ("Ford", "Flex", 2009, 2019,
+             {"ambig": "Flex EcoBoost shares the 3.5 decode string; confirm non-turbo"}),
+            ("Ford", "Mustang", 2011, 2017),
+            ("Ford", "F-150", 2011, 2014),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "non-turbo Cyclone unit — EcoBoost accessories differ; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "ford-40sohc": {
+        "display": "Ford 4.0 SOHC V6",
+        "engine": {"liters": [4.0], "cyl": 6},
+        "apps": [
+            ("Ford", "Explorer", 1997, 2000,
+             {"ambig": "97–00 Explorers split 4.0 OHV vs 4.0 SOHC — same decode string; confirm SOHC"}),
+            ("Ford", "Explorer", 2001, 2010),
+            ("Ford", "Explorer Sport Trac", 2001, 2010),
+            ("Ford", "Ranger", 2001, 2011),
+            ("Ford", "Mustang", 2005, 2010),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "SOHC unit — the older OHV 4.0 differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "ford-3g-50": {
+        "display": "Ford 5.0/5.8 Windsor V8 (3G era)",
+        "engine": {"liters": [5.0, 5.8], "cyl": 8},
+        "apps": [
+            ("Ford", "Mustang", 1987, 1995),
+            ("Ford", "F-150", 1987, 1996),
+            ("Ford", "Bronco", 1987, 1996),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "2G/3G era — many swap UP to the 130A 3G; match case style & plug"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    # ------------------------------------------------------------------ GM
+    "gm-ecotec22": {
+        "display": "GM Ecotec 2.2 I4 (L61)",
+        "engine": {"liters": [2.2], "cyl": 4},
+        "apps": [
+            ("Chevrolet", "Cavalier", 2002, 2005),
+            ("Chevrolet", "Cobalt", 2005, 2010),
+            ("Chevrolet", "Malibu", 2004, 2008),
+            ("Chevrolet", "HHR", 2006, 2010),
+            ("Saturn", "ION", 2003, 2007),
+            ("Pontiac", "G5", 2007, 2009),
+            ("Pontiac", "Sunfire", 2002, 2005),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "L61 Ecotec unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "gm-ecotec24": {
+        "display": "GM Ecotec 2.4 I4 (LE5/LE9/LEA)",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Chevrolet", "Cobalt", 2006, 2010),
+            ("Chevrolet", "Malibu", 2008, 2012),
+            ("Chevrolet", "Equinox", 2010, 2017),
+            ("Chevrolet", "HHR", 2008, 2010),
+            ("GMC", "Terrain", 2010, 2017),
+            ("Pontiac", "G6", 2006, 2009),
+            ("Chevrolet", "Captiva Sport", 2012, 2015),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "Ecotec 2.4 unit — direct-injection (LEA/LUK) era plugs can differ; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "gm-14t": {
+        "display": "GM 1.4 Turbo I4 (LUJ/LUV)",
+        "engine": {"liters": [1.4], "cyl": 4},
+        "apps": [
+            ("Chevrolet", "Cruze", 2011, 2015),
+            ("Chevrolet", "Sonic", 2012, 2018),
+            ("Buick", "Encore", 2013, 2021),
+            ("Chevrolet", "Trax", 2013, 2021),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "gen-1 1.4T unit — the 16+ Cruze (LE2) differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "gm-gen3-truck": {
+        "display": "GM Gen III Vortec truck V8 (4.8/5.3/6.0)",
+        "engine": {"liters": [4.8, 5.3, 6.0], "cyl": 8},
+        "apps": [
+            ("Chevrolet", "Silverado*", 1999, 2007),
+            ("GMC", "Sierra*", 1999, 2007),
+            ("Chevrolet", "Tahoe", 2000, 2006),
+            ("GMC", "Yukon*", 2000, 2006),
+            ("Chevrolet", "Suburban*", 2000, 2006),
+            ("Chevrolet", "Avalanche", 2002, 2006),
+            ("Cadillac", "Escalade*", 2002, 2006),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "4.8/5.3/6.0 share brackets — match amps (105 vs 145) & plug; diesel/8.1 differ"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "gm-gen4-truck": {
+        "display": "GM Gen IV Vortec truck V8 (4.8/5.3/6.0/6.2)",
+        "engine": {"liters": [4.8, 5.3, 6.0, 6.2], "cyl": 8},
+        "apps": [
+            ("Chevrolet", "Silverado*", 2007, 2013),
+            ("GMC", "Sierra*", 2007, 2013),
+            ("Chevrolet", "Tahoe", 2007, 2014),
+            ("GMC", "Yukon*", 2007, 2014),
+            ("Chevrolet", "Suburban*", 2007, 2014),
+            ("Chevrolet", "Avalanche", 2007, 2013),
+            ("Cadillac", "Escalade*", 2007, 2014),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "GMT900-era unit — match amps & 2-pin plug; the 07 'Classic' body keeps Gen III parts"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "gm-atlas42": {
+        "display": "GM Atlas 4.2 I6 (LL8)",
+        "engine": {"liters": [4.2], "cyl": 6},
+        "apps": [
+            ("Chevrolet", "Trailblazer", 2002, 2009),
+            ("GMC", "Envoy", 2002, 2009),
+            ("Oldsmobile", "Bravada", 2002, 2004, {"sole": True}),
+            ("Buick", "Rainier", 2004, 2007),
+            ("Saab", "9-7x", 2005, 2009),
+            ("Isuzu", "Ascender", 2003, 2008),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "LL8 unit shared across the GMT360 twins; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "gm-3800": {
+        "display": "GM 3800 Series II/III V6",
+        "engine": {"liters": [3.8], "cyl": 6},
+        "apps": [
+            ("Buick", "Lesabre", 1996, 2005, {"sole": True}),
+            ("Pontiac", "Grand Prix", 1997, 2008),
+            ("Pontiac", "Bonneville", 1996, 2005),
+            ("Chevrolet", "Impala", 2000, 2005),
+            ("Chevrolet", "Monte Carlo", 1998, 2005),
+            ("Buick", "Regal", 1997, 2004, {"sole": True}),
+            ("Buick", "Park Avenue", 1997, 2005, {"sole": True}),
+            ("Buick", "Lucerne", 2006, 2008),
+            ("Buick", "Lacrosse", 2005, 2009),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "NA 3800 unit — supercharged (GTP/SSEi) accessories differ; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "gm-60deg": {
+        "display": "GM 60° 3.1/3.4 V6",
+        "engine": {"liters": [3.1, 3.4], "cyl": 6},
+        "apps": [
+            ("Chevrolet", "Venture", 1997, 2005, {"sole": True}),
+            ("Pontiac", "Montana", 1999, 2005, {"sole": True}),
+            ("Pontiac", "Grand Am", 1999, 2005),
+            ("Oldsmobile", "Alero", 1999, 2004),
+            ("Chevrolet", "Impala", 2000, 2005),
+            ("Chevrolet", "Monte Carlo", 2000, 2005),
+            ("Chevrolet", "Malibu", 1997, 2005),
+            ("Buick", "Century", 1997, 2005, {"sole": True}),
+            ("Pontiac", "Aztek", 2001, 2005, {"sole": True}),
+            ("Buick", "Rendezvous", 2002, 2007),
+            ("Chevrolet", "Equinox", 2005, 2009),
+            ("Pontiac", "Torrent", 2006, 2009),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "3.1/3.4 60° family shares mounts in most years — match plug & amps"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "gm-hv-v6": {
+        "display": "GM High Value 3.5/3.9 V6",
+        "engine": {"liters": [3.5, 3.9], "cyl": 6},
+        "apps": [
+            ("Chevrolet", "Impala", 2006, 2011),
+            ("Chevrolet", "Monte Carlo", 2006, 2007),
+            ("Chevrolet", "Malibu", 2004, 2010),
+            ("Pontiac", "G6", 2005, 2009),
+            ("Chevrolet", "Uplander", 2005, 2009),
+            ("Buick", "Terraza", 2005, 2007),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "LZ-series unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "gm-llt36": {
+        "display": "GM 3.6 DI V6 (LLT/LFX)",
+        "engine": {"liters": [3.6], "cyl": 6},
+        "apps": [
+            ("Chevrolet", "Traverse", 2009, 2017, {"sole": True}),
+            ("GMC", "Acadia", 2007, 2016, {"sole": True}),
+            ("Buick", "Enclave", 2008, 2017, {"sole": True}),
+            ("Saturn", "Outlook", 2007, 2010, {"sole": True}),
+            ("Chevrolet", "Impala", 2012, 2019),
+            ("Chevrolet", "Camaro", 2010, 2015),
+            ("Chevrolet", "Equinox", 2013, 2017),
+            ("GMC", "Terrain", 2013, 2017),
+            ("Buick", "Lacrosse", 2010, 2016),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "LLT vs LFX bracket/plug can differ by year — match part number"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    # ------------------------------------------------------- Chrysler/Jeep
+    "mopar-pentastar": {
+        "display": "Chrysler Pentastar 3.6 V6",
+        "engine": {"liters": [3.6], "cyl": 6},
+        "apps": [
+            ("Dodge", "Grand Caravan", 2011, 2020, {"sole": True}),
+            ("Chrysler", "Town & Country", 2011, 2016, {"sole": True}),
+            ("Dodge", "Journey", 2011, 2020),
+            ("Dodge", "Avenger", 2011, 2014),
+            ("Chrysler", "200", 2011, 2017),
+            ("Dodge", "Charger", 2011, 2023),
+            ("Dodge", "Challenger", 2011, 2023),
+            ("Chrysler", "300", 2011, 2023),
+            ("Dodge", "Durango", 2011, 2024),
+            ("Jeep", "Grand Cherokee", 2011, 2021),
+            ("Jeep", "Wrangler", 2012, 2018),
+            ("Dodge|Ram", "Ram*", 2013, 2024),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "Pentastar unit — 160/180/220A variants and RWD vs FWD brackets; match part number"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "mopar-world24": {
+        "display": "Chrysler World/GEMA 2.4 I4",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Dodge", "Avenger", 2008, 2014),
+            ("Chrysler", "200", 2011, 2014),
+            ("Dodge", "Journey", 2009, 2020),
+            ("Dodge", "Caliber", 2007, 2012),
+            ("Jeep", "Patriot", 2007, 2017),
+            ("Jeep", "Compass", 2007, 2017),
+            ("Chrysler", "Sebring", 2007, 2010),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "GEMA 2.4 unit — the 15+ Tigershark 2.4 (200/Dart/Cherokee) differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "mopar-minivan": {
+        "display": "Chrysler 3.3/3.8 OHV V6",
+        "engine": {"liters": [3.3, 3.8], "cyl": 6},
+        "apps": [
+            ("Dodge", "Caravan", 1996, 2007),
+            ("Dodge", "Grand Caravan", 1996, 2010),
+            ("Chrysler", "Town & Country", 1996, 2010),
+            ("Plymouth|Chrysler", "Voyager", 1996, 2003),
+            ("Jeep", "Wrangler", 2007, 2011),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "3.3/3.8 share accessories in most years — match plug & amps; JK Wrangler bracket same engine"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "mopar-47": {
+        "display": "Chrysler PowerTech 4.7 V8",
+        "engine": {"liters": [4.7], "cyl": 8},
+        "apps": [
+            ("Jeep", "Grand Cherokee", 1999, 2009),
+            ("Dodge", "Dakota", 2000, 2011),
+            ("Dodge", "Durango", 2000, 2009),
+            ("Dodge|Ram", "Ram*", 2002, 2013),
+            ("Jeep", "Commander", 2006, 2009),
+            ("Chrysler", "Aspen", 2007, 2009),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "4.7 PowerTech unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "mopar-37": {
+        "display": "Chrysler PowerTech 3.7 V6",
+        "engine": {"liters": [3.7], "cyl": 6},
+        "apps": [
+            ("Jeep", "Liberty", 2002, 2012),
+            ("Dodge", "Dakota", 2004, 2011),
+            ("Dodge|Ram", "Ram*", 2002, 2012),
+            ("Jeep", "Grand Cherokee", 2005, 2010),
+            ("Dodge", "Nitro", 2007, 2011),
+            ("Jeep", "Commander", 2006, 2010),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "3.7 PowerTech unit (shares architecture with the 4.7); " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "jeep-40": {
+        "display": "Jeep 4.0 I6",
+        "engine": {"liters": [4.0], "cyl": 6},
+        "apps": [
+            ("Jeep", "Grand Cherokee", 1993, 2004),
+            ("Jeep", "Cherokee", 1991, 2001),
+            ("Jeep", "Wrangler", 1991, 2006),
+            ("Jeep", "Comanche", 1991, 1992),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "4.0 HO era — 91–98 vs 99–06 units differ, stay in your window; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "mopar-hemi57": {
+        "display": "Chrysler 5.7 HEMI V8",
+        "engine": {"liters": [5.7], "cyl": 8},
+        "apps": [
+            ("Dodge|Ram", "Ram*", 2003, 2024),
+            ("Dodge", "Charger", 2006, 2023),
+            ("Dodge", "Challenger", 2009, 2023),
+            ("Chrysler", "300", 2005, 2023),
+            ("Dodge", "Magnum", 2005, 2008),
+            ("Jeep", "Grand Cherokee", 2005, 2021),
+            ("Dodge", "Durango", 2011, 2023),
+            ("Jeep", "Commander", 2006, 2009),
+            ("Chrysler", "Aspen", 2007, 2009),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "03–08 vs 09+ Eagle HEMI accessories differ — stay in your window & match part number"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "mopar-magnum": {
+        "display": "Dodge Magnum 5.2/5.9 V8",
+        "engine": {"liters": [5.2, 5.9], "cyl": 8},
+        "apps": [
+            ("Dodge|Ram", "Ram*", 1994, 2001),
+            ("Dodge", "Dakota", 1992, 2003),
+            ("Dodge", "Durango", 1998, 2003),
+            ("Jeep", "Grand Cherokee", 1993, 1998),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "5.2/5.9 Magnum V8 only — the 5.9 Cummins (6-cyl) is a different world; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    # ---------------------------------------------------------- Hyundai/Kia
+    "hk-theta-mpi": {
+        "display": "Hyundai/Kia Theta 2.4 MPI I4",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Sonata", 2006, 2010),
+            ("Kia", "Optima", 2006, 2010),
+            ("Kia", "Rondo", 2007, 2010),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "port-injected Theta — the 11+ GDI unit differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "hk-theta-gdi": {
+        "display": "Hyundai/Kia Theta II 2.4 GDI I4",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Sonata", 2011, 2019),
+            ("Kia", "Optima", 2011, 2020),
+            ("Hyundai", "Santa Fe Sport", 2013, 2018),
+            ("Kia", "Sorento", 2011, 2020),
+            ("Kia", "Sportage", 2011, 2016),
+            ("Hyundai", "Tucson", 2010, 2015),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "GDI-era Theta II — port-injected 06–10 unit differs; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "hk-nu": {
+        "display": "Hyundai/Kia Nu 1.8/2.0 I4",
+        "engine": {"liters": [1.8, 2.0], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Elantra", 2011, 2020),
+            ("Kia", "Soul", 2012, 2019),
+            ("Kia", "Forte", 2014, 2018),
+            ("Hyundai", "Tucson", 2016, 2021),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "Nu family — 1.8 MPI vs 2.0 GDI variants; match part number"},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "hk-gamma16": {
+        "display": "Hyundai/Kia Gamma 1.6 I4",
+        "engine": {"liters": [1.6], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Accent", 2012, 2017),
+            ("Kia", "Rio", 2012, 2017),
+            ("Kia", "Soul", 2012, 2019),
+            ("Hyundai", "Veloster", 2012, 2017),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "Gamma GDI unit — turbo Veloster accessories differ; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "hk-beta20": {
+        "display": "Hyundai/Kia Beta II 2.0 I4",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Elantra", 2001, 2010),
+            ("Hyundai", "Tiburon", 2003, 2008),
+            ("Hyundai", "Tucson", 2005, 2009),
+            ("Kia", "Sportage", 2005, 2010),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "Beta II unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    # --------------------------------------------------------------- Subaru
+    "subaru-ej25na": {
+        "display": "Subaru EJ25 2.5 SOHC H4 (non-turbo)",
+        "engine": {"liters": [2.5], "cyl": 4},
+        "apps": [
+            ("Subaru", "Outback", 2000, 2009,
+             {"ambig": "XT models are the turbo EJ255 — same 2.5 decode string; confirm non-turbo"}),
+            ("Subaru", "Legacy", 2000, 2009,
+             {"ambig": "GT models are the turbo EJ255 — same 2.5 decode string; confirm non-turbo"}),
+            ("Subaru", "Forester", 1999, 2010,
+             {"ambig": "XT models are the turbo EJ255 — same 2.5 decode string; confirm non-turbo"}),
+            ("Subaru", "Impreza", 2006, 2011,
+             {"ambig": "WRX/turbo models share the 2.5 decode string; confirm non-turbo"}),
+            ("Subaru", "Baja", 2003, 2006,
+             {"ambig": "Baja Turbo shares the 2.5 decode string; confirm non-turbo"}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "NA SOHC EJ25 unit — turbo cars route differently; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "subaru-ej25t": {
+        "display": "Subaru EJ255/EJ257 2.5 turbo H4",
+        "engine": {"liters": [2.5], "cyl": 4},
+        "apps": [
+            ("Subaru", "Impreza", 2006, 2014,
+             {"ambig": "only WRX/STI trims carry the turbo EJ — confirm turbo before buying"}),
+            ("Subaru", "WRX", 2008, 2014, {"sole": True}),
+            ("Subaru", "Impreza WRX", 2006, 2014, {"sole": True}),
+            ("Subaru", "Forester", 2004, 2013,
+             {"ambig": "only XT trims are turbo — confirm before buying"}),
+            ("Subaru", "Legacy", 2005, 2012,
+             {"ambig": "only GT trims are turbo — confirm before buying"}),
+            ("Subaru", "Outback", 2005, 2009,
+             {"ambig": "only XT trims are turbo — confirm before buying"}),
+            ("Subaru", "Baja", 2004, 2006,
+             {"ambig": "only Baja Turbo is turbo — confirm before buying"}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "turbo EJ unit; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "subaru-fb25": {
+        "display": "Subaru FB25 2.5 H4",
+        "engine": {"liters": [2.5], "cyl": 4},
+        "apps": [
+            ("Subaru", "Forester", 2011, 2018,
+             {"ambig": "11–13 XT is the turbo EJ255 — same 2.5 decode string; confirm FB non-turbo"}),
+            ("Subaru", "Outback", 2013, 2019, {"sole": True}),
+            ("Subaru", "Legacy", 2013, 2019, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "FB25 unit — the EJ-era unit does NOT carry over; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    "subaru-fa20dit": {
+        "display": "Subaru FA20DIT 2.0 turbo H4",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Subaru", "WRX", 2015, 2021, {"sole": True}),
+            ("Subaru", "Forester", 2014, 2018,
+             {"ambig": "only 2.0XT trims carry the FA20DIT — base Foresters are the 2.5 FB; confirm turbo"}),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "FA20DIT unit — the NA FA20 (BRZ) and FB engines differ; " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+    # ------------------------------------------------------------------ VW
+    "vw-25": {
+        "display": "VW 2.5 I5",
+        "engine": {"liters": [2.5], "cyl": 5},
+        "apps": [
+            ("Volkswagen", "Jetta", 2005, 2014),
+            ("Volkswagen", "Rabbit", 2006, 2009, {"sole": True}),
+            ("Volkswagen", "Golf", 2010, 2014),
+            ("Volkswagen", "Beetle", 2012, 2014),
+            ("Volkswagen", "Passat", 2012, 2014),
+        ],
+        "parts": {
+            "alternator": {"tier": "likely",
+                           "note": "5-cyl unit (the decode's '5-cyl' is the tell); " + _ALT_NOTE},
+            "starter": {"tier": "likely", "note": _STR_NOTE},
+        },
+    },
+}
+
+
+def _parse_engine_str(s: str) -> tuple[float | None, int | None]:
+    """('2.4L 4-cyl Flexible Fuel...' -> (2.4, 4)); (None, None) when the
+    string carries neither. Diesel/Electric markers are NOT handled here —
+    callers that must exclude them check the raw string."""
+    if not s:
+        return None, None
+    sl = s.lower()
+    m = re.search(r"(\d+\.\d+)\s*l", sl)
+    liters = float(m.group(1)) if m else None
+    m = re.search(r"(\d+)[\s-]*cyl", sl)
+    cyl = int(m.group(1)) if m else None
+    return liters, cyl
+
+
+def _squash_model(model: str, make: str = "") -> str:
+    """Matching key for feed model spellings: lowercase alphanumerics, any
+    leading make token dropped ('Ford F150 Pickup' -> 'f150pickup' ->
+    'f150'), a trailing 'pickup' dropped when something remains."""
+    sm = re.sub(r"[^a-z0-9]", "", (model or "").lower())
+    mk = re.sub(r"[^a-z0-9]", "", (make or "").lower())
+    if mk and sm.startswith(mk) and len(sm) > len(mk):
+        sm = sm[len(mk):]
+    if sm.endswith("pickup") and len(sm) > len("pickup"):
+        sm = sm[: -len("pickup")]
+    return sm
+
+
+def _app_matches(app: tuple, year: int, make: str, model: str) -> bool:
+    a_make, a_model, lo, hi = app[0], app[1], app[2], app[3]
+    if not (lo <= year <= hi):
+        return False
+    mk = (make or "").lower()
+    if mk not in (m.lower() for m in a_make.split("|")):
+        return False
+    sm = _squash_model(model, make)
+    am = re.sub(r"[^a-z0-9]", "", a_model.rstrip("*").lower())
+    return sm.startswith(am) if a_model.endswith("*") else sm == am
+
+
+def _app_flags(app: tuple) -> dict:
+    return app[4] if len(app) > 4 else {}
+
+
+def engine_families_for(year: int, make: str, model: str) -> list[tuple[str, dict, tuple]]:
+    """All (family_id, family, matching app) for a seeker's car. More than one
+    result means the model offered several family engines in that year — the
+    UI must ask which engine the seeker has."""
+    out = []
+    for fam_id, fam in ENGINE_FAMILIES.items():
+        for app in fam["apps"]:
+            if _app_matches(app, year, make, model):
+                out.append((fam_id, fam, app))
+                break
+    return out
+
+
+def engine_matches_family(engine_str: str, fam: dict) -> bool | None:
+    """True/False when the decode string confirms/denies the family engine;
+    None when there's no usable engine data. Diesel strings always deny —
+    no family here covers one."""
+    if engine_str and "diesel" in engine_str.lower():
+        return False
+    liters, cyl = _parse_engine_str(engine_str)
+    if liters is None:
+        return None
+    spec = fam["engine"]
+    if not any(abs(liters - want) < 0.05 for want in spec["liters"]):
+        return False
+    want_cyl = spec.get("cyl")
+    if cyl is not None and want_cyl is not None and cyl != want_cyl:
+        return False
+    return True
+
+
+def _lint_engine_families() -> list[str]:
+    problems: list[str] = []
+    for fam_id, fam in ENGINE_FAMILIES.items():
+        if not fam.get("display"):
+            problems.append(f"{fam_id}: missing display")
+        spec = fam.get("engine") or {}
+        liters = spec.get("liters") or []
+        if not liters or not all(isinstance(x, float) and 0.5 <= x <= 8.5 for x in liters):
+            problems.append(f"{fam_id}: bad liters {liters!r}")
+        if spec.get("cyl") not in (3, 4, 5, 6, 8, 10):
+            problems.append(f"{fam_id}: bad cyl {spec.get('cyl')!r}")
+        apps = fam.get("apps") or []
+        if not apps:
+            problems.append(f"{fam_id}: no apps")
+        for app in apps:
+            if len(app) not in (4, 5) or not app[0] or not app[1]:
+                problems.append(f"{fam_id}: malformed app {app!r}")
+                continue
+            if not (1950 <= app[2] <= app[3] <= 2027):
+                problems.append(f"{fam_id}: bad years in app {app!r}")
+            flags = _app_flags(app)
+            if flags.get("sole") and flags.get("ambig"):
+                problems.append(
+                    f"{fam_id}: app {app[:2]} can't be both sole and ambig")
+        parts = fam.get("parts") or {}
+        if not parts:
+            problems.append(f"{fam_id}: no parts")
+        for cat, p in parts.items():
+            pc = INTERCHANGE_PART_CATEGORIES.get(cat)
+            if not pc or pc["kind"] != "engine":
+                problems.append(f"{fam_id}: {cat!r} is not an engine part category")
+            if p.get("tier") not in ("verified", "likely"):
+                problems.append(f"{fam_id}: {cat} bad tier {p.get('tier')!r}")
+            if not p.get("note"):
+                problems.append(f"{fam_id}: {cat} missing honesty note")
+            if p.get("tier") == "verified" and len(p.get("evidence", "")) < 20:
+                problems.append(
+                    f"{fam_id}: {cat} verified without evidence citation")
+    return problems
+
+
+_engine_family_problems = _lint_engine_families()
+if _engine_family_problems:
+    raise ValueError(
+        "ENGINE_FAMILIES lint failed:\n  " + "\n  ".join(_engine_family_problems))
+
+
+# Platform-family keys whose UNOBTANIUM_DB key doesn't directly name the
+# feed's (make, model): resolved here for the part-first export. Model may
+# use the trailing-* prefix convention.
+_PLATFORM_KEY_EXPORT: dict[str, tuple[str, str]] = {
+    "chrysler 300": ("Chrysler", "300*"),
+    "lexus es": ("Lexus", "ES*"),
+    "rx": ("Lexus", "RX*"),
+    "bmw 1": ("BMW", "1 Series*"),
+    "bmw 3": ("BMW", "3 Series*"),
+    "audi a4": ("Audi", "A4"),
+    "audi a5": ("Audi", "A5"),
+    "audi q5": ("Audi", "Q5"),
+    "acura tl": ("Acura", "TL"),
+    "toyota pickup": ("Toyota", "Pickup"),
+    "c/k": ("Chevrolet", "C/K*"),
+    "k1500": ("Chevrolet", "K1500*"),
+}
+
+
+def _platform_member_app(key: str) -> tuple[str, str] | None:
+    """(make, model_pattern) for an UNOBTANIUM_DB member key, or None when
+    the key can't be resolved to a feed model."""
+    if key in _PLATFORM_KEY_EXPORT:
+        return _PLATFORM_KEY_EXPORT[key]
+    info = UNOBTANIUM_DB.get(key)
+    if not info or not info.get("make"):
+        return None
+    model = re.sub(r"\s+\d{4}-\d{4}$", "", key).strip()
+    return (info["make"], model)
+
+
+def _category_for_part_name(name: str) -> str | None:
+    nl = name.lower()
+    for cat, pc in INTERCHANGE_PART_CATEGORIES.items():
+        if pc["kind"] == "body" and any(t in nl for t in pc["tokens"]):
+            return cat
+    return None
+
+
+def build_interchange_payload() -> dict:
+    """The part-first search table shipped to the app as
+    docs/data/interchange.json. Pure curated data — no scan required."""
+    cats = [
+        {"id": cid, "label": pc["label"], "kind": pc["kind"],
+         "tokens": pc["tokens"], "priceTokens": pc["priceTokens"]}
+        for cid, pc in INTERCHANGE_PART_CATEGORIES.items()
+    ]
+    fams = []
+    for fam_id, fam in ENGINE_FAMILIES.items():
+        fams.append({
+            "id": fam_id,
+            "label": fam["display"],
+            "liters": fam["engine"]["liters"],
+            "cyl": fam["engine"]["cyl"],
+            "apps": [
+                [a[0], a[1], a[2], a[3],
+                 1 if _app_flags(a).get("sole") else 0,
+                 _app_flags(a).get("ambig", "")]
+                for a in fam["apps"]
+            ],
+            "parts": {
+                cat: {"tier": p["tier"], "note": p["note"]}
+                for cat, p in fam["parts"].items()
+            },
+        })
+    groups = []
+    for fam_id, fam in PLATFORM_FAMILIES.items():
+        for gi, grp in enumerate(fam["shared"]):
+            if grp.get("donor"):
+                continue  # one-way swap provenance: donors aren't enumerable
+            cat = _category_for_part_name(grp["part"])
+            if cat is None:
+                continue  # no part-first category for this group
+            apps = []
+            for k, (lo, hi) in grp["members"].items():
+                resolved = _platform_member_app(k)
+                if resolved is None:
+                    apps = []
+                    break
+                apps.append([resolved[0], resolved[1], lo, hi])
+            if not apps:
+                continue
+            groups.append({
+                "id": f"{fam_id}#{gi}",
+                "label": fam["display"],
+                "cat": cat,
+                "tier": "verified",   # two-way groups are hand-verified (see research notes)
+                "note": grp.get("note", ""),
+                "apps": apps,
+            })
+    return {
+        "schemaVersion": 1,
+        "builtAt": _iso_utc_z_interchange(),
+        "categories": cats,
+        "engineFamilies": fams,
+        "platformGroups": groups,
+    }
+
+
+def _iso_utc_z_interchange() -> str:
+    # Local copy: _iso_utc_z is defined later in the file (module ordering).
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def write_interchange_payload() -> None:
+    out = DATA_DIR / "interchange.json"
+    out.write_text(json.dumps(build_interchange_payload(),
+                              separators=(",", ":")) + "\n")
+    print(f"  [interchange] wrote {out}", file=sys.stderr)
+
+
 # ---------------------------------------------------------------------------
 # Sell-channel guide — where each part actually moves and how fast.
 # Keyed by lowercase substring found in part name.  Checked longest-match-first.
@@ -13500,6 +14922,7 @@ def main():
                          "extras": extras}, separators=(",", ":")))
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})")
                     print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}")
+                    write_interchange_payload()
                     _update_yard_health(payload)
                     _record_scan_to_db(vehicles, payload["scrapedAt"])
                 if args.json:
@@ -13541,6 +14964,7 @@ def main():
                 if not args.json:
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})", file=sys.stderr)
                     print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}", file=sys.stderr)
+                write_interchange_payload()
                 _update_yard_health(payload)
                 _record_scan_to_db(vehicles, payload["scrapedAt"])
             if args.json:
