@@ -10415,6 +10415,125 @@ def normalize_model(model: str, make: str = "") -> str:
 
 
 # ---------------------------------------------------------------------------
+# Generic-blob resolution via the VIN decode cache (same idea as the
+# 'General Motors' make blob in normalize_make, but the evidence is NHTSA's
+# decoded model instead of the WMI). Chains file whole families under one
+# string — BMW '3 Series' (919 cars at audit time), Ford 'E-Series' /
+# 'Econoline', GMC 'Sierra', Dodge 'Ram Pickup' — and the audit showed the
+# decode cache resolves 85-95%+ of them to the concrete model.
+#
+# Policy: resolve ONLY rows whose (already-normalized) model is a registered
+# blob key below, ONLY when the decode is confident (decoded make agrees,
+# decoded model is concrete). Ambiguous rows keep the blob — never guess.
+# Mercedes '*-Class' blobs are deliberately NOT registered: NHTSA catalogs
+# Mercedes at class granularity, so the decode can't go more specific.
+_MODEL_BLOBS: dict[str, set[str]] = {
+    "bmw": {"1series", "2series", "3series", "4series", "5series", "6series",
+            "7series", "7seriesalpinab7"},
+    "ford": {"eseries", "fseries", "econoline", "econolinewagon", "clubwagon"},
+    "mazda": {"bseries"},
+    "saturn": {"sseries", "lseries", "lseriessedan", "lserieswagon"},
+    "volvo": {"30series", "40series", "50series", "60series", "70series",
+              "80series", "120series", "xc"},
+    "infiniti": {"fxseries"},
+    "jaguar": {"xjseries", "xfseries", "xkseries"},
+    "hyundai": {"xgseries"},
+    "chevrolet": {"silverado", "suburban", "express", "gmt400",
+                  "ck1500", "ck2500", "ck3500", "ck10", "ck20", "ck30",
+                  "ckpickup", "gseries", "1500pickup", "2500pickup",
+                  "3500pickup", "1500", "2500"},
+    "gmc": {"sierra", "suburban", "gmt400", "jimmyorenvoy", "ck1500",
+            "ck2500", "ckpickup", "1500pickup", "2500pickup", "3500pickup",
+            "1500", "2500", "1500van", "2500van"},
+    "dodge": {"ram", "rampickup", "ramtruck", "dseries", "wseries",
+              "1500pickup", "2500pickup", "1500", "1500van", "2500van",
+              "3500van", "150van", "250van",
+              "caravangrandcaravan"},
+    "lexus": {"gs300400", "sc300400", "scseries"},
+}
+# Bare BMW three-digit strings ('328' could be i/is/ci/xi) also resolve by
+# VIN; 'Unknown' resolves for every make.
+_BMW_BARE_NUM_RE = re.compile(r"^\d{3}$")
+
+# GM truck decodes name the family in `model` and the size in `series`
+# ('Silverado' + '1500 (1/2 Ton)' / '1/2 Ton Nominal'). Dodge Ram ditto
+# ('Ram' + 'DR (1500)').
+_TONNAGE_NUM_RE = re.compile(r"\b([123]500)\b")
+_TONNAGE_FRAC_RE = re.compile(r"\b(1/2|3/4|1)\s*ton", re.IGNORECASE)
+_TON_TO_SERIES = {"1/2": "1500", "3/4": "2500", "1": "3500"}
+
+
+def _series_tonnage(series: str) -> str | None:
+    m = _TONNAGE_NUM_RE.search(series or "")
+    if m:
+        return m.group(1)
+    m = _TONNAGE_FRAC_RE.search(series or "")
+    if m:
+        return _TON_TO_SERIES[m.group(1)]
+    return None
+
+
+def _decode_make_agrees(make: str, dec_make: str) -> bool:
+    a, b = _make_key(make), _make_key(dec_make)
+    return bool(a and b) and (a in b or b in a)
+
+
+def resolve_model_blob(model: str, make: str, vin_dec: dict | None) -> str:
+    """Concrete model for a registered generic-blob row, from its VIN decode.
+    Returns the (already canonical) model unchanged when the row isn't a blob
+    or the decode isn't confident."""
+    key = _squash_model_key(model)
+    make_key = _make_key(make)
+    is_blob = (key in _MODEL_BLOBS.get(make_key, ()) or key == "unknown"
+               or (make_key == "bmw" and _BMW_BARE_NUM_RE.match(key)))
+    if not is_blob or not vin_dec:
+        return model
+    dec_model = (vin_dec.get("model") or "").strip()
+    dec_series = (vin_dec.get("series") or "").strip()
+    if not dec_model or not _decode_make_agrees(make, vin_dec.get("make") or ""):
+        return model
+    dm_key = _squash_model_key(dec_model)
+    # GM/Dodge truck families: NHTSA model is itself the family name; the
+    # tonnage lives in `series`. GMT-400 / 'C/K Pickup' refine to C/K via
+    # driveType (position-coded C=2WD, K=4WD).
+    if dm_key in ("silverado", "sierra", "suburban", "express", "ram"):
+        t = _series_tonnage(dec_series)
+        if t:
+            name = {"ram": "Ram"}.get(dm_key, dec_model.title())
+            return normalize_model(f"{name} {t}", make)
+        return model
+    if dm_key in ("gmt400", "ckpickup"):
+        t = _series_tonnage(dec_series)
+        if not t:
+            return model
+        drive = (vin_dec.get("driveType") or "").lower()
+        if "4wd" in drive or "4x4" in drive:
+            return f"K{t}"
+        if "rwd" in drive or "2wd" in drive:
+            return f"C{t}"
+        return f"C/K {t}"
+    # Mazda B-Series / Dodge D-Series: concrete designation in `series`.
+    if dm_key in ("bseries", "dseries"):
+        r = re.match(r"^([BD]\d{3,4})\b", dec_series.upper())
+        return normalize_model(r.group(1), make) if r else model
+    # Lexus 'GS 300/400' / 'SC 300/400': decode model is bare 'GS'/'SC'; the
+    # platform code in `series` names the engine (JZS160=GS 300, UZS160=
+    # GS 400; JZZ3x=SC 300, UZZ3x=SC 400).
+    if dm_key in ("gs", "sc"):
+        plat = dec_series.upper()
+        for pfx, out in (("JZS160", "GS 300"), ("UZS160", "GS 400"),
+                         ("JZZ", "SC 300"), ("UZZ", "SC 400")):
+            if plat.startswith(pfx):
+                return out
+        return model
+    # NHTSA sometimes answers with a multi-model string ('325/325e') or the
+    # same blob the feed used ('E-Series' stays series-less) — not confident.
+    if "/" in dec_model or dm_key in ("unknown", "") or dm_key == key:
+        return model
+    return normalize_model(dec_model, make)
+
+
+# ---------------------------------------------------------------------------
 # Make-name normalization. 27 chains spell makes their own way, and the raw
 # strings shipped straight into the UI's make dropdown: "MINI (756)" next to
 # "MINI Cooper (52)", "Alfa Romeo" next to "Alfa-Romeo", "Vw" next to
@@ -10657,6 +10776,12 @@ def enrich_vehicles(
     allowed_vins: set[str] | None = None
 
     def _apply_match(v: dict, vin_dec: dict | None) -> None:
+        # Generic-blob rows ('3 Series', 'E-Series', 'Sierra', 'Ram Pickup')
+        # resolve to the concrete model here, where the VIN decode is in hand
+        # — before matching, so UNOBTANIUM_DB keyword matches see the real
+        # model too. Non-blob rows and unconfident decodes pass through.
+        v["model"] = resolve_model_blob(
+            v.get("model") or "", v.get("make") or "", vin_dec)
         mismatch = _vpic_mismatch_msg(v, vin_dec)
         if mismatch:
             v["_vpic_mismatch"] = mismatch
@@ -11586,11 +11711,12 @@ def check_watchlist_alerts(vehicles: list[dict]):
     hits: list[dict] = []
 
     for entry in watchlist:
-        # Vehicles are already make-normalized by enrich_vehicles; run the
-        # watch entry through the same aliasing so a watch saved as "Vw" or
-        # "MINI Cooper" still hits post-merge inventory.
+        # Vehicles are already make+model-normalized by enrich_vehicles; run
+        # the watch entry through the same aliasing so a watch saved as "Vw",
+        # "MINI Cooper", or "Mazda 3" still hits post-merge inventory.
         make_low = normalize_make(entry.get("make") or "").lower()
-        model_low = (entry.get("model") or "").lower()
+        model_low = normalize_model(
+            entry.get("model") or "", entry.get("make") or "").lower()
         yr_min = entry.get("yrMin")
         yr_max = entry.get("yrMax")
         match_only = entry.get("matchOnly", False)
