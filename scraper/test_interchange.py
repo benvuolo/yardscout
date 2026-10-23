@@ -318,6 +318,55 @@ _tiers = [pf for pf in _pf
           for pp in pf["parts"].values() if "tier" in pp]
 check("payload never ships a declared tier key", not _tiers)
 
+# =========================================================================
+# Phase B explicit fixtures — mirror the hand-verified spot-checks
+# =========================================================================
+def _tier(fid, cat, a, b):
+    return js.interchange_tier(EF[fid], cat, a, b)
+
+check("IS 250 <-> IS 350 06-09 alternator verified",
+      _tier("lexus-is2", "alternator",
+            (2009, "Lexus", "IS 250"), (2007, "Lexus", "IS 350")) == "verified")
+check("IS 250 2012 alternator NOT verified (Base-qualified rows)",
+      _tier("lexus-is2", "alternator",
+            (2012, "Lexus", "IS 250"), (2009, "Lexus", "IS 250")) != "verified")
+check("RDX 2.3T 08<->11 alternator verified",
+      _tier("acura-rdx", "alternator",
+            (2008, "Acura", "RDX"), (2011, "Acura", "RDX")) == "verified")
+check("RDX 3.5 13<->15 starter verified",
+      _tier("acura-rdx35", "starter",
+            (2013, "Acura", "RDX"), (2015, "Acura", "RDX")) == "verified")
+check("Transit Connect 2010<->2013 alternator verified",
+      _tier("ford-tc", "alternator",
+            (2010, "Ford", "Transit Connect"),
+            (2013, "Ford", "Transit Connect")) == "verified")
+check("Transit Connect 2011 alternator NOT verified (vendor-qualified)",
+      _tier("ford-tc", "alternator",
+            (2011, "Ford", "Transit Connect"),
+            (2010, "Ford", "Transit Connect")) != "verified")
+check("Passat 2.0T 08 <-> GTI 07 starter verified",
+      _tier("vw-20t", "starter",
+            (2008, "Volkswagen", "Passat"),
+            (2007, "Volkswagen", "GTI")) == "verified")
+check("Passat 2.0T 2010 starter NOT verified (Bosch-qualified row)",
+      _tier("vw-20t", "starter",
+            (2010, "Volkswagen", "Passat"),
+            (2008, "Volkswagen", "Passat")) != "verified")
+check("Sonata 2012 GDI alternator NOT verified (2011-13 rows unpublished)",
+      _tier("hk-theta2gdi", "alternator",
+            (2012, "Hyundai", "Sonata"), (2012, "Kia", "Optima")) != "verified")
+check("Intrepid 2.7 99<->01 alternator verified",
+      _tier("mopar-lh27", "alternator",
+            (1999, "Dodge", "Intrepid"), (2001, "Dodge", "Intrepid")) == "verified")
+check("feed alias: Chrysler-make 'Dodge 1500 Pickup' 1998 reaches mopar-magnum",
+      "mopar-magnum" in [f["id"] if isinstance(f, dict) and "id" in f else fid
+                         for fid, f in EF.items()
+                         if any(js._app_matches(a, 1998, "Chrysler", "Dodge 1500 Pickup")
+                                for a in f["apps"])])
+check("feed alias: raw 'Town &amp; Country' entity 2012 reaches mopar-pentastar",
+      any(js._app_matches(a, 2012, "Chrysler", "Town &amp; Country")
+          for a in EF["mopar-pentastar"]["apps"]))
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILURE(S):", *FAILS, sep="\n  - ")

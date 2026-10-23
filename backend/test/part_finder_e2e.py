@@ -65,8 +65,9 @@ CARS = [
 ]
 
 
-def pf_search(page, year, make, model_candidates, engine_chip):
-    page.fill("#pf-part", "alternator")
+def pf_search(page, year, make, model_candidates, engine_chip,
+              part="alternator"):
+    page.fill("#pf-part", part)
     page.wait_for_selector("#pf-part-suggest .compare-suggest-item",
                            timeout=5000)
     page.locator("#pf-part-suggest .compare-suggest-item").first.dispatch_event(
@@ -191,7 +192,7 @@ with sync_playwright() as pw:
           page.locator("#tab-live .part-finder").count() == 0)
     ctx.close()
 
-    def boot(viewport, mobile):
+    def boot(viewport, mobile, zip_code="85003"):
         c = browser.new_context(
             viewport=viewport, device_scale_factor=3 if mobile else 1,
             is_mobile=mobile, has_touch=mobile)
@@ -200,7 +201,7 @@ with sync_playwright() as pw:
         p.goto(f"http://127.0.0.1:{PORT}/index.html",
                wait_until="domcontentloaded")
         p.click("#live-filter-toggle")
-        p.fill("#live-zip", "85003")
+        p.fill("#live-zip", zip_code)
         p.wait_for_selector("#live-grid .match-card, #live-grid .dim-card",
                             timeout=30000)
         p.click("#live-filter-toggle")
@@ -214,6 +215,46 @@ with sync_playwright() as pw:
         ".tabs .tab", "els => els.map(e => e.scrollWidth > e.clientWidth + 1)")
     check("no tab label clips at 360px", not any(tabs), str(tabs))
     page.screenshot(path=str(SHOTS / "parts_tab_mobile_360.png"))
+    ctx.close()
+
+    # ---- enthusiast checks (Phase A/B regression fixtures) -----------------
+    # Run from Santa Fe Springs, CA (90670) — a 1999 Miata donor sits at that
+    # yard, inside mazda-miata-18's verified 1999-2000 alternator group
+    # (Denso 210-3155). Phoenix has no 99-00 Miata within the default radius,
+    # so the honest app shows zero verified donors there.
+    ctx, page = boot({"width": 390, "height": 844}, True, zip_code="90670")
+    model = pf_search(page, "1999", "Mazda", ["Miata", "MX-5 Miata", "MX5"],
+                      None)
+    check("miata99: model option found", model is not None)
+    if model is not None:
+        rows = page.locator("#pf-results .pf-row-card")
+        n_ver = page.locator("#pf-results .pf-row-card.pf-verified").count()
+        check("miata99: donor rows render", rows.count() > 0)
+        check("miata99: at least one Verified-fit donor (210-3155 group)",
+              n_ver > 0, f"ver={n_ver} of {rows.count()}")
+        page.screenshot(path=str(SHOTS / "pf_miata99_alternator.png"))
+        print(f"     miata99 ver={n_ver} of {rows.count()} — "
+              f"shot pf_miata99_alternator.png")
+
+    # Body-part flow: 99 Corolla window regulator (standing in for the
+    # suggested 95 Civic — no 92-95 Civic in the payload ships a window-
+    # regulator row, so that search honestly returns zero donors; the
+    # Corolla row's published window is 1995-2013 with dozens of donors).
+    # Every row must carry an honest tier chip.
+    model = pf_search(page, "1999", "Toyota", ["Corolla"], None,
+                      part="window regulator")
+    check("corolla99: model option found", model is not None)
+    if model is not None:
+        rows = page.locator("#pf-results .pf-row-card")
+        check("corolla99: donor rows render for a body part", rows.count() > 0,
+              page.locator("#pf-results").inner_text()[:120])
+        chips = page.locator("#pf-results .pf-tier").count()
+        check("corolla99: every row carries a tier chip",
+              rows.count() > 0 and chips == rows.count(),
+              f"{chips} chips / {rows.count()} rows")
+        page.screenshot(path=str(SHOTS / "pf_corolla99_window_regulator.png"))
+        print(f"     corolla99 rows={rows.count()} — "
+              f"shot pf_corolla99_window_regulator.png")
     ctx.close()
 
     # ---- desktop: tab active with a real search on screen -----------------
