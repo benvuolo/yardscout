@@ -1997,8 +1997,8 @@ document.getElementById('zip-banner-skip').addEventListener('click', () => {
 
 // Part-first search: lowercase query typed in the live-tab toolbar. Filters
 // the grid to cars carrying a matching part (name or interchange provenance).
-let activePartQuery = '';
-
+/* Spotted-part name matching — now serves the Parts tab's browse mode (the
+ * Live-tab filter it powered was absorbed there, owner decision 2026-10). */
 function partQueryHit(p, q) {
   return p.name.toLowerCase().includes(q)
     || (p.sharedWith || '').toLowerCase().includes(q);
@@ -2048,8 +2048,6 @@ function getFilteredLive() {
     // unknown transmission are excluded rather than guessed at (the inline
     // hint under the control says so).
     if (matchFilter === 'manual' && !isConfirmedManual(v)) return false;
-    if (activePartQuery
-        && !(v.topParts || []).some(p => partQueryHit(p, activePartQuery))) return false;
     return true;
   });
 
@@ -2107,22 +2105,7 @@ function getFilteredLive() {
     case 'date-asc': keyFn = tsOf; asc = true; break;
     case 'year-asc': keyFn = v => v.year || 0; asc = true; break;
   }
-  // Part-first search overrides the sort for Pro: rank by the best MATCHING
-  // confirmed part's resale high (unconfirmed parts count $0 — same honesty
-  // rule as every other ranking), with distance as the tie-break when a zip
-  // is set. Free users keep their neutral sorts — value ordering is the Pro
-  // value data in disguise.
-  let tieFn = tsOf, tieAscEff = tieAsc;
-  if (activePartQuery && isPro()) {
-    keyFn = v => Math.max(0, ...(v.topParts || [])
-      .filter(p => partQueryHit(p, activePartQuery))
-      .map(p => p.trim_status === 'unconfirmed' ? 0 : (p.high || 0)));
-    asc = false;
-    if (activeZipCoords) {
-      tieFn = v => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; };
-      tieAscEff = true;
-    }
-  }
+  const tieFn = tsOf, tieAscEff = tieAsc;
   if (keyFn) {
     const dec = filtered.map(v => [keyFn(v), tieFn(v), v]);
     dec.sort((x, y) => (asc ? x[0] - y[0] : y[0] - x[0])
@@ -2140,10 +2123,6 @@ function updateLiveFilterCount() {
       || document.getElementById('live-filter-year-max').value) n++;
   if (document.getElementById('live-filter-location').value) n++;
   if (document.getElementById('live-filter-match').value) n++;
-  // The part-spotted search lives in the drawer now (it filters cars like
-  // any other field) — it must show in the badge or an applied search is
-  // invisible once the drawer closes.
-  if (document.getElementById('live-part-search').value.trim()) n++;
   if (activeZipCoords && document.getElementById('live-radius').value) n++;
   const el = document.getElementById('live-filter-count');
   el.style.display = n ? 'inline-grid' : 'none';
@@ -2199,13 +2178,6 @@ function renderLive() {
     // closest yard and how far it is instead of showing a blank wall.
     const radiusMi = effectiveRadiusMi();
     let msg = '<h3>No matches</h3><p>Try adjusting your filters.</p>';
-    if (activePartQuery) {
-      // Part search emptied the grid: say so, with the query shown, instead
-      // of making the user guess which filter did it.
-      msg = `<h3>No cars here carry a part matching &ldquo;${escapeHtml(activePartQuery)}&rdquo;</h3>
-        <p>Try a shorter word (&ldquo;tailgate&rdquo;, &ldquo;3rd row&rdquo;), widen the radius, or clear the part search.</p>
-        <button type="button" class="btn" style="margin-top:0.8rem;" onclick="document.getElementById('live-part-search-clear').click()">Clear part search</button>`;
-    }
     if (!isPro() && !activeZipCoords) {
       // Free tier with no location set: point at the zip banner, and be honest
       // that skipping straight to the national list is a Pro feature.
@@ -2357,10 +2329,7 @@ function renderLive() {
         const fitsMark = p.fits
           ? ` <span class="fits-badge" title="Model years this part fits — prices are specific to this generation">fits ${p.fits}</span>`
           : '';
-        // Part-search highlight: mark the row(s) that satisfied the query so
-        // the eye lands on why this car is in the results.
-        const hitCls = unlocked && activePartQuery && partQueryHit(p, activePartQuery)
-          ? ' part-hit' : '';
+        const hitCls = '';  // part-hit highlight retired with the Live filter
         // Free tier: everything the parts database produces is blurred —
         // names, fits, values, channels. Real strings never reach the DOM;
         // rows render plausible placeholders so the blur has a shape. The
@@ -2577,31 +2546,8 @@ document.getElementById('live-filter-match').addEventListener('change', (e) => {
   if (hint) hint.style.display = e.target.value === 'manual' ? '' : 'none';
   renderLive();
 });
-// Part-first search: debounced so the 400-card grid doesn't re-render per
-// keystroke. Free users get the search as a filter too — part values on the
-// results stay blurred like everywhere else.
-(() => {
-  const inp = document.getElementById('live-part-search');
-  const clr = document.getElementById('live-part-search-clear');
-  let timer = null;
-  inp.addEventListener('input', () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      activePartQuery = inp.value.trim().toLowerCase();
-      clr.style.display = activePartQuery ? '' : 'none';
-      renderLive();
-    }, 180);
-  });
-  clr.addEventListener('click', () => {
-    inp.value = '';
-    activePartQuery = '';
-    clr.style.display = 'none';
-    renderLive();
-    inp.focus();
-  });
-})();
-// Quiet disambiguation next to the part-spotted filter: people hunting for
-// "does this part FIT my car" belong on the Parts tab, not here.
+// The old spotted-part filter is the Parts tab's browse mode now — the
+// drawer keeps only this pointer for anyone who comes looking for it here.
 document.getElementById('live-parts-pointer').addEventListener('click', () => {
   document.querySelector(".tab[data-tab='parts']").click();
 });
@@ -3896,8 +3842,10 @@ function pfSeeker() {
   };
 }
 function pfMaybeSearch() {
-  const s = pfSeeker();
-  if (pfCat && s.year && s.make && s.model) pfRunSearch();
+  // The car is OPTIONAL now: part + car runs the fitment search, part alone
+  // runs browse mode (every nearby car carrying the part). Any change with a
+  // part picked re-renders whichever mode the inputs imply.
+  if (pfCat) pfRunSearch();
 }
 
 function pfTierChip(tier) {
@@ -3906,18 +3854,158 @@ function pfTierChip(tier) {
     : '<span class="pf-tier pf-tier-likely" title="Same engine family / same generation, so it very likely fits — but this exact pairing wasn\u2019t individually verified. Verify the part number before driving out.">Likely fit &mdash; verify part #</span>';
 }
 
+/* ===== BROWSE MODE (owner request, 2026-10): part chosen, no car =========
+ * Lists every nearby car CARRYING the part — the old Live-tab spotted-part
+ * filter's job, now living where parts people look. No fit claims are made
+ * (there's no seeker car to claim against). Per rule class:
+ *   - engine-class categories (engine assembly, alternator, starter, coils):
+ *     browse keys off the ENGINE-FAMILY data — pick a family ("Vortec 5.3"),
+ *     donors are cars whose applications match it, with VIN-decode
+ *     confirmation badges. This is the "any LS/5.3 near me" flow.
+ *   - body/platform categories: spotted-part semantics — cars whose
+ *     valuable-parts list names the part (same matching the Live filter had).
+ *   - combo/exact (transmissions, ECM, radio): spotted semantics too, but
+ *     the valuable-parts data rarely tracks them — the honest empty state
+ *     points at adding a car to run the fit search instead.
+ * Partial car fields (just a make, say) act as plain filters on the browse
+ * list, never as fit claims. */
+function pfRenderBrowseFamPicker() {
+  const wrap = document.getElementById('pf-engine');
+  wrap.style.display = '';
+  const fams = [...interchangeData.engineFamilies]
+    .sort((a, b) => a.label.localeCompare(b.label));
+  wrap.innerHTML =
+    '<span class="pf-engine-label">Browsing by engine — which engine are you hunting? Donors are matched by engine family, not by keyword.</span>'
+    + '<select id="pf-browse-fam" class="pf-browse-fam">'
+    + '<option value="">Pick an engine&hellip;</option>'
+    + fams.map(f => `<option value="${f.id}" ${pfChosenFam === f.id ? 'selected' : ''}>${escapeHtml(f.label)}</option>`).join('')
+    + '</select>';
+}
+document.getElementById('pf-engine').addEventListener('change', e => {
+  if (e.target.id === 'pf-browse-fam') {
+    pfChosenFam = e.target.value || null;
+    pfRunSearch();
+  }
+});
+
+function pfRunBrowse(s) {
+  const out = document.getElementById('pf-results');
+  track('part-browse');
+  pfSaveState();
+  const radius = effectiveRadiusMi();
+  const unlocked = isPro();
+  const sMakeOk = v => !s.make || canonicalMake(v.make) === s.make;
+  const sModelOk = v => !s.model
+    || pfSquashModel(canonicalModel(v.make, v.model), v.make)
+       === pfSquashModel(s.model, s.make);
+  const sYearOk = v => !s.year || v.year === s.year;
+  const inScope = v => {
+    if (!sMakeOk(v) || !sModelOk(v) || !sYearOk(v)) return false;
+    const d = vehicleDistanceMi(v);
+    return !(radius && (d == null || d > radius));
+  };
+  const rows = [];
+  let fam = null;
+  let headTop = '';
+
+  if (pfCat.kind === 'engine') {
+    // Family browse: donors by engine-family application lists + VIN decode,
+    // never by a "spotted" keyword (the parts DB doesn't track engines).
+    pfRenderBrowseFamPicker();
+    fam = interchangeData.engineFamilies.find(f => f.id === pfChosenFam);
+    if (!fam) {
+      out.innerHTML = '<div class="pf-empty">Browsing without a car: pick the engine you\u2019re hunting above and we\u2019ll list every nearby car that came with it. Or add your car (year, make, model) to run the fit search instead.</div>';
+      return;
+    }
+    for (const v of liveInventory) {
+      if (!inScope(v)) continue;
+      const app = fam.apps.find(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model));
+      if (!app) continue;
+      const ex = extrasFor(v);
+      const verdict = pfEngineVerdict(ex ? ex[2] : '', fam);
+      if (verdict === false) continue;  // decode says a different engine
+      const engineOk = verdict === true || (verdict === null && !!app[4] && !app[5]);
+      const warns = [];
+      if (!engineOk) warns.push(`engine not confirmed — this ${escapeHtml(v.model)} also came with other engines; check under the hood before pulling`);
+      if (app[5]) warns.push(escapeHtml(app[5]));
+      rows.push({ v, d: vehicleDistanceMi(v), warns,
+                  badge: verdict === true
+                    ? `<span class="pf-tier pf-tier-verified" title="The donor's VIN decode confirms a ${escapeHtml(fam.label)}.">VIN-confirmed</span>`
+                    : '' });
+    }
+    headTop = `<strong>${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} near you</strong> carrying a ${escapeHtml(fam.label)} &mdash; add your car (year, make, model) above to check what fits.`;
+  } else {
+    pfRenderEngineChips(null);
+    // Spotted-part semantics: the car's valuable-parts list names the part —
+    // exactly what the old Live-tab part filter matched on.
+    const kws = (pfCat.tokens.length ? pfCat.tokens : [pfCat.label]).map(t => t.toLowerCase());
+    for (const v of liveInventory) {
+      if (!inScope(v)) continue;
+      const hit = (v.topParts || []).find(p => kws.some(t => partQueryHit(p, t)));
+      if (!hit) continue;
+      rows.push({ v, d: vehicleDistanceMi(v), warns: [], hit, badge: '' });
+    }
+    headTop = `<strong>Showing all cars with this part near you</strong> &mdash; add your car to check what fits. ${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} list${rows.length === 1 ? 's' : ''} a spotted ${escapeHtml(pfCat.label.toLowerCase())}.`;
+  }
+
+  if (!rows.length) {
+    const kindNote = (pfCat.kind === 'combo' || pfCat.kind === 'exact')
+      ? ` The spotted-parts data tracks carry-out flip parts, and ${escapeHtml(pfCat.label.toLowerCase())}s mostly aren't in it — add your car above and the fit search will find donors by ${pfCat.kind === 'combo' ? 'generation and engine' : 'generation'} instead.`
+      : ' Yards rotate stock weekly — widen the radius or check back.';
+    out.innerHTML = `<div class="pf-empty">No cars within ${radius ? radius + ' mi' : 'range'} ${pfCat.kind === 'engine' ? `carrying a ${escapeHtml(fam.label)}` : `listing a spotted ${escapeHtml(pfCat.label.toLowerCase())}`} right now.${kindNote}</div>`;
+    return;
+  }
+
+  rows.sort((a, b) => (a.d ?? 1e9) - (b.d ?? 1e9));
+  const CAP = 120;
+  let quoteVariants = pfCat.priceTokens.map(t => t.toLowerCase());
+  if (pfCat.id === 'engine-assembly' && fam) {
+    quoteVariants = pfEngineQuoteVariants(fam.cyl).concat(quoteVariants);
+  }
+  const filterNote = (s.make || s.model || s.year)
+    ? `<div class="pf-caveat">Filtered to ${escapeHtml([s.year || '', s.make || '', s.model || ''].join(' ').trim())} — clear those fields to browse everything.</div>` : '';
+  out.innerHTML =
+    `<div class="pf-results-head">${headTop} Sorted by distance. Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.</div>`
+    + filterNote
+    + (pfCat.notes || []).map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('')
+    + rows.slice(0, CAP).map(r => {
+      const v = r.v;
+      const quote = yardPartQuote(v.location, quoteVariants);
+      const priceHtml = quote.status === 'priced'
+        ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard's own published price list">$${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+        : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
+      const worthHtml = (!pfCat.noValue && r.hit)
+        ? (unlocked
+          ? `<span class="pf-ebay" title="Typical sold prices for working parts (eBay, national)">worth ${formatPrice(r.hit.low)}&ndash;${formatPrice(r.hit.high)}</span>`
+          : `<span class="pf-ebay locked-blur" role="button" onclick="openUpgradeSheet('pf-value')">worth ${LOCKED_PRICE_MASK}</span>`)
+        : '';
+      const dateLbl = pfDateLabel(v.dateAdded);
+      return `<div class="pf-row-card pf-browse">
+        <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${r.badge}</div>
+        <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ''}${saleBadgeHtml(v.location)}</div>
+        <div class="pf-value">${priceHtml}${worthHtml}</div>
+        ${r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
+      </div>`;
+    }).join('')
+    + (rows.length > CAP
+      ? `<div class="pf-more">Showing the ${CAP} nearest of ${rows.length.toLocaleString()} cars — tighten the radius to narrow.</div>`
+      : '');
+}
+
 function pfRunSearch() {
   const out = document.getElementById('pf-results');
   const status = document.getElementById('pf-status');
   const s = pfSeeker();
   if (!pfCat) { status.textContent = 'Pick a part first.'; return; }
-  if (!s.year || !s.make || !s.model) { status.textContent = 'Tell us your car — year, make, model.'; return; }
   if (!activeZipCoords) {
     out.innerHTML = '<div class="pf-empty">Set a zip code (or use your location) up top so we know which yards are near you — distances drive this whole list.</div>';
     return;
   }
   if (!interchangeData) { loadInterchange().then(() => pfRunSearch()); return; }
   status.textContent = '';
+  // Part chosen but no (full) car: BROWSE mode — every nearby car carrying
+  // the part, no fit claims. Fitment needs all three car fields.
+  if (!s.year || !s.make || !s.model) { pfRunBrowse(s); return; }
   track('part-first-search');
   pfSaveState();
 
@@ -4147,7 +4235,12 @@ document.getElementById('pf-go').addEventListener('click', pfRunSearch);
 ['pf-year', 'pf-make', 'pf-model'].forEach(id => {
   document.getElementById(id).addEventListener('change', () => {
     if (id === 'pf-make') pfPopulateModels();
-    pfChosenFam = null;
+    // Keep a chosen engine family across car-field changes: a browse-mode
+    // "Vortec 5.3" pick survives adding a make filter, and carries into the
+    // fitment flow when it's valid for the car (the chips validate it).
+    // Only the sticky escape hatch resets — "my engine isn't listed" for an
+    // old car must never silence a new one.
+    if (pfChosenFam === '__none__') pfChosenFam = null;
     pfMaybeSearch();
   });
 });

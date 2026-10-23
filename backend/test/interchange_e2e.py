@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Browser e2e for the interchange feature: part-first search, part-hit
-highlight, 'swaps with' provenance notes, free-tier blur. Starts its own
-static server over docs/ (optionally overlaying a rebuilt inventory file) and
-drives Chromium at an iPhone viewport.
+"""Browser e2e for the Parts tab's two modes + the retired Live filter.
 
-    INVENTORY_OVERRIDE=/tmp/inv_interchange.json \
-        ~/projects/sigma-mcp/.venv/bin/python backend/test/interchange_e2e.py
+Browse mode (owner decision 2026-10-23): part chosen with NO car lists every
+nearby car CARRYING the part — engine-class categories browse by engine
+family ("any 5.3 Vortec near me"), platform parts by spotted-part keywords.
+Part + car still runs the unchanged fitment flow. The old Live-tab
+'Part spotted on car' filter is gone; its drawer slot keeps only a pointer.
+
+    ~/projects/sigma-mcp/.venv/bin/python backend/test/interchange_e2e.py
 
 Screenshots land in /tmp/yardscout_shots/.
 """
@@ -37,7 +39,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*a, directory=str(DOCS), **kw)
 
     def translate_path(self, path):
-        # Overlay: serve the freshly rebuilt inventory without touching the
+        # Overlay: serve a freshly rebuilt inventory without touching the
         # committed data file (the scan workflow owns it on main).
         if OVERRIDE and path.split("?")[0] == "/data/inventory_live.json":
             return OVERRIDE
@@ -76,130 +78,127 @@ def boot(ctx, init_js):
     return page
 
 
-def part_search(page, q):
-    """The part-spotted box lives in the Filters drawer now ('Part spotted
-    on car') — open the drawer, type, collapse again so grid screenshots
-    stay clean. The filter stays active with the drawer closed."""
-    if not page.locator("#live-controls.open").count():
-        page.click("#live-filter-toggle")
-    page.fill("#live-part-search", q)
-    page.wait_for_timeout(600)   # debounce + render
-    page.click("#live-filter-toggle")
-    page.wait_for_timeout(200)
-
-
-def part_clear(page):
-    if not page.locator("#live-controls.open").count():
-        page.click("#live-filter-toggle")
-    page.click("#live-part-search-clear")
+def pf_pick_part(page, label):
+    """Open the Parts tab and choose a part from the combobox (no car)."""
+    page.click(".tab[data-tab='parts']")
     page.wait_for_timeout(400)
-    page.click("#live-filter-toggle")
-    page.wait_for_timeout(200)
+    page.fill("#pf-part", label)
+    page.wait_for_selector("#pf-part-suggest .compare-suggest-item",
+                           timeout=5000)
+    page.locator("#pf-part-suggest .compare-suggest-item").first.dispatch_event(
+        "mousedown")
+    page.wait_for_timeout(700)   # browse renders immediately on part pick
 
 
 with sync_playwright() as pw:
     browser = pw.chromium.launch()
 
-    # ---------------- Pro: search, highlight, provenance ----------------
+    # ---------------- Pro: browse mode, both rule classes -----------------
     ctx = browser.new_context(**IPHONE)
     page = boot(ctx, PRO_BOOT)
 
-    part_search(page, "tailgate")
-    cards = page.locator("#live-grid .match-card")
-    check("part search returns cards", cards.count() > 0, str(cards.count()))
+    # Platform part, no car -> spotted-part browse with values.
+    pf_pick_part(page, "tailgate")
+    rows = page.locator("#pf-results .pf-row-card.pf-browse")
+    check("tailgate browse: cards render without a car", rows.count() > 0,
+          page.locator("#pf-results").inner_text()[:120])
+    head = page.locator("#pf-results .pf-results-head").inner_text()
+    check("tailgate browse: honest header (all cars + add your car)",
+          "Showing all cars with this part near you" in head
+          and "add your car" in head, head[:160])
+    check("tailgate browse: no fit-tier chips (no claims without a car)",
+          page.locator("#pf-results .pf-tier").count() == 0)
+    body = page.locator("#pf-results").inner_text()
+    check("tailgate browse: resale value shown per row (pro)",
+          "worth $" in body, body[:200])
+    dists = page.eval_on_selector_all(
+        "#pf-results .pf-row-card .dist",
+        "els => els.map(e => parseInt(e.textContent))")
+    check("tailgate browse: rows sorted by distance",
+          all(a <= b for a, b in zip(dists, dists[1:])), str(dists[:8]))
+    page.evaluate("document.getElementById('pf-results')"
+                  ".scrollIntoView({block:'start'})")
+    page.wait_for_timeout(250)
+    page.screenshot(path=str(SHOTS / "1_browse_tailgate.png"))
 
-    # Open the first card's parts and check the highlight + provenance.
-    page.locator("#live-grid .parts-details summary").first.click()
-    page.wait_for_timeout(200)
-    hits = page.locator(".part-item.part-hit")
-    check("matching part row is highlighted", hits.count() > 0)
-    hit_text = hits.first.inner_text().lower()
-    check("highlighted row matches the query",
-          "tailgate" in hit_text, hit_text[:80])
-    page.screenshot(path=str(SHOTS / "1_part_search_tailgate.png"))
-
-    # Find a card whose matched row carries interchange provenance.
-    found_shared = page.evaluate("""() => {
-      const notes = document.querySelectorAll('#live-grid .shared-note');
-      return notes.length ? notes[0].textContent : '';
+    # Engine-class part, no car -> FAMILY browse (the 'any 5.3 near me' flow),
+    # never keyword matching.
+    pf_pick_part(page, "engine assembly")
+    check("engine browse: family picker renders",
+          page.locator("#pf-browse-fam").count() == 1)
+    prompt = page.locator("#pf-results .pf-empty")
+    check("engine browse: pick-an-engine prompt (not a broken state)",
+          prompt.count() == 1 and "pick the engine" in prompt.inner_text(),
+          prompt.inner_text()[:120] if prompt.count() else "no prompt")
+    fam_val = page.evaluate("""() => {
+      const os = [...document.querySelectorAll('#pf-browse-fam option')];
+      const o = os.find(o => o.textContent.includes('5.3'));
+      return o ? o.value : '';
     }""")
-    if not found_shared:
-        # Tailgate hits may all be originals in this radius — search a family
-        # part that always carries provenance.
-        part_search(page, "3rd row seat")
-        for i in range(min(6, page.locator("#live-grid .parts-details summary").count())):
-            page.locator("#live-grid .parts-details summary").nth(i).click()
-        page.wait_for_timeout(300)
-        found_shared = page.evaluate("""() => {
-          const notes = document.querySelectorAll('#live-grid .shared-note');
-          return notes.length ? notes[0].textContent : '';
-        }""")
-    # The committed inventory_live.json (owned by the scan workflow on main)
-    # ships WITHOUT enriched provenance rows — only an INVENTORY_OVERRIDE
-    # rebuild carries sharedWith. Skip honestly instead of failing forever.
-    import json as _json
-    _inv_path = OVERRIDE or str(DOCS / "data" / "inventory_live.json")
-    with open(_inv_path) as _f:
-        _has_prov = any(isinstance(p, dict) and p.get("sharedWith")
-                        for ps in _json.load(_f)["partSets"] for p in ps)
-    if _has_prov:
-        check("'swaps with' provenance renders on a part row",
-              "swaps with" in (found_shared or ""), repr(found_shared)[:100])
-    else:
-        print("skip 'swaps with' provenance — inventory ships no sharedWith "
-              "rows; run with INVENTORY_OVERRIDE for the full check")
-    if found_shared:
-        page.evaluate("""() => {
-          const n = document.querySelector('#live-grid .shared-note');
-          n.closest('.match-card, .dim-card').scrollIntoView({block:'center'});
-        }""")
-        page.wait_for_timeout(300)
-        page.screenshot(path=str(SHOTS / "2_interchange_note.png"))
+    check("engine browse: a 5.3 family exists in the picker", bool(fam_val))
+    page.select_option("#pf-browse-fam", fam_val)
+    page.wait_for_timeout(700)
+    rows = page.locator("#pf-results .pf-row-card.pf-browse")
+    check("engine browse: 5.3 donors render by family data", rows.count() > 0,
+          page.locator("#pf-results").inner_text()[:120])
+    body = page.locator("#pf-results").inner_text()
+    check("engine browse: header counts cars + add-your-car pointer",
+          "carrying a" in body and "add your car" in body, body[:200])
+    check("engine browse: VIN-confirmed badge on decoded donors",
+          page.locator("#pf-results .pf-tier-verified").count() > 0)
+    check("engine browse: no resale band on engines", "worth" not in body,
+          body[:200])
+    page.evaluate("document.getElementById('pf-results')"
+                  ".scrollIntoView({block:'start'})")
+    page.wait_for_timeout(250)
+    page.screenshot(path=str(SHOTS / "2_browse_engine_53.png"))
 
-    # Clear button restores the unfiltered grid.
-    before = page.locator("#live-grid .match-card, #live-grid .dim-card").count()
-    part_clear(page)
-    after = page.locator("#live-grid .match-card, #live-grid .dim-card").count()
-    check("clear restores the grid", after >= before, f"{before} -> {after}")
-
-    # Nonsense query shows the dedicated empty state.
-    part_search(page, "zzzznotapart")
-    empty = page.locator("#live-grid .empty-state").inner_text()
-    check("empty state names the query", "zzzznotapart" in empty, empty[:80])
-    page.screenshot(path=str(SHOTS / "3_empty_state.png"))
-
-    # ---- the move itself (owner request): the box lives in the Filters
-    # drawer as 'Part spotted on car', counts in the badge, and a quiet
-    # pointer sends fit-seekers to the Parts tab. ------------------------
-    check("old top-bar box is gone",
-          page.locator(".toolbar #live-part-search").count() == 0)
-    page.click("#live-filter-toggle")
+    # Add the car -> the unchanged fitment flow takes over (mode switch).
+    page.select_option("#pf-year", "2004")
+    page.select_option("#pf-make", "Chevrolet")
     page.wait_for_timeout(300)
-    label = page.locator("label[for='live-part-search']")
-    check("drawer field labeled 'Part spotted on car'",
-          label.count() == 1
-          # labels render uppercase via CSS — compare case-insensitively
-          and label.inner_text().strip().lower() == "part spotted on car",
-          label.inner_text() if label.count() else "missing")
-    # zzzznotapart is still applied from above — the badge must count it.
-    badge = page.locator("#live-filter-count")
-    n_with = int(badge.inner_text()) if badge.is_visible() else 0
-    page.click("#live-part-search-clear")
-    page.wait_for_timeout(400)
-    n_without = int(badge.inner_text()) if badge.is_visible() else 0
-    check("part search counts in the active-filter badge",
-          n_with == n_without + 1, f"{n_with} with vs {n_without} without")
-    page.fill("#live-part-search", "tailgate")
-    page.wait_for_timeout(600)
+    page.select_option("#pf-model", "Tahoe")
+    page.click("#pf-go")
+    page.wait_for_timeout(700)
+    if (not page.locator("#pf-results .pf-row-card").count()
+            and page.locator("#pf-engine .pf-chip").count()):
+        chips = page.locator("#pf-engine .pf-chip")
+        for i in range(chips.count()):
+            if "5.3" in chips.nth(i).inner_text():
+                chips.nth(i).click()
+                break
+        page.wait_for_timeout(700)
+    rows = page.locator("#pf-results .pf-row-card")
+    tiers = page.locator("#pf-results .pf-tier")
+    check("fitment unchanged: car added -> tiered donor rows",
+          rows.count() > 0 and tiers.count() >= rows.count(),
+          f"{rows.count()} rows / {tiers.count()} tiers")
+    fit_head = page.locator("#pf-results .pf-results-head").inner_text()
+    check("fitment unchanged: verified/likely split in head",
+          "verified" in fit_head and "likely" in fit_head, fit_head[:140])
+    page.screenshot(path=str(SHOTS / "3_fitment_unchanged.png"))
+
+    # ---- Filters drawer: old field gone, single pointer remains ----------
+    page.click(".tab[data-tab='live']")
+    page.wait_for_timeout(300)
+    if not page.locator("#live-controls.open").count():
+        page.click("#live-filter-toggle")
+        page.wait_for_timeout(300)
+    check("drawer: 'Part spotted on car' field removed",
+          page.locator("#live-part-search").count() == 0)
     pointer = page.locator("#live-parts-pointer")
-    check("pointer line renders next to the field",
-          pointer.count() == 1 and pointer.is_visible())
-    page.locator("#live-part-search").scroll_into_view_if_needed()
+    check("drawer: single pointer remains",
+          pointer.count() == 1 and pointer.is_visible()
+          and "Parts" in pointer.inner_text())
+    badge_probe = page.evaluate(
+        "() => typeof updateLiveFilterCount === 'function'")
+    check("drawer: filter-count fn intact after revert", badge_probe)
+    pointer.scroll_into_view_if_needed()
     page.wait_for_timeout(200)
-    page.screenshot(path=str(SHOTS / "5_filters_drawer_part_field.png"))
+    page.screenshot(path=str(SHOTS / "4_drawer_pointer_only.png"))
     pointer.click()
     page.wait_for_timeout(400)
-    check("pointer lands on the Parts tab",
+    check("drawer pointer lands on the Parts tab",
           page.locator("#tab-parts.active").count() == 1)
 
     # Yards drawer regression — same handle/panel mechanics, own state.
@@ -216,45 +215,45 @@ with sync_playwright() as pw:
           page.locator("#yards-grid .yard-card").count() > 0)
     ctx.close()
 
-    # ---- desktop width: drawer field + pointer render and filter ----------
+    # ---------------- desktop width: engine browse ------------------------
     ctx = browser.new_context(viewport={"width": 1280, "height": 900})
     page = boot(ctx, PRO_BOOT)
-    page.click("#live-filter-toggle")
-    page.wait_for_timeout(300)
-    check("desktop: 'Part spotted on car' field visible in the drawer",
-          page.locator("#live-part-search").is_visible()
-          and page.locator("#live-parts-pointer").is_visible())
-    page.fill("#live-part-search", "tailgate")
-    page.wait_for_timeout(600)
-    check("desktop: part search filters the grid",
-          page.locator("#live-grid .match-card").count() > 0)
-    page.screenshot(path=str(SHOTS / "6_filters_drawer_part_field_desktop.png"))
+    pf_pick_part(page, "engine assembly")
+    fam_val = page.evaluate("""() => {
+      const os = [...document.querySelectorAll('#pf-browse-fam option')];
+      const o = os.find(o => o.textContent.includes('5.3'));
+      return o ? o.value : '';
+    }""")
+    page.select_option("#pf-browse-fam", fam_val)
+    page.wait_for_timeout(700)
+    check("desktop: 5.3 engine browse renders",
+          page.locator("#pf-results .pf-row-card.pf-browse").count() > 0)
+    page.screenshot(path=str(SHOTS / "5_browse_engine_desktop.png"))
     ctx.close()
 
-    # ---------------- Free tier: search filters, values stay blurred ------
+    # ---------------- Free tier: browse values stay blurred ---------------
     ctx = browser.new_context(**IPHONE)
     page = boot(ctx, FREE_BOOT)
-    part_search(page, "tailgate")
-    check("free: search still filters",
-          page.locator("#live-grid .match-card").count() > 0)
-    # Open parts on a NON-sample locked card and confirm nothing leaked.
+    pf_pick_part(page, "tailgate")
+    rows = page.locator("#pf-results .pf-row-card.pf-browse")
+    check("free: browse still lists cars", rows.count() > 0)
+    check("free: browse resale values blurred",
+          page.locator("#pf-results .locked-blur").count() > 0)
+    # The blur mask reads 'worth $•••–$•••' — a LEAK is a real digit value.
+    import re as _re
+    check("free: no real value strings leak",
+          not _re.search(r"worth \$\d", page.locator("#pf-results").inner_text()))
+    page.screenshot(path=str(SHOTS / "6_browse_free_blur.png"))
+
+    # Live cards' free blur unaffected by the filter's removal.
+    page.click(".tab[data-tab='live']")
+    page.wait_for_timeout(300)
     leak = page.evaluate("""() => {
       document.querySelectorAll('#live-grid .parts-details summary')
         .forEach(s => s.click());
-      const locked = document.querySelectorAll('#live-grid .locked-blur');
-      const shared = document.querySelectorAll('#live-grid .shared-note');
-      // shared-notes may appear ONLY within the single free sample card
-      const sample = document.querySelector('#live-grid .sample-note');
-      const sampleCard = sample ? sample.closest('.match-card') : null;
-      const leaked = [...shared].some(n =>
-        !sampleCard || !sampleCard.contains(n));
-      return {lockedCount: locked.length, leaked};
+      return document.querySelectorAll('#live-grid .locked-blur').length;
     }""")
-    check("free: blurred rows still blurred", leak["lockedCount"] > 0,
-          str(leak))
-    check("free: provenance only on the sample card", not leak["leaked"],
-          str(leak))
-    page.screenshot(path=str(SHOTS / "4_free_tier_search.png"))
+    check("free: live-card blur unaffected", leak > 0, str(leak))
     ctx.close()
     browser.close()
 

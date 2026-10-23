@@ -1924,6 +1924,19 @@
   color: var(--text); cursor: pointer; font-family: var(--font-ui);
 }
 .pf-chip.active { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+/* Browse mode's engine-family picker (177 families — a select, not chips). */
+.pf-browse-fam {
+  flex: 1;
+  min-width: 220px;
+  max-width: 420px;
+  padding: 0.55rem 0.7rem;
+  background: var(--surface);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
 .pf-actions { display: flex; align-items: center; gap: 0.7rem; margin-top: 0.7rem; flex-wrap: wrap; }
 .pf-status { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; }
 .pf-results { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.45rem; }
