@@ -87,12 +87,29 @@ jobs:
             # conflict the scan's version wins ("theirs" during a rebase = the
             # commit being replayed, i.e. ours). Without this, a code merge
             # that touched inventory_live.json mid-scan fails the whole run.
-            if ! git pull --rebase origin main; then
-              git checkout --theirs -- docs/data/
-              git add docs/data/
-              GIT_EDITOR=true git rebase --continue
+            #
+            # Retry loop: on busy days commits land on main in the seconds
+            # BETWEEN our rebase and our push, and the push gets rejected as
+            # non-fast-forward (lost the 2026-10-23 16:12 MT run that way).
+            # Rebase + push up to 6 times before giving up.
+            pushed=""
+            for attempt in 1 2 3 4 5 6; do
+              if ! git pull --rebase origin main; then
+                git checkout --theirs -- docs/data/
+                git add docs/data/
+                GIT_EDITOR=true git rebase --continue
+              fi
+              if git push; then
+                pushed=yes
+                break
+              fi
+              echo "push raced a concurrent commit (attempt $attempt/6), retrying..."
+              sleep 15
+            done
+            if [ -z "$pushed" ]; then
+              echo "::error::could not push scan results after 6 attempts"
+              exit 1
             fi
-            git push
           fi
 
       # Push the same build to the API backend (Cloudflare Worker + D1) so the
