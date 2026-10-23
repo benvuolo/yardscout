@@ -4596,6 +4596,95 @@ def _apply_consensus_evergreens() -> None:
 
 _apply_consensus_evergreens()
 
+# ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
+# Enthusiast entries often span several body generations under one key
+# (mx-5 1990-2024, supra 1979-1998, corvette 1968-2013). Blanket evergreens
+# there would ship "fits 1990–2024"-style claims that cross generations.
+# Instead each copy is year-gated to one published generation window, so the
+# body-part finder's same-model match ("fits YYYY–YYYY") stays honest.
+# Windows are factory generation boundaries (US model years, manufacturer
+# press/parts literature); an empty tuple means the entry already covers a
+# single generation and gets ungated copies.
+_ENTHUSIAST_EVERGREEN_GENS: dict[str, tuple[tuple[int, int], ...]] = {
+    # Mazda
+    "mx-5": ((1990, 1997), (1999, 2005), (2006, 2015), (2016, 2024)),
+    "rx-7": ((1979, 1985), (1986, 1992), (1993, 1995)),
+    "rx-8": (),
+    # Honda / Acura
+    "crx": ((1984, 1987), (1988, 1991)),
+    "civic 1992-1995": (),
+    "del sol": (),
+    "integra": ((1990, 1993), (1994, 2001)),
+    "rsx": (),
+    "prelude": ((1988, 1991), (1992, 1996), (1997, 2001)),
+    "s2000": (),
+    # Toyota / Lexus / Scion / Subaru
+    "supra": ((1979, 1981), (1982, 1986), (1987, 1992), (1993, 1998)),
+    "celica": ((1985, 1985), (1986, 1989), (1990, 1993), (1994, 1999),
+               (2000, 2005)),
+    "mr2": ((1985, 1989), (1990, 1995), (2000, 2005)),
+    "scion tc": ((2005, 2010), (2011, 2016)),
+    "wrx": ((2002, 2007), (2008, 2014), (2015, 2021), (2022, 2024)),
+    "impreza": ((1993, 2001), (2002, 2007), (2008, 2011), (2012, 2016),
+                (2017, 2024)),
+    "brz": ((2013, 2020), (2022, 2024)),
+    "fr-s": (),
+    # Nissan / Infiniti
+    "240sx": ((1989, 1994), (1995, 1998)),
+    "300zx": ((1984, 1989), (1990, 1996)),
+    "350z": (),
+    "370z": (),
+    "g35": ((2003, 2006), (2007, 2008)),
+    # Mitsubishi
+    "eclipse": ((1990, 1994), (1995, 1999), (2000, 2005), (2006, 2012)),
+    "lancer": ((2002, 2007), (2008, 2017)),
+    "lancer evolution": ((2003, 2006), (2008, 2015)),
+    # German
+    "bmw 3": ((1992, 1998), (1999, 2006), (2007, 2011), (2012, 2018),
+              (2019, 2024)),
+    "bmw m3": ((2001, 2006), (2008, 2013), (2015, 2018), (2021, 2024)),
+    "z4": ((2003, 2008), (2009, 2016), (2019, 2024)),
+    "golf": ((1999, 2005), (2006, 2009), (2010, 2014), (2015, 2021),
+             (2022, 2024)),
+    "gti": ((2006, 2009), (2010, 2014), (2015, 2021), (2022, 2024)),
+    # American (gen-split keys already bound one generation each)
+    "camaro 1982-1992": (), "camaro 1993-2002": (), "camaro 2010-2015": (),
+    "camaro 2016-2024": (),
+    "mustang 1979-1993": (), "mustang 1994-2004": (), "mustang 2005-2014": (),
+    "mustang 2015-2024": (),
+    "firebird": ((1982, 1992), (1993, 2002)),
+    "corvette": ((1968, 1982), (1984, 1996), (1997, 2004), (2005, 2013)),
+    "wrangler 1987-1995": (), "wrangler 1996-2006": (),
+    "wrangler 2007-2017": (), "wrangler 2018-2024": (),
+}
+
+
+def _apply_enthusiast_gen_evergreens() -> None:
+    """Append evergreen copies to enthusiast entries, year-gated per gen.
+
+    Same token-dedupe rule as _apply_consensus_evergreens: a hand-tuned part
+    of the same category anywhere in the entry suppresses ALL windows for
+    that category (hand bands always win). Window bounds are intersected with
+    any evergreen-intrinsic yr_min (e.g. power-window parts floor at 1994);
+    empty intersections are skipped."""
+    for key, windows in _ENTHUSIAST_EVERGREEN_GENS.items():
+        info = UNOBTANIUM_DB[key]
+        lo, hi = info["year_range"]
+        have = " | ".join(p["name"].lower() for p in info["top_parts"])
+        for part, tokens in _EVERGREEN_PARTS:
+            if any(t in have for t in tokens):
+                continue  # entry already tracks this category
+            for wlo, whi in windows or ((lo, hi),):
+                copy = dict(part)
+                copy["yr_min"] = max(wlo, lo, copy.get("yr_min", wlo))
+                copy["yr_max"] = min(whi, hi, copy.get("yr_max", whi))
+                if copy["yr_min"] > copy["yr_max"]:
+                    continue  # window entirely outside entry/part bounds
+                info["top_parts"].append(copy)
+
+
+_apply_enthusiast_gen_evergreens()
+
 # 90s-2000s full-size trucks: manual/telescoping tow mirrors were the one
 # high-consensus truck category still missing on pre-power-fold generations
 # (the power-fold rows only start when that option did). Option-flagged like
