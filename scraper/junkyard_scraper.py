@@ -10258,6 +10258,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "scionxd": "Scion xD", "scionia": "Scion iA", "scioniq": "Scion iQ",
         "yarisia": "Yaris iA", "corollaim": "Corolla iM",
         "celicast": "Celica ST", "celicagt": "Celica GT",
+        "mr2": "MR2",            # pins 'Mr2' / 'MR-2' / 'Mr 2' feed spellings
         "mr2spyder": "MR2 Spyder", "vanwagon": "Van",
     },
     "volkswagen": {
