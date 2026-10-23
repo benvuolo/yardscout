@@ -8089,6 +8089,33 @@ ENGINE_FAMILIES: dict[str, dict] = {
             "starter": {"note": _STR_NOTE},
         },
     },
+    "jeep-kl-24": {
+        "display": "Jeep Cherokee KL 2.4 Tigershark",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            # KL Cherokee base engine. The 3.2 V6 (jeep-kl-32) and the
+            # 2022+ 2.0T share the model years — decode disambiguates. The
+            # 1984-2001 XJ Cherokee is a different truck (jeep-40 era).
+            ("Jeep", "Cherokee", 2014, 2022),
+            ("Jeep", "Cherokee Kl", 2014, 2022),  # feed spelling
+        ],
+        "parts": {
+            "alternator": {"note": "2.4 Tigershark unit — one published number across 14-19"},
+            "starter": {"note": "one published number 14-18; 19+ rows absent from the catalog"},
+        },
+    },
+    "jeep-kl-32": {
+        "display": "Jeep Cherokee KL 3.2 Pentastar",
+        "engine": {"liters": [3.2], "cyl": 6},
+        "apps": [
+            ("Jeep", "Cherokee", 2014, 2023),
+            ("Jeep", "Cherokee Kl", 2014, 2023),  # feed spelling
+        ],
+        "parts": {
+            "alternator": {"note": "3.2 unit — 2015-16 and 2020+ rows carry shield/module qualifiers; those years stay Likely, match part number"},
+            "starter": {"note": "only 2014 publishes clean; later rows absent or qualified"},
+        },
+    },
     "mopar-hemi57": {
         "display": "Chrysler 5.7 HEMI V8",
         "engine": {"liters": [5.7], "cyl": 8},
@@ -9809,6 +9836,20 @@ _ALT_VERIFIED: dict = {
              ("Chevrolet", "Malibu", 2018, 2021)],
         ],
     },
+    "jeep-kl-24": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-4198 (160A) Cherokee 2.4 2014-2019 — one published unit, unqualified every year (2020+ 2.4 rows absent).",
+        "groups": [[("Jeep", "Cherokee", 2014, 2019),
+                    ("Jeep", "Cherokee Kl", 2014, 2019)]],  # feed spelling
+    },
+    "jeep-kl-32": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-1237 (160A) Cherokee 3.2 — 2014 and 2017-2019 unqualified, one unit (2015 'Except Shield', 2016 engine-designation EHK/EHB and 2020-21 'Power Train Parts Module X87' rows are qualified — excluded).",
+        "groups": [
+            [("Jeep", "Cherokee", 2014, 2014),
+             ("Jeep", "Cherokee", 2017, 2019),
+             ("Jeep", "Cherokee Kl", 2014, 2014),
+             ("Jeep", "Cherokee Kl", 2017, 2019)],
+        ],
+    },
     "ford-escape-20eb": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4202 (135A) Escape 2.0 2013-2014. 2015-2016 2.0 cars are past this catalog edition — left at likely.",
         "groups": [[("Ford", "Escape", 2013, 2014)]],
@@ -11142,6 +11183,16 @@ _STR_VERIFIED: dict = {
     "gm-malibu-20t": {
         "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-1028 (1.2 kW) Malibu 2.0 2017-2021 — one published unit, unqualified (2016 row absent; 2022 past this catalog).",
         "groups": [[("Chevrolet", "Malibu", 2017, 2021)]],
+    },
+    "jeep-kl-24": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-4284 (1.4 kW) Cherokee 2.4 2014-2018 — one published unit, unqualified (2019+ rows absent).",
+        "groups": [[("Jeep", "Cherokee", 2014, 2018),
+                    ("Jeep", "Cherokee Kl", 2014, 2018)]],  # feed spelling
+    },
+    "jeep-kl-32": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-1031 (1.2 kW) Cherokee 3.2 2014 — one published unit, unqualified (later rows absent).",
+        "groups": [[("Jeep", "Cherokee", 2014, 2014),
+                    ("Jeep", "Cherokee Kl", 2014, 2014)]],
     },
     "nissan-mr16t": {
         "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-3139 (1.0 kW) Juke 1.6 2011-2015 unqualified (the 2016 row carries 'To 11/2015' and is excluded; 2017 is absent).",

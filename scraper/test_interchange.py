@@ -648,6 +648,63 @@ check("malibu-20t: 16-22 covered; starter verified 17-21; 17 alt stays Likely",
       and not any(r[2] <= 2017 <= r[3]
                   for g in js.ENGINE_FAMILIES["gm-malibu-20t"]["parts"]
                   ["alternator"]["verified"]["groups"] for r in g))
+# Explicit tier fixtures mirroring the 2026-10-23 hand-verified spot-checks
+# (see interchange_research.md, "Coverage run spot-checks 2026-10").
+check("sc1: 2006<->2008 Yaris alternator is Likely (no published 2006 row)",
+      _tier("toyota-1nz", "alternator",
+            (2006, "Toyota", "Yaris"), (2008, "Toyota", "Yaris")) == "likely")
+check("sc2: 2016<->2018 Yaris alternator verified (210-0893)",
+      _tier("toyota-1nz", "alternator",
+            (2016, "Toyota", "Yaris"), (2018, "Toyota", "Yaris")) == "verified")
+check("sc3: 2015 Yaris stays Likely against 2016 (build-date split)",
+      _tier("toyota-1nz", "alternator",
+            (2015, "Toyota", "Yaris"), (2016, "Toyota", "Yaris")) == "likely")
+check("sc4: xB <-> Toyota-alias xB alternator verified (210-0527)",
+      _tier("toyota-1nz", "alternator",
+            (2005, "Scion", "xB"), (2004, "Toyota", "Scion xB")) == "verified")
+check("sc5: Yaris starter 2013<->2014 demoted to Likely (dual-published)",
+      _tier("toyota-1nz", "starter",
+            (2013, "Toyota", "Yaris"), (2014, "Toyota", "Yaris")) == "likely")
+check("sc6: Sentra starter 2014<->2016 verified (280-3139)",
+      _tier("nissan-mra8", "starter",
+            (2014, "Nissan", "Sentra"), (2016, "Nissan", "Sentra")) == "verified")
+check("sc7: Juke alternator 2012<->2017 verified (210-4009)",
+      _tier("nissan-mr16t", "alternator",
+            (2012, "Nissan", "Juke"), (2017, "Nissan", "Juke")) == "verified")
+check("sc8: R52 Pathfinder alternator 2014<->2015 verified (210-4006)",
+      _tier("nissan-vq35de", "alternator",
+            (2014, "Nissan", "Pathfinder"),
+            (2015, "Nissan", "Pathfinder")) == "verified")
+check("sc9: Fusion alt 2013<->2016 verified; 2014 donor only Likely",
+      _tier("ford-fusion-cd4", "alternator",
+            (2013, "Ford", "Fusion"), (2016, "Ford", "Fusion")) == "verified"
+      and _tier("ford-fusion-cd4", "alternator",
+                (2013, "Ford", "Fusion"), (2014, "Ford", "Fusion")) == "likely")
+check("sc10: Golf<->Jetta Mk4 alt verified; Valeo-year Jetta only Likely",
+      _tier("vw-mk4", "alternator",
+            (2003, "Volkswagen", "Golf"),
+            (2004, "Volkswagen", "Jetta")) == "verified"
+      and _tier("vw-mk4", "alternator",
+                (2003, "Volkswagen", "Golf"),
+                (2001, "Volkswagen", "Jetta")) == "likely")
+
+check("jeep-kl: 2.4 and 3.2 families split; XJ-era Cherokee stays jeep-40",
+      _fam_hit("jeep-kl-24", 2016, "Jeep", "Cherokee")
+      and _fam_hit("jeep-kl-32", 2016, "Jeep", "Cherokee")
+      and _fam_hit("jeep-kl-24", 2016, "Jeep", "Cherokee Kl")
+      and not _fam_hit("jeep-kl-24", 1999, "Jeep", "Cherokee")
+      and _fam_hit("jeep-40", 1999, "Jeep", "Cherokee"))
+check("jeep-kl-24: alternator 2015<->2019 verified; 2020 donor only Likely",
+      _tier("jeep-kl-24", "alternator",
+            (2015, "Jeep", "Cherokee"), (2019, "Jeep", "Cherokee")) == "verified"
+      and _tier("jeep-kl-24", "alternator",
+                (2015, "Jeep", "Cherokee"), (2020, "Jeep", "Cherokee")) == "likely")
+check("jeep-kl-32: shield/module-qualified years outside the alt group",
+      _tier("jeep-kl-32", "alternator",
+            (2014, "Jeep", "Cherokee"), (2018, "Jeep", "Cherokee")) == "verified"
+      and _tier("jeep-kl-32", "alternator",
+                (2015, "Jeep", "Cherokee"), (2018, "Jeep", "Cherokee")) == "likely")
+
 check("gens: Golf/Rabbit/New Beetle/Beetle/Spark rows exist and split right",
       _gen_win("Volkswagen", "Golf", 2003) == (1999, 2006)
       and _gen_win("Volkswagen", "Rabbit", 2008) == (2006, 2009)

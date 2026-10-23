@@ -1366,6 +1366,28 @@ rotating-electrical row for the small-EcoBoost Fusions is option-qualified
 Feature"), so no verified group can be anchored and no family ships. Those
 cars stay at no-data until a clean application list is found.
 
+### jeep-kl-24 — Jeep Cherokee KL 2.4 Tigershark
+
+- **Engine:** 2.4L 4-cyl
+- **Family applications:** Jeep Cherokee 2014-2022 (+ "Cherokee Kl" spelling;
+  non-sole — 3.2 V6 and 2022 2.0T share the years, decode disambiguates)
+- **Context:** Cherokee 2014-22 was #10 in the gap ranking (348 vehicles).
+  The 1984-2001 XJ "Cherokee" is a different truck and matched jeep-40
+  already — windows keep them apart.
+- **alternator — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-4198 (160A) 2014-2019 — one unit, unqualified every year (2020+ 2.4 rows absent).
+  - Group 1: Cherokee 2014-2019
+- **starter — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-4284 (1.4 kW) 2014-2018 — one unit, unqualified (2019+ absent).
+  - Group 1: Cherokee 2014-2018
+
+### jeep-kl-32 — Jeep Cherokee KL 3.2 Pentastar
+
+- **Engine:** 3.2L V6
+- **Family applications:** Jeep Cherokee 2014-2023 (+ "Cherokee Kl" spelling)
+- **alternator — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-1237 (160A) 2014 and 2017-2019 unqualified, one unit. 2015 ("Except Shield"), 2016 (engine-designation EHK/EHB) and 2020-21 ("Power Train Parts Module X87") rows are qualified — excluded.
+  - Group 1 (one unit): Cherokee 2014 + 2017-2019
+- **starter — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-1031 (1.2 kW) 2014 — one unit, unqualified (later rows absent).
+  - Group 1: Cherokee 2014-2014
+
 ### vw-mk4 — VW Mk4 1.8T/2.0 (Golf/Jetta/New Beetle)
 
 - **Engine:** 1.8L turbo / 2.0L 8v 4-cyl
