@@ -52,6 +52,24 @@ cited below.**
   - Group 1: Acura CL 2001-2003; Acura TL 2000-2003
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### bmw-m52 — BMW M50/M52/S50/S52 I6 (E36/E39/Z3)
+
+- **Engine:** 2.5/2.8/3.0/3.2L 6-cyl
+- **Family applications:** BMW 3 Series 1992-1999, BMW 325i 1992-1995, BMW 325is 1992-1995, BMW 328i 1996-1999, BMW 328is 1996-1998, BMW 323i 1998-1999, BMW 323is 1998-1999, BMW M3 1995-1999, BMW Z3 1996-2002, BMW 525i 1992-1995, BMW 528i 1997-2000
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5395 (140A) 528i 2.8 1997-1998 unqualified — the Z3 2.8 rows for the same unit are case-size-qualified and excluded; every other E36-era row is OEM-number- or case-qualified (Bosch vs Valeo sourcing) and excluded.
+  - Group 1: BMW 528i 1997-1998
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5355 M3 3.2 1996-1999 and every Z3 1996-2002 (1.9/2.5/2.8/3.0/3.2 rows all carry the one number), unqualified; 280-5346 M3 3.0 1995.
+  - Group 1: BMW M3 1996-1999; BMW Z3 1996-2002
+  - Group 2: BMW M3 1995-1995
+
+### bmw-m54 — BMW M54 2.5/3.0 I6 (E46/E39/E53/E85)
+
+- **Engine:** 2.5/3.0L 6-cyl
+- **Family applications:** BMW 3 Series 2000-2006, BMW 325i 2001-2006, BMW 325ci 2001-2006, BMW 325xi 2001-2006, BMW 330i 2001-2006, BMW 330ci 2001-2006, BMW 330xi 2001-2006, BMW 525i 2001-2003, BMW 530i 2001-2003, BMW X3 2004-2006, BMW X5 2001-2006, BMW Z4 2003-2005
+- **alternator:** no verified group — Likely tier only. Note: every published M54 alternator row is OEM-number qualified (Bosch vs Valeo split) — all pairs stay Likely; match the number stamped on your unit
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5371 X5 3.0 2001-2006 unqualified — the one clean published M54 starter span (3-Series starter rows aren't published in this edition).
+  - Group 1: BMW X5 2001-2006
+
 ### cadillac-northstar — Cadillac Northstar 4.6 V8
 
 - **Engine:** 4.6L 8-cyl
@@ -67,8 +85,10 @@ cited below.**
 
 - **Engine:** 5.0/5.8L 8-cyl
 - **Family applications:** Ford Mustang 1987-1995, Ford F-150 1987-1996, Ford Bronco 1987-1996
-- **alternator — verified evidence:** Lester 7750 (Ford F07U-10300, 3G 95A side-mount) application list (maniacelectricmotors.com, retrieved 2026-10-22): F-150/F-250 5.0/5.8 1993-1996, Bronco 5.0/5.8 1993-1996, E-150 5.0/5.8 1993-1996. Mustang 5.0 1994-1995 uses the pivot-mount 3G and 1987-93 trucks the 2G — both left at likely.
+- **alternator — verified evidence:** Lester 7750 (Ford F07U-10300, 3G 95A side-mount) application list (maniacelectricmotors.com, retrieved 2026-10-22): F-150/F-250 5.0/5.8 1993-1996, Bronco 5.0/5.8 1993-1996, E-150 5.0/5.8 1993-1996; 1987-93 trucks (2G era) left at likely. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5123 and 210-5305 both list Mustang 5.0 1988-1993 with identical spans (two published case styles — match yours); 210-5310 Mustang 5.0 1994-1995 and 5.8 1995 (the same list also covers the 3.8 those years).
   - Group 1: Ford F-150 1993-1996; Ford Bronco 1993-1996
+  - Group 2: Ford Mustang 1988-1993
+  - Group 3: Ford Mustang 1994-1995
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### ford-40sohc — Ford 4.0 SOHC V6
@@ -76,10 +96,11 @@ cited below.**
 - **Engine:** 4.0L 6-cyl
 - **Family applications:** Ford Explorer 1997-2000, Ford Explorer 2001-2010, Ford Explorer Sport Trac 2001-2010, Ford Ranger 2001-2011, Ford Mustang 2005-2010
 - **Ambiguity cap:** Ford Explorer — 97–00 Explorers split 4.0 OHV vs 4.0 SOHC — same decode string; confirm SOHC
-- **alternator — verified evidence:** TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-07787 (Ford 1L2Z-10346-AB) Explorer 4.0 1997-2003 (97-01 SOHC, 02-03 all); 2-08258 (1L5Z-10346-BA) Ranger 4.0 2001-2005; 2-08437 (6R3Z-10346-A) Mustang 4.0 2005-2008.
+- **alternator — verified evidence:** TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-07787 (Ford 1L2Z-10346-AB) Explorer 4.0 1997-2003 (97-01 SOHC, 02-03 all); 2-08258 (1L5Z-10346-BA) Ranger 4.0 2001-2005; 2-08437 (6R3Z-10346-A) Mustang 4.0 2005-2008. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0701 (150A) Mustang 4.0 2009-2010.
   - Group 1: Ford Explorer 1997-2003
   - Group 2: Ford Ranger 2001-2005
   - Group 3: Ford Mustang 2005-2008
+  - Group 4: Ford Mustang 2009-2010
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### ford-46-2v — Ford 4.6 2V Modular V8
@@ -91,6 +112,15 @@ cited below.**
   - Group 2: Ford Mustang 1999-2004
   - Group 3: Ford Crown Victoria 1995-1999
   - Group 4: Mercury Grand Marquis 1998-2002
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### ford-46-3v — Ford 4.6 3V Modular V8 (Mustang GT S197)
+
+- **Engine:** 4.6L 8-cyl
+- **Family applications:** Ford Mustang 2005-2010
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5367 (135A) Mustang 4.6 2006-2008 unqualified (the 2009 row for the same unit is transmission-qualified and excluded); 210-5355 (135A) Mustang 4.6 2005. 09-10 rows split by transmission — left at likely.
+  - Group 1: Ford Mustang 2006-2008
+  - Group 2: Ford Mustang 2005-2005
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### ford-54-2v — Ford 5.4 2V Triton V8
@@ -110,16 +140,26 @@ cited below.**
   - Group 2: Ford F-150 2009-2010; Ford Expedition 2009-2014
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### ford-coyote — Ford Coyote 5.0 V8 (Mustang GT/F-150)
+
+- **Engine:** 5.0L 8-cyl
+- **Family applications:** Ford Mustang 2011-2023, Ford F-150 2011-2023, Ford F150* 2011-2023
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0533 (150A) Mustang 5.0 2012-2013 unqualified (the same published list covers the 3.7 and the 13 GT500 5.8); 210-0743 (200A) F-150 5.0 2012-2014 unqualified (the 11-14 'w/ Power Converter' rows are option-qualified and excluded).
+  - Group 1: Ford Mustang 2012-2013
+  - Group 2: Ford F-150 2012-2014; Ford F150* 2012-2014
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
 ### ford-cyclone — Ford 3.5/3.7 Cyclone V6 (non-turbo)
 
 - **Engine:** 3.5/3.7L 6-cyl
-- **Family applications:** Ford Edge 2007-2014, Ford Taurus 2008-2019, Ford Explorer 2011-2019, Ford Flex 2009-2019, Ford Mustang 2011-2017, Ford F-150 2011-2014
+- **Family applications:** Ford Edge 2007-2014, Ford Taurus 2008-2019, Ford Explorer 2011-2019, Ford Flex 2009-2019, Ford Mustang 2011-2014, Ford Mustang 2011-2017, Ford F-150 2011-2014
 - **Ambiguity cap:** Ford Taurus — SHO is the 3.5 EcoBoost twin-turbo — same decode string; confirm non-turbo
 - **Ambiguity cap:** Ford Explorer — Explorer Sport/Platinum is 3.5 EcoBoost — same decode string; confirm non-turbo
 - **Ambiguity cap:** Ford Flex — Flex EcoBoost shares the 3.5 decode string; confirm non-turbo
-- **alternator — verified evidence:** DSS/TRQ Lester 11273 application table (Ford 7T4Z-10346-A, Mitsubishi A3TJ1291, retrieved 2026-10-22): Edge 2007-2014, Taurus 3.5 2008-2012. Quality-Built 11271 175A (Ford 8A4Z-10346-A, partshawk.com): Taurus 2008-2012, Flex 2009-2012, Edge 2011-2013, Explorer 2011-2012.
+- **alternator — verified evidence:** DSS/TRQ Lester 11273 application table (Ford 7T4Z-10346-A, Mitsubishi A3TJ1291, retrieved 2026-10-22): Edge 2007-2014, Taurus 3.5 2008-2012. Quality-Built 11271 175A (Ford 8A4Z-10346-A, partshawk.com): Taurus 2008-2012, Flex 2009-2012, Edge 2011-2013, Explorer 2011-2012. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0533 (150A) Mustang 3.7 and 5.0 2012-2013 unqualified (11/14 rows split by transmission — excluded).
   - Group 1: Ford Edge 2007-2014; Ford Taurus 2008-2012
   - Group 2: Ford Taurus 2008-2012; Ford Flex 2009-2012; Ford Edge 2011-2013; Ford Explorer 2011-2012
+  - Group 3: Ford Mustang 2012-2013
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### ford-duratec30 — Ford/Mazda Duratec 3.0 DOHC V6
@@ -148,6 +188,15 @@ cited below.**
 - **Family applications:** Ford Escape 2013-2016
 - **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4202 (135A) Escape 2.0 2013-2014. 2015-2016 2.0 cars are past this catalog edition — left at likely.
   - Group 1: Ford Escape 2013-2014
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### ford-essex38 — Ford Essex 3.8/3.9 V6 (Mustang SN95)
+
+- **Engine:** 3.8/3.9L 6-cyl
+- **Family applications:** Ford Mustang 1994-2004
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5207 and 210-5310 both list Mustang 3.8 1994-2000 with identical spans (two published 130A case styles — match yours); 210-5348 (110A) Mustang 3.8 2001-2004 and 3.9 2004, unqualified.
+  - Group 1: Ford Mustang 1994-2000
+  - Group 2: Ford Mustang 2001-2004
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### ford-mzr — Ford/Mazda MZR-Duratec 2.0/2.3/2.5 I4
@@ -185,17 +234,21 @@ cited below.**
 ### gm-3800 — GM 3800 Series II/III V6
 
 - **Engine:** 3.8L 6-cyl
-- **Family applications:** Buick Lesabre 1996-2005, Pontiac Grand Prix 1997-2008, Pontiac Bonneville 1996-2005, Chevrolet Impala 2000-2005, Chevrolet Monte Carlo 1998-2005, Buick Regal 1997-2004, Buick Park Avenue 1997-2005, Buick Lucerne 2006-2008, Buick Lacrosse 2005-2009
-- **alternator — verified evidence:** Lester 8245 listing (OCPTY/amazon.com, GM 10464439/10480411, retrieved 2026-10-22): LeSabre 3.8 2000-2004, Bonneville 3.8 2000-2004. W-body 3800s (Grand Prix/Impala/Monte Carlo/Regal) use different mounting-era units — left at likely.
+- **Family applications:** Buick Lesabre 1996-2005, Pontiac Grand Prix 1997-2008, Pontiac Bonneville 1996-2005, Chevrolet Impala 2000-2005, Chevrolet Monte Carlo 1998-2005, Buick Regal 1997-2004, Buick Park Avenue 1997-2005, Buick Lucerne 2006-2008, Buick Lacrosse 2005-2009, Chevrolet Camaro 1995-2002, Pontiac Firebird 1995-2002
+- **alternator — verified evidence:** Lester 8245 listing (OCPTY/amazon.com, GM 10464439/10480411, retrieved 2026-10-22): LeSabre 3.8 2000-2004, Bonneville 3.8 2000-2004. W-body 3800s (Grand Prix/Impala/Monte Carlo/Regal) use different mounting-era units — left at likely. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5118 (105A, engine code K) Camaro 3.8 1995-1999 and Firebird 3.8 1995-1999, both unqualified.
   - Group 1: Buick Lesabre 2000-2004; Pontiac Bonneville 2000-2004
-- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+  - Group 2: Chevrolet Camaro 1995-1999; Pontiac Firebird 1995-1999
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5100 Camaro 3.8 (K) 1995-1997 and Firebird 3.8 1995-1997, unqualified.
+  - Group 1: Chevrolet Camaro 1995-1997; Pontiac Firebird 1995-1997
 
-### gm-60deg — GM 60° 3.1/3.4 V6
+### gm-60deg — GM 60° 2.8/3.1/3.4 V6
 
-- **Engine:** 3.1/3.4L 6-cyl
-- **Family applications:** Chevrolet Venture 1997-2005, Pontiac Montana 1999-2005, Pontiac Grand Am 1999-2005, Oldsmobile Alero 1999-2004, Chevrolet Impala 2000-2005, Chevrolet Monte Carlo 2000-2005, Chevrolet Malibu 1997-2005, Buick Century 1997-2005, Pontiac Aztek 2001-2005, Buick Rendezvous 2002-2007, Chevrolet Equinox 2005-2009, Pontiac Torrent 2006-2009
-- **alternator — verified evidence:** Lester 13993 (GM 10317647/10440635, Valeo SG10S029) application list (dbelectrical.com 400-40079, retrieved 2026-10-22): Venture 3.4 2002-2005, Montana 3.4 2002-2005, Silhouette 3.4 2002-2004. Grand Am/Alero/Impala/Malibu 3.4 use CS130D-era Delco units with multiple amp options — left at likely.
+- **Engine:** 2.8/3.1/3.4L 6-cyl
+- **Family applications:** Chevrolet Camaro 1987-1995, Pontiac Firebird 1987-1995, Chevrolet Venture 1997-2005, Pontiac Montana 1999-2005, Pontiac Grand Am 1999-2005, Oldsmobile Alero 1999-2004, Chevrolet Impala 2000-2005, Chevrolet Monte Carlo 2000-2005, Chevrolet Malibu 1997-2005, Buick Century 1997-2005, Pontiac Aztek 2001-2005, Buick Rendezvous 2002-2007, Chevrolet Equinox 2005-2009, Pontiac Torrent 2006-2009
+- **alternator — verified evidence:** Lester 13993 (GM 10317647/10440635, Valeo SG10S029) application list (dbelectrical.com 400-40079, retrieved 2026-10-22): Venture 3.4 2002-2005, Montana 3.4 2002-2005, Silhouette 3.4 2002-2004. Grand Am/Alero/Impala/Malibu 3.4 use CS130D-era Delco units with multiple amp options — left at likely. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5132 (100A) Camaro and Firebird 2.8 1987-1989 and 3.1 1990-1992, one unit across both displacements; 210-5126 (105A) Camaro and Firebird 3.4 1993-1995.
   - Group 1: Chevrolet Venture 2002-2005; Pontiac Montana 2002-2005
+  - Group 2: Chevrolet Camaro 1987-1992; Pontiac Firebird 1987-1992
+  - Group 3: Chevrolet Camaro 1993-1995; Pontiac Firebird 1993-1995
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### gm-atlas42 — GM Atlas 4.2 I6 (LL8)
@@ -205,6 +258,17 @@ cited below.**
 - **alternator — verified evidence:** TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-08290 (GM 19151920) Trailblazer/Envoy 4.2 L6 2002-2006.
   - Group 1: Chevrolet Trailblazer 2002-2006; GMC Envoy 2002-2006
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### gm-corvette-c6 — GM Gen IV LS V8 (Corvette C6/Camaro SS)
+
+- **Engine:** 6.0/6.2/7.0L 8-cyl
+- **Family applications:** Chevrolet Corvette 2005-2013, Chevrolet Camaro 2010-2015
+- **alternator — verified evidence:** Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6020 (145A) Corvette 6.0 2005-2007, 7.0 2006-2012 and 6.2 2008-2012 — one published unit across the LS2/LS3/LS7; the supercharged ZR1 (211-6028) is its own unit, so the verified span stops at 2008 before the ZR1 enters the fleet. Denso reman 210-0325 (150A) Camaro 6.2 2012-2013 (the 2014 row is stamp-qualified and excluded).
+  - Group 1: Chevrolet Corvette 2005-2008
+  - Group 2: Chevrolet Camaro 2012-2013
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5391 Corvette 6.0 2006-2007, 6.2 2008-2013 and 7.0 2006-2013, unqualified — one published starter for the whole C6 including the ZR1; 280-4331 Camaro 6.2 2012 and 2015 (the 10-11 rows are vendor-qualified and excluded).
+  - Group 1: Chevrolet Corvette 2006-2013
+  - Group 2: Chevrolet Camaro 2012-2012; Chevrolet Camaro 2015-2015
 
 ### gm-ecotec22 — GM Ecotec 2.2 I4 (L61)
 
@@ -224,6 +288,26 @@ cited below.**
   - Group 1: Chevrolet Equinox 2010-2017; GMC Terrain 2010-2017
   - Group 2: Saturn VUE 2008-2010
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### gm-fbody-lt1 — GM LT1 5.7 V8 (F-body/C4 Corvette)
+
+- **Engine:** 5.7L 8-cyl
+- **Family applications:** Chevrolet Camaro 1993-1997, Pontiac Firebird 1993-1997, Chevrolet Corvette 1992-1996
+- **alternator:** no verified group — Likely tier only. Note: LT1 alternator rows aren't published in this catalog (Delco CS-series cars) — all pairs stay Likely; match the CS130/CS144 number on your unit
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5109 Camaro 5.7 (P) 1995-1997 and Firebird 5.7 1995-1997, unqualified; 280-5160 Camaro and Firebird 5.7 1987-1994 (the LT1 years 93-94 of that span sit in this family); 280-0299 Corvette 5.7 1996 (the 90-95 rows are 'Exc. ZR1' and excluded).
+  - Group 1: Chevrolet Camaro 1995-1997; Pontiac Firebird 1995-1997
+  - Group 2: Chevrolet Camaro 1987-1994; Pontiac Firebird 1987-1994
+  - Group 3: Chevrolet Corvette 1996-1996
+
+### gm-fbody-tpi — GM 5.0/5.7 TBI/TPI V8 (F-body/C4 Corvette)
+
+- **Engine:** 5.0/5.7L 8-cyl
+- **Family applications:** Chevrolet Camaro 1982-1992, Pontiac Firebird 1982-1992, Chevrolet Corvette 1985-1991
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5144 (100A) Camaro and Firebird 5.0 (E/F) and 5.7 (8) 1988-1989 — one unqualified unit across both displacements and models; 210-5102 (100A) the same four applications 1990-1992. Pre-88 rows and C4 Corvette alternator rows aren't published — left at likely.
+  - Group 1: Chevrolet Camaro 1988-1989; Pontiac Firebird 1988-1989
+  - Group 2: Chevrolet Camaro 1990-1992; Pontiac Firebird 1990-1992
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0299 Corvette 5.7 1988-1989 unqualified (the 90-95 rows exclude the ZR1 and the 96 row anchors the LT1 family). F-body starter rows split 5.0 vs 5.7 within the same years — excluded to avoid cross-displacement claims.
+  - Group 1: Chevrolet Corvette 1988-1989
 
 ### gm-gen3-truck — GM Gen III Vortec truck V8 (4.8/5.3/6.0)
 
@@ -260,6 +344,16 @@ cited below.**
   - Group 4: Cadillac CTS 2010-2013
   - Group 5: Cadillac SRX 2004-2009; Cadillac STS 2005-2011
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### gm-ls1-car — GM LS1/LS6 5.7 V8 (F-body/C5 Corvette)
+
+- **Engine:** 5.7L 8-cyl
+- **Family applications:** Chevrolet Camaro 1998-2002, Pontiac Firebird 1998-2002, Chevrolet Corvette 1997-2004
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5164 (102A, engine code G) Camaro 5.7 1998-2002 and Firebird 5.7 1998-2002, one published unit, unqualified. Denso First Time Fit 211-6025 (145A) Corvette 5.7 2004 (the 2003 row is transmission/design-qualified and excluded; 97-02 C5 alternator rows aren't published).
+  - Group 1: Chevrolet Camaro 1998-2002; Pontiac Firebird 1998-2002
+  - Group 2: Chevrolet Corvette 2004-2004
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5112 in one published set — Camaro 5.7 1998-2001, Firebird 5.7 1998-2001 and Corvette 5.7 1997-2001, unqualified.
+  - Group 1: Chevrolet Camaro 1998-2001; Pontiac Firebird 1998-2001; Chevrolet Corvette 1997-2001
 
 ### gm-vortec-van — Chevy/GMC Vortec V8 van (Express/Savana)
 
@@ -349,6 +443,35 @@ cited below.**
   - Group 1: Honda Accord 1986-1989
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### honda-b18 — Honda/Acura B17/B18 1.7/1.8 I4 (Integra)
+
+- **Engine:** 1.7/1.8L 4-cyl
+- **Family applications:** Acura Integra 1990-2001
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows unqualified: 210-0223 (65A) Integra B18A1 1990-1991; 210-0214 (80A) Integra B18A1 1992-1993 and B17A1 1993; 210-0211 (90A) Integra B18B1 and B18C1 1994-1995, one unit for both. The 96-01 span splits by trim (Type R B18C5 210-4190 vs all others 210-0199) — excluded from verified; match part number there.
+  - Group 1: Acura Integra 1990-1991
+  - Group 2: Acura Integra 1992-1993
+  - Group 3: Acura Integra 1994-1995
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0194 Integra 1.8 1990-1993 and 1.7 1993, unqualified. 94-01 rows split by transmission and are excluded.
+  - Group 1: Acura Integra 1990-1993
+
+### honda-d-ef — Honda D15/D16 1.5/1.6 I4 (EF Civic/CRX)
+
+- **Engine:** 1.5/1.6L 4-cyl
+- **Family applications:** Honda Civic 1988-1991, Honda CRX 1988-1991
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0227 (60A) Civic D15B2 1990-1991, Civic D16A6 1990-1991, CRX D15B2/D15B6 1990-1991 and CRX D16A6 1990-1991 — one unqualified unit across both engines and models. The 1988-89 rows are vendor-split (DENSO Unit) and excluded.
+  - Group 1: Honda Civic 1990-1991; Honda CRX 1990-1991
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### honda-d-eg — Honda D15/D16 1.5/1.6 I4 (EG Civic/Del Sol)
+
+- **Engine:** 1.5/1.6L 4-cyl
+- **Family applications:** Honda Civic 1992-1995, Honda Civic Del Sol 1993-1995, Honda Del Sol 1993-1995
+- **Ambiguity cap:** Honda Civic Del Sol — VTEC (B16A3 1.6 DOHC) Del Sols use a different unit — this family covers the D-series singles-cam cars; confirm the engine code
+- **Ambiguity cap:** Honda Del Sol — VTEC (B16A3 1.6 DOHC) Del Sols use a different unit — this family covers the D-series single-cam cars; confirm the engine code
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4133 lists Civic D15B7/B8/Z1 1994-1995 and Del Sol D15B7 1993-1995 unqualified; for the 1.6 D16Z6 (Civic 92-95, Del Sol 93-95) the catalog publishes two interchange-equivalent sourcings with identical spans — Denso-built 210-0213 and Mitsubishi-built 210-4133 — so every 92-95 D-series car is covered by a published list; match the vendor tag on a 1.6 (3MZ-precedent dual-list note). VTEC (B16A3) Del Sols are a different engine and capped by the app-level ambiguity flag.
+  - Group 1: Honda Civic 1992-1995; Honda Civic Del Sol 1993-1995; Honda Del Sol 1993-1995
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
 ### honda-d16 — Honda D16 1.6 SOHC I4
 
 - **Engine:** 1.6L 4-cyl
@@ -363,6 +486,15 @@ cited below.**
 - **Family applications:** Honda Civic 2001-2005
 - **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4148 (70A) Civic 1.7 D17A1/A2/A6/A7 2001-2005 (exc Canada). Corroborated by Lester 13893 (Honda 31100-PLM-A02) listings incl. Acura EL 1.7.
   - Group 1: Honda Civic 2001-2005
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### honda-f20c — Honda F20C/F22C 2.0/2.2 I4 (S2000)
+
+- **Engine:** 2.0/2.2L 4-cyl
+- **Family applications:** Honda S2000 2000-2009
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0458 (105A) S2000 F20C1 2000-2003; 210-0597 (105A) S2000 F22C1 2004-2005, both unqualified. 2006-09 (same F22C1) is past this catalog edition — left at likely.
+  - Group 1: Honda S2000 2000-2003
+  - Group 2: Honda S2000 2004-2005
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### honda-f22 — Honda F22 2.2 I4
@@ -381,6 +513,15 @@ cited below.**
 - **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0192 (80A) Accord 2.3 1998-2002 (coupe/ULEV splits) and 210-0193 (80A) Accord 2.3 sedan exc-ULEV 1998-2001 + Acura CL 2.3 1998-1999. Both units cover the Accord span; the CL pairs via 210-0193.
   - Group 1: Honda Accord 1998-2002
   - Group 2: Honda Accord 1998-2001; Acura CL 1998-1999
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### honda-h22 — Honda H22/H23/F22 2.2/2.3 I4 (Prelude)
+
+- **Engine:** 2.2/2.3L 4-cyl
+- **Family applications:** Honda Prelude 1992-2001
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0197 (90A) Prelude H22A4 1997-1998; 210-0456 (90A) Prelude H22A4 1999-2001, both unqualified. The 92-96 span splits three ways (F22A1 non-VTEC 210-0216 / H22A1 VTEC 210-0217 / H23A1 2.3 210-0215) — year spans can't separate the trims, so 92-96 stays at likely.
+  - Group 1: Honda Prelude 1997-1998
+  - Group 2: Honda Prelude 1999-2001
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### honda-j30 — Honda/Acura J30 3.0 V6 (Accord)
@@ -416,6 +557,15 @@ cited below.**
   - Group 1: Honda Pilot 2009-2011; Honda Ridgeline 2009-2011
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### honda-k20 — Honda/Acura K20 2.0 I4 (Civic Si/RSX)
+
+- **Engine:** 2.0L 4-cyl
+- **Family applications:** Honda Civic 2002-2011, Acura RSX 2002-2006
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0525 (80A) Civic 2.0 (K20A3, EP3 Si) 2002-2005 unqualified; 210-0609 (105A) Civic 2.0 K20Z3 (FG/FA Si) 2006-2011 unqualified. RSX rows split by trim (Type S 210-0507 vs base 210-4168) and are excluded.
+  - Group 1: Honda Civic 2002-2005
+  - Group 2: Honda Civic 2006-2011
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
 ### honda-k24a — Honda/Acura K24 2.4 I4 (02–09 era)
 
 - **Engine:** 2.4L 4-cyl
@@ -449,6 +599,54 @@ cited below.**
   - Group 2: Jeep Wrangler 2001-2006
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### mazda-miata-16 — Mazda B6 1.6 I4 (Miata NA)
+
+- **Engine:** 1.6L 4-cyl
+- **Family applications:** Mazda Miata 1990-1993, Mazda MX-5* 1990-1993
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4184 (60A) Miata 1.6 1990 unqualified — the 1991-93 rows for the same and sibling units are transmission-qualified (M/T 210-4184 / A/T 210-4270) and excluded.
+  - Group 1: Mazda Miata 1990-1990; Mazda MX-5* 1990-1990
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4160 Miata 1.6 1990-1993 unqualified (the same published list covers the 94-97 1.8 M/T cars, which are transmission-qualified rows).
+  - Group 1: Mazda Miata 1990-1993; Mazda MX-5* 1990-1993
+
+### mazda-miata-18 — Mazda BP 1.8 I4 (Miata NA/NB)
+
+- **Engine:** 1.8L 4-cyl
+- **Family applications:** Mazda Miata 1994-2005, Mazda MX-5* 1994-2005
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3155 (70A) Miata 1.8 1999-2000; 210-3157 (80A) Miata 1.8 2001-2005, both unqualified. The 1994-97 (NA8) rows split by transmission (210-4157 A/T / 210-4284 M/T) and are excluded.
+  - Group 1: Mazda Miata 1999-2000; Mazda MX-5* 1999-2000
+  - Group 2: Mazda Miata 2001-2005; Mazda MX-5* 2001-2005
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4137 Miata 1.8 1999-2005 unqualified. The 94-97 rows split by transmission and are excluded.
+  - Group 1: Mazda Miata 1999-2005; Mazda MX-5* 1999-2005
+
+### mazda-miata-nc — Mazda MZR 2.0 I4 (Miata NC)
+
+- **Engine:** 2.0L 4-cyl
+- **Family applications:** Mazda Miata 2006-2015, Mazda MX-5* 2006-2015
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4238 (100A) MX-5 Miata 2.0 2006-2008 (the same published list covers the 2006-09 Mazda6); 210-4334 (100A) MX-5 Miata 2.0 2009-2012, both unqualified. 2013-15 is past this catalog edition — left at likely.
+  - Group 1: Mazda Miata 2006-2008; Mazda MX-5* 2006-2008
+  - Group 2: Mazda Miata 2009-2012; Mazda MX-5* 2009-2012
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4334 MX-5 Miata 2.0 2006-2008; 280-4336 MX-5 Miata 2.0 2009-2012, both unqualified.
+  - Group 1: Mazda Miata 2006-2008; Mazda MX-5* 2006-2008
+  - Group 2: Mazda Miata 2009-2012; Mazda MX-5* 2009-2012
+
+### mazda-rx7 — Mazda 13B rotary (RX-7)
+
+- **Engine:** 1.3L 2-cyl
+- **Family applications:** Mazda RX-7 1986-1995, Mazda RX7 1986-1995
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4241 (100A) RX-7 1.3 rotary 1993-1995 unqualified (the FD span). The 86-88 FC row is turbo-qualified and 89-92 FC rows aren't published — both excluded.
+  - Group 1: Mazda RX-7 1993-1995; Mazda RX7 1993-1995
+- **starter:** no verified group — Likely tier only. Note: FC starters split by transmission — match part number
+
+### mazda-rx8 — Mazda 13B-MSP Renesis rotary (RX-8)
+
+- **Engine:** 1.3L 2-cyl
+- **Family applications:** Mazda RX-8 2004-2011, Mazda RX8 2004-2011
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4213 (100A) RX-8 2005-2007 (the 2004 row is build-date-qualified 'From 04/04/2003' and excluded); 210-4343 (110A) RX-8 2009-2011, unqualified. No 2008 alternator row is published — 2008 stays at likely.
+  - Group 1: Mazda RX-8 2005-2007; Mazda RX8 2005-2007
+  - Group 2: Mazda RX-8 2009-2011; Mazda RX8 2009-2011
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4342 RX-8 2011 (engine codes M, P) unqualified — the 2009-10 rows for the same unit are transmission-qualified and excluded.
+  - Group 1: Mazda RX-8 2011-2011; Mazda RX8 2011-2011
+
 ### mini-r50 — MINI Cooper 1.6 (R50/R52/R53)
 
 - **Engine:** 1.6L 4-cyl
@@ -457,10 +655,55 @@ cited below.**
   - Group 1: MINI Cooper 2002-2005
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### mitsu-24 — Mitsubishi 4G64/4G69 2.4 I4
+
+- **Engine:** 2.4L 4-cyl
+- **Family applications:** Mitsubishi Eclipse 2000-2012, Mitsubishi Galant 1994-2012, Mitsubishi Lancer 2005-2006, Mitsubishi Outlander 2003-2006
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows engine-coded 4G64/4G69 and unqualified: 210-4215 (110A) Eclipse 2.4 2006-2011, Galant 2.4 2004-2011 and Lancer 2.4 2005-2006 — one published unit across all three; 210-4142 (85A) Galant 2.4 2000-2003; 210-4156 (90A) Galant 2.4 1997-1999; 210-4160 (90A) Eclipse 2.4 2000-2001 (the 02-05 rows split by transmission and are excluded).
+  - Group 1: Mitsubishi Eclipse 2006-2011; Mitsubishi Galant 2004-2011; Mitsubishi Lancer 2005-2006
+  - Group 2: Mitsubishi Galant 2000-2003
+  - Group 3: Mitsubishi Galant 1997-1999
+  - Group 4: Mitsubishi Eclipse 2000-2001
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### mitsu-6g72 — Mitsubishi 6G72 3.0 V6 (Eclipse/Galant)
+
+- **Engine:** 3.0L 6-cyl
+- **Family applications:** Mitsubishi Eclipse 2000-2005, Mitsubishi Galant 1999-2003
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4179 (85A) in one published set — Eclipse 3.0 2002-2005 and 2000, Galant 3.0 2002-2003 and 1999-2000, all unqualified (2001 rows aren't printed for either model, so 2001 cars sit between spans).
+  - Group 1: Mitsubishi Eclipse 2002-2005; Mitsubishi Eclipse 2000-2000; Mitsubishi Galant 2002-2003; Mitsubishi Galant 1999-2000
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### mitsu-6g75 — Mitsubishi 6G75 3.8 V6 (Eclipse/Galant)
+
+- **Engine:** 3.8L 6-cyl
+- **Family applications:** Mitsubishi Eclipse 2006-2012, Mitsubishi Galant 2004-2009
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4230 (110A) Eclipse 3.8 2006-2011 and Galant 3.8 2005-2009, one published unit, unqualified; 210-4208 (110A) Galant 3.8 2004.
+  - Group 1: Mitsubishi Eclipse 2006-2011; Mitsubishi Galant 2005-2009
+  - Group 2: Mitsubishi Galant 2004-2004
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### mitsu-dsm — Mitsubishi 4G63/420A 1.8/2.0 I4 (DSM Eclipse/Talon)
+
+- **Engine:** 1.8/2.0L 4-cyl
+- **Family applications:** Mitsubishi Eclipse 1990-1995, Mitsubishi Eclipse 1996-1999, Eagle Talon 1990-1998, Plymouth Laser 1990-1994
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4120 (90A) Eclipse 1999 listed for the 420A and the 4G63 turbo alike, unqualified — one published unit for every 99 Eclipse. All earlier DSM rows split by transmission, turbo or drivetrain and are excluded.
+  - Group 1: Mitsubishi Eclipse 1999-1999
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### mitsu-evo — Mitsubishi Evo 2.0 turbo I4 (4G63T/4B11T)
+
+- **Engine:** 2.0L 4-cyl
+- **Family applications:** Mitsubishi Lancer Evolution 2003-2015
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4229 (90A) Lancer 4G63 'w/ Turbo' 2003-2006 — every US Lancer Evolution those years is the 4G63 turbo, so the span is exact for the Evolution model; 210-4338 (130A) Lancer 4B11 'w/ Turbo' 2008-2011 — the Evo X span (the Ralliart shares the engine but is a separate feed model). 2012-15 Evo X is past this catalog edition — left at likely.
+  - Group 1: Mitsubishi Lancer Evolution 2003-2006
+  - Group 2: Mitsubishi Lancer Evolution 2008-2011
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
 ### mopar-37 — Chrysler PowerTech 3.7 V6
 
 - **Engine:** 3.7L 6-cyl
-- **Family applications:** Jeep Liberty 2002-2012, Dodge Dakota 2004-2011, Dodge|Ram Ram* 2002-2012, Jeep Grand Cherokee 2005-2010, Dodge Nitro 2007-2011, Jeep Commander 2006-2010
+- **Family applications:** Jeep Liberty 2002-2012, Dodge Dakota 2004-2011, Dodge|Ram Ram* 2002-2012, Ram 1500* 2011-2012, Jeep Grand Cherokee 2005-2010, Dodge Nitro 2007-2011, Jeep Commander 2006-2010
 - **alternator — verified evidence:** Mopar OEM 56029914AC fitment (jeeppartsdeal.com, retrieved 2026-10-22): Liberty 3.7 2002-2005, Grand Cherokee 3.7 2005-2006; Denso 421000-0040 vendor table: Commander 3.7 2006-2010. Mopar RL041120AC/56029700AD: Ram 3.7 2002-2008 (same units as the 4.7 trucks).
   - Group 1: Jeep Liberty 2002-2005; Jeep Grand Cherokee 2005-2006; Jeep Commander 2006-2010
   - Group 2: Dodge|Ram Ram* 2002-2008
@@ -469,7 +712,7 @@ cited below.**
 ### mopar-47 — Chrysler PowerTech 4.7 V8
 
 - **Engine:** 4.7L 8-cyl
-- **Family applications:** Jeep Grand Cherokee 1999-2009, Dodge Dakota 2000-2011, Dodge Durango 2000-2009, Dodge|Ram Ram* 2002-2013, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
+- **Family applications:** Jeep Grand Cherokee 1999-2009, Dodge Dakota 2000-2011, Dodge Durango 2000-2009, Dodge|Ram Ram* 2002-2013, Ram 1500* 2011-2013, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
 - **alternator — verified evidence:** Mopar OEM 56029914AC (160A Denso, replaces 56029914AA) fitment (jeeppartsdeal.com, retrieved 2026-10-22): Durango 3.7/4.7 2001-2007, Grand Cherokee 3.7/4.7 2005-2006; Denso 421000-0040 vendor table adds Commander 3.7/4.7 2006-2010. Mopar RL041120AC (Ram 1500 3.7/4.7 2002-2007) and 56029700AD (Ram 1500 2008) cover the trucks.
   - Group 1: Dodge Durango 2001-2007; Jeep Grand Cherokee 2005-2006; Jeep Commander 2006-2009
   - Group 2: Dodge|Ram Ram* 2002-2008
@@ -486,7 +729,7 @@ cited below.**
 ### mopar-hemi57 — Chrysler 5.7 HEMI V8
 
 - **Engine:** 5.7L 8-cyl
-- **Family applications:** Dodge|Ram Ram* 2003-2024, Dodge Charger 2006-2023, Dodge Challenger 2009-2023, Chrysler 300 2005-2023, Dodge Magnum 2005-2008, Jeep Grand Cherokee 2005-2021, Dodge Durango 2011-2023, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
+- **Family applications:** Dodge|Ram Ram* 2003-2024, Ram 1500* 2011-2024, Ram 2500* 2011-2024, Ram 3500* 2011-2024, Dodge Charger 2006-2023, Dodge Challenger 2009-2023, Chrysler 300 2005-2023, Dodge Magnum 2005-2008, Jeep Grand Cherokee 2005-2021, Dodge Durango 2011-2023, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
 - **alternator — verified evidence:** TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-11298 (Chrysler 5602869, Denso 7S) Ram 5.7 2007-2008.
   - Group 1: Dodge|Ram Ram* 2007-2008
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
@@ -511,7 +754,7 @@ cited below.**
 ### mopar-pentastar — Chrysler Pentastar 3.6 V6
 
 - **Engine:** 3.6L 6-cyl
-- **Family applications:** Dodge Grand Caravan 2011-2020, Chrysler Town & Country 2011-2016, Chrysler Town And Country 2011-2016, Dodge Journey 2011-2020, Dodge Avenger 2011-2014, Chrysler 200 2011-2017, Dodge Charger 2011-2023, Dodge Challenger 2011-2023, Chrysler 300 2011-2023, Dodge Durango 2011-2024, Jeep Grand Cherokee 2011-2021, Jeep Wrangler 2012-2018, Dodge|Ram Ram* 2013-2024
+- **Family applications:** Dodge Grand Caravan 2011-2020, Chrysler Town & Country 2011-2016, Chrysler Town And Country 2011-2016, Dodge Journey 2011-2020, Dodge Avenger 2011-2014, Chrysler 200 2011-2017, Dodge Charger 2011-2023, Dodge Challenger 2011-2023, Chrysler 300 2011-2023, Dodge Durango 2011-2024, Jeep Grand Cherokee 2011-2021, Jeep Wrangler 2012-2018, Dodge|Ram Ram* 2013-2024, Ram 1500* 2013-2024
 - **alternator — verified evidence:** TYC 2-11570 fitment list (finditparts.com) + BBB 11570 table (partcatalog.com; Chrysler 68272108AD, Denso 421000-0770, retrieved 2026-10-22): Grand Caravan 2011-2020, Town & Country 2011-2016, Journey 3.6 2011-2019, Avenger 3.6 2011-2014, 200 3.6 2011-2014.
   - Group 1: Dodge Grand Caravan 2011-2020; Chrysler Town & Country 2011-2016; Chrysler Town And Country 2011-2016; Dodge Journey 2011-2019; Dodge Avenger 2011-2014; Chrysler 200 2011-2014
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
@@ -542,15 +785,17 @@ cited below.**
   - Group 1: Nissan Versa 2012-2019; Nissan Versa Note 2014-2019
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
-### nissan-ka24 — Nissan KA24DE 2.4 I4
+### nissan-ka24 — Nissan KA24E/DE 2.4 I4
 
 - **Engine:** 2.4L 4-cyl
-- **Family applications:** Nissan Altima 1993-2001, Nissan 240SX 1991-1998, Nissan Frontier 1998-2004, Nissan Xterra 2000-2004
-- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3146 (100A) Altima KA24DE 1998-2001; 210-3156 (70A) Frontier and Xterra KA24DE 2002-2004; 210-3118 (70A) Frontier 1998-2000 and Xterra 2000. 240SX/early Altima use other units — left at likely.
+- **Family applications:** Nissan Altima 1993-2001, Nissan 240SX 1989-1998, Nissan Frontier 1998-2004, Nissan Xterra 2000-2004
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3146 (100A) Altima KA24DE 1998-2001; 210-3156 (70A) Frontier and Xterra KA24DE 2002-2004; 210-3118 (70A) Frontier 1998-2000 and Xterra 2000; 210-3170 (80A) 240SX KA24E 1989-1990. The 91-98 (KA24DE) 240SX and early Altima use other units — left at likely.
   - Group 1: Nissan Altima 1998-2001
   - Group 2: Nissan Frontier 2002-2004; Nissan Xterra 2002-2004
   - Group 3: Nissan Frontier 1998-2000; Nissan Xterra 2000-2000
-- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+  - Group 4: Nissan 240SX 1989-1990
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4109 240SX 2.4 1991-1996 unqualified (the 89-90 rows are vendor-split and excluded).
+  - Group 1: Nissan 240SX 1991-1996
 
 ### nissan-mr18 — Nissan MR18DE 1.8 I4
 
@@ -585,15 +830,26 @@ cited below.**
   - Group 1: Nissan Titan 2004-2006; Nissan Armada 2005-2006; Nissan Pathfinder Armada 2004-2004
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### nissan-vq-hr — Nissan/Infiniti VQ35HR/VQ37VHR 3.5/3.7 V6
+
+- **Engine:** 3.5/3.7L 6-cyl
+- **Family applications:** Nissan 350Z 2007-2009, Nissan 370Z 2009-2020, Infiniti G35 2007-2008, Infiniti G37 2008-2013
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4313 (150A) in one published application set — 350Z VQ35HR 2007-2009, G35 VQ35HR 2007-2008 (both 07 trim rows carry the same number), G37 VQ37VHR 2008-2010, 370Z VQ37VHR 2009 (the 2010 370Z rows are build-date-qualified 'To 02/2010' and excluded).
+  - Group 1: Nissan 350Z 2007-2009; Infiniti G35 2007-2008; Infiniti G37 2008-2010; Nissan 370Z 2009-2009
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-3143 370Z 3.7 2010-2011 and G37 3.7 2011, unqualified (350Z/G35 HR starter rows are build-date- or trim-qualified and excluded).
+  - Group 1: Nissan 370Z 2010-2011; Infiniti G37 2011-2011
+
 ### nissan-vq35de — Nissan/Infiniti VQ35DE 3.5 V6
 
 - **Engine:** 3.5L 6-cyl
 - **Family applications:** Nissan Altima 2002-2006, Nissan Maxima 2002-2014, Nissan Murano 2003-2014, Nissan Pathfinder 2001-2004, Nissan Quest 2004-2009, Nissan 350Z 2003-2006, Infiniti G35 2003-2006, Infiniti I35 2002-2004, Infiniti FX35 2003-2008
-- **alternator — verified evidence:** OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely.
+- **alternator — verified evidence:** OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely; 210-4211 (110A) 350Z VQ35DE 2003-2006 and G35 2004-2006 (the 2003 G35 sedan row is body-qualified and excluded).
   - Group 1: Nissan Altima 2002-2006; Nissan Maxima 2002-2003; Nissan Murano 2003-2007; Infiniti I35 2002-2004
   - Group 2: Nissan Maxima 2004-2008
   - Group 3: Nissan Maxima 2009-2010; Nissan Murano 2009-2009
-- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+  - Group 4: Nissan 350Z 2003-2006; Infiniti G35 2004-2006
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-3133 350Z VQ35DE 2003-2006 unqualified (the 2007 HR rows are build-date-qualified; G35 rows are drivetrain-qualified and excluded).
+  - Group 1: Nissan 350Z 2003-2006
 
 ### nissan-vq40 — Nissan VQ40DE 4.0 V6
 
@@ -603,6 +859,23 @@ cited below.**
   - Group 1: Nissan Frontier 2005-2008; Nissan Pathfinder 2005-2008; Nissan Xterra 2005-2008
   - Group 2: Nissan Frontier 2007-2019
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### nissan-z32 — Nissan VG30DE/DETT 3.0 V6 (300ZX Z32)
+
+- **Engine:** 3.0L 6-cyl
+- **Family applications:** Nissan 300ZX 1990-1996
+- **alternator:** no verified group — Likely tier only. Note: NA (VG30DE) and twin-turbo (VG30DETT) alternators differ and the decode can't tell them apart — all pairs stay Likely; match part number
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4122 300ZX 3.0 1990-1996 unqualified — one published starter for every Z32, NA and twin-turbo (the 1989 Z31 row is vendor-qualified and excluded).
+  - Group 1: Nissan 300ZX 1990-1996
+
+### subaru-ej205 — Subaru EJ205 2.0 turbo H4 (WRX 02-05)
+
+- **Engine:** 2.0L 4-cyl
+- **Family applications:** Subaru WRX 2002-2005, Subaru Impreza WRX 2002-2005, Subaru Impreza 2002-2005
+- **Ambiguity cap:** Subaru Impreza — only WRX trims carry the 2.0 turbo — confirm turbo before buying
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4167 (75A) Impreza EJ205 2.0 2002-2005 unqualified (the same published list covers the 03-04 EJ251 2.5 NA, which lives in subaru-ej25na).
+  - Group 1: Subaru WRX 2002-2005; Subaru Impreza WRX 2002-2005
+- **starter:** no verified group — Likely tier only. Note: 02-05 WRX starters split by transmission — match part number
 
 ### subaru-ej25na — Subaru EJ25 2.5 SOHC H4 (non-turbo)
 
@@ -670,9 +943,10 @@ cited below.**
 ### toyota-1zz — Toyota/Pontiac 1ZZ-FE 1.8 I4
 
 - **Engine:** 1.8L 4-cyl
-- **Family applications:** Toyota Corolla 1998-2008, Toyota Matrix 2003-2008, Pontiac Vibe 2003-2008, Toyota Celica 2000-2005, Toyota MR2 Spyder 2000-2005
-- **alternator — verified evidence:** TYC 2-13878 application table (tycamericas.com) + discountstarterandalternator.com VIN-qualified list (Lester 13878, Toyota 27060-22040, retrieved 2026-10-22): Corolla 1ZZ 2003-2008, Matrix 2003-2008 (excl XRS), Vibe 2003-2008 (excl GT), Celica GT 2000-2005, MR2 Spyder 2000-2005. 1998-2002 Corolla uses an earlier unit — left at likely.
+- **Family applications:** Toyota Corolla 1998-2008, Toyota Matrix 2003-2008, Pontiac Vibe 2003-2008, Toyota Celica 2000-2005, Toyota MR2 Spyder 2000-2005, Chevrolet Prizm 1998-2002
+- **alternator — verified evidence:** TYC 2-13878 application table (tycamericas.com) + discountstarterandalternator.com VIN-qualified list (Lester 13878, Toyota 27060-22040, retrieved 2026-10-22): Corolla 1ZZ 2003-2008, Matrix 2003-2008 (excl XRS), Vibe 2003-2008 (excl GT), Celica GT 2000-2005, MR2 Spyder 2000-2005. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0432 (80A) Corolla 1ZZ-FE 1998-2001 and Chevrolet Prizm 1.8 1998-2002, both unqualified (the 2002 Corolla splits by build plant — excluded).
   - Group 1: Toyota Corolla 2003-2008; Toyota Matrix 2003-2008; Pontiac Vibe 2003-2008; Toyota Celica 2000-2005; Toyota MR2 Spyder 2000-2005
+  - Group 2: Toyota Corolla 1998-2001; Chevrolet Prizm 1998-2002
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### toyota-22re — Toyota 22RE 2.4 I4 (EFI)
@@ -708,6 +982,22 @@ cited below.**
   - Group 1: Toyota Camry 2007-2017; Toyota Avalon 2005-2018; Toyota Highlander 2008-2013; Toyota RAV4 2009-2010; Toyota Venza 2009-2015; Lexus ES 350 2007-2018; Lexus RX 350 2007-2009
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### toyota-2jz — Toyota/Lexus 2JZ 3.0 I6 (Supra MK4/SC/GS/IS)
+
+- **Engine:** 3.0L 6-cyl
+- **Family applications:** Toyota Supra 1993-1998, Lexus SC300 1992-2000, Lexus GS300 1993-2005, Lexus IS300 2001-2005
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows engine-coded 2JZGE and unqualified: 210-0506 (100A) GS300 2001-2005 and IS300 2001-2005; 210-0286 (100A) GS300 1999-2000 (the 1998 row is production-split and excluded); 210-0293 (80A) GS300 1996-1997; 210-0169 (80A) GS300 1993-1995; 210-0290 (80A) SC300 1997-2000; 210-0287 (80A) SC300 1996 (the 1995 rows are production-split); 210-0168 (100A) SC300 1992-1994. Supra rows split NA/turbo and by transmission — excluded.
+  - Group 1: Lexus GS300 2001-2005; Lexus IS300 2001-2005
+  - Group 2: Lexus GS300 1999-2000
+  - Group 3: Lexus GS300 1996-1997
+  - Group 4: Lexus GS300 1993-1995
+  - Group 5: Lexus SC300 1997-2000
+  - Group 6: Lexus SC300 1996-1996
+  - Group 7: Lexus SC300 1992-1994
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows engine-coded 2JZGE/unqualified: 280-0234 GS300 1998-2005 and IS300 2001-2005; 280-0163 Supra 3.0 1993-1998, SC300 1995-2000 and GS300 1993-1997 — one published starter across the NA and twin-turbo Supra alike.
+  - Group 1: Lexus GS300 1998-2005; Lexus IS300 2001-2005
+  - Group 2: Toyota Supra 1993-1998; Lexus SC300 1995-2000; Lexus GS300 1993-1997
+
 ### toyota-2uz — Toyota/Lexus 2UZ-FE 4.7 V8
 
 - **Engine:** 4.7L 8-cyl
@@ -733,6 +1023,28 @@ cited below.**
   - Group 2: Lexus RX 330 2004-2006; Toyota Sienna 2004-2006
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### toyota-3s — Toyota 2S/3S 2.0 I4 (Celica/MR2 Turbo)
+
+- **Engine:** 2.0L 4-cyl
+- **Family applications:** Toyota Celica 1986-1993, Toyota MR2 1991-1995
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0103 (70A) Celica 3S-FE and 3S-GE 1988-1989, one unit for both; 210-0274 (60A) Celica 3S-FE/3S-GE 1987; 210-0264 (80A) Celica All-Trac 3S-GTE 1992-1993 (the only 2.0 Celica those years). The 90-93 5S-FE 2.2 rows split by transmission and belong to toyota-5s anyway; MR2 Turbo rows aren't separately published — MR2 pairs stay Likely.
+  - Group 1: Toyota Celica 1988-1989
+  - Group 2: Toyota Celica 1987-1987
+  - Group 3: Toyota Celica 1992-1993
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### toyota-4a — Toyota 4A/7A 1.6/1.8 I4 (Corolla era)
+
+- **Engine:** 1.6/1.8L 4-cyl
+- **Family applications:** Toyota Corolla 1985-1997, Geo|Chevrolet Prizm 1989-1997, Toyota Celica 1990-1999
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0100 (17mm shaft) and 210-0101 (15mm shaft) both list Corolla 4A-FE 1.6 and 7A-FE 1.8 1993-1997 with identical spans — two published shaft diameters, match yours; 210-0152 Corolla 4A-FE 1990 unqualified (1991-92 rows are stamp-number-qualified, 88-89 split 4A-F/FE vs the twin-cam 4A-GE, and Prizm rows are fan- or vendor-qualified — all excluded).
+  - Group 1: Toyota Corolla 1993-1997
+  - Group 2: Toyota Corolla 1990-1990
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0305 Prizm 1.6/1.8 1994-1997 unqualified (the matching Corolla rows those years are Cold-Spec-qualified and excluded); 280-0304 Prizm 1.6/1.8 1993; 280-0100 Corolla 1.6/1.8 1997 unqualified.
+  - Group 1: Geo|Chevrolet Prizm 1994-1997
+  - Group 2: Geo|Chevrolet Prizm 1993-1993
+  - Group 3: Toyota Corolla 1997-1997
+
 ### toyota-5s — Toyota 5S-FE 2.2 I4
 
 - **Engine:** 2.2L 4-cyl
@@ -752,6 +1064,18 @@ cited below.**
   - Group 4: Toyota Tundra 2003-2004
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### toyota-m6 — Toyota 5M/7M 2.8/3.0 I6 (Supra MK3/Cressida)
+
+- **Engine:** 2.8/3.0L 6-cyl
+- **Family applications:** Toyota Supra 1986-1992, Toyota Cressida 1985-1992
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0158 (80A) Cressida 7M-GE 1989-1992 unqualified (the Supra rows for the same unit are turbo/transmission-qualified and excluded); 210-0167 (60A) Cressida 5M-GE 1987-1988; 210-0111 (60A) Cressida 5M-GE 1984-1986 (clipped to this family's 1985 start).
+  - Group 1: Toyota Cressida 1989-1992
+  - Group 2: Toyota Cressida 1987-1988
+  - Group 3: Toyota Cressida 1985-1986
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0107 in one published set — Supra 3.0 1986-1990 and Cressida 2.8/3.0 1983-1990 (clipped to this family's 1985 start; the 81-82 rows are option-qualified); 280-0121 Supra 3.0 1991-1992 and Cressida 3.0 1991-1992.
+  - Group 1: Toyota Supra 1986-1990; Toyota Cressida 1985-1990
+  - Group 2: Toyota Supra 1991-1992; Toyota Cressida 1991-1992
+
 ### toyota-rz — Toyota 2RZ/3RZ-FE 2.4/2.7 I4
 
 - **Engine:** 2.4/2.7L 4-cyl
@@ -761,6 +1085,15 @@ cited below.**
   - Group 2: Toyota Tacoma 1997-1999; Toyota T100 1997-1998; Toyota 4Runner 1996-1999
   - Group 3: Toyota Tacoma 2000-2004; Toyota 4Runner 2000-2000
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### vw-20t — VW 2.0T EA113/EA888 I4 (GTI/Jetta)
+
+- **Engine:** 2.0L 4-cyl
+- **Family applications:** Volkswagen GTI 2006-2014, Volkswagen Jetta 2006-2013
+- **alternator:** no verified group — Likely tier only. Note: every published 2.0T alternator row is vendor-qualified (Bosch vs Valeo) — all pairs stay Likely; match the unit on your car
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 GTI 2.0 2006-2009 unqualified; 281-6001 (First Time Fit) GTI 2.0 2010-2011 unqualified. Jetta rows split by fuel, body and transmission and are excluded.
+  - Group 1: Volkswagen GTI 2006-2009
+  - Group 2: Volkswagen GTI 2010-2011
 
 ### vw-25 — VW 2.5 I5
 
