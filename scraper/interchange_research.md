@@ -2249,3 +2249,62 @@ Pick-n-Pull list now quotes STARTER ($30.99), never the cheaper STARTER
 SOLENOID ($11.99) that the old substring match preferred; `tow mirror`
 resolves TOW MIRRORS on NV/UT Pic-A-Part lists and falls back honestly
 (not to an interior mirror) elsewhere.
+
+## Coverage run 2026-10-23 — the "2006 Yaris" miss and the next-tier band
+
+**The Yaris story:** the owner's "2006 Toyota Yaris shows no parts" turned
+out to be a real car, not a feed typo — the one 2006 Yaris in inventory
+sits at Pick-n-Pull Calgary (Barlow Trail). Canada got the XP90 Yaris a
+model year before the US (MY2006 vs MY2007) — same body, same 1NZ-FE. The
+toyota-1nz family already existed but its Yaris window opened at 2007, so
+the car answered nothing. The window now opens at 2006 (Likely tier — no
+published 2006 row exists to anchor Verified), and while in there the
+family gained the 2016-18 XP130 years, xA/xB verified groups and the
+Toyota-prefixed Scion feed aliases.
+
+### Spot-checks (10 hand-verified, mirrored as fixtures sc1-sc10)
+
+| # | Claim checked | Published anchor | Verdict |
+|---|---------------|------------------|---------|
+| 1 | 2006 Yaris alternator vs 2008 donor | no 2006 row published (Canadian MY) | PASS — answers, honestly Likely |
+| 2 | 2016 vs 2018 Yaris alternator | Denso 210-0893 16-18 unqualified | PASS — Verified |
+| 3 | 2015 Yaris vs 2016 | 2015 splits at build date 07/2014 | PASS — stays Likely |
+| 4 | 2005 Scion xB vs 2004 "Toyota / Scion xB" (alias spelling) | 210-0527 04-06 unqualified | PASS — Verified across spellings |
+| 5 | 2013 vs 2014 Yaris starter | TWO concurrent units today (280-0336/280-0401) | PASS — demoted to Likely (was Verified on the older edition) |
+| 6 | 2014 vs 2016 Sentra starter | 280-3139 13-16 unqualified | PASS — Verified |
+| 7 | 2012 vs 2017 Juke alternator | 210-4009 11-17 unqualified | PASS — Verified |
+| 8 | 2014 vs 2015 Pathfinder alternator | 210-4006 13-16 unqualified; 2017 'To 07/2016' = VQ35DD switch | PASS — Verified; 2017 refused by the family window |
+| 9 | 2013 vs 2016 Fusion alternator; 2014 donor | 210-1102 one unit, 2014 2.5 VIN-qualified | PASS — Verified across the gap-year; 2014 Likely |
+| 10 | 2003 Golf vs 2004 Jetta alternator; 2001 Jetta donor | 210-6200 one unit; 2000-02 Valeo dual-source | PASS — Verified cross-model; Valeo years Likely |
+
+### Coverage impact (same script, same 253,223-vehicle snapshot)
+
+|  | engine families | gen windows | union (Parts tab answers something) |
+|---|---|---|---|
+| before (main @ 9636d67) | 83.7% | 80.5% | 90.0% |
+| after this run | 85.5% | 84.4% | **93.2%** |
+
+(The previous research note's 89.7% union was computed 2026-10-22 against
+the older 252,673-vehicle snapshot with the one-off P0 script.)
+
+### Honest exclusions this run (documented, deliberately NOT covered)
+
+- **Toyota Prius 2001-16 (1,235)** — hybrid: no belt alternator, MG starter;
+  engine-family coverage is structurally impossible. Gen windows already
+  cover its body parts.
+- **Ford Fiesta 2011-19 (922), Chevy Cruze 2016-19 (301), Chevy Spark
+  2013-21 (254), Ford Focus 2000-04 (457)** — no rotating-electrical rows
+  at all in the catalogs we checked (Denso part-finder, 2026-10-23); gen
+  windows carry their body parts.
+- **Honda Accord 2013-17 (295)** — every published row is CVT/MT- or
+  engine-designation-qualified (K24W1 CVT-only rows) — no clean anchor.
+- **Fusion 1.5/1.6 EcoBoost** — all rows option-qualified (heated-seat /
+  start-stop) — no family ships.
+- **Malibu 1.5T (volume engine)** — publishes nothing; only the 2.0T family
+  ships. **Sentra 2020+ (B18 MR20DD)** — no published rows yet.
+- **BMW 328i 07-16 / Mercedes C-/E-Class engines / MINI Cooper 07-16 /
+  Audi A4** — need Bosch/Valeo application tables (different catalog
+  ecosystem); gen windows added this run so their body parts answer.
+- **Coverage requests (D1):** endpoint is live in production but the
+  `coverage_requests` table held ZERO rows at run time — nothing to fold
+  into the priority ranking this pass.
