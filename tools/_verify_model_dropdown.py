@@ -40,13 +40,9 @@ with sync_playwright() as pw:
     page.wait_for_timeout(2500)
 
     # Open filters if collapsed, pick BMW, open the model multi-select.
-    try:
-        ftoggle = page.locator("#live-filters-toggle, .filters-toggle").first
-        if ftoggle.is_visible():
-            ftoggle.click()
-            page.wait_for_timeout(300)
-    except Exception:
-        pass
+    if not page.locator("#live-filter-make").is_visible():
+        page.click("#live-filter-toggle")
+        page.wait_for_timeout(500)
     page.select_option("#live-filter-make", "BMW")
     page.wait_for_timeout(800)
     page.click("#live-filter-model-btn")
