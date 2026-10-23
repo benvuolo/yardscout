@@ -6339,6 +6339,332 @@ if _trim_problems:
 
 
 # ===========================================================================
+# MODEL GENERATIONS (PART_CATALOG_SPEC §5.1) — factory generation windows
+# (US model years) for the highest-population models in the live inventory.
+# This is what lets every class-B body category answer "same model, same
+# generation" without a hand-researched part row: a donor fits when seeker
+# and donor years sit inside the SAME window. Windows are platform/body
+# generation boundaries from manufacturer press/parts literature (the same
+# basis as _ENTHUSIAST_EVERGREEN_GENS above); 15 of them are hand-spot-
+# checked in scraper/interchange_research.md.
+#
+# Spelling notes: matching squashes case/punctuation and drops a leading
+# make token and a trailing "pickup", so "Ford F150 Pickup" ≡ "F-150". But
+# DIFFERENT words are different keys — feed aliases like "Ram Pickup",
+# "Suburban 1500" and "Town And Country" each need their own row (same
+# windows). Keep windows identical across alias rows.
+MODEL_GENERATIONS: list[tuple[str, str, tuple[tuple[int, int], ...]]] = [
+    # --- Japanese volume ---
+    ("Nissan", "Altima", ((1993, 1997), (1998, 2001), (2002, 2006),
+                          (2007, 2012), (2013, 2018), (2019, 2025))),
+    ("Honda", "Accord", ((1990, 1993), (1994, 1997), (1998, 2002),
+                         (2003, 2007), (2008, 2012), (2013, 2017),
+                         (2018, 2022), (2023, 2025))),
+    ("Toyota", "Camry", ((1992, 1996), (1997, 2001), (2002, 2006),
+                         (2007, 2011), (2012, 2017), (2018, 2024))),
+    ("Toyota", "Camry Solara", ((1999, 2003), (2004, 2008))),
+    ("Toyota", "Solara", ((1999, 2003), (2004, 2008))),
+    ("Honda", "Civic", ((1992, 1995), (1996, 2000), (2001, 2005),
+                        (2006, 2011), (2012, 2015), (2016, 2021),
+                        (2022, 2025))),
+    ("Nissan", "Sentra", ((1991, 1994), (1995, 1999), (2000, 2006),
+                          (2007, 2012), (2013, 2019), (2020, 2025))),
+    ("Toyota", "Corolla", ((1993, 1997), (1998, 2002), (2003, 2008),
+                           (2009, 2013), (2014, 2019), (2020, 2025))),
+    ("Honda", "Odyssey", ((1995, 1998), (1999, 2004), (2005, 2010),
+                          (2011, 2017), (2018, 2024))),
+    ("Nissan", "Versa", ((2007, 2012), (2013, 2019), (2020, 2025))),
+    ("Nissan", "Versa Note", ((2014, 2019),)),
+    ("Nissan", "Rogue", ((2008, 2013), (2014, 2020), (2021, 2025))),
+    ("Nissan", "Rogue Select", ((2008, 2015),)),
+    ("Mazda", "Mazda3", ((2004, 2009), (2010, 2013), (2014, 2018),
+                         (2019, 2025))),
+    ("Nissan", "Maxima", ((1989, 1994), (1995, 1999), (2000, 2003),
+                          (2004, 2008), (2009, 2014), (2016, 2023))),
+    ("Nissan", "Pathfinder", ((1987, 1995), (1996, 2004), (2005, 2012),
+                              (2013, 2020), (2022, 2025))),
+    ("Honda", "Pilot", ((2003, 2008), (2009, 2015), (2016, 2022),
+                        (2023, 2025))),
+    ("Nissan", "Murano", ((2003, 2007), (2009, 2014), (2015, 2024))),
+    ("Toyota", "Sienna", ((1998, 2003), (2004, 2010), (2011, 2020),
+                          (2021, 2025))),
+    ("Honda", "CR-V", ((1997, 2001), (2002, 2006), (2007, 2011),
+                       (2012, 2016), (2017, 2022), (2023, 2025))),
+    ("Toyota", "Prius", ((2001, 2003), (2004, 2009), (2010, 2015),
+                         (2016, 2022), (2023, 2025))),
+    ("Toyota", "Avalon", ((1995, 1999), (2000, 2004), (2005, 2012),
+                          (2013, 2018), (2019, 2022))),
+    ("Acura", "MDX", ((2001, 2006), (2007, 2013), (2014, 2020),
+                      (2022, 2025))),
+    ("Acura", "TL", ((1996, 1998), (1999, 2003), (2004, 2008),
+                     (2009, 2014))),
+    ("Acura", "TSX", ((2004, 2008), (2009, 2014))),
+    ("Nissan", "Xterra", ((2000, 2004), (2005, 2015))),
+    ("Subaru", "Outback", ((1995, 1999), (2000, 2004), (2005, 2009),
+                           (2010, 2014), (2015, 2019), (2020, 2025))),
+    ("Subaru", "Forester", ((1998, 2002), (2003, 2008), (2009, 2013),
+                            (2014, 2018), (2019, 2025))),
+    ("Subaru", "Legacy", ((1990, 1994), (1995, 1999), (2000, 2004),
+                          (2005, 2009), (2010, 2014), (2015, 2019),
+                          (2020, 2025))),
+    ("Subaru", "Impreza", ((1993, 2001), (2002, 2007), (2008, 2011),
+                           (2012, 2016), (2017, 2023))),
+    ("Infiniti", "G35", ((2003, 2006), (2007, 2008))),
+    ("Toyota", "RAV4", ((1996, 2000), (2001, 2005), (2006, 2012),
+                        (2013, 2018), (2019, 2025))),
+    ("Toyota", "Highlander", ((2001, 2007), (2008, 2013), (2014, 2019),
+                              (2020, 2025))),
+    ("Toyota", "4Runner", ((1984, 1989), (1990, 1995), (1996, 2002),
+                           (2003, 2009), (2010, 2024))),
+    ("Toyota", "Tundra", ((2000, 2006), (2007, 2013), (2014, 2021),
+                          (2022, 2025))),
+    ("Toyota", "Sequoia", ((2001, 2007), (2008, 2022), (2023, 2025))),
+    ("Toyota", "Yaris", ((2007, 2011), (2012, 2018))),
+    ("Toyota", "Matrix", ((2003, 2008), (2009, 2013))),
+    ("Pontiac", "Vibe", ((2003, 2008), (2009, 2010))),
+    ("Honda", "Fit", ((2007, 2008), (2009, 2013), (2015, 2020))),
+    ("Nissan", "Titan", ((2004, 2015), (2016, 2024))),
+    ("Nissan", "Armada", ((2004, 2015), (2017, 2024))),
+    ("Nissan", "Quest", ((1993, 1998), (1999, 2002), (2004, 2009),
+                         (2011, 2017))),
+    ("Nissan", "Frontier", ((1998, 2004), (2005, 2021), (2022, 2025))),
+    ("Mazda", "Mazda6", ((2003, 2008), (2009, 2013), (2014, 2021))),
+    ("Mazda", "CX-9", ((2007, 2015), (2016, 2023))),
+    ("Mazda", "CX-7", ((2007, 2012),)),
+    ("Mitsubishi", "Lancer", ((2002, 2007), (2008, 2017))),
+    ("Mitsubishi", "Galant", ((1994, 1998), (1999, 2003), (2004, 2012))),
+    ("Mitsubishi", "Eclipse", ((1990, 1994), (1995, 1999), (2000, 2005),
+                               (2006, 2012))),
+    ("Scion", "tC", ((2005, 2010), (2011, 2016))),
+    ("Scion", "xB", ((2004, 2006), (2008, 2015))),
+    ("Lexus", "ES 300", ((1992, 1996), (1997, 2001), (2002, 2003))),
+    # --- Ford / Lincoln / Mercury ---
+    ("Ford", "F-150", ((1980, 1986), (1987, 1991), (1992, 1996),
+                       (1997, 2003), (2004, 2008), (2009, 2014),
+                       (2015, 2020), (2021, 2025))),
+    ("Ford", "F-150 Heritage", ((1997, 2004),)),
+    ("Ford", "F-250", ((1992, 1997), (1999, 2007), (2008, 2010),
+                       (2011, 2016), (2017, 2022))),
+    ("Ford", "Focus", ((2000, 2004), (2005, 2007), (2008, 2011),
+                       (2012, 2018))),
+    ("Ford", "Fusion", ((2006, 2012), (2013, 2020))),
+    ("Ford", "Escape", ((2001, 2007), (2008, 2012), (2013, 2019),
+                        (2020, 2024))),
+    ("Ford", "Explorer", ((1991, 1994), (1995, 2001), (2002, 2005),
+                          (2006, 2010), (2011, 2019), (2020, 2025))),
+    ("Ford", "Explorer Sport Trac", ((2001, 2005), (2007, 2010))),
+    ("Ford", "Expedition", ((1997, 2002), (2003, 2006), (2007, 2017),
+                            (2018, 2024))),
+    ("Ford", "Taurus", ((1986, 1991), (1992, 1995), (1996, 1999),
+                        (2000, 2007), (2008, 2009), (2010, 2019))),
+    ("Ford", "Five Hundred", ((2005, 2007),)),
+    ("Ford", "Ranger", ((1983, 1992), (1993, 1997), (1998, 2011),
+                        (2019, 2023))),
+    ("Ford", "Mustang", ((1979, 1993), (1994, 2004), (2005, 2014),
+                         (2015, 2023), (2024, 2025))),
+    ("Ford", "Edge", ((2007, 2014), (2015, 2024))),
+    ("Ford", "Fiesta", ((2011, 2019),)),
+    ("Ford", "Flex", ((2009, 2019),)),
+    ("Ford", "Econoline", ((1975, 1991), (1992, 2014))),
+    ("Ford", "Crown Victoria", ((1992, 1997), (1998, 2011))),
+    ("Mercury", "Grand Marquis", ((1992, 1997), (1998, 2011))),
+    ("Lincoln", "Town Car", ((1990, 1997), (1998, 2011))),
+    ("Lincoln", "Navigator", ((1998, 2002), (2003, 2006), (2007, 2017),
+                              (2018, 2024))),
+    ("Lincoln", "MKZ", ((2007, 2012), (2013, 2020))),
+    # --- GM ---
+    ("Chevrolet", "Malibu", ((1997, 2003), (2004, 2007), (2008, 2012),
+                             (2013, 2015), (2016, 2024))),
+    ("Chevrolet", "Impala", ((1994, 1996), (2000, 2005), (2006, 2013),
+                             (2014, 2020))),
+    ("Chevrolet", "Impala Limited", ((2014, 2016),)),
+    ("Chevrolet", "Cruze", ((2011, 2015), (2016, 2019))),
+    ("Chevrolet", "Cruze Limited", ((2016, 2016),)),
+    ("Chevrolet", "Equinox", ((2005, 2009), (2010, 2017), (2018, 2024))),
+    ("Chevrolet", "Tahoe", ((1995, 1999), (2000, 2006), (2007, 2014),
+                            (2015, 2020), (2021, 2025))),
+    ("Chevrolet", "Suburban", ((1992, 1999), (2000, 2006), (2007, 2014),
+                               (2015, 2020), (2021, 2025))),
+    ("Chevrolet", "Suburban 1500", ((1992, 1999), (2000, 2006),
+                                    (2007, 2014), (2015, 2020))),
+    ("GMC", "Suburban", ((1992, 1999),)),
+    ("Chevrolet", "Silverado 1500", ((1999, 2006), (2007, 2013),
+                                     (2014, 2018), (2019, 2025))),
+    ("Chevrolet", "Silverado", ((1999, 2006), (2007, 2013), (2014, 2018),
+                                (2019, 2025))),
+    ("GMC", "Sierra 1500", ((1999, 2006), (2007, 2013), (2014, 2018),
+                            (2019, 2025))),
+    ("GMC", "Sierra", ((1999, 2006), (2007, 2013), (2014, 2018),
+                       (2019, 2025))),
+    ("Chevrolet", "C/K 1500", ((1988, 1998),)),
+    ("Chevrolet", "Traverse", ((2009, 2017), (2018, 2023))),
+    ("Chevrolet", "Trailblazer", ((2002, 2009), (2021, 2024))),
+    ("Chevrolet", "Trailblazer Ext", ((2002, 2009),)),
+    ("Chevrolet", "Cobalt", ((2005, 2010),)),
+    ("Chevrolet", "Sonic", ((2012, 2020),)),
+    ("Chevrolet", "Aveo", ((2004, 2011),)),
+    ("Chevrolet", "HHR", ((2006, 2011),)),
+    ("Chevrolet", "Cavalier", ((1988, 1994), (1995, 2005))),
+    ("Chevrolet", "Monte Carlo", ((1995, 1999), (2000, 2007))),
+    ("Chevrolet", "Camaro", ((1982, 1992), (1993, 2002), (2010, 2015),
+                             (2016, 2024))),
+    ("Chevrolet", "S10 Pickup", ((1982, 1993), (1994, 2004))),
+    ("Chevrolet", "Blazer", ((1983, 1994), (1995, 2005), (2019, 2024))),
+    ("Chevrolet", "Astro", ((1985, 1994), (1995, 2005))),
+    ("Chevrolet", "Avalanche", ((2002, 2006), (2007, 2013))),
+    ("Chevrolet", "Express", ((1996, 2002), (2003, 2024))),
+    ("Chevrolet", "Colorado", ((2004, 2012), (2015, 2022), (2023, 2025))),
+    ("GMC", "Acadia", ((2007, 2016), (2017, 2023))),
+    ("GMC", "Yukon", ((1995, 1999), (2000, 2006), (2007, 2014),
+                      (2015, 2020), (2021, 2025))),
+    ("GMC", "Yukon XL", ((2000, 2006), (2007, 2014), (2015, 2020),
+                         (2021, 2025))),
+    ("GMC", "Terrain", ((2010, 2017), (2018, 2024))),
+    ("GMC", "Envoy", ((2002, 2009),)),
+    ("GMC", "Envoy Xl", ((2002, 2006),)),
+    ("Buick", "Enclave", ((2008, 2017), (2018, 2023))),
+    ("Buick", "Lesabre", ((1992, 1999), (2000, 2005))),
+    ("Buick", "Lacrosse", ((2005, 2009), (2010, 2016), (2017, 2019))),
+    ("Buick", "Century", ((1997, 2005),)),
+    ("Buick", "Regal", ((1988, 1996), (1997, 2004), (2011, 2017),
+                        (2018, 2020))),
+    ("Buick", "Lucerne", ((2006, 2011),)),
+    ("Buick", "Verano", ((2012, 2017),)),
+    ("Pontiac", "G6", ((2005, 2010),)),
+    ("Pontiac", "Grand Prix", ((1988, 1996), (1997, 2003), (2004, 2008))),
+    ("Pontiac", "Grand Am", ((1992, 1998), (1999, 2005))),
+    ("Cadillac", "CTS", ((2003, 2007), (2008, 2013), (2014, 2019))),
+    ("Cadillac", "SRX", ((2004, 2009), (2010, 2016))),
+    ("Cadillac", "Deville", ((1994, 1999), (2000, 2005))),
+    ("Cadillac", "Escalade", ((1999, 2000), (2002, 2006), (2007, 2014),
+                              (2015, 2020), (2021, 2025))),
+    ("Saturn", "VUE", ((2002, 2007), (2008, 2010))),
+    ("Saturn", "ION", ((2003, 2007),)),
+    # --- Mopar ---
+    ("Dodge", "Grand Caravan", ((1996, 2000), (2001, 2007), (2008, 2020))),
+    ("Dodge", "Caravan", ((1996, 2000), (2001, 2007), (2008, 2020))),
+    ("Chrysler", "Town & Country", ((1996, 2000), (2001, 2007),
+                                    (2008, 2016))),
+    ("Chrysler", "Town And Country", ((1996, 2000), (2001, 2007),
+                                      (2008, 2016))),
+    ("Chrysler", "Town &amp; Country", ((1996, 2000), (2001, 2007),
+                                        (2008, 2016))),
+    ("Dodge", "Ram 1500", ((1994, 2001), (2002, 2008), (2009, 2018),
+                           (2019, 2025))),
+    ("Dodge", "Ram Pickup", ((1994, 2001), (2002, 2008), (2009, 2018))),
+    ("Ram", "1500", ((2009, 2018), (2019, 2025))),
+    ("Chrysler", "Dodge 1500 Pickup", ((1994, 2001), (2002, 2008))),
+    ("Dodge", "Dakota", ((1987, 1996), (1997, 2004), (2005, 2011))),
+    ("Dodge", "Durango", ((1998, 2003), (2004, 2009), (2011, 2024))),
+    ("Dodge", "Charger", ((2006, 2010), (2011, 2023))),
+    ("Dodge", "Journey", ((2009, 2020),)),
+    ("Dodge", "Avenger", ((1995, 2000), (2008, 2014))),
+    ("Dodge", "Caliber", ((2007, 2012),)),
+    ("Dodge", "Dart", ((2013, 2016),)),
+    ("Dodge", "Nitro", ((2007, 2012),)),
+    ("Chrysler", "200", ((2011, 2014), (2015, 2017))),
+    ("Chrysler", "300", ((2005, 2010), (2011, 2023))),
+    ("Chrysler", "300C", ((2005, 2010), (2011, 2023))),
+    ("Chrysler", "300M", ((1999, 2004),)),
+    ("Chrysler", "Sebring", ((1995, 2000), (2001, 2006), (2007, 2010))),
+    ("Chrysler", "PT Cruiser", ((2001, 2010),)),
+    ("Chrysler", "Pacifica", ((2004, 2008), (2017, 2025))),
+    ("Jeep", "Grand Cherokee", ((1993, 1998), (1999, 2004), (2005, 2010),
+                                (2011, 2021), (2022, 2025))),
+    ("Jeep", "Liberty", ((2002, 2007), (2008, 2012))),
+    ("Jeep", "Patriot", ((2007, 2017),)),
+    ("Jeep", "Compass", ((2007, 2016), (2017, 2025))),
+    ("Jeep", "Cherokee", ((1984, 2001), (2014, 2023))),
+    ("Jeep", "Cherokee Xj", ((1984, 2001),)),
+    ("Jeep", "Cherokee Kl", ((2014, 2023),)),
+    ("Jeep", "Commander", ((2006, 2010),)),
+    # --- Hyundai / Kia ---
+    ("Hyundai", "Sonata", ((1995, 1998), (1999, 2005), (2006, 2010),
+                           (2011, 2014), (2015, 2019), (2020, 2024))),
+    ("Hyundai", "Elantra", ((1996, 2000), (2001, 2006), (2007, 2010),
+                            (2011, 2016), (2017, 2020), (2021, 2025))),
+    ("Hyundai", "Accent", ((1995, 1999), (2000, 2005), (2006, 2011),
+                           (2012, 2017), (2018, 2022))),
+    ("Hyundai", "Santa Fe", ((2001, 2006), (2007, 2012), (2013, 2018),
+                             (2019, 2024))),
+    ("Hyundai", "Santa Fe Sport", ((2013, 2018),)),
+    ("Hyundai", "Tucson", ((2005, 2009), (2010, 2015), (2016, 2021),
+                           (2022, 2025))),
+    ("Kia", "Optima", ((2001, 2006), (2007, 2010), (2011, 2015),
+                       (2016, 2020))),
+    ("Kia", "Soul", ((2010, 2013), (2014, 2019), (2020, 2025))),
+    ("Kia", "Sorento", ((2003, 2009), (2011, 2015), (2016, 2020),
+                        (2021, 2025))),
+    ("Kia", "Forte", ((2010, 2013), (2014, 2018), (2019, 2024))),
+    ("Kia", "Rio", ((2001, 2005), (2006, 2011), (2012, 2017),
+                    (2018, 2023))),
+    ("Kia", "Spectra", ((2000, 2004), (2005, 2009))),
+    ("Kia", "Sportage", ((1995, 2002), (2005, 2010), (2011, 2016),
+                         (2017, 2022), (2023, 2025))),
+    ("Kia", "Sedona", ((2002, 2005), (2006, 2012), (2015, 2021))),
+    # --- European ---
+    ("Volkswagen", "Jetta", ((1993, 1998), (1999, 2004), (2005, 2010),
+                             (2011, 2018), (2019, 2025))),
+    ("Volkswagen", "Passat", ((1990, 1997), (1998, 2005), (2006, 2010),
+                              (2012, 2022))),
+    ("Volkswagen", "CC", ((2009, 2017),)),
+    ("BMW", "3 Series", ((1992, 1998), (1999, 2006), (2007, 2011),
+                         (2012, 2018), (2019, 2025))),
+    ("BMW", "325i", ((1992, 1995), (2001, 2006))),
+    ("BMW", "325ci", ((2001, 2006),)),
+    ("BMW", "328i", ((1996, 1999), (2007, 2013), (2014, 2016))),
+    ("BMW", "330i", ((2001, 2006), (2016, 2018))),
+    ("BMW", "335i", ((2007, 2013),)),
+    ("BMW", "5 Series", ((1989, 1995), (1997, 2003), (2004, 2010),
+                         (2011, 2016), (2017, 2023))),
+    ("BMW", "X3", ((2004, 2010), (2011, 2017), (2018, 2024))),
+    ("BMW", "X5", ((2000, 2006), (2007, 2013), (2014, 2018),
+                   (2019, 2025))),
+    ("Mercedes-Benz", "C-Class", ((1994, 2000), (2001, 2007), (2008, 2014),
+                                  (2015, 2021))),
+    ("Mercedes-Benz", "Mercedes C-Class", ((1994, 2000), (2001, 2007),
+                                           (2008, 2014), (2015, 2021))),
+    ("Mercedes-Benz", "E-Class", ((1996, 2002), (2003, 2009), (2010, 2016),
+                                  (2017, 2023))),
+    ("Mercedes-Benz", "Mercedes E-Class", ((1996, 2002), (2003, 2009),
+                                           (2010, 2016), (2017, 2023))),
+    ("MINI", "Cooper", ((2002, 2006), (2007, 2013), (2014, 2024))),
+    ("Audi", "A4", ((1996, 2001), (2002, 2005), (2006, 2008),
+                    (2009, 2016), (2017, 2023))),
+    ("Audi", "A4 Quattro", ((1996, 2001), (2002, 2005), (2006, 2008),
+                            (2009, 2016), (2017, 2023))),
+    ("Volvo", "XC90", ((2003, 2014), (2016, 2024))),
+    ("Volvo", "S60", ((2001, 2009), (2011, 2018), (2019, 2025))),
+]
+
+
+def _lint_model_generations() -> list[str]:
+    probs = []
+    seen = set()
+    for mk, md, wins in MODEL_GENERATIONS:
+        key = (mk, md)
+        if key in seen:
+            probs.append(f"duplicate row {key}")
+        seen.add(key)
+        if not wins:
+            probs.append(f"{key}: no windows")
+        prev_hi = 0
+        for lo, hi in wins:
+            if not (1900 < lo <= hi < 2036):
+                probs.append(f"{key}: bad window {(lo, hi)}")
+            if lo <= prev_hi:
+                probs.append(f"{key}: overlapping/unsorted window {(lo, hi)}")
+            prev_hi = hi
+    return probs
+
+
+_gen_problems = _lint_model_generations()
+if _gen_problems:
+    raise ValueError(
+        "MODEL_GENERATIONS lint failed:\n  " + "\n  ".join(_gen_problems))
+
+
+# ===========================================================================
 # PART-FIRST INTERCHANGE (v2) — "I need an alternator" search.
 #
 # PLATFORM_FAMILIES (above) answers "this car on the lot shares part X with
@@ -6408,8 +6734,11 @@ INTERCHANGE_PART_CATEGORIES: dict[str, dict] = {
         "label": "Alternator", "kind": "engine",
         "tokens": ["alternator"], "priceTokens": ["alternator"]},
     "starter": {
+        # §6.3: a bare "starter" substring quoted the cheaper STARTER
+        # SOLENOID row on lists that carry both. Exact row first.
         "label": "Starter", "kind": "engine",
-        "tokens": ["starter"], "priceTokens": ["starter"]},
+        "tokens": ["starter"],
+        "priceTokens": ["=starter", "starter motor", "starter"]},
     "gauge-cluster": {
         "label": "Gauge cluster", "kind": "body",
         "tokens": ["cluster"],
@@ -6429,24 +6758,197 @@ INTERCHANGE_PART_CATEGORIES: dict[str, dict] = {
     "tail-lights": {
         "label": "Tail lights", "kind": "body",
         "tokens": ["tail light"],
-        "priceTokens": ["tail light", "taillight", "tail lamp", "taillamp"]},
+        "priceTokens": ["tail light", "taillight", "tail lamp", "taillamp"],
+        "notes": ["Mid-generation facelifts usually restyle the lenses — "
+                  "match the donor to your car's pre- or post-facelift years, "
+                  "not just the generation."]},
     "headlights": {
         "label": "Headlights", "kind": "body",
         "tokens": ["headlight"],
-        "priceTokens": ["headlight", "headlamp"]},
+        "priceTokens": ["headlight", "headlamp"],
+        "notes": ["Mid-generation facelifts usually restyle the housings, and "
+                  "halogen, HID and LED units don't swap — match the donor to "
+                  "your car's facelift years and lamp type."]},
     "side-mirrors": {
         "label": "Side mirrors", "kind": "body",
         "tokens": ["side mirror"],
         "priceTokens": ["door mirror", "side mirror", "mirror"]},
     "tow-mirrors": {
+        # §6.2: the old ["mirror"] token priced whatever mirror row was
+        # cheapest (usually an interior rear-view). Tow-specific rows first;
+        # the plain-mirror fallback only engages when nothing tow-ish exists.
         "label": "Tow mirrors", "kind": "body",
-        "tokens": ["tow mirror"], "priceTokens": ["mirror"]},
+        "tokens": ["tow mirror"],
+        "priceTokens": ["tow mirrors", "tow mirror", "mirror (tow",
+                        "mirror tow", "mirror - tow", "door mirror", "mirror"]},
     "third-row-seat": {
+        # §6.3: the old ["third","3rd","seat"] substring set hit "3RD BRAKE
+        # LIGHT" rows. Ordered: explicit third-row rows, then bench/rear-seat
+        # rows, then the generic seat row — never a brake light.
         "label": "3rd row seat", "kind": "body",
-        "tokens": ["3rd row"], "priceTokens": ["third", "3rd", "seat"]},
+        "tokens": ["3rd row"],
+        "priceTokens": ["3rd row seat", "third row seat", "3rd row",
+                        "third row", "seat (rear", "rear seat", "bench seat",
+                        "seat rear", "=seat", "seat ("]},
     "tailgate": {
         "label": "Tailgate", "kind": "body",
         "tokens": ["tailgate"], "priceTokens": ["tailgate"]},
+    # ---- P0 catalog expansion (PART_CATALOG_SPEC.md, 2026-10) -------------
+    # New kinds: "combo" = donor must match BOTH the body generation and the
+    # engine family (always Likely); "exact" = same-model same-generation is
+    # the only honest claim (skip platform groups, always Likely).
+    # "notes" ship as category-level caveats (always shown with results);
+    # "rowWarn" is appended to every donor row's warning line.
+    # priceTokens are ORDERED (first match wins) and support an "="-prefix
+    # for exact row-name matches — see _yardPartQuoteUncached.
+    "engine-assembly": {
+        "label": "Engine assembly", "kind": "engine",
+        "tokens": [], "priceTokens": [
+            "engine complete", "engine (complete", "engine (no acc",
+            "engine (no access", "engine - long block", "engine long block",
+            "engine 4 cyl (assembly", "=engine", "engine - with  acc"],
+        "notes": [
+            "Same family = the long block interchanges. Manifolds, mounts, "
+            "oil pan, accessories and wiring often differ between models — "
+            "plan to swap yours over.",
+            "Mileage and internal condition are unknown — yards track cars, "
+            "not engines. Pull a valve cover or check the oil before you "
+            "commit.",
+            "Engine pulls take hours and need a hoist — call ahead. Some "
+            "self-serve yards don't allow engine pulls or rent hoists; most "
+            "charge a core fee refunded on your old unit."],
+        "noValue": True},
+    "ignition-coils": {
+        "label": "Ignition coils", "kind": "engine",
+        "tokens": ["ignition coil", "coil pack"], "priceTokens": [
+            "coil on plug", "coil over plug", "coil-plug",
+            "ignition coil pack", "coil ignition", "coil (ignition",
+            "coil pack", "coil (individual", "coil (single", "=coil"],
+        "notes": ["Match the coil part number — coil packs changed within "
+                  "engine families; pull the set, singles age together."]},
+    "transmission-auto": {
+        "label": "Automatic transmission", "kind": "combo",
+        "tokens": [], "priceTokens": [
+            "transmission (fwd", "transmission (rwd", "transmission 2wd",
+            "transmission car", "transmission / any type",
+            "transmission 4x4", "transmission awd", "=transmission",
+            "transmission - "],
+        "notes": [
+            "ALWAYS verify the transmission code on the case tag — ratios, "
+            "bellhousing and TCM calibration differ even within one model "
+            "year. Same model + same engine is a starting point, never a "
+            "guarantee.",
+            "Mileage and internal condition are unknown — yards track cars, "
+            "not transmissions. Check the fluid before you commit.",
+            "Transmission pulls take hours — call ahead; most yards charge "
+            "a refundable core fee."],
+        "rowWarn": "verify the trans code on the case tag before pulling",
+        "noValue": True},
+    "ecm": {
+        "label": "ECM / PCM (engine computer)", "kind": "combo",
+        "tokens": ["ecm", "pcm", "engine computer"], "priceTokens": [
+            "computer ecm", "computer-ecm", "computer ecu",
+            "computer (engine", "computer engine", "computer brain box",
+            "module- ecm", "computer control module", "computer/module",
+            "=computer"],
+        "notes": ["Match the ECM part number exactly — calibrations differ "
+                  "by engine/trans/emissions package, and most 2000s+ cars "
+                  "need the module programmed or married to the immobilizer "
+                  "before they'll start."],
+        "rowWarn": "match the part number exactly; plan on programming"},
+    "radio": {
+        "label": "Radio / infotainment", "kind": "exact",
+        "tokens": ["radio", "infotainment", "touchscreen"], "priceTokens": [
+            "=radio", "radio/cd", "radio am", "am/fm", "am-fm",
+            "radio w", "radio"],
+        "notes": ["Many factory radios are VIN-locked or anti-theft coded — "
+                  "they may demand a code or dealer pairing in your car. "
+                  "Same model and generation is the only honest fit claim "
+                  "for electronics; options and screens vary by trim."]},
+    "front-seats": {
+        "label": "Front seats (pair)", "kind": "body",
+        "tokens": ["bucket seat", "front seat"], "priceTokens": [
+            "bucket seat", "seat, bucket", "seat-buck",
+            "seat with air bag front", "seat no air bag front", "=seat"],
+        "notes": ["Many 2000s+ front seats contain seat-mounted side "
+                  "airbags — those can't be listed on eBay; local sale or "
+                  "own-car use only.",
+                  "Match cloth/leather, power/manual and heated options — "
+                  "harness plugs differ by trim."],
+        "rowWarn": "check for a side-airbag tag on the seat frame"},
+    "door-front": {
+        "label": "Front door", "kind": "body",
+        "tokens": ["door shell", "front door"], "priceTokens": [
+            "door complete", "door assy w/hinges", "door assy - complete",
+            "door - front", "door front", "door bare", "door (shell",
+            "door (any", "door (manual", "door (w-power", "door car / van",
+            "=door"],
+        "notes": ["Color code must match or plan to paint — check the "
+                  "door-jamb sticker on both cars. Glass, regulator and "
+                  "harness come along on most yard pulls; power vs manual "
+                  "must match."],
+        "rowWarn": "match the paint code on the door-jamb sticker"},
+    "fender": {
+        "label": "Fender", "kind": "body",
+        "tokens": ["fender"], "priceTokens": [
+            "fender bare", "fender - car", "fender-car", "fender - truck",
+            "fender-truck", "fender assembly", "fender (w/o acc",
+            "fender (no accessories", "=fender"],
+        "notes": ["Color code must match or plan to paint — check the "
+                  "door-jamb sticker on both cars. Facelifts sometimes "
+                  "change fender cutlines mid-generation; hold it up "
+                  "before you buy."],
+        "rowWarn": "match the paint code on the door-jamb sticker"},
+    "hood": {
+        "label": "Hood", "kind": "body",
+        "tokens": ["hood"], "priceTokens": [
+            "hood bare", "hood - car", "hood - truck", "hood (car",
+            "hood (truck", "hood (w/o acc", "hood (no hinges", "hood-car",
+            "hood-truck", "=hood"],
+        "notes": ["Color code must match or plan to paint — check the "
+                  "door-jamb sticker on both cars. Scoops/vents are "
+                  "trim-specific — match yours."],
+        "rowWarn": "match the paint code on the door-jamb sticker"},
+    "bumper-front": {
+        "label": "Front bumper", "kind": "body",
+        "tokens": ["front bumper", "bumper cover"], "priceTokens": [
+            "bumper assembly front", "fr bumper", "front bumper",
+            "bumper cover w/grill", "bumper cvr w/grille", "bumper cover",
+            "=bumper"],
+        "notes": ["Color code must match or plan to paint. Park-sensor and "
+                  "fog-light cutouts differ by trim — count the holes "
+                  "before you pull."],
+        "rowWarn": "match paint code + sensor/fog cutouts"},
+    "grille": {
+        "label": "Grille", "kind": "body",
+        "tokens": ["grille"], "priceTokens": [
+            "grille any", "grille (w/o acc", "grille lrg", "grille sml",
+            "grille car", "grille truck", "grille - plastic",
+            "grille (plastic", "grille (metal", "grill plastic",
+            "grill metal", "=grille", "=grill"],
+        "notes": ["Mid-cycle facelifts change grilles while the generation "
+                  "continues — match your car's front clip year, not just "
+                  "the generation."]},
+    "trunk-lid": {
+        "label": "Trunk lid / decklid", "kind": "body",
+        "tokens": ["trunk lid", "decklid"], "priceTokens": [
+            "trunk lid bare", "trunk lid no lights", "trunk lid  w lights",
+            "deck lid - bare", "deck lid complete", "decklid - sdn",
+            "trunk no lights", "=trunk lid", "=deck lid", "=decklid"],
+        "notes": ["Color code must match or plan to paint. Spoiler holes, "
+                  "camera and badge cutouts differ by trim — check the "
+                  "underside before you pull."],
+        "rowWarn": "match the paint code on the door-jamb sticker"},
+    "liftgate": {
+        "label": "Liftgate / hatch", "kind": "body",
+        "tokens": ["liftgate", "hatch"], "priceTokens": [
+            "liftgate shell", "liftgate (bare", "tailgate/liftgate",
+            "=liftgate", "suv / van deck lid", "trunk hatch with glass",
+            "liftgate"],
+        "notes": ["Color code must match or plan to paint. Glass, wiper "
+                  "and camera variants differ within a generation — match "
+                  "yours before pulling."],
+        "rowWarn": "match paint code + glass/wiper/camera variant"},
 }
 
 # Default caveat lines — families override where the family has a sharper one.
@@ -10953,11 +11455,32 @@ def build_interchange_payload() -> dict:
     docs/data/interchange.json. Pure curated data — no scan required."""
     cats = [
         {"id": cid, "label": pc["label"], "kind": pc["kind"],
-         "tokens": pc["tokens"], "priceTokens": pc["priceTokens"]}
+         "tokens": pc["tokens"], "priceTokens": pc["priceTokens"],
+         **({"notes": pc["notes"]} if pc.get("notes") else {}),
+         **({"rowWarn": pc["rowWarn"]} if pc.get("rowWarn") else {}),
+         **({"noValue": True} if pc.get("noValue") else {})}
         for cid, pc in INTERCHANGE_PART_CATEGORIES.items()
     ]
     fams = []
     for fam_id, fam in ENGINE_FAMILIES.items():
+        parts = {
+            cat: {"note": p["note"],
+                  **({"years": list(p["years"])} if p.get("years") else {}),
+                  # vg: verified groups — each a published part-number
+                  # application list; seeker+donor inside one = verified.
+                  **({"vg": [[list(s) for s in g]
+                             for g in p["verified"]["groups"]]}
+                     if p.get("verified") else {})}
+            for cat, p in fam["parts"].items()
+        }
+        # P0 catalog (PART_CATALOG_SPEC §4): every family answers the
+        # engine-assembly and ignition-coil searches — the family IS the
+        # application list for the assembly; no per-family research needed.
+        parts["engine-assembly"] = {
+            "note": "any donor in this family carries the same long block"}
+        parts["ignition-coils"] = {
+            "note": "same family, but coil packs changed within model "
+                    "years — match the coil part number before buying"}
         fams.append({
             "id": fam_id,
             "label": fam["display"],
@@ -10969,16 +11492,7 @@ def build_interchange_payload() -> dict:
                  _app_flags(a).get("ambig", "")]
                 for a in fam["apps"]
             ],
-            "parts": {
-                cat: {"note": p["note"],
-                      **({"years": list(p["years"])} if p.get("years") else {}),
-                      # vg: verified groups — each a published part-number
-                      # application list; seeker+donor inside one = verified.
-                      **({"vg": [[list(s) for s in g]
-                                 for g in p["verified"]["groups"]]}
-                         if p.get("verified") else {})}
-                for cat, p in fam["parts"].items()
-            },
+            "parts": parts,
         })
     groups = []
     for fam_id, fam in PLATFORM_FAMILIES.items():
@@ -11027,12 +11541,16 @@ def build_interchange_payload() -> dict:
                 "apps": [list(a) for a in t["trim_apps"]],
             })
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "builtAt": _iso_utc_z_interchange(),
         "categories": cats,
         "engineFamilies": fams,
         "platformGroups": groups,
         "trimEngineNotes": trim_engine_notes,
+        # §5.1 generation windows: same-model donors fit when seeker and
+        # donor years share ONE window. [make, model, [[lo, hi], ...]]
+        "modelGenerations": [[mk, md, [list(w) for w in wins]]
+                             for mk, md, wins in MODEL_GENERATIONS],
     }
 
 

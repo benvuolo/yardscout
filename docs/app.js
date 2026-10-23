@@ -116,6 +116,12 @@ const PART_KEYWORD_MAP = [
   { kw: 'gauge',               pnp: 'CLOCK/ SMALL GAUGES EACH',     tap: 'GAUGE SINGLE', utpap: 'GAUGE SINGLE', pyp: 'GAUGES', pap: 'CLOCK OR SMALL GAUGES (EACH)', wap: 'GAUGE (SINGLE/MISC)', upullr: 'GAUGE SINGLE', bwg: 'GAUGE SINGLE', bba: 'GAUGE SINGLE' },
   // --- charging / hybrid ---
   { kw: 'alternator',          pnp: 'ALTERNATOR',                   tap: 'ALTERNATOR', utpap: 'ALTERNATOR', pyp: 'ALTERNATOR', pap: 'ALTERNATOR (NON HYBRID)', wap: 'ALTERNATOR', upullr: 'ALTERNATOR', bwg: 'ALTERNATOR', bba: 'ALTERNATOR' },
+  // Chains listed only where the exact row name is verified on the yard's
+  // published list (spec §6.1) — unverified chains fall through honestly.
+  { kw: 'starter',             pnp: 'STARTER',                      tap: 'STARTER', utpap: 'STARTER', upullr: 'STARTER' },
+  { kw: 'climate control',     pnp: 'HEATER CONTROL PANEL(MAN)' },
+  { kw: 'heater control',      pnp: 'HEATER CONTROL PANEL(MAN)' },
+  { kw: 'tow mirror',          utpap: 'TOW MIRRORS' },
   { kw: 'hybrid battery',      pnp: 'BATTERY HYBRID/ELECTRICAL',    pyp: 'BATTERY (HYBRID BATTERY)', pap: 'HYBRID BATTERY ANY', wap: 'HYBRID BATTERY' },
   { kw: 'battery cells',       pnp: 'BATTERY HYBRID/ELECTRICAL',    pyp: 'BATTERY (HYBRID BATTERY)', pap: 'HYBRID BATTERY ANY', wap: 'HYBRID BATTERY' },
   { kw: 'inverter pump',       pnp: 'WATER PUMP',                   tap: 'WATER PUMP (ELECTRIC', utpap: 'WATER PUMP', pyp: 'WATER PUMP', pap: 'AUXILIARY WATER PUMP', wap: 'WATER PUMP', upullr: 'WATER PUMP', bwg: 'WATER PUMP', bba: 'WATER PUMP' },
@@ -3251,14 +3257,25 @@ function yardPartQuote(location, variants) {
 function _yardPartQuoteUncached(location, variants) {
   const rows = yardPriceList(location);
   if (!rows) return { status: 'no-list' };
+  // Variants are ORDERED by specificity (PART_CATALOG_SPEC §6.3): the first
+  // variant with any hit wins, cheapest row within THAT variant only. A "="
+  // prefix demands an exact row-name match — "=door" prices a row named
+  // DOOR without also sweeping up DOOR HANDLE, the old cheapest-substring
+  // hazard that quoted a $9 handle as the price of a door.
   let best = null;
-  for (const r of rows) {
-    const pl = r.part.toLowerCase();
-    if (variants.some(v => pl.includes(v)) && (!best || r.price < best.price)) best = r;
+  for (const v of variants) {
+    const exact = v.charAt(0) === '=';
+    const needle = exact ? v.slice(1) : v;
+    for (const r of rows) {
+      const pl = r.part.toLowerCase();
+      const hit = exact ? pl.trim() === needle : pl.includes(needle);
+      if (hit && (!best || r.price < best.price)) best = r;
+    }
+    if (best) break;
   }
   if (!best) {
     for (const v of variants) {
-      const kw = lookupYardCost(v, location);
+      const kw = lookupYardCost(v.charAt(0) === '=' ? v.slice(1) : v, location);
       if (kw.cost != null) {
         // Recover the full row (core charge) behind the keyword-map name.
         best = rows.find(r => r.part === kw.yardName) || { part: kw.yardName, price: kw.cost, core: 0 };
@@ -3614,6 +3631,45 @@ function pfAppMatches(app, year, make, model) {
   const am = pfSquash(prefix ? app[1].slice(0, -1) : app[1]);
   return prefix ? cands.some(sm => sm.startsWith(am)) : cands.includes(am);
 }
+/* Factory generation windows (PART_CATALOG_SPEC §5.1). A same-model donor
+ * fits a class-B/C/D category when seeker and donor years share ONE window.
+ * Alias spellings ("Ram Pickup", "Suburban 1500") ship as their own rows,
+ * so a plain squash-keyed map resolves every feed spelling. */
+let _pfGenMap = null;
+function pfGenWindows(make, model) {
+  if (!interchangeData || !interchangeData.modelGenerations) return null;
+  if (!_pfGenMap) {
+    _pfGenMap = new Map();
+    for (const [gmk, gmd, wins] of interchangeData.modelGenerations) {
+      _pfGenMap.set(pfSquash(gmk) + '|' + pfSquashModel(gmd, gmk), wins);
+    }
+  }
+  const mk = pfSquash(make);
+  return _pfGenMap.get(mk + '|' + pfSquashModel(model, make))
+    || _pfGenMap.get(mk + '|' + pfSquashModel(model, ''))
+    || null;
+}
+function pfGenWindow(make, model, year) {
+  const wins = pfGenWindows(make, model);
+  if (wins) for (const w of wins) { if (year >= w[0] && year <= w[1]) return w; }
+  return null;
+}
+
+/* Engine-assembly yard quotes are cylinder-tiered on most price lists
+ * ("ENGINE 4 CYL", "ENGINE (NO ACC) 8-10", "ENGINE - 8CYL & UP") — prefer
+ * the row matching the chosen family's cylinder count before the generic
+ * complete-engine rows. */
+function pfEngineQuoteVariants(cyl) {
+  if (!cyl) return [];
+  if (cyl >= 8) {
+    return ['engine 8 cyl', 'engine 8 cly', 'engine (no acc) 8-10',
+            '8cyl & up', 'engine 6.0 & above'];
+  }
+  return [`engine ${cyl} cyl`, `engine ${cyl} cly`, 'engine (no acc) 3-6',
+          'engine - 4cyl - 6cyl', 'engine 5.9 and below',
+          'engine 3&4 cylinder'];
+}
+
 function pfParseEngine(s) {
   if (!s) return { l: null, cyl: null };
   const sl = String(s).toLowerCase();
@@ -3898,44 +3954,95 @@ function pfRunSearch() {
           }
         }
       }
+      // Engine assemblies (spec §4): "Verified" is reserved for donors whose
+      // VIN decode CONFIRMS the engine — family application lists alone
+      // can't rule out an option engine sitting in the donor. Decode-silent
+      // donors stay Likely and keep the check-under-the-hood warning.
+      if (pfCat.id === 'engine-assembly') {
+        tier = (verdict === true && !app[5] && !seekerAmbig) ? 'verified' : 'likely';
+      }
       results.set(v.id, { v, d, tier, warns });
     }
   } else {
-    pfRenderEngineChips(null);
-    // Cross-model groups: hand-verified platform families ship tier
-    // "verified"; performance-trim platform mappings (M3 -> E46 etc.) are
-    // reasoned claims, not published part-number lists, and ship "likely".
-    for (const g of interchangeData.platformGroups) {
-      if (g.cat !== pfCat.id) continue;
-      if (!g.apps.some(a => pfAppMatches(a, s.year, s.make, s.model))) continue;
-      const gTier = g.tier === 'likely' ? 'likely' : 'verified';
-      groupNotes.push(`${g.label}: ${g.note}`);
-      for (const v of liveInventory) {
-        if (!g.apps.some(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model))) continue;
-        const d = vehicleDistanceMi(v);
-        if (radius && (d == null || d > radius)) continue;
-        const prev = results.get(v.id);
-        if (prev && prev.tier === 'verified') continue; // verified wins
-        results.set(v.id, { v, d, tier: gTier, warns: [escapeHtml(g.note)] });
+    // Chassis-side kinds (spec §3): body = platform groups + same-model
+    // generation; combo = same-model generation × engine-family chip,
+    // always Likely; exact = same-model generation ONLY, always Likely.
+    let famFilter = null;
+    if (pfCat.kind === 'combo') {
+      // Which engine drives which transmission/ECM — offer the same chips
+      // the engine path uses. Unlike engines, an unpicked chip doesn't
+      // block results: generation match alone is an honest Likely, the
+      // chip just narrows donors to matching drivetrains.
+      const fams = interchangeData.engineFamilies.filter(f =>
+        f.apps.some(a => pfAppMatches(a, s.year, s.make, s.model)));
+      pfRenderEngineChips(fams);
+      const fam = fams.length === 1 ? fams[0]
+        : (pfChosenFam !== '__none__' ? fams.find(f => f.id === pfChosenFam) : null);
+      if (fam) {
+        pfChosenFam = fam.id;
+        pfRenderEngineChips(fams);  // repaint active state
+        famFilter = fam;
+        groupNotes.push(`Donors narrowed to cars that came with the ${fam.label} — a different engine usually means a different ${pfCat.label.toLowerCase()}.`);
+      } else if (fams.length > 1) {
+        groupNotes.push('Showing every same-generation donor — pick your engine above to narrow to donors with a matching drivetrain.');
+      }
+    } else {
+      pfRenderEngineChips(null);
+    }
+    if (pfCat.kind === 'body') {
+      // Cross-model groups: hand-verified platform families ship tier
+      // "verified"; performance-trim platform mappings (M3 -> E46 etc.) are
+      // reasoned claims, not published part-number lists, and ship "likely".
+      // combo/exact categories NEVER use platform groups (spec §3): a
+      // chassis-mate's transmission or radio is not a fit claim we can make.
+      for (const g of interchangeData.platformGroups) {
+        if (g.cat !== pfCat.id) continue;
+        if (!g.apps.some(a => pfAppMatches(a, s.year, s.make, s.model))) continue;
+        const gTier = g.tier === 'likely' ? 'likely' : 'verified';
+        groupNotes.push(`${g.label}: ${g.note}`);
+        for (const v of liveInventory) {
+          if (!g.apps.some(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model))) continue;
+          const d = vehicleDistanceMi(v);
+          if (radius && (d == null || d > radius)) continue;
+          const prev = results.get(v.id);
+          if (prev && prev.tier === 'verified') continue; // verified wins
+          results.set(v.id, { v, d, tier: gTier, warns: [escapeHtml(g.note)] });
+        }
       }
     }
-    // Same model, same generation window — the donor's own part row says
-    // which years it fits; the seeker's year must sit inside it.
+    // Same model, same generation. Two honest sources, donor-row first:
+    // (1) the donor's own researched part row carries a fits window;
+    // (2) the factory generation table — seeker and donor years inside ONE
+    //     window of the same model. Both are Likely, never Verified.
     const sKey = pfSquashModel(s.model, s.make);
+    const sWin = pfGenWindow(s.make, s.model, s.year);
+    const rowWarn = pfCat.rowWarn ? escapeHtml(pfCat.rowWarn) : '';
     for (const v of liveInventory) {
       if (results.has(v.id)) continue;  // verified group row already won
       if (canonicalMake(v.make) !== s.make) continue;
       if (pfSquashModel(canonicalModel(v.make, v.model), v.make) !== sKey) continue;
-      const row = pfPartRow(v, pfCat);
-      if (!row) continue;
-      const win = pfParseFits(row.fits);
-      if (!win || s.year < win[0] || s.year > win[1]) continue;
       const d = vehicleDistanceMi(v);
       if (radius && (d == null || d > radius)) continue;
-      results.set(v.id, {
-        v, d, tier: 'likely',
-        warns: [`same ${escapeHtml(s.make)} ${escapeHtml(s.model)} generation (${row.fits}) — trim and options still vary, verify part number`],
-      });
+      if (famFilter) {
+        // The chosen engine must be plausible in the donor: it must be a
+        // listed application AND the donor's decode must not contradict it.
+        const dApp = famFilter.apps.find(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model));
+        if (!dApp) continue;
+        const ex = extrasFor(v);
+        if (pfEngineVerdict(ex ? ex[2] : '', famFilter) === false) continue;
+      }
+      const warns = [];
+      const row = pfPartRow(v, pfCat);
+      const win = row ? pfParseFits(row.fits) : null;
+      if (win && s.year >= win[0] && s.year <= win[1]) {
+        warns.push(`same ${escapeHtml(s.make)} ${escapeHtml(s.model)} generation (${row.fits}) — trim and options still vary, verify part number`);
+      } else if (sWin && v.year >= sWin[0] && v.year <= sWin[1]) {
+        warns.push(`same ${escapeHtml(s.make)} ${escapeHtml(s.model)} generation (${sWin[0]}\u2013${sWin[1]}) — trim and options still vary`);
+      } else {
+        continue;  // outside every window we can vouch for
+      }
+      if (rowWarn) warns.push(rowWarn);
+      results.set(v.id, { v, d, tier: 'likely', warns });
     }
     if (!groupNotes.length) famNote = 'Same-generation donors of your own model' + (pfCat ? ` — ${pfCat.label.toLowerCase()}s rarely cross model lines without a verified platform group` : '');
   }
@@ -3952,14 +4059,26 @@ function pfRunSearch() {
   const unlocked = isPro();
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &middot; ${nVer} verified, ${rows.length - nVer} likely &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>`
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
-    + groupNotes.map(n => `<div class="pf-caveat">${n}</div>`).join('');
+    + groupNotes.map(n => `<div class="pf-caveat">${n}</div>`).join('')
+    // Category-level honesty notes always show (spec: engine long-block
+    // caveat, unknown mileage, pull logistics, VIN-lock, airbag handling…).
+    + (pfCat.notes || []).map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('');
+  // Engine-assembly rows on most yard lists are cylinder-tiered — quote the
+  // row matching the chosen family's cylinder count ahead of the generics.
+  let quoteVariants = pfCat.priceTokens.map(t => t.toLowerCase());
+  if (pfCat.id === 'engine-assembly' && pfChosenFam) {
+    const qFam = interchangeData.engineFamilies.find(f => f.id === pfChosenFam);
+    if (qFam) quoteVariants = pfEngineQuoteVariants(qFam.cyl).concat(quoteVariants);
+  }
   out.innerHTML = head + rows.slice(0, CAP).map(r => {
     const v = r.v;
-    const quote = yardPartQuote(v.location, pfCat.priceTokens.map(t => t.toLowerCase()));
+    const quote = yardPartQuote(v.location, quoteVariants);
     const priceHtml = quote.status === 'priced'
       ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard's own published price list">$${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
       : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
-    const partRow = pfPartRow(v, pfCat);
+    // noValue categories (engine assemblies, transmissions) ship no resale
+    // band by charter — you can't carry one out, so "worth" is misleading.
+    const partRow = pfCat.noValue ? null : pfPartRow(v, pfCat);
     const ebayHtml = partRow
       ? (unlocked
         ? `<span class="pf-ebay" title="Typical sold prices for working parts (eBay, national)">worth ${formatPrice(partRow.low)}&ndash;${formatPrice(partRow.high)}</span>`
