@@ -7115,7 +7115,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Dodge", "Dakota", 2000, 2011),
             ("Dodge", "Durango", 2000, 2009),
             ("Dodge|Ram", "Ram*", 2002, 2013),
-            ("Chrysler|Dodge", "Dodge 1500 Pickup", 2002, 2008),  # feed alias
+            ("Chrysler|Dodge", "Dodge 1500", 2002, 2008),  # feed alias
             ("Ram", "1500*", 2011, 2013),
             ("Jeep", "Commander", 2006, 2009),
             ("Chrysler", "Aspen", 2007, 2009),
@@ -7161,7 +7161,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [5.7], "cyl": 8},
         "apps": [
             ("Dodge|Ram", "Ram*", 2003, 2024),
-            ("Chrysler|Dodge", "Dodge 1500 Pickup", 2003, 2008),  # feed alias
+            ("Chrysler|Dodge", "Dodge 1500", 2003, 2008),  # feed alias
             ("Ram", "1500*", 2011, 2024),
             ("Ram", "2500*", 2011, 2024),
             ("Ram", "3500*", 2011, 2024),
@@ -7184,7 +7184,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [5.2, 5.9], "cyl": 8},
         "apps": [
             ("Dodge|Ram", "Ram*", 1994, 2001),
-            ("Chrysler|Dodge", "Dodge 1500 Pickup", 1994, 2001),  # feed alias
+            ("Chrysler|Dodge", "Dodge 1500", 1994, 2001),  # feed alias
             ("Dodge", "Dakota", 1992, 2003),
             ("Dodge", "Durango", 1998, 2003),
             ("Jeep", "Grand Cherokee", 1993, 1998),

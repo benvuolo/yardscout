@@ -1175,7 +1175,7 @@ cited below.**
 ### mopar-47 — Chrysler PowerTech 4.7 V8
 
 - **Engine:** 4.7L 8-cyl
-- **Family applications:** Jeep Grand Cherokee 1999-2009, Dodge Dakota 2000-2011, Dodge Durango 2000-2009, Dodge|Ram Ram* 2002-2013, Chrysler|Dodge Dodge 1500 Pickup 2002-2008, Ram 1500* 2011-2013, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
+- **Family applications:** Jeep Grand Cherokee 1999-2009, Dodge Dakota 2000-2011, Dodge Durango 2000-2009, Dodge|Ram Ram* 2002-2013, Chrysler|Dodge Dodge 1500 2002-2008, Ram 1500* 2011-2013, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
 - **alternator — verified evidence:** Mopar OEM 56029914AC (160A Denso, replaces 56029914AA) fitment (jeeppartsdeal.com, retrieved 2026-10-22): Durango 3.7/4.7 2001-2007, Grand Cherokee 3.7/4.7 2005-2006; Denso 421000-0040 vendor table adds Commander 3.7/4.7 2006-2010. Mopar RL041120AC (Ram 1500 3.7/4.7 2002-2007) and 56029700AD (Ram 1500 2008) cover the trucks.
   - Group 1: Dodge Durango 2001-2007; Jeep Grand Cherokee 2005-2006; Jeep Commander 2006-2009
   - Group 2: Dodge|Ram Ram* 2002-2008
@@ -1192,7 +1192,7 @@ cited below.**
 ### mopar-hemi57 — Chrysler 5.7 HEMI V8
 
 - **Engine:** 5.7L 8-cyl
-- **Family applications:** Dodge|Ram Ram* 2003-2024, Chrysler|Dodge Dodge 1500 Pickup 2003-2008, Ram 1500* 2011-2024, Ram 2500* 2011-2024, Ram 3500* 2011-2024, Dodge Charger 2006-2023, Dodge Challenger 2009-2023, Chrysler 300 2005-2023, Dodge Magnum 2005-2008, Jeep Grand Cherokee 2005-2021, Dodge Durango 2011-2023, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
+- **Family applications:** Dodge|Ram Ram* 2003-2024, Chrysler|Dodge Dodge 1500 2003-2008, Ram 1500* 2011-2024, Ram 2500* 2011-2024, Ram 3500* 2011-2024, Dodge Charger 2006-2023, Dodge Challenger 2009-2023, Chrysler 300 2005-2023, Dodge Magnum 2005-2008, Jeep Grand Cherokee 2005-2021, Dodge Durango 2011-2023, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
 - **alternator — verified evidence:** TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-11298 (Chrysler 5602869, Denso 7S) Ram 5.7 2007-2008.
   - Group 1: Dodge|Ram Ram* 2007-2008
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
@@ -1208,7 +1208,7 @@ cited below.**
 ### mopar-magnum — Dodge Magnum 5.2/5.9 V8
 
 - **Engine:** 5.2/5.9L 8-cyl
-- **Family applications:** Dodge|Ram Ram* 1994-2001, Chrysler|Dodge Dodge 1500 Pickup 1994-2001, Dodge Dakota 1992-2003, Dodge Durango 1998-2003, Jeep Grand Cherokee 1993-1998
+- **Family applications:** Dodge|Ram Ram* 1994-2001, Chrysler|Dodge Dodge 1500 1994-2001, Dodge Dakota 1992-2003, Dodge Durango 1998-2003, Jeep Grand Cherokee 1993-1998
 - **alternator — verified evidence:** Lester 13354 (Denso 121000-3530, Chrysler 56027912) application list (maniacelectricmotors.com + aspwholesale.com, retrieved 2026-10-22): Dakota 1992-1998, Ram 1500/2500/3500 1994-1998, Durango 1998, Grand Cherokee 5.2/5.9 1993-1998, Ramcharger 1992-1993. Corroborated by Lester 13742 (Chrysler 56027913, 136A) with the same spans. Lester 13920/13914 (Bosch/Denso 136A, Chrysler 56028237) application table (dssautoparts.com): Ram 1999-2003, Durango 5.9 2001-2003.
   - Group 1: Dodge|Ram Ram* 1994-1998; Dodge Dakota 1992-1998; Dodge Durango 1998-1998; Jeep Grand Cherokee 1993-1998
   - Group 2: Dodge|Ram Ram* 1999-2001; Dodge Durango 2001-2003
@@ -1911,3 +1911,73 @@ are structurally impossible for these entries. No new cross-model lighting
 groups were added: TYC/Depo application catalogs were unreachable this
 session (fetch blocked), so lighting interchange stays within same-model
 generation windows only.
+
+## Phase B (2026-10): highest-volume commuter platforms
+
+Working down the inventory-weighted gap ranking after Phase A. ~60 new engine
+families plus feed-spelling aliases, in six pushed batches. Coverage of the
+251,732-vehicle inventory snapshot: 71.9% (end of Phase A) → 83.2%.
+All evidence from the Denso reman + First Time Fit catalog
+(densoautoparts.com, retrieved 2026-10-22); per-family details in the
+evidence block above.
+
+### Phase B triple spot-checks (20 new, random seed 42 over Phase B families)
+
+Every triple hand-checked against the catalog dump: both the seeker's and the
+donor's year/engine rows must carry the SAME published part number with no
+disqualifying qualifier.
+
+| # | Family | Part | Seeker | Donor | Published # | Result |
+|---|--------|------|--------|-------|-------------|--------|
+| 1 | gm-lumina31 | alternator | 2001 Chevrolet Lumina | 2001 Chevrolet Lumina | 210-5161 (102A) | PASS — single unqualified 2001 row |
+| 2 | gm-atlas-i45 | starter | 2011 Chevrolet Colorado | 2010 Chevrolet Colorado | 280-5394 | PASS — 2.9 + 3.7 rows 2008-2012 both carry it |
+| 3 | nissan-qg18 | starter | 2003 Nissan Sentra | 2003 Nissan Sentra | 280-5373 | PASS — three 1.8 CID spellings 2003-2005, one number |
+| 4 | hyundai-gencoupe38 | alternator | 2014 Hyundai Genesis Coupe | 2012 Hyundai Genesis Coupe | 210-0713 (130A) | PASS — 3.8 row 2010-2015 unqualified |
+| 5 | vw-b5-v6 | starter | 2000 VW Passat 2.8 | 2005 Audi A4 Quattro 3.0 | 280-5364 | PASS — Passat 2.8 2000-2005 + A4 Quattro 3.0 2003-2006 rows |
+| 6 | mopar-pacifica | starter | 2005 Chrysler Pacifica | 2005 Chrysler Pacifica | 280-0349 | PASS — 3.5 and 3.8 2005 rows both carry it |
+| 7 | mazda-cx9 | alternator | 2009 Mazda CX-9 | 2010 Mazda CX9 (feed spelling) | 210-4321 (110A) | PASS — 3.7 2008-2011 row |
+| 8 | hyundai-santafe1 | starter | 2005 Hyundai Santa Fe | 2006 Hyundai Santa Fe | 281-6004 | PASS — 2.4/2.7/3.5 rows all on one number 2005-2006 |
+| 9 | lexus-is2 | alternator | 2009 Lexus IS 250 | 2009 Lexus IS 250 | 210-0657 (150A) | PASS — 2006-2009 row unqualified (2010-2013 Base-qualified, excluded) |
+| 10 | gm-ecotec-lcv | starter | 2013 Chevrolet Malibu | 2013 Chevrolet Malibu | 280-0434 | PASS — 2.0T + 2.5 2013 rows both carry it |
+| 11 | lexus-3uz | alternator | 2005 Lexus LS 430 | 2006 Lexus LS 430 | 210-0570 (130A) | PASS — 3UZFE 2005-2006 row |
+| 12 | mazda-mpv30 | alternator | 1991 Mazda MPV | 1993 Mazda MPV | 210-4105 (70A) | PASS — V6-3.0 1989-1998 row |
+| 13 | mitsu-4b11 | starter | 2010 Mitsubishi Lancer | 2010 Mitsubishi Lancer | 280-4317 | PASS — 2010 4B11 NA and Evo GSR rows both carry it |
+| 14 | honda-b20 | alternator | 1997 Honda CR-V | 1997 Honda CR-V | 210-0196 (95A) | PASS — B20B4 1997-1998 row unqualified |
+| 15 | ford-40ohv | alternator | 1992 Ford Explorer | 1992 Ford Explorer | 210-5210 (95A) | PASS — 4.0 1991-1992 row unqualified (93-94 trim-qualified, excluded) |
+| 16 | honda-j37 | starter | 2012 Acura MDX | 2012 Acura MDX | 280-0405 | PASS — J37A1 2010-2013 row |
+| 17 | nissan-vg30-maxima | alternator | 1990 Nissan Maxima | 1989 Nissan Maxima | 210-3131 (90A) | PASS — VG30E 1989-1991 row unqualified |
+| 18 | mopar-lh27 | alternator | 2001 Dodge Intrepid | 2001 Dodge Intrepid | 210-0686 (120A) | PASS — 2.7 1999-2001 row unqualified |
+| 19 | hyundai-gencoupe20 | alternator | 2012 Hyundai Genesis Coupe | 2012 Hyundai Genesis Coupe | 211-6017 | PASS — 2.0T 2010-2012 row |
+| 20 | mazda-cx7 | alternator | 2007 Mazda CX7 | 2009 Mazda CX-7 | 210-4312 (110A) | PASS — 2.3T 2007-2011 row |
+
+All 20/20 PASS (checked 2026-10-22).
+
+### Phase B accuracy-forced exclusions
+
+Catalog-absent models (no rows at all in this edition — no family created):
+Ford Fiesta, Nissan Juke, Fiat 500, Chevrolet Spark, Scion/Subaru BRZ-family.
+
+Catalog year ceiling (~2015) — these high-volume 2016+ clusters cannot be
+verified from this edition and stay uncovered: Sentra 2013+ span past 2015,
+Fusion 2015+, Pathfinder 2013+ past 2015, Malibu 2016+, Cruze 2016+, Accord
+2013+ past 2015, Civic 2016+, Equinox 2018+. 2016+ vehicles are 2.6% of the
+inventory snapshot.
+
+Hybrids: Prius (0.5% of inventory) and all other hybrids excluded — HV
+systems make alternator/starter interchange inapplicable or dealer-only.
+
+Qualified-row families (published rows exist but every one carries a
+disqualifying split — stays Likely or no family):
+- Mercedes C/E/S-Class — vendor-mixed (Bosch/Valeo) in every span.
+- BMW 3-Series 2007-2017 (N52) — no unqualified rows published.
+- Ford Focus 2000-2004 — SOHC/Zetec + transmission splits.
+- VW Jetta 1994-2004, Golf 1995-2006, New Beetle/Beetle — vendor and
+  transmission qualifiers on every row (Beetle starters all trans-qualified).
+- MINI Cooper — supercharged/vendor splits throughout.
+- Volvo XC90 and sedans — fragmented vendor/amp splits.
+- Ford Freestyle — Rear-A/C option splits on alternator rows.
+- Toyota Tercel — transmission and cold-spec qualifiers.
+- Mazda B-Series — mixed Ford/Mazda engines per year; no clean span.
+- Lexus IS 250/350 2010-2013 alternators — Base-trim-qualified rows only.
+- VW Passat 2.0T 2010 starter — Bosch-vendor-qualified (07-09 verified via
+  280-5338; 07-10 also dual-listed with 281-6001 — match yours).
