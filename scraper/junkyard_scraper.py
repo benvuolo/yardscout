@@ -6192,6 +6192,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Pontiac", "Vibe", 2003, 2008),
             ("Toyota", "Celica", 2000, 2005),
             ("Toyota", "MR2 Spyder", 2000, 2005, {"sole": True}),
+            ("Chevrolet", "Prizm", 1998, 2002, {"sole": True}),
         ],
         "parts": {
             "alternator": {"note": "1ZZ-FE unit — the 2ZZ (Celica GT-S/XRS) differs; " + _ALT_NOTE},
@@ -6410,11 +6411,11 @@ ENGINE_FAMILIES: dict[str, dict] = {
     },
     # -------------------------------------------------------------- Nissan
     "nissan-ka24": {
-        "display": "Nissan KA24DE 2.4 I4",
+        "display": "Nissan KA24E/DE 2.4 I4",
         "engine": {"liters": [2.4], "cyl": 4},
         "apps": [
             ("Nissan", "Altima", 1993, 2001, {"sole": True}),
-            ("Nissan", "240SX", 1991, 1998, {"sole": True}),
+            ("Nissan", "240SX", 1989, 1998, {"sole": True}),
             ("Nissan", "Frontier", 1998, 2004),
             ("Nissan", "Xterra", 2000, 2004),
         ],
@@ -6629,6 +6630,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
              {"ambig": "Explorer Sport/Platinum is 3.5 EcoBoost — same decode string; confirm non-turbo"}),
             ("Ford", "Flex", 2009, 2019,
              {"ambig": "Flex EcoBoost shares the 3.5 decode string; confirm non-turbo"}),
+            ("Ford", "Mustang", 2011, 2014),
             ("Ford", "Mustang", 2011, 2017),
             ("Ford", "F-150", 2011, 2014),
         ],
@@ -6847,6 +6849,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Buick", "Park Avenue", 1997, 2005, {"sole": True}),
             ("Buick", "Lucerne", 2006, 2008),
             ("Buick", "Lacrosse", 2005, 2009),
+            ("Chevrolet", "Camaro", 1995, 2002),
+            ("Pontiac", "Firebird", 1995, 2002),
         ],
         "parts": {
             "alternator": {"note": "NA 3800 unit — supercharged (GTP/SSEi) accessories differ; " + _ALT_NOTE},
@@ -6854,9 +6858,11 @@ ENGINE_FAMILIES: dict[str, dict] = {
         },
     },
     "gm-60deg": {
-        "display": "GM 60° 3.1/3.4 V6",
-        "engine": {"liters": [3.1, 3.4], "cyl": 6},
+        "display": "GM 60° 2.8/3.1/3.4 V6",
+        "engine": {"liters": [2.8, 3.1, 3.4], "cyl": 6},
         "apps": [
+            ("Chevrolet", "Camaro", 1987, 1995),
+            ("Pontiac", "Firebird", 1987, 1995),
             ("Chevrolet", "Venture", 1997, 2005, {"sole": True}),
             ("Pontiac", "Montana", 1999, 2005, {"sole": True}),
             ("Pontiac", "Grand Am", 1999, 2005),
@@ -6932,6 +6938,9 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Jeep", "Grand Cherokee", 2011, 2021),
             ("Jeep", "Wrangler", 2012, 2018),
             ("Dodge|Ram", "Ram*", 2013, 2024),
+            # Ram-branded feeds carry make "Ram" with bare "1500" models —
+            # the Ram* prefix can't reach those, so they get their own apps.
+            ("Ram", "1500*", 2013, 2024),
         ],
         "parts": {
             "alternator": {"note": "Pentastar unit — 160/180/220A variants and RWD vs FWD brackets; match part number"},
@@ -6979,6 +6988,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Dodge", "Dakota", 2000, 2011),
             ("Dodge", "Durango", 2000, 2009),
             ("Dodge|Ram", "Ram*", 2002, 2013),
+            ("Ram", "1500*", 2011, 2013),
             ("Jeep", "Commander", 2006, 2009),
             ("Chrysler", "Aspen", 2007, 2009),
         ],
@@ -6994,6 +7004,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Jeep", "Liberty", 2002, 2012),
             ("Dodge", "Dakota", 2004, 2011),
             ("Dodge|Ram", "Ram*", 2002, 2012),
+            ("Ram", "1500*", 2011, 2012),
             ("Jeep", "Grand Cherokee", 2005, 2010),
             ("Dodge", "Nitro", 2007, 2011),
             ("Jeep", "Commander", 2006, 2010),
@@ -7022,6 +7033,9 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [5.7], "cyl": 8},
         "apps": [
             ("Dodge|Ram", "Ram*", 2003, 2024),
+            ("Ram", "1500*", 2011, 2024),
+            ("Ram", "2500*", 2011, 2024),
+            ("Ram", "3500*", 2011, 2024),
             ("Dodge", "Charger", 2006, 2023),
             ("Dodge", "Challenger", 2009, 2023),
             ("Chrysler", "300", 2005, 2023),
@@ -7265,6 +7279,443 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "parts": {
             "alternator": {"note": "5-cyl unit (the decode's '5-cyl' is the tell); " + _ALT_NOTE},
             "starter": {"note": _STR_NOTE},
+        },
+    },
+    # ================= 2026-10 PHASE A — enthusiast platforms =============
+    # ------------------------------------------------------------- Toyota
+    "toyota-4a": {
+        "display": "Toyota 4A/7A 1.6/1.8 I4 (Corolla era)",
+        "engine": {"liters": [1.6, 1.8], "cyl": 4},
+        "apps": [
+            ("Toyota", "Corolla", 1985, 1997, {"sole": True}),
+            ("Geo|Chevrolet", "Prizm", 1989, 1997, {"sole": True}),
+            ("Toyota", "Celica", 1990, 1999),
+        ],
+        "parts": {
+            "alternator": {"note": "4A-F/4A-FE/7A-FE share published units per year span; the twin-cam 4A-GE (85-89) uses its own — match part number on a GT-S"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "toyota-3s": {
+        "display": "Toyota 2S/3S 2.0 I4 (Celica/MR2 Turbo)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Toyota", "Celica", 1986, 1993),
+            ("Toyota", "MR2", 1991, 1995),
+        ],
+        "parts": {
+            "alternator": {"note": "2.0 (2S/3S-FE/3S-GE/3S-GTE) unit — the 1.6 and 2.2 Celica units differ; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "toyota-m6": {
+        "display": "Toyota 5M/7M 2.8/3.0 I6 (Supra MK3/Cressida)",
+        "engine": {"liters": [2.8, 3.0], "cyl": 6},
+        "apps": [
+            ("Toyota", "Supra", 1986, 1992, {"sole": True}),
+            ("Toyota", "Cressida", 1985, 1992, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "Supra rows split by turbo and transmission — Supra pairs stay Likely; Cressida rows anchor the verified groups"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "toyota-2jz": {
+        "display": "Toyota/Lexus 2JZ 3.0 I6 (Supra MK4/SC/GS/IS)",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Toyota", "Supra", 1993, 1998, {"sole": True}),
+            ("Lexus", "SC300", 1992, 2000, {"sole": True}),
+            ("Lexus", "GS300", 1993, 2005, {"sole": True}),
+            ("Lexus", "IS300", 2001, 2005, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "Supra NA (2JZ-GE) and twin-turbo (GTE) alternators differ, and the turbo splits again by transmission — Supra pairs stay Likely; Lexus GE units anchor the verified groups"},
+            "starter": {"note": "the 93-98 Supra, 95-00 SC300 and 93-97 GS300 share one published starter — " + _STR_NOTE},
+        },
+    },
+    # -------------------------------------------------------------- Honda
+    "honda-d-ef": {
+        "display": "Honda D15/D16 1.5/1.6 I4 (EF Civic/CRX)",
+        "engine": {"liters": [1.5, 1.6], "cyl": 4},
+        "apps": [
+            ("Honda", "Civic", 1988, 1991, {"sole": True}),
+            ("Honda", "CRX", 1988, 1991, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "88-89 rows are vendor-split (Denso vs Mitsubishi source) — match the unit on your car; 90-91 is one published unit"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "honda-d-eg": {
+        "display": "Honda D15/D16 1.5/1.6 I4 (EG Civic/Del Sol)",
+        "engine": {"liters": [1.5, 1.6], "cyl": 4},
+        "apps": [
+            ("Honda", "Civic", 1992, 1995, {"sole": True}),
+            ("Honda", "Civic Del Sol", 1993, 1995,
+             {"ambig": "VTEC (B16A3 1.6 DOHC) Del Sols use a different unit — this family covers the D-series singles-cam cars; confirm the engine code"}),
+            ("Honda", "Del Sol", 1993, 1995,
+             {"ambig": "VTEC (B16A3 1.6 DOHC) Del Sols use a different unit — this family covers the D-series single-cam cars; confirm the engine code"}),
+        ],
+        "parts": {
+            "alternator": {"note": "D15 rows are one unit; the D16Z6 is dual-sourced (Denso 210-0213 / Mitsubishi 210-4133, identical spans) — match the vendor tag on a 1.6"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "honda-b18": {
+        "display": "Honda/Acura B17/B18 1.7/1.8 I4 (Integra)",
+        "engine": {"liters": [1.7, 1.8], "cyl": 4},
+        "apps": [
+            ("Acura", "Integra", 1990, 2001, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "96-01: the Type R (B18C5) uses Denso 210-4190 — every other trim shares 210-0199; match part number on a 96+ car"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "honda-k20": {
+        "display": "Honda/Acura K20 2.0 I4 (Civic Si/RSX)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Honda", "Civic", 2002, 2011),
+            ("Acura", "RSX", 2002, 2006, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "RSX splits by trim (Type S 210-0507 vs base 210-4168) — RSX pairs stay Likely; Civic Si spans anchor the verified groups"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "honda-f20c": {
+        "display": "Honda F20C/F22C 2.0/2.2 I4 (S2000)",
+        "engine": {"liters": [2.0, 2.2], "cyl": 4},
+        "apps": [
+            ("Honda", "S2000", 2000, 2009, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "AP1 (2.0, 00-03) and AP2 (2.2, 04-09) units differ; 06-09 is the same F22C1 as 04-05 but past this catalog edition — verify part number"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "honda-h22": {
+        "display": "Honda H22/H23/F22 2.2/2.3 I4 (Prelude)",
+        "engine": {"liters": [2.2, 2.3], "cyl": 4},
+        "apps": [
+            ("Honda", "Prelude", 1992, 2001, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "92-96 splits three ways (F22A1 non-VTEC / H22A1 VTEC / H23A1 2.3) — those pairs stay Likely; 97+ H22A4 spans are verified"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    # -------------------------------------------------------------- Mazda
+    "mazda-miata-16": {
+        "display": "Mazda B6 1.6 I4 (Miata NA)",
+        "engine": {"liters": [1.6], "cyl": 4},
+        "apps": [
+            ("Mazda", "Miata", 1990, 1993, {"sole": True}),
+            ("Mazda", "MX-5*", 1990, 1993, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "91-93 rows split by transmission (M/T 210-4184 / A/T 210-4270) — match yours; 1990 is one unit"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "mazda-miata-18": {
+        "display": "Mazda BP 1.8 I4 (Miata NA/NB)",
+        "engine": {"liters": [1.8], "cyl": 4},
+        "apps": [
+            ("Mazda", "Miata", 1994, 2005, {"sole": True}),
+            ("Mazda", "MX-5*", 1994, 2005, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "94-97 (NA8) splits by transmission — match yours; 99-00 and 01-05 NB units are year-split, match amps"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "mazda-miata-nc": {
+        "display": "Mazda MZR 2.0 I4 (Miata NC)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Mazda", "Miata", 2006, 2015, {"sole": True}),
+            ("Mazda", "MX-5*", 2006, 2015, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "06-08 (NC1) and 09-12 (NC2) units differ; 13-15 is past this catalog edition — verify part number"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "mazda-rx7": {
+        "display": "Mazda 13B rotary (RX-7)",
+        "engine": {"liters": [1.3], "cyl": 2},
+        "apps": [
+            ("Mazda", "RX-7", 1986, 1995, {"sole": True}),
+            ("Mazda", "RX7", 1986, 1995, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "FD (93-95) is one published unit; FC turbo (86-88) has its own and 89-92 FC rows aren't published in this catalog — match part number on an FC"},
+            "starter": {"note": "FC starters split by transmission — match part number"},
+        },
+    },
+    "mazda-rx8": {
+        "display": "Mazda 13B-MSP Renesis rotary (RX-8)",
+        "engine": {"liters": [1.3], "cyl": 2},
+        "apps": [
+            ("Mazda", "RX-8", 2004, 2011, {"sole": True}),
+            ("Mazda", "RX8", 2004, 2011, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "05-07 and 09-11 are year-split units; early-build 2004 and the 2008 model year aren't cleanly published — verify part number on those"},
+            "starter": {"note": "most rows split by transmission — match part number"},
+        },
+    },
+    # ------------------------------------------------------------- Nissan
+    "nissan-z32": {
+        "display": "Nissan VG30DE/DETT 3.0 V6 (300ZX Z32)",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Nissan", "300ZX", 1990, 1996, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "NA (VG30DE) and twin-turbo (VG30DETT) alternators differ and the decode can't tell them apart — all pairs stay Likely; match part number"},
+            "starter": {"note": "one published starter covers every 90-96 Z32, NA and twin-turbo"},
+        },
+    },
+    "nissan-vq-hr": {
+        "display": "Nissan/Infiniti VQ35HR/VQ37VHR 3.5/3.7 V6",
+        "engine": {"liters": [3.5, 3.7], "cyl": 6},
+        "apps": [
+            ("Nissan", "350Z", 2007, 2009, {"sole": True}),
+            ("Nissan", "370Z", 2009, 2020, {"sole": True}),
+            ("Infiniti", "G35", 2007, 2008, {"sole": True}),
+            ("Infiniti", "G37", 2008, 2013, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "one 150A unit spans the HR cars (350Z 07-09, G35 07-08, G37 08-10, early 370Z); late 370Z (from 02/2010) revises it — match part number there"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    # ---------------------------------------------------------- Mitsubishi
+    "mitsu-dsm": {
+        "display": "Mitsubishi 4G63/420A 1.8/2.0 I4 (DSM Eclipse/Talon)",
+        "engine": {"liters": [1.8, 2.0], "cyl": 4},
+        "apps": [
+            ("Mitsubishi", "Eclipse", 1990, 1995, {"sole": True}),
+            ("Mitsubishi", "Eclipse", 1996, 1999),
+            ("Eagle", "Talon", 1990, 1998, {"sole": True}),
+            ("Plymouth", "Laser", 1990, 1994, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "90-98 rows split by transmission and turbo — match part number; 1999 is one published unit for 420A and 4G63 turbo alike"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "mitsu-24": {
+        "display": "Mitsubishi 4G64/4G69 2.4 I4",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Mitsubishi", "Eclipse", 2000, 2012),
+            ("Mitsubishi", "Galant", 1994, 2012),
+            ("Mitsubishi", "Lancer", 2005, 2006),
+            ("Mitsubishi", "Outlander", 2003, 2006, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "one published 110A unit spans Eclipse 06-11, Galant 04-11 and Lancer 2.4 05-06; earlier Galant spans are year-split — match amps"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "mitsu-6g72": {
+        "display": "Mitsubishi 6G72 3.0 V6 (Eclipse/Galant)",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Mitsubishi", "Eclipse", 2000, 2005),
+            ("Mitsubishi", "Galant", 1999, 2003),
+        ],
+        "parts": {
+            "alternator": {"note": "one published 85A unit spans the 3.0 Eclipse and Galant; " + _ALT_NOTE},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "mitsu-6g75": {
+        "display": "Mitsubishi 6G75 3.8 V6 (Eclipse/Galant)",
+        "engine": {"liters": [3.8], "cyl": 6},
+        "apps": [
+            ("Mitsubishi", "Eclipse", 2006, 2012),
+            ("Mitsubishi", "Galant", 2004, 2009),
+        ],
+        "parts": {
+            "alternator": {"note": "one published 110A unit spans Eclipse 06-11 and Galant 05-09; the 2004 Galant 3.8 unit is its own — match part number"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "mitsu-evo": {
+        "display": "Mitsubishi Evo 2.0 turbo I4 (4G63T/4B11T)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Mitsubishi", "Lancer Evolution", 2003, 2015, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "Evo VIII/IX (4G63T, 03-06) and Evo X (4B11T, 08-15) units differ; 12-15 is past this catalog edition — verify part number"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    # -------------------------------------------------------------- Subaru
+    "subaru-ej205": {
+        "display": "Subaru EJ205 2.0 turbo H4 (WRX 02-05)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Subaru", "WRX", 2002, 2005, {"sole": True}),
+            ("Subaru", "Impreza WRX", 2002, 2005, {"sole": True}),
+            ("Subaru", "Impreza", 2002, 2005,
+             {"ambig": "only WRX trims carry the 2.0 turbo — confirm turbo before buying"}),
+        ],
+        "parts": {
+            "alternator": {"note": "one published 75A unit spans every 02-05 EJ205 WRX; " + _ALT_NOTE},
+            "starter": {"note": "02-05 WRX starters split by transmission — match part number"},
+        },
+    },
+    # ----------------------------------------------------------------- BMW
+    "bmw-m52": {
+        "display": "BMW M50/M52/S50/S52 I6 (E36/E39/Z3)",
+        "engine": {"liters": [2.5, 2.8, 3.0, 3.2], "cyl": 6},
+        "apps": [
+            ("BMW", "3 Series", 1992, 1999),
+            ("BMW", "325i", 1992, 1995),
+            ("BMW", "325is", 1992, 1995),
+            ("BMW", "328i", 1996, 1999),
+            ("BMW", "328is", 1996, 1998),
+            ("BMW", "323i", 1998, 1999),
+            ("BMW", "323is", 1998, 1999),
+            ("BMW", "M3", 1995, 1999, {"sole": True}),
+            ("BMW", "Z3", 1996, 2002),
+            ("BMW", "525i", 1992, 1995),
+            ("BMW", "528i", 1997, 2000),
+        ],
+        "parts": {
+            "alternator": {"note": "most E36-era rows are case-size or OEM-number qualified (Bosch vs Valeo sourcing) — match the tag on your unit; the 528i 97-98 140A unit is the clean published span"},
+            "starter": {"note": "one published starter covers M3 96-99 and every Z3 96-02"},
+        },
+    },
+    "bmw-m54": {
+        "display": "BMW M54 2.5/3.0 I6 (E46/E39/E53/E85)",
+        "engine": {"liters": [2.5, 3.0], "cyl": 6},
+        "apps": [
+            ("BMW", "3 Series", 2000, 2006),
+            ("BMW", "325i", 2001, 2006),
+            ("BMW", "325ci", 2001, 2006),
+            ("BMW", "325xi", 2001, 2006),
+            ("BMW", "330i", 2001, 2006),
+            ("BMW", "330ci", 2001, 2006),
+            ("BMW", "330xi", 2001, 2006),
+            ("BMW", "525i", 2001, 2003),
+            ("BMW", "530i", 2001, 2003),
+            ("BMW", "X3", 2004, 2006),
+            ("BMW", "X5", 2001, 2006),
+            ("BMW", "Z4", 2003, 2005),
+        ],
+        "parts": {
+            "alternator": {"note": "every published M54 alternator row is OEM-number qualified (Bosch vs Valeo split) — all pairs stay Likely; match the number stamped on your unit"},
+            "starter": {"note": "the 3.0 X5 starter span is the published anchor; " + _STR_NOTE},
+        },
+    },
+    # ------------------------------------------------------------------ VW
+    "vw-20t": {
+        "display": "VW 2.0T EA113/EA888 I4 (GTI/Jetta)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Volkswagen", "GTI", 2006, 2014, {"sole": True}),
+            ("Volkswagen", "Jetta", 2006, 2013),
+        ],
+        "parts": {
+            "alternator": {"note": "every published 2.0T alternator row is vendor-qualified (Bosch vs Valeo) — all pairs stay Likely; match the unit on your car"},
+            "starter": {"note": "GTI 06-09 and 10-11 starters are clean published spans; Jetta rows split by fuel/transmission — match part number"},
+        },
+    },
+    # ---------------------------------------------------------- Ford perf
+    "ford-46-3v": {
+        "display": "Ford 4.6 3V Modular V8 (Mustang GT S197)",
+        "engine": {"liters": [4.6], "cyl": 8},
+        "apps": [
+            ("Ford", "Mustang", 2005, 2010),
+        ],
+        "parts": {
+            "alternator": {"note": "05 and 06-08 are year-split units; 09-10 rows split by transmission — match part number there"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "ford-coyote": {
+        "display": "Ford Coyote 5.0 V8 (Mustang GT/F-150)",
+        "engine": {"liters": [5.0], "cyl": 8},
+        "apps": [
+            ("Ford", "Mustang", 2011, 2023),
+            ("Ford", "F-150", 2011, 2023),
+            ("Ford", "F150*", 2011, 2023),
+        ],
+        "parts": {
+            "alternator": {"note": "11-14 Mustang rows split by transmission except the 12-13 150A unit; 15+ is past this catalog edition — verify part number"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "ford-essex38": {
+        "display": "Ford Essex 3.8/3.9 V6 (Mustang SN95)",
+        "engine": {"liters": [3.8, 3.9], "cyl": 6},
+        "apps": [
+            ("Ford", "Mustang", 1994, 2004),
+        ],
+        "parts": {
+            "alternator": {"note": "94-00 lists two interchangeable published units (210-5207/210-5310) — match yours; 01-04 is one unit"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    # ------------------------------------------------------------- GM perf
+    "gm-fbody-tpi": {
+        "display": "GM 5.0/5.7 TBI/TPI V8 (F-body/C4 Corvette)",
+        "engine": {"liters": [5.0, 5.7], "cyl": 8},
+        "apps": [
+            ("Chevrolet", "Camaro", 1982, 1992),
+            ("Pontiac", "Firebird", 1982, 1992),
+            ("Chevrolet", "Corvette", 1985, 1991, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "Camaro/Firebird 5.0 and 5.7 share the published unit within each span; C4 Corvette alternator rows aren't published in this catalog — Corvette pairs stay Likely"},
+            "starter": {"note": "5.0 and 5.7 starters differ — match displacement and part number"},
+        },
+    },
+    "gm-fbody-lt1": {
+        "display": "GM LT1 5.7 V8 (F-body/C4 Corvette)",
+        "engine": {"liters": [5.7], "cyl": 8},
+        "apps": [
+            ("Chevrolet", "Camaro", 1993, 1997),
+            ("Pontiac", "Firebird", 1993, 1997),
+            ("Chevrolet", "Corvette", 1992, 1996, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "LT1 alternator rows aren't published in this catalog (Delco CS-series cars) — all pairs stay Likely; match the CS130/CS144 number on your unit"},
+            "starter": {"note": "90-95 Corvette rows exclude the ZR1 — a ZR1 needs its own number"},
+        },
+    },
+    "gm-ls1-car": {
+        "display": "GM LS1/LS6 5.7 V8 (F-body/C5 Corvette)",
+        "engine": {"liters": [5.7], "cyl": 8},
+        "apps": [
+            ("Chevrolet", "Camaro", 1998, 2002),
+            ("Pontiac", "Firebird", 1998, 2002),
+            ("Chevrolet", "Corvette", 1997, 2004, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "Camaro and Firebird share one published 102A unit; C5 alternator rows are published for 2004 only (03 splits by transmission) — match part number on a C5"},
+            "starter": {"note": "one published starter covers LS1 F-bodies 98-01 and the C5 97-01"},
+        },
+    },
+    "gm-corvette-c6": {
+        "display": "GM Gen IV LS V8 (Corvette C6/Camaro SS)",
+        "engine": {"liters": [6.0, 6.2, 7.0], "cyl": 8},
+        "apps": [
+            ("Chevrolet", "Corvette", 2005, 2013, {"sole": True}),
+            ("Chevrolet", "Camaro", 2010, 2015),
+        ],
+        "parts": {
+            "alternator": {"note": "one published 145A unit spans Corvette 05-12 incl. the Z06 7.0; the supercharged ZR1 (09-13) uses its own — ZR1 years stay out of the verified span; Camaro SS 12-13 is its own published unit"},
+            "starter": {"note": "one published starter covers every 06-13 Corvette incl. ZR1"},
         },
     },
 }
@@ -7562,9 +8013,13 @@ _ALT_VERIFIED: dict = {
         ],
     },
     "gm-60deg": {
-        "evidence": "Lester 13993 (GM 10317647/10440635, Valeo SG10S029) application list (dbelectrical.com 400-40079, retrieved 2026-10-22): Venture 3.4 2002-2005, Montana 3.4 2002-2005, Silhouette 3.4 2002-2004. Grand Am/Alero/Impala/Malibu 3.4 use CS130D-era Delco units with multiple amp options — left at likely.",
+        "evidence": "Lester 13993 (GM 10317647/10440635, Valeo SG10S029) application list (dbelectrical.com 400-40079, retrieved 2026-10-22): Venture 3.4 2002-2005, Montana 3.4 2002-2005, Silhouette 3.4 2002-2004. Grand Am/Alero/Impala/Malibu 3.4 use CS130D-era Delco units with multiple amp options — left at likely. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5132 (100A) Camaro and Firebird 2.8 1987-1989 and 3.1 1990-1992, one unit across both displacements; 210-5126 (105A) Camaro and Firebird 3.4 1993-1995.",
         "groups": [[("Chevrolet", "Venture", 2002, 2005),
-                    ("Pontiac", "Montana", 2002, 2005)]],
+                    ("Pontiac", "Montana", 2002, 2005)],
+                   [("Chevrolet", "Camaro", 1987, 1992),
+                    ("Pontiac", "Firebird", 1987, 1992)],
+                   [("Chevrolet", "Camaro", 1993, 1995),
+                    ("Pontiac", "Firebird", 1993, 1995)]],
     },
     "gm-hv-v6": {
         "evidence": "Lester 11185 (Bosch 0-124-425-032, GM 20911162) application list (TYC 2-11185 via finditparts.com + maniacelectricmotors.com, retrieved 2026-10-22): Impala 3.5/3.9 2006-2011, Monte Carlo 3.5/3.9 2006-2007. Malibu/G6/Uplander use different units — left at likely.",
@@ -7633,13 +8088,14 @@ _ALT_VERIFIED: dict = {
                     ("Acura", "TL", 2000, 2003)]],
     },
     "nissan-ka24": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3146 (100A) Altima KA24DE 1998-2001; 210-3156 (70A) Frontier and Xterra KA24DE 2002-2004; 210-3118 (70A) Frontier 1998-2000 and Xterra 2000. 240SX/early Altima use other units — left at likely.",
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3146 (100A) Altima KA24DE 1998-2001; 210-3156 (70A) Frontier and Xterra KA24DE 2002-2004; 210-3118 (70A) Frontier 1998-2000 and Xterra 2000; 210-3170 (80A) 240SX KA24E 1989-1990. The 91-98 (KA24DE) 240SX and early Altima use other units — left at likely.",
         "groups": [
             [("Nissan", "Altima", 1998, 2001)],
             [("Nissan", "Frontier", 2002, 2004),
              ("Nissan", "Xterra", 2002, 2004)],
             [("Nissan", "Frontier", 1998, 2000),
              ("Nissan", "Xterra", 2000, 2000)],
+            [("Nissan", "240SX", 1989, 1990)],
         ],
     },
     "nissan-mr18": {
@@ -7670,9 +8126,11 @@ _ALT_VERIFIED: dict = {
                     ("Kia", "Sportage", 2005, 2006)]],
     },
     "ford-3g-50": {
-        "evidence": "Lester 7750 (Ford F07U-10300, 3G 95A side-mount) application list (maniacelectricmotors.com, retrieved 2026-10-22): F-150/F-250 5.0/5.8 1993-1996, Bronco 5.0/5.8 1993-1996, E-150 5.0/5.8 1993-1996. Mustang 5.0 1994-1995 uses the pivot-mount 3G and 1987-93 trucks the 2G — both left at likely.",
+        "evidence": "Lester 7750 (Ford F07U-10300, 3G 95A side-mount) application list (maniacelectricmotors.com, retrieved 2026-10-22): F-150/F-250 5.0/5.8 1993-1996, Bronco 5.0/5.8 1993-1996, E-150 5.0/5.8 1993-1996; 1987-93 trucks (2G era) left at likely. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5123 and 210-5305 both list Mustang 5.0 1988-1993 with identical spans (two published case styles — match yours); 210-5310 Mustang 5.0 1994-1995 and 5.8 1995 (the same list also covers the 3.8 those years).",
         "groups": [[("Ford", "F-150", 1993, 1996),
-                    ("Ford", "Bronco", 1993, 1996)]],
+                    ("Ford", "Bronco", 1993, 1996)],
+                   [("Ford", "Mustang", 1988, 1993)],
+                   [("Ford", "Mustang", 1994, 1995)]],
     },
     "honda-j30": {
         "evidence": "Lester 8220 (Delco CS130D, Honda 31100-P8A-A01/P8C-A02) application lists (alternatorparts.com + thewrenchmonkey.ca, retrieved 2026-10-22): Accord 3.0 1998-2002, Acura CL 3.0 1997-1999. The 03-07 Accord V6 uses a Denso unit — left at likely.",
@@ -7756,9 +8214,11 @@ _ALT_VERIFIED: dict = {
         ],
     },
     "gm-3800": {
-        "evidence": "Lester 8245 listing (OCPTY/amazon.com, GM 10464439/10480411, retrieved 2026-10-22): LeSabre 3.8 2000-2004, Bonneville 3.8 2000-2004. W-body 3800s (Grand Prix/Impala/Monte Carlo/Regal) use different mounting-era units — left at likely.",
+        "evidence": "Lester 8245 listing (OCPTY/amazon.com, GM 10464439/10480411, retrieved 2026-10-22): LeSabre 3.8 2000-2004, Bonneville 3.8 2000-2004. W-body 3800s (Grand Prix/Impala/Monte Carlo/Regal) use different mounting-era units — left at likely. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5118 (105A, engine code K) Camaro 3.8 1995-1999 and Firebird 3.8 1995-1999, both unqualified.",
         "groups": [[("Buick", "Lesabre", 2000, 2004),
-                    ("Pontiac", "Bonneville", 2000, 2004)]],
+                    ("Pontiac", "Bonneville", 2000, 2004)],
+                   [("Chevrolet", "Camaro", 1995, 1999),
+                    ("Pontiac", "Firebird", 1995, 1999)]],
     },
     "toyota-2gr": {
         "evidence": "TYC 2-11137 application table (tycamericas.com, retrieved 2026-10-22; Toyota 27060-31111-84, Lester 11137, 130A): Camry 3.5 2007-2017, Avalon 2005-2018, Highlander 3.5 2008-2013, RAV4 3.5 2009-2010, Venza 3.5 2009-2015, ES 350 2007-2018, RX 350 2007-2009. Sienna and RAV4 06-08 are NOT in this unit — left at likely.",
@@ -7771,12 +8231,14 @@ _ALT_VERIFIED: dict = {
                     ("Lexus", "RX 350", 2007, 2009)]],
     },
     "toyota-1zz": {
-        "evidence": "TYC 2-13878 application table (tycamericas.com) + discountstarterandalternator.com VIN-qualified list (Lester 13878, Toyota 27060-22040, retrieved 2026-10-22): Corolla 1ZZ 2003-2008, Matrix 2003-2008 (excl XRS), Vibe 2003-2008 (excl GT), Celica GT 2000-2005, MR2 Spyder 2000-2005. 1998-2002 Corolla uses an earlier unit — left at likely.",
+        "evidence": "TYC 2-13878 application table (tycamericas.com) + discountstarterandalternator.com VIN-qualified list (Lester 13878, Toyota 27060-22040, retrieved 2026-10-22): Corolla 1ZZ 2003-2008, Matrix 2003-2008 (excl XRS), Vibe 2003-2008 (excl GT), Celica GT 2000-2005, MR2 Spyder 2000-2005. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0432 (80A) Corolla 1ZZ-FE 1998-2001 and Chevrolet Prizm 1.8 1998-2002, both unqualified (the 2002 Corolla splits by build plant — excluded).",
         "groups": [[("Toyota", "Corolla", 2003, 2008),
                     ("Toyota", "Matrix", 2003, 2008),
                     ("Pontiac", "Vibe", 2003, 2008),
                     ("Toyota", "Celica", 2000, 2005),
-                    ("Toyota", "MR2 Spyder", 2000, 2005)]],
+                    ("Toyota", "MR2 Spyder", 2000, 2005)],
+                   [("Toyota", "Corolla", 1998, 2001),
+                    ("Chevrolet", "Prizm", 1998, 2002)]],
     },
     "toyota-2uz": {
         "evidence": "Lester 13994 application list (aspwholesale.com, retrieved 2026-10-22; Denso 104210-3380, Toyota 27060-0F040): Tundra 4.7 2003-2009, Sequoia 4.7 2003-2009. Toyota lists a separate OEM number (27060-50320-84) for the 4.7 4Runner — kept out of the group.",
@@ -7866,7 +8328,7 @@ _ALT_VERIFIED: dict = {
                     ("Kia", "Optima", 2011, 2013)]],
     },
     "nissan-vq35de": {
-        "evidence": "OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely.",
+        "evidence": "OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely; 210-4211 (110A) 350Z VQ35DE 2003-2006 and G35 2004-2006 (the 2003 G35 sedan row is body-qualified and excluded).",
         "groups": [
             [("Nissan", "Altima", 2002, 2006),
              ("Nissan", "Maxima", 2002, 2003),
@@ -7875,6 +8337,8 @@ _ALT_VERIFIED: dict = {
             [("Nissan", "Maxima", 2004, 2008)],
             [("Nissan", "Maxima", 2009, 2010),
              ("Nissan", "Murano", 2009, 2009)],
+            [("Nissan", "350Z", 2003, 2006),
+             ("Infiniti", "G35", 2004, 2006)],
         ],
     },
     "honda-k24a": {
@@ -7902,7 +8366,7 @@ _ALT_VERIFIED: dict = {
                    [("Ford", "Fusion", 2013, 2014)]],
     },
     "ford-cyclone": {
-        "evidence": "DSS/TRQ Lester 11273 application table (Ford 7T4Z-10346-A, Mitsubishi A3TJ1291, retrieved 2026-10-22): Edge 2007-2014, Taurus 3.5 2008-2012. Quality-Built 11271 175A (Ford 8A4Z-10346-A, partshawk.com): Taurus 2008-2012, Flex 2009-2012, Edge 2011-2013, Explorer 2011-2012.",
+        "evidence": "DSS/TRQ Lester 11273 application table (Ford 7T4Z-10346-A, Mitsubishi A3TJ1291, retrieved 2026-10-22): Edge 2007-2014, Taurus 3.5 2008-2012. Quality-Built 11271 175A (Ford 8A4Z-10346-A, partshawk.com): Taurus 2008-2012, Flex 2009-2012, Edge 2011-2013, Explorer 2011-2012. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0533 (150A) Mustang 3.7 and 5.0 2012-2013 unqualified (11/14 rows split by transmission — excluded).",
         "groups": [
             [("Ford", "Edge", 2007, 2014),
              ("Ford", "Taurus", 2008, 2012)],
@@ -7910,6 +8374,7 @@ _ALT_VERIFIED: dict = {
              ("Ford", "Flex", 2009, 2012),
              ("Ford", "Edge", 2011, 2013),
              ("Ford", "Explorer", 2011, 2012)],
+            [("Ford", "Mustang", 2012, 2013)],
         ],
     },
     "gm-atlas42": {
@@ -7918,11 +8383,12 @@ _ALT_VERIFIED: dict = {
                     ("GMC", "Envoy", 2002, 2006)]],
     },
     "ford-40sohc": {
-        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-07787 (Ford 1L2Z-10346-AB) Explorer 4.0 1997-2003 (97-01 SOHC, 02-03 all); 2-08258 (1L5Z-10346-BA) Ranger 4.0 2001-2005; 2-08437 (6R3Z-10346-A) Mustang 4.0 2005-2008.",
+        "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-07787 (Ford 1L2Z-10346-AB) Explorer 4.0 1997-2003 (97-01 SOHC, 02-03 all); 2-08258 (1L5Z-10346-BA) Ranger 4.0 2001-2005; 2-08437 (6R3Z-10346-A) Mustang 4.0 2005-2008. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0701 (150A) Mustang 4.0 2009-2010.",
         "groups": [
             [("Ford", "Explorer", 1997, 2003)],
             [("Ford", "Ranger", 2001, 2005)],
             [("Ford", "Mustang", 2005, 2008)],
+            [("Ford", "Mustang", 2009, 2010)],
         ],
     },
     "ford-vulcan30": {
@@ -7951,10 +8417,369 @@ _ALT_VERIFIED: dict = {
         "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-11298 (Chrysler 5602869, Denso 7S) Ram 5.7 2007-2008.",
         "groups": [[("Dodge|Ram", "Ram*", 2007, 2008)]],
     },
+    # ================= 2026-10 PHASE A — enthusiast platforms ==============
+    "toyota-4a": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0100 (17mm shaft) and 210-0101 (15mm shaft) both list Corolla 4A-FE 1.6 and 7A-FE 1.8 1993-1997 with identical spans — two published shaft diameters, match yours; 210-0152 Corolla 4A-FE 1990 unqualified (1991-92 rows are stamp-number-qualified, 88-89 split 4A-F/FE vs the twin-cam 4A-GE, and Prizm rows are fan- or vendor-qualified — all excluded).",
+        "groups": [
+            [("Toyota", "Corolla", 1993, 1997)],
+            [("Toyota", "Corolla", 1990, 1990)],
+        ],
+    },
+    "toyota-3s": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0103 (70A) Celica 3S-FE and 3S-GE 1988-1989, one unit for both; 210-0274 (60A) Celica 3S-FE/3S-GE 1987; 210-0264 (80A) Celica All-Trac 3S-GTE 1992-1993 (the only 2.0 Celica those years). The 90-93 5S-FE 2.2 rows split by transmission and belong to toyota-5s anyway; MR2 Turbo rows aren't separately published — MR2 pairs stay Likely.",
+        "groups": [
+            [("Toyota", "Celica", 1988, 1989)],
+            [("Toyota", "Celica", 1987, 1987)],
+            [("Toyota", "Celica", 1992, 1993)],
+        ],
+    },
+    "toyota-m6": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0158 (80A) Cressida 7M-GE 1989-1992 unqualified (the Supra rows for the same unit are turbo/transmission-qualified and excluded); 210-0167 (60A) Cressida 5M-GE 1987-1988; 210-0111 (60A) Cressida 5M-GE 1984-1986 (clipped to this family's 1985 start).",
+        "groups": [
+            [("Toyota", "Cressida", 1989, 1992)],
+            [("Toyota", "Cressida", 1987, 1988)],
+            [("Toyota", "Cressida", 1985, 1986)],
+        ],
+    },
+    "toyota-2jz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows engine-coded 2JZGE and unqualified: 210-0506 (100A) GS300 2001-2005 and IS300 2001-2005; 210-0286 (100A) GS300 1999-2000 (the 1998 row is production-split and excluded); 210-0293 (80A) GS300 1996-1997; 210-0169 (80A) GS300 1993-1995; 210-0290 (80A) SC300 1997-2000; 210-0287 (80A) SC300 1996 (the 1995 rows are production-split); 210-0168 (100A) SC300 1992-1994. Supra rows split NA/turbo and by transmission — excluded.",
+        "groups": [
+            [("Lexus", "GS300", 2001, 2005), ("Lexus", "IS300", 2001, 2005)],
+            [("Lexus", "GS300", 1999, 2000)],
+            [("Lexus", "GS300", 1996, 1997)],
+            [("Lexus", "GS300", 1993, 1995)],
+            [("Lexus", "SC300", 1997, 2000)],
+            [("Lexus", "SC300", 1996, 1996)],
+            [("Lexus", "SC300", 1992, 1994)],
+        ],
+    },
+    "honda-d-ef": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0227 (60A) Civic D15B2 1990-1991, Civic D16A6 1990-1991, CRX D15B2/D15B6 1990-1991 and CRX D16A6 1990-1991 — one unqualified unit across both engines and models. The 1988-89 rows are vendor-split (DENSO Unit) and excluded.",
+        "groups": [
+            [("Honda", "Civic", 1990, 1991), ("Honda", "CRX", 1990, 1991)],
+        ],
+    },
+    "honda-d-eg": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4133 lists Civic D15B7/B8/Z1 1994-1995 and Del Sol D15B7 1993-1995 unqualified; for the 1.6 D16Z6 (Civic 92-95, Del Sol 93-95) the catalog publishes two interchange-equivalent sourcings with identical spans — Denso-built 210-0213 and Mitsubishi-built 210-4133 — so every 92-95 D-series car is covered by a published list; match the vendor tag on a 1.6 (3MZ-precedent dual-list note). VTEC (B16A3) Del Sols are a different engine and capped by the app-level ambiguity flag.",
+        "groups": [
+            [("Honda", "Civic", 1992, 1995),
+             ("Honda", "Civic Del Sol", 1993, 1995),
+             ("Honda", "Del Sol", 1993, 1995)],
+        ],
+    },
+    "honda-b18": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows unqualified: 210-0223 (65A) Integra B18A1 1990-1991; 210-0214 (80A) Integra B18A1 1992-1993 and B17A1 1993; 210-0211 (90A) Integra B18B1 and B18C1 1994-1995, one unit for both. The 96-01 span splits by trim (Type R B18C5 210-4190 vs all others 210-0199) — excluded from verified; match part number there.",
+        "groups": [
+            [("Acura", "Integra", 1990, 1991)],
+            [("Acura", "Integra", 1992, 1993)],
+            [("Acura", "Integra", 1994, 1995)],
+        ],
+    },
+    "honda-k20": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0525 (80A) Civic 2.0 (K20A3, EP3 Si) 2002-2005 unqualified; 210-0609 (105A) Civic 2.0 K20Z3 (FG/FA Si) 2006-2011 unqualified. RSX rows split by trim (Type S 210-0507 vs base 210-4168) and are excluded.",
+        "groups": [
+            [("Honda", "Civic", 2002, 2005)],
+            [("Honda", "Civic", 2006, 2011)],
+        ],
+    },
+    "honda-f20c": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0458 (105A) S2000 F20C1 2000-2003; 210-0597 (105A) S2000 F22C1 2004-2005, both unqualified. 2006-09 (same F22C1) is past this catalog edition — left at likely.",
+        "groups": [
+            [("Honda", "S2000", 2000, 2003)],
+            [("Honda", "S2000", 2004, 2005)],
+        ],
+    },
+    "honda-h22": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0197 (90A) Prelude H22A4 1997-1998; 210-0456 (90A) Prelude H22A4 1999-2001, both unqualified. The 92-96 span splits three ways (F22A1 non-VTEC 210-0216 / H22A1 VTEC 210-0217 / H23A1 2.3 210-0215) — year spans can't separate the trims, so 92-96 stays at likely.",
+        "groups": [
+            [("Honda", "Prelude", 1997, 1998)],
+            [("Honda", "Prelude", 1999, 2001)],
+        ],
+    },
+    "mazda-miata-16": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4184 (60A) Miata 1.6 1990 unqualified — the 1991-93 rows for the same and sibling units are transmission-qualified (M/T 210-4184 / A/T 210-4270) and excluded.",
+        "groups": [
+            [("Mazda", "Miata", 1990, 1990), ("Mazda", "MX-5*", 1990, 1990)],
+        ],
+    },
+    "mazda-miata-18": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3155 (70A) Miata 1.8 1999-2000; 210-3157 (80A) Miata 1.8 2001-2005, both unqualified. The 1994-97 (NA8) rows split by transmission (210-4157 A/T / 210-4284 M/T) and are excluded.",
+        "groups": [
+            [("Mazda", "Miata", 1999, 2000), ("Mazda", "MX-5*", 1999, 2000)],
+            [("Mazda", "Miata", 2001, 2005), ("Mazda", "MX-5*", 2001, 2005)],
+        ],
+    },
+    "mazda-miata-nc": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4238 (100A) MX-5 Miata 2.0 2006-2008 (the same published list covers the 2006-09 Mazda6); 210-4334 (100A) MX-5 Miata 2.0 2009-2012, both unqualified. 2013-15 is past this catalog edition — left at likely.",
+        "groups": [
+            [("Mazda", "Miata", 2006, 2008), ("Mazda", "MX-5*", 2006, 2008)],
+            [("Mazda", "Miata", 2009, 2012), ("Mazda", "MX-5*", 2009, 2012)],
+        ],
+    },
+    "mazda-rx7": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4241 (100A) RX-7 1.3 rotary 1993-1995 unqualified (the FD span). The 86-88 FC row is turbo-qualified and 89-92 FC rows aren't published — both excluded.",
+        "groups": [
+            [("Mazda", "RX-7", 1993, 1995), ("Mazda", "RX7", 1993, 1995)],
+        ],
+    },
+    "mazda-rx8": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4213 (100A) RX-8 2005-2007 (the 2004 row is build-date-qualified 'From 04/04/2003' and excluded); 210-4343 (110A) RX-8 2009-2011, unqualified. No 2008 alternator row is published — 2008 stays at likely.",
+        "groups": [
+            [("Mazda", "RX-8", 2005, 2007), ("Mazda", "RX8", 2005, 2007)],
+            [("Mazda", "RX-8", 2009, 2011), ("Mazda", "RX8", 2009, 2011)],
+        ],
+    },
+    "nissan-vq-hr": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4313 (150A) in one published application set — 350Z VQ35HR 2007-2009, G35 VQ35HR 2007-2008 (both 07 trim rows carry the same number), G37 VQ37VHR 2008-2010, 370Z VQ37VHR 2009 (the 2010 370Z rows are build-date-qualified 'To 02/2010' and excluded).",
+        "groups": [
+            [("Nissan", "350Z", 2007, 2009),
+             ("Infiniti", "G35", 2007, 2008),
+             ("Infiniti", "G37", 2008, 2010),
+             ("Nissan", "370Z", 2009, 2009)],
+        ],
+    },
+    "mitsu-dsm": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4120 (90A) Eclipse 1999 listed for the 420A and the 4G63 turbo alike, unqualified — one published unit for every 99 Eclipse. All earlier DSM rows split by transmission, turbo or drivetrain and are excluded.",
+        "groups": [
+            [("Mitsubishi", "Eclipse", 1999, 1999)],
+        ],
+    },
+    "mitsu-24": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows engine-coded 4G64/4G69 and unqualified: 210-4215 (110A) Eclipse 2.4 2006-2011, Galant 2.4 2004-2011 and Lancer 2.4 2005-2006 — one published unit across all three; 210-4142 (85A) Galant 2.4 2000-2003; 210-4156 (90A) Galant 2.4 1997-1999; 210-4160 (90A) Eclipse 2.4 2000-2001 (the 02-05 rows split by transmission and are excluded).",
+        "groups": [
+            [("Mitsubishi", "Eclipse", 2006, 2011),
+             ("Mitsubishi", "Galant", 2004, 2011),
+             ("Mitsubishi", "Lancer", 2005, 2006)],
+            [("Mitsubishi", "Galant", 2000, 2003)],
+            [("Mitsubishi", "Galant", 1997, 1999)],
+            [("Mitsubishi", "Eclipse", 2000, 2001)],
+        ],
+    },
+    "mitsu-6g72": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4179 (85A) in one published set — Eclipse 3.0 2002-2005 and 2000, Galant 3.0 2002-2003 and 1999-2000, all unqualified (2001 rows aren't printed for either model, so 2001 cars sit between spans).",
+        "groups": [
+            [("Mitsubishi", "Eclipse", 2002, 2005),
+             ("Mitsubishi", "Eclipse", 2000, 2000),
+             ("Mitsubishi", "Galant", 2002, 2003),
+             ("Mitsubishi", "Galant", 1999, 2000)],
+        ],
+    },
+    "mitsu-6g75": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4230 (110A) Eclipse 3.8 2006-2011 and Galant 3.8 2005-2009, one published unit, unqualified; 210-4208 (110A) Galant 3.8 2004.",
+        "groups": [
+            [("Mitsubishi", "Eclipse", 2006, 2011),
+             ("Mitsubishi", "Galant", 2005, 2009)],
+            [("Mitsubishi", "Galant", 2004, 2004)],
+        ],
+    },
+    "mitsu-evo": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4229 (90A) Lancer 4G63 'w/ Turbo' 2003-2006 — every US Lancer Evolution those years is the 4G63 turbo, so the span is exact for the Evolution model; 210-4338 (130A) Lancer 4B11 'w/ Turbo' 2008-2011 — the Evo X span (the Ralliart shares the engine but is a separate feed model). 2012-15 Evo X is past this catalog edition — left at likely.",
+        "groups": [
+            [("Mitsubishi", "Lancer Evolution", 2003, 2006)],
+            [("Mitsubishi", "Lancer Evolution", 2008, 2011)],
+        ],
+    },
+    "subaru-ej205": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4167 (75A) Impreza EJ205 2.0 2002-2005 unqualified (the same published list covers the 03-04 EJ251 2.5 NA, which lives in subaru-ej25na).",
+        "groups": [
+            [("Subaru", "WRX", 2002, 2005),
+             ("Subaru", "Impreza WRX", 2002, 2005)],
+        ],
+    },
+    "bmw-m52": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5395 (140A) 528i 2.8 1997-1998 unqualified — the Z3 2.8 rows for the same unit are case-size-qualified and excluded; every other E36-era row is OEM-number- or case-qualified (Bosch vs Valeo sourcing) and excluded.",
+        "groups": [
+            [("BMW", "528i", 1997, 1998)],
+        ],
+    },
+    "ford-46-3v": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5367 (135A) Mustang 4.6 2006-2008 unqualified (the 2009 row for the same unit is transmission-qualified and excluded); 210-5355 (135A) Mustang 4.6 2005. 09-10 rows split by transmission — left at likely.",
+        "groups": [
+            [("Ford", "Mustang", 2006, 2008)],
+            [("Ford", "Mustang", 2005, 2005)],
+        ],
+    },
+    "ford-coyote": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0533 (150A) Mustang 5.0 2012-2013 unqualified (the same published list covers the 3.7 and the 13 GT500 5.8); 210-0743 (200A) F-150 5.0 2012-2014 unqualified (the 11-14 'w/ Power Converter' rows are option-qualified and excluded).",
+        "groups": [
+            [("Ford", "Mustang", 2012, 2013)],
+            [("Ford", "F-150", 2012, 2014), ("Ford", "F150*", 2012, 2014)],
+        ],
+    },
+    "ford-essex38": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5207 and 210-5310 both list Mustang 3.8 1994-2000 with identical spans (two published 130A case styles — match yours); 210-5348 (110A) Mustang 3.8 2001-2004 and 3.9 2004, unqualified.",
+        "groups": [
+            [("Ford", "Mustang", 1994, 2000)],
+            [("Ford", "Mustang", 2001, 2004)],
+        ],
+    },
+    "gm-fbody-tpi": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5144 (100A) Camaro and Firebird 5.0 (E/F) and 5.7 (8) 1988-1989 — one unqualified unit across both displacements and models; 210-5102 (100A) the same four applications 1990-1992. Pre-88 rows and C4 Corvette alternator rows aren't published — left at likely.",
+        "groups": [
+            [("Chevrolet", "Camaro", 1988, 1989),
+             ("Pontiac", "Firebird", 1988, 1989)],
+            [("Chevrolet", "Camaro", 1990, 1992),
+             ("Pontiac", "Firebird", 1990, 1992)],
+        ],
+    },
+    "gm-ls1-car": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5164 (102A, engine code G) Camaro 5.7 1998-2002 and Firebird 5.7 1998-2002, one published unit, unqualified. Denso First Time Fit 211-6025 (145A) Corvette 5.7 2004 (the 2003 row is transmission/design-qualified and excluded; 97-02 C5 alternator rows aren't published).",
+        "groups": [
+            [("Chevrolet", "Camaro", 1998, 2002),
+             ("Pontiac", "Firebird", 1998, 2002)],
+            [("Chevrolet", "Corvette", 2004, 2004)],
+        ],
+    },
+    "gm-corvette-c6": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6020 (145A) Corvette 6.0 2005-2007, 7.0 2006-2012 and 6.2 2008-2012 — one published unit across the LS2/LS3/LS7; the supercharged ZR1 (211-6028) is its own unit, so the verified span stops at 2008 before the ZR1 enters the fleet. Denso reman 210-0325 (150A) Camaro 6.2 2012-2013 (the 2014 row is stamp-qualified and excluded).",
+        "groups": [
+            [("Chevrolet", "Corvette", 2005, 2008)],
+            [("Chevrolet", "Camaro", 2012, 2013)],
+        ],
+    },
 }
 
 for _fid, _v in _ALT_VERIFIED.items():
     ENGINE_FAMILIES[_fid]["parts"]["alternator"]["verified"] = _v
+del _fid, _v
+
+
+# --- Verified starter application groups -----------------------------------
+# Same contract as _ALT_VERIFIED, for the starter category. Added 2026-10
+# (Phase A): several platforms publish clean starter spans where every
+# alternator row is turbo-, vendor- or OEM-number-qualified (Z32 300ZX, BMW
+# M54, VW 2.0T, LT1 F-bodies) — those families are starter-verified and their
+# alternators honestly stay at Likely.
+_STR_VERIFIED: dict = {
+    "toyota-4a": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0305 Prizm 1.6/1.8 1994-1997 unqualified (the matching Corolla rows those years are Cold-Spec-qualified and excluded); 280-0304 Prizm 1.6/1.8 1993; 280-0100 Corolla 1.6/1.8 1997 unqualified.",
+        "groups": [
+            [("Geo|Chevrolet", "Prizm", 1994, 1997)],
+            [("Geo|Chevrolet", "Prizm", 1993, 1993)],
+            [("Toyota", "Corolla", 1997, 1997)],
+        ],
+    },
+    "toyota-m6": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0107 in one published set — Supra 3.0 1986-1990 and Cressida 2.8/3.0 1983-1990 (clipped to this family's 1985 start; the 81-82 rows are option-qualified); 280-0121 Supra 3.0 1991-1992 and Cressida 3.0 1991-1992.",
+        "groups": [
+            [("Toyota", "Supra", 1986, 1990), ("Toyota", "Cressida", 1985, 1990)],
+            [("Toyota", "Supra", 1991, 1992), ("Toyota", "Cressida", 1991, 1992)],
+        ],
+    },
+    "toyota-2jz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows engine-coded 2JZGE/unqualified: 280-0234 GS300 1998-2005 and IS300 2001-2005; 280-0163 Supra 3.0 1993-1998, SC300 1995-2000 and GS300 1993-1997 — one published starter across the NA and twin-turbo Supra alike.",
+        "groups": [
+            [("Lexus", "GS300", 1998, 2005), ("Lexus", "IS300", 2001, 2005)],
+            [("Toyota", "Supra", 1993, 1998), ("Lexus", "SC300", 1995, 2000),
+             ("Lexus", "GS300", 1993, 1997)],
+        ],
+    },
+    "honda-b18": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0194 Integra 1.8 1990-1993 and 1.7 1993, unqualified. 94-01 rows split by transmission and are excluded.",
+        "groups": [[("Acura", "Integra", 1990, 1993)]],
+    },
+    "mazda-miata-16": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4160 Miata 1.6 1990-1993 unqualified (the same published list covers the 94-97 1.8 M/T cars, which are transmission-qualified rows).",
+        "groups": [
+            [("Mazda", "Miata", 1990, 1993), ("Mazda", "MX-5*", 1990, 1993)],
+        ],
+    },
+    "mazda-miata-18": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4137 Miata 1.8 1999-2005 unqualified. The 94-97 rows split by transmission and are excluded.",
+        "groups": [
+            [("Mazda", "Miata", 1999, 2005), ("Mazda", "MX-5*", 1999, 2005)],
+        ],
+    },
+    "mazda-miata-nc": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4334 MX-5 Miata 2.0 2006-2008; 280-4336 MX-5 Miata 2.0 2009-2012, both unqualified.",
+        "groups": [
+            [("Mazda", "Miata", 2006, 2008), ("Mazda", "MX-5*", 2006, 2008)],
+            [("Mazda", "Miata", 2009, 2012), ("Mazda", "MX-5*", 2009, 2012)],
+        ],
+    },
+    "mazda-rx8": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4342 RX-8 2011 (engine codes M, P) unqualified — the 2009-10 rows for the same unit are transmission-qualified and excluded.",
+        "groups": [
+            [("Mazda", "RX-8", 2011, 2011), ("Mazda", "RX8", 2011, 2011)],
+        ],
+    },
+    "nissan-z32": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4122 300ZX 3.0 1990-1996 unqualified — one published starter for every Z32, NA and twin-turbo (the 1989 Z31 row is vendor-qualified and excluded).",
+        "groups": [[("Nissan", "300ZX", 1990, 1996)]],
+    },
+    "nissan-vq-hr": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-3143 370Z 3.7 2010-2011 and G37 3.7 2011, unqualified (350Z/G35 HR starter rows are build-date- or trim-qualified and excluded).",
+        "groups": [
+            [("Nissan", "370Z", 2010, 2011), ("Infiniti", "G37", 2011, 2011)],
+        ],
+    },
+    "nissan-ka24": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4109 240SX 2.4 1991-1996 unqualified (the 89-90 rows are vendor-split and excluded).",
+        "groups": [[("Nissan", "240SX", 1991, 1996)]],
+    },
+    "nissan-vq35de": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-3133 350Z VQ35DE 2003-2006 unqualified (the 2007 HR rows are build-date-qualified; G35 rows are drivetrain-qualified and excluded).",
+        "groups": [[("Nissan", "350Z", 2003, 2006)]],
+    },
+    "bmw-m52": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5355 M3 3.2 1996-1999 and every Z3 1996-2002 (1.9/2.5/2.8/3.0/3.2 rows all carry the one number), unqualified; 280-5346 M3 3.0 1995.",
+        "groups": [
+            [("BMW", "M3", 1996, 1999), ("BMW", "Z3", 1996, 2002)],
+            [("BMW", "M3", 1995, 1995)],
+        ],
+    },
+    "bmw-m54": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5371 X5 3.0 2001-2006 unqualified — the one clean published M54 starter span (3-Series starter rows aren't published in this edition).",
+        "groups": [[("BMW", "X5", 2001, 2006)]],
+    },
+    "vw-20t": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 GTI 2.0 2006-2009 unqualified; 281-6001 (First Time Fit) GTI 2.0 2010-2011 unqualified. Jetta rows split by fuel, body and transmission and are excluded.",
+        "groups": [
+            [("Volkswagen", "GTI", 2006, 2009)],
+            [("Volkswagen", "GTI", 2010, 2011)],
+        ],
+    },
+    "gm-fbody-tpi": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0299 Corvette 5.7 1988-1989 unqualified (the 90-95 rows exclude the ZR1 and the 96 row anchors the LT1 family). F-body starter rows split 5.0 vs 5.7 within the same years — excluded to avoid cross-displacement claims.",
+        "groups": [[("Chevrolet", "Corvette", 1988, 1989)]],
+    },
+    "gm-fbody-lt1": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5109 Camaro 5.7 (P) 1995-1997 and Firebird 5.7 1995-1997, unqualified; 280-5160 Camaro and Firebird 5.7 1987-1994 (the LT1 years 93-94 of that span sit in this family); 280-0299 Corvette 5.7 1996 (the 90-95 rows are 'Exc. ZR1' and excluded).",
+        "groups": [
+            [("Chevrolet", "Camaro", 1995, 1997),
+             ("Pontiac", "Firebird", 1995, 1997)],
+            [("Chevrolet", "Camaro", 1987, 1994),
+             ("Pontiac", "Firebird", 1987, 1994)],
+            [("Chevrolet", "Corvette", 1996, 1996)],
+        ],
+    },
+    "gm-ls1-car": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5112 in one published set — Camaro 5.7 1998-2001, Firebird 5.7 1998-2001 and Corvette 5.7 1997-2001, unqualified.",
+        "groups": [
+            [("Chevrolet", "Camaro", 1998, 2001),
+             ("Pontiac", "Firebird", 1998, 2001),
+             ("Chevrolet", "Corvette", 1997, 2001)],
+        ],
+    },
+    "gm-corvette-c6": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5391 Corvette 6.0 2006-2007, 6.2 2008-2013 and 7.0 2006-2013, unqualified — one published starter for the whole C6 including the ZR1; 280-4331 Camaro 6.2 2012 and 2015 (the 10-11 rows are vendor-qualified and excluded).",
+        "groups": [
+            [("Chevrolet", "Corvette", 2006, 2013)],
+            [("Chevrolet", "Camaro", 2012, 2012),
+             ("Chevrolet", "Camaro", 2015, 2015)],
+        ],
+    },
+    "gm-3800": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5100 Camaro 3.8 (K) 1995-1997 and Firebird 3.8 1995-1997, unqualified.",
+        "groups": [
+            [("Chevrolet", "Camaro", 1995, 1997),
+             ("Pontiac", "Firebird", 1995, 1997)],
+        ],
+    },
+}
+
+for _fid, _v in _STR_VERIFIED.items():
+    ENGINE_FAMILIES[_fid]["parts"]["starter"]["verified"] = _v
 del _fid, _v
 
 
@@ -7967,7 +8792,7 @@ def _lint_engine_families() -> list[str]:
         liters = spec.get("liters") or []
         if not liters or not all(isinstance(x, float) and 0.5 <= x <= 8.5 for x in liters):
             problems.append(f"{fam_id}: bad liters {liters!r}")
-        if spec.get("cyl") not in (3, 4, 5, 6, 8, 10):
+        if spec.get("cyl") not in (2, 3, 4, 5, 6, 8, 10):  # 2 = rotary rotors (13B)
             problems.append(f"{fam_id}: bad cyl {spec.get('cyl')!r}")
         apps = fam.get("apps") or []
         if not apps:

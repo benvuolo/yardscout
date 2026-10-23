@@ -186,10 +186,14 @@ import random
 
 EF = js.ENGINE_FAMILIES
 
-# --- every family carries at least one verified alternator group ----------
+# --- every family carries at least one verified group (any category) ------
+# Phase A (2026-10): some platforms publish clean starter spans while every
+# alternator row is turbo-/vendor-/OEM-number-qualified (Z32, BMW M54, VW
+# 2.0T, LT1 F-body) — those families are starter-verified and the alternator
+# honestly stays at Likely. The gate is: verified evidence SOMEWHERE.
 _no_group = [fid for fid, f in EF.items()
-             if not f["parts"].get("alternator", {}).get("verified")]
-check("every family has >=1 verified alternator group", not _no_group,
+             if not any(p.get("verified") for p in f["parts"].values())]
+check("every family has >=1 verified group (any category)", not _no_group,
       str(_no_group[:5]))
 
 # --- evidence strings are real citations (length + retrieval date) --------
@@ -261,28 +265,31 @@ def _famb(f, yr, mk, md):
 
 _unreach = []
 for fid, f in EF.items():
-    v = f["parts"]["alternator"].get("verified")
-    hit = None
-    for g in v["groups"]:
-        cars = []
-        for s in g:
-            mk = s[0].split("|")[0]
-            md = s[1].rstrip("*") + (" 1500" if s[1].endswith("*") else "")
-            cars.append((s[2], mk, md))
-            cars.append((s[3], mk, md))
-        for a, b in itertools.combinations(cars, 2):
-            if _famb(f, *a) or _famb(f, *b):
-                continue
-            if js.interchange_tier(f, "alternator", a, b) == "verified":
-                hit = (a, b)
+    for cat, p in f["parts"].items():
+        v = p.get("verified")
+        if not v:
+            continue
+        hit = None
+        for g in v["groups"]:
+            cars = []
+            for s in g:
+                mk = s[0].split("|")[0]
+                md = s[1].rstrip("*") + (" 1500" if s[1].endswith("*") else "")
+                cars.append((s[2], mk, md))
+                cars.append((s[3], mk, md))
+            for a, b in itertools.combinations(cars, 2):
+                if _famb(f, *a) or _famb(f, *b):
+                    continue
+                if js.interchange_tier(f, cat, a, b) == "verified":
+                    hit = (a, b)
+                    break
+            if hit:
                 break
-        if hit:
-            break
-    all_ambig = all(
-        _famb(f, s[2], s[0].split("|")[0], s[1].rstrip("*"))
-        for g in v["groups"] for s in g)
-    if hit is None and not all_ambig:
-        _unreach.append(fid)
+        all_ambig = all(
+            _famb(f, s[2], s[0].split("|")[0], s[1].rstrip("*"))
+            for g in v["groups"] for s in g)
+        if hit is None and not all_ambig:
+            _unreach.append(f"{fid}/{cat}")
 check("verified tier reachable in every non-ambig family", not _unreach,
       str(_unreach[:5]))
 
@@ -294,8 +301,8 @@ _pf = _payload["engineFamilies"]
 check("payload family count matches module", len(_pf) == len(EF),
       f"{len(_pf)} vs {len(EF)}")
 _no_vg = [pf["id"] for pf in _pf
-          if not pf["parts"].get("alternator", {}).get("vg")]
-check("payload ships vg for every family alternator", not _no_vg,
+          if not any(p.get("vg") for p in pf["parts"].values())]
+check("payload ships vg for every family (some category)", not _no_vg,
       str(_no_vg[:5]))
 _bad_vg = []
 for pf in _pf:
