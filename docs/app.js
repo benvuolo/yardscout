@@ -64,6 +64,9 @@ let barrysPricing = {};    // Barry's U Pull It (Mobile AL): one yard-wide list
 let budgetPricing = {};    // Budget U-Pull-It (FL): per-yard lists keyed by location (WG and Bartow differ)
 let p195Pricing = {};      // 195 Used Auto Parts (Killeen TX): one yard-wide list
 let pnpsaPricing = {};     // San Antonio Pick-N-Pull (Independent, TX): one yard-wide list
+let ryansPricing = {};     // Ryan's Pick-a-Part (Detroit MI): one yard-wide list
+let usautoPricing = {};    // US Auto Supply (Sterling Heights MI): one yard-wide list
+let upasPricing = {};      // U-Pull and Save (Pontiac MI): one yard-wide list
 
 /* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page)
  * pyp = exact "Description" from pyp.com per-location PriceList API
@@ -459,6 +462,9 @@ async function loadAllPricing() {
     grab('data/budget_pricing.json', d => { budgetPricing = d; }),
     grab('data/p195_pricing.json', d => d.forEach(p => { p195Pricing[p.description] = p; })),
     grab('data/pnpsa_pricing.json', d => d.forEach(p => { pnpsaPricing[p.description] = p; })),
+    grab('data/ryans_pricing.json', d => d.forEach(p => { ryansPricing[p.description] = p; })),
+    grab('data/usauto_pricing.json', d => d.forEach(p => { usautoPricing[p.description] = p; })),
+    grab('data/upas_pricing.json', d => d.forEach(p => { upasPricing[p.description] = p; })),
   ]);
   _yardCostMemo.clear();
   // Compare/type-ahead caches may have been built against empty lists.
@@ -2697,6 +2703,9 @@ const YARD_INVENTORY_PAGES = [
   [/^barry'?s/i, 'https://barrysupullit.net/vehicle-inventory-2/'],
   [/^prestige/i, 'https://prestigepullyourpart.com/vehicle-search/'],
   [/^budget/i, 'https://budgetupullit.com/current-inventory/'],
+  [/^ryan'?s pick/i, 'https://ryanspickapart.com/Home/Inventory'],
+  [/^us auto supply/i, 'https://usautosupplymi.com/inventory/'],
+  [/^u[\s-]*pull and save/i, 'https://www.u-pullandsave.com/used-car-parts'],
 ];
 /* GEN:YARD_INVENTORY_PAGES:END */
 
@@ -2721,6 +2730,11 @@ function yardPageUrl(v) {
   }
   if (id.startsWith('gopullit-')) {
     return { url: `https://gopullit.com/inventory/${encodeURIComponent(id.slice(9))}/`, tier: 1 };
+  }
+  // U-Pull and Save (Pontiac MI): ids are "upas-{vehicleID}" and the site
+  // serves a public per-car page at /vehicles/{vehicleID}.
+  if (id.startsWith('upas-')) {
+    return { url: `https://www.u-pullandsave.com/vehicles/${encodeURIComponent(id.slice(5))}`, tier: 1 };
   }
   // Tier 2 — make-filtered search on the yard's site. Deliberately make-ONLY:
   // our model strings are canonicalized (normalize_model in the scraper, e.g.
@@ -3095,6 +3109,11 @@ function yardPriceList(location) {
   // The independent San Antonio yard — NOT the Pick-n-Pull chain (whose
   // startsWith('pick-n-pull') branch above can never match this name).
   else if (loc.startsWith('san antonio pick-n-pull')) rows = fromList(pnpsaPricing);
+  else if (loc.startsWith("ryan's pick-a-part")) rows = fromList(ryansPricing);
+  else if (loc.startsWith('us auto supply')) rows = fromList(usautoPricing);
+  // Must not collide with the startsWith('u-pull-it') NE branch above —
+  // "u-pull and save" shares only the "u-pull" prefix, not "u-pull-it".
+  else if (loc.startsWith('u-pull and save')) rows = fromList(upasPricing);
   else if (loc.startsWith('budget u-pull-it')) rows = fromDict(budgetPricing[location]);
   else if (loc.startsWith('pick your part')) rows = fromDict(pypPricing[location]);
   else if (loc.startsWith('pull-a-part')) rows = fromDict(papPricing[location]);

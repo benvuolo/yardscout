@@ -114,6 +114,13 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^barry'?s", "Barry's U Pull It", None, ""),
     (r"^prestige", "Prestige Pull-Your-Part", None, ""),
     (r"^budget", "Budget U-Pull-It", None, "Winter Garden (Bartow matched above)"),
+    (r"^ryan'?s pick", "Ryan's Pick-a-Part", None,
+     "the Ario iframe host has no deep links; the CRUSH /Home/Inventory page "
+     "embeds it"),
+    (r"^us auto supply", "US Auto Supply", None, ""),
+    (r"^u[\s-]*pull and save", "U-Pull and Save", None,
+     "tier 1 handles per-car /vehicles/{id} links; anchored so the U-Pull-It "
+     "chains can't collide"),
 ]
 
 
