@@ -545,6 +545,15 @@ check("civic 1995<->1997 do NOT share a window (EG/EK split)",
 check("no window predates 1960 or runs past 2035",
       all(1960 < lo <= hi < 2036
           for wins in GENS.values() for lo, hi in wins))
+# The 2026-10 model-normalization worker rewrites feed spellings before they
+# reach the payload. Generation rows key on squashed forms, which must absorb
+# every canon rewrite — a canon change that squashes a row out of the table
+# would silently kill its class-B coverage.
+_gen_keys = {(mk.lower(), js._squash_model(md, mk))
+             for mk, md, _ in js.MODEL_GENERATIONS}
+check("every generation row survives model normalization (squash-stable)",
+      all((mk.lower(), js._squash_model(js.normalize_model(md, mk), mk))
+          in _gen_keys for mk, md, _ in js.MODEL_GENERATIONS))
 
 print()
 if FAILS:

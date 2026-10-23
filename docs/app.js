@@ -2140,6 +2140,10 @@ function updateLiveFilterCount() {
       || document.getElementById('live-filter-year-max').value) n++;
   if (document.getElementById('live-filter-location').value) n++;
   if (document.getElementById('live-filter-match').value) n++;
+  // The part-spotted search lives in the drawer now (it filters cars like
+  // any other field) — it must show in the badge or an applied search is
+  // invisible once the drawer closes.
+  if (document.getElementById('live-part-search').value.trim()) n++;
   if (activeZipCoords && document.getElementById('live-radius').value) n++;
   const el = document.getElementById('live-filter-count');
   el.style.display = n ? 'inline-grid' : 'none';
@@ -2596,6 +2600,11 @@ document.getElementById('live-filter-match').addEventListener('change', (e) => {
     inp.focus();
   });
 })();
+// Quiet disambiguation next to the part-spotted filter: people hunting for
+// "does this part FIT my car" belong on the Parts tab, not here.
+document.getElementById('live-parts-pointer').addEventListener('click', () => {
+  document.querySelector(".tab[data-tab='parts']").click();
+});
 document.getElementById('live-zip').addEventListener('input', e => setZipCenter(e.target.value.trim()));
 document.getElementById('live-radius').addEventListener('change', () => {
   const sel = document.getElementById('live-radius');
