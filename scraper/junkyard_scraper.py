@@ -5985,6 +5985,359 @@ if _family_problems:
 
 
 # ===========================================================================
+# TRIM PLATFORM GROUPS — performance trims share BODY parts with their
+# platform siblings even when the engine is trim-unique. An E46 M3's window
+# regulator is an E46 coupe regulator; its S54 engine interchanges with
+# nothing else on a yard lot. Each family below maps a performance-trim
+# model string (as the live feed spells it — audited 2026-10) onto its
+# platform siblings for the body-part categories that genuinely carry over.
+#
+# House rule: under-claim. These are reasoned platform claims, NOT published
+# part-number lists, so every category ships at tier "likely" with an honest
+# caveat. Categories where the trim diverges (gauge clusters with unique
+# faces/redlines, aero mirrors, trim-specific panels) are omitted on purpose
+# — reasoning per family in scraper/interchange_research.md.
+#
+# Schema:
+#   display       — label shown on donor rows
+#   engine_note   — optional; shipped when the trim's ENGINE is unique and
+#                   unpublished, so the engine-part search can explain itself
+#                   instead of showing a bare "no data" (apps = trim_apps)
+#   trim_apps     — (make, model, lo, hi) spans for the trim's feed strings
+#   platform_apps — sibling spans (feed spellings, gen-windowed)
+#   cats          — {category id: donor-row caveat}
+#
+# NOTE (model normalization): a parallel worker is canonicalizing feed model
+# strings on main ("330I" -> "330i"). pf matching squashes case/punctuation,
+# so these spellings survive that change, but re-check alias tuples against
+# their canonical-forms test file at the next rebase onto main.
+TRIM_PLATFORM_GROUPS: dict[str, dict] = {
+    "bmw-e46-m3": {
+        "display": "BMW E46 platform (M3)",
+        "engine_note": ("The M3's S54 engine is M3-specific — engine parts "
+                        "only interchange with other E46 M3s, and no "
+                        "published application list covers the S54 yet."),
+        "trim_apps": [("BMW", "M3", 2001, 2006)],
+        "platform_apps": [
+            ("BMW", "3 Series", 1999, 2006),
+            ("BMW", "323i", 1999, 2000), ("BMW", "323ci", 2000, 2000),
+            ("BMW", "325i", 2001, 2006), ("BMW", "325ci", 2001, 2006),
+            ("BMW", "325xi", 2001, 2006),
+            ("BMW", "328i", 1999, 2000), ("BMW", "328ci", 2000, 2000),
+            ("BMW", "330i", 2001, 2006), ("BMW", "330ci", 2001, 2006),
+            ("BMW", "330xi", 2001, 2006),
+        ],
+        "cats": {
+            "window-regulator": "M3 is coupe/convertible — use Ci coupe/"
+                                "convertible donors for door hardware; E46 "
+                                "sedan/wagon front regulators differ",
+            "window-switch": "switch packs are shared across the E46 range",
+            "climate-control": "same IHKA climate panel across the E46 range",
+            "headlights": "match body style AND facelift: coupe/convertible "
+                          "housings (00-03 pre-LCI / 04-06 LCI) differ from "
+                          "sedan; halogen vs xenon also differ",
+            "tail-lights": "coupe/convertible lenses only, matched pre/post "
+                           "facelift — sedan/wagon lenses differ",
+        },
+    },
+    "bmw-e60-m5": {
+        "display": "BMW E60 platform (M5)",
+        "engine_note": ("The 2006-2010 M5's S85 V10 is M5-specific — engine "
+                        "parts only interchange with other E60 M5s, and no "
+                        "published application list covers the S85."),
+        "trim_apps": [("BMW", "M5", 2006, 2010)],
+        "platform_apps": [
+            ("BMW", "5 Series", 2004, 2010),
+            ("BMW", "525i", 2004, 2007), ("BMW", "525xi", 2006, 2007),
+            ("BMW", "528i", 2008, 2010), ("BMW", "528xi", 2008, 2008),
+            ("BMW", "530i", 2004, 2007), ("BMW", "530xi", 2006, 2007),
+            ("BMW", "535i", 2008, 2010), ("BMW", "535xi", 2008, 2008),
+            ("BMW", "545i", 2004, 2005), ("BMW", "550i", 2006, 2010),
+        ],
+        "cats": {
+            "window-regulator": "same E60 sedan door shell across the range",
+            "window-switch": "switch packs shared across the E60 range",
+            "climate-control": "same panel; high/low IHKA versions — match "
+                               "button layout",
+            "headlights": "M5 ran adaptive xenon — match halogen/xenon/"
+                          "adaptive type and pre/post-LCI (08+) housings",
+            "tail-lights": "sedan lenses shared; match pre/post-LCI (08+)",
+        },
+    },
+    "bmw-f10-m5": {
+        "display": "BMW F10 platform (M5)",
+        "engine_note": ("The 2011-2016 M5's S63 twin-turbo V8 is M-specific "
+                        "— engine parts only interchange with other F10 M5s, "
+                        "and no published application list covers it."),
+        "trim_apps": [("BMW", "M5", 2011, 2016)],
+        "platform_apps": [
+            ("BMW", "5 Series", 2011, 2016),
+            ("BMW", "528i", 2011, 2016), ("BMW", "528I Xdrive", 2011, 2016),
+            ("BMW", "535i", 2011, 2015), ("BMW", "535I Xdrive", 2011, 2016),
+            ("BMW", "550i", 2011, 2015), ("BMW", "550I Xdrive", 2012, 2014),
+        ],
+        "cats": {
+            "window-regulator": "same F10 sedan door shell across the range "
+                                "(5-Series GT is a different body — skip it)",
+            "window-switch": "switch packs shared across the F10 range",
+            "climate-control": "same panel across the F10 range",
+        },
+    },
+    "cadillac-ctsv1": {
+        "display": "Cadillac CTS platform (CTS-V gen 1)",
+        "engine_note": ("The 2004-2007 CTS-V's LS6/LS2 V8 has no published "
+                        "application rows in our catalog edition — engine "
+                        "parts only interchange with other gen-1 CTS-Vs."),
+        "trim_apps": [("Cadillac", "Cts-V", 2004, 2007)],
+        "platform_apps": [("Cadillac", "CTS", 2003, 2007)],
+        "cats": {
+            "window-regulator": "same Sigma-platform door shell as the CTS",
+            "window-switch": "switchgear shared with the 03-07 CTS",
+            "climate-control": "same HVAC panel as the 03-07 CTS",
+            "headlights": "same housings as the 03-07 CTS",
+            "tail-lights": "same lenses as the 03-07 CTS",
+        },
+    },
+    "mopar-srt4-body": {
+        "display": "Dodge Neon platform (SRT-4)",
+        "trim_apps": [("Dodge", "Neon Srt-4", 2003, 2005)],
+        "platform_apps": [
+            ("Dodge", "Neon", 2000, 2005),
+            ("Dodge", "Neon Pl", 2001, 2005),
+        ],
+        "cats": {
+            "window-regulator": "same PL door shell as the 00-05 Neon",
+            "window-switch": "switchgear shared with the 00-05 Neon",
+            "climate-control": "same HVAC panel as the 00-05 Neon",
+            "headlights": "03-05 facelift housings only — match donor year "
+                          "03+",
+            "tail-lights": "03-05 facelift lenses only — match donor year "
+                           "03+",
+        },
+    },
+    "ford-focus-svt-body": {
+        "display": "Ford Focus platform (SVT)",
+        "engine_note": ("The SVT Focus 2.0 Zetec-SVT only appears in "
+                        "qualified build-date rows — engine parts stay "
+                        "unverified; other Focus donors are NOT safe."),
+        "trim_apps": [("Ford", "Focus Svt", 2002, 2004)],
+        "platform_apps": [
+            ("Ford", "Focus", 2000, 2004),
+            ("Ford", "Focus Wagon", 2000, 2004),
+        ],
+        "cats": {
+            "window-regulator": "SVT is the 3/5-door hatch — match the donor "
+                                "body style and door count",
+            "window-switch": "switchgear shared across the 00-04 Focus range",
+            "climate-control": "same HVAC panel across the 00-04 Focus",
+            "headlights": "00-04 housings shared (SVT HID option differs — "
+                          "halogen cars only)",
+        },
+    },
+    "panther-marauder-body": {
+        "display": "Ford Panther platform (Marauder)",
+        "trim_apps": [("Mercury", "Marauder", 2003, 2004)],
+        "platform_apps": [
+            ("Mercury", "Grand Marquis", 2003, 2011),
+            ("Ford", "Crown Victoria", 2003, 2011),
+            ("Lincoln", "Town Car", 2003, 2011),
+        ],
+        "cats": {
+            "window-regulator": "same 03+ Panther door hardware (chassis "
+                                "revision in 2003 — stick to 03+ donors)",
+            "window-switch": "switchgear shared across 03+ Panthers",
+            "headlights": "Marauder uses Grand Marquis housings (dark trim "
+                          "is cosmetic) — Grand Marquis donors only",
+            "tail-lights": "Grand Marquis lenses fit — Grand Marquis donors "
+                           "only",
+        },
+    },
+    "subaru-gr-wrx-body": {
+        "display": "Subaru GR/GE platform (Impreza WRX)",
+        "trim_apps": [("Subaru", "Impreza WRX", 2008, 2014),
+                      ("Subaru", "WRX", 2008, 2014)],
+        "platform_apps": [("Subaru", "Impreza", 2008, 2014)],
+        "cats": {
+            "window-regulator": "WRX was sedan and hatch — match the donor "
+                                "body style",
+            "window-switch": "switchgear shared across the 08-14 Impreza "
+                             "range",
+            "climate-control": "same panel across the 08-14 Impreza range",
+        },
+    },
+    "subaru-va-wrx-body": {
+        "display": "Subaru VA WRX / GJ Impreza sedan",
+        "trim_apps": [("Subaru", "WRX", 2015, 2021)],
+        "platform_apps": [("Subaru", "Impreza", 2012, 2016)],
+        "cats": {
+            "window-regulator": "VA WRX uses the 2012-16 Impreza sedan door "
+                                "shell (aftermarket fitment lists cover "
+                                "both) — sedan donors only, verify the part "
+                                "number",
+            "window-switch": "switchgear shared with the 12-16 Impreza sedan",
+        },
+    },
+    "vw-mk5-r32-body": {
+        "display": "VW Golf MkV platform (R32)",
+        "trim_apps": [("Volkswagen", "R32", 2008, 2008)],
+        "platform_apps": [
+            ("Volkswagen", "GTI", 2006, 2009),
+            ("Volkswagen", "Golf Gti", 2006, 2009),
+            ("Volkswagen", "Rabbit", 2006, 2009),
+            ("Volkswagen", "Golf", 2006, 2009),
+        ],
+        "cats": {
+            "window-regulator": "R32 is the 2-door MkV shell — match the "
+                                "donor door count",
+            "window-switch": "switchgear shared across the MkV Golf range",
+            "climate-control": "same Climatic/Climatronic panel — match "
+                               "manual vs auto climate",
+        },
+    },
+    # --- Mercedes AMG: each AMG string maps onto its class, gen-windowed.
+    # AMG shares the class body shell; door hardware/switchgear carry over.
+    # Clusters (AMG faces) and exterior panels/mirrors are omitted. Lights
+    # are omitted for Mercedes: halogen/xenon + facelift splits make an
+    # unqualified claim dishonest. The feed spells most classes two ways
+    # ("E-Class" and "Mercedes E-Class") — both are mapped.
+    "mb-w210-e55": {
+        "display": "Mercedes W210 platform (E55 AMG)",
+        "engine_note": ("Mercedes engine rows in our catalog are vendor-"
+                        "mixed (Bosch/Valeo) — no verified engine groups; "
+                        "AMG engines interchange with other same-code AMGs "
+                        "only."),
+        "trim_apps": [("Mercedes-Benz", "E55 Amg", 1999, 2002)],
+        "platform_apps": [("Mercedes-Benz", "E-Class", 1996, 2002),
+                          ("Mercedes-Benz", "Mercedes E-Class", 1996, 2002)],
+        "cats": {
+            "window-regulator": "same W210 sedan door shell",
+            "window-switch": "switchgear shared across the W210 range",
+            "climate-control": "same panel across the W210 range",
+        },
+    },
+    "mb-w211-e55": {
+        "display": "Mercedes W211 platform (E55 AMG)",
+        "engine_note": ("Mercedes engine rows in our catalog are vendor-"
+                        "mixed (Bosch/Valeo) — no verified engine groups; "
+                        "AMG engines interchange with other same-code AMGs "
+                        "only."),
+        "trim_apps": [("Mercedes-Benz", "E55 Amg", 2003, 2006)],
+        "platform_apps": [("Mercedes-Benz", "E-Class", 2003, 2009),
+                          ("Mercedes-Benz", "Mercedes E-Class", 2003, 2009)],
+        "cats": {
+            "window-regulator": "same W211 sedan door shell",
+            "window-switch": "switchgear shared across the W211 range",
+            "climate-control": "same panel across the W211 range",
+        },
+    },
+    "mb-w208-clk55": {
+        "display": "Mercedes W208 platform (CLK55 AMG)",
+        "engine_note": ("Mercedes engine rows in our catalog are vendor-"
+                        "mixed (Bosch/Valeo) — no verified engine groups; "
+                        "AMG engines interchange with other same-code AMGs "
+                        "only."),
+        "trim_apps": [("Mercedes-Benz", "Clk55 Amg", 2001, 2002)],
+        "platform_apps": [("Mercedes-Benz", "CLK-Class", 1998, 2003)],
+        "cats": {
+            "window-regulator": "W208 coupe/cabrio door shell — match body "
+                                "style",
+            "window-switch": "switchgear shared across the W208 range",
+        },
+    },
+    "mb-w215-cl55": {
+        "display": "Mercedes C215 platform (CL55 AMG)",
+        "engine_note": ("Mercedes engine rows in our catalog are vendor-"
+                        "mixed (Bosch/Valeo) — no verified engine groups; "
+                        "AMG engines interchange with other same-code AMGs "
+                        "only."),
+        "trim_apps": [("Mercedes-Benz", "Cl55 Amg", 2001, 2006)],
+        "platform_apps": [("Mercedes-Benz", "CL-Class", 2000, 2006),
+                          ("Mercedes-Benz", "Mercedes Cl-Class", 2000, 2006)],
+        "cats": {
+            "window-regulator": "same C215 coupe door shell",
+            "window-switch": "switchgear shared across the C215 range",
+        },
+    },
+    "mb-w163-ml55": {
+        "display": "Mercedes W163 platform (ML55 AMG)",
+        "engine_note": ("Mercedes engine rows in our catalog are vendor-"
+                        "mixed (Bosch/Valeo) — no verified engine groups; "
+                        "AMG engines interchange with other same-code AMGs "
+                        "only."),
+        "trim_apps": [("Mercedes-Benz", "Ml55 Amg", 2000, 2003)],
+        "platform_apps": [("Mercedes-Benz", "M-Class", 1998, 2005),
+                          ("Mercedes-Benz", "Ml-Class", 1998, 2005),
+                          ("Mercedes-Benz", "Mercedes Ml-Class", 1998, 2005)],
+        "cats": {
+            "window-regulator": "same W163 door shell across the range",
+            "window-switch": "switchgear shared across the W163 range",
+            "climate-control": "same panel across the W163 range",
+        },
+    },
+    "mb-w221-s63": {
+        "display": "Mercedes W221 platform (S63 AMG)",
+        "engine_note": ("Mercedes engine rows in our catalog are vendor-"
+                        "mixed (Bosch/Valeo) — no verified engine groups; "
+                        "AMG engines interchange with other same-code AMGs "
+                        "only."),
+        "trim_apps": [("Mercedes-Benz", "S63 Amg", 2007, 2013)],
+        "platform_apps": [("Mercedes-Benz", "S-Class", 2007, 2013),
+                          ("Mercedes-Benz", "Mercedes S-Class", 2007, 2013)],
+        "cats": {
+            "window-regulator": "same W221 sedan door shell",
+            "window-switch": "switchgear shared across the W221 range",
+            "climate-control": "same panel across the W221 range",
+        },
+    },
+    "mb-w205-c43": {
+        "display": "Mercedes W205 platform (C43 AMG)",
+        "engine_note": ("Mercedes engine rows in our catalog are vendor-"
+                        "mixed (Bosch/Valeo) and stop around 2015 — no "
+                        "verified engine groups for the C43's M276 biturbo."),
+        "trim_apps": [("Mercedes-Benz", "C43 Amg", 2015, 2021)],
+        "platform_apps": [("Mercedes-Benz", "C-Class", 2015, 2020),
+                          ("Mercedes-Benz", "Mercedes C-Class", 2015, 2020)],
+        "cats": {
+            "window-regulator": "same W205 door shell — match sedan/coupe "
+                                "body style",
+            "window-switch": "switchgear shared across the W205 range",
+        },
+    },
+}
+
+_VALID_TRIM_CATS = {"gauge-cluster", "climate-control", "window-regulator",
+                    "window-switch", "tail-lights", "headlights",
+                    "side-mirrors"}
+
+
+def _lint_trim_platform_groups() -> list[str]:
+    """Import-time sanity: body categories only, well-formed spans, notes."""
+    probs = []
+    for tid, t in TRIM_PLATFORM_GROUPS.items():
+        if not t.get("trim_apps"):
+            probs.append(f"{tid}: no trim_apps")
+        if not t.get("platform_apps"):
+            probs.append(f"{tid}: no platform_apps")
+        for a in list(t.get("trim_apps", [])) + list(t.get("platform_apps", [])):
+            if len(a) != 4 or not (1900 < a[2] <= a[3] < 2035):
+                probs.append(f"{tid}: bad span {a}")
+        if not t.get("cats"):
+            probs.append(f"{tid}: no cats")
+        for cid, note in t.get("cats", {}).items():
+            if cid not in _VALID_TRIM_CATS:
+                probs.append(f"{tid}: {cid} is not a body category")
+            if not note or len(note) < 15:
+                probs.append(f"{tid}/{cid}: missing/terse caveat")
+    return probs
+
+
+_trim_problems = _lint_trim_platform_groups()
+if _trim_problems:
+    raise ValueError(
+        "TRIM_PLATFORM_GROUPS lint failed:\n  " + "\n  ".join(_trim_problems))
+
+
+# ===========================================================================
 # PART-FIRST INTERCHANGE (v2) — "I need an alternator" search.
 #
 # PLATFORM_FAMILIES (above) answers "this car on the lot shares part X with
@@ -8602,6 +8955,42 @@ ENGINE_FAMILIES: dict[str, dict] = {
             "starter": {"note": _STR_NOTE},
         },
     },
+    "mopar-srt4": {
+        "display": "Dodge SRT-4 2.4 Turbo (EDV)",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Dodge", "Neon Srt-4", 2003, 2005, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "2.4 turbo rows are published clean — "
+                                   "do NOT use 2.0 Neon units"},
+            "starter": {"note": "04-05 published; the 2003 2.4 starter row "
+                                "is not in this catalog edition"},
+        },
+    },
+    "mercury-marauder": {
+        "display": "Mercury Marauder 4.6 DOHC",
+        "engine": {"liters": [4.6], "cyl": 8},
+        "apps": [
+            ("Mercury", "Marauder", 2003, 2004, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "published rows carry a Police/Ford-unit "
+                                   "qualifier — match the unit on your car"},
+            "starter": {"note": "two published case styles — match yours"},
+        },
+    },
+    "vw-r32-32": {
+        "display": "VW R32 3.2 VR6 (MkV)",
+        "engine": {"liters": [3.2], "cyl": 6},
+        "apps": [
+            ("Volkswagen", "R32", 2008, 2008, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": _ALT_NOTE},
+            "starter": {"note": "two published case styles — match yours"},
+        },
+    },
     "ford-tc": {
         "display": "Ford Transit Connect 1.6/2.0/2.5",
         "engine": {"liters": [1.6, 2.0, 2.5], "cyl": 4},
@@ -9849,6 +10238,13 @@ _ALT_VERIFIED: dict = {
              ("Ford", "Transit Connect", 2012, 2013)],
         ],
     },
+    "mopar-srt4": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), Neon 2.4 turbo rows unqualified: 210-0559 (130A) 2004-2005; 210-0558 (145A) 2003 (that number also covers the 2003 2.0 — the one year both engines share a unit).",
+        "groups": [
+            [("Dodge", "Neon Srt-4", 2004, 2005)],
+            [("Dodge", "Neon Srt-4", 2003, 2003)],
+        ],
+    },
     "mitsu-4g94": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4165 (85A) Lancer 2.0 2002 — clean row (03-04 rows carry a non-turbo qualifier because the Evo arrived in 2003); 210-4271 (105A) Lancer 2.0 4G94 2007 — clean row (the Evo IX ended in 2006).",
         "groups": [
@@ -10402,6 +10798,18 @@ _STR_VERIFIED: dict = {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0366 IS 250 2.5 2006-2011 — one published unit, unqualified.",
         "groups": [[("Lexus", "IS 250", 2006, 2011)]],
     },
+    "mopar-srt4": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4278 Neon 2.4 2004-2005 unqualified (no 2003 2.4 starter row is published in this edition).",
+        "groups": [[("Dodge", "Neon Srt-4", 2004, 2005)]],
+    },
+    "mercury-marauder": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5105 AND 280-5312 are both listed for the Marauder 4.6 2003-2004 with no qualifiers — two published case styles, match yours.",
+        "groups": [[("Mercury", "Marauder", 2003, 2004)]],
+    },
+    "vw-r32-32": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 R32 3.2 2008 unqualified, dual-listed with 281-6001 (First Time Fit, CBRA engine code) — two published case styles, match yours.",
+        "groups": [[("Volkswagen", "R32", 2008, 2008)]],
+    },
 }
 
 for _fid, _v in _STR_VERIFIED.items():
@@ -10596,12 +11004,34 @@ def build_interchange_payload() -> dict:
                 "note": grp.get("note", ""),
                 "apps": apps,
             })
+    # Performance-trim platform groups: reasoned body-part platform claims
+    # (NOT published part-number lists), shipped at tier "likely" so the UI
+    # stays honest. See TRIM_PLATFORM_GROUPS curation notes.
+    trim_engine_notes = []
+    for tid, t in TRIM_PLATFORM_GROUPS.items():
+        all_apps = [list(a) for a in
+                    list(t["trim_apps"]) + list(t["platform_apps"])]
+        for cid, note in t["cats"].items():
+            groups.append({
+                "id": f"{tid}#{cid}",
+                "label": t["display"],
+                "cat": cid,
+                "tier": "likely",
+                "note": note,
+                "apps": all_apps,
+            })
+        if t.get("engine_note"):
+            trim_engine_notes.append({
+                "note": t["engine_note"],
+                "apps": [list(a) for a in t["trim_apps"]],
+            })
     return {
         "schemaVersion": 1,
         "builtAt": _iso_utc_z_interchange(),
         "categories": cats,
         "engineFamilies": fams,
         "platformGroups": groups,
+        "trimEngineNotes": trim_engine_notes,
     }
 
 

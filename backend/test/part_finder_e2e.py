@@ -255,6 +255,54 @@ with sync_playwright() as pw:
         page.screenshot(path=str(SHOTS / "pf_corolla99_window_regulator.png"))
         print(f"     corolla99 rows={rows.count()} — "
               f"shot pf_corolla99_window_regulator.png")
+
+    # ---- E46 M3: the performance-trim platform fix -------------------------
+    # Body part: the M3 maps into the E46 platform group, so a window-
+    # regulator search must surface regular E46 donors (112 within 100 mi of
+    # 90670 in the current snapshot) at the honest "likely" tier.
+    model = pf_search(page, "2002", "BMW", ["M3"], None,
+                      part="window regulator")
+    check("m3: model option found", model is not None)
+    if model is not None:
+        rows = page.locator("#pf-results .pf-row-card")
+        check("m3 window regulator: E46 platform donors render",
+              rows.count() > 0,
+              page.locator("#pf-results").inner_text()[:120])
+        n_ver = page.locator("#pf-results .pf-row-card.pf-verified").count()
+        check("m3 window regulator: trim platform rows are likely, not verified",
+              rows.count() > 0 and n_ver == 0,
+              f"ver={n_ver} of {rows.count()}")
+        chips = page.locator("#pf-results .pf-tier").count()
+        check("m3 window regulator: every row carries a tier chip",
+              rows.count() > 0 and chips == rows.count(),
+              f"{chips} chips / {rows.count()} rows")
+        body = page.locator("#pf-results").inner_text()
+        check("m3 window regulator: coupe/convertible caveat shipped",
+              "coupe/convertible" in body, body[:200])
+        page.screenshot(path=str(SHOTS / "pf_m3_window_regulator.png"))
+        print(f"     m3 regulator rows={rows.count()} — "
+              f"shot pf_m3_window_regulator.png")
+
+    # Engine part: the S54 is unpublished, so the alternator search must show
+    # the honest trim-specific message (with the live M3 count) instead of a
+    # bare "no data", and point at the body-part search.
+    model = pf_search(page, "2002", "BMW", ["M3"], None, part="alternator")
+    check("m3 alternator: model option found", model is not None)
+    if model is not None:
+        empty = page.locator("#pf-results .pf-empty")
+        check("m3 alternator: honest empty state renders",
+              empty.count() == 1 and
+              page.locator("#pf-results .pf-row-card").count() == 0)
+        txt = empty.inner_text() if empty.count() else ""
+        check("m3 alternator: message names the S54 as M3-specific",
+              "S54" in txt and "M3-specific" in txt, txt[:200])
+        check("m3 alternator: message counts tracked M3 donors",
+              "1 in tracked yards" in txt, txt[:200])
+        check("m3 alternator: message points at the body-part search",
+              "window regulator" in txt.lower(), txt[:200])
+        page.screenshot(path=str(SHOTS / "pf_m3_alternator_honest.png"))
+        print("     m3 alternator honest message — "
+              "shot pf_m3_alternator_honest.png")
     ctx.close()
 
     # ---- desktop: tab active with a real search on screen -----------------

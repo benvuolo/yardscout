@@ -367,6 +367,64 @@ check("feed alias: raw 'Town &amp; Country' entity 2012 reaches mopar-pentastar"
       any(js._app_matches(a, 2012, "Chrysler", "Town &amp; Country")
           for a in EF["mopar-pentastar"]["apps"]))
 
+# =========================================================================
+# Performance-trim platform groups (2026-10) — body parts follow the
+# platform even when the engine is trim-unique.
+# =========================================================================
+_payload2 = js.build_interchange_payload()
+_trim_ids = set(js.TRIM_PLATFORM_GROUPS)
+_trim_groups = [g for g in _payload2["platformGroups"]
+                if g["id"].split("#")[0] in _trim_ids]
+check("payload ships a group per trim family x category",
+      len(_trim_groups) == sum(len(t["cats"])
+                               for t in js.TRIM_PLATFORM_GROUPS.values()),
+      str(len(_trim_groups)))
+check("every trim platform group ships tier=likely (reasoned, not published)",
+      all(g["tier"] == "likely" for g in _trim_groups))
+check("every trim platform group carries a caveat note",
+      all(len(g["note"]) >= 15 for g in _trim_groups))
+check("legacy platform groups still ship tier=verified",
+      all(g["tier"] == "verified" for g in _payload2["platformGroups"]
+          if g["id"].split("#")[0] not in _trim_ids))
+_ten = _payload2["trimEngineNotes"]
+check("trimEngineNotes shipped for unique-engine trims", len(_ten) >= 10)
+check("E46 M3 2002 hits a trim engine note (S54 honesty)",
+      any(any(js._app_matches(tuple(a), 2002, "BMW", "M3") for a in t["apps"])
+          for t in _ten))
+check("E46 M3 2002 reaches the window-regulator platform group",
+      any(g["cat"] == "window-regulator"
+          and any(js._app_matches(tuple(a), 2002, "BMW", "M3")
+                  for a in g["apps"])
+          and any(js._app_matches(tuple(a), 2003, "BMW", "325ci")
+                  for a in g["apps"])
+          for g in _trim_groups))
+check("Mercedes prefixed feed spelling reaches the AMG groups",
+      any(g["id"].startswith("mb-w211-e55")
+          and any(js._app_matches(tuple(a), 2005, "Mercedes-Benz",
+                                  "Mercedes E-Class") for a in g["apps"])
+          for g in _trim_groups))
+check("no trim group claims an engine category",
+      all(g["cat"] not in ("alternator", "starter") for g in _trim_groups))
+check("gauge clusters never cross a trim boundary (unique faces)",
+      all(g["cat"] != "gauge-cluster" for g in _trim_groups))
+
+# Trim engine families with published rows get real tiers.
+check("Neon SRT-4 04<->05 alternator verified",
+      _tier("mopar-srt4", "alternator",
+            (2004, "Dodge", "Neon Srt-4"),
+            (2005, "Dodge", "Neon Srt-4")) == "verified")
+check("Marauder 03<->04 starter verified (dual case styles noted)",
+      _tier("mercury-marauder", "starter",
+            (2003, "Mercury", "Marauder"),
+            (2004, "Mercury", "Marauder")) == "verified")
+check("R32 2008 starter verified",
+      _tier("vw-r32-32", "starter",
+            (2008, "Volkswagen", "R32"),
+            (2008, "Volkswagen", "R32")) == "verified")
+check("SRT-4 never matches the 2.0 Neon family (engine split)",
+      not any(js._app_matches(a, 2004, "Dodge", "Neon Srt-4")
+              for a in EF["mopar-neon"]["apps"]))
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILURE(S):", *FAILS, sep="\n  - ")

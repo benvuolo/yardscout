@@ -1090,6 +1090,14 @@ cited below.**
 - **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4342 RX-8 2011 (engine codes M, P) unqualified — the 2009-10 rows for the same unit are transmission-qualified and excluded.
   - Group 1: Mazda RX-8 2011-2011; Mazda RX8 2011-2011
 
+### mercury-marauder — Mercury Marauder 4.6 DOHC
+
+- **Engine:** 4.6L 8-cyl
+- **Family applications:** Mercury Marauder 2003-2004
+- **alternator:** no verified group — Likely tier only. Note: published rows carry a Police/Ford-unit qualifier — match the unit on your car
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5105 AND 280-5312 are both listed for the Marauder 4.6 2003-2004 with no qualifiers — two published case styles, match yours.
+  - Group 1: Mercury Marauder 2003-2004
+
 ### mini-r50 — MINI Cooper 1.6 (R50/R52/R53)
 
 - **Engine:** 1.6L 4-cyl
@@ -1273,6 +1281,16 @@ cited below.**
   - Group 2: Chrysler PT Cruiser 2003-2005
   - Group 3: Chrysler PT Cruiser 2006-2010
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### mopar-srt4 — Dodge SRT-4 2.4 Turbo (EDV)
+
+- **Engine:** 2.4L 4-cyl
+- **Family applications:** Dodge Neon Srt-4 2003-2005
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), Neon 2.4 turbo rows unqualified: 210-0559 (130A) 2004-2005; 210-0558 (145A) 2003 (that number also covers the 2003 2.0 — the one year both engines share a unit).
+  - Group 1: Dodge Neon Srt-4 2004-2005
+  - Group 2: Dodge Neon Srt-4 2003-2003
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4278 Neon 2.4 2004-2005 unqualified (no 2003 2.4 starter row is published in this edition).
+  - Group 1: Dodge Neon Srt-4 2004-2005
 
 ### mopar-world24 — Chrysler World/GEMA 2.4 I4
 
@@ -1731,6 +1749,14 @@ cited below.**
 - **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5364 — one published starter for Passat 2.8 2000-2005, A4 2.8 2000-2001, A4 3.0 2002-2005, A4 Quattro 2.8 2000-2001 and 3.0 2003-2006 (A4 Quattro 2002 is not published — spans split around it).
   - Group 1: Volkswagen Passat* 2000-2005; Audi A4 2000-2005; Audi A4 Quattro 2000-2001; Audi A4 Quattro 2003-2006
 
+### vw-r32-32 — VW R32 3.2 VR6 (MkV)
+
+- **Engine:** 3.2L 6-cyl
+- **Family applications:** Volkswagen R32 2008-2008
+- **alternator:** no verified group — Likely tier only. Note: match amperage, pulley and plug before buying — options packages used higher-amp units
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 R32 3.2 2008 unqualified, dual-listed with 281-6001 (First Time Fit, CBRA engine code) — two published case styles, match yours.
+  - Group 1: Volkswagen R32 2008-2008
+
 ## Accuracy-forced exclusions (kept at Likely)
 
 - **ford-3g-50 / Mustang 5.0 1987-1995** — 94-95 Mustang uses the pivot-mount
@@ -1981,3 +2007,84 @@ disqualifying split — stays Likely or no family):
 - Lexus IS 250/350 2010-2013 alternators — Base-trim-qualified rows only.
 - VW Passat 2.0T 2010 starter — Bosch-vendor-qualified (07-09 verified via
   280-5338; 07-10 also dual-listed with 281-6001 — match yours).
+
+## Performance-trim platform mapping (2026-10)
+
+An E46 M3 returned zero Parts-tab matches even though hundreds of regular
+E46s carry body parts that fit it. Root cause: performance trims have
+trim-UNIQUE engines but share PLATFORM parts, and the trim model string
+("M3") never mapped into any family. `TRIM_PLATFORM_GROUPS`
+(junkyard_scraper.py) now maps each performance-trim feed string onto its
+platform siblings for the body-part categories that genuinely carry over.
+
+House rules applied:
+- These are reasoned platform claims, NOT published part-number lists —
+  every trim group ships at tier **likely** with a caveat on each donor row.
+  Hand-verified badge-twin groups (PLATFORM_FAMILIES) keep tier verified.
+- **Gauge clusters are excluded from every trim group** — M3/M5/AMG/SRT/V
+  clusters have unique faces, redlines and coding.
+- Side mirrors and trim-specific exterior panels (M3 fenders, SRT-4
+  fascias, STI wings) are never mapped.
+- Lights are mapped only where the trim demonstrably used the sibling
+  housing (Marauder = Grand Marquis; SRT-4 = 03-05 facelift Neon; CTS-V =
+  CTS) and carry body-style/facelift caveats. Lights are NOT mapped for
+  Mercedes (halogen/xenon + facelift splits) or where the trim ran unique
+  lighting options by default.
+
+Trims mapped (inventory census 2026-10, feed spellings):
+- **BMW M3 2001-06 → E46** (3 Series/323i/ci/325i/ci/xi/328i/ci/330i/ci/xi
+  1999-2006): regulators (coupe/convertible donors only — sedan units
+  differ), switches, climate, lights (body-style + facelift caveats).
+- **BMW M5 2006-10 → E60** and **M5 2011-16 → F10** 5-Series spans:
+  regulators/switches/climate (+ E60 lights with xenon/adaptive caveat).
+  The 5-Series GT body is excluded from F10 groups.
+- **Cadillac CTS-V 2004-07 → CTS 2003-07**: regulators, switches, climate,
+  lights.
+- **Dodge Neon SRT-4 2003-05 → Neon/Neon Pl 2000-05**: regulators,
+  switches, climate; lights capped to the 03-05 facelift window.
+- **Ford Focus SVT 2002-04 → Focus/Focus Wagon 2000-04**: regulators
+  (hatch body-style caveat), switches, climate, headlights (halogen only —
+  SVT HID option differs). Tail lights excluded: hatch vs sedan lenses.
+- **Mercury Marauder 2003-04 → 03+ Panthers** (Grand Marquis/Crown
+  Victoria/Town Car 2003-2011): regulators, switches; lights restricted to
+  Grand Marquis donors (same housings, dark trim is cosmetic). Climate
+  excluded: Marauder ran EATC, many donors are manual.
+- **Subaru Impreza WRX 2008-14 → GR/GE Impreza**: regulators (sedan vs
+  hatch caveat), switches, climate. **WRX 2015-21 → 2012-16 Impreza sedan**
+  (VA uses the GJ door shell; aftermarket fitment lists cover both):
+  regulators + switches only, verify-part-number caveat.
+- **VW R32 2008 → MkV Golf/GTI/Rabbit 2006-09**: regulators (2-door
+  caveat), switches, climate (manual vs Climatronic caveat).
+- **Mercedes AMG → class shells, gen-windowed**: E55→W210 96-02 and
+  W211 03-09, CLK55→W208, CL55→C215, ML55→W163, S63→W221, C43→W205.
+  Regulators/switches (+climate where the panel is class-wide). Both feed
+  spellings ("E-Class" and "Mercedes E-Class") are mapped.
+
+Trim-unique ENGINES — honesty outcomes:
+- **Published clean → real engine families added**: mopar-srt4 (2.4 turbo:
+  alt 210-0559 04-05 + 210-0558 2003; str 280-4278 04-05), mercury-marauder
+  (str 280-5105/280-5312 dual case styles 03-04; alternator rows are
+  Police/Ford-unit qualified — stays Likely), vw-r32-32 (str 280-5338 2008,
+  dual-listed with 281-6001).
+- **Unpublished → honest message, no family**: E46 M3 S54 (no rows in this
+  edition; E36 3.2 S52 IS published but no E36 M3 is in inventory — it
+  already rides bmw-m52), E60 M5 S85 and F10 M5 S63 (only the E39 S62
+  2000-03 starter is published; no E39 M5 in inventory), CTS-V gen-1
+  LS6/LS2 (gen-2 6.2 rows exist but carry a Supercharged qualifier and no
+  gen-2 V is in inventory), Focus SVT Zetec-SVT (build-date-qualified rows
+  only), all Mercedes AMG engines (vendor-mixed rows), Jaguar S-Type R
+  (catalog's S-Type rows stop at 2002).
+  These trims ship a `trimEngineNotes` payload entry: the engine-part
+  search explains the engine is trim-specific (with the live count of
+  trim donors in tracked yards) and points at the body-part search.
+
+Trims with NOTHING to map (audited, documented):
+- Mustang GT/Cobra/Shelby, Camaro SS/Z28, Impala SS, Charger/Challenger
+  SRT — the feed spells all of these as the plain model string, so platform
+  mapping is a no-op (plain strings already hit their families). Suffixed
+  strings that DO exist ("Charger Lc", "Grand Prix Gtp", platform codes)
+  are feed aliases of regular models, not performance trims.
+- WRX STI: no STI model string exists in the current feed (Evos are
+  likewise labeled plain "Lancer" — see Phase A notes).
+- Pontiac GTO 2004-06: no US platform sibling in the feed; its LS1/LS2
+  rows weren't verified this pass — engine stays unmapped (documented).
