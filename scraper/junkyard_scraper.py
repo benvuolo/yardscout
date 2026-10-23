@@ -40,6 +40,7 @@ import argparse
 import base64
 import concurrent.futures
 import hashlib
+import html
 import json
 import os
 import re
@@ -10006,40 +10007,410 @@ _MODEL_CANON = {
     "yukonxl": "Yukon XL",
 }
 
+# --- 2026-10 model-name merge (owner-reported: BMW filter showed '328' next
+# to '328i', '330I' vs '330i', a 919-car '3 Series' blob; every make audited).
+#
+# _MODEL_CANON_BY_MAKE: evidence-driven per-make canon table, generated from a
+# collision audit of the full live inventory (2026-10-22, 2,388 distinct
+# (make, model) pairs), hand-corrected to each marque's real styling. Keys are
+# squashed lowercase alphanumerics of the model (same keying as _MODEL_CANON),
+# outer keys are squashed canonical make names. Consulted BEFORE the global
+# table so make-specific meanings win ('ls' is Lincoln 'LS').
+#
+# Merge policy (mirrors the 2026-10 make merge): merge only provable spelling/
+# case/suffix variants of the SAME car — per-chain body suffixes ("S10
+# Pickup"), Chrysler-family platform codes ("Charger Lc", "Sebring Jr"),
+# redundant trim junk ("Aura Xe"), word-order flips ("Silverado Classic
+# 1500"). Genuinely distinct trims stay separate: 328i ≠ 328is ≠ 328ci ≠
+# 328xi ≠ 323iC, F-250 ≠ F-250 Super Duty, Malibu ≠ Malibu Limited (a real
+# fleet continuation model), Armada ≠ Pathfinder Armada (official early name),
+# A4 ≠ A4 Quattro. When unsure, keep separate.
+_MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
+    "acura": {"cl": "CL", "rl": "RL", "rdx": "RDX"},
+    "audi": {"ttquattro": "TT Quattro"},
+    "bmw": {
+        # 525iA/530iA are 525i/530i automatics (feed + NHTSA use the trans
+        # marker); not a distinct model, unlike is/ci/xi body/drive variants.
+        "525ia": "525i", "530ia": "530i",
+        "activehybrid3": "ActiveHybrid 3", "activehybrid5": "ActiveHybrid 5",
+        "i3": "i3", "428igrancoupe": "428i Gran Coupe",
+        "alpinab7xdrive": "Alpina B7 xDrive",
+        "alpinab7lxdrive": "Alpina B7L xDrive",
+    },
+    "buick": {
+        "lesabre": "LeSabre", "lacrosse": "LaCrosse", "encoregx": "Encore GX",
+        "rendezvoussrv": "Rendezvous",  # SRV = chain body code, not a trim
+    },
+    "cadillac": {
+        "deville": "DeVille", "coupedeville": "Coupe DeVille",
+        "eldorado": "Eldorado",  # catches 'El Dorado'
+        "sts": "STS", "xts": "XTS", "ctsv": "CTS-V", "elr": "ELR",
+        "escaladeesv": "Escalade ESV",
+    },
+    "chevrolet": {
+        "s10pickup": "S-10", "s10pu": "S-10", "c10": "C10",
+        "c10pickup": "C10", "belair": "Bel Air", "vega": "Vega",
+        "trailblazerext": "Trailblazer EXT",
+        "blazers10jimmys15": "Blazer S10/Jimmy S15",
+        "s10s15sonoma": "S10/S15/Sonoma",
+        "silverado1500hd": "Silverado 1500HD",
+        "silveradohd2500": "Silverado 2500HD",
+        "silveradoclassic1500": "Silverado 1500 Classic",   # word-order flip
+        "silveradoclassic": "Silverado Classic",
+        "astrovan": "Astro", "chevyvanclassic": "Chevy Van",
+        "luminacar": "Lumina", "luminavan": "Lumina APV",
+        "luminaminivan": "Lumina APV", "ventureapv": "Venture",
+        "sparkev": "Spark EV", "boltev": "Bolt EV",
+        "cityexpressls": "City Express", "geoprizm": "Prizm",
+        "ck1500series": "C/K 1500", "ck2500series": "C/K 2500",
+        "ck3500series": "C/K 3500", "ck10series": "C/K 10",
+        "ck20series": "C/K 20", "ck30series": "C/K 30",
+        "rv20series": "R/V 20", "gseriesvan": "G-Series",
+        "c15c1500pickup": "C1500", "c3500hd": "C3500HD",
+        "c20truck": "C20", "c30pickup": "C30",
+    },
+    "chrysler": {
+        # 'TOWN &amp; COUNTRY' unescapes to 'Town & Country' whose squashed
+        # key is 'towncountry'; 'Town And Country' squashes to the long key.
+        "towncountry": "Town & Country", "townandcountry": "Town & Country",
+        "townandcountryrs": "Town & Country", "townandcountryrt": "Town & Country",
+        # Trailing Lx/Js/Jr/... are Chrysler internal platform codes some
+        # chains append; the base nameplate is the model. '300 Lh' deliberately
+        # NOT merged ('300' didn't exist in the LH era — likely a mislabeled
+        # 300M; ambiguous, keep).
+        "300lx": "300", "300clx": "300C", "300m": "300M",
+        "200js": "200", "200uf": "200", "200lx": "200",
+        "sebringjr": "Sebring", "sebringjs": "Sebring",
+        "pacificacs": "Pacifica", "ptcruiserpt": "PT Cruiser",
+        "aspenhg": "Aspen", "concordelh": "Concorde",
+        "crossfirezh": "Crossfire", "voyagerrs": "Voyager",
+        "lhslh": "LHS", "lhs": "LHS",
+        "tcbymaserati": "TC By Maserati", "tcmaserati": "TC By Maserati",
+    },
+    "dodge": {
+        "ram": "Ram",            # display casing for unresolved 'RAM' rows
+        "chargerlc": "Charger", "chargerlx": "Charger",
+        "challengerla": "Challenger", "challengerlc": "Challenger",
+        "avengerjs": "Avenger", "dakotand": "Dakota", "dakotaan": "Dakota",
+        "caliberpm": "Caliber", "journeyjc": "Journey",
+        "durangohb": "Durango", "durangodn": "Durango",
+        "neonpl": "Neon", "dartpf": "Dart",
+        "stratusjr": "Stratus", "stratusja": "Stratus",
+        "magnumlx": "Magnum", "nitroka": "Nitro", "intrepidlh": "Intrepid",
+        "grandcaravanrs": "Grand Caravan", "grandcaravanrt": "Grand Caravan",
+        "caravanrs": "Caravan",
+        "caravangrandcaravanrs": "Caravan/Grand Caravan",
+        "neonsrt4": "Neon SRT-4",
+        "d150pickup": "D150", "d100pickup": "D100", "pud250": "D250",
+        "w100pickup": "W100", "w150pickup": "W150", "w200pickup": "W200",
+        "w250pickup": "W250", "w350pickup": "W350",
+        "ram1500van": "Ram Van 1500", "ram2500van": "Ram Van 2500",
+        "ram3500van": "Ram Van 3500",
+    },
+    "ford": {
+        "f250sd": "F-250 Super Duty", "f350sd": "F-350 Super Duty",
+        "f450sd": "F-450 Super Duty",
+        "escapexlt": "Escape", "escapexls": "Escape",
+        "escapelimited": "Escape",       # trim, not a continuation model
+        "ecosportse": "Ecosport", "ecosportses": "Ecosport",
+        "expeditionel": "Expedition EL", "expeditionmax": "Expedition MAX",
+        "focussvt": "Focus SVT", "escortzx2": "Escort ZX2",
+        "cmax": "C-Max", "cmaxhybrid": "C-Max Hybrid",
+        "cmaxenergi": "C-Max Energi",
+        "transit150": "Transit-150", "transit250": "Transit-250",
+        "transit350": "Transit-350", "transit350hd": "Transit-350 HD",
+        "f100truck": "F-100", "f100pickup": "F-100",
+    },
+    "gmc": {
+        "sierra1500pickup": "Sierra 1500", "sierra2500pickup": "Sierra 2500",
+        "sierrack1500": "Sierra 1500", "sierrack2500": "Sierra 2500",
+        "sierrack3500": "Sierra 3500",
+        "savana1500van": "Savana 1500", "savana2500van": "Savana 2500",
+        "savana3500van": "Savana 3500",
+        "jimmys15": "S-15 Jimmy", "s15pickup": "S-15",
+        "s15utility": "S-15 Jimmy", "jimmyutility": "Jimmy",
+        "safarigmc": "Safari", "c3500hd": "C3500HD",
+        "ck1500series": "C/K 1500", "ck2500series": "C/K 2500",
+        "c15c1500pickup": "C1500",
+        "blazers10jimmys15": "Blazer S10/Jimmy S15",
+        "s10s15sonoma": "S10/S15/Sonoma",
+        "yukonxl1500": "Yukon XL 1500", "yukonxl2500": "Yukon XL 2500",
+    },
+    "honda": {"civiccrx": "CRX", "cbr600": "CBR600"},
+    "hyundai": {"kona": "Kona", "santafexl": "Santa Fe XL"},
+    "infiniti": {
+        "qx41999": "QX4", "m35h": "M35h", "qx60hybrid": "QX60 Hybrid",
+        "fxseries": "FX Series",
+    },
+    "isuzu": {"isuzupuppickup": "Pup", "trooperii": "Trooper II"},
+    "jaguar": {
+        "xf": "XF", "xj": "XJ", "xj6": "XJ6", "xjs": "XJS",
+        "xjsedan": "XJ", "xk8": "XK8",
+    },
+    "jeep": {
+        "libertykj": "Liberty", "libertykk": "Liberty",
+        "grandcherokeewk": "Grand Cherokee", "grandcherokeewj": "Grand Cherokee",
+        "patriotmk": "Patriot", "compassmk": "Compass",
+        "commanderxh": "Commander", "commanderxk": "Commander",
+        "cherokeekl": "Cherokee", "cherokeexj": "Cherokee",
+        "wranglerjk": "Wrangler", "cj7": "CJ7", "cj5": "CJ5",
+        "pucomanche": "Comanche", "j10pickup": "J10",
+    },
+    "kia": {
+        "niro": "Niro", "soulev": "Soul EV",
+        "rio5door": "Rio5", "riocinco": "Rio5", "forte5door": "Forte5",
+    },
+    "landrover": {
+        "rangesport": "Range Rover Sport",
+        "evoque": "Range Rover Evoque",
+        "discoveryii": "Discovery Series II",
+        "discoveryseriesii": "Discovery Series II",
+        "lr3": "LR3",
+    },
+    "lexus": {"ls600hl": "LS 600h L", "scseries": "SC Series"},
+    "lincoln": {"ls": "LS", "mks": "MKS", "mkt": "MKT", "mark": "Mark"},
+    "mazda": {
+        # Bare numbers under make Mazda are unambiguous ('3' is a Mazda3).
+        "3": "Mazda3", "6": "Mazda6", "5": "Mazda5", "2": "Mazda2",
+        "b2000": "B2000", "b2200": "B2200", "b2300": "B2300",
+        "b2500": "B2500", "b2600": "B2600",
+        "rx8": "RX-8", "rx7": "RX-7",
+        "miata": "MX-5 Miata", "mx5": "MX-5 Miata",
+        "mazdaspeed6": "Mazdaspeed6",
+        "tributelx": "Tribute", "tributedx": "Tribute", "tributees": "Tribute",
+    },
+    "mercedesbenz": {
+        "aclass": "A-Class", "bclass": "B-Class", "cclass": "C-Class",
+        "eclass": "E-Class", "sclass": "S-Class", "rclass": "R-Class",
+        "mclass": "M-Class",
+        "mlclass": "M-Class", "claclass": "CLA-Class", "glaclass": "GLA-Class",
+        "glcclass": "GLC-Class", "gleclass": "GLE-Class",
+        "clk": "CLK", "slk": "SLK", "cls": "CLS", "sl": "SL", "gl": "GL",
+        "cla": "CLA", "gla": "GLA", "glc": "GLC", "gls": "GLS", "slc": "SLC",
+        "smartsmart": "Smart",
+    },
+    "mini": {
+        "minicooper": "Cooper",
+        "cooperclubman": "Clubman", "coopercountryman": "Countryman",
+        "cooperpaceman": "Paceman", "cooperconvertible": "Convertible",
+        "cooperhardtop": "Hardtop",
+    },
+    "mitsubishi": {
+        "raidernm": "Raider", "expo": "Expo", "expolrv": "Expo LRV",
+        "imiev": "i-MiEV",
+    },
+    "nissan": {
+        "nv200": "NV200", "nv1500": "NV1500", "nv3500": "NV3500",
+        "nv2500hd": "NV2500 HD", "240sx": "240SX", "350z": "350Z",
+        "370z": "370Z", "pathfinder19995": "Pathfinder",
+    },
+    "oldsmobile": {
+        "ciera": "Cutlass Ciera", "culassciera": "Cutlass Ciera",  # feed typo
+        "eightyeight88": "Eighty-Eight", "ninetyeight98": "Ninety-Eight",
+        "eightyeightroyale": "Eighty-Eight",
+        "deltaeightyeightroyale": "Delta 88",
+        "intriguegx": "Intrigue", "intriguegls": "Intrigue",
+        "silhouetteapv": "Silhouette",
+    },
+    "pontiac": {
+        "grandam": "Grand Am", "grandamse": "Grand Am", "grandamse1": "Grand Am",
+        "grandamgt": "Grand Am", "grandamgt1": "Grand Am",
+        "grandprixgt": "Grand Prix", "grandprixgtp": "Grand Prix",
+        "grandprixgt2": "Grand Prix", "grandprixse": "Grand Prix",
+        "grandprixse1": "Grand Prix",
+        "bonnevillese": "Bonneville", "bonnevillegxp": "Bonneville",
+        "sunfirese": "Sunfire", "azteksrv": "Aztek",
+        "g3wave": "G3", "gto": "GTO",
+    },
+    "ram": {
+        "1500pickup": "1500", "2500pickup": "2500", "3500pickup": "3500",
+        "promaster": "ProMaster", "promastercity": "ProMaster City",
+        "promaster1500": "ProMaster 1500", "promaster2500": "ProMaster 2500",
+        "promaster3500": "ProMaster 3500",
+        "promaster1500van": "ProMaster 1500", "promaster2500van": "ProMaster 2500",
+        "promaster3500van": "ProMaster 3500",
+        "cv": "C/V",
+    },
+    "saab": {"92x": "9-2X", "97x": "9-7X", "93x": "9-3X"},
+    "saturn": {
+        "auraxe": "Aura", "auraxr": "Aura", "astraxe": "Astra",
+        "vuegreenlinehybrid": "VUE Green Line",
+        "auragreenlinehybrid": "Aura Green Line",
+        "l300sedan": "L300", "lw300": "LW300", "lw200": "LW200",
+        "sl1": "SL1",
+    },
+    "scion": {"iq": "iQ", "ia": "iA", "im": "iM"},
+    "subaru": {"xvcrosstrek": "XV Crosstrek"},
+    "suzuki": {
+        "sx4sedan": "SX4 Sport",   # the SX4 Sport IS the sedan body
+        "sx4sport": "SX4 Sport", "grandvitaraxl7": "XL-7",
+    },
+    "toyota": {
+        "solara": "Camry Solara", "corollamatrix": "Matrix",
+        "pickup": "Pickup",              # catches 'Pick-Up' / 'Pick-Up Std'
+        "pickupstd": "Pickup", "pickupdlx": "Pickup",
+        "sciontc": "Scion tC", "scionxa": "Scion xA", "scionxb": "Scion xB",
+        "scionxd": "Scion xD", "scionia": "Scion iA", "scioniq": "Scion iQ",
+        "yarisia": "Yaris iA", "corollaim": "Corolla iM",
+        "celicast": "Celica ST", "celicagt": "Celica GT",
+        "mr2spyder": "MR2 Spyder", "vanwagon": "Van",
+    },
+    "volkswagen": {
+        "cc": "CC", "golfgti": "GTI",
+        "gli": "Jetta GLI", "jettagli": "Jetta GLI",
+        "taos": "Taos", "bus": "Bus",
+        "cabrioletconvertible": "Cabriolet",
+    },
+    "volvo": {
+        "v70xc": "V70 XC",
+        "240series": "240", "240series240": "240",
+        "740series": "740", "760series": "760",
+        "850series": "850", "850series850": "850",
+        "940series": "940", "940series940": "940", "960series": "960",
+    },
+}
+
+# Leading make-name junk some chains prepend to the model ('BMW 328i',
+# 'Mercedes C-Class', 'Volvo 60 Series', 'Mini Mini Cooper'). Stripped only
+# when the prefix names the row's OWN make — 'Dodge Durango' under make
+# Chrysler and 'Chevrolet Sonic' under Buick keep their (sibling-make) prefix
+# rather than silently changing meaning. Extra prefixes cover short forms and
+# parent brands of the same marque.
+_MODEL_STRIP_EXTRA = {
+    "mercedesbenz": ("mercedes",),
+    "ram": ("dodge",),       # 'Dodge 1500 Pickup' under make Ram IS the Ram
+    "scion": ("toyota",),    # Scion is Toyota; 'Toyota Xb' under Scion = xB
+}
+
 # Pattern rules are MAKE-SCOPED: "E350" is a Ford van (E-350) but a Mercedes
 # sedan (E350), and "Es300" is Lexus-styled "ES 300" while "Ml350" is
 # Mercedes-styled "ML350". A make-blind rule broke Mercedes matches.
-_BMW_SUFFIX_RE = re.compile(r"^(\d{3})\s*(i|is|ci|xi|si|d|e)$", re.IGNORECASE)
+# BMW: numeric model + suffix in BMW's own casing (328I -> 328i, 740Il ->
+# 740iL, 750LI -> 750Li), with optional GT / xDrive tails ('328I Xdrive' ->
+# '328i xDrive'). 'li'/'il' before 'i' so the alternation matches longest.
+_BMW_SUFFIX_CASE = {"li": "Li", "il": "iL"}  # everything else lowercases
+_BMW_MODEL_RE = re.compile(
+    r"^(\d{3})\s*(li|il|is|ci|xi|ix|si|ti|es|i|d|e)(?:\s+(gt))?(?:\s+(xdrive))?$",
+    re.IGNORECASE,
+)
 _FE_SERIES_RE = re.compile(r"^([FE])\s*-?\s*(\d{2,3})$", re.IGNORECASE)
-_TWO_LETTER_NUM_RE = re.compile(r"^([A-Za-z]{2})\s*-?\s*(\d{3})$")
+# Ford truck/van chain suffixes on the squashed key: 'F150 Pickup', 'Ford
+# F250Sd Pickup' (after prefix strip), 'E350 Super Duty Van', 'E-150
+# Econoline Club Wagon'. SD/Super Duty is a REAL distinct truck and is kept
+# in the display name; the body words (Pickup/Truck/Van/Econoline/Wagon) are
+# per-chain noise — every F-150 is a pickup.
+_FORD_F_KEY_RE = re.compile(r"^f(\d{3})(sd|superduty)?(?:pickup|truck)?$")
+_FORD_E_KEY_RE = re.compile(
+    r"^e(\d{3})(sd|superduty)?(?:van|econoline|wagon|econolinewagon|"
+    r"clubwagon|econolineclubwagon)?$")
+_TWO_LETTER_NUM_RE = re.compile(r"^([A-Za-z]{2})\s*-?\s*(\d{3})\s*(h|t|c)?$",
+                                re.IGNORECASE)
 _MB_ALNUM_RE = re.compile(r"^([A-Za-z]{1,3})\s*-?\s*(\d{2,3})$")
+# Classic Mercedes digits-then-letters designations ('300Sd' -> 300SD,
+# '450Sl' -> 450SL, '560Sec' -> 560SEC) and AMG tails ('Ml55 Amg' -> ML55 AMG).
+_MB_NUM_SUFFIX_RE = re.compile(
+    r"^(\d{3})\s*(sel|sec|slc|se|sd|sl|ce|td|te|e|d|s)$", re.IGNORECASE)
+_MB_AMG_RE = re.compile(r"^([A-Za-z]{1,3})\s*(\d{2,3})\s+amg$", re.IGNORECASE)
+# Volvo / Infiniti letter-prefix models are all-caps (Xc90 -> XC90, Qx56 ->
+# QX56, Fx35 -> FX35, G35x stays G35X per the inventory's dominant form).
+_LETTERS_NUM_UPPER_RE = re.compile(r"^([A-Za-z]{1,2})\s*-?\s*(\d{1,3})(x?)$",
+                                   re.IGNORECASE)
+# Chevy/GMC chain suffixes on the squashed key.
+_SILVERADO_KEY_RE = re.compile(r"^silverado(\d{4})(hd)?(?:pickup)?$")
+_EXPRESS_KEY_RE = re.compile(r"^express(\d{4})(?:van|cargovan)?$")
+
+
+def _squash_model_key(s: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def _strip_make_prefix(m: str, make_key: str) -> str:
+    """Drop leading word(s) that just repeat the row's own make. Loops so
+    'Mini Mini Cooper' -> 'Cooper'; never strips the whole string."""
+    prefixes = (make_key,) + _MODEL_STRIP_EXTRA.get(make_key, ())
+    while True:
+        words = m.split()
+        if len(words) < 2:
+            return m
+        stripped = False
+        for k in (2, 1):  # longest match first ('Land Rover Range Rover')
+            if len(words) > k and _squash_model_key(" ".join(words[:k])) in prefixes:
+                m = " ".join(words[k:])
+                stripped = True
+                break
+        if not stripped:
+            return m
 
 
 def normalize_model(model: str, make: str = "") -> str:
-    """Canonical display spelling for a feed-supplied model name."""
-    m = re.sub(r"\s+", " ", (model or "").strip().lstrip("&/ ").strip())
+    """Canonical display spelling for a feed-supplied model name. Idempotent.
+
+    Order: HTML-entity unescape ('TOWN &amp; COUNTRY'), whitespace/trailing-
+    punctuation cleanup ('Grand Caravan.'), own-make prefix strip ('BMW 328i'),
+    per-make canon table, global canon table, make-scoped pattern rules."""
+    m = html.unescape(model or "")
+    m = re.sub(r"\s+", " ", m.strip().lstrip("&/ ")).strip().rstrip(".,")
     if not m:
         return m
-    key = re.sub(r"[^a-z0-9]", "", m.lower())
+    make_key = _squash_model_key(make)
+    m = _strip_make_prefix(m, make_key)
+    key = _squash_model_key(m)
+    per_make = _MODEL_CANON_BY_MAKE.get(make_key)
+    if per_make and key in per_make:
+        return per_make[key]
     if key in _MODEL_CANON:
         return _MODEL_CANON[key]
     mk = (make or "").lower()
     if "ford" in mk:
+        r = _FORD_F_KEY_RE.match(key)    # F250Sd Pickup -> F-250 Super Duty
+        if r:
+            return f"F-{r.group(1)}" + (" Super Duty" if r.group(2) else "")
+        r = _FORD_E_KEY_RE.match(key)    # E-350 Econoline Club Wagon -> E-350
+        if r:
+            return f"E-{r.group(1)}" + (" Super Duty" if r.group(2) else "")
         r = _FE_SERIES_RE.match(m)       # F150 / E 350 -> F-150 / E-350
         if r:
             return f"{r.group(1).upper()}-{r.group(2)}"
     elif "bmw" in mk:
-        r = _BMW_SUFFIX_RE.match(m)      # 328I -> 328i
+        r = _BMW_MODEL_RE.match(m)       # 328I Xdrive -> 328i xDrive
         if r:
-            return f"{r.group(1)}{r.group(2).lower()}"
+            suf = r.group(2).lower()
+            out = f"{r.group(1)}{_BMW_SUFFIX_CASE.get(suf, suf)}"
+            if r.group(3):
+                out += " GT"
+            if r.group(4):
+                out += " xDrive"
+            return out
     elif "lexus" in mk:
-        r = _TWO_LETTER_NUM_RE.match(m)  # Es300 / Rx 350 -> ES 300
+        r = _TWO_LETTER_NUM_RE.match(m)  # Es300 / Rx450H -> ES 300 / RX 450h
         if r:
-            return f"{r.group(1).upper()} {r.group(2)}"
+            out = f"{r.group(1).upper()} {r.group(2)}"
+            if r.group(3):
+                # h/t stay lowercase (RX 450h, IS 200t); C is upper (IS 250C).
+                suf = r.group(3)
+                out += suf.upper() if suf.lower() == "c" else suf.lower()
+            return out
     elif "mercedes" in mk:
+        r = _MB_NUM_SUFFIX_RE.match(m)   # 300Sd / 560Sec -> 300SD / 560SEC
+        if r:
+            return f"{r.group(1)}{r.group(2).upper()}"
+        r = _MB_AMG_RE.match(m)          # Ml55 Amg -> ML55 AMG
+        if r:
+            return f"{r.group(1).upper()}{r.group(2)} AMG"
         r = _MB_ALNUM_RE.match(m)        # Ml350 / e320 -> ML350 / E320
         if r:
             return f"{r.group(1).upper()}{r.group(2)}"
+    elif "volvo" in mk or "infiniti" in mk:
+        r = _LETTERS_NUM_UPPER_RE.match(m)  # Xc90 / Qx56 -> XC90 / QX56
+        if r:
+            return f"{r.group(1).upper()}{r.group(2)}{r.group(3).upper()}"
+    elif "chevrolet" in mk:
+        r = _SILVERADO_KEY_RE.match(key)  # Silverado 1500 Pickup -> Silverado 1500
+        if r:
+            return f"Silverado {r.group(1)}" + ("HD" if r.group(2) else "")
+        r = _EXPRESS_KEY_RE.match(key)    # Express 2500 Van -> Express 2500
+        if r:
+            return f"Express {r.group(1)}"
     return m
 
 
