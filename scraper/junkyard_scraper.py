@@ -6711,7 +6711,9 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "Ford 3.5/3.7 Cyclone V6 (non-turbo)",
         "engine": {"liters": [3.5, 3.7], "cyl": 6},
         "apps": [
-            ("Ford", "Edge", 2007, 2014),
+            ("Ford", "Edge", 2007, 2015),
+            ("Mercury", "Sable", 2008, 2009, {"sole": True}),
+            ("Lincoln", "MKZ", 2007, 2012, {"sole": True}),
             ("Ford", "Taurus", 2008, 2019,
              {"ambig": "SHO is the 3.5 EcoBoost twin-turbo — same decode string; confirm non-turbo"}),
             ("Ford", "Explorer", 2011, 2019,
@@ -6854,6 +6856,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Pontiac", "G6", 2006, 2009),
             ("Chevrolet", "Captiva Sport", 2012, 2015),
             ("Saturn", "VUE", 2008, 2010),
+            ("Buick", "Verano", 2012, 2017),
         ],
         "parts": {
             "alternator": {"note": "Ecotec 2.4 unit — direct-injection (LEA/LUK) era plugs can differ; " + _ALT_NOTE},
@@ -7219,10 +7222,12 @@ ENGINE_FAMILIES: dict[str, dict] = {
         },
     },
     "hk-alpha": {
-        "display": "Hyundai Alpha 1.5/1.6 I4",
+        "display": "Hyundai/Kia Alpha 1.5/1.6 I4",
         "engine": {"liters": [1.5, 1.6], "cyl": 4},
         "apps": [
             ("Hyundai", "Accent", 1995, 2011, {"sole": True}),
+            ("Kia", "Rio", 2001, 2011, {"sole": True}),
+            ("Kia", "Rio5", 2006, 2011, {"sole": True}),
         ],
         "parts": {
             "alternator": {"note": "Mando and Valeo units overlap 2003-2009 — match the part number on the donor; 2012+ Accents are the Gamma 1.6 (separate family)"},
@@ -7237,6 +7242,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Hyundai", "Azera", 2006, 2011, {"sole": True}),
             ("Hyundai", "Veracruz", 2007, 2012, {"sole": True}),
             ("Hyundai", "Entourage", 2007, 2008, {"sole": True}),
+            ("Kia", "Sorento", 2007, 2009, {"sole": True}),
         ],
         "parts": {
             "alternator": {"note": "one Denso 130A unit spans the 2.7/3.3/3.8 in 07-08 — 2009+ builds split Denso vs non-Denso vendors, match the part number"},
@@ -7258,11 +7264,11 @@ ENGINE_FAMILIES: dict[str, dict] = {
         },
     },
     "hk-beta20": {
-        "display": "Hyundai/Kia Beta II 2.0 I4",
-        "engine": {"liters": [2.0], "cyl": 4},
+        "display": "Hyundai/Kia Beta 1.8/2.0 I4",
+        "engine": {"liters": [1.8, 2.0], "cyl": 4},
         "apps": [
-            ("Hyundai", "Elantra", 2001, 2010),
-            ("Hyundai", "Tiburon", 2003, 2008),
+            ("Hyundai", "Elantra", 1996, 2012),
+            ("Hyundai", "Tiburon", 1997, 2008),
             ("Hyundai", "Tucson", 2005, 2009),
             ("Kia", "Sportage", 2005, 2010),
         ],
@@ -7617,6 +7623,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "apps": [
             ("Mitsubishi", "Eclipse", 2000, 2005),
             ("Mitsubishi", "Galant", 1999, 2003),
+            ("Chrysler", "Sebring", 2001, 2005),
+            ("Dodge", "Stratus", 2001, 2005),
         ],
         "parts": {
             "alternator": {"note": "one published 85A unit spans the 3.0 Eclipse and Galant; " + _ALT_NOTE},
@@ -7804,6 +7812,358 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "parts": {
             "alternator": {"note": "one published 145A unit spans Corvette 05-12 incl. the Z06 7.0; the supercharged ZR1 (09-13) uses its own — ZR1 years stay out of the verified span; Camaro SS 12-13 is its own published unit"},
             "starter": {"note": "one published starter covers every 06-13 Corvette incl. ZR1"},
+        },
+    },
+    # ================= 2026-10 PHASE B — high-volume commuters =============
+    "nissan-ga16": {
+        "display": "Nissan GA16DE 1.6 I4",
+        "engine": {"liters": [1.6], "cyl": 4},
+        "apps": [
+            ("Nissan", "Sentra", 1995, 1999),
+            ("Nissan", "200SX", 1995, 1998),
+        ],
+        "parts": {
+            "alternator": {"note": "one published unit per era (95-96, 97-99); SE-R SR20 cars are a different engine"},
+            "starter": {"note": "every published starter row splits M/T vs A/T and California — all pairs stay Likely"},
+        },
+    },
+    "nissan-qg18": {
+        "display": "Nissan QG18DE 1.8 I4",
+        "engine": {"liters": [1.8], "cyl": 4},
+        "apps": [
+            ("Nissan", "Sentra", 2000, 2006),
+        ],
+        "parts": {
+            "alternator": {"note": "clean published spans 00-01 and 02-06"},
+            "starter": {"note": "clean published spans 00-01, 03-05 and 06"},
+        },
+    },
+    "nissan-vg30-maxima": {
+        "display": "Nissan VG30E/VE30DE 3.0 V6 (Maxima)",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Nissan", "Maxima", 1989, 1994),
+        ],
+        "parts": {
+            "alternator": {"note": "89-91 is one published unit; 92-94 splits SOHC (VG30E) vs DOHC (VE30DE) and stays Likely"},
+            "starter": {"note": "89-91 is one published unit; 92-94 DOHC A/T cars take a different starter"},
+        },
+    },
+    "nissan-vq30": {
+        "display": "Nissan VQ30DE 3.0 V6 (Maxima/I30)",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Nissan", "Maxima", 1995, 2001, {"sole": True}),
+            ("Infiniti", "I30", 1996, 2001, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "95-97 one unit (Maxima + I30); 98-01 splits by trim some years — see verified groups"},
+            "starter": {"note": "ONE published starter covers every 95-01 Maxima and 96-01 I30"},
+        },
+    },
+    "nissan-vg33": {
+        "display": "Nissan VG33E 3.3 V6 (Pathfinder/Xterra/Frontier)",
+        "engine": {"liters": [3.3], "cyl": 6},
+        "apps": [
+            ("Nissan", "Pathfinder", 1996, 2000, {"sole": True}),
+            ("Infiniti", "QX4*", 1997, 2000, {"sole": True}),
+            ("Nissan", "Xterra", 2000, 2004),
+            ("Nissan", "Frontier", 1999, 2004),
+        ],
+        "parts": {
+            "alternator": {"note": "Pathfinder 98-00 one unit (97 split by production date); Xterra/Frontier 03-04 one unit incl. the supercharged VG33ER"},
+            "starter": {"note": "one unit covers Pathfinder 96-00; another covers Xterra/Frontier 99-04"},
+        },
+    },
+    "honda-b20": {
+        "display": "Honda B20 2.0 I4 (CR-V)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Honda", "CR-V", 1997, 2001, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "97-98 one published unit; 99-01 splits M/T vs A/T and stays Likely"},
+            "starter": {"note": "97 unqualified; 98-01 splits M/T vs A/T"},
+        },
+    },
+    "gm-ecotec-lcv": {
+        "display": "GM Ecotec Gen3 2.0T/2.4/2.5 I4 (Malibu 8th gen)",
+        "engine": {"liters": [2.0, 2.4, 2.5], "cyl": 4},
+        "apps": [
+            ("Chevrolet", "Malibu", 2013, 2015, {"sole": True}),
+            ("Chevrolet", "Impala", 2014, 2015),
+        ],
+        "parts": {
+            "alternator": {"note": "2013 Malibu ships one published alternator across 2.0T, 2.4 eAssist and 2.5; 14-15 rows are beyond this catalog edition"},
+            "starter": {"note": "2013 2.0T/2.5 share one published starter"},
+        },
+    },
+    "gm-atlas-i45": {
+        "display": "GM Atlas I4/I5 2.8/2.9/3.5/3.7 (Colorado/Canyon)",
+        "engine": {"liters": [2.8, 2.9, 3.5, 3.7], "cyl": 5},
+        "apps": [
+            ("Chevrolet", "Colorado", 2004, 2008, {"sole": True}),
+            ("GMC", "Canyon", 2004, 2008, {"sole": True}),
+            ("Chevrolet", "Colorado", 2009, 2012),
+            ("GMC", "Canyon", 2009, 2012),
+            ("Hummer", "H3*", 2006, 2010),
+        ],
+        "parts": {
+            "alternator": {"note": "04-06 2.8/3.5 share one published unit; 07-09 2.9/3.7 share another — both across Colorado and Canyon"},
+            "starter": {"note": "08-12 2.9/3.7 share one published unit (Canyon 2.9 published from 09)"},
+        },
+    },
+    "hyundai-santafe1": {
+        "display": "Hyundai Santa Fe 2.4/2.7/3.5 (1st gen)",
+        "engine": {"liters": [2.4, 2.7, 3.5], "cyl": 6},
+        "apps": [
+            ("Hyundai", "Santa Fe", 2001, 2006, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "2.7 02-04 and 2.4 01-04 each have one clean unit, but the mixed-engine years keep cross-engine spans at Likely; 05 rows are dual-sourced"},
+            "starter": {"note": "one published starter covers ALL 05-06 engines; the same unit covers 2.7 back to 01 and 3.5 back to 03, but 2.4 03-04 splits M/T vs A/T, so earlier years stay Likely"},
+        },
+    },
+    "toyota-1nz": {
+        "display": "Toyota 1NZ-FE 1.5 I4 (Yaris/Echo/xA/xB)",
+        "engine": {"liters": [1.5], "cyl": 4},
+        "apps": [
+            ("Toyota", "Yaris", 2007, 2015, {"sole": True}),
+            ("Toyota", "Echo", 2000, 2005, {"sole": True}),
+            ("Scion", "xA", 2004, 2006, {"sole": True}),
+            ("Scion", "xB", 2004, 2006, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "Yaris 07-09 and 10-14 each one published unit; Echo/xA/xB rows are not in this catalog edition"},
+            "starter": {"note": "Yaris 12 and 13-15 published clean; 07-11 splits M/T vs A/T"},
+        },
+    },
+    "honda-l15": {
+        "display": "Honda L15 1.5 I4 (Fit)",
+        "engine": {"liters": [1.5], "cyl": 4},
+        "apps": [
+            ("Honda", "Fit", 2007, 2014, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "07-08 one published unit; 2015 splits CVT vs M/T"},
+            "starter": {"note": "07-08 and 10-13 each one published unit; 2009 was dual-sourced between the two — match your part number"},
+        },
+    },
+    "kia-spectra": {
+        "display": "Kia Spectra 1.8/2.0 I4",
+        "engine": {"liters": [1.8, 2.0], "cyl": 4},
+        "apps": [
+            ("Kia", "Spectra", 2000, 2009, {"sole": True}),
+            ("Kia", "Spectra5", 2005, 2009, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "1.8 00-01 and 2.0 08-09 publish clean; 05-07 splits Valeo vs Mando vendor"},
+            "starter": {"note": "every published row splits M/T vs A/T — all pairs stay Likely"},
+        },
+    },
+    "kia-forte1": {
+        "display": "Kia Forte 1.6T/2.0/2.4 I4",
+        "engine": {"liters": [1.6, 2.0, 2.4], "cyl": 4},
+        "apps": [
+            ("Kia", "Forte", 2010, 2015),
+            ("Kia", "Forte Koup", 2010, 2015, {"sole": True}),
+            ("Kia", "Forte5", 2010, 2015, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "Koup 10-13 publishes one clean unit for 2.0 and 2.4; sedan 2.0 splits hydraulic vs electric power steering"},
+            "starter": {"note": "Koup 14-15 publishes one clean unit (1.6T and 2.0); 10-11 rows split by build date"},
+        },
+    },
+    "mazda-cx7": {
+        "display": "Mazda CX-7 2.3T/2.5",
+        "engine": {"liters": [2.3, 2.5], "cyl": 4},
+        "apps": [
+            ("Mazda", "CX-7", 2007, 2012, {"sole": True}),
+            ("Mazda", "CX7", 2007, 2012, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers 2.3T 07-11 and 2.5 10-11"},
+            "starter": {"note": "07-09 one unit; 2011 (both engines) another; 2010/2012 rows absent from this edition"},
+        },
+    },
+    "mazda-cx9": {
+        "display": "Mazda CX-9 3.5/3.7 V6",
+        "engine": {"liters": [3.5, 3.7], "cyl": 6},
+        "apps": [
+            ("Mazda", "CX-9", 2007, 2015, {"sole": True}),
+            ("Mazda", "CX9", 2007, 2015, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers 3.5 (07) and 3.7 (08-11)"},
+            "starter": {"note": "07-09 one unit; 10-12 another"},
+        },
+    },
+    "mopar-pacifica": {
+        "display": "Chrysler Pacifica 3.5/3.8/4.0 V6",
+        "engine": {"liters": [3.5, 3.8, 4.0], "cyl": 6},
+        "apps": [
+            ("Chrysler", "Pacifica*", 2004, 2008, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "04 (3.5-only year) publishes clean; 07-08 units differ 3.8 vs 4.0 so those years stay Likely across engines"},
+            "starter": {"note": "2005 (3.5 and 3.8) shares one published unit; 06-08 splits by engine"},
+        },
+    },
+    "ford-mod-sd": {
+        "display": "Ford Modular 4.6/5.4 V8 (Super Duty/E-Series/Navigator)",
+        "engine": {"liters": [4.6, 5.4], "cyl": 8},
+        "apps": [
+            ("Ford", "F-250*", 1999, 2010),
+            ("Ford", "F250*", 1999, 2010),
+            ("Ford", "E-150*", 1997, 2014),
+            ("Ford", "E150*", 1997, 2014),
+            ("Ford", "E-250*", 1997, 2014),
+            ("Ford", "E-350*", 1997, 2014),
+            ("Ford", "E-Series", 1997, 2014),
+            ("Ford", "Econoline*", 1997, 2014),
+            ("Lincoln", "Navigator*", 1998, 2014, {"sole": True}),
+            ("Ford", "Navigator*", 1998, 2014, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "most van/SD rows split by case diameter and battery-post options — see the few clean verified spans; diesels are separate units entirely"},
+            "starter": {"note": "ONE published gas starter covers F-250 Super Duty 5.4/V10 99-08, another covers E-150 4.6/5.4 97-12, and Navigator 99-14 is one unit"},
+        },
+    },
+    "vw-b5-v6": {
+        "display": "VW/Audi B5 V6 2.8/3.0 (Passat/A4)",
+        "engine": {"liters": [2.8, 3.0], "cyl": 6},
+        "apps": [
+            ("Volkswagen", "Passat*", 1998, 2005),
+            ("Audi", "A4", 1996, 2006),
+            ("Audi", "A4 Quattro", 1996, 2006),
+            ("Audi", "A4 Avant", 1996, 2006),
+        ],
+        "parts": {
+            "alternator": {"note": "every published alternator row carries Bosch/Valeo vendor qualifiers — all pairs stay Likely"},
+            "starter": {"note": "ONE published starter covers Passat 2.8 00-05, A4 2.8 00-01 and A4 3.0 02-06"},
+        },
+    },
+    "vw-b5-18t": {
+        "display": "VW/Audi 1.8T I4 (Passat/A4 longitudinal)",
+        "engine": {"liters": [1.8], "cyl": 4},
+        "apps": [
+            ("Volkswagen", "Passat*", 1997, 2005),
+            ("Audi", "A4", 1997, 2006),
+            ("Audi", "A4 Quattro", 1997, 2006),
+            ("Audi", "A4 Avant", 1997, 2006),
+        ],
+        "parts": {
+            "alternator": {"note": "every published alternator row carries Bosch/Valeo vendor qualifiers — all pairs stay Likely"},
+            "starter": {"note": "one published unit covers Passat 1.8T 02-04 and A4 1.8T 04 (05 splits by chassis number)"},
+        },
+    },
+    "gm-aveo": {
+        "display": "Chevrolet Aveo 1.6 I4",
+        "engine": {"liters": [1.6], "cyl": 4},
+        "apps": [
+            ("Chevrolet", "Aveo", 2004, 2011, {"sole": True}),
+            ("Chevrolet", "Aveo5", 2006, 2011, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "no unqualified alternator rows in this catalog edition — pairs stay Likely"},
+            "starter": {"note": "04-08 one published unit; 10-11 another (2009 rows absent)"},
+        },
+    },
+    "kia-sedona1": {
+        "display": "Kia Sedona 3.5/3.8 V6",
+        "engine": {"liters": [3.5, 3.8], "cyl": 6},
+        "apps": [
+            ("Kia", "Sedona", 2002, 2012, {"sole": True}),
+            ("Kia", "Sedona", 2014, 2014, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "02-05, 06-07 and 11-12/14 each publish one clean unit; 08-09 splits by rear-DVD option"},
+            "starter": {"note": "02-05 and 06-07 each one unit; 08-12 one number spans both engines (a second number was dual-sourced 08-12 — match yours)"},
+        },
+    },
+    "kia-sorento1": {
+        "display": "Kia Sorento 3.5 V6 (1st gen)",
+        "engine": {"liters": [3.5], "cyl": 6},
+        "apps": [
+            ("Kia", "Sorento", 2003, 2006, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers all 03-06"},
+            "starter": {"note": "ONE published unit covers all 03-06"},
+        },
+    },
+    "ford-focus3": {
+        "display": "Ford Focus 2.0 I4 (Mk3)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Ford", "Focus", 2012, 2018),
+        ],
+        "parts": {
+            "alternator": {"note": "2012+ alternator rows are not published unqualified in this catalog edition — pairs stay Likely"},
+            "starter": {"note": "ONE published starter covers 12-14 across both 2.0 VIN codes (GDI and ST turbo)"},
+        },
+    },
+    "hk-delta27": {
+        "display": "Hyundai/Kia Delta 2.7 V6",
+        "engine": {"liters": [2.7], "cyl": 6},
+        "apps": [
+            ("Hyundai", "Tucson", 2005, 2009),
+            ("Hyundai", "Tiburon", 2003, 2008),
+            ("Kia", "Sportage", 2005, 2010),
+            ("Hyundai", "Sonata", 1999, 2005),
+            ("Kia", "Optima", 2001, 2006),
+            ("Hyundai", "Santa Fe", 2001, 2006),
+        ],
+        "parts": {
+            "alternator": {"note": "one published 120A unit covers the 05+ 2.7s across Tucson/Tiburon/Sportage/Sonata/Santa Fe"},
+            "starter": {"note": "ONE published starter covers the 2.7 across six models and up to a decade — see the verified group"},
+        },
+    },
+    "hk-sirius24": {
+        "display": "Hyundai/Kia Sirius 2.4 I4 (Sonata/Optima)",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Sonata", 1999, 2005),
+            ("Kia", "Optima", 2001, 2006),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers Sonata 2.4 99-05 and Optima 2.4 01-06"},
+            "starter": {"note": "every published row splits M/T vs A/T — pairs stay Likely"},
+        },
+    },
+    "hk-theta24": {
+        "display": "Hyundai/Kia Theta 2.4 I4 (Sonata/Optima NF)",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Sonata", 2006, 2010),
+            ("Kia", "Optima", 2006, 2010),
+        ],
+        "parts": {
+            "alternator": {"note": "one published unit covers Sonata 06-08 and Optima 06-10; Sonata 09-10 rows are option-qualified"},
+            "starter": {"note": "ONE published starter covers Sonata 06-08; Optima rows split by transmission — those pairs stay Likely"},
+        },
+    },
+    "hk-theta2gdi": {
+        "display": "Hyundai/Kia Theta-II 2.0T/2.4 GDI (Sonata/Optima)",
+        "engine": {"liters": [2.0, 2.4], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Sonata", 2011, 2014, {"sole": True}),
+            ("Kia", "Optima", 2011, 2015, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "one published unit covers Sonata 2014 (both engines) + 2.0T 11-13 and Optima 12-13; Sonata 2.4 11-13 rows aren't published — those pairs stay Likely"},
+            "starter": {"note": "starters were dual-sourced (Denso/Delco) across these years — pairs stay Likely, match your part number"},
+        },
+    },
+    "honda-j37": {
+        "display": "Acura J37 3.7 V6 (MDX 2nd gen)",
+        "engine": {"liters": [3.7], "cyl": 6},
+        "apps": [
+            ("Acura", "MDX", 2007, 2013, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "07-09 and 10-13 each one published unit (the 07-09 unit carries over from the 03-06 3.5)"},
+            "starter": {"note": "07-09 and 10-13 each one published unit"},
         },
     },
 }
@@ -8028,17 +8388,22 @@ _ALT_VERIFIED: dict = {
         "groups": [[("Dodge", "Dart*", 2013, 2015)]],
     },
     "hk-alpha": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 211-6012 (90A) Accent 1.5 1995-1999; 211-6005 (90A) Accent 1.5 2000-2003 and 1.6 2001-2002 (the 2003-2005 1.6 rows carry a Mando-unit qualifier — excluded); 211-6016 (90A) Accent 1.6 2010-2011. The 2006-2009 rows are Mando-qualified — left at likely.",
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 211-6012 (90A) Accent 1.5 1995-1999; 211-6005 (90A) Accent 1.5 2000-2003 and 1.6 2001-2002 (the 2003-2005 1.6 rows carry a Mando-unit qualifier — excluded); 211-6016 (90A) Accent 1.6 2010-2011 plus Rio and Rio5 1.6 2010-2011 in the same published set; 211-6006 (80A) Rio 1.5 2001-2002 and 1.6 2003-2005; 211-6002 (90A) Rio 1.6 2006-2009 and Rio5 2006-2007 (the Rio5 08-09 rows are Valeo-qualified). The Accent 2006-2009 rows are Mando-qualified — left at likely.",
         "groups": [
             [("Hyundai", "Accent", 1995, 1999)],
             [("Hyundai", "Accent", 2000, 2002)],
-            [("Hyundai", "Accent", 2010, 2011)],
+            [("Hyundai", "Accent", 2010, 2011),
+             ("Kia", "Rio", 2010, 2011),
+             ("Kia", "Rio5", 2010, 2011)],
+            [("Kia", "Rio", 2001, 2005)],
+            [("Kia", "Rio", 2006, 2009), ("Kia", "Rio5", 2006, 2007)],
         ],
     },
     "hk-mu-lambda": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0712 (130A) Santa Fe 2.7 2007-2009 and 3.3 2007-2008, Azera 3.3 2007-2009 and 3.8 2007-2008 (the 2009+ rows carry Denso-unit vendor qualifiers — group capped at 2008).",
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0712 (130A) Santa Fe 2.7 2007-2009 and 3.3 2007-2008, Azera 3.3 2007-2009 and 3.8 2007-2008 (the 2009+ rows carry Denso-unit vendor qualifiers — group capped at 2008), plus Sorento 3.8 2007-2009 and 3.3 2008-2009 in the same published set (2007 Sorentos are all 3.8, so the span is clean).",
         "groups": [[("Hyundai", "Santa Fe", 2007, 2008),
-                    ("Hyundai", "Azera", 2007, 2008)]],
+                    ("Hyundai", "Azera", 2007, 2008),
+                    ("Kia", "Sorento", 2007, 2009)]],
     },
     "mini-r50": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0844 (105A) Cooper W10 2002-2004 plus 2005 coupe and convertible rows; the supercharged S (W11, 210-0524) spans 2002-2006 — match trim. Group capped at 2002-2005 where both published lists cover every body style.",
@@ -8206,12 +8571,15 @@ _ALT_VERIFIED: dict = {
                     ("Kia", "Rio", 2012, 2013)]],
     },
     "hk-beta20": {
-        "evidence": "Lester 13973 (Hyundai/Kia 37300-23600, Mando AB190147) application lists (qpselectric.com + partshawk.com, retrieved 2026-10-22): Elantra 2.0 2001-2006, Tiburon 2.0 2003-2004 and 2007-2008 (w/ Mando unit), Tucson 2.0 2005, Sportage 2.0 2005-2006.",
+        "evidence": "Lester 13973 (Hyundai/Kia 37300-23600, Mando AB190147) application lists (qpselectric.com + partshawk.com, retrieved 2026-10-22): Elantra 2.0 2001-2006, Tiburon 2.0 2003-2004 and 2007-2008 (w/ Mando unit), Tucson 2.0 2005, Sportage 2.0 2005-2006. Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6008 (90A) Elantra 2.0 2007-2012 unqualified; 211-6012 (90A) Elantra 1.8/2.0 1996-2000 and Tiburon 1.8/2.0 1997-2001 unqualified.",
         "groups": [[("Hyundai", "Elantra", 2001, 2006),
                     ("Hyundai", "Tiburon", 2003, 2004),
                     ("Hyundai", "Tiburon", 2007, 2008),
                     ("Hyundai", "Tucson", 2005, 2005),
-                    ("Kia", "Sportage", 2005, 2006)]],
+                    ("Kia", "Sportage", 2005, 2006)],
+                   [("Hyundai", "Elantra", 2007, 2012)],
+                   [("Hyundai", "Elantra", 1996, 2000),
+                    ("Hyundai", "Tiburon", 1997, 2001)]],
     },
     "ford-3g-50": {
         "evidence": "Lester 7750 (Ford F07U-10300, 3G 95A side-mount) application list (maniacelectricmotors.com, retrieved 2026-10-22): F-150/F-250 5.0/5.8 1993-1996, Bronco 5.0/5.8 1993-1996, E-150 5.0/5.8 1993-1996; 1987-93 trucks (2G era) left at likely. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5123 and 210-5305 both list Mustang 5.0 1988-1993 with identical spans (two published case styles — match yours); 210-5310 Mustang 5.0 1994-1995 and 5.8 1995 (the same list also covers the 3.8 those years).",
@@ -8221,9 +8589,10 @@ _ALT_VERIFIED: dict = {
                    [("Ford", "Mustang", 1994, 1995)]],
     },
     "honda-j30": {
-        "evidence": "Lester 8220 (Delco CS130D, Honda 31100-P8A-A01/P8C-A02) application lists (alternatorparts.com + thewrenchmonkey.ca, retrieved 2026-10-22): Accord 3.0 1998-2002, Acura CL 3.0 1997-1999. The 03-07 Accord V6 uses a Denso unit — left at likely.",
+        "evidence": "Lester 8220 (Delco CS130D, Honda 31100-P8A-A01/P8C-A02) application lists (alternatorparts.com + thewrenchmonkey.ca, retrieved 2026-10-22): Accord 3.0 1998-2002, Acura CL 3.0 1997-1999. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0606 (110A) Accord 3.0 J30A4/J30A5 2004-2007 unqualified (2003 shipped 210-0511 shared with the 2.4).",
         "groups": [[("Honda", "Accord", 1998, 2002),
-                    ("Acura", "CL", 1997, 1999)]],
+                    ("Acura", "CL", 1997, 1999)],
+                   [("Honda", "Accord", 2004, 2007)]],
     },
     "honda-j35-mid": {
         "evidence": "TYC 2-11151 fitment (partshawk.com; Honda 31100-RJA-A02 OEM list on hondapartsnow.com, retrieved 2026-10-22): Odyssey 2005-2007, Pilot 2005-2008, Ridgeline 2006-2008 (+ MDX/TL/RL). Honda 31100-RGW-A01 (CSF92, hondapartsconnection.com): Odyssey 2008-2011 is the follow-on unit.",
@@ -8240,15 +8609,17 @@ _ALT_VERIFIED: dict = {
                     ("Honda", "Ridgeline", 2009, 2011)]],
     },
     "honda-j35-early": {
-        "evidence": "TYC 2-13918 fitment (partshawk.com + a-premium.com; Honda 31100-PGK-A01/A03, Denso 104210-3090, retrieved 2026-10-22): MDX 2001-2002, Odyssey 3.5 2002-2004, Pilot 2003-2004. The 99-01 Odyssey unit differs — left at likely.",
+        "evidence": "TYC 2-13918 fitment (partshawk.com + a-premium.com; Honda 31100-PGK-A01/A03, Denso 104210-3090, retrieved 2026-10-22): MDX 2001-2002, Odyssey 3.5 2002-2004, Pilot 2003-2004. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0580 (130A) MDX 3.5 J35A5 2003-2006 (the same published unit continues on the 3.7 MDX through 2009). The 99-01 Odyssey unit differs — left at likely.",
         "groups": [[("Acura", "MDX", 2001, 2002),
                     ("Honda", "Odyssey", 2002, 2004),
-                    ("Honda", "Pilot", 2003, 2004)]],
+                    ("Honda", "Pilot", 2003, 2004)],
+                   [("Acura", "MDX", 2003, 2006)]],
     },
     "honda-k24z": {
-        "evidence": "Lester 11390 (Honda 31100-R40-A01, Denso 104210-5890) application tables (dssautoparts.com + FVP/autofactsdb.com + DB Electrical 400-52394, retrieved 2026-10-22): Accord 2.4 2008-2012, TSX 2.4 2009-2014.",
+        "evidence": "Lester 11390 (Honda 31100-R40-A01, Denso 104210-5890) application tables (dssautoparts.com + FVP/autofactsdb.com + DB Electrical 400-52394, retrieved 2026-10-22): Accord 2.4 2008-2012, TSX 2.4 2009-2014. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0808 (105A) CR-V 2.4 K24Z7 2012-2014 unqualified.",
         "groups": [[("Honda", "Accord", 2008, 2012),
-                    ("Acura", "TSX", 2009, 2014)]],
+                    ("Acura", "TSX", 2009, 2014)],
+                   [("Honda", "CR-V", 2012, 2014)]],
     },
     "mopar-world24": {
         "evidence": "Lester 11231 (Chrysler 4801323AC, Mitsubishi A2TJ0481) application tables (qpselectric.com + thenthgear.com + TYC 2-11231, retrieved 2026-10-22): Sebring 2.4 2007-2010, 200 2.4 2011-2013, Avenger 2.4 2008-2013, Caliber 2007-2012, Compass 2007-2017, Patriot 2007-2017. Journey uses a different unit — left at likely.",
@@ -8341,9 +8712,10 @@ _ALT_VERIFIED: dict = {
                     ("Toyota", "Tundra", 2006, 2010)]],
     },
     "nissan-qr25": {
-        "evidence": "TYC 2-13939 application table (tycamericas.com, retrieved 2026-10-22) + DB Electrical 400-44053 (Lester 13939, Hitachi LR1110-726): Altima 2.5 2002-2006, Sentra 2.5 (SE-R/Spec V) 2002-2006.",
+        "evidence": "TYC 2-13939 application table (tycamericas.com, retrieved 2026-10-22) + DB Electrical 400-44053 (Lester 13939, Hitachi LR1110-726): Altima 2.5 2002-2006, Sentra 2.5 (SE-R/Spec V) 2002-2006. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3163 (110A) Frontier 2.5 QR25DE 2005-2011 unqualified.",
         "groups": [[("Nissan", "Altima", 2002, 2006),
-                    ("Nissan", "Sentra", 2002, 2006)]],
+                    ("Nissan", "Sentra", 2002, 2006)],
+                   [("Nissan", "Frontier", 2005, 2011)]],
     },
     "ford-46-2v": {
         "evidence": "OEG/PartsPlayer listing for Ford F75U-10300-CA/CB 130A 3G (amazon.com, retrieved 2026-10-22): F-150 4.6/5.4 1997-2003, Expedition 5.4 1997-2002. TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-08252 Mustang 4.6 SOHC 99-04 is its own 6G unit; 2-07776 Crown Victoria 95-99; 2-07795 Grand Marquis 98-02.",
@@ -8416,7 +8788,7 @@ _ALT_VERIFIED: dict = {
                     ("Kia", "Optima", 2011, 2013)]],
     },
     "nissan-vq35de": {
-        "evidence": "OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely; 210-4211 (110A) 350Z VQ35DE 2003-2006 and G35 2004-2006 (the 2003 G35 sedan row is body-qualified and excluded).",
+        "evidence": "OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely; 210-4211 (110A) 350Z VQ35DE 2003-2006 and G35 2004-2006 (the 2003 G35 sedan row is body-qualified and excluded); 210-4207 (110A) Pathfinder 3.5 2003-2004; 210-3150 (110A) Pathfinder 3.5 2002.",
         "groups": [
             [("Nissan", "Altima", 2002, 2006),
              ("Nissan", "Maxima", 2002, 2003),
@@ -8427,23 +8799,27 @@ _ALT_VERIFIED: dict = {
              ("Nissan", "Murano", 2009, 2009)],
             [("Nissan", "350Z", 2003, 2006),
              ("Infiniti", "G35", 2004, 2006)],
+            [("Nissan", "Pathfinder", 2003, 2004)],
+            [("Nissan", "Pathfinder", 2002, 2002)],
         ],
     },
     "honda-k24a": {
-        "evidence": "TYC 2-13980 application table (tycamericas.com, retrieved 2026-10-22; Honda 31100-RAA-A05, Lester 13980): Accord 2.4 2003-2007, Element 2003-2011, TSX 2004-2008, CR-V 2007-2011. CR-V 2002-2006 is NOT in this unit's list — left at likely.",
+        "evidence": "TYC 2-13980 application table (tycamericas.com, retrieved 2026-10-22; Honda 31100-RAA-A05, Lester 13980): Accord 2.4 2003-2007, Element 2003-2011, TSX 2004-2008, CR-V 2007-2011. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4168 (90A) CR-V 2.4 K24A1 2002-2006 — its own published unit, unqualified.",
         "groups": [[("Honda", "Accord", 2003, 2007),
                     ("Honda", "Element", 2003, 2011),
                     ("Acura", "TSX", 2004, 2008),
-                    ("Honda", "CR-V", 2007, 2011)]],
+                    ("Honda", "CR-V", 2007, 2011)],
+                   [("Honda", "CR-V", 2002, 2006)]],
     },
     "gm-14t": {
-        "evidence": "Rareelectrical FG12S031/Lester 11399 listing (GM 13577154/13597226, retrieved 2026-10-22): Cruze 1.4T 2011 ONLY, Encore 2013-2021, Trax 2015-2021. 2012-2016 Cruze 1.4 uses a different unit — left at likely.",
+        "evidence": "Rareelectrical FG12S031/Lester 11399 listing (GM 13577154/13597226, retrieved 2026-10-22): Cruze 1.4T 2011 ONLY, Encore 2013-2021, Trax 2015-2021. Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6019 (130A) Cruze 1.4 2012-2013 unqualified.",
         "groups": [[("Chevrolet", "Cruze", 2011, 2011),
                     ("Buick", "Encore", 2013, 2021),
-                    ("Chevrolet", "Trax", 2015, 2021)]],
+                    ("Chevrolet", "Trax", 2015, 2021)],
+                   [("Chevrolet", "Cruze", 2012, 2013)]],
     },
     "ford-mzr": {
-        "evidence": "Lester 11172 application table (cautop.com; Mitsubishi A3TJ0891, Ford 6E5Z-10346-AA, retrieved 2026-10-22): Fusion 2.3 2006-2009, Milan 2.3 2006-2009. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4214 (90A) Mazda3 2.0 2004-2009, Mazda3 2.3 2004-2006 and non-turbo 2007-2009, Mazda5 2.3 2006-2007; 210-4303 (100A) Mazda3 2.0 2010-2011; 210-4327 (110A) Mazda5 2.3 2008-2010; 210-4238 (100A) Mazda6 2.3 2008 and 2.5 2009; 210-0615 (170A) Fusion 2.5 AND 2.0 Turbo 2013-2014 (one unit spans both engines). Mazda6 2.3 03-05 splits by transmission and Mazdaspeed turbos differ — left at likely.",
+        "evidence": "Lester 11172 application table (cautop.com; Mitsubishi A3TJ0891, Ford 6E5Z-10346-AA, retrieved 2026-10-22): Fusion 2.3 2006-2009, Milan 2.3 2006-2009. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4214 (90A) Mazda3 2.0 2004-2009, Mazda3 2.3 2004-2006 and non-turbo 2007-2009, Mazda5 2.3 2006-2007; 210-4303 (100A) Mazda3 2.0 2010-2011; 210-4327 (110A) Mazda5 2.3 2008-2010; 210-4238 (100A) Mazda6 2.3 2008 and 2.5 2009; 210-0615 (170A) Fusion 2.5 AND 2.0 Turbo 2013-2014 (one unit spans both engines); 210-4304 (150A) Focus 2.0 2009-2010 unqualified (2008 splits by trim vendor, 2011 is Mitsubishi-unit-qualified). Mazda6 2.3 03-05 splits by transmission and Mazdaspeed turbos differ — left at likely.",
         "groups": [[("Ford", "Fusion", 2006, 2009),
                     ("Mercury", "Milan", 2006, 2009)],
                    [("Mazda", "3", 2004, 2009),
@@ -8451,10 +8827,11 @@ _ALT_VERIFIED: dict = {
                    [("Mazda", "3", 2010, 2011)],
                    [("Mazda", "5", 2008, 2010)],
                    [("Mazda", "6", 2008, 2009)],
-                   [("Ford", "Fusion", 2013, 2014)]],
+                   [("Ford", "Fusion", 2013, 2014)],
+                   [("Ford", "Focus", 2009, 2010)]],
     },
     "ford-cyclone": {
-        "evidence": "DSS/TRQ Lester 11273 application table (Ford 7T4Z-10346-A, Mitsubishi A3TJ1291, retrieved 2026-10-22): Edge 2007-2014, Taurus 3.5 2008-2012. Quality-Built 11271 175A (Ford 8A4Z-10346-A, partshawk.com): Taurus 2008-2012, Flex 2009-2012, Edge 2011-2013, Explorer 2011-2012. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0533 (150A) Mustang 3.7 and 5.0 2012-2013 unqualified (11/14 rows split by transmission — excluded).",
+        "evidence": "DSS/TRQ Lester 11273 application table (Ford 7T4Z-10346-A, Mitsubishi A3TJ1291, retrieved 2026-10-22): Edge 2007-2014, Taurus 3.5 2008-2012. Quality-Built 11271 175A (Ford 8A4Z-10346-A, partshawk.com): Taurus 2008-2012, Flex 2009-2012, Edge 2011-2013, Explorer 2011-2012. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0533 (150A) Mustang 3.7 and 5.0 2012-2013 unqualified (11/14 rows split by transmission — excluded); 210-4316 (150A) Edge 3.5 2010-2015, Taurus 3.5 2008-2009 and 2012 (10-11 rows are option-qualified), Sable 3.5 2008-2009, MKZ 3.5 2011-2012.",
         "groups": [
             [("Ford", "Edge", 2007, 2014),
              ("Ford", "Taurus", 2008, 2012)],
@@ -8463,6 +8840,11 @@ _ALT_VERIFIED: dict = {
              ("Ford", "Edge", 2011, 2013),
              ("Ford", "Explorer", 2011, 2012)],
             [("Ford", "Mustang", 2012, 2013)],
+            [("Ford", "Edge", 2010, 2015),
+             ("Ford", "Taurus", 2008, 2009),
+             ("Ford", "Taurus", 2012, 2012),
+             ("Mercury", "Sable", 2008, 2009),
+             ("Lincoln", "MKZ", 2011, 2012)],
         ],
     },
     "gm-atlas42": {
@@ -8644,9 +9026,10 @@ _ALT_VERIFIED: dict = {
         ],
     },
     "mitsu-6g72": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4179 (85A) in one published set — Eclipse 3.0 2002-2005 and 2000, Galant 3.0 2002-2003 and 1999-2000, all unqualified (2001 rows aren't printed for either model, so 2001 cars sit between spans).",
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4179 (85A) in one published set — Eclipse 3.0 2002-2005 and 2000, Galant 3.0 2002-2003 and 1999-2000, plus Sebring 3.0 coupe 2001-2005, all unqualified (2001 rows aren't printed for Eclipse/Galant, so their 2001 cars sit between spans).",
         "groups": [
             [("Mitsubishi", "Eclipse", 2002, 2005),
+             ("Chrysler", "Sebring", 2001, 2005),
              ("Mitsubishi", "Eclipse", 2000, 2000),
              ("Mitsubishi", "Galant", 2002, 2003),
              ("Mitsubishi", "Galant", 1999, 2000)],
@@ -8723,6 +9106,145 @@ _ALT_VERIFIED: dict = {
         "groups": [
             [("Chevrolet", "Corvette", 2005, 2008)],
             [("Chevrolet", "Camaro", 2012, 2013)],
+        ],
+    },
+    # ================= 2026-10 PHASE B — high-volume commuters =============
+    "nissan-ga16": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3127 (80A) Sentra 1.6 GA16DE 1997-1999 unqualified; 210-3117 (70A) Sentra 1.6 1995-1996 unqualified. 200SX rows are not published separately in this edition.",
+        "groups": [
+            [("Nissan", "Sentra", 1997, 1999)],
+            [("Nissan", "Sentra", 1995, 1996)],
+        ],
+    },
+    "nissan-qg18": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3158 (80A) Sentra 1.8 QG18DE 2002-2006 unqualified; 210-3147 (100A) Sentra 1.8 2000-2001 unqualified.",
+        "groups": [
+            [("Nissan", "Sentra", 2002, 2006)],
+            [("Nissan", "Sentra", 2000, 2001)],
+        ],
+    },
+    "nissan-vg30-maxima": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3131 (90A) Maxima 3.0 VG30E 1989-1991 unqualified (the 92-94 rows are SOHC-vs-DOHC split between 210-3131 and 210-3135 and stay Likely).",
+        "groups": [[("Nissan", "Maxima", 1989, 1991)]],
+    },
+    "nissan-vq30": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3106 (125A) in one published set — Maxima 3.0 VQ30DE 1995-1997 and I30 1996-1997; 210-3105 (110A) Maxima 1999 and 2001 (1998 splits SE vs Exc. SE) and I30 1998-2001; 210-3137 (100A) Maxima 2000.",
+        "groups": [
+            [("Nissan", "Maxima", 1995, 1997), ("Infiniti", "I30", 1996, 1997)],
+            [("Nissan", "Maxima", 1999, 1999), ("Nissan", "Maxima", 2001, 2001),
+             ("Infiniti", "I30", 1998, 2001)],
+            [("Nissan", "Maxima", 2000, 2000)],
+        ],
+    },
+    "nissan-vg33": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3134 (90A) Pathfinder 3.3 VG33E 1998-2000 (1997 splits 1st/2nd production); 210-3128 (80A) Xterra 3.3 2000 and Frontier 3.3 1999-2000; 210-3149 (100A) Xterra and Frontier 3.3 2003-2004 incl. the supercharged VG33ER.",
+        "groups": [
+            [("Nissan", "Pathfinder", 1998, 2000)],
+            [("Nissan", "Xterra", 2000, 2000), ("Nissan", "Frontier", 1999, 2000)],
+            [("Nissan", "Xterra", 2003, 2004), ("Nissan", "Frontier", 2003, 2004)],
+        ],
+    },
+    "honda-b20": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0196 (95A) CR-V 2.0 B20B4 1997-1998 unqualified. The 99-01 B20Z2 rows split M/T vs A/T and stay Likely.",
+        "groups": [[("Honda", "CR-V", 1997, 1998)]],
+    },
+    "gm-ecotec-lcv": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0255 (110A) Malibu 2013 — one published unit across the 2.0 turbo, 2.4 and 2.5. 2014-15 alternator rows are beyond this catalog edition.",
+        "groups": [[("Chevrolet", "Malibu", 2013, 2013)]],
+    },
+    "toyota-1nz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0799 (80A) Yaris 1.5 1NZ-FE 2010-2014 unqualified; 210-0619 (80A) Yaris 1.5 2007-2009 unqualified.",
+        "groups": [
+            [("Toyota", "Yaris", 2010, 2014)],
+            [("Toyota", "Yaris", 2007, 2009)],
+        ],
+    },
+    "honda-l15": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4299 (75A) Fit 1.5 L15A1 2007-2008 unqualified (2015 rows split CVT vs M/T).",
+        "groups": [[("Honda", "Fit", 2007, 2008)]],
+    },
+    "kia-spectra": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6002 (90A) Spectra 2.0 2008-2009 unqualified (05-07 rows split Valeo vs Mando vendor; the 2004 2.0 row is excluded because early-2004 1.8 cars used the vendor-split unit); 211-6011 (90A) Spectra 1.8 2000-2001 unqualified.",
+        "groups": [
+            [("Kia", "Spectra", 2008, 2009)],
+            [("Kia", "Spectra", 2000, 2001)],
+        ],
+    },
+    "kia-forte1": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6014 (100A) Forte Koup 2.0 and 2.4 2010-2013, one published unit, unqualified (sedan 2.0 splits hydraulic vs electric power steering those years and stays Likely).",
+        "groups": [[("Kia", "Forte Koup", 2010, 2013)]],
+    },
+    "mazda-cx7": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4312 (110A) — one published unit for CX-7 2.3 turbo 2007-2011 and 2.5 2010-2011.",
+        "groups": [
+            [("Mazda", "CX-7", 2007, 2011), ("Mazda", "CX7", 2007, 2011)],
+        ],
+    },
+    "mazda-cx9": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4321 (110A) — one published unit for CX-9 3.5 2007 and 3.7 2008-2011.",
+        "groups": [
+            [("Mazda", "CX-9", 2007, 2011), ("Mazda", "CX9", 2007, 2011)],
+        ],
+    },
+    "mopar-pacifica": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0671 (120A) Pacifica 3.5 2004-2006 — kept to 2004 only (the sole-3.5 model year); 05-06 also fielded the 3.8 whose alternator is not published for those years, and 07-08 units differ 3.8 (210-4340) vs 4.0 (210-0632), so cross-engine years stay Likely.",
+        "groups": [[("Chrysler", "Pacifica*", 2004, 2004)]],
+    },
+    "ford-mod-sd": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5350 (110A) F-250 Super Duty 5.4 and V10 6.8 2002-2003, unqualified; 210-5205 (115A) Navigator 5.4 2000-2002; 210-0760 (150A) Navigator 5.4 2005-2009. E-Series rows split by case diameter/battery-post options and stay Likely.",
+        "groups": [
+            [("Ford", "F-250*", 2002, 2003), ("Ford", "F250*", 2002, 2003)],
+            [("Lincoln", "Navigator*", 2000, 2002),
+             ("Ford", "Navigator*", 2000, 2002)],
+            [("Lincoln", "Navigator*", 2005, 2009),
+             ("Ford", "Navigator*", 2005, 2009)],
+        ],
+    },
+    "kia-sedona1": {
+        "evidence": "Denso First Time Fit + reman catalog (densoautoparts.com, retrieved 2026-10-22): 211-6013 (120A) Sedona 3.5 2002-2005 unqualified; 210-0711 (130A) Sedona 3.8 2006-2007 unqualified (08-09 split by rear-DVD option); 210-5000 (150A) Sedona 3.5 2011-2012 and 2014 (2015 is AMS-qualified).",
+        "groups": [
+            [("Kia", "Sedona", 2002, 2005)],
+            [("Kia", "Sedona", 2006, 2007)],
+            [("Kia", "Sedona", 2011, 2012), ("Kia", "Sedona", 2014, 2014)],
+        ],
+    },
+    "kia-sorento1": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6003 (120A) Sorento 3.5 2003-2006 — one published unit, unqualified.",
+        "groups": [[("Kia", "Sorento", 2003, 2006)]],
+    },
+    "hk-delta27": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6010 (120A) in one published set — Tucson 2.7 2005-2009, Tiburon 2.7 2005-2008, Sportage 2.7 2005-2010, Sonata 2.7 2005 and Santa Fe 2.7 2005-2006, all unqualified (Sonata/Tiburon 03-04 rows carry pulley/build-date qualifiers).",
+        "groups": [
+            [("Hyundai", "Tucson", 2005, 2009),
+             ("Hyundai", "Tiburon", 2005, 2008),
+             ("Kia", "Sportage", 2005, 2010),
+             ("Hyundai", "Sonata", 2005, 2005),
+             ("Hyundai", "Santa Fe", 2005, 2006)],
+        ],
+    },
+    "hk-sirius24": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6007 (110A) — one published unit for Sonata 2.4 1999-2005 and Optima 2.4 2001-2006, unqualified.",
+        "groups": [
+            [("Hyundai", "Sonata", 1999, 2005), ("Kia", "Optima", 2001, 2006)],
+        ],
+    },
+    "hk-theta24": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6014 (110A) Sonata 2.4 2006-2008 and Optima 2.4 2006-2010 — one published unit, unqualified (Sonata 09-10 rows are option-qualified — excluded).",
+        "groups": [
+            [("Hyundai", "Sonata", 2006, 2008), ("Kia", "Optima", 2006, 2010)],
+        ],
+    },
+    "hk-theta2gdi": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6030 (110A) Sonata 2.4 2014 and 2.0T 2011-2013 (SE and Limited rows cover the turbo lineup) and Optima 2.4 2012-2013 and 2.0T 2011-2013 — spans capped to the years where BOTH engines publish the one number (Sonata 2.4 11-13 rows are absent from this catalog edition).",
+        "groups": [
+            [("Hyundai", "Sonata", 2014, 2014), ("Kia", "Optima", 2012, 2013)],
+        ],
+    },
+    "honda-j37": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0580 (130A) MDX 3.7 J37A1 2007-2009 (continues from the 03-06 3.5); 210-0750 (130A) MDX 3.7 2010-2013, both unqualified.",
+        "groups": [
+            [("Acura", "MDX", 2007, 2009)],
+            [("Acura", "MDX", 2010, 2013)],
         ],
     },
 }
@@ -8802,12 +9324,18 @@ _STR_VERIFIED: dict = {
         ],
     },
     "nissan-ka24": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4109 240SX 2.4 1991-1996 unqualified (the 89-90 rows are vendor-split and excluded).",
-        "groups": [[("Nissan", "240SX", 1991, 1996)]],
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4109 240SX 2.4 1991-1996 unqualified (the 89-90 rows are vendor-split and excluded); 280-4175 Xterra and Frontier KA24DE 2002-2004 unqualified; 280-4100 Xterra and Frontier KA24DE 2000-2001 unqualified (98-99 Frontier splits 2WD vs 4WD).",
+        "groups": [[("Nissan", "240SX", 1991, 1996)],
+                   [("Nissan", "Xterra", 2002, 2004),
+                    ("Nissan", "Frontier", 2002, 2004)],
+                   [("Nissan", "Xterra", 2000, 2001),
+                    ("Nissan", "Frontier", 2000, 2001)]],
     },
     "nissan-vq35de": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-3133 350Z VQ35DE 2003-2006 unqualified (the 2007 HR rows are build-date-qualified; G35 rows are drivetrain-qualified and excluded).",
-        "groups": [[("Nissan", "350Z", 2003, 2006)]],
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-3133 350Z VQ35DE 2003-2006 unqualified (the 2007 HR rows are build-date-qualified; G35 rows are drivetrain-qualified and excluded); 280-4222 Pathfinder 3.5 2001-2004 unqualified; 280-4237 Maxima 3.5 2007-2008 unqualified (02-06 Maxima splits M/T vs A/T).",
+        "groups": [[("Nissan", "350Z", 2003, 2006)],
+                   [("Nissan", "Pathfinder", 2001, 2004)],
+                   [("Nissan", "Maxima", 2007, 2008)]],
     },
     "bmw-m52": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5355 M3 3.2 1996-1999 and every Z3 1996-2002 (1.9/2.5/2.8/3.0/3.2 rows all carry the one number), unqualified; 280-5346 M3 3.0 1995.",
@@ -8821,9 +9349,10 @@ _STR_VERIFIED: dict = {
         "groups": [[("BMW", "X5", 2001, 2006)]],
     },
     "vw-20t": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 GTI 2.0 2006-2009 unqualified; 281-6001 (First Time Fit) GTI 2.0 2010-2011 unqualified. Jetta rows split by fuel, body and transmission and are excluded.",
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 GTI 2.0 2006-2009 and Jetta 2.0 2006-2008 in one published set, unqualified; 281-6001 (First Time Fit) GTI 2.0 2010-2011 unqualified. Later Jetta rows split by fuel, body and transmission and are excluded.",
         "groups": [
-            [("Volkswagen", "GTI", 2006, 2009)],
+            [("Volkswagen", "GTI", 2006, 2009),
+             ("Volkswagen", "Jetta", 2006, 2008)],
             [("Volkswagen", "GTI", 2010, 2011)],
         ],
     },
@@ -8862,6 +9391,255 @@ _STR_VERIFIED: dict = {
         "groups": [
             [("Chevrolet", "Camaro", 1995, 1997),
              ("Pontiac", "Firebird", 1995, 1997)],
+        ],
+    },
+    # ================= 2026-10 PHASE B — high-volume commuters =============
+    "nissan-qg18": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5373 Sentra 1.8 2003-2005 unqualified (three CID spellings, one number); 280-3138 Sentra 1.8 QG18DE 2006; 280-3137 Sentra 1.8 2000-2001.",
+        "groups": [
+            [("Nissan", "Sentra", 2003, 2005)],
+            [("Nissan", "Sentra", 2006, 2006)],
+            [("Nissan", "Sentra", 2000, 2001)],
+        ],
+    },
+    "nissan-vg30-maxima": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-3106 Maxima 3.0 1989-1991 unqualified (92-94 rows split SOHC/DOHC and M/T vs A/T).",
+        "groups": [[("Nissan", "Maxima", 1989, 1991)]],
+    },
+    "nissan-vq30": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-3126 — ONE published starter for Maxima 3.0 1995-2001 and I30 1996-2001, unqualified.",
+        "groups": [
+            [("Nissan", "Maxima", 1995, 2001), ("Infiniti", "I30", 1996, 2001)],
+        ],
+    },
+    "nissan-vg33": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4135 Pathfinder 3.3 1996-2000 unqualified; 280-4136 Xterra 3.3 2000-2004 and Frontier 3.3 1999-2004 (incl. VG33ER), unqualified.",
+        "groups": [
+            [("Nissan", "Pathfinder", 1996, 2000)],
+            [("Nissan", "Xterra", 2000, 2004), ("Nissan", "Frontier", 1999, 2004)],
+        ],
+    },
+    "nissan-vq40": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4302 — one published starter for Pathfinder 4.0 2005-2011, Xterra 4.0 2005-2011 and 2015, Frontier 4.0 2005-2011 and 2015 (12-14 rows are not in this edition).",
+        "groups": [
+            [("Nissan", "Pathfinder", 2005, 2011),
+             ("Nissan", "Xterra", 2005, 2011),
+             ("Nissan", "Frontier", 2005, 2011)],
+        ],
+    },
+    "nissan-qr25": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4282 Frontier 2.5 QR25DE 2005-2011 unqualified (Altima/Sentra QR25 starters split M/T vs A/T and stay Likely).",
+        "groups": [[("Nissan", "Frontier", 2005, 2011)]],
+    },
+    "honda-b20": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0185 CR-V 2.0 1997 unqualified (98-01 rows split M/T vs A/T).",
+        "groups": [[("Honda", "CR-V", 1997, 1997)]],
+    },
+    "honda-k24a": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-6005 CR-V 2.4 K24A1 2002-2006 unqualified; 280-6007 CR-V 2.4 2007-2009 and Accord 2.4 K24A8 2006-2007, one published set, unqualified.",
+        "groups": [
+            [("Honda", "CR-V", 2002, 2006)],
+            [("Honda", "CR-V", 2007, 2009), ("Honda", "Accord", 2006, 2007)],
+        ],
+    },
+    "honda-k24z": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-6010 CR-V 2.4 K24Z6 2010-2011 unqualified (Accord 08-12 rows split by region/transmission).",
+        "groups": [[("Honda", "CR-V", 2010, 2011)]],
+    },
+    "honda-j30": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-6000 Accord 3.0 J30A1 1998-2002 unqualified (03-07 rows split by transmission/trim; the hybrid uses 280-4333).",
+        "groups": [[("Honda", "Accord", 1998, 2002)]],
+    },
+    "honda-l15": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0412 Fit 1.5 2010-2013 unqualified; 280-0368 Fit 1.5 2007-2008 unqualified. 2009 was dual-sourced between the two — groups capped either side; match your part number in 2009.",
+        "groups": [
+            [("Honda", "Fit", 2010, 2013)],
+            [("Honda", "Fit", 2007, 2008)],
+        ],
+    },
+    "gm-ecotec-lcv": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0434 Malibu 2013 2.0 turbo and 2.5, one published unit, unqualified.",
+        "groups": [[("Chevrolet", "Malibu", 2013, 2013)]],
+    },
+    "gm-atlas-i45": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5394 Colorado 2.9 and 3.7 2008-2012; Canyon 3.7 2008-2012 and 2.9 2009-2012 (the Canyon span starts at 2009 because the 2008 2.9 row is not published).",
+        "groups": [
+            [("Chevrolet", "Colorado", 2008, 2012), ("GMC", "Canyon", 2009, 2012)],
+        ],
+    },
+    "hyundai-santafe1": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 281-6004 Santa Fe — 2.7 2001-2006, 3.5 2003-2006 and 2.4 2005-2006 in one published set. The verified span is capped to 2005-2006, the years where ALL family engines carry this number (2.4 02-04 splits M/T vs A/T).",
+        "groups": [[("Hyundai", "Santa Fe", 2005, 2006)]],
+    },
+    "toyota-1nz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0401 Yaris 1.5 2013-2015 unqualified; 280-0395 Yaris 1.5 2012 unqualified (07-11 rows split M/T vs A/T).",
+        "groups": [
+            [("Toyota", "Yaris", 2013, 2015)],
+            [("Toyota", "Yaris", 2012, 2012)],
+        ],
+    },
+    "kia-forte1": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 281-6017 Forte Koup 2.0 2014-2015 and 1.6 2014, one published unit, unqualified (sedan 14-15 rows carry start/stop-feature qualifiers; 10-11 rows split by build date).",
+        "groups": [[("Kia", "Forte Koup", 2014, 2015)]],
+    },
+    "mazda-cx7": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4230 CX-7 2.3 turbo 2007-2009 unqualified; 280-4323 CX-7 2011 (2.3 and 2.5), unqualified.",
+        "groups": [
+            [("Mazda", "CX-7", 2007, 2009), ("Mazda", "CX7", 2007, 2009)],
+            [("Mazda", "CX-7", 2011, 2011), ("Mazda", "CX7", 2011, 2011)],
+        ],
+    },
+    "mazda-cx9": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4326 CX-9 3.5 2007 and 3.7 2008-2009; 280-4329 CX-9 3.7 2010-2012, both unqualified.",
+        "groups": [
+            [("Mazda", "CX-9", 2007, 2009), ("Mazda", "CX9", 2007, 2009)],
+            [("Mazda", "CX-9", 2010, 2012), ("Mazda", "CX9", 2010, 2012)],
+        ],
+    },
+    "mopar-pacifica": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0349 Pacifica 3.5 2005-2006 and 3.8 2005 — the verified span is 2005 only, the year both engines carry the one number (2006 3.8 moved to 280-0360; 2004 splits by build date).",
+        "groups": [[("Chrysler", "Pacifica*", 2005, 2005)]],
+    },
+    "ford-mod-sd": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5315 — one published gas starter for F-250 Super Duty 5.4 and V10 6.8 1999-2008 AND Navigator 5.4 1999-2014 (2009 splits by build date on the SD); 280-5312 — one published starter for E-150 4.6 and 5.4 1997-2012 and Econoline Super Duty 5.4/V10 1997-1999.",
+        "groups": [
+            [("Ford", "F-250*", 1999, 2008), ("Ford", "F250*", 1999, 2008),
+             ("Lincoln", "Navigator*", 1999, 2014),
+             ("Ford", "Navigator*", 1999, 2014)],
+            [("Ford", "E-150*", 1997, 2012), ("Ford", "E150*", 1997, 2012),
+             ("Ford", "Econoline*", 1997, 1999)],
+        ],
+    },
+    "vw-b5-v6": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5364 — one published starter for Passat 2.8 2000-2005, A4 2.8 2000-2001, A4 3.0 2002-2005, A4 Quattro 2.8 2000-2001 and 3.0 2003-2006 (A4 Quattro 2002 is not published — spans split around it).",
+        "groups": [
+            [("Volkswagen", "Passat*", 2000, 2005),
+             ("Audi", "A4", 2000, 2005),
+             ("Audi", "A4 Quattro", 2000, 2001),
+             ("Audi", "A4 Quattro", 2003, 2006)],
+        ],
+    },
+    "vw-b5-18t": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-6111 Passat 1.8 AWM 2002-2004, A4 1.8 2004 and A4 Quattro 1.8 2004 (2005 rows split by chassis number).",
+        "groups": [
+            [("Volkswagen", "Passat*", 2002, 2004),
+             ("Audi", "A4", 2004, 2004),
+             ("Audi", "A4 Quattro", 2004, 2004)],
+        ],
+    },
+    "gm-aveo": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5397 Aveo 1.6 2004-2008 and Aveo5 2007-2008; 280-5377 Aveo and Aveo5 1.6 2010-2011 (2009 rows absent from this edition).",
+        "groups": [
+            [("Chevrolet", "Aveo", 2004, 2008), ("Chevrolet", "Aveo5", 2007, 2008)],
+            [("Chevrolet", "Aveo", 2010, 2011), ("Chevrolet", "Aveo5", 2010, 2011)],
+        ],
+    },
+    "kia-sedona1": {
+        "evidence": "Denso reman + First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 281-6004 Sedona 3.5 2002-2005 unqualified; 280-5379 Sedona 3.8 2006-2007; 280-5375 Sedona 3.8 2008-2010 and 3.5 2011-2012, one number (a second number, 281-6009, was dual-sourced over 08-12 — match yours).",
+        "groups": [
+            [("Kia", "Sedona", 2002, 2005)],
+            [("Kia", "Sedona", 2006, 2007)],
+            [("Kia", "Sedona", 2008, 2012)],
+        ],
+    },
+    "kia-sorento1": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 281-6002 Sorento 3.5 2003-2006 — one published unit, unqualified.",
+        "groups": [[("Kia", "Sorento", 2003, 2006)]],
+    },
+    "hk-mu-lambda": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5001 Sorento 3.8 2007-2009 and 3.3 2008-2009, unqualified (280-5376 was dual-sourced on 08-09 — match yours).",
+        "groups": [[("Kia", "Sorento", 2007, 2009)]],
+    },
+    "ford-focus3": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4241 Focus 2.0 2012-2014 — the 13-14 rows list both 2.0 VIN engine codes (GDI and EcoBoost ST) on the one number, unqualified.",
+        "groups": [[("Ford", "Focus", 2012, 2014)]],
+    },
+    "mopar-world24": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4273 in one published set — Caliber 2.0/2.4 2007-2011, Compass 2.0/2.4 2008-2011 and 2015, Patriot 2.0/2.4 2008-2011 and 2015, Sebring 2.4 2007-2010, Avenger 2.4 2008-2010, Journey 2.4 2009-2010 and 2015, all unqualified (the gap years carry build-date splits — excluded).",
+        "groups": [
+            [("Dodge", "Caliber", 2007, 2011),
+             ("Jeep", "Compass", 2008, 2011),
+             ("Jeep", "Compass", 2015, 2015),
+             ("Jeep", "Patriot", 2008, 2011),
+             ("Jeep", "Patriot", 2015, 2015),
+             ("Chrysler", "Sebring", 2007, 2010),
+             ("Dodge", "Avenger", 2008, 2010),
+             ("Dodge", "Journey", 2009, 2010),
+             ("Dodge", "Journey", 2015, 2015)],
+        ],
+    },
+    "mopar-pentastar": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0438 Avenger 3.6 2011-2014 and Journey 3.6 2011-2014 — the rows carry a 'FLEX Fuel' tag, but every 3.6 Pentastar in these models is flex-fuel, so it doesn't discriminate.",
+        "groups": [
+            [("Dodge", "Avenger", 2011, 2014), ("Dodge", "Journey", 2011, 2014)],
+        ],
+    },
+    "ford-cyclone": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4266 MKZ 3.5 2007-2010; 280-4235 MKZ 3.5 2011-2012 — each one published unit, unqualified. Ford-badged rows in this catalog split by transmission/option — excluded.",
+        "groups": [
+            [("Lincoln", "MKZ", 2007, 2010)],
+            [("Lincoln", "MKZ", 2011, 2012)],
+        ],
+    },
+    "gm-hv-v6": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5390 Impala 3.5/3.9 2006-2011; 280-5386 Malibu 3.5/3.9 2007-2010 — each one published unit, unqualified (the 2006 Malibu 3.5 row is absent, so it stays outside the span).",
+        "groups": [
+            [("Chevrolet", "Impala", 2006, 2011)],
+            [("Chevrolet", "Malibu", 2007, 2010)],
+        ],
+    },
+    "gm-ecotec24": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5396 Malibu 2.4 2008-2012 and Verano 2.4 2012-2015 — one published unit, unqualified.",
+        "groups": [
+            [("Chevrolet", "Malibu", 2008, 2012), ("Buick", "Verano", 2012, 2015)],
+        ],
+    },
+    "gm-14t": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4209 Cruze 1.4 2011-2014 — one published unit, unqualified.",
+        "groups": [[("Chevrolet", "Cruze", 2011, 2014)]],
+    },
+    "hk-delta27": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 281-6004 in one published set — Tucson 2.7 2005-2009, Tiburon 2.7 2003-2008, Sportage 2.7 2005-2009, Sonata 2.7 2002-2005, Optima 2.7 2002-2006, Santa Fe 2.7 2001-2006, all unqualified.",
+        "groups": [
+            [("Hyundai", "Tucson", 2005, 2009),
+             ("Hyundai", "Tiburon", 2003, 2008),
+             ("Kia", "Sportage", 2005, 2009),
+             ("Hyundai", "Sonata", 2002, 2005),
+             ("Kia", "Optima", 2002, 2006),
+             ("Hyundai", "Santa Fe", 2001, 2006)],
+        ],
+    },
+    "hk-theta24": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5372 Sonata 2.4 2006-2008 — one published unit, unqualified (Optima rows carry trans qualifiers — excluded).",
+        "groups": [[("Hyundai", "Sonata", 2006, 2008)]],
+    },
+    "mitsu-24": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4213 Galant 2.4 2005-2009 (4G69), unqualified — the 2004 row carries a From-09/2003 build-date qualifier, so 2004 stays outside the span.",
+        "groups": [[("Mitsubishi", "Galant", 2005, 2009)]],
+    },
+    "mitsu-6g75": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4212 Galant 3.8 2004-2009 — one published unit, unqualified.",
+        "groups": [[("Mitsubishi", "Galant", 2004, 2009)]],
+    },
+    "mitsu-6g72": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4165 Galant 3.0 1999-2003 and Sebring 3.0 coupe 2001-2005 — one published unit, unqualified.",
+        "groups": [
+            [("Mitsubishi", "Galant", 1999, 2003),
+             ("Chrysler", "Sebring", 2001, 2005)],
+        ],
+    },
+    "honda-j35-early": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-6000 MDX 3.5 2001-2002; 280-4207 MDX 3.5 2003-2006 — each one published unit, unqualified.",
+        "groups": [
+            [("Acura", "MDX", 2001, 2002)],
+            [("Acura", "MDX", 2003, 2006)],
+        ],
+    },
+    "honda-j37": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0404 MDX 3.7 2007-2009; 280-0405 MDX 3.7 2010-2013 — each one published unit, unqualified.",
+        "groups": [
+            [("Acura", "MDX", 2007, 2009)],
+            [("Acura", "MDX", 2010, 2013)],
         ],
     },
 }
