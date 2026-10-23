@@ -10288,9 +10288,11 @@ _MODEL_STRIP_EXTRA = {
 # BMW: numeric model + suffix in BMW's own casing (328I -> 328i, 740Il ->
 # 740iL, 750LI -> 750Li), with optional GT / xDrive tails ('328I Xdrive' ->
 # '328i xDrive'). 'li'/'il' before 'i' so the alternation matches longest.
-_BMW_SUFFIX_CASE = {"li": "Li", "il": "iL"}  # everything else lowercases
+#   'ia' is the automatic-transmission marker (540iA = 540i automatic), not a
+#   distinct model — it folds into plain 'i'.
+_BMW_SUFFIX_CASE = {"li": "Li", "il": "iL", "ia": "i"}  # rest lowercases
 _BMW_MODEL_RE = re.compile(
-    r"^(\d{3})\s*(li|il|is|ci|xi|ix|si|ti|es|i|d|e)(?:\s+(gt))?(?:\s+(xdrive))?$",
+    r"^(\d{3})\s*(li|il|ia|is|ci|xi|ix|si|ti|es|i|d|e)(?:\s+(gt))?(?:\s+(xdrive))?$",
     re.IGNORECASE,
 )
 _FE_SERIES_RE = re.compile(r"^([FE])\s*-?\s*(\d{2,3})$", re.IGNORECASE)
