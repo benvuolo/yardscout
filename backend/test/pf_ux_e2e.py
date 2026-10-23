@@ -128,6 +128,12 @@ with sync_playwright() as pw:
         txt = counts.inner_text() if counts.count() else ""
         check(f"{w} counts use tier vocabulary",
               "verified" in txt and "likely" in txt, txt)
+        # The 'what verified means' line must be VISIBLE text, not a hover
+        # tooltip phone users never see (honesty audit, 2026-10-23).
+        defs = page.locator("#pf-results .pf-hint",
+                            has_text="published catalog fitment data")
+        check(f"{w} visible Verified definition under the header",
+              defs.count() == 1 and defs.first.is_visible())
         n_all = page.locator("#pf-results .pf-row-card").count()
         n_ver = page.locator("#pf-results .pf-row-card.pf-verified").count()
         # Rendering caps at the 120 nearest; the counts speak for the FULL

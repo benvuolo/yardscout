@@ -3899,6 +3899,11 @@ function pfVonlyRowHtml(nVer, nOther, vocab) {
       <span class="pf-tier-counts"><strong>${nVer.toLocaleString()}</strong> ${verWord} &middot; <strong>${nOther.toLocaleString()}</strong> ${otherWord}</span>
       <label class="pf-vonly"><input type="checkbox" id="pf-vonly-cb"${pfVerifiedOnly ? ' checked' : ''}> ${vocab === 'vin' ? 'VIN-confirmed only' : 'Verified fits only'}</label>
     </div>`
+    // What 'verified' means, said out loud (honesty audit, 2026-10-23): the
+    // definition used to live only in a hover tooltip phone users never see.
+    + `<div class="pf-hint">${vocab === 'vin'
+        ? 'VIN-confirmed = the donor\u2019s VIN decode shows this engine, not a physical inspection &mdash; still check under the hood at the yard.'
+        : 'Verified = published catalog fitment data, not a physical inspection &mdash; match the part number at the yard.'}</div>`
     + (nVer === 0
       ? `<div class="pf-vonly-none pf-empty">No ${verWord} donors in range right now &mdash; flip the toggle off to see the ${nOther.toLocaleString()} ${otherWord} one${nOther === 1 ? '' : 's'}.</div>`
       : '');
