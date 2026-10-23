@@ -1943,6 +1943,24 @@
   padding: 0.1rem 0.1rem 0.25rem;
 }
 .pf-results-head strong { color: var(--text); }
+/* 'Verified fits only' — a view filter row under the results head. Counts
+ * always visible so filtering never hides that more donors exist; the CSS
+ * does the filtering (no refetch, no re-render). */
+.pf-vonly-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.7rem; flex-wrap: wrap; padding: 0.1rem 0.1rem 0.2rem;
+}
+.pf-tier-counts { font-size: 0.75rem; color: var(--text-dim); }
+.pf-tier-counts strong { color: var(--text); }
+.pf-vonly {
+  display: flex; align-items: center; gap: 0.4rem; cursor: pointer;
+  font-size: 0.78rem; color: var(--text); user-select: none; white-space: nowrap;
+}
+.pf-vonly input { accent-color: var(--accent2); width: 1rem; height: 1rem; margin: 0; }
+.pf-results.pf-vonly .pf-row-card.pf-likely { display: none; }
+.pf-results.pf-vonly .pf-row-card.pf-browse:not(.pf-vin) { display: none; }
+.pf-vonly-none { display: none; }
+.pf-results.pf-vonly .pf-vonly-none { display: block; }
 .pf-caveat {
   font-size: 0.72rem; color: var(--text-dim); line-height: 1.5;
   background: var(--surface2); border-left: 2px solid var(--border-dark);

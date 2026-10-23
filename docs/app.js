@@ -3869,6 +3869,34 @@ function pfTierChip(tier) {
     : '<span class="pf-tier pf-tier-likely" title="Same engine family / same generation, so it very likely fits — but this exact pairing wasn\u2019t individually verified. Verify the part number before driving out.">Likely fit &mdash; verify part #</span>';
 }
 
+/* 'Verified fits only' (owner request, 2026-10-23): a pure VIEW filter over
+ * the already-rendered list — CSS hides the Likely rows, nothing refetches,
+ * and it's free for everyone (it filters a view, it doesn't unlock data).
+ * The tier counts always render beside it so filtering never hides that more
+ * donors exist. Fitment mode filters by fit tier; engine-browse mode filters
+ * by its own tier vocabulary (VIN-confirmed). Spotted-part browse makes no
+ * fit claims at all, so it gets no toggle. Default OFF on load; it holds for
+ * the session (a view preference), and when a later search has zero verified
+ * rows the explicit "flip the toggle off" note keeps that state honest. */
+let pfVerifiedOnly = false;
+function pfVonlyRowHtml(nVer, nOther, vocab) {
+  const verWord = vocab === 'vin' ? 'VIN-confirmed' : 'verified';
+  const otherWord = vocab === 'vin' ? 'unconfirmed' : 'likely';
+  return `<div class="pf-vonly-row">
+      <span class="pf-tier-counts"><strong>${nVer.toLocaleString()}</strong> ${verWord} &middot; <strong>${nOther.toLocaleString()}</strong> ${otherWord}</span>
+      <label class="pf-vonly"><input type="checkbox" id="pf-vonly-cb"${pfVerifiedOnly ? ' checked' : ''}> ${vocab === 'vin' ? 'VIN-confirmed only' : 'Verified fits only'}</label>
+    </div>`
+    + (nVer === 0
+      ? `<div class="pf-vonly-none pf-empty">No ${verWord} donors in range right now &mdash; flip the toggle off to see the ${nOther.toLocaleString()} ${otherWord} one${nOther === 1 ? '' : 's'}.</div>`
+      : '');
+}
+document.getElementById('pf-results').addEventListener('change', e => {
+  if (e.target.id !== 'pf-vonly-cb') return;
+  pfVerifiedOnly = e.target.checked;
+  document.getElementById('pf-results').classList.toggle('pf-vonly', pfVerifiedOnly);
+  track(pfVerifiedOnly ? 'pf-verified-only-on' : 'pf-verified-only-off');
+});
+
 /* ===== BROWSE MODE (owner request, 2026-10): part chosen, no car =========
  * Lists every nearby car CARRYING the part — the old Live-tab spotted-part
  * filter's job, now living where parts people look. No fit claims are made
@@ -3979,8 +4007,13 @@ function pfRunBrowse(s) {
   }
   const filterNote = (s.make || s.model || s.year)
     ? `<div class="pf-caveat">Filtered to ${escapeHtml([s.year || '', s.make || '', s.model || ''].join(' ').trim())} — clear those fields to browse everything.</div>` : '';
+  // Engine browse carries its own tier vocabulary (VIN-confirmed vs not), so
+  // the view toggle applies there; spotted-part browse makes no claims.
+  const nVin = rows.filter(r => r.badge).length;
+  out.classList.toggle('pf-vonly', pfCat.kind === 'engine' && pfVerifiedOnly);
   out.innerHTML =
     `<div class="pf-results-head">${headTop} Sorted by distance. Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.</div>`
+    + (pfCat.kind === 'engine' ? pfVonlyRowHtml(nVin, rows.length - nVin, 'vin') : '')
     + filterNote
     + (pfCat.notes || []).map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('')
     + rows.slice(0, CAP).map(r => {
@@ -4000,7 +4033,7 @@ function pfRunBrowse(s) {
         ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(r.hit.low - quote.price)))}&ndash;${formatPrice(Math.round(r.hit.high - quote.price))}</span>`
         : '';
       const dateLbl = pfDateLabel(v.dateAdded);
-      return `<div class="pf-row-card pf-browse">
+      return `<div class="pf-row-card pf-browse${r.badge ? ' pf-vin' : ''}">
         <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${r.badge}</div>
         <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ''}${saleBadgeHtml(v.location)}</div>
         <div class="pf-value">${worthHtml}${priceHtml}${saveHtml}</div>
@@ -4212,7 +4245,9 @@ function pfRunSearch() {
   }
   const CAP = 120;
   const unlocked = isPro();
-  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &middot; ${nVer} verified, ${rows.length - nVer} likely &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>`
+  out.classList.toggle('pf-vonly', pfVerifiedOnly);
+  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>`
+    + pfVonlyRowHtml(nVer, rows.length - nVer, 'fit')
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
     + groupNotes.map(n => `<div class="pf-caveat">${n}</div>`).join('')
     // Category-level honesty notes always show (spec: engine long-block
