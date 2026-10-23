@@ -1333,6 +1333,18 @@ function populateModelFilter() {
   updateModelBtnLabel();
 }
 
+/* Space/punctuation-insensitive model search: the 2026-10 normalization
+ * canonicalized display names to hyphenated/spaced forms (F-150, S-10,
+ * MR2 Spyder), so a plain substring test misses the spellings people
+ * actually type — 'f150', 's10', 'mr 2'. Squash BOTH sides to lowercase
+ * alphanumerics before the substring test; a squashed match is a strict
+ * superset of the old plain match, so nothing that used to match stops. */
+function modelSearchMatch(model, q) {
+  if (!q) return true;
+  const squash = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+  return squash(model).includes(squash(q));
+}
+
 let _modelCounts = new Map();
 function renderModelList(counts) {
   if (counts) _modelCounts = counts;
@@ -1340,7 +1352,7 @@ function renderModelList(counts) {
   const q = (document.getElementById('live-filter-model-search').value || '').trim().toLowerCase();
   const pro = isPro();
   const models = [...(_modelCounts).keys()].sort()
-    .filter(m => !q || m.toLowerCase().includes(q));
+    .filter(m => modelSearchMatch(m, q));
   list.innerHTML = models.length ? models.map(m => `
     <label class="multi-select-row">
       <input type="checkbox" data-model="${escapeHtml(m)}" ${selectedModels.has(m) ? 'checked' : ''}>
@@ -3774,7 +3786,7 @@ function renderWatchModelList() {
   const list = document.getElementById('alert-model-list');
   const q = (document.getElementById('alert-model-search').value || '').trim().toLowerCase();
   const models = [..._watchModelCounts.keys()].sort()
-    .filter(m => !q || m.toLowerCase().includes(q));
+    .filter(m => modelSearchMatch(m, q));  // same squashed match as the live filter
   list.innerHTML = models.length ? models.map(m => `
     <label class="multi-select-row">
       <input type="checkbox" data-model="${escapeHtml(m)}" ${watchSelectedModels.has(m) ? 'checked' : ''}>
