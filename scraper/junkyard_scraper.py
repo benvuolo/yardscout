@@ -6511,6 +6511,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "240SX", 1989, 1998, {"sole": True}),
             ("Nissan", "Frontier", 1998, 2004),
             ("Nissan", "Xterra", 2000, 2004),
+            ("Nissan", "Pickup", 1990, 1997),
         ],
         "parts": {
             "alternator": {"note": "KA24DE unit — truck vs car brackets can differ, verify; " + _ALT_NOTE},
@@ -6524,6 +6525,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Altima", 2002, 2018),
             ("Nissan", "Sentra", 2002, 2006),
             ("Nissan", "Rogue", 2008, 2020, {"sole": True}),
+            ("Nissan", "Rogue Select", 2014, 2015, {"sole": True}),
             ("Nissan", "Frontier", 2005, 2019),
         ],
         "parts": {
@@ -6540,6 +6542,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Murano", 2003, 2014, {"sole": True}),
             ("Nissan", "Pathfinder", 2001, 2004),
             ("Nissan", "Quest", 2004, 2009, {"sole": True}),
+            ("Nissan", "Quest", 2011, 2017, {"sole": True}),
+            ("Infiniti", "M35", 2006, 2008, {"sole": True}),
             ("Nissan", "350Z", 2003, 2006, {"sole": True}),
             ("Infiniti", "G35", 2003, 2006, {"sole": True}),
             ("Infiniti", "I35", 2002, 2004, {"sole": True}),
@@ -6719,6 +6723,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "Edge", 2007, 2015),
             ("Mercury", "Sable", 2008, 2009, {"sole": True}),
             ("Lincoln", "MKZ", 2007, 2012, {"sole": True}),
+            ("Lincoln", "MKS", 2009, 2016,
+             {"ambig": "MKS EcoBoost is the 3.5 twin-turbo — same decode string; confirm non-turbo"}),
             ("Ford", "Taurus", 2008, 2019,
              {"ambig": "SHO is the 3.5 EcoBoost twin-turbo — same decode string; confirm non-turbo"}),
             ("Ford", "Explorer", 2011, 2019,
@@ -6857,7 +6863,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chevrolet", "Cobalt", 2006, 2010),
             ("Chevrolet", "Malibu", 2008, 2012),
             ("Chevrolet", "Equinox", 2010, 2017),
-            ("Chevrolet", "HHR", 2008, 2010),
+            ("Chevrolet", "HHR", 2008, 2011),
             ("GMC", "Terrain", 2010, 2017),
             ("Pontiac", "G6", 2006, 2009),
             ("Chevrolet", "Captiva Sport", 2012, 2015),
@@ -6875,6 +6881,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [1.4], "cyl": 4},
         "apps": [
             ("Chevrolet", "Cruze", 2011, 2015),
+            ("Chevrolet", "Cruze Limited", 2016, 2016),
             ("Chevrolet", "Sonic", 2012, 2018),
             ("Buick", "Encore", 2013, 2021),
             ("Chevrolet", "Trax", 2013, 2021),
@@ -6928,6 +6935,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Buick", "Rainier", 2004, 2007),
             ("Saab", "9-7x", 2005, 2009),
             ("Isuzu", "Ascender", 2003, 2008),
+            ("Chevrolet", "Trailblazer Ext", 2002, 2006),
+            ("GMC", "Envoy Xl", 2002, 2006),
         ],
         "parts": {
             "alternator": {"note": "LL8 unit shared across the GMT360 twins; " + _ALT_NOTE},
@@ -6990,6 +6999,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chevrolet", "Uplander", 2005, 2009),
             ("Buick", "Terraza", 2005, 2007),
             ("Saturn", "Aura", 2007, 2008),
+            ("Buick", "Lucerne", 2009, 2011),
         ],
         "parts": {
             "alternator": {"note": "LZ-series unit; " + _ALT_NOTE},
@@ -7005,6 +7015,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Buick", "Enclave", 2008, 2017, {"sole": True}),
             ("Saturn", "Outlook", 2007, 2010, {"sole": True}),
             ("Chevrolet", "Impala", 2012, 2019),
+            ("Chevrolet", "Impala Limited", 2014, 2016),
             ("Chevrolet", "Camaro", 2010, 2015),
             ("Chevrolet", "Equinox", 2013, 2017),
             ("GMC", "Terrain", 2013, 2017),
@@ -7027,6 +7038,9 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chrysler", "Town & Country", 2011, 2016, {"sole": True}),
             # The live feed spells it out — "&" squashes away, "And" doesn't.
             ("Chrysler", "Town And Country", 2011, 2016, {"sole": True}),
+            # feed sometimes drops the "Grand" on 2011+ Grand Caravans
+            ("Dodge", "Caravan", 2011, 2019, {"sole": True}),
+            ("Volkswagen", "Routan", 2011, 2014, {"sole": True}),
             ("Dodge", "Journey", 2011, 2020),
             ("Dodge", "Avenger", 2011, 2014),
             ("Chrysler", "200", 2011, 2017),
@@ -7591,6 +7605,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "370Z", 2009, 2020, {"sole": True}),
             ("Infiniti", "G35", 2007, 2008, {"sole": True}),
             ("Infiniti", "G37", 2008, 2013, {"sole": True}),
+            ("Infiniti", "M35", 2009, 2010, {"sole": True}),
         ],
         "parts": {
             "alternator": {"note": "one 150A unit spans the HR cars (350Z 07-09, G35 07-08, G37 08-10, early 370Z); late 370Z (from 02/2010) revises it — match part number there"},
@@ -7620,6 +7635,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Mitsubishi", "Galant", 1994, 2012),
             ("Mitsubishi", "Lancer", 2005, 2017),
             ("Mitsubishi", "Outlander", 2003, 2006, {"sole": True}),
+            ("Mitsubishi", "Outlander Sport", 2015, 2017),
         ],
         "parts": {
             "alternator": {"note": "one published 110A unit spans Eclipse 06-11, Galant 04-11 and Lancer 2.4 05-06; earlier Galant spans are year-split — match amps"},
@@ -7634,6 +7650,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Mitsubishi", "Galant", 1999, 2003),
             ("Chrysler", "Sebring", 2001, 2005),
             ("Dodge", "Stratus", 2001, 2005),
+            ("Mitsubishi", "Montero Sport", 1997, 2004),
         ],
         "parts": {
             "alternator": {"note": "one published 85A unit spans the 3.0 Eclipse and Galant; " + _ALT_NOTE},
@@ -7646,6 +7663,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "apps": [
             ("Mitsubishi", "Eclipse", 2006, 2012),
             ("Mitsubishi", "Galant", 2004, 2009),
+            ("Mitsubishi", "Endeavor", 2004, 2011, {"sole": True}),
         ],
         "parts": {
             "alternator": {"note": "one published 110A unit spans Eclipse 06-11 and Galant 05-09; the 2004 Galant 3.8 unit is its own — match part number"},
@@ -7878,6 +7896,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Infiniti", "QX4*", 1997, 2000, {"sole": True}),
             ("Nissan", "Xterra", 2000, 2004),
             ("Nissan", "Frontier", 1999, 2004),
+            ("Nissan", "Quest", 1999, 2002, {"sole": True}),
+            ("Mercury", "Villager", 1999, 2002, {"sole": True}),
         ],
         "parts": {
             "alternator": {"note": "Pathfinder 98-00 one unit (97 split by production date); Xterra/Frontier 03-04 one unit incl. the supercharged VG33ER"},
@@ -8228,6 +8248,13 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chevrolet", "Tahoe", 1995, 2000),
             ("Chevrolet", "Suburban", 1992, 1999),
             ("GMC", "Yukon", 1995, 1999),
+            # GMT400 pickups — feed uses several spellings
+            ("Chevrolet", "C/K 1500", 1988, 1999),
+            ("Chevrolet", "C/K 1500 Series", 1988, 1999),
+            ("Chevrolet", "K1500", 1988, 1999),
+            ("Chevrolet", "C1500", 1988, 1999),
+            ("Chevrolet", "Gmt-400", 1988, 2000),
+            ("GMC", "Sierra", 1989, 1998),
         ],
         "parts": {
             "alternator": {"note": "every published alternator row splits by case diameter or rear-cover style — match the case on your old unit"},
@@ -8253,10 +8280,95 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [2.0], "cyl": 4},
         "apps": [
             ("Mitsubishi", "Lancer", 2008, 2017),
+            ("Mitsubishi", "Outlander Sport", 2011, 2017),
         ],
         "parts": {
             "alternator": {"note": "turbo (Ralliart/Evo) and non-turbo 2.0s use different published units — confirm which you have; pairs stay Likely"},
             "starter": {"note": "2010 publishes one unit for both NA and Evo GSR; other years split by turbo/build date — match part number"},
+        },
+    },
+    "mitsu-4g94": {
+        "display": "Mitsubishi 4G94 2.0 I4 (Lancer 02-07)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Mitsubishi", "Lancer", 2002, 2007),
+        ],
+        "parts": {
+            "alternator": {"note": "2002 and 2007 each publish one clean unit; 03-06 rows carry a non-turbo qualifier because the Evo shares the 2.0 badge — confirm non-turbo"},
+            "starter": {"note": "03+ rows carry non-turbo qualifiers (Evo years) — match part number"},
+        },
+    },
+    "acura-rl": {
+        "display": "Acura RL 3.5/3.7 V6",
+        "engine": {"liters": [3.5, 3.7], "cyl": 6},
+        "apps": [
+            ("Acura", "RL", 1996, 2012, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "one published unit per generation (96-04 / 05-08 / 09-12), all unqualified"},
+            "starter": {"note": "96-04, 05-08 and 09-10 each one published unit; 2011-12 is dual-listed — match your part number"},
+        },
+    },
+    "ford-freestar": {
+        "display": "Ford Freestar/Mercury Monterey 3.9/4.2 V6",
+        "engine": {"liters": [3.9, 4.2], "cyl": 6},
+        "apps": [
+            ("Ford", "Freestar", 2004, 2007, {"sole": True}),
+            ("Mercury", "Monterey", 2004, 2007, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers both the 3.9 and 4.2 Freestar 04-06"},
+            "starter": {"note": "ONE published starter covers both engines across the full 04-07 run"},
+        },
+    },
+    "lincoln-ls39": {
+        "display": "Lincoln LS 3.9 V8",
+        "engine": {"liters": [3.9], "cyl": 8},
+        "apps": [
+            ("Lincoln", "LS", 2000, 2006),
+        ],
+        "parts": {
+            "alternator": {"note": "00-02 and 03-06 each one published unit; the V6 3.0's 03-04 rows split by transmission — V6 pairs stay Likely"},
+            "starter": {"note": "ONE published starter covers every 3.9 LS 00-06"},
+        },
+    },
+    "mazda-mpv30": {
+        "display": "Mazda MPV 3.0 V6",
+        "engine": {"liters": [3.0], "cyl": 6},
+        "apps": [
+            ("Mazda", "MPV", 1989, 1998),
+            ("Mazda", "MPV", 2002, 2006),
+        ],
+        "parts": {
+            "alternator": {"note": "89-98 one published unit; 02-05 another — the 00-01 MPV is the 2.5 Duratec (different family)"},
+            "starter": {"note": "02-06 one published unit; 92-95 another (96-98 rows split Std/Opt)"},
+        },
+    },
+    "mazda-protege": {
+        "display": "Mazda Protege 1.5/1.6/1.8/2.0 I4",
+        "engine": {"liters": [1.5, 1.6, 1.8, 2.0], "cyl": 4},
+        "apps": [
+            ("Mazda", "Protege", 1992, 2003),
+            ("Mazda", "Protege5", 2002, 2003, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "02-03 2.0 cars (incl. Protege5) share one published unit; 97-98 another; other years mix engines on different units — match part number"},
+            "starter": {"note": "every published starter row splits by transmission — match part number"},
+        },
+    },
+    "mopar-minivan-ohv": {
+        "display": "Chrysler minivan 3.3/3.8 OHV V6 (01-10)",
+        "engine": {"liters": [3.3, 3.8], "cyl": 6},
+        "apps": [
+            ("Dodge", "Grand Caravan", 2001, 2010),
+            ("Dodge", "Caravan", 2001, 2007),
+            ("Chrysler", "Town & Country", 2001, 2010),
+            ("Chrysler", "Town And Country", 2001, 2010),
+            ("Chrysler", "Voyager", 2001, 2003),
+        ],
+        "parts": {
+            "alternator": {"note": "every published alternator row splits Std vs Opt amperage — match the amp rating on your old unit"},
+            "starter": {"note": "ONE published starter per band (01-03 / 04-05 / 06-10) covers both the 3.3 and 3.8 — the 08-10 4.0 uses its own unit"},
         },
     },
 }
@@ -9380,6 +9492,46 @@ _ALT_VERIFIED: dict = {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5381 (160A) Tahoe 5.3 2011-2012 — the one unqualified row; every other year splits by case diameter (145 vs 156mm) and is excluded.",
         "groups": [[("Chevrolet", "Tahoe", 2011, 2012)]],
     },
+    "mitsu-4g94": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4165 (85A) Lancer 2.0 2002 — clean row (03-04 rows carry a non-turbo qualifier because the Evo arrived in 2003); 210-4271 (105A) Lancer 2.0 4G94 2007 — clean row (the Evo IX ended in 2006).",
+        "groups": [
+            [("Mitsubishi", "Lancer", 2002, 2002)],
+            [("Mitsubishi", "Lancer", 2007, 2007)],
+        ],
+    },
+    "acura-rl": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows unqualified: 210-0204 (110A) RL 3.5 C35A1 1996-2004; 210-0580 (130A) RL 3.5 J35A8 2005-2008; 210-0750 (130A) RL 3.7 J37A2 2009-2012.",
+        "groups": [
+            [("Acura", "RL", 1996, 2004)],
+            [("Acura", "RL", 2005, 2008)],
+            [("Acura", "RL", 2009, 2012)],
+        ],
+    },
+    "ford-freestar": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5361 (135A) Freestar 3.9 2004-2006 AND 4.2 2004-2006 — one published unit for both engines, unqualified.",
+        "groups": [[("Ford", "Freestar", 2004, 2006)]],
+    },
+    "lincoln-ls39": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0532 (150A) LS 3.9 2003-2006; 210-5344 (110A) LS 3.9 2000-2002 — both unqualified (the V6 3.0's rows split by transmission and sit outside this 3.9 family).",
+        "groups": [
+            [("Lincoln", "LS", 2003, 2006)],
+            [("Lincoln", "LS", 2000, 2002)],
+        ],
+    },
+    "mazda-mpv30": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4180 (110A) MPV 3.0 2002-2005; 210-4105 (70A) MPV 3.0 1989-1998 — both unqualified.",
+        "groups": [
+            [("Mazda", "MPV", 2002, 2005)],
+            [("Mazda", "MPV", 1989, 1998)],
+        ],
+    },
+    "mazda-protege": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4163 (80A) Protege 2.0 2001-2003 and Protege5 2.0 2002-2003 — span capped to 02-03 because the 1.6 (its own unit) was still sold in 2001; 210-4200 (70A) Protege 1.5 and 1.8 1997-1998 — one unit for both engines (the 99-01 1.8 rows aren't published, so those years are excluded).",
+        "groups": [
+            [("Mazda", "Protege", 2002, 2003), ("Mazda", "Protege5", 2002, 2003)],
+            [("Mazda", "Protege", 1997, 1998)],
+        ],
+    },
 }
 
 for _fid, _v in _ALT_VERIFIED.items():
@@ -9823,6 +9975,37 @@ _STR_VERIFIED: dict = {
     "mitsu-4b11": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4317 Lancer 2.0 2010 — the one year where both the naturally-aspirated row and the Evolution GSR turbo row carry the same number (the Evo MR's dual-clutch starter isn't published; other years split by turbo or build date).",
         "groups": [[("Mitsubishi", "Lancer", 2010, 2010)]],
+    },
+    "acura-rl": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows unqualified: 280-4197 RL 3.5 1996-2004; 280-4328 RL 3.5 2005-2008; 280-0403 RL 3.7 2009-2010 (2011-12 is dual-listed with 280-0423/281-6001 — excluded).",
+        "groups": [
+            [("Acura", "RL", 1996, 2004)],
+            [("Acura", "RL", 2005, 2008)],
+            [("Acura", "RL", 2009, 2010)],
+        ],
+    },
+    "ford-freestar": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5314 Freestar 3.9 2004-2007 AND 4.2 2004-2007 — one published unit for both engines, unqualified.",
+        "groups": [[("Ford", "Freestar", 2004, 2007)]],
+    },
+    "lincoln-ls39": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5317 LS 3.9 2000-2006 — ONE published starter for every 3.9 LS, unqualified.",
+        "groups": [[("Lincoln", "LS", 2000, 2006)]],
+    },
+    "mazda-mpv30": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4192 MPV 3.0 2002-2006; 280-4116 MPV 3.0 1992-1995 — both unqualified (96-98 rows split Std/Opt — excluded).",
+        "groups": [
+            [("Mazda", "MPV", 2002, 2006)],
+            [("Mazda", "MPV", 1992, 1995)],
+        ],
+    },
+    "mopar-minivan-ohv": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), Grand Caravan rows unqualified for both the 3.3 and 3.8: 280-0360 2006-2010; 280-0349 2004-2005; 280-0321 2001-2003 (the 2003 FLEX Fuel/GAS tags don't discriminate — both carry the same number). Caravan/Town & Country spans not separately verified — left at likely.",
+        "groups": [
+            [("Dodge", "Grand Caravan", 2006, 2010)],
+            [("Dodge", "Grand Caravan", 2004, 2005)],
+            [("Dodge", "Grand Caravan", 2001, 2003)],
+        ],
     },
 }
 
