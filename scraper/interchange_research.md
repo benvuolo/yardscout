@@ -2088,3 +2088,36 @@ Trims with NOTHING to map (audited, documented):
   likewise labeled plain "Lancer" — see Phase A notes).
 - Pontiac GTO 2004-06: no US platform sibling in the feed; its LS1/LS2
   rows weren't verified this pass — engine stays unmapped (documented).
+
+## P0 part catalog spot-checks (2026-10) — 15 hand-verified
+
+The class-B/C/D categories ride MODEL_GENERATIONS: a donor fits when
+seeker + donor years share one factory generation window. Each check below
+was verified by hand against manufacturer generation boundaries (press
+material / parts-catalog platform codes), since the WINDOW is the fitment
+claim for these categories. PASS = the table window matches the published
+generation boundary AND the claim behaves correctly at the boundary year.
+
+| # | Category | Claim checked | Public boundary | Verdict |
+|---|----------|---------------|-----------------|---------|
+| 1 | door-front | 2009 vs 2013 Nissan Altima share a door (one window 2007-2012? NO — 2013 is next gen) | L32 Altima 2007-2012; L33 from 2013 | PASS — 2013 donor correctly refused for a 2009 seeker |
+| 2 | door-front | 2008 vs 2012 Honda Accord doors swap | 8th-gen Accord 2008-2012 | PASS — one window |
+| 3 | fender | 2015 vs 2019 Chevy Silverado 1500 fenders | K2XX 2014-2018; T1XX from 2019 | PASS — 2019 refused for a 2015 seeker |
+| 4 | hood | 2007 vs 2013 Chevy Tahoe hood swaps | GMT900 2007-2014 | PASS — one window |
+| 5 | bumper-front | 2013 vs 2017 Ford Fusion bumper | one generation 2013-2020 (2017 facelift) | PASS as Likely — facelift note warns about the restyled fascia |
+| 6 | grille | 2010 vs 2012 Ram 1500 grille | DS Ram 2009-2018 | PASS — one window, both "Dodge Ram 1500" and Ram-make "1500" spellings land in it |
+| 7 | trunk-lid | 2007 vs 2011 Toyota Camry decklid | XV40 2007-2011 — 2012 XV50 refused | PASS |
+| 8 | liftgate | 2011 vs 2017 Honda Odyssey liftgate | 4th gen 2011-2017 | PASS — one window |
+| 9 | front-seats | 2016 vs 2013 Ford Escape seats | C520 Escape 2013-2019 | PASS — one window; side-airbag note present |
+| 10 | third-row-seat | 2015 vs 2008 GMC Acadia 3rd row | Lambda Acadia 2007-2016 | PASS — one window; price no longer quotes 3RD BRAKE LIGHT (ordered tokens) |
+| 11 | engine-assembly | 2004 Tahoe 5.3 <-> 2002 Silverado 1500 5.3 long block | gm-vortec-gen3 family (LM7 Gen-III) | PASS — family answers; Verified only on decode-confirmed donors, else Likely + check-hood warn |
+| 12 | engine-assembly | 2010 Camry 2.4 <-> 2005 Camry 2.4 | toyota-2az family spans 02-11 apps | PASS — same 2AZ-FE long block; accessory-swap note shown |
+| 13 | transmission-auto | 2012 vs 2014 Nissan Rogue (CVT) | 1st-gen Rogue 2008-2013 + Select 2014-15 | PASS — 2014 plain Rogue (2nd gen) refused; "Rogue Select" alias row keeps the 1st-gen window so Select donors still serve |
+| 14 | radio | 2006 vs 2010 Chrysler 300 head unit | LX 300 2005-2010 | PASS as Likely-only — exact class never uses platform groups (Charger/Magnum donors refused despite shared LX platform) |
+| 15 | ecm | 2013 vs 2016 Honda Civic ECM | 9th gen 2012-2015; 10th from 2016 | PASS — 2016 refused for a 2013 seeker; programming note always shown |
+
+Hazard regressions re-checked while writing these: `starter` on the
+Pick-n-Pull list now quotes STARTER ($30.99), never the cheaper STARTER
+SOLENOID ($11.99) that the old substring match preferred; `tow mirror`
+resolves TOW MIRRORS on NV/UT Pic-A-Part lists and falls back honestly
+(not to an interior mirror) elsewhere.

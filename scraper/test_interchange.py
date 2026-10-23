@@ -425,6 +425,127 @@ check("SRT-4 never matches the 2.0 Neon family (engine split)",
       not any(js._app_matches(a, 2004, "Dodge", "Neon Srt-4")
               for a in EF["mopar-neon"]["apps"]))
 
+# =========================================================================
+# P0 part catalog (PART_CATALOG_SPEC, 2026-10) — rule classes, honesty
+# notes, taxonomy fixes, generation windows.
+# =========================================================================
+_p0 = js.build_interchange_payload()
+CATS = {c["id"]: c for c in _p0["categories"]}
+PC = js.INTERCHANGE_PART_CATEGORIES
+
+check("payload ships schemaVersion 2", _p0["schemaVersion"] == 2)
+check("25 P0 categories ship", len(CATS) == 25, str(len(CATS)))
+_P0_NEW = ["engine-assembly", "ignition-coils", "transmission-auto", "ecm",
+           "radio", "front-seats", "door-front", "fender", "hood",
+           "bumper-front", "grille", "trunk-lid", "liftgate"]
+check("all 13 new categories present", all(c in CATS for c in _P0_NEW))
+
+# Rule classes (spec §3): A=engine, B=body, C=combo, D=exact.
+check("engine assembly + coils are class A (engine kind)",
+      CATS["engine-assembly"]["kind"] == "engine"
+      and CATS["ignition-coils"]["kind"] == "engine")
+check("transmission + ECM are class C (combo kind)",
+      CATS["transmission-auto"]["kind"] == "combo"
+      and CATS["ecm"]["kind"] == "combo")
+check("radio is class D (exact kind) — electronics never cross models",
+      CATS["radio"]["kind"] == "exact")
+check("panels are class B (body kind)",
+      all(CATS[c]["kind"] == "body" for c in
+          ("door-front", "fender", "hood", "bumper-front", "grille",
+           "trunk-lid", "liftgate", "front-seats")))
+
+# Mandatory honesty notes (spec §4) — computed into the payload, not UI-only.
+_ea_notes = " ".join(CATS["engine-assembly"]["notes"]).lower()
+check("engine assembly ships all three §4 honesty notes",
+      "long block" in _ea_notes and "mileage" in _ea_notes
+      and "hours" in _ea_notes and "call ahead" in _ea_notes)
+check("engine assembly + transmission ship no resale band (noValue)",
+      CATS["engine-assembly"].get("noValue") is True
+      and CATS["transmission-auto"].get("noValue") is True
+      and not any(CATS[c].get("noValue")
+                  for c in CATS if c not in
+                  ("engine-assembly", "transmission-auto")))
+check("transmission rowWarn demands the case-tag code check",
+      "code" in CATS["transmission-auto"]["rowWarn"]
+      and "code" in " ".join(CATS["transmission-auto"]["notes"]).lower())
+check("radio note covers VIN-lock/anti-theft",
+      "vin-lock" in " ".join(CATS["radio"]["notes"]).lower()
+      or "anti-theft" in " ".join(CATS["radio"]["notes"]).lower())
+check("front seats warn about seat-mounted airbags",
+      "airbag" in " ".join(CATS["front-seats"]["notes"]).lower())
+check("every combo/exact category carries notes (never a bare fit claim)",
+      all(CATS[c].get("notes") for c in CATS
+          if CATS[c]["kind"] in ("combo", "exact")))
+check("headlights + tail lights carry the facelift note",
+      "facelift" in " ".join(CATS["headlights"]["notes"]).lower()
+      and "facelift" in " ".join(CATS["tail-lights"]["notes"]).lower())
+
+# Class A synthesis: every family answers assembly + coils with no vg
+# (Verified for assemblies comes only from a donor VIN decode, app-side).
+check("every engine family ships engine-assembly + ignition-coils parts",
+      all("engine-assembly" in f["parts"] and "ignition-coils" in f["parts"]
+          for f in _p0["engineFamilies"]))
+check("no family claims a verified group for the assembly (decode-only tier)",
+      all("vg" not in f["parts"]["engine-assembly"]
+          for f in _p0["engineFamilies"]))
+
+# Honest refusal: exact/combo categories never ride platform groups —
+# a chassis-mate's radio or transmission is not a claim we can make.
+check("no platform group ships an exact/combo category",
+      all(g["cat"] not in ("radio", "transmission-auto", "ecm")
+          for g in _p0["platformGroups"]))
+check("no platform group ships an engine category",
+      all(CATS.get(g["cat"], {}).get("kind") != "engine"
+          for g in _p0["platformGroups"]))
+
+# Taxonomy fixes (spec §6): ordered priceTokens, specific-first.
+check("starter quotes exact row first (STARTER SOLENOID hazard)",
+      PC["starter"]["priceTokens"][0] == "=starter")
+check("tow mirrors quote tow rows before any plain mirror",
+      PC["tow-mirrors"]["priceTokens"][0].startswith("tow")
+      and PC["tow-mirrors"]["priceTokens"][-1] == "mirror")
+check("3rd row seat never substring-matches a brake light",
+      all("row" in t or "seat" in t
+          for t in PC["third-row-seat"]["priceTokens"])
+      and "3rd" not in PC["third-row-seat"]["priceTokens"]
+      and "third" not in PC["third-row-seat"]["priceTokens"])
+
+# Generation windows (spec §5.1).
+GENS = {(mk, md): wins for mk, md, wins in js.MODEL_GENERATIONS}
+
+
+def _gen_win(mk, md, yr):
+    for lo, hi in GENS.get((mk, md), ()):
+        if lo <= yr <= hi:
+            return (lo, hi)
+    return None
+
+
+check("payload ships the generation table",
+      len(_p0["modelGenerations"]) == len(js.MODEL_GENERATIONS)
+      and len(_p0["modelGenerations"]) >= 190)
+check("Altima 2015<->2013 share a window; 2012 does not",
+      _gen_win("Nissan", "Altima", 2015) == _gen_win("Nissan", "Altima", 2013)
+      and _gen_win("Nissan", "Altima", 2012)
+      != _gen_win("Nissan", "Altima", 2013))
+check("Tahoe 2008<->2014 share the GMT900 window",
+      _gen_win("Chevrolet", "Tahoe", 2008)
+      == _gen_win("Chevrolet", "Tahoe", 2014) == (2007, 2014))
+check("feed aliases carry identical windows (Ram Pickup = Ram 1500)",
+      all(w in GENS[("Dodge", "Ram 1500")]
+          for w in GENS[("Dodge", "Ram Pickup")]))
+check("Ram-make 1500 row exists for post-split feed spellings",
+      _gen_win("Ram", "1500", 2015) == (2009, 2018))
+check("Town & Country ships all three feed spellings",
+      GENS[("Chrysler", "Town & Country")]
+      == GENS[("Chrysler", "Town And Country")]
+      == GENS[("Chrysler", "Town &amp; Country")])
+check("civic 1995<->1997 do NOT share a window (EG/EK split)",
+      _gen_win("Honda", "Civic", 1995) != _gen_win("Honda", "Civic", 1997))
+check("no window predates 1960 or runs past 2035",
+      all(1960 < lo <= hi < 2036
+          for wins in GENS.values() for lo, hi in wins))
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILURE(S):", *FAILS, sep="\n  - ")
