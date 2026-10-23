@@ -6619,6 +6619,14 @@ MODEL_GENERATIONS: list[tuple[str, str, tuple[tuple[int, int], ...]]] = [
     # --- European ---
     ("Volkswagen", "Jetta", ((1993, 1998), (1999, 2004), (2005, 2010),
                              (2011, 2018), (2019, 2025))),
+    ("Volkswagen", "Golf", ((1993, 1998), (1999, 2006), (2010, 2014),
+                            (2015, 2021))),
+    ("Volkswagen", "Rabbit", ((2006, 2009),)),  # Mk5 Golf's US badge
+    # "New Beetle" is the 98-10 car; plain "Beetle" feed rows span both it
+    # and the 2012-19 A5 — windows keep the two bodies apart.
+    ("Volkswagen", "New Beetle", ((1998, 2010),)),
+    ("Volkswagen", "Beetle", ((1998, 2010), (2012, 2019))),
+    ("Chevrolet", "Spark", ((2013, 2015), (2016, 2022))),
     ("Volkswagen", "Passat", ((1990, 1997), (1998, 2005), (2006, 2010),
                               (2012, 2022))),
     ("Volkswagen", "CC", ((2009, 2017),)),
@@ -8341,6 +8349,27 @@ ENGINE_FAMILIES: dict[str, dict] = {
             "starter": {"note": _STR_NOTE},
         },
     },
+    "vw-mk4": {
+        "display": "VW Mk4 1.8T/2.0 (Golf/Jetta/New Beetle)",
+        "engine": {"liters": [1.8, 2.0], "cyl": 4},
+        "apps": [
+            # One published 90A alternator (210-6200) spans the 1.8T and the
+            # 2.0 8v across the Mk4 platform. VR6 and TDI cars are out
+            # (liters), as are Mk3 (ABA, pre-99) cars — the published list
+            # starts at 1999.
+            ("Volkswagen", "Golf", 1999, 2006),
+            ("Volkswagen", "GTI", 1999, 2005),
+            ("Volkswagen", "Jetta", 1999, 2005),
+            ("Volkswagen", "Beetle", 1998, 2005),
+            ("Volkswagen", "New Beetle", 1998, 2005),  # feed spelling
+            ("Volkswagen", "New Beetle Convertible", 2003, 2005),  # feed spelling
+            ("Volkswagen", "Cabrio", 1999, 2002),
+        ],
+        "parts": {
+            "alternator": {"note": "one 90A unit (Bosch-type) spans 1.8T and 2.0 — but 2000-02 rows dual-source a 70A Valeo unit; those years stay Likely, match vendor"},
+            "starter": {"note": "no clean published rows — M/T vs A/T and vendor splits throughout; " + _STR_NOTE},
+        },
+    },
     # ================= 2026-10 PHASE A — enthusiast platforms =============
     # ------------------------------------------------------------- Toyota
     "toyota-4a": {
@@ -8875,6 +8904,20 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "parts": {
             "alternator": {"note": "2013 Malibu ships one published alternator across 2.0T, 2.4 eAssist and 2.5; 14-15 rows are beyond this catalog edition"},
             "starter": {"note": "2013 2.0T/2.5 share one published starter"},
+        },
+    },
+    "gm-malibu-20t": {
+        "display": "Chevrolet Malibu 2.0T (9th gen, LTG)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            # 9th-gen Malibu Premier 2.0T. The volume 1.5T (LFV) shares the
+            # model years but publishes NO rotating-electrical rows — those
+            # cars stay honestly uncovered (see research notes). Hybrid out.
+            ("Chevrolet", "Malibu", 2016, 2022),
+        ],
+        "parts": {
+            "alternator": {"note": "2.0T unit — 2017 dual-sources a 150A against the standard unit; that year stays Likely"},
+            "starter": {"note": "2.0T unit, one published number 17-21; the volume 1.5T publishes nothing — match part number"},
         },
     },
     "gm-atlas-i45": {
@@ -9745,6 +9788,25 @@ _ALT_VERIFIED: dict = {
             # other; 2014 sits out (VIN-qualified year).
             [("Ford", "Fusion", 2013, 2013),
              ("Ford", "Fusion", 2015, 2016)],
+        ],
+    },
+    "vw-mk4": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-6200 (90A) — one published unit across the 1.8T and 2.0 for Jetta 1999 and 2004-2005, Golf 1999 and 2002-2005, Beetle 1999. In 2000-2002 a 70A Valeo unit (211-6001) runs alongside it — those years excluded as vendor splits (kia-spectra precedent). Beetle 2003-05 publishes only 2.0 rows while the 1.8T was still sold — excluded per the all-family-engines rule.",
+        "groups": [
+            # One unit, several clean spans — all interchange with each other.
+            [("Volkswagen", "Jetta", 1999, 1999),
+             ("Volkswagen", "Jetta", 2004, 2005),
+             ("Volkswagen", "Golf", 1999, 1999),
+             ("Volkswagen", "Golf", 2002, 2005),
+             ("Volkswagen", "Beetle", 1999, 1999),
+             ("Volkswagen", "New Beetle", 1999, 1999)],  # feed spelling
+        ],
+    },
+    "gm-malibu-20t": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-1248 Malibu 2.0 — 2016 and 2018-2021 unqualified (2017 dual-sources 210-1023 150A alongside it — excluded; 2022 is past this catalog).",
+        "groups": [
+            [("Chevrolet", "Malibu", 2016, 2016),
+             ("Chevrolet", "Malibu", 2018, 2021)],
         ],
     },
     "ford-escape-20eb": {
@@ -11076,6 +11138,10 @@ _STR_VERIFIED: dict = {
     "ford-fusion-cd4": {
         "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-4241 (1.4 kW) Fusion — 2.0 EcoBoost 2013-2016 unqualified, but the 2.5 row is engine-VIN-qualified every year except 2015. Capped to 2015, the one year ALL family engines publish clean.",
         "groups": [[("Ford", "Fusion", 2015, 2015)]],
+    },
+    "gm-malibu-20t": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-1028 (1.2 kW) Malibu 2.0 2017-2021 — one published unit, unqualified (2016 row absent; 2022 past this catalog).",
+        "groups": [[("Chevrolet", "Malibu", 2017, 2021)]],
     },
     "nissan-mr16t": {
         "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-3139 (1.0 kW) Juke 1.6 2011-2015 unqualified (the 2016 row carries 'To 11/2015' and is excluded; 2017 is absent).",

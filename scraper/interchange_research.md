@@ -1366,6 +1366,34 @@ rotating-electrical row for the small-EcoBoost Fusions is option-qualified
 Feature"), so no verified group can be anchored and no family ships. Those
 cars stay at no-data until a clean application list is found.
 
+### vw-mk4 — VW Mk4 1.8T/2.0 (Golf/Jetta/New Beetle)
+
+- **Engine:** 1.8L turbo / 2.0L 8v 4-cyl
+- **Family applications:** Golf 1999-2006, GTI 1999-2005, Jetta 1999-2005,
+  Beetle/New Beetle 1998-2005 (+ "New Beetle Convertible"), Cabrio 1999-2002
+- **Context:** Jetta 94-04 (#14, 364) + New Beetle 98-10 (#22, 251) +
+  Beetle 98-10 (#27, 221) in the gap ranking — ~800 vehicles across the
+  spellings. Mk3 (ABA, pre-99) stays out: the published list starts at 1999.
+  VR6 and TDI are out by liters.
+- **alternator — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-6200 (90A), one unit across 1.8T and 2.0: Jetta 1999 + 2004-05, Golf 1999 + 2002-05, Beetle 1999, all unqualified. 2000-02 rows dual-source a 70A Valeo (211-6001) — vendor split, excluded (kia-spectra precedent). Beetle 2003-05 publishes only the 2.0 while the 1.8T was still sold — excluded (all-family-engines rule).
+  - Group 1 (one unit): Jetta 1999 + 2004-05, Golf 1999 + 2002-05, Beetle/New Beetle 1999
+- **starter:** no clean published rows (M/T vs A/T and vendor splits
+  throughout) — Likely only.
+
+### gm-malibu-20t — Chevrolet Malibu 2.0T (9th gen, LTG)
+
+- **Engine:** 2.0L turbo 4-cyl
+- **Family applications:** Chevrolet Malibu 2016-2022 (Premier trim's engine;
+  non-sole — the volume 1.5T and the hybrid share the model years)
+- **Context:** Malibu 2016-24 was #11 in the gap ranking (423 vehicles).
+  The volume 1.5T (LFV) publishes NO rotating-electrical rows in the
+  catalogs we checked — those cars stay honestly uncovered; only the 2.0T
+  anchors groups. Decode gates which donors answer.
+- **alternator — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-1248 Malibu 2.0 2016 and 2018-2021 unqualified (2017 dual-sources a 150A 210-1023 — excluded; 2022 past this catalog).
+  - Group 1 (one unit): Malibu 2016 + 2018-2021
+- **starter — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-1028 (1.2 kW) Malibu 2.0 2017-2021 — one published unit, unqualified.
+  - Group 1: Malibu 2017-2021
+
 ### nissan-mra8 — Nissan MRA8DE 1.8 I4 (Sentra)
 
 - **Engine:** 1.8L 4-cyl

@@ -631,6 +631,31 @@ check("fusion-cd4: 2016 Fusion covered; alt group skips the VIN-split 2014",
                                   ("Ford", "Fusion", 2015, 2016)]])
 check("fusion: no 1.5/1.6 EcoBoost family ships (all rows option-qualified)",
       "ford-fusion-15eb" not in js.ENGINE_FAMILIES)
+check("vw-mk4: Jetta/Golf/Beetle + New Beetle spellings all land; Mk3 is out",
+      _fam_hit("vw-mk4", 2002, "Volkswagen", "Jetta")
+      and _fam_hit("vw-mk4", 2003, "Volkswagen", "Golf")
+      and _fam_hit("vw-mk4", 2001, "Volkswagen", "New Beetle")
+      and _fam_hit("vw-mk4", 2001, "Volkswagen", "Beetle")
+      and not _fam_hit("vw-mk4", 1997, "Volkswagen", "Jetta"))
+check("vw-mk4: Valeo dual-source years (2000-02) are outside the alt group",
+      not any(r[2] <= 2001 <= r[3] and r[1] == "Jetta"
+              for g in js.ENGINE_FAMILIES["vw-mk4"]["parts"]["alternator"]
+              ["verified"]["groups"] for r in g))
+check("malibu-20t: 16-22 covered; starter verified 17-21; 17 alt stays Likely",
+      _fam_hit("gm-malibu-20t", 2019, "Chevrolet", "Malibu")
+      and js.ENGINE_FAMILIES["gm-malibu-20t"]["parts"]["starter"]
+      ["verified"]["groups"] == [[("Chevrolet", "Malibu", 2017, 2021)]]
+      and not any(r[2] <= 2017 <= r[3]
+                  for g in js.ENGINE_FAMILIES["gm-malibu-20t"]["parts"]
+                  ["alternator"]["verified"]["groups"] for r in g))
+check("gens: Golf/Rabbit/New Beetle/Beetle/Spark rows exist and split right",
+      _gen_win("Volkswagen", "Golf", 2003) == (1999, 2006)
+      and _gen_win("Volkswagen", "Rabbit", 2008) == (2006, 2009)
+      and _gen_win("Volkswagen", "New Beetle", 2005) == (1998, 2010)
+      and _gen_win("Volkswagen", "Beetle", 2014) == (2012, 2019)
+      and _gen_win("Volkswagen", "Beetle", 2005) == (1998, 2010)
+      and _gen_win("Chevrolet", "Spark", 2015) == (2013, 2015)
+      and _gen_win("Chevrolet", "Spark", 2016) == (2016, 2022))
 
 check("gens: Echo/xA/xD rows exist; Toyota-alias Scion rows mirror Scion's",
       _gen_win("Toyota", "Echo", 2003) == (2000, 2005)
