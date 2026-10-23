@@ -3836,6 +3836,21 @@ function pfRunSearch() {
       partOk(f) && f.apps.some(a => pfAppMatches(a, s.year, s.make, s.model)));
     pfRenderEngineChips(fams);
     if (!fams.length) {
+      // Performance trims with unique, unpublished engines get a real
+      // explanation (and a pointer at the body-part search that DOES work)
+      // instead of a bare "no data".
+      const trimNote = (interchangeData.trimEngineNotes || []).find(t =>
+        t.apps.some(a => pfAppMatches(a, s.year, s.make, s.model)));
+      if (trimNote) {
+        const nTrim = liveInventory.filter(v =>
+          trimNote.apps.some(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model))).length;
+        out.innerHTML = `<div class="pf-empty">${escapeHtml(trimNote.note)}`
+          + ` (${nTrim} in tracked yards right now.)`
+          + ` Body parts are a different story — window regulators, switches and`
+          + ` climate controls share the platform, so search one of those to see`
+          + ` every platform donor near you.</div>`;
+        return;
+      }
       out.innerHTML = `<div class="pf-empty">No interchange data yet for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())}. We only list fits we can stand behind — this car's engine family isn't in the verified table yet, so we'd rather show nothing than guess.</div>`;
       return;
     }
@@ -3887,16 +3902,21 @@ function pfRunSearch() {
     }
   } else {
     pfRenderEngineChips(null);
-    // Verified cross-model groups (hand-curated platform families).
+    // Cross-model groups: hand-verified platform families ship tier
+    // "verified"; performance-trim platform mappings (M3 -> E46 etc.) are
+    // reasoned claims, not published part-number lists, and ship "likely".
     for (const g of interchangeData.platformGroups) {
       if (g.cat !== pfCat.id) continue;
       if (!g.apps.some(a => pfAppMatches(a, s.year, s.make, s.model))) continue;
+      const gTier = g.tier === 'likely' ? 'likely' : 'verified';
       groupNotes.push(`${g.label}: ${g.note}`);
       for (const v of liveInventory) {
         if (!g.apps.some(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model))) continue;
         const d = vehicleDistanceMi(v);
         if (radius && (d == null || d > radius)) continue;
-        results.set(v.id, { v, d, tier: 'verified', warns: [escapeHtml(g.note)] });
+        const prev = results.get(v.id);
+        if (prev && prev.tier === 'verified') continue; // verified wins
+        results.set(v.id, { v, d, tier: gTier, warns: [escapeHtml(g.note)] });
       }
     }
     // Same model, same generation window — the donor's own part row says
