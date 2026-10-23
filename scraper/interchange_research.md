@@ -2116,6 +2116,11 @@ generation boundary AND the claim behaves correctly at the boundary year.
 | 14 | radio | 2006 vs 2010 Chrysler 300 head unit | LX 300 2005-2010 | PASS as Likely-only — exact class never uses platform groups (Charger/Magnum donors refused despite shared LX platform) |
 | 15 | ecm | 2013 vs 2016 Honda Civic ECM | 9th gen 2012-2015; 10th from 2016 | PASS — 2016 refused for a 2013 seeker; programming note always shown |
 
+**Coverage impact** (vs the 252,673-vehicle live inventory, 2026-10-22):
+engine-family (class A) coverage 83.3%; generation-window coverage for the
+class B/C/D categories 80.7%; union — vehicles the Parts tab can answer
+SOMETHING for — **89.7%**.
+
 Hazard regressions re-checked while writing these: `starter` on the
 Pick-n-Pull list now quotes STARTER ($30.99), never the cheaper STARTER
 SOLENOID ($11.99) that the old substring match preferred; `tow mirror`
