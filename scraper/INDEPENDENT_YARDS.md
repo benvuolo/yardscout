@@ -417,3 +417,64 @@ the two yards resolve to a real published price — on par with PnP/PYP.
 Unmapped stays honest ("check yard price list"): hybrid batteries, cameras,
 transfer-case motors etc. aren't on Budget's lists; Bartow's list has no
 amplifier or hybrid-inverter line items (WG's does).
+
+## 2026-10-23 — Metro Detroit pass (owner-forwarded email, 4 chains requested)
+
+Owner forwarded an email from Elliot Bruzek asking for metro Detroit
+u-pull coverage: Ryans Pick-A-Part, US Auto Supply (2 locations),
+U-Pull and Save (2 locations), Regal U-Pull-It. Outcome: 3 adapters
+built (3 yards listed), 1 directory-only. Michigan goes from 2 yards
+(Parts Galore Detroit, Fenix Belleville) to 5.
+
+1. **Ryan's Pick-a-Part — Detroit (9309 Hubbell Ave, ~1,350 cars)** —
+   ryanspickapart.com runs the CRUSH MVC shell but its /Home/Inventory
+   search form is dead (JS points at removed elements); the REAL inventory
+   is an iframe to **Ario (app.autorecycler.io)**, a Bubble.io app — NEW
+   platform, first Bubble adapter. Bubble obfuscates POST bodies
+   (PBKDF2-MD5 c=7 → AES-256-CBC, key = appname+timestamp, in `z`/`y`/`x`
+   fields); scheme reversed from the app's run.js into `_ario_encode_data`
+   (needs `cryptography`, added to scan.yml). Responses are plain JSON.
+   Gotchas: rows live in `custom.inventorysearch` (not custom.inventory);
+   reference constraints need the full `<appid>__LOOKUP__<id>` value (bare
+   ids silently match nothing); empty `sorts_list` is fine but a populated
+   one throws BAD_REVISION. Org id resolved at runtime from the slug
+   `ryans-pick-a-part-detroit`; make/model are `in`-batched id→name
+   lookups. visible=true + not-deleted filters ~16.6k historical rows to
+   the live lot. Stock STK##### (id basis `ryans-stk#####`), VIN on all
+   but ~32, row, color, added_date (epoch-ms). Pin from the org record's
+   own geocode. Price list: CRUSH /Home/PartPrices 4-col → 525 rows,
+   `ryans_pricing.json`.
+2. **US Auto Supply — Sterling Heights (7575 18 1/2 Mile Rd)** — VinPlus
+   tenant `us_auto_supply` (oracle hit on /api/yard-info), so a
+   CONFIG-ONLY addition to VINPLUS_TENANTS, single-location keyed "".
+   The email said 2 locations, but the Detroit store (2346 W. Warren Ave)
+   is full-service — its only search is a Hollander part-interchange CGI
+   (part listings, not vehicle rows) — not listed, Budget Auburndale
+   precedent. Exact OSM parcel. Price list /upull/part-prices/ → 722 rows,
+   `usauto_pricing.json`.
+3. **U-Pull and Save — Pontiac (240 E. Columbia Ave, store 105)** — Nuxt 3
+   site with a clean same-origin JSON API, but NO bulk listing endpoint
+   (empty/ALL/% model all return []). Hybrid Chesterfield-style adapter:
+   committed cache `docs/data/upas_cache.json` holds known (make, model)
+   pairs + per-vehicle details; each scan does one
+   /api/vehicles/search/?store=105&make=&model= per known pair (live set),
+   /api/vehicles/recent/105 + a bounded sequential-id sweep (vehicleIDs
+   are intake-sequential) to discover new pairs, and a capped
+   /api/vehicles/{id} detail backfill for VIN + YardLocationDT (404 =
+   removed). Seeded 2026-10-23 by a one-time full id-window scan. Tier-1
+   per-car links: u-pullandsave.com/vehicles/{vehicleID}. The email said
+   2 locations, but the site's own store picker says "Mason, MI (Yard
+   Closed)" — Mason (store 110) is vehicle purchasing only, not listed.
+   Exact OSM parcel. Price list /price-list → 488 rows,
+   `upas_pricing.json`.
+4. **Regal U-Pull-It — Howell (945 Lucy Rd): DIRECTORY-ONLY.** The
+   WordPress site publishes NO vehicle inventory: /parts/ ("Search for
+   Parts") renders only address/hours, and the U-Pull-It page says "We can
+   only tell you if the vehicle is available in the yard." Registry entry
+   status `directory-only` with exact OSM pin; re-check if they adopt an
+   inventory platform. Not faked into the app.
+
+All three price lists are single-location (no per-yard split needed) and
+wired p195-style: price sheet only, no PART_KEYWORD_MAP columns — same
+scope as every non-Budget independent (Budget's keyword columns were a
+specific owner follow-up).

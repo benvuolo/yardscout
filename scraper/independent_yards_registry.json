@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updated": "2026-10-22",
-  "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
+  "updated": "2026-10-23",
+  "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked | retired | directory-only. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
       "name": "Wrench-A-Part",
@@ -1139,6 +1139,110 @@
           "state": "FL",
           "lat": 27.9031,
           "lng": -81.8087
+        }
+      ]
+    },
+    {
+      "name": "Ryan's Pick-a-Part",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' embedded as an iframe on the yard's CRUSH MVC site (ryanspickapart.com/Home/Inventory). FIRST Ario/Bubble adapter.",
+      "inventory_url": "https://ryanspickapart.com/Home/Inventory",
+      "api": {
+        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search \u2014 Bubble obfuscated bodies (PBKDF2-MD5 c=7 + AES-256-CBC, keys derived from appname+timestamp; reproduced in _ario_encode_data). Types: custom.organization (slug ryans-pick-a-part-detroit -> org id), custom.inventorysearch (org + visible=true, n=400 paging), custom.vehicle_make / custom.vehicle_model ('in'-constrained id->name lookups).",
+        "method": "POST (JSON, obfuscated)",
+        "auth": "none (anonymous public search, same calls the embed makes)",
+        "format": "JSON hits: name/year/stock STK#####/VIN/row/ext color/added_date epoch-ms + make/model as __LOOKUP__ refs. Reference-equality constraints REQUIRE the '<appid>__LOOKUP__<id>' form \u2014 bare ids match nothing.",
+        "requests_per_scan": "~10-12 POSTs at 2s pacing (org + 4 inventory pages + make/model lookups; +1 GET for the price list)",
+        "notes": "Owner-forwarded email request (Elliot B., Oct 2026). ~16.6k historical inventorysearch records; visible=true filters to the ~1,350 currently on the lot. Stock numbers are CRUSH-style STK#####; 32 rows VIN-less (ids stay stock-based). Pin from the org record's own geocode (9309 Hubbell Ave, Detroit 48228). Needs the `cryptography` pip package (added to scan.yml). The yard site's own robots disallows its dead /Home/GetMakes|GetModels AJAX \u2014 never touched; app.autorecycler.io robots only disallows /version-test/."
+      },
+      "update_freshness": "live (added_date values from the same week; site banner 'New Vehicles Added Daily')",
+      "robots": "app.autorecycler.io: allow all except /version-test/; ryanspickapart.com: disallows /Home/GetMakes + /Home/GetModels (not used)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Ryan's Pick-a-Part - Detroit",
+          "city": "Detroit",
+          "state": "MI",
+          "lat": 42.3626,
+          "lng": -83.1885
+        }
+      ]
+    },
+    {
+      "name": "US Auto Supply",
+      "status": "adapter-built",
+      "platform": "VinPlus \u2014 TexN Rewards (tenant us_auto_supply, custom_slug 'usauto'); config-only addition to the existing fetch_vinplus_inventory adapter",
+      "inventory_url": "https://usautosupplymi.com/inventory/",
+      "api": {
+        "endpoint": "POST {VINPLUS_API}/searchVehicleHttp with yard_id=us_auto_supply, location_id=null (single-location tenant)",
+        "method": "POST (JSON)",
+        "auth": "none",
+        "format": "VinPlus rows: STK##### stocks, full VINs, year/make/model/row/color/engine/dateAdded",
+        "requests_per_scan": "~50 shared-host VinPlus queries (one per make; serial inside the adapter) +1 GET for the price list",
+        "notes": "Owner-forwarded email request (Elliot B., Oct 2026) \u2014 email said '2 locations': the u-pull inventory is the Sterling Heights yard (7575 18 1/2 Mile Rd, exact OSM parcel); the Detroit location (2346 W. Warren Ave) is full-service with a Hollander interchange search only (search.usautosupplymi.com /cgi-bin/search.cgi \u2014 part listings, not vehicle rows) and is NOT listed (Budget Auburndale precedent). Price list at /upull/part-prices/ (~720 rows) -> usauto_pricing.json."
+      },
+      "update_freshness": "live (dateAdded values from the same day; 'new cars daily')",
+      "robots": "usautosupplymi.com: wp-admin disallow only + Crawl-delay 10 (we make 1 GET to the price page per refresh); vinplus API host: allow all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "US Auto Supply - Sterling Heights",
+          "city": "Sterling Heights",
+          "state": "MI",
+          "lat": 42.6025,
+          "lng": -83.0373
+        }
+      ]
+    },
+    {
+      "name": "U-Pull and Save",
+      "status": "adapter-built",
+      "platform": "Custom Nuxt 3 site (Schram Auto Parts family) with a same-origin JSON API under /api/ \u2014 the same endpoints the site's own search tabs call",
+      "inventory_url": "https://www.u-pullandsave.com/used-car-parts",
+      "api": {
+        "endpoint": "GET /api/vehicles/search/?store=105&year=&make=&model= (all live vehicles of a make+model; year is catalog context only), GET /api/vehicles/{id} (full record incl. VIN + YardLocationDT; 404 once removed), GET /api/vehicles/recent/105 (today's arrivals, ~15 cap)",
+        "method": "GET (JSON)",
+        "auth": "none",
+        "format": "search rows: vehicleID (sequential intake ids; tier-1 per-car link key), stockID P#####, year/make/model/color/yardRow; detail adds VIN, YardLocationDT, factory options",
+        "requests_per_scan": "~300 at 1.5s (one search per known make+model pair + new-id sweep + bounded VIN/date backfill); hybrid cache docs/data/upas_cache.json committed by the scan workflow (Chesterfield precedent), seeded by a one-time full id-window scan 2026-10-23",
+        "notes": "Owner-forwarded email request (Elliot B., Oct 2026) \u2014 email said '2 locations': Pontiac (240 E. Columbia Ave, exact OSM parcel) is the open u-pull yard; Mason (1325 N. Cedar) is vehicle purchasing only \u2014 the site's own store picker lists it as 'Mason, MI (Yard Closed)' \u2014 not listed. No wildcard/bulk listing endpoint exists (verified: empty/ALL/% model all return []), hence the pair-search + id-sweep hybrid. Price list /price-list (~490 rows, '$X.XX/ Each' + core) -> upas_pricing.json."
+      },
+      "update_freshness": "live (YardLocationDT values from the same hour)",
+      "robots": "allow all, no crawl-delay",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "U-Pull and Save - Pontiac",
+          "city": "Pontiac",
+          "state": "MI",
+          "lat": 42.6703,
+          "lng": -83.2911
+        }
+      ]
+    },
+    {
+      "name": "Regal U-Pull-It",
+      "status": "directory-only",
+      "platform": "WordPress/Divi brochure site (regalautopartsmi.com); no inventory system found",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Owner-forwarded email request (Elliot B., Oct 2026) \u2014 NO public vehicle inventory exists: the 'Search for Parts' page (/parts/) renders only the address/hours, and the U-Pull-It page states 'We can only tell you if the vehicle is available in the yard.' Self-serve yard at 945 Lucy Rd, Howell MI 48843 (Livingston County; exact OSM parcel). Re-check if they ever adopt an inventory platform."
+      },
+      "update_freshness": null,
+      "robots": "allow all (Yoast)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Regal U-Pull-It - Howell",
+          "city": "Howell",
+          "state": "MI",
+          "lat": 42.5873,
+          "lng": -83.9142
         }
       ]
     }
