@@ -1980,3 +1980,32 @@
   padding: 0.6rem 0.2rem;
 }
 .pf-more { font-size: 0.75rem; color: var(--text-dim); padding: 0.3rem 0.1rem; }
+
+/* Coverage ask — the reply channel for the honest "we don't cover this yet"
+ * empty states. Quiet by design: a muted one-liner + underlined link, then a
+ * tiny prefilled form. The thank-you stays in the same muted voice. */
+.pfc-line { margin-top: 0.55rem; font-size: 0.78rem; color: var(--text-dim); }
+.pfc-ask {
+  background: none; border: none; padding: 0; font: inherit;
+  color: var(--text-dim); text-decoration: underline; cursor: pointer;
+}
+.pfc-ask:hover { color: var(--text); }
+.pf-coverage-form {
+  margin-top: 0.6rem; padding: 0.7rem; max-width: 26rem;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex; flex-direction: column; gap: 0.45rem;
+}
+.pfc-what { font-size: 0.78rem; color: var(--text-dim); line-height: 1.5; }
+.pfc-what strong { color: var(--text); }
+.pfc-zip { color: var(--text-dim); }
+.pf-coverage-form input {
+  width: 100%; padding: 0.5rem 0.65rem;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text);
+  font-size: 0.8125rem; font-family: var(--font-ui);
+}
+.pf-coverage-form input::placeholder { color: var(--text-dim); }
+.pfc-actions { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.pfc-status { font-size: 0.72rem; color: var(--text-dim); }
+.pfc-thanks { margin-top: 0.6rem; font-size: 0.78rem; color: var(--text-dim); line-height: 1.5; }

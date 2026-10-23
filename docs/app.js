@@ -3783,7 +3783,7 @@ function pfRenderPartSuggest() {
         <span>${escapeHtml(c.label)}</span>
         <span class="csi-count">${c.kind === 'engine' ? 'engine-driven' : 'body / interior'}</span>
       </div>`).join('')
-    : '<div class="compare-suggest-empty">No matching part — interchange currently covers the parts in this list. More families land as they\u2019re verified.</div>';
+    : '<div class="compare-suggest-empty">No matching part — interchange currently covers the parts in this list. More families land as they\u2019re verified.' + pfAskHtml('part') + '</div>';
   pfPartSuggest.style.display = '';
   pfPartInput.setAttribute('aria-expanded', 'true');
 }
@@ -3798,6 +3798,15 @@ pfPartInput.addEventListener('input', () => {
 });
 pfPartInput.addEventListener('blur', () => setTimeout(pfHidePartSuggest, 150));
 pfPartSuggest.addEventListener('mousedown', e => {
+  // Coverage ask inside the "no matching part" row: mousedown (not click)
+  // so the input's blur-hide doesn't eat the tap. Form lands in #pf-results.
+  const ask = e.target.closest('.pfc-ask');
+  if (ask) {
+    e.preventDefault();
+    pfHidePartSuggest();
+    pfCoverageOpen('part', null);
+    return;
+  }
   const item = e.target.closest('.compare-suggest-item');
   if (!item) return;
   e.preventDefault();
@@ -4039,14 +4048,14 @@ function pfRunSearch() {
           + ` (${nTrim} in tracked yards right now.)`
           + ` Body parts are a different story — window regulators, switches and`
           + ` climate controls share the platform, so search one of those to see`
-          + ` every platform donor near you.</div>`;
+          + ` every platform donor near you.${pfAskHtml('car')}</div>`;
         return;
       }
-      out.innerHTML = `<div class="pf-empty">No interchange data yet for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())}. We only list fits we can stand behind — this car's engine family isn't in the verified table yet, so we'd rather show nothing than guess.</div>`;
+      out.innerHTML = `<div class="pf-empty">No interchange data yet for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())}. We only list fits we can stand behind — this car's engine family isn't in the verified table yet, so we'd rather show nothing than guess.${pfAskHtml('car')}</div>`;
       return;
     }
     if (pfChosenFam === '__none__') {
-      out.innerHTML = `<div class="pf-empty">We don't have interchange data for your engine yet — only the engines listed above are in the verified table. We'd rather show nothing than guess a fit that wastes your drive.</div>`;
+      out.innerHTML = `<div class="pf-empty">We don't have interchange data for your engine yet — only the engines listed above are in the verified table. We'd rather show nothing than guess a fit that wastes your drive.${pfAskHtml('engine')}</div>`;
       return;
     }
     let fam = fams.length === 1 ? fams[0] : fams.find(f => f.id === pfChosenFam);
@@ -4230,6 +4239,99 @@ function pfRunSearch() {
     ? `<div class="pf-more">Showing the ${CAP} nearest of ${rows.length.toLocaleString()} donors — tighten the radius to narrow.</div>`
     : '');
 }
+
+/* ===== COVERAGE REQUESTS (owner ask, 2026-10) ============================
+ * The honest empty states above say "we don't cover this yet" — this is the
+ * reply channel. A quiet one-liner + link opens a tiny inline form PREFILLED
+ * with what the seeker already entered (car, part, zip); one tap files it.
+ * No login. Email is optional and the copy promises nothing automated — when
+ * coverage lands we may ping them by hand. Requests aggregate server-side by
+ * a normalized key and surface to the owner (admin GET + a max-once-a-day
+ * digest email). Server: POST /v1/coverage/request (backend/src/coverage.js). */
+const COVERAGE_API = 'https://yardscout-api.yardscout.workers.dev';
+let _covPending = null;   // context captured when the form opens
+
+function pfAskHtml(kind) {
+  return `<div class="pfc-line">We don\u2019t cover this yet \u2014 <button type="button" class="pfc-ask" data-kind="${kind}">ask us to add it</button>.</div>`;
+}
+
+function pfCoverageContext(kind) {
+  const s = pfSeeker();
+  return {
+    kind,
+    year: s.year || null,
+    make: s.make || null,
+    model: s.model || null,
+    part: (pfCat ? pfCat.label : pfPartInput.value.trim()) || null,
+    zip: localStorage.getItem('jh_zip') || null,
+  };
+}
+
+function pfCoverageFormHtml(ctx) {
+  const what = [[ctx.year, ctx.make, ctx.model].filter(Boolean).join(' '), ctx.part]
+    .filter(Boolean).join(' \u2014 ');
+  const notePh = ctx.kind === 'engine'
+    ? 'which engine is in it? (e.g. 3.0 V6) — optional'
+    : 'anything that helps us verify it — optional';
+  return `<div class="pf-coverage-form" id="pf-coverage-form">
+    <div class="pfc-what">Asking us to add: <strong>${escapeHtml(what)}</strong>${ctx.zip ? ` <span class="pfc-zip">(near ${escapeHtml(ctx.zip)})</span>` : ''}</div>
+    <input type="email" id="pfc-email" placeholder="email (optional) — if it lands, we may ping you" autocomplete="email">
+    <input type="text" id="pfc-note" placeholder="${notePh}" maxlength="500">
+    <div class="pfc-actions">
+      <button type="button" class="btn btn-primary" id="pfc-send" onclick="pfCoverageSubmit()">Add it to the list</button>
+      <span class="pfc-status" id="pfc-status"></span>
+    </div>
+  </div>`;
+}
+
+function pfCoverageOpen(kind, linkEl) {
+  _covPending = pfCoverageContext(kind);
+  track('coverage-ask-open');
+  const html = pfCoverageFormHtml(_covPending);
+  const line = linkEl && linkEl.closest('.pfc-line');
+  if (line) line.outerHTML = html;                                 // in place, inside the empty state
+  else document.getElementById('pf-results').innerHTML = html;     // part-combobox path (dropdown closes)
+}
+
+async function pfCoverageSubmit() {
+  if (!_covPending) return;
+  const btn = document.getElementById('pfc-send');
+  const status = document.getElementById('pfc-status');
+  const email = (document.getElementById('pfc-email').value || '').trim();
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    status.textContent = 'That email doesn\u2019t look right — fix it or leave it blank.';
+    return;
+  }
+  btn.disabled = true;
+  status.textContent = 'Sending\u2026';
+  const body = Object.assign({}, _covPending, {
+    email: email || null,
+    note: (document.getElementById('pfc-note').value || '').trim() || null,
+  });
+  try {
+    const r = await fetch(COVERAGE_API + '/v1/coverage/request', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!r.ok) throw new Error(r.status === 429 ? 'rate' : 'http');
+    track('coverage-ask-sent');
+    document.getElementById('pf-coverage-form').outerHTML =
+      '<div class="pfc-thanks">Added to the list \u2014 requests like this decide what we verify next.</div>';
+    _covPending = null;
+  } catch (e) {
+    btn.disabled = false;
+    status.textContent = e.message === 'rate'
+      ? 'We got your earlier requests \u2014 that\u2019s plenty for today.'
+      : 'Couldn\u2019t send right now \u2014 try again in a minute.';
+  }
+}
+
+/* Ask-links live inside innerHTML-built empty states — delegate the clicks. */
+document.getElementById('pf-results').addEventListener('click', e => {
+  const ask = e.target.closest('.pfc-ask');
+  if (ask) pfCoverageOpen(ask.dataset.kind, ask);
+});
 
 document.getElementById('pf-go').addEventListener('click', pfRunSearch);
 ['pf-year', 'pf-make', 'pf-model'].forEach(id => {
