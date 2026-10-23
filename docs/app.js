@@ -1507,6 +1507,7 @@ async function setZipCenter(zip) {
     document.getElementById('live-zip').style.borderColor = 'var(--red)';
     setTimeout(() => { document.getElementById('live-zip').style.borderColor = ''; }, 1500);
   }
+  pfSyncWhere();   // keep the Parts-tab mirror current (skips a focused input)
   renderLive();
 }
 
@@ -1534,6 +1535,7 @@ async function useMyLocation() {
     zipEl.placeholder = 'Using your location';
     busy(false);
     updateZipBanner();
+    pfSyncWhere();
     renderLive();
     if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
   };
@@ -4415,6 +4417,50 @@ document.getElementById('pf-go').addEventListener('click', pfRunSearch);
     pfMaybeSearch();
   });
 });
+/* ===== PARTS-TAB WHERE CONTROLS (owner request, 2026-10-23) ==============
+ * The Parts search always ran inside the app's zip/radius — these controls
+ * make that visible on the tab itself. Same stored center (setZipCenter,
+ * jh_zip) and radius (jh_radius) as the Live and Yards tabs — one
+ * implementation, three entry points — with the identical free 250 mi cap
+ * and Pro gate. Changing either re-runs whatever search/browse is on
+ * screen; with no part picked yet, the try-example chips recompute for the
+ * new area instead. */
+document.getElementById('pf-zip').addEventListener('input', async e => {
+  const v = e.target.value.trim();
+  document.getElementById('live-zip').value = v;
+  await setZipCenter(v);
+  updateZipBanner();
+  if (pfCat) pfRunSearch(); else pfRenderTry();
+});
+document.getElementById('pf-radius').addEventListener('change', e => {
+  const sel = e.target;
+  if (!isPro() && (sel.value === '' || parseFloat(sel.value) > FREE_MAX_RADIUS_MI)) {
+    const trigger = sel.value === '' ? 'radius-any-distance' : 'radius-' + sel.value + 'mi';
+    // Snap back to the radius actually in effect (the Live select is the
+    // source of truth), then pitch — identical to the Yards-tab gate.
+    sel.value = document.getElementById('live-radius').value || String(FREE_MAX_RADIUS_MI);
+    openUpgradeSheet(trigger);
+    return;
+  }
+  document.getElementById('live-radius').value = sel.value;
+  localStorage.setItem('jh_radius', sel.value);
+  if (pfCat) pfRunSearch();
+});
+/* Resync so the three tabs' where controls never disagree: on every Parts
+ * visit, and whenever the center changes elsewhere (zip banner, GPS). The
+ * zip is left alone while the user is typing in it. */
+function pfSyncWhere() {
+  const pr = document.getElementById('pf-radius');
+  if (!pr) return;
+  pr.value = document.getElementById('live-radius').value;
+  const pz = document.getElementById('pf-zip');
+  const lz = document.getElementById('live-zip');
+  if (document.activeElement !== pz) {
+    pz.value = lz.value;
+    pz.placeholder = lz.placeholder;   // carries 'Using your location' when GPS is the center
+  }
+}
+
 /* ===== TRY-EXAMPLE CHIPS (owner request, 2026-10-23) =====================
  * The empty Parts tab used to greet people with a paragraph of instructions;
  * now it greets them with 2-3 one-tap examples that prefill AND run. Picks
@@ -4588,6 +4634,7 @@ document.getElementById('pf-results').addEventListener('click', e => {
  * (recomputed if the zip changed since last look). */
 let pfInited = false;
 function initPartsTab() {
+  pfSyncWhere();   // pick up any zip/radius change made on the other tabs
   if (pfInited) { loadInterchange().then(pfRenderTry); return; }
   pfInited = true;
   track('part-finder-open');

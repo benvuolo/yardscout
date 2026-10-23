@@ -339,6 +339,28 @@
           <div class="pf-ctl"><label for="pf-make">Make</label><select id="pf-make"></select></div>
           <div class="pf-ctl"><label for="pf-model">Model</label><select id="pf-model" disabled></select></div>
         </div>
+        <!-- Where controls (owner request, 2026-10-23): Parts always searched
+             inside the app's zip/radius — now that's visible on the tab, same
+             stored center and radius as the Live and Yards tabs, same free
+             250 mi cap and Pro gate. Its own two-up row so the part/car grid
+             stays uncrowded at phone widths. -->
+        <div class="pf-grid pf-where">
+          <div class="pf-ctl">
+            <label for="pf-zip">Zip code</label>
+            <input type="text" id="pf-zip" inputmode="numeric" maxlength="5" placeholder="e.g. 84101" title="Center point for the donor search &mdash; shared with the Live and Yards tabs">
+          </div>
+          <div class="pf-ctl">
+            <label for="pf-radius">Within</label>
+            <select id="pf-radius" title="Only show donor cars within this distance of your zip">
+              <option value="">Any distance &mdash; Pro</option>
+              <option value="25">&le; 25 mi</option>
+              <option value="50">&le; 50 mi</option>
+              <option value="100" selected>&le; 100 mi</option>
+              <option value="250">&le; 250 mi</option>
+              <option value="500">&le; 500 mi &mdash; Pro</option>
+            </select>
+          </div>
+        </div>
         <div class="pf-engine" id="pf-engine" style="display:none;"></div>
         <div class="pf-actions">
           <button type="button" class="btn btn-primary" id="pf-go">Find donor cars</button>

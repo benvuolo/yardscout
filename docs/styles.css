@@ -1921,6 +1921,13 @@
   .pf-grid { grid-template-columns: 2fr 0.8fr 1fr 1.2fr; }
   .pf-ctl-part { grid-column: auto; }
 }
+/* Where row (zip + distance, shared with Live/Yards): always its own
+ * two-up line under the car pickers so the part/car grid stays uncrowded
+ * at 360-390px phone widths; capped on desktop so it doesn't stretch. */
+.pf-grid.pf-where { grid-template-columns: 1fr 1fr; padding-top: 0.5rem; }
+@media (min-width: 720px) {
+  .pf-grid.pf-where { max-width: 420px; }
+}
 .pf-engine {
   display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;
   margin-top: 0.65rem;
