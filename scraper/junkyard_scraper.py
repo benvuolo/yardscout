@@ -6420,7 +6420,11 @@ MODEL_GENERATIONS: list[tuple[str, str, tuple[tuple[int, int], ...]]] = [
     ("Toyota", "Tundra", ((2000, 2006), (2007, 2013), (2014, 2021),
                           (2022, 2025))),
     ("Toyota", "Sequoia", ((2001, 2007), (2008, 2022), (2023, 2025))),
-    ("Toyota", "Yaris", ((2007, 2011), (2012, 2018))),
+    # Yaris XP90 window opens 2006 for the Canadian-market MY2006 hatch (US
+    # sales began MY2007 — same body). 2019-20 is the Mazda2-based sedan/hatch,
+    # its own window.
+    ("Toyota", "Yaris", ((2006, 2011), (2012, 2018), (2019, 2020))),
+    ("Toyota", "Echo", ((2000, 2005),)),
     ("Toyota", "Matrix", ((2003, 2008), (2009, 2013))),
     ("Pontiac", "Vibe", ((2003, 2008), (2009, 2010))),
     ("Honda", "Fit", ((2007, 2008), (2009, 2013), (2015, 2020))),
@@ -6438,6 +6442,14 @@ MODEL_GENERATIONS: list[tuple[str, str, tuple[tuple[int, int], ...]]] = [
                                (2006, 2012))),
     ("Scion", "tC", ((2005, 2010), (2011, 2016))),
     ("Scion", "xB", ((2004, 2006), (2008, 2015))),
+    ("Scion", "xA", ((2004, 2006),)),
+    ("Scion", "xD", ((2008, 2014),)),
+    # Feed-alias spellings: some chains list Scions under make Toyota with
+    # the model spelled "Scion tC" etc. Same cars, same windows.
+    ("Toyota", "Scion tC", ((2005, 2010), (2011, 2016))),
+    ("Toyota", "Scion xB", ((2004, 2006), (2008, 2015))),
+    ("Toyota", "Scion xA", ((2004, 2006),)),
+    ("Toyota", "Scion xD", ((2008, 2014),)),
     ("Lexus", "ES 300", ((1992, 1996), (1997, 2001), (2002, 2003))),
     # --- Ford / Lincoln / Mercury ---
     ("Ford", "F-150", ((1980, 1986), (1987, 1991), (1992, 1996),
@@ -7089,6 +7101,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Toyota", "Highlander", 2001, 2007),
             ("Scion", "tC", 2005, 2010, {"sole": True}),
             ("Scion", "xB", 2008, 2015, {"sole": True}),
+            ("Toyota", "Scion tC", 2005, 2010, {"sole": True}),  # feed alias
+            ("Toyota", "Scion xB", 2008, 2015, {"sole": True}),  # feed alias
             ("Toyota", "Matrix", 2009, 2013),
             ("Toyota", "Corolla", 2009, 2010),
         ],
@@ -7104,7 +7118,8 @@ ENGINE_FAMILIES: dict[str, dict] = {
                                     ("Toyota", "RAV4", 2004, 2005),
                                     ("Toyota", "Solara", 2004, 2008),
                                     ("Toyota", "Camry Solara", 2004, 2008),
-                                    ("Scion", "tC", 2005, 2010)],
+                                    ("Scion", "tC", 2005, 2010),
+                                    ("Toyota", "Scion tC", 2005, 2010)],  # feed alias
                                    [("Toyota", "Camry", 2007, 2009),
                                     ("Toyota", "Matrix", 2009, 2013),
                                     ("Toyota", "Corolla", 2009, 2010)],
@@ -7121,12 +7136,14 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Toyota", "RAV4", 2009, 2012),
             ("Toyota", "RAV4", 2013, 2018, {"sole": True}),
             ("Scion", "tC", 2011, 2016, {"sole": True}),
+            ("Toyota", "Scion tC", 2011, 2016, {"sole": True}),  # feed alias
         ],
         "parts": {
             "alternator": {"note": "2AR-FE unit — hybrid Camrys have no belt alternator; the 10–11 XV40 Camry unit differs from the 12+ one, match part number",
                            "verified": {
                                "evidence": "Denso 104210-2270/-2340 (Toyota 27060-36010/36011, Lester 11402) application tables (dcalltech.com + rareelectrical.com, retrieved 2026-10-22): Scion tC 2.5 2011-16, Camry 2.5 2012-15, RAV4 2.5 2009-12.",
                                "groups": [[("Scion", "tC", 2011, 2016),
+                                           ("Toyota", "Scion tC", 2011, 2016),  # feed alias
                                            ("Toyota", "Camry", 2012, 2015),
                                            ("Toyota", "RAV4", 2009, 2012)]],
                            }},
@@ -7158,6 +7175,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Toyota", "Matrix", 2009, 2013),
             ("Pontiac", "Vibe", 2009, 2010),
             ("Scion", "xD", 2008, 2014, {"sole": True}),
+            ("Toyota", "Scion xD", 2008, 2014, {"sole": True}),  # feed alias
         ],
         "parts": {
             "alternator": {"note": "2ZR-FE unit — Prius 1.8 (2ZR-FXE hybrid) has no belt alternator; " + _ALT_NOTE},
@@ -8838,14 +8856,20 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "Toyota 1NZ-FE 1.5 I4 (Yaris/Echo/xA/xB)",
         "engine": {"liters": [1.5], "cyl": 4},
         "apps": [
-            ("Toyota", "Yaris", 2007, 2015, {"sole": True}),
+            # 2006 start covers the Canadian-market MY2006 XP90 hatch (US
+            # sales began MY2007 — same car, same 1NZ-FE); 2016-18 is the
+            # XP130 facelift, still 1NZ-FE. The 2019-20 US "Yaris" is the
+            # Mazda2-based P5 1.5 — a different engine, deliberately outside.
+            ("Toyota", "Yaris", 2006, 2018, {"sole": True}),
             ("Toyota", "Echo", 2000, 2005, {"sole": True}),
             ("Scion", "xA", 2004, 2006, {"sole": True}),
             ("Scion", "xB", 2004, 2006, {"sole": True}),
+            ("Toyota", "Scion xA", 2004, 2006, {"sole": True}),  # feed alias
+            ("Toyota", "Scion xB", 2004, 2006, {"sole": True}),  # feed alias
         ],
         "parts": {
-            "alternator": {"note": "Yaris 07-09 and 10-14 each one published unit; Echo/xA/xB rows are not in this catalog edition"},
-            "starter": {"note": "Yaris 12 and 13-15 published clean; 07-11 splits M/T vs A/T"},
+            "alternator": {"note": "Yaris 07-09, 10-14 and 16-18 each one published unit (2015 splits by build date); xB 04-06 and xA 05-06 publish clean; Echo dual-sources 70A standard vs 80A"},
+            "starter": {"note": "two published units (1.0 kW vs 1.6 kW) run side by side across Yaris 12-17 and the 07-11 rows split M/T vs A/T — all pairs stay Likely, match part number"},
         },
     },
     "honda-l15": {
@@ -9853,6 +9877,7 @@ _ALT_VERIFIED: dict = {
     "toyota-2zr": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0699 (100A clutch pulley) Scion xD 1.8 2008-2009 and Corolla 1.8 2009 (Japan-built). Later 2ZR Corolla/Matrix years use successor units — left at likely.",
         "groups": [[("Scion", "xD", 2008, 2009),
+                    ("Toyota", "Scion xD", 2008, 2009),  # feed alias
                     ("Toyota", "Corolla", 2009, 2009)]],
     },
     "honda-d16": {
@@ -10498,10 +10523,15 @@ _ALT_VERIFIED: dict = {
         "groups": [[("Chevrolet", "Malibu", 2013, 2013)]],
     },
     "toyota-1nz": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0799 (80A) Yaris 1.5 1NZ-FE 2010-2014 unqualified; 210-0619 (80A) Yaris 1.5 2007-2009 unqualified.",
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-0799 (80A) Yaris 1.5 1NZ-FE 2010-2014 unqualified ('To 07/2014' in the 2015 row — 2015 excluded as a build-date split); 210-0619 (80A) Yaris 2007-2009 unqualified; 210-0893 (80A) Yaris 2016-2018 unqualified ('From 07/2014' in 2015); 210-0527 (80A) Scion xB 2004-2006 unqualified; 210-0528 (80A) Scion xA 2005-2006 unqualified (the 2004 xA row splits by build date 08/2003). Echo rows dual-source a 70A standard (210-0398) against the 80A — excluded.",
         "groups": [
             [("Toyota", "Yaris", 2010, 2014)],
             [("Toyota", "Yaris", 2007, 2009)],
+            [("Toyota", "Yaris", 2016, 2018)],
+            [("Scion", "xB", 2004, 2006),
+             ("Toyota", "Scion xB", 2004, 2006)],  # feed alias, same cars
+            [("Scion", "xA", 2005, 2006),
+             ("Toyota", "Scion xA", 2005, 2006)],  # feed alias, same cars
         ],
     },
     "honda-l15": {
@@ -11014,13 +11044,11 @@ _STR_VERIFIED: dict = {
         "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 281-6004 Santa Fe — 2.7 2001-2006, 3.5 2003-2006 and 2.4 2005-2006 in one published set. The verified span is capped to 2005-2006, the years where ALL family engines carry this number (2.4 02-04 splits M/T vs A/T).",
         "groups": [[("Hyundai", "Santa Fe", 2005, 2006)]],
     },
-    "toyota-1nz": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0401 Yaris 1.5 2013-2015 unqualified; 280-0395 Yaris 1.5 2012 unqualified (07-11 rows split M/T vs A/T).",
-        "groups": [
-            [("Toyota", "Yaris", 2013, 2015)],
-            [("Toyota", "Yaris", 2012, 2012)],
-        ],
-    },
+    # toyota-1nz starter groups removed 2026-10-23: the current Denso
+    # part-finder publishes TWO concurrent units for Yaris 2012-2017
+    # (280-0336 1.6 kW and 280-0401 1.0 kW, both unqualified) — the earlier
+    # catalog edition's clean 280-0401/280-0395 rows no longer stand alone,
+    # so every pair honestly drops back to Likely. Match part number.
     "kia-forte1": {
         "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 281-6017 Forte Koup 2.0 2014-2015 and 1.6 2014, one published unit, unqualified (sedan 14-15 rows carry start/stop-feature qualifiers; 10-11 rows split by build date).",
         "groups": [[("Kia", "Forte Koup", 2014, 2015)]],

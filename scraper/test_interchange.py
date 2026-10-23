@@ -565,6 +565,60 @@ check("browse: every body category ships spotted-part tokens",
       all(PC[c]["tokens"] for c in PC if PC[c]["kind"] == "body"),
       str([c for c in PC if PC[c]["kind"] == "body" and not PC[c]["tokens"]]))
 
+# Yaris/Echo/Scion 1NZ coverage (2026-10-23, owner-reported miss): the
+# Canadian-market MY2006 XP90 Yaris and the 2016-18 XP130 facelift are both
+# 1NZ-FE and belong to the family; the 2019-20 US Yaris is the Mazda2-based
+# P5 1.5 and must stay OUT. Toyota-prefixed feed spellings of the Scion
+# models must land in the same families as their Scion-make rows.
+_1nz = js.ENGINE_FAMILIES["toyota-1nz"]["apps"]
+
+
+def _fam_hit(fid, year, make, model):
+    return any(js._app_matches(a, year, make, model)
+               for a in js.ENGINE_FAMILIES[fid]["apps"])
+
+
+check("1nz: 2006 Yaris (Canadian MY2006 XP90) is in the family",
+      _fam_hit("toyota-1nz", 2006, "Toyota", "Yaris"))
+check("1nz: 2016-18 XP130 facelift Yaris is in the family",
+      _fam_hit("toyota-1nz", 2016, "Toyota", "Yaris")
+      and _fam_hit("toyota-1nz", 2018, "Toyota", "Yaris"))
+check("1nz: 2019 Mazda2-based Yaris is honestly excluded",
+      not any(any(js._app_matches(a, 2019, "Toyota", "Yaris")
+                  for a in f["apps"])
+              for f in js.ENGINE_FAMILIES.values()))
+check("1nz: 'Toyota / Scion xA' and 'Toyota / Scion xB' aliases match",
+      _fam_hit("toyota-1nz", 2005, "Toyota", "Scion xA")
+      and _fam_hit("toyota-1nz", 2005, "Toyota", "Scion xB"))
+check("2az/2ar: 'Toyota / Scion tC' alias lands in the right gen's family",
+      _fam_hit("toyota-2az", 2008, "Toyota", "Scion tC")
+      and _fam_hit("toyota-2ar", 2013, "Toyota", "Scion tC"))
+check("2zr: 'Toyota / Scion xD' alias matches",
+      _fam_hit("toyota-2zr", 2010, "Toyota", "Scion xD"))
+check("1nz: starter has NO verified groups (dual-published 0336/0401)",
+      "verified" not in js.ENGINE_FAMILIES["toyota-1nz"]["parts"]["starter"])
+check("1nz: alternator verified covers 16-18 but NOT the 2015 date-split",
+      any(any(r[:2] == ("Toyota", "Yaris") and r[2] == 2016 and r[3] == 2018
+              for r in g)
+          for g in js.ENGINE_FAMILIES["toyota-1nz"]["parts"]["alternator"]
+          ["verified"]["groups"])
+      and not any(any(r[2] <= 2015 <= r[3] and r[:2] == ("Toyota", "Yaris")
+                      for r in g)
+                  for g in js.ENGINE_FAMILIES["toyota-1nz"]["parts"]
+                  ["alternator"]["verified"]["groups"]))
+check("gens: Yaris window opens 2006 and the Mazda-based 19-20 is its own",
+      _gen_win("Toyota", "Yaris", 2006) == (2006, 2011)
+      and _gen_win("Toyota", "Yaris", 2019) == (2019, 2020)
+      and _gen_win("Toyota", "Yaris", 2018) == (2012, 2018))
+check("gens: Echo/xA/xD rows exist; Toyota-alias Scion rows mirror Scion's",
+      _gen_win("Toyota", "Echo", 2003) == (2000, 2005)
+      and _gen_win("Scion", "xA", 2005) == (2004, 2006)
+      and _gen_win("Scion", "xD", 2010) == (2008, 2014)
+      and GENS[("Toyota", "Scion tC")] == GENS[("Scion", "tC")]
+      and GENS[("Toyota", "Scion xB")] == GENS[("Scion", "xB")]
+      and GENS[("Toyota", "Scion xA")] == GENS[("Scion", "xA")]
+      and GENS[("Toyota", "Scion xD")] == GENS[("Scion", "xD")])
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILURE(S):", *FAILS, sep="\n  - ")
