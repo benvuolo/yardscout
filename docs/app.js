@@ -259,7 +259,7 @@ const PART_KEYWORD_MAP = [
 /* Strict provenance: each chain's price list applies ONLY to that chain's own
  * yards, and there is no estimated fallback. Returns {cost:null, source:'none'}
  * whenever the yard's real price list doesn't cover the part — callers then
- * show "check yard price list" and compute resale-only ranges. */
+ * show "check yard price list" and compute value-only ranges. */
 /* Memoized: called O(vehicles x parts) during sorting/rendering; the distinct
  * (part, location) pairs number only a few thousand. Cleared when price lists
  * finish loading so early misses don't stick. */
@@ -1578,7 +1578,7 @@ document.getElementById('live-gps').addEventListener('click', useMyLocation);
 document.getElementById('zip-banner-gps').addEventListener('click', useMyLocation);
 
 /* ===== PRO =====
- * Pro is sold exclusively through the iOS app (StoreKit, $8.99/mo). Web
+ * Pro ships exclusively through the iOS app (StoreKit, $8.99/mo). Web
  * touchpoints open the same upgrade sheet; its CTA links to the App Store. */
 const FREE_SAVE_CAP = 5;
 
@@ -1649,7 +1649,8 @@ function openUpgradeSheet(trigger) {
     // 1.2) — same honest copy, only the store name differs.
     if (sheetSub) sheetSub.textContent =
       'Finding cars near you is free and stays free. '
-      + 'Pro adds the money layer — part values, pull costs, '
+      + 'Pro adds the money layer — what each car\u2019s parts would cost you '
+      + 'used online, what the yard charges, what you\u2019d save, '
       + 'and instant push alerts. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
   }
@@ -1756,7 +1757,7 @@ function toggleSaved(key) {
 function savedRange(s) {
   if (!s.topParts || !s.topParts.length) return null;
   // Only subtract pull costs that come from the yard's real price list; when a
-  // part isn't covered we don't invent a cost — the range is flagged resale-only.
+  // part isn't covered we don't invent a cost — the range is flagged value-only.
   let lo = 0, hi = 0, unknownCost = false;
   s.topParts.forEach(p => {
     // "If equipped" (trim/option-unconfirmed) parts contribute $0 — the saved
@@ -1814,7 +1815,7 @@ function renderSavedSheet() {
                   : s.topParts.length + ' flagged part' + (s.topParts.length > 1 ? 's' : '') + ' \u2014 names with Pro'}</div>
               </div>
               ${range && range.hi > 0 ? (isPro()
-                ? `<div class="saved-item-profit" title="${range.unknownCost ? 'Estimated part value — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated range if parts are good, after this yard\u2019s list pull costs'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">value</small>' : ''}</div>`
+                ? `<div class="saved-item-profit" title="${range.unknownCost ? 'What these parts would cost to buy used online — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated savings vs buying these parts used online, after this yard\u2019s list pull costs — if parts are good'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">online price</small>' : '<small style="display:block;font-weight:400;opacity:0.7;">est. savings</small>'}</div>`
                 : `<div class="saved-item-profit locked-blur" role="button" onclick="openUpgradeSheet('saved-value')">${LOCKED_PRICE_MASK}</div>`) : ''}
               <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">${ICON.x}</button>
             </div>`;
@@ -2042,7 +2043,7 @@ function getFilteredLive() {
     }
     // 'manual' is the only Show option besides All cars. (The old 'valuable
     // parts' option was removed in the Oct 2026 needs-first copy rework —
-    // a profit-first filter was flip-framing baked into the UI; value info
+    // a value-first filter was seller-framing baked into the UI; value info
     // stays on the cards and in the sorts, where it reads as context.)
     // Confirmed from the VIN decode or the yard's own listing — cars with
     // unknown transmission are excluded rather than guessed at (the inline
@@ -2078,7 +2079,7 @@ function getFilteredLive() {
   };
   const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
   // Fastest-sell ranks by CONFIRMED parts only — an unconfirmed hardtop that
-  // "sells fast" (if it exists) must not put the car in the fast band.
+  // "goes fast" (if it exists) must not put the car in the fast band.
   const bestSpeed = v => {
     const conf = (v.topParts || []).filter(p => p.trim_status !== 'unconfirmed');
     return conf.length ? Math.max(...conf.map(p => speedRk(p.sell_speed))) : 0;
@@ -2313,10 +2314,16 @@ function renderLive() {
         const sellSpd = p.sell_speed || '';
         const sellCls = sellSpd === 'Fast' ? 'sell-fast' : sellSpd === 'Slow' ? 'sell-slow' : 'sell-medium';
         const costHtml = hasCost
-          ? `<span class="part-cost" title="${chainTitle[lookup.source]}: ${lookup.yardName || ''}">${formatPrice(yardCost)} <small style="opacity:0.65">${chainLabel[lookup.source]}</small></span>`
+          ? `<span class="part-cost" title="${chainTitle[lookup.source]}: ${lookup.yardName || ''}">Yard: ${formatPrice(yardCost)} <small style="opacity:0.65">${chainLabel[lookup.source]}</small></span>`
           : `<span class="part-cost" title="This part isn\u2019t on the yard\u2019s published price list — ask at the counter" style="opacity:0.75;"><small>check yard price list</small></span>`;
-        const localNote = /\bFB\b|Facebook/i.test(p.sell_at || '')
-          ? ' <span class="sell-tip" title="Facebook Marketplace is a local market — prices vary by area">FB prices vary by area</span>' : '';
+        // Buyer's math: the eBay-sold band is what this used part costs to BUY
+        // online; the yard's list price is the gate price. The difference is
+        // the reader's savings — only shown when the yard cost is real.
+        const saveLow = Math.max(0, Math.round(p.low - yardCost));
+        const saveHigh = Math.round(p.high - yardCost);
+        const saveHtml = hasCost && saveHigh > 0
+          ? `<span class="part-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(saveLow)}&ndash;${formatPrice(saveHigh)}</span>`
+          : '';
         // Trim-honesty marker: shown to everyone (it's about whether the part
         // exists on the car, not its value).
         const trimMark = p.trim_status === 'vin'
@@ -2339,8 +2346,8 @@ function renderLive() {
           return `
             <li class="part-item" style="flex-wrap:wrap;">
               <span class="part-name locked-blur" role="button" onclick="openUpgradeSheet('part-name')">${ph}</span>
-              <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">$\u2022\u2022 list</span>
-              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">worth ${LOCKED_PRICE_MASK}</span>
+              <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">Yard: $\u2022\u2022</span>
+              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">Used online: ${LOCKED_PRICE_MASK}</span>
             </li>`;
         }
         // "Spot it" tell for unconfirmed option parts — the VIN can't confirm
@@ -2357,20 +2364,19 @@ function renderLive() {
           <li class="part-item${hitCls}" style="flex-wrap:wrap;">
             <span class="part-name">${p.name}</span>
             ${trimMark}${fitsMark}
+            <span class="part-price" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
             ${costHtml}
-            <span class="part-price" title="Typical sold prices for working parts (eBay, national)">worth ${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
+            ${saveHtml}
             ${verifyNote}${sharedNote}
-            ${p.sell_at ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
-              <span class="sell-badge ${sellCls}">${sellSpd === 'Fast' ? 'Goes fast' : sellSpd === 'Slow' ? 'Slow mover' : 'Steady mover'}</span>
-              <span class="sell-channel">Spares sell on: ${p.sell_at}</span>${localNote}
-              ${p.sell_notes ? '<span class="sell-tip">' + displaySellNotes(p.sell_notes, v.make) + '</span>' : ''}
+            ${sellSpd ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
+              <span class="sell-badge ${sellCls}" title="How quickly parts like these typically get claimed at the yard">${sellSpd === 'Fast' ? 'Goes fast' : sellSpd === 'Slow' ? 'Slow mover' : 'Steady mover'}</span>
             </div>` : ''}
           </li>`;
       }).join('');
 
       // Demand is the primary signal; dollars are a supporting range, never a promise.
       // Only real price-list pull costs are subtracted — when any part isn't on
-      // the yard's list, the range is labeled resale-only instead of guessing.
+      // the yard's list, the range is labeled value-only instead of guessing.
       const rangeLow = Math.max(0, Math.round(lowSum * fm));
       const rangeHigh = Math.round(highSum * fm);
       const extraHigh = Math.round(unconfirmedHigh * fm);
@@ -2381,8 +2387,8 @@ function renderLive() {
         : { cls: 'demand-steady', label: 'Steady mover' };
       cardStyle = `--tier-color:var(--${demandRk === 3 ? 'demand-fast' : demandRk === 1 ? 'demand-slow' : 'demand-steady'});`;
       const rangeText = anyUnknownCost
-        ? `worth ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; pull cost: check yard price list`
-        : `e.g. ${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
+        ? `parts worth ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if bought elsewhere &middot; pull cost: check yard price list`
+        : `save ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} vs buying used online, if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
       // Upside stays visible without misleading: unconfirmed ("if equipped")
       // parts never inflate the headline range — they get a muted second line.
       const extraNote = extraHigh > 0 ? `
@@ -2396,7 +2402,7 @@ function renderLive() {
         </div>${extraNote}` : `
         <div class="profit-line">
           <span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>
-          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} See parts &amp; values &mdash; Pro</button>
+          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} See parts &amp; savings &mdash; Pro</button>
         </div>`)
         : '';
       partsBlock = `
@@ -3959,7 +3965,7 @@ function pfRunBrowse(s) {
 
   if (!rows.length) {
     const kindNote = (pfCat.kind === 'combo' || pfCat.kind === 'exact')
-      ? ` The spotted-parts data tracks carry-out flip parts, and ${escapeHtml(pfCat.label.toLowerCase())}s mostly aren't in it — add your car above and the fit search will find donors by ${pfCat.kind === 'combo' ? 'generation and engine' : 'generation'} instead.`
+      ? ` The spotted-parts data tracks smaller carry-out parts, and ${escapeHtml(pfCat.label.toLowerCase())}s mostly aren't in it — add your car above and the fit search will find donors by ${pfCat.kind === 'combo' ? 'generation and engine' : 'generation'} instead.`
       : ' Yards rotate stock weekly — widen the radius or check back.';
     out.innerHTML = `<div class="pf-empty">No cars within ${radius ? radius + ' mi' : 'range'} ${pfCat.kind === 'engine' ? `carrying a ${escapeHtml(fam.label)}` : `listing a spotted ${escapeHtml(pfCat.label.toLowerCase())}`} right now.${kindNote}</div>`;
     return;
@@ -3981,18 +3987,23 @@ function pfRunBrowse(s) {
       const v = r.v;
       const quote = yardPartQuote(v.location, quoteVariants);
       const priceHtml = quote.status === 'priced'
-        ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard's own published price list">$${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+        ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard's own published price list">Yard: $${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
         : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
       const worthHtml = (!pfCat.noValue && r.hit)
         ? (unlocked
-          ? `<span class="pf-ebay" title="Typical sold prices for working parts (eBay, national)">worth ${formatPrice(r.hit.low)}&ndash;${formatPrice(r.hit.high)}</span>`
-          : `<span class="pf-ebay locked-blur" role="button" onclick="openUpgradeSheet('pf-value')">worth ${LOCKED_PRICE_MASK}</span>`)
+          ? `<span class="pf-ebay" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(r.hit.low)}&ndash;${formatPrice(r.hit.high)}</span>`
+          : `<span class="pf-ebay locked-blur" role="button" onclick="openUpgradeSheet('pf-value')">Used online: ${LOCKED_PRICE_MASK}</span>`)
+        : '';
+      // Buyer's savings line — only when BOTH sides are real: a published
+      // yard price and a value band (Pro; free users would back the band out).
+      const saveHtml = (unlocked && !pfCat.noValue && r.hit && quote.status === 'priced' && r.hit.high - quote.price > 0)
+        ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">save ~${formatPrice(Math.max(0, Math.round(r.hit.low - quote.price)))}&ndash;${formatPrice(Math.round(r.hit.high - quote.price))}</span>`
         : '';
       const dateLbl = pfDateLabel(v.dateAdded);
       return `<div class="pf-row-card pf-browse">
         <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${r.badge}</div>
         <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ''}${saleBadgeHtml(v.location)}</div>
-        <div class="pf-value">${priceHtml}${worthHtml}</div>
+        <div class="pf-value">${worthHtml}${priceHtml}${saveHtml}</div>
         ${r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
       </div>`;
     }).join('')
@@ -4218,21 +4229,26 @@ function pfRunSearch() {
     const v = r.v;
     const quote = yardPartQuote(v.location, quoteVariants);
     const priceHtml = quote.status === 'priced'
-      ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard's own published price list">$${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+      ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard's own published price list">Yard: $${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
       : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
-    // noValue categories (engine assemblies, transmissions) ship no resale
+    // noValue categories (engine assemblies, transmissions) ship no value
     // band by charter — you can't carry one out, so "worth" is misleading.
     const partRow = pfCat.noValue ? null : pfPartRow(v, pfCat);
     const ebayHtml = partRow
       ? (unlocked
-        ? `<span class="pf-ebay" title="Typical sold prices for working parts (eBay, national)">worth ${formatPrice(partRow.low)}&ndash;${formatPrice(partRow.high)}</span>`
-        : `<span class="pf-ebay locked-blur" role="button" onclick="openUpgradeSheet('pf-value')">worth ${LOCKED_PRICE_MASK}</span>`)
+        ? `<span class="pf-ebay" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(partRow.low)}&ndash;${formatPrice(partRow.high)}</span>`
+        : `<span class="pf-ebay locked-blur" role="button" onclick="openUpgradeSheet('pf-value')">Used online: ${LOCKED_PRICE_MASK}</span>`)
+      : '';
+    // Buyer's savings line — both sides real, Pro only (free users would
+    // back the blurred band out of price + savings).
+    const saveHtml = (unlocked && partRow && quote.status === 'priced' && partRow.high - quote.price > 0)
+      ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">save ~${formatPrice(Math.max(0, Math.round(partRow.low - quote.price)))}&ndash;${formatPrice(Math.round(partRow.high - quote.price))}</span>`
       : '';
     const dateLbl = pfDateLabel(v.dateAdded);
     return `<div class="pf-row-card ${r.tier === 'verified' ? 'pf-verified' : 'pf-likely'}">
       <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${pfTierChip(r.tier)}</div>
       <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
-      <div class="pf-value">${priceHtml}${ebayHtml}</div>
+      <div class="pf-value">${ebayHtml}${priceHtml}${saveHtml}</div>
       ${r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
     </div>`;
   }).join('') + (rows.length > CAP
@@ -4383,21 +4399,6 @@ document.getElementById('yards-filter-chain').addEventListener('change', renderY
 document.getElementById('yards-filter-state').addEventListener('change', renderYards);
 
 /* ===== PROFIT BREAKDOWN ===== */
-/** Baked sell_notes can carry another make's flavor text (keyword-matched at
- *  scan time): "Mark Levinson" notes say Lexus, "hardtop" notes say Wrangler.
- *  Rewrite them when the donor car's make doesn't match. */
-function displaySellNotes(notes, vehicleMake) {
-  if (!notes) return '';
-  const m = (vehicleMake || '').toLowerCase();
-  if (!m.includes('lexus') && /lexus\s+audio/i.test(notes)) {
-    return 'Premium OEM audio — sought after, goes fast';
-  }
-  if (!m.includes('jeep') && /wrangler|jeep/i.test(notes)) {
-    return 'Removable hardtops go fast in summer — often claimed the same day';
-  }
-  return notes;
-}
-
 /* ===== TABS ===== */
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
@@ -4566,8 +4567,8 @@ function renderAlerts() {
                     <span class="part-name">${p.name}</span>
                     
                     ${isPro()
-                      ? `<span class="part-price">${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>`
-                      : `<span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('alerts-value')">${LOCKED_PRICE_MASK}</span>`}
+                      ? `<span class="part-price" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>`
+                      : `<span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('alerts-value')">Used online: ${LOCKED_PRICE_MASK}</span>`}
                   </li>
                 `).join('')}
               </ul>

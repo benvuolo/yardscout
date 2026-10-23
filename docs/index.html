@@ -104,8 +104,8 @@
       <p><strong>How to read this:</strong> yards list whole cars, not parts &mdash; and every car
       here is weeks from the crusher, so anything nobody pulls gets shredded with it. We flag what
       each car <em>came from the factory with</em>; by the time you visit, some parts may already
-      be rescued. Values are typical sold prices for working parts, never a promise. Newer
-      arrivals are your best odds.</p>
+      be rescued. Values are typical online prices for working used parts &mdash; what you&rsquo;d
+      pay, never a promise. Newer arrivals are your best odds.</p>
       <button type="button" class="btn" id="first-run-dismiss">Got it</button>
     </div>
     <!-- Skeleton placeholders paint immediately and are replaced by the first
@@ -501,9 +501,9 @@
   </div>
 
   <footer class="app-footer">
-    <p><strong>About the numbers:</strong> All dollar figures are ranges based on typical eBay sold prices (a national market) for used parts in working condition. Facebook Marketplace and local classifieds are local markets &mdash; prices vary by area, so check your own market before pulling. Condition dominates: a cracked, faded, or non-working part may be worth little or nothing, and none of these figures are a guarantee. Pull costs are shown only when they come from that yard's own published price list; otherwise you'll see &ldquo;check yard price list&rdquo; and the estimate is part value only (no pull cost subtracted).<span id="prices-reviewed"></span></p>
+    <p><strong>About the numbers:</strong> All dollar figures are what the same used part typically costs to buy online &mdash; ranges from eBay sold listings (a national market) for parts in working condition, i.e. what you'd pay if you didn't pull it yourself. Local prices vary by area, so check your own market too. Condition dominates: a cracked, faded, or non-working part may be worth little or nothing, and none of these figures are a guarantee. Pull costs are shown only when they come from that yard's own published price list; otherwise you'll see &ldquo;check yard price list&rdquo; and the figure is the online price only (no pull cost subtracted, so your actual savings depend on the gate price).<span id="prices-reviewed"></span></p>
     <p style="margin-top:0.5rem;"><strong>About coverage:</strong> YardScout tracks every major self-service chain with online inventory &mdash; Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part (including former U-Pull-&amp;-Pay yards) &mdash; plus regional chains and a growing set of independent yards: <span class="coverage-count">210+</span> yards nationwide. If your local yard publishes inventory online, <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">email us</a> and we'll look at adding it.</p>
-    <p style="margin-top:0.5rem;"><strong>About freshness:</strong> Inventory is re-scanned every 4 hours &mdash; the &ldquo;Updated&rdquo; stat above shows the last scan time. Parts listed on a car are what it <em>originally came with</em>; yards track cars, not remaining parts, so a part may already be pulled by the time you visit. Yard pull costs come from each chain's own published price sheet, refreshed with the scans. Part values are curated estimates from typical eBay sold prices &mdash; not live quotes.</p>
+    <p style="margin-top:0.5rem;"><strong>About freshness:</strong> Inventory is re-scanned every 4 hours &mdash; the &ldquo;Updated&rdquo; stat above shows the last scan time. Parts listed on a car are what it <em>originally came with</em>; yards track cars, not remaining parts, so a part may already be pulled by the time you visit. Yard pull costs come from each chain's own published price sheet, refreshed with the scans. Part values are curated estimates of what the same used part costs to buy online (typical eBay sold prices) &mdash; not live quotes.</p>
     <p style="margin-top:0.5rem;">Always inspect a part on the car before you buy. Inventory reflects the last scan and yards sell or crush cars daily.</p>
     <p style="margin-top:0.5rem;"><a class="feedback-link" href="mailto:yardscout.io@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a></p>
     <!-- Store badges: shown in every web context (desktop, mobile browser,
@@ -564,12 +564,12 @@
     <h2>YardScout Pro</h2>
     <button type="button" id="upgrade-close">Close</button>
   </div>
-  <p class="sheet-sub">Finding cars near you is free and stays free. Pro adds the money layer &mdash; what a part is worth, what it costs to pull, which ones go fast, and instant alerts. Subscribe in the YardScout iOS app.</p>
+  <p class="sheet-sub">Finding cars near you is free and stays free. Pro adds the money layer &mdash; what each car's parts would cost you used online, what the yard charges, what you'd save, which ones go fast, and instant alerts. Subscribe in the YardScout iOS app.</p>
 
   <div class="tier-card plan-option selected" data-plan="pro" data-price="8.99" role="button" tabindex="0">
     <div class="tier-head"><span class="tier-name">Pro</span><span class="tier-price">$8.99<small>/mo</small></span></div>
     <ul class="tier-list">
-      <li>Full value data &mdash; what parts are worth &amp; which go fast on nearly every car, pull costs where yards publish prices</li>
+      <li>Full savings data &mdash; what each part would cost you used online, what you'd save pulling it yourself &amp; which go fast, on nearly every car (pull costs where yards publish prices)</li>
       <li id="tier-alerts-li">Push alerts within hours of a watched car hitting a yard &mdash; including sale-day alerts</li>
       <li>One-tap "watch this" from any car + nationwide watches (alerts from any yard in the country)</li>
       <li>Unlimited saved cars</li>
@@ -682,8 +682,8 @@
   <button type="button" id="app-promo-close" aria-label="Dismiss">&#x2715;</button>
 </div>
 
-<script src="data.js"></script>
 <script src="api.js"></script>
+<script src="data.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

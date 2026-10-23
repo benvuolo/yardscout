@@ -797,10 +797,8 @@
   .sell-fast { background: var(--green-soft); color: var(--accent2); }
   .sell-medium { background: var(--surface3); color: var(--text-dim); }
   .sell-slow { background: var(--gold-soft); color: var(--demand-slow); }
-  .sell-channel { font-size: 0.6875rem; color: var(--text-dim); }
-  /* padding-right keeps the last italic glyph's slant inside the opacity
-   * layer's paint bounds — without it WebKit clips the final letter. */
-  .sell-tip { font-size: 0.6875rem; color: var(--text-dim); font-style: italic; opacity: 0.85; padding-right: 0.2em; }
+  /* Buyer's savings figure: used-online price minus the yard's gate price. */
+  .part-save { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--accent2); white-space: nowrap; }
 
   /* The VIN never splits across lines: the whole "VIN XXXX [copy]" chunk
    * wraps to a new line as one unit instead of breaking mid-string. */
@@ -1971,6 +1969,8 @@
 .pf-value { font-size: 0.75rem; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: baseline; }
 .pf-yard-price { font-family: var(--font-mono); font-weight: 600; }
 .pf-ebay { color: var(--text-dim); }
+/* Buyer's savings figure: used-online price minus the yard's gate price. */
+.pf-save { font-family: var(--font-mono); font-weight: 700; color: var(--accent2); }
 .pf-warn {
   font-size: 0.7rem; color: var(--orange); line-height: 1.45;
 }
