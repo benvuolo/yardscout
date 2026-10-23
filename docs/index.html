@@ -123,10 +123,6 @@
       <button type="button" class="filter-toggle" id="live-filter-toggle">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.4"/><circle cx="7" cy="17" r="2.4"/></svg> Filters <span class="filter-count" id="live-filter-count" style="display:none;">0</span>
       </button>
-      <div class="part-search-wrap">
-        <input type="text" class="search-box" id="live-part-search" placeholder="Search a part &mdash; e.g. tailgate, 3rd row seat&hellip;" title="Show only cars carrying a part whose name matches">
-        <button type="button" class="part-search-clear" id="live-part-search-clear" style="display:none;" title="Clear part search">&times;</button>
-      </div>
     </div>
     <div class="controls" id="live-controls">
       <div class="filters-hint" id="filters-need-zip">Enter a zip code (or use your location) to unlock filters.</div>
@@ -201,6 +197,17 @@
               <option value="manual">Manual transmission (confirmed only)</option>
             </select>
             <div class="ctl-hint" id="manual-filter-hint" style="display:none;">Confirmed by the VIN decode or the yard&rsquo;s own listing. Most cars have neither &mdash; a real manual nothing confirms won&rsquo;t appear here.</div>
+          </div>
+          <!-- Moved in from the top bar: it filters CARS by a spotted part,
+               which read as a duplicate of the Parts tab's fit finder when it
+               stood alone. The label + pointer disambiguate the two. -->
+          <div class="ctl">
+            <label for="live-part-search">Part spotted on car</label>
+            <div class="part-search-wrap">
+              <input type="text" class="search-box" id="live-part-search" placeholder="e.g. tailgate, 3rd row seat&hellip;" title="Show only cars carrying a part whose name matches">
+              <button type="button" class="part-search-clear" id="live-part-search-clear" style="display:none;" title="Clear part search">&times;</button>
+            </div>
+            <div class="ctl-hint">Looking for a part that fits <em>your</em> car? <button type="button" class="parts-pointer" id="live-parts-pointer">&rarr; Parts</button></div>
           </div>
         </div>
       </div>

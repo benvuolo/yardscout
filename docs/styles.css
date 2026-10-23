@@ -1840,6 +1840,19 @@
 /* Part-first search (live toolbar) */
 .part-search-wrap { position: relative; flex: 1; min-width: 0; }
 .part-search-wrap .search-box { width: 100%; margin: 0; padding-right: 2rem; }
+/* "→ Parts" pointer beside the part-spotted filter — a quiet link, not a
+ * button: it redirects fit-seekers to the Parts tab. */
+.parts-pointer {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.parts-pointer:hover { color: var(--text); }
 .part-search-clear {
   position: absolute;
   right: 0.25rem;
