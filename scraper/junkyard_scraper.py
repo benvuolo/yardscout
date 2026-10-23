@@ -6545,6 +6545,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Quest", 2004, 2009, {"sole": True}),
             ("Nissan", "Quest", 2011, 2017, {"sole": True}),
             ("Infiniti", "M35", 2006, 2008, {"sole": True}),
+            ("Infiniti", "JX35", 2013, 2013, {"sole": True}),
             ("Nissan", "350Z", 2003, 2006, {"sole": True}),
             ("Infiniti", "G35", 2003, 2006, {"sole": True}),
             ("Infiniti", "I35", 2002, 2004, {"sole": True}),
@@ -6623,6 +6624,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [4.6], "cyl": 8},
         "apps": [
             ("Ford", "F-150", 1997, 2008),
+            ("Ford", "F-150 Heritage", 2004, 2004),
             ("Ford", "Expedition", 1997, 2004),
             ("Ford", "Crown Victoria", 1992, 2011, {"sole": True}),
             ("Mercury", "Grand Marquis", 1992, 2011, {"sole": True}),
@@ -6640,6 +6642,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [5.4], "cyl": 8},
         "apps": [
             ("Ford", "F-150", 1997, 2003),
+            ("Ford", "F-150 Heritage", 2004, 2004),
             ("Ford", "Expedition", 1997, 2004),
         ],
         "parts": {
@@ -6752,6 +6755,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Ford", "Ranger", 2001, 2011),
             ("Ford", "Mustang", 2005, 2010),
             ("Mercury", "Mountaineer", 1998, 2010),
+            ("Ford", "Explorer Sport", 2001, 2003),
         ],
         "parts": {
             "alternator": {"note": "SOHC unit — the older OHV 4.0 differs; " + _ALT_NOTE},
@@ -7041,9 +7045,12 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chrysler", "Town And Country", 2011, 2016, {"sole": True}),
             # feed sometimes drops the "Grand" on 2011+ Grand Caravans
             ("Dodge", "Caravan", 2011, 2019, {"sole": True}),
+            ("Chrysler", "Caravan", 2011, 2019, {"sole": True}),
             ("Volkswagen", "Routan", 2011, 2014, {"sole": True}),
             ("Dodge", "Journey", 2011, 2020),
+            ("Chrysler", "Journey", 2011, 2020),
             ("Dodge", "Avenger", 2011, 2014),
+            ("Chrysler", "Avenger", 2011, 2014),
             ("Chrysler", "200", 2011, 2017),
             ("Dodge", "Charger", 2011, 2023),
             ("Dodge", "Challenger", 2011, 2023),
@@ -7066,8 +7073,10 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [2.4], "cyl": 4},
         "apps": [
             ("Dodge", "Avenger", 2008, 2014),
+            ("Chrysler", "Avenger", 2008, 2014),  # feed wrong-make rows
             ("Chrysler", "200", 2011, 2014),
             ("Dodge", "Journey", 2009, 2020),
+            ("Chrysler", "Journey", 2009, 2020),  # feed wrong-make rows
             ("Dodge", "Caliber", 2007, 2012),
             ("Jeep", "Patriot", 2007, 2017),
             ("Jeep", "Compass", 2007, 2017),
@@ -7235,6 +7244,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [1.8, 2.0], "cyl": 4},
         "apps": [
             ("Hyundai", "Elantra", 2011, 2020),
+            ("Hyundai", "Elantra GT", 2013, 2017),
             ("Kia", "Soul", 2012, 2019),
             ("Kia", "Forte", 2014, 2018),
             ("Hyundai", "Tucson", 2016, 2021),
@@ -7636,6 +7646,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Mitsubishi", "Galant", 1994, 2012),
             ("Mitsubishi", "Lancer", 2005, 2017),
             ("Mitsubishi", "Outlander", 2003, 2006, {"sole": True}),
+            ("Mitsubishi", "Outlander", 2007, 2013),
             ("Mitsubishi", "Outlander Sport", 2015, 2017),
         ],
         "parts": {
@@ -7921,6 +7932,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [2.0, 2.4, 2.5], "cyl": 4},
         "apps": [
             ("Chevrolet", "Malibu", 2013, 2015, {"sole": True}),
+            ("Chevrolet", "Malibu Limited", 2016, 2016, {"sole": True}),
             ("Chevrolet", "Impala", 2014, 2015),
         ],
         "parts": {
@@ -8045,6 +8057,9 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "apps": [
             ("Ford", "F-250*", 1999, 2010),
             ("Ford", "F250*", 1999, 2010),
+            ("Ford", "F-350*", 1999, 2010),
+            ("Ford", "F350*", 1999, 2010),
+            ("Ford", "Excursion", 2000, 2005),
             ("Ford", "E-150*", 1997, 2014),
             ("Ford", "E150*", 1997, 2014),
             ("Ford", "E-250*", 1997, 2014),
@@ -8255,7 +8270,9 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chevrolet", "K1500", 1988, 1999),
             ("Chevrolet", "C1500", 1988, 1999),
             ("Chevrolet", "Gmt-400", 1988, 2000),
+            ("Chevrolet", "C/K 2500", 1988, 2000),
             ("GMC", "Sierra", 1989, 1998),
+            ("GMC", "Suburban", 1993, 1999),
         ],
         "parts": {
             "alternator": {"note": "every published alternator row splits by case diameter or rear-cover style — match the case on your old unit"},
@@ -8270,6 +8287,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chevrolet", "Suburban", 2000, 2014),
             ("GMC", "Yukon", 2000, 2014),
             ("Chevrolet", "Avalanche", 2002, 2013),
+            ("Chevrolet", "Avalanche 1500", 2002, 2006),
         ],
         "parts": {
             "alternator": {"note": "most years split by case diameter (145 vs 156mm) — match the case; 11-12 Tahoe publishes one unqualified unit"},
@@ -8362,14 +8380,154 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [3.3, 3.8], "cyl": 6},
         "apps": [
             ("Dodge", "Grand Caravan", 2001, 2010),
+            ("Chrysler", "Grand Caravan", 2001, 2010),  # feed wrong-make rows
             ("Dodge", "Caravan", 2001, 2007),
-            ("Chrysler", "Town & Country", 2001, 2010),
-            ("Chrysler", "Town And Country", 2001, 2010),
+            ("Chrysler", "Caravan", 2001, 2007),
+            ("Chrysler", "Town & Country", 2000, 2010),
+            ("Chrysler", "Town And Country", 2000, 2010),
             ("Chrysler", "Voyager", 2001, 2003),
         ],
         "parts": {
             "alternator": {"note": "every published alternator row splits Std vs Opt amperage — match the amp rating on your old unit"},
             "starter": {"note": "ONE published starter per band (01-03 / 04-05 / 06-10) covers both the 3.3 and 3.8 — the 08-10 4.0 uses its own unit"},
+        },
+    },
+    "ford-escort": {
+        "display": "Ford Escort 1.9/2.0 I4",
+        "engine": {"liters": [1.9, 2.0], "cyl": 4},
+        "apps": [
+            ("Ford", "Escort", 1991, 2003),
+            ("Ford", "Escort ZX2", 1998, 2003, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "91-93, 94-96 and 98-03 SPI each one published unit (98-03 has two case styles — match yours); the ZX2's Zetec uses its own unit"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "ford-40ohv": {
+        "display": "Ford 4.0 OHV V6 (Explorer 1st gen)",
+        "engine": {"liters": [4.0], "cyl": 6},
+        "apps": [
+            ("Ford", "Explorer", 1991, 1996),
+            ("Ford", "Aerostar", 1990, 1997),
+        ],
+        "parts": {
+            "alternator": {"note": "91-92 one published unit; 93-98 rows split by trim package / door keypad — match amperage"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "toyota-rav4-1": {
+        "display": "Toyota RAV4 2.0 I4 (1st/2nd gen)",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Toyota", "RAV4", 1996, 2003, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "96-97 and 98-00 (3S-FE) each one published unit; 01-03 (1AZ-FE) rows split by transmission"},
+            "starter": {"note": "01-03 rows carry a Mfd-in-Japan qualifier — match part number"},
+        },
+    },
+    "subaru-legacy25": {
+        "display": "Subaru Legacy/Outback 2.2/2.5 H4",
+        "engine": {"liters": [2.2, 2.5], "cyl": 4},
+        "apps": [
+            ("Subaru", "Legacy", 1990, 2014),
+            ("Subaru", "Outback", 1995, 2014),
+        ],
+        "parts": {
+            "alternator": {"note": "one published unit per band (90-94 / 96-99 2.2+2.5 / 00-04 / 06-09 incl. GT turbo / 10-11 / 13-14); 2005 and 2012 split by turbo or are unpublished"},
+            "starter": {"note": "published rows split by transmission — match part number"},
+        },
+    },
+    "gm-lumina31": {
+        "display": "Chevrolet Lumina 3.1 V6",
+        "engine": {"liters": [3.1], "cyl": 6},
+        "apps": [
+            ("Chevrolet", "Lumina", 1990, 2001),
+            ("Chevrolet", "Monte Carlo", 1995, 1999),
+        ],
+        "parts": {
+            "alternator": {"note": "five published units by year band (90-94 / 95-97 / 98-99 / 00 / 01) — all unqualified for the 3.1"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "isuzu-6vd1": {
+        "display": "Isuzu 6VD1 3.2 V6 (Rodeo/Passport)",
+        "engine": {"liters": [3.2], "cyl": 6},
+        "apps": [
+            ("Isuzu", "Rodeo", 1992, 2004),
+            ("Honda", "Passport", 1994, 2002),
+            ("Isuzu", "Trooper", 1992, 1997),
+        ],
+        "parts": {
+            "alternator": {"note": "99-01 and 97 each one published unit; 96 rows carry a plug-position qualifier"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "lexus-1uz": {
+        "display": "Lexus LS 400 1UZ-FE 4.0 V8",
+        "engine": {"liters": [4.0], "cyl": 8},
+        "apps": [
+            ("Lexus", "LS 400", 1990, 2000, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "four published units by year band (90-92 / 93-94 / 95-97 / 99-00); 1998 splits by production date"},
+            "starter": {"note": "two published units: 90-94 and 95-00 — both unqualified"},
+        },
+    },
+    "lexus-3uz": {
+        "display": "Lexus LS 430 3UZ-FE 4.3 V8",
+        "engine": {"liters": [4.3], "cyl": 8},
+        "apps": [
+            ("Lexus", "LS 430", 2001, 2006, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "01-04 and 05-06 each one published unit, unqualified"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "saturn-s19": {
+        "display": "Saturn S-Series 1.9 I4",
+        "engine": {"liters": [1.9], "cyl": 4},
+        "apps": [
+            ("Saturn", "S-Series", 1991, 2002, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers every SL/SC/SW 91-96 (SOHC and DOHC); 1997 rows carry an external-fan qualifier"},
+            "starter": {"note": "98-99 one published unit; other years split — match part number"},
+        },
+    },
+    "hyundai-genesis38": {
+        "display": "Hyundai Genesis sedan 3.8 V6",
+        "engine": {"liters": [3.8], "cyl": 6},
+        "apps": [
+            ("Hyundai", "Genesis", 2009, 2015),
+        ],
+        "parts": {
+            "alternator": {"note": "year-banded published units (09-11 / 12 / 13 / 14-15) — the V8s share the 14-15 unit"},
+            "starter": {"note": "2009 one published unit (shared with the 4.6); later years split — match part number"},
+        },
+    },
+    "hyundai-gencoupe20": {
+        "display": "Hyundai Genesis Coupe 2.0T I4",
+        "engine": {"liters": [2.0], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Genesis Coupe", 2010, 2014),
+        ],
+        "parts": {
+            "alternator": {"note": "10-12 and 13-14 each one published unit, unqualified"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "hyundai-gencoupe38": {
+        "display": "Hyundai Genesis Coupe 3.8 V6",
+        "engine": {"liters": [3.8], "cyl": 6},
+        "apps": [
+            ("Hyundai", "Genesis Coupe", 2010, 2015),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers 10-15 (2012 is dual-listed with the 2.0T's unit — match yours)"},
+            "starter": {"note": _STR_NOTE},
         },
     },
 }
@@ -9493,6 +9651,96 @@ _ALT_VERIFIED: dict = {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5381 (160A) Tahoe 5.3 2011-2012 — the one unqualified row; every other year splits by case diameter (145 vs 156mm) and is excluded.",
         "groups": [[("Chevrolet", "Tahoe", 2011, 2012)]],
     },
+    "ford-escort": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5218 (75A) Escort 1.9 1991-1993; 210-5200 (75A) Escort 1.9 1994-1996; 210-5203 and 210-5314 (95A) both list Escort 2.0 SPI 1998-2003 with identical spans (two published case styles — match yours); 210-5201 (75A) ZX2 2.0 Zetec 1997-2002, all unqualified.",
+        "groups": [
+            [("Ford", "Escort", 1991, 1993)],
+            [("Ford", "Escort", 1994, 1996)],
+            [("Ford", "Escort", 1998, 2003)],
+            [("Ford", "Escort ZX2", 1998, 2002)],
+        ],
+    },
+    "ford-40ohv": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5210 (95A) Explorer 4.0 OHV 1991-1992 — unqualified (93-94 rows split by Limited trim, 95-98 by door keypad).",
+        "groups": [[("Ford", "Explorer", 1991, 1992)]],
+    },
+    "toyota-rav4-1": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0186 (80A) RAV4 2.0 3S-FE 1996-1997; 210-0436 (80A) RAV4 2.0 3S-FE 1998-2000 — both unqualified (01-03 1AZ-FE rows split by transmission).",
+        "groups": [
+            [("Toyota", "RAV4", 1996, 1997)],
+            [("Toyota", "RAV4", 1998, 2000)],
+        ],
+    },
+    "subaru-legacy25": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows unqualified unless noted: 210-3142 (70A) Legacy 2.2 1990-1994; 210-3144 (85A) Legacy 2.2 AND 2.5 1996-1999; 210-4140 (90A) Legacy 2.5 2000 and 2002-2004 plus Outback 2.5 2002-2003 (2001 rows are M/T-qualified); 210-4216 (110A) Legacy/Outback 2.5 2006-2009 — one row covers EJ253 AND the EJ255 GT turbo; 210-4309 (110A) Legacy/Outback 2.5 2010-2011 (incl. 2.5GT); 210-4203 (110A) Legacy/Outback 2.5 FB25 2013-2014.",
+        "groups": [
+            [("Subaru", "Legacy", 1990, 1994)],
+            [("Subaru", "Legacy", 1996, 1999)],
+            [("Subaru", "Legacy", 2000, 2000),
+             ("Subaru", "Legacy", 2002, 2004),
+             ("Subaru", "Outback", 2002, 2003)],
+            [("Subaru", "Legacy", 2006, 2009), ("Subaru", "Outback", 2006, 2009)],
+            [("Subaru", "Legacy", 2010, 2011), ("Subaru", "Outback", 2010, 2011)],
+            [("Subaru", "Legacy", 2013, 2014), ("Subaru", "Outback", 2013, 2014)],
+        ],
+    },
+    "gm-lumina31": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), Lumina 3.1 rows all unqualified: 210-5106 (100A) 1990-1994; 210-5109 (105A) 1995-1997; 210-5114 (105A) 1998-1999; 210-5160 (102A) 2000; 210-5161 (102A) 2001. Monte Carlo spans not separately verified — left at likely.",
+        "groups": [
+            [("Chevrolet", "Lumina", 1990, 1994)],
+            [("Chevrolet", "Lumina", 1995, 1997)],
+            [("Chevrolet", "Lumina", 1998, 1999)],
+            [("Chevrolet", "Lumina", 2000, 2000)],
+            [("Chevrolet", "Lumina", 2001, 2001)],
+        ],
+    },
+    "isuzu-6vd1": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3145 (90A) Rodeo 3.2 1999-2001; 210-3140 (60A) Rodeo 3.2 1997 — both unqualified (1996 rows carry a plug-position qualifier). Passport/Trooper spans not separately verified — left at likely.",
+        "groups": [
+            [("Isuzu", "Rodeo", 1999, 2001)],
+            [("Isuzu", "Rodeo", 1997, 1997)],
+        ],
+    },
+    "lexus-1uz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), all rows unqualified: 210-0170 (100A) LS 400 1990-1992; 210-0282 (100A) 1993-1994; 210-0174 (80A) 1995-1997; 210-0176 (100A) 1999-2000 (1998 splits by production date).",
+        "groups": [
+            [("Lexus", "LS 400", 1990, 1992)],
+            [("Lexus", "LS 400", 1993, 1994)],
+            [("Lexus", "LS 400", 1995, 1997)],
+            [("Lexus", "LS 400", 1999, 2000)],
+        ],
+    },
+    "lexus-3uz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0508 (130A) LS 430 2001-2004; 210-0570 (130A) LS 430 2005-2006 — both unqualified.",
+        "groups": [
+            [("Lexus", "LS 430", 2001, 2004)],
+            [("Lexus", "LS 430", 2005, 2006)],
+        ],
+    },
+    "saturn-s19": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-5100 (96A) published for SL/SL1/SL2/SC/SC1/SC2 1.9 1991-1996 — one unit across every S-Series nameplate, SOHC and DOHC, unqualified (1997 rows carry an external-fan qualifier).",
+        "groups": [[("Saturn", "S-Series", 1991, 1996)]],
+    },
+    "hyundai-genesis38": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), Genesis sedan 3.8 rows all unqualified: 210-0715 (150A) 2009-2011 and 2013; 210-0827 (200A) 2012; 210-0717 (180A) 2014-2015 (shared with the V8s).",
+        "groups": [
+            [("Hyundai", "Genesis", 2009, 2011)],
+            [("Hyundai", "Genesis", 2013, 2013)],
+            [("Hyundai", "Genesis", 2012, 2012)],
+            [("Hyundai", "Genesis", 2014, 2015)],
+        ],
+    },
+    "hyundai-gencoupe20": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 211-6017 (110A) Genesis Coupe 2.0T 2010-2012; 210-0713 (130A) Genesis Coupe 2.0T 2013-2014 — both unqualified.",
+        "groups": [
+            [("Hyundai", "Genesis Coupe", 2010, 2012)],
+            [("Hyundai", "Genesis Coupe", 2013, 2014)],
+        ],
+    },
+    "hyundai-gencoupe38": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0713 (130A) Genesis Coupe 3.8 2010-2015 — one published unit, unqualified (2012 is also dual-listed with 211-6017 — match yours).",
+        "groups": [[("Hyundai", "Genesis Coupe", 2010, 2015)]],
+    },
     "mitsu-4g94": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4165 (85A) Lancer 2.0 2002 — clean row (03-04 rows carry a non-turbo qualifier because the Evo arrived in 2003); 210-4271 (105A) Lancer 2.0 4G94 2007 — clean row (the Evo IX ended in 2006).",
         "groups": [
@@ -10006,6 +10254,28 @@ _STR_VERIFIED: dict = {
             [("Dodge", "Grand Caravan", 2006, 2010)],
             [("Dodge", "Grand Caravan", 2004, 2005)],
             [("Dodge", "Grand Caravan", 2001, 2003)],
+        ],
+    },
+    "lexus-1uz": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0164 LS 400 1990-1994; 280-0165 LS 400 1995-2000 — both unqualified.",
+        "groups": [
+            [("Lexus", "LS 400", 1990, 1994)],
+            [("Lexus", "LS 400", 1995, 2000)],
+        ],
+    },
+    "saturn-s19": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 281-6000 SL 1.9 1998-1999 — unqualified.",
+        "groups": [[("Saturn", "S-Series", 1998, 1999)]],
+    },
+    "hyundai-genesis38": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5380 Genesis sedan 3.8 2009 (the 4.6 carries the same number) — unqualified.",
+        "groups": [[("Hyundai", "Genesis", 2009, 2009)]],
+    },
+    "toyota-2az": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0174 RAV4 2.4 2004-2005; 280-0345 RAV4 2.4 2006-2008 (the 3.5 V6 carries the same number) — both unqualified.",
+        "groups": [
+            [("Toyota", "RAV4", 2004, 2005)],
+            [("Toyota", "RAV4", 2006, 2008)],
         ],
     },
 }
