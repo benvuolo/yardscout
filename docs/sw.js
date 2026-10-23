@@ -3,11 +3,13 @@
    app is always fresh when online but still opens (with the last-seen inventory)
    when cell signal dies between the rows of cars. */
 
-const CACHE = 'jh-v53';
+const CACHE = 'jh-v54';
 const SHELL = [
   './',
   './index.html',
   './styles.css',
+  './assets/badge-app-store.svg',
+  './assets/badge-google-play.png',
   './data.js',
   './app.js',
   './api.js',

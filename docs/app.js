@@ -4122,6 +4122,24 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
   });
 })();
 
+/* ===== STORE BADGES (header + footer) =====
+ * Persistent, quiet store presence to complement the mobile-only promo above:
+ * official Apple / Google Play badges right-aligned in the header on
+ * desktop/tablet widths (>=768px — CSS keeps phones on the banner alone) and
+ * a standard-size pair in the footer by Privacy/Terms at every width.
+ * Gating mirrors appPromo: never inside the native shells (IS_NATIVE);
+ * installed PWAs get footer badges but no header push; and while the mobile
+ * promo banner is showing, the banner stays the only above-the-fold promo —
+ * header badges wait until it's been dismissed. */
+(function storeBadges() {
+  if (IS_NATIVE) return; // never promote the store from inside the store build
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  document.body.classList.add('has-store-badges'); // footer pair: all web contexts
+  const promo = document.getElementById('app-promo');
+  const promoShowing = !!promo && promo.style.display !== 'none';
+  if (!standalone && !promoShowing) document.body.classList.add('has-header-badges');
+})();
+
 /* ===== ACCOUNT / API SESSION (active only in API mode — see api.js) =====
  * When the backend session reports a paid tier, the jh_pro gate is driven by
  * the ACCOUNT — and once inventory loads through the API, the server refuses

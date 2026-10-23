@@ -46,7 +46,18 @@
       <span class="head-spec" id="head-spec">SELF&#8209;SERVICE YARD INTEL</span>
     </div>
   </div>
-  <button type="button" id="pro-pill" class="pro-pill" title="YardScout Pro">Pro</button>
+  <div class="header-right">
+    <!-- Official store badges, desktop/tablet only (phones get the in-page
+         promo banner instead). Revealed by app.js — never in the native
+         shells or installed PWAs, and not while the mobile banner is showing.
+         Art is Apple's unmodified SVG + Google's badge-generator PNG (which
+         bakes its required clear space into the file). -->
+    <div class="store-badges header-badges" id="header-badges">
+      <a href="https://apps.apple.com/app/id6817126581" target="_blank" rel="noopener"><img class="badge-ios" src="assets/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
+      <a href="https://play.google.com/store/apps/details?id=io.yardscout.app" target="_blank" rel="noopener"><img class="badge-play" src="assets/badge-google-play.png" alt="Get it on Google Play" width="155" height="60"></a>
+    </div>
+    <button type="button" id="pro-pill" class="pro-pill" title="YardScout Pro">Pro</button>
+  </div>
 </header>
 
 <div class="container">
@@ -449,6 +460,17 @@
     <p style="margin-top:0.5rem;"><strong>About freshness:</strong> Inventory is re-scanned every 4 hours &mdash; the &ldquo;Updated&rdquo; stat above shows the last scan time. Parts listed on a car are what it <em>originally came with</em>; yards track cars, not remaining parts, so a part may already be pulled by the time you visit. Yard pull costs come from each chain's own published price sheet, refreshed with the scans. Part values are curated estimates from typical eBay sold prices &mdash; not live quotes.</p>
     <p style="margin-top:0.5rem;">Always inspect a part on the car before you buy. Inventory reflects the last scan and yards sell or crush cars daily.</p>
     <p style="margin-top:0.5rem;"><a class="feedback-link" href="mailto:yardscout.io@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a></p>
+    <!-- Store badges: shown in every web context (desktop, mobile browser,
+         installed PWA) — only the native shells never see them (app.js gates
+         via the has-store-badges body class). -->
+    <div class="footer-get-app" id="footer-get-app">
+      <p><strong>Take YardScout to the yard:</strong> the native app adds real push alerts, faster launches, and works offline between the rows.</p>
+      <div class="store-badges footer-badges">
+        <a href="https://apps.apple.com/app/id6817126581" target="_blank" rel="noopener"><img class="badge-ios" src="assets/badge-app-store.svg" alt="Download on the App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=io.yardscout.app" target="_blank" rel="noopener"><img class="badge-play" src="assets/badge-google-play.png" alt="Get it on Google Play" width="186" height="72"></a>
+      </div>
+      <p class="badge-legal">Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.</p>
+    </div>
     <p class="footer-links" style="margin-top:0.5rem;"><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="support.html">Support</a></p>
     <p style="margin-top:0.5rem;">YardScout <span id="jh-version" style="user-select:none;">v2.1</span></p>
   </footer>

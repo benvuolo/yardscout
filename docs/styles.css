@@ -1579,6 +1579,31 @@
   .footer-links a { color: var(--text-dim); text-decoration: underline; text-underline-offset: 2px; }
   .footer-links a:hover { color: var(--accent); }
 
+  /* ===== Official store badges (header pair + footer pair) =====
+   * The art is never restyled. Apple's SVG is used as-is at >=40px tall with
+   * >=1/4-badge-height clear space (provided by header padding / flex gaps /
+   * footer margins). Google's badge-generator PNG bakes its required clear
+   * space into the file (41px on 250px height), so it renders at 250/168 of
+   * the Apple badge height and is pulled in vertically by exactly its own
+   * padding — visible art aligns without cropping or editing the file.
+   * Both pairs stay hidden until app.js adds the body classes; the native
+   * shells and (for the header) installed PWAs never add them. */
+  .store-badges { display: none; align-items: center; gap: 0.75rem; }
+  .store-badges a { display: block; line-height: 0; flex-shrink: 0; }
+  .store-badges img { display: block; width: auto; }
+  .header-right { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+  .header-badges .badge-ios  { height: 40px; }
+  .header-badges .badge-play { height: 59.5px; margin: -9.75px 0; }
+  @media (min-width: 768px) {
+    body.has-header-badges .header-badges { display: flex; }
+  }
+  body.has-store-badges .footer-badges { display: flex; flex-wrap: wrap; }
+  .footer-get-app { margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--border); }
+  .footer-get-app p { margin: 0 0 0.8rem; }
+  .footer-badges .badge-ios  { height: 48px; }
+  .footer-badges .badge-play { height: 71.4px; margin: -11.7px 0; }
+  .badge-legal { margin: 0.8rem 0 0 !important; font-size: 0.6875rem; }
+
   /* ===== Car photos (hotlinked from chain CDNs) ===== */
   .car-photo-wrap {
     margin: -1rem -1rem 0.75rem;
