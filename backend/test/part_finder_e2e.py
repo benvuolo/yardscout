@@ -305,6 +305,87 @@ with sync_playwright() as pw:
               "shot pf_m3_alternator_honest.png")
     ctx.close()
 
+    # ---- P0 catalog flows (PART_CATALOG_SPEC, 2026-10) ---------------------
+    # Engine assembly: 5.3 Vortec truck engine near Phoenix. The family
+    # answers the search; the three §4 honesty notes must show, and no
+    # resale band appears (you can't carry an engine out).
+    ctx, page = boot({"width": 390, "height": 844}, True)
+    model = pf_search(page, "2004", "Chevrolet", ["Tahoe"], "5.3",
+                      part="engine assembly")
+    check("tahoe04 engine: model option found", model is not None)
+    if model is not None:
+        rows = page.locator("#pf-results .pf-row-card")
+        check("tahoe04 engine: Vortec donors render", rows.count() > 0,
+              page.locator("#pf-results").inner_text()[:120])
+        body = page.locator("#pf-results").inner_text()
+        check("tahoe04 engine: long-block honesty note shows",
+              "long block" in body, body[:200])
+        check("tahoe04 engine: unknown-mileage note shows",
+              "Mileage and internal condition are unknown" in body)
+        check("tahoe04 engine: pull-reality note shows (hours, call ahead)",
+              "call ahead" in body and "hours" in body)
+        check("tahoe04 engine: no resale band on engine rows",
+              "worth" not in body, body[:200])
+        chips = page.locator("#pf-results .pf-tier").count()
+        check("tahoe04 engine: every row carries a tier chip",
+              rows.count() > 0 and chips == rows.count(),
+              f"{chips} chips / {rows.count()} rows")
+        n_ver = page.locator("#pf-results .pf-row-card.pf-verified").count()
+        page.evaluate("document.getElementById('pf-results')"
+                      ".scrollIntoView({block:'start'})")
+        page.wait_for_timeout(250)
+        page.screenshot(path=str(SHOTS / "pf_tahoe04_engine_assembly.png"))
+        print(f"     tahoe04 engine ver={n_ver} of {rows.count()} — "
+              f"shot pf_tahoe04_engine_assembly.png")
+
+    # Front door: class B — generation-window donors of the seeker's own
+    # model, always Likely, paint-code warning on every row.
+    model = pf_search(page, "2009", "Honda", ["Accord"], None,
+                      part="front door")
+    check("accord09 door: model option found", model is not None)
+    if model is not None:
+        rows = page.locator("#pf-results .pf-row-card")
+        check("accord09 door: same-generation donors render", rows.count() > 0,
+              page.locator("#pf-results").inner_text()[:120])
+        n_ver = page.locator("#pf-results .pf-row-card.pf-verified").count()
+        check("accord09 door: generation rows are Likely, never Verified",
+              rows.count() > 0 and n_ver == 0,
+              f"ver={n_ver} of {rows.count()}")
+        body = page.locator("#pf-results").inner_text()
+        check("accord09 door: paint-code warning on rows",
+              "paint code" in body, body[:200])
+        check("accord09 door: generation window named in the warns",
+              "generation" in body, body[:200])
+        page.screenshot(path=str(SHOTS / "pf_accord09_door_front.png"))
+        print(f"     accord09 door rows={rows.count()} — "
+              f"shot pf_accord09_door_front.png")
+
+    # Automatic transmission: class C (combo) — generation x engine chip,
+    # always Likely, with the verify-the-trans-code note visible.
+    model = pf_search(page, "2015", "Nissan", ["Altima"], "2.5",
+                      part="automatic transmission")
+    check("altima15 trans: model option found", model is not None)
+    if model is not None:
+        rows = page.locator("#pf-results .pf-row-card")
+        check("altima15 trans: same-gen donors render", rows.count() > 0,
+              page.locator("#pf-results").inner_text()[:120])
+        n_ver = page.locator("#pf-results .pf-row-card.pf-verified").count()
+        check("altima15 trans: combo rows are Likely, never Verified",
+              rows.count() > 0 and n_ver == 0,
+              f"ver={n_ver} of {rows.count()}")
+        body = page.locator("#pf-results").inner_text()
+        check("altima15 trans: verify-code note visible (head)",
+              "verify the transmission code" in body
+              or "ALWAYS verify" in body, body[:300])
+        check("altima15 trans: verify-code warn on each row",
+              "verify the trans code" in body, body[:300])
+        check("altima15 trans: no resale band on transmission rows",
+              "worth" not in body, body[:200])
+        page.screenshot(path=str(SHOTS / "pf_altima15_transmission.png"))
+        print(f"     altima15 trans rows={rows.count()} — "
+              f"shot pf_altima15_transmission.png")
+    ctx.close()
+
     # ---- desktop: tab active with a real search on screen -----------------
     ctx, page = boot({"width": 1280, "height": 900}, False)
     model = pf_search(page, "2005", "Toyota", ["Camry"], "2AZ")
