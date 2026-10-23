@@ -242,7 +242,12 @@ def _request(url: str, method: str, headers: dict, body: bytes | None, attempts:
                 time.sleep(2 ** attempt)
                 continue
             raise SystemExit(f"FATAL {method} {url} → HTTP {e.code}: {detail}")
-        except (urllib.error.URLError, TimeoutError) as e:
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            # OSError catches raw ConnectionResetError surfacing from
+            # resp.read() AFTER urlopen returned (urlopen wraps only its own
+            # failures in URLError) — killed the 2026-10-23 16:10 scan run
+            # mid-upload. Harmless thanks to the atomic manifest commit, but
+            # a retry should absorb it.
             last = str(e)
             if attempt < attempts - 1:
                 time.sleep(2 ** attempt)
