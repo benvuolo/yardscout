@@ -4397,11 +4397,180 @@ document.getElementById('pf-go').addEventListener('click', pfRunSearch);
     pfMaybeSearch();
   });
 });
-/* The Parts tab owns the finder now: data loads lazily on first visit, and
- * the last search is restored so a returning user is one tap from results. */
+/* ===== TRY-EXAMPLE CHIPS (owner request, 2026-10-23) =====================
+ * The empty Parts tab used to greet people with a paragraph of instructions;
+ * now it greets them with 2-3 one-tap examples that prefill AND run. Picks
+ * are computed from the live inventory near the user's zip — the commonest
+ * covered car for a fitment query, the engine family with the most donors on
+ * rows for a hunt, the spotted part nearby yards list most for a browse — so
+ * the first tap always lands on results. Nationwide-common picks fill in
+ * when no zip is set (or the area is sparse). One hint line survives: the
+ * engine-hunt move isn't guessable from the controls (the owner stumbled
+ * there); everything else the examples teach by doing. */
+let _pfTry = null, _pfTryKey = null;
+
+function pfTryExamples() {
+  const radius = effectiveRadiusMi() || 100;  // examples should be NEAR
+  const key = (activeZipCoords ? activeZipCoords.lat + ',' + activeZipCoords.lng : 'nozip') + '|' + radius;
+  if (_pfTry && _pfTryKey === key) return _pfTry;
+  const cats = interchangeData.categories;
+  const catById = id => cats.find(c => c.id === id);
+  const ex = { fit: null, hunt: null, browse: null };
+
+  if (activeZipCoords && liveInventory.length) {
+    // Index family applications by make|model so the tally pass is a map
+    // lookup per car, not a scan of 180+ families per car.
+    const famIdx = new Map();
+    for (const f of interchangeData.engineFamilies) {
+      for (const a of f.apps) {
+        if (a[1].endsWith('*')) continue;
+        for (const mk of a[0].split('|')) {
+          const k = pfSquash(mk) + '|' + pfSquashModel(a[1], mk);
+          if (!famIdx.has(k)) famIdx.set(k, new Set());
+          famIdx.get(k).add(f);
+        }
+      }
+    }
+    const browseCands = ['tailgate', 'headlights', 'front-seats', 'side-mirrors']
+      .map(catById).filter(Boolean);
+    const models = new Map();   // covered models in range, by popularity
+    const famN = new Map();     // engine family -> in-range donor count
+    const browseN = new Map();  // spotted-part category -> in-range hits
+    for (const v of liveInventory) {
+      const d = vehicleDistanceMi(v);
+      if (d == null || d > radius) continue;
+      const make = canonicalMake(v.make);
+      const model = canonicalModel(v.make, v.model);
+      const k = pfSquash(make) + '|' + pfSquashModel(model, make);
+      const fams = famIdx.get(k);
+      let covered = false;
+      if (fams) for (const f of fams) {
+        if (!f.apps.some(a => pfAppMatches(a, v.year, make, v.model))) continue;
+        covered = true;
+        famN.set(f, (famN.get(f) || 0) + 1);
+      }
+      if (covered) {
+        let m = models.get(k);
+        if (!m) models.set(k, m = { make, model, byYear: new Map(), n: 0 });
+        m.n++;
+        m.byYear.set(v.year, (m.byYear.get(v.year) || 0) + 1);
+      }
+      for (const p of (v.topParts || [])) {
+        for (const c of browseCands) {
+          const toks = c.tokens.length ? c.tokens : [c.label];
+          if (toks.some(t => partQueryHit(p, t.toLowerCase()))) {
+            browseN.set(c, (browseN.get(c) || 0) + 1);
+          }
+        }
+      }
+    }
+    // Fitment pick: commonest in-range model with a year that maps to exactly
+    // ONE alternator-covered family — one tap, straight to donor rows, no
+    // which-engine chooser stop in between. Prefer a year sitting inside a
+    // verified group so the showcase search carries Verified-fit rows (a
+    // first impression of all-Likely undersells the tier system).
+    const alt = catById('alternator');
+    const byCount = [...models.values()].sort((a, b) => b.n - a.n);
+    let fitFallback = null;
+    outer: for (const m of byCount.slice(0, 25)) {
+      if (m.n < 3) break;
+      const years = [...m.byYear.entries()].sort((a, b) => b[1] - a[1]).map(e => e[0]);
+      for (const y of years) {
+        const fams = interchangeData.engineFamilies.filter(f => {
+          const p = f.parts[alt.id];
+          return p && (!p.years || (y >= p.years[0] && y <= p.years[1]))
+            && f.apps.some(a => pfAppMatches(a, y, m.make, m.model));
+        });
+        if (fams.length !== 1) continue;
+        const pick = { label: `Alternator — ${y} ${m.make} ${m.model}`,
+                       run: () => pfTryRun(alt, { year: y, make: m.make, model: m.model }) };
+        const vg = fams[0].parts[alt.id].vg;
+        if (vg && vg.some(g => g.some(sp => pfAppMatches(sp, y, m.make, m.model)))) {
+          ex.fit = pick;
+          break outer;
+        }
+        if (!fitFallback) fitFallback = pick;
+      }
+    }
+    if (!ex.fit) ex.fit = fitFallback;
+    // Hunt pick: the engine family with the most donors on rows near you.
+    const topFam = [...famN.entries()].sort((a, b) => b[1] - a[1])[0];
+    if (topFam && topFam[1] >= 3) {
+      const f = topFam[0];
+      ex.hunt = { label: `Hunt a ${f.label.replace(/\s*\(.*\)$/, '')} engine`,
+                  run: () => pfTryRun(catById('engine-assembly'), null, f.id) };
+    }
+    // Browse pick: the spotted body part nearby yards list most.
+    const topB = [...browseN.entries()].sort((a, b) => b[1] - a[1])[0];
+    if (topB && topB[1] >= 2) {
+      const c = topB[0];
+      const noun = c.label.toLowerCase();
+      ex.browse = { label: `Browse ${noun}${noun.endsWith('s') ? '' : 's'} near you`,
+                    run: () => pfTryRun(c, null) };
+    }
+  }
+  // Nationwide-common fallbacks fill any empty slot.
+  if (!ex.fit) {
+    const alt = catById('alternator');
+    ex.fit = { label: 'Alternator — 2005 Toyota Camry',
+               run: () => pfTryRun(alt, { year: 2005, make: 'Toyota', model: 'Camry' }) };
+  }
+  if (!ex.hunt) {
+    const f = interchangeData.engineFamilies.find(x => x.label.startsWith('GM Gen III Vortec'));
+    if (f) ex.hunt = { label: `Hunt a ${f.label.replace(/\s*\(.*\)$/, '')} engine`,
+                       run: () => pfTryRun(catById('engine-assembly'), null, f.id) };
+  }
+  if (!ex.browse) {
+    const c = catById('tailgate');
+    if (c) ex.browse = { label: 'Browse tailgates near you', run: () => pfTryRun(c, null) };
+  }
+  _pfTry = [ex.fit, ex.hunt, ex.browse].filter(Boolean);
+  _pfTryKey = key;
+  return _pfTry;
+}
+
+function pfTryRun(cat, car, famId) {
+  track('pf-try-chip');
+  pfCat = cat;
+  pfPartInput.value = cat.label;
+  pfChosenFam = famId || null;
+  document.getElementById('pf-year').value = car ? String(car.year) : '';
+  document.getElementById('pf-make').value = car ? car.make : '';
+  pfPopulateModels();
+  document.getElementById('pf-model').value = car ? car.model : '';
+  if (!activeZipCoords) {
+    // Keep the chips on screen — the generic empty state would eat them.
+    document.getElementById('pf-status').textContent =
+      'Set a zip (or use your location) up top, then tap an example.';
+    return;
+  }
+  pfRunSearch();
+}
+
+function pfRenderTry() {
+  const out = document.getElementById('pf-results');
+  // Only greet an idle results area — never stomp on real search output.
+  if (out.querySelector('.pf-row-card, .pf-results-head, .pf-empty:not(.pf-vonly-none), .pf-coverage-form')) return;
+  if (!interchangeData) return;
+  const ex = pfTryExamples();
+  out.innerHTML =
+    `<div class="pf-try"><span class="pf-try-label">Try:</span>`
+    + ex.map((e, i) => `<button type="button" class="pf-chip pf-try-chip" data-try="${i}">${escapeHtml(e.label)}</button>`).join('')
+    + `</div>`
+    + `<div class="pf-hint">Hunting an engine? Pick &ldquo;Engine assembly&rdquo; as the part, then choose your engine.</div>`;
+}
+document.getElementById('pf-results').addEventListener('click', e => {
+  const chip = e.target.closest('.pf-try-chip');
+  if (chip && _pfTry && _pfTry[chip.dataset.try]) _pfTry[chip.dataset.try].run();
+});
+
+/* The Parts tab owns the finder now: data loads lazily on first visit, the
+ * last search is restored so a returning user is one tap from results, and
+ * an idle results area greets every visit with the try-example chips
+ * (recomputed if the zip changed since last look). */
 let pfInited = false;
 function initPartsTab() {
-  if (pfInited) return;
+  if (pfInited) { loadInterchange().then(pfRenderTry); return; }
   pfInited = true;
   track('part-finder-open');
   loadInterchange().then(() => {
@@ -4416,6 +4585,7 @@ function initPartsTab() {
         if (saved.model) document.getElementById('pf-model').value = saved.model;
       }
     } catch (e) { /* corrupt saved state — start clean */ }
+    pfRenderTry();
   });
 }
 // Quiet hand-off to the Yards price comparison — the compare feature lives
