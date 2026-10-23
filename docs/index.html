@@ -121,6 +121,11 @@
       <div class="skel-chip skeleton"></div>
       <div class="skel-chip skeleton"></div>
     </div>
+    <!-- Freshness stamp: at phone widths the stats bar scrolls and its
+         "Updated" chip sits off-screen — this line keeps the last-scan time
+         visible exactly where people read the numbers. Hidden at widths
+         where the Updated chip itself fits (styles.css). -->
+    <div class="fresh-stamp" id="live-fresh-stamp" style="display:none;"></div>
     <div class="toolbar">
       <button type="button" class="filter-toggle" id="live-filter-toggle">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.4"/><circle cx="7" cy="17" r="2.4"/></svg> Filters <span class="filter-count" id="live-filter-count" style="display:none;">0</span>
@@ -302,7 +307,7 @@
       </div>
       <button type="button" class="btn btn-primary" id="compare-go">Compare</button>
     </div>
-    <p class="yards-hint">Yards within your search radius, nearest first. Filter by chain or state, tap a yard to see its cars, or pick a part above to compare what the yards in view charge for it &mdash; prices from each yard&rsquo;s own published price list.</p>
+    <p class="yards-hint">Yards within your search radius, nearest first. Filter by chain or state, tap a yard to see its cars, or pick a part above to compare what the yards in view charge for it &mdash; prices from each yard&rsquo;s own published price list. Car counts are from the latest scan; every yard is re-scanned about every 4 hours.</p>
     <div class="car-grid" id="yards-grid"></div>
   </div>
 
@@ -352,7 +357,7 @@
     <div class="info-box" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
       <div style="flex:1;min-width:250px;">
         <h3 style="margin:0 0 0.25rem;">Vehicle watchlist</h3>
-        <p style="margin:0;" id="alerts-intro-copy">Add vehicles you want to track &mdash; watching is free, no signup. Matches light up right here, and in the iOS app free watches get a <strong>weekly recap push</strong>; <strong>instant push alerts</strong> are a Pro feature.</p>
+        <p style="margin:0;" id="alerts-intro-copy">Add vehicles you want to track &mdash; watching is free, no signup. Matches light up right here, and in the iOS app free watches get a <strong>weekly recap push</strong>; <strong>push alerts within hours</strong> of a car hitting the yard are a Pro feature.</p>
       </div>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
         <button id="alert-notif-btn" class="btn btn-primary">Enable notifications</button>
@@ -423,8 +428,8 @@
       <h4>Push alerts</h4>
       <p style="font-size:0.8125rem;color:var(--text-dim);line-height:1.6;margin:0.4rem 0 0.8rem;">
         Free members get a <strong>weekly recap push</strong> &mdash; every watched car that
-        arrived this week, plus upcoming sale days near you. <strong>Pro</strong> hears the
-        moment a watched car hits any yard, including sale-day alerts. No email, no account.
+        arrived this week, plus upcoming sale days near you. <strong>Pro</strong> gets a push
+        within hours of a watched car hitting any yard, including sale-day alerts. No email, no account.
       </p>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
         <button type="button" id="native-push-enable" class="btn btn-primary">Enable push notifications</button>
@@ -451,6 +456,8 @@
       <h4>Add to watchlist</h4>
       <p style="font-size:0.75rem;color:var(--text-dim);margin:0.3rem 0 0.7rem;">
         Pick from vehicles that actually cycle through yards nationwide &mdash; no typing, no typos.
+        &ldquo;With parts only&rdquo; limits alerts to cars carrying parts we flag as worth pulling
+        &mdash; uncheck it to hear about every match.
       </p>
       <div style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;">
         <div>
@@ -490,8 +497,8 @@
           </select>
         </div>
         <div>
-          <label for="alert-match-only">With parts only</label>
-          <input type="checkbox" id="alert-match-only" checked style="width:18px;height:18px;margin-top:0.4rem;accent-color:var(--accent);">
+          <label for="alert-match-only" title="Only alert for cars carrying parts we flag as worth pulling">With parts only</label>
+          <input type="checkbox" id="alert-match-only" checked title="Only alert for cars carrying parts we flag as worth pulling" style="width:18px;height:18px;margin-top:0.4rem;accent-color:var(--accent);">
         </div>
         <button id="alert-add-btn" class="btn btn-primary">Add</button>
       </div>
@@ -537,7 +544,7 @@
     <h2>Yard visit list</h2>
     <button type="button" id="saved-clear">Clear all</button>
   </div>
-  <p class="sheet-sub">Your saved cars, grouped by yard and sorted by row &mdash; work the list top to bottom when you walk in.</p>
+  <p class="sheet-sub">Your saved cars, grouped by yard and sorted by row &mdash; work the list top to bottom when you walk in. Driving far for one car? Call the yard first &mdash; this list matches our last scan, and cars leave daily.</p>
   <div id="saved-list"></div>
 </div>
 
@@ -570,7 +577,7 @@
     <h2>YardScout Pro</h2>
     <button type="button" id="upgrade-close">Close</button>
   </div>
-  <p class="sheet-sub">Finding cars near you is free and stays free. Pro adds the money layer &mdash; what each car&rsquo;s parts would cost you used online, what the yard charges, what you&rsquo;d save, which ones go fast, and instant alerts. Subscribe in the YardScout iOS app.</p>
+  <p class="sheet-sub">Finding cars near you is free and stays free. Pro adds the money layer &mdash; what each car&rsquo;s parts would cost you used online, what the yard charges, what you&rsquo;d save, which ones go fast, and push alerts within hours of arrival. Subscribe in the YardScout iOS app.</p>
 
   <div class="tier-card plan-option selected" data-plan="pro" data-price="8.99" role="button" tabindex="0">
     <div class="tier-head"><span class="tier-name">Pro</span><span class="tier-price">$8.99<small>/mo</small></span></div>

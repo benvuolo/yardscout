@@ -1651,7 +1651,7 @@ function openUpgradeSheet(trigger) {
       'Finding cars near you is free and stays free. '
       + 'Pro adds the money layer — what each car\u2019s parts would cost you '
       + 'used online, what the yard charges, what you\u2019d save, '
-      + 'and instant push alerts. Subscribe through '
+      + 'and push alerts within hours of arrival. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
   }
   document.getElementById('upgrade-sheet').classList.add('open');
@@ -2152,12 +2152,25 @@ function renderLive() {
   renderSaleStrip();
 
   document.getElementById('live-stats-bar').innerHTML = `
-    <div class="stat-card"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">Worth a look</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">Going fast</div><div class="value">${fastSellers.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">New this week</div><div class="value">${newThisWeek.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="label">Updated</div><div class="value value-sm">${scrapedLabel}</div></div>
+    <div class="stat-card" title="Cars on the lots in view, as of the last scan"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
+    <div class="stat-card" title="Cars carrying at least one part we track values for"><div class="label">Worth a look</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
+    <div class="stat-card" title="Cars with a part that typically gets claimed quickly at the yard"><div class="label">Going fast</div><div class="value">${fastSellers.toLocaleString()}</div></div>
+    <div class="stat-card" title="Set out on the lot within the last 7 days"><div class="label">New this week</div><div class="value">${newThisWeek.toLocaleString()}</div></div>
+    <div class="stat-card" title="When we last scanned yard inventories — automatic, about every 4 hours"><div class="label">Updated</div><div class="value value-sm">${scrapedLabel}</div></div>
   `;
+
+  // Phone widths clip the "Updated" chip off the end of the scrolling stats
+  // bar — keep the last-scan time visible where the numbers are read. The
+  // stamp hides via CSS at widths where the chip itself fits.
+  const freshEl = document.getElementById('live-fresh-stamp');
+  if (freshEl) {
+    if (liveScrapedAt) {
+      freshEl.textContent = `Inventory as of ${scrapedLabel} \u00b7 every yard re-scanned about every 4 hours`;
+      freshEl.style.display = '';
+    } else {
+      freshEl.style.display = 'none';
+    }
+  }
 
   // Shared-link landing: focused single-car view, or an honest message when
   // the shared car has left the inventory.
@@ -5125,7 +5138,7 @@ if (IS_NATIVE) {
   const intro = document.getElementById('alerts-intro-copy');
   if (intro) intro.innerHTML = 'Add vehicles you want to track &mdash; watching is free, '
     + 'no signup, no email. Free watches get a <strong>weekly recap push</strong>; '
-    + '<strong>instant push alerts</strong> within hours of a car hitting the yard are Pro.';
+    + '<strong>push alerts within hours</strong> of a car hitting the yard are Pro.';
 }
 
 document.getElementById('alert-make').addEventListener('change', populateWatchModelOptions);

@@ -330,6 +330,18 @@
     padding-bottom: 2px;
   }
   .stats-bar::-webkit-scrollbar { display: none; }
+  /* Last-scan stamp under the Live stats bar: phones clip the "Updated" chip
+     off the end of the scrolling bar, so the time lives here instead. Hidden
+     once the viewport is wide enough that the chip itself is visible. */
+  .fresh-stamp {
+    font-size: 0.6875rem;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+    margin: -0.35rem 0 0.8rem;
+  }
+  @media (min-width: 720px) {
+    .fresh-stamp { display: none !important; }
+  }
   .stat-card {
     flex: 0 0 auto;
     display: flex;
