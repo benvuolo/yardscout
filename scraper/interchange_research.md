@@ -1349,6 +1349,28 @@ cited below.**
   - Group 1: Nissan Sentra 2007-2010
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### nissan-mra8 — Nissan MRA8DE 1.8 I4 (Sentra)
+
+- **Engine:** 1.8L 4-cyl
+- **Family applications:** Nissan Sentra 2013-2019 (B17; 13-16 sole, 17-19
+  share the model years with the 1.6T SR Turbo/NISMO — decode disambiguates)
+- **Context:** the #1 inventory-weighted no-data cluster of the 2026-10-23
+  gap audit (1,529 vehicles, Sentra 2013-2026). 2020+ B18 Sentra is a
+  different engine (MR20DD 2.0) and stays out until evidence lands.
+- **alternator:** no published application list in the catalogs we checked
+  (retrieved 2026-10-23) — Likely only.
+- **starter — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-3139 (1.0 kW) Sentra 1.8 MRA8DE 2013-2016 — one published unit, unqualified (2017-2019 rows absent from the catalog).
+  - Group 1: Nissan Sentra 2013-2016
+
+### nissan-mr16t — Nissan MR16DDT 1.6T I4 (Juke)
+
+- **Engine:** 1.6L turbo 4-cyl
+- **Family applications:** Nissan Juke 2011-2017 (sole engine)
+- **alternator — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-4009 (110A) Juke 1.6 — one published unit, unqualified, every year 2011-2017.
+  - Group 1: Nissan Juke 2011-2017
+- **starter — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-3139 (1.0 kW) Juke 2011-2015 unqualified (2016 carries 'To 11/2015' — excluded; 2017 absent).
+  - Group 1: Nissan Juke 2011-2015
+
 ### nissan-qg18 — Nissan QG18DE 1.8 I4
 
 - **Engine:** 1.8L 4-cyl
@@ -1551,13 +1573,25 @@ cited below.**
 ### toyota-1nz — Toyota 1NZ-FE 1.5 I4 (Yaris/Echo/xA/xB)
 
 - **Engine:** 1.5L 4-cyl
-- **Family applications:** Toyota Yaris 2007-2015, Toyota Echo 2000-2005, Scion xA 2004-2006, Scion xB 2004-2006
-- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0799 (80A) Yaris 1.5 1NZ-FE 2010-2014 unqualified; 210-0619 (80A) Yaris 1.5 2007-2009 unqualified.
+- **Family applications:** Toyota Yaris 2006-2018, Toyota Echo 2000-2005, Scion xA 2004-2006, Scion xB 2004-2006 (+ "Toyota / Scion xA|xB" feed-alias spellings)
+- **2026-10-23 owner-reported miss (2006 Yaris):** the single 2006 Yaris in
+  inventory is a Canadian-market MY2006 XP90 hatch (Pick-n-Pull Calgary) —
+  Canada got the XP90 a model year before the US (US sales began MY2007).
+  Same body, same 1NZ-FE. The app window now opens at 2006. The 2016-18
+  XP130 facelift keeps the 1NZ-FE and is also in. The 2019-20 US "Yaris" is
+  the Mazda2-based P5 1.5 — deliberately excluded (own generation window).
+- **alternator — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-0799 (80A) Yaris 2010-2014 unqualified; 210-0619 (80A) Yaris 2007-2009 unqualified; 210-0893 (80A) Yaris 2016-2018 unqualified (2015 splits by build date 07/2014 — excluded); 210-0527 (80A) Scion xB 2004-2006 unqualified; 210-0528 (80A) Scion xA 2005-2006 unqualified (2004 xA splits by build date 08/2003). Echo dual-sources a 70A standard (210-0398) against the 80A (210-0527/0528) every year — Likely only.
   - Group 1: Toyota Yaris 2010-2014
   - Group 2: Toyota Yaris 2007-2009
-- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0401 Yaris 1.5 2013-2015 unqualified; 280-0395 Yaris 1.5 2012 unqualified (07-11 rows split M/T vs A/T).
-  - Group 1: Toyota Yaris 2013-2015
-  - Group 2: Toyota Yaris 2012-2012
+  - Group 3: Toyota Yaris 2016-2018
+  - Group 4: Scion xB 2004-2006 (+ Toyota-alias spelling)
+  - Group 5: Scion xA 2005-2006 (+ Toyota-alias spelling)
+- **starter:** DEMOTED to Likely 2026-10-23. The earlier catalog edition
+  published 280-0401 (13-15) and 280-0395 (12) as clean rows; today's
+  part-finder lists TWO concurrent units for Yaris 2012-2017 (280-0336
+  1.6 kW and 280-0401 1.0 kW, both unqualified) — the clean rows no longer
+  stand alone, so no starter pair can honestly claim Verified. 07-11 rows
+  split M/T vs A/T as before.
 
 ### toyota-1zz — Toyota/Pontiac 1ZZ-FE 1.8 I4
 
