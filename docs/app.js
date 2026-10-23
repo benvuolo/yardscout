@@ -2104,9 +2104,17 @@ function getFilteredLive() {
     case 'gold-first': keyFn = v => (v.hasMatch ? 1e12 : 0) + (v.maxValue || 0); break;
     case 'fastest-sell': keyFn = v => bestSpeed(v) * 1e9 + totalProfit(v); break;
     case 'leaving-soonest': keyFn = urgency; tieAsc = true; break;
-    case 'date-desc': keyFn = tsOf; break;
-    case 'date-asc': keyFn = tsOf; asc = true; break;
-    case 'year-asc': keyFn = v => v.year || 0; asc = true; break;
+    case 'date-desc': keyFn = tsOf; break;   // unknown set-out dates (ts 0) land last, not faked
+    // Ascending sorts: a missing date/year means "we don't know", never
+    // "oldest" — unknowns get a beyond-the-range key so they land LAST.
+    // (8.64e15 is the max JS date ms; 9999 clears any real model year.)
+    case 'date-asc': keyFn = v => tsOf(v) || 8.64e15; asc = true; break;
+    // Closest: cars without coords (or no zip center set — Pro nationwide)
+    // key at 1e9 mi, so the date-desc tie-break takes over and the list
+    // degrades gracefully to newest arrivals instead of a frozen order.
+    case 'dist-asc': { const dOf = v => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; }; keyFn = dOf; asc = true; break; }
+    case 'year-desc': keyFn = v => v.year || 0; break;   // unknown years land last
+    case 'year-asc': keyFn = v => v.year || 9999; asc = true; break;
   }
   const tieFn = tsOf, tieAscEff = tieAsc;
   if (keyFn) {
