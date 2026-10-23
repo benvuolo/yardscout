@@ -135,7 +135,7 @@ async function sendDigestEmail(env, groups, total) {
   return true;
 }
 
-/** Called from handleCommit via ctx.waitUntil (scans run ~every 6h) and from
+/** Called from handleCommit via ctx.waitUntil (scans run ~every 4h) and from
  * the manual admin trigger. Sends at most one digest email per 24h, covering
  * everything since the last digest (floor: 24h ago on the first ever run so
  * an old backlog doesn't arrive as a wall of text — it lives in the admin GET). */

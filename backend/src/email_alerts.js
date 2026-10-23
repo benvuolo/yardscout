@@ -24,7 +24,7 @@
  *   - the entitlement is re-checked in KV at send time, so a lapsed
  *     subscription stops emailing without any extra machinery.
  *
- * Copy stays honest about cadence: scans run ~every 6 hours, so alerts say
+ * Copy stays honest about cadence: scans run ~every 4 hours, so alerts say
  * "same day", never "instant".
  */
 
@@ -213,7 +213,7 @@ async function sendAlertEmail(env, email, matches) {
     `${n} watched car${n === 1 ? '' : 's'} just showed up at the yard — found by the latest inventory scan:\n\n` +
     textLines.join('\n\n') +
     `\n\nYards crush cars within weeks — fresh arrivals are your best odds.\n` +
-    `Scans run about every 6 hours, so you hear the same day a car is listed.\n\n` +
+    `Scans run about every 4 hours, so you hear the same day a car is listed.\n\n` +
     `Manage watches: ${(env.APP_URL || 'https://yardscout.io/')}\n` +
     `Unsubscribe from email alerts (Pro is unaffected): ${unsub}\n`;
 
@@ -231,7 +231,7 @@ async function sendAlertEmail(env, email, matches) {
   ${more > 0 ? `<p style="color:#999;font-size:13px;">…and ${more} more on the site.</p>` : ''}
   <p style="color:#999;font-size:13px;line-height:1.6;margin:16px 0 0;">
     Yards crush cars within weeks — fresh arrivals are your best odds.
-    Scans run about every 6 hours, so you hear the same day a car is listed.</p>
+    Scans run about every 4 hours, so you hear the same day a car is listed.</p>
   <p style="margin:18px 0 0;"><a href="${esc((env.APP_URL || 'https://yardscout.io/'))}" style="color:#ff9500;font-size:13px;">Manage your watchlist</a></p>
   <p style="color:#666;font-size:11px;margin:22px 0 0;border-top:1px solid #2a2a2a;padding-top:12px;">
     You get these because email alerts are on for ${esc(email)} (a YardScout Pro perk).
