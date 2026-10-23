@@ -13,7 +13,7 @@ Spot the valuable "unobtanium" parts that common junkyard cars originally came w
 
 It cross-references every car against a curated database of rare/valuable parts and shows you exactly what to pull, what it costs (when the yard publishes a real price list), what it sells for, and where to sell it.
 
-No engines. No transmissions. Just parts you can carry out.
+Flip parts you can carry out. Fix your car with the rest — the Parts tab now covers engines, transmissions, and body panels, with honest warnings about what a pull really takes.
 
 ## Install on your phone
 

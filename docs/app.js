@@ -3391,7 +3391,10 @@ function partMergeKey(name) {
 
 function getPartIndex() {
   const { shown } = getYardsView();
-  const sig = shown.map(y => y.location).join('|');
+  // The finder taxonomy merges in once interchange.json arrives — fetch it
+  // lazily and let the signature change rebuild the index on the next open.
+  if (!interchangeData) loadInterchange();
+  const sig = shown.map(y => y.location).join('|') + (interchangeData ? '#ic' : '');
   if (_partIndex && sig === _partIndexSig) return _partIndex;
   const baseName = loc => loc.replace(/\s*\(premium\)\s*$/i, '');
 
@@ -3422,6 +3425,33 @@ function getPartIndex() {
     if (yards.size) raw.set(entry.kw, { display: titleCasePart(entry.kw), yards });
   }
 
+  // Finder categories (spec §6 taxonomy convergence): the Parts-tab part
+  // names resolve here too, carrying the finder's ORDERED price tokens as
+  // the quote variants — so "Automatic transmission" or "Engine assembly"
+  // compares across yards with the same careful row matching the finder
+  // uses, and the finder's canonical label names the merged group.
+  for (const cat of (interchangeData && interchangeData.categories) || []) {
+    if (!cat.priceTokens || !cat.priceTokens.length) continue;
+    const key = cat.label.toLowerCase();
+    const toks = cat.priceTokens.map(t => t.toLowerCase());
+    const existing = raw.get(key);
+    if (existing) {
+      existing.display = cat.label;
+      existing.variants = toks;
+      existing.canonical = true;
+      continue;
+    }
+    const yards = new Set();
+    for (const y of shown) {
+      const base = baseName(y.location);
+      if (yards.has(base)) continue;
+      if (yardPartQuote(y.location, toks).status === 'priced') yards.add(base);
+    }
+    if (yards.size) {
+      raw.set(key, { display: cat.label, yards, variants: toks, canonical: true });
+    }
+  }
+
   // Pass 2 — fold spelling variants into one entry; the best-covered variant
   // names the group, and all variant spellings stay searchable/matchable.
   const groups = new Map(); // merge key -> { display, repCoverage, yards, names }
@@ -3432,12 +3462,20 @@ function getPartIndex() {
       g = { display: e.display, repCoverage: e.yards.size, yards: new Set(), names: [] };
       groups.set(mk, g);
     }
-    if (e.yards.size > g.repCoverage
-        || (e.yards.size === g.repCoverage && e.display.length < g.display.length)) {
+    // Canonical finder labels win the group's display name outright
+    // (spec §6.5); otherwise the best-covered spelling names the group.
+    if (e.canonical && !g.canonical) {
+      g.display = e.display;
+      g.canonical = true;
+    } else if (!g.canonical
+        && (e.yards.size > g.repCoverage
+            || (e.yards.size === g.repCoverage && e.display.length < g.display.length))) {
       g.display = e.display;
       g.repCoverage = e.yards.size;
     }
     g.names.push(k);
+    // Finder categories quote through their ordered tokens, not the label.
+    if (e.variants) g.names.push(...e.variants.filter(t => t !== k));
     e.yards.forEach(b => g.yards.add(b));
   }
 
