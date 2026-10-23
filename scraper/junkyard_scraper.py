@@ -10182,7 +10182,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
     "mercedesbenz": {
         "aclass": "A-Class", "bclass": "B-Class", "cclass": "C-Class",
         "eclass": "E-Class", "sclass": "S-Class", "rclass": "R-Class",
-        "mclass": "M-Class",
+        "mclass": "M-Class", "slkclass": "SLK-Class",
         "mlclass": "M-Class", "claclass": "CLA-Class", "glaclass": "GLA-Class",
         "glcclass": "GLC-Class", "gleclass": "GLE-Class",
         "clk": "CLK", "slk": "SLK", "cls": "CLS", "sl": "SL", "gl": "GL",
