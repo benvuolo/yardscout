@@ -7,6 +7,7 @@
  *   GET  /v1/inventory/partsets              (tier-aware)
  *   GET  /v1/inventory/shard/:yardId         (tier-aware)
  *   GET  /v1/vehicles/:idOrVin               (tier-aware)
+ *   POST /v1/coverage/request                 (Parts tab "ask us to add it")
  *   POST /v1/auth/request-link
  *   GET  /v1/auth/callback?token=
  *   GET  /v1/me                              (session required)
@@ -18,6 +19,8 @@
  *   POST /v1/admin/grant                          x-admin-secret
  *   GET  /v1/admin/users                          x-admin-secret
  *   POST /v1/admin/digest/run                     x-admin-secret (manual weekly-digest trigger)
+ *   GET  /v1/admin/coverage                       x-admin-secret (request counts by key)
+ *   POST /v1/admin/coverage/digest/run            x-admin-secret (manual owner-digest trigger)
  *   POST /v1/iap/revenuecat                       RevenueCat webhook auth
  */
 
@@ -47,6 +50,9 @@ import {
   handleEmailAlertsSync, handleEmailAlertsStatus, handleEmailAlertsUnsubscribe,
   handleEmailAlertsDispatchRun, handleTestEntitlement,
 } from './email_alerts.js';
+import {
+  handleCoverageRequest, handleCoverageList, maybeSendCoverageDigest,
+} from './coverage.js';
 
 export default {
   /* Cron (wrangler.toml [triggers]): weekly digest email for free users
@@ -132,6 +138,12 @@ async function route(req, env, url, ctx) {
     return handleWaitlistJoin(req, env);
   }
 
+  /* ----- coverage requests (public, Parts tab "ask us to add it") ----- */
+  if (method === 'POST' && path === '/v1/coverage/request') {
+    if (!rateLimit('cov:ip:' + ip, 10, 3600_000)) return err(429, 'rate_limited', 'Slow down.');
+    return handleCoverageRequest(req, env);
+  }
+
   /* ----- alerts: watches + web push (session-scoped) ----- */
   if (path === '/v1/watches' && method === 'GET') return handleWatchesList(req, env);
   if (path === '/v1/watches' && method === 'POST') return handleWatchCreate(req, env);
@@ -187,6 +199,7 @@ async function route(req, env, url, ctx) {
   if (path === '/v1/admin/grant' || path === '/v1/admin/users' || path === '/v1/admin/waitlist'
       || path === '/v1/admin/digest/run' || path === '/v1/admin/email-alerts/dispatch'
       || path === '/v1/admin/device-alerts/dispatch' || path === '/v1/admin/device-digest/run'
+      || path === '/v1/admin/coverage' || path === '/v1/admin/coverage/digest/run'
       || path === '/v1/admin/test/ent') {
     const denied = await requireAdmin(req, env);
     if (denied) return denied;
@@ -209,6 +222,13 @@ async function route(req, env, url, ctx) {
     }
     if (method === 'POST' && path === '/v1/admin/device-digest/run') {
       return handleDeviceDigestRun(req, env);
+    }
+    // Coverage-request demand: counts by normalized key (what the coverage
+    // workers mine) + a manual trigger for the owner digest email (same
+    // throttle as the commit-hook path — max one per day).
+    if (method === 'GET' && path === '/v1/admin/coverage') return handleCoverageList(req, env);
+    if (method === 'POST' && path === '/v1/admin/coverage/digest/run') {
+      return json(await maybeSendCoverageDigest(env));
     }
     // DEV ONLY (404s in prod): seed a test entitlement into local KV.
     if (method === 'POST' && path === '/v1/admin/test/ent') {

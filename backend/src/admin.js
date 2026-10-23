@@ -10,6 +10,7 @@ import { json, err, sha256Hex, isoNow, timingSafeEqual } from './util.js';
 import { dispatchAlerts, dispatchSaleAlerts, storeArrivals } from './alerts.js';
 import { dispatchDeviceAlerts, dispatchDeviceSaleAlerts } from './devices.js';
 import { dispatchEmailAlerts } from './email_alerts.js';
+import { maybeSendCoverageDigest } from './coverage.js';
 
 async function checkSecret(req, env, header, envKey) {
   const expected = env[envKey];
@@ -114,6 +115,16 @@ export async function handleCommit(req, env, ctx) {
       storeArrivals(env, newArrivals)
         .then((r) => console.log(`arrivals stored: ${r.stored}`))
         .catch((e) => console.log('arrival store failed:', e && e.message))
+    );
+  }
+  // Coverage-request digest to the owner piggybacks the commit hook too —
+  // self-throttled to max one email per day (coverage.js), so riding every
+  // ~6h scan commit costs nothing on quiet days.
+  if (ctx) {
+    ctx.waitUntil(
+      maybeSendCoverageDigest(env)
+        .then((r) => console.log(`coverage digest: ${r.sent ? `sent (${r.requests} requests, ${r.keys} keys)` : `skipped (${r.reason})`}`))
+        .catch((e) => console.log('coverage digest failed:', e && e.message))
     );
   }
   // Sale-day snapshot + instant sale pushes (Pro). An empty array still
