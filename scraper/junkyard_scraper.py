@@ -8,7 +8,8 @@ against the unobtanium database. Vehicle VINs are present when the source API
 provides them (Pick-n-Pull, Tear-A-Part, and Utah Pic-A-Part XML).
 Outputs JSON for the web app or a rich terminal report.
 
-No engines. No transmissions. Just parts you can carry out and flip.
+Flip parts you can carry out. Fix your car with the rest — the part catalog
+covers engines, transmissions, and body panels with honest fit confidence.
 
 Usage:
     python junkyard_scraper.py                      # Scan & print results
