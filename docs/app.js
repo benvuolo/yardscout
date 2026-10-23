@@ -422,12 +422,12 @@ function vinMetaHtml(v) {
   // card's spec line below; repeating it read as a bug.)
   if (specBits.length) {
     vpic = isPro()
-      ? ` <span class="meta-note" title="Factory build — trim/drivetrain decoded from the VIN via NHTSA VPIC, engine from the VIN or the yard's own feed — so you know what to look for before walking over">${specBits.join(' &middot; ')} (factory spec)</span>`
+      ? ` <span class="meta-note" title="Factory build — trim/drivetrain decoded from the VIN via NHTSA VPIC, engine from the VIN or the yard\u2019s own feed — so you know what to look for before walking over">${specBits.join(' &middot; ')} (factory spec)</span>`
       : ` <button type="button" class="lock-chip lock-chip-sm" onclick="event.stopPropagation();openUpgradeSheet('vin-specs')" title="Factory trim, drivetrain, and engine decoded from the VIN &mdash; a Pro feature">${ICON.lock} VIN specs</button>`;
   }
   let mismatch = '';
   if (v.vpicMismatch) {
-    mismatch = ` <span class="meta-warn" title="The VIN's factory decode disagrees with the yard listing — the lot sign may be mislabeled. The VIN is used for matching; verify at the yard.">${escapeHtml(v.vpicMismatch)}</span>`;
+    mismatch = ` <span class="meta-warn" title="The VIN\u2019s factory decode disagrees with the yard listing — the lot sign may be mislabeled. The VIN is used for matching; verify at the yard.">${escapeHtml(v.vpicMismatch)}</span>`;
   }
   return ` &middot; <span class="vin-chunk">VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}</span>${dup}${vpic}${mismatch}`;
 }
@@ -680,7 +680,7 @@ function saleBadgeHtml(location) {
   const ev = saleForYard(location);
   if (!ev) return '';
   const label = (ev.pct ? ev.pct + '% off ' : 'Sale ') + saleDateLabel(ev);
-  return ` <span class="sale-pill" title="${escapeHtml(ev.title || 'Sale')} &mdash; from the chain's published sale calendar">${ICON.tag}${label}</span>`;
+  return ` <span class="sale-pill" title="${escapeHtml(ev.title || 'Sale')} &mdash; from the chain\u2019s published sale calendar">${ICON.tag}${label}</span>`;
 }
 
 /** Live-tab strip: sales at yards inside the current radius. */
@@ -815,8 +815,8 @@ async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
     document.getElementById('live-stats-bar').innerHTML = '';
     document.getElementById('live-grid').innerHTML = `
       <div class="empty-state" style="grid-column: 1/-1;">
-        <h3>Couldn't load inventory</h3>
-        <p>The inventory data didn't load. Check your connection and pull to refresh (or tap Refresh data in Filters).</p>
+        <h3>Couldn\u2019t load inventory</h3>
+        <p>The inventory data didn\u2019t load. Check your connection and pull to refresh (or tap Refresh data in Filters).</p>
         <p style="margin-top:0.75rem;">If this keeps happening, the latest scan may still be publishing &mdash; try again in a few minutes.</p>
       </div>`;
   }
@@ -1542,9 +1542,9 @@ async function useMyLocation() {
    * NO system prompt), telling the user to "check access" without saying
    * where is useless. Point them at Settings explicitly. */
   const DENIED_MSG = IS_NATIVE
-    ? "Location is turned off for YardScout. To use this, open your phone's Settings > Apps > YardScout > Permissions and allow Location — or enter a zip code instead."
-    : "Location is blocked for this site. Allow location access in your browser's site settings, or enter a zip code instead.";
-  const GENERIC_MSG = "Couldn't get your location. Check that location access is allowed for YardScout, or enter a zip code instead.";
+    ? "Location is turned off for YardScout. To use this, open your phone\u2019s Settings > Apps > YardScout > Permissions and allow Location — or enter a zip code instead."
+    : "Location is blocked for this site. Allow location access in your browser\u2019s site settings, or enter a zip code instead.";
+  const GENERIC_MSG = "Couldn\u2019t get your location. Check that location access is allowed for YardScout, or enter a zip code instead.";
   const onErr = async (e) => {
     busy(false);
     // Native plugin rejects permission denials with OS-PLUG-GLOC-0003 (both
@@ -2166,7 +2166,7 @@ function renderLive() {
     if (!found) {
       document.getElementById('live-grid').innerHTML = `
         <div class="empty-state" style="grid-column:1/-1;">
-          <h3>That car isn't in the current inventory</h3>
+          <h3>That car isn\u2019t in the current inventory</h3>
           <p>It may have been pulled or crushed since the link was shared &mdash; yards turn over daily.</p>
           <button type="button" class="btn btn-primary" style="margin-top:0.8rem;" onclick="jhClearFocus()">See all cars</button>
         </div>`;
@@ -2411,7 +2411,7 @@ function renderLive() {
             ? `Up to ${shownParts.length} part${shownParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart}`
             : `${shownParts.length} valuable part${shownParts.length > 1 ? 's' : ''} spotted`} <span class="chev">${ICON.chev}</span></summary>
           <div class="car-body">
-            <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can't be confirmed from the VIN are marked "if equipped." Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
+            <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can\u2019t be confirmed from the VIN are marked &ldquo;if equipped.&rdquo; Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
             <ul class="parts-list">${partRows}</ul>
             <a class="feedback-link" href="mailto:yardscout.io@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a>
           </div>
@@ -2625,7 +2625,7 @@ document.getElementById('live-refresh-btn').addEventListener('click', async () =
       : hrs < 48 ? ` Last scan: ${hrs}h ago.`
       : ` Last scan: ${Math.round(hrs / 24)} days ago.`;
   }
-  alert("You're already seeing the latest scan. Yards are re-scanned automatically about every 4 hours." + age);
+  alert("You\u2019re already seeing the latest scan. Yards are re-scanned automatically about every 4 hours." + age);
 });
 document.getElementById('tab-live').addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-copy-vin');
@@ -2799,7 +2799,7 @@ function yardPageUrl(v) {
 function yardSiteLinkHtml(v) {
   const link = yardPageUrl(v);
   if (!link) return '';
-  const label = link.tier === 1 ? "View on yard's site" : "Find it on the yard's site";
+  const label = link.tier === 1 ? "View on yard\u2019s site" : "Find it on the yard\u2019s site";
   const title = link.tier === 1
     ? 'Opens this exact car on the yard\u2019s own website'
     : link.tier === 2
@@ -3318,7 +3318,7 @@ function openPriceCompare(query) {
   pricesSheetMode = 'compare';
   document.getElementById('prices-title').textContent = `"${query.trim()}" across yards in view`;
   document.getElementById('prices-sub').textContent = compareResults.length
-    ? `Prices from each yard's own published price list \u2014 ${compareResults.length} of ${seen.size} yard${seen.size === 1 ? '' : 's'} in view publish${compareResults.length === 1 ? 'es' : ''} this part.`
+    ? `Prices from each yard\u2019s own published price list \u2014 ${compareResults.length} of ${seen.size} yard${seen.size === 1 ? '' : 's'} in view publish${compareResults.length === 1 ? 'es' : ''} this part.`
     : '';
   document.getElementById('prices-search-wrap').style.display = 'none';
   document.getElementById('prices-sort-wrap').style.display = compareResults.length > 1 ? '' : 'none';
@@ -3945,7 +3945,7 @@ function pfRunBrowse(s) {
       if (app[5]) warns.push(escapeHtml(app[5]));
       rows.push({ v, d: vehicleDistanceMi(v), warns,
                   badge: verdict === true
-                    ? `<span class="pf-tier pf-tier-verified" title="The donor's VIN decode confirms a ${escapeHtml(fam.label)}.">VIN-confirmed</span>`
+                    ? `<span class="pf-tier pf-tier-verified" title="The donor\u2019s VIN decode confirms a ${escapeHtml(fam.label)}.">VIN-confirmed</span>`
                     : '' });
     }
     headTop = `<strong>${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} near you</strong> carrying a ${escapeHtml(fam.label)} &mdash; add your car (year, make, model) above to check what fits.`;
@@ -3965,7 +3965,7 @@ function pfRunBrowse(s) {
 
   if (!rows.length) {
     const kindNote = (pfCat.kind === 'combo' || pfCat.kind === 'exact')
-      ? ` The spotted-parts data tracks smaller carry-out parts, and ${escapeHtml(pfCat.label.toLowerCase())}s mostly aren't in it — add your car above and the fit search will find donors by ${pfCat.kind === 'combo' ? 'generation and engine' : 'generation'} instead.`
+      ? ` The spotted-parts data tracks smaller carry-out parts, and ${escapeHtml(pfCat.label.toLowerCase())}s mostly aren\u2019t in it — add your car above and the fit search will find donors by ${pfCat.kind === 'combo' ? 'generation and engine' : 'generation'} instead.`
       : ' Yards rotate stock weekly — widen the radius or check back.';
     out.innerHTML = `<div class="pf-empty">No cars within ${radius ? radius + ' mi' : 'range'} ${pfCat.kind === 'engine' ? `carrying a ${escapeHtml(fam.label)}` : `listing a spotted ${escapeHtml(pfCat.label.toLowerCase())}`} right now.${kindNote}</div>`;
     return;
@@ -3987,7 +3987,7 @@ function pfRunBrowse(s) {
       const v = r.v;
       const quote = yardPartQuote(v.location, quoteVariants);
       const priceHtml = quote.status === 'priced'
-        ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard's own published price list">Yard: $${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+        ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard\u2019s own published price list">Yard: $${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
         : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
       const worthHtml = (!pfCat.noValue && r.hit)
         ? (unlocked
@@ -3997,7 +3997,7 @@ function pfRunBrowse(s) {
       // Buyer's savings line — only when BOTH sides are real: a published
       // yard price and a value band (Pro; free users would back the band out).
       const saveHtml = (unlocked && !pfCat.noValue && r.hit && quote.status === 'priced' && r.hit.high - quote.price > 0)
-        ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">save ~${formatPrice(Math.max(0, Math.round(r.hit.low - quote.price)))}&ndash;${formatPrice(Math.round(r.hit.high - quote.price))}</span>`
+        ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(r.hit.low - quote.price)))}&ndash;${formatPrice(Math.round(r.hit.high - quote.price))}</span>`
         : '';
       const dateLbl = pfDateLabel(v.dateAdded);
       return `<div class="pf-row-card pf-browse">
@@ -4062,11 +4062,11 @@ function pfRunSearch() {
           + ` every platform donor near you.${pfAskHtml('car')}</div>`;
         return;
       }
-      out.innerHTML = `<div class="pf-empty">No interchange data yet for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())}. We only list fits we can stand behind — this car's engine family isn't in the verified table yet, so we'd rather show nothing than guess.${pfAskHtml('car')}</div>`;
+      out.innerHTML = `<div class="pf-empty">No interchange data yet for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())}. We only list fits we can stand behind — this car\u2019s engine family isn\u2019t in the verified table yet, so we\u2019d rather show nothing than guess.${pfAskHtml('car')}</div>`;
       return;
     }
     if (pfChosenFam === '__none__') {
-      out.innerHTML = `<div class="pf-empty">We don't have interchange data for your engine yet — only the engines listed above are in the verified table. We'd rather show nothing than guess a fit that wastes your drive.${pfAskHtml('engine')}</div>`;
+      out.innerHTML = `<div class="pf-empty">We don\u2019t have interchange data for your engine yet — only the engines listed above are in the verified table. We\u2019d rather show nothing than guess a fit that wastes your drive.${pfAskHtml('engine')}</div>`;
       return;
     }
     let fam = fams.length === 1 ? fams[0] : fams.find(f => f.id === pfChosenFam);
@@ -4229,7 +4229,7 @@ function pfRunSearch() {
     const v = r.v;
     const quote = yardPartQuote(v.location, quoteVariants);
     const priceHtml = quote.status === 'priced'
-      ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard's own published price list">Yard: $${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+      ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard\u2019s own published price list">Yard: $${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
       : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
     // noValue categories (engine assemblies, transmissions) ship no value
     // band by charter — you can't carry one out, so "worth" is misleading.
@@ -4242,7 +4242,7 @@ function pfRunSearch() {
     // Buyer's savings line — both sides real, Pro only (free users would
     // back the blurred band out of price + savings).
     const saveHtml = (unlocked && partRow && quote.status === 'priced' && partRow.high - quote.price > 0)
-      ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">save ~${formatPrice(Math.max(0, Math.round(partRow.low - quote.price)))}&ndash;${formatPrice(Math.round(partRow.high - quote.price))}</span>`
+      ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(partRow.low - quote.price)))}&ndash;${formatPrice(Math.round(partRow.high - quote.price))}</span>`
       : '';
     const dateLbl = pfDateLabel(v.dateAdded);
     return `<div class="pf-row-card ${r.tier === 'verified' ? 'pf-verified' : 'pf-likely'}">
@@ -4736,7 +4736,7 @@ function addWatchItem() {
   if (yrMin && yrMax && yrMin > yrMax) return alert('Year min is after year max.');
   const radiusMi = parseInt(document.getElementById('alert-radius').value) || null;
   if (radiusMi && !activeZipCoords) {
-    return alert('Set a ZIP (or use "near me") in the Live tab first, so the radius has a center.');
+    return alert('Set a zip code (or use "near me") in the Live tab first, so the radius has a center.');
   }
   const matchOnly = document.getElementById('alert-match-only').checked;
   const watchlist = loadWatchlist();
@@ -5327,7 +5327,7 @@ function revokeNativePro() {
     const note = document.getElementById('iap-note');
     if (note) note.innerHTML = 'Auto-renews monthly through your Google Play account &mdash; '
       + 'cancel anytime in Play Store subscriptions. '
-      + '<a href="privacy.html">Privacy</a> &middot; <a href="terms.html">terms</a>.';
+      + '<a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>.';
     // Push is live on Android as of 1.2 (FCM) — the static "Push alerts
     // within hours" copy is now honest on both platforms, no override needed.
   }

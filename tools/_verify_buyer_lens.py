@@ -82,7 +82,7 @@ def run(width, height, label):
             body = pg.locator("#pf-results").inner_html()
             results["pf_used_online"] = "Used online:" in body
             results["pf_yard_prefix"] = "Yard: $" in body
-            results["pf_save"] = "save ~" in body
+            results["pf_save"] = "save ~" in body.lower()
         else:
             pg.screenshot(path=f"{OUT}/parts-tab-{label}.png")
             results["pf_rows"] = 0

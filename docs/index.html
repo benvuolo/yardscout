@@ -87,7 +87,7 @@
     <div class="zip-banner" id="zip-banner" style="display:none;">
       <div class="zip-banner-text">
         <strong>Where are you?</strong>
-        <span>Enter your zip code and we'll show you what's in the self-service yards near you.</span>
+        <span>Enter your zip code and we&rsquo;ll show you what&rsquo;s in the self-service yards near you.</span>
         <span class="zip-banner-coverage">Coverage: every major self-service chain &mdash; Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part &mdash; plus a growing set of independents: <strong class="coverage-count">210+</strong> yards nationwide. Missing your yard? <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">Tell us</a>.</span>
       </div>
       <div class="zip-banner-form">
@@ -101,11 +101,13 @@
          in the footer and inside expanded cards, but a first-time user can
          browse ranges without ever meeting them — so say it once, up front. -->
     <div class="first-run-note" id="first-run-note" style="display:none;">
+      <!-- Keep "what each" on one line: the iOS 1.5 bundle shipped a staged copy
+           where this soft line break was collapsed without a space ("whateach"). -->
       <p><strong>How to read this:</strong> yards list whole cars, not parts &mdash; and every car
-      here is weeks from the crusher, so anything nobody pulls gets shredded with it. We flag what
-      each car <em>came from the factory with</em>; by the time you visit, some parts may already
-      be rescued. Values are typical online prices for working used parts &mdash; what you&rsquo;d
-      pay, never a promise. Newer arrivals are your best odds.</p>
+      here is weeks from the crusher, so anything nobody pulls gets shredded with it.
+      We flag what each car <em>came from the factory with</em>; by the time you visit,
+      some parts may already be rescued. Values are typical online prices for working
+      used parts &mdash; what you&rsquo;d pay, never a promise. Newer arrivals are your best odds.</p>
       <button type="button" class="btn" id="first-run-dismiss">Got it</button>
     </div>
     <!-- Skeleton placeholders paint immediately and are replaced by the first
@@ -300,7 +302,7 @@
       </div>
       <button type="button" class="btn btn-primary" id="compare-go">Compare</button>
     </div>
-    <p class="yards-hint">Yards within your search radius, nearest first. Filter by chain or state, tap a yard to see its cars, or pick a part above to compare what the yards in view charge for it &mdash; prices from each yard's own published price list.</p>
+    <p class="yards-hint">Yards within your search radius, nearest first. Filter by chain or state, tap a yard to see its cars, or pick a part above to compare what the yards in view charge for it &mdash; prices from each yard&rsquo;s own published price list.</p>
     <div class="car-grid" id="yards-grid"></div>
   </div>
 
@@ -425,7 +427,7 @@
         <span id="native-push-status" style="font-size:0.8125rem;color:var(--text-dim);"></span>
       </div>
       <p style="font-size:0.75rem;color:var(--text-dim);margin:0.7rem 0 0;">
-        <a href="#" onclick="openUpgradeSheet('alerts-push');return false;" style="color:var(--accent);">Want alerts within hours of a car landing? That's Pro &rarr;</a>
+        <a href="#" onclick="openUpgradeSheet('alerts-push');return false;" style="color:var(--accent);">Want alerts within hours of a car landing? That&rsquo;s Pro &rarr;</a>
       </p>
     </div>
 
@@ -474,7 +476,7 @@
           <select id="alert-yr-max" style="width:95px;"><option value="">Any</option></select>
         </div>
         <div>
-          <label for="alert-radius" title="Alerts only fire for arrivals inside this distance of your search ZIP">Alert radius</label>
+          <label for="alert-radius" title="Alerts only fire for arrivals inside this distance of your search zip code">Alert radius</label>
           <select id="alert-radius" style="width:150px;">
             <option value="25">Within 25 mi</option>
             <option value="50">Within 50 mi</option>
@@ -501,9 +503,9 @@
   </div>
 
   <footer class="app-footer">
-    <p><strong>About the numbers:</strong> All dollar figures are what the same used part typically costs to buy online &mdash; ranges from eBay sold listings (a national market) for parts in working condition, i.e. what you'd pay if you didn't pull it yourself. Local prices vary by area, so check your own market too. Condition dominates: a cracked, faded, or non-working part may be worth little or nothing, and none of these figures are a guarantee. Pull costs are shown only when they come from that yard's own published price list; otherwise you'll see &ldquo;check yard price list&rdquo; and the figure is the online price only (no pull cost subtracted, so your actual savings depend on the gate price).<span id="prices-reviewed"></span></p>
-    <p style="margin-top:0.5rem;"><strong>About coverage:</strong> YardScout tracks every major self-service chain with online inventory &mdash; Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part (including former U-Pull-&amp;-Pay yards) &mdash; plus regional chains and a growing set of independent yards: <span class="coverage-count">210+</span> yards nationwide. If your local yard publishes inventory online, <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">email us</a> and we'll look at adding it.</p>
-    <p style="margin-top:0.5rem;"><strong>About freshness:</strong> Inventory is re-scanned every 4 hours &mdash; the &ldquo;Updated&rdquo; stat above shows the last scan time. Parts listed on a car are what it <em>originally came with</em>; yards track cars, not remaining parts, so a part may already be pulled by the time you visit. Yard pull costs come from each chain's own published price sheet, refreshed with the scans. Part values are curated estimates of what the same used part costs to buy online (typical eBay sold prices) &mdash; not live quotes.</p>
+    <p><strong>About the numbers:</strong> All dollar figures are what the same used part typically costs to buy online &mdash; ranges from eBay sold listings (a national market) for parts in working condition, i.e. what you&rsquo;d pay if you didn&rsquo;t pull it yourself. Local prices vary by area, so check your own market too. Condition dominates: a cracked, faded, or non-working part may be worth little or nothing, and none of these figures are a guarantee. Pull costs are shown only when they come from that yard&rsquo;s own published price list; otherwise you&rsquo;ll see &ldquo;check yard price list&rdquo; and the figure is the online price only (no pull cost subtracted, so your actual savings depend on the gate price).<span id="prices-reviewed"></span></p>
+    <p style="margin-top:0.5rem;"><strong>About coverage:</strong> YardScout tracks every major self-service chain with online inventory &mdash; Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part (including former U-Pull-&amp;-Pay yards) &mdash; plus regional chains and a growing set of independent yards: <span class="coverage-count">210+</span> yards nationwide. If your local yard publishes inventory online, <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">email us</a> and we&rsquo;ll look at adding it.</p>
+    <p style="margin-top:0.5rem;"><strong>About freshness:</strong> Inventory is re-scanned every 4 hours &mdash; the &ldquo;Updated&rdquo; stat above shows the last scan time. Parts listed on a car are what it <em>originally came with</em>; yards track cars, not remaining parts, so a part may already be pulled by the time you visit. Yard pull costs come from each chain&rsquo;s own published price sheet, refreshed with the scans. Part values are curated estimates of what the same used part costs to buy online (typical eBay sold prices) &mdash; not live quotes.</p>
     <p style="margin-top:0.5rem;">Always inspect a part on the car before you buy. Inventory reflects the last scan and yards sell or crush cars daily.</p>
     <p style="margin-top:0.5rem;"><a class="feedback-link" href="mailto:yardscout.io@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a></p>
     <!-- Store badges: shown in every web context (desktop, mobile browser,
@@ -553,7 +555,7 @@
     <button type="button" class="sort-chip" id="prices-sort-dist">Nearest first</button>
   </div>
   <div id="prices-body"></div>
-  <p class="prices-footnote">Prices come from each chain's own published price list and are per part category. Entry fees, taxes, core charges (refundable deposits, shown where the chain lists them) and environmental fees vary by yard.</p>
+  <p class="prices-footnote">Prices come from each chain&rsquo;s own published price list and are per part category. Entry fees, taxes, core charges (refundable deposits, shown where the chain lists them) and environmental fees vary by yard.</p>
 </div>
 
 <!-- PRO UPGRADE SHEET (fake door: waitlist only, no payments yet) -->
@@ -564,12 +566,12 @@
     <h2>YardScout Pro</h2>
     <button type="button" id="upgrade-close">Close</button>
   </div>
-  <p class="sheet-sub">Finding cars near you is free and stays free. Pro adds the money layer &mdash; what each car's parts would cost you used online, what the yard charges, what you'd save, which ones go fast, and instant alerts. Subscribe in the YardScout iOS app.</p>
+  <p class="sheet-sub">Finding cars near you is free and stays free. Pro adds the money layer &mdash; what each car&rsquo;s parts would cost you used online, what the yard charges, what you&rsquo;d save, which ones go fast, and instant alerts. Subscribe in the YardScout iOS app.</p>
 
   <div class="tier-card plan-option selected" data-plan="pro" data-price="8.99" role="button" tabindex="0">
     <div class="tier-head"><span class="tier-name">Pro</span><span class="tier-price">$8.99<small>/mo</small></span></div>
     <ul class="tier-list">
-      <li>Full savings data &mdash; what each part would cost you used online, what you'd save pulling it yourself &amp; which go fast, on nearly every car (pull costs where yards publish prices)</li>
+      <li>Full savings data &mdash; what each part would cost you used online, what you&rsquo;d save pulling it yourself &amp; which go fast, on nearly every car (pull costs where yards publish prices)</li>
       <li id="tier-alerts-li">Push alerts within hours of a watched car hitting a yard &mdash; including sale-day alerts</li>
       <li>One-tap "watch this" from any car + nationwide watches (alerts from any yard in the country)</li>
       <li>Unlimited saved cars</li>
@@ -610,11 +612,11 @@
     </div>
   </div>
   <div id="upgrade-thanks" class="waitlist-thanks" style="display:none;">
-    <strong>You're on the list.</strong>
-    <span>We'll email you when Pro launches. Everything free stays free in the meantime.</span>
+    <strong>You&rsquo;re on the list.</strong>
+    <span>We&rsquo;ll email you when Pro launches. Everything free stays free in the meantime.</span>
   </div>
   <div id="upgrade-pro-state" class="waitlist-thanks" style="display:none;">
-    <strong>You're Pro &#10003;</strong>
+    <strong>You&rsquo;re Pro &#10003;</strong>
     <span>Everything above is unlocked on this device.</span>
     <!-- Web-subscription extras (JS shows what applies; all hidden on native). -->
     <div id="ent-pro-actions" style="display:none;margin-top:0.6rem;">
@@ -645,7 +647,7 @@
       <button type="button" id="iap-restore" class="btn" style="font-size:0.8125rem;">Restore purchases</button>
       <span id="iap-status" style="font-size:0.8125rem;color:var(--text-dim);"></span>
     </div>
-    <span class="waitlist-note" id="iap-note">Auto-renews monthly through your App Store account &mdash; cancel anytime in iOS Settings. <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">terms</a>.</span>
+    <span class="waitlist-note" id="iap-note">Auto-renews monthly through your App Store account &mdash; cancel anytime in iOS Settings. <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>.</span>
   </div>
   <!-- Account sign-in (backend API mode only — stays hidden until the API is
        enabled; see api.js). Magic-link email auth, no passwords. -->
