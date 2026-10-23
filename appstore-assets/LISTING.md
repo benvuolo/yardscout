@@ -2,6 +2,28 @@
 
 Screenshots in this folder are 1290x2796 (accepted 6.7" iPhone size). Upload
 1_home, 2_yards, 3_alerts, 5_upgrade in that order.
+(Superseded by the `ios/` sets — see "Screenshots (current)" below.)
+
+## Screenshots (current — interchange release, 2026-10-23)
+
+The live set is `ios/screen_*.png` (1320x2868) with derived sizes in
+`ios/6.5-inch/` (1242x2688) and `ios/dynamic-island-1206x2622/`. Two new
+interchange slides were captured 2026-10-23 by `ios/_capture_ios_interchange.py`
+(zip 84047, free tier, real production data):
+
+- `screen_6_compare.png` — Yards tab, "Alternator" compared across the Salt
+  Lake–area yards, cheapest first.
+- `screen_7_fitment.png` — Parts tab, 2005 Camry alternator donors with the
+  Verified fit / Likely fit honesty tags.
+
+**Upload order (7 slides)**: screen_1_live, screen_2_search,
+screen_7_fitment, screen_6_compare, screen_3_yards, screen_5_pro,
+screen_4_alerts — same order as the Play listing (already in Google review).
+
+**Status**: NOT yet uploaded to ASC — the console was logged out and iOS 1.6
+unsubmitted when these were captured. Attach to the 1.6 version page while
+it's editable, or right after 1.6 clears (screenshot/metadata edits
+post-approval are allowed). Do NOT pull an in-review submission for these.
 
 ## Name (30 chars max)
 YardScout: Junkyard Parts

@@ -45,3 +45,43 @@ the approved iOS set (CSS width 432 vs iOS 440).
 **Not uploaded.** 1.1 (versionCode 3) is in Google review — the Play Console
 stays untouched until it clears. Upload these to
 Store presence → Main store listing → Phone screenshots afterwards.
+(Superseded: the 5-slide set went live Oct 21–22; see below for the Oct 23
+7-slide interchange update.)
+
+## Interchange release additions (2026-10-23)
+
+Two new slides captured by `play-assets/_capture_android_interchange.py`
+(same geometry/house rules as the rig above; zip **84047** — Midvale, Salt
+Lake valley; free-tier state; real production data; the web-only
+"YardScout is now a native app" banner is suppressed via `ys_app_promo` —
+it never renders in the native builds):
+
+| Play file | Mirrors iOS file | Scene |
+|---|---|---|
+| `screen_6_compare.png` | `screen_6_compare.png` | Yards tab — "Alternator" compared across the 7 Salt Lake–area yards in view, compare sheet open, default **cheapest-first** sort (capture asserts ascending prices) |
+| `screen_7_fitment.png` | `screen_7_fitment.png` | Parts tab — 2005 Toyota Camry + alternator fitment: engine-chip question (2AZ-FE I4 chosen), 95 donors, **Verified fit** and **Likely fit — verify part #** tags both legible in frame (capture asserts both tiers visible) |
+
+**Slide order** (uploaded + sent for review 2026-10-23, superseding the
+step19/step20 5-slide order — new slides sit right after the core Live/search
+pair, fitment first because the honesty tiers are the differentiator; the Pro
+value shot stays last-ish and alerts still closes the deck):
+
+1. `screen_1_live.png`
+2. `screen_2_search.png`
+3. `screen_7_fitment.png` *(new)*
+4. `screen_6_compare.png` *(new)*
+5. `screen_3_yards.png`
+6. `screen_5_pro.png`
+7. `screen_4_alerts.png`
+
+Upload evidence: `play-assets/listing-update/46c-after-full-order.png`
+(editor, 7/8 slot) and `47d-after-submit.png` (change in review). The vc9
+(1.5) production release had already cleared and published before the listing
+change was sent — the two reviews are independent.
+
+The iOS pair (`appstore-assets/ios/screen_6_compare.png` /
+`screen_7_fitment.png`, plus 6.5-inch and dynamic-island derived sizes) is
+captured and ready but **not uploaded**: ASC is logged out (owner logs in
+manually) and iOS 1.6 wasn't submitted yet at capture time. Attach them to
+the 1.6 version page if it's still editable, else right after 1.6 clears
+(metadata edits post-approval are allowed), in the same 7-slide order.
