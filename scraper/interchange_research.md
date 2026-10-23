@@ -52,6 +52,24 @@ cited below.**
   - Group 1: Acura CL 2001-2003; Acura TL 2000-2003
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### acura-rdx — Acura RDX 2.3T I4 (1st gen)
+
+- **Engine:** 2.3L 4-cyl
+- **Family applications:** Acura RDX 2007-2012
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0788 (110A) RDX 2.3 K23A1 2007-2012 — one published unit, unqualified.
+  - Group 1: Acura RDX 2007-2012
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-6018 RDX 2.3 2007-2009; 280-6019 RDX 2.3 2010-2012 — both unqualified.
+  - Group 1: Acura RDX 2007-2009
+  - Group 2: Acura RDX 2010-2012
+
+### acura-rdx35 — Acura RDX 3.5 V6 (2nd gen)
+
+- **Engine:** 3.5L 6-cyl
+- **Family applications:** Acura RDX 2013-2018
+- **alternator:** no verified group — Likely tier only. Note: match amperage, pulley and plug before buying — options packages used higher-amp units
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0440 RDX 3.5 J35Z2 2013-2015 — one published unit, unqualified.
+  - Group 1: Acura RDX 2013-2015
+
 ### acura-rl — Acura RL 3.5/3.7 V6
 
 - **Engine:** 3.5/3.7L 6-cyl
@@ -189,7 +207,7 @@ cited below.**
 ### ford-cyclone — Ford 3.5/3.7 Cyclone V6 (non-turbo)
 
 - **Engine:** 3.5/3.7L 6-cyl
-- **Family applications:** Ford Edge 2007-2015, Mercury Sable 2008-2009, Lincoln MKZ 2007-2012, Lincoln MKS 2009-2016, Ford Taurus 2008-2019, Ford Explorer 2011-2019, Ford Flex 2009-2019, Ford Mustang 2011-2014, Ford Mustang 2011-2017, Ford F-150 2011-2014
+- **Family applications:** Ford Edge 2007-2015, Mercury Sable 2008-2009, Lincoln MKZ 2007-2012, Lincoln MKS 2009-2016, Lincoln MKX 2007-2015, Ford Taurus 2008-2019, Ford Explorer 2011-2019, Ford Flex 2009-2019, Ford Mustang 2011-2014, Ford Mustang 2011-2017, Ford F-150 2011-2014
 - **Ambiguity cap:** Lincoln MKS — MKS EcoBoost is the 3.5 twin-turbo — same decode string; confirm non-turbo
 - **Ambiguity cap:** Ford Taurus — SHO is the 3.5 EcoBoost twin-turbo — same decode string; confirm non-turbo
 - **Ambiguity cap:** Ford Explorer — Explorer Sport/Platinum is 3.5 EcoBoost — same decode string; confirm non-turbo
@@ -292,6 +310,14 @@ cited below.**
   - Group 5: Mazda 6 2008-2009
   - Group 6: Ford Fusion 2013-2014
   - Group 7: Ford Focus 2009-2010
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### ford-tc — Ford Transit Connect 1.6/2.0/2.5
+
+- **Engine:** 1.6/2.0/2.5L 4-cyl
+- **Family applications:** Ford Transit Connect 2010-2014
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4304 (150A) Transit Connect 2.0 2010 and 2012-2013 unqualified (the 2011 row carries a Mitsubishi-unit qualifier — excluded).
+  - Group 1: Ford Transit Connect 2010-2010; Ford Transit Connect 2012-2013
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### ford-vulcan30 — Ford 3.0 Vulcan V6
@@ -401,7 +427,7 @@ cited below.**
 ### gm-ecotec24 — GM Ecotec 2.4 I4 (LE5/LE9/LEA)
 
 - **Engine:** 2.4L 4-cyl
-- **Family applications:** Chevrolet Cobalt 2006-2010, Chevrolet Malibu 2008-2012, Chevrolet Equinox 2010-2017, Chevrolet HHR 2008-2011, GMC Terrain 2010-2017, Pontiac G6 2006-2009, Chevrolet Captiva Sport 2012-2015, Saturn VUE 2008-2010, Buick Verano 2012-2017, Saturn Aura 2007-2009
+- **Family applications:** Chevrolet Cobalt 2006-2010, Chevrolet Malibu 2008-2012, Chevrolet Equinox 2010-2017, Chevrolet HHR 2008-2011, GMC Terrain 2010-2017, Pontiac G6 2006-2009, Chevrolet Captiva Sport 2012-2015, Saturn VUE 2008-2010, Buick Verano 2012-2017, Saturn Aura 2007-2009, Buick Regal 2011-2013
 - **alternator — verified evidence:** TYC 2-11459 application table (tycamericas.com, retrieved 2026-10-22; Lester 11459, GM 13512759): Equinox 2.4 2010-2017, Terrain 2.4 2010-2017. Lester 11265 (Valeo, GM 15828450/22762984) application list (am-autoparts.com, retrieved 2026-10-22) includes Saturn Vue 2.4 2008-2010. Cobalt/Malibu/G6-era LE5 uses a different unit — left at likely.
   - Group 1: Chevrolet Equinox 2010-2017; GMC Terrain 2010-2017
   - Group 2: Saturn VUE 2008-2010
@@ -869,6 +895,14 @@ cited below.**
 - **starter — verified evidence:** Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 281-6004 Santa Fe — 2.7 2001-2006, 3.5 2003-2006 and 2.4 2005-2006 in one published set. The verified span is capped to 2005-2006, the years where ALL family engines carry this number (2.4 02-04 splits M/T vs A/T).
   - Group 1: Hyundai Santa Fe 2005-2006
 
+### hyundai-santafe2 — Hyundai Santa Fe 2.4 (2nd/3rd gen)
+
+- **Engine:** 2.4L 4-cyl
+- **Family applications:** Hyundai Santa Fe 2010-2012, Hyundai Santa Fe Sport 2013-2016
+- **alternator — verified evidence:** Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6030 (110A) Santa Fe 2.4 2010-2012 — one published unit (the same number as the Sonata/Optima Theta-II GDI), unqualified.
+  - Group 1: Hyundai Santa Fe 2010-2012
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
 ### isuzu-6vd1 — Isuzu 6VD1 3.2 V6 (Rodeo/Passport)
 
 - **Engine:** 3.2L 6-cyl
@@ -948,6 +982,15 @@ cited below.**
   - Group 1: Lexus LS 430 2001-2004
   - Group 2: Lexus LS 430 2005-2006
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### lexus-is2 — Lexus IS 250/350 (2nd gen)
+
+- **Engine:** 2.5/3.5L 6-cyl
+- **Family applications:** Lexus IS 250 2006-2015, Lexus IS 350 2006-2015, Lexus IS 2006-2015
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0657 (150A) IS 250 2006-2009 AND IS 350 2006-2009 — one published unit for both engines, unqualified (the 2010-2013 rows carry a Base-trim qualifier — excluded).
+  - Group 1: Lexus IS 250 2006-2009; Lexus IS 350 2006-2009
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0366 IS 250 2.5 2006-2011 — one published unit, unqualified.
+  - Group 1: Lexus IS 250 2006-2011
 
 ### lincoln-ls39 — Lincoln LS 3.9 V8
 
@@ -1132,7 +1175,7 @@ cited below.**
 ### mopar-47 — Chrysler PowerTech 4.7 V8
 
 - **Engine:** 4.7L 8-cyl
-- **Family applications:** Jeep Grand Cherokee 1999-2009, Dodge Dakota 2000-2011, Dodge Durango 2000-2009, Dodge|Ram Ram* 2002-2013, Ram 1500* 2011-2013, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
+- **Family applications:** Jeep Grand Cherokee 1999-2009, Dodge Dakota 2000-2011, Dodge Durango 2000-2009, Dodge|Ram Ram* 2002-2013, Chrysler|Dodge Dodge 1500 Pickup 2002-2008, Ram 1500* 2011-2013, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
 - **alternator — verified evidence:** Mopar OEM 56029914AC (160A Denso, replaces 56029914AA) fitment (jeeppartsdeal.com, retrieved 2026-10-22): Durango 3.7/4.7 2001-2007, Grand Cherokee 3.7/4.7 2005-2006; Denso 421000-0040 vendor table adds Commander 3.7/4.7 2006-2010. Mopar RL041120AC (Ram 1500 3.7/4.7 2002-2007) and 56029700AD (Ram 1500 2008) cover the trucks.
   - Group 1: Dodge Durango 2001-2007; Jeep Grand Cherokee 2005-2006; Jeep Commander 2006-2009
   - Group 2: Dodge|Ram Ram* 2002-2008
@@ -1149,15 +1192,23 @@ cited below.**
 ### mopar-hemi57 — Chrysler 5.7 HEMI V8
 
 - **Engine:** 5.7L 8-cyl
-- **Family applications:** Dodge|Ram Ram* 2003-2024, Ram 1500* 2011-2024, Ram 2500* 2011-2024, Ram 3500* 2011-2024, Dodge Charger 2006-2023, Dodge Challenger 2009-2023, Chrysler 300 2005-2023, Dodge Magnum 2005-2008, Jeep Grand Cherokee 2005-2021, Dodge Durango 2011-2023, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
+- **Family applications:** Dodge|Ram Ram* 2003-2024, Chrysler|Dodge Dodge 1500 Pickup 2003-2008, Ram 1500* 2011-2024, Ram 2500* 2011-2024, Ram 3500* 2011-2024, Dodge Charger 2006-2023, Dodge Challenger 2009-2023, Chrysler 300 2005-2023, Dodge Magnum 2005-2008, Jeep Grand Cherokee 2005-2021, Dodge Durango 2011-2023, Jeep Commander 2006-2009, Chrysler Aspen 2007-2009
 - **alternator — verified evidence:** TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-11298 (Chrysler 5602869, Denso 7S) Ram 5.7 2007-2008.
   - Group 1: Dodge|Ram Ram* 2007-2008
+- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+
+### mopar-lh27 — Chrysler LH 2.7 V6 (Intrepid/Concorde)
+
+- **Engine:** 2.7L 6-cyl
+- **Family applications:** Dodge Intrepid 1998-2004, Chrysler Concorde 1998-2004, Chrysler 300M 1999-2004
+- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0686 (120A) Intrepid 2.7 1999-2001 — one published unit, unqualified (the 3.2/3.5 use their own units; 02-04 rows split Std/Opt). Concorde/300M spans not separately verified — left at likely.
+  - Group 1: Dodge Intrepid 1999-2001
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
 ### mopar-magnum — Dodge Magnum 5.2/5.9 V8
 
 - **Engine:** 5.2/5.9L 8-cyl
-- **Family applications:** Dodge|Ram Ram* 1994-2001, Dodge Dakota 1992-2003, Dodge Durango 1998-2003, Jeep Grand Cherokee 1993-1998
+- **Family applications:** Dodge|Ram Ram* 1994-2001, Chrysler|Dodge Dodge 1500 Pickup 1994-2001, Dodge Dakota 1992-2003, Dodge Durango 1998-2003, Jeep Grand Cherokee 1993-1998
 - **alternator — verified evidence:** Lester 13354 (Denso 121000-3530, Chrysler 56027912) application list (maniacelectricmotors.com + aspwholesale.com, retrieved 2026-10-22): Dakota 1992-1998, Ram 1500/2500/3500 1994-1998, Durango 1998, Grand Cherokee 5.2/5.9 1993-1998, Ramcharger 1992-1993. Corroborated by Lester 13742 (Chrysler 56027913, 136A) with the same spans. Lester 13920/13914 (Bosch/Denso 136A, Chrysler 56028237) application table (dssautoparts.com): Ram 1999-2003, Durango 5.9 2001-2003.
   - Group 1: Dodge|Ram Ram* 1994-1998; Dodge Dakota 1992-1998; Dodge Durango 1998-1998; Jeep Grand Cherokee 1993-1998
   - Group 2: Dodge|Ram Ram* 1999-2001; Dodge Durango 2001-2003
@@ -1174,7 +1225,7 @@ cited below.**
 ### mopar-minivan-ohv — Chrysler minivan 3.3/3.8 OHV V6 (01-10)
 
 - **Engine:** 3.3/3.8L 6-cyl
-- **Family applications:** Dodge Grand Caravan 2001-2010, Chrysler Grand Caravan 2001-2010, Dodge Caravan 2001-2007, Chrysler Caravan 2001-2007, Chrysler Town & Country 2000-2010, Chrysler Town And Country 2000-2010, Chrysler Voyager 2001-2003
+- **Family applications:** Dodge Grand Caravan 2001-2010, Chrysler Grand Caravan 2001-2010, Dodge Caravan 2001-2007, Chrysler Caravan 2001-2007, Chrysler Town & Country 2000-2010, Chrysler Town And Country 2000-2010, Chrysler Town &amp; Country 2000-2010, Chrysler Voyager 2001-2003
 - **alternator:** no verified group — Likely tier only. Note: every published alternator row splits Std vs Opt amperage — match the amp rating on your old unit
 - **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22), Grand Caravan rows unqualified for both the 3.3 and 3.8: 280-0360 2006-2010; 280-0349 2004-2005; 280-0321 2001-2003 (the 2003 FLEX Fuel/GAS tags don't discriminate — both carry the same number). Caravan/Town & Country spans not separately verified — left at likely.
   - Group 1: Dodge Grand Caravan 2006-2010
@@ -1207,7 +1258,7 @@ cited below.**
 ### mopar-pentastar — Chrysler Pentastar 3.6 V6
 
 - **Engine:** 3.6L 6-cyl
-- **Family applications:** Dodge Grand Caravan 2011-2020, Chrysler Town & Country 2011-2016, Chrysler Town And Country 2011-2016, Dodge Caravan 2011-2019, Chrysler Caravan 2011-2019, Volkswagen Routan 2011-2014, Dodge Journey 2011-2020, Chrysler Journey 2011-2020, Dodge Avenger 2011-2014, Chrysler Avenger 2011-2014, Chrysler 200 2011-2017, Dodge Charger 2011-2023, Dodge Challenger 2011-2023, Chrysler 300 2011-2023, Dodge Durango 2011-2024, Jeep Grand Cherokee 2011-2021, Jeep Wrangler 2012-2018, Dodge|Ram Ram* 2013-2024, Ram 1500* 2013-2024
+- **Family applications:** Dodge Grand Caravan 2011-2020, Chrysler Town & Country 2011-2016, Chrysler Town And Country 2011-2016, Chrysler Town &amp; Country 2011-2016, Dodge Caravan 2011-2019, Chrysler Caravan 2011-2019, Volkswagen Routan 2011-2014, Dodge Journey 2011-2020, Chrysler Journey 2011-2020, Dodge Avenger 2011-2014, Chrysler Avenger 2011-2014, Chrysler 200 2011-2017, Dodge Charger 2011-2023, Dodge Challenger 2011-2023, Chrysler 300 2011-2023, Dodge Durango 2011-2024, Jeep Grand Cherokee 2011-2021, Jeep Wrangler 2012-2018, Dodge|Ram Ram* 2013-2024, Ram 1500* 2013-2024
 - **alternator — verified evidence:** TYC 2-11570 fitment list (finditparts.com) + BBB 11570 table (partcatalog.com; Chrysler 68272108AD, Denso 421000-0770, retrieved 2026-10-22): Grand Caravan 2011-2020, Town & Country 2011-2016, Journey 3.6 2011-2019, Avenger 3.6 2011-2014, 200 3.6 2011-2014.
   - Group 1: Dodge Grand Caravan 2011-2020; Chrysler Town & Country 2011-2016; Chrysler Town And Country 2011-2016; Dodge Journey 2011-2019; Dodge Avenger 2011-2014; Chrysler 200 2011-2014
 - **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0438 Avenger 3.6 2011-2014 and Journey 3.6 2011-2014 — the rows carry a 'FLEX Fuel' tag, but every 3.6 Pentastar in these models is flex-fuel, so it doesn't discriminate.
@@ -1334,7 +1385,7 @@ cited below.**
 ### nissan-vq-hr — Nissan/Infiniti VQ35HR/VQ37VHR 3.5/3.7 V6
 
 - **Engine:** 3.5/3.7L 6-cyl
-- **Family applications:** Nissan 350Z 2007-2009, Nissan 370Z 2009-2020, Infiniti G35 2007-2008, Infiniti G37 2008-2013, Infiniti M35 2009-2010
+- **Family applications:** Nissan 350Z 2007-2009, Nissan 370Z 2009-2020, Infiniti G35 2007-2008, Infiniti G37 2008-2013, Infiniti M35 2009-2010, Infiniti Q50 2014-2019
 - **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4313 (150A) in one published application set — 350Z VQ35HR 2007-2009, G35 VQ35HR 2007-2008 (both 07 trim rows carry the same number), G37 VQ37VHR 2008-2010, 370Z VQ37VHR 2009 (the 2010 370Z rows are build-date-qualified 'To 02/2010' and excluded).
   - Group 1: Nissan 350Z 2007-2009; Infiniti G35 2007-2008; Infiniti G37 2008-2010; Nissan 370Z 2009-2009
 - **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-3143 370Z 3.7 2010-2011 and G37 3.7 2011, unqualified (350Z/G35 HR starter rows are build-date- or trim-qualified and excluded).
@@ -1354,7 +1405,7 @@ cited below.**
 ### nissan-vq35de — Nissan/Infiniti VQ35DE 3.5 V6
 
 - **Engine:** 3.5L 6-cyl
-- **Family applications:** Nissan Altima 2002-2006, Nissan Maxima 2002-2014, Nissan Murano 2003-2014, Nissan Pathfinder 2001-2004, Nissan Quest 2004-2009, Nissan Quest 2011-2017, Infiniti M35 2006-2008, Infiniti JX35 2013-2013, Nissan 350Z 2003-2006, Infiniti G35 2003-2006, Infiniti I35 2002-2004, Infiniti FX35 2003-2008
+- **Family applications:** Nissan Altima 2002-2006, Nissan Maxima 2002-2014, Nissan Murano 2003-2014, Nissan Pathfinder 2001-2004, Nissan Quest 2004-2009, Nissan Quest 2011-2017, Infiniti M35 2006-2008, Infiniti JX35 2013-2013, Infiniti QX60 2014-2020, Nissan 350Z 2003-2006, Infiniti G35 2003-2006, Infiniti I35 2002-2004, Infiniti FX35 2003-2008
 - **alternator — verified evidence:** OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely; 210-4211 (110A) 350Z VQ35DE 2003-2006 and G35 2004-2006 (the 2003 G35 sedan row is body-qualified and excluded); 210-4207 (110A) Pathfinder 3.5 2003-2004; 210-3150 (110A) Pathfinder 3.5 2002.
   - Group 1: Nissan Altima 2002-2006; Nissan Maxima 2002-2003; Nissan Murano 2003-2007; Infiniti I35 2002-2004
   - Group 2: Nissan Maxima 2004-2008
@@ -1650,10 +1701,10 @@ cited below.**
 ### vw-20t — VW 2.0T EA113/EA888 I4 (GTI/Jetta)
 
 - **Engine:** 2.0L 4-cyl
-- **Family applications:** Volkswagen GTI 2006-2014, Volkswagen Jetta 2006-2013
+- **Family applications:** Volkswagen GTI 2006-2014, Volkswagen Jetta 2006-2013, Volkswagen Passat 2006-2010, Volkswagen CC 2009-2017, Volkswagen Tiguan 2009-2017, Volkswagen Eos 2007-2016
 - **alternator:** no verified group — Likely tier only. Note: every published 2.0T alternator row is vendor-qualified (Bosch vs Valeo) — all pairs stay Likely; match the unit on your car
-- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 GTI 2.0 2006-2009 and Jetta 2.0 2006-2008 in one published set, unqualified; 281-6001 (First Time Fit) GTI 2.0 2010-2011 unqualified. Later Jetta rows split by fuel, body and transmission and are excluded.
-  - Group 1: Volkswagen GTI 2006-2009; Volkswagen Jetta 2006-2008
+- **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 GTI 2.0 2006-2009, Jetta 2.0 2006-2008 and Passat 2.0T 2007-2009 in one published set, unqualified (the 2010 Passat row carries a Bosch-unit qualifier and 07-10 Passats are also dual-listed with 281-6001 — match yours); 281-6001 (First Time Fit) GTI 2.0 2010-2011 unqualified. Later Jetta rows split by fuel, body and transmission and are excluded.
+  - Group 1: Volkswagen GTI 2006-2009; Volkswagen Jetta 2006-2008; Volkswagen Passat 2007-2009
   - Group 2: Volkswagen GTI 2010-2011
 
 ### vw-25 — VW 2.5 I5

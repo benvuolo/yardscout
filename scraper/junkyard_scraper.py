@@ -6546,6 +6546,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Quest", 2011, 2017, {"sole": True}),
             ("Infiniti", "M35", 2006, 2008, {"sole": True}),
             ("Infiniti", "JX35", 2013, 2013, {"sole": True}),
+            ("Infiniti", "QX60", 2014, 2020),
             ("Nissan", "350Z", 2003, 2006, {"sole": True}),
             ("Infiniti", "G35", 2003, 2006, {"sole": True}),
             ("Infiniti", "I35", 2002, 2004, {"sole": True}),
@@ -6729,6 +6730,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Lincoln", "MKZ", 2007, 2012, {"sole": True}),
             ("Lincoln", "MKS", 2009, 2016,
              {"ambig": "MKS EcoBoost is the 3.5 twin-turbo — same decode string; confirm non-turbo"}),
+            ("Lincoln", "MKX", 2007, 2015, {"sole": True}),
             ("Ford", "Taurus", 2008, 2019,
              {"ambig": "SHO is the 3.5 EcoBoost twin-turbo — same decode string; confirm non-turbo"}),
             ("Ford", "Explorer", 2011, 2019,
@@ -6875,6 +6877,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Saturn", "VUE", 2008, 2010),
             ("Buick", "Verano", 2012, 2017),
             ("Saturn", "Aura", 2007, 2009),
+            ("Buick", "Regal", 2011, 2013),
         ],
         "parts": {
             "alternator": {"note": "Ecotec 2.4 unit — direct-injection (LEA/LUK) era plugs can differ; " + _ALT_NOTE},
@@ -7043,6 +7046,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chrysler", "Town & Country", 2011, 2016, {"sole": True}),
             # The live feed spells it out — "&" squashes away, "And" doesn't.
             ("Chrysler", "Town And Country", 2011, 2016, {"sole": True}),
+            ("Chrysler", "Town &amp; Country", 2011, 2016, {"sole": True}),  # raw feed HTML entity
             # feed sometimes drops the "Grand" on 2011+ Grand Caravans
             ("Dodge", "Caravan", 2011, 2019, {"sole": True}),
             ("Chrysler", "Caravan", 2011, 2019, {"sole": True}),
@@ -7111,6 +7115,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Dodge", "Dakota", 2000, 2011),
             ("Dodge", "Durango", 2000, 2009),
             ("Dodge|Ram", "Ram*", 2002, 2013),
+            ("Chrysler|Dodge", "Dodge 1500 Pickup", 2002, 2008),  # feed alias
             ("Ram", "1500*", 2011, 2013),
             ("Jeep", "Commander", 2006, 2009),
             ("Chrysler", "Aspen", 2007, 2009),
@@ -7156,6 +7161,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [5.7], "cyl": 8},
         "apps": [
             ("Dodge|Ram", "Ram*", 2003, 2024),
+            ("Chrysler|Dodge", "Dodge 1500 Pickup", 2003, 2008),  # feed alias
             ("Ram", "1500*", 2011, 2024),
             ("Ram", "2500*", 2011, 2024),
             ("Ram", "3500*", 2011, 2024),
@@ -7178,6 +7184,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [5.2, 5.9], "cyl": 8},
         "apps": [
             ("Dodge|Ram", "Ram*", 1994, 2001),
+            ("Chrysler|Dodge", "Dodge 1500 Pickup", 1994, 2001),  # feed alias
             ("Dodge", "Dakota", 1992, 2003),
             ("Dodge", "Durango", 1998, 2003),
             ("Jeep", "Grand Cherokee", 1993, 1998),
@@ -7617,6 +7624,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Infiniti", "G35", 2007, 2008, {"sole": True}),
             ("Infiniti", "G37", 2008, 2013, {"sole": True}),
             ("Infiniti", "M35", 2009, 2010, {"sole": True}),
+            ("Infiniti", "Q50", 2014, 2019),
         ],
         "parts": {
             "alternator": {"note": "one 150A unit spans the HR cars (350Z 07-09, G35 07-08, G37 08-10, early 370Z); late 370Z (from 02/2010) revises it — match part number there"},
@@ -7759,6 +7767,10 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "apps": [
             ("Volkswagen", "GTI", 2006, 2014, {"sole": True}),
             ("Volkswagen", "Jetta", 2006, 2013),
+            ("Volkswagen", "Passat", 2006, 2010),
+            ("Volkswagen", "CC", 2009, 2017),
+            ("Volkswagen", "Tiguan", 2009, 2017, {"sole": True}),
+            ("Volkswagen", "Eos", 2007, 2016),
         ],
         "parts": {
             "alternator": {"note": "every published 2.0T alternator row is vendor-qualified (Bosch vs Valeo) — all pairs stay Likely; match the unit on your car"},
@@ -8385,6 +8397,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Chrysler", "Caravan", 2001, 2007),
             ("Chrysler", "Town & Country", 2000, 2010),
             ("Chrysler", "Town And Country", 2000, 2010),
+            ("Chrysler", "Town &amp; Country", 2000, 2010),  # raw feed HTML entity
             ("Chrysler", "Voyager", 2001, 2003),
         ],
         "parts": {
@@ -8527,6 +8540,77 @@ ENGINE_FAMILIES: dict[str, dict] = {
         ],
         "parts": {
             "alternator": {"note": "ONE published unit covers 10-15 (2012 is dual-listed with the 2.0T's unit — match yours)"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "acura-rdx": {
+        "display": "Acura RDX 2.3T I4 (1st gen)",
+        "engine": {"liters": [2.3], "cyl": 4},
+        "apps": [
+            ("Acura", "RDX", 2007, 2012, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers every 2.3T RDX 07-12"},
+            "starter": {"note": "two published units (07-09 / 10-12), both unqualified"},
+        },
+    },
+    "acura-rdx35": {
+        "display": "Acura RDX 3.5 V6 (2nd gen)",
+        "engine": {"liters": [3.5], "cyl": 6},
+        "apps": [
+            ("Acura", "RDX", 2013, 2018, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": _ALT_NOTE},
+            "starter": {"note": "ONE published unit covers 13-15"},
+        },
+    },
+    "lexus-is2": {
+        "display": "Lexus IS 250/350 (2nd gen)",
+        "engine": {"liters": [2.5, 3.5], "cyl": 6},
+        "apps": [
+            ("Lexus", "IS 250", 2006, 2015, {"sole": True}),
+            ("Lexus", "IS 350", 2006, 2015, {"sole": True}),
+            ("Lexus", "IS", 2006, 2015),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers IS 250 AND IS 350 06-09 (10-13 rows carry a Base-trim qualifier)"},
+            "starter": {"note": "ONE published starter covers the IS 250 06-11; IS 350 starters aren't published unqualified"},
+        },
+    },
+    "mopar-lh27": {
+        "display": "Chrysler LH 2.7 V6 (Intrepid/Concorde)",
+        "engine": {"liters": [2.7], "cyl": 6},
+        "apps": [
+            ("Dodge", "Intrepid", 1998, 2004),
+            ("Chrysler", "Concorde", 1998, 2004),
+            ("Chrysler", "300M", 1999, 2004),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers the 2.7 Intrepid 99-01; the 3.2/3.5 use their own units and 03-04 rows split Std/Opt"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "hyundai-santafe2": {
+        "display": "Hyundai Santa Fe 2.4 (2nd/3rd gen)",
+        "engine": {"liters": [2.4], "cyl": 4},
+        "apps": [
+            ("Hyundai", "Santa Fe", 2010, 2012),
+            ("Hyundai", "Santa Fe Sport", 2013, 2016),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers the 2.4 Santa Fe 10-12 (shared with the Sonata); 13+ Sport rows carry trim/AMS qualifiers"},
+            "starter": {"note": _STR_NOTE},
+        },
+    },
+    "ford-tc": {
+        "display": "Ford Transit Connect 1.6/2.0/2.5",
+        "engine": {"liters": [1.6, 2.0, 2.5], "cyl": 4},
+        "apps": [
+            ("Ford", "Transit Connect", 2010, 2014),
+        ],
+        "parts": {
+            "alternator": {"note": "ONE published unit covers the 2.0 in 2010 and 2012-13 (the 2011 row carries a vendor qualifier); 2014's 1.6 and 2.5 each use their own unit"},
             "starter": {"note": _STR_NOTE},
         },
     },
@@ -9741,6 +9825,31 @@ _ALT_VERIFIED: dict = {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0713 (130A) Genesis Coupe 3.8 2010-2015 — one published unit, unqualified (2012 is also dual-listed with 211-6017 — match yours).",
         "groups": [[("Hyundai", "Genesis Coupe", 2010, 2015)]],
     },
+    "acura-rdx": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0788 (110A) RDX 2.3 K23A1 2007-2012 — one published unit, unqualified.",
+        "groups": [[("Acura", "RDX", 2007, 2012)]],
+    },
+    "lexus-is2": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0657 (150A) IS 250 2006-2009 AND IS 350 2006-2009 — one published unit for both engines, unqualified (the 2010-2013 rows carry a Base-trim qualifier — excluded).",
+        "groups": [
+            [("Lexus", "IS 250", 2006, 2009), ("Lexus", "IS 350", 2006, 2009)],
+        ],
+    },
+    "mopar-lh27": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0686 (120A) Intrepid 2.7 1999-2001 — one published unit, unqualified (the 3.2/3.5 use their own units; 02-04 rows split Std/Opt). Concorde/300M spans not separately verified — left at likely.",
+        "groups": [[("Dodge", "Intrepid", 1999, 2001)]],
+    },
+    "hyundai-santafe2": {
+        "evidence": "Denso First Time Fit catalog (densoautoparts.com, retrieved 2026-10-22): 211-6030 (110A) Santa Fe 2.4 2010-2012 — one published unit (the same number as the Sonata/Optima Theta-II GDI), unqualified.",
+        "groups": [[("Hyundai", "Santa Fe", 2010, 2012)]],
+    },
+    "ford-tc": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4304 (150A) Transit Connect 2.0 2010 and 2012-2013 unqualified (the 2011 row carries a Mitsubishi-unit qualifier — excluded).",
+        "groups": [
+            [("Ford", "Transit Connect", 2010, 2010),
+             ("Ford", "Transit Connect", 2012, 2013)],
+        ],
+    },
     "mitsu-4g94": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4165 (85A) Lancer 2.0 2002 — clean row (03-04 rows carry a non-turbo qualifier because the Evo arrived in 2003); 210-4271 (105A) Lancer 2.0 4G94 2007 — clean row (the Evo IX ended in 2006).",
         "groups": [
@@ -9883,10 +9992,11 @@ _STR_VERIFIED: dict = {
         "groups": [[("BMW", "X5", 2001, 2006)]],
     },
     "vw-20t": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 GTI 2.0 2006-2009 and Jetta 2.0 2006-2008 in one published set, unqualified; 281-6001 (First Time Fit) GTI 2.0 2010-2011 unqualified. Later Jetta rows split by fuel, body and transmission and are excluded.",
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 GTI 2.0 2006-2009, Jetta 2.0 2006-2008 and Passat 2.0T 2007-2009 in one published set, unqualified (the 2010 Passat row carries a Bosch-unit qualifier and 07-10 Passats are also dual-listed with 281-6001 — match yours); 281-6001 (First Time Fit) GTI 2.0 2010-2011 unqualified. Later Jetta rows split by fuel, body and transmission and are excluded.",
         "groups": [
             [("Volkswagen", "GTI", 2006, 2009),
-             ("Volkswagen", "Jetta", 2006, 2008)],
+             ("Volkswagen", "Jetta", 2006, 2008),
+             ("Volkswagen", "Passat", 2007, 2009)],
             [("Volkswagen", "GTI", 2010, 2011)],
         ],
     },
@@ -10277,6 +10387,21 @@ _STR_VERIFIED: dict = {
             [("Toyota", "RAV4", 2004, 2005)],
             [("Toyota", "RAV4", 2006, 2008)],
         ],
+    },
+    "acura-rdx": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-6018 RDX 2.3 2007-2009; 280-6019 RDX 2.3 2010-2012 — both unqualified.",
+        "groups": [
+            [("Acura", "RDX", 2007, 2009)],
+            [("Acura", "RDX", 2010, 2012)],
+        ],
+    },
+    "acura-rdx35": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0440 RDX 3.5 J35Z2 2013-2015 — one published unit, unqualified.",
+        "groups": [[("Acura", "RDX", 2013, 2015)]],
+    },
+    "lexus-is2": {
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0366 IS 250 2.5 2006-2011 — one published unit, unqualified.",
+        "groups": [[("Lexus", "IS 250", 2006, 2011)]],
     },
 }
 
