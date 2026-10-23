@@ -5621,6 +5621,12 @@ async function refreshNativeIapUi() {
         if (buy) buy.style.display = '';
         const head = $id('ent-appstore-head');
         if (head) head.textContent = 'Prefer the app?';
+        // The static sheet intro ends "Subscribe in the YardScout iOS app." —
+        // contradicts the live web checkout button right below it.
+        const sub = document.querySelector('#upgrade-sheet .sheet-sub');
+        if (sub) sub.textContent = sub.textContent.replace(
+          'Subscribe in the YardScout iOS app.',
+          'Subscribe right here or in the YardScout app; cancel anytime.');
       }
     } catch (e) { /* worker unreachable → App-Store-only copy stands */ }
   })();
