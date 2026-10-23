@@ -1013,10 +1013,272 @@ const MODEL_ALIASES = {
   },
 };
 
+/* 2026-10 model merge — mirror of the scraper's normalize_model output for
+ * every pre-merge inventory spelling whose canonical form differs beyond
+ * case ('Mazda 3'->'Mazda3', 'F250Sd Pickup'->'F-250 Super Duty', 'BMW
+ * 328i'->'328i', 'Charger Lc'->'Charger'...). The inventory now ships
+ * canonical models; this map exists so WATCHES saved BEFORE the merge keep
+ * matching at comparison time — same approach as MAKE_ALIASES (fa3480c).
+ * Outer keys: squashed canonical make; inner keys: squashed old model.
+ * Generated from the full pre-merge inventory audit (2026-10-22); keep in
+ * sync with scraper/test_model_normalization.py. */
+const MODEL_RENAMES_2026_10 = {
+  "alfaromeo": {
+    "alfaromeogtv6": "Gtv-6",
+  },
+  "audi": {
+    "audi4000": "4000", "audia3": "A3", "audia4": "A4", "audia5": "A5", "audia6": "A6",
+    "audia8": "A8", "audiallroad": "Allroad", "audicabriolet": "Cabriolet", "audiq3": "Q3",
+    "audiq5": "Q5", "audiq7": "Q7", "audis3": "S3", "audis5": "S5", "auditt": "TT",
+  },
+  "bmw": {
+    "525ia": "525i", "530ia": "530i", "bmw128i": "128i", "bmw318i": "318i", "bmw320i": "320i",
+    "bmw323i": "323i", "bmw325i": "325i", "bmw328i": "328i", "bmw330i": "330i",
+    "bmw335i": "335i", "bmw430i": "430i", "bmw525i": "525i", "bmw528e": "528e",
+    "bmw528i": "528i", "bmw530i": "530i", "bmw535i": "535i", "bmw540i": "540i",
+    "bmw550i": "550i", "bmw550igt": "550i GT", "bmw645i": "645i", "bmw650i": "650i",
+    "bmw735i": "735i", "bmw740i": "740i", "bmw745i": "745i", "bmw750i": "750i",
+    "bmwalpinab7": "Alpina B7", "bmwi3": "i3", "bmwx1": "X1", "bmwx3": "X3", "bmwx5": "X5",
+    "bmwz3": "Z3", "bmwz4": "Z4",
+  },
+  "buick": {
+    "rendezvoussrv": "Rendezvous",
+  },
+  "cadillac": {
+    "eldorado": "Eldorado",
+  },
+  "chevrolet": {
+    "astrovan": "Astro", "belair": "Bel Air", "blazers10jimmys15": "Blazer S10/Jimmy S15",
+    "c10": "C10", "c10pickup": "C10", "c20truck": "C20", "c30pickup": "C30",
+    "chevrolet10pickup": "10 Pickup", "chevrolet10van": "10 Van",
+    "chevrolet1500pickup": "1500 Pickup", "chevrolet20pickup": "20 Pickup",
+    "chevrolet20van": "20 Van", "chevrolet2500pickup": "2500 Pickup", "chevrolet30van": "30 Van",
+    "chevrolet3500pickup": "3500 Pickup", "chevyvanclassic": "Chevy Van",
+    "cityexpressls": "City Express", "ck10series": "C/K 10", "ck1500series": "C/K 1500",
+    "ck20series": "C/K 20", "ck2500series": "C/K 2500", "ck30series": "C/K 30",
+    "ck3500series": "C/K 3500", "express1500van": "Express 1500",
+    "express2500van": "Express 2500", "express3500van": "Express 3500", "geoprizm": "Prizm",
+    "gseriesvan": "G-Series", "luminacar": "Lumina", "luminaminivan": "Lumina APV",
+    "luminavan": "Lumina APV", "pu": "P.U", "rv20series": "R/V 20", "s10pickup": "S-10",
+    "s10pu": "S-10", "s10s15sonoma": "S10/S15/Sonoma", "silverado1500hd": "Silverado 1500HD",
+    "silverado1500pickup": "Silverado 1500", "silverado2500pickup": "Silverado 2500",
+    "silverado3500pickup": "Silverado 3500", "silveradoclassic1500": "Silverado 1500 Classic",
+    "silveradohd2500": "Silverado 2500HD", "ventureapv": "Venture",
+  },
+  "chrysler": {
+    "200js": "200", "200lx": "200", "200uf": "200", "300clx": "300C", "300lx": "300",
+    "300m": "300M", "aspenhg": "Aspen", "concordelh": "Concorde", "crossfirezh": "Crossfire",
+    "lhslh": "LHS", "pacificacs": "Pacifica", "ptcruiserpt": "PT Cruiser",
+    "sebringjr": "Sebring", "sebringjs": "Sebring", "tcmaserati": "TC By Maserati",
+    "townampcountry": "Town & Country", "townandcountry": "Town & Country",
+    "townandcountryrs": "Town & Country", "townandcountryrt": "Town & Country",
+    "voyagerrs": "Voyager",
+  },
+  "dodge": {
+    "200pu": "200 P.U", "avengerjs": "Avenger", "caliberpm": "Caliber",
+    "caravangrandcaravanrs": "Caravan/Grand Caravan", "caravanrs": "Caravan",
+    "challengerla": "Challenger", "challengerlc": "Challenger", "chargerlc": "Charger",
+    "chargerlx": "Charger", "d100pickup": "D100", "d10pu": "D-10 P.U", "d150pickup": "D150",
+    "dakotaan": "Dakota", "dakotand": "Dakota", "dartpf": "Dart",
+    "dodge1500pickup": "1500 Pickup", "dodge1500van": "1500 Van", "dodge150pickup": "150 Pickup",
+    "dodge2500pickup": "2500 Pickup", "dodge2500van": "2500 Van",
+    "dodge3500pickup": "3500 Pickup", "dodge3500van": "3500 Van", "dodge600": "600",
+    "durangodn": "Durango", "durangohb": "Durango", "grandcaravan": "Grand Caravan",
+    "grandcaravanrs": "Grand Caravan", "grandcaravanrt": "Grand Caravan",
+    "intrepidlh": "Intrepid", "journeyjc": "Journey", "magnumlx": "Magnum", "neonpl": "Neon",
+    "nitroka": "Nitro", "pud250": "D250", "ram1500van": "Ram Van 1500",
+    "ram2500van": "Ram Van 2500", "ram3500van": "Ram Van 3500", "stratusja": "Stratus",
+    "stratusjr": "Stratus", "w100pickup": "W100", "w150pickup": "W150", "w200pickup": "W200",
+    "w250pickup": "W250", "w350pickup": "W350",
+  },
+  "fiat": {
+    "fiat500": "500", "fiatfiat500": "500",
+  },
+  "ford": {
+    "e100econoline": "E-100", "e150clubwagon": "E-150", "e150econoline": "E-150",
+    "e150econolineclubwagon": "E-150", "e150van": "E-150", "e250econoline": "E-250",
+    "e250van": "E-250", "e300econoline": "E-300", "e350clubwagon": "E-350",
+    "e350econoline": "E-350", "e350econolineclubwagon": "E-350", "e350van": "E-350",
+    "e350wagon": "E-350", "e450sdvan": "E-450 Super Duty", "ecosportse": "Ecosport",
+    "ecosportses": "Ecosport", "escapelimited": "Escape", "escapexls": "Escape",
+    "escapexlt": "Escape", "f100pickup": "F-100", "f100truck": "F-100", "f150pickup": "F-150",
+    "f250pickup": "F-250", "f250sd": "F-250 Super Duty", "f250sdpickup": "F-250 Super Duty",
+    "f350pickup": "F-350", "f350sd": "F-350 Super Duty", "f350sdpickup": "F-350 Super Duty",
+    "f450sd": "F-450 Super Duty", "f450sdpickup": "F-450 Super Duty", "forde150van": "E-150",
+    "forde250van": "E-250", "forde350van": "E-350", "forde450sdvan": "E-450 Super Duty",
+    "fordf150pickup": "F-150", "fordf250pickup": "F-250", "fordf250sdpickup": "F-250 Super Duty",
+    "fordf350pickup": "F-350", "fordf350sdpickup": "F-350 Super Duty",
+    "fordf450sdpickup": "F-450 Super Duty", "fordf550sdpickup": "F-550 Super Duty",
+    "fordpass": "Pass", "transit150": "Transit-150", "transit250": "Transit-250",
+    "transit350": "Transit-350",
+  },
+  "gmc": {
+    "c15c1500pickup": "C1500", "ck1500series": "C/K 1500", "ck2500series": "C/K 2500",
+    "gmc1500pickup": "1500 Pickup", "gmc1500van": "1500 Van", "gmc2500pickup": "2500 Pickup",
+    "gmc2500van": "2500 Van", "gmc3500pickup": "3500 Pickup", "gmcenvoy": "Envoy",
+    "gmcenvoyxl": "Envoy Xl", "gmcs10s15sonoma": "S10/S15/Sonoma", "gmcsafarigmc": "Safari",
+    "gmcsierra1500pickup": "Sierra 1500", "gmcsierradenaliev": "Sierra Denali Ev",
+    "gmcterrain": "Terrain", "gmcyukon": "Yukon", "gmcyukonxl1500": "Yukon XL 1500",
+    "jimmys15": "S-15 Jimmy", "jimmyutility": "Jimmy", "s15pickup": "S-15",
+    "s15utility": "S-15 Jimmy", "safarigmc": "Safari", "savana1500van": "Savana 1500",
+    "savana2500van": "Savana 2500", "savana3500van": "Savana 3500",
+    "sierra1500pickup": "Sierra 1500", "sierra2500pickup": "Sierra 2500",
+    "sierrack1500": "Sierra 1500", "sierrack2500": "Sierra 2500", "sierrack3500": "Sierra 3500",
+  },
+  "honda": {
+    "civiccrx": "CRX",
+  },
+  "hummer": {
+    "hummerh3": "H3",
+  },
+  "infiniti": {
+    "infinitiex35": "EX35", "infinitiex37": "EX37", "infinitifxseries": "FX Series",
+    "infinitig20": "G20", "infinitig25": "G25", "infinitig35": "G35", "infinitig37": "G37",
+    "infinitii30": "I30", "infinitii35": "I35", "infinitij30": "J30", "infinitijx35": "JX35",
+    "infinitim35": "M35", "infinitim37": "M37", "infinitiq45": "Q45", "infinitiq50": "Q50",
+    "infinitiq60": "Q60", "infinitiq70": "Q70", "infinitiqx30": "QX30", "infinitiqx4": "QX4",
+    "infinitiqx50": "QX50", "infinitiqx56": "QX56", "infinitiqx60": "QX60",
+    "infinitiqx80": "QX80", "qx41999": "QX4",
+  },
+  "isuzu": {
+    "isuzuascender": "Ascender", "isuzui280": "I-280", "isuzupuppickup": "Pup (Pickup)",
+    "isuzurodeo": "Rodeo", "isuzutrooper": "Trooper",
+  },
+  "jaguar": {
+    "xj6": "XJ6", "xjsedan": "XJ",
+  },
+  "jeep": {
+    "cherokeekl": "Cherokee", "cherokeexj": "Cherokee", "cj7": "CJ7", "commanderxh": "Commander",
+    "commanderxk": "Commander", "compassmk": "Compass", "grandcherokeewj": "Grand Cherokee",
+    "grandcherokeewk": "Grand Cherokee", "j10pickup": "J10", "libertykj": "Liberty",
+    "libertykk": "Liberty", "patriotmk": "Patriot", "pucomanche": "Comanche",
+    "wranglerjk": "Wrangler",
+  },
+  "kia": {
+    "forte5door": "Forte5", "rio5door": "Rio5", "riocinco": "Rio5",
+  },
+  "landrover": {
+    "discoveryii": "Discovery Series II", "evoque": "Range Rover Evoque",
+    "landroverdiscovery": "Discovery", "landroverevoque": "Range Rover Evoque",
+    "landroverlr2": "Lr2", "landroverrangerover": "Range Rover",
+    "landroverrangesport": "Range Rover Sport",
+  },
+  "lexus": {
+    "es300h": "ES 300h", "is200t": "IS 200t", "lexusct200h": "CT 200h", "lexuses300": "ES 300",
+    "lexuses330": "ES 330", "lexuses350": "ES 350", "lexusgs300": "GS 300",
+    "lexusgs350": "GS 350", "lexusgs400": "GS 400", "lexusgs430": "GS 430",
+    "lexusgs450h": "GS 450h", "lexusgs460": "GS 460", "lexusis250": "IS 250",
+    "lexusis300": "IS 300", "lexusis350": "IS 350", "lexusls400": "LS 400",
+    "lexusls430": "LS 430", "lexusls460": "LS 460", "lexusls600hl": "LS 600h L",
+    "lexusrx300": "RX 300", "lexusrx330": "RX 330", "lexusrx350": "RX 350",
+    "lexusrx400h": "RX 400h", "lexusscseries": "SC Series", "rx450h": "RX 450h",
+    "ux250h": "UX 250h",
+  },
+  "lincoln": {
+    "lincolnls": "LS",
+  },
+  "mazda": {
+    "2": "Mazda2", "3": "Mazda3", "5": "Mazda5", "6": "Mazda6", "b2000": "B2000",
+    "b2200": "B2200", "b2300": "B2300", "mazda2": "Mazda2", "mazda3": "Mazda3",
+    "mazda5": "Mazda5", "mazda6": "Mazda6", "mazda626": "626", "mazdab2200": "B2200",
+    "mazdab2300": "B2300", "mazdab2600": "B2600", "mazdab3000": "B3000", "mazdab4000": "B4000",
+    "mazdacx30": "Cx-30", "mazdacx5": "Cx-5", "mazdacx7": "CX-7", "mazdacx9": "CX-9",
+    "mazdamillenia": "Millenia", "mazdampv": "MPV", "mazdamx5miata": "MX-5 Miata",
+    "mazdamx6": "Mx-6", "mazdaprotege": "Protege", "mazdarx8": "RX-8", "mazdatribute": "Tribute",
+    "miata": "MX-5 Miata", "mx5": "MX-5 Miata", "rx8": "RX-8", "tributedx": "Tribute",
+    "tributees": "Tribute", "tributelx": "Tribute",
+  },
+  "mercedesbenz": {
+    "mercedes190": "190", "mercedes2304": "230-4", "mercedes280": "280", "mercedes300d": "300D",
+    "mercedes300e": "300E", "mercedes380": "380", "mercedes560": "560",
+    "mercedescclass": "C-Class", "mercedesclaclass": "CLA-Class", "mercedesclclass": "CL-Class",
+    "mercedesclk": "CLK", "mercedesclsclass": "CLS-Class", "mercedeseclass": "E-Class",
+    "mercedesglaclass": "GLA-Class", "mercedesglclass": "GL-Class",
+    "mercedesglkclass": "GLK-Class", "mercedesmlclass": "M-Class", "mercedesrclass": "R-Class",
+    "mercedessclass": "S-Class", "mercedesslk": "SLK", "mercedessprinter2500": "Sprinter 2500",
+    "mercedessprinter3500": "Sprinter 3500", "mlclass": "M-Class", "smartsmart": "Smart",
+  },
+  "mini": {
+    "cooperclubman": "Clubman", "cooperconvertible": "Convertible",
+    "coopercountryman": "Countryman", "cooperhardtop": "Hardtop", "cooperpaceman": "Paceman",
+    "miniclubman": "Clubman", "minicooper": "Cooper", "minicountryman": "Countryman",
+    "miniminicooper": "Cooper",
+  },
+  "mitsubishi": {
+    "mitsubishipickup": "Pickup", "mitsubishiraider": "Raider", "raidernm": "Raider",
+  },
+  "nissan": {
+    "nissanpickup": "Pickup", "nv1500": "NV1500", "nv2500hd": "NV2500 HD", "nv3500": "NV3500",
+    "pathfinder19995": "Pathfinder", "pu": "P.U",
+  },
+  "oldsmobile": {
+    "ciera": "Cutlass Ciera", "culassciera": "Cutlass Ciera",
+    "deltaeightyeightroyale": "Delta 88", "eightyeight88": "Eighty-Eight",
+    "eightyeightroyale": "Eighty-Eight", "intriguegls": "Intrigue", "intriguegx": "Intrigue",
+    "ninetyeight98": "Ninety-Eight", "oldsmobilebravada": "Bravada",
+    "silhouetteapv": "Silhouette",
+  },
+  "pontiac": {
+    "azteksrv": "Aztek", "bonnevillegxp": "Bonneville", "bonnevillese": "Bonneville",
+    "g3wave": "G3", "grandamgt": "Grand Am", "grandamgt1": "Grand Am", "grandamse": "Grand Am",
+    "grandamse1": "Grand Am", "grandprixgt": "Grand Prix", "grandprixgt2": "Grand Prix",
+    "grandprixgtp": "Grand Prix", "grandprixse": "Grand Prix", "grandprixse1": "Grand Prix",
+    "pontiacfirebird": "Firebird", "pontiacg6": "G6", "pontiacgrandam": "Grand Am",
+    "pontiacgrandprix": "Grand Prix", "pontiacmontana": "Montana", "pontiactorrent": "Torrent",
+    "sunfirese": "Sunfire",
+  },
+  "porsche": {
+    "porsche944": "944", "porscheboxster": "Boxster", "porschecayenne": "Cayenne",
+  },
+  "ram": {
+    "dodge1500pickup": "1500", "dodge2500pickup": "2500", "promaster1500van": "ProMaster 1500",
+    "promaster2500van": "ProMaster 2500", "promaster3500van": "ProMaster 3500",
+  },
+  "saab": {
+    "saab93": "9-3", "saab95": "9-5", "saab97x": "9-7X",
+  },
+  "saturn": {
+    "astraxe": "Astra", "auragreenlinehybrid": "Aura Green Line", "auraxe": "Aura",
+    "auraxr": "Aura", "l300sedan": "L300", "saturnaura": "Aura", "saturnion": "ION",
+    "saturnlseries": "L-Series", "saturnsseries": "S-Series", "saturnvue": "VUE", "sl1": "SL1",
+    "vuegreenlinehybrid": "VUE Green Line",
+  },
+  "scion": {
+    "scionia": "iA", "sciontc": "tC", "scionxa": "xA", "scionxb": "xB", "scionxd": "xD",
+    "toyotascionxa": "xA", "toyotatc": "tC", "toyotaxb": "xB", "toyotaxd": "xD",
+  },
+  "suzuki": {
+    "grandvitaraxl7": "XL-7", "sx4sedan": "SX4 Sport",
+  },
+  "toyota": {
+    "corollamatrix": "Matrix", "pickup": "Pickup", "pickupdlx": "Pickup", "pickupstd": "Pickup",
+    "solara": "Camry Solara", "toyotapickup": "Pickup", "vanwagon": "Van",
+  },
+  "volkswagen": {
+    "cabrioletconvertible": "Cabriolet", "gli": "Jetta GLI", "golfgti": "GTI",
+  },
+  "volvo": {
+    "240series": "240", "240series240": "240", "740series": "740", "760series": "760",
+    "850series": "850", "850series850": "850", "940series": "940", "940series940": "940",
+    "960series": "960", "volvo120series": "120 Series", "volvo240series": "240",
+    "volvo30series": "30 Series", "volvo40series": "40 Series", "volvo50series": "50 Series",
+    "volvo60series": "60 Series", "volvo70series": "70 Series", "volvo740": "740",
+    "volvo80series": "80 Series", "volvos60": "S60", "volvoxc60": "XC60", "volvoxc90": "XC90",
+  },
+};
+
 function canonicalModel(make, model) {
-  const table = MODEL_ALIASES[String(make || '').toLowerCase()];
-  if (!table) return model;
-  return table[String(model || '').trim().toLowerCase()] || model;
+  // canonicalMake first so a pre-merge watch make ('Vw') finds the table.
+  const mk = canonicalMake(make);
+  const table = MODEL_ALIASES[String(mk || '').toLowerCase()];
+  const hit = table && table[String(model || '').trim().toLowerCase()];
+  if (hit) return hit;
+  const ren = MODEL_RENAMES_2026_10[String(mk || '').toLowerCase().replace(/[^a-z0-9]/g, '')];
+  if (ren) {
+    const r = ren[String(model || '').toLowerCase().replace(/[^a-z0-9]/g, '')];
+    if (r) return r;
+  }
+  return model;
 }
 
 /* Make aliases — mirror of the scraper's _MAKE_ALIASES (2026-10 dropdown
@@ -3403,9 +3665,12 @@ function hasWatchFor(make, model) {
   if (!make) return false;
   // canonicalMake on both sides: a pre-merge watch saved as "MINI Cooper"
   // still lights the bell on a (now-canonical) MINI card.
+  // canonicalModel on both sides: a pre-merge watch saved as 'Mazda 3' or
+  // 'F250Sd Pickup' still lights the bell on the renamed card.
   return loadWatchlist().some(e =>
     canonicalMake(e.make).toLowerCase() === canonicalMake(make).toLowerCase() &&
-    (!e.model || (e.model || '').toLowerCase() === (model || '').toLowerCase()));
+    (!e.model || String(canonicalModel(e.make, e.model) || '').toLowerCase()
+      === String(canonicalModel(make, model) || '').toLowerCase()));
 }
 
 /* One-tap watch from a Live card (Pro): make+model, all years, any condition.
