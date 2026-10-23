@@ -624,6 +624,13 @@ check("vq35de: R52 Pathfinder 13-16 in; VQ35DD-era 2017 honestly out",
       _fam_hit("nissan-vq35de", 2013, "Nissan", "Pathfinder")
       and _fam_hit("nissan-vq35de", 2016, "Nissan", "Pathfinder")
       and not _fam_hit("nissan-vq35de", 2017, "Nissan", "Pathfinder"))
+check("fusion-cd4: 2016 Fusion covered; alt group skips the VIN-split 2014",
+      _fam_hit("ford-fusion-cd4", 2016, "Ford", "Fusion")
+      and js.ENGINE_FAMILIES["ford-fusion-cd4"]["parts"]["alternator"]
+      ["verified"]["groups"] == [[("Ford", "Fusion", 2013, 2013),
+                                  ("Ford", "Fusion", 2015, 2016)]])
+check("fusion: no 1.5/1.6 EcoBoost family ships (all rows option-qualified)",
+      "ford-fusion-15eb" not in js.ENGINE_FAMILIES)
 
 check("gens: Echo/xA/xD rows exist; Toyota-alias Scion rows mirror Scion's",
       _gen_win("Toyota", "Echo", 2003) == (2000, 2005)

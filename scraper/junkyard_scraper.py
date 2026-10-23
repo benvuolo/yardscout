@@ -7626,6 +7626,26 @@ ENGINE_FAMILIES: dict[str, dict] = {
             "starter": {"note": _STR_NOTE},
         },
     },
+    "ford-fusion-cd4": {
+        "display": "Ford Fusion 2.0T/2.5 (CD4, 2013-20)",
+        "engine": {"liters": [2.0, 2.5], "cyl": 4},
+        "apps": [
+            # CD4 Fusion: the 2.0 EcoBoost and 2.5 Duratec share one
+            # published alternator (210-1102) and starter (280-4241). The
+            # 1.5/1.6 EcoBoost cars are ford-fusion-15eb; hybrids/Energi
+            # have no conventional alternator and are out.
+            ("Ford", "Fusion", 2013, 2020),
+        ],
+        "parts": {
+            "alternator": {"note": "2.0T and 2.5 share one published unit; 2014 splits by engine VIN and 17-20 rows are trim-feature-qualified — those pairs stay Likely"},
+            "starter": {"note": "2.0T and 2.5 share one published unit; only 2015 publishes clean for both engines"},
+        },
+    },
+    # NOTE: no ford-fusion-15eb family — the 1.5/1.6 EcoBoost Fusions'
+    # published rows are ALL option-qualified (210-1238 'without Heated and
+    # Cooled Seats'; 280-4360 'Exc. Start/Stop'), and the suite's quality bar
+    # requires every shipped family to anchor at least one verified group.
+    # Honest exclusion, documented in interchange_research.md.
     "ford-cyclone": {
         "display": "Ford 3.5/3.7 Cyclone V6 (non-turbo)",
         "engine": {"liters": [3.5, 3.7], "cyl": 6},
@@ -9718,6 +9738,15 @@ _ALT_VERIFIED: dict = {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0604 (170A) Escape 1.6 2013-2014. 2015-2016 1.6 cars are past this catalog edition — left at likely.",
         "groups": [[("Ford", "Escape", 2013, 2014)]],
     },
+    "ford-fusion-cd4": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-1102 (170A) Fusion — 2.0 EcoBoost 2013-2016 unqualified AND 2.5 2013 and 2015-2016 unqualified, one shared unit (2014 2.5 is engine-VIN-qualified; 2017-20 rows are trim-feature-qualified — excluded).",
+        "groups": [
+            # One published unit: 2013 and 2015-16 interchange with each
+            # other; 2014 sits out (VIN-qualified year).
+            [("Ford", "Fusion", 2013, 2013),
+             ("Ford", "Fusion", 2015, 2016)],
+        ],
+    },
     "ford-escape-20eb": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4202 (135A) Escape 2.0 2013-2014. 2015-2016 2.0 cars are past this catalog edition — left at likely.",
         "groups": [[("Ford", "Escape", 2013, 2014)]],
@@ -11043,6 +11072,10 @@ _STR_VERIFIED: dict = {
     "nissan-mra8": {
         "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-3139 (1.0 kW) Sentra 1.8 MRA8DE 2013-2016 — one published unit, unqualified (2017-2019 rows are absent from the catalog).",
         "groups": [[("Nissan", "Sentra", 2013, 2016)]],
+    },
+    "ford-fusion-cd4": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-4241 (1.4 kW) Fusion — 2.0 EcoBoost 2013-2016 unqualified, but the 2.5 row is engine-VIN-qualified every year except 2015. Capped to 2015, the one year ALL family engines publish clean.",
+        "groups": [[("Ford", "Fusion", 2015, 2015)]],
     },
     "nissan-mr16t": {
         "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-3139 (1.0 kW) Juke 1.6 2011-2015 unqualified (the 2016 row carries 'To 11/2015' and is excluded; 2017 is absent).",

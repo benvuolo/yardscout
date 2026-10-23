@@ -1349,6 +1349,23 @@ cited below.**
   - Group 1: Nissan Sentra 2007-2010
 - **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
 
+### ford-fusion-cd4 — Ford Fusion 2.0T/2.5 (CD4, 2013-20)
+
+- **Engine:** 2.0L EcoBoost turbo / 2.5L Duratec 4-cyl
+- **Family applications:** Ford Fusion 2013-2020 (non-sole: 1.5/1.6 EcoBoost
+  and hybrid/Energi share the model years — decode disambiguates)
+- **Context:** Fusion 2015-2020 was the #4 gap cluster (764 vehicles).
+- **alternator — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-1102 (170A) — 2.0 2013-2016 unqualified AND 2.5 2013, 2015-2016 unqualified, one shared unit. 2014's 2.5 row is engine-VIN-qualified; 2017-20 rows are trim-feature-qualified (heated-seat / power-converter packages) though they all still resolve to 210-1102 — excluded per the no-qualified-rows standard.
+  - Group 1: Ford Fusion 2013 + 2015-2016 (one unit, 2014 sits out)
+- **starter — verified evidence:** Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-4241 (1.4 kW) — 2.0 2013-2016 unqualified; the 2.5 row publishes clean only in 2015. Capped to 2015 per the all-family-engines rule (hyundai-santafe1 precedent).
+  - Group 1: Ford Fusion 2015-2015
+
+**Honest exclusion — Fusion 1.5/1.6 EcoBoost (2013-20):** every published
+rotating-electrical row for the small-EcoBoost Fusions is option-qualified
+(210-1238 "without Heated and Cooled Seats"; 280-4360 "Exc. Start/Stop
+Feature"), so no verified group can be anchored and no family ships. Those
+cars stay at no-data until a clean application list is found.
+
 ### nissan-mra8 — Nissan MRA8DE 1.8 I4 (Sentra)
 
 - **Engine:** 1.8L 4-cyl
