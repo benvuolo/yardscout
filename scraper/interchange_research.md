@@ -1223,3 +1223,63 @@ fitment data. Recorded below as they are performed.
 | 20 | toyota-2gr | 2012 Toyota Highlander | 2009 Toyota RAV4 | verified | verified | PASS — TYC 2-11137 list: Highlander 3.5 2008-2013 + RAV4 3.5 2009-2010 — tycamericas.com |
 
 All 20/20 spot-checks consistent with public fitment data (checked 2026-10-22). Random sample: seed 42 over families x inventory donors; seekers drawn from family application spans.
+
+## Phase A (2026-10): enthusiast platforms
+
+33 new engine families (Miata NA/NB/NC, RX-7 FD, RX-8, EF+EG Civic, Integra
+B18, K20, S2000, Prelude H/F, Supra MK3+MK4 w/ SC300/GS300/IS300, 300ZX Z32,
+VQ35HR/VQ37, DSM, Eclipse 2.4/3.0/3.8 + Galant/Lancer, Evo, WRX EJ205,
+BMW M52/M54, VW 2.0T, Mustang 4.6-3V/Coyote/SN95-3.8, F-body TPI/LT1/LS1,
+Corvette C4-C6+gen5 Camaro SS, Corolla 4A, Celica 3S). All evidence from the
+Denso reman + First Time Fit catalog (densoautoparts.com, retrieved
+2026-10-22); per-family details in the evidence block above.
+
+### New: starter-verified families
+
+`_STR_VERIFIED` mirrors the alternator table for the starter category. Four
+families publish ONLY qualified alternator rows (turbo/vendor/OEM-number
+splits) but clean starter spans — nissan-z32, bmw-m54, vw-20t, gm-fbody-lt1
+are starter-verified and their alternators honestly stay at Likely. The test
+gate is now "≥1 verified group in ANY category", with reachability checked
+per category.
+
+### Phase A accuracy-forced exclusions (no verified data / kept out)
+
+- **BRZ / FR-S / 86** — absent from this Denso catalog edition entirely; no
+  engine family created (body-part gen windows still apply).
+- **BMW E9x N52 (328i 2007+) and E36/E46 3-Series starters** — no unqualified
+  rows in this edition; bmw-m52/m54 verified groups ride on M3/Z3/X5/528i
+  spans instead.
+- **VW VR6 + 1.8T** — every row carries Bosch-vs-Valeo vendor qualifiers;
+  no family created. vw-20t covers the 2.0T era via GTI-only spans.
+- **Mustang GT500, Corvette C7 (2014+), 300ZX Z31 (84-89), RX-7 FC
+  alternators (86-92)** — supercharger-, stamp- or vendor-qualified rows
+  only; excluded from verified spans.
+- **MR2 1985-1989 (4A-GE), 3000GT, Prelude 1992-1996 (3-way trim split),
+  Integra 1994-2001 Type R split, RSX Type-S split, Eclipse/Talon 1990-1998
+  trans/turbo starter splits, RX-8 2004 build-date + 2008 gap** — published
+  rows exist but every one is qualified; families stay Likely for those
+  years (family membership itself remains correct).
+- **Lexus "SC 300/400" and "GS 300/400" combined feed rows** (37 vehicles) —
+  the feed string doesn't distinguish 2JZ from 1UZ cars; honestly uncovered.
+- **Chrysler Laser** — the 84-86 G-body, not a DSM; only Plymouth Laser
+  90-94 is in mitsu-dsm.
+- **Mitsubishi Lancer Evolution** — the live feed labels every Evo plainly
+  "Lancer", so mitsu-evo is currently unreachable from inventory rows. It is
+  kept (correct, published spans) for when the feed distinguishes trims;
+  plain Lancer 02-04 (4G94 2.0) stays uncovered rather than guessing.
+
+### Body parts by generation (evergreen gen windows)
+
+`_ENTHUSIAST_EVERGREEN_GENS` (junkyard_scraper.py) appends the consensus
+evergreen parts to enthusiast entries with per-copy `yr_min`/`yr_max` set to
+factory generation boundaries (US model years) — e.g. the `supra` entry
+(1979-1998) now carries four window-gated copies of each evergreen, so a
+1994 donor ships "fits 1993–1998", never "fits 1979–1998". Single-generation
+entries (s2000, rx-8, 350z, gen-split camaro/mustang/wrangler/civic keys)
+get ungated copies clipped to the entry range. The body-part finder's
+same-model match inherits these windows, so cross-generation false positives
+are structurally impossible for these entries. No new cross-model lighting
+groups were added: TYC/Depo application catalogs were unreachable this
+session (fetch blocked), so lighting interchange stays within same-model
+generation windows only.
