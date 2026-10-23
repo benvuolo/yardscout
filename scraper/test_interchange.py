@@ -610,6 +610,21 @@ check("gens: Yaris window opens 2006 and the Mazda-based 19-20 is its own",
       _gen_win("Toyota", "Yaris", 2006) == (2006, 2011)
       and _gen_win("Toyota", "Yaris", 2019) == (2019, 2020)
       and _gen_win("Toyota", "Yaris", 2018) == (2012, 2018))
+# Next-tier coverage (2026-10-23): Sentra B17, Juke, R52 Pathfinder.
+check("mra8: Sentra 2013-19 covered; 2020+ (B18, different engine) is not",
+      _fam_hit("nissan-mra8", 2013, "Nissan", "Sentra")
+      and _fam_hit("nissan-mra8", 2019, "Nissan", "Sentra")
+      and not _fam_hit("nissan-mra8", 2020, "Nissan", "Sentra"))
+check("mr16t: Juke 2011-17 covered, alternator verified spans all years",
+      _fam_hit("nissan-mr16t", 2011, "Nissan", "Juke")
+      and _fam_hit("nissan-mr16t", 2017, "Nissan", "Juke")
+      and js.ENGINE_FAMILIES["nissan-mr16t"]["parts"]["alternator"]
+      ["verified"]["groups"] == [[("Nissan", "Juke", 2011, 2017)]])
+check("vq35de: R52 Pathfinder 13-16 in; VQ35DD-era 2017 honestly out",
+      _fam_hit("nissan-vq35de", 2013, "Nissan", "Pathfinder")
+      and _fam_hit("nissan-vq35de", 2016, "Nissan", "Pathfinder")
+      and not _fam_hit("nissan-vq35de", 2017, "Nissan", "Pathfinder"))
+
 check("gens: Echo/xA/xD rows exist; Toyota-alias Scion rows mirror Scion's",
       _gen_win("Toyota", "Echo", 2003) == (2000, 2005)
       and _gen_win("Scion", "xA", 2005) == (2004, 2006)

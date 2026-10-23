@@ -6433,6 +6433,7 @@ MODEL_GENERATIONS: list[tuple[str, str, tuple[tuple[int, int], ...]]] = [
     ("Nissan", "Quest", ((1993, 1998), (1999, 2002), (2004, 2009),
                          (2011, 2017))),
     ("Nissan", "Frontier", ((1998, 2004), (2005, 2021), (2022, 2025))),
+    ("Nissan", "Juke", ((2011, 2017),)),
     ("Mazda", "Mazda6", ((2003, 2008), (2009, 2013), (2014, 2021))),
     ("Mazda", "CX-9", ((2007, 2015), (2016, 2023))),
     ("Mazda", "CX-7", ((2007, 2012),)),
@@ -7418,6 +7419,11 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Nissan", "Pathfinder", 2001, 2004),
             ("Nissan", "Quest", 2004, 2009, {"sole": True}),
             ("Nissan", "Quest", 2011, 2017, {"sole": True}),
+            # R52 Pathfinder keeps the VQ35DE through MY2016; the mid-2016
+            # build switch to the direct-injection VQ35DD (MY2017+) shows in
+            # the published alternator row's 'To 07/2016' qualifier — 2017-20
+            # stays out of this family.
+            ("Nissan", "Pathfinder", 2013, 2016),  # 14 Hybrid 2.5 exists — not sole
             ("Infiniti", "M35", 2006, 2008, {"sole": True}),
             ("Infiniti", "JX35", 2013, 2013, {"sole": True}),
             ("Infiniti", "QX60", 2014, 2020),
@@ -7453,6 +7459,31 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "parts": {
             "alternator": {"note": "base 2.0 (MR20DE) unit — the SE-R 2.5 differs; " + _ALT_NOTE},
             "starter": {"note": _STR_NOTE},
+        },
+    },
+    "nissan-mra8": {
+        "display": "Nissan MRA8DE 1.8 I4 (Sentra)",
+        "engine": {"liters": [1.8], "cyl": 4},
+        "apps": [
+            # B17 Sentra 1.8 2013-2019. The 17-19 SR Turbo / NISMO 1.6T
+            # (MR16DDT) shares the model years — decode disambiguates.
+            ("Nissan", "Sentra", 2013, 2016, {"sole": True}),
+            ("Nissan", "Sentra", 2017, 2019),
+        ],
+        "parts": {
+            "alternator": {"note": "MRA8DE unit — no published application list in the catalogs we checked (retrieved 2026-10-23); " + _ALT_NOTE},
+            "starter": {"note": "13-16 one published unit; 17-19 rows absent from the catalog"},
+        },
+    },
+    "nissan-mr16t": {
+        "display": "Nissan MR16DDT 1.6T I4 (Juke)",
+        "engine": {"liters": [1.6], "cyl": 4},
+        "apps": [
+            ("Nissan", "Juke", 2011, 2017, {"sole": True}),
+        ],
+        "parts": {
+            "alternator": {"note": "MR16DDT unit — one published unit across 11-17"},
+            "starter": {"note": "11-15 one published unit; the 2016 row splits by build date (to 11/2015)"},
         },
     },
     "nissan-vk56": {
@@ -9673,6 +9704,10 @@ _ALT_VERIFIED: dict = {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4301 (110A) Sentra 2.0 MR20DE 2007-2010 (the same list serves the Versa 1.8 and NV200). 2011-2012 Sentra 2.0 keeps the MR20DE but is past this catalog edition — left at likely.",
         "groups": [[("Nissan", "Sentra", 2007, 2010)]],
     },
+    "nissan-mr16t": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-4009 (110A) Juke 1.6 MR16DDT — one published unit, unqualified, every year 2011-2017.",
+        "groups": [[("Nissan", "Juke", 2011, 2017)]],
+    },
     "nissan-vk56": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-3160 (130A) engine-coded VK56DE — Titan 2004-2006, Armada 2005-2006, Pathfinder Armada 2004. Later VK56DE years are past this catalog edition — left at likely.",
         "groups": [[("Nissan", "Titan", 2004, 2006),
@@ -10155,7 +10190,7 @@ _ALT_VERIFIED: dict = {
                     ("Kia", "Optima", 2011, 2013)]],
     },
     "nissan-vq35de": {
-        "evidence": "OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely; 210-4211 (110A) 350Z VQ35DE 2003-2006 and G35 2004-2006 (the 2003 G35 sedan row is body-qualified and excluded); 210-4207 (110A) Pathfinder 3.5 2003-2004; 210-3150 (110A) Pathfinder 3.5 2002.",
+        "evidence": "OCPTY Lester 13940 listing (Hitachi LR1110-721, Nissan 23100-8J100, retrieved 2026-10-22): Altima 3.5 2002-2006, Maxima 2002-2003, Murano 2003-2007, Infiniti I35 2002-2004. Nissan OEM 23100-7Y020 (nissanpartsdeal.com): Maxima 3.5 2004-2008 is a separate unit. Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-4255 (130A) Maxima 3.5 2009-2010 and Murano 2009 — later A35 Maximas (2011-14) use the same VQ35DE but this catalog edition ends there, left at likely; 210-4211 (110A) 350Z VQ35DE 2003-2006 and G35 2004-2006 (the 2003 G35 sedan row is body-qualified and excluded); 210-4207 (110A) Pathfinder 3.5 2003-2004; 210-3150 (110A) Pathfinder 3.5 2002. Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 210-4006 (130A) R52 Pathfinder 3.5 2013-2016 unqualified (the 2017 row carries 'To 07/2016' — the VQ35DD switch — and is excluded).",
         "groups": [
             [("Nissan", "Altima", 2002, 2006),
              ("Nissan", "Maxima", 2002, 2003),
@@ -10168,6 +10203,7 @@ _ALT_VERIFIED: dict = {
              ("Infiniti", "G35", 2004, 2006)],
             [("Nissan", "Pathfinder", 2003, 2004)],
             [("Nissan", "Pathfinder", 2002, 2002)],
+            [("Nissan", "Pathfinder", 2013, 2016)],
         ],
     },
     "honda-k24a": {
@@ -11003,6 +11039,14 @@ _STR_VERIFIED: dict = {
     "nissan-qr25": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-4282 Frontier 2.5 QR25DE 2005-2011 unqualified (Altima/Sentra QR25 starters split M/T vs A/T and stay Likely).",
         "groups": [[("Nissan", "Frontier", 2005, 2011)]],
+    },
+    "nissan-mra8": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-3139 (1.0 kW) Sentra 1.8 MRA8DE 2013-2016 — one published unit, unqualified (2017-2019 rows are absent from the catalog).",
+        "groups": [[("Nissan", "Sentra", 2013, 2016)]],
+    },
+    "nissan-mr16t": {
+        "evidence": "Denso part-finder (densoautoparts.com, retrieved 2026-10-23): 280-3139 (1.0 kW) Juke 1.6 2011-2015 unqualified (the 2016 row carries 'To 11/2015' and is excluded; 2017 is absent).",
+        "groups": [[("Nissan", "Juke", 2011, 2015)]],
     },
     "honda-b20": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0185 CR-V 2.0 1997 unqualified (98-01 rows split M/T vs A/T).",
