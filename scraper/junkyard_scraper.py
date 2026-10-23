@@ -51,6 +51,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
+from urllib.parse import quote
 
 try:
     import requests
@@ -8625,6 +8626,19 @@ VINPLUS_TENANTS = {
         "": {"code": "pickurpart", "name": "Pick Ur Part Auto Salvage",
              "city": "Lubbock", "state": "TX", "lat": 33.5200, "lng": -101.7805},
     },
+    # --- 2026-10-23 Detroit-metro pass (owner-forwarded email, Elliot B.) ---
+    # US Auto Supply's self-serve u-pull yard: 7575 18 1/2 Mile Rd, Sterling
+    # Heights MI (exact OSM parcel). The chain's SECOND location (2346 W.
+    # Warren Ave, Detroit) is full-service pre-pulled parts with a Hollander
+    # interchange search only (search.usautosupplymi.com /cgi-bin/search.cgi
+    # — part listings, not vehicle rows), so it is NOT listed; Budget
+    # Auburndale precedent. Single-location VinPlus tenant (locations: [] in
+    # yard-info, custom_slug "usauto"); rows carry STK##### stocks + full
+    # VINs. Price list on their own WP site -> usauto_pricing.json.
+    "us_auto_supply": {
+        "": {"code": "usauto", "name": "US Auto Supply - Sterling Heights",
+             "city": "Sterling Heights", "state": "MI", "lat": 42.6025, "lng": -83.0373},
+    },
     # --- migrated from the retired WordPress crawl (2026-10-22) ---
     # source stays "gopullit" for the zero-vehicle alarm; id_prefix keeps the
     # historical gopullit-{stock} scheme (stocks carry per-yard GPI*/ATL*/
@@ -9820,6 +9834,569 @@ def refresh_budget_pricing_file() -> Path:
     return path
 
 
+# ===== 2026-10-23 Detroit-metro pass (owner-forwarded email, Elliot B.) =====
+# Ryan's Pick-a-Part (Detroit MI) — the CRUSH MVC site at ryanspickapart.com
+# only ever renders an IFRAME: the real public inventory is an embedded
+# Bubble.io app by Ario (app.autorecycler.io, Bubble appname "autoscrapzen").
+# NEW PLATFORM for us. Bubble's /elasticsearch/search endpoint "obfuscates"
+# request bodies, but the scheme (lib-browser/db/obfuscate_shared.js in the
+# served run.js bundle) is fully reproducible in Python:
+#   ts   = epoch millis as a string; key = appname + ts; iv = str(random())
+#   enc(key, iv, text) = b64( AES-256-CBC( PBKDF2-MD5(key, salt=appname,
+#                             c=7, dkLen=32), PBKDF2-MD5(iv, salt=appname,
+#                             c=7, dkLen=16) ).encrypt(pkcs7(text)) )
+#   body = {z: enc(key, iv, json(data)), y: enc(appname, "po9", f"{ts}_1"),
+#           x: enc(appname, "fl1", iv)}
+# (AES/PBKDF2 via the `cryptography` package — added to scan.yml's pip line.)
+# The flattened public search type is custom.inventorysearch (year, name,
+# stock STK#####, VIN, row, color, added date, visible/deleted flags, and
+# vehicle_make / vehicle_model as "<appid>__LOOKUP__<id>" references).
+# Reference-equality constraints need the full __LOOKUP__ form — a bare id
+# matches nothing. Make/model names resolve via one custom.vehicle_make page
+# (~300 rows, global table) + "in"-constrained custom.vehicle_model lookups
+# for just the ids on visible rows. ~10 POSTs/scan at n=400 paging.
+# Org record (searched by slug id_text = "ryans-pick-a-part-detroit") carries
+# the yard's own geocode: 9309 Hubbell Ave, Detroit 48228 -> 42.3626,-83.1885.
+# robots.txt (app.autorecycler.io): only /version-test/ disallowed. The
+# ryanspickapart.com robots disallows its own dead /Home/GetMakes|GetModels
+# AJAX (dropdowns the iframe replaced) — we never touch those.
+ARIO_BASE = "https://app.autorecycler.io"
+ARIO_APPNAME = "autoscrapzen"
+ARIO_DELAY_SEC = 2.0
+ARIO_PAGE_N = 400
+RYANS_ORG_SLUG = "ryans-pick-a-part-detroit"
+RYANS_PRICES_URL = "https://ryanspickapart.com/Home/PartPrices"
+RYANS_YARD = {"name": "Ryan's Pick-a-Part - Detroit", "city": "Detroit",
+              "state": "MI", "lat": 42.3626, "lng": -83.1885}
+
+
+def _ario_encode_data(data: dict) -> dict:
+    """Bubble.io client-query obfuscation (see block comment above)."""
+    import base64
+    import hashlib
+    import random as random_mod
+    try:
+        from cryptography.hazmat.primitives.ciphers import (Cipher, algorithms,
+                                                            modes)
+    except ImportError as e:  # pragma: no cover — scan.yml installs it
+        raise RuntimeError(
+            "the Ario adapter needs the 'cryptography' package "
+            "(pip install cryptography)") from e
+
+    def enc(key: str, iv: str, text: str) -> str:
+        dk = hashlib.pbkdf2_hmac("md5", key.encode(), ARIO_APPNAME.encode(),
+                                 7, dklen=32)
+        div = hashlib.pbkdf2_hmac("md5", iv.encode(), ARIO_APPNAME.encode(),
+                                  7, dklen=16)
+        raw = text.encode()
+        pad = 16 - len(raw) % 16
+        raw += bytes([pad]) * pad
+        c = Cipher(algorithms.AES(dk), modes.CBC(div)).encryptor()
+        return base64.b64encode(c.update(raw) + c.finalize()).decode()
+
+    ts = str(int(time.time() * 1000))
+    iv = str(random_mod.random())
+    return {"z": enc(ARIO_APPNAME + ts, iv, json.dumps(data)),
+            "y": enc(ARIO_APPNAME, "po9", f"{ts}_1"),
+            "x": enc(ARIO_APPNAME, "fl1", iv)}
+
+
+def _ario_search(session: "requests.Session", type_name: str,
+                 constraints: list[dict], frm: int = 0,
+                 n: int = ARIO_PAGE_N) -> dict | None:
+    """One obfuscated /elasticsearch/search POST; responses are plain JSON."""
+    time.sleep(ARIO_DELAY_SEC)
+    body = _ario_encode_data({
+        "appname": ARIO_APPNAME, "app_version": "live", "type": type_name,
+        "constraints": constraints, "sorts_list": [], "from": frm, "n": n,
+    })
+    try:
+        r = session.post(f"{ARIO_BASE}/elasticsearch/search", json=body,
+                         headers={**HEADERS, "Content-Type": "application/json"},
+                         timeout=60)
+        r.raise_for_status()
+        return r.json()
+    except Exception as e:
+        print(f"  [Ryan's] {type_name} search (from={frm}) failed: {e}",
+              file=sys.stderr)
+        return None
+
+
+def _ario_search_all(session: "requests.Session", type_name: str,
+                     constraints: list[dict], max_pages: int = 20) -> list[dict]:
+    """Page a search to at_end; returns hit dicts ({_id, _source})."""
+    hits: list[dict] = []
+    frm = 0
+    for _ in range(max_pages):
+        res = _ario_search(session, type_name, constraints, frm)
+        if res is None:
+            break
+        page = (res.get("hits") or {}).get("hits") or []
+        hits.extend(page)
+        if res.get("at_end") or not page:
+            break
+        frm += len(page)
+    return hits
+
+
+def _ario_name_map(session: "requests.Session", type_name: str,
+                   ids: set[str]) -> dict[str, str]:
+    """Resolve Bubble reference ids -> name_text via "in"-constrained lookups.
+    Reference values look like "<appid>__LOOKUP__<id>"; both forms are mapped
+    so callers can look up either."""
+    out: dict[str, str] = {}
+    plain = sorted({i.split("__LOOKUP__")[-1] for i in ids if i})
+    for i in range(0, len(plain), 100):
+        batch = plain[i:i + 100]
+        res = _ario_search(session, type_name,
+                           [{"key": "_id", "constraint_type": "in",
+                             "value": batch}], 0, max(100, len(batch)))
+        for h in ((res or {}).get("hits") or {}).get("hits") or []:
+            name = str((h.get("_source") or {}).get("name_text") or "").strip()
+            if name:
+                out[h["_id"]] = name
+    return out
+
+
+def fetch_ryans_inventory() -> list[dict]:
+    """Fetch Ryan's Pick-a-Part (Detroit) from its embedded Ario Bubble app."""
+    session = requests.Session()
+    org_res = _ario_search(session, "custom.organization",
+                           [{"key": "id_text", "constraint_type": "equals",
+                             "value": RYANS_ORG_SLUG}], 0, 5)
+    org_hits = ((org_res or {}).get("hits") or {}).get("hits") or []
+    if not org_hits:
+        print("  [Ryan's] org lookup failed — slug gone or API changed?",
+              file=sys.stderr)
+        return []
+    org = org_hits[0]
+    # Reference constraints need the "<appid>__LOOKUP__<id>" form; pull the
+    # app id off any reference field the org record itself carries rather
+    # than hardcoding it.
+    ref_prefix = ""
+    for v in (org.get("_source") or {}).values():
+        vals = v if isinstance(v, list) else [v]
+        for item in vals:
+            if isinstance(item, str) and "__LOOKUP__" in item:
+                ref_prefix = item.split("__LOOKUP__")[0] + "__LOOKUP__"
+                break
+        if ref_prefix:
+            break
+    org_ref = f"{ref_prefix}{org['_id']}" if ref_prefix else org["_id"]
+
+    hits = _ario_search_all(session, "custom.inventorysearch", [
+        {"key": "organization_custom_organization", "constraint_type": "equals",
+         "value": org_ref},
+        {"key": "visible_boolean", "constraint_type": "equals", "value": True},
+    ])
+    rows = [h["_source"] for h in hits
+            if not (h.get("_source") or {}).get("deleted_boolean")]
+    _indep_cache_raw("ryans_inventorysearch.json", json.dumps(rows).encode())
+
+    make_map = _ario_name_map(
+        session, "custom.vehicle_make",
+        {str(r.get("vehicle_make_custom_vehicle_make") or "") for r in rows})
+    model_map = _ario_name_map(
+        session, "custom.vehicle_model",
+        {str(r.get("vehicle_model_custom_vehicle_model") or "") for r in rows})
+
+    def ref_name(mapping: dict[str, str], ref: str) -> str:
+        return mapping.get(str(ref or "").split("__LOOKUP__")[-1], "")
+
+    yard = RYANS_YARD
+    vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    for r in rows:
+        try:
+            year_i = int(r.get("vehicle_year_number") or 0)
+        except (TypeError, ValueError):
+            year_i = 0
+        name_s = str(r.get("name_text") or "").strip()
+        make_s = ref_name(make_map, r.get("vehicle_make_custom_vehicle_make"))
+        model_s = ref_name(model_map, r.get("vehicle_model_custom_vehicle_model"))
+        if not (make_s and model_s):
+            # Fallback: name_text is "{year} {Make} {Model}" (sometimes the
+            # year trails) — strip the year token, longest-prefix the make.
+            words = [w for w in name_s.split() if not re.match(r"^(19|20)\d{2}$", w)]
+            rest = " ".join(words)
+            if not make_s:
+                for m_id, m_name in sorted(make_map.items(),
+                                           key=lambda kv: -len(kv[1])):
+                    if rest.lower().startswith(m_name.lower() + " "):
+                        make_s = m_name
+                        break
+            if make_s and not model_s and rest.lower().startswith(make_s.lower()):
+                model_s = rest[len(make_s):].strip()
+        if not make_s or not model_s or not year_i:
+            continue
+        stock = str(r.get("stock_number_text") or "").strip()
+        base = f"ryans-{stock.lower()}" if stock else (
+            "ryans-" + str(r.get("inventory_id_text") or "").strip().lower())
+        if not base or base == "ryans-":
+            continue
+        n = dupes.get(base, 0) + 1
+        dupes[base] = n
+        vid = base if n == 1 else f"{base}-{n}"
+        vin = str(r.get("vin_text") or "").strip().upper()
+        date_iso = ""
+        try:
+            ms = float(r.get("added_date_date") or 0)
+            if ms > 0:
+                date_iso = datetime.fromtimestamp(
+                    ms / 1000, tz=timezone.utc).date().isoformat()
+        except (TypeError, ValueError):
+            pass
+        color = str(r.get("exterior_color_text") or "").strip().title()
+        vehicles.append({
+            "id": vid,
+            "vin": vin if len(vin) == 17 else "",
+            "year": year_i,
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": str(r.get("row_text") or "").strip(),
+            "dateAdded": date_iso,
+            **({"_color": color} if color else {}),
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "ryans",
+        })
+    print(f"  [Ryan's Pick-a-Part] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
+# Ryan's publishes a clean 4-column price list on the CRUSH side of its site
+# (/Home/PartPrices: PART DESCRIPTION, $PRICE, BASIS, $CORE, ~530 rows) ->
+# ryans_pricing.json (p195 list shape).
+def refresh_ryans_pricing_file() -> Path:
+    """Refresh Ryan's Pick-a-Part price list -> ryans_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "ryans_pricing.json"
+    try:
+        r = requests.get(RYANS_PRICES_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Ryan's pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for block in re.findall(r"(?s)<tr[^>]*>(.*?)</tr>", page):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 4:
+            continue
+        name, price_s, _basis, core_s = cells[:4]
+        if not name or name.upper() in ("PART DESCRIPTION",) or name in seen:
+            continue
+        try:
+            price_f = float(price_s.replace("$", "").replace(",", ""))
+            core_f = float(core_s.replace("$", "").replace(",", "")) if core_s else 0.0
+        except ValueError:
+            continue
+        seen[name] = {
+            "description": name,
+            "price": f"{price_f:.2f}",
+            "corePrice": f"{core_f:.2f}",
+            "totalPrice": f"{price_f + core_f:.2f}",
+        }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Ryan's pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Ryan's pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# US Auto Supply's u-pull price list lives on the chain's WP site
+# (/upull/part-prices/: NAME, PRICE, PER, CORE, ~720 rows, no $ signs) ->
+# usauto_pricing.json. (Inventory comes via the VinPlus tenant above.)
+USAUTO_PRICES_URL = "https://usautosupplymi.com/upull/part-prices/"
+
+
+def refresh_usauto_pricing_file() -> Path:
+    """Refresh US Auto Supply's u-pull price list -> usauto_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "usauto_pricing.json"
+    try:
+        r = requests.get(USAUTO_PRICES_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [US Auto pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for block in re.findall(r"(?s)<tr[^>]*>(.*?)</tr>", page):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 4:
+            continue
+        name, price_s, _basis, core_s = cells[:4]
+        if not name or name in seen:
+            continue
+        try:
+            price_f = float(price_s.replace("$", "").replace(",", ""))
+            core_f = float(core_s.replace("$", "").replace(",", "")) if core_s else 0.0
+        except ValueError:
+            continue
+        seen[name] = {
+            "description": name,
+            "price": f"{price_f:.2f}",
+            "corePrice": f"{core_f:.2f}",
+            "totalPrice": f"{price_f + core_f:.2f}",
+        }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [US Auto pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [US Auto pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# U-Pull and Save Auto Parts (Pontiac MI) — Nuxt site with a clean same-origin
+# JSON API (the same endpoints its own search tabs call):
+#   GET /api/vehicles/recent/{store}        -> today's arrivals (capped ~15)
+#   GET /api/vehicles/{id}                  -> full record incl. VIN +
+#                                              YardLocationDT; 404 once removed
+#   GET /api/vehicles/search/?store=&year=&make=&model=
+#       -> ALL live vehicles of that make+model (the year param is just the
+#          Hollander-catalog context and does not filter results; model
+#          matches the display model name case-insensitively; no wildcards)
+# No bulk listing exists, so the adapter is a Chesterfield-style hybrid:
+# a committed cache (docs/data/upas_cache.json) carries (a) the known
+# (make, model) pairs — each scan searches every pair, (b) the highest
+# vehicleID swept — vehicleIDs are sequential per intake, so each scan GETs
+# only the ids between the cached max and the newest arrival id, discovering
+# new pairs/VINs/dates as it goes, and (c) per-id details (VIN + yard date,
+# which the search rows lack). The cache travels with the repo (the scan
+# workflow commits docs/data), seeded by a one-time full id-window scan on
+# 2026-10-23. ~300 requests/scan at 1.5s.
+# The chain's SECOND location (1325 N. Cedar, Mason MI) buys vehicles only —
+# the site's own store picker lists it as "Mason, MI (Yard Closed)" — so only
+# Pontiac is listed. robots.txt: allow all, no crawl-delay.
+# Pin: 240 E. Columbia Ave, Pontiac MI 48340 (exact OSM parcel).
+UPAS_BASE = "https://www.u-pullandsave.com"
+UPAS_STORE = 105  # Pontiac (110 = Mason, closed yard)
+UPAS_DELAY_SEC = 1.5
+UPAS_CACHE_PATH = DATA_DIR / "upas_cache.json"
+UPAS_SWEEP_CAP = 800        # max new-id probes per scan (normally ~50-100)
+UPAS_DETAIL_BACKFILL_CAP = 200  # max per-scan detail fetches for uncached ids
+UPAS_YARD = {"name": "U-Pull and Save - Pontiac", "city": "Pontiac",
+             "state": "MI", "lat": 42.6703, "lng": -83.2911}
+
+
+def _upas_get(session: "requests.Session", path: str):
+    time.sleep(UPAS_DELAY_SEC)
+    try:
+        r = session.get(f"{UPAS_BASE}{path}",
+                        headers={**HEADERS, "Accept": "application/json"},
+                        timeout=60)
+        if r.status_code == 404:
+            return None  # removed vehicle — expected, not an error
+        r.raise_for_status()
+        return r.json()
+    except Exception as e:
+        print(f"  [UPAS] GET {path} failed: {e}", file=sys.stderr)
+        return None
+
+
+def _upas_pair_key(make: str, model: str) -> str:
+    return f"{make.strip().upper()}|{model.strip().upper()}"
+
+
+def fetch_upas_inventory() -> list[dict]:
+    """Fetch U-Pull and Save (Pontiac MI): per-pair searches + new-id sweep."""
+    session = requests.Session()
+    try:
+        cache = json.loads(UPAS_CACHE_PATH.read_text())
+    except (OSError, ValueError):
+        cache = {}
+    # Each pair carries a representative modelYear from a real vehicle: the
+    # search endpoint VALIDATES year against the Hollander catalog for that
+    # make/model era (year=2015&model=Silhouette returns [] even though a
+    # 2003 Silhouette is on the lot) — any year the model actually existed
+    # returns the model's full live list, so a seen vehicle's own year is
+    # always safe.
+    pairs: dict[str, list] = {
+        _upas_pair_key(m, md): [m, md, y] for m, md, y in cache.get("pairs", [])}
+    details: dict[str, dict] = dict(cache.get("details", {}))
+    max_id = int(cache.get("max_id", 0))
+
+    recent = _upas_get(session, f"/api/vehicles/recent/{UPAS_STORE}") or []
+    for v in recent:
+        mk, md = str(v.get("vehicleMake") or ""), str(v.get("modelName") or "")
+        if mk.strip() and md.strip() and v.get("modelYear"):
+            pairs.setdefault(_upas_pair_key(mk, md),
+                             [mk.strip(), md.strip(), int(v["modelYear"])])
+    recent_max = max((int(v.get("vehicleID") or 0) for v in recent), default=0)
+
+    # Sweep new ids since the last scan for pair discovery (recent/105 is
+    # capped at ~15 rows, so busy days can scroll arrivals past it). The id
+    # sequence is shared across the whole Schram chain (purchases, Mason,
+    # retail), advancing thousands/day for a handful of Pontiac yard cars —
+    # so sweep the NEWEST window of the gap (likeliest to be fresh Pontiac
+    # intake) and always jump max_id to recent_max: a model that slips
+    # through both recent and the sweep surfaces when its pair next appears,
+    # and liveness never depends on the sweep (per-pair searches below).
+    if max_id and recent_max > max_id:
+        lo = max(max_id + 1, recent_max - UPAS_SWEEP_CAP + 1)
+        sweep = range(lo, recent_max + 1)
+        if lo > max_id + 1:
+            print(f"  [UPAS] gap {recent_max - max_id} ids > cap "
+                  f"{UPAS_SWEEP_CAP} — sweeping newest window only",
+                  file=sys.stderr)
+        for vid in sweep:
+            d = _upas_get(session, f"/api/vehicles/{vid}")
+            if not d or int(d.get("storeNumber") or 0) != UPAS_STORE:
+                continue
+            mk, md = str(d.get("vehicleMake") or ""), str(d.get("modelName") or "")
+            if mk.strip() and md.strip() and d.get("modelYear"):
+                pairs.setdefault(_upas_pair_key(mk, md),
+                                 [mk.strip(), md.strip(), int(d["modelYear"])])
+            details[str(vid)] = {
+                "vin": str(d.get("VIN") or "").strip().upper(),
+                "date": str(d.get("YardLocationDT") or "")[:10],
+            }
+        max_id = recent_max
+    elif not max_id:
+        max_id = recent_max
+
+    # Per-pair searches are the liveness source of truth: the API 404s
+    # removed vehicles and the search only returns what's on the lot.
+    live: dict[int, dict] = {}
+    for mk, md, yr in sorted(pairs.values()):
+        res = _upas_get(
+            session,
+            f"/api/vehicles/search/?store={UPAS_STORE}&year={yr}"
+            f"&make={quote(mk)}&model={quote(md)}") or []
+        for v in res:
+            try:
+                vid = int(v.get("vehicleID") or 0)
+            except (TypeError, ValueError):
+                continue
+            if vid:
+                live[vid] = v
+    _indep_cache_raw("upas_live.json", json.dumps(list(live.values())).encode())
+
+    # Backfill details (VIN + yard date) for live ids the cache doesn't know —
+    # bounded per scan; rows ship without VIN/date until their turn comes.
+    missing = [vid for vid in sorted(live) if str(vid) not in details]
+    for vid in missing[:UPAS_DETAIL_BACKFILL_CAP]:
+        d = _upas_get(session, f"/api/vehicles/{vid}")
+        if d:
+            details[str(vid)] = {
+                "vin": str(d.get("VIN") or "").strip().upper(),
+                "date": str(d.get("YardLocationDT") or "")[:10],
+            }
+    if len(missing) > UPAS_DETAIL_BACKFILL_CAP:
+        print(f"  [UPAS] {len(missing) - UPAS_DETAIL_BACKFILL_CAP} detail "
+              f"backfills deferred to later scans", file=sys.stderr)
+
+    # Prune cached details to the live set and persist the cache.
+    details = {k: v for k, v in details.items() if int(k) in live}
+    if live or pairs:
+        try:
+            UPAS_CACHE_PATH.write_text(json.dumps({
+                "max_id": max_id,
+                "pairs": sorted(pairs.values()),
+                "details": {k: details[k] for k in sorted(details, key=int)},
+            }, separators=(",", ":")))
+        except OSError as e:
+            print(f"  [UPAS] cache write failed: {e}", file=sys.stderr)
+
+    yard = UPAS_YARD
+    vehicles: list[dict] = []
+    for vid in sorted(live):
+        v = live[vid]
+        try:
+            year_i = int(v.get("modelYear") or 0)
+        except (TypeError, ValueError):
+            year_i = 0
+        make_s = str(v.get("modelMake") or "").strip()
+        model_s = str(v.get("modelName") or "").strip()
+        if not make_s or not model_s or not year_i:
+            continue
+        det = details.get(str(vid), {})
+        vin = str(det.get("vin") or "")
+        color = str(v.get("colorOfVehicle") or "").strip().title()
+        vehicles.append({
+            "id": f"upas-{vid}",
+            "vin": vin if len(vin) == 17 else "",
+            "year": year_i,
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": str(v.get("yardRow") if v.get("yardRow") is not None else "").strip(),
+            "dateAdded": str(det.get("date") or ""),
+            **({"_color": color} if color else {}),
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "upas",
+        })
+    print(f"  [U-Pull and Save] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
+# U-Pull and Save publishes a parts price list at /price-list (3 columns:
+# NAME, "$X.XX/ Each", core as "$Y.YY" or an em-dash) -> upas_pricing.json.
+UPAS_PRICES_URL = f"{UPAS_BASE}/price-list"
+
+
+def refresh_upas_pricing_file() -> Path:
+    """Refresh U-Pull and Save's price list -> upas_pricing.json."""
+    import html as html_mod
+    path = DATA_DIR / "upas_pricing.json"
+    try:
+        r = requests.get(UPAS_PRICES_URL, headers={**HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [UPAS pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for block in re.findall(r"(?s)<tr[^>]*>(.*?)</tr>", page):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 3:
+            continue
+        name, price_s, core_s = cells[:3]
+        if not name or name in seen:
+            continue
+        pm = re.search(r"\$\s*([\d.,]+)", price_s)
+        if not pm:
+            continue
+        cm = re.search(r"\$\s*([\d.,]+)", core_s)
+        try:
+            price_f = float(pm.group(1).replace(",", ""))
+            core_f = float(cm.group(1).replace(",", "")) if cm else 0.0
+        except ValueError:
+            continue
+        seen[name] = {
+            "description": name,
+            "price": f"{price_f:.2f}",
+            "corePrice": f"{core_f:.2f}",
+            "totalPrice": f"{price_f + core_f:.2f}",
+        }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [UPAS pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [UPAS pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -9841,13 +10418,15 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "stcloud": "St. Cloud U Pull",
     "nvpap": "Nevada Pic-A-Part",
     "vinplus": "VinPlus (RTP KY/TN/NC, Pickers TX/AR/LA, Joliet IL, "
-               "San Antonio PnP TX, 195 TX, Pick Ur Part TX)",
+               "San Antonio PnP TX, 195 TX, Pick Ur Part TX, US Auto Supply MI)",
     "papva": "Pick-A-Part VA",
     "upickitaz": "U-Pick-It AZ",
     "gopullit": "Go Pull-It",
     "barrys": "Barry's U Pull It",
     "prestige": "Prestige Pull-Your-Part",
     "budget": "Budget U-Pull-It (FL)",
+    "ryans": "Ryan's Pick-a-Part (Detroit MI)",
+    "upas": "U-Pull and Save (Pontiac MI)",
 }
 
 
@@ -9875,6 +10454,8 @@ INDEPENDENT_FETCHERS: list = [
     ("Barry's", fetch_barrys_inventory),
     ("Prestige", fetch_prestige_inventory),
     ("Budget U-Pull-It", fetch_budget_inventory),
+    ("Ryan's Pick-a-Part", fetch_ryans_inventory),
+    ("U-Pull and Save", fetch_upas_inventory),
 ]
 
 
@@ -11867,7 +12448,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA/FL/GA (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, Chesterfield Auto Parts, Go Pull-It), Pick-A-Part VA, U-Pick-It AZ, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA/FL/GA/MI (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, US Auto Supply, Chesterfield Auto Parts, Go Pull-It), Pick-A-Part VA, U-Pick-It AZ, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL, Ryan's Pick-a-Part MI, U-Pull and Save MI — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -11892,7 +12473,9 @@ def main():
                refresh_chesterfield_pricing_file, refresh_ace_pricing_file,
                refresh_sturtevant_pricing_file, refresh_nvpap_pricing_file,
                refresh_barrys_pricing_file, refresh_budget_pricing_file,
-               refresh_p195_pricing_file, refresh_pnpsa_pricing_file)
+               refresh_p195_pricing_file, refresh_pnpsa_pricing_file,
+               refresh_ryans_pricing_file, refresh_usauto_pricing_file,
+               refresh_upas_pricing_file)
         for fn in fns:
             try:
                 fn()
@@ -11972,7 +12555,7 @@ def main():
         indep_fut = None
         indep_pool = None
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x20 incl. Chesterfield + Go Pull-It, Pick-A-Part VA, U-Pick-It AZ, Barry's, Prestige, Budget) in the background, overlapped with the chain scans...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x21 incl. Chesterfield + Go Pull-It + US Auto Supply, Pick-A-Part VA, U-Pick-It AZ, Barry's, Prestige, Budget, Ryan's Pick-a-Part, U-Pull and Save) in the background, overlapped with the chain scans...", file=sys.stderr)
             indep_pool = concurrent.futures.ThreadPoolExecutor(
                 max_workers=1, thread_name_prefix="indep-main")
             indep_fut = indep_pool.submit(fetch_independent_inventory)
