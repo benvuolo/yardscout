@@ -198,16 +198,10 @@
             </select>
             <div class="ctl-hint" id="manual-filter-hint" style="display:none;">Confirmed by the VIN decode or the yard&rsquo;s own listing. Most cars have neither &mdash; a real manual nothing confirms won&rsquo;t appear here.</div>
           </div>
-          <!-- Moved in from the top bar: it filters CARS by a spotted part,
-               which read as a duplicate of the Parts tab's fit finder when it
-               stood alone. The label + pointer disambiguate the two. -->
+          <!-- Part search lives on the Parts tab now (browse mode covers
+               what the old spotted-part filter did) — just the pointer. -->
           <div class="ctl">
-            <label for="live-part-search">Part spotted on car</label>
-            <div class="part-search-wrap">
-              <input type="text" class="search-box" id="live-part-search" placeholder="e.g. tailgate, 3rd row seat&hellip;" title="Show only cars carrying a part whose name matches">
-              <button type="button" class="part-search-clear" id="live-part-search-clear" style="display:none;" title="Clear part search">&times;</button>
-            </div>
-            <div class="ctl-hint">Looking for a part that fits <em>your</em> car? <button type="button" class="parts-pointer" id="live-parts-pointer">&rarr; Parts</button></div>
+            <div class="ctl-hint">Looking for a part? <button type="button" class="parts-pointer" id="live-parts-pointer">&rarr; Parts</button></div>
           </div>
         </div>
       </div>
@@ -317,7 +311,7 @@
     <div class="info-box" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
       <div style="flex:1;min-width:250px;">
         <h3 style="margin:0 0 0.25rem;">I need a part</h3>
-        <p style="margin:0;">Name the part and your car &mdash; we list donor cars near you it fits, with how sure we are. <strong>Verified fit</strong> means the pairing sits inside a published part-number application list; <strong>Likely fit</strong> means same engine family &mdash; verify the part number before driving out.</p>
+        <p style="margin:0;">Name the part and your car &mdash; we list donor cars near you it fits, with how sure we are. <strong>Verified fit</strong> means the pairing sits inside a published part-number application list; <strong>Likely fit</strong> means same engine family &mdash; verify the part number before driving out. <strong>No car? Leave it blank to browse</strong> every nearby car carrying the part &mdash; hunting &ldquo;any 5.3 Vortec near me&rdquo; works without one.</p>
       </div>
     </div>
     <div class="part-finder part-finder-page" id="part-finder">

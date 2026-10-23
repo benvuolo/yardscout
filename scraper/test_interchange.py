@@ -555,6 +555,16 @@ check("every generation row survives model normalization (squash-stable)",
       all((mk.lower(), js._squash_model(js.normalize_model(md, mk), mk))
           in _gen_keys for mk, md, _ in js.MODEL_GENERATIONS))
 
+# Browse mode (2026-10-23): engine-class categories browse by FAMILY data
+# (select a family, donors by application list + decode) — they must not
+# carry spotted-part tokens that would silently keyword-match instead.
+# Body-class categories browse by spotted-part tokens — they must have some.
+check("browse: engine assembly ships no spotted tokens (family browse only)",
+      PC["engine-assembly"]["tokens"] == [])
+check("browse: every body category ships spotted-part tokens",
+      all(PC[c]["tokens"] for c in PC if PC[c]["kind"] == "body"),
+      str([c for c in PC if PC[c]["kind"] == "body" and not PC[c]["tokens"]]))
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILURE(S):", *FAILS, sep="\n  - ")

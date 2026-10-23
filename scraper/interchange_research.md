@@ -2121,6 +2121,28 @@ engine-family (class A) coverage 83.3%; generation-window coverage for the
 class B/C/D categories 80.7%; union — vehicles the Parts tab can answer
 SOMETHING for — **89.7%**.
 
+### Browse mode (owner decision 2026-10-23) — per-class behavior
+
+Part chosen with NO car = browse: every nearby car CARRYING the part, no
+fit claims (there is no seeker to claim against). Distance-sorted. The old
+Live-tab "spotted part" filter was retired into this. Per rule class:
+
+- **Class A (engine-kind: engine assembly, alternator, starter, coils)**:
+  browse keys off the ENGINE-FAMILY data — the user picks a family
+  ("Vortec 5.3") from a select and donors are cars whose application lists
+  match it, decode-denied donors excluded, VIN-confirmed donors badged.
+  Never keyword-matched: the spotted-parts DB doesn't track engines, and a
+  keyword "engine" would be noise. This is the "any LS/5.3 near me" flow.
+- **Class B (body/platform parts)**: spotted-part semantics — cars whose
+  valuable-parts list names the part (the exact matching the Live filter
+  had), with the matched row's resale band shown (blurred for free).
+- **Class C/D (transmission, ECM, radio)**: spotted semantics apply but the
+  valuable-parts data mostly doesn't track them — the honest empty state
+  says so and points at adding a car to run the generation-based fit
+  search instead.
+- Partial car fields (just a make/year) act as plain FILTERS on the browse
+  list, never as fit claims.
+
 Hazard regressions re-checked while writing these: `starter` on the
 Pick-n-Pull list now quotes STARTER ($30.99), never the cheaper STARTER
 SOLENOID ($11.99) that the old substring match preferred; `tow mirror`
