@@ -10089,6 +10089,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
     },
     "dodge": {
         "ram": "Ram",            # display casing for unresolved 'RAM' rows
+        "ram50": "Ram 50",
         "chargerlc": "Charger", "chargerlx": "Charger",
         "challengerla": "Challenger", "challengerlc": "Challenger",
         "avengerjs": "Avenger", "dakotand": "Dakota", "dakotaan": "Dakota",
@@ -10165,7 +10166,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "evoque": "Range Rover Evoque",
         "discoveryii": "Discovery Series II",
         "discoveryseriesii": "Discovery Series II",
-        "lr3": "LR3",
+        "lr2": "LR2", "lr3": "LR3", "lr4": "LR4",
     },
     "lexus": {"ls600hl": "LS 600h L", "scseries": "SC Series"},
     "lincoln": {"ls": "LS", "mks": "MKS", "mkt": "MKT", "mark": "Mark"},
@@ -10174,7 +10175,8 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "3": "Mazda3", "6": "Mazda6", "5": "Mazda5", "2": "Mazda2",
         "b2000": "B2000", "b2200": "B2200", "b2300": "B2300",
         "b2500": "B2500", "b2600": "B2600",
-        "rx8": "RX-8", "rx7": "RX-7",
+        "rx8": "RX-8", "rx7": "RX-7", "mx6": "MX-6", "mx3": "MX-3",
+        "cx3": "CX-3", "cx5": "CX-5", "cx30": "CX-30", "cx50": "CX-50",
         "miata": "MX-5 Miata", "mx5": "MX-5 Miata",
         "mazdaspeed6": "Mazdaspeed6",
         "tributelx": "Tribute", "tributedx": "Tribute", "tributees": "Tribute",
@@ -10231,6 +10233,9 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "promaster3500van": "ProMaster 3500",
         "cv": "C/V",
     },
+    "plymouth": {"fury": "Fury"},
+    "fiat": {"500l": "500L", "500x": "500X"},
+    "merkur": {"xr4ti": "XR4Ti"},
     "saab": {"92x": "9-2X", "97x": "9-7X", "93x": "9-3X"},
     "saturn": {
         "auraxe": "Aura", "auraxr": "Aura", "astraxe": "Astra",
