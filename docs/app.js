@@ -2140,6 +2140,19 @@ function updateLiveFilterCount() {
   el.textContent = n;
 }
 
+/* Last-scan stamp for the always-visible "Updated" chip (Live + Yards bars):
+ * short relative time in the chip, full timestamp in the hover title. */
+function scrapeAgoLabel() {
+  if (!liveScrapedAt) return '\u2014';
+  const hrs = Math.floor((Date.now() - new Date(liveScrapedAt)) / 3.6e6);
+  return hrs < 1 ? 'just now' : hrs < 48 ? `${hrs}h ago` : `${Math.round(hrs / 24)}d ago`;
+}
+function scrapedTitle() {
+  return liveScrapedAt
+    ? new Date(liveScrapedAt).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
+    : '\u2014';
+}
+
 function renderLive() {
   updateFilterAvailability();
   if (!liveLoaded) return;
@@ -2151,36 +2164,20 @@ function renderLive() {
   // whole national database — that's what a parts hunter actually cares about.
   const nearLabel = activeZipCoords && effectiveRadiusMi() ? 'Cars Near You' : 'Cars';
   const worthPulling = vehicles.filter(v => v.hasMatch).length;
-  const newThisWeek = vehicles.filter(v => isNew(v.dateAdded)).length;
-  const fastSellers = vehicles.filter(v => v.hasMatch && (v.topParts || []).some(p => p.sell_speed === 'Fast')).length;
-  const scrapedLabel = liveScrapedAt
-    ? new Date(liveScrapedAt).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
-    : '—';
 
   updateLiveFilterCount();
   updateZipBanner();
   renderSaleStrip();
 
+  // Three chips, no horizontal scroll (owner request 2026-10-24): the old
+  // five-chip bar swiped sideways at phone widths and hid "Updated" — the
+  // chip people most needed — off the end. Freshness now always visible,
+  // which also retired the fresh-stamp line that papered over it.
   document.getElementById('live-stats-bar').innerHTML = `
     <div class="stat-card" title="Cars on the lots in view, as of the last scan"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
     <div class="stat-card" title="Cars carrying at least one part we track values for"><div class="label">Worth a look</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
-    <div class="stat-card" title="Cars with a part that typically gets claimed quickly at the yard"><div class="label">Going fast</div><div class="value">${fastSellers.toLocaleString()}</div></div>
-    <div class="stat-card" title="Set out on the lot within the last 7 days"><div class="label">New this week</div><div class="value">${newThisWeek.toLocaleString()}</div></div>
-    <div class="stat-card" title="When we last scanned yard inventories — automatic, about every 4 hours"><div class="label">Updated</div><div class="value value-sm">${scrapedLabel}</div></div>
+    <div class="stat-card" title="Last scan: ${scrapedTitle()} — automatic, about every 4 hours"><div class="label">Updated</div><div class="value value-sm">${scrapeAgoLabel()}</div></div>
   `;
-
-  // Phone widths clip the "Updated" chip off the end of the scrolling stats
-  // bar — keep the last-scan time visible where the numbers are read. The
-  // stamp hides via CSS at widths where the chip itself fits.
-  const freshEl = document.getElementById('live-fresh-stamp');
-  if (freshEl) {
-    if (liveScrapedAt) {
-      freshEl.textContent = `Inventory as of ${scrapedLabel} \u00b7 every yard re-scanned about every 4 hours`;
-      freshEl.style.display = '';
-    } else {
-      freshEl.style.display = 'none';
-    }
-  }
 
   // Shared-link landing: focused single-car view, or an honest message when
   // the shared car has left the inventory.
@@ -2986,12 +2983,18 @@ function renderYards() {
   const prevChain = fChain.value, prevState = fState.value;
   populateYardFilters(view.inRange);
   if (fChain.value !== prevChain || fState.value !== prevState) view = getYardsView();
-  const { allCount, radius, inRange, shown } = view;
+  const { radius, inRange, shown } = view;
 
+  // Three chips, no horizontal scroll (owner request 2026-10-24): the old
+  // bar truncated "Tracked nationwide" and swiped sideways on phones. The
+  // radius lives in the Within select and the nationwide count in the
+  // footer coverage note — the chips now carry yards, cars, and freshness.
+  const chipYards = view.filtered ? shown : inRange;
+  const carsInView = chipYards.reduce((s, y) => s + (y.count || 0), 0);
   statsBar.innerHTML = `
-    <div class="stat-card"><div class="label">${view.filtered ? 'Yards in view' : 'Yards near you'}</div><div class="value">${view.filtered ? shown.length : inRange.length}</div></div>
-    <div class="stat-card"><div class="label">Within</div><div class="value-sm">${radius ? radius + ' mi' : 'any distance'}</div></div>
-    <div class="stat-card"><div class="label">Tracked nationwide</div><div class="value">${allCount}</div></div>
+    <div class="stat-card" title="Yards ${view.filtered ? 'matching your filters' : 'inside your radius'}${radius ? ` — within ${radius} mi` : ''}"><div class="label">${view.filtered ? 'Yards in view' : 'Yards near you'}</div><div class="value">${chipYards.length.toLocaleString()}</div></div>
+    <div class="stat-card" title="Cars on those lots as of the last scan"><div class="label">${view.filtered ? 'Cars in view' : 'Cars in range'}</div><div class="value">${carsInView.toLocaleString()}</div></div>
+    <div class="stat-card" title="Last scan: ${scrapedTitle()} — every yard re-scanned about every 4 hours"><div class="label">Updated</div><div class="value value-sm">${scrapeAgoLabel()}</div></div>
   `;
 
   if (!shown.length) {

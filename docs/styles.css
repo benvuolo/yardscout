@@ -319,31 +319,20 @@
   .first-run-note p { margin: 0; flex: 1; }
   .first-run-note .btn { flex-shrink: 0; }
 
-  /* ---------- Stat chips ---------- */
+  /* ---------- Stat chips ----------
+     Static row (owner request 2026-10-24): exactly three chips per bar, no
+     horizontal scroll — the old scrolling bar truncated labels and hid the
+     Updated chip off-screen at phone widths. Chips split the row evenly;
+     labels wrap on phones instead of ever truncating. */
   .stats-bar {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 0.9rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 2px;
-  }
-  .stats-bar::-webkit-scrollbar { display: none; }
-  /* Last-scan stamp under the Live stats bar: phones clip the "Updated" chip
-     off the end of the scrolling bar, so the time lives here instead. Hidden
-     once the viewport is wide enough that the chip itself is visible. */
-  .fresh-stamp {
-    font-size: 0.6875rem;
-    color: var(--text-dim);
-    letter-spacing: 0.02em;
-    margin: -0.35rem 0 0.8rem;
-  }
-  @media (min-width: 720px) {
-    .fresh-stamp { display: none !important; }
   }
   .stat-card {
-    flex: 0 0 auto;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 280px;
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
@@ -351,7 +340,6 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     padding: 0.5rem 0.85rem;
-    min-width: 92px;
   }
   .stat-card .label {
     font-family: var(--font-mono);
@@ -361,6 +349,10 @@
     letter-spacing: 0.09em;
     color: var(--text-dim);
     white-space: nowrap;
+  }
+  @media (max-width: 480px) {
+    .stat-card { padding: 0.5rem 0.6rem; }
+    .stat-card .label { white-space: normal; }
   }
   .stat-card .value { font-family: var(--font-mono); font-size: 1rem; font-weight: 700; letter-spacing: 0; white-space: nowrap; line-height: 1.4; }
   .stat-card .value.value-sm { font-size: 0.8125rem; line-height: 1.72; }
@@ -497,7 +489,7 @@
     color: var(--text-dim);
     padding-left: 2px;
   }
-  select, .controls input[type="text"], .controls input[type="number"], #live-zip {
+  select, .controls input[type="text"], .controls input[type="number"], #live-zip, #pf-zip {
     width: 100%;
     padding: 0.55rem 0.7rem;
     background: var(--surface2);
@@ -517,7 +509,7 @@
     background-position: right 0.7rem center;
     padding-right: 1.8rem;
   }
-  select:focus, .controls input:focus, #live-zip:focus { border-color: var(--accent); }
+  select:focus, .controls input:focus, #live-zip:focus, #pf-zip:focus { border-color: var(--accent); }
   /* Multi-select (model filter): a select-shaped button that drops a
    * search + checkbox panel. */
   .multi-select { position: relative; }
@@ -998,6 +990,25 @@
     line-height: 1.6;
   }
   .app-footer strong { color: var(--text); }
+  /* "About" accordions: collapsed by default, full text one tap away —
+     same summary/chevron language as the card parts-details pattern. */
+  .app-footer .footer-fold summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text);
+    user-select: none;
+  }
+  .app-footer .footer-fold summary::-webkit-details-marker { display: none; }
+  .app-footer .footer-fold summary .chev { margin-left: auto; transition: transform 0.2s; color: var(--text-dim); }
+  .app-footer .footer-fold[open] summary .chev { transform: rotate(180deg); }
+  .app-footer .footer-fold + .footer-fold { border-top: 1px dashed var(--border); }
+  .app-footer .footer-fold p { margin: 0 0 0.6rem; }
 
   /* ===== Saved hearts + yard-visit sheet ===== */
   .heart-btn {
@@ -1120,8 +1131,9 @@
   }
   .skel-chip {
     height: 3.7rem; /* matches loaded stat-card height — no layout shift on swap */
-    flex: 1;
-    min-width: 7rem;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 280px; /* mirrors .stat-card so the swap doesn't reflow */
     border: 1px solid var(--border);
   }
   .skel-card {
