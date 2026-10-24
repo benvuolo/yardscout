@@ -3921,7 +3921,11 @@ function pfVonlyRowHtml(nVer, nOther, vocab) {
 document.getElementById('pf-results').addEventListener('change', e => {
   if (e.target.id !== 'pf-vonly-cb') return;
   pfVerifiedOnly = e.target.checked;
-  document.getElementById('pf-results').classList.toggle('pf-vonly', pfVerifiedOnly);
+  // State class is pf-vonly-on, NOT pf-vonly: the label already owns
+  // .pf-vonly (display:flex + white-space:nowrap), and putting that class on
+  // the results container inherited nowrap into every line — the header grew
+  // past the viewport and iOS zoomed the whole page out to fit it.
+  document.getElementById('pf-results').classList.toggle('pf-vonly-on', pfVerifiedOnly);
   track(pfVerifiedOnly ? 'pf-verified-only-on' : 'pf-verified-only-off');
 });
 
@@ -4038,7 +4042,7 @@ function pfRunBrowse(s) {
   // Engine browse carries its own tier vocabulary (VIN-confirmed vs not), so
   // the view toggle applies there; spotted-part browse makes no claims.
   const nVin = rows.filter(r => r.badge).length;
-  out.classList.toggle('pf-vonly', pfCat.kind === 'engine' && pfVerifiedOnly);
+  out.classList.toggle('pf-vonly-on', pfCat.kind === 'engine' && pfVerifiedOnly);
   out.innerHTML =
     `<div class="pf-results-head">${headTop} Sorted by distance. Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.</div>`
     + (pfCat.kind === 'engine' ? pfVonlyRowHtml(nVin, rows.length - nVin, 'vin') : '')
@@ -4273,7 +4277,7 @@ function pfRunSearch() {
   }
   const CAP = 120;
   const unlocked = isPro();
-  out.classList.toggle('pf-vonly', pfVerifiedOnly);
+  out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>`
     + pfVonlyRowHtml(nVer, rows.length - nVer, 'fit')
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')

@@ -1976,10 +1976,14 @@
   font-size: 0.78rem; color: var(--text); user-select: none; white-space: nowrap;
 }
 .pf-vonly input { accent-color: var(--accent2); width: 1rem; height: 1rem; margin: 0; }
-.pf-results.pf-vonly .pf-row-card.pf-likely { display: none; }
-.pf-results.pf-vonly .pf-row-card.pf-browse:not(.pf-vin) { display: none; }
+/* Filter-active state on the results CONTAINER is .pf-vonly-on — a distinct
+ * class from the label's .pf-vonly above. Reusing .pf-vonly here applied the
+ * label's white-space:nowrap to the whole container, blowing the header line
+ * past the viewport and making iOS zoom the page out (owner bug, 2026-10-24). */
+.pf-results.pf-vonly-on .pf-row-card.pf-likely { display: none; }
+.pf-results.pf-vonly-on .pf-row-card.pf-browse:not(.pf-vin) { display: none; }
 .pf-vonly-none { display: none; }
-.pf-results.pf-vonly .pf-vonly-none { display: block; }
+.pf-results.pf-vonly-on .pf-vonly-none { display: block; }
 .pf-caveat {
   font-size: 0.72rem; color: var(--text-dim); line-height: 1.5;
   background: var(--surface2); border-left: 2px solid var(--border-dark);
