@@ -1,0 +1,191 @@
+# Archive the iOS app from the current docs/ shell on a macOS runner and
+# upload it to App Store Connect (TestFlight). Optionally also create the
+# App Store version with release notes, attach the build and submit it for
+# review — the replacement for the by-hand xcodebuild + ASC clicking.
+#
+# Needs these repository secrets (see RELEASING.md for where each comes from):
+#   ASC_KEY_ID                  App Store Connect API key id
+#   ASC_ISSUER_ID               its issuer id
+#   ASC_API_KEY_P8              the .p8 file's contents
+#   IOS_DIST_CERT_P12_BASE64    "Apple Distribution" certificate + private key (.p12), base64
+#   IOS_DIST_CERT_P12_PASSWORD  the .p12 password
+#
+# Signing is automatic: xcodebuild uses the API key to create/refresh the
+# App Store provisioning profile itself (-allowProvisioningUpdates), so no
+# profile secret is needed — only the distribution certificate.
+name: Release iOS
+
+on:
+  workflow_dispatch:
+    inputs:
+      marketing_version:
+        description: "Marketing version (e.g. 1.10)"
+        required: true
+      build_number:
+        description: "Build number (must be unique per marketing version). Blank = this workflow's run number"
+        default: ""
+      notes:
+        description: "What's New / TestFlight notes (en-US)"
+        required: true
+      submit:
+        description: "Also create the App Store version and submit for review (otherwise TestFlight only)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-ios
+  cancel-in-progress: false
+
+jobs:
+  archive-upload:
+    runs-on: macos-latest
+    env:
+      TEAM_ID: G23Z9MSBUG
+      BUNDLE_ID: com.benvuolo.yardscout
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install JS deps + stage the web shell
+        run: |
+          npm ci
+          node --check docs/app.js
+          ./native/stage.sh
+          npx cap sync ios
+
+      - name: Set version
+        id: ver
+        run: |
+          set -euo pipefail
+          mv="${{ github.event.inputs.marketing_version }}"
+          bn="${{ github.event.inputs.build_number }}"
+          if [ -z "$bn" ]; then bn="${{ github.run_number }}"; fi
+          sed -i '' -E "s/MARKETING_VERSION = [^;]+;/MARKETING_VERSION = $mv;/" ios/App/App.xcodeproj/project.pbxproj
+          sed -i '' -E "s/CURRENT_PROJECT_VERSION = [^;]+;/CURRENT_PROJECT_VERSION = $bn;/" ios/App/App.xcodeproj/project.pbxproj
+          echo "mv=$mv" >> "$GITHUB_OUTPUT"
+          echo "bn=$bn" >> "$GITHUB_OUTPUT"
+          grep -E 'MARKETING_VERSION|CURRENT_PROJECT_VERSION' ios/App/App.xcodeproj/project.pbxproj | sort -u
+
+      - name: Install signing certificate + API key
+        env:
+          P12_B64: ${{ secrets.IOS_DIST_CERT_P12_BASE64 }}
+          P12_PASS: ${{ secrets.IOS_DIST_CERT_P12_PASSWORD }}
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+        run: |
+          set -euo pipefail
+          test -n "$P12_B64" || { echo "::error::IOS_DIST_CERT_P12_BASE64 secret missing"; exit 1; }
+          test -n "$ASC_P8" || { echo "::error::ASC_API_KEY_P8 secret missing"; exit 1; }
+          KEYCHAIN=$RUNNER_TEMP/ys.keychain-db
+          KCPASS=$(uuidgen)
+          security create-keychain -p "$KCPASS" "$KEYCHAIN"
+          security set-keychain-settings -lut 3600 "$KEYCHAIN"
+          security unlock-keychain -p "$KCPASS" "$KEYCHAIN"
+          echo "$P12_B64" | base64 -d > "$RUNNER_TEMP/dist.p12"
+          security import "$RUNNER_TEMP/dist.p12" -P "$P12_PASS" -A -t cert -f pkcs12 -k "$KEYCHAIN"
+          security set-key-partition-list -S apple-tool:,apple: -k "$KCPASS" "$KEYCHAIN" > /dev/null
+          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+          security find-identity -v -p codesigning "$KEYCHAIN"
+          # xcodebuild looks for API keys in ~/.appstoreconnect/private_keys/
+          mkdir -p ~/.appstoreconnect/private_keys
+          printf '%s' "$ASC_P8" > ~/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8
+          echo "key_path=$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8" >> "$GITHUB_ENV"
+
+      - name: Archive
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release \
+            -sdk iphoneos -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/App.xcarchive" archive \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$key_path" \
+            -authenticationKeyID "$ASC_KEY_ID" \
+            -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
+            CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM="$TEAM_ID" \
+            | tail -40
+
+      - name: Upload to App Store Connect (TestFlight)
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/export.plist" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>upload</string>
+            <key>teamID</key><string>$TEAM_ID</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>uploadSymbols</key><true/>
+            <key>manageAppVersionAndBuildNumber</key><false/>
+          </dict></plist>
+          EOF
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/App.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/export.plist" \
+            -exportPath "$RUNNER_TEMP/export" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$key_path" \
+            -authenticationKeyID "$ASC_KEY_ID" \
+            -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
+            | tail -30
+
+      - name: Commit version bump
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ios/App/App.xcodeproj/project.pbxproj
+          git commit -m "chore(release): iOS ${{ steps.ver.outputs.mv }} build ${{ steps.ver.outputs.bn }}${{ github.event.inputs.submit == 'true' && ' (submitted)' || ' (TestFlight)' }}"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 10
+          done
+          echo "::error::could not push the version bump"; exit 1
+
+      # Apple takes ~10-40 minutes to process an upload. deliver needs the
+      # processed build to attach it, so poll (up to ~60 min) before
+      # creating the version, setting What's New and submitting.
+      - name: Create App Store version + submit for review
+        if: ${{ github.event.inputs.submit == 'true' }}
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          json.dump({"key_id": os.environ["ASC_KEY_ID"], "issuer_id": os.environ["ASC_ISSUER_ID"],
+                     "key": os.environ["ASC_P8"], "in_house": False},
+                    open(os.environ["RUNNER_TEMP"] + "/asc_key.json", "w"))
+          PY
+          mkdir -p fastlane/metadata/en-US
+          printf '%s\n' "${{ github.event.inputs.notes }}" > fastlane/metadata/en-US/release_notes.txt
+          for attempt in $(seq 1 12); do
+            if fastlane deliver --api_key_path "$RUNNER_TEMP/asc_key.json" \
+                --app_identifier "$BUNDLE_ID" --team_id "$TEAM_ID" \
+                --app_version "${{ steps.ver.outputs.mv }}" --build_number "${{ steps.ver.outputs.bn }}" \
+                --skip_binary_upload --skip_screenshots --skip_app_version_update false \
+                --precheck_include_in_app_purchases false --run_precheck_before_submit false \
+                --submit_for_review --automatic_release --force; then
+              echo "submitted ${{ steps.ver.outputs.mv }} (${{ steps.ver.outputs.bn }})"; exit 0
+            fi
+            echo "build not processed yet or submit failed (attempt $attempt/12) — retrying in 5 min"
+            sleep 300
+          done
+          echo "::error::could not submit after 60 min — the build is uploaded; submit from App Store Connect or re-run with submit=true later"
+          exit 1

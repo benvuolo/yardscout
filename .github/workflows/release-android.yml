@@ -1,0 +1,138 @@
+# Build the Android app bundle from the current docs/ shell and upload it to
+# Google Play (internal testing by default, production on request) — the
+# replacement for the by-hand Gradle build + Play Console clicking.
+#
+# Needs these repository secrets (see RELEASING.md for where each comes from):
+#   ANDROID_KEYSTORE_BASE64     the upload keystore (.jks), base64
+#   ANDROID_KEYSTORE_PASSWORD   its store password
+#   ANDROID_KEY_ALIAS           key alias inside it
+#   ANDROID_KEY_PASSWORD        that key's password
+#   PLAY_SERVICE_ACCOUNT_JSON   Google Play API service-account key (JSON text)
+#
+# The version bump is committed back to main so source always matches what
+# the store has. Nothing here touches the iOS project.
+name: Release Android
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: "versionName shown to users (e.g. 1.10)"
+        required: true
+      version_code:
+        description: "versionCode (integer, must exceed the last upload). Blank = current + 1"
+        default: ""
+      track:
+        description: "Play track"
+        type: choice
+        options: [internal, production]
+        default: internal
+      notes:
+        description: "Release notes (en-US)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-android
+  cancel-in-progress: false
+
+jobs:
+  build-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install JS deps + stage the web shell
+        run: |
+          npm ci
+          node --check docs/app.js
+          ./native/stage.sh
+          npx cap sync android
+
+      - name: Set version
+        id: ver
+        run: |
+          set -euo pipefail
+          cur=$(grep -oE 'versionCode [0-9]+' android/app/build.gradle | grep -oE '[0-9]+')
+          code="${{ github.event.inputs.version_code }}"
+          if [ -z "$code" ]; then code=$((cur + 1)); fi
+          if [ "$code" -le "$cur" ]; then echo "::error::versionCode $code must exceed current $cur"; exit 1; fi
+          name="${{ github.event.inputs.version_name }}"
+          sed -i -E "s/versionCode [0-9]+/versionCode $code/" android/app/build.gradle
+          sed -i -E "s/versionName \"[^\"]*\"/versionName \"$name\"/" android/app/build.gradle
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          grep -E 'versionCode|versionName' android/app/build.gradle
+
+      - name: Install signing keystore
+        env:
+          KS_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KS_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          test -n "$KS_B64" || { echo "::error::ANDROID_KEYSTORE_BASE64 secret missing"; exit 1; }
+          mkdir -p ~/yardscout-android
+          echo "$KS_B64" | base64 -d > ~/yardscout-android/upload.jks
+          # build.gradle reads exactly this file (same layout as the owner's Mac).
+          cat > ~/yardscout-android/keystore.properties <<EOF
+          storeFile=$HOME/yardscout-android/upload.jks
+          storePassword=$KS_PASS
+          keyAlias=$KEY_ALIAS
+          keyPassword=$KEY_PASS
+          EOF
+
+      - name: Build release bundle
+        run: |
+          chmod +x android/gradlew
+          cd android && ./gradlew bundleRelease --no-daemon
+          ls -la app/build/outputs/bundle/release/
+
+      - name: Release notes file
+        run: |
+          mkdir -p whatsnew
+          printf '%s\n' "${{ github.event.inputs.notes }}" > whatsnew/whatsnew-en-US
+
+      - name: Upload to Google Play (${{ github.event.inputs.track }})
+        uses: r0adkll/upload-google-play@v1.1.3
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: io.yardscout.app
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: ${{ github.event.inputs.track }}
+          status: completed
+          releaseName: ${{ steps.ver.outputs.name }} (${{ steps.ver.outputs.code }})
+          whatsNewDirectory: whatsnew
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yardscout-${{ steps.ver.outputs.name }}-${{ steps.ver.outputs.code }}.aab
+          path: android/app/build/outputs/bundle/release/app-release.aab
+
+      - name: Commit version bump
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add android/app/build.gradle
+          git commit -m "chore(release): Android versionCode ${{ steps.ver.outputs.code }} / ${{ steps.ver.outputs.name }} (${{ github.event.inputs.track }})"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 10
+          done
+          echo "::error::could not push the version bump"; exit 1
