@@ -18,6 +18,7 @@ Pro state is staged the way the iOS handoff documents (jh_pro + jh_pro_source).
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -81,45 +82,27 @@ def free_shots(page, base, out):
     page.evaluate("window.scrollTo(0, 0)")
     shoot(page, out, "1_live")
 
-    # 2: filtered to a popular make/model
+    # 2: filtered to a popular make (the model picker is a modal whose
+    # controls vary; a make-only filter is robust and reads the same).
     try:
         page.click("#live-filter-toggle"); page.wait_for_timeout(500)
         makes = page.eval_on_selector_all("#live-filter-make option", "els => els.map(e => e.value)")
-        best = None
-        for make, model in [("Toyota", "Tacoma"), ("Toyota", "4Runner"), ("Honda", "Civic"), ("Toyota", "Camry"), ("Ford", "F-150"), ("Subaru", "Outback")]:
-            if make not in makes:
-                continue
-            page.select_option("#live-filter-make", make); page.wait_for_timeout(700)
-            page.click("#live-filter-model-btn"); page.wait_for_timeout(400)
-            models = page.eval_on_selector_all("#live-filter-model-list input[data-model]", "els => els.map(e => e.dataset.model)")
-            target = next((m for m in models if model.lower() in m.lower()), None)
-            for el in page.locator("#live-filter-model-list input:checked").all():
-                el.click()
-            if target:
-                page.click(f'#live-filter-model-list input[data-model="{target}"]')
-            page.click("#live-filter-model-done"); page.wait_for_timeout(1000)
-            n = page.locator("#live-grid .car-card").count()
-            log(f"  {make} {target}: {n} cars")
-            if target and (best is None or n > best[0]):
-                best = (n, make, target)
-            if target and n >= 6:
-                break
-        if best and (best[1], best[2]) != (make, target):
-            page.select_option("#live-filter-make", best[1]); page.wait_for_timeout(700)
-            page.click("#live-filter-model-btn"); page.wait_for_timeout(400)
-            for el in page.locator("#live-filter-model-list input:checked").all():
-                el.click()
-            page.click(f'#live-filter-model-list input[data-model="{best[2]}"]')
-            page.click("#live-filter-model-done"); page.wait_for_timeout(1000)
+        for make in ("Toyota", "Honda", "Subaru", "Ford"):
+            if make in makes:
+                page.select_option("#live-filter-make", make); page.wait_for_timeout(1200)
+                if page.locator("#live-grid .car-card").count() >= 4:
+                    break
         page.click("#live-filter-toggle"); page.wait_for_timeout(1200)
         page.evaluate("window.scrollTo(0, 0)")
         shoot(page, out, "2_search")
     except Exception as e:
         log("shot 2 failed:", str(e)[:120])
+    page.keyboard.press("Escape"); page.wait_for_timeout(300)
 
     # 7: fitment — Parts tab
     try:
-        page.click('.tab[data-tab="parts"]'); page.wait_for_timeout(1000)
+        page.keyboard.press("Escape")
+        page.locator('.tab[data-tab="parts"]').click(timeout=10000, force=True); page.wait_for_timeout(1000)
         page.fill("#pf-part", "alternator"); page.wait_for_timeout(800)
         opt = page.locator('[role="option"]:visible, .combo-item:visible').first
         if opt.count():
@@ -148,7 +131,8 @@ def free_shots(page, base, out):
 
     # 6: compare — Yards tab
     try:
-        page.click('.tab[data-tab="yards"]'); page.wait_for_selector("#yards-grid .yard-card", timeout=30000); page.wait_for_timeout(1500)
+        page.keyboard.press("Escape")
+        page.locator('.tab[data-tab="yards"]').click(timeout=10000, force=True); page.wait_for_selector("#yards-grid .yard-card", timeout=30000); page.wait_for_timeout(1500)
         cmp_in = page.locator('input[placeholder*="Compare" i]:visible').first
         if cmp_in.count():
             cmp_in.fill("Alternator"); page.wait_for_timeout(800)
@@ -160,7 +144,7 @@ def free_shots(page, base, out):
         shoot(page, out, "6_compare")
         # 3: plain yards list
         page.reload(wait_until="domcontentloaded"); page.wait_for_timeout(1500)
-        page.click('.tab[data-tab="yards"]'); page.wait_for_selector("#yards-grid .yard-card", timeout=60000); page.wait_for_timeout(2000)
+        page.locator('.tab[data-tab="yards"]').click(timeout=10000, force=True); page.wait_for_selector("#yards-grid .yard-card", timeout=60000); page.wait_for_timeout(2000)
         first = page.locator("#yards-grid .yard-card").first
         first.scroll_into_view_if_needed(); page.evaluate("window.scrollBy(0, -170)"); page.wait_for_timeout(400)
         shoot(page, out, "3_yards")
@@ -169,7 +153,8 @@ def free_shots(page, base, out):
 
     # 4: alerts
     try:
-        page.click('.tab[data-tab="alerts"]'); page.wait_for_timeout(2500)
+        page.keyboard.press("Escape")
+        page.locator('.tab[data-tab="alerts"]').click(timeout=10000, force=True); page.wait_for_timeout(2500)
         page.evaluate("window.scrollTo(0, 0)")
         shoot(page, out, "4_alerts")
     except Exception as e:
@@ -200,7 +185,10 @@ def pro_shot(page, base, out):
     s = card.locator("details summary").first
     if s.count():
         s.click(); page.wait_for_timeout(500)
-    card.scroll_into_view_if_needed(); page.evaluate("window.scrollBy(0, -130)"); page.wait_for_timeout(500)
+    # Frame the chosen card right under the sticky header (no sliver of the
+    # card above it).
+    card.evaluate("el => { el.scrollIntoView({block: 'start'}); window.scrollBy(0, -(document.querySelector('header')?.offsetHeight || 90) - 10); }")
+    page.wait_for_timeout(500)
     shoot(page, out, "5_pro")
 
 
@@ -211,7 +199,10 @@ def main():
     ap.add_argument("--android-out", type=Path, default=Path("fastlane/metadata/android/en-US/images/phoneScreenshots"))
     args = ap.parse_args()
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        # Pre-installed browser on the cloud runner (a pip-installed
+        # playwright can't find its own); set PW_CHROMIUM elsewhere if needed.
+        exe = os.environ.get("PW_CHROMIUM")
+        browser = p.chromium.launch(executable_path=exe) if exe else p.chromium.launch()
         for ios, out in ((True, args.out), (False, args.android_out)):
             out.mkdir(parents=True, exist_ok=True)
             label = "iOS" if ios else "Android"
