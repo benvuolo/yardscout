@@ -19,11 +19,12 @@ KNOW THE YARDS
 WATCH FOR THE RIGHT CAR
 - Build a watchlist of makes, models and years
 - Watched cars light up in the app when they arrive at a yard in your radius
+- Free watches get a weekly recap push of every watched car that landed
 
 YARDSCOUT PRO
-- What each part would cost you used online, what the yard charges, and what you'd save pulling it yourself — on nearly every car
-- Push alerts within hours of a watched car hitting a yard in your radius, plus sale-day alerts
-- Which cars get picked over fast, days-on-lot and leaving-soon signals
+- Price list before you drive: what the yard charges vs what the same used part goes for online, on nearly every car
+- Donor-car alerts: a push within hours of a watched car hitting a yard in your radius, plus sale-day alerts
+- Which parts get picked over fast, days on the lot and leaving-soon signals — get there before the crusher
 - Unlimited radius and nationwide search
 
 NO ACCOUNT, NO EMAIL
