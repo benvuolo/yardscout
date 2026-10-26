@@ -429,7 +429,8 @@ function vinMetaHtml(v) {
   if (v.vpicMismatch) {
     mismatch = ` <span class="meta-warn" title="The VIN\u2019s factory decode disagrees with the yard listing — the lot sign may be mislabeled. The VIN is used for matching; verify at the yard.">${escapeHtml(v.vpicMismatch)}</span>`;
   }
-  return ` &middot; <span class="vin-chunk">VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}</span>${dup}${vpic}${mismatch}`;
+  // Separator lives inside the chunk so it can't wrap onto a line by itself.
+  return ` <span class="vin-chunk">&middot;&nbsp;VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}</span>${dup}${vpic}${mismatch}`;
 }
 
 /* No bulk export at any tier: inventory goes stale in days, but the part
@@ -2492,7 +2493,7 @@ function renderLive() {
         <details class="parts-details">
           <summary>${unlocked
             ? `Up to ${shownParts.length} part${shownParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart}`
-            : `${shownParts.length} valuable part${shownParts.length > 1 ? 's' : ''} spotted`} <span class="chev">${ICON.chev}</span></summary>
+            : `${shownParts.length} part${shownParts.length > 1 ? 's' : ''} to check`} <span class="chev">${ICON.chev}</span></summary>
           <div class="car-body">
             <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can\u2019t be confirmed from the VIN are marked &ldquo;if equipped.&rdquo; Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
             <ul class="parts-list">${partRows}</ul>
