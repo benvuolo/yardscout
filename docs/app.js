@@ -944,6 +944,10 @@ function jhShowNationwide() {
  * distance" (nationwide) is a Pro feature. Pro gets the raw select value,
  * where empty = unlimited. */
 const FREE_MAX_RADIUS_MI = 250;
+/* The radius select ships at 100 mi (the `selected` option in index.html).
+ * Filter badges count only what the user CHANGED from its default — a fresh
+ * install must not wear a "Filters 1" badge (owner request 2026-10-26). */
+const DEFAULT_RADIUS = '100';
 function effectiveRadiusMi() {
   const raw = parseFloat(document.getElementById('live-radius').value) || null;
   if (isPro()) return raw;
@@ -2134,7 +2138,9 @@ function updateLiveFilterCount() {
       || document.getElementById('live-filter-year-max').value) n++;
   if (document.getElementById('live-filter-location').value) n++;
   if (document.getElementById('live-filter-match').value) n++;
-  if (activeZipCoords && document.getElementById('live-radius').value) n++;
+  // Radius counts only when moved off the default — the untouched 100 mi
+  // ships with the app, so it isn't "a filter the user applied".
+  if (activeZipCoords && document.getElementById('live-radius').value !== DEFAULT_RADIUS) n++;
   const el = document.getElementById('live-filter-count');
   el.style.display = n ? 'inline-grid' : 'none';
   el.textContent = n;
@@ -3104,7 +3110,9 @@ function updateYardsFilterCount() {
   if (document.getElementById('yards-search').value.trim()) n++;
   if (document.getElementById('yards-filter-chain').value) n++;
   if (document.getElementById('yards-filter-state').value) n++;
-  if (activeZipCoords && document.getElementById('yards-radius').value) n++;
+  // Same default-aware radius rule as updateLiveFilterCount: the shipped
+  // 100 mi doesn't count, a user-changed radius does.
+  if (activeZipCoords && document.getElementById('yards-radius').value !== DEFAULT_RADIUS) n++;
   const el = document.getElementById('yards-filter-count');
   el.style.display = n ? 'inline-grid' : 'none';
   el.textContent = n;
