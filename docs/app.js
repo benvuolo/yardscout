@@ -2169,7 +2169,10 @@ function renderLive() {
   // KPIs describe what the user is LOOKING AT (their zip/filters), not the
   // whole national database — that's what a parts hunter actually cares about.
   const nearLabel = activeZipCoords && effectiveRadiusMi() ? 'Cars Near You' : 'Cars';
-  const worthPulling = vehicles.filter(v => v.hasMatch).length;
+  // "New this week" replaced "Worth a look" (owner request 2026-10-26): with
+  // value coverage this broad, worth-a-look counted nearly every car in view
+  // — a stat that never changes anyone's plan. Fresh arrivals do.
+  const newThisWeek = vehicles.filter(v => isNew(v.dateAdded)).length;
 
   updateLiveFilterCount();
   updateZipBanner();
@@ -2181,7 +2184,7 @@ function renderLive() {
   // which also retired the fresh-stamp line that papered over it.
   document.getElementById('live-stats-bar').innerHTML = `
     <div class="stat-card" title="Cars on the lots in view, as of the last scan"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
-    <div class="stat-card" title="Cars carrying at least one part we track values for"><div class="label">Worth a look</div><div class="value accent">${worthPulling.toLocaleString()}</div></div>
+    <div class="stat-card" title="Cars set out in the last 7 days at the yards in view"><div class="label">New this week</div><div class="value accent">${newThisWeek.toLocaleString()}</div></div>
     <div class="stat-card" title="Last scan: ${scrapedTitle()} — automatic, about every 4 hours"><div class="label">Updated</div><div class="value value-sm">${scrapeAgoLabel()}</div></div>
   `;
 
