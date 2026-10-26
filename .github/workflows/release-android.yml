@@ -108,10 +108,32 @@ jobs:
           mkdir -p whatsnew
           printf '%s\n' "${{ github.event.inputs.notes }}" > whatsnew/whatsnew-en-US
 
+      # A pasted key file sometimes carries stray text after the closing
+      # brace (double paste, shell prompt); take the first JSON object only.
+      - name: Normalize service-account key
+        env:
+          SA_RAW: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          raw = os.environ["SA_RAW"].strip()
+          if not raw:
+              print("::error::PLAY_SERVICE_ACCOUNT_JSON secret missing"); sys.exit(1)
+          start = raw.find("{")
+          obj, _end = json.JSONDecoder().raw_decode(raw[start:])
+          for k in ("client_email", "private_key"):
+              if k not in obj:
+                  print(f"::error::service-account JSON lacks {k}"); sys.exit(1)
+          obj.setdefault("type", "service_account")
+          obj.setdefault("token_uri", "https://oauth2.googleapis.com/token")
+          json.dump(obj, open(os.environ["RUNNER_TEMP"] + "/play-sa.json", "w"))
+          print("service account:", obj["client_email"])
+          PY
+
       - name: Upload to Google Play (${{ github.event.inputs.track }})
         uses: r0adkll/upload-google-play@v1.1.3
         with:
-          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          serviceAccountJson: ${{ runner.temp }}/play-sa.json
           packageName: io.yardscout.app
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           track: ${{ github.event.inputs.track }}
