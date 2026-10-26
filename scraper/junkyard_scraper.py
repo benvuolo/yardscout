@@ -16860,10 +16860,6 @@ ARIO_BASE = "https://app.autorecycler.io"
 ARIO_APPNAME = "autoscrapzen"
 ARIO_DELAY_SEC = 2.0
 ARIO_PAGE_N = 400
-RYANS_ORG_SLUG = "ryans-pick-a-part-detroit"
-RYANS_PRICES_URL = "https://ryanspickapart.com/Home/PartPrices"
-RYANS_YARD = {"name": "Ryan's Pick-a-Part - Detroit", "city": "Detroit",
-              "state": "MI", "lat": 42.3626, "lng": -83.1885}
 
 
 def _ario_encode_data(data: dict) -> dict:
@@ -16913,7 +16909,7 @@ def _ario_search(session: "requests.Session", type_name: str,
         r.raise_for_status()
         return r.json()
     except Exception as e:
-        print(f"  [Ryan's] {type_name} search (from={frm}) failed: {e}",
+        print(f"  [Ario] {type_name} search (from={frm}) failed: {e}",
               file=sys.stderr)
         return None
 
@@ -16954,52 +16950,102 @@ def _ario_name_map(session: "requests.Session", type_name: str,
     return out
 
 
-def fetch_ryans_inventory() -> list[dict]:
-    """Fetch Ryan's Pick-a-Part (Detroit) from its embedded Ario Bubble app."""
-    session = requests.Session()
-    org_res = _ario_search(session, "custom.organization",
-                           [{"key": "id_text", "constraint_type": "equals",
-                             "value": RYANS_ORG_SLUG}], 0, 5)
-    org_hits = ((org_res or {}).get("hits") or {}).get("hits") or []
-    if not org_hits:
-        print("  [Ryan's] org lookup failed — slug gone or API changed?",
-              file=sys.stderr)
-        return []
-    org = org_hits[0]
-    # Reference constraints need the "<appid>__LOOKUP__<id>" form; pull the
-    # app id off any reference field the org record itself carries rather
-    # than hardcoding it.
-    ref_prefix = ""
+# ---- Ario multi-tenant config (2026-10-26 wave 1) ---------------------------
+# Every Ario customer is one `custom.organization` row; the public search is
+# the same obfuscated query with a different org reference. So each yard here
+# is a CONFIG ENTRY on the one adapter below: keyed by the org's URL slug
+# (`id_text`, the /inventory/{slug} path) or, for slugless orgs, its Bubble
+# `org_id`. Chains group yards under one SOURCE tag (zero-vehicle alarm +
+# `_source`) and one id scheme: `{source}-{code}-{stock}` so stock numbers
+# that repeat across a chain's orgs can't collide. Ryan's keeps its original
+# `ryans-{stock}` scheme (`id_prefix`) — history/lifespan rows are keyed on it.
+# Pins: the org record carries the yard's own geocode and is preferred at
+# scan time; the hardcoded lat/lng is the fallback (same convention as
+# YARD_COORDS). `added_since` (ISO date) drops rows older than that — for
+# orgs that never hide departed cars (Santa Maria lesson, EXPANSION §8.1).
+# Requests per scan: 2 (org table) + ceil(rows/400) per yard + make/model
+# lookups shared across every yard (~5-10 total), all at ARIO_DELAY_SEC on
+# the one host — ~26 yards ≈ 100-130 POSTs ≈ 4-5 min, serial.
+ARIO_CHAINS: dict[str, dict] = {
+    "ryans": {
+        "label": "Ryan's Pick-a-Part (Detroit MI)",
+        "id_prefix": "ryans-",
+        "yards": [
+            {"slug": "ryans-pick-a-part-detroit", "code": "detroit",
+             "name": "Ryan's Pick-a-Part - Detroit", "city": "Detroit",
+             "state": "MI", "lat": 42.3626, "lng": -83.1885},
+        ],
+    },
+    # Wave 1 (EXPANSION_CANDIDATES.md §8.5, owner-approved 2026-10-26):
+    # EZ Pull N Pay ×7, Paul's Auto Yard ×10, Foss U-Pull-It ×6, Carolina
+    # Pick N Pull ×3. Slugs/org ids and pins come from
+    # scraper/_probe_ario_orgs.py (the org table) — fill, then verify each
+    # yard's live count against the scout's probe before trusting the feed.
+    "ezpullnpay": {"label": "EZ Pull N Pay (GA/AL)", "yards": []},
+    "pauls": {"label": "Paul's Auto Yard (IN)", "yards": []},
+    "foss": {"label": "Foss U-Pull-It (NC/VA)", "yards": []},
+    "carolinapnp": {"label": "Carolina Pick N Pull (NC/SC)", "yards": []},
+}
+RYANS_PRICES_URL = "https://ryanspickapart.com/Home/PartPrices"
+
+
+def _ario_ref_prefix(org: dict) -> str:
+    """"<appid>__LOOKUP__" taken off any reference field the org record
+    carries (never hardcoded); "" when the record has none."""
     for v in (org.get("_source") or {}).values():
         vals = v if isinstance(v, list) else [v]
         for item in vals:
             if isinstance(item, str) and "__LOOKUP__" in item:
-                ref_prefix = item.split("__LOOKUP__")[0] + "__LOOKUP__"
-                break
-        if ref_prefix:
-            break
-    org_ref = f"{ref_prefix}{org['_id']}" if ref_prefix else org["_id"]
+                return item.split("__LOOKUP__")[0] + "__LOOKUP__"
+    return ""
 
-    hits = _ario_search_all(session, "custom.inventorysearch", [
-        {"key": "organization_custom_organization", "constraint_type": "equals",
-         "value": org_ref},
-        {"key": "visible_boolean", "constraint_type": "equals", "value": True},
-    ])
-    rows = [h["_source"] for h in hits
-            if not (h.get("_source") or {}).get("deleted_boolean")]
-    _indep_cache_raw("ryans_inventorysearch.json", json.dumps(rows).encode())
 
-    make_map = _ario_name_map(
-        session, "custom.vehicle_make",
-        {str(r.get("vehicle_make_custom_vehicle_make") or "") for r in rows})
-    model_map = _ario_name_map(
-        session, "custom.vehicle_model",
-        {str(r.get("vehicle_model_custom_vehicle_model") or "") for r in rows})
+def _ario_org_pin(org: dict) -> tuple[float, float] | None:
+    """The org record's own geocode: Bubble geographic-address fields
+    serialize as {"address": ..., "lat": ..., "lng": ...}. First plausible
+    (lat, lng) wins; None when the record has none."""
+    for v in (org.get("_source") or {}).values():
+        if not isinstance(v, dict):
+            continue
+        try:
+            lat, lng = float(v.get("lat")), float(v.get("lng"))
+        except (TypeError, ValueError):
+            continue
+        if -90 <= lat <= 90 and -180 <= lng <= 180 and (lat, lng) != (0.0, 0.0):
+            return round(lat, 4), round(lng, 4)
+    return None
 
-    def ref_name(mapping: dict[str, str], ref: str) -> str:
+
+def _ario_org_index(orgs: list[dict]) -> tuple[dict[str, dict], dict[str, dict]]:
+    """({slug: org}, {org_id: org}) from raw organization hits."""
+    by_slug: dict[str, dict] = {}
+    by_id: dict[str, dict] = {}
+    for org in orgs:
+        by_id[str(org.get("_id") or "")] = org
+        slug = str((org.get("_source") or {}).get("id_text") or "").strip().lower()
+        if slug:
+            by_slug[slug] = org
+    return by_slug, by_id
+
+
+def _ario_resolve_org(yard: dict, by_slug: dict, by_id: dict) -> dict | None:
+    if yard.get("slug"):
+        return by_slug.get(str(yard["slug"]).lower())
+    if yard.get("org_id"):
+        return by_id.get(str(yard["org_id"]))
+    return None
+
+
+def _ario_rows_to_vehicles(rows: list[dict], *, yard: dict, source: str,
+                           id_prefix: str, make_map: dict[str, str],
+                           model_map: dict[str, str],
+                           pin: tuple[float, float] | None = None) -> list[dict]:
+    """custom.inventorysearch rows -> scan vehicle dicts for ONE yard."""
+    def ref_name(mapping: dict[str, str], ref) -> str:
         return mapping.get(str(ref or "").split("__LOOKUP__")[-1], "")
 
-    yard = RYANS_YARD
+    lat, lng = pin if pin else (yard["lat"], yard["lng"])
+    added_since = str(yard.get("added_since") or "")
     vehicles: list[dict] = []
     dupes: dict[str, int] = {}
     for r in rows:
@@ -17026,10 +17072,10 @@ def fetch_ryans_inventory() -> list[dict]:
         if not make_s or not model_s or not year_i:
             continue
         stock = str(r.get("stock_number_text") or "").strip()
-        base = f"ryans-{stock.lower()}" if stock else (
-            "ryans-" + str(r.get("inventory_id_text") or "").strip().lower())
-        if not base or base == "ryans-":
+        key = stock or str(r.get("inventory_id_text") or "").strip()
+        if not key:
             continue
+        base = f"{id_prefix}{key.lower()}"
         n = dupes.get(base, 0) + 1
         dupes[base] = n
         vid = base if n == 1 else f"{base}-{n}"
@@ -17042,6 +17088,8 @@ def fetch_ryans_inventory() -> list[dict]:
                     ms / 1000, tz=timezone.utc).date().isoformat()
         except (TypeError, ValueError):
             pass
+        if added_since and date_iso and date_iso < added_since:
+            continue
         color = str(r.get("exterior_color_text") or "").strip().title()
         vehicles.append({
             "id": vid,
@@ -17055,12 +17103,77 @@ def fetch_ryans_inventory() -> list[dict]:
             "_location": yard["name"],
             "_city": yard["city"],
             "_state": yard["state"],
-            "_lat": yard["lat"],
-            "_lng": yard["lng"],
-            "_source": "ryans",
+            "_lat": lat,
+            "_lng": lng,
+            "_source": source,
         })
-    print(f"  [Ryan's Pick-a-Part] {len(vehicles)} vehicles", file=sys.stderr)
     return vehicles
+
+
+def fetch_ario_inventory() -> list[dict]:
+    """Every configured Ario (autorecycler.io) yard — Ryan's + wave 1 chains.
+
+    One org-table fetch resolves every yard's org record (slug or id) and
+    pin; inventory pages are per yard; make/model id->name lookups are
+    pooled across all yards (global tables) so they cost ~5-10 POSTs total
+    instead of ~5 per yard."""
+    session = requests.Session()
+    org_hits = _ario_search_all(session, "custom.organization", [], max_pages=5)
+    if not org_hits:
+        print("  [Ario] organization table fetch failed — API changed?",
+              file=sys.stderr)
+        return []
+    by_slug, by_id = _ario_org_index(org_hits)
+    ref_prefix = next((p for p in (_ario_ref_prefix(o) for o in org_hits) if p), "")
+
+    # Pass 1: rows per yard (cached raw per yard for parser forensics).
+    per_yard: list[tuple[str, dict, dict, list[dict], tuple | None]] = []
+    make_ids: set[str] = set()
+    model_ids: set[str] = set()
+    for source, chain in ARIO_CHAINS.items():
+        for yard in chain["yards"]:
+            org = _ario_resolve_org(yard, by_slug, by_id)
+            if org is None:
+                print(f"  [Ario] {yard['name']}: org not found "
+                      f"(slug={yard.get('slug')!r} id={yard.get('org_id')!r}) — "
+                      f"renamed or dropped off the platform?", file=sys.stderr)
+                continue
+            org_ref = f"{ref_prefix}{org['_id']}" if ref_prefix else org["_id"]
+            hits = _ario_search_all(session, "custom.inventorysearch", [
+                {"key": "organization_custom_organization",
+                 "constraint_type": "equals", "value": org_ref},
+                {"key": "visible_boolean", "constraint_type": "equals", "value": True},
+            ])
+            rows = [h["_source"] for h in hits
+                    if not (h.get("_source") or {}).get("deleted_boolean")]
+            code = yard.get("code") or re.sub(r"[^a-z0-9]+", "", yard["name"].lower())
+            _indep_cache_raw(f"ario_{source}_{code}.json", json.dumps(rows).encode())
+            make_ids |= {str(r.get("vehicle_make_custom_vehicle_make") or "") for r in rows}
+            model_ids |= {str(r.get("vehicle_model_custom_vehicle_model") or "") for r in rows}
+            per_yard.append((source, chain, yard, rows, _ario_org_pin(org)))
+
+    # Pass 2: one pooled make map + model map for everything fetched.
+    make_map = _ario_name_map(session, "custom.vehicle_make", make_ids)
+    model_map = _ario_name_map(session, "custom.vehicle_model", model_ids)
+
+    vehicles: list[dict] = []
+    for source, chain, yard, rows, pin in per_yard:
+        code = yard.get("code") or re.sub(r"[^a-z0-9]+", "", yard["name"].lower())
+        id_prefix = chain.get("id_prefix") or f"{source}-{code}-"
+        got = _ario_rows_to_vehicles(rows, yard=yard, source=source,
+                                     id_prefix=id_prefix, make_map=make_map,
+                                     model_map=model_map, pin=pin)
+        print(f"  [Ario] {yard['name']}: {len(got)} vehicles"
+              + ("" if pin else " (fallback pin)"), file=sys.stderr)
+        vehicles.extend(got)
+    print(f"  [Ario] {len(vehicles)} vehicles across {len(per_yard)} yards",
+          file=sys.stderr)
+    return vehicles
+
+
+def fetch_ryans_inventory() -> list[dict]:
+    """Back-compat alias (Ryan's is ARIO_CHAINS['ryans'] now)."""
+    return [v for v in fetch_ario_inventory() if v["_source"] == "ryans"]
 
 
 # Ryan's publishes a clean 4-column price list on the CRUSH side of its site
@@ -17421,9 +17534,12 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "barrys": "Barry's U Pull It",
     "prestige": "Prestige Pull-Your-Part",
     "budget": "Budget U-Pull-It (FL)",
-    "ryans": "Ryan's Pick-a-Part (Detroit MI)",
     "upas": "U-Pull and Save (Pontiac MI)",
 }
+# Ario chains (Ryan's + wave 1) register themselves from their config so a
+# chain with no yards wired yet can't trip the alarm every scan.
+INDEPENDENT_EXPECTED_SOURCES.update(
+    {src: c["label"] for src, c in ARIO_CHAINS.items() if c["yards"]})
 
 
 # Canonical adapter order. The parallel fetch below concatenates results in
@@ -17450,7 +17566,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Barry's", fetch_barrys_inventory),
     ("Prestige", fetch_prestige_inventory),
     ("Budget U-Pull-It", fetch_budget_inventory),
-    ("Ryan's Pick-a-Part", fetch_ryans_inventory),
+    ("Ario (Ryan's + wave-1 chains)", fetch_ario_inventory),
     ("U-Pull and Save", fetch_upas_inventory),
 ]
 
