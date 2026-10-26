@@ -137,29 +137,39 @@ def free_shots(page, base, out):
     except Exception as e:
         log("shot 7 failed:", str(e)[:120])
 
-    # 6: compare — Yards tab, in a fresh page (the Parts flow leaves state
-    # that makes the tab bar unreachable for the driver).
+    # 6 + 3: Yards tab in a fresh page (the Parts flow leaves state that
+    # makes the tab bar unreachable for the driver). Each shot fails alone.
     try:
         page = page.context.new_page()
         load_with_zip(page, base)
-        page.locator('.tab[data-tab="yards"]').first.click(timeout=10000); page.wait_for_selector("#yards-grid .yard-card", timeout=30000); page.wait_for_timeout(1500)
-        cmp_in = page.locator('input[placeholder*="Compare" i]:visible').first
-        if cmp_in.count():
-            cmp_in.fill("Alternator"); page.wait_for_timeout(800)
-            opt = page.locator('[role="option"]:visible, .combo-item:visible').first
-            if opt.count():
-                opt.click(); page.wait_for_timeout(300)
-            page.locator('button:has-text("Compare"):visible').first.click(); page.wait_for_timeout(2500)
-            cmp_in.scroll_into_view_if_needed(); page.evaluate("window.scrollBy(0, -140)"); page.wait_for_timeout(400)
+        page.locator('.tab[data-tab="yards"]').first.click(timeout=10000)
+        page.wait_for_selector("#yards-grid .yard-card", timeout=30000); page.wait_for_timeout(1500)
+    except Exception as e:
+        log("yards tab failed:", str(e)[:120])
+    try:
+        cmp_in = page.locator('input[placeholder*="Compare" i]').first
+        cmp_in.fill("Alternator", timeout=5000); page.wait_for_timeout(800)
+        opt = page.locator('[role="option"], .combo-item').first
+        try:
+            opt.click(timeout=3000); page.wait_for_timeout(300)
+        except Exception:
+            page.keyboard.press("Enter")
+        page.get_by_role("button", name="Compare", exact=True).first.click(timeout=5000); page.wait_for_timeout(2500)
+        cmp_in.evaluate("el => { el.scrollIntoView({block: 'start'}); window.scrollBy(0, -(document.querySelector('header')?.offsetHeight || 90) - 10); }")
+        page.wait_for_timeout(400)
         shoot(page, out, "6_compare")
-        # 3: plain yards list
-        page.reload(wait_until="domcontentloaded"); page.wait_for_timeout(1500)
-        page.locator('.tab[data-tab="yards"]').first.click(timeout=10000); page.wait_for_selector("#yards-grid .yard-card", timeout=60000); page.wait_for_timeout(2000)
+    except Exception as e:
+        log("shot 6 failed:", str(e)[:120])
+    try:
+        page.reload(wait_until="domcontentloaded"); page.wait_for_selector("#live-grid .car-card", timeout=90000); page.wait_for_timeout(800)
+        page.locator('.tab[data-tab="yards"]').first.click(timeout=10000)
+        page.wait_for_selector("#yards-grid .yard-card", timeout=60000); page.wait_for_timeout(2000)
         first = page.locator("#yards-grid .yard-card").first
-        first.scroll_into_view_if_needed(); page.evaluate("window.scrollBy(0, -170)"); page.wait_for_timeout(400)
+        first.evaluate("el => { el.scrollIntoView({block: 'start'}); window.scrollBy(0, -(document.querySelector('header')?.offsetHeight || 90) - 60); }")
+        page.wait_for_timeout(400)
         shoot(page, out, "3_yards")
     except Exception as e:
-        log("shot 6/3 failed:", str(e)[:120])
+        log("shot 3 failed:", str(e)[:120])
 
     # 4: alerts
     try:
