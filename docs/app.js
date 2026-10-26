@@ -5021,7 +5021,7 @@ function addWatchItem() {
   if (yrMin && yrMax && yrMin > yrMax) return alert('Year min is after year max.');
   const radiusMi = parseInt(document.getElementById('alert-radius').value) || null;
   if (radiusMi && !activeZipCoords) {
-    return alert('Set a zip code (or use "near me") in the Live tab first, so the radius has a center.');
+    return alert('Set a zip code (or use "near me") in the Cars tab first, so the radius has a center.');
   }
   const matchOnly = document.getElementById('alert-match-only').checked;
   const watchlist = loadWatchlist();

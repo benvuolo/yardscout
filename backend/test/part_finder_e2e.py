@@ -160,8 +160,8 @@ with sync_playwright() as pw:
           label: e.querySelector('.tab-label').textContent,
           w: e.getBoundingClientRect().width,
           clipped: e.scrollWidth > e.clientWidth + 1}))""")
-    check("tab bar has 4 tabs (Live/Yards/Parts/Alerts)",
-          [t["label"] for t in tabs] == ["Live", "Yards", "Parts", "Alerts"],
+    check("tab bar has 4 tabs (Cars/Yards/Parts/Alerts)",
+          [t["label"] for t in tabs] == ["Cars", "Yards", "Parts", "Alerts"],
           str(tabs))
     check("no tab label clips at 390px", not any(t["clipped"] for t in tabs),
           str(tabs))
@@ -188,7 +188,7 @@ with sync_playwright() as pw:
         page.wait_for_timeout(300)
         check(f"{t} tab renders after the move",
               page.locator(f"#tab-{t}.active").count() == 1)
-    check("Live tab carries no leftover finder markup",
+    check("Cars tab carries no leftover finder markup",
           page.locator("#tab-live .part-finder").count() == 0)
     ctx.close()
 
