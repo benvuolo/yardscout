@@ -434,11 +434,15 @@ CATS = {c["id"]: c for c in _p0["categories"]}
 PC = js.INTERCHANGE_PART_CATEGORIES
 
 check("payload ships schemaVersion 2", _p0["schemaVersion"] == 2)
-check("25 P0 categories ship", len(CATS) == 25, str(len(CATS)))
+check("29 categories ship (25 P0 + 4 intake/P1 lights-up)",
+      len(CATS) == 29, str(len(CATS)))
 _P0_NEW = ["engine-assembly", "ignition-coils", "transmission-auto", "ecm",
            "radio", "front-seats", "door-front", "fender", "hood",
            "bumper-front", "grille", "trunk-lid", "liftgate"]
 check("all 13 new categories present", all(c in CATS for c in _P0_NEW))
+_INTAKE_NEW = ["intake-manifold", "airbox", "door-rear", "bumper-rear"]
+check("intake + P1 lights-up categories present",
+      all(c in CATS for c in _INTAKE_NEW))
 
 # Rule classes (spec §3): A=engine, B=body, C=combo, D=exact.
 check("engine assembly + coils are class A (engine kind)",
@@ -554,6 +558,81 @@ _gen_keys = {(mk.lower(), js._squash_model(md, mk))
 check("every generation row survives model normalization (squash-stable)",
       all((mk.lower(), js._squash_model(js.normalize_model(md, mk), mk))
           in _gen_keys for mk, md, _ in js.MODEL_GENERATIONS))
+
+# =========================================================================
+# Intake system + P1 lights-up (owner request, 2026-10-25)
+# =========================================================================
+check("intake manifold is class A (engine kind)",
+      CATS["intake-manifold"]["kind"] == "engine")
+check("airbox + rear door + rear bumper are class B (body kind)",
+      all(CATS[c]["kind"] == "body"
+          for c in ("airbox", "door-rear", "bumper-rear")))
+
+# Class A synthesis: every family answers the manifold search, and NO
+# family carries a verified group — no published manifold application list
+# exists in the research notes, so every donor is "Likely fit — verify
+# part number". The doctrine: never invent fitment.
+check("every engine family ships an intake-manifold part",
+      all("intake-manifold" in f["parts"] for f in _p0["engineFamilies"]))
+check("no family claims a verified group for the manifold (no evidence)",
+      all("vg" not in f["parts"]["intake-manifold"]
+          for f in _p0["engineFamilies"]))
+
+# Mandatory verify note + rowWarn (the transmission-code-note pattern):
+# within-family manifold variations must be said out loud.
+_im_notes = " ".join(CATS["intake-manifold"]["notes"]).lower()
+check("manifold notes flag California emissions + throttle-type splits",
+      "california" in _im_notes and "throttle" in _im_notes)
+check("manifold rowWarn demands the casting/part-number check",
+      "casting" in CATS["intake-manifold"]["rowWarn"])
+
+# Token hygiene (spec §6.3 hazard class):
+check("manifold never quotes a bare intake/manifold substring",
+      "intake" not in PC["intake-manifold"]["priceTokens"]
+      and "manifold" not in PC["intake-manifold"]["priceTokens"])
+check("rear door never substring-matches GLASS DOOR REAR",
+      all(t not in "glass door rear"            # "="-prefixed = exact match,
+          for t in PC["door-rear"]["priceTokens"]  # immune by definition
+          if not t.startswith("=")))
+check("rear bumper never quotes a bare rear-bumper substring (REINFORC rows)",
+      "rear bumper" not in PC["bumper-rear"]["priceTokens"]
+      and "bumper" not in PC["bumper-rear"]["priceTokens"])
+check("rear panel clones carry the paint rowWarn",
+      "paint" in CATS["door-rear"]["rowWarn"]
+      and "paint" in CATS["bumper-rear"]["rowWarn"])
+check("airbox note says engine-specific (platform claim stays honest)",
+      "engine" in " ".join(CATS["airbox"]["notes"]).lower())
+
+# Part-picker synonym contract: the app's suggest filter is
+# label.includes(q) || tokens.some(t => t.includes(q)) — all five owner
+# synonyms must surface an intake category.
+def _suggest_hits(q):
+    return [c["id"] for c in _p0["categories"]
+            if q in c["label"].lower()
+            or any(q in t for t in c["tokens"])]
+
+check("'intake' finds both intake categories",
+      {"intake-manifold", "airbox"} <= set(_suggest_hits("intake")))
+for _q, _want in [("airbox", "airbox"), ("air box", "airbox"),
+                  ("air cleaner", "airbox"),
+                  ("intake manifold", "intake-manifold")]:
+    check(f"'{_q}' finds {_want}", _want in _suggest_hits(_q),
+          str(_suggest_hits(_q)))
+
+# Acceptance fixture (owner, 2026-10-25): 1998 Toyota 4Runner 'intake'.
+# Manifold: both 3rd-gen families answer, both Likely (no vg).
+_r98_fams = [f for f in _p0["engineFamilies"]
+             if "intake-manifold" in f["parts"]
+             and any(js._app_matches(tuple(a[:4]), 1998, "Toyota", "4Runner")
+                     for a in f["apps"])]
+check("1998 4Runner manifold -> 3RZ + 5VZ families (chip chooser)",
+      {f["id"] for f in _r98_fams} == {"toyota-rz", "toyota-5vz"},
+      str([f["id"] for f in _r98_fams]))
+check("1998 4Runner manifold donors are all Likely (no vg shipped)",
+      all("vg" not in f["parts"]["intake-manifold"] for f in _r98_fams))
+# Airbox: class B rides the 3rd-gen window — 1998 donor pool is 1996-2002.
+check("1998 4Runner airbox window is the 3rd gen (1996-2002)",
+      _gen_win("Toyota", "4Runner", 1998) == (1996, 2002))
 
 # Browse mode (2026-10-23): engine-class categories browse by FAMILY data
 # (select a family, donors by application list + decode) — they must not

@@ -7047,6 +7047,84 @@ INTERCHANGE_PART_CATEGORIES: dict[str, dict] = {
                   "and camera variants differ within a generation — match "
                   "yours before pulling."],
         "rowWarn": "match paint code + glass/wiper/camera variant"},
+    # ---- Intake system + P1 lights-up (owner request, 2026-10-25) ---------
+    # Intake manifold: class A (engine-family), rides the 177 families the
+    # way ignition coils do — zero new fitment research. NO family carries a
+    # published manifold application list yet, so no vg anywhere: every
+    # donor ships "Likely fit — verify part number". Manifolds split WITHIN
+    # families (California emissions, drive-by-wire vs cable throttle,
+    # upper/lower plenum), so the category carries a mandatory verify note +
+    # rowWarn exactly the way transmissions carry their case-code note.
+    # Verified arrives later per family via casting-number lists (spec §2).
+    "intake-manifold": {
+        "label": "Intake manifold", "kind": "engine",
+        "tokens": ["intake manifold", "intake plenum"], "priceTokens": [
+            # Ordered (spec §6.3): explicit manifold rows, then the pnp
+            # word-order variant, plenum rows, upullr's combined row, and an
+            # exact bare-MANIFOLD row last. Never a bare "intake" or
+            # "manifold" substring — those sweep up COLD AIR INTAKE, intake
+            # sensors and EXHAUST MANIFOLD rows.
+            "intake manifold", "manifold intake", "intake plenum",
+            "intake/exh manifold", "=manifold"],
+        "notes": [
+            "Manifolds split WITHIN engine families — California-emissions "
+            "cars, drive-by-wire vs cable-throttle years and upper vs lower "
+            "plenum designs use different castings on otherwise-identical "
+            "engines. Match the casting/part number before buying.",
+            "Composite (plastic) manifolds crack and warp with age — check "
+            "the gasket faces and vacuum fittings before you pull."],
+        "rowWarn": "match the manifold casting/part number — emissions "
+                   "package and throttle type split manifolds within a "
+                   "family"},
+    # Air intake / airbox: class B (platform) — the OEM airbox is tied to
+    # the body/platform generation like doors and fenders, and yard sheets
+    # price it as a body-side row (AIR CLEANER HOUSING). Engine choice still
+    # shapes the inlet tract, so the category-level note says so.
+    "airbox": {
+        "label": "Air intake / airbox", "kind": "body",
+        "tokens": ["airbox", "air box", "air cleaner"], "priceTokens": [
+            # Housing/assembly rows first; the generic "air cleaner" last
+            # (it can land on a LID/HOSE row where that's all a sheet has —
+            # the quoted row name shows in the tooltip).
+            "air cleaner housing", "air filter housing",
+            "air cleaner assembly", "air box - complete", "air cleaner box",
+            "air filter box", "=air cleaner", "air cleaner"],
+        "notes": ["Airboxes are usually engine-specific within a generation "
+                  "— match your engine size, and move your MAF/IAT sensor "
+                  "and a fresh filter over before installing."],
+        "rowWarn": "match engine size + MAF/sensor fittings"},
+    # Rear door / rear bumper: P1 categories that are pure clones of the
+    # shipped front-door/front-bumper mechanics (class B, generation
+    # windows, paint note) — zero new research, 20+/22 sheets price them.
+    "door-rear": {
+        "label": "Rear door", "kind": "body",
+        "tokens": ["rear door"], "priceTokens": [
+            # No bare "door rear"/"rear door" substrings: "GLASS DOOR REAR"
+            # (60 sheet rows) would price door glass as a door. Exact rows
+            # where sheets split by side, then the side-agnostic ladder the
+            # front-door category uses.
+            "door rear w/glass", "door rear no glass", "=rear door",
+            "=door - rear", "door complete", "door assy w/hinges",
+            "door assy - complete", "door bare", "door (shell", "door (any",
+            "door (manual", "door (w-power", "door car / van", "=door"],
+        "notes": ["Color code must match or plan to paint — check the "
+                  "door-jamb sticker on both cars. Rear doors never "
+                  "interchange with fronts, and sedan vs extended-cab vs "
+                  "crew-cab rear doors differ within one generation."],
+        "rowWarn": "match the paint code on the door-jamb sticker"},
+    "bumper-rear": {
+        "label": "Rear bumper", "kind": "body",
+        "tokens": ["rear bumper"], "priceTokens": [
+            # No bare "rear bumper" substring: it lands on REAR BUMPER
+            # REINFORC/END filler rows. Explicit rear rows, then the
+            # side-agnostic cover/steel rows most sheets price.
+            "bumper assembly rear", "rr bumper", "rear bumper cover",
+            "rear bumper truck", "bumper cover", "bumper steel or aluminum",
+            "=bumper"],
+        "notes": ["Color code must match or plan to paint. Park-sensor and "
+                  "tow-hitch cutouts differ by trim — count the holes "
+                  "before you pull."],
+        "rowWarn": "match paint code + sensor/hitch cutouts"},
 }
 
 # Default caveat lines — families override where the family has a sharper one.
@@ -11780,6 +11858,16 @@ def build_interchange_payload() -> dict:
         parts["ignition-coils"] = {
             "note": "same family, but coil packs changed within model "
                     "years — match the coil part number before buying"}
+        # Intake manifolds (2026-10-25): same blanket mechanics as coils —
+        # the family answers the search, but NO family has a published
+        # manifold application list yet, so no vg is ever attached: every
+        # donor row stays "Likely fit — verify part number". Honest per
+        # the owner's doctrine: we never invent fitment.
+        parts["intake-manifold"] = {
+            "note": "same family, but manifolds split within it — "
+                    "California-emissions cars and drive-by-wire vs "
+                    "cable-throttle years use different castings; match "
+                    "the casting/part number before buying"}
         fams.append({
             "id": fam_id,
             "label": fam["display"],
