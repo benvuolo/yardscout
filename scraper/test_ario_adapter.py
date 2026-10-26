@@ -200,6 +200,15 @@ try:
           got == {"foss-wilson-stk00001": "1FAHP3F29CL123456"} and vs[1]["vin"] == "1FAHP3F29CL123456", str(got))
     check("backfill skipped the rest under the cap", vs[2]["vin"] == "" and sum(1 for f, _ in calls if f == "get-inventory-item") == 1)
 
+    ghost = js._ario_live_items_to_vehicles(
+        [item(7, date="2017-11-12"), item(8, date="2026-10-01"), {**item(9), "date_placed": ""}],
+        yard=yard, source="foss", id_prefix="foss-wilson-", vin_map={})
+    check("live rows older than ARIO_LIVE_MAX_AGE_DAYS are dropped; undated rows kept",
+          [v["id"] for v in ghost] == ["foss-wilson-stk00008", "foss-wilson-stk00009"], str([v["id"] for v in ghost]))
+    since = js._ario_live_items_to_vehicles([item(7, date="2026-03-01"), item(8, date="2026-10-01")],
+                                            yard={**yard, "added_since": "2026-05-01"}, source="foss", id_prefix="foss-wilson-", vin_map={})
+    check("live rows honour added_since", [v["id"] for v in since] == ["foss-wilson-stk00008"])
+
     js._ario_live_post = make_fake_post(PAGES, {}, fail_at=3)
     trunc = []
     items = js._ario_live_yard_items(FakeSession(), "foss-wilson", truncated=trunc)

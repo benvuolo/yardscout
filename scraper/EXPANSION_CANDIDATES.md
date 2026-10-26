@@ -507,3 +507,31 @@ over fast (Ryan's ~81-day lifespan: 1%; Warner Robins 7%), high where they
 don't (Havelock/Birmingham 82–83%). The rest fill via get-inventory-item
 at 600/scan (~2 days). Merged to main; the first scheduled scan after the
 merge publishes the 13 new yards and un-freezes Ryan's.
+
+#### 8.6.4 Wave 2 (same day) — which §8.1 candidates are actually on the live backend
+
+Browser check of all 27 remaining §8.1 orgs against `ario.autorecycler.io/yard/{slug}`:
+
+**Live (wired, branch `feat/ario-wave2`): 14 yards** — UAPI ×6 (N/S Shreveport,
+Bossier City, Monroe, Alexandria, Texarkana), Auto Parts U Pull ×2 (Shelby
+1,630 / Lincolnton 857), L and L (1,437, set-outs today), A & A Bradenton,
+JDM Maysville, Samson LA, Southside Houston, Santa Maria (3,297 rows but
+newest 2026-08-24 — never hides departures, so published with an
+`added_since` cutoff). JDM/Southside show no recent set-outs on the page's
+first view; the CI probe's per-yard newest date is the gate before merge.
+
+**Not on the live backend ("Yard not found"): 13** — A-1 Metals, A-Z U-Pull-It,
+Bevell's, Blue & Gold, Cash-N-Carry, Dis & Dat, Highway 82, Kiker's, Southern
+Auto Salvage, TAS ×2, Yank-A-Part, Young's. Same pattern as Paul's/Carolina:
+Bubble org exists, rows are a stale dump. Registry stays "candidate"; each
+needs its own-site source before it can be wired.
+
+CI probe (run 40396524689): 27,779 cars / 28 yards. **Merged: 11 wave-2 yards**
+— UAPI ×6 (580–886 each, set-outs Oct 20–23), Auto Parts U Pull ×2 (1,630 /
+857), L and L (1,437, set-outs the day of the probe), A & A (1,117), Samson
+(349). **Dropped before merge:** JDM (newest 2026-08-26), Southside
+(2026-06-16, 84 undated), Santa Maria (2026-08-24) — live backend, but no
+arrivals for 2+ months. Several yards carry ghost rows never hidden (A & A
+oldest 2017, Lincolnton/L and L 2021), so the live adapter now drops dated
+rows older than `ARIO_LIVE_MAX_AGE_DAYS` (365). New yards start at 0% VIN
+(no legacy seed); the 600/scan detail backfill fills them over ~3 days.

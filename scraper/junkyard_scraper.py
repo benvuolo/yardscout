@@ -17049,6 +17049,68 @@ ARIO_CHAINS: dict[str, dict] = {
              "lat": 34.8731, "lng": -76.9287},
         ],
     },
+    # --- Wave 2 (2026-10-26, same day): the §8.1 singles/chains that answer
+    # on the LIVE backend with recent set-outs. 13 others are "Yard not
+    # found" there and 3 more (JDM, Southside, Santa Maria) have had no
+    # arrivals for 2+ months — all listed in EXPANSION_CANDIDATES.md §8.6.4.
+    "uapi": {
+        "label": "UAPI / U-Auto-Pull-It (LA/TX)",
+        "yards": [
+            {"slug": "uapi", "code": "nshreveport",
+             "name": "UAPI - North Shreveport", "city": "Shreveport", "state": "LA",
+             "lat": 32.5288, "lng": -93.7757},
+            {"slug": "uapi-south-shreveport", "code": "sshreveport",
+             "name": "UAPI - South Shreveport", "city": "Shreveport", "state": "LA",
+             "lat": 32.5288, "lng": -93.7757},
+            {"slug": "uapi-bossier-city", "code": "bossier",
+             "name": "UAPI - Bossier City", "city": "Bossier City", "state": "LA",
+             "lat": 32.5288, "lng": -93.7757},
+            {"slug": "uapi-monroe", "code": "monroe",
+             "name": "UAPI - Monroe", "city": "Monroe", "state": "LA",
+             "lat": 32.475, "lng": -92.0835},
+            {"slug": "uapi-alexandria", "code": "alexandria",
+             "name": "UAPI - Alexandria", "city": "Alexandria", "state": "LA",
+             "lat": 31.3514, "lng": -92.5322},
+            {"slug": "uapi-texarkana", "code": "texarkana",
+             "name": "UAPI - Texarkana", "city": "Wake Village", "state": "TX",
+             "lat": 33.4435, "lng": -94.1442},
+        ],
+    },
+    "autopartsupull": {
+        "label": "Auto Parts U Pull (NC)",
+        "yards": [
+            {"slug": "auto-parts-u-pull-shelby-nc", "code": "shelby",
+             "name": "Auto Parts U Pull - Shelby", "city": "Shelby", "state": "NC",
+             "lat": 35.2718, "lng": -81.5073},
+            {"slug": "auto-parts-u-pull-nc", "code": "lincolnton",
+             "name": "Auto Parts U Pull - Lincolnton", "city": "Lincolnton", "state": "NC",
+             "lat": 35.5182, "lng": -81.2001},
+        ],
+    },
+    "landl": {
+        "label": "L and L U-Pull Auto Parts (Kings Mountain NC)",
+        "yards": [
+            {"slug": "l-and-l-u-pull", "code": "kingsmountain",
+             "name": "L and L U-Pull Auto Parts", "city": "Kings Mountain", "state": "NC",
+             "lat": 35.2547, "lng": -81.4565},
+        ],
+    },
+    "aaauto": {
+        "label": "A & A Auto Recycling (Bradenton FL)",
+        "yards": [
+            {"slug": "a-a-auto-recycling", "code": "bradenton",
+             "name": "A & A Auto Recycling", "city": "Bradenton", "state": "FL",
+             "lat": 27.4434, "lng": -82.5544},
+        ],
+    },
+    "samson": {
+        "label": "Samson Auto Salvage (Los Angeles CA)",
+        "yards": [
+            {"slug": "samson-auto-salvage", "code": "losangeles",
+             "name": "Samson Auto Salvage", "city": "Los Angeles", "state": "CA",
+             "lat": 33.9648, "lng": -118.2328},
+        ],
+    },
     # NOT HERE (2026-10-26, see EXPANSION_CANDIDATES.md §8.6.2): Paul's Auto
     # Yard ×10 and Carolina Pick N Pull ×3 exist in the legacy Bubble org
     # table but are "Yard not found" on the live backend, and their Bubble
@@ -17290,6 +17352,10 @@ ARIO_LIVE_KEY = "sb_publishable_njLlN9YEWSrEvkZ4ZS2fdQ_l7vkJI-C"
 ARIO_LIVE_PAGE = int(os.environ.get("ARIO_LIVE_PAGE", "40"))  # the page itself asks for 25/40
 ARIO_LIVE_DELAY_SEC = 2.0
 ARIO_LIVE_RATE_LIMIT_SLEEP = 30
+# Some Ario yards never hide departed cars (A & A's oldest row: 2017; Santa
+# Maria: 2024). No u-pull keeps a car a year, so dated rows older than this
+# are ghosts and are dropped; undated rows are kept.
+ARIO_LIVE_MAX_AGE_DAYS = 365
 
 
 def _ario_live_post(session: "requests.Session", fn: str, body: dict) -> dict | None:
@@ -17369,7 +17435,13 @@ def _ario_live_items_to_vehicles(items: list[dict], *, yard: dict, source: str,
     the VIN backfill can ask get-inventory-item for the ones still missing."""
     vehicles: list[dict] = []
     dupes: dict[str, int] = {}
+    added_since = str(yard.get("added_since") or "")
+    age_floor = (datetime.now(timezone.utc).date()
+                 - timedelta(days=ARIO_LIVE_MAX_AGE_DAYS)).isoformat()
     for it in items:
+        date_iso = str(it.get("date_placed") or "")[:10]
+        if date_iso and (date_iso < age_floor or (added_since and date_iso < added_since)):
+            continue
         try:
             year_i = int(it.get("year") or 0)
         except (TypeError, ValueError):
@@ -17393,7 +17465,7 @@ def _ario_live_items_to_vehicles(items: list[dict], *, yard: dict, source: str,
             "make": _utpap_format_label(make_s),
             "model": _utpap_format_label(model_s),
             "row": str(it.get("row") or "").strip(),
-            "dateAdded": str(it.get("date_placed") or "")[:10],
+            "dateAdded": date_iso,
             **({"_color": color} if color else {}),
             "_location": yard["name"],
             "_city": yard["city"],
