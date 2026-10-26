@@ -19354,6 +19354,91 @@ def _write_inventory_meta(payload: dict) -> None:
         separators=(",", ":")))
 
 
+LANDED_DAYS = 7
+LANDED_PER_MAKE = 250
+
+
+def _write_landed_json(payload: dict) -> None:
+    """docs/data/landed.json — what set out in the last LANDED_DAYS days, per
+    make, for the public /landed/<make> pages rendered by the site Worker
+    (backend/site-proxy/src/share.js). One compact file instead of one HTML
+    page per make so the 4-hourly scan commit doesn't balloon the repo.
+    Rows: [year, make, model, row, dateAdded, key, yardIdx] (key = VIN or id,
+    the same key the app's #car= link and /car/<key> use)."""
+    from datetime import date as _date, timedelta as _td
+    fields = payload.get("fields") or []
+    fi = {n: i for i, n in enumerate(fields)}
+    need = ("id", "vin", "year", "make", "model", "row", "dateAdded", "yard")
+    if any(n not in fi for n in need):
+        return
+    cutoff = (_date.today() - _td(days=LANDED_DAYS)).isoformat()
+    makes: dict[str, dict] = {}
+    for r in payload.get("vehicles") or []:
+        make = str(r[fi["make"]] or "").strip()
+        if not make:
+            continue
+        m = makes.setdefault(make, {"total": 0, "recent": []})
+        m["total"] += 1
+        d = str(r[fi["dateAdded"]] or "")[:10]
+        if d >= cutoff:
+            m["recent"].append([r[fi["year"]], make, r[fi["model"]], r[fi["row"]], d,
+                                r[fi["vin"]] or str(r[fi["id"]]), r[fi["yard"]]])
+    for m in makes.values():
+        m["recent"].sort(key=lambda x: (x[4], str(x[2])), reverse=True)
+        m["recentCount"] = len(m["recent"])
+        del m["recent"][LANDED_PER_MAKE:]
+    yf = payload.get("yardFields") or []
+    yi = {n: i for i, n in enumerate(yf)}
+    # Per-yard rows for the public /yards page: [location, city, state,
+    # carsOnLot, setOutLast7Days].
+    ycount: dict[int, list[int]] = {}
+    for r in payload.get("vehicles") or []:
+        c = ycount.setdefault(r[fi["yard"]], [0, 0])
+        c[0] += 1
+        if str(r[fi["dateAdded"]] or "")[:10] >= cutoff:
+            c[1] += 1
+    yards = [[y[yi["location"]] if "location" in yi else None,
+              y[yi["city"]] if "city" in yi else None,
+              y[yi["state"]] if "state" in yi else None,
+              ycount.get(i, [0, 0])[0], ycount.get(i, [0, 0])[1]]
+             for i, y in enumerate(payload.get("yards") or [])]
+    (DATA_DIR / "landed.json").write_text(json.dumps(
+        {"scrapedAt": payload.get("scrapedAt"), "days": LANDED_DAYS, "yards": yards,
+         "makes": dict(sorted(makes.items()))}, separators=(",", ":")))
+
+
+def _write_yards_added(payload: dict) -> None:
+    """docs/data/yards_added.json — yards first seen by the history DB in the
+    last 90 days (the public /yards page's "recently added" feed, which is
+    also the cue for a local-region post). Best effort: no DB, no file change."""
+    try:
+        from datetime import datetime as _dt, timedelta as _td
+        import db as _db
+        con = _db._connect()
+        rows = con.execute(
+            "SELECT location, city, state, MIN(first_seen) AS fs, COUNT(*) AS n "
+            "FROM vehicles WHERE location IS NOT NULL AND location != '' "
+            "GROUP BY location ORDER BY fs DESC").fetchall()
+        oldest = con.execute("SELECT MIN(first_seen) FROM vehicles").fetchone()[0] or ""
+        con.close()
+    except Exception as e:  # noqa: BLE001
+        print(f"  [yards_added] skipped: {e}", file=sys.stderr)
+        return
+    yf = payload.get("yardFields") or []
+    yi = {n: i for i, n in enumerate(yf)}
+    live = {y[yi["location"]] for y in payload.get("yards") or []} if "location" in yi else set()
+    cutoff = (_dt.now() - _td(days=90)).strftime("%Y-%m-%d")
+    out = []
+    for loc, city, state, fs, n in rows:
+        fs = str(fs or "")[:10]
+        # Yards present when the DB was first created all share its first
+        # scan date — that is a cold-start artifact, not an addition.
+        if loc not in live or fs < cutoff or fs[:10] == str(oldest)[:10]:
+            continue
+        out.append({"location": loc, "city": city, "state": state, "added": fs})
+    (DATA_DIR / "yards_added.json").write_text(json.dumps(out, separators=(",", ":")))
+
+
 def build_inventory_json_payload(vehicles: list[dict], only_matches: bool) -> dict:
     """Wrapper written to inventory_live.json: metadata + vehicle rows."""
     return compact_inventory_v2(output_json(vehicles, only_matches=only_matches))
@@ -20176,6 +20261,8 @@ def main():
                     apply_stale_keep(payload, extras)
                     LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                     _write_inventory_meta(payload)
+                    _write_landed_json(payload)
+                    _write_yards_added(payload)
                     EXTRAS_FILE.write_text(json.dumps(
                         {"version": 1, "scrapedAt": payload["scrapedAt"],
                          "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
@@ -20218,6 +20305,8 @@ def main():
                 apply_stale_keep(payload, extras)
                 LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                 _write_inventory_meta(payload)
+                _write_landed_json(payload)
+                _write_yards_added(payload)
                 EXTRAS_FILE.write_text(json.dumps(
                     {"version": 1, "scrapedAt": payload["scrapedAt"],
                      "extraFields": ["photo", "color", "engine", "trans", "transSrc"],

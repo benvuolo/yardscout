@@ -22,7 +22,43 @@ const DATA_BASE = IS_NATIVE ? 'https://yardscout.io/' : '';
  * Set the site code after creating a (free) account at goatcounter.com.
  * While GOATCOUNTER_CODE is null every track() call is a no-op. */
 const GOATCOUNTER_CODE = null; // e.g. 'yardscout' for https://yardscout.goatcounter.com
+/* UTM attribution: a utm_source link (Reddit post, forum thread, creator)
+ * is remembered for 90 days and stamped onto a short list of funnel events
+ * sent to the API as daily counters — no ids, no IPs (backend/src/attribution.js).
+ * Everything else about analytics stays off unless GOATCOUNTER_CODE is set. */
+const EVENTS_API = 'https://yardscout-api.yardscout.workers.dev/v1/events';
+const FUNNEL_EVENTS = {
+  'first-visit': 'first-visit', 'zip-entered': 'zip-entered', 'part-first-search': 'part-first-search',
+  'watch-created': 'watch-created', 'push-enabled': 'push-enabled', 'native-push-enable': 'push-enabled',
+  'email-alerts-linked': 'push-enabled', 'checkout-start': 'checkout-start', 'iap-subscribe': 'checkout-start',
+  'ent-checkout-start': 'checkout-start', 'iap-purchased': 'pro-converted', 'ent-purchased': 'pro-converted',
+};
+const ATTRIB = (() => {
+  try {
+    const q = new URLSearchParams(location.search);
+    if (q.get('utm_source')) {
+      localStorage.setItem('ys_utm', JSON.stringify({
+        src: q.get('utm_source'), cmp: q.get('utm_campaign') || '', med: q.get('utm_medium') || '', at: Date.now(),
+      }));
+      for (const k of [...q.keys()]) if (k.startsWith('utm_')) q.delete(k);
+      history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : '') + location.hash);
+    }
+    const a = JSON.parse(localStorage.getItem('ys_utm') || 'null');
+    return a && Date.now() - a.at < 90 * 86400000 ? a : null;
+  } catch (e) { return null; }
+})();
 function track(event) {
+  try {
+    const f = FUNNEL_EVENTS[String(event).split('/')[0]];
+    if (f) {
+      const body = JSON.stringify({ e: f, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
+        p: IS_NATIVE ? (IS_ANDROID ? 'android' : 'ios') : 'web' });
+      // text/plain keeps it a "simple" request (no CORS preflight, works from sendBeacon).
+      if (!(navigator.sendBeacon && navigator.sendBeacon(EVENTS_API, new Blob([body], { type: 'text/plain' })))) {
+        fetch(EVENTS_API, { method: 'POST', body, headers: { 'content-type': 'text/plain' }, keepalive: true }).catch(() => {});
+      }
+    }
+  } catch (e) { /* analytics must never break the app */ }
   if (!GOATCOUNTER_CODE) return;
   try {
     if (window.goatcounter && window.goatcounter.count) {
@@ -30,6 +66,7 @@ function track(event) {
     }
   } catch (e) { /* analytics must never break the app */ }
 }
+try { if (!localStorage.getItem('ys_seen')) { localStorage.setItem('ys_seen', '1'); track('first-visit'); } } catch (e) { /* private mode */ }
 if (GOATCOUNTER_CODE) {
   window.goatcounter = { endpoint: 'https://' + GOATCOUNTER_CODE + '.goatcounter.com/count' };
   const gcScript = document.createElement('script');
@@ -4297,7 +4334,7 @@ function pfRunBrowse(s) {
   const nVin = rows.filter(r => r.badge).length;
   out.classList.toggle('pf-vonly-on', pfCat.kind === 'engine' && pfVerifiedOnly);
   out.innerHTML =
-    `<div class="pf-results-head">${headTop} Sorted by distance. Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.</div>`
+    `<div class="pf-results-head">${headTop} Sorted by distance. Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
     + (pfCat.kind === 'engine' ? pfVonlyRowHtml(nVin, rows.length - nVin, 'vin') : '')
     + filterNote
     + (pfCat.notes || []).map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('')
@@ -4310,7 +4347,7 @@ function pfRunBrowse(s) {
       const worthHtml = (!pfCat.noValue && r.hit)
         ? (unlocked
           ? `<span class="pf-ebay" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(r.hit.low)}&ndash;${formatPrice(r.hit.high)}</span>`
-          : `<span class="pf-ebay locked-blur" role="button" onclick="openUpgradeSheet('pf-value')">Used online: ${LOCKED_PRICE_MASK}</span>`)
+          : '')
         : '';
       // Buyer's savings line — only when BOTH sides are real: a published
       // yard price and a value band (Pro; free users would back the band out).
@@ -4531,7 +4568,7 @@ function pfRunSearch() {
   const CAP = 120;
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
-  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>`
+  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
     + pfVonlyRowHtml(nVer, rows.length - nVer, 'fit')
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
     + groupNotes.map(n => `<div class="pf-caveat">${n}</div>`).join('')
@@ -4557,7 +4594,7 @@ function pfRunSearch() {
     const ebayHtml = partRow
       ? (unlocked
         ? `<span class="pf-ebay" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(partRow.low)}&ndash;${formatPrice(partRow.high)}</span>`
-        : `<span class="pf-ebay locked-blur" role="button" onclick="openUpgradeSheet('pf-value')">Used online: ${LOCKED_PRICE_MASK}</span>`)
+        : '')
       : '';
     // Buyer's savings line — both sides real, Pro only (free users would
     // back the blurred band out of price + savings).

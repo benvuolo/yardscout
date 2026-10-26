@@ -20,6 +20,8 @@
  *   GET  /v1/admin/users                          x-admin-secret
  *   POST /v1/admin/digest/run                     x-admin-secret (manual weekly-digest trigger)
  *   GET  /v1/admin/coverage                       x-admin-secret (request counts by key)
+ *   POST /v1/events                               public (UTM funnel counters)
+ *   GET  /v1/admin/attribution                    x-admin-secret (per-source funnel)
  *   POST /v1/admin/coverage/digest/run            x-admin-secret (manual owner-digest trigger)
  *   POST /v1/iap/revenuecat                       RevenueCat webhook auth
  */
@@ -36,6 +38,7 @@ import {
   handleGrant, handleListUsers, handleRevenueCatWebhook,
   handleWaitlistJoin, handleWaitlistList,
 } from './admin.js';
+import { handleEvent, handleAttribution } from './attribution.js';
 import { handleCheckout, handlePortal, handleStripeWebhook } from './billing.js';
 import {
   handleWatchesList, handleWatchCreate, handleWatchDelete,
@@ -136,6 +139,16 @@ async function route(req, env, url, ctx) {
   if (method === 'POST' && path === '/v1/waitlist') {
     if (!rateLimit('wl:ip:' + ip, 10, 3600_000)) return err(429, 'rate_limited', 'Slow down.');
     return handleWaitlistJoin(req, env);
+  }
+
+  /* ----- attribution counters (public, coarse; see attribution.js) ----- */
+  if (method === 'POST' && path === '/v1/events') {
+    if (!rateLimit('ev:ip:' + ip, 60, 60_000)) return err(429, 'rate_limited', 'Slow down.');
+    return handleEvent(req, env);
+  }
+  if (method === 'GET' && path === '/v1/admin/attribution') {
+    const bad = await requireAdmin(req, env); if (bad) return bad;
+    return handleAttribution(req, env);
   }
 
   /* ----- coverage requests (public, Parts tab "ask us to add it") ----- */

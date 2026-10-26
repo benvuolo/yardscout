@@ -37,6 +37,12 @@ async function apiJson(path, ttl) {
   return { status: r.status, data: await r.json() };
 }
 
+const DATA = 'https://benvuolo.github.io/yardscout/data';
+async function dataJson(name, ttl) {
+  const r = await fetch(`${DATA}/${name}`, { cf: { cacheTtl: ttl, cacheEverything: true } });
+  return r.ok ? r.json() : null;
+}
+
 /* Yard set-out dates are plain YYYY-MM-DD strings in the yard's local day;
  * compare against UTC midnight so "today" never reads as day 0 vs day 1
  * depending on the viewer's timezone. */
@@ -107,6 +113,14 @@ h1{font-size:1.75rem;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px;font-
 .list{list-style:none;padding:0;margin:0}.list li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--border)}
 .list li:first-child{border-top:0}.list a{font-weight:600;text-decoration:none;color:var(--text)}.list a:hover{color:var(--accent)}.list .meta{color:var(--dim);font-size:.875rem;white-space:nowrap}
 .gone{border-color:var(--red)}
+h2{font-size:1.1rem;margin:22px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;list-style:none;padding:0;margin:0}
+.grid a{display:block;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--text);font-weight:600}
+.grid a small{display:block;color:var(--dim);font-weight:500}
+form label{display:block;font-size:.8125rem;font-weight:600;color:var(--dim);margin:10px 0 4px}
+form input,form textarea{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);font:inherit;font-size:16px}
+form textarea{min-height:72px}form button{margin-top:14px;cursor:pointer;font:inherit}
+.ok{color:var(--green);font-weight:600}.err{color:var(--red);font-weight:600}
 `;
 
 function layout({ title, desc, canonical, body, status = 200, robots = 'index,follow', cache = 300, ogTitle, type = 'website' }) {
@@ -257,9 +271,104 @@ export async function renderYardSitemap() {
   if (!dir) return new Response('', { status: 503 });
   const iLoc = dir.yardFields.indexOf('location');
   const seen = new Set();
-  const urls = dir.yards.map((y) => slugify(y[iLoc])).filter((s) => s && !seen.has(s) && seen.add(s))
+  const landed = await dataJson('landed.json', 900);
+  const makeUrls = landed ? Object.entries(landed.makes).filter(([, m]) => m.total >= 20)
+    .map(([mk]) => `<url><loc>${SITE}/landed/${slugify(mk)}</loc><changefreq>daily</changefreq></url>`).join('') : '';
+  const urls = `<url><loc>${SITE}/yards</loc><changefreq>daily</changefreq></url><url><loc>${SITE}/landed</loc><changefreq>daily</changefreq></url>`
+    + makeUrls + dir.yards.map((y) => slugify(y[iLoc])).filter((s) => s && !seen.has(s) && seen.add(s))
     .map((s) => `<url><loc>${SITE}/yard/${s}</loc><changefreq>daily</changefreq></url>`).join('');
   return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`, {
     headers: { 'content-type': 'application/xml; charset=utf-8', 'cache-control': 'public, max-age=3600' },
   });
+}
+
+const STATE_NAMES = { AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',DC:'Washington DC' };
+
+/** /yards — public coverage page: every tracked yard by state with counts,
+ * recently added yards, and a request-a-yard form (POSTs to the API's
+ * coverage endpoint with kind=yard). */
+export async function renderYardsPage() {
+  const [landed, added] = await Promise.all([dataJson('landed.json', 900), dataJson('yards_added.json', 900)]);
+  if (!landed) return layout({ title: 'Covered yards — YardScout', desc: 'Self-service yards YardScout tracks.', canonical: SITE + '/yards', status: 503, robots: 'noindex', cache: 60, body: '<div class="card"><h1>Coverage list is briefly unavailable</h1></div>' });
+  const byState = new Map();
+  let totalCars = 0;
+  for (const [loc, city, state, n, recent] of landed.yards) {
+    if (!loc) continue;
+    totalCars += n || 0;
+    const st = state || '—';
+    if (!byState.has(st)) byState.set(st, []);
+    byState.get(st).push({ loc, city, n: n || 0, recent: recent || 0 });
+  }
+  const states = [...byState.keys()].sort((a, b) => (STATE_NAMES[a] || a).localeCompare(STATE_NAMES[b] || b));
+  const stateBlocks = states.map((st) => {
+    const yards = byState.get(st).sort((a, b) => a.loc.localeCompare(b.loc));
+    return `<h2 id="${esc(st)}">${esc(STATE_NAMES[st] || st)} <span style="color:var(--dim);font-weight:500">· ${yards.length} yard${yards.length === 1 ? '' : 's'}</span></h2>
+<ul class="list">${yards.map((y) => `<li><a href="${SITE}/yard/${slugify(y.loc)}">${esc(y.loc)}${y.city ? `<br><span style="font-weight:500;color:var(--dim)">${esc(y.city)}</span>` : ''}</a><span class="meta">${y.n.toLocaleString()} cars · ${y.recent} this week</span></li>`).join('')}</ul>`;
+  }).join('');
+  const newYards = (added || []).slice(0, 20);
+  const stateNav = states.map((st) => `<a href="#${esc(st)}">${esc(st)}</a>`).join(' · ');
+  const desc = `${landed.yards.length} self-service junkyards in ${states.length} states, ${totalCars.toLocaleString()} cars on the lots, scanned every 4 hours. Don't see your yard? Ask and it's usually in within a day or two.`;
+  const body = `<p class="kicker">Coverage</p>
+<h1>${landed.yards.length} self-service yards, every 4 hours</h1>
+<p class="sub">${totalCars.toLocaleString()} cars on the lots across ${states.length} states, as of ${esc(fmtStamp(landed.scrapedAt))}. Coverage is limited to yards that publish their inventory online — phone-only yards can't be tracked.</p>
+<div class="card" id="request"><h2 style="margin-top:0">Missing your yard?</h2>
+<p style="margin:0 0 6px;color:var(--dim)">If it posts inventory online, it's usually added within a day or two.</p>
+<form id="yard-req" onsubmit="return ysReq(event)">
+<label for="yn">Yard name</label><input id="yn" name="yard" required maxlength="80" placeholder="e.g. U-Pull-It Des Moines">
+<label for="yu">Inventory page URL</label><input id="yu" name="url" type="url" maxlength="300" placeholder="https://…">
+<label for="yc">City, state</label><input id="yc" name="city" maxlength="80" placeholder="Des Moines, IA">
+<label for="ye">Your email (optional — we'll tell you when it's live)</label><input id="ye" name="email" type="email" maxlength="254">
+<button class="btn primary" type="submit">Ask for this yard</button> <span id="yard-req-msg" role="status"></span>
+</form></div>
+${newYards.length ? `<h2>Recently added</h2><ul class="list">${newYards.map((y) => `<li><a href="${SITE}/yard/${slugify(y.location)}">${esc(y.location)}${y.city ? `<br><span style="font-weight:500;color:var(--dim)">${esc([y.city, y.state].filter(Boolean).join(', '))}</span>` : ''}</a><span class="meta">added ${esc(fmtDate(y.added))}</span></li>`).join('')}</ul>` : ''}
+<h2>By state</h2><p class="note" style="margin:0 0 6px">${stateNav}</p>
+${stateBlocks}
+<div class="cta"><a class="btn primary" href="${SITE}/">Search near your zip</a><a class="btn" href="${SITE}/landed">What landed this week, by make</a></div>
+${storesLine()}
+<script>
+async function ysReq(e){e.preventDefault();const f=e.target,m=document.getElementById('yard-req-msg');m.textContent='Sending…';m.className='';
+const url=f.url.value.trim(),city=f.city.value.trim();
+try{const r=await fetch('${API}/v1/coverage/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({kind:'yard',part:f.yard.value.trim().slice(0,80),note:[url,city].filter(Boolean).join(' · ').slice(0,500),email:f.email.value.trim()})});
+const j=await r.json().catch(()=>({}));if(r.ok){m.textContent='Got it — thanks. We check requests every day.';m.className='ok';f.reset();}else{m.textContent=j.message||'Could not send — try again.';m.className='err';}}
+catch(err){m.textContent='Could not send — try again.';m.className='err';}return false;}
+</script>`;
+  return layout({ title: 'Covered yards — YardScout', ogTitle: `${landed.yards.length} self-service junkyards tracked by YardScout`, desc, canonical: SITE + '/yards', body, cache: 900 });
+}
+
+/** /landed and /landed/<make-slug> — what set out in the last 7 days, by
+ * make, from docs/data/landed.json (written by every scan). The data-post
+ * engine: "N 3rd-gen 4Runners landed this week" with row + yard, shareable. */
+export async function renderLandedPage(slug) {
+  const landed = await dataJson('landed.json', 900);
+  if (!landed) return layout({ title: 'What landed — YardScout', desc: '', canonical: SITE + '/landed', status: 503, robots: 'noindex', cache: 60, body: '<div class="card"><h1>Briefly unavailable</h1></div>' });
+  const makes = Object.entries(landed.makes).filter(([, m]) => m.total >= 20);
+  const stamp = esc(fmtStamp(landed.scrapedAt));
+  if (!slug) {
+    makes.sort((a, b) => b[1].recentCount - a[1].recentCount);
+    const body = `<p class="kicker">Last ${landed.days} days</p><h1>What landed in the yards this week</h1>
+<p class="sub">Every car that set out at a tracked self-service yard in the last ${landed.days} days, by make. As of ${stamp}.</p>
+<ul class="grid">${makes.map(([mk, m]) => `<li><a href="${SITE}/landed/${slugify(mk)}">${esc(mk)}<small>${m.recentCount} this week · ${m.total.toLocaleString()} on lots</small></a></li>`).join('')}</ul>
+<div class="cta"><a class="btn primary" href="${SITE}/">Search near your zip</a><a class="btn" href="${SITE}/#tab=alerts">Get the weekly recap for a model you want</a></div>${storesLine()}`;
+    return layout({ title: 'What landed in self-service yards this week — YardScout', ogTitle: 'What landed in the junkyards this week', desc: `New set-outs at ${landed.yards.length} self-service yards in the last ${landed.days} days, by make.`, canonical: SITE + '/landed', body, cache: 900 });
+  }
+  slug = decodeURIComponent(slug).toLowerCase();
+  const hit = Object.entries(landed.makes).find(([mk]) => slugify(mk) === slug);
+  if (!hit) return layout({ title: 'Make not found — YardScout', desc: '', canonical: SITE + '/landed', status: 404, robots: 'noindex', cache: 120, body: `<div class="card gone"><h1>No cars of that make on the lists</h1><div class="cta"><a class="btn primary" href="${SITE}/landed">All makes</a></div></div>` });
+  const [mk, m] = hit;
+  const byModel = new Map();
+  for (const r of m.recent) { const k = String(r[2] || '—'); if (!byModel.has(k)) byModel.set(k, []); byModel.get(k).push(r); }
+  const models = [...byModel.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+  const yardName = (i) => (landed.yards[i] || [])[0] || '';
+  const yardState = (i) => (landed.yards[i] || [])[2] || '';
+  const blocks = models.map(([model, rows]) => `<h2>${esc(mk)} ${esc(model)} <span style="color:var(--dim);font-weight:500">· ${rows.length}</span></h2>
+<ul class="list">${rows.slice(0, 40).map((r) => `<li><a href="${SITE}/car/${encodeURIComponent(r[5])}">${esc(r[0])} ${esc(mk)} ${esc(model)}<br><span style="font-weight:500;color:var(--dim)">${esc(yardName(r[6]))}${yardState(r[6]) ? ', ' + esc(yardState(r[6])) : ''}</span></a><span class="meta">${r[3] ? 'Row ' + esc(r[3]) + ' · ' : ''}${esc(fmtDate(r[4]))}</span></li>`).join('')}${rows.length > 40 ? `<li class="note">+ ${rows.length - 40} more in the app</li>` : ''}</ul>`).join('');
+  const truncated = m.recentCount > m.recent.length ? `<p class="note">Showing the newest ${m.recent.length} of ${m.recentCount} set-outs; the full list is in the app.</p>` : '';
+  const desc = `${m.recentCount} ${mk} set out at self-service yards in the last ${landed.days} days (${m.total.toLocaleString()} on the lots right now), with row numbers and yards. As of ${fmtStamp(landed.scrapedAt)}.`;
+  const body = `<p class="kicker">Last ${landed.days} days · <a href="${SITE}/landed">all makes</a></p>
+<h1>${m.recentCount} ${esc(mk)}${m.recentCount === 1 ? '' : 's'} landed in self-service yards this week</h1>
+<p class="sub">${m.total.toLocaleString()} ${esc(mk)} on the lots right now across ${landed.yards.length} yards. Cars typically last about 70 days before the crusher, busy yards under three weeks — if one you want is on this list, your window is short.</p>
+${truncated}${blocks}
+<div class="cta"><a class="btn primary" href="${SITE}/#tab=alerts">Alert me when a ${esc(mk)} I want lands near me</a><a class="btn" href="${SITE}/">Search near your zip</a></div>${storesLine()}
+<p class="note">Straight from each yard's published list, refreshed every 4 hours. Row numbers and dates are the yard's; call ahead before a long drive.</p>`;
+  return layout({ title: `${mk}: what landed in self-service yards this week — YardScout`, ogTitle: `${m.recentCount} ${mk}${m.recentCount === 1 ? '' : 's'} landed in junkyards this week`, desc, canonical: `${SITE}/landed/${slug}`, body, cache: 900 });
 }

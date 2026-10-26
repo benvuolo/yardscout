@@ -29,3 +29,6 @@ backend/test/.out/
 node_modules/
 native/www/
 scraper/.out-show-filter/
+
+# Claude Code agent worktrees
+.claude/worktrees/

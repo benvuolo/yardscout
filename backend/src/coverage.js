@@ -16,7 +16,7 @@
 import { json, err, isoNow } from './util.js';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const VALID_KINDS = new Set(['car', 'engine', 'part']);
+const VALID_KINDS = new Set(['car', 'engine', 'part', 'yard']);
 
 /* Mirrors the app's pfSquash: lowercase alphanumerics only, so "F-150",
  * "F150" and "f 150" aggregate under one request_key. */
@@ -30,15 +30,17 @@ export async function handleCoverageRequest(req, env) {
   const clip = (v, n) => String(v == null ? '' : v).trim().slice(0, n);
 
   const kind = clip(body.kind, 16);
-  if (!VALID_KINDS.has(kind)) return err(400, 'bad_kind', 'kind must be car, engine, or part.');
+  if (!VALID_KINDS.has(kind)) return err(400, 'bad_kind', 'kind must be car, engine, part, or yard.');
 
   const year = Number.isFinite(+body.year) && +body.year >= 1900 && +body.year <= 2100
     ? Math.floor(+body.year) : null;
   const make = clip(body.make, 40) || null;
   const model = clip(body.model, 60) || null;
   const part = clip(body.part, 80) || null;
-  if (!part && !make && !model) {
-    return err(400, 'bad_request', 'Tell us the part or the car — an empty request is nothing to add.');
+  // kind=yard (public /yards page): the yard's name rides in `part`, its
+  // inventory URL + city/state in `note`.
+  if (kind === 'yard' ? !part : (!part && !make && !model)) {
+    return err(400, 'bad_request', kind === 'yard' ? 'Tell us the yard\'s name.' : 'Tell us the part or the car — an empty request is nothing to add.');
   }
 
   const zipRaw = clip(body.zip, 10);

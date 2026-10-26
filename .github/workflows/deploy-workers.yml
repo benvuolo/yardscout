@@ -1,0 +1,69 @@
+# Deploy the Cloudflare Workers from CI so no Mac session is needed:
+#   yardscout-api   (backend/)            — D1 migrations, then deploy
+#   yardscout-site  (backend/site-proxy/) — yardscout.io proxy + share pages
+#
+# Runs on every push to main that touches backend/, or by hand.
+# Needs two repository secrets (see README-BACKEND.md → "Deploying from CI"):
+#   CLOUDFLARE_API_TOKEN   API token with "Workers Scripts: Edit", "D1: Edit",
+#                          "Workers KV Storage: Edit" and "Workers Routes: Edit"
+#                          (Account → API Tokens → Create → "Edit Cloudflare
+#                          Workers" template, then add D1 Edit)
+#   CLOUDFLARE_ACCOUNT_ID  the account id shown on the Workers overview page
+# Worker secrets (STRIPE_*, APNS_*, …) are NOT touched: they live in
+# Cloudflare and survive deploys.
+name: Deploy Workers
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Which Worker"
+        type: choice
+        options: [both, api, site]
+        default: both
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - ".github/workflows/deploy-workers.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-workers
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      TARGET: ${{ github.event.inputs.target || 'both' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check secrets
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "::error::CLOUDFLARE_API_TOKEN secret missing"; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "::error::CLOUDFLARE_ACCOUNT_ID secret missing"; exit 1; }
+      - name: Deploy yardscout-api (migrations + worker)
+        if: env.TARGET == 'both' || env.TARGET == 'api'
+        working-directory: backend
+        run: |
+          node --check src/index.js
+          npx --yes wrangler@4 d1 migrations apply yardscout-db --remote
+          npx --yes wrangler@4 deploy
+      - name: Deploy yardscout-site
+        if: env.TARGET == 'both' || env.TARGET == 'site'
+        working-directory: backend/site-proxy
+        run: |
+          node --check src/index.js
+          npx --yes wrangler@4 deploy
+      - name: Smoke
+        run: |
+          curl -sfS https://yardscout-api.yardscout.workers.dev/v1/health
+          curl -sfS -o /dev/null -w "site %{http_code}\n" https://yardscout.io/
