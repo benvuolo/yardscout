@@ -12281,6 +12281,35 @@ def _vpic_row_to_decode(row: dict) -> dict:
     }
 
 
+def _vpic_incremental_queue(
+    vin_newest: dict[str, str],
+    cached: dict[str, dict],
+    cap: int,
+) -> tuple[list[str], list[str], int, int]:
+    """Split this scan's VINs into the two decode queues, newest-first.
+
+    Never-seen VINs always go first (they have NO data at all). Any cap
+    budget left over re-decodes OLD-SCHEMA cache entries: payloads stored
+    before the engine/transmission summary shipped (2026-10 audit found
+    57k live VINs riding them) lack the 'engine' key entirely, and since
+    cached VINs normally never re-decode, they'd stay engine-silent forever
+    — which keeps their donors at "Likely fit" / "engine not confirmed" in
+    the part-first search. VINs are immutable, so a fresh decode of the same
+    VIN is strictly more data, never different data.
+
+    Returns (new_todo, upgrade_todo, n_new_total, n_stale_total).
+    """
+    uncached = [vn for vn in vin_newest if vn not in cached]
+    uncached.sort(key=lambda vn: vin_newest[vn], reverse=True)
+    stale = [vn for vn in vin_newest
+             if vn in cached and isinstance(cached[vn], dict)
+             and "engine" not in cached[vn]]
+    stale.sort(key=lambda vn: vin_newest[vn], reverse=True)
+    todo = uncached[:cap]
+    upgrade_todo = stale[:max(0, cap - len(todo))]
+    return todo, upgrade_todo, len(uncached), len(stale)
+
+
 def _decode_vpic_batch(vins: list[str]) -> None:
     """Decode via vPIC's DecodeVINValuesBatch POST (50 VINs per call) into
     _VPIC_CACHE. ~50x fewer HTTP requests than per-VIN GETs — the per-VIN
@@ -18347,6 +18376,9 @@ def enrich_vehicles(
         # persistent SQLite cache with zero API calls; only never-seen VINs
         # are decoded, newest arrivals first, capped per run so the initial
         # backlog drains across scheduled scans without blowing up CI time.
+        # Leftover cap budget re-decodes OLD-SCHEMA cache entries (see
+        # _vpic_incremental_queue) so they gain the engine/transmission
+        # summaries the fitment tiers depend on.
         try:
             import db as _db
         except ImportError:
@@ -18362,32 +18394,48 @@ def enrich_vehicles(
                 d = str(v.get("dateAdded", "") or "")
                 if d > vin_newest.get(vn, ""):
                     vin_newest[vn] = d
-        uncached = [vn for vn in vin_newest if vn not in cached]
-        uncached.sort(key=lambda vn: vin_newest[vn], reverse=True)
         cap = max(0, int(os.environ.get("VPIC_MAX_PER_RUN", "5000")))
-        todo = uncached[:cap]
+        todo, upgrade_todo, n_new, n_stale = _vpic_incremental_queue(
+            vin_newest, cached, cap)
         print(
             f"  NHTSA VPIC incremental: {len(vin_newest)} unique VINs in scan, "
-            f"{len(cached)} cached, {len(uncached)} new; decoding {len(todo)} this run "
+            f"{len(cached)} cached, {n_new} new, {n_stale} old-schema; "
+            f"decoding {len(todo)} new + {len(upgrade_todo)} upgrades this run "
             f"(cap {cap}, newest first, batches of {VPIC_BATCH_SIZE})...",
             file=sys.stderr,
         )
-        if todo:
-            _decode_vpic_batch(todo)
+        if todo or upgrade_todo:
+            _decode_vpic_batch(todo + upgrade_todo)
             fresh = {vn: _VPIC_CACHE[vn] for vn in todo if _VPIC_CACHE.get(vn) is not None}
             failed = len(todo) - len(fresh)
             added = _db.store_vin_decodes(fresh, _iso_utc_z())
+            # Schema upgrades overwrite their old rows — but only when the
+            # fresh decode actually carries the new fields ('engine' is always
+            # present post-upgrade, possibly empty). A failed batch leaves the
+            # old payload in _VPIC_CACHE, which must NOT clobber decoded_at.
+            upgraded_rows = {vn: _VPIC_CACHE[vn] for vn in upgrade_todo
+                             if isinstance(_VPIC_CACHE.get(vn), dict)
+                             and "engine" in _VPIC_CACHE[vn]}
+            upgraded = _db.store_vin_decodes(upgraded_rows, _iso_utc_z(), replace=True)
             print(
-                f"  VPIC incremental: {added} decodes cached this run"
-                + (f", {failed} failed (will retry next run)" if failed else ""),
+                f"  VPIC incremental: {added} new decodes cached, "
+                f"{upgraded} old-schema payloads upgraded this run"
+                + (f", {failed} new failed (will retry next run)" if failed else ""),
                 file=sys.stderr,
             )
-            # Disaster-insurance export to git (only when grown enough — see db.py).
-            if _db.export_vin_decodes_gz(DATA_DIR / "vin_decodes.json.gz"):
+            # Disaster-insurance export to git (only when grown enough — see
+            # db.py). Force one export when the upgrade queue just drained, so
+            # the committed backup stops carrying engine-less payloads.
+            drain_done = bool(upgraded_rows) and len(upgrade_todo) >= n_stale
+            if _db.export_vin_decodes_gz(DATA_DIR / "vin_decodes.json.gz",
+                                         force=drain_done):
                 print("  VPIC incremental: refreshed docs/data/vin_decodes.json.gz backup", file=sys.stderr)
-        remaining = max(0, len(uncached) - len(todo))
+        remaining = max(0, n_new - len(todo))
         if remaining:
             print(f"  VPIC incremental: {remaining} VINs still queued for future runs", file=sys.stderr)
+        remaining_up = max(0, n_stale - len(upgrade_todo))
+        if remaining_up:
+            print(f"  VPIC incremental: {remaining_up} old-schema payloads still queued for upgrade", file=sys.stderr)
         for v in vehicles:
             vn = _normalize_vin(v.get("vin", ""))
             # Cache-only lookup: never trigger a network call here, so vehicles
@@ -19375,8 +19423,9 @@ def main():
         "--decode-vins-incremental",
         action="store_true",
         help="Trim-aware matching using the persistent VIN decode cache (inventory_history.db): "
-             "cached VINs cost zero API calls; only never-seen VINs are decoded, newest arrivals "
-             "first, capped per run by VPIC_MAX_PER_RUN (default 5000)",
+             "cached VINs cost zero API calls; never-seen VINs are decoded first (newest arrivals "
+             "first), then leftover cap budget upgrades old-schema cache entries that predate the "
+             "engine/transmission summary, all capped per run by VPIC_MAX_PER_RUN (default 5000)",
     )
     parser.add_argument(
         "--decode-vins-profit-top",

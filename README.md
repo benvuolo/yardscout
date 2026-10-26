@@ -377,10 +377,14 @@ Every scheduled scan runs `--decode-vins-incremental`:
   `scraper/inventory_history.db` (persisted between CI runs by the Actions
   cache). VINs are immutable, so entries never expire — a previously-seen VIN
   costs zero API calls forever.
-- **Capped drain**: only never-seen VINs hit the NHTSA vPIC API, newest
-  arrivals first, capped by `VPIC_MAX_PER_RUN` (CI uses 5000). The initial
-  backlog drains across successive 6-hour runs; steady-state runs only decode
-  the day's new arrivals.
+- **Capped drain**: never-seen VINs hit the NHTSA vPIC API first, newest
+  arrivals first; leftover cap budget re-decodes old-schema cache entries
+  that predate the engine/transmission summary (they'd otherwise stay
+  engine-silent forever and hold fitment results at "Likely"). All capped by
+  `VPIC_MAX_PER_RUN` (CI uses 10000 — 200 batch POSTs of 50 VINs at 0.3s
+  spacing, well inside vPIC's stated 1000–2000 tx/min comfort zone; their
+  FAQ sets no daily limit). Backlogs drain across successive runs;
+  steady-state runs only decode the day's new arrivals.
 - **Disaster insurance**: the cache is exported to
   `docs/data/vin_decodes.json.gz` and committed, but only after ~20k new
   decodes accumulate — frequent multi-MB commits would bloat git history. If

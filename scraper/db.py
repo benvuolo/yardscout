@@ -176,19 +176,24 @@ def load_vin_decodes() -> dict:
     return out
 
 
-def store_vin_decodes(decodes: dict, decoded_at: str) -> int:
-    """Insert new {vin: decode_dict} entries. Existing VINs are left untouched
-    (VINs are immutable — first successful decode wins). Returns rows added."""
+def store_vin_decodes(decodes: dict, decoded_at: str, replace: bool = False) -> int:
+    """Insert new {vin: decode_dict} entries. By default existing VINs are left
+    untouched (VINs are immutable — first successful decode wins). With
+    replace=True existing rows are overwritten — used ONLY by the payload
+    schema upgrade, where an old cached decode predates fields (engine,
+    transmission) that a fresh decode of the SAME immutable VIN now carries.
+    Returns rows written."""
     if not decodes:
         return 0
     conn = _connect()
     cur = conn.cursor()
+    verb = "REPLACE" if replace else "IGNORE"
     added = 0
     for vin, dec in decodes.items():
         if not isinstance(dec, dict):
             continue
         cur.execute(
-            "INSERT OR IGNORE INTO vin_decodes (vin, payload, trim_quality, decoded_at) VALUES (?,?,?,?)",
+            f"INSERT OR {verb} INTO vin_decodes (vin, payload, trim_quality, decoded_at) VALUES (?,?,?,?)",
             (vin, json.dumps(dec, separators=(",", ":")), dec.get("trimQuality", ""), decoded_at),
         )
         added += cur.rowcount
@@ -223,18 +228,26 @@ def import_vin_decodes_gz(path: Path) -> int:
     return store_vin_decodes(entries, decoded_at)
 
 
-def export_vin_decodes_gz(path: Path, min_new: int = 20000) -> bool:
+def export_vin_decodes_gz(path: Path, min_new: int = 20000,
+                          force: bool = False) -> bool:
     """Write the full decode cache to a gzipped JSON committed to the repo.
 
     Skipped unless the cache has grown by >= min_new entries since the last
     export — committing a multi-MB gz blob every 6-hour run would bloat git
     history, and the Actions cache already persists the DB between runs. The
     export is disaster insurance, refreshed at coarse intervals; if the Actions
-    cache is evicted, at most the last < min_new decodes re-fetch from vPIC."""
+    cache is evicted, at most the last < min_new decodes re-fetch from vPIC.
+
+    force=True exports regardless of growth (still requires a non-empty
+    cache) — used once when the payload schema-upgrade queue drains, so the
+    committed backup doesn't keep pre-engine-field payloads for the month+ it
+    takes steady-state arrivals to accumulate min_new rows."""
     import gzip
     from datetime import datetime, timezone
     total = vin_decode_count()
-    if path.exists():
+    if total == 0:
+        return False
+    if not force and path.exists():
         try:
             existing = json.loads(gzip.decompress(path.read_bytes()))
             prev = len([k for k in existing if not k.startswith("_")])
@@ -242,8 +255,6 @@ def export_vin_decodes_gz(path: Path, min_new: int = 20000) -> bool:
             prev = 0
         if total - prev < min_new:
             return False
-    elif total == 0:
-        return False
     payload = load_vin_decodes()
     payload["_exportedAt"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     path.write_bytes(gzip.compress(

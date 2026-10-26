@@ -60,10 +60,15 @@ jobs:
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          # Per-run cap on NEW VIN decodes (cached VINs are free). The initial
-          # ~40-160k backlog drains across successive 6-hour runs, newest
-          # arrivals first; steady-state runs only decode the day's arrivals.
-          VPIC_MAX_PER_RUN: "5000"
+          # Per-run cap on VIN decodes (cached VINs are free): never-seen VINs
+          # first, then old-schema cache entries missing the engine summary
+          # (2026-10-26 audit: 57k live VINs predate that field and never
+          # re-decode on their own). 10000 = 200 batch POSTs of 50 VINs at
+          # 0.3s spacing (~67 req/min) — vPIC's FAQ states no daily limit and
+          # 1000-2000 tx/min of comfortable server headroom, so this drains
+          # the one-time upgrade backlog in ~1 day of 4-hourly runs, then
+          # steady-state runs only decode the day's arrivals (~100/run).
+          VPIC_MAX_PER_RUN: "10000"
         run: python scraper/junkyard_scraper.py --save --all --national --independents --decode-vins-incremental
 
       - name: Commit and push inventory
