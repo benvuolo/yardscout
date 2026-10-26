@@ -2,7 +2,7 @@
 
 **Live app: https://yardscout.io/**
 
-Spot the valuable "unobtanium" parts that common junkyard cars originally came with, and see typical resale ranges before you drive to the yard. This is an information tool — estimates, not income promises: parts may already be pulled, and condition decides everything. Scrapes live inventory from **~150 self-service yards across four national/regional chains**:
+Find the donor car before you drive. YardScout shows what every car in a self-service yard came from the factory with, what the yard charges to pull a part, and what the same used part goes for online — so you know whether the trip is worth it before you leave the house. An information tool for enthusiasts and DIY wrenchers: estimates, never promises — parts may already be pulled, and condition decides everything. Scrapes live inventory from **~150 self-service yards across four national/regional chains**:
 
 | Chain | Yards | Coverage |
 |---|---|---|
@@ -11,9 +11,7 @@ Spot the valuable "unobtanium" parts that common junkyard cars originally came w
 | **Pull-A-Part** (incl. former U-Pull-&-Pay yards) | ~36 | Southeast/Gulf (GA/AL/TN/LA/MS/NC/SC/KY/FL), OH, IN, PA, TX, AZ, NM, CO |
 | **Tear-A-Part + Utah Pic-A-Part** | 4 | Utah (SLC, Ogden, Orem) |
 
-It cross-references every car against a curated database of rare/valuable parts and shows you exactly what to pull, what it costs (when the yard publishes a real price list), what it sells for, and where to sell it.
-
-Flip parts you can carry out. Fix your car with the rest — the Parts tab now covers engines, transmissions, and body panels, with honest warnings about what a pull really takes.
+It cross-references every car against a curated database of hard-to-find factory parts and shows you what to look for in the row, what the yard charges (when it publishes a real price list), and what you'd save pulling it yourself. The Parts tab covers engines, transmissions, and body panels too, with honest warnings about what a pull really takes. Every part that leaves beat the shredder.
 
 ## Install on your phone
 

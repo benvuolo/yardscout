@@ -579,7 +579,7 @@ function parseInventoryPayload(raw) {
         const d = new Date(raw.pricesLastReviewed + 'T12:00:00Z');
         if (!isNaN(d)) {
           document.getElementById('prices-reviewed').textContent =
-            ` Value ranges last reviewed ${d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}.`;
+            ` Online price ranges last reviewed ${d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}.`;
         }
       }
     } else if (Array.isArray(raw)) {
@@ -1734,9 +1734,10 @@ function openUpgradeSheet(trigger) {
     // 1.2) — same honest copy, only the store name differs.
     if (sheetSub) sheetSub.textContent =
       'Finding cars near you is free and stays free. '
-      + 'Pro adds the savings layer — what each part would cost you '
-      + 'used online, what the yard charges, what you\u2019d save, '
-      + 'and push alerts within hours of arrival. Subscribe through '
+      + 'Pro is for planning the trip: a push within hours of a watched '
+      + 'car landing (free gets the weekly recap), what the yard charges '
+      + 'vs what the same used part goes for online, and which parts get '
+      + 'picked over fast. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
   }
   document.getElementById('upgrade-sheet').classList.add('open');
@@ -2493,7 +2494,7 @@ function renderLive() {
             ${saveHtml}
             ${verifyNote}${sharedNote}
             ${sellSpd ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
-              <span class="sell-badge ${sellCls}" title="How quickly parts like these typically get claimed at the yard">${sellSpd === 'Fast' ? 'Picked over fast' : sellSpd === 'Slow' ? 'Usually still there' : 'Steady demand'}</span>
+              <span class="sell-badge ${sellCls}" title="How quickly parts like these typically get claimed at the yard">${sellSpd === 'Fast' ? 'Picked over fast' : sellSpd === 'Slow' ? 'Usually still there' : 'Steady turnover'}</span>
             </div>` : ''}
           </li>`;
       }).join('');
@@ -2514,12 +2515,12 @@ function renderLive() {
         : { cls: 'demand-steady', label: '' };
       cardStyle = `--tier-color:var(--${demandRk === 3 ? 'demand-fast' : demandRk === 1 ? 'demand-slow' : 'demand-steady'});`;
       const rangeText = anyUnknownCost
-        ? `parts worth ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if bought elsewhere &middot; pull cost: check yard price list`
+        ? `~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} to buy these used online &middot; pull price: check yard price list`
         : `save ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} vs buying used online, if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
       // Upside stays visible without misleading: unconfirmed ("if equipped")
       // parts never inflate the headline range — they get a muted second line.
       const extraNote = extraHigh > 0 ? `
-        <div class="range-extra" title="Parts specific to a trim or factory option that couldn\u2019t be confirmed for this car &mdash; they add nothing to its ranking or headline value">+ up to ${formatPrice(extraHigh)}${rangeHigh > 0 ? ' more' : ''} if equipped (unconfirmed &mdash; check at the yard)</div>` : '';
+        <div class="range-extra" title="Parts specific to a trim or factory option that couldn\u2019t be confirmed for this car &mdash; they add nothing to its ranking or headline figure">+ up to ${formatPrice(extraHigh)}${rangeHigh > 0 ? ' more' : ''} if equipped (unconfirmed &mdash; check at the yard)</div>` : '';
       profitLine = (rangeHigh > 0 || extraHigh > 0)
         ? (unlocked ? `
         ${isSampleCard ? '<div class="sample-note" role="button" onclick="openUpgradeSheet(\'sample-note\')">Free sample &mdash; Pro shows this for every car</div>' : ''}
@@ -2535,7 +2536,7 @@ function renderLive() {
       partsBlock = `
         <details class="parts-details">
           <summary>${unlocked
-            ? `Up to ${shownParts.length} part${shownParts.length > 1 ? 's' : ''} worth a look &middot; top: ${bestPart}`
+            ? `Up to ${shownParts.length} part${shownParts.length > 1 ? 's' : ''} to check &middot; top: ${bestPart}`
             : `${shownParts.length} part${shownParts.length > 1 ? 's' : ''} to check`} <span class="chev">${ICON.chev}</span></summary>
           <div class="car-body">
             <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can\u2019t be confirmed from the VIN are marked &ldquo;if equipped.&rdquo; Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
@@ -2553,7 +2554,7 @@ function renderLive() {
       : '';
     // Freshness is context, not an alert: quiet text in the metadata line.
     const freshNote = isMatch
-      ? ` &middot; <span title="Time on the lot — older arrivals are more likely already picked over, so value estimates are discounted">${fl.text.toLowerCase()}</span>`
+      ? ` &middot; <span title="Time on the lot — older arrivals are more likely already picked over, so online-price figures are discounted">${fl.text.toLowerCase()}</span>`
       : '';
     const ex = extrasFor(v);
     const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
@@ -5109,7 +5110,7 @@ function renderAlerts() {
 
   const grid = document.getElementById('alert-matches-grid');
   if (!allHitVehicles.length) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No matches yet</h3><p>None of your watchlist vehicles are in the yard right now. The scraper checks automatically in <code>--watch</code> mode.</p></div>';
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h3>No matches yet</h3><p>None of your watchlist vehicles are in the yard right now. Every yard is re-scanned about every 4 hours &mdash; matches show up here.</p></div>';
     return;
   }
 
