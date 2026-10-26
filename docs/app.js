@@ -4367,13 +4367,16 @@ function pfCoverageContext(kind) {
 function pfCoverageFormHtml(ctx) {
   const what = [[ctx.year, ctx.make, ctx.model].filter(Boolean).join(' '), ctx.part]
     .filter(Boolean).join(' \u2014 ');
+  // Placeholder says what the box IS; the how/why lives in the hint below
+  // (placeholder-pattern sweep 2026-10-26, same fix as the compare box).
   const notePh = ctx.kind === 'engine'
-    ? 'which engine is in it? (e.g. 3.0 V6) — optional'
-    : 'anything that helps us verify it — optional';
+    ? 'Engine (e.g. 3.0 V6) — optional'
+    : 'Notes — optional';
   return `<div class="pf-coverage-form" id="pf-coverage-form">
     <div class="pfc-what">Asking us to add: <strong>${escapeHtml(what)}</strong>${ctx.zip ? ` <span class="pfc-zip">(near ${escapeHtml(ctx.zip)})</span>` : ''}</div>
-    <input type="email" id="pfc-email" placeholder="email (optional) — if it lands, we may ping you" autocomplete="email">
+    <input type="email" id="pfc-email" placeholder="you@email.com — optional" autocomplete="email">
     <input type="text" id="pfc-note" placeholder="${notePh}" maxlength="500">
+    <div class="pf-hint">A note helps us verify it. Leave an email and we may ping you if it lands &mdash; nothing automated.</div>
     <div class="pfc-actions">
       <button type="button" class="btn btn-primary" id="pfc-send" onclick="pfCoverageSubmit()">Add it to the list</button>
       <span class="pfc-status" id="pfc-status"></span>
