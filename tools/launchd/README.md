@@ -1,6 +1,6 @@
 # YardScout launchd snapshot jobs
 
-Three macOS launchd agents run daily on the dev Mac to snapshot junkyard sites
+Four macOS launchd agents run daily on the dev Mac to snapshot junkyard sites
 whose hosts block datacenter IPs (GitHub Actions / Cloudflare Workers egress get
 403/520/521, residential IPs get clean 200s). Each job runs a script from this
 repo, commits the snapshot to `scraper/snapshots/`, and pushes to `origin main`.
@@ -19,10 +19,11 @@ jobs on a new residential-IP machine.
 | `io.yardscout.indy-snapshot` | daily 08:15 | `scraper/update_indy_snapshot.sh` | curl-snapshots Indy-U-Pull-It inventory + price pages (SiteGround blocks CI IPs) → `scraper/snapshots/indy_{inventory,prices}.html.gz` |
 | `io.yardscout.ace-snapshot` | daily 08:25 | `scraper/update_ace_snapshot.sh` | runs the real Ace Pick-A-Part adapter (`junkyard_scraper.fetch_ace_inventory`) → `scraper/snapshots/ace_inventory.json.gz` + fresh `docs/data/ace_pricing.json` |
 | `io.yardscout.papva-snapshot` | daily 08:35 | `scraper/update_papva_snapshot.sh` | runs the Pick-A-Part VA adapter (`fetch_papva_inventory`) → `scraper/snapshots/papva_inventory.json.gz` |
+| `io.yardscout.upullr-snapshot` | daily 08:45 | `scraper/update_upullr_snapshot.sh` | runs the U-Pull-R Parts adapter (`fetch_upullr_inventory`, 3 yards MN/OH; CI gets 403 on getVehicles since 2026-10-21) → `scraper/snapshots/upullr_inventory.json.gz` + fresh `docs/data/upullr_pricing.json` |
 
 Each plist logs stdout+stderr to `/tmp/yardscout_<name>_snapshot.log`.
 
-All three scripts refuse to overwrite snapshots with failed/suspiciously small
+All four scripts refuse to overwrite snapshots with failed/suspiciously small
 crawls (marker checks, minimum row/vehicle counts) and skip the commit when
 content is unchanged (`gzip -n` keeps unchanged content byte-identical).
 
@@ -62,6 +63,7 @@ content is unchanged (`gzip -n` keeps unchanged content byte-identical).
    launchctl load ~/Library/LaunchAgents/io.yardscout.indy-snapshot.plist
    launchctl load ~/Library/LaunchAgents/io.yardscout.ace-snapshot.plist
    launchctl load ~/Library/LaunchAgents/io.yardscout.papva-snapshot.plist
+   launchctl load ~/Library/LaunchAgents/io.yardscout.upullr-snapshot.plist
    ```
 
 5. **Smoke-test one** (runs immediately, check the log):
@@ -73,3 +75,16 @@ content is unchanged (`gzip -n` keeps unchanged content byte-identical).
 
 Note: `StartCalendarInterval` jobs that miss their window (Mac asleep) run once
 on wake, so a laptop that sleeps overnight still snapshots daily.
+
+## Adding a job to a Mac that already has the others
+
+```bash
+cd ~/PODIUM_SETUP/admin/junkyard-hunter && git pull origin main
+cp tools/launchd/io.yardscout.upullr-snapshot.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/io.yardscout.upullr-snapshot.plist
+launchctl start io.yardscout.upullr-snapshot      # first run now (~4 min)
+tail -f /tmp/yardscout_upullr_snapshot.log
+```
+
+The script exits 1 without committing when the crawl is blocked from the Mac
+too or comes back suspiciously small; the log says which.

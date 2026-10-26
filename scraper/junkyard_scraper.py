@@ -13651,6 +13651,23 @@ def fetch_upullr_inventory() -> list[dict]:
         if v["id"] not in seen:
             seen.add(v["id"])
             unique.append(v)
+    if not unique:
+        # Since 2026-10-21 every getVehicles POST from CI gets HTTP 403
+        # (getMakes still 200) — datacenter-IP filtering in front of the
+        # vehicle endpoint. Fall back to the snapshot pushed daily from the
+        # dev Mac's residential IP (scraper/update_upullr_snapshot.sh, launchd
+        # io.yardscout.upullr-snapshot), same remedy as Ace / PAPVA.
+        snap = Path(__file__).parent / "snapshots" / "upullr_inventory.json.gz"
+        if snap.exists():
+            import gzip as gzip_mod
+            try:
+                data = json.loads(gzip_mod.decompress(snap.read_bytes()))
+                unique = data.get("vehicles", [])
+                print(f"  [U-Pull-R] live crawl blocked — using committed snapshot "
+                      f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
+                      file=sys.stderr)
+            except Exception as e:
+                print(f"  [U-Pull-R] snapshot unreadable: {e}", file=sys.stderr)
     print(f"  [U-Pull-R] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
