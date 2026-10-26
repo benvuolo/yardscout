@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /data/
+Sitemap: https://yardscout.io/sitemap-yards.xml

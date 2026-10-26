@@ -414,3 +414,18 @@ backend/
 scraper/push_inventory.py   # shard builder + differential uploader (stdlib only)
 docs/api.js                 # frontend API layer (flag-gated, static fallback)
 ```
+
+## Share pages on yardscout.io (`backend/site-proxy/src/share.js`)
+
+The site Worker server-renders three public pages from yardscout-api's free
+tier, so links unfurl in forum threads and texts without the app shell:
+
+| Route | Shows |
+|---|---|
+| `/car/<vin-or-id>` | one car: yard, row, set-out date, day count vs the yard's typical stay ("roughly N days left"), VIN, decoded engine/drive; CTAs to `#car=` in the app and `#tab=alerts` |
+| `/yard/<slug>` | "What's at <yard> this week": lot count, last-7-day set-outs linking to car pages, typical lifespan |
+| `/sitemap-yards.xml` | every yard page (referenced from `docs/robots.txt`) |
+
+The app's share button links here (`shareUrlFor` in `docs/app.js`). A car that
+has since left the list answers 404 with a "no longer listed — watch for the
+next one" page. Deploy with `cd backend/site-proxy && npx wrangler deploy`.

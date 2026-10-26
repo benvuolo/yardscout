@@ -17,6 +17,8 @@ const UPSTREAM = 'https://benvuolo.github.io/yardscout';
 // Pro entitlements API (account-less, email-anchored) — see entitlements.js.
 // Lives here (not in yardscout-api) so the web app talks same-origin.
 import { handleEntitlements } from './entitlements.js';
+// Server-rendered share pages (/car/<vin>, /yard/<slug>) — see share.js.
+import { renderCarPage, renderYardPage, renderYardSitemap } from './share.js';
 
 // Fixed-allowlist upstream mirror for the scan workflow. Some independent
 // yards' hosts (first case: indyupullit.com) hard-block GitHub Actions'
@@ -35,6 +37,13 @@ export default {
   async fetch(req, env) {
     const url = new URL(req.url);
     if (url.pathname.startsWith('/api/ent/')) return handleEntitlements(req, env, url);
+    if (req.method === 'GET' || req.method === 'HEAD') {
+      let sm = url.pathname.match(/^\/car\/([^/]+)\/?$/);
+      if (sm) return renderCarPage(sm[1]);
+      sm = url.pathname.match(/^\/yard\/([^/]+)\/?$/);
+      if (sm) return renderYardPage(sm[1]);
+      if (url.pathname === '/sitemap-yards.xml') return renderYardSitemap();
+    }
     const mirror = MIRRORS[url.pathname];
     if (mirror) {
       if (req.method !== 'GET') return new Response('GET only', { status: 405 });

@@ -1992,8 +1992,11 @@ function jhClearFocus() {
   renderLive();
 }
 
+// Share links go to the server-rendered page (backend/site-proxy/src/share.js)
+// so they unfurl in forum threads / texts with the car, yard, row and crush
+// window — and never carry capacitor://localhost from the native shells.
 function shareUrlFor(v) {
-  return location.origin + location.pathname + '#car=' + encodeURIComponent(vehicleKey(v));
+  return 'https://yardscout.io/car/' + encodeURIComponent(vehicleKey(v));
 }
 
 async function shareVehicle(key) {
@@ -5528,6 +5531,12 @@ if (_bootAlertId) {
   history.replaceState(null, '', location.pathname + location.search + '#car=' + _bootAlertId);
 }
 loadLiveInventory({ fresh: !!_bootAlertId });
+// #tab=<name> opens a tab directly (share pages link to #tab=alerts).
+{
+  const t = (location.hash.match(/#tab=([a-z]+)/) || [])[1];
+  const el = t && document.querySelector(`.tab[data-tab="${t}"]`);
+  if (el) { el.click(); history.replaceState(null, '', location.pathname + location.search); }
+}
 
 // Offline + instant-launch cache. Needs a secure context (HTTPS or localhost) —
 // silently skipped when served over plain LAN IP, active once on GitHub Pages.
