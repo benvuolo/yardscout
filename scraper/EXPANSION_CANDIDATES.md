@@ -472,3 +472,26 @@ the rest, then ~100/scan steady state). Ids are unchanged, so Ryan's
 history carries over. Verify with the manual `Ario adapter probe` workflow
 (`scraper/_probe_ario_live.py`); the per-yard table it prints is the merge
 gate.
+
+#### 8.6.2 Wave 1 narrowed to 13 yards — Paul's and Carolina PnP are not on Ario's live backend
+
+Per-slug browser check of all 27 configured yards against the live frontend:
+Ryan's, EZ ×7 and Foss ×6 load and show set-outs from this week (EZ Atlanta
+78 cars placed in the last 7 days; Foss Chesapeake 50). **Paul's ×10 and
+Carolina PnP ×3 answer "Yard not found"** (`/rest/v1/yards?slug=eq.…` → 406).
+Their Bubble rows explain why they looked fine to the scout: Paul's is a
+one-time import (steady ~150 cars/month Mar→Oct 2025, nothing after the org
+was created on 2025-10-21); Carolina's rows are a 2024 dump (Sandhills
+2024-04..10, Cape Fear 2024-06..09 plus garbage years). Neither is a live
+feed anywhere on Ario. Both dropped from `ARIO_CHAINS` (registry status →
+candidate):
+
+- **Carolina Pick N Pull** really publishes on its own WordPress site:
+  `carolinapicknpull.com/inventory/?location={3|9|10}` (Location/Make
+  form, server-rendered). Plain curl gets a WAF 403, a browser is fine —
+  a curl_cffi-style adapter (Pick-A-Part VA precedent). ~4,300 cars, wave 3.
+- **Paul's Auto Yard**: paulsautosalvage.com has parts/engines/"used cars for
+  sale" pages but no public vehicle rows found. Directory-only for now.
+
+Wave 1 as built: EZ Pull N Pay ×7 + Foss U-Pull-It ×6 (+ Ryan's repaired),
+~13,000 live cars, VINs seeded from the legacy feed.

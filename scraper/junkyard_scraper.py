@@ -17022,44 +17022,6 @@ ARIO_CHAINS: dict[str, dict] = {
              "lat": 33.5568, "lng": -86.6903},
         ],
     },
-    # 13-location chain, 10 with live inventory (the other 3 are not on
-    # Ario). Westville's parcel geocodes to La Porte; the yard brands
-    # itself Westville, so that stays the display city.
-    "pauls": {
-        "label": "Paul's Auto Yard (IN)",
-        "yards": [
-            {"slug": "pauls-south-bend", "code": "southbend",
-             "name": "Paul's Auto Yard - South Bend", "city": "South Bend", "state": "IN",
-             "lat": 41.6406, "lng": -86.2511},
-            {"slug": "pauls-fort-wayne", "code": "fortwayne",
-             "name": "Paul's Auto Yard - Fort Wayne", "city": "Fort Wayne", "state": "IN",
-             "lat": 41.0580, "lng": -85.1646},
-            {"slug": "pauls-westville", "code": "westville",
-             "name": "Paul's Auto Yard - Westville", "city": "Westville", "state": "IN",
-             "lat": 41.6014, "lng": -86.7300},
-            {"slug": "pauls-merrilville", "code": "merrillville",
-             "name": "Paul's Auto Yard - Merrillville", "city": "Merrillville", "state": "IN",
-             "lat": 41.4999, "lng": -87.3368},
-            {"slug": "pauls-lake-station", "code": "lakestation",
-             "name": "Paul's Auto Yard - Lake Station", "city": "Lake Station", "state": "IN",
-             "lat": 41.5873, "lng": -87.2653},
-            {"slug": "pauls-elkhart", "code": "elkhart",
-             "name": "Paul's Auto Yard - Elkhart", "city": "Elkhart", "state": "IN",
-             "lat": 41.7145, "lng": -86.0305},
-            {"slug": "pauls-gary", "code": "gary",
-             "name": "Paul's Auto Yard - Gary", "city": "Gary", "state": "IN",
-             "lat": 41.5883, "lng": -87.4239},
-            {"slug": "pauls-demotte", "code": "demotte",
-             "name": "Paul's Auto Yard - DeMotte", "city": "DeMotte", "state": "IN",
-             "lat": 41.1946, "lng": -87.1779},
-            {"slug": "pauls-knox", "code": "knox",
-             "name": "Paul's Auto Yard - Knox", "city": "Knox", "state": "IN",
-             "lat": 41.2870, "lng": -86.4905},
-            {"slug": "pauls-logansport", "code": "logansport",
-             "name": "Paul's Auto Yard - Logansport", "city": "Logansport", "state": "IN",
-             "lat": 40.7402, "lng": -86.3455},
-        ],
-    },
     # Foss Recycling's u-pull arm; fossrecycling.com points at
     # fossupullit.com, whose /inventory/ page iframes the NEW Ario
     # frontend (ario.autorecycler.io/yard/foss-recycling?embed=1).
@@ -17087,24 +17049,12 @@ ARIO_CHAINS: dict[str, dict] = {
              "lat": 34.8731, "lng": -76.9287},
         ],
     },
-    # Three sister yards (carolinapicknpull.com) that brand themselves
-    # separately; display names keep the local brand. None publish VINs.
-    # Display names never START with "Pick N Pull" so the Pick-n-Pull chain
-    # patterns in app.js / the audit's chain_of can't claim them.
-    "carolinapnp": {
-        "label": "Carolina Pick N Pull (NC/SC)",
-        "yards": [
-            {"slug": "cape-fear-pick-n-pull-wilmington-north-carolina", "code": "capefear",
-             "name": "Cape Fear Pick N Pull - Wilmington", "city": "Wilmington", "state": "NC",
-             "lat": 34.2786, "lng": -77.9613},
-            {"slug": "grand-strand-pick-n-pull-conway-south-carolina", "code": "grandstrand",
-             "name": "Grand Strand Pick N Pull - Conway", "city": "Conway", "state": "SC",
-             "lat": 33.8635, "lng": -79.0973},
-            {"slug": "fayetteville-north-carolina-sandhills-pick-n-pull", "code": "sandhills",
-             "name": "Sandhills Pick N Pull - Fayetteville", "city": "Fayetteville", "state": "NC",
-             "lat": 35.0409, "lng": -78.8638},
-        ],
-    },
+    # NOT HERE (2026-10-26, see EXPANSION_CANDIDATES.md §8.6.2): Paul's Auto
+    # Yard ×10 and Carolina Pick N Pull ×3 exist in the legacy Bubble org
+    # table but are "Yard not found" on the live backend, and their Bubble
+    # rows are one-time dumps (Paul's: Mar–Oct 2025; Carolina: 2024). Their
+    # real inventory is elsewhere (Carolina: own WordPress search on
+    # carolinapicknpull.com/inventory/; Paul's: no public vehicle rows found).
 }
 RYANS_PRICES_URL = "https://ryanspickapart.com/Home/PartPrices"
 
