@@ -1545,6 +1545,284 @@
           "inventory_url": "https://app.autorecycler.io/inventory/fayetteville-north-carolina-sandhills-pick-n-pull"
         }
       ]
+    },
+    {
+      "name": "UAPI / U-Auto-Pull-It",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "inventory_url": "https://app.autorecycler.io/inventory/uapi",
+      "api": {
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified). Sister of Pipes U-Pull-It (tracked via VinPlus). Bossier/N/S Shreveport orgs share one geocode (809 Aero Dr) in Ario's own data."
+      },
+      "update_freshness": "live",
+      "robots": "app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "UAPI - North Shreveport",
+          "city": "Shreveport",
+          "state": "LA",
+          "lat": 32.5288,
+          "lng": -93.7757,
+          "ario_slug": "uapi",
+          "inventory_url": "https://app.autorecycler.io/inventory/uapi"
+        },
+        {
+          "name": "UAPI - South Shreveport",
+          "city": "Shreveport",
+          "state": "LA",
+          "lat": 32.5288,
+          "lng": -93.7757,
+          "ario_slug": "uapi-south-shreveport",
+          "inventory_url": "https://app.autorecycler.io/inventory/uapi-south-shreveport"
+        },
+        {
+          "name": "UAPI - Bossier City",
+          "city": "Bossier City",
+          "state": "LA",
+          "lat": 32.5288,
+          "lng": -93.7757,
+          "ario_slug": "uapi-bossier-city",
+          "inventory_url": "https://app.autorecycler.io/inventory/uapi-bossier-city"
+        },
+        {
+          "name": "UAPI - Monroe",
+          "city": "Monroe",
+          "state": "LA",
+          "lat": 32.475,
+          "lng": -92.0835,
+          "ario_slug": "uapi-monroe",
+          "inventory_url": "https://app.autorecycler.io/inventory/uapi-monroe"
+        },
+        {
+          "name": "UAPI - Alexandria",
+          "city": "Alexandria",
+          "state": "LA",
+          "lat": 31.3514,
+          "lng": -92.5322,
+          "ario_slug": "uapi-alexandria",
+          "inventory_url": "https://app.autorecycler.io/inventory/uapi-alexandria"
+        },
+        {
+          "name": "UAPI - Texarkana",
+          "city": "Wake Village",
+          "state": "TX",
+          "lat": 33.4435,
+          "lng": -94.1442,
+          "ario_slug": "uapi-texarkana",
+          "inventory_url": "https://app.autorecycler.io/inventory/uapi-texarkana"
+        }
+      ]
+    },
+    {
+      "name": "Auto Parts U Pull",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "inventory_url": "https://app.autorecycler.io/inventory/auto-parts-u-pull-shelby-nc",
+      "api": {
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified)."
+      },
+      "update_freshness": "live",
+      "robots": "app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Auto Parts U Pull - Shelby",
+          "city": "Shelby",
+          "state": "NC",
+          "lat": 35.2718,
+          "lng": -81.5073,
+          "ario_slug": "auto-parts-u-pull-shelby-nc",
+          "inventory_url": "https://app.autorecycler.io/inventory/auto-parts-u-pull-shelby-nc"
+        },
+        {
+          "name": "Auto Parts U Pull - Lincolnton",
+          "city": "Lincolnton",
+          "state": "NC",
+          "lat": 35.5182,
+          "lng": -81.2001,
+          "ario_slug": "auto-parts-u-pull-nc",
+          "inventory_url": "https://app.autorecycler.io/inventory/auto-parts-u-pull-nc"
+        }
+      ]
+    },
+    {
+      "name": "L and L U-Pull Auto Parts",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "inventory_url": "https://app.autorecycler.io/inventory/l-and-l-u-pull",
+      "api": {
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified)."
+      },
+      "update_freshness": "live",
+      "robots": "app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "L and L U-Pull Auto Parts",
+          "city": "Kings Mountain",
+          "state": "NC",
+          "lat": 35.2547,
+          "lng": -81.4565,
+          "ario_slug": "l-and-l-u-pull",
+          "inventory_url": "https://app.autorecycler.io/inventory/l-and-l-u-pull"
+        }
+      ]
+    },
+    {
+      "name": "A & A Auto Recycling",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "inventory_url": "https://app.autorecycler.io/inventory/a-a-auto-recycling",
+      "api": {
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified)."
+      },
+      "update_freshness": "live",
+      "robots": "app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "A & A Auto Recycling",
+          "city": "Bradenton",
+          "state": "FL",
+          "lat": 27.4434,
+          "lng": -82.5544,
+          "ario_slug": "a-a-auto-recycling",
+          "inventory_url": "https://app.autorecycler.io/inventory/a-a-auto-recycling"
+        }
+      ]
+    },
+    {
+      "name": "JDM Automotive & Recycling",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "inventory_url": "https://app.autorecycler.io/inventory/jdm-automotive-recycling",
+      "api": {
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified)."
+      },
+      "update_freshness": "live",
+      "robots": "app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "JDM Automotive & Recycling",
+          "city": "Maysville",
+          "state": "NC",
+          "lat": 34.8013,
+          "lng": -77.2166,
+          "ario_slug": "jdm-automotive-recycling",
+          "inventory_url": "https://app.autorecycler.io/inventory/jdm-automotive-recycling"
+        }
+      ]
+    },
+    {
+      "name": "Samson Auto Salvage",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "inventory_url": "https://app.autorecycler.io/inventory/samson-auto-salvage",
+      "api": {
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified). Verify self-serve at the gate \u2014 listed as a dismantler in some directories."
+      },
+      "update_freshness": "live",
+      "robots": "app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Samson Auto Salvage",
+          "city": "Los Angeles",
+          "state": "CA",
+          "lat": 33.9648,
+          "lng": -118.2328,
+          "ario_slug": "samson-auto-salvage",
+          "inventory_url": "https://app.autorecycler.io/inventory/samson-auto-salvage"
+        }
+      ]
+    },
+    {
+      "name": "Southside U-Pull-It",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "inventory_url": "https://app.autorecycler.io/inventory/southside-u-pull-it",
+      "api": {
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified)."
+      },
+      "update_freshness": "live",
+      "robots": "app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Southside U-Pull-It",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.6172,
+          "lng": -95.3671,
+          "ario_slug": "southside-u-pull-it",
+          "inventory_url": "https://app.autorecycler.io/inventory/southside-u-pull-it"
+        }
+      ]
+    },
+    {
+      "name": "Santa Maria Recycling Center",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "inventory_url": "https://app.autorecycler.io/inventory/santa-maria-recycling-center",
+      "api": {
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified). Rows never hidden when cars leave; the adapter publishes only cars set out after a rolling cutoff (added_since in ARIO_CHAINS)."
+      },
+      "update_freshness": "live",
+      "robots": "app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Santa Maria Recycling Center",
+          "city": "Santa Maria",
+          "state": "CA",
+          "lat": 34.9343,
+          "lng": -120.4895,
+          "ario_slug": "santa-maria-recycling-center",
+          "inventory_url": "https://app.autorecycler.io/inventory/santa-maria-recycling-center"
+        }
+      ]
     }
   ]
 }
