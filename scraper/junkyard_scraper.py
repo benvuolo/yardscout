@@ -16896,38 +16896,51 @@ def _ario_encode_data(data: dict) -> dict:
 def _ario_search(session: "requests.Session", type_name: str,
                  constraints: list[dict], frm: int = 0,
                  n: int = ARIO_PAGE_N) -> dict | None:
-    """One obfuscated /elasticsearch/search POST; responses are plain JSON."""
-    time.sleep(ARIO_DELAY_SEC)
-    body = _ario_encode_data({
-        "appname": ARIO_APPNAME, "app_version": "live", "type": type_name,
-        "constraints": constraints, "sorts_list": [], "from": frm, "n": n,
-    })
-    try:
-        r = session.post(f"{ARIO_BASE}/elasticsearch/search", json=body,
-                         headers={**HEADERS, "Content-Type": "application/json"},
-                         timeout=60)
-        r.raise_for_status()
-        return r.json()
-    except Exception as e:
-        print(f"  [Ario] {type_name} search (from={frm}) failed: {e}",
-              file=sys.stderr)
-        return None
+    """One obfuscated /elasticsearch/search POST; responses are plain JSON.
+    Retries transient failures (3 attempts, 5s apart) — a failed page
+    mid-way through a yard must not silently truncate that yard."""
+    for attempt in (1, 2, 3):
+        time.sleep(ARIO_DELAY_SEC)
+        body = _ario_encode_data({
+            "appname": ARIO_APPNAME, "app_version": "live", "type": type_name,
+            "constraints": constraints, "sorts_list": [], "from": frm, "n": n,
+        })
+        try:
+            r = session.post(f"{ARIO_BASE}/elasticsearch/search", json=body,
+                             headers={**HEADERS, "Content-Type": "application/json"},
+                             timeout=60)
+            r.raise_for_status()
+            return r.json()
+        except Exception as e:
+            print(f"  [Ario] {type_name} search (from={frm}) attempt {attempt} failed: {e}",
+                  file=sys.stderr)
+            if attempt < 3:
+                time.sleep(5)
+    return None
 
 
 def _ario_search_all(session: "requests.Session", type_name: str,
-                     constraints: list[dict], max_pages: int = 20) -> list[dict]:
-    """Page a search to at_end; returns hit dicts ({_id, _source})."""
+                     constraints: list[dict], max_pages: int = 20,
+                     truncated: list | None = None) -> list[dict]:
+    """Page a search to at_end; returns hit dicts ({_id, _source}).
+    When paging stops before at_end (a page failed after retries, or
+    max_pages hit) the result is PARTIAL: `truncated` (a caller-supplied
+    list) gets a reason appended so the caller can refuse to publish it."""
     hits: list[dict] = []
     frm = 0
     for _ in range(max_pages):
         res = _ario_search(session, type_name, constraints, frm)
         if res is None:
-            break
+            if truncated is not None:
+                truncated.append(f"page at from={frm} failed")
+            return hits
         page = (res.get("hits") or {}).get("hits") or []
         hits.extend(page)
         if res.get("at_end") or not page:
-            break
+            return hits
         frm += len(page)
+    if truncated is not None:
+        truncated.append(f"max_pages={max_pages} reached at from={frm}")
     return hits
 
 
@@ -17254,11 +17267,20 @@ def fetch_ario_inventory() -> list[dict]:
                       f"renamed or dropped off the platform?", file=sys.stderr)
                 continue
             org_ref = f"{ref_prefix}{org['_id']}" if ref_prefix else org["_id"]
+            trunc: list[str] = []
             hits = _ario_search_all(session, "custom.inventorysearch", [
                 {"key": "organization_custom_organization",
                  "constraint_type": "equals", "value": org_ref},
                 {"key": "visible_boolean", "constraint_type": "equals", "value": True},
-            ])
+            ], truncated=trunc)
+            if trunc:
+                # A partial list would look like a mass departure to the
+                # history/lifespan machinery; leaving the yard out of this
+                # scan lets the carry-forward logic keep its previous rows.
+                print(f"  [Ario] {yard['name']}: paging truncated ({trunc[0]}) — "
+                      f"skipping this scan rather than publishing a partial lot",
+                      file=sys.stderr)
+                continue
             rows = [h["_source"] for h in hits
                     if not (h.get("_source") or {}).get("deleted_boolean")]
             code = yard.get("code") or re.sub(r"[^a-z0-9]+", "", yard["name"].lower())
@@ -19230,6 +19252,9 @@ YARD_HEALTH_FILE = DATA_DIR / "yard_health.json"
 # the PnP SLC national-index freeze of 2026-10-19..21 served an identical
 # 964-car set for 6 straight scans and hid a watched 4Runner for two days.
 YARD_STALE_SCANS = 6
+# Days without a single new set-out date before a big, dated yard is
+# flagged as reading a frozen feed (see _update_yard_health).
+YARD_NO_ARRIVALS_DAYS = 30
 # Drop vanished yards from the health file after this many scans missing
 # (closed/renamed yards shouldn't haunt the report forever).
 YARD_MISSING_DROP = 30
@@ -19249,13 +19274,22 @@ def _update_yard_health(payload: dict) -> None:
 
     names = [y[0] for y in payload["yards"]]
     per_yard: dict[str, list[str]] = {n: [] for n in names}
+    newest: dict[str, str] = {n: "" for n in names}
+    dated: dict[str, int] = {n: 0 for n in names}
     for row in payload["vehicles"]:
         # id + dateAdded: catches adds, removals AND date corrections.
-        per_yard[names[row[7]]].append(f"{row[0]}|{row[6]}")
+        n = names[row[7]]
+        per_yard[n].append(f"{row[0]}|{row[6]}")
+        if row[6]:
+            dated[n] += 1
+            if row[6] > newest[n]:
+                newest[n] = row[6]
 
     now = payload["scrapedAt"]
+    today = datetime.strptime(now[:10], "%Y-%m-%d").date()
     yards_out: dict[str, dict] = {}
     stale: list[tuple[int, str, int]] = []
+    no_arrivals: list[tuple[int, str, int]] = []
     for n in names:
         fp = hashlib.sha1("\n".join(sorted(per_yard[n])).encode()).hexdigest()[:16]
         p = prev.get(n) or {}
@@ -19266,9 +19300,23 @@ def _update_yard_health(payload: dict) -> None:
             unchanged = 0
             last_changed = now
         yards_out[n] = {"count": len(per_yard[n]), "fingerprint": fp,
-                        "unchangedScans": unchanged, "lastChangedAt": last_changed}
+                        "unchangedScans": unchanged, "lastChangedAt": last_changed,
+                        **({"newestDateAdded": newest[n]} if newest[n] else {})}
         if unchanged >= YARD_STALE_SCANS:
             stale.append((unchanged, n, len(per_yard[n])))
+        # A feed can keep CHANGING (departures hidden) while receiving no
+        # new cars at all — Ryan's Ario/Bubble feed did exactly that for two
+        # months (2026-08-13 -> 2026-10) without tripping the fingerprint
+        # check. Big, well-dated yards that haven't added a car in
+        # YARD_NO_ARRIVALS_DAYS are almost certainly reading a frozen index.
+        ct = len(per_yard[n])
+        if newest[n] and ct >= 100 and dated[n] >= ct // 2:
+            try:
+                age = (today - datetime.strptime(newest[n], "%Y-%m-%d").date()).days
+            except ValueError:
+                age = 0
+            if age >= YARD_NO_ARRIVALS_DAYS:
+                no_arrivals.append((age, n, ct))
 
     missing: list[tuple[int, str]] = []
     for n, p in prev.items():
@@ -19293,8 +19341,13 @@ def _update_yard_health(payload: dict) -> None:
     for miss, n in sorted(missing, reverse=True):
         print(f"  ⚠️  MISSING YARD: {n} — absent from the last {miss} scan(s); "
               f"adapter may be silently failing", file=sys.stderr)
-    if stale or missing:
-        print(f"  ⚠️  yard health: {len(stale)} stale, {len(missing)} missing — "
+    for age, n, ct in sorted(no_arrivals, reverse=True):
+        print(f"  ⚠️  NO ARRIVALS: {n} — newest of {ct} dated cars was set out "
+              f"{age} days ago; feed is changing but nothing new is landing "
+              f"(frozen/legacy index?)", file=sys.stderr)
+    if stale or missing or no_arrivals:
+        print(f"  ⚠️  yard health: {len(stale)} stale, {len(missing)} missing, "
+              f"{len(no_arrivals)} without recent arrivals — "
               f"see docs/data/yard_health.json", file=sys.stderr)
 
 

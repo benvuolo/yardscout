@@ -478,3 +478,16 @@ All three price lists are single-location (no per-yard split needed) and
 wired p195-style: price sheet only, no PART_KEYWORD_MAP columns — same
 scope as every non-Budget independent (Budget's keyword columns were a
 specific owner follow-up).
+
+## 2026-10-26 — Ario wave 1 (EZ Pull N Pay ×7, Paul's Auto Yard ×10, Foss U-Pull-It ×6, Carolina Pick N Pull ×3)
+
+Branch `feat/ario-wave1`, **built but not merged**. The Ryan's adapter became
+`fetch_ario_inventory` over an `ARIO_CHAINS` table (one org-table fetch,
+per-yard inventory pages, pooled make/model lookups; ids
+`{source}-{code}-{stock}`, Ryan's keeps `ryans-{stock}`); slugs/pins from
+`scraper/_probe_ario_orgs.py`. Live fetch: 25,310 vehicles / 27 yards in
+226 s, counts matching the scouting pass. Blocker: the Bubble data behind
+`app.autorecycler.io` is a frozen late-August-2026 snapshot — Ario moved live
+inventory to a Supabase-backed frontend (`ario.autorecycler.io/yard/{slug}`,
+`search-inventory` edge function). Details and the decision needed:
+`EXPANSION_CANDIDATES.md` §8.6. Ryan's (live since 10-23) is affected too.

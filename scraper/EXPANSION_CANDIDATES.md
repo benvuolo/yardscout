@@ -391,3 +391,51 @@ yards sit in metros where we currently only have Pull-A-Part.
 **Wave 2:** the 17 singles + UAPI ×6 + Auto Parts U Pull ×2 + TAS (~21,000
 more vehicles). **Wave 3:** the 2026-10-22 CRUSH/BYOT/Wilbert's/Ewe Pullet
 builds (§8.4) for the ID/SD/NY gap-fill.
+
+### 8.6 2026-10-26 (later) — wave-1 build findings: the Bubble feed is frozen
+
+*Built on branch `feat/ario-wave1` (not merged). Multi-tenant adapter
+`fetch_ario_inventory` / `ARIO_CHAINS` + `scraper/_probe_ario_orgs.py` (the
+org-table dump this pass was missing). All 26 wave-1 yards resolved and
+fetched live: 25,310 vehicles across 27 Ario yards in 226 s, per-yard counts
+within ~1% of §8.1 (Sandhills aside — below).*
+
+**The finding that changes the plan: Ario's Bubble app stopped receiving new
+cars in late August 2026.** Newest `added_date` per feed, scanned 2026-10-26:
+Ryan's 2026-08-13, EZ Pull N Pay 2026-08-24/25 (all 7), Foss 2026-08-19..27
+(all 6), Paul's 2025-10-21 (all 10 — nothing since the orgs were created),
+Carolina PnP: date garbage (2000..2031; 151 undated at Grand Strand). Rows
+still get *hidden* as cars leave (counts drift), so the fingerprint-based
+STALE YARD check never fires — but a ~1,350-car lot with 1,300 July/August
+set-outs and zero in September/October is not live. **Ryan's — already in the
+app since 2026-10-23 — has been serving a two-month-old lot this whole time.**
+
+Why: Ario migrated. The yards' own sites now embed a NEW frontend,
+`ario.autorecycler.io/yard/{slug}?embed=1` (Vite SPA, Supabase project
+`zqfzqcyteuemzbnwtmcr`, inventory via the `search-inventory` edge function:
+`{start_year, end_year, input_make, input_model, yard_list:[slug],
+limit_results}`; org records expose a `bubble_legacy_url` fallback). The old
+`app.autorecycler.io/inventory/{slug}` pages still render the Bubble data —
+which is exactly the frozen snapshot we scraped. Fresh inventory lives behind
+the Supabase function, which has visible rate limiting ("Too many searches /
+verify your email") and a per-call result cap — it needs its own adapter pass
+(make × year bisection like VinPlus) before any Ario yard, Ryan's included,
+can be called live. Not probed further this session (owner call: it means
+calling Supabase with the site's public anon key).
+
+Also learned this build:
+
+- **Bubble paging is flaky.** Sandhills returned 2 visible rows on one pass
+  and 1,272 (= §8.1) minutes later with the identical query; no error was
+  raised. `_ario_search` now retries, and `_ario_search_all` reports
+  truncation so a yard is skipped for the scan instead of published short.
+- **New scan alarm, NO ARRIVALS** (`_update_yard_health`): a yard with ≥100
+  cars, ≥50% dated, whose newest set-out date is ≥30 days old. Dry-run on the
+  2026-10-26 10:29Z payload flags 8 yards nobody had noticed: Ryan's (74 d),
+  U-Pull-It Lincoln/Omaha ×2/Des Moines (81–88 d), Prestige Houston (108 d),
+  St. Cloud (167 d), Fenix Belleville (885 d — placeholder dates or a dead
+  feed; check).
+- **§8.3 correction:** Fenix's own table already publishes VINs (Binghamton
+  1,867/1,881). The VinPlus `fenix_u_pull` tenant adds nothing — dropped.
+- Carolina PnP's dates need the standard `_sanitize_date_added` clamp
+  (future years, 2000-01-31 placeholders) — already applied in enrich.
