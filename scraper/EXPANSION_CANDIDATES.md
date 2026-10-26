@@ -4,6 +4,13 @@
 Companion to `scraper/INDEPENDENT_YARDS.md` (onboarding history) and
 `scraper/independent_yards_registry.json` (machine-readable registry).*
 
+> **2026-10-26 UPDATE:** see [§8 — Ario footprint / VinPlus sweep / Nuxt-vendor
+> pass](#8-2026-10-26-scouting-pass--ario-footprint-vinplus-sweep-nuxt-vendor)
+> at the bottom. Headline: the Ario/autorecycler.io adapter built for Ryan's
+> Pick-a-Part generalizes to **~53 new yards / ~48,000 vehicles** enumerated
+> directly from the platform's own org table. It dwarfs everything in the
+> 2026-10-22 tables below (which remain valid and un-built).
+
 **Method:** hunt inventory-software *platforms*, not individual yards. Verified via
 read-only spot checks (1 req/~2s, browser-equivalent UA), certificate-transparency
 subdomain enumeration (crt.sh), frontend-bundle mining, and state-by-state web
@@ -250,3 +257,137 @@ Chicago-metro independent with ~3,000 cars), TX (20 → 25), FL (15 → 17).
   `gm_vehicle_search` plugin change like the 2026-10-13 `doApiCall→doAaaApiCall`
   rename — check the scan log's `INDEPENDENT_EXPECTED_SOURCES` warning.
 - Chesterfield + Go Pull-It VinPlus consolidation opportunity (see §1/§6).
+
+---
+
+## 8. 2026-10-26 scouting pass — Ario footprint, VinPlus sweep, Nuxt vendor
+
+*Read-only scouting (no scraper changes). Method: enumerated the Ario Bubble
+app's own `custom.organization` table via the obfuscated `/elasticsearch/search`
+endpoint the Ryan's adapter already speaks (154 orgs, 2 requests), then one
+`n=1` probe per org for visible `custom.inventorysearch` rows and a paged count
+for the ~70 orgs that had any (all at 2s pacing, ~400 requests total). VinPlus:
+bundle mining + ~85-slug dictionary against the public `/api/yard-info/{slug}`
+oracle at 1.5s. All counts are visible+non-deleted rows as of 2026-10-26.*
+
+### Headline
+
+| Metric | 2026-10-22 pass | This pass |
+|---|---|---|
+| New candidate yards | 25 | **+53 (Ario alone)** |
+| Est. new vehicles | ~25,000 | **+~48,000** |
+| Biggest unlock | VinPlus ×5 | **Ario org sweep: one existing adapter family → 7 chains + 17 singles** |
+
+Current DB for scale: 221 yards / ~256k vehicles. The Ario batch alone is
++24% yards, +19% vehicles, at near-config-only cost (the Ryan's
+`fetch_ryans_inventory` flow parameterizes on the org record; orgs without a
+URL slug are still queryable by org `_id`).
+
+### 8.1 Ario / autorecycler.io (Bubble app `autoscrapzen`) — THE find
+
+**Vendor:** AutoRecycler.io "Ario", now marketed as **ari (Auto PARTnered
+Solutions**, ariintel.com, Melbourne AU). Marketing claims 125k vehicles listed
+across 35+ customers — matches our enumeration. Integrates CRUSH / Pinnacle /
+Checkmate back-offices, so it keeps absorbing yards (same dynamic as VinPlus).
+Public search pages live at `app.autorecycler.io/inventory/{slug}`; most
+customer yards ALSO embed/link that search on their own sites (Ryan's iframe
+precedent; EZ Pull N Pay renders the tables directly on ezpullnpay.com; Foss
+points fossrecycling.com at fossupullit.com; Carolina PnP at
+carolinapicknpull.com; Bevell's "Vehicle Search" on bevellspiy.com). The dead
+`fossupi` / `hwy82` S3-cert leads from §1 resolved: **both moved to Ario.**
+
+**Mirrors of yards we already track** (no action, but useful as backup/liveness
+cross-checks): all ~35 Pull-A-Part cities, 12 LKQ/Pick Your Part yards,
+Pick-n-Pull Oakland, Prestige Houston, Pickers Longview/Texarkana, Nevada
+Pic-A-Part LV, Ryan's itself. Our Ario counts cross-check within ~6% of
+UPullScan/SalvageWatch for EZ Montgomery and Foss — counts are trustworthy.
+
+**NEW candidate chains** (vehicles = our live probe counts):
+
+| Chain | Yards | Vehicles | States | VINs | Notes |
+|---|---|---|---|---|---|
+| Paul's Auto Yard | 10 | 9,809 | IN | yes | 13-location chain, 10 with live inventory (South Bend 1,634 / Ft Wayne 1,459 / Westville 1,429 / Merrillville 1,372 / Lake Station 1,232 / Elkhart 860 / Gary 593 / DeMotte 521 / Knox 436 / Logansport 273). IN currently has 5 tracked yards. |
+| EZ Pull N Pay | 7 | 6,914 | GA, AL | yes | Atlanta 1,058 / Stockbridge 1,112 / Warner Robins 1,183 / Columbus 948 / Montgomery 1,023 / Decatur 1,012 / Birmingham 578 (new yard, ramping). Tables published on ezpullnpay.com. |
+| Foss U-Pull-It | 6 | 5,599 | NC, VA | yes | Winston-Salem 1,338 / Jacksonville 1,167 / La Grange 970 / Chesapeake VA 816 / Wilson 752 / Havelock 556. First Hampton Roads coverage. |
+| Carolina Pick N Pull | 3 | 4,317 | NC, SC | no | Cape Fear (Wilmington) 1,613 / Grand Strand (Conway SC) 1,432 / Sandhills (Fayetteville) 1,272. |
+| UAPI (U-Auto-Pull-It) | 6 | 3,020 | LA, TX, AR | yes | Ark-La-Tex: Texarkana 666 / Alexandria 531 / Monroe 518 / N Shreveport 469 / S Shreveport 420 / Bossier City 416. Sister of Pipes U-Pull-It (tracked via VinPlus). |
+| Auto Parts U Pull | 2 | 2,839 | NC | yes | Shelby 1,993 / Lincolnton 846. |
+| TAS Recycling | 2 | ~717–1,434 | TN | no | Kingsport + Knoxville both probe exactly 717 — likely one shared pool under a shared slug; **dedupe at build time**. |
+
+**NEW candidate singles:**
+
+| Yard | City/State | Vehicles | VINs | Notes |
+|---|---|---|---|---|
+| Bevell's Pull It Yourself | Goldsboro, NC | 1,934 | no | bevellspiy.com |
+| Blue & Gold Auto Salvage | Goose Creek, SC | 1,837 | no | Charleston metro; converted to self-serve |
+| L AND L U-Pull Auto Parts | Kings Mountain, NC | 1,188 | yes | |
+| A & A Auto Recycling | Bradenton, FL | 1,109 | yes | |
+| Yank-A-Part | Poulsbo, WA | 1,032 | yes | Kitsap Co.; first WA independent (WA = 5 Pick-n-Pull today) |
+| Cash-N-Carry Pull Your Part | Savannah, GA | 995 | no | cashncarryparts.com |
+| Young's U-Pull-It | Dudley (Goldsboro), NC | 963 | yes | upull.youngsautocenter.com |
+| Southern Auto Salvage | Cameron, NC | 936 | yes | |
+| Highway 82 Pick & Pay | Poulan, GA | 897 | no | hwy82pp.com (ex-S3 `hwy82` lead); publishes price list |
+| A-Z U-Pull-It | Shoemakersville, PA | 810 | yes | Reading metro; 2nd PA independent after Harry's |
+| Santa Maria Recycling Center | Santa Maria, CA | ~833 live | yes | Raw visible count 4,265 is STALE (rows never hidden; sample added-dates 2024–25). 833 added since 2026-04 — **scan must date-filter**. |
+| JDM Automotive & Recycling | Maysville, NC | 569 | yes | |
+| Samson Auto Salvage | Los Angeles, CA | 375 | yes | verify self-serve at build |
+| Kiker's U-Pull-It | Pensacola, FL | 285 | yes | Ario's own case-study customer |
+| Southside U-Pull-It | Houston, TX | 281 | no | |
+| Dis & Dat Auto Recycling | Las Vegas, NV | 258 | yes | distinct from NVPAP |
+| A-1 Metals & Auto Salvage | Paso Robles, CA | 187 | yes | |
+
+**Micro/out-of-scope tier** (documented so we stop re-checking): Long's Hampton
+VA (37), AB Rayne LA (36), Ario KC demo (31), Green Vehicle Disposal (47 across
+2 dupe orgs), Universal St Louis (6), Yeti Chilliwack BC (18, Canada), Ajax SF
+(103, full-service dismantler), plus ~10 tiny CA dismantlers (1–5 rows each)
+and demo orgs (Jack/Testino Autos, Sam's Worcester, Jamm Davie, Gaston Towing).
+
+**Build notes:** generalize `fetch_ryans_inventory` into a tenant table keyed on
+org `_id` (slug optional); make/model name maps are GLOBAL tables — fetch once
+per scan, not per yard. ~5–10 POSTs per yard per scan → 53 yards ≈ 300–500
+POSTs at 2s ≈ 10–17 min; consider a dedicated Ario stage in the scan. Exclude
+rows via the Santa Maria date-filter lesson where a yard's added-date histogram
+looks stale. Verify each chain's own-site embed at build time; everything above
+is also publicly reachable at `app.autorecycler.io/inventory/{slug}` (or via
+the yard's own search page for slugless orgs).
+
+### 8.2 Nuxt JSON API (U-Pull and Save Pontiac) — custom, no siblings
+
+**Verdict: in-house one-off, not a product.** Same-origin `/api/vehicles/*`
+only, no vendor strings in any `_nuxt` bundle, bespoke Tailwind components,
+Sentry org 49970; parent schramauto.com is plain WordPress. Schram Auto Parts
+has a long-tenured IT director (Jesse Ostrander) with a documented history of
+building custom inventory sites. No sibling yards exist to find. (Mason store
+110 confirmed returning `[]` — "yard closed" stands.)
+
+### 8.3 VinPlus tenant sweep — no skipped tenants; one migration signal
+
+85-slug dictionary + SPA bundle mining against `/api/yard-info/{slug}`. All 12
+known/covered tenants re-validated. New valid slugs found: only
+`chesterfield_auto_parts_demo` (TexN's sales demo — ignore) and **`fenix`** =
+"Fenix U-Pull Binghampton" (search `yard_id: fenix_u_pull`, single location,
+rows carry FULL VINs — the current fenix adapter has none). Binghamton is
+already tracked, so this is a **migration/enrichment opportunity, not a new
+yard** — and a signal Fenix corporate is piloting VinPlus: re-sweep
+`fenix_*`-style slugs periodically; more Fenix locations may appear. None of
+the 2026-10-22 un-built candidates (Jalopy, Trusty, M&M, Polk, Ewe Pullet,
+BYOT, Wilbert's) nor any of our other adapter chains resolve as tenants.
+
+### 8.4 Still-pending from the 2026-10-22 pass (unchanged, re-verified un-built)
+
+CRUSH MVC family (Jalopy ×5 + Trusty + M&M Buffalo + Polk County, ~6,500–9,000
+vehicles, difficulty 2), Ewe Pullet (SD, ~1,200), BYOT ×3 (TX, ~3,300),
+Wilbert's ×3 (NY). No OTHER new platform hit the 3+ yard threshold this pass —
+Ario absorbed every lead that would have.
+
+### 8.5 Recommended first batch (owner approval required before any build)
+
+**Ario wave 1 — the four big chains: 26 yards, ~26,600 vehicles.**
+EZ Pull N Pay ×7 + Paul's ×10 + Foss ×6 + Carolina PnP ×3. One adapter
+generalization, all chains verified publishing inventory on their own sites,
+VINs everywhere except Carolina PnP. Geography: IN +10 (5 today), first Hampton
+Roads VA, first Savannah-adjacent GA… and EZ's Atlanta/Birmingham/Montgomery
+yards sit in metros where we currently only have Pull-A-Part.
+**Wave 2:** the 17 singles + UAPI ×6 + Auto Parts U Pull ×2 + TAS (~21,000
+more vehicles). **Wave 3:** the 2026-10-22 CRUSH/BYOT/Wilbert's/Ewe Pullet
+builds (§8.4) for the ID/SD/NY gap-fill.
