@@ -1584,6 +1584,24 @@
     padding: 0.1rem 0.25rem;
     flex-shrink: 0;
   }
+  /* Touch screens: 16px inputs keep iOS from zooming the page on focus (the
+     reason maximum-scale used to be set), and the icon-only card actions
+     (watch / share / heart / copy-VIN / promo close) get the 44px hit area
+     Apple and Google ask for — they sit three in a row and mis-taps toggled
+     the wrong one. Visual size is unchanged; the padding is the hit area. */
+  @media (pointer: coarse) {
+    select, .controls input[type="text"], .controls input[type="number"], #live-zip, #pf-zip, #pf-part {
+      font-size: 16px;
+    }
+    .heart-btn, .share-btn, .watch-btn, .btn-copy-vin, #app-promo-close {
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .car-badges .heart-btn, .car-badges .share-btn, .car-badges .watch-btn { margin: -0.5rem -0.15rem; }
+  }
   @media (min-width: 768px) {
     #app-promo { bottom: 1rem; }
   }

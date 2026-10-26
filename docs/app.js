@@ -736,6 +736,7 @@ function hydratePhotos() {
   });
 }
 const INVENTORY_URL = DATA_BASE + 'data/inventory_live.json';
+const INVENTORY_META_URL = DATA_BASE + 'data/inventory_meta.json';
 
 /* In-flight guard: the boot load, the resume self-heal, an alert-tap entry,
  * and the manual refresh button can all ask at once — piggyback on the
@@ -756,7 +757,7 @@ function loadLiveInventory(opts = {}) {
  *   screen (the original behavior). */
 async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
   // Pricing files load concurrently with the inventory (they used to be a
-  // serial waterfall in front of the 4MB fetch). Rendering needs them for
+  // serial waterfall in front of the ~37MB fetch). Rendering needs them for
   // pull costs, so each render path awaits this promise before first paint
   // of cards.
   const pricingReady = loadAllPricing();
@@ -801,11 +802,28 @@ async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
     // proves a newer scan is published); 'no-cache' is a conditional
     // revalidation (GitHub Pages serves ETags, so it costs one 304 round
     // trip when nothing changed).
+    // Cheap freshness probe first: the scan publishes a few-byte
+    // inventory_meta.json beside the big file. When its scrapedAt matches
+    // what's on screen there is nothing to download or parse — the old
+    // path re-read and re-parsed the whole ~37 MB file just to learn that
+    // (a 304 upstream still hands the browser the full cached body).
+    if (shownScrapedAt && !fresh) {
+      try {
+        const mr = await fetch(INVENTORY_META_URL, { cache: 'no-cache' });
+        if (mr.ok) {
+          const meta = await mr.json();
+          if (meta && meta.scrapedAt && meta.scrapedAt === shownScrapedAt) return; // nothing new
+        }
+      } catch (e) { /* meta missing/offline — fall through to the real check */ }
+    }
     const resp = await fetch(INVENTORY_URL,
       fresh ? { cache: 'reload' } : (shownScrapedAt ? { cache: 'no-cache' } : {}));
     if (!resp.ok) throw new Error('not found');
-    if (cache) { try { await cache.put(INVENTORY_URL, resp.clone()); } catch (e) { /* quota */ } }
+    // Write-through and parse concurrently; the cache write used to block
+    // parsing for the full disk write.
+    const putP = cache ? cache.put(INVENTORY_URL, resp.clone()).catch(() => { /* quota */ }) : null;
     const raw = await resp.json();
+    if (putP) await putP;
     if (shownScrapedAt && (raw.scrapedAt || 'unknown') === shownScrapedAt) return; // nothing new
     await pricingReady;
     applyInventory(raw, { quiet: quiet != null ? quiet : !!shownScrapedAt });
@@ -883,16 +901,9 @@ function headTickerFacts() {
   const nDisp = yardCountDisplay();
   if (cars) facts.push(`${cars.toLocaleString()} CARS ON ROW`);
   if (nDisp) facts.push(`${nDisp} YARDS COAST TO COAST`);
-  const weekAgo = Date.now() - 7 * 86400000;
-  const fresh = liveInventory.reduce((k, v) => k + (yardDateMs(v.dateAdded) >= weekAgo ? 1 : 0), 0);
+  const { fresh, near } = headTickerHeavy();
   if (fresh) facts.push(`${fresh.toLocaleString()} SET OUT THIS WEEK`);
-  if (activeZipCoords) {
-    const r = effectiveRadiusMi();
-    const near = new Set(liveInventory
-      .filter(v => v.lat != null && haversineMiles(activeZipCoords.lat, activeZipCoords.lng, v.lat, v.lng) <= r)
-      .map(v => v.location)).size;
-    if (near) facts.push(`${near} YARD${near === 1 ? '' : 'S'} IN YOUR RANGE`);
-  }
+  if (near) facts.push(`${near} YARD${near === 1 ? '' : 'S'} IN YOUR RANGE`);
   const ts = Date.parse(liveScrapedAt || '');
   if (ts) {
     const hrs = Math.max(0, Math.round((Date.now() - ts) / 3600000));
@@ -901,6 +912,26 @@ function headTickerFacts() {
       : `SCANNED ${Math.round(hrs / 24)}D AGO`);
   }
   return facts;
+}
+/* The two full-inventory passes (fresh-this-week count, yards in range) are
+ * memoised on what can change them; the 5 s tick only rotates the text. */
+let _headHeavyKey = null, _headHeavyVal = { fresh: 0, near: 0 };
+function headTickerHeavy() {
+  const r = activeZipCoords ? effectiveRadiusMi() : null;
+  const key = [liveScrapedAt, liveInventory.length, activeZipCoords && activeZipCoords.lat,
+    activeZipCoords && activeZipCoords.lng, r, Math.floor(Date.now() / 3600000)].join('|');
+  if (key === _headHeavyKey) return _headHeavyVal;
+  const weekAgo = Date.now() - 7 * 86400000;
+  const fresh = liveInventory.reduce((k, v) => k + (yardDateMs(v.dateAdded) >= weekAgo ? 1 : 0), 0);
+  let near = 0;
+  if (activeZipCoords) {
+    near = new Set(liveInventory
+      .filter(v => v.lat != null && haversineMiles(activeZipCoords.lat, activeZipCoords.lng, v.lat, v.lng) <= r)
+      .map(v => v.location)).size;
+  }
+  _headHeavyKey = key;
+  _headHeavyVal = { fresh, near };
+  return _headHeavyVal;
 }
 function startHeadTicker() {
   const spec = document.getElementById('head-spec');
@@ -920,6 +951,11 @@ function startHeadTicker() {
   const facts = headTickerFacts();
   if (facts.length) { spec.textContent = facts[0]; _headTickerIdx = 1; }
   _headTickerTimer = setInterval(show, 5000);
+  // No point rotating a header nobody can see; resume on return.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') { clearInterval(_headTickerTimer); _headTickerTimer = null; }
+    else if (!_headTickerTimer) _headTickerTimer = setInterval(show, 5000);
+  });
 }
 
 /* One-tap actions for the out-of-range empty state. */
@@ -1481,7 +1517,12 @@ function updateFilterAvailability() {
 
 /* ===== ZIP + RADIUS FILTER ===== */
 let activeZipCoords = null;   // {lat, lng} once a valid zip is entered
-const zipCoordsCache = JSON.parse(localStorage.getItem('jh_zip_coords') || '{}');
+/* A half-written value (quota hit mid-setItem) or a storage-disabled browser
+ * must not throw at top level — everything below this line would never run. */
+const zipCoordsCache = (() => {
+  try { const v = JSON.parse(localStorage.getItem('jh_zip_coords') || '{}'); return v && typeof v === 'object' ? v : {}; }
+  catch (e) { return {}; }
+})();
 
 function haversineMiles(lat1, lng1, lat2, lng2) {
   const R = 3958.8, toRad = d => d * Math.PI / 180;
@@ -1666,6 +1707,13 @@ function openUpgradeSheet(trigger) {
   // App Store product is loadable (defined later in the native module).
   if (IS_NATIVE && typeof refreshNativeIapUi === 'function') refreshNativeIapUi();
 }
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  const open = (id) => { const el = document.getElementById(id); return el && el.classList.contains('open'); };
+  if (open('upgrade-sheet')) closeUpgradeSheet();
+  else if (open('saved-sheet')) closeSavedSheet();
+  else if (open('prices-sheet')) closePricesSheet();
+});
 function closeUpgradeSheet() {
   document.getElementById('upgrade-sheet').classList.remove('open');
   document.getElementById('upgrade-backdrop').classList.remove('open');
@@ -1883,15 +1931,21 @@ updateSavedPill();
 /* ===== SHAREABLE FINDS (deep links) ===== */
 let focusedCarKey = null;
 
+/* decodeURIComponent throws URIError on a truncated escape ("%E0%A4%A" —
+ * what SMS/Messenger do to long share links); fall back to the raw key so a
+ * bad link degrades to "no match" instead of a dead app. */
+function safeDecode(s) {
+  try { return decodeURIComponent(s); } catch (e) { return s; }
+}
 function applyShareHash() {
   // #car= is the share-link form; #alert= is the push-payload form (same key,
   // but it additionally signals "bypass caches" — see openFromAlert).
   const m = location.hash.match(/#(?:car|alert)=([^&]+)/);
-  focusedCarKey = m ? decodeURIComponent(m[1]) : null;
+  focusedCarKey = m ? safeDecode(m[1]) : null;
 }
 window.addEventListener('hashchange', () => {
   const alertId = (location.hash.match(/#alert=([^&]+)/) || [])[1];
-  if (alertId) { openFromAlert(decodeURIComponent(alertId)); return; }
+  if (alertId) { openFromAlert(safeDecode(alertId)); return; }
   applyShareHash();
   if (liveLoaded) {
     renderLive();
@@ -2391,7 +2445,7 @@ function renderLive() {
           ? `<div class="shared-note"><span class="shared-badge" title="Platform interchange: hand-verified shared unit across sibling models. Read the caveat and verify part numbers before buying.">swaps with</span>${escapeHtml(p.sharedWith)}</div>` : '';
         return `
           <li class="part-item${hitCls}" style="flex-wrap:wrap;">
-            <span class="part-name">${p.name}</span>
+            <span class="part-name">${escapeHtml(p.name)}</span>
             ${trimMark}${fitsMark}
             <span class="part-price" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
             ${costHtml}
@@ -2465,8 +2519,8 @@ function renderLive() {
         ${photo ? `<div class="car-photo-wrap"><img class="car-photo" loading="lazy" src="${photo.url}" alt="" onerror="this.parentNode.remove()"><span class="photo-credit">${escapeHtml(photo.label)}</span></div>` : ''}
         <div class="car-header">
           <div style="min-width:0;">
-            <div class="car-name">${v.year} ${v.make} ${v.model}</div>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
+            <div class="car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + escapeHtml(v.row) + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
             <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${freshNote}${vinMetaHtml(v)}</div>
             ${specBits.length ? `<div class="car-meta car-specs">${specBits.map(escapeHtml).join(' &middot; ')}</div>` : ''}
             ${lotClock}
@@ -2475,8 +2529,8 @@ function renderLive() {
             ${isConfirmedManual(v) ? `<span class="badge badge-manual" title="${transSource(v) === 'listing' ? 'Manual transmission, from the yard\u2019s own listing \u2014 never inferred' : 'Manual transmission, confirmed from this car\u2019s VIN decode \u2014 never inferred'}">Manual</span>` : ''}
             ${statusBadge}
             <button type="button" class="watch-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Already on your watchlist' : 'Watch this model — get alerted when another shows up'}">${ICON.bell}</button>
-            <button type="button" class="share-btn" data-vkey="${vehicleKey(v)}" title="Share this find">${ICON.share}</button>
-            <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${vehicleKey(v)}" title="Save for your yard visit">${ICON.heart}</button>
+            <button type="button" class="share-btn" data-vkey="${escapeHtml(vehicleKey(v))}" title="Share this find">${ICON.share}</button>
+            <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${escapeHtml(vehicleKey(v))}" title="Save for your yard visit">${ICON.heart}</button>
           </div>
         </div>
         ${profitLine}
@@ -2586,7 +2640,19 @@ document.getElementById('live-filter-match').addEventListener('change', (e) => {
 document.getElementById('live-parts-pointer').addEventListener('click', () => {
   document.querySelector(".tab[data-tab='parts']").click();
 });
-document.getElementById('live-zip').addEventListener('input', e => setZipCenter(e.target.value.trim()));
+document.getElementById('live-zip').addEventListener('input', e => {
+  const val = e.target.value.trim();
+  if (val === '') {
+    // Cleared on purpose: forget the stored zip too, or it quietly comes
+    // back on the next launch while the field shows nothing.
+    localStorage.removeItem('jh_zip');
+    activeZipCoords = null;
+    updateZipBanner();
+    renderLive();
+    return;
+  }
+  if (/^\d{5}$/.test(val)) setZipCenter(val);   // partial zips: wait, don't re-render per keystroke
+});
 document.getElementById('live-radius').addEventListener('change', () => {
   const sel = document.getElementById('live-radius');
   // Widths beyond the free cap ("any distance" and 500 mi) are Pro only.
@@ -4990,8 +5056,8 @@ function renderAlerts() {
       <div class="car-card match-card" style="--tier-color:var(--accent);">
         <div class="car-header">
           <div style="min-width:0;">
-            <div class="car-name">${v.year} ${v.make} ${v.model}</div>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${v.location}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + v.row + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
+            <div class="car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + escapeHtml(v.row) + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
             <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${vinMetaHtml(v)} &middot; matched: ${matchedRules.join(', ')}</div>
           </div>
           <div class="car-badges">
@@ -5005,7 +5071,7 @@ function renderAlerts() {
               <ul class="parts-list">
                 ${v.topParts.slice(0, 5).map(p => `
                   <li class="part-item">
-                    <span class="part-name">${p.name}</span>
+                    <span class="part-name">${escapeHtml(p.name)}</span>
                     
                     ${isPro()
                       ? `<span class="part-price" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>`
@@ -5423,7 +5489,7 @@ document.getElementById('alert-model-done').addEventListener('click', () => {
 
 /* ===== INIT ===== */
 // The onboarding zip banner doesn't depend on inventory data — show it (or a
-// shared-find suppression) immediately instead of after the 4MB fetch.
+// shared-find suppression) immediately instead of after the ~37MB fetch.
 applyShareHash();
 updateZipBanner();
 // Launched via an alert deep link (#alert=<id> in web-push / FCM / APNs
@@ -5445,7 +5511,7 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
     const url = e.data && e.data.type === 'open-alert' && e.data.url;
     if (!url) return;
     const m = String(url).match(/#(?:alert|car)=([^&]+)/);
-    openFromAlert(m ? decodeURIComponent(m[1]) : null);
+    openFromAlert(m ? safeDecode(m[1]) : null);
   });
 }
 
@@ -5626,7 +5692,11 @@ async function syncDeviceRegistration(freshToken) {
       tier: isPro() ? 'pro' : 'free',
       watches: loadWatchlist().map((w) => ({
         make: w.make, model: w.model, yearMin: w.yrMin, yearMax: w.yrMax,
-        lat: w.lat, lng: w.lng, radiusMi: w.radiusMi,
+        // Rounded to ~1 km: the Worker only needs a radius centre, never
+        // the exact GPS fix — and the privacy policy promises as much.
+        lat: w.lat == null ? w.lat : Math.round(w.lat * 100) / 100,
+        lng: w.lng == null ? w.lng : Math.round(w.lng * 100) / 100,
+        radiusMi: w.radiusMi,
       })),
     };
     body[IS_ANDROID ? 'fcmToken' : 'apnsToken'] = token;
@@ -5687,7 +5757,7 @@ async function syncDeviceRegistration(freshToken) {
     // car's card. Old payloads without a url fall back to the Alerts tab.
     const data = (action && action.notification && action.notification.data) || {};
     const m = String(data.url || '').match(/#(?:alert|car)=([^&]+)/);
-    openFromAlert(m ? decodeURIComponent(m[1]) : null);
+    openFromAlert(m ? safeDecode(m[1]) : null);
   });
 
   // Permission is requested HERE, on the user's explicit "enable alerts" tap —
