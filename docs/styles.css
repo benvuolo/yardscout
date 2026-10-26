@@ -689,10 +689,9 @@
     margin-left: 0.4rem;
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-dim);
     border: 1px solid var(--border-dark);
     border-radius: var(--radius-sm);
     padding: 0 0.3rem;
@@ -727,12 +726,11 @@
   .demand-badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.26rem 0.5rem;
+    padding: 0.2rem 0.5rem;
     border-radius: var(--radius-sm);
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 600;
     letter-spacing: 0.07em;
     white-space: nowrap;
   }
@@ -790,13 +788,11 @@
   .sell-badge {
     display: inline-flex;
     align-items: center;
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    font-weight: 700;
+    font-family: var(--font-ui);
+    font-size: 0.6875rem;
+    font-weight: 600;
     padding: 0.1rem 0.4rem;
     border-radius: var(--radius-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
   }
   .sell-fast { background: var(--green-soft); color: var(--accent2); }
   .sell-medium { background: var(--surface3); color: var(--text-dim); }
@@ -1165,7 +1161,7 @@
     font-family: var(--font-mono);
     font-size: 0.65rem;
     color: var(--text-dim);
-    font-weight: 600;
+    font-weight: 400;
   }
   .lot-clock-soon { color: var(--orange); }
   .badge-soon {
@@ -1317,22 +1313,27 @@
     border-radius: var(--radius-sm);
     cursor: pointer;
   }
-  .lock-chip {
+  /* Pro affordances are links, not boxed chips: a card already carries a
+     status pill and three icon actions, and every free card has two of
+     these — boxes made the upsell the loudest thing on the screen. */
+  .lock-chip, .lock-text {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.32rem 0.7rem;
-    background: var(--accent-soft);
-    border: 1px dashed rgba(191, 74, 8, 0.4);
+    gap: 0.3rem;
+    padding: 0.15rem 0;
+    background: none;
+    border: none;
     color: var(--accent);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
     font-weight: 600;
-    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: background 0.15s;
+    text-decoration: underline;
+    text-decoration-color: rgba(191, 74, 8, 0.35);
+    text-underline-offset: 3px;
   }
-  .lock-chip:hover { background: rgba(191, 74, 8, 0.16); }
+  .lock-chip:hover, .lock-text:hover { text-decoration-color: var(--accent); }
+  .lock-text { font-size: 0.7rem; font-weight: 500; padding: 0; }
   .locked-blur {
     filter: blur(4.5px);
     opacity: 0.75;
@@ -1488,11 +1489,13 @@
   /* Per-car link to the yard's own site — quiet, bottom of every car card. */
   .yard-site-line { margin-top: 0.55rem; }
   .yard-site-link {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 500;
     color: var(--text-dim);
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
   }
   .yard-site-link:hover { color: var(--accent); }
   .yard-price-none {
@@ -1850,7 +1853,7 @@
 .yard-prices-btn svg { width: 13px; height: 13px; vertical-align: -2px; }
 
 /* VIN spec chip + option "spot it" hints */
-.lock-chip-sm { font-size: 0.72rem; padding: 0.1rem 0.45rem; }
+.lock-chip-sm { font-size: 0.72rem; }
 .verify-note {
   width: 100%;
   color: var(--text-dim);
