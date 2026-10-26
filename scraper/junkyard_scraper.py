@@ -17050,8 +17050,9 @@ ARIO_CHAINS: dict[str, dict] = {
         ],
     },
     # --- Wave 2 (2026-10-26, same day): the §8.1 singles/chains that answer
-    # on the LIVE backend. 13 others ("Yard not found" there, Bubble rows a
-    # one-time dump) are listed in EXPANSION_CANDIDATES.md §8.6.4, not here.
+    # on the LIVE backend with recent set-outs. 13 others are "Yard not
+    # found" there and 3 more (JDM, Southside, Santa Maria) have had no
+    # arrivals for 2+ months — all listed in EXPANSION_CANDIDATES.md §8.6.4.
     "uapi": {
         "label": "UAPI / U-Auto-Pull-It (LA/TX)",
         "yards": [
@@ -17102,39 +17103,12 @@ ARIO_CHAINS: dict[str, dict] = {
              "lat": 27.4434, "lng": -82.5544},
         ],
     },
-    "jdm": {
-        "label": "JDM Automotive & Recycling (Maysville NC)",
-        "yards": [
-            {"slug": "jdm-automotive-recycling", "code": "maysville",
-             "name": "JDM Automotive & Recycling", "city": "Maysville", "state": "NC",
-             "lat": 34.8013, "lng": -77.2166},
-        ],
-    },
     "samson": {
         "label": "Samson Auto Salvage (Los Angeles CA)",
         "yards": [
             {"slug": "samson-auto-salvage", "code": "losangeles",
              "name": "Samson Auto Salvage", "city": "Los Angeles", "state": "CA",
              "lat": 33.9648, "lng": -118.2328},
-        ],
-    },
-    "southside": {
-        "label": "Southside U-Pull-It (Houston TX)",
-        "yards": [
-            {"slug": "southside-u-pull-it", "code": "houston",
-             "name": "Southside U-Pull-It", "city": "Houston", "state": "TX",
-             "lat": 29.6172, "lng": -95.3671},
-        ],
-    },
-    # Rows are never hidden when cars leave (EXPANSION §8.1): only cars set
-    # out in the last ~6 months are published; the date is bumped at merge.
-    "santamaria": {
-        "label": "Santa Maria Recycling Center (CA)",
-        "yards": [
-            {"slug": "santa-maria-recycling-center", "code": "santamaria",
-             "name": "Santa Maria Recycling Center", "city": "Santa Maria", "state": "CA",
-             "lat": 34.9343, "lng": -120.4895,
-             "added_since": "2026-05-01"},
         ],
     },
     # NOT HERE (2026-10-26, see EXPANSION_CANDIDATES.md §8.6.2): Paul's Auto
@@ -17378,6 +17352,10 @@ ARIO_LIVE_KEY = "sb_publishable_njLlN9YEWSrEvkZ4ZS2fdQ_l7vkJI-C"
 ARIO_LIVE_PAGE = int(os.environ.get("ARIO_LIVE_PAGE", "40"))  # the page itself asks for 25/40
 ARIO_LIVE_DELAY_SEC = 2.0
 ARIO_LIVE_RATE_LIMIT_SLEEP = 30
+# Some Ario yards never hide departed cars (A & A's oldest row: 2017; Santa
+# Maria: 2024). No u-pull keeps a car a year, so dated rows older than this
+# are ghosts and are dropped; undated rows are kept.
+ARIO_LIVE_MAX_AGE_DAYS = 365
 
 
 def _ario_live_post(session: "requests.Session", fn: str, body: dict) -> dict | None:
@@ -17457,7 +17435,13 @@ def _ario_live_items_to_vehicles(items: list[dict], *, yard: dict, source: str,
     the VIN backfill can ask get-inventory-item for the ones still missing."""
     vehicles: list[dict] = []
     dupes: dict[str, int] = {}
+    added_since = str(yard.get("added_since") or "")
+    age_floor = (datetime.now(timezone.utc).date()
+                 - timedelta(days=ARIO_LIVE_MAX_AGE_DAYS)).isoformat()
     for it in items:
+        date_iso = str(it.get("date_placed") or "")[:10]
+        if date_iso and (date_iso < age_floor or (added_since and date_iso < added_since)):
+            continue
         try:
             year_i = int(it.get("year") or 0)
         except (TypeError, ValueError):
@@ -17481,7 +17465,7 @@ def _ario_live_items_to_vehicles(items: list[dict], *, yard: dict, source: str,
             "make": _utpap_format_label(make_s),
             "model": _utpap_format_label(model_s),
             "row": str(it.get("row") or "").strip(),
-            "dateAdded": str(it.get("date_placed") or "")[:10],
+            "dateAdded": date_iso,
             **({"_color": color} if color else {}),
             "_location": yard["name"],
             "_city": yard["city"],

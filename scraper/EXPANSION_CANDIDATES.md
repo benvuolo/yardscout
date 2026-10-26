@@ -525,3 +525,13 @@ Bevell's, Blue & Gold, Cash-N-Carry, Dis & Dat, Highway 82, Kiker's, Southern
 Auto Salvage, TAS ×2, Yank-A-Part, Young's. Same pattern as Paul's/Carolina:
 Bubble org exists, rows are a stale dump. Registry stays "candidate"; each
 needs its own-site source before it can be wired.
+
+CI probe (run 40396524689): 27,779 cars / 28 yards. **Merged: 11 wave-2 yards**
+— UAPI ×6 (580–886 each, set-outs Oct 20–23), Auto Parts U Pull ×2 (1,630 /
+857), L and L (1,437, set-outs the day of the probe), A & A (1,117), Samson
+(349). **Dropped before merge:** JDM (newest 2026-08-26), Southside
+(2026-06-16, 84 undated), Santa Maria (2026-08-24) — live backend, but no
+arrivals for 2+ months. Several yards carry ghost rows never hidden (A & A
+oldest 2017, Lincolnton/L and L 2021), so the live adapter now drops dated
+rows older than `ARIO_LIVE_MAX_AGE_DAYS` (365). New yards start at 0% VIN
+(no legacy seed); the 600/scan detail backfill fills them over ~3 days.

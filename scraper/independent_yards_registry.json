@@ -1714,16 +1714,11 @@
     },
     {
       "name": "JDM Automotive & Recycling",
-      "status": "adapter-built",
+      "status": "candidate",
       "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/jdm-automotive-recycling",
       "api": {
-        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
-        "method": "POST (JSON)",
-        "auth": "site's publishable anon key (sent by every visitor's browser)",
-        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
-        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
-        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified)."
+        "notes": "On Ario's live backend but no set-outs for 2+ months at the 2026-10-26 probe (JDM newest 08-26, Southside 06-16, Santa Maria 08-24) \u2014 not wired. Re-probe with scraper/_probe_ario_live.py before enabling."
       },
       "update_freshness": "live",
       "robots": "app.autorecycler.io: allow all except /version-test/",
@@ -1770,16 +1765,11 @@
     },
     {
       "name": "Southside U-Pull-It",
-      "status": "adapter-built",
+      "status": "candidate",
       "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/southside-u-pull-it",
       "api": {
-        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
-        "method": "POST (JSON)",
-        "auth": "site's publishable anon key (sent by every visitor's browser)",
-        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
-        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
-        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified)."
+        "notes": "On Ario's live backend but no set-outs for 2+ months at the 2026-10-26 probe (JDM newest 08-26, Southside 06-16, Santa Maria 08-24) \u2014 not wired. Re-probe with scraper/_probe_ario_live.py before enabling."
       },
       "update_freshness": "live",
       "robots": "app.autorecycler.io: allow all except /version-test/",
@@ -1798,16 +1788,11 @@
     },
     {
       "name": "Santa Maria Recycling Center",
-      "status": "adapter-built",
+      "status": "candidate",
       "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/santa-maria-recycling-center",
       "api": {
-        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
-        "method": "POST (JSON)",
-        "auth": "site's publishable anon key (sent by every visitor's browser)",
-        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
-        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
-        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified). Rows never hidden when cars leave; the adapter publishes only cars set out after a rolling cutoff (added_since in ARIO_CHAINS)."
+        "notes": "On Ario's live backend but no set-outs for 2+ months at the 2026-10-26 probe (JDM newest 08-26, Southside 06-16, Santa Maria 08-24) \u2014 not wired. Re-probe with scraper/_probe_ario_live.py before enabling."
       },
       "update_freshness": "live",
       "robots": "app.autorecycler.io: allow all except /version-test/",
