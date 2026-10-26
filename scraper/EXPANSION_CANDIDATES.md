@@ -495,3 +495,15 @@ candidate):
 
 Wave 1 as built: EZ Pull N Pay ×7 + Foss U-Pull-It ×6 (+ Ryan's repaired),
 ~13,000 live cars, VINs seeded from the legacy feed.
+
+#### 8.6.3 Probe result and merge
+
+CI probe (`Ario adapter probe`, run 40382136094) with `per_yard_limit` 40 —
+the function answers HTTP 400 to 200: **13,986 vehicles across 14 yards in
+~14 min**, every yard's newest set-out between 2026-10-07 and 2026-10-26;
+EZ counts 685–1,153, Foss 529–1,326, Ryan's 1,376 (vs 1,358 frozen).
+VIN seed from the legacy feed covered 6,221 (44%) — low where lots turn
+over fast (Ryan's ~81-day lifespan: 1%; Warner Robins 7%), high where they
+don't (Havelock/Birmingham 82–83%). The rest fill via get-inventory-item
+at 600/scan (~2 days). Merged to main; the first scheduled scan after the
+merge publishes the 13 new yards and un-freezes Ryan's.

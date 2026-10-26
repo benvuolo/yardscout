@@ -17282,7 +17282,7 @@ def fetch_ario_legacy_inventory() -> list[dict]:
 # The function rate-limits anonymous use ("Too many searches") — 429s back
 # off 30s and a yard whose paging doesn't complete is skipped for the scan.
 # VINs: fetched once per stock via get-inventory-item, newest cars first,
-# ARIO_VIN_MAX_PER_RUN per scan, persisted in the history DB (ario_vins),
+# ARIO_VIN_MAX_PER_RUN per scan (600 ≈ 20 min at 2 s), persisted in the history DB (ario_vins),
 # seeded from the legacy Bubble feed when the table is empty. Photos
 # (image_url) are deliberately ignored — no-photos policy.
 ARIO_LIVE_FN = "https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1"
@@ -17465,7 +17465,7 @@ def fetch_ario_inventory() -> list[dict]:
             vehicles.extend(got)
             n_yards += 1
 
-    cap = max(0, int(os.environ.get("ARIO_VIN_MAX_PER_RUN", "1000")))
+    cap = max(0, int(os.environ.get("ARIO_VIN_MAX_PER_RUN", "600")))
     fresh = _ario_vin_backfill(session, vehicles, cap)
     if fresh:
         _db.store_ario_vins(fresh, _iso_utc_z())
