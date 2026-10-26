@@ -2390,6 +2390,13 @@ function renderLive() {
       }
     }
 
+    // Scan stamp so a screenshot carries when this list was true. The
+    // inventory has no per-yard scan time (yard_health.json isn't loaded
+    // here), so this is the global scrapedAt in the viewer's local time.
+    const scanLine = liveScrapedAt
+      ? `<div class="lot-clock scan-stamp" title="When YardScout last scanned the yards — cars can leave between scans">Scanned ${escapeHtml(scrapedTitle())}</div>`
+      : '';
+
     let cardStyle = '', profitLine = '', partsBlock = '';
     if (isMatch && v.topParts && v.topParts.length) {
       let totalCost = 0, lowSum = 0, highSum = 0, unconfirmedHigh = 0, bestPart = null, bestHigh = -Infinity;
@@ -2569,6 +2576,7 @@ function renderLive() {
             <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${freshNote}${vinMetaHtml(v)}</div>
             ${specBits.length ? `<div class="car-meta car-specs">${specBits.map(escapeHtml).join(' &middot; ')}</div>` : ''}
             ${lotClock}
+            ${scanLine}
           </div>
           <div class="car-badges">
             ${isConfirmedManual(v) ? `<span class="badge badge-manual" title="${transSource(v) === 'listing' ? 'Manual transmission, from the yard\u2019s own listing \u2014 never inferred' : 'Manual transmission, confirmed from this car\u2019s VIN decode \u2014 never inferred'}">Manual</span>` : ''}
@@ -5076,7 +5084,7 @@ function renderAlerts() {
       const hitCount = r.hits.length;
       return `<div class="watchlist-item">
         <div class="wl-info">
-          <span class="wl-name">${label}</span>
+          <span class="wl-name">${escapeHtml(label)}</span>
           <span class="wl-detail">${yrLabel}${radLabel}${e.matchOnly ? ' &middot; Parts only' : ''}</span>
           <span class="wl-count ${hitCount > 0 ? 'has-hits' : 'no-hits'}">${hitCount} in yard now</span>
         </div>
@@ -5270,13 +5278,28 @@ function populateWatchModelOptions() {
 function renderWatchModelList() {
   const list = document.getElementById('alert-model-list');
   const q = (document.getElementById('alert-model-search').value || '').trim().toLowerCase();
+  const raw = (document.getElementById('alert-model-search').value || '').trim();
   const models = [..._watchModelCounts.keys()].sort()
     .filter(m => modelSearchMatch(m, q));  // same squashed match as the live filter
-  list.innerHTML = models.length ? models.map(m => `
+  const rows = models.map(m => `
     <label class="multi-select-row">
       <input type="checkbox" data-model="${escapeHtml(m)}" ${watchSelectedModels.has(m) ? 'checked' : ''}>
       <span>${escapeHtml(m)}</span>
-    </label>`).join('')
+    </label>`);
+  // "Watch anyway": the picker only lists models sitting in a tracked yard
+  // right now, so an '86 Celica can't be watched until one lands. When the
+  // typed text matches no listed model, offer it as a free-text watch. The
+  // stored string goes through the same canonicalModel/substring matching
+  // as picked models (watchlistMatches), so it fires when one shows up.
+  if (raw && !models.some(m => modelSearchMatch(m, q) && modelSearchMatch(q, m))) {
+    rows.push(`
+    <label class="multi-select-row multi-select-row-free">
+      <input type="checkbox" data-model="${escapeHtml(raw)}" ${watchSelectedModels.has(raw) ? 'checked' : ''}>
+      <span>Watch &ldquo;${escapeHtml(raw)}&rdquo; anyway</span>
+    </label>
+    <div class="multi-select-empty multi-select-note">None in the rows right now &mdash; we&rsquo;ll alert you when one lands.</div>`);
+  }
+  list.innerHTML = rows.length ? rows.join('')
     : '<div class="multi-select-empty">No models match</div>';
 }
 
