@@ -2796,6 +2796,19 @@ const CHAIN_PRICE_PAGES = [
  * per-car photos, so a per-car link would routinely show the wrong car. */
 /* GEN:YARD_INVENTORY_PAGES:BEGIN (gen_yard_site_links.py) */
 const YARD_INVENTORY_PAGES = [
+  [/^ez pull n pay - atlanta$/i, 'https://app.autorecycler.io/inventory/ez-pull-n-pay-atlanta'],
+  [/^ez pull n pay - stockbridge$/i, 'https://app.autorecycler.io/inventory/ez-pull-n-pay-stockbridge'],
+  [/^ez pull n pay - warner robins$/i, 'https://app.autorecycler.io/inventory/ez-pull-n-pay-warner-robins'],
+  [/^ez pull n pay - columbus$/i, 'https://app.autorecycler.io/inventory/ez-pull-n-pay-columbus'],
+  [/^ez pull n pay - montgomery$/i, 'https://app.autorecycler.io/inventory/ez-pull-n-pay-montgomery'],
+  [/^ez pull n pay - decatur$/i, 'https://app.autorecycler.io/inventory/ez-pull-n-pay-decatur'],
+  [/^ez pull n pay - birmingham$/i, 'https://app.autorecycler.io/inventory/ez-pull-n-pay-birmingham'],
+  [/^foss u-pull-it - winston-salem$/i, 'https://app.autorecycler.io/inventory/foss-winston-salem'],
+  [/^foss u-pull-it - jacksonville$/i, 'https://app.autorecycler.io/inventory/foss-jacksonville'],
+  [/^foss u-pull-it - la grange$/i, 'https://app.autorecycler.io/inventory/foss-la-grange'],
+  [/^foss u-pull-it - chesapeake$/i, 'https://app.autorecycler.io/inventory/foss-recycling'],
+  [/^foss u-pull-it - wilson$/i, 'https://app.autorecycler.io/inventory/foss-wilson'],
+  [/^foss u-pull-it - havelock$/i, 'https://app.autorecycler.io/inventory/foss-havelock'],
   [/^utah pic-a-part - ogden \(premium\)/i, 'https://utpap.com/ogden-premium-inventory/'],
   [/^utah pic-a-part - ogden/i, 'https://utpap.com/ogden-inventory/'],
   [/^utah pic-a-part - orem \(premium\)/i, 'https://utpap.com/orem-premium-inventory/'],

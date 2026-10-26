@@ -391,3 +391,119 @@ yards sit in metros where we currently only have Pull-A-Part.
 **Wave 2:** the 17 singles + UAPI ×6 + Auto Parts U Pull ×2 + TAS (~21,000
 more vehicles). **Wave 3:** the 2026-10-22 CRUSH/BYOT/Wilbert's/Ewe Pullet
 builds (§8.4) for the ID/SD/NY gap-fill.
+
+### 8.6 2026-10-26 (later) — wave-1 build findings: the Bubble feed is frozen
+
+*Built on branch `feat/ario-wave1` (not merged). Multi-tenant adapter
+`fetch_ario_inventory` / `ARIO_CHAINS` + `scraper/_probe_ario_orgs.py` (the
+org-table dump this pass was missing). All 26 wave-1 yards resolved and
+fetched live: 25,310 vehicles across 27 Ario yards in 226 s, per-yard counts
+within ~1% of §8.1 (Sandhills aside — below).*
+
+**The finding that changes the plan: Ario's Bubble app stopped receiving new
+cars in late August 2026.** Newest `added_date` per feed, scanned 2026-10-26:
+Ryan's 2026-08-13, EZ Pull N Pay 2026-08-24/25 (all 7), Foss 2026-08-19..27
+(all 6), Paul's 2025-10-21 (all 10 — nothing since the orgs were created),
+Carolina PnP: date garbage (2000..2031; 151 undated at Grand Strand). Rows
+still get *hidden* as cars leave (counts drift), so the fingerprint-based
+STALE YARD check never fires — but a ~1,350-car lot with 1,300 July/August
+set-outs and zero in September/October is not live. **Ryan's — already in the
+app since 2026-10-23 — has been serving a two-month-old lot this whole time.**
+
+Why: Ario migrated. The yards' own sites now embed a NEW frontend,
+`ario.autorecycler.io/yard/{slug}?embed=1` (Vite SPA, Supabase project
+`zqfzqcyteuemzbnwtmcr`, inventory via the `search-inventory` edge function:
+`{start_year, end_year, input_make, input_model, yard_list:[slug],
+limit_results}`; org records expose a `bubble_legacy_url` fallback). The old
+`app.autorecycler.io/inventory/{slug}` pages still render the Bubble data —
+which is exactly the frozen snapshot we scraped. Fresh inventory lives behind
+the Supabase function, which has visible rate limiting ("Too many searches /
+verify your email") and a per-call result cap — it needs its own adapter pass
+(make × year bisection like VinPlus) before any Ario yard, Ryan's included,
+can be called live. Not probed further this session (owner call: it means
+calling Supabase with the site's public anon key).
+
+Also learned this build:
+
+- **Bubble paging is flaky.** Sandhills returned 2 visible rows on one pass
+  and 1,272 (= §8.1) minutes later with the identical query; no error was
+  raised. `_ario_search` now retries, and `_ario_search_all` reports
+  truncation so a yard is skipped for the scan instead of published short.
+- **New scan alarm, NO ARRIVALS** (`_update_yard_health`): a yard with ≥100
+  cars, ≥50% dated, whose newest set-out date is ≥30 days old. Dry-run on the
+  2026-10-26 10:29Z payload flags 8 yards nobody had noticed: Ryan's (74 d),
+  U-Pull-It Lincoln/Omaha ×2/Des Moines (81–88 d), Prestige Houston (108 d),
+  St. Cloud (167 d), Fenix Belleville (885 d — placeholder dates or a dead
+  feed; check).
+- **§8.3 correction:** Fenix's own table already publishes VINs (Binghamton
+  1,867/1,881). The VinPlus `fenix_u_pull` tenant adds nothing — dropped.
+- Carolina PnP's dates need the standard `_sanitize_date_added` clamp
+  (future years, 2000-01-31 placeholders) — already applied in enrich.
+
+#### 8.6.1 Live adapter built (same day)
+
+Owner approved probing the new backend. Observed from a real browser (the
+page's own requests, `scratchpad` Playwright runs), nothing guessed:
+
+- `POST /functions/v1/search-inventory` body
+  `{yard_list:[slug], per_yard_limit, item_rank_offset, limit_results,
+  sort_mode:"days_newest", projection:"list", surface:"yard", filters null}`
+  → `{items, total, yards_meta:[{yard, returned, total_matching, truncated,
+  next_offset}]}`. Items: id, year, make, model, row, stock, date_placed,
+  color, image_url (ignored), yard. **No VIN in the list.** The page pages
+  25 then 40 at a time by `next_offset`; `total_matching` is the whole lot.
+- `POST /functions/v1/get-inventory-item {inventory_id, yard_slug}` →
+  `{item:{..., vin, description}}` — the only place the VIN appears.
+- `GET /rest/v1/yards?slug=eq.{slug}&customer_facing_visible=eq.true` →
+  the yard record (display_name, address, `data.latitude/longitude`,
+  `inventory_source` e.g. `crush_xml_sync`, organization_id).
+- Auth: the site's publishable anon key from the bundle (every visitor's
+  browser sends it). Rate limiting exists ("Too many searches").
+- **Freshness confirmed live:** Ryan's `total_matching` 1,376 with cars
+  placed 2026-10-23; Foss Chesapeake 50 cars placed in the last 7 days.
+  The Bubble feed had neither.
+
+`fetch_ario_inventory` now reads this feed (offset paging per yard, server
+counts trusted, incomplete lots skipped, 429 → 30 s back-off). VINs: a new
+history-DB table `ario_vins` seeded once from the legacy feed (every car
+that pre-dates the freeze gets its VIN for free), then `get-inventory-item`
+newest-first under `ARIO_VIN_MAX_PER_RUN` (1000/scan ≈ a few days to drain
+the rest, then ~100/scan steady state). Ids are unchanged, so Ryan's
+history carries over. Verify with the manual `Ario adapter probe` workflow
+(`scraper/_probe_ario_live.py`); the per-yard table it prints is the merge
+gate.
+
+#### 8.6.2 Wave 1 narrowed to 13 yards — Paul's and Carolina PnP are not on Ario's live backend
+
+Per-slug browser check of all 27 configured yards against the live frontend:
+Ryan's, EZ ×7 and Foss ×6 load and show set-outs from this week (EZ Atlanta
+78 cars placed in the last 7 days; Foss Chesapeake 50). **Paul's ×10 and
+Carolina PnP ×3 answer "Yard not found"** (`/rest/v1/yards?slug=eq.…` → 406).
+Their Bubble rows explain why they looked fine to the scout: Paul's is a
+one-time import (steady ~150 cars/month Mar→Oct 2025, nothing after the org
+was created on 2025-10-21); Carolina's rows are a 2024 dump (Sandhills
+2024-04..10, Cape Fear 2024-06..09 plus garbage years). Neither is a live
+feed anywhere on Ario. Both dropped from `ARIO_CHAINS` (registry status →
+candidate):
+
+- **Carolina Pick N Pull** really publishes on its own WordPress site:
+  `carolinapicknpull.com/inventory/?location={3|9|10}` (Location/Make
+  form, server-rendered). Plain curl gets a WAF 403, a browser is fine —
+  a curl_cffi-style adapter (Pick-A-Part VA precedent). ~4,300 cars, wave 3.
+- **Paul's Auto Yard**: paulsautosalvage.com has parts/engines/"used cars for
+  sale" pages but no public vehicle rows found. Directory-only for now.
+
+Wave 1 as built: EZ Pull N Pay ×7 + Foss U-Pull-It ×6 (+ Ryan's repaired),
+~13,000 live cars, VINs seeded from the legacy feed.
+
+#### 8.6.3 Probe result and merge
+
+CI probe (`Ario adapter probe`, run 40382136094) with `per_yard_limit` 40 —
+the function answers HTTP 400 to 200: **13,986 vehicles across 14 yards in
+~14 min**, every yard's newest set-out between 2026-10-07 and 2026-10-26;
+EZ counts 685–1,153, Foss 529–1,326, Ryan's 1,376 (vs 1,358 frozen).
+VIN seed from the legacy feed covered 6,221 (44%) — low where lots turn
+over fast (Ryan's ~81-day lifespan: 1%; Warner Robins 7%), high where they
+don't (Havelock/Birmingham 82–83%). The rest fill via get-inventory-item
+at 600/scan (~2 days). Merged to main; the first scheduled scan after the
+merge publishes the 13 new yards and un-freezes Ryan's.
