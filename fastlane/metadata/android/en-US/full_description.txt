@@ -1,0 +1,36 @@
+YardScout tracks the live inventory of self-service salvage yards across the country, so you stop driving to yards on a maybe.
+
+FIND THE CAR BEFORE YOU DRIVE
+• Live inventory from 240+ self-serve yards — Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part and a growing set of independents — refreshed throughout the day
+• Search by make, model and year range around your ZIP
+• See the row number, arrival date and VIN before you leave the house
+• Model search understands yard naming quirks — searching WRX finds every spelling
+
+FIND THE PART THAT FITS
+• Name the part and your car; YardScout lists donor cars near you it fits, with how sure we are (Verified fit or Likely fit)
+• Every car shows what it came from the factory with, so you know what to look for in the row
+• Compare one part's price across every yard in range, from each yard's own published price list
+
+KNOW THE YARDS
+• Every tracked yard near you with distance, car counts and what arrived this week
+• Each yard's pull-price list right in the app
+• Tool rules per yard (sawzalls, compressors) so you bring the right gear
+
+WATCH FOR THE RIGHT CAR
+• Build a watchlist of makes, models and years
+• Watched cars light up in the app when they arrive at a yard in your radius
+
+YARDSCOUT PRO
+• What each part would cost you used online, what the yard charges, and what you'd save pulling it yourself — on nearly every car
+• Push alerts within hours of a watched car hitting a yard in your radius, plus sale-day alerts
+• Which cars get picked over fast, days-on-lot and leaving-soon signals
+• Unlimited radius and nationwide search
+
+NO ACCOUNT, NO EMAIL
+• The whole app works without signing up
+• Alerts use an anonymous device ID — we never ask who you are
+
+YardScout Pro is $8.99/month through your Google Play account, auto-renews monthly, cancel anytime in Play Store → Subscriptions. Finding cars is free forever.
+
+Privacy policy: https://yardscout.io/privacy.html
+Terms of use: https://yardscout.io/terms.html

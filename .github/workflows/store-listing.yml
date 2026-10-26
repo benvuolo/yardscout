@@ -1,0 +1,36 @@
+# Manual: push the Google Play store listing (text + phone screenshots) from
+# fastlane/metadata/android/en-US — no binary, no track change. Play reviews
+# listing edits the same way it reviews a release. Needs PLAY_SERVICE_ACCOUNT_JSON.
+name: Store listing (Google Play)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  supply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - run: gem install fastlane --no-document
+      - name: Service-account key
+        env:
+          SA_RAW: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          raw = os.environ["SA_RAW"].strip(); obj, _ = json.JSONDecoder().raw_decode(raw[raw.find("{"):])
+          obj.setdefault("type", "service_account"); obj.setdefault("token_uri", "https://oauth2.googleapis.com/token")
+          json.dump(obj, open(os.environ["RUNNER_TEMP"] + "/play-sa.json", "w"))
+          PY
+      - name: Upload listing
+        run: |
+          fastlane supply --json_key "$RUNNER_TEMP/play-sa.json" --package_name io.yardscout.app \
+            --metadata_path fastlane/metadata/android \
+            --skip_upload_aab --skip_upload_apk --skip_upload_changelogs \
+            --skip_upload_images --track production

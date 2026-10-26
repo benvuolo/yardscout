@@ -251,13 +251,19 @@ jobs:
                     open(os.environ["RUNNER_TEMP"] + "/asc_key.json", "w"))
           PY
           sleep 20
+          # Listing text lives in fastlane/metadata/en-US (see fastlane/README.md);
+          # screenshots in fastlane/screenshots/en-US when present. Both go up
+          # with the version, then it is submitted.
           mkdir -p fastlane/metadata/en-US
           printf '%s\n' "${{ github.event.inputs.notes }}" > fastlane/metadata/en-US/release_notes.txt
+          SHOTS="--skip_screenshots"
+          if ls fastlane/screenshots/en-US/*.png >/dev/null 2>&1; then SHOTS="--skip_screenshots false --overwrite_screenshots --screenshots_path fastlane/screenshots"; fi
           for attempt in $(seq 1 12); do
             if fastlane deliver --api_key_path "$RUNNER_TEMP/asc_key.json" \
                 --app_identifier "$BUNDLE_ID" --team_id "$TEAM_ID" \
                 --app_version "${{ github.event.inputs.marketing_version }}" --build_number "$BUILD_NUMBER" \
-                --skip_binary_upload --skip_screenshots --skip_app_version_update false \
+                --skip_binary_upload --skip_metadata false --metadata_path fastlane/metadata $SHOTS \
+                --skip_app_version_update false \
                 --precheck_include_in_app_purchases false --run_precheck_before_submit false \
                 --submit_for_review --automatic_release --force; then
               echo "submitted ${{ github.event.inputs.marketing_version }} ($BUILD_NUMBER)"; exit 0
