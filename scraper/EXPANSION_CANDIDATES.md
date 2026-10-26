@@ -439,3 +439,36 @@ Also learned this build:
   1,867/1,881). The VinPlus `fenix_u_pull` tenant adds nothing — dropped.
 - Carolina PnP's dates need the standard `_sanitize_date_added` clamp
   (future years, 2000-01-31 placeholders) — already applied in enrich.
+
+#### 8.6.1 Live adapter built (same day)
+
+Owner approved probing the new backend. Observed from a real browser (the
+page's own requests, `scratchpad` Playwright runs), nothing guessed:
+
+- `POST /functions/v1/search-inventory` body
+  `{yard_list:[slug], per_yard_limit, item_rank_offset, limit_results,
+  sort_mode:"days_newest", projection:"list", surface:"yard", filters null}`
+  → `{items, total, yards_meta:[{yard, returned, total_matching, truncated,
+  next_offset}]}`. Items: id, year, make, model, row, stock, date_placed,
+  color, image_url (ignored), yard. **No VIN in the list.** The page pages
+  25 then 40 at a time by `next_offset`; `total_matching` is the whole lot.
+- `POST /functions/v1/get-inventory-item {inventory_id, yard_slug}` →
+  `{item:{..., vin, description}}` — the only place the VIN appears.
+- `GET /rest/v1/yards?slug=eq.{slug}&customer_facing_visible=eq.true` →
+  the yard record (display_name, address, `data.latitude/longitude`,
+  `inventory_source` e.g. `crush_xml_sync`, organization_id).
+- Auth: the site's publishable anon key from the bundle (every visitor's
+  browser sends it). Rate limiting exists ("Too many searches").
+- **Freshness confirmed live:** Ryan's `total_matching` 1,376 with cars
+  placed 2026-10-23; Foss Chesapeake 50 cars placed in the last 7 days.
+  The Bubble feed had neither.
+
+`fetch_ario_inventory` now reads this feed (offset paging per yard, server
+counts trusted, incomplete lots skipped, 429 → 30 s back-off). VINs: a new
+history-DB table `ario_vins` seeded once from the legacy feed (every car
+that pre-dates the freeze gets its VIN for free), then `get-inventory-item`
+newest-first under `ARIO_VIN_MAX_PER_RUN` (1000/scan ≈ a few days to drain
+the rest, then ~100/scan steady state). Ids are unchanged, so Ryan's
+history carries over. Verify with the manual `Ario adapter probe` workflow
+(`scraper/_probe_ario_live.py`); the per-yard table it prints is the merge
+gate.

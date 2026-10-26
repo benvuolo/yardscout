@@ -1145,15 +1145,15 @@
     {
       "name": "Ryan's Pick-a-Part",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' embedded as an iframe on the yard's CRUSH MVC site (ryanspickapart.com/Home/Inventory). FIRST Ario/Bubble adapter.",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
       "inventory_url": "https://ryanspickapart.com/Home/Inventory",
       "api": {
-        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search \u2014 Bubble obfuscated bodies (PBKDF2-MD5 c=7 + AES-256-CBC, keys derived from appname+timestamp; reproduced in _ario_encode_data). Types: custom.organization (slug ryans-pick-a-part-detroit -> org id), custom.inventorysearch (org + visible=true, n=400 paging), custom.vehicle_make / custom.vehicle_model ('in'-constrained id->name lookups).",
-        "method": "POST (JSON, obfuscated)",
-        "auth": "none (anonymous public search, same calls the embed makes)",
-        "format": "JSON hits: name/year/stock STK#####/VIN/row/ext color/added_date epoch-ms + make/model as __LOOKUP__ refs. Reference-equality constraints REQUIRE the '<appid>__LOOKUP__<id>' form \u2014 bare ids match nothing.",
-        "requests_per_scan": "~10-12 POSTs at 2s pacing (org + 4 inventory pages + make/model lookups; +1 GET for the price list)",
-        "notes": "Owner-forwarded email request (Elliot B., Oct 2026). ~16.6k historical inventorysearch records; visible=true filters to the ~1,350 currently on the lot. Stock numbers are CRUSH-style STK#####; 32 rows VIN-less (ids stay stock-based). Pin from the org record's own geocode (9309 Hubbell Ave, Detroit 48228). Needs the `cryptography` pip package (added to scan.yml). The yard site's own robots disallows its dead /Home/GetMakes|GetModels AJAX \u2014 never touched; app.autorecycler.io robots only disallows /version-test/."
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Observed from the page's own browser requests 2026-10-26. Rate-limited ('Too many searches'): 429 backs off 30s; a yard whose paging doesn't complete is skipped for the scan. Photos deliberately ignored."
       },
       "update_freshness": "live (added_date values from the same week; site banner 'New Vehicles Added Daily')",
       "robots": "app.autorecycler.io: allow all except /version-test/; ryanspickapart.com: disallows /Home/GetMakes + /Home/GetModels (not used)",
@@ -1249,15 +1249,15 @@
     {
       "name": "EZ Pull N Pay",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' (same multi-tenant adapter as Ryan's: fetch_ario_inventory / ARIO_CHAINS). Public per-yard pages at app.autorecycler.io/inventory/{slug}; the yard's own site embeds the NEW ario.autorecycler.io/yard/{slug} frontend (Supabase) in some cases.",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
       "inventory_url": "https://www.ezpullnpay.com/inventory/",
       "api": {
-        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search (Bubble obfuscated bodies; see Ryan's entry). custom.organization table fetched ONCE per scan (2 POSTs) and indexed by org Slug/id_text; custom.inventorysearch per yard (org ref + visible=true, n=400 paging); make/model lookups pooled across every Ario yard.",
-        "method": "POST (JSON, obfuscated)",
-        "auth": "none (anonymous public search, same calls the embed makes)",
-        "format": "JSON hits: year/name/stock/VIN/row/color/added_date epoch-ms + make/model __LOOKUP__ refs",
-        "requests_per_scan": "ceil(rows/400) per yard + the shared org/make/model lookups (~5-10 total across all Ario yards), 2s pacing, serial on the one host",
-        "notes": "Wave 1 of the 2026-10-26 Ario org-table sweep (EXPANSION_CANDIDATES.md \u00a78). Pins are the org records' own geocodes (preferred live; config lat/lng is the fallback). Ids {source}-{code}-{stock}."
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Observed from the page's own browser requests 2026-10-26. Rate-limited ('Too many searches'): 429 backs off 30s; a yard whose paging doesn't complete is skipped for the scan. Photos deliberately ignored."
       },
       "update_freshness": "live (added_date values from the same week)",
       "robots": "ezpullnpay.com answers 406 to non-browser clients (verify in a browser); app.autorecycler.io: allow all except /version-test/",
@@ -1331,15 +1331,15 @@
     {
       "name": "Paul's Auto Yard",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' (same multi-tenant adapter as Ryan's: fetch_ario_inventory / ARIO_CHAINS). Public per-yard pages at app.autorecycler.io/inventory/{slug}; the yard's own site embeds the NEW ario.autorecycler.io/yard/{slug} frontend (Supabase) in some cases.",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/pauls-south-bend",
       "api": {
-        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search (Bubble obfuscated bodies; see Ryan's entry). custom.organization table fetched ONCE per scan (2 POSTs) and indexed by org Slug/id_text; custom.inventorysearch per yard (org ref + visible=true, n=400 paging); make/model lookups pooled across every Ario yard.",
-        "method": "POST (JSON, obfuscated)",
-        "auth": "none (anonymous public search, same calls the embed makes)",
-        "format": "JSON hits: year/name/stock/VIN/row/color/added_date epoch-ms + make/model __LOOKUP__ refs",
-        "requests_per_scan": "ceil(rows/400) per yard + the shared org/make/model lookups (~5-10 total across all Ario yards), 2s pacing, serial on the one host",
-        "notes": "Wave 1 of the 2026-10-26 Ario org-table sweep (EXPANSION_CANDIDATES.md \u00a78). Pins are the org records' own geocodes (preferred live; config lat/lng is the fallback). Ids {source}-{code}-{stock}."
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Observed from the page's own browser requests 2026-10-26. Rate-limited ('Too many searches'): 429 backs off 30s; a yard whose paging doesn't complete is skipped for the scan. Photos deliberately ignored."
       },
       "update_freshness": "live",
       "robots": "paulsautoyard.com redirects to paulsautosalvage.com (no inventory page found on the WP site \u2014 Ario public pages are the inventory); app.autorecycler.io: allow all except /version-test/",
@@ -1440,15 +1440,15 @@
     {
       "name": "Foss U-Pull-It",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' (same multi-tenant adapter as Ryan's: fetch_ario_inventory / ARIO_CHAINS). Public per-yard pages at app.autorecycler.io/inventory/{slug}; the yard's own site embeds the NEW ario.autorecycler.io/yard/{slug} frontend (Supabase) in some cases.",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
       "inventory_url": "https://fossupullit.com/inventory/",
       "api": {
-        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search (Bubble obfuscated bodies; see Ryan's entry). custom.organization table fetched ONCE per scan (2 POSTs) and indexed by org Slug/id_text; custom.inventorysearch per yard (org ref + visible=true, n=400 paging); make/model lookups pooled across every Ario yard.",
-        "method": "POST (JSON, obfuscated)",
-        "auth": "none (anonymous public search, same calls the embed makes)",
-        "format": "JSON hits: year/name/stock/VIN/row/color/added_date epoch-ms + make/model __LOOKUP__ refs",
-        "requests_per_scan": "ceil(rows/400) per yard + the shared org/make/model lookups (~5-10 total across all Ario yards), 2s pacing, serial on the one host",
-        "notes": "Wave 1 of the 2026-10-26 Ario org-table sweep (EXPANSION_CANDIDATES.md \u00a78). Pins are the org records' own geocodes (preferred live; config lat/lng is the fallback). Ids {source}-{code}-{stock}."
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Observed from the page's own browser requests 2026-10-26. Rate-limited ('Too many searches'): 429 backs off 30s; a yard whose paging doesn't complete is skipped for the scan. Photos deliberately ignored."
       },
       "update_freshness": "live",
       "robots": "fossupullit.com: /inventory/ iframes ario.autorecycler.io/yard/foss-recycling?embed=1; app.autorecycler.io: allow all except /version-test/",
@@ -1513,15 +1513,15 @@
     {
       "name": "Carolina Pick N Pull",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' (same multi-tenant adapter as Ryan's: fetch_ario_inventory / ARIO_CHAINS). Public per-yard pages at app.autorecycler.io/inventory/{slug}; the yard's own site embeds the NEW ario.autorecycler.io/yard/{slug} frontend (Supabase) in some cases.",
+      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/cape-fear-pick-n-pull-wilmington-north-carolina",
       "api": {
-        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search (Bubble obfuscated bodies; see Ryan's entry). custom.organization table fetched ONCE per scan (2 POSTs) and indexed by org Slug/id_text; custom.inventorysearch per yard (org ref + visible=true, n=400 paging); make/model lookups pooled across every Ario yard.",
-        "method": "POST (JSON, obfuscated)",
-        "auth": "none (anonymous public search, same calls the embed makes)",
-        "format": "JSON hits: year/name/stock/VIN/row/color/added_date epoch-ms + make/model __LOOKUP__ refs",
-        "requests_per_scan": "ceil(rows/400) per yard + the shared org/make/model lookups (~5-10 total across all Ario yards), 2s pacing, serial on the one host",
-        "notes": "Wave 1 of the 2026-10-26 Ario org-table sweep (EXPANSION_CANDIDATES.md \u00a78). Pins are the org records' own geocodes (preferred live; config lat/lng is the fallback). Ids {source}-{code}-{stock}."
+        "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
+        "method": "POST (JSON)",
+        "auth": "site's publishable anon key (sent by every visitor's browser)",
+        "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
+        "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
+        "notes": "Observed from the page's own browser requests 2026-10-26. Rate-limited ('Too many searches'): 429 backs off 30s; a yard whose paging doesn't complete is skipped for the scan. Photos deliberately ignored."
       },
       "update_freshness": "live",
       "robots": "carolinapicknpull.com answers 403 to non-browser clients; the three yards' Ario public pages are the inventory; app.autorecycler.io: allow all except /version-test/",
