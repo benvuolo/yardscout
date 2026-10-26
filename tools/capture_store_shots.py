@@ -61,9 +61,14 @@ def new_ctx(browser, *, ios: bool, pro: bool):
 
 def load_with_zip(page, base):
     page.goto(base, wait_until="domcontentloaded", timeout=60000)
-    page.wait_for_selector("#zip-banner-input", state="visible", timeout=60000)
-    page.fill("#zip-banner-input", ZIP)
-    page.click("#zip-banner-go")
+    # A second page in the same context already has the zip stored, so the
+    # zip banner never appears — go straight to the cards in that case.
+    try:
+        page.wait_for_selector("#zip-banner-input", state="visible", timeout=8000)
+        page.fill("#zip-banner-input", ZIP)
+        page.click("#zip-banner-go")
+    except Exception:
+        pass
     page.wait_for_selector("#live-grid .car-card", timeout=90000)
     page.wait_for_timeout(3000)
     pin_header(page)
