@@ -426,6 +426,39 @@ tier, so links unfurl in forum threads and texts without the app shell:
 | `/yard/<slug>` | "What's at <yard> this week": lot count, last-7-day set-outs linking to car pages, typical lifespan |
 | `/sitemap-yards.xml` | every yard page (referenced from `docs/robots.txt`) |
 
+| `/yards` | public coverage page: every yard by state with counts, recently added yards (`docs/data/yards_added.json`), and a request-a-yard form (POSTs `kind=yard` to `/v1/coverage/request`) |
+| `/landed`, `/landed/<make-slug>` | what set out in the last 7 days, by make and model, from `docs/data/landed.json` (written by every scan) — the "N 4Runners landed this week" data posts |
+
 The app's share button links here (`shareUrlFor` in `docs/app.js`). A car that
 has since left the list answers 404 with a "no longer listed — watch for the
-next one" page. Deploy with `cd backend/site-proxy && npx wrangler deploy`.
+next one" page.
+
+## Deploying from CI (`.github/workflows/deploy-workers.yml`)
+
+Every push to `main` that touches `backend/` deploys both Workers (D1
+migrations first), and *Actions → Deploy Workers → Run workflow* does it by
+hand. Two repository secrets:
+
+| Secret | Where it comes from |
+|---|---|
+| `CLOUDFLARE_API_TOKEN` | dash.cloudflare.com → profile (top right) → *API Tokens* → *Create Token* → template **Edit Cloudflare Workers** → under *Permissions* add **Account · D1 · Edit** → Continue → Create → copy once |
+| `CLOUDFLARE_ACCOUNT_ID` | dash.cloudflare.com → *Workers & Pages* → right-hand column *Account ID* |
+
+Worker secrets (Stripe, APNs, Resend, Google) live in Cloudflare and are
+untouched by deploys. Local `npx wrangler deploy` still works.
+
+## UTM attribution (`backend/src/attribution.js`)
+
+A `?utm_source=…&utm_campaign=…` link is remembered by the web app for 90
+days and stamped on a short funnel (`first-visit`, `zip-entered`,
+`part-first-search`, `watch-created`, `push-enabled`, `checkout-start`,
+`pro-converted`) sent to `POST /v1/events` as daily counters — no ids, no
+IPs. Read it with:
+
+```bash
+curl -s -H "x-admin-secret: $ADMIN_SECRET" \
+  "https://yardscout-api.yardscout.workers.dev/v1/admin/attribution?days=30"
+```
+
+App-store installs can't carry a UTM, so native sessions count under an
+empty source unless the phone visited a tagged web link first.

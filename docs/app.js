@@ -5357,6 +5357,7 @@ function addWatchItem() {
     watchlist.push(entry);
     seedAlertedForEntry(entry);
     syncWatchToServer(entry);
+    track('watch-created');
     added++;
   }
   if (!added) return alert('Already on your watchlist.');
