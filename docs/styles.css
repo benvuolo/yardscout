@@ -1600,7 +1600,10 @@
       align-items: center;
       justify-content: center;
     }
-    .car-badges .heart-btn, .car-badges .share-btn, .car-badges .watch-btn { margin: -0.5rem -0.15rem; }
+    .car-badges .heart-btn, .car-badges .share-btn, .car-badges .watch-btn { min-width: 40px; margin: -0.5rem -0.4rem; }
+    /* Inline in the meta text line: pull the extra hit-area height back in
+       so the line doesn't grow and wrap around a 44px block. */
+    .btn-copy-vin { margin: -0.9rem 0 -0.9rem 0; vertical-align: middle; }
   }
   @media (min-width: 768px) {
     #app-promo { bottom: 1rem; }
