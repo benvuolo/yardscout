@@ -3,7 +3,7 @@
    app is always fresh when online but still opens (with the last-seen inventory)
    when cell signal dies between the rows of cars. */
 
-const CACHE = 'jh-v71';
+const CACHE = 'jh-v72';
 const SHELL = [
   './',
   './index.html',
@@ -41,7 +41,7 @@ self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET' || url.origin !== self.location.origin) return;
   // The big inventory file is managed by the app itself (Cache API,
   // cache-first + background revalidate in app.js) — network-first here would
-  // make every repeat visit wait on the full 4MB download and store a
+  // make every repeat visit wait on the full ~37MB download and store a
   // duplicate copy.
   if (url.pathname.endsWith('/data/inventory_live.json')) return;
   e.respondWith(

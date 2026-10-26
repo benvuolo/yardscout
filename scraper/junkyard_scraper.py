@@ -18834,6 +18834,15 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
     }
 
 
+def _write_inventory_meta(payload: dict) -> None:
+    """Few-byte freshness probe beside inventory_live.json: the app checks
+    this before touching the ~37 MB file (loadLiveInventory in app.js)."""
+    (DATA_DIR / "inventory_meta.json").write_text(json.dumps(
+        {"scrapedAt": payload.get("scrapedAt"),
+         "vehicles": len(payload.get("vehicles") or [])},
+        separators=(",", ":")))
+
+
 def build_inventory_json_payload(vehicles: list[dict], only_matches: bool) -> dict:
     """Wrapper written to inventory_live.json: metadata + vehicle rows."""
     return compact_inventory_v2(output_json(vehicles, only_matches=only_matches))
@@ -19624,6 +19633,7 @@ def main():
                 if args.save:
                     apply_stale_keep(payload, extras)
                     LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
+                    _write_inventory_meta(payload)
                     EXTRAS_FILE.write_text(json.dumps(
                         {"version": 1, "scrapedAt": payload["scrapedAt"],
                          "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
@@ -19665,6 +19675,7 @@ def main():
             if args.save:
                 apply_stale_keep(payload, extras)
                 LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
+                _write_inventory_meta(payload)
                 EXTRAS_FILE.write_text(json.dumps(
                     {"version": 1, "scrapedAt": payload["scrapedAt"],
                      "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
