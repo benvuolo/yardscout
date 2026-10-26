@@ -101,8 +101,7 @@ def free_shots(page, base, out):
 
     # 7: fitment — Parts tab
     try:
-        page.keyboard.press("Escape")
-        page.locator('.tab[data-tab="parts"]').click(timeout=10000, force=True); page.wait_for_timeout(1000)
+        page.locator('.tab[data-tab="parts"]').first.click(timeout=10000); page.wait_for_timeout(1000)
         page.fill("#pf-part", "alternator"); page.wait_for_timeout(800)
         opt = page.locator('[role="option"]:visible, .combo-item:visible').first
         if opt.count():
@@ -118,21 +117,27 @@ def free_shots(page, base, out):
             pass
         if page.locator("#pf-zip").count():
             page.fill("#pf-zip", ZIP)
+        # Multi-engine models ask which engine is in YOUR car: pick the first.
+        eng = page.locator('button:has-text(" I4"), button:has-text(" V6"), button:has-text(" V8")').first
+        if eng.count():
+            eng.click(); page.wait_for_timeout(600)
         btn = page.locator('button:has-text("Find donor cars"):visible').first
         if btn.count():
-            btn.click(); page.wait_for_timeout(4000)
-        res = page.locator('#pf-results, .pf-results').first
+            btn.click(); page.wait_for_timeout(5000)
+        res = page.locator('#pf-results .pf-results-head, #pf-results .car-card').first
         if res.count():
-            res.scroll_into_view_if_needed(); page.wait_for_timeout(400)
-            page.evaluate("window.scrollBy(0, -120)")
+            res.evaluate("el => { el.scrollIntoView({block: 'start'}); window.scrollBy(0, -(document.querySelector('header')?.offsetHeight || 90) - 60); }")
+            page.wait_for_timeout(500)
         shoot(page, out, "7_fitment")
     except Exception as e:
         log("shot 7 failed:", str(e)[:120])
 
-    # 6: compare — Yards tab
+    # 6: compare — Yards tab, in a fresh page (the Parts flow leaves state
+    # that makes the tab bar unreachable for the driver).
     try:
-        page.keyboard.press("Escape")
-        page.locator('.tab[data-tab="yards"]').click(timeout=10000, force=True); page.wait_for_selector("#yards-grid .yard-card", timeout=30000); page.wait_for_timeout(1500)
+        page = page.context.new_page()
+        load_with_zip(page, base)
+        page.locator('.tab[data-tab="yards"]').first.click(timeout=10000); page.wait_for_selector("#yards-grid .yard-card", timeout=30000); page.wait_for_timeout(1500)
         cmp_in = page.locator('input[placeholder*="Compare" i]:visible').first
         if cmp_in.count():
             cmp_in.fill("Alternator"); page.wait_for_timeout(800)
@@ -144,7 +149,7 @@ def free_shots(page, base, out):
         shoot(page, out, "6_compare")
         # 3: plain yards list
         page.reload(wait_until="domcontentloaded"); page.wait_for_timeout(1500)
-        page.locator('.tab[data-tab="yards"]').click(timeout=10000, force=True); page.wait_for_selector("#yards-grid .yard-card", timeout=60000); page.wait_for_timeout(2000)
+        page.locator('.tab[data-tab="yards"]').first.click(timeout=10000); page.wait_for_selector("#yards-grid .yard-card", timeout=60000); page.wait_for_timeout(2000)
         first = page.locator("#yards-grid .yard-card").first
         first.scroll_into_view_if_needed(); page.evaluate("window.scrollBy(0, -170)"); page.wait_for_timeout(400)
         shoot(page, out, "3_yards")
@@ -153,8 +158,7 @@ def free_shots(page, base, out):
 
     # 4: alerts
     try:
-        page.keyboard.press("Escape")
-        page.locator('.tab[data-tab="alerts"]').click(timeout=10000, force=True); page.wait_for_timeout(2500)
+        page.locator('.tab[data-tab="alerts"]').first.click(timeout=10000); page.wait_for_timeout(2500)
         page.evaluate("window.scrollTo(0, 0)")
         shoot(page, out, "4_alerts")
     except Exception as e:
