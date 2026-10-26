@@ -66,6 +66,15 @@ CREATE TABLE IF NOT EXISTS vin_decodes (
     trim_quality TEXT,
     decoded_at   TEXT NOT NULL
 );
+
+-- Ario (autorecycler.io) live feed: the list search carries no VIN, only the
+-- per-car detail call does. VINs are fetched once per stock number (capped
+-- per run) and kept here; seeded in bulk from the legacy Bubble feed.
+CREATE TABLE IF NOT EXISTS ario_vins (
+    vehicle_id   TEXT PRIMARY KEY,   -- the scan's vehicle id ({chain}-{code}-{stock})
+    vin          TEXT NOT NULL,
+    fetched_at   TEXT NOT NULL
+);
 """
 
 
@@ -207,6 +216,33 @@ def vin_decode_count() -> int:
     n = conn.execute("SELECT COUNT(*) FROM vin_decodes").fetchone()[0]
     conn.close()
     return n
+
+
+def load_ario_vins() -> dict:
+    """{vehicle_id: vin} for every Ario car whose VIN has been fetched."""
+    conn = _connect()
+    rows = conn.execute("SELECT vehicle_id, vin FROM ario_vins").fetchall()
+    conn.close()
+    return dict(rows)
+
+
+def store_ario_vins(vins: dict, fetched_at: str) -> int:
+    """Insert {vehicle_id: vin}; existing ids are left alone (a stock number's
+    VIN never changes). Returns rows written."""
+    if not vins:
+        return 0
+    conn = _connect()
+    cur = conn.cursor()
+    added = 0
+    for vid, vin in vins.items():
+        if not (vid and vin):
+            continue
+        cur.execute("INSERT OR IGNORE INTO ario_vins (vehicle_id, vin, fetched_at) VALUES (?,?,?)",
+                    (vid, vin, fetched_at))
+        added += cur.rowcount
+    conn.commit()
+    conn.close()
+    return added
 
 
 def import_vin_decodes_gz(path: Path) -> int:

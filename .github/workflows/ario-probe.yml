@@ -1,0 +1,41 @@
+# Manual-only: run the live Ario adapter by itself and print the per-yard
+# table (scraper/_probe_ario_live.py). Restores the scan-state cache so the
+# ario_vins table persists between probes, and saves it back so the VIN
+# backfill done here isn't wasted. Never commits anything.
+name: Ario adapter probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      vin_cap:
+        description: "get-inventory-item calls this run (VIN backfill)"
+        default: "50"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: junkyard-scan   # never overlap a real scan (shared history DB cache)
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Restore scan state
+        uses: actions/cache@v4
+        with:
+          path: |
+            scraper/inventory_history.db
+            scraper/watch_alerted.json
+          key: scan-state-${{ github.run_id }}
+          restore-keys: scan-state-
+      - run: pip install requests beautifulsoup4 rich curl_cffi cryptography
+      - name: Probe live Ario feed
+        env:
+          ARIO_VIN_MAX_PER_RUN: ${{ github.event.inputs.vin_cap || '50' }}
+        run: python scraper/_probe_ario_live.py

@@ -149,6 +149,64 @@ check("chains with no yards are NOT registered",
               for src, c in js.ARIO_CHAINS.items() if not c["yards"]))
 check("fetcher wired", any(fn is js.fetch_ario_inventory for _l, fn in js.INDEPENDENT_FETCHERS))
 
+# --- live (Supabase) feed: paging, truncation, VIN cache, backfill cap --------
+class FakeSession:
+    pass
+
+
+def make_fake_post(pages: dict, details: dict, fail_at: int | None = None, calls: list | None = None):
+    """pages: {offset: (items, meta)}; details: {inventory_id: vin}."""
+    def fake(session, fn, body):
+        if calls is not None:
+            calls.append((fn, body))
+        if fn == "search-inventory":
+            off = body["item_rank_offset"]
+            if fail_at is not None and off == fail_at:
+                return None
+            items, meta = pages[off]
+            return {"items": items, "total": meta["total_matching"], "yards_meta": [meta]}
+        if fn == "get-inventory-item":
+            vin = details.get(body["inventory_id"])
+            return {"item": {"vin": vin}} if vin else {"item": {}}
+        raise AssertionError(fn)
+    return fake
+
+
+def item(i, stock=None, date="2026-10-20"):
+    return {"id": str(1000 + i), "year": "2010", "make": "FORD", "model": "FUSION", "row": "7",
+            "stock": stock or f"STK{i:05d}", "date_placed": date, "color": "RED", "yard": "foss-wilson"}
+
+
+PAGES = {
+    0: ([item(i) for i in range(3)], {"yard": "foss-wilson", "returned": 3, "total_matching": 5, "truncated": True, "next_offset": 3}),
+    3: ([item(i) for i in range(3, 5)], {"yard": "foss-wilson", "returned": 2, "total_matching": 5, "truncated": False, "next_offset": 5}),
+}
+_orig_post = js._ario_live_post
+calls: list = []
+js._ario_live_post = make_fake_post(PAGES, {"1001": "1FAHP3F29CL123456"}, calls=calls)
+try:
+    trunc: list = []
+    items = js._ario_live_yard_items(FakeSession(), "foss-wilson", truncated=trunc)
+    check("live paging follows next_offset to completion", [i["id"] for i in items] == [str(1000 + i) for i in range(5)] and not trunc, str(trunc))
+    check("live paging asks for ARIO_LIVE_PAGE rows", calls[0][1]["per_yard_limit"] == js.ARIO_LIVE_PAGE and calls[0][1]["yard_list"] == ["foss-wilson"])
+
+    yard = {"slug": "foss-wilson", "code": "wilson", "name": "Foss U-Pull-It - Wilson", "city": "Wilson", "state": "NC", "lat": 35.7, "lng": -77.9}
+    vs = js._ario_live_items_to_vehicles(items, yard=yard, source="foss", id_prefix="foss-wilson-", vin_map={"foss-wilson-stk00000": "1FAHP3F20CL000000"})
+    check("live rows map to the same id scheme as the legacy feed", vs[0]["id"] == "foss-wilson-stk00000", vs[0]["id"])
+    check("VIN comes from the cache when present", vs[0]["vin"] == "1FAHP3F20CL000000" and vs[1]["vin"] == "")
+    check("date_placed -> dateAdded, color title-cased", vs[0]["dateAdded"] == "2026-10-20" and vs[0]["_color"] == "Red")
+    got = js._ario_vin_backfill(FakeSession(), vs, cap=1)
+    check("backfill fetches VIN-less cars up to the cap (newest first) and fills the row",
+          got == {"foss-wilson-stk00001": "1FAHP3F29CL123456"} and vs[1]["vin"] == "1FAHP3F29CL123456", str(got))
+    check("backfill skipped the rest under the cap", vs[2]["vin"] == "" and sum(1 for f, _ in calls if f == "get-inventory-item") == 1)
+
+    js._ario_live_post = make_fake_post(PAGES, {}, fail_at=3)
+    trunc = []
+    items = js._ario_live_yard_items(FakeSession(), "foss-wilson", truncated=trunc)
+    check("a failed page reports truncation instead of a short lot", len(items) == 3 and trunc and "failed" in trunc[0], str(trunc))
+finally:
+    js._ario_live_post = _orig_post
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILED: {FAILS}")

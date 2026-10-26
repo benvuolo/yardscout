@@ -17238,8 +17238,14 @@ def _ario_rows_to_vehicles(rows: list[dict], *, yard: dict, source: str,
     return vehicles
 
 
-def fetch_ario_inventory() -> list[dict]:
-    """Every configured Ario (autorecycler.io) yard — Ryan's + wave 1 chains.
+def fetch_ario_legacy_inventory() -> list[dict]:
+    """Every configured Ario yard from the LEGACY Bubble app (app.autorecycler.io).
+
+    FROZEN SINCE LATE AUGUST 2026: Ario moved live inventory to the Supabase
+    frontend (fetch_ario_inventory below); this feed still hides departures
+    but receives no new cars. Kept for two jobs — it is the only bulk source
+    of VINs (the live list search omits them), so it seeds the ario_vins
+    cache once, and _probe_ario_orgs.py still reads the org table here.
 
     One org-table fetch resolves every yard's org record (slug or id) and
     pin; inventory pages are per yard; make/model id->name lookups are
@@ -17305,6 +17311,212 @@ def fetch_ario_inventory() -> list[dict]:
         vehicles.extend(got)
     print(f"  [Ario] {len(vehicles)} vehicles across {len(per_yard)} yards",
           file=sys.stderr)
+    return vehicles
+
+
+# ---- Ario LIVE feed (ario.autorecycler.io, Supabase) ------------------------
+# 2026-10-26: every yard's own site now embeds ario.autorecycler.io/yard/
+# {slug}?embed=1 — a Vite SPA on Supabase project zqfzqcyteuemzbnwtmcr. The
+# page's own calls (observed in a browser, see EXPANSION_CANDIDATES.md §8.6):
+#   POST /functions/v1/search-inventory
+#        {yard_list:[slug], per_yard_limit, item_rank_offset, limit_results,
+#         sort_mode:"days_newest", projection:"list", surface:"yard", filters
+#         null} -> {items:[{id, year, make, model, row, stock, date_placed,
+#         color, yard, ...}], total, yards_meta:[{yard, returned,
+#         total_matching, truncated, next_offset}]}
+#   POST /functions/v1/get-inventory-item {inventory_id, yard_slug}
+#        -> {item:{..., vin, description}}   (the ONLY place the VIN appears)
+# Auth is the site's publishable anon key (shipped in the page bundle; every
+# visitor's browser sends it). Offset paging per yard; the page uses 25/40
+# per call, we ask for ARIO_LIVE_PAGE and trust `returned`/`next_offset`.
+# The function rate-limits anonymous use ("Too many searches") — 429s back
+# off 30s and a yard whose paging doesn't complete is skipped for the scan.
+# VINs: fetched once per stock via get-inventory-item, newest cars first,
+# ARIO_VIN_MAX_PER_RUN per scan, persisted in the history DB (ario_vins),
+# seeded from the legacy Bubble feed when the table is empty. Photos
+# (image_url) are deliberately ignored — no-photos policy.
+ARIO_LIVE_FN = "https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1"
+ARIO_LIVE_KEY = "sb_publishable_njLlN9YEWSrEvkZ4ZS2fdQ_l7vkJI-C"
+ARIO_LIVE_PAGE = 200
+ARIO_LIVE_DELAY_SEC = 2.0
+ARIO_LIVE_RATE_LIMIT_SLEEP = 30
+
+
+def _ario_live_post(session: "requests.Session", fn: str, body: dict) -> dict | None:
+    """One edge-function call; retries transient errors, backs off on 429."""
+    for attempt in (1, 2, 3):
+        time.sleep(ARIO_LIVE_DELAY_SEC)
+        try:
+            r = session.post(f"{ARIO_LIVE_FN}/{fn}", json=body, timeout=60,
+                             headers={**HEADERS, "Content-Type": "application/json",
+                                      "apikey": ARIO_LIVE_KEY,
+                                      "Authorization": f"Bearer {ARIO_LIVE_KEY}",
+                                      "Origin": "https://ario.autorecycler.io",
+                                      "Referer": "https://ario.autorecycler.io/"})
+            if r.status_code == 429:
+                print(f"  [Ario live] {fn}: rate limited (attempt {attempt}) — "
+                      f"sleeping {ARIO_LIVE_RATE_LIMIT_SLEEP}s", file=sys.stderr)
+                time.sleep(ARIO_LIVE_RATE_LIMIT_SLEEP)
+                continue
+            r.raise_for_status()
+            return r.json()
+        except Exception as e:
+            print(f"  [Ario live] {fn} attempt {attempt} failed: {e}", file=sys.stderr)
+            if attempt < 3:
+                time.sleep(5)
+    return None
+
+
+def _ario_live_yard_items(session: "requests.Session", slug: str,
+                          truncated: list | None = None) -> list[dict]:
+    """Every list-projection item for one yard, offset-paged to completion.
+    Appends a reason to `truncated` (and returns what it has) when the
+    server's own meta says the lot was not fully read."""
+    items: list[dict] = []
+    offset = 0
+    total = None
+    for _ in range(200):
+        res = _ario_live_post(session, "search-inventory", {
+            "start_year": None, "end_year": None, "input_make": None,
+            "input_model": None, "make_list": None, "model_keywords": None,
+            "yard_list": [slug], "min_date_placed": None, "ario_date_removed": None,
+            "sort_mode": "days_newest", "projection": "list", "surface": "yard",
+            "per_yard_limit": ARIO_LIVE_PAGE, "item_rank_offset": offset,
+            "limit_results": ARIO_LIVE_PAGE,
+        })
+        if res is None:
+            if truncated is not None:
+                truncated.append(f"search-inventory failed at offset {offset}")
+            return items
+        page = [it for it in (res.get("items") or []) if it.get("yard") in (slug, None)]
+        meta = next((m for m in (res.get("yards_meta") or []) if m.get("yard") == slug), {})
+        total = meta.get("total_matching", total)
+        items.extend(page)
+        if not page or not meta.get("truncated"):
+            break
+        nxt = int(meta.get("next_offset") or 0)
+        if nxt <= offset:
+            if truncated is not None:
+                truncated.append(f"next_offset did not advance at {offset}")
+            return items
+        offset = nxt
+    if total is not None and len(items) < int(total) and truncated is not None:
+        truncated.append(f"read {len(items)} of {total}")
+    return items
+
+
+def _ario_live_items_to_vehicles(items: list[dict], *, yard: dict, source: str,
+                                 id_prefix: str, vin_map: dict[str, str]) -> list[dict]:
+    """search-inventory list items -> scan vehicle dicts for ONE yard. VINs
+    come from vin_map (the ario_vins cache); rows carry `_ario_item_id` so
+    the VIN backfill can ask get-inventory-item for the ones still missing."""
+    vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    for it in items:
+        try:
+            year_i = int(it.get("year") or 0)
+        except (TypeError, ValueError):
+            year_i = 0
+        make_s = str(it.get("make") or "").strip()
+        model_s = str(it.get("model") or "").strip()
+        stock = str(it.get("stock") or "").strip()
+        key = stock or str(it.get("id") or "").strip()
+        if not make_s or not model_s or not year_i or not key:
+            continue
+        base = f"{id_prefix}{key.lower()}"
+        n = dupes.get(base, 0) + 1
+        dupes[base] = n
+        vid = base if n == 1 else f"{base}-{n}"
+        vin = str(vin_map.get(vid) or "").strip().upper()
+        color = str(it.get("color") or "").strip().title()
+        vehicles.append({
+            "id": vid,
+            "vin": vin if len(vin) == 17 else "",
+            "year": year_i,
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": str(it.get("row") or "").strip(),
+            "dateAdded": str(it.get("date_placed") or "")[:10],
+            **({"_color": color} if color else {}),
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": source,
+            "_ario_item_id": str(it.get("id") or ""),
+            "_ario_slug": yard["slug"],
+        })
+    return vehicles
+
+
+def _ario_vin_backfill(session: "requests.Session", vehicles: list[dict],
+                       cap: int) -> dict[str, str]:
+    """get-inventory-item for up to `cap` VIN-less cars, newest first.
+    Returns {vehicle_id: vin} for the ones that answered."""
+    todo = [v for v in vehicles if not v["vin"] and v.get("_ario_item_id")]
+    todo.sort(key=lambda v: v.get("dateAdded") or "", reverse=True)
+    got: dict[str, str] = {}
+    for v in todo[:max(0, cap)]:
+        res = _ario_live_post(session, "get-inventory-item",
+                              {"inventory_id": v["_ario_item_id"], "yard_slug": v["_ario_slug"]})
+        vin = str(((res or {}).get("item") or {}).get("vin") or "").strip().upper()
+        if len(vin) == 17:
+            got[v["id"]] = vin
+            v["vin"] = vin
+    if todo:
+        print(f"  [Ario live] VIN backfill: {len(got)} fetched of {len(todo)} missing "
+              f"(cap {cap}; {max(0, len(todo) - cap)} left for later runs)", file=sys.stderr)
+    return got
+
+
+def fetch_ario_inventory() -> list[dict]:
+    """Every configured Ario yard from the LIVE Supabase feed (see block above)."""
+    try:
+        import db as _db
+    except ImportError:
+        from scraper import db as _db  # pragma: no cover
+    session = requests.Session()
+    vin_map = _db.load_ario_vins()
+    if not vin_map:
+        # One-time seed: the legacy feed carries VINs for every car that
+        # existed before it froze — most of the current lots. Free VINs.
+        legacy = fetch_ario_legacy_inventory()
+        seed = {v["id"]: v["vin"] for v in legacy if v.get("vin")}
+        n = _db.store_ario_vins(seed, _iso_utc_z())
+        print(f"  [Ario live] seeded ario_vins with {n} VINs from the legacy feed",
+              file=sys.stderr)
+        vin_map = _db.load_ario_vins()
+
+    vehicles: list[dict] = []
+    n_yards = 0
+    for source, chain in ARIO_CHAINS.items():
+        for yard in chain["yards"]:
+            trunc: list[str] = []
+            items = _ario_live_yard_items(session, yard["slug"], truncated=trunc)
+            if trunc:
+                print(f"  [Ario live] {yard['name']}: paging incomplete ({trunc[0]}) — "
+                      f"skipping this scan rather than publishing a partial lot",
+                      file=sys.stderr)
+                continue
+            code = yard.get("code") or re.sub(r"[^a-z0-9]+", "", yard["name"].lower())
+            _indep_cache_raw(f"ario_live_{source}_{code}.json", json.dumps(items).encode())
+            id_prefix = chain.get("id_prefix") or f"{source}-{code}-"
+            got = _ario_live_items_to_vehicles(items, yard=yard, source=source,
+                                               id_prefix=id_prefix, vin_map=vin_map)
+            print(f"  [Ario live] {yard['name']}: {len(got)} vehicles", file=sys.stderr)
+            vehicles.extend(got)
+            n_yards += 1
+
+    cap = max(0, int(os.environ.get("ARIO_VIN_MAX_PER_RUN", "1000")))
+    fresh = _ario_vin_backfill(session, vehicles, cap)
+    if fresh:
+        _db.store_ario_vins(fresh, _iso_utc_z())
+    for v in vehicles:
+        v.pop("_ario_item_id", None)
+        v.pop("_ario_slug", None)
+    print(f"  [Ario live] {len(vehicles)} vehicles across {n_yards} yards "
+          f"({sum(1 for v in vehicles if v['vin'])} with VIN)", file=sys.stderr)
     return vehicles
 
 
