@@ -95,10 +95,36 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple: -k "$KCPASS" "$KEYCHAIN" > /dev/null
           security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
           security find-identity -v -p codesigning "$KEYCHAIN"
-          # xcodebuild looks for API keys in ~/.appstoreconnect/private_keys/
+          # xcodebuild looks for API keys in ~/.appstoreconnect/private_keys/.
+          # The secret may have been pasted with lost newlines, as a single
+          # line, or base64-encoded — rebuild a clean PEM from any of those.
           mkdir -p ~/.appstoreconnect/private_keys
-          printf '%s' "$ASC_P8" > ~/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8
-          echo "key_path=$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8" >> "$GITHUB_ENV"
+          KEY_FILE=$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8
+          python3 - "$KEY_FILE" <<'PY'
+          import base64, os, re, sys, textwrap
+          raw = os.environ["ASC_P8"].strip().replace("\r", "")
+          raw = raw.replace("\\n", "\n")          # literal backslash-n from some paste paths
+          def body_of(txt):
+              m = re.search(r"-----BEGIN[^-]*-----(.*?)-----END", txt, re.S)
+              return re.sub(r"\s+", "", m.group(1)) if m else None
+          body = body_of(raw)
+          if body is None:
+              compact = re.sub(r"\s+", "", raw)
+              try:
+                  dec = base64.b64decode(compact, validate=True)
+                  inner = body_of(dec.decode("utf-8", "ignore"))
+                  body = inner if inner else compact   # base64 of a PEM, or bare DER base64
+              except Exception:
+                  body = compact
+          try:
+              base64.b64decode(body, validate=True)
+          except Exception:
+              print("::error::ASC_API_KEY_P8 is not a PEM/base64 private key — paste the AuthKey_*.p8 file contents"); sys.exit(1)
+          pem = "-----BEGIN PRIVATE KEY-----\n" + "\n".join(textwrap.wrap(body, 64)) + "\n-----END PRIVATE KEY-----\n"
+          open(sys.argv[1], "w").write(pem)
+          PY
+          openssl pkey -in "$KEY_FILE" -noout 2>/dev/null && echo "API key PEM ok" || { echo "::error::ASC_API_KEY_P8 did not parse as a private key"; exit 1; }
+          echo "key_path=$KEY_FILE" >> "$GITHUB_ENV"
 
       - name: Archive
         env:
