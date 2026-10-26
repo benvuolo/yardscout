@@ -1164,6 +1164,9 @@
     font-weight: 400;
   }
   .lot-clock-soon { color: var(--orange); }
+  .scan-stamp { opacity: 0.85; }
+  .multi-select-row-free span { font-style: italic; }
+  .multi-select-note { padding-top: 0; font-size: 0.75rem; }
   .badge-soon {
     background: var(--gold-soft);
     color: var(--orange);
