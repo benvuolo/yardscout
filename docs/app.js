@@ -423,7 +423,7 @@ function vinMetaHtml(v) {
   if (specBits.length) {
     vpic = isPro()
       ? ` <span class="meta-note" title="Factory build — trim/drivetrain decoded from the VIN via NHTSA VPIC, engine from the VIN or the yard\u2019s own feed — so you know what to look for before walking over">${specBits.join(' &middot; ')} (factory spec)</span>`
-      : ` <button type="button" class="lock-chip lock-chip-sm" onclick="event.stopPropagation();openUpgradeSheet('vin-specs')" title="Factory trim, drivetrain, and engine decoded from the VIN &mdash; a Pro feature">${ICON.lock} VIN specs</button>`;
+      : '';   // free cards carry one Pro link (the savings line) — not a second one per VIN
   }
   let mismatch = '';
   if (v.vpicMismatch) {
@@ -1697,7 +1697,7 @@ function openUpgradeSheet(trigger) {
     // 1.2) — same honest copy, only the store name differs.
     if (sheetSub) sheetSub.textContent =
       'Finding cars near you is free and stays free. '
-      + 'Pro adds the money layer — what each car\u2019s parts would cost you '
+      + 'Pro adds the savings layer — what each part would cost you '
       + 'used online, what the yard charges, what you\u2019d save, '
       + 'and push alerts within hours of arrival. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
@@ -2345,7 +2345,7 @@ function renderLive() {
         lotClock = `<div class="lot-clock" title="${title}">On the lot ${daysOn} days &mdash; past the ~${avg}-day typical ${basisTxt}</div>`;
       } else {
         leavingSoon = daysOn >= 0.8 * avg;
-        lotClock = `<div class="lot-clock${leavingSoon ? ' lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} of ~${avg} typical ${basisTxt}</div>`;
+        lotClock = `<div class="lot-clock${leavingSoon ? ' lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} on the lot &middot; ~${avg} typical ${basisTxt}</div>`;
       }
     }
 
@@ -2453,7 +2453,7 @@ function renderLive() {
             ${saveHtml}
             ${verifyNote}${sharedNote}
             ${sellSpd ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
-              <span class="sell-badge ${sellCls}" title="How quickly parts like these typically get claimed at the yard">${sellSpd === 'Fast' ? 'Goes fast' : sellSpd === 'Slow' ? 'Slow mover' : 'Steady mover'}</span>
+              <span class="sell-badge ${sellCls}" title="How quickly parts like these typically get claimed at the yard">${sellSpd === 'Fast' ? 'Picked over fast' : sellSpd === 'Slow' ? 'Usually still there' : 'Steady demand'}</span>
             </div>` : ''}
           </li>`;
       }).join('');
@@ -2464,11 +2464,14 @@ function renderLive() {
       const rangeLow = Math.max(0, Math.round(lowSum * fm));
       const rangeHigh = Math.round(highSum * fm);
       const extraHigh = Math.round(unconfirmedHigh * fm);
+      // Demand reads as "how soon should I go", not "how fast it sells":
+      // only the two informative states get a label; steady is the default
+      // and says nothing.
       const demand = demandRk === 3
-        ? { cls: 'demand-fast', label: 'Goes fast' }
+        ? { cls: 'demand-fast', label: 'Gets picked over fast' }
         : demandRk === 1
-        ? { cls: 'demand-slow', label: 'Slow mover' }
-        : { cls: 'demand-steady', label: 'Steady mover' };
+        ? { cls: 'demand-slow', label: 'Usually still there' }
+        : { cls: 'demand-steady', label: '' };
       cardStyle = `--tier-color:var(--${demandRk === 3 ? 'demand-fast' : demandRk === 1 ? 'demand-slow' : 'demand-steady'});`;
       const rangeText = anyUnknownCost
         ? `parts worth ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} if bought elsewhere &middot; pull cost: check yard price list`
@@ -2481,12 +2484,12 @@ function renderLive() {
         ? (unlocked ? `
         ${isSampleCard ? '<div class="sample-note" role="button" onclick="openUpgradeSheet(\'sample-note\')">Free sample &mdash; Pro shows this for every car</div>' : ''}
         <div class="profit-line">
-          <span class="demand-badge ${demand.cls}">${demand.label}</span>
+          ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
           ${rangeHigh > 0 ? `<span class="range-text">${rangeText}</span>` : ''}
         </div>${extraNote}` : `
         <div class="profit-line">
-          <span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>
-          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} See parts &amp; savings &mdash; Pro</button>
+          ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
+          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} What you’d save &mdash; Pro</button>
         </div>`)
         : '';
       partsBlock = `
@@ -5563,6 +5566,11 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
   const platform = forced || (isIOS ? 'ios' : (isAndroid ? 'android' : null));
   if (!platform) return; // desktop: unchanged
   if (!forced && (standalone || localStorage.getItem('ys_app_promo') === '1')) return;
+  // First visit is for the cars, not the install pitch: show from the
+  // second visit on.
+  let visits = 0;
+  try { visits = parseInt(localStorage.getItem('jh_visits') || '0', 10) + 1; localStorage.setItem('jh_visits', String(visits)); } catch (e) { visits = 2; }
+  if (visits < 2) return;
   const el = document.getElementById('app-promo');
   if (!el) return;
   const link = document.getElementById('app-promo-link');
