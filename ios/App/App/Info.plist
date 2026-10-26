@@ -28,6 +28,13 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>YardScout uses your location to find salvage yards near you. Only if you turn on push alerts is an approximate (about 1 km) centre of your alert radius sent to our server.</string>
+	<!-- Never requested (only When-In-Use is), but App Store Connect's static
+	     check (ITMS-90683) requires these because the Geolocation plugin
+	     binary references the Always APIs. -->
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>YardScout uses your location to find salvage yards near you. Only if you turn on push alerts is an approximate (about 1 km) centre of your alert radius sent to our server.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>YardScout uses your location to find salvage yards near you. Only if you turn on push alerts is an approximate (about 1 km) centre of your alert radius sent to our server.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
