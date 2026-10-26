@@ -78,15 +78,28 @@ D1 schema rebuilds from `backend/migrations/` via
 
 ## GitHub Actions secrets (repo → Settings → Secrets)
 
-`ALERT_EMAIL`, `ANTHROPIC_API_KEY`, `NTFY_TOPIC`, `OPENAI_API_KEY`,
-`SMTP_PASS`, `SMTP_USER`, `YS_UPLOAD_TOKEN`. All re-creatable from the
-respective vendor dashboards / your email provider.
+Scraper/alerts: `ALERT_EMAIL`, `ANTHROPIC_API_KEY`, `NTFY_TOPIC`,
+`OPENAI_API_KEY`, `SMTP_PASS`, `SMTP_USER`, `YS_UPLOAD_TOKEN`. All
+re-creatable from the respective vendor dashboards / your email provider.
+
+Store releases (since 2026-10-26, see `RELEASING.md` for how each is made):
+`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`,
+`ANDROID_KEY_PASSWORD`, `PLAY_SERVICE_ACCOUNT_JSON`, `ASC_KEY_ID`,
+`ASC_ISSUER_ID`, `ASC_API_KEY_P8`, `IOS_DIST_CERT_P12_BASE64`,
+`IOS_DIST_CERT_P12_PASSWORD`, `IOS_APPSTORE_PROFILE_BASE64`. GitHub never
+shows a secret again once saved — the Android keystore is the only one whose
+loss is not just inconvenient (see "Android upload keystore" above); the
+Apple ones are all re-issuable (new API key, new distribution certificate +
+profile from developer.apple.com, the .p12 exported from Keychain Access).
 
 ## iOS signing
 
-Nothing to back up: distribution certificates and provisioning profiles are
-regenerated on demand via Xcode (automatic signing) or developer.apple.com.
-The only non-regenerable iOS asset is the APNs .p8 key (see manual backups).
+CI signs manually with an Apple Distribution certificate (.p12, exported from
+the Mac's keychain) and an App Store provisioning profile, both stored only
+as the GitHub secrets above. Nothing irreplaceable: both can be regenerated at
+developer.apple.com (profiles expire yearly — regenerate and update the
+secret). The only non-regenerable iOS asset is the APNs .p8 key (see manual
+backups).
 
 ## launchd snapshot jobs (dev-Mac resident by design)
 

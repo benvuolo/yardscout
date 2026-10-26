@@ -21,7 +21,7 @@ Flip parts you can carry out. Fix your car with the rest — the Parts tab now c
 2. iPhone: tap the Share button, then **Add to Home Screen**. Android: tap the menu, then **Install app**
 3. Launch it from your home screen — it runs full-screen like a native app and keeps working offline with the last-loaded inventory
 
-Inventory auto-refreshes every 6 hours via GitHub Actions (see `.github/workflows/scan.yml`).
+Inventory auto-refreshes every 4 hours via GitHub Actions (see `.github/workflows/scan.yml`).
 
 ## Repo layout
 
@@ -45,7 +45,7 @@ yardscout/
 │   ├── junkyard_scraper.py     # Python scraper + unobtanium parts database
 │   ├── db.py                   # SQLite history tracking (inventory_history.db, gitignored)
 │   └── watchlist.json          # Your alert rules (export from UI or hand-edit; commit for CI)
-└── .github/workflows/scan.yml  # Auto-scan every 6 hours, commits fresh inventory
+└── .github/workflows/scan.yml  # Auto-scan every 4 hours, commits fresh inventory
 ```
 
 ## Quick start
@@ -179,7 +179,7 @@ You can also hand-edit `watchlist.json`:
 ]
 ```
 
-### 6. GitHub Actions (runs every 6 hours, email alerts, free)
+### 6. GitHub Actions (runs every 4 hours, email alerts, free)
 
 Use this when you want the scraper to run **without your laptop being on**, and get **emails on your phone** (Gmail app).
 
