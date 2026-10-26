@@ -17287,7 +17287,7 @@ def fetch_ario_legacy_inventory() -> list[dict]:
 # (image_url) are deliberately ignored — no-photos policy.
 ARIO_LIVE_FN = "https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1"
 ARIO_LIVE_KEY = "sb_publishable_njLlN9YEWSrEvkZ4ZS2fdQ_l7vkJI-C"
-ARIO_LIVE_PAGE = 200
+ARIO_LIVE_PAGE = int(os.environ.get("ARIO_LIVE_PAGE", "40"))  # the page itself asks for 25/40
 ARIO_LIVE_DELAY_SEC = 2.0
 ARIO_LIVE_RATE_LIMIT_SLEEP = 30
 
@@ -17308,7 +17308,14 @@ def _ario_live_post(session: "requests.Session", fn: str, body: dict) -> dict | 
                       f"sleeping {ARIO_LIVE_RATE_LIMIT_SLEEP}s", file=sys.stderr)
                 time.sleep(ARIO_LIVE_RATE_LIMIT_SLEEP)
                 continue
-            r.raise_for_status()
+            if r.status_code >= 400:
+                # Surface the function's own error text — a 400 is usually a
+                # body-shape complaint and the message says which field.
+                print(f"  [Ario live] {fn} attempt {attempt}: HTTP {r.status_code} "
+                      f"{r.text[:300]!r}", file=sys.stderr)
+                if 400 <= r.status_code < 500 and r.status_code != 429:
+                    return None  # not transient; retrying the same body is pointless
+                raise RuntimeError(f"HTTP {r.status_code}")
             return r.json()
         except Exception as e:
             print(f"  [Ario live] {fn} attempt {attempt} failed: {e}", file=sys.stderr)
