@@ -62,8 +62,11 @@ CSR from Keychain Access → Certificate Assistant → *Request a Certificate
 From a Certificate Authority*), download it, double-click to add it to the
 keychain, then export the .p12 as above. Each team can hold up to 3.
 
-No provisioning-profile secret is needed: `xcodebuild -allowProvisioningUpdates`
-with the API key creates/refreshes the App Store profile on the runner.
+| `IOS_APPSTORE_PROFILE_BASE64` | an **App Store Connect** distribution provisioning profile for `com.benvuolo.yardscout`, base64 | developer.apple.com → *Certificates, Identifiers & Profiles* → **Profiles** → **+** → under *Distribution* pick **App Store Connect** → Continue → App ID `com.benvuolo.yardscout` → Continue → select the Apple Distribution certificate you exported above → Continue → name `YardScout App Store CI` → **Generate** → **Download** → `base64 -i ~/Downloads/YardScout_App_Store_CI.mobileprovision \| pbcopy`. Profiles expire after a year — regenerate and update the secret when the run says so. |
+
+The archive is signed manually with that certificate + profile (CI keychains
+have no Apple Development certificate, which automatic signing would want
+for the archive step). The API key is used for the upload.
 
 ## First run, in this order
 

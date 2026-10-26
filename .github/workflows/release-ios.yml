@@ -9,10 +9,13 @@
 #   ASC_API_KEY_P8              the .p8 file's contents
 #   IOS_DIST_CERT_P12_BASE64    "Apple Distribution" certificate + private key (.p12), base64
 #   IOS_DIST_CERT_P12_PASSWORD  the .p12 password
+#   IOS_APPSTORE_PROFILE_BASE64 an "App Store Connect" distribution provisioning
+#                               profile for com.benvuolo.yardscout (.mobileprovision), base64
 #
-# Signing is automatic: xcodebuild uses the API key to create/refresh the
-# App Store provisioning profile itself (-allowProvisioningUpdates), so no
-# profile secret is needed — only the distribution certificate.
+# Signing is MANUAL on the runner: the archive is signed with the
+# distribution certificate + that App Store profile. (Automatic signing
+# wants an Apple Development certificate/profile for the archive step,
+# which a CI keychain doesn't have.) The API key is used for the upload.
 name: Release iOS
 
 on:
@@ -79,6 +82,7 @@ jobs:
         env:
           P12_B64: ${{ secrets.IOS_DIST_CERT_P12_BASE64 }}
           P12_PASS: ${{ secrets.IOS_DIST_CERT_P12_PASSWORD }}
+          PROFILE_B64: ${{ secrets.IOS_APPSTORE_PROFILE_BASE64 }}
           ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
         run: |
@@ -95,6 +99,20 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple: -k "$KCPASS" "$KEYCHAIN" > /dev/null
           security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
           security find-identity -v -p codesigning "$KEYCHAIN"
+          # App Store provisioning profile -> where Xcode looks for it; its
+          # UUID/name are read back for the manual-signing build settings.
+          test -n "$PROFILE_B64" || { echo "::error::IOS_APPSTORE_PROFILE_BASE64 secret missing (see RELEASING.md)"; exit 1; }
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          echo "$PROFILE_B64" | base64 -d > "$RUNNER_TEMP/appstore.mobileprovision"
+          security cms -D -i "$RUNNER_TEMP/appstore.mobileprovision" > "$RUNNER_TEMP/profile.plist"
+          PROFILE_UUID=$(/usr/libexec/PlistBuddy -c 'Print UUID' "$RUNNER_TEMP/profile.plist")
+          PROFILE_NAME=$(/usr/libexec/PlistBuddy -c 'Print Name' "$RUNNER_TEMP/profile.plist")
+          PROFILE_APPID=$(/usr/libexec/PlistBuddy -c 'Print Entitlements:application-identifier' "$RUNNER_TEMP/profile.plist")
+          echo "profile: $PROFILE_NAME ($PROFILE_UUID) for $PROFILE_APPID"
+          case "$PROFILE_APPID" in *"$BUNDLE_ID") ;; *) echo "::error::profile is for $PROFILE_APPID, not $BUNDLE_ID"; exit 1;; esac
+          cp "$RUNNER_TEMP/appstore.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/"$PROFILE_UUID.mobileprovision"
+          echo "profile_name=$PROFILE_NAME" >> "$GITHUB_ENV"
+          echo "profile_uuid=$PROFILE_UUID" >> "$GITHUB_ENV"
           # xcodebuild looks for API keys in ~/.appstoreconnect/private_keys/.
           # The secret may have been pasted with lost newlines, as a single
           # line, or base64-encoded — rebuild a clean PEM from any of those.
@@ -135,11 +153,9 @@ jobs:
           xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release \
             -sdk iphoneos -destination 'generic/platform=iOS' \
             -archivePath "$RUNNER_TEMP/App.xcarchive" archive \
-            -allowProvisioningUpdates \
-            -authenticationKeyPath "$key_path" \
-            -authenticationKeyID "$ASC_KEY_ID" \
-            -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
-            CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM="$TEAM_ID" \
+            CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM="$TEAM_ID" \
+            CODE_SIGN_IDENTITY="Apple Distribution" \
+            PROVISIONING_PROFILE_SPECIFIER="$profile_name" \
             | tail -40
 
       - name: Upload to App Store Connect (TestFlight)
@@ -155,7 +171,11 @@ jobs:
             <key>method</key><string>app-store-connect</string>
             <key>destination</key><string>upload</string>
             <key>teamID</key><string>$TEAM_ID</string>
-            <key>signingStyle</key><string>automatic</string>
+            <key>signingStyle</key><string>manual</string>
+            <key>signingCertificate</key><string>Apple Distribution</string>
+            <key>provisioningProfiles</key><dict>
+              <key>$BUNDLE_ID</key><string>$profile_name</string>
+            </dict>
             <key>uploadSymbols</key><true/>
             <key>manageAppVersionAndBuildNumber</key><false/>
           </dict></plist>
@@ -163,7 +183,6 @@ jobs:
           xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/App.xcarchive" \
             -exportOptionsPlist "$RUNNER_TEMP/export.plist" \
             -exportPath "$RUNNER_TEMP/export" \
-            -allowProvisioningUpdates \
             -authenticationKeyPath "$key_path" \
             -authenticationKeyID "$ASC_KEY_ID" \
             -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
