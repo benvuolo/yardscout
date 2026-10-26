@@ -33,8 +33,12 @@ ORGS = [
                                      "address_geographic_address": {
                                          "address": "9309 Hubbell Ave, Detroit",
                                          "lat": 42.36261, "lng": -83.18853}}},
-    {"_id": "org-foss-ws", "_source": {"id_text": "Foss-Winston-Salem",
+    # Foss orgs carry only the newer `Slug` field, no id_text.
+    {"_id": "org-foss-ws", "_source": {"Slug": "Foss-Winston-Salem",
                                        "name_text": "Foss U-Pull-It Winston-Salem"}},
+    # Paul's Lake Station: the two slug fields disagree — both must resolve.
+    {"_id": "org-pauls-ls", "_source": {"id_text": "pauls-auto-yard", "Slug": "pauls-lake-station",
+                                        "name_text": "Paul's - Lake Station"}},
     {"_id": "org-slugless", "_source": {"name_text": "Slugless Yard",
                                         "address_geographic_address": {
                                             "address": "x", "lat": 0, "lng": 0}}},
@@ -45,8 +49,11 @@ by_slug, by_id = js._ario_org_index(ORGS)
 check("slug index is case-insensitive", "foss-winston-salem" in by_slug)
 check("resolve by slug (any case)",
       js._ario_resolve_org({"slug": "FOSS-winston-salem"}, by_slug, by_id) is ORGS[1])
+check("resolve by either slug field when they disagree",
+      js._ario_resolve_org({"slug": "pauls-auto-yard"}, by_slug, by_id) is ORGS[2]
+      and js._ario_resolve_org({"slug": "pauls-lake-station"}, by_slug, by_id) is ORGS[2])
 check("resolve by org_id for slugless orgs",
-      js._ario_resolve_org({"org_id": "org-slugless"}, by_slug, by_id) is ORGS[2])
+      js._ario_resolve_org({"org_id": "org-slugless"}, by_slug, by_id) is ORGS[3])
 check("unknown slug resolves to None",
       js._ario_resolve_org({"slug": "nope"}, by_slug, by_id) is None)
 check("ref prefix comes off a reference field",
@@ -56,7 +63,7 @@ check("ref prefix empty when the record has none", js._ario_ref_prefix(ORGS[1]) 
 # --- pins ----------------------------------------------------------------
 check("org pin extracted + rounded", js._ario_org_pin(ORGS[0]) == (42.3626, -83.1885))
 check("org without geocode -> None", js._ario_org_pin(ORGS[1]) is None)
-check("0,0 geocode is rejected", js._ario_org_pin(ORGS[2]) is None)
+check("0,0 geocode is rejected", js._ario_org_pin(ORGS[3]) is None)
 
 # --- row parser ----------------------------------------------------------
 MAKES = {"mk-toyota": "TOYOTA", "mk-chevrolet": "CHEVROLET"}

@@ -16981,10 +16981,117 @@ ARIO_CHAINS: dict[str, dict] = {
     # Pick N Pull ×3. Slugs/org ids and pins come from
     # scraper/_probe_ario_orgs.py (the org table) — fill, then verify each
     # yard's live count against the scout's probe before trusting the feed.
-    "ezpullnpay": {"label": "EZ Pull N Pay (GA/AL)", "yards": []},
-    "pauls": {"label": "Paul's Auto Yard (IN)", "yards": []},
-    "foss": {"label": "Foss U-Pull-It (NC/VA)", "yards": []},
-    "carolinapnp": {"label": "Carolina Pick N Pull (NC/SC)", "yards": []},
+    # Slugs are the org `Slug` field; pins are the org records' own
+    # geocodes (street addresses in the probe output), rounded to 4 dp.
+    "ezpullnpay": {
+        "label": "EZ Pull N Pay (GA/AL)",
+        "yards": [
+            {"slug": "ez-pull-n-pay-atlanta", "code": "atlanta",
+             "name": "EZ Pull N Pay - Atlanta", "city": "Atlanta", "state": "GA",
+             "lat": 33.7878, "lng": -84.4843},
+            {"slug": "ez-pull-n-pay-stockbridge", "code": "stockbridge",
+             "name": "EZ Pull N Pay - Stockbridge", "city": "Stockbridge", "state": "GA",
+             "lat": 33.5494, "lng": -84.2068},
+            {"slug": "ez-pull-n-pay-warner-robins", "code": "warnerrobins",
+             "name": "EZ Pull N Pay - Warner Robins", "city": "Warner Robins", "state": "GA",
+             "lat": 32.6563, "lng": -83.6158},
+            {"slug": "ez-pull-n-pay-columbus", "code": "columbus",
+             "name": "EZ Pull N Pay - Columbus", "city": "Columbus", "state": "GA",
+             "lat": 32.4441, "lng": -84.9405},
+            {"slug": "ez-pull-n-pay-montgomery", "code": "montgomery",
+             "name": "EZ Pull N Pay - Montgomery", "city": "Montgomery", "state": "AL",
+             "lat": 32.4226, "lng": -86.2325},
+            {"slug": "ez-pull-n-pay-decatur", "code": "decatur",
+             "name": "EZ Pull N Pay - Decatur", "city": "Decatur", "state": "AL",
+             "lat": 34.6035, "lng": -87.0157},
+            {"slug": "ez-pull-n-pay-birmingham", "code": "birmingham",
+             "name": "EZ Pull N Pay - Birmingham", "city": "Birmingham", "state": "AL",
+             "lat": 33.5568, "lng": -86.6903},
+        ],
+    },
+    # 13-location chain, 10 with live inventory (the other 3 are not on
+    # Ario). Westville's parcel geocodes to La Porte; the yard brands
+    # itself Westville, so that stays the display city.
+    "pauls": {
+        "label": "Paul's Auto Yard (IN)",
+        "yards": [
+            {"slug": "pauls-south-bend", "code": "southbend",
+             "name": "Paul's Auto Yard - South Bend", "city": "South Bend", "state": "IN",
+             "lat": 41.6406, "lng": -86.2511},
+            {"slug": "pauls-fort-wayne", "code": "fortwayne",
+             "name": "Paul's Auto Yard - Fort Wayne", "city": "Fort Wayne", "state": "IN",
+             "lat": 41.0580, "lng": -85.1646},
+            {"slug": "pauls-westville", "code": "westville",
+             "name": "Paul's Auto Yard - Westville", "city": "Westville", "state": "IN",
+             "lat": 41.6014, "lng": -86.7300},
+            {"slug": "pauls-merrilville", "code": "merrillville",
+             "name": "Paul's Auto Yard - Merrillville", "city": "Merrillville", "state": "IN",
+             "lat": 41.4999, "lng": -87.3368},
+            {"slug": "pauls-lake-station", "code": "lakestation",
+             "name": "Paul's Auto Yard - Lake Station", "city": "Lake Station", "state": "IN",
+             "lat": 41.5873, "lng": -87.2653},
+            {"slug": "pauls-elkhart", "code": "elkhart",
+             "name": "Paul's Auto Yard - Elkhart", "city": "Elkhart", "state": "IN",
+             "lat": 41.7145, "lng": -86.0305},
+            {"slug": "pauls-gary", "code": "gary",
+             "name": "Paul's Auto Yard - Gary", "city": "Gary", "state": "IN",
+             "lat": 41.5883, "lng": -87.4239},
+            {"slug": "pauls-demotte", "code": "demotte",
+             "name": "Paul's Auto Yard - DeMotte", "city": "DeMotte", "state": "IN",
+             "lat": 41.1946, "lng": -87.1779},
+            {"slug": "pauls-knox", "code": "knox",
+             "name": "Paul's Auto Yard - Knox", "city": "Knox", "state": "IN",
+             "lat": 41.2870, "lng": -86.4905},
+            {"slug": "pauls-logansport", "code": "logansport",
+             "name": "Paul's Auto Yard - Logansport", "city": "Logansport", "state": "IN",
+             "lat": 40.7402, "lng": -86.3455},
+        ],
+    },
+    # Foss Recycling's u-pull arm; fossrecycling.com points at
+    # fossupullit.com, whose /inventory/ page iframes the NEW Ario
+    # frontend (ario.autorecycler.io/yard/foss-recycling?embed=1).
+    # Chesapeake is the parent org and owns the `foss-recycling` slug.
+    "foss": {
+        "label": "Foss U-Pull-It (NC/VA)",
+        "yards": [
+            {"slug": "foss-winston-salem", "code": "winstonsalem",
+             "name": "Foss U-Pull-It - Winston-Salem", "city": "Winston-Salem", "state": "NC",
+             "lat": 36.0552, "lng": -80.2070},
+            {"slug": "foss-jacksonville", "code": "jacksonville",
+             "name": "Foss U-Pull-It - Jacksonville", "city": "Jacksonville", "state": "NC",
+             "lat": 34.7542, "lng": -77.5541},
+            {"slug": "foss-la-grange", "code": "lagrange",
+             "name": "Foss U-Pull-It - La Grange", "city": "La Grange", "state": "NC",
+             "lat": 35.2683, "lng": -77.7372},
+            {"slug": "foss-recycling", "code": "chesapeake",
+             "name": "Foss U-Pull-It - Chesapeake", "city": "Chesapeake", "state": "VA",
+             "lat": 36.7709, "lng": -76.4584},
+            {"slug": "foss-wilson", "code": "wilson",
+             "name": "Foss U-Pull-It - Wilson", "city": "Wilson", "state": "NC",
+             "lat": 35.6975, "lng": -77.8948},
+            {"slug": "foss-havelock", "code": "havelock",
+             "name": "Foss U-Pull-It - Havelock", "city": "Havelock", "state": "NC",
+             "lat": 34.8731, "lng": -76.9287},
+        ],
+    },
+    # Three sister yards (carolinapicknpull.com) that brand themselves
+    # separately; display names keep the local brand. None publish VINs.
+    # Display names never START with "Pick N Pull" so the Pick-n-Pull chain
+    # patterns in app.js / the audit's chain_of can't claim them.
+    "carolinapnp": {
+        "label": "Carolina Pick N Pull (NC/SC)",
+        "yards": [
+            {"slug": "cape-fear-pick-n-pull-wilmington-north-carolina", "code": "capefear",
+             "name": "Cape Fear Pick N Pull - Wilmington", "city": "Wilmington", "state": "NC",
+             "lat": 34.2786, "lng": -77.9613},
+            {"slug": "grand-strand-pick-n-pull-conway-south-carolina", "code": "grandstrand",
+             "name": "Grand Strand Pick N Pull - Conway", "city": "Conway", "state": "SC",
+             "lat": 33.8635, "lng": -79.0973},
+            {"slug": "fayetteville-north-carolina-sandhills-pick-n-pull", "code": "sandhills",
+             "name": "Sandhills Pick N Pull - Fayetteville", "city": "Fayetteville", "state": "NC",
+             "lat": 35.0409, "lng": -78.8638},
+        ],
+    },
 }
 RYANS_PRICES_URL = "https://ryanspickapart.com/Home/PartPrices"
 
@@ -17017,14 +17124,22 @@ def _ario_org_pin(org: dict) -> tuple[float, float] | None:
 
 
 def _ario_org_index(orgs: list[dict]) -> tuple[dict[str, dict], dict[str, dict]]:
-    """({slug: org}, {org_id: org}) from raw organization hits."""
+    """({slug: org}, {org_id: org}) from raw organization hits.
+
+    Two slug fields exist on the org record: `Slug` (131/154 orgs; what the
+    new ario.autorecycler.io/yard/{slug} frontend routes on) and the older
+    `id_text` (115/154; the Bubble /inventory/{slug} path). They usually
+    agree, but not always (Paul's Lake Station: id_text pauls-auto-yard,
+    Slug pauls-lake-station), so both are indexed — `Slug` wins a clash."""
     by_slug: dict[str, dict] = {}
     by_id: dict[str, dict] = {}
     for org in orgs:
         by_id[str(org.get("_id") or "")] = org
-        slug = str((org.get("_source") or {}).get("id_text") or "").strip().lower()
-        if slug:
-            by_slug[slug] = org
+        src = org.get("_source") or {}
+        for field in ("id_text", "Slug"):
+            slug = str(src.get(field) or "").strip().lower()
+            if slug:
+                by_slug[slug] = org
     return by_slug, by_id
 
 

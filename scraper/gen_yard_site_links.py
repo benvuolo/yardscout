@@ -124,10 +124,32 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
 ]
 
 
+def _js_regex_escape(s: str) -> str:
+    return re.sub(r"([.*+?^${}()|\[\]\\/])", r"\\\1", s)
+
+
+def ario_rows() -> list[tuple[str, str]]:
+    """Per-yard tier-3 links for the multi-tenant Ario chains, derived from
+    ARIO_CHAINS in the scraper so a new yard is one config entry: every Ario
+    org has a public inventory page at app.autorecycler.io/inventory/{slug}.
+    Ryan's keeps its curated registry entry (its own site embeds the page)."""
+    sys.path.insert(0, str(ROOT / "scraper"))
+    import junkyard_scraper as js  # noqa: E402
+    rows = []
+    for source, chain in js.ARIO_CHAINS.items():
+        if source == "ryans":
+            continue
+        for y in chain["yards"]:
+            rows.append((f"^{_js_regex_escape(y['name'].lower())}$",
+                         f"https://app.autorecycler.io/inventory/{y['slug']}"))
+    return rows
+
+
 def build_rows() -> list[tuple[str, str]]:
     registry = json.loads(REGISTRY.read_text())
     by_name = {c["name"]: c for c in registry["chains"]}
-    rows = []
+    # Exact per-yard anchors first: they can't shadow anything else.
+    rows = ario_rows()
     for pattern, reg_name, url, _comment in ENTRIES:
         if url is None:
             chain = by_name.get(reg_name)

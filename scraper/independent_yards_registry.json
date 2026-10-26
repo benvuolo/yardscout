@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-23",
+  "updated": "2026-10-26",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked | retired | directory-only. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -1243,6 +1243,316 @@
           "state": "MI",
           "lat": 42.5873,
           "lng": -83.9142
+        }
+      ]
+    },
+    {
+      "name": "EZ Pull N Pay",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' (same multi-tenant adapter as Ryan's: fetch_ario_inventory / ARIO_CHAINS). Public per-yard pages at app.autorecycler.io/inventory/{slug}; the yard's own site embeds the NEW ario.autorecycler.io/yard/{slug} frontend (Supabase) in some cases.",
+      "inventory_url": "https://www.ezpullnpay.com/inventory/",
+      "api": {
+        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search (Bubble obfuscated bodies; see Ryan's entry). custom.organization table fetched ONCE per scan (2 POSTs) and indexed by org Slug/id_text; custom.inventorysearch per yard (org ref + visible=true, n=400 paging); make/model lookups pooled across every Ario yard.",
+        "method": "POST (JSON, obfuscated)",
+        "auth": "none (anonymous public search, same calls the embed makes)",
+        "format": "JSON hits: year/name/stock/VIN/row/color/added_date epoch-ms + make/model __LOOKUP__ refs",
+        "requests_per_scan": "ceil(rows/400) per yard + the shared org/make/model lookups (~5-10 total across all Ario yards), 2s pacing, serial on the one host",
+        "notes": "Wave 1 of the 2026-10-26 Ario org-table sweep (EXPANSION_CANDIDATES.md \u00a78). Pins are the org records' own geocodes (preferred live; config lat/lng is the fallback). Ids {source}-{code}-{stock}."
+      },
+      "update_freshness": "live (added_date values from the same week)",
+      "robots": "ezpullnpay.com answers 406 to non-browser clients (verify in a browser); app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "EZ Pull N Pay - Atlanta",
+          "city": "Atlanta",
+          "state": "GA",
+          "lat": 33.7878,
+          "lng": -84.4843,
+          "ario_slug": "ez-pull-n-pay-atlanta",
+          "inventory_url": "https://app.autorecycler.io/inventory/ez-pull-n-pay-atlanta"
+        },
+        {
+          "name": "EZ Pull N Pay - Stockbridge",
+          "city": "Stockbridge",
+          "state": "GA",
+          "lat": 33.5494,
+          "lng": -84.2068,
+          "ario_slug": "ez-pull-n-pay-stockbridge",
+          "inventory_url": "https://app.autorecycler.io/inventory/ez-pull-n-pay-stockbridge"
+        },
+        {
+          "name": "EZ Pull N Pay - Warner Robins",
+          "city": "Warner Robins",
+          "state": "GA",
+          "lat": 32.6563,
+          "lng": -83.6158,
+          "ario_slug": "ez-pull-n-pay-warner-robins",
+          "inventory_url": "https://app.autorecycler.io/inventory/ez-pull-n-pay-warner-robins"
+        },
+        {
+          "name": "EZ Pull N Pay - Columbus",
+          "city": "Columbus",
+          "state": "GA",
+          "lat": 32.4441,
+          "lng": -84.9405,
+          "ario_slug": "ez-pull-n-pay-columbus",
+          "inventory_url": "https://app.autorecycler.io/inventory/ez-pull-n-pay-columbus"
+        },
+        {
+          "name": "EZ Pull N Pay - Montgomery",
+          "city": "Montgomery",
+          "state": "AL",
+          "lat": 32.4226,
+          "lng": -86.2325,
+          "ario_slug": "ez-pull-n-pay-montgomery",
+          "inventory_url": "https://app.autorecycler.io/inventory/ez-pull-n-pay-montgomery"
+        },
+        {
+          "name": "EZ Pull N Pay - Decatur",
+          "city": "Decatur",
+          "state": "AL",
+          "lat": 34.6035,
+          "lng": -87.0157,
+          "ario_slug": "ez-pull-n-pay-decatur",
+          "inventory_url": "https://app.autorecycler.io/inventory/ez-pull-n-pay-decatur"
+        },
+        {
+          "name": "EZ Pull N Pay - Birmingham",
+          "city": "Birmingham",
+          "state": "AL",
+          "lat": 33.5568,
+          "lng": -86.6903,
+          "ario_slug": "ez-pull-n-pay-birmingham",
+          "inventory_url": "https://app.autorecycler.io/inventory/ez-pull-n-pay-birmingham"
+        }
+      ]
+    },
+    {
+      "name": "Paul's Auto Yard",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' (same multi-tenant adapter as Ryan's: fetch_ario_inventory / ARIO_CHAINS). Public per-yard pages at app.autorecycler.io/inventory/{slug}; the yard's own site embeds the NEW ario.autorecycler.io/yard/{slug} frontend (Supabase) in some cases.",
+      "inventory_url": "https://app.autorecycler.io/inventory/pauls-south-bend",
+      "api": {
+        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search (Bubble obfuscated bodies; see Ryan's entry). custom.organization table fetched ONCE per scan (2 POSTs) and indexed by org Slug/id_text; custom.inventorysearch per yard (org ref + visible=true, n=400 paging); make/model lookups pooled across every Ario yard.",
+        "method": "POST (JSON, obfuscated)",
+        "auth": "none (anonymous public search, same calls the embed makes)",
+        "format": "JSON hits: year/name/stock/VIN/row/color/added_date epoch-ms + make/model __LOOKUP__ refs",
+        "requests_per_scan": "ceil(rows/400) per yard + the shared org/make/model lookups (~5-10 total across all Ario yards), 2s pacing, serial on the one host",
+        "notes": "Wave 1 of the 2026-10-26 Ario org-table sweep (EXPANSION_CANDIDATES.md \u00a78). Pins are the org records' own geocodes (preferred live; config lat/lng is the fallback). Ids {source}-{code}-{stock}."
+      },
+      "update_freshness": "live",
+      "robots": "paulsautoyard.com redirects to paulsautosalvage.com (no inventory page found on the WP site \u2014 Ario public pages are the inventory); app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Paul's Auto Yard - South Bend",
+          "city": "South Bend",
+          "state": "IN",
+          "lat": 41.6406,
+          "lng": -86.2511,
+          "ario_slug": "pauls-south-bend",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-south-bend"
+        },
+        {
+          "name": "Paul's Auto Yard - Fort Wayne",
+          "city": "Fort Wayne",
+          "state": "IN",
+          "lat": 41.058,
+          "lng": -85.1646,
+          "ario_slug": "pauls-fort-wayne",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-fort-wayne"
+        },
+        {
+          "name": "Paul's Auto Yard - Westville",
+          "city": "Westville",
+          "state": "IN",
+          "lat": 41.6014,
+          "lng": -86.73,
+          "ario_slug": "pauls-westville",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-westville"
+        },
+        {
+          "name": "Paul's Auto Yard - Merrillville",
+          "city": "Merrillville",
+          "state": "IN",
+          "lat": 41.4999,
+          "lng": -87.3368,
+          "ario_slug": "pauls-merrilville",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-merrilville"
+        },
+        {
+          "name": "Paul's Auto Yard - Lake Station",
+          "city": "Lake Station",
+          "state": "IN",
+          "lat": 41.5873,
+          "lng": -87.2653,
+          "ario_slug": "pauls-lake-station",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-lake-station"
+        },
+        {
+          "name": "Paul's Auto Yard - Elkhart",
+          "city": "Elkhart",
+          "state": "IN",
+          "lat": 41.7145,
+          "lng": -86.0305,
+          "ario_slug": "pauls-elkhart",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-elkhart"
+        },
+        {
+          "name": "Paul's Auto Yard - Gary",
+          "city": "Gary",
+          "state": "IN",
+          "lat": 41.5883,
+          "lng": -87.4239,
+          "ario_slug": "pauls-gary",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-gary"
+        },
+        {
+          "name": "Paul's Auto Yard - DeMotte",
+          "city": "DeMotte",
+          "state": "IN",
+          "lat": 41.1946,
+          "lng": -87.1779,
+          "ario_slug": "pauls-demotte",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-demotte"
+        },
+        {
+          "name": "Paul's Auto Yard - Knox",
+          "city": "Knox",
+          "state": "IN",
+          "lat": 41.287,
+          "lng": -86.4905,
+          "ario_slug": "pauls-knox",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-knox"
+        },
+        {
+          "name": "Paul's Auto Yard - Logansport",
+          "city": "Logansport",
+          "state": "IN",
+          "lat": 40.7402,
+          "lng": -86.3455,
+          "ario_slug": "pauls-logansport",
+          "inventory_url": "https://app.autorecycler.io/inventory/pauls-logansport"
+        }
+      ]
+    },
+    {
+      "name": "Foss U-Pull-It",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' (same multi-tenant adapter as Ryan's: fetch_ario_inventory / ARIO_CHAINS). Public per-yard pages at app.autorecycler.io/inventory/{slug}; the yard's own site embeds the NEW ario.autorecycler.io/yard/{slug} frontend (Supabase) in some cases.",
+      "inventory_url": "https://fossupullit.com/inventory/",
+      "api": {
+        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search (Bubble obfuscated bodies; see Ryan's entry). custom.organization table fetched ONCE per scan (2 POSTs) and indexed by org Slug/id_text; custom.inventorysearch per yard (org ref + visible=true, n=400 paging); make/model lookups pooled across every Ario yard.",
+        "method": "POST (JSON, obfuscated)",
+        "auth": "none (anonymous public search, same calls the embed makes)",
+        "format": "JSON hits: year/name/stock/VIN/row/color/added_date epoch-ms + make/model __LOOKUP__ refs",
+        "requests_per_scan": "ceil(rows/400) per yard + the shared org/make/model lookups (~5-10 total across all Ario yards), 2s pacing, serial on the one host",
+        "notes": "Wave 1 of the 2026-10-26 Ario org-table sweep (EXPANSION_CANDIDATES.md \u00a78). Pins are the org records' own geocodes (preferred live; config lat/lng is the fallback). Ids {source}-{code}-{stock}."
+      },
+      "update_freshness": "live",
+      "robots": "fossupullit.com: /inventory/ iframes ario.autorecycler.io/yard/foss-recycling?embed=1; app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Foss U-Pull-It - Winston-Salem",
+          "city": "Winston-Salem",
+          "state": "NC",
+          "lat": 36.0552,
+          "lng": -80.207,
+          "ario_slug": "foss-winston-salem",
+          "inventory_url": "https://app.autorecycler.io/inventory/foss-winston-salem"
+        },
+        {
+          "name": "Foss U-Pull-It - Jacksonville",
+          "city": "Jacksonville",
+          "state": "NC",
+          "lat": 34.7542,
+          "lng": -77.5541,
+          "ario_slug": "foss-jacksonville",
+          "inventory_url": "https://app.autorecycler.io/inventory/foss-jacksonville"
+        },
+        {
+          "name": "Foss U-Pull-It - La Grange",
+          "city": "La Grange",
+          "state": "NC",
+          "lat": 35.2683,
+          "lng": -77.7372,
+          "ario_slug": "foss-la-grange",
+          "inventory_url": "https://app.autorecycler.io/inventory/foss-la-grange"
+        },
+        {
+          "name": "Foss U-Pull-It - Chesapeake",
+          "city": "Chesapeake",
+          "state": "VA",
+          "lat": 36.7709,
+          "lng": -76.4584,
+          "ario_slug": "foss-recycling",
+          "inventory_url": "https://app.autorecycler.io/inventory/foss-recycling"
+        },
+        {
+          "name": "Foss U-Pull-It - Wilson",
+          "city": "Wilson",
+          "state": "NC",
+          "lat": 35.6975,
+          "lng": -77.8948,
+          "ario_slug": "foss-wilson",
+          "inventory_url": "https://app.autorecycler.io/inventory/foss-wilson"
+        },
+        {
+          "name": "Foss U-Pull-It - Havelock",
+          "city": "Havelock",
+          "state": "NC",
+          "lat": 34.8731,
+          "lng": -76.9287,
+          "ario_slug": "foss-havelock",
+          "inventory_url": "https://app.autorecycler.io/inventory/foss-havelock"
+        }
+      ]
+    },
+    {
+      "name": "Carolina Pick N Pull",
+      "status": "adapter-built",
+      "platform": "Ario (autorecycler.io) \u2014 Bubble.io app 'autoscrapzen' (same multi-tenant adapter as Ryan's: fetch_ario_inventory / ARIO_CHAINS). Public per-yard pages at app.autorecycler.io/inventory/{slug}; the yard's own site embeds the NEW ario.autorecycler.io/yard/{slug} frontend (Supabase) in some cases.",
+      "inventory_url": "https://app.autorecycler.io/inventory/cape-fear-pick-n-pull-wilmington-north-carolina",
+      "api": {
+        "endpoint": "POST https://app.autorecycler.io/elasticsearch/search (Bubble obfuscated bodies; see Ryan's entry). custom.organization table fetched ONCE per scan (2 POSTs) and indexed by org Slug/id_text; custom.inventorysearch per yard (org ref + visible=true, n=400 paging); make/model lookups pooled across every Ario yard.",
+        "method": "POST (JSON, obfuscated)",
+        "auth": "none (anonymous public search, same calls the embed makes)",
+        "format": "JSON hits: year/name/stock/VIN/row/color/added_date epoch-ms + make/model __LOOKUP__ refs",
+        "requests_per_scan": "ceil(rows/400) per yard + the shared org/make/model lookups (~5-10 total across all Ario yards), 2s pacing, serial on the one host",
+        "notes": "Wave 1 of the 2026-10-26 Ario org-table sweep (EXPANSION_CANDIDATES.md \u00a78). Pins are the org records' own geocodes (preferred live; config lat/lng is the fallback). Ids {source}-{code}-{stock}."
+      },
+      "update_freshness": "live",
+      "robots": "carolinapicknpull.com answers 403 to non-browser clients; the three yards' Ario public pages are the inventory; app.autorecycler.io: allow all except /version-test/",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Cape Fear Pick N Pull - Wilmington",
+          "city": "Wilmington",
+          "state": "NC",
+          "lat": 34.2786,
+          "lng": -77.9613,
+          "ario_slug": "cape-fear-pick-n-pull-wilmington-north-carolina",
+          "inventory_url": "https://app.autorecycler.io/inventory/cape-fear-pick-n-pull-wilmington-north-carolina"
+        },
+        {
+          "name": "Grand Strand Pick N Pull - Conway",
+          "city": "Conway",
+          "state": "SC",
+          "lat": 33.8635,
+          "lng": -79.0973,
+          "ario_slug": "grand-strand-pick-n-pull-conway-south-carolina",
+          "inventory_url": "https://app.autorecycler.io/inventory/grand-strand-pick-n-pull-conway-south-carolina"
+        },
+        {
+          "name": "Sandhills Pick N Pull - Fayetteville",
+          "city": "Fayetteville",
+          "state": "NC",
+          "lat": 35.0409,
+          "lng": -78.8638,
+          "ario_slug": "fayetteville-north-carolina-sandhills-pick-n-pull",
+          "inventory_url": "https://app.autorecycler.io/inventory/fayetteville-north-carolina-sandhills-pick-n-pull"
         }
       ]
     }
