@@ -167,7 +167,23 @@ cited below.**
   - Group 2: Ford Mustang 1999-2004
   - Group 3: Ford Crown Victoria 1995-1999
   - Group 4: Mercury Grand Marquis 1998-2002
-- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+- **starter — verified evidence (added 2026-10-26):** DB Electrical 410-52582
+  (Lester 3267, PMGR 12-tooth) applications table (dbelectrical.com, retrieved
+  2026-10-26): Crown Victoria 4.6 1998-2005, Grand Marquis 4.6 1998-2005, Town
+  Car 4.6 1998-2005, Mustang 4.6 1998-1999 — all unqualified rows. CPR Starters
+  6691N application table (cprstarters.com, retrieved 2026-10-26) and
+  Quality-Built 6691S fitment (partshawk.com, retrieved 2026-10-26), both
+  Lester 6691 / Ford 6W1Z-11002-AA / Motorcraft SA-952: Crown Victoria, Grand
+  Marquis, Town Car 4.6 2006-2009. **Dual-source exclusions:** the 3267 table
+  ALSO lists GM/TC 2009 and all three Panthers 2010-2011, overlapping 6691's
+  span — a donor from those years could carry either unit, so they stay Likely
+  (same doctrine as the Hyundai/Kia Denso-vs-Delco starters). F-150/Expedition/
+  Explorer use the truck unit (see the 1997 Town Car × 2005 F-150 spot-check)
+  and Mustang 1996-97 / 2000-04 rows aren't published unqualified.
+  - Group 1 (Lester 3267): Ford Crown Victoria 1998-2005; Mercury Grand
+    Marquis 1998-2005; Lincoln Town Car 1998-2005; Ford Mustang 1998-1999
+  - Group 2 (Lester 6691): Ford Crown Victoria 2006-2009; Mercury Grand
+    Marquis 2006-2008; Lincoln Town Car 2006-2008
 
 ### ford-46-3v — Ford 4.6 3V Modular V8 (Mustang GT S197)
 
@@ -310,7 +326,16 @@ cited below.**
   - Group 5: Mazda 6 2008-2009
   - Group 6: Ford Fusion 2013-2014
   - Group 7: Ford Focus 2009-2010
-- **starter:** no verified group — Likely tier only. Note: match the part number — nose cone / tooth count can differ
+- **starter — verified evidence (added 2026-10-26):** DB Electrical 410-48124
+  (Lester 17944, Ford 6E5Z-11002-AA / Motorcraft SA-950) applications table
+  (dbelectrical.com, retrieved 2026-10-26): Fusion 2.3 2006-2009 + 2.5 2010
+  and Milan 2.3 2006-2009 + 2.5 2010 — ONE published unit across both
+  displacements, every row unqualified. **Exclusions:** Mazda 6 rides Lester
+  17908 (DB 410-48085, "Mazda 6 2003-2010") but DB 410-48090 ALSO lists
+  Mazda 6 2006-2007 on a different unit — dual-published, stays Likely;
+  Mazda 3/5, Escape, Focus and Ranger starter rows are published on separate
+  units. Fusion/Milan 2011+ aren't on the 17944 table.
+  - Group 1 (Lester 17944): Ford Fusion 2006-2010; Mercury Milan 2006-2010
 
 ### ford-tc — Ford Transit Connect 1.6/2.0/2.5
 
@@ -2308,3 +2333,24 @@ the older 252,673-vehicle snapshot with the one-off P0 script.)
 - **Coverage requests (D1):** endpoint is live in production but the
   `coverage_requests` table held ZERO rows at run time — nothing to fold
   into the priority ranking this pass.
+
+## Starter list mining 2026-10-26 — audit-driven (`scraper/_audit_verified_fits.py`)
+
+The verified-fits audit (2026-10-26 scan, 256,134 vehicles) found starter was
+the weakest researched category: 2.5% of in-family seeker×donor pairs
+Verified vs 13.7% for alternator, with **59.4% of starter Likely pairs
+sitting in families that have no published starter list at all**. Ranked by
+live donors, the two biggest such families were ford-46-2v (10,455) and
+ford-mzr (10,128) — both mined this pass (citations in the per-family
+sections above; tiers covered by `test_interchange.py` "Starter list mining
+2026-10-26" checks).
+
+**Mined but rejected on honesty grounds:** gm-gen3-truck (6,417 donors, #3
+missing-list family). The published lists split by displacement INSIDE the
+family — Lester 6494 (DB 410-12257) covers 4.8/5.3 trucks while Lester 6492
+covers the 6.0 (bzerob.com GM starter cross-reference + DB Electrical,
+retrieved 2026-10-26) — and verified groups match on (make, model, year)
+only, so a 6.0 Silverado donor would false-Verify against a 5.3 seeker
+inside any model-span group. Same displacement-split doctrine as the
+gm-fbody starter exclusion. Would need displacement-aware groups (schema
+change) to ship honestly.

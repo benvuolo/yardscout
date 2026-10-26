@@ -802,6 +802,48 @@ check("gens: Echo/xA/xD rows exist; Toyota-alias Scion rows mirror Scion's",
       and GENS[("Toyota", "Scion xA")] == GENS[("Scion", "xA")]
       and GENS[("Toyota", "Scion xD")] == GENS[("Scion", "xD")])
 
+# --- Starter list mining 2026-10-26 (audit-driven) -------------------------
+# ford-46-2v: Lester 3267 (Panthers 98-05 + Mustang 98-99) and Lester 6691
+# (Panthers 06-08, CV 09) — dual-published 2009(GM/TC)-2011 stay Likely, and
+# truck/Mustang-00+ rows aren't on either list.
+_f46 = js.ENGINE_FAMILIES["ford-46-2v"]
+_tier46 = lambda s, d: js.interchange_tier(_f46, "starter", s, d)
+check("46-2v starter: Panther 98-05 pairs verified (Lester 3267)",
+      _tier46((2000, "Ford", "Crown Victoria"),
+              (2003, "Mercury", "Grand Marquis")) == "verified"
+      and _tier46((1998, "Ford", "Mustang"),
+                  (2004, "Lincoln", "Town Car")) == "verified")
+check("46-2v starter: Panther 06-08 pairs verified (Lester 6691)",
+      _tier46((2007, "Ford", "Crown Victoria"),
+              (2008, "Lincoln", "Town Car")) == "verified")
+check("46-2v starter: units differ across the 05/06 split — likely",
+      _tier46((2004, "Ford", "Crown Victoria"),
+              (2007, "Ford", "Crown Victoria")) == "likely")
+check("46-2v starter: dual-sourced 2010-11 Panthers stay likely",
+      _tier46((2010, "Ford", "Crown Victoria"),
+              (2011, "Ford", "Crown Victoria")) == "likely")
+check("46-2v starter: truck unit differs — F-150 x Panther likely",
+      _tier46((2004, "Ford", "F-150"),
+              (2004, "Ford", "Crown Victoria")) == "likely")
+check("46-2v starter: Mustang 00-04 rows unpublished — likely",
+      _tier46((2002, "Ford", "Mustang"),
+              (2000, "Ford", "Crown Victoria")) == "likely")
+
+# ford-mzr: Lester 17944 — ONE unit for Fusion/Milan 06-10 across 2.3 AND 2.5.
+_fmzr = js.ENGINE_FAMILIES["ford-mzr"]
+_tiermzr = lambda s, d: js.interchange_tier(_fmzr, "starter", s, d)
+check("mzr starter: Fusion/Milan 06-10 verified across 2.3/2.5 (Lester 17944)",
+      _tiermzr((2007, "Ford", "Fusion"),
+               (2010, "Mercury", "Milan")) == "verified"
+      and _tiermzr((2008, "Ford", "Fusion"),
+                   (2009, "Ford", "Fusion")) == "verified")
+check("mzr starter: Mazda/Escape/Focus units differ — likely",
+      _tiermzr((2007, "Ford", "Fusion"), (2007, "Mazda", "6")) == "likely"
+      and _tiermzr((2007, "Ford", "Fusion"),
+                   (2008, "Ford", "Escape")) == "likely")
+check("mzr starter: 2011+ Fusion not on the published list — likely",
+      _tiermzr((2012, "Ford", "Fusion"), (2008, "Ford", "Fusion")) == "likely")
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILURE(S):", *FAILS, sep="\n  - ")

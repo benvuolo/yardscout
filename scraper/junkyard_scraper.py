@@ -7702,7 +7702,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         ],
         "parts": {
             "alternator": {"note": "truck vs Panther vs Mustang brackets/plugs differ by era — match part number"},
-            "starter": {"note": _STR_NOTE},
+            "starter": {"note": "Panther cars share one published unit 98-05 and another 06-08; 2009-11 cars were dual-sourced and the trucks use their own unit — " + _STR_NOTE},
         },
     },
     "ford-54-2v": {
@@ -7785,7 +7785,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         ],
         "parts": {
             "alternator": {"note": "MZR family — displacement variants share accessories in most years, but verify plug & pulley; turbo (Mazdaspeed/EcoBoost) differs"},
-            "starter": {"note": _STR_NOTE},
+            "starter": {"note": "Fusion/Milan 06-10 share one published unit across the 2.3 and 2.5; Mazda and truck rows ride different units — " + _STR_NOTE},
         },
     },
     "ford-fusion-cd4": {
@@ -11685,6 +11685,29 @@ _STR_VERIFIED: dict = {
     "mercury-marauder": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5105 AND 280-5312 are both listed for the Marauder 4.6 2003-2004 with no qualifiers — two published case styles, match yours.",
         "groups": [[("Mercury", "Marauder", 2003, 2004)]],
+    },
+    # 2026-10-26 audit-driven mining: starter was the weakest category (2.5%
+    # of in-family pairs Verified; 59% of Likely pairs sat in families with
+    # no starter list at all). ford-46-2v and ford-mzr were the two biggest
+    # such families by live donors (10.5k and 10.1k).
+    "ford-46-2v": {
+        "evidence": "DB Electrical 410-52582 (Lester 3267, PMGR 12-tooth) applications table (dbelectrical.com, retrieved 2026-10-26): Crown Victoria 4.6 1998-2005, Grand Marquis 4.6 1998-2005, Town Car 4.6 1998-2005 and Mustang 4.6 1998-1999, all unqualified rows. CPR Starters 6691N application table (cprstarters.com, retrieved 2026-10-26) and Quality-Built 6691S fitment (partshawk.com, retrieved 2026-10-26), both Lester 6691 / Ford 6W1Z-11002-AA: Crown Victoria, Grand Marquis and Town Car 4.6 2006-2009 — single-sourced 2006-2008 (plus Crown Victoria 2009; GM/TC 2009 also appear on the 3267 table). The 3267 table lists the Panthers again for 2009/2010-2011, dual-published against 6691 — those years stay Likely, match your unit. F-150/Expedition/Explorer 4.6 use the truck unit (prior spot-check: Lester 7791/8252-era lists) and Mustang 1996-97/2000-04 rows aren't published unqualified — all stay Likely.",
+        "groups": [
+            [("Ford", "Crown Victoria", 1998, 2005),
+             ("Mercury", "Grand Marquis", 1998, 2005),
+             ("Lincoln", "Town Car", 1998, 2005),
+             ("Ford", "Mustang", 1998, 1999)],
+            [("Ford", "Crown Victoria", 2006, 2009),
+             ("Mercury", "Grand Marquis", 2006, 2008),
+             ("Lincoln", "Town Car", 2006, 2008)],
+        ],
+    },
+    "ford-mzr": {
+        "evidence": "DB Electrical 410-48124 (Lester 17944, Ford 6E5Z-11002-AA / Motorcraft SA-950) applications table (dbelectrical.com, retrieved 2026-10-26): Fusion 2.3 2006-2009 + 2.5 2010 and Milan 2.3 2006-2009 + 2.5 2010 — one published unit across both displacements, every row unqualified. Mazda 3/5/6, Escape, Focus and Ranger starters are published on OTHER units (Lester 17908 covers Mazda 6 03-10 but a second unit also lists Mazda 6 06-07, and several Mazda rows are transmission-adjacent) — all non-Fusion/Milan pairs stay Likely, match part number.",
+        "groups": [
+            [("Ford", "Fusion", 2006, 2010),
+             ("Mercury", "Milan", 2006, 2010)],
+        ],
     },
     "vw-r32-32": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5338 R32 3.2 2008 unqualified, dual-listed with 281-6001 (First Time Fit, CBRA engine code) — two published case styles, match yours.",
