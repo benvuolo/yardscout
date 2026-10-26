@@ -3244,7 +3244,7 @@ function openYardPrices(location) {
  *  ("HEADLAMP COMPOSITE"). Memoized: the combobox counts call this a lot. */
 const _partQuoteMemo = new Map();
 function yardPartQuote(location, variants) {
-  const key = variants.join('\u0001') + '|' + location;
+  const key = variants.map(v => Array.isArray(v) ? v.join('\u0002') : v).join('\u0001') + '|' + location;
   let hit = _partQuoteMemo.get(key);
   if (hit === undefined) {
     hit = _yardPartQuoteUncached(location, variants);
@@ -3259,20 +3259,25 @@ function _yardPartQuoteUncached(location, variants) {
   // variant with any hit wins, cheapest row within THAT variant only. A "="
   // prefix demands an exact row-name match — "=door" prices a row named
   // DOOR without also sweeping up DOOR HANDLE, the old cheapest-substring
-  // hazard that quoted a $9 handle as the price of a door.
+  // hazard that quoted a $9 handle as the price of a door. An ARRAY variant
+  // is one tier of synonymous names (a curated alias group's raw spellings):
+  // cheapest hit across the whole tier wins together.
   let best = null;
   for (const v of variants) {
-    const exact = v.charAt(0) === '=';
-    const needle = exact ? v.slice(1) : v;
-    for (const r of rows) {
-      const pl = r.part.toLowerCase();
-      const hit = exact ? pl.trim() === needle : pl.includes(needle);
-      if (hit && (!best || r.price < best.price)) best = r;
+    for (const tv of (Array.isArray(v) ? v : [v])) {
+      const exact = tv.charAt(0) === '=';
+      const needle = exact ? tv.slice(1) : tv;
+      for (const r of rows) {
+        const pl = r.part.toLowerCase();
+        const hit = exact ? pl.trim() === needle : pl.includes(needle);
+        if (hit && (!best || r.price < best.price)) best = r;
+      }
     }
     if (best) break;
   }
   if (!best) {
-    for (const v of variants) {
+    for (let v of variants) {
+      if (Array.isArray(v)) v = v[0];
       const kw = lookupYardCost(v.charAt(0) === '=' ? v.slice(1) : v, location);
       if (kw.cost != null) {
         // Recover the full row (core charge) behind the keyword-map name.
@@ -3331,9 +3336,10 @@ function openPriceCompare(query) {
 
   const { shown } = getYardsView();
   // Merged spelling variants compare as one part: a pick of "Tail Light"
-  // must still price yards whose list spells it "TAILLIGHT".
+  // must still price yards whose list spells it "TAILLIGHT". Curated alias
+  // groups carry a dedicated exact-name quote tier (never substrings).
   const entry = getPartIndex().byName.get(q);
-  const variants = entry ? entry.names : [q];
+  const variants = entry ? (entry.quote || entry.names) : [q];
   // UTPAP's premium-row sections appear as separate "(Premium)" yards in the
   // directory but share the base yard's price list — keep one per real yard.
   const seen = new Set();
@@ -3403,19 +3409,134 @@ function titleCasePart(s) {
 }
 
 /* Scraper parse artifacts: a handful of price-list rows ship the PRICE as the
- * part name ("5.00" — Barry's U Pull It list). Pure numeric / price-looking
- * names are dropped from the picker entirely. */
+ * part name ("5.00" — Barry's U Pull It list), and Chesterfield's list carries
+ * "...we do not sell" disclaimer rows. Neither belongs in the picker. */
 const JUNK_PART_NAME = /^[\s\d.,$-]+$/;
+const JUNK_PART_PHRASE = /we do not sell/i;
 
-/** Merge key for true spelling variants of the same part: punctuation and
- *  spacing collapse ("tail light" = "taillight", "a-frame" = "a frame"), and
- *  a simple trailing-s fold merges singular/plural. Vendor-specific rows like
- *  "Bracket - Alum" vs "Bracket - Tin" keep distinct keys — they're real
- *  distinct items, only the spelling-level variants fold together. */
+/* ===== CANONICAL PART-NAME MERGING (the make/model-normalization pattern,
+ * applied to the chains' raw price-sheet spellings) =====
+ *
+ * partMergeKey folds TRUE spelling variants of one physical part into one
+ * compare entry: punctuation, word order ("spring, coil" = "coil spring"),
+ * singular/plural, filler words ("(each)", "any", "misc"), and the chains'
+ * stock abbreviations (HOUS→housing, ASSY→assembly, ELEC→electric, W/→with).
+ * Genuinely different parts keep different keys because their CONTENT tokens
+ * differ — "air cleaner lid" never folds into "air cleaner housing".
+ * Every rule below was audited against the full ~7,200-name corpus across
+ * all wired price lists (see tools/check_part_aliases.py); where a fold was
+ * ambiguous it was NOT added — honest fragmentation beats wrong unification. */
+const PART_FILLER_TOKENS = new Set([
+  'each', 'any', 'only', 'misc', 'oem', 'per', 'type', 'style',
+  'the', 'of', 'or', 'and', 'ea', 's', 'n',
+]);
+const PART_TOKEN_ABBR = {
+  // chain abbreviations (verified against the lists that use them)
+  assy: 'assembly', hous: 'housing', housng: 'housing', alum: 'aluminum',
+  elec: 'electric', elect: 'electric', elctric: 'electric', electrc: 'electric',
+  cyl: 'cylinder', trans: 'transmission', mtr: 'motor', moto: 'motor',
+  pwr: 'power', cvr: 'cover', cntrl: 'control', ctrl: 'control',
+  sml: 'small', sm: 'small', lrg: 'large', lg: 'large', frt: 'front',
+  rr: 'rear', w: 'with', reg: 'regulator', pla: 'plastic', plas: 'plastic',
+  plast: 'plastic', met: 'metal', sw: 'switch', eng: 'engine', man: 'manual',
+  pres: 'pressure', press: 'pressure', susp: 'suspension',
+  // compound words some chains close up that others split (or vice versa)
+  airbag: 'air bag', airflow: 'air flow', sparkplug: 'spark plug',
+  clockspring: 'clock spring', domelight: 'dome light', foglamp: 'fog light',
+  pushrod: 'push rod', hubcap: 'hub cap', oilpan: 'oil pan',
+  signalswitch: 'signal switch', sunroof: 'sun roof', subwoofer: 'sub woofer',
+  ujoint: 'u joint',
+  // lamp/light vocabularies name the same hardware on every list surveyed
+  lamp: 'light', taillight: 'tail light', taillamp: 'tail light',
+  headlight: 'head light', headlamp: 'head light',
+};
+/* Token-set collisions where the SAME sorted tokens describe DIFFERENT parts
+ * (found in the corpus audit). These raw names always keep their own entry. */
+const PART_NEVER_MERGE = new Set([
+  'back seat back',                  // a seat-back section, not a back seat
+  'motor - seat without tracks',     // the motor, not the track
+  'motor - window without regulator',// the motor, not the regulator
+]);
+
 function partMergeKey(name) {
-  let k = name.toLowerCase().replace(/[^a-z0-9]+/g, '');
-  if (k.length > 3 && k.endsWith('s') && !k.endsWith('ss')) k = k.slice(0, -1);
-  return k;
+  const n = name.toLowerCase().replace(/w\/o/g, ' without ').replace(/w\//g, ' with ');
+  const toks = [];
+  for (let t of n.split(/[^a-z0-9]+/)) {
+    if (!t) continue;
+    let exp = PART_TOKEN_ABBR[t];
+    if (exp === undefined && t.length > 3 && t.endsWith('s') && !t.endsWith('ss')) {
+      t = t.slice(0, -1);
+      exp = PART_TOKEN_ABBR[t];
+    }
+    for (const p of (exp !== undefined ? exp.split(' ') : [t])) {
+      if (!PART_FILLER_TOKENS.has(p)) toks.push(p);
+    }
+  }
+  const key = [...new Set(toks)].sort().join(' ');
+  return key || name.toLowerCase();
+}
+
+/* ===== CURATED ALIAS GROUPS =====
+ * Hand-curated merges partMergeKey can't prove mechanically: the same
+ * physical part published under different VOCABULARY per chain (airbox vs
+ * air cleaner housing vs air cleaner box), plus Lg/Sm-style size variants of
+ * one part. Raw names were taken verbatim from the live price lists
+ * (tools/check_part_aliases.py validates them and flags drift). Where a
+ * chain's catalog makes a merge ambiguous (air cleaner BASE / HALF / LID vs
+ * housing) the name is deliberately NOT listed. `syn` adds searchable
+ * mechanic's words. Quoting uses the group's EXACT raw names as one tier —
+ * cheapest matching row per yard, the yard's own spelling shown in the row —
+ * never substrings, so "air cleaner" can't sweep up a $6 lid.
+ * Where a finder category covers the same part, `canon` must EQUAL that
+ * category's label (one taxonomy — spec §6); the category's own suggest
+ * entry stands down in favor of the alias group (same name, honest counts). */
+const PART_ALIAS_GROUPS = [
+  {
+    canon: 'Air intake / airbox',   // = finder `airbox` category label
+    syn: ['airbox', 'air box', 'intake box', 'air cleaner'],
+    raw: [
+      'air cleaner', 'air cleaner (round)', 'air cleaner sm',
+      'air cleaner assembly', 'air cleaner assembly aftermarket',
+      'air cleaner assembly plastic', 'air cleaner assembly steel',
+      'air cleaner assy', 'air cleaner box', 'air cleaner box plas',
+      'air cleaner box plastic', 'air cleaner hous(lg)', 'air cleaner hous(sm)',
+      'air cleaner housing', 'air cleaner housing carb', 'air box - complete',
+    ],
+  },
+  {
+    canon: 'Air cleaner lid',
+    syn: ['airbox lid', 'air box lid', 'air cleaner top'],
+    raw: ['air cleaner lid', 'air cleaner top', 'air box lid'],
+  },
+  {
+    canon: 'Alternator',            // = finder `alternator` category label
+    syn: [],
+    raw: ['alternator', 'alternator (non hybrid)'],
+  },
+  {
+    canon: 'Mass air flow sensor',
+    syn: ['maf', 'maf sensor', 'mass airflow sensor'],
+    raw: [
+      'mass air flow sensor', 'sensor (mass air flow)', 'sensor - mass air flow',
+      'sensor-mass airflow', 'air flow sensor', 'sensor- air flow',
+    ],
+  },
+  {
+    canon: 'Hood prop rod',
+    syn: [],
+    raw: [
+      'hood prop', 'hood prop - any', 'hood prop any',
+      'hood prop rod', 'prop rod - hood', 'prop rod-hood',
+    ],
+  },
+];
+// merge-key → group, so punctuation/abbreviation variants of a listed raw
+// name (and future list drift that normalizes the same) land in the group.
+const PART_ALIAS_BY_KEY = new Map();
+const PART_ALIAS_CANON = new Set();
+for (const g of PART_ALIAS_GROUPS) {
+  PART_ALIAS_CANON.add(g.canon.toLowerCase());
+  for (const r of g.raw) PART_ALIAS_BY_KEY.set(partMergeKey(r), g);
 }
 
 function getPartIndex() {
@@ -3434,7 +3555,7 @@ function getPartIndex() {
     if (!rows) continue;
     const base = baseName(y.location);
     for (const r of rows) {
-      if (JUNK_PART_NAME.test(r.part)) continue;
+      if (JUNK_PART_NAME.test(r.part) || JUNK_PART_PHRASE.test(r.part)) continue;
       const k = r.part.toLowerCase();
       let e = raw.get(k);
       if (!e) { e = { display: titleCasePart(r.part), yards: new Set() }; raw.set(k, e); }
@@ -3462,6 +3583,12 @@ function getPartIndex() {
   for (const cat of (interchangeData && interchangeData.categories) || []) {
     if (!cat.priceTokens || !cat.priceTokens.length) continue;
     const key = cat.label.toLowerCase();
+    // A curated alias group with the same canonical name owns this part:
+    // its exact-raw-name tier quotes and counts honestly (substring tokens
+    // can land on the wrong row — the LID-for-airbox hazard), and the group
+    // already wears the category's label. The category stands down here;
+    // the Parts tab itself is untouched.
+    if (PART_ALIAS_CANON.has(key)) continue;
     const toks = cat.priceTokens.map(t => t.toLowerCase());
     const existing = raw.get(key);
     if (existing) {
@@ -3483,17 +3610,29 @@ function getPartIndex() {
 
   // Pass 2 — fold spelling variants into one entry; the best-covered variant
   // names the group, and all variant spellings stay searchable/matchable.
+  // Curated alias groups fold across VOCABULARIES: their raw names share one
+  // group keyed by the group object, display the canonical name, and collect
+  // the exact raw spellings for quoting.
   const groups = new Map(); // merge key -> { display, repCoverage, yards, names }
   for (const [k, e] of raw) {
-    const mk = partMergeKey(k);
+    const mkRaw = partMergeKey(k);
+    const ag = PART_NEVER_MERGE.has(k) ? undefined : PART_ALIAS_BY_KEY.get(mkRaw);
+    const mk = PART_NEVER_MERGE.has(k) ? 'solo:' + k : (ag ? 'alias:' + ag.canon : mkRaw);
     let g = groups.get(mk);
     if (!g) {
       g = { display: e.display, repCoverage: e.yards.size, yards: new Set(), names: [] };
+      if (ag) {
+        g.display = ag.canon;
+        g.canonical = true;      // canonical name wins; suggestions rank by yards
+        g.exact = [];            // exact raw spellings — the quote tier
+        g.names.push(ag.canon.toLowerCase(), ...ag.syn);
+      }
       groups.set(mk, g);
     }
+    if (g.exact) g.exact.push(k);
     // Canonical finder labels win the group's display name outright
     // (spec §6.5); otherwise the best-covered spelling names the group.
-    if (e.canonical && !g.canonical) {
+    if (e.canonical && !g.exact && !g.canonical) {
       g.display = e.display;
       g.canonical = true;
     } else if (!g.canonical
@@ -3511,6 +3650,9 @@ function getPartIndex() {
   const entries = [...groups.values()];
   const byName = new Map();
   for (const g of entries) {
+    // Alias groups quote through ONE exact-match tier: every raw spelling at
+    // once, cheapest row per yard, never substrings (openPriceCompare).
+    if (g.exact) g.quote = [g.exact.map(n => '=' + n)];
     byName.set(g.display.toLowerCase(), g);
     for (const n of g.names) byName.set(n, g);
   }
