@@ -96,7 +96,7 @@ with sync_playwright() as pw:
         check("no raw airbox-spelling fragments in suggestions",
               not frag, str(frag))
         check("'air' shows consolidated Air cleaner lid",
-              any("Air Cleaner Lid" in x for x in labels), str(labels[:12]))
+              any("air cleaner lid" in x.lower() for x in labels), str(labels[:12]))
 
     # 2. the airbox compare — covers every yard publishing ANY alias
     opened = open_compare(page, "air", "airbox" if not BEFORE else "hous(sm)")
