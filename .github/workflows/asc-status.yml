@@ -1,0 +1,45 @@
+# Read-only: what App Store Connect currently says about YardScout — each
+# version's state, the build attached, and any review submission in flight.
+# Uses the same API key the release workflow uses; prints nothing secret.
+name: App Store status
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+      BUNDLE_ID: com.benvuolo.yardscout
+    steps:
+      - name: Query App Store Connect
+        run: |
+          set -euo pipefail
+          pip install -q pyjwt cryptography requests
+          python3 - <<'PY'
+          import os, time, jwt, requests
+          key = os.environ["ASC_P8"].strip().replace("\\n", "\n")
+          token = jwt.encode({"iss": os.environ["ASC_ISSUER_ID"], "iat": int(time.time()), "exp": int(time.time()) + 900,
+                              "aud": "appstoreconnect-v1"}, key, algorithm="ES256",
+                             headers={"kid": os.environ["ASC_KEY_ID"], "typ": "JWT"})
+          H = {"Authorization": f"Bearer {token}"}
+          API = "https://api.appstoreconnect.apple.com/v1"
+          app = requests.get(f"{API}/apps", headers=H, params={"filter[bundleId]": os.environ["BUNDLE_ID"]}, timeout=60).json()["data"][0]
+          print("app:", app["attributes"]["name"], app["id"])
+          vs = requests.get(f"{API}/apps/{app['id']}/appStoreVersions", headers=H,
+                            params={"filter[platform]": "IOS", "limit": 6, "include": "build", "fields[builds]": "version,processingState"}, timeout=60).json()
+          builds = {b["id"]: b["attributes"] for b in vs.get("included", []) if b["type"] == "builds"}
+          for v in vs["data"]:
+              a = v["attributes"]; b = (v.get("relationships", {}).get("build", {}).get("data") or {}).get("id")
+              print(f"version {a['versionString']:>7}  state={a['appStoreState']:<28} build={builds.get(b, {}).get('version', '-')}  created={a.get('createdDate','')[:10]}")
+          subs = requests.get(f"{API}/apps/{app['id']}/reviewSubmissions", headers=H, params={"limit": 5}, timeout=60).json().get("data", [])
+          for s in subs:
+              print("review submission:", s["attributes"].get("state"), "submitted", (s["attributes"].get("submittedDate") or "")[:16])
+          if not subs: print("review submissions: none")
+          PY
