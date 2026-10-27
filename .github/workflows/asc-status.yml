@@ -42,4 +42,18 @@ jobs:
           for s in subs:
               print("review submission:", s["attributes"].get("state"), "submitted", (s["attributes"].get("submittedDate") or "")[:16])
           if not subs: print("review submissions: none")
+          bl = requests.get(f"{API}/builds", headers=H, params={"filter[app]": app["id"], "sort": "-uploadedDate", "limit": 6,
+                            "include": "buildBetaDetail,preReleaseVersion,betaGroups"}, timeout=60).json()
+          inc = {(i["type"], i["id"]): i for i in bl.get("included", [])}
+          for b in bl.get("data", []):
+              a = b["attributes"]; rel = b.get("relationships", {})
+              pv = inc.get(("preReleaseVersions", (rel.get("preReleaseVersion", {}).get("data") or {}).get("id")), {}).get("attributes", {}).get("version", "?")
+              bd = inc.get(("buildBetaDetails", (rel.get("buildBetaDetail", {}).get("data") or {}).get("id")), {}).get("attributes", {})
+              groups = [inc.get(("betaGroups", g["id"]), {}).get("attributes", {}).get("name", g["id"]) for g in (rel.get("betaGroups", {}).get("data") or [])]
+              print(f"build {pv} ({a['version']}) uploaded={a.get('uploadedDate','')[:16]} processing={a.get('processingState')} "
+                    f"expired={a.get('expired')} encryption={a.get('usesNonExemptEncryption')} "
+                    f"internal={bd.get('internalBuildState')} external={bd.get('externalBuildState')} groups={groups}")
+          for g in requests.get(f"{API}/apps/{app['id']}/betaGroups", headers=H, timeout=60).json().get("data", []):
+              ga = g["attributes"]
+              print(f"beta group: {ga.get('name')} internal={ga.get('isInternalGroup')} allBuilds={ga.get('hasAccessToAllBuilds')}")
           PY
