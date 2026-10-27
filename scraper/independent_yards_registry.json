@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-26",
+  "updated": "2026-10-27",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked | retired | directory-only. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -742,6 +742,147 @@
           "state": "MN",
           "lat": 45.5519,
           "lng": -94.1169
+        }
+      ]
+    },
+    {
+      "name": "Pick-A-Part Jalopy Jungle",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - same family as Sturtevant / St. Cloud, config-driven adapter",
+      "website": "https://www.pickapartjalopyjungle.com",
+      "inventory_url": "https://inventory.pickapartjalopyjungle.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://inventory.pickapartjalopyjungle.com/",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "~255 (5 yards x (GetMakes + one POST per make), 1s apart on the one host)",
+        "notes": "Multipart POST / with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, ROW only - no color, no arrival date). No stock # / VIN: ids are content hashes jalopy-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: POST /Home/GetMakes {yardId} (JSON, ~50 makes per yard). Config: CRUSH_MVC_SITES['jalopy'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: none published (/Home/PartPrices 404). robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / \u00a76.2. Live 2026-10-27: 6557 vehicles (Boise 894; Caldwell 1192; Nampa 2037; Garden City 857; Twin Falls 1577). First Idaho coverage: Treasure Valley x4 + Twin Falls."
+      },
+      "update_freshness": "live (jalopybot.com tracks the same app daily; no dates in the feed - dateAdded is '' / unknown)",
+      "robots": "no robots.txt (404)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "yard_id": "1020",
+          "name": "Pick-A-Part Jalopy Jungle - Boise",
+          "city": "Boise",
+          "state": "ID",
+          "lat": 43.6551,
+          "lng": -116.2576
+        },
+        {
+          "yard_id": "1021",
+          "name": "Pick-A-Part Jalopy Jungle - Caldwell",
+          "city": "Caldwell",
+          "state": "ID",
+          "lat": 43.6247,
+          "lng": -116.6316
+        },
+        {
+          "yard_id": "1022",
+          "name": "Pick-A-Part Jalopy Jungle - Nampa",
+          "city": "Nampa",
+          "state": "ID",
+          "lat": 43.5921,
+          "lng": -116.5227
+        },
+        {
+          "yard_id": "1119",
+          "name": "Pick-A-Part Jalopy Jungle - Garden City",
+          "city": "Garden City",
+          "state": "ID",
+          "lat": 43.6417,
+          "lng": -116.2547
+        },
+        {
+          "yard_id": "1099",
+          "name": "Pick-A-Part Jalopy Jungle - Twin Falls",
+          "city": "Twin Falls",
+          "state": "ID",
+          "lat": 42.5375,
+          "lng": -114.451
+        }
+      ]
+    },
+    {
+      "name": "Trusty Pick-A-Part",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - same family as Sturtevant / St. Cloud, config-driven adapter",
+      "website": "https://www.trustypickapart.com",
+      "inventory_url": "https://inventory.trustypickapart.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://inventory.trustypickapart.com/",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "~40 (page GET + one POST per make, 1s apart)",
+        "notes": "Multipart POST / with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, ROW only - no color, no arrival date). No stock # / VIN: ids are content hashes trusty-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: server-rendered #car-make select on /Home/Inventory (~38 makes). Config: CRUSH_MVC_SITES['trusty'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: none usable (/Home/PartPrices returns HTTP 500 - re-check). robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / \u00a76.2. Live 2026-10-27: 1381 vehicles (Caldwell 1381). A mile from Jalopy Caldwell; the yard's own site is the marketing page, inventory lives on the inventory. subdomain."
+      },
+      "update_freshness": "appears live (no dates in the feed - dateAdded is '' / unknown)",
+      "robots": "no robots.txt (404)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Trusty Pick-A-Part - Caldwell",
+          "city": "Caldwell",
+          "state": "ID",
+          "lat": 43.6295,
+          "lng": -116.6386
+        }
+      ]
+    },
+    {
+      "name": "M&M U-Pull-It",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - same family as Sturtevant / St. Cloud, config-driven adapter",
+      "website": "https://www.mmupullit.com",
+      "inventory_url": "https://www.mmupullit.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://www.mmupullit.com/Home/Inventory",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "~39 (page GET + one POST per make, 1s apart)",
+        "notes": "Multipart POST /Home/Inventory with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, COLOR, REFERENCE (engine/trim), ROW, ARRIVAL DATE MM/DD/YYYY). No stock # / VIN: ids are content hashes mmupullit-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: server-rendered #car-make select on /Home/Inventory (~37 makes). Config: CRUSH_MVC_SITES['mmupullit'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: /Home/PartPrices 4-col (PART DESCRIPTION, PRICE, BASIS, CORE CHARGE) -> mmupullit_pricing.json. robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / \u00a76.2. Live 2026-10-27: 631 vehicles (Buffalo 631). First Buffalo / western-NY yard."
+      },
+      "update_freshness": "live (2026 Arrival Date values observed)",
+      "robots": "no robots.txt (404)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "M&M U-Pull-It - Buffalo",
+          "city": "Buffalo",
+          "state": "NY",
+          "lat": 42.8846,
+          "lng": -78.7909
+        }
+      ]
+    },
+    {
+      "name": "Polk County Pick and Pay",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - same family as Sturtevant / St. Cloud, config-driven adapter",
+      "website": "https://www.polkcountypickandpay.com",
+      "inventory_url": "https://www.polkcountypickandpay.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://www.polkcountypickandpay.com/Home/Inventory",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "~41 (page GET + one POST per make, 1s apart)",
+        "notes": "Multipart POST /Home/Inventory with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, COLOR, ENGINE (mostly blank), ROW, ARRIVAL DATE MM/DD/YYYY). No stock # / VIN: ids are content hashes polkpickpay-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: server-rendered #car-make select on /Home/Inventory (~39 makes). Config: CRUSH_MVC_SITES['polkpickpay'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: /Home/PartPrices 4-col (PART DESCRIPTION, PRICE, BASIS, CORE RETURN) -> polkpickpay_pricing.json. robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / \u00a76.2. Live 2026-10-27: 991 vehicles (Lakeland 991). ~25 mi from Budget U-Pull-It Bartow (referral geography, EXPANSION_CANDIDATES.md \u00a75)."
+      },
+      "update_freshness": "live (2026 Arrival Date values observed)",
+      "robots": "no robots.txt (404)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Polk County Pick and Pay - Lakeland",
+          "city": "Lakeland",
+          "state": "FL",
+          "lat": 28.1094,
+          "lng": -81.9736
         }
       ]
     },

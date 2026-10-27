@@ -135,6 +135,8 @@ Pick Ur Part photos exist on `api.yardsmartapp.com` — ignore per no-photos pol
 
 ### CRUSH MVC app (difficulty 2 — St. Cloud/Sturtevant parser family)
 
+**BUILT 2026-10-27** — all 8 yards live via the config-driven `CRUSH_MVC_SITES` adapter (9,560 vehicles: Jalopy 6,557 across 5, Trusty 1,381, M&M 631, Polk 991). Boise yardId = 1020. Price lists: M&M + Polk wired; Trusty's `/Home/PartPrices` is a 500, Jalopy's a 404. Details: INDEPENDENT_YARDS.md 2026-10-27 section.
+
 | Yard | City/State | Website | Inv | Vehicles | PL |
 |---|---|---|---|---|---|
 | Pick-A-Part Jalopy Jungle — Boise | Boise, ID | https://inventory.pickapartjalopyjungle.com | yes | unverified (large; 5-yard chain) | no |

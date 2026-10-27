@@ -491,3 +491,76 @@ per-yard inventory pages, pooled make/model lookups; ids
 inventory to a Supabase-backed frontend (`ario.autorecycler.io/yard/{slug}`,
 `search-inventory` edge function). Details and the decision needed:
 `EXPANSION_CANDIDATES.md` §8.6. Ryan's (live since 10-23) is affected too.
+
+## 2026-10-27 — CRUSH MVC wave (Jalopy Jungle ×5, Trusty, M&M Buffalo, Polk County Pick and Pay)
+
+Built from EXPANSION_CANDIDATES.md "CRUSH MVC app" / §6 item 2: the S3
+Software Solutions hosted MVC inventory app that Sturtevant and St. Cloud
+were already parsed from, generalized into ONE config-driven adapter —
+`CRUSH_MVC_SITES` + `fetch_crush_mvc_site(source)` in `junkyard_scraper.py`
+(a new tenant is a config entry: base URL, page/search paths, optional
+`prices_path`, and per-yard `yard_id` / name / city / state / lat / lng).
+Sturtevant and St. Cloud keep their own adapters (stock-number ids that
+history rows are keyed on). 4 tenants, 8 yards, **9,560 vehicles live**
+(2026-10-27, 310 s wall-clock with the four hosts overlapped).
+
+Mechanism (same on every tenant): `GET /Home/Inventory` renders a multipart
+form (`YardId` on multi-yard tenants, `VehicleMake`, `VehicleModel`); one
+multipart POST per make with `VehicleModel` EMPTY to the form's action
+(`/` on Jalopy/Trusty, `/Home/Inventory` on M&M/Polk) returns the whole make
+as a table. Multi-yard tenants list makes via `POST /Home/GetMakes {yardId}`
+(JSON); single-yard tenants via the server-rendered `#car-make` select.
+Column sets differ per tenant, so the parse is header-driven: Jalopy and
+Trusty publish YEAR/MAKE/MODEL/ROW only; M&M adds COLOR, REFERENCE
+(engine/trim) and ARRIVAL DATE; Polk adds COLOR, ENGINE (mostly blank) and
+ARRIVAL DATE. No tenant exposes a stock number or VIN, so ids are content
+hashes in the Budget-Bartow convention
+(`{source}-{code}-sha1(year|make|model|color|engine|row|date)[:12]`, `-N`
+on the 2nd+ identical row) — stable while the row is unchanged; a car that
+moves rows gets a new id (same trade-off as Bartow). Arrival dates before
+2015 or beyond UTC-tomorrow drop to `""` (`_crush_mvc_parse_date`, then the
+global `_sanitize_date_added` clamp). robots.txt is 404 on all four hosts;
+pacing 1 s per host (`CRUSH_MVC_DELAY_SEC`), one `INDEPENDENT_FETCHERS` entry
+per HOST so the four hosts overlap but no host ever sees two of our requests
+at once. Pins geocoded once via Nominatim (street addresses are the comments
+in `CRUSH_MVC_SITES`); all exact OSM addresses except Polk, which resolves to
+the US-98 N segment in zip 33809.
+
+| Yard | Source | Live count | VIN | Newest dateAdded | Price list |
+|---|---|---|---|---|---|
+| Pick-A-Part Jalopy Jungle — Boise (5501 W State St; YardId 1020) | `jalopy` | 894 | 0% | none (feed has no dates) | no (`/Home/PartPrices` 404) |
+| Pick-A-Part Jalopy Jungle — Caldwell (6301 Cleveland Blvd; 1021) | `jalopy` | 1,192 | 0% | none | no |
+| Pick-A-Part Jalopy Jungle — Nampa (3931 Garrity Blvd; 1022) | `jalopy` | 2,037 | 0% | none | no |
+| Pick-A-Part Jalopy Jungle — Garden City (520 E 47th St; 1119) | `jalopy` | 857 | 0% | none | no |
+| Pick-A-Part Jalopy Jungle — Twin Falls (1750 Osterloh Ave; 1099) | `jalopy` | 1,577 | 0% | none | no |
+| Trusty Pick-A-Part — Caldwell (5517 Cleveland Blvd) | `trusty` | 1,381 | 0% | none (feed has no dates) | no (`/Home/PartPrices` HTTP 500 — re-check) |
+| M&M U-Pull-It — Buffalo (2150 William St) | `mmupullit` | 631 | 0% | 2026-10-22 | yes → `mmupullit_pricing.json` (251 parts) |
+| Polk County Pick and Pay — Lakeland (7623 US Hwy 98 N) | `polkpickpay` | 991 | 0% | 2026-10-23 | yes → `polkpickpay_pricing.json` (770 parts) |
+
+Notes:
+
+- Jalopy = **first Idaho coverage** (Treasure Valley ×4 + Twin Falls). The
+  Boise yard id (1020) was not in the scouting notes; it is the page's
+  default-selected option. `YardId` is honored by the search POST — the
+  five yards' (year, make, model, row) sets overlap by ≤50 rows pairwise, so
+  the chain is not one lot mirrored five times. jalopybot.com scrapes the
+  same app daily, so our ~255 requests/scan (5 × GetMakes + ~37–47 makes)
+  at 1 s are well inside the tolerated volume.
+- Jalopy and Trusty ship **no set-out date** — every row is
+  `dateAdded: ""` ("Set-out date unknown" in the app, never NEW/fresh), the
+  same as Budget Bartow's undated rows. Garden City has one 2026-model
+  listing (year passes through as the lot sign shows it).
+- M&M = first western-NY / Buffalo yard; Polk is ~25 mi from Budget Bartow
+  (referral geography, EXPANSION §5). Both are fully dated.
+- Price lists are wired production-side the way Sturtevant/Ryan's are
+  (`refresh_crush_mvc_pricing_file` → `docs/data/{source}_pricing.json`,
+  registered in the `--refresh-chain-pricing` tuple; 4-column PART
+  DESCRIPTION/PRICE/BASIS/CORE, Ryan's shape; bare-UPC "names" like
+  `042782999127` dropped by `_PRICE_AS_NAME_RE`). **Follow-up (docs/app.js
+  untouched in this branch):** the app's `grab('data/<src>_pricing.json', …)`
+  list and the yard→pricing map need the two new sources, and
+  `gen_yard_site_links.py` (ENTRIES added here) needs a regeneration pass
+  to write the tier-3 inventory links into app.js.
+- Registry: four `adapter-built` chains inserted after St. Cloud (same
+  family); `INDEPENDENT_EXPECTED_SOURCES` registers the four sources from
+  `CRUSH_MVC_SITES` (zero-vehicle alarm), like the Ario chains.

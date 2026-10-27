@@ -121,6 +121,12 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^u[\s-]*pull and save", "U-Pull and Save", None,
      "tier 1 handles per-car /vehicles/{id} links; anchored so the U-Pull-It "
      "chains can't collide"),
+    # --- CRUSH MVC tenants (2026-10-27) — one app per tenant, no deep links ---
+    (r"^pick-a-part jalopy jungle", "Pick-A-Part Jalopy Jungle", None,
+     "5 Idaho yards share one inventory app (yard picker on the page)"),
+    (r"^trusty pick-a-part", "Trusty Pick-A-Part", None, ""),
+    (r"^m&m u-pull-it", "M&M U-Pull-It", None, ""),
+    (r"^polk county pick and pay", "Polk County Pick and Pay", None, ""),
 ]
 
 

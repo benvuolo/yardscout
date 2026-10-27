@@ -17973,6 +17973,348 @@ def refresh_upas_pricing_file() -> Path:
     return path
 
 
+# ---- CRUSH MVC "Enterprise Websites" app (S3 Software Solutions) ----------
+# (2026-10-27) The hosted ASP.NET MVC inventory app S3 Software Solutions
+# sells to u-pull yards — the same family Sturtevant and St. Cloud are
+# parsed from above, generalized into ONE config-driven adapter so a new
+# tenant is a config entry (EXPANSION_CANDIDATES.md "CRUSH MVC app", §6.2).
+# Fingerprint: /Home/Inventory renders a multipart form (optional YardId +
+# VehicleMake + VehicleModel) whose action is "/" or "/Home/Inventory"
+# depending on the tenant; multi-yard tenants expose POST /Home/GetMakes
+# {yardId} and /Home/GetModels {makeName, yardId} (JSON). One multipart
+# POST per make with VehicleModel EMPTY returns the whole make as a table
+# whose column set the tenant picks: Jalopy/Trusty ship YEAR/MAKE/MODEL/ROW
+# only (no stock #, no date, no VIN); M&M and Polk add COLOR, REFERENCE or
+# ENGINE and ARRIVAL DATE. The parse is header-driven for that reason.
+# No tenant here exposes a stock number, so ids are content hashes in the
+# Budget-Bartow convention: {source}-{code}-sha1(year|make|model|color|
+# engine|row|date)[:12], with "-N" appended to the 2nd+ identical row.
+# Arrival dates before 2015 or beyond UTC-tomorrow are dropped to "" (the
+# schema's unknown-date value) before _sanitize_date_added's global clamp.
+# robots.txt: 404 on all four hosts; pacing CRUSH_MVC_DELAY_SEC per host
+# (each site is its own INDEPENDENT_FETCHERS entry, so hosts overlap but a
+# host never sees two of our requests at once). Pins geocoded once via
+# Nominatim (YARD_COORDS convention); the street address is the comment.
+# Price lists: tenants that publish /Home/PartPrices (M&M, Polk — 4-column
+# PART DESCRIPTION/PRICE/BASIS/CORE, the Ryan's shape) get
+# docs/data/{source}_pricing.json via refresh_crush_mvc_pricing_file.
+# Jalopy returns 404 and Trusty a 500 on that route (2026-10-27), so no
+# prices_path for them.
+CRUSH_MVC_DELAY_SEC = 1.0
+CRUSH_MVC_SITES: dict[str, dict] = {
+    # Pick-A-Part Jalopy Jungle — 5-yard Idaho chain (Treasure Valley ×4 +
+    # Twin Falls), first Idaho coverage. One app, YardId per yard (the
+    # ids in the page's #yard-id select). A third-party tracker
+    # (jalopybot.com) scrapes this app daily, so the volume is tolerated.
+    "jalopy": {
+        "label": "Pick-A-Part Jalopy Jungle (ID)",
+        "base": "https://inventory.pickapartjalopyjungle.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/",
+        "yards": [
+            # 5501 W State St, Boise ID 83703 (exact OSM address)
+            {"yard_id": "1020", "code": "boise",
+             "name": "Pick-A-Part Jalopy Jungle - Boise", "city": "Boise",
+             "state": "ID", "lat": 43.6551, "lng": -116.2576},
+            # 6301 Cleveland Blvd, Caldwell ID 83607 (exact OSM address)
+            {"yard_id": "1021", "code": "caldwell",
+             "name": "Pick-A-Part Jalopy Jungle - Caldwell", "city": "Caldwell",
+             "state": "ID", "lat": 43.6247, "lng": -116.6316},
+            # 3931 Garrity Blvd, Nampa ID 83687 (exact OSM address)
+            {"yard_id": "1022", "code": "nampa",
+             "name": "Pick-A-Part Jalopy Jungle - Nampa", "city": "Nampa",
+             "state": "ID", "lat": 43.5921, "lng": -116.5227},
+            # 520 E 47th St, Garden City ID 83714 (exact OSM address)
+            {"yard_id": "1119", "code": "gardencity",
+             "name": "Pick-A-Part Jalopy Jungle - Garden City", "city": "Garden City",
+             "state": "ID", "lat": 43.6417, "lng": -116.2547},
+            # 1750 Osterloh Ave, Twin Falls ID 83301 (exact OSM address)
+            {"yard_id": "1099", "code": "twinfalls",
+             "name": "Pick-A-Part Jalopy Jungle - Twin Falls", "city": "Twin Falls",
+             "state": "ID", "lat": 42.5375, "lng": -114.4510},
+        ],
+    },
+    # Trusty Pick-A-Part — single yard, Caldwell ID (a mile from Jalopy
+    # Caldwell). Same app shape as Jalopy (form posts to "/") minus the
+    # yard select. /Home/PartPrices answers HTTP 500 (2026-10-27).
+    "trusty": {
+        "label": "Trusty Pick-A-Part (Caldwell ID)",
+        "base": "https://inventory.trustypickapart.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/",
+        "yards": [
+            # 5517 Cleveland Blvd, Caldwell ID 83607 (exact OSM address)
+            {"yard_id": None, "code": "caldwell",
+             "name": "Trusty Pick-A-Part - Caldwell", "city": "Caldwell",
+             "state": "ID", "lat": 43.6295, "lng": -116.6386},
+        ],
+    },
+    # M&M U-Pull-It — single yard, Buffalo NY (first western-NY yard; the
+    # app's other NY coverage is Fenix in the Hudson Valley/Albany). 7-column
+    # table with REFERENCE (engine) and ARRIVAL DATE. Price list published.
+    "mmupullit": {
+        "label": "M&M U-Pull-It (Buffalo NY)",
+        "base": "https://www.mmupullit.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "prices_path": "/Home/PartPrices",
+        "yards": [
+            # 2150 William St, Buffalo NY 14206 (exact OSM address)
+            {"yard_id": None, "code": "buffalo",
+             "name": "M&M U-Pull-It - Buffalo", "city": "Buffalo",
+             "state": "NY", "lat": 42.8846, "lng": -78.7909},
+        ],
+    },
+    # Polk County Pick and Pay — single yard, Lakeland FL, ~25 mi from
+    # Budget U-Pull-It Bartow (referral geography, EXPANSION §5). 7-column
+    # table with ENGINE (usually blank) and ARRIVAL DATE. Price list
+    # published (~790 rows).
+    "polkpickpay": {
+        "label": "Polk County Pick and Pay (Lakeland FL)",
+        "base": "https://www.polkcountypickandpay.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "prices_path": "/Home/PartPrices",
+        "yards": [
+            # 7623 US Highway 98 N, Lakeland FL 33809 — Nominatim resolves
+            # the US-98 N segment in zip 33809, not the parcel (the house
+            # number is not in OSM); close enough for the map pin.
+            {"yard_id": None, "code": "lakeland",
+             "name": "Polk County Pick and Pay - Lakeland", "city": "Lakeland",
+             "state": "FL", "lat": 28.1094, "lng": -81.9736},
+        ],
+    },
+}
+_CRUSH_MVC_MAKE_SELECT_RE = re.compile(
+    r'<select[^>]*(?:id="car-make"|name="VehicleMake")[^>]*>(.*?)</select>', re.S)
+_CRUSH_MVC_OPTION_RE = re.compile(r'<option value="([^"]+)"')
+_CRUSH_MVC_TABLE_RE = re.compile(r"<table[^>]*>(.*?)</table>", re.S)
+_CRUSH_MVC_TR_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+_CRUSH_MVC_TH_RE = re.compile(r"<th[^>]*>(.*?)</th>", re.S)
+_CRUSH_MVC_DATE_RE = re.compile(r"^(\d{1,2})/(\d{1,2})/(\d{4})$")
+# Arrival dates before this are placeholders / data-entry garbage on a
+# u-pull lot (cars rarely sit more than a few months).
+CRUSH_MVC_MIN_DATE_YEAR = 2015
+
+
+def _crush_mvc_parse_date(date_raw: str) -> str:
+    """MM/DD/YYYY -> ISO; '' for garbage, pre-2015 or future (> UTC+1d)."""
+    m = _CRUSH_MVC_DATE_RE.match((date_raw or "").strip())
+    if not m:
+        return ""
+    if int(m.group(3)) < CRUSH_MVC_MIN_DATE_YEAR:
+        return ""
+    iso = f"{m.group(3)}-{int(m.group(1)):02d}-{int(m.group(2)):02d}"
+    return _sanitize_date_added(iso)
+
+
+def _crush_mvc_parse_rows(page: str) -> list[dict]:
+    """The first <table> on a search result page -> [{HEADER: cell}].
+
+    Header-driven: the <th> row names the columns (YEAR, MAKE, MODEL, ROW and,
+    per tenant, COLOR, REFERENCE/ENGINE, ARRIVAL DATE). Rows whose cell count
+    differs from the header's are skipped."""
+    import html as html_mod
+    tm = _CRUSH_MVC_TABLE_RE.search(page)
+    if not tm:
+        return []
+    header: list[str] | None = None
+    out: list[dict] = []
+    for block in _CRUSH_MVC_TR_RE.findall(tm.group(1)):
+        ths = _CRUSH_MVC_TH_RE.findall(block)
+        if ths:
+            header = [html_mod.unescape(re.sub(r"<[^>]+>", "", h)).strip().upper()
+                      for h in ths]
+            continue
+        if header is None:
+            continue
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) != len(header):
+            continue
+        out.append(dict(zip(header, cells)))
+    return out
+
+
+def _crush_mvc_makes(site: dict, yard: dict) -> list[str]:
+    """Make list for one yard: POST /Home/GetMakes {yardId} on multi-yard
+    tenants, else the server-rendered #car-make select."""
+    base = site["base"]
+    page_url = base + site.get("page_path", "/Home/Inventory")
+    if yard.get("yard_id"):
+        r = requests.post(f"{base}/Home/GetMakes", data={"yardId": yard["yard_id"]},
+                          headers={**HEADERS, "Referer": page_url,
+                                   "X-Requested-With": "XMLHttpRequest"},
+                          timeout=60)
+        r.raise_for_status()
+        return [m for m in (str((d or {}).get("makeName") or "").strip()
+                            for d in r.json()) if m]
+    r = requests.get(page_url, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+    r.raise_for_status()
+    m = _CRUSH_MVC_MAKE_SELECT_RE.search(r.text)
+    return [v for v in (_CRUSH_MVC_OPTION_RE.findall(m.group(1)) if m else []) if v]
+
+
+def fetch_crush_mvc_site(source: str) -> list[dict]:
+    """Fetch every yard of one CRUSH_MVC_SITES tenant (one POST per make per
+    yard, CRUSH_MVC_DELAY_SEC apart on that tenant's host)."""
+    site = CRUSH_MVC_SITES[source]
+    label = site["label"]
+    base = site["base"]
+    search_url = base + site.get("search_path", "/Home/Inventory")
+    page_url = base + site.get("page_path", "/Home/Inventory")
+    vehicles: list[dict] = []
+    for yard in site["yards"]:
+        yard_id = yard.get("yard_id")
+        try:
+            makes = _crush_mvc_makes(site, yard)
+        except Exception as e:
+            print(f"  [{label}] {yard['code']}: make-list fetch failed: {e}", file=sys.stderr)
+            continue
+        if not makes:
+            print(f"  [{label}] {yard['code']}: no makes parsed — site layout changed?",
+                  file=sys.stderr)
+            continue
+        dupes: dict[str, int] = {}
+        n_before = len(vehicles)
+        for make_name in makes:
+            time.sleep(CRUSH_MVC_DELAY_SEC)
+            form = {"VehicleMake": (None, make_name), "VehicleModel": (None, "")}
+            if yard_id:
+                form = {"YardId": (None, str(yard_id)), **form}
+            try:
+                r = requests.post(search_url, files=form,
+                                  headers={**HEADERS, "Accept": "text/html",
+                                           "Referer": page_url},
+                                  timeout=60)
+                r.raise_for_status()
+            except Exception as e:
+                print(f"  [{label}] {yard['code']}: make {make_name!r} fetch failed: {e}",
+                      file=sys.stderr)
+                continue
+            for rec in _crush_mvc_parse_rows(r.text):
+                year_s = rec.get("YEAR", "")
+                make_s = rec.get("MAKE", "")
+                model_s = rec.get("MODEL", "")
+                if not year_s.isdigit() or not make_s or not model_s:
+                    continue
+                row_s = rec.get("ROW", "")
+                color_s = rec.get("COLOR", "")
+                engine_s = rec.get("ENGINE") or rec.get("REFERENCE") or ""
+                date_raw = next((v for k, v in rec.items() if "DATE" in k), "")
+                basis = "|".join((yard["code"], year_s, make_s, model_s, color_s,
+                                  engine_s, row_s, date_raw)).lower()
+                vid = f"{source}-{yard['code']}-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+                n = dupes.get(vid, 0) + 1
+                dupes[vid] = n
+                if n > 1:
+                    vid = f"{vid}-{n}"
+                v = {
+                    "id": vid,
+                    "vin": "",
+                    "year": int(year_s),
+                    "make": _utpap_format_label(make_s),
+                    "model": _utpap_format_label(model_s),
+                    "row": row_s,
+                    "dateAdded": _crush_mvc_parse_date(date_raw),
+                    "_location": yard["name"],
+                    "_city": yard["city"],
+                    "_state": yard["state"],
+                    "_lat": yard["lat"],
+                    "_lng": yard["lng"],
+                    "_source": source,
+                }
+                if color_s:
+                    v["_color"] = color_s.title()
+                vehicles.append(v)
+        print(f"  [{label}] {yard['code']}: {len(vehicles) - n_before} vehicles "
+              f"({len(makes)} makes)", file=sys.stderr)
+    print(f"  [{label}] {len(vehicles)} vehicles across "
+          f"{len({v['_location'] for v in vehicles})} yards", file=sys.stderr)
+    return vehicles
+
+
+def fetch_jalopy_inventory() -> list[dict]:
+    """Pick-A-Part Jalopy Jungle (5 Idaho yards) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("jalopy")
+
+
+def fetch_trusty_inventory() -> list[dict]:
+    """Trusty Pick-A-Part (Caldwell ID) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("trusty")
+
+
+def fetch_mmupullit_inventory() -> list[dict]:
+    """M&M U-Pull-It (Buffalo NY) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("mmupullit")
+
+
+def fetch_polkpickpay_inventory() -> list[dict]:
+    """Polk County Pick and Pay (Lakeland FL) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("polkpickpay")
+
+
+def refresh_crush_mvc_pricing_file(source: str) -> Path:
+    """/Home/PartPrices of one CRUSH MVC tenant -> {source}_pricing.json
+    (4 columns: PART DESCRIPTION, $PRICE, BASIS, $CORE — the Ryan's shape;
+    price-like 'names' such as bare UPC digits are dropped, Barry's rule)."""
+    import html as html_mod
+    site = CRUSH_MVC_SITES[source]
+    label = site["label"]
+    path = DATA_DIR / f"{source}_pricing.json"
+    if not site.get("prices_path"):
+        print(f"  [{label} pricing] no published price list — nothing to refresh",
+              file=sys.stderr)
+        return path
+    try:
+        r = requests.get(site["base"] + site["prices_path"],
+                         headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [{label} pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for block in _CRUSH_MVC_TR_RE.findall(page):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < 4:
+            continue
+        name, price_s, _basis, core_s = cells[:4]
+        if (not name or name.upper() == "PART DESCRIPTION" or name in seen
+                or _PRICE_AS_NAME_RE.match(name)):
+            continue
+        try:
+            price_f = float(price_s.replace("$", "").replace(",", ""))
+            core_f = float(core_s.replace("$", "").replace(",", "")) if core_s else 0.0
+        except ValueError:
+            continue
+        seen[name] = {
+            "description": name,
+            "price": f"{price_f:.2f}",
+            "corePrice": f"{core_f:.2f}",
+            "totalPrice": f"{price_f + core_f:.2f}",
+        }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [{label} pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [{label} pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+def refresh_mmupullit_pricing_file() -> Path:
+    """Refresh M&M U-Pull-It's price list -> mmupullit_pricing.json."""
+    return refresh_crush_mvc_pricing_file("mmupullit")
+
+
+def refresh_polkpickpay_pricing_file() -> Path:
+    """Refresh Polk County Pick and Pay's price list -> polkpickpay_pricing.json."""
+    return refresh_crush_mvc_pricing_file("polkpickpay")
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -18007,6 +18349,9 @@ INDEPENDENT_EXPECTED_SOURCES = {
 # chain with no yards wired yet can't trip the alarm every scan.
 INDEPENDENT_EXPECTED_SOURCES.update(
     {src: c["label"] for src, c in ARIO_CHAINS.items() if c["yards"]})
+# CRUSH MVC tenants (Jalopy Jungle, Trusty, M&M, Polk County) likewise.
+INDEPENDENT_EXPECTED_SOURCES.update(
+    {src: c["label"] for src, c in CRUSH_MVC_SITES.items() if c["yards"]})
 
 
 # Canonical adapter order. The parallel fetch below concatenates results in
@@ -18035,6 +18380,12 @@ INDEPENDENT_FETCHERS: list = [
     ("Budget U-Pull-It", fetch_budget_inventory),
     ("Ario (Ryan's + wave-1 chains)", fetch_ario_inventory),
     ("U-Pull and Save", fetch_upas_inventory),
+    # CRUSH MVC tenants: one entry per HOST so pacing stays per-host while
+    # the four hosts overlap (Jalopy's 5 yards share one host -> one entry).
+    ("Jalopy Jungle", fetch_jalopy_inventory),
+    ("Trusty", fetch_trusty_inventory),
+    ("M&M U-Pull-It", fetch_mmupullit_inventory),
+    ("Polk County Pick and Pay", fetch_polkpickpay_inventory),
 ]
 
 
@@ -20173,7 +20524,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA/FL/GA/MI (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, US Auto Supply, Chesterfield Auto Parts, Go Pull-It), Pick-A-Part VA, U-Pick-It AZ, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL, Ryan's Pick-a-Part MI, U-Pull and Save MI — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA/FL/GA/MI (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, US Auto Supply, Chesterfield Auto Parts, Go Pull-It), Pick-A-Part VA, U-Pick-It AZ, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL, Ryan's Pick-a-Part MI, U-Pull and Save MI, CRUSH MVC tenants (Pick-A-Part Jalopy Jungle ID x5, Trusty Pick-A-Part ID, M&M U-Pull-It NY, Polk County Pick and Pay FL) — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -20200,7 +20551,8 @@ def main():
                refresh_barrys_pricing_file, refresh_budget_pricing_file,
                refresh_p195_pricing_file, refresh_pnpsa_pricing_file,
                refresh_ryans_pricing_file, refresh_usauto_pricing_file,
-               refresh_upas_pricing_file)
+               refresh_upas_pricing_file, refresh_mmupullit_pricing_file,
+               refresh_polkpickpay_pricing_file)
         for fn in fns:
             try:
                 fn()
@@ -20280,7 +20632,7 @@ def main():
         indep_fut = None
         indep_pool = None
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x21 incl. Chesterfield + Go Pull-It + US Auto Supply, Pick-A-Part VA, U-Pick-It AZ, Barry's, Prestige, Budget, Ryan's Pick-a-Part, U-Pull and Save) in the background, overlapped with the chain scans...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x21 incl. Chesterfield + Go Pull-It + US Auto Supply, Pick-A-Part VA, U-Pick-It AZ, Barry's, Prestige, Budget, Ryan's Pick-a-Part, U-Pull and Save, Jalopy Jungle x5, Trusty, M&M U-Pull-It, Polk County Pick and Pay) in the background, overlapped with the chain scans...", file=sys.stderr)
             indep_pool = concurrent.futures.ThreadPoolExecutor(
                 max_workers=1, thread_name_prefix="indep-main")
             indep_fut = indep_pool.submit(fetch_independent_inventory)
