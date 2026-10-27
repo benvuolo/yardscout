@@ -1168,7 +1168,7 @@
     {
       "name": "U-Pick-It AZ",
       "status": "adapter-built",
-      "platform": "wordpress + yardconnect-pro v2.3 plugin (NEW plugin family; YardSmart backend, photos on api.yardsmartapp.com \u2014 fingerprint: wp-content/plugins/yardconnect-pro/)",
+      "platform": "wordpress + yardconnect-pro v2.3 plugin (M&M Auto Parts plugin over a YardSmart backend, photos on api.yardsmartapp.com \u2014 fingerprint: wp-content/plugins/yardconnect-pro/). Config-driven adapter since 2026-10-27: YARDCONNECT_SITES['upickitaz'] / fetch_yardconnect_site (ids and cache names unchanged)",
       "inventory_url": "https://upickitaz.com/",
       "api": {
         "endpoint": "https://upickitaz.com/wp-admin/admin-ajax.php",
@@ -1947,6 +1947,60 @@
           "lng": -120.4895,
           "ario_slug": "santa-maria-recycling-center",
           "inventory_url": "https://app.autorecycler.io/inventory/santa-maria-recycling-center"
+        }
+      ]
+    },
+    {
+      "name": "Chuck & Eddie's Self Service",
+      "status": "adapter-built",
+      "platform": "wordpress + yardconnect-pro v1.3.1 (server-rendered table; no search AJAX in this plugin version) \u2014 config-driven adapter YARDCONNECT_SITES['chuckeddies']",
+      "website": "https://www.chuckandeddies.com",
+      "inventory_url": "https://www.chuckandeddies.com/vehicle-inventory/",
+      "api": {
+        "endpoint": "https://www.chuckandeddies.com/vehicle-inventory/?make=all&model=all",
+        "method": "GET",
+        "auth": "none",
+        "format": "html",
+        "requests_per_scan": 1,
+        "notes": "FIRST CONNECTICUT COVERAGE. Chuck & Eddie's is a 3-store CT chain; only the Southington SELF-SERVICE lot (450 Old Turnpike Rd) is inventoried here \u2014 New Haven and Hartford are full-service and are deliberately not pins. yardconnect-pro v1.3.1 has no yardconnect_search_vehicles AJAX action (admin-ajax returns 400/'0'); a plain GET of /vehicle-inventory/?make=all&model=all server-renders the whole lot unpaginated (~2.8 MB, ~845 rows). Columns: Image, Make, Model, Year, Body Style, Engine, Yard Row (e.g. 'Left 11', 'Back Holding 1'), Date Set MM/DD/YY. data-stock-number on EVERY row -> ids chuckeddies-{stock}. No VIN. Engine -> _engine extra. Price list /parts-price-list/ (Part name, Part price, Part labor cost; labor ignored, no core column) -> chuckeddies_pricing.json (564 unique parts). Ignore the lorem-ipsum /u-pull-southhampton-2/ template page. Live 2026-10-27: 844 vehicles, newest Date Set 10/26/26."
+      },
+      "update_freshness": "live (previous-day Date Set values observed)",
+      "robots": "Disallow /wp-admin/ (admin-ajax.php explicitly allowed) and WooCommerce paths only; no crawl-delay",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Chuck & Eddie's Self Service - Southington",
+          "city": "Southington",
+          "state": "CT",
+          "lat": 41.5818,
+          "lng": -72.8835
+        }
+      ]
+    },
+    {
+      "name": "Robertson's U-Pull-It",
+      "status": "adapter-built",
+      "platform": "wordpress + yardconnect-pro v1.3.3 (admin-ajax yardconnect_search_vehicles, table view) \u2014 config-driven adapter YARDCONNECT_SITES['robertsons']",
+      "website": "https://robertsonautosalvage.com",
+      "inventory_url": "https://robertsonautosalvage.com/inventory-search/",
+      "api": {
+        "endpoint": "https://robertsonautosalvage.com/wp-admin/admin-ajax.php",
+        "method": "POST",
+        "auth": "nonce from `var yardconnectPublic = {...\"nonce\":...}` on /inventory-search/",
+        "format": "html fragment (one table, whole lot unpaginated with view=table)",
+        "requests_per_scan": "2 at 2s (nonce page + one search POST)",
+        "notes": "FIRST MASSACHUSETTS COVERAGE. Robertson's Auto Salvage runs a full-service Hollander side (the 'Parts List' nav, robertsons.hollanderstores.com) and a U-Pull-It lot; only the U-Pull-It inventory is parsed. Same flow as U-Pick-It AZ minus the `lot` param: action=yardconnect_search_vehicles&make=all&model=all&engine=&year_start=1949&year_end=2026&view=table (~3.1 MB). Columns: Image, Make, Model, Year, Color, Body Style, Engine, Yard Row (e.g. 'N 2 F'), Date Set MM/DD/YY. data-stock-number on ~94% of rows -> robertsons-{stock}, else sha1 content-hash ids (upickitaz convention). No VIN. Color/Engine -> _color/_engine extras. No price list page. Live 2026-10-27: 561 vehicles (36 hash ids), newest Date Set 10/26/26."
+      },
+      "update_freshness": "live (previous-day Date Set values observed)",
+      "robots": "Disallow /wp-admin/ with admin-ajax.php explicitly allowed; MJ12bot blocked; no crawl-delay",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Robertson's U-Pull-It - Wareham",
+          "city": "Wareham",
+          "state": "MA",
+          "lat": 41.7703,
+          "lng": -70.7046
         }
       ]
     }

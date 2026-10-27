@@ -537,3 +537,50 @@ arrivals for 2+ months. Several yards carry ghost rows never hidden (A & A
 oldest 2017, Lincolnton/L and L 2021), so the live adapter now drops dated
 rows older than `ARIO_LIVE_MAX_AGE_DAYS` (365). New yards start at 0% VIN
 (no legacy seed); the 600/scan detail backfill fills them over ~3 days.
+
+## 9. 2026-10-27 gap-state scouting pass
+
+*Targeted at the states with zero coverage (New England, NJ/DE/WV, the
+Mountain/Plains gap, AK/HI, southern UT, northern AZ). Outcome: 2 adapters
+built on branch `yards/ct-ma-yardconnect` (see INDEPENDENT_YARDS.md
+"yardconnect-pro wave"); everything else below is checked-and-rejected so it
+is not re-checked. Key finding: **yardconnect-pro is the Northeast key** —
+the M&M Auto Parts WordPress plugin (fingerprint
+`wp-content/plugins/yardconnect-pro`) is what the CT and MA yards run; a
+periodic fingerprint sweep for it is the cheapest way to find the next ones.*
+
+**Built (this branch):** CT — Chuck & Eddie's Self Service, Southington
+(yardconnect-pro v1.3.1, server-rendered GET, 844 cars, price list). MA —
+Robertson's U-Pull-It, Wareham (yardconnect-pro v1.3.3, admin-ajax, 561 cars).
+
+**Owner call, not built:** NH — 603 Auto Salvage: full-service with DIY
+pulls allowed; public WP REST `/wp-json/wp/v2/parts-vehicles` returns 1,033
+records WITH VIN. Easy adapter, but it is not a self-service yard by the
+registry's definition — decide policy before wiring.
+
+**Checked and rejected (do not re-check without new signal):**
+- NH: Bow Auto Parts (full-service); Camaro Heaven (eBay listings only).
+- MA: Everett's (Brockton) — claims 1,500-car self-serve lot + online
+  database but the domain is unreachable from CI (**verify from a browser**);
+  Smith Clinton / Standard (Worcester) — DNS failure; Eastern Vehicle
+  Recycling (Westfield) — no site.
+- CT: Jordan's — no site.
+- ME: Kenny U-Pull — dead; Deavila — "coming soon".
+- VT: Rathe's, Brown's — scrap / full-service.
+- NJ: Dirkes U-Pull-It (Mays Landing) — 1,000-car u-pull, domain unreachable
+  from CI (**best NJ lead, verify from a browser**); RT50 U-Pull-It — price
+  list only, no vehicle list; Albion — hijacked domain; Vineland — no site.
+- DE: Diamond State / EMR — scrap, no public inventory.
+- WV: nothing found.
+- MT: A-1 Johnson, Louie & Dean's — brochure sites; Spalding — Spokane
+  full-service chain.
+- WY: Cheyenne Auto & Metal — non-inventoried; Bud's — full-service.
+- ND: West Fargo Self Service — vehicle list "under construction, ready Jan
+  2026" but the price list is already published (**re-check quarterly**);
+  Dakota Wrecking (Minot) — staff pulls.
+- SD: Angel's U-Pull-It (Rapid City) — site 404.
+- AK: Northwest Auto Parts — full-service.
+- HI: Oahu Cyber Junkyard — bot challenge, possibly closed (not worked around).
+- Southern UT: Dixie, Utah Auto Wrecking, Auto Moto, Ballard — full-service,
+  no lists.
+- Northern AZ: U-Pick-It AZ already built; Dan's (Kingman) — no site.

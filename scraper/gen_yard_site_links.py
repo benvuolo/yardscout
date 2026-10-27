@@ -127,6 +127,11 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^trusty pick-a-part", "Trusty Pick-A-Part", None, ""),
     (r"^m&m u-pull-it", "M&M U-Pull-It", None, ""),
     (r"^polk county pick and pay", "Polk County Pick and Pay", None, ""),
+    # --- yardconnect-pro tenants (2026-10-27) — whole-lot table pages, no deep links ---
+    (r"^chuck & eddie'?s", "Chuck & Eddie's Self Service", None,
+     "Southington self-service lot only (New Haven/Hartford are full-service)"),
+    (r"^robertson'?s u[\s-]*pull[\s-]*it", "Robertson's U-Pull-It", None,
+     "U-Pull-It side of Robertson's Auto Salvage (Hollander full-service stock ignored)"),
 ]
 
 

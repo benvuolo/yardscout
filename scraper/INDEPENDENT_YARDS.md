@@ -564,3 +564,67 @@ Notes:
 - Registry: four `adapter-built` chains inserted after St. Cloud (same
   family); `INDEPENDENT_EXPECTED_SOURCES` registers the four sources from
   `CRUSH_MVC_SITES` (zero-vehicle alarm), like the Ario chains.
+
+## 2026-10-27 — yardconnect-pro wave (Chuck & Eddie's Self Service CT, Robertson's U-Pull-It MA)
+
+First Connecticut and first Massachusetts coverage, both on the
+**yardconnect-pro** WordPress plugin (M&M Auto Parts' plugin over a YardSmart
+backend) that U-Pick-It AZ was already parsed from. The U-Pick-It adapter was
+generalized into ONE config-driven adapter — `YARDCONNECT_SITES` +
+`fetch_yardconnect_site(source)` in `junkyard_scraper.py` (a new tenant is a
+config entry: site, `mode`, nonce/inventory/prices paths, and per-yard
+`lot` / `code` / name / city / state / lat / lng). U-Pick-It AZ is the first
+entry; verified live that the refactor emits the **identical id and row
+lists** (2,979 vehicles, `upickitaz-{stock}` + sha1 ids, same cache file
+names). Rupert's (also yardconnect-pro, server-rendered GET) keeps its own
+adapter for now — it predates the config and skips no-stock rows instead
+of hashing them, so migrating it would change its id set.
+
+Two plugin generations, hence two modes:
+
+- `mode: "ajax"` (v1.3.3 Robertson's, v2.3 U-Pick-It): nonce from
+  `var yardconnectPublic = {... "nonce":...}` on any page, then one POST per
+  yard to `admin-ajax.php` with `action=yardconnect_search_vehicles`
+  (`lot=` only on multi-lot tenants) `&make=all&model=all&view=table` —
+  whole lot unpaginated. 403 = expired nonce; the body carries a fresh one.
+- `mode: "get"` (v1.3.1 Chuck & Eddie's): the search AJAX action does not
+  exist (admin-ajax returns 400/`0`); `GET /vehicle-inventory/?make=all&
+  model=all` server-renders the whole lot (~2.8 MB).
+
+Same table either way: Image, Make, Model, Year, [Color,] Body Style, Engine,
+Yard Row, Date Set (MM/DD/YY); Color is a per-tenant display option, so the
+parse is header-driven (`<thead>` labels → keys) with a positional fallback
+by column count. Stock number = `data-stock-number` on the thumbnail (100%
+of Chuck & Eddie's rows, ~94% of Robertson's, ~45% of U-Pick-It's); rows
+without one get the sha1 content-hash id with ordinal dupe suffixes. No VIN
+on any tenant. Color/Engine ride along as `_color`/`_engine` extras (new for
+U-Pick-It's engine column too). Pacing 2 s per host, 1–3 requests per scan,
+one `INDEPENDENT_FETCHERS` entry per host. robots.txt on both new hosts
+explicitly allows `admin-ajax.php`, no crawl-delay. Pins geocoded once via
+Nominatim: Chuck & Eddie's is an exact OSM node ("Chuck and Eddie's Pick N
+Pull Lot"), Robertson's an exact OSM building.
+
+| Yard | Source | Live count | VIN | Newest dateAdded | Price list |
+|---|---|---|---|---|---|
+| Chuck & Eddie's Self Service — Southington CT (450 Old Turnpike Rd) | `chuckeddies` | 844 | 0% | 2026-10-26 | yes → `chuckeddies_pricing.json` (564 parts; `/parts-price-list/` Part name / Part price / Part labor cost — labor ignored, no core column) |
+| Robertson's U-Pull-It — Wareham MA (2680 Cranberry Hwy) | `robertsons` | 561 (36 hash ids) | 0% | 2026-10-26 | no (their "Parts List" nav is the full-service Hollander side) |
+
+Notes:
+- Chuck & Eddie's is a 3-store chain; only the Southington self-service lot
+  is a pin (New Haven / Hartford are full-service). The lorem-ipsum
+  `/u-pull-southhampton-2/` page is a template leftover — ignore it.
+- Robertson's also runs full-service stock on robertsons.hollanderstores.com
+  — deliberately not parsed; only the U-Pull-It `inventory-search` lot.
+- Both yards set out cars the day before the build (Date Set 10/26/26), so
+  `dateAdded` is fully populated; years 1964–2019 (Robertson's keeps a few
+  classics: '64 Thunderbird, '81 Firebird).
+- `refresh_chuckeddies_pricing_file` is in the `--refresh-chain-pricing`
+  tuple via `refresh_yardconnect_pricing_file("chuckeddies")`. **Follow-up
+  (docs/app.js untouched in this branch):** the app's `grab('data/<src>_
+  pricing.json', …)` list and the yard→pricing map need `chuckeddies`, and
+  `gen_yard_site_links.py` (ENTRIES added here) needs a regeneration pass to
+  write the two tier-3 inventory links into app.js.
+- Platform note: yardconnect-pro is the Northeast key — M&M (Buffalo, CRUSH
+  MVC) owns the plugin and its customers cluster in the Northeast. A periodic
+  fingerprint sweep for `wp-content/plugins/yardconnect-pro` should surface
+  the next tenants; each is now a ~15-line config entry.

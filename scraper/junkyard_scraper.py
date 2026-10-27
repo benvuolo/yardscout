@@ -16210,137 +16210,325 @@ def fetch_papva_inventory() -> list[dict]:
 # See VINPLUS_TENANTS.
 
 
-# U-Pick-It AZ (upickitaz.com) — 2 yards: Flagstaff (7320 Leupp Rd) +
-# Prescott Valley (10440 E Valley Rd), ~2,900 vehicles. User-requested from
-# Reddit (Flagstaff, zip 86015). WordPress + yardconnect-pro v2.3 plugin — a
-# NEW plugin family over a YardSmart backend (photos on api.yardsmartapp.com;
-# fingerprint for platform detection: wp-content/plugins/yardconnect-pro/).
-# Mechanism: regex the nonce from `var yardconnectPublic = {... "nonce":...}`
-# on any site page (even their 404 page carries it — don't raise on status),
-# then ONE POST per lot to admin-ajax.php with
-# action=yardconnect_search_vehicles&lot={Lot}&make=all&model=all&engine=&
-# year_start=1949&year_end=2026&view=table. view=table is CRITICAL: it
-# returns the whole lot unpaginated (1.5-2.8 MB fragment); grid view is
-# paginated ~20/page. Columns: Image, Make, Model, Year, Color, Body Style,
-# Engine, Yard Row, Date Set (MM/DD/YY). Stock number only exists on rows
-# with photos (data-stock-number in the thumbnail cell; ~45% of rows) → ids
-# are upickitaz-{stock} when present else the sha1-hash convention with
-# ordinal dupe suffixes. No VIN anywhere. Expired nonce self-heals: HTTP 403
-# returns JSON {data:{nonce:"<fresh>"}} — retry once with that. ~3 requests/
-# scan. robots.txt explicitly allows admin-ajax.php. No parts price list
-# found. Flagstaff's parcel is missing from OSM → Leupp Road centroid;
-# Prescott Valley geocodes exactly.
-UPICKIT_SITE = "https://upickitaz.com"
-UPICKIT_AJAX = f"{UPICKIT_SITE}/wp-admin/admin-ajax.php"
-UPICKIT_DELAY_SEC = 2.0
-UPICKIT_YARDS = {  # keyed by the `lot` param value
-    "Flagstaff": {"name": "U-Pick-It AZ - Flagstaff", "city": "Flagstaff",
-                  "state": "AZ", "lat": 35.2872, "lng": -111.3546},
-    "Prescott Valley": {"name": "U-Pick-It AZ - Prescott Valley", "city": "Prescott Valley",
-                        "state": "AZ", "lat": 34.5836, "lng": -112.2791},
+# yardconnect-pro (WordPress plugin by M&M Auto Parts over a YardSmart
+# backend; photos on api.yardsmartapp.com; fingerprint for platform
+# detection: wp-content/plugins/yardconnect-pro/) — ONE config-driven adapter
+# for every yard on the plugin (2026-10-27; U-Pick-It AZ was the original
+# single-site adapter and is now the first YARDCONNECT_SITES entry, same ids,
+# same cache file names). Two plugin generations exist:
+#
+#   mode "ajax" (v1.3.3+, v2.3): regex the nonce from
+#     `var yardconnectPublic = {... "nonce":...}` on any site page (even a 404
+#     page carries it — don't raise on status), then ONE POST per yard to
+#     admin-ajax.php with action=yardconnect_search_vehicles[&lot={Lot}]
+#     &make=all&model=all&engine=&year_start=1949&year_end=2026&view=table.
+#     view=table is CRITICAL: it returns the whole lot unpaginated (1.5-3 MB
+#     fragment); grid view is paginated ~20/page. Expired nonce self-heals:
+#     HTTP 403 returns JSON {data:{nonce:"<fresh>"}} — retry once with that.
+#   mode "get" (v1.3.1): the search AJAX action does not exist (admin-ajax
+#     returns 400/"0"); instead a plain GET of the inventory page with
+#     ?make=all&model=all server-renders the whole lot unpaginated.
+#
+# Both render the same table: Image, Make, Model, Year, [Color,] Body Style,
+# Engine, Yard Row, Date Set (MM/DD/YY). The column set varies per site
+# (Color is a per-tenant display option), so the parse is header-driven
+# (<thead> labels) with a positional fallback by column count. The thumbnail
+# cell carries data-stock-number when the row has a stock number (100% on
+# some tenants, ~45% on U-Pick-It AZ) → ids are {source}-{stock} when present
+# else sha1(lot|cells...)[:12] with ordinal dupe suffixes. No VIN anywhere.
+# Color/engine ride along as _color/_engine extras. Price lists, where a
+# tenant publishes one, are the plugin's /parts-price-list/ table (Part name,
+# Part price, Part labor cost — labor is the we-pull-it charge and ignored;
+# no core column) → refresh_yardconnect_pricing_file(source). Rupert's
+# (rupertsupullit.com) predates this config and keeps its own adapter.
+YARDCONNECT_DELAY_SEC = 2.0
+YARDCONNECT_SITES: dict[str, dict] = {
+    # U-Pick-It AZ — 2 yards: Flagstaff (7320 Leupp Rd) + Prescott Valley
+    # (10440 E Valley Rd), ~2,900 vehicles. User-requested from Reddit
+    # (Flagstaff, zip 86015). yardconnect-pro v2.3; the `lot` param selects
+    # the yard. robots.txt explicitly allows admin-ajax.php. No parts price
+    # list found. Flagstaff's parcel is missing from OSM → Leupp Road
+    # centroid; Prescott Valley geocodes exactly.
+    "upickitaz": {
+        "label": "U-Pick-It AZ",
+        "site": "https://upickitaz.com",
+        "mode": "ajax",
+        "nonce_paths": ("/", "/inventory/"),
+        "yards": [
+            {"lot": "Flagstaff", "code": "flagstaff",
+             "name": "U-Pick-It AZ - Flagstaff", "city": "Flagstaff",
+             "state": "AZ", "lat": 35.2872, "lng": -111.3546},
+            {"lot": "Prescott Valley", "code": "prescott",
+             "name": "U-Pick-It AZ - Prescott Valley", "city": "Prescott Valley",
+             "state": "AZ", "lat": 34.5836, "lng": -112.2791},
+        ],
+    },
+    # Chuck & Eddie's Used Auto Parts — SELF-SERVICE yard only (Southington
+    # CT; the chain's New Haven / Hartford stores are full-service and the
+    # lorem-ipsum /u-pull-southhampton-2/ page is a template leftover).
+    # FIRST CONNECTICUT COVERAGE. yardconnect-pro v1.3.1 = "get" mode: no
+    # search AJAX; GET /vehicle-inventory/?make=all&model=all returns the
+    # whole lot (~2.8 MB, ~845 rows, data-stock-number on every row, no Color
+    # column). Price list at /parts-price-list/ (~665 parts). robots.txt:
+    # no relevant disallows, no crawl-delay.
+    "chuckeddies": {
+        "label": "Chuck & Eddie's",
+        "site": "https://www.chuckandeddies.com",
+        "mode": "get",
+        "inventory_path": "/vehicle-inventory/?make=all&model=all",
+        "prices_path": "/parts-price-list/",
+        "yards": [
+            # 450 Old Turnpike Rd, Southington CT 06489 (exact OSM node:
+            # "Chuck and Eddie's Pick N Pull Lot")
+            {"lot": None, "code": "southington",
+             "name": "Chuck & Eddie's Self Service - Southington",
+             "city": "Southington", "state": "CT", "lat": 41.5818, "lng": -72.8835},
+        ],
+    },
+    # Robertson's Auto Salvage — U-Pull-It side only (Wareham MA; the
+    # "Parts List" nav and robertsons.hollanderstores.com are the full-service
+    # Hollander stock — ignored). FIRST MASSACHUSETTS COVERAGE.
+    # yardconnect-pro v1.3.3 = "ajax" mode, single lot (no `lot` param),
+    # ~560 rows, data-stock-number on ~94% of rows (Color column present).
+    # No price list page. robots.txt explicitly allows admin-ajax.php.
+    "robertsons": {
+        "label": "Robertson's",
+        "site": "https://robertsonautosalvage.com",
+        "mode": "ajax",
+        "nonce_paths": ("/inventory-search/", "/"),
+        "yards": [
+            # 2680 Cranberry Hwy, Wareham MA 02571 (exact OSM building)
+            {"lot": None, "code": "wareham",
+             "name": "Robertson's U-Pull-It - Wareham",
+             "city": "Wareham", "state": "MA", "lat": 41.7703, "lng": -70.7046},
+        ],
+    },
 }
-_UPICKIT_NONCE_RE = re.compile(r'yardconnectPublic\s*=\s*{[^}]*"nonce"\s*:\s*"([0-9a-f]+)"')
-_UPICKIT_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
-_UPICKIT_STOCK_RE = re.compile(r'data-stock-number="([^"]+)"')
+_YARDCONNECT_NONCE_RE = re.compile(
+    r'yardconnectPublic\s*=\s*{[^}]*"nonce"\s*:\s*"([0-9a-f]+)"')
+_YARDCONNECT_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+_YARDCONNECT_STOCK_RE = re.compile(r'data-stock-number="([^"]+)"')
+_YARDCONNECT_TH_RE = re.compile(r"<th[^>]*>(.*?)</th>", re.S)
+# <th> label (lowercased, squeezed) -> cell key. Anything else is kept
+# positionally but ignored.
+_YARDCONNECT_COLS = {"image": "image", "make": "make", "model": "model",
+                     "year": "year", "color": "color", "body style": "body",
+                     "engine": "engine", "yard row": "row", "date set": "date"}
+_YARDCONNECT_DEFAULT_COLS = {  # positional fallback when no <thead> is present
+    9: ["image", "make", "model", "year", "color", "body", "engine", "row", "date"],
+    8: ["image", "make", "model", "year", "body", "engine", "row", "date"],
+}
 
 
-def fetch_upickitaz_inventory() -> list[dict]:
-    """Fetch U-Pick-It AZ's 2-yard inventory (one table-view POST per lot)."""
-    import hashlib
+def _yardconnect_nonce(session: "requests.Session", site: dict) -> str:
+    label = site["label"]
+    for path in site.get("nonce_paths", ("/",)):
+        try:
+            r = session.get(site["site"] + path, headers={**HEADERS, "Accept": "text/html"},
+                            timeout=60)  # no raise_for_status: 404 pages carry the nonce too
+            m = _YARDCONNECT_NONCE_RE.search(r.text)
+            if m:
+                return m.group(1)
+        except Exception as e:
+            print(f"  [{label}] nonce page {path} fetch failed: {e}", file=sys.stderr)
+        time.sleep(YARDCONNECT_DELAY_SEC)
+    print(f"  [{label}] no yardconnectPublic nonce found — plugin changed?",
+          file=sys.stderr)
+    return ""
+
+
+def _yardconnect_fetch_lot(session: "requests.Session", site: dict, yard: dict,
+                           nonce: str) -> str | None:
+    """One lot's table HTML (fragment in ajax mode, full page in get mode)."""
+    label = site["label"]
+    for attempt in (1, 2):
+        try:
+            if site["mode"] == "get":
+                r = session.get(site["site"] + site["inventory_path"],
+                                headers={**HEADERS, "Accept": "text/html"}, timeout=120)
+                r.raise_for_status()
+                if "data-stock-number" not in r.text and "yardconnect" not in r.text:
+                    print(f"  [{label}] attempt {attempt} returned page without "
+                          f"inventory ({len(r.content)} bytes)", file=sys.stderr)
+                    time.sleep(5)
+                    continue
+                return r.text
+            data = {"action": "yardconnect_search_vehicles", "nonce": nonce,
+                    "make": "all", "model": "all", "engine": "", "year_start": "1949",
+                    "year_end": "2026", "view": "table"}
+            if yard.get("lot"):
+                data["lot"] = yard["lot"]
+            r = session.post(site["site"] + "/wp-admin/admin-ajax.php", data=data,
+                             headers=HEADERS, timeout=120)
+            if r.status_code == 403 and attempt == 1:
+                try:  # expired nonce self-heal: fresh one in the 403 body
+                    nonce = r.json()["data"]["nonce"]
+                    print(f"  [{label}] nonce expired — retrying with fresh one",
+                          file=sys.stderr)
+                    continue
+                except Exception:
+                    pass
+            r.raise_for_status()
+            return r.text
+        except Exception as e:
+            print(f"  [{label}] lot {yard['code']!r} attempt {attempt} failed: {e}",
+                  file=sys.stderr)
+            if site["mode"] != "get":
+                break
+            time.sleep(5)
+    return None
+
+
+def fetch_yardconnect_site(source: str) -> list[dict]:
+    """All yards of one yardconnect-pro tenant (YARDCONNECT_SITES[source])."""
     import html as html_mod
+    site = YARDCONNECT_SITES[source]
+    label = site["label"]
     session = requests.Session()
     nonce = ""
-    for path in ("/", "/inventory/"):
-        try:
-            r = session.get(UPICKIT_SITE + path, headers={**HEADERS, "Accept": "text/html"},
-                            timeout=60)  # no raise_for_status: their 404 page has the nonce
-            m = _UPICKIT_NONCE_RE.search(r.text)
-            if m:
-                nonce = m.group(1)
-                break
-        except Exception as e:
-            print(f"  [U-Pick-It AZ] nonce page {path} fetch failed: {e}", file=sys.stderr)
-    if not nonce:
-        print("  [U-Pick-It AZ] no yardconnectPublic nonce found — plugin changed?",
-              file=sys.stderr)
-        return []
+    if site["mode"] == "ajax":
+        nonce = _yardconnect_nonce(session, site)
+        if not nonce:
+            return []
 
     all_vehicles: list[dict] = []
     dupes: dict[str, int] = {}
-    for lot, yard in UPICKIT_YARDS.items():
-        time.sleep(UPICKIT_DELAY_SEC)
-        page = None
-        for attempt in (1, 2):
-            try:
-                r = session.post(UPICKIT_AJAX,
-                                 data={"action": "yardconnect_search_vehicles",
-                                       "nonce": nonce, "lot": lot, "make": "all",
-                                       "model": "all", "engine": "", "year_start": "1949",
-                                       "year_end": "2026", "view": "table"},
-                                 headers=HEADERS, timeout=120)
-                if r.status_code == 403 and attempt == 1:
-                    try:  # expired nonce self-heal: fresh one in the 403 body
-                        nonce = r.json()["data"]["nonce"]
-                        print("  [U-Pick-It AZ] nonce expired — retrying with fresh one",
-                              file=sys.stderr)
-                        continue
-                    except Exception:
-                        pass
-                r.raise_for_status()
-                page = r.text
-            except Exception as e:
-                print(f"  [U-Pick-It AZ] lot {lot!r} fetch failed: {e}", file=sys.stderr)
-            break
+    for yard in site["yards"]:
+        time.sleep(YARDCONNECT_DELAY_SEC)
+        page = _yardconnect_fetch_lot(session, site, yard, nonce)
         if page is None:
             continue
-        _indep_cache_raw(f"upickitaz_{lot.split()[0].lower()}.html", page.encode())
+        _indep_cache_raw(f"{source}_{yard['code']}.html", page.encode())
         if "No vehicles found" in page:
-            print(f"  [U-Pick-It AZ] lot {lot!r}: no vehicles", file=sys.stderr)
+            print(f"  [{label}] lot {yard['code']!r}: no vehicles", file=sys.stderr)
             continue
-        for block in _UPICKIT_ROW_RE.findall(page):
-            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
-                     for c in _FENIX_TD_RE.findall(block)]
-            if len(cells) < 9:
+        headers = [re.sub(r"\s+", " ", html_mod.unescape(re.sub(r"<[^>]+>", "", h))).strip().lower()
+                   for h in _YARDCONNECT_TH_RE.findall(page)]
+        header_keys = [_YARDCONNECT_COLS.get(h, h) for h in headers]
+        if not {"make", "model", "year", "date"} <= set(header_keys):
+            header_keys = []  # unexpected/missing header → positional fallback
+        lot_tag = yard.get("lot") or ""
+        for block in _YARDCONNECT_ROW_RE.findall(page):
+            raw_cells = _FENIX_TD_RE.findall(block)
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip() for c in raw_cells]
+            keys = header_keys if len(cells) == len(header_keys) else \
+                _YARDCONNECT_DEFAULT_COLS.get(len(cells), [])
+            if not keys:
                 continue
-            _, make_s, model_s, year_s, color_s, body_s, engine_s, row_s, date_s = cells[-9:]
-            if not year_s.isdigit():  # header row
+            c = dict(zip(keys, cells))
+            year_s = c.get("year", "")
+            if not year_s.isdigit():  # header row / no-results row
+                continue
+            make_s, model_s = c.get("make", ""), c.get("model", "")
+            if not make_s or not model_s:
                 continue
             date_iso = ""
-            m = re.match(r"(\d{2})/(\d{2})/(\d{2})$", date_s)
+            m = re.match(r"(\d{2})/(\d{2})/(\d{2})$", c.get("date", ""))
             if m:
-                date_iso = f"20{m.group(3)}-{m.group(1)}-{m.group(2)}"
-            sm = _UPICKIT_STOCK_RE.search(block)
+                date_iso = _sanitize_date_added(f"20{m.group(3)}-{m.group(1)}-{m.group(2)}")
+            sm = _YARDCONNECT_STOCK_RE.search(block)
             if sm:
-                vid = f"upickitaz-{sm.group(1).lower()}"
-            else:  # ~55% of rows have no photo and no stock number
-                basis = "|".join((lot, make_s, model_s, year_s, color_s, body_s,
-                                  engine_s, row_s, date_s)).lower()
-                vid = "upickitaz-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+                vid = f"{source}-{sm.group(1).strip().lower()}"
+            else:  # no photo → no stock number: content hash (U-Pick-It AZ ~55%)
+                basis = "|".join((lot_tag, *cells[1:])).lower()
+                vid = f"{source}-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
                 n = dupes.get(vid, 0) + 1
                 dupes[vid] = n
                 if n > 1:
                     vid = f"{vid}-{n}"
+            color_s = c.get("color", "")
+            engine_s = c.get("engine", "")
             all_vehicles.append({
                 "id": vid,
                 "vin": "",
                 "year": int(year_s),
                 "make": _utpap_format_label(make_s),
                 "model": _utpap_format_label(model_s),
-                "row": re.sub(r"(?i)^yard\s+", "", row_s),
+                "row": re.sub(r"(?i)^yard\s+", "", c.get("row", "")),
                 "dateAdded": date_iso,
-                "_color": color_s.title(),
+                **({"_color": color_s.title()} if color_s else {}),
+                **({"_engine": engine_s} if engine_s else {}),
                 "_location": yard["name"],
                 "_city": yard["city"],
                 "_state": yard["state"],
                 "_lat": yard["lat"],
                 "_lng": yard["lng"],
-                "_source": "upickitaz",
+                "_source": source,
             })
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
-    print(f"  [U-Pick-It AZ] {len(unique)} vehicles across "
+    print(f"  [{label}] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
+
+
+def fetch_upickitaz_inventory() -> list[dict]:
+    """Fetch U-Pick-It AZ's 2-yard inventory (one table-view POST per lot)."""
+    return fetch_yardconnect_site("upickitaz")
+
+
+def fetch_chuckeddies_inventory() -> list[dict]:
+    """Fetch Chuck & Eddie's Southington self-service lot (one server-rendered GET)."""
+    return fetch_yardconnect_site("chuckeddies")
+
+
+def fetch_robertsons_inventory() -> list[dict]:
+    """Fetch Robertson's U-Pull-It Wareham inventory (one table-view POST)."""
+    return fetch_yardconnect_site("robertsons")
+
+
+_YARDCONNECT_PRICE_ROW_RE = re.compile(
+    r"<tr[^>]*>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>\s*\$?\s*([\d.,]+)\s*</td>", re.S)
+
+
+def refresh_yardconnect_pricing_file(source: str) -> Path:
+    """yardconnect-pro /parts-price-list/ of one tenant -> {source}_pricing.json
+    (3 columns: Part name, Part price, Part labor cost — labor ignored, no
+    core column so corePrice is 0.00; Harrys-style output shape)."""
+    import html as html_mod
+    site = YARDCONNECT_SITES[source]
+    label = site["label"]
+    path = DATA_DIR / f"{source}_pricing.json"
+    if not site.get("prices_path"):
+        print(f"  [{label} pricing] no published price list — nothing to refresh",
+              file=sys.stderr)
+        return path
+    try:
+        r = requests.get(site["site"] + site["prices_path"],
+                         headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [{label} pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for name_html, price in _YARDCONNECT_PRICE_ROW_RE.findall(page):
+        name = re.sub(r"\s+", " ", html_mod.unescape(re.sub(r"<[^>]+>", "", name_html))).strip()
+        if not name or name.lower() == "part name" or name in seen:
+            continue
+        try:
+            price_f = float(price.replace(",", ""))
+        except ValueError:
+            continue
+        seen[name] = {
+            "description": name,
+            "price": f"{price_f:.2f}",
+            "corePrice": "0.00",
+            "totalPrice": f"{price_f:.2f}",
+        }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [{label} pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [{label} pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+def refresh_chuckeddies_pricing_file() -> Path:
+    """Refresh Chuck & Eddie's Southington price list -> chuckeddies_pricing.json."""
+    return refresh_yardconnect_pricing_file("chuckeddies")
 
 
 # Barry's U Pull It (barrysupullit.net — NOTE: .com is a parked lander) —
@@ -18344,6 +18532,8 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "prestige": "Prestige Pull-Your-Part",
     "budget": "Budget U-Pull-It (FL)",
     "upas": "U-Pull and Save (Pontiac MI)",
+    "chuckeddies": "Chuck & Eddie's Self Service (Southington CT)",
+    "robertsons": "Robertson's U-Pull-It (Wareham MA)",
 }
 # Ario chains (Ryan's + wave 1) register themselves from their config so a
 # chain with no yards wired yet can't trip the alarm every scan.
@@ -18386,6 +18576,10 @@ INDEPENDENT_FETCHERS: list = [
     ("Trusty", fetch_trusty_inventory),
     ("M&M U-Pull-It", fetch_mmupullit_inventory),
     ("Polk County Pick and Pay", fetch_polkpickpay_inventory),
+    # yardconnect-pro tenants (2026-10-27): one entry per host, like U-Pick-It
+    # AZ above (same config-driven adapter, YARDCONNECT_SITES).
+    ("Chuck & Eddie's", fetch_chuckeddies_inventory),
+    ("Robertson's", fetch_robertsons_inventory),
 ]
 
 
@@ -20524,7 +20718,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA/FL/GA/MI (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, US Auto Supply, Chesterfield Auto Parts, Go Pull-It), Pick-A-Part VA, U-Pick-It AZ, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL, Ryan's Pick-a-Part MI, U-Pull and Save MI, CRUSH MVC tenants (Pick-A-Part Jalopy Jungle ID x5, Trusty Pick-A-Part ID, M&M U-Pull-It NY, Polk County Pick and Pay FL) — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA/FL/GA/MI (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, US Auto Supply, Chesterfield Auto Parts, Go Pull-It), Pick-A-Part VA, U-Pick-It AZ, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL, Ryan's Pick-a-Part MI, U-Pull and Save MI, CRUSH MVC tenants (Pick-A-Part Jalopy Jungle ID x5, Trusty Pick-A-Part ID, M&M U-Pull-It NY, Polk County Pick and Pay FL), yardconnect-pro tenants (Chuck & Eddie's Self Service CT, Robertson's U-Pull-It MA) — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
     )
     args = parser.parse_args()
 
@@ -20552,7 +20746,7 @@ def main():
                refresh_p195_pricing_file, refresh_pnpsa_pricing_file,
                refresh_ryans_pricing_file, refresh_usauto_pricing_file,
                refresh_upas_pricing_file, refresh_mmupullit_pricing_file,
-               refresh_polkpickpay_pricing_file)
+               refresh_polkpickpay_pricing_file, refresh_chuckeddies_pricing_file)
         for fn in fns:
             try:
                 fn()
@@ -20632,7 +20826,7 @@ def main():
         indep_fut = None
         indep_pool = None
         if scan_independents:
-            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x21 incl. Chesterfield + Go Pull-It + US Auto Supply, Pick-A-Part VA, U-Pick-It AZ, Barry's, Prestige, Budget, Ryan's Pick-a-Part, U-Pull and Save, Jalopy Jungle x5, Trusty, M&M U-Pull-It, Polk County Pick and Pay) in the background, overlapped with the chain scans...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x21 incl. Chesterfield + Go Pull-It + US Auto Supply, Pick-A-Part VA, U-Pick-It AZ, Barry's, Prestige, Budget, Ryan's Pick-a-Part, U-Pull and Save, Jalopy Jungle x5, Trusty, M&M U-Pull-It, Polk County Pick and Pay, Chuck & Eddie's, Robertson's) in the background, overlapped with the chain scans...", file=sys.stderr)
             indep_pool = concurrent.futures.ThreadPoolExecutor(
                 max_workers=1, thread_name_prefix="indep-main")
             indep_fut = indep_pool.submit(fetch_independent_inventory)
