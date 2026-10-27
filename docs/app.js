@@ -1847,6 +1847,14 @@ function applyProGates() {
   // trip (that's what they paid for); free default stays Newest arrivals. An
   // explicit choice (jh_sort) always wins and is restored at boot.
   if (pro && !localStorage.getItem('jh_sort')) sortSel.value = 'smart-profit';
+  // Trim / drivetrain watch filters are Pro: free sees the fields disabled
+  // with an honest lock line; Pro gets them live.
+  const driveEl = document.getElementById('alert-drive');
+  const trimEl = document.getElementById('alert-trim');
+  const lock = document.getElementById('alert-vpic-lock');
+  if (driveEl) { driveEl.disabled = !pro; if (!pro) driveEl.value = ''; }
+  if (trimEl) { trimEl.disabled = !pro; if (!pro) trimEl.value = ''; }
+  if (lock) lock.style.display = pro ? 'none' : '';
 }
 
 /* Sorting BY value hands out the value ranking even with prices blurred, so
@@ -1883,7 +1891,46 @@ try { savedCars = JSON.parse(localStorage.getItem('jh_saved') || '{}'); } catch 
 
 function vehicleKey(v) { return v.vin || String(v.id); }
 function isSaved(v) { return !!savedCars[vehicleKey(v)]; }
-function persistSaved() { localStorage.setItem('jh_saved', JSON.stringify(savedCars)); }
+function persistSaved() {
+  localStorage.setItem('jh_saved', JSON.stringify(savedCars));
+  syncSavedCars();
+}
+
+/* Saved-car alerts (Pro): the visit list mirrors to the alert backend on
+ * the same paths that carry watches — native device registration and the
+ * web email-alerts sync — so a scan can say "it's gone" / "leaving soon".
+ * Key = VIN or scraper id (what the server's vindex resolves); the rest is
+ * only for the message. Capped at 50, newest saves first. */
+const SAVED_SYNC_CAP = 50;
+function savedSyncPayload() {
+  return Object.entries(savedCars)
+    .sort((a, b) => String(b[1].savedAt || '').localeCompare(String(a[1].savedAt || '')))
+    .slice(0, SAVED_SYNC_CAP)
+    .map(([key, s]) => ({
+      key, id: s.id, year: s.year, make: s.make, model: s.model, location: s.location,
+    }));
+}
+let _savedSyncTimer = null;
+function syncSavedCars() {
+  clearTimeout(_savedSyncTimer);
+  _savedSyncTimer = setTimeout(() => {
+    if (IS_NATIVE && typeof syncDeviceRegistration === 'function') syncDeviceRegistration();
+    if (!IS_NATIVE && typeof syncEmailAlertWatches === 'function') syncEmailAlertWatches();
+  }, 1500);
+}
+
+/* A saved car that is no longer in the loaded (nationwide) inventory has
+ * been pulled or crushed since you saved it — the list keeps the snapshot
+ * but says so quietly. Only judged once the inventory has loaded. */
+let _liveKeySet = null, _liveKeySetFor = null;
+function savedIsGone(key) {
+  if (!liveLoaded || !liveInventory.length) return false;
+  if (!_liveKeySet || _liveKeySetFor !== liveInventory) {
+    _liveKeySet = new Set(liveInventory.map(vehicleKey));
+    _liveKeySetFor = liveInventory;
+  }
+  return !_liveKeySet.has(key);
+}
 
 function toggleSaved(key) {
   if (savedCars[key]) {
@@ -1958,14 +2005,15 @@ function renderSavedSheet() {
         <div class="saved-yard-name">${yard} &middot; ${items.length} car${items.length > 1 ? 's' : ''}</div>
         ${items.map(([key, s]) => {
           const best = (s.topParts && s.topParts[0]) ? s.topParts[0].name : '';
+          const gone = savedIsGone(key);
           return `
-            <div class="saved-item">
+            <div class="saved-item${gone ? ' saved-gone' : ''}"${gone ? ' title="Not on the yard\u2019s current list \u2014 pulled or crushed since you saved it"' : ''}>
               ${s.row
                 ? `<div class="saved-row-badge">${escapeHtml(String(s.row))}<small>row</small></div>`
                 : '<div class="saved-row-badge saved-row-none" title="The yard hasn\u2019t published a row for this car yet \u2014 ask at the counter">&mdash;<small>no row yet</small></div>'}
               <div class="saved-item-info">
                 <div class="saved-item-name">${s.year} ${s.make} ${s.model}</div>
-                <div class="saved-item-sub">${[s.dateAdded ? 'Set out ' + (parseYardDate(s.dateAdded) ? parseYardDate(s.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : s.dateAdded) : '',
+                <div class="saved-item-sub">${[gone ? 'No longer listed' : '', s.dateAdded ? 'Set out ' + (parseYardDate(s.dateAdded) ? parseYardDate(s.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : s.dateAdded) : '',
                   !best ? '' : isPro()
                     ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '')
                     : s.topParts.length + ' part' + (s.topParts.length > 1 ? 's' : '') + ' to check'].filter(Boolean).join(' \u00b7 ')}</div>
@@ -5154,6 +5202,34 @@ function watchlistMatches(entry, v) {
     if (v.lat == null || v.lng == null) return false;
     if (haversineMiles(entry.lat, entry.lng, v.lat, v.lng) > entry.radiusMi) return false;
   }
+  if (!vpicFilterMatches(entry, v)) return false;
+  return true;
+}
+
+/* Trim / drivetrain filters (Pro) — the SAME rule as vpicMatches() in
+ * backend/src/alerts.js, so the in-app hit count and the server's push agree:
+ *   driveFilter '4x4' → VIN-decoded drive type names 4WD or AWD;
+ *   '2wd' → FWD, RWD or 4x2. No decoded drive type → no match ("only cars
+ *   whose VIN decode confirms it").
+ *   trimFilter → case-insensitive substring of the decoded trim OR series,
+ *   only when the decode is 'usable'. No usable decode → no match.
+ * TODO(manual-transmission): "manual confirmed" lives in vehicle_extras.json,
+ * not in the shards the server matches — not a watch filter yet. */
+function vpicFilterMatches(entry, v) {
+  const drive = entry.driveFilter || '';
+  const trim = String(entry.trimFilter || '').trim().toLowerCase();
+  if (!drive && !trim) return true;
+  if (drive) {
+    const dt = String(v.vpicDriveType || '');
+    if (!dt) return false;
+    if (drive === '4x4' && !/4WD|AWD|4x4/i.test(dt)) return false;
+    if (drive === '2wd' && !/FWD|RWD|4x2/i.test(dt)) return false;
+  }
+  if (trim) {
+    if (v.vpicTrimQuality !== 'usable') return false;
+    const hay = `${v.vpicTrim || ''} ${v.vpicSeries || ''}`.toLowerCase();
+    if (!hay.includes(trim)) return false;
+  }
   return true;
 }
 
@@ -5188,10 +5264,12 @@ function renderAlerts() {
       const radLabel = !('radiusMi' in e) ? ''
         : e.radiusMi ? ` &middot; within ${e.radiusMi} mi` : ' &middot; anywhere';
       const hitCount = r.hits.length;
+      const vpicLabel = (e.driveFilter === '4x4' ? ' &middot; 4WD/AWD only' : e.driveFilter === '2wd' ? ' &middot; 2WD only' : '')
+        + (e.trimFilter ? ' &middot; trim &ldquo;' + escapeHtml(e.trimFilter) + '&rdquo;' : '');
       return `<div class="watchlist-item">
         <div class="wl-info">
           <span class="wl-name">${escapeHtml(label)}</span>
-          <span class="wl-detail">${yrLabel}${radLabel}${e.matchOnly ? ' &middot; Parts only' : ''}</span>
+          <span class="wl-detail">${yrLabel}${radLabel}${vpicLabel}${e.matchOnly ? ' &middot; Parts only' : ''}</span>
           <span class="wl-count ${hitCount > 0 ? 'has-hits' : 'no-hits'}">${hitCount} in yard now</span>
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;">
@@ -5444,6 +5522,12 @@ function addWatchItem() {
     return alert('Set a zip code (or use "near me") in the Cars tab first, so the radius has a center.');
   }
   const matchOnly = document.getElementById('alert-match-only').checked;
+  // Trim / drivetrain filters are Pro — free watches stay make/model/years
+  // (the fields are disabled for free users; this is the belt to that brace).
+  const driveEl = document.getElementById('alert-drive');
+  const trimEl = document.getElementById('alert-trim');
+  const driveFilter = isPro() && driveEl ? (driveEl.value || '') : '';
+  const trimFilter = isPro() && trimEl ? (trimEl.value || '').trim().slice(0, 40) : '';
   const watchlist = loadWatchlist();
   // One watch per checked model; no models checked = one any-model watch.
   const models = watchSelectedModels.size ? [...watchSelectedModels] : [''];
@@ -5453,11 +5537,13 @@ function addWatchItem() {
       (e.make || '') === make && (e.model || '') === model &&
       (e.yrMin || null) === yrMin && (e.yrMax || null) === yrMax &&
       (e.radiusMi || null) === radiusMi &&
+      (e.driveFilter || '') === driveFilter &&
+      (e.trimFilter || '').toLowerCase() === trimFilter.toLowerCase() &&
       !!e.matchOnly === matchOnly);
     if (dupe) continue;
     // addedAt doubles as the local↔server sync key — the random suffix keeps
     // it unique when several models are added in the same millisecond.
-    const entry = { make, model, yrMin, yrMax, matchOnly, radiusMi,
+    const entry = { make, model, yrMin, yrMax, matchOnly, radiusMi, driveFilter, trimFilter,
       addedAt: new Date().toISOString() + '~' + Math.random().toString(36).slice(2, 8) };
     if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
     watchlist.push(entry);
@@ -5472,6 +5558,8 @@ function addWatchItem() {
   populateWatchModelOptions();   // resets + disables the model picker
   document.getElementById('alert-yr-min').value = '';
   document.getElementById('alert-yr-max').value = '';
+  if (driveEl) driveEl.value = '';
+  if (trimEl) trimEl.value = '';
   renderAlerts();
   saveWatchlistFile();
   checkAndNotify();
@@ -5506,6 +5594,7 @@ async function syncWatchToServer(entry) {
     const w = {
       make: entry.make || null, model: entry.model || null,
       yearMin: entry.yrMin || null, yearMax: entry.yrMax || null,
+      driveFilter: entry.driveFilter || '', trimFilter: entry.trimFilter || '',
     };
     if (entry.radiusMi && entry.lat != null && entry.lng != null) {
       // Explicit per-watch radius, chosen when the watch was created.
@@ -5907,7 +5996,10 @@ async function syncDeviceRegistration(freshToken) {
         lat: w.lat == null ? w.lat : Math.round(w.lat * 100) / 100,
         lng: w.lng == null ? w.lng : Math.round(w.lng * 100) / 100,
         radiusMi: w.radiusMi,
+        driveFilter: w.driveFilter || '', trimFilter: w.trimFilter || '',
       })),
+      // Saved cars (yard-visit list) for Pro "gone" / "leaving soon" pushes.
+      saved: savedSyncPayload(),
     };
     body[IS_ANDROID ? 'fcmToken' : 'apnsToken'] = token;
     await fetch(NATIVE_API_BASE + '/v1/device/register', {
@@ -6531,6 +6623,7 @@ async function refreshNativeIapUi() {
       yearMin: e.yrMin || null, yearMax: e.yrMax || null,
       lat: e.lat != null ? e.lat : null, lng: e.lng != null ? e.lng : null,
       radiusMi: e.radiusMi || null,
+      driveFilter: e.driveFilter || '', trimFilter: e.trimFilter || '',
     }));
   }
 
@@ -6540,7 +6633,8 @@ async function refreshNativeIapUi() {
     const r = await fetch(API_BASE + '/v1/email-alerts/sync', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ token, watches: serverWatches(), enabled }),
+      // saved = the yard-visit list, for Pro "gone" / "leaving soon" emails.
+      body: JSON.stringify({ token, watches: serverWatches(), saved: savedSyncPayload(), enabled }),
     });
     const data = await r.json().catch(() => ({}));
     return { ok: r.ok, status: r.status, data };

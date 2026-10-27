@@ -29,7 +29,8 @@
  */
 
 import { json, err, isoNow } from './util.js';
-import { watchMatches } from './alerts.js';
+import { watchMatches, loadArrivals, sanitizeVpicFilters } from './alerts.js';
+import { sanitizeSaved } from './saved_alerts.js';
 
 const MAX_WATCHES = 20;                 // mirrors MAX_WATCHES_PER_USER / device cap
 const MAX_EMAILS_PER_COMMIT = 20;       // subrequest budget (shared with push sends)
@@ -37,7 +38,7 @@ const MAX_VEHICLES_PER_EMAIL = 30;      // one digest email, never one-per-car
 
 /* ===== entitlement lookups (ENTITLEMENTS KV — shared with the site Worker) ===== */
 
-function entActive(ent) {
+export function entActive(ent) {
   return !!(ent && ent.pro && (!ent.expiresAt || Date.parse(ent.expiresAt) > Date.now()));
 }
 
@@ -64,6 +65,9 @@ function sanitizeWatches(raw) {
     const lng = Number.isFinite(+w.lng) ? +w.lng : null;
     const radiusMi = Number.isFinite(+w.radiusMi) && +w.radiusMi > 0
       ? Math.min(Math.floor(+w.radiusMi), 3000) : null;
+    // Sync is already Pro-gated (entitlement checked above), so the trim /
+    // drivetrain filters are accepted as-is; old clients never send them.
+    const { driveFilter, trimFilter } = sanitizeVpicFilters(w);
     out.push({
       make, model,
       year_min: Number.isFinite(+w.yearMin) && +w.yearMin > 1900 ? Math.floor(+w.yearMin) : null,
@@ -71,6 +75,8 @@ function sanitizeWatches(raw) {
       lat: (lat != null && lng != null) ? lat : null,
       lng: (lat != null && lng != null) ? lng : null,
       radius_mi: radiusMi,
+      drive_filter: driveFilter || null,
+      trim_filter: trimFilter || null,
     });
   }
   return out;
@@ -103,8 +109,10 @@ export async function unsubUrl(env, email) {
 
 /* ===== sync + status (called by the web app) ===== */
 
-/** POST /v1/email-alerts/sync {token, watches?, enabled?} — upsert the
- * subscriber row for the token's entitlement email. Pro-gated. */
+/** POST /v1/email-alerts/sync {token, watches?, saved?, enabled?} — upsert
+ * the subscriber row for the token's entitlement email. Pro-gated. `saved`
+ * mirrors the yard-visit list for saved-car alerts (optional; old clients
+ * omit it). */
 export async function handleEmailAlertsSync(req, env) {
   let body;
   try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
@@ -115,28 +123,27 @@ export async function handleEmailAlertsSync(req, env) {
   }
   const email = resolved.email;
   const watches = sanitizeWatches(body.watches);
+  const saved = sanitizeSaved(body.saved);
   const enabled = body.enabled === false ? 0 : 1;
   const now = isoNow();
 
   await env.DB.prepare(
-    `INSERT INTO email_watchers (email, watches_json, enabled, created_at, updated_at)
-     VALUES (?1, ?2, ?3, ?4, ?4)
-     ON CONFLICT (email) DO UPDATE SET watches_json = ?2, enabled = ?3, updated_at = ?4`
-  ).bind(email, JSON.stringify(watches), enabled, now).run();
+    `INSERT INTO email_watchers (email, watches_json, saved_json, enabled, created_at, updated_at)
+     VALUES (?1, ?2, ?5, ?3, ?4, ?4)
+     ON CONFLICT (email) DO UPDATE SET watches_json = ?2, saved_json = ?5, enabled = ?3, updated_at = ?4`
+  ).bind(email, JSON.stringify(watches), enabled, now, saved.length ? JSON.stringify(saved) : null).run();
 
   // Watches alert on FUTURE arrivals only (same contract as accounts and
   // devices): seed the dedupe log with everything currently matching.
-  const existing = (await env.DB.prepare(
-    'SELECT vehicle_id, year, make, model, lat, lng FROM arrivals'
-  ).all()).results || [];
+  const existing = await loadArrivals(env);
   const stmt = env.DB.prepare(
     'INSERT OR IGNORE INTO email_alerts_sent (email, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
   );
   const seeds = existing.filter((v) => watches.some((w) => watchMatches(w, v)))
-    .map((v) => stmt.bind(email, String(v.vehicle_id), now));
+    .map((v) => stmt.bind(email, String(v.id), now));
   for (let i = 0; i < seeds.length; i += 80) await env.DB.batch(seeds.slice(i, i + 80));
 
-  return json({ ok: true, email, enabled: !!enabled, watches: watches.length, seeded: seeds.length });
+  return json({ ok: true, email, enabled: !!enabled, watches: watches.length, saved: saved.length, seeded: seeds.length });
 }
 
 /** GET /v1/email-alerts/status?token= → {pro, email, enabled, watches} */
@@ -197,7 +204,7 @@ function carUrl(env, v) {
   return `${base}/#car=${encodeURIComponent(String(v.id))}`;
 }
 
-const esc = (s) => String(s == null ? '' : s)
+export const esc = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 async function sendAlertEmail(env, email, matches) {

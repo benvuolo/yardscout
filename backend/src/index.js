@@ -24,6 +24,7 @@
  *   GET  /v1/admin/attribution                    x-admin-secret (per-source funnel)
  *   POST /v1/admin/ent/grant                      x-ent-admin (owner comps → ENTITLEMENTS KV)
  *   POST /v1/admin/coverage/digest/run            x-admin-secret (manual owner-digest trigger)
+ *   POST /v1/admin/saved-alerts/dispatch          x-admin-secret (manual saved-car alert dispatch)
  *   POST /v1/iap/revenuecat                       RevenueCat webhook auth
  */
 
@@ -58,6 +59,7 @@ import {
 import {
   handleCoverageRequest, handleCoverageList, maybeSendCoverageDigest,
 } from './coverage.js';
+import { handleSavedAlertsDispatchRun } from './saved_alerts.js';
 
 export default {
   /* Cron (wrangler.toml [triggers]): weekly digest email for free users
@@ -216,6 +218,7 @@ async function route(req, env, url, ctx) {
       || path === '/v1/admin/digest/run' || path === '/v1/admin/email-alerts/dispatch'
       || path === '/v1/admin/device-alerts/dispatch' || path === '/v1/admin/device-digest/run'
       || path === '/v1/admin/coverage' || path === '/v1/admin/coverage/digest/run'
+      || path === '/v1/admin/saved-alerts/dispatch'
       || path === '/v1/admin/test/ent') {
     const denied = await requireAdmin(req, env);
     if (denied) return denied;
@@ -238,6 +241,11 @@ async function route(req, env, url, ctx) {
     }
     if (method === 'POST' && path === '/v1/admin/device-digest/run') {
       return handleDeviceDigestRun(req, env);
+    }
+    // Manual saved-car alert dispatch ("gone" / "leaving soon") — same code
+    // path as the commit hook, against the live shards.
+    if (method === 'POST' && path === '/v1/admin/saved-alerts/dispatch') {
+      return handleSavedAlertsDispatchRun(req, env);
     }
     // Coverage-request demand: counts by normalized key (what the coverage
     // workers mine) + a manual trigger for the owner digest email (same
