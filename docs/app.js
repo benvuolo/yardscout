@@ -366,6 +366,28 @@ function _lookupYardCostUncached(partName, location) {
     const e = yard && key ? yard[key] : null;
     return e ? { cost: parseFloat(e.price), source: 'budget', yardName: key } : none;
   }
+  // Every other yard with a published list (Pull-N-Save, Harry's, Indy, the
+  // CRUSH-family independents, …): match against that yard's own rows — the
+  // same list the Yards-tab compare and the Parts tab already quote from.
+  // 1) a row spelled like any chain's known name for this part, else
+  // 2) the shortest row containing the keyword, skipping obvious sub-parts
+  //    (a HEADLIGHT BULB is not a headlight). Still no estimated fallback.
+  const rows = yardPriceList(location);
+  if (rows && rows.length) {
+    const names = ['pnp', 'tap', 'utpap', 'pyp', 'pap', 'wap', 'upullr', 'bwg', 'bba']
+      .map(k => bestMatch[k]).filter(Boolean).map(x => x.toLowerCase().trim());
+    let best = rows.find(r => names.includes(r.part.toLowerCase().trim()));
+    if (!best) {
+      const kw = bestMatch.kw;
+      const sub = ['bulb', 'switch', 'relay', 'bracket', 'cover', 'bezel', 'trim', 'sensor', 'fuse', 'cable', 'hose', 'belt', 'gasket', 'seal', 'bolt', 'clip', 'wire', 'harness', 'motor', 'actuator', 'regulator', 'latch', 'lock', 'handle', 'hinge', 'lever', 'knob', 'pad', 'liner', 'strip', 'molding', 'emblem', 'bushing', 'mount', 'track', 'rail', 'frame', 'heater', 'control', 'module', 'air bag', 'airbag'].filter(w => !kw.includes(w));
+      const cands = rows.filter(r => { const pl = r.part.toLowerCase(); return pl.includes(kw) && !sub.some(w => pl.includes(w)); });
+      // Prefer rows that START with the part word (SEAT BUCKET over AIR BAG-
+      // SEAT), then the shortest name.
+      const rank = r => (r.part.toLowerCase().trim().startsWith(kw) ? 0 : 1000) + r.part.length;
+      if (cands.length) best = cands.reduce((a, b) => (rank(b) < rank(a) ? b : a));
+    }
+    if (best && best.price > 0) return { cost: best.price, source: 'list', yardName: best.part };
+  }
   return none;
 }
 
@@ -2457,7 +2479,7 @@ function renderLive() {
       let anyUnknownCost = false;
       const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
       let demandRk = 0;
-      const chainLabel = { pnp: 'PnP list', tap: 'TAP list', utpap: 'UTPAP list', pyp: 'PYP list', pap: 'PAP list', wap: 'WAP list', upullr: 'UPR list', budget: 'yard list' };
+      const chainLabel = { pnp: 'PnP list', tap: 'TAP list', utpap: 'UTPAP list', pyp: 'PYP list', pap: 'PAP list', wap: 'WAP list', upullr: 'UPR list', budget: 'yard list', list: 'yard list' };
       const chainTitle = {
         pnp: 'Pick-n-Pull published price',
         tap: 'Tear-A-Part published price',
@@ -2466,8 +2488,7 @@ function renderLive() {
         pap: 'This Pull-A-Part yard\u2019s published price',
         wap: 'This Wrench-A-Part yard\u2019s published price',
         upullr: 'U-Pull-R Parts published price',
-        budget: 'This Budget U-Pull-It yard\u2019s published price',
-      };
+        budget: 'This Budget U-Pull-It yard\u2019s published price', list: 'From this yard\u2019s own published price list' };
       // Transmission honesty: the parts DB is model-generation-level, so a
       // manual-only part (shifter, clutch, pedal box) can list on a car that
       // left the factory as an automatic. If this car's own data confirms
