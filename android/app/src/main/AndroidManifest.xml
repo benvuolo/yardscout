@@ -18,6 +18,18 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- App Links: yardscout.io/car/<key> opens the app when installed
+                 (verified against https://yardscout.io/.well-known/assetlinks.json). -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="yardscout.io" />
+                <data android:host="www.yardscout.io" />
+                <data android:pathPrefix="/car/" />
+            </intent-filter>
         </activity>
 
         <provider

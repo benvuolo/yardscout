@@ -2132,6 +2132,35 @@ function openFromAlert(vehicleId) {
     .catch(() => { /* load error path already rendered its message */ });
 }
 
+/* ===== APP LINKS (universal links / Android app links) =====
+ * A yardscout.io/car/<key> link tapped anywhere on a phone with the app
+ * installed opens the app instead of the browser (the site Worker serves
+ * apple-app-site-association + assetlinks.json). The native App plugin
+ * hands us the URL: on a warm app via 'appUrlOpen', on a cold launch via
+ * getLaunchUrl(). Either way it becomes the same #car= focus a web share
+ * link uses, so the landing is identical. */
+function openSharedCarUrl(rawUrl) {
+  let u;
+  try { u = new URL(rawUrl); } catch (e) { return; }
+  const m = u.pathname.match(/^\/car\/([^/]+)\/?$/);
+  if (!m) return;
+  track('app-link-open');
+  try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
+  history.replaceState(null, '',
+    location.pathname + location.search + '#car=' + encodeURIComponent(safeDecode(m[1])));
+  applyShareHash();
+  try { updateZipBanner(); } catch (e) { /* defined later during boot */ }
+  if (liveLoaded) { renderLive(); window.scrollTo({ top: 0 }); }
+}
+(function wireAppLinks() {
+  const AppP = IS_NATIVE && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+  if (!AppP) return;
+  try { AppP.addListener('appUrlOpen', (e) => { if (e && e.url) openSharedCarUrl(e.url); }); } catch (e) { /* older shell */ }
+  try {
+    AppP.getLaunchUrl().then((r) => { if (r && r.url) openSharedCarUrl(r.url); }).catch(() => {});
+  } catch (e) { /* older shell */ }
+})();
+
 function jhClearFocus() {
   focusedCarKey = null;
   history.replaceState(null, '', location.pathname + location.search);

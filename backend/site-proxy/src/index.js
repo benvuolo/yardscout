@@ -33,11 +33,40 @@ const MIRRORS = {
 const MIRROR_UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
+/* Universal Links (iOS) + App Links (Android): car share links open the app
+ * when it's installed. Apple's CDN and Google's verifier fetch these; both
+ * must be 200 application/json with no redirect. */
+const AASA = JSON.stringify({
+  applinks: {
+    apps: [],
+    details: [{
+      appIDs: ['G23Z9MSBUG.com.benvuolo.yardscout'],
+      appID: 'G23Z9MSBUG.com.benvuolo.yardscout',
+      components: [{ '/': '/car/*', comment: 'shared car pages' }],
+      paths: ['/car/*'],
+    }],
+  },
+});
+const ASSET_LINKS = JSON.stringify([{
+  relation: ['delegate_permission/common.handle_all_urls'],
+  target: {
+    namespace: 'android_app',
+    package_name: 'io.yardscout.app',
+    // Google Play app-signing certificate (Play Console > App integrity).
+    sha256_cert_fingerprints: ['19:7D:A7:E9:5D:E5:36:12:32:E0:D7:69:CC:EE:C0:91:47:F3:78:3D:15:87:BE:DA:22:ED:24:BD:F2:F8:CE:EF'],
+  },
+}]);
+function wellKnown(body) {
+  return new Response(body, { headers: { 'content-type': 'application/json', 'cache-control': 'public, max-age=3600' } });
+}
+
 export default {
   async fetch(req, env) {
     const url = new URL(req.url);
     if (url.pathname.startsWith('/api/ent/')) return handleEntitlements(req, env, url);
     if (req.method === 'GET' || req.method === 'HEAD') {
+      if (url.pathname === '/.well-known/apple-app-site-association' || url.pathname === '/apple-app-site-association') return wellKnown(AASA);
+      if (url.pathname === '/.well-known/assetlinks.json') return wellKnown(ASSET_LINKS);
       let sm = url.pathname.match(/^\/car\/([^/]+)\/?$/);
       if (sm) return renderCarPage(sm[1]);
       sm = url.pathname.match(/^\/yard\/([^/]+)\/?$/);

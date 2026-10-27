@@ -83,6 +83,69 @@ jobs:
           echo "bn=$bn" >> "$GITHUB_OUTPUT"
           grep -E 'MARKETING_VERSION|CURRENT_PROJECT_VERSION' ios/App/App.xcodeproj/project.pbxproj | sort -u
 
+      # Universal links need the Associated Domains capability on the App ID,
+      # and a profile minted AFTER it was enabled. Ensure the capability, then
+      # mint a fresh App Store profile each run (replacing the previous CI
+      # one) so the profile always matches App.entitlements. The stored
+      # IOS_APPSTORE_PROFILE_BASE64 secret stays the fallback.
+      - name: Ensure App ID capabilities + fresh App Store profile
+        if: ${{ github.event.inputs.submit_only != 'true' }}
+        env:
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          pip3 install -q --break-system-packages pyjwt cryptography requests 2>/dev/null || pip3 install -q pyjwt cryptography requests
+          python3 - <<'PY'
+          import base64, os, re, sys, textwrap, time, jwt, requests
+          raw = os.environ["ASC_P8"].strip().replace("\r", "").replace("\\n", "\n")
+          m = re.search(r"-----BEGIN[^-]*-----(.*?)-----END", raw, re.S)
+          body = re.sub(r"\s+", "", m.group(1)) if m else re.sub(r"\s+", "", raw)
+          if not m:
+              try:
+                  dec = base64.b64decode(body).decode("utf-8", "ignore")
+                  mm = re.search(r"-----BEGIN[^-]*-----(.*?)-----END", dec, re.S)
+                  if mm: body = re.sub(r"\s+", "", mm.group(1))
+              except Exception:
+                  pass
+          key = "-----BEGIN PRIVATE KEY-----\n" + "\n".join(textwrap.wrap(body, 64)) + "\n-----END PRIVATE KEY-----\n"
+          tok = jwt.encode({"iss": os.environ["ASC_ISSUER_ID"], "iat": int(time.time()), "exp": int(time.time()) + 900,
+                            "aud": "appstoreconnect-v1"}, key, algorithm="ES256",
+                           headers={"kid": os.environ["ASC_KEY_ID"], "typ": "JWT"})
+          H = {"Authorization": f"Bearer {tok}", "Content-Type": "application/json"}
+          API = "https://api.appstoreconnect.apple.com/v1"
+          BID = os.environ["BUNDLE_ID"]; NAME = "YardScout App Store CI"
+          def die(msg, r=None):
+              print(f"::warning::{msg}" + (f" ({r.status_code}: {r.text[:300]})" if r is not None else ""))
+              print("falling back to the IOS_APPSTORE_PROFILE_BASE64 secret"); sys.exit(0)
+          r = requests.get(f"{API}/bundleIds", headers=H, params={"filter[identifier]": BID}, timeout=60)
+          if r.status_code != 200: die("bundleIds lookup failed", r)
+          bid = [b for b in r.json()["data"] if b["attributes"]["identifier"] == BID][0]["id"]
+          caps = requests.get(f"{API}/bundleIds/{bid}/bundleIdCapabilities", headers=H, timeout=60).json()["data"]
+          have = {c["attributes"]["capabilityType"] for c in caps}
+          if "ASSOCIATED_DOMAINS" not in have:
+              r = requests.post(f"{API}/bundleIdCapabilities", headers=H, timeout=60, json={"data": {
+                  "type": "bundleIdCapabilities", "attributes": {"capabilityType": "ASSOCIATED_DOMAINS"},
+                  "relationships": {"bundleId": {"data": {"type": "bundleIds", "id": bid}}}}})
+              if r.status_code not in (200, 201): die("could not enable Associated Domains", r)
+              print("enabled ASSOCIATED_DOMAINS on", BID)
+          r = requests.get(f"{API}/certificates", headers=H, params={"filter[certificateType]": "DISTRIBUTION,IOS_DISTRIBUTION", "limit": 50}, timeout=60)
+          certs = sorted(r.json().get("data", []), key=lambda c: c["attributes"]["expirationDate"], reverse=True)
+          if not certs: die("no distribution certificate visible to the API key", r)
+          for p in requests.get(f"{API}/bundleIds/{bid}/profiles", headers=H, timeout=60).json().get("data", []):
+              if p["attributes"]["name"] == NAME:
+                  requests.delete(f"{API}/profiles/{p['id']}", headers=H, timeout=60)
+          r = requests.post(f"{API}/profiles", headers=H, timeout=60, json={"data": {
+              "type": "profiles", "attributes": {"name": NAME, "profileType": "IOS_APP_STORE"},
+              "relationships": {"bundleId": {"data": {"type": "bundleIds", "id": bid}},
+                                "certificates": {"data": [{"type": "certificates", "id": c["id"]} for c in certs]}}}})
+          if r.status_code not in (200, 201): die("profile create failed", r)
+          content = r.json()["data"]["attributes"]["profileContent"]
+          open(os.path.join(os.environ["RUNNER_TEMP"], "fresh-profile.b64"), "w").write(content)
+          print("minted fresh App Store profile:", NAME)
+          PY
+
       - name: Install signing certificate + API key
         if: ${{ github.event.inputs.submit_only != 'true' }}
         env:
@@ -93,6 +156,8 @@ jobs:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
         run: |
           set -euo pipefail
+          # Prefer the profile minted by the previous step (carries Associated Domains).
+          if [ -s "$RUNNER_TEMP/fresh-profile.b64" ]; then PROFILE_B64=$(cat "$RUNNER_TEMP/fresh-profile.b64"); echo "using freshly minted profile"; fi
           test -n "$P12_B64" || { echo "::error::IOS_DIST_CERT_P12_BASE64 secret missing"; exit 1; }
           test -n "$ASC_P8" || { echo "::error::ASC_API_KEY_P8 secret missing"; exit 1; }
           KEYCHAIN=$RUNNER_TEMP/ys.keychain-db
