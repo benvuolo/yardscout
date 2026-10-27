@@ -204,6 +204,11 @@ def emit(rows: list[tuple[str, str]]) -> None:
                  src, count=1, flags=re.S)
     APP_JS.write_text(new)
     print(f"Wrote {len(rows)} entries into docs/app.js")
+    # Same map as JSON for the share pages (backend/site-proxy/src/share.js):
+    # [[regex source, url], ...] — the Worker rebuilds the RegExp with the i flag.
+    out = ROOT / "docs" / "data" / "yard_site_links.json"
+    out.write_text(json.dumps([[pattern, url] for pattern, url in rows], separators=(",", ":")))
+    print(f"Wrote {len(rows)} entries into {out.relative_to(ROOT)}")
 
 
 def http_check(rows: list[tuple[str, str]]) -> None:

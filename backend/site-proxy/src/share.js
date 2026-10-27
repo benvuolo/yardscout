@@ -43,6 +43,33 @@ async function dataJson(name, ttl) {
   return r.ok ? r.json() : null;
 }
 
+/* Chain price-list pages — same table as CHAIN_PRICE_PAGES in docs/app.js
+ * (keep the two in step). Independent yards' lists come via the registry. */
+const CHAIN_PRICE_PAGES = [
+  [/^pick[\s-]*n[\s-]*pull/i, 'https://www.picknpull.com/part-pricing', 'Pick-n-Pull'],
+  [/^pull[\s-]*a[\s-]*part/i, 'https://www.pullapart.com/used-auto-parts/parts-pricing/', 'Pull-A-Part'],
+  [/^tear[\s-]*a[\s-]*part/i, 'https://tearapart.com/price-list/', 'Tear-A-Part'],
+  [/pic[\s-]*a[\s-]*part/i, 'https://utpap.com/ogden-prices/', 'Utah Pic-A-Part'],
+  [/wrench[\s-]*a[\s-]*part/i, 'https://wrenchapart.com/austin-price-list', 'Wrench-A-Part'],
+  [/^u[\s-]*pull[\s-]*r/i, 'https://upullrparts.com/part-pricing/', 'U-Pull-R Parts'],
+  [/^fenix[\s-]*u[\s-]*pull/i, 'https://fenixupull.com/parts-prices/', 'Fenix U-Pull'],
+  [/^harry'?s[\s-]*u[\s-]*pull/i, 'https://wegotused.com/price-list/', "Harry's U-Pull-It"],
+  [/^joliet u[\s-]*pull[\s-]*it/i, 'https://www.jolietupullit.com/auto-part-prices', 'Joliet U-Pull-It'],
+  [/^go pull[\s-]*it/i, 'https://gopullit.com/parts-price-list/', 'Go Pull-It'],
+  [/^195 used auto parts/i, 'https://www.195usedautoparts.com/Home/PartPrices', '195 Used Auto Parts'],
+  [/^san antonio pick[\s-]*n[\s-]*pull/i, 'https://www.picknpullsa.com/price-list', 'San Antonio Pick-N-Pull'],
+];
+function priceListFor(loc) { const h = CHAIN_PRICE_PAGES.find((c) => c[0].test(loc || '')); return h ? { url: h[1], label: h[2] } : null; }
+let siteLinksCache = { at: 0, rows: null };
+async function yardSiteFor(loc) {
+  if (!siteLinksCache.rows || Date.now() - siteLinksCache.at > 3600_000) {
+    const rows = await dataJson('yard_site_links.json', 3600);
+    siteLinksCache = { at: Date.now(), rows: (rows || []).map(([src, url]) => { try { return [new RegExp(src, 'i'), url]; } catch (e) { return null; } }).filter(Boolean) };
+  }
+  const hit = siteLinksCache.rows.find(([re]) => re.test(loc || ''));
+  return hit ? hit[1] : null;
+}
+
 /* Yard set-out dates are plain YYYY-MM-DD strings in the yard's local day;
  * compare against UTC midnight so "today" never reads as day 0 vs day 1
  * depending on the viewer's timezone. */
@@ -142,7 +169,7 @@ function layout({ title, desc, canonical, body, status = 200, robots = 'index,fo
 <meta name="description" content="${esc(desc)}">
 <meta name="robots" content="${robots}">
 <link rel="canonical" href="${esc(canonical)}">
-<link rel="icon" type="image/png" sizes="192x192" href="${SITE}/icon-192.png"><link rel="apple-touch-icon" href="${SITE}/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="${SITE}/icon-192.png?v=2"><link rel="apple-touch-icon" href="${SITE}/apple-touch-icon.png?v=2">
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="YardScout">
 <meta property="og:title" content="${esc(ogTitle || title)}"><meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${esc(canonical)}"><meta property="og:image" content="${OG_IMAGE}">
@@ -237,11 +264,15 @@ export async function renderCarPage(token) {
     ? { short: daysOn > avg ? `On the lot ${daysOn} days · past the ~${avg} typical` : `Day ${daysOn + 1} on the lot · ~${avg} typical ${basis === 'yard' ? 'at this yard' : basis === 'chain' ? 'for this chain' : 'across yards'}`, soon: cw.soon }
     : (daysOn != null ? { short: `Day ${daysOn + 1} on the lot`, soon: false } : null);
 
+  const [siteUrl, price] = [await yardSiteFor(yardName), priceListFor(yardName)];
+  const yardLinks = (siteUrl || price)
+    ? `<p class="share-sub" style="margin:.2rem 0 .4rem">${siteUrl ? `<a href="${esc(siteUrl)}" target="_blank" rel="noopener">Yard's own inventory page &#8599;</a>` : ''}${siteUrl && price ? ' &middot; ' : ''}${price ? `<a href="${esc(price.url)}" target="_blank" rel="noopener">${esc(price.label)} price list &#8599;</a>` : ''}</p>` : '';
   const body = `<p class="kicker">Seen in a self-service yard · <a href="${yardHref}">${esc(yardName)}</a></p>
 ${carCard({ name, yardName, where, row: v.row, metaHtml: meta, specs: [trim, drive].filter(Boolean).join(' · '), clock: shortClock, badge: isNew ? 'New' : '' })}
 <div class="car-card">
 <div class="clock${cw.soon ? ' soon' : ''}">${esc(cw.line)}<small>Based on how long departed cars sat on this lot before they left — an estimate, not a schedule. Call the yard before a long drive.</small></div>
 </div>
+${yardLinks}
 <div class="cta"><a class="btn btn-primary" href="${SITE}/#car=${encodeURIComponent(key)}">Open in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when the next ${esc(v.make)} ${esc(v.model)} lands near me</a></div>
 ${storesLine()}
 <p class="note">Row and set-out date come straight from the yard's own published list, refreshed every 4 hours (inventory as of ${esc(fmtStamp(d.scrapedAt))}). Yards track cars, not the parts still on them — a car that has sat a while may be picked over.</p>`;
@@ -282,13 +313,14 @@ export async function renderYardPage(slug) {
     const car = `${r[iYear]} ${r[iMake]} ${r[iModel]}`.trim();
     return `<li><a href="${SITE}/car/${encodeURIComponent(key)}">${esc(car)}</a><span class="meta">${r[iRow] ? 'Row ' + esc(r[iRow]) + '<br>' : ''}${esc(fmtDate(r[iDate]))}</span></li>`;
   }).join('');
+  const [ySite, yPrice] = [await yardSiteFor(name), priceListFor(name)];
   const lifeLine = avg
     ? `Cars typically last ~${avg} days here${basis === 'chain' ? ' (chain average)' : basis === 'all' ? ' (all-yards average)' : ''}, based on when departed cars arrived and left.`
     : 'Not enough departure history yet to estimate how long cars last here.';
   const body = `<p class="kicker">Self-service yard · ${esc(where)}</p>
 <h2 class="share-h">${esc(title)}</h2>
 <div class="stats-bar"><div class="stat-card"><span class="label">On the lot</span><span class="value">${total.toLocaleString()}</span></div><div class="stat-card"><span class="label">New this week</span><span class="value accent">${recent.length}</span></div><div class="stat-card"><span class="label">Typical stay</span><span class="value">${avg ? '~' + avg + ' days' : '—'}</span></div></div>
-<p class="share-sub">${esc(lifeLine)}</p>
+<p class="share-sub">${esc(lifeLine)}${ySite ? ` <a href="${esc(ySite)}" target="_blank" rel="noopener">Yard's own inventory page &#8599;</a>` : ''}${yPrice ? ` &middot; <a href="${esc(yPrice.url)}" target="_blank" rel="noopener">${esc(yPrice.label)} price list &#8599;</a>` : ''}</p>
 <div class="section">Set out in the last 7 days <span>· ${recent.length}</span></div>
 <div class="car-card">${items ? `<ul class="rowlist">${items}</ul>` : '<p style="margin:0;color:var(--text-dim);font-size:.875rem">No new set-outs in the last 7 days on the yard\'s published list.</p>'}${recent.length > SHOW ? `<p class="note">Showing ${SHOW} of ${recent.length}. The full list is in the app.</p>` : ''}</div>
 <div class="cta"><a class="btn btn-primary" href="${SITE}/">Search this yard in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when a car I want lands here</a></div>

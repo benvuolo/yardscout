@@ -2054,10 +2054,11 @@ async function shareVehicle(key) {
   // clumsy way to copy, so copy the link straight to the clipboard there.
   const touchDevice = IS_NATIVE || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   if (navigator.share && touchDevice) {
-    try { await navigator.share({ title: 'YardScout find', text, url }); return; } catch (e) { /* cancelled/unsupported -> fall through */ }
+    try { await navigator.share({ title: text, url }); return; } catch (e) { /* cancelled/unsupported -> fall through */ }
   }
   try {
-    await navigator.clipboard.writeText(`${text}\n${url}`);
+    // Just the link — the page it opens carries the car, yard, row and dates.
+    await navigator.clipboard.writeText(url);
     const btn = document.querySelector(`.share-btn[data-vkey="${CSS.escape(key)}"]`);
     if (btn) {
       const orig = btn.innerHTML;
