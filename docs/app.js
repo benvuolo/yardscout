@@ -572,6 +572,34 @@ function applyInventory(raw, { quiet = false } = {}) {
   }
 }
 
+/* ===== FEED CATEGORY MAKES → MAKE + MODEL (client-side safety net) =====
+ * Some feeds (first seen: L and L U-Pull via Ario) put a Hollander-style
+ * category in the make field — "Honda Accord", "Ford Pickup F150 Series",
+ * "Blazer S10/Jimmy S15" — and a six-letter interchange code in the model.
+ * The scraper splits these (_ario_split_category); this mirrors it at load
+ * time so the make dropdowns stay clean even on data from an older scan. A
+ * plain make passes straight through. */
+const _CAT_MAKES = ['Harley-Davidson','Mercedes-Benz','Aston Martin','Freightliner','International','Alfa Romeo','Land Rover','Oldsmobile','Volkswagen','Mitsubishi','Chevrolet','Chrysler','Daihatsu','Infiniti','Plymouth','Kawasaki','Workhorse','Maserati','Mercedes','Sterling','Cadillac','Pontiac','Porsche','Triumph','Renault','Polaris','Hyundai','Lincoln','Mercury','Genesis','Bentley','Ferrari','Peugeot','Hummer','Jaguar','Subaru','Suzuki','Toyota','Nissan','Daewoo','Datsun','Lancia','Fisker','Yamaha','Can-Am','Saturn','Merkur','Acura','Buick','Chevy','Dodge','Honda','Isuzu','Lexus','Mazda','Scion','Smart','Tesla','Eagle','Lotus','Rover','Volvo','Audi','Ford','Jeep','Saab','MINI','Mini','Opel','Fiat','Yugo','AMC','BMW','GMC','Geo','Kia','Ram','VW'];
+const _CAT_MODELS = { 'explorer':['Ford','Explorer'],'mustang':['Ford','Mustang'],'bronco ii':['Ford','Bronco II'],'bronco':['Ford','Bronco'],'s10/s15/sonoma pickup':['Chevrolet','S10'],'blazer s10/jimmy s15':['Chevrolet','Blazer S10'],'avalanche 1500':['Chevrolet','Avalanche 1500'],'avalanche 2500':['Chevrolet','Avalanche 2500'],'aspen':['Dodge','Aspen'],'corvette':['Chevrolet','Corvette'],'camaro':['Chevrolet','Camaro'],'silverado 1500':['Chevrolet','Silverado 1500'],'silverado 2500':['Chevrolet','Silverado 2500'],'tahoe':['Chevrolet','Tahoe'],'suburban':['Chevrolet','Suburban'],'firebird':['Pontiac','Firebird'],'grand am':['Pontiac','Grand Am'],'wrangler':['Jeep','Wrangler'],'cherokee':['Jeep','Cherokee'],'prius':['Toyota','Prius'],'beetle':['Volkswagen','Beetle'],'jetta':['Volkswagen','Jetta'],'grand prix':['Pontiac','Grand Prix'],'linc & town':['Lincoln','Town Car'],'monte carlo':['Chevrolet','Monte Carlo'],'fiesta':['Ford','Fiesta'],'thunderbird':['Ford','Thunderbird'],'chevy/gmc suburban 1500':['Chevrolet','Suburban 1500'],'chevy/gmc suburban 2500':['Chevrolet','Suburban 2500'],'malibu':['Chevrolet','Malibu'],'cutlass':['Oldsmobile','Cutlass'],'cavalier':['Chevrolet','Cavalier'],'range rover sport':['Land Rover','Range Rover Sport'],'range rover':['Land Rover','Range Rover'],'pt cruiser':['Chrysler','PT Cruiser'],'diplomat':['Dodge','Diplomat'],'sable':['Mercury','Sable'],'challenger':['Dodge','Challenger'],'regal':['Buick','Regal'],'eldorado':['Cadillac','Eldorado'],'montego':['Mercury','Montego'],'impala':['Chevrolet','Impala'],'caprice':['Chevrolet','Caprice'],'taurus':['Ford','Taurus'],'sprinter':['Dodge','Sprinter'],'escort':['Ford','Escort'],'ranger':['Ford','Ranger'] };
+const _CAT_NOISE = /\((?:see also|also see|except|small|small truck|mid-?size|full-?size|type \d|\d+ & up|domestic|for|mercury|dodge & chrysler)[^)]*\)|\b(?:see also|also see)\b.*$|\bexcept\b.*$|\bnot rs\b|\bseries\b|\(\s*\)/gi;
+function splitCategoryMake(make, model) {
+  const raw = String(make || '');
+  if (!raw || (!/\s/.test(raw) && !/\d/.test(raw))) return [raw, model];
+  const cat = raw.replace(_CAT_NOISE, ' ').replace(/\s+/g, ' ').replace(/^[\s\-,]+|[\s\-,]+$/g, '');
+  const low = cat.toLowerCase();
+  if (_CAT_MODELS[low]) return _CAT_MODELS[low];
+  if (low === 'atv / motorcycle' || low === 'atv/motorcycle' || low === 'motorcycle') return [model ? String(model) : 'Motorcycle', 'Motorcycle'];
+  for (const mk of _CAT_MAKES) {
+    const ml = mk.toLowerCase();
+    if (low === ml) return [raw, model];
+    if (low.startsWith(ml + ' ')) {
+      let rest = cat.slice(mk.length).replace(/\b(pickup|truck)\b/gi, ' ').replace(/\s+/g, ' ').replace(/^[\s\-,]+|[\s\-,]+$/g, '');
+      return [mk, rest || model];
+    }
+  }
+  return [raw, model];
+}
+
 function parseInventoryPayload(raw) {
   {
     if (raw && raw.schemaVersion === 2 && Array.isArray(raw.vehicles)) {
@@ -582,12 +610,13 @@ function parseInventoryPayload(raw) {
       liveInventory = raw.vehicles.map((r, i) => {
         const y = yards[r[7]] || [];
         const parts = r[8] >= 0 ? (partSets[r[8]] || []) : [];
+        const [mk, md] = splitCategoryMake(r[3], r[4]);
         const v = {
-          id: r[0], vin: r[1], year: r[2], make: r[3], model: r[4], row: r[5],
+          id: r[0], vin: r[1], year: r[2], make: mk, model: md, row: r[5],
           dateAdded: r[6], location: y[0] || '', city: y[1] || '', state: y[2] || '',
           lat: y[3], lng: y[4], utpapPremium: !!r[10],
           hasMatch: parts.length > 0, maxValue: r[9] || 0,
-          displayName: `${r[3]} ${r[4]}`.trim(), topParts: parts,
+          displayName: `${mk} ${md}`.trim(), topParts: parts,
         };
         if (y[5] != null) { v.yardAvgLifespan = y[5]; v.yardLifespanBasis = y[6] || 'all'; }
         const vp = vpic[String(i)];

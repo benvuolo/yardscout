@@ -17488,7 +17488,7 @@ _ARIO_CATEGORY_MODELS = {
     "pt cruiser": ("Chrysler", "PT Cruiser"), "diplomat": ("Dodge", "Diplomat"), "sable": ("Mercury", "Sable"),
     "challenger": ("Dodge", "Challenger"), "regal": ("Buick", "Regal"), "eldorado": ("Cadillac", "Eldorado"),
     "montego": ("Mercury", "Montego"), "impala": ("Chevrolet", "Impala"), "caprice": ("Chevrolet", "Caprice"),
-    "taurus": ("Ford", "Taurus"), "escort": ("Ford", "Escort"), "ranger": ("Ford", "Ranger"),
+    "taurus": ("Ford", "Taurus"), "sprinter": ("Dodge", "Sprinter"), "escort": ("Ford", "Escort"), "ranger": ("Ford", "Ranger"),
 }
 _ARIO_CATEGORY_NOISE = re.compile(
     r"\((?:see also|also see|except|small|small truck|mid-?size|full-?size|type \d|\d+ & up|domestic|for|mercury|dodge & chrysler)[^)]*\)"

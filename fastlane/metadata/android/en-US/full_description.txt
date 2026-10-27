@@ -1,9 +1,10 @@
 YardScout tracks the live inventory of self-service salvage yards across the country, so you stop driving to yards on a maybe.
 
 FIND THE CAR BEFORE YOU DRIVE
-• Live inventory from 240+ self-serve yards — Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part and a growing set of independents — refreshed throughout the day
+• Live inventory from 250+ self-serve yards — Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part and a growing set of independents — refreshed throughout the day
 • Search by make, model and year range around your ZIP
 • See the row number, arrival date and VIN before you leave the house
+• Share any car as a link — yard, row, set-out date and how long cars usually last at that yard
 • Model search understands yard naming quirks — searching WRX finds every spelling
 
 FIND THE PART THAT FITS
@@ -15,9 +16,10 @@ KNOW THE YARDS
 • Every tracked yard near you with distance, car counts and what arrived this week
 • Each yard's pull-price list right in the app
 • Tool rules per yard (sawzalls, compressors) so you bring the right gear
+• Every yard's pull prices on the car cards, from its own published list
 
 WATCH FOR THE RIGHT CAR
-• Build a watchlist of makes, models and years
+• Build a watchlist of makes, models and years — even a model that isn't in the rows yet
 • Watched cars light up in the app when they arrive at a yard in your radius
 • Free watches get a weekly recap push of every watched car that landed
 
@@ -28,6 +30,7 @@ YARDSCOUT PRO
 • Unlimited radius and nationwide search
 
 NO ACCOUNT, NO EMAIL
+• Light and dark mode — follows your phone, or pick one
 • The whole app works without signing up
 • Alerts use an anonymous device ID — we never ask who you are
 
