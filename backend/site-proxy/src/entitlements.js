@@ -623,6 +623,40 @@ function handleConfig(env) {
 
 /* ---------- router ---------- */
 
+/* ---------- Owner comps: POST /api/ent/admin/grant ----------
+ * Hardcode a friend into Pro (or take it back). Guarded by the
+ * ENT_ADMIN_SECRET Worker secret (header x-ent-admin); 503 until it is set so
+ * the route is inert on a fresh deploy. The grant lands in the same KV record
+ * every store purchase uses, so the friend unlocks like any Pro member:
+ * Pro sheet → "Already have Pro?" → their email → 6-digit code — on web,
+ * iPhone and Android alike.
+ *   { email, months?: 12, expires_at?: ISO, revoke?: false, note?: "friend" } */
+async function handleAdminGrant(req, env) {
+  if (!env.ENT_ADMIN_SECRET) return err(503, 'not_configured', 'ENT_ADMIN_SECRET is not set.');
+  const given = req.headers.get('x-ent-admin') || '';
+  if (!given || !timingSafeEqual(given, env.ENT_ADMIN_SECRET)) return err(401, 'unauthorized', 'Bad admin secret.');
+  let body;
+  try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
+  const email = normEmail(body.email);
+  if (!email) return err(400, 'bad_email', 'Valid email required.');
+  const note = String(body.note || 'owner comp').slice(0, 120);
+  if (body.revoke) {
+    const ent = await grantEntitlement(env, email, { pro: false, expiresAt: isoNow() }, 'comp revoked: ' + note);
+    return json({ ok: true, email, pro: entActive(ent), expiresAt: ent.expiresAt });
+  }
+  let expiresAt = null;
+  if (body.expires_at) {
+    if (Number.isNaN(Date.parse(body.expires_at))) return err(400, 'bad_date', 'expires_at must be an ISO date.');
+    expiresAt = new Date(body.expires_at).toISOString();
+  } else if (body.months !== undefined && body.months !== null && body.months !== '') {
+    const m = Number(body.months);
+    if (!Number.isFinite(m) || m <= 0 || m > 120) return err(400, 'bad_months', 'months must be 1-120.');
+    const d = new Date(); d.setMonth(d.getMonth() + Math.round(m)); expiresAt = d.toISOString();
+  }
+  const ent = await grantEntitlement(env, email, { pro: true, expiresAt, source: 'comp' }, 'comp: ' + note);
+  return json({ ok: true, email, pro: entActive(ent), expiresAt: ent.expiresAt || null, source: ent.source });
+}
+
 export async function handleEntitlements(req, env, url) {
   REQ_ORIGIN = req.headers.get('origin');
   REQ_ACRH = req.headers.get('access-control-request-headers');
@@ -639,6 +673,7 @@ export async function handleEntitlements(req, env, url) {
     if (req.method === 'POST' && route === 'verify-android') return await handleVerifyAndroid(req, env);
     if (req.method === 'GET' && route === 'status') return await handleStatus(req, env, url);
     if (req.method === 'POST' && route === 'portal') return await handlePortal(req, env);
+    if (req.method === 'POST' && route === 'admin/grant') return await handleAdminGrant(req, env);
   } catch (e) {
     console.log('entitlements error', route, e.message);
     return err(500, 'internal', 'Something went wrong — try again.');

@@ -73,6 +73,14 @@ jobs:
         run: |
           node --check src/index.js
           npx --yes wrangler@4 deploy
+      # Owner-comp secret: mirrored from the GitHub secret so granting Pro
+      # never needs a Mac. Skipped when the GitHub secret isn't set.
+      - name: Sync ENT_ADMIN_SECRET to yardscout-site
+        if: (env.TARGET == 'both' || env.TARGET == 'site') && env.ENT_ADMIN_SECRET != ''
+        working-directory: backend/site-proxy
+        env:
+          ENT_ADMIN_SECRET: ${{ secrets.ENT_ADMIN_SECRET }}
+        run: printf '%s' "$ENT_ADMIN_SECRET" | npx --yes wrangler@4 secret put ENT_ADMIN_SECRET
       - name: Smoke
         run: |
           curl -sfS https://yardscout-api.yardscout.workers.dev/v1/health

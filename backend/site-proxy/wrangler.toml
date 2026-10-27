@@ -15,6 +15,8 @@ routes = [
 #   RESEND_API_KEY         re_… (unlock-code emails)
 #   GOOGLE_SA_EMAIL        Play service account client_email
 #                          (…@….iam.gserviceaccount.com) for /api/ent/verify-android
+#   ENT_ADMIN_SECRET       random string; unlocks POST /api/ent/admin/grant (owner comps —
+#                          the grant-pro.yml workflow sends it; 503 until set)
 #   GOOGLE_SA_KEY          that service account's private_key — paste the
 #                          PKCS#8 PEM from the JSON key file (literal "\n"
 #                          escapes are fine; google-play.js normalizes them)

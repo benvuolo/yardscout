@@ -1,0 +1,57 @@
+# Give a friend Pro (or take it back) without touching a Mac or the
+# dashboard. Needs the ENT_ADMIN_SECRET repository secret (same value the
+# deploy workflow mirrors into the yardscout-site Worker).
+#
+#   gh workflow run grant-pro.yml -f email=friend@example.com -f months=12 -f note="college buddy"
+#   gh workflow run grant-pro.yml -f email=friend@example.com -f revoke=true
+#
+# The friend then unlocks like any Pro member: Pro sheet → "Already have
+# Pro?" → their email → 6-digit code (web, iPhone or Android).
+name: Grant Pro
+
+on:
+  workflow_dispatch:
+    inputs:
+      email:
+        description: "Friend's email (the one they'll type into the app)"
+        required: true
+      months:
+        description: "How long (months). Blank = no expiry"
+        default: "12"
+      note:
+        description: "Who / why (kept in the entitlement's audit history)"
+        default: "owner comp"
+      revoke:
+        description: "Take Pro away instead"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  grant:
+    runs-on: ubuntu-latest
+    env:
+      ENT_ADMIN_SECRET: ${{ secrets.ENT_ADMIN_SECRET }}
+    steps:
+      - name: Grant
+        run: |
+          set -euo pipefail
+          test -n "$ENT_ADMIN_SECRET" || { echo "::error::ENT_ADMIN_SECRET secret missing"; exit 1; }
+          python3 - <<'PY'
+          import json, os, urllib.request
+          body = {"email": os.environ["IN_EMAIL"], "note": os.environ["IN_NOTE"], "revoke": os.environ["IN_REVOKE"] == "true"}
+          if os.environ["IN_MONTHS"].strip(): body["months"] = int(os.environ["IN_MONTHS"])
+          req = urllib.request.Request("https://yardscout.io/api/ent/admin/grant", data=json.dumps(body).encode(),
+                                       headers={"content-type": "application/json", "x-ent-admin": os.environ["ENT_ADMIN_SECRET"]}, method="POST")
+          try:
+              with urllib.request.urlopen(req, timeout=30) as r: print(r.read().decode())
+          except urllib.error.HTTPError as e:
+              print("::error::", e.code, e.read().decode()); raise SystemExit(1)
+          PY
+        env:
+          IN_EMAIL: ${{ github.event.inputs.email }}
+          IN_MONTHS: ${{ github.event.inputs.months }}
+          IN_NOTE: ${{ github.event.inputs.note }}
+          IN_REVOKE: ${{ github.event.inputs.revoke }}

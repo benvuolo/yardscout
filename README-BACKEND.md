@@ -462,3 +462,22 @@ curl -s -H "x-admin-secret: $ADMIN_SECRET" \
 
 App-store installs can't carry a UTM, so native sessions count under an
 empty source unless the phone visited a tagged web link first.
+
+## Giving friends Pro (owner comps)
+
+`POST /api/ent/admin/grant` on the site Worker writes a Pro entitlement for
+an email, guarded by the `ENT_ADMIN_SECRET` Worker secret. One-time setup:
+generate a random string (`openssl rand -hex 24`), add it as the GitHub
+repository secret `ENT_ADMIN_SECRET`, and run *Deploy Workers* once (it
+mirrors the secret into the Worker). Then:
+
+```bash
+gh workflow run grant-pro.yml -f email=friend@example.com -f months=12 -f note="college buddy"
+gh workflow run grant-pro.yml -f email=friend@example.com -f revoke=true
+```
+
+The friend unlocks it like any Pro member, on web, iPhone or Android: Pro
+sheet → *Already have Pro?* → their email → the 6-digit code we email them.
+Grants are plain entitlement records (`source: "comp"`) with an audit note,
+so the Stripe/Apple/Google flows and the lapsed-Pro checks treat them the
+same as a purchase.
