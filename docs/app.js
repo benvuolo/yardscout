@@ -5244,6 +5244,59 @@ function watchlistMatches(entry, v) {
  *   only when the decode is 'usable'. No usable decode → no match.
  * TODO(manual-transmission): "manual confirmed" lives in vehicle_extras.json,
  * not in the shards the server matches — not a watch filter yet. */
+/* Trim watch matching, shared by the Worker (alerts.js) and the web shell
+ * (app.js) — keep the two copies identical.
+ *
+ * The decoder (NHTSA vPIC) names trims in its own words, not the badge's:
+ * "Grade: SR5 V6", "Luxury" for a Toyota Limited, "Base/LS", "1LT". A
+ * plain substring test also over-matches ("LT" hits "LTZ", "SE" hits
+ * "SEL"). So: both sides are split into lowercase tokens, a leading
+ * digit is split off a token ("1LT" -> "1","lt"), and the query's tokens
+ * must appear contiguously in trim+series. Then a small, make-scoped
+ * alias table lets the words a shopper would type ("Limited", "base")
+ * find the decoder's label. */
+const TRIM_ALIASES = [
+  // make (lowercase, or '*' for any) + a set of interchangeable words
+  { make: 'toyota', words: ['limited', 'luxury'] },
+  { make: 'lexus', words: ['limited', 'luxury'] },
+  { make: '*', words: ['base', 'std', 'standard'] },
+  { make: '*', words: ['grand touring', 'gt'] },
+];
+function trimTokens(s) {
+  const out = [];
+  for (const raw of String(s || '').toLowerCase().replace(/grade:/g, ' ').split(/[^a-z0-9]+/)) {
+    if (!raw) continue;
+    const m = raw.match(/^(\d)([a-z]{2,})$/); // "1lt" -> "1","lt"
+    if (m) { out.push(m[1]); out.push(m[2]); } else out.push(raw);
+  }
+  return out;
+}
+function tokensContain(hay, needle) {
+  if (!needle.length) return false;
+  outer: for (let i = 0; i + needle.length <= hay.length; i++) {
+    for (let j = 0; j < needle.length; j++) if (hay[i + j] !== needle[j]) continue outer;
+    return true;
+  }
+  return false;
+}
+function trimQueryVariants(query, make) {
+  const q = String(query || '').trim().toLowerCase();
+  const mk = String(make || '').trim().toLowerCase();
+  const variants = new Set([q]);
+  for (const a of TRIM_ALIASES) {
+    if (a.make !== '*' && a.make !== mk) continue;
+    for (const w of a.words) {
+      if (!tokensContain(trimTokens(q), trimTokens(w))) continue;
+      for (const alt of a.words) if (alt !== w) variants.add(q.replace(w, alt));
+    }
+  }
+  return [...variants];
+}
+function trimFilterMatches(query, trim, series, make) {
+  const hay = trimTokens(`${trim || ''} ${series || ''}`);
+  return trimQueryVariants(query, make).some((v) => tokensContain(hay, trimTokens(v)));
+}
+
 function vpicFilterMatches(entry, v) {
   const drive = entry.driveFilter || '';
   const trim = String(entry.trimFilter || '').trim().toLowerCase();
@@ -5256,8 +5309,7 @@ function vpicFilterMatches(entry, v) {
   }
   if (trim) {
     if (v.vpicTrimQuality !== 'usable') return false;
-    const hay = `${v.vpicTrim || ''} ${v.vpicSeries || ''}`.toLowerCase();
-    if (!hay.includes(trim)) return false;
+    if (!trimFilterMatches(trim, v.vpicTrim, v.vpicSeries, v.make)) return false;
   }
   return true;
 }
