@@ -2069,6 +2069,43 @@ async function shareVehicle(key) {
   }
 }
 
+/* ===== THEME =====
+ * Follows the OS by default; the header toggle pins light or dark
+ * (ys_theme). The <head> applies the stored value before first paint. */
+function effectiveTheme() {
+  const pinned = document.documentElement.getAttribute('data-theme');
+  if (pinned === 'dark' || pinned === 'light') return pinned;
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+function applyThemeColor() {
+  const m = document.getElementById('theme-color');
+  if (m) m.setAttribute('content', effectiveTheme() === 'dark' ? '#17150f' : '#efece4');
+}
+function toggleTheme() {
+  const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('ys_theme', next); } catch (e) { /* private mode */ }
+  applyThemeColor();
+  track('theme/' + next);
+}
+document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyThemeColor); } catch (e) { /* old WebView */ }
+applyThemeColor();
+
+// Native shells: the yard card's "This week" shares the public page instead
+// of bouncing the user out to the system browser.
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('.yard-week-btn');
+  if (!b) return;
+  e.stopPropagation();
+  const url = b.dataset.url;
+  track('share-used');
+  if (navigator.share) {
+    try { await navigator.share({ title: 'This week at ' + b.dataset.yard, url }); return; } catch (err) { /* cancelled */ }
+  }
+  try { await navigator.clipboard.writeText(url); const o = b.textContent; b.textContent = 'Copied'; setTimeout(() => { b.textContent = o; }, 1400); } catch (err) { prompt('Copy this link:', url); }
+});
+
 /* First-run banner: ask for a zip once, in plain language. */
 function updateZipBanner() {
   // A shared deep link should land on the car, not the onboarding banner.
@@ -3212,7 +3249,9 @@ function renderYards() {
         </div>
         <div class="yard-actions">
           <button type="button" class="btn yard-view-btn">View cars</button>
-          <a class="btn yard-week-link" href="https://yardscout.io/yard/${yardSlug(y.location)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Public page: this yard's set-outs from the last 7 days, shareable">This week &#8599;</a>
+          ${IS_NATIVE
+            ? `<button type="button" class="btn yard-week-btn" data-url="https://yardscout.io/yard/${yardSlug(y.location)}" data-yard="${escapeHtml(y.location)}" title="Share this yard's last 7 days of set-outs">Share this week</button>`
+            : `<a class="btn yard-week-link" href="https://yardscout.io/yard/${yardSlug(y.location)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Public page: this yard's set-outs from the last 7 days, shareable">This week &#8599;</a>`}
           ${yardPriceList(y.location)
             ? '<button type="button" class="btn yard-prices-btn">' + ICON.tag + ' Price list</button>'
             : (chain ? `<a class="yard-price-link" href="${chain[1]}" target="_blank" rel="noopener">${chain[2]} price list</a>` : '<span class="yard-price-none">Prices posted at the yard</span>')}

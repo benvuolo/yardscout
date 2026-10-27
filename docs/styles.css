@@ -48,6 +48,86 @@
     /* The data voice: every number, date, VIN, and tag reads like a spec sheet. */
     --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
     --nav-h: 58px;
+    --btn-primary-hover: #33301f;
+    --skeleton-hi: #e4dfd1;
+    color-scheme: light;
+  }
+  /* Dark theme: same paper-and-ink logic, inverted — night shift at the
+     yard. Follows the OS unless the header toggle pins a choice
+     (data-theme on <html>, persisted as ys_theme). */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+    --bg: #17150f;
+    --surface: #211e16;
+    --surface2: #2a261c;
+    --surface3: #332e22;
+    --border: #3b3628;
+    --border-dark: #5a5342;
+    --text: #efece4;
+    --text-dim: #b0a890;
+    --accent: #e8702a;
+    --accent-hover: #f08a4a;
+    --accent-soft: rgba(232, 112, 42, 0.14);
+    --accent2: #8dbb7d;
+    --green-soft: rgba(141, 187, 125, 0.14);
+    --red: #e06b60;
+    --red-soft: rgba(224, 107, 96, 0.14);
+    --blue: #b0a890;
+    --blue-soft: rgba(176, 168, 144, 0.12);
+    --purple: #b0a890;
+    --purple-soft: rgba(176, 168, 144, 0.12);
+    --cyan: #b0a890;
+    --pink: #b0a890;
+    --orange: #d9a441;
+    --gold: #d9a441;
+    --gold-soft: rgba(217, 164, 65, 0.14);
+    --gold-glow: rgba(217, 164, 65, 0.07);
+    --gold-border: rgba(217, 164, 65, 0.35);
+    --demand-fast: #8dbb7d;
+    --demand-steady: #b0a890;
+    --demand-slow: #d9a441;
+    --shadow-md: 0 1px 0 rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 -4px 28px rgba(0, 0, 0, 0.55);
+    --btn-primary-hover: #d8d2c2;
+    --skeleton-hi: #3b3628;
+    color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17150f;
+    --surface: #211e16;
+    --surface2: #2a261c;
+    --surface3: #332e22;
+    --border: #3b3628;
+    --border-dark: #5a5342;
+    --text: #efece4;
+    --text-dim: #b0a890;
+    --accent: #e8702a;
+    --accent-hover: #f08a4a;
+    --accent-soft: rgba(232, 112, 42, 0.14);
+    --accent2: #8dbb7d;
+    --green-soft: rgba(141, 187, 125, 0.14);
+    --red: #e06b60;
+    --red-soft: rgba(224, 107, 96, 0.14);
+    --blue: #b0a890;
+    --blue-soft: rgba(176, 168, 144, 0.12);
+    --purple: #b0a890;
+    --purple-soft: rgba(176, 168, 144, 0.12);
+    --cyan: #b0a890;
+    --pink: #b0a890;
+    --orange: #d9a441;
+    --gold: #d9a441;
+    --gold-soft: rgba(217, 164, 65, 0.14);
+    --gold-glow: rgba(217, 164, 65, 0.07);
+    --gold-border: rgba(217, 164, 65, 0.35);
+    --demand-fast: #8dbb7d;
+    --demand-steady: #b0a890;
+    --demand-slow: #d9a441;
+    --shadow-md: 0 1px 0 rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 -4px 28px rgba(0, 0, 0, 0.55);
+    --btn-primary-hover: #d8d2c2;
+    --skeleton-hi: #3b3628;
+    color-scheme: dark;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
@@ -114,8 +194,9 @@
     display: inline-grid;
     place-items: center;
     width: 34px; height: 30px;
-    background: var(--text);
-    color: var(--bg);
+    background: #1b1913;
+    color: #efece4;
+    border: 1px solid var(--border-dark);
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     font-weight: 800;
@@ -625,7 +706,7 @@
     border-color: var(--text);
     color: var(--surface);
   }
-  .btn-primary:hover { background: #33301f; border-color: #33301f; }
+  .btn-primary:hover { background: var(--btn-primary-hover); border-color: var(--btn-primary-hover); }
 
   /* ---------- Vehicle cards ---------- */
   .car-grid {
@@ -1117,7 +1198,7 @@
 
   /* ===== Loading skeleton (first paint before the inventory JSON lands) ===== */
   .skeleton {
-    background: linear-gradient(90deg, var(--surface2) 25%, #e4dfd1 37%, var(--surface2) 63%);
+    background: linear-gradient(90deg, var(--surface2) 25%, var(--skeleton-hi) 37%, var(--surface2) 63%);
     background-size: 400% 100%;
     animation: skel-shimmer 1.4s ease infinite;
     border-radius: var(--radius-sm);
@@ -1285,6 +1366,20 @@
     border-radius: 50%;
     border: 1px solid currentColor;
     flex-shrink: 0;
+  }
+  .theme-toggle {
+    width: 34px; height: 30px; display: inline-grid; place-items: center;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    color: var(--text-dim); cursor: pointer; margin-right: 0.5rem; flex-shrink: 0;
+  }
+  .theme-toggle:hover { color: var(--text); border-color: var(--border-dark); }
+  .theme-toggle .ico { width: 15px; height: 15px; }
+  .theme-toggle .ico-sun { display: none; }
+  :root[data-theme="dark"] .theme-toggle .ico-sun { display: block; }
+  :root[data-theme="dark"] .theme-toggle .ico-moon { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-toggle .ico-sun { display: block; }
+    :root:not([data-theme="light"]) .theme-toggle .ico-moon { display: none; }
   }
   .pro-pill:hover { background: var(--accent); color: #fff; }
   .pro-pill.active { background: var(--accent); color: #fff; }
@@ -1751,7 +1846,7 @@
   border: 1px solid var(--accent2);
   border-left-width: 4px;
   border-radius: 4px;
-  background: var(--card-bg, #fff);
+  background: var(--card-bg, var(--surface));
   cursor: pointer;
   font: inherit;
   text-align: left;
