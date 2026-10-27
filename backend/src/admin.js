@@ -11,6 +11,7 @@ import { dispatchAlerts, dispatchSaleAlerts, storeArrivals } from './alerts.js';
 import { dispatchDeviceAlerts, dispatchDeviceSaleAlerts } from './devices.js';
 import { dispatchEmailAlerts } from './email_alerts.js';
 import { maybeSendCoverageDigest } from './coverage.js';
+import { dispatchSavedCarAlerts } from './saved_alerts.js';
 
 async function checkSecret(req, env, header, envKey) {
   const expected = env[envKey];
@@ -115,6 +116,16 @@ export async function handleCommit(req, env, ctx) {
       storeArrivals(env, newArrivals)
         .then((r) => console.log(`arrivals stored: ${r.stored}`))
         .catch((e) => console.log('arrival store failed:', e && e.message))
+    );
+  }
+  // Saved-car alerts (Pro): "gone" / "leaving soon" for every synced
+  // yard-visit list, resolved against the shards just committed. Runs on
+  // every commit, arrivals or not — a car can leave on a quiet scan.
+  if (ctx) {
+    ctx.waitUntil(
+      dispatchSavedCarAlerts(env)
+        .then((r) => console.log(`saved-car alerts: ${r.devices} devices, ${r.emails} emails, ${r.gone} gone, ${r.leaving} leaving, ${r.deferred} deferred`))
+        .catch((e) => console.log('saved-car alert dispatch failed:', e && e.message))
     );
   }
   // Coverage-request digest to the owner piggybacks the commit hook too —

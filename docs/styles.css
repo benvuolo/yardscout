@@ -1195,6 +1195,8 @@
   }
   .saved-row-badge.saved-row-none { color: var(--text-dim); }
   .saved-row-badge small { display: block; font-size: 0.6875rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+  .saved-item.saved-gone { opacity: 0.55; }
+  .saved-item.saved-gone .saved-item-name { text-decoration: line-through; text-decoration-thickness: 1px; }
   .saved-item-info { flex: 1; min-width: 0; }
   .saved-item-name { font-weight: 700; font-size: 0.875rem; }
   .saved-item-sub { font-size: 0.75rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

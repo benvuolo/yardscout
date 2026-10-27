@@ -19,7 +19,10 @@
 import { json, err, isoNow } from './util.js';
 import { sendApns, apnsConfigured } from './apns.js';
 import { sendFcm, fcmConfigured } from './fcm.js';
-import { watchMatches, digestText, salesForWatches, fmtSaleRange } from './alerts.js';
+import {
+  watchMatches, digestText, salesForWatches, fmtSaleRange, loadArrivals, sanitizeVpicFilters,
+} from './alerts.js';
+import { sanitizeSaved } from './saved_alerts.js';
 
 const MAX_WATCHES_PER_DEVICE = 20;
 const MAX_WATCHES_FREE = 5;
@@ -37,7 +40,7 @@ export function devicePushConfigured(env) {
  * Returns {ok}. Dead tokens (uninstall / rotation) are cleared in-place so
  * every dispatch path prunes identically — the APNs feedback contract,
  * extended to FCM 404/UNREGISTERED. */
-async function sendDevicePush(env, d, payload) {
+export async function sendDevicePush(env, d, payload) {
   if (d.apns_token && apnsConfigured(env)) {
     const res = await sendApns(env, d.apns_token, payload);
     if (res.gone) {
@@ -75,6 +78,9 @@ function sanitizeWatches(raw, tier) {
       if (lat == null || lng == null || !radiusMi) continue;
       radiusMi = Math.min(radiusMi, FREE_RADIUS_CAP_MI);
     }
+    // Trim / drivetrain filters are Pro — silently dropped for free devices
+    // (the client never shows them to free users; old clients never send them).
+    const { driveFilter, trimFilter } = tier === 'pro' ? sanitizeVpicFilters(w) : { driveFilter: '', trimFilter: '' };
     out.push({
       make, model,
       year_min: Number.isFinite(+w.yearMin) && +w.yearMin > 1900 ? Math.floor(+w.yearMin) : null,
@@ -82,14 +88,18 @@ function sanitizeWatches(raw, tier) {
       lat: (lat != null && lng != null) ? lat : null,
       lng: (lat != null && lng != null) ? lng : null,
       radius_mi: radiusMi,
+      drive_filter: driveFilter || null,
+      trim_filter: trimFilter || null,
     });
   }
   return out;
 }
 
 /** POST /v1/device/register — {deviceId, apnsToken?|fcmToken?, platform?,
- * tier?, watches?}. Idempotent upsert; called on push-enable and on every
- * watch/tier change. iOS sends apnsToken, Android sends fcmToken. */
+ * tier?, watches?, saved?}. Idempotent upsert; called on push-enable and on
+ * every watch/tier/saved-car change. iOS sends apnsToken, Android sends
+ * fcmToken. `saved` mirrors the yard-visit list for saved-car alerts (Pro);
+ * old clients omit it and the column stays empty. */
 export async function handleDeviceRegister(req, env) {
   let body;
   try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
@@ -104,6 +114,9 @@ export async function handleDeviceRegister(req, env) {
     ? String(body.fcmToken) : null;
   const tier = body.tier === 'pro' ? 'pro' : 'free';
   const watches = sanitizeWatches(body.watches, tier);
+  // Saved cars are stored for every tier (the list is free) but only Pro
+  // devices are dispatched — see saved_alerts.js.
+  const saved = sanitizeSaved(body.saved);
   const now = isoNow();
 
   // Push tokens must be unique — steal them from any stale row (reinstall
@@ -118,27 +131,25 @@ export async function handleDeviceRegister(req, env) {
   }
   const defaultPlatform = fcmToken ? 'android' : 'ios';
   await env.DB.prepare(
-    `INSERT INTO devices (id, apns_token, fcm_token, platform, tier, watches_json, created_at, updated_at)
-     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?7)
+    `INSERT INTO devices (id, apns_token, fcm_token, platform, tier, watches_json, saved_json, created_at, updated_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?8, ?7, ?7)
      ON CONFLICT (id) DO UPDATE SET
        apns_token = COALESCE(?2, apns_token), fcm_token = COALESCE(?3, fcm_token),
-       tier = ?5, watches_json = ?6, updated_at = ?7`
+       tier = ?5, watches_json = ?6, saved_json = ?8, updated_at = ?7`
   ).bind(deviceId, apnsToken, fcmToken, String(body.platform || defaultPlatform).slice(0, 12), tier,
-         JSON.stringify(watches), now).run();
+         JSON.stringify(watches), now, saved.length ? JSON.stringify(saved) : null).run();
 
   // New watches alert on FUTURE arrivals: seed dedupe with current matches.
-  const existing = (await env.DB.prepare(
-    'SELECT vehicle_id, year, make, model, lat, lng FROM arrivals'
-  ).all()).results || [];
+  const existing = await loadArrivals(env);
   const stmt = env.DB.prepare(
     'INSERT OR IGNORE INTO device_alerts_sent (device_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
   );
   const seeds = existing.filter((v) => watches.some((w) => watchMatches(w, v)))
-    .map((v) => stmt.bind(deviceId, String(v.vehicle_id), now));
+    .map((v) => stmt.bind(deviceId, String(v.id), now));
   for (let i = 0; i < seeds.length; i += 80) await env.DB.batch(seeds.slice(i, i + 80));
 
   const push = (!!apnsToken && apnsConfigured(env)) || (!!fcmToken && fcmConfigured(env));
-  return json({ ok: true, watches: watches.length, push });
+  return json({ ok: true, watches: watches.length, saved: saved.length, push });
 }
 
 /** POST /v1/device/test — {deviceId}: one test push to that device. */
@@ -263,12 +274,7 @@ export async function dispatchDeviceSaleAlerts(env) {
 export async function sendWeeklyDevicePushes(env) {
   if (!devicePushConfigured(env)) return { devices: 0, sends: 0, arrivals: 0 };
   const since = new Date(Date.now() - 7 * 86400_000).toISOString();
-  const arrivals = ((await env.DB.prepare(
-    'SELECT vehicle_id, year, make, model, row, location, lat, lng FROM arrivals WHERE seen_at >= ?1'
-  ).bind(since).all()).results || []).map((r) => ({
-    id: r.vehicle_id, year: r.year, make: r.make, model: r.model,
-    row: r.row, location: r.location, lat: r.lat, lng: r.lng,
-  }));
+  const arrivals = await loadArrivals(env, since);
 
   const rows = (await env.DB.prepare(
     `SELECT id, apns_token, fcm_token, watches_json FROM devices WHERE tier != 'pro' AND ${PUSHABLE}`

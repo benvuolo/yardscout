@@ -28,7 +28,7 @@ export async function handleWatchesList(req, env) {
   const user = await getSessionUser(req, env);
   if (!user) return err(401, 'auth_required', 'Sign in first.');
   const rows = (await env.DB.prepare(
-    'SELECT id, make, model, year_min, year_max, lat, lng, radius_mi, created_at FROM watches WHERE user_id = ?1 ORDER BY created_at DESC'
+    'SELECT id, make, model, year_min, year_max, lat, lng, radius_mi, drive_filter, trim_filter, created_at FROM watches WHERE user_id = ?1 ORDER BY created_at DESC'
   ).bind(user.id).all()).results || [];
   return json({ watches: rows, tier: resolveTier(user) });
 }
@@ -61,6 +61,13 @@ export async function handleWatchCreate(req, env) {
     radiusMi = Math.min(radiusMi, 250);
   }
 
+  // Trim / drivetrain filters are Pro (free watches stay make/model/years).
+  // Old clients never send them; an empty string means "any".
+  const { driveFilter, trimFilter } = sanitizeVpicFilters(body);
+  if (tier !== 'pro' && (driveFilter || trimFilter)) {
+    return err(403, 'pro_required', 'Trim and drivetrain filters are a Pro feature.');
+  }
+
   const maxWatches = tier === 'pro' ? MAX_WATCHES_PER_USER : MAX_WATCHES_FREE;
   const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM watches WHERE user_id = ?1')
     .bind(user.id).first();
@@ -72,12 +79,12 @@ export async function handleWatchCreate(req, env) {
 
   const id = crypto.randomUUID();
   await env.DB.prepare(
-    `INSERT INTO watches (id, user_id, make, model, year_min, year_max, lat, lng, radius_mi, created_at)
-     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)`
+    `INSERT INTO watches (id, user_id, make, model, year_min, year_max, lat, lng, radius_mi, drive_filter, trim_filter, created_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)`
   ).bind(id, user.id, make, model, yearMin, yearMax,
          (lat != null && lng != null) ? lat : null,
          (lat != null && lng != null) ? lng : null,
-         radiusMi, isoNow()).run();
+         radiusMi, driveFilter || null, trimFilter || null, isoNow()).run();
 
   // Watches alert on FUTURE arrivals only: seed the sent-log with every
   // current match in the arrivals window (a 10-day superset of the 3-day
@@ -88,16 +95,15 @@ export async function handleWatchCreate(req, env) {
     lat: (lat != null && lng != null) ? lat : null,
     lng: (lat != null && lng != null) ? lng : null,
     radius_mi: radiusMi,
+    drive_filter: driveFilter || null, trim_filter: trimFilter || null,
   };
-  const existing = (await env.DB.prepare(
-    'SELECT vehicle_id, year, make, model, lat, lng FROM arrivals'
-  ).all()).results || [];
+  const existing = await loadArrivals(env);
   const seedStmt = env.DB.prepare(
     'INSERT OR IGNORE INTO alerts_sent (user_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
   );
   const now = isoNow();
   const seeds = existing.filter((v) => watchMatches(w, v))
-    .map((v) => seedStmt.bind(user.id, String(v.vehicle_id), now));
+    .map((v) => seedStmt.bind(user.id, String(v.id), now));
   for (let i = 0; i < seeds.length; i += 80) {
     await env.DB.batch(seeds.slice(i, i + 80));
   }
@@ -462,6 +468,46 @@ function canonModelLow(make, model) {
   return (ren && ren[low.replace(/[^a-z0-9]/g, '')]) || low;
 }
 
+/* ===== trim / drivetrain filters (Pro) =====
+ * Shared by every sync path (account watches, native devices, email
+ * watchers). Returns {driveFilter: '4x4'|'2wd'|'', trimFilter: string}.
+ * Both optional; old clients never send them. */
+export function sanitizeVpicFilters(w) {
+  const d = String(w?.driveFilter || '').toLowerCase();
+  const driveFilter = d === '4x4' || d === '2wd' ? d : '';
+  const trimFilter = String(w?.trimFilter || '').trim().slice(0, 40);
+  return { driveFilter, trimFilter };
+}
+
+/** The one matching rule for VIN-decode filters — mirrored verbatim by
+ * watchlistMatches() in docs/app.js. vpic = [trim, trimQuality, series,
+ * driveType] (the per-vehicle decode the shards carry).
+ *   drive '4x4' → driveType names 4WD or AWD; '2wd' → FWD, RWD or 4x2.
+ *     No decoded drive type → no match ("only cars whose VIN decode
+ *     confirms it").
+ *   trim → case-insensitive substring of trim OR series, only when the
+ *     decode's trimQuality is 'usable'. No usable decode → no match.
+ * TODO(manual-transmission): "manual confirmed" lives in
+ * docs/data/vehicle_extras.json, not in the shards — not filterable here yet. */
+export function vpicMatches(w, vpic) {
+  const drive = w.drive_filter || '';
+  const trim = String(w.trim_filter || '').trim().toLowerCase();
+  if (!drive && !trim) return true;
+  if (!Array.isArray(vpic)) return false;
+  if (drive) {
+    const dt = String(vpic[3] || '');
+    if (!dt) return false;
+    if (drive === '4x4' && !/4WD|AWD|4x4/i.test(dt)) return false;
+    if (drive === '2wd' && !/FWD|RWD|4x2/i.test(dt)) return false;
+  }
+  if (trim) {
+    if (vpic[1] !== 'usable') return false;
+    const hay = `${vpic[0] || ''} ${vpic[2] || ''}`.toLowerCase();
+    if (!hay.includes(trim)) return false;
+  }
+  return true;
+}
+
 export function watchMatches(w, v) {
   if (w.make && canonMakeLow(v.make) !== canonMakeLow(w.make)) return false;
   if (w.model && canonModelLow(v.make, v.model) !== canonModelLow(w.make, w.model)) return false;
@@ -471,7 +517,26 @@ export function watchMatches(w, v) {
     if (v.lat == null || v.lng == null) return false;
     if (haversineMiles(w.lat, w.lng, v.lat, v.lng) > w.radius_mi) return false;
   }
+  if (!vpicMatches(w, v.vpic)) return false;
   return true;
+}
+
+/** Rolling-window arrivals as the dispatch-shaped objects watchMatches
+ * expects (vpic parsed from vpic_json). Used by the seed-on-create paths
+ * and the weekly digests. */
+export async function loadArrivals(env, since = null) {
+  const sql = 'SELECT vehicle_id, year, make, model, row, location, lat, lng, vpic_json FROM arrivals'
+    + (since ? ' WHERE seen_at >= ?1' : '');
+  const stmt = env.DB.prepare(sql);
+  const rows = (await (since ? stmt.bind(since) : stmt).all()).results || [];
+  return rows.map((r) => {
+    let vpic = null;
+    if (r.vpic_json) { try { vpic = JSON.parse(r.vpic_json); } catch { vpic = null; } }
+    return {
+      id: r.vehicle_id, year: r.year, make: r.make, model: r.model,
+      row: r.row, location: r.location, lat: r.lat, lng: r.lng, vpic,
+    };
+  });
 }
 
 export function digestText(matches) {
@@ -533,6 +598,7 @@ export async function dispatchAlerts(env, arrivals) {
   // Active watches for users whose tier is currently pro (expiry honored).
   const rows = (await env.DB.prepare(
     `SELECT w.id AS wid, w.make, w.model, w.year_min, w.year_max, w.lat, w.lng, w.radius_mi,
+            w.drive_filter, w.trim_filter,
             u.id AS user_id, u.email, u.tier, u.tier_expires_at
        FROM watches w JOIN users u ON u.id = w.user_id`
   ).all()).results || [];
@@ -619,8 +685,8 @@ export async function storeArrivals(env, arrivals) {
   if (!Array.isArray(arrivals) || !arrivals.length) return { stored: 0 };
   const now = isoNow();
   const stmt = env.DB.prepare(
-    `INSERT INTO arrivals (vehicle_id, year, make, model, row, location, city, state, lat, lng, date_added, seen_at)
-     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)
+    `INSERT INTO arrivals (vehicle_id, year, make, model, row, location, city, state, lat, lng, date_added, seen_at, vpic_json)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13)
      ON CONFLICT (vehicle_id) DO NOTHING`   // first sighting wins — keeps seen_at honest
   );
   // D1 batches keep this to one round trip per chunk (a commit can carry
@@ -632,6 +698,7 @@ export async function storeArrivals(env, arrivals) {
       String(v.id), v.year ?? null, v.make ?? null, v.model ?? null,
       v.row ?? null, v.location ?? null, v.city ?? null, v.state ?? null,
       v.lat ?? null, v.lng ?? null, v.dateAdded ?? null, now,
+      Array.isArray(v.vpic) ? JSON.stringify(v.vpic.slice(0, 4)) : null,
     ));
     await env.DB.batch(batch);
     stored += batch.length;
@@ -647,16 +714,12 @@ export async function storeArrivals(env, arrivals) {
  * hears about the same car twice. */
 export async function sendWeeklyDigests(env) {
   const since = new Date(Date.now() - 7 * 86400_000).toISOString();
-  const arrivals = ((await env.DB.prepare(
-    'SELECT vehicle_id, year, make, model, row, location, lat, lng FROM arrivals WHERE seen_at >= ?1'
-  ).bind(since).all()).results || []).map((r) => ({
-    id: r.vehicle_id, year: r.year, make: r.make, model: r.model,
-    row: r.row, location: r.location, lat: r.lat, lng: r.lng,
-  }));
+  const arrivals = await loadArrivals(env, since);
   if (!arrivals.length) return { users: 0, emails: 0, arrivals: 0 };
 
   const rows = (await env.DB.prepare(
     `SELECT w.make, w.model, w.year_min, w.year_max, w.lat, w.lng, w.radius_mi,
+            w.drive_filter, w.trim_filter,
             u.id AS user_id, u.email, u.tier, u.tier_expires_at
        FROM watches w JOIN users u ON u.id = w.user_id`
   ).all()).results || [];

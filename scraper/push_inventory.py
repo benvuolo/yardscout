@@ -151,16 +151,22 @@ def build_arrivals(data: dict) -> list[dict]:
     yards = data["yards"]
     yf = data.get("yardFields", [])
     yi = {name: i for i, name in enumerate(yf)}
+    vpic = data.get("vpic", {})
     cutoff = (datetime.now(timezone.utc) - timedelta(days=ARRIVAL_WINDOW_DAYS)).strftime("%Y-%m-%d")
 
-    recent = [r for r in data["vehicles"] if str(r[IDX_DATE] or "") >= cutoff]
+    # vpic is keyed by global vehicle position, so carry the index along.
+    recent = [(i, r) for i, r in enumerate(data["vehicles"]) if str(r[IDX_DATE] or "") >= cutoff]
     # When the window overflows the cap, keep the NEWEST arrivals — those are
     # the ones nobody has been alerted about yet.
-    recent.sort(key=lambda r: str(r[IDX_DATE] or ""), reverse=True)
+    recent.sort(key=lambda ir: str(ir[1][IDX_DATE] or ""), reverse=True)
 
     out: list[dict] = []
-    for row in recent[:MAX_ARRIVALS]:
+    for i, row in recent[:MAX_ARRIVALS]:
         yard = yards[row[IDX_YARD]]
+        # VIN decode [trim, trimQuality, series, driveType] — the Worker's
+        # trim/drivetrain watch filters (Pro) match against it. Omitted when
+        # the VIN never decoded: such cars never match a filtered watch.
+        vp = vpic.get(str(i))
         out.append({
             "id": row[IDX_ID],
             "year": row[IDX_YEAR],
@@ -173,6 +179,7 @@ def build_arrivals(data: dict) -> list[dict]:
             "state": yard[yi["state"]] if "state" in yi else None,
             "lat": yard[yi["lat"]] if "lat" in yi else None,
             "lng": yard[yi["lng"]] if "lng" in yi else None,
+            **({"vpic": list(vp[:4])} if vp else {}),
         })
     return out
 
