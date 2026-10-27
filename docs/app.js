@@ -6352,7 +6352,7 @@ async function refreshNativeIapUi() {
       const { ok, status, data } = await postJson('checkout', {});
       if (ok && data.url) { location.href = data.url; return; }
       setMsg($id('ent-checkout-status'), status === 503
-        ? 'Web checkout isn\u2019t live quite yet — Pro is available in the iOS app.'
+        ? 'Web checkout isn\u2019t live quite yet — Pro is available in the iPhone and Android apps.'
         : (data.message || 'Could not start checkout — try again.'), true);
     } catch (e) {
       setMsg($id('ent-checkout-status'), 'Could not reach checkout — check your connection.', true);
