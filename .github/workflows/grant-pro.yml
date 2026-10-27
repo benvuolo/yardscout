@@ -46,7 +46,7 @@ jobs:
           body = {"email": os.environ["IN_EMAIL"], "note": os.environ["IN_NOTE"], "revoke": os.environ["IN_REVOKE"] == "true"}
           if os.environ["IN_MONTHS"].strip(): body["months"] = int(os.environ["IN_MONTHS"])
           req = urllib.request.Request("https://yardscout-api.yardscout.workers.dev/v1/admin/ent/grant", data=json.dumps(body).encode(),
-                                       headers={"content-type": "application/json", "x-ent-admin": os.environ["ENT_ADMIN_SECRET"]}, method="POST")
+                                       headers={"content-type": "application/json", "x-ent-admin": os.environ["ENT_ADMIN_SECRET"], "user-agent": "YardScout-GrantPro/1.0 (+https://yardscout.io; GitHub Actions)"}, method="POST")
           try:
               with urllib.request.urlopen(req, timeout=30) as r: print(r.read().decode())
           except urllib.error.HTTPError as e:
