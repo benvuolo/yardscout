@@ -1896,20 +1896,19 @@ function renderSavedSheet() {
       <div class="saved-yard-group">
         <div class="saved-yard-name">${yard} &middot; ${items.length} car${items.length > 1 ? 's' : ''}</div>
         ${items.map(([key, s]) => {
-          const range = savedRange(s);
           const best = (s.topParts && s.topParts[0]) ? s.topParts[0].name : '';
           return `
             <div class="saved-item">
-              <div class="saved-row-badge">${s.row || '?'}<small>row</small></div>
+              ${s.row
+                ? `<div class="saved-row-badge">${escapeHtml(String(s.row))}<small>row</small></div>`
+                : '<div class="saved-row-badge saved-row-none" title="The yard hasn\u2019t published a row for this car yet \u2014 ask at the counter">&mdash;<small>no row yet</small></div>'}
               <div class="saved-item-info">
                 <div class="saved-item-name">${s.year} ${s.make} ${s.model}</div>
-                <div class="saved-item-sub">${!best ? 'No flagged parts' : isPro()
-                  ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '')
-                  : s.topParts.length + ' flagged part' + (s.topParts.length > 1 ? 's' : '') + ' \u2014 names with Pro'}</div>
+                <div class="saved-item-sub">${[s.dateAdded ? 'Set out ' + (parseYardDate(s.dateAdded) ? parseYardDate(s.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : s.dateAdded) : '',
+                  !best ? '' : isPro()
+                    ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '')
+                    : s.topParts.length + ' part' + (s.topParts.length > 1 ? 's' : '') + ' to check'].filter(Boolean).join(' \u00b7 ')}</div>
               </div>
-              ${range && range.hi > 0 ? (isPro()
-                ? `<div class="saved-item-profit" title="${range.unknownCost ? 'What these parts would cost to buy used online — pull cost not on this yard\u2019s published price list, check at the yard' : 'Estimated savings vs buying these parts used online, after this yard\u2019s list pull costs — if parts are good'}">${formatPrice(range.lo)}&ndash;${formatPrice(range.hi)}${range.unknownCost ? '<small style="display:block;font-weight:400;opacity:0.7;">online price</small>' : '<small style="display:block;font-weight:400;opacity:0.7;">est. savings</small>'}</div>`
-                : `<div class="saved-item-profit locked-blur" role="button" onclick="openUpgradeSheet('saved-value')">${LOCKED_PRICE_MASK}</div>`) : ''}
               <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">${ICON.x}</button>
             </div>`;
         }).join('')}
@@ -2051,7 +2050,10 @@ async function shareVehicle(key) {
   const text = `${bits.join(' — ')} at ${v.location}${arrived ? ', set out ' + arrived : ''}`;
   const url = shareUrlFor(v);
   track('share-used');
-  if (navigator.share) {
+  // Phones get the native share sheet; on a desktop that sheet is just a
+  // clumsy way to copy, so copy the link straight to the clipboard there.
+  const touchDevice = IS_NATIVE || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+  if (navigator.share && touchDevice) {
     try { await navigator.share({ title: 'YardScout find', text, url }); return; } catch (e) { /* cancelled/unsupported -> fall through */ }
   }
   try {

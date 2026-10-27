@@ -1102,6 +1102,7 @@
     font-family: var(--font-mono);
     font-weight: 700; font-size: 0.9375rem;
   }
+  .saved-row-badge.saved-row-none { color: var(--text-dim); }
   .saved-row-badge small { display: block; font-size: 0.6875rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
   .saved-item-info { flex: 1; min-width: 0; }
   .saved-item-name { font-weight: 700; font-size: 0.875rem; }
