@@ -1595,7 +1595,7 @@ function populateYardFilter() {
  * disabled until one is set. */
 function updateFilterAvailability() {
   const hasLoc = !!activeZipCoords;
-  ['live-radius', 'live-filter-make', 'live-filter-location', 'live-filter-match', 'live-sort',
+  ['live-radius', 'live-filter-make', 'live-filter-location', 'live-sort',
    'live-filter-year-min', 'live-filter-year-max']
     .forEach(id => { const el = document.getElementById(id); if (el) el.disabled = !hasLoc; });
   // Model stays a cascade: enabled only when a location AND a make are set.
@@ -2230,7 +2230,6 @@ function getFilteredLive() {
   const modelFilter = makeFilter ? selectedModels : null;   // empty set = all models
   const yearMin = parseInt(document.getElementById('live-filter-year-min').value, 10) || null;
   const yearMax = parseInt(document.getElementById('live-filter-year-max').value, 10) || null;
-  const matchFilter = document.getElementById('live-filter-match').value;
   const locationFilter = document.getElementById('live-filter-location').value;
   let sortBy = document.getElementById('live-sort').value;
   // Belt & suspenders: value sorts never apply for free even if the select
@@ -2255,7 +2254,6 @@ function getFilteredLive() {
     // Confirmed from the VIN decode or the yard's own listing — cars with
     // unknown transmission are excluded rather than guessed at (the inline
     // hint under the control says so).
-    if (matchFilter === 'manual' && !isConfirmedManual(v)) return false;
     return true;
   });
 
@@ -2338,7 +2336,6 @@ function updateLiveFilterCount() {
   if (document.getElementById('live-filter-year-min').value
       || document.getElementById('live-filter-year-max').value) n++;
   if (document.getElementById('live-filter-location').value) n++;
-  if (document.getElementById('live-filter-match').value) n++;
   // Radius counts only when moved off the default — the untouched 100 mi
   // ships with the app, so it isn't "a filter the user applied".
   if (activeZipCoords && document.getElementById('live-radius').value !== DEFAULT_RADIUS) n++;
@@ -2775,21 +2772,6 @@ document.getElementById('live-sort').addEventListener('change', e => {
   }
   if (!PRO_SORTS.has(val)) _lastFreeSort = val;
   localStorage.setItem('jh_sort', val);   // explicit choice, remembered
-  renderLive();
-});
-/* Self-heal, same pattern as the jh_sort restore above: a browser's form
- * restore (or an old WebView's saved state) can re-select a match option
- * that no longer exists, leaving the select with no valid choice and the
- * grid filtered by nothing the UI can show. Snap back to All cars. */
-(() => {
-  const sel = document.getElementById('live-filter-match');
-  if (sel.selectedIndex < 0 || ![...sel.options].some(o => o.value === sel.value)) sel.value = '';
-})();
-document.getElementById('live-filter-match').addEventListener('change', (e) => {
-  // The manual option under-counts by design (confirmed-only) — say so right
-  // where the choice is made, not in a hover-only tooltip phones never see.
-  const hint = document.getElementById('manual-filter-hint');
-  if (hint) hint.style.display = e.target.value === 'manual' ? '' : 'none';
   renderLive();
 });
 // The old spotted-part filter is the Parts tab's browse mode now — the
