@@ -454,7 +454,18 @@ const LOCKED_PART_PLACEHOLDERS = [
 ];
 const LOCKED_PRICE_MASK = '$\u2022\u2022\u2022&ndash;$\u2022\u2022\u2022';
 
-function vinMetaHtml(v) {
+/* The VIN decoder's trim label, as a shopper would say it: drop the
+ * "Grade:" prefix vPIC prepends on some makes, and show Toyota/Lexus
+ * "Luxury" as the Limited it is (same alias the trim watch uses). */
+function displayTrim(trim, make) {
+  let t = trim != null ? String(trim).trim().replace(/^grade:\s*/i, '') : '';
+  if (!t) return '';
+  const mk = String(make || '').toLowerCase();
+  if ((mk === 'toyota' || mk === 'lexus') && /^luxury$/i.test(t)) t = 'Limited';
+  return t;
+}
+
+function vinMetaHtml(v, unlocked = false) {
   if (!v.vin || !String(v.vin).trim()) return '';
   const show = String(v.vin).trim();
   // Quiet metadata, not badge soup: VIN + icon copy button, then plain dim
@@ -470,7 +481,7 @@ function vinMetaHtml(v) {
   // a value signal.
   let vpic = '';
   const specBits = [];
-  const vt = v.vpicTrim != null ? String(v.vpicTrim).trim() : '';
+  const vt = displayTrim(v.vpicTrim, v.make);
   if (vt && (v.vpicTrimQuality === 'usable' || v.vpicDecodeWell === true)) {
     specBits.push(`trim: ${escapeHtml(vt)}`);
   } else if (v.vpicSeries) {
@@ -479,15 +490,17 @@ function vinMetaHtml(v) {
   if (v.vpicDriveType) {
     const d = String(v.vpicDriveType);
     const short = /4wd|4x4|four/i.test(d) ? '4WD' : /awd|all/i.test(d) ? 'AWD'
-      : /rwd|rear/i.test(d) ? 'RWD' : /fwd|front/i.test(d) ? 'FWD' : '';
+      : /rwd|rear/i.test(d) ? 'RWD' : /fwd|front/i.test(d) ? 'FWD' : /4x2|2wd/i.test(d) ? '2WD' : '';
     if (short) specBits.push(short);
   }
   // (Engine deliberately NOT included here — it already renders on the
   // card's spec line below; repeating it read as a bug.)
   if (specBits.length) {
-    vpic = isPro()
-      ? ` <span class="meta-note" title="Factory build — trim/drivetrain decoded from the VIN via NHTSA VPIC, engine from the VIN or the yard\u2019s own feed — so you know what to look for before walking over">${specBits.join(' &middot; ')} (factory spec)</span>`
-      : '';   // free cards carry one Pro link (the savings line) — not a second one per VIN
+    // Pro sees it on every card; the free sample card shows it too, lit up,
+    // so the value of the decode is visible before upgrading.
+    const title = 'Factory build \u2014 trim/drivetrain decoded from the VIN via NHTSA VPIC \u2014 so you know what to look for before walking over';
+    if (isPro()) vpic = ` <span class="meta-note" title="${title}">${specBits.join(' &middot; ')} (factory spec)</span>`;
+    else if (unlocked) vpic = ` <span class="meta-note meta-spec-sample" title="${title}">${specBits.join(' &middot; ')} (factory spec \u2014 Pro)</span>`;
   }
   let mismatch = '';
   if (v.vpicMismatch) {
@@ -2757,7 +2770,7 @@ function renderLive() {
           <div style="min-width:0;">
             <div class="car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + escapeHtml(v.row) + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
-            <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${freshNote}${vinMetaHtml(v)}</div>
+            <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${freshNote}${vinMetaHtml(v, unlocked)}</div>
             ${specBits.length ? `<div class="car-meta car-specs">${specBits.map(escapeHtml).join(' &middot; ')}</div>` : ''}
             ${lotClock}
             ${scanLine}

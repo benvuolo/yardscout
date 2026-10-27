@@ -791,6 +791,7 @@
   .car-meta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 0.3rem; line-height: 1.6; word-break: break-word; }
   .meta-note { color: var(--text-dim); opacity: 0.85; }
   .meta-note::before { content: '· '; }
+  .meta-note.meta-spec-sample { color: var(--accent); opacity: 1; font-weight: 600; }
   .meta-warn { color: var(--demand-slow); font-weight: 600; }
   .meta-warn::before { content: '· '; }
   .car-badges { display: flex; gap: 0.25rem; align-items: center; flex-shrink: 0; }
