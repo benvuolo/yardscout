@@ -379,7 +379,7 @@ function _lookupYardCostUncached(partName, location) {
     let best = rows.find(r => names.includes(r.part.toLowerCase().trim()));
     if (!best) {
       const kw = bestMatch.kw;
-      const sub = ['bulb', 'switch', 'relay', 'bracket', 'cover', 'bezel', 'trim', 'sensor', 'fuse', 'cable', 'hose', 'belt', 'gasket', 'seal', 'bolt', 'clip', 'wire', 'harness', 'motor', 'actuator', 'regulator', 'latch', 'lock', 'handle', 'hinge', 'lever', 'knob', 'pad', 'liner', 'strip', 'molding', 'emblem', 'bushing', 'mount', 'track', 'rail', 'frame', 'heater', 'control', 'module', 'air bag', 'airbag'].filter(w => !kw.includes(w));
+      const sub = ['bulb', 'switch', 'relay', 'bracket', 'cover', 'bezel', 'trim', 'sensor', 'fuse', 'cable', 'hose', 'belt', 'gasket', 'seal', 'bolt', 'clip', 'wire', 'harness', 'motor', 'actuator', 'regulator', 'latch', 'lock', 'handle', 'hinge', 'lever', 'knob', 'pad', 'liner', 'strip', 'molding', 'emblem', 'bushing', 'mount', 'track', 'rail', 'frame', 'heater', 'control', 'module', 'air bag', 'airbag', 'back seat', 'rear seat', 'jump seat', 'child seat'].filter(w => !kw.includes(w));
       const cands = rows.filter(r => { const pl = r.part.toLowerCase(); return pl.includes(kw) && !sub.some(w => pl.includes(w)); });
       // Prefer rows that START with the part word (SEAT BUCKET over AIR BAG-
       // SEAT), then the shortest name.
