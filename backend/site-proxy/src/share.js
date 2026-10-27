@@ -169,20 +169,20 @@ function layout({ title, desc, canonical, body, status = 200, robots = 'index,fo
 <meta name="description" content="${esc(desc)}">
 <meta name="robots" content="${robots}">
 <link rel="canonical" href="${esc(canonical)}">
-<link rel="icon" type="image/png" sizes="192x192" href="${SITE}/icon-192.png?v=2"><link rel="apple-touch-icon" href="${SITE}/apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" sizes="192x192" href="${SITE}/favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="${SITE}/favicon-32.png?v=3"><link rel="apple-touch-icon" href="${SITE}/apple-touch-icon.png?v=3">
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="YardScout">
 <meta property="og:title" content="${esc(ogTitle || title)}"><meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${esc(canonical)}"><meta property="og:image" content="${OG_IMAGE}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(ogTitle || title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${OG_IMAGE}">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Saira+Stencil+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${SITE}/styles.css">
 <style>${CSS}</style></head>
 <body>
 <header>
   <div class="header-row">
-    <a href="${SITE}/" class="row-plate" aria-label="YardScout home" style="text-decoration:none">YS</a>
-    <div class="wordmark"><h1><a href="${SITE}/" style="color:inherit;text-decoration:none">YardScout</a></h1><span class="head-spec">${esc(spec)}</span></div>
+    <a href="${SITE}/" aria-label="YardScout home" style="display:block"><svg class="brand-mark" viewBox="4 29 122 72" aria-hidden="true"><g fill="var(--mark-rim)"><circle cx="40" cy="65" r="36"/><circle cx="90" cy="65" r="36"/></g><g fill="#F26B1D"><circle cx="40" cy="65" r="32"/><circle cx="90" cy="65" r="32"/></g><g transform="translate(65 64) scale(0.88) translate(-66.5 -63)"><path d="M16 76 V62 Q16 59 19 59 H35 L46 44.5 Q47 43.5 49 43.5 H79 Q81 43.5 82 44.5 L92 58 L110 60 Q114 60.5 114 63 V76 Q114 79 111 79 H106 A10 10 0 0 0 86 79 H44 A10 10 0 0 0 24 79 H19 Q16 79 16 76 Z" fill="#1C1C1A"/><path d="M49 46.8 H78.3 L88 57.4 H46.6 L44 54.2 Z" fill="#F26B1D"/><rect x="63" y="46" width="2.6" height="12" fill="#1C1C1A"/><g fill="#1C1C1A"><circle cx="34" cy="80" r="8"/><circle cx="96" cy="80" r="8"/></g><g fill="#F26B1D"><circle cx="34" cy="80" r="3.2"/><circle cx="96" cy="80" r="3.2"/></g></g></svg></a>
+    <div class="wordmark"><h1><a href="${SITE}/" style="color:inherit;text-decoration:none">Yard<span class="wm-scout">Scout</span></a></h1><span class="head-spec">${esc(spec)}</span></div>
   </div>
   <a class="btn" href="${SITE}/" style="text-decoration:none">Open the app</a>
 </header>
