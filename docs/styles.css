@@ -1481,6 +1481,9 @@
     border-top: 1px solid var(--border);
   }
   .yard-actions .btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+  .yard-actions a.btn { text-decoration: none; display: inline-flex; align-items: center; }
+  .public-pages-note { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; margin: -0.3rem 0 0.9rem; }
+  .public-pages-note a { color: var(--accent); }
   .yard-price-link {
     font-family: var(--font-mono);
     font-size: 0.6875rem;

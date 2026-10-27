@@ -2804,6 +2804,12 @@ const CHAIN_TOOL_POLICY = [
   [/^harry'?s[\s-]*u[\s-]*pull/i, 'Hand tools only \u2014 NO sawzalls or grinders'],
 ];
 
+/* Same slug rule as the public yard pages (backend/site-proxy/src/share.js). */
+function yardSlug(name) {
+  return String(name || '').toLowerCase().replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
 function chainToolPolicy(location) {
   const hit = CHAIN_TOOL_POLICY.find(c => c[0].test(location));
   return hit ? hit[1] : 'Tool rules unpublished \u2014 call before bringing power tools';
@@ -3204,6 +3210,7 @@ function renderYards() {
         </div>
         <div class="yard-actions">
           <button type="button" class="btn yard-view-btn">View cars</button>
+          <a class="btn yard-week-link" href="https://yardscout.io/yard/${yardSlug(y.location)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Public page: this yard's set-outs from the last 7 days, shareable">This week &#8599;</a>
           ${yardPriceList(y.location)
             ? '<button type="button" class="btn yard-prices-btn">' + ICON.tag + ' Price list</button>'
             : (chain ? `<a class="yard-price-link" href="${chain[1]}" target="_blank" rel="noopener">${chain[2]} price list</a>` : '<span class="yard-price-none">Prices posted at the yard</span>')}
