@@ -275,7 +275,8 @@ export async function renderYardPage(slug) {
   const where = [city, state].filter(Boolean).join(', ');
   const title = `What's at ${name} this week`;
   const desc = `${total} cars on the lot at ${name}${where ? ' (' + where + ')' : ''}, ${recent.length} set out in the last 7 days${avg ? `, cars typically last ~${avg} days here` : ''}. Live list, refreshed every 4 hours.`;
-  const SHOW = 80;
+  // A taste, not a search tool: the full list (and filters) live in the app.
+  const SHOW = 30;
   const items = recent.slice(0, SHOW).map((r) => {
     const key = r[iVin] || String(r[iId]);
     const car = `${r[iYear]} ${r[iMake]} ${r[iModel]}`.trim();
@@ -388,14 +389,19 @@ export async function renderLandedPage(slug) {
   const hit = Object.entries(landed.makes).find(([mk]) => slugify(mk) === slug);
   if (!hit) return layout({ title: 'Make not found — YardScout', desc: '', canonical: SITE + '/landed', status: 404, robots: 'noindex', cache: 120, body: `<h2 class="share-h">No cars of that make on the lists</h2><div class="cta"><a class="btn btn-primary" href="${SITE}/landed">All makes</a></div>` });
   const [mk, m] = hit;
+  // Public taste of the week: newest 40 per make, grouped by model. The
+  // nationwide search this would otherwise become is the Pro "Any distance"
+  // feature in the app, so the page stops well short of it.
+  const SHOWN = 40;
+  const shown = m.recent.slice(0, SHOWN);
   const byModel = new Map();
-  for (const r of m.recent) { const k = String(r[2] || '—'); if (!byModel.has(k)) byModel.set(k, []); byModel.get(k).push(r); }
+  for (const r of shown) { const k = String(r[2] || '—'); if (!byModel.has(k)) byModel.set(k, []); byModel.get(k).push(r); }
   const models = [...byModel.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
   const yardName = (i) => (landed.yards[i] || [])[0] || '';
   const yardState = (i) => (landed.yards[i] || [])[2] || '';
   const blocks = models.map(([model, rows]) => `<div class="section">${esc(mk)} ${esc(model)} <span>· ${rows.length}</span></div>
-<div class="car-card"><ul class="rowlist">${rows.slice(0, 40).map((r) => `<li><a href="${SITE}/car/${encodeURIComponent(r[5])}">${esc(r[0])} ${esc(mk)} ${esc(model)}<span class="where">${esc(yardName(r[6]))}${yardState(r[6]) ? ', ' + esc(yardState(r[6])) : ''}</span></a><span class="meta">${r[3] ? 'Row ' + esc(r[3]) + '<br>' : ''}${esc(fmtDate(r[4]))}</span></li>`).join('')}</ul>${rows.length > 40 ? `<p class="note">+ ${rows.length - 40} more in the app</p>` : ''}</div>`).join('');
-  const truncated = m.recentCount > m.recent.length ? `<p class="note" style="margin-top:0">Showing the newest ${m.recent.length} of ${m.recentCount} set-outs; the full list is in the app.</p>` : '';
+<div class="car-card"><ul class="rowlist">${rows.map((r) => `<li><a href="${SITE}/car/${encodeURIComponent(r[5])}">${esc(r[0])} ${esc(mk)} ${esc(model)}<span class="where">${esc(yardName(r[6]))}${yardState(r[6]) ? ', ' + esc(yardState(r[6])) : ''}</span></a><span class="meta">${r[3] ? 'Row ' + esc(r[3]) + '<br>' : ''}${esc(fmtDate(r[4]))}</span></li>`).join('')}</ul></div>`).join('');
+  const truncated = m.recentCount > shown.length ? `<p class="note" style="margin-top:0">Showing the newest ${shown.length} of ${m.recentCount.toLocaleString()} set-outs this week. The full list, filters and alerts are in the app.</p>` : '';
   const desc = `${m.recentCount} ${mk} set out at self-service yards in the last ${landed.days} days (${m.total.toLocaleString()} on the lots right now), with row numbers and yards. As of ${fmtStamp(landed.scrapedAt)}.`;
   const body = `<p class="kicker">Last ${landed.days} days · <a href="${SITE}/landed">all makes</a></p>
 <h2 class="share-h">${m.recentCount} ${esc(mk)}${m.recentCount === 1 ? '' : 's'} landed in self-service yards this week</h2>
