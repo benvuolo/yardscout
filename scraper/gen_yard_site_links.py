@@ -142,6 +142,12 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^byot auto parts - beaumont", None,
      "https://www.byotautoparts.com/locations/beaumont/inventory/",
      "BYOT per-location inventory page"),
+    (r"^byot auto parts - baton rouge", None,
+     "https://www.byotautoparts.com/locations/baton-rouge/inventory/",
+     "BYOT per-location inventory page"),
+    (r"^byot auto parts - jackson", None,
+     "https://www.byotautoparts.com/locations/jackson-ms/inventory/",
+     "BYOT per-location inventory page"),
     (r"^wilbert'?s u-pull-it", "Wilbert's U-Pull-It", None,
      "3 NY yards share one search page (location picker on the page)"),
 ]

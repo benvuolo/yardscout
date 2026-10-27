@@ -131,7 +131,7 @@
         "method": "POST",
         "auth": "none",
         "format": "html-table (json for getStores/getMakes)",
-        "requests_per_scan": "~46 (getMakes + one getVehicles per make with store=0; 10s apart per robots crawl-delay \u2248 8 min)",
+        "requests_per_scan": "~46 (getMakes + one getVehicles per make with store=0; 10s apart per robots crawl-delay ≈ 8 min)",
         "notes": "Same WP plugin family as U-Pull-R (footable + 'glennForm' fingerprints; plugin dirs PnsV1_3.3 / gm_vehicle_search). action=getStores returns JSON store list; action=getMakes returns <option> HTML; action=getVehicles&makes={Make}&models=0&store=0 returns an HTML footable (img, Year, Model, Date Received with ISO data-value, Row, Store display name, Color, Stock#, VIN) across all stores. Stock numbers (STK#) are chain-unique (id basis: pns-{stock}). Chain-wide price list at /parts-pricing/ (~810 unique parts) -> pns_pricing.json. Vehicle photos hosted at app.pullnsaveapp.com (own app, not Row52) but photos are not captured per policy. robots.txt Crawl-delay: 10 - honored (PNS_DELAY_SEC), full scan ~46 requests x 10s = ~8 min."
       },
       "update_freshness": "live",
@@ -543,7 +543,7 @@
         "auth": "none",
         "format": "html",
         "requests_per_scan": 1,
-        "notes": "Entire inventory server-rendered as one DataTables <table id=\"vehicles\"> (~1,250 rows). Columns: Year, Make, Model, Color, Engine, Row, Arrival Date (MM/DD/YY, 01/01/70 = unknown). No VIN, no stock number \u2014 ids are a stable hash of the identifying fields. Price list at /price-list/ is a 3-column table (part, price, core) -> indy_pricing.json. First user-requested yard (feedback email 2026-10-16)."
+        "notes": "Entire inventory server-rendered as one DataTables <table id=\"vehicles\"> (~1,250 rows). Columns: Year, Make, Model, Color, Engine, Row, Arrival Date (MM/DD/YY, 01/01/70 = unknown). No VIN, no stock number — ids are a stable hash of the identifying fields. Price list at /price-list/ is a 3-column table (part, price, core) -> indy_pricing.json. First user-requested yard (feedback email 2026-10-16)."
       },
       "update_freshness": "live (same-day Arrival Date values observed)",
       "robots": "allow all, no crawl-delay",
@@ -757,7 +757,7 @@
         "auth": "none",
         "format": "html-table",
         "requests_per_scan": "~255 (5 yards x (GetMakes + one POST per make), 1s apart on the one host)",
-        "notes": "Multipart POST / with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, ROW only - no color, no arrival date). No stock # / VIN: ids are content hashes jalopy-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: POST /Home/GetMakes {yardId} (JSON, ~50 makes per yard). Config: CRUSH_MVC_SITES['jalopy'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: none published (/Home/PartPrices 404). robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / \u00a76.2. Live 2026-10-27: 6557 vehicles (Boise 894; Caldwell 1192; Nampa 2037; Garden City 857; Twin Falls 1577). First Idaho coverage: Treasure Valley x4 + Twin Falls."
+        "notes": "Multipart POST / with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, ROW only - no color, no arrival date). No stock # / VIN: ids are content hashes jalopy-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: POST /Home/GetMakes {yardId} (JSON, ~50 makes per yard). Config: CRUSH_MVC_SITES['jalopy'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: none published (/Home/PartPrices 404). robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / §6.2. Live 2026-10-27: 6557 vehicles (Boise 894; Caldwell 1192; Nampa 2037; Garden City 857; Twin Falls 1577). First Idaho coverage: Treasure Valley x4 + Twin Falls."
       },
       "update_freshness": "live (jalopybot.com tracks the same app daily; no dates in the feed - dateAdded is '' / unknown)",
       "robots": "no robots.txt (404)",
@@ -817,7 +817,7 @@
         "auth": "none",
         "format": "html-table",
         "requests_per_scan": "~40 (page GET + one POST per make, 1s apart)",
-        "notes": "Multipart POST / with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, ROW only - no color, no arrival date). No stock # / VIN: ids are content hashes trusty-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: server-rendered #car-make select on /Home/Inventory (~38 makes). Config: CRUSH_MVC_SITES['trusty'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: none usable (/Home/PartPrices returns HTTP 500 - re-check). robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / \u00a76.2. Live 2026-10-27: 1381 vehicles (Caldwell 1381). A mile from Jalopy Caldwell; the yard's own site is the marketing page, inventory lives on the inventory. subdomain."
+        "notes": "Multipart POST / with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, ROW only - no color, no arrival date). No stock # / VIN: ids are content hashes trusty-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: server-rendered #car-make select on /Home/Inventory (~38 makes). Config: CRUSH_MVC_SITES['trusty'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: none usable (/Home/PartPrices returns HTTP 500 - re-check). robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / §6.2. Live 2026-10-27: 1381 vehicles (Caldwell 1381). A mile from Jalopy Caldwell; the yard's own site is the marketing page, inventory lives on the inventory. subdomain."
       },
       "update_freshness": "appears live (no dates in the feed - dateAdded is '' / unknown)",
       "robots": "no robots.txt (404)",
@@ -844,7 +844,7 @@
         "auth": "none",
         "format": "html-table",
         "requests_per_scan": "~39 (page GET + one POST per make, 1s apart)",
-        "notes": "Multipart POST /Home/Inventory with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, COLOR, REFERENCE (engine/trim), ROW, ARRIVAL DATE MM/DD/YYYY). No stock # / VIN: ids are content hashes mmupullit-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: server-rendered #car-make select on /Home/Inventory (~37 makes). Config: CRUSH_MVC_SITES['mmupullit'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: /Home/PartPrices 4-col (PART DESCRIPTION, PRICE, BASIS, CORE CHARGE) -> mmupullit_pricing.json. robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / \u00a76.2. Live 2026-10-27: 631 vehicles (Buffalo 631). First Buffalo / western-NY yard."
+        "notes": "Multipart POST /Home/Inventory with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, COLOR, REFERENCE (engine/trim), ROW, ARRIVAL DATE MM/DD/YYYY). No stock # / VIN: ids are content hashes mmupullit-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: server-rendered #car-make select on /Home/Inventory (~37 makes). Config: CRUSH_MVC_SITES['mmupullit'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: /Home/PartPrices 4-col (PART DESCRIPTION, PRICE, BASIS, CORE CHARGE) -> mmupullit_pricing.json. robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / §6.2. Live 2026-10-27: 631 vehicles (Buffalo 631). First Buffalo / western-NY yard."
       },
       "update_freshness": "live (2026 Arrival Date values observed)",
       "robots": "no robots.txt (404)",
@@ -871,7 +871,7 @@
         "auth": "none",
         "format": "html-table",
         "requests_per_scan": "~41 (page GET + one POST per make, 1s apart)",
-        "notes": "Multipart POST /Home/Inventory with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, COLOR, ENGINE (mostly blank), ROW, ARRIVAL DATE MM/DD/YYYY). No stock # / VIN: ids are content hashes polkpickpay-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: server-rendered #car-make select on /Home/Inventory (~39 makes). Config: CRUSH_MVC_SITES['polkpickpay'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: /Home/PartPrices 4-col (PART DESCRIPTION, PRICE, BASIS, CORE RETURN) -> polkpickpay_pricing.json. robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / \u00a76.2. Live 2026-10-27: 991 vehicles (Lakeland 991). ~25 mi from Budget U-Pull-It Bartow (referral geography, EXPANSION_CANDIDATES.md \u00a75)."
+        "notes": "Multipart POST /Home/Inventory with VehicleMake={MAKE}, VehicleModel empty (plus YardId on multi-yard tenants) returns the whole make as an HTML table; header-driven parse (YEAR, MAKE, MODEL, COLOR, ENGINE (mostly blank), ROW, ARRIVAL DATE MM/DD/YYYY). No stock # / VIN: ids are content hashes polkpickpay-{code}-sha1(year|make|model|color|engine|row|date)[:12] with -N for identical rows. Make list: server-rendered #car-make select on /Home/Inventory (~39 makes). Config: CRUSH_MVC_SITES['polkpickpay'] in junkyard_scraper.py (fetch_crush_mvc_site). Price list: /Home/PartPrices 4-col (PART DESCRIPTION, PRICE, BASIS, CORE RETURN) -> polkpickpay_pricing.json. robots.txt 404. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'CRUSH MVC app' / §6.2. Live 2026-10-27: 991 vehicles (Lakeland 991). ~25 mi from Budget U-Pull-It Bartow (referral geography, EXPANSION_CANDIDATES.md §5)."
       },
       "update_freshness": "live (2026 Arrival Date values observed)",
       "robots": "no robots.txt (404)",
@@ -927,6 +927,22 @@
           "state": "TX",
           "lat": 30.0577,
           "lng": -94.2193
+        },
+        {
+          "yard_id": 1123,
+          "name": "BYOT Auto Parts - Baton Rouge",
+          "city": "Port Allen",
+          "state": "LA",
+          "lat": 30.4534,
+          "lng": -91.2101
+        },
+        {
+          "yard_id": 1123,
+          "name": "BYOT Auto Parts - Jackson",
+          "city": "Jackson",
+          "state": "MS",
+          "lat": 32.2888,
+          "lng": -90.1891
         }
       ]
     },
@@ -1009,7 +1025,7 @@
         "auth": "none (but requires a Chrome TLS fingerprint)",
         "format": "html (500 cards/page, ~15 pages)",
         "requests_per_scan": "~16 at 2s",
-        "notes": "UN-PARKED 2026-10-18: Cloudflare's TLS-fingerprint challenge blocks plain requests from everywhere, so the adapter tries plain requests first then falls back to curl_cffi with impersonate=chrome (lazy import; installed in scan.yml). Cards carry Stock (PAP######, id basis), Year, combined Make/Model (YardSmart style, make often repeated), VIN, Location (Fredericksburg|Stafford), Row (often blank), Set Date (ISO). robots.txt allow-all. CI CAVEAT (2026-10-19): GitHub Actions gets HTTP 521 even through curl_cffi (residential is clean) \u2014 scraper/update_papva_snapshot.sh pushes a daily committed snapshot (launchd io.yardscout.papva-snapshot, 08:35) and the adapter falls back to it on an empty crawl, Ace pattern."
+        "notes": "UN-PARKED 2026-10-18: Cloudflare's TLS-fingerprint challenge blocks plain requests from everywhere, so the adapter tries plain requests first then falls back to curl_cffi with impersonate=chrome (lazy import; installed in scan.yml). Cards carry Stock (PAP######, id basis), Year, combined Make/Model (YardSmart style, make often repeated), VIN, Location (Fredericksburg|Stafford), Row (often blank), Set Date (ISO). robots.txt allow-all. CI CAVEAT (2026-10-19): GitHub Actions gets HTTP 521 even through curl_cffi (residential is clean) — scraper/update_papva_snapshot.sh pushes a daily committed snapshot (launchd io.yardscout.papva-snapshot, 08:35) and the adapter falls back to it on an empty crawl, Ace pattern."
       },
       "update_freshness": "live (same-day set dates observed)",
       "robots": "allow all (wp-admin excepted)",
@@ -1075,7 +1091,7 @@
         "auth": "none",
         "format": "json",
         "requests_per_scan": "~245 shared with the Pickers tenant (49 makes x 9 locations + year-bucket splits) at 2s",
-        "notes": "Shared fetch_vinplus_inventory adapter, tenant yard_id=road_tested_parts. GET /api/yard-info/{tenant} lists locations; GET /api/vehicle-groups is the global 49-make catalog. Results CAP AT 100/query \u2014 the adapter queries per make per location_id and recursively bisects year ranges on exactly-100 responses. Rows: year, make, model, vin, stock (id basis, location-code qualified), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. NOTE: utah-pic-a-part and ipull-upull are also VinPlus tenants (covered by their own adapters) \u2014 a periodic tenant-slug sweep is worth doing for new yards. Addresses from upullandsave.com/roadtestedparts.com; Lexington/Savannah/Maiden parcels not in OSM (zip/town centroids)."
+        "notes": "Shared fetch_vinplus_inventory adapter, tenant yard_id=road_tested_parts. GET /api/yard-info/{tenant} lists locations; GET /api/vehicle-groups is the global 49-make catalog. Results CAP AT 100/query — the adapter queries per make per location_id and recursively bisects year ranges on exactly-100 responses. Rows: year, make, model, vin, stock (id basis, location-code qualified), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. NOTE: utah-pic-a-part and ipull-upull are also VinPlus tenants (covered by their own adapters) — a periodic tenant-slug sweep is worth doing for new yards. Addresses from upullandsave.com/roadtestedparts.com; Lexington/Savannah/Maiden parcels not in OSM (zip/town centroids)."
       },
       "update_freshness": "live (daysInYard present; fresh dateAdded values)",
       "robots": "vinplus.texnrewards.com: allow all",
@@ -1129,7 +1145,7 @@
         "auth": "none",
         "format": "json",
         "requests_per_scan": "shared with Road Tested Parts (one fetch_vinplus_inventory pass)",
-        "notes": "SEARCH yard_id=tri_state_iron_metal (the business name) \u2014 the pickers_longview URL slug works for yard-info but silently returns zero matches on searchVehicleHttp. 4 locations. NOTE: the API lists Texarkana as TX but the yard is at 5512 E 9th St on the ARKANSAS side (pickerstxk.com) \u2014 we record AR. Addresses from pickerslongview.com / pickerstxk.com / pickersreno.com / pipesupullit.net."
+        "notes": "SEARCH yard_id=tri_state_iron_metal (the business name) — the pickers_longview URL slug works for yard-info but silently returns zero matches on searchVehicleHttp. 4 locations. NOTE: the API lists Texarkana as TX but the yard is at 5512 E 9th St on the ARKANSAS side (pickerstxk.com) — we record AR. Addresses from pickerslongview.com / pickerstxk.com / pickersreno.com / pipesupullit.net."
       },
       "update_freshness": "live",
       "robots": "vinplus.texnrewards.com: allow all",
@@ -1176,12 +1192,12 @@
         "auth": "none",
         "format": "json",
         "requests_per_scan": "~49+ (49 makes x 1 location + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
-        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=joliet_u_pull_it, sourceSystem=crush. Results CAP AT 100/query \u2014 per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. First Chicago-metro independent (~3,000 vehicles; 1014 E Washington St, Joliet IL 60433 \u2014 exact OSM parcel). Own Wix site also renders inventory at /inventory."
+        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=joliet_u_pull_it, sourceSystem=crush. Results CAP AT 100/query — per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. First Chicago-metro independent (~3,000 vehicles; 1014 E Washington St, Joliet IL 60433 — exact OSM parcel). Own Wix site also renders inventory at /inventory."
       },
       "update_freshness": "live (daysInYard present; fresh dateAdded values)",
       "robots": "vinplus.texnrewards.com: allow all",
       "tos_flags": "none found",
-      "price_list": "https://www.jolietupullit.com/auto-part-prices (Wix page, only ~14 popular prices embedded server-side \u2014 link-only, not parseable into a structured list)",
+      "price_list": "https://www.jolietupullit.com/auto-part-prices (Wix page, only ~14 popular prices embedded server-side — link-only, not parseable into a structured list)",
       "vinplus_spa_url": "https://vinplus.texnrewards.com/joliet",
       "locations": [
         {
@@ -1204,7 +1220,7 @@
         "auth": "none",
         "format": "json",
         "requests_per_scan": "~49+ (49 makes x 1 location + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
-        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=pick_n_pull_san_antonio, sourceSystem=crush. Results CAP AT 100/query \u2014 per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. INDEPENDENT yard trading as 'Pick-N-Pull San Antonio' (picknpullsa.com; 11795 Applewhite Rd, San Antonio TX 78224 \u2014 exact OSM parcel). NOT the national Pick-n-Pull chain: the app display name deliberately does not start with 'Pick-N-Pull' because app.js/db.py dispatch the chain's pricing/links/tool rules on that name prefix. Rows include pre-2019 dateAdded values \u2014 the global _sanitize_date_added clamp handles them."
+        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=pick_n_pull_san_antonio, sourceSystem=crush. Results CAP AT 100/query — per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. INDEPENDENT yard trading as 'Pick-N-Pull San Antonio' (picknpullsa.com; 11795 Applewhite Rd, San Antonio TX 78224 — exact OSM parcel). NOT the national Pick-n-Pull chain: the app display name deliberately does not start with 'Pick-N-Pull' because app.js/db.py dispatch the chain's pricing/links/tool rules on that name prefix. Rows include pre-2019 dateAdded values — the global _sanitize_date_added clamp handles them."
       },
       "update_freshness": "live (daysInYard present; fresh dateAdded values)",
       "robots": "vinplus.texnrewards.com: allow all",
@@ -1232,7 +1248,7 @@
         "auth": "none",
         "format": "json",
         "requests_per_scan": "~49+ (49 makes x 1 location + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
-        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=195_used_auto_parts, sourceSystem=crush. Results CAP AT 100/query \u2014 per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. 12077 State Highway 195, Killeen TX 76542 \u2014 parcel missing from OSM, zip-centroid coords. Own site runs the CRUSH MVC app (/Home/Inventory, /Home/PartPrices)."
+        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=195_used_auto_parts, sourceSystem=crush. Results CAP AT 100/query — per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. 12077 State Highway 195, Killeen TX 76542 — parcel missing from OSM, zip-centroid coords. Own site runs the CRUSH MVC app (/Home/Inventory, /Home/PartPrices)."
       },
       "update_freshness": "live (daysInYard present; fresh dateAdded values)",
       "robots": "vinplus.texnrewards.com: allow all",
@@ -1260,7 +1276,7 @@
         "auth": "none",
         "format": "json",
         "requests_per_scan": "~49+ (49 makes x 1 location + year-bucket splits) at 2s, shared host with the other VinPlus tenants",
-        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=pick_ur_part, sourceSystem=yardsmart. Results CAP AT 100/query \u2014 per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. 4125 E Slaton Rd, Lubbock TX 79404 \u2014 house number missing from OSM, road-level coords. Opened Feb 2026, growing fast (~870 vehicles). Also runs yardconnect-pro on its own WordPress site; VinPlus is the cheaper path."
+        "notes": "Shared fetch_vinplus_inventory adapter, single-location tenant (GET /api/yard-info/{tenant} reports locations: []; searchVehicleHttp takes location_id null). yard_id=pick_ur_part, sourceSystem=yardsmart. Results CAP AT 100/query — per-make queries with recursive year-range bisection. Rows: year, make, model, vin, stock (id basis), vehicleRow, color, engine, dateAdded, yardLocation, daysInYard. 4125 E Slaton Rd, Lubbock TX 79404 — house number missing from OSM, road-level coords. Opened Feb 2026, growing fast (~870 vehicles). Also runs yardconnect-pro on its own WordPress site; VinPlus is the cheaper path."
       },
       "update_freshness": "live (daysInYard present; fresh dateAdded values)",
       "robots": "vinplus.texnrewards.com: allow all",
@@ -1280,7 +1296,7 @@
     {
       "name": "U-Pick-It AZ",
       "status": "adapter-built",
-      "platform": "wordpress + yardconnect-pro v2.3 plugin (M&M Auto Parts plugin over a YardSmart backend, photos on api.yardsmartapp.com \u2014 fingerprint: wp-content/plugins/yardconnect-pro/). Config-driven adapter since 2026-10-27: YARDCONNECT_SITES['upickitaz'] / fetch_yardconnect_site (ids and cache names unchanged)",
+      "platform": "wordpress + yardconnect-pro v2.3 plugin (M&M Auto Parts plugin over a YardSmart backend, photos on api.yardsmartapp.com — fingerprint: wp-content/plugins/yardconnect-pro/). Config-driven adapter since 2026-10-27: YARDCONNECT_SITES['upickitaz'] / fetch_yardconnect_site (ids and cache names unchanged)",
       "inventory_url": "https://upickitaz.com/",
       "api": {
         "endpoint": "https://upickitaz.com/wp-admin/admin-ajax.php",
@@ -1288,7 +1304,7 @@
         "auth": "nonce from `var yardconnectPublic = {...\"nonce\":...}` on any page (even the 404 page)",
         "format": "html fragment (one tbody, whole lot unpaginated with view=table)",
         "requests_per_scan": "~3 at 2s",
-        "notes": "User-requested from Reddit (Flagstaff, zip 86015). action=yardconnect_search_vehicles&lot={Flagstaff|Prescott Valley}&make=all&model=all&engine=&year_start=1949&year_end=2026&view=table \u2014 view=table is CRITICAL (grid view paginates ~20/page). Columns: Image, Make, Model, Year, Color, Body Style, Engine, Yard Row, Date Set MM/DD/YY. data-stock-number only on rows with photos (~45%) \u2192 stock ids else sha1-hash ids with ordinal dupes. No VIN. Expired nonce self-heals: 403 body is JSON {data:{nonce}} \u2014 retry once. robots.txt explicitly allows admin-ajax.php. No parts price list found. Flagstaff parcel not in OSM \u2192 Leupp Road centroid."
+        "notes": "User-requested from Reddit (Flagstaff, zip 86015). action=yardconnect_search_vehicles&lot={Flagstaff|Prescott Valley}&make=all&model=all&engine=&year_start=1949&year_end=2026&view=table — view=table is CRITICAL (grid view paginates ~20/page). Columns: Image, Make, Model, Year, Color, Body Style, Engine, Yard Row, Date Set MM/DD/YY. data-stock-number only on rows with photos (~45%) → stock ids else sha1-hash ids with ordinal dupes. No VIN. Expired nonce self-heals: 403 body is JSON {data:{nonce}} — retry once. robots.txt explicitly allows admin-ajax.php. No parts price list found. Flagstaff parcel not in OSM → Leupp Road centroid."
       },
       "update_freshness": "live (same-month set dates)",
       "robots": "allow all; admin-ajax.php explicitly allowed",
@@ -1313,7 +1329,7 @@
     {
       "name": "Barry's U Pull It",
       "status": "adapter-built",
-      "platform": "wordpress; entire inventory server-rendered as one DataTable (Indy pattern). NOTE: barrysupullit.com is a parked lander \u2014 real site is barrysupullit.net",
+      "platform": "wordpress; entire inventory server-rendered as one DataTable (Indy pattern). NOTE: barrysupullit.com is a parked lander — real site is barrysupullit.net",
       "inventory_url": "https://barrysupullit.net/vehicle-inventory-2/",
       "api": {
         "endpoint": "https://barrysupullit.net/vehicle-inventory-2/",
@@ -1321,7 +1337,7 @@
         "auth": "none",
         "format": "html table#vehicles (~700 rows: Year, Make, Model, Engine, Color, VIN, Stock# STK######, Row#, Arrival Date MM/DD/YY)",
         "requests_per_scan": "1 (+1 for /part-pricing/, ~425 parts -> barrys_pricing.json)",
-        "notes": "TWO physical yards (Mobile/Theodore AL at 5385 Barry Dr; Pass Christian MS at 8270 Firetower Rd) but ONE blended inventory table with no location column and no per-yard page (sitemap checked) \u2014 mapped to a single 'Barry's U Pull It - Mobile' yard, Parts Galore precedent. Split if they ever expose per-yard inventory. Neither parcel in OSM \u2192 zip centroids (Mobile 36582 used for the pin; Pass Christian 39571 recorded here: 30.3786,-89.2610)."
+        "notes": "TWO physical yards (Mobile/Theodore AL at 5385 Barry Dr; Pass Christian MS at 8270 Firetower Rd) but ONE blended inventory table with no location column and no per-yard page (sitemap checked) — mapped to a single 'Barry's U Pull It - Mobile' yard, Parts Galore precedent. Split if they ever expose per-yard inventory. Neither parcel in OSM → zip centroids (Mobile 36582 used for the pin; Pass Christian 39571 recorded here: 30.3786,-89.2610)."
       },
       "update_freshness": "live (recent arrival dates)",
       "robots": "allow all",
@@ -1347,7 +1363,7 @@
         "auth": "nonce from `art_inventory_sf_ajax = {...,\"nonce\":...}` on /vehicle-search/",
         "format": "json (whole yard in one response)",
         "requests_per_scan": "2 at 2s",
-        "notes": "action=art_inventory_get_yard_assets&security={nonce}&yard=0&make=0&model=0&year=0 returns the ENTIRE yard (~1,250 rows) \u2014 the '0' values are required (named/empty values return []). Rows: stock_number (PRE######, id basis), iyear, make, model, vehicle_row, yard_date, color, vin (often truncated; only 17-char kept), yard_name/city/state. Houston parcel not in OSM \u2192 E Mount Houston Rd centroid."
+        "notes": "action=art_inventory_get_yard_assets&security={nonce}&yard=0&make=0&model=0&year=0 returns the ENTIRE yard (~1,250 rows) — the '0' values are required (named/empty values return []). Rows: stock_number (PRE######, id basis), iyear, make, model, vehicle_row, yard_date, color, vin (often truncated; only 17-char kept), yard_name/city/state. Houston parcel not in OSM → E Mount Houston Rd centroid."
       },
       "update_freshness": "live (same-week yard_date values)",
       "robots": "allow all",
@@ -1365,15 +1381,15 @@
     {
       "name": "Budget U-Pull-It",
       "status": "adapter-built",
-      "platform": "TWO systems: Winter Garden on WordPress (server-rendered /current-inventory/ per-make GET); Bartow on S3 Software Solutions (ASP.NET WebForms postbacks at budgetupullit.s3softwaresolutions.com \u2014 first of this platform)",
+      "platform": "TWO systems: Winter Garden on WordPress (server-rendered /current-inventory/ per-make GET); Bartow on S3 Software Solutions (ASP.NET WebForms postbacks at budgetupullit.s3softwaresolutions.com — first of this platform)",
       "inventory_url": "https://budgetupullit.com/current-inventory/",
       "api": {
         "endpoint": "https://budgetupullit.com/current-inventory/?make={MAKE}&model= (WG, ~40 GETs) + http://budgetupullit.s3softwaresolutions.com/inventory.aspx (Bartow: GET then ddlMake/ddlModel __doPostBack chain, ~250-300 POSTs)",
         "method": "GET (WG) / POST postbacks (Bartow)",
         "auth": "none (Bartow needs VIEWSTATE/EVENTVALIDATION re-chained from each response; option values must be HTML-unescaped before postback or the server 500s)",
-        "format": "WG: html rows Year, Make, Model, Stock# STK#####, Row#, VIN, Yard Date MM.DD.YY (dots). Bartow: html rows Year, Make, Model, Row #, Arrival Date MM/DD/YYYY \u2014 NO stock#/VIN, sha1 ids",
+        "format": "WG: html rows Year, Make, Model, Stock# STK#####, Row#, VIN, Yard Date MM.DD.YY (dots). Bartow: html rows Year, Make, Model, Row #, Arrival Date MM/DD/YYYY — NO stock#/VIN, sha1 ids",
         "requests_per_scan": "~40 (WG) + ~250-300 (Bartow) at 1.5s/0.5s pacing (+2 for the two price lists -> budget_pricing.json)",
-        "notes": "Owner-requested (Austin Rutherford email, Oct 2026). Chain has a THIRD location (Auburndale, 324 Recker Hwy: full-service pre-pulled parts, no self-serve inventory) \u2014 not listed. Bartow's official site is budgetupullitbartow.com (hibu builder), which links the s3softwaresolutions inventory + partspricelist.aspx. Neither parcel in OSM/Census: WG pin from the site's own footer map, Bartow pin from the u-pull-it.com directory listing. Price lists DIFFER per yard (e.g. alternator core $5 WG vs $8 Bartow) -> per-yard dict, wap_pricing shape."
+        "notes": "Owner-requested (Austin Rutherford email, Oct 2026). Chain has a THIRD location (Auburndale, 324 Recker Hwy: full-service pre-pulled parts, no self-serve inventory) — not listed. Bartow's official site is budgetupullitbartow.com (hibu builder), which links the s3softwaresolutions inventory + partspricelist.aspx. Neither parcel in OSM/Census: WG pin from the site's own footer map, Bartow pin from the u-pull-it.com directory listing. Price lists DIFFER per yard (e.g. alternator core $5 WG vs $8 Bartow) -> per-yard dict, wap_pricing shape."
       },
       "update_freshness": "live (site banner: 'Inventory Updated' same-day; owner states daily updates)",
       "robots": "budgetupullit.com: allow all (Yoast); s3softwaresolutions.com: no robots.txt; budgetupullitbartow.com: allow all",
@@ -1398,7 +1414,7 @@
     {
       "name": "Ryan's Pick-a-Part",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://ryanspickapart.com/Home/Inventory",
       "api": {
         "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
@@ -1424,7 +1440,7 @@
     {
       "name": "US Auto Supply",
       "status": "adapter-built",
-      "platform": "VinPlus \u2014 TexN Rewards (tenant us_auto_supply, custom_slug 'usauto'); config-only addition to the existing fetch_vinplus_inventory adapter",
+      "platform": "VinPlus — TexN Rewards (tenant us_auto_supply, custom_slug 'usauto'); config-only addition to the existing fetch_vinplus_inventory adapter",
       "inventory_url": "https://usautosupplymi.com/inventory/",
       "api": {
         "endpoint": "POST {VINPLUS_API}/searchVehicleHttp with yard_id=us_auto_supply, location_id=null (single-location tenant)",
@@ -1432,7 +1448,7 @@
         "auth": "none",
         "format": "VinPlus rows: STK##### stocks, full VINs, year/make/model/row/color/engine/dateAdded",
         "requests_per_scan": "~50 shared-host VinPlus queries (one per make; serial inside the adapter) +1 GET for the price list",
-        "notes": "Owner-forwarded email request (Elliot B., Oct 2026) \u2014 email said '2 locations': the u-pull inventory is the Sterling Heights yard (7575 18 1/2 Mile Rd, exact OSM parcel); the Detroit location (2346 W. Warren Ave) is full-service with a Hollander interchange search only (search.usautosupplymi.com /cgi-bin/search.cgi \u2014 part listings, not vehicle rows) and is NOT listed (Budget Auburndale precedent). Price list at /upull/part-prices/ (~720 rows) -> usauto_pricing.json."
+        "notes": "Owner-forwarded email request (Elliot B., Oct 2026) — email said '2 locations': the u-pull inventory is the Sterling Heights yard (7575 18 1/2 Mile Rd, exact OSM parcel); the Detroit location (2346 W. Warren Ave) is full-service with a Hollander interchange search only (search.usautosupplymi.com /cgi-bin/search.cgi — part listings, not vehicle rows) and is NOT listed (Budget Auburndale precedent). Price list at /upull/part-prices/ (~720 rows) -> usauto_pricing.json."
       },
       "update_freshness": "live (dateAdded values from the same day; 'new cars daily')",
       "robots": "usautosupplymi.com: wp-admin disallow only + Crawl-delay 10 (we make 1 GET to the price page per refresh); vinplus API host: allow all",
@@ -1450,7 +1466,7 @@
     {
       "name": "U-Pull and Save",
       "status": "adapter-built",
-      "platform": "Custom Nuxt 3 site (Schram Auto Parts family) with a same-origin JSON API under /api/ \u2014 the same endpoints the site's own search tabs call",
+      "platform": "Custom Nuxt 3 site (Schram Auto Parts family) with a same-origin JSON API under /api/ — the same endpoints the site's own search tabs call",
       "inventory_url": "https://www.u-pullandsave.com/used-car-parts",
       "api": {
         "endpoint": "GET /api/vehicles/search/?store=105&year=&make=&model= (all live vehicles of a make+model; year is catalog context only), GET /api/vehicles/{id} (full record incl. VIN + YardLocationDT; 404 once removed), GET /api/vehicles/recent/105 (today's arrivals, ~15 cap)",
@@ -1458,7 +1474,7 @@
         "auth": "none",
         "format": "search rows: vehicleID (sequential intake ids; tier-1 per-car link key), stockID P#####, year/make/model/color/yardRow; detail adds VIN, YardLocationDT, factory options",
         "requests_per_scan": "~300 at 1.5s (one search per known make+model pair + new-id sweep + bounded VIN/date backfill); hybrid cache docs/data/upas_cache.json committed by the scan workflow (Chesterfield precedent), seeded by a one-time full id-window scan 2026-10-23",
-        "notes": "Owner-forwarded email request (Elliot B., Oct 2026) \u2014 email said '2 locations': Pontiac (240 E. Columbia Ave, exact OSM parcel) is the open u-pull yard; Mason (1325 N. Cedar) is vehicle purchasing only \u2014 the site's own store picker lists it as 'Mason, MI (Yard Closed)' \u2014 not listed. No wildcard/bulk listing endpoint exists (verified: empty/ALL/% model all return []), hence the pair-search + id-sweep hybrid. Price list /price-list (~490 rows, '$X.XX/ Each' + core) -> upas_pricing.json."
+        "notes": "Owner-forwarded email request (Elliot B., Oct 2026) — email said '2 locations': Pontiac (240 E. Columbia Ave, exact OSM parcel) is the open u-pull yard; Mason (1325 N. Cedar) is vehicle purchasing only — the site's own store picker lists it as 'Mason, MI (Yard Closed)' — not listed. No wildcard/bulk listing endpoint exists (verified: empty/ALL/% model all return []), hence the pair-search + id-sweep hybrid. Price list /price-list (~490 rows, '$X.XX/ Each' + core) -> upas_pricing.json."
       },
       "update_freshness": "live (YardLocationDT values from the same hour)",
       "robots": "allow all, no crawl-delay",
@@ -1484,7 +1500,7 @@
         "auth": null,
         "format": null,
         "requests_per_scan": null,
-        "notes": "Owner-forwarded email request (Elliot B., Oct 2026) \u2014 NO public vehicle inventory exists: the 'Search for Parts' page (/parts/) renders only the address/hours, and the U-Pull-It page states 'We can only tell you if the vehicle is available in the yard.' Self-serve yard at 945 Lucy Rd, Howell MI 48843 (Livingston County; exact OSM parcel). Re-check if they ever adopt an inventory platform."
+        "notes": "Owner-forwarded email request (Elliot B., Oct 2026) — NO public vehicle inventory exists: the 'Search for Parts' page (/parts/) renders only the address/hours, and the U-Pull-It page states 'We can only tell you if the vehicle is available in the yard.' Self-serve yard at 945 Lucy Rd, Howell MI 48843 (Livingston County; exact OSM parcel). Re-check if they ever adopt an inventory platform."
       },
       "update_freshness": null,
       "robots": "allow all (Yoast)",
@@ -1502,7 +1518,7 @@
     {
       "name": "EZ Pull N Pay",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://www.ezpullnpay.com/inventory/",
       "api": {
         "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
@@ -1584,13 +1600,13 @@
     {
       "name": "Paul's Auto Yard",
       "status": "candidate",
-      "platform": "Ario legacy (Bubble) org exists but holds a one-time Mar\u2013Oct 2025 dump and the yard is 'Yard not found' on the live Supabase backend; paulsautosalvage.com has no public vehicle rows (parts/engines pages only). Needs a fresh source before it can be wired.",
+      "platform": "Ario legacy (Bubble) org exists but holds a one-time Mar–Oct 2025 dump and the yard is 'Yard not found' on the live Supabase backend; paulsautosalvage.com has no public vehicle rows (parts/engines pages only). Needs a fresh source before it can be wired.",
       "inventory_url": "https://app.autorecycler.io/inventory/pauls-south-bend",
       "api": {
-        "notes": "2026-10-26: wave-1 build dropped it; see EXPANSION_CANDIDATES.md \u00a78.6.2"
+        "notes": "2026-10-26: wave-1 build dropped it; see EXPANSION_CANDIDATES.md §8.6.2"
       },
       "update_freshness": "live",
-      "robots": "paulsautoyard.com redirects to paulsautosalvage.com (no inventory page found on the WP site \u2014 Ario public pages are the inventory); app.autorecycler.io: allow all except /version-test/",
+      "robots": "paulsautoyard.com redirects to paulsautosalvage.com (no inventory page found on the WP site — Ario public pages are the inventory); app.autorecycler.io: allow all except /version-test/",
       "tos_flags": "none found",
       "locations": [
         {
@@ -1688,7 +1704,7 @@
     {
       "name": "Foss U-Pull-It",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://fossupullit.com/inventory/",
       "api": {
         "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
@@ -1761,10 +1777,10 @@
     {
       "name": "Carolina Pick N Pull",
       "status": "candidate",
-      "platform": "Own WordPress vehicle search at carolinapicknpull.com/inventory/?location={3|9|10} (Location/Make form, server-rendered; WAF 403s plain curl, browser OK). The Ario Bubble org rows are a 2024 dump and the slugs are 'Yard not found' on the live backend \u2014 do NOT use Ario for this chain.",
+      "platform": "Own WordPress vehicle search at carolinapicknpull.com/inventory/?location={3|9|10} (Location/Make form, server-rendered; WAF 403s plain curl, browser OK). The Ario Bubble org rows are a 2024 dump and the slugs are 'Yard not found' on the live backend — do NOT use Ario for this chain.",
       "inventory_url": "https://carolinapicknpull.com/inventory/",
       "api": {
-        "notes": "2026-10-26: wave-1 build dropped it; needs its own adapter (curl_cffi or browser), see EXPANSION_CANDIDATES.md \u00a78.6.2"
+        "notes": "2026-10-26: wave-1 build dropped it; needs its own adapter (curl_cffi or browser), see EXPANSION_CANDIDATES.md §8.6.2"
       },
       "update_freshness": "live",
       "robots": "carolinapicknpull.com answers 403 to non-browser clients; the three yards' Ario public pages are the inventory; app.autorecycler.io: allow all except /version-test/",
@@ -1802,7 +1818,7 @@
     {
       "name": "UAPI / U-Auto-Pull-It",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/uapi",
       "api": {
         "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
@@ -1875,7 +1891,7 @@
     {
       "name": "Auto Parts U Pull",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/auto-parts-u-pull-shelby-nc",
       "api": {
         "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
@@ -1912,7 +1928,7 @@
     {
       "name": "L and L U-Pull Auto Parts",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/l-and-l-u-pull",
       "api": {
         "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
@@ -1940,7 +1956,7 @@
     {
       "name": "A & A Auto Recycling",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/a-a-auto-recycling",
       "api": {
         "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
@@ -1968,10 +1984,10 @@
     {
       "name": "JDM Automotive & Recycling",
       "status": "candidate",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/jdm-automotive-recycling",
       "api": {
-        "notes": "On Ario's live backend but no set-outs for 2+ months at the 2026-10-26 probe (JDM newest 08-26, Southside 06-16, Santa Maria 08-24) \u2014 not wired. Re-probe with scraper/_probe_ario_live.py before enabling."
+        "notes": "On Ario's live backend but no set-outs for 2+ months at the 2026-10-26 probe (JDM newest 08-26, Southside 06-16, Santa Maria 08-24) — not wired. Re-probe with scraper/_probe_ario_live.py before enabling."
       },
       "update_freshness": "live",
       "robots": "app.autorecycler.io: allow all except /version-test/",
@@ -1991,7 +2007,7 @@
     {
       "name": "Samson Auto Salvage",
       "status": "adapter-built",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/samson-auto-salvage",
       "api": {
         "endpoint": "POST https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1/search-inventory (offset-paged per yard; yards_meta.total_matching/next_offset) + get-inventory-item (VIN, once per stock, cached in history DB table ario_vins)",
@@ -1999,7 +2015,7 @@
         "auth": "site's publishable anon key (sent by every visitor's browser)",
         "format": "JSON items: id/year/make/model/row/stock/date_placed/color (+ image_url, ignored)",
         "requests_per_scan": "ceil(lot/200) search pages per yard + up to ARIO_VIN_MAX_PER_RUN detail calls, 2s pacing",
-        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified). Verify self-serve at the gate \u2014 listed as a dismantler in some directories."
+        "notes": "Wave 2 of the 2026-10-26 Ario sweep (live-backend verified). Verify self-serve at the gate — listed as a dismantler in some directories."
       },
       "update_freshness": "live",
       "robots": "app.autorecycler.io: allow all except /version-test/",
@@ -2019,10 +2035,10 @@
     {
       "name": "Southside U-Pull-It",
       "status": "candidate",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/southside-u-pull-it",
       "api": {
-        "notes": "On Ario's live backend but no set-outs for 2+ months at the 2026-10-26 probe (JDM newest 08-26, Southside 06-16, Santa Maria 08-24) \u2014 not wired. Re-probe with scraper/_probe_ario_live.py before enabling."
+        "notes": "On Ario's live backend but no set-outs for 2+ months at the 2026-10-26 probe (JDM newest 08-26, Southside 06-16, Santa Maria 08-24) — not wired. Re-probe with scraper/_probe_ario_live.py before enabling."
       },
       "update_freshness": "live",
       "robots": "app.autorecycler.io: allow all except /version-test/",
@@ -2042,10 +2058,10 @@
     {
       "name": "Santa Maria Recycling Center",
       "status": "candidate",
-      "platform": "Ario (autorecycler.io) \u2014 LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md \u00a78.6.",
+      "platform": "Ario (autorecycler.io) — LIVE feed is the Supabase-backed ario.autorecycler.io/yard/{slug} frontend (search-inventory + get-inventory-item edge functions; fetch_ario_inventory / ARIO_CHAINS). The older Bubble app at app.autorecycler.io/inventory/{slug} froze in late Aug 2026 and is only used to seed VINs (fetch_ario_legacy_inventory). See EXPANSION_CANDIDATES.md §8.6.",
       "inventory_url": "https://app.autorecycler.io/inventory/santa-maria-recycling-center",
       "api": {
-        "notes": "On Ario's live backend but no set-outs for 2+ months at the 2026-10-26 probe (JDM newest 08-26, Southside 06-16, Santa Maria 08-24) \u2014 not wired. Re-probe with scraper/_probe_ario_live.py before enabling."
+        "notes": "On Ario's live backend but no set-outs for 2+ months at the 2026-10-26 probe (JDM newest 08-26, Southside 06-16, Santa Maria 08-24) — not wired. Re-probe with scraper/_probe_ario_live.py before enabling."
       },
       "update_freshness": "live",
       "robots": "app.autorecycler.io: allow all except /version-test/",
@@ -2065,7 +2081,7 @@
     {
       "name": "Chuck & Eddie's Self Service",
       "status": "adapter-built",
-      "platform": "wordpress + yardconnect-pro v1.3.1 (server-rendered table; no search AJAX in this plugin version) \u2014 config-driven adapter YARDCONNECT_SITES['chuckeddies']",
+      "platform": "wordpress + yardconnect-pro v1.3.1 (server-rendered table; no search AJAX in this plugin version) — config-driven adapter YARDCONNECT_SITES['chuckeddies']",
       "website": "https://www.chuckandeddies.com",
       "inventory_url": "https://www.chuckandeddies.com/vehicle-inventory/",
       "api": {
@@ -2074,7 +2090,7 @@
         "auth": "none",
         "format": "html",
         "requests_per_scan": 1,
-        "notes": "FIRST CONNECTICUT COVERAGE. Chuck & Eddie's is a 3-store CT chain; only the Southington SELF-SERVICE lot (450 Old Turnpike Rd) is inventoried here \u2014 New Haven and Hartford are full-service and are deliberately not pins. yardconnect-pro v1.3.1 has no yardconnect_search_vehicles AJAX action (admin-ajax returns 400/'0'); a plain GET of /vehicle-inventory/?make=all&model=all server-renders the whole lot unpaginated (~2.8 MB, ~845 rows). Columns: Image, Make, Model, Year, Body Style, Engine, Yard Row (e.g. 'Left 11', 'Back Holding 1'), Date Set MM/DD/YY. data-stock-number on EVERY row -> ids chuckeddies-{stock}. No VIN. Engine -> _engine extra. Price list /parts-price-list/ (Part name, Part price, Part labor cost; labor ignored, no core column) -> chuckeddies_pricing.json (564 unique parts). Ignore the lorem-ipsum /u-pull-southhampton-2/ template page. Live 2026-10-27: 844 vehicles, newest Date Set 10/26/26."
+        "notes": "FIRST CONNECTICUT COVERAGE. Chuck & Eddie's is a 3-store CT chain; only the Southington SELF-SERVICE lot (450 Old Turnpike Rd) is inventoried here — New Haven and Hartford are full-service and are deliberately not pins. yardconnect-pro v1.3.1 has no yardconnect_search_vehicles AJAX action (admin-ajax returns 400/'0'); a plain GET of /vehicle-inventory/?make=all&model=all server-renders the whole lot unpaginated (~2.8 MB, ~845 rows). Columns: Image, Make, Model, Year, Body Style, Engine, Yard Row (e.g. 'Left 11', 'Back Holding 1'), Date Set MM/DD/YY. data-stock-number on EVERY row -> ids chuckeddies-{stock}. No VIN. Engine -> _engine extra. Price list /parts-price-list/ (Part name, Part price, Part labor cost; labor ignored, no core column) -> chuckeddies_pricing.json (564 unique parts). Ignore the lorem-ipsum /u-pull-southhampton-2/ template page. Live 2026-10-27: 844 vehicles, newest Date Set 10/26/26."
       },
       "update_freshness": "live (previous-day Date Set values observed)",
       "robots": "Disallow /wp-admin/ (admin-ajax.php explicitly allowed) and WooCommerce paths only; no crawl-delay",
@@ -2092,7 +2108,7 @@
     {
       "name": "Robertson's U-Pull-It",
       "status": "adapter-built",
-      "platform": "wordpress + yardconnect-pro v1.3.3 (admin-ajax yardconnect_search_vehicles, table view) \u2014 config-driven adapter YARDCONNECT_SITES['robertsons']",
+      "platform": "wordpress + yardconnect-pro v1.3.3 (admin-ajax yardconnect_search_vehicles, table view) — config-driven adapter YARDCONNECT_SITES['robertsons']",
       "website": "https://robertsonautosalvage.com",
       "inventory_url": "https://robertsonautosalvage.com/inventory-search/",
       "api": {

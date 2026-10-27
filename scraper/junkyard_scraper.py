@@ -18519,8 +18519,8 @@ def refresh_polkpickpay_pricing_file() -> Path:
 # Color, Reference (engine), YardRow. /search/vehicles needs year+make+model
 # and goes through the interchange catalog, so it is not used.
 # Location codes from the page's `locations` map: Waco 1123, Bryan/College
-# Station 1183, Beaumont 1218 — plus Baton Rouge LA 1259 and Jackson MS
-# 1289 (same API, same shape, ~1,000 cars each) which are NOT built in this
+# Station 1183, Beaumont 1218, Baton Rouge LA 1259, Jackson MS 1289 (the last
+# two added 2026-10-27 after the TX wave; same API, same shape). Formerly:
 # wave (TX scope); each is one BYOT_YARDS entry away.
 # Price list: /locations/{slug}/prices/ renders nothing server-side; the
 # API's /parts/{partType}/prices (Location header) returns the price GROUP
@@ -18548,6 +18548,15 @@ BYOT_YARDS = [
     {"code": "beaumont", "location": 1218, "slug": "beaumont",
      "name": "BYOT Auto Parts - Beaumont", "city": "Beaumont", "state": "TX",
      "lat": 30.0577, "lng": -94.2193},
+    # 4007 I-10 Frontage Rd, Port Allen LA 70767 (Baton Rouge metro) — the
+    # frontage-road number isn't in OSM; pin is Nominatim's Port Allen centroid.
+    {"code": "batonrouge", "location": 1259, "slug": "baton-rouge",
+     "name": "BYOT Auto Parts - Baton Rouge", "city": "Port Allen", "state": "LA",
+     "lat": 30.4534, "lng": -91.2101},
+    # 908 S Roach St, Jackson MS 39201 (exact OSM address)
+    {"code": "jackson", "location": 1289, "slug": "jackson-ms",
+     "name": "BYOT Auto Parts - Jackson", "city": "Jackson", "state": "MS",
+     "lat": 32.2888, "lng": -90.1891},
 ]
 
 
