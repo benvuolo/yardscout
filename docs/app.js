@@ -100,6 +100,8 @@ let nvpapPricing = {};     // Nevada Pic-A-Part (Las Vegas/Henderson NV): one ch
 let barrysPricing = {};    // Barry's U Pull It (Mobile AL): one yard-wide list
 let budgetPricing = {};    // Budget U-Pull-It (FL): per-yard lists keyed by location (WG and Bartow differ)
 let p195Pricing = {};      // 195 Used Auto Parts (Killeen TX): one yard-wide list
+let mmupullitPricing = {}; // M&M U-Pull-It (Buffalo NY): one yard-wide list
+let polkpickpayPricing = {}; // Polk County Pick and Pay (Lakeland FL): one yard-wide list
 let pnpsaPricing = {};     // San Antonio Pick-N-Pull (Independent, TX): one yard-wide list
 let ryansPricing = {};     // Ryan's Pick-a-Part (Detroit MI): one yard-wide list
 let usautoPricing = {};    // US Auto Supply (Sterling Heights MI): one yard-wide list
@@ -505,6 +507,8 @@ async function loadAllPricing() {
     grab('data/barrys_pricing.json', d => d.forEach(p => { barrysPricing[p.description] = p; })),
     grab('data/budget_pricing.json', d => { budgetPricing = d; }),
     grab('data/p195_pricing.json', d => d.forEach(p => { p195Pricing[p.description] = p; })),
+    grab('data/mmupullit_pricing.json', d => d.forEach(p => { mmupullitPricing[p.description] = p; })),
+    grab('data/polkpickpay_pricing.json', d => d.forEach(p => { polkpickpayPricing[p.description] = p; })),
     grab('data/pnpsa_pricing.json', d => d.forEach(p => { pnpsaPricing[p.description] = p; })),
     grab('data/ryans_pricing.json', d => d.forEach(p => { ryansPricing[p.description] = p; })),
     grab('data/usauto_pricing.json', d => d.forEach(p => { usautoPricing[p.description] = p; })),
@@ -3382,6 +3386,8 @@ function yardPriceList(location) {
   else if (loc.startsWith('nevada pic-a-part')) rows = fromList(nvpapPricing);
   else if (loc.startsWith("barry's u pull it")) rows = fromList(barrysPricing);
   else if (loc.startsWith('195 used auto parts')) rows = fromList(p195Pricing);
+  else if (loc.startsWith('m&m u-pull-it')) rows = fromList(mmupullitPricing);
+  else if (loc.startsWith('polk county pick and pay')) rows = fromList(polkpickpayPricing);
   // The independent San Antonio yard — NOT the Pick-n-Pull chain (whose
   // startsWith('pick-n-pull') branch above can never match this name).
   else if (loc.startsWith('san antonio pick-n-pull')) rows = fromList(pnpsaPricing);
