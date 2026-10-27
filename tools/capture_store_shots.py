@@ -25,6 +25,9 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 ZIP = "84047"
+# Store shots are taken in dark mode (owner preference, 2026-10-27); pass
+# --theme light for the old look.
+THEME = "dark"
 SHOTS = ["1_live", "2_search", "7_fitment", "6_compare", "3_yards", "5_pro", "4_alerts"]
 
 
@@ -52,7 +55,8 @@ def new_ctx(browser, *, ios: bool, pro: bool):
                     user_agent="Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Mobile Safari/537.36")
     ctx = browser.new_context(is_mobile=True, has_touch=True, **opts)
     keys = ["localStorage.setItem('jh_honesty_ack','1')", "localStorage.setItem('ys_install_hint','1')",
-            "localStorage.setItem('ys_app_promo','1')", "localStorage.setItem('jh_visits','5')"]
+            "localStorage.setItem('ys_app_promo','1')", "localStorage.setItem('jh_visits','5')",
+            f"localStorage.setItem('ys_theme','{THEME}')"]
     if pro:
         keys += ["localStorage.setItem('jh_pro','1')", "localStorage.setItem('jh_pro_source','iap')"]
     ctx.add_init_script("try { " + "; ".join(keys) + "; } catch(e) {}")
@@ -216,7 +220,10 @@ def main():
     ap.add_argument("--base", default="http://127.0.0.1:8765/")
     ap.add_argument("--out", type=Path, default=Path("fastlane/screenshots/en-US"))
     ap.add_argument("--android-out", type=Path, default=Path("fastlane/metadata/android/en-US/images/phoneScreenshots"))
+    ap.add_argument("--theme", choices=["dark", "light"], default="dark")
     args = ap.parse_args()
+    global THEME
+    THEME = args.theme
     with sync_playwright() as p:
         # Pre-installed browser on the cloud runner (a pip-installed
         # playwright can't find its own); set PW_CHROMIUM elsewhere if needed.
