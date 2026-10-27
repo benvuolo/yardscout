@@ -205,7 +205,7 @@ jobs:
           git add ios/App/App.xcodeproj/project.pbxproj
           git commit -m "chore(release): iOS ${{ steps.ver.outputs.mv }} build ${{ steps.ver.outputs.bn }}${{ github.event.inputs.submit == 'true' && ' (submitted)' || ' (TestFlight)' }}"
           for attempt in 1 2 3 4; do
-            git pull --rebase origin main && git push && exit 0
+            git -c rebase.autoStash=true pull --rebase origin main && git push && exit 0
             sleep 10
           done
           echo "::error::could not push the version bump"; exit 1

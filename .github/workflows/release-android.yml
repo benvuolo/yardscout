@@ -154,7 +154,7 @@ jobs:
           git add android/app/build.gradle
           git commit -m "chore(release): Android versionCode ${{ steps.ver.outputs.code }} / ${{ steps.ver.outputs.name }} (${{ github.event.inputs.track }})"
           for attempt in 1 2 3 4; do
-            git pull --rebase origin main && git push && exit 0
+            git -c rebase.autoStash=true pull --rebase origin main && git push && exit 0
             sleep 10
           done
           echo "::error::could not push the version bump"; exit 1
