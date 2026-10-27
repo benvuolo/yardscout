@@ -18595,7 +18595,7 @@ def fetch_crush_mvc_site(source: str) -> list[dict]:
                 model_s = rec.get("MODEL", "")
                 if not year_s.isdigit() or not make_s or not model_s:
                     continue
-                row_s = rec.get("ROW", "")
+                row_s = rec.get("ROW") or rec.get("ROW #") or ""
                 color_s = rec.get("COLOR", "")
                 engine_s = rec.get("ENGINE") or rec.get("REFERENCE") or ""
                 date_raw = next((v for k, v in rec.items() if "DATE" in k), "")
