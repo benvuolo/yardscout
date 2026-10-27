@@ -33,4 +33,4 @@ jobs:
           fastlane supply --json_key "$RUNNER_TEMP/play-sa.json" --package_name io.yardscout.app \
             --metadata_path fastlane/metadata/android \
             --skip_upload_aab --skip_upload_apk --skip_upload_changelogs \
-            --skip_upload_images --track production
+            --track production
