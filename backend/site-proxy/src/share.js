@@ -167,7 +167,7 @@ function layout({ title, desc, canonical, body, status = 200, robots = 'index,fo
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
-<meta name="robots" content="${robots}">
+<meta name="robots" content="${robots}"><meta name="theme-color" content="#F4F2EC" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1A" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="${esc(canonical)}">
 <link rel="icon" type="image/png" sizes="192x192" href="${SITE}/favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="${SITE}/favicon-32.png?v=3"><link rel="apple-touch-icon" href="${SITE}/apple-touch-icon.png?v=3">
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="YardScout">
@@ -177,6 +177,7 @@ function layout({ title, desc, canonical, body, status = 200, robots = 'index,fo
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(ogTitle || title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${OG_IMAGE}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Saira+Stencil+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${SITE}/styles.css">
+<script>try{var t=localStorage.getItem('ys_theme');if(t=='dark'||t=='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <style>${CSS}</style></head>
 <body>
 <header>
@@ -184,8 +185,14 @@ function layout({ title, desc, canonical, body, status = 200, robots = 'index,fo
     <a href="${SITE}/" aria-label="YardScout home" style="display:block"><svg class="brand-mark" viewBox="4 29 122 72" aria-hidden="true"><g fill="var(--mark-rim)"><circle cx="40" cy="65" r="36"/><circle cx="90" cy="65" r="36"/></g><g fill="#F26B1D"><circle cx="40" cy="65" r="32"/><circle cx="90" cy="65" r="32"/></g><g transform="translate(65 64) scale(0.88) translate(-66.5 -63)"><path d="M16 76 V62 Q16 59 19 59 H35 L46 44.5 Q47 43.5 49 43.5 H79 Q81 43.5 82 44.5 L92 58 L110 60 Q114 60.5 114 63 V76 Q114 79 111 79 H106 A10 10 0 0 0 86 79 H44 A10 10 0 0 0 24 79 H19 Q16 79 16 76 Z" fill="#1C1C1A"/><path d="M49 46.8 H78.3 L88 57.4 H46.6 L44 54.2 Z" fill="#F26B1D"/><rect x="63" y="46" width="2.6" height="12" fill="#1C1C1A"/><g fill="#1C1C1A"><circle cx="34" cy="80" r="8"/><circle cx="96" cy="80" r="8"/></g><g fill="#F26B1D"><circle cx="34" cy="80" r="3.2"/><circle cx="96" cy="80" r="3.2"/></g></g></svg></a>
     <div class="wordmark"><h1><a href="${SITE}/" style="color:inherit;text-decoration:none">Yard<span class="wm-scout">Scout</span></a></h1><span class="head-spec">${esc(spec)}</span></div>
   </div>
-  <a class="btn" href="${SITE}/" style="text-decoration:none">Open the app</a>
+  <div style="display:flex;align-items:center;gap:0.5rem">
+    <button type="button" id="theme-toggle" class="theme-toggle" title="Switch light / dark" aria-label="Switch light or dark theme"><svg class="ico ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><svg class="ico ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <a class="btn" href="${SITE}/" style="text-decoration:none">Open the app</a>
+  </div>
 </header>
+<script>
+(function(){var b=document.getElementById('theme-toggle');if(!b)return;b.addEventListener('click',function(){var h=document.documentElement,p=h.getAttribute('data-theme');var cur=(p=='dark'||p=='light')?p:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var n=cur=='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('ys_theme',n);}catch(e){}});})();
+</script>
 <main class="share-main">
 ${body}
 </main></body></html>`;
