@@ -127,6 +127,18 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^trusty pick-a-part", "Trusty Pick-A-Part", None, ""),
     (r"^m&m u-pull-it", "M&M U-Pull-It", None, ""),
     (r"^polk county pick and pay", "Polk County Pick and Pay", None, ""),
+    # --- 2026-10-27 SD/NY/TX wave ---
+    (r"^byot auto parts - waco", None,
+     "https://www.byotautoparts.com/locations/waco/inventory/",
+     "BYOT per-location inventory page"),
+    (r"^byot auto parts - bryan", None,
+     "https://www.byotautoparts.com/locations/bryan-college-station/inventory/",
+     "BYOT per-location inventory page"),
+    (r"^byot auto parts - beaumont", None,
+     "https://www.byotautoparts.com/locations/beaumont/inventory/",
+     "BYOT per-location inventory page"),
+    (r"^wilbert'?s u-pull-it", "Wilbert's U-Pull-It", None,
+     "3 NY yards share one search page (location picker on the page)"),
 ]
 
 

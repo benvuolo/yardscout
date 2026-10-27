@@ -564,3 +564,115 @@ Notes:
 - Registry: four `adapter-built` chains inserted after St. Cloud (same
   family); `INDEPENDENT_EXPECTED_SOURCES` registers the four sources from
   `CRUSH_MVC_SITES` (zero-vehicle alarm), like the Ario chains.
+
+## 2026-10-27 — SD/NY/TX wave (BYOT Auto Parts ×3, Wilbert's U-Pull-It ×3; Ewe Pullet skipped)
+
+Built from EXPANSION_CANDIDATES.md "WordPress custom server-rendered" / §6
+item 3 / §8.4 (the wave-3 gap-fill). Outcome: **2 adapters, 6 yards,
+7,042 vehicles live** on the seed run; Ewe Pullet (SD) recorded and
+skipped — its inventory backend is down (below). Both adapters are config
+tables + one fetcher (`BYOT_YARDS` / `fetch_byot_inventory`, `WILBERTS_YARDS`
+/ `fetch_wilberts_inventory`); both price lists are wired production-side
+(`refresh_byot_pricing_file`, `refresh_wilberts_pricing_file` →
+`docs/data/{byot,wilberts}_pricing.json`, in the `--refresh-chain-pricing`
+tuple).
+
+| Yard | Source | Live count | VIN | Newest dateAdded | Price list |
+|---|---|---|---|---|---|
+| BYOT Auto Parts — Waco (14401 N I-35 Frontage Rd, Elm Mott; Location 1123) | `byot` | 1,246 | 99.6% | 2026-10-26 | yes → `byot_pricing.json` (452 variants, chain-wide) |
+| BYOT Auto Parts — Bryan/College Station (3738 E SH-21, Bryan; 1183) | `byot` | 967 | 99.6% | 2026-10-23 | (same file) |
+| BYOT Auto Parts — Beaumont (7516 Shady Ln; 1218) | `byot` | 1,090 | 99.6% | 2026-10-23 | (same file) |
+| Wilbert's U-Pull-It — Rochester (4936 NY-104, Williamson) | `wilberts` | 1,918 (seed) | 99.9% | 2026-10-27 | yes → `wilberts_pricing.json` (434 parts, chain-wide) |
+| Wilbert's U-Pull-It — Bath (7992B NY-415) | `wilberts` | 823 (seed) | 99.9% | 2026-10-27 | (same file) |
+| Wilbert's U-Pull-It — Buffalo (550 Pound Rd, Elma) | `wilberts` | 998 (seed) | 99.9% | 2026-10-27 | (same file) |
+| Ewe Pullet (Nordstrom's) — Garretson SD | — | not built | — | — | PDF only (`2026carpricelist-1.pdf`) — not wired |
+
+**BYOT Auto Parts (TX).** The scouting note ("page embeds vehicle data; 225 KB
+inventory page") was the theme's JS, not rows: each
+`/locations/{slug}/inventory/` page is a shell over the chain's own JSON API
+at `api.byotautoparts.com`. The page's "Latest Arrivals" call —
+`GET /inventory/yard/vehicles/recent-arrivals?limit=N` with the yard code in a
+`Location` request **header** — has no date floor and at a large limit returns
+the yard's whole lot (Waco: 1,246 rows back to 2026-04-18), so the adapter is
+**one request per yard** (`BYOT_LIMIT` = 10,000, warns when hit). Rows carry
+`StockId` (STK-/BCS-/BMT-prefixed; ids `byot-{stockid}`), `YardLocationDt`
+(ISO set-out date → `dateAdded` via `_sanitize_date_added`), full VINs
+(99.6%), Color (`_color`), Reference (engine, not shipped) and YardRow. The
+`/search/vehicles` route needs year+make+model through the interchange
+catalog (empty make 500s) and is not used. The same config map on the page
+lists **Baton Rouge LA (1259, ~1,050 cars) and Jackson MS (1289, ~990 cars)** —
+same API, same shape, probed live — NOT built in this TX-scoped wave; each is
+one `BYOT_YARDS` entry (owner call: first LA/MS coverage). Price list: the
+`/prices/` pages render nothing server-side; `/parts/{partType}/prices` (same
+Location header) returns the part type's price GROUP (variants with
+`part_price`/`core_price`; identical across yards except sales tax), walked
+over `/search/parts?year=&make=&model=` (423 part types at 1 s, ~7 min inside
+`--refresh-chain-pricing`; variants deduped by name → 452 rows).
+Pins: Beaumont is an exact OSM POI; Bryan resolves to the E SH-21 segment in
+zip 77808; Waco/Elm Mott is the Elm Mott place centroid (the I-35 frontage-road
+house number is not in OSM; the lot is at the town's west edge, ~1 mi off).
+robots.txt allow-all (Yoast), no crawl-delay.
+
+**Wilbert's U-Pull-It (NY) — hybrid, slow by design.** The custom
+`wilberts-parts-search` plugin's `form.js` POSTs urlencoded `action=…` to the
+plugin's own `api.php` (not admin-ajax; the page nonces belong to the contact
+forms, nothing is checked). `search_type=recent` returns every car set out in
+the last ~6 days across all three yards (~300 rows; extra params ignored).
+`search_type=upull` with `make` + `model` returns **every** car of that pair on
+all three lots, any year (year/location ignored) — but `model` is required
+(empty, `%` and make-only all return the handful of make-less junk rows) and
+`list-models` needs a year per call, so there is no bulk listing. Hence the
+U-Pull-and-Save pattern: a committed cache `docs/data/wilberts_cache.json`
+(the scan workflow already commits `docs/data/`) carries known (make, model)
+pairs and the cars last seen per pair; each scan merges the recent feed (new
+pairs, new cars) and re-searches known pairs, which are the liveness source of
+truth (a cached car missing from its pair's result is dropped; a pair that
+comes back empty is forgotten until a new arrival revives it). robots.txt
+says `Crawl-delay: 10` and it is honored (`WILBERTS_DELAY_SEC`, do not
+lower), so the sweep is budgeted: `WILBERTS_PAIR_BUDGET` = 240 pairs per scan
+(~40 min, overlapped with the other hosts like every adapter) via a
+round-robin cursor kept in the cache; cars whose pair was not reached ride
+the cache until their turn, with `WILBERTS_STALE_DAYS` = 14 as a safety net.
+The feed has no absolute set-out date, only `DaysInYard`: `dateAdded` =
+first-seen UTC date − DaysInYard, computed **once** and kept in the cache so
+it never drifts. ids `wilberts-{stockid}` (STK- Rochester, BAT- Bath, BUF-
+Buffalo); VINs are 99.9% full. The seed (recent feed + one full pair sweep of
+138 pairs, 25 min) found 3,739 cars, years 1978–2022, set-out dates
+back to 2025-09 — one week of arrivals already names most (make, model) pairs
+on the lots, and each pair search returns the whole pair; any pair not yet
+seen surfaces the next time one of its cars arrives (a pair search also
+matches longer model names, e.g. ESCAPE → ESCAPE HYBRID, which seeds extra
+pairs — 130 → 138 on the seed run).
+The site calls the Williamson yard "Rochester" and the Elma yard "Buffalo";
+display names follow the site, `_city` follows the address. First Rochester /
+Finger Lakes coverage; Buffalo joins M&M. Price list:
+`admin-ajax.php?action=price_list_get_prices` (upiPriceList plugin, DataTables
+JSON, 434 rows, chain-wide) → `wilberts_pricing.json`. All three pins are
+exact OSM (Williamson and Elma are mapped POIs).
+
+**Ewe Pullet (Nordstrom's), Garretson SD — NOT built (backend down).** Same
+`iis-pro-upull` plugin family as Pick-A-Part VA (v1.8, URG-hosted), robots
+allow-all with admin-ajax allowed, plain requests get HTTP 200 — no WAF, no
+challenge — but every inventory URL (`/inventory/ANY/ANY/?k=1`, `&id=PP93`,
+`&pagenum=1`, make/model paths, with the plugin's cookies) renders the
+empty-results shell ("No Results Found", zero `.car-details-uPull` cards)
+while pickapartva.com on the same plugin renders 500 cards, and admin-ajax
+`action=getMakesIISupull` answers `{"error":"api error"}` (the static catalog
+actions still work, so WordPress is up and the URG data feed behind it is
+down). Nothing to work around; registry entry `candidate` with the probe
+notes, re-probe later. Address per the site header is 47989 255th Street,
+Garretson SD 57030 (NE of Sioux Falls — not Brandon); would be the first
+South Dakota coverage. Price list is a PDF + PNG, not a parseable table.
+
+Notes / follow-ups (docs/app.js untouched in this branch):
+
+- The app's `grab('data/<src>_pricing.json', …)` list and the yard→pricing
+  map need `byot` and `wilberts`; `gen_yard_site_links.py` (ENTRIES added
+  here: BYOT per-location pages, Wilbert's shared search page) needs a
+  regeneration pass to write the tier-3 links into app.js.
+- `docs/data/wilberts_cache.json` is committed with the seed so the first CI
+  scan starts from it (UPAS precedent). Scan-log line to watch:
+  `[Wilbert's] N vehicles across 3 yards (recent R, C/P pairs re-checked)`.
+- Registry: `BYOT Auto Parts` and `Wilbert's U-Pull-It` inserted after Polk
+  County (`adapter-built`), `Ewe Pullet (Nordstrom's)` as `candidate`;
+  `INDEPENDENT_EXPECTED_SOURCES` gains `byot` and `wilberts`.
