@@ -18503,6 +18503,464 @@ def refresh_polkpickpay_pricing_file() -> Path:
     return refresh_crush_mvc_pricing_file("polkpickpay")
 
 
+# ---- BYOT Auto Parts (byotautoparts.com) — 3 Texas yards -------------------
+# (2026-10-27) Ex-CRUSH tenant (EXPANSION_CANDIDATES.md "WordPress custom
+# server-rendered") that moved to a WordPress site whose per-location
+# /locations/{slug}/inventory/ pages are thin shells over the chain's own
+# JSON API (api.byotautoparts.com) — the "page embeds vehicle data" note was
+# the theme's 225 KB of JS, not rows. The page's "Latest Arrivals" call —
+# GET /inventory/yard/vehicles/recent-arrivals?limit=N with the yard's code
+# in a `Location` request HEADER — returns the yard's ENTIRE lot (newest
+# first, no date floor: Waco's 1,246 rows reach back to April 2026 at
+# limit=5000), so the adapter is one request per yard. Rows: VehicleRno,
+# StockId (STK-/BCS-/BMT-prefixed per yard; id basis byot-{stockid}),
+# YardLocationDt (ISO set-out date), Year, Make, Model (Hollander style —
+# "FORD F150 PICKUP", make prefix stripped), VIN (99.6% full 17-char),
+# Color, Reference (engine), YardRow. /search/vehicles needs year+make+model
+# and goes through the interchange catalog, so it is not used.
+# Location codes from the page's `locations` map: Waco 1123, Bryan/College
+# Station 1183, Beaumont 1218 — plus Baton Rouge LA 1259 and Jackson MS
+# 1289 (same API, same shape, ~1,000 cars each) which are NOT built in this
+# wave (TX scope); each is one BYOT_YARDS entry away.
+# Price list: /locations/{slug}/prices/ renders nothing server-side; the
+# API's /parts/{partType}/prices (Location header) returns the price GROUP
+# of a part type (variants with part_price/core_price; identical across
+# yards except sales tax) -> ONE chain-wide byot_pricing.json walked over
+# /search/parts?year=&make=&model= (423 part types, 1 s apart, ~7 min).
+# robots.txt: allow all (Yoast), no crawl-delay. 3 requests/scan.
+BYOT_API = "https://api.byotautoparts.com"
+BYOT_DELAY_SEC = 1.0
+BYOT_LIMIT = 10000  # per-yard row cap on the recent-arrivals call (warns when hit)
+BYOT_YARDS = [
+    # 14401 N Interstate 35 Frontage Rd, Elm Mott TX 76640 — the frontage-road
+    # house number is not in OSM; pin is Nominatim's Elm Mott place centroid
+    # (the lot is on I-35 at the west edge of town, ~1 mi off) — close enough
+    # for the map pin.
+    {"code": "waco", "location": 1123, "slug": "waco",
+     "name": "BYOT Auto Parts - Waco", "city": "Elm Mott", "state": "TX",
+     "lat": 31.6715, "lng": -97.1001},
+    # 3738 E State Hwy 21, Bryan TX 77808 — Nominatim resolves the E SH-21
+    # segment in zip 77808, not the parcel.
+    {"code": "bryan", "location": 1183, "slug": "bryan-college-station",
+     "name": "BYOT Auto Parts - Bryan/College Station", "city": "Bryan",
+     "state": "TX", "lat": 30.7168, "lng": -96.3408},
+    # 7516 Shady Ln, Beaumont TX 77713 (exact OSM POI)
+    {"code": "beaumont", "location": 1218, "slug": "beaumont",
+     "name": "BYOT Auto Parts - Beaumont", "city": "Beaumont", "state": "TX",
+     "lat": 30.0577, "lng": -94.2193},
+]
+
+
+def _byot_get(path: str, location: int | None = None):
+    """GET the BYOT API (JSON); the yard is addressed by a Location header."""
+    time.sleep(BYOT_DELAY_SEC)
+    headers = {**HEADERS, "Accept": "application/json"}
+    if location:
+        headers["Location"] = str(location)
+    r = requests.get(f"{BYOT_API}{path}", headers=headers, timeout=120)
+    r.raise_for_status()
+    return r.json()
+
+
+def _strip_hollander_make_prefix(make_s: str, model_s: str) -> str:
+    """Hollander catalog model names repeat the make ('FORD F150 PICKUP',
+    'FORD E350 VAN'): drop that prefix so the model column reads cleanly."""
+    if model_s.upper().startswith(make_s.upper() + " "):
+        return model_s[len(make_s):].strip() or model_s
+    return model_s
+
+
+def fetch_byot_inventory() -> list[dict]:
+    """BYOT Auto Parts (Waco, Bryan/College Station, Beaumont TX): one
+    recent-arrivals call per yard returns the yard's whole lot."""
+    vehicles: list[dict] = []
+    for yard in BYOT_YARDS:
+        try:
+            rows = _byot_get(
+                f"/inventory/yard/vehicles/recent-arrivals?limit={BYOT_LIMIT}",
+                yard["location"])
+        except Exception as e:
+            print(f"  [BYOT] {yard['code']}: fetch failed: {e}", file=sys.stderr)
+            continue
+        if not isinstance(rows, list):
+            print(f"  [BYOT] {yard['code']}: unexpected response shape — API changed?",
+                  file=sys.stderr)
+            continue
+        if len(rows) >= BYOT_LIMIT:
+            print(f"  [BYOT] {yard['code']}: hit the {BYOT_LIMIT}-row cap — raise BYOT_LIMIT",
+                  file=sys.stderr)
+        if yard["code"] == "waco":
+            _indep_cache_raw("byot_waco.json", json.dumps(rows).encode())
+        n_before = len(vehicles)
+        seen: set[str] = set()
+        for v in rows:
+            if not isinstance(v, dict):
+                continue
+            stock = str(v.get("StockId") or "").strip()
+            make_s = str(v.get("Make") or "").strip()
+            model_s = str(v.get("Model") or "").strip()
+            try:
+                year_i = int(v.get("Year") or 0)
+            except (TypeError, ValueError):
+                year_i = 0
+            if not stock or not make_s or not model_s or not year_i:
+                continue
+            vid = f"byot-{stock.lower()}"
+            if vid in seen:
+                continue
+            seen.add(vid)
+            vin = str(v.get("VIN") or "").strip().upper()
+            row = v.get("YardRow")
+            color = str(v.get("Color") or "").strip()
+            vehicles.append({
+                "id": vid,
+                "vin": vin if len(vin) == 17 else "",
+                "year": year_i,
+                "make": _utpap_format_label(make_s),
+                "model": _utpap_format_label(_strip_hollander_make_prefix(make_s, model_s)),
+                "row": str(row).strip() if row not in (None, "") else "",
+                "dateAdded": _sanitize_date_added(str(v.get("YardLocationDt") or "")[:10]),
+                **({"_color": color.title()} if color else {}),
+                "_location": yard["name"],
+                "_city": yard["city"],
+                "_state": yard["state"],
+                "_lat": yard["lat"],
+                "_lng": yard["lng"],
+                "_source": "byot",
+            })
+        print(f"  [BYOT] {yard['code']}: {len(vehicles) - n_before} vehicles", file=sys.stderr)
+    print(f"  [BYOT] {len(vehicles)} vehicles across "
+          f"{len({v['_location'] for v in vehicles})} yards", file=sys.stderr)
+    return vehicles
+
+
+def refresh_byot_pricing_file() -> Path:
+    """BYOT's chain-wide price list -> byot_pricing.json. /search/parts (no
+    filters) lists the part types; /parts/{type}/prices with the Waco
+    Location header returns that type's price group (variants, 'standard'
+    price_type); variants are deduped by name across groups."""
+    path = DATA_DIR / "byot_pricing.json"
+    try:
+        parts = _byot_get("/search/parts?year=&make=&model=")
+    except Exception as e:
+        print(f"  [BYOT pricing] part-type list failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    types: list[str] = []
+    for p in parts if isinstance(parts, list) else []:
+        t = str((p or {}).get("PartType") or "").strip()
+        if t and t not in types:
+            types.append(t)
+    seen: dict[str, dict] = {}
+    failures = 0
+    for t in types:
+        try:
+            group = _byot_get(f"/parts/{t}/prices", BYOT_YARDS[0]["location"])
+        except Exception as e:
+            failures += 1
+            if failures <= 3:
+                print(f"  [BYOT pricing] type {t}: {e}", file=sys.stderr)
+            continue
+        for g in group if isinstance(group, list) else []:
+            if not isinstance(g, dict):
+                continue
+            if str(g.get("price_type") or "standard").lower() != "standard":
+                continue
+            name = str(g.get("variant") or "").strip()
+            if not name or name in seen or _PRICE_AS_NAME_RE.match(name):
+                continue
+            try:
+                price_f = float(g.get("part_price") or 0)
+                core_f = float(g.get("core_price") or 0)
+            except (TypeError, ValueError):
+                continue
+            if price_f <= 0:
+                continue
+            seen[name] = {
+                "description": name,
+                "price": f"{price_f:.2f}",
+                "corePrice": f"{core_f:.2f}",
+                "totalPrice": f"{price_f + core_f:.2f}",
+            }
+    if failures:
+        print(f"  [BYOT pricing] {failures} of {len(types)} part-type groups failed",
+              file=sys.stderr)
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [BYOT pricing] wrote {len(seen)} parts ({len(types)} groups)",
+              file=sys.stderr)
+    else:
+        print(f"  [BYOT pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+# ---- Wilbert's U-Pull-It (wilberts.com/u-pull-it) — 3 western-NY yards -----
+# (2026-10-27) Custom WordPress plugin `wilberts-parts-search` (rebuilt Jul
+# 2026; EXPANSION_CANDIDATES.md "WordPress custom server-rendered"). The
+# search page's form.js POSTs urlencoded `action=...` to the plugin's own
+# api.php (NOT admin-ajax; no nonce is checked — the page's nonces belong to
+# the contact forms). Actions: list-years, list-makes (Hollander
+# manufacturer codes), list-models {make: code, year} (catalog; year is
+# REQUIRED), search {search_type, location, year, make, model, part}.
+# search_type=recent returns every car set out in the last ~6 days across
+# all three yards (~300 rows; extra params are ignored). search_type=upull
+# with make + model (the vehicle-record spellings, "FORD"/"ESCAPE") returns
+# EVERY car of that pair on all three lots, any year (year/location are
+# ignored) — but model is required (empty, "%", and make-only all return
+# just the handful of make-less junk rows) and the model catalog needs a
+# year per call, so there is no bulk listing. Hence the U-Pull-and-Save-
+# style hybrid: a committed cache (docs/data/wilberts_cache.json; the scan
+# workflow commits docs/data) carries the known (make, model) pairs and the
+# cars last seen per pair; every scan merges the recent feed (new pairs,
+# new cars) and re-searches known pairs — the pair search is the liveness
+# source of truth (a cached car missing from its pair's result is dropped;
+# a pair that comes back empty is forgotten until a new arrival revives it).
+# robots.txt: Crawl-delay: 10 — honored (WILBERTS_DELAY_SEC), so pair
+# sweeps are budgeted per scan (WILBERTS_PAIR_BUDGET, round-robin cursor
+# in the cache) and cars whose pair was not re-checked this scan ride the
+# cache until their turn, capped by WILBERTS_STALE_DAYS as a safety net.
+# Seeded 2026-10-27 from the recent feed + one full pair sweep.
+# Rows: StockID (STK-/BAT-/BUF-prefixed; id basis wilberts-{stockid}), VIN
+# (100% full 17-char), Year, Make, Model, YardRow, Location (williamson =
+# the Rochester yard | bath | buffalo = Elma), Engine, DaysInYard. There is
+# no absolute date: dateAdded = first-seen UTC date minus DaysInYard,
+# computed ONCE and kept in the cache so it never drifts between scans.
+# Price list: admin-ajax.php?action=price_list_get_prices (upiPriceList
+# plugin; DataTables JSON, ~434 rows, chain-wide) -> wilberts_pricing.json.
+WILBERTS_API = ("https://www.wilberts.com/u-pull-it/wp-content/plugins/"
+                "wilberts-parts-search/api.php")
+WILBERTS_PAGE_URL = "https://www.wilberts.com/u-pull-it/vehicle-inventory-search/"
+WILBERTS_PRICES_URL = ("https://www.wilberts.com/u-pull-it/wp-admin/admin-ajax.php"
+                       "?action=price_list_get_prices")
+WILBERTS_DELAY_SEC = 10.0  # robots.txt Crawl-delay: 10 — do not lower
+WILBERTS_CACHE_PATH = DATA_DIR / "wilberts_cache.json"
+WILBERTS_PAIR_BUDGET = 240  # pair searches per scan (40 min at crawl-delay pacing)
+WILBERTS_STALE_DAYS = 14    # drop a cached car its pair sweep hasn't confirmed in this long
+WILBERTS_YARDS = {  # keyed by the feed's lower-case Location value
+    # 4936 NY-104, Williamson NY 14589 (exact OSM POI; the site calls this
+    # yard "Rochester")
+    "williamson": {"name": "Wilbert's U-Pull-It - Rochester", "city": "Williamson",
+                   "state": "NY", "lat": 43.2348, "lng": -77.1469},
+    # 7992B NY-415, Bath NY 14810 (exact OSM house number)
+    "bath": {"name": "Wilbert's U-Pull-It - Bath", "city": "Bath",
+             "state": "NY", "lat": 42.3865, "lng": -77.3951},
+    # 550 Pound Rd, Elma NY 14059 (exact OSM POI; the site calls this yard
+    # "Buffalo")
+    "buffalo": {"name": "Wilbert's U-Pull-It - Buffalo", "city": "Elma",
+                "state": "NY", "lat": 42.8359, "lng": -78.6806},
+}
+
+
+def _wilberts_post(session: "requests.Session", data: dict):
+    """POST one api.php action (crawl-delay paced); JSON or None on failure."""
+    time.sleep(WILBERTS_DELAY_SEC)
+    try:
+        r = session.post(WILBERTS_API, data=data,
+                         headers={**HEADERS, "Accept": "application/json",
+                                  "Referer": WILBERTS_PAGE_URL,
+                                  "X-Requested-With": "XMLHttpRequest"},
+                         timeout=120)
+        r.raise_for_status()
+        return r.json()
+    except Exception as e:
+        print(f"  [Wilbert's] {data.get('action')} {data.get('search_type', '')} "
+              f"{data.get('make', '')} {data.get('model', '')}: {e}", file=sys.stderr)
+        return None
+
+
+def _wilberts_pair_key(make: str, model: str) -> str:
+    return f"{make.strip().upper()}|{model.strip().upper()}"
+
+
+def fetch_wilberts_inventory() -> list[dict]:
+    """Wilbert's U-Pull-It (Rochester/Williamson, Bath, Buffalo/Elma NY):
+    recent feed + budgeted per-pair searches over the committed cache."""
+    session = requests.Session()
+    try:
+        cache = json.loads(WILBERTS_CACHE_PATH.read_text())
+    except (OSError, ValueError):
+        cache = {}
+    pairs: dict[str, list] = {
+        _wilberts_pair_key(m, md): [m, md] for m, md in cache.get("pairs", [])}
+    cached: dict[str, dict] = {k: v for k, v in dict(cache.get("vehicles", {})).items()
+                               if isinstance(v, dict)}
+    cursor = int(cache.get("cursor", 0) or 0)
+    today = datetime.now(timezone.utc).date()
+    today_s = today.isoformat()
+
+    def absorb(rows) -> set[str]:
+        """Upsert feed rows into the cache; returns the stock ids seen."""
+        got: set[str] = set()
+        for v in rows or []:
+            if not isinstance(v, dict):
+                continue
+            stock = str(v.get("StockID") or "").strip()
+            make_s = str(v.get("Make") or "").strip()
+            model_s = str(v.get("Model") or "").strip()
+            try:
+                year_i = int(v.get("Year") or 0)
+            except (TypeError, ValueError):
+                year_i = 0
+            if not stock or not make_s or not model_s or not year_i:
+                continue
+            pairs.setdefault(_wilberts_pair_key(make_s, model_s), [make_s, model_s])
+            date_s = str((cached.get(stock) or {}).get("date") or "")
+            if not date_s:
+                try:
+                    days = max(int(v.get("DaysInYard") or 0), 0)
+                except (TypeError, ValueError):
+                    days = 0
+                date_s = (today - timedelta(days=days)).isoformat()
+            row = v.get("YardRow")
+            cached[stock] = {
+                "vin": str(v.get("VIN") or "").strip().upper(),
+                "year": year_i, "make": make_s, "model": model_s,
+                "row": str(row).strip() if row not in (None, "") else "",
+                "loc": str(v.get("Location") or "").strip().lower(),
+                "date": date_s, "seen": today_s,
+            }
+            got.add(stock)
+        return got
+
+    recent = _wilberts_post(session, {"action": "search", "search_type": "recent"})
+    recent_rows = recent.get("vehicleDetails") if isinstance(recent, dict) else None
+    if not recent_rows:
+        print("  [Wilbert's] recent feed empty/unreadable — site layout changed?",
+              file=sys.stderr)
+    n_recent = len(absorb(recent_rows))
+
+    # Budgeted round-robin pair sweep: authoritative for the pairs it reaches.
+    order = sorted(pairs)
+    n_sweep = min(WILBERTS_PAIR_BUDGET, len(order))
+    checked = 0
+    empty_pairs: list[str] = []
+    if order:
+        cursor %= len(order)
+        for i in range(n_sweep):
+            key = order[(cursor + i) % len(order)]
+            mk, md = pairs[key]
+            res = _wilberts_post(session, {
+                "action": "search", "search_type": "upull", "location": "",
+                "year": "", "make": mk, "model": md, "part": ""})
+            if not isinstance(res, dict):
+                continue  # transient failure: leave this pair's cars alone
+            got = absorb(res.get("vehicleDetails") or [])
+            checked += 1
+            for stock in [s for s, c in cached.items()
+                          if _wilberts_pair_key(c["make"], c["model"]) == key
+                          and s not in got]:
+                del cached[stock]
+            if not got:
+                empty_pairs.append(key)
+        cursor = (cursor + n_sweep) % len(order)
+    for key in empty_pairs:
+        pairs.pop(key, None)
+
+    # Safety net for cars whose pair the budget hasn't reached in a while.
+    stale = []
+    for stock, c in cached.items():
+        try:
+            seen_d = datetime.strptime(str(c.get("seen") or ""), "%Y-%m-%d").date()
+        except ValueError:
+            seen_d = today
+        if (today - seen_d).days > WILBERTS_STALE_DAYS:
+            stale.append(stock)
+    for stock in stale:
+        del cached[stock]
+    if stale:
+        print(f"  [Wilbert's] dropped {len(stale)} cars unconfirmed for "
+              f"> {WILBERTS_STALE_DAYS} days", file=sys.stderr)
+
+    if cached or pairs:
+        try:
+            WILBERTS_CACHE_PATH.write_text(json.dumps({
+                "cursor": cursor,
+                "pairs": sorted(pairs.values()),
+                "vehicles": {k: cached[k] for k in sorted(cached)},
+            }, separators=(",", ":")))
+        except OSError as e:
+            print(f"  [Wilbert's] cache write failed: {e}", file=sys.stderr)
+
+    vehicles: list[dict] = []
+    unknown_locs: set[str] = set()
+    for stock in sorted(cached):
+        c = cached[stock]
+        yard = WILBERTS_YARDS.get(c.get("loc", ""))
+        if yard is None:
+            unknown_locs.add(c.get("loc") or "?")
+            continue
+        vin = c.get("vin") or ""
+        vehicles.append({
+            "id": f"wilberts-{stock.lower()}",
+            "vin": vin if len(vin) == 17 else "",
+            "year": int(c["year"]),
+            "make": _utpap_format_label(c["make"]),
+            "model": _utpap_format_label(_strip_hollander_make_prefix(c["make"], c["model"])),
+            "row": c.get("row") or "",
+            "dateAdded": _sanitize_date_added(c.get("date") or ""),
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "wilberts",
+        })
+    if unknown_locs:
+        print(f"  [Wilbert's] skipped cars from unmapped location(s): {sorted(unknown_locs)}",
+              file=sys.stderr)
+    print(f"  [Wilbert's] {len(vehicles)} vehicles across "
+          f"{len({v['_location'] for v in vehicles})} yards "
+          f"(recent {n_recent}, {checked}/{len(order)} pairs re-checked)",
+          file=sys.stderr)
+    return vehicles
+
+
+def refresh_wilberts_pricing_file() -> Path:
+    """Refresh Wilbert's chain-wide price list -> wilberts_pricing.json
+    (upiPriceList DataTables JSON: partName, basePrice, corePrice)."""
+    path = DATA_DIR / "wilberts_pricing.json"
+    try:
+        r = requests.get(WILBERTS_PRICES_URL,
+                         headers={**HEADERS, "Accept": "application/json",
+                                  "Referer": "https://www.wilberts.com/u-pull-it/price-list/",
+                                  "X-Requested-With": "XMLHttpRequest"},
+                         timeout=60)
+        r.raise_for_status()
+        rows = r.json().get("data") or []
+    except Exception as e:
+        print(f"  [Wilbert's pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    seen: dict[str, dict] = {}
+    for g in rows:
+        if not isinstance(g, dict):
+            continue
+        name = str(g.get("partName") or "").strip()
+        if not name or name in seen or _PRICE_AS_NAME_RE.match(name):
+            continue
+        try:
+            price_f = float(str(g.get("basePrice") or "").replace(",", ""))
+            core_f = float(str(g.get("corePrice") or "0").replace(",", "") or 0)
+        except ValueError:
+            continue
+        if price_f <= 0:
+            continue
+        seen[name] = {
+            "description": name,
+            "price": f"{price_f:.2f}",
+            "corePrice": f"{core_f:.2f}",
+            "totalPrice": f"{price_f + core_f:.2f}",
+        }
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [Wilbert's pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [Wilbert's pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -18534,6 +18992,8 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "upas": "U-Pull and Save (Pontiac MI)",
     "chuckeddies": "Chuck & Eddie's Self Service (Southington CT)",
     "robertsons": "Robertson's U-Pull-It (Wareham MA)",
+    "byot": "BYOT Auto Parts (TX)",
+    "wilberts": "Wilbert's U-Pull-It (NY)",
 }
 # Ario chains (Ryan's + wave 1) register themselves from their config so a
 # chain with no yards wired yet can't trip the alarm every scan.
@@ -18580,6 +19040,10 @@ INDEPENDENT_FETCHERS: list = [
     # AZ above (same config-driven adapter, YARDCONNECT_SITES).
     ("Chuck & Eddie's", fetch_chuckeddies_inventory),
     ("Robertson's", fetch_robertsons_inventory),
+    ("BYOT Auto Parts", fetch_byot_inventory),
+    # Wilbert's is slow by design (10 s crawl-delay, ~40 min of pair
+    # sweeps) but overlaps the other hosts like everything else here.
+    ("Wilbert's U-Pull-It", fetch_wilberts_inventory),
 ]
 
 
@@ -20718,7 +21182,7 @@ def main():
     parser.add_argument(
         "--independents",
         action="store_true",
-        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA/FL/GA/MI (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, US Auto Supply, Chesterfield Auto Parts, Go Pull-It), Pick-A-Part VA, U-Pick-It AZ, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL, Ryan's Pick-a-Part MI, U-Pull and Save MI, CRUSH MVC tenants (Pick-A-Part Jalopy Jungle ID x5, Trusty Pick-A-Part ID, M&M U-Pull-It NY, Polk County Pick and Pay FL), yardconnect-pro tenants (Chuck & Eddie's Self Service CT, Robertson's U-Pull-It MA) — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.",
+        help="Also scan onboarded independent yards (Wrench-A-Part TX, U-Pull-R Parts MN/OH, Fenix U-Pull NY/GA, Harry's U-Pull-It PA, Indy-U-Pull-It IN, U-Pull-It IA/NE, Rupert's U-Pull-It VA, Pull-N-Save UT/AZ/CA, Parts Galore MI, Ace Pick-A-Part FL, Sturtevant Auto WI, iPull-uPull CA, St. Cloud U Pull MN, Nevada Pic-A-Part NV, VinPlus platform KY/TN/NC/TX/AR/LA/IL/VA/FL/GA/MI (Bessler's, Bluegrass, Raceway, RTP Maiden, Pickers, Pipes, Joliet U-Pull-It, San Antonio Pick-N-Pull, 195 Used Auto Parts, Pick Ur Part, US Auto Supply, Chesterfield Auto Parts, Go Pull-It), Pick-A-Part VA, U-Pick-It AZ, Barry's U Pull It AL, Prestige Pull-Your-Part TX, Budget U-Pull-It FL, Ryan's Pick-a-Part MI, U-Pull and Save MI, CRUSH MVC tenants (Pick-A-Part Jalopy Jungle ID x5, Trusty Pick-A-Part ID, M&M U-Pull-It NY, Polk County Pick and Pay FL), yardconnect-pro tenants (Chuck & Eddie's Self Service CT, Robertson's U-Pull-It MA) — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too., BYOT Auto Parts TX x3, Wilbert's U-Pull-It NY x3 — see scraper/independent_yards_registry.json). Opt-in so the scheduled scan enables them deliberately; JUNKYARD_INDEPENDENTS=1 works too.)",
     )
     args = parser.parse_args()
 
@@ -20746,7 +21210,8 @@ def main():
                refresh_p195_pricing_file, refresh_pnpsa_pricing_file,
                refresh_ryans_pricing_file, refresh_usauto_pricing_file,
                refresh_upas_pricing_file, refresh_mmupullit_pricing_file,
-               refresh_polkpickpay_pricing_file, refresh_chuckeddies_pricing_file)
+               refresh_polkpickpay_pricing_file, refresh_chuckeddies_pricing_file,
+               refresh_byot_pricing_file, refresh_wilberts_pricing_file)
         for fn in fns:
             try:
                 fn()
@@ -20827,6 +21292,7 @@ def main():
         indep_pool = None
         if scan_independents:
             print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x21 incl. Chesterfield + Go Pull-It + US Auto Supply, Pick-A-Part VA, U-Pick-It AZ, Barry's, Prestige, Budget, Ryan's Pick-a-Part, U-Pull and Save, Jalopy Jungle x5, Trusty, M&M U-Pull-It, Polk County Pick and Pay, Chuck & Eddie's, Robertson's) in the background, overlapped with the chain scans...", file=sys.stderr)
+            print("Scanning independent yards (Wrench-A-Part, U-Pull-R, Fenix, Harry's, Indy, U-Pull-It IA/NE, Rupert's, Pull-N-Save, Parts Galore, Ace, Sturtevant, iPull-uPull, St. Cloud, Nevada Pic-A-Part, VinPlus x21 incl. Chesterfield + Go Pull-It + US Auto Supply, Pick-A-Part VA, U-Pick-It AZ, Barry's, Prestige, Budget, Ryan's Pick-a-Part, U-Pull and Save, Jalopy Jungle x5, Trusty, M&M U-Pull-It, Polk County Pick and Pay, BYOT x3, Wilbert's x3) in the background, overlapped with the chain scans...", file=sys.stderr)
             indep_pool = concurrent.futures.ThreadPoolExecutor(
                 max_workers=1, thread_name_prefix="indep-main")
             indep_fut = indep_pool.submit(fetch_independent_inventory)

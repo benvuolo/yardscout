@@ -887,6 +887,118 @@
       ]
     },
     {
+      "name": "BYOT Auto Parts",
+      "status": "adapter-built",
+      "platform": "WordPress (custom 'byot' theme) per-location pages that are thin shells over the chain's own JSON API at api.byotautoparts.com (ex-CRUSH/S3 tenant that moved platforms); config-driven adapter BYOT_YARDS / fetch_byot_inventory",
+      "website": "https://www.byotautoparts.com",
+      "inventory_url": "https://www.byotautoparts.com/locations/waco/inventory/",
+      "api": {
+        "endpoint": "GET https://api.byotautoparts.com/inventory/yard/vehicles/recent-arrivals?limit=10000 with request header Location: {yard code}",
+        "method": "GET",
+        "auth": "none (the yard is selected by a `Location` request HEADER: Waco 1123, Bryan/College Station 1183, Beaumont 1218)",
+        "format": "json list: VehicleRno, StockId (STK-/BCS-/BMT-prefixed per yard), YardLocationDt (ISO set-out date), Year, Make, Model, VIN (99.6% full), Color, Reference (engine), YardRow, images (ignored)",
+        "requests_per_scan": "3 (one per yard, 1s apart)",
+        "notes": "The inventory page's own 'Latest Arrivals' call returns the yard's ENTIRE lot at a large limit (no date floor: Waco's 1,246 rows reach back to April 2026), so one request per yard replaces any make/model crawl; /search/vehicles needs year+make+model through the interchange catalog and is not used. ids byot-{stockid}. The same config map lists Baton Rouge LA (1259, ~1,050 cars) and Jackson MS (1289, ~990 cars) - same API, same shape, NOT built in this wave (TX scope); each is one BYOT_YARDS entry. Price list: /locations/{slug}/prices/ renders nothing server-side; the API's /parts/{partType}/prices (Location header) returns the price GROUP of a part type (variants with part_price/core_price, identical across yards except sales tax) -> ONE chain-wide byot_pricing.json walked over /search/parts?year=&make=&model= (423 part types, 1s apart, ~7 min, in --refresh-chain-pricing). Built 2026-10-27 from EXPANSION_CANDIDATES.md 'WordPress custom server-rendered' / §6 / §8.4. Live 2026-10-27: 3,303 vehicles (Waco 1,246; Bryan/College Station 967; Beaumont 1,090), newest YardLocationDt 2026-10-26. Pins: Beaumont exact OSM POI; Bryan = the E SH-21 segment in zip 77808; Waco/Elm Mott = Elm Mott place centroid (the I-35 frontage-road house number is not in OSM)."
+      },
+      "update_freshness": "live (YardLocationDt values from the previous day observed)",
+      "robots": "allow all (Yoast block), no crawl-delay",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "yard_id": 1123,
+          "name": "BYOT Auto Parts - Waco",
+          "city": "Elm Mott",
+          "state": "TX",
+          "lat": 31.6715,
+          "lng": -97.1001
+        },
+        {
+          "yard_id": 1183,
+          "name": "BYOT Auto Parts - Bryan/College Station",
+          "city": "Bryan",
+          "state": "TX",
+          "lat": 30.7168,
+          "lng": -96.3408
+        },
+        {
+          "yard_id": 1218,
+          "name": "BYOT Auto Parts - Beaumont",
+          "city": "Beaumont",
+          "state": "TX",
+          "lat": 30.0577,
+          "lng": -94.2193
+        }
+      ]
+    },
+    {
+      "name": "Wilbert's U-Pull-It",
+      "status": "adapter-built",
+      "platform": "WordPress + custom `wilberts-parts-search` plugin (rebuilt Jul 2026) whose form.js POSTs to the plugin's own api.php (urlencoded action=..., no nonce); U-Pull-and-Save-style hybrid adapter fetch_wilberts_inventory with a committed cache docs/data/wilberts_cache.json",
+      "website": "https://www.wilberts.com/u-pull-it/",
+      "inventory_url": "https://www.wilberts.com/u-pull-it/vehicle-inventory-search/",
+      "api": {
+        "endpoint": "POST https://www.wilberts.com/u-pull-it/wp-content/plugins/wilberts-parts-search/api.php (action=search&search_type=recent | action=search&search_type=upull&make=X&model=Y; also list-years / list-makes / list-models {make code, year} / list-parts)",
+        "method": "POST (urlencoded) -> JSON",
+        "auth": "none",
+        "format": "vehicleDetails rows: StockID (STK-/BAT-/BUF-prefixed), VIN (99.9% full), Year, Make, Model, YardRow, Location (williamson|bath|buffalo), Engine, DaysInYard, ImageURLs (ignored)",
+        "requests_per_scan": "1 + min(known pairs, 240) at 10s (robots Crawl-delay: 10) - ~138 pairs today, ~23 min",
+        "notes": "search_type=recent returns every car set out in the last ~6 days across all three yards (~300 rows; no other params honored). search_type=upull with make + model returns EVERY car of that pair on all three lots, any year (year/location ignored), but model is REQUIRED (empty / % / make-only return only a handful of make-less junk rows) and list-models needs a year per call, so there is no bulk listing. Hybrid: the committed cache carries known (make, model) pairs + the cars last seen per pair; each scan merges the recent feed (new pairs/cars) and re-searches up to WILBERTS_PAIR_BUDGET known pairs round-robin (the pair search is the liveness source of truth: a cached car missing from its pair's result is dropped, an empty pair is forgotten until a new arrival revives it); cars whose pair was not reached ride the cache, capped at WILBERTS_STALE_DAYS=14. No absolute set-out date in the feed: dateAdded = first-seen UTC date minus DaysInYard, computed once and kept in the cache. ids wilberts-{stockid}. Seeded 2026-10-27 (recent feed + one full pair sweep): 3,739 vehicles (Rochester/Williamson 1,918; Bath 823; Buffalo/Elma 998) (years 1978-2022, set-out dates back to 2025-09: one week of arrivals already names most pairs on the lots; a pair search also matches longer model names, so pairs grow on their own - 130 -> 138 on the seed run). Price list: admin-ajax.php?action=price_list_get_prices (upiPriceList plugin, DataTables JSON, 434 rows, chain-wide) -> wilberts_pricing.json. First Rochester / Finger Lakes coverage; Buffalo yard joins M&M. Built 2026-10-27 from EXPANSION_CANDIDATES.md 'WordPress custom server-rendered' / §6 item 3 / §8.4. All three pins exact OSM (two are mapped POIs)."
+      },
+      "update_freshness": "live (DaysInYard 0 rows in the recent feed)",
+      "robots": "Crawl-delay: 10 (honored via WILBERTS_DELAY_SEC); /wp-admin/admin-ajax.php explicitly allowed; /plugins/search/ disallowed (not used)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Wilbert's U-Pull-It - Rochester",
+          "city": "Williamson",
+          "state": "NY",
+          "lat": 43.2348,
+          "lng": -77.1469
+        },
+        {
+          "name": "Wilbert's U-Pull-It - Bath",
+          "city": "Bath",
+          "state": "NY",
+          "lat": 42.3865,
+          "lng": -77.3951
+        },
+        {
+          "name": "Wilbert's U-Pull-It - Buffalo",
+          "city": "Elma",
+          "state": "NY",
+          "lat": 42.8359,
+          "lng": -78.6806
+        }
+      ]
+    },
+    {
+      "name": "Ewe Pullet (Nordstrom's)",
+      "status": "candidate",
+      "platform": "wordpress + iis-pro-upull plugin v1.8 (URG-hosted; same plugin family as Pick-A-Part VA) - server-rendered card deck",
+      "website": "https://ewepullet.com",
+      "inventory_url": "https://ewepullet.com/inventory/ANY/ANY/?k=1",
+      "api": {
+        "endpoint": "https://ewepullet.com/inventory/ANY/ANY/?k=1&pagenum={n}",
+        "method": "GET",
+        "auth": "none",
+        "format": "html card deck (expected; see notes)",
+        "requests_per_scan": "unverified",
+        "notes": "NOT BUILT 2026-10-27: the plugin's inventory backend is erroring. Every inventory URL (/inventory/ANY/ANY/?k=1, &id=PP93, &pagenum=1, make/model paths like /inventory/FORD/ESCAPE/?k=1, with and without the plugin's cookies) renders the empty-results shell ('No Results Found. Try Browsing Our Parts Or Search Again'; zero .car-details-uPull cards) while the control site on the same plugin (pickapartva.com) renders 500 cards; admin-ajax action=getMakesIISupull answers {\"error\":\"api error\"} (the catalog actions getYearsIISupull / ajaxflowupull getAllModelsIISupull still work, so the WordPress side is up and the URG data feed behind it is down). No 403 / challenge - plain requests get HTTP 200 - so nothing to work around; re-probe later. Price list is a PDF (/wp-content/uploads/2026/04/2026carpricelist-1.pdf) plus a PNG, not an HTML table - not wired. robots.txt allow-all with admin-ajax explicitly allowed. Address on the site header: 47989 255th Street, Garretson SD 57030 (NE of Sioux Falls; not Brandon) - would be the FIRST South Dakota coverage. Pin = Garretson place centroid (the rural house number is not in OSM)."
+      },
+      "update_freshness": "unknown (inventory backend down at probe time)",
+      "robots": "allow all; /wp-admin/admin-ajax.php explicitly allowed",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Ewe Pullet - Garretson",
+          "city": "Garretson",
+          "state": "SD",
+          "lat": 43.7173,
+          "lng": -96.5029
+        }
+      ]
+    },
+    {
       "name": "Pick-A-Part VA",
       "status": "adapter-built",
       "platform": "wordpress + iis-pro-upull plugin (server-rendered card deck) behind Cloudflare TLS fingerprinting",

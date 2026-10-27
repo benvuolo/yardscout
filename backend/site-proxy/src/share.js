@@ -82,7 +82,7 @@ const PRICE_FILES = [
   ['chesterfield auto parts', 'chesterfield_pricing.json', 'list'], ['ace pick-a-part', 'ace_pricing.json', 'list'],
   ['sturtevant auto', 'sturtevant_pricing.json', 'list'], ['nevada pic-a-part', 'nvpap_pricing.json', 'list'],
   ["barry's u pull it", 'barrys_pricing.json', 'list'], ['195 used auto parts', 'p195_pricing.json', 'list'],
-  ['m&m u-pull-it', 'mmupullit_pricing.json', 'list'], ["chuck & eddie's", 'chuckeddies_pricing.json', 'list'], ['polk county pick and pay', 'polkpickpay_pricing.json', 'list'],
+  ['m&m u-pull-it', 'mmupullit_pricing.json', 'list'], ["chuck & eddie's", 'chuckeddies_pricing.json', 'list'], ['byot auto parts', 'byot_pricing.json', 'list'], ["wilbert's u-pull-it", 'wilberts_pricing.json', 'list'], ['polk county pick and pay', 'polkpickpay_pricing.json', 'list'],
   ['san antonio pick-n-pull', 'pnpsa_pricing.json', 'list'], ["ryan's pick-a-part", 'ryans_pricing.json', 'list'],
   ['us auto supply', 'usauto_pricing.json', 'list'], ['u-pull and save', 'upas_pricing.json', 'list'],
   ['budget u-pull-it', 'budget_pricing.json', 'dict'], ['pick your part', 'pyp_pricing.json', 'dict'],

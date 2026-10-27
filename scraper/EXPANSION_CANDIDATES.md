@@ -155,6 +155,8 @@ Budget U-Pull-It Bartow — prime referral-geography flag** (see §5).
 
 ### WordPress custom server-rendered (difficulty 2–3 — Indy/Budget parser pattern)
 
+**BUILT 2026-10-27 (BYOT ×3, Wilbert's ×3) — Ewe Pullet SKIPPED.** BYOT turned out to be a JSON API (`api.byotautoparts.com`, one recent-arrivals call per yard with a `Location` header returns the whole lot): 3,303 vehicles (Waco 1,246 / Bryan 967 / Beaumont 1,090), 99.6% VINs, chain-wide price list wired (452 variants). Baton Rouge LA + Jackson MS are on the same API, not built (TX scope). Wilbert's is a U-Pull-and-Save-style hybrid (recent feed + per-pair searches over a committed cache, robots `Crawl-delay: 10` honored): seed 3,739 vehicles, 99.9% VINs, 434-row price list wired; one week of arrivals already names most pairs on the lots. Ewe Pullet: no WAF, but the iis-pro-upull backend answers `api error` and every inventory page renders empty — recorded as `candidate`, re-probe. Details: INDEPENDENT_YARDS.md 2026-10-27 SD/NY/TX section.
+
 | Yard | City/State | Website | Inv | Vehicles | PL |
 |---|---|---|---|---|---|
 | BYOT Auto Parts — Waco | Elm Mott, TX | https://www.byotautoparts.com/locations/waco/inventory/ | yes (per-location pages; Color/VIN/Stock fields) | ~1,200 | yes (pricing pages) |
@@ -381,6 +383,8 @@ CRUSH MVC family (Jalopy ×5 + Trusty + M&M Buffalo + Polk County, ~6,500–9,00
 vehicles, difficulty 2), Ewe Pullet (SD, ~1,200), BYOT ×3 (TX, ~3,300),
 Wilbert's ×3 (NY). No OTHER new platform hit the 3+ yard threshold this pass —
 Ario absorbed every lead that would have.
+
+**Update 2026-10-27:** CRUSH family built (above); BYOT ×3 and Wilbert's ×3 built (see the WordPress section's BUILT note); Ewe Pullet skipped — inventory backend down at probe time, still `candidate`.
 
 ### 8.5 Recommended first batch (owner approval required before any build)
 
