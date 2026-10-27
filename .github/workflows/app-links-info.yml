@@ -1,0 +1,64 @@
+# Read-only: prints what universal links / app links need from the stores.
+#  - Google Play: SHA-256 of the app-signing certificate (for assetlinks.json),
+#    from the generated APKs of a released versionCode.
+#  - App Store Connect: the App ID's enabled capabilities.
+name: App links info
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_code:
+        description: "A released Android versionCode"
+        default: "20"
+
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_ID: com.benvuolo.yardscout
+      PACKAGE: io.yardscout.app
+    steps:
+      - run: pip install -q pyjwt cryptography requests google-auth
+      - name: Play app-signing fingerprint
+        env:
+          SA_RAW: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          VC: ${{ github.event.inputs.version_code }}
+        run: |
+          python3 - <<'PY'
+          import json, os, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+          raw = os.environ["SA_RAW"].strip(); obj, _ = json.JSONDecoder().raw_decode(raw[raw.find("{"):])
+          obj.setdefault("type", "service_account"); obj.setdefault("token_uri", "https://oauth2.googleapis.com/token")
+          cred = service_account.Credentials.from_service_account_info(obj, scopes=["https://www.googleapis.com/auth/androidpublisher"])
+          cred.refresh(Request())
+          url = f"https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{os.environ['PACKAGE']}/generatedApks/{os.environ['VC']}"
+          r = requests.get(url, headers={"Authorization": f"Bearer {cred.token}"}, timeout=60)
+          print("status", r.status_code)
+          for g in r.json().get("generatedApks", []):
+              h = g.get("certificateSha256Hash", "")
+              print("certificateSha256Hash:", h)
+          if r.status_code != 200: print(r.text[:500])
+          PY
+      - name: App Store App ID capabilities
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+        run: |
+          python3 - <<'PY'
+          import os, time, jwt, requests
+          key = os.environ["ASC_P8"].strip().replace("\\n", "\n")
+          tok = jwt.encode({"iss": os.environ["ASC_ISSUER_ID"], "iat": int(time.time()), "exp": int(time.time()) + 900,
+                            "aud": "appstoreconnect-v1"}, key, algorithm="ES256", headers={"kid": os.environ["ASC_KEY_ID"], "typ": "JWT"})
+          H = {"Authorization": f"Bearer {tok}"}; API = "https://api.appstoreconnect.apple.com/v1"
+          b = requests.get(f"{API}/bundleIds", headers=H, params={"filter[identifier]": os.environ["BUNDLE_ID"]}, timeout=60).json()["data"]
+          b = [x for x in b if x["attributes"]["identifier"] == os.environ["BUNDLE_ID"]][0]
+          print("bundleId", b["id"], b["attributes"]["name"])
+          caps = requests.get(f"{API}/bundleIds/{b['id']}/bundleIdCapabilities", headers=H, timeout=60).json()["data"]
+          print("capabilities:", sorted(c["attributes"]["capabilityType"] for c in caps))
+          profs = requests.get(f"{API}/bundleIds/{b['id']}/profiles", headers=H, timeout=60).json()["data"]
+          for p in profs: print("profile:", p["attributes"]["name"], p["attributes"]["profileType"], p["attributes"]["profileState"])
+          certs = requests.get(f"{API}/certificates", headers=H, params={"filter[certificateType]": "DISTRIBUTION,IOS_DISTRIBUTION"}, timeout=60).json()["data"]
+          for c in certs: print("cert:", c["id"], c["attributes"]["certificateType"], c["attributes"]["displayName"], c["attributes"]["serialNumber"], c["attributes"]["expirationDate"][:10])
+          PY
