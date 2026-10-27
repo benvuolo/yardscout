@@ -67,6 +67,13 @@ jobs:
           node --check src/index.js
           npx --yes wrangler@4 d1 migrations apply yardscout-db --remote
           npx --yes wrangler@4 deploy
+      # Owner-comp secret for the API Worker's /v1/admin/ent/grant route.
+      - name: Sync ENT_ADMIN_SECRET to yardscout-api
+        if: (env.TARGET == 'both' || env.TARGET == 'api') && env.ENT_ADMIN_SECRET != ''
+        working-directory: backend
+        env:
+          ENT_ADMIN_SECRET: ${{ secrets.ENT_ADMIN_SECRET }}
+        run: printf '%s' "$ENT_ADMIN_SECRET" | npx --yes wrangler@4 secret put ENT_ADMIN_SECRET
       - name: Deploy yardscout-site
         if: env.TARGET == 'both' || env.TARGET == 'site'
         working-directory: backend/site-proxy

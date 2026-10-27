@@ -1,3 +1,5 @@
+# Goes through the API Worker (same entitlement store as the site Worker):
+# yardscout.io's bot protection challenges GitHub's runners.
 # Give a friend Pro (or take it back) without touching a Mac or the
 # dashboard. Needs the ENT_ADMIN_SECRET repository secret (same value the
 # deploy workflow mirrors into the yardscout-site Worker).
@@ -43,7 +45,7 @@ jobs:
           import json, os, urllib.request
           body = {"email": os.environ["IN_EMAIL"], "note": os.environ["IN_NOTE"], "revoke": os.environ["IN_REVOKE"] == "true"}
           if os.environ["IN_MONTHS"].strip(): body["months"] = int(os.environ["IN_MONTHS"])
-          req = urllib.request.Request("https://yardscout.io/api/ent/admin/grant", data=json.dumps(body).encode(),
+          req = urllib.request.Request("https://yardscout-api.yardscout.workers.dev/v1/admin/ent/grant", data=json.dumps(body).encode(),
                                        headers={"content-type": "application/json", "x-ent-admin": os.environ["ENT_ADMIN_SECRET"]}, method="POST")
           try:
               with urllib.request.urlopen(req, timeout=30) as r: print(r.read().decode())

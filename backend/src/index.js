@@ -22,6 +22,7 @@
  *   GET  /v1/admin/coverage                       x-admin-secret (request counts by key)
  *   POST /v1/events                               public (UTM funnel counters)
  *   GET  /v1/admin/attribution                    x-admin-secret (per-source funnel)
+ *   POST /v1/admin/ent/grant                      x-ent-admin (owner comps → ENTITLEMENTS KV)
  *   POST /v1/admin/coverage/digest/run            x-admin-secret (manual owner-digest trigger)
  *   POST /v1/iap/revenuecat                       RevenueCat webhook auth
  */
@@ -39,6 +40,7 @@ import {
   handleWaitlistJoin, handleWaitlistList,
 } from './admin.js';
 import { handleEvent, handleAttribution } from './attribution.js';
+import { handleCompGrant } from './comps.js';
 import { handleCheckout, handlePortal, handleStripeWebhook } from './billing.js';
 import {
   handleWatchesList, handleWatchCreate, handleWatchDelete,
@@ -146,6 +148,7 @@ async function route(req, env, url, ctx) {
     if (!rateLimit('ev:ip:' + ip, 60, 60_000)) return err(429, 'rate_limited', 'Slow down.');
     return handleEvent(req, env);
   }
+  if (method === 'POST' && path === '/v1/admin/ent/grant') return handleCompGrant(req, env);
   if (method === 'GET' && path === '/v1/admin/attribution') {
     const bad = await requireAdmin(req, env); if (bad) return bad;
     return handleAttribution(req, env);
