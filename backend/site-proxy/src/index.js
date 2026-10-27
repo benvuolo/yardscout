@@ -18,7 +18,7 @@ const UPSTREAM = 'https://benvuolo.github.io/yardscout';
 // Lives here (not in yardscout-api) so the web app talks same-origin.
 import { handleEntitlements } from './entitlements.js';
 // Server-rendered share pages (/car/<vin>, /yard/<slug>) — see share.js.
-import { renderCarPage, renderYardPage, renderYardSitemap, renderYardsPage, renderLandedPage } from './share.js';
+import { renderCarPage, renderYardPage, renderYardSitemap, renderYardsPage, renderLandedPage, IOS_URL, PLAY_URL } from './share.js';
 
 // Fixed-allowlist upstream mirror for the scan workflow. Some independent
 // yards' hosts (first case: indyupullit.com) hard-block GitHub Actions'
@@ -42,8 +42,8 @@ const AASA = JSON.stringify({
     details: [{
       appIDs: ['G23Z9MSBUG.com.benvuolo.yardscout'],
       appID: 'G23Z9MSBUG.com.benvuolo.yardscout',
-      components: [{ '/': '/car/*', comment: 'shared car pages' }],
-      paths: ['/car/*'],
+      components: [{ '/': '/car/*', comment: 'shared car pages' }, { '/': '/open', comment: 'open the app' }],
+      paths: ['/car/*', '/open'],
     }],
   },
 });
@@ -67,6 +67,19 @@ export default {
     if (req.method === 'GET' || req.method === 'HEAD') {
       if (url.pathname === '/.well-known/apple-app-site-association' || url.pathname === '/apple-app-site-association') return wellKnown(AASA);
       if (url.pathname === '/.well-known/assetlinks.json') return wellKnown(ASSET_LINKS);
+      // App-button landings. Reached only when the app did NOT claim the
+      // link (not installed, or an older build): send the visitor on to the
+      // web app (car links) or their store (the header button).
+      if (url.pathname === '/open' || url.pathname === '/open/') {
+        const ua = req.headers.get('user-agent') || '';
+        const to = /iPhone|iPad|iPod|Macintosh/.test(ua) && url.searchParams.get('app') === '1' ? IOS_URL
+          : /Android/.test(ua) ? PLAY_URL : 'https://yardscout.io/';
+        return Response.redirect(to, 302);
+      }
+      if (url.searchParams.get('app') === '1') {
+        const cm = url.pathname.match(/^\/car\/([^/]+)\/?$/);
+        if (cm) return Response.redirect('https://yardscout.io/#car=' + cm[1], 302);
+      }
       let sm = url.pathname.match(/^\/car\/([^/]+)\/?$/);
       if (sm) return renderCarPage(sm[1]);
       sm = url.pathname.match(/^\/yard\/([^/]+)\/?$/);

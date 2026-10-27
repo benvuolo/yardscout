@@ -29,6 +29,7 @@
                 <data android:host="yardscout.io" />
                 <data android:host="www.yardscout.io" />
                 <data android:pathPrefix="/car/" />
+                <data android:path="/open" />
             </intent-filter>
         </activity>
 

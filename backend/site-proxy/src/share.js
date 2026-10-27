@@ -15,8 +15,8 @@
  */
 const API = 'https://yardscout-api.yardscout.workers.dev';
 const SITE = 'https://yardscout.io';
-const IOS_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
-const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
+export const IOS_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
+export const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
 const OG_IMAGE = SITE + '/og-card.png';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
@@ -203,13 +203,14 @@ form button{margin-top:.9rem;cursor:pointer}
 
 const PIN = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
 
-function layout({ title, desc, canonical, body, status = 200, robots = 'index,follow', cache = 300, ogTitle, type = 'website', spec = 'SELF-SERVICE YARD INTEL' }) {
+function layout({ title, desc, canonical, body, status = 200, robots = 'index,follow', cache = 300, ogTitle, type = 'website', spec = 'SELF-SERVICE YARD INTEL', appArg }) {
   const html = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <meta name="robots" content="${robots}"><meta name="theme-color" content="#F4F2EC" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1A" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="${esc(canonical)}">
+<meta name="apple-itunes-app" content="app-id=6817126581, app-argument=${esc(appArg || canonical)}">
 <link rel="icon" type="image/png" sizes="192x192" href="${SITE}/favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="${SITE}/favicon-32.png?v=3"><link rel="apple-touch-icon" href="${SITE}/apple-touch-icon.png?v=3">
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="YardScout">
 <meta property="og:title" content="${esc(ogTitle || title)}"><meta property="og:description" content="${esc(desc)}">
@@ -228,9 +229,20 @@ function layout({ title, desc, canonical, body, status = 200, robots = 'index,fo
   </div>
   <div style="display:flex;align-items:center;gap:0.5rem">
     <button type="button" id="theme-toggle" class="theme-toggle" title="Switch light / dark" aria-label="Switch light or dark theme"><svg class="ico ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><svg class="ico ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
-    <a class="btn" href="${SITE}/" style="text-decoration:none">Open the app</a>
+    <a class="btn" href="${SITE}/" data-app-path="/open" data-fallback="store" style="text-decoration:none">Open the app</a>
   </div>
 </header>
+<script>
+/* "Open the app" buttons. iOS only hands a link to the app when it comes
+ * from ANOTHER domain, so iPhone buttons point at www.yardscout.io (a
+ * separate domain to iOS; the Worker sends it on to the web or the store
+ * when the app isn't installed). Android uses an intent link with a
+ * browser fallback. Desktop keeps the plain web link. */
+document.addEventListener('DOMContentLoaded',function(){var ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1),and=/Android/.test(ua);if(!ios&&!and)return;
+var PLAY='${PLAY_URL}';document.querySelectorAll('a[data-app-path]').forEach(function(a){var p=a.getAttribute('data-app-path'),web=a.getAttribute('href');
+if(ios){a.href='https://www.yardscout.io'+p+(p.indexOf('?')<0?'?':'&')+'app=1';}
+else{var fb=a.getAttribute('data-fallback')=='store'?PLAY:web;a.href='intent://yardscout.io'+p+'#Intent;scheme=https;package=io.yardscout.app;S.browser_fallback_url='+encodeURIComponent(fb)+';end';}});});
+</script>
 <script>
 (function(){var b=document.getElementById('theme-toggle');if(!b)return;b.addEventListener('click',function(){var h=document.documentElement,p=h.getAttribute('data-theme');var cur=(p=='dark'||p=='light')?p:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var n=cur=='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('ys_theme',n);}catch(e){}});})();
 </script>
@@ -322,7 +334,7 @@ ${carCard({ name, yardName, where, row: v.row, metaHtml: meta, specs: [trim, dri
 </div>
 ${yardLinks}
 ${priceListHtml(priceRows, yardName)}
-<div class="cta"><a class="btn btn-primary" href="${SITE}/#car=${encodeURIComponent(key)}">Open in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when the next ${esc(v.make)} ${esc(v.model)} lands near me</a></div>
+<div class="cta"><a class="btn btn-primary" href="${SITE}/#car=${encodeURIComponent(key)}" data-app-path="/car/${encodeURIComponent(key)}">Open in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when the next ${esc(v.make)} ${esc(v.model)} lands near me</a></div>
 ${storesLine()}
 <p class="note">Row and set-out date come straight from the yard's own published list, refreshed every 4 hours (inventory as of ${esc(fmtStamp(d.scrapedAt))}). Yards track cars, not the parts still on them — a car that has sat a while may be picked over.</p>`;
 
