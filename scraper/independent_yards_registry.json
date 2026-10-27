@@ -2131,6 +2131,175 @@
           "lng": -70.7046
         }
       ]
+    },
+    {
+      "name": "Buddy's Upull",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - config-driven adapter CRUSH_MVC_SITES['buddys']",
+      "website": "https://www.buddysupull.com",
+      "inventory_url": "https://www.buddysupull.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://www.buddysupull.com/Home/Inventory",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "page GET + one POST per make, 1s apart",
+        "notes": "Found 2026-10-27 by the platform hunt (title search for the CRUSH MVC app). Verified live with recent ARRIVAL DATE values."
+      },
+      "update_freshness": "live (Oct 2026 arrival dates observed)",
+      "robots": "not restrictive",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Buddy's Upull - Springfield",
+          "city": "Brookline",
+          "state": "MO",
+          "lat": 37.1425,
+          "lng": -93.4353
+        }
+      ]
+    },
+    {
+      "name": "U-Pull-It Auto Parts",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - config-driven adapter CRUSH_MVC_SITES['upullitap']",
+      "website": "https://www.upullitap.com",
+      "inventory_url": "https://www.upullitap.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://www.upullitap.com/Home/Inventory",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "page GET + one POST per make, 1s apart",
+        "notes": "Found 2026-10-27 by the platform hunt (title search for the CRUSH MVC app). Verified live with recent ARRIVAL DATE values."
+      },
+      "update_freshness": "live (Oct 2026 arrival dates observed)",
+      "robots": "not restrictive",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "U-Pull-It Auto Parts - Memphis",
+          "city": "Memphis",
+          "state": "TN",
+          "lat": 35.18,
+          "lng": -90.0084
+        },
+        {
+          "name": "U-Pull-It Auto Parts - Millington",
+          "city": "Millington",
+          "state": "TN",
+          "lat": 35.3375,
+          "lng": -89.8961
+        }
+      ]
+    },
+    {
+      "name": "Marion County Auto Parts",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - config-driven adapter CRUSH_MVC_SITES['marioncounty']",
+      "website": "https://marioncountyautoparts.com",
+      "inventory_url": "https://marioncountyautoparts.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://marioncountyautoparts.com/Home/Inventory",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "page GET + one POST per make, 1s apart",
+        "notes": "Found 2026-10-27 by the platform hunt (title search for the CRUSH MVC app). Verified live with recent ARRIVAL DATE values."
+      },
+      "update_freshness": "live (Oct 2026 arrival dates observed)",
+      "robots": "not restrictive",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Marion County Auto Parts - Belleview",
+          "city": "Belleview",
+          "state": "FL",
+          "lat": 29.0626,
+          "lng": -82.0495
+        }
+      ]
+    },
+    {
+      "name": "662 Self Serve Auto Parts",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - config-driven adapter CRUSH_MVC_SITES['selfserve662']",
+      "website": "https://662selfserveautoparts.com",
+      "inventory_url": "https://662selfserveautoparts.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://662selfserveautoparts.com/Home/Inventory",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "page GET + one POST per make, 1s apart",
+        "notes": "Found 2026-10-27 by the platform hunt (title search for the CRUSH MVC app). Verified live with recent ARRIVAL DATE values."
+      },
+      "update_freshness": "live (Oct 2026 arrival dates observed)",
+      "robots": "not restrictive",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "662 Self Serve Auto Parts - Corinth",
+          "city": "Corinth",
+          "state": "MS",
+          "lat": 34.9161,
+          "lng": -88.5313
+        }
+      ]
+    },
+    {
+      "name": "CP's U-Pull-It",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - config-driven adapter CRUSH_MVC_SITES['cpsupullit']",
+      "website": "https://cpsupullit.com",
+      "inventory_url": "https://cpsupullit.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://cpsupullit.com/Home/Inventory",
+        "method": "POST",
+        "auth": "none",
+        "format": "html-table",
+        "requests_per_scan": "page GET + one POST per make, 1s apart",
+        "notes": "Found 2026-10-27 by the platform hunt (title search for the CRUSH MVC app). Verified live with recent ARRIVAL DATE values."
+      },
+      "update_freshness": "live (Oct 2026 arrival dates observed)",
+      "robots": "not restrictive",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "CP's U-Pull-It - Dalton",
+          "city": "Dalton",
+          "state": "GA",
+          "lat": 34.7692,
+          "lng": -84.9702
+        }
+      ]
+    },
+    {
+      "name": "Genesis Metal Recycling",
+      "status": "adapter-built",
+      "platform": "wordpress + yardconnect-pro v2.3 (admin-ajax, table view) - config-driven adapter YARDCONNECT_SITES['genesis']",
+      "website": "https://genesismetalrecycling.com",
+      "inventory_url": "https://genesismetalrecycling.com/inventory-search/",
+      "api": {
+        "endpoint": "https://genesismetalrecycling.com/wp-admin/admin-ajax.php",
+        "method": "POST",
+        "auth": "nonce from yardconnectPublic",
+        "format": "html fragment",
+        "requests_per_scan": "2",
+        "notes": "Self-service yard. Found 2026-10-27 by the platform hunt. ~290 rows, Date Set newest 10/26/26."
+      },
+      "update_freshness": "live",
+      "robots": "not restrictive",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Genesis Metal Recycling - Madison",
+          "city": "Madison",
+          "state": "NC",
+          "lat": 36.4012,
+          "lng": -79.987
+        }
+      ]
     }
   ]
 }

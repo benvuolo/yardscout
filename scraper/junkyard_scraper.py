@@ -16303,6 +16303,21 @@ YARDCONNECT_SITES: dict[str, dict] = {
              "city": "Wareham", "state": "MA", "lat": 41.7703, "lng": -70.7046},
         ],
     },
+    # Genesis Metal Recycling — self-service yard, Madison NC (804 Island Dr,
+    # exact OSM address). yardconnect-pro v2.3 "ajax" mode, single lot, ~290
+    # rows. Its table has an extra "Stock Number" column (header-driven
+    # parse ignores unknown labels).
+    "genesis": {
+        "label": "Genesis Metal Recycling (Madison NC)",
+        "site": "https://genesismetalrecycling.com",
+        "mode": "ajax",
+        "nonce_paths": ("/inventory-search/", "/"),
+        "yards": [
+            {"lot": None, "code": "madison",
+             "name": "Genesis Metal Recycling - Madison", "city": "Madison",
+             "state": "NC", "lat": 36.4012, "lng": -79.987},
+        ],
+    },
 }
 _YARDCONNECT_NONCE_RE = re.compile(
     r'yardconnectPublic\s*=\s*{[^}]*"nonce"\s*:\s*"([0-9a-f]+)"')
@@ -16471,6 +16486,10 @@ def fetch_chuckeddies_inventory() -> list[dict]:
     """Fetch Chuck & Eddie's Southington self-service lot (one server-rendered GET)."""
     return fetch_yardconnect_site("chuckeddies")
 
+
+def fetch_genesis_inventory() -> list[dict]:
+    """Genesis Metal Recycling Madison NC (yardconnect-pro table POST)."""
+    return fetch_yardconnect_site("genesis")
 
 def fetch_robertsons_inventory() -> list[dict]:
     """Fetch Robertson's U-Pull-It Wareham inventory (one table-view POST)."""
@@ -17314,6 +17333,130 @@ ARIO_CHAINS: dict[str, dict] = {
             {"slug": "samson-auto-salvage", "code": "losangeles",
              "name": "Samson Auto Salvage", "city": "Los Angeles", "state": "CA",
              "lat": 33.9648, "lng": -118.2328},
+        ],
+    },
+    # --- Wave 3 (2026-10-27): yards found by listing Ario's public live-yard
+    # table (customer_facing_visible). Each was checked live with set-outs
+    # in the last 3 weeks. Pins are the org records' own geocodes, except
+    # Eichelberger's (no pin in the record; Spring Grove centroid).
+    "rgpickapart": {
+        "label": "RG Pick-a-Part (Anthony TX)",
+        "yards": [
+            {"slug": "rg-pick-a-part-anthony-tx", "code": "anthony",
+             "name": "RG Pick-a-Part - Anthony", "city": "Anthony", "state": "TX",
+             "lat": 31.9759, "lng": -106.5996},
+        ],
+    },
+    "youngstownupullit": {
+        "label": "Youngstown U-Pull-It (OH)",
+        "yards": [
+            {"slug": "youngstown-u-pull-it-youngstown-oh", "code": "youngstown",
+             "name": "Youngstown U-Pull-It", "city": "Youngstown", "state": "OH",
+             "lat": 41.1172, "lng": -80.633},
+        ],
+    },
+    "robertsupick": {
+        "label": "Roberts Parts-U-Pick (Moffett OK)",
+        "yards": [
+            {"slug": "roberts-parts-u-pick-moffett-ok", "code": "moffett",
+             "name": "Roberts Parts-U-Pick - Moffett", "city": "Moffett", "state": "OK",
+             "lat": 35.3904, "lng": -94.4469},
+        ],
+    },
+    "baughmans": {
+        "label": "Baughman's U-Pull-It (York PA)",
+        "yards": [
+            {"slug": "baughmans-u-pull-it-york-pa", "code": "york",
+             "name": "Baughman's U-Pull-It - York", "city": "York", "state": "PA",
+             "lat": 39.9769, "lng": -76.7065},
+        ],
+    },
+    "a1crashed": {
+        "label": "A-1 Crashed Cars (South Sioux City NE)",
+        "yards": [
+            {"slug": "a-1-crashed-cars-south-sioux-city-ne", "code": "southsiouxcity",
+             "name": "A-1 Crashed Cars U-Pull-It - South Sioux City", "city": "South Sioux City", "state": "NE",
+             "lat": 42.4824, "lng": -96.4381},
+        ],
+    },
+    "eichelbergers": {
+        "label": "Eichelberger's U-Pull-It (Spring Grove PA)",
+        "yards": [
+            {"slug": "eichelbergers-u-pull-it-spring-grove", "code": "springgrove",
+             "name": "Eichelberger's U-Pull-It - Spring Grove", "city": "Spring Grove", "state": "PA",
+             "lat": 39.8745, "lng": -76.8658},
+        ],
+    },
+    "upullpocatello": {
+        "label": "U Pull Auto Parts (Pocatello ID)",
+        "yards": [
+            {"slug": "u-pull-auto-parts-pocatello-id", "code": "pocatello",
+             "name": "U Pull Auto Parts - Pocatello", "city": "Pocatello", "state": "ID",
+             "lat": 42.9132, "lng": -112.4959},
+        ],
+    },
+    "hhsalvage": {
+        "label": "H and H Salvage (Amarillo TX)",
+        "yards": [
+            {"slug": "h-and-h-salvage-amarillo-tx", "code": "amarillo",
+             "name": "H and H Salvage - Amarillo", "city": "Amarillo", "state": "TX",
+             "lat": 35.2615, "lng": -101.7496},
+        ],
+    },
+    "cashncarry": {
+        "label": "Cash-N-Carry Pull-Your-Part (Savannah GA)",
+        "yards": [
+            {"slug": "cash-n-carry-pull-your-part-savannah-ga", "code": "savannah",
+             "name": "Cash-N-Carry Pull-Your-Part - Savannah", "city": "Savannah", "state": "GA",
+             "lat": 32.0338, "lng": -81.1145},
+        ],
+    },
+    "milliron": {
+        "label": "Milliron Auto Parts (Mansfield OH)",
+        "yards": [
+            {"slug": "milliron-auto-parts-mansfield-oh", "code": "mansfield",
+             "name": "Milliron Auto Parts - Mansfield", "city": "Mansfield", "state": "OH",
+             "lat": 40.694, "lng": -82.5879},
+        ],
+    },
+    "smithauto": {
+        "label": "Smith Auto Self Serve (Pawnee City NE)",
+        "yards": [
+            {"slug": "smith-auto-inc-self-serve-pawnee-city-ne", "code": "pawneecity",
+             "name": "Smith Auto Self Serve - Pawnee City", "city": "Pawnee City", "state": "NE",
+             "lat": 40.1127, "lng": -96.1656},
+        ],
+    },
+    "grandpajohns": {
+        "label": "Grandpa John's Pick & Pull (Green Bay WI)",
+        "yards": [
+            {"slug": "grandpa-johns-pick-and-pull-green-bay-wi", "code": "greenbay",
+             "name": "Grandpa John's Pick & Pull - Green Bay", "city": "Green Bay", "state": "WI",
+             "lat": 44.552, "lng": -88.053},
+        ],
+    },
+    "partsyoupull": {
+        "label": "Parts YoU Pull (Amite LA)",
+        "yards": [
+            {"slug": "parts-you-pull-amite-la", "code": "amite",
+             "name": "Parts YoU Pull - Amite", "city": "Amite", "state": "LA",
+             "lat": 30.7266, "lng": -90.509},
+        ],
+    },
+    "coloradoauto": {
+        "label": "Colorado Auto & Parts (Englewood CO)",
+        "yards": [
+            {"slug": "colorado-auto-and-parts-englewood-co", "code": "englewood",
+             "name": "Colorado Auto & Parts - Englewood", "city": "Englewood", "state": "CO",
+             "lat": 39.6368, "lng": -105.0107},
+        ],
+    },
+    "aeroauto": {
+        "label": "Aero Auto Salvage (Shreveport LA)",
+        "yards": [
+            {"slug": "aero-auto-parts-llc-shreveport-la", "code": "shreveport",
+             "name": "Aero Auto Salvage - Shreveport", "city": "Shreveport", "state": "LA",
+             "lat": 32.5288, "lng": -93.7695},
         ],
     },
     # NOT HERE (2026-10-26, see EXPANSION_CANDIDATES.md §8.6.2): Paul's Auto
@@ -18272,6 +18415,72 @@ CRUSH_MVC_SITES: dict[str, dict] = {
              "state": "FL", "lat": 28.1094, "lng": -81.9736},
         ],
     },
+    # --- 2026-10-27 hunt: more CRUSH MVC tenants (same app, /Home/Inventory
+    # form posts to itself). Each verified live with recent ARRIVAL DATEs.
+    "buddys": {
+        "label": "Buddy's Upull (Springfield MO)",
+        "base": "https://www.buddysupull.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "yards": [
+            # 5740 W US-60 (US-60 segment at Brookline; parcel not in OSM)
+            {"yard_id": None, "code": "springfield",
+             "name": "Buddy's Upull - Springfield", "city": "Brookline",
+             "state": "MO", "lat": 37.1425, "lng": -93.4353},
+        ],
+    },
+    "upullitap": {
+        "label": "U-Pull-It Auto Parts (Memphis TN)",
+        "base": "https://www.upullitap.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "yards": [
+            # 1515 N Watkins St (exact OSM address)
+            {"yard_id": "1079", "code": "memphis",
+             "name": "U-Pull-It Auto Parts - Memphis", "city": "Memphis",
+             "state": "TN", "lat": 35.18, "lng": -90.0084},
+            # 7710 Raleigh Millington Rd (exact OSM node)
+            {"yard_id": "1196", "code": "millington",
+             "name": "U-Pull-It Auto Parts - Millington", "city": "Millington",
+             "state": "TN", "lat": 35.3375, "lng": -89.8961},
+        ],
+    },
+    "marioncounty": {
+        "label": "Marion County Auto Parts (Belleview FL)",
+        "base": "https://marioncountyautoparts.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "yards": [
+            # 8635 CR 25 (not in OSM; Belleview centroid)
+            {"yard_id": None, "code": "belleview",
+             "name": "Marion County Auto Parts - Belleview", "city": "Belleview",
+             "state": "FL", "lat": 29.0626, "lng": -82.0495},
+        ],
+    },
+    "selfserve662": {
+        "label": "662 Self Serve Auto Parts (Corinth MS)",
+        "base": "https://662selfserveautoparts.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "yards": [
+            # 1301 Cardinal Dr (exact OSM address)
+            {"yard_id": None, "code": "corinth",
+             "name": "662 Self Serve Auto Parts - Corinth", "city": "Corinth",
+             "state": "MS", "lat": 34.9161, "lng": -88.5313},
+        ],
+    },
+    "cpsupullit": {
+        "label": "CP's U-Pull-It (Dalton GA)",
+        "base": "https://cpsupullit.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "yards": [
+            # 2430 S Dixie Hwy (not in OSM; Dalton centroid)
+            {"yard_id": None, "code": "dalton",
+             "name": "CP's U-Pull-It - Dalton", "city": "Dalton",
+             "state": "GA", "lat": 34.7692, "lng": -84.9702},
+        ],
+    },
 }
 _CRUSH_MVC_MAKE_SELECT_RE = re.compile(
     r'<select[^>]*(?:id="car-make"|name="VehicleMake")[^>]*>(.*?)</select>', re.S)
@@ -18441,6 +18650,30 @@ def fetch_polkpickpay_inventory() -> list[dict]:
     """Polk County Pick and Pay (Lakeland FL) via the CRUSH MVC adapter."""
     return fetch_crush_mvc_site("polkpickpay")
 
+
+def fetch_buddys_inventory() -> list[dict]:
+    """Buddy's Upull (Springfield MO) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("buddys")
+
+
+def fetch_upullitap_inventory() -> list[dict]:
+    """U-Pull-It Auto Parts (Memphis TN) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("upullitap")
+
+
+def fetch_marioncounty_inventory() -> list[dict]:
+    """Marion County Auto Parts (Belleview FL) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("marioncounty")
+
+
+def fetch_selfserve662_inventory() -> list[dict]:
+    """662 Self Serve Auto Parts (Corinth MS) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("selfserve662")
+
+
+def fetch_cpsupullit_inventory() -> list[dict]:
+    """CP's U-Pull-It (Dalton GA) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("cpsupullit")
 
 def refresh_crush_mvc_pricing_file(source: str) -> Path:
     """/Home/PartPrices of one CRUSH MVC tenant -> {source}_pricing.json
@@ -19001,6 +19234,7 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "upas": "U-Pull and Save (Pontiac MI)",
     "chuckeddies": "Chuck & Eddie's Self Service (Southington CT)",
     "robertsons": "Robertson's U-Pull-It (Wareham MA)",
+    "genesis": "Genesis Metal Recycling (Madison NC)",
     "byot": "BYOT Auto Parts (TX)",
     "wilberts": "Wilbert's U-Pull-It (NY)",
 }
@@ -19045,10 +19279,16 @@ INDEPENDENT_FETCHERS: list = [
     ("Trusty", fetch_trusty_inventory),
     ("M&M U-Pull-It", fetch_mmupullit_inventory),
     ("Polk County Pick and Pay", fetch_polkpickpay_inventory),
+    ("Buddy's Upull", fetch_buddys_inventory),
+    ("U-Pull-It Auto Parts TN", fetch_upullitap_inventory),
+    ("Marion County Auto Parts", fetch_marioncounty_inventory),
+    ("662 Self Serve", fetch_selfserve662_inventory),
+    ("CP's U-Pull-It", fetch_cpsupullit_inventory),
     # yardconnect-pro tenants (2026-10-27): one entry per host, like U-Pick-It
     # AZ above (same config-driven adapter, YARDCONNECT_SITES).
     ("Chuck & Eddie's", fetch_chuckeddies_inventory),
     ("Robertson's", fetch_robertsons_inventory),
+    ("Genesis Metal Recycling", fetch_genesis_inventory),
     ("BYOT Auto Parts", fetch_byot_inventory),
     # Wilbert's is slow by design (10 s crawl-delay, ~40 min of pair
     # sweeps) but overlaps the other hosts like everything else here.
