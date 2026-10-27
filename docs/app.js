@@ -6337,7 +6337,7 @@ async function refreshNativeIapUi() {
         // contradicts the live web checkout button right below it.
         const sub = document.querySelector('#upgrade-sheet .sheet-sub');
         if (sub) sub.textContent = sub.textContent.replace(
-          'Subscribe in the YardScout iOS app.',
+          'Subscribe in the YardScout app for iPhone or Android.',
           'Subscribe right here or in the YardScout app; cancel anytime.');
       }
     } catch (e) { /* worker unreachable → App-Store-only copy stands */ }
