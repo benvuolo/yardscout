@@ -26,8 +26,10 @@ WATCH FOR THE RIGHT CAR
 YARDSCOUT PRO
 - Price list before you drive: what the yard charges vs what the same used part goes for online, on nearly every car
 - Donor-car alerts: a push within hours of a watched car hitting a yard in your radius, plus sale-day alerts
-- Which parts get picked over fast, days on the lot and leaving-soon signals — get there before the crusher
-- Unlimited radius and nationwide search
+- Saved-car alerts — a push when a car on your visit list leaves the yard, or passes the yard's typical stay
+- Watches by drivetrain and trim — 4WD only, "SR5", "TRD" — confirmed from the VIN
+- Which parts get picked over fast, and sorting by leaving-soonest — get there before the crusher
+- Unlimited radius, nationwide search and email alerts
 
 NO ACCOUNT, NO EMAIL
 - Light and dark mode — follows your phone, or pick one
