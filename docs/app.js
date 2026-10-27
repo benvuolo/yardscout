@@ -2079,8 +2079,18 @@ function effectiveTheme() {
   return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 function applyThemeColor() {
+  const dark = effectiveTheme() === 'dark';
   const m = document.getElementById('theme-color');
-  if (m) m.setAttribute('content', effectiveTheme() === 'dark' ? '#17150f' : '#efece4');
+  if (m) m.setAttribute('content', dark ? '#17150f' : '#efece4');
+  // Native shells: status-bar icons must flip with the theme (Capacitor
+  // StatusBar plugin; Style.Dark = light icons on a dark background).
+  try {
+    const SB = IS_NATIVE && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.StatusBar;
+    if (SB) {
+      SB.setStyle({ style: dark ? 'DARK' : 'LIGHT' }).catch(() => {});
+      if (IS_ANDROID && SB.setBackgroundColor) SB.setBackgroundColor({ color: dark ? '#17150f' : '#efece4' }).catch(() => {});
+    }
+  } catch (e) { /* plugin absent in older shells */ }
 }
 function toggleTheme() {
   const next = effectiveTheme() === 'dark' ? 'light' : 'dark';

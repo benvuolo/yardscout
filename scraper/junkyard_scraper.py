@@ -17445,6 +17445,77 @@ def _ario_live_yard_items(session: "requests.Session", slug: str,
     return items
 
 
+# Some Ario tenants (first seen: L and L U-Pull, Kings Mountain NC) fill the
+# feed's `make` with a Hollander-style CATEGORY ("Honda Accord", "Ford Pickup
+# F150 Series", "Explorer", "Civic (See Also Delsol & Crx)") and `model` with
+# a 6-character interchange code ("Ftf150", "Gndche"). Shown raw, those
+# categories flood the app's make dropdowns with models. Split them back into
+# make + model; the interchange code is dropped in favour of the category's
+# words. Rows whose make is already a real make pass through untouched.
+_ARIO_CATEGORY_MAKES = sorted([
+    "AMC", "Acura", "Alfa Romeo", "Aston Martin", "Audi", "BMW", "Buick",
+    "Cadillac", "Chevrolet", "Chevy", "Chrysler", "Daewoo", "Daihatsu", "Datsun",
+    "Dodge", "Eagle", "Fiat", "Ford", "GMC", "Genesis", "Geo", "Honda", "Hummer",
+    "Hyundai", "Infiniti", "International", "Isuzu", "Jaguar", "Jeep", "Kia",
+    "Land Rover", "Lexus", "Lincoln", "Mazda", "Mercedes-Benz", "Mercedes",
+    "Mercury", "Merkur", "MINI", "Mini", "Mitsubishi", "Nissan", "Oldsmobile",
+    "Peugeot", "Plymouth", "Pontiac", "Porsche", "Ram", "Saab", "Saturn", "Scion",
+    "Smart", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "VW", "Volvo",
+    "Yugo", "Sterling", "Triumph", "Renault", "Rover", "Opel", "Lancia", "Fisker",
+    "Maserati", "Bentley", "Lotus", "Ferrari", "Kawasaki", "Yamaha", "Polaris",
+    "Harley-Davidson", "Can-Am", "Freightliner", "Workhorse",
+], key=len, reverse=True)
+_ARIO_CATEGORY_MAKES_LC = [(m.lower(), m) for m in _ARIO_CATEGORY_MAKES]
+# Make-less categories the feed uses for famous models / body styles.
+_ARIO_CATEGORY_MODELS = {
+    "explorer": ("Ford", "Explorer"), "mustang": ("Ford", "Mustang"),
+    "bronco ii": ("Ford", "Bronco II"), "bronco": ("Ford", "Bronco"),
+    "s10/s15/sonoma pickup": ("Chevrolet", "S10"), "blazer s10/jimmy s15": ("Chevrolet", "Blazer S10"),
+    "avalanche 1500": ("Chevrolet", "Avalanche 1500"), "avalanche 2500": ("Chevrolet", "Avalanche 2500"),
+    "aspen": ("Dodge", "Aspen"), "aspen (dodge & chrysler)": ("Dodge", "Aspen"),
+    "corvette": ("Chevrolet", "Corvette"), "camaro": ("Chevrolet", "Camaro"),
+    "silverado 1500": ("Chevrolet", "Silverado 1500"), "silverado 2500": ("Chevrolet", "Silverado 2500"),
+    "tahoe": ("Chevrolet", "Tahoe"), "suburban": ("Chevrolet", "Suburban"),
+    "firebird": ("Pontiac", "Firebird"), "grand am": ("Pontiac", "Grand Am"),
+    "wrangler": ("Jeep", "Wrangler"), "cherokee": ("Jeep", "Cherokee"),
+    "prius": ("Toyota", "Prius"), "beetle": ("Volkswagen", "Beetle"),
+    "jetta": ("Volkswagen", "Jetta"), "grand prix": ("Pontiac", "Grand Prix"),
+    "linc & town": ("Lincoln", "Town Car"), "monte carlo": ("Chevrolet", "Monte Carlo"),
+    "fiesta": ("Ford", "Fiesta"), "thunderbird": ("Ford", "Thunderbird"),
+    "chevy/gmc suburban 1500": ("Chevrolet", "Suburban 1500"), "chevy/gmc suburban 2500": ("Chevrolet", "Suburban 2500"),
+    "malibu": ("Chevrolet", "Malibu"), "cutlass": ("Oldsmobile", "Cutlass"), "cavalier": ("Chevrolet", "Cavalier"),
+    "range rover sport": ("Land Rover", "Range Rover Sport"), "range rover": ("Land Rover", "Range Rover"),
+    "pt cruiser": ("Chrysler", "PT Cruiser"), "diplomat": ("Dodge", "Diplomat"), "sable": ("Mercury", "Sable"),
+    "challenger": ("Dodge", "Challenger"), "regal": ("Buick", "Regal"), "eldorado": ("Cadillac", "Eldorado"),
+    "montego": ("Mercury", "Montego"), "impala": ("Chevrolet", "Impala"), "caprice": ("Chevrolet", "Caprice"),
+    "taurus": ("Ford", "Taurus"), "escort": ("Ford", "Escort"), "ranger": ("Ford", "Ranger"),
+}
+_ARIO_CATEGORY_NOISE = re.compile(
+    r"\((?:see also|also see|except|small|small truck|mid-?size|full-?size|type \d|\d+ & up|domestic|for|mercury|dodge & chrysler)[^)]*\)"
+    r"|\b(?:see also|also see)\b.*$|\bexcept\b.*$|\bnot rs\b|\bseries\b|\(\s*\)", re.I)
+
+
+def _ario_split_category(make_s: str, model_s: str) -> tuple[str, str]:
+    """('Honda Civic (See Also Delsol & Crx)', 'Civic') -> ('Honda', 'Civic');
+    ('Ford Pickup F150 Series', 'Ftf150') -> ('Ford', 'F150');
+    ('Explorer', 'Explor') -> ('Ford', 'Explorer'); real makes pass through."""
+    cat = " ".join(_ARIO_CATEGORY_NOISE.sub(" ", make_s).split()).strip(" -,")
+    low = cat.lower()
+    if low in _ARIO_CATEGORY_MODELS:
+        return _ARIO_CATEGORY_MODELS[low]
+    if low in ("atv / motorcycle", "atv/motorcycle", "motorcycle"):
+        return (model_s.title() if model_s else "Motorcycle", "Motorcycle")
+    for mk_lc, mk in _ARIO_CATEGORY_MAKES_LC:
+        if low == mk_lc:
+            return (make_s, model_s)  # a plain make: nothing to split
+        if low.startswith(mk_lc + " "):
+            rest = cat[len(mk_lc):].strip(" -,")
+            rest = re.sub(r"\b(pickup|truck)\b", " ", rest, flags=re.I)
+            rest = " ".join(rest.split()).strip(" -,")
+            return (mk, rest or model_s)
+    return (make_s, model_s)
+
+
 def _ario_live_items_to_vehicles(items: list[dict], *, yard: dict, source: str,
                                  id_prefix: str, vin_map: dict[str, str]) -> list[dict]:
     """search-inventory list items -> scan vehicle dicts for ONE yard. VINs
@@ -17465,6 +17536,7 @@ def _ario_live_items_to_vehicles(items: list[dict], *, yard: dict, source: str,
             year_i = 0
         make_s = str(it.get("make") or "").strip()
         model_s = str(it.get("model") or "").strip()
+        make_s, model_s = _ario_split_category(make_s, model_s)
         stock = str(it.get("stock") or "").strip()
         key = stock or str(it.get("id") or "").strip()
         if not make_s or not model_s or not year_i or not key:
