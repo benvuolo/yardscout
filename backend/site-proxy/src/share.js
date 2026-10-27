@@ -142,7 +142,7 @@ function layout({ title, desc, canonical, body, status = 200, robots = 'index,fo
 <meta name="description" content="${esc(desc)}">
 <meta name="robots" content="${robots}">
 <link rel="canonical" href="${esc(canonical)}">
-<link rel="icon" href="${SITE}/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="${SITE}/icon-192.png"><link rel="apple-touch-icon" href="${SITE}/apple-touch-icon.png">
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="YardScout">
 <meta property="og:title" content="${esc(ogTitle || title)}"><meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${esc(canonical)}"><meta property="og:image" content="${OG_IMAGE}">
