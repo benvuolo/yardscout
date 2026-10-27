@@ -442,7 +442,7 @@ hand. Two repository secrets:
 | Secret | Where it comes from |
 |---|---|
 | `CLOUDFLARE_API_TOKEN` | dash.cloudflare.com → profile (top right) → *API Tokens* → *Create Token* → template **Edit Cloudflare Workers** → under *Permissions* add **Account · D1 · Edit** → Continue → Create → copy once |
-| `CLOUDFLARE_ACCOUNT_ID` | dash.cloudflare.com → *Workers & Pages* → right-hand column *Account ID* |
+| `CLOUDFLARE_ACCOUNT_ID` | optional — the workflow resolves the account from the token; set it only if the token can see several accounts |
 
 Worker secrets (Stripe, APNs, Resend, Google) live in Cloudflare and are
 untouched by deploys. Local `npx wrangler deploy` still works.

@@ -3,12 +3,12 @@
 #   yardscout-site  (backend/site-proxy/) — yardscout.io proxy + share pages
 #
 # Runs on every push to main that touches backend/, or by hand.
-# Needs two repository secrets (see README-BACKEND.md → "Deploying from CI"):
+# Needs one repository secret (see README-BACKEND.md → "Deploying from CI"):
 #   CLOUDFLARE_API_TOKEN   API token with "Workers Scripts: Edit", "D1: Edit",
-#                          "Workers KV Storage: Edit" and "Workers Routes: Edit"
-#                          (Account → API Tokens → Create → "Edit Cloudflare
-#                          Workers" template, then add D1 Edit)
-#   CLOUDFLARE_ACCOUNT_ID  the account id shown on the Workers overview page
+#                          "Workers KV Storage: Edit", "Workers Routes: Edit"
+#                          and "Account Settings: Read" (Account → API Tokens →
+#                          Create → "Edit Cloudflare Workers" template + D1 Edit)
+#   CLOUDFLARE_ACCOUNT_ID  optional — only needed if the token sees several accounts
 # Worker secrets (STRIPE_*, APNS_*, …) are NOT touched: they live in
 # Cloudflare and survive deploys.
 name: Deploy Workers
@@ -46,10 +46,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Check secrets
+      # The token can list its own accounts, so the account id is resolved
+      # here (the optional CLOUDFLARE_ACCOUNT_ID secret only disambiguates
+      # when the token sees more than one account).
+      - name: Resolve account
         run: |
           test -n "$CLOUDFLARE_API_TOKEN" || { echo "::error::CLOUDFLARE_API_TOKEN secret missing"; exit 1; }
-          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "::error::CLOUDFLARE_ACCOUNT_ID secret missing"; exit 1; }
+          ids=$(curl -sfS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts?per_page=50" \
+                | python3 -c 'import json,sys; print("\n".join(a["id"] for a in json.load(sys.stdin)["result"]))')
+          n=$(printf '%s\n' "$ids" | grep -c .)
+          if [ "$n" -eq 1 ]; then acct="$ids";
+          elif printf '%s\n' "$ids" | grep -qx "$CLOUDFLARE_ACCOUNT_ID"; then acct="$CLOUDFLARE_ACCOUNT_ID";
+          else echo "::error::token sees $n accounts and CLOUDFLARE_ACCOUNT_ID matches none of them"; exit 1; fi
+          echo "CLOUDFLARE_ACCOUNT_ID=$acct" >> "$GITHUB_ENV"
+          echo "account resolved (${#acct} chars)"
       - name: Deploy yardscout-api (migrations + worker)
         if: env.TARGET == 'both' || env.TARGET == 'api'
         working-directory: backend
