@@ -70,6 +70,47 @@ async function yardSiteFor(loc) {
   return hit ? hit[1] : null;
 }
 
+
+/* ---------- Inline price lists (same mapping as yardPriceList in docs/app.js) ----------
+ * So a share page reader can check pull prices without leaving the page. */
+const PRICE_FILES = [
+  ['pick-n-pull', 'picknpull_pricing.json', 'list'], ['tear-a-part', 'tearapart_pricing.json', 'list'],
+  ['utah pic-a-part', 'utpap_pricing.json', 'list'], ['u-pull-r', 'upullr_pricing.json', 'list'],
+  ["harry's u-pull-it", 'harrys_pricing.json', 'list'], ['indy-u-pull-it', 'indy_pricing.json', 'list'],
+  ["rupert's u-pull-it", 'ruperts_pricing.json', 'list'], ['u-pull-it', 'upullitne_pricing.json', 'list'],
+  ['pull-n-save', 'pns_pricing.json', 'list'], ['parts galore', 'partsgalore_pricing.json', 'list'],
+  ['chesterfield auto parts', 'chesterfield_pricing.json', 'list'], ['ace pick-a-part', 'ace_pricing.json', 'list'],
+  ['sturtevant auto', 'sturtevant_pricing.json', 'list'], ['nevada pic-a-part', 'nvpap_pricing.json', 'list'],
+  ["barry's u pull it", 'barrys_pricing.json', 'list'], ['195 used auto parts', 'p195_pricing.json', 'list'],
+  ['m&m u-pull-it', 'mmupullit_pricing.json', 'list'], ['polk county pick and pay', 'polkpickpay_pricing.json', 'list'],
+  ['san antonio pick-n-pull', 'pnpsa_pricing.json', 'list'], ["ryan's pick-a-part", 'ryans_pricing.json', 'list'],
+  ['us auto supply', 'usauto_pricing.json', 'list'], ['u-pull and save', 'upas_pricing.json', 'list'],
+  ['budget u-pull-it', 'budget_pricing.json', 'dict'], ['pick your part', 'pyp_pricing.json', 'dict'],
+  ['pull-a-part', 'pap_pricing.json', 'dict'], ['wrench-a-part', 'wap_pricing.json', 'dict'],
+  ['fenix u-pull', 'fenix_pricing.json', 'dict'],
+];
+async function yardPriceRows(location) {
+  const loc = (location || '').toLowerCase();
+  const hit = PRICE_FILES.find(([pfx]) => pfx === 'wrench-a-part' ? loc.includes(pfx) : loc.startsWith(pfx));
+  if (!hit) return null;
+  const data = await dataJson(hit[1], 3600);
+  if (!data) return null;
+  let rows = [];
+  if (hit[2] === 'list') rows = (Array.isArray(data) ? data : Object.values(data)).map((p) => ({ part: p.description, price: parseFloat(p.price), core: parseFloat(p.corePrice || 0) }));
+  else rows = Object.entries(data[location] || {}).map(([k, v]) => ({ part: k, price: Number(v.price), core: Number(v.core || 0) }));
+  rows = rows.filter((r) => r.part && Number.isFinite(r.price)).sort((a, b) => a.part.localeCompare(b.part));
+  return rows.length ? rows : null;
+}
+function priceListHtml(rows, yardName) {
+  if (!rows) return '';
+  const money = (n) => '$' + n.toFixed(2);
+  return `<details class="card-fold" id="prices"><summary class="section" style="cursor:pointer;margin-top:1rem">${esc(yardName)} price list <span>· ${rows.length} parts · tap to open</span></summary>
+<div class="car-card"><input type="search" id="pl-q" placeholder="Filter parts…" aria-label="Filter the price list" style="width:100%;min-height:44px;padding:.6rem .75rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font:inherit;font-size:16px;margin-bottom:.6rem">
+<ul class="rowlist" id="pl-rows">${rows.map((r) => `<li><a style="font-weight:600;font-size:.875rem">${esc(r.part)}</a><span class="meta">${money(r.price)}${r.core > 0 ? '<br>+ ' + money(r.core) + ' core' : ''}</span></li>`).join('')}</ul>
+<p class="note">From the yard's own published price list. Pull prices change — confirm at the counter.</p></div></details>
+<script>(function(){var q=document.getElementById('pl-q'),rows=[].slice.call(document.querySelectorAll('#pl-rows li'));if(!q)return;q.addEventListener('input',function(){var v=q.value.trim().toLowerCase();rows.forEach(function(li){li.style.display=!v||li.textContent.toLowerCase().indexOf(v)>-1?'':'none';});});})();</script>`;
+}
+
 /* Yard set-out dates are plain YYYY-MM-DD strings in the yard's local day;
  * compare against UTC midnight so "today" never reads as day 0 vs day 1
  * depending on the viewer's timezone. */
@@ -271,7 +312,7 @@ export async function renderCarPage(token) {
     ? { short: daysOn > avg ? `On the lot ${daysOn} days · past the ~${avg} typical` : `Day ${daysOn + 1} on the lot · ~${avg} typical ${basis === 'yard' ? 'at this yard' : basis === 'chain' ? 'for this chain' : 'across yards'}`, soon: cw.soon }
     : (daysOn != null ? { short: `Day ${daysOn + 1} on the lot`, soon: false } : null);
 
-  const [siteUrl, price] = [await yardSiteFor(yardName), priceListFor(yardName)];
+  const [siteUrl, price, priceRows] = [await yardSiteFor(yardName), priceListFor(yardName), await yardPriceRows(yardName)];
   const yardLinks = (siteUrl || price)
     ? `<p class="share-sub" style="margin:.2rem 0 .4rem">${siteUrl ? `<a href="${esc(siteUrl)}" target="_blank" rel="noopener">Yard's own inventory page &#8599;</a>` : ''}${siteUrl && price ? ' &middot; ' : ''}${price ? `<a href="${esc(price.url)}" target="_blank" rel="noopener">${esc(price.label)} price list &#8599;</a>` : ''}</p>` : '';
   const body = `<p class="kicker">Seen in a self-service yard · <a href="${yardHref}">${esc(yardName)}</a></p>
@@ -280,6 +321,7 @@ ${carCard({ name, yardName, where, row: v.row, metaHtml: meta, specs: [trim, dri
 <div class="clock${cw.soon ? ' soon' : ''}">${esc(cw.line)}<small>Based on how long departed cars sat on this lot before they left — an estimate, not a schedule. Call the yard before a long drive.</small></div>
 </div>
 ${yardLinks}
+${priceListHtml(priceRows, yardName)}
 <div class="cta"><a class="btn btn-primary" href="${SITE}/#car=${encodeURIComponent(key)}">Open in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when the next ${esc(v.make)} ${esc(v.model)} lands near me</a></div>
 ${storesLine()}
 <p class="note">Row and set-out date come straight from the yard's own published list, refreshed every 4 hours (inventory as of ${esc(fmtStamp(d.scrapedAt))}). Yards track cars, not the parts still on them — a car that has sat a while may be picked over.</p>`;
@@ -320,7 +362,7 @@ export async function renderYardPage(slug) {
     const car = `${r[iYear]} ${r[iMake]} ${r[iModel]}`.trim();
     return `<li><a href="${SITE}/car/${encodeURIComponent(key)}">${esc(car)}</a><span class="meta">${r[iRow] ? 'Row ' + esc(r[iRow]) + '<br>' : ''}${esc(fmtDate(r[iDate]))}</span></li>`;
   }).join('');
-  const [ySite, yPrice] = [await yardSiteFor(name), priceListFor(name)];
+  const [ySite, yPrice, yRows] = [await yardSiteFor(name), priceListFor(name), await yardPriceRows(name)];
   const lifeLine = avg
     ? `Cars typically last ~${avg} days here${basis === 'chain' ? ' (chain average)' : basis === 'all' ? ' (all-yards average)' : ''}, based on when departed cars arrived and left.`
     : 'Not enough departure history yet to estimate how long cars last here.';
@@ -330,6 +372,7 @@ export async function renderYardPage(slug) {
 <p class="share-sub">${esc(lifeLine)}${ySite ? ` <a href="${esc(ySite)}" target="_blank" rel="noopener">Yard's own inventory page &#8599;</a>` : ''}${yPrice ? ` &middot; <a href="${esc(yPrice.url)}" target="_blank" rel="noopener">${esc(yPrice.label)} price list &#8599;</a>` : ''}</p>
 <div class="section">Set out in the last 7 days <span>· ${recent.length}</span></div>
 <div class="car-card">${items ? `<ul class="rowlist">${items}</ul>` : '<p style="margin:0;color:var(--text-dim);font-size:.875rem">No new set-outs in the last 7 days on the yard\'s published list.</p>'}${recent.length > SHOW ? `<p class="note">Showing ${SHOW} of ${recent.length}. The full list is in the app.</p>` : ''}</div>
+${priceListHtml(yRows, name)}
 <div class="cta"><a class="btn btn-primary" href="${SITE}/">Search this yard in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when a car I want lands here</a></div>
 ${storesLine()}
 <p class="note">Straight from the yard's own published list, refreshed every 4 hours (inventory as of ${esc(fmtStamp(dir.scrapedAt))}). Row numbers and dates are the yard's; call ahead before a long drive.</p>`;
