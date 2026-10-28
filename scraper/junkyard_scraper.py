@@ -39,6 +39,7 @@ Set JUNKYARD_RAW_PRICES=1 to disable adjustment (raw DB numbers).
 
 import argparse
 import base64
+import collections
 import concurrent.futures
 import hashlib
 import html
@@ -13425,6 +13426,56 @@ def _indep_cache_raw(name: str, content: bytes) -> None:
         pass
 
 
+# Committed residential-IP snapshots (scraper/snapshots/*.json.gz, pushed by
+# the update_*_snapshot.sh launchd jobs on the dev Mac) are the fallback for
+# adapters whose live crawl is blocked from CI. Nothing used to check their
+# age: if the dev Mac's job stopped, CI would republish the same snapshot
+# forever and the app would present it as a live scan. Refuse snapshots
+# older than this and veto stale-keep for the affected yards, so the yard
+# drops out (loudly) instead of silently freezing.
+SNAPSHOT_MAX_AGE_DAYS = 3
+# Yard names whose adapter refused/lacked a fallback this scan; read by
+# apply_stale_keep so carried-forward rows can't paper over a dead snapshot.
+STALE_KEEP_VETO: set[str] = set()
+
+
+def _load_vehicle_snapshot(label: str, filename: str,
+                           yard_names: "list[str] | set[str]") -> list[dict]:
+    """Vehicles from scraper/snapshots/{filename} if it is fresh enough, else
+    [] (and the yards are vetoed from stale-keep)."""
+    import gzip as gzip_mod
+    snap = Path(__file__).parent / "snapshots" / filename
+    if not snap.exists():
+        print(f"  ⚠️  [{label}] live crawl blocked and NO committed snapshot "
+              f"({filename}) — yard(s) will drop out", file=sys.stderr)
+        STALE_KEEP_VETO.update(yard_names)
+        return []
+    try:
+        data = json.loads(gzip_mod.decompress(snap.read_bytes()))
+    except Exception as e:
+        print(f"  [{label}] snapshot unreadable: {e}", file=sys.stderr)
+        STALE_KEEP_VETO.update(yard_names)
+        return []
+    vehicles = data.get("vehicles", [])
+    fetched = str(data.get("fetched_at") or "")
+    try:
+        age = (datetime.now(timezone.utc).date()
+               - datetime.strptime(fetched[:10], "%Y-%m-%d").date()).days
+    except ValueError:
+        age = None
+    if age is None or age > SNAPSHOT_MAX_AGE_DAYS:
+        print(f"  ⚠️  SNAPSHOT TOO OLD: [{label}] {filename} fetched {fetched or '?'} "
+              f"({'unknown' if age is None else age} days, cap {SNAPSHOT_MAX_AGE_DAYS}) — "
+              f"refusing to republish it; is the residential snapshot job still running?",
+              file=sys.stderr)
+        STALE_KEEP_VETO.update(yard_names)
+        return []
+    print(f"  [{label}] live crawl blocked — using committed snapshot "
+          f"({len(vehicles)} vehicles, fetched {fetched}, {age} day(s) old)",
+          file=sys.stderr)
+    return vehicles
+
+
 # Wrench-A-Part (7 self-service yards, all TX) — public JSON API used by their
 # own Svelte inventory page (wrenchapart.com/vehicle-search.html). One
 # unauthenticated GET returns the ENTIRE multi-yard inventory (~11k vehicles);
@@ -13709,17 +13760,8 @@ def fetch_upullr_inventory() -> list[dict]:
         # vehicle endpoint. Fall back to the snapshot pushed daily from the
         # dev Mac's residential IP (scraper/update_upullr_snapshot.sh, launchd
         # io.yardscout.upullr-snapshot), same remedy as Ace / PAPVA.
-        snap = Path(__file__).parent / "snapshots" / "upullr_inventory.json.gz"
-        if snap.exists():
-            import gzip as gzip_mod
-            try:
-                data = json.loads(gzip_mod.decompress(snap.read_bytes()))
-                unique = data.get("vehicles", [])
-                print(f"  [U-Pull-R] live crawl blocked — using committed snapshot "
-                      f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
-                      file=sys.stderr)
-            except Exception as e:
-                print(f"  [U-Pull-R] snapshot unreadable: {e}", file=sys.stderr)
+        unique = _load_vehicle_snapshot("U-Pull-R", "upullr_inventory.json.gz",
+                                        [s["name"] for s in UPR_STORES.values()])
     print(f"  [U-Pull-R] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
@@ -13794,8 +13836,8 @@ def refresh_upullr_pricing_file() -> Path:
     return path
 
 
-# Fenix U-Pull (fenixupull.com) — 3 upstate-NY yards + Belleville MI (Detroit
-# metro) + Moultrie GA. First Northeast (NY) coverage in the app.
+# Fenix U-Pull (fenixupull.com) — 3 upstate-NY yards + Moultrie GA (Belleville MI
+# was retired 2026-10-28 — see FENIX_RETIRED_LOCATIONS). First Northeast (NY) coverage.
 # WordPress/Divi, but /recent-inventory/
 # server-renders the entire multi-yard list as a plain HTML table, 50 rows a
 # page (?pg=N, newest-first), ~130 pages / ~6,500 rows. robots.txt allows all
@@ -13815,9 +13857,12 @@ FENIX_YARDS = {
                    "state": "NY", "lat": 42.1561, "lng": -76.8627},
     "moultrie, ga": {"name": "Fenix U-Pull - Moultrie", "city": "Moultrie",
                      "state": "GA", "lat": 31.1759, "lng": -83.7494},
-    "belleville, mi": {"name": "Fenix U-Pull - Belleville", "city": "Belleville",
-                       "state": "MI", "lat": 42.1726, "lng": -83.5419},
 }
+# Location values still present in /recent-inventory/ for yards Fenix no
+# longer operates: rows are skipped quietly (not reported as unknown).
+# Belleville MI (was 42.1726,-83.5419) left the site's location switcher and
+# its 895 feed rows have been frozen since 2024-05-24 — see RETIRED_YARDS.
+FENIX_RETIRED_LOCATIONS = {"belleville, mi"}
 
 _FENIX_ROW_RE = re.compile(r"<tr>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
 _FENIX_TD_RE = re.compile(r"<td[^>]*>(.*?)</td>", re.S)
@@ -13895,7 +13940,8 @@ def fetch_fenix_inventory() -> list[dict]:
             loc_raw = cells[7] if len(cells) > 7 else ""
             yard = FENIX_YARDS.get(loc_raw.strip().lower())
             if yard is None:
-                unknown_yards.add(loc_raw)
+                if loc_raw.strip().lower() not in FENIX_RETIRED_LOCATIONS:
+                    unknown_yards.add(loc_raw)
                 continue
             if not stock:
                 continue
@@ -14397,110 +14443,23 @@ def refresh_indy_pricing_file() -> Path:
 
 # U-Pull-It (upullitne.com) — 4-yard chain: Des Moines IA, Omaha North/South
 # and Lincoln NE. First Iowa AND first Nebraska coverage (user-requested via
-# Reddit, 2026-10-16). WordPress + "TAP Inventory Search System" plugin backed
-# by the Crush yard-management platform (s3clientid/crush_version in rows):
-# POST admin-ajax.php action=sif_search_products with a nonce scraped from
-# /search-inventory/ returns the ENTIRE chain's inventory as one JSON response
-# (~2,500 rows): yard name/city/state, year, make, model, row, color, VIN
-# (98.5% real 17-char), unique stock number, set date MM-DD-YYYY. All rows are
-# istatus=0/location=YARD (on the lot). robots.txt: allow all (Yoast default).
-# Two requests per scan: nonce GET + search POST. Not to be confused with the
-# registry's blocked "ABC U-Pull-It" (also Lincoln NE — different company) or
-# U-Pull-R Parts MN/OH. Coordinates geocoded once via Nominatim (YARD_COORDS
-# convention).
-UPULLITNE_SEARCH_URL = "https://upullitne.com/search-inventory/"
-UPULLITNE_AJAX_URL = "https://upullitne.com/wp-admin/admin-ajax.php"
-_UPULLITNE_NONCE_RE = re.compile(r'"sif_ajax_nonce"\s*:\s*"([0-9a-f]+)"')
-UPULLITNE_YARDS = {
-    "U PULL IT IA": {"name": "U-Pull-It - Des Moines", "city": "Des Moines",
-                     "state": "IA", "lat": 41.6405, "lng": -93.5988},
-    "U-PULL-IT INC OMAHA SOUTH": {"name": "U-Pull-It - Omaha South", "city": "Omaha",
-                                  "state": "NE", "lat": 41.2045, "lng": -96.0048},
-    "U-PULL-IT INC OMAHA NORTH": {"name": "U-Pull-It - Omaha North", "city": "Omaha",
-                                  "state": "NE", "lat": 41.2768, "lng": -95.9364},
-    "U-PULL-IT INC LINCOLN": {"name": "U-Pull-It - Lincoln", "city": "Lincoln",
-                              "state": "NE", "lat": 40.8702, "lng": -96.6245},
-}
-
-
+# Reddit, 2026-10-16). Not to be confused with the registry's blocked "ABC
+# U-Pull-It" (also Lincoln NE — different company) or U-Pull-R Parts MN/OH.
+#
+# 2026-10-28: the chain moved its public search to yardconnect-pro (YardSmart
+# backend) and the adapter now rides YARDCONNECT_SITES["upullitne"]. The OLD
+# source — the "TAP Inventory Search System" plugin (action=
+# sif_search_products over a CRUSH sync) — is still installed and still
+# answers 200 with ~2,536 rows, but its CRUSH sync stopped per yard (row
+# `lastupdate` 08/04 Omaha North, 08/27 Des Moines, 09/21 Lincoln + Omaha
+# South) so it served a byte-identical set for 32+ scans with the newest
+# set-out in early August. The yardconnect table the site actually shows
+# customers had ~3,324 rows with set dates through the previous day. Ids
+# changed scheme with the cutover (CRUSH stock LCN056020 → YardSmart stock /
+# content hash, see the yardconnect header), so every car re-lands once.
 def fetch_upullitne_inventory() -> list[dict]:
-    """Fetch U-Pull-It's (IA/NE) 4-yard chain inventory (nonce GET + one POST)."""
-    try:
-        r = requests.get(UPULLITNE_SEARCH_URL, headers={**HEADERS, "Accept": "text/html"},
-                         timeout=60)
-        r.raise_for_status()
-        m = _UPULLITNE_NONCE_RE.search(r.text)
-        if not m:
-            print("  [U-Pull-It IA/NE] nonce not found — site layout changed?",
-                  file=sys.stderr)
-            return []
-        resp = requests.post(
-            UPULLITNE_AJAX_URL,
-            headers={**HEADERS, "Accept": "application/json",
-                     "Referer": UPULLITNE_SEARCH_URL},
-            data={"action": "sif_search_products", "sif_verify_request": m.group(1),
-                  "make": "Any", "model": "Any", "location": "Any",
-                  "year_start": "", "year_end": "", "sorting": "0"},
-            timeout=120,
-        )
-        resp.raise_for_status()
-        payload = resp.json()
-    except Exception as e:
-        print(f"  [U-Pull-It IA/NE] fetch failed: {e}", file=sys.stderr)
-        return []
-    if not payload.get("success"):
-        print(f"  [U-Pull-It IA/NE] search returned success=false: "
-              f"{str(payload.get('message'))[:120]}", file=sys.stderr)
-        return []
-    products = payload.get("products") or []
-    _indep_cache_raw("upullitne_inventory.json", resp.content)
-
-    vehicles: list[dict] = []
-    unknown_yards: set[str] = set()
-    for p in products:
-        yard = UPULLITNE_YARDS.get((p.get("yard_name") or "").strip())
-        if yard is None:
-            unknown_yards.add((p.get("yard_name") or "?").strip())
-            continue
-        make = (p.get("make") or "").strip()
-        model = (p.get("model") or "").strip()
-        if not make or not model:
-            continue
-        date_iso = ""
-        dm = re.match(r"(\d{2})-(\d{2})-(\d{4})", (p.get("yard_date") or "").strip())
-        if dm:
-            date_iso = f"{dm.group(3)}-{dm.group(1)}-{dm.group(2)}"
-        try:
-            year_i = int(p.get("iyear") or 0)
-        except ValueError:
-            year_i = 0
-        stock = (p.get("stocknumber") or "").strip()
-        if not stock:  # never seen, but ids must stay stable and unique
-            stock = hashlib.sha1(
-                f"{year_i}|{make}|{model}|{p.get('vin')}|{p.get('vehicle_row')}"
-                .lower().encode()).hexdigest()[:12]
-        vin = (p.get("vin") or "").strip().upper()
-        vehicles.append({
-            "id": f"upullitne-{stock.lower()}",
-            "vin": vin if len(vin) == 17 else "",
-            "year": year_i,
-            "make": _utpap_format_label(make),
-            "model": _utpap_format_label(model),
-            "row": (p.get("vehicle_row") or "").strip(),
-            "dateAdded": date_iso,
-            "_location": yard["name"],
-            "_city": yard["city"],
-            "_state": yard["state"],
-            "_lat": yard["lat"],
-            "_lng": yard["lng"],
-            "_source": "upullitne",
-        })
-    if unknown_yards:
-        print(f"  [U-Pull-It IA/NE] skipped rows from unmapped yard(s): "
-              f"{sorted(unknown_yards)}", file=sys.stderr)
-    print(f"  [U-Pull-It IA/NE] {len(vehicles)} vehicles across "
-          f"{len({v['_location'] for v in vehicles})} yards", file=sys.stderr)
-    return vehicles
+    """Fetch U-Pull-It's (IA/NE) 4-yard chain inventory (yardconnect-pro)."""
+    return fetch_yardconnect_site("upullitne")
 
 
 # U-Pull-It (IA/NE) publishes one chain-wide price list on /parts-pricelist/ —
@@ -15204,17 +15163,7 @@ def fetch_ace_inventory() -> list[dict]:
     if not unique:
         # Cloudflare blanket-403s CI's datacenter IPs — fall back to the
         # committed snapshot pushed daily from a residential IP (see header).
-        snap = Path(__file__).parent / "snapshots" / "ace_inventory.json.gz"
-        if snap.exists():
-            import gzip as gzip_mod
-            try:
-                data = json.loads(gzip_mod.decompress(snap.read_bytes()))
-                unique = data.get("vehicles", [])
-                print(f"  [Ace] live crawl blocked — using committed snapshot "
-                      f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
-                      file=sys.stderr)
-            except Exception as e:
-                print(f"  [Ace] snapshot unreadable: {e}", file=sys.stderr)
+        unique = _load_vehicle_snapshot("Ace", "ace_inventory.json.gz", [ACE_YARD["name"]])
     print(f"  [Ace] {len(unique)} vehicles", file=sys.stderr)
     return unique
 
@@ -15724,6 +15673,21 @@ VINPLUS_TENANTS = {
         "tallahassee": {"code": "gpital", "name": "Go Pull-It - Tallahassee",
                         "city": "Tallahassee", "state": "FL", "lat": 30.3870, "lng": -84.2752,
                         "source": "gopullit", "id_prefix": "gopullit-"},
+    },
+    # --- migrated from the frozen art-inventory WordPress feed (2026-10-28) ---
+    # prestigepullyourpart.com/vehicle-search/ now embeds the VinPlus SPA
+    # (iframe vinplus.texnrewards.com/parts/prestige-pull-your-part; tenant
+    # yard_id prestige_pull_your_part, single location, sourceSystem crush).
+    # The old art_inventory_get_yard_assets POST still answers 200 with a
+    # 1,228-row set whose newest yard_date is 2026-07-10 (last_update all
+    # 0000-00-00) — it froze when the yard switched front ends, and served an
+    # identical set for 32+ scans. Stocks are the same PRE###### numbers, so
+    # id_prefix keeps the historical prestige-{stock} ids; source stays
+    # "prestige" for the zero-vehicle alarm.
+    "prestige_pull_your_part": {
+        "": {"code": "prestige", "name": "Prestige Pull-Your-Part - Houston",
+             "city": "Houston", "state": "TX", "lat": 29.8912, "lng": -95.3000,
+             "source": "prestige", "id_prefix": "prestige-"},
     },
     # --- migrated from the retired ASP.NET hybrid adapter (2026-10-22) ---
     # source stays "chesterfield" so the zero-vehicle alarm keeps its own
@@ -16396,17 +16360,8 @@ def fetch_iis_upull_site(source: str) -> list[dict]:
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
     if not unique and site.get("snapshot"):
-        snap = Path(__file__).parent / "snapshots" / site["snapshot"]
-        if snap.exists():
-            import gzip as gzip_mod
-            try:
-                data = json.loads(gzip_mod.decompress(snap.read_bytes()))
-                unique = data.get("vehicles", [])
-                print(f"  [{label}] live crawl blocked — using committed snapshot "
-                      f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
-                      file=sys.stderr)
-            except Exception as e:
-                print(f"  [{label}] snapshot unreadable: {e}", file=sys.stderr)
+        unique = _load_vehicle_snapshot(label, site["snapshot"],
+                                        [y["name"] for y in site["yards"].values()])
     print(f"  [{label}] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
@@ -16558,6 +16513,34 @@ YARDCONNECT_SITES: dict[str, dict] = {
              "state": "NC", "lat": 36.4012, "lng": -79.987},
         ],
     },
+    # U-Pull-It (IA/NE) — 4 yards, one yardconnect-pro v2.3 tenant (see the
+    # header above fetch_upullitne_inventory for the 2026-10-28 cutover off
+    # the frozen TAP/CRUSH plugin). The yard selector here is the form's
+    # `location` field (values from its <select>: "Des Moines", "Lincoln",
+    # "North", "South"), not `lot`; the table carries an extra Location
+    # column the header-driven parse ignores. Coordinates and display names
+    # unchanged from the CRUSH adapter so yard identity/history carries over.
+    "upullitne": {
+        "label": "U-Pull-It IA/NE",
+        "site": "https://upullitne.com",
+        "mode": "ajax",
+        "lot_param": "location",
+        "nonce_paths": ("/search-inventory/", "/"),
+        "yards": [
+            {"lot": "Des Moines", "code": "desmoines",
+             "name": "U-Pull-It - Des Moines", "city": "Des Moines",
+             "state": "IA", "lat": 41.6405, "lng": -93.5988},
+            {"lot": "Lincoln", "code": "lincoln",
+             "name": "U-Pull-It - Lincoln", "city": "Lincoln",
+             "state": "NE", "lat": 40.8702, "lng": -96.6245},
+            {"lot": "North", "code": "omahanorth",
+             "name": "U-Pull-It - Omaha North", "city": "Omaha",
+             "state": "NE", "lat": 41.2768, "lng": -95.9364},
+            {"lot": "South", "code": "omahasouth",
+             "name": "U-Pull-It - Omaha South", "city": "Omaha",
+             "state": "NE", "lat": 41.2045, "lng": -96.0048},
+        ],
+    },
 }
 _YARDCONNECT_NONCE_RE = re.compile(
     r'yardconnectPublic\s*=\s*{[^}]*"nonce"\s*:\s*"([0-9a-f]+)"')
@@ -16608,11 +16591,13 @@ def _yardconnect_fetch_lot(session: "requests.Session", site: dict, yard: dict,
                     time.sleep(5)
                     continue
                 return r.text
+            # year_end tracks the calendar (next model year included) instead
+            # of a hard-coded 2026 that would silently drop 2027+ cars.
             data = {"action": "yardconnect_search_vehicles", "nonce": nonce,
                     "make": "all", "model": "all", "engine": "", "year_start": "1949",
-                    "year_end": "2026", "view": "table"}
+                    "year_end": str(datetime.now().year + 1), "view": "table"}
             if yard.get("lot"):
-                data["lot"] = yard["lot"]
+                data[site.get("lot_param", "lot")] = yard["lot"]
             r = session.post(site["site"] + "/wp-admin/admin-ajax.php", data=data,
                              headers=HEADERS, timeout=120)
             if r.status_code == 403 and attempt == 1:
@@ -17091,91 +17076,10 @@ def refresh_barrys_pricing_file() -> Path:
     return path
 
 
-# Prestige Pull-Your-Part (prestigepullyourpart.com) — single Houston TX yard
-# (7615 E Mount Houston Rd, ~1,250 vehicles). WordPress running BOTH the
-# gm_inventory_search family plugin AND a newer "art-inventory" plugin — the
-# live search uses art-inventory: regex the nonce from
-# `art_inventory_sf_ajax = {"url":..., "nonce":"..."}` on /vehicle-search/,
-# then ONE POST to admin-ajax.php with action=art_inventory_get_yard_assets&
-# security={nonce}&yard=0&make=0&model=0&year=0 → the ENTIRE yard as JSON
-# ("0" params are the magic; named/empty values return []). Rows carry
-# stock_number (PRE######, the id basis), iyear, make, model, vehicle_row,
-# yard_date ("YYYY-MM-DD HH:MM:SS"), color, vin (often truncated — only
-# 17-char values kept), yard_name/city/state. 2 requests/scan. robots.txt:
-# allow all. Street geocodes to road centroid (parcel not in OSM).
-PRESTIGE_SEARCH_URL = "https://prestigepullyourpart.com/vehicle-search/"
-PRESTIGE_AJAX = "https://prestigepullyourpart.com/wp-admin/admin-ajax.php"
-PRESTIGE_YARD = {"name": "Prestige Pull-Your-Part - Houston", "city": "Houston",
-                 "state": "TX", "lat": 29.8912, "lng": -95.3000}
-_PRESTIGE_NONCE_RE = re.compile(r'art_inventory_sf_ajax\s*=\s*{[^}]*"nonce":"([0-9a-f]+)"')
-
-
-def fetch_prestige_inventory() -> list[dict]:
-    """Fetch Prestige Pull-Your-Part's inventory (one all-yard JSON POST)."""
-    session = requests.Session()
-    try:
-        r = session.get(PRESTIGE_SEARCH_URL, headers={**HEADERS, "Accept": "text/html"},
-                        timeout=60)
-        r.raise_for_status()
-        m = _PRESTIGE_NONCE_RE.search(r.text)
-        if not m:
-            print("  [Prestige] art_inventory nonce not found — plugin changed?",
-                  file=sys.stderr)
-            return []
-        nonce = m.group(1)
-    except Exception as e:
-        print(f"  [Prestige] search page fetch failed: {e}", file=sys.stderr)
-        return []
-    time.sleep(2)
-    try:
-        r = session.post(PRESTIGE_AJAX,
-                         data={"action": "art_inventory_get_yard_assets",
-                               "security": nonce, "yard": "0", "make": "0",
-                               "model": "0", "year": "0"},
-                         headers={**HEADERS, "Referer": PRESTIGE_SEARCH_URL}, timeout=120)
-        r.raise_for_status()
-        rows = r.json()
-    except Exception as e:
-        print(f"  [Prestige] yard-assets fetch failed: {e}", file=sys.stderr)
-        return []
-    if not isinstance(rows, list) or not rows:
-        print("  [Prestige] yard-assets returned no rows", file=sys.stderr)
-        return []
-    _indep_cache_raw("prestige_assets.json", r.content)
-    vehicles: list[dict] = []
-    for row in rows:
-        stock = str(row.get("stock_number") or "").strip()
-        make_s = str(row.get("make") or "").strip()
-        if not stock or not make_s:
-            continue
-        model_s = str(row.get("model") or "").strip()
-        if model_s.upper().startswith(make_s.upper() + " "):
-            model_s = model_s[len(make_s):].strip()
-        vin = str(row.get("vin") or "").strip().upper()
-        try:
-            year_i = int(row.get("iyear") or 0)
-        except (TypeError, ValueError):
-            year_i = 0
-        vehicles.append({
-            "id": f"prestige-{stock.lower()}",
-            "vin": vin if len(vin) == 17 else "",
-            "year": year_i,
-            "make": _utpap_format_label(make_s),
-            "model": _utpap_format_label(model_s),
-            "row": str(row.get("vehicle_row") or "").strip(),
-            "dateAdded": str(row.get("yard_date") or "")[:10],
-            "_color": str(row.get("color") or "").strip().title(),
-            "_location": PRESTIGE_YARD["name"],
-            "_city": PRESTIGE_YARD["city"],
-            "_state": PRESTIGE_YARD["state"],
-            "_lat": PRESTIGE_YARD["lat"],
-            "_lng": PRESTIGE_YARD["lng"],
-            "_source": "prestige",
-        })
-    seen: set[str] = set()
-    unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
-    print(f"  [Prestige] {len(unique)} vehicles", file=sys.stderr)
-    return unique
+# Prestige Pull-Your-Part (Houston TX) — moved to VINPLUS_TENANTS
+# ["prestige_pull_your_part"] on 2026-10-28; the art-inventory WordPress feed
+# it used to read froze on 2026-07-10 when the yard switched its search page
+# to the VinPlus SPA. See the tenant comment there.
 
 
 # Budget U-Pull-It (FL) — owner-requested (Austin Rutherford email, Oct 2026:
@@ -19966,7 +19870,8 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "stcloud": "St. Cloud U Pull",
     "nvpap": "Nevada Pic-A-Part",
     "vinplus": "VinPlus (RTP KY/TN/NC, Pickers TX/AR/LA, Joliet IL, "
-               "San Antonio PnP TX, 195 TX, Pick Ur Part TX, US Auto Supply MI)",
+               "San Antonio PnP TX, 195 TX, Pick Ur Part TX, US Auto Supply MI, "
+               "Prestige TX)",
     "papva": "Pick-A-Part VA",
     "upickitaz": "U-Pick-It AZ",
     "gopullit": "Go Pull-It",
@@ -20026,7 +19931,6 @@ INDEPENDENT_FETCHERS: list = [
     ("Pick-A-Part VA", fetch_papva_inventory),
     ("U-Pick-It AZ", fetch_upickitaz_inventory),
     ("Barry's", fetch_barrys_inventory),
-    ("Prestige", fetch_prestige_inventory),
     ("Budget U-Pull-It", fetch_budget_inventory),
     ("Ario (Ryan's + wave-1 chains)", fetch_ario_inventory),
     ("U-Pull and Save", fetch_upas_inventory),
@@ -21557,6 +21461,21 @@ def build_inventory_json_payload(vehicles: list[dict], only_matches: bool) -> di
 STALE_KEEP_FLOOR = 0.40      # carry forward when a yard returns <40% of its previous count
 STALE_KEEP_MIN_PREV = 25     # ignore tiny yards (legit fluctuation, not failure signal)
 STALE_KEEP_MAX_SCANS = 30    # stop carrying after ~30 consecutive frozen scans (~5 days @4h)
+# A yard that collapses while at least this share of its previous ids shows
+# up under ANOTHER yard name in the fresh scan was renamed upstream; carrying
+# the old name would publish every car twice (see apply_stale_keep).
+STALE_KEEP_RENAME_SHARE = 0.5
+# Yards confirmed closed/delisted upstream: never carried forward, so their
+# last rows drop on the next scan instead of lingering up to
+# STALE_KEEP_MAX_SCANS. Value = why (printed in the scan log).
+RETIRED_YARDS: dict[str, str] = {
+    # fenixupull.com dropped Belleville from its location switcher; its
+    # /belleville-mi/ page renders "null null" for address/phone, and the
+    # shared /recent-inventory/ feed still carries 895 legacy rows whose
+    # newest set date is 2024-05-24 (identical for 32+ scans). Verified
+    # 2026-10-28.
+    "Fenix U-Pull - Belleville": "delisted by Fenix U-Pull; feed rows frozen since 2024-05-24",
+}
 
 
 def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
@@ -21672,12 +21591,46 @@ def apply_stale_keep(payload: dict, extras: dict) -> None:
         return c
     prev_counts, new_counts = _counts(prev), _counts(payload)
 
+    # Rename detection: when an upstream renames/re-keys a yard (LKQ turned
+    # "Pick Your Part - San Bernadino" into "... San Bernardino" and
+    # "Wilmington Help Yourself" into "Help Yourself" on 2026-10-24, same store
+    # codes, same coordinates), the old name collapses to 0 while its cars
+    # show up under the new name. Carrying the old name forward then
+    # publishes every car TWICE (2,290 duplicate ids on 2026-10-28), and the
+    # duplicates never age out. If most of the old yard's ids are present in
+    # the fresh scan under another yard, it was renamed — don't carry it.
+    i_id = payload["fields"].index("id")
+    new_names = [y[0] for y in payload["yards"]]
+    fresh_yard_of = {str(row[i_id]): new_names[row[i_yard]] for row in payload["vehicles"]}
+    prev_names = [y[0] for y in prev["yards"]]
+    prev_ids_of: dict[str, list[str]] = {}
+    for row in prev["vehicles"]:
+        prev_ids_of.setdefault(prev_names[row[i_yard]], []).append(str(row[i_id]))
+
     to_carry: list[str] = []
     for name, pc in sorted(prev_counts.items()):
         if pc < STALE_KEEP_MIN_PREV:
             continue
         nc = new_counts.get(name, 0)
         if nc >= STALE_KEEP_FLOOR * pc:
+            continue
+        if name in STALE_KEEP_VETO:
+            print(f"  ⚠️  STALE-KEEP vetoed: {name} — its snapshot fallback is missing or "
+                  f"too old; dropping {pc} previously published rows rather than "
+                  f"re-serving them as live", file=sys.stderr)
+            continue
+        if name in RETIRED_YARDS:
+            print(f"  STALE-KEEP skipped: {name} is retired ({RETIRED_YARDS[name]}); "
+                  f"dropping its {pc} previously published rows", file=sys.stderr)
+            continue
+        moved = collections.Counter(fresh_yard_of[i] for i in prev_ids_of.get(name, [])
+                        if i in fresh_yard_of and fresh_yard_of[i] != name)
+        if moved and sum(moved.values()) >= STALE_KEEP_RENAME_SHARE * pc:
+            dest, n_dest = moved.most_common(1)[0]
+            print(f"  STALE-KEEP skipped: {name} looks RENAMED to {dest!r} "
+                  f"({n_dest}/{pc} of its ids are in the fresh scan there); "
+                  f"dropping the old name instead of publishing duplicates",
+                  file=sys.stderr)
             continue
         frozen = int((health.get(name) or {}).get("unchangedScans", 0))
         if frozen >= STALE_KEEP_MAX_SCANS:
