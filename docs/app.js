@@ -473,6 +473,13 @@ function displayTrim(trim, make, model, year) {
   // trim you could buy (one trim + ESV/EXT bodies until 2015's Luxury/
   // Premium/Platinum ladder), so it reads as a false claim on the card.
   if (mk === 'cadillac' && /escalade/i.test(String(model || '')) && (+year || 0) < 2015 && /^luxury$/i.test(t)) return '';
+  // Same GM VIN-series noise on pre-2015 trucks/SUVs: "1500 (1/2 Ton) Luxury"
+  // on a Yukon Denali. Drop the tonnage series; a bare "Luxury" left over is
+  // the series code, not a trim.
+  if (mk === 'chevrolet' || mk === 'gmc' || mk === 'cadillac') {
+    t = t.replace(/^\d{4}\s*\(\d\/\d\s*ton\)\s*/i, '').trim();
+    if ((+year || 0) < 2015 && /^luxury$/i.test(t)) return '';
+  }
   return t;
 }
 
@@ -1861,8 +1868,27 @@ document.querySelectorAll('#upgrade-sheet .plan-option').forEach(c => {
 });
 
 let upgradeTrigger = 'unknown';
+/* One line of local proof at the top of the Pro sheet: what actually
+ * landed near this person this week (their watches first, else everything
+ * in their radius). Silent when there's nothing true to say. */
+function proSheetProof() {
+  if (!liveLoaded) return '';
+  const week = v => isNew(v.dateAdded);
+  const watches = loadWatchlist();
+  if (watches.length) {
+    const ids = new Set();
+    for (const e of watches) for (const v of liveInventory) if (week(v) && watchlistMatches(e, v)) ids.add(v.id);
+    if (ids.size) return `${ids.size} ${ids.size === 1 ? 'car' : 'cars'} matching your watches landed this week. Pro sends each one the day it lands.`;
+  }
+  if (!activeZipCoords) return '';
+  const r = effectiveRadiusMi();
+  let n = 0;
+  for (const v of liveInventory) { if (!week(v)) continue; const d = vehicleDistanceMi(v); if (d != null && (!r || d <= r)) n++; }
+  return n ? `${n.toLocaleString()} cars were set out within ${r || 'any distance of'}${r ? ' miles' : ''} of you this week.` : '';
+}
 function openUpgradeSheet(trigger) {
   upgradeTrigger = trigger || 'unknown';
+  { const pr = document.getElementById('pro-proof'); if (pr) { const t = isPro() ? '' : proSheetProof(); pr.textContent = t; pr.style.display = t ? '' : 'none'; } }
   track('pro-lock/' + upgradeTrigger);
   // Native builds never enter Stripe billing mode — Pro purchase on iOS will
   // go through StoreKit IAP when it ships; until then natives see the waitlist.
@@ -2679,7 +2705,9 @@ function renderLive() {
   let sampleKey = null;
   if (!isPro() && !focusedCarKey) {
     let bestScore = 0;
-    for (const sv of vehiclesToRender) {
+    // Pick from the first ~two screens so the sample is actually SEEN, not
+    // buried at card 300 (2026-10-29 conversion pass).
+    for (const sv of vehiclesToRender.slice(0, 24)) {
       if (!sv.hasMatch || !sv.topParts || !sv.topParts.length) continue;
       const score = sv.topParts.reduce((k, sp) =>
         k + (sp.trim_status === 'unconfirmed' ? 0 : (sp.high || 0)), 0) * freshnessMultiplier(sv.dateAdded);
@@ -2892,7 +2920,7 @@ function renderLive() {
         <div class="range-extra" title="Parts specific to a trim or factory option that couldn\u2019t be confirmed for this car &mdash; they add nothing to its ranking or headline figure">+ up to ${formatPrice(extraHigh)}${rangeHigh > 0 ? ' more' : ''} if equipped (unconfirmed &mdash; check at the yard)</div>` : '';
       profitLine = (rangeHigh > 0 || extraHigh > 0)
         ? (unlocked ? `
-        ${isSampleCard ? '<div class="sample-note" role="button" onclick="openUpgradeSheet(\'sample-note\')">Free sample &mdash; Pro shows this for every car</div>' : ''}
+        ${isSampleCard ? '<div class="sample-pitch" role="button" onclick="openUpgradeSheet(\'sample-note\')"><strong>Free look:</strong> this is what Pro shows on every car &mdash; parts worth pulling, what the yard charges, what they sell for. <span class="sample-pitch-cta">See Pro &rarr;</span></div>' : ''}
         <div class="profit-line">
           ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
           ${rangeHigh > 0 ? `<span class="range-text">${rangeText}</span>` : ''}
@@ -5631,6 +5659,23 @@ function renderAlerts() {
       const radLabel = !('radiusMi' in e) ? ''
         : e.radiusMi ? ` &middot; within ${e.radiusMi} mi` : ' &middot; anywhere';
       const hitCount = r.hits.length;
+      // Near-miss (free only): cars that landed AFTER this watch was set and
+      // at least a day ago — Pro would already have pushed them. One line,
+      // only when it's true; nothing on watches with no such car.
+      let missLine = '';
+      if (!isPro() && e.addedAt) {
+        const setAt = Date.parse(String(e.addedAt).split('~')[0]);
+        const dayAgo = Date.now() - 86400000;
+        const missed = r.hits.filter(v => { const d = parseYardDate(v.dateAdded); return d && d.getTime() >= setAt - 86400000 && d.getTime() <= dayAgo; });
+        if (missed.length) {
+          const first = missed.map(v => parseYardDate(v.dateAdded)).sort((a, b) => a - b)[0];
+          const when = first.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+          const lead = missed.length === 1
+            ? `One landed on ${escapeHtml(when)}, after you set this watch.`
+            : `${missed.length} landed since you set this watch, the first on ${escapeHtml(when)}.`;
+          missLine = `<span class="wl-miss">${lead} Pro would have sent a push within hours. <button type="button" class="linklike" onclick="openUpgradeSheet('watch-near-miss')">See Pro</button></span>`;
+        }
+      }
       const vpicLabel = (e.driveFilter === '4x4' ? ' &middot; 4WD/AWD only' : e.driveFilter === '2wd' ? ' &middot; 2WD only' : '')
         + (e.trimFilter ? ' &middot; trim &ldquo;' + escapeHtml(e.trimFilter) + '&rdquo;' : '');
       return `<div class="watchlist-item">
@@ -5638,6 +5683,7 @@ function renderAlerts() {
           <span class="wl-name">${escapeHtml(label)}</span>
           <span class="wl-detail">${yrLabel}${radLabel}${vpicLabel}${e.matchOnly ? ' &middot; Parts only' : ''}</span>
           <span class="wl-count ${hitCount > 0 ? 'has-hits' : 'no-hits'}">${hitCount} in yard now</span>
+          ${missLine}
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;">
           <button class="wl-remove" onclick="removeWatchItem(${i})">Remove</button>

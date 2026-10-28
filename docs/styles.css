@@ -1416,6 +1416,12 @@
     vertical-align: middle;
   }
   /* Free-sample tag on the one unlocked card */
+  .sample-pitch { margin-top: 0.65rem; padding: 0.55rem 0.7rem; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); font-size: 0.8125rem; line-height: 1.45; color: var(--text); cursor: pointer; }
+  .sample-pitch strong { color: var(--accent); }
+  .sample-pitch-cta { color: var(--accent); font-weight: 700; white-space: nowrap; }
+  .wl-miss { display: block; margin-top: 0.3rem; font-size: 0.75rem; line-height: 1.45; color: var(--text-dim); }
+  .wl-miss .linklike { background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .pro-proof { margin: 0.2rem 0 0.4rem; padding: 0.5rem 0.65rem; background: var(--accent-soft); border-radius: var(--radius-sm); font-size: 0.8125rem; font-weight: 600; color: var(--text); }
   .sample-note {
     display: inline-block;
     margin-top: 0.65rem;
