@@ -1,0 +1,57 @@
+# Backup for scan.yml's 4-hour cron, which GitHub sometimes skips under
+# load (2026-10-27/28: two gaps of 6+ hours left the live data stale).
+#
+# Every hour, at an off-peak minute: if no scan is queued or running and the
+# last SUCCESSFUL scan started more than 5 hours ago, dispatch one. Scans
+# normally start every 4 hours, so this only fires after a skipped or failed
+# run. scan.yml's concurrency group still serializes everything, so a
+# dispatch can never overlap a scan.
+name: Scan watchdog
+
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: scan-watchdog
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Start a scan if the last successful one is too old
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          MAX_AGE_HOURS: "5"
+        run: |
+          set -euo pipefail
+          active=$(gh api "repos/$REPO/actions/workflows/scan.yml/runs?per_page=20" \
+            --jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="pending")] | length')
+          if [ "$active" -gt 0 ]; then
+            echo "A scan is already queued or running — nothing to do."
+            exit 0
+          fi
+          last=$(gh api "repos/$REPO/actions/workflows/scan.yml/runs?status=success&per_page=1" \
+            --jq '.workflow_runs[0].run_started_at // .workflow_runs[0].created_at // empty')
+          now=$(date -u +%s)
+          if [ -z "$last" ]; then
+            age_h=999
+          else
+            age_h=$(( (now - $(date -u -d "$last" +%s)) / 3600 ))
+          fi
+          echo "Last successful scan started: ${last:-never} (${age_h}h ago)"
+          if [ "$age_h" -ge "$MAX_AGE_HOURS" ]; then
+            echo "Older than ${MAX_AGE_HOURS}h — dispatching scan.yml"
+            gh workflow run scan.yml --repo "$REPO" --ref "${{ github.event.repository.default_branch }}"
+            echo "::notice::Watchdog started a scan (last success ${age_h}h ago)"
+          else
+            echo "Fresh enough — nothing to do."
+          fi
