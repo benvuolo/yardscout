@@ -3269,6 +3269,9 @@ const YARD_INVENTORY_PAGES = [
   [/^hwy 82 pick/i, 'https://hwy82pp.com/search-inventory/'],
   [/^route 34 u-pull-m/i, 'https://route34upullm.com/inventory/'],
   [/^sunshine auto salvage/i, 'https://sunshineautosalvage.com/vehicle-inventory/'],
+  [/^kiker'?s u-pull-it/i, 'https://www.kikersupullit.com/inventory'],
+  [/^weller self serve/i, 'https://www.wellerselfserve.com/inventory/'],
+  [/^cagle'?s u-pull-it/i, 'https://www.caglesupullit.com/inventory.aspx'],
 ];
 /* GEN:YARD_INVENTORY_PAGES:END */
 

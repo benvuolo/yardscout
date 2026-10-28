@@ -2510,6 +2510,87 @@
           "lng": -112.0058
         }
       ]
+    },
+    {
+      "name": "Kiker's U-Pull-It",
+      "status": "adapter-built",
+      "platform": "custom 'RowCall' page (/rowcall-ui.js filters server-rendered cards client-side; no XHR/JSON) - adapter fetch_kikers_inventory",
+      "website": "https://www.kikersupullit.com",
+      "inventory_url": "https://www.kikersupullit.com/inventory",
+      "api": {
+        "endpoint": "https://www.kikersupullit.com/inventory",
+        "method": "GET",
+        "auth": "none",
+        "format": "html <article class=\"rc-card\"> data-* attributes (stock, year, make-label, title, location S#R#) + photo",
+        "requests_per_scan": "1",
+        "notes": "~633 cards. Stock # is the id basis. No VIN and no set-out date on the page -> dateAdded '' (unknown). Models are Hollander-style names ('PICKUP 1500 SERIES'). 3010 W Fairfield Dr is not an OSM address -> W Fairfield Dr street segment (32505)."
+      },
+      "update_freshness": "live ('Inventory as of <date>' stamp updated nightly); no per-car dates",
+      "robots": "allow all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Kiker's U-Pull-It - Pensacola",
+          "city": "Pensacola",
+          "state": "FL",
+          "lat": 30.4338,
+          "lng": -87.2777
+        }
+      ]
+    },
+    {
+      "name": "Weller Self Serve",
+      "status": "adapter-built",
+      "platform": "wordpress + 'Automotive Listings' plugin (wp-content/plugins/automotive v16.6) - adapter fetch_weller_inventory",
+      "website": "https://www.wellerselfserve.com",
+      "inventory_url": "https://www.wellerselfserve.com/inventory/",
+      "api": {
+        "endpoint": "https://www.wellerselfserve.com/inventory/?paged=N",
+        "method": "GET",
+        "auth": "none",
+        "format": "html listing cards, 10/page: Date Added (MM/DD/YYYY), Year, Make, Model, VIN Number, sometimes Exterior Color",
+        "requests_per_scan": "~139 (10 per page) at the robots Crawl-delay of 10 s (~25-30 min)",
+        "notes": "~1,385 listings. Listing post type is not in the WP REST API, so the plugin's own ?paged= pagination is used. VIN ids (post id fallback). No row column. Address from the site's contact page: 2525 Chicago Dr SW, Wyoming MI 49519 (Grand Rapids), exact OSM match."
+      },
+      "update_freshness": "live (Date Added within days)",
+      "robots": "Disallow /wp-admin/ only; Crawl-delay: 10 (honored)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Weller Self Serve - Wyoming",
+          "city": "Wyoming",
+          "state": "MI",
+          "lat": 42.9285,
+          "lng": -85.7282
+        }
+      ]
+    },
+    {
+      "name": "Cagle's U-Pull-It",
+      "status": "adapter-built",
+      "platform": "ASP.NET WebForms inventory.aspx (Budget Bartow family: ddlMake -> ddlModel postbacks) - adapter fetch_cagles_inventory",
+      "website": "https://www.caglesupullit.com",
+      "inventory_url": "https://www.caglesupullit.com/inventory.aspx",
+      "api": {
+        "endpoint": "https://www.caglesupullit.com/inventory.aspx",
+        "method": "GET + POST postbacks",
+        "auth": "none",
+        "format": "html table#ddlRow (Year, Make, Model, Yard Row, Arrival Date MM/DD/YYYY); every response also carries a 14-day New Arrivals grid (table#MyDataGrid), which is ignored",
+        "requests_per_scan": "1 + makes + sum(models) (~440 at 2 s)",
+        "notes": "No stock # / VIN -> sha1 row-hash ids with ordinal dupe suffixes (Bartow convention). 'Inventory updated at midnight each day'. OSM has the yard (landuse 'Cagle's U Pull It', 1139 Old Alabama Rd SW) -> exact pin."
+      },
+      "update_freshness": "live (nightly; arrival dates within the week)",
+      "robots": "none (404)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Cagle's U-Pull-It - Cartersville",
+          "city": "Cartersville",
+          "state": "GA",
+          "lat": 34.1141,
+          "lng": -84.8685
+        }
+      ]
     }
   ]
 }

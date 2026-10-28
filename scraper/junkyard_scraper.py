@@ -19624,6 +19624,327 @@ def refresh_wilberts_pricing_file() -> Path:
     return path
 
 
+# ===== 2026-10-28 Kiker's / Weller / Cagle's pass (self-contained block) =====
+# Three single-host yards, each on its own small adapter. All send the honest
+# YARDSCOUT_HEADERS UA and pace >= 2 s per request (Weller: its robots.txt
+# Crawl-delay of 10 s). Registered in INDEPENDENT_EXPECTED_SOURCES via one
+# update() and in INDEPENDENT_FETCHERS (one entry per host) below.
+#
+# Kiker's U-Pull-It (kikersupullit.com, Pensacola FL) — a custom "RowCall"
+# page: /inventory server-renders EVERY vehicle as an <article class=
+# "rc-card"> (~630) and /rowcall-ui.js only filters/sorts those cards
+# client-side (no fetch/XHR, no embedded JSON), so the page is the data
+# source: one GET per scan. Card data-* attributes: data-stock (the id
+# basis), data-year, data-make-label, data-title ("2020 DODGE CARAVAN" — make
+# sometimes omitted: "2016 CAMARO"), data-location (yard position "S1R9",
+# staging "S1-STG"/"STG"), plus a photo <img>. NO VIN and NO set-out date
+# anywhere on the page -> dateAdded "" (unknown; never invented).
+# robots.txt: allow all. 3010 W Fairfield Dr isn't an OSM address -> the
+# W Fairfield Dr street segment in 32505 (Nominatim), ~200 m accuracy.
+KIKERS_INVENTORY_URL = "https://www.kikersupullit.com/inventory"
+KIKERS_YARD = {"name": "Kiker's U-Pull-It - Pensacola", "city": "Pensacola",
+               "state": "FL", "lat": 30.4338, "lng": -87.2777}
+_KIKERS_CARD_RE = re.compile(r'<article class="rc-card"([^>]*)>(.*?)</article>', re.S)
+_KIKERS_ATTR_RE = re.compile(r'(data-[a-z-]+)="([^"]*)"')
+_KIKERS_IMG_RE = re.compile(r'<img src="([^"]+)"')
+# Title-make spellings that differ from data-make-label ("2012 BMW MINI COOPER"
+# is labelled MINI; "2008 MERCEDES GL CLASS" is labelled Mercedes-Benz).
+_KIKERS_MAKE_ALIASES = {
+    "chevrolet": ("CHEVY",), "mercedes-benz": ("MERCEDES BENZ", "MERCEDES"),
+    "mini": ("BMW MINI",), "volkswagen": ("VW",),
+}
+
+
+def _kikers_model(title: str, year_s: str, make_label: str) -> str:
+    """Model from a RowCall card title: drop the year, the make (when the
+    title repeats it), parenthetical notes ("FIESTA (FOR)") and Hollander-
+    style qualifiers ("JETTA EXCEPT GLI", "FOCUS NOT RS"). Other Hollander
+    names ("PICKUP 1500 SERIES") are kept as the yard lists them."""
+    rest = title.strip()
+    if year_s and rest.startswith(year_s):
+        rest = rest[len(year_s):].strip()
+    up = rest.upper()
+    prefixes = [make_label.upper(), *_KIKERS_MAKE_ALIASES.get(make_label.lower(), ())]
+    for p in sorted(prefixes, key=len, reverse=True):
+        if p and up.startswith(p + " "):
+            rest = rest[len(p) + 1:]
+            break
+    rest = re.sub(r"\s*\([^)]*\)", "", rest)
+    return re.sub(r"\s+(?:EXCEPT|NOT)\s.*$", "", rest, flags=re.I).strip()
+
+
+def fetch_kikers_inventory() -> list[dict]:
+    """Kiker's U-Pull-It (Pensacola FL): one GET, server-rendered cards."""
+    import html as html_mod
+    yard = KIKERS_YARD
+    try:
+        r = requests.get(KIKERS_INVENTORY_URL,
+                         headers={**YARDSCOUT_HEADERS, "Accept": "text/html"}, timeout=120)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Kiker's] inventory fetch failed: {e}", file=sys.stderr)
+        return []
+    _indep_cache_raw("kikers_inventory.html", page.encode())
+    vehicles: list[dict] = []
+    seen: set[str] = set()
+    for attrs_s, body in _KIKERS_CARD_RE.findall(page):
+        a = {k: html_mod.unescape(v).strip() for k, v in _KIKERS_ATTR_RE.findall(attrs_s)}
+        stock, year_s = a.get("data-stock", ""), a.get("data-year", "")
+        if not stock or not year_s.isdigit():
+            continue
+        vid = f"kikers-{stock.lower()}"
+        if vid in seen:
+            continue
+        seen.add(vid)
+        make_label = a.get("data-make-label", "")
+        if make_label.lower().startswith("other"):   # "Other / not specified"
+            make_label = ""
+        img = _KIKERS_IMG_RE.search(body)
+        v = {
+            "id": vid,
+            "vin": "",
+            "year": int(year_s),
+            "make": _utpap_format_label(make_label),
+            "model": _utpap_format_label(
+                _kikers_model(a.get("data-title", ""), year_s, make_label)),
+            "row": a.get("data-location", ""),
+            "dateAdded": "",
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "kikers",
+        }
+        if img:
+            v["_photo"] = html_mod.unescape(img.group(1))
+        vehicles.append(v)
+    if not vehicles:
+        print("  [Kiker's] no rc-card vehicles parsed — page layout changed?", file=sys.stderr)
+    print(f"  [Kiker's U-Pull-It] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
+# Weller Self Serve (wellerselfserve.com) — WordPress + the "Automotive
+# Listings" plugin (wp-content/plugins/automotive, v16.6). The listing post
+# type is NOT exposed in the WP REST API; the plugin's own pagination
+# (listing.js pushUrlVars) is a plain server-rendered GET of
+# /inventory/?paged=N, 10 cards per page (~139 pages, "Page 1 of N" in
+# .total_pages, "N Vehicles Matching" in .number_of_listings). Each card:
+# data-listing (WP post id), photo <img>, and a spec table with Date Added
+# (MM/DD/YYYY), Year, Make, Model, VIN Number (always a 17-char VIN so far),
+# sometimes Exterior Color. No row / stock column -> ids are the VIN
+# (post id fallback). robots.txt: Disallow /wp-admin/ only, Crawl-delay: 10
+# -> honored (~25-30 min/scan; overlaps other hosts like Wilbert's).
+# The site's own contact page gives 2525 Chicago Dr SW, Wyoming MI 49519
+# (Grand Rapids; the research note's "Wayland" was wrong) -> exact
+# Nominatim house match.
+WELLER_INVENTORY_URL = "https://www.wellerselfserve.com/inventory/"
+WELLER_DELAY_SEC = 10.0   # robots.txt Crawl-delay
+WELLER_MAX_PAGES = 400    # runaway guard (~139 pages today)
+WELLER_YARD = {"name": "Weller Self Serve - Wyoming", "city": "Wyoming",
+               "state": "MI", "lat": 42.9285, "lng": -85.7282}
+_WELLER_CARD_RE = re.compile(
+    r'<div class="inventory clearfix[^"]*" data-listing="(\d+)">(.*?)'
+    r'<div class="view-details', re.S)
+_WELLER_SPEC_RE = re.compile(
+    r"<tr class='listing_category_([a-z-]+)'>\s*<td[^>]*>[^<]*</td>\s*"
+    r"<td class='spec'>([^<]*)</td>", re.S)
+_WELLER_IMG_RE = re.compile(r'<img[^>]*src="([^"]+)"[^>]*class="preview"')
+_WELLER_TOTAL_PAGES_RE = re.compile(r'class="total_pages">(\d+)<')
+_WELLER_TOTAL_RE = re.compile(r'class="number_of_listings">(\d+)<')
+
+
+def fetch_weller_inventory() -> list[dict]:
+    """Weller Self Serve (Grand Rapids MI): paged server-rendered listings."""
+    import html as html_mod
+    yard = WELLER_YARD
+    session = requests.Session()
+    vehicles: list[dict] = []
+    seen: set[str] = set()
+    total_pages, expected = 1, 0
+    page_n = 1
+    while page_n <= min(total_pages, WELLER_MAX_PAGES):
+        if page_n > 1:
+            time.sleep(WELLER_DELAY_SEC)
+        try:
+            r = session.get(WELLER_INVENTORY_URL,
+                            params={"paged": page_n} if page_n > 1 else None,
+                            headers={**YARDSCOUT_HEADERS, "Accept": "text/html"}, timeout=90)
+            r.raise_for_status()
+            page = r.text
+        except Exception as e:
+            print(f"  [Weller] page {page_n} fetch failed: {e}", file=sys.stderr)
+            if page_n == 1:
+                return []
+            page_n += 1
+            continue
+        if page_n == 1:
+            _indep_cache_raw("weller_inventory_p1.html", page.encode())
+            m = _WELLER_TOTAL_PAGES_RE.search(page)
+            total_pages = int(m.group(1)) if m else 1
+            m = _WELLER_TOTAL_RE.search(page)
+            expected = int(m.group(1)) if m else 0
+        cards = _WELLER_CARD_RE.findall(page)
+        if not cards:
+            break
+        for post_id, body in cards:
+            spec = {k: html_mod.unescape(v).strip() for k, v in _WELLER_SPEC_RE.findall(body)}
+            year_s = spec.get("year", "")
+            if not year_s.isdigit():
+                continue
+            vin = re.sub(r"\s+", "", spec.get("vin-number", "")).upper()
+            vid = f"weller-{vin.lower()}" if len(vin) == 17 else f"weller-p{post_id}"
+            if vid in seen:
+                continue
+            seen.add(vid)
+            date_iso = ""
+            dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})$", spec.get("date-added", ""))
+            if dm:
+                date_iso = _sanitize_date_added(
+                    f"{dm.group(3)}-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}")
+            img = _WELLER_IMG_RE.search(body)
+            v = {
+                "id": vid,
+                "vin": vin if len(vin) == 17 else "",
+                "year": int(year_s),
+                "make": _utpap_format_label(re.sub(r"\s+", " ", spec.get("make", ""))),
+                "model": _utpap_format_label(re.sub(r"\s+", " ", spec.get("model", ""))),
+                "row": "",
+                "dateAdded": date_iso,
+                "_location": yard["name"],
+                "_city": yard["city"],
+                "_state": yard["state"],
+                "_lat": yard["lat"],
+                "_lng": yard["lng"],
+                "_source": "weller",
+            }
+            color = spec.get("exterior-color", "")
+            if color:
+                v["_color"] = color.title()
+            if img:
+                v["_photo"] = html_mod.unescape(img.group(1))
+            vehicles.append(v)
+        page_n += 1
+    if expected and len(vehicles) < expected * 0.95:
+        print(f"  [Weller] only {len(vehicles)} of {expected} listed vehicles parsed "
+              f"(paging order drift or layout change?)", file=sys.stderr)
+    print(f"  [Weller Self Serve] {len(vehicles)} vehicles ({page_n - 1} pages, "
+          f"site says {expected})", file=sys.stderr)
+    return vehicles
+
+
+# Cagle's U-Pull-It (caglesupullit.com, Cartersville GA) — the same classic
+# ASP.NET WebForms inventory.aspx as Budget Bartow above (ddlMake -> ddlModel
+# postbacks, hidden fields re-chained from each response; Year, Make, Model,
+# Yard Row, Arrival Date MM/DD/YYYY; no stock#, no VIN). Kept as a parallel
+# function (reusing the Bartow option/hidden-field helpers) instead of
+# generalizing the Bartow path: Bartow's host did not resolve on 2026-10-28,
+# so its output could not be re-verified byte-identical, and Cagle's needs
+# two differences anyway: (1) its page ALSO renders a "New Arrivals - last
+# 14 days" grid (table#MyDataGrid) on every response, so rows must be read
+# from the search-result table (table#ddlRow) only; (2) honest UA + 2 s
+# pacing. 1 + makes + Σmodels requests (~440/scan, ~15 min). sha1-hash ids
+# with ordinal dupe suffixes (Bartow convention). robots.txt: 404 (none).
+# "Cagle's U Pull It" is an OSM landuse at 1139 Old Alabama Rd -> exact pin.
+CAGLES_INVENTORY_URL = "https://www.caglesupullit.com/inventory.aspx"
+CAGLES_DELAY_SEC = 2.0
+CAGLES_YARD = {"name": "Cagle's U-Pull-It - Cartersville", "city": "Cartersville",
+               "state": "GA", "lat": 34.1141, "lng": -84.8685}
+_CAGLES_RESULT_TABLE_RE = re.compile(r'<table[^>]*id="ddlRow"[^>]*>(.*?)</table>', re.S)
+
+
+def fetch_cagles_inventory() -> list[dict]:
+    """Cagle's U-Pull-It (Cartersville GA): ASP.NET make->model postbacks."""
+    import hashlib
+    import html as html_mod
+    yard = CAGLES_YARD
+    session = requests.Session()
+    hdrs = {**YARDSCOUT_HEADERS, "Accept": "text/html"}
+
+    def postback(page: str, target: str, make: str, model: str) -> str | None:
+        data = dict(_BUDGET_BARTOW_HIDDEN_RE.findall(page))
+        data.update({"__EVENTTARGET": target, "__EVENTARGUMENT": "", "__LASTFOCUS": "",
+                     "ddlMake": make, "ddlModel": model})
+        try:
+            r = session.post(CAGLES_INVENTORY_URL, data=data, headers=hdrs, timeout=60)
+            r.raise_for_status()
+            return r.text
+        except Exception as e:
+            print(f"  [Cagle's] postback {make}/{model} failed: {e}", file=sys.stderr)
+            return None
+
+    try:
+        r = session.get(CAGLES_INVENTORY_URL, headers=hdrs, timeout=60)
+        r.raise_for_status()
+        base = r.text
+    except Exception as e:
+        print(f"  [Cagle's] inventory.aspx fetch failed: {e}", file=sys.stderr)
+        return []
+    _indep_cache_raw("cagles_base.html", base.encode())
+    makes = _budget_bartow_options(base, "ddlMake")
+    if not makes:
+        print("  [Cagle's] no makes in ddlMake — page changed?", file=sys.stderr)
+        return []
+    vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    for make_name in makes:
+        time.sleep(CAGLES_DELAY_SEC)
+        make_page = postback(base, "ddlMake", make_name, "SELECT MODEL")
+        if make_page is None:
+            continue
+        page = make_page
+        for model_name in _budget_bartow_options(make_page, "ddlModel"):
+            time.sleep(CAGLES_DELAY_SEC)
+            resp = postback(page, "ddlModel", make_name, model_name)
+            if resp is None:
+                continue
+            page = resp  # re-chain VIEWSTATE from the latest response
+            m = _CAGLES_RESULT_TABLE_RE.search(resp)
+            if not m:
+                continue
+            for block in _BUDGET_WG_ROW_RE.findall(m.group(1)):
+                cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                         for c in _FENIX_TD_RE.findall(block)]
+                # Year, Make, Model, Yard Row, Arrival Date
+                if len(cells) != 5 or not cells[0].isdigit():
+                    continue
+                year_s, make_s, model_s, row_s, date_s = cells
+                date_iso = ""
+                dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})$", date_s)
+                if dm:
+                    date_iso = _sanitize_date_added(
+                        f"{dm.group(3)}-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}")
+                basis = "|".join(("cagles", make_s, model_s, year_s, row_s, date_s)).lower()
+                vid = "cagles-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+                n = dupes.get(vid, 0) + 1
+                dupes[vid] = n
+                if n > 1:
+                    vid = f"{vid}-{n}"
+                vehicles.append({
+                    "id": vid,
+                    "vin": "",
+                    "year": int(year_s),
+                    "make": _utpap_format_label(make_s),
+                    "model": _utpap_format_label(model_s),
+                    "row": row_s.strip(),
+                    "dateAdded": date_iso,
+                    "_location": yard["name"],
+                    "_city": yard["city"],
+                    "_state": yard["state"],
+                    "_lat": yard["lat"],
+                    "_lng": yard["lng"],
+                    "_source": "cagles",
+                })
+    print(f"  [Cagle's U-Pull-It] {len(vehicles)} vehicles ({len(makes)} makes)",
+          file=sys.stderr)
+    return vehicles
+
+
+# ===== end 2026-10-28 Kiker's / Weller / Cagle's block =====
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -19675,6 +19996,12 @@ INDEPENDENT_EXPECTED_SOURCES.update(
 INDEPENDENT_EXPECTED_SOURCES.update(
     {src: c["label"] for src, c in CRUSH_TABLE_SITES.items()
      if c["yard"] and src not in INDEPENDENT_EXPECTED_SOURCES})
+# 2026-10-28 single-host adapters (Kiker's / Weller / Cagle's block above).
+INDEPENDENT_EXPECTED_SOURCES.update({
+    "kikers": "Kiker's U-Pull-It (Pensacola FL)",
+    "weller": "Weller Self Serve (Grand Rapids MI)",
+    "cagles": "Cagle's U-Pull-It (Cartersville GA)",
+})
 
 
 # Canonical adapter order. The parallel fetch below concatenates results in
@@ -19733,6 +20060,11 @@ INDEPENDENT_FETCHERS: list = [
     ("Hwy 82 Pick & Pay", fetch_hwy82_inventory),
     ("Route 34 U-Pull-M", fetch_route34_inventory),
     ("Sunshine Auto Salvage", fetch_sunshine_inventory),
+    # 2026-10-28 single-host adapters (Kiker's / Weller / Cagle's block).
+    # Weller honors a 10 s robots Crawl-delay (~25-30 min), like Wilbert's.
+    ("Kiker's U-Pull-It", fetch_kikers_inventory),
+    ("Weller Self Serve", fetch_weller_inventory),
+    ("Cagle's U-Pull-It", fetch_cagles_inventory),
 ]
 
 
