@@ -42,9 +42,11 @@ id = "deb0d4c244fb4eb09a109050000d0e1b"
 APP_ORIGINS = "https://yardscout.io,https://benvuolo.github.io,capacitor://localhost,https://localhost,http://localhost:8765,http://127.0.0.1:8765"
 # Where the magic-link callback redirects back to (the PWA).
 APP_URL = "https://yardscout.io/"
-# Sender for magic-link emails. Resend's shared onboarding sender works out of
-# the box for testing; switch to a verified domain sender for real users.
-EMAIL_FROM = "YardScout <onboarding@resend.dev>"
+# Sender for magic-link and free weekly-digest emails. Must be on a domain
+# verified in Resend: the shared onboarding@resend.dev sender only delivers
+# to the Resend account's own address (2026-10-29: free digests and sign-in
+# links were silently going nowhere for everyone else).
+EMAIL_FROM = "YardScout <hello@yardscout.io>"
 # Sender for Pro email alerts (yardscout.io is verified in Resend).
 EMAIL_ALERTS_FROM = "YardScout Alerts <alerts@yardscout.io>"
 # Owner inbox for the coverage-request digest (Parts tab "ask us to add it").
