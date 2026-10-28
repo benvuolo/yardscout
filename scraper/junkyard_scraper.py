@@ -339,7 +339,7 @@ UNOBTANIUM_DB = {
         "top_parts": [
             # Factory rear e-locker was an option package, never standard (3rd-gen option;
             # 5th-gen TRD trims are trim-gated in the gen-split entries).
-            {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15, "option": True},
+            {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15, "option": True, "drive": ["4wd"]},
             {"name": "TRD Pro Grille", "rarity": "Legendary", "low": 300, "high": 600, "cost": 40, "yr_min": 2014},
             {"name": "KDSS Sway Bar Actuators", "rarity": "Legendary", "low": 200, "high": 500, "cost": 20, "yr_min": 2003, "yr_max": 2009},
             {"name": "OEM LED Headlights", "rarity": "Epic", "low": 400, "high": 800, "cost": 60, "yr_min": 2014},
@@ -1575,7 +1575,11 @@ UNOBTANIUM_DB = {
     "bmw 3": {
         "display": "BMW 3 Series",
         "make": "BMW",
-        "year_range": (1999, 2024),
+        # 2026-10-28: range opened to 1992 — E36s were falling outside it and
+        # getting NO parts despite the E36 rows below. Enthusiast swap parts
+        # (manual conversions, LSDs, brake upgrades, ZHP bits) added per
+        # generation; prices are used-pull resale (eBay/forum asking ranges).
+        "year_range": (1992, 2024),
         # 2026-09 generation-fits audit: clusters, iDrive units, lights and
         # seats don't interchange across E36/E46/E90/F30/G20 — one wide band
         # produced "fits 1992-2024" badges. Split per generation:
@@ -1585,6 +1589,14 @@ UNOBTANIUM_DB = {
             {"name": "Headlights (E36, pair)", "rarity": "Rare", "low": 80, "high": 220, "cost": 25, "yr_max": 1998},
             {"name": "Instrument Cluster (E36, M3/sport worth more)", "rarity": "Rare", "low": 80, "high": 280, "cost": 20, "yr_max": 1998},
             {"name": "Sport Seats (E36 Vaders top the range, pair)", "rarity": "Rare", "low": 250, "high": 700, "cost": 55, "yr_max": 1998, "trim": ["M Sport", "328", "M3"]},
+            # E36 swap economy: auto->manual conversions want the whole kit
+            # (box, pedal assembly, clutch hydraulics, shifter, driveshaft);
+            # OBD2 M52 harness+DME is the E30/E36 engine-swap staple.
+            {"name": "5-Speed Manual + Pedal Box + Shifter (E36 swap kit)", "rarity": "Epic", "low": 300, "high": 700, "cost": 120, "yr_max": 1998, "manual": True},
+            {"name": "Limited-Slip Differential (E36 — 'S' on the diff tag)", "rarity": "Legendary", "low": 300, "high": 700, "cost": 60, "yr_max": 1998, "option": True},
+            {"name": "M52 DME + OBD2 Engine Harness (96-98; E30/E36 swap)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "yr_min": 1996, "yr_max": 1998},
+            {"name": "M-Tech II / Sport Steering Wheel (E36)", "rarity": "Rare", "low": 150, "high": 400, "cost": 20, "yr_max": 1998, "option": True},
+            {"name": "Convertible Hardtop (E36, with mounts)", "rarity": "Legendary", "low": 400, "high": 1200, "cost": 80, "yr_max": 1998, "option": True},
             # E46 (1999-2005) — the volume yard 3-series; angel-eye xenons sell on sight
             {"name": "OEM Headlight Assembly (E46 halogen/xenon, pair)", "rarity": "Rare", "low": 120, "high": 350, "cost": 30, "yr_min": 1999, "yr_max": 2005},
             {"name": "Instrument Cluster (E46, M3/sport worth more)", "rarity": "Rare", "low": 100, "high": 400, "cost": 20, "yr_min": 1999, "yr_max": 2005},
@@ -1595,6 +1607,15 @@ UNOBTANIUM_DB = {
             # BMW buyers pay the OEM premium (clone MAFs are a known lemon).
             {"name": "ABS/DSC Hydraulic Module (E46)", "rarity": "Epic", "low": 80, "high": 220, "cost": 15, "yr_min": 1999, "yr_max": 2005},
             {"name": "MAF (OEM Siemens/VDO, M54)", "rarity": "Uncommon", "low": 40, "high": 90, "cost": 10, "yr_min": 1999, "yr_max": 2005},
+            # E46 enthusiast pulls: 330i 325mm fronts bolt onto 323/325 (same
+            # master cylinder); ZHP (03-06 330i Performance Package) knob /
+            # wheel / cluster are option-package content; the "purple tag"
+            # quick rack is the E36/Z3 steering swap favorite.
+            {"name": "330i Front Brakes — 325 mm calipers + carriers (bolt-on 323/325 upgrade)", "rarity": "Rare", "low": 120, "high": 300, "cost": 35, "yr_min": 2001, "yr_max": 2005, "trim": ["330"]},
+            {"name": "5/6-Speed Manual + Pedal Box + Shifter (E46 swap kit)", "rarity": "Epic", "low": 300, "high": 700, "cost": 120, "yr_min": 1999, "yr_max": 2005, "manual": True},
+            {"name": "ZHP Package: Illuminated Shift Knob + Wheel + Cluster (03-05 330i)", "rarity": "Epic", "low": 150, "high": 450, "cost": 30, "yr_min": 2003, "yr_max": 2005, "trim": ["330"], "option": True},
+            {"name": "Purple-Tag Quick Steering Rack (E46 ZHP/M3 — check the tag; E36/Z3 swap)", "rarity": "Rare", "low": 150, "high": 400, "cost": 35, "yr_min": 2001, "yr_max": 2005, "trim": ["330", "M3"], "option": True},
+            {"name": "Sport Steering Wheel (E46 3-spoke)", "rarity": "Rare", "low": 100, "high": 250, "cost": 15, "yr_min": 1999, "yr_max": 2005, "option": True},
             # E90 (2006-2011) — first iDrive cars; CCC screens die, working pulls move fast
             {"name": "iDrive Head Unit (E90 CCC/CIC)", "rarity": "Rare", "low": 120, "high": 320, "cost": 40, "yr_min": 2006, "yr_max": 2011},
             {"name": "Harman Kardon / Logic7 Amp + Speakers (E90)", "rarity": "Rare", "low": 120, "high": 320, "cost": 35, "yr_min": 2006, "yr_max": 2011},
@@ -1614,8 +1635,28 @@ UNOBTANIUM_DB = {
     "bmw m3": {
         "display": "BMW M3",
         "make": "BMW",
-        "year_range": (2001, 2024),
+        # 2026-10-28: range opened to 1995 and E36/E46 parts added — a 2002
+        # M3 matched the entry but every part was 2008+, so the card was
+        # empty. These are the pulls the E36/E46 crowd drives for.
+        "year_range": (1995, 2024),
         "top_parts": [
+            # E36 M3 (1995-1999): 3.23 clutch LSD standard, Vader seats,
+            # 315 mm front brakes and the M3 control arms/sway bars all
+            # bolt onto 325/328s; S52 (96-99, OBD2) is the E30/E36 swap engine.
+            {"name": "3.23 Limited-Slip Differential (E36 M3)", "rarity": "Legendary", "low": 400, "high": 900, "cost": 60, "yr_max": 1999},
+            {"name": "ZF 5-Speed Manual + Pedal Box + Shifter (E36 M3)", "rarity": "Epic", "low": 350, "high": 800, "cost": 120, "yr_max": 1999, "manual": True},
+            {"name": "Vader Sport Seats (E36 M3, pair)", "rarity": "Legendary", "low": 500, "high": 1200, "cost": 55, "yr_max": 1999},
+            {"name": "Front Control Arms + Sway Bars (E36 M3; bolt-on 325/328 upgrade)", "rarity": "Rare", "low": 100, "high": 250, "cost": 40, "yr_max": 1999},
+            {"name": "315 mm Front Brakes — calipers + carriers (E36 M3)", "rarity": "Rare", "low": 120, "high": 300, "cost": 35, "yr_max": 1999},
+            {"name": "S52 DME + OBD2 Engine Harness (96-99; E30/E36 swap)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "yr_min": 1996, "yr_max": 1999},
+            {"name": "M-Tech II Steering Wheel (E36 M3)", "rarity": "Rare", "low": 150, "high": 400, "cost": 20, "yr_max": 1999},
+            # E46 M3 (2001-2006): 3.62 LSD, Getrag 6-speed, S54-only engine.
+            {"name": "3.62 Limited-Slip Differential (E46 M3)", "rarity": "Legendary", "low": 500, "high": 1200, "cost": 60, "yr_min": 2001, "yr_max": 2006},
+            {"name": "Getrag 6-Speed Manual + Pedal Box + Shifter (E46 M3)", "rarity": "Epic", "low": 500, "high": 1200, "cost": 130, "yr_min": 2001, "yr_max": 2006, "manual": True},
+            {"name": "Sport Seats (E46 M3, pair)", "rarity": "Epic", "low": 400, "high": 900, "cost": 55, "yr_min": 2001, "yr_max": 2006},
+            {"name": "325 mm Front + 328 mm Rear Brakes (E46 M3 calipers/carriers)", "rarity": "Rare", "low": 150, "high": 350, "cost": 40, "yr_min": 2001, "yr_max": 2006},
+            {"name": "M3 Front Fenders + Bumper (E46)", "rarity": "Rare", "low": 150, "high": 400, "cost": 45, "yr_min": 2001, "yr_max": 2006},
+            {"name": "Steering Wheel (E46 M3 3-spoke)", "rarity": "Rare", "low": 120, "high": 300, "cost": 15, "yr_min": 2001, "yr_max": 2006},
             {"name": "Carbon Roof Panel", "rarity": "Legendary", "low": 800, "high": 2000, "cost": 100, "yr_min": 2008},
             {"name": "OEM Carbon Bucket Seats (pair)", "rarity": "Legendary", "low": 2000, "high": 4500, "cost": 200, "yr_min": 2015},
             {"name": "Competition Wheels (set)", "rarity": "Epic", "low": 1200, "high": 2800, "cost": 150, "yr_min": 2015},
@@ -1802,6 +1843,8 @@ UNOBTANIUM_DB = {
         "top_parts": [
             {"name": "Manual / SMG Cluster + Gauges", "rarity": "Rare", "low": 120, "high": 350, "cost": 18},
             {"name": "Soft Top Frame + Latches (roadster)", "rarity": "Rare", "low": 200, "high": 500, "cost": 35},
+            {"name": "Quick-Ratio Steering Rack (Z3; E30/E36 swap favorite)", "rarity": "Rare", "low": 150, "high": 350, "cost": 35},
+            {"name": "Limited-Slip Differential (Z3 2.8/3.0/M — 'S' on the diff tag)", "rarity": "Legendary", "low": 300, "high": 800, "cost": 60, "option": True},
             {"name": "OEM Headlights (pair)", "rarity": "Uncommon", "low": 80, "high": 220, "cost": 22},
         ],
     },
@@ -3693,7 +3736,7 @@ _split_generations("4runner", display="Toyota 4Runner", make="Toyota", gens=[
     ]},
     {"label": "3rd gen", "years": (1996, 2002), "parts": [
         # Factory rear e-locker is a 3rd-gen option — previously claimed for ALL years.
-        {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15, "option": True},
+        {"name": "Rear E-Locker Actuator Motor", "rarity": "Legendary", "low": 250, "high": 500, "cost": 15, "option": True, "drive": ["4wd"]},
         # Sport/Highlander scooped hood (1999-2002 only): documented junkyard
         # pulls sold $300-350, clean painted example $395; repro hood + scoop
         # insert + paint runs ~$500 all-in. Sell local — shipping is freight. (2026-09-21)
@@ -5223,6 +5266,9 @@ if _gate_problems:
 #       note    — honesty caveat appended to the provenance string (keep
 #                 terse: it ships in the payload per part-set)
 #       copy_gates — allow copying a trim/drive-gated row (default: refuse)
+#       strip_gates — copy a gated row WITHOUT its trim/drive/manual gates
+#                 (the gate is true of the source vehicle only: the 4Runner
+#                 e-locker is 4WD-only, but 2WD PreRunner Tacomas got it)
 #       donor   — one-way swap provenance ("Integra arms bolt into 92-00
 #                 Civics"). The note ships verbatim as the row's sharedWith;
 #                 no member labels, no copies, single-member groups allowed.
@@ -5492,7 +5538,10 @@ PLATFORM_FAMILIES: dict[str, dict] = {
              "members": {"4runner 1996-2002": (1996, 2002),
                          "tacoma 1995-2004": (1996, 2004),
                          "tacoma 2005-2015": (2005, 2015)},
-             "copy_to": ["tacoma 1995-2004"],
+             # strip_gates: the 4Runner row is 4WD-gated (never offered on
+             # 2WD 4Runners) but 2WD PreRunner Tacomas with TRD Off-Road
+             # got the same locker, so the Tacoma copy stays ungated.
+             "copy_to": ["tacoma 1995-2004"], "strip_gates": True,
              "note": "8\" diff actuators (SAT-008/009); plug & vent routing differ — verify"},
         ],
     },
@@ -5935,7 +5984,7 @@ def _apply_platform_families() -> list[str]:
                     f"{fam_id}: group {grp['part']!r} has no source row")
                 continue
             canonical = rows[canonical_key]
-            if copy_to and not grp.get("copy_gates") and (
+            if copy_to and not grp.get("copy_gates") and not grp.get("strip_gates") and (
                     canonical.get("trim") or canonical.get("drive")):
                 problems.append(
                     f"{fam_id}: refusing to copy trim/drive-gated "
@@ -5953,6 +6002,9 @@ def _apply_platform_families() -> list[str]:
                 top = entries[k]["top_parts"]
                 if row is None:  # copy_to member
                     row = dict(canonical)
+                    if grp.get("strip_gates"):
+                        for gk in ("trim", "drive", "manual"):
+                            row.pop(gk, None)
                     row["yr_min"], row["yr_max"] = lo, hi
                     row["sharedWith"] = shared_txt
                     row["sharedYears"] = (lo, hi)
@@ -12579,7 +12631,7 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                     # (e.g. "2WD/4WD") stays unconfirmed.
                     classes = {c for c, toks in DRIVE_SYNONYMS.items()
                                if _gate_hit(toks, drive_str)}
-                    if _gate_hit(("2wd",), drive_str):
+                    if _gate_hit(("2wd", "4x2"), drive_str):
                         classes.add("2wd")
                     if len(classes) == 1:
                         continue
