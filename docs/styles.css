@@ -2072,11 +2072,11 @@
 }
 .pf-body { padding: 0 0.8rem 0.8rem; }
 /* Quiet hand-off to the Yards price comparison. */
-.pf-compare-cta { margin: 0.8rem 0 0.4rem; text-align: center; }
+.pf-compare-cta { margin: 0.5rem 0 0.2rem; }
 .pf-compare-link {
   background: none; border: none; cursor: pointer;
   font-family: var(--font-ui); font-size: 0.78rem; font-weight: 600;
-  color: var(--text-dim); padding: 0.4rem 0.6rem;
+  color: var(--accent); padding: 0.3rem 0;
 }
 .pf-compare-link:hover { color: var(--text); text-decoration: underline; }
 .pf-grid {

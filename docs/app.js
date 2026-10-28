@@ -464,11 +464,15 @@ const LOCKED_PRICE_MASK = '$\u2022\u2022\u2022&ndash;$\u2022\u2022\u2022';
 /* The VIN decoder's trim label, as a shopper would say it: drop the
  * "Grade:" prefix vPIC prepends on some makes, and show Toyota/Lexus
  * "Luxury" as the Limited it is (same alias the trim watch uses). */
-function displayTrim(trim, make) {
+function displayTrim(trim, make, model, year) {
   let t = trim != null ? String(trim).trim().replace(/^grade:\s*/i, '') : '';
   if (!t) return '';
   const mk = String(make || '').toLowerCase();
   if ((mk === 'toyota' || mk === 'lexus') && /^luxury$/i.test(t)) t = 'Limited';
+  // GM encodes a "Luxury" series in pre-2015 Escalade VINs; it wasn't a
+  // trim you could buy (one trim + ESV/EXT bodies until 2015's Luxury/
+  // Premium/Platinum ladder), so it reads as a false claim on the card.
+  if (mk === 'cadillac' && /escalade/i.test(String(model || '')) && (+year || 0) < 2015 && /^luxury$/i.test(t)) return '';
   return t;
 }
 
@@ -488,10 +492,10 @@ function vinMetaHtml(v, unlocked = false) {
   // a value signal.
   let vpic = '';
   const specBits = [];
-  const vt = displayTrim(v.vpicTrim, v.make);
+  const vt = displayTrim(v.vpicTrim, v.make, v.model, v.year);
   if (vt && (v.vpicTrimQuality === 'usable' || v.vpicDecodeWell === true)) {
     specBits.push(escapeHtml(vt));
-  } else if (v.vpicSeries) {
+  } else if (v.vpicSeries && !(v.vpicTrim && String(v.vpicTrim).trim())) {  // series only when vPIC had no trim at all
     specBits.push(escapeHtml(String(v.vpicSeries).trim()));
   }
   if (v.vpicDriveType) {
