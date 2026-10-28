@@ -139,6 +139,13 @@ export async function handleDeviceRegister(req, env) {
   ).bind(deviceId, apnsToken, fcmToken, String(body.platform || defaultPlatform).slice(0, 12), tier,
          JSON.stringify(watches), now, saved.length ? JSON.stringify(saved) : null).run();
 
+  // First-watch check-in clock: starts the first time this device syncs any
+  // watch, never resets (see dispatchFirstWatchCheckins).
+  if (watches.length) {
+    await env.DB.prepare('UPDATE devices SET first_watch_at = COALESCE(first_watch_at, ?1) WHERE id = ?2')
+      .bind(now, deviceId).run();
+  }
+
   // New watches alert on FUTURE arrivals: seed dedupe with current matches.
   const existing = await loadArrivals(env);
   const stmt = env.DB.prepare(
@@ -329,6 +336,59 @@ export async function sendWeeklyDevicePushes(env) {
   return { devices, sends, arrivals: arrivals.length };
 }
 
+/* ===== first-watch check-in (free native devices, once per install) =====
+ * ~48 h after a free device sets its first watch, ONE push: what has landed
+ * for its watches since. Value first — the moment a new user learns the
+ * watch works — with one short Pro clause. Nothing landed yet: keep looking
+ * on each commit for up to 7 days, then give up silently. Never repeats. */
+const CHECKIN_AFTER_MS = 48 * 3600_000;
+const CHECKIN_GIVE_UP_MS = 7 * 86400_000;
+const MAX_CHECKINS_PER_COMMIT = 20;
+
+function watchLabel(w) {
+  return [w.make, w.model].filter(Boolean).join(' ') || 'your watch';
+}
+
+export async function dispatchFirstWatchCheckins(env, { now = Date.now() } = {}) {
+  if (!devicePushConfigured(env)) return { due: 0, sent: 0, gaveUp: 0 };
+  const dueBefore = new Date(now - CHECKIN_AFTER_MS).toISOString();
+  const rows = (await env.DB.prepare(
+    `SELECT id, apns_token, fcm_token, watches_json, first_watch_at FROM devices
+     WHERE tier != 'pro' AND checkin_at IS NULL AND first_watch_at IS NOT NULL
+       AND first_watch_at <= ?1 AND ${PUSHABLE}
+     ORDER BY first_watch_at LIMIT ?2`
+  ).bind(dueBefore, MAX_CHECKINS_PER_COMMIT).all()).results || [];
+  let sent = 0, gaveUp = 0;
+  for (const d of rows) {
+    const watches = parseWatches(d);
+    const arrivals = watches.length ? await loadArrivals(env, d.first_watch_at) : [];
+    const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
+    const fresh = await freshOnly(env, d.id, matched);
+    if (!fresh.length) {
+      if (now - Date.parse(d.first_watch_at) >= CHECKIN_GIVE_UP_MS) {
+        await env.DB.prepare('UPDATE devices SET checkin_at = ?1 WHERE id = ?2').bind(isoNow(), d.id).run();
+        gaveUp++;
+      }
+      continue;
+    }
+    const w = watches.find((x) => fresh.some((v) => watchMatches(x, v))) || watches[0];
+    const within = w && w.radius_mi ? ` within ${w.radius_mi} mi` : '';
+    const n = fresh.length;
+    const res = await sendDevicePush(env, d, {
+      title: `Since you started watching ${watchLabel(w)}`,
+      body: `${n} landed${within}: ${digestText(fresh.slice(0, 2)).replace(/\n/g, '; ')}${n > 2 ? ` and ${n - 2} more` : ''}. `
+        + 'Free gets a Monday recap; Pro pushes each one the day it lands.',
+      url: '/#alert=' + encodeURIComponent(String(fresh[0].id)),
+    });
+    if (res.ok) {
+      await markSent(env, d.id, fresh);
+      await env.DB.prepare('UPDATE devices SET checkin_at = ?1 WHERE id = ?2').bind(isoNow(), d.id).run();
+      sent++;
+    }
+  }
+  return { due: rows.length, sent, gaveUp };
+}
+
 /* ===== test/ops helpers (x-admin-secret; same pattern as email_alerts) ===== */
 
 /** POST /v1/admin/device-alerts/dispatch {arrivals:[...]} — manual dispatch
@@ -345,6 +405,15 @@ export async function handleDeviceAlertsDispatchRun(req, env) {
 
 /** POST /v1/admin/device-digest/run — manual weekly device push trigger;
  * same code path as the Monday cron (mirrors /v1/admin/digest/run). */
+/** POST /v1/admin/checkins/run {nowOffsetHours?} — run the first-watch
+ * check-in pass now (or as if N hours from now, for tests/ops). */
+export async function handleCheckinsRun(req, env) {
+  let body = {};
+  try { body = await req.json(); } catch { /* empty body ok */ }
+  const off = Number.isFinite(+body.nowOffsetHours) ? +body.nowOffsetHours : 0;
+  return json(await dispatchFirstWatchCheckins(env, { now: Date.now() + off * 3600_000 }));
+}
+
 export async function handleDeviceDigestRun(req, env) {
   return json(await sendWeeklyDevicePushes(env));
 }

@@ -8,7 +8,7 @@
 
 import { json, err, sha256Hex, isoNow, timingSafeEqual } from './util.js';
 import { dispatchAlerts, dispatchSaleAlerts, storeArrivals } from './alerts.js';
-import { dispatchDeviceAlerts, dispatchDeviceSaleAlerts } from './devices.js';
+import { dispatchDeviceAlerts, dispatchDeviceSaleAlerts, dispatchFirstWatchCheckins } from './devices.js';
 import { dispatchEmailAlerts } from './email_alerts.js';
 import { maybeSendCoverageDigest } from './coverage.js';
 import { dispatchSavedCarAlerts } from './saved_alerts.js';
@@ -122,6 +122,13 @@ export async function handleCommit(req, env, ctx) {
   // yard-visit list, resolved against the shards just committed. Runs on
   // every commit, arrivals or not — a car can leave on a quiet scan.
   if (ctx) {
+    // One-time first-watch check-in for new free app users (after storeArrivals
+    // has had a chance to land this commit's arrivals; it reads the table).
+    ctx.waitUntil(
+      dispatchFirstWatchCheckins(env)
+        .then((r) => console.log(`first-watch check-ins: ${r.due} due, ${r.sent} sent, ${r.gaveUp} gave up`))
+        .catch((e) => console.log('first-watch check-in failed:', e && e.message))
+    );
     ctx.waitUntil(
       dispatchSavedCarAlerts(env)
         .then((r) => console.log(`saved-car alerts: ${r.devices} devices, ${r.emails} emails, ${r.gone} gone, ${r.leaving} leaving, ${r.deferred} deferred`))

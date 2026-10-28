@@ -148,5 +148,34 @@ check('old row lost the token (404 no_token)', r.status === 404 && r.data.error 
 r = await api('/v1/device/test', J({}, { deviceId: newInstall }));
 check('new row owns the token', r.status === 200 && r.data.ok === true);
 
+/* ---- 7. first-watch check-in: once, ~48 h after the first watch, only
+ *         if something landed; gives up silently after 7 quiet days ---- */
+const chkId = uuid(), chkToken = fcmTok('checkin-device');
+r = await api('/v1/device/register', J({}, { deviceId: chkId, fcmToken: chkToken, tier: 'free',
+  watches: [{ make: 'Toyota', model: 'Tacoma', lat: 40.76, lng: -111.89, radiusMi: 100 }] }));
+check('check-in device registers', r.status === 200);
+const quietId = uuid(), quietToken = fcmTok('quiet-device');
+r = await api('/v1/device/register', J({}, { deviceId: quietId, fcmToken: quietToken, tier: 'free',
+  watches: [{ make: 'Saab', model: '9-3', lat: 40.76, lng: -111.89, radiusMi: 100 }] }));
+r = await commit([arrival(9101, { make: 'Toyota', model: 'Tacoma', row: '7' }), arrival(9102, { make: 'Toyota', model: 'Tacoma', row: '9' })]);
+await waitDispatch();
+const runChk = (h) => api('/v1/admin/checkins/run', { method: 'POST', headers: { ...ADMIN, 'content-type': 'application/json' }, body: JSON.stringify({ nowOffsetHours: h }) });
+r = await runChk(0);
+let chk = (await sentList()).filter((s) => s.token === chkToken);
+check('no check-in before 48 h', chk.length === 0, `got ${chk.length}`);
+r = await runChk(49);
+chk = (await sentList()).filter((s) => s.token === chkToken);
+check('one check-in after 48 h', chk.length === 1, `got ${chk.length} ${JSON.stringify(r.data)}`);
+check('check-in names the watch', /Since you started watching Toyota Tacoma/.test(chk[0]?.title || ''), chk[0]?.title);
+check('check-in lists what landed', /2 landed within 100 mi/.test(chk[0]?.body || ''), chk[0]?.body);
+check('check-in deep-links to a car', /^\/#alert=910[12]$/.test(chk[0]?.data?.url || ''), chk[0]?.data?.url);
+check('quiet device gets nothing', (await sentList()).filter((s) => s.token === quietToken).length === 0);
+r = await runChk(60);
+check('check-in never repeats', (await sentList()).filter((s) => s.token === chkToken).length === 1);
+r = await runChk(24 * 8);
+check('quiet device given up after 7 days, silently', r.data.gaveUp >= 1 && (await sentList()).filter((s) => s.token === quietToken).length === 0, JSON.stringify(r.data));
+r = await api('/v1/admin/device-digest/run', { method: 'POST', headers: ADMIN });
+check('weekly recap does not repeat the check-in cars', (await sentList()).filter((s) => s.token === chkToken).length === 1);
+
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);
