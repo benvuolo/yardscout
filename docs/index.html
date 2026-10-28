@@ -303,6 +303,20 @@
     </div>
     <p class="yards-hint">Yards within your search radius, nearest first. Filter by chain or state, tap a yard to see its cars, or pick a part above to compare what the yards in view charge for it &mdash; prices from each yard&rsquo;s own published price list. Car counts are from the latest scan; every yard is re-scanned about every 4 hours.</p>
     <div class="car-grid" id="yards-grid"></div>
+    <!-- Request a yard: same /v1/coverage/request endpoint the public /yards
+         page posts to (kind=yard), so requests from the app, the web app and
+         the SEO page land in one owner digest. -->
+    <div class="pf-coverage-form yard-request" id="yard-request">
+      <div class="pfc-what"><strong>Don&rsquo;t see your yard?</strong> Tell us and we&rsquo;ll look at adding it.</div>
+      <input type="text" id="yr-name" maxlength="80" placeholder="Yard name" autocomplete="off">
+      <input type="text" id="yr-where" maxlength="200" placeholder="City, state or website &mdash; optional" autocomplete="off">
+      <input type="email" id="yr-email" maxlength="120" placeholder="you@email.com &mdash; optional" autocomplete="email">
+      <div class="pf-hint">Self-service yards that post their inventory online are the quickest to add. Leave an email and we&rsquo;ll tell you when it&rsquo;s live.</div>
+      <div class="pfc-actions">
+        <button type="button" class="btn btn-primary" id="yr-send">Request this yard</button>
+        <span class="pfc-status" id="yr-status"></span>
+      </div>
+    </div>
   </div>
 
   <!-- PARTS TAB: part-first search — "I need an alternator" -> every donor

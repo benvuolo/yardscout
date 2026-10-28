@@ -2192,6 +2192,7 @@
   color: var(--text-dim); text-decoration: underline; cursor: pointer;
 }
 .pfc-ask:hover { color: var(--text); }
+.yard-request { margin-top: 1.25rem; }
 .pf-coverage-form {
   margin-top: 0.6rem; padding: 0.7rem; max-width: 26rem;
   background: var(--surface2); border: 1px solid var(--border);

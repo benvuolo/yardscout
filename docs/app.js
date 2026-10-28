@@ -3520,6 +3520,37 @@ document.getElementById('yards-grid').addEventListener('keydown', e => {
   if (card) viewYardInLive(card.dataset.loc);
 });
 document.getElementById('yards-search').addEventListener('input', () => renderYards());
+/* Request a yard (Yards tab footer). kind=yard: the name rides in `part`,
+ * city/website in `note` — identical to the public /yards form. */
+document.getElementById('yr-send').addEventListener('click', async () => {
+  const btn = document.getElementById('yr-send');
+  const status = document.getElementById('yr-status');
+  const name = document.getElementById('yr-name').value.trim();
+  const where = document.getElementById('yr-where').value.trim();
+  const email = document.getElementById('yr-email').value.trim();
+  if (!name) { status.textContent = 'Add the yard\u2019s name.'; document.getElementById('yr-name').focus(); return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = 'That email doesn\u2019t look right \u2014 fix it or leave it blank.'; return; }
+  btn.disabled = true;
+  status.textContent = 'Sending\u2026';
+  try {
+    const r = await fetch(COVERAGE_API + '/v1/coverage/request', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ kind: 'yard', part: name.slice(0, 80), note: where.slice(0, 500) || null,
+        email: email || null, zip: localStorage.getItem('jh_zip') || null }),
+    });
+    if (!r.ok) throw new Error(r.status === 429 ? 'rate' : 'http');
+    track('yard-request-sent');
+    document.getElementById('yard-request').innerHTML =
+      '<div class="pfc-thanks">Got it \u2014 thanks. We check yard requests every day.</div>';
+  } catch (e) {
+    btn.disabled = false;
+    status.textContent = e.message === 'rate' ? 'Too many requests just now \u2014 try again in a minute.' : 'Couldn\u2019t send \u2014 check your connection and try again.';
+  }
+});
+// In the app, the Yards tab's web-links note sent people to the browser;
+// the request form above replaces its only job there.
+if (IS_NATIVE) { const n = document.querySelector('#tab-yards .public-pages-note'); if (n) n.style.display = 'none'; }
 /* Filters drawer — same handle/panel mechanics as the Live tab, with its own
  * remembered open state. Default is CLOSED on first paint (no half-open
  * illusion in the iOS webview — see the Live tab's 'Show' filter saga). */
