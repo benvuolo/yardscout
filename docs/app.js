@@ -1886,9 +1886,38 @@ function proSheetProof() {
   for (const v of liveInventory) { if (!week(v)) continue; const d = vehicleDistanceMi(v); if (d != null && (!r || d <= r)) n++; }
   return n ? `${n.toLocaleString()} cars were set out within ${r || 'any distance of'}${r ? ' miles' : ''} of you this week.` : '';
 }
-function openUpgradeSheet(trigger) {
+/* Paywall at the moment of value: opened from a locked part or "What
+ * you'd save" on a specific car, the sheet leads with THAT car — what it
+ * is, where, how many parts, and a floored value bucket. Which parts, the
+ * yard's prices and the savings stay Pro. */
+function proSheetCarHtml(enc) {
+  if (!enc || !liveLoaded) return '';
+  const key = safeDecode(enc);
+  const v = liveInventory.find(x => vehicleKey(x) === key);
+  if (!v || !v.topParts || !v.topParts.length) return '';
+  const confirmed = v.topParts.filter(p => p.trim_status !== 'unconfirmed');
+  const high = confirmed.reduce((s, p) => s + (p.high || 0), 0);
+  const bucket = [1500, 1000, 500, 250, 100].find(b => high >= b);
+  const fast = v.topParts.some(p => p.sell_speed === 'Fast');
+  const d = vehicleDistanceMi(v);
+  const where = [v.location, d != null ? Math.round(d) + ' mi' : '', v.row ? 'Row ' + v.row : ''].filter(Boolean).map(escapeHtml).join(' &middot; ');
+  return `<div class="pro-car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
+    <div class="pro-car-where">${where}</div>
+    <div class="pro-car-facts">${v.topParts.length} part${v.topParts.length === 1 ? '' : 's'} worth checking${bucket ? ` &middot; <strong>$${bucket.toLocaleString()}+</strong> to buy them used online` : ''}${fast ? ' &middot; some get picked over fast' : ''}</div>
+    <div class="pro-car-note">Pro shows which parts, what this yard charges for each, and what you&rsquo;d save &mdash; on this car and every other one.</div>`;
+}
+function openUpgradeSheet(trigger, carKey) {
   upgradeTrigger = trigger || 'unknown';
-  { const pr = document.getElementById('pro-proof'); if (pr) { const t = isPro() ? '' : proSheetProof(); pr.textContent = t; pr.style.display = t ? '' : 'none'; } }
+  {
+    const box = document.getElementById('pro-car'), pr = document.getElementById('pro-proof');
+    const car = isPro() ? '' : proSheetCarHtml(carKey);
+    if (box) { box.innerHTML = car; box.style.display = car ? '' : 'none'; }
+    // One lead, not two: the car box replaces the local-proof line.
+    if (pr) { const t = (isPro() || car) ? '' : proSheetProof(); pr.textContent = t; pr.style.display = t ? '' : 'none'; }
+    // With a specific car leading, the long intro just repeats the bullets.
+    const sub = document.querySelector('#upgrade-sheet .sheet-sub'); if (sub) sub.style.display = car ? 'none' : '';
+    if (car) track('pro-lock-car');
+  }
   track('pro-lock/' + upgradeTrigger);
   // Native builds never enter Stripe billing mode — Pro purchase on iOS will
   // go through StoreKit IAP when it ships; until then natives see the waitlist.
@@ -2867,9 +2896,9 @@ function renderLive() {
           const ph = LOCKED_PART_PLACEHOLDERS[pi % LOCKED_PART_PLACEHOLDERS.length];
           return `
             <li class="part-item" style="flex-wrap:wrap;">
-              <span class="part-name locked-blur" role="button" onclick="openUpgradeSheet('part-name')">${ph}</span>
-              <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value')">Yard: $\u2022\u2022</span>
-              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value')">Used online: ${LOCKED_PRICE_MASK}</span>
+              <span class="part-name locked-blur" role="button" onclick="openUpgradeSheet('part-name','${encodeURIComponent(vehicleKey(v))}')">${ph}</span>
+              <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value','${encodeURIComponent(vehicleKey(v))}')">Yard: $\u2022\u2022</span>
+              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value','${encodeURIComponent(vehicleKey(v))}')">Used online: ${LOCKED_PRICE_MASK}</span>
             </li>`;
         }
         // "Spot it" tell for unconfirmed option parts — the VIN can't confirm
@@ -2927,7 +2956,7 @@ function renderLive() {
         </div>${extraNote}` : `
         <div class="profit-line">
           ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
-          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value')">${ICON.lock} What you’d save &mdash; Pro</button>
+          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value','${encodeURIComponent(vehicleKey(v))}')">${ICON.lock} What you’d save &mdash; Pro</button>
         </div>`)
         : '';
       partsBlock = `

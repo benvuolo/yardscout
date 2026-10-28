@@ -1421,6 +1421,12 @@
   .sample-pitch-cta { color: var(--accent); font-weight: 700; white-space: nowrap; }
   .wl-miss { display: block; margin-top: 0.3rem; font-size: 0.75rem; line-height: 1.45; color: var(--text-dim); }
   .wl-miss .linklike { background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .pro-car { margin: 0.2rem 0 0.5rem; padding: 0.7rem 0.8rem; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); }
+  .pro-car-name { font-weight: 800; font-size: 1rem; color: var(--text); }
+  .pro-car-where { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.1rem; }
+  .pro-car-facts { font-size: 0.875rem; color: var(--text); margin-top: 0.45rem; }
+  .pro-car-facts strong { color: var(--accent); }
+  .pro-car-note { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.35rem; line-height: 1.45; }
   .pro-proof { margin: 0.2rem 0 0.4rem; padding: 0.5rem 0.65rem; background: var(--accent-soft); border-radius: var(--radius-sm); font-size: 0.8125rem; font-weight: 600; color: var(--text); }
   .sample-note {
     display: inline-block;
