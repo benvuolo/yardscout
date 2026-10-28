@@ -3269,6 +3269,7 @@ const YARD_INVENTORY_PAGES = [
   [/^u[\s-]*pull[\s-]*it\b/i, 'https://upullitne.com/search-inventory/'],
   [/^rupert/i, 'https://rupertsupullit.com/search-our-inventory/'],
   [/^chesterfield/i, 'https://chesterfieldauto.com/search-our-inventory-by-location'],
+  [/^ipull-upull - edmonton/i, 'https://ipullupullcanada.ca/inventory-pricing/'],
   [/^ipull/i, 'https://ipullupull.com/inventory-pricing/'],
   [/^st\.?\s*cloud/i, 'https://stccrush.com/Home/Inventory'],
   [/^pick-a-part va/i, 'https://pickapartva.com/inventory/ANY/ANY/?k=1'],
@@ -3315,6 +3316,9 @@ const YARD_INVENTORY_PAGES = [
   [/^kiker'?s u-pull-it/i, 'https://www.kikersupullit.com/inventory'],
   [/^weller self serve/i, 'https://www.wellerselfserve.com/inventory/'],
   [/^cagle'?s u-pull-it/i, 'https://www.caglesupullit.com/inventory.aspx'],
+  [/^c&c pick a part/i, 'https://candcpickapart.com/inventory/'],
+  [/^army'?s auto wrecking/i, 'https://armysauto.com/self-service-inventory/'],
+  [/^pasco ez pull it/i, 'https://ezpullit.com/search'],
 ];
 /* GEN:YARD_INVENTORY_PAGES:END */
 

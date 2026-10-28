@@ -19849,6 +19849,360 @@ def fetch_cagles_inventory() -> list[dict]:
 # ===== end 2026-10-28 Kiker's / Weller / Cagle's block =====
 
 
+# ===== 2026-10-28 wave-300 pass: C&C / Army's / Pasco EZ / iPull-uPull CA =====
+# Four single-host self-service yards, each on its own small adapter (own
+# block to keep merges clean). All send the honest YARDSCOUT_HEADERS UA and
+# pace >= 2 s per request (iPull-uPull Canada: its robots Crawl-delay of
+# 10 s, though it is one request per scan). Registered in
+# INDEPENDENT_EXPECTED_SOURCES via one update() and in INDEPENDENT_FETCHERS
+# (one entry per host) below. Researched and dropped in the same pass:
+# Pick-N-Save VA (WooCommerce feed frozen: newest product 2026-09-22) and
+# Wrench-N-Go (search form returns an empty list; Milwaukee no longer retail).
+#
+# C&C Pick A Part (candcpickapart.com, Greenwood SC) — WP "custom-parts-
+# search" plugin: /inventory/ server-renders the WHOLE yard as one
+# <table id="inventoryTable"> (~1,020 rows: [blank], Year, Make, Model,
+# Engine & Drive Train, Color, Row, Location) under an "Updated: MM/DD/YY"
+# stamp; DataTables only filters it client-side. One GET per scan. No VIN,
+# no stock #, no per-car date -> dateAdded "" (unknown; never invented) and
+# sha1 ids over year/make/model/engine/color (row excluded: the yard moves
+# cars between rows) with ordinal dupe suffixes. Live: a 2026-10-27 vs
+# 10-28 diff showed 10 cars gone and 9 new ones set in rows 222/223.
+# robots.txt: Disallow /wp-admin/ only. 225 State Rd S-24-412 is not in OSM
+# (nor the yard) -> ZIP 29649 centroid (Nominatim), a few km off.
+CANDC_INVENTORY_URL = "https://candcpickapart.com/inventory/"
+CANDC_YARD = {"name": "C&C Pick A Part - Greenwood", "city": "Greenwood",
+              "state": "SC", "lat": 34.2279, "lng": -82.1558}
+_CANDC_TABLE_RE = re.compile(r'<table id="inventoryTable"[^>]*>(.*?)</table>', re.S)
+_CANDC_TR_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+_CANDC_TD_RE = re.compile(r"<td[^>]*>(.*?)</td>", re.S)
+
+
+def fetch_candc_inventory() -> list[dict]:
+    """C&C Pick A Part (Greenwood SC): one GET, one server-rendered table."""
+    import hashlib
+    import html as html_mod
+    yard = CANDC_YARD
+    try:
+        r = requests.get(CANDC_INVENTORY_URL,
+                         headers={**YARDSCOUT_HEADERS, "Accept": "text/html"}, timeout=120)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [C&C] inventory fetch failed: {e}", file=sys.stderr)
+        return []
+    _indep_cache_raw("candc_inventory.html", page.encode())
+    m = _CANDC_TABLE_RE.search(page)
+    if not m:
+        print("  [C&C] inventoryTable not found — page layout changed?", file=sys.stderr)
+        return []
+    vehicles: list[dict] = []
+    dupes: dict[str, int] = {}
+    for tr in _CANDC_TR_RE.findall(m.group(1)):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _CANDC_TD_RE.findall(tr)]
+        # [blank], Year, Make, Model, Engine & Drive Train, Color, Row, Location
+        if len(cells) < 7 or not cells[1].isdigit() or not cells[2]:
+            continue
+        _, year_s, make_s, model_s, engine_s, color_s, row_s = cells[:7]
+        basis = "|".join(("candc", year_s, make_s, model_s, engine_s, color_s)).lower()
+        vid = "candc-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+        n = dupes.get(vid, 0) + 1
+        dupes[vid] = n
+        if n > 1:
+            vid = f"{vid}-{n}"
+        v = {
+            "id": vid,
+            "vin": "",
+            "year": int(year_s),
+            "make": _utpap_format_label(make_s.upper()),
+            "model": _utpap_format_label(model_s.upper()),
+            "row": row_s,
+            "dateAdded": "",
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "candc",
+        }
+        if color_s:
+            v["_color"] = color_s.title()
+        vehicles.append(v)
+    if not vehicles:
+        print("  [C&C] no rows parsed from inventoryTable", file=sys.stderr)
+    print(f"  [C&C Pick A Part] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
+# Army's Auto Wrecking (armysauto.com, Lima OH) — WP "yswp" plugin (YardSmart
+# WP, v0.60). /self-service-inventory/ server-renders every yard vehicle
+# (~260; data-pagination="false") as a bootstrap-table row: Make, Model,
+# Year, Color, plus a modal with Stock Number and VIN and a data-id (the WP
+# record). The list has no date, so each vehicle's set-out date comes from
+# the plugin's own per-vehicle endpoint the modal calls for photos
+# (/wp-json/vehicles/item?id=N -> json.date_set, YardSmart's "set" event):
+# 1 + ~260 GETs at 2 s (~15 min/scan incl. server time). Only date_set and image URLs are read
+# from it. Ids: stock # (VIN fallback). robots.txt: `User-agent: *` Allow /
+# (Content-Signal search=yes) and name-blocks AI crawlers/trainers only; our
+# YardScout UA is a parts-search index and matches only `*`. 1510 St.
+# John's Rd is an exact OSM house match.
+ARMYS_INVENTORY_URL = "https://armysauto.com/self-service-inventory/"
+ARMYS_ITEM_URL = "https://armysauto.com/wp-json/vehicles/item"
+ARMYS_DELAY_SEC = 2.0
+ARMYS_YARD = {"name": "Army's Auto Wrecking - Lima", "city": "Lima",
+              "state": "OH", "lat": 40.7160, "lng": -84.0932}
+_ARMYS_ROW_RE = re.compile(
+    r'vehicleModalButton" data-id="(\d+)".*?Stock Number: </span>\s*([^<\s]*)\s*</div>.*?'
+    r'VIN: </span>\s*([^<\s]*)\s*</div>.*?</td>\s*'
+    r'<td>([^<]*)</td>\s*<td>([^<]*)</td>\s*<td>([^<]*)</td>\s*<td>([^<]*)</td>', re.S)
+
+
+def fetch_armys_inventory() -> list[dict]:
+    """Army's Auto Wrecking (Lima OH): list page + per-vehicle set date."""
+    import html as html_mod
+    yard = ARMYS_YARD
+    session = requests.Session()
+    try:
+        r = session.get(ARMYS_INVENTORY_URL,
+                        headers={**YARDSCOUT_HEADERS, "Accept": "text/html"}, timeout=120)
+        r.raise_for_status()
+        page = r.text
+    except Exception as e:
+        print(f"  [Army's] inventory fetch failed: {e}", file=sys.stderr)
+        return []
+    _indep_cache_raw("armys_inventory.html", page.encode())
+    vehicles: list[dict] = []
+    seen: set[str] = set()
+    item_ids: dict[str, str] = {}
+    for did, stock, vin, make_s, model_s, year_s, color_s in _ARMYS_ROW_RE.findall(page):
+        make_s, model_s, year_s, color_s = (html_mod.unescape(x).strip()
+                                            for x in (make_s, model_s, year_s, color_s))
+        if not year_s.isdigit() or not make_s:
+            continue
+        vin = vin.strip().upper()
+        stock = stock.strip().lstrip("0")
+        key = stock.lower() if stock else (vin.lower() if len(vin) == 17 else f"p{did}")
+        vid = f"armys-{key}"
+        if vid in seen:
+            continue
+        seen.add(vid)
+        v = {
+            "id": vid,
+            "vin": vin if len(vin) == 17 else "",
+            "year": int(year_s),
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": "",
+            "dateAdded": "",
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "armys",
+        }
+        if color_s and color_s.upper() not in ("N/A", "NA", "UNKNOWN"):
+            v["_color"] = color_s.title()
+        vehicles.append(v)
+        item_ids[vid] = did
+    if not vehicles:
+        print("  [Army's] no vehicle rows parsed — page layout changed?", file=sys.stderr)
+        return []
+    dated = 0
+    for v in vehicles:
+        time.sleep(ARMYS_DELAY_SEC)
+        try:
+            r = session.get(ARMYS_ITEM_URL, params={"id": item_ids[v["id"]]},
+                            headers={**YARDSCOUT_HEADERS, "Accept": "application/json"},
+                            timeout=60)
+            r.raise_for_status()
+            item = r.json()
+            detail = json.loads(item.get("json") or "{}")
+        except Exception as e:
+            print(f"  [Army's] item {item_ids[v['id']]} failed: {e}", file=sys.stderr)
+            continue
+        v["dateAdded"] = _sanitize_date_added(str(detail.get("date_set") or "")[:10])
+        dated += bool(v["dateAdded"])
+        imgs = detail.get("images") or []
+        if imgs and isinstance(imgs[0], dict):
+            src = imgs[0].get("url") or imgs[0].get("src") or ""
+            if isinstance(src, str) and src.startswith("https://"):
+                v["_photo"] = src
+    print(f"  [Army's Auto Wrecking] {len(vehicles)} vehicles ({dated} with set dates)",
+          file=sys.stderr)
+    return vehicles
+
+
+# Pasco EZ Pull It (ezpullit.com, Hudson FL) — Shopify store where every yard
+# vehicle is a "Complete Vehicle" product (~920). The storefront's public
+# /products.json (250 per page, ~4 pages, robots-allowed) carries everything:
+# title "2013 Lincoln MKX Location - Ford - Row 28 - Stock # H54507" (id
+# basis: the stock #), body_html "Date Set in Yard: Oct 28, 2026" (+ a VIN
+# line that is blank so far, and a large build sheet), product images.
+# Responses are ~35 MB per page uncompressed but ~350 KB brotli/gzip on the
+# wire (requests negotiates gzip). Non-vehicle products ("Core Charge" fee)
+# are skipped by product_type. 9910 Houston Ave is mapped in OSM as the
+# yard's landuse ("Pasco EZ-Pull it") -> exact pin.
+EZPULLIT_PRODUCTS_URL = "https://ezpullit.com/products.json"
+EZPULLIT_DELAY_SEC = 2.0
+EZPULLIT_MAX_PAGES = 20   # runaway guard (~4 pages today)
+EZPULLIT_YARD = {"name": "Pasco EZ Pull It - Hudson", "city": "Hudson",
+                 "state": "FL", "lat": 28.4036, "lng": -82.6510}
+_EZPULLIT_TITLE_RE = re.compile(
+    r"^(\d{4} .+?) Location - (.+?) - Row (\S+) - Stock # (\S+)\s*$")
+_EZPULLIT_SET_RE = re.compile(
+    r"Date Set in Yard:</strong>\s*([A-Z][a-z]{2}) (\d{1,2}), (\d{4})")
+_EZPULLIT_VIN_RE = re.compile(r"VIN:</strong>\s*([A-HJ-NPR-Z0-9]{17})\b")
+_MONTH_ABBR = {m: i for i, m in enumerate(
+    ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"), 1)}
+
+
+def fetch_ezpullit_inventory() -> list[dict]:
+    """Pasco EZ Pull It (Hudson FL): Shopify /products.json, 250 per page."""
+    yard = EZPULLIT_YARD
+    session = requests.Session()
+    vehicles: list[dict] = []
+    seen: set[str] = set()
+    for page_n in range(1, EZPULLIT_MAX_PAGES + 1):
+        if page_n > 1:
+            time.sleep(EZPULLIT_DELAY_SEC)
+        try:
+            r = session.get(EZPULLIT_PRODUCTS_URL, params={"limit": 250, "page": page_n},
+                            headers={**YARDSCOUT_HEADERS, "Accept": "application/json"},
+                            timeout=180)
+            r.raise_for_status()
+            products = r.json().get("products") or []
+        except Exception as e:
+            print(f"  [Pasco EZ] page {page_n} fetch failed: {e}", file=sys.stderr)
+            if page_n == 1:
+                return []
+            break
+        if not products:
+            break
+        for p in products:
+            if (p.get("product_type") or "") != "Complete Vehicle":
+                continue
+            m = _EZPULLIT_TITLE_RE.match(p.get("title") or "")
+            if not m:
+                continue
+            ymm, _section, row_s, stock = m.groups()
+            year, make, model = _split_ymm(ymm)
+            if not year or not make:
+                continue
+            vid = f"ezpullit-{stock.lower()}"
+            if vid in seen:
+                continue
+            seen.add(vid)
+            body = p.get("body_html") or ""
+            date_iso = ""
+            dm = _EZPULLIT_SET_RE.search(body)
+            if dm and dm.group(1) in _MONTH_ABBR:
+                date_iso = _sanitize_date_added(
+                    f"{dm.group(3)}-{_MONTH_ABBR[dm.group(1)]:02d}-{int(dm.group(2)):02d}")
+            vm = _EZPULLIT_VIN_RE.search(body)
+            v = {
+                "id": vid,
+                "vin": vm.group(1) if vm else "",
+                "year": year,
+                "make": make,
+                "model": model,
+                "row": row_s,
+                "dateAdded": date_iso,
+                "_location": yard["name"],
+                "_city": yard["city"],
+                "_state": yard["state"],
+                "_lat": yard["lat"],
+                "_lng": yard["lng"],
+                "_source": "ezpullit",
+            }
+            imgs = p.get("images") or []
+            if imgs and isinstance(imgs[0], dict) and imgs[0].get("src"):
+                v["_photo"] = imgs[0]["src"]
+            vehicles.append(v)
+        if len(products) < 250:
+            break
+    if not vehicles:
+        print("  [Pasco EZ] no vehicle products parsed — store layout changed?",
+              file=sys.stderr)
+    print(f"  [Pasco EZ Pull It] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
+# iPull-uPull Canada (ipullupullcanada.ca, Edmonton AB) — the older iPull
+# theme (no ipullCatalog nonce / CSV-export AJAX like the California site in
+# fetch_ipull_inventory), but its inventory page links the yard's own full
+# export: /edmonton.csv (~1,200 rows; "Date Added, Year, Make, Model, VIN,
+# Stock#, Yard, Row, Fresh Set"; Date Added is ISO). One GET per scan, so
+# robots' Crawl-delay: 10 is trivially honored. Stock# ("EDM028785") is the
+# id basis; VINs ~96% real 17-char. Kept as its own fetcher/source (separate
+# host) rather than folded into fetch_ipull_inventory. 1201 76 Ave NW is an
+# exact OSM shop match ("iPull-uPull Auto Parts").
+IPULLCA_CSV_URL = "https://ipullupullcanada.ca/edmonton.csv"
+IPULLCA_YARD = {"name": "iPull-uPull - Edmonton", "city": "Edmonton",
+                "state": "AB", "lat": 53.5113, "lng": -113.3661}
+
+
+def fetch_ipullca_inventory() -> list[dict]:
+    """iPull-uPull Canada (Edmonton AB): the yard's published CSV export."""
+    import csv
+    import io
+    yard = IPULLCA_YARD
+    try:
+        r = requests.get(IPULLCA_CSV_URL,
+                         headers={**YARDSCOUT_HEADERS, "Accept": "text/csv,*/*"}, timeout=120)
+        r.raise_for_status()
+        text = r.content.decode("utf-8-sig", errors="replace")
+    except Exception as e:
+        print(f"  [iPull-uPull CA] CSV fetch failed: {e}", file=sys.stderr)
+        return []
+    if not text.lstrip().startswith("Date Added"):
+        print(f"  [iPull-uPull CA] not the inventory CSV ({text[:80]!r})", file=sys.stderr)
+        return []
+    _indep_cache_raw("ipullca_edmonton.csv", r.content)
+    vehicles: list[dict] = []
+    seen: set[str] = set()
+    reader = csv.reader(io.StringIO(text))
+    header = [h.strip().lower() for h in next(reader, [])]
+    col = {h: i for i, h in enumerate(header)}
+    need = ("date added", "year", "make", "model", "vin", "stock#", "row")
+    if any(h not in col for h in need):
+        print(f"  [iPull-uPull CA] unexpected CSV header {header}", file=sys.stderr)
+        return []
+    for row in reader:
+        if len(row) < len(header):
+            continue
+        get = lambda h: (row[col[h]] or "").strip()  # noqa: E731
+        stock, year_s, make_s = get("stock#"), get("year"), get("make")
+        if not stock or not year_s.isdigit() or not make_s:
+            continue
+        vid = f"ipullca-{stock.lower()}"
+        if vid in seen:
+            continue
+        seen.add(vid)
+        vin = get("vin").upper()
+        vehicles.append({
+            "id": vid,
+            "vin": vin if len(vin) == 17 else "",
+            "year": int(year_s),
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(get("model")),
+            "row": get("row"),
+            "dateAdded": _sanitize_date_added(get("date added")),
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "ipullca",
+        })
+    print(f"  [iPull-uPull CA] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
+# ===== end 2026-10-28 wave-300 block =====
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -19906,6 +20260,13 @@ INDEPENDENT_EXPECTED_SOURCES.update({
     "kikers": "Kiker's U-Pull-It (Pensacola FL)",
     "weller": "Weller Self Serve (Grand Rapids MI)",
     "cagles": "Cagle's U-Pull-It (Cartersville GA)",
+})
+# 2026-10-28 wave-300 single-host adapters (C&C / Army's / Pasco EZ / iPull CA).
+INDEPENDENT_EXPECTED_SOURCES.update({
+    "candc": "C&C Pick A Part (Greenwood SC)",
+    "armys": "Army's Auto Wrecking (Lima OH)",
+    "ezpullit": "Pasco EZ Pull It (Hudson FL)",
+    "ipullca": "iPull-uPull (Edmonton AB)",
 })
 
 
@@ -19969,6 +20330,12 @@ INDEPENDENT_FETCHERS: list = [
     ("Kiker's U-Pull-It", fetch_kikers_inventory),
     ("Weller Self Serve", fetch_weller_inventory),
     ("Cagle's U-Pull-It", fetch_cagles_inventory),
+    # 2026-10-28 wave-300 single-host adapters. Army's does ~260 per-vehicle
+    # date lookups at 2 s (~15 min), overlapping the other hosts.
+    ("C&C Pick A Part", fetch_candc_inventory),
+    ("Army's Auto Wrecking", fetch_armys_inventory),
+    ("Pasco EZ Pull It", fetch_ezpullit_inventory),
+    ("iPull-uPull Canada", fetch_ipullca_inventory),
 ]
 
 

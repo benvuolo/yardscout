@@ -93,6 +93,8 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
      "anchored: Budget/Indy/Harry's/Rupert's/Pipes U-Pull-Its differ upfront"),
     (r"^rupert", "Rupert's U-Pull-It", None, "tier 2 handles cars with a make"),
     (r"^chesterfield", "Chesterfield Auto Parts", None, "search form is POST-only"),
+    (r"^ipull-upull - edmonton", "iPull-uPull Canada", None,
+     "separate Canadian site; must precede the California ^ipull entry"),
     (r"^ipull", "iPull-uPull", None, ""),
     (r"^st\.?\s*cloud", "St. Cloud U Pull", None, ""),
     (r"^pick-a-part va", "Pick-A-Part VA", None, "tier 2 handles make+model"),
@@ -175,6 +177,10 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^weller self serve", "Weller Self Serve", None, ""),
     (r"^cagle'?s u-pull-it", "Cagle's U-Pull-It", None,
      "WebForms make/model postbacks: no deep links"),
+    # --- 2026-10-28 wave-300 single-host adapters ---
+    (r"^c&c pick a part", "C&C Pick A Part", None, "one client-filtered table"),
+    (r"^army'?s auto wrecking", "Army's Auto Wrecking", None, ""),
+    (r"^pasco ez pull it", "Pasco EZ Pull It", None, ""),
 ]
 
 

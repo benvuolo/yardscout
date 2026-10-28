@@ -2592,6 +2592,114 @@
           "lng": -84.8685
         }
       ]
+    },
+    {
+      "name": "C&C Pick A Part",
+      "status": "adapter-built",
+      "platform": "wordpress + 'custom-parts-search' plugin (one server-rendered table#inventoryTable, DataTables filters client-side) - adapter fetch_candc_inventory",
+      "website": "https://candcpickapart.com",
+      "inventory_url": "https://candcpickapart.com/inventory/",
+      "api": {
+        "endpoint": "https://candcpickapart.com/inventory/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html table: [blank], Year, Make, Model, Engine & Drive Train, Color, Row, Location",
+        "requests_per_scan": "1",
+        "notes": "~1,020 rows under an 'Updated: MM/DD/YY' stamp. No VIN, stock # or per-car date -> dateAdded '' and sha1 ids over year/make/model/engine/color (row excluded: cars move between rows) with ordinal dupe suffixes. 10-27 vs 10-28 diff: 10 cars gone, 9 new set in rows 222/223. 225 State Rd S-24-412 is not in OSM -> ZIP 29649 centroid."
+      },
+      "update_freshness": "live (daily 'Updated' stamp; day-over-day row turnover); no per-car dates",
+      "robots": "Disallow /wp-admin/ only",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "C&C Pick A Part - Greenwood",
+          "city": "Greenwood",
+          "state": "SC",
+          "lat": 34.2279,
+          "lng": -82.1558
+        }
+      ]
+    },
+    {
+      "name": "Army's Auto Wrecking",
+      "status": "adapter-built",
+      "platform": "wordpress + 'yswp' plugin (YardSmart WP v0.60) - adapter fetch_armys_inventory",
+      "website": "https://armysauto.com",
+      "inventory_url": "https://armysauto.com/self-service-inventory/",
+      "api": {
+        "endpoint": "https://armysauto.com/self-service-inventory/ + https://armysauto.com/wp-json/vehicles/item?id=N",
+        "method": "GET",
+        "auth": "none",
+        "format": "html bootstrap-table (Make, Model, Year, Color; modal with Stock Number + VIN + data-id) + per-vehicle JSON (json.date_set = YardSmart set event)",
+        "requests_per_scan": "1 + ~260 per-vehicle lookups at 2 s (~15 min)",
+        "notes": "~260 vehicles, all on one page (data-pagination=false). Ids: stock # (VIN fallback). Only date_set and image URLs are read from the per-vehicle JSON (the endpoint the page's own photo modal calls). Newest set dates 2026-10-26. 1510 St. John's Rd, Lima OH 45804 -> exact OSM house match."
+      },
+      "update_freshness": "live (YardSmart set dates within days)",
+      "robots": "User-agent: * Allow / (Content-Signal search=yes, ai-train=no); AI crawlers/trainers blocked by name only - YardScout UA matches '*'",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Army's Auto Wrecking - Lima",
+          "city": "Lima",
+          "state": "OH",
+          "lat": 40.716,
+          "lng": -84.0932
+        }
+      ]
+    },
+    {
+      "name": "Pasco EZ Pull It",
+      "status": "adapter-built",
+      "platform": "shopify (each yard vehicle is a 'Complete Vehicle' product) - adapter fetch_ezpullit_inventory",
+      "website": "https://ezpullit.com",
+      "inventory_url": "https://ezpullit.com/search",
+      "api": {
+        "endpoint": "https://ezpullit.com/products.json?limit=250&page=N",
+        "method": "GET",
+        "auth": "none",
+        "format": "shopify products JSON: title '<year make model> Location - <section> - Row N - Stock # X', body_html 'Date Set in Yard: Mon D, YYYY' (+ blank VIN line, build sheet), images",
+        "requests_per_scan": "~4 (250 per page) at 2 s",
+        "notes": "~920 vehicles. Stock # is the id basis. ~35 MB/page uncompressed but ~350 KB on the wire (gzip/brotli). Non-vehicle products ('Core Charge') skipped by product_type. Per-car product pages exist at /products/{handle} (possible tier-1 link later). 9910 Houston Ave, Hudson FL 34667 -> OSM landuse 'Pasco EZ-Pull it' (exact)."
+      },
+      "update_freshness": "live (set dates same-day; products published hourly)",
+      "robots": "Shopify default (products.json and /products allowed)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Pasco EZ Pull It - Hudson",
+          "city": "Hudson",
+          "state": "FL",
+          "lat": 28.4036,
+          "lng": -82.651
+        }
+      ]
+    },
+    {
+      "name": "iPull-uPull Canada",
+      "status": "adapter-built",
+      "platform": "wordpress, older iPull theme (no ipullCatalog nonce); the inventory page links a full CSV export - adapter fetch_ipullca_inventory",
+      "website": "https://ipullupullcanada.ca",
+      "inventory_url": "https://ipullupullcanada.ca/inventory-pricing/",
+      "api": {
+        "endpoint": "https://ipullupullcanada.ca/edmonton.csv",
+        "method": "GET",
+        "auth": "none",
+        "format": "csv: Date Added (ISO), Year, Make, Model, VIN, Stock#, Yard, Row, Fresh Set",
+        "requests_per_scan": "1",
+        "notes": "~1,220 rows, one yard (Edmonton). Stock# (EDM......) is the id basis; ~96% real VINs. Separate host and source tag from the California iPull-uPull chain. 1201 76 Ave NW, Edmonton AB T6P 1P2 -> exact OSM shop match."
+      },
+      "update_freshness": "live (Date Added within days; CSV Last-Modified = scan day)",
+      "robots": "Disallow /wp-admin/ only, Crawl-delay: 10 (1 request/scan)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "iPull-uPull - Edmonton",
+          "city": "Edmonton",
+          "state": "AB",
+          "lat": 53.5113,
+          "lng": -113.3661
+        }
+      ]
     }
   ]
 }
