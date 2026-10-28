@@ -74,6 +74,14 @@ jobs:
         env:
           ENT_ADMIN_SECRET: ${{ secrets.ENT_ADMIN_SECRET }}
         run: printf '%s' "$ENT_ADMIN_SECRET" | npx --yes wrangler@4 secret put ENT_ADMIN_SECRET
+      # GitHub token for the API Worker's hourly scan watchdog (fine-grained,
+      # benvuolo/yardscout, Actions: Read and write). Skipped until set.
+      - name: Sync SCAN_DISPATCH_TOKEN to yardscout-api
+        if: (env.TARGET == 'both' || env.TARGET == 'api') && env.SCAN_DISPATCH_TOKEN != ''
+        working-directory: backend
+        env:
+          SCAN_DISPATCH_TOKEN: ${{ secrets.SCAN_DISPATCH_TOKEN }}
+        run: printf '%s' "$SCAN_DISPATCH_TOKEN" | npx --yes wrangler@4 secret put SCAN_DISPATCH_TOKEN
       - name: Deploy yardscout-site
         if: env.TARGET == 'both' || env.TARGET == 'site'
         working-directory: backend/site-proxy

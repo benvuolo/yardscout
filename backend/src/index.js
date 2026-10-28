@@ -60,12 +60,27 @@ import {
   handleCoverageRequest, handleCoverageList, maybeSendCoverageDigest,
 } from './coverage.js';
 import { handleSavedAlertsDispatchRun } from './saved_alerts.js';
+import { runScanWatchdog } from './scan_watchdog.js';
 
 export default {
   /* Cron (wrangler.toml [triggers]): weekly digest email for free users
    * whose watches matched arrivals this week. Pro users hear instantly via
    * dispatchAlerts on each inventory commit and are skipped here. */
   async scheduled(event, env, ctx) {
+    // Hourly: scan watchdog only. The digests below must ONLY run on the
+    // Monday cron — every cron in wrangler.toml lands in this handler.
+    if (event.cron === '23 * * * *') {
+      ctx.waitUntil(
+        runScanWatchdog(env)
+          .then((r) => console.log('scan watchdog:', JSON.stringify(r)))
+          .catch((e) => console.log('scan watchdog failed:', e && (e.stack || e.message)))
+      );
+      return;
+    }
+    if (event.cron && event.cron !== '0 15 * * 1') {
+      console.log('unknown cron, ignoring:', event.cron);
+      return;
+    }
     ctx.waitUntil(
       sendWeeklyDigests(env)
         .then((r) => console.log(`weekly digest: ${r.users} users, ${r.emails} emails, ${r.arrivals} arrivals in window`))

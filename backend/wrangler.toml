@@ -19,7 +19,9 @@ compatibility_date = "2026-09-01"
 # Weekly digest email for free users (Mondays 15:00 UTC ≈ 9am Mountain).
 # Deploys automatically with `npm run deploy` — no dashboard setup needed.
 [triggers]
-crons = ["0 15 * * 1"]
+# Monday 15:00 UTC = weekly digests; :23 hourly = scan watchdog (see
+# src/scan_watchdog.js). index.js scheduled() dispatches on event.cron.
+crons = ["0 15 * * 1", "23 * * * *"]
 
 [[d1_databases]]
 binding = "DB"
