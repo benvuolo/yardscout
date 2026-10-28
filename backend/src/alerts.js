@@ -577,7 +577,7 @@ export function watchMatches(w, v) {
  * expects (vpic parsed from vpic_json). Used by the seed-on-create paths
  * and the weekly digests. */
 export async function loadArrivals(env, since = null) {
-  const sql = 'SELECT vehicle_id, year, make, model, row, location, lat, lng, vpic_json FROM arrivals'
+  const sql = 'SELECT vehicle_id, year, make, model, row, location, lat, lng, vpic_json, seen_at FROM arrivals'
     + (since ? ' WHERE seen_at >= ?1' : '');
   const stmt = env.DB.prepare(sql);
   const rows = (await (since ? stmt.bind(since) : stmt).all()).results || [];
@@ -587,6 +587,7 @@ export async function loadArrivals(env, since = null) {
     return {
       id: r.vehicle_id, year: r.year, make: r.make, model: r.model,
       row: r.row, location: r.location, lat: r.lat, lng: r.lng, vpic,
+      seenAt: r.seen_at,   // first sighting — lets the weekly digest say how long ago it landed
     };
   });
 }
@@ -599,7 +600,79 @@ export function digestText(matches) {
   return lines.join('\n');
 }
 
+/** Where the "part of Pro" line in the weekly digest points: the Alerts tab
+ * (same #tab= deep link the share pages use), which is where free users meet
+ * the upgrade sheet. */
+function upgradeUrl(env) {
+  return (env.APP_URL || 'https://yardscout.io/').replace(/\/+$/, '') + '/#tab=alerts';
+}
+
+/** Whole days between an arrival's first sighting and `now` (null when the
+ * row carries no usable timestamp). */
+function daysAgo(v, now) {
+  const t = Date.parse(v.seenAt || v.seen_at || v.dateAdded || '');
+  if (!Number.isFinite(t)) return null;
+  return Math.max(0, Math.floor((now - t) / 86400_000));
+}
+
+function fmtDaysAgo(d) {
+  if (d === 0) return 'today';
+  if (d === 1) return 'yesterday';
+  return `${d} days ago`;
+}
+
+/** The ONE Pro mention in a free weekly digest: a calm "what you missed" line
+ * that sits right after the match list. Every car in `matches` is one Pro
+ * would have alerted on the day it landed, so the count is the list itself;
+ * the age is the oldest first sighting in the window. Empty when there are
+ * no matches — a sale-only digest says nothing about Pro.
+ *   short=true  → push-sized variant (no price, no link; the push deep-links). */
+export function digestUpsell(matches, { short = false, now = Date.now(), url = '' } = {}) {
+  if (!Array.isArray(matches) || !matches.length) return '';
+  const ages = matches.map((v) => daysAgo(v, now)).filter((d) => d != null);
+  const oldest = ages.length ? Math.max(...ages) : null;
+  const one = matches.length === 1;
+  if (short) {
+    const lead = one ? 'Pro would have pushed this one the day it landed' : 'Pro would have pushed these the day they landed';
+    return oldest == null ? `${lead}.` : `${lead} — ${one ? '' : 'the first one '}${fmtDaysAgo(oldest)}.`;
+  }
+  const lead = one
+    ? 'Pro would have told you about this one the day it landed'
+    : 'Pro would have told you about these the day they landed';
+  const when = oldest == null ? '' : ` — ${one ? 'it' : 'the first one'} hit the yard ${fmtDaysAgo(oldest)}`;
+  return `${lead}${when}. Alerts within hours are part of Pro ($8.99/mo):\n${url}`;
+}
+
+/** Builds the digest email (subject + plain text). Pure — no I/O — so a
+ * preview script can render it. `weekly` = the free-tier Monday digest;
+ * otherwise the instant email fallback for Pro users without push. */
+export function buildDigestEmail(env, email, matches, { weekly = false, sales = [], now = Date.now() } = {}) {
+  const n = matches.length;
+  const subject = n
+    ? (weekly
+      ? `Your week at the yards — ${n} watched car${n === 1 ? '' : 's'} arrived`
+      : `${n} watched car${n === 1 ? '' : 's'} just hit the yard`)
+    : `Sale days coming up at ${sales.length} yard${sales.length === 1 ? '' : 's'} near you`;
+  const intro = weekly
+    ? 'Arrivals from the past week matching your YardScout watches:'
+    : 'New arrivals matching your YardScout watches:';
+  // Exactly one Pro mention per free digest, and only when there is
+  // something it would have alerted on.
+  const upsell = weekly && n ? `\n\n${digestUpsell(matches, { now, url: upgradeUrl(env) })}` : '';
+  const salesTxt = sales.length
+    ? `\n\nSale days at yards near your watches:\n` + sales.slice(0, 6).map((s) =>
+        `${s.yard} — ${fmtSaleRange(s.start_date, s.end_date)}${s.pct ? ` (${s.pct}% off)` : ''}`).join('\n')
+    : '';
+  const text =
+    (n ? `${intro}\n\n${digestText(matches)}` : 'Nothing new matched your watches this week, but:') +
+    upsell + salesTxt + `\n\n` +
+    `Open the app for rows, VINs, and part details:\n${(env.APP_URL || '').trim()}\n\n` +
+    `Yards crush cars within weeks — fresh arrivals are the best odds.`;
+  return { subject, text, to: email };
+}
+
 async function emailDigest(env, email, matches, { weekly = false, sales = [] } = {}) {
+  const { subject, text } = buildDigestEmail(env, email, matches, { weekly, sales });
   if (!env.RESEND_API_KEY) {
     // Local dev has no Resend key — log-and-succeed so e2e tests can assert
     // the dedupe bookkeeping. Production without a key correctly reports
@@ -610,19 +683,6 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [] } =
     }
     return false;
   }
-  const n = matches.length;
-  const subject = n
-    ? (weekly
-      ? `Your week at the yards — ${n} watched car${n === 1 ? '' : 's'} arrived`
-      : `${n} watched car${n === 1 ? '' : 's'} just hit the yard`)
-    : `Sale days coming up at ${sales.length} yard${sales.length === 1 ? '' : 's'} near you`;
-  const intro = weekly
-    ? 'Arrivals from the past week matching your YardScout watches — Pro members were pushed each of these within hours of it hitting the yard, up to a week ago:'
-    : 'New arrivals matching your YardScout watches:';
-  const salesTxt = sales.length
-    ? `\n\nSale days at yards near your watches:\n` + sales.slice(0, 6).map((s) =>
-        `${s.yard} — ${fmtSaleRange(s.start_date, s.end_date)}${s.pct ? ` (${s.pct}% off)` : ''}`).join('\n')
-    : '';
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { authorization: 'Bearer ' + env.RESEND_API_KEY, 'content-type': 'application/json' },
@@ -630,12 +690,7 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [] } =
       from: env.EMAIL_FROM || 'YardScout <onboarding@resend.dev>',
       to: [email],
       subject,
-      text:
-        (n ? `${intro}\n\n${digestText(matches)}` : 'Nothing new matched your watches this week, but:') +
-        salesTxt + `\n\n` +
-        `Open the app for rows, VINs, and part details:\n${(env.APP_URL || '').trim()}\n\n` +
-        `Yards crush cars within weeks — fresh arrivals are the best odds.` +
-        (weekly ? `\n\nWant to hear within hours of a watched car arriving, not a week later? Instant push alerts are part of Pro.` : ''),
+      text,
     }),
   });
   if (!r.ok) console.log('alert email failed:', r.status, (await r.text()).slice(0, 200));
