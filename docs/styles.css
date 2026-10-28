@@ -1358,6 +1358,8 @@
    * left, clipped corner top-right. */
   .pro-pill {
     display: inline-flex;
+    white-space: nowrap;
+    flex-shrink: 0;
     align-items: center;
     gap: 0.4rem;
     margin-left: 0.35rem;
@@ -1586,13 +1588,16 @@
   .yard-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .yard-actions {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
     margin-top: 0.75rem;
     padding-top: 0.6rem;
     border-top: 1px solid var(--border);
   }
-  .yard-actions .btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+  .yard-actions .btn { padding: 0.4rem 0.7rem; font-size: 0.75rem; white-space: nowrap; }
+  .yard-actions .yard-share-btn { padding: 0.4rem 0.55rem; }
+  .yard-actions .yard-prices-btn, .yard-actions .yard-price-link, .yard-actions .yard-price-none { margin-left: auto; }
   .yard-actions a.btn { text-decoration: none; display: inline-flex; align-items: center; }
   .week-nearby-btn { width: 100%; margin: -0.3rem 0 0.9rem; }
   .week-banner { flex-wrap: wrap; }
@@ -1610,7 +1615,17 @@
   }
   .yard-price-link:hover { color: var(--accent); }
   /* Per-car link to the yard's own site — quiet, bottom of every car card. */
-  .yard-site-line { margin-top: 0.55rem; }
+  .yard-site-line { margin: 0; }
+  /* Card footer: yard link left, VIN + scan time right — the reference
+     data you need at the yard, out of the way of the browse view. */
+  .car-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem 0.75rem; margin-top: 0.6rem; }
+  .car-footer-meta { white-space: nowrap; font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-dim); opacity: 0.85; }
+  .car-footer-meta .btn-copy-vin { vertical-align: middle; }
+  /* Spec line: what the car is, in the UI face at body size (not mono). */
+  .car-spec-line { font-size: 0.8125rem; color: var(--text); margin-top: 0.35rem; line-height: 1.4; }
+  .spec-vin { font-weight: 600; }
+  .spec-sample { color: var(--accent); }
+  .spec-pro-tag { font-family: var(--font-mono); font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid currentColor; border-radius: var(--radius-sm); padding: 0 0.25rem; vertical-align: 1px; }
   .yard-site-link {
     font-family: var(--font-ui);
     font-size: 0.75rem;

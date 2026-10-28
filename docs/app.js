@@ -473,7 +473,7 @@ function displayTrim(trim, make) {
 }
 
 function vinMetaHtml(v, unlocked = false) {
-  if (!v.vin || !String(v.vin).trim()) return '';
+  if (!v.vin || !String(v.vin).trim()) return { vin: '', spec: '', warn: '' };
   const show = String(v.vin).trim();
   // Quiet metadata, not badge soup: VIN + icon copy button, then plain dim
   // text notes. Only a genuine warning (VIN/listing mismatch) gets color.
@@ -490,9 +490,9 @@ function vinMetaHtml(v, unlocked = false) {
   const specBits = [];
   const vt = displayTrim(v.vpicTrim, v.make);
   if (vt && (v.vpicTrimQuality === 'usable' || v.vpicDecodeWell === true)) {
-    specBits.push(`trim: ${escapeHtml(vt)}`);
+    specBits.push(escapeHtml(vt));
   } else if (v.vpicSeries) {
-    specBits.push(`series: ${escapeHtml(String(v.vpicSeries).trim())}`);
+    specBits.push(escapeHtml(String(v.vpicSeries).trim()));
   }
   if (v.vpicDriveType) {
     const d = String(v.vpicDriveType);
@@ -500,21 +500,25 @@ function vinMetaHtml(v, unlocked = false) {
       : /rwd|rear/i.test(d) ? 'RWD' : /fwd|front/i.test(d) ? 'FWD' : /4x2|2wd/i.test(d) ? '2WD' : '';
     if (short) specBits.push(short);
   }
-  // (Engine deliberately NOT included here — it already renders on the
-  // card's spec line below; repeating it read as a bug.)
   if (specBits.length) {
     // Pro sees it on every card; the free sample card shows it too, lit up,
     // so the value of the decode is visible before upgrading.
     const title = 'Factory build \u2014 trim/drivetrain decoded from the VIN via NHTSA VPIC \u2014 so you know what to look for before walking over';
-    if (isPro()) vpic = ` <span class="meta-note" title="${title}">${specBits.join(' &middot; ')} (factory spec)</span>`;
-    else if (unlocked) vpic = ` <span class="meta-note meta-spec-sample" title="${title}">${specBits.join(' &middot; ')} (factory spec \u2014 Pro)</span>`;
+    if (isPro()) vpic = `<span class="spec-vin" title="${title}">${specBits.join(' &middot; ')}</span>`;
+    else if (unlocked) vpic = `<span class="spec-vin spec-sample" title="${title} (a Pro feature, shown free on this sample car)">${specBits.join(' &middot; ')} <span class="spec-pro-tag">Pro</span></span>`;
   }
   let mismatch = '';
   if (v.vpicMismatch) {
     mismatch = ` <span class="meta-warn" title="The VIN\u2019s factory decode disagrees with the yard listing — the lot sign may be mislabeled. The VIN is used for matching; verify at the yard.">${escapeHtml(v.vpicMismatch)}</span>`;
   }
-  // Separator lives inside the chunk so it can't wrap onto a line by itself.
-  return ` <span class="vin-chunk">&middot;&nbsp;VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}</span>${dup}${vpic}${mismatch}`;
+  return { vin: `<span class="vin-chunk">VIN <span class="mono-vin">${escapeHtml(show)}</span>${copyBtn}</span>`, spec: vpic, warn: `${dup}${mismatch}` };
+}
+
+/* Engine strings from the yards/vPIC are long ("5.3L 8-cyl Flexible Fuel
+ * Vehicle (FFV)"); the card wants the short form ("5.3L 8-cyl FFV"). */
+function shortEngine(s) {
+  return String(s || '').replace(/Flexible Fuel Vehicle\s*\(FFV\)/i, 'FFV')
+    .replace(/\s*\bGasoline\b/i, '').replace(/\s{2,}/g, ' ').trim();
 }
 
 /* No bulk export at any tier: inventory goes stale in days, but the part
@@ -1019,7 +1023,7 @@ function headTickerFacts() {
   const cars = liveInventory.length;
   const nDisp = yardCountDisplay();
   if (cars) facts.push(`${cars.toLocaleString()} CARS ON ROW`);
-  if (nDisp) facts.push(`${nDisp} YARDS COAST TO COAST`);
+  if (nDisp) facts.push(`${nDisp} YARDS TRACKED`);
   const { fresh, near } = headTickerHeavy();
   if (fresh) facts.push(`${fresh.toLocaleString()} SET OUT THIS WEEK`);
   if (near) facts.push(`${near} YARD${near === 1 ? '' : 'S'} IN YOUR RANGE`);
@@ -2687,10 +2691,10 @@ function renderLive() {
       if (daysOn > 2 * avg) {
         // Long-timers have already outlived the average — claiming "leaving
         // soon" would be false urgency, so just state the facts.
-        lotClock = `<div class="lot-clock" title="${title}">On the lot ${daysOn} days &mdash; past the ~${avg}-day typical ${basisTxt}</div>`;
+        lotClock = `<span title="${title}">${daysOn} days on the lot (past the ~${avg}-day typical)</span>`;
       } else {
         leavingSoon = daysOn >= 0.8 * avg;
-        lotClock = `<div class="lot-clock${leavingSoon ? ' lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} on the lot &middot; ~${avg} typical ${basisTxt}</div>`;
+        lotClock = `<span class="${leavingSoon ? 'lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} of ~${avg} typical</span>`;
       }
     }
 
@@ -2698,7 +2702,7 @@ function renderLive() {
     // inventory has no per-yard scan time (yard_health.json isn't loaded
     // here), so this is the global scrapedAt in the viewer's local time.
     const scanLine = liveScrapedAt
-      ? `<div class="lot-clock scan-stamp" title="When YardScout last scanned the yards — cars can leave between scans">Scanned ${escapeHtml(scrapedTitle())}</div>`
+      ? `<span class="scan-stamp" title="When YardScout last scanned the yards — cars can leave between scans">scanned ${escapeHtml(scrapedTitle())}</span>`
       : '';
 
     let cardStyle = '', profitLine = '', partsBlock = '';
@@ -2862,13 +2866,15 @@ function renderLive() {
       : leavingSoon
       ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon</span>'
       : '';
-    // Freshness is context, not an alert: quiet text in the metadata line.
-    const freshNote = isMatch
-      ? ` &middot; <span title="Time on the lot — older arrivals are more likely already picked over, so online-price figures are discounted">${fl.text.toLowerCase()}</span>`
-      : '';
     const ex = extrasFor(v);
     const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
-    const specBits = ex ? [ex[1], ex[2], ex[3]].filter(Boolean) : [];
+    const vm = vinMetaHtml(v, unlocked);
+    // Line 1 — what the car IS: VIN-decoded trim/drive (Pro) + color/engine/trans.
+    const yardSpecs = ex ? [ex[1], shortEngine(ex[2]), ex[3]].filter(Boolean).map(escapeHtml) : [];
+    const specLine = [vm.spec, ...yardSpecs].filter(Boolean).join(' &middot; ');
+    // Line 2 — WHEN: set-out date + time on the lot, one line.
+    const whenBits = [dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'];
+    if (lotClock) whenBits.push(lotClock);
     return `
       <div class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}">
         ${photo ? `<div class="car-photo-wrap"><img class="car-photo" loading="lazy" src="${photo.url}" alt="" onerror="this.parentNode.remove()"><span class="photo-credit">${escapeHtml(photo.label)}</span></div>` : ''}
@@ -2876,10 +2882,6 @@ function renderLive() {
           <div style="min-width:0;">
             <div class="car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + escapeHtml(v.row) + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
-            <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${freshNote}${vinMetaHtml(v, unlocked)}</div>
-            ${specBits.length ? `<div class="car-meta car-specs">${specBits.map(escapeHtml).join(' &middot; ')}</div>` : ''}
-            ${lotClock}
-            ${scanLine}
           </div>
           <div class="car-badges">
             ${isConfirmedManual(v) ? `<span class="badge badge-manual" title="${transSource(v) === 'listing' ? 'Manual transmission, from the yard\u2019s own listing \u2014 never inferred' : 'Manual transmission, confirmed from this car\u2019s VIN decode \u2014 never inferred'}">Manual</span>` : ''}
@@ -2889,9 +2891,11 @@ function renderLive() {
             <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${escapeHtml(vehicleKey(v))}" title="Save for your yard visit">${ICON.heart}</button>
           </div>
         </div>
+        ${specLine ? `<div class="car-spec-line">${specLine}</div>` : ''}
+        <div class="car-meta">${whenBits.join(' &middot; ')}${vm.warn}</div>
         ${profitLine}
         ${partsBlock}
-        ${yardSiteLinkHtml(v)}
+        <div class="car-footer">${yardSiteLinkHtml(v)}<span class="car-footer-meta">${vm.vin}${vm.vin && scanLine ? ' &middot; ' : ''}${scanLine}</span></div>
       </div>`;
   }).join('') + (overflow
     ? `<div class="empty-state" style="grid-column:1/-1;padding:1rem;"><p>Showing first ${RENDER_CAP} of ${vehicles.length.toLocaleString()} vehicles &mdash; narrow with search or filters (results stay fully sorted).</p></div>`
@@ -5617,7 +5621,7 @@ function renderAlerts() {
           <div style="min-width:0;">
             <div class="car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + escapeHtml(v.row) + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
-            <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${vinMetaHtml(v)} &middot; matched: ${matchedRules.join(', ')}</div>
+            <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${vinMetaHtml(v).warn} &middot; matched: ${matchedRules.join(', ')}</div>
           </div>
           <div class="car-badges">
             <span class="badge badge-new">Watchlist hit</span>
