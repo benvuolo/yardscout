@@ -3440,8 +3440,31 @@ function viewYardInLive(loc) {
   track('yard-opened');
   const sel = document.getElementById('live-filter-location');
   sel.value = loc;
-  if (sel.value !== loc) return; // option missing (shouldn't happen — same data)
+  if (sel.value !== loc) {
+    // The Yard dropdown only lists yards inside the Live radius, but the
+    // Yards tab can show farther ones (2026-10-28: "View cars" did nothing
+    // for a yard 148 mi out on a 100 mi radius). Widen the radius to the
+    // smallest step that covers this yard — within the free cap for free
+    // users, who get the upgrade sheet for anything beyond it.
+    const v = liveInventory.find(x => x.location === loc && x.lat != null);
+    const d = (v && activeZipCoords) ? haversineMiles(activeZipCoords.lat, activeZipCoords.lng, v.lat, v.lng) : null;
+    const rSel = document.getElementById('live-radius');
+    const steps = [...rSel.options].map(o => o.value).filter(x => x !== '').map(Number).sort((a, b) => a - b);
+    let step = d == null ? null : steps.find(r => r >= d);
+    if (step != null && !isPro() && step > FREE_MAX_RADIUS_MI) step = null;
+    if (step == null) {
+      if (!isPro()) { openUpgradeSheet('yard-beyond-radius'); return; }
+      rSel.value = '';            // Pro: any distance
+    } else {
+      rSel.value = String(step);
+    }
+    localStorage.setItem('jh_radius', rSel.value);
+    populateYardFilter();
+    sel.value = loc;
+    if (sel.value !== loc) return; // genuinely unknown yard
+  }
   document.querySelector('.tab[data-tab="live"]').click();
+  renderLive();
   window.scrollTo({ top: 0 });
 }
 
