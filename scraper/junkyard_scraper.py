@@ -15638,6 +15638,21 @@ VINPLUS_TENANTS = {
                         "city": "Tallahassee", "state": "FL", "lat": 30.3870, "lng": -84.2752,
                         "source": "gopullit", "id_prefix": "gopullit-"},
     },
+    # --- migrated from the frozen art-inventory WordPress feed (2026-10-28) ---
+    # prestigepullyourpart.com/vehicle-search/ now embeds the VinPlus SPA
+    # (iframe vinplus.texnrewards.com/parts/prestige-pull-your-part; tenant
+    # yard_id prestige_pull_your_part, single location, sourceSystem crush).
+    # The old art_inventory_get_yard_assets POST still answers 200 with a
+    # 1,228-row set whose newest yard_date is 2026-07-10 (last_update all
+    # 0000-00-00) — it froze when the yard switched front ends, and served an
+    # identical set for 32+ scans. Stocks are the same PRE###### numbers, so
+    # id_prefix keeps the historical prestige-{stock} ids; source stays
+    # "prestige" for the zero-vehicle alarm.
+    "prestige_pull_your_part": {
+        "": {"code": "prestige", "name": "Prestige Pull-Your-Part - Houston",
+             "city": "Houston", "state": "TX", "lat": 29.8912, "lng": -95.3000,
+             "source": "prestige", "id_prefix": "prestige-"},
+    },
     # --- migrated from the retired ASP.NET hybrid adapter (2026-10-22) ---
     # source stays "chesterfield" so the zero-vehicle alarm keeps its own
     # label; id_prefix drops the location code because stock numbers are
@@ -17034,91 +17049,10 @@ def refresh_barrys_pricing_file() -> Path:
     return path
 
 
-# Prestige Pull-Your-Part (prestigepullyourpart.com) — single Houston TX yard
-# (7615 E Mount Houston Rd, ~1,250 vehicles). WordPress running BOTH the
-# gm_inventory_search family plugin AND a newer "art-inventory" plugin — the
-# live search uses art-inventory: regex the nonce from
-# `art_inventory_sf_ajax = {"url":..., "nonce":"..."}` on /vehicle-search/,
-# then ONE POST to admin-ajax.php with action=art_inventory_get_yard_assets&
-# security={nonce}&yard=0&make=0&model=0&year=0 → the ENTIRE yard as JSON
-# ("0" params are the magic; named/empty values return []). Rows carry
-# stock_number (PRE######, the id basis), iyear, make, model, vehicle_row,
-# yard_date ("YYYY-MM-DD HH:MM:SS"), color, vin (often truncated — only
-# 17-char values kept), yard_name/city/state. 2 requests/scan. robots.txt:
-# allow all. Street geocodes to road centroid (parcel not in OSM).
-PRESTIGE_SEARCH_URL = "https://prestigepullyourpart.com/vehicle-search/"
-PRESTIGE_AJAX = "https://prestigepullyourpart.com/wp-admin/admin-ajax.php"
-PRESTIGE_YARD = {"name": "Prestige Pull-Your-Part - Houston", "city": "Houston",
-                 "state": "TX", "lat": 29.8912, "lng": -95.3000}
-_PRESTIGE_NONCE_RE = re.compile(r'art_inventory_sf_ajax\s*=\s*{[^}]*"nonce":"([0-9a-f]+)"')
-
-
-def fetch_prestige_inventory() -> list[dict]:
-    """Fetch Prestige Pull-Your-Part's inventory (one all-yard JSON POST)."""
-    session = requests.Session()
-    try:
-        r = session.get(PRESTIGE_SEARCH_URL, headers={**HEADERS, "Accept": "text/html"},
-                        timeout=60)
-        r.raise_for_status()
-        m = _PRESTIGE_NONCE_RE.search(r.text)
-        if not m:
-            print("  [Prestige] art_inventory nonce not found — plugin changed?",
-                  file=sys.stderr)
-            return []
-        nonce = m.group(1)
-    except Exception as e:
-        print(f"  [Prestige] search page fetch failed: {e}", file=sys.stderr)
-        return []
-    time.sleep(2)
-    try:
-        r = session.post(PRESTIGE_AJAX,
-                         data={"action": "art_inventory_get_yard_assets",
-                               "security": nonce, "yard": "0", "make": "0",
-                               "model": "0", "year": "0"},
-                         headers={**HEADERS, "Referer": PRESTIGE_SEARCH_URL}, timeout=120)
-        r.raise_for_status()
-        rows = r.json()
-    except Exception as e:
-        print(f"  [Prestige] yard-assets fetch failed: {e}", file=sys.stderr)
-        return []
-    if not isinstance(rows, list) or not rows:
-        print("  [Prestige] yard-assets returned no rows", file=sys.stderr)
-        return []
-    _indep_cache_raw("prestige_assets.json", r.content)
-    vehicles: list[dict] = []
-    for row in rows:
-        stock = str(row.get("stock_number") or "").strip()
-        make_s = str(row.get("make") or "").strip()
-        if not stock or not make_s:
-            continue
-        model_s = str(row.get("model") or "").strip()
-        if model_s.upper().startswith(make_s.upper() + " "):
-            model_s = model_s[len(make_s):].strip()
-        vin = str(row.get("vin") or "").strip().upper()
-        try:
-            year_i = int(row.get("iyear") or 0)
-        except (TypeError, ValueError):
-            year_i = 0
-        vehicles.append({
-            "id": f"prestige-{stock.lower()}",
-            "vin": vin if len(vin) == 17 else "",
-            "year": year_i,
-            "make": _utpap_format_label(make_s),
-            "model": _utpap_format_label(model_s),
-            "row": str(row.get("vehicle_row") or "").strip(),
-            "dateAdded": str(row.get("yard_date") or "")[:10],
-            "_color": str(row.get("color") or "").strip().title(),
-            "_location": PRESTIGE_YARD["name"],
-            "_city": PRESTIGE_YARD["city"],
-            "_state": PRESTIGE_YARD["state"],
-            "_lat": PRESTIGE_YARD["lat"],
-            "_lng": PRESTIGE_YARD["lng"],
-            "_source": "prestige",
-        })
-    seen: set[str] = set()
-    unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
-    print(f"  [Prestige] {len(unique)} vehicles", file=sys.stderr)
-    return unique
+# Prestige Pull-Your-Part (Houston TX) — moved to VINPLUS_TENANTS
+# ["prestige_pull_your_part"] on 2026-10-28; the art-inventory WordPress feed
+# it used to read froze on 2026-07-10 when the yard switched its search page
+# to the VinPlus SPA. See the tenant comment there.
 
 
 # Budget U-Pull-It (FL) — owner-requested (Austin Rutherford email, Oct 2026:
@@ -19588,7 +19522,8 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "stcloud": "St. Cloud U Pull",
     "nvpap": "Nevada Pic-A-Part",
     "vinplus": "VinPlus (RTP KY/TN/NC, Pickers TX/AR/LA, Joliet IL, "
-               "San Antonio PnP TX, 195 TX, Pick Ur Part TX, US Auto Supply MI)",
+               "San Antonio PnP TX, 195 TX, Pick Ur Part TX, US Auto Supply MI, "
+               "Prestige TX)",
     "papva": "Pick-A-Part VA",
     "upickitaz": "U-Pick-It AZ",
     "gopullit": "Go Pull-It",
@@ -19642,7 +19577,6 @@ INDEPENDENT_FETCHERS: list = [
     ("Pick-A-Part VA", fetch_papva_inventory),
     ("U-Pick-It AZ", fetch_upickitaz_inventory),
     ("Barry's", fetch_barrys_inventory),
-    ("Prestige", fetch_prestige_inventory),
     ("Budget U-Pull-It", fetch_budget_inventory),
     ("Ario (Ryan's + wave-1 chains)", fetch_ario_inventory),
     ("U-Pull and Save", fetch_upas_inventory),

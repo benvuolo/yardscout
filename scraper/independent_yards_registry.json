@@ -1355,10 +1355,10 @@
     {
       "name": "Prestige Pull-Your-Part",
       "status": "adapter-built",
-      "platform": "wordpress running BOTH gm_inventory_search and the newer art-inventory plugin (art-inventory is live)",
+      "platform": "VinPlus tenant prestige_pull_your_part (iframe on /vehicle-search/, crush backend) since 2026-10-28; the art-inventory WordPress feed froze 2026-07-10 and is no longer read",
       "inventory_url": "https://prestigepullyourpart.com/vehicle-search/",
       "api": {
-        "endpoint": "https://prestigepullyourpart.com/wp-admin/admin-ajax.php",
+        "endpoint": "https://inventory-search-api-581547763015.us-central1.run.app/searchVehicleHttp (yard_id prestige_pull_your_part; was admin-ajax.php art_inventory_get_yard_assets)",
         "method": "POST",
         "auth": "nonce from `art_inventory_sf_ajax = {...,\"nonce\":...}` on /vehicle-search/",
         "format": "json (whole yard in one response)",
