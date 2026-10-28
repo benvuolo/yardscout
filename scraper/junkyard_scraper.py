@@ -14397,110 +14397,23 @@ def refresh_indy_pricing_file() -> Path:
 
 # U-Pull-It (upullitne.com) — 4-yard chain: Des Moines IA, Omaha North/South
 # and Lincoln NE. First Iowa AND first Nebraska coverage (user-requested via
-# Reddit, 2026-10-16). WordPress + "TAP Inventory Search System" plugin backed
-# by the Crush yard-management platform (s3clientid/crush_version in rows):
-# POST admin-ajax.php action=sif_search_products with a nonce scraped from
-# /search-inventory/ returns the ENTIRE chain's inventory as one JSON response
-# (~2,500 rows): yard name/city/state, year, make, model, row, color, VIN
-# (98.5% real 17-char), unique stock number, set date MM-DD-YYYY. All rows are
-# istatus=0/location=YARD (on the lot). robots.txt: allow all (Yoast default).
-# Two requests per scan: nonce GET + search POST. Not to be confused with the
-# registry's blocked "ABC U-Pull-It" (also Lincoln NE — different company) or
-# U-Pull-R Parts MN/OH. Coordinates geocoded once via Nominatim (YARD_COORDS
-# convention).
-UPULLITNE_SEARCH_URL = "https://upullitne.com/search-inventory/"
-UPULLITNE_AJAX_URL = "https://upullitne.com/wp-admin/admin-ajax.php"
-_UPULLITNE_NONCE_RE = re.compile(r'"sif_ajax_nonce"\s*:\s*"([0-9a-f]+)"')
-UPULLITNE_YARDS = {
-    "U PULL IT IA": {"name": "U-Pull-It - Des Moines", "city": "Des Moines",
-                     "state": "IA", "lat": 41.6405, "lng": -93.5988},
-    "U-PULL-IT INC OMAHA SOUTH": {"name": "U-Pull-It - Omaha South", "city": "Omaha",
-                                  "state": "NE", "lat": 41.2045, "lng": -96.0048},
-    "U-PULL-IT INC OMAHA NORTH": {"name": "U-Pull-It - Omaha North", "city": "Omaha",
-                                  "state": "NE", "lat": 41.2768, "lng": -95.9364},
-    "U-PULL-IT INC LINCOLN": {"name": "U-Pull-It - Lincoln", "city": "Lincoln",
-                              "state": "NE", "lat": 40.8702, "lng": -96.6245},
-}
-
-
+# Reddit, 2026-10-16). Not to be confused with the registry's blocked "ABC
+# U-Pull-It" (also Lincoln NE — different company) or U-Pull-R Parts MN/OH.
+#
+# 2026-10-28: the chain moved its public search to yardconnect-pro (YardSmart
+# backend) and the adapter now rides YARDCONNECT_SITES["upullitne"]. The OLD
+# source — the "TAP Inventory Search System" plugin (action=
+# sif_search_products over a CRUSH sync) — is still installed and still
+# answers 200 with ~2,536 rows, but its CRUSH sync stopped per yard (row
+# `lastupdate` 08/04 Omaha North, 08/27 Des Moines, 09/21 Lincoln + Omaha
+# South) so it served a byte-identical set for 32+ scans with the newest
+# set-out in early August. The yardconnect table the site actually shows
+# customers had ~3,324 rows with set dates through the previous day. Ids
+# changed scheme with the cutover (CRUSH stock LCN056020 → YardSmart stock /
+# content hash, see the yardconnect header), so every car re-lands once.
 def fetch_upullitne_inventory() -> list[dict]:
-    """Fetch U-Pull-It's (IA/NE) 4-yard chain inventory (nonce GET + one POST)."""
-    try:
-        r = requests.get(UPULLITNE_SEARCH_URL, headers={**HEADERS, "Accept": "text/html"},
-                         timeout=60)
-        r.raise_for_status()
-        m = _UPULLITNE_NONCE_RE.search(r.text)
-        if not m:
-            print("  [U-Pull-It IA/NE] nonce not found — site layout changed?",
-                  file=sys.stderr)
-            return []
-        resp = requests.post(
-            UPULLITNE_AJAX_URL,
-            headers={**HEADERS, "Accept": "application/json",
-                     "Referer": UPULLITNE_SEARCH_URL},
-            data={"action": "sif_search_products", "sif_verify_request": m.group(1),
-                  "make": "Any", "model": "Any", "location": "Any",
-                  "year_start": "", "year_end": "", "sorting": "0"},
-            timeout=120,
-        )
-        resp.raise_for_status()
-        payload = resp.json()
-    except Exception as e:
-        print(f"  [U-Pull-It IA/NE] fetch failed: {e}", file=sys.stderr)
-        return []
-    if not payload.get("success"):
-        print(f"  [U-Pull-It IA/NE] search returned success=false: "
-              f"{str(payload.get('message'))[:120]}", file=sys.stderr)
-        return []
-    products = payload.get("products") or []
-    _indep_cache_raw("upullitne_inventory.json", resp.content)
-
-    vehicles: list[dict] = []
-    unknown_yards: set[str] = set()
-    for p in products:
-        yard = UPULLITNE_YARDS.get((p.get("yard_name") or "").strip())
-        if yard is None:
-            unknown_yards.add((p.get("yard_name") or "?").strip())
-            continue
-        make = (p.get("make") or "").strip()
-        model = (p.get("model") or "").strip()
-        if not make or not model:
-            continue
-        date_iso = ""
-        dm = re.match(r"(\d{2})-(\d{2})-(\d{4})", (p.get("yard_date") or "").strip())
-        if dm:
-            date_iso = f"{dm.group(3)}-{dm.group(1)}-{dm.group(2)}"
-        try:
-            year_i = int(p.get("iyear") or 0)
-        except ValueError:
-            year_i = 0
-        stock = (p.get("stocknumber") or "").strip()
-        if not stock:  # never seen, but ids must stay stable and unique
-            stock = hashlib.sha1(
-                f"{year_i}|{make}|{model}|{p.get('vin')}|{p.get('vehicle_row')}"
-                .lower().encode()).hexdigest()[:12]
-        vin = (p.get("vin") or "").strip().upper()
-        vehicles.append({
-            "id": f"upullitne-{stock.lower()}",
-            "vin": vin if len(vin) == 17 else "",
-            "year": year_i,
-            "make": _utpap_format_label(make),
-            "model": _utpap_format_label(model),
-            "row": (p.get("vehicle_row") or "").strip(),
-            "dateAdded": date_iso,
-            "_location": yard["name"],
-            "_city": yard["city"],
-            "_state": yard["state"],
-            "_lat": yard["lat"],
-            "_lng": yard["lng"],
-            "_source": "upullitne",
-        })
-    if unknown_yards:
-        print(f"  [U-Pull-It IA/NE] skipped rows from unmapped yard(s): "
-              f"{sorted(unknown_yards)}", file=sys.stderr)
-    print(f"  [U-Pull-It IA/NE] {len(vehicles)} vehicles across "
-          f"{len({v['_location'] for v in vehicles})} yards", file=sys.stderr)
-    return vehicles
+    """Fetch U-Pull-It's (IA/NE) 4-yard chain inventory (yardconnect-pro)."""
+    return fetch_yardconnect_site("upullitne")
 
 
 # U-Pull-It (IA/NE) publishes one chain-wide price list on /parts-pricelist/ —
@@ -16558,6 +16471,34 @@ YARDCONNECT_SITES: dict[str, dict] = {
              "state": "NC", "lat": 36.4012, "lng": -79.987},
         ],
     },
+    # U-Pull-It (IA/NE) — 4 yards, one yardconnect-pro v2.3 tenant (see the
+    # header above fetch_upullitne_inventory for the 2026-10-28 cutover off
+    # the frozen TAP/CRUSH plugin). The yard selector here is the form's
+    # `location` field (values from its <select>: "Des Moines", "Lincoln",
+    # "North", "South"), not `lot`; the table carries an extra Location
+    # column the header-driven parse ignores. Coordinates and display names
+    # unchanged from the CRUSH adapter so yard identity/history carries over.
+    "upullitne": {
+        "label": "U-Pull-It IA/NE",
+        "site": "https://upullitne.com",
+        "mode": "ajax",
+        "lot_param": "location",
+        "nonce_paths": ("/search-inventory/", "/"),
+        "yards": [
+            {"lot": "Des Moines", "code": "desmoines",
+             "name": "U-Pull-It - Des Moines", "city": "Des Moines",
+             "state": "IA", "lat": 41.6405, "lng": -93.5988},
+            {"lot": "Lincoln", "code": "lincoln",
+             "name": "U-Pull-It - Lincoln", "city": "Lincoln",
+             "state": "NE", "lat": 40.8702, "lng": -96.6245},
+            {"lot": "North", "code": "omahanorth",
+             "name": "U-Pull-It - Omaha North", "city": "Omaha",
+             "state": "NE", "lat": 41.2768, "lng": -95.9364},
+            {"lot": "South", "code": "omahasouth",
+             "name": "U-Pull-It - Omaha South", "city": "Omaha",
+             "state": "NE", "lat": 41.2045, "lng": -96.0048},
+        ],
+    },
 }
 _YARDCONNECT_NONCE_RE = re.compile(
     r'yardconnectPublic\s*=\s*{[^}]*"nonce"\s*:\s*"([0-9a-f]+)"')
@@ -16608,11 +16549,13 @@ def _yardconnect_fetch_lot(session: "requests.Session", site: dict, yard: dict,
                     time.sleep(5)
                     continue
                 return r.text
+            # year_end tracks the calendar (next model year included) instead
+            # of a hard-coded 2026 that would silently drop 2027+ cars.
             data = {"action": "yardconnect_search_vehicles", "nonce": nonce,
                     "make": "all", "model": "all", "engine": "", "year_start": "1949",
-                    "year_end": "2026", "view": "table"}
+                    "year_end": str(datetime.now().year + 1), "view": "table"}
             if yard.get("lot"):
-                data["lot"] = yard["lot"]
+                data[site.get("lot_param", "lot")] = yard["lot"]
             r = session.post(site["site"] + "/wp-admin/admin-ajax.php", data=data,
                              headers=HEADERS, timeout=120)
             if r.status_code == 403 and attempt == 1:

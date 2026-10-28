@@ -561,11 +561,11 @@
     {
       "name": "U-Pull-It (IA/NE)",
       "status": "adapter-built",
-      "platform": "wordpress-tap-inventory-search-system (Crush yard-management backend)",
+      "platform": "wordpress-yardconnect-pro v2.3 (YardSmart backend); legacy TAP/Crush plugin still installed but frozen since Aug-Sep 2026",
       "inventory_url": "https://upullitne.com/search-inventory/",
       "robots": "allow all (Yoast default), no crawl-delay",
       "tos_flags": "none found",
-      "update_freshness": "live (lastupdate timestamps show nightly Crush sync)",
+      "update_freshness": "live via yardconnect-pro (set dates through previous day, verified 2026-10-28). The legacy sif_search_products/Crush feed stopped syncing 08/04-09/21/2026 and must not be used.",
       "locations": [
         {
           "name": "U-Pull-It - Des Moines",
@@ -600,9 +600,9 @@
         "endpoint": "https://upullitne.com/wp-admin/admin-ajax.php",
         "method": "POST",
         "format": "json",
-        "auth": "nonce (sif_ajax_nonce scraped from /search-inventory/ page JS object)",
-        "requests_per_scan": 2,
-        "notes": "action=sif_search_products&make=Any&model=Any&location=Any returns the ENTIRE 4-yard chain's inventory in one JSON response (~2,500 rows): yard_name/city/state, iyear, make, model, vehicle_row, yard_date (MM-DD-YYYY set date), color, VIN (98.5% real 17-char), unique stocknumber (id basis: upullitne-{stocknumber}), mileage, image_url. All rows istatus=0/location=YARD. Rows carry crush_version/s3clientid = Crush platform. Chain-wide price list at /parts-pricelist/ is a 4-column table (part, price, core, labor=all $0) -> upullitne_pricing.json. First IA and NE coverage; user-requested via Reddit 2026-10-16. NOT the same company as blocked ABC U-Pull-It (also Lincoln NE)."
+        "auth": "nonce (yardconnectPublic.nonce scraped from /search-inventory/)",
+        "requests_per_scan": 5,
+        "notes": "2026-10-28 cutover: action=yardconnect_search_vehicles&location={Des Moines|Lincoln|North|South}&make=all&model=all&view=table, one POST per yard (YARDCONNECT_SITES['upullitne']); ~3,300 rows, no VIN, data-stock-number only on rows with photos (else content-hash id). The old action=sif_search_products (Crush, ~2,536 rows, VINs) still answers 200 but its per-yard lastupdate froze 08/04-09/21/2026, so it served an identical set for 32+ scans. Chain-wide price list at /parts-pricelist/ (part, price, core, labor=$0) -> upullitne_pricing.json. First IA and NE coverage; user-requested via Reddit 2026-10-16. NOT the same company as blocked ABC U-Pull-It (also Lincoln NE)."
       }
     },
     {
