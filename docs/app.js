@@ -753,6 +753,43 @@ fetch(DATA_BASE + 'data/vehicle_extras.json')
   })
   .catch(() => { /* enrichment is optional */ });
 
+/* ===== PER-YARD FRESHNESS (data/yard_health.json) =====
+ * The scan time is global, but a yard's own list can lag it: the yard
+ * stopped publishing, our source froze, or rows were carried forward.
+ * yard_health records when each yard's list last CHANGED and its newest
+ * set-out date. Cards show "yard list unchanged since …" once a list has
+ * been frozen > 2 days; a yard whose newest car is > 120 days old is
+ * DORMANT: kept on the Yards tab with a warning, left out of the default
+ * Cars list and the yard count (it isn't really being tracked). */
+let yardHealth = {};
+const DORMANT_DAYS = 120;
+function yardFrozenSince(loc) {
+  const h = yardHealth[loc];
+  if (!h || !h.lastChangedAt || !liveScrapedAt) return null;
+  const changed = Date.parse(h.lastChangedAt), scanned = Date.parse(liveScrapedAt);
+  return (scanned - changed) > 2 * 86400000 ? new Date(changed) : null;
+}
+function formatYardDate(iso) {
+  const d = parseYardDate(iso);
+  return d ? d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : String(iso || '');
+}
+function yardDormant(loc) {
+  const h = yardHealth[loc];
+  if (!h || !h.newestDateAdded) return false;
+  const d = parseYardDate(h.newestDateAdded);
+  return !!d && (Date.now() - d.getTime()) > DORMANT_DAYS * 86400000;
+}
+fetch(DATA_BASE + 'data/yard_health.json')
+  .then(r => (r.ok ? r.json() : null))
+  .then(d => {
+    if (!d || !d.yards) return;
+    yardHealth = d.yards;
+    updateCoverageCounts();
+    if (liveLoaded) renderLive();
+    if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
+  })
+  .catch(() => { /* freshness labels are optional */ });
+
 /* ===== SALE DAYS (chain sale calendars -> data/sale_events.json) =====
  * Events come from each chain's own published calendar (Pick-n-Pull events
  * API, PYP deals pages) plus hand-verified manual entries. An event with
@@ -997,7 +1034,7 @@ document.addEventListener('resume', refreshIfStale);
 /* Coverage transparency: the yard count shown in the zip banner / footer is
  * computed from the live data, never hardcoded. */
 function coverageYardCount() {
-  return new Set(liveInventory.map(v => v.location).filter(Boolean)).size;
+  return new Set(liveInventory.map(v => v.location).filter(l => l && !yardDormant(l))).size;
 }
 /* Marketing surfaces (zip banner, header ticker, about copy) show a rounded
  * tier that auto-scales with coverage — floored to the nearest 10 with a
@@ -2428,6 +2465,7 @@ function getFilteredLive() {
     if (yearMin && (!v.year || v.year < yearMin)) return false;
     if (yearMax && (!v.year || v.year > yearMax)) return false;
     if (locationFilter && v.location !== locationFilter) return false;
+    if (!locationFilter && yardDormant(v.location)) return false;  // dormant yards: only when picked
     if (liveWeekOnly && !isNew(v.dateAdded)) return false;
     if (activeZipCoords && radiusMi) {
       const d = vehicleDistanceMi(v);
@@ -2713,7 +2751,12 @@ function renderLive() {
     // Scan stamp so a screenshot carries when this list was true. The
     // inventory has no per-yard scan time (yard_health.json isn't loaded
     // here), so this is the global scrapedAt in the viewer's local time.
-    const scanLine = liveScrapedAt
+    const frozen = yardFrozenSince(v.location);
+    const scanLine = yardDormant(v.location)
+      ? `<span class="scan-stamp stamp-stale" title="This yard hasn\u2019t posted a new car online in months \u2014 these listings are probably out of date. Call before going.">no new cars since ${escapeHtml(formatYardDate(yardHealth[v.location].newestDateAdded))}</span>`
+      : frozen
+      ? `<span class="scan-stamp stamp-stale" title="This yard\u2019s published list hasn\u2019t changed since then, even though we re-check it every 4 hours \u2014 the yard may have stopped updating it. Call before a long drive.">yard list unchanged since ${escapeHtml(frozen.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))}</span>`
+      : liveScrapedAt
       ? `<span class="scan-stamp" title="When YardScout last scanned the yards (${escapeHtml(scrapedTitle())}) — cars can leave between scans">scanned ${escapeHtml(scrapedShort())}</span>`
       : '';
 
@@ -3557,6 +3600,9 @@ function renderYards() {
             <div class="car-meta">${y.count.toLocaleString()} cars on the lot &middot; ${y.newCount.toLocaleString()} new this week</div>
             <div class="lot-clock" title="Based on historical arrival-to-departure data — an estimate, not a schedule">${life}</div>
             <div class="lot-clock" title="Chain-published rule — individual locations can differ; torches and jacks are banned everywhere. Confirm at the gate before a long drive.">${ICON.tag} Tools: ${chainToolPolicy(y.location)}</div>
+            ${yardDormant(y.location)
+              ? `<div class="yard-stale-note">No new cars posted online since ${escapeHtml(formatYardDate(yardHealth[y.location].newestDateAdded))} &mdash; the yard may have stopped updating its list. Call before going.</div>`
+              : (() => { const f = yardFrozenSince(y.location); return f ? `<div class="yard-stale-note">List unchanged since ${escapeHtml(f.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))} &mdash; call to confirm.</div>` : ''; })()}
           </div>
         </div>
         <div class="yard-actions">

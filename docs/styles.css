@@ -1622,6 +1622,8 @@
   .car-footer-meta { display: flex; flex-wrap: wrap; column-gap: 0.6rem; font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-dim); opacity: 0.85; }
   .car-footer-meta .btn-copy-vin { vertical-align: middle; }
   .car-footer-meta > * { white-space: nowrap; }
+  .stamp-stale { color: var(--orange); opacity: 1; }
+  .yard-stale-note { margin-top: 0.4rem; font-size: 0.75rem; line-height: 1.4; color: var(--orange); }
   /* Spec line: what the car is, in the UI face at body size (not mono). */
   .car-spec-line { font-size: 0.8125rem; color: var(--text); margin-top: 0.35rem; line-height: 1.4; }
   .spec-vin { font-weight: 600; }
