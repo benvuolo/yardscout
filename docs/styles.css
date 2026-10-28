@@ -138,6 +138,9 @@
     color-scheme: dark;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  /* No double-tap-to-zoom anywhere (it jumbled the app UI); pinch-zoom
+     stays available on the web for accessibility. */
+  html { touch-action: manipulation; }
   body {
     font-family: var(--font-ui);
     background: var(--bg);

@@ -7,6 +7,9 @@
  * IS_NATIVE also disables web-only machinery (service worker, native-app
  * promo banner) and keeps Stripe checkout out of the native build entirely (Apple
  * guideline 3.1.1 — digital subscriptions in-app must use StoreKit). */
+/* App shells: no pinch/double-tap zoom (the CSS touch-action rule covers
+ * double-tap everywhere; this also pins the scale inside the native webview).
+ * The web keeps pinch-zoom for accessibility. */
 const IS_NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform
   && window.Capacitor.isNativePlatform());
 // Android has its own Purchases plugin (Google Play Billing — see
@@ -397,6 +400,10 @@ function _lookupYardCostUncached(partName, location) {
 /* ===== LIVE INVENTORY ===== */
 let liveInventory = [];
 let liveLoaded = false;
+if (IS_NATIVE) {
+  const vp = document.querySelector('meta[name="viewport"]');
+  if (vp) vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+}
 let liveScrapedAt = null;
 
 function escapeHtml(str) {
@@ -2090,6 +2097,17 @@ updateSavedPill();
 
 /* ===== SHAREABLE FINDS (deep links) ===== */
 let focusedCarKey = null;
+/* "This week" from a yard card: Live tab scoped to that yard AND the last 7
+ * days (the in-app twin of the public /yard/<slug> page). Cleared when the
+ * yard filter changes or the banner's button is tapped. */
+let liveWeekOnly = false;
+function viewYardWeek(loc) {
+  track('yard-week');
+  liveWeekOnly = true;
+  viewYardInLive(loc);
+  if (liveLoaded) renderLive();
+}
+function jhClearWeek() { liveWeekOnly = false; renderLive(); }
 
 /* decodeURIComponent throws URIError on a truncated escape ("%E0%A4%A" —
  * what SMS/Messenger do to long share links); fall back to the raw key so a
@@ -2256,8 +2274,14 @@ applyThemeColor();
 
 // Native shells: the yard card's "This week" shares the public page instead
 // of bouncing the user out to the system browser.
-document.addEventListener('click', async (e) => {
+document.addEventListener('click', (e) => {
   const b = e.target.closest('.yard-week-btn');
+  if (!b || !b.dataset.yard) return;
+  e.stopPropagation();
+  viewYardWeek(b.dataset.yard);
+}, true);
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('.yard-share-btn');
   if (!b) return;
   e.stopPropagation();
   const url = b.dataset.url;
@@ -2339,6 +2363,7 @@ function getFilteredLive() {
     if (yearMin && (!v.year || v.year < yearMin)) return false;
     if (yearMax && (!v.year || v.year > yearMax)) return false;
     if (locationFilter && v.location !== locationFilter) return false;
+    if (liveWeekOnly && !isNew(v.dateAdded)) return false;
     if (activeZipCoords && radiusMi) {
       const d = vehicleDistanceMi(v);
       if (d == null || d > radiusMi) return false;
@@ -2557,7 +2582,13 @@ function renderLive() {
       <button type="button" class="btn" onclick="jhClearFocus()">See all cars</button>
     </div>` : '';
 
-  document.getElementById('live-grid').innerHTML = focusBanner + vehiclesToRender.map(v => {
+  const weekYard = liveWeekOnly ? document.getElementById('live-filter-location').value : '';
+  const weekBanner = weekYard ? `
+    <div class="focus-banner" style="grid-column:1/-1;">
+      <span>This week at <strong>${escapeHtml(weekYard)}</strong> &mdash; ${vehicles.length.toLocaleString()} ${vehicles.length === 1 ? 'car' : 'cars'} set out in the last 7 days.</span>
+      <button type="button" class="btn" onclick="jhClearWeek()">All cars at this yard</button>
+    </div>` : '';
+  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + vehiclesToRender.map(v => {
     // Pro sees everything; free users get exactly one fully-unlocked sample card.
     const unlocked = isPro() || (sampleKey !== null && vehicleKey(v) === sampleKey);
     const isSampleCard = unlocked && !isPro();
@@ -2854,7 +2885,7 @@ document.getElementById('live-filter-year-max').addEventListener('change', () =>
   if (lo.value && hi.value && +hi.value < +lo.value) lo.value = hi.value;
   renderLive();
 });
-document.getElementById('live-filter-location').addEventListener('change', renderLive);
+document.getElementById('live-filter-location').addEventListener('change', () => { liveWeekOnly = false; renderLive(); });
 let _lastFreeSort = (() => {
   const s = localStorage.getItem('jh_sort');
   return (s && !PRO_SORTS.has(s)) ? s : FREE_DEFAULT_SORT;
@@ -3393,7 +3424,7 @@ function renderYards() {
         <div class="yard-actions">
           <button type="button" class="btn yard-view-btn">View cars</button>
           ${IS_NATIVE
-            ? `<button type="button" class="btn yard-week-btn" data-url="https://yardscout.io/yard/${yardSlug(y.location)}" data-yard="${escapeHtml(y.location)}" title="Share this yard's last 7 days of set-outs">Share this week</button>`
+            ? `<button type="button" class="btn yard-week-btn" data-yard="${escapeHtml(y.location)}" title="This yard's set-outs from the last 7 days">This week</button><button type="button" class="btn yard-share-btn" data-url="https://yardscout.io/yard/${yardSlug(y.location)}" data-yard="${escapeHtml(y.location)}" title="Share this yard's week" aria-label="Share this yard's week">${ICON.share}</button>`
             : `<a class="btn yard-week-link" href="https://yardscout.io/yard/${yardSlug(y.location)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Public page: this yard's set-outs from the last 7 days, shareable">This week &#8599;</a>`}
           ${yardPriceList(y.location)
             ? '<button type="button" class="btn yard-prices-btn">' + ICON.tag + ' Price list</button>'
