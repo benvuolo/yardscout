@@ -1,7 +1,7 @@
 YardScout tracks the live inventory of self-service salvage yards across the country, so you stop driving to yards on a maybe.
 
 FIND THE CAR BEFORE YOU DRIVE
-• Live inventory from 250+ self-serve yards — Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part and a growing set of independents — refreshed throughout the day
+• Live inventory from 300+ self-serve yards — Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part and a growing set of independents — refreshed throughout the day
 • Search by make, model and year range around your ZIP
 • See the row number, arrival date and VIN before you leave the house
 • Share any car as a link — yard, row, set-out date and how long cars usually last at that yard
