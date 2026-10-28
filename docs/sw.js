@@ -3,7 +3,7 @@
    app is always fresh when online but still opens (with the last-seen inventory)
    when cell signal dies between the rows of cars. */
 
-const CACHE = 'jh-v113';
+const CACHE = 'jh-v114';
 const SHELL = [
   './',
   './index.html',
@@ -44,6 +44,12 @@ self.addEventListener('fetch', (e) => {
   // make every repeat visit wait on the full ~37MB download and store a
   // duplicate copy.
   if (url.pathname.endsWith('/data/inventory_live.json')) return;
+  // Same for the radius-first shards (data/inv/): app.js keeps them in its
+  // own jh-data store, versioned per scan (?v=<scrapedAt>). Network-first
+  // here would cache a copy of every scan's shards under its own URL.
+  // Never precached either — which shards a user needs depends on where
+  // they are.
+  if (url.pathname.includes('/data/inv/')) return;
   e.respondWith(
     fetch(e.request)
       .then((resp) => {

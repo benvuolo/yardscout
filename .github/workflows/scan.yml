@@ -79,6 +79,11 @@ jobs:
           # files (tearapart, utpap, wap, upullr, ...) beyond the big six, and
           # any tracked-but-unstaged leftover makes `git pull --rebase` below
           # fail with "You have unstaged changes" (broke 3 scans on 2026-09-15).
+          # This also stages the app's radius-first shards in docs/data/inv/
+          # (manifest, partsets, shard-NN, keys-BB — rewritten every scan by
+          # inventory_shards.py; a directory pathspec stages removals too).
+          # Don't name docs/data/inv/ separately: a pathspec that matches
+          # nothing (first scan, shard write failed) would fail this step.
           git add docs/data/
           if git diff --staged --quiet; then
             echo "No inventory changes."

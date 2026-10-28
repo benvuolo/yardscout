@@ -400,6 +400,11 @@ function _lookupYardCostUncached(partName, location) {
 /* ===== LIVE INVENTORY ===== */
 let liveInventory = [];
 let liveLoaded = false;
+// Radius-first loading (see RADIUS-FIRST INVENTORY): liveComplete is false
+// while liveInventory holds only the shards around the user.
+let liveComplete = false;
+let _inv = null;       // shard session behind what's on screen
+let _invNext = null;   // a session still loading before it takes over the screen
 if (IS_NATIVE) {
   const vp = document.querySelector('meta[name="viewport"]');
   if (vp) vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
@@ -591,6 +596,20 @@ async function loadAllPricing() {
  * their next interaction (every control calls renderLive). */
 function applyInventory(raw, { quiet = false } = {}) {
   parseInventoryPayload(raw);
+  // The full file (or the API) is always the whole scan; a radius-first
+  // shard session it replaces must not keep loading over it.
+  liveComplete = true;
+  if (_inv) _inv.stopped = true;
+  if (_invNext) _invStop(_invNext);
+  _inv = _invNext = null;
+  afterInventoryChange({ quiet });
+}
+
+/* Everything that follows new inventory data — shared by the full-file path
+ * and the radius-first shard loader. While liveComplete is false (only the
+ * shards around the user are in), watch notifications and the alerts badge
+ * wait for the whole scan: a partial list would under-count them. */
+function afterInventoryChange({ quiet = false } = {}) {
   annotateVinDuplicates(liveInventory);
   liveLoaded = true;
   updateCoverageCounts();
@@ -599,14 +618,19 @@ function applyInventory(raw, { quiet = false } = {}) {
   // so this forward reference is safe).
   if (pfInited) pfPopulatePickers();
   _makeScopeKey = null;   // data changed — force the scoped rebuild
+  _yardScopeKey = null;   // ...and the yard dropdown's counts
   refreshScopedInventory();
   populateWatchOptions();
   updateStaleBanner();
+  invUpdateProgress();
+  if (liveComplete) flushPendingWatchSeeds();
   if (!quiet) {
     applyShareHash();
     renderLive();
-    checkAndNotify();
-    updateAlertsBadge();
+    if (liveComplete) {
+      checkAndNotify();
+      updateAlertsBadge();
+    }
     if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
   } else if (window.scrollY < 400 && !document.querySelector('#live-grid details[open]')) {
     renderLive();
@@ -641,6 +665,40 @@ function splitCategoryMake(make, model) {
   return [raw, model];
 }
 
+/* One schema-v2 row -> the app's vehicle object. Shared by the full-file
+ * parse and the radius-first shard loader, so both build identical objects.
+ * `vp` is the row's vPIC side-table entry (or undefined). */
+function expandV2Row(r, yards, partSets, vp) {
+  const y = yards[r[7]] || [];
+  const parts = r[8] >= 0 ? (partSets[r[8]] || []) : [];
+  const [mk, md] = splitCategoryMake(r[3], r[4]);
+  const v = {
+    id: r[0], vin: r[1], year: r[2], make: mk, model: md, row: r[5],
+    dateAdded: r[6], location: y[0] || '', city: y[1] || '', state: y[2] || '',
+    lat: y[3], lng: y[4], utpapPremium: !!r[10],
+    hasMatch: parts.length > 0, maxValue: r[9] || 0,
+    displayName: `${mk} ${md}`.trim(), topParts: parts,
+  };
+  if (y[5] != null) { v.yardAvgLifespan = y[5]; v.yardLifespanBasis = y[6] || 'all'; }
+  if (vp) {
+    v.vpicTrim = vp[0]; v.vpicTrimQuality = vp[1];
+    v.vpicDecodeWell = vp[1] === 'usable';
+    if (vp[2]) v.vpicSeries = vp[2];
+    if (vp[3]) v.vpicDriveType = vp[3];
+    if (vp[4]) v.vpicMismatch = vp[4];
+  }
+  return v;
+}
+
+function applyPricesReviewed(iso) {
+  if (!iso) return;
+  const d = new Date(iso + 'T12:00:00Z');
+  if (!isNaN(d)) {
+    document.getElementById('prices-reviewed').textContent =
+      ` Online price ranges last reviewed ${d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}.`;
+  }
+}
+
 function parseInventoryPayload(raw) {
   {
     if (raw && raw.schemaVersion === 2 && Array.isArray(raw.vehicles)) {
@@ -648,36 +706,9 @@ function parseInventoryPayload(raw) {
       const yards = raw.yards || [];
       const partSets = raw.partSets || [];
       const vpic = raw.vpic || {};
-      liveInventory = raw.vehicles.map((r, i) => {
-        const y = yards[r[7]] || [];
-        const parts = r[8] >= 0 ? (partSets[r[8]] || []) : [];
-        const [mk, md] = splitCategoryMake(r[3], r[4]);
-        const v = {
-          id: r[0], vin: r[1], year: r[2], make: mk, model: md, row: r[5],
-          dateAdded: r[6], location: y[0] || '', city: y[1] || '', state: y[2] || '',
-          lat: y[3], lng: y[4], utpapPremium: !!r[10],
-          hasMatch: parts.length > 0, maxValue: r[9] || 0,
-          displayName: `${mk} ${md}`.trim(), topParts: parts,
-        };
-        if (y[5] != null) { v.yardAvgLifespan = y[5]; v.yardLifespanBasis = y[6] || 'all'; }
-        const vp = vpic[String(i)];
-        if (vp) {
-          v.vpicTrim = vp[0]; v.vpicTrimQuality = vp[1];
-          v.vpicDecodeWell = vp[1] === 'usable';
-          if (vp[2]) v.vpicSeries = vp[2];
-          if (vp[3]) v.vpicDriveType = vp[3];
-          if (vp[4]) v.vpicMismatch = vp[4];
-        }
-        return v;
-      });
+      liveInventory = raw.vehicles.map((r, i) => expandV2Row(r, yards, partSets, vpic[String(i)]));
       liveScrapedAt = raw.scrapedAt || null;
-      if (raw.pricesLastReviewed) {
-        const d = new Date(raw.pricesLastReviewed + 'T12:00:00Z');
-        if (!isNaN(d)) {
-          document.getElementById('prices-reviewed').textContent =
-            ` Online price ranges last reviewed ${d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}.`;
-        }
-      }
+      applyPricesReviewed(raw.pricesLastReviewed);
     } else if (Array.isArray(raw)) {
       liveInventory = raw;
       liveScrapedAt = null;
@@ -751,14 +782,24 @@ function transSource(v) {
   return ex[4] === 'listing' ? 'listing' : 'vin';
 }
 
-fetch(DATA_BASE + 'data/vehicle_extras.json')
-  .then(r => (r.ok ? r.json() : null))
-  .then(d => {
-    if (!d || !d.extras) return;
-    vehicleExtras = d.extras;
-    hydratePhotos();
-  })
-  .catch(() => { /* enrichment is optional */ });
+/* The whole-country extras file is only fetched on the full-file / API
+ * paths: radius-first shards (data/inv/) carry their own cars' extras, so
+ * the 14 MB file never competes with the first screen for bandwidth. */
+let _extrasFileP = null;
+function loadVehicleExtrasFile() {
+  if (_extrasFileP) return _extrasFileP;
+  _extrasFileP = fetch(DATA_BASE + 'data/vehicle_extras.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then(d => {
+      if (!d || !d.extras) return;
+      // A shard session that took over meanwhile owns vehicleExtras.
+      if (_inv && _inv.shown) return;
+      vehicleExtras = d.extras;
+      hydratePhotos();
+    })
+    .catch(() => { /* enrichment is optional */ });
+  return _extrasFileP;
+}
 
 /* ===== PER-YARD FRESHNESS (data/yard_health.json) =====
  * The scan time is global, but a yard's own list can lag it: the yard
@@ -936,6 +977,7 @@ async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
   // API mode (feature-flagged, see api.js): load tier-aware shards from the
   // backend instead of the public static file. Falls back to static on error.
   if (!IS_NATIVE && window.YSApi && YSApi.enabled()) {
+    loadVehicleExtrasFile();
     try {
       const raw = await YSApi.fetchInventory();
       await pricingReady;
@@ -945,6 +987,14 @@ async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
       console.log('API inventory failed, falling back to static:', e && e.message);
     }
   }
+
+  // Radius-first: the shards around the user, then the rest in the
+  // background (see RADIUS-FIRST INVENTORY below). Falls through to the
+  // full file exactly as before when no shard manifest is published.
+  try {
+    if (await loadShardedInventory({ fresh, quiet }, pricingReady)) return;
+  } catch (e) { /* any shard-path surprise: the full file still works */ }
+  loadVehicleExtrasFile();
 
   // Repeat visits: render instantly from the Cache API copy, then revalidate
   // in the background. (The service worker deliberately skips this file.)
@@ -1011,6 +1061,505 @@ async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
   }
 }
 
+/* ===== RADIUS-FIRST INVENTORY (data/inv/) =====
+ * The full inventory_live.json is ~44 MB (~9 MB gzipped): on a phone that
+ * was a minute of skeleton cards before the first car. Every scan also
+ * publishes the same data cut into ~40 geographic shards
+ * (scraper/inventory_shards.py):
+ *   inv/manifest.json  scan stamp, the yards table, which shard holds each
+ *                      yard (a few KB)
+ *   inv/partsets.json  the shared part-list table
+ *   inv/shard-NN.json  one region's rows (identical to the full file's),
+ *                      their global positions, and their vPIC + extras
+ *   inv/keys-BB.json   hashed car keys -> shard, for #car= / #alert= links
+ * The app fetches the manifest, then the shards whose yards fall inside the
+ * current center + radius (plus the nearest yard's, for the "closest yard is
+ * N mi away" message, and a deep-linked car's), renders, then loads the rest
+ * one shard at a time in idle time until liveInventory is the whole scan in
+ * its original order — from then on dropdowns, counts, watch matching and
+ * Pro nationwide are exactly what the full file produced.
+ *
+ * Every file carries its scan's scrapedAt and is fetched as ?v=<scrapedAt>,
+ * so HTTP / CDN caches can't mix scans; a file from another scan is rejected
+ * and the load retried against a freshly fetched manifest. DATA_CACHE keeps
+ * the manifest + shards for instant repeat launches (cache-first, then
+ * revalidate against the network manifest — the old meta probe's job).
+ * No manifest published (older data) -> the full-file path runs unchanged. */
+const INV_BASE = DATA_BASE + 'data/inv/';
+const INV_MANIFEST_URL = INV_BASE + 'manifest.json';
+
+function _invPad(n) { return String(n).padStart(2, '0'); }
+/* 32-bit FNV-1a over UTF-8 — must match fnv1a32() in scraper/inventory_shards.py. */
+function _invHash(s) {
+  let h = 0x811c9dc5;
+  for (const b of new TextEncoder().encode(String(s))) h = Math.imul(h ^ b, 0x01000193) >>> 0;
+  return h >>> 0;
+}
+function _invValidManifest(m) {
+  if (!m || m.schemaVersion !== 2 || m.shardLayout !== 1 || !m.scrapedAt) return false;
+  if (!Array.isArray(m.yards) || !Array.isArray(m.yardShard) || m.yardShard.length !== m.yards.length) return false;
+  if (!Array.isArray(m.shards) || !m.shards.length || !Array.isArray(m.yardCount)) return false;
+  return m.shards.reduce((a, b) => a + b, 0) === m.vehicles;
+}
+function _invStaleError(name) {
+  const e = new Error('inventory file from another scan: ' + name);
+  e.stale = true;
+  return e;
+}
+
+/* One file of the session's scan: the Cache API copy for a cache-sourced
+ * session (when it is that scan's), else the network — ?v= makes the URL
+ * unique per scan, so no HTTP or CDN cache layer can hand back another. */
+async function _invGet(s, name, store = true) {
+  const bare = INV_BASE + name;
+  if (s.source === 'cache' && s.cache) {
+    try {
+      const hit = await s.cache.match(bare);
+      const d = hit ? await hit.json() : null;
+      if (d && d.scrapedAt === s.m.scrapedAt) return d;
+    } catch (e) { /* unreadable copy — refetch */ }
+  }
+  const resp = await fetch(bare + '?v=' + encodeURIComponent(s.m.scrapedAt));
+  if (!resp.ok) throw new Error('inventory file ' + resp.status + ': ' + name);
+  const text = await resp.text();
+  const d = JSON.parse(text);
+  if (!d || d.scrapedAt !== s.m.scrapedAt) throw _invStaleError(name);
+  if (store && s.cache) {
+    s.cache.put(bare, new Response(text, { headers: { 'content-type': 'application/json' } }))
+      .catch(() => { /* quota */ });
+  }
+  return d;
+}
+
+function _invPartSets(s) {
+  if (!s.partSetsP) {
+    s.partSetsP = _invGet(s, 'partsets.json')
+      .then(d => { s.partSets = Array.isArray(d.partSets) ? d.partSets : []; })
+      .catch(e => { s.partSetsP = null; throw e; });
+  }
+  return s.partSetsP;
+}
+
+/* Expand a shard's rows into vehicle objects (+ their global positions). */
+function _invParseShard(s, i, sh) {
+  const m = s.m, rows = sh.vehicles, deltas = sh.pos;
+  if (sh.shard !== i || !Array.isArray(rows) || !Array.isArray(deltas)
+      || deltas.length !== rows.length || rows.length !== m.shards[i]) {
+    throw new Error('inventory shard ' + i + ' malformed');
+  }
+  const vp = sh.vpic || {}, ex = sh.extras || {};
+  const vehicles = new Array(rows.length), pos = new Array(rows.length);
+  let g = 0;
+  for (let j = 0; j < rows.length; j++) {
+    g += deltas[j];
+    if (!(g >= 0 && g < m.vehicles)) throw new Error('inventory shard ' + i + ' malformed');
+    pos[j] = g;
+    const r = rows[j];
+    vehicles[j] = expandV2Row(r, m.yards, s.partSets, vp[j]);
+    if (ex[j]) s.extras[String(r[0])] = ex[j];
+  }
+  s.parsed.set(i, { vehicles, pos });
+}
+
+function _invLoadShard(s, i) {
+  if (s.parsed.has(i)) return Promise.resolve();
+  let p = s.inflight.get(i);
+  if (!p) {
+    p = Promise.all([_invGet(s, 'shard-' + _invPad(i) + '.json'), _invPartSets(s)])
+      .then(([sh]) => {
+        if (s.stopped || s.parsed.has(i)) return;
+        _invParseShard(s, i, sh);
+        if (s === _inv) invUpdateProgress();
+      })
+      .finally(() => s.inflight.delete(i));
+    s.inflight.set(i, p);
+  }
+  return p;
+}
+
+/* Deep link (#car= share / #alert= push): which shard holds that car?
+ * focus.shards: null = looking it up; [ids] = there (empty = not in this
+ * scan); 'all' = no usable index, load everything; 'stale' = this scan was
+ * superseded (the newer session looks again). */
+function _invLookupFocus(s) {
+  const key = focusedCarKey;
+  if (!key) return null;
+  if (s.focus && s.focus.key === key) return s.focus.p;
+  const f = { key, shards: null, p: null };
+  s.focus = f;
+  f.p = (async () => {
+    try {
+      const h = _invHash(key);
+      const kb = await _invGet(s, 'keys-' + _invPad(h % (s.m.keyBuckets || 64)) + '.json', false);
+      const tok = ' ' + h.toString(36) + ' ', hits = [];
+      for (const si of Object.keys(kb.s || {})) {
+        if ((' ' + kb.s[si] + ' ').includes(tok)) hits.push(+si);
+      }
+      f.shards = hits;
+    } catch (e) {
+      f.shards = e && e.stale ? 'stale' : 'all';
+      if (f.shards === 'stale' && s === _inv) loadLiveInventory({ fresh: true, quiet: true }).catch(() => {});
+    }
+    invKick();
+  })();
+  return f.p;
+}
+
+/* The shards the current view needs before it can render honestly.
+ * radiusOnly: the Yards tab's view (a deep-linked car doesn't change it). */
+function _invWanted(s, radiusOnly = false) {
+  const m = s.m, want = new Set();
+  if (!radiusOnly && focusedCarKey && !document.getElementById('tab-yards').classList.contains('active')) {
+    // A deep link shows just that car: its shard is all the first screen
+    // needs (nothing while the lookup runs; the radius around the user
+    // follows right behind, nearest first).
+    const f = s.focus && s.focus.key === focusedCarKey ? s.focus : null;
+    if (f && f.shards === 'all') m.shards.forEach((_, i) => want.add(i));
+    else if (f && Array.isArray(f.shards)) f.shards.forEach(i => want.add(i));
+    return want;
+  }
+  const c = activeZipCoords;
+  if (c) {
+    // Nationwide (Pro "any distance") starts with the free radius around
+    // the user; the rest streams in behind it.
+    const r = effectiveRadiusMi() || FREE_MAX_RADIUS_MI;
+    let best = -1, bestD = Infinity;
+    for (let i = 0; i < m.yards.length; i++) {
+      const y = m.yards[i];
+      if (y[3] == null || y[4] == null) continue;
+      const d = haversineMiles(c.lat, c.lng, y[3], y[4]);
+      if (d <= r) want.add(m.yardShard[i]);
+      if (d < bestD) { bestD = d; best = i; }
+    }
+    // An empty radius names the closest covered yard — load its shard too.
+    if (best >= 0) want.add(m.yardShard[best]);
+  } else if (isPro()) {
+    // Pro without a location browses nationwide: any one region to start.
+    want.add(s.parsed.size ? s.parsed.keys().next().value : 0);
+  }
+  return want;
+}
+
+/* Next background shard: nearest to the user first (a widened radius then
+ * finds its data already in), else in file order. */
+function _invNextShard(s) {
+  const m = s.m, c = activeZipCoords;
+  let best = null, bestD = Infinity;
+  for (let i = 0; i < m.shards.length; i++) {
+    if (s.parsed.has(i) || s.inflight.has(i)) continue;
+    let d = i;
+    if (c) {
+      d = Infinity;
+      for (const yi of s.shardYards[i]) {
+        const y = m.yards[yi];
+        if (y[3] != null && y[4] != null) d = Math.min(d, haversineMiles(c.lat, c.lng, y[3], y[4]));
+      }
+    }
+    if (best == null || d < bestD) { best = i; bestD = d; }
+  }
+  return best;
+}
+
+/* Is the Live (or, focus:false, the Yards) view still waiting on shards? */
+function invViewPending({ focus = true } = {}) {
+  const s = _inv;
+  if (!s || s.done) return false;
+  if (focus && focusedCarKey) {
+    if (liveInventory.some(x => vehicleKey(x) === focusedCarKey || String(x.id) === focusedCarKey)) return false;
+    const f = s.focus && s.focus.key === focusedCarKey ? s.focus : null;
+    if (!f) { _invLookupFocus(s); return true; }
+    if (Array.isArray(f.shards)) {
+      if (f.shards.some(i => !s.applied.has(i))) return true;
+      if (!f.shards.length) return false;   // not in this scan: the honest "gone" message
+      f.shards = 'all';                     // indexed but absent (hash collision): load everything
+      return true;
+    }
+    return true;                            // looking up, superseded, or loading everything
+  }
+  for (const i of _invWanted(s, !focus)) if (!s.applied.has(i)) return true;
+  return false;
+}
+
+/* The view changed (zip, radius, deep link): fetch what it needs now rather
+ * than after the background shard in flight. */
+let _invKickT = 0;
+function invKick() {
+  if (_invKickT) return;
+  _invKickT = setTimeout(() => {
+    _invKickT = 0;
+    for (const s of [_invNext, _inv]) {
+      if (!s || s.done || s.stopped || s.failed) continue;
+      if (focusedCarKey) _invLookupFocus(s);
+      const want = [..._invWanted(s)].filter(i => !s.parsed.has(i));
+      if (want.length) {
+        Promise.all(want.map(i => _invLoadShard(s, i)))
+          .then(() => _invMaybeApply(s), () => { /* the pump retries */ });
+      } else {
+        _invMaybeApply(s);
+      }
+      if (!s.pumping) _invPump(s);
+    }
+  }, 0);
+}
+
+function _invIdle() {
+  return new Promise(res => {
+    if (window.requestIdleCallback) requestIdleCallback(() => res(), { timeout: 1000 });
+    else setTimeout(res, 30);
+  });
+}
+
+/* Loader loop: the view's shards first (in parallel), then everything else
+ * in idle time, nearest first, two in flight (one downloads while the other
+ * parses, so the link never sits idle). Re-reads the view every turn, so a
+ * zip entered mid-load is served next. */
+const INV_BACKGROUND_PARALLEL = 2;
+async function _invPump(s) {
+  if (s.pumping) return;
+  s.pumping = true;
+  let tries = 0, bgErr = null;
+  const settle = () => Promise.race([...s.inflight.values()]).catch(() => {});
+  try {
+    while (!s.stopped && !s.failed && !s.done) {
+      try {
+        if (bgErr) { const e = bgErr; bgErr = null; throw e; }
+        const fp = focusedCarKey ? _invLookupFocus(s) : null;
+        const want = [..._invWanted(s)].filter(i => !s.parsed.has(i));
+        if (want.length || (fp && s.focus.shards === null)) {
+          await Promise.all(want.map(i => _invLoadShard(s, i)).concat(fp ? [fp] : []));
+          _invMaybeApply(s);
+          tries = 0;
+          continue;
+        }
+        _invMaybeApply(s);
+        if (s.done || s.stopped || s.failed) break;
+        if (s.inflight.size >= INV_BACKGROUND_PARALLEL) { await settle(); continue; }
+        const next = _invNextShard(s);
+        if (next == null) {
+          if (!s.inflight.size) break;      // all parsed (applied once pricing is in)
+          await settle();
+          continue;
+        }
+        await _invIdle();
+        if (s.stopped || s.parsed.has(next) || s.inflight.has(next)) continue;
+        _invLoadShard(s, next).then(() => { tries = 0; }, e => { bgErr = bgErr || e; });
+      } catch (e) {
+        if ((e && e.stale) || ++tries > 3) throw e;
+        await new Promise(r => setTimeout(r, 2000 * tries));
+      }
+    }
+  } catch (e) {
+    _invFail(s, e);
+  } finally {
+    s.pumping = false;
+  }
+}
+
+function _invStart(m, { source, cache, quiet, fresh }, pricingReady) {
+  // A background refresh (data already on screen) swaps in only once the
+  // whole new scan is loaded — the full file's quiet-swap behavior. A first
+  // load, an explicit refresh, an alert entry, or a screen the old session
+  // can't serve (failed, or a deep link its superseded scan can't look up)
+  // shows the new scan as soon as the view's shards are in.
+  const stuck = !!(_inv && (_inv.failed
+    || (focusedCarKey && _inv.focus && _inv.focus.key === focusedCarKey && _inv.focus.shards === 'stale')));
+  const swap = (quiet && liveLoaded && !fresh && !stuck) ? 'complete' : 'partial';
+  const s = {
+    m, source, cache, quiet: !!quiet, swap,
+    parsed: new Map(), inflight: new Map(), applied: new Set(), extras: {},
+    shardYards: m.shards.map(() => []),
+    partSetsP: null, partSets: null, focus: null,
+    pricingOk: false, pumping: false, shown: false, done: false, stopped: false, failed: null,
+  };
+  m.yardShard.forEach((sh, yi) => { if (s.shardYards[sh]) s.shardYards[sh].push(yi); });
+  s.shownP = new Promise((res, rej) => { s.onShown = res; s.onFail = rej; });
+  s.shownP.catch(() => { /* awaited (and handled) by loadShardedInventory */ });
+  if (_invNext) _invStop(_invNext);
+  if (swap === 'partial' && _inv) _inv.stopped = true;   // about to be replaced
+  _invNext = s;
+  pricingReady.then(() => { s.pricingOk = true; _invMaybeApply(s); });
+  _invPump(s);
+  return s;
+}
+
+function _invStop(s) {
+  s.stopped = true;
+  if (!s.shown && s.onFail) s.onFail(new Error('superseded'));
+}
+
+function _invFail(s, e) {
+  if (s.failed || s.stopped) return;
+  s.failed = e || new Error('inventory shards failed');
+  if (s === _invNext || !s.shown) {
+    if (_invNext === s) _invNext = null;
+    // The session it was replacing keeps the screen (and its loading).
+    if (_inv && _inv.stopped && !_inv.done && !_inv.failed) { _inv.stopped = false; _invPump(_inv); }
+    if (s.onFail) s.onFail(s.failed);
+    return;
+  }
+  // On screen: keep what's there, say the rest didn't load.
+  invUpdateProgress();
+  if (invViewPending()) renderLive();
+  if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
+  // A newer scan replaced these files mid-load: switch to it.
+  if (s.failed.stale) loadLiveInventory({ fresh: true, quiet: true }).catch(() => {});
+}
+
+/* Put a session's parsed shards on screen, in the full file's row order. */
+function _invApply(s) {
+  const m = s.m, all = new Array(m.vehicles);
+  for (const { vehicles, pos } of s.parsed.values()) {
+    for (let j = 0; j < vehicles.length; j++) all[pos[j]] = vehicles[j];
+  }
+  const inv = [];
+  for (let g = 0; g < all.length; g++) if (all[g]) inv.push(all[g]);
+  const complete = s.parsed.size === m.shards.length;
+  if (complete && inv.length !== m.vehicles) throw new Error('inventory shards overlap');
+  liveInventory = inv;
+  liveComplete = complete;
+  liveScrapedAt = m.scrapedAt;
+  applyPricesReviewed(m.pricesLastReviewed);
+  vehicleExtras = s.extras;
+  s.applied = new Set(s.parsed.keys());
+  if (complete) s.done = true;
+}
+
+/* Called whenever shards land or the view changes: promote a loading
+ * session to the screen once it can show the view, re-apply when the view
+ * gained shards, finish when the whole scan is in. */
+function _invMaybeApply(s) {
+  if (s.stopped || s.failed || s.done || !s.pricingOk) return;
+  const all = s.parsed.size === s.m.shards.length;
+  const promote = s === _invNext;
+  if (!promote && s !== _inv) return;
+  if (promote && !all && s.swap === 'complete') return;
+  if (!all) {
+    let fresh = !s.shown;
+    for (const i of _invWanted(s)) {
+      if (!s.parsed.has(i)) return;
+      if (!s.applied.has(i)) fresh = true;
+    }
+    if (!fresh) return;
+    // A deep link waits for its lookup, so the first screen is the car.
+    if (promote && focusedCarKey
+        && (!s.focus || s.focus.key !== focusedCarKey || s.focus.shards === null)) return;
+  }
+  const first = !s.shown;
+  const livePending = !first && all && invViewPending();
+  const yardsPending = !first && all && invViewPending({ focus: false });
+  try { _invApply(s); } catch (e) { _invFail(s, e); return; }
+  if (promote) {
+    if (_inv && _inv !== s) _inv.stopped = true;
+    _inv = s;
+    _invNext = null;
+  }
+  s.shown = true;
+  // First screen: like the full file's apply. The view gained shards: the
+  // user changed it and is waiting on exactly this, so render. The last
+  // regions arrived in the background: the same unobtrusive re-render as a
+  // background refresh (the user may be mid-scroll).
+  afterInventoryChange({ quiet: first ? s.quiet : (all ? true : false) });
+  hydratePhotos();
+  if (first) { _invShown(s); return; }
+  if (!all) return;
+  if (livePending) renderLive();
+  if (!s.quiet) {
+    // The first complete view of this scan: what a full-file load did up front.
+    checkAndNotify();
+    updateAlertsBadge();
+    if (document.getElementById('tab-alerts').classList.contains('active')) renderAlerts();
+  }
+  if ((!s.quiet || yardsPending) && document.getElementById('tab-yards').classList.contains('active')) renderYards();
+}
+
+function _invShown(s) {
+  if (s.onShown) s.onShown();
+  if (!s.cache) return;
+  // The next cold start draws from these (its shards were stored as they came).
+  if (s.source === 'net') {
+    s.cache.put(INV_MANIFEST_URL, new Response(JSON.stringify(s.m), { headers: { 'content-type': 'application/json' } }))
+      .catch(() => { /* quota */ });
+  }
+  // The pre-shard full-file copy is dead weight from here on.
+  s.cache.delete(INVENTORY_URL).catch(() => {});
+}
+
+/* Small status line while only part of the country is loaded. */
+function invUpdateProgress() {
+  const s = _inv;
+  const show = !!(s && s.shown && !s.done);
+  let el = document.getElementById('inv-progress');
+  if (!el) {
+    const anchor = document.getElementById('stale-banner');
+    if (!show || !anchor || !anchor.parentNode) return;
+    el = document.createElement('div');
+    el.id = 'inv-progress';
+    el.setAttribute('role', 'status');
+    anchor.parentNode.insertBefore(el, anchor.nextSibling);
+  }
+  if (!show) { el.style.display = 'none'; return; }
+  el.classList.toggle('failed', !!s.failed);
+  el.textContent = s.failed
+    ? 'Some far-away yards didn’t load — tap Refresh data to try again.'
+    : `Loading the rest of the inventory… ${s.parsed.size} of ${s.m.shards.length} regions`;
+  el.style.display = '';
+}
+
+/* Returns true when the shard path handled this load (rendered, or nothing
+ * new), false when the caller should use the full file (no manifest
+ * published, or the shards couldn't be loaded and nothing is on screen). */
+async function loadShardedInventory({ fresh = false, quiet = null } = {}, pricingReady) {
+  let cache = null;
+  try { if ('caches' in window) cache = await caches.open(DATA_CACHE); } catch (e) { cache = null; }
+  let shownAt = liveLoaded ? (liveScrapedAt || 'unknown') : null;
+
+  // Repeat launch: draw from the cached shards first, then revalidate.
+  if (!shownAt && cache) {
+    let cm = null;
+    try { const hit = await cache.match(INV_MANIFEST_URL); cm = hit ? await hit.json() : null; } catch (e) { cm = null; }
+    if (_invValidManifest(cm)) {
+      const s = _invStart(cm, { source: 'cache', cache, quiet: false }, pricingReady);
+      try { await s.shownP; shownAt = cm.scrapedAt; } catch (e) { /* incomplete cache — use the network */ }
+    }
+  }
+
+  let m = null;
+  try {
+    // 'no-cache' revalidates (a 304 when nothing changed). fresh: a push
+    // alert proves a newer scan exists — skip every cache layer, the CDN
+    // edge included (unique URL).
+    const r = await fetch(INV_MANIFEST_URL + (fresh ? '?t=' + Date.now() : ''),
+      { cache: fresh ? 'reload' : 'no-cache' });
+    if (r.ok) m = await r.json();
+  } catch (e) { m = null; }
+  if (!_invValidManifest(m)) return !!(shownAt && _inv);   // offline with shards on screen: stay quiet
+
+  if (shownAt && m.scrapedAt === shownAt) {
+    // Nothing new. Resume a background load that stalled (offline, flaky).
+    if (_inv && !_inv.done && _inv.failed && !_inv.failed.stale) {
+      _inv.failed = null;
+      _inv.stopped = false;
+      _invPump(_inv);
+      invUpdateProgress();
+    } else if (_inv && !_inv.done) {
+      invKick();
+    }
+    return true;
+  }
+
+  const s = _invStart(m, { source: 'net', cache, quiet: quiet != null ? quiet : !!shownAt, fresh }, pricingReady);
+  if (s.swap === 'complete') return true;   // background refresh: swaps in when complete
+  try {
+    await s.shownP;
+    return true;
+  } catch (e) {
+    // The CDN handed out a stale manifest next to newer shards: once more,
+    // straight from the origin.
+    if (e && e.stale && !fresh) return loadShardedInventory({ fresh: true, quiet }, pricingReady);
+    return !!shownAt;
+  }
+}
+
 /* ===== RESUME SELF-HEAL =====
  * The inventory only revalidated at launch, so an app resumed after hours in
  * the background kept presenting a superseded scan as live. On resume, if
@@ -1041,6 +1590,13 @@ document.addEventListener('resume', refreshIfStale);
 /* Coverage transparency: the yard count shown in the zip banner / footer is
  * computed from the live data, never hardcoded. */
 function coverageYardCount() {
+  // Radius-first: until the whole scan is in, count from the shard
+  // manifest's yards table (the same yards the full data will have).
+  if (!liveComplete && _inv) {
+    const m = _inv.m;
+    return new Set(m.yards.filter((y, i) => m.yardCount[i] > 0).map(y => y[0])
+      .filter(l => l && !yardDormant(l))).size;
+  }
   return new Set(liveInventory.map(v => v.location).filter(l => l && !yardDormant(l))).size;
 }
 /* Marketing surfaces (zip banner, header ticker, about copy) show a rounded
@@ -1068,12 +1624,14 @@ let _headTickerTimer = null;
 let _headTickerIdx = 0;
 function headTickerFacts() {
   const facts = [];
-  const cars = liveInventory.length;
+  // Radius-first: the national totals come from the shard manifest until
+  // the whole scan is in; the this-week count waits for it.
+  const cars = (!liveComplete && _inv) ? _inv.m.vehicles : liveInventory.length;
   const nDisp = yardCountDisplay();
   if (cars) facts.push(`${cars.toLocaleString()} CARS ON ROW`);
   if (nDisp) facts.push(`${nDisp} YARDS TRACKED`);
   const { fresh, near } = headTickerHeavy();
-  if (fresh) facts.push(`${fresh.toLocaleString()} SET OUT THIS WEEK`);
+  if (fresh && liveComplete) facts.push(`${fresh.toLocaleString()} SET OUT THIS WEEK`);
   if (near) facts.push(`${near} YARD${near === 1 ? '' : 'S'} IN YOUR RANGE`);
   const ts = Date.parse(liveScrapedAt || '');
   if (ts) {
@@ -2082,7 +2640,9 @@ function syncSavedCars() {
  * but says so quietly. Only judged once the inventory has loaded. */
 let _liveKeySet = null, _liveKeySetFor = null;
 function savedIsGone(key) {
-  if (!liveLoaded || !liveInventory.length) return false;
+  // Only the whole scan can say a car is gone (radius-first loads hold
+  // just the shards near you until the rest arrives).
+  if (!liveLoaded || !liveComplete || !liveInventory.length) return false;
   if (!_liveKeySet || _liveKeySetFor !== liveInventory) {
     _liveKeySet = new Set(liveInventory.map(vehicleKey));
     _liveKeySetFor = liveInventory;
@@ -2644,9 +3204,28 @@ function scrapedTitle() {
     : '\u2014';
 }
 
+/* Radius-first loading: this view's shards (or a deep-linked car's) are
+ * still on the way — say so instead of rendering a partial answer. */
+function renderLivePending() {
+  updateLiveFilterCount();
+  updateZipBanner();
+  const msg = _inv && _inv.failed
+    ? 'Couldn’t load the cars for this area. Check your connection and tap Refresh data.'
+    : focusedCarKey ? 'Finding that car&hellip;' : 'Loading cars near you&hellip;';
+  const skel = '<div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>';
+  document.getElementById('live-stats-bar').innerHTML = '';
+  document.getElementById('sale-strip').style.display = 'none';
+  document.getElementById('live-grid').innerHTML =
+    `<div class="skel-note" style="grid-column:1/-1;">${msg}</div>` + skel.repeat(3);
+}
+
 function renderLive() {
   updateFilterAvailability();
   if (!liveLoaded) return;
+  if (_inv && !liveComplete) {
+    invKick();
+    if (invViewPending()) { renderLivePending(); return; }
+  }
   populateYardFilter();
   refreshScopedInventory();   // make/model dropdowns follow the radius too
   const vehicles = getFilteredLive();
@@ -3586,6 +4165,17 @@ function renderYards() {
     document.getElementById('yards-zip-input').addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
     document.getElementById('yards-gps').addEventListener('click', useMyLocation);
     return;
+  }
+  // Radius-first loading: the yards in this radius may still be on the way.
+  if (_inv && !liveComplete) {
+    invKick();
+    if (invViewPending({ focus: false })) {
+      statsBar.innerHTML = '';
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><p>${_inv.failed
+        ? 'Couldn’t load the yards for this area. Check your connection and tap Refresh data.'
+        : 'Loading yards near you&hellip;'}</p></div>`;
+      return;
+    }
   }
 
   let view = getYardsView();
@@ -5941,8 +6531,18 @@ function updateWatchModelBtnLabel() {
  * lot when the watch was created — mark every current match as
  * already-alerted so only genuinely new arrivals notify. The backend does
  * the same for push/email (see handleWatchCreate). */
+const SEED_PENDING_KEY = 'jh_seed_pending';
 function seedAlertedForEntry(entry) {
   if (!liveLoaded) return;
+  if (!liveComplete) {
+    // Radius-first: only the shards near you are in. Seed again against the
+    // whole scan when it lands, so cars already sitting in far-away yards
+    // don't fire as "new" (persisted in case the app closes first).
+    try {
+      const p = JSON.parse(localStorage.getItem(SEED_PENDING_KEY) || '[]');
+      if (Array.isArray(p)) { p.push(entry); localStorage.setItem(SEED_PENDING_KEY, JSON.stringify(p)); }
+    } catch (e) { /* storage full/blocked */ }
+  }
   const alerted = loadAlerted();
   let n = 0;
   for (const v of liveInventory) {
@@ -5951,6 +6551,15 @@ function seedAlertedForEntry(entry) {
     if (!alerted[key]) { alerted[key] = new Date().toISOString(); n++; }
   }
   if (n) saveAlerted(alerted);
+}
+/* Watches added while only part of the scan was loaded: seed them against
+ * the whole scan (called once liveComplete, before any notification). */
+function flushPendingWatchSeeds() {
+  let p = null;
+  try { p = JSON.parse(localStorage.getItem(SEED_PENDING_KEY) || 'null'); } catch (e) { p = null; }
+  if (!p) return;
+  try { localStorage.removeItem(SEED_PENDING_KEY); } catch (e) { /* blocked */ }
+  if (Array.isArray(p)) p.forEach(e => { if (e && typeof e === 'object') seedAlertedForEntry(e); });
 }
 
 function addWatchItem() {

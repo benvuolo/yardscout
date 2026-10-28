@@ -87,6 +87,14 @@ def main() -> None:
     data["partSets"] = part_sets
     data["pricesLastReviewed"] = js.PRICES_LAST_REVIEWED
     args.out.write_text(json.dumps(data, separators=(",", ":")) + "\n")
+    if args.out.resolve() == INVENTORY.resolve():
+        # The app's radius-first shards (docs/data/inv/) carry the same part
+        # data — rewrite them too, or they'd keep serving the old partSets.
+        try:
+            extras = json.loads(js.EXTRAS_FILE.read_text()).get("extras", {})
+        except FileNotFoundError:
+            extras = {}
+        js._write_inventory_shards(data, extras)
     js.write_interchange_payload()  # part-first table follows every DB edit
     print(f"rows: {len(data['vehicles'])}  matched before: {was_matched}  "
           f"after: {now_matched}  partSets: {len(part_sets)}  -> {args.out}")
