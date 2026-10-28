@@ -1651,19 +1651,57 @@ function haversineMiles(lat1, lng1, lat2, lng2) {
   return 2 * R * Math.asin(Math.sqrt(a));
 }
 
-async function setZipCenter(zip) {
-  if (!/^\d{5}$/.test(zip)) { activeZipCoords = null; renderLive(); return; }
+/* ===== ZIP / POSTAL CODES =====
+ * US 5-digit zips, plus Canadian postal codes ("T2A 0A1" or just the
+ * first three, "T2A" — the forward sortation area, which is what the
+ * geocoder resolves). normalizePostal returns the canonical stored form
+ * and the geocoder path, or null while the entry is incomplete. */
+function normalizePostal(raw) {
+  const v = String(raw || '').trim().toUpperCase().replace(/\s+/g, '');
+  if (/^\d{5}$/.test(v)) return { code: v, path: 'us/' + v };
+  if (/^[A-Z]\d[A-Z](\d[A-Z]\d)?$/.test(v)) {
+    const fsa = v.slice(0, 3);
+    return { code: v.length === 6 ? fsa + ' ' + v.slice(3) : fsa, path: 'ca/' + fsa, key: 'CA:' + fsa };
+  }
+  return null;
+}
+/* Canadian visitors get a letter keyboard and "postal code" wording; the
+ * rest keep the numeric pad (a letter keyboard for a 5-digit zip is worse). */
+const POSTAL_CA = (() => {
   try {
-    if (!zipCoordsCache[zip]) {
-      const r = await fetch('https://api.zippopotam.us/us/' + zip);
+    if (/-CA$/i.test(navigator.language || '')) return true;
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    return /^America\/(Toronto|Montreal|Vancouver|Edmonton|Winnipeg|Halifax|Regina|St_Johns|Moncton|Glace_Bay|Goose_Bay|Whitehorse|Yellowknife|Iqaluit|Dawson_Creek|Fort_Nelson|Swift_Current|Rankin_Inlet|Atikokan|Thunder_Bay|Nipigon|Rainy_River|Cambridge_Bay|Inuvik|Creston|Blanc-Sablon)$/.test(tz);
+  } catch (e) { return false; }
+})();
+function applyPostalInputs() {
+  for (const id of ['zip-banner-input', 'live-zip', 'yards-zip', 'pf-zip', 'yards-zip-input']) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    el.maxLength = 7;
+    if (POSTAL_CA) {
+      el.setAttribute('inputmode', 'text');
+      el.setAttribute('autocapitalize', 'characters');
+      el.placeholder = /^e\.g\./.test(el.placeholder) ? 'e.g. T2A 0A1' : 'Postal code';
+    }
+  }
+}
+
+async function setZipCenter(zip) {
+  const pc = normalizePostal(zip);
+  if (!pc) { activeZipCoords = null; renderLive(); return; }
+  const cacheKey = pc.key || pc.code;
+  try {
+    if (!zipCoordsCache[cacheKey]) {
+      const r = await fetch('https://api.zippopotam.us/' + pc.path);
       if (!r.ok) throw new Error('zip not found');
       const p = (await r.json()).places[0];
-      zipCoordsCache[zip] = { lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) };
+      zipCoordsCache[cacheKey] = { lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) };
       localStorage.setItem('jh_zip_coords', JSON.stringify(zipCoordsCache));
     }
-    activeZipCoords = zipCoordsCache[zip];
-    track('zip-entered');
-    localStorage.setItem('jh_zip', zip);
+    activeZipCoords = zipCoordsCache[cacheKey];
+    track(pc.key ? 'zip-entered/ca' : 'zip-entered');
+    localStorage.setItem('jh_zip', pc.code);
     localStorage.removeItem('jh_gps');
     document.getElementById('live-zip').placeholder = 'e.g. 84101';
   } catch (e) {
@@ -2304,7 +2342,7 @@ function updateZipBanner() {
 }
 document.getElementById('zip-banner-go').addEventListener('click', () => {
   const zip = document.getElementById('zip-banner-input').value.trim();
-  if (!/^\d{5}$/.test(zip)) {
+  if (!normalizePostal(zip)) {
     document.getElementById('zip-banner-input').style.borderColor = 'var(--red)';
     setTimeout(() => { document.getElementById('zip-banner-input').style.borderColor = ''; }, 1500);
     return;
@@ -2917,7 +2955,7 @@ document.getElementById('live-zip').addEventListener('input', e => {
     renderLive();
     return;
   }
-  if (/^\d{5}$/.test(val)) setZipCenter(val);   // partial zips: wait, don't re-render per keystroke
+  if (normalizePostal(val)) setZipCenter(val);   // partial zips: wait, don't re-render per keystroke
 });
 document.getElementById('live-radius').addEventListener('change', () => {
   const sel = document.getElementById('live-radius');
@@ -2935,6 +2973,7 @@ document.getElementById('live-radius').addEventListener('change', () => {
   renderLive();
 });
 // Restore saved zip/radius/GPS center across visits
+applyPostalInputs();
 (() => {
   const savedZip = localStorage.getItem('jh_zip') || '';
   let savedRadius = localStorage.getItem('jh_radius');
@@ -3328,14 +3367,14 @@ function renderYards() {
         <h3>Where are you?</h3>
         <p>Yards are listed by distance from you. Set a zip code or use your location to see the yards nearby.</p>
         <div class="zip-banner-form" style="justify-content:center;">
-          <input type="text" id="yards-zip-input" inputmode="numeric" maxlength="5" placeholder="Zip code">
+          <input type="text" id="yards-zip-input" inputmode="${POSTAL_CA ? 'text' : 'numeric'}" maxlength="7" placeholder="${POSTAL_CA ? 'Postal code' : 'Zip code'}">
           <button type="button" class="btn btn-primary" id="yards-zip-go">Show yards</button>
         </div>
         <button type="button" class="btn gps-btn" id="yards-gps" style="margin-top:0.6rem;">${ICON.pin} Or use my location</button>
       </div>`;
     const go = () => {
       const zip = document.getElementById('yards-zip-input').value.trim();
-      if (/^\d{5}$/.test(zip)) {
+      if (normalizePostal(zip)) {
         document.getElementById('live-zip').value = zip;
         setZipCenter(zip).then(() => { updateZipBanner(); renderYards(); });
       }

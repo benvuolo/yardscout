@@ -93,11 +93,11 @@
     <div class="zip-banner" id="zip-banner" style="display:none;">
       <div class="zip-banner-text">
         <strong>Where are you?</strong>
-        <span>Enter your zip code and we&rsquo;ll show you what&rsquo;s in the self-service yards near you.</span>
+        <span>Enter your zip or postal code and we&rsquo;ll show you what&rsquo;s in the self-service yards near you.</span>
         <span class="zip-banner-coverage">Coverage: every major self-service chain &mdash; Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part &mdash; plus a growing set of independents: <strong class="coverage-count">210+</strong> yards nationwide. Missing your yard? <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">Tell us</a>.</span>
       </div>
       <div class="zip-banner-form">
-        <input type="text" id="zip-banner-input" inputmode="numeric" maxlength="5" placeholder="Zip code">
+        <input type="text" id="zip-banner-input" inputmode="numeric" maxlength="7" placeholder="Zip code">
         <button type="button" class="btn btn-primary" id="zip-banner-go">Show me</button>
       </div>
       <button type="button" class="btn gps-btn" id="zip-banner-gps"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Or use my location</button>
@@ -131,14 +131,14 @@
       </button>
     </div>
     <div class="controls" id="live-controls">
-      <div class="filters-hint" id="filters-need-zip">Enter a zip code (or use your location) to unlock filters.</div>
+      <div class="filters-hint" id="filters-need-zip">Enter a zip or postal code (or use your location) to unlock filters.</div>
       <div class="ctl-group">
         <div class="ctl-group-title">Where</div>
         <div class="ctl-group-grid">
           <div class="ctl">
             <label for="live-zip">Zip code</label>
             <div style="display:flex;gap:0.4rem;">
-              <input type="text" id="live-zip" inputmode="numeric" maxlength="5" placeholder="e.g. 84101" title="Center point for distance filter" style="flex:1;min-width:0;">
+              <input type="text" id="live-zip" inputmode="numeric" maxlength="7" placeholder="e.g. 84101" title="Center point for distance filter" style="flex:1;min-width:0;">
               <button type="button" class="gps-btn" id="live-gps" title="Use my current location"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></button>
             </div>
           </div>
@@ -256,7 +256,7 @@
         <div class="ctl-group-grid">
           <div class="ctl">
             <label for="yards-zip">Zip code</label>
-            <input type="text" id="yards-zip" inputmode="numeric" maxlength="5" placeholder="e.g. 84101" title="Re-center distances on a different zip code">
+            <input type="text" id="yards-zip" inputmode="numeric" maxlength="7" placeholder="e.g. 84101" title="Re-center distances on a different zip code">
           </div>
           <div class="ctl">
             <label for="yards-radius">Within</label>
@@ -341,7 +341,7 @@
         <div class="pf-grid pf-where">
           <div class="pf-ctl">
             <label for="pf-zip">Zip code</label>
-            <input type="text" id="pf-zip" inputmode="numeric" maxlength="5" placeholder="e.g. 84101" title="Center point for the donor search &mdash; shared with the Cars and Yards tabs">
+            <input type="text" id="pf-zip" inputmode="numeric" maxlength="7" placeholder="e.g. 84101" title="Center point for the donor search &mdash; shared with the Cars and Yards tabs">
           </div>
           <div class="pf-ctl">
             <label for="pf-radius">Within</label>
