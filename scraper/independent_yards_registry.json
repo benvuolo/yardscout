@@ -454,7 +454,8 @@
           "city": "Belleville",
           "state": "MI",
           "lat": 42.1726,
-          "lng": -83.5419
+          "lng": -83.5419,
+          "retired": "2026-10-28: delisted on fenixupull.com (not in the location switcher; /belleville-mi/ renders null address/phone); its 895 /recent-inventory/ rows are frozen at 2024-05-24. Skipped via FENIX_RETIRED_LOCATIONS + RETIRED_YARDS."
         }
       ]
     },
