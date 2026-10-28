@@ -5957,16 +5957,16 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
   const platform = forced || (isIOS ? 'ios' : (isAndroid ? 'android' : null));
   if (!platform) return; // desktop: unchanged
   if (!forced && (standalone || localStorage.getItem('ys_app_promo') === '1')) return;
-  // First visit is for the cars, not the install pitch: show from the
-  // second visit on.
-  let visits = 0;
-  try { visits = parseInt(localStorage.getItem('jh_visits') || '0', 10) + 1; localStorage.setItem('jh_visits', String(visits)); } catch (e) { visits = 2; }
-  if (visits < 2) return;
+  // Shown from the FIRST visit (2026-10-28): Apple's Smart App Banner is
+  // hidden for good once swiped away and never appears outside Safari, so
+  // this is the one pointer a phone visitor reliably sees. Dismiss sticks.
+  try { localStorage.setItem('jh_visits', String(parseInt(localStorage.getItem('jh_visits') || '0', 10) + 1)); } catch (e) { /* private mode */ }
   const el = document.getElementById('app-promo');
   if (!el) return;
   const link = document.getElementById('app-promo-link');
   link.href = platform === 'android' ? PLAY_URL : APP_STORE_URL;
-  link.textContent = platform === 'android' ? 'Google Play' : 'App Store';
+  link.textContent = platform === 'android' ? 'Get the Android app' : 'Get the iPhone app';
+  document.querySelector('#app-promo .app-promo-text strong').textContent = platform === 'android' ? 'YardScout is on Google Play' : 'YardScout is on the App Store';
   el.style.display = '';
   document.getElementById('app-promo-close').addEventListener('click', () => {
     localStorage.setItem('ys_app_promo', '1');
