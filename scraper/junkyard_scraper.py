@@ -17511,8 +17511,30 @@ ARIO_CHAINS: dict[str, dict] = {
              "lat": 32.5288, "lng": -93.7695},
         ],
     },
-    # NOT HERE (2026-10-26, see EXPANSION_CANDIDATES.md §8.6.2): Paul's Auto
-    # Yard ×10 and Carolina Pick N Pull ×3 exist in the legacy Bubble org
+    # Paul's Auto Yard (NW Indiana) — owner-approved 2026-10-28. Now live on
+    # the new Ario backend (hollander_html_sync from Paul's Hollander store):
+    # counts move scan to scan, but NO row carries date_placed, so these cars
+    # never show a set-out date or "new this week" and the stale-yard check
+    # can't fire for them. Pins: org geocodes; DeMotte from OSM (901 Orchid St).
+    "paulsautoyard": {
+        "label": "Paul's Auto Yard (IN)",
+        "yards": [
+            {"slug": "pauls-auto-yard-westville-in", "code": "westville",
+             "name": "Paul's Auto Yard - Westville", "city": "Westville", "state": "IN",
+             "lat": 41.5447, "lng": -86.9051},
+            {"slug": "pauls-auto-yard-lake-station-in", "code": "lakestation",
+             "name": "Paul's Auto Yard - Lake Station", "city": "Lake Station", "state": "IN",
+             "lat": 41.5886, "lng": -87.2661},
+            {"slug": "pauls-auto-yard-merrillville", "code": "merrillville",
+             "name": "Paul's Auto Yard - Merrillville", "city": "Merrillville", "state": "IN",
+             "lat": 41.4998, "lng": -87.3361},
+            {"slug": "pauls-auto-yard-demotte", "code": "demotte",
+             "name": "Paul's Auto Yard - DeMotte", "city": "DeMotte", "state": "IN",
+             "lat": 41.1936, "lng": -87.1792},
+        ],
+    },
+    # NOT HERE (2026-10-26, see EXPANSION_CANDIDATES.md §8.6.2; Paul's 4 live
+    # yards were added 2026-10-28 above): Paul's Auto Yard ×10 and Carolina Pick N Pull ×3 exist in the legacy Bubble org
     # table but are "Yard not found" on the live backend, and their Bubble
     # rows are one-time dumps (Paul's: Mar–Oct 2025; Carolina: 2024). Their
     # real inventory is elsewhere (Carolina: own WordPress search on
