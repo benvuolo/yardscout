@@ -1698,6 +1698,15 @@
     font-weight: 700;
     font-size: 0.8125rem;
   }
+  /* Radius-first loading: the cars near you are in, the rest is streaming. */
+  #inv-progress {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-dim);
+    padding: 0 0.1rem;
+    margin: -0.25rem 0 0.6rem;
+  }
+  #inv-progress.failed { color: var(--accent); }
 
   /* ===== Native-app promo (replaces the old iOS install hint) ===== */
   #app-promo {

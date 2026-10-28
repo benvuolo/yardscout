@@ -21727,6 +21727,34 @@ def _write_inventory_meta(payload: dict) -> None:
         separators=(",", ":")))
 
 
+def _write_inventory_shards(payload: dict, extras: dict) -> None:
+    """docs/data/inv/ — the same scan cut into geographic shards so the app
+    can render the cars near the user before the rest has downloaded (see
+    inventory_shards.py). Written IN ADDITION to inventory_live.json, which
+    stays the complete file every other reader uses. Never fatal: on any
+    failure the shard manifest is removed, so the app falls back to the full
+    file instead of serving a previous scan's shards."""
+    try:
+        try:
+            import inventory_shards as _shards
+        except ImportError:
+            from scraper import inventory_shards as _shards  # pragma: no cover
+    except Exception as e:  # noqa: BLE001
+        print(f"  [inv shards] skipped: {e}", file=sys.stderr)
+        try:
+            (DATA_DIR / "inv" / "manifest.json").unlink()
+        except FileNotFoundError:
+            pass
+        return
+    try:
+        info = _shards.write_inventory_shards(payload, extras, DATA_DIR)
+        print(f"  [inv shards] {info['shards']} shards, {info['minShard']}-{info['maxShard']} vehicles each",
+              file=sys.stderr)
+    except Exception as e:  # noqa: BLE001
+        print(f"  [inv shards] FAILED ({e}) — manifest removed, app uses the full file", file=sys.stderr)
+        _shards.remove_inventory_shards(DATA_DIR)
+
+
 LANDED_DAYS = 7
 LANDED_PER_MAKE = 250
 
@@ -22692,6 +22720,7 @@ def main():
                         {"version": 1, "scrapedAt": payload["scrapedAt"],
                          "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
                          "extras": extras}, separators=(",", ":")))
+                    _write_inventory_shards(payload, extras)
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})")
                     print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}")
                     write_interchange_payload()
@@ -22736,6 +22765,7 @@ def main():
                     {"version": 1, "scrapedAt": payload["scrapedAt"],
                      "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
                      "extras": extras}, separators=(",", ":")))
+                _write_inventory_shards(payload, extras)
                 if not args.json:
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})", file=sys.stderr)
                     print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}", file=sys.stderr)
