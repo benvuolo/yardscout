@@ -1619,8 +1619,9 @@
   /* Card footer: yard link left, VIN + scan time right — the reference
      data you need at the yard, out of the way of the browse view. */
   .car-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem 0.75rem; margin-top: 0.6rem; }
-  .car-footer-meta { white-space: nowrap; font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-dim); opacity: 0.85; }
+  .car-footer-meta { display: flex; flex-wrap: wrap; column-gap: 0.6rem; font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-dim); opacity: 0.85; }
   .car-footer-meta .btn-copy-vin { vertical-align: middle; }
+  .car-footer-meta > * { white-space: nowrap; }
   /* Spec line: what the car is, in the UI face at body size (not mono). */
   .car-spec-line { font-size: 0.8125rem; color: var(--text); margin-top: 0.35rem; line-height: 1.4; }
   .spec-vin { font-weight: 600; }

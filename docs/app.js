@@ -2537,6 +2537,14 @@ function scrapeAgoLabel() {
   const hrs = Math.floor((Date.now() - new Date(liveScrapedAt)) / 3.6e6);
   return hrs < 1 ? 'just now' : hrs < 48 ? `${hrs}h ago` : `${Math.round(hrs / 24)}d ago`;
 }
+/* Card footer form: "5:37 AM" when the scan was today, else "Oct 27". */
+function scrapedShort() {
+  if (!liveScrapedAt) return '\u2014';
+  const d = new Date(liveScrapedAt);
+  return d.toDateString() === new Date().toDateString()
+    ? d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })
+    : d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
 function scrapedTitle() {
   return liveScrapedAt
     ? new Date(liveScrapedAt).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
@@ -2706,7 +2714,7 @@ function renderLive() {
     // inventory has no per-yard scan time (yard_health.json isn't loaded
     // here), so this is the global scrapedAt in the viewer's local time.
     const scanLine = liveScrapedAt
-      ? `<span class="scan-stamp" title="When YardScout last scanned the yards — cars can leave between scans">scanned ${escapeHtml(scrapedTitle())}</span>`
+      ? `<span class="scan-stamp" title="When YardScout last scanned the yards (${escapeHtml(scrapedTitle())}) — cars can leave between scans">scanned ${escapeHtml(scrapedShort())}</span>`
       : '';
 
     let cardStyle = '', profitLine = '', partsBlock = '';
@@ -2899,7 +2907,7 @@ function renderLive() {
         <div class="car-meta">${whenBits.join(' &middot; ')}${vm.warn}</div>
         ${profitLine}
         ${partsBlock}
-        <div class="car-footer">${yardSiteLinkHtml(v)}<span class="car-footer-meta">${vm.vin}${vm.vin && scanLine ? ' &middot; ' : ''}${scanLine}</span></div>
+        <div class="car-footer">${yardSiteLinkHtml(v)}<span class="car-footer-meta">${vm.vin}${scanLine}</span></div>
       </div>`;
   }).join('') + (overflow
     ? `<div class="empty-state" style="grid-column:1/-1;padding:1rem;"><p>Showing first ${RENDER_CAP} of ${vehicles.length.toLocaleString()} vehicles &mdash; narrow with search or filters (results stay fully sorted).</p></div>`
