@@ -739,3 +739,71 @@ Notes / follow-ups (docs/app.js untouched in this branch):
 - Registry: `BYOT Auto Parts` and `Wilbert's U-Pull-It` inserted after Polk
   County (`adapter-built`), `Ewe Pullet (Nordstrom's)` as `candidate`;
   `INDEPENDENT_EXPECTED_SOURCES` gains `byot` and `wilberts`.
+
+## 2026-10-28 — iis-pro-upull + CRUSH static-table wave (U-Pull-It WA ×3, AESOP Tulsa, Midway ×2, Hwy 82, Route 34, Sunshine; iPull Idaho Falls blocked; U-Pull-R via Ario not added)
+
+Two single-site adapters became config-driven, then gained tenants (yard-hunt
+2026-10-27 §1c / §2):
+
+- **iis-pro-upull**: `fetch_papva_inventory` → `IIS_UPULL_SITES` +
+  `fetch_iis_upull_site(source)`. Per tenant: page URL template, optional URG
+  `&id=` filters (one deck per id), card Location → yard map, pacing (≥2 s),
+  page size. The Set Date field is now optional in the card regex: go2upullit
+  cards have none, so their `dateAdded` stays `""` (no invented dates).
+  Card counts per page vary on the new tenants (go2upullit: 317/480/488/…),
+  so for them the adapter follows the deck's own pager to its last page; a
+  page with no new stock numbers also stops the deck.
+- **CRUSH static table**: `fetch_barrys_inventory` → `CRUSH_TABLE_SITES` +
+  `fetch_crush_table_site(source)`. Header-driven: `<th>` labels map to
+  fields (`_CRUSH_TABLE_FIELDS`), so VIN and Stock # are read when the
+  tenant has them. Table id is `vehicles` or `crush-inventory`. Ids: stock if
+  present, else VIN (`vin_id`), else Barry's row hash. `max_age_days` drops
+  ghost rows.
+
+**Byte-identical checks** (old and new functions run on the same saved
+pages, output compared as JSON bytes): Pick-A-Part VA, live crawl of
+2026-10-28 (15 pages): 7,330 rows, same sha1, same request sequence. Also a
+synthetic deck (cards without Set Date or with a blank one, short page 2):
+497 rows identical. A blocked page-1 case falling back to the snapshot:
+7,324 rows identical. Barry's, live page: 653 rows identical. A synthetic
+page (stock-less duplicate rows, a bad year, a short row): identical.
+Pick-A-Part VA keeps its legacy `HEADERS` and its curl_cffi fallback
+(`cffi_fallback`, PAPVA only). Barry's keeps `HEADERS`. The new tenants send
+`YARDSCOUT_HEADERS`, which uses the honest YardScout UA. None of them may
+set `cffi_fallback`.
+
+| Yard | Source | Live count (2026-10-28) | VIN | Newest dateAdded |
+|---|---|---|---|---|
+| U-Pull-It Auto Parts — Pasco WA (802 S Oregon Ave) | `upullitwa` | 834 | 100% | — (no dates on cards) |
+| U-Pull-It Auto Parts — Kennewick WA (34508 S Piert Rd) | `upullitwa` | 848 | 99% | — |
+| U-Pull-It Auto Parts — Yakima WA (14 E Washington Ave) | `upullitwa` | 788 | 99% | — |
+| AESOP U-Pull — Tulsa OK (13802 E Apache St; `&id=OO95`) | `aesop` | 1,064 | 99% | 2026-10-27 |
+| Midway U-Pull — Muncie, Kansas City KS (6345 Kansas Ave; `MO38`) | `midwayupull` | 419 | 100% | 2026-10-23 |
+| Midway U-Pull — Liberty MO (1101 Old State Hwy 210; `MO09`) | `midwayupull` | 344 | 100% | 2026-10-23 |
+| Hwy 82 Pick & Pay — Poulan GA | `hwy82` | 789 | 0% | 2026-10-22 |
+| Route 34 U-Pull-M — Auburn NY | `route34` | 364 | 98% | 2026-10-26 |
+| Sunshine Auto Salvage — Orangeburg SC | `sunshine` | 745 (2,355 rows >120 d dropped) | 0% | 2026-10-27 |
+
+First Washington and first Kansas coverage. Pins come from Nominatim: exact
+for Pasco, Yakima, Muncie, Liberty, Route 34 and Sunshine. Kennewick (99337),
+Tulsa (74116) and Idaho Falls (83401) use zip centroids. Poulan uses the town
+centroid.
+
+Not built:
+- **iPull by Intermountain Auto (Idaho Falls ID)**: every page request with
+  the YardScout UA got HTTP 500 (a hosting-panel error page) while robots.txt
+  answered 200. Not worked around. Registry entry `blocked`, and the config is
+  in a NOT HERE comment.
+- **U-Pull-R East Bethel / Toledo via Ario**: not added. Ario's own yard
+  records for both have `inventory_source: upullrparts_ajax_sync`, with
+  `claimed: false`, no owner, created 2026-07-27 together with Ario's Pick-n-Pull
+  (`row52_odata_sync`), Pull-A-Part and PYP mirrors. That points to Ario
+  syncing U-Pull-R's own admin-ajax endpoint, the one that 403s us, rather
+  than to a vendor feed U-Pull-R chose. Rosemount is absent from Ario, and
+  its newest rows were 2026-10-06. Owner call.
+
+Follow-ups (docs/app.js untouched in this branch): `gen_yard_site_links.py`
+ENTRIES were added for the new yards. Two existing ones were fixed: Memphis
+and Millington had been falling through to the IA/NE "U-Pull-It" link, and
+Buddy's, Marion County, 662, CP's and Genesis had no entry, which made
+`validate()` exit. A regeneration pass will write them into app.js.

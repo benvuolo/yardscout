@@ -83,6 +83,12 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
      "tier 3 only: recycled stock ids + no photos make per-car links useless, "
      "and the site's Sucuri challenge blocks cheap verification of filters"),
     (r"^indy[\s-]*u[\s-]*pull", "Indy-U-Pull-It", None, ""),
+    # Two unrelated "U-Pull-It Auto Parts" chains (WA iis-pro-upull, TN CRUSH
+    # MVC) must be matched before the IA/NE catch-all below.
+    (r"^u-pull-it auto parts - (pasco|kennewick|yakima)", "U-Pull-It Auto Parts (WA)", None,
+     "go2upullit.com: 3 WA yards share one inventory deck"),
+    (r"^u-pull-it auto parts - (memphis|millington)", "U-Pull-It Auto Parts", None,
+     "upullitap.com (TN); was falling through to the IA/NE entry"),
     (r"^u[\s-]*pull[\s-]*it\b", "U-Pull-It (IA/NE)", None,
      "anchored: Budget/Indy/Harry's/Rupert's/Pipes U-Pull-Its differ upfront"),
     (r"^rupert", "Rupert's U-Pull-It", None, "tier 2 handles cars with a make"),
@@ -127,6 +133,13 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^trusty pick-a-part", "Trusty Pick-A-Part", None, ""),
     (r"^m&m u-pull-it", "M&M U-Pull-It", None, ""),
     (r"^polk county pick and pay", "Polk County Pick and Pay", None, ""),
+    # (2026-10-28: these 10-27 tenants were live without a tier-3 entry,
+    # which made validate() exit; registry URLs already existed.)
+    (r"^buddy'?s upull", "Buddy's Upull", None, ""),
+    (r"^marion county auto parts", "Marion County Auto Parts", None, ""),
+    (r"^662 self serve", "662 Self Serve Auto Parts", None, ""),
+    (r"^cp'?s u-pull-it", "CP's U-Pull-It", None, ""),
+    (r"^genesis metal recycling", "Genesis Metal Recycling", None, ""),
     # --- yardconnect-pro tenants (2026-10-27) — whole-lot table pages, no deep links ---
     (r"^chuck & eddie'?s", "Chuck & Eddie's Self Service", None,
      "Southington self-service lot only (New Haven/Hartford are full-service)"),
@@ -150,6 +163,13 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
      "BYOT per-location inventory page"),
     (r"^wilbert'?s u-pull-it", "Wilbert's U-Pull-It", None,
      "3 NY yards share one search page (location picker on the page)"),
+    # --- 2026-10-28 iis-pro-upull + CRUSH static-table wave ---
+    (r"^aesop u-pull", "AESOP Self Serve", None, "Tulsa deck (&id=OO95)"),
+    (r"^midway u-pull", "Midway U-Pull", None,
+     "Muncie + Liberty share one site (location picker on the page)"),
+    (r"^hwy 82 pick", "Hwy 82 Pick & Pay", None, ""),
+    (r"^route 34 u-pull-m", "Route 34 U-Pull-M", None, ""),
+    (r"^sunshine auto salvage", "Sunshine Auto Salvage", None, ""),
 ]
 
 

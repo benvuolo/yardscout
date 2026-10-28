@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-27",
+  "updated": "2026-10-28",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked | retired | directory-only. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -2298,6 +2298,216 @@
           "state": "NC",
           "lat": 36.4012,
           "lng": -79.987
+        }
+      ]
+    },
+    {
+      "name": "U-Pull-It Auto Parts (WA)",
+      "status": "adapter-built",
+      "platform": "wordpress + iis-pro-upull plugin (URG-hosted; server-rendered card deck) - config-driven adapter IIS_UPULL_SITES['upullitwa']",
+      "website": "https://go2upullit.com",
+      "inventory_url": "https://go2upullit.com/search-inventory/",
+      "api": {
+        "endpoint": "https://go2upullit.com/inventory/ANY/ANY/?k=1&pagenum={n}",
+        "method": "GET",
+        "auth": "none",
+        "format": "html card deck (Stock, Year, Make/Model, Vin, Location, Row; NO Set Date)",
+        "requests_per_scan": "~6 at 2.5s",
+        "notes": "3 WA yards in one deck (upullurgid 'JJ65,UU44,UU43'), split by the card Location value (U Pull It Pasco/Kennewick/Yakima). Cards per page vary (230-490), so the adapter follows the pager to its last page. No set-out date on the cards (only a 'Fresh Set' badge) -> dateAdded is left empty. 2,470 cars on 2026-10-28, VIN ~99%. First Washington coverage. Not related to the TN 'U-Pull-It Auto Parts' (upullitap.com) despite the name. Kennewick (34508 S Piert Rd) is not in OSM -> 99337 zip centroid; Pasco and Yakima exact."
+      },
+      "update_freshness": "live (no dates on cards; deck changes daily)",
+      "robots": "allow * (wp-admin excepted); blocks AI-training crawlers by name",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "U-Pull-It Auto Parts - Pasco",
+          "city": "Pasco",
+          "state": "WA",
+          "lat": 46.2261,
+          "lng": -119.0772
+        },
+        {
+          "name": "U-Pull-It Auto Parts - Kennewick",
+          "city": "Kennewick",
+          "state": "WA",
+          "lat": 46.1824,
+          "lng": -119.134
+        },
+        {
+          "name": "U-Pull-It Auto Parts - Yakima",
+          "city": "Yakima",
+          "state": "WA",
+          "lat": 46.5704,
+          "lng": -120.4914
+        }
+      ]
+    },
+    {
+      "name": "AESOP Self Serve",
+      "status": "adapter-built",
+      "platform": "wordpress + iis-pro-upull plugin (URG-hosted; server-rendered card deck) - config-driven adapter IIS_UPULL_SITES['aesop']",
+      "website": "https://aesopselfserve.com",
+      "inventory_url": "https://aesopselfserve.com/inventory/ANY/ANY/?k=1&id=OO95",
+      "api": {
+        "endpoint": "https://aesopselfserve.com/inventory/ANY/ANY/?k=1&id=OO95&pagenum={n}",
+        "method": "GET",
+        "auth": "none",
+        "format": "html card deck with Set Date (ISO)",
+        "requests_per_scan": "~3 at 2.5s",
+        "notes": "Tulsa yard of the AESOP/Midway group (upullurgid 'MO38,MO09,OO95'); the site's own per-yard filter &id=OO95 is used (Muncie/Liberty return 0 cards here - see Midway U-Pull). 1,064 cars on 2026-10-28, newest set date 2026-10-27, VIN ~99%. 13802 E Apache St is not house-numbered in OSM -> 74116 zip centroid."
+      },
+      "update_freshness": "live (same-day set dates observed)",
+      "robots": "allow * (wp-admin excepted); blocks AI-training crawlers by name",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "AESOP U-Pull - Tulsa",
+          "city": "Tulsa",
+          "state": "OK",
+          "lat": 36.1716,
+          "lng": -95.8327
+        }
+      ]
+    },
+    {
+      "name": "Midway U-Pull",
+      "status": "adapter-built",
+      "platform": "wordpress + iis-pro-upull plugin (URG-hosted; server-rendered card deck) - config-driven adapter IIS_UPULL_SITES['midwayupull']",
+      "website": "https://midwayupull.com",
+      "inventory_url": "https://midwayupull.com/inventory/ANY/ANY/?k=1",
+      "api": {
+        "endpoint": "https://midwayupull.com/inventory/ANY/ANY/?k=1&id={MO38|MO09}&pagenum={n}",
+        "method": "GET",
+        "auth": "none",
+        "format": "html card deck with Set Date (ISO)",
+        "requests_per_scan": "2 at 2.5s (one page per yard today)",
+        "notes": "Muncie (6345 Kansas Ave, Kansas City KS; &id=MO38) and Liberty MO (1101 Old State Hwy 210; &id=MO09). 419 + 344 cars on 2026-10-28, newest set date 2026-10-23. First Kansas coverage. Both addresses geocode exactly."
+      },
+      "update_freshness": "live (set dates within the week)",
+      "robots": "allow * (wp-admin excepted); blocks AI-training crawlers by name",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Midway U-Pull - Muncie (Kansas City)",
+          "city": "Kansas City",
+          "state": "KS",
+          "lat": 39.0876,
+          "lng": -94.7257
+        },
+        {
+          "name": "Midway U-Pull - Liberty",
+          "city": "Liberty",
+          "state": "MO",
+          "lat": 39.2006,
+          "lng": -94.402
+        }
+      ]
+    },
+    {
+      "name": "Hwy 82 Pick & Pay",
+      "status": "adapter-built",
+      "platform": "wordpress; CRUSH export server-rendered as one static <table id=\"vehicles\"> (Barry's family) - config-driven adapter CRUSH_TABLE_SITES['hwy82']",
+      "website": "https://hwy82pp.com",
+      "inventory_url": "https://hwy82pp.com/search-inventory/",
+      "api": {
+        "endpoint": "https://hwy82pp.com/search-inventory/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html table#vehicles (Year, Make, Model, Color, Engine, Row, Arrival Date, Location)",
+        "requests_per_scan": "1",
+        "notes": "~790 rows, 'Updated: MM/DD/YY' stamp daily. No VIN / stock column -> row-hash ids (Barry's rule). Their Ario org has 0 rows, so the site is the source. 455 Hwy 82 NW is not in OSM -> Poulan town centroid."
+      },
+      "update_freshness": "live (arrival dates within the week)",
+      "robots": "allow * (wp-admin excepted)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Hwy 82 Pick & Pay - Poulan",
+          "city": "Poulan",
+          "state": "GA",
+          "lat": 31.5132,
+          "lng": -83.7886
+        }
+      ]
+    },
+    {
+      "name": "Route 34 U-Pull-M",
+      "status": "adapter-built",
+      "platform": "wordpress; CRUSH export server-rendered as one static <table id=\"crush-inventory\"> (Barry's family) - config-driven adapter CRUSH_TABLE_SITES['route34']",
+      "website": "https://route34upullm.com",
+      "inventory_url": "https://route34upullm.com/inventory/",
+      "api": {
+        "endpoint": "https://route34upullm.com/inventory/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html table#crush-inventory (Year, Make, Model, VIN, Color, Row, Arrival Date)",
+        "requests_per_scan": "1",
+        "notes": "~365 rows, VIN on ~98% -> VIN ids (row hash when the VIN is missing). 6983 North Street Road geocodes exactly."
+      },
+      "update_freshness": "live (arrival dates within the week)",
+      "robots": "allow * (wp-admin excepted)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Route 34 U-Pull-M - Auburn",
+          "city": "Auburn",
+          "state": "NY",
+          "lat": 42.9556,
+          "lng": -76.5653
+        }
+      ]
+    },
+    {
+      "name": "Sunshine Auto Salvage",
+      "status": "adapter-built",
+      "platform": "wordpress; CRUSH export server-rendered as one static <table id=\"vehicles\"> (Barry's family) - config-driven adapter CRUSH_TABLE_SITES['sunshine']",
+      "website": "https://sunshineautosalvage.com",
+      "inventory_url": "https://sunshineautosalvage.com/vehicle-inventory/",
+      "api": {
+        "endpoint": "https://sunshineautosalvage.com/vehicle-inventory/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html table#vehicles (Year, Make, Model, Color, Engine, Vehicle Row, Arrival Date)",
+        "requests_per_scan": "1",
+        "notes": "~3,100 rows but most are 2021 ghosts the export never removed: rows older than 120 days are dropped (max_age_days), leaving ~745 on 2026-10-28. No VIN / stock column -> row-hash ids. 228 Southland Rd geocodes exactly (OSM landuse 'Sunshine Auto Salvage')."
+      },
+      "update_freshness": "live (arrival dates to the previous day), plus stale ghost rows filtered by age",
+      "robots": "allow all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Sunshine Auto Salvage - Orangeburg",
+          "city": "Orangeburg",
+          "state": "SC",
+          "lat": 33.4752,
+          "lng": -80.8787
+        }
+      ]
+    },
+    {
+      "name": "iPull by Intermountain Auto",
+      "status": "blocked",
+      "platform": "wordpress; CRUSH export server-rendered as one static <table id=\"vehicles\"> (Barry's family) - config-driven adapter CRUSH_TABLE_SITES['ifipull'] (config not wired)",
+      "website": "https://ifipull.com",
+      "inventory_url": "https://ifipull.com/inventory/",
+      "api": {
+        "endpoint": "https://ifipull.com/inventory/",
+        "method": "GET",
+        "auth": "none",
+        "format": "html table#vehicles (Year, Make, Model, Reference, VIN, Color, Stock #, Vehicle Row, Arrival Date)",
+        "requests_per_scan": "1",
+        "notes": "BLOCKED 2026-10-28: every page request with the YardScout User-Agent returns HTTP 500 (hosting-panel error page) while robots.txt answers 200 - the host filters our UA. Not worked around. The 2026-10-27 scout saw ~545 rows ('Inventory Updated: 10/27/26'). Re-check later; the adapter config is in a NOT HERE comment under CRUSH_TABLE_SITES. 3015 N 15th E is not in OSM -> 83401 zip centroid."
+      },
+      "update_freshness": "unknown (blocked)",
+      "robots": "only /cgi-bin/ and /tmp/ disallowed",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "iPull by Intermountain Auto - Idaho Falls",
+          "city": "Idaho Falls",
+          "state": "ID",
+          "lat": 43.5111,
+          "lng": -112.0058
         }
       ]
     }

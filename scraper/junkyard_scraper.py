@@ -16111,137 +16111,325 @@ def refresh_nvpap_pricing_file() -> Path:
     return path
 
 
+# ---- iis-pro-upull (URG-hosted WordPress plugin) multi-tenant config ---------
+# Generalized from the Pick-A-Part VA single-site adapter (2026-10-28). Every
+# tenant is the same plugin: GET {site}/inventory/ANY/ANY/?k=1[&id=URGID]
+# &pagenum=N server-renders a deck of cards (Stock, Year, Make/Model, Vin,
+# Location, Row, and — on most tenants — Set Date). Fingerprint: the page's
+# inline `upullurgid = '...'` (comma-separated URG yard ids).
+#   page_url   template with {urg_q} ("" or "&id=URGID") and {n} (page number)
+#   urg_ids    per-yard `&id=` filters; [None] = one unfiltered deck. A
+#              multi-yard tenant can split the deck by id (AESOP/Midway) or
+#              serve all yards in one deck tagged by Location (go2upullit).
+#   yards      card Location value -> yard (unmapped locations are skipped
+#              and logged, never guessed)
+#   page_size  fixed cards-per-page; a shorter page is the last. None = page
+#              sizes vary, so follow the deck's pager to its last page instead
+#   id_fmt     vehicle id template ({source}, {code}, {stock} lowercased)
+#   require_set_date  drop cards with no Set Date (Pick-A-Part VA's original
+#              regex required it; kept so its output is unchanged). Others
+#              keep undated cards with dateAdded "" — never an invented date.
+#   headers    request headers. New tenants send YARDSCOUT_HEADERS (honest
+#              YardScout UA); Pick-A-Part VA keeps the scan's legacy HEADERS.
+#   cffi_fallback  Pick-A-Part VA ONLY (pre-existing behaviour, untouched by
+#              the generalization): curl_cffi fallback when the plain fetch is
+#              challenged. New tenants must not set it — a tenant that blocks
+#              plain requests is dropped, not worked around.
+# One INDEPENDENT_FETCHERS entry per HOST (thin wrappers below) so each host
+# stays strictly serial at its own delay (>= 2 s; these sites are small).
+#
 # Pick-A-Part VA (pickapartva.com) — 2 yards: Fredericksburg (9001 Patriot
 # Hwy, ~5,300 cards) + Stafford (164 Norman Rd, ~2,000), ~7,300 vehicles.
-# WordPress + "iis-pro-upull" plugin; GET /inventory/ANY/ANY/?k=1&pagenum=N
-# returns 500 server-rendered cards per page (~15 pages). Card fields:
-# Stock (PAP######, the id basis), Year, Make/Model (combined, YardSmart
-# style with the make often repeated — "SATURN SATURN S SERIES"), Vin,
-# Location (Fredericksburg|Stafford), Row (often blank), Set Date (ISO).
-# CLOUDFLARE: TLS-fingerprint challenge blocks plain requests (residential
-# AND datacenter) — _papva_get() tries plain requests first (in case the WAF
-# posture relaxes) then falls back to curl_cffi with impersonate="chrome"
-# (lazy import; CI installs curl_cffi in scan.yml). This un-parks the chain
-# registered as candidate on 2026-10-17. robots.txt: allow all (wp-admin
-# excepted). ~16 requests/scan at 2s pacing. Both addresses geocode exactly.
-PAPVA_PAGE_URL = "https://pickapartva.com/inventory/ANY/ANY/?k=1&pagenum={n}"
-PAPVA_DELAY_SEC = 2.0
-PAPVA_MAX_PAGES = 40
-PAPVA_YARDS = {  # keyed by the card's Location value
-    "Fredericksburg": {"name": "Pick-A-Part VA - Fredericksburg", "city": "Fredericksburg",
-                       "state": "VA", "lat": 38.2714, "lng": -77.4927},
-    "Stafford": {"name": "Pick-A-Part VA - Stafford", "city": "Stafford",
-                 "state": "VA", "lat": 38.4612, "lng": -77.3635},
+# 500 cards/page (~15 pages). Stock (PAP######) is the id basis; Make/Model
+# is combined YardSmart-style with the make often repeated ("SATURN SATURN S
+# SERIES"); Location Fredericksburg|Stafford; Row often blank; Set Date ISO.
+# CLOUDFLARE: TLS-fingerprint challenge has blocked plain requests
+# (residential AND datacenter) — the fetch tries plain requests first then
+# falls back to curl_cffi (lazy import; CI installs curl_cffi in scan.yml).
+# (2026-10-28: a plain request with an honest UA got 200 + 500 cards.)
+# robots.txt: allow all (wp-admin excepted). ~16 requests/scan at 2s
+# pacing. Both addresses geocode exactly.
+YARDSCOUT_HEADERS = {**HEADERS, "User-Agent": "YardScout/1.12 (+https://yardscout.io)"}
+IIS_UPULL_DELAY_SEC = 2.0
+IIS_UPULL_SITES: dict[str, dict] = {
+    "papva": {
+        "label": "Pick-A-Part VA",
+        "page_url": "https://pickapartva.com/inventory/ANY/ANY/?k=1{urg_q}&pagenum={n}",
+        "urg_ids": [None],
+        "page_size": 500,
+        "max_pages": 40,
+        "delay": 2.0,
+        "id_fmt": "papva-{stock}",
+        "require_set_date": True,
+        "headers": HEADERS,
+        "cffi_fallback": True,
+        "page1_cache": "papva_page1.html",
+        # CI gets HTTP 521 even through curl_cffi (2026-10-19 scan) while
+        # residential works — same remedy as Ace: committed snapshot pushed
+        # daily by scraper/update_papva_snapshot.sh (launchd).
+        "snapshot": "papva_inventory.json.gz",
+        "yards": {  # keyed by the card's Location value
+            "Fredericksburg": {"code": "fredericksburg",
+                               "name": "Pick-A-Part VA - Fredericksburg",
+                               "city": "Fredericksburg", "state": "VA",
+                               "lat": 38.2714, "lng": -77.4927},
+            "Stafford": {"code": "stafford", "name": "Pick-A-Part VA - Stafford",
+                         "city": "Stafford", "state": "VA",
+                         "lat": 38.4612, "lng": -77.3635},
+        },
+    },
+    # U-Pull-It Auto Parts (go2upullit.com) — 3 WA yards in ONE deck
+    # (upullurgid 'JJ65,UU44,UU43'), split by the Location value. 6 pages
+    # of 230-490 cards (2,470 cars on 2026-10-28). Cards carry NO Set Date (only a
+    # "Fresh Set" badge), so dateAdded stays "". Stock numbers carry a
+    # per-yard prefix (2L…, 3B…) but the id includes the yard code anyway.
+    # robots.txt: allow * (wp-admin excepted). Pins: Pasco + Yakima exact
+    # (OSM); Kennewick (34508 S Piert Rd) is not in OSM -> 99337 zip centroid.
+    "upullitwa": {
+        "label": "U-Pull-It Auto Parts (WA)",
+        "page_url": "https://go2upullit.com/inventory/ANY/ANY/?k=1{urg_q}&pagenum={n}",
+        "urg_ids": [None],
+        "page_size": None,
+        "max_pages": 20,
+        "delay": 2.5,
+        "inventory_url": "https://go2upullit.com/search-inventory/",
+        "yards": {
+            "U Pull It Pasco": {"code": "pasco", "name": "U-Pull-It Auto Parts - Pasco",
+                                "city": "Pasco", "state": "WA",
+                                "lat": 46.2261, "lng": -119.0772},
+            "U Pull It Kennewick": {"code": "kennewick",
+                                    "name": "U-Pull-It Auto Parts - Kennewick",
+                                    "city": "Kennewick", "state": "WA",
+                                    "lat": 46.1824, "lng": -119.134},
+            "U Pull It Yakima": {"code": "yakima", "name": "U-Pull-It Auto Parts - Yakima",
+                                 "city": "Yakima", "state": "WA",
+                                 "lat": 46.5704, "lng": -120.4914},
+        },
+    },
+    # AESOP Self Serve (aesopselfserve.com) — the Tulsa yard of the
+    # AESOP/Midway group (upullurgid 'MO38,MO09,OO95'). The site's own
+    # per-yard filter &id=OO95 is used; Muncie/Liberty return 0 cards here
+    # and are served by midwayupull.com below. Set Date present. 13802 E
+    # Apache St is not house-numbered in OSM -> 74116 zip centroid.
+    "aesop": {
+        "label": "AESOP Self Serve (Tulsa OK)",
+        "page_url": "https://aesopselfserve.com/inventory/ANY/ANY/?k=1{urg_q}&pagenum={n}",
+        "urg_ids": ["OO95"],
+        "page_size": None,
+        "max_pages": 20,
+        "delay": 2.5,
+        "inventory_url": "https://aesopselfserve.com/inventory/ANY/ANY/?k=1&id=OO95",
+        "yards": {
+            "Tulsa U-Pull": {"code": "tulsa", "name": "AESOP U-Pull - Tulsa",
+                             "city": "Tulsa", "state": "OK",
+                             "lat": 36.1716, "lng": -95.8327},
+        },
+    },
+    # Midway U-Pull (midwayupull.com) — Muncie (6345 Kansas Ave, Kansas City
+    # KS; &id=MO38) and Liberty MO (1101 Old State Hwy 210; &id=MO09). One
+    # page per yard at the time of writing (~420 / ~345 cards, no pagenum
+    # links). Set Date present. Both addresses geocode exactly.
+    "midwayupull": {
+        "label": "Midway U-Pull (KS/MO)",
+        "page_url": "https://midwayupull.com/inventory/ANY/ANY/?k=1{urg_q}&pagenum={n}",
+        "urg_ids": ["MO38", "MO09"],
+        "page_size": None,
+        "max_pages": 20,
+        "delay": 2.5,
+        "inventory_url": "https://midwayupull.com/inventory/ANY/ANY/?k=1",
+        "yards": {
+            "Muncie U-Pull": {"code": "muncie", "name": "Midway U-Pull - Muncie (Kansas City)",
+                              "city": "Kansas City", "state": "KS",
+                              "lat": 39.0876, "lng": -94.7257},
+            "Liberty U-Pull": {"code": "liberty", "name": "Midway U-Pull - Liberty",
+                               "city": "Liberty", "state": "MO",
+                               "lat": 39.2006, "lng": -94.402},
+        },
+    },
+    # NOT HERE: Grandpa John's (WI25) is live via ARIO_CHAINS['grandpajohns'];
+    # Ewe Pullet (SD) still renders 0 cards (yard-hunt 2026-10-27).
 }
-_PAPVA_CARD_RE = re.compile(
+# Set Date is OPTIONAL (go2upullit cards have none): group 7 is the whole
+# Set Date field ("" when absent), group 8 its value.
+_IIS_UPULL_CARD_RE = re.compile(
     r'<b>Stock:</b>\s*([^<]*)<br/>\s*<b>Year:</b>\s*([^<]*)<br/>\s*'
     r'<b>Make/Model :</b>\s*([^<]*)<br/>\s*<b>Vin :</b>\s*([^<]*)<br/>\s*'
     r'<b>Location: </b>\s*([^<]*)<br/>\s*<b>Row: </b>\s*([^<]*)<br/>'
-    r'<b>Set Date: </b>\s*([^<]*)<br/>', re.S)
+    r'(<b>Set Date: </b>\s*([^<]*)<br/>)?', re.S)
+_IIS_UPULL_PAGENUM_RE = re.compile(r"pagenum=(\d+)")
 _PAPVA_TWO_WORD_MAKES = ("LAND ROVER", "ALFA ROMEO", "ASTON MARTIN")
+# Back-compat names (update_papva_snapshot.sh and old notes refer to these).
+PAPVA_DELAY_SEC = IIS_UPULL_SITES["papva"]["delay"]
+PAPVA_MAX_PAGES = IIS_UPULL_SITES["papva"]["max_pages"]
+PAPVA_YARDS = IIS_UPULL_SITES["papva"]["yards"]
 
 
-def _papva_get(url: str) -> str | None:
-    """GET through Cloudflare: plain requests first, curl_cffi fallback."""
+def _iis_upull_get(site: dict, url: str) -> str | None:
+    """Plain GET; curl_cffi fallback only for sites flagged cffi_fallback."""
+    label = site["label"]
     try:
-        r = requests.get(url, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+        r = requests.get(url, headers={**site.get("headers", YARDSCOUT_HEADERS),
+                                       "Accept": "text/html"}, timeout=60)
         r.raise_for_status()
         if "iis-uPull" in r.text or "car-details-uPull" in r.text:
             return r.text
-    except Exception:
-        pass
+        if not site.get("cffi_fallback"):
+            print(f"  [{label}] page has no iis-uPull markup (HTTP {r.status_code}) — "
+                  f"layout change or block page; not retrying", file=sys.stderr)
+            return None
+    except Exception as e:
+        if not site.get("cffi_fallback"):
+            print(f"  [{label}] fetch failed: {e}", file=sys.stderr)
+            return None
     try:
         from curl_cffi import requests as cffi_requests
     except ImportError:
-        print("  [Pick-A-Part VA] plain fetch challenged and curl_cffi not "
+        print(f"  [{label}] plain fetch challenged and curl_cffi not "
               "installed — skipping", file=sys.stderr)
         return None
     try:
         r = cffi_requests.get(url, impersonate="chrome", timeout=60)
         if r.status_code == 200:
             return r.text
-        print(f"  [Pick-A-Part VA] curl_cffi got HTTP {r.status_code}", file=sys.stderr)
+        print(f"  [{label}] curl_cffi got HTTP {r.status_code}", file=sys.stderr)
     except Exception as e:
-        print(f"  [Pick-A-Part VA] curl_cffi fetch failed: {e}", file=sys.stderr)
+        print(f"  [{label}] curl_cffi fetch failed: {e}", file=sys.stderr)
     return None
 
 
-def fetch_papva_inventory() -> list[dict]:
-    """Fetch Pick-A-Part VA's 2-yard inventory (paginated card deck)."""
+def _papva_get(url: str) -> str | None:
+    """Back-compat: GET one Pick-A-Part VA page (see _iis_upull_get)."""
+    return _iis_upull_get(IIS_UPULL_SITES["papva"], url)
+
+
+def fetch_iis_upull_site(source: str) -> list[dict]:
+    """Every yard of one IIS_UPULL_SITES tenant (paginated card decks,
+    one deck per urg_id, site["delay"] apart on that tenant's host)."""
     import html as html_mod
+    site = IIS_UPULL_SITES[source]
+    label = site["label"]
+    delay = max(IIS_UPULL_DELAY_SEC, float(site.get("delay") or 0))
+    id_fmt = site.get("id_fmt") or "{source}-{code}-{stock}"
     all_vehicles: list[dict] = []
     unknown_locs: set[str] = set()
-    for n in range(1, PAPVA_MAX_PAGES + 1):
-        if n > 1:
-            time.sleep(PAPVA_DELAY_SEC)
-        page = _papva_get(PAPVA_PAGE_URL.format(n=n))
-        if page is None:
-            break
-        cards = _PAPVA_CARD_RE.findall(page)
-        if not cards:
-            break
-        if n == 1:
-            _indep_cache_raw("papva_page1.html", page.encode())
-        for stock_s, year_s, mm_s, vin_s, loc_s, row_s, date_s in cards:
-            stock = stock_s.strip()
-            mm = html_mod.unescape(mm_s).strip()
-            if not stock or not mm:
-                continue
-            yard = PAPVA_YARDS.get(loc_s.strip())
-            if yard is None:
-                unknown_locs.add(loc_s.strip() or "?")
-                continue
-            mm_up = mm.upper()
-            make_s = next((p for p in _PAPVA_TWO_WORD_MAKES if mm_up.startswith(p + " ")),
-                          mm.split()[0])
-            model_s = mm[len(make_s):].strip()
-            if model_s.upper().startswith(make_s.upper() + " "):
-                model_s = model_s[len(make_s):].strip()  # "SATURN SATURN S SERIES"
-            vin = vin_s.strip().upper()
-            try:
-                year_i = int(year_s.strip())
-            except ValueError:
-                year_i = 0
-            all_vehicles.append({
-                "id": f"papva-{stock.lower()}",
-                "vin": vin if len(vin) == 17 else "",
-                "year": year_i,
-                "make": _utpap_format_label(make_s),
-                "model": _utpap_format_label(model_s),
-                "row": row_s.strip(),
-                "dateAdded": date_s.strip(),
-                "_location": yard["name"],
-                "_city": yard["city"],
-                "_state": yard["state"],
-                "_lat": yard["lat"],
-                "_lng": yard["lng"],
-                "_source": "papva",
-            })
-        if len(cards) < 500:  # short page = last page
-            break
+    n_requests = 0
+    for urg in site.get("urg_ids") or [None]:
+        urg_q = f"&id={urg}" if urg else ""
+        page_size = site.get("page_size")
+        learned = page_size is None
+        last_page = site.get("max_pages") or 40
+        seen_stocks: set[str] = set()
+        for n in range(1, (site.get("max_pages") or 40) + 1):
+            if n > last_page:
+                break
+            if n_requests:
+                time.sleep(delay)
+            n_requests += 1
+            page = _iis_upull_get(site, site["page_url"].format(urg_q=urg_q, n=n))
+            if page is None:
+                break
+            cards = _IIS_UPULL_CARD_RE.findall(page)
+            if site.get("require_set_date"):
+                cards = [c for c in cards if c[6]]  # field present (value may be blank)
+            if not cards:
+                break
+            if n == 1:
+                _indep_cache_raw(site.get("page1_cache")
+                                 or f"{source}_{urg or 'all'}_page1.html", page.encode())
+            if learned:
+                # Cards per page VARY on these tenants (go2upullit: 317, 480,
+                # 488, ... — the plugin drops some of each 500-slot page), so a
+                # short page proves nothing. Follow the deck's own pager
+                # ("1 2 3 ... 6"; no pagenum links at all = a single page).
+                links = [int(x) for x in _IIS_UPULL_PAGENUM_RE.findall(page)]
+                pager_last = max(links + [n])
+                last_page = min(site.get("max_pages") or 40,
+                                pager_last if n == 1 else max(last_page, pager_last))
+            new_stocks = 0
+            for stock_s, year_s, mm_s, vin_s, loc_s, row_s, _date_f, date_s in cards:
+                stock = stock_s.strip()
+                mm = html_mod.unescape(mm_s).strip()
+                if not stock or not mm:
+                    continue
+                if stock not in seen_stocks:
+                    seen_stocks.add(stock)
+                    new_stocks += 1
+                loc = html_mod.unescape(loc_s).strip()
+                yard = site["yards"].get(loc)
+                if yard is None:
+                    unknown_locs.add(loc or "?")
+                    continue
+                mm_up = mm.upper()
+                make_s = next((p for p in _PAPVA_TWO_WORD_MAKES if mm_up.startswith(p + " ")),
+                              mm.split()[0])
+                model_s = mm[len(make_s):].strip()
+                if model_s.upper().startswith(make_s.upper() + " "):
+                    model_s = model_s[len(make_s):].strip()  # "SATURN SATURN S SERIES"
+                vin = vin_s.strip().upper()
+                try:
+                    year_i = int(year_s.strip())
+                except ValueError:
+                    year_i = 0
+                all_vehicles.append({
+                    "id": id_fmt.format(source=source, code=yard["code"],
+                                        stock=stock.lower()),
+                    "vin": vin if len(vin) == 17 else "",
+                    "year": year_i,
+                    "make": _utpap_format_label(make_s),
+                    "model": _utpap_format_label(model_s),
+                    "row": row_s.strip(),
+                    "dateAdded": date_s.strip(),
+                    "_location": yard["name"],
+                    "_city": yard["city"],
+                    "_state": yard["state"],
+                    "_lat": yard["lat"],
+                    "_lng": yard["lng"],
+                    "_source": source,
+                })
+            if not learned and len(cards) < page_size:  # short page = last page
+                break
+            if learned and not new_stocks:  # server ignoring pagenum — stop
+                break
     if unknown_locs:
-        print(f"  [Pick-A-Part VA] skipped cards from unmapped location(s): "
+        print(f"  [{label}] skipped cards from unmapped location(s): "
               f"{sorted(unknown_locs)}", file=sys.stderr)
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
-    if not unique:
-        # CI gets HTTP 521 even through curl_cffi (2026-10-19 scan) while
-        # residential works — same remedy as Ace: committed snapshot pushed
-        # daily by scraper/update_papva_snapshot.sh (launchd).
-        snap = Path(__file__).parent / "snapshots" / "papva_inventory.json.gz"
+    if not unique and site.get("snapshot"):
+        snap = Path(__file__).parent / "snapshots" / site["snapshot"]
         if snap.exists():
             import gzip as gzip_mod
             try:
                 data = json.loads(gzip_mod.decompress(snap.read_bytes()))
                 unique = data.get("vehicles", [])
-                print(f"  [Pick-A-Part VA] live crawl blocked — using committed snapshot "
+                print(f"  [{label}] live crawl blocked — using committed snapshot "
                       f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
                       file=sys.stderr)
             except Exception as e:
-                print(f"  [Pick-A-Part VA] snapshot unreadable: {e}", file=sys.stderr)
-    print(f"  [Pick-A-Part VA] {len(unique)} vehicles across "
+                print(f"  [{label}] snapshot unreadable: {e}", file=sys.stderr)
+    print(f"  [{label}] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
+
+
+def fetch_papva_inventory() -> list[dict]:
+    """Fetch Pick-A-Part VA's 2-yard inventory (paginated card deck)."""
+    return fetch_iis_upull_site("papva")
+
+
+def fetch_upullitwa_inventory() -> list[dict]:
+    """U-Pull-It Auto Parts (Pasco/Kennewick/Yakima WA) via iis-pro-upull."""
+    return fetch_iis_upull_site("upullitwa")
+
+
+def fetch_aesop_inventory() -> list[dict]:
+    """AESOP Self Serve (Tulsa OK) via iis-pro-upull."""
+    return fetch_iis_upull_site("aesop")
+
+
+def fetch_midwayupull_inventory() -> list[dict]:
+    """Midway U-Pull (Muncie/Kansas City KS + Liberty MO) via iis-pro-upull."""
+    return fetch_iis_upull_site("midwayupull")
 
 
 # Go Pull-It (gopullit.com) — 4 yards: Jacksonville FL, Atlanta East
@@ -16602,6 +16790,26 @@ def refresh_chuckeddies_pricing_file() -> Path:
     return refresh_yardconnect_pricing_file("chuckeddies")
 
 
+# ---- CRUSH export as a static WordPress table (multi-tenant config) ---------
+# Generalized from the Barry's single-site adapter (2026-10-28). Several CRUSH
+# yards publish their whole lot as ONE server-rendered <table id="vehicles">
+# (or id="crush-inventory") with an "Updated: MM/DD/YY" stamp: one GET per
+# scan, no paging. Columns differ per site, so the parser is HEADER-DRIVEN:
+# the table's own <th> labels are mapped to fields (_CRUSH_TABLE_FIELDS) and
+# cells are read by position under them. A table missing Year/Make/Model is
+# refused (layout change) rather than guessed.
+#   table_id     "vehicles" | "crush-inventory"
+#   yard         the single yard this table belongs to
+#   id_prefix    vehicle ids are {id_prefix}{stock} when a Stock # column is
+#                present and filled; else {id_prefix}{vin} if `vin_id` and
+#                the VIN is 17 chars; else a hash of the row (Barry's rule,
+#                duplicates suffixed -2, -3 ...)
+#   max_age_days drop rows whose Arrival Date is older than this (for sites
+#                that never remove departed cars); undated rows are kept
+#   headers      new tenants send YARDSCOUT_HEADERS (honest YardScout UA);
+#                Barry's keeps the scan's legacy HEADERS
+# One INDEPENDENT_FETCHERS entry per host (thin wrappers below).
+#
 # Barry's U Pull It (barrysupullit.net — NOTE: .com is a parked lander) —
 # two physical yards (Mobile/Theodore AL at 5385 Barry Dr; Pass Christian MS
 # at 8270 Firetower Rd) but ONE blended inventory: the entire site has a
@@ -16615,56 +16823,165 @@ def refresh_chuckeddies_pricing_file() -> Path:
 # price, unit, core) -> barrys_pricing.json. robots.txt: allow all. Neither
 # parcel is in OSM → zip centroids (36582 Mobile; 39571 recorded in registry
 # for the MS yard).
-BARRYS_INVENTORY_URL = "https://barrysupullit.net/vehicle-inventory-2/"
 BARRYS_PRICES_URL = "https://barrysupullit.net/part-pricing/"
-BARRYS_YARD = {"name": "Barry's U Pull It - Mobile", "city": "Mobile",
-               "state": "AL", "lat": 30.5391, "lng": -88.1828}
-_BARRYS_TABLE_RE = re.compile(r'<table[^>]*id="vehicles"[^>]*>(.*?)</table>', re.S)
 _BARRYS_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+_CRUSH_TABLE_TH_RE = re.compile(r"<th[^>]*>(.*?)</th>", re.S)
+# Normalized <th> label (lowercase, letters/digits only) -> field.
+_CRUSH_TABLE_FIELDS = {
+    "year": "year", "make": "make", "model": "model",
+    "color": "color", "colour": "color",
+    "vin": "vin",
+    "stock": "stock", "stocknumber": "stock", "stockno": "stock",
+    "row": "row", "vehiclerow": "row", "rowno": "row",
+    "arrivaldate": "date", "arrived": "date", "datesetout": "date", "dateset": "date",
+    "engine": "engine", "reference": "engine", "location": "location",
+}
+CRUSH_TABLE_SITES: dict[str, dict] = {
+    "barrys": {
+        "label": "Barry's",
+        "url": "https://barrysupullit.net/vehicle-inventory-2/",
+        "table_id": "vehicles",
+        "id_prefix": "barrys-",
+        "headers": HEADERS,
+        "cache": "barrys_inventory.html",
+        "yard": {"name": "Barry's U Pull It - Mobile", "city": "Mobile",
+                 "state": "AL", "lat": 30.5391, "lng": -88.1828},
+    },
+    # Hwy 82 Pick & Pay (hwy82pp.com, Poulan GA) — CRUSH export on a
+    # WordPress/Colibri page: Year, Make, Model, Color, Engine, Row, Arrival
+    # Date, Location (always POULAN). No VIN / stock column -> row-hash ids.
+    # ~790 rows, set-outs to the day before. Their Ario org has 0 rows, so
+    # the site is the source. robots.txt: allow * (wp-admin excepted).
+    # 455 Hwy 82 NW is not in OSM -> Poulan town centroid.
+    "hwy82": {
+        "label": "Hwy 82 Pick & Pay (Poulan GA)",
+        "url": "https://hwy82pp.com/search-inventory/",
+        "table_id": "vehicles",
+        "id_prefix": "hwy82-",
+        "yard": {"name": "Hwy 82 Pick & Pay - Poulan", "city": "Poulan",
+                 "state": "GA", "lat": 31.5132, "lng": -83.7886},
+    },
+    # NOT HERE: iPull by Intermountain Auto (ifipull.com, Idaho Falls ID) —
+    # same table family (Year, Make, Model, Reference, VIN, Color, Stock #,
+    # Vehicle Row, Arrival Date; ~545 rows). On 2026-10-28 every page request
+    # carrying the YardScout User-Agent got HTTP 500 (a hosting-panel error
+    # page) while robots.txt answered 200, i.e. the host filters our UA. Not
+    # worked around (no UA change); re-check later. Config if it opens up:
+    # url https://ifipull.com/inventory/, table_id "vehicles", id_prefix
+    # "ifipull-", yard Idaho Falls ID (3015 N 15th E not in OSM -> 83401 zip
+    # centroid 43.5111, -112.0058).
+    # Route 34 U-Pull-M (route34upullm.com, Auburn NY) — <table id=
+    # "crush-inventory">: Year, Make, Model, VIN, Color, Row, Arrival Date.
+    # No stock column -> VIN ids (rows without a full VIN fall back to the
+    # row hash). robots.txt: allow * (wp-admin excepted). 6983 North Street
+    # Road geocodes exactly.
+    "route34": {
+        "label": "Route 34 U-Pull-M (Auburn NY)",
+        "url": "https://route34upullm.com/inventory/",
+        "table_id": "crush-inventory",
+        "id_prefix": "route34-",
+        "vin_id": True,
+        "yard": {"name": "Route 34 U-Pull-M - Auburn", "city": "Auburn",
+                 "state": "NY", "lat": 42.9556, "lng": -76.5653},
+    },
+    # Sunshine Auto Salvage (sunshineautosalvage.com, Orangeburg SC) — Year,
+    # Make, Model, Color, Engine, Vehicle Row, Arrival Date; ~3,100 rows but
+    # most are 2021 ghosts the export never removed, so rows older than 120
+    # days are dropped (max_age_days). No VIN / stock -> row-hash ids.
+    # robots.txt: allow all. 228 Southland Rd geocodes exactly.
+    "sunshine": {
+        "label": "Sunshine Auto Salvage (Orangeburg SC)",
+        "url": "https://sunshineautosalvage.com/vehicle-inventory/",
+        "table_id": "vehicles",
+        "id_prefix": "sunshine-",
+        "max_age_days": 120,
+        "yard": {"name": "Sunshine Auto Salvage - Orangeburg", "city": "Orangeburg",
+                 "state": "SC", "lat": 33.4752, "lng": -80.8787},
+    },
+}
+# Back-compat names.
+BARRYS_INVENTORY_URL = CRUSH_TABLE_SITES["barrys"]["url"]
+BARRYS_YARD = CRUSH_TABLE_SITES["barrys"]["yard"]
+_BARRYS_TABLE_RE = re.compile(r'<table[^>]*id="vehicles"[^>]*>(.*?)</table>', re.S)
 
 
-def fetch_barrys_inventory() -> list[dict]:
-    """Fetch Barry's U Pull It's blended inventory (one server-rendered table)."""
+def fetch_crush_table_site(source: str) -> list[dict]:
+    """One CRUSH_TABLE_SITES yard: one GET, header-driven table parse."""
     import hashlib
     import html as html_mod
+    site = CRUSH_TABLE_SITES[source]
+    label = site["label"]
+    yard = site["yard"]
     try:
-        r = requests.get(BARRYS_INVENTORY_URL, headers={**HEADERS, "Accept": "text/html"},
-                         timeout=120)
+        r = requests.get(site["url"], headers={**site.get("headers", YARDSCOUT_HEADERS),
+                                               "Accept": "text/html"}, timeout=120)
         r.raise_for_status()
         page = r.text
     except Exception as e:
-        print(f"  [Barry's] inventory fetch failed: {e}", file=sys.stderr)
+        print(f"  [{label}] inventory fetch failed: {e}", file=sys.stderr)
         return []
-    m = _BARRYS_TABLE_RE.search(page)
+    table_id = site.get("table_id", "vehicles")
+    m = re.search(r'<table[^>]*id="' + re.escape(table_id) + r'"[^>]*>(.*?)</table>',
+                  page, re.S)
     if not m:
-        print("  [Barry's] table#vehicles not found — site layout changed?", file=sys.stderr)
+        print(f"  [{label}] table#{table_id} not found — site layout changed?",
+              file=sys.stderr)
         return []
-    _indep_cache_raw("barrys_inventory.html", page.encode())
+    _indep_cache_raw(site.get("cache") or f"{source}_inventory.html", page.encode())
+    labels = [re.sub(r"[^a-z0-9]", "", html_mod.unescape(re.sub(r"<[^>]+>", "", t)).lower())
+              for t in _CRUSH_TABLE_TH_RE.findall(m.group(1))]
+    col = {}
+    for i, lab in enumerate(labels):
+        field = _CRUSH_TABLE_FIELDS.get(lab)
+        if field and field not in col:
+            col[field] = i
+    if not all(f in col for f in ("year", "make", "model")):
+        print(f"  [{label}] table headers {labels} lack Year/Make/Model — "
+              f"site layout changed?", file=sys.stderr)
+        return []
+    min_cells = len(labels)
+    max_age = site.get("max_age_days")
+    age_floor = ((datetime.now(timezone.utc).date() - timedelta(days=int(max_age))).isoformat()
+                 if max_age else "")
+    id_prefix = site.get("id_prefix") or f"{source}-"
     vehicles: list[dict] = []
     dupes: dict[str, int] = {}
+    n_aged = 0
     for block in _BARRYS_ROW_RE.findall(m.group(1)):
         cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
                  for c in _FENIX_TD_RE.findall(block)]
-        if len(cells) < 9:
+        if len(cells) < min_cells:
             continue
-        year_s, make_s, model_s, engine_s, color_s, vin_s, stock_s, row_s, date_s = cells[:9]
+
+        def cell(field: str) -> str:
+            i = col.get(field)
+            return cells[i] if i is not None else ""
+
+        year_s, make_s, model_s = cell("year"), cell("make"), cell("model")
+        color_s, vin_s, stock_s = cell("color"), cell("vin"), cell("stock")
+        row_s, date_s = cell("row"), cell("date")
         if not year_s.isdigit():
             continue
         date_iso = ""
         dm = re.match(r"(\d{2})/(\d{2})/(\d{2})$", date_s)
         if dm:
             date_iso = f"20{dm.group(3)}-{dm.group(1)}-{dm.group(2)}"
+        if age_floor and date_iso and date_iso < age_floor:
+            n_aged += 1
+            continue
         stock = stock_s.strip()
+        vin = vin_s.strip().upper()
         if stock:
-            vid = f"barrys-{stock.lower()}"
+            vid = f"{id_prefix}{stock.lower()}"
+        elif site.get("vin_id") and len(vin) == 17:
+            vid = f"{id_prefix}{vin.lower()}"
         else:
             basis = "|".join((make_s, model_s, year_s, color_s, vin_s, row_s, date_s)).lower()
-            vid = "barrys-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+            vid = id_prefix + hashlib.sha1(basis.encode()).hexdigest()[:12]
             n = dupes.get(vid, 0) + 1
             dupes[vid] = n
             if n > 1:
                 vid = f"{vid}-{n}"
-        vin = vin_s.strip().upper()
         vehicles.append({
             "id": vid,
             "vin": vin if len(vin) == 17 else "",
@@ -16674,17 +16991,40 @@ def fetch_barrys_inventory() -> list[dict]:
             "row": row_s.strip(),
             "dateAdded": date_iso,
             "_color": color_s.title(),
-            "_location": BARRYS_YARD["name"],
-            "_city": BARRYS_YARD["city"],
-            "_state": BARRYS_YARD["state"],
-            "_lat": BARRYS_YARD["lat"],
-            "_lng": BARRYS_YARD["lng"],
-            "_source": "barrys",
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": source,
         })
     seen: set[str] = set()
     unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
-    print(f"  [Barry's] {len(unique)} vehicles", file=sys.stderr)
+    if n_aged:
+        print(f"  [{label}] dropped {n_aged} rows older than {max_age} days "
+              f"(departed cars the export never removed)", file=sys.stderr)
+    print(f"  [{label}] {len(unique)} vehicles", file=sys.stderr)
     return unique
+
+
+def fetch_barrys_inventory() -> list[dict]:
+    """Fetch Barry's U Pull It's blended inventory (one server-rendered table)."""
+    return fetch_crush_table_site("barrys")
+
+
+def fetch_hwy82_inventory() -> list[dict]:
+    """Hwy 82 Pick & Pay (Poulan GA) via the CRUSH static-table adapter."""
+    return fetch_crush_table_site("hwy82")
+
+
+def fetch_route34_inventory() -> list[dict]:
+    """Route 34 U-Pull-M (Auburn NY) via the CRUSH static-table adapter."""
+    return fetch_crush_table_site("route34")
+
+
+def fetch_sunshine_inventory() -> list[dict]:
+    """Sunshine Auto Salvage (Orangeburg SC) via the CRUSH static-table adapter."""
+    return fetch_crush_table_site("sunshine")
 
 
 # Barry's /part-pricing/ table ships a handful of TOOLS-section rows with the
@@ -17539,6 +17879,13 @@ ARIO_CHAINS: dict[str, dict] = {
     # rows are one-time dumps (Paul's: Mar–Oct 2025; Carolina: 2024). Their
     # real inventory is elsewhere (Carolina: own WordPress search on
     # carolinapicknpull.com/inventory/; Paul's: no public vehicle rows found).
+    # ALSO NOT HERE (2026-10-28, owner call): U-Pull-R East Bethel
+    # (u-pull-east-bethel-mn) and Toledo (u-pull-r-parts-toledo). Ario's own
+    # yard records give inventory_source "upullrparts_ajax_sync", unclaimed and
+    # with no owner, created with Ario's Pick-n-Pull/Pull-A-Part/PYP mirrors.
+    # That reads as Ario syncing upullrparts.com's admin-ajax, the endpoint that
+    # 403s this scraper, not as a feed U-Pull-R publishes. Routing around the
+    # yard's block through a mirror is not done. Rosemount is not on Ario.
 }
 RYANS_PRICES_URL = "https://ryanspickapart.com/Home/PartPrices"
 
@@ -19319,6 +19666,15 @@ INDEPENDENT_EXPECTED_SOURCES.update(
 # CRUSH MVC tenants (Jalopy Jungle, Trusty, M&M, Polk County) likewise.
 INDEPENDENT_EXPECTED_SOURCES.update(
     {src: c["label"] for src, c in CRUSH_MVC_SITES.items() if c["yards"]})
+# iis-pro-upull (Pick-A-Part VA + 2026-10-28 tenants) and CRUSH static-table
+# (Barry's + 2026-10-28 tenants) likewise. papva/barrys are already listed
+# above; update() keeps their position and (same-meaning) labels.
+INDEPENDENT_EXPECTED_SOURCES.update(
+    {src: c["label"] for src, c in IIS_UPULL_SITES.items()
+     if c["yards"] and src not in INDEPENDENT_EXPECTED_SOURCES})
+INDEPENDENT_EXPECTED_SOURCES.update(
+    {src: c["label"] for src, c in CRUSH_TABLE_SITES.items()
+     if c["yard"] and src not in INDEPENDENT_EXPECTED_SOURCES})
 
 
 # Canonical adapter order. The parallel fetch below concatenates results in
@@ -19367,6 +19723,16 @@ INDEPENDENT_FETCHERS: list = [
     # Wilbert's is slow by design (10 s crawl-delay, ~40 min of pair
     # sweeps) but overlaps the other hosts like everything else here.
     ("Wilbert's U-Pull-It", fetch_wilberts_inventory),
+    # iis-pro-upull tenants (2026-10-28; same config-driven adapter as
+    # Pick-A-Part VA above, IIS_UPULL_SITES): one entry per host.
+    ("U-Pull-It Auto Parts WA", fetch_upullitwa_inventory),
+    ("AESOP Self Serve", fetch_aesop_inventory),
+    ("Midway U-Pull", fetch_midwayupull_inventory),
+    # CRUSH static-table tenants (2026-10-28; same adapter as Barry's above,
+    # CRUSH_TABLE_SITES): one entry per host.
+    ("Hwy 82 Pick & Pay", fetch_hwy82_inventory),
+    ("Route 34 U-Pull-M", fetch_route34_inventory),
+    ("Sunshine Auto Salvage", fetch_sunshine_inventory),
 ]
 
 
