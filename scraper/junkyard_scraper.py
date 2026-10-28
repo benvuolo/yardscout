@@ -39,6 +39,7 @@ Set JUNKYARD_RAW_PRICES=1 to disable adjustment (raw DB numbers).
 
 import argparse
 import base64
+import collections
 import concurrent.futures
 import hashlib
 import html
@@ -13425,6 +13426,56 @@ def _indep_cache_raw(name: str, content: bytes) -> None:
         pass
 
 
+# Committed residential-IP snapshots (scraper/snapshots/*.json.gz, pushed by
+# the update_*_snapshot.sh launchd jobs on the dev Mac) are the fallback for
+# adapters whose live crawl is blocked from CI. Nothing used to check their
+# age: if the dev Mac's job stopped, CI would republish the same snapshot
+# forever and the app would present it as a live scan. Refuse snapshots
+# older than this and veto stale-keep for the affected yards, so the yard
+# drops out (loudly) instead of silently freezing.
+SNAPSHOT_MAX_AGE_DAYS = 3
+# Yard names whose adapter refused/lacked a fallback this scan; read by
+# apply_stale_keep so carried-forward rows can't paper over a dead snapshot.
+STALE_KEEP_VETO: set[str] = set()
+
+
+def _load_vehicle_snapshot(label: str, filename: str,
+                           yard_names: "list[str] | set[str]") -> list[dict]:
+    """Vehicles from scraper/snapshots/{filename} if it is fresh enough, else
+    [] (and the yards are vetoed from stale-keep)."""
+    import gzip as gzip_mod
+    snap = Path(__file__).parent / "snapshots" / filename
+    if not snap.exists():
+        print(f"  ⚠️  [{label}] live crawl blocked and NO committed snapshot "
+              f"({filename}) — yard(s) will drop out", file=sys.stderr)
+        STALE_KEEP_VETO.update(yard_names)
+        return []
+    try:
+        data = json.loads(gzip_mod.decompress(snap.read_bytes()))
+    except Exception as e:
+        print(f"  [{label}] snapshot unreadable: {e}", file=sys.stderr)
+        STALE_KEEP_VETO.update(yard_names)
+        return []
+    vehicles = data.get("vehicles", [])
+    fetched = str(data.get("fetched_at") or "")
+    try:
+        age = (datetime.now(timezone.utc).date()
+               - datetime.strptime(fetched[:10], "%Y-%m-%d").date()).days
+    except ValueError:
+        age = None
+    if age is None or age > SNAPSHOT_MAX_AGE_DAYS:
+        print(f"  ⚠️  SNAPSHOT TOO OLD: [{label}] {filename} fetched {fetched or '?'} "
+              f"({'unknown' if age is None else age} days, cap {SNAPSHOT_MAX_AGE_DAYS}) — "
+              f"refusing to republish it; is the residential snapshot job still running?",
+              file=sys.stderr)
+        STALE_KEEP_VETO.update(yard_names)
+        return []
+    print(f"  [{label}] live crawl blocked — using committed snapshot "
+          f"({len(vehicles)} vehicles, fetched {fetched}, {age} day(s) old)",
+          file=sys.stderr)
+    return vehicles
+
+
 # Wrench-A-Part (7 self-service yards, all TX) — public JSON API used by their
 # own Svelte inventory page (wrenchapart.com/vehicle-search.html). One
 # unauthenticated GET returns the ENTIRE multi-yard inventory (~11k vehicles);
@@ -13709,17 +13760,8 @@ def fetch_upullr_inventory() -> list[dict]:
         # vehicle endpoint. Fall back to the snapshot pushed daily from the
         # dev Mac's residential IP (scraper/update_upullr_snapshot.sh, launchd
         # io.yardscout.upullr-snapshot), same remedy as Ace / PAPVA.
-        snap = Path(__file__).parent / "snapshots" / "upullr_inventory.json.gz"
-        if snap.exists():
-            import gzip as gzip_mod
-            try:
-                data = json.loads(gzip_mod.decompress(snap.read_bytes()))
-                unique = data.get("vehicles", [])
-                print(f"  [U-Pull-R] live crawl blocked — using committed snapshot "
-                      f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
-                      file=sys.stderr)
-            except Exception as e:
-                print(f"  [U-Pull-R] snapshot unreadable: {e}", file=sys.stderr)
+        unique = _load_vehicle_snapshot("U-Pull-R", "upullr_inventory.json.gz",
+                                        [s["name"] for s in UPR_STORES.values()])
     print(f"  [U-Pull-R] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
@@ -13794,8 +13836,8 @@ def refresh_upullr_pricing_file() -> Path:
     return path
 
 
-# Fenix U-Pull (fenixupull.com) — 3 upstate-NY yards + Belleville MI (Detroit
-# metro) + Moultrie GA. First Northeast (NY) coverage in the app.
+# Fenix U-Pull (fenixupull.com) — 3 upstate-NY yards + Moultrie GA (Belleville MI
+# was retired 2026-10-28 — see FENIX_RETIRED_LOCATIONS). First Northeast (NY) coverage.
 # WordPress/Divi, but /recent-inventory/
 # server-renders the entire multi-yard list as a plain HTML table, 50 rows a
 # page (?pg=N, newest-first), ~130 pages / ~6,500 rows. robots.txt allows all
@@ -13815,9 +13857,12 @@ FENIX_YARDS = {
                    "state": "NY", "lat": 42.1561, "lng": -76.8627},
     "moultrie, ga": {"name": "Fenix U-Pull - Moultrie", "city": "Moultrie",
                      "state": "GA", "lat": 31.1759, "lng": -83.7494},
-    "belleville, mi": {"name": "Fenix U-Pull - Belleville", "city": "Belleville",
-                       "state": "MI", "lat": 42.1726, "lng": -83.5419},
 }
+# Location values still present in /recent-inventory/ for yards Fenix no
+# longer operates: rows are skipped quietly (not reported as unknown).
+# Belleville MI (was 42.1726,-83.5419) left the site's location switcher and
+# its 895 feed rows have been frozen since 2024-05-24 — see RETIRED_YARDS.
+FENIX_RETIRED_LOCATIONS = {"belleville, mi"}
 
 _FENIX_ROW_RE = re.compile(r"<tr>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
 _FENIX_TD_RE = re.compile(r"<td[^>]*>(.*?)</td>", re.S)
@@ -13895,7 +13940,8 @@ def fetch_fenix_inventory() -> list[dict]:
             loc_raw = cells[7] if len(cells) > 7 else ""
             yard = FENIX_YARDS.get(loc_raw.strip().lower())
             if yard is None:
-                unknown_yards.add(loc_raw)
+                if loc_raw.strip().lower() not in FENIX_RETIRED_LOCATIONS:
+                    unknown_yards.add(loc_raw)
                 continue
             if not stock:
                 continue
@@ -15117,17 +15163,7 @@ def fetch_ace_inventory() -> list[dict]:
     if not unique:
         # Cloudflare blanket-403s CI's datacenter IPs — fall back to the
         # committed snapshot pushed daily from a residential IP (see header).
-        snap = Path(__file__).parent / "snapshots" / "ace_inventory.json.gz"
-        if snap.exists():
-            import gzip as gzip_mod
-            try:
-                data = json.loads(gzip_mod.decompress(snap.read_bytes()))
-                unique = data.get("vehicles", [])
-                print(f"  [Ace] live crawl blocked — using committed snapshot "
-                      f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
-                      file=sys.stderr)
-            except Exception as e:
-                print(f"  [Ace] snapshot unreadable: {e}", file=sys.stderr)
+        unique = _load_vehicle_snapshot("Ace", "ace_inventory.json.gz", [ACE_YARD["name"]])
     print(f"  [Ace] {len(unique)} vehicles", file=sys.stderr)
     return unique
 
@@ -16324,17 +16360,8 @@ def fetch_iis_upull_site(source: str) -> list[dict]:
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
     if not unique and site.get("snapshot"):
-        snap = Path(__file__).parent / "snapshots" / site["snapshot"]
-        if snap.exists():
-            import gzip as gzip_mod
-            try:
-                data = json.loads(gzip_mod.decompress(snap.read_bytes()))
-                unique = data.get("vehicles", [])
-                print(f"  [{label}] live crawl blocked — using committed snapshot "
-                      f"({len(unique)} vehicles, fetched {data.get('fetched_at', '?')})",
-                      file=sys.stderr)
-            except Exception as e:
-                print(f"  [{label}] snapshot unreadable: {e}", file=sys.stderr)
+        unique = _load_vehicle_snapshot(label, site["snapshot"],
+                                        [y["name"] for y in site["yards"].values()])
     print(f"  [{label}] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
@@ -21102,6 +21129,21 @@ def build_inventory_json_payload(vehicles: list[dict], only_matches: bool) -> di
 STALE_KEEP_FLOOR = 0.40      # carry forward when a yard returns <40% of its previous count
 STALE_KEEP_MIN_PREV = 25     # ignore tiny yards (legit fluctuation, not failure signal)
 STALE_KEEP_MAX_SCANS = 30    # stop carrying after ~30 consecutive frozen scans (~5 days @4h)
+# A yard that collapses while at least this share of its previous ids shows
+# up under ANOTHER yard name in the fresh scan was renamed upstream; carrying
+# the old name would publish every car twice (see apply_stale_keep).
+STALE_KEEP_RENAME_SHARE = 0.5
+# Yards confirmed closed/delisted upstream: never carried forward, so their
+# last rows drop on the next scan instead of lingering up to
+# STALE_KEEP_MAX_SCANS. Value = why (printed in the scan log).
+RETIRED_YARDS: dict[str, str] = {
+    # fenixupull.com dropped Belleville from its location switcher; its
+    # /belleville-mi/ page renders "null null" for address/phone, and the
+    # shared /recent-inventory/ feed still carries 895 legacy rows whose
+    # newest set date is 2024-05-24 (identical for 32+ scans). Verified
+    # 2026-10-28.
+    "Fenix U-Pull - Belleville": "delisted by Fenix U-Pull; feed rows frozen since 2024-05-24",
+}
 
 
 def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
@@ -21217,12 +21259,46 @@ def apply_stale_keep(payload: dict, extras: dict) -> None:
         return c
     prev_counts, new_counts = _counts(prev), _counts(payload)
 
+    # Rename detection: when an upstream renames/re-keys a yard (LKQ turned
+    # "Pick Your Part - San Bernadino" into "... San Bernardino" and
+    # "Wilmington Help Yourself" into "Help Yourself" on 2026-10-24, same store
+    # codes, same coordinates), the old name collapses to 0 while its cars
+    # show up under the new name. Carrying the old name forward then
+    # publishes every car TWICE (2,290 duplicate ids on 2026-10-28), and the
+    # duplicates never age out. If most of the old yard's ids are present in
+    # the fresh scan under another yard, it was renamed — don't carry it.
+    i_id = payload["fields"].index("id")
+    new_names = [y[0] for y in payload["yards"]]
+    fresh_yard_of = {str(row[i_id]): new_names[row[i_yard]] for row in payload["vehicles"]}
+    prev_names = [y[0] for y in prev["yards"]]
+    prev_ids_of: dict[str, list[str]] = {}
+    for row in prev["vehicles"]:
+        prev_ids_of.setdefault(prev_names[row[i_yard]], []).append(str(row[i_id]))
+
     to_carry: list[str] = []
     for name, pc in sorted(prev_counts.items()):
         if pc < STALE_KEEP_MIN_PREV:
             continue
         nc = new_counts.get(name, 0)
         if nc >= STALE_KEEP_FLOOR * pc:
+            continue
+        if name in STALE_KEEP_VETO:
+            print(f"  ⚠️  STALE-KEEP vetoed: {name} — its snapshot fallback is missing or "
+                  f"too old; dropping {pc} previously published rows rather than "
+                  f"re-serving them as live", file=sys.stderr)
+            continue
+        if name in RETIRED_YARDS:
+            print(f"  STALE-KEEP skipped: {name} is retired ({RETIRED_YARDS[name]}); "
+                  f"dropping its {pc} previously published rows", file=sys.stderr)
+            continue
+        moved = collections.Counter(fresh_yard_of[i] for i in prev_ids_of.get(name, [])
+                        if i in fresh_yard_of and fresh_yard_of[i] != name)
+        if moved and sum(moved.values()) >= STALE_KEEP_RENAME_SHARE * pc:
+            dest, n_dest = moved.most_common(1)[0]
+            print(f"  STALE-KEEP skipped: {name} looks RENAMED to {dest!r} "
+                  f"({n_dest}/{pc} of its ids are in the fresh scan there); "
+                  f"dropping the old name instead of publishing duplicates",
+                  file=sys.stderr)
             continue
         frozen = int((health.get(name) or {}).get("unchangedScans", 0))
         if frozen >= STALE_KEEP_MAX_SCANS:
