@@ -20,7 +20,7 @@ import { json, err, isoNow } from './util.js';
 import { sendApns, apnsConfigured } from './apns.js';
 import { sendFcm, fcmConfigured } from './fcm.js';
 import {
-  watchMatches, digestText, salesForWatches, fmtSaleRange, loadArrivals, sanitizeVpicFilters,
+  watchMatches, digestText, digestUpsell, salesForWatches, fmtSaleRange, loadArrivals, sanitizeVpicFilters,
 } from './alerts.js';
 import { sanitizeSaved } from './saved_alerts.js';
 
@@ -307,7 +307,7 @@ export async function sendWeeklyDevicePushes(env) {
         ? `Your week at the yards — ${fresh.length} watched car${fresh.length === 1 ? '' : 's'} arrived`
         : 'Sale days coming up near you',
       body: (fresh.length
-        ? digestText(fresh) + '\nPro members heard about each of these within hours of it landing.'
+        ? digestText(fresh) + '\n' + digestUpsell(fresh, { short: true })
         : '') + salesLine,
       // Same deep-link contract as the instant path when there are arrivals.
       ...(fresh.length ? { url: '/#alert=' + encodeURIComponent(String(fresh[0].id)) } : {}),
