@@ -1594,6 +1594,11 @@
   }
   .yard-actions .btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
   .yard-actions a.btn { text-decoration: none; display: inline-flex; align-items: center; }
+  .week-nearby-btn { width: 100%; margin: -0.3rem 0 0.9rem; }
+  .week-banner { flex-wrap: wrap; }
+  .week-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; width: 100%; }
+  .week-make-chip { font: inherit; font-size: 0.8125rem; padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); cursor: pointer; }
+  .week-make-chip .chip-n { color: var(--text-dim); font-variant-numeric: tabular-nums; }
   .public-pages-note { font-size: 0.75rem; color: var(--text-dim); line-height: 1.5; margin: -0.3rem 0 0.9rem; }
   .public-pages-note a { color: var(--accent); }
   .yard-price-link {

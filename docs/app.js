@@ -2146,6 +2146,25 @@ function viewYardWeek(loc) {
   if (liveLoaded) renderLive();
 }
 function jhClearWeek() { liveWeekOnly = false; renderLive(); }
+/* "What landed this week near you" — all yards in the current radius. */
+function viewWeekNearby() {
+  track('week-nearby');
+  liveWeekOnly = true;
+  const loc = document.getElementById('live-filter-location');
+  if (loc.value) { loc.value = ''; }
+  try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
+  if (liveLoaded) renderLive();
+  window.scrollTo({ top: 0 });
+}
+document.addEventListener('click', (e) => {
+  const c = e.target.closest('.week-make-chip');
+  if (!c) return;
+  const sel = document.getElementById('live-filter-make');
+  sel.value = c.dataset.make;
+  if (sel.value !== c.dataset.make) return;
+  sel.dispatchEvent(new Event('change'));
+  window.scrollTo({ top: 0 });
+});
 
 /* decodeURIComponent throws URIError on a truncated escape ("%E0%A4%A" —
  * what SMS/Messenger do to long share links); fall back to the raw key so a
@@ -2621,11 +2640,29 @@ function renderLive() {
     </div>` : '';
 
   const weekYard = liveWeekOnly ? document.getElementById('live-filter-location').value : '';
-  const weekBanner = weekYard ? `
+  const nCars = `${vehicles.length.toLocaleString()} ${vehicles.length === 1 ? 'car' : 'cars'}`;
+  let weekBanner = '';
+  if (liveWeekOnly && weekYard) {
+    weekBanner = `
     <div class="focus-banner" style="grid-column:1/-1;">
-      <span>This week at <strong>${escapeHtml(weekYard)}</strong> &mdash; ${vehicles.length.toLocaleString()} ${vehicles.length === 1 ? 'car' : 'cars'} set out in the last 7 days.</span>
+      <span>This week at <strong>${escapeHtml(weekYard)}</strong> &mdash; ${nCars} set out in the last 7 days.</span>
       <button type="button" class="btn" onclick="jhClearWeek()">All cars at this yard</button>
-    </div>` : '';
+    </div>`;
+  } else if (liveWeekOnly) {
+    // In-app twin of the public /landed page: everything set out in the
+    // last 7 days inside your radius, with the top makes as one-tap chips.
+    const curMake = document.getElementById('live-filter-make').value;
+    const byMake = new Map();
+    for (const v of vehicles) byMake.set(v.make, (byMake.get(v.make) || 0) + 1);
+    const chips = curMake ? '' : [...byMake.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)
+      .map(([mk, n]) => `<button type="button" class="chip week-make-chip" data-make="${escapeHtml(mk)}">${escapeHtml(mk)} <span class="chip-n">${n}</span></button>`).join('');
+    weekBanner = `
+    <div class="focus-banner week-banner" style="grid-column:1/-1;">
+      <span>Set out this week near you${curMake ? ` &middot; <strong>${escapeHtml(curMake)}</strong>` : ''} &mdash; ${nCars} in the last 7 days.</span>
+      <button type="button" class="btn" onclick="jhClearWeek()">All cars</button>
+      ${chips ? `<div class="week-chips">${chips}</div>` : ''}
+    </div>`;
+  }
   document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + vehiclesToRender.map(v => {
     // Pro sees everything; free users get exactly one fully-unlocked sample card.
     const unlocked = isPro() || (sampleKey !== null && vehicleKey(v) === sampleKey);
@@ -3593,7 +3630,7 @@ document.getElementById('yr-send').addEventListener('click', async () => {
 });
 // In the app, the Yards tab's web-links note sent people to the browser;
 // the request form above replaces its only job there.
-if (IS_NATIVE) { const n = document.querySelector('#tab-yards .public-pages-note'); if (n) n.style.display = 'none'; }
+document.getElementById('week-nearby-btn').addEventListener('click', viewWeekNearby);
 /* Filters drawer — same handle/panel mechanics as the Live tab, with its own
  * remembered open state. Default is CLOSED on first paint (no half-open
  * illusion in the iOS webview — see the Live tab's 'Show' filter saga). */
