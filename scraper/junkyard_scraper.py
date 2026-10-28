@@ -18675,6 +18675,121 @@ def fetch_cpsupullit_inventory() -> list[dict]:
     """CP's U-Pull-It (Dalton GA) via the CRUSH MVC adapter."""
     return fetch_crush_mvc_site("cpsupullit")
 
+# ---- Express Pull-N-Save (Nashville-area TN, 3 yards) ----------------------
+# kiosk.expresspullnsave.com: the yard's own PHP vehicle-search kiosk (same
+# page their in-store kiosks run). Session-scoped: GET /?location_id=N picks
+# the yard, /index.php?skip_login=1 enters guest mode, then the visitor walks
+# make -> model -> "ALL YEARS" results. No broad query exists, so one scan is
+# 1 make list + 1 page per make + 1 results page per model WITH inventory
+# (~300 GETs per yard, makes/models without stock are skipped). Results table:
+# STOCK# | VEHICLE "MAKE MODEL (YEAR)" | LOCATION | ROW# | Days on Lot, plus a
+# photo. Days on lot tops out ~35, so departed cars are already hidden.
+# robots.txt: none on the kiosk host; the main site allows all. Reported by a
+# Reddit user (r/3rdGen4Runner, 2026-10-28). Pins are exact OSM addresses.
+EXPRESSPNS_BASE = "https://kiosk.expresspullnsave.com/"
+EXPRESSPNS_DELAY_SEC = 1.0
+EXPRESSPNS_YARDS = [
+    # 409 Dick Buchanan St, La Vergne TN 37086
+    {"location_id": 1, "code": "lavergne", "name": "Express Pull-N-Save - La Vergne",
+     "city": "La Vergne", "state": "TN", "lat": 36.0242, "lng": -86.5550},
+    # 464 Cainsville Rd, Lebanon TN 37087
+    {"location_id": 2, "code": "lebanon", "name": "Express Pull-N-Save - Lebanon",
+     "city": "Lebanon", "state": "TN", "lat": 36.1946, "lng": -86.2862},
+    # 400 W Trinity Ln, Nashville TN 37207
+    {"location_id": 3, "code": "nashville", "name": "Express Pull-N-Save - Nashville",
+     "city": "Nashville", "state": "TN", "lat": 36.2073, "lng": -86.7841},
+]
+_EXPRESSPNS_MAKE_RE = re.compile(r'<div id="button_main"><a href="index\.php\?vehicle_make_id=([^"&]+)">')
+_EXPRESSPNS_MODEL_RE = re.compile(
+    r'<div id="button_main"><a href="index\.php\?vehicle_make_id=[^"&]+&vehicle_model_id=([^"]+)">')
+_EXPRESSPNS_ROW_RE = re.compile(
+    r'(?s)<tr height="60"[^>]*class="results_content_text">(.*?)</tr>')
+_EXPRESSPNS_TD_RE = re.compile(r"(?s)<td[^>]*>(.*?)</td>")
+_EXPRESSPNS_YEAR_RE = re.compile(r"\((\d{4})\)\s*$")
+
+
+def fetch_expresspns_inventory() -> list[dict]:
+    """Express Pull-N-Save La Vergne / Lebanon / Nashville via the yard's kiosk."""
+    import html as html_mod
+    import urllib.parse as up
+    label = "Express Pull-N-Save"
+    source = "expresspns"
+    today = datetime.now(timezone.utc).date()
+    vehicles: list[dict] = []
+
+    def text(cell: str) -> str:
+        cell = re.sub(r"(?s)<script.*?</script>", "", cell)
+        return html_mod.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", cell))).strip()
+
+    for yard in EXPRESSPNS_YARDS:
+        session = requests.Session()
+        hdr = {**HEADERS, "Accept": "text/html"}
+
+        def get(path: str) -> str:
+            time.sleep(EXPRESSPNS_DELAY_SEC)
+            r = session.get(EXPRESSPNS_BASE + path, headers=hdr, timeout=60)
+            r.raise_for_status()
+            return r.text
+
+        n_before = len(vehicles)
+        try:
+            get(f"?location_id={yard['location_id']}")
+            makes = _EXPRESSPNS_MAKE_RE.findall(get("index.php?skip_login=1"))
+        except Exception as e:  # noqa: BLE001
+            print(f"  [{label}] {yard['code']}: make list failed: {e}", file=sys.stderr)
+            continue
+        seen: set[str] = set()
+        for mk in makes:
+            try:
+                models = _EXPRESSPNS_MODEL_RE.findall(get("index.php?vehicle_make_id=" + mk))
+            except Exception as e:  # noqa: BLE001
+                print(f"  [{label}] {yard['code']} {mk}: {e}", file=sys.stderr)
+                continue
+            for md in models:
+                try:
+                    page = get(f"index.php?vehicle_make_id={mk}&vehicle_model_id={md}&year=all")
+                except Exception as e:  # noqa: BLE001
+                    print(f"  [{label}] {yard['code']} {mk}/{md}: {e}", file=sys.stderr)
+                    continue
+                for row in _EXPRESSPNS_ROW_RE.findall(page):
+                    cells = _EXPRESSPNS_TD_RE.findall(row)
+                    if len(cells) < 7:
+                        continue
+                    stock = text(cells[2])
+                    ym = _EXPRESSPNS_YEAR_RE.search(text(cells[3]))
+                    if not stock or not ym or stock in seen:
+                        continue
+                    seen.add(stock)
+                    days_s = text(cells[6])
+                    date_added = ""
+                    if days_s.isdigit():
+                        date_added = (today - timedelta(days=int(days_s))).isoformat()
+                    photo = re.search(r'src="(https://kiosk\.expresspullnsave\.com/vehicle_images/[^"]+)"', row)
+                    v = {
+                        "id": f"{source}-{yard['code']}-{stock.lower()}",
+                        "vin": "",
+                        "year": int(ym.group(1)),
+                        "make": _utpap_format_label(up.unquote_plus(mk).replace("-", " ").upper()
+                                                    if mk != "mercedes-benz" else "MERCEDES-BENZ"),
+                        "model": _utpap_format_label(up.unquote_plus(md).upper()),
+                        "row": text(cells[5]),
+                        "dateAdded": _sanitize_date_added(date_added) if date_added else "",
+                        "_location": yard["name"],
+                        "_city": yard["city"],
+                        "_state": yard["state"],
+                        "_lat": yard["lat"],
+                        "_lng": yard["lng"],
+                        "_source": source,
+                    }
+                    if photo:
+                        v["_photo"] = photo.group(1)
+                    vehicles.append(v)
+        print(f"  [{label}] {yard['code']}: {len(vehicles) - n_before} vehicles "
+              f"({len(makes)} makes)", file=sys.stderr)
+    print(f"  [{label}] {len(vehicles)} vehicles across "
+          f"{len({v['_location'] for v in vehicles})} yards", file=sys.stderr)
+    return vehicles
+
 def refresh_crush_mvc_pricing_file(source: str) -> Path:
     """/Home/PartPrices of one CRUSH MVC tenant -> {source}_pricing.json
     (4 columns: PART DESCRIPTION, $PRICE, BASIS, $CORE — the Ryan's shape;
@@ -19235,6 +19350,7 @@ INDEPENDENT_EXPECTED_SOURCES = {
     "chuckeddies": "Chuck & Eddie's Self Service (Southington CT)",
     "robertsons": "Robertson's U-Pull-It (Wareham MA)",
     "genesis": "Genesis Metal Recycling (Madison NC)",
+    "expresspns": "Express Pull-N-Save (Nashville TN)",
     "byot": "BYOT Auto Parts (TX)",
     "wilberts": "Wilbert's U-Pull-It (NY)",
 }
@@ -19289,6 +19405,8 @@ INDEPENDENT_FETCHERS: list = [
     ("Chuck & Eddie's", fetch_chuckeddies_inventory),
     ("Robertson's", fetch_robertsons_inventory),
     ("Genesis Metal Recycling", fetch_genesis_inventory),
+    # Express Pull-N-Save: ~900 paced GETs on one host (3 yards, serial).
+    ("Express Pull-N-Save", fetch_expresspns_inventory),
     ("BYOT Auto Parts", fetch_byot_inventory),
     # Wilbert's is slow by design (10 s crawl-delay, ~40 min of pair
     # sweeps) but overlaps the other hosts like everything else here.

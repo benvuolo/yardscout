@@ -2300,6 +2300,47 @@
           "lng": -79.987
         }
       ]
+    },
+    {
+      "name": "Express Pull-N-Save",
+      "status": "adapter-built",
+      "platform": "custom PHP vehicle-search kiosk (kiosk.expresspullnsave.com), session-scoped per location_id",
+      "website": "https://www.expresspullnsave.com",
+      "inventory_url": "https://kiosk.expresspullnsave.com/",
+      "api": {
+        "endpoint": "https://kiosk.expresspullnsave.com/index.php",
+        "method": "GET",
+        "auth": "guest session (skip_login=1)",
+        "format": "html-table",
+        "requests_per_scan": "~900 (3 yards x ~300: make list, one page per make, one results page per stocked model), 1s apart",
+        "notes": "GET /?location_id={1 La Vergne|2 Lebanon|3 Nashville} sets the yard in the session, /index.php?skip_login=1 enters guest search, then make -> model -> year=all. Results: STOCK#, VEHICLE 'MAKE MODEL (YEAR)', LOCATION, ROW#, Days on Lot, photo. dateAdded = scan date - days on lot. No VIN. Ids expresspns-{code}-{stock}. Reported by a Reddit user 2026-10-28. fetch_expresspns_inventory / EXPRESSPNS_YARDS."
+      },
+      "update_freshness": "live (days on lot 0-35 observed; departed cars hidden)",
+      "robots": "no robots.txt on the kiosk host (404); www allows all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Express Pull-N-Save - La Vergne",
+          "city": "La Vergne",
+          "state": "TN",
+          "lat": 36.0242,
+          "lng": -86.555
+        },
+        {
+          "name": "Express Pull-N-Save - Lebanon",
+          "city": "Lebanon",
+          "state": "TN",
+          "lat": 36.1946,
+          "lng": -86.2862
+        },
+        {
+          "name": "Express Pull-N-Save - Nashville",
+          "city": "Nashville",
+          "state": "TN",
+          "lat": 36.2073,
+          "lng": -86.7841
+        }
+      ]
     }
   ]
 }
