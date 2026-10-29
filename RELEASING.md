@@ -89,6 +89,22 @@ for the archive step). The API key is used for the upload.
   version; blank = the workflow run number, which only ever goes up.
 - Keep both marketing versions in step by hand (e.g. 1.10 on both stores).
 
+## Update prompts and forcing an update (1.12.9+)
+
+Apps from 1.12.9 on check `/v1/app-version` at launch and whenever they come
+back to the foreground (`backend/src/app_version.js`):
+
+- **"Update available" card** — automatic. iOS shows it once Apple's public
+  lookup reports a newer live version; Android 48 h after a production upload
+  (`release-android.yml` records it in `docs/app-version.json`). Dismissible,
+  once per version.
+- **Required update** — manual. Edit `docs/app-version.json` on GitHub and set
+  `min.ios` / `min.android` to the oldest version still allowed (e.g. `"1.13"`),
+  optionally with a `message`. Apps below it show a full-screen "Update
+  YardScout" within ~10 minutes. Set it back to `""` to lift it. Only raise
+  `min` to a version that is already **live** in that store, or people will be
+  sent to a store page with nothing to update to.
+
 ## What the workflows deliberately don't do
 
 - Screenshots/metadata other than release notes (`appstore-assets/`,
