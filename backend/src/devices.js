@@ -65,7 +65,10 @@ function sanitizeWatches(raw, tier) {
   if (!Array.isArray(raw)) return [];
   const cap = tier === 'pro' ? MAX_WATCHES_PER_DEVICE : MAX_WATCHES_FREE;
   const out = [];
-  for (const w of raw.slice(0, cap)) {
+  // Cap what's KEPT, not what's read: a free watch dropped below (no centre)
+  // must not push a valid one past the cap.
+  for (const w of raw.slice(0, MAX_WATCHES_PER_DEVICE * 2)) {
+    if (out.length >= cap) break;
     const make = String(w.make || '').trim().slice(0, 40) || null;
     const model = String(w.model || '').trim().slice(0, 60) || null;
     if (!make && !model) continue;

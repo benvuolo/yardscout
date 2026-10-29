@@ -195,5 +195,21 @@ const fe = (r.data.recentErrors || []).find((e) => e.channel === 'fcm');
 check('fcm error row: status 500, no token in detail', fe && fe.status === 500 && !/APA91b|server-error/.test(fe.detail || ''), JSON.stringify(fe));
 check('push-ready device counts reported', Number.isInteger(r.data.audience?.proDevices) && r.data.audience.proDevices >= 1, JSON.stringify(r.data.audience));
 
+/* ---- free cap counts KEPT watches: a dropped centre-less watch must not
+ * push the 5th valid one out (it used to: slice(0, 5) ran before the drop). */
+const capId = uuid(), capToken = fcmTok('cap-device');
+const near = { lat: 40.76, lng: -111.89, radiusMi: 100 };
+r = await api('/v1/device/register', J({}, { deviceId: capId, fcmToken: capToken, tier: 'free', watches: [
+  { make: 'Ford', model: 'Ranger' },                       // no centre → dropped for free
+  ...['Kia Rio', 'Kia Soul', 'Kia Optima', 'Kia Sedona'].map((m) => ({ make: 'Kia', model: m.slice(4), ...near })),
+  { make: 'Mazda', model: 'MX-5 Miata', ...near },         // 5th valid watch
+] }));
+check('cap device registers', r.status === 200);
+await commit([arrival(9501, { make: 'Mazda', model: 'MX-5 Miata' })]);
+await waitDispatch();
+r = await api('/v1/admin/device-digest/run', { method: 'POST', headers: ADMIN });
+const capSends = (await sentList()).filter((s) => s.token === capToken);
+check('5th valid free watch survives a dropped one (recap names the Miata)', capSends.length === 1 && /Miata|MX-5/.test(capSends[0].body), JSON.stringify(capSends));
+
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);

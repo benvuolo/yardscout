@@ -6318,6 +6318,10 @@ function renderAlerts() {
           missLine = `<span class="wl-miss">${lead} Pro would have sent a push within hours. <button type="button" class="linklike" onclick="openUpgradeSheet('watch-near-miss')">See Pro</button></span>`;
         }
       }
+      // Free watches past the limit are ignored by the alert backend; say so.
+      if (!isPro() && i >= FREE_WATCH_LIMIT) {
+        missLine = `<span class="wl-miss wl-off">Not sending alerts &mdash; free covers ${FREE_WATCH_LIMIT} watches. Remove one above, or <button type="button" class="linklike" onclick="openUpgradeSheet('watch-limit')">go Pro for 20</button>.</span>`;
+      }
       const vpicLabel = (e.driveFilter === '4x4' ? ' &middot; 4WD/AWD only' : e.driveFilter === '2wd' ? ' &middot; 2WD only' : '')
         + (e.trimFilter ? ' &middot; trim &ldquo;' + escapeHtml(e.trimFilter) + '&rdquo;' : '');
       return `<div class="watchlist-item">
@@ -6739,6 +6743,12 @@ function addWatchItem() {
   const watchlist = loadWatchlist();
   // One watch per checked model; no models checked = one any-model watch.
   const models = watchSelectedModels.size ? [...watchSelectedModels] : [''];
+  // Free covers FREE_WATCH_LIMIT watches; the backend silently ignores the
+  // rest, so say so here instead of saving a watch that never alerts.
+  if (!isPro() && watchlist.length + models.length > FREE_WATCH_LIMIT) {
+    if (watchlist.length >= FREE_WATCH_LIMIT) { openUpgradeSheet('watch-limit'); return; }
+    return alert(`Free covers ${FREE_WATCH_LIMIT} watches — you have room for ${FREE_WATCH_LIMIT - watchlist.length} more. Pick fewer models, or go Pro for up to 20.`);
+  }
   let added = 0;
   for (const model of models) {
     const dupe = watchlist.some(e =>
@@ -7195,7 +7205,7 @@ async function syncDeviceRegistration(freshToken) {
       deviceId: deviceId(),
       platform: IS_ANDROID ? 'android' : 'ios',
       tier: isPro() ? 'pro' : 'free',
-      watches: loadWatchlist().map((w) => ({
+      watches: deviceSyncWatches().map((w) => ({
         make: w.make, model: w.model, yearMin: w.yrMin, yearMax: w.yrMax,
         // Rounded to ~1 km: the Worker only needs a radius centre, never
         // the exact GPS fix — and the privacy policy promises as much.
@@ -7214,6 +7224,22 @@ async function syncDeviceRegistration(freshToken) {
       body: JSON.stringify(body),
     });
   } catch (e) { /* re-synced on next change/launch */ }
+}
+
+/* Watches as the alert backend should get them. Free watches must have a
+ * centre and radius (nationwide is Pro) or the backend drops them without a
+ * word — legacy watches (pre radius picker) and "Anywhere" watches kept
+ * after Pro lapses have none. Those follow the current zip at the free
+ * radius cap, the same rule web sync uses for legacy watches. */
+function deviceSyncWatches() {
+  const list = loadWatchlist();
+  if (isPro()) return list;
+  return list.map(w => {
+    if (w.lat != null && w.lng != null && w.radiusMi) return w;
+    if (!activeZipCoords) return w;
+    return { ...w, lat: activeZipCoords.lat, lng: activeZipCoords.lng,
+      radiusMi: Math.min(w.radiusMi || FREE_MAX_RADIUS_MI, FREE_MAX_RADIUS_MI) };
+  }).slice(0, FREE_WATCH_LIMIT);
 }
 
 /* ---- push enable flow (native Alerts tab) ---- */

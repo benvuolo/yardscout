@@ -1437,6 +1437,7 @@
   .watch-toast-next > span { flex: 1; min-width: 0; }
   .watch-toast-next .btn { flex-shrink: 0; padding: 0.4rem 0.85rem; font-size: 0.8125rem; text-decoration: none; }
   @media (max-width: 720px) { .watch-toast { bottom: calc(4.6rem + env(safe-area-inset-bottom, 0px)); } }
+  .wl-miss.wl-off { color: var(--red); }
   .wl-miss { display: block; margin-top: 0.3rem; font-size: 0.75rem; line-height: 1.45; color: var(--text-dim); }
   .wl-miss .linklike { background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
   .pro-car { margin: 0.2rem 0 0.5rem; padding: 0.7rem 0.8rem; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); }
