@@ -18146,6 +18146,38 @@ _ARIO_CATEGORY_MODELS = {
     "montego": ("Mercury", "Montego"), "impala": ("Chevrolet", "Impala"), "caprice": ("Chevrolet", "Caprice"),
     "taurus": ("Ford", "Taurus"), "sprinter": ("Dodge", "Sprinter"), "escort": ("Ford", "Escort"), "ranger": ("Ford", "Ranger"),
 }
+# Paul's Auto Yard (Hollander store sync, 2026-10-28) hands over 9-character
+# Hollander descriptions SPLIT at the first space, so a model-first entry
+# arrives as make="Town", model="COUN" (Chrysler Town & Country), make="A4",
+# model="AUDI", make="Rav", model="4". Keyed "make model" lowercase.
+# Owner-reported 2026-10-29: 'Town', 'Grand', 'Crown', 'Rav', 'X', 'Tc'...
+# were showing up as makes in the watch picker.
+_ARIO_CATEGORY_PAIRS = {
+    "town coun": ("Chrysler", "Town & Country"),
+    "grand pri": ("Pontiac", "Grand Prix"), "grand mar": ("Mercury", "Grand Marquis"),
+    "grand am": ("Pontiac", "Grand Am"), "grand car": ("Dodge", "Grand Caravan"),
+    "grand che": ("Jeep", "Grand Cherokee"), "grand voy": ("Plymouth", "Grand Voyager"),
+    "monte car": ("Chevrolet", "Monte Carlo"), "crown vic": ("Ford", "Crown Victoria"),
+    "park ave": ("Buick", "Park Avenue"), "rav 4": ("Toyota", "RAV4"), "4 runner": ("Toyota", "4Runner"),
+    "sat l sdn": ("Saturn", "L-Series"), "sat s sdn": ("Saturn", "SL"), "sat s cpe": ("Saturn", "SC"),
+    "sat l wgn": ("Saturn", "L-Series"), "sat s wgn": ("Saturn", "SW"),
+    "a3 audi": ("Audi", "A3"), "a4 audi": ("Audi", "A4"), "a5 audi": ("Audi", "A5"), "a6 audi": ("Audi", "A6"),
+    "a8 audi": ("Audi", "A8"), "q5 audi": ("Audi", "Q5"), "q7 audi": ("Audi", "Q7"), "s4 audi": ("Audi", "S4"),
+    "s5 audi": ("Audi", "S5"), "tt audi": ("Audi", "TT"),
+    "xa scion": ("Scion", "xA"), "xb scion": ("Scion", "xB"), "xd scion": ("Scion", "xD"),
+    "tc scion": ("Scion", "tC"), "iq scion": ("Scion", "iQ"),
+    "x type": ("Jaguar", "X-Type"), "s type": ("Jaguar", "S-Type"),
+    "explr spt": ("Ford", "Explorer Sport"), "olds 88": ("Oldsmobile", "Eighty-Eight"),
+    "olds 98": ("Oldsmobile", "Ninety-Eight"), "88 royale": ("Oldsmobile", "Eighty-Eight"),
+    "range rov": ("Land Rover", "Range Rover"), "denali xl": ("GMC", "Yukon XL"),
+    "outlan sp": ("Mitsubishi", "Outlander Sport"), "xv crosst": ("Subaru", "Crosstrek"),
+    "captiva s": ("Chevrolet", "Captiva Sport"), "cc volks": ("Volkswagen", "CC"),
+    "npr isuzu": ("Isuzu", "NPR"), "colt pass": ("Dodge", "Colt"), "500 fiat": ("Fiat", "500"),
+    "yukon 53l": ("GMC", "Yukon"), "vch astro": ("Chevrolet", "Astro"), "mpv van": ("Mazda", "MPV"),
+    "american motors h3": ("Hummer", "H3"),
+    # Conversion vans carry no make in the feed: browsable, never a picker entry.
+    "conv van": ("Other", "Conversion Van"),
+}
 _ARIO_CATEGORY_NOISE = re.compile(
     r"\((?:see also|also see|except|small|small truck|mid-?size|full-?size|type \d|\d+ & up|domestic|for|mercury|dodge & chrysler)[^)]*\)"
     r"|\b(?:see also|also see)\b.*$|\bexcept\b.*$|\bnot rs\b|\bseries\b|\(\s*\)", re.I)
@@ -18157,6 +18189,9 @@ def _ario_split_category(make_s: str, model_s: str) -> tuple[str, str]:
     ('Explorer', 'Explor') -> ('Ford', 'Explorer'); real makes pass through."""
     cat = " ".join(_ARIO_CATEGORY_NOISE.sub(" ", make_s).split()).strip(" -,")
     low = cat.lower()
+    pair = _ARIO_CATEGORY_PAIRS.get(" ".join(f"{low} {model_s.lower()}".split()))
+    if pair:
+        return pair
     if low in _ARIO_CATEGORY_MODELS:
         return _ARIO_CATEGORY_MODELS[low]
     if low in ("atv / motorcycle", "atv/motorcycle", "motorcycle"):
@@ -20811,6 +20846,95 @@ def _strip_make_prefix(m: str, make_key: str) -> str:
             return m
 
 
+# Hollander parts-catalog model abbreviations (9 characters, no spaces, the
+# make or a body code fused on: "Silvrdo15", "Grandcher", "Optimakia",
+# "Tchev1500"). Yards that export straight from their Hollander store (Paul's
+# Auto Yard, Weller, A & A, U-Pull and Save) list cars this way; the app's
+# model pickers showed them next to the real names (owner report 2026-10-29).
+# Keyed by squashed make, then squashed model; values are the canonical forms
+# used elsewhere in this table. Unsure -> left alone, never guessed.
+_HOLLANDER_MODEL_CANON: dict[str, dict[str, str]] = {
+    "audi": {"cabr": "Cabriolet"},
+    "buick": {"rendezvou": "Rendezvous", "roadmastr": "Roadmaster", "parkave": "Park Avenue",
+              "buickprk": "Park Avenue", "buickles": "LeSabre"},
+    "cadillac": {"escalaesv": "Escalade ESV", "ctsnew": "CTS", "fleetrwd": "Fleetwood"},
+    "chevrolet": {
+        "silvrdo15": "Silverado 1500", "slvrado15": "Silverado 1500", "silv15new": "Silverado 1500",
+        "silv15old": "Silverado 1500", "silvrdo25": "Silverado 2500", "slvrado25": "Silverado 2500",
+        "silv25old": "Silverado 2500", "silvrdo35": "Silverado 3500",
+        "trailblaz": "Trailblazer", "trailbext": "Trailblazer EXT",
+        "suburbn15": "Suburban 1500", "subchev15": "Suburban 1500", "subchev25": "Suburban 2500",
+        "malibunew": "Malibu", "malibuold": "Malibu", "impalanew": "Impala", "cruzenew": "Cruze",
+        "tchev1500": "C/K 1500", "tche15old": "C/K 1500", "tgmc1500": "C/K 1500",
+        "tchev2500": "C/K 2500", "tche25old": "C/K 2500", "tchev3500": "C/K 3500",
+        "avalnch15": "Avalanche 1500", "express15": "Express 1500", "express25": "Express 2500",
+        "express35": "Express 3500", "vchexpr35": "Express 3500", "montecar": "Monte Carlo",
+        "captivas": "Captiva Sport",
+    },
+    "chrysler": {"towncoun": "Town & Country"},
+    "dodge": {
+        "tdod150": "D150", "tdod250": "D250", "tdod350": "D350",
+        "vdod150": "Ram Van", "vdod1500": "Ram Van", "vdod250": "Ram Van", "vdod2500": "Ram Van", "vdod3500": "Ram Van",
+        "tdodr1500": "Ram 1500", "tdodr2500": "Ram 2500", "challenge": "Challenger",
+        "sprintv25": "Sprinter 2500", "sprintv35": "Sprinter 3500", "neonchry": "Neon", "neondodg": "Neon",
+        "dminivan": "Caravan",
+    },
+    "fiat": {"500fiat": "500"},
+    "ford": {
+        "expediton": "Expedition", "f150new": "F-150", "f150old": "F-150", "tford150": "F-150",
+        "transcnct": "Transit Connect", "sporttrac": "Explorer Sport Trac", "fivehundr": "Five Hundred",
+        "crownvic": "Crown Victoria", "transit15": "Transit-150", "transit25": "Transit-250",
+        "transit35": "Transit-350", "thunderbi": "Thunderbird", "vford35sd": "E-350 Super Duty",
+        "explrspt": "Explorer Sport",
+    },
+    "freightliner": {"sprintv25": "Sprinter 2500", "sprintv35": "Sprinter 3500"},
+    "gmc": {
+        "blazers10": "Blazer S10/Jimmy S15",
+        "sierra150": "Sierra 1500", "sier15new": "Sierra 1500", "sier15old": "Sierra 1500",
+        "sierra250": "Sierra 2500", "sier25new": "Sierra 2500", "sierra350": "Sierra 3500",
+        "tgmc1500": "C/K 1500", "tchev1500": "C/K 1500", "tgmc2500": "C/K 2500", "vgmc2500": "C/K 2500",
+        "tgmc3500": "C/K 3500", "savana15": "Savana 1500", "savana25": "Savana 2500",
+        "savana35": "Savana 3500", "vgmsava35": "Savana 3500", "yukonxl15": "Yukon XL 1500",
+        "denali": "Yukon Denali", "denalixl": "Yukon XL", "subchev15": "Suburban 1500",
+        "subgm1500": "Suburban 1500", "safarivan": "Safari",
+    },
+    "infiniti": {"g20infin": "G20"},
+    "jeep": {"grandcher": "Grand Cherokee", "chergrand": "Grand Cherokee", "compasnew": "Compass"},
+    "kia": {"optimakia": "Optima"},
+    "landrover": {"rangerov": "Range Rover"},
+    "lincoln": {"lincls": "LS", "linclt": "Mark LT", "linccont": "Continental"},
+    "mini": {"minicoope": "Cooper"},
+    "mercury": {"mountneer": "Mountaineer", "grandmar": "Grand Marquis"},
+    "mitsubishi": {"lancermit": "Lancer", "monterosp": "Montero Sport", "outlansp": "Outlander Sport",
+                   "pickupmit": "Pickup"},
+    "nissan": {"pathfindr": "Pathfinder", "roguenew": "Rogue", "rogueold": "Rogue", "roguespt": "Rogue Sport"},
+    "oldsmobile": {"silhouett": "Silhouette", "eightyei": "Eighty-Eight", "ninetyei": "Ninety-Eight",
+                   "olds88": "Eighty-Eight", "olds98": "Ninety-Eight", "supreme": "Cutlass Supreme"},
+    "plymouth": {"neonplym": "Neon", "voyagerch": "Voyager"},
+    "pontiac": {"grandpri": "Grand Prix", "bonnevill": "Bonneville"},
+    "ram": {"ram1500": "1500", "ram2500": "2500", "ram3500": "3500", "promast15": "ProMaster 1500",
+            "promast25": "ProMaster 2500", "promast35": "ProMaster 3500", "promacity": "ProMaster City"},
+    "saturn": {"satlsdn": "L-Series", "satssdn": "SL", "satscpe": "SC", "saturncpe": "SC"},
+    "scion": {"xascion": "xA", "xbscion": "xB", "xdscion": "xD", "tcscion": "tC", "iqscion": "iQ"},
+    "smart": {"smartfor2": "Fortwo"},
+    "subaru": {"outbakleg": "Outback", "outbakimp": "Impreza Outback Sport", "xvcrosst": "Crosstrek"},
+    "toyota": {"highlandr": "Highlander", "ttoytcoma": "Tacoma", "sequia": "Sequoia", "pu": "Pickup",
+               # not Hollander — trim/body suffixes from hand-typed independents (Prestige, Pasco)
+               "4runnersr5": "4Runner", "tundra4wdtruck": "Tundra"},
+    "volkswagen": {"ccvolks": "CC"},
+}
+
+
+def _strip_make_suffix(m: str, make_key: str) -> str:
+    """Drop a trailing word that just repeats the row's own make ('A4 Audi'
+    under Audi, '428I Bmw' under BMW — Hollander descriptions put the make
+    last). Never strips the whole string."""
+    words = m.split()
+    if len(words) >= 2 and _squash_model_key(words[-1]) in (make_key,) + _MODEL_STRIP_EXTRA.get(make_key, ()):
+        return " ".join(words[:-1])
+    return m
+
+
 def normalize_model(model: str, make: str = "") -> str:
     """Canonical display spelling for a feed-supplied model name. Idempotent.
 
@@ -20823,10 +20947,14 @@ def normalize_model(model: str, make: str = "") -> str:
         return m
     make_key = _squash_model_key(make)
     m = _strip_make_prefix(m, make_key)
+    m = _strip_make_suffix(m, make_key)
     key = _squash_model_key(m)
     per_make = _MODEL_CANON_BY_MAKE.get(make_key)
     if per_make and key in per_make:
         return per_make[key]
+    holl = _HOLLANDER_MODEL_CANON.get(make_key)
+    if holl and key in holl:
+        return holl[key]
     if key in _MODEL_CANON:
         return _MODEL_CANON[key]
     mk = (make or "").lower()
@@ -21038,7 +21166,72 @@ _MAKE_ALIASES = {
     "landrover": "Land Rover",
     "rangerover": "Land Rover",      # Range Rover is a Land Rover model line
     "infinity": "Infiniti",          # misspelling — Infinity is not a marque
+    # Hand-typed independents (2026-10-29 audit): abbreviations and typos.
+    "olds": "Oldsmobile", "sat": "Saturn", "hona": "Honda", "gnc": "GMC",
+    "chevycp": "Chevrolet", "toyoto": "Toyota", "volkswagan": "Volkswagen",
+    "fleetwood": "Cadillac",         # the model typed into the make column
 }
+
+# A make written INSIDE the model, under the wrong make: Pull-N-Save files an
+# "Audi A3" under Toyota, A & A lists "Tc Scion" under Toyota. When the
+# model's first or last word is itself a marque (and not this row's own), that
+# marque wins; normalize_model then strips it from the model. Ram and Geo are
+# deliberately NOT here: "Ram 1500" under Dodge and "Geo Prizm" under
+# Chevrolet are correct period names, resolved by year elsewhere.
+_MAKE_IN_MODEL = {
+    re.sub(r"[^a-z0-9]", "", m.lower()): m for m in (
+        "Acura", "Alfa Romeo", "Audi", "BMW", "Buick", "Cadillac", "Chevrolet", "Chrysler",
+        "Dodge", "Fiat", "Ford", "GMC", "Honda", "Hummer", "Hyundai", "Infiniti", "Isuzu",
+        "Jaguar", "Jeep", "Kia", "Land Rover", "Lexus", "Lincoln", "Mazda", "Mercedes-Benz",
+        "Mercury", "MINI", "Mitsubishi", "Nissan", "Oldsmobile", "Plymouth", "Pontiac",
+        "Porsche", "Saab", "Saturn", "Scion", "Smart", "Subaru", "Suzuki", "Toyota",
+        "Volkswagen", "Volvo",
+    )
+}
+_MAKE_IN_MODEL_ALIASES = {"chevy": "Chevrolet", "vw": "Volkswagen", "mercedes": "Mercedes-Benz", "volks": "Volkswagen"}
+
+
+# Hollander names shared GM trucks after the Chevy ("Chevrolet 1500 Pickup"
+# covers the GMC Sierra too): a GMC filed that way IS a GMC. Never flip twins.
+_MAKE_IN_MODEL_TWINS = {("gmc", "chevrolet"), ("chevrolet", "gmc")}
+# Only within one corporate family. Nevada Pic-A-Part / Pull-N-Save file by
+# parent company ("Chrysler" + "Dodge Caravan", "Ford" + "Lincoln Town Car",
+# "Toyota" + "Scion tC") — those are safe. Across families the same yards
+# also produce nonsense pairs where the ROW's make was the right one
+# ("Acura" + "Bmw Rl", "Kia" + "Smart Forte", "Mitsubishi" + "Subaru
+# Outlander"); no wording rule can tell those from a real mislabel, so they
+# stay as filed. Never guess.
+_MAKE_FAMILIES = [
+    {"chrysler", "dodge", "jeep", "plymouth", "ram", "eagle"},
+    {"ford", "lincoln", "mercury"},
+    {"chevrolet", "gmc", "buick", "pontiac", "oldsmobile", "cadillac", "saturn", "hummer"},
+    {"toyota", "scion", "lexus"}, {"honda", "acura"}, {"nissan", "infiniti"},
+    {"hyundai", "kia"}, {"bmw", "mini"}, {"volkswagen", "audi", "porsche"},
+    {"mercedesbenz", "smart"},
+]
+_MAKE_FAMILY_OF = {m: i for i, fam in enumerate(_MAKE_FAMILIES) for m in fam}
+
+
+def _make_named_in_model(make_key: str, model: str) -> str | None:
+    words = (model or "").split()
+    if len(words) < 2:
+        return None
+    # First word only: "Dodge Caravan" under Chrysler, "Lincoln Town Car"
+    # under Ford. A make as the LAST word is usually a yard's cross-reference
+    # note ("Outlander Subaru", "Forte Smart", "Ram Mini") — the one honest
+    # suffix form is Hollander's "Tc Scion" / "Xb Scion".
+    k = _MAKE_SQUASH_RE.sub("", words[0].lower())
+    hit = _MAKE_IN_MODEL.get(k) or _MAKE_IN_MODEL_ALIASES.get(k)
+    if not hit and _MAKE_SQUASH_RE.sub("", words[-1].lower()) == "scion":
+        hit = "Scion"
+    if not hit:
+        return None
+    hk = _MAKE_SQUASH_RE.sub("", hit.lower())
+    if hk == make_key or (make_key, hk) in _MAKE_IN_MODEL_TWINS:
+        return None
+    if _MAKE_FAMILY_OF.get(make_key) is None or _MAKE_FAMILY_OF.get(make_key) != _MAKE_FAMILY_OF.get(hk):
+        return None
+    return hit
 
 # "General Motors" (3,046 rows: Pull-N-Save + Nevada Pic-A-Part label every GM
 # car with the corporation, not the division). Resolve to the real marque only
@@ -21190,7 +21383,9 @@ def normalize_make(make: str, model: str = "", vin: str = "", year: int = 0) -> 
     key = _make_key(s)
     if key in ("generalmotors", "gm"):
         return _resolve_general_motors(model, vin, year) or "General Motors"
-    return _MAKE_ALIASES.get(key, s)
+    s = _MAKE_ALIASES.get(key, s)
+    named = _make_named_in_model(_make_key(s), model)
+    return named or s
 
 
 _DATE_ADDED_MAX_AGE_DAYS = 15 * 365  # ~15 years; nothing sits on a U-pull lot that long

@@ -1733,7 +1733,7 @@ function effectiveRadiusMi() {
  * ("Misc" rows are Pull-A-Part's "1977 CAR" / "Commercial Truck" stubs).
  * The cars stay browsable under "All makes"; they just don't get a
  * dropdown entry. */
-const JUNK_MAKES = new Set(['misc', 'miscellaneous', 'unknown', 'other', '']);
+const JUNK_MAKES = new Set(['misc', 'miscellaneous', 'unknown', 'other', '', 'trailer', 'atv / motorcycle', 'motorcycle']);
 
 /* Vehicles inside the current center+radius — the population for the Make
  * and Model dropdowns, so the picker never offers a brand with zero cars
@@ -6714,6 +6714,10 @@ function populateWatchModelOptions() {
       _watchModelCounts.set(v.model, (_watchModelCounts.get(v.model) || 0) + 1);
     }
   }
+  // A model on ONE car nationwide is a yard's typo far more often than a real
+  // nameplate (2026-10-29 audit: 'Ttoytcoma', 'Unknown'). Keep it out of the
+  // picker once the whole scan is in; "Watch anyway" still takes it by name.
+  if (liveComplete) for (const [m, n] of [..._watchModelCounts]) if (n < 2) _watchModelCounts.delete(m);
   renderWatchModelList();
   updateWatchModelBtnLabel();
 }

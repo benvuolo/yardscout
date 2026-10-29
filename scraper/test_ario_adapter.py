@@ -216,6 +216,19 @@ try:
 finally:
     js._ario_live_post = _orig_post
 
+# ---- 2026-10-29: Hollander descriptions split at the first space (Paul's) ----
+S = js._ario_split_category
+for raw, want in [
+    (("Town", "COUN"), ("Chrysler", "Town & Country")), (("Grand", "PRI"), ("Pontiac", "Grand Prix")),
+    (("Grand", "MAR"), ("Mercury", "Grand Marquis")), (("Crown", "VIC"), ("Ford", "Crown Victoria")),
+    (("Park", "AVE"), ("Buick", "Park Avenue")), (("Rav", "4"), ("Toyota", "RAV4")), (("4", "Runner"), ("Toyota", "4Runner")),
+    (("A4", "AUDI"), ("Audi", "A4")), (("Xb", "Scion"), ("Scion", "xB")), (("Tc", "Scion"), ("Scion", "tC")),
+    (("X", "TYPE"), ("Jaguar", "X-Type")), (("Sat", "L Sdn"), ("Saturn", "L-Series")),
+    (("Olds", "88"), ("Oldsmobile", "Eighty-Eight")), (("Conv", "Van"), ("Other", "Conversion Van")),
+    (("Toyota", "Camry"), ("Toyota", "Camry")),   # a real make passes through
+]:
+    check(f"split {raw} -> {want}", S(*raw) == want, str(S(*raw)))
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILED: {FAILS}")

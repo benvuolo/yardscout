@@ -348,6 +348,25 @@ check("enrich: HTML entity -> Town & Country", out[2]["model"] == "Town & Countr
 check("enrich: Mazda 3 -> Mazda3", out[3]["model"] == "Mazda3", out[3]["model"])
 check("enrich: F250Sd Pickup -> F-250 Super Duty", out[4]["model"] == "F-250 Super Duty", out[4]["model"])
 
+# ---- 2026-10-29 audit: Hollander 9-char abbreviations + trailing make ----
+print("hollander abbreviations:")
+for raw, make, want in [
+    ("Silvrdo15", "Chevrolet", "Silverado 1500"), ("SilvRDO15", "Chevrolet", "Silverado 1500"),
+    ("Trailblaz", "Chevrolet", "Trailblazer"), ("Tchev1500", "Chevrolet", "C/K 1500"),
+    ("Grandcher", "Jeep", "Grand Cherokee"), ("Chergrand", "Jeep", "Grand Cherokee"),
+    ("Expediton", "Ford", "Expedition"), ("F150New", "Ford", "F-150"), ("Transcnct", "Ford", "Transit Connect"),
+    ("Optimakia", "Kia", "Optima"), ("Pathfindr", "Nissan", "Pathfinder"), ("Highlandr", "Toyota", "Highlander"),
+    ("Sierra150", "GMC", "Sierra 1500"), ("Yukonxl15", "GMC", "Yukon XL 1500"), ("Mountneer", "Mercury", "Mountaineer"),
+    ("Rendezvou", "Buick", "Rendezvous"), ("Town Coun", "Chrysler", "Town & Country"),
+    ("Lancermit", "Mitsubishi", "Lancer"), ("Outbakleg", "Subaru", "Outback"), ("Minicoope", "MINI", "Cooper"),
+    ("Ttoytcoma", "Toyota", "Tacoma"), ("Xb Scion", "Scion", "xB"), ("Tc Scion", "Scion", "tC"),
+    ("A4 Audi", "Audi", "A4"), ("428I Bmw", "BMW", "428i"), ("Cc Volks", "Volkswagen", "CC"),
+    ("4Runner Sr5", "Toyota", "4Runner"), ("Tundra 4WD Truck", "Toyota", "Tundra"),
+]:
+    check(f"{make} {raw!r} -> {want!r}", N(raw, make) == want, N(raw, make))
+check("trailing make strip never empties the model", N("Audi", "Audi") == "Audi")
+check("unknown abbreviation left alone (never guessed)", N("Buick-Sw", "Buick") == "Buick-Sw")
+
 print()
 if failures:
     print(f"{len(failures)} FAILURE(S): {failures}")

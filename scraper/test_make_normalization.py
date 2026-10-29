@@ -145,6 +145,25 @@ check("enrich: Vw -> Volkswagen", out[1]["make"] == "Volkswagen", out[1]["make"]
 check("enrich: GM + 1GK VIN -> GMC", out[2]["make"] == "GMC", out[2]["make"])
 check("enrich: Datsun untouched", out[3]["make"] == "Datsun", out[3]["make"])
 
+# ---- 5. 2026-10-29 audit: typo makes + a make named inside the model -------
+print("typo aliases + make-in-model:")
+for raw, want in [("Olds", "Oldsmobile"), ("Sat", "Saturn"), ("Hona", "Honda"), ("Gnc", "GMC"),
+                  ("Chevy Cp", "Chevrolet"), ("Fleetwood", "Cadillac")]:
+    check(f"{raw!r} -> {want}", N(raw) == want, N(raw))
+check("Chrysler + 'Dodge Caravan' -> Dodge (same family)", N("Chrysler", model="Dodge Caravan") == "Dodge")
+check("Ford + 'Lincoln Town Car' -> Lincoln", N("Ford", model="Lincoln Town Car") == "Lincoln")
+check("Toyota + 'Audi A3' stays Toyota (cross-family: never guess)", N("Toyota", model="Audi A3") == "Toyota", N("Toyota", model="Audi A3"))
+check("Kia + 'Smart Forte' stays Kia (cross-family note)", N("Kia", model="Smart Forte") == "Kia")
+check("Toyota + 'Tc Scion' -> Scion (make last)", N("Toyota", model="Tc Scion") == "Scion")
+check("BMW + 'Mini Cooper' -> MINI", N("BMW", model="Mini Cooper") == "MINI")
+check("Dodge + 'Ram 1500' stays Dodge (Ram is a period model name)", N("Dodge", model="Ram 1500") == "Dodge")
+check("Chevrolet + 'Geo Prizm' stays Chevrolet (year-gated elsewhere)", N("Chevrolet", model="Geo Prizm") == "Chevrolet")
+check("own make in model is not a switch", N("Ford", model="Ford Ranger") == "Ford")
+check("GMC + 'Chevrolet 1500 Pickup' stays GMC (Hollander names GM twins after the Chevy)", N("GMC", model="Chevrolet 1500 Pickup") == "GMC")
+check("single-word model never switches", N("Toyota", model="Audi") == "Toyota")
+check("a make as the LAST word is a yard note, not a switch", N("Mitsubishi", model="Outlander Subaru") == "Mitsubishi")
+check("…except Hollander's 'Xb Scion'", N("Toyota", model="Xb Scion") == "Scion")
+
 print()
 if failures:
     print(f"{len(failures)} FAILURE(S): {failures}")
