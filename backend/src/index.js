@@ -25,6 +25,8 @@
  *   POST /v1/admin/ent/grant                      x-ent-admin (owner comps → ENTITLEMENTS KV)
  *   POST /v1/admin/coverage/digest/run            x-admin-secret (manual owner-digest trigger)
  *   POST /v1/admin/saved-alerts/dispatch          x-admin-secret (manual saved-car alert dispatch)
+ *   POST /v1/admin/ops/check/run                  x-admin-secret (hourly owner-alert check now; {dryRun})
+ *   POST /v1/admin/ops/daily/run                  x-admin-secret (daily health email now; {dryRun})
  *   POST /v1/iap/revenuecat                       RevenueCat webhook auth
  */
 
@@ -61,14 +63,16 @@ import {
 } from './coverage.js';
 import { handleSavedAlertsDispatchRun } from './saved_alerts.js';
 import { runScanWatchdog } from './scan_watchdog.js';
+import { runOpsCheck, runDailyReport, handleOpsCheckRun, handleOpsDailyRun } from './ops_monitor.js';
 
 export default {
   /* Cron (wrangler.toml [triggers]): weekly digest email for free users
    * whose watches matched arrivals this week. Pro users hear instantly via
    * dispatchAlerts on each inventory commit and are skipped here. */
   async scheduled(event, env, ctx) {
-    // Hourly: scan watchdog only. The digests below must ONLY run on the
-    // Monday cron — every cron in wrangler.toml lands in this handler.
+    // Hourly: scan watchdog, then the owner-alert check (ops_monitor.js),
+    // which reads the watchdog decision just stored. The digests below must
+    // ONLY run on the Monday cron — every cron in wrangler.toml lands here.
     if (event.cron === '23 * * * *') {
       ctx.waitUntil(
         runScanWatchdog(env)
@@ -78,6 +82,18 @@ export default {
             if (env.ENTITLEMENTS) await env.ENTITLEMENTS.put('ops:scan-watchdog', JSON.stringify({ at: new Date().toISOString(), ...r }));
           })
           .catch((e) => console.log('scan watchdog failed:', e && (e.stack || e.message)))
+          .then(() => runOpsCheck(env))
+          .then((r) => console.log(`ops check: ${r.active.length} open, alerted [${r.alerted}], cleared [${r.cleared}], ${r.reason}`))
+          .catch((e) => console.log('ops check failed:', e && (e.stack || e.message)))
+      );
+      return;
+    }
+    // Daily 13:07 UTC: owner health email only.
+    if (event.cron === '7 13 * * *') {
+      ctx.waitUntil(
+        runDailyReport(env)
+          .then((r) => console.log(`ops daily: ${r.verdict}, sent=${r.sent}`))
+          .catch((e) => console.log('ops daily failed:', e && (e.stack || e.message)))
       );
       return;
     }
@@ -242,6 +258,7 @@ async function route(req, env, url, ctx) {
       || path === '/v1/admin/checkins/run'
       || path === '/v1/admin/coverage' || path === '/v1/admin/coverage/digest/run'
       || path === '/v1/admin/saved-alerts/dispatch'
+      || path === '/v1/admin/ops/check/run' || path === '/v1/admin/ops/daily/run'
       || path === '/v1/admin/test/ent') {
     const denied = await requireAdmin(req, env);
     if (denied) return denied;
@@ -280,6 +297,10 @@ async function route(req, env, url, ctx) {
     if (method === 'POST' && path === '/v1/admin/coverage/digest/run') {
       return json(await maybeSendCoverageDigest(env));
     }
+    // Ops monitoring: run the hourly alert check / daily health email now.
+    // Both return the computed report; {dryRun:true} computes without sending.
+    if (method === 'POST' && path === '/v1/admin/ops/check/run') return handleOpsCheckRun(req, env);
+    if (method === 'POST' && path === '/v1/admin/ops/daily/run') return handleOpsDailyRun(req, env);
     // DEV ONLY (404s in prod): seed a test entitlement into local KV.
     if (method === 'POST' && path === '/v1/admin/test/ent') {
       return handleTestEntitlement(req, env);

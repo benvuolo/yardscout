@@ -20,6 +20,8 @@
  * guard as google-play.js.
  */
 
+import { countOk, countFail, countGone } from './ops.js';
+
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const FCM_BASE = 'https://fcm.googleapis.com';
 const SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
@@ -114,15 +116,17 @@ export async function sendFcm(env, deviceToken, payload) {
       cachedAuth = null;
       r = await send(await accessToken(env));
     }
-    if (r.ok) return { ok: true, gone: false };
+    if (r.ok) { await countOk(env, 'fcm'); return { ok: true, gone: false }; }
     const text = await r.text();
     // 404 UNREGISTERED = app uninstalled / token rotated away.
     // 400 "not a valid FCM registration token" = garbage token — also prune.
     const gone = r.status === 404 || /UNREGISTERED|not a valid FCM registration token/i.test(text);
     if (!gone) console.log('fcm send failed:', r.status, text.slice(0, 200));
+    if (gone) await countGone(env, 'fcm'); else await countFail(env, 'fcm', r.status, text);
     return { ok: false, gone };
   } catch (e) {
     console.log('fcm send error:', e && e.message);
+    await countFail(env, 'fcm', 0, `error: ${e && e.message}`);
     return { ok: false, gone: false };
   }
 }

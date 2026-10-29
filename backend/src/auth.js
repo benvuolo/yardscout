@@ -14,6 +14,7 @@
 import {
   json, err, redirect, sha256Hex, randomToken, isoNow, rateLimit, clientIp,
 } from './util.js';
+import { resendFetch } from './ops.js';
 
 const MAGIC_TTL_MS = 15 * 60 * 1000;          // 15 minutes
 const SESSION_TTL_MS = 90 * 24 * 3600 * 1000; // 90 days
@@ -53,7 +54,7 @@ export async function handleRequestLink(req, env) {
 
   const link = new URL(req.url).origin + '/v1/auth/callback?token=' + encodeURIComponent(token);
 
-  if (env.DEV_MODE === '1') {
+  if (env.DEV_MODE === '1' && !env.RESEND_API_URL_TEST) {
     // Local dev / tests: no email sender needed — the link is logged and
     // returned so the flow can be exercised end-to-end offline.
     console.log('[DEV_MODE] magic link for ' + email + ': ' + link);
@@ -62,22 +63,32 @@ export async function handleRequestLink(req, env) {
   if (!env.RESEND_API_KEY) {
     return err(503, 'email_unconfigured', 'Sign-in email is not configured yet (missing RESEND_API_KEY).');
   }
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      authorization: 'Bearer ' + env.RESEND_API_KEY,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: env.EMAIL_FROM || 'YardScout <onboarding@resend.dev>',
-      to: [email],
-      subject: 'Your YardScout sign-in link',
-      text:
-        'Tap to sign in to YardScout:\n\n' + link + '\n\n' +
-        'This link works once and expires in 15 minutes. ' +
-        "If you didn't request it, you can ignore this email.",
-    }),
-  });
+  // (The ops-monitor e2e sets RESEND_API_URL_TEST to exercise this real
+  // send path against a mock Resend — see ops.js resendUrl.)
+  let r;
+  try {
+    r = await resendFetch(env, 'email:auth', email, {
+      method: 'POST',
+      headers: {
+        authorization: 'Bearer ' + env.RESEND_API_KEY,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: env.EMAIL_FROM || 'YardScout <onboarding@resend.dev>',
+        to: [email],
+        subject: 'Your YardScout sign-in link',
+        text:
+          'Tap to sign in to YardScout:\n\n' + link + '\n\n' +
+          'This link works once and expires in 15 minutes. ' +
+          "If you didn't request it, you can ignore this email.",
+      }),
+    });
+  } catch (e) {
+    console.log('resend send error:', e && e.message);
+    return err(502, 'email_failed', 'Could not send the sign-in email. Try again in a minute.');
+  }
+  // Never claim {sent:true} unless Resend accepted it (the 2026-10 sandbox
+  // sender failure was invisible to users because of exactly that).
   if (!r.ok) {
     console.log('resend send failed:', r.status, (await r.text()).slice(0, 500));
     return err(502, 'email_failed', 'Could not send the sign-in email. Try again in a minute.');

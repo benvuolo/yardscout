@@ -29,6 +29,7 @@ import { json, err, isoNow, gunzipToText, vindexBucket } from './util.js';
 import { getDirectory } from './inventory.js';
 import { sendDevicePush, devicePushConfigured } from './devices.js';
 import { entActive, esc, unsubUrl } from './email_alerts.js';
+import { resendFetch } from './ops.js';
 
 const MAX_SAVED_PER_OWNER = 50;
 const MAX_KEYS_PER_RUN = 300;      // ~2 resolves/ms worst case; well under the budget
@@ -213,7 +214,7 @@ async function sendSavedEmail(env, email, events) {
     if (env.DEV_MODE === '1') { console.log(`DEV saved-car email → ${email}: ${events.length} events`); return true; }
     return false;
   }
-  const r = await fetch('https://api.resend.com/emails', {
+  const r = await resendFetch(env, 'email:saved', email, {
     method: 'POST',
     headers: { authorization: 'Bearer ' + env.RESEND_API_KEY, 'content-type': 'application/json' },
     body: JSON.stringify({

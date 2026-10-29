@@ -177,5 +177,23 @@ check('quiet device given up after 7 days, silently', r.data.gaveUp >= 1 && (awa
 r = await api('/v1/admin/device-digest/run', { method: 'POST', headers: ADMIN });
 check('weekly recap does not repeat the check-in cars', (await sentList()).filter((s) => s.token === chkToken).length === 1);
 
+/* ---- ops send accounting (src/ops.js): every FCM outcome is counted ----
+ * ok = accepted sends above; gone = the UNREGISTERED device; fail = a real
+ * provider error (mock answers 500 for "server-error" tokens). */
+const errId = uuid();
+r = await api('/v1/device/register', J({}, { deviceId: errId, fcmToken: fcmTok('server-error'), tier: 'pro',
+  watches: [{ make: 'Subaru', model: 'Outback', lat: 40.76, lng: -111.89, radiusMi: 100 }] }));
+r = await api('/v1/admin/device-alerts/dispatch', J(ADMIN, { arrivals: [arrival(9301, { make: 'Subaru', model: 'Outback' })] }));
+check('provider 500 → send not ok', r.status === 200 && r.data.sends === 1 && r.data.devices === 0, JSON.stringify(r.data));
+const okSends = (await sentList()).length;
+r = await api('/v1/admin/ops/daily/run', J(ADMIN, { dryRun: true }));
+const fcmStats = r.data.channels?.fcm || {};
+check('ops counter: fcm ok = accepted sends', fcmStats.ok === okSends, `${JSON.stringify(fcmStats)} vs ${okSends}`);
+check('ops counter: fcm gone counted (dead token)', fcmStats.gone >= 1, JSON.stringify(fcmStats));
+check('ops counter: fcm fail = 1 (provider 500)', fcmStats.fail === 1, JSON.stringify(fcmStats));
+const fe = (r.data.recentErrors || []).find((e) => e.channel === 'fcm');
+check('fcm error row: status 500, no token in detail', fe && fe.status === 500 && !/APA91b|server-error/.test(fe.detail || ''), JSON.stringify(fe));
+check('push-ready device counts reported', Number.isInteger(r.data.audience?.proDevices) && r.data.audience.proDevices >= 1, JSON.stringify(r.data.audience));
+
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);

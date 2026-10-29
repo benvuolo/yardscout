@@ -14,6 +14,7 @@
  */
 
 import { json, err, isoNow } from './util.js';
+import { resendFetch } from './ops.js';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const VALID_KINDS = new Set(['car', 'engine', 'part', 'yard']);
@@ -120,7 +121,7 @@ async function sendDigestEmail(env, groups, total) {
     }
     return false;
   }
-  const r = await fetch('https://api.resend.com/emails', {
+  const r = await resendFetch(env, 'email:coverage', to, {
     method: 'POST',
     headers: { authorization: 'Bearer ' + env.RESEND_API_KEY, 'content-type': 'application/json' },
     body: JSON.stringify({

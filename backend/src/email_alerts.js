@@ -29,6 +29,7 @@
  */
 
 import { json, err, isoNow } from './util.js';
+import { resendFetch } from './ops.js';
 import { watchMatches, loadArrivals, sanitizeVpicFilters } from './alerts.js';
 import { sanitizeSaved } from './saved_alerts.js';
 
@@ -254,7 +255,7 @@ async function sendAlertEmail(env, email, matches) {
     }
     return false;
   }
-  const r = await fetch('https://api.resend.com/emails', {
+  const r = await resendFetch(env, 'email:pro-alert', email, {
     method: 'POST',
     headers: { authorization: 'Bearer ' + env.RESEND_API_KEY, 'content-type': 'application/json' },
     body: JSON.stringify({

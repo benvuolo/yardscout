@@ -12,6 +12,7 @@
  * genuinely exercised, not stubbed. Device-token behavior:
  *   - tokens containing "dead-token"   → 404 UNREGISTERED (prune contract)
  *   - tokens containing "malformed"    → 400 "not a valid FCM registration token"
+ *   - tokens containing "server-error" → 500 INTERNAL (a real failure, not a dead token)
  *   - anything else                    → 200 (recorded)
  * GET /sent returns every accepted send as [{token, title, body, data}] so
  * the e2e can assert deliveries and payloads.
@@ -108,6 +109,9 @@ createServer((req, res) => {
       if (!tok) return ferr(res, 400, 'INVALID_ARGUMENT', 'message.token required', 'INVALID_ARGUMENT');
       if (tok.includes('dead-token')) {
         return ferr(res, 404, 'NOT_FOUND', 'Requested entity was not found.', 'UNREGISTERED');
+      }
+      if (tok.includes('server-error')) {
+        return ferr(res, 500, 'INTERNAL', 'Internal error encountered.');
       }
       if (tok.includes('malformed')) {
         return ferr(res, 400, 'INVALID_ARGUMENT',
