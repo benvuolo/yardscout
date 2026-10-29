@@ -158,7 +158,10 @@ with sync_playwright() as pw:
               f"visible={visible_cards(page)} ver={n_ver}")
         check(f"{w} counts still visible while filtered",
               counts.is_visible() and "likely" in counts.inner_text())
-        data_fetches = [u for u in req_before if "/data/" in u or ".json" in u]
+        # The radius-first loader keeps pulling far-away inventory shards in
+        # the background (data/inv/shard-NN.json) — that's the boot load
+        # finishing, not a refetch caused by the toggle.
+        data_fetches = [u for u in req_before if ("/data/" in u or ".json" in u) and "/data/inv/shard-" not in u]
         check(f"{w} toggling made no refetch", not data_fetches,
               str(data_fetches[:2]))
         if width == 390:

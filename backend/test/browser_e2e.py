@@ -103,6 +103,9 @@ def run_browser():
         # ── 1. default state: API OFF, static file loads as before ──────────
         page.goto(f"{WEB}/index.html", wait_until="domcontentloaded")
         page.wait_for_function("typeof liveLoaded !== 'undefined' && liveLoaded === true", timeout=30000)
+        # Radius-first shards: liveLoaded fires once the nearby shards are in;
+        # the national total arrives when the background load completes.
+        page.wait_for_function("typeof liveComplete !== 'undefined' && liveComplete === true", timeout=120000)
         check("flag OFF: static inventory path still works",
               page.evaluate("liveInventory.length") > 100000)
         check("flag OFF: account UI stays hidden",
