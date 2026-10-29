@@ -110,7 +110,7 @@ with sync_playwright() as pw:
           page.locator("#pf-results .pf-tier").count() == 0)
     body = page.locator("#pf-results").inner_text()
     check("tailgate browse: resale value shown per row (pro)",
-          "worth $" in body, body[:200])
+          "Used online: ~$" in body, body[:200])
     dists = page.eval_on_selector_all(
         "#pf-results .pf-row-card .dist",
         "els => els.map(e => parseInt(e.textContent))")
@@ -173,7 +173,7 @@ with sync_playwright() as pw:
     check("fitment unchanged: car added -> tiered donor rows",
           rows.count() > 0 and tiers.count() >= rows.count(),
           f"{rows.count()} rows / {tiers.count()} tiers")
-    fit_head = page.locator("#pf-results .pf-results-head").inner_text()
+    fit_head = page.locator("#pf-results .pf-tier-counts").inner_text()   # toggle row under the head
     check("fitment unchanged: verified/likely split in head",
           "verified" in fit_head and "likely" in fit_head, fit_head[:140])
     page.screenshot(path=str(SHOTS / "3_fitment_unchanged.png"))
@@ -237,12 +237,13 @@ with sync_playwright() as pw:
     pf_pick_part(page, "tailgate")
     rows = page.locator("#pf-results .pf-row-card.pf-browse")
     check("free: browse still lists cars", rows.count() > 0)
+    # Since 2026-10-26 free rows carry no value at all (no per-row blur);
+    # one honest "Pro adds…" line in the head says what's missing.
     check("free: browse resale values blurred",
-          page.locator("#pf-results .locked-blur").count() > 0)
-    # The blur mask reads 'worth $•••–$•••' — a LEAK is a real digit value.
+          page.locator("#pf-results .pf-results-head .lock-text").count() == 1)
     import re as _re
     check("free: no real value strings leak",
-          not _re.search(r"worth \$\d", page.locator("#pf-results").inner_text()))
+          not _re.search(r"(Used online: ~|worth )\$\d", page.locator("#pf-results").inner_text()))
     page.screenshot(path=str(SHOTS / "6_browse_free_blur.png"))
 
     # Live cards' free blur unaffected by the filter's removal.

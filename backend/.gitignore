@@ -9,3 +9,5 @@ test/.out-email/
 test/.out-alerts/
 test/.out-ops/
 site-proxy/test/.out/
+test/.out-devices/
+test/.out-coverage/

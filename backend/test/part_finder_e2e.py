@@ -128,7 +128,9 @@ with sync_playwright() as pw:
               page.locator("#pf-results").inner_text()[:120])
         if not rows.count():
             continue
-        head = page.locator("#pf-results .pf-results-head").inner_text()
+        # Since 2026-10-23 the split sits in the always-visible toggle row
+        # right under the head (counts + "Verified fits only").
+        head = page.locator("#pf-results .pf-tier-counts").inner_text()
         check(f"{slug}: head reports verified/likely split",
               "verified" in head and "likely" in head, head[:120])
         n_ver = page.locator("#pf-results .pf-row-card.pf-verified").count()

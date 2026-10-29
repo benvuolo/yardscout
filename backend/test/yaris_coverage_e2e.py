@@ -101,7 +101,7 @@ with sync_playwright() as pw:
           rows.count() > 0,
           page.locator("#pf-results").inner_text()[:150])
     if rows.count():
-        head = page.locator("#pf-results .pf-results-head").inner_text()
+        head = page.locator("#pf-results .pf-tier-counts").inner_text()   # toggle row under the head
         check("yaris06: head reports the verified/likely split",
               "likely" in head.lower(), head[:120])
         # No published 2006 row exists — every donor must be Likely, none

@@ -11,14 +11,20 @@
   3. alert entry, cold — launching on #alert=<id> normalizes to #car=<id>,
      fetches past the cache, and lands on the card.
 
-The static server serves docs/ as-is but owns /data/inventory_live.json:
-tests swap the payload ("a new scan published") and count hits.
+The static server serves docs/ as-is but owns the inventory: the full
+inventory_live.json AND the radius-first shards under /data/inv/ (built from
+the same payload with scraper/inventory_shards.py — exactly what the scan
+publishes). Tests swap the payload ("a new scan published") and count hits on
+the two entry points the app revalidates: inv/manifest.json and
+inventory_live.json.
 
 Run from backend/:  ../.venv/bin/python test/alert_freshness_e2e.py
 """
 
 import http.server
 import json
+import sys
+import tempfile
 import threading
 import time
 from datetime import datetime, timedelta, timezone
@@ -28,6 +34,10 @@ from playwright.sync_api import sync_playwright
 
 BACKEND = Path(__file__).resolve().parent.parent
 DOCS = BACKEND.parent / "docs"
+sys.path.insert(0, str(BACKEND.parent / "scraper"))
+from inventory_shards import write_inventory_shards  # noqa: E402
+
+SHARD_ROOT = Path(tempfile.mkdtemp(prefix="ys-alert-fresh-"))
 WEB_PORT = 8793
 WEB = f"http://127.0.0.1:{WEB_PORT}"
 
@@ -43,18 +53,31 @@ def iso_ago(minutes):
     return (datetime.now(timezone.utc) - timedelta(minutes=minutes)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+FIELDS = ["id", "vin", "year", "make", "model", "row", "dateAdded", "yard", "partSet", "maxValue", "premium"]
+YARD_FIELDS = ["location", "city", "state", "lat", "lng", "avgLifespanDays", "lifespanBasis"]
+
+
 def vehicle(vid, model="4Runner", date_added=None):
-    return {
-        "id": vid, "vin": "", "year": 1999, "make": "Toyota", "model": model,
-        "row": "42", "dateAdded": date_added or iso_ago(30),
-        "location": "Pick-n-Pull - Ogden", "city": "Ogden", "state": "UT",
-        "lat": 41.2, "lng": -111.97, "hasMatch": False, "maxValue": 0,
-        "displayName": f"Toyota {model}", "topParts": [],
-    }
+    # A schema-v2 row (what the scraper publishes), all at one Ogden yard.
+    return [vid, "", 1999, "Toyota", model, "42",
+            date_added or datetime.now(timezone.utc).strftime("%Y-%m-%d"), 0, 0, 0, 0]
 
 
 def payload(scraped_at, vehicles):
-    return {"vehicles": vehicles, "scrapedAt": scraped_at}
+    return {
+        "schemaVersion": 2, "scrapedAt": scraped_at, "pricesLastReviewed": "2026-10-01",
+        "fields": FIELDS, "yardFields": YARD_FIELDS,
+        "yards": [["Pick-n-Pull - Ogden", "Ogden", "UT", 41.2, -111.97, 90, "yard"]],
+        "partSets": [[]], "vpic": {}, "vehicles": vehicles,
+    }
+
+
+def shard_dir(inv):
+    """The /data/inv/ tree for this payload, built once per scan."""
+    d = SHARD_ROOT / inv["scrapedAt"].replace(":", "-")
+    if not (d / "inv" / "manifest.json").exists():
+        write_inventory_shards(inv, None, d)
+    return d / "inv"
 
 
 class Server(http.server.ThreadingHTTPServer):
@@ -72,16 +95,27 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
+    def _json(self, body):
+        self.send_response(200)
+        self.send_header("content-type", "application/json")
+        self.send_header("content-length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def do_GET(self):
-        if self.path.split("?")[0].endswith("/data/inventory_live.json"):
+        path = self.path.split("?")[0]
+        if path.endswith("/data/inventory_live.json"):
             Handler.hits.append(self.path)
-            body = json.dumps(Handler.inventory).encode()
-            self.send_response(200)
-            self.send_header("content-type", "application/json")
-            self.send_header("content-length", str(len(body)))
-            self.end_headers()
-            self.wfile.write(body)
-            return
+            return self._json(json.dumps(Handler.inventory).encode())
+        if "/data/inv/" in path:
+            name = path.rsplit("/", 1)[1]
+            if name == "manifest.json":
+                Handler.hits.append(self.path)   # the revalidation entry point
+            f = shard_dir(Handler.inventory) / name
+            if not f.exists():
+                self.send_error(404)
+                return
+            return self._json(f.read_bytes())
         super().do_GET()
 
 
@@ -127,6 +161,10 @@ def main():
         ctx, page = new_page(browser)
         page.goto(WEB + "/")
         wait_for(page, "typeof liveLoaded !== 'undefined' && liveLoaded")
+        # Let the radius-first background load finish first: a scan that
+        # publishes MID-load is caught by the shard scrapedAt check and
+        # re-fetched fresh (one extra manifest hit, by design).
+        wait_for(page, "typeof liveComplete !== 'undefined' && liveComplete", 30)
         boot_hits = len(Handler.hits)
         # a new scan publishes while the app sits in the background
         Handler.inventory = payload(iso_ago(1), [vehicle(101), vehicle(202, model="Tacoma")])
@@ -135,7 +173,8 @@ def main():
               wait_for(page, f"liveScrapedAt === '{Handler.inventory['scrapedAt']}'"),
               f"hits {boot_hits}→{len(Handler.hits)}")
         check("new scan swapped in place (new car present)",
-              page.evaluate("liveInventory.some(v => String(v.id) === '202')"))
+              wait_for(page, "liveInventory.some(v => String(v.id) === '202')", 10),
+              f"ids={page.evaluate('liveInventory.map(v => v.id)')} complete={page.evaluate('liveComplete')}")
         check("resume refetch hit the network exactly once",
               len(Handler.hits) == boot_hits + 1, f"hits {boot_hits}→{len(Handler.hits)}")
         # immediate second resume: throttled, no extra fetch
