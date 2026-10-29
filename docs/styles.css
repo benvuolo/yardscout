@@ -1419,6 +1419,24 @@
   .sample-pitch { margin-top: 0.65rem; padding: 0.55rem 0.7rem; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); font-size: 0.8125rem; line-height: 1.45; color: var(--text); cursor: pointer; }
   .sample-pitch strong { color: var(--accent); }
   .sample-pitch-cta { color: var(--accent); font-weight: 700; white-space: nowrap; }
+  /* Quick watches (2026-10-29): strip above the Live grid + post-watch toast. */
+  .watch-strip { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.75rem; background: var(--accent-soft); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); font-size: 0.875rem; line-height: 1.4; color: var(--text); }
+  .watch-strip > .ico { flex-shrink: 0; color: var(--accent); }
+  .watch-strip > span { flex: 1; min-width: 0; }
+  .watch-strip .btn { flex-shrink: 0; padding: 0.4rem 0.9rem; font-size: 0.8125rem; }
+  .watch-strip.watching { background: var(--green-soft); border-left-color: var(--accent2); }
+  .watch-strip.watching > .ico { color: var(--accent2); }
+  .watch-strip .linklike, .watch-toast .linklike { background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; flex-shrink: 0; }
+  .watch-toast { position: fixed; left: 50%; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 1rem); width: min(26rem, calc(100vw - 2rem)); z-index: 250; background: var(--surface); color: var(--text); border: 1px solid var(--border-dark); border-left: 3px solid var(--accent2); border-radius: var(--radius-sm); box-shadow: 0 6px 24px rgba(27, 25, 19, 0.22); padding: 0.65rem 0.75rem; font-size: 0.875rem; line-height: 1.4; opacity: 0; pointer-events: none; transition: opacity 0.18s, transform 0.18s; }
+  .watch-toast.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+  .watch-toast-head { display: flex; align-items: center; gap: 0.45rem; }
+  .watch-toast-head > .ico { color: var(--accent2); flex-shrink: 0; }
+  .watch-toast-head > span { flex: 1; min-width: 0; }
+  .watch-toast-x { background: none; border: none; color: var(--text-dim); font-size: 1.25rem; line-height: 1; padding: 0 0.15rem; cursor: pointer; }
+  .watch-toast-next { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.45rem; color: var(--text-dim); font-size: 0.8125rem; }
+  .watch-toast-next > span { flex: 1; min-width: 0; }
+  .watch-toast-next .btn { flex-shrink: 0; padding: 0.4rem 0.85rem; font-size: 0.8125rem; text-decoration: none; }
+  @media (max-width: 720px) { .watch-toast { bottom: calc(4.6rem + env(safe-area-inset-bottom, 0px)); } }
   .wl-miss { display: block; margin-top: 0.3rem; font-size: 0.75rem; line-height: 1.45; color: var(--text-dim); }
   .wl-miss .linklike { background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
   .pro-car { margin: 0.2rem 0 0.5rem; padding: 0.7rem 0.8rem; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); }

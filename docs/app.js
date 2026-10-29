@@ -2773,10 +2773,7 @@ document.getElementById('live-grid').addEventListener('click', e => {
   const watch = e.target.closest('.watch-btn');
   if (watch) {
     e.preventDefault();
-    // One-tap watch is a Pro convenience: free users build watches in the
-    // Alerts tab (their radius tops out anyway), Pro watches from any card.
-    if (!isPro()) { openUpgradeSheet('watch-card'); return; }
-    watchFromCard(watch);
+    watchFromCard(watch);   // free too (up to FREE_WATCH_LIMIT) — see QUICK WATCHES
     return;
   }
   const share = e.target.closest('.share-btn');
@@ -3298,7 +3295,8 @@ function renderLive() {
           <p style="margin-top:1rem;font-size: 0.75rem;">We track every major self-service chain — LKQ Pick Your Part, Pick-n-Pull, and Pull-A-Part — plus a growing set of independents: <span class="coverage-count">${yardCountDisplay()}</span> yards nationwide. Missing your local yard? <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">Tell us</a>.</p>`;
       }
     }
-    document.getElementById('live-grid').innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;
+    document.getElementById('live-grid').innerHTML = (activeZipCoords ? watchStripHtml(0) : '')
+      + `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;
     return;
   }
 
@@ -3353,7 +3351,7 @@ function renderLive() {
       ${chips ? `<div class="week-chips">${chips}</div>` : ''}
     </div>`;
   }
-  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + vehiclesToRender.map(v => {
+  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + watchStripHtml(vehicles.length) + vehiclesToRender.map(v => {
     // Pro sees everything; free users get exactly one fully-unlocked sample card.
     const unlocked = isPro() || (sampleKey !== null && vehicleKey(v) === sampleKey);
     const isSampleCard = unlocked && !isPro();
@@ -6419,28 +6417,58 @@ function hasWatchFor(make, model) {
       === String(canonicalModel(make, model) || '').toLowerCase()));
 }
 
-/* One-tap watch from a Live card (Pro): make+model, all years, any condition.
- * Idempotent — tapping an already-watched card just confirms. */
+/* ===== QUICK WATCHES (2026-10-29): watch straight from a search =====
+ * Usage data, Oct 15-28: ~390 zip entries but only 19 watches — and a
+ * watch is what brings someone back ("your 4Runner just landed") and what
+ * Pro sells (free: weekly recap; Pro: a push within hours). So watching is
+ * one tap wherever someone is already looking: the bell on any car card
+ * (free too, up to the free limit — it used to open the paywall) and a
+ * strip above the grid whenever a make is filtered. Quick watches follow
+ * the current search: make + model(s) + year range, centred on the zip at
+ * the Cars-tab radius (null = Pro's "Any distance" = nationwide). */
+const FREE_WATCH_LIMIT = 5;              // mirrors MAX_WATCHES_FREE in backend/src/devices.js
+const APP_STORE_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
+const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
+
+/** Adds one make/model watch scoped to the current search. Returns
+ * 'added' | 'exists' | 'limit' | 'no-zip'. */
+function addQuickWatch(make, model, yrMin, yrMax, source) {
+  if (!make) return 'exists';
+  model = model || '';
+  const watchlist = loadWatchlist();
+  const same = (e) => canonicalMake(e.make).toLowerCase() === canonicalMake(make).toLowerCase()
+    && String(e.model || '').toLowerCase() === model.toLowerCase()
+    && (e.yrMin || null) === (yrMin || null) && (e.yrMax || null) === (yrMax || null);
+  if (watchlist.some(same) || (!yrMin && !yrMax && hasWatchFor(make, model))) return 'exists';
+  if (!isPro() && watchlist.length >= FREE_WATCH_LIMIT) return 'limit';
+  // Free watches need a centre: the backend requires a radius for free tiers.
+  if (!isPro() && !activeZipCoords) return 'no-zip';
+  const radiusMi = activeZipCoords ? (effectiveRadiusMi() || null) : null;
+  const entry = { make, model, yrMin: yrMin || null, yrMax: yrMax || null, matchOnly: false, radiusMi,
+    addedAt: new Date().toISOString() + '~' + Math.random().toString(36).slice(2, 8) };
+  if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
+  watchlist.push(entry);
+  saveWatchlist(watchlist);
+  // The cars already on the lots are known to you — alert only on arrivals
+  // from here on.
+  seedAlertedForEntry(entry);
+  syncWatchToServer(entry);
+  track('watch-created/' + source);
+  return 'added';
+}
+
+/* Bell on a Live card: make+model, all years. Tapping an already-watched
+ * card just confirms. */
 function watchFromCard(btn) {
   const make = btn.dataset.make, model = btn.dataset.model;
   if (!make) return;
-  if (!hasWatchFor(make, model)) {
-    // One-tap watch follows the current search scope: "watch this near me."
-    // Radius = whatever the Live tab is set to right now (null = Pro's "Any
-    // distance" = nationwide). Tighter or wider is an Alerts-tab edit away.
-    const radiusMi = activeZipCoords ? (effectiveRadiusMi() || null) : null;
-    const entry = { make, model, yrMin: null, yrMax: null, matchOnly: false, radiusMi,
-      addedAt: new Date().toISOString() + '~' + Math.random().toString(36).slice(2, 8) };
-    if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
-    const watchlist = loadWatchlist();
-    watchlist.push(entry);
-    saveWatchlist(watchlist);
-    // The car you tapped (and its lot-mates) are already known to you —
-    // alert only on arrivals from here on.
-    seedAlertedForEntry(entry);
-    syncWatchToServer(entry);
+  const r = addQuickWatch(make, model, null, null, 'card');
+  if (r === 'limit') { openUpgradeSheet('watch-limit'); return; }
+  if (r === 'no-zip') { alert('Set your zip code up top first, so the watch knows where "near you" is.'); return; }
+  if (r === 'added') {
     renderAlerts();
     checkAndNotify();
+    showWatchToast(`${make} ${model}`.trim());
   }
   // Flash confirmation on every matching bell currently rendered.
   document.querySelectorAll('.watch-btn').forEach(b => {
@@ -6452,6 +6480,110 @@ function watchFromCard(btn) {
   const orig = btn.innerHTML;
   btn.innerHTML = ICON.check;
   setTimeout(() => { btn.innerHTML = orig; }, 1200);
+}
+
+/** What the Live filters are looking for, as watch terms (null = no make). */
+function liveWatchScope() {
+  const make = document.getElementById('live-filter-make').value;
+  if (!make) return null;
+  const models = [...selectedModels];
+  const yrMin = parseInt(document.getElementById('live-filter-year-min').value, 10) || null;
+  const yrMax = parseInt(document.getElementById('live-filter-year-max').value, 10) || null;
+  const label = (models.length === 1 ? `${make} ${models[0]}` : models.length ? `${make} (${models.length} models)` : make)
+    + (yrMin || yrMax ? ` ${yrMin || ''}–${yrMax || ''}` : '');
+  const watched = (models.length ? models : ['']).every(m => loadWatchlist().some(e =>
+    canonicalMake(e.make).toLowerCase() === canonicalMake(make).toLowerCase()
+    && (!e.model || String(e.model).toLowerCase() === m.toLowerCase())
+    && (!e.yrMin || (yrMin && yrMin >= e.yrMin)) && (!e.yrMax || (yrMax && yrMax <= e.yrMax))));
+  return { make, models, yrMin, yrMax, label, watched };
+}
+
+/** Strip above the Live grid while a make is filtered: one tap watches it. */
+function watchStripHtml(nCars) {
+  if (focusedCarKey) return '';
+  const sc = liveWatchScope();
+  if (!sc) return '';
+  if (sc.watched) {
+    return `<div class="watch-strip watching" style="grid-column:1/-1;">${ICON.check}
+      <span>Watching <strong>${escapeHtml(sc.label)}</strong> &mdash; ${IS_NATIVE ? 'we&rsquo;ll tell you when another lands' : 'new ones light up in Alerts'}.</span>
+      <button type="button" class="linklike" onclick="jhOpenAlertsTab()">Manage</button></div>`;
+  }
+  const r = activeZipCoords ? effectiveRadiusMi() : null;
+  const where = r ? ` within ${r} mi` : (isPro() ? ' anywhere' : ' near you');
+  return `<div class="watch-strip" style="grid-column:1/-1;">${ICON.bell}
+    <span>${nCars ? 'Not the one?' : 'None here right now.'} ${IS_NATIVE ? 'Get told when' : 'Watch for'} ${nCars ? 'another' : 'one'} <strong>${escapeHtml(sc.label)}</strong>${IS_NATIVE ? ' lands' : ''}${where}.</span>
+    <button type="button" class="btn btn-primary btn-sm" onclick="jhWatchSearch()">Watch</button></div>`;
+}
+
+function jhWatchSearch() {
+  const sc = liveWatchScope();
+  if (!sc) return;
+  let added = 0, blocked = null;
+  for (const m of (sc.models.length ? sc.models : [''])) {
+    const r = addQuickWatch(sc.make, m, sc.yrMin, sc.yrMax, 'search');
+    if (r === 'added') added++;
+    else if (r === 'limit' || r === 'no-zip') { blocked = r; break; }
+  }
+  if (added) { renderAlerts(); checkAndNotify(); showWatchToast(sc.label); }
+  if (blocked === 'limit') openUpgradeSheet('watch-limit');
+  else if (blocked === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+  renderLive();
+}
+
+function jhOpenAlertsTab() {
+  try { document.querySelector('.tab[data-tab="alerts"]').click(); } catch (e) { /* boot race */ }
+}
+
+/* Confirmation after a quick watch, with the ONE next step that makes the
+ * watch actually reach the person: notifications on (app), the app itself
+ * (web), or — already set — what free vs Pro delivery looks like. Never
+ * more than one toast at a time; auto-hides. */
+let _watchToastTimer = null, _promoStepAside = false;
+function showWatchToast(label) {
+  let el = document.getElementById('watch-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'watch-toast';
+    el.className = 'watch-toast';
+    el.setAttribute('role', 'status');
+    document.body.appendChild(el);
+  }
+  const pushOn = localStorage.getItem('ys_push_on') === '1';
+  let next = '';
+  if (IS_NATIVE && !pushOn && document.getElementById('native-push-enable')) {
+    next = `<span>Turn on notifications so we can tell you.</span>
+      <button type="button" class="btn btn-primary btn-sm" data-act="push">Turn on</button>`;
+  } else if (!IS_NATIVE) {
+    const android = /android/i.test(navigator.userAgent);
+    next = `<span>New ones light up in Alerts. For a push when one lands, get the free app.</span>
+      <a class="btn btn-primary btn-sm" data-act="app" href="${android ? PLAY_URL : APP_STORE_URL}" target="_blank" rel="noopener">Get the app</a>`;
+  } else if (!isPro()) {
+    next = `<span>Free: a recap every Monday. Pro: a push within hours.</span>
+      <button type="button" class="linklike" data-act="pro">See Pro</button>`;
+  }
+  el.innerHTML = `<div class="watch-toast-head">${ICON.check}<span>Watching <strong>${escapeHtml(label)}</strong></span>
+      <button type="button" class="watch-toast-x" data-act="close" aria-label="Dismiss">&times;</button></div>
+    ${next ? `<div class="watch-toast-next">${next}</div>` : ''}`;
+  el.onclick = (e) => {
+    const act = e.target.closest('[data-act]');
+    if (!act) return;
+    if (act.dataset.act === 'push') { track('watch-toast-push'); document.getElementById('native-push-enable').click(); }
+    if (act.dataset.act === 'pro') openUpgradeSheet('watch-toast');
+    if (act.dataset.act === 'app') track('watch-toast-app');
+    hide();
+  };
+  // The mobile-web store banner sits in the same spot and says the same
+  // thing as the toast's "Get the app": step it aside while the toast is up.
+  const promo = document.getElementById('app-promo');
+  if (promo && getComputedStyle(promo).display !== 'none') { promo.style.display = 'none'; _promoStepAside = true; }
+  const hide = () => {
+    el.classList.remove('show');
+    if (_promoStepAside && promo && localStorage.getItem('ys_app_promo') !== '1') promo.style.display = '';
+    _promoStepAside = false;
+  };
+  el.classList.add('show');
+  clearTimeout(_watchToastTimer);
+  _watchToastTimer = setTimeout(hide, next ? 12000 : 4000);
 }
 
 /* Watchlist pickers mirror the Live filters, with one intentional difference:
@@ -6896,8 +7028,6 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
  * via related_applications in manifest.webmanifest.
  * Test hook: ?appbanner=ios|android forces the platform for QA. */
 (function appPromo() {
-  const APP_STORE_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
-  const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
   if (IS_NATIVE) return; // already inside the native app — never promote
   const qs = new URLSearchParams(location.search).get('appbanner');
   const forced = (qs === 'ios' || qs === 'android') ? qs : null;
