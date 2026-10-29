@@ -181,6 +181,9 @@ export function crushWindow(daysOn, avg, basis) {
 // link looks like the app it came from. Only share-page-specific bits below.
 const CSS = `
 body{padding-bottom:2.5rem}
+/* The share header's "Open the app" button squeezes the wordmark: let the
+ * spec line wrap instead of clipping ("28,500 SET OU…", "SUN VALLEY, C…"). */
+.head-spec{white-space:normal;line-height:1.35;max-width:11rem}
 .share-main{max-width:680px;margin:0 auto;padding:1rem 1.25rem}
 .kicker{font-family:var(--font-mono);font-size:.625rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin:.25rem 0 .5rem}
 .kicker a{color:var(--accent);text-decoration:none}
@@ -498,7 +501,7 @@ export async function renderLandedPage(slug) {
 <p class="share-sub">Every car that set out at a tracked self-service yard in the last ${landed.days} days, by make.</p>
 <ul class="grid">${makes.map(([mk, m]) => `<li><a href="${SITE}/landed/${slugify(mk)}">${esc(mk)}<small>${m.recentCount} this week · ${m.total.toLocaleString()} on lots</small></a></li>`).join('')}</ul>
 <div class="cta"><a class="btn btn-primary" href="${SITE}/">Search near your zip</a><a class="btn" href="${SITE}/#tab=alerts">Get the weekly recap for a model you want</a></div>${storesLine()}`;
-    return layout({ title: 'What landed in self-service yards this week — YardScout', ogTitle: 'What landed in the junkyards this week', desc: `New set-outs at ${landed.yards.length} self-service yards in the last ${landed.days} days, by make.`, canonical: SITE + '/landed', body, cache: 900, spec: `${weekTotal.toLocaleString()} SET OUT THIS WEEK` });
+    return layout({ title: 'What landed in self-service yards this week — YardScout', ogTitle: 'What landed in the junkyards this week', desc: `New set-outs at ${landed.yards.length} self-service yards in the last ${landed.days} days, by make.`, canonical: SITE + '/landed', body, cache: 900, spec: `${weekTotal.toLocaleString()} NEW THIS WEEK` });
   }
   slug = decodeURIComponent(slug).toLowerCase();
   const hit = Object.entries(landed.makes).find(([mk]) => slugify(mk) === slug);
