@@ -2464,6 +2464,14 @@ function proSheetCarHtml(enc) {
     <div class="pro-car-facts">${v.topParts.length} part${v.topParts.length === 1 ? '' : 's'} worth checking${bucket ? ` &middot; <strong>$${bucket.toLocaleString()}+</strong> to buy them used online` : ''}${fast ? ' &middot; some get picked over fast' : ''}</div>
     <div class="pro-car-note">Pro shows which parts, what this yard charges for each, and what you&rsquo;d save &mdash; on this car and every other one.</div>`;
 }
+/* Why the sheet opened, in one line, when a watch gate opened it — the
+ * generic local-proof line reads as a non sequitur after "6th watch". */
+const watchGateLead = (t) => ({
+  'watch-limit': `Free covers ${FREE_WATCH_LIMIT} watches within 250 mi, with a recap every Monday. Pro: up to 20 watches, any distance, and a push within hours of one landing.`,
+  'watch-anywhere': 'Free watches stay within 250 mi of you. Pro watches the whole country — and pushes within hours when one lands.',
+  'watch-toast': 'Free: a recap every Monday of what landed. Pro: a push within hours, so you get there before the parts are gone.',
+  'watch-near-miss': 'Pro would have pushed that one the day it landed. Monday recaps are free; same-day alerts are Pro.',
+})[t] || '';
 function openUpgradeSheet(trigger, carKey) {
   upgradeTrigger = trigger || 'unknown';
   {
@@ -2471,7 +2479,7 @@ function openUpgradeSheet(trigger, carKey) {
     const car = isPro() ? '' : proSheetCarHtml(carKey);
     if (box) { box.innerHTML = car; box.style.display = car ? '' : 'none'; }
     // One lead, not two: the car box replaces the local-proof line.
-    if (pr) { const t = (isPro() || car) ? '' : proSheetProof(); pr.textContent = t; pr.style.display = t ? '' : 'none'; }
+    if (pr) { const t = (isPro() || car) ? '' : (watchGateLead(upgradeTrigger) || proSheetProof()); pr.textContent = t; pr.style.display = t ? '' : 'none'; }
     // With a specific car leading, the long intro just repeats the bullets.
     const sub = document.querySelector('#upgrade-sheet .sheet-sub'); if (sub) sub.style.display = car ? 'none' : '';
     if (car) track('pro-lock-car');
@@ -6557,10 +6565,14 @@ function showWatchToast(label) {
   if (IS_NATIVE && !pushOn && document.getElementById('native-push-enable')) {
     next = `<span>Turn on notifications so we can tell you.</span>
       <button type="button" class="btn btn-primary btn-sm" data-act="push">Turn on</button>`;
-  } else if (!IS_NATIVE) {
+  } else if (!IS_NATIVE && /android|iphone|ipad|ipod/i.test(navigator.userAgent)) {
     const android = /android/i.test(navigator.userAgent);
     next = `<span>New ones light up in Alerts. For a push when one lands, get the free app.</span>
       <a class="btn btn-primary btn-sm" data-act="app" href="${android ? PLAY_URL : APP_STORE_URL}" target="_blank" rel="noopener">Get the app</a>`;
+  } else if (!IS_NATIVE) {
+    // Desktop: no store to send them to — say where matches show up, and
+    // that a phone can be told the day one lands.
+    next = `<span>New ones light up in Alerts. The free iPhone and Android apps can push you the day one lands.</span>`;
   } else if (!isPro()) {
     next = `<span>Free: a recap every Monday. Pro: a push within hours.</span>
       <button type="button" class="linklike" data-act="pro">See Pro</button>`;
