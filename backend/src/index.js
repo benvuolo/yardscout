@@ -72,7 +72,11 @@ export default {
     if (event.cron === '23 * * * *') {
       ctx.waitUntil(
         runScanWatchdog(env)
-          .then((r) => console.log('scan watchdog:', JSON.stringify(r)))
+          .then(async (r) => {
+            console.log('scan watchdog:', JSON.stringify(r));
+            // Last decision, readable at /v1/health (no secrets in it).
+            if (env.ENTITLEMENTS) await env.ENTITLEMENTS.put('ops:scan-watchdog', JSON.stringify({ at: new Date().toISOString(), ...r }));
+          })
           .catch((e) => console.log('scan watchdog failed:', e && (e.stack || e.message)))
       );
       return;
@@ -127,7 +131,10 @@ async function route(req, env, url, ctx) {
   }
 
   if (method === 'GET' && path === '/v1/health') {
-    return json({ ok: true, service: 'yardscout-api', at: new Date().toISOString() });
+    let watchdog = null;
+    try { watchdog = env.ENTITLEMENTS ? JSON.parse(await env.ENTITLEMENTS.get('ops:scan-watchdog') || 'null') : null; } catch { watchdog = null; }
+    return json({ ok: true, service: 'yardscout-api', at: new Date().toISOString(),
+      scanWatchdog: { tokenConfigured: !!env.SCAN_DISPATCH_TOKEN, last: watchdog } });
   }
 
   /* ----- auth ----- */
