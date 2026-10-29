@@ -39,6 +39,7 @@ jobs:
           q "first-visit per day (14d)" "SELECT day, platform, SUM(n) n FROM events_daily WHERE event='first-visit' AND day >= date('now','-14 day') GROUP BY day, platform ORDER BY day"
           q "pro devices by first-seen day" "SELECT substr(created_at,1,10) first_seen, platform, COUNT(*) n, SUM(updated_at >= datetime('now','-7 day')) active_7d FROM devices WHERE tier='pro' GROUP BY first_seen, platform ORDER BY first_seen"
           q "coverage/yard requests (30d)" "SELECT kind, COUNT(*) n FROM coverage_requests WHERE created_at >= datetime('now','-30 day') GROUP BY kind"
+          q "coverage/yard requests, details (30d; email shown only as yes/no)" "SELECT created_at, kind, year, make, model, part, zip, note, CASE WHEN email IS NOT NULL AND email != '' THEN 'yes' ELSE 'no' END wants_reply FROM coverage_requests WHERE created_at >= datetime('now','-30 day') ORDER BY created_at DESC LIMIT 40"
       # Real App Store numbers (Sales and Trends). The app's own Pro flag can't
       # tell paying users from TestFlight/sandbox or review devices; Apple's
       # report can. Needs the ASC_VENDOR_NUMBER secret (App Store Connect →
