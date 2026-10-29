@@ -35,6 +35,7 @@ const FUNNEL_EVENTS = {
   'watch-created': 'watch-created', 'push-enabled': 'push-enabled', 'native-push-enable': 'push-enabled',
   'email-alerts-linked': 'push-enabled', 'checkout-start': 'checkout-start', 'iap-subscribe': 'checkout-start',
   'ent-checkout-start': 'checkout-start', 'iap-purchased': 'pro-converted', 'ent-purchased': 'pro-converted',
+  'pro-lock': 'paywall',
 };
 const ATTRIB = (() => {
   try {
@@ -50,17 +51,26 @@ const ATTRIB = (() => {
     return a && Date.now() - a.at < 90 * 86400000 ? a : null;
   } catch (e) { return null; }
 })();
+/* Which paywall sells (2026-10-29): the gate that opened the Pro sheet
+ * (upgradeTrigger) rides along as a second counter — paywall/<gate>,
+ * checkout/<gate>, purchase/<gate> — so the daily email can say "locked
+ * part prices open the sheet most; the watch limit converts best". */
+const REASON_EVENTS = { 'pro-lock': 'paywall', 'iap-subscribe': 'checkout', 'iap-purchased': 'purchase' };
+function sendEvent(e) {
+  const body = JSON.stringify({ e, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
+    p: IS_NATIVE ? (IS_ANDROID ? 'android' : 'ios') : 'web' });
+  // text/plain keeps it a "simple" request (no CORS preflight, works from sendBeacon).
+  if (!(navigator.sendBeacon && navigator.sendBeacon(EVENTS_API, new Blob([body], { type: 'text/plain' })))) {
+    fetch(EVENTS_API, { method: 'POST', body, headers: { 'content-type': 'text/plain' }, keepalive: true }).catch(() => {});
+  }
+}
 function track(event) {
   try {
-    const f = FUNNEL_EVENTS[String(event).split('/')[0]];
-    if (f) {
-      const body = JSON.stringify({ e: f, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
-        p: IS_NATIVE ? (IS_ANDROID ? 'android' : 'ios') : 'web' });
-      // text/plain keeps it a "simple" request (no CORS preflight, works from sendBeacon).
-      if (!(navigator.sendBeacon && navigator.sendBeacon(EVENTS_API, new Blob([body], { type: 'text/plain' })))) {
-        fetch(EVENTS_API, { method: 'POST', body, headers: { 'content-type': 'text/plain' }, keepalive: true }).catch(() => {});
-      }
-    }
+    const [base, ...rest] = String(event).split('/');
+    const f = FUNNEL_EVENTS[base];
+    if (f) sendEvent(f);
+    const reason = rest.join('/').toLowerCase().replace(/[^a-z0-9_-]/g, '-').slice(0, 30);
+    if (REASON_EVENTS[base] && reason) sendEvent(REASON_EVENTS[base] + '/' + reason);
   } catch (e) { /* analytics must never break the app */ }
   if (!GOATCOUNTER_CODE) return;
   try {
@@ -7396,7 +7406,7 @@ function revokeNativePro() {
       const r = await P.purchase({ productId: IAP_PRODUCT_ID });
       if (r && r.entitled) {
         grantNativePro();
-        track('iap-purchased');
+        track('iap-purchased/' + upgradeTrigger);
         closeUpgradeSheet();
       } else if (r && r.pending) {
         if (status) status.textContent = 'Purchase pending approval — Pro unlocks automatically once approved.';

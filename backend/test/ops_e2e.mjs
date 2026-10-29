@@ -154,10 +154,14 @@ console.log('\n----- sample daily email (dry run) -----\n' + d.email?.subject + 
 const ev = (e, extra = {}) => fetch(BASE + '/v1/events', { method: 'POST', headers: { 'content-type': 'text/plain' },
   body: JSON.stringify({ e, p: 'ios', ...extra }) });
 await ev('first-visit', { src: 'reddit', cmp: 'r-4runner' }); await ev('first-visit'); await ev('checkout-start');
+await ev('paywall/part-value'); await ev('paywall/part-value'); await ev('paywall/watch-limit'); await ev('checkout/watch-limit'); await ev('purchase/watch-limit');
 r = await dailyRun({ dryRun: true, nowOffsetHours: 24 });
 const u = r.data.usage || {};
 check('usage: yesterday funnel counts', u.funnel?.['first-visit']?.yesterday === 2 && u.funnel?.['first-visit']?.week === 2
   && u.funnel?.['checkout-start']?.yesterday === 1, JSON.stringify(u.funnel));
+check('usage: gates ranked by purchases', JSON.stringify(u.gates) === JSON.stringify([
+  { gate: 'watch-limit', paywall: 1, checkout: 1, purchase: 1 }, { gate: 'part-value', paywall: 2, checkout: 0, purchase: 0 }]), JSON.stringify(u.gates));
+check('usage: email lists gates', /Pro sheet by gate[\s\S]*watch-limit\s+1 \/ 1 \/ 1[\s\S]*part-value\s+2 \/ 0 \/ 0/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
 check('usage: tagged source listed', JSON.stringify(u.sources) === JSON.stringify([{ source: 'reddit', n: 1 }]), JSON.stringify(u.sources));
 check('usage: email shows source + checkout taps', /Tagged sources \(first visits, 7 d\): reddit 1/.test(r.data.email?.text || '')
   && /Checkout taps\s+1\s+1/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);

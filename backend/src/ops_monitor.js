@@ -357,8 +357,8 @@ function nameList(items, fmt) {
 
 const FUNNEL_ROWS = [
   ['first-visit', 'First visits'], ['zip-entered', 'Entered a zip'], ['part-first-search', 'Part searches'],
-  ['watch-created', 'Watches created'], ['push-enabled', 'Alerts turned on'], ['checkout-start', 'Checkout taps'],
-  ['pro-converted', 'Purchases'],
+  ['watch-created', 'Watches created'], ['push-enabled', 'Alerts turned on'], ['paywall', 'Paywall opens'],
+  ['checkout-start', 'Checkout taps'], ['pro-converted', 'Purchases'],
 ];
 
 function usageLines(u, audience) {
@@ -379,6 +379,11 @@ function usageLines(u, audience) {
   L.push(`  Tagged sources (first visits, 7 d): ${u.sources.length
     ? u.sources.map((s) => `${s.source} ${fmtInt(s.n)}`).join(', ') : 'none (add ?utm_source=… to links you post)'}`);
   if (u.topWatches.length) L.push(`  Most watched: ${u.topWatches.map((w) => `${w.name} ${fmtInt(w.n)}`).join(', ')}`);
+  // Which gate opened the sheet, and which gate people bought from (7 d).
+  if (u.gates && u.gates.length) {
+    L.push('  Pro sheet by gate (7 d): opens / checkout taps / purchases');
+    for (const g of u.gates) L.push(`    ${g.gate.padEnd(24)} ${String(fmtInt(g.paywall)).padStart(5)} / ${g.checkout} / ${g.purchase}`);
+  }
   return L;
 }
 
@@ -443,7 +448,7 @@ async function loadUsage(env, now) {
   const today = utcDay(now), yesterday = utcDay(now - DAY), weekAgo = utcDay(now - 7 * DAY);
   const iso = (ms) => new Date(ms).toISOString();
   const watchesOk = `watches_json IS NOT NULL AND json_valid(watches_json)`;
-  const [dev, users, webWatches, events, sources, top] = (await env.DB.batch([
+  const [dev, users, webWatches, events, sources, top, gateRows] = (await env.DB.batch([
     env.DB.prepare(
       `SELECT platform, tier, COUNT(*) AS n,
               SUM(CASE WHEN apns_token IS NOT NULL OR fcm_token IS NOT NULL THEN 1 ELSE 0 END) AS push,
@@ -474,7 +479,18 @@ async function loadUsage(env, now) {
         WHERE d.watches_json IS NOT NULL AND json_valid(d.watches_json)
         GROUP BY make, model ORDER BY n DESC LIMIT 5`
     ),
+    env.DB.prepare(
+      `SELECT event, SUM(n) AS n FROM events_daily
+        WHERE day >= ?1 AND day < ?2 AND (event LIKE 'paywall/%' OR event LIKE 'checkout/%' OR event LIKE 'purchase/%')
+        GROUP BY event`
+    ).bind(weekAgo, today),
   ])).map((r) => r.results || []);
+  const gates = new Map();
+  for (const r of gateRows) {
+    const [kind, gate] = String(r.event).split('/');
+    if (!gates.has(gate)) gates.set(gate, { gate, paywall: 0, checkout: 0, purchase: 0 });
+    gates.get(gate)[kind] += r.n;
+  }
   const sum = (rows, k) => rows.reduce((a, r) => a + (r[k] || 0), 0);
   const funnel = {};
   for (const e of events) funnel[e.event] = { yesterday: e.yesterday || 0, week: e.week || 0 };
@@ -492,6 +508,7 @@ async function loadUsage(env, now) {
     funnel,
     sources: sources.map((r) => ({ source: r.source, n: r.n })),
     topWatches: top.map((r) => ({ name: [r.make, r.model].filter(Boolean).join(' ') || 'any', n: r.n })),
+    gates: [...gates.values()].sort((a, b) => b.purchase - a.purchase || b.checkout - a.checkout || b.paywall - a.paywall).slice(0, 10),
   };
 }
 

@@ -34,6 +34,7 @@ jobs:
           q "email-alert watchers" "SELECT enabled, COUNT(*) n FROM email_watchers GROUP BY enabled"
           q "alerts sent (14d): device / web push / email" "SELECT 'device' ch, COUNT(*) n FROM device_alerts_sent WHERE sent_at >= datetime('now','-14 day') UNION ALL SELECT 'webpush', COUNT(*) FROM alerts_sent WHERE sent_at >= datetime('now','-14 day') UNION ALL SELECT 'email', COUNT(*) FROM email_alerts_sent WHERE sent_at >= datetime('now','-14 day')"
           q "funnel events (14d totals)" "SELECT event, platform, SUM(n) n FROM events_daily WHERE day >= date('now','-14 day') GROUP BY event, platform ORDER BY n DESC LIMIT 40"
+          q "pro sheet by gate (14d): paywall/ checkout/ purchase/" "SELECT event, SUM(n) n FROM events_daily WHERE day >= date('now','-14 day') AND (event LIKE 'paywall/%' OR event LIKE 'checkout/%' OR event LIKE 'purchase/%') GROUP BY event ORDER BY n DESC LIMIT 40"
           q "funnel by source (14d)" "SELECT source, campaign, event, SUM(n) n FROM events_daily WHERE day >= date('now','-14 day') AND source != '' GROUP BY source, campaign, event ORDER BY n DESC LIMIT 30"
           q "first-visit per day (14d)" "SELECT day, platform, SUM(n) n FROM events_daily WHERE event='first-visit' AND day >= date('now','-14 day') GROUP BY day, platform ORDER BY day"
           q "pro devices by first-seen day" "SELECT substr(created_at,1,10) first_seen, platform, COUNT(*) n, SUM(updated_at >= datetime('now','-7 day')) active_7d FROM devices WHERE tier='pro' GROUP BY first_seen, platform ORDER BY first_seen"
