@@ -44,8 +44,11 @@ async function loadSiteFile(env) {
   return {};
 }
 
+// Why iOS `latest` is null, when it is (returned as `note`; no secrets).
+let lastNote = '';
 async function itunesLatest(env, now) {
   const KEY = 'appver:ios-store';
+  lastNote = '';
   try {
     const hit = env.ENTITLEMENTS ? JSON.parse(await env.ENTITLEMENTS.get(KEY) || 'null') : null;
     if (hit && now - hit.at < ITUNES_TTL_MS) return hit.version;
@@ -54,13 +57,14 @@ async function itunesLatest(env, now) {
     ? env.APPVER_ITUNES_TEST
     : `https://itunes.apple.com/lookup?bundleId=${BUNDLE_ID}&country=us`;
   try {
-    const r = await fetch(url, { signal: AbortSignal.timeout(6000) });
-    if (!r.ok) return null;
-    const d = await r.json();
+    const r = await fetch(url, { headers: { accept: 'application/json' }, signal: AbortSignal.timeout(8000) });
+    if (!r.ok) { lastNote = `apple lookup HTTP ${r.status}`; return null; }
+    const d = JSON.parse((await r.text()).trim());
     const version = cleanVersion(d && d.results && d.results[0] && d.results[0].version);
-    if (version && env.ENTITLEMENTS) await env.ENTITLEMENTS.put(KEY, JSON.stringify({ version, at: now }));
+    if (!version) { lastNote = `apple lookup: ${d && d.resultCount} results`; return null; }
+    if (env.ENTITLEMENTS) await env.ENTITLEMENTS.put(KEY, JSON.stringify({ version, at: now }));
     return version;
-  } catch { return null; }
+  } catch (e) { lastNote = `apple lookup failed: ${String((e && e.message) || e).slice(0, 80)}`; return null; }
 }
 
 export async function appVersionInfo(env, platform, now = Date.now()) {
@@ -75,7 +79,9 @@ export async function appVersionInfo(env, platform, now = Date.now()) {
     if (Number.isFinite(at) && now - at >= ANDROID_REVIEW_HOLD_MS) latest = cleanVersion(a.latest);
   }
   const message = typeof file.message === 'string' ? file.message.slice(0, 240) : '';
-  return { platform, latest, min, storeUrl: STORE[platform], message };
+  const out = { platform, latest, min, storeUrl: STORE[platform], message };
+  if (platform === 'ios' && !latest && lastNote) out.note = lastNote;
+  return out;
 }
 
 export async function handleAppVersion(req, env) {
