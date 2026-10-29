@@ -141,13 +141,26 @@ check('daily: dormant yards listed', JSON.stringify(d.yardHealth?.dormant?.map((
 check('daily: frozen yards listed', JSON.stringify(d.yardHealth?.frozen?.map((y) => y.name)) === JSON.stringify(['Ghost Yard - Lehi', 'Frozen Yard - Provo']), JSON.stringify(d.yardHealth));
 check('daily: per-channel 24 h sends', d.channels?.['email:auth']?.ok === 1 && d.channels?.['email:auth']?.fail === 3 && d.channels?.['email:ops']?.ok === 4, JSON.stringify(d.channels));
 check('daily: audience counts', d.audience && ['proDevices', 'freeDevices', 'emailWatchers'].every((k) => Number.isInteger(d.audience[k])), JSON.stringify(d.audience));
+check('daily: usage loads', d.usage && !d.usage.error && Number.isInteger(d.usage.devices?.total) && typeof d.usage.funnel === 'object', JSON.stringify(d.usage));
 check('daily: open conditions', d.openConditions?.length === 2, JSON.stringify(d.openConditions));
 for (const sec of ['Verdict: 2 issues', 'OPEN ISSUES (2)', 'SCAN', 'Last commit:', 'Live: 3 yards · 1,541 vehicles', 'Watchdog:',
-  'YARD HEALTH', 'Dormant Yard - Orem', 'Frozen Yard - Provo', 'SENDS, last 24 h', 'email:auth', 'Resend today (UTC): 5 / 100', 'AUDIENCE']) {
+  'YARD HEALTH', 'Dormant Yard - Orem', 'Frozen Yard - Provo', 'SENDS, last 24 h', 'email:auth', 'Resend today (UTC): 5 / 100', 'USAGE', 'App devices:', 'Funnel (all platforms)', 'Purchases']) {
   check(`daily text has "${sec}"`, text.includes(sec));
 }
 check('daily text leaks no user email', !/tester\d@users/.test(text));
 console.log('\n----- sample daily email (dry run) -----\n' + d.email?.subject + '\n\n' + text + '----------------------------------------\n');
+
+/* ---- 6b. usage: funnel counters land in "yesterday" when the clock moves a day ---- */
+const ev = (e, extra = {}) => fetch(BASE + '/v1/events', { method: 'POST', headers: { 'content-type': 'text/plain' },
+  body: JSON.stringify({ e, p: 'ios', ...extra }) });
+await ev('first-visit', { src: 'reddit', cmp: 'r-4runner' }); await ev('first-visit'); await ev('checkout-start');
+r = await dailyRun({ dryRun: true, nowOffsetHours: 24 });
+const u = r.data.usage || {};
+check('usage: yesterday funnel counts', u.funnel?.['first-visit']?.yesterday === 2 && u.funnel?.['first-visit']?.week === 2
+  && u.funnel?.['checkout-start']?.yesterday === 1, JSON.stringify(u.funnel));
+check('usage: tagged source listed', JSON.stringify(u.sources) === JSON.stringify([{ source: 'reddit', n: 1 }]), JSON.stringify(u.sources));
+check('usage: email shows source + checkout taps', /Tagged sources \(first visits, 7 d\): reddit 1/.test(r.data.email?.text || '')
+  && /Checkout taps\s+1\s+1/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
 
 /* ---- 7. daily run (send) ---- */
 r = await dailyRun();

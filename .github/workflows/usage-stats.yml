@@ -36,4 +36,59 @@ jobs:
           q "funnel events (14d totals)" "SELECT event, platform, SUM(n) n FROM events_daily WHERE day >= date('now','-14 day') GROUP BY event, platform ORDER BY n DESC LIMIT 40"
           q "funnel by source (14d)" "SELECT source, campaign, event, SUM(n) n FROM events_daily WHERE day >= date('now','-14 day') AND source != '' GROUP BY source, campaign, event ORDER BY n DESC LIMIT 30"
           q "first-visit per day (14d)" "SELECT day, platform, SUM(n) n FROM events_daily WHERE event='first-visit' AND day >= date('now','-14 day') GROUP BY day, platform ORDER BY day"
+          q "pro devices by first-seen day" "SELECT substr(created_at,1,10) first_seen, platform, COUNT(*) n, SUM(updated_at >= datetime('now','-7 day')) active_7d FROM devices WHERE tier='pro' GROUP BY first_seen, platform ORDER BY first_seen"
           q "coverage/yard requests (30d)" "SELECT kind, COUNT(*) n FROM coverage_requests WHERE created_at >= datetime('now','-30 day') GROUP BY kind"
+      # Real App Store numbers (Sales and Trends). The app's own Pro flag can't
+      # tell paying users from TestFlight/sandbox or review devices; Apple's
+      # report can. Needs the ASC_VENDOR_NUMBER secret (App Store Connect →
+      # Payments and Financial Reports, the number shown next to your name).
+      - name: App Store sales (last 14 days)
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          VENDOR: ${{ secrets.ASC_VENDOR_NUMBER }}
+        run: |
+          if [ -z "$VENDOR" ]; then
+            echo "Skipped: add the ASC_VENDOR_NUMBER repo secret (App Store Connect → Payments and Financial Reports → number next to your name)."
+            exit 0
+          fi
+          pip install -q pyjwt cryptography requests
+          python3 - <<'PY'
+          import csv, datetime as dt, gzip, io, os, time, jwt, requests
+          key = os.environ["ASC_P8"].strip().replace("\\n", "\n")
+          tok = jwt.encode({"iss": os.environ["ASC_ISSUER_ID"], "iat": int(time.time()), "exp": int(time.time()) + 900,
+                            "aud": "appstoreconnect-v1"}, key, algorithm="ES256", headers={"kid": os.environ["ASC_KEY_ID"], "typ": "JWT"})
+          H = {"Authorization": f"Bearer {tok}", "Accept": "application/a-gzip"}
+          URL = "https://api.appstoreconnect.apple.com/v1/salesReports"
+          def report(kind, sub, ver, day):
+              r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "DAILY", "filter[reportType]": kind,
+                  "filter[reportSubType]": sub, "filter[vendorNumber]": os.environ["VENDOR"], "filter[reportDate]": day, "filter[version]": ver})
+              if r.status_code == 404: return []          # no activity that day (or not published yet)
+              if r.status_code != 200: raise SystemExit(f"{kind} {day}: HTTP {r.status_code} {r.text[:300]}")
+              return list(csv.DictReader(io.StringIO(gzip.decompress(r.content).decode()), delimiter="\t"))
+          DOWNLOAD = {"1", "1F", "1T", "F1"}
+          tot = {"downloads": 0, "sub_units": 0, "proceeds": 0.0}
+          print("day         downloads  subscription units (new+renewals)  proceeds")
+          today = dt.date.today()
+          for i in range(14, 0, -1):
+              day = (today - dt.timedelta(days=i)).isoformat()
+              rows = report("SALES", "SUMMARY", "1_1", day)
+              d = sum(int(r["Units"]) for r in rows if r["Product Type Identifier"] in DOWNLOAD)
+              s = [r for r in rows if r["Product Type Identifier"].startswith("IA")]
+              u = sum(int(r["Units"]) for r in s)
+              p = sum(float(r["Developer Proceeds"] or 0) * int(r["Units"]) for r in s)
+              tot["downloads"] += d; tot["sub_units"] += u; tot["proceeds"] += p
+              print(f"{day}  {d:>9}  {u:>34}  {p:>8.2f}")
+          print(f"TOTAL       {tot['downloads']:>9}  {tot['sub_units']:>34}  {tot['proceeds']:>8.2f}  (proceeds in each row's currency, mostly USD)")
+          for i in range(1, 5):   # newest published subscription snapshot
+              day = (today - dt.timedelta(days=i)).isoformat()
+              rows = report("SUBSCRIPTION", "SUMMARY", "1_4", day)
+              if rows:
+                  act = sum(int(r.get("Active Standard Price Subscriptions") or 0) for r in rows)
+                  trial = sum(int(r.get("Active Free Trial Introductory Offer Subscriptions") or 0) for r in rows)
+                  print(f"Active paid subscriptions on {day}: {act}" + (f" (+{trial} in free trial)" if trial else ""))
+                  break
+          else:
+              print("Active subscriptions: no SUBSCRIPTION report in the last 4 days (none active, or not published yet).")
+          PY

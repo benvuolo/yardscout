@@ -355,6 +355,33 @@ function nameList(items, fmt) {
   return shown.join('; ') + (items.length > shown.length ? `; +${items.length - shown.length} more` : '');
 }
 
+const FUNNEL_ROWS = [
+  ['first-visit', 'First visits'], ['zip-entered', 'Entered a zip'], ['part-first-search', 'Part searches'],
+  ['watch-created', 'Watches created'], ['push-enabled', 'Alerts turned on'], ['checkout-start', 'Checkout taps'],
+  ['pro-converted', 'Purchases'],
+];
+
+function usageLines(u, audience) {
+  if (!u || u.error) return [`USAGE: could not load (${(u && u.error) || 'unknown'})`];
+  const L = ['USAGE'];
+  const d = u.devices;
+  L.push(`  App devices: ${fmtInt(d.total)} (${fmtInt(d.pro)} pro) · alerts on ${fmtInt(d.push)}`
+    + ` · with a watch ${fmtInt(d.withWatches)} (${fmtInt(d.watches)} watches)`);
+  if (d.byPlatform.length) L.push(`    ${d.byPlatform.map((r) => `${r.platform} ${r.tier} ${fmtInt(r.n)}`).join(' · ')}`);
+  L.push(`  New devices: ${fmtInt(d.newYesterday)} yesterday · ${fmtInt(d.new7d)} in 7 d · used in last 7 d: ${fmtInt(d.active7d)}`);
+  L.push(`  Web accounts: ${fmtInt(u.web.accounts)} (${fmtInt(u.web.pro)} pro, ${fmtInt(u.web.active30d)} signed in 30 d)`
+    + ` · web watches ${fmtInt(u.web.watches)} · email-alert watchers ${fmtInt(audience && audience.emailWatchers)}`);
+  L.push(`  Funnel (all platforms)       yesterday     7 d`);
+  for (const [k, label] of FUNNEL_ROWS) {
+    const f = u.funnel[k] || { yesterday: 0, week: 0 };
+    L.push(`    ${label.padEnd(24)} ${String(fmtInt(f.yesterday)).padStart(9)} ${String(fmtInt(f.week)).padStart(7)}`);
+  }
+  L.push(`  Tagged sources (first visits, 7 d): ${u.sources.length
+    ? u.sources.map((s) => `${s.source} ${fmtInt(s.n)}`).join(', ') : 'none (add ?utm_source=… to links you post)'}`);
+  if (u.topWatches.length) L.push(`  Most watched: ${u.topWatches.map((w) => `${w.name} ${fmtInt(w.n)}`).join(', ')}`);
+  return L;
+}
+
 function composeDaily(r) {
   const L = [];
   const d = new Date(r.at);
@@ -403,12 +430,69 @@ function composeDaily(r) {
     }
   }
   L.push('');
-  L.push('AUDIENCE');
-  L.push(`  Push-ready devices: ${fmtInt(r.audience.proDevices)} pro · ${fmtInt(r.audience.freeDevices)} free`
-    + ` · email-alert watchers: ${fmtInt(r.audience.emailWatchers)}`);
+  L.push(...usageLines(r.usage, r.audience));
   L.push('');
   L.push('— YardScout daily health (yardscout-api, 13:07 UTC). Problems also alert hourly with subject "[YardScout alert]".');
   return L.join('\n') + '\n';
+}
+
+/** Who is using the app: devices, accounts, watches and the funnel counters
+ * (events_daily). Aggregate counts only — no ids, emails or tokens. One D1
+ * batch; a failure here never blocks the rest of the daily email. */
+async function loadUsage(env, now) {
+  const today = utcDay(now), yesterday = utcDay(now - DAY), weekAgo = utcDay(now - 7 * DAY);
+  const iso = (ms) => new Date(ms).toISOString();
+  const watchesOk = `watches_json IS NOT NULL AND json_valid(watches_json)`;
+  const [dev, users, webWatches, events, sources, top] = (await env.DB.batch([
+    env.DB.prepare(
+      `SELECT platform, tier, COUNT(*) AS n,
+              SUM(CASE WHEN apns_token IS NOT NULL OR fcm_token IS NOT NULL THEN 1 ELSE 0 END) AS push,
+              SUM(CASE WHEN ${watchesOk} AND json_array_length(watches_json) > 0 THEN 1 ELSE 0 END) AS withWatches,
+              SUM(CASE WHEN ${watchesOk} THEN json_array_length(watches_json) ELSE 0 END) AS watches,
+              SUM(CASE WHEN updated_at >= ?1 THEN 1 ELSE 0 END) AS active7d,
+              SUM(CASE WHEN created_at >= ?2 AND created_at < ?3 THEN 1 ELSE 0 END) AS newYesterday,
+              SUM(CASE WHEN created_at >= ?1 THEN 1 ELSE 0 END) AS new7d
+         FROM devices GROUP BY platform, tier ORDER BY platform, tier`
+    ).bind(iso(now - 7 * DAY), `${yesterday}T00:00:00`, `${today}T00:00:00`),
+    env.DB.prepare(
+      `SELECT tier, COUNT(*) AS n, SUM(CASE WHEN last_login_at >= ?1 THEN 1 ELSE 0 END) AS active30d
+         FROM users GROUP BY tier`
+    ).bind(iso(now - 30 * DAY)),
+    env.DB.prepare('SELECT COUNT(*) AS n FROM watches'),
+    env.DB.prepare(
+      `SELECT event, SUM(CASE WHEN day = ?1 THEN n ELSE 0 END) AS yesterday, SUM(n) AS week
+         FROM events_daily WHERE day >= ?2 AND day < ?3 GROUP BY event`
+    ).bind(yesterday, weekAgo, today),
+    env.DB.prepare(
+      `SELECT source, SUM(n) AS n FROM events_daily
+        WHERE event = 'first-visit' AND source != '' AND day >= ?1 AND day < ?2
+        GROUP BY source ORDER BY n DESC LIMIT 5`
+    ).bind(weekAgo, today),
+    env.DB.prepare(
+      `SELECT json_extract(w.value, '$.make') AS make, json_extract(w.value, '$.model') AS model, COUNT(*) AS n
+         FROM devices d, json_each(d.watches_json) w
+        WHERE d.watches_json IS NOT NULL AND json_valid(d.watches_json)
+        GROUP BY make, model ORDER BY n DESC LIMIT 5`
+    ),
+  ])).map((r) => r.results || []);
+  const sum = (rows, k) => rows.reduce((a, r) => a + (r[k] || 0), 0);
+  const funnel = {};
+  for (const e of events) funnel[e.event] = { yesterday: e.yesterday || 0, week: e.week || 0 };
+  return {
+    devices: {
+      total: sum(dev, 'n'), pro: sum(dev.filter((r) => r.tier === 'pro'), 'n'),
+      push: sum(dev, 'push'), withWatches: sum(dev, 'withWatches'), watches: sum(dev, 'watches'),
+      active7d: sum(dev, 'active7d'), newYesterday: sum(dev, 'newYesterday'), new7d: sum(dev, 'new7d'),
+      byPlatform: dev.map((r) => ({ platform: r.platform, tier: r.tier, n: r.n })),
+    },
+    web: {
+      accounts: sum(users, 'n'), pro: sum(users.filter((r) => r.tier !== 'free'), 'n'),
+      active30d: sum(users, 'active30d'), watches: (webWatches[0] && webWatches[0].n) || 0,
+    },
+    funnel,
+    sources: sources.map((r) => ({ source: r.source, n: r.n })),
+    topWatches: top.map((r) => ({ name: [r.make, r.model].filter(Boolean).join(' ') || 'any', n: r.n })),
+  };
 }
 
 /** Builds the daily report (JSON + the email it would send). Read-only. */
@@ -428,6 +512,8 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
       WHERE apns_token IS NOT NULL OR fcm_token IS NOT NULL GROUP BY tier`
   ).all()).results || [];
   const watchers = await env.DB.prepare('SELECT COUNT(*) AS n FROM email_watchers WHERE enabled = 1').first();
+  let usage;
+  try { usage = await loadUsage(env, now); } catch (e) { usage = { error: String((e && e.message) || e).slice(0, 200) }; }
 
   const channels = {};
   for (const [c, s] of Object.entries(ev.stats.channels)) channels[c] = { ...s.last24h };
@@ -453,6 +539,7 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
       freeDevices: tiers.filter((t) => t.tier !== 'pro').reduce((k, t) => k + t.n, 0),
       emailWatchers: (watchers && watchers.n) || 0,
     },
+    usage,
   };
   const tail = report.inventory.yards != null
     ? ` · ${fmtInt(report.inventory.yards)} yards · ${fmtInt(report.inventory.vehicles)} cars` : '';
