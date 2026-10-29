@@ -44,9 +44,11 @@ jobs:
       # Payments and Financial Reports, the number shown next to your name).
       - name: App Store sales (last 14 days)
         env:
-          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          # A read-only "Sales" role key (ASC_SALES_KEY_ID + ASC_SALES_P8) if set;
+          # the release key's role can't read Sales and Trends.
+          ASC_KEY_ID: ${{ secrets.ASC_SALES_KEY_ID || secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          ASC_P8: ${{ secrets.ASC_SALES_P8 || secrets.ASC_API_KEY_P8 }}
           VENDOR: ${{ secrets.ASC_VENDOR_NUMBER }}
         run: |
           if [ -z "$VENDOR" ]; then
@@ -65,6 +67,9 @@ jobs:
               r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "DAILY", "filter[reportType]": kind,
                   "filter[reportSubType]": sub, "filter[vendorNumber]": os.environ["VENDOR"], "filter[reportDate]": day, "filter[version]": ver})
               if r.status_code == 404: return []          # no activity that day (or not published yet)
+              if r.status_code == 403:
+                  raise SystemExit("App Store Connect: this API key's role can't read sales. Create a key with the Sales role "
+                                   "(Users and Access → Integrations) and add it as ASC_SALES_KEY_ID + ASC_SALES_P8.")
               if r.status_code != 200: raise SystemExit(f"{kind} {day}: HTTP {r.status_code} {r.text[:300]}")
               return list(csv.DictReader(io.StringIO(gzip.decompress(r.content).decode()), delimiter="\t"))
           DOWNLOAD = {"1", "1F", "1T", "F1"}
