@@ -4002,9 +4002,28 @@ function yardPageUrl(v) {
       tier: 2,
     };
   }
+  if (/^pick your part - /i.test(loc)) {
+    const url = pypStoreUrl(v.id, loc, v.make, v.model);
+    if (url) return { url, tier: 2 };
+  }
   // Tier 3 — the yard's inventory page.
   const hit = YARD_INVENTORY_PAGES.find(c => c[0].test(loc));
   return hit ? { url: hit[1], tier: 3 } : null;
+}
+
+/* Pick Your Part (LKQ): each car id starts with its 4-digit store code
+ * ("1263-269258" = Sun Valley), and pyp.com's store page is
+ * /inventory/<town-slug>-<code>/ with a free-text ?search=. Search by make +
+ * model; fall back to make only when our canonical model has punctuation
+ * (F-150, S-Series) that PYP's own names may not share. */
+function pypStoreUrl(id, yardName, make, model) {
+  const m = /^(\d{4})-/.exec(String(id || ''));
+  if (!m || !/^pick your part - /i.test(yardName || '')) return null;
+  const slug = String(yardName).split(' - ').slice(1).join(' - ').toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  if (!slug) return null;
+  const q = [make, model && !/[-/]/.test(model) ? model : ''].filter(Boolean).join(' ').trim();
+  return `https://www.pyp.com/inventory/${slug}-${m[1]}/` + (q ? `?search=${encodeURIComponent(q).replace(/%20/g, '+')}` : '');
 }
 
 /** The quiet link line at the bottom of a car card ('' when yard unknown). */

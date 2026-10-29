@@ -61,6 +61,21 @@ const CHAIN_PRICE_PAGES = [
 ];
 function priceListFor(loc) { const h = CHAIN_PRICE_PAGES.find((c) => c[0].test(loc || '')); return h ? { url: h[1], label: h[2] } : null; }
 let siteLinksCache = { at: 0, rows: null };
+/* Pick Your Part (LKQ): each car id starts with its 4-digit store code
+ * ("1263-269258" = Sun Valley), and pyp.com's store page is
+ * /inventory/<town-slug>-<code>/ with a free-text ?search=. Search by make +
+ * model; fall back to make only when our canonical model has punctuation
+ * (F-150, S-Series) that PYP's own names may not share. */
+function pypStoreUrl(id, yardName, make, model) {
+  const m = /^(\d{4})-/.exec(String(id || ''));
+  if (!m || !/^pick your part - /i.test(yardName || '')) return null;
+  const slug = String(yardName).split(' - ').slice(1).join(' - ').toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  if (!slug) return null;
+  const q = [make, model && !/[-/]/.test(model) ? model : ''].filter(Boolean).join(' ').trim();
+  return `https://www.pyp.com/inventory/${slug}-${m[1]}/` + (q ? `?search=${encodeURIComponent(q).replace(/%20/g, '+')}` : '');
+}
+
 async function yardSiteFor(loc) {
   if (!siteLinksCache.rows || Date.now() - siteLinksCache.at > 3600_000) {
     const rows = await dataJson('yard_site_links.json', 3600);
@@ -324,7 +339,7 @@ export async function renderCarPage(token) {
     ? { short: daysOn > avg ? `On the lot ${daysOn} days · past the ~${avg} typical` : `Day ${daysOn + 1} on the lot · ~${avg} typical ${basis === 'yard' ? 'at this yard' : basis === 'chain' ? 'for this chain' : 'across yards'}`, soon: cw.soon }
     : (daysOn != null ? { short: `Day ${daysOn + 1} on the lot`, soon: false } : null);
 
-  const [siteUrl, price, priceRows] = [await yardSiteFor(yardName), priceListFor(yardName), await yardPriceRows(yardName)];
+  const [siteUrl, price, priceRows] = [pypStoreUrl(v.id, yardName, v.make, v.model) || await yardSiteFor(yardName), priceListFor(yardName), await yardPriceRows(yardName)];
   const yardLinks = (siteUrl || price)
     ? `<p class="share-sub" style="margin:.2rem 0 .4rem">${siteUrl ? `<a href="${esc(siteUrl)}" target="_blank" rel="noopener">Yard's own inventory page &#8599;</a>` : ''}${siteUrl && price ? ' &middot; ' : ''}${price ? `<a href="${esc(price.url)}" target="_blank" rel="noopener">${esc(price.label)} price list &#8599;</a>` : ''}</p>` : '';
   const body = `<p class="kicker">Seen in a self-service yard · <a href="${yardHref}">${esc(yardName)}</a></p>
@@ -374,7 +389,7 @@ export async function renderYardPage(slug) {
     const car = `${r[iYear]} ${r[iMake]} ${r[iModel]}`.trim();
     return `<li><a href="${SITE}/car/${encodeURIComponent(key)}">${esc(car)}</a><span class="meta">${r[iRow] ? 'Row ' + esc(r[iRow]) + '<br>' : ''}${esc(fmtDate(r[iDate]))}</span></li>`;
   }).join('');
-  const [ySite, yPrice, yRows] = [await yardSiteFor(name), priceListFor(name), await yardPriceRows(name)];
+  const [ySite, yPrice, yRows] = [(recent.length && pypStoreUrl(recent[0][iId], name)) || await yardSiteFor(name), priceListFor(name), await yardPriceRows(name)];
   const lifeLine = avg
     ? `Cars typically last ~${avg} days here${basis === 'chain' ? ' (chain average)' : basis === 'all' ? ' (all-yards average)' : ''}, based on when departed cars arrived and left.`
     : 'Not enough departure history yet to estimate how long cars last here.';
