@@ -19,9 +19,12 @@ compatibility_date = "2026-09-01"
 # Weekly digest email for free users (Mondays 15:00 UTC ≈ 9am Mountain).
 # Deploys automatically with `npm run deploy` — no dashboard setup needed.
 [triggers]
-# Monday 15:00 UTC = weekly digests; :23 hourly = scan watchdog (see
-# src/scan_watchdog.js). index.js scheduled() dispatches on event.cron.
-crons = ["0 15 * * 1", "23 * * * *"]
+# Monday 15:00 UTC = weekly digests; :23 hourly = scan watchdog + owner-alert
+# check (src/scan_watchdog.js, src/ops_monitor.js); 13:07 UTC daily (~7am
+# Mountain) = owner health email. index.js scheduled() dispatches on
+# event.cron — a new cron here MUST get its own branch there (unknown crons
+# are logged and ignored; only "0 15 * * 1" may ever reach the digests).
+crons = ["0 15 * * 1", "23 * * * *", "7 13 * * *"]
 
 [[d1_databases]]
 binding = "DB"
@@ -51,8 +54,10 @@ APP_URL = "https://yardscout.io/"
 EMAIL_FROM = "YardScout <hello@yardscout.io>"
 # Sender for Pro email alerts (yardscout.io is verified in Resend).
 EMAIL_ALERTS_FROM = "YardScout Alerts <alerts@yardscout.io>"
-# Owner inbox for the coverage-request digest (Parts tab "ask us to add it").
-# Max one email per day, sent on the first inventory commit after new requests.
+# Owner inbox for the coverage-request digest (Parts tab "ask us to add it";
+# max one per day, on the first inventory commit after new requests) and for
+# ops monitoring (src/ops_monitor.js): "[YardScout alert]" emails from the
+# hourly check, "[YardScout daily]" health email at 13:07 UTC.
 OWNER_EMAIL = "yardscout.io@gmail.com"
 # Public URL of THIS Worker — unsubscribe links in alert emails point here.
 API_PUBLIC_URL = "https://yardscout-api.yardscout.workers.dev"

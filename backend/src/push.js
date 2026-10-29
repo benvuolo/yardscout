@@ -14,6 +14,8 @@
  * Generate keys once with: node backend/scripts/gen-vapid.mjs
  */
 
+import { countOk, countFail, countGone } from './ops.js';
+
 /* ---------- base64url helpers ---------- */
 
 export function b64uToBytes(s) {
@@ -123,11 +125,18 @@ export async function sendWebPush(env, sub, payload) {
       },
       body,
     });
-    if (r.status === 404 || r.status === 410) return { ok: false, gone: true };
-    if (!r.ok) console.log('push send failed:', r.status, (await r.text()).slice(0, 200));
+    if (r.status === 404 || r.status === 410) { await countGone(env, 'webpush'); return { ok: false, gone: true }; }
+    if (!r.ok) {
+      const text = (await r.text()).slice(0, 200);
+      console.log('push send failed:', r.status, text);
+      await countFail(env, 'webpush', r.status, `${text} (${endpoint.host})`);
+    } else {
+      await countOk(env, 'webpush');
+    }
     return { ok: r.ok, gone: false };
   } catch (e) {
     console.log('push send error:', e && e.message);
+    await countFail(env, 'webpush', 0, `error: ${e && e.message}`);
     return { ok: false, gone: false };
   }
 }

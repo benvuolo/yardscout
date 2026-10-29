@@ -14,6 +14,7 @@
 import { json, err, isoNow, haversineMiles } from './util.js';
 import { getSessionUser, resolveTier } from './auth.js';
 import { sendWebPush, pushConfigured } from './push.js';
+import { resendFetch } from './ops.js';
 
 const MAX_WATCHES_PER_USER = 20;
 const MAX_WATCHES_FREE = 5;
@@ -683,7 +684,8 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [] } =
     }
     return false;
   }
-  const r = await fetch('https://api.resend.com/emails', {
+  // Weekly = the free Monday digest; otherwise the instant Pro fallback email.
+  const r = await resendFetch(env, weekly ? 'email:digest' : 'email:pro-alert', email, {
     method: 'POST',
     headers: { authorization: 'Bearer ' + env.RESEND_API_KEY, 'content-type': 'application/json' },
     body: JSON.stringify({

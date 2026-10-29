@@ -14,6 +14,7 @@
  */
 
 import { bytesToB64u } from './push.js';
+import { countOk, countFail, countGone } from './ops.js';
 
 let cachedJwt = null;   // { token, iat } — module-global survives across requests
 
@@ -72,14 +73,16 @@ export async function sendApns(env, deviceToken, payload) {
         url: payload.url || '/',
       }),
     });
-    if (r.ok) return { ok: true, gone: false };
+    if (r.ok) { await countOk(env, 'apns'); return { ok: true, gone: false }; }
     const text = await r.text();
     // 410 = token no longer active; 400 BadDeviceToken = wrong env or garbage.
     const gone = r.status === 410 || /BadDeviceToken|Unregistered/i.test(text);
     if (!gone) console.log('apns send failed:', r.status, text.slice(0, 200));
+    if (gone) await countGone(env, 'apns'); else await countFail(env, 'apns', r.status, text);
     return { ok: false, gone };
   } catch (e) {
     console.log('apns send error:', e && e.message);
+    await countFail(env, 'apns', 0, `error: ${e && e.message}`);
     return { ok: false, gone: false };
   }
 }

@@ -7,4 +7,5 @@ package-lock.json
 test/.out/
 test/.out-email/
 test/.out-alerts/
+test/.out-ops/
 site-proxy/test/.out/
