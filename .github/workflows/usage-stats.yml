@@ -1,0 +1,39 @@
+# Read-only usage snapshot from production D1: aggregate counts only (no
+# emails, device ids, tokens or watch contents). Manual trigger.
+name: Usage stats
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Resolve account
+        run: |
+          acct=$(curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" https://api.cloudflare.com/client/v4/accounts | python3 -c 'import sys,json;print(json.load(sys.stdin)["result"][0]["id"])')
+          echo "CLOUDFLARE_ACCOUNT_ID=$acct" >> "$GITHUB_ENV"
+      - name: Query
+        working-directory: backend
+        run: |
+          q() { echo "=== $1"; npx --yes wrangler@4 d1 execute yardscout-db --remote --json --command "$2" 2>/dev/null | python3 -c 'import sys,json
+          d=json.load(sys.stdin)
+          for r in d[0]["results"]: print("  ", json.dumps(r))'; }
+          q "devices by platform/tier (push-ready)" "SELECT platform, tier, COUNT(*) n, SUM(CASE WHEN apns_token IS NOT NULL OR fcm_token IS NOT NULL THEN 1 ELSE 0 END) push_ready, SUM(CASE WHEN watches_json IS NOT NULL AND watches_json NOT IN ('[]','') THEN 1 ELSE 0 END) with_watches, SUM(CASE WHEN saved_json IS NOT NULL AND saved_json NOT IN ('[]','') THEN 1 ELSE 0 END) with_saved FROM devices GROUP BY platform, tier"
+          q "device watch totals" "SELECT SUM(json_array_length(watches_json)) watches, SUM(CASE WHEN json_array_length(watches_json)>0 THEN 1 ELSE 0 END) devices_with_watches FROM devices WHERE watches_json IS NOT NULL AND json_valid(watches_json)"
+          q "new devices per day (14d)" "SELECT substr(created_at,1,10) day, platform, COUNT(*) n FROM devices WHERE created_at >= date('now','-14 day') GROUP BY day, platform ORDER BY day"
+          q "devices active (synced) last 7d / 30d" "SELECT SUM(updated_at >= datetime('now','-7 day')) d7, SUM(updated_at >= datetime('now','-30 day')) d30 FROM devices"
+          q "most-watched makes/models (top 25)" "SELECT json_extract(w.value,'$.make') make, json_extract(w.value,'$.model') model, COUNT(*) n FROM devices d, json_each(d.watches_json) w WHERE json_valid(d.watches_json) GROUP BY make, model ORDER BY n DESC LIMIT 25"
+          q "web accounts by tier" "SELECT tier, COUNT(*) n, SUM(last_login_at >= datetime('now','-30 day')) active_30d FROM users GROUP BY tier"
+          q "web account watches" "SELECT COUNT(*) watches, COUNT(DISTINCT user_id) users FROM watches"
+          q "email-alert watchers" "SELECT enabled, COUNT(*) n FROM email_watchers GROUP BY enabled"
+          q "alerts sent (14d): device / web push / email" "SELECT 'device' ch, COUNT(*) n FROM device_alerts_sent WHERE sent_at >= datetime('now','-14 day') UNION ALL SELECT 'webpush', COUNT(*) FROM alerts_sent WHERE sent_at >= datetime('now','-14 day') UNION ALL SELECT 'email', COUNT(*) FROM email_alerts_sent WHERE sent_at >= datetime('now','-14 day')"
+          q "funnel events (14d totals)" "SELECT event, platform, SUM(n) n FROM events_daily WHERE day >= date('now','-14 day') GROUP BY event, platform ORDER BY n DESC LIMIT 40"
+          q "funnel by source (14d)" "SELECT source, campaign, event, SUM(n) n FROM events_daily WHERE day >= date('now','-14 day') AND source != '' GROUP BY source, campaign, event ORDER BY n DESC LIMIT 30"
+          q "first-visit per day (14d)" "SELECT day, platform, SUM(n) n FROM events_daily WHERE event='first-visit' AND day >= date('now','-14 day') GROUP BY day, platform ORDER BY day"
+          q "coverage/yard requests (30d)" "SELECT kind, COUNT(*) n FROM coverage_requests WHERE created_at >= datetime('now','-30 day') GROUP BY kind"
