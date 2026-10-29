@@ -1,0 +1,67 @@
+# Rewrite the "What's new" text of a release that is ALREADY on a Play track
+# (no new build, no review of a binary). Uses the Android Publisher edits API
+# with the same service account as release-android.yml.
+name: Play release notes
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_code:
+        description: "versionCode whose release notes to replace"
+        required: true
+      track:
+        description: "Play track"
+        type: choice
+        options: [production, internal]
+        default: production
+      notes:
+        description: "New release notes (en-US, max 500 chars)"
+        required: true
+
+env:
+  RELEASE_NOTES: ${{ github.event.inputs.notes }}
+  VERSION_CODE: ${{ github.event.inputs.version_code }}
+  TRACK: ${{ github.event.inputs.track }}
+
+permissions:
+  contents: read
+
+jobs:
+  notes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: pip install -q google-auth requests
+      - name: Replace release notes
+        env:
+          SA_RAW: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python3 - <<'PY'
+          import json, os, sys, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+          notes = os.environ["RELEASE_NOTES"].strip()
+          if not notes or len(notes) > 500:
+              print(f"::error::notes must be 1-500 chars (got {len(notes)})"); sys.exit(1)
+          raw = os.environ["SA_RAW"].strip(); obj, _ = json.JSONDecoder().raw_decode(raw[raw.find("{"):])
+          obj.setdefault("type", "service_account"); obj.setdefault("token_uri", "https://oauth2.googleapis.com/token")
+          cred = service_account.Credentials.from_service_account_info(obj, scopes=["https://www.googleapis.com/auth/androidpublisher"])
+          cred.refresh(Request())
+          H = {"Authorization": f"Bearer {cred.token}"}
+          base = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/io.yardscout.app/edits"
+          edit = requests.post(base, headers=H, timeout=60).json()["id"]
+          track = requests.get(f"{base}/{edit}/tracks/{os.environ['TRACK']}", headers=H, timeout=60).json()
+          vc = os.environ["VERSION_CODE"]; hit = False
+          for rel in track.get("releases", []):
+              if vc in [str(c) for c in rel.get("versionCodes", [])]:
+                  print("before:", json.dumps(rel.get("releaseNotes"), ensure_ascii=False))
+                  rel["releaseNotes"] = [{"language": "en-US", "text": notes}]
+                  hit = True
+          if not hit:
+              print(f"::error::versionCode {vc} not found on {os.environ['TRACK']}: {[r.get('versionCodes') for r in track.get('releases', [])]}"); sys.exit(1)
+          r = requests.put(f"{base}/{edit}/tracks/{os.environ['TRACK']}", headers=H, json=track, timeout=60)
+          if r.status_code != 200: print("::error::track update", r.status_code, r.text[:400]); sys.exit(1)
+          c = requests.post(f"{base}/{edit}:commit", headers=H, timeout=60)
+          if c.status_code != 200: print("::error::commit", c.status_code, c.text[:400]); sys.exit(1)
+          print("after:", notes)
+          PY

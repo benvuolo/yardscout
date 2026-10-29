@@ -38,6 +38,13 @@ concurrency:
   group: release-android
   cancel-in-progress: false
 
+
+# Release notes reach shell steps ONLY through this env var. Interpolating
+# the notes input directly into a run: script broke on double quotes (1.12.6's
+# Play "What's new" rendered one word per line) and is an injection risk.
+env:
+  RELEASE_NOTES: ${{ github.event.inputs.notes }}
+
 jobs:
   build-upload:
     runs-on: ubuntu-latest
@@ -106,7 +113,7 @@ jobs:
       - name: Release notes file
         run: |
           mkdir -p whatsnew
-          printf '%s\n' "${{ github.event.inputs.notes }}" > whatsnew/whatsnew-en-US
+          printf '%s\n' "$RELEASE_NOTES" > whatsnew/whatsnew-en-US
 
       # A pasted key file sometimes carries stray text after the closing
       # brace (double paste, shell prompt); take the first JSON object only.

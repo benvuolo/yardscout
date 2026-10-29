@@ -46,6 +46,13 @@ concurrency:
   group: release-ios
   cancel-in-progress: false
 
+
+# Release notes reach shell steps ONLY through this env var. Interpolating
+# the notes input directly into a run: script broke on double quotes (1.12.6's
+# Play "What's new" rendered one word per line) and is an injection risk.
+env:
+  RELEASE_NOTES: ${{ github.event.inputs.notes }}
+
 jobs:
   archive-upload:
     runs-on: macos-latest
@@ -321,7 +328,7 @@ jobs:
           # screenshots in fastlane/screenshots/en-US when present. Both go up
           # with the version, then it is submitted.
           mkdir -p fastlane/metadata/en-US
-          printf '%s\n' "${{ github.event.inputs.notes }}" > fastlane/metadata/en-US/release_notes.txt
+          printf '%s\n' "$RELEASE_NOTES" > fastlane/metadata/en-US/release_notes.txt
           SHOTS="--skip_screenshots"
           if ls fastlane/screenshots/en-US/*.png >/dev/null 2>&1; then SHOTS="--skip_screenshots false --overwrite_screenshots --screenshots_path fastlane/screenshots"; fi
           for attempt in $(seq 1 12); do
