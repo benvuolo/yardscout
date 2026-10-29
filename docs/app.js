@@ -6822,7 +6822,7 @@ function cancelWatchEdit() {
   populateWatchModelOptions();
   document.getElementById('alert-yr-min').value = '';
   document.getElementById('alert-yr-max').value = '';
-  document.getElementById('alert-match-only').checked = true;
+  document.getElementById('alert-match-only').checked = false;   // default: hear every match
   const driveEl = document.getElementById('alert-drive'), trimEl = document.getElementById('alert-trim');
   if (driveEl) driveEl.value = '';
   if (trimEl) trimEl.value = '';
