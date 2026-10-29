@@ -4,8 +4,10 @@
  * breakage instead of it failing silently for weeks (2026-10-29 incident:
  * sandbox sender, digests + magic links went nowhere, nobody knew).
  *
- * Contract: these helpers NEVER throw into the send path. Every write is
- * wrapped; a D1 hiccup costs a counter, never a send.
+ * Contract: these helpers NEVER throw into the send path. count* only
+ * buffers in memory (zero D1 statements per send); flushOps() writes the
+ * buffer in one D1 batch and swallows its own errors — a D1 hiccup costs
+ * counters, never a send.
  *
  * Privacy: ops_errors.detail is scrubbed — truncated, email addresses
  * reduced to their domain, long token-like strings and API keys redacted.
@@ -40,40 +42,90 @@ export function emailDomain(to) {
   return m ? m[1].toLowerCase() : '';
 }
 
-async function bump(env, channel, outcome, now) {
+/* ----- in-memory buffer, flushed in ONE D1 batch -----
+ * Counting must not cost D1 statements per send: a commit invocation runs
+ * every dispatcher (web push, devices, email, saved cars, check-ins) via
+ * waitUntil and shares one per-invocation D1/subrequest budget. So count*
+ * only touches this module-level buffer; flushOps(env) writes it with a
+ * single env.DB.batch() — at most ceil(rows/30) counter upserts (one in
+ * practice) + one multi-row ops_errors insert. Callers flush at the end of
+ * each dispatch chain / scheduled branch / request (index.js, admin.js).
+ * The buffer is isolate-wide, which is fine: counters are global anyway, so
+ * whichever flush runs first simply writes everything pending. */
+const pendingCounts = new Map();   // "day|metric" → n
+let pendingErrors = [];            // newest MAX_ERRORS_PER_FLUSH failure rows
+const MAX_ERRORS_PER_FLUSH = 20;
+const COUNTER_ROWS_PER_STMT = 30;  // 3 binds/row; D1 caps a statement at 100 binds
+
+function bump(channel, outcome, now) {
   const metric = `${channel}:${outcome}`;
-  await env.DB.prepare(
-    `INSERT INTO ops_counters (day, metric, n) VALUES (?1, ?2, 1), (?1, ?3, 1)
-     ON CONFLICT (day, metric) DO UPDATE SET n = n + 1`
-  ).bind(utcDay(now), metric, `${metric}@${utcHour(now)}`).run();
+  const day = utcDay(now);
+  for (const key of [`${day}|${metric}`, `${day}|${metric}@${utcHour(now)}`]) {
+    pendingCounts.set(key, (pendingCounts.get(key) || 0) + 1);
+  }
 }
 
 export async function countOk(env, channel) {
-  try {
-    if (env && env.DB) await bump(env, channel, 'ok', Date.now());
-  } catch (e) { console.log('ops countOk failed:', channel, e && e.message); }
+  try { bump(channel, 'ok', Date.now()); } catch (e) { console.log('ops countOk failed:', channel, e && e.message); }
 }
 
 /** A push token the provider says is dead (uninstall/rotation). Normal churn,
  * not breakage — counted apart from failures. */
 export async function countGone(env, channel) {
-  try {
-    if (env && env.DB) await bump(env, channel, 'gone', Date.now());
-  } catch (e) { console.log('ops countGone failed:', channel, e && e.message); }
+  try { bump(channel, 'gone', Date.now()); } catch (e) { console.log('ops countGone failed:', channel, e && e.message); }
 }
 
 export async function countFail(env, channel, status, detail) {
   try {
-    if (!env || !env.DB) return;
     const now = Date.now();
-    await bump(env, channel, 'fail', now);
-    await env.DB.prepare('INSERT INTO ops_errors (at, channel, status, detail) VALUES (?1, ?2, ?3, ?4)')
-      .bind(new Date(now).toISOString(), channel, Number.isFinite(+status) ? +status : 0, scrub(detail)).run();
-    // Cheap amortized prune (the hourly check prunes too).
-    if (Math.random() < 0.05) await pruneOpsErrors(env);
+    bump(channel, 'fail', now);
+    pendingErrors.push([new Date(now).toISOString(), channel, Number.isFinite(+status) ? +status : 0, scrub(detail)]);
+    if (pendingErrors.length > MAX_ERRORS_PER_FLUSH) pendingErrors = pendingErrors.slice(-MAX_ERRORS_PER_FLUSH);
   } catch (e) { console.log('ops countFail failed:', channel, e && e.message); }
 }
 
+/** Write everything buffered in ONE env.DB.batch(). Never throws; a failed
+ * flush drops that buffer (logged) rather than growing without bound.
+ * Returns the number of statements sent (0 when nothing was pending). */
+export async function flushOps(env) {
+  try {
+    if (!pendingCounts.size && !pendingErrors.length) return 0;
+    const counts = [...pendingCounts];
+    const errors = pendingErrors;
+    pendingCounts.clear();
+    pendingErrors = [];
+    if (!env || !env.DB) return 0;
+    const stmts = [];
+    for (let i = 0; i < counts.length; i += COUNTER_ROWS_PER_STMT) {
+      const chunk = counts.slice(i, i + COUNTER_ROWS_PER_STMT);
+      const binds = [];
+      for (const [key, n] of chunk) {
+        const cut = key.indexOf('|');
+        binds.push(key.slice(0, cut), key.slice(cut + 1), n);
+      }
+      stmts.push(env.DB.prepare(
+        `INSERT INTO ops_counters (day, metric, n) VALUES ${chunk.map(() => '(?, ?, ?)').join(', ')}
+         ON CONFLICT (day, metric) DO UPDATE SET n = n + excluded.n`
+      ).bind(...binds));
+    }
+    if (errors.length) {
+      stmts.push(env.DB.prepare(
+        `INSERT INTO ops_errors (at, channel, status, detail) VALUES ${errors.map(() => '(?, ?, ?, ?)').join(', ')}`
+      ).bind(...errors.flat()));
+    }
+    await env.DB.batch(stmts);
+    return stmts.length;
+  } catch (e) {
+    console.log('ops flush failed:', e && e.message);
+    return 0;
+  }
+}
+
+/** Promise-chain helper: `.finally(opsFlusher(env))` at the end of a
+ * waitUntil dispatch chain. */
+export const opsFlusher = (env) => () => flushOps(env);
+
+/** Hourly (ops_monitor.js): keep the newest MAX_ERRORS rows. */
 export async function pruneOpsErrors(env) {
   await env.DB.prepare(
     `DELETE FROM ops_errors WHERE rowid NOT IN

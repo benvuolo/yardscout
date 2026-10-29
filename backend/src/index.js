@@ -64,6 +64,7 @@ import {
 import { handleSavedAlertsDispatchRun } from './saved_alerts.js';
 import { runScanWatchdog } from './scan_watchdog.js';
 import { runOpsCheck, runDailyReport, handleOpsCheckRun, handleOpsDailyRun } from './ops_monitor.js';
+import { flushOps, opsFlusher } from './ops.js';
 
 export default {
   /* Cron (wrangler.toml [triggers]): weekly digest email for free users
@@ -85,6 +86,7 @@ export default {
           .then(() => runOpsCheck(env))
           .then((r) => console.log(`ops check: ${r.active.length} open, alerted [${r.alerted}], cleared [${r.cleared}], ${r.reason}`))
           .catch((e) => console.log('ops check failed:', e && (e.stack || e.message)))
+          .finally(opsFlusher(env))   // the alert email's own counter
       );
       return;
     }
@@ -94,6 +96,7 @@ export default {
         runDailyReport(env)
           .then((r) => console.log(`ops daily: ${r.verdict}, sent=${r.sent}`))
           .catch((e) => console.log('ops daily failed:', e && (e.stack || e.message)))
+          .finally(opsFlusher(env))
       );
       return;
     }
@@ -105,6 +108,7 @@ export default {
       sendWeeklyDigests(env)
         .then((r) => console.log(`weekly digest: ${r.users} users, ${r.emails} emails, ${r.arrivals} arrivals in window`))
         .catch((e) => console.log('weekly digest failed:', e && (e.stack || e.message)))
+        .finally(opsFlusher(env))
     );
     // Native devices: weekly summary PUSH for the free tier (no email exists
     // in the device model — this replaced the digest email entirely there).
@@ -112,6 +116,7 @@ export default {
       sendWeeklyDevicePushes(env)
         .then((r) => console.log(`weekly device push: ${r.devices} devices, ${r.sends} sends, ${r.arrivals} arrivals in window`))
         .catch((e) => console.log('weekly device push failed:', e && (e.stack || e.message)))
+        .finally(opsFlusher(env))
     );
   },
 
@@ -127,6 +132,10 @@ export default {
       console.log('unhandled error:', e && (e.stack || e.message || e));
       resp = err(500, 'internal', 'Internal error.');
     }
+    // Send counters buffered by this request's own sends (magic link, test
+    // pushes, admin dispatch runs): ONE D1 batch, only if anything is
+    // pending; never throws. waitUntil dispatch chains flush themselves.
+    await flushOps(env);
     // All handlers build their own Response objects, so headers are mutable.
     for (const [k, v] of Object.entries(cors)) resp.headers.set(k, v);
     return resp;

@@ -12,6 +12,7 @@ import { dispatchDeviceAlerts, dispatchDeviceSaleAlerts, dispatchFirstWatchCheck
 import { dispatchEmailAlerts } from './email_alerts.js';
 import { maybeSendCoverageDigest } from './coverage.js';
 import { dispatchSavedCarAlerts } from './saved_alerts.js';
+import { opsFlusher } from './ops.js';
 
 async function checkSecret(req, env, header, envKey) {
   const expected = env[envKey];
@@ -92,30 +93,35 @@ export async function handleCommit(req, env, ctx) {
       .bind(o.kind, o.key, o.variant).run();
   }
   // Alert dispatch runs after the response goes out — the scan workflow
-  // shouldn't wait on (or fail because of) notification sends.
+  // shouldn't wait on (or fail because of) notification sends. Each chain
+  // ends with ONE batched write of its send counters (ops.js flushOps).
   if (Array.isArray(newArrivals) && newArrivals.length && ctx) {
     ctx.waitUntil(
       dispatchAlerts(env, newArrivals)
         .then((r) => console.log(`alerts: ${r.users} users notified, ${r.sends} sends`))
         .catch((e) => console.log('alert dispatch failed:', e && e.message))
+        .finally(opsFlusher(env))
     );
     // Native devices (iOS app): instant APNs push for Pro devices.
     ctx.waitUntil(
       dispatchDeviceAlerts(env, newArrivals)
         .then((r) => console.log(`device alerts: ${r.devices} devices pushed, ${r.sends} sends`))
         .catch((e) => console.log('device alert dispatch failed:', e && e.message))
+        .finally(opsFlusher(env))
     );
     // Web Pro members with email alerts on: one digest email per user.
     ctx.waitUntil(
       dispatchEmailAlerts(env, newArrivals)
         .then((r) => console.log(`email alerts: ${r.users} users emailed, ${r.emails} attempts`))
         .catch((e) => console.log('email alert dispatch failed:', e && e.message))
+        .finally(opsFlusher(env))
     );
     // Snapshot arrivals for the weekly free-tier digest cron.
     ctx.waitUntil(
       storeArrivals(env, newArrivals)
         .then((r) => console.log(`arrivals stored: ${r.stored}`))
         .catch((e) => console.log('arrival store failed:', e && e.message))
+        .finally(opsFlusher(env))
     );
   }
   // Saved-car alerts (Pro): "gone" / "leaving soon" for every synced
@@ -128,11 +134,13 @@ export async function handleCommit(req, env, ctx) {
       dispatchFirstWatchCheckins(env)
         .then((r) => console.log(`first-watch check-ins: ${r.due} due, ${r.sent} sent, ${r.gaveUp} gave up`))
         .catch((e) => console.log('first-watch check-in failed:', e && e.message))
+        .finally(opsFlusher(env))
     );
     ctx.waitUntil(
       dispatchSavedCarAlerts(env)
         .then((r) => console.log(`saved-car alerts: ${r.devices} devices, ${r.emails} emails, ${r.gone} gone, ${r.leaving} leaving, ${r.deferred} deferred`))
         .catch((e) => console.log('saved-car alert dispatch failed:', e && e.message))
+        .finally(opsFlusher(env))
     );
   }
   // Coverage-request digest to the owner piggybacks the commit hook too —
@@ -143,6 +151,7 @@ export async function handleCommit(req, env, ctx) {
       maybeSendCoverageDigest(env)
         .then((r) => console.log(`coverage digest: ${r.sent ? `sent (${r.requests} requests, ${r.keys} keys)` : `skipped (${r.reason})`}`))
         .catch((e) => console.log('coverage digest failed:', e && e.message))
+        .finally(opsFlusher(env))
     );
   }
   // Sale-day snapshot + instant sale pushes (Pro). An empty array still
@@ -158,6 +167,7 @@ export async function handleCommit(req, env, ctx) {
           console.log(`device sales: ${d.devices} devices pushed, ${d.sends} sends`);
         })
         .catch((e) => console.log('sale-alert dispatch failed:', e && e.message))
+        .finally(opsFlusher(env))
     );
   }
 
