@@ -43,6 +43,13 @@ export async function handleCoverageRequest(req, env) {
   if (kind === 'yard' ? !part : (!part && !make && !model)) {
     return err(400, 'bad_request', kind === 'yard' ? 'Tell us the yard\'s name.' : 'Tell us the part or the car — an empty request is nothing to add.');
   }
+  // A yard request needs a place: chains share names ("Pick-n-Pull" is 48
+  // yards plus unrelated independents), and a bare name can't be acted on
+  // (2026-10-29: one arrived with no city, no note, no email). The /yards
+  // form sends `city`; older pages send it inside `note` only.
+  if (kind === 'yard' && clip(body.city, 80).length < 3 && !/,\s*[A-Za-z]{2}\b/.test(String(body.note || ''))) {
+    return err(400, 'need_city', 'Tell us the city and state, so we know which yard you mean.');
+  }
 
   const zipRaw = clip(body.zip, 10);
   const zip = /^\d{5}$/.test(zipRaw) ? zipRaw : null;

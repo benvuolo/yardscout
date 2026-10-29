@@ -116,6 +116,15 @@ check "request 10 of 10 still accepted" "$S" "200"
 S=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$API/v1/coverage/request" -H 'content-type: application/json' -d '{"kind":"part","part":"widget 11"}')
 check "request 11 rate-limited (429)" "$S" "429"
 
+echo "── yard requests need a place (separate client: the limiter above is spent)"
+ypost() { curl -s -w '\n%{http_code}' -X POST "$API/v1/coverage/request" -H 'content-type: application/json' -H 'cf-connecting-ip: 10.9.9.9' -d "$1"; }
+R=$(ypost '{"kind":"yard","part":"Pick-n-Pull"}')
+check "yard request with no city rejected" "$(status_of "$R")" "400"
+R=$(ypost '{"kind":"yard","part":"Carolina Pick N Pull","city":"Wilmington, NC"}')
+check "yard request with city accepted" "$(status_of "$R")" "200"
+R=$(ypost '{"kind":"yard","part":"Old Page Yard","note":"https://example.com · Conway, SC"}')
+check "yard request with city in note (older page) accepted" "$(status_of "$R")" "200"
+
 echo
 echo "coverage e2e: $PASS passed, $FAIL failed"
 [ "$FAIL" = 0 ]

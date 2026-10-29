@@ -466,7 +466,7 @@ export async function renderYardsPage() {
 <form id="yard-req" onsubmit="return ysReq(event)">
 <label for="yn">Yard name</label><input id="yn" name="yard" required maxlength="80" placeholder="e.g. U-Pull-It Des Moines">
 <label for="yu">Inventory page URL</label><input id="yu" name="url" type="url" maxlength="300" placeholder="https://…">
-<label for="yc">City, state</label><input id="yc" name="city" maxlength="80" placeholder="Des Moines, IA">
+<label for="yc">City, state</label><input id="yc" name="city" required minlength="4" maxlength="80" placeholder="Des Moines, IA">
 <label for="ye">Your email (optional — we'll tell you when it's live)</label><input id="ye" name="email" type="email" maxlength="254">
 <button class="btn btn-primary" type="submit">Ask for this yard</button> <span id="yard-req-msg" role="status"></span>
 </form></div>
@@ -478,7 +478,7 @@ ${storesLine()}
 <script>
 async function ysReq(e){e.preventDefault();const f=e.target,m=document.getElementById('yard-req-msg');m.textContent='Sending…';m.className='';
 const url=f.url.value.trim(),city=f.city.value.trim();
-try{const r=await fetch('${API}/v1/coverage/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({kind:'yard',part:f.yard.value.trim().slice(0,80),note:[url,city].filter(Boolean).join(' · ').slice(0,500),email:f.email.value.trim()})});
+try{const r=await fetch('${API}/v1/coverage/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({kind:'yard',part:f.yard.value.trim().slice(0,80),note:[url,city].filter(Boolean).join(' · ').slice(0,500),city,email:f.email.value.trim()})});
 const j=await r.json().catch(()=>({}));if(r.ok){m.textContent='Got it — thanks. We check requests every day.';m.className='ok';f.reset();}else{m.textContent=j.message||'Could not send — try again.';m.className='err';}}
 catch(err){m.textContent='Could not send — try again.';m.className='err';}return false;}
 </script>`;
