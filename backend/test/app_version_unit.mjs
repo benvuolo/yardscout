@@ -4,26 +4,22 @@ import { appVersionInfo, handleAppVersion } from '../src/app_version.js';
 let failures = 0;
 const check = (name, ok, detail = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${ok ? '' : ' — ' + detail}`); if (!ok) failures++; };
 const H = 3600_000, NOW = Date.parse('2026-11-01T12:00:00Z');
-let site = {}, itunes = { results: [{ version: '1.12.9' }] }, itunesCalls = 0, siteDown = false, itunesDown = false;
+let site = {}, siteDown = false;
 globalThis.fetch = async (url) => {
   url = String(url);
-  if (url.includes('itunes.apple.com')) { itunesCalls++; if (itunesDown) throw new Error('down'); return new Response(JSON.stringify(itunes)); }
+  if (url.includes('itunes.apple.com')) throw new Error('the Worker must not call Apple\'s public lookup (403 from Cloudflare)');
   if (url.endsWith('/app-version.json')) { if (siteDown) return new Response('nope', { status: 500 }); return new Response(JSON.stringify(site)); }
   throw new Error('unexpected ' + url);
 };
 const kv = new Map();
 const env = { ENTITLEMENTS: { get: async (k) => kv.get(k) ?? null, put: async (k, v) => { kv.set(k, v); } } };
 
-site = { min: { ios: '1.12.8', android: '' }, message: 'Please update', android: { latest: '1.12.9', releasedAt: new Date(NOW - 10 * H).toISOString() } };
+site = { min: { ios: '1.12.8', android: '' }, message: 'Please update', ios: { latest: '1.12.9', liveAt: '2026-11-01T00:00:00Z' }, android: { latest: '1.12.9', releasedAt: new Date(NOW - 10 * H).toISOString() } };
 let r = await appVersionInfo(env, 'ios', NOW);
-check('ios latest from Apple lookup', r.latest === '1.12.9', JSON.stringify(r));
+check('ios latest from the file (recorded when live)', r.latest === '1.12.9', JSON.stringify(r));
 check('ios min from file', r.min === '1.12.8');
 check('message passed through', r.message === 'Please update');
 check('ios store url', /apps\.apple\.com\/app\/id6817126581/.test(r.storeUrl));
-await appVersionInfo(env, 'ios', NOW + 10 * 60_000);
-check('Apple lookup cached for an hour', itunesCalls === 1, `calls=${itunesCalls}`);
-await appVersionInfo(env, 'ios', NOW + 2 * H);
-check('Apple lookup refreshed after an hour', itunesCalls === 2, `calls=${itunesCalls}`);
 
 r = await appVersionInfo(env, 'android', NOW);
 check('android latest held back during Play review (10 h after upload)', r.latest === null, JSON.stringify(r));
@@ -35,7 +31,7 @@ site = { min: { ios: 'not-a-version' } };
 r = await appVersionInfo(env, 'ios', NOW);
 check('junk min ignored', r.min === null);
 
-siteDown = true; itunesDown = true; kv.clear();
+siteDown = true;
 r = await appVersionInfo(env, 'ios', NOW);
 check('everything down → no latest, no min (never blocks)', r.latest === null && r.min === null, JSON.stringify(r));
 

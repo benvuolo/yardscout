@@ -1,0 +1,70 @@
+# Records which iOS version is LIVE on the App Store into docs/app-version.json
+# ("ios": {"latest", "liveAt"}), for the in-app "Update available" card
+# (backend/src/app_version.js). Uses the App Store Connect API (Apple's
+# public lookup answers 403 to Cloudflare Workers). Read-only on Apple's side;
+# commits only when the live version changes.
+name: App Store live version
+
+on:
+  schedule:
+    - cron: "41 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: app-store-version
+  cancel-in-progress: false
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+      BUNDLE_ID: com.benvuolo.yardscout
+    steps:
+      - uses: actions/checkout@v4
+      - name: Look up the live version and record it
+        run: |
+          set -euo pipefail
+          pip install -q pyjwt cryptography requests
+          python3 - <<'PY'
+          import datetime, json, os, time, jwt, requests
+          key = os.environ["ASC_P8"].strip().replace("\\n", "\n")
+          token = jwt.encode({"iss": os.environ["ASC_ISSUER_ID"], "iat": int(time.time()), "exp": int(time.time()) + 900,
+                              "aud": "appstoreconnect-v1"}, key, algorithm="ES256", headers={"kid": os.environ["ASC_KEY_ID"], "typ": "JWT"})
+          H = {"Authorization": f"Bearer {token}"}
+          API = "https://api.appstoreconnect.apple.com/v1"
+          app = requests.get(f"{API}/apps", headers=H, params={"filter[bundleId]": os.environ["BUNDLE_ID"]}, timeout=60).json()["data"][0]
+          vs = requests.get(f"{API}/apps/{app['id']}/appStoreVersions", headers=H,
+                            params={"filter[platform]": "IOS", "filter[appStoreState]": "READY_FOR_SALE", "limit": 5}, timeout=60).json()
+          live = [v["attributes"]["versionString"] for v in vs.get("data", [])]
+          if not live:
+              print("No READY_FOR_SALE version found — leaving the file alone."); raise SystemExit(0)
+          key_of = lambda s: [int(x) if x.isdigit() else 0 for x in s.split(".")]
+          version = max(live, key=key_of)
+          p = "docs/app-version.json"
+          d = json.load(open(p))
+          if (d.get("ios") or {}).get("latest") == version:
+              print(f"Live iOS version still {version} — no change."); raise SystemExit(0)
+          d["ios"] = {"latest": version, "liveAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+          json.dump(d, open(p, "w"), indent=2); open(p, "a").write("\n")
+          print(f"Recorded live iOS version {version}")
+          PY
+      - name: Commit if changed
+        run: |
+          set -euo pipefail
+          git diff --quiet docs/app-version.json && { echo "nothing to commit"; exit 0; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/app-version.json
+          git commit -m "chore: live iOS version $(python3 -c 'import json;print(json.load(open("docs/app-version.json"))["ios"]["latest"])') (app-store-version)"
+          for attempt in 1 2 3 4; do
+            git -c rebase.autoStash=true pull --rebase origin main && git push && exit 0
+            sleep 10
+          done
+          echo "::error::could not push"; exit 1

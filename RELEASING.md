@@ -94,10 +94,11 @@ for the archive step). The API key is used for the upload.
 Apps from 1.12.9 on check `/v1/app-version` at launch and whenever they come
 back to the foreground (`backend/src/app_version.js`):
 
-- **"Update available" card** — automatic. iOS shows it once Apple's public
-  lookup reports a newer live version; Android 48 h after a production upload
-  (`release-android.yml` records it in `docs/app-version.json`). Dismissible,
-  once per version.
+- **"Update available" card** — automatic. iOS shows it once a newer version
+  is live on the App Store (`app-store-version.yml` checks App Store Connect
+  every 2 h and records it in `docs/app-version.json`; run it by hand to skip
+  the wait); Android 48 h after a production upload (`release-android.yml`
+  records it). Dismissible, once per version.
 - **Required update** — manual. Edit `docs/app-version.json` on GitHub and set
   `min.ios` / `min.android` to the oldest version still allowed (e.g. `"1.13"`),
   optionally with a `message`. Apps below it show a full-screen "Update
