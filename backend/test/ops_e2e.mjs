@@ -148,6 +148,13 @@ for (const sec of ['Verdict: 2 issues', 'OPEN ISSUES (2)', 'SCAN', 'Last commit:
   check(`daily text has "${sec}"`, text.includes(sec));
 }
 check('daily text leaks no user email', !/tester\d@users/.test(text));
+const html = d.email?.html || '';
+check('daily html part present', html.startsWith('<!doctype html>') && html.length > 2000, String(html.length));
+for (const sec of ['YardScout daily', 'Open issues', 'Scan', 'Yard health', 'Alerts sent', 'Users', 'Funnel', '2 issues']) {
+  check(`daily html has "${sec}"`, html.includes(sec));
+}
+check('daily html leaks no user email', !/tester\d@users/.test(html));
+check('daily html escapes yard names', !/<script/i.test(html));
 console.log('\n----- sample daily email (dry run) -----\n' + d.email?.subject + '\n\n' + text + '----------------------------------------\n');
 
 /* ---- 6b. usage: funnel counters land in "yesterday" when the clock moves a day ---- */

@@ -229,7 +229,7 @@ export async function evaluateConditions(env, now = Date.now()) {
 
 /** One plain-text email to OWNER_EMAIL (channel email:ops). Returns true
  * when Resend accepted it. Never throws. */
-export async function sendOpsEmail(env, { subject, text }) {
+export async function sendOpsEmail(env, { subject, text, html }) {
   try {
     const to = env.OWNER_EMAIL;
     if (!to) { console.log('ops email: OWNER_EMAIL not configured — skipped'); return false; }
@@ -243,7 +243,7 @@ export async function sendOpsEmail(env, { subject, text }) {
       headers: { authorization: 'Bearer ' + env.RESEND_API_KEY, 'content-type': 'application/json' },
       body: JSON.stringify({
         from: env.EMAIL_FROM || 'YardScout <hello@yardscout.io>',
-        to: [to], subject, text,
+        to: [to], subject, text, ...(html ? { html } : {}),
       }),
     });
     if (!r.ok) console.log('ops email failed:', r.status);
@@ -512,6 +512,126 @@ async function loadUsage(env, now) {
   };
 }
 
+/* ===== daily email, HTML (2026-10-29: owner asked for "easier to read") =====
+ * Same numbers as composeDaily (which stays as the text/plain part). Inline
+ * styles only and table layout: what every mail client renders. */
+const esc = (v) => String(v == null ? '' : v)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const C = { ink: '#1c1c1a', dim: '#6b675f', line: '#e4e0d6', soft: '#f6f4ee', accent: '#b84a0a', ok: '#3f6c33', bad: '#b03429' };
+const TD = `padding:6px 10px;border-bottom:1px solid ${C.line};font-size:14px;color:${C.ink};`;
+const TDN = TD + 'text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;';
+const TH = `padding:6px 10px;border-bottom:2px solid ${C.line};font-size:12px;color:${C.dim};text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.04em;`;
+const THN = TH + 'text-align:right;';
+
+function hSection(title, inner, note = '') {
+  return `<tr><td style="padding:18px 22px 4px;">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${C.accent};margin:0 0 8px;">${esc(title)}${note ? ` <span style="color:${C.dim};font-weight:400;text-transform:none;letter-spacing:0;">${note}</span>` : ''}</div>
+    ${inner}</td></tr>`;
+}
+function hTable(head, rows, numericFrom = 1) {
+  const th = head.map((h, i) => `<th style="${i >= numericFrom ? THN : TH}">${esc(h)}</th>`).join('');
+  const tr = rows.map((r) => `<tr>${r.map((c, i) => `<td style="${i >= numericFrom ? TDN : TD}">${c}</td>`).join('')}</tr>`).join('');
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">${th ? `<tr>${th}</tr>` : ''}${tr}</table>`;
+}
+function hStats(items) {
+  const cells = items.map(([label, value]) => `<td style="padding:10px 12px;background:${C.soft};border-radius:8px;vertical-align:top;">
+      <div style="font-size:11px;color:${C.dim};text-transform:uppercase;letter-spacing:.05em;">${esc(label)}</div>
+      <div style="font-size:20px;font-weight:700;color:${C.ink};margin-top:2px;">${value}</div></td>`);
+  return `<table role="presentation" cellpadding="0" cellspacing="6" style="width:100%;border-collapse:separate;"><tr>${cells.join('')}</tr></table>`;
+}
+const hMuted = (t) => `<div style="font-size:14px;color:${C.dim};">${t}</div>`;
+const hList = (items) => `<ul style="margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.6;color:${C.ink};">${items.map((i) => `<li>${i}</li>`).join('')}</ul>`;
+const ago = (h) => (h == null ? '' : h < 1 ? `${Math.round(h * 60)} min ago` : `${h} h ago`);
+
+export function composeDailyHtml(r) {
+  const d = new Date(r.at);
+  const good = !r.openConditions.length;
+  const badge = `<span style="display:inline-block;padding:4px 10px;border-radius:999px;font-size:13px;font-weight:700;color:#fff;background:${good ? C.ok : C.bad};">${esc(r.verdict)}</span>`;
+  const S = [];
+
+  S.push(hSection('Open issues', r.openConditions.length
+    ? hList(r.openConditions.map((c) => `<span style="color:${C.bad};font-weight:600;">${esc(c.title)}</span>`))
+    : hMuted('None.')));
+
+  S.push(hSection('Scan', hStats([
+    ['Yards live', fmtInt(r.inventory.yards)],
+    ['Cars', fmtInt(r.inventory.vehicles)],
+    ['Last scan', esc(ago(r.scan.ageHours) || fmtTime(r.scan.lastCommitAt))],
+  ]) + `<div style="font-size:13px;color:${C.dim};margin-top:6px;">Watchdog: ${esc(fmtWatchdog(r.watchdog))}</div>`));
+
+  const yh = r.yardHealth;
+  if (yh && !yh.error) {
+    const parts = [];
+    parts.push(`<div style="font-size:14px;margin:2px 0;"><strong>${yh.dormant.length}</strong> dormant <span style="color:${C.dim};">(no new car in 120+ days)</span></div>`);
+    if (yh.dormant.length) parts.push(hList(yh.dormant.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· newest ${esc(y.newestDateAdded)}</span>`)));
+    parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> frozen <span style="color:${C.dim};">(yard list unchanged 2+ days)</span></div>`);
+    if (yh.frozen.length) parts.push(hList(yh.frozen.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`))
+      + (yh.frozen.length > MAX_YARD_NAMES ? hMuted(`+${yh.frozen.length - MAX_YARD_NAMES} more`) : ''));
+    S.push(hSection('Yard health', parts.join(''), `${yh.yards} yards checked`));
+  } else {
+    S.push(hSection('Yard health', hMuted(`Could not load yard_health.json (${esc((yh && yh.error) || 'unknown')})`)));
+  }
+
+  const active = Object.entries(r.channels).filter(([, s]) => s.ok + s.fail + s.gone > 0);
+  const sendRows = active.map(([c, s]) => [esc(c), fmtInt(s.ok),
+    s.fail ? `<span style="color:${C.bad};font-weight:700;">${s.fail}</span>` : '0',
+    c.startsWith('email:') ? '—' : String(s.gone)]);
+  let sends = active.length ? hTable(['Channel', 'Sent', 'Failed', 'Dead tokens'], sendRows) : hMuted('No sends in the last 24 h.');
+  sends += `<div style="font-size:13px;color:${C.dim};margin-top:6px;">Resend today: ${r.resend.sentToday} of ${r.resend.dailyCap}</div>`;
+  if (r.recentErrors.length) {
+    sends += hList(r.recentErrors.slice(0, 3).map((e) => `<span style="color:${C.bad};">${esc(fmtTime(e.at).slice(11))} ${esc(e.channel)} HTTP ${esc(e.status || 'net')}</span> — ${esc(String(e.detail || '').slice(0, 140))}`));
+  }
+  S.push(hSection('Alerts sent', sends, 'last 24 h'));
+
+  const u = r.usage;
+  if (u && !u.error) {
+    const dv = u.devices;
+    let usage = hStats([
+      ['App devices', `${fmtInt(dv.total)}<span style="font-size:13px;color:${C.dim};font-weight:400;"> · ${fmtInt(dv.pro)} Pro</span>`],
+      ['Alerts on', fmtInt(dv.push)],
+      ['Watching', `${fmtInt(dv.withWatches)}<span style="font-size:13px;color:${C.dim};font-weight:400;"> · ${fmtInt(dv.watches)} watches</span>`],
+    ]);
+    usage += `<div style="font-size:13px;color:${C.dim};margin:6px 0 2px;">${dv.byPlatform.map((p) => `${esc(p.platform)} ${esc(p.tier)} ${fmtInt(p.n)}`).join(' · ')}
+      &nbsp;|&nbsp; new: ${fmtInt(dv.newYesterday)} yesterday, ${fmtInt(dv.new7d)} in 7 d &nbsp;|&nbsp; used in last 7 d: ${fmtInt(dv.active7d)}<br>
+      Web: ${fmtInt(u.web.accounts)} account${u.web.accounts === 1 ? '' : 's'} (${fmtInt(u.web.pro)} Pro) · ${fmtInt(u.web.watches)} web watches · ${fmtInt(r.audience && r.audience.emailWatchers)} email-alert watchers</div>`;
+    S.push(hSection('Users', usage));
+
+    const fRows = FUNNEL_ROWS.map(([k, label]) => {
+      const f = u.funnel[k] || { yesterday: 0, week: 0 };
+      const strong = k === 'pro-converted' && f.week ? `font-weight:700;color:${C.ok};` : '';
+      return [`<span style="${strong}">${esc(label)}</span>`, fmtInt(f.yesterday), fmtInt(f.week)];
+    });
+    S.push(hSection('Funnel', hTable(['', 'Yesterday', '7 days'], fRows), 'all platforms'));
+
+    if (u.gates && u.gates.length) {
+      S.push(hSection('What opens the Pro sheet', hTable(['Gate', 'Opens', 'Checkout', 'Bought'],
+        u.gates.map((g) => [esc(g.gate), fmtInt(g.paywall), fmtInt(g.checkout), g.purchase ? `<strong style="color:${C.ok};">${g.purchase}</strong>` : '0'])), '7 days'));
+    }
+    const extras = [];
+    extras.push(`<div style="font-size:14px;margin:2px 0;"><span style="color:${C.dim};">Tagged sources (first visits, 7 d):</span> ${u.sources.length
+      ? u.sources.map((x) => `${esc(x.source)} <strong>${fmtInt(x.n)}</strong>`).join(', ')
+      : '<span style="color:' + C.dim + ';">none yet — add ?utm_source=… to links you post</span>'}</div>`);
+    if (u.topWatches.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most watched:</span> ${u.topWatches.map((w) => `${esc(w.name)} <strong>${fmtInt(w.n)}</strong>`).join(', ')}</div>`);
+    S.push(hSection('Where people come from', extras.join('')));
+  } else {
+    S.push(hSection('Usage', hMuted(`Could not load (${esc((u && u.error) || 'unknown')})`)));
+  }
+
+  return `<!doctype html><html><body style="margin:0;padding:0;background:${C.soft};">
+<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;background:${C.soft};"><tr><td align="center" style="padding:20px 10px;">
+<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;max-width:640px;background:#fff;border:1px solid ${C.line};border-radius:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+<tr><td style="padding:20px 22px 6px;border-bottom:3px solid ${C.accent};">
+  <div style="font-size:20px;font-weight:800;color:${C.ink};">YardScout daily</div>
+  <div style="font-size:13px;color:${C.dim};margin:2px 0 10px;">${esc(d.toUTCString().slice(0, 16))} · ${esc(d.toISOString().slice(11, 16))} UTC</div>
+  ${badge}
+</td></tr>
+${S.join('\n')}
+<tr><td style="padding:18px 22px 20px;font-size:12px;color:${C.dim};border-top:1px solid ${C.line};">
+  Sent daily at 13:07 UTC by yardscout-api. Problems also alert hourly with the subject “[YardScout alert]”.
+</td></tr>
+</table></td></tr></table></body></html>`;
+}
+
 /** Builds the daily report (JSON + the email it would send). Read-only. */
 export async function buildDailyReport(env, { now = Date.now() } = {}) {
   const ev = await evaluateConditions(env, now);
@@ -560,7 +680,7 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
   };
   const tail = report.inventory.yards != null
     ? ` · ${fmtInt(report.inventory.yards)} yards · ${fmtInt(report.inventory.vehicles)} cars` : '';
-  report.email = { subject: `[YardScout daily] ${report.verdict}${tail}`, text: composeDaily(report) };
+  report.email = { subject: `[YardScout daily] ${report.verdict}${tail}`, text: composeDaily(report), html: composeDailyHtml(report) };
   return report;
 }
 
