@@ -66,9 +66,15 @@ let siteLinksCache = { at: 0, rows: null };
  * /inventory/<town-slug>-<code>/ with a free-text ?search=. Search by make +
  * model; fall back to make only when our canonical model has punctuation
  * (F-150, S-Series) that PYP's own names may not share. */
+const PYP_STORE_PAGES = {
+  '1231': 'https://www.pyp.com/locations/co/denver/1355-w-52nd-ave/',  // Denver 52nd Ave (2026-10-29)
+};
 function pypStoreUrl(id, yardName, make, model) {
   const m = /^(\d{4})-/.exec(String(id || ''));
   if (!m || !/^pick your part - /i.test(yardName || '')) return null;
+  // Stores whose pyp.com page doesn't follow <town>-<code> (owner-verified).
+  const override = PYP_STORE_PAGES[m[1]];
+  if (override) return override;
   const slug = String(yardName).split(' - ').slice(1).join(' - ').toLowerCase()
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   if (!slug) return null;
