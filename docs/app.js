@@ -3593,7 +3593,7 @@ function renderLive() {
           <div class="car-badges">
             ${isConfirmedManual(v) ? `<span class="badge badge-manual" title="${transSource(v) === 'listing' ? 'Manual transmission, from the yard\u2019s own listing \u2014 never inferred' : 'Manual transmission, confirmed from this car\u2019s VIN decode \u2014 never inferred'}">Manual</span>` : ''}
             ${statusBadge}
-            <button type="button" class="watch-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Already on your watchlist' : 'Watch this model — get alerted when another shows up'}">${ICON.bell}</button>
+            <button type="button" class="watch-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Watching — tap to stop' : 'Watch this model — get alerted when another shows up'}">${ICON.bell}</button>
             <button type="button" class="share-btn" data-vkey="${escapeHtml(vehicleKey(v))}" title="Share this find">${ICON.share}</button>
             <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${escapeHtml(vehicleKey(v))}" title="Save for your yard visit">${ICON.heart}</button>
           </div>
@@ -6350,6 +6350,7 @@ function renderAlerts() {
           ${missLine}
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;">
+          <button class="wl-remove wl-edit" onclick="editWatchItem(${i})">Edit</button>
           <button class="wl-remove" onclick="removeWatchItem(${i})">Remove</button>
         </div>
       </div>`;
@@ -6481,24 +6482,59 @@ function addQuickWatch(make, model, yrMin, yrMax, source) {
 
 /* Bell on a Live card: make+model, all years. Tapping an already-watched
  * card just confirms. */
+/* A "quick" watch is exactly what a bell tap creates: make+model, all
+ * years, no trim/drivetrain. Only those come off again with a bell tap —
+ * a watch someone configured in Alerts is never deleted from a card. */
+function quickWatchEntries(make, model) {
+  return loadWatchlist().filter(e =>
+    canonicalMake(e.make).toLowerCase() === canonicalMake(make).toLowerCase()
+    && String(e.model || '').toLowerCase() === String(model || '').toLowerCase()
+    && !e.yrMin && !e.yrMax && !e.driveFilter && !e.trimFilter);
+}
+function setCardBells(make, model, on) {
+  document.querySelectorAll('.watch-btn').forEach(b => {
+    if (b.dataset.make === make && b.dataset.model === model) {
+      b.classList.toggle('watching', on);
+      b.title = on ? 'Watching — tap to stop' : 'Watch this model — get alerted when another shows up';
+    }
+  });
+}
 function watchFromCard(btn) {
   const make = btn.dataset.make, model = btn.dataset.model;
   if (!make) return;
+  const label = `${make} ${model}`.trim();
+  if (hasWatchFor(make, model)) {
+    const quick = quickWatchEntries(make, model);
+    if (!quick.length) {
+      // Configured in Alerts (years, trim, or an any-model watch on the make).
+      showWatchToast(label, { manage: true });
+      return;
+    }
+    const keep = loadWatchlist().filter(e => !quick.includes(e) && !quick.some(q => q.addedAt === e.addedAt));
+    saveWatchlist(keep);
+    for (const q of quick) if (q.serverId && window.YSApi && YSApi.enabled()) YSApi.deleteWatch(q.serverId).catch(() => {});
+    if (quick.some(q => q.addedAt === editingWatchAddedAt)) cancelWatchEdit();
+    renderAlerts();
+    setCardBells(make, model, false);
+    track('watch-removed/card');
+    showWatchToast(label, { undo: () => {
+      const list = loadWatchlist();
+      for (const q of quick) { delete q.serverId; list.push(q); syncWatchToServer(q); }
+      saveWatchlist(list);
+      renderAlerts();
+      setCardBells(make, model, true);
+    } });
+    return;
+  }
   const r = addQuickWatch(make, model, null, null, 'card');
   if (r === 'limit') { openUpgradeSheet('watch-limit'); return; }
   if (r === 'no-zip') { alert('Set your zip code up top first, so the watch knows where "near you" is.'); return; }
   if (r === 'added') {
     renderAlerts();
     checkAndNotify();
-    showWatchToast(`${make} ${model}`.trim());
+    showWatchToast(label);
   }
-  // Flash confirmation on every matching bell currently rendered.
-  document.querySelectorAll('.watch-btn').forEach(b => {
-    if (b.dataset.make === make && b.dataset.model === model) {
-      b.classList.add('watching');
-      b.title = 'Already on your watchlist';
-    }
-  });
+  setCardBells(make, model, true);
   const orig = btn.innerHTML;
   btn.innerHTML = ICON.check;
   setTimeout(() => { btn.innerHTML = orig; }, 1200);
@@ -6561,7 +6597,7 @@ function jhOpenAlertsTab() {
  * (web), or — already set — what free vs Pro delivery looks like. Never
  * more than one toast at a time; auto-hides. */
 let _watchToastTimer = null, _promoStepAside = false;
-function showWatchToast(label) {
+function showWatchToast(label, opts = {}) {
   let el = document.getElementById('watch-toast');
   if (!el) {
     el = document.createElement('div');
@@ -6572,7 +6608,13 @@ function showWatchToast(label) {
   }
   const pushOn = localStorage.getItem('ys_push_on') === '1';
   let next = '';
-  if (IS_NATIVE && !pushOn && document.getElementById('native-push-enable')) {
+  let head = `Watching <strong>${escapeHtml(label)}</strong>`;
+  if (opts.undo) {
+    head = `Stopped watching <strong>${escapeHtml(label)}</strong>`;
+    next = `<span>Removed from your watchlist.</span><button type="button" class="btn btn-sm" data-act="undo">Undo</button>`;
+  } else if (opts.manage) {
+    next = `<span>Set up in Alerts with its own years or trim.</span><button type="button" class="linklike" data-act="manage">Manage</button>`;
+  } else if (IS_NATIVE && !pushOn && document.getElementById('native-push-enable')) {
     next = `<span>Turn on notifications so we can tell you.</span>
       <button type="button" class="btn btn-primary btn-sm" data-act="push">Turn on</button>`;
   } else if (!IS_NATIVE && /android|iphone|ipad|ipod/i.test(navigator.userAgent)) {
@@ -6587,7 +6629,7 @@ function showWatchToast(label) {
     next = `<span>Free: a recap every Monday. Pro: a push within hours.</span>
       <button type="button" class="linklike" data-act="pro">See Pro</button>`;
   }
-  el.innerHTML = `<div class="watch-toast-head">${ICON.check}<span>Watching <strong>${escapeHtml(label)}</strong></span>
+  el.innerHTML = `<div class="watch-toast-head">${opts.undo ? ICON.bell : ICON.check}<span>${head}</span>
       <button type="button" class="watch-toast-x" data-act="close" aria-label="Dismiss">&times;</button></div>
     ${next ? `<div class="watch-toast-next">${next}</div>` : ''}`;
   el.onclick = (e) => {
@@ -6596,6 +6638,8 @@ function showWatchToast(label) {
     if (act.dataset.act === 'push') { track('watch-toast-push'); document.getElementById('native-push-enable').click(); }
     if (act.dataset.act === 'pro') openUpgradeSheet('watch-toast');
     if (act.dataset.act === 'app') track('watch-toast-app');
+    if (act.dataset.act === 'undo' && opts.undo) opts.undo();
+    if (act.dataset.act === 'manage') jhOpenAlertsTab();
     hide();
   };
   // The mobile-web store banner sits in the same spot and says the same
@@ -6745,6 +6789,59 @@ function flushPendingWatchSeeds() {
   if (Array.isArray(p)) p.forEach(e => { if (e && typeof e === 'object') seedAlertedForEntry(e); });
 }
 
+/* Editing (2026-10-29): the form above the list looked like a global filter
+ * and the only way to change a watch was Remove + re-add. Edit loads the
+ * watch into the form; Add becomes "Save changes" and replaces it. */
+let editingWatchAddedAt = null;
+function editWatchItem(idx) {
+  const e = loadWatchlist()[idx];
+  if (!e) return;
+  const makeSel = document.getElementById('alert-make');
+  if (![...makeSel.options].some(o => o.value === e.make)) {
+    // A make with no car in the scan right now still needs to be editable.
+    const opt = document.createElement('option'); opt.value = e.make; opt.textContent = e.make; makeSel.appendChild(opt);
+  }
+  makeSel.value = e.make;
+  populateWatchModelOptions();
+  if (e.model) { watchSelectedModels.add(e.model); _watchModelCounts.has(e.model) || _watchModelCounts.set(e.model, 0); renderWatchModelList(); updateWatchModelBtnLabel(); }
+  document.getElementById('alert-yr-min').value = e.yrMin || '';
+  document.getElementById('alert-yr-max').value = e.yrMax || '';
+  // Legacy watches (no radiusMi key) predate the picker: offer the free cap.
+  document.getElementById('alert-radius').value = !('radiusMi' in e) ? '250' : (e.radiusMi ? String(e.radiusMi) : (isPro() ? '' : '250'));
+  document.getElementById('alert-match-only').checked = !!e.matchOnly;
+  const driveEl = document.getElementById('alert-drive'), trimEl = document.getElementById('alert-trim');
+  if (driveEl && isPro()) driveEl.value = e.driveFilter || '';
+  if (trimEl && isPro()) trimEl.value = e.trimFilter || '';
+  editingWatchAddedAt = e.addedAt;
+  setWatchFormMode();
+  document.getElementById('alert-add-btn').scrollIntoView({ block: 'center', behavior: 'smooth' });
+}
+function cancelWatchEdit() {
+  editingWatchAddedAt = null;
+  document.getElementById('alert-make').value = '';
+  populateWatchModelOptions();
+  document.getElementById('alert-yr-min').value = '';
+  document.getElementById('alert-yr-max').value = '';
+  document.getElementById('alert-match-only').checked = true;
+  const driveEl = document.getElementById('alert-drive'), trimEl = document.getElementById('alert-trim');
+  if (driveEl) driveEl.value = '';
+  if (trimEl) trimEl.value = '';
+  setWatchFormMode();
+}
+function setWatchFormMode() {
+  const btn = document.getElementById('alert-add-btn');
+  const note = document.getElementById('alert-edit-note');
+  const editing = !!editingWatchAddedAt;
+  btn.textContent = editing ? 'Save changes' : 'Add';
+  if (note) note.style.display = editing ? '' : 'none';
+  document.querySelectorAll('.watchlist-item.editing').forEach(el => el.classList.remove('editing'));
+  if (editing) {
+    const i = loadWatchlist().findIndex(e => e.addedAt === editingWatchAddedAt);
+    const row = document.querySelectorAll('#alert-watchlist .watchlist-item')[i];
+    if (row) row.classList.add('editing');
+  }
+}
+
 function addWatchItem() {
   const make = document.getElementById('alert-make').value;
   if (!make) return alert('Pick a make first.');
@@ -6762,7 +6859,9 @@ function addWatchItem() {
   const trimEl = document.getElementById('alert-trim');
   const driveFilter = isPro() && driveEl ? (driveEl.value || '') : '';
   const trimFilter = isPro() && trimEl ? (trimEl.value || '').trim().slice(0, 40) : '';
-  const watchlist = loadWatchlist();
+  // Editing: the old watch leaves the list only once its replacement is in.
+  const editing = loadWatchlist().find(e => e.addedAt === editingWatchAddedAt) || null;
+  const watchlist = loadWatchlist().filter(e => e !== editing && e.addedAt !== editingWatchAddedAt);
   // One watch per checked model; no models checked = one any-model watch.
   const models = watchSelectedModels.size ? [...watchSelectedModels] : [''];
   // Free covers FREE_WATCH_LIMIT watches; the backend silently ignores the
@@ -6792,14 +6891,12 @@ function addWatchItem() {
     track('watch-created');
     added++;
   }
-  if (!added) return alert('Already on your watchlist.');
+  if (!added) return alert(editing ? 'That\u2019s the same as a watch you already have.' : 'Already on your watchlist.');
+  if (editing && editing.serverId && window.YSApi && YSApi.enabled()) {
+    YSApi.deleteWatch(editing.serverId).catch(() => { /* gone next sync */ });
+  }
   saveWatchlist(watchlist);
-  document.getElementById('alert-make').value = '';
-  populateWatchModelOptions();   // resets + disables the model picker
-  document.getElementById('alert-yr-min').value = '';
-  document.getElementById('alert-yr-max').value = '';
-  if (driveEl) driveEl.value = '';
-  if (trimEl) trimEl.value = '';
+  cancelWatchEdit();   // clears the form (and the editing state)
   renderAlerts();
   saveWatchlistFile();
   checkAndNotify();
@@ -6812,6 +6909,7 @@ function removeWatchItem(idx) {
   if (removed && removed.serverId && window.YSApi && YSApi.enabled()) {
     YSApi.deleteWatch(removed.serverId).catch(() => { /* gone next sync */ });
   }
+  if (removed && removed.addedAt === editingWatchAddedAt) cancelWatchEdit();
   renderAlerts();
   saveWatchlistFile();
 }
