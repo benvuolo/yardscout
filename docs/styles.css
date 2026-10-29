@@ -1441,6 +1441,17 @@
   .watch-toast-next > span { flex: 1; min-width: 0; }
   .watch-toast-next .btn { flex-shrink: 0; padding: 0.4rem 0.85rem; font-size: 0.8125rem; text-decoration: none; }
   @media (max-width: 720px) { .watch-toast { bottom: calc(4.6rem + env(safe-area-inset-bottom, 0px)); } }
+  /* Update check (native): the "available" card reuses the watch toast; the
+   * "required" screen covers the app until it is updated. */
+  .update-toast { border-left-color: var(--accent); }
+  .update-toast .watch-toast-head > .ico { color: var(--accent); }
+  .update-required { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 1.5rem 1rem calc(1.5rem + env(safe-area-inset-bottom, 0px)); background: var(--bg); }
+  .update-required-card { max-width: 22rem; text-align: center; background: var(--surface); border: 1px solid var(--border-dark); border-radius: var(--radius); padding: 1.6rem 1.3rem; box-shadow: 0 6px 24px rgba(27, 25, 19, 0.15); }
+  .update-required-mark { width: 3rem; height: 3rem; margin: 0 auto 0.8rem; display: grid; place-items: center; border-radius: 50%; background: var(--accent-soft); color: var(--accent); }
+  .update-required-mark .ico { width: 1.4rem; height: 1.4rem; }
+  .update-required h2 { margin: 0 0 0.5rem; font-size: 1.25rem; font-weight: 800; color: var(--text); }
+  .update-required p { margin: 0 0 1.1rem; font-size: 0.9375rem; line-height: 1.5; color: var(--text-dim); }
+  .update-required .btn { display: inline-block; text-decoration: none; padding: 0.7rem 1.3rem; }
   .wl-miss.wl-off { color: var(--red); }
   .wl-miss { display: block; margin-top: 0.3rem; font-size: 0.75rem; line-height: 1.45; color: var(--text-dim); }
   .wl-miss .linklike { background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }

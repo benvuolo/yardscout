@@ -1,0 +1,12 @@
+{
+  "_readme": "Native app update check (backend/src/app_version.js). To FORCE an update, set min.ios / min.android to the oldest version still allowed (e.g. \"1.12.9\") and commit; apps below it show a blocking Update screen within ~10 min. Leave \"\" for no minimum. android.latest is written by release-android.yml; iOS latest comes from the App Store itself. message (optional) is shown on the required-update screen.",
+  "min": {
+    "ios": "",
+    "android": ""
+  },
+  "message": "",
+  "android": {
+    "latest": "1.12.8",
+    "releasedAt": "2026-10-29T04:05:00Z"
+  }
+}

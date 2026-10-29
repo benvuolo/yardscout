@@ -2,6 +2,7 @@
  *
  * Public (tier-aware where noted):
  *   GET  /v1/health
+ *   GET  /v1/app-version?platform=ios|android (native update banner / required update)
  *   GET  /v1/yards
  *   GET  /v1/inventory?lat&lng&radius        (tier-aware plan)
  *   GET  /v1/inventory/partsets              (tier-aware)
@@ -65,6 +66,7 @@ import { handleSavedAlertsDispatchRun } from './saved_alerts.js';
 import { runScanWatchdog } from './scan_watchdog.js';
 import { runOpsCheck, runDailyReport, handleOpsCheckRun, handleOpsDailyRun } from './ops_monitor.js';
 import { flushOps, opsFlusher } from './ops.js';
+import { handleAppVersion } from './app_version.js';
 
 export default {
   /* Cron (wrangler.toml [triggers]): weekly digest email for free users
@@ -154,6 +156,8 @@ async function route(req, env, url, ctx) {
   if (!isAdminPath && !rateLimit('ip:' + ip, 300, 60_000)) {
     return err(429, 'rate_limited', 'Slow down.');
   }
+
+  if (method === 'GET' && path === '/v1/app-version') return handleAppVersion(req, env);
 
   if (method === 'GET' && path === '/v1/health') {
     let watchdog = null;

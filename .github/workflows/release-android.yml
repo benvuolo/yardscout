@@ -159,6 +159,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add android/app/build.gradle
+          # Production uploads feed the in-app "Update available" banner
+          # (backend/src/app_version.js holds it back 48 h for Play review).
+          if [ "${{ github.event.inputs.track }}" = "production" ]; then
+            python3 - "${{ steps.ver.outputs.name }}" <<'PY'
+          import json, sys, datetime
+          p = "docs/app-version.json"
+          d = json.load(open(p))
+          d.setdefault("android", {})
+          d["android"]["latest"] = sys.argv[1]
+          d["android"]["releasedAt"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          json.dump(d, open(p, "w"), indent=2); open(p, "a").write("\n")
+          PY
+            git add docs/app-version.json
+          fi
           git commit -m "chore(release): Android versionCode ${{ steps.ver.outputs.code }} / ${{ steps.ver.outputs.name }} (${{ github.event.inputs.track }})"
           for attempt in 1 2 3 4; do
             git -c rebase.autoStash=true pull --rebase origin main && git push && exit 0

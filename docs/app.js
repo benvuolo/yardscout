@@ -7366,6 +7366,98 @@ function deviceSyncWatches() {
   }).slice(0, FREE_WATCH_LIMIT);
 }
 
+/* ===== UPDATE CHECK (native, 2026-10-29) =====
+ * Owner: friends had to find YardScout in the store again to update. The
+ * app compares its own version (Capacitor App.getInfo) with
+ * /v1/app-version (backend/src/app_version.js):
+ *   below `min`     → a blocking "Update required" screen (the owner sets
+ *                     min in docs/app-version.json; empty = none)
+ *   below `latest`  → a dismissible "Update available" card, once per version
+ * Both buttons open YardScout's own store page. Checked shortly after launch
+ * and whenever the app comes back to the foreground (throttled). */
+function versionCmp(a, b) {
+  const pa = String(a || '').split('.').map(n => parseInt(n, 10) || 0);
+  const pb = String(b || '').split('.').map(n => parseInt(n, 10) || 0);
+  for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+    const d = (pa[i] || 0) - (pb[i] || 0);
+    if (d) return d < 0 ? -1 : 1;
+  }
+  return 0;
+}
+function storeName() { return IS_ANDROID ? 'Google Play' : 'the App Store'; }
+function showUpdateRequired(info) {
+  let el = document.getElementById('update-required');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'update-required';
+    el.className = 'update-required';
+    el.setAttribute('role', 'alertdialog');
+    el.setAttribute('aria-modal', 'true');
+    document.body.appendChild(el);
+  }
+  el.innerHTML = `<div class="update-required-card">
+      <div class="update-required-mark">${ICON.bell}</div>
+      <h2>Update YardScout</h2>
+      <p>${info.message ? escapeHtml(info.message) : 'This version is out of date. Update to keep getting accurate yard inventory and alerts.'}</p>
+      <a class="btn btn-primary" href="${escapeHtml(info.storeUrl)}" target="_blank" rel="noopener" onclick="track('update-required-tap')">Update in ${storeName()}</a>
+    </div>`;
+  el.style.display = '';
+  track('update-required-shown');
+}
+function hideUpdateRequired() {
+  const el = document.getElementById('update-required');
+  if (el) el.style.display = 'none';
+}
+function showUpdateAvailable(info) {
+  if (document.getElementById('update-toast')) return;
+  const el = document.createElement('div');
+  el.id = 'update-toast';
+  el.className = 'watch-toast update-toast show';
+  el.setAttribute('role', 'status');
+  el.innerHTML = `<div class="watch-toast-head">${ICON.bell}<span><strong>YardScout ${escapeHtml(info.latest)}</strong> is out</span>
+      <button type="button" class="watch-toast-x" data-act="close" aria-label="Not now">&times;</button></div>
+    <div class="watch-toast-next"><span>Update for the latest fixes and features.</span>
+      <a class="btn btn-primary btn-sm" data-act="update" href="${escapeHtml(info.storeUrl)}" target="_blank" rel="noopener">Update</a></div>`;
+  el.onclick = (e) => {
+    const act = e.target.closest('[data-act]');
+    if (!act) return;
+    if (act.dataset.act === 'update') track('update-tap');
+    // Either way, don't ask again for this version.
+    try { localStorage.setItem('ys_update_dismissed', info.latest); } catch (err) { /* private mode */ }
+    el.remove();
+  };
+  document.body.appendChild(el);
+  track('update-shown');
+}
+(function nativeUpdateCheck() {
+  if (!IS_NATIVE || !NATIVE_API_BASE) return;
+  const AppP = nativePlugin('App');
+  if (!AppP || typeof AppP.getInfo !== 'function') return;
+  const platform = IS_ANDROID ? 'android' : 'ios';
+  let lastCheck = 0, blocked = false;
+  async function check() {
+    // While blocked, re-check on every return (the owner may lower min);
+    // otherwise at most every 30 minutes.
+    if (!blocked && Date.now() - lastCheck < 30 * 60_000) return;
+    lastCheck = Date.now();
+    let mine, info;
+    try { mine = (await AppP.getInfo()).version; } catch (e) { return; }
+    try {
+      const r = await fetch(`${NATIVE_API_BASE}/v1/app-version?platform=${platform}`);
+      if (!r.ok) return;
+      info = await r.json();
+    } catch (e) { return; }   // offline: never block on a failed check
+    if (!mine || !info) return;
+    if (info.min && versionCmp(mine, info.min) < 0) { blocked = true; showUpdateRequired(info); return; }
+    if (blocked) { blocked = false; hideUpdateRequired(); }
+    let dismissed = null;
+    try { dismissed = localStorage.getItem('ys_update_dismissed'); } catch (e) { /* private mode */ }
+    if (info.latest && versionCmp(mine, info.latest) < 0 && dismissed !== info.latest) showUpdateAvailable(info);
+  }
+  setTimeout(check, 4000);
+  try { AppP.addListener('appStateChange', (st) => { if (st && st.isActive) check(); }); } catch (e) { /* older shell */ }
+})();
+
 /* ---- push enable flow (native Alerts tab) ---- */
 (function nativePushInit() {
   if (!IS_NATIVE) return;
