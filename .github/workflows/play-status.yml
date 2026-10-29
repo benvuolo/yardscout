@@ -1,0 +1,43 @@
+# Read-only: what Google Play's production and internal tracks hold right now
+# (version codes, names, status, rollout). Opens an edit only to read, then
+# deletes it without committing — nothing changes on Play. Play's API does
+# not expose review progress; a "completed" production release is submitted
+# and goes live when Google's review clears.
+name: Play status
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: pip install -q google-auth requests
+      - name: Read tracks
+        env:
+          SA_RAW: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python3 - <<'PY'
+          import json, os, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+          raw = os.environ["SA_RAW"].strip(); obj, _ = json.JSONDecoder().raw_decode(raw[raw.find("{"):])
+          obj.setdefault("type", "service_account"); obj.setdefault("token_uri", "https://oauth2.googleapis.com/token")
+          cred = service_account.Credentials.from_service_account_info(obj, scopes=["https://www.googleapis.com/auth/androidpublisher"])
+          cred.refresh(Request())
+          H = {"Authorization": f"Bearer {cred.token}"}
+          base = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/io.yardscout.app/edits"
+          edit = requests.post(base, headers=H, timeout=60).json()["id"]
+          try:
+              for t in ("production", "internal"):
+                  track = requests.get(f"{base}/{edit}/tracks/{t}", headers=H, timeout=60).json()
+                  for r in track.get("releases", []):
+                      print(f"{t:<10} {r.get('name','?'):<22} codes={','.join(r.get('versionCodes', []))} "
+                            f"status={r.get('status')} rollout={r.get('userFraction', 1)}")
+          finally:
+              requests.delete(f"{base}/{edit}", headers=H, timeout=60)   # read-only: never commit
+          PY
