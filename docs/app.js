@@ -1641,7 +1641,7 @@ function headTickerFacts() {
   if (cars) facts.push(`${cars.toLocaleString()} CARS ON ROW`);
   if (nDisp) facts.push(`${nDisp} YARDS TRACKED`);
   const { fresh, near } = headTickerHeavy();
-  if (fresh && liveComplete) facts.push(`${fresh.toLocaleString()} SET OUT THIS WEEK`);
+  if (fresh && liveComplete) facts.push(`${fresh.toLocaleString()} NEW THIS WEEK`);   // "SET OUT THIS WEEK" clipped on phones
   if (near) facts.push(`${near} YARD${near === 1 ? '' : 'S'} IN YOUR RANGE`);
   const ts = Date.parse(liveScrapedAt || '');
   if (ts) {
@@ -7048,8 +7048,12 @@ document.getElementById('alert-add-btn').addEventListener('click', addWatchItem)
 document.getElementById('alert-notif-btn').addEventListener('click', requestNotifPermission);
 // Native app: the web Notification API doesn't exist in the WKWebView — hide
 // the dead button and swap the intro copy (no "browser notification" talk).
-if (IS_NATIVE) {
+// Mobile Safari (outside an installed PWA) has no Notification API either:
+// the button would only raise an alert() saying so. Hide it where it can't work.
+if (IS_NATIVE || !('Notification' in window)) {
   document.getElementById('alert-notif-btn').style.display = 'none';
+}
+if (IS_NATIVE) {
   const intro = document.getElementById('alerts-intro-copy');
   if (intro) intro.innerHTML = 'Add vehicles you want to track &mdash; watching is free, '
     + 'no signup, no email. Free watches get a <strong>weekly recap push</strong>; '

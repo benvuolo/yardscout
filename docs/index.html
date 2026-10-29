@@ -396,10 +396,95 @@
         <p style="margin:0;" id="alerts-intro-copy">Add vehicles you want to track &mdash; watching is free, no signup. Matches light up right here, and in the iOS and Android apps free watches get a <strong>weekly recap push</strong>; <strong>push alerts within hours</strong> of a car hitting the yard are a Pro feature.</p>
       </div>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-        <button id="alert-notif-btn" class="btn btn-primary">Enable notifications</button>
+        <button id="alert-notif-btn" class="btn btn-primary">Enable browser notifications</button>
       </div>
     </div>
 
+    <div class="panel">
+      <h4>Add to watchlist</h4>
+      <p style="font-size:0.75rem;color:var(--text-dim);margin:0.3rem 0 0.7rem;">
+        Pick from vehicles that actually cycle through yards nationwide, or type a model that isn&rsquo;t
+        in the rows yet (an &rsquo;86 Celica, say) and check &ldquo;Watch anyway&rdquo; &mdash; we&rsquo;ll alert you when one lands.
+        &ldquo;With parts only&rdquo; limits alerts to cars carrying parts we flag as hard to find
+        &mdash; uncheck it to hear about every match.
+      </p>
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;">
+        <div>
+          <label for="alert-make">Make</label>
+          <select id="alert-make" style="width:150px;"><option value="">Select make&hellip;</option></select>
+        </div>
+        <div>
+          <label for="alert-model-btn">Models</label>
+          <div class="multi-select" style="width:170px;">
+            <button type="button" id="alert-model-btn" class="multi-select-btn" disabled title="Pick a make first">Any model</button>
+            <div class="multi-select-panel" id="alert-model-panel" style="display:none;">
+              <input type="text" id="alert-model-search" placeholder="Search models&hellip;" autocomplete="off">
+              <div class="multi-select-list" id="alert-model-list"></div>
+              <div class="multi-select-actions">
+                <button type="button" id="alert-model-clear">Clear</button>
+                <button type="button" id="alert-model-done">Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="alert-yr-min">Year min</label>
+          <select id="alert-yr-min" style="width:95px;"><option value="">Any</option></select>
+        </div>
+        <div>
+          <label for="alert-yr-max">Year max</label>
+          <select id="alert-yr-max" style="width:95px;"><option value="">Any</option></select>
+        </div>
+        <div>
+          <label for="alert-radius" title="Alerts only fire for arrivals inside this distance of your search zip code">Alert radius</label>
+          <select id="alert-radius" style="width:150px;">
+            <option value="25">Within 25 mi</option>
+            <option value="50">Within 50 mi</option>
+            <option value="100">Within 100 mi</option>
+            <option value="250" selected>Within 250 mi</option>
+            <option value="">Anywhere &mdash; Pro</option>
+          </select>
+        </div>
+        <div>
+          <label for="alert-match-only" title="Only alert for cars carrying parts we flag as hard to find">With parts only</label>
+          <input type="checkbox" id="alert-match-only" checked title="Only alert for cars carrying parts we flag as hard to find" style="width:18px;height:18px;margin-top:0.4rem;accent-color:var(--accent);">
+        </div>
+        <!-- Trim / drivetrain filters (Pro). Matched against the VIN decode on
+             the client and the server by the same rule — see vpicFilterMatches
+             in app.js / vpicMatches in backend/src/alerts.js. -->
+        <div>
+          <label for="alert-drive" title="Only alert for cars whose VIN decode confirms the drivetrain">Drivetrain <span class="pro-tag">Pro</span></label>
+          <select id="alert-drive" style="width:150px;" disabled>
+            <option value="">Any</option>
+            <option value="4x4">4WD or AWD</option>
+            <option value="2wd">2WD</option>
+          </select>
+        </div>
+        <div>
+          <label for="alert-trim" title="Only alert for cars whose VIN decode names this trim or series. Whole words: LT won't match LTZ. Limited also finds Toyota's 'Luxury' label.">Trim contains <span class="pro-tag">Pro</span></label>
+          <input type="text" id="alert-trim" maxlength="40" placeholder="SR5, Limited, TRD&hellip;" autocomplete="off" style="width:150px;" disabled>
+        </div>
+        <button id="alert-add-btn" class="btn btn-primary">Add</button>
+      </div>
+      <p id="alert-edit-note" class="alert-edit-note" style="display:none;">Editing a watch &mdash; change what you like, then Save. <button type="button" class="linklike" onclick="cancelWatchEdit()">Cancel</button></p>
+      <p style="font-size:0.75rem;color:var(--text-dim);margin:0.6rem 0 0;">
+        Drivetrain and trim filters match only cars whose VIN decode confirms it &mdash; a car with no
+        decode never matches a filtered watch, so a filtered watch hears less, never wrong.
+        <span id="alert-vpic-lock" class="lock-text" role="button" onclick="openUpgradeSheet('watch-trim')">Trim and drivetrain filters are part of Pro &rarr;</span>
+      </p>
+    </div>
+
+    <div id="alert-watchlist" style="margin-top:1rem;"></div>
+
+    <div style="margin-top:1.5rem;">
+      <h4 style="margin:0 0 0.75rem;font-size: 0.875rem;font-weight:800;">Current matches in yard</h4>
+      <div id="alert-matches-bar" class="stats-bar" style="margin-bottom:1rem;"></div>
+      <div id="alert-matches-grid" class="car-grid"></div>
+    </div>
+
+    <!-- How alerts reach you (2026-10-29: moved below the watchlist — a new
+         visitor used to scroll past three panels to add a watch). -->
+    <h4 style="margin:1.5rem 0 0.5rem;font-size: 0.875rem;font-weight:800;">How alerts reach you</h4>
     <!-- Cloud alerts (API mode): real Web Push from the account backend.
          Shown instead of the ntfy panel once an API base is configured. -->
     <div class="panel" id="cloud-alerts-panel" style="display:none;">
@@ -492,87 +577,6 @@
       </div>
     </div>
 
-    <div class="panel">
-      <h4>Add to watchlist</h4>
-      <p style="font-size:0.75rem;color:var(--text-dim);margin:0.3rem 0 0.7rem;">
-        Pick from vehicles that actually cycle through yards nationwide, or type a model that isn&rsquo;t
-        in the rows yet (an &rsquo;86 Celica, say) and check &ldquo;Watch anyway&rdquo; &mdash; we&rsquo;ll alert you when one lands.
-        &ldquo;With parts only&rdquo; limits alerts to cars carrying parts we flag as hard to find
-        &mdash; uncheck it to hear about every match.
-      </p>
-      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;">
-        <div>
-          <label for="alert-make">Make</label>
-          <select id="alert-make" style="width:150px;"><option value="">Select make&hellip;</option></select>
-        </div>
-        <div>
-          <label for="alert-model-btn">Models</label>
-          <div class="multi-select" style="width:170px;">
-            <button type="button" id="alert-model-btn" class="multi-select-btn" disabled title="Pick a make first">Any model</button>
-            <div class="multi-select-panel" id="alert-model-panel" style="display:none;">
-              <input type="text" id="alert-model-search" placeholder="Search models&hellip;" autocomplete="off">
-              <div class="multi-select-list" id="alert-model-list"></div>
-              <div class="multi-select-actions">
-                <button type="button" id="alert-model-clear">Clear</button>
-                <button type="button" id="alert-model-done">Done</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <label for="alert-yr-min">Year min</label>
-          <select id="alert-yr-min" style="width:95px;"><option value="">Any</option></select>
-        </div>
-        <div>
-          <label for="alert-yr-max">Year max</label>
-          <select id="alert-yr-max" style="width:95px;"><option value="">Any</option></select>
-        </div>
-        <div>
-          <label for="alert-radius" title="Alerts only fire for arrivals inside this distance of your search zip code">Alert radius</label>
-          <select id="alert-radius" style="width:150px;">
-            <option value="25">Within 25 mi</option>
-            <option value="50">Within 50 mi</option>
-            <option value="100">Within 100 mi</option>
-            <option value="250" selected>Within 250 mi</option>
-            <option value="">Anywhere &mdash; Pro</option>
-          </select>
-        </div>
-        <div>
-          <label for="alert-match-only" title="Only alert for cars carrying parts we flag as hard to find">With parts only</label>
-          <input type="checkbox" id="alert-match-only" checked title="Only alert for cars carrying parts we flag as hard to find" style="width:18px;height:18px;margin-top:0.4rem;accent-color:var(--accent);">
-        </div>
-        <!-- Trim / drivetrain filters (Pro). Matched against the VIN decode on
-             the client and the server by the same rule — see vpicFilterMatches
-             in app.js / vpicMatches in backend/src/alerts.js. -->
-        <div>
-          <label for="alert-drive" title="Only alert for cars whose VIN decode confirms the drivetrain">Drivetrain <span class="pro-tag">Pro</span></label>
-          <select id="alert-drive" style="width:150px;" disabled>
-            <option value="">Any</option>
-            <option value="4x4">4WD or AWD</option>
-            <option value="2wd">2WD</option>
-          </select>
-        </div>
-        <div>
-          <label for="alert-trim" title="Only alert for cars whose VIN decode names this trim or series. Whole words: LT won't match LTZ. Limited also finds Toyota's 'Luxury' label.">Trim contains <span class="pro-tag">Pro</span></label>
-          <input type="text" id="alert-trim" maxlength="40" placeholder="SR5, Limited, TRD&hellip;" autocomplete="off" style="width:150px;" disabled>
-        </div>
-        <button id="alert-add-btn" class="btn btn-primary">Add</button>
-      </div>
-      <p id="alert-edit-note" class="alert-edit-note" style="display:none;">Editing a watch &mdash; change what you like, then Save. <button type="button" class="linklike" onclick="cancelWatchEdit()">Cancel</button></p>
-      <p style="font-size:0.75rem;color:var(--text-dim);margin:0.6rem 0 0;">
-        Drivetrain and trim filters match only cars whose VIN decode confirms it &mdash; a car with no
-        decode never matches a filtered watch, so a filtered watch hears less, never wrong.
-        <span id="alert-vpic-lock" class="lock-text" role="button" onclick="openUpgradeSheet('watch-trim')">Trim and drivetrain filters are part of Pro &rarr;</span>
-      </p>
-    </div>
-
-    <div id="alert-watchlist" style="margin-top:1rem;"></div>
-
-    <div style="margin-top:1.5rem;">
-      <h4 style="margin:0 0 0.75rem;font-size: 0.875rem;font-weight:800;">Current matches in yard</h4>
-      <div id="alert-matches-bar" class="stats-bar" style="margin-bottom:1rem;"></div>
-      <div id="alert-matches-grid" class="car-grid"></div>
-    </div>
   </div>
 
   <footer class="app-footer">
