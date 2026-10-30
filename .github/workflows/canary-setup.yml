@@ -1,0 +1,68 @@
+# Name the owner's phone as the alert canary (backend/src/ops_monitor.js):
+# the hourly ops check alerts if no push has reached it in 36 h, and the
+# daily email shows "Owner canary: last alert reached your phone N h ago".
+#
+# How: on the phone, add a watch for a make nobody else watches (default
+# "Yugo", any model/year/distance). This finds the ONE device with that watch
+# and stores the first 8 characters of its id in KV (ops:canary-device). Then
+# delete the throwaway watch. Prints only that 8-char prefix — never a token.
+name: Canary setup
+
+on:
+  workflow_dispatch:
+    inputs:
+      marker_make:
+        description: "Make of the throwaway watch on your phone"
+        default: "Yugo"
+      off:
+        description: "Turn the canary off instead"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      MARKER: ${{ github.event.inputs.marker_make }}
+      OFF: ${{ github.event.inputs.off }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Resolve account
+        run: |
+          acct=$(curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" https://api.cloudflare.com/client/v4/accounts | python3 -c 'import sys,json;print(json.load(sys.stdin)["result"][0]["id"])')
+          echo "CLOUDFLARE_ACCOUNT_ID=$acct" >> "$GITHUB_ENV"
+      - name: Find the device and store the canary
+        working-directory: backend
+        run: |
+          set -euo pipefail
+          if [ "$OFF" = "true" ]; then
+            npx --yes wrangler@4 kv key delete --binding ENTITLEMENTS "ops:canary-device" --remote
+            echo "Canary turned off."; exit 0
+          fi
+          case "$MARKER" in *[!A-Za-z0-9\ -]*|"") echo "::error::marker_make must be a plain make name"; exit 1;; esac
+          SQL="SELECT substr(d.id,1,8) AS prefix, d.tier, (d.apns_token IS NOT NULL OR d.fcm_token IS NOT NULL) AS push_ready, d.last_push_at FROM devices d, json_each(d.watches_json) w WHERE json_valid(d.watches_json) AND lower(json_extract(w.value,'\$.make')) = lower('$MARKER') GROUP BY d.id"
+          npx --yes wrangler@4 d1 execute yardscout-db --remote --json --command "$SQL" > rows.json
+          python3 - <<'PY'
+          import json, os, sys
+          rows = json.load(open("rows.json"))[0]["results"]
+          if len(rows) != 1:
+              print(f"::error::Expected exactly 1 device watching {os.environ['MARKER']!r}, found {len(rows)}. "
+                    "Add (or remove extra) throwaway watches on your phone, wait ~1 min for it to sync, and re-run.")
+              sys.exit(1)
+          r = rows[0]
+          print(f"Found device {r['prefix']}… tier={r['tier']} push_ready={bool(r['push_ready'])} last_push_at={r['last_push_at']}")
+          if not r["push_ready"]:
+              print("::warning::That device has no push token — turn notifications on in the app first.")
+          if r["tier"] != "pro":
+              print("::warning::That device is not Pro — free devices only get the weekly recap, so the canary would trip.")
+          open("prefix.txt", "w").write(r["prefix"])
+          PY
+          npx --yes wrangler@4 kv key put --binding ENTITLEMENTS "ops:canary-device" "$(cat prefix.txt)" --remote
+          echo "::notice::Canary set to device $(cat prefix.txt)… — you can delete the $MARKER watch now."

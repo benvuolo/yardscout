@@ -222,7 +222,47 @@ export async function evaluateConditions(env, now = Date.now()) {
     });
   }
 
-  return { conditions, stats, facts: { lastCommitAt, ageHours: ageMs == null ? null : hours(ageMs), watchdog } };
+  // Owner canary (2026-10-30): send counters prove Apple/Google ACCEPTED
+  // pushes; this proves one reached a known phone recently. The owner's
+  // device is named by an id prefix in CANARY_DEVICE_PREFIX (wrangler.toml
+  // var — a prefix can't be used to re-register the device). last_push_at is
+  // only written after APNs/FCM said ok (devices.js markSent).
+  const canary = await loadCanary(env, now);
+  if (canary && !canary.ok) {
+    conditions.push({
+      id: 'canary', short: 'canary silent',
+      title: canary.found
+        ? `Owner canary: no alert has reached your phone in ${canary.ageHours == null ? 'ever' : `${canary.ageHours} h`}`
+        : 'Owner canary: your phone is no longer registered for push',
+      detail: canary.found
+        ? `Last accepted push ${fmtTime(canary.lastPushAt)} (threshold ${CANARY_MAX_H} h). Your Pro watches should produce a push at least daily. `
+          + `${canary.pushReady ? '' : 'The device has NO push token (notifications off or app reinstalled). '}`
+        : 'The canary device id is no longer in the devices table (app reinstalled or reset?). Re-run the canary setup.',
+      check: 'Your phone: notifications on for YardScout, still Pro, a broad watch set. Then the fail:apns / fail:fcm lines above.',
+    });
+  }
+
+  return { conditions, stats, facts: { lastCommitAt, ageHours: ageMs == null ? null : hours(ageMs), watchdog, canary } };
+}
+
+const CANARY_MAX_H = 36;
+const CANARY_KEY = 'ops:canary-device';
+async function canaryPrefix(env) {
+  if (env.CANARY_DEVICE_PREFIX) return String(env.CANARY_DEVICE_PREFIX);
+  try { return (env.ENTITLEMENTS && await env.ENTITLEMENTS.get(CANARY_KEY)) || ''; } catch { return ''; }
+}
+async function loadCanary(env, now) {
+  const prefix = String(await canaryPrefix(env)).trim().toLowerCase();
+  if (!/^[0-9a-f-]{6,36}$/.test(prefix)) return null;   // not configured
+  const d = await env.DB.prepare(
+    `SELECT last_push_at, tier, (apns_token IS NOT NULL OR fcm_token IS NOT NULL) AS push_ready
+       FROM devices WHERE id LIKE ?1 LIMIT 1`
+  ).bind(prefix + '%').first();
+  if (!d) return { found: false, ok: false };
+  const at = d.last_push_at ? Date.parse(d.last_push_at) : NaN;
+  const ageHours = Number.isFinite(at) ? hours(now - at) : null;
+  return { found: true, ok: ageHours != null && ageHours <= CANARY_MAX_H, ageHours,
+    lastPushAt: d.last_push_at || null, tier: d.tier, pushReady: !!d.push_ready };
 }
 
 /* ===== sending ===== */
@@ -401,6 +441,12 @@ function usageLines(u, audience) {
   return L;
 }
 
+function canaryLine(c) {
+  if (!c) return 'Owner canary: not set up';
+  if (!c.found) return 'Owner canary: your phone is not registered for push ✗';
+  return `Owner canary: last alert reached your phone ${c.ageHours == null ? 'never' : `${c.ageHours} h ago`} ${c.ok ? '✓' : '✗'}`;
+}
+
 function composeDaily(r) {
   const L = [];
   const d = new Date(r.at);
@@ -418,6 +464,7 @@ function composeDaily(r) {
     + (r.inventory.publicVehicles != null && r.inventory.publicVehicles !== r.inventory.vehicles
       ? ` (public inventory_meta.json: ${fmtInt(r.inventory.publicVehicles)})` : ''));
   L.push(`  Watchdog: ${fmtWatchdog(r.watchdog)}`);
+  L.push(`  ${canaryLine(r.canary)}`);
   L.push('');
   const yh = r.yardHealth;
   if (yh && !yh.error) {
@@ -573,7 +620,8 @@ export function composeDailyHtml(r) {
     ['Yards live', fmtInt(r.inventory.yards)],
     ['Cars', fmtInt(r.inventory.vehicles)],
     ['Last scan', esc(ago(r.scan.ageHours) || fmtTime(r.scan.lastCommitAt))],
-  ]) + `<div style="font-size:13px;color:${C.dim};margin-top:6px;">Watchdog: ${esc(fmtWatchdog(r.watchdog))}</div>`));
+  ]) + `<div style="font-size:13px;color:${C.dim};margin-top:6px;">Watchdog: ${esc(fmtWatchdog(r.watchdog))}</div>`
+    + `<div style="font-size:13px;margin-top:4px;color:${!r.canary ? C.dim : r.canary.ok ? C.ok : C.bad};">${esc(canaryLine(r.canary))}</div>`));
 
   const yh = r.yardHealth;
   if (yh && !yh.error) {
@@ -702,6 +750,7 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
     resend: { sentToday: ev.stats.emailsToday, dailyCap: RESEND_DAILY_CAP },
     recentErrors: ev.stats.recentErrors.slice(0, 5),
     watchdog: ev.facts.watchdog,
+    canary: ev.facts.canary,
     audience: {
       proDevices: tiers.filter((t) => t.tier === 'pro').reduce((k, t) => k + t.n, 0),
       freeDevices: tiers.filter((t) => t.tier !== 'pro').reduce((k, t) => k + t.n, 0),
@@ -740,6 +789,18 @@ export async function handleOpsCheckRun(req, env) {
     console.log('ops check failed:', e && (e.stack || e.message));
     return err(500, 'ops_check_failed', 'Ops check failed — see Worker logs.');
   }
+}
+
+/** POST /v1/admin/ops/canary {prefix} — name the owner's phone as the alert
+ * canary (first 8+ chars of its device id; '' turns it off). Stored in KV;
+ * a CANARY_DEVICE_PREFIX var, if set, wins. */
+export async function handleOpsCanarySet(req, env) {
+  let body = {};
+  try { body = await req.json(); } catch { body = {}; }
+  const prefix = String(body.prefix || '').trim().toLowerCase();
+  if (prefix && !/^[0-9a-f-]{8,36}$/.test(prefix)) return err(400, 'bad_prefix', 'prefix must be 8+ hex characters of the device id.');
+  if (prefix) await env.ENTITLEMENTS.put(CANARY_KEY, prefix); else await env.ENTITLEMENTS.delete(CANARY_KEY);
+  return json({ ok: true, prefix: prefix || null, canary: await loadCanary(env, Date.now()) });
 }
 
 /** POST /v1/admin/ops/daily/run {dryRun?} — build (and send) the daily email. */

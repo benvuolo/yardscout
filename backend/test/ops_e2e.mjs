@@ -196,6 +196,28 @@ check('cron "23 * * * *" runs the watchdog first (decision stored)', r.data.scan
 check('hourly cron: open problems stay deduped (no new email)', (await opsSent()).length === opsBefore + 1);
 check('neither cron sent any user email (no Monday digest)', (await mockGet('/sent')).length === allBefore + 1);
 
+/* ---- 8b. owner canary: configured but the phone isn't registered yet ---- */
+r = await dailyRun({ dryRun: true });
+check('canary: off by default (no issue, text says not set up)', !r.data.openConditions?.some((c) => c.id === 'canary') && /Owner canary: not set up/.test(r.data.email?.text || ''));
+r = await api('/v1/admin/ops/canary', J({ 'x-admin-secret': 'nope' }, { prefix: 'c0ffee00' }));
+check('canary set: admin secret required', r.status === 401 || r.status === 403, String(r.status));
+r = await api('/v1/admin/ops/canary', J(ADMIN, { prefix: 'not hex!' }));
+check('canary set: junk prefix rejected', r.status === 400);
+r = await api('/v1/admin/ops/canary', J(ADMIN, { prefix: 'c0ffee00' }));
+check('canary set: stored', r.status === 200 && r.data.prefix === 'c0ffee00', JSON.stringify(r.data));
+r = await dailyRun({ dryRun: true });
+check('canary: unregistered phone is an open issue', r.data.openConditions?.some((c) => c.id === 'canary') && r.data.canary?.found === false, JSON.stringify(r.data.canary));
+check('canary: daily text says so', /Owner canary: your phone is not registered for push/.test(r.data.email?.text || ''));
+// The phone registers (Pro, push on) but nothing has been pushed to it yet.
+r = await api('/v1/device/register', J({}, { deviceId: 'c0ffee00-0000-4000-8000-000000000001', tier: 'pro',
+  fcmToken: 'canary:APA91b' + 'x'.repeat(100), watches: [{ make: 'Ford', model: 'F-150' }] }));
+check('canary: device registers', r.status === 200, JSON.stringify(r.data));
+r = await dailyRun({ dryRun: true });
+check('canary: registered but never pushed -> still an issue', r.data.canary?.found === true && r.data.canary?.ok === false && r.data.canary?.pushReady === true, JSON.stringify(r.data.canary));
+check('canary: daily html shows the canary line', /Owner canary: last alert reached your phone never/.test(r.data.email?.html || ''));
+r = await api('/v1/admin/ops/canary', J(ADMIN, { prefix: '' }));
+check('canary: can be turned off again', r.status === 200 && r.data.prefix === null, JSON.stringify(r.data));
+
 /* ---- 9. production guard: the clock offset is DEV-only (sanity: present here) ---- */
 r = await checkRun({ dryRun: true, nowOffsetHours: 30 });
 check('offset honored in DEV_MODE', r.data.active.some((c) => c.id === 'stale'));

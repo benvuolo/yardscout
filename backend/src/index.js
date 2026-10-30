@@ -28,6 +28,7 @@
  *   POST /v1/admin/saved-alerts/dispatch          x-admin-secret (manual saved-car alert dispatch)
  *   POST /v1/admin/ops/check/run                  x-admin-secret (hourly owner-alert check now; {dryRun})
  *   POST /v1/admin/ops/daily/run                  x-admin-secret (daily health email now; {dryRun})
+ *   POST /v1/admin/ops/canary                     x-admin-secret (owner phone as alert canary; {prefix})
  *   POST /v1/iap/revenuecat                       RevenueCat webhook auth
  */
 
@@ -64,7 +65,7 @@ import {
 } from './coverage.js';
 import { handleSavedAlertsDispatchRun } from './saved_alerts.js';
 import { runScanWatchdog } from './scan_watchdog.js';
-import { runOpsCheck, runDailyReport, handleOpsCheckRun, handleOpsDailyRun } from './ops_monitor.js';
+import { runOpsCheck, runDailyReport, handleOpsCheckRun, handleOpsDailyRun, handleOpsCanarySet } from './ops_monitor.js';
 import { flushOps, opsFlusher } from './ops.js';
 import { handleAppVersion } from './app_version.js';
 
@@ -271,7 +272,7 @@ async function route(req, env, url, ctx) {
       || path === '/v1/admin/checkins/run'
       || path === '/v1/admin/coverage' || path === '/v1/admin/coverage/digest/run'
       || path === '/v1/admin/saved-alerts/dispatch'
-      || path === '/v1/admin/ops/check/run' || path === '/v1/admin/ops/daily/run'
+      || path === '/v1/admin/ops/check/run' || path === '/v1/admin/ops/daily/run' || path === '/v1/admin/ops/canary'
       || path === '/v1/admin/test/ent') {
     const denied = await requireAdmin(req, env);
     if (denied) return denied;
@@ -314,6 +315,7 @@ async function route(req, env, url, ctx) {
     // Both return the computed report; {dryRun:true} computes without sending.
     if (method === 'POST' && path === '/v1/admin/ops/check/run') return handleOpsCheckRun(req, env);
     if (method === 'POST' && path === '/v1/admin/ops/daily/run') return handleOpsDailyRun(req, env);
+    if (method === 'POST' && path === '/v1/admin/ops/canary') return handleOpsCanarySet(req, env);
     // DEV ONLY (404s in prod): seed a test entitlement into local KV.
     if (method === 'POST' && path === '/v1/admin/test/ent') {
       return handleTestEntitlement(req, env);
