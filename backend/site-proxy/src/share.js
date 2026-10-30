@@ -8,6 +8,7 @@
  *
  *   /car/<id-or-vin>      one car (same key as the app's #car= deep link)
  *   /yard/<slug>          what arrived at one yard this week (SEO page)
+ *   /junkyards[/<state>[/<city>]]  "junkyards near me" pages (see below)
  *   /sitemap-yards.xml    every yard page, for crawlers
  *
  * Tier rules are the API's: these pages only ever see the free variant, so
@@ -420,11 +421,11 @@ export async function renderYardSitemap() {
   if (!dir) return new Response('', { status: 503 });
   const iLoc = dir.yardFields.indexOf('location');
   const seen = new Set();
-  const landed = await dataJson('landed.json', 900);
+  const [landed, junkyardUrls] = await Promise.all([dataJson('landed.json', 900), junkyardSitemapUrls()]);
   const makeUrls = landed ? Object.entries(landed.makes).filter(([, m]) => m.total >= 20)
     .map(([mk]) => `<url><loc>${SITE}/landed/${slugify(mk)}</loc><changefreq>daily</changefreq></url>`).join('') : '';
   const urls = `<url><loc>${SITE}/yards</loc><changefreq>daily</changefreq></url><url><loc>${SITE}/landed</loc><changefreq>daily</changefreq></url>`
-    + makeUrls + dir.yards.map((y) => slugify(y[iLoc])).filter((s) => s && !seen.has(s) && seen.add(s))
+    + makeUrls + junkyardUrls + dir.yards.map((y) => slugify(y[iLoc])).filter((s) => s && !seen.has(s) && seen.add(s))
     .map((s) => `<url><loc>${SITE}/yard/${s}</loc><changefreq>daily</changefreq></url>`).join('');
   return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`, {
     headers: { 'content-type': 'application/xml; charset=utf-8', 'cache-control': 'public, max-age=3600' },
@@ -451,7 +452,8 @@ export async function renderYardsPage() {
   const states = [...byState.keys()].sort((a, b) => (STATE_NAMES[a] || a).localeCompare(STATE_NAMES[b] || b));
   const stateBlocks = states.map((st) => {
     const yards = byState.get(st).sort((a, b) => a.loc.localeCompare(b.loc));
-    return `<div class="section" id="${esc(st)}">${esc(STATE_NAMES[st] || st)} <span>· ${yards.length} yard${yards.length === 1 ? '' : 's'}</span></div>
+    const page = stateSlug(st);
+    return `<div class="section" id="${esc(st)}">${esc(STATE_NAMES[st] || st)} <span>· ${yards.length} yard${yards.length === 1 ? '' : 's'}${page ? ` · <a href="${SITE}/junkyards/${page}">by city</a>` : ''}</span></div>
 <div class="car-card"><ul class="rowlist">${yards.map((y) => `<li><a href="${SITE}/yard/${slugify(y.loc)}">${esc(y.loc)}${y.city ? `<span class="where">${esc(y.city)}</span>` : ''}</a><span class="meta">${y.n.toLocaleString()} cars<br>${y.recent} this week</span></li>`).join('')}</ul></div>`;
   }).join('');
   const newYards = (added || []).slice(0, 20);
@@ -529,4 +531,213 @@ ${truncated}${blocks}
 <div class="cta"><a class="btn btn-primary" href="${SITE}/#tab=alerts">Alert me when a ${esc(mk)} I want lands near me</a><a class="btn" href="${SITE}/">Search near your zip</a></div>${storesLine()}
 <p class="note">Straight from each yard's published list, refreshed every 4 hours. Row numbers and dates are the yard's; call ahead before a long drive.</p>`;
   return layout({ title: `${mk}: what landed in self-service yards this week — YardScout`, ogTitle: `${m.recentCount} ${mk}${m.recentCount === 1 ? '' : 's'} landed in junkyards this week`, desc, canonical: `${SITE}/landed/${slug}`, body, cache: 900, spec: `${m.recentCount.toLocaleString()} ${esc(mk).toUpperCase()} THIS WEEK` });
+}
+
+/* ---------- /junkyards — "junkyards near me" pages ----------
+ *   /junkyards                     every state with yard + car counts
+ *   /junkyards/<state>             its tracked yards by metro, top makes this week
+ *   /junkyards/<state>/<city>      yards in + near one city, newest arrivals
+ * All from docs/data/junkyards.json (written by every scan beside
+ * landed.json; ~200 KB). Only yards we track appear — coverage is limited to
+ * yards that publish their inventory online, and the pages say so. */
+const PROVINCE_NAMES = { AB: 'Alberta', BC: 'British Columbia', MB: 'Manitoba', NB: 'New Brunswick', NL: 'Newfoundland and Labrador', NS: 'Nova Scotia', ON: 'Ontario', PE: 'Prince Edward Island', QC: 'Quebec', SK: 'Saskatchewan' };
+const regionName = (code) => STATE_NAMES[code] || PROVINCE_NAMES[code] || '';
+export const stateSlug = (code) => slugify(regionName(code));
+const NEAR_MILES = 30;    // "near <city>" on a city page
+const METRO_MILES = 30;   // cities this close to a bigger one group under it on a state page
+const CITY_NEWEST = 30;   // newest arrivals shown on a city page
+
+function miles(a, b) {
+  if (a.lat == null || b.lat == null || a.lng == null || b.lng == null) return Infinity;
+  const rad = Math.PI / 180;
+  const dLat = (b.lat - a.lat) * rad, dLng = (b.lng - a.lng) * rad;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLng / 2) ** 2;
+  return 3958.8 * 2 * Math.asin(Math.sqrt(h));
+}
+function centroid(yards) {
+  const pts = yards.filter((y) => y.lat != null && y.lng != null);
+  if (!pts.length) return { lat: null, lng: null };
+  return { lat: pts.reduce((s, y) => s + y.lat, 0) / pts.length, lng: pts.reduce((s, y) => s + y.lng, 0) / pts.length };
+}
+const sumOf = (rows, k) => rows.reduce((n, r) => n + (r[k] || 0), 0);
+const plural = (n, w) => `${n.toLocaleString()} ${w}${n === 1 ? '' : 's'}`;
+
+/** Parse junkyards.json into states → cities → yards, with metro groups.
+ * Yards whose state code we can't name are skipped here (they still show on
+ * /yards), so every slug below is a real place name. */
+export function buildJunkyardIndex(data) {
+  const states = new Map();
+  (data.yards || []).forEach((row, i) => {
+    const [loc, city, code, lat, lng, cars, week] = row;
+    const name = regionName(code);
+    if (!loc || !name) return;
+    const slug = slugify(name);
+    if (!states.has(slug)) states.set(slug, { code, name, slug, country: STATE_NAMES[code] ? 'US' : 'CA', yards: [], cities: new Map(), makes: (data.stateMakes || {})[code] || [] });
+    const st = states.get(slug);
+    const y = { loc, city: city || '', state: code, lat: typeof lat === 'number' ? lat : null, lng: typeof lng === 'number' ? lng : null, cars: cars || 0, week: week || 0, newest: (data.newest || [])[i] || [] };
+    st.yards.push(y);
+    const cs = slugify(y.city);
+    if (!cs) return;
+    if (!st.cities.has(cs)) st.cities.set(cs, { name: y.city, slug: cs, yards: [] });
+    st.cities.get(cs).yards.push(y);
+  });
+  const all = [];
+  for (const st of states.values()) {
+    st.cars = sumOf(st.yards, 'cars'); st.week = sumOf(st.yards, 'week');
+    all.push(...st.yards);
+    for (const c of st.cities.values()) {
+      c.cars = sumOf(c.yards, 'cars'); c.week = sumOf(c.yards, 'week');
+      Object.assign(c, centroid(c.yards));
+      c.yards.sort((a, b) => b.cars - a.cars || a.loc.localeCompare(b.loc));
+    }
+    // Metro groups: the city most yards are named after first ("Wrench-A-
+    // Part - Austin" sits in Del Valle), then any not-yet-grouped city whose
+    // yards sit within METRO_MILES of it. Plain distance, no census metros.
+    for (const c of st.cities.values()) {
+      const re = new RegExp('\\b' + c.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+      c.named = st.yards.filter((y) => re.test(y.loc)).length;
+    }
+    const cities = [...st.cities.values()].sort((a, b) => b.named - a.named || b.yards.length - a.yards.length || b.cars - a.cars || a.name.localeCompare(b.name));
+    const taken = new Set();
+    st.metros = [];
+    for (const c of cities) {
+      if (taken.has(c.slug)) continue;
+      const members = cities.filter((o) => !taken.has(o.slug) && (o === c || miles(c, o) <= METRO_MILES));
+      members.forEach((m) => taken.add(m.slug));
+      const yards = members.flatMap((m) => m.yards).sort((a, b) => b.cars - a.cars || a.loc.localeCompare(b.loc));
+      st.metros.push({ anchor: c, cities: members, yards, cars: sumOf(members, 'cars') });
+    }
+    const noCity = st.yards.filter((y) => !slugify(y.city));
+    if (noCity.length) st.metros.push({ anchor: null, cities: [], yards: noCity, cars: sumOf(noCity, 'cars') });
+  }
+  return { scrapedAt: data.scrapedAt, days: data.days || 7, states, all };
+}
+
+let junkyardsCache = { at: 0, idx: null };
+async function junkyardIndex() {
+  if (!junkyardsCache.idx || Date.now() - junkyardsCache.at > 900_000) {
+    const data = await dataJson('junkyards.json', 900);
+    // A failed refetch keeps serving the last good copy rather than a 503.
+    if (data && Array.isArray(data.yards)) junkyardsCache = { at: Date.now(), idx: buildJunkyardIndex(data) };
+  }
+  return junkyardsCache.idx;
+}
+
+function breadcrumbLd(items) {
+  const ld = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([name, item], n) => ({ '@type': 'ListItem', position: n + 1, name, item })) };
+  return `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`;
+}
+function yardRows(yards, distFrom) {
+  return `<ul class="rowlist">${yards.map((y) => {
+    const d = distFrom ? miles(distFrom, y) : Infinity;
+    const where = [y.city, y.state].filter(Boolean).join(', ') + (Number.isFinite(d) ? ` · ${Math.round(d)} mi` : '');
+    return `<li><a href="${SITE}/yard/${slugify(y.loc)}">${esc(y.loc)}<span class="where">${esc(where)}</span></a><span class="meta">${y.cars.toLocaleString()} cars<br>${y.newest.length ? `${y.week.toLocaleString()} this week` : 'no set-out dates'}</span></li>`;
+  }).join('')}</ul>`;
+}
+const JY_CTA = `<div class="cta"><a class="btn btn-primary" href="${SITE}/">Search near your zip</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when a car I want lands nearby</a></div>`;
+function junkyardNote(stamp) {
+  return `<p class="note">Counts are the cars on each yard's own published inventory, scanned every 4 hours (as of ${stamp}). YardScout only tracks self-service yards that post their inventory online, so yards that don't aren't listed here. Missing one? <a href="${SITE}/yards#request">Ask for it</a>.</p>`;
+}
+function junkyardsMissing(title, msg, back, backLabel) {
+  return layout({ title: `${title} — YardScout`, desc: msg, canonical: back, status: 404, robots: 'noindex', cache: 120, body: `<h2 class="share-h">${esc(title)}</h2><p class="share-sub">${esc(msg)}</p><div class="cta"><a class="btn btn-primary" href="${back}">${esc(backLabel)}</a></div>` });
+}
+
+export async function renderJunkyardsPage(stateArg, cityArg) {
+  const idx = await junkyardIndex();
+  if (!idx) return layout({ title: 'Junkyards — YardScout', desc: 'Self-service junkyards YardScout tracks.', canonical: SITE + '/junkyards', status: 503, robots: 'noindex', cache: 60, body: '<div class="car-card"><div class="car-name">Yard list is briefly unavailable</div><div class="share-sub" style="margin:.4rem 0 0">Try again in a minute.</div></div>' });
+  const stamp = esc(fmtStamp(idx.scrapedAt));
+  const dec = (s) => { try { return decodeURIComponent(s || '').trim().toLowerCase(); } catch (e) { return '\u0000'; } };
+  const stateKey = dec(stateArg), cityKey = dec(cityArg);
+
+  if (!stateKey) {
+    const states = [...idx.states.values()].sort((a, b) => a.name.localeCompare(b.name));
+    const us = states.filter((s) => s.country === 'US'), ca = states.filter((s) => s.country === 'CA');
+    const cars = sumOf(idx.all, 'cars'), week = sumOf(idx.all, 'week');
+    const grid = (list) => `<ul class="grid">${list.map((s) => `<li><a href="${SITE}/junkyards/${s.slug}">${esc(s.name)}<small>${plural(s.yards.length, 'yard')} · ${s.cars.toLocaleString()} cars</small></a></li>`).join('')}</ul>`;
+    const desc = `${idx.all.length} self-service junkyards in ${us.length} states${ca.length ? ` and ${ca.length} Canadian province${ca.length === 1 ? '' : 's'}` : ''}, ${cars.toLocaleString()} cars on the lots. Live pick-and-pull inventory by state and city, scanned every 4 hours.`;
+    const body = `<p class="kicker">Junkyards by state</p>
+<h2 class="share-h">Self-service junkyards near you</h2>
+<div class="stats-bar"><div class="stat-card"><span class="label">Yards</span><span class="value">${idx.all.length}</span></div><div class="stat-card"><span class="label">Cars on the lots</span><span class="value">${cars.toLocaleString()}</span></div><div class="stat-card"><span class="label">New this week</span><span class="value accent">${week.toLocaleString()}</span></div></div>
+<p class="share-sub">Every pick-and-pull yard YardScout tracks, by state: the yards near you, what's on their lots and what set out this week. As of ${stamp}.</p>
+<div class="section">United States <span>· ${plural(us.length, 'state')}</span></div>${grid(us)}
+${ca.length ? `<div class="section">Canada <span>· ${ca.length} province${ca.length === 1 ? '' : 's'}</span></div>${grid(ca)}` : ''}
+${JY_CTA}${storesLine()}${junkyardNote(stamp)}`;
+    return layout({ title: 'Self-service junkyards by state: live inventory — YardScout', ogTitle: `${idx.all.length} self-service junkyards with live inventory`, desc, canonical: SITE + '/junkyards', body, cache: 900, spec: `${idx.all.length} YARDS · ${cars.toLocaleString()} CARS` });
+  }
+
+  const st = idx.states.get(stateKey);
+  if (!st && /^[a-z]{2}$/.test(stateKey)) {
+    // /junkyards/tx → /junkyards/texas (people type the postal code).
+    const byCode = [...idx.states.values()].find((s) => s.code.toLowerCase() === stateKey);
+    if (byCode) return Response.redirect(`${SITE}/junkyards/${byCode.slug}${cityKey ? '/' + slugify(cityKey) : ''}`, 301);
+  }
+  if (!st) return junkyardsMissing('No tracked yards there', "YardScout doesn't track any self-service yards in that state yet.", SITE + '/junkyards', 'See every state');
+  const stateUrl = `${SITE}/junkyards/${st.slug}`;
+  const crumbs = [['Junkyards', SITE + '/junkyards'], [st.name, stateUrl]];
+
+  if (!cityKey) {
+    const cityNav = [...st.cities.values()].sort((a, b) => a.name.localeCompare(b.name))
+      .map((c) => `<a href="${stateUrl}/${c.slug}">${esc(c.name)}</a>`).join(' · ');
+    const makes = st.makes.length ? `<div class="section">What landed this week in ${esc(st.name)} <span>· ${st.week.toLocaleString()} cars</span></div>
+<ul class="grid">${st.makes.map(([mk, n]) => `<li><a href="${SITE}/landed/${slugify(mk)}">${esc(mk)}<small>${n.toLocaleString()} set out in ${esc(st.code)}</small></a></li>`).join('')}</ul>
+<p class="note" style="margin-top:.5rem">Top makes set out at ${esc(st.name)} yards in the last ${idx.days} days. Each make links to its nationwide list.</p>` : '';
+    const groups = st.metros.map((m) => {
+      const label = m.anchor ? m.cities.map((c) => c.name).join(' · ') : 'Other yards';
+      const links = m.cities.map((c) => `<a href="${stateUrl}/${c.slug}">Junkyards in ${esc(c.name)}</a>`).join(' · ');
+      return `<div class="section">${esc(label)} <span>· ${plural(m.yards.length, 'yard')} · ${m.cars.toLocaleString()} cars</span></div>
+<div class="car-card">${yardRows(m.yards)}${links ? `<p class="statenav" style="margin:.4rem 0 0">${links}</p>` : ''}</div>`;
+    }).join('');
+    const yc = st.yards.length;
+    const desc = `${plural(yc, 'self-service junkyard')} in ${st.name} with ${st.cars.toLocaleString()} cars on the lots and ${st.week.toLocaleString()} set out in the last ${idx.days} days. Live pick-and-pull inventory by city, scanned every 4 hours.`;
+    const body = `${breadcrumbLd(crumbs)}<p class="kicker"><a href="${SITE}/junkyards">Junkyards</a> · ${esc(st.name)}</p>
+<h2 class="share-h">Self-service junkyards in ${esc(st.name)}</h2>
+<div class="stats-bar"><div class="stat-card"><span class="label">Yards</span><span class="value">${yc}</span></div><div class="stat-card"><span class="label">Cars on the lots</span><span class="value">${st.cars.toLocaleString()}</span></div><div class="stat-card"><span class="label">New this week</span><span class="value accent">${st.week.toLocaleString()}</span></div></div>
+<p class="share-sub">The ${plural(yc, 'pick-and-pull yard')} in ${esc(st.name)} that YardScout tracks, with what's on each lot right now. As of ${stamp}.</p>
+${cityNav ? `<p class="statenav">${cityNav}</p>` : ''}
+${makes}${groups}
+${JY_CTA}${storesLine()}${junkyardNote(stamp)}`;
+    return layout({ title: `Junkyards in ${st.name}: live self-service yard inventory — YardScout`, ogTitle: `${plural(yc, 'self-service junkyard')} in ${st.name}`, desc, canonical: stateUrl, body, cache: 900, spec: `${yc} YARD${yc === 1 ? '' : 'S'} · ${st.cars.toLocaleString()} CARS · ${st.code}` });
+  }
+
+  const city = st.cities.get(cityKey);
+  if (!city) return junkyardsMissing('No tracked yards in that city', `YardScout doesn't track a self-service yard in that city. Here are the ${st.name} yards it does track.`, stateUrl, `Junkyards in ${st.name}`);
+  const cityUrl = `${stateUrl}/${city.slug}`;
+  const inCity = new Set(city.yards);
+  // Nearby can cross a state line (Kansas City, Texarkana, St. Louis).
+  const near = city.lat == null ? [] : idx.all.filter((y) => !inCity.has(y) && miles(city, y) <= NEAR_MILES)
+    .sort((a, b) => miles(city, a) - miles(city, b));
+  const pool = [...city.yards, ...near];
+  // Newest first; same-day cars alternate between the yards instead of one
+  // yard's whole day filling the list.
+  const arrivals = pool.flatMap((y, yi) => y.newest.map((r, n) => ({ r, y, yi, n })))
+    .sort((a, b) => String(b.r[4]).localeCompare(String(a.r[4])) || a.n - b.n || a.yi - b.yi)
+    .slice(0, CITY_NEWEST);
+  const items = arrivals.map(({ r, y }) => {
+    const [year, make, model, row, date, key] = r;
+    return `<li><a href="${SITE}/car/${encodeURIComponent(key)}">${esc(`${year || ''} ${make || ''} ${model || ''}`.trim())}<span class="where">${esc(y.loc)}</span></a><span class="meta">${row ? 'Row ' + esc(row) + '<br>' : ''}${esc(fmtDate(date))}</span></li>`;
+  }).join('');
+  const place = `${city.name}, ${st.code}`;
+  const yc = city.yards.length;
+  const desc = `${plural(yc, 'self-service junkyard')} in ${place} with ${city.cars.toLocaleString()} cars on the lots and ${city.week.toLocaleString()} set out in the last ${idx.days} days${near.length ? `, plus ${plural(near.length, 'yard')} within ${NEAR_MILES} miles` : ''}. Newest arrivals with row numbers, as of ${fmtStamp(idx.scrapedAt)}.`;
+  const body = `${breadcrumbLd([...crumbs, [city.name, cityUrl]])}<p class="kicker"><a href="${SITE}/junkyards">Junkyards</a> · <a href="${stateUrl}">${esc(st.name)}</a> · ${esc(city.name)}</p>
+<h2 class="share-h">Self-service junkyards in ${esc(place)}</h2>
+<div class="stats-bar"><div class="stat-card"><span class="label">Yards</span><span class="value">${yc}</span></div><div class="stat-card"><span class="label">Cars on the lots</span><span class="value">${city.cars.toLocaleString()}</span></div><div class="stat-card"><span class="label">New this week</span><span class="value accent">${city.week.toLocaleString()}</span></div></div>
+<p class="share-sub">The pick-and-pull ${yc === 1 ? 'yard' : 'yards'} in ${esc(city.name)} that YardScout tracks, with what's on the lot right now. As of ${stamp}.</p>
+<div class="section">In ${esc(city.name)} <span>· ${plural(yc, 'yard')}</span></div>
+<div class="car-card">${yardRows(city.yards)}</div>
+${near.length ? `<div class="section">Within ${NEAR_MILES} miles <span>· ${plural(near.length, 'yard')}</span></div>
+<div class="car-card">${yardRows(near, city)}</div>` : ''}
+<div class="section">Newest arrivals <span>· ${pool.length === 1 ? 'this yard' : `${pool.length} yards`}</span></div>
+<div class="car-card">${items ? `<ul class="rowlist">${items}</ul><p class="note">The newest set-outs on ${pool.length === 1 ? "the yard's" : "these yards'"} published lists. Each yard's page has its full week; search and alerts are in the app.</p>` : `<p style="margin:0;color:var(--text-dim);font-size:.875rem">${pool.length === 1 ? "This yard doesn't" : "These yards don't"} publish set-out dates, so there's no arrivals list. The cars are on the yard ${pool.length === 1 ? 'page' : 'pages'} above.</p>`}</div>
+${JY_CTA}${storesLine()}${junkyardNote(stamp)}`;
+  return layout({ title: `Junkyards in ${place}: live self-service yard inventory — YardScout`, ogTitle: `${plural(yc, 'self-service junkyard')} in ${place}`, desc, canonical: cityUrl, body, cache: 900, spec: `${yc} YARD${yc === 1 ? '' : 'S'} · ${city.cars.toLocaleString()} CARS · ${place}` });
+}
+
+/** Sitemap entries for every /junkyards page (folded into /sitemap-yards.xml). */
+async function junkyardSitemapUrls() {
+  const idx = await junkyardIndex();
+  if (!idx) return '';
+  const u = (p) => `<url><loc>${SITE}${p}</loc><changefreq>daily</changefreq></url>`;
+  return u('/junkyards') + [...idx.states.values()].map((st) => u(`/junkyards/${st.slug}`)
+    + [...st.cities.values()].map((c) => u(`/junkyards/${st.slug}/${c.slug}`)).join('')).join('');
 }

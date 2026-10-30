@@ -22022,6 +22022,96 @@ def _write_landed_json(payload: dict) -> None:
          "makes": dict(sorted(makes.items()))}, separators=(",", ":")))
 
 
+JUNKYARDS_NEWEST_PER_YARD = 10
+JUNKYARDS_TOP_MAKES = 10
+# Page city for the /junkyards/<state>/<city> pages where the feed's "city"
+# is a store nickname (LKQ's store names stand in for the city). Only those
+# public pages use this; the app and every other file keep the feed's value.
+# "<City> <suffix>" when <City> is also a city in that state ("Houston SW",
+# "Denver 52nd Ave") folds into <City> without an entry here.
+JUNKYARDS_CITY_FIXES = {
+    ("CA", "Help Yourself"): "Wilmington",      # was "Wilmington Help Yourself"
+    ("FL", "Daytona"): "Daytona Beach",
+    ("IL", "Chicago North"): "Chicago",
+    ("IL", "Chicago South"): "Chicago",
+    ("MD", "Erdman"): "Baltimore",              # Erdman Ave, east Baltimore
+    ("MD", "Hawkins Point"): "Baltimore",       # south Baltimore
+    ("NC", "East NC"): "Greenville",            # store sits just SW of Greenville
+}
+
+
+def _junkyard_page_city(state: str, city: str, state_cities: set[str]) -> str:
+    fix = JUNKYARDS_CITY_FIXES.get((state, city))
+    if fix:
+        return fix
+    for base in sorted(state_cities, key=len, reverse=True):
+        if base != city and city.startswith(base + " "):
+            return base
+    return city
+
+
+def _write_junkyards_json(payload: dict) -> None:
+    """docs/data/junkyards.json — the small aggregate behind the public
+    /junkyards, /junkyards/<state> and /junkyards/<state>/<city> pages
+    (backend/site-proxy/src/share.js), so the Worker never needs the full
+    inventory. Same scan, same counting rules as landed.json.
+      yards:      [location, pageCity, state, lat, lng, carsOnLot, setOutLast7Days]
+                  (index-aligned with the payload's yards)
+      newest:     per yard, its newest JUNKYARDS_NEWEST_PER_YARD dated cars,
+                  [year, make, model, row, dateAdded, key] (key as landed.json)
+      stateMakes: {state: [[make, setOutLast7Days], ...]} top makes this week"""
+    from datetime import date as _date, timedelta as _td
+    fields = payload.get("fields") or []
+    fi = {n: i for i, n in enumerate(fields)}
+    need = ("id", "vin", "year", "make", "model", "row", "dateAdded", "yard")
+    yf = payload.get("yardFields") or []
+    yi = {n: i for i, n in enumerate(yf)}
+    if any(n not in fi for n in need) or any(n not in yi for n in ("location", "city", "state")):
+        return
+    cutoff = (_date.today() - _td(days=LANDED_DAYS)).isoformat()
+    src_yards = payload.get("yards") or []
+    counts = [[0, 0] for _ in src_yards]
+    dated: list[list] = [[] for _ in src_yards]
+    state_makes: dict[str, collections.Counter] = {}
+    for r in payload.get("vehicles") or []:
+        y = r[fi["yard"]]
+        if not isinstance(y, int) or not 0 <= y < len(src_yards):
+            continue
+        counts[y][0] += 1
+        d = str(r[fi["dateAdded"]] or "")[:10]
+        if not d:
+            continue
+        m = re.search(r"\d+$", str(r[fi["id"]]))
+        dated[y].append([r[fi["year"]], r[fi["make"]], r[fi["model"]], r[fi["row"]], d,
+                         r[fi["vin"]] or str(r[fi["id"]]), int(m.group()) if m else 0])
+        if d >= cutoff:
+            counts[y][1] += 1
+            make = str(r[fi["make"]] or "").strip()
+            st = src_yards[y][yi["state"]]
+            if make and st:
+                state_makes.setdefault(st, collections.Counter())[make] += 1
+    by_state: dict[str, set[str]] = {}
+    for y in src_yards:
+        by_state.setdefault(y[yi["state"]], set()).add((y[yi["city"]] or "").strip())
+    yards, newest = [], []
+    for i, y in enumerate(src_yards):
+        st, city = y[yi["state"]], (y[yi["city"]] or "").strip()
+        yards.append([y[yi["location"]], _junkyard_page_city(st, city, by_state.get(st, set())) if city else city,
+                      st, y[yi["lat"]] if "lat" in yi else None, y[yi["lng"]] if "lng" in yi else None,
+                      counts[i][0], counts[i][1]])
+        # Same-day ties go to the higher stock number (ids end in one —
+        # "1263-269258", "ipull-fre111980" — usually issued in arrival
+        # order). Not make/model: that would always pick the Acuras (or the
+        # Volvos) off a busy day.
+        dated[i].sort(key=lambda x: (x[4], x[6]), reverse=True)
+        newest.append([x[:6] for x in dated[i][:JUNKYARDS_NEWEST_PER_YARD]])
+    top = {st: sorted(c.items(), key=lambda kv: (-kv[1], kv[0]))[:JUNKYARDS_TOP_MAKES]
+           for st, c in sorted(state_makes.items())}
+    (DATA_DIR / "junkyards.json").write_text(json.dumps(
+        {"scrapedAt": payload.get("scrapedAt"), "days": LANDED_DAYS, "yards": yards,
+         "newest": newest, "stateMakes": top}, separators=(",", ":")))
+
+
 def _write_yards_added(payload: dict) -> None:
     """docs/data/yards_added.json — yards first seen by the history DB in the
     last 90 days (the public /yards page's "recently added" feed, which is
@@ -22957,6 +23047,7 @@ def main():
                     LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                     _write_inventory_meta(payload)
                     _write_landed_json(payload)
+                    _write_junkyards_json(payload)
                     _write_yards_added(payload)
                     EXTRAS_FILE.write_text(json.dumps(
                         {"version": 1, "scrapedAt": payload["scrapedAt"],
@@ -23002,6 +23093,7 @@ def main():
                 LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                 _write_inventory_meta(payload)
                 _write_landed_json(payload)
+                _write_junkyards_json(payload)
                 _write_yards_added(payload)
                 EXTRAS_FILE.write_text(json.dumps(
                     {"version": 1, "scrapedAt": payload["scrapedAt"],
