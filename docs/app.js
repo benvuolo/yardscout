@@ -323,6 +323,7 @@ function lookupYardCost(partName, location) {
   const memoKey = partName + '|' + (location || '');
   const hit = _yardCostMemo.get(memoKey);
   if (hit !== undefined) return hit;
+  _pricingKick(location);   // lazy lists: a miss here loads the yard's file (see LAZY YARD PRICE LISTS)
   const result = _lookupYardCostUncached(partName, location);
   _yardCostMemo.set(memoKey, result);
   return result;
@@ -551,52 +552,152 @@ function shortEngine(s) {
  * values attached to every row don't — a one-click download of them is a
  * permanent copy of the product. Deliberate decision, not an oversight. */
 
-async function loadAllPricing() {
-  // All chain price lists fetch in parallel (this used to be a serial
-  // waterfall queued in front of the big inventory fetch). Each is optional.
-  const grab = async (url, apply) => {
+/* ===== LAZY YARD PRICE LISTS (2026-10-30) =====
+ * The ~30 chain price lists (~1.7 MB together) used to all load up front,
+ * and the first screen of cards waited on every one of them — on a slow
+ * phone connection that was a big share of the wait before the first car,
+ * for the lists of chains hundreds of miles away. Now a list loads the
+ * first time something asks about one of its yards, and nothing on the
+ * first screen waits for it:
+ *   - lookupYardCost / yardPriceList kick the yard's file on a miss (the
+ *     catch-all: every card, sort and quote goes through them). When it
+ *     lands the memos clear and whatever is on screen (Live grid, Yards
+ *     grid, compare type-ahead) re-renders with the price lines filled in.
+ *   - Actions whose answer would be wrong without the list (a yard's Price
+ *     list sheet, the cross-yard compare, the Parts tab search) await
+ *     ensurePricingFor() first.
+ * Same plain fetch as before, so the service worker's network-first copy
+ * and the HTTP cache still serve repeat launches. Each list is optional; a
+ * failed one is retried on a later ask (never in a loop).
+ * Order matters: first match wins, in yardPriceList's dispatch order. */
+const PRICING_FILES = [
+  [l => l.startsWith('pick-n-pull'), 'picknpull', d => d.forEach(p => { pnpPricing[p.description] = p; })],
+  [l => l.startsWith('tear-a-part'), 'tearapart', d => d.forEach(p => { tapPricing[p.description] = p; })],
+  [l => l.startsWith('utah pic-a-part'), 'utpap', d => d.forEach(p => { utpapPricing[p.description] = p; })],
+  [l => l.startsWith('u-pull-r'), 'upullr', d => d.forEach(p => { upullrPricing[p.description] = p; })],
+  [l => l.startsWith("harry's u-pull-it"), 'harrys', d => d.forEach(p => { harrysPricing[p.description] = p; })],
+  [l => l.startsWith('indy-u-pull-it'), 'indy', d => d.forEach(p => { indyPricing[p.description] = p; })],
+  [l => l.startsWith("rupert's u-pull-it"), 'ruperts', d => d.forEach(p => { rupertsPricing[p.description] = p; })],
+  [l => l.startsWith('u-pull-it'), 'upullitne', d => d.forEach(p => { upullitnePricing[p.description] = p; })],
+  [l => l.startsWith('pull-n-save'), 'pns', d => d.forEach(p => { pnsPricing[p.description] = p; })],
+  [l => l.startsWith('parts galore'), 'partsgalore', d => d.forEach(p => { partsgalorePricing[p.description] = p; })],
+  [l => l.startsWith('chesterfield auto parts'), 'chesterfield', d => d.forEach(p => { chesterfieldPricing[p.description] = p; })],
+  [l => l.startsWith('ace pick-a-part'), 'ace', d => d.forEach(p => { acePricing[p.description] = p; })],
+  [l => l.startsWith('sturtevant auto'), 'sturtevant', d => d.forEach(p => { sturtevantPricing[p.description] = p; })],
+  [l => l.startsWith('nevada pic-a-part'), 'nvpap', d => d.forEach(p => { nvpapPricing[p.description] = p; })],
+  [l => l.startsWith("barry's u pull it"), 'barrys', d => d.forEach(p => { barrysPricing[p.description] = p; })],
+  [l => l.startsWith('195 used auto parts'), 'p195', d => d.forEach(p => { p195Pricing[p.description] = p; })],
+  [l => l.startsWith('m&m u-pull-it'), 'mmupullit', d => d.forEach(p => { mmupullitPricing[p.description] = p; })],
+  [l => l.startsWith('polk county pick and pay'), 'polkpickpay', d => d.forEach(p => { polkpickpayPricing[p.description] = p; })],
+  [l => l.startsWith("chuck & eddie's"), 'chuckeddies', d => d.forEach(p => { chuckeddiesPricing[p.description] = p; })],
+  [l => l.startsWith('byot auto parts'), 'byot', d => d.forEach(p => { byotPricing[p.description] = p; })],
+  [l => l.startsWith("wilbert's u-pull-it"), 'wilberts', d => d.forEach(p => { wilbertsPricing[p.description] = p; })],
+  [l => l.startsWith('san antonio pick-n-pull'), 'pnpsa', d => d.forEach(p => { pnpsaPricing[p.description] = p; })],
+  [l => l.startsWith("ryan's pick-a-part"), 'ryans', d => d.forEach(p => { ryansPricing[p.description] = p; })],
+  [l => l.startsWith('us auto supply'), 'usauto', d => d.forEach(p => { usautoPricing[p.description] = p; })],
+  [l => l.startsWith('u-pull and save'), 'upas', d => d.forEach(p => { upasPricing[p.description] = p; })],
+  [l => l.startsWith('budget u-pull-it'), 'budget', d => { budgetPricing = d; }],
+  [l => l.startsWith('pick your part'), 'pyp', d => { pypPricing = d; }],
+  [l => l.startsWith('pull-a-part'), 'pap', d => { papPricing = d; }],
+  [l => l.includes('wrench-a-part'), 'wap', d => { wapPricing = d; }],
+  [l => l.startsWith('fenix u-pull'), 'fenix', d => { fenixPricing = d; }],
+];
+const PRICING_RETRY_MS = 30000;
+const _pricingFileMemo = new Map();   // location -> PRICING_FILES entry | null
+const _pricing = new Map();           // file -> { ok, p (while in flight), failedAt }
+
+function pricingFileFor(location) {
+  let f = _pricingFileMemo.get(location);
+  if (f === undefined) {
+    const l = String(location || '').toLowerCase();
+    f = PRICING_FILES.find(e => e[0](l)) || null;
+    _pricingFileMemo.set(location, f);
+  }
+  return f;
+}
+
+/* Start (or join) one file's load; returns its state. */
+function _pricingLoad(f) {
+  let st = _pricing.get(f[1]);
+  if (st && (st.ok || st.p || Date.now() - st.failedAt < PRICING_RETRY_MS)) return st;
+  if (!st) { st = { ok: false, p: null, failedAt: 0 }; _pricing.set(f[1], st); }
+  st.p = (async () => {
     try {
-      const resp = await fetch(DATA_BASE + url);
-      if (resp.ok) apply(await resp.json());
-    } catch (e) { /* price list not available */ }
-  };
-  await Promise.all([
-    grab('data/picknpull_pricing.json', d => d.forEach(p => { pnpPricing[p.description] = p; })),
-    grab('data/utpap_pricing.json', d => d.forEach(p => { utpapPricing[p.description] = p; })),
-    grab('data/tearapart_pricing.json', d => d.forEach(p => { tapPricing[p.description] = p; })),
-    grab('data/pyp_pricing.json', d => { pypPricing = d; }),
-    grab('data/pap_pricing.json', d => { papPricing = d; }),
-    grab('data/wap_pricing.json', d => { wapPricing = d; }),
-    grab('data/upullr_pricing.json', d => d.forEach(p => { upullrPricing[p.description] = p; })),
-    grab('data/fenix_pricing.json', d => { fenixPricing = d; }),
-    grab('data/harrys_pricing.json', d => d.forEach(p => { harrysPricing[p.description] = p; })),
-    grab('data/indy_pricing.json', d => d.forEach(p => { indyPricing[p.description] = p; })),
-    grab('data/upullitne_pricing.json', d => d.forEach(p => { upullitnePricing[p.description] = p; })),
-    grab('data/ruperts_pricing.json', d => d.forEach(p => { rupertsPricing[p.description] = p; })),
-    grab('data/pns_pricing.json', d => d.forEach(p => { pnsPricing[p.description] = p; })),
-    grab('data/partsgalore_pricing.json', d => d.forEach(p => { partsgalorePricing[p.description] = p; })),
-    grab('data/chesterfield_pricing.json', d => d.forEach(p => { chesterfieldPricing[p.description] = p; })),
-    grab('data/ace_pricing.json', d => d.forEach(p => { acePricing[p.description] = p; })),
-    grab('data/sturtevant_pricing.json', d => d.forEach(p => { sturtevantPricing[p.description] = p; })),
-    grab('data/nvpap_pricing.json', d => d.forEach(p => { nvpapPricing[p.description] = p; })),
-    grab('data/barrys_pricing.json', d => d.forEach(p => { barrysPricing[p.description] = p; })),
-    grab('data/budget_pricing.json', d => { budgetPricing = d; }),
-    grab('data/p195_pricing.json', d => d.forEach(p => { p195Pricing[p.description] = p; })),
-    grab('data/mmupullit_pricing.json', d => d.forEach(p => { mmupullitPricing[p.description] = p; })),
-    grab('data/polkpickpay_pricing.json', d => d.forEach(p => { polkpickpayPricing[p.description] = p; })),
-    grab('data/chuckeddies_pricing.json', d => d.forEach(p => { chuckeddiesPricing[p.description] = p; })),
-    grab('data/byot_pricing.json', d => d.forEach(p => { byotPricing[p.description] = p; })),
-    grab('data/wilberts_pricing.json', d => d.forEach(p => { wilbertsPricing[p.description] = p; })),
-    grab('data/pnpsa_pricing.json', d => d.forEach(p => { pnpsaPricing[p.description] = p; })),
-    grab('data/ryans_pricing.json', d => d.forEach(p => { ryansPricing[p.description] = p; })),
-    grab('data/usauto_pricing.json', d => d.forEach(p => { usautoPricing[p.description] = p; })),
-    grab('data/upas_pricing.json', d => d.forEach(p => { upasPricing[p.description] = p; })),
-  ]);
+      const resp = await fetch(DATA_BASE + 'data/' + f[1] + '_pricing.json');
+      if (!resp.ok) throw new Error('price list ' + resp.status);
+      f[2](await resp.json());
+      st.ok = true;
+    } catch (e) { st.failedAt = Date.now(); /* price list not available */ }
+    st.p = null;
+    if (st.ok) _pricingArrived();
+  })();
+  return st;
+}
+
+/* This yard's list is in, or isn't coming (no published list, or its load
+ * just failed) — i.e. asking again now wouldn't change the answer. */
+function pricingSettled(location) {
+  const f = pricingFileFor(location);
+  if (!f) return true;
+  const st = _pricing.get(f[1]);
+  return !!st && !st.p && (st.ok || Date.now() - st.failedAt < PRICING_RETRY_MS);
+}
+
+/* Kick the lists these yards need. Returns a promise for the ones still on
+ * the way, or null when every one is already settled. Callers that must
+ * not answer without the list: `const w = ensurePricingFor(locs); if (w)
+ * { w.then(retry); return; }` (a failed load resolves too — no loop). */
+function ensurePricingFor(locations) {
+  let waits = null;
+  const seen = new Set();
+  for (const loc of locations) {
+    const f = pricingFileFor(loc);
+    if (!f || seen.has(f)) continue;
+    seen.add(f);
+    const st = _pricingLoad(f);
+    if (st.p) (waits || (waits = [])).push(st.p);
+  }
+  return waits ? Promise.all(waits) : null;
+}
+function _pricingKick(location) {
+  const f = pricingFileFor(location);
+  if (f) _pricingLoad(f);
+}
+
+/* A list landed: drop everything computed without it, then refresh what's
+ * on screen (coalesced — a radius usually needs a few files at once). */
+let _pricingRefreshT = 0;
+function _pricingArrived() {
   _yardCostMemo.clear();
   // Compare/type-ahead caches may have been built against empty lists.
   _partQuoteMemo.clear();
   _partIndex = null;
   _partIndexSig = '';
+  if (!_pricingRefreshT) _pricingRefreshT = setTimeout(_pricingRefreshViews, 120);
+}
+function _pricingRefreshViews() {
+  _pricingRefreshT = 0;
+  if (!liveLoaded) return;
+  const active = id => document.getElementById(id).classList.contains('active');
+  if (active('tab-live')) {
+    // The profit sorts move cards once real pull costs are in: don't
+    // reorder under someone mid-scroll — their next interaction re-sorts.
+    // Otherwise re-render in place: same scroll, same cards left open.
+    const sort = document.getElementById('live-sort').value;
+    const y = window.scrollY;
+    if (!(y >= 400 && isPro() && (sort === 'smart-profit' || sort === 'fastest-sell'))) {
+      const open = [...document.querySelectorAll('#live-grid .car-card[data-eid] details[open]')]
+        .map(d => d.closest('.car-card').dataset.eid);
+      renderLive();
+      for (const eid of open) {
+        const d = document.querySelector(`#live-grid .car-card[data-eid="${CSS.escape(eid)}"] details`);
+        if (d) d.open = true;
+      }
+      if (window.scrollY !== y) window.scrollTo(0, y);
+    }
+  }
+  if (active('tab-yards')) renderYards();
+  if (compareSuggest.style.display !== 'none') renderCompareSuggest();
 }
 
 /* Expand a fetched inventory payload into app state + render. `quiet` is the
@@ -979,11 +1080,9 @@ function loadLiveInventory(opts = {}) {
  *   unobtrusive (resume self-heal). Default: quiet iff data was already on
  *   screen (the original behavior). */
 async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
-  // Pricing files load concurrently with the inventory (they used to be a
-  // serial waterfall in front of the ~37MB fetch). Rendering needs them for
-  // pull costs, so each render path awaits this promise before first paint
-  // of cards.
-  const pricingReady = loadAllPricing();
+  // Price lists no longer gate first paint: each loads when a yard in view
+  // first needs it, and the cards fill their price lines in when it lands
+  // (see LAZY YARD PRICE LISTS).
 
   // API mode (feature-flagged, see api.js): load tier-aware shards from the
   // backend instead of the public static file. Falls back to static on error.
@@ -991,7 +1090,6 @@ async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
     loadVehicleExtrasFile();
     try {
       const raw = await YSApi.fetchInventory();
-      await pricingReady;
       applyInventory(raw);
       return;
     } catch (e) {
@@ -1003,7 +1101,7 @@ async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
   // background (see RADIUS-FIRST INVENTORY below). Falls through to the
   // full file exactly as before when no shard manifest is published.
   try {
-    if (await loadShardedInventory({ fresh, quiet }, pricingReady)) return;
+    if (await loadShardedInventory({ fresh, quiet })) return;
   } catch (e) { /* any shard-path surprise: the full file still works */ }
   loadVehicleExtrasFile();
 
@@ -1021,7 +1119,6 @@ async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
         const hit = await cache.match(INVENTORY_URL);
         if (hit) {
           const raw = await hit.json();
-          await pricingReady;
           applyInventory(raw);
           shownScrapedAt = raw.scrapedAt || 'unknown';
         }
@@ -1057,7 +1154,6 @@ async function _loadLiveInventory({ fresh = false, quiet = null } = {}) {
     const raw = await resp.json();
     if (putP) await putP;
     if (shownScrapedAt && (raw.scrapedAt || 'unknown') === shownScrapedAt) return; // nothing new
-    await pricingReady;
     applyInventory(raw, { quiet: quiet != null ? quiet : !!shownScrapedAt });
   } catch (e) {
     if (shownScrapedAt) return; // cached data already on screen — stay quiet
@@ -1347,7 +1443,7 @@ async function _invPump(s) {
         if (s.inflight.size >= INV_BACKGROUND_PARALLEL) { await settle(); continue; }
         const next = _invNextShard(s);
         if (next == null) {
-          if (!s.inflight.size) break;      // all parsed (applied once pricing is in)
+          if (!s.inflight.size) break;      // all parsed
           await settle();
           continue;
         }
@@ -1366,7 +1462,7 @@ async function _invPump(s) {
   }
 }
 
-function _invStart(m, { source, cache, quiet, fresh }, pricingReady) {
+function _invStart(m, { source, cache, quiet, fresh }) {
   // A background refresh (data already on screen) swaps in only once the
   // whole new scan is loaded — the full file's quiet-swap behavior. A first
   // load, an explicit refresh, an alert entry, or a screen the old session
@@ -1380,7 +1476,7 @@ function _invStart(m, { source, cache, quiet, fresh }, pricingReady) {
     parsed: new Map(), inflight: new Map(), applied: new Set(), extras: {},
     shardYards: m.shards.map(() => []),
     partSetsP: null, partSets: null, focus: null,
-    pricingOk: false, pumping: false, shown: false, done: false, stopped: false, failed: null,
+    pumping: false, shown: false, done: false, stopped: false, failed: null,
   };
   m.yardShard.forEach((sh, yi) => { if (s.shardYards[sh]) s.shardYards[sh].push(yi); });
   s.shownP = new Promise((res, rej) => { s.onShown = res; s.onFail = rej; });
@@ -1388,7 +1484,6 @@ function _invStart(m, { source, cache, quiet, fresh }, pricingReady) {
   if (_invNext) _invStop(_invNext);
   if (swap === 'partial' && _inv) _inv.stopped = true;   // about to be replaced
   _invNext = s;
-  pricingReady.then(() => { s.pricingOk = true; _invMaybeApply(s); });
   _invPump(s);
   return s;
 }
@@ -1439,7 +1534,7 @@ function _invApply(s) {
  * session to the screen once it can show the view, re-apply when the view
  * gained shards, finish when the whole scan is in. */
 function _invMaybeApply(s) {
-  if (s.stopped || s.failed || s.done || !s.pricingOk) return;
+  if (s.stopped || s.failed || s.done) return;
   const all = s.parsed.size === s.m.shards.length;
   const promote = s === _invNext;
   if (!promote && s !== _inv) return;
@@ -1519,7 +1614,7 @@ function invUpdateProgress() {
 /* Returns true when the shard path handled this load (rendered, or nothing
  * new), false when the caller should use the full file (no manifest
  * published, or the shards couldn't be loaded and nothing is on screen). */
-async function loadShardedInventory({ fresh = false, quiet = null } = {}, pricingReady) {
+async function loadShardedInventory({ fresh = false, quiet = null } = {}) {
   let cache = null;
   try { if ('caches' in window) cache = await caches.open(DATA_CACHE); } catch (e) { cache = null; }
   let shownAt = liveLoaded ? (liveScrapedAt || 'unknown') : null;
@@ -1529,7 +1624,7 @@ async function loadShardedInventory({ fresh = false, quiet = null } = {}, pricin
     let cm = null;
     try { const hit = await cache.match(INV_MANIFEST_URL); cm = hit ? await hit.json() : null; } catch (e) { cm = null; }
     if (_invValidManifest(cm)) {
-      const s = _invStart(cm, { source: 'cache', cache, quiet: false }, pricingReady);
+      const s = _invStart(cm, { source: 'cache', cache, quiet: false });
       try { await s.shownP; shownAt = cm.scrapedAt; } catch (e) { /* incomplete cache — use the network */ }
     }
   }
@@ -1558,7 +1653,7 @@ async function loadShardedInventory({ fresh = false, quiet = null } = {}, pricin
     return true;
   }
 
-  const s = _invStart(m, { source: 'net', cache, quiet: quiet != null ? quiet : !!shownAt, fresh }, pricingReady);
+  const s = _invStart(m, { source: 'net', cache, quiet: quiet != null ? quiet : !!shownAt, fresh });
   if (s.swap === 'complete') return true;   // background refresh: swaps in when complete
   try {
     await s.shownP;
@@ -1566,7 +1661,7 @@ async function loadShardedInventory({ fresh = false, quiet = null } = {}, pricin
   } catch (e) {
     // The CDN handed out a stale manifest next to newer shards: once more,
     // straight from the origin.
-    if (e && e.stale && !fresh) return loadShardedInventory({ fresh: true, quiet }, pricingReady);
+    if (e && e.stale && !fresh) return loadShardedInventory({ fresh: true, quiet });
     return !!shownAt;
   }
 }
@@ -4303,7 +4398,7 @@ function renderYards() {
           ${IS_NATIVE
             ? `<button type="button" class="btn yard-week-btn" data-yard="${escapeHtml(y.location)}" title="This yard's set-outs from the last 7 days">This week</button><button type="button" class="btn yard-share-btn" data-url="https://yardscout.io/yard/${yardSlug(y.location)}" data-yard="${escapeHtml(y.location)}" title="Share this yard's week" aria-label="Share this yard's week">${ICON.share}</button>`
             : `<a class="btn yard-week-link" href="https://yardscout.io/yard/${yardSlug(y.location)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Public page: this yard's set-outs from the last 7 days, shareable">This week &#8599;</a>`}
-          ${yardPriceList(y.location)
+          ${(yardPriceList(y.location) || !pricingSettled(y.location))   // list still loading: the button waits for it
             ? '<button type="button" class="btn yard-prices-btn">' + ICON.tag + ' Price list</button>'
             : (chain ? `<a class="yard-price-link" href="${chain[1]}" target="_blank" rel="noopener">${chain[2]} price list</a>` : '<span class="yard-price-none">Prices posted at the yard</span>')}
         </div>
@@ -4452,6 +4547,7 @@ document.getElementById('yards-zip').addEventListener('input', async e => {
 /** Normalized [{part, price, core}] for a yard, or null when the chain
  *  doesn't publish a scrapeable list (e.g. LKQ posts prices in-store only). */
 function yardPriceList(location) {
+  _pricingKick(location);   // loads lazily; null until the yard's file lands
   const loc = (location || '').toLowerCase();
   const fromList = obj => Object.values(obj).map(p => ({
     part: p.description, price: parseFloat(p.price), core: parseFloat(p.corePrice || 0),
@@ -4518,9 +4614,37 @@ function renderPricesSheetRows() {
     : '<div class="empty-state"><p>No parts match. The chain may list it under a different name &mdash; try a shorter word.</p></div>';
 }
 
+/* Lazy price lists (see LAZY YARD PRICE LISTS): when a sheet's lists are
+ * still on the way, open it with a loading line and fill it when they land
+ * — unless the user closed it or asked for something else meanwhile. */
+let _pricesWait = null;
+function pricesSheetWait(title, wait, then) {
+  const token = {};
+  _pricesWait = token;
+  pricesSheetMode = 'loading';
+  document.getElementById('prices-title').textContent = title;
+  document.getElementById('prices-sub').textContent = '';
+  document.getElementById('prices-search-wrap').style.display = 'none';
+  document.getElementById('prices-sort-wrap').style.display = 'none';
+  document.getElementById('prices-body').innerHTML = '<div class="empty-state"><p>Loading published prices&hellip;</p></div>';
+  document.getElementById('prices-sheet').classList.add('open');
+  document.getElementById('prices-backdrop').classList.add('open');
+  wait.then(() => { if (_pricesWait === token) { _pricesWait = null; then(); } });
+}
+
 function openYardPrices(location) {
+  const w = ensurePricingFor([location]);
+  if (w) { pricesSheetWait(location, w, () => openYardPrices(location)); return; }
+  _pricesWait = null;
   const rows = yardPriceList(location);
-  if (!rows) return;
+  if (!rows) {
+    // Only reachable when the list failed to load (the button shows for a
+    // list still on the way) — say so rather than leave a dead sheet.
+    if (pricesSheetMode === 'loading' && document.getElementById('prices-sheet').classList.contains('open')) {
+      document.getElementById('prices-body').innerHTML = '<div class="empty-state"><p>Couldn’t load this yard’s price list. Check your connection and try again.</p></div>';
+    }
+    return;
+  }
   track('price-list-opened');
   pricesSheetMode = 'yard';
   pricesSheetRows = rows;
@@ -4633,9 +4757,14 @@ function openPriceCompare(query) {
   if (!activeZipCoords) { alert('Set a zip code first so we know which yards are near you.'); return; }
   const q = query.trim().toLowerCase();
   if (q.length < 3) return;
+  const { shown } = getYardsView();
+  // Every yard in view needs its list before the compare can say who
+  // publishes the part (lazy lists — see LAZY YARD PRICE LISTS).
+  const w = ensurePricingFor(shown.map(y => y.location));
+  if (w) { pricesSheetWait(`"${query.trim()}" across yards in view`, w, () => openPriceCompare(query)); return; }
+  _pricesWait = null;
   track('price-compare');
 
-  const { shown } = getYardsView();
   // Merged spelling variants compare as one part: a pick of "Tail Light"
   // must still price yards whose list spells it "TAILLIGHT". Curated alias
   // groups carry a dedicated exact-name quote tier (never substrings).
@@ -4681,6 +4810,7 @@ document.getElementById('prices-sort-price').addEventListener('click', () => set
 document.getElementById('prices-sort-dist').addEventListener('click', () => setCompareSort('dist'));
 
 function closePricesSheet() {
+  _pricesWait = null;   // a list still loading must not reopen it
   document.getElementById('prices-sheet').classList.remove('open');
   document.getElementById('prices-backdrop').classList.remove('open');
 }
@@ -5022,6 +5152,9 @@ function resolveAndCompare() {
   const q = compareInput.value.trim().toLowerCase();
   if (!q) { renderCompareSuggest(); return; }
   if (suggestActive >= 0) { pickSuggestion(suggestActive); return; }
+  // The exact-name match reads the yards' lists — wait for any still loading.
+  const w = activeZipCoords ? ensurePricingFor(getYardsView().shown.map(y => y.location)) : null;
+  if (w) { w.then(resolveAndCompare); return; }
   const exact = getPartIndex().byName.get(q);
   if (exact) {
     compareInput.value = exact.display;
@@ -5544,6 +5677,10 @@ function pfRunSearch() {
     return;
   }
   if (!interchangeData) { loadInterchange().then(() => pfRunSearch()); return; }
+  // Same for the price lists of the yards in range: every result row quotes
+  // its yard's list (lazy lists — see LAZY YARD PRICE LISTS).
+  const pw = ensurePricingFor(getYardsView().inRange.map(y => y.location));
+  if (pw) { status.textContent = 'Loading yard prices…'; pw.then(() => pfRunSearch()); return; }
   status.textContent = '';
   // Part chosen but no (full) car: BROWSE mode — every nearby car carrying
   // the part, no fit claims. Fitment needs all three car fields.
