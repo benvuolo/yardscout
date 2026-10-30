@@ -14701,7 +14701,11 @@ def fetch_pns_inventory() -> list[dict]:
     # 2026-10-17 20:02 UTC run while the same call worked 2.5h earlier) — retry
     # a few times at crawl-delay pacing and log what came back on failure.
     makes: list[str] = []
-    for attempt in (1, 2, 3):
+    # 2026-10-30: the site answered three retries 10 s apart with the same
+    # HTTP 202 "please wait" interstitial (all 8 yards fetched 0 and were
+    # re-served from the previous publish). Back off between attempts
+    # instead — same honest request, just later — and leave it at that.
+    for attempt, pause in ((1, PNS_DELAY_SEC), (2, 60), (3, 180)):
         try:
             r = session.post(PNS_AJAX, data={"action": "getMakes"}, headers=PNS_HEADERS,
                              timeout=60)
@@ -14714,7 +14718,7 @@ def fetch_pns_inventory() -> list[dict]:
                   file=sys.stderr)
         except Exception as e:
             print(f"  [Pull-N-Save] getMakes attempt {attempt} failed: {e}", file=sys.stderr)
-        time.sleep(PNS_DELAY_SEC)
+        time.sleep(pause)
     if not makes:
         print("  [Pull-N-Save] getMakes returned no makes after 3 attempts — skipping",
               file=sys.stderr)
