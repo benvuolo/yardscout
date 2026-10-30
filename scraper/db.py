@@ -221,24 +221,41 @@ def vin_decode_count() -> int:
 def load_ario_vins() -> dict:
     """{vehicle_id: vin} for every Ario car whose VIN has been fetched."""
     conn = _connect()
-    rows = conn.execute("SELECT vehicle_id, vin FROM ario_vins").fetchall()
+    rows = conn.execute("SELECT vehicle_id, vin FROM ario_vins WHERE vin != ''").fetchall()
     conn.close()
     return dict(rows)
 
 
+def load_ario_vin_misses(since: str) -> set:
+    """Ids looked up since `since` whose item had NO VIN at the yard (stored
+    as vin ''). The backfill skips them until they age out, so each scan's
+    lookups go to cars nobody has asked about yet (2026-10-30: the same ~530
+    VIN-less newest cars were retried every scan and the 26k backlog never
+    moved)."""
+    conn = _connect()
+    rows = conn.execute("SELECT vehicle_id FROM ario_vins WHERE vin = '' AND fetched_at >= ?",
+                        (since,)).fetchall()
+    conn.close()
+    return {r[0] for r in rows}
+
+
 def store_ario_vins(vins: dict, fetched_at: str) -> int:
-    """Insert {vehicle_id: vin}; existing ids are left alone (a stock number's
-    VIN never changes). Returns rows written."""
+    """Upsert {vehicle_id: vin}. A real VIN is never overwritten (a stock
+    number's VIN never changes); a '' (checked, none) row is refreshed, and is
+    replaced when the VIN later turns up. Returns rows written."""
     if not vins:
         return 0
     conn = _connect()
     cur = conn.cursor()
     added = 0
     for vid, vin in vins.items():
-        if not (vid and vin):
+        if not vid:
             continue
-        cur.execute("INSERT OR IGNORE INTO ario_vins (vehicle_id, vin, fetched_at) VALUES (?,?,?)",
-                    (vid, vin, fetched_at))
+        cur.execute(
+            "INSERT INTO ario_vins (vehicle_id, vin, fetched_at) VALUES (?,?,?) "
+            "ON CONFLICT(vehicle_id) DO UPDATE SET vin = excluded.vin, fetched_at = excluded.fetched_at "
+            "WHERE ario_vins.vin = ''",
+            (vid, vin or "", fetched_at))
         added += cur.rowcount
     conn.commit()
     conn.close()

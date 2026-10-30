@@ -195,10 +195,19 @@ try:
     check("live rows map to the same id scheme as the legacy feed", vs[0]["id"] == "foss-wilson-stk00000", vs[0]["id"])
     check("VIN comes from the cache when present", vs[0]["vin"] == "1FAHP3F20CL000000" and vs[1]["vin"] == "")
     check("date_placed -> dateAdded, color title-cased", vs[0]["dateAdded"] == "2026-10-20" and vs[0]["_color"] == "Red")
-    got = js._ario_vin_backfill(FakeSession(), vs, cap=1)
+    got, misses = js._ario_vin_backfill(FakeSession(), vs, cap=1)
     check("backfill fetches VIN-less cars up to the cap (newest first) and fills the row",
-          got == {"foss-wilson-stk00001": "1FAHP3F29CL123456"} and vs[1]["vin"] == "1FAHP3F29CL123456", str(got))
+          got == {"foss-wilson-stk00001": "1FAHP3F29CL123456"} and vs[1]["vin"] == "1FAHP3F29CL123456" and misses == [], str(got))
     check("backfill skipped the rest under the cap", vs[2]["vin"] == "" and sum(1 for f, _ in calls if f == "get-inventory-item") == 1)
+    # 2026-10-30: VIN-less answers are reported as misses, and recent misses are skipped
+    # so the lookups move on to cars nobody has asked about yet.
+    n0 = sum(1 for f, _ in calls if f == "get-inventory-item")
+    got, misses = js._ario_vin_backfill(FakeSession(), vs, cap=2)
+    check("an item with no VIN at the yard comes back as a miss", got == {} and misses == ["foss-wilson-stk00002", "foss-wilson-stk00003"], f"{got} {misses}")
+    n1 = len(calls)
+    got, misses = js._ario_vin_backfill(FakeSession(), vs, cap=2, recently_missed={"foss-wilson-stk00002", "foss-wilson-stk00003"})
+    asked = [b["inventory_id"] for f, b in calls[n1:] if f == "get-inventory-item"]
+    check("recent misses are skipped; the next cars get the lookups", asked == ["1004"], str(asked))
 
     ghost = js._ario_live_items_to_vehicles(
         [item(7, date="2017-11-12"), item(8, date="2026-10-01"), {**item(9), "date_placed": ""}],

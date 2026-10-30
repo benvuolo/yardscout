@@ -18263,24 +18263,38 @@ def _ario_live_items_to_vehicles(items: list[dict], *, yard: dict, source: str,
     return vehicles
 
 
+ARIO_VIN_MISS_RETRY_DAYS = 14   # re-ask a VIN-less item after this long (yards add VINs late)
+
+
 def _ario_vin_backfill(session: "requests.Session", vehicles: list[dict],
-                       cap: int) -> dict[str, str]:
-    """get-inventory-item for up to `cap` VIN-less cars, newest first.
-    Returns {vehicle_id: vin} for the ones that answered."""
-    todo = [v for v in vehicles if not v["vin"] and v.get("_ario_item_id")]
+                       cap: int, recently_missed: "set[str] | None" = None
+                       ) -> tuple[dict[str, str], list[str]]:
+    """get-inventory-item for up to `cap` VIN-less cars, newest first,
+    skipping ones checked recently that had no VIN. Returns ({vehicle_id:
+    vin} for the ones that had one, [ids that answered with no VIN])."""
+    recently_missed = recently_missed or set()
+    missing = [v for v in vehicles if not v["vin"] and v.get("_ario_item_id")]
+    todo = [v for v in missing if v["id"] not in recently_missed]
     todo.sort(key=lambda v: v.get("dateAdded") or "", reverse=True)
     got: dict[str, str] = {}
+    misses: list[str] = []
     for v in todo[:max(0, cap)]:
         res = _ario_live_post(session, "get-inventory-item",
                               {"inventory_id": v["_ario_item_id"], "yard_slug": v["_ario_slug"]})
-        vin = str(((res or {}).get("item") or {}).get("vin") or "").strip().upper()
+        if not res:
+            continue   # no answer: try again next scan
+        vin = str((res.get("item") or {}).get("vin") or "").strip().upper()
         if len(vin) == 17:
             got[v["id"]] = vin
             v["vin"] = vin
-    if todo:
-        print(f"  [Ario live] VIN backfill: {len(got)} fetched of {len(todo)} missing "
-              f"(cap {cap}; {max(0, len(todo) - cap)} left for later runs)", file=sys.stderr)
-    return got
+        else:
+            misses.append(v["id"])
+    if missing:
+        print(f"  [Ario live] VIN backfill: {len(got)} found, {len(misses)} have no VIN at the yard "
+              f"(of {len(missing)} missing; {len(missing) - len(todo)} skipped as checked "
+              f"<{ARIO_VIN_MISS_RETRY_DAYS} d ago; {max(0, len(todo) - cap)} left for later runs)",
+              file=sys.stderr)
+    return got, misses
 
 
 def fetch_ario_inventory() -> list[dict]:
@@ -18322,9 +18336,10 @@ def fetch_ario_inventory() -> list[dict]:
             n_yards += 1
 
     cap = max(0, int(os.environ.get("ARIO_VIN_MAX_PER_RUN", "600")))
-    fresh = _ario_vin_backfill(session, vehicles, cap)
-    if fresh:
-        _db.store_ario_vins(fresh, _iso_utc_z())
+    since = (datetime.now(timezone.utc) - timedelta(days=ARIO_VIN_MISS_RETRY_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    fresh, misses = _ario_vin_backfill(session, vehicles, cap, _db.load_ario_vin_misses(since))
+    if fresh or misses:
+        _db.store_ario_vins({**{m: "" for m in misses}, **fresh}, _iso_utc_z())
     for v in vehicles:
         v.pop("_ario_item_id", None)
         v.pop("_ario_slug", None)
