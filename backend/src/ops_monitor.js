@@ -337,12 +337,18 @@ export async function runOpsCheck(env, { now = Date.now(), dryRun = false } = {}
 function yardFlags(h) {
   if (!h || typeof h.yards !== 'object' || !h.yards) return null;
   const scraped = Date.parse(h.scrapedAt) || Date.now();
-  const dormant = [], frozen = [], carried = [];
+  const dormant = [], frozen = [], carried = [], missing = [];
   for (const [name, y] of Object.entries(h.yards)) {
     if (!y || typeof y !== 'object') continue;
-    // Absent from the scan (closed, renamed, retired): not in the live data,
-    // so neither frozen nor dormant — the health file just remembers it.
-    if (y.missingScans) continue;
+    // Absent from the scan. Retired / renamed-upstream yards are expected;
+    // anything else is a yard users can no longer see (U-Pull-R, 2026-10).
+    if (y.missingScans) {
+      const why = String(y.missingReason || '');
+      if (why !== 'retired' && !why.startsWith('renamed')) {
+        missing.push({ name, missingScans: y.missingScans, reason: why || 'unknown — adapter failing?', count: y.count, lastChangedAt: y.lastChangedAt });
+      }
+      continue;
+    }
     // Our fetch returned nothing and the scan re-served the last good copy
     // (scraper stale-keep): actionable on OUR side, listed separately.
     if (y.carried) { carried.push({ name, lastChangedAt: y.lastChangedAt, count: y.count }); continue; }
@@ -354,7 +360,8 @@ function yardFlags(h) {
   dormant.sort((a, b) => String(a.newestDateAdded).localeCompare(String(b.newestDateAdded)));
   frozen.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
   carried.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
-  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, carried };
+  missing.sort((a, b) => b.missingScans - a.missingScans);
+  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, carried, missing };
 }
 
 function nameList(items, fmt) {
@@ -416,6 +423,7 @@ function composeDaily(r) {
   if (yh && !yh.error) {
     L.push(`YARD HEALTH (yard_health.json: ${yh.yards} yards, scraped ${fmtTime(yh.scrapedAt)})`);
     L.push(`  Dormant, no new car in 120+ d: ${yh.dormant.length}${yh.dormant.length ? ' — ' + nameList(yh.dormant, (y) => `${y.name} (newest ${y.newestDateAdded})`) : ''}`);
+    L.push(`  MISSING from the scan (users can't see them): ${yh.missing.length}${yh.missing.length ? ' — ' + nameList(yh.missing, (y) => `${y.name} (${y.reason}; ${y.missingScans} scans)`) : ''}`);
     L.push(`  Re-serving last copy (fetch returned nothing): ${yh.carried.length}${yh.carried.length ? ' — ' + nameList(yh.carried, (y) => `${y.name} (since ${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
     L.push(`  Frozen, unchanged 3+ d at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
   } else {
@@ -572,6 +580,10 @@ export function composeDailyHtml(r) {
     const parts = [];
     parts.push(`<div style="font-size:14px;margin:2px 0;"><strong>${yh.dormant.length}</strong> dormant <span style="color:${C.dim};">(no new car in 120+ days)</span></div>`);
     if (yh.dormant.length) parts.push(hList(yh.dormant.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· newest ${esc(y.newestDateAdded)}</span>`)));
+    if (yh.missing.length) {
+      parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.missing.length}</strong> missing from the scan <span style="color:${C.dim};">(users can't see these yards at all)</span></div>`);
+      parts.push(hList(yh.missing.map((y) => `${esc(y.name)} <span style="color:${C.dim};">· ${esc(y.reason)} · gone ${y.missingScans} scans${y.count ? ` · had ${fmtInt(y.count)} cars` : ''}</span>`)));
+    }
     if (yh.carried.length) {
       parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.carried.length}</strong> re-serving last copy <span style="color:${C.dim};">(our fetch returned nothing — check the adapter or the source)</span></div>`);
       parts.push(hList(yh.carried.map((y) => `${esc(y.name)} <span style="color:${C.dim};">· ${fmtInt(y.count)} cars · since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`)));
@@ -666,11 +678,18 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
 
   const channels = {};
   for (const [c, s] of Object.entries(ev.stats.channels)) channels[c] = { ...s.last24h };
-  const n = ev.conditions.length;
+  // Yards missing from the scan count as an open issue: "All good" while
+  // three yards had silently vanished (U-Pull-R, 2026-10) was the failure.
+  const conds = ev.conditions.map((c) => ({ id: c.id, title: c.title }));
+  if (yardHealth && yardHealth.missing && yardHealth.missing.length) {
+    const m = yardHealth.missing;
+    conds.push({ id: 'yards-missing', title: `${m.length} yard${m.length === 1 ? '' : 's'} missing from the scan: ${m.slice(0, 4).map((y) => y.name).join(', ')}${m.length > 4 ? ` +${m.length - 4} more` : ''}` });
+  }
+  const n = conds.length;
   const report = {
     at: new Date(now).toISOString(),
     verdict: n ? `${n} issue${n === 1 ? '' : 's'}` : 'All good',
-    openConditions: ev.conditions.map((c) => ({ id: c.id, title: c.title })),
+    openConditions: conds,
     scan: { lastCommitAt: ev.facts.lastCommitAt, ageHours: ev.facts.ageHours, scrapedAt: (dir && dir.scrapedAt) || null },
     inventory: {
       yards: dir ? (Array.isArray(dir.yards) ? dir.yards.length : (dir.counts && dir.counts.yards)) : null,

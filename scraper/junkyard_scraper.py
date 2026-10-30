@@ -22163,6 +22163,8 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
 # "carried" so the daily health email can separate "our fetch failed" from
 # "the yard's own list hasn't changed" (owner, 2026-10-30).
 _CARRIED_YARDS: set[str] = set()
+# Old yard name -> new name, for yards the upstream renamed this scan.
+_RENAMED_YARDS: dict[str, str] = {}
 
 
 def apply_stale_keep(payload: dict, extras: dict) -> None:
@@ -22228,6 +22230,7 @@ def apply_stale_keep(payload: dict, extras: dict) -> None:
                         if i in fresh_yard_of and fresh_yard_of[i] != name)
         if moved and sum(moved.values()) >= STALE_KEEP_RENAME_SHARE * pc:
             dest, n_dest = moved.most_common(1)[0]
+            _RENAMED_YARDS[name] = dest
             print(f"  STALE-KEEP skipped: {name} looks RENAMED to {dest!r} "
                   f"({n_dest}/{pc} of its ids are in the fresh scan there); "
                   f"dropping the old name instead of publishing duplicates",
@@ -22334,11 +22337,26 @@ def _update_yard_health(payload: dict) -> None:
         if n in yards_out:
             continue
         miss = int(p.get("missingScans", 0)) + 1
-        if miss > YARD_MISSING_DROP:
+        # Why it's gone, when we know: retired on purpose, renamed upstream
+        # (cars now published under the new name), or the fetch is blocked /
+        # failing. Explained absences age out after YARD_MISSING_DROP scans;
+        # UNexplained ones stay until someone looks (2026-10-30: U-Pull-R's 3
+        # yards dropped out on 10-21 and were forgotten 5 days later, so the
+        # daily email never said a word).
+        reason = p.get("missingReason") or ""
+        if n in RETIRED_YARDS:
+            reason = "retired"
+        elif n in _RENAMED_YARDS:
+            reason = f"renamed to {_RENAMED_YARDS[n]}"
+        elif n in STALE_KEEP_VETO and not reason:
+            reason = "fetch blocked, no usable snapshot"
+        explained = reason == "retired" or reason.startswith("renamed")
+        if miss > YARD_MISSING_DROP and explained:
             continue
         yards_out[n] = {**{k: p[k] for k in ("count", "fingerprint", "lastChangedAt") if k in p},
                         "unchangedScans": int(p.get("unchangedScans", 0)),
-                        "missingScans": miss}
+                        "missingScans": miss,
+                        **({"missingReason": reason} if reason else {})}
         missing.append((miss, n))
 
     YARD_HEALTH_FILE.write_text(json.dumps(

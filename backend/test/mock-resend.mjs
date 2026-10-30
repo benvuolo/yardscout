@@ -36,7 +36,9 @@ const YARD_HEALTH = {
     'Ghost Yard - Lehi': { count: 60, lastChangedAt: iso(now - 9 * D), newestDateAdded: day(now - 300 * D), unchangedScans: 54 },
     'Lull Yard - Sandy': { count: 700, lastChangedAt: iso(now - 2.5 * D), newestDateAdded: day(now - 3 * D), unchangedScans: 15 },   // 2.5 d: an ordinary lull, NOT frozen
     'Carried Yard - Bartow': { count: 900, lastChangedAt: iso(now - 6 * D), newestDateAdded: day(now - 7 * D), unchangedScans: 36, carried: true },
-    'Renamed Yard - Old Name': { count: 400, lastChangedAt: iso(now - 6 * D), unchangedScans: 10, missingScans: 8 },
+    'Renamed Yard - Old Name': { count: 400, lastChangedAt: iso(now - 6 * D), unchangedScans: 10, missingScans: 8, missingReason: 'renamed to Renamed Yard - New Name' },
+    'Retired Yard - Belleville': { count: 895, lastChangedAt: iso(now - 9 * D), unchangedScans: 31, missingScans: 12, missingReason: 'retired' },
+    'Blocked Yard - Toledo': { count: 610, lastChangedAt: iso(now - 9 * D), unchangedScans: 0, missingScans: 54, missingReason: 'fetch blocked, no usable snapshot' },
   },
 };
 const INVENTORY_META = { scrapedAt: iso(now), vehicles: 1541 };
