@@ -8,6 +8,8 @@ import StoreKit
 ///
 /// JS surface (window.Capacitor.Plugins.Purchases):
 ///   getProduct({ productId })        -> { available, price?, displayName?, period? }
+///   getProduct({ productId })        -> { available, price, displayName, period,
+///                                        introPrice?, introPeriod?, introCycles? }
 ///   purchase({ productId })          -> { entitled }
 ///   restore()                        -> { entitled }
 ///   isEntitled({ productId })        -> { entitled }
@@ -43,6 +45,14 @@ public class PurchasesPlugin: CAPPlugin, CAPBridgedPlugin {
                 ]
                 if let sub = product.subscription {
                     out["period"] = "\(sub.subscriptionPeriod.value) \(sub.subscriptionPeriod.unit)"
+                    // Intro offer (2026-10-30) — shown only to people Apple says
+                    // are eligible (once per Apple ID). StoreKit applies it on
+                    // purchase by itself; this is just so the sheet can say so.
+                    if let intro = sub.introductoryOffer, await sub.isEligibleForIntroOffer {
+                        out["introPrice"] = intro.paymentMode == .freeTrial ? "Free" : intro.displayPrice
+                        out["introPeriod"] = "\(intro.period.value) \(intro.period.unit)"
+                        out["introCycles"] = intro.periodCount
+                    }
                 }
                 call.resolve(out)
             } catch {

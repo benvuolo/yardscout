@@ -28,7 +28,8 @@ import java.util.List;
  * ios/App/App/PurchasesPlugin.swift (StoreKit 2). Same JS surface, so
  * docs/app.js needs no platform branching for purchases:
  *
- *   getProduct({ productId })  -> { available, price?, displayName?, period? }
+ *   getProduct({ productId })  -> { available, price?, displayName?, period?,
+ *                                   introPrice?, introPeriod?, introCycles? }
  *   purchase({ productId })    -> { entitled } (+ cancelled / pending flags)
  *   restore()                  -> { entitled }
  *   isEntitled({ productId })  -> { entitled }
@@ -139,11 +140,32 @@ public class PurchasesPlugin extends Plugin implements PurchasesUpdatedListener 
     /** Base-plan recurring price lives in the LAST pricing phase (earlier
      *  phases are intro offers / free trials, none configured today). */
     private static ProductDetails.PricingPhase basePricingPhase(ProductDetails product) {
+        ProductDetails.SubscriptionOfferDetails o = bestOffer(product);
+        if (o == null) return null;
+        List<ProductDetails.PricingPhase> phases = o.getPricingPhases().getPricingPhaseList();
+        return phases.isEmpty() ? null : phases.get(phases.size() - 1);
+    }
+
+    /**
+     * The offer to show and buy (2026-10-30, intro price). Play lists only the
+     * offers this user is ELIGIBLE for, in no guaranteed order — the base plan
+     * (offerId null) plus e.g. a "new customer" intro offer. offers.get(0) could
+     * be the base plan and charge a first-timer full price. Prefer the offer
+     * whose first phase is cheapest; ties go to the base plan.
+     */
+    private static ProductDetails.SubscriptionOfferDetails bestOffer(ProductDetails product) {
         List<ProductDetails.SubscriptionOfferDetails> offers = product.getSubscriptionOfferDetails();
         if (offers == null || offers.isEmpty()) return null;
-        List<ProductDetails.PricingPhase> phases =
-            offers.get(0).getPricingPhases().getPricingPhaseList();
-        return phases.isEmpty() ? null : phases.get(phases.size() - 1);
+        ProductDetails.SubscriptionOfferDetails best = null;
+        long bestMicros = Long.MAX_VALUE;
+        for (ProductDetails.SubscriptionOfferDetails o : offers) {
+            List<ProductDetails.PricingPhase> phases = o.getPricingPhases().getPricingPhaseList();
+            if (phases.isEmpty()) continue;
+            long first = phases.get(0).getPriceAmountMicros();
+            boolean better = first < bestMicros || (first == bestMicros && o.getOfferId() == null);
+            if (best == null || better) { best = o; bestMicros = first; }
+        }
+        return best != null ? best : offers.get(0);
     }
 
     private static String humanPeriod(String iso) {
@@ -175,6 +197,19 @@ public class PurchasesPlugin extends Plugin implements PurchasesUpdatedListener 
                 String period = humanPeriod(phase.getBillingPeriod());
                 if (period != null) out.put("period", period);
             }
+            // Intro price (same keys as the iOS plugin): the best offer's
+            // first phase, when it's cheaper than the recurring price.
+            ProductDetails.SubscriptionOfferDetails best = bestOffer(product);
+            if (best != null && phase != null) {
+                List<ProductDetails.PricingPhase> phases = best.getPricingPhases().getPricingPhaseList();
+                ProductDetails.PricingPhase first = phases.get(0);
+                if (phases.size() > 1 && first.getPriceAmountMicros() < phase.getPriceAmountMicros()) {
+                    out.put("introPrice", first.getPriceAmountMicros() == 0 ? "Free" : first.getFormattedPrice());
+                    String ip = humanPeriod(first.getBillingPeriod());
+                    if (ip != null) out.put("introPeriod", ip);
+                    out.put("introCycles", Math.max(1, first.getBillingCycleCount()));
+                }
+            }
             call.resolve(out);
         }));
     }
@@ -187,9 +222,8 @@ public class PurchasesPlugin extends Plugin implements PurchasesUpdatedListener 
                 call.reject(error != null ? error : "Product not available.");
                 return;
             }
-            List<ProductDetails.SubscriptionOfferDetails> offers =
-                product.getSubscriptionOfferDetails();
-            if (offers == null || offers.isEmpty()) {
+            ProductDetails.SubscriptionOfferDetails offer = bestOffer(product);
+            if (offer == null) {
                 call.reject("Product not available.");
                 return;
             }
@@ -202,7 +236,7 @@ public class PurchasesPlugin extends Plugin implements PurchasesUpdatedListener 
                 .setProductDetailsParamsList(Collections.singletonList(
                     BillingFlowParams.ProductDetailsParams.newBuilder()
                         .setProductDetails(product)
-                        .setOfferToken(offers.get(0).getOfferToken())
+                        .setOfferToken(offer.getOfferToken())
                         .build()))
                 .build();
             purchaseCall = call;

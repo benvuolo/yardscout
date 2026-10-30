@@ -7643,6 +7643,22 @@ function revokeNativePro() {
  * stays (with its baked-in price) and a status line says to retry; the
  * purchase call does its own product lookup, so a tap can still succeed the
  * moment connectivity returns. */
+/* "$1.99 for your first month, then $8.99/mo" from the store's product info
+ * (introPrice / introPeriod / introCycles — see the native Purchases
+ * plugins). null when there's no offer for this person. */
+function introOfferText(p) {
+  if (!p || !p.introPrice || !p.price) return null;
+  const unit = String(p.introPeriod || '1 month').replace(/^1 /, '').replace(/s$/, '');
+  const n = Math.max(1, parseInt(p.introCycles, 10) || 1);
+  const free = /^free$/i.test(p.introPrice);
+  const span = n > 1 ? `${n} ${unit}s` : `${unit}`;
+  return {
+    button: free ? `Try free for ${n > 1 ? span : 'a ' + unit}` : `Start for ${p.introPrice}${n > 1 ? `/${unit} for ${span}` : ` — first ${unit}`}`,
+    line: free ? `Free for your first ${span}, then ${p.price}/mo. Cancel anytime.`
+      : `${p.introPrice}${n > 1 ? `/${unit}` : ''} for your first ${span}, then ${p.price}/mo. Cancel anytime.`,
+  };
+}
+
 async function refreshNativeIapUi() {
   if (!IS_NATIVE) return;
   if (isPro()) return;   // already Pro — the sheet shows the Pro state instead
@@ -7655,7 +7671,22 @@ async function refreshNativeIapUi() {
     const p = await P.getProduct({ productId: IAP_PRODUCT_ID });
     if (p && p.available) {
       const sub = document.getElementById('iap-subscribe');
-      if (sub && p.price) sub.textContent = 'Subscribe — ' + p.price + '/mo';
+      // Intro offer (2026-10-30): the store only reports it to people who are
+      // eligible (new subscribers), and applies it at checkout by itself —
+      // say it plainly on the button and in one line under it.
+      const intro = introOfferText(p);
+      if (sub && intro) sub.textContent = intro.button;
+      else if (sub && p.price) sub.textContent = 'Subscribe — ' + p.price + '/mo';
+      let line = document.getElementById('iap-intro');
+      if (intro) {
+        if (!line && sub) {
+          line = document.createElement('div');
+          line.id = 'iap-intro';
+          line.className = 'iap-intro';
+          sub.insertAdjacentElement('afterend', line);
+        }
+        if (line) line.textContent = intro.line;
+      } else if (line) line.remove();
       if (status) status.textContent = '';
     } else if (status) {
       status.textContent = 'Can\u2019t reach ' + STORE_NAME + ' right now — try again in a minute.';

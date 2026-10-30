@@ -1424,6 +1424,7 @@
   .sample-pitch strong { color: var(--accent); }
   .sample-pitch-cta { color: var(--accent); font-weight: 700; white-space: nowrap; }
   /* Quick watches (2026-10-29): strip above the Live grid + post-watch toast. */
+  .iap-intro { margin-top: 0.4rem; font-size: 0.8125rem; font-weight: 600; color: var(--accent); text-align: center; }
   .watch-strip { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.75rem; background: var(--accent-soft); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); font-size: 0.875rem; line-height: 1.4; color: var(--text); }
   .watch-strip > .ico { flex-shrink: 0; color: var(--accent); }
   .watch-strip > span { flex: 1; min-width: 0; }
