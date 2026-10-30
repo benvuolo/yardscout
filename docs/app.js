@@ -816,7 +816,8 @@ function loadVehicleExtrasFile() {
  * stopped publishing, our source froze, or rows were carried forward.
  * yard_health records when each yard's list last CHANGED and its newest
  * set-out date. Cards show "yard list unchanged since …" once a list has
- * been frozen > 2 days; a yard whose newest car is > 120 days old is
+ * been frozen > 3 days (yards set out Tue-Fri, so 2 days flagged ordinary
+ * weekday lulls — owner, 2026-10-30); a yard whose newest car is > 120 days old is
  * DORMANT: kept on the Yards tab with a warning, left out of the default
  * Cars list and the yard count (it isn't really being tracked). */
 let yardHealth = {};
@@ -825,7 +826,7 @@ function yardFrozenSince(loc) {
   const h = yardHealth[loc];
   if (!h || !h.lastChangedAt || !liveScrapedAt) return null;
   const changed = Date.parse(h.lastChangedAt), scanned = Date.parse(liveScrapedAt);
-  return (scanned - changed) > 2 * 86400000 ? new Date(changed) : null;
+  return (scanned - changed) > 3 * 86400000 ? new Date(changed) : null;
 }
 function formatYardDate(iso) {
   const d = parseYardDate(iso);

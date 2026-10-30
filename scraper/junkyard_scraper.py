@@ -22154,6 +22154,13 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
     return carried
 
 
+# Yards whose rows the current scan re-served from the previous publish
+# (fetch returned nothing/too little). _update_yard_health marks them
+# "carried" so the daily health email can separate "our fetch failed" from
+# "the yard's own list hasn't changed" (owner, 2026-10-30).
+_CARRIED_YARDS: set[str] = set()
+
+
 def apply_stale_keep(payload: dict, extras: dict) -> None:
     """Compare the fresh payload against the last published LIVE_FILE and carry
     forward any yard that vanished or collapsed below STALE_KEEP_FLOOR of its
@@ -22230,10 +22237,12 @@ def apply_stale_keep(payload: dict, extras: dict) -> None:
             continue
         to_carry.append(name)
 
+    _CARRIED_YARDS.clear()
     if not to_carry:
         return
     carried = merge_carryforward_yards(payload, prev, to_carry,
                                        new_extras=extras, prev_extras=prev_extras)
+    _CARRIED_YARDS.update(n for n in to_carry if carried.get(n))
     for name in to_carry:
         print(f"  ⚠️  STALE-KEEP: {name} fetched {new_counts.get(name, 0)} vehicles "
               f"(previously {prev_counts[name]}) — carrying forward {carried.get(name, 0)} "
@@ -22298,7 +22307,8 @@ def _update_yard_health(payload: dict) -> None:
             last_changed = now
         yards_out[n] = {"count": len(per_yard[n]), "fingerprint": fp,
                         "unchangedScans": unchanged, "lastChangedAt": last_changed,
-                        **({"newestDateAdded": newest[n]} if newest[n] else {})}
+                        **({"newestDateAdded": newest[n]} if newest[n] else {}),
+                        **({"carried": True} if n in _CARRIED_YARDS else {})}
         if unchanged >= YARD_STALE_SCANS:
             stale.append((unchanged, n, len(per_yard[n])))
         # A feed can keep CHANGING (departures hidden) while receiving no

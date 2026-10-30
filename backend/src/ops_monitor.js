@@ -37,7 +37,7 @@ const REALERT_MS = 6 * H;
 const RESEND_DAILY_CAP = 100;
 const RESEND_WARN_AT = 90;
 const DORMANT_MS = 120 * DAY;
-const FROZEN_MS = 2 * DAY;
+const FROZEN_MS = 3 * DAY;   // yards set out Tue-Fri; 2 d flagged ordinary weekday lulls (owner, 2026-10-30)
 const COUNTER_RETENTION_DAYS = 60;
 const STATE_KEY = 'ops:alert-state';
 const MAX_YARD_NAMES = 40;
@@ -337,9 +337,15 @@ export async function runOpsCheck(env, { now = Date.now(), dryRun = false } = {}
 function yardFlags(h) {
   if (!h || typeof h.yards !== 'object' || !h.yards) return null;
   const scraped = Date.parse(h.scrapedAt) || Date.now();
-  const dormant = [], frozen = [];
+  const dormant = [], frozen = [], carried = [];
   for (const [name, y] of Object.entries(h.yards)) {
     if (!y || typeof y !== 'object') continue;
+    // Absent from the scan (closed, renamed, retired): not in the live data,
+    // so neither frozen nor dormant — the health file just remembers it.
+    if (y.missingScans) continue;
+    // Our fetch returned nothing and the scan re-served the last good copy
+    // (scraper stale-keep): actionable on OUR side, listed separately.
+    if (y.carried) { carried.push({ name, lastChangedAt: y.lastChangedAt, count: y.count }); continue; }
     const newest = y.newestDateAdded ? Date.parse(String(y.newestDateAdded).slice(0, 10) + 'T00:00:00Z') : NaN;
     if (Number.isFinite(newest) && scraped - newest > DORMANT_MS) dormant.push({ name, newestDateAdded: y.newestDateAdded });
     const changed = y.lastChangedAt ? Date.parse(y.lastChangedAt) : NaN;
@@ -347,7 +353,8 @@ function yardFlags(h) {
   }
   dormant.sort((a, b) => String(a.newestDateAdded).localeCompare(String(b.newestDateAdded)));
   frozen.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
-  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen };
+  carried.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
+  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, carried };
 }
 
 function nameList(items, fmt) {
@@ -409,7 +416,8 @@ function composeDaily(r) {
   if (yh && !yh.error) {
     L.push(`YARD HEALTH (yard_health.json: ${yh.yards} yards, scraped ${fmtTime(yh.scrapedAt)})`);
     L.push(`  Dormant, no new car in 120+ d: ${yh.dormant.length}${yh.dormant.length ? ' — ' + nameList(yh.dormant, (y) => `${y.name} (newest ${y.newestDateAdded})`) : ''}`);
-    L.push(`  Frozen, unchanged 2+ d: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    L.push(`  Re-serving last copy (fetch returned nothing): ${yh.carried.length}${yh.carried.length ? ' — ' + nameList(yh.carried, (y) => `${y.name} (since ${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    L.push(`  Frozen, unchanged 3+ d at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
   } else {
     L.push(`YARD HEALTH: could not load yard_health.json (${(yh && yh.error) || 'unknown'})`);
   }
@@ -564,7 +572,11 @@ export function composeDailyHtml(r) {
     const parts = [];
     parts.push(`<div style="font-size:14px;margin:2px 0;"><strong>${yh.dormant.length}</strong> dormant <span style="color:${C.dim};">(no new car in 120+ days)</span></div>`);
     if (yh.dormant.length) parts.push(hList(yh.dormant.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· newest ${esc(y.newestDateAdded)}</span>`)));
-    parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> frozen <span style="color:${C.dim};">(yard list unchanged 2+ days)</span></div>`);
+    if (yh.carried.length) {
+      parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.carried.length}</strong> re-serving last copy <span style="color:${C.dim};">(our fetch returned nothing — check the adapter or the source)</span></div>`);
+      parts.push(hList(yh.carried.map((y) => `${esc(y.name)} <span style="color:${C.dim};">· ${fmtInt(y.count)} cars · since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`)));
+    }
+    parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> frozen <span style="color:${C.dim};">(the yard's own list unchanged 3+ days)</span></div>`);
     if (yh.frozen.length) parts.push(hList(yh.frozen.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`))
       + (yh.frozen.length > MAX_YARD_NAMES ? hMuted(`+${yh.frozen.length - MAX_YARD_NAMES} more`) : ''));
     S.push(hSection('Yard health', parts.join(''), `${yh.yards} yards checked`));
