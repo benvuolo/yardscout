@@ -1404,6 +1404,7 @@ function invKick() {
       } else {
         _invMaybeApply(s);
       }
+      if (s.onView) s.onView();   // a pump holding for a view (see _invNoView)
       if (!s.pumping) _invPump(s);
     }
   }, 0);
@@ -1421,6 +1422,9 @@ function _invIdle() {
  * parses, so the link never sits idle). Re-reads the view every turn, so a
  * zip entered mid-load is served next. */
 const INV_BACKGROUND_PARALLEL = 2;
+function _invNoView() {
+  return !activeZipCoords && !isPro() && !focusedCarKey && !loadWatchlist().length;
+}
 async function _invPump(s) {
   if (s.pumping) return;
   s.pumping = true;
@@ -1441,6 +1445,13 @@ async function _invPump(s) {
         _invMaybeApply(s);
         if (s.done || s.stopped || s.failed) break;
         if (s.inflight.size >= INV_BACKGROUND_PARALLEL) { await settle(); continue; }
+        // No view yet (2026-10-30): a free visitor who hasn't entered a zip
+        // sees nothing, so background regions bought nothing — and once the
+        // price lists stopped loading up front, two of them were mid-download
+        // when the zip arrived, holding up that zip's own shards (1.6 Mbps:
+        // first card 27 s -> 31 s after a 5 s pause to type). Wait for a
+        // view (invKick wakes this); watches still need the whole scan.
+        if (_invNoView()) { await new Promise(r => { s.onView = r; }); s.onView = null; continue; }
         const next = _invNextShard(s);
         if (next == null) {
           if (!s.inflight.size) break;      // all parsed
