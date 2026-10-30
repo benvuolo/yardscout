@@ -45,7 +45,10 @@ echo "── starting wrangler dev on :$PORT (fresh local KV state)"
 rm -rf .wrangler/state
 npx wrangler dev --port $PORT --local > "$OUT/wrangler.log" 2>&1 &
 WPID=$!
-trap 'kill $WPID 2>/dev/null || true' EXIT
+# npx -> wrangler -> workerd: kill the whole tree, or workerd keeps the port
+# and the restart below silently talks to the OLD server (no Google vars).
+kill_tree() { local c; for c in $(pgrep -P "$1" 2>/dev/null); do kill_tree "$c"; done; kill "$1" 2>/dev/null || true; }
+trap 'kill_tree $WPID' EXIT
 for i in $(seq 1 60); do
   sleep 1
   if curl -s -o /dev/null "$BASE/api/ent/status?token=$(printf '0%.0s' {1..64})"; then break; fi
@@ -190,7 +193,7 @@ MOCKPORT=${MOCKPORT:-8798}
 echo "── starting the Play mock on :$MOCKPORT + restarting wrangler with Google vars"
 node test/mock-play.mjs $MOCKPORT "$OUT" > "$OUT/mock-play.log" 2>&1 &
 MPID=$!
-trap 'kill $WPID $MPID 2>/dev/null || true' EXIT
+trap 'kill_tree $WPID; kill $MPID 2>/dev/null || true' EXIT
 for i in $(seq 1 20); do
   sleep 0.5
   if curl -s -o /dev/null "http://127.0.0.1:$MOCKPORT/ping"; then break; fi
@@ -206,10 +209,11 @@ GOOGLE_SA_KEY=$SA_KEY_ONELINE
 GOOGLE_TOKEN_URL_TEST=http://127.0.0.1:$MOCKPORT/token
 GOOGLE_PLAY_API_URL_TEST=http://127.0.0.1:$MOCKPORT
 EOF
-kill $WPID 2>/dev/null || true; wait $WPID 2>/dev/null || true
+kill_tree $WPID; wait $WPID 2>/dev/null || true
+for i in $(seq 1 20); do curl -s -o /dev/null "$BASE/" || break; sleep 0.5; done   # port actually free
 npx wrangler dev --port $PORT --local > "$OUT/wrangler2.log" 2>&1 &
 WPID=$!
-trap 'kill $WPID $MPID 2>/dev/null || true' EXIT
+trap 'kill_tree $WPID; kill $MPID 2>/dev/null || true' EXIT
 for i in $(seq 1 60); do
   sleep 1
   if curl -s -o /dev/null "$BASE/api/ent/status?token=$(printf '0%.0s' {1..64})"; then break; fi
