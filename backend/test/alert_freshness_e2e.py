@@ -130,8 +130,12 @@ def wait_for(page, expr, timeout_s=15):
 
 def new_page(browser):
     ctx = browser.new_context()  # fresh storage: scenarios stay independent
+    # A saved zip (Ogden, where the test yard is): since 2026-10-30 a free
+    # visitor with no zip/watch/link doesn't load inventory in the background
+    # at all, and alert users always have one of those.
     ctx.add_init_script("try { localStorage.setItem('jh_honesty_ack','1');"
-                        " localStorage.setItem('ys_install_hint','1'); } catch(e) {}")
+                        " localStorage.setItem('ys_install_hint','1');"
+                        " if (!localStorage.getItem('jh_zip')) localStorage.setItem('jh_zip','84401'); } catch(e) {}")
     return ctx, ctx.new_page()
 
 
