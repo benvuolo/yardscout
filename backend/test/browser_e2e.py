@@ -102,12 +102,17 @@ def run_browser():
 
         # ── 1. default state: API OFF, static file loads as before ──────────
         page.goto(f"{WEB}/index.html", wait_until="domcontentloaded")
+        # A saved zip: a free visitor with no zip/watch/link loads nothing in
+        # the background (2026-10-30), so give this one a view first.
+        page.evaluate("localStorage.setItem('jh_zip', '84101')")
+        page.reload(wait_until="domcontentloaded")
         page.wait_for_function("typeof liveLoaded !== 'undefined' && liveLoaded === true", timeout=30000)
         # Radius-first shards: liveLoaded fires once the nearby shards are in;
         # the national total arrives when the background load completes.
         page.wait_for_function("typeof liveComplete !== 'undefined' && liveComplete === true", timeout=120000)
         check("flag OFF: static inventory path still works",
               page.evaluate("liveInventory.length") > 100000)
+        page.evaluate("localStorage.removeItem('jh_zip')")   # later phases run zip-less as before
         check("flag OFF: account UI stays hidden",
               page.evaluate("document.getElementById('account-wrap').style.display") == "none")
 
