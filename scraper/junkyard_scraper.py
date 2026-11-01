@@ -19196,12 +19196,20 @@ def fetch_byot_inventory() -> list[dict]:
     recent-arrivals call per yard returns the yard's whole lot."""
     vehicles: list[dict] = []
     for yard in BYOT_YARDS:
-        try:
-            rows = _byot_get(
-                f"/inventory/yard/vehicles/recent-arrivals?limit={BYOT_LIMIT}",
-                yard["location"])
-        except Exception as e:
-            print(f"  [BYOT] {yard['code']}: fetch failed: {e}", file=sys.stderr)
+        rows = None
+        # One retry: Baton Rouge's whole-lot query timed out at their gateway
+        # (HTTP 504) on 2026-11-01 while the other four answered.
+        for attempt in (1, 2):
+            try:
+                rows = _byot_get(
+                    f"/inventory/yard/vehicles/recent-arrivals?limit={BYOT_LIMIT}",
+                    yard["location"])
+                break
+            except Exception as e:
+                print(f"  [BYOT] {yard['code']}: fetch failed (attempt {attempt}): {e}", file=sys.stderr)
+                if attempt == 1:
+                    time.sleep(30)
+        if rows is None:
             continue
         if not isinstance(rows, list):
             print(f"  [BYOT] {yard['code']}: unexpected response shape — API changed?",
@@ -22270,6 +22278,12 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
 _CARRIED_YARDS: set[str] = set()
 # Old yard name -> new name, for yards the upstream renamed this scan.
 _RENAMED_YARDS: dict[str, str] = {}
+# Renames that predate the per-scan detection above (it only sees a rename on
+# the scan where it happens). Same store codes and coordinates.
+KNOWN_YARD_RENAMES: dict[str, str] = {
+    "Pick Your Part - San Bernadino": "Pick Your Part - San Bernardino",          # LKQ, 2026-10-24
+    "Pick Your Part - Wilmington Help Yourself": "Pick Your Part - Help Yourself",  # LKQ, 2026-10-24
+}
 
 
 def apply_stale_keep(payload: dict, extras: dict) -> None:
@@ -22451,8 +22465,8 @@ def _update_yard_health(payload: dict) -> None:
         reason = p.get("missingReason") or ""
         if n in RETIRED_YARDS:
             reason = "retired"
-        elif n in _RENAMED_YARDS:
-            reason = f"renamed to {_RENAMED_YARDS[n]}"
+        elif n in _RENAMED_YARDS or n in KNOWN_YARD_RENAMES:
+            reason = f"renamed to {_RENAMED_YARDS.get(n) or KNOWN_YARD_RENAMES[n]}"
         elif n in STALE_KEEP_VETO and not reason:
             reason = "fetch blocked, no usable snapshot"
         explained = reason == "retired" or reason.startswith("renamed")
