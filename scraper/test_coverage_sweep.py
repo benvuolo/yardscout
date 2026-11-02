@@ -146,6 +146,26 @@ out, skipped, notes = cs.run(None, known=known, site=fs, max_sites=1,
 check("run: tracked yard skipped", skipped == {"tracked": 1}, str(skipped))
 check("run: budget respected", fs.gets == ["https://n1.example/"] and out[1].evidence.startswith("not checked"), str(fs.gets))
 check("run: notes carry source errors and the cap", any("Ario" in n for n in notes) and any("capped" in n for n in notes), str(notes))
+# time budget: a fake clock that jumps 10 minutes per check
+tick = [0.0]
+def clock():
+    return tick[0]
+class SlowSite(FakeSite):
+    def get(self, url):
+        tick[0] += 600
+        return super().get(url)
+many = [cs.Candidate(name=f"U-Pull {i}", lat=40 + i, lng=-100.0, website=f"https://s{i}.example/") for i in range(6)]
+ss = SlowSite({f"https://s{i}.example/": (200, "hours") for i in range(6)})
+out3, _, notes3 = cs.run(None, known=[], site=ss, osm_fetch=lambda s, deadline=None: (many, ""),
+                         ario_fetch=lambda s: ([], ""), budget_min=30, clock=clock)
+check("run: time budget stops site checks, report still complete",
+      len(out3) == 6 and sum(1 for c in out3 if "time budget" in c.evidence) == 2 and any("Time budget" in n for n in notes3),
+      f"{[c.evidence for c in out3]} {notes3}")
+fo2 = FakeOverpass({(m, "NE"): FakeResp(200, el)})
+got2, err2 = cs.fetch_osm(fo2, states=("NE", "IA"), pause=0, deadline=1.0)
+check("osm: deadline in the past skips the remaining states", got2 == [] and "time budget reached before NE, IA" in err2, err2)
+
+
 def boom(_):
     raise RuntimeError("needs cryptography")
 out2, _, notes2 = cs.run(None, known=known, site=FakeSite({}), osm_fetch=lambda s: ([], ""), ario_fetch=boom)

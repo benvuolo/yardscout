@@ -37,7 +37,7 @@ jobs:
       - run: pip install requests beautifulsoup4 rich cryptography
       - name: Sweep
         run: |
-          python scraper/coverage_sweep.py --max-sites "${{ github.event.inputs.max_sites || '400' }}" \
+          python scraper/coverage_sweep.py --budget-min 70 --max-sites "${{ github.event.inputs.max_sites || '400' }}" \
             ${{ github.event.inputs.osm == 'false' && '--no-osm' || '' }}
           { echo "## Coverage sweep"; sed -n '1,/^## /p' scraper/coverage_sweep.md | sed '$d'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Commit the report

@@ -71,6 +71,7 @@ UA = "YardScout/1.12 (+https://yardscout.io)"
 SITE_DELAY_SEC = 1.5
 TIMEOUT = 20
 MATCH_KM = 3.0
+OSM_TIMEOUT = 120         # per Overpass request
 ARIO_MIN_ROWS = 50        # an Ario yard counts as live with this many rows...
 ARIO_FRESH_DAYS = 30      # ...and a set-out within this many days
 US_STATES = ("AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ "
@@ -272,16 +273,21 @@ def parse_overpass(data: dict) -> list[Candidate]:
     return out
 
 
-def fetch_osm(session, states=US_STATES, pause: float = 3.0) -> tuple[list[Candidate], str]:
+def fetch_osm(session, states=US_STATES, pause: float = 3.0, deadline: float | None = None) -> tuple[list[Candidate], str]:
     """One Overpass query per state (a nationwide regex times out), each tried
-    on the main server then a mirror. Failed states are named in the note."""
+    on the main server then a mirror. Stops at `deadline` (epoch seconds);
+    failed or skipped states are named in the note."""
     out: list[Candidate] = []
     failed: list[str] = []
-    for st in states:
+    skipped: list[str] = []
+    for i, st in enumerate(states):
+        if deadline and time.time() > deadline:
+            skipped = list(states[i:])
+            break
         got = None
         for url in OVERPASS_URLS:
             try:
-                r = session.post(url, data={"data": overpass_query(st)}, timeout=240, headers={"User-Agent": UA})
+                r = session.post(url, data={"data": overpass_query(st)}, timeout=OSM_TIMEOUT, headers={"User-Agent": UA})
                 if r.status_code == 200:
                     got = parse_overpass(r.json())
                     break
@@ -295,9 +301,15 @@ def fetch_osm(session, states=US_STATES, pause: float = 3.0) -> tuple[list[Candi
             for c in got:
                 c.state = c.state or st
             out += got
+        print(f"  osm {st}: {'failed' if got is None else len(got)}", flush=True)
         if pause:
             time.sleep(pause)
-    return out, (f"Overpass failed for {', '.join(failed)}" if failed else "")
+    msg = []
+    if failed:
+        msg.append(f"Overpass failed for {', '.join(failed)}")
+    if skipped:
+        msg.append(f"time budget reached before {', '.join(skipped)}")
+    return out, "; ".join(msg)
 
 
 def fetch_ario(session) -> tuple[list[Candidate], str]:
@@ -488,16 +500,23 @@ def render_md(cands: list[Candidate], skipped: dict, notes: list[str], when: str
 
 def run(session, use_osm: bool = True, use_ario: bool = True, max_sites: int = 400,
         known: list[Known] | None = None, site: Site | None = None,
-        osm_fetch=fetch_osm, ario_fetch=fetch_ario) -> tuple[list[Candidate], dict, list[str]]:
+        osm_fetch=fetch_osm, ario_fetch=fetch_ario, budget_min: float | None = None,
+        clock=time.time) -> tuple[list[Candidate], dict, list[str]]:
+    """budget_min: total minutes. Discovery may use 45% of it, website checks
+    the rest; whatever is left unchecked is listed as such, and the report is
+    always written."""
     known = load_known() if known is None else known
     site = site or Site(session)
     notes: list[str] = []
     raw: list[Candidate] = []
+    t0 = clock()
+    end = t0 + budget_min * 60 if budget_min else None
+    osm_end = t0 + budget_min * 60 * 0.45 if budget_min else None
     for on, label, fetch in ((use_ario, "Ario", ario_fetch), (use_osm, "OpenStreetMap", osm_fetch)):
         if not on:
             continue
         try:
-            got, err = fetch(session)
+            got, err = fetch(session, deadline=osm_end) if label == "OpenStreetMap" and osm_end else fetch(session)
         except Exception as e:  # one broken source must not sink the sweep
             got, err = [], f"{type(e).__name__}: {str(e)[:120]}"
         raw += got
@@ -506,6 +525,7 @@ def run(session, use_osm: bool = True, use_ario: bool = True, max_sites: int = 4
     out: list[Candidate] = []
     skipped: dict[str, int] = {}
     checked = 0
+    timed_out = False
     for c in raw:
         k = match_known(c.name, c.city, c.state, c.lat, c.lng, known)
         if k:
@@ -514,12 +534,19 @@ def run(session, use_osm: bool = True, use_ario: bool = True, max_sites: int = 4
         if not c.tier:
             if checked >= max_sites:
                 c.tier, c.evidence = "E", "not checked (site budget reached)"
+            elif end and clock() > end:
+                c.tier, c.evidence = "E", "not checked (time budget reached)"
+                timed_out = True
             else:
                 check_site(c, site)
                 checked += 1
+                if checked % 25 == 0:
+                    print(f"  checked {checked} sites", flush=True)
         out.append(c)
     if checked >= max_sites:
         notes.append(f"Website checks capped at {max_sites}.")
+    if timed_out:
+        notes.append(f"Time budget ({budget_min:g} min) reached after {checked} website checks; re-run to cover the rest.")
     return out, skipped, notes
 
 
@@ -528,13 +555,14 @@ def main(argv=None) -> int:
     ap.add_argument("--no-osm", action="store_true")
     ap.add_argument("--no-ario", action="store_true")
     ap.add_argument("--max-sites", type=int, default=400)
+    ap.add_argument("--budget-min", type=float, default=70, help="total time budget; the report is always written")
     args = ap.parse_args(argv)
     if requests is None:
         print("::error::python 'requests' is required")
         return 2
     session = requests.Session()
     cands, skipped, notes = run(session, use_osm=not args.no_osm, use_ario=not args.no_ario,
-                                max_sites=args.max_sites)
+                                max_sites=args.max_sites, budget_min=args.budget_min)
     when = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     OUT_MD.write_text(render_md(cands, skipped, notes, when))
     OUT_JSON.write_text(json.dumps({"at": when, "skipped": skipped, "notes": notes,
