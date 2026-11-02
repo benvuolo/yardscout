@@ -18,7 +18,7 @@ const API = 'https://yardscout-api.yardscout.workers.dev';
 const SITE = 'https://yardscout.io';
 export const IOS_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
 export const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
-const OG_IMAGE = SITE + '/og-card.png';
+const OG_IMAGE = SITE + '/og-card.png?v=2';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
