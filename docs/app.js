@@ -6349,14 +6349,21 @@ function watchlistMatches(entry, v) {
   // Canonicalize BOTH makes: a watch saved as "MINI Cooper" or "Vw" before
   // the 2026-10 make merge must keep matching the merged inventory.
   const makeLow = canonicalMake(entry.make).toLowerCase();
-  const modelLow = (entry.model || '').toLowerCase();
+  let modelLow = (entry.model || '').toLowerCase().trim();
+  // Older watches carry their own make in the model ("Infiniti G35"); drop it.
+  // Same rule as watchModelLow in backend/src/alerts.js.
+  for (const mk of [makeLow, String(entry.make || '').toLowerCase().trim()]) {
+    if (mk && modelLow.startsWith(mk + ' ')) { modelLow = modelLow.slice(mk.length + 1).trim(); break; }
+  }
   if (makeLow && !canonicalMake(v.make).toLowerCase().includes(makeLow)) return false;
   if (modelLow) {
     // Match raw yard spelling OR the canonical alias (so a watch for "WRX"
-    // catches a car a yard filed as "Impreza WRX", and vice versa).
+    // catches a car a yard filed as "Impreza WRX", and vice versa). The
+    // server's watchMatches uses the same rule, so what lights up here is
+    // what gets pushed.
     const rawMatch = (v.model || '').toLowerCase().includes(modelLow);
     const canonMatch = String(canonicalModel(v.make, v.model) || '').toLowerCase()
-      === String(canonicalModel(entry.make, entry.model) || '').toLowerCase();
+      === String(canonicalModel(entry.make, modelLow) || '').toLowerCase();
     if (!rawMatch && !canonMatch) return false;
   }
   if (entry.yrMin && v.year < entry.yrMin) return false;
