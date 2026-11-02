@@ -927,7 +927,15 @@ function yardFrozenSince(loc) {
   const h = yardHealth[loc];
   if (!h || !h.lastChangedAt || !liveScrapedAt) return null;
   const changed = Date.parse(h.lastChangedAt), scanned = Date.parse(liveScrapedAt);
-  return (scanned - changed) > 3 * 86400000 ? new Date(changed) : null;
+  // Counted in weekdays: yards set out Mon-Fri, so a list last changed on
+  // Friday is one weekday old on Monday, not three (2026-11-02).
+  let weekdays = 0;
+  const d = new Date(changed); d.setUTCHours(0, 0, 0, 0);
+  const end = new Date(scanned); end.setUTCHours(0, 0, 0, 0);
+  for (d.setUTCDate(d.getUTCDate() + 1); d <= end; d.setUTCDate(d.getUTCDate() + 1)) {
+    if (d.getUTCDay() !== 0 && d.getUTCDay() !== 6) weekdays++;
+  }
+  return weekdays >= 3 ? new Date(changed) : null;
 }
 function formatYardDate(iso) {
   const d = parseYardDate(iso);

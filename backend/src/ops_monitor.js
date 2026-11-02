@@ -37,7 +37,21 @@ const REALERT_MS = 6 * H;
 const RESEND_DAILY_CAP = 100;
 const RESEND_WARN_AT = 90;
 const DORMANT_MS = 120 * DAY;
-const FROZEN_MS = 3 * DAY;   // yards set out Tue-Fri; 2 d flagged ordinary weekday lulls (owner, 2026-10-30)
+// Yards set out Mon-Fri, so "unchanged" is measured in WEEKDAYS: a list
+// last changed Friday is 1 weekday old on Monday morning, not 3 (2026-11-02:
+// a Monday email listed 35 'frozen' yards, most of them just the weekend).
+const FROZEN_WEEKDAYS = 3;
+function weekdaysBetween(fromMs, toMs) {
+  if (!(toMs > fromMs)) return 0;
+  let n = 0;
+  const d = new Date(fromMs); d.setUTCHours(0, 0, 0, 0);
+  const end = new Date(toMs); end.setUTCHours(0, 0, 0, 0);
+  for (d.setUTCDate(d.getUTCDate() + 1); d <= end; d.setUTCDate(d.getUTCDate() + 1)) {
+    const w = d.getUTCDay();
+    if (w !== 0 && w !== 6) n++;
+  }
+  return n;
+}
 const COUNTER_RETENTION_DAYS = 60;
 const STATE_KEY = 'ops:alert-state';
 const MAX_YARD_NAMES = 40;
@@ -395,7 +409,7 @@ function yardFlags(h) {
     const newest = y.newestDateAdded ? Date.parse(String(y.newestDateAdded).slice(0, 10) + 'T00:00:00Z') : NaN;
     if (Number.isFinite(newest) && scraped - newest > DORMANT_MS) dormant.push({ name, newestDateAdded: y.newestDateAdded });
     const changed = y.lastChangedAt ? Date.parse(y.lastChangedAt) : NaN;
-    if (Number.isFinite(changed) && scraped - changed > FROZEN_MS) frozen.push({ name, lastChangedAt: y.lastChangedAt });
+    if (Number.isFinite(changed) && weekdaysBetween(changed, scraped) >= FROZEN_WEEKDAYS) frozen.push({ name, lastChangedAt: y.lastChangedAt });
   }
   dormant.sort((a, b) => String(a.newestDateAdded).localeCompare(String(b.newestDateAdded)));
   frozen.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
@@ -472,7 +486,7 @@ function composeDaily(r) {
     L.push(`  Dormant, no new car in 120+ d: ${yh.dormant.length}${yh.dormant.length ? ' — ' + nameList(yh.dormant, (y) => `${y.name} (newest ${y.newestDateAdded})`) : ''}`);
     L.push(`  MISSING from the scan (users can't see them): ${yh.missing.length}${yh.missing.length ? ' — ' + nameList(yh.missing, (y) => `${y.name} (${y.reason}; ${y.missingScans} scans)`) : ''}`);
     L.push(`  Re-serving last copy (fetch returned nothing): ${yh.carried.length}${yh.carried.length ? ' — ' + nameList(yh.carried, (y) => `${y.name} (since ${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
-    L.push(`  Frozen, unchanged 3+ d at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    L.push(`  Frozen, unchanged 3+ weekdays at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
   } else {
     L.push(`YARD HEALTH: could not load yard_health.json (${(yh && yh.error) || 'unknown'})`);
   }
@@ -636,7 +650,7 @@ export function composeDailyHtml(r) {
       parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.carried.length}</strong> re-serving last copy <span style="color:${C.dim};">(our fetch returned nothing — check the adapter or the source)</span></div>`);
       parts.push(hList(yh.carried.map((y) => `${esc(y.name)} <span style="color:${C.dim};">· ${fmtInt(y.count)} cars · since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`)));
     }
-    parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> frozen <span style="color:${C.dim};">(the yard's own list unchanged 3+ days)</span></div>`);
+    parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> frozen <span style="color:${C.dim};">(the yard's own list unchanged 3+ weekdays)</span></div>`);
     if (yh.frozen.length) parts.push(hList(yh.frozen.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`))
       + (yh.frozen.length > MAX_YARD_NAMES ? hMuted(`+${yh.frozen.length - MAX_YARD_NAMES} more`) : ''));
     S.push(hSection('Yard health', parts.join(''), `${yh.yards} yards checked`));

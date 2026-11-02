@@ -32,9 +32,9 @@ const YARD_HEALTH = {
   yards: {
     'Healthy Yard - Ogden': { count: 900, lastChangedAt: iso(now - 3600_000), newestDateAdded: day(now - D), unchangedScans: 0 },
     'Dormant Yard - Orem': { count: 80, lastChangedAt: iso(now - 3600_000), newestDateAdded: day(now - 200 * D), unchangedScans: 0 },
-    'Frozen Yard - Provo': { count: 500, lastChangedAt: iso(now - 5 * D), newestDateAdded: day(now - 6 * D), unchangedScans: 30 },
+    'Frozen Yard - Provo': { count: 500, lastChangedAt: iso(now - 7 * D), newestDateAdded: day(now - 8 * D), unchangedScans: 42 },   // 7 d = 5 weekdays whatever today is
     'Ghost Yard - Lehi': { count: 60, lastChangedAt: iso(now - 9 * D), newestDateAdded: day(now - 300 * D), unchangedScans: 54 },
-    'Lull Yard - Sandy': { count: 700, lastChangedAt: iso(now - 2.5 * D), newestDateAdded: day(now - 3 * D), unchangedScans: 15 },   // 2.5 d: an ordinary lull, NOT frozen
+    'Lull Yard - Sandy': { count: 700, lastChangedAt: iso(now - 1.5 * D), newestDateAdded: day(now - 2 * D), unchangedScans: 9 },   // 1.5 d = at most 2 weekdays: an ordinary lull, NOT frozen
     'Carried Yard - Bartow': { count: 900, lastChangedAt: iso(now - 6 * D), newestDateAdded: day(now - 7 * D), unchangedScans: 36, carried: true },
     'Renamed Yard - Old Name': { count: 400, lastChangedAt: iso(now - 6 * D), unchangedScans: 10, missingScans: 8, missingReason: 'renamed to Renamed Yard - New Name' },
     'Retired Yard - Belleville': { count: 895, lastChangedAt: iso(now - 9 * D), unchangedScans: 31, missingScans: 12, missingReason: 'retired' },
