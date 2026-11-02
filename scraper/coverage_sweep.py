@@ -71,7 +71,8 @@ UA = "YardScout/1.12 (+https://yardscout.io)"
 SITE_DELAY_SEC = 1.5
 TIMEOUT = 20
 MATCH_KM = 3.0
-OSM_TIMEOUT = 120         # per Overpass request
+OSM_TIMEOUT = 60          # per Overpass request
+OSM_GIVE_UP_AFTER = 3     # consecutive failed states before discovery stops
 ARIO_MIN_ROWS = 50        # an Ario yard counts as live with this many rows...
 ARIO_FRESH_DAYS = 30      # ...and a set-out within this many days
 US_STATES = ("AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ "
@@ -87,8 +88,13 @@ OSM_NAME_RE = (
     "|pi[ck]k?[- ]?a[- ]?part|self[- ]?serv(e|ice)[^;]*(auto|salvage|parts|yard)"
     "|u[- ]?pick[- ]?(it|a|parts)|wrench[- ]?a[- ]?part|tear[- ]?a[- ]?part"
 )
-_YARD_WORDS = re.compile(
-    r"pull|pick[- ]?(a|n|ur|your|it)[- ]?(part|pull|pay)|pik[- ]?a[- ]?part|part|salvage|auto|wreck|yard|recycl|junk",
+# Whole yard phrases on word boundaries: "Casapulla's Subs", "Lilly Pulitzer"
+# and "Epic Apartments" all contain an Overpass hit but none of these.
+_YARD_PHRASE = re.compile(
+    r"\b(u|you)[- ]?pull\b|\bpull[- ]?(a|n|and|&|it|r|your)\b([- ]?(part|parts|save|pay|own)\b)?"
+    r"|\bpick[- ]?(a|n|ur|your|&|and|it)[- ]?(part|parts|pull|pay)\b|\bpi[ck]k?[- ]?a[- ]?part\b"
+    r"|\bself[- ]?serv(e|ice)\b.*\b(auto|salvage|parts|yard)\b|\bu[- ]?pick[- ]?(it|a|parts)\b"
+    r"|\b(wrench|tear)[- ]?a[- ]?part\b",
     re.I)
 _NOT_A_YARD = re.compile(
     r"berr|farm|orchard|pumpkin|apple|peach|flower|christmas|tree|fruit|vegetable|garden|vineyard|"
@@ -106,7 +112,7 @@ def looks_like_yard(name: str, tags: dict | None = None) -> bool:
     tags = tags or {}
     if any((k, tags.get(k)) in _NOT_A_YARD_TAGS for k, _ in _NOT_A_YARD_TAGS):
         return False
-    return bool(_YARD_WORDS.search(name))
+    return bool(_YARD_PHRASE.search(name))
 
 
 # ---------------------------------------------------------------- platforms
@@ -297,6 +303,10 @@ def fetch_osm(session, states=US_STATES, pause: float = 3.0, deadline: float | N
                 pass
         if got is None:
             failed.append(st)
+            if len(failed) >= OSM_GIVE_UP_AFTER and failed[-OSM_GIVE_UP_AFTER:] == list(states[i - OSM_GIVE_UP_AFTER + 1:i + 1]):
+                skipped = list(states[i + 1:])
+                print(f"  osm {st}: failed — Overpass unavailable, stopping discovery", flush=True)
+                break
         else:
             for c in got:
                 c.state = c.state or st
@@ -308,7 +318,7 @@ def fetch_osm(session, states=US_STATES, pause: float = 3.0, deadline: float | N
     if failed:
         msg.append(f"Overpass failed for {', '.join(failed)}")
     if skipped:
-        msg.append(f"time budget reached before {', '.join(skipped)}")
+        msg.append(f"not queried: {', '.join(skipped)}")
     return out, "; ".join(msg)
 
 

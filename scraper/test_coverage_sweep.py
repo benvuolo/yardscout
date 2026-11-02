@@ -32,7 +32,8 @@ def check(name, ok, detail=""):
 for n in ("U-Pull-It Omaha", "Pick-A-Part Jalopy Jungle", "Pull-N-Save", "Joe's Self Serve Auto Salvage",
           "Pik-A-Part", "Wrench-A-Part", "You Pull It Auto Parts"):
     check(f"yard kept: {n}", cs.looks_like_yard(n), n)
-for n in ("Smith Farm U-Pick Strawberries", "Pick-A-Peck Orchard", "U-Pick Blueberries", "Pick N Pull Pumpkins"):
+for n in ("Smith Farm U-Pick Strawberries", "Pick-A-Peck Orchard", "U-Pick Blueberries", "Pick N Pull Pumpkins",
+          "Casapulla's Subs", "Lilly Pullitzer", "Pullara Drive", "Epic Apartments"):
     check(f"farm dropped: {n}", not cs.looks_like_yard(n), n)
 check("farm tag dropped", not cs.looks_like_yard("Pick-A-Part", {"landuse": "orchard"}))
 
@@ -163,7 +164,10 @@ check("run: time budget stops site checks, report still complete",
       f"{[c.evidence for c in out3]} {notes3}")
 fo2 = FakeOverpass({(m, "NE"): FakeResp(200, el)})
 got2, err2 = cs.fetch_osm(fo2, states=("NE", "IA"), pause=0, deadline=1.0)
-check("osm: deadline in the past skips the remaining states", got2 == [] and "time budget reached before NE, IA" in err2, err2)
+check("osm: deadline in the past skips the remaining states", got2 == [] and "not queried: NE, IA" in err2, err2)
+fo3 = FakeOverpass({})
+got3, err3 = cs.fetch_osm(fo3, states=("AL", "AK", "AZ", "AR", "CA"), pause=0)
+check("osm: gives up after 3 straight failed states", len({st for _, st in fo3.calls}) == 3 and "not queried: AR, CA" in err3, err3)
 
 
 def boom(_):
