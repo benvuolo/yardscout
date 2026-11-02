@@ -1,0 +1,54 @@
+# Monthly (and on demand): find self-service yards we don't track yet
+# (scraper/coverage_sweep.py → scraper/coverage_sweep.md / .json) and commit
+# the report. Read-only toward the yards: robots.txt respected, honest
+# YardScout user agent, one page per site plus at most one inventory page.
+# Yards that block us are listed for outreach; nothing works around a block.
+name: Coverage sweep
+
+on:
+  schedule:
+    - cron: "43 9 3 * *"   # 3rd of each month, 09:43 UTC
+  workflow_dispatch:
+    inputs:
+      max_sites:
+        description: "Most candidate websites to check"
+        default: "400"
+      osm:
+        description: "Include OpenStreetMap discovery (off = Ario only)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: coverage-sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install requests beautifulsoup4 rich
+      - name: Sweep
+        run: |
+          python scraper/coverage_sweep.py --max-sites "${{ github.event.inputs.max_sites || '400' }}" \
+            ${{ github.event.inputs.osm == 'false' && '--no-osm' || '' }}
+          { echo "## Coverage sweep"; sed -n '1,/^## /p' scraper/coverage_sweep.md | sed '$d'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit the report
+        run: |
+          [ -z "$(git status --porcelain scraper/coverage_sweep.md scraper/coverage_sweep.json)" ] && { echo "nothing to commit"; exit 0; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scraper/coverage_sweep.md scraper/coverage_sweep.json
+          git commit -m "chore: coverage sweep $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4; do
+            git -c rebase.autoStash=true pull --rebase origin main && git push && exit 0
+            sleep $((i * 5))
+          done
+          echo "::error::could not push"; exit 1
