@@ -1,0 +1,65 @@
+# Weekly: refresh live eBay asking-price bands for every part in the parts
+# database (scraper/ebay_prices.py → docs/data/ebay_prices.json), then commit.
+# The next scan ships the bands on each car ("On eBay now" in the app).
+#
+# One-time setup (owner): developer.ebay.com → Create an application
+# (Production keyset) → repository secrets EBAY_CLIENT_ID and
+# EBAY_CLIENT_SECRET. Browse API, application token only. Default allowance
+# 5,000 calls/day; a full refresh is ~3,800 calls. Nothing secret is printed.
+name: eBay price bands
+
+on:
+  schedule:
+    - cron: "17 7 * * 1"   # Mondays 07:17 UTC, before the week's first scans
+  workflow_dispatch:
+    inputs:
+      max_calls:
+        description: "Most parts to query this run (stalest first)"
+        default: "2000"
+      dry_run:
+        description: "Print the query plan only (no eBay calls, no commit)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ebay-prices
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
+      EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install requests
+      - name: Query plan
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: python scraper/ebay_prices.py --dry-run
+      - name: Refresh bands
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          if [ -z "$EBAY_CLIENT_ID" ] || [ -z "$EBAY_CLIENT_SECRET" ]; then
+            echo "::warning::EBAY_CLIENT_ID / EBAY_CLIENT_SECRET not set — see the header of this workflow"; exit 0
+          fi
+          python scraper/ebay_prices.py --max-calls "${{ github.event.inputs.max_calls || '2000' }}"
+      - name: Commit if changed
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git diff --quiet docs/data/ebay_prices.json 2>/dev/null && [ -z "$(git status --porcelain docs/data/ebay_prices.json)" ] && { echo "nothing to commit"; exit 0; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/ebay_prices.json
+          git commit -m "chore: eBay price bands $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4; do
+            git -c rebase.autoStash=true pull --rebase origin main && git push && exit 0
+            sleep $((i * 5))
+          done
+          echo "::error::could not push"; exit 1

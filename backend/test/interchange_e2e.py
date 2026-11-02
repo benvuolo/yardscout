@@ -110,7 +110,7 @@ with sync_playwright() as pw:
           page.locator("#pf-results .pf-tier").count() == 0)
     body = page.locator("#pf-results").inner_text()
     check("tailgate browse: resale value shown per row (pro)",
-          "Used online: ~$" in body, body[:200])
+          "online: ~$" in body, body[:200])
     dists = page.eval_on_selector_all(
         "#pf-results .pf-row-card .dist",
         "els => els.map(e => parseInt(e.textContent))")
@@ -243,7 +243,7 @@ with sync_playwright() as pw:
           page.locator("#pf-results .pf-results-head .lock-text").count() == 1)
     import re as _re
     check("free: no real value strings leak",
-          not _re.search(r"(Used online: ~|worth )\$\d", page.locator("#pf-results").inner_text()))
+          not _re.search(r"(online: ~|worth )\$\d", page.locator("#pf-results").inner_text()))
     page.screenshot(path=str(SHOTS / "6_browse_free_blur.png"))
 
     # Live cards' free blur unaffected by the filter's removal.

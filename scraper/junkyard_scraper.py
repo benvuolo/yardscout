@@ -12508,6 +12508,84 @@ def _verify_hint(name: str) -> str:
     return best
 
 
+# ---------------------------------------------------------------------------
+# Live eBay bands (scraper/ebay_prices.py writes docs/data/ebay_prices.json).
+# When a part has a fresh band from enough fitment-matched USED listings, the
+# car ships that band ("src": "ebay", "n": listings) instead of the curated
+# anchor. Guards: stale file (> EBAY_MAX_AGE_DAYS) or thin data keep the
+# anchor; a band wildly off the anchor (keyword collision: a $9 "4Runner
+# grille" emblem) is ignored too. YS_EBAY_PRICES=0 disables; the path can be
+# overridden with YS_EBAY_PRICES_PATH (tests).
+# ---------------------------------------------------------------------------
+EBAY_MAX_AGE_DAYS = 45
+EBAY_MIN_N = 5
+_EBAY_PRICES: dict | None = None
+_UNOBTANIUM_CANON: dict[int, str] = {}
+
+
+def _ebay_prices_reset() -> None:
+    global _EBAY_PRICES
+    _EBAY_PRICES = None
+
+
+def _load_ebay_prices() -> dict:
+    global _EBAY_PRICES
+    if _EBAY_PRICES is not None:
+        return _EBAY_PRICES
+    _EBAY_PRICES = {}
+    if os.environ.get("YS_EBAY_PRICES", "").strip() in ("0", "false", "no"):
+        return _EBAY_PRICES
+    path = Path(os.environ.get("YS_EBAY_PRICES_PATH") or (DATA_DIR / "ebay_prices.json"))
+    try:
+        d = json.loads(path.read_text())
+    except (OSError, ValueError):
+        return _EBAY_PRICES
+    parts = d.get("parts") if isinstance(d, dict) else None
+    if not isinstance(parts, dict):
+        return _EBAY_PRICES
+    cutoff = datetime.now(timezone.utc) - timedelta(days=EBAY_MAX_AGE_DAYS)
+    for k, v in parts.items():
+        if not isinstance(v, dict) or "low" not in v or int(v.get("n", 0) or 0) < EBAY_MIN_N:
+            continue
+        try:
+            at = datetime.fromisoformat(str(v.get("at", "")).replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        if at < cutoff:
+            continue
+        _EBAY_PRICES[k] = v
+    return _EBAY_PRICES
+
+
+def _ebay_band(info: dict, p: dict) -> dict | None:
+    """Fresh, plausible live band for this entry's part, or None (keep the anchor)."""
+    prices = _load_ebay_prices()
+    if not prices:
+        return None
+    if not _UNOBTANIUM_CANON:
+        for k, e in UNOBTANIUM_DB.items():
+            _UNOBTANIUM_CANON.setdefault(id(e), k)
+    ekey = _UNOBTANIUM_CANON.get(id(info))
+    if ekey is None:
+        return None
+    lo, hi = info.get("year_range", (0, 0))
+    plo, phi = max(lo, int(p.get("yr_min", lo) or lo)), min(hi, int(p.get("yr_max", hi) or hi))
+    if phi < plo:
+        plo, phi = lo, hi
+    rec = prices.get(f"{ekey}|{str(p.get('name', '')).strip().lower()}|{plo}-{phi}")
+    if not rec:
+        return None
+    low, high = int(rec["low"]), int(rec["high"])
+    if high <= 0 or low < 0 or high < low:
+        return None
+    a_lo, a_hi = int(p.get("low", 0) or 0), int(p.get("high", 0) or 0)
+    # Plausibility vs the curated anchor: more than 4x above or below 1/5 of
+    # it means the keywords hit a different part. Keep the anchor.
+    if a_hi and (high > a_hi * 4 or high < a_lo / 5):
+        return None
+    return {"low": low, "high": high, "n": int(rec.get("n", 0) or 0)}
+
+
 def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = None) -> list[dict]:
     """Match a vehicle against the unobtanium database, filtering parts by
     year range and trim requirements.  Attaches sell-channel info to each part.
@@ -12653,6 +12731,9 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                 trim_status = "listing" if hinted else "unconfirmed"
             cl, ch = _resale_sold_calibrate(p["low"], p["high"], p["name"], year)
             enriched = {**p, "low": cl, "high": ch, **_lookup_sell_info(p["name"], make)}
+            eb = _ebay_band(info, p)
+            if eb:
+                enriched.update({"low": eb["low"], "high": eb["high"], "src": "ebay", "n": eb["n"]})
             # Provenance: the model years this part actually fits — the
             # entry's (generation) year range narrowed by the part's own
             # yr_min/yr_max gates. Shipped to the UI as "fits 1996–2002".
@@ -21750,6 +21831,7 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                     **({"trim_status": p["trim_status"]} if p.get("trim_status") else {}),
                     **({"verify": p["verify"]} if p.get("verify") else {}),
                     **({"sharedWith": p["sharedWith"]} if p.get("sharedWith") else {}),
+                    **({"src": p["src"], "n": p["n"]} if p.get("src") else {}),
                 }
                 for p in v.get("_top_parts", [])
             ],

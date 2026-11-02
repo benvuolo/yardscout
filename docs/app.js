@@ -3634,7 +3634,7 @@ function renderLive() {
           <li class="part-item${hitCls}" style="flex-wrap:wrap;">
             <span class="part-name">${escapeHtml(p.name)}</span>
             ${trimMark}${fitsMark}
-            <span class="part-price" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>
+            ${onlinePriceHtml(p, 'part-price')}
             ${costHtml}
             ${saveHtml}
             ${verifyNote}${sharedNote}
@@ -5674,7 +5674,7 @@ function pfRunBrowse(s) {
         : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
       const worthHtml = (!pfCat.noValue && r.hit)
         ? (unlocked
-          ? `<span class="pf-ebay" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(r.hit.low)}&ndash;${formatPrice(r.hit.high)}</span>`
+          ? onlinePriceHtml(r.hit, 'pf-ebay')
           : '')
         : '';
       // Buyer's savings line — only when BOTH sides are real: a published
@@ -5925,7 +5925,7 @@ function pfRunSearch() {
     const partRow = pfCat.noValue ? null : pfPartRow(v, pfCat);
     const ebayHtml = partRow
       ? (unlocked
-        ? `<span class="pf-ebay" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(partRow.low)}&ndash;${formatPrice(partRow.high)}</span>`
+        ? onlinePriceHtml(partRow, 'pf-ebay')
         : '')
       : '';
     // Buyer's savings line — both sides real, Pro only (free users would
@@ -7483,6 +7483,18 @@ const IAP_PRODUCT_ID = 'yardscout_pro_monthly';
 const STORE_NAME = IS_ANDROID ? 'Google Play' : 'the App Store';
 const STORE_ACCOUNT = IS_ANDROID ? 'Google account' : 'Apple account';
 
+/* Online price line for a part. Live eBay band (src 'ebay', from
+ * scraper/ebay_prices.py: middle half of fitment-matched USED asking prices)
+ * or the curated typical range — labelled honestly either way. */
+function onlinePriceHtml(p, cls) {
+  if (!p || p.low == null) return '';
+  const range = `~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}`;
+  if (p.src === 'ebay') {
+    const n = p.n ? `${p.n} used listings` : 'used listings';
+    return `<span class="${cls}" title="Asking prices of ${n} on eBay right now that fit this car (middle half of the range). Refreshed weekly; not a sale price.">On eBay now: ${range}</span>`;
+  }
+  return `<span class="${cls}" title="Typical range this used part lists for online. A curated estimate, not a live quote.">Typical online: ${range}</span>`;
+}
 function nativePlugin(name) {
   return (IS_NATIVE && window.Capacitor && window.Capacitor.Plugins
     && window.Capacitor.Plugins[name]) || null;
