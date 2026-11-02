@@ -17,9 +17,17 @@ for (const path of ['/app', '/app/', '/get', '/APP']) {
   r = await go(path, DESKTOP);
   check(`${path} desktop -> site`, r.status === 302 && r.headers.get('location') === 'https://yardscout.io/', `${r.status} ${r.headers.get('location')}`);
 }
-let r = await go('/open', ANDROID);
+let r = await go('/app?utm_source=facebook&utm_campaign=x', DESKTOP);
+check('/app keeps campaign tags for the site', r.headers.get('location') === 'https://yardscout.io/?utm_source=facebook&utm_campaign=x', r.headers.get('location'));
+r = await go('/app?utm_source=facebook', ANDROID);
+check('/app passes campaign tags to Play as referrer', /play\.google\.com.*&referrer=utm_source%3Dfacebook$/.test(r.headers.get('location') || ''), r.headers.get('location'));
+r = await go('/app?utm_source=facebook', IPHONE);
+check('/app iPhone with tags still -> App Store', /^https:\/\/apps\.apple\.com/.test(r.headers.get('location') || ''), r.headers.get('location'));
+r = await go('/open', ANDROID);
 check('/open Android still -> Google Play', r.status === 302 && /play\.google\.com/.test(r.headers.get('location') || ''));
-r = await go('/apple', IPHONE);
+// Falls through to the upstream proxy; with no network that fetch throws,
+// which still proves it is not a store redirect.
+r = await go('/apple', IPHONE).catch(() => new Response('offline', { status: 502 }));
 check('/apple is not a redirect route', r.status !== 302 || !/apps\.apple\.com/.test(r.headers.get('location') || ''));
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');

@@ -75,7 +75,12 @@ export default {
       // go straight to their store; everything else to the site.
       if (/^\/(app|get)\/?$/i.test(url.pathname)) {
         const ua = req.headers.get('user-agent') || '';
-        const to = /iPhone|iPad|iPod/.test(ua) ? IOS_URL : /Android/.test(ua) ? PLAY_URL : 'https://yardscout.io/';
+        // Campaign tags survive: the site keeps the query string, Play gets
+        // it as the install referrer (Apple has no equivalent).
+        const q = url.search.replace(/^\?/, '');
+        const to = /iPhone|iPad|iPod/.test(ua) ? IOS_URL
+          : /Android/.test(ua) ? PLAY_URL + (q ? '&referrer=' + encodeURIComponent(q) : '')
+          : 'https://yardscout.io/' + (q ? '?' + q : '');
         return Response.redirect(to, 302);
       }
       if (url.pathname === '/open' || url.pathname === '/open/') {

@@ -9,7 +9,7 @@ AAB to upload: `android/app/build/outputs/bundle/release/app-release.aab`
 
 | Field | Value |
 |---|---|
-| App name (30 max) | `YardScout: Junkyard Inventory` |
+| App name (30 max) | `YardScout: Junkyard Parts` (matched to the App Store name 2026-11-02; was `YardScout: Junkyard Inventory`) |
 | Package name | `io.yardscout.app` (set automatically by the AAB) |
 | Category | Auto & Vehicles |
 | Free/paid | Free |
