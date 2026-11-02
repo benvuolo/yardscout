@@ -20,6 +20,10 @@ check('different make does not match', !watchMatches(w('Ford', 'Ranger'), car('M
 check('year range still applies', !watchMatches(w('Toyota', '4Runner', { year_min: 1996, year_max: 2002 }), car('Toyota', '4Runner', 2005)));
 check('radius still applies', !watchMatches(w('Toyota', '4Runner', { lat: 30, lng: -97, radius_mi: 50 }), car('Toyota', '4Runner')));
 check('any-model watch (no model) matches the make', watchMatches(w('Toyota', ''), car('Toyota', 'Camry')));
+check("'Toyota / Scion tC' watch matches a car now filed Scion / tC", watchMatches(w('Toyota', 'Scion tC'), car('Scion', 'tC')));
+check("'Toyota / Scion tC' watch still matches a yard filing it under Toyota", watchMatches(w('Toyota', 'Scion tC'), car('Toyota', 'Scion tC')));
+check("'Toyota / Scion tC' watch does not match a Toyota Camry", !watchMatches(w('Toyota', 'Scion tC'), car('Toyota', 'Camry')));
+check("a plain Toyota watch does not match Scion", !watchMatches(w('Toyota', '4Runner'), car('Scion', 'tC')));
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);

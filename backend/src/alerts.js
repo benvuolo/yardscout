@@ -571,14 +571,26 @@ function watchModelLow(make, model) {
   return low;
 }
 
+/* Makes that have shown up at the FRONT of a model string in yard feeds
+ * ("Scion tC" filed under Toyota). A watch built from such a car keeps
+ * matching after the scan moved the car to its real make. */
+const MAKE_IN_MODEL = new Set(['scion', 'lexus', 'acura', 'infiniti', 'mini', 'genesis', 'ram', 'geo', 'hummer', 'datsun']);
+function watchMakeLow(w) {
+  const first = String(w.model || '').toLowerCase().trim().split(/\s+/)[0] || '';
+  return MAKE_IN_MODEL.has(first) ? first : canonMakeLow(w.make);
+}
+
 export function watchMatches(w, v) {
-  if (w.make && canonMakeLow(v.make) !== canonMakeLow(w.make)) return false;
+  if (w.make && canonMakeLow(v.make) !== canonMakeLow(w.make) && canonMakeLow(v.make) !== watchMakeLow(w)) return false;
   // Same rule as the app's watchlistMatches (docs/app.js): the yard's model
   // CONTAINS the watched name, or the canonical names are equal. The server
   // used to require equality only, so a "Silverado" watch lit up 3,654 trucks
   // in the app but pushed for the 367 filed as plain "Silverado" (2026-11-02).
   if (w.model) {
-    const wm = watchModelLow(w.make, w.model);
+    let wm = watchModelLow(w.make, w.model);
+    // "Scion tC" under a Toyota watch vs a car now filed as Scion / tC.
+    const first = wm.split(/\s+/)[0];
+    if (MAKE_IN_MODEL.has(first) && canonMakeLow(v.make) === first) wm = wm.slice(first.length).trim() || wm;
     const raw = String(v.model || '').toLowerCase().includes(wm);
     if (!raw && canonModelLow(v.make, v.model) !== canonModelLow(w.make, wm)) return false;
   }

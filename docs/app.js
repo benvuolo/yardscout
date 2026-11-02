@@ -6355,7 +6355,12 @@ function watchlistMatches(entry, v) {
   for (const mk of [makeLow, String(entry.make || '').toLowerCase().trim()]) {
     if (mk && modelLow.startsWith(mk + ' ')) { modelLow = modelLow.slice(mk.length + 1).trim(); break; }
   }
-  if (makeLow && !canonicalMake(v.make).toLowerCase().includes(makeLow)) return false;
+  // A watch built from a car a yard filed under the wrong make ("Scion tC"
+  // under Toyota) keeps matching after the scan moved it (Scion / tC).
+  const firstWord = modelLow.split(/\s+/)[0] || '';
+  const carMakeLow = canonicalMake(v.make).toLowerCase();
+  if (makeLow && !carMakeLow.includes(makeLow) && carMakeLow !== firstWord) return false;
+  if (modelLow && carMakeLow === firstWord && firstWord !== makeLow) modelLow = modelLow.slice(firstWord.length).trim() || modelLow;
   if (modelLow) {
     // Match raw yard spelling OR the canonical alias (so a watch for "WRX"
     // catches a car a yard filed as "Impreza WRX", and vice versa). The
