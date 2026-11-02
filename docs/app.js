@@ -56,7 +56,12 @@ const ATTRIB = (() => {
  * checkout/<gate>, purchase/<gate> — so the daily email can say "locked
  * part prices open the sheet most; the watch limit converts best". */
 const REASON_EVENTS = { 'pro-lock': 'paywall', 'iap-subscribe': 'checkout', 'iap-purchased': 'purchase' };
+// Local copies and automated browsers never count: the e2e tests run this
+// exact bundle from 127.0.0.1 and were posting real-looking first visits and
+// 'browser-test' paywall opens into the production funnel (2026-11-02).
+const ANALYTICS_OFF = /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(location.hostname) || navigator.webdriver === true;
 function sendEvent(e) {
+  if (ANALYTICS_OFF) return;
   const body = JSON.stringify({ e, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
     p: IS_NATIVE ? (IS_ANDROID ? 'android' : 'ios') : 'web' });
   // text/plain keeps it a "simple" request (no CORS preflight, works from sendBeacon).
