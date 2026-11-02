@@ -70,6 +70,14 @@ export default {
       // App-button landings. Reached only when the app did NOT claim the
       // link (not installed, or an older build): send the visitor on to the
       // web app (car links) or their store (the header button).
+      // yardscout.io/app — the link to say out loud (2026-11-02: people who
+      // searched the store by name sometimes landed on another app). Phones
+      // go straight to their store; everything else to the site.
+      if (/^\/(app|get)\/?$/i.test(url.pathname)) {
+        const ua = req.headers.get('user-agent') || '';
+        const to = /iPhone|iPad|iPod/.test(ua) ? IOS_URL : /Android/.test(ua) ? PLAY_URL : 'https://yardscout.io/';
+        return Response.redirect(to, 302);
+      }
       if (url.pathname === '/open' || url.pathname === '/open/') {
         const ua = req.headers.get('user-agent') || '';
         const to = /iPhone|iPad|iPod|Macintosh/.test(ua) && url.searchParams.get('app') === '1' ? IOS_URL
