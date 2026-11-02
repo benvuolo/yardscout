@@ -6,45 +6,26 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 
 | | Yards |
 |---|---|
-| A. Runs a platform we already parse (cheapest adds) | 26 |
+| A. Runs a platform we already parse (cheapest adds) | 1 |
 | B. Has its own online inventory (custom adapter) | 0 |
 | C. Blocked us or robots.txt says no (outreach) | 0 |
-| D. Site found, no online vehicle inventory | 0 |
-| E. No website on the map, or unreachable | 67 |
-| Already tracked (skipped) | 18 |
+| D. Site found, no online vehicle inventory | 1 |
+| E. No website on the map, or unreachable | 61 |
+| Already tracked (skipped) | 69 |
 
-**Notes:** OpenStreetMap: Overpass HTTP 504.
+**Notes:** OpenStreetMap: Overpass failed for AL, AK, AZ, AR, CA, CO, CT; time budget reached before ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY.
 
 ## A. Runs a platform we already parse (cheapest adds)
 
 | Yard | Where | Platform | Evidence | Link |
 |---|---|---|---|---|
 | A-1 METALS & AUTO SALVAGE INC | 35.685, -120.698 | Ario (autorecycler.io) | live on Ario: 507 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/a1-metals |
-| ARIO AUTO PARTS | 30.253, -97.748 | Ario (autorecycler.io) | live on Ario: 608 rows, newest set-out 2026-09-29 | https://ario.autorecycler.io/yard/harolds-auto-parts-u-pull-it |
-| Pull A Part - Akron |  | Ario (autorecycler.io) | live on Ario: 882 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-akron |
-| Pull A Part - Atlanta North |  | Ario (autorecycler.io) | live on Ario: 1025 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-atlanta-north |
-| Pull A Part - Atlanta South |  | Ario (autorecycler.io) | live on Ario: 1352 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-atlanta-south |
-| Pull A Part - Augusta |  | Ario (autorecycler.io) | live on Ario: 1215 rows, newest set-out 2026-11-02 | https://ario.autorecycler.io/yard/pull-a-part-augusta |
-| Pull A Part - Baton Rouge |  | Ario (autorecycler.io) | live on Ario: 972 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-baton-rouge |
-| Pull A Part - Birmingham |  | Ario (autorecycler.io) | live on Ario: 1354 rows, newest set-out 2026-10-31 | https://ario.autorecycler.io/yard/pull-a-part-birmingham |
-| Pull A Part - Canton |  | Ario (autorecycler.io) | live on Ario: 1099 rows, newest set-out 2026-11-02 | https://ario.autorecycler.io/yard/pull-a-part-canton |
-| Pull A Part - Charlotte |  | Ario (autorecycler.io) | live on Ario: 1252 rows, newest set-out 2026-11-02 | https://ario.autorecycler.io/yard/pull-a-part-charlotte |
-| Pull A Part - Cleveland West |  | Ario (autorecycler.io) | live on Ario: 1360 rows, newest set-out 2026-11-02 | https://ario.autorecycler.io/yard/pull-a-part-cleveland-west |
-| Pull A Part - Columbia |  | Ario (autorecycler.io) | live on Ario: 987 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-columbia |
-| Pull A Part - Corpus Christi |  | Ario (autorecycler.io) | live on Ario: 1039 rows, newest set-out 2026-10-28 | https://ario.autorecycler.io/yard/pull-a-part-corpus-christi |
-| Pull A Part - El Paso |  | Ario (autorecycler.io) | live on Ario: 1492 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-el-paso |
-| Pull A Part - Indianapolis |  | Ario (autorecycler.io) | live on Ario: 1164 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-indianapolis |
-| Pull A Part - Jackson |  | Ario (autorecycler.io) | live on Ario: 1005 rows, newest set-out 2026-11-02 | https://ario.autorecycler.io/yard/pull-a-part-jackson |
-| Pull A Part - Knoxville |  | Ario (autorecycler.io) | live on Ario: 1195 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-knoxville |
-| Pull A Part - Lafayette |  | Ario (autorecycler.io) | live on Ario: 1519 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-lafayette |
-| Pull A Part - Louisville |  | Ario (autorecycler.io) | live on Ario: 1589 rows, newest set-out 2026-10-28 | https://ario.autorecycler.io/yard/pull-a-part-louisville |
-| Pull A Part - Memphis |  | Ario (autorecycler.io) | live on Ario: 1187 rows, newest set-out 2026-10-31 | https://ario.autorecycler.io/yard/pull-a-part-memphis |
-| Pull A Part - Montgomery |  | Ario (autorecycler.io) | live on Ario: 1057 rows, newest set-out 2026-11-02 | https://ario.autorecycler.io/yard/pull-a-part-montgomery |
-| Pull A Part - Nashville |  | Ario (autorecycler.io) | live on Ario: 1191 rows, newest set-out 2026-11-02 | https://ario.autorecycler.io/yard/pull-a-part-nashville |
-| Pull A Part - New Orleans West |  | Ario (autorecycler.io) | live on Ario: 1248 rows, newest set-out 2026-11-02 | https://ario.autorecycler.io/yard/pull-a-part-new-orleans-west |
-| Pull A Part - Tucson |  | Ario (autorecycler.io) | live on Ario: 817 rows, newest set-out 2026-10-30 | https://ario.autorecycler.io/yard/pull-a-part-tucson |
-| Pull A Part - Winston-Salem |  | Ario (autorecycler.io) | live on Ario: 1130 rows, newest set-out 2026-11-02 | https://ario.autorecycler.io/yard/pull-a-part-winston-salem |
-| Yank A Part |  | Ario (autorecycler.io) | live on Ario: 1 rows, newest set-out 2024-04-10 | https://ario.autorecycler.io/yard/yank-a-part |
+
+## D. Site found, no online vehicle inventory
+
+| Yard | Where | Platform | Evidence | Link |
+|---|---|---|---|---|
+| Casapulla’s North Subs & Steaks | DE | — | site has no inventory link | https://casapullasnorth.com |
 
 ## E. No website on the map, or unreachable
 
@@ -57,6 +38,7 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 | AJAX AUTO DISMANTLERS |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/ajax |
 | ALL CAR & TRUCK RECYCLING |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/allcar |
 | AMERICAN PARTS CENTER |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/american-parts-center |
+| ARIO AUTO PARTS | 30.253, -97.748 | Ario (autorecycler.io) | on Ario but stale: 608 rows, newest set-out 2026-09-29 | https://ario.autorecycler.io/yard/harolds-auto-parts-u-pull-it |
 | Autogator |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/autogator |
 | Bevell's Pull It Yourself Used Auto Parts | 35.351, -78.018 | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/goldsboro-north-carolina-bevells-pull-it-yourself-used-auto-parts |
 | Blue & Gold Auto Salvage | 32.981, -80.015 | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/blue--gold-auto-salvage-goose-creek-south-carolina |
@@ -77,7 +59,6 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 | LKQ San Bernadino |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/lqk-san-bernadino |
 | LONG'S AUTO RECYCLING |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/longs-auto-recycling |
 | MENDOZA AUTO DISMANTLING |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/mendozaauto |
-| NEVADA PIC A PART - LAS VEGAS |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/nvpap-lv |
 | New org | 39.517, -74.663 | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/rt-50-u-pull-it-nj |
 | P & C AUTO WRECKERS |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pandcautoparts |
 | PACIFIC AUTO RECYCLING |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pacific |
@@ -86,19 +67,6 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 | PHELPS AUTO WRECKERS, INC. |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/phelpsautowreckers |
 | PICK THE PART |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pick-the-part |
 | PRESTIGE PULL YOUR PART |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/prestige-pull-your-part |
-| Pick n Pull Oakland |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pick-n-pull-oakland |
-| Pull A Part - Albuquerque |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-albuquerque |
-| Pull A Part - Atlanta East |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part |
-| Pull A Part - Aurora |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-aurora |
-| Pull A Part - Cincinnati |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-cincinnati |
-| Pull A Part - Colorado Springs |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-colorado-springs |
-| Pull A Part - Denver |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-denver |
-| Pull A Part - Fort Myers |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-fort-myers |
-| Pull A Part - Houston |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-houston |
-| Pull A Part - Orlando |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-orlando |
-| Pull A Part - Phoenix |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-phoenix |
-| Pull A Part - Pittsburgh |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-pittsburgh |
-| Pull A Part - West Palm Beach |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/pull-a-part-west-palm-beach |
 | Riteway Demo |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/riteway-demo |
 | SAM'S AUTO SALVAGE |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/sam's-auto-salvage |
 | SAN LUIS AUTO SALVAGE |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/san-luis-auto-salvage |
@@ -116,4 +84,11 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 | Universal Auto and Recycling Group |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/universal-auto-and-recycling-group |
 | VIKING AUTO PARTS |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/vikingautoparts |
 | YETI USED AUTO PARTS |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/yeti |
+| Yank A Part |  | Ario (autorecycler.io) | on Ario but stale: 1 rows, newest set-out 2024-04-10 | https://ario.autorecycler.io/yard/yank-a-part |
 | Young's U-Pull It | 35.283, -78.048 | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/youngs-u-pull-it-north-carolina |
+| Casapulla's | DE | — | no website on the map | — |
+| Casapulla’s Subs | DE | — | no website on the map | — |
+| Casapulla’s Subs | Rehoboth Beach, DE | — | no website on the map | — |
+| Pullara Drive | FL | — | no website on the map | — |
+| Epic Apartments | Daytona Beach, FL | — | no website on the map | — |
+| Lilly Pullitzer | Jacksonville, FL | — | no website on the map | — |

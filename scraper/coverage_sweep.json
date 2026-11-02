@@ -1,10 +1,10 @@
 {
- "at": "2026-11-02T21:51:46Z",
+ "at": "2026-11-02T23:31:04Z",
  "skipped": {
-  "tracked": 18
+  "tracked": 69
  },
  "notes": [
-  "OpenStreetMap: Overpass HTTP 504."
+  "OpenStreetMap: Overpass failed for AL, AK, AZ, AR, CA, CO, CT; time budget reached before ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY."
  ],
  "candidates": [
   {
@@ -87,9 +87,9 @@
    "lng": -97.7484,
    "website": "https://ario.autorecycler.io/yard/harolds-auto-parts-u-pull-it",
    "source": "ario",
-   "tier": "A",
+   "tier": "E",
    "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 608 rows, newest set-out 2026-09-29",
+   "evidence": "on Ario but stale: 608 rows, newest set-out 2026-09-29",
    "known_status": "",
    "extra": {
     "slug": "harolds-auto-parts-u-pull-it",
@@ -291,24 +291,6 @@
    "known_status": "",
    "extra": {
     "slug": "autogator",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "NEVADA PIC A PART - LAS VEGAS",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/nvpap-lv",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "nvpap-lv",
     "live_rows": 0,
     "newest": ""
    }
@@ -764,24 +746,6 @@
    }
   },
   {
-   "name": "Pick n Pull Oakland",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pick-n-pull-oakland",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pick-n-pull-oakland",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
    "name": "U-PULL IT AUTO SALVAGE OF PADUCAH",
    "city": "",
    "state": "",
@@ -825,9 +789,9 @@
    "lng": null,
    "website": "https://ario.autorecycler.io/yard/yank-a-part",
    "source": "ario",
-   "tier": "A",
+   "tier": "E",
    "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1 rows, newest set-out 2024-04-10",
+   "evidence": "on Ario but stale: 1 rows, newest set-out 2024-04-10",
    "known_status": "",
    "extra": {
     "slug": "yank-a-part",
@@ -1016,636 +980,6 @@
    }
   },
   {
-   "name": "Pull A Part - Atlanta East",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Nashville",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-nashville",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1191 rows, newest set-out 2026-11-02",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-nashville",
-    "live_rows": 1191,
-    "newest": "2026-11-02"
-   }
-  },
-  {
-   "name": "Pull A Part - Corpus Christi",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-corpus-christi",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1039 rows, newest set-out 2026-10-28",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-corpus-christi",
-    "live_rows": 1039,
-    "newest": "2026-10-28"
-   }
-  },
-  {
-   "name": "Pull A Part - Aurora",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-aurora",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-aurora",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Denver",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-denver",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-denver",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Fort Myers",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-fort-myers",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-fort-myers",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Birmingham",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-birmingham",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1354 rows, newest set-out 2026-10-31",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-birmingham",
-    "live_rows": 1354,
-    "newest": "2026-10-31"
-   }
-  },
-  {
-   "name": "Pull A Part - Orlando",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-orlando",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-orlando",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - West Palm Beach",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-west-palm-beach",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-west-palm-beach",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Montgomery",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-montgomery",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1057 rows, newest set-out 2026-11-02",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-montgomery",
-    "live_rows": 1057,
-    "newest": "2026-11-02"
-   }
-  },
-  {
-   "name": "Pull A Part - Colorado Springs",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-colorado-springs",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-colorado-springs",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Phoenix",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-phoenix",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-phoenix",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Atlanta North",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-atlanta-north",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1025 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-atlanta-north",
-    "live_rows": 1025,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - Tucson",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-tucson",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 817 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-tucson",
-    "live_rows": 817,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - Atlanta South",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-atlanta-south",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1352 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-atlanta-south",
-    "live_rows": 1352,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - Augusta",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-augusta",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1215 rows, newest set-out 2026-11-02",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-augusta",
-    "live_rows": 1215,
-    "newest": "2026-11-02"
-   }
-  },
-  {
-   "name": "Pull A Part - Indianapolis",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-indianapolis",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1164 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-indianapolis",
-    "live_rows": 1164,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - Louisville",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-louisville",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1589 rows, newest set-out 2026-10-28",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-louisville",
-    "live_rows": 1589,
-    "newest": "2026-10-28"
-   }
-  },
-  {
-   "name": "Pull A Part - Baton Rouge",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-baton-rouge",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 972 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-baton-rouge",
-    "live_rows": 972,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - El Paso",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-el-paso",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1492 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-el-paso",
-    "live_rows": 1492,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - Lafayette",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-lafayette",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1519 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-lafayette",
-    "live_rows": 1519,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - New Orleans West",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-new-orleans-west",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1248 rows, newest set-out 2026-11-02",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-new-orleans-west",
-    "live_rows": 1248,
-    "newest": "2026-11-02"
-   }
-  },
-  {
-   "name": "Pull A Part - Jackson",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-jackson",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1005 rows, newest set-out 2026-11-02",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-jackson",
-    "live_rows": 1005,
-    "newest": "2026-11-02"
-   }
-  },
-  {
-   "name": "Pull A Part - Charlotte",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-charlotte",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1252 rows, newest set-out 2026-11-02",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-charlotte",
-    "live_rows": 1252,
-    "newest": "2026-11-02"
-   }
-  },
-  {
-   "name": "Pull A Part - Winston-Salem",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-winston-salem",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1130 rows, newest set-out 2026-11-02",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-winston-salem",
-    "live_rows": 1130,
-    "newest": "2026-11-02"
-   }
-  },
-  {
-   "name": "Pull A Part - Albuquerque",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-albuquerque",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-albuquerque",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Akron",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-akron",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 882 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-akron",
-    "live_rows": 882,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - Canton",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-canton",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1099 rows, newest set-out 2026-11-02",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-canton",
-    "live_rows": 1099,
-    "newest": "2026-11-02"
-   }
-  },
-  {
-   "name": "Pull A Part - Cincinnati",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-cincinnati",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-cincinnati",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Cleveland West",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-cleveland-west",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1360 rows, newest set-out 2026-11-02",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-cleveland-west",
-    "live_rows": 1360,
-    "newest": "2026-11-02"
-   }
-  },
-  {
-   "name": "Pull A Part - Pittsburgh",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-pittsburgh",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-pittsburgh",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
-   "name": "Pull A Part - Columbia",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-columbia",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 987 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-columbia",
-    "live_rows": 987,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - Knoxville",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-knoxville",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1195 rows, newest set-out 2026-10-30",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-knoxville",
-    "live_rows": 1195,
-    "newest": "2026-10-30"
-   }
-  },
-  {
-   "name": "Pull A Part - Memphis",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-memphis",
-   "source": "ario",
-   "tier": "A",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 1187 rows, newest set-out 2026-10-31",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-memphis",
-    "live_rows": 1187,
-    "newest": "2026-10-31"
-   }
-  },
-  {
-   "name": "Pull A Part - Houston",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/pull-a-part-houston",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "pull-a-part-houston",
-    "live_rows": 0,
-    "newest": ""
-   }
-  },
-  {
    "name": "TAS Recycling - Kingsport",
    "city": "",
    "state": "",
@@ -1680,6 +1014,104 @@
     "live_rows": 0,
     "newest": ""
    }
+  },
+  {
+   "name": "Casapulla\u2019s North Subs & Steaks",
+   "city": "",
+   "state": "DE",
+   "lat": 39.7973284,
+   "lng": -75.5471937,
+   "website": "https://casapullasnorth.com",
+   "source": "osm",
+   "tier": "D",
+   "platform": "",
+   "evidence": "site has no inventory link",
+   "known_status": "",
+   "extra": {}
+  },
+  {
+   "name": "Casapulla\u2019s Subs",
+   "city": "",
+   "state": "DE",
+   "lat": 39.6965982,
+   "lng": -75.7109179,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {}
+  },
+  {
+   "name": "Casapulla's",
+   "city": "",
+   "state": "DE",
+   "lat": 39.7405773,
+   "lng": -75.5924779,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {}
+  },
+  {
+   "name": "Casapulla\u2019s Subs",
+   "city": "Rehoboth Beach",
+   "state": "DE",
+   "lat": 38.7223126,
+   "lng": -75.119273,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {}
+  },
+  {
+   "name": "Lilly Pullitzer",
+   "city": "Jacksonville",
+   "state": "FL",
+   "lat": 30.2543075,
+   "lng": -81.5254888,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {}
+  },
+  {
+   "name": "Pullara Drive",
+   "city": "",
+   "state": "FL",
+   "lat": 28.1673465,
+   "lng": -82.5683775,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {}
+  },
+  {
+   "name": "Epic Apartments",
+   "city": "Daytona Beach",
+   "state": "FL",
+   "lat": 29.1748861,
+   "lng": -81.0427627,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {}
   }
  ]
 }
