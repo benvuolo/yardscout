@@ -56,4 +56,22 @@ jobs:
           for g in requests.get(f"{API}/apps/{app['id']}/betaGroups", headers=H, timeout=60).json().get("data", []):
               ga = g["attributes"]
               print(f"beta group: {ga.get('name')} internal={ga.get('isInternalGroup')} allBuilds={ga.get('hasAccessToAllBuilds')}")
+          # Provisioning side (Certificates, Identifiers & Profiles). The release
+          # workflow mints its App Store profile here; 2026-11-02 this started
+          # answering 403 "Unable to find a team with the given Team ID" while
+          # the app endpoints above kept working, so it is checked separately.
+          r = requests.get(f"{API}/bundleIds", headers=H, params={"filter[identifier]": os.environ["BUNDLE_ID"]}, timeout=60)
+          if r.status_code == 200:
+              ids = r.json().get("data", [])
+              caps = []
+              if ids:
+                  caps = [c["attributes"]["capabilityType"] for c in requests.get(f"{API}/bundleIds/{ids[0]['id']}/bundleIdCapabilities", headers=H, timeout=60).json().get("data", [])]
+              print("provisioning API: ok; bundle id capabilities:", ", ".join(sorted(caps)) or "(none listed)")
+              pr = requests.get(f"{API}/profiles", headers=H, params={"filter[profileType]": "IOS_APP_STORE", "limit": 20}, timeout=60).json().get("data", [])
+              for p in pr:
+                  a = p["attributes"]; print(f"profile: {a.get('name')} state={a.get('profileState')} expires={(a.get('expirationDate') or '')[:10]}")
+          else:
+              try: detail = r.json()["errors"][0].get("detail", "")
+              except Exception: detail = r.text[:200]
+              print(f"provisioning API: HTTP {r.status_code} — {detail[:200]}")
           PY
