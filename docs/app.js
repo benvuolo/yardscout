@@ -2556,6 +2556,7 @@ document.querySelectorAll('#upgrade-sheet .plan-option').forEach(c => {
 });
 
 let upgradeTrigger = 'unknown';
+let lastPaywallAt = 0;
 /* One line of local proof at the top of the Pro sheet: what actually
  * landed near this person this week (their watches first, else everything
  * in their radius). Silent when there's nothing true to say. */
@@ -2604,6 +2605,7 @@ const watchGateLead = (t) => ({
 })[t] || '';
 function openUpgradeSheet(trigger, carKey) {
   upgradeTrigger = trigger || 'unknown';
+  lastPaywallAt = Date.now();   // the rating sheet never follows a paywall (maybeAskForReview)
   {
     const box = document.getElementById('pro-car'), pr = document.getElementById('pro-proof');
     const car = isPro() ? '' : proSheetCarHtml(carKey);
@@ -3011,6 +3013,8 @@ function openFromAlert(vehicleId) {
       // showing the honest "isn't in the current inventory" state from before
       // the fetch settled. One final render pins the true outcome.
       if (liveLoaded && focusedCarKey) renderLive();
+      // A watched car that actually arrived is the app's best moment.
+      if (vehicleId && focusedCarKey) maybeAskForReview('alert-car');
     })
     .catch(() => { /* load error path already rendered its message */ });
 }
@@ -7634,6 +7638,57 @@ function showUpdateAvailable(info) {
   }
   setTimeout(check, 4000);
   try { AppP.addListener('appStateChange', (st) => { if (st && st.isActive) check(); }); } catch (e) { /* older shell */ }
+})();
+
+/* ===== IN-APP RATING PROMPT (1.12.11) =====
+ * Apple's and Google's one-tap rating sheet, shown inside the app. We ask
+ * only after a real win and only on native; the stores apply their own
+ * quota on top (Apple: 3 per year), so a request is not a guaranteed sheet.
+ *   - 'alert-car'  the person opened a car from a watch alert and it's there
+ *   - 'third-day'  the app was opened on a third distinct day
+ * Never on launch itself, never within 10 minutes of the paywall, never
+ * while a required-update screen is up, and at most once every 120 days.
+ * All state is local to the phone; the only thing sent is the funnel
+ * event 'review-prompt/<reason>' so the daily email can show how often
+ * it fires. */
+const REVIEW_MIN_GAP_MS = 120 * 86400_000;
+const REVIEW_PAYWALL_GAP_MS = 10 * 60_000;
+function reviewPromptDue(askedAt, lastPaywall, now) {
+  if (askedAt && now - askedAt < REVIEW_MIN_GAP_MS) return false;
+  if (lastPaywall && now - lastPaywall < REVIEW_PAYWALL_GAP_MS) return false;
+  return true;
+}
+function maybeAskForReview(reason) {
+  const R = nativePlugin('Review');
+  if (!R || typeof R.requestReview !== 'function') return;
+  let askedAt = 0;
+  try { askedAt = Number(localStorage.getItem('ys_review_asked_at')) || 0; } catch (e) { /* private mode */ }
+  if (!reviewPromptDue(askedAt, lastPaywallAt, Date.now())) return;
+  if (document.querySelector('.update-required')) return;
+  // Let the screen settle on the thing they came for before the sheet.
+  setTimeout(() => {
+    if (document.querySelector('.update-required') || document.querySelector('#upgrade-sheet.open, #saved-sheet.open')) return;
+    try { localStorage.setItem('ys_review_asked_at', String(Date.now())); } catch (e) { /* private mode */ }
+    sendEvent('review-prompt/' + reason);
+    Promise.resolve(R.requestReview()).catch(() => {});
+  }, 1500);
+}
+(function reviewOnThirdDay() {
+  if (!IS_NATIVE) return;
+  const AppP = nativePlugin('App');
+  function noteOpen() {
+    let days = [];
+    try { days = JSON.parse(localStorage.getItem('ys_open_days') || '[]'); } catch (e) { days = []; }
+    const today = new Date().toISOString().slice(0, 10);
+    if (!Array.isArray(days)) days = [];
+    if (days.includes(today)) return;
+    days = days.concat(today).slice(-10);
+    try { localStorage.setItem('ys_open_days', JSON.stringify(days)); } catch (e) { /* private mode */ }
+    // Third distinct day, and only after they've used it a little this time.
+    if (days.length === 3) setTimeout(() => maybeAskForReview('third-day'), 45_000);
+  }
+  noteOpen();
+  if (AppP) { try { AppP.addListener('appStateChange', (st) => { if (st && st.isActive) noteOpen(); }); } catch (e) { /* older shell */ } }
 })();
 
 /* ---- push enable flow (native Alerts tab) ---- */

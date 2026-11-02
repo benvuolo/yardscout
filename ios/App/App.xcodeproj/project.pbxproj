@@ -17,6 +17,7 @@
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582B6822FE993A50072D4E8 /* SceneDelegate.swift */; };
 		AA10000000000000000001B1 /* PurchasesPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000000000000000001A1 /* PurchasesPlugin.swift */; };
+		AA10000000000000000002B1 /* ReviewPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000000000000000002A1 /* ReviewPlugin.swift */; };
 		AA10000000000000000001B2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000000000000000001A2 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		9582B6822FE993A50072D4E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 		AA10000000000000000001A1 /* PurchasesPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesPlugin.swift; sourceTree = "<group>"; };
+		AA10000000000000000002A1 /* ReviewPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPlugin.swift; sourceTree = "<group>"; };
 		AA10000000000000000001A2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		AA10000000000000000001A3 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		AA10000000000000000001A4 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = Products.storekit; path = ../Products.storekit; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				9582B6822FE993A50072D4E8 /* SceneDelegate.swift */,
 				AA10000000000000000001A2 /* MainViewController.swift */,
 				AA10000000000000000001A1 /* PurchasesPlugin.swift */,
+				AA10000000000000000002A1 /* ReviewPlugin.swift */,
 				AA10000000000000000001A3 /* App.entitlements */,
 				AA10000000000000000001A4 /* Products.storekit */,
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
@@ -171,6 +174,7 @@
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 				9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */,
 				AA10000000000000000001B1 /* PurchasesPlugin.swift in Sources */,
+				AA10000000000000000002B1 /* ReviewPlugin.swift in Sources */,
 				AA10000000000000000001B2 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

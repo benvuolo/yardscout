@@ -62,6 +62,8 @@ dependencies {
     // rejected on 7.x). 8.x changed queryProductDetailsAsync to return a
     // QueryProductDetailsResult — handled in PurchasesPlugin.queryProduct.
     implementation "com.android.billingclient:billing:8.0.0"
+    // Google Play in-app review card (ReviewPlugin.java).
+    implementation "com.google.android.play:review:2.0.2"
     implementation project(':capacitor-android')
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"

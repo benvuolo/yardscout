@@ -10,6 +10,7 @@ public class MainActivity extends BridgeActivity {
         // Custom plugins must be registered BEFORE super.onCreate — the Android
         // analog of iOS gotcha #2 (MainViewController.capacitorDidLoad).
         registerPlugin(PurchasesPlugin.class);
+        registerPlugin(ReviewPlugin.class);
         super.onCreate(savedInstanceState);
     }
 }

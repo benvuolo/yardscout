@@ -432,7 +432,7 @@ function nameList(items, fmt) {
 const FUNNEL_ROWS = [
   ['first-visit', 'First visits'], ['zip-entered', 'Entered a zip'], ['part-first-search', 'Part searches'],
   ['watch-created', 'Watches created'], ['push-enabled', 'Alerts turned on'], ['paywall', 'Paywall opens'],
-  ['checkout-start', 'Checkout taps'], ['pro-converted', 'Purchases'],
+  ['checkout-start', 'Checkout taps'], ['pro-converted', 'Purchases'], ['review-prompt', 'Rating prompts'],
 ];
 
 function usageLines(u, audience) {
@@ -580,6 +580,12 @@ async function loadUsage(env, now) {
   const sum = (rows, k) => rows.reduce((a, r) => a + (r[k] || 0), 0);
   const funnel = {};
   for (const e of events) funnel[e.event] = { yesterday: e.yesterday || 0, week: e.week || 0 };
+  // 'review-prompt/<reason>' (in-app rating sheet, 1.12.11+) rolls up into one row.
+  for (const e of events) {
+    if (!String(e.event).startsWith('review-prompt/')) continue;
+    const f = funnel['review-prompt'] || (funnel['review-prompt'] = { yesterday: 0, week: 0 });
+    f.yesterday += e.yesterday || 0; f.week += e.week || 0;
+  }
   return {
     devices: {
       total: sum(dev, 'n'), pro: sum(dev.filter((r) => r.tier === 'pro'), 'n'),
