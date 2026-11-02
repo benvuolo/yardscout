@@ -42,6 +42,9 @@ const YARD_HEALTH = {
   },
 };
 const INVENTORY_META = { scrapedAt: iso(now), vehicles: 1541 };
+// Every make/model name in the scan (docs/data/models.json). POST /models
+// replaces it, so a test can "rename" a model between two daily runs.
+let MODELS = { scrapedAt: iso(now), makes: { Toyota: { '4Runner': 12, Tacoma: 5 }, Chevrolet: { 'Silverado 1500': 30 }, Scion: { tC: 3 } } };
 
 const json = (res, status, obj) => {
   res.writeHead(status, { 'content-type': 'application/json' });
@@ -60,6 +63,11 @@ createServer(async (req, res) => {
   if (req.method === 'GET' && url.pathname === '/rejected') return json(res, 200, rejected);
   if (req.method === 'GET' && url.pathname === '/data/yard_health.json') return json(res, 200, YARD_HEALTH);
   if (req.method === 'GET' && url.pathname === '/data/inventory_meta.json') return json(res, 200, INVENTORY_META);
+  if (req.method === 'GET' && url.pathname === '/data/models.json') return json(res, 200, MODELS);
+  if (req.method === 'POST' && url.pathname === '/models') {
+    try { MODELS = { ...MODELS, ...JSON.parse(await readBody(req)) }; } catch { /* keep */ }
+    return json(res, 200, MODELS);
+  }
   if (req.method === 'POST' && url.pathname === '/mode') {
     try { mode = { status: 200, message: '', ...JSON.parse(await readBody(req)) }; } catch { /* keep */ }
     return json(res, 200, mode);

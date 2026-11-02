@@ -83,3 +83,22 @@ check("scrapedAt + days", out["scrapedAt"] == payload["scrapedAt"] and out["days
 
 print(f"\n{len(failures)} failure(s)" if failures else "\nALL PASS")
 sys.exit(1 if failures else 0)
+
+
+# ---- models.json (2026-11-02): every make/model name with its count ----------
+def _models_check():
+    import json as _json, tempfile as _tf, pathlib as _pl
+    payload = {"scrapedAt": "2026-11-02T00:00:00Z", "fields": ["id", "vin", "year", "make", "model", "row", "dateAdded", "yard"],
+               "yards": [["Y", "C", "UT", 40.0, -111.0, 60, "yard"]],
+               "vehicles": [[1, "", 2001, "Toyota", "4Runner", "1", "2026-11-01", 0], [2, "", 2002, "Toyota", "4Runner", "2", "2026-11-01", 0],
+                            [3, "", 2003, "Scion", "tC", "3", "2026-11-01", 0], [4, "", 2004, "", "Junk", "4", "2026-11-01", 0]]}
+    old = js.DATA_DIR
+    js.DATA_DIR = _pl.Path(_tf.mkdtemp())
+    try:
+        js._write_models_json(payload)
+        d = _json.loads((js.DATA_DIR / "models.json").read_text())
+    finally:
+        js.DATA_DIR = old
+    check("models.json counts per make/model", d["makes"] == {"Scion": {"tC": 1}, "Toyota": {"4Runner": 2}}, str(d))
+    check("models.json carries scrapedAt", d["scrapedAt"] == "2026-11-02T00:00:00Z")
+_models_check()

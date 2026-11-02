@@ -221,6 +221,28 @@ check('canary: daily html shows the canary line', /Owner canary: last alert reac
 r = await api('/v1/admin/ops/canary', J(ADMIN, { prefix: '' }));
 check('canary: can be turned off again', r.status === 200 && r.data.prefix === null, JSON.stringify(r.data));
 
+/* ---- 8c. saved watches still name real cars (models.json check) ---- */
+r = await api('/v1/device/register', J({}, { deviceId: 'dead0000-0000-4000-8000-000000000002', tier: 'free',
+  fcmToken: 'wchk:APA91b' + 'y'.repeat(100), watches: [
+    { make: 'Chevrolet', model: 'Silverado', lat: 40.76, lng: -111.89, radiusMi: 100 },   // contains-match -> resolves
+    { make: 'Toyota', model: 'Scion tC', lat: 40.76, lng: -111.89, radiusMi: 100 },       // wrong-make legacy watch -> resolves (Scion / tC)
+    { make: 'Toyota', model: 'Celica', lat: 40.76, lng: -111.89, radiusMi: 100 },         // nothing in the scan -> orphan (legit)
+  ] }));
+check('watch-check: device registers', r.status === 200);
+r = await dailyRun({ dryRun: true });
+let wc = r.data.watchCheck;
+check('watch-check: resolves contains + wrong-make watches, lists the orphan', wc && !wc.error && wc.resolved >= 2 && wc.orphans.some((o) => o.model === 'Celica') && !wc.orphans.some((o) => o.model === 'Silverado' || o.model === 'Scion tC'), JSON.stringify(wc));
+check('watch-check: a brand-new watch that names nothing is NOT "new" (it never resolved)', wc && wc.newlyOrphaned.length === 0 && !r.data.openConditions?.some((c) => c.id === 'watch-orphans'), JSON.stringify(wc?.newlyOrphaned));
+check('watch-check: daily text + html carry the line', /WATCHES: .* name cars in the scan/.test(r.data.email?.text || '') && /Saved watches/.test(r.data.email?.html || ''));
+// A "rename" on our side: Silverado 1500 becomes "Silverado 1500 Pickup" (still contains) — fine; Scion tC disappears entirely — the Scion tC watch is NEWLY orphaned.
+await fetch(MOCK + '/models', { method: 'POST', body: JSON.stringify({ makes: { Toyota: { '4Runner': 12, Tacoma: 5 }, Chevrolet: { 'Silverado 1500 Pickup': 30 } } }) });
+r = await dailyRun({ dryRun: true });
+wc = r.data.watchCheck;
+check('watch-check: a name that matched yesterday and not today is NEW', wc && wc.newlyOrphaned.length === 1 && wc.newlyOrphaned[0].model === 'Scion tC', JSON.stringify(wc?.newlyOrphaned));
+check('watch-check: newly orphaned is an open issue', r.data.openConditions?.some((c) => c.id === 'watch-orphans' && /Scion tC/.test(c.title)), JSON.stringify(r.data.openConditions));
+check('watch-check: the still-orphaned Celica is not reported as new', !wc.newlyOrphaned.some((o) => o.model === 'Celica'));
+check('watch-check: no user email in the line', !/tester\d@users|@example/.test((r.data.email?.text || '').split('WATCHES')[1] || ''));
+
 /* ---- 9. production guard: the clock offset is DEV-only (sanity: present here) ---- */
 r = await checkRun({ dryRun: true, nowOffsetHours: 30 });
 check('offset honored in DEV_MODE', r.data.active.some((c) => c.id === 'stale'));

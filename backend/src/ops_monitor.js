@@ -29,6 +29,7 @@
 
 import { json, err } from './util.js';
 import { CHANNELS, utcDay, resendFetch, pruneOpsErrors } from './ops.js';
+import { watchMatches } from './alerts.js';
 
 const H = 3600_000;
 const DAY = 24 * H;
@@ -520,6 +521,8 @@ function composeDaily(r) {
   L.push('');
   L.push(...usageLines(r.usage, r.audience));
   L.push('');
+  L.push(...watchCheckLines(r.watchCheck));
+  L.push('');
   L.push('— YardScout daily health (yardscout-api, 13:07 UTC). Problems also alert hourly with subject "[YardScout alert]".');
   return L.join('\n') + '\n';
 }
@@ -709,6 +712,16 @@ export function composeDailyHtml(r) {
     S.push(hSection('Usage', hMuted(`Could not load (${esc((u && u.error) || 'unknown')})`)));
   }
 
+  const wc = r.watchCheck;
+  if (wc && !wc.error) {
+    let body = `<div style="font-size:14px;"><strong>${fmtInt(wc.watches)}</strong> watches on <strong>${fmtInt(wc.names)}</strong> make/model names · <span style="color:${C.ok};font-weight:600;">${fmtInt(wc.resolved)} name cars in the scan ✓</span></div>`;
+    if (wc.orphans.length) body += `<div style="font-size:13px;color:${C.dim};margin-top:4px;">Naming no car right now (${wc.orphans.length}): ${wc.orphans.slice(0, 12).map((o) => `${esc(`${o.make} ${o.model}`.trim())} (${o.watches})`).join(', ')}${wc.orphans.length > 12 ? ', …' : ''}</div>`;
+    if (wc.newlyOrphaned.length) body += `<div style="font-size:13px;color:${C.bad};font-weight:600;margin-top:4px;">New since yesterday — a rename may have broken these: ${wc.newlyOrphaned.map((o) => esc(`${o.make} ${o.model}`.trim())).join(', ')}</div>`;
+    S.push(hSection('Saved watches', body, 'every watched name checked against the scan'));
+  } else {
+    S.push(hSection('Saved watches', hMuted(`Could not check (${esc((wc && wc.error) || 'unknown')})`)));
+  }
+
   return `<!doctype html><html><body style="margin:0;padding:0;background:${C.soft};">
 <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;background:${C.soft};"><tr><td align="center" style="padding:20px 10px;">
 <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;max-width:640px;background:#fff;border:1px solid ${C.line};border-radius:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
@@ -722,6 +735,65 @@ ${S.join('\n')}
   Sent daily at 13:07 UTC by yardscout-api. Problems also alert hourly with the subject “[YardScout alert]”.
 </td></tr>
 </table></td></tr></table></body></html>`;
+}
+
+/* ===== saved watches still name real cars? (2026-11-02) =====
+ * Watches are never rewritten when names change on our side; the matcher
+ * adapts (alerts.js watchMatches). This proves it every morning: every
+ * distinct make/model people watch (device + account watches) is checked
+ * against models.json (every name in the scan). A name that resolves to no
+ * car can be legitimate (an '86 Celica nobody has today); a name that
+ * resolved YESTERDAY and not today is a rename that just broke a watch — an
+ * open issue. Names only; no ids, no emails. */
+const ORPHANS_KEY = 'ops:watch-orphans';
+async function loadWatchCheck(env, now) {
+  const [dev, acct, models] = await Promise.all([
+    env.DB.prepare(
+      `SELECT json_extract(w.value,'$.make') AS make, json_extract(w.value,'$.model') AS model, COUNT(*) AS n
+         FROM devices d, json_each(d.watches_json) w WHERE json_valid(d.watches_json) GROUP BY 1, 2`
+    ).all().then((r) => r.results || []),
+    env.DB.prepare('SELECT make, model, COUNT(*) AS n FROM watches GROUP BY 1, 2').all().then((r) => r.results || []),
+    fetchPublicJson(env, 'models.json'),
+  ]);
+  if (!models.data || typeof models.data.makes !== 'object') return { error: models.error || 'models.json unexpected shape' };
+  const names = new Map();
+  for (const r of [...dev, ...acct]) {
+    const make = String(r.make || '').trim(), model = String(r.model || '').trim();
+    if (!make && !model) continue;
+    const key = `${make}\u0000${model}`;
+    names.set(key, { make, model, watches: (names.get(key)?.watches || 0) + (r.n || 0) });
+  }
+  const cars = [];
+  for (const [make, ms] of Object.entries(models.data.makes)) for (const model of Object.keys(ms)) cars.push({ make, model, year: 0, lat: null, lng: null, vpic: null });
+  const orphans = [];
+  for (const w of names.values()) {
+    const probe = { make: w.make, model: w.model };
+    if (!cars.some((c) => watchMatches(probe, c))) orphans.push(w);
+  }
+  orphans.sort((a, b) => b.watches - a.watches || a.make.localeCompare(b.make));
+  // "Newly orphaned" = resolved on the previous run, orphaned now. A brand-new
+  // watch for a car nobody has today is NOT new (it never resolved); only a
+  // name we were matching yesterday and aren't today points at a rename.
+  const key = (o) => `${o.make}\u0000${o.model}`;
+  const orphanKeys = new Set(orphans.map(key));
+  const resolvedKeys = [...names.values()].map(key).filter((k) => !orphanKeys.has(k));
+  let prev = null;
+  try { prev = JSON.parse(await env.ENTITLEMENTS.get(ORPHANS_KEY) || 'null'); } catch { prev = null; }
+  const prevResolved = new Set((prev && Array.isArray(prev.resolved)) ? prev.resolved : []);
+  const newlyOrphaned = orphans.filter((o) => prevResolved.has(key(o)));
+  try { await env.ENTITLEMENTS.put(ORPHANS_KEY, JSON.stringify({ resolved: resolvedKeys, orphans: [...orphanKeys] })); } catch { /* next run compares against the old set */ }
+  const totalWatches = [...names.values()].reduce((k, w) => k + w.watches, 0);
+  return { scrapedAt: models.data.scrapedAt || null, names: names.size, watches: totalWatches,
+    resolved: names.size - orphans.length, orphans, newlyOrphaned };
+}
+
+function watchCheckLines(c) {
+  if (!c) return ['WATCHES: not checked'];
+  if (c.error) return [`WATCHES: could not check (${c.error})`];
+  const L = [`WATCHES: ${fmtInt(c.watches)} watches on ${fmtInt(c.names)} make/model names · ${fmtInt(c.resolved)} name cars in the scan ✓`];
+  if (c.orphans.length) L.push(`  Naming no car right now (${c.orphans.length}): ${c.orphans.slice(0, 12).map((o) => `${o.make} ${o.model}`.trim() + ` (${o.watches})`).join(', ')}${c.orphans.length > 12 ? ', …' : ''}`);
+  if (c.newlyOrphaned.length) L.push(`  NEW since yesterday — a rename may have broken these: ${c.newlyOrphaned.map((o) => `${o.make} ${o.model}`.trim()).join(', ')}`);
+  return L;
 }
 
 /** Builds the daily report (JSON + the email it would send). Read-only. */
@@ -743,6 +815,8 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
   const watchers = await env.DB.prepare('SELECT COUNT(*) AS n FROM email_watchers WHERE enabled = 1').first();
   let usage;
   try { usage = await loadUsage(env, now); } catch (e) { usage = { error: String((e && e.message) || e).slice(0, 200) }; }
+  let watchCheck;
+  try { watchCheck = await loadWatchCheck(env, now); } catch (e) { watchCheck = { error: String((e && e.message) || e).slice(0, 200) }; }
 
   const channels = {};
   for (const [c, s] of Object.entries(ev.stats.channels)) channels[c] = { ...s.last24h };
@@ -752,6 +826,10 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
   if (yardHealth && yardHealth.missing && yardHealth.missing.length) {
     const m = yardHealth.missing;
     conds.push({ id: 'yards-missing', title: `${m.length} yard${m.length === 1 ? '' : 's'} missing from the scan: ${m.slice(0, 4).map((y) => y.name).join(', ')}${m.length > 4 ? ` +${m.length - 4} more` : ''}` });
+  }
+  if (watchCheck && !watchCheck.error && watchCheck.newlyOrphaned.length) {
+    const o = watchCheck.newlyOrphaned;
+    conds.push({ id: 'watch-orphans', title: `${o.length} watched name${o.length === 1 ? '' : 's'} stopped matching any car since yesterday: ${o.slice(0, 4).map((w) => `${w.make} ${w.model}`.trim()).join(', ')}${o.length > 4 ? ` +${o.length - 4} more` : ''}` });
   }
   const n = conds.length;
   const report = {
@@ -777,6 +855,7 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
       emailWatchers: (watchers && watchers.n) || 0,
     },
     usage,
+    watchCheck,
   };
   const tail = report.inventory.yards != null
     ? ` · ${fmtInt(report.inventory.yards)} yards · ${fmtInt(report.inventory.vehicles)} cars` : '';

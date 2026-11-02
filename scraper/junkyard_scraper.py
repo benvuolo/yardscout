@@ -22120,6 +22120,28 @@ def _write_junkyards_json(payload: dict) -> None:
          "newest": newest, "stateMakes": top}, separators=(",", ":")))
 
 
+def _write_models_json(payload: dict) -> None:
+    """docs/data/models.json — every make/model name in the scan with its car
+    count (~1,700 names, ~40 KB). The daily health email checks each saved
+    watch name against it so a rename on our side can never quietly orphan a
+    watch (backend/src/ops_monitor.js, 2026-11-02)."""
+    fields = payload.get("fields") or []
+    fi = {n: i for i, n in enumerate(fields)}
+    if "make" not in fi or "model" not in fi:
+        return
+    makes: dict[str, dict[str, int]] = {}
+    for r in payload.get("vehicles") or []:
+        mk, md = str(r[fi["make"]] or ""), str(r[fi["model"]] or "")
+        if not mk:
+            continue
+        makes.setdefault(mk, {})
+        makes[mk][md] = makes[mk].get(md, 0) + 1
+    (DATA_DIR / "models.json").write_text(json.dumps(
+        {"scrapedAt": payload.get("scrapedAt"),
+         "makes": {mk: dict(sorted(v.items())) for mk, v in sorted(makes.items())}},
+        separators=(",", ":")))
+
+
 def _write_yards_added(payload: dict) -> None:
     """docs/data/yards_added.json — yards first seen by the history DB in the
     last 90 days (the public /yards page's "recently added" feed, which is
@@ -23062,6 +23084,7 @@ def main():
                     _write_inventory_meta(payload)
                     _write_landed_json(payload)
                     _write_junkyards_json(payload)
+                    _write_models_json(payload)
                     _write_yards_added(payload)
                     EXTRAS_FILE.write_text(json.dumps(
                         {"version": 1, "scrapedAt": payload["scrapedAt"],
@@ -23108,6 +23131,7 @@ def main():
                 _write_inventory_meta(payload)
                 _write_landed_json(payload)
                 _write_junkyards_json(payload)
+                _write_models_json(payload)
                 _write_yards_added(payload)
                 EXTRAS_FILE.write_text(json.dumps(
                     {"version": 1, "scrapedAt": payload["scrapedAt"],
