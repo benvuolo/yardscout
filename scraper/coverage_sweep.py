@@ -462,16 +462,16 @@ def run(session, use_osm: bool = True, use_ario: bool = True, max_sites: int = 4
     site = site or Site(session)
     notes: list[str] = []
     raw: list[Candidate] = []
-    if use_ario:
-        a, err = ario_fetch(session)
-        raw += a
+    for on, label, fetch in ((use_ario, "Ario", ario_fetch), (use_osm, "OpenStreetMap", osm_fetch)):
+        if not on:
+            continue
+        try:
+            got, err = fetch(session)
+        except Exception as e:  # one broken source must not sink the sweep
+            got, err = [], f"{type(e).__name__}: {str(e)[:120]}"
+        raw += got
         if err:
-            notes.append(f"Ario: {err}.")
-    if use_osm:
-        o, err = osm_fetch(session)
-        raw += o
-        if err:
-            notes.append(f"OpenStreetMap: {err}.")
+            notes.append(f"{label}: {err}.")
     out: list[Candidate] = []
     skipped: dict[str, int] = {}
     checked = 0

@@ -118,6 +118,10 @@ out, skipped, notes = cs.run(None, known=known, site=fs, max_sites=1,
 check("run: tracked yard skipped", skipped == {"tracked": 1}, str(skipped))
 check("run: budget respected", fs.gets == ["https://n1.example/"] and out[1].evidence.startswith("not checked"), str(fs.gets))
 check("run: notes carry source errors and the cap", any("Ario" in n for n in notes) and any("capped" in n for n in notes), str(notes))
+def boom(_):
+    raise RuntimeError("needs cryptography")
+out2, _, notes2 = cs.run(None, known=known, site=FakeSite({}), osm_fetch=lambda s: ([], ""), ario_fetch=boom)
+check("run: a source that raises becomes a note", out2 == [] and any("needs cryptography" in n for n in notes2), str(notes2))
 md = cs.render_md(out, skipped, notes, "2026-11-02T00:00:00Z")
 check("report: tier A table lists the PT1 yard", "## A." in md and "New U-Pull" in md and "gm_vehicle_search" in md)
 
