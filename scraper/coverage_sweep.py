@@ -68,10 +68,14 @@ OUT_MD = SCRIPT_DIR / "coverage_sweep.md"
 OUT_JSON = SCRIPT_DIR / "coverage_sweep.json"
 
 UA = "YardScout/1.12 (+https://yardscout.io)"
-OVERPASS_URL = "https://overpass-api.de/api/interpreter"
 SITE_DELAY_SEC = 1.5
 TIMEOUT = 20
 MATCH_KM = 3.0
+ARIO_MIN_ROWS = 50        # an Ario yard counts as live with this many rows...
+ARIO_FRESH_DAYS = 30      # ...and a set-out within this many days
+US_STATES = ("AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ "
+             "NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY").split()
+OVERPASS_URLS = ("https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter")
 
 # ---------------------------------------------------------------- names
 # Overpass regex (POSIX ERE, case-insensitive). Broad on purpose; the Python
@@ -213,6 +217,9 @@ def match_known(name: str, city: str, state: str, lat: float | None, lng: float 
             return best[1]
     n, c = _norm(name), _norm(city)
     for k in known:
+        if _norm(k.name) == n:  # "Pull A Part - Akron" (Ario) == "Pull-A-Part - Akron" (tracked)
+            return k
+    for k in known:
         kn = _norm(k.name)
         if c and _norm(k.city) == c and (n in kn or kn.split(" - ")[0] in n):
             return k
@@ -236,10 +243,10 @@ class Candidate:
     extra: dict = field(default_factory=dict)
 
 
-def overpass_query() -> str:
+def overpass_query(state: str) -> str:
     return (
-        '[out:json][timeout:600];area["ISO3166-1"="US"][admin_level=2]->.us;'
-        f'nwr["name"~"{OSM_NAME_RE}",i](area.us);out center tags;'
+        f'[out:json][timeout:180];area["ISO3166-2"="US-{state}"]->.s;'
+        f'nwr["name"~"{OSM_NAME_RE}",i](area.s);out center tags;'
     )
 
 
@@ -265,15 +272,32 @@ def parse_overpass(data: dict) -> list[Candidate]:
     return out
 
 
-def fetch_osm(session) -> tuple[list[Candidate], str]:
-    try:
-        r = session.post(OVERPASS_URL, data={"data": overpass_query()}, timeout=700,
-                         headers={"User-Agent": UA})
-        if r.status_code != 200:
-            return [], f"Overpass HTTP {r.status_code}"
-        return parse_overpass(r.json()), ""
-    except Exception as e:  # network, JSON
-        return [], f"Overpass failed: {type(e).__name__}"
+def fetch_osm(session, states=US_STATES, pause: float = 3.0) -> tuple[list[Candidate], str]:
+    """One Overpass query per state (a nationwide regex times out), each tried
+    on the main server then a mirror. Failed states are named in the note."""
+    out: list[Candidate] = []
+    failed: list[str] = []
+    for st in states:
+        got = None
+        for url in OVERPASS_URLS:
+            try:
+                r = session.post(url, data={"data": overpass_query(st)}, timeout=240, headers={"User-Agent": UA})
+                if r.status_code == 200:
+                    got = parse_overpass(r.json())
+                    break
+                if r.status_code == 429:
+                    time.sleep(30)
+            except Exception:
+                pass
+        if got is None:
+            failed.append(st)
+        else:
+            for c in got:
+                c.state = c.state or st
+            out += got
+        if pause:
+            time.sleep(pause)
+    return out, (f"Overpass failed for {', '.join(failed)}" if failed else "")
 
 
 def fetch_ario(session) -> tuple[list[Candidate], str]:
@@ -316,8 +340,15 @@ def fetch_ario(session) -> tuple[list[Candidate], str]:
         c = Candidate(name=name, lat=pin[0] if pin else None, lng=pin[1] if pin else None,
                       website=f"https://ario.autorecycler.io/yard/{slug}", source="ario",
                       platform="Ario (autorecycler.io)", extra={"slug": slug, "live_rows": total, "newest": newest})
-        if total > 0:
-            c.tier, c.evidence = "A", f"live on Ario: {total} rows, newest set-out {newest or 'undated'}"
+        fresh = False
+        try:
+            fresh = (datetime.now(timezone.utc).date() - datetime.fromisoformat(newest).date()).days <= ARIO_FRESH_DAYS
+        except ValueError:
+            pass
+        if total >= ARIO_MIN_ROWS and fresh:
+            c.tier, c.evidence = "A", f"live on Ario: {total} rows, newest set-out {newest}"
+        elif total > 0:
+            c.tier, c.evidence = "E", f"on Ario but stale: {total} rows, newest set-out {newest or 'undated'}"
         else:
             c.tier, c.evidence = "E", "Ario org exists but not on the live backend"
         out.append(c)

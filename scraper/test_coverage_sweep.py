@@ -67,6 +67,34 @@ known = [cs.Known("Pull-A-Part - Atlanta", "Atlanta", "GA", 33.75, -84.39, "trac
 check("match: within 3 km", cs.match_known("Pull A Part", "", "", 33.76, -84.39, known).status == "tracked")
 check("match: far away is new", cs.match_known("Pull A Part", "", "", 34.5, -84.39, known) is None)
 check("match: registry by name + city without coords", cs.match_known("Kenny U-Pull", "Bangor", "ME", None, None, known).status == "candidate")
+check("match: same name, punctuation aside, no coords or city", cs.match_known("Pull A Part - Atlanta", "", "", None, None, known).status == "tracked")
+
+
+class FakeResp:
+    def __init__(self, status, payload=None):
+        self.status_code, self._p = status, payload or {}
+
+    def json(self):
+        return self._p
+
+
+class FakeOverpass:
+    def __init__(self, plan):
+        self.plan, self.calls = plan, []
+
+    def post(self, url, data=None, timeout=None, headers=None):
+        st = data["data"].split('"US-')[1][:2]
+        self.calls.append((url, st))
+        return self.plan.get((url, st), FakeResp(504))
+
+
+m, k = cs.OVERPASS_URLS
+el = {"elements": [{"type": "node", "lat": 41.0, "lon": -96.0, "tags": {"name": "U-Pull-It"}}]}
+fo = FakeOverpass({(m, "NE"): FakeResp(200, el), (k, "IA"): FakeResp(200, el)})
+got, err = cs.fetch_osm(fo, states=("NE", "IA", "KS"), pause=0)
+check("osm: per-state, mirror on failure, failed states named",
+      len(got) == 2 and got[0].state == "NE" and got[1].state == "IA" and err == "Overpass failed for KS"
+      and (k, "IA") in fo.calls, f"{err} {fo.calls}")
 
 
 # 5. check_site with a fake site
