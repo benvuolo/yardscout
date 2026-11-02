@@ -275,7 +275,12 @@ async function loadCanary(env, now) {
   if (!d) return { found: false, ok: false };
   const at = d.last_push_at ? Date.parse(d.last_push_at) : NaN;
   const ageHours = Number.isFinite(at) ? hours(now - at) : null;
-  return { found: true, ok: ageHours != null && ageHours <= CANARY_MAX_H, ageHours,
+  // Grace period: a freshly named canary may never have had a push yet —
+  // give it CANARY_MAX_H from setup before calling that a failure.
+  let setAt = NaN;
+  try { setAt = Date.parse((env.ENTITLEMENTS && await env.ENTITLEMENTS.get(CANARY_KEY + ':set-at')) || ''); } catch { setAt = NaN; }
+  const inGrace = ageHours == null && Number.isFinite(setAt) && now - setAt <= CANARY_MAX_H * H;
+  return { found: true, ok: inGrace || (ageHours != null && ageHours <= CANARY_MAX_H), ageHours, inGrace,
     lastPushAt: d.last_push_at || null, tier: d.tier, pushReady: !!d.push_ready };
 }
 
@@ -458,6 +463,7 @@ function usageLines(u, audience) {
 function canaryLine(c) {
   if (!c) return 'Owner canary: not set up';
   if (!c.found) return 'Owner canary: your phone is not registered for push ✗';
+  if (c.inGrace) return 'Owner canary: set up, waiting for the first alert to reach your phone (36 h grace)';
   return `Owner canary: last alert reached your phone ${c.ageHours == null ? 'never' : `${c.ageHours} h ago`} ${c.ok ? '✓' : '✗'}`;
 }
 
@@ -813,7 +819,12 @@ export async function handleOpsCanarySet(req, env) {
   try { body = await req.json(); } catch { body = {}; }
   const prefix = String(body.prefix || '').trim().toLowerCase();
   if (prefix && !/^[0-9a-f-]{8,36}$/.test(prefix)) return err(400, 'bad_prefix', 'prefix must be 8+ hex characters of the device id.');
-  if (prefix) await env.ENTITLEMENTS.put(CANARY_KEY, prefix); else await env.ENTITLEMENTS.delete(CANARY_KEY);
+  if (prefix) {
+    await env.ENTITLEMENTS.put(CANARY_KEY, prefix);
+    await env.ENTITLEMENTS.put(CANARY_KEY + ':set-at', new Date().toISOString());
+  } else {
+    await env.ENTITLEMENTS.delete(CANARY_KEY);
+  }
   return json({ ok: true, prefix: prefix || null, canary: await loadCanary(env, Date.now()) });
 }
 

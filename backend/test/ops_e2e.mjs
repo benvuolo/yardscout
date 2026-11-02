@@ -213,7 +213,10 @@ r = await api('/v1/device/register', J({}, { deviceId: 'c0ffee00-0000-4000-8000-
   fcmToken: 'canary:APA91b' + 'x'.repeat(100), watches: [{ make: 'Ford', model: 'F-150' }] }));
 check('canary: device registers', r.status === 200, JSON.stringify(r.data));
 r = await dailyRun({ dryRun: true });
-check('canary: registered but never pushed -> still an issue', r.data.canary?.found === true && r.data.canary?.ok === false && r.data.canary?.pushReady === true, JSON.stringify(r.data.canary));
+check('canary: registered, never pushed, just set up -> grace, not an issue', r.data.canary?.found === true && r.data.canary?.ok === true && r.data.canary?.inGrace === true && !r.data.openConditions?.some((c) => c.id === 'canary'), JSON.stringify(r.data.canary));
+check('canary: daily html shows the grace line', /waiting for the first alert/.test(r.data.email?.html || ''));
+r = await dailyRun({ dryRun: true, nowOffsetHours: 40 });
+check('canary: still never pushed 40 h after setup -> issue', r.data.canary?.ok === false && r.data.openConditions?.some((c) => c.id === 'canary'), JSON.stringify(r.data.canary));
 check('canary: daily html shows the canary line', /Owner canary: last alert reached your phone never/.test(r.data.email?.html || ''));
 r = await api('/v1/admin/ops/canary', J(ADMIN, { prefix: '' }));
 check('canary: can be turned off again', r.status === 200 && r.data.prefix === null, JSON.stringify(r.data));

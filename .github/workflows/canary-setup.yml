@@ -65,4 +65,5 @@ jobs:
           open("prefix.txt", "w").write(r["prefix"])
           PY
           npx --yes wrangler@4 kv key put --binding ENTITLEMENTS "ops:canary-device" "$(cat prefix.txt)" --remote
+          npx --yes wrangler@4 kv key put --binding ENTITLEMENTS "ops:canary-device:set-at" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" --remote
           echo "::notice::Canary set to device $(cat prefix.txt)… — you can delete the $MARKER watch now."
