@@ -1,0 +1,1685 @@
+{
+ "at": "2026-11-02T21:51:46Z",
+ "skipped": {
+  "tracked": 18
+ },
+ "notes": [
+  "OpenStreetMap: Overpass HTTP 504."
+ ],
+ "candidates": [
+  {
+   "name": "P & C AUTO WRECKERS",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pandcautoparts",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pandcautoparts",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "UNITED TRUCK DISMANTLERS",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/unitedtruck",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "unitedtruck",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "ALL CAR & TRUCK RECYCLING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/allcar",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "allcar",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "MENDOZA AUTO DISMANTLING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/mendozaauto",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "mendozaauto",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "ARIO AUTO PARTS",
+   "city": "",
+   "state": "",
+   "lat": 30.2535,
+   "lng": -97.7484,
+   "website": "https://ario.autorecycler.io/yard/harolds-auto-parts-u-pull-it",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 608 rows, newest set-out 2026-09-29",
+   "known_status": "",
+   "extra": {
+    "slug": "harolds-auto-parts-u-pull-it",
+    "live_rows": 608,
+    "newest": "2026-09-29"
+   }
+  },
+  {
+   "name": "VIKING AUTO PARTS",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/vikingautoparts",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "vikingautoparts",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "John's Auto Wrecking",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/johns",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "johns",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "PACIFIC AUTO RECYCLING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pacific",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pacific",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "JOHN'S USED CARS",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/1548883285138x726590182942834700",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "1548883285138x726590182942834700",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "KENNEDY AUTO CO",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/kennedys",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "kennedys",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Riteway Demo",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/riteway-demo",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "riteway-demo",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "TIMO'S AUTO WRECKING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/timosautowrecking",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "timosautowrecking",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "PHELPS AUTO WRECKERS, INC.",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/phelpsautowreckers",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "phelpsautowreckers",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "HIGGINS AUTO WRECKING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/higgins",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "higgins",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "T AND T SALVAGE AND STORAGE",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/tandtsalvagestorage",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "tandtsalvagestorage",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Autogator",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/autogator",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "autogator",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "NEVADA PIC A PART - LAS VEGAS",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/nvpap-lv",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "nvpap-lv",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "DIS & DAT AUTO RECYCLING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/dis-n-dat",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "dis-n-dat",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "TIMOS AUTO WRECKING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/timos-auto-wrecking",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "timos-auto-wrecking",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "PICK THE PART",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pick-the-part",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pick-the-part",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "A&S AUTO WRECKING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/a-s-auto-wrecking",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "a-s-auto-wrecking",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "PARTS R US",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/parts-r-us",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "parts-r-us",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "A-1 METALS & AUTO SALVAGE INC",
+   "city": "",
+   "state": "",
+   "lat": 35.6855,
+   "lng": -120.6982,
+   "website": "https://ario.autorecycler.io/yard/a1-metals",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 507 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "a1-metals",
+    "live_rows": 507,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Testino Autos",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/testino-autos",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "testino-autos",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "SAN LUIS AUTO SALVAGE",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/san-luis-auto-salvage",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "san-luis-auto-salvage",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Jack Autos",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/jack-autos",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "jack-autos",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "AMERICAN PARTS CENTER",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/american-parts-center",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "american-parts-center",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "PRESTIGE PULL YOUR PART",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/prestige-pull-your-part",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "prestige-pull-your-part",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "AB AUTO SALVAGE",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/ab-auto-salvage",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "ab-auto-salvage",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "GULF BANK USED AUTO PARTS",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/gulf-bank-used-auto-parts",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "gulf-bank-used-auto-parts",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "SAM'S AUTO SALVAGE",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/sam's-auto-salvage",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "sam's-auto-salvage",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "ADAM CAR BUYER",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/adam-car-buyer",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "adam-car-buyer",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "PASO ROBLES AUTO WRECKING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/paso-robles-auto-wrecking",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "paso-robles-auto-wrecking",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Test Auto Parts",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/test-auto-parts",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "test-auto-parts",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Ezer",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/ezer",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "ezer",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Create Digital Growth Inc.",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/create-digital-growth-inc",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "create-digital-growth-inc",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Universal Auto and Recycling Group",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/universal-auto-and-recycling-group",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "universal-auto-and-recycling-group",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Green Vehicle Disposal Inc.",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/green-vehicle-disposal-inc",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "green-vehicle-disposal-inc",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Green Vehicle Disposal Inc.",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/green-vehicle-disposal-inc-1",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "green-vehicle-disposal-inc-1",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "LONG'S AUTO RECYCLING",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/longs-auto-recycling",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "longs-auto-recycling",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "AJAX AUTO DISMANTLERS",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/ajax",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "ajax",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "LKQ San Bernadino",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/lqk-san-bernadino",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "lqk-san-bernadino",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pick n Pull Oakland",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pick-n-pull-oakland",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pick-n-pull-oakland",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "U-PULL IT AUTO SALVAGE OF PADUCAH",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/asop",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "asop",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "YETI USED AUTO PARTS",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/yeti",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "yeti",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Yank A Part",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/yank-a-part",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1 rows, newest set-out 2024-04-10",
+   "known_status": "",
+   "extra": {
+    "slug": "yank-a-part",
+    "live_rows": 1,
+    "newest": "2024-04-10"
+   }
+  },
+  {
+   "name": "SOUTHERN AUTO SALVAGE",
+   "city": "",
+   "state": "",
+   "lat": 35.3213,
+   "lng": -79.1069,
+   "website": "https://ario.autorecycler.io/yard/southern-auto-salvage",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "southern-auto-salvage",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Salisbury Salvage",
+   "city": "",
+   "state": "",
+   "lat": 42.8737,
+   "lng": -70.8755,
+   "website": "https://ario.autorecycler.io/yard/salisbury-salvage",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "salisbury-salvage",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "A-Z U-PULL-IT USED AUTO PARTS INC.",
+   "city": "",
+   "state": "",
+   "lat": 40.4994,
+   "lng": -75.956,
+   "website": "https://ario.autorecycler.io/yard/a-to-z-u-pull-it",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "a-to-z-u-pull-it",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Blue & Gold Auto Salvage",
+   "city": "",
+   "state": "",
+   "lat": 32.981,
+   "lng": -80.0154,
+   "website": "https://ario.autorecycler.io/yard/blue--gold-auto-salvage-goose-creek-south-carolina",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "blue--gold-auto-salvage-goose-creek-south-carolina",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Young's U-Pull It",
+   "city": "",
+   "state": "",
+   "lat": 35.2826,
+   "lng": -78.0478,
+   "website": "https://ario.autorecycler.io/yard/youngs-u-pull-it-north-carolina",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "youngs-u-pull-it-north-carolina",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Bevell's Pull It Yourself Used Auto Parts",
+   "city": "",
+   "state": "",
+   "lat": 35.3513,
+   "lng": -78.0178,
+   "website": "https://ario.autorecycler.io/yard/goldsboro-north-carolina-bevells-pull-it-yourself-used-auto-parts",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "goldsboro-north-carolina-bevells-pull-it-yourself-used-auto-parts",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Sam's Pull A Part",
+   "city": "",
+   "state": "",
+   "lat": 42.2372,
+   "lng": -71.7832,
+   "website": "https://ario.autorecycler.io/yard/sams-pull-a-part",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "sams-pull-a-part",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "New org",
+   "city": "",
+   "state": "",
+   "lat": 39.5165,
+   "lng": -74.6632,
+   "website": "https://ario.autorecycler.io/yard/rt-50-u-pull-it-nj",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "rt-50-u-pull-it-nj",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Jamm Junkyard",
+   "city": "",
+   "state": "",
+   "lat": 26.0716,
+   "lng": -80.2099,
+   "website": "https://ario.autorecycler.io/yard/jamm-junkyard",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "jamm-junkyard",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Gaston Towing & Recovery",
+   "city": "",
+   "state": "",
+   "lat": 35.2243,
+   "lng": -81.1995,
+   "website": "https://ario.autorecycler.io/yard/gaston-towing-recovery",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "gaston-towing-recovery",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Atlanta East",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Nashville",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-nashville",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1191 rows, newest set-out 2026-11-02",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-nashville",
+    "live_rows": 1191,
+    "newest": "2026-11-02"
+   }
+  },
+  {
+   "name": "Pull A Part - Corpus Christi",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-corpus-christi",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1039 rows, newest set-out 2026-10-28",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-corpus-christi",
+    "live_rows": 1039,
+    "newest": "2026-10-28"
+   }
+  },
+  {
+   "name": "Pull A Part - Aurora",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-aurora",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-aurora",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Denver",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-denver",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-denver",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Fort Myers",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-fort-myers",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-fort-myers",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Birmingham",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-birmingham",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1354 rows, newest set-out 2026-10-31",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-birmingham",
+    "live_rows": 1354,
+    "newest": "2026-10-31"
+   }
+  },
+  {
+   "name": "Pull A Part - Orlando",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-orlando",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-orlando",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - West Palm Beach",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-west-palm-beach",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-west-palm-beach",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Montgomery",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-montgomery",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1057 rows, newest set-out 2026-11-02",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-montgomery",
+    "live_rows": 1057,
+    "newest": "2026-11-02"
+   }
+  },
+  {
+   "name": "Pull A Part - Colorado Springs",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-colorado-springs",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-colorado-springs",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Phoenix",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-phoenix",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-phoenix",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Atlanta North",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-atlanta-north",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1025 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-atlanta-north",
+    "live_rows": 1025,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - Tucson",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-tucson",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 817 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-tucson",
+    "live_rows": 817,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - Atlanta South",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-atlanta-south",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1352 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-atlanta-south",
+    "live_rows": 1352,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - Augusta",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-augusta",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1215 rows, newest set-out 2026-11-02",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-augusta",
+    "live_rows": 1215,
+    "newest": "2026-11-02"
+   }
+  },
+  {
+   "name": "Pull A Part - Indianapolis",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-indianapolis",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1164 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-indianapolis",
+    "live_rows": 1164,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - Louisville",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-louisville",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1589 rows, newest set-out 2026-10-28",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-louisville",
+    "live_rows": 1589,
+    "newest": "2026-10-28"
+   }
+  },
+  {
+   "name": "Pull A Part - Baton Rouge",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-baton-rouge",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 972 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-baton-rouge",
+    "live_rows": 972,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - El Paso",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-el-paso",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1492 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-el-paso",
+    "live_rows": 1492,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - Lafayette",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-lafayette",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1519 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-lafayette",
+    "live_rows": 1519,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - New Orleans West",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-new-orleans-west",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1248 rows, newest set-out 2026-11-02",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-new-orleans-west",
+    "live_rows": 1248,
+    "newest": "2026-11-02"
+   }
+  },
+  {
+   "name": "Pull A Part - Jackson",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-jackson",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1005 rows, newest set-out 2026-11-02",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-jackson",
+    "live_rows": 1005,
+    "newest": "2026-11-02"
+   }
+  },
+  {
+   "name": "Pull A Part - Charlotte",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-charlotte",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1252 rows, newest set-out 2026-11-02",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-charlotte",
+    "live_rows": 1252,
+    "newest": "2026-11-02"
+   }
+  },
+  {
+   "name": "Pull A Part - Winston-Salem",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-winston-salem",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1130 rows, newest set-out 2026-11-02",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-winston-salem",
+    "live_rows": 1130,
+    "newest": "2026-11-02"
+   }
+  },
+  {
+   "name": "Pull A Part - Albuquerque",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-albuquerque",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-albuquerque",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Akron",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-akron",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 882 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-akron",
+    "live_rows": 882,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - Canton",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-canton",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1099 rows, newest set-out 2026-11-02",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-canton",
+    "live_rows": 1099,
+    "newest": "2026-11-02"
+   }
+  },
+  {
+   "name": "Pull A Part - Cincinnati",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-cincinnati",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-cincinnati",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Cleveland West",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-cleveland-west",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1360 rows, newest set-out 2026-11-02",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-cleveland-west",
+    "live_rows": 1360,
+    "newest": "2026-11-02"
+   }
+  },
+  {
+   "name": "Pull A Part - Pittsburgh",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-pittsburgh",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-pittsburgh",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "Pull A Part - Columbia",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-columbia",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 987 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-columbia",
+    "live_rows": 987,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - Knoxville",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-knoxville",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1195 rows, newest set-out 2026-10-30",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-knoxville",
+    "live_rows": 1195,
+    "newest": "2026-10-30"
+   }
+  },
+  {
+   "name": "Pull A Part - Memphis",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-memphis",
+   "source": "ario",
+   "tier": "A",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "live on Ario: 1187 rows, newest set-out 2026-10-31",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-memphis",
+    "live_rows": 1187,
+    "newest": "2026-10-31"
+   }
+  },
+  {
+   "name": "Pull A Part - Houston",
+   "city": "",
+   "state": "",
+   "lat": null,
+   "lng": null,
+   "website": "https://ario.autorecycler.io/yard/pull-a-part-houston",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "pull-a-part-houston",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "TAS Recycling - Kingsport",
+   "city": "",
+   "state": "",
+   "lat": 36.5713,
+   "lng": -82.5039,
+   "website": "https://ario.autorecycler.io/yard/tas-recycling",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "tas-recycling",
+    "live_rows": 0,
+    "newest": ""
+   }
+  },
+  {
+   "name": "JALOPY WIZARDS",
+   "city": "",
+   "state": "",
+   "lat": 34.0259,
+   "lng": -80.9595,
+   "website": "https://ario.autorecycler.io/yard/jalopy-wizards",
+   "source": "ario",
+   "tier": "E",
+   "platform": "Ario (autorecycler.io)",
+   "evidence": "Ario org exists but not on the live backend",
+   "known_status": "",
+   "extra": {
+    "slug": "jalopy-wizards",
+    "live_rows": 0,
+    "newest": ""
+   }
+  }
+ ]
+}
