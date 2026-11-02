@@ -12583,7 +12583,7 @@ def _ebay_band(info: dict, p: dict) -> dict | None:
     # it means the keywords hit a different part. Keep the anchor.
     if a_hi and (high > a_hi * 4 or high < a_lo / 5):
         return None
-    return {"low": low, "high": high, "n": int(rec.get("n", 0) or 0)}
+    return {"low": low, "high": high, "n": int(rec.get("n", 0) or 0), "src": "ebay-sold" if rec.get("sold") else "ebay"}
 
 
 def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = None) -> list[dict]:
@@ -12733,7 +12733,7 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
             enriched = {**p, "low": cl, "high": ch, **_lookup_sell_info(p["name"], make)}
             eb = _ebay_band(info, p)
             if eb:
-                enriched.update({"low": eb["low"], "high": eb["high"], "src": "ebay", "n": eb["n"]})
+                enriched.update({"low": eb["low"], "high": eb["high"], "src": eb["src"], "n": eb["n"]})
             # Provenance: the model years this part actually fits — the
             # entry's (generation) year range narrowed by the part's own
             # yr_min/yr_max gates. Shipped to the UI as "fits 1996–2002".

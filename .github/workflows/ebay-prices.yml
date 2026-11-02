@@ -16,6 +16,11 @@ on:
       max_calls:
         description: "Most parts to query this run (stalest first)"
         default: "2000"
+      source:
+        description: "sold = Marketplace Insights only (needs eBay approval); asking = Browse only; auto = sold with fallback"
+        type: choice
+        options: [auto, sold, asking]
+        default: auto
       dry_run:
         description: "Print the query plan only (no eBay calls, no commit)"
         type: boolean
@@ -49,7 +54,7 @@ jobs:
           if [ -z "$EBAY_CLIENT_ID" ] || [ -z "$EBAY_CLIENT_SECRET" ]; then
             echo "::warning::EBAY_CLIENT_ID / EBAY_CLIENT_SECRET not set — see the header of this workflow"; exit 0
           fi
-          python scraper/ebay_prices.py --max-calls "${{ github.event.inputs.max_calls || '2000' }}"
+          python scraper/ebay_prices.py --max-calls "${{ github.event.inputs.max_calls || '2000' }}" --source "${{ github.event.inputs.source || 'auto' }}"
       - name: Commit if changed
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |

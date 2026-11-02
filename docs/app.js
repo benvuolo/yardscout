@@ -7489,6 +7489,10 @@ const STORE_ACCOUNT = IS_ANDROID ? 'Google account' : 'Apple account';
 function onlinePriceHtml(p, cls) {
   if (!p || p.low == null) return '';
   const range = `~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}`;
+  if (p.src === 'ebay-sold') {
+    const n = p.n ? `${p.n} used ones` : 'used ones';
+    return `<span class="${cls}" title="What ${n} that fit this car actually sold for on eBay in the last 90 days (middle half of the range). Refreshed weekly.">Sold on eBay: ${range}</span>`;
+  }
   if (p.src === 'ebay') {
     const n = p.n ? `${p.n} used listings` : 'used listings';
     return `<span class="${cls}" title="Asking prices of ${n} on eBay right now that fit this car (middle half of the range). Refreshed weekly; not a sale price.">On eBay now: ${range}</span>`;

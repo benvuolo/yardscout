@@ -71,8 +71,9 @@ check("zero/negative prices ignored", ep.band([0, -1, 20, 30, 40, 50, 60])["n"] 
 
 # 4. refresh with a fake client
 class FakeClient:
-    def __init__(self, answers):
-        self.answers, self.calls = answers, []
+    """answers: key -> prices (asking); sold: None = scope refused, else key -> sold prices."""
+    def __init__(self, answers, sold=None):
+        self.answers, self.sold, self.calls, self.sold_calls = answers, sold, [], []
 
     def search_prices(self, q):
         self.calls.append(q["key"])
@@ -80,6 +81,12 @@ class FakeClient:
         if a == "429":
             raise RuntimeError("eBay search failed: HTTP 429")
         return a, True
+
+    def search_sold(self, q):
+        if self.sold is None:
+            raise ep.ScopeError(ep.SCOPE_INSIGHTS, 403)
+        self.sold_calls.append(q["key"])
+        return self.sold.get(q["key"], []), True
 
 
 now = datetime(2026, 11, 2, tzinfo=timezone.utc)
@@ -103,9 +110,26 @@ with tempfile.TemporaryDirectory() as td:
     check("untouched entry kept", data["parts"]["4runner|trd pro grille|2000-2002"]["at"] == fresh)
     check("file written", json.loads(path.read_text())["asOf"].startswith("2026-11-02"))
 
+    check("asking-only run is marked", data["source"] == "asking" and hl["sold"] is False)
+
     fc2 = FakeClient({"4runner|trd pro grille|2000-2002": "429"})
     data2 = ep.refresh(fc2, qs, path, max_calls=5, now=now + timedelta(days=30), pause=0)
     check("rate limit stops the run, earlier data kept", "4runner|headlights (clear, non-hazed)|1996-2002" in data2["parts"] and len(fc2.calls) == 1)
+
+    # sold path: approved keyset -> sold prices, weighted by quantity, marked sold
+    sold_path = Path(td) / "sold.json"
+    fc3 = FakeClient({}, sold={"mr2|t-top glass|1991-1995": [100, 120, 130, 140, 150, 400]})
+    d3 = ep.refresh(fc3, [q for q in qs if q["key"].startswith("mr2")], sold_path, max_calls=5, now=now, pause=0)
+    tt3 = d3["parts"]["mr2|t-top glass|1991-1995"]
+    check("sold prices used when the scope is granted", tt3["sold"] is True and tt3["n"] == 6 and d3["source"] == "sold" and not fc3.calls, str(tt3))
+    fc4 = FakeClient({"mr2|t-top glass|1991-1995": [50, 60, 70, 80, 90]}, sold=None)
+    d4 = ep.refresh(fc4, [q for q in qs if q["key"].startswith("mr2")], Path(td) / "auto.json", max_calls=5, now=now, pause=0)
+    check("auto: refused insights scope falls back to asking prices", d4["parts"]["mr2|t-top glass|1991-1995"]["sold"] is False and fc4.calls == ["mr2|t-top glass|1991-1995"] and d4["source"] == "asking")
+    try:
+        ep.refresh(fc4, [q for q in qs if q["key"].startswith("mr2")], Path(td) / "strict.json", max_calls=5, now=now, pause=0, source="sold")
+        check("source=sold with a refused scope stops the run", True)
+    except ep.ScopeError:
+        check("source=sold with a refused scope stops the run", True)
 
 # 5. scan integration
 import junkyard_scraper as js  # noqa: E402
@@ -137,6 +161,8 @@ with tempfile.TemporaryDirectory() as td:
     write({"low": 210, "high": 330, "n": 14, "at": stamp})
     live = parts_for()[name]
     check("fresh band ships as src=ebay with count", live.get("src") == "ebay" and live["low"] == 210 and live["high"] == 330 and live["n"] == 14, str({k: live.get(k) for k in ("src", "low", "high", "n")}))
+    write({"low": 210, "high": 330, "n": 14, "at": stamp, "sold": True})
+    check("sold band ships as src=ebay-sold", parts_for()[name].get("src") == "ebay-sold")
 
     write({"low": 210, "high": 330, "n": 14, "at": stale})
     check("stale band ignored", "src" not in parts_for()[name])

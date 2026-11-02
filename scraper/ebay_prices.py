@@ -11,10 +11,13 @@ What it does
   junkyard_scraper._ebay_band / match_vehicle. Parts with too few listings,
   or a stale/absent entry, keep the anchors; the app labels each case.
 
-Why asking prices, not sold
-  eBay's sold-price API (Marketplace Insights) is limited-release and needs a
-  separate approval. Browse is open to any developer account. The app says
-  "On eBay now" and never claims these are sale prices.
+Sold vs asking
+  Sold prices (what buyers actually paid, last 90 days) come from eBay's
+  Marketplace Insights API, which is limited-release: eBay has to approve the
+  keyset for it. The run tries sold first ("auto"); while the insights scope
+  is refused it uses Browse asking prices, which any keyset can read. Each
+  record says which it is ("sold": true/false) and the app labels them
+  "Sold on eBay" vs "On eBay now".
 
 Accuracy guards
   - compatibility_filter restricts to listings whose fitment includes this
@@ -59,6 +62,13 @@ sys.path.insert(0, str(SCRIPT_DIR))
 
 TOKEN_URL = "https://api.ebay.com/identity/v1/oauth2/v2/token"
 SEARCH_URL = "https://api.ebay.com/buy/browse/v1/item_summary/search"
+# Sold prices (last 90 days). Marketplace Insights is a limited-release API:
+# the keyset must be approved by eBay for it (developer.ebay.com → Buy APIs
+# production access). Until then the insights scope is refused and the run
+# falls back to asking prices automatically (source "auto").
+SOLD_URL = "https://api.ebay.com/buy/marketplace_insights/v1_beta/item_sales/search"
+SCOPE_BROWSE = "https://api.ebay.com/oauth/api_scope"
+SCOPE_INSIGHTS = "https://api.ebay.com/oauth/api_scope/buy.marketplace.insights"
 MARKETPLACE = "EBAY_US"
 CATEGORY_PARTS = "6028"  # eBay Motors > Parts & Accessories
 DEFAULT_PATH = SCRIPT_DIR.parent / "docs" / "data" / "ebay_prices.json"
@@ -196,6 +206,14 @@ def band(prices: list[float]) -> dict | None:
 
 
 # ---------------------------------------------------------------- eBay
+class ScopeError(RuntimeError):
+    """The keyset can't use this API (not approved / wrong scope)."""
+
+    def __init__(self, scope: str, status: int):
+        super().__init__(f"scope refused ({status}): {scope.rsplit('/', 1)[-1]}")
+        self.scope, self.status = scope, status
+
+
 class EbayClient:
     """Thin Browse API client: application token + one search call."""
 
@@ -203,25 +221,79 @@ class EbayClient:
         self.client_id = client_id
         self.client_secret = client_secret
         self.session = session or requests.Session()
-        self._token = ""
-        self._token_exp = 0.0
+        self._tokens: dict[str, tuple[str, float]] = {}
+        self.sold_available: bool | None = None   # None = not tried yet
 
-    def token(self) -> str:
-        if self._token and time.time() < self._token_exp - 60:
-            return self._token
+    def token(self, scope: str = SCOPE_BROWSE) -> str:
+        tok, exp = self._tokens.get(scope, ("", 0.0))
+        if tok and time.time() < exp - 60:
+            return tok
         basic = base64.b64encode(f"{self.client_id}:{self.client_secret}".encode()).decode()
         r = self.session.post(
             TOKEN_URL,
             headers={"Authorization": f"Basic {basic}", "Content-Type": "application/x-www-form-urlencoded"},
-            data={"grant_type": "client_credentials", "scope": "https://api.ebay.com/oauth/api_scope"},
+            data={"grant_type": "client_credentials", "scope": scope},
             timeout=30,
         )
         if r.status_code != 200:
-            raise RuntimeError(f"eBay token request failed: HTTP {r.status_code}")
+            raise ScopeError(scope, r.status_code) if scope != SCOPE_BROWSE else RuntimeError(
+                f"eBay token request failed: HTTP {r.status_code}")
         j = r.json()
-        self._token = j["access_token"]
-        self._token_exp = time.time() + float(j.get("expires_in", 7200))
-        return self._token
+        tok = j["access_token"]
+        self._tokens[scope] = (tok, time.time() + float(j.get("expires_in", 7200)))
+        return tok
+
+    def search_sold(self, q: dict) -> tuple[list[float], bool]:
+        """Prices buyers paid in the last 90 days (Marketplace Insights).
+
+        Raises ScopeError when the keyset isn't approved for the API (the
+        caller then falls back to asking prices for the rest of the run).
+        """
+        base = {
+            "q": q["q"],
+            "category_ids": CATEGORY_PARTS,
+            "limit": str(LIMIT),
+            "filter": "conditions:{USED},buyingOptions:{FIXED_PRICE|AUCTION},priceCurrency:USD,itemLocationCountry:US",
+        }
+        compat = f"Year:{q['year']};Make:{q['make']};Model:{q['model']}" if q.get("year") and q.get("make") and q.get("model") else ""
+        tok = self.token(SCOPE_INSIGHTS)
+        for use_fit in ((True, False) if compat else (False,)):
+            params = dict(base)
+            if use_fit:
+                params["compatibility_filter"] = compat
+            r = self.session.get(
+                SOLD_URL, params=params,
+                headers={"Authorization": f"Bearer {tok}", "X-EBAY-C-MARKETPLACE-ID": MARKETPLACE},
+                timeout=30,
+            )
+            if r.status_code == 400 and use_fit:
+                continue
+            if r.status_code in (401, 403):
+                raise ScopeError(SCOPE_INSIGHTS, r.status_code)
+            if r.status_code == 429 or r.status_code >= 500:
+                raise RuntimeError(f"eBay sold search failed: HTTP {r.status_code}")
+            if r.status_code != 200:
+                return [], use_fit
+            items = r.json().get("itemSales", []) or []
+            prices = []
+            for it in items:
+                pr = it.get("lastSoldPrice") or it.get("price") or {}
+                if pr.get("currency", "USD") != "USD":
+                    continue
+                try:
+                    v = float(pr.get("value"))
+                except (TypeError, ValueError):
+                    continue
+                # Multi-quantity listings count up to 5 sales each, never more.
+                try:
+                    qty = max(1, min(5, int(it.get("totalSoldQuantity") or 1)))
+                except (TypeError, ValueError):
+                    qty = 1
+                prices.extend([v] * qty)
+            if items and not prices:
+                print("::warning::sold search returned items but no readable prices — check field names (lastSoldPrice)")
+            return prices, use_fit
+        return [], False
 
     def search_prices(self, q: dict) -> tuple[list[float], bool]:
         """Asking prices (USD) for a query; second value: fitment filter applied."""
@@ -286,21 +358,37 @@ def refresh_order(queries: list[dict], parts: dict, now: datetime) -> list[dict]
 
 
 def refresh(client, queries: list[dict], path: Path, max_calls: int, now: datetime | None = None,
-            pause: float = PAUSE_SEC) -> dict:
+            pause: float = PAUSE_SEC, source: str = "auto") -> dict:
+    """source: "sold" (Marketplace Insights only), "asking" (Browse only) or
+    "auto" (sold, falling back to asking for the rest of the run the first
+    time the insights scope is refused)."""
     now = now or datetime.now(timezone.utc)
     data = load(path)
     parts = data["parts"]
     stamp = now.strftime("%Y-%m-%dT%H:%M:%SZ")
-    done = thin = 0
+    done = thin = sold_n = 0
     stopped = ""
+    use_sold = source in ("sold", "auto")
     for q in refresh_order(queries, parts, now)[:max_calls]:
         try:
-            prices, fit = client.search_prices(q)
+            if use_sold:
+                try:
+                    prices, fit = client.search_sold(q)
+                except ScopeError as e:
+                    if source == "sold":
+                        raise
+                    print(f"::notice::sold prices unavailable for this keyset ({e}); using asking prices")
+                    use_sold = False
+                    prices, fit = client.search_prices(q)
+            else:
+                prices, fit = client.search_prices(q)
         except RuntimeError as e:
             stopped = str(e)
             break
         b = band(prices)
-        rec = {"q": q["q"], "at": stamp, "fit": bool(fit), "n": len([p for p in prices if p and p > 0])}
+        rec = {"q": q["q"], "at": stamp, "fit": bool(fit), "sold": bool(use_sold),
+               "n": len([p for p in prices if p and p > 0])}
+        sold_n += 1 if use_sold else 0
         if b:
             rec.update(b)
         else:
@@ -310,12 +398,13 @@ def refresh(client, queries: list[dict], path: Path, max_calls: int, now: dateti
         if pause:
             time.sleep(pause)
     data["asOf"] = stamp
+    data["source"] = "sold" if (done and sold_n == done) else ("mixed" if sold_n else "asking")
     data["parts"] = dict(sorted(parts.items()))
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     Path(path).write_text(json.dumps(data, indent=0, sort_keys=True, ensure_ascii=False) + "\n")
     priced = sum(1 for v in parts.values() if v.get("n", 0) >= MIN_N and "low" in v)
-    print(f"ebay prices: {done} queried this run ({thin} with <{MIN_N} listings); "
-          f"{priced}/{len(queries)} parts have a live band; file {path}")
+    print(f"ebay prices: {done} queried this run ({sold_n} sold-price, {done - sold_n} asking-price; "
+          f"{thin} with <{MIN_N} listings); {priced}/{len(queries)} parts have a live band; file {path}")
     if stopped:
         print(f"::warning::stopped early: {stopped}")
     return data
@@ -326,6 +415,8 @@ def main(argv=None) -> int:
     ap.add_argument("--max-calls", type=int, default=2000)
     ap.add_argument("--path", default=str(DEFAULT_PATH))
     ap.add_argument("--dry-run", action="store_true", help="print the query plan, call nothing")
+    ap.add_argument("--source", choices=("auto", "sold", "asking"), default="auto",
+                    help="sold = Marketplace Insights only; asking = Browse only; auto = sold with fallback")
     args = ap.parse_args(argv)
 
     import junkyard_scraper as js  # noqa: WPS433 - the DB lives there
@@ -344,7 +435,7 @@ def main(argv=None) -> int:
     if requests is None:
         print("::error::python 'requests' is required")
         return 2
-    refresh(EbayClient(cid, sec), queries, Path(args.path), args.max_calls)
+    refresh(EbayClient(cid, sec), queries, Path(args.path), args.max_calls, source=args.source)
     return 0
 
 
