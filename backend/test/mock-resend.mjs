@@ -36,6 +36,17 @@ const YARD_HEALTH = {
     'Ghost Yard - Lehi': { count: 60, lastChangedAt: iso(now - 9 * D), newestDateAdded: day(now - 300 * D), unchangedScans: 54 },
     'Lull Yard - Sandy': { count: 700, lastChangedAt: iso(now - 1.5 * D), newestDateAdded: day(now - 2 * D), unchangedScans: 9 },   // 1.5 d = at most 2 weekdays: an ordinary lull, NOT frozen
     'Carried Yard - Bartow': { count: 900, lastChangedAt: iso(now - 6 * D), newestDateAdded: day(now - 7 * D), unchangedScans: 36, carried: true },
+    // Chain feed freeze: 5 of 6 "Big Chain" yards unchanged 8 scans (~1.3 d:
+    // not yet 3 weekdays, so NOT frozen per-yard) -> chain-frozen. "Tiny
+    // Chain" has only 2 yards, both stuck: below the chain minimum.
+    'Big Chain - A': { count: 500, lastChangedAt: iso(now - 1.3 * D), newestDateAdded: day(now - 2 * D), unchangedScans: 8 },
+    'Big Chain - B': { count: 500, lastChangedAt: iso(now - 1.3 * D), newestDateAdded: day(now - 2 * D), unchangedScans: 8 },
+    'Big Chain - C': { count: 500, lastChangedAt: iso(now - 1.3 * D), newestDateAdded: day(now - 2 * D), unchangedScans: 8 },
+    'Big Chain - D': { count: 500, lastChangedAt: iso(now - 1.2 * D), newestDateAdded: day(now - 2 * D), unchangedScans: 7 },
+    'Big Chain - E': { count: 500, lastChangedAt: iso(now - 1.2 * D), newestDateAdded: day(now - 2 * D), unchangedScans: 7 },
+    'Big Chain - F': { count: 500, lastChangedAt: iso(now - 3600_000), newestDateAdded: day(now - D), unchangedScans: 0 },
+    'Tiny Chain - X': { count: 50, lastChangedAt: iso(now - 1.3 * D), newestDateAdded: day(now - 2 * D), unchangedScans: 9 },
+    'Tiny Chain - Y': { count: 50, lastChangedAt: iso(now - 1.3 * D), newestDateAdded: day(now - 2 * D), unchangedScans: 9 },
     'Renamed Yard - Old Name': { count: 400, lastChangedAt: iso(now - 6 * D), unchangedScans: 10, missingScans: 8, missingReason: 'renamed to Renamed Yard - New Name' },
     'Retired Yard - Belleville': { count: 895, lastChangedAt: iso(now - 9 * D), unchangedScans: 31, missingScans: 12, missingReason: 'retired' },
     'Blocked Yard - Toledo': { count: 610, lastChangedAt: iso(now - 9 * D), unchangedScans: 0, missingScans: 54, missingReason: 'fetch blocked, no usable snapshot' },

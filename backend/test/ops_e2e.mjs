@@ -134,7 +134,7 @@ r = await dailyRun({ dryRun: true });
 const d = r.data;
 const text = d.email?.text || '';
 check('daily dry run: 200 + not sent', r.status === 200 && d.dryRun === true && d.sent === false && (await opsSent()).length === before, JSON.stringify(d).slice(0, 300));
-check('daily subject + verdict', /^\[YardScout daily\] 3 issues · 3 yards · 1,541 cars$/.test(d.email?.subject || ''), d.email?.subject);
+check('daily subject + verdict', /^\[YardScout daily\] 4 issues · 3 yards · 1,541 cars$/.test(d.email?.subject || ''), d.email?.subject);
 check('daily: scan commit time + age', !!d.scan?.lastCommitAt && d.scan.ageHours >= 0 && d.scan.ageHours < 1, JSON.stringify(d.scan));
 check('daily: live yard + vehicle counts', d.inventory?.yards === 3 && d.inventory?.vehicles === 1541 && d.inventory?.publicVehicles === 1541, JSON.stringify(d.inventory));
 check('daily: dormant yards listed', JSON.stringify(d.yardHealth?.dormant?.map((y) => y.name).sort()) === JSON.stringify(['Dormant Yard - Orem', 'Ghost Yard - Lehi']), JSON.stringify(d.yardHealth));
@@ -142,19 +142,23 @@ check('daily: frozen yards listed (3+ d; a 2.5 d lull is not frozen; missing/car
 check('daily: carried yards listed separately', JSON.stringify(d.yardHealth?.carried?.map((y) => y.name)) === JSON.stringify(['Carried Yard - Bartow']), JSON.stringify(d.yardHealth?.carried));
 check('daily: renamed/retired yards not listed anywhere', !JSON.stringify(d.yardHealth).includes('Renamed Yard') && !JSON.stringify(d.yardHealth).includes('Retired Yard'), JSON.stringify(d.yardHealth));
 check('daily: blocked yard listed as missing with its reason', d.yardHealth?.missing?.length === 1 && d.yardHealth.missing[0].name === 'Blocked Yard - Toledo' && /blocked/.test(d.yardHealth.missing[0].reason), JSON.stringify(d.yardHealth?.missing));
+check('daily: chain-wide freeze flagged same day (5 of 6 Big Chain yards stuck; Tiny Chain below the minimum)',
+  JSON.stringify(d.yardHealth?.chainFrozen?.map((c) => [c.chain, c.stuck, c.total])) === JSON.stringify([['Big Chain', 5, 6]]), JSON.stringify(d.yardHealth?.chainFrozen));
+check('daily: chain freeze is an open issue with the chain name', d.openConditions?.some((c) => c.id === 'chain-frozen:Big Chain' && /5 of 6 yards/.test(c.title)), JSON.stringify(d.openConditions));
+check('daily: chain freeze in the email text', /CHAIN FEED FROZEN \(same-day\): Big Chain — 5 of 6 yards/.test(d.email?.text || ''));
 check('daily: missing yard counted as an open issue', d.openConditions?.some((c) => c.id === 'yards-missing' && /Blocked Yard - Toledo/.test(c.title)), JSON.stringify(d.openConditions));
 check('daily: per-channel 24 h sends', d.channels?.['email:auth']?.ok === 1 && d.channels?.['email:auth']?.fail === 3 && d.channels?.['email:ops']?.ok === 4, JSON.stringify(d.channels));
 check('daily: audience counts', d.audience && ['proDevices', 'freeDevices', 'emailWatchers'].every((k) => Number.isInteger(d.audience[k])), JSON.stringify(d.audience));
 check('daily: usage loads', d.usage && !d.usage.error && Number.isInteger(d.usage.devices?.total) && typeof d.usage.funnel === 'object', JSON.stringify(d.usage));
-check('daily: open conditions', d.openConditions?.length === 3, JSON.stringify(d.openConditions));
-for (const sec of ['Verdict: 3 issues', 'OPEN ISSUES (3)', 'MISSING from the scan', 'Blocked Yard - Toledo', 'SCAN', 'Last commit:', 'Live: 3 yards · 1,541 vehicles', 'Watchdog:',
+check('daily: open conditions', d.openConditions?.length === 4, JSON.stringify(d.openConditions));
+for (const sec of ['Verdict: 4 issues', 'OPEN ISSUES (4)', 'MISSING from the scan', 'Blocked Yard - Toledo', 'SCAN', 'Last commit:', 'Live: 3 yards · 1,541 vehicles', 'Watchdog:',
   'YARD HEALTH', 'Dormant Yard - Orem', 'Frozen Yard - Provo', 'Re-serving last copy', 'Carried Yard - Bartow', 'SENDS, last 24 h', 'email:auth', 'Resend today (UTC): 5 / 100', 'USAGE', 'App devices:', 'Funnel (all platforms)', 'Purchases']) {
   check(`daily text has "${sec}"`, text.includes(sec));
 }
 check('daily text leaks no user email', !/tester\d@users/.test(text));
 const html = d.email?.html || '';
 check('daily html part present', html.startsWith('<!doctype html>') && html.length > 2000, String(html.length));
-for (const sec of ['YardScout daily', 'Open issues', 'Scan', 'Yard health', 'Alerts sent', 'Users', 'Funnel', '3 issues', 'missing from the scan', 're-serving last copy', 'Carried Yard - Bartow']) {
+for (const sec of ['YardScout daily', 'Open issues', 'Scan', 'Yard health', 'Alerts sent', 'Users', 'Funnel', '4 issues', 'missing from the scan', 're-serving last copy', 'Carried Yard - Bartow']) {
   check(`daily html has "${sec}"`, html.includes(sec));
 }
 check('daily html leaks no user email', !/tester\d@users/.test(html));

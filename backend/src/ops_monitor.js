@@ -42,6 +42,13 @@ const DORMANT_MS = 120 * DAY;
 // last changed Friday is 1 weekday old on Monday morning, not 3 (2026-11-02:
 // a Monday email listed 35 'frozen' yards, most of them just the weekend).
 const FROZEN_WEEKDAYS = 3;
+// A whole chain's feed freezing (Pick-n-Pull, 2026-11-01: 37 of 48 yards
+// unchanged for 12 scans while the per-yard rule waited 3 weekdays) is
+// flagged the same day: a chain of CHAIN_MIN_YARDS+ yards with
+// CHAIN_FROZEN_SHARE of them unchanged for CHAIN_STUCK_SCANS+ scans.
+const CHAIN_MIN_YARDS = 5;
+const CHAIN_STUCK_SCANS = 6;      // one day of 4-hourly scans
+const CHAIN_FROZEN_SHARE = 0.8;
 function weekdaysBetween(fromMs, toMs) {
   if (!(toMs > fromMs)) return 0;
   let n = 0;
@@ -398,8 +405,19 @@ function yardFlags(h) {
   if (!h || typeof h.yards !== 'object' || !h.yards) return null;
   const scraped = Date.parse(h.scrapedAt) || Date.now();
   const dormant = [], frozen = [], carried = [], missing = [];
+  const chains = new Map();   // "Pick-n-Pull" -> { total, stuck, since }
   for (const [name, y] of Object.entries(h.yards)) {
     if (!y || typeof y !== 'object') continue;
+    if (!y.missingScans && !y.carried && name.includes(' - ')) {
+      const chain = name.split(' - ')[0].trim();
+      const c = chains.get(chain) || { chain, total: 0, stuck: 0, since: null };
+      c.total++;
+      if ((y.unchangedScans || 0) >= CHAIN_STUCK_SCANS) {
+        c.stuck++;
+        if (y.lastChangedAt && (!c.since || y.lastChangedAt < c.since)) c.since = y.lastChangedAt;
+      }
+      chains.set(chain, c);
+    }
     // Absent from the scan. Retired / renamed-upstream yards are expected;
     // anything else is a yard users can no longer see (U-Pull-R, 2026-10).
     if (y.missingScans) {
@@ -421,7 +439,10 @@ function yardFlags(h) {
   frozen.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
   carried.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
   missing.sort((a, b) => b.missingScans - a.missingScans);
-  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, carried, missing };
+  const chainFrozen = [...chains.values()]
+    .filter((c) => c.total >= CHAIN_MIN_YARDS && c.stuck / c.total >= CHAIN_FROZEN_SHARE)
+    .sort((a, b) => b.total - a.total);
+  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, carried, missing, chainFrozen };
 }
 
 function nameList(items, fmt) {
@@ -493,6 +514,9 @@ function composeDaily(r) {
     L.push(`  Dormant, no new car in 120+ d: ${yh.dormant.length}${yh.dormant.length ? ' — ' + nameList(yh.dormant, (y) => `${y.name} (newest ${y.newestDateAdded})`) : ''}`);
     L.push(`  MISSING from the scan (users can't see them): ${yh.missing.length}${yh.missing.length ? ' — ' + nameList(yh.missing, (y) => `${y.name} (${y.reason}; ${y.missingScans} scans)`) : ''}`);
     L.push(`  Re-serving last copy (fetch returned nothing): ${yh.carried.length}${yh.carried.length ? ' — ' + nameList(yh.carried, (y) => `${y.name} (since ${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    if (yh.chainFrozen && yh.chainFrozen.length) {
+      L.push(`  CHAIN FEED FROZEN (same-day): ${yh.chainFrozen.map((c) => `${c.chain} — ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(5, 16)}`).join('; ')}`);
+    }
     L.push(`  Frozen, unchanged 3+ weekdays at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
   } else {
     L.push(`YARD HEALTH: could not load yard_health.json (${(yh && yh.error) || 'unknown'})`);
@@ -662,6 +686,10 @@ export function composeDailyHtml(r) {
     if (yh.missing.length) {
       parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.missing.length}</strong> missing from the scan <span style="color:${C.dim};">(users can't see these yards at all)</span></div>`);
       parts.push(hList(yh.missing.map((y) => `${esc(y.name)} <span style="color:${C.dim};">· ${esc(y.reason)} · gone ${y.missingScans} scans${y.count ? ` · had ${fmtInt(y.count)} cars` : ''}</span>`)));
+    }
+    if (yh.chainFrozen && yh.chainFrozen.length) {
+      parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>Chain feed frozen</strong> <span style="color:${C.dim};">(most of a chain's yards unchanged for a day: their system, not ours)</span></div>`);
+      parts.push(hList(yh.chainFrozen.map((c) => `${esc(c.chain)} <span style="color:${C.dim};">· ${c.stuck} of ${c.total} yards · since ${esc(String(c.since || '').slice(5, 16))}</span>`)));
     }
     if (yh.carried.length) {
       parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.carried.length}</strong> re-serving last copy <span style="color:${C.dim};">(our fetch returned nothing — check the adapter or the source)</span></div>`);
@@ -911,6 +939,11 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
   if (yardHealth && yardHealth.missing && yardHealth.missing.length) {
     const m = yardHealth.missing;
     conds.push({ id: 'yards-missing', title: `${m.length} yard${m.length === 1 ? '' : 's'} missing from the scan: ${m.slice(0, 4).map((y) => y.name).join(', ')}${m.length > 4 ? ` +${m.length - 4} more` : ''}` });
+  }
+  if (yardHealth && yardHealth.chainFrozen && yardHealth.chainFrozen.length) {
+    for (const c of yardHealth.chainFrozen) {
+      conds.push({ id: 'chain-frozen:' + c.chain, title: `${c.chain}'s feed looks frozen: ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(0, 16)}` });
+    }
   }
   if (watchCheck && !watchCheck.error && watchCheck.newlyOrphaned.length) {
     const o = watchCheck.newlyOrphaned;
