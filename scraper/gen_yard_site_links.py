@@ -172,6 +172,7 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^hwy 82 pick", "Hwy 82 Pick & Pay", None, ""),
     (r"^route 34 u-pull-m", "Route 34 U-Pull-M", None, ""),
     (r"^sunshine auto salvage", "Sunshine Auto Salvage", None, ""),
+    (r"^bevell", "Bevell's Pull It Yourself", None, ""),
     # --- 2026-10-28 single-host adapters (Kiker's / Weller / Cagle's) ---
     (r"^kiker'?s u-pull-it", "Kiker's U-Pull-It", None, ""),
     (r"^weller self serve", "Weller Self Serve", None, ""),

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-28",
+  "updated": "2026-11-03",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked | retired | directory-only. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -991,7 +991,7 @@
     {
       "name": "Ewe Pullet (Nordstrom's)",
       "status": "candidate",
-      "platform": "wordpress + iis-pro-upull plugin v1.8 (URG-hosted; same plugin family as Pick-A-Part VA) - server-rendered card deck",
+      "platform": "wordpress + iis-pro-upull plugin v1.8 (URG-hosted; same plugin family as Pick-A-Part VA) - server-rendered card deck - RE-CHECKED 2026-11-03: plugin present (upullurgid PP93) but no cards render on /inventory/, /vehicles/ or /vehicle-list/; the vehicle backend still returns nothing. Re-check monthly (coverage sweep).",
       "website": "https://ewepullet.com",
       "inventory_url": "https://ewepullet.com/inventory/ANY/ANY/?k=1",
       "api": {
@@ -2698,6 +2698,47 @@
           "state": "AB",
           "lat": 53.5113,
           "lng": -113.3661
+        }
+      ]
+    },
+    {
+      "name": "Bevell's Pull It Yourself",
+      "status": "adapter-built",
+      "platform": "wordpress + Toolset Views: /vehicle-inventory/ server-renders a paged table (Year, Make, Model, Row, Arrival Date), 50 rows/page, pager wpv_paged=N - adapter fetch_bevells_inventory",
+      "website": "https://bevellspiy.com",
+      "inventory_url": "https://bevellspiy.com/vehicle-inventory/",
+      "api": {
+        "endpoint": "https://bevellspiy.com/vehicle-inventory/?wpv_view_count=6372&wpv_paged=N",
+        "method": "GET",
+        "auth": "none",
+        "format": "html table (Year, Make, Model, Row, Arrival Date)",
+        "requests_per_scan": "~24 at 2 s",
+        "notes": "~1,200 rows, arrival dates back ~6 months (the yard prunes departures); no VIN/stock -> row-slot+car+date hash ids. Also an Ario org, but Ario's live backend holds no rows for it (2026-11-03 sweep)."
+      },
+      "update_freshness": "live (arrivals within the week)",
+      "robots": "allow all",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Bevell's Pull It Yourself - Goldsboro",
+          "city": "Goldsboro",
+          "state": "NC",
+          "lat": 35.3513,
+          "lng": -78.0178,
+          "address": "1909 US-117, Goldsboro, NC 27530"
+        }
+      ]
+    },
+    {
+      "name": "Blue & Gold Auto Salvage",
+      "status": "directory-only",
+      "platform": "no website found (2026-11-03): directory listings only; Ario org exists but holds no live rows",
+      "locations": [
+        {
+          "name": "Blue & Gold Auto Salvage - Goose Creek",
+          "city": "Goose Creek",
+          "state": "SC",
+          "address": "429 Howe Hall Rd, Goose Creek, SC 29445"
         }
       ]
     }

@@ -17321,6 +17321,108 @@ def fetch_sunshine_inventory() -> list[dict]:
     return fetch_crush_table_site("sunshine")
 
 
+# Bevell's Pull It Yourself (bevellspiy.com, Goldsboro NC) — 2026-11-03.
+# WordPress + Toolset Views: /vehicle-inventory/ server-renders a plain
+# table (Year, Make, Model, Row, Arrival Date), 50 rows a page, pager
+# ?wpv_view_count=6372&wpv_paged=N (24 pages / ~1,200 cars at build time).
+# Arrival dates run back ~6 months, so the yard prunes departed cars; the
+# 365-day floor is only a guard. No VIN or stock: ids hash the row slot +
+# car + arrival date (slots are reused as cars turn over). robots.txt:
+# allow all. One GET per page at 2 s = ~1 min per scan. Pin: Ario's geocode
+# of 1909 US-117. Ario also lists the yard, but its live backend holds no
+# rows for it, so the yard's own site is the source.
+BEVELLS_URL = "https://bevellspiy.com/vehicle-inventory/?wpv_view_count=6372&wpv_paged={n}"
+BEVELLS_DELAY_SEC = 2.0
+BEVELLS_MAX_PAGES = 60
+BEVELLS_MAX_AGE_DAYS = 365
+BEVELLS_YARD = {"name": "Bevell's Pull It Yourself - Goldsboro", "city": "Goldsboro",
+                "state": "NC", "lat": 35.3513, "lng": -78.0178}
+_BEVELLS_MONTHS = {m: i for i, m in enumerate(
+    ("january", "february", "march", "april", "may", "june", "july", "august",
+     "september", "october", "november", "december"), 1)}
+
+
+def _bevells_parse_page(page: str) -> tuple[list[dict], str]:
+    """(rows, problem) from one inventory page. Header-driven so a column
+    reorder is caught ("" problem = fine). Row dicts: year, make, model,
+    row, date (ISO or "")."""
+    import html as html_mod
+    m = re.search(r'<table[^>]*>\s*<thead>(.*?)</thead>\s*<tbody[^>]*>(.*?)</tbody>', page, re.S)
+    if not m:
+        return [], "inventory table not found"
+    heads = [re.sub(r"[^a-z]", "", html_mod.unescape(re.sub(r"<[^>]+>", "", h)).lower())
+             for h in re.findall(r"<th[^>]*>(.*?)</th>", m.group(1), re.S)]
+    want = {"year": "year", "make": "make", "model": "model", "row": "row", "arrivaldate": "date"}
+    col = {want[h]: i for i, h in enumerate(heads) if h in want}
+    if not all(k in col for k in ("year", "make", "model")):
+        return [], f"table headers {heads} lack Year/Make/Model"
+    rows = []
+    for block in re.findall(r"<tr[^>]*>(.*?)</tr>", m.group(2), re.S):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in re.findall(r"<td[^>]*>(.*?)</td>", block, re.S)]
+        if len(cells) < len(col):
+            continue
+        get = lambda k: cells[col[k]] if k in col else ""  # noqa: E731
+        if not get("year").isdigit():
+            continue
+        dm = re.match(r"([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$", get("date"))
+        date_iso = ""
+        if dm and dm.group(1).lower() in _BEVELLS_MONTHS:
+            date_iso = f"{dm.group(3)}-{_BEVELLS_MONTHS[dm.group(1).lower()]:02d}-{int(dm.group(2)):02d}"
+        rows.append({"year": int(get("year")), "make": get("make"), "model": get("model"),
+                     "row": get("row"), "date": date_iso})
+    return rows, ""
+
+
+def fetch_bevells_inventory() -> list[dict]:
+    """Bevell's Pull It Yourself (Goldsboro NC): paged Toolset table."""
+    import hashlib
+    label = "Bevell's"
+    all_rows: list[dict] = []
+    for n in range(1, BEVELLS_MAX_PAGES + 1):
+        if n > 1:
+            time.sleep(BEVELLS_DELAY_SEC)
+        try:
+            r = requests.get(BEVELLS_URL.format(n=n), headers={**YARDSCOUT_HEADERS, "Accept": "text/html"}, timeout=60)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"  [{label}] page {n} fetch failed: {e}", file=sys.stderr)
+            break
+        if n == 1:
+            _indep_cache_raw("bevells_page1.html", r.content)
+        rows, problem = _bevells_parse_page(r.text)
+        if problem:
+            print(f"  [{label}] page {n}: {problem} — site layout changed?", file=sys.stderr)
+            break
+        all_rows.extend(rows)
+        if len(rows) < 50:
+            break  # a short page is the last one
+    age_floor = (datetime.now(timezone.utc).date() - timedelta(days=BEVELLS_MAX_AGE_DAYS)).isoformat()
+    vehicles: list[dict] = []
+    seen: set[str] = set()
+    n_aged = 0
+    for x in all_rows:
+        if x["date"] and x["date"] < age_floor:
+            n_aged += 1
+            continue
+        basis = "|".join((x["row"], str(x["year"]), x["make"], x["model"], x["date"])).lower()
+        vid = "bevells-" + hashlib.sha1(basis.encode()).hexdigest()[:12]
+        if vid in seen:
+            continue
+        seen.add(vid)
+        vehicles.append({
+            "id": vid, "vin": "", "year": x["year"],
+            "make": _utpap_format_label(x["make"]), "model": _utpap_format_label(x["model"]),
+            "row": x["row"], "dateAdded": x["date"], "_color": "",
+            "_location": BEVELLS_YARD["name"], "_city": BEVELLS_YARD["city"], "_state": BEVELLS_YARD["state"],
+            "_lat": BEVELLS_YARD["lat"], "_lng": BEVELLS_YARD["lng"], "_source": "bevells",
+        })
+    if n_aged:
+        print(f"  [{label}] dropped {n_aged} rows older than {BEVELLS_MAX_AGE_DAYS} days", file=sys.stderr)
+    print(f"  [{label}] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
 # Barry's /part-pricing/ table ships a handful of TOOLS-section rows with the
 # PRICE in the description cell (source HTML is literally
 # <td>5.00</td><td>5.00</td><td>Each</td><td>0.00</td> — a data-entry hole on
@@ -20692,6 +20794,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Hwy 82 Pick & Pay", fetch_hwy82_inventory),
     ("Route 34 U-Pull-M", fetch_route34_inventory),
     ("Sunshine Auto Salvage", fetch_sunshine_inventory),
+    ("Bevell's", fetch_bevells_inventory),  # 2026-11-03, Goldsboro NC (paged Toolset table)
     # 2026-10-28 single-host adapters (Kiker's / Weller / Cagle's block).
     # Weller honors a 10 s robots Crawl-delay (~25-30 min), like Wilbert's.
     ("Kiker's U-Pull-It", fetch_kikers_inventory),
