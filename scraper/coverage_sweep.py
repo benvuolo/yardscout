@@ -367,7 +367,13 @@ def fetch_ario(session) -> tuple[list[Candidate], str]:
             fresh = (datetime.now(timezone.utc).date() - datetime.fromisoformat(newest).date()).days <= ARIO_FRESH_DAYS
         except ValueError:
             pass
-        if total >= ARIO_MIN_ROWS and fresh:
+        # Ario's own org flag. All 25 Ario yards we list carry it (checked
+        # 2026-11-03); A-1 Metals, a full-service dismantler, does not.
+        self_serve = bool(src.get("is_self_service_boolean"))
+        c.extra["self_service"] = self_serve
+        if total >= ARIO_MIN_ROWS and fresh and not self_serve:
+            c.tier, c.evidence = "D", f"live on Ario ({total} rows) but Ario lists it as not self-service"
+        elif total >= ARIO_MIN_ROWS and fresh:
             c.tier, c.evidence = "A", f"live on Ario: {total} rows, newest set-out {newest}"
         elif total > 0:
             c.tier, c.evidence = "E", f"on Ario but stale: {total} rows, newest set-out {newest or 'undated'}"

@@ -12357,6 +12357,35 @@ def _vpic_row_to_decode(row: dict) -> dict:
     }
 
 
+# Known errors in NHTSA vPIC's own data, corrected after decoding (cached
+# decodes included, so the fix reaches cars already on the lots). Each row is
+# (make, model, first year, last year, wrong transmission text, correct text)
+# and must be a case where every car of that make/model/year has the same
+# gearbox — never a guess between options.
+#   2005 Land Rover LR3: vPIC reports 5 speeds for the whole model year
+#   (27 of 27 cached decodes, 2026-11-03). Every LR3 (2005-2009, 4.0 V6 and
+#   4.4 V8) used the ZF 6HP26 six-speed automatic; vPIC's 2006+ rows agree.
+VPIC_TRANS_FIXES: list[tuple[str, str, int, int, str, str]] = [
+    ("LAND ROVER", "LR3", 2005, 2005, "5-spd Automatic", "6-spd Automatic"),
+]
+
+
+def _correct_vpic(dec: dict | None) -> dict | None:
+    """Apply VPIC_TRANS_FIXES; returns a corrected copy (or the input as-is)."""
+    if not isinstance(dec, dict) or not dec.get("transmission"):
+        return dec
+    mk = str(dec.get("make") or "").strip().upper()
+    md = str(dec.get("model") or "").strip().upper()
+    try:
+        yr = int(str(dec.get("modelYear") or "0")[:4])
+    except ValueError:
+        return dec
+    for f_mk, f_md, y0, y1, wrong, right in VPIC_TRANS_FIXES:
+        if mk == f_mk and md == f_md.upper() and y0 <= yr <= y1 and dec["transmission"] == wrong:
+            return {**dec, "transmission": right, "transmissionFixed": True}
+    return dec
+
+
 def _vpic_incremental_queue(
     vin_newest: dict[str, str],
     cached: dict[str, dict],
@@ -21652,6 +21681,7 @@ def enrich_vehicles(
             # beyond this run's cap simply match without VIN data until a
             # later run decodes them.
             vin_dec = _VPIC_CACHE.get(vn) if vn else None
+            vin_dec = _correct_vpic(vin_dec)
             v["_vpic"] = vin_dec
             _apply_match(v, vin_dec)
     elif decode_vins_profit_top > 0:
@@ -21699,6 +21729,7 @@ def enrich_vehicles(
             vn = _normalize_vin(v.get("vin", ""))
             if vn and allowed_vins is not None and vn in allowed_vins:
                 vin_dec = fetch_vpic_decode(vn)
+            vin_dec = _correct_vpic(vin_dec)
             v["_vpic"] = vin_dec
             _apply_match(v, vin_dec)
     elif decode_vins:
@@ -21734,6 +21765,7 @@ def enrich_vehicles(
             vn = _normalize_vin(v.get("vin", ""))
             if vn:
                 vin_dec = fetch_vpic_decode(vn)
+            vin_dec = _correct_vpic(vin_dec)
             v["_vpic"] = vin_dec
             _apply_match(v, vin_dec)
     else:
