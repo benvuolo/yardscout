@@ -41,3 +41,54 @@ jobs:
           finally:
               requests.delete(f"{base}/{edit}", headers=H, timeout=60)   # read-only: never commit
           PY
+      - name: Read subscription products (read-only)
+        env:
+          SA_RAW: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python3 - <<'PY'
+          # What a buyer is offered: each subscription, its base plans (billing
+          # period, state, auto-renew) with the US price, and its offers
+          # (free trials / intro prices) with their phases. GET only.
+          import json, os, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+          raw = os.environ["SA_RAW"].strip(); obj, _ = json.JSONDecoder().raw_decode(raw[raw.find("{"):])
+          obj.setdefault("type", "service_account"); obj.setdefault("token_uri", "https://oauth2.googleapis.com/token")
+          cred = service_account.Credentials.from_service_account_info(obj, scopes=["https://www.googleapis.com/auth/androidpublisher"])
+          cred.refresh(Request())
+          H = {"Authorization": f"Bearer {cred.token}"}
+          app = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/io.yardscout.app"
+          def money(m):
+              if not m: return "-"
+              return f"{m.get('currencyCode','')} {int(m.get('units') or 0) + int(m.get('nanos') or 0) / 1e9:.2f}"
+          r = requests.get(f"{app}/subscriptions", headers=H, timeout=60)
+          print("subscriptions list: HTTP", r.status_code)
+          if r.status_code != 200:
+              print(r.text[:300]); raise SystemExit(0)
+          subs = r.json().get("subscriptions", [])
+          if not subs: print("NO subscription products exist")
+          for s in subs:
+              pid = s.get("productId"); print(f"\nPRODUCT {pid}  archived={s.get('archived', False)}")
+              for lst in s.get("listings", [])[:1]:
+                  print(f"  listing ({lst.get('languageCode')}): {lst.get('title')!r} — {', '.join(lst.get('benefits', [])[:4])}")
+              for bp in s.get("basePlans", []):
+                  kind = "auto-renewing" if "autoRenewingBasePlanType" in bp else ("prepaid" if "prepaidBasePlanType" in bp else "?")
+                  period = (bp.get("autoRenewingBasePlanType") or bp.get("prepaidBasePlanType") or {}).get("billingPeriodDuration")
+                  grace = (bp.get("autoRenewingBasePlanType") or {}).get("gracePeriodDuration")
+                  us = next((c for c in bp.get("regionalConfigs", []) if c.get("regionCode") == "US"), None)
+                  print(f"  base plan {bp.get('basePlanId')}: state={bp.get('state')} {kind} every {period}"
+                        f"{f', grace {grace}' if grace else ''}; US price {money(us and us.get('price'))}; "
+                        f"{len(bp.get('regionalConfigs', []))} regions")
+                  o = requests.get(f"{app}/subscriptions/{pid}/basePlans/{bp.get('basePlanId')}/offers", headers=H, timeout=60)
+                  for of in (o.json().get("subscriptionOffers", []) if o.status_code == 200 else []):
+                      phases = []
+                      for ph in of.get("phases", []):
+                          us_ph = next((c for c in ph.get("regionalConfigs", []) if c.get("regionCode") == "US"), {})
+                          if "free" in us_ph: what = "free"
+                          elif "price" in us_ph: what = money(us_ph["price"])
+                          elif "relativeDiscount" in us_ph: what = f"{float(us_ph['relativeDiscount'])*100:.0f}% off"
+                          else: what = "?"
+                          phases.append(f"{ph.get('recurrenceCount', 1)}x {ph.get('duration')} {what}")
+                      elig = of.get("targeting", {})
+                      print(f"    offer {of.get('offerId')}: state={of.get('state')} phases=[{'; '.join(phases)}] targeting={list(elig.keys()) or 'developer-determined'}")
+          PY
