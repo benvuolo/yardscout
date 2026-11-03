@@ -13809,13 +13809,27 @@ def fetch_upullr_inventory() -> list[dict]:
     makes = [m.strip() for m in makes if isinstance(m, str) and m.strip()]
 
     all_vehicles: list[dict] = []
+    captcha = False
     for make_name in makes:
+        if captcha:
+            break
         rows = []
         for site in ("1", "3"):  # 1 = Rosemount + East Bethel, 3 = Toledo
             time.sleep(UPR_DELAY_SEC)
             try:
                 r = _post("getVehicles", site=site, makes=make_name, models="0",
                           years="0", beginDate="", endDate="")
+                # Since ~2026-10-21 the search requires a Cloudflare Turnstile
+                # token (403 {"code":"captcha_missing"}) from every client, not
+                # just datacenter IPs. Stop at the first refusal instead of
+                # sending ~112 doomed requests; the fix is the yard exempting
+                # us or sending a feed, never solving the captcha.
+                if r.status_code == 403 and "captcha_missing" in r.text:
+                    print("  [U-Pull-R] search requires a captcha (captcha_missing) — "
+                          "stopping; needs the yard to exempt the scanner or send a feed",
+                          file=sys.stderr)
+                    captcha = True
+                    break
                 r.raise_for_status()
                 site_rows = json.loads(r.text) if r.text.strip() else []
             except Exception as e:
@@ -13865,9 +13879,11 @@ def fetch_upullr_inventory() -> list[dict]:
             seen.add(v["id"])
             unique.append(v)
     if not unique:
-        # Since 2026-10-21 every getVehicles POST from CI gets HTTP 403
-        # (getMakes still 200) — datacenter-IP filtering in front of the
-        # vehicle endpoint. Fall back to the snapshot pushed daily from the
+        # Since 2026-10-21 every getVehicles POST gets HTTP 403 (getMakes
+        # still 200). First read as datacenter-IP filtering; 2026-11-03 the
+        # body showed it is a Cloudflare Turnstile captcha on the search, so
+        # the residential snapshot below fails the same way. Kept for the day
+        # the yard exempts the scanner. Fall back to the snapshot pushed from the
         # dev Mac's residential IP (scraper/update_upullr_snapshot.sh, launchd
         # io.yardscout.upullr-snapshot), same remedy as Ace / PAPVA.
         # PERMISSION (2026-11-03): the owner phoned U-Pull-R and the front
