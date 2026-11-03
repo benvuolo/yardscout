@@ -1,0 +1,60 @@
+# Manual: set the Pro subscription's "benefits" lines on Google Play (the
+# short what-you-get list Google shows on its purchase sheet and in the
+# user's Play subscriptions) from
+# fastlane/metadata/android/en-US/pro_subscription_benefits.txt
+# (one per line, at most 4 lines of 40 characters). Reads the live listing
+# first and changes only the benefits; title, description, prices and base
+# plans are untouched.
+name: Play subscription listing
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  benefits:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q google-auth requests
+      - name: Set benefits
+        env:
+          SA_RAW: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          PRODUCT: yardscout_pro_monthly
+        run: |
+          python3 - <<'PY'
+          import json, os, requests, sys
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+          lines = [l.strip() for l in open("fastlane/metadata/android/en-US/pro_subscription_benefits.txt") if l.strip()]
+          bad = [l for l in lines if len(l) > 40]
+          if not lines or len(lines) > 4 or bad:
+              sys.exit(f"benefits must be 1-4 lines of <=40 chars; got {len(lines)} lines, too long: {bad}")
+          raw = os.environ["SA_RAW"].strip(); obj, _ = json.JSONDecoder().raw_decode(raw[raw.find("{"):])
+          obj.setdefault("type", "service_account"); obj.setdefault("token_uri", "https://oauth2.googleapis.com/token")
+          cred = service_account.Credentials.from_service_account_info(obj, scopes=["https://www.googleapis.com/auth/androidpublisher"])
+          cred.refresh(Request())
+          H = {"Authorization": f"Bearer {cred.token}", "Content-Type": "application/json"}
+          url = f"https://androidpublisher.googleapis.com/androidpublisher/v3/applications/io.yardscout.app/subscriptions/{os.environ['PRODUCT']}"
+          sub = requests.get(url, headers=H, timeout=60)
+          if sub.status_code != 200:
+              sys.exit(f"read failed: HTTP {sub.status_code} {sub.text[:300]}")
+          sub = sub.json()
+          listings = sub.get("listings", [])
+          en = next((l for l in listings if l.get("languageCode") == "en-US"), None)
+          if en is None:
+              sys.exit("no en-US listing to update")
+          print("before:", en.get("benefits", []))
+          en["benefits"] = lines
+          r = requests.patch(url, headers=H, timeout=60,
+                             params={"updateMask": "listings", "regionsVersion.version": "2022/02"},
+                             json={"packageName": "io.yardscout.app", "productId": os.environ["PRODUCT"], "listings": listings})
+          if r.status_code != 200:
+              sys.exit(f"update failed: HTTP {r.status_code} {r.text[:400]}")
+          after = next(l for l in r.json().get("listings", []) if l.get("languageCode") == "en-US")
+          print("after: ", after.get("benefits", []))
+          print("title unchanged:", after.get("title") == en.get("title"))
+          PY
