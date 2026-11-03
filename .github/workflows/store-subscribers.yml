@@ -1,0 +1,52 @@
+# Daily, before the 13:07 UTC ops email: count active paid subscriptions in
+# each store (tools/store_subscribers.py) and store them in KV
+# ops:store-subs, which the daily email's SUBSCRIBERS section reads. Web
+# (Stripe) subscribers and free comps come from the entitlement records the
+# email already reads, so they need nothing here.
+#
+# Google Play setup (owner, one time):
+#   1. Play Console → Users and permissions → the service account in
+#      PLAY_SERVICE_ACCOUNT_JSON → app permissions: "View financial data".
+#   2. Play Console → Download reports → Financial → "Copy Cloud Storage URI"
+#      → GitHub repo → Settings → Secrets and variables → Actions →
+#      Variables → New: PLAY_REPORTS_BUCKET = that URI.
+name: Store subscribers
+
+on:
+  schedule:
+    - cron: "41 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pyjwt cryptography requests
+      - name: Count
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_SALES_KEY_ID || secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_P8: ${{ secrets.ASC_SALES_P8 || secrets.ASC_API_KEY_P8 }}
+          ASC_VENDOR: ${{ secrets.ASC_VENDOR_NUMBER }}
+          PLAY_SA_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          PLAY_REPORTS_BUCKET: ${{ vars.PLAY_REPORTS_BUCKET }}
+          PLAY_PACKAGE: io.yardscout.app
+        run: |
+          python3 tools/store_subscribers.py > subs.json
+          cat subs.json
+          { echo "## Store subscribers"; echo '```'; cat subs.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Store for the daily email
+        working-directory: backend
+        run: |
+          acct=$(curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" https://api.cloudflare.com/client/v4/accounts | python3 -c 'import sys,json;print(json.load(sys.stdin)["result"][0]["id"])')
+          export CLOUDFLARE_ACCOUNT_ID=$acct
+          npx --yes wrangler@4 kv key put --binding ENTITLEMENTS "ops:store-subs" "$(cat ../subs.json)" --remote

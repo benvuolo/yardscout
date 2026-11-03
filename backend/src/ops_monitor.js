@@ -519,6 +519,8 @@ function composeDaily(r) {
     }
   }
   L.push('');
+  L.push(...subscriberLines(r.subscribers));
+  L.push('');
   L.push(...usageLines(r.usage, r.audience));
   L.push('');
   L.push(...watchCheckLines(r.watchCheck));
@@ -684,6 +686,16 @@ export function composeDailyHtml(r) {
   }
   S.push(hSection('Alerts sent', sends, 'last 24 h'));
 
+  const sb = r.subscribers;
+  if (sb && !sb.error) {
+    const s = subscriberSummary(sb);
+    let body = hStats([[`Paying${s.complete ? '' : ' (at least)'}`, fmtInt(s.paying)], ...s.parts]);
+    body += `<div style="font-size:13px;color:${C.dim};margin:6px 0 2px;">Free Pro you gave out (comps): ${fmtInt(s.comps)}${s.notes.length ? '<br>' + s.notes.map(esc).join('<br>') : ''}</div>`;
+    S.push(hSection('Paying subscribers', body, 'store reports run a day behind'));
+  } else {
+    S.push(hSection('Paying subscribers', hMuted(`Could not load (${esc((sb && sb.error) || 'unknown')})`)));
+  }
+
   const u = r.usage;
   if (u && !u.error) {
     const dv = u.devices;
@@ -802,6 +814,71 @@ function watchCheckLines(c) {
   return L;
 }
 
+/* ===== Paying subscribers =====
+ * Web (Stripe) subscribers and free comps: the entitlement records the site
+ * Worker writes (ent:<email> in ENTITLEMENTS; source stripe / comp /
+ * apple_iap / google_play). App Store and Google Play counts: each store's
+ * own subscription report, pulled daily before this email by
+ * .github/workflows/store-subscribers.yml into KV ops:store-subs. Store
+ * reports count paid subscriptions only, so comps and test purchases never
+ * inflate them. Counts only, never emails. */
+const STORE_SUBS_KEY = 'ops:store-subs';
+const STORE_SUBS_STALE_H = 36;
+
+async function loadSubscribers(env, now) {
+  const out = { stripe: 0, comps: 0, stores: null, storesAgeH: null };
+  let cursor = null;
+  let seen = 0;
+  do {
+    const page = await env.ENTITLEMENTS.list({ prefix: 'ent:', cursor: cursor || undefined, limit: 1000 });
+    for (const k of page.keys) {
+      seen++;
+      const ent = await env.ENTITLEMENTS.get(k.name, 'json');
+      if (!ent || !ent.pro || (ent.expiresAt && Date.parse(ent.expiresAt) <= now)) continue;
+      if (ent.source === 'stripe') out.stripe++;
+      else if (ent.source === 'comp') out.comps++;
+    }
+    cursor = page.list_complete ? null : page.cursor;
+  } while (cursor && seen < 5000);
+  out.stores = await env.ENTITLEMENTS.get(STORE_SUBS_KEY, 'json');
+  if (out.stores && out.stores.at) out.storesAgeH = Math.round((now - Date.parse(out.stores.at)) / 36e5);
+  return out;
+}
+
+/** {paying, parts: [[label, value-text]], complete, notes} for both renderers. */
+function subscriberSummary(sb) {
+  const parts = [];
+  const notes = [];
+  let paying = 0;
+  let complete = true;
+  const stale = sb.storesAgeH != null && sb.storesAgeH > STORE_SUBS_STALE_H;
+  for (const [key, label] of [['apple', 'App Store'], ['google', 'Google Play']]) {
+    const st = sb.stores && sb.stores[key];
+    if (st && Number.isFinite(st.active)) {
+      paying += st.active;
+      parts.push([label, `${fmtInt(st.active)}${st.asOf ? ` (as of ${String(st.asOf).slice(5)})` : ''}`]);
+      if (st.trial) notes.push(`${label}: ${fmtInt(st.trial)} more in a free trial`);
+    } else {
+      complete = false;
+      parts.push([label, '?']);
+      notes.push(`${label}: ${(st && st.error) || 'store counts not pulled yet (store-subscribers workflow)'}`);
+    }
+  }
+  paying += sb.stripe;
+  parts.push(['Web (Stripe)', fmtInt(sb.stripe)]);
+  if (stale) notes.push(`store counts are ${sb.storesAgeH} h old; the store-subscribers workflow may be failing`);
+  return { paying, parts, complete, notes, comps: sb.comps };
+}
+
+function subscriberLines(sb) {
+  if (!sb || sb.error) return [`SUBSCRIBERS: could not load (${(sb && sb.error) || 'unknown'})`];
+  const s = subscriberSummary(sb);
+  const L = [`SUBSCRIBERS: ${s.complete ? '' : 'at least '}${fmtInt(s.paying)} paying — ${s.parts.map(([l, v]) => `${l} ${v}`).join(' · ')}`];
+  L.push(`  Free Pro you gave out (comps): ${fmtInt(s.comps)}`);
+  for (const n of s.notes) L.push(`  ${n}`);
+  return L;
+}
+
 /** Builds the daily report (JSON + the email it would send). Read-only. */
 export async function buildDailyReport(env, { now = Date.now() } = {}) {
   const ev = await evaluateConditions(env, now);
@@ -823,6 +900,8 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
   try { usage = await loadUsage(env, now); } catch (e) { usage = { error: String((e && e.message) || e).slice(0, 200) }; }
   let watchCheck;
   try { watchCheck = await loadWatchCheck(env, now); } catch (e) { watchCheck = { error: String((e && e.message) || e).slice(0, 200) }; }
+  let subscribers;
+  try { subscribers = await loadSubscribers(env, now); } catch (e) { subscribers = { error: String((e && e.message) || e).slice(0, 200) }; }
 
   const channels = {};
   for (const [c, s] of Object.entries(ev.stats.channels)) channels[c] = { ...s.last24h };
@@ -862,6 +941,7 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
     },
     usage,
     watchCheck,
+    subscribers,
   };
   const tail = report.inventory.yards != null
     ? ` · ${fmtInt(report.inventory.yards)} yards · ${fmtInt(report.inventory.vehicles)} cars` : '';

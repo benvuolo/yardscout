@@ -243,6 +243,18 @@ check('watch-check: newly orphaned is an open issue', r.data.openConditions?.som
 check('watch-check: the still-orphaned Celica is not reported as new', !wc.newlyOrphaned.some((o) => o.model === 'Celica'));
 check('watch-check: no user email in the line', !/tester\d@users|@example/.test((r.data.email?.text || '').split('WATCHES')[1] || ''));
 
+/* ---- 8d. paying subscribers (seeded by e2e-ops.sh) ---- */
+r = await dailyRun({ dryRun: true });
+const subTxt = r.data.email?.text || '';
+const subLine = subTxt.split('\n').find((l) => l.startsWith('SUBSCRIBERS')) || '';
+check('subscribers: Apple 4 + live Stripe 1, Google unknown → "at least 5"',
+  /^SUBSCRIBERS: at least 5 paying — App Store 4 \(as of 11-02\) · Google Play \? · Web \(Stripe\) 1$/.test(subLine), subLine);
+check('subscribers: lapsed Stripe sub and comps are not counted as paying', !/Web \(Stripe\) 2/.test(subLine));
+check('subscribers: comps shown separately', /Free Pro you gave out \(comps\): 1/.test(subTxt));
+check('subscribers: why Google is missing is spelled out', /Google Play: not set up: add the PLAY_REPORTS_BUCKET/.test(subTxt));
+check('subscribers: HTML section present', /Paying subscribers/.test(r.data.email?.html || ''));
+check('subscribers: no subscriber email in the email', !/web1@|web2@|friend@|ios1@/.test(subTxt + (r.data.email?.html || '')));
+
 /* ---- 9. production guard: the clock offset is DEV-only (sanity: present here) ---- */
 r = await checkRun({ dryRun: true, nowOffsetHours: 30 });
 check('offset honored in DEV_MODE', r.data.active.some((c) => c.id === 'stale'));

@@ -42,6 +42,17 @@ echo "── applying migrations (local D1)"
 npx wrangler d1 migrations apply yardscout-db --local \
   --persist-to "$OUT/wrangler-state" >"$OUT/migrate.log" 2>&1
 
+echo "── seeding entitlement records + store counts (local KV)"
+# Paying-subscribers section: one live Stripe sub, one lapsed, one comp, one
+# email-linked iOS buyer (counted via Apple's report, not here), and the
+# store-subscribers workflow's KV record with Google not set up.
+kvput() { npx wrangler kv key put --binding ENTITLEMENTS --local --persist-to "$OUT/wrangler-state" "$1" "$2" >>"$OUT/kv.log" 2>&1; }
+kvput "ent:web1@users.test" '{"pro":true,"source":"stripe","expiresAt":"2099-01-01T00:00:00Z"}'
+kvput "ent:web2@users.test" '{"pro":true,"source":"stripe","expiresAt":"2020-01-01T00:00:00Z"}'
+kvput "ent:friend@users.test" '{"pro":true,"source":"comp","expiresAt":"2099-01-01T00:00:00Z"}'
+kvput "ent:ios1@users.test" '{"pro":true,"source":"apple_iap","expiresAt":"2099-01-01T00:00:00Z"}'
+kvput "ops:store-subs" "{\"at\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"apple\":{\"active\":4,\"trial\":0,\"asOf\":\"2026-11-02\"},\"google\":{\"error\":\"not set up: add the PLAY_REPORTS_BUCKET repository variable\"}}"
+
 echo "── starting wrangler dev on :$PORT"
 # --test-scheduled exposes /__scheduled?cron=… so the cron branches run for real.
 npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-ops --test-scheduled \
