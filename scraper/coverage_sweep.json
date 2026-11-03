@@ -1,10 +1,10 @@
 {
- "at": "2026-11-02T23:31:04Z",
+ "at": "2026-11-03T17:27:55Z",
  "skipped": {
-  "tracked": 69
+  "tracked": 55
  },
  "notes": [
-  "OpenStreetMap: Overpass failed for AL, AK, AZ, AR, CA, CO, CT; time budget reached before ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY."
+  "OpenStreetMap: Overpass failed for AL, AK, AZ; not queried: AR, CA, CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY."
  ],
  "candidates": [
   {
@@ -22,7 +22,8 @@
    "extra": {
     "slug": "pandcautoparts",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -40,7 +41,8 @@
    "extra": {
     "slug": "unitedtruck",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -58,7 +60,8 @@
    "extra": {
     "slug": "allcar",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -76,7 +79,8 @@
    "extra": {
     "slug": "mendozaauto",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -89,12 +93,13 @@
    "source": "ario",
    "tier": "E",
    "platform": "Ario (autorecycler.io)",
-   "evidence": "on Ario but stale: 608 rows, newest set-out 2026-09-29",
+   "evidence": "on Ario but stale: 610 rows, newest set-out 2026-09-29",
    "known_status": "",
    "extra": {
     "slug": "harolds-auto-parts-u-pull-it",
-    "live_rows": 608,
-    "newest": "2026-09-29"
+    "live_rows": 610,
+    "newest": "2026-09-29",
+    "self_service": true
    }
   },
   {
@@ -112,7 +117,8 @@
    "extra": {
     "slug": "vikingautoparts",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -130,7 +136,8 @@
    "extra": {
     "slug": "johns",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -148,7 +155,8 @@
    "extra": {
     "slug": "pacific",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -166,7 +174,8 @@
    "extra": {
     "slug": "1548883285138x726590182942834700",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -184,7 +193,8 @@
    "extra": {
     "slug": "kennedys",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -202,7 +212,8 @@
    "extra": {
     "slug": "riteway-demo",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -220,7 +231,8 @@
    "extra": {
     "slug": "timosautowrecking",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -238,7 +250,8 @@
    "extra": {
     "slug": "phelpsautowreckers",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -256,7 +269,8 @@
    "extra": {
     "slug": "higgins",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -274,7 +288,8 @@
    "extra": {
     "slug": "tandtsalvagestorage",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -292,7 +307,8 @@
    "extra": {
     "slug": "autogator",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -310,7 +326,8 @@
    "extra": {
     "slug": "dis-n-dat",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -328,7 +345,8 @@
    "extra": {
     "slug": "timos-auto-wrecking",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -346,7 +364,8 @@
    "extra": {
     "slug": "pick-the-part",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -364,7 +383,8 @@
    "extra": {
     "slug": "a-s-auto-wrecking",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -382,7 +402,8 @@
    "extra": {
     "slug": "parts-r-us",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -393,14 +414,15 @@
    "lng": -120.6982,
    "website": "https://ario.autorecycler.io/yard/a1-metals",
    "source": "ario",
-   "tier": "A",
+   "tier": "D",
    "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario: 507 rows, newest set-out 2026-10-30",
+   "evidence": "live on Ario (509 rows) but Ario lists it as not self-service",
    "known_status": "",
    "extra": {
     "slug": "a1-metals",
-    "live_rows": 507,
-    "newest": "2026-10-30"
+    "live_rows": 509,
+    "newest": "2026-11-02",
+    "self_service": false
    }
   },
   {
@@ -418,7 +440,8 @@
    "extra": {
     "slug": "testino-autos",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -436,7 +459,8 @@
    "extra": {
     "slug": "san-luis-auto-salvage",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -454,7 +478,8 @@
    "extra": {
     "slug": "jack-autos",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -472,7 +497,8 @@
    "extra": {
     "slug": "american-parts-center",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -490,7 +516,8 @@
    "extra": {
     "slug": "prestige-pull-your-part",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": true
    }
   },
   {
@@ -508,7 +535,8 @@
    "extra": {
     "slug": "ab-auto-salvage",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -526,7 +554,8 @@
    "extra": {
     "slug": "gulf-bank-used-auto-parts",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -544,7 +573,8 @@
    "extra": {
     "slug": "sam's-auto-salvage",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -562,7 +592,8 @@
    "extra": {
     "slug": "adam-car-buyer",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -580,7 +611,8 @@
    "extra": {
     "slug": "paso-robles-auto-wrecking",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -598,7 +630,8 @@
    "extra": {
     "slug": "test-auto-parts",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -616,7 +649,8 @@
    "extra": {
     "slug": "ezer",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -634,7 +668,8 @@
    "extra": {
     "slug": "create-digital-growth-inc",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -652,7 +687,8 @@
    "extra": {
     "slug": "universal-auto-and-recycling-group",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -670,7 +706,8 @@
    "extra": {
     "slug": "green-vehicle-disposal-inc",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -688,7 +725,8 @@
    "extra": {
     "slug": "green-vehicle-disposal-inc-1",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -706,7 +744,8 @@
    "extra": {
     "slug": "longs-auto-recycling",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -724,7 +763,8 @@
    "extra": {
     "slug": "ajax",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -742,7 +782,8 @@
    "extra": {
     "slug": "lqk-san-bernadino",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -760,7 +801,8 @@
    "extra": {
     "slug": "asop",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -778,7 +820,8 @@
    "extra": {
     "slug": "yeti",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -796,7 +839,8 @@
    "extra": {
     "slug": "yank-a-part",
     "live_rows": 1,
-    "newest": "2024-04-10"
+    "newest": "2024-04-10",
+    "self_service": false
    }
   },
   {
@@ -814,7 +858,8 @@
    "extra": {
     "slug": "southern-auto-salvage",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -832,7 +877,8 @@
    "extra": {
     "slug": "salisbury-salvage",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -850,7 +896,8 @@
    "extra": {
     "slug": "a-to-z-u-pull-it",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": true
    }
   },
   {
@@ -868,7 +915,8 @@
    "extra": {
     "slug": "blue--gold-auto-salvage-goose-creek-south-carolina",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": true
    }
   },
   {
@@ -886,7 +934,8 @@
    "extra": {
     "slug": "youngs-u-pull-it-north-carolina",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": true
    }
   },
   {
@@ -904,7 +953,8 @@
    "extra": {
     "slug": "goldsboro-north-carolina-bevells-pull-it-yourself-used-auto-parts",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": true
    }
   },
   {
@@ -922,7 +972,8 @@
    "extra": {
     "slug": "sams-pull-a-part",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -940,7 +991,8 @@
    "extra": {
     "slug": "rt-50-u-pull-it-nj",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
   },
   {
@@ -958,7 +1010,8 @@
    "extra": {
     "slug": "jamm-junkyard",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": true
    }
   },
   {
@@ -976,7 +1029,8 @@
    "extra": {
     "slug": "gaston-towing-recovery",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": true
    }
   },
   {
@@ -994,7 +1048,8 @@
    "extra": {
     "slug": "tas-recycling",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": true
    }
   },
   {
@@ -1012,106 +1067,9 @@
    "extra": {
     "slug": "jalopy-wizards",
     "live_rows": 0,
-    "newest": ""
+    "newest": "",
+    "self_service": false
    }
-  },
-  {
-   "name": "Casapulla\u2019s North Subs & Steaks",
-   "city": "",
-   "state": "DE",
-   "lat": 39.7973284,
-   "lng": -75.5471937,
-   "website": "https://casapullasnorth.com",
-   "source": "osm",
-   "tier": "D",
-   "platform": "",
-   "evidence": "site has no inventory link",
-   "known_status": "",
-   "extra": {}
-  },
-  {
-   "name": "Casapulla\u2019s Subs",
-   "city": "",
-   "state": "DE",
-   "lat": 39.6965982,
-   "lng": -75.7109179,
-   "website": "",
-   "source": "osm",
-   "tier": "E",
-   "platform": "",
-   "evidence": "no website on the map",
-   "known_status": "",
-   "extra": {}
-  },
-  {
-   "name": "Casapulla's",
-   "city": "",
-   "state": "DE",
-   "lat": 39.7405773,
-   "lng": -75.5924779,
-   "website": "",
-   "source": "osm",
-   "tier": "E",
-   "platform": "",
-   "evidence": "no website on the map",
-   "known_status": "",
-   "extra": {}
-  },
-  {
-   "name": "Casapulla\u2019s Subs",
-   "city": "Rehoboth Beach",
-   "state": "DE",
-   "lat": 38.7223126,
-   "lng": -75.119273,
-   "website": "",
-   "source": "osm",
-   "tier": "E",
-   "platform": "",
-   "evidence": "no website on the map",
-   "known_status": "",
-   "extra": {}
-  },
-  {
-   "name": "Lilly Pullitzer",
-   "city": "Jacksonville",
-   "state": "FL",
-   "lat": 30.2543075,
-   "lng": -81.5254888,
-   "website": "",
-   "source": "osm",
-   "tier": "E",
-   "platform": "",
-   "evidence": "no website on the map",
-   "known_status": "",
-   "extra": {}
-  },
-  {
-   "name": "Pullara Drive",
-   "city": "",
-   "state": "FL",
-   "lat": 28.1673465,
-   "lng": -82.5683775,
-   "website": "",
-   "source": "osm",
-   "tier": "E",
-   "platform": "",
-   "evidence": "no website on the map",
-   "known_status": "",
-   "extra": {}
-  },
-  {
-   "name": "Epic Apartments",
-   "city": "Daytona Beach",
-   "state": "FL",
-   "lat": 29.1748861,
-   "lng": -81.0427627,
-   "website": "",
-   "source": "osm",
-   "tier": "E",
-   "platform": "",
-   "evidence": "no website on the map",
-   "known_status": "",
-   "extra": {}
   }
  ]
 }
