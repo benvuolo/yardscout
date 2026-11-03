@@ -38,7 +38,7 @@ jobs:
           ASC_P8: ${{ secrets.ASC_SALES_P8 || secrets.ASC_API_KEY_P8 }}
           ASC_VENDOR: ${{ secrets.ASC_VENDOR_NUMBER }}
           PLAY_SA_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
-          PLAY_REPORTS_BUCKET: ${{ vars.PLAY_REPORTS_BUCKET }}
+          PLAY_REPORTS_BUCKET: ${{ vars.PLAY_REPORTS_BUCKET || secrets.PLAY_REPORTS_BUCKET }}
           PLAY_PACKAGE: io.yardscout.app
         run: |
           python3 tools/store_subscribers.py > subs.json
