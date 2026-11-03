@@ -12,6 +12,9 @@
 # inventory to scraper/snapshots/upullr_inventory.json.gz plus a fresh
 # docs/data/upullr_pricing.json, and the CI scan's adapter falls back to the
 # snapshot whenever its live crawl yields zero vehicles.
+#
+# PERMISSION: 2026-11-03 the owner phoned U-Pull-R; the front desk said
+# listing and scanning is fine. Run only with that permission standing.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

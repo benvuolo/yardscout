@@ -13870,6 +13870,10 @@ def fetch_upullr_inventory() -> list[dict]:
         # vehicle endpoint. Fall back to the snapshot pushed daily from the
         # dev Mac's residential IP (scraper/update_upullr_snapshot.sh, launchd
         # io.yardscout.upullr-snapshot), same remedy as Ace / PAPVA.
+        # PERMISSION (2026-11-03): the owner phoned U-Pull-R and the front
+        # desk said listing and scanning their inventory is fine. No web or
+        # IT contact was given; if one turns up, ask them to allow the CI
+        # scanner so this snapshot path can be retired.
         unique = _load_vehicle_snapshot("U-Pull-R", "upullr_inventory.json.gz",
                                         [s["name"] for s in UPR_STORES.values()])
     print(f"  [U-Pull-R] {len(unique)} vehicles across "
