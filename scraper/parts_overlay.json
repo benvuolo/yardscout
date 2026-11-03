@@ -92,22 +92,24 @@
           "high": 90,
           "cost": 15,
           "yr_min": 2005,
-          "yr_max": 2009,
+          "yr_max": 2012,
           "option": true,
           "rarity": "Rare",
           "source": "agent-research",
-          "added": "2026-10-09"
+          "added": "2026-10-09",
+          "note": "2026-11-03: extended to 2012 (base entry covers 2013+)"
         },
         {
           "name": "Electronic Steering Column Lock (ESCL)",
           "low": 45,
           "high": 110,
           "cost": 12,
-          "yr_min": 2009,
-          "yr_max": 2009,
+          "yr_min": 2007,
+          "yr_max": 2012,
           "rarity": "Rare",
           "source": "agent-research",
-          "added": "2026-10-09"
+          "added": "2026-10-09",
+          "note": "2026-11-03: window was 2009-2009; push-button ESCL is on every 2007-2012 Altima"
         }
       ]
     },

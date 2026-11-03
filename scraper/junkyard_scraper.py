@@ -937,7 +937,7 @@ UNOBTANIUM_DB = {
             {"name": "OEM LED Headlights", "rarity": "Rare", "low": 200, "high": 450, "cost": 40, "yr_min": 2019},
             {"name": "Bose Door Speakers + Amp", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 22, "yr_min": 2013},
             {"name": "Touchscreen / NissanConnect Unit", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 45, "yr_min": 2013},
-            {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_max": 2018},
+            {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_max": 2015},  # 2016+ facelift lamps have their own row (gap curation below)
             {"name": "Blind Spot Radar Module", "rarity": "Uncommon", "low": 75, "high": 175, "cost": 22, "yr_min": 2016},
         ],
     },
@@ -3089,6 +3089,36 @@ for _k in ("corolla", "altima", "sentra", "malibu", "cruze", "escape", "explorer
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
     ])
 
+# ---- 2026-11 gap curation: model-specific rows for the most common cars on
+# the lots, which until now matched only the generic commuter rows (see
+# scraper/PARTS_GAPS_2026-11.md for the per-row basis). Pull costs are the
+# medians of the 30 published yard price lists for the category; bands are
+# conservative used-OEM resale anchors that _resale_sold_calibrate() scales
+# down at display time, and the live eBay feed (ebay_prices.py) replaces
+# them per part once the keys exist. No engines, transmissions or
+# catalytic converters, as everywhere in this table.
+_extend_entry("altima", parts=[
+    # Mechanical commodity pulls across L31/L32/L33 (2002-2018): the
+    # generation pass leaves pump/compressor rows whole, like the starter.
+    {"name": "Fuel Pump Module (in-tank, test before listing)", "rarity": "Uncommon", "low": 40, "high": 90, "cost": 24, "yr_min": 2002, "yr_max": 2018},
+    {"name": "Electronic Throttle Body (match part #)", "rarity": "Uncommon", "low": 40, "high": 95, "cost": 32, "yr_min": 2002, "yr_max": 2018},
+    {"name": "A/C Compressor (clutch spins free)", "rarity": "Uncommon", "low": 60, "high": 130, "cost": 40, "yr_min": 2002, "yr_max": 2018},
+    {"name": "Radiator Fan Assembly (dual fan)", "rarity": "Uncommon", "low": 40, "high": 90, "cost": 16, "yr_min": 2002, "yr_max": 2018},
+    # L32 2007-2012 and L33 2013-2018 options (never VIN-decodable).
+    {"name": "Rear Spoiler (factory)", "rarity": "Uncommon", "low": 50, "high": 110, "cost": 28, "yr_min": 2002, "yr_max": 2018, "option": True},
+    {"name": "Leather Power Driver Seat (SL)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "yr_min": 2007, "yr_max": 2018, "option": True},
+    {"name": "17\"/18\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2007, "yr_max": 2018, "option": True},
+    # 2010-2012 3.5 SR premium package only.
+    {"name": "HID Xenon Headlights (pair)", "rarity": "Rare", "low": 180, "high": 360, "cost": 44, "yr_min": 2010, "yr_max": 2012, "option": True},
+    # 2016-2018 facelift: halogen lamps with the LED signature; the generic
+    # pre-2016 headlight row stops at 2015.
+    {"name": "Headlights w/ LED Signature (2016+ facelift, pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 44, "yr_min": 2016, "yr_max": 2018},
+    # Altima Coupe (2008-2013): far fewer built than the sedan, and its
+    # lamps are coupe-only. Body-gated: a sedan decode excludes them.
+    {"name": "Coupe Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 60, "high": 150, "cost": 23, "yr_min": 2008, "yr_max": 2013, "body": ["coupe"]},
+    {"name": "Coupe Headlights (pair, clear)", "rarity": "Rare", "low": 80, "high": 190, "cost": 44, "yr_min": 2008, "yr_max": 2013, "body": ["coupe"]},
+])
+
 # --- New entries: high-volume models the audit found uncovered ---
 UNOBTANIUM_DB.update({
     # -- Nissan volume --
@@ -5117,7 +5147,7 @@ def _merge_parts_overlay() -> None:
     except Exception as exc:  # pragma: no cover
         print(f"[overlay] parts_overlay.json unreadable, skipping: {exc}")
         return
-    allowed = ("name", "rarity", "low", "high", "cost", "yr_min", "yr_max", "trim", "option")
+    allowed = ("name", "rarity", "low", "high", "cost", "yr_min", "yr_max", "trim", "option", "body")
     for ent in data.get("entries", []):
         make = (ent.get("make") or "").strip()
         terms = [str(t).lower().strip() for t in (ent.get("match") or []) if str(t).strip()]
@@ -5214,6 +5244,7 @@ def lint_gate_tokens() -> list[str]:
         for p in info["top_parts"]:
             tokens = [str(t).lower() for t in p.get("trim", [])]
             tokens += [str(t).lower() for t in p.get("drive", [])]
+            tokens += [str(t).lower() for t in p.get("body", [])]
             for t in tokens:
                 if not t.strip():
                     problems.append(f"{key}: empty gate token on {p['name']!r}")
@@ -12662,6 +12693,11 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
     # the decode is definite / "if equipped" otherwise.
     drive_str = (vin_decode.get("driveType") or "").lower() if vin_decode else ""
     trans_str = (vin_decode.get("transmission") or "").lower() if vin_decode else ""
+    # Body style from the VIN decode ("Sedan/Saloon", "Coupe", "Wagon"...).
+    # vPIC fills bodyClass even when the trim is empty (every Altima decode
+    # has no trim but a body class), so body-gated parts confirm or exclude
+    # from it like drive gates do.
+    body_str = (vin_decode.get("bodyClass") or "").lower() if vin_decode else ""
     is_manual = "manual" in trans_str and "automated" not in trans_str
     is_definitely_auto = bool(trans_str) and not is_manual and any(
         t in trans_str for t in ("automatic", "cvt", "dual-clutch", "automated"))
@@ -12744,6 +12780,20 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                     if len(classes) == 1:
                         continue
                     trim_status = trim_status or "unconfirmed"
+                else:
+                    trim_status = trim_status or "unconfirmed"
+            if "body" in p:
+                # Body-style gate, tokens like ["coupe"]. Decode names it →
+                # confirmed; listing names it ("Altima Coupe") → listing;
+                # decode names a different body → excluded; no decode →
+                # "if equipped".
+                body_tokens = [str(b).lower() for b in p["body"]]
+                if body_str and _gate_hit(body_tokens, body_str):
+                    trim_status = "vin"
+                elif _gate_hit(body_tokens, model_lower):
+                    trim_status = "listing"
+                elif body_str:
+                    continue
                 else:
                     trim_status = trim_status or "unconfirmed"
             if p.get("option"):
