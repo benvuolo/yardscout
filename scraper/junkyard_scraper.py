@@ -3119,6 +3119,107 @@ _extend_entry("altima", parts=[
     {"name": "Coupe Headlights (pair, clear)", "rarity": "Rare", "low": 80, "high": 190, "cost": 44, "yr_min": 2008, "yr_max": 2013, "body": ["coupe"]},
 ])
 
+# Shared commodity pulls for the rest of the 2026-11 gap set. Same basis as
+# the Altima rows above (yard-list median pull costs; conservative anchors
+# that the display pass scales down and the eBay feed will replace).
+_GAP_MECH = [
+    {"name": "Fuel Pump Module (in-tank, test before listing)", "rarity": "Uncommon", "low": 40, "high": 90, "cost": 24},
+    {"name": "A/C Compressor (clutch spins free)", "rarity": "Uncommon", "low": 60, "high": 130, "cost": 40},
+    {"name": "Radiator Fan Assembly", "rarity": "Uncommon", "low": 40, "high": 90, "cost": 16},
+]
+
+
+def _gap_rows(yr_min: int, yr_max: int, extra: list | None = None) -> list[dict]:
+    rows = [{**p, "yr_min": yr_min, "yr_max": yr_max} for p in _GAP_MECH]
+    return rows + (extra or [])
+
+
+# Toyota Camry (7,600 cars; XV30 2002-06, XV40 2007-11, XV50 2012-17, XV70 2018+)
+_extend_entry("camry", parts=_gap_rows(2002, 2017, [
+    {"name": "Entune / Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 35, "yr_min": 2012, "yr_max": 2017},
+    {"name": "Entune 3 Touchscreen Head Unit", "rarity": "Rare", "low": 150, "high": 350, "cost": 45, "yr_min": 2018, "yr_max": 2024},
+    {"name": "JBL Amp + Speakers", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 15, "yr_min": 2015, "yr_max": 2017, "option": True},  # base row stops at 2014
+    {"name": "Hybrid Battery Pack (test modules first)", "rarity": "Rare", "low": 150, "high": 400, "cost": 100, "yr_min": 2015, "yr_max": 2017, "trim": ["hybrid"]},
+    {"name": "SE/XSE Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 110, "cost": 28, "yr_min": 2007, "yr_max": 2024, "option": True},
+    {"name": "17\"/18\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2007, "yr_max": 2024, "option": True},
+    {"name": "Leather Power Driver Seat (XLE)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "yr_min": 2002, "yr_max": 2017, "option": True},
+    {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2002, "yr_max": 2024, "option": True},
+]))
+
+# Ford Focus (6,350 cars; 2012-18 is the bulk)
+_extend_entry("focus", parts=_gap_rows(2008, 2018, [
+    # DPS6 dual-clutch cars: the transmission control module is the part
+    # people hunt for after the settlement years. Electronic module on the
+    # gearbox, not the gearbox itself.
+    {"name": "DCT Transmission Control Module (TCM, match part #)", "rarity": "Rare", "low": 90, "high": 220, "cost": 30, "yr_min": 2012, "yr_max": 2018},
+    {"name": "MyFord Touch 8\" Screen + APIM", "rarity": "Uncommon", "low": 100, "high": 220, "cost": 45, "yr_min": 2012, "yr_max": 2014, "option": True},
+    {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 2000, "yr_max": 2018},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 2000, "yr_max": 2018},
+    # Hatch lamps differ from the sedan's and the hatch sold fewer.
+    {"name": "Hatchback Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 55, "high": 140, "cost": 23, "yr_min": 2012, "yr_max": 2018, "body": ["hatchback"]},
+    {"name": "Titanium 17\"/18\" Alloy Wheels (set of 4)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2012, "yr_max": 2018, "option": True},
+    {"name": "Heated Leather Seats (Titanium, pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2012, "yr_max": 2018, "option": True},
+]))
+
+# Chevrolet Malibu (5,760 cars; 2008-12 and 2013-15 are the bulk)
+_extend_entry("malibu", parts=_gap_rows(2004, 2024, [
+    {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2008, "yr_max": 2024, "option": True},
+    {"name": "LTZ Leather Heated Seats (pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2008, "yr_max": 2024, "option": True},
+    {"name": "17\"/18\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2008, "yr_max": 2024, "option": True},
+    {"name": "Remote Start / BCM (match part #)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15, "yr_min": 2008, "yr_max": 2015, "option": True},
+]))
+
+# Ford Escape (4,850 cars; 2013-19 is the bulk)
+_extend_entry("escape", parts=_gap_rows(2001, 2019, [
+    # EcoBoost turbos: an engine option the VIN decode can't gate here, so
+    # "if equipped". Rear-mounted on the 2.0, front on the 1.6.
+    {"name": "EcoBoost Turbocharger (1.6/2.0, match part #)", "rarity": "Rare", "low": 120, "high": 280, "cost": 60, "yr_min": 2013, "yr_max": 2019, "option": True},
+    # The 2013+ AWD power transfer unit is the generation's failure item.
+    {"name": "AWD Power Transfer Unit (PTU)", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "yr_min": 2013, "yr_max": 2019, "drive": ["awd", "4wd"]},
+    {"name": "MyFord Touch 8\" Screen + APIM", "rarity": "Uncommon", "low": 100, "high": 220, "cost": 45, "yr_min": 2013, "yr_max": 2016, "option": True},
+    {"name": "Roof Rack Crossbars (pair)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 20, "yr_min": 2001, "yr_max": 2019, "option": True},
+    {"name": "Leather Heated Seats (Titanium/Limited, pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2008, "yr_max": 2019, "option": True},
+]))
+
+# Chevrolet Equinox (4,140 cars; 2010-17 is the bulk)
+_extend_entry("equinox", parts=_gap_rows(2005, 2024, [
+    {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 2005, "yr_max": 2024},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15, "yr_min": 2005, "yr_max": 2024},
+    {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "yr_min": 2010, "yr_max": 2024, "drive": ["awd", "4wd"]},
+    {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2005, "yr_max": 2024, "option": True},
+    {"name": "Pioneer Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 120, "cost": 15, "yr_min": 2010, "yr_max": 2017, "option": True},
+    {"name": "LTZ Leather Heated Seats (pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2010, "yr_max": 2024, "option": True},
+    {"name": "18\"/19\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 160, "high": 340, "cost": 100, "yr_min": 2010, "yr_max": 2024, "option": True},
+]))
+
+# Nissan Sentra (4,130 cars; B16 2007-12, B17 2013-19)
+_extend_entry("sentra", parts=_gap_rows(2007, 2019, [
+    {"name": "SR Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 110, "cost": 28, "yr_min": 2013, "yr_max": 2019, "trim": ["SR"]},
+    {"name": "SR 17\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2013, "yr_max": 2019, "trim": ["SR"]},
+    {"name": "Bose Amp + Speakers (SL)", "rarity": "Uncommon", "low": 50, "high": 120, "cost": 15, "yr_min": 2013, "yr_max": 2019, "option": True},
+    {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2007, "yr_max": 2019, "option": True},
+    {"name": "Leather Power Driver Seat (SL)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "yr_min": 2007, "yr_max": 2019, "option": True},
+]))
+
+# Toyota Corolla (3,450 cars; E120/130 2003-08, E140 2009-13, E170 2014-19)
+_extend_entry("corolla", parts=_gap_rows(2003, 2019, [
+    {"name": "S/XSE Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 110, "cost": 28, "yr_min": 2003, "yr_max": 2019, "option": True},
+    {"name": "16\"/17\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 140, "high": 300, "cost": 100, "yr_min": 2009, "yr_max": 2019, "option": True},
+    {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2003, "yr_max": 2019, "option": True},
+]))
+
+# Hyundai Elantra (3,170 cars; HD 2007-10, MD 2011-16). The overlay's lamp/
+# mirror rows cover 2005-2010; the 2011-16 generation had none.
+_extend_entry("elantra", parts=_gap_rows(2007, 2016, [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 120, "cost": 20, "yr_min": 2011, "yr_max": 2016},
+    {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 12, "yr_min": 2011, "yr_max": 2016},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 15, "yr_min": 2011, "yr_max": 2016},
+    {"name": "Navigation Touchscreen (Limited)", "rarity": "Rare", "low": 120, "high": 280, "cost": 45, "yr_min": 2011, "yr_max": 2016, "option": True},
+    {"name": "Limited Leather Heated Seats (pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2011, "yr_max": 2016, "option": True},
+    {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2007, "yr_max": 2016, "option": True},
+    {"name": "16\"/17\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 140, "high": 300, "cost": 100, "yr_min": 2011, "yr_max": 2016, "option": True},
+]))
+
 # --- New entries: high-volume models the audit found uncovered ---
 UNOBTANIUM_DB.update({
     # -- Nissan volume --
@@ -3889,6 +3990,20 @@ _split_generations("civic", display="Honda Civic", make="Honda", gens=[
         {"name": "Instrument Cluster", "rarity": "Uncommon", "low": 50, "high": 150, "cost": 18},
     ]},
 ])
+
+# 2026-11 gap curation for the Civic lives here because the split above
+# replaces the base entry: rows go onto the generation entries directly.
+for _k, _lo, _hi in (("civic 2001-2005", 2001, 2005), ("civic 2006-2011", 2006, 2011), ("civic 2012-2015", 2012, 2015)):
+    _extend_entry(_k, parts=_gap_rows(_lo, _hi, [
+        {"name": "Sunroof Glass + Motor (EX)", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "option": True},
+        {"name": "EX/Si Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "option": True},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    ]))
+_extend_entry("civic 2006-2011", parts=[
+    # 8th-gen only: the navigation head unit was an EX-L/Si option.
+    {"name": "Navigation Head Unit (EX-L w/ Navi)", "rarity": "Rare", "low": 100, "high": 240, "cost": 45, "option": True},
+])
+
 
 _split_generations("accord", display="Honda Accord", make="Honda", gens=[
     {"label": "1990-1997 (CB/CD)", "years": (1990, 1997), "parts": [
@@ -5179,8 +5294,18 @@ def _merge_parts_overlay() -> None:
             if not any(t in kws for t in terms):
                 continue
             hit = True
-            have = {pp["name"].lower() for pp in info["top_parts"]}
-            info["top_parts"].extend(pp for pp in clean if pp["name"].lower() not in have)
+            # Same name AND overlapping model years = already covered; a
+            # same-name row for a different generation (Elantra lamps
+            # 2005-10 vs 2011-16) is a distinct part and is kept.
+            lo, hi = info["year_range"]
+            def _win(pp):
+                return (max(lo, int(pp.get("yr_min", lo) or lo)), min(hi, int(pp.get("yr_max", hi) or hi)))
+            have = [(pp["name"].lower(), _win(pp)) for pp in info["top_parts"]]
+            for pp in clean:
+                w = _win(pp)
+                if any(n == pp["name"].lower() and w[0] <= hw[1] and hw[0] <= w[1] for n, hw in have):
+                    continue
+                info["top_parts"].append(pp)
         if not hit:
             new_key = terms[0]
             if new_key in UNOBTANIUM_DB:

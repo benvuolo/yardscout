@@ -72,10 +72,43 @@ p04 = parts(2004, "Nissan", "Altima", SEDAN)
 check("2004: mechanical rows yes, ESCL no", "Fuel Pump Module (in-tank, test before listing)" in p04 and "Electronic Steering Column Lock (ESCL)" not in p04)
 check("2020: none of the 2002-2018 rows", not any(n in parts(2020, "Nissan", "Altima", SEDAN) for n in ("Fuel Pump Module (in-tank, test before listing)", "Rear Spoiler (factory)")))
 
+# 2b. the other nine models
+FWD = {**SEDAN, "driveType": "FWD/Front-Wheel Drive"}
+AWD = {**SEDAN, "bodyClass": "Sport Utility Vehicle (SUV)/Multipurpose Vehicle (MPV)", "driveType": "AWD/All-Wheel Drive"}
+HATCH = {**SEDAN, "bodyClass": "Hatchback/Liftback/Notchback"}
+def names(year, make, model, decode):
+    return set(parts(year, make, model, decode))
+check("Camry 2007: mechanical rows + XLE seat option", {"Fuel Pump Module (in-tank, test before listing)", "A/C Compressor (clutch spins free)"} <= names(2007, "Toyota", "Camry", FWD)
+      and parts(2007, "Toyota", "Camry", FWD)["Leather Power Driver Seat (XLE)"]["trim_status"] == "unconfirmed")
+check("Camry 2014: Entune row, 2019: Entune 3 row (not both)", "Entune / Touchscreen Head Unit" in names(2014, "Toyota", "Camry", FWD)
+      and "Entune 3 Touchscreen Head Unit" in names(2019, "Toyota", "Camry", FWD) and "Entune / Touchscreen Head Unit" not in names(2019, "Toyota", "Camry", FWD))
+check("Civic 2008: gen entry got the rows + Navi option; Civic 1998 did not", "A/C Compressor (clutch spins free)" in names(2008, "Honda", "Civic", FWD)
+      and "Navigation Head Unit (EX-L w/ Navi)" in names(2008, "Honda", "Civic", FWD) and "A/C Compressor (clutch spins free)" not in names(1998, "Honda", "Civic", FWD))
+check("Focus 2013 hatch: hatch tail lights VIN-confirmed; sedan excluded; no decode 'if equipped'",
+      parts(2013, "Ford", "Focus", HATCH)["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin"
+      and "Hatchback Tail Lights (pair, uncracked)" not in names(2013, "Ford", "Focus", FWD)
+      and parts(2013, "Ford", "Focus")["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "unconfirmed")
+check("Focus 2013: TCM row; Focus 2010: none", "DCT Transmission Control Module (TCM, match part #)" in names(2013, "Ford", "Focus", FWD)
+      and "DCT Transmission Control Module (TCM, match part #)" not in names(2010, "Ford", "Focus", FWD))
+check("Escape 2014 AWD: PTU VIN-confirmed; FWD decode: excluded", parts(2014, "Ford", "Escape", AWD)["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin"
+      and "AWD Power Transfer Unit (PTU)" not in names(2014, "Ford", "Escape", FWD))
+check("Escape 2014: turbo is 'if equipped'", parts(2014, "Ford", "Escape", FWD)["EcoBoost Turbocharger (1.6/2.0, match part #)"]["trim_status"] == "unconfirmed")
+check("Equinox 2012: tail lights now exist, gen-bounded", parts(2012, "Chevrolet", "Equinox", FWD)["Tail Lights (pair, uncracked)"]["fits"] == "2010–2017")
+check("Sentra 2015 listed as SR: spoiler listing-confirmed", parts(2015, "Nissan", "Sentra SR")["SR Rear Spoiler"]["trim_status"] == "listing")
+check("Elantra 2013: headlights/mirrors/tails now exist", {"Headlights (clear, non-hazed)", "Side Mirrors (power, pair)", "Tail Lights (pair, uncracked)"} <= names(2013, "Hyundai", "Elantra", FWD))
+check("Elantra 2008: still has the 2005-10 overlay lamp rows (merge is window-aware)",
+      parts(2008, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)", {}).get("fits") == "2005–2010", str(parts(2008, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)")))
+check("Elantra 2013: lamp row is the 2011-16 one", parts(2013, "Hyundai", "Elantra", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2011–2016")
+check("Camry 2010: overlay JBL (2002-14) survives next to the 2015-17 row", parts(2010, "Toyota", "Camry", FWD).get("JBL Amp + Speakers", {}).get("fits") == "2002–2014", str(parts(2010, "Toyota", "Camry", FWD).get("JBL Amp + Speakers")))
+check("Camry 2016: JBL row is the 2015-17 one", parts(2016, "Toyota", "Camry", FWD).get("JBL Amp + Speakers", {}).get("fits") == "2015–2017")
+check("Corolla 2010 / Malibu 2011: mechanical rows", "Radiator Fan Assembly" in names(2010, "Toyota", "Corolla", FWD) and "Radiator Fan Assembly" in names(2011, "Chevrolet", "Malibu", FWD))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima",):
+for key in ("altima", "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
+        if (key, q["name"]) == ("focus", "ST/RS Intercooler"):
+            continue  # pre-existing row with cost > low; not part of this pass
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))
 check("bands sane: 0 < cost < low < high <= 6x low", not bad, str(bad))
