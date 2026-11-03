@@ -2243,6 +2243,8 @@
 .pf-value { font-size: 0.75rem; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: baseline; }
 .pf-yard-price { font-family: var(--font-mono); font-weight: 600; }
 .pf-ebay { color: var(--text-dim); }
+.ebay-sold-link { font-size: 0.85em; color: var(--accent, #F26B1D); text-decoration: none; white-space: nowrap; margin-left: 4px; }
+.ebay-sold-link:hover { text-decoration: underline; }
 /* Buyer's savings figure: used-online price minus the yard's gate price. */
 .pf-save { font-family: var(--font-mono); font-weight: 700; color: var(--accent2); }
 .pf-warn {
