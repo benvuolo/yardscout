@@ -107,8 +107,6 @@ check("Corolla 2010 / Malibu 2011: mechanical rows", "Radiator Fan Assembly" in 
 bad = []
 for key in ("altima", "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
-        if (key, q["name"]) == ("focus", "ST/RS Intercooler"):
-            continue  # pre-existing row with cost > low; not part of this pass
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))
 check("bands sane: 0 < cost < low < high <= 6x low", not bad, str(bad))

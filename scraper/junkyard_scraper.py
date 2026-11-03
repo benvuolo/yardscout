@@ -860,7 +860,7 @@ UNOBTANIUM_DB = {
             # Both std on RS — "option" under-claims RS, which is acceptable.
             {"name": "ST3/RS HID Headlights (pair)", "rarity": "Epic", "low": 500, "high": 1600, "cost": 45, "yr_min": 2013, "trim": ["ST", "RS"], "option": True},
             {"name": "Recaro Seats (pair, ST/RS)", "rarity": "Epic", "low": 1100, "high": 2600, "cost": 71, "yr_min": 2013, "trim": ["ST", "RS"], "option": True},
-            {"name": "ST/RS Intercooler", "rarity": "Rare", "low": 60, "high": 160, "cost": 95, "yr_min": 2013, "trim": ["ST", "RS"]},
+            {"name": "ST/RS Intercooler", "rarity": "Rare", "low": 60, "high": 160, "cost": 49, "yr_min": 2013, "trim": ["ST", "RS"]},  # cost: median intercooler price across the 30 published yard lists (2026-11-03); the old $95 was one yard's outlier
             {"name": "ST/RS Steering Wheel", "rarity": "Rare", "low": 100, "high": 225, "cost": 37, "yr_min": 2013, "trim": ["ST", "RS"]},
             {"name": "RS Brake Calipers (set)", "rarity": "Epic", "low": 300, "high": 600, "cost": 28, "yr_min": 2016, "trim": ["RS"]},  # RS sold 2016-2018 only
             {"name": "SYNC 3 Touchscreen (8\")", "rarity": "Rare", "low": 150, "high": 350, "cost": 45, "yr_min": 2015},
