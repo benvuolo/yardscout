@@ -15,10 +15,11 @@ watches are bound to it. It does not build features.
   hand when the last scan is over 5 h old.
 - **model_lifespan.json** live since the 2026-11-04 15:54 scan: 638 models,
   193 yards, 2,382 yard+model figures, global median 61 d, 134 fast pairs.
-  Open data issues (not yet assigned): long yard medians at Prestige Houston
-  (296 d), San Antonio PnP (233 d), Wichita, Belton, Dallas South (likely
-  stale feeds holding departed cars); model spellings split ("Dodge|Ram",
-  "Dodge|RAM", "Dodge|Ram 1500"; "General Motors|ION"/"VUE" should be Saturn).
+  Data-quality pass e787fc9 (2026-11-04): split spellings merged (54 groups,
+  GM→division), yards with flushed/stale departure feeds excluded from
+  lifespans (rule in `db.yard_departure_reliability`). Takes effect on the
+  first scan after e787fc9. Open owner call: Dodge|Ram 1500 vs Ram|1500
+  (NHTSA decodes 2011+ as both makes); see `ops/data.md`.
 - **Daily ops email** 13:07 UTC (`backend/src/ops_monitor.js`): subscribers
   (Apple + Google from KV `ops:store-subs`, Stripe + comps from entitlement
   records), chain-frozen flags, review-prompt funnel, most-searched parts/cars.
