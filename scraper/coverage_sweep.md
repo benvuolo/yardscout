@@ -6,19 +6,27 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 
 | | Yards |
 |---|---|
-| A. Runs a platform we already parse (cheapest adds) | 0 |
-| B. Has its own online inventory (custom adapter) | 3 |
+| A. Runs a platform we already parse (cheapest adds) | 1 |
+| B. Has its own online inventory (custom adapter) | 5 |
 | C. Blocked us or robots.txt says no (outreach) | 0 |
 | D. Site found, no online vehicle inventory | 4 |
-| E. No website on the map, or unreachable | 64 |
-| Already tracked (skipped) | 127 |
+| E. No website on the map, or unreachable | 74 |
+| Already tracked (skipped) | 154 |
 
-**Notes:** OSM-only pass 2026-11-04T17:52:56Z: 34 pending state(s) covered, 14 still pending. OpenStreetMap: not queried: SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY, AL, AK, AZ.
+**Notes:** OSM-only pass 2026-11-04T18:21:14Z: 12 pending state(s) covered, 2 still pending. OpenStreetMap: Geofabrik/osmium failed for WA, AL.
+
+## A. Runs a platform we already parse (cheapest adds)
+
+| Yard | Where | Platform | Evidence | Link |
+|---|---|---|---|---|
+| Nordstrom’s Ewe-Pullet – Self Service Used Auto Parts | Garretson, SD | iis-pro-upull | iis-pro-upull fingerprint | https://www.ewepullet.com/ |
 
 ## B. Has its own online inventory (custom adapter)
 
 | Yard | Where | Platform | Evidence | Link |
 |---|---|---|---|---|
+| Pick A Part | Mesa, AZ | custom | vehicle table at https://mypickapart.com/fresh-inventory/ | https://www.mypickapart.com/ |
+| Pick A Part | Phoenix, AZ | custom | vehicle table at https://mypickapart.com/fresh-inventory/ | https://www.mypickapart.com/ |
 | U Auto Pull It | Bossier City, LA | custom | inventory link https://uapi.biz/inventory (no recognised platform; check by hand) | https://www.uapi.biz/ |
 | U-Pull And Save | MI | custom | inventory link https://www.u-pullandsave.com/vehicles/15921597 (no recognised platform; check by hand) | https://www.u-pullandsave.com/ |
 | Pull-A-Part Auto Parts Yard | OK | custom | inventory link http://pullapartokc.com/VehiclesForSale.aspx (no recognised platform; check by hand) | http://pullapartokc.com |
@@ -84,6 +92,8 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 | YETI USED AUTO PARTS |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/yeti |
 | Yank A Part |  | Ario (autorecycler.io) | on Ario but stale: 1 rows, newest set-out 2024-04-10 | https://ario.autorecycler.io/yard/yank-a-part |
 | Arkansas Pik-A-Part Auto Salvage | Hartman, AR | — | no website on the map | — |
+| U-Pick-It | AZ | — | no website on the map | — |
+| Self Service Salvage | Phoenix, AZ | — | no website on the map | — |
 | Littleton U-Pull | CO | — | no website on the map | — |
 | U Pull & Pay of Aurora | Aurora, CO | — | HTTP 404 | https://upullandpay.com/aurora/home/ |
 | Grand Junction Pick-A-Part | Grand Junction, CO | — | no website on the map | — |
@@ -100,3 +110,11 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 | Millerstown Pic-a-Part | PA | — | no website on the map | — |
 | Pick-a-Part Home of Junk Yard Barbie | PA | — | no website on the map | — |
 | Hanna's U-Pull It | Slatington, PA | — | no website on the map | — |
+| Lambert's Pick-a-Part | TN | — | no website on the map | — |
+| Pull-A-Part | TN | — | no website on the map | — |
+| Pull-A-Part | El Paso City, TX | — | no website on the map | — |
+| U-Pick U-Pull Auto Parts | Pasadena, TX | — | no website on the map | — |
+| Pic-A-Part | UT | — | no website on the map | — |
+| Pop's Pick N Pay | VA | — | no website on the map | — |
+| Pic-A-Part | Fredericksburg, VA | — | no website on the map | — |
+| Wally's U-Pull-It | WI | — | no website on the map | — |

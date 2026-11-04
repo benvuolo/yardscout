@@ -1,27 +1,15 @@
 {
- "at": "2026-11-04T17:52:56Z",
+ "at": "2026-11-04T18:21:14Z",
  "skipped": {
-  "tracked": 127
+  "tracked": 154
  },
  "notes": [
-  "OSM-only pass 2026-11-04T17:52:56Z: 34 pending state(s) covered, 14 still pending.",
-  "OpenStreetMap: not queried: SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY, AL, AK, AZ."
+  "OSM-only pass 2026-11-04T18:21:14Z: 12 pending state(s) covered, 2 still pending.",
+  "OpenStreetMap: Geofabrik/osmium failed for WA, AL."
  ],
  "osm_pending": [
-  "SC",
-  "SD",
-  "TN",
-  "TX",
-  "UT",
-  "VT",
-  "VA",
   "WA",
-  "WV",
-  "WI",
-  "WY",
-  "AL",
-  "AK",
-  "AZ"
+  "AL"
  ],
  "candidates": [
   {
@@ -1300,6 +1288,214 @@
    "known_status": "",
    "extra": {
     "osm": "way/1391005938"
+   }
+  },
+  {
+   "name": "Nordstrom\u2019s Ewe-Pullet \u2013 Self Service Used Auto Parts",
+   "city": "Garretson",
+   "state": "SD",
+   "lat": 43.687967,
+   "lng": -96.613934,
+   "website": "https://www.ewepullet.com/",
+   "source": "osm",
+   "tier": "A",
+   "platform": "iis-pro-upull",
+   "evidence": "iis-pro-upull fingerprint",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1221592393"
+   }
+  },
+  {
+   "name": "Lambert's Pick-a-Part",
+   "city": "",
+   "state": "TN",
+   "lat": 36.027984,
+   "lng": -84.061882,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1084529765"
+   }
+  },
+  {
+   "name": "Pull-A-Part",
+   "city": "",
+   "state": "TN",
+   "lat": 35.076569,
+   "lng": -89.964764,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1558209627"
+   }
+  },
+  {
+   "name": "U-Pick U-Pull Auto Parts",
+   "city": "Pasadena",
+   "state": "TX",
+   "lat": 29.681093,
+   "lng": -95.208552,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "node/4604207070"
+   }
+  },
+  {
+   "name": "Pull-A-Part",
+   "city": "El Paso City",
+   "state": "TX",
+   "lat": 31.802315,
+   "lng": -106.274376,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "relation/21425296"
+   }
+  },
+  {
+   "name": "Pic-A-Part",
+   "city": "",
+   "state": "UT",
+   "lat": 40.2924,
+   "lng": -111.732434,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/531732584"
+   }
+  },
+  {
+   "name": "Pop's Pick N Pay",
+   "city": "",
+   "state": "VA",
+   "lat": 37.596259,
+   "lng": -77.380882,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "node/11460323395"
+   }
+  },
+  {
+   "name": "Pic-A-Part",
+   "city": "Fredericksburg",
+   "state": "VA",
+   "lat": 38.204647,
+   "lng": -77.506419,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/907748350"
+   }
+  },
+  {
+   "name": "Wally's U-Pull-It",
+   "city": "",
+   "state": "WI",
+   "lat": 44.034877,
+   "lng": -88.637573,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/995020553"
+   }
+  },
+  {
+   "name": "Pick A Part",
+   "city": "Mesa",
+   "state": "AZ",
+   "lat": 33.412374,
+   "lng": -111.849485,
+   "website": "https://www.mypickapart.com/",
+   "source": "osm",
+   "tier": "B",
+   "platform": "custom",
+   "evidence": "vehicle table at https://mypickapart.com/fresh-inventory/",
+   "known_status": "",
+   "extra": {
+    "osm": "way/491793458"
+   }
+  },
+  {
+   "name": "Pick A Part",
+   "city": "Phoenix",
+   "state": "AZ",
+   "lat": 33.406298,
+   "lng": -112.12518,
+   "website": "https://www.mypickapart.com/",
+   "source": "osm",
+   "tier": "B",
+   "platform": "custom",
+   "evidence": "vehicle table at https://mypickapart.com/fresh-inventory/",
+   "known_status": "",
+   "extra": {
+    "osm": "way/491793462"
+   }
+  },
+  {
+   "name": "Self Service Salvage",
+   "city": "Phoenix",
+   "state": "AZ",
+   "lat": 33.407057,
+   "lng": -112.12927,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1070824347"
+   }
+  },
+  {
+   "name": "U-Pick-It",
+   "city": "",
+   "state": "AZ",
+   "lat": 35.243549,
+   "lng": -111.424603,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1315970636"
    }
   }
  ]
