@@ -774,3 +774,32 @@ was changed.
 
 Result: Legacy generic-only 528 → 0. Lots: generic-only 25,644 (7.7%) →
 25,116 (7.6%).
+
+### 18.7 Lincoln MKZ 2007–2020 (1st gen 2007–12, 2nd gen 2013–20)
+
+Basis: en.wikipedia.org/wiki/Lincoln_MKZ; jalopnik.com "2010 Lincoln MKZ";
+autoblog.com "2017 Lincoln MKZ" (LA 2015); cars.com "2017 Lincoln MKZ first
+look" (fetched).
+- **New `GENERATION_BREAKS` "mkz": [2013]:** the entry had no breaks.
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 2010: "the split-wing grille and thinner wraparound head lamps", "LED
+    taillamps" (Jalopnik).
+  - 2017: "the all-new one-piece Lincoln signature grille", adaptive LED
+    headlamps (Autoblog).
+- **Lamp rows re-cut:** the existing MKZ headlight, tail-light and mirror
+  rows are now bounded by generation, and the lamps also by facelift.
+- **AWD:** optional with the 3.5 V6 from 2007, and on the 2nd gen with the
+  2.0T, 3.7 and 3.0TT. Hybrids were FWD.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2007–12, 2013–20 | — | Every car. |
+| A/C compressor | same | option | Standard fitment not confirmed by a source (conservative). |
+| AWD rear differential / transfer unit | same | drive: awd/4wd | |
+
+Left out, no stated basis: THX/Revel audio, panoramic roof, seats and
+wheels (not researched), the hybrid battery (years known, but no audited
+band for this car), the 2006 Zephyr.
+
+Result: MKZ generic-only 507 → 0. Lots: generic-only 25,116 (7.6%) →
+24,609 (7.4%).

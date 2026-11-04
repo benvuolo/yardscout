@@ -5748,6 +5748,15 @@ def _apply_consensus_evergreens() -> None:
             info["top_parts"].append(dict(part))
 
 
+# §18.7: the mkz entry is created by the §11 breadth pass, so its rows go here.
+# Lincoln MKZ (507 cars generic-only; 1st gen 2007-12, 2nd gen 2013-20; new
+# GENERATION_BREAKS 2013, facelifts 2010/2017). AWD optional in both
+# generations (3.5 V6 from 2007; 2.0T/3.7/3.0TT on the 2nd gen).
+_gap_extend("mkz", parts=_per_gen([(2007, 2012), (2013, 2020)], [
+    _GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True},
+    {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+]))
+
 _apply_consensus_evergreens()
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
@@ -6020,6 +6029,7 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    "mkz": [2013],                        # 1st gen 2007-12, 2nd gen 2013-20 (PARTS_GAPS §18.7)
     "cruze": [2016],
     "monte carlo": [1995, 2000],
     "trailblazer": [2021],                 # 02-09 SUV vs 21+ crossover revival
@@ -6200,6 +6210,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "sportage": [2009, 2014, 2020],
     "spectra": [2007],
     "legacy": [2003, 2013],
+    "mkz": [2010, 2017],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

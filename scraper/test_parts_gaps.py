@@ -359,6 +359,12 @@ check("§18 Legacy: pump per generation; rear diff gated 1995-99 (AWD decode con
       and "Rear Differential (match final-drive ratio)" not in names(1997, "Subaru", "Legacy", FWD)
       and l02["Rear Differential (match final-drive ratio)"].get("trim_status") is None and l13["Rear Differential (match final-drive ratio)"]["fits"] == "2010–2014")
 
+z08, z15 = parts(2008, "Lincoln", "MKZ", AWD), parts(2015, "Lincoln", "MKZ", FWD)
+check("§18 MKZ: rows per generation (new 2013 break); AWD gated; existing lamp rows cut at the 2010/2017 facelifts",
+      z08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2007–2012" and z15["Radiator Fan Assembly"]["fits"] == "2013–2020"
+      and z08["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in z15
+      and z08["Headlights (clear, non-hazed)"]["fits"] == "2007–2009" and z15["Tail Lights (pair, uncracked)"]["fits"] == "2013–2016")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

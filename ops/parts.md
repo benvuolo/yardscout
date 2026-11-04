@@ -63,7 +63,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   facelift 2014 (→ 27,255, 8.2%); Tucson 2005–21 with facelifts 2009/2014/2019
   (→ 26,697, 8.0%); Sportage 2005–22 with facelifts 2009/2014/2020 (→ 26,154,
   7.9%); Spectra 2000–03/2005–09 with facelift 2007 (→ 25,644, 7.7%);
-  Legacy 1995–2004/2010–14 with facelifts 2003/2013 (→ 25,116, 7.6%).
+  Legacy 1995–2004/2010–14 with facelifts 2003/2013 (→ 25,116, 7.6%); MKZ
+  2007–20 with new break 2013 and facelifts 2010/2017 (→ 24,609, 7.4%).
 
 ## How to measure
 
