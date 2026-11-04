@@ -23190,6 +23190,50 @@ def _write_models_json(payload: dict) -> None:
         separators=(",", ":")))
 
 
+MODEL_LIFESPAN_MIN_N = 25        # departures before a model's national median counts
+YARD_MODEL_LIFESPAN_MIN_N = 15   # ... before a model's median AT ONE YARD counts
+
+
+def _write_model_lifespan_json(scraped_at: str | None) -> None:
+    """docs/data/model_lifespan.json — median lot lifespan per model and per
+    yard+model from the history DB (db.model_lifespan_stats). The app uses the
+    yard+model median for a car's "Day N of ~X typical" line when the yard has
+    enough departures of that model, and tags models that leave much faster
+    than the yard's norm ("leaves fast here") — the closest thing the data
+    offers to "what gets stripped first". Best effort: no DB or too little
+    history means no file change (the app treats a missing file as "no data")."""
+    try:
+        try:
+            import db as _db
+        except ImportError:
+            from scraper import db as _db  # pragma: no cover
+        st = _db.model_lifespan_stats()
+    except Exception as e:
+        print(f"  [model lifespan] history DB unavailable ({e}) — skipping", file=sys.stderr)
+        return
+    g_med, g_n = st["global"]
+    if g_n < LIFESPAN_MIN_N:
+        print(f"  [model lifespan] only {g_n} departures — not writing", file=sys.stderr)
+        return
+    models = {f"{mk}|{md}": [round(m), n] for (mk, md), (m, n) in st["models"].items() if n >= MODEL_LIFESPAN_MIN_N}
+    yards: dict[str, dict] = {}
+    for (loc, mk, md), (m, n) in st["yard_models"].items():
+        if n < YARD_MODEL_LIFESPAN_MIN_N:
+            continue
+        y = yards.setdefault(loc, {"typical": None, "models": {}})
+        y["models"][f"{mk}|{md}"] = [round(m), n]
+    for loc, y in yards.items():
+        ym = st["yards"].get(loc)
+        y["typical"] = round(ym[0]) if ym and ym[1] >= LIFESPAN_MIN_N else None
+        y["models"] = dict(sorted(y["models"].items()))
+    out = {"scrapedAt": scraped_at, "basis": "median days on the lot for departed cars",
+           "minN": {"model": MODEL_LIFESPAN_MIN_N, "yardModel": YARD_MODEL_LIFESPAN_MIN_N},
+           "global": round(g_med), "models": dict(sorted(models.items())), "yards": dict(sorted(yards.items()))}
+    (DATA_DIR / "model_lifespan.json").write_text(json.dumps(out, separators=(",", ":")))
+    print(f"  [model lifespan] {len(models)} models, {sum(len(y['models']) for y in yards.values())} "
+          f"yard+model medians across {len(yards)} yards (global median {round(g_med)} d over {g_n})", file=sys.stderr)
+
+
 def _write_yards_added(payload: dict) -> None:
     """docs/data/yards_added.json — yards first seen by the history DB in the
     last 90 days (the public /yards page's "recently added" feed, which is
@@ -24133,6 +24177,7 @@ def main():
                     _write_landed_json(payload)
                     _write_junkyards_json(payload)
                     _write_models_json(payload)
+                    _write_model_lifespan_json(payload.get("scrapedAt"))
                     _write_yards_added(payload)
                     EXTRAS_FILE.write_text(json.dumps(
                         {"version": 1, "scrapedAt": payload["scrapedAt"],

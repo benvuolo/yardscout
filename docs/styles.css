@@ -2245,6 +2245,7 @@
 .pf-ebay { color: var(--text-dim); }
 .ebay-sold-link { font-size: 0.85em; color: var(--accent, #F26B1D); text-decoration: none; white-space: nowrap; margin-left: 4px; }
 .ebay-sold-link:hover { text-decoration: underline; }
+.lot-fast { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; font-size: 0.8em; font-weight: 600; background: var(--accent, #F26B1D); color: #fff; letter-spacing: .02em; }
 /* Buyer's savings figure: used-online price minus the yard's gate price. */
 .pf-save { font-family: var(--font-mono); font-weight: 700; color: var(--accent2); }
 .pf-warn {

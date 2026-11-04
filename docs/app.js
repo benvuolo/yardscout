@@ -963,6 +963,32 @@ fetch(DATA_BASE + 'data/yard_health.json')
   })
   .catch(() => { /* freshness labels are optional */ });
 
+/* ===== MODEL LIFESPANS (data/model_lifespan.json) =====
+ * Median days on the lot per model and per yard+model, from the scan's
+ * departure history. A car's "Day N of ~X typical" uses the yard+model
+ * median when that yard has retired enough of that model; the plain yard
+ * figure otherwise. A model that leaves far faster than the yard's norm is
+ * the closest signal the data gives to "what gets stripped first". */
+let modelLifespan = null;
+const LIFESPAN_FAST_RATIO = 0.7;
+fetch(DATA_BASE + 'data/model_lifespan.json')
+  .then(r => (r.ok ? r.json() : null))
+  .then(d => { if (d && d.yards) { modelLifespan = d; if (liveLoaded) renderLive(); } })
+  .catch(() => { /* optional */ });
+function lifespanFor(v) {
+  const ml = modelLifespan;
+  if (ml && v.location && v.make && v.model) {
+    const y = ml.yards[v.location];
+    const m = y && y.models && y.models[v.make + '|' + v.model];
+    if (m && m[0] > 0) {
+      return { avg: m[0], basis: 'model-here', n: m[1], typical: y.typical || null,
+        fast: !!(y.typical && m[0] <= LIFESPAN_FAST_RATIO * y.typical) };
+    }
+  }
+  if (v.yardAvgLifespan) return { avg: v.yardAvgLifespan, basis: v.yardLifespanBasis || 'all', fast: false };
+  return null;
+}
+
 /* ===== SALE DAYS (chain sale calendars -> data/sale_events.json) =====
  * Events come from each chain's own published calendar (Pick-n-Pull events
  * API, PYP deals pages) plus hand-verified manual entries. An event with
@@ -3272,8 +3298,9 @@ function getFilteredLive() {
   // so they rank below the genuine 0.8-2x leaving window; cars without
   // lifespan data sort last.
   const urgency = v => {
-    if (!v.yardAvgLifespan || !v.dateAdded) return -1;
-    const r = daysSinceAdded(v.dateAdded) / v.yardAvgLifespan;
+    const ls = lifespanFor(v);
+    if (!ls || !v.dateAdded) return -1;
+    const r = daysSinceAdded(v.dateAdded) / ls.avg;
     return r > 2 ? 0.75 : r;
   };
 
@@ -3509,18 +3536,23 @@ function renderLive() {
     // yard's historical average — an estimate, never a prediction.
     const daysOn = v.dateAdded ? Math.floor(daysSinceAdded(v.dateAdded)) : null;
     let lotClock = '', leavingSoon = false;
-    if (v.yardAvgLifespan && daysOn != null) {
-      const basisTxt = v.yardLifespanBasis === 'yard' ? 'at this yard'
-        : v.yardLifespanBasis === 'chain' ? 'for this chain' : 'across covered yards';
-      const avg = v.yardAvgLifespan;
-      const title = `Compared to the average time departed vehicles spent on the lot (historical average ${basisTxt} — an estimate, not a schedule)`;
+    const ls = lifespanFor(v);
+    if (ls && daysOn != null) {
+      const basisTxt = ls.basis === 'model-here' ? `for ${escapeHtml(v.make)} ${escapeHtml(v.model)}s at this yard (${ls.n} that already left)`
+        : ls.basis === 'yard' ? 'at this yard'
+        : ls.basis === 'chain' ? 'for this chain' : 'across covered yards';
+      const avg = ls.avg;
+      const title = `Compared to how long departed vehicles stayed on the lot (${ls.basis === 'model-here' ? 'median' : 'historical average'} ${basisTxt} — an estimate, not a schedule)`;
+      const fastTag = ls.fast
+        ? ` <span class="lot-fast" title="${escapeHtml(v.make)} ${escapeHtml(v.model)}s leave this yard in ~${avg} days against ~${ls.typical} for the yard as a whole: they get picked over and pulled fast. Get there early.">leaves fast here</span>`
+        : '';
       if (daysOn > 2 * avg) {
         // Long-timers have already outlived the average — claiming "leaving
         // soon" would be false urgency, so just state the facts.
-        lotClock = `<span title="${title}">${daysOn} days on the lot (past the ~${avg}-day typical)</span>`;
+        lotClock = `<span title="${title}">${daysOn} days on the lot (past the ~${avg}-day typical)</span>${fastTag}`;
       } else {
         leavingSoon = daysOn >= 0.8 * avg;
-        lotClock = `<span class="${leavingSoon ? 'lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} of ~${avg} typical</span>`;
+        lotClock = `<span class="${leavingSoon ? 'lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} of ~${avg} typical</span>${fastTag}`;
       }
     }
 

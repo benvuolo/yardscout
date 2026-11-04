@@ -351,6 +351,49 @@ def lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict:
     }
 
 
+def model_lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict:
+    """Median lot lifespan (days) of departed vehicles by model, by yard+model,
+    and by yard, plus global — the basis for "this model leaves fast here".
+
+    Medians, not means: a few 300-day ghosts would drag a mean. Same lifespan
+    definition and sanity window as lifespan_stats(). Returns
+    {"models": {(make, model): (median, n)},
+     "yard_models": {(location, make, model): (median, n)},
+     "yards": {location: (median, n)}, "global": (median, n)}."""
+    conn = _connect()
+    rows = conn.execute(
+        """SELECT location, make, model,
+                  julianday(departed_at) - julianday(COALESCE(NULLIF(date_added, ''), first_seen))
+           FROM vehicles
+           WHERE departed_at IS NOT NULL AND location != ''
+             AND COALESCE(make, '') != '' AND COALESCE(model, '') != ''"""
+    ).fetchall()
+    conn.close()
+    models: dict[tuple, list[float]] = {}
+    yard_models: dict[tuple, list[float]] = {}
+    yards: dict[str, list[float]] = {}
+    all_spans: list[float] = []
+    for loc, mk, md, span in rows:
+        if span is None or not (min_days <= span <= max_days):
+            continue
+        models.setdefault((mk, md), []).append(span)
+        yard_models.setdefault((loc, mk, md), []).append(span)
+        yards.setdefault(loc, []).append(span)
+        all_spans.append(span)
+
+    def med(v: list[float]) -> tuple[float, int]:
+        v = sorted(v)
+        n = len(v)
+        return ((v[n // 2] if n % 2 else (v[n // 2 - 1] + v[n // 2]) / 2), n)
+
+    return {
+        "models": {k: med(v) for k, v in models.items()},
+        "yard_models": {k: med(v) for k, v in yard_models.items()},
+        "yards": {k: med(v) for k, v in yards.items()},
+        "global": med(all_spans) if all_spans else (0.0, 0),
+    }
+
+
 def summary() -> str:
     """Quick human-readable DB status."""
     conn = _connect()
