@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-03",
+  "updated": "2026-11-04",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked | retired | directory-only. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -1375,7 +1375,8 @@
           "city": "Houston",
           "state": "TX",
           "lat": 29.8912,
-          "lng": -95.3
+          "lng": -95.3,
+          "ario_slug": "prestige-pull-your-part"
         }
       ]
     },
@@ -2725,7 +2726,8 @@
           "state": "NC",
           "lat": 35.3513,
           "lng": -78.0178,
-          "address": "1909 US-117, Goldsboro, NC 27530"
+          "address": "1909 US-117, Goldsboro, NC 27530",
+          "ario_slug": "goldsboro-north-carolina-bevells-pull-it-yourself-used-auto-parts"
         }
       ]
     },
@@ -2738,7 +2740,145 @@
           "name": "Blue & Gold Auto Salvage - Goose Creek",
           "city": "Goose Creek",
           "state": "SC",
-          "address": "429 Howe Hall Rd, Goose Creek, SC 29445"
+          "address": "429 Howe Hall Rd, Goose Creek, SC 29445",
+          "ario_slug": "blue--gold-auto-salvage-goose-creek-south-carolina"
+        }
+      ]
+    },
+    {
+      "name": "Young's U-Pull-It",
+      "status": "directory-only",
+      "platform": "WordPress + iis-pro-v2 parts-locator plugin (upull.youngsautocenter.com, 'Powered by' Briscoweb); Ario org exists but holds no live rows",
+      "website": "https://upull.youngsautocenter.com",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Checked 2026-11-04. Self-service yard (own site: 'U-Pull-It - Dudley/Goldsboro', '8,000 Parts Vehicles', bring your own tools, $50 all-you-can-carry Saturdays). The 'Our Inventory' page (/used-parts/) is a Year/Make/Model/PART TYPE search over the full-service parts stock (iis-pro-v2 getMakesIIS/getpartTypesIIS), not a list of cars on the lot; /latest-arrivals/ and /iislatestarrivals/ render no vehicles. Ario slug youngs-u-pull-it-north-carolina is 'not on the live backend'. Re-check if latest-arrivals starts listing cars. Parent: Young's Auto Center and Salvage (youngsautocenter.com)."
+      },
+      "update_freshness": null,
+      "robots": "allow all (Yoast)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Young's U-Pull-It - Dudley",
+          "city": "Dudley",
+          "state": "NC",
+          "lat": 35.2826,
+          "lng": -78.0478,
+          "address": "4172 US Hwy 117 South Alt, Dudley, NC 28333",
+          "ario_slug": "youngs-u-pull-it-north-carolina"
+        }
+      ]
+    },
+    {
+      "name": "Sam's Pull-A-Part",
+      "status": "directory-only",
+      "platform": "page on Linder's, Inc. WordPress site (lindersparts.com, URG + iis-pro-v2); no self-service lot inventory",
+      "website": "https://lindersparts.com/sams-pull-a-part/",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Checked 2026-11-04. Self-service yard run by Linder's, Inc. (full-service recycler across the street, 211 Granite St). lindersparts.com/recent-arrivals/ lists Linder's full-service purchases (stock #, VIN, 'See Parts') and /search-inventory/ is a part-type search; neither is the Sam's self-service lot, so no adapter. samspullapart.com redirects to lindersinc.net -> lindersparts.com. Note: lindersparts.com robots.txt disallows ClaudeBot/anthropic-ai. Ario slug sams-pull-a-part exists but is not on the live backend."
+      },
+      "update_freshness": null,
+      "robots": "allow all for generic agents; disallows several AI crawlers",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Sam's Pull-A-Part - Worcester",
+          "city": "Worcester",
+          "state": "MA",
+          "lat": 42.2371,
+          "lng": -71.783,
+          "address": "210 Granite St, Worcester, MA 01607",
+          "ario_slug": "sams-pull-a-part"
+        }
+      ]
+    },
+    {
+      "name": "Route 50 U-Pull-It by Dirkes",
+      "status": "directory-only",
+      "platform": "no website found (2026-11-04): directory listings only; Ario org ('New org', slug rt-50-u-pull-it-nj) holds no live rows",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Checked 2026-11-04. Directory listings (salvage-parts.com, uscarjunker.com) only; route50upullit.com / dirkesupullit.com do not resolve and rt50upullit.com is a parked lander. Re-check when the Ario org goes live."
+      },
+      "locations": [
+        {
+          "name": "Route 50 U-Pull-It - Mays Landing",
+          "city": "Mays Landing",
+          "state": "NJ",
+          "lat": 39.5167,
+          "lng": -74.6631,
+          "address": "3135 NJ-50, Mays Landing, NJ 08330",
+          "ario_slug": "rt-50-u-pull-it-nj"
+        }
+      ]
+    },
+    {
+      "name": "U-Pull It Auto Salvage of Paducah",
+      "status": "directory-only",
+      "platform": "no website found (2026-11-04): directory listings only; Ario org (slug asop) holds no live rows",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Checked 2026-11-04. KY SOS lists AUTO SALVAGE OF PADUCAH, LLC (active), 1250 N 8th St; directories describe it as self-service. No site found (upullitpaducah.com / autosalvageofpaducah.com do not resolve). Pin geocoded via Nominatim (exact address)."
+      },
+      "locations": [
+        {
+          "name": "U-Pull It Auto Salvage of Paducah",
+          "city": "Paducah",
+          "state": "KY",
+          "lat": 37.094,
+          "lng": -88.6132,
+          "address": "1250 N 8th St, Paducah, KY 42001",
+          "ario_slug": "asop"
+        }
+      ]
+    },
+    {
+      "name": "Harold's Auto Parts U-Pull-It",
+      "status": "candidate",
+      "platform": "Ario (autorecycler.io) live Supabase feed, slug harolds-auto-parts-u-pull-it (Ario org name 'ARIO AUTO PARTS', yard_name \"Harold's Auto Parts - U-Pull-It\", is_self_service true); embedded as an iframe on haroldsautoparts.com/inventory/ (URG site)",
+      "website": "https://haroldsautoparts.com",
+      "inventory_url": "https://haroldsautoparts.com/inventory/",
+      "api": {
+        "endpoint": "Ario live search-inventory (fetch_ario_inventory)",
+        "method": "POST",
+        "auth": "publishable key (same as ARIO_CHAINS)",
+        "format": "json",
+        "requests_per_scan": 16,
+        "notes": "Checked 2026-11-04: 612 rows, 606 with a row number, unique stock numbers. NOT WIRED because the feed looks like a one-time load: every dated row was set out 2026-09-09..09-25 (plus one on 09-29), none in October, so the lot may have turned over since. Wire it into ARIO_CHAINS (config only) once set-outs newer than 30 days appear. The sweep pin (30.2535,-97.7484, central Austin) is Ario's org default, not the yard: the yard is at 223 CR 218, Briggs TX 78608 (Burnet County). Pin below is the Briggs hamlet centroid (Nominatim) - refine to the parcel before wiring. Harold's site itself is framed as full-service (warranty, delivery); Ario's flag and yard name say U-Pull-It - confirm with the yard if in doubt."
+      },
+      "update_freshness": "stale: newest set-out 2026-09-29 (checked 2026-11-04)",
+      "robots": "allow all (Yoast)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "Harold's Auto Parts U-Pull-It - Briggs",
+          "city": "Briggs",
+          "state": "TX",
+          "lat": 30.8888,
+          "lng": -97.9258,
+          "address": "223 CR 218, Briggs, TX 78608",
+          "ario_slug": "harolds-auto-parts-u-pull-it"
         }
       ]
     }
