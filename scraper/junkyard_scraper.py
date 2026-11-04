@@ -5967,6 +5967,31 @@ _gap_extend("mariner", parts=[
     *_per_gen([(2005, 2007)], [_SUNROOF]),
 ])
 
+# Fiat 500 2012-2019 (one US generation; the 2016 European facelift was not
+# sold here). The "fiat 500" keyword also caught 500L, 500X and 500e
+# listings (the keyword pattern anchors only at the start), so those
+# different cars got the 500's rows and "fits 2012-2019" windows. They now
+# have their own entries; the specificity guard in match_vehicle drops
+# "fiat 500" when a longer keyword matches. US runs from the EPA
+# (fueleconomy.gov) model menus: 500L 2014-20, 500X 2016-23, 500e 2013-19.
+# 500L/500X get the consensus evergreens only (nothing model-specific
+# claimed); the 500e is electric, so its entry has no rows (no card) rather
+# than gas-car rows.
+UNOBTANIUM_DB.update({
+    "fiat 500l": {"display": "Fiat 500L", "make": "Fiat", "match": ["fiat 500l", "fiat 500 l"], "year_range": (2014, 2020), "top_parts": []},
+    "fiat 500x": {"display": "Fiat 500X", "make": "Fiat", "match": ["fiat 500x", "fiat 500 x"], "year_range": (2016, 2023), "top_parts": []},
+    "fiat 500e": {"display": "Fiat 500e (electric)", "make": "Fiat", "match": ["fiat 500e", "fiat 500 e"], "year_range": (2013, 2019), "top_parts": []},
+})
+_EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, "fiat 500l", "fiat 500x")
+# A/C confirmed standard 2012-13 (CG; 2013 Fiat feature matrix); later years
+# snippet-only, so option-flagged. No sunroof row: it was a hatch-only
+# option, and an undecoded 500C listing would wrongly show it.
+_gap_extend("fiat 500", parts=[
+    *_per_gen([(2012, 2019)], [_GAP_PUMP, _GAP_FAN]),
+    *_per_gen([(2012, 2013)], [_GAP_AC]),
+    *_per_gen([(2014, 2019)], [{**_GAP_AC, "option": True}]),
+])
+
 # ---- end of §21 block
 
 _apply_consensus_evergreens()
@@ -13705,7 +13730,8 @@ def _max_entry_calibrated_high(info: dict) -> int:
     """Largest calibrated *high* for a vehicle entry (for sorting list-parts)."""
     lo, hi = info["year_range"]
     ymid = (lo + hi) // 2
-    return max(_resale_sold_calibrate(p["low"], p["high"], p["name"], ymid)[1] for p in info["top_parts"])
+    # default=0: an entry may have no rows (a §21 suppressor entry, e.g. "spark ev").
+    return max((_resale_sold_calibrate(p["low"], p["high"], p["name"], ymid)[1] for p in info["top_parts"]), default=0)
 
 
 def _vehicle_carry_profit(v: dict) -> float:

@@ -1411,3 +1411,46 @@ band), the gen-2 sunroof.
 
 Result: Mariner generic-only 346 → 0. Lots: generic-only 17,883 (5.4%) →
 17,537 (5.3%).
+
+### 21.2 Fiat 500 2012–2019, and the 500L / 500X / 500e routing fix
+
+Basis: WP Fiat_500_(2007); consumerguide.com/used/2012-14-fiat-500;
+autotrader.ca 2016 Fiat 500 1957 Edition test drive; fiat500usa.com 2013
+features matrix; fueleconomy.gov model menus 2012–2023 (fetched).
+- **No US facelift:** the 2016 European facelift was not sold in North
+  America ("here in North America we don't get any of the exterior
+  changes", autotrader.ca). One generation, 2012–19, with the Abarth and
+  500c throughout.
+- **A/C:** standard on Pop/Sport/Turbo/500c Pop for 2012–13 (CG and the
+  2013 matrix). Later years rest on snippets only.
+
+**Fix: 500L, 500X and 500e (91 cars).**
+- **What was wrong:** the entry keyword "fiat 500" matched "Fiat 500L",
+  "500X" and "500E" listings, because keyword patterns anchor only at the
+  start. Those different cars got the 500's lamp, mirror and evergreen rows
+  with "fits 2012–2019" windows, which made the part finder treat them as
+  the same generation as the 500.
+- **500L and 500X:** they now have their own entries over their EPA US runs
+  (500L 2014–20, 500X 2016–23), carrying only the consensus evergreens.
+  Nothing model-specific is claimed; their lamps await their own research.
+- **500e:** it is electric, so its entry has no rows and its listings show
+  no card, rather than an alternator, starter or fuel pump.
+- **How it works:** the existing specificity guard in `match_vehicle` drops
+  "fiat 500" whenever a longer keyword matches. Matching code is unchanged.
+- **Code change:** `_max_entry_calibrated_high` (used by `--list-parts`)
+  now tolerates an entry with no rows.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2012–19 | — | Every 500. |
+| A/C compressor | 2012–13 | — | Standard. |
+| A/C compressor | 2014–19 | option | Snippet-only for those years. |
+
+Left out, no stated basis: a sunroof row (a hatch-only option, and an
+undecoded "500C" listing would wrongly show it as "if equipped"), 500c-
+specific lamps (unconfirmed), Abarth parts.
+
+Result, measured on the same inventory (333,449 cars after a new scan):
+generic-only 17,518 → 17,262; the Fiat 500's own 255 cars → 0. The 500L/500X
+listings (89) stay generic-only by design. No entry 12,357 → 12,359 (the
+two 500e listings).

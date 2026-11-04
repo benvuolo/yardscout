@@ -87,7 +87,9 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   `_apply_consensus_evergreens()` so breadth-pass entries exist.
 
 - §21 (owner: "start the next parts block"; in progress): Mariner done
-  with new break 2008 (generic-only 17,883 → 17,537, 5.4% → 5.3%, new scan).
+  with new break 2008 (generic-only 17,883 → 17,537, 5.4% → 5.3%, new scan);
+  Fiat 500 (→ 17,262 on the 333,449-car scan) plus a routing fix: 500L/500X
+  get their own evergreen-only entries, the 500e an empty one (no card).
 
 ## How to measure
 

@@ -496,6 +496,20 @@ check("§21 Mariner: rows per generation (new 2008 break); PTU on AWD decodes; s
       and r09["A/C Compressor (clutch spins free)"]["fits"] == "2008–2011" and r06["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin"
       and "AWD Power Transfer Unit (PTU)" not in r09 and "Sunroof Glass + Motor" not in r09 and r06["Tail Lights (pair, uncracked)"]["fits"] == "2005–2007")
 
+check("§21 Fiat: 500L/500X get their own entries (evergreens only, own runs); 500e matches nothing; 500/Abarth/500C stay on the 500",
+      [m["display"] for m in js.match_vehicle(2015, "Fiat", "500L")] == ["Fiat 500L"]
+      and [m["display"] for m in js.match_vehicle(2017, "Fiat", "500X")] == ["Fiat 500X"]
+      and js.match_vehicle(2014, "Fiat", "500E") == []
+      and [m["display"] for m in js.match_vehicle(2014, "Fiat", "500 Abarth")] == ["Fiat 500"]
+      and [m["display"] for m in js.match_vehicle(2013, "Fiat", "500C")] == ["Fiat 500"]
+      and parts(2015, "Fiat", "500L")["Alternator (spin-test at yard)"]["fits"] == "2014–2020"
+      and "Headlights (clear, non-hazed)" not in parts(2015, "Fiat", "500L"))
+f12, f16 = parts(2012, "Fiat", "500", FWD), parts(2016, "Fiat", "500", FWD)
+check("§21 Fiat 500: pump/fan 2012-19; A/C plain 2012, 'if equipped' 2016; list-parts ceiling safe on empty entries",
+      MECH3 <= set(f12) and f12["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2012–2019"
+      and f12["A/C Compressor (clutch spins free)"].get("trim_status") is None and f16["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
+      and js._max_entry_calibrated_high(js.UNOBTANIUM_DB["fiat 500e"]) == 0)
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
