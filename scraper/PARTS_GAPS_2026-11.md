@@ -1234,3 +1234,39 @@ researched further).
 
 Result: Mazda5 generic-only 364 → 0. Lots: generic-only 19,560 (5.9%) →
 19,196 (5.8%).
+
+### 20.5 Lexus ES 1992–2006 (XV10 1992–96, XV20 1997–2001, XV30 2002–06)
+
+Basis: en.wikipedia.org/wiki/Lexus_ES (raw); consumerguide.com/used/1997-01-lexus-es-300
+and /used/2002-06-lexus-es-300es-330; Lexus Knowledge Center pricing and
+spec PDFs 1992–2005 (xr793.com; fetched).
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 1995: "a revised grille insert …, new headlights and fog lights".
+  - 2000: "new, clear tail lights and turn signals, a revised front end
+    with a new grille, headlights, and lower bumper".
+  - 2005: "new front and rear fascias, clear taillights, projector
+    headlights, and a redesigned grille".
+  The existing ES lamp rows are now cut at these years.
+- **Moonroof:** option code SR on XV10/XV20; standard on the XV30 (CG and
+  the pricing sheets).
+- **Audio:** Nakamichi was option code NK 1998–2001. Mark Levinson
+  (2002–06) is already an existing row.
+- **A/C:** standard on the XV20 and XV30 (CG). For the XV10 it is only
+  implied by its absence from the option lists, so it is option-flagged.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1992–96, 1997–01, 2002–06 | — | Every car. |
+| A/C compressor | 1992–96 | option | Not stated outright for the XV10. |
+| A/C compressor | 1997–01, 2002–06 | — | Standard. |
+| Sunroof | 1992–96, 1997–01 | option | |
+| Sunroof | 2002–06 | — | Standard on the XV30. |
+| Nakamichi amp + speakers | 1998–01 | option | Cost is the amplifier median ($24); band as the Harman Kardon rows. |
+
+Also flagged: "ES 300"/"ES 330" listings match both the `lexus es` entry
+and the overlay-created `es 300` entry, so they show two "Lexus ES" cards.
+This is pre-existing and was not changed here; merging the overlay entry
+into `lexus es` is a follow-up.
+
+Result: Lexus ES 1992–2006 generic-only 361 → 0. Lots: generic-only 19,196
+(5.8%) → 18,835 (5.7%).

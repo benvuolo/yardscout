@@ -5921,6 +5921,21 @@ _gap_extend("mazda5", parts=[
     *_per_gen([(2012, 2015)], [{**_GAP_AC, "option": True}]),
 ])
 
+# Lexus ES 1992-2006 (361 cars generic-only; XV10 1992-96, XV20 1997-2001,
+# XV30 2002-06; facelifts 1995/2000/2005). Lexus pricing sheets: moonroof
+# an option (code SR) through 2001, standard 2002-06; Nakamichi audio an
+# option 1998-2001. A/C standard confirmed from 1997 (CG); XV10 flagged.
+_gap_extend("lexus es", parts=[
+    *_per_gen([(1992, 1996), (1997, 2001), (2002, 2006)], [_GAP_PUMP, _GAP_FAN]),
+    *_per_gen([(1992, 1996)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(1997, 2001), (2002, 2006)], [_GAP_AC]),
+    *_per_gen([(1992, 1996), (1997, 2001)], [_SUNROOF]),
+    *_per_gen([(2002, 2006)], [{k: v for k, v in _SUNROOF.items() if k != "option"}]),
+    *_per_gen([(1998, 2001)], [
+        {"name": "Nakamichi Amp + Speakers", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 24, "option": True},
+    ]),
+])
+
 # ---- end of §20 block
 
 _apply_consensus_evergreens()
@@ -6386,6 +6401,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "volkswagen cc": [2013],
     "tribute": [2005],
     "mazda5": [2008],
+    "lexus es": [1995, 2000, 2005],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

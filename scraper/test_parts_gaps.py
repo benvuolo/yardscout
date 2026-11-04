@@ -461,6 +461,13 @@ check("§20 Mazda5: rows per generation (new 2012 break); A/C plain gen 1, 'if e
       and d13["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and "Sunroof Glass + Motor" not in d13
       and d07["Tail Lights (pair, uncracked)"]["fits"] == "2006–2007")
 
+e98, e04 = parts(1998, "Lexus", "ES 300", FWD), parts(2004, "Lexus", "ES 330", FWD)
+check("§20 Lexus ES: mech per generation; moonroof 'if equipped' 1998, plain 2004; Nakamichi option 1998; tails cut at the 2000 facelift",
+      MECH3 <= set(e98) and MECH3 <= set(e04) and e98["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1997–2001"
+      and e98["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed" and e04["Sunroof Glass + Motor"].get("trim_status") is None
+      and e98["Nakamichi Amp + Speakers"]["trim_status"] == "unconfirmed" and "Nakamichi Amp + Speakers" not in e04
+      and e98["Headlights (clear, non-hazed)"]["fits"] == "1997–1999")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
