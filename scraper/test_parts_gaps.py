@@ -209,7 +209,9 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        # §19
        "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc",
        # §20
-       "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "chevrolet classic"},
+       "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "chevrolet classic",
+       # §21
+       "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -487,9 +489,16 @@ check("§20 Savana: pump bounded at the 2003 revision; A/C 'if equipped'; no ele
       and g10["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and "Radiator Fan Assembly" not in g10
       and g00["Headlights (clear, non-hazed)"]["fits"] == "1996–2002")
 
+# §21
+r06, r09 = parts(2006, "Mercury", "Mariner", AWD), parts(2009, "Mercury", "Mariner", FWD)
+check("§21 Mariner: rows per generation (new 2008 break); PTU on AWD decodes; sunroof gen 1 only; lamps bounded by generation",
+      MECH3 <= set(r06) and MECH3 <= set(r09) and r06["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2005–2007"
+      and r09["A/C Compressor (clutch spins free)"]["fits"] == "2008–2011" and r06["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin"
+      and "AWD Power Transfer Unit (PTU)" not in r09 and "Sunroof Glass + Motor" not in r09 and r06["Tail Lights (pair, uncracked)"]["fits"] == "2005–2007")
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

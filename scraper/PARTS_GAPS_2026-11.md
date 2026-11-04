@@ -1367,3 +1367,47 @@ unchanged at 12,301 (3.7%).
   windows were what changed. `sharedWith` notes are identical.
 - **Tests:** `test_interchange.py`, `test_consensus_parts.py` and the
   other offline scraper tests pass.
+
+## 21. Next measured block (2026-11-04, owner: "start the next parts block")
+
+Same basis and method as §18–20: generations and facelifts were researched
+first. WP is Wikipedia raw wikitext, CG is Consumer Guide used reviews;
+FETCHED/SNIPPET as before. Measured on the new scan: generic-only 17,883
+(5.4%) of 333,739 cars, no entry 12,369 (3.7%).
+
+| Order | Model | Generic-only cars |
+|---|---|---|
+| 1 | Mercury Mariner 2005–11 | 346 |
+| 2 | Fiat 500 2012–19 (the count included 500L/500X listings; see §21.2) | 344 |
+| 3 | Chevrolet Spark 2013–22 | 330 |
+| 4 | Nissan Juke 2011–17 | 330 |
+| 5 | Mercury Sable 1992–2009 | 326 |
+| 6 | Dodge Stratus 1995–2006 | 325 |
+| 7 | Ford Mustang S197 2005–06 | 320 |
+| 8 | Ford Transit Connect 2010–22 | 310 |
+
+### 21.1 Mercury Mariner 2005–2007, 2008–2011
+
+Basis: WP Mercury_Mariner; consumerguide.com/used/2005-11-mercury-mariner
+(fetched).
+- **New `GENERATION_BREAKS` "mariner": [2008]:** the 2008 redesign brought
+  "new seats, headlights, taillights, a new liftgate …". The existing
+  Mariner lamp and mirror rows are now bounded by generation.
+- **No facelift within either generation:** the only lamp change was the
+  2010 removal of the turn-signal repeaters, which no row covers.
+- **A/C:** standard (CG).
+- **AWD:** optional on gas models, and every Hybrid was AWD. Escape twin, so
+  AWD cars carry a PTU.
+- **Sunroof:** a gen-1 option (Luxury/Premier).
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2005–07, 2008–11 | — | Every vehicle. |
+| AWD power transfer unit | same | drive: awd/4wd | Same band as the Escape/Tribute PTU rows. |
+| Sunroof | 2005–07 | option | Gen-2 availability not confirmed. |
+
+Left out, no stated basis: hybrid battery and drive parts (no audited
+band), the gen-2 sunroof.
+
+Result: Mariner generic-only 346 → 0. Lots: generic-only 17,883 (5.4%) →
+17,537 (5.3%).

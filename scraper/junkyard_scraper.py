@@ -5955,6 +5955,20 @@ _gap_extend("savana", parts=_per_gen([(1996, 2002), (2003, 2024)], [_GAP_PUMP, {
 
 # ---- end of §20 block
 
+# ---- 2026-11 §21 (PARTS_GAPS §21).
+# Mercury Mariner (346 cars generic-only; 1st gen 2005-07, 2nd gen 2008-11,
+# new GENERATION_BREAKS 2008). No facelift within either. A/C standard; AWD
+# optional (Escape twin: PTU on AWD cars). Sunroof confirmed for gen 1.
+_gap_extend("mariner", parts=[
+    *_per_gen([(2005, 2007), (2008, 2011)], [
+        *_GAP_MECH,
+        {"name": "AWD Power Transfer Unit (PTU)", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "drive": ["awd", "4wd"]},
+    ]),
+    *_per_gen([(2005, 2007)], [_SUNROOF]),
+])
+
+# ---- end of §21 block
+
 _apply_consensus_evergreens()
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
@@ -6227,6 +6241,7 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    "mariner": [2008],                     # 1st gen 2005-07, 2nd gen 2008-11 (PARTS_GAPS §21.1)
     "windstar": [1999],                    # 1st gen 1995-98, 2nd gen 1999-2003 (PARTS_GAPS §20.7)
     "mazda5": [2012],                      # 1st gen 2006-10, 2nd gen 2012-15, no 2011 US MY (PARTS_GAPS §20.4)
     "mkx": [2016],                        # 1st gen 2007-15, 2nd gen 2016-18 (PARTS_GAPS §19.5)

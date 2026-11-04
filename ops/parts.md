@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–20 done)
+# Parts workstream — status (updated 2026-11-04, §13–20 done, §21 in progress)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -85,6 +85,9 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 - Overlay-created entries (Aura, es 300 …) take their rows in
   `parts_overlay.json`; §20 code sits just before
   `_apply_consensus_evergreens()` so breadth-pass entries exist.
+
+- §21 (owner: "start the next parts block"; in progress): Mariner done
+  with new break 2008 (generic-only 17,883 → 17,537, 5.4% → 5.3%, new scan).
 
 ## How to measure
 
