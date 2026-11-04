@@ -333,6 +333,12 @@ check("§18 Regal: mechanical rows per generation; tail lights cut at the 2014 f
 check("§18 Regal: AWD unit 2014-17 only (AWD decode confirms 2015; no row 2012)", g15["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin"
       and "AWD Rear Differential / Transfer Unit" not in names(2012, "Buick", "Regal", AWD))
 
+h06, h12 = parts(2006, "Hyundai", "Tucson", AWD), parts(2012, "Hyundai", "Tucson", FWD)
+check("§18 Tucson: pump/fan per generation; A/C plain 2006, 'if equipped' 2012; AWD decode confirms coupling", MECH3 <= set(h06) and MECH3 <= set(h12)
+      and h06["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2005–2009" and h12["Radiator Fan Assembly"]["fits"] == "2010–2015"
+      and h06["A/C Compressor (clutch spins free)"].get("trim_status") is None and h12["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
+      and h06["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in h12)
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

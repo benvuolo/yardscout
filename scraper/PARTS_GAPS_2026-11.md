@@ -661,3 +661,31 @@ and wheels, and 1988–96 cars (about 70; not researched in this block).
 
 Result: Regal 1997–2017 generic-only 507 → 0 (the remaining 67 are
 1988–96 and 2018–19). Lots: generic-only 27,762 (8.4%) → 27,255 (8.2%).
+
+### 18.3 Hyundai Tucson 2005–2021 (JM 2005–09, LM 2010–15, TL 2016–21)
+
+Basis: en.wikipedia.org/wiki/Hyundai_Tucson; consumerguide.com/used/2005-09-hyundai-tucson;
+cars.com 2005 "What's New", 2014 "What's Changed", 2019 "What's New"
+(all fetched).
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 2009: "slightly freshened exterior styling" (Consumer Guide, no part
+    detail; the cut is conservative).
+  - 2014: "new projector-type headlights with LED accents and LED
+    taillights" (cars.com); in North America only the lamps changed.
+  - 2019: "cascading grille", "slightly restyled" bumpers, "revised
+    headlight and taillight designs" (cars.com).
+- **AWD:** offered on all three generations.
+- **A/C:** standard on the 2005 GL (Consumer Guide and cars.com).
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2005–09, 2010–15, 2016–21 | — | Every car. |
+| A/C compressor | 2005–09 | — | Standard per the sources. |
+| A/C compressor | 2010–15, 2016–21 | option | Standard fitment not confirmed by a source. |
+| AWD rear differential / coupling | 2005–09, 2010–15, 2016–21 | drive: awd/4wd | Same band as the Rogue/RAV4 rows. |
+
+Left out, no stated basis: sunroof, leather and wheel rows (option
+availability not researched).
+
+Result: Tucson 2005–21 generic-only 548 → 0 (14 cars from 2022–23 remain).
+Lots: generic-only 27,255 (8.2%) → 26,697 (8.0%).

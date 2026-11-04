@@ -4559,6 +4559,16 @@ _gap_extend("regal", parts=[
     ]),
 ])
 
+# Hyundai Tucson (562 cars generic-only; JM 2005-09, LM 2010-15, TL
+# 2016-21). Facelifts 2009/2014/2019 in FACELIFT_BREAKS. AWD offered on all
+# three; A/C confirmed standard on the JM only (flagged option after).
+_AWD_COUPLING = {"name": "AWD Rear Differential / Coupling", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "drive": ["awd", "4wd"]}
+_gap_extend("tucson", parts=[
+    *_per_gen([(2005, 2009), (2010, 2015), (2016, 2021)], [_GAP_PUMP, _GAP_FAN, _AWD_COUPLING]),
+    *_per_gen([(2005, 2009)], [_GAP_AC]),
+    *_per_gen([(2010, 2015), (2016, 2021)], [{**_GAP_AC, "option": True}]),
+])
+
 # ---- end of §18 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
@@ -6152,6 +6162,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "mazda3": [2012, 2017],
     # §18 (cited in PARTS_GAPS §18)
     "regal": [2014],
+    "tucson": [2009, 2014, 2019],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

@@ -60,7 +60,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 
 - §18 (owner: "start the next parts block"; in progress): Forte 2010–13
   done (generic-only 28,344 → 27,762, 8.5% → 8.4%); Regal 1997–2017 with
-  facelift 2014 (→ 27,255, 8.2%).
+  facelift 2014 (→ 27,255, 8.2%); Tucson 2005–21 with facelifts 2009/2014/2019
+  (→ 26,697, 8.0%).
 
 ## How to measure
 
