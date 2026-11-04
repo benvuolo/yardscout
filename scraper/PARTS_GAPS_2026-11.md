@@ -1541,3 +1541,38 @@ tail lights differ from the sedan's is not stated), 1992–99 sunroofs.
 
 Result (same inventory): generic-only 16,605 (5.0%) → 16,280 (4.9%). Sable
 326 → 0.
+
+### 21.6 Dodge Stratus 1995–2000 (JA sedan), 2001–2006 (JR sedan)
+
+Basis: WP Dodge_Stratus; consumerguide.com/used/1995-00-dodge-stratus and
+/used/2001-06-dodge-stratus (fetched).
+- **New `GENERATION_BREAKS` "stratus": [2001]:** the existing Stratus lamp
+  and mirror rows are now bounded by generation.
+- **Facelifts added to `FACELIFT_BREAKS` at 2003 and 2004:**
+  - The coupe got "revised styling … for both front and rear" for 2003.
+  - The sedan "got revised front styling that mimicked the changes to the
+    coupes in 2003" for 2004.
+  The existing lamp rows cover both bodies, so both years are cut. Which
+  specific lamps changed is not stated; the cut can only narrow windows.
+- **The 2001–05 coupe is a different car** (Mitsubishi Eclipse-based
+  ST-22). Every listing is spelled just "Stratus", so the JR rows carry a
+  body gate (`body: sedan`):
+  - a sedan decode confirms them;
+  - a coupe decode excludes them;
+  - an undecoded car shows them as "if equipped" ($0).
+  On the current lots, 2001–05 decodes are 135 sedan and 6 coupe, with 43
+  undecoded.
+- **A/C:** standard on the 2001–06 sedan and coupe (CG). For 1995–2000 it is
+  confirmed only on the 2000 SE.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1995–2000 | — | Every JA. |
+| A/C compressor | 1995–2000 | option | |
+| Fuel pump module, A/C compressor, radiator fan | 2001–06 | body: sedan | JR sedan only. |
+| Sunroof | 2001–06 | body: sedan + option | Optional on the sedan (R/T or SXT package in 2006). |
+
+Left out, no stated basis: coupe-specific rows, and JA sunroofs (offered
+only in some years: 1996, 1998, 2000).
+
+Result (same inventory): generic-only 16,280 (4.9%) → 15,958 (4.8%).

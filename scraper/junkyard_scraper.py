@@ -6022,6 +6022,18 @@ _gap_extend("sable", parts=[
     ]),
 ])
 
+# Dodge Stratus (325 cars generic-only; JA sedan 1995-2000, JR sedan
+# 2001-06, new GENERATION_BREAKS 2001; facelifts coupe 2003 / sedan 2004).
+# The 2001-05 coupe is a different, Mitsubishi-based car, so the JR rows are
+# body-gated to sedans: a sedan decode confirms, a coupe decode excludes,
+# no decode shows them as "if equipped". A/C standard 2001-06 (CG); 1995-2000
+# confirmed only for the 2000 SE, so option-flagged.
+_SEDAN_ONLY = {"body": ["sedan"]}
+_gap_extend("stratus", parts=[
+    *_per_gen([(1995, 2000)], [_GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}]),
+    *_per_gen([(2001, 2006)], [{**r, **_SEDAN_ONLY} for r in (*_GAP_MECH, _SUNROOF)]),
+])
+
 # ---- end of §21 block
 
 _apply_consensus_evergreens()
@@ -6296,6 +6308,7 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    "stratus": [2001],                     # JA sedan 1995-2000, JR sedan 2001-06 (+ Mitsubishi-based coupe 2001-05) (PARTS_GAPS §21.6)
     "spark": [2016],                       # M300 2013-15, M400 2016-22 (PARTS_GAPS §21.3)
     "mariner": [2008],                     # 1st gen 2005-07, 2nd gen 2008-11 (PARTS_GAPS §21.1)
     "windstar": [1999],                    # 1st gen 1995-98, 2nd gen 1999-2003 (PARTS_GAPS §20.7)
@@ -6496,6 +6509,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "spark": [2019],
     "juke": [2015],
     "sable": [1998, 2004],
+    "stratus": [2003, 2004],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

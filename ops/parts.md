@@ -92,7 +92,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   get their own evergreen-only entries, the 500e an empty one (no card).
   Spark with new break 2016 and facelift 2019; Spark EV empty entry
   (→ 16,935, 5.1%); Juke with facelift 2015 (→ 16,605, 5.0%);
-  Sable with facelifts 1998/2004 (→ 16,280, 4.9%).
+  Sable with facelifts 1998/2004 (→ 16,280, 4.9%); Stratus with new break
+  2001, facelifts 2003/2004, JR rows sedan-gated (→ 15,958, 4.8%).
 
 ## How to measure
 

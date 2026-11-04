@@ -530,6 +530,15 @@ check("§21 Sable: mech per generation; A/C 'if equipped' 1997, plain 2002; AWD 
       and m08["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in m02
       and m02["Tail Lights (pair, uncracked)"]["fits"] == "2000–2003")
 
+COUPE_D2 = {**SEDAN, "bodyClass": "Coupe"}
+t98, t03s, t03c = parts(1998, "Dodge", "Stratus", FWD), parts(2003, "Dodge", "Stratus", SEDAN), parts(2003, "Dodge", "Stratus", COUPE_D2)
+check("§21 Stratus: JA rows 1995-2000; JR rows sedan-gated (sedan decode confirms, coupe decode excludes, no decode 'if equipped'); lamps cut at 2003/2004",
+      t98["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1995–2000" and t98["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
+      and t03s["Fuel Pump Module (in-tank, test before listing)"]["trim_status"] == "vin" and t03s["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2001–2006"
+      and "Fuel Pump Module (in-tank, test before listing)" not in t03c
+      and parts(2003, "Dodge", "Stratus")["Fuel Pump Module (in-tank, test before listing)"]["trim_status"] == "unconfirmed"
+      and t03s["Tail Lights (pair, uncracked)"]["fits"] == "2003–2003")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
