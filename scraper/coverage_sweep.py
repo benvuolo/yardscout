@@ -266,8 +266,8 @@ class Candidate:
 
 
 # Exact tag values Overpass answers from its tag index. A self-service yard
-# in OSM is nearly always one of these; the name regex then runs only over
-# this small set instead of every named object (streets included) in the
+# in OSM is nearly always one of these; the name regex runs inside each
+# clause, only over elements carrying that tag, instead of every named object (streets included) in the
 # state. Trade-off: a yard mapped with a name and no tag at all is missed —
 # Ario discovery and owner requests still cover those.
 OSM_TAG_CLAUSES = (
@@ -278,11 +278,15 @@ OSM_TAG_CLAUSES = (
 
 
 def overpass_query(state: str) -> str:
-    union = "".join(f'nwr["{k}"="{v}"](area.s);' for k, v in OSM_TAG_CLAUSES)
+    # The name filter sits inside every clause, so each statement filters on
+    # the server before anything is collected: a separate ".t then name"
+    # step would first materialise every shop=car / landuse=industrial /
+    # amenity=recycling element in the state (huge for CA/TX).
+    name = f'["name"~"{OSM_NAME_RE}",i]'
+    union = "".join(f'nwr["{k}"="{v}"]{name}(area.s);' for k, v in OSM_TAG_CLAUSES)
     return (
         f'[out:json][timeout:{OSM_SERVER_TIMEOUT}][maxsize:{OSM_MAXSIZE}];'
-        f'area["ISO3166-2"="US-{state}"]->.s;({union})->.t;'
-        f'nwr.t["name"~"{OSM_NAME_RE}",i];out center tags qt;'
+        f'area["ISO3166-2"="US-{state}"]->.s;({union});out center tags qt;'
     )
 
 

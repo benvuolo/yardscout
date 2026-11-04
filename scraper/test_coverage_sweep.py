@@ -194,10 +194,13 @@ q = cs.overpass_query("AL")
 check("osm query: [timeout:] and [maxsize:] set, client waits just past the server",
       f"[timeout:{cs.OSM_SERVER_TIMEOUT}]" in q and f"[maxsize:{cs.OSM_MAXSIZE}]" in q
       and cs.OSM_SERVER_TIMEOUT < cs.OSM_TIMEOUT <= cs.OSM_SERVER_TIMEOUT + 60, q[:80])
-check("osm query: indexed tag clauses first, name regex only over that set",
-      all(f'nwr["{kk}"="{vv}"](area.s);' in q for kk, vv in cs.OSM_TAG_CLAUSES)
-      and '->.t;nwr.t["name"~' in q and '(area.s);out' not in q.split("->.t;")[-1]
-      and '"name"~' not in q.split("->.t;")[0], q)
+nf = f'["name"~"{cs.OSM_NAME_RE}",i]'
+clauses = [c for c in q.split("(area.s);") if 'nwr["' in c]
+check("osm query: every union clause carries the name filter, no collect-then-filter step",
+      len(clauses) == len(cs.OSM_TAG_CLAUSES)
+      and all(f'nwr["{kk}"="{vv}"]{nf}(area.s);' in q for kk, vv in cs.OSM_TAG_CLAUSES)
+      and all(nf in c for c in clauses) and "->.t" not in q and ".t[" not in q
+      and q.endswith(");out center tags qt;"), q)
 # The exact 2026-11-03/04 failure: every server fails the first states. The
 # pass must stop after OSM_DROP_SERVER_AFTER states (bounded cost) and leave
 # all of them pending for the next run, not burn the budget.

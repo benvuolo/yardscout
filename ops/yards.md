@@ -57,8 +57,11 @@ them.
 Second fix (this commit, unconfirmed live):
 - `overpass_query` selects by exact, indexed tags first (`OSM_TAG_CLAUSES`:
   shop=car_parts/car/car_repair/scrap_yard, industrial=scrap_yard/auto_wrecker,
-  landuse=industrial, amenity=scrap_yard/recycling, craft=car_repair). It runs
-  the name regex only over that set, with `[timeout:90]` and
+  landuse=industrial, amenity=scrap_yard/recycling, craft=car_repair). The
+  name regex sits inside every clause (`nwr["shop"="car_parts"]["name"~RE,i](area.s);`),
+  so nothing is collected before it is filtered. A collect-then-filter step
+  would first materialise every shop=car or landuse=industrial element in
+  CA or TX (the hub's review). The query uses `[timeout:90]` and
   `[maxsize:64MB]`, and the client read timeout is 120 s.
 - Trade-off: a yard mapped with a name and no tag is missed. Compare CA's
   count with the 20 found by the name-only query.
