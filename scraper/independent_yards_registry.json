@@ -2968,6 +2968,29 @@
           "lng": -111.8495
         }
       ]
+    },
+    {
+      "name": "Littleton U-Pull",
+      "status": "directory-only",
+      "platform": "littletonupull.com serves only the default IIS Windows page (2026-11-04)",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Found by the Geofabrik coverage sweep 2026-11-04 (tier D). Self-service yard (directories: ~1,200 vehicles, mostly 2000+, on stands). The website shows the bare IIS start page, so there is no inventory online. Directory addresses conflict (5100 Aspen Leaf Dr vs 8571 US-85 N, Littleton CO 80125); pin is the OSM node. Phone (303) 791-1380. Re-check if the site comes back."
+      },
+      "locations": [
+        {
+          "name": "Littleton U-Pull - Littleton",
+          "city": "Littleton",
+          "state": "CO",
+          "lat": 39.4872,
+          "lng": -104.9972
+        }
+      ]
     }
   ]
 }
