@@ -67,7 +67,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   Legacy, MKZ, Elantra 2004. No car lost or changed an existing part.
 
 - §19 (owner: "start the next parts block"; in progress): Galant done
-  (generic-only 24,111 → 23,618, 7.3% → 7.1%).
+  (generic-only 24,111 → 23,618, 7.3% → 7.1%); Grand Am 1996–2005 (→ 23,132,
+  7.0%).
 
 ## How to measure
 

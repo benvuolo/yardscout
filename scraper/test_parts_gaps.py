@@ -381,6 +381,14 @@ check("§19 Galant: mech per generation, A/C plain; tail lights cut at the 2002/
       and m01["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1999–2003" and m01["Tail Lights (pair, uncracked)"]["fits"] == "1999–2001"
       and m08["Tail Lights (pair, uncracked)"]["fits"] == "2007–2008")
 
+a97, a03 = parts(1997, "Pontiac", "Grand Am", FWD), parts(2003, "Pontiac", "Grand Am", FWD)
+check("§19 Grand Am: mech per generation; A/C plain 1997/2003, 'if equipped' 1999; GT lamps listing-confirmed on 'Grand Am GT'",
+      MECH3 <= set(a97) and MECH3 <= set(a03) and a97["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1996–1998"
+      and a03["A/C Compressor (clutch spins free)"].get("trim_status") is None
+      and parts(1999, "Pontiac", "Grand Am", FWD)["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
+      and parts(2003, "Pontiac", "Grand Am GT")["GT Tail Lights (pair, uncracked)"]["trim_status"] == "listing"
+      and "GT Tail Lights (pair, uncracked)" not in a97)
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

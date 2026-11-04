@@ -4632,6 +4632,20 @@ _gap_extend("elantra", parts=[
 # the base DE/ES (Consumer Guide); sunroof an ES/LS/GTS option by year.
 _gap_extend("galant", parts=_per_gen([(1999, 2003), (2004, 2012)], [*_GAP_MECH, _SUNROOF]))
 
+# Pontiac Grand Am (486 cars generic-only; 4th gen to 1998, 5th gen
+# 1999-2005). No facelift inside either window (the 4th gen's 1996 refresh
+# is the entry's first year). A/C confirmed standard 1997-98 and 2000-04
+# (Consumer Guide lists); option-flagged elsewhere. The GM catalog lists
+# separate 1999-2005 tail lamps for GT vs SE (shared by coupe and sedan).
+_gap_extend("grand am", parts=[
+    *_per_gen([(1996, 1998), (1999, 2005)], [_GAP_PUMP, _GAP_FAN]),
+    *_per_gen([(1997, 1998), (2000, 2004)], [_GAP_AC]),
+    *_per_gen([(1996, 1996), (1999, 1999), (2005, 2005)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(1999, 2005)], [
+        {"name": "GT Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 55, "high": 140, "cost": 23, "trim": ["GT"]},
+    ]),
+])
+
 # ---- end of §19 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[

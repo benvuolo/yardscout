@@ -891,3 +891,32 @@ researched), seats and wheels.
 
 Result: Galant generic-only 493 → 0. Lots: generic-only 24,111 (7.3%) →
 23,618 (7.1%).
+
+### 19.2 Pontiac Grand Am 1996–1998, 1999–2005
+
+Basis: en.wikipedia.org/wiki/Pontiac_Grand_Am; consumerguide.com/used/1992-98-pontiac-grand-am
+and /used/1999-05-pontiac-grand-am; gmpartsgiant.com Grand Am tail-light
+catalog (fetched; a dealer catalog, so check the part number against the
+VIN).
+- **Facelifts:** the 4th gen's 1996 facelift is the entry's first year, so
+  no cut is needed. No 5th-gen facelift was found: the only changes were
+  wheels (2001) and sedan cladding (2003).
+- **A/C:** CG says A/C was added to "the standard equipment list of all
+  models" for 1997, and lists it standard on the SE in 2000–04. The 1999
+  and 2005 lists were not available.
+- **Tail lamps:** 1999–2005 lamps are split by trim (SE 22612876/77 vs GT
+  22612878/79), each shared by coupe and sedan. The 1996–98 lamps are one
+  part across GT and SE.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1996–98, 1999–05 | — | Every car. |
+| A/C compressor | 1997–98, 2000–04 | — | Standard per CG. |
+| A/C compressor | 1996, 1999, 2005 | option | Standard not confirmed for those years. |
+| GT tail lights | 1999–05 | trim: GT | Separate GT part numbers; same band as the other trim/body lamp rows. |
+
+Left out, no stated basis: sunroof, wheels and GT seats (not researched),
+the 3.4 V6 intake gaskets (engine).
+
+Result: Grand Am generic-only 486 → 0. Lots: generic-only 23,618 (7.1%) →
+23,132 (7.0%).
