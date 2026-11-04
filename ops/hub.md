@@ -10,8 +10,15 @@ watches are bound to it. It does not build features.
 - **Android 1.12.11 (33)**: Play production, status completed (Google review).
   Check: dispatch `play-status.yml`.
 - **Web**: `main` deploys to GitHub Pages; sw cache `jh-v139`.
-- **Scan**: `scan.yml` every 4 h, commits `docs/data/`. `model_lifespan.json`
-  writer fixed after the 09:23 UTC run; expected from the 13:23 UTC run.
+- **Scan**: `scan.yml` every 4 h, commits `docs/data/`. GitHub skips crons
+  often (12:00 and the hourly watchdog were skipped 2026-11-04); dispatch by
+  hand when the last scan is over 5 h old.
+- **model_lifespan.json** live since the 2026-11-04 15:54 scan: 638 models,
+  193 yards, 2,382 yard+model figures, global median 61 d, 134 fast pairs.
+  Open data issues (not yet assigned): long yard medians at Prestige Houston
+  (296 d), San Antonio PnP (233 d), Wichita, Belton, Dallas South (likely
+  stale feeds holding departed cars); model spellings split ("Dodge|Ram",
+  "Dodge|RAM", "Dodge|Ram 1500"; "General Motors|ION"/"VUE" should be Saturn).
 - **Daily ops email** 13:07 UTC (`backend/src/ops_monitor.js`): subscribers
   (Apple + Google from KV `ops:store-subs`, Stripe + comps from entitlement
   records), chain-frozen flags, review-prompt funnel, most-searched parts/cars.
