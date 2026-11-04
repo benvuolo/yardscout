@@ -950,3 +950,28 @@ no part-level basis was found for a shift motor or transfer unit.
 
 Result: Sorento 2003–09 generic-only 463 → 0. Lots: generic-only 23,132
 (7.0%) → 22,669 (6.8%).
+
+### 19.4 Hyundai Santa Fe 2001–2006 (SM)
+
+Basis: en.wikipedia.org/wiki/Hyundai_Santa_Fe; consumerguide.com/used/2001-06-hyundai-santa-fe;
+cars.com "2005 Hyundai Santa Fe: What's New" (fetched).
+- **Facelift 2005 (added to `FACELIFT_BREAKS`):** "Changes were made to the
+  grille, tail lights, rear bumper" (Wikipedia); "new grille and
+  taillights" (cars.com).
+- **A/C:** standard (CG).
+- **AWD:** offered on the V6 models (GL V6/GLS/LX in 2001, V6 models from
+  2002; no low range from 2005).
+- **Sunroof:** "a sunroof option was added in May 2002" (Wikipedia).
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2001–06 | — | Every truck. |
+| Tail lights | 2001–04, 2005–06 | — | The entry had none; cut at the facelift. |
+| AWD rear differential / coupling | 2001–06 | drive: awd/4wd | Same band as the Tucson row. |
+| Sunroof | 2002–06 | option | Not offered for 2001. |
+
+Left out, no stated basis: leather and wheels (not researched), the
+2.7/3.5 V6 parts (engine).
+
+Result: Santa Fe 2001–06 generic-only 414 → 0. Lots: generic-only 22,669
+(6.8%) → 22,255 (6.7%).

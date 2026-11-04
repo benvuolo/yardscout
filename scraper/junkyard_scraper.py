@@ -4655,6 +4655,14 @@ _gap_extend("sorento", parts=[
     *_per_gen([(2007, 2009)], [{**_GAP_AC, "option": True}]),
 ])
 
+# Hyundai Santa Fe 2001-2006 (SM; 414 cars generic-only). Facelift 2005 in
+# FACELIFT_BREAKS. A/C standard; AWD offered (V6 models after 2001); the
+# sunroof arrived as an option in May 2002. The entry had no tail-light row.
+_gap_extend("santa fe", parts=[
+    *_per_gen([(2001, 2006)], [*_GAP_MECH, _TAILS, _AWD_COUPLING]),
+    *_per_gen([(2002, 2006)], [_SUNROOF]),
+])
+
 # ---- end of §19 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
@@ -6265,6 +6273,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "mkz": [2010, 2017],
     "galant": [2002, 2007, 2009],
     "sorento": [2007],
+    "santa fe": [2005],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

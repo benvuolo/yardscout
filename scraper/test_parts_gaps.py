@@ -395,6 +395,12 @@ check("§19 Sorento: mech 2003-09; tails cut at the 2007 facelift; A/C plain 200
       and r05["Tail Lights (pair, uncracked)"]["fits"] == "2003–2006" and r08["Tail Lights (pair, uncracked)"]["fits"] == "2007–2009"
       and r05["A/C Compressor (clutch spins free)"].get("trim_status") is None and r08["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed")
 
+q03, q06 = parts(2003, "Hyundai", "Santa Fe", AWD), parts(2006, "Hyundai", "Santa Fe", FWD)
+check("§19 Santa Fe: mech 2001-06; tails cut at the 2005 facelift; AWD coupling gated; no sunroof row 2001",
+      MECH3 <= set(q03) and q03["Tail Lights (pair, uncracked)"]["fits"] == "2001–2004" and q06["Tail Lights (pair, uncracked)"]["fits"] == "2005–2006"
+      and q03["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in q06
+      and "Sunroof Glass + Motor" not in names(2001, "Hyundai", "Santa Fe", FWD))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
