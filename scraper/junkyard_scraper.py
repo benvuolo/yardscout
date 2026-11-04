@@ -3852,6 +3852,26 @@ _extend_entry("lesabre", parts=[
     *_per_gen([(2000, 2005)], [_TAILS, _SUNROOF]),
 ])
 
+# Buick LaCrosse (1,077 cars generic-only; W-body 2005-09, Epsilon II
+# 2010-16). The 2005-09 cars had halogen lamps (the entry's lamp row is the
+# 2010+ HID/LED one) and no tail-light row existed. AWD was offered 2010-16.
+_extend_entry("lacrosse", parts=[
+    *_per_gen([(2005, 2009), (2010, 2016)], [
+        *_GAP_MECH,
+        _TAILS,
+        _SUNROOF,
+        {"name": "Leather Power Driver Seat (CXL/CXS)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
+        {"name": "17\"/18\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "option": True},
+    ]),
+    *_per_gen([(2005, 2009)], [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 20},
+    ]),
+    *_per_gen([(2010, 2016)], [
+        {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+        {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30, "option": True},
+    ]),
+])
+
 # --- Feed-spelling aliases: same entry object, different key the feeds use ---
 # ("Town And Country" never contained "town & country"; "Mazda 3" has a space.)
 for _alias, _key in (

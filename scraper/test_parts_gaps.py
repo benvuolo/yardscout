@@ -156,9 +156,20 @@ check("LeSabre 2003: tail lights + sunroof; 1997: neither", {"Tail Lights (pair,
       and not ({"Tail Lights (pair, uncracked)", "Sunroof Glass + Motor"} & set(l97)))
 check("LeSabre: Limited seat and wheels are 'if equipped'", all(l03[n]["trim_status"] == "unconfirmed" for n in ("Leather Power Driver Seat (Limited)", "Alloy Wheels (set of 4, straight)", "Sunroof Glass + Motor")))
 
+c07, c12 = parts(2007, "Buick", "LaCrosse", FWD), parts(2012, "Buick", "LaCrosse", FWD)
+check("LaCrosse 2007/2012: mechanical rows + tail lights in their generation", MECH3 <= set(c07) and MECH3 <= set(c12)
+      and c07["Tail Lights (pair, uncracked)"]["fits"] == "2005–2009" and c12["Radiator Fan Assembly"]["fits"] == "2010–2016")
+check("LaCrosse 2007: halogen lamp row, not HID; 2012: HID row, not halogen", "Headlights (clear, non-hazed)" in c07 and "OEM HID/LED Headlights" not in c07
+      and "OEM HID/LED Headlights" in c12 and "Headlights (clear, non-hazed)" not in c12)
+check("LaCrosse 2012: AWD decode confirms the rear unit; FWD decode excludes; 2007 has none",
+      parts(2012, "Buick", "LaCrosse", AWD)["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin"
+      and "AWD Rear Differential / Transfer Unit" not in c12 and "AWD Rear Differential / Transfer Unit" not in names(2007, "Buick", "LaCrosse", AWD))
+check("LaCrosse 2012: Harman Kardon 'if equipped'; 2018: none of the new rows", c12["Harman Kardon Amp + Speakers"]["trim_status"] == "unconfirmed"
+      and not (MECH3 & names(2018, "Buick", "LaCrosse", FWD)))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "lesabre", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "lesabre", "lacrosse", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

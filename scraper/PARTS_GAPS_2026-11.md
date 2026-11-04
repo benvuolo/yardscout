@@ -199,3 +199,21 @@ value). Pre-1992 LeSabres (46 cars) stay outside the entry.
 
 Result: LeSabre generic-only 1,098 → 0. Lots: generic-only 39,669 (11.9%)
 → 38,571 (11.6%).
+
+### 13.4 Buick LaCrosse 2005–2016 (W-body 2005–09, Epsilon II 2010–16)
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2005–09, 2010–16 | — | Commodity pulls on every car. |
+| Tail lights (pair) | 2005–09, 2010–16 | — | The entry had none. |
+| Headlights (clear, non-hazed) | 2005–09 | — | Halogen lamps; the entry's only lamp row was the 2010+ HID/LED one. |
+| AWD rear differential / transfer unit | 2010–16 | drive: awd/4wd | AWD offered on the Epsilon II; same band as the Equinox row. A FWD decode excludes it. |
+| Harman Kardon amp + speakers | 2010–16 | option | Premium-audio option. |
+| Sunroof, leather power seat (CXL/CXS), 17"/18" wheels | 2005–09, 2010–16 | option | |
+
+Left out, no stated basis: IntelliLink touchscreen (first model year not
+confirmed between 2013 and 2014), halogen lamps for 2010–16 base cars.
+2017–19 (8 cars) not in this block.
+
+Result: LaCrosse generic-only 1,077 → 8 (all 2017+). Lots: generic-only
+38,571 (11.6%) → 37,502 (11.2%).
