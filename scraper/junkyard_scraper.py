@@ -5817,6 +5817,19 @@ _gap_extend("mkz", parts=_per_gen([(2007, 2012), (2013, 2020)], [
     {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
 ]))
 
+# §19.5: mkx is also a breadth-pass entry. 1st gen 2007-15, 2nd gen 2016-18
+# (new break 2016, facelift 2011). AWD optional; THX II audio 2007-15 and
+# Revel 2016-18 were options, as was the Vista Roof.
+_gap_extend("mkx", parts=[
+    *_per_gen([(2007, 2015), (2016, 2018)], [
+        _GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True},
+        {"name": "AWD Power Transfer Unit (PTU)", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "drive": ["awd", "4wd"]},
+        {"name": "Vista Panoramic Roof Assembly", "rarity": "Rare", "low": 200, "high": 450, "cost": 44, "option": True},
+    ]),
+    *_per_gen([(2007, 2015)], [{"name": "THX II Amp + Speakers", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 24, "option": True}]),
+    *_per_gen([(2016, 2018)], [{"name": "Revel Amp + Speakers", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 24, "option": True}]),
+])
+
 _apply_consensus_evergreens()
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
@@ -6089,6 +6102,7 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    "mkx": [2016],                        # 1st gen 2007-15, 2nd gen 2016-18 (PARTS_GAPS §19.5)
     "mkz": [2013],                        # 1st gen 2007-12, 2nd gen 2013-20 (PARTS_GAPS §18.7)
     "cruze": [2016],
     "monte carlo": [1995, 2000],
@@ -6274,6 +6288,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "galant": [2002, 2007, 2009],
     "sorento": [2007],
     "santa fe": [2005],
+    "mkx": [2011],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

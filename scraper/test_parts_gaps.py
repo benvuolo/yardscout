@@ -401,6 +401,13 @@ check("§19 Santa Fe: mech 2001-06; tails cut at the 2005 facelift; AWD coupling
       and q03["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in q06
       and "Sunroof Glass + Motor" not in names(2001, "Hyundai", "Santa Fe", FWD))
 
+k09, k13 = parts(2009, "Lincoln", "MKX", AWD), parts(2013, "Lincoln", "MKX", FWD)
+check("§19 MKX: rows per generation (new 2016 break); PTU gated; THX 'if equipped'; lamps cut at the 2011 facelift",
+      MECH3 <= set(k09) and k09["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2007–2015"
+      and k09["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin" and "AWD Power Transfer Unit (PTU)" not in k13
+      and k13["THX II Amp + Speakers"]["trim_status"] == "unconfirmed" and "Revel Amp + Speakers" not in k13
+      and k09["Tail Lights (pair, uncracked)"]["fits"] == "2007–2010" and k13["Headlights (clear, non-hazed)"]["fits"] == "2011–2015")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

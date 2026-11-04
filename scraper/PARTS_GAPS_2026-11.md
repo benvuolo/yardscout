@@ -975,3 +975,33 @@ Left out, no stated basis: leather and wheels (not researched), the
 
 Result: Santa Fe 2001–06 generic-only 414 → 0. Lots: generic-only 22,669
 (6.8%) → 22,255 (6.7%).
+
+### 19.5 Lincoln MKX 2007–2015, 2016–2018
+
+Basis: en.wikipedia.org/wiki/Lincoln_MKX; cars.com "2011 Lincoln MKX: What's
+New"; autoblog.com 2007 MKX; slashgear.com 2011 MKX THX; Lincoln 2016 MKX
+pricing sheet (all fetched; 2015 package details snippet only).
+- **New `GENERATION_BREAKS` "mkx": [2016]:** the entry had no breaks.
+- **Facelift 2011 (added to `FACELIFT_BREAKS`):** "Along with the new grille
+  comes new headlights"; "The full-width taillight design … has been
+  replaced by new split taillights" (cars.com). The existing MKX lamp rows
+  are now cut at 2011, and every row at 2016.
+- **AWD:** optional on both generations.
+- **Audio:** THX II (14 speakers) optional 2007–15; Revel 13- or 19-speaker
+  2016–18, with no THX.
+- **Vista Roof:** optional (standard on the 2016 Reserve and Black Label).
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2007–15, 2016–18 | — | Every vehicle. |
+| A/C compressor | same | option | Standard fitment not confirmed by a source (conservative). |
+| AWD power transfer unit | same | drive: awd/4wd | Same band as the Escape/Explorer PTU rows. |
+| Vista panoramic roof | same | option | Same band as the Soul/Sportage panoramic rows. |
+| THX II amp + speakers | 2007–15 | option | Cost is the amplifier median ($24); band as the Harman Kardon rows. |
+| Revel amp + speakers | 2016–18 | option | Same. |
+
+Left out, no stated basis: the rear drive unit (only the PTU is a known
+pull for this platform here), seats and wheels.
+
+Result: MKX generic-only 413 → 0. Lots: generic-only 22,255 (6.7%) →
+21,842 (6.6%).
