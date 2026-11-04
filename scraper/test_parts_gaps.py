@@ -365,6 +365,13 @@ check("§18 MKZ: rows per generation (new 2013 break); AWD gated; existing lamp 
       and z08["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in z15
       and z08["Headlights (clear, non-hazed)"]["fits"] == "2007–2009" and z15["Tail Lights (pair, uncracked)"]["fits"] == "2013–2016")
 
+x02, x05, x09 = parts(2002, "Hyundai", "Elantra", FWD), parts(2005, "Hyundai", "Elantra", HATCH), parts(2009, "Hyundai", "Elantra", FWD)
+check("§18 Elantra XD: mech 2001-06; lamps 2001-03 (2004 facelift cut); hatch lamps VIN-confirmed 2004-06; overlay 2007-10 lamps kept",
+      MECH3 <= set(x02) and x02["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2001–2006"
+      and x02["Headlights (clear, non-hazed)"]["fits"] == "2001–2003" and x02["Tail Lights (pair, uncracked)"]["fits"] == "2001–2003"
+      and x05["Hatchback Tail Lights (pair, uncracked)"]["fits"] == "2004–2006" and x05["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin"
+      and x09["Headlights (clear, non-hazed)"]["fits"] == "2007–2010")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

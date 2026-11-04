@@ -803,3 +803,44 @@ band for this car), the 2006 Zephyr.
 
 Result: MKZ generic-only 507 → 0. Lots: generic-only 25,116 (7.6%) →
 24,609 (7.4%).
+
+### 18.8 Hyundai Elantra 2001–2006 (XD)
+
+Basis: en.wikipedia.org/wiki/Hyundai_Elantra; consumerguide.com/used/2001-06-hyundai-elantra
+(fetched).
+- **Facelift 2004 (added to `FACELIFT_BREAKS`):** "Elantra gets a new
+  grille, taillights, interior console, and interior controls for 2004"
+  (Consumer Guide); new headlights and bumpers (Wikipedia, XD2).
+- **A/C:** standard on US cars ("all American market models came with …
+  air conditioning").
+- **GT 5-door hatch:** 2002–06 ("joined the sedan during the 2001 model
+  year", sold as a 2002 model).
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2001–06 | — | Every car. |
+| Headlights, tail lights | 2001–03, 2004 | — | The entry had no lamp rows before 2005; cut at the 2004 facelift. They stop at 2004 because the overlay's lamp rows start at 2005, and an overlapping same-name base row would make the window-aware merge skip them. |
+| Hatchback tail lights | 2002–03, 2004–06 | body: hatchback | GT hatch rear lamps. |
+
+Left out, no stated basis: sunroof, wheels and GT-specific rows (not
+researched).
+
+Result: Elantra 2001–06 generic-only 498 → 0. Lots: generic-only 24,609
+(7.4%) → 24,111 (7.3%).
+
+### 18.9 Block totals
+
+Generic-only **28,344 (8.5%) → 24,111 (7.3%)**: 4,233 cars moved. No entry
+unchanged at 12,301 (3.7%).
+- **New `GENERATION_BREAKS`:** mkz 2013.
+- **New `FACELIFT_BREAKS`:** regal 2014; tucson 2009/2014/2019; sportage
+  2009/2014/2020; spectra 2007; legacy 2003/2013; mkz 2010/2017; elantra
+  2004.
+- **Compared with the commit before §18:** none of the 12,726 distinct
+  year/make/model combinations on the lots lost a part or had an existing
+  part's band or gate status change, and `sharedWith` notes are identical.
+- **Tests:** `test_interchange.py`, `test_consensus_parts.py` and the
+  other offline scraper tests pass.
+
+Leftovers in these models: Regal 1988–96 and 2018–19 (67), Spectra 2004
+(35), Tucson 2022–23 (4), Sportage 2023 (3).

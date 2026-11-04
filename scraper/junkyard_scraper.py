@@ -4603,6 +4603,22 @@ _gap_extend("legacy", parts=[
     *_per_gen([(2000, 2004), (2010, 2014)], [_REAR_DIFF]),
 ])
 
+# Hyundai Elantra 2001-2006 (XD; 498 cars generic-only). 2004 refresh in
+# FACELIFT_BREAKS. A/C was standard on US cars. The GT 5-door hatch ran
+# 2002-06. New lamp rows stop at 2004: the overlay's lamp rows start at
+# 2005, and an overlapping same-name base row would make the window-aware
+# overlay merge skip them.
+_gap_extend("elantra", parts=[
+    *_per_gen([(2001, 2006)], [*_GAP_MECH]),
+    *_per_gen([(2001, 2004)], [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 20},
+        _TAILS,
+    ]),
+    *_per_gen([(2002, 2006)], [
+        {"name": "Hatchback Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 55, "high": 140, "cost": 23, "body": ["hatchback"]},
+    ]),
+])
+
 # ---- end of §18 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
@@ -6193,7 +6209,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "sentra": [2010, 2016],
     "equinox": [2016],
     "corolla": [2005, 2011, 2017],
-    "elantra": [2014, 2019],
+    "elantra": [2004, 2014, 2019],   # 2004 XD refresh added in §18.8
     "explorer": [2016, 2018],
     "taurus": [2013],
     "jetta": [2015],

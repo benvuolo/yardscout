@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–17 done, §18 in progress)
+# Parts workstream — status (updated 2026-11-04, §13–18 done)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -58,13 +58,13 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   Per-car parts, bands and interchange notes are identical; coverage
   unchanged. A test guards it.
 
-- §18 (owner: "start the next parts block"; in progress): Forte 2010–13
-  done (generic-only 28,344 → 27,762, 8.5% → 8.4%); Regal 1997–2017 with
-  facelift 2014 (→ 27,255, 8.2%); Tucson 2005–21 with facelifts 2009/2014/2019
-  (→ 26,697, 8.0%); Sportage 2005–22 with facelifts 2009/2014/2020 (→ 26,154,
-  7.9%); Spectra 2000–03/2005–09 with facelift 2007 (→ 25,644, 7.7%);
-  Legacy 1995–2004/2010–14 with facelifts 2003/2013 (→ 25,116, 7.6%); MKZ
-  2007–20 with new break 2013 and facelifts 2010/2017 (→ 24,609, 7.4%).
+- §18 (owner: "start the next parts block"): Forte 2010–13, Regal
+  1997–2004/2011–17, Tucson 2005–21, Sportage 2005–22, Spectra
+  2000–03/2005–09, Legacy 1995–2004/2010–14, MKZ 2007–20, Elantra 2001–06,
+  in measured order. Generations and facelifts were researched with cited
+  sources first. Generic-only 28,344 (8.5%) → 24,111 (7.3%). New breaks:
+  MKZ generation 2013; facelifts for Regal, Tucson, Sportage, Spectra,
+  Legacy, MKZ, Elantra 2004. No car lost or changed an existing part.
 
 ## How to measure
 
@@ -87,10 +87,10 @@ The generic-only count re-matches every distinct year/make/model in
 
 ## Next
 
-1. Next block by generic-only cars: Kia Forte (582), Buick Regal (576),
-   Hyundai Tucson (564), Kia Sportage (550), Kia Spectra (548), Subaru
-   Legacy (538), Lincoln MKZ (507), Hyundai Elantra (498, the years outside
-   the §2–10 rows).
+1. Next block by generic-only cars: Mitsubishi Galant (493), Pontiac Grand
+   Am (486), Kia Sorento (463), Hyundai Santa Fe (414), Lincoln MKX (413),
+   Ford Five Hundred (409), Kia Optima (396), VW CC (396). Research
+   generations and facelifts with sources first, as in §18.
 2. Facelifts: research and add `FACELIFT_BREAKS` for the next models by
    cars (Grand Caravan, Odyssey, Expedition, Town & Country, Silverado, Ram,
    BMW 3, Maxima, Ranger, Suburban, Traverse, Pathfinder). The rule: a cited
