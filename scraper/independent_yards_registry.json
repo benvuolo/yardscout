@@ -2884,6 +2884,31 @@
           "ario_slug": "harolds-auto-parts-u-pull-it"
         }
       ]
+    },
+    {
+      "name": "U-Pull and Save - Mason (vehicle purchasing only)",
+      "status": "retired",
+      "platform": "same Schram Nuxt site as U-Pull and Save Pontiac (store 110)",
+      "website": "https://www.u-pullandsave.com",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Re-checked 2026-11-04 after the Geofabrik coverage sweep listed it as tier B. Not a self-service lot: the site's store list says 'U-Pull And Save Mason ... Vehicle Purchasing Only, 1325 N. Cedar, Mason MI 48854', and /api/vehicles/recent/110 returns 0 vehicles. Listed here only so the sweep stops re-listing it. The Pontiac yard is live (UPAS adapter)."
+      },
+      "locations": [
+        {
+          "name": "U-Pull and Save - Mason",
+          "city": "Mason",
+          "state": "MI",
+          "lat": 42.6197,
+          "lng": -84.5005,
+          "address": "1325 N. Cedar, Mason, MI 48854"
+        }
+      ]
     }
   ]
 }
