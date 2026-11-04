@@ -1,4 +1,6 @@
-# Monthly (and on demand): find self-service yards we don't track yet
+# Monthly (and on demand): find self-service yards we don't track yet.
+# OSM discovery downloads Geofabrik state extracts one at a time and filters
+# them with osmium-tool (each file deleted before the next state).
 # (scraper/coverage_sweep.py → scraper/coverage_sweep.md / .json) and commit
 # the report. Read-only toward the yards: robots.txt respected, honest
 # YardScout user agent, one page per site plus at most one inventory page.
@@ -29,6 +31,11 @@ on:
       budget_min:
         description: "Time budget in minutes (the job times out at 90)"
         default: "70"
+      osm_source:
+        description: "OSM discovery source: geofabrik (state extracts + osmium) or overpass"
+        type: choice
+        options: [geofabrik, overpass]
+        default: geofabrik
 
 permissions:
   contents: write
@@ -47,7 +54,13 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install requests beautifulsoup4 rich cryptography
-      - name: Overpass diagnostics (never fails the job)
+      - name: Install osmium-tool (Geofabrik extracts are filtered locally)
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q osmium-tool
+          osmium --version | head -1
+          df -h "$RUNNER_TEMP" /tmp | sed 's/^/disk: /'
+      - name: Overpass diagnostics (overpass source only; never fails the job)
+        if: ${{ github.event.inputs.osm_source == 'overpass' }}
         continue-on-error: true
         timeout-minutes: 5
         run: python scraper/coverage_sweep.py --diagnose
@@ -56,7 +69,8 @@ jobs:
           python scraper/coverage_sweep.py --budget-min "${{ github.event.inputs.budget_min || '70' }}" \
             --max-sites "${{ github.event.inputs.max_sites || '400' }}" \
             ${{ github.event.inputs.osm == 'false' && '--no-osm' || '' }} \
-            ${{ (github.event.inputs.osm_pending == 'true' || github.event.schedule == '17 11 * * 1') && '--osm-pending' || '' }}
+            ${{ (github.event.inputs.osm_pending == 'true' || github.event.schedule == '17 11 * * 1') && '--osm-pending' || '' }} \
+            --osm-source "${{ github.event.inputs.osm_source || 'geofabrik' }}"
           { echo "## Coverage sweep"; sed -n '1,/^## /p' scraper/coverage_sweep.md | sed '$d'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Commit the report
         run: |

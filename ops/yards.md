@@ -111,6 +111,36 @@ Third fix (unconfirmed live):
 - **Stop rule:** if the diagnostics show the servers refuse runner IPs
   outright, the hub takes it to the owner. Nothing will work around it.
 
+Fourth run (41868290780, on 56fae4b): the diagnostics showed the runners are
+**not refused**; the public servers are just overloaded. overpass-api.de took
+35.8 s to answer a 1-element bbox query and its /api/status timed out. kumi
+and private.coffee timed out on both checks. Then AL, AK and AZ failed again,
+and 0 states were covered.
+
+Fourth fix: discovery now uses **Geofabrik state extracts**
+(`fetch_osm_geofabrik`, the default; `--osm-source overpass` keeps the old
+path).
+- One sequential download per state from
+  `download.geofabrik.de/north-america/us/<slug>-latest.osm.pbf`, with the
+  honest UA, 5 s between states and one retry after 429/503.
+- Slugs and sizes are from Geofabrik's index page (2026-11-04): 21 MB (DE) to
+  1.2 GB (CA), about 11.6 GB for all 50. The page states no download limits
+  beyond the ODbL licence.
+- Each file is filtered locally with `osmium tags-filter` (the same tags as
+  `OSM_TAG_CLAUSES`) and `osmium export -f geojsonseq -a type,id`. The name
+  filter and centroids are done in Python, one row per OSM id.
+- The pbf and intermediates are deleted before the next state. A download is
+  refused when free disk is under 2.5× its size, and short reads fail.
+- Same `osm_pending` contract (unqueried first, failed last) and deadline.
+- The workflow installs osmium-tool via apt and logs `df` before the sweep.
+  The Overpass diagnostics step runs only with `osm_source=overpass`.
+- Tests: mocked downloads and osmium cover the retry, disk guard, short read,
+  cleanup, a missing osmium, the deadline and de-duplication across states.
+  A real osmium 1.16 test on an inline .osm fixture (skipped where osmium is
+  absent) caught that osmium exports a closed area way twice, as a LineString
+  and a Polygon. That is now de-duped, and the closing point is no longer
+  counted in centroids.
+
 Tests: `scraper/test_coverage_sweep.py` all pass offline, with mocked cases for
 the query shape, fast failover on 502, the stop when all servers fail, the
 retry pass, 429 handling, the merge, and the `--osm-pending` paths. Live

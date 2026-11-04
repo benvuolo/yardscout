@@ -6,10 +6,12 @@ Read-only. Writes a report (scraper/coverage_sweep.md + .json) and never
 touches the scan config — adding a yard stays a reviewed change.
 
 Where candidates come from
-  1. OpenStreetMap (Overpass API): every US place whose name looks like a
-     self-service yard ("U-Pull-It", "Pick-A-Part", "Pull-N-Save", "self
-     serve auto"...), with its website tag when mapped. Pick-your-own farms
-     and the like are filtered out.
+  1. OpenStreetMap: every US car-parts / scrap-yard / industrial place whose
+     name looks like a self-service yard ("U-Pull-It", "Pick-A-Part",
+     "Pull-N-Save", "self serve auto"...), with its website tag when mapped.
+     Pick-your-own farms and the like are filtered out. Source: Geofabrik
+     state extracts filtered with osmium-tool (default), or the Overpass API
+     (--osm-source overpass).
   2. Ario (autorecycler.io): the platform's own yard table. An org that is
      live on Ario's backend and not in ARIO_CHAINS is a near-free add.
 
@@ -38,6 +40,7 @@ Tiers in the report
 Run
   python scraper/coverage_sweep.py                    # full sweep
   python scraper/coverage_sweep.py --no-osm           # Ario only
+  python scraper/coverage_sweep.py --osm-pending      # OSM-only pass over osm_pending
   python scraper/coverage_sweep.py --max-sites 50     # cap website checks
 """
 
@@ -48,7 +51,10 @@ import functools
 import json
 import math
 import re
+import shutil
+import subprocess
 import sys
+import tempfile
 import time
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
@@ -509,6 +515,197 @@ def fetch_osm(session, states=US_STATES, pause: float = 3.0, deadline: float | N
     return out, "; ".join(msg)
 
 
+# ---------------------------------------------------------------- Geofabrik
+# Bulk OSM discovery. The public Overpass servers were too overloaded for a
+# 50-state pass (run 41868290780: a 1-element bbox query took 36 s on
+# overpass-api.de, both mirrors timed out). Geofabrik's per-state extracts are
+# the OSM-recommended route for bulk data: one sequential download per state
+# (honest UA, a pause between states), filtered locally with osmium-tool,
+# file deleted before the next state. Sizes 2026-11-04: 21 MB (DE) to
+# 1.2 GB (CA), ~11.6 GB for all 50. Slugs from
+# https://download.geofabrik.de/north-america/us.html (lower-case state name,
+# spaces as hyphens).
+GEOFABRIK_URL = "https://download.geofabrik.de/north-america/us/{slug}-latest.osm.pbf"
+GEOFABRIK_PAUSE_SEC = 5.0
+GEOFABRIK_TIMEOUT = (20, 120)     # connect, per-read
+GEOFABRIK_RETRY_SLEEP = 60        # once, after 429/503
+OSMIUM_TIMEOUT = 900              # per osmium call; CA is the largest
+DISK_HEADROOM = 2.5               # need this many times the file size free (pbf + filtered + export)
+
+
+def geofabrik_slug(state: str) -> str:
+    return STATE_NAMES[state].replace(" ", "-")
+
+
+def osmium_filter_args() -> list[str]:
+    """`osmium tags-filter` expressions for OSM_TAG_CLAUSES, one per key."""
+    by_key: dict[str, list[str]] = {}
+    for k, v in OSM_TAG_CLAUSES:
+        by_key.setdefault(k, []).append(v)
+    return [f"nwr/{k}={','.join(vs)}" for k, vs in by_key.items()]
+
+
+def _centroid(geom: dict) -> tuple[float | None, float | None]:
+    """Mean of the outer coordinates — fine for a yard-sized polygon."""
+    t, c = geom.get("type"), geom.get("coordinates")
+    pts: list = []
+    if t == "Point":
+        pts = [c]
+    elif t == "LineString":
+        pts = c
+    elif t == "Polygon":
+        pts = c[0] if c else []
+    elif t == "MultiPolygon":
+        pts = [p for poly in c for p in (poly[0] if poly else [])]
+    pts = [p for p in pts if isinstance(p, (list, tuple)) and len(p) >= 2]
+    if len(pts) > 2 and pts[0] == pts[-1]:
+        pts = pts[:-1]  # a closed ring repeats its first point; don't count it twice
+    if not pts:
+        return None, None
+    return round(sum(p[1] for p in pts) / len(pts), 6), round(sum(p[0] for p in pts) / len(pts), 6)
+
+
+def parse_osmium_geojsonseq(text: str) -> list[Candidate]:
+    """`osmium export -f geojsonseq -a type,id` output -> yard candidates
+    (same name filter as the Overpass path). osmium emits a closed area way
+    twice (LineString and Polygon, checked with osmium 1.16); one row per
+    OSM id is kept."""
+    out: list[Candidate] = []
+    ids: set[str] = set()
+    for line in text.splitlines():
+        line = line.strip().lstrip("\x1e")
+        if not line:
+            continue
+        try:
+            f = json.loads(line)
+        except ValueError:
+            continue
+        tags = dict(f.get("properties") or {})
+        name = str(tags.get("name") or "")
+        if not looks_like_yard(name, tags):
+            continue
+        lat, lng = _centroid(f.get("geometry") or {})
+        site = tags.get("website") or tags.get("contact:website") or tags.get("url") or ""
+        if site and not str(site).startswith("http"):
+            site = "http://" + site
+        oid = f"{tags.get('@type', '')}/{tags.get('@id', '')}"
+        if oid != "/" and oid in ids:
+            continue
+        ids.add(oid)
+        out.append(Candidate(name=name, city=str(tags.get("addr:city", "")), state=_state_of(tags),
+                             lat=lat, lng=lng, website=str(site), source="osm", extra={"osm": oid}))
+    return out
+
+
+def _download(session, url: str, dest: Path, sleep) -> str:
+    """Stream one extract to disk. '' on success, else a reason."""
+    for attempt in (1, 2):
+        try:
+            with session.get(url, stream=True, timeout=GEOFABRIK_TIMEOUT, headers={"User-Agent": UA}) as r:
+                if r.status_code in (429, 503) and attempt == 1:
+                    sleep(GEOFABRIK_RETRY_SLEEP)
+                    continue
+                if r.status_code != 200:
+                    return f"HTTP {r.status_code}"
+                size = int(r.headers.get("Content-Length") or 0)
+                free = shutil.disk_usage(dest.parent).free
+                if size and free < size * DISK_HEADROOM:
+                    return f"disk: {free // 2**20} MB free, need {int(size * DISK_HEADROOM) // 2**20} MB"
+                with open(dest, "wb") as fh:
+                    for chunk in r.iter_content(chunk_size=1 << 20):
+                        fh.write(chunk)
+                if size and dest.stat().st_size != size:
+                    return f"short read {dest.stat().st_size} of {size}"
+                return ""
+        except Exception as e:
+            return type(e).__name__
+    return "HTTP 429/503 twice"
+
+
+def _osmium_extract(pbf: Path, work: Path, run=subprocess.run) -> tuple[list[Candidate] | None, str]:
+    filt, geo = work / "filtered.osm.pbf", work / "filtered.geojsonseq"
+    try:
+        r1 = run(["osmium", "tags-filter", str(pbf), *osmium_filter_args(), "-o", str(filt), "--overwrite"],
+                 capture_output=True, text=True, timeout=OSMIUM_TIMEOUT)
+        if r1.returncode:
+            return None, f"osmium tags-filter: {(r1.stderr or '').strip()[:120]}"
+        r2 = run(["osmium", "export", str(filt), "-f", "geojsonseq", "-a", "type,id", "-o", str(geo), "--overwrite"],
+                 capture_output=True, text=True, timeout=OSMIUM_TIMEOUT)
+        if r2.returncode:
+            return None, f"osmium export: {(r2.stderr or '').strip()[:120]}"
+        return parse_osmium_geojsonseq(geo.read_text() if geo.exists() else ""), ""
+    except FileNotFoundError:
+        return None, "osmium-tool not installed"
+    except subprocess.TimeoutExpired:
+        return None, "osmium timed out"
+    finally:
+        for f in (filt, geo):
+            f.unlink(missing_ok=True)
+
+
+def fetch_osm_geofabrik(session, states=US_STATES, pause: float = GEOFABRIK_PAUSE_SEC, deadline: float | None = None,
+                        report: dict | None = None, clock=time.time, sleep=time.sleep, run=subprocess.run,
+                        workdir: Path | None = None) -> tuple[list[Candidate], str]:
+    """One state at a time: download the extract, filter with osmium, delete.
+    Same contract as fetch_osm: note + report["pending"] (unqueried first,
+    failed last) + report["covered"]. Results de-duped by OSM id across
+    states (extracts overlap slightly at borders); a row whose addr:state
+    names another state is left to that state."""
+    out: list[Candidate] = []
+    seen: set[str] = set()
+    failed: list[str] = []
+    skipped: list[str] = []
+    tmp = None
+    if workdir is None:
+        tmp = tempfile.TemporaryDirectory(prefix="osm-")
+        workdir = Path(tmp.name)
+    try:
+        for i, st in enumerate(states):
+            if deadline and clock() > deadline:
+                skipped = list(states[i:])
+                break
+            pbf = workdir / f"{geofabrik_slug(st)}.osm.pbf"
+            t0 = clock()
+            why = _download(session, GEOFABRIK_URL.format(slug=geofabrik_slug(st)), pbf, sleep)
+            got = None
+            if not why:
+                got, why = _osmium_extract(pbf, workdir, run=run)
+            pbf.unlink(missing_ok=True)
+            if got is None:
+                failed.append(st)
+                print(f"  osm {st}: failed ({why})", flush=True)
+                if why == "osmium-tool not installed":
+                    skipped = list(states[i + 1:])
+                    break
+            else:
+                kept = []
+                for c in got:
+                    if c.state and c.state != st:
+                        continue
+                    oid = c.extra.get("osm") or f"{_norm(c.name)}/{c.lat}/{c.lng}"
+                    if oid in seen:
+                        continue
+                    seen.add(oid)
+                    c.state = c.state or st
+                    kept.append(c)
+                out += kept
+                print(f"  osm {st}: {len(kept)} (geofabrik, {clock() - t0:.0f}s)", flush=True)
+            if pause and i + 1 < len(states):
+                sleep(pause)
+    finally:
+        if tmp is not None:
+            tmp.cleanup()
+    msg = []
+    if failed:
+        msg.append(f"Geofabrik/osmium failed for {', '.join(failed)}")
+    if skipped:
+        msg.append(f"not queried: {', '.join(skipped)}")
+    if report is not None:
+        report["pending"] = skipped + failed
+        report["covered"] = [st for st in states if st not in failed + skipped]
+    return out, "; ".join(msg)
+
+
 DIAG_QUERY = '[out:json][timeout:25];node["shop"="car_parts"](61.0,-150.5,61.4,-149.5);out 1;'  # Anchorage
 
 
@@ -819,12 +1016,19 @@ def merge_report(prev: dict, cands: list[Candidate], skipped: dict, notes: list[
     return merged, sk, out["notes"], out
 
 
+def _osm_fn(source: str):
+    """Looked up at call time so tests can patch either fetcher."""
+    return fetch_osm_geofabrik if source == "geofabrik" else fetch_osm
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Find self-service yards we don't track yet.")
     ap.add_argument("--no-osm", action="store_true")
     ap.add_argument("--no-ario", action="store_true")
     ap.add_argument("--max-sites", type=int, default=400)
     ap.add_argument("--budget-min", type=float, default=70, help="total time budget; the report is always written")
+    ap.add_argument("--osm-source", choices=("geofabrik", "overpass"), default="geofabrik",
+                    help="OSM discovery: Geofabrik extracts + osmium (default) or the Overpass API")
     ap.add_argument("--diagnose", action="store_true",
                     help="log each Overpass server's /api/status and a tiny query, then exit 0")
     ap.add_argument("--osm-pending", action="store_true",
@@ -851,7 +1055,7 @@ def main(argv=None) -> int:
             print("coverage sweep: osm_pending is empty, nothing to do")
             return 0
         print(f"OSM-only pass over {len(states)} pending state(s): {', '.join(states)}", flush=True)
-        osm_fetch = functools.partial(fetch_osm, states=states, report=osm_report)
+        osm_fetch = functools.partial(_osm_fn(args.osm_source), states=states, report=osm_report)
         cands, skipped, notes = run(session, use_osm=True, use_ario=False, max_sites=args.max_sites,
                                     budget_min=args.budget_min, osm_fetch=osm_fetch, osm_share=OSM_ONLY_SHARE)
         when = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -860,7 +1064,7 @@ def main(argv=None) -> int:
         OUT_MD.write_text(render_md(cands, skipped, notes, when))
         OUT_JSON.write_text(json.dumps(doc, indent=1) + "\n")
     else:
-        osm_fetch = functools.partial(fetch_osm, states=osm_state_order(), report=osm_report)
+        osm_fetch = functools.partial(_osm_fn(args.osm_source), states=osm_state_order(), report=osm_report)
         cands, skipped, notes = run(session, use_osm=not args.no_osm, use_ario=not args.no_ario,
                                     max_sites=args.max_sites, budget_min=args.budget_min, osm_fetch=osm_fetch)
         when = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

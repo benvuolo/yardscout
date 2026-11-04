@@ -405,17 +405,17 @@ with tempfile.TemporaryDirectory() as td:
           rc == 0 and "nothing to do" in buf.getvalue() and not cs.OUT_MD.exists(), buf.getvalue())
     # pending AL: a fake fetch covers it, the report is merged
     cs.OUT_JSON.write_text(_json.dumps(prev))
-    real = cs.fetch_osm
+    real = cs.fetch_osm_geofabrik
     def fake_fetch(session, states=(), report=None, deadline=None, **kw):
         report["pending"] = [s for s in states if s != "AL"]
         return [cs.Candidate(name="Fresh U-Pull", lat=33.0, lng=-86.0, source="osm", tier="E", state="AL",
                              extra={"note": "no site"})], ""
-    cs.fetch_osm = fake_fetch
+    cs.fetch_osm_geofabrik = fake_fetch
     try:
         with contextlib.redirect_stdout(io.StringIO()):
             rc2 = cs.main(["--osm-pending", "--max-sites", "0", "--budget-min", "1"])
     finally:
-        cs.fetch_osm = real
+        cs.fetch_osm_geofabrik = real
     d2 = _json.loads(cs.OUT_JSON.read_text())
     check("--osm-pending: queries only pending states, merges, shrinks osm_pending",
           rc2 == 0 and d2["osm_pending"] == ["AK", "TX"] and {c["name"] for c in d2["candidates"]} >= {"Old Ario Yard", "Fresh U-Pull"},
@@ -430,6 +430,175 @@ weekly = [c for c in crons if c.split()[2] == "*" and c.split()[4] != "*"]
 check("workflow: one weekly cron, and the Sweep step maps exactly it to --osm-pending",
       len(weekly) == 1 and f"github.event.schedule == '{weekly[0]}') && '--osm-pending'" in wf
       and any(c.split()[2] != "*" for c in crons), str(crons))
+
+# --- Geofabrik + osmium (default OSM source since 2026-11-04) ---------------
+RS = "\x1e"
+FIXTURE = "\n".join([
+    RS + _json.dumps({"type": "Feature", "geometry": {"type": "Point", "coordinates": [-86.8, 33.5]},
+                      "properties": {"@type": "node", "@id": 11, "name": "Bham U-Pull-It", "shop": "car_parts",
+                                     "website": "bhamupull.example"}}),
+    RS + _json.dumps({"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[-87.0, 32.0], [-86.0, 32.0],
+                                                                                         [-86.0, 33.0], [-87.0, 33.0]]]},
+                      "properties": {"@type": "way", "@id": 22, "name": "Pick-A-Part South", "landuse": "industrial",
+                                     "addr:state": "AL"}}),
+    RS + _json.dumps({"type": "Feature", "geometry": {"type": "Point", "coordinates": [-85.0, 31.0]},
+                      "properties": {"@type": "node", "@id": 33, "name": "Joe's Tire Shop", "shop": "car_repair"}}),
+    RS + _json.dumps({"type": "Feature", "geometry": {"type": "Point", "coordinates": [-84.9, 32.4]},
+                      "properties": {"@type": "node", "@id": 44, "name": "Columbus U-Pull", "shop": "car_parts",
+                                     "addr:state": "Georgia"}}),
+    "not json",
+])
+pc0 = cs.parse_osmium_geojsonseq(FIXTURE)
+check("geofabrik parse: name filter, centroids, ids, website, addr:state",
+      [(c.name, c.extra["osm"], c.state) for c in pc0] == [("Bham U-Pull-It", "node/11", ""), ("Pick-A-Part South", "way/22", "AL"),
+                                                          ("Columbus U-Pull", "node/44", "GA")]
+      and (pc0[0].lat, pc0[0].lng) == (33.5, -86.8) and (pc0[1].lat, pc0[1].lng) == (32.5, -86.5)
+      and pc0[0].website == "http://bhamupull.example", str([(c.name, c.lat, c.lng, c.state) for c in pc0]))
+check("geofabrik: osmium filter mirrors OSM_TAG_CLAUSES",
+      sorted(f"{k}={v}" for a in cs.osmium_filter_args() for k, vs in [a[4:].split("=")] for v in vs.split(","))
+      == sorted(f"{k}={v}" for k, v in cs.OSM_TAG_CLAUSES) and all(a.startswith("nwr/") for a in cs.osmium_filter_args()))
+check("geofabrik: slugs match the index page form", cs.geofabrik_slug("NY") == "new-york" and cs.geofabrik_slug("WV") == "west-virginia"
+      and cs.GEOFABRIK_URL.format(slug="georgia") == "https://download.geofabrik.de/north-america/us/georgia-latest.osm.pbf")
+
+
+class StreamResp:
+    def __init__(self, status, body=b"", length=None):
+        self.status_code, self.body = status, body
+        self.headers = {"Content-Length": str(len(body) if length is None else length)}
+    def __enter__(self):
+        return self
+    def __exit__(self, *a):
+        return False
+    def iter_content(self, chunk_size=1):
+        for i in range(0, len(self.body), 4):
+            yield self.body[i:i + 4]
+
+
+class GeoSession:
+    def __init__(self, plan):
+        self.plan, self.gets = plan, []
+    def get(self, url, stream=False, timeout=None, headers=None):
+        self.gets.append((url, headers.get("User-Agent")))
+        r = self.plan.get(url.split("/us/")[1].split("-latest")[0], StreamResp(404))
+        if isinstance(r, list):
+            r = r.pop(0) if len(r) > 1 else r[0]
+        if isinstance(r, Exception):
+            raise r
+        return r
+
+
+class FakeOsmium:
+    """Plays osmium: tags-filter writes a marker file, export writes the
+    fixture for whichever state's pbf it was given."""
+    def __init__(self, per_slug, fail_slug=None):
+        self.per_slug, self.fail_slug, self.calls, self.present = per_slug, fail_slug, [], []
+    def __call__(self, cmd, capture_output=True, text=True, timeout=None):
+        self.calls.append(cmd[:2])
+        class R:
+            returncode, stderr = 0, ""
+        work = Path(cmd[cmd.index("-o") + 1]).parent
+        self.present.append(sorted(p.name for p in work.iterdir()))
+        if cmd[1] == "tags-filter":
+            slug = Path(cmd[2]).name.split(".osm.pbf")[0]
+            if slug == self.fail_slug:
+                R.returncode, R.stderr = 1, "Error: corrupt pbf"
+                return R()
+            Path(cmd[cmd.index("-o") + 1]).write_text(slug)
+        else:
+            slug = Path(cmd[2]).read_text()
+            Path(cmd[cmd.index("-o") + 1]).write_text(self.per_slug.get(slug, ""))
+        return R()
+
+
+with tempfile.TemporaryDirectory() as td:
+    wd = Path(td)
+    gs = GeoSession({"alabama": StreamResp(200, b"PBFDATA-AL"), "georgia": StreamResp(200, b"PBFDATA-GA"),
+                     "alaska": [StreamResp(503), StreamResp(200, b"PBFDATA-AK")], "arizona": StreamResp(200, b"PBF")})
+    osm_fake = FakeOsmium({"alabama": FIXTURE, "georgia": FIXTURE, "alaska": ""}, fail_slug="arizona")
+    slept.clear()
+    repg = {}
+    with contextlib.redirect_stdout(io.StringIO()) as gbuf:
+        gg, gerr = cs.fetch_osm_geofabrik(gs, states=("AL", "GA", "AK", "AZ"), pause=0, report=repg,
+                                          sleep=nosleep, run=osm_fake, workdir=wd)
+    check("geofabrik: one sequential download per state, honest UA, 503 retried once after a pause",
+          [u.split("/us/")[1] for u, _ in gs.gets] == ["alabama-latest.osm.pbf", "georgia-latest.osm.pbf", "alaska-latest.osm.pbf",
+                                                        "alaska-latest.osm.pbf", "arizona-latest.osm.pbf"]
+          and {ua for _, ua in gs.gets} == {cs.UA} and cs.GEOFABRIK_RETRY_SLEEP in slept, str(gs.gets))
+    check("geofabrik: rows kept once across states; addr:state decides (Columbus -> GA, not AL)",
+          sorted((c.name, c.state) for c in gg) == [("Bham U-Pull-It", "AL"), ("Columbus U-Pull", "GA"), ("Pick-A-Part South", "AL")],
+          str([(c.name, c.state) for c in gg]))
+    check("geofabrik: osmium failure -> state failed (last in pending), others covered",
+          repg["pending"] == ["AZ"] and repg["covered"] == ["AL", "GA", "AK"] and "Geofabrik/osmium failed for AZ" in gerr,
+          f"{repg} {gerr}")
+    check("geofabrik: each state's pbf deleted before the next download; workdir empty at the end",
+          all(sum(1 for n in names if n.endswith("-latest.osm.pbf") or (n.endswith(".osm.pbf") and n != "filtered.osm.pbf")) <= 1
+              for names in osm_fake.present) and list(wd.iterdir()) == [], f"{osm_fake.present} {list(wd.iterdir())}")
+    # disk guard: Content-Length larger than free space / headroom -> refused before writing
+    big = StreamResp(200, b"x", length=10 ** 15)
+    repd = {}
+    with contextlib.redirect_stdout(io.StringIO()):
+        gd, gderr = cs.fetch_osm_geofabrik(GeoSession({"california": big}), states=("CA",), pause=0, report=repd,
+                                           sleep=nosleep, run=FakeOsmium({}), workdir=wd)
+    check("geofabrik: refuses a download the runner disk can't hold", gd == [] and repd["pending"] == ["CA"]
+          and list(wd.iterdir()) == [], gderr)
+    # short read is a failure, not a silent partial file
+    with contextlib.redirect_stdout(io.StringIO()) as sbuf:
+        cs.fetch_osm_geofabrik(GeoSession({"texas": StreamResp(200, b"abc", length=10)}), states=("TX",), pause=0,
+                               sleep=nosleep, run=FakeOsmium({}), workdir=wd)
+    check("geofabrik: short read fails the state", "short read" in sbuf.getvalue(), sbuf.getvalue())
+    # osmium missing: stop at once, everything pending
+    def no_osmium(*a, **k):
+        raise FileNotFoundError("osmium")
+    repn = {}
+    with contextlib.redirect_stdout(io.StringIO()):
+        cs.fetch_osm_geofabrik(GeoSession({s_: StreamResp(200, b"p") for s_ in ("alabama", "alaska")}), states=("AL", "AK", "AZ"),
+                               pause=0, report=repn, sleep=nosleep, run=no_osmium, workdir=wd)
+    check("geofabrik: osmium-tool missing -> stop, all states pending", sorted(repn["pending"]) == ["AK", "AL", "AZ"], str(repn))
+    # deadline
+    tg = [0.0]
+    class SlowGeo(GeoSession):
+        def get(self, *a, **k):
+            tg[0] += 100
+            return super().get(*a, **k)
+    repdl = {}
+    with contextlib.redirect_stdout(io.StringIO()):
+        cs.fetch_osm_geofabrik(SlowGeo({"rhode-island": StreamResp(200, b"p"), "delaware": StreamResp(200, b"p")}),
+                               states=("RI", "DE", "CT"), pause=0, deadline=150, report=repdl, clock=lambda: tg[0],
+                               sleep=nosleep, run=FakeOsmium({}), workdir=wd)
+    check("geofabrik: deadline -> remaining states pending", repdl["pending"] == ["CT"] and repdl["covered"] == ["RI", "DE"], str(repdl))
+check("main: geofabrik is the default OSM source", cs._osm_fn("geofabrik") is cs.fetch_osm_geofabrik
+      and cs._osm_fn("overpass") is cs.fetch_osm)
+_osmium = cs.shutil.which("osmium")
+TINY_OSM = """<?xml version='1.0' encoding='UTF-8'?>
+<osm version="0.6" generator="test">
+  <!-- sorted like a Geofabrik extract: nodes by id, then ways -->
+  <node id="1" version="1" lat="33.50" lon="-86.80"><tag k="shop" v="car_parts"/><tag k="name" v="Bham U-Pull-It"/></node>
+  <node id="2" version="1" lat="32.0" lon="-87.0"/>
+  <node id="3" version="1" lat="32.0" lon="-86.0"/>
+  <node id="4" version="1" lat="33.0" lon="-86.0"/>
+  <node id="5" version="1" lat="33.0" lon="-87.0"/>
+  <node id="6" version="1" lat="31.0" lon="-85.0"><tag k="shop" v="car_repair"/><tag k="name" v="Joe's Tire Shop"/></node>
+  <node id="7" version="1" lat="31.5" lon="-85.5"><tag k="amenity" v="cafe"/><tag k="name" v="U-Pull Cafe"/></node>
+  <way id="10" version="1"><nd ref="2"/><nd ref="3"/><nd ref="4"/><nd ref="5"/><nd ref="2"/>
+    <tag k="landuse" v="industrial"/><tag k="name" v="Pick-A-Part South"/></way>
+</osm>
+"""
+if _osmium:
+    with tempfile.TemporaryDirectory() as td:
+        wd = Path(td)
+        (wd / "tiny.osm").write_text(TINY_OSM)
+        cs.subprocess.run(["osmium", "cat", str(wd / "tiny.osm"), "-o", str(wd / "tiny.osm.pbf")], check=True,
+                          capture_output=True)
+        real_rows, real_err = cs._osmium_extract(wd / "tiny.osm.pbf", wd)
+        check("real osmium: tags-filter + export + name filter -> two yards, once each (osmium emits a closed way twice)",
+              real_err == "" and sorted((c.name, c.extra["osm"]) for c in real_rows)
+              == [("Bham U-Pull-It", "node/1"), ("Pick-A-Part South", "way/10")]
+              and [(c.lat, c.lng) for c in real_rows if c.name.startswith("Pick")] == [(32.5, -86.5)],
+              f"{real_err} {[(c.name, c.extra, c.lat, c.lng) for c in real_rows]}")
+        check("real osmium: intermediate files removed", sorted(p.name for p in wd.iterdir()) == ["tiny.osm", "tiny.osm.pbf"],
+              str(list(wd.iterdir())))
+else:
+    print("INFO  real osmium-tool not installed here; CI installs it via apt (real-osmium test skipped)")
 
 print("\n" + ("ALL PASS" if not failures else f"{len(failures)} FAILURES: {failures}"))
 sys.exit(1 if failures else 0)
