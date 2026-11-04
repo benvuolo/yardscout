@@ -79,8 +79,10 @@ Second fix (this commit, unconfirmed live):
   the pending states with 75% of the budget, checks the new sites, merges into
   the existing report and shrinks `osm_pending`. Dispatch it repeatedly until
   the list is empty. With nothing pending it exits without changes.
-- No weekly schedule was added. That is the owner's call: add a cron line to
-  coverage-sweep.yml if wanted.
+- Weekly schedule (owner-requested 2026-11-04): `17 11 * * 1` (Mondays,
+  11:17 UTC) runs the `--osm-pending` pass. It exits with no commit when
+  `osm_pending` is empty. The monthly full sweep (`43 9 3 * *`) is unchanged
+  and shares the concurrency group, so the two never overlap.
 
 Tests: `scraper/test_coverage_sweep.py` all pass offline, with mocked cases for
 the query shape, fast failover on 502, the stop when all servers fail, the

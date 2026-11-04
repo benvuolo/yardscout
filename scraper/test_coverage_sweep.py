@@ -337,5 +337,14 @@ with tempfile.TemporaryDirectory() as td:
           f"{d2['osm_pending']} {[c['name'] for c in d2['candidates']]}")
     cs.OUT_MD, cs.OUT_JSON = saved
 
+# Workflow: the weekly cron must be the one that switches on --osm-pending.
+import re as _re  # noqa: E402
+wf = (Path(__file__).resolve().parent.parent / ".github" / "workflows" / "coverage-sweep.yml").read_text()
+crons = _re.findall(r'cron: "([^"]+)"', wf)
+weekly = [c for c in crons if c.split()[2] == "*" and c.split()[4] != "*"]
+check("workflow: one weekly cron, and the Sweep step maps exactly it to --osm-pending",
+      len(weekly) == 1 and f"github.event.schedule == '{weekly[0]}') && '--osm-pending'" in wf
+      and any(c.split()[2] != "*" for c in crons), str(crons))
+
 print("\n" + ("ALL PASS" if not failures else f"{len(failures)} FAILURES: {failures}"))
 sys.exit(1 if failures else 0)

@@ -3,14 +3,16 @@
 # the report. Read-only toward the yards: robots.txt respected, honest
 # YardScout user agent, one page per site plus at most one inventory page.
 # Yards that block us are listed for outreach; nothing works around a block.
-# Dispatch with osm_pending=true for an OSM-only pass over the states the last
-# run could not cover (scraper/coverage_sweep.json osm_pending); repeat until
-# it is empty. No extra schedule is set: the owner decides whether to add one.
+# Weekly (owner-requested 2026-11-04), and on dispatch with osm_pending=true:
+# an OSM-only pass over the states the last run could not cover
+# (scraper/coverage_sweep.json osm_pending). It exits with no commit once the
+# list is empty, so most weeks it costs about a minute.
 name: Coverage sweep
 
 on:
   schedule:
-    - cron: "43 9 3 * *"   # 3rd of each month, 09:43 UTC
+    - cron: "43 9 3 * *"   # 3rd of each month, 09:43 UTC: full sweep
+    - cron: "17 11 * * 1"  # Mondays, 11:17 UTC: OSM-only pass over osm_pending (the Sweep step matches this exact string)
   workflow_dispatch:
     inputs:
       max_sites:
@@ -50,7 +52,7 @@ jobs:
           python scraper/coverage_sweep.py --budget-min "${{ github.event.inputs.budget_min || '70' }}" \
             --max-sites "${{ github.event.inputs.max_sites || '400' }}" \
             ${{ github.event.inputs.osm == 'false' && '--no-osm' || '' }} \
-            ${{ github.event.inputs.osm_pending == 'true' && '--osm-pending' || '' }}
+            ${{ (github.event.inputs.osm_pending == 'true' || github.event.schedule == '17 11 * * 1') && '--osm-pending' || '' }}
           { echo "## Coverage sweep"; sed -n '1,/^## /p' scraper/coverage_sweep.md | sed '$d'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Commit the report
         run: |
