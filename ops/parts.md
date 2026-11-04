@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–18 done)
+# Parts workstream — status (updated 2026-11-04, §13–18 done, §19 in progress)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -65,6 +65,9 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   sources first. Generic-only 28,344 (8.5%) → 24,111 (7.3%). New breaks:
   MKZ generation 2013; facelifts for Regal, Tucson, Sportage, Spectra,
   Legacy, MKZ, Elantra 2004. No car lost or changed an existing part.
+
+- §19 (owner: "start the next parts block"; in progress): Galant done
+  (generic-only 24,111 → 23,618, 7.3% → 7.1%).
 
 ## How to measure
 

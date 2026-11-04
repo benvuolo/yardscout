@@ -205,7 +205,9 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        # §16
        "explorer 1991-2001", "compass", "kia rio", "century", "aveo", "passat", "lucerne",
        # §18
-       "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "elantra"},
+       "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "elantra",
+       # §19
+       "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -372,9 +374,16 @@ check("§18 Elantra XD: mech 2001-06; lamps 2001-03 (2004 facelift cut); hatch l
       and x05["Hatchback Tail Lights (pair, uncracked)"]["fits"] == "2004–2006" and x05["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin"
       and x09["Headlights (clear, non-hazed)"]["fits"] == "2007–2010")
 
+# §19
+m01, m08 = parts(2001, "Mitsubishi", "Galant", FWD), parts(2008, "Mitsubishi", "Galant", FWD)
+check("§19 Galant: mech per generation, A/C plain; tail lights cut at the 2002/2007/2009 facelifts",
+      MECH3 <= set(m01) and MECH3 <= set(m08) and m08["A/C Compressor (clutch spins free)"].get("trim_status") is None
+      and m01["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1999–2003" and m01["Tail Lights (pair, uncracked)"]["fits"] == "1999–2001"
+      and m08["Tail Lights (pair, uncracked)"]["fits"] == "2007–2008")
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

@@ -4626,6 +4626,14 @@ _gap_extend("elantra", parts=[
 
 # ---- end of §18 block
 
+# ---- 2026-11 §19: next measured block (PARTS_GAPS §19). Same basis as §18.
+# Mitsubishi Galant (493 cars generic-only; 8th gen 1999-2003, 9th gen
+# 2004-12). Facelifts 2002/2007/2009 in FACELIFT_BREAKS. A/C standard on
+# the base DE/ES (Consumer Guide); sunroof an ES/LS/GTS option by year.
+_gap_extend("galant", parts=_per_gen([(1999, 2003), (2004, 2012)], [*_GAP_MECH, _SUNROOF]))
+
+# ---- end of §19 block
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
@@ -6232,6 +6240,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "spectra": [2007],
     "legacy": [2003, 2013],
     "mkz": [2010, 2017],
+    "galant": [2002, 2007, 2009],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

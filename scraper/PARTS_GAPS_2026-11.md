@@ -844,3 +844,50 @@ unchanged at 12,301 (3.7%).
 
 Leftovers in these models: Regal 1988–96 and 2018–19 (67), Spectra 2004
 (35), Tucson 2022–23 (4), Sportage 2023 (3).
+
+## 19. Next measured block (2026-11-04, owner: "start the next parts block")
+
+Same basis and method as §18: generations and facelifts were researched
+first with cited sources. FETCHED means the page was read (Wikipedia via
+raw wikitext, Consumer Guide used reviews, cars.com "What's New",
+manufacturer releases); SNIPPET means search text only. Before:
+generic-only 24,111 (7.3%) of 332,476 cars, no entry 12,301 (3.7%).
+
+| Order | Model | Generic-only cars |
+|---|---|---|
+| 1 | Mitsubishi Galant 1999–2012 | 493 |
+| 2 | Pontiac Grand Am 1996–2005 | 486 |
+| 3 | Kia Sorento 2003–09 | 463 |
+| 4 | Hyundai Santa Fe 2001–06 | 414 |
+| 5 | Lincoln MKX 2007–18 | 413 |
+| 6 | Ford Five Hundred 2005–07 | 409 |
+| 7 | Kia Optima 2001–10 | 396 |
+| 8 | VW CC 2009–17 | 396 |
+
+### 19.1 Mitsubishi Galant 1999–2003, 2004–2012
+
+Basis: en.wikipedia.org/wiki/Mitsubishi_Galant; consumerguide.com/used/1999-03-mitsubishi-galant
+and /used/2004-12-mitsubishi-galant; cars.com "What's New" 2002, 2007, 2009;
+auto123 2009 launch (all fetched).
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 2002: "revised front and rear styling" (CG); "a new grille", "New aero
+    bumpers and fresh taillights" (cars.com).
+  - 2007: "revised nose and tail appearance" (CG); "front and rear fascias
+    include a single-piece grille" (cars.com).
+  - 2009: "freshened styling" (CG); "new grille, taillights … a new bumper
+    in back" (auto123).
+- **Lamp rows re-cut:** the existing Galant headlight and tail-light rows
+  are now cut at those years.
+- **A/C:** standard on the DE (1999–2008) and the ES (2009–12) per CG
+  equipment lists.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1999–03, 2004–12 | — | Every car. |
+| Sunroof | 1999–03, 2004–12 | option | Optional or standard by trim and year per CG (ES/LS/GTS/SE/Ralliart). |
+
+Left out, no stated basis: Ralliart-specific rows (2007–09; trim parts not
+researched), seats and wheels.
+
+Result: Galant generic-only 493 → 0. Lots: generic-only 24,111 (7.3%) →
+23,618 (7.1%).
