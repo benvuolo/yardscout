@@ -117,7 +117,7 @@ check("Lincoln LS does not steal Lexus LS", disp(2004, "Lexus", "LS") == ["Lexus
 check("'Dodge 1500 Pickup' routes to the Ram entry", any("Ram" in d for d in disp(2005, "Dodge", "1500 Pickup")))
 check("Grand Caravan still matches (shared entry kept both keywords)", disp(2010, "Dodge", "Grand Caravan") == ["Dodge Grand Caravan"] and disp(2008, "Chrysler", "Caravan") == ["Dodge Grand Caravan"], str(disp(2010, "Dodge", "Grand Caravan")))
 check("1997 Sentra now matches with lamp rows", "Headlights (clear, non-hazed)" in names(1997, "Nissan", "Sentra", FWD))
-check("'Chevrolet Classic' routes to Malibu", disp(2005, "Chevrolet", "Classic") == ["Chevrolet Malibu"])
+check("'Chevrolet Classic' routes to its own N-body entry (§20), not the Epsilon Malibu", disp(2005, "Chevrolet", "Classic") == ["Chevrolet Classic (N-body Malibu)"])
 check("'Chevrolet K2500' routes to the C/K entry", any("C/K" in d for d in disp(1995, "Chevrolet", "K2500")))
 check("Saturn SL2 and Mazda 5 spellings match", disp(1999, "Saturn", "SL2") == ["Saturn SL"] and disp(2010, "Mazda", "Mazda5") == ["Mazda Mazda5"] and disp(2010, "Mazda", "Mazda 5") == ["Mazda Mazda5"])
 check("every breadth key exists and carries the evergreens", all(k in js.UNOBTANIUM_DB and any("Alternator" in q["name"] for q in js.UNOBTANIUM_DB[k]["top_parts"]) for k in js._GAP_GENERIC_KEYS))
@@ -207,7 +207,9 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        # §18
        "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "elantra",
        # §19
-       "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc"},
+       "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc",
+       # §20
+       "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "chevrolet classic"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -426,9 +428,23 @@ check("§19 CC: mech 2009-17; 4Motion diff gated 2009-16; lamps cut at the 2013 
       and "4Motion Rear Differential (match part #)" not in names(2017, "Volkswagen", "CC", AWD)
       and w11["Tail Lights (pair, uncracked)"]["fits"] == "2009–2012" and w15["Tail Lights (pair, uncracked)"]["fits"] == "2013–2017")
 
+# §20
+c99, c02 = parts(1999, "Chevrolet", "Malibu", FWD), parts(2002, "Chevrolet", "Malibu", FWD)
+check("§20 Malibu 1997-2003: mech rows (A/C plain); sunroof/spoiler 'if equipped' 2000-03 only; 2005 keeps the Epsilon rows",
+      MECH3 <= set(c99) and c99["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1997–2003"
+      and c02["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed" and "LS Rear Spoiler" not in c99
+      and parts(2005, "Chevrolet", "Malibu", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2004–2007")
+
+cl = js.match_vehicle(2005, "Chevrolet", "Classic")
+check("§20 Chevrolet Classic 2005: own N-body entry, rows bounded 2004-05, evergreens kept, no Epsilon Malibu rows",
+      [m["display"] for m in cl] == ["Chevrolet Classic (N-body Malibu)"]
+      and parts(2005, "Chevrolet", "Classic")["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2004–2005"
+      and "Alternator (spin-test at yard)" in parts(2005, "Chevrolet", "Classic") and "Headlights (clear, non-hazed)" in parts(2005, "Chevrolet", "Classic")
+      and "MyLink / Infotainment Screen" not in parts(2005, "Chevrolet", "Classic"), str([m["display"] for m in cl]))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

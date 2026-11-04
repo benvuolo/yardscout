@@ -1103,3 +1103,55 @@ unchanged at 12,301 (3.7%).
   other offline scraper tests pass.
 
 Leftovers in these models: Optima 2006 (58).
+
+## 20. Next measured block (2026-11-04, owner: "start the next parts block")
+
+Same basis and method as §18/§19 (generations and facelifts researched
+first; FETCHED/SNIPPET as before). The §20 code sits just before
+`_apply_consensus_evergreens()`, because several of these entries are
+created by the §11 breadth pass after the §16–19 blocks. The Saturn Aura
+entry is created by the overlay, so its rows go in `parts_overlay.json`.
+Before: generic-only 20,699 (6.2%) of 332,476 cars, no entry 12,301 (3.7%).
+
+| Order | Model | Generic-only cars |
+|---|---|---|
+| 1 | Chevrolet Malibu 1997–2003 | 384 |
+| 2 | Mazda Tribute 2001–11 | 379 |
+| 3 | Chevrolet Uplander 2005–09 | 376 |
+| 4 | Mazda5 2006–15 | 364 |
+| 5 | Lexus ES 1992–2006 | 361 |
+| 6 | Saturn Aura 2007–09 | 353 |
+| 7 | Ford Windstar 1995–2003 | 347 |
+| 8 | GMC Savana 1996–2019 | 343 |
+
+### 20.1 Chevrolet Malibu 1997–2003 (N-body), and the Chevrolet Classic fix
+
+Basis: consumerguide.com/used/1997-03-chevrolet-malibu; en.wikipedia.org/wiki/Chevrolet_Malibu
+(raw; fetched).
+- **Facelift 2000 (added to `FACELIFT_BREAKS`):** "Malibu earned a modest
+  facelift this season" (CG); "For 2000, the grille was restyled with a
+  chrome center bar" (Wikipedia).
+- **A/C:** standard ("Standard equipment included … air conditioning", CG).
+- **LS options:** a power sunroof (in the 2000 option table) and, from
+  2000, a rear spoiler. Sunroof availability before 2000 is unconfirmed.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1997–2003 | — | Every car. |
+| Sunroof, LS rear spoiler | 2000–03 | option | |
+
+**Fix: Chevrolet Classic 2004–05 (87 cars).** Wikipedia lists the N-body
+as "1997–2003 (Chevrolet Malibu) / 2004–2005 (Chevrolet Classic)". The §11
+breadth pass had routed "Chevrolet Classic" to the malibu entry, so those
+cars were shown the 2004–07 Epsilon Malibu's rows: a false fitment claim
+from this workstream's own earlier change.
+- The Classic now has its own entry ("Chevrolet Classic (N-body Malibu)",
+  2004–05). It carries copies of the Malibu's lamp and mirror rows, the
+  mechanical pulls, the sunroof and spoiler options, and the evergreens,
+  all bounded 2004–05.
+- The malibu entry no longer claims the Classic spelling.
+- The §11 test that asserted the old routing now asserts the new entry.
+- No interchange with any Malibu year is claimed.
+
+Result: Malibu 1997–2003 generic-only 384 → 0. Lots: generic-only 20,699
+(6.2%) → 20,315 (6.1%).

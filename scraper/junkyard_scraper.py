@@ -5858,6 +5858,41 @@ _gap_extend("volkswagen cc", parts=[
     ]),
 ])
 
+# ---- 2026-11 §20 (PARTS_GAPS §20). Placed here because several entries
+# (breadth-pass) are created after the §16-19 blocks.
+# Chevrolet Malibu 1997-2003 (N-body; 384 cars generic-only). Facelift 2000
+# (grille) in FACELIFT_BREAKS. A/C standard; power sunroof and a rear
+# spoiler were LS options in 2000-03 (sunroof before 2000 unconfirmed).
+_gap_extend("malibu", parts=[
+    *_per_gen([(1997, 2003)], [*_GAP_MECH]),
+    *_per_gen([(2000, 2003)], [
+        _SUNROOF,
+        {"name": "LS Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 110, "cost": 26, "option": True},
+    ]),
+])
+
+# "Chevrolet Classic" (2004-05) is the N-body Malibu continued for fleets
+# (Wikipedia Chevrolet_Malibu: "2004–2005 (Chevrolet Classic)"). The §11
+# breadth pass routed it to the malibu entry, whose 2004+ rows are the
+# Epsilon car's, a false fitment claim. It gets its own entry with the
+# N-body rows, bounded 2004-05 (no claim of interchange with any Malibu).
+UNOBTANIUM_DB["malibu"]["match"] = ["malibu"]
+UNOBTANIUM_DB["chevrolet classic"] = {
+    "display": "Chevrolet Classic (N-body Malibu)", "make": "Chevrolet",
+    "match": ["chevrolet classic"], "year_range": (2004, 2005),
+    "top_parts": [
+        *[{**p, "yr_min": 2004, "yr_max": 2005} for p in UNOBTANIUM_DB["malibu"]["top_parts"]
+          if p["name"] in ("Headlights (clear, non-hazed)", "Side Mirrors (power, pair)", "Tail Lights (pair, uncracked)")
+          and p.get("yr_min", 1997) <= 2003 and "option" not in p],
+        *_per_gen([(2004, 2005)], [*_GAP_MECH, _SUNROOF,
+                                   {"name": "LS Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 110, "cost": 26, "option": True}]),
+    ],
+}
+_GAP_BLOCK_IDS.update((id(p), p) for p in UNOBTANIUM_DB["chevrolet classic"]["top_parts"])
+_EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, "chevrolet classic")
+
+# ---- end of §20 block
+
 _apply_consensus_evergreens()
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
@@ -6285,7 +6320,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "altima": [2005, 2010, 2016],
     "camry": [2000, 2005, 2010, 2015],
     "focus": [2005, 2015],           # 2008-11 had no facelift
-    "malibu": [2006, 2014, 2019],    # 2008-12 had no facelift
+    "malibu": [2000, 2006, 2014, 2019],
     "accord": [2006, 2011],
     "fusion": [2010, 2017, 2019],
     "escape": [2005, 2017],

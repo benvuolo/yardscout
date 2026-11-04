@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–19 done)
+# Parts workstream — status (updated 2026-11-04, §13–19 done, §20 in progress)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -74,6 +74,10 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   Santa Fe, MKX, Optima, CC. No car lost or changed an existing part.
 - Breadth-pass entries (mkz, mkx, volkswagen cc …) are created after the
   §16–19 blocks; their rows go just before `_apply_consensus_evergreens()`.
+
+- §20 (owner: "start the next parts block"; in progress): Malibu 1997–2003
+  done (→ 20,315, 6.1%). Fixed: "Chevrolet Classic" 2004–05 (N-body) had
+  been routed to the Epsilon Malibu rows in §11; it now has its own entry.
 
 ## How to measure
 
