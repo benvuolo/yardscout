@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–18 done, §19 in progress)
+# Parts workstream — status (updated 2026-11-04, §13–19 done)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -66,12 +66,14 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   MKZ generation 2013; facelifts for Regal, Tucson, Sportage, Spectra,
   Legacy, MKZ, Elantra 2004. No car lost or changed an existing part.
 
-- §19 (owner: "start the next parts block"; in progress): Galant done
-  (generic-only 24,111 → 23,618, 7.3% → 7.1%); Grand Am 1996–2005 (→ 23,132,
-  7.0%); Sorento 2003–09 with facelift 2007 (→ 22,669, 6.8%);
-  Santa Fe 2001–06 with facelift 2005 (→ 22,255, 6.7%); MKX 2007–18 with new
-  break 2016 and facelift 2011 (→ 21,842, 6.6%); Five Hundred 2005–07
-  (→ 21,433, 6.4%); Optima 2001–05/2007–10 with facelifts (→ 21,095, 6.3%).
+- §19 (owner: "start the next parts block"): Galant 1999–2012, Grand Am
+  1996–2005, Sorento 2003–09, Santa Fe 2001–06, MKX 2007–18, Five Hundred
+  2005–07, Optima 2001–05/2007–10, CC 2009–17, in measured order, each
+  researched with cited sources first. Generic-only 24,111 (7.3%) → 20,699
+  (6.2%). New breaks: MKX generation 2016; facelifts for Galant, Sorento,
+  Santa Fe, MKX, Optima, CC. No car lost or changed an existing part.
+- Breadth-pass entries (mkz, mkx, volkswagen cc …) are created after the
+  §16–19 blocks; their rows go just before `_apply_consensus_evergreens()`.
 
 ## How to measure
 
@@ -94,10 +96,10 @@ The generic-only count re-matches every distinct year/make/model in
 
 ## Next
 
-1. Next block by generic-only cars: Mitsubishi Galant (493), Pontiac Grand
-   Am (486), Kia Sorento (463), Hyundai Santa Fe (414), Lincoln MKX (413),
-   Ford Five Hundred (409), Kia Optima (396), VW CC (396). Research
-   generations and facelifts with sources first, as in §18.
+1. Next block by generic-only cars: Chevrolet Malibu (384, the years
+   outside the §2–10 rows), Mazda Tribute (379), Chevrolet Uplander (376),
+   Mazda5 (364), Lexus ES (361), Saturn Aura (353), Ford Windstar (347), GMC
+   Savana (343). Research generations and facelifts with sources first.
 2. Facelifts: research and add `FACELIFT_BREAKS` for the next models by
    cars (Grand Caravan, Odyssey, Expedition, Town & Country, Silverado, Ram,
    BMW 3, Maxima, Ranger, Suburban, Traverse, Pathfinder). The rule: a cited

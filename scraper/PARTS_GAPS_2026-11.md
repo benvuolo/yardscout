@@ -1060,3 +1060,46 @@ cut at 2003/04/05, and its 2005–06 piece is left as is (flagged here).
 
 Result: Optima 2001–10 generic-only 396 → 58 (all 2006). Lots:
 generic-only 21,433 (6.4%) → 21,095 (6.3%).
+
+### 19.8 VW CC 2009–2017
+
+Basis: en.wikipedia.org/wiki/Volkswagen_CC; cars.com "2013 Volkswagen CC at
+the 2011 LA Auto Show" and "2009 Volkswagen CC: What's New";
+consumerguide.com/used/2009-14-volkswagen-cc; carvana.com 2017 CC
+(fetched). The US name "CC" (not "Passat CC") rests on search text only;
+the entry already matches both "volkswagen cc" and "vw cc".
+- **Facelift 2013 (added to `FACELIFT_BREAKS`):** "Newly standard bi-xenon
+  headlights … in new surrounds", "the grille and front bumper have a more
+  horizontal, angular appearance", "new rectangular LED taillights"
+  (cars.com).
+- **4Motion:** VR6 only, 2009–16. It was dropped for 2017 (Carvana).
+- **Sunroof:** standard on most trims, but not the 2009 4-cylinder Sport.
+  The sources disagree on pop-up vs panoramic.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2009–17 | — | Every car. |
+| A/C compressor | 2009–17 | option | Standard fitment not confirmed by a source (conservative). |
+| 4Motion rear differential | 2009–16 | drive: awd/4wd | Same band and cost basis as the Passat row (§16.7). |
+| Sunroof | 2009–17 | option | Not on every trim. |
+
+The existing CC lamp rows are now cut at 2013. Left out, no stated basis:
+DSG units (transmission), seats and wheels.
+
+Result: CC generic-only 396 → 0. Lots: generic-only 21,095 (6.3%) → 20,699
+(6.2%).
+
+### 19.9 Block totals
+
+Generic-only **24,111 (7.3%) → 20,699 (6.2%)**: 3,412 cars moved. No entry
+unchanged at 12,301 (3.7%).
+- **New `GENERATION_BREAKS`:** mkx 2016.
+- **New `FACELIFT_BREAKS`:** galant 2002/2007/2009, sorento 2007, santa fe
+  2005, mkx 2011, optima 2003/2004/2005/2009, volkswagen cc 2013.
+- **Compared with the commit before §19:** none of the 12,726 distinct
+  year/make/model combinations on the lots lost a part or had an existing
+  part's band or gate status change, and `sharedWith` notes are identical.
+- **Tests:** `test_interchange.py`, `test_consensus_parts.py` and the
+  other offline scraper tests pass.
+
+Leftovers in these models: Optima 2006 (58).

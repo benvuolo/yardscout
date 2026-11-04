@@ -419,6 +419,13 @@ check("§19 Optima: mech per generation, none for 2006; tails cut at the MS (200
       and "Fuel Pump Module (in-tank, test before listing)" not in names(2006, "Kia", "Optima", FWD)
       and o02["Tail Lights (pair, uncracked)"]["fits"] == "2001–2002" and o08["Tail Lights (pair, uncracked)"]["fits"] == "2007–2008")
 
+w11, w15 = parts(2011, "Volkswagen", "CC", AWD), parts(2015, "Volkswagen", "CC", FWD)
+check("§19 CC: mech 2009-17; 4Motion diff gated 2009-16; lamps cut at the 2013 facelift",
+      MECH3 <= set(w11) and w11["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2009–2017"
+      and w11["4Motion Rear Differential (match part #)"]["trim_status"] == "vin" and "4Motion Rear Differential (match part #)" not in w15
+      and "4Motion Rear Differential (match part #)" not in names(2017, "Volkswagen", "CC", AWD)
+      and w11["Tail Lights (pair, uncracked)"]["fits"] == "2009–2012" and w15["Tail Lights (pair, uncracked)"]["fits"] == "2013–2017")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

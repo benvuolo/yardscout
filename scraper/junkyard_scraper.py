@@ -5847,6 +5847,17 @@ _gap_extend("mkx", parts=[
     *_per_gen([(2016, 2018)], [{"name": "Revel Amp + Speakers", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 24, "option": True}]),
 ])
 
+# §19.8: volkswagen cc is a breadth-pass entry too.
+# VW CC 2009-2017 (396 cars generic-only; one generation, facelift 2013 in
+# FACELIFT_BREAKS). 4Motion was VR6-only, 2009-16. Sunroof standard on most
+# trims but not all (option-flagged). A/C standard not confirmed (option).
+_gap_extend("volkswagen cc", parts=[
+    *_per_gen([(2009, 2017)], [_GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}, _SUNROOF]),
+    *_per_gen([(2009, 2016)], [
+        {"name": "4Motion Rear Differential (match part #)", "rarity": "Rare", "low": 150, "high": 400, "cost": 36, "drive": ["awd", "4wd"]},
+    ]),
+])
+
 _apply_consensus_evergreens()
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
@@ -6306,6 +6317,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "sorento": [2007],
     "santa fe": [2005],
     "mkx": [2011],
+    "volkswagen cc": [2013],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
