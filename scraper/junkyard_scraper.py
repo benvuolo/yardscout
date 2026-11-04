@@ -4646,6 +4646,15 @@ _gap_extend("grand am", parts=[
     ]),
 ])
 
+# Kia Sorento 2003-2009 (BL; 463 cars generic-only). Facelift 2007 in
+# FACELIFT_BREAKS. A/C standard 2003-06; the 2007 Base made it an option.
+# The entry had no tail-light row. Sunroof standard EX 2003-06, option after.
+_gap_extend("sorento", parts=[
+    *_per_gen([(2003, 2009)], [_GAP_PUMP, _GAP_FAN, _TAILS, _SUNROOF]),
+    *_per_gen([(2003, 2006)], [_GAP_AC]),
+    *_per_gen([(2007, 2009)], [{**_GAP_AC, "option": True}]),
+])
+
 # ---- end of §19 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
@@ -6255,6 +6264,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "legacy": [2003, 2013],
     "mkz": [2010, 2017],
     "galant": [2002, 2007, 2009],
+    "sorento": [2007],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

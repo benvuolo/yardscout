@@ -920,3 +920,33 @@ the 3.4 V6 intake gaskets (engine).
 
 Result: Grand Am generic-only 486 → 0. Lots: generic-only 23,618 (7.1%) →
 23,132 (7.0%).
+
+### 19.3 Kia Sorento 2003–2009 (BL)
+
+Basis: en.wikipedia.org/wiki/Kia_Sorento; consumerguide.com/used/2003-09-kia-sorento;
+autotrader.ca/research/kia/sorento/2007; cars.com "What's New" 2007 and 2009
+(fetched).
+- **Facelift 2007 (added to `FACELIFT_BREAKS`):** "a new grille, front and
+  rear bumpers, head- and taillamps" (autotrader.ca); "Projector beam
+  headlamps were added, along with new tail lamps" (Wikipedia).
+- **2009 not used:** CG says "slightly freshened", while cars.com says "no
+  significant changes". The sources disagree, so there is no cut.
+- **A/C:** standard on the LX 2003–07. The 2007 Base had it as an option,
+  and it was standard again from 2008. The row is plain 2003–06 and
+  option-flagged 2007–09.
+- **Sunroof:** standard on the EX 2003–06, optional from 2007.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2003–09 | — | Every truck. |
+| A/C compressor | 2003–06 | — | Standard. |
+| A/C compressor | 2007–09 | option | Optional on the 2007 Base. |
+| Tail lights | 2003–06, 2007–09 | — | The entry had none; cut at the facelift. |
+| Sunroof | 2003–09 | option | |
+
+Left out, no stated basis: 4WD rows. Part-time 4WD and full-time
+Torque-on-Demand were both offered, but the sources disagree on trims, and
+no part-level basis was found for a shift motor or transfer unit.
+
+Result: Sorento 2003–09 generic-only 463 → 0. Lots: generic-only 23,132
+(7.0%) → 22,669 (6.8%).

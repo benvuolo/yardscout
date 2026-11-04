@@ -389,6 +389,12 @@ check("§19 Grand Am: mech per generation; A/C plain 1997/2003, 'if equipped' 19
       and parts(2003, "Pontiac", "Grand Am GT")["GT Tail Lights (pair, uncracked)"]["trim_status"] == "listing"
       and "GT Tail Lights (pair, uncracked)" not in a97)
 
+r05, r08 = parts(2005, "Kia", "Sorento", FWD), parts(2008, "Kia", "Sorento", FWD)
+check("§19 Sorento: mech 2003-09; tails cut at the 2007 facelift; A/C plain 2005, 'if equipped' 2008",
+      MECH3 <= set(r05) and MECH3 <= set(r08) and r05["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2003–2009"
+      and r05["Tail Lights (pair, uncracked)"]["fits"] == "2003–2006" and r08["Tail Lights (pair, uncracked)"]["fits"] == "2007–2009"
+      and r05["A/C Compressor (clutch spins free)"].get("trim_status") is None and r08["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

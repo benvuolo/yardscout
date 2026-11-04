@@ -68,7 +68,7 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 
 - §19 (owner: "start the next parts block"; in progress): Galant done
   (generic-only 24,111 → 23,618, 7.3% → 7.1%); Grand Am 1996–2005 (→ 23,132,
-  7.0%).
+  7.0%); Sorento 2003–09 with facelift 2007 (→ 22,669, 6.8%).
 
 ## How to measure
 
