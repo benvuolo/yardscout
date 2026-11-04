@@ -219,46 +219,51 @@ PAP_SITE = "https://www.pullapart.com"
 PAP_TOKEN_URL = f"{PAP_SITE}/api/internal/gettoken/"
 PAP_INVENTORY_API = "https://inventoryservice.pullapart.com"
 PAP_ENTERPRISE_API = "https://enterpriseservice.pullapart.com"
-# Their location API has no coordinates; these are geocoded from each yard's zip
-# (zip centroids, often several km off) except where marked "address" — those
-# were re-pinned 2026-11-04 from the yard's street address in the Location API,
-# checked against the named OSM yard feature.
+# Their location API has no coordinates. Until 2026-11-04 these were zip
+# centroids (0.5-6 km off). All 35 are now geocoded from the street address in
+# the Location API (address1/city/state/zip), checked where possible:
+#   census+nominatim — US Census geocoder and Nominatim agree within 500 m
+#   census+OSM yard  — Census match within 200 m of a named OSM yard feature
+#   census           — Census exact-address match only (no second source found;
+#                      Nominatim missed or matched only the street)
+#   address: ...      — re-pinned against the named OSM yard feature
+# A new location from the API needs an entry here (no pin = no map position).
 PAP_COORDS = {
-    3: (33.6369, -84.3371),    # Atlanta South, GA 30288
-    4: (33.9381, -84.1972),    # Atlanta North, GA 30071
-    5: (33.5594, -86.8153),    # Birmingham, AL 35207
-    6: (36.1546, -86.8602),    # Nashville, TN 37209
-    7: (35.2836, -80.7638),    # Charlotte, NC 28213
-    8: (38.1593, -85.778),     # Louisville, KY 40214
-    9: (33.4601, -81.973),     # Augusta, GA 30901
-    10: (36.032, -83.8021),    # Knoxville, TN 37924
-    11: (41.4342, -81.8044),   # Cleveland West, OH 44135
-    12: (30.2077, -92.0656),   # Lafayette, LA 70506
-    13: (32.3257, -86.3104),   # Montgomery, AL 36105
-    14: (29.8725, -90.0673),   # New Orleans West, LA 70058
+    3: (33.6668, -84.3291),     # Atlanta South — 1540 Henrico Road (census+nominatim)
+    4: (33.9677, -84.1754),     # Atlanta North — 4416 Buford Hwy (census+nominatim)
+    5: (33.5495, -86.7961),     # Birmingham — 3520 27th Avenue North (census+nominatim)
+    6: (36.1712, -86.8737),     # Nashville — 7114 Centennial Blvd. (census+nominatim)
+    7: (35.268, -80.7682),      # Charlotte — 6024 N. Tryon St. (census+nominatim)
+    8: (38.1504, -85.7516),     # Louisville — 6825 Recovery Road (census+nominatim)
+    9: (33.4639, -81.9415),     # Augusta — 327 SandBar Ferry Rd (census)
+    10: (36.0258, -83.85),      # Knoxville — 5800 Rutledge Pike (census+nominatim)
+    11: (41.4335, -81.7799),    # Cleveland West — 4433 West 130th Street (census+nominatim)
+    12: (30.2284, -92.0748),    # Lafayette — 207 Galbert Road (census+nominatim)
+    13: (32.3135, -86.2962),    # Montgomery — 4526 Norman Bridge Rd (census+nominatim)
+    14: (29.8425, -90.0544),    # New Orleans West — 4401 Peters Road (census)
     15: (32.2296, -90.2197),   # Jackson, MS — address: 4000 I-55 S; OSM way/1167186887 "Pull-A-Part"
-    16: (30.4848, -91.0689),   # Baton Rouge, LA 70814
+    16: (30.4775, -91.1098),    # Baton Rouge — 8056 Greenwell Springs Rd (census)
     17: (35.0766, -89.9648),   # Memphis, TN — address: 2955 Farrisview Blvd; OSM way/1558209627
-    18: (39.8082, -86.1014),   # Indianapolis, IN 46218
-    19: (36.144, -80.2376),    # Winston-Salem, NC 27105
-    20: (34.0635, -81.0265),   # Columbia, SC 29203
-    21: (33.7356, -84.1009),   # Atlanta East, GA 30058
-    24: (40.7598, -81.35),     # Canton, OH 44707
-    25: (41.0479, -81.4916),   # Akron, OH 44306
-    27: (32.1707, -110.9719),  # Tucson, AZ 85714
+    18: (39.8033, -86.0979),    # Indianapolis — 2505 Producers Lane (census)
+    19: (36.1624, -80.2557),    # Winston-Salem — 4125 N. Patterson Ave (census+nominatim)
+    20: (34.0598, -81.0443),    # Columbia — 5702 Monticello Road (census+nominatim)
+    21: (33.7358, -84.1216),    # Atlanta East — 6513 Marshall Boulevard (census+OSM yard)
+    24: (40.7825, -81.35),      # Canton — 1551 Belden Avenue (census+nominatim)
+    25: (41.037, -81.482),      # Akron — 1250 Kelly Ave (census+nominatim)
+    27: (32.1716, -110.9066),   # Tucson — 4151 East Michigan St. (census)
     29: (31.8023, -106.2744),  # El Paso, TX — address: 12000 Montana Ave; OSM relation/21425296
-    30: (27.7762, -97.4271),   # Corpus Christi, TX 78405
-    33: (26.6644, -80.1741),   # West Palm Beach, FL 33411
-    34: (28.3932, -81.3622),   # Orlando, FL 32824
-    35: (39.2003, -84.4859),   # Cincinnati, OH 45216
-    36: (35.0448, -106.6893),  # Albuquerque, NM 87105
-    37: (33.4564, -112.1284),  # Phoenix, AZ 85009
-    38: (38.7902, -104.8199),  # Colorado Springs, CO 80906
+    30: (27.7856, -97.4647),    # Corpus Christi — 5609 Agnes St (census+nominatim)
+    33: (26.686, -80.1743),     # West Palm Beach — 551 Benoist Farms Rd (census)
+    34: (28.402, -81.3629),     # Orlando — 1157 Jetstream Drive (census)
+    35: (39.1959, -84.4874),    # Cincinnati — 426 West Seymour Ave. (census+nominatim)
+    36: (35.0058, -106.6504),   # Albuquerque — 4560 Broadway Blvd SE (census+nominatim)
+    37: (33.4367, -112.1131),   # Phoenix — 2501 West Buckeye Rd (census+nominatim)
+    38: (38.776, -104.7811),    # Colorado Springs — 3745 So. Highway 85-87 (census)
     39: (39.7381, -104.7732),  # Aurora, CO — address: 1370 N Zeno St (OSM still names it U Pull & Pay)
-    40: (39.838, -104.9988),   # Denver, CO 80221
-    41: (29.6223, -95.26),     # Houston, TX 77075
-    42: (40.4598, -79.8224),   # Pittsburgh, PA 15235
-    43: (26.6466, -81.8429),   # Fort Myers, FL 33916
+    40: (39.818, -104.9912),    # Denver — 390 West 66th Way (census+nominatim)
+    41: (29.6309, -95.2485),    # Houston — 9445 Tavenor Lane (census+nominatim)
+    42: (40.459, -79.8685),     # Pittsburgh — 250 Eastgate Drive (census)
+    43: (26.6227, -81.8555),    # Fort Myers — 2804 Hanson Street (census+nominatim)
 }
 
 # Part descriptions worth carrying into per-yard price files (keyword-mapped by

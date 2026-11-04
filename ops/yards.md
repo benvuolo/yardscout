@@ -193,10 +193,21 @@ Sweep follow-ups (mine):
   Ave exactly. The OSM "Pick-n-Pull" way/318885801 9 km away is a different
   or stale feature. The app shows the new pins after the next scan
   rewrites docs/data/junkyards.json.
-- **Not done:** the other 31 `PAP_COORDS` entries are still ZIP centroids
-  and probably off by a few km too. Pull-A-Part's Location API has every
-  street address, so the same re-pin is mechanical (geocode, check against
-  OSM).
+- **Done (owner-requested, 2026-11-04):** the other 31 `PAP_COORDS` entries
+  were ZIP centroids 0.5–6 km off. They are now geocoded from the street
+  addresses in Pull-A-Part's Location API:
+  - 21 confirmed by the US Census geocoder and Nominatim agreeing within
+    500 m.
+  - 1 (Atlanta East) confirmed by a named OSM "Pull-A-Part Atlanta East"
+    yard 170 m from the Census point.
+  - 9 are Census exact-address matches only (Augusta, New Orleans West
+    (Harvey LA), Baton Rouge, Indianapolis, Tucson, West Palm Beach, Orlando,
+    Colorado Springs, Pittsburgh). For these Nominatim found nothing, the
+    wrong place, or only the street, and pullapart.com's pages give only
+    "directions to <address>" links.
+  - Each entry's comment names its basis. Largest moves: Tucson 6.1 km,
+    Albuquerque 5.6 km.
+  - The app shows the new pins after the next scan.
 
 ## Next
 
