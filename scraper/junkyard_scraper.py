@@ -6004,6 +6004,11 @@ _gap_extend("spark", parts=[
     *_per_gen([(2016, 2022)], [{**_GAP_AC, "option": True}]),
 ])
 
+# Nissan Juke 2011-2017 (F15, one US generation; 330 cars generic-only).
+# Facelift 2015 in FACELIFT_BREAKS. A/C standard (manual on S, automatic on
+# SV/SL); AWD available on every grade; moonroof on SV/SL only.
+_gap_extend("juke", parts=_per_gen([(2011, 2017)], [*_GAP_MECH, _AWD_COUPLING, _SUNROOF]))
+
 # ---- end of §21 block
 
 _apply_consensus_evergreens()
@@ -6476,6 +6481,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "windstar": [1998, 2001],
     "savana": [2003],
     "spark": [2019],
+    "juke": [2015],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

@@ -517,6 +517,12 @@ check("§21 Spark: rows per generation (new 2016 break); A/C plain 2014, 'if equ
       and k18["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and k18["Headlights (clear, non-hazed)"]["fits"] == "2016–2018"
       and js.match_vehicle(2015, "Chevrolet", "Spark EV") == [])
 
+j12, j16 = parts(2012, "Nissan", "Juke", AWD), parts(2016, "Nissan", "Juke", FWD)
+check("§21 Juke: mech 2011-17; AWD coupling gated; moonroof 'if equipped'; lamps cut at the 2015 facelift",
+      MECH3 <= set(j12) and j12["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2011–2017"
+      and j12["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in j16
+      and j16["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed" and j12["Tail Lights (pair, uncracked)"]["fits"] == "2011–2014")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

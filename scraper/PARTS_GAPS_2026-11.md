@@ -1487,3 +1487,29 @@ parts (no audited band).
 Result (same 333,449-car inventory): generic-only 17,262 (5.2%) → 16,935
 (5.1%); Spark generic-only → 0 except the 3 EVs, which now have no entry
 (no entry 12,359 → 12,362).
+
+### 21.4 Nissan Juke 2011–2017 (F15)
+
+Basis: WP Nissan_Juke; consumerguide.com/used/2011-14-nissan-juke; Nissan
+2015 Juke US press kit (usa.nissannews.com; fetched).
+- **Facelift 2015 (added to `FACELIFT_BREAKS`):** "projector beam headlights
+  and LED front Signature Accent Lamps"; "The grille incorporates the new
+  Nissan V-Motion look"; "revised boomerang taillights with LED accents"
+  (press kit). The existing Juke lamp rows are now cut at 2015.
+- **A/C:** standard (manual on S, automatic on SV/SL).
+- **AWD:** "Each grade level is available in All-Wheel Drive or Front-Wheel
+  Drive".
+- **Moonroof:** standard on SV 2011–14 and on SV/SL in 2015; not available
+  on S.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2011–17 | — | Every car. |
+| AWD rear differential / coupling | 2011–17 | drive: awd/4wd | Same band as the Rogue/Tucson rows. |
+| Sunroof | 2011–17 | option | Not on S; not VIN-decodable by trim here. |
+
+Left out, no stated basis: NISMO/NISMO RS parts (no audited band), the MR16
+turbo (engine), the CVT (transmission).
+
+Result (same inventory): generic-only 16,935 (5.1%) → 16,605 (5.0%). Juke
+330 → 0.

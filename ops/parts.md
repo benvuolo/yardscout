@@ -91,7 +91,7 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   Fiat 500 (→ 17,262 on the 333,449-car scan) plus a routing fix: 500L/500X
   get their own evergreen-only entries, the 500e an empty one (no card).
   Spark with new break 2016 and facelift 2019; Spark EV empty entry
-  (→ 16,935, 5.1%).
+  (→ 16,935, 5.1%); Juke with facelift 2015 (→ 16,605, 5.0%).
 
 ## How to measure
 
