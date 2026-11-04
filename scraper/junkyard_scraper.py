@@ -4429,6 +4429,18 @@ _gap_extend("focus", parts=[
     ]),
 ])
 
+# Ford Explorer 1991-2001 (1,173 cars generic-only; 1991-94, 1995-2001).
+# No radiator-fan row: these trucks use an engine-driven clutch fan. 4x4s
+# use an electric transfer-case shift motor (4WD/AWD decode confirms).
+_gap_extend("explorer 1991-2001", parts=_per_gen([(1991, 1994), (1995, 2001)], [
+    _GAP_PUMP,
+    {**_GAP_AC, "option": True},
+    {"name": "Transfer Case Shift Motor (match part #)", "rarity": "Rare", "low": 75, "high": 200, "cost": 10, "drive": ["4wd", "awd"]},
+    {"name": "Leather Power Driver Seat (Eddie Bauer/Limited)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
+    _SUNROOF,
+    {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+]))
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},

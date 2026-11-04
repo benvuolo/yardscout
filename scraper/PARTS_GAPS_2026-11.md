@@ -389,3 +389,20 @@ audio. The existing 2000–07 lamp rows were left as they are; they cross the
 
 Result: Focus 2000–07 generic-only 1,535 → 0. Lots: generic-only 35,451
 (10.6%) → 33,916 (10.2%).
+
+### 16.2 Ford Explorer 1991–2001 (1991–94, 1995–2001)
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module | 1991–94, 1995–01 | — | In-tank on every truck. |
+| A/C compressor | 1991–94, 1995–01 | option | Not confirmed standard on base XL trucks. |
+| Transfer case shift motor | 1991–94, 1995–01 | drive: 4wd/awd | Electric-shift 4x4 and the 1996+ AWD; a RWD decode excludes it. Same band as the Grand Cherokee row. |
+| Leather power driver seat (Eddie Bauer/Limited), sunroof, alloy wheels | 1991–94, 1995–01 | option | |
+
+Left out, no stated basis: a radiator-fan row (these trucks use an
+engine-driven clutch fan, not the electric assembly the row describes), the
+transfer case itself (a drivetrain gearbox, kept out with transmissions),
+Mach audio (offer years not confirmed), 2-door Sport body parts.
+
+Result: Explorer 1991–2001 generic-only 1,173 → 0. Lots: generic-only
+33,916 (10.2%) → 32,743 (9.8%).

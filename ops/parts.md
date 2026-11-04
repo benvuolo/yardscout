@@ -47,7 +47,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   no row on any GENERATION_BREAKS model crosses a break.
 
 - §16 (owner: "start the next parts block"; in progress): Focus 2000–07
-  done (generic-only 35,451 → 33,916, 10.6% → 10.2%).
+  done (generic-only 35,451 → 33,916, 10.6% → 10.2%); Explorer 1991–2001
+  (→ 32,743, 9.8%).
 
 ## How to measure
 

@@ -199,7 +199,9 @@ check("§14: registry covers the gap models (Altima, Camry, Malibu, RAV4, Soul .
 check("§14: only gap-block entries are registered (no id reuse leaks)",
       {r[0] for r in js._GAP_BLOCK_ROWS} <= {"altima", "camry", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra",
        "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "rogue", "cr-v", "rav4", "explorer 2011-2019", "wrx", "impreza", "mx-5",
-       "4runner 2003-2009", "4runner 2010-2024", "tacoma 2005-2015", "tacoma 2016-2024", "accent", "lesabre", "lacrosse", "soul"},
+       "4runner 2003-2009", "4runner 2010-2024", "tacoma 2005-2015", "tacoma 2016-2024", "accent", "lesabre", "lacrosse", "soul",
+       # §16
+       "explorer 1991-2001", "compass", "kia rio", "century", "aveo", "passat", "lucerne"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -237,6 +239,15 @@ check("§16 Focus SVT: seats listing-confirmed on 'Focus SVT', 'if equipped' on 
       parts(2003, "Ford", "Focus SVT")["SVT Front Seats (pair)"]["trim_status"] == "listing"
       and f03["SVT Front Seats (pair)"]["trim_status"] == "unconfirmed" and "SVT Front Seats (pair)" not in f06)
 check("§16 Focus 2010: still the 2008-11 rows, not the 2005-07 ones", parts(2010, "Ford", "Focus", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2008–2011")
+
+FOUR = {**SEDAN, "bodyClass": "Sport Utility Vehicle (SUV)/Multipurpose Vehicle (MPV)", "driveType": "4WD/4-Wheel Drive/4x4"}
+RWD = {**FOUR, "driveType": "RWD/Rear-Wheel Drive"}
+e93, e99 = parts(1993, "Ford", "Explorer", FOUR), parts(1999, "Ford", "Explorer", FOUR)
+check("§16 Explorer 1993/1999: pump in its generation, no electric-fan row", e93["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1991–1994"
+      and e99["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1995–2001" and "Radiator Fan Assembly" not in e99)
+check("§16 Explorer 1999: 4WD decode confirms the shift motor; RWD decode excludes it",
+      e99["Transfer Case Shift Motor (match part #)"]["trim_status"] == "vin" and "Transfer Case Shift Motor (match part #)" not in names(1999, "Ford", "Explorer", RWD))
+check("§16 Explorer 2004: none of the 1991-2001 rows", "Leather Power Driver Seat (Eddie Bauer/Limited)" not in names(2004, "Ford", "Explorer", FOUR))
 
 # 3. band sanity + lint
 bad = []
