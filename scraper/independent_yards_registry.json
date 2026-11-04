@@ -3066,17 +3066,17 @@
     },
     {
       "name": "Wally's U-Pull-It",
-      "status": "candidate",
-      "platform": "WordPress + URG iis-pro-v2 2.7.90 (urgid WI37, iispartdir used-parts); home page lists per-make counts",
+      "status": "directory-only",
+      "platform": "WordPress + URG iis-pro-v2 2.7.90 parts locator (urgid WI37); no vehicle feed",
       "website": "https://wallysupullit.com",
-      "inventory_url": "https://wallysupullit.com/used-parts/ACURA/",
+      "inventory_url": null,
       "api": {
         "endpoint": null,
         "method": null,
         "auth": null,
         "format": null,
         "requests_per_scan": null,
-        "notes": "Found in the 2026-11-04 Geofabrik sweep tier E (OSM node had no website tag). Self-service yard at 4266 State Road 21, Oshkosh WI 54904. The home page shows per-make counts (Ford 144, Chevrolet 122, Toyota 57 ... about 800 in all), which look like vehicles on the lot. The per-make pages (/used-parts/ACURA/) render nothing server-side: the iis-pro-v2 plugin fills them by JavaScript, the same URG plugin as Young's parts locator. Next step: open a make page in devtools and see whether the plugin's own XHR returns vehicle rows (year/make/model/row) or part rows. Build only if it is vehicles. robots.txt: allow all except wp-admin (admin-ajax allowed). Pin is the OSM node."
+        "notes": "Found in the 2026-11-04 Geofabrik sweep tier E (OSM node had no website tag). Self-service yard at 4266 State Road 21, Oshkosh WI 54904. The home page shows per-make counts (Ford 144, Chevrolet 122, Toyota 57 ... about 800 in all), which look like vehicles on the lot. The per-make pages (/used-parts/ACURA/) render nothing server-side: the iis-pro-v2 plugin fills them by JavaScript, the same URG plugin as Young's parts locator. Next step: open a make page in devtools and see whether the plugin's own XHR returns vehicle rows (year/make/model/row) or part rows. Build only if it is vehicles. robots.txt: allow all except wp-admin (admin-ajax allowed). Pin is the OSM node. 2026-11-04 devtools check (headless Chromium, YardScout UA): /used-parts/<MAKE>/ makes no XHR and renders nothing. 'Search Inventory' opens a picker whose steps call getyearsv2.php -> getmymakev2.php?y= -> getmymodelv2.php?m=&year= -> used-parts/includes/searchparts.php. That returns part categories and part types. The make list is a parts catalog (2010 includes Tesla, Maserati, Kenworth, Peterbilt), not cars on the lot. No endpoint lists lot vehicles, so directory-only. The page also loads an invisible reCAPTCHA; the check stopped at the part categories and never ran a parts search."
       },
       "locations": [
         {

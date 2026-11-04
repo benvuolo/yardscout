@@ -30,7 +30,7 @@ directory-only entries.
 | **OKC Pull-A-Part** (Oklahoma City OK) | **adapter live** (`fetch_okcpap_inventory`): 1,025 cars at build, from one WebForms POST per make. The name avoids the "Pull-A-Part" prefix, which the app keys the national chain on. No dates or VIN on the site. Test: `test_okcpap.py` |
 | UAPI Bossier City / South Shreveport | already tracked. Their pins were copies of North Shreveport's and are now fixed (address geocodes) |
 | Ewe Pullet (SD) | still `candidate`: no cards render on any inventory page (re-checked 2026-11-04) |
-| Wally's U-Pull-It (Oshkosh WI) | `candidate`: the home page shows per-make counts (~800). Its iis-pro-v2 make pages fill by JavaScript, so check in devtools whether the plugin's XHR returns vehicles or parts |
+| Wally's U-Pull-It (Oshkosh WI) | directory-only. Devtools check 2026-11-04: its "inventory" is the URG iis-pro-v2 parts locator (year → catalog make → model → part category). The make list is a parts catalog (2010 lists Tesla, Kenworth) and no endpoint lists lot vehicles |
 | Littleton U-Pull (CO), Andersen's U-Pull-It (Greeley CO, now Alter Trading), One Stop You Pull It (Klamath Falls OR), Vince's U-Pull-It (Marcy NY) | directory-only, no online inventory |
 | U-Pull and Save Mason (MI), Pick A Part of Arizona (Phoenix, Mesa), A-1 Metals (CA) | registry `retired` so the sweep skips them: vehicle purchasing only / closed to the public / not self-service |
 
