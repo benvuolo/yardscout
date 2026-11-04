@@ -523,6 +523,13 @@ check("§21 Juke: mech 2011-17; AWD coupling gated; moonroof 'if equipped'; lamp
       and j12["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in j16
       and j16["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed" and j12["Tail Lights (pair, uncracked)"]["fits"] == "2011–2014")
 
+m97, m02, m08 = parts(1997, "Mercury", "Sable", FWD), parts(2002, "Mercury", "Sable", FWD), parts(2008, "Mercury", "Sable", AWD)
+check("§21 Sable: mech per generation; A/C 'if equipped' 1997, plain 2002; AWD unit 2008-09 only; tails cut at the 2004 facelift",
+      MECH3 <= set(m97) and MECH3 <= set(m02) and m97["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1996–1999"
+      and m97["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and m02["A/C Compressor (clutch spins free)"].get("trim_status") is None
+      and m08["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in m02
+      and m02["Tail Lights (pair, uncracked)"]["fits"] == "2000–2003")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

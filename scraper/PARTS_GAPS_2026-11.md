@@ -1513,3 +1513,31 @@ turbo (engine), the CVT (transmission).
 
 Result (same inventory): generic-only 16,935 (5.1%) → 16,605 (5.0%). Juke
 330 → 0.
+
+### 21.5 Mercury Sable 1992–1995, 1996–1999, 2000–2005, 2008–2009
+
+Basis: WP Mercury_Sable; Consumer Guide used reviews 1990–95, 1996–99,
+2000–05, 2008–09 (fetched); 1996 A/C from an Edmunds snippet.
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 1998: "new headlights and a centered Mercury emblem in the grille" (WP);
+    "a new grille" (CG).
+  - 2004: "a new front and rear fascia, taillights, and a new grille" (CG).
+  The existing Sable lamp rows are now cut at those years.
+- **No facelift found** for 1992–95 or 2008–09.
+- **A/C:** standard 2000–05 (GS) and 2008–09 (CG). 1996 rests on a snippet,
+  and 1992–95 is unconfirmed.
+- **Sunroof:** optional 2000–05 (LS/LS Premium) and 2008–09 (Premier).
+- **AWD:** optional on the 2008–09 Base and Premier.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1992–95, 1996–99, 2000–05, 2008–09 | — | Every car. |
+| A/C compressor | 1992–95, 1996–99 | option | Not confirmed from a fetched source. |
+| A/C compressor, sunroof | 2000–05, 2008–09 | — / option | A/C standard; sunroof optional. |
+| AWD rear differential / transfer unit | 2008–09 | drive: awd/4wd | Same band as the Five Hundred row (same platform). |
+
+Left out, no stated basis: wagon lamps (wagons 1992–2004; whether their
+tail lights differ from the sedan's is not stated), 1992–99 sunroofs.
+
+Result (same inventory): generic-only 16,605 (5.0%) → 16,280 (4.9%). Sable
+326 → 0.

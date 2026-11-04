@@ -6009,6 +6009,19 @@ _gap_extend("spark", parts=[
 # SV/SL); AWD available on every grade; moonroof on SV/SL only.
 _gap_extend("juke", parts=_per_gen([(2011, 2017)], [*_GAP_MECH, _AWD_COUPLING, _SUNROOF]))
 
+# Mercury Sable (326 cars generic-only; 1992-95, 1996-99, 2000-05, 2008-09).
+# Facelifts 1998/2004 in FACELIFT_BREAKS. A/C confirmed standard 2000-05 and
+# 2008-09 (CG); option-flagged before. Sunroof optional 2000-05 and
+# 2008-09; AWD optional on the 2008-09 (Montego-based) car.
+_gap_extend("sable", parts=[
+    *_per_gen([(1992, 1995), (1996, 1999), (2000, 2005), (2008, 2009)], [_GAP_PUMP, _GAP_FAN]),
+    *_per_gen([(1992, 1995), (1996, 1999)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(2000, 2005), (2008, 2009)], [_GAP_AC, _SUNROOF]),
+    *_per_gen([(2008, 2009)], [
+        {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+    ]),
+])
+
 # ---- end of §21 block
 
 _apply_consensus_evergreens()
@@ -6482,6 +6495,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "savana": [2003],
     "spark": [2019],
     "juke": [2015],
+    "sable": [1998, 2004],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
