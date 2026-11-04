@@ -3,6 +3,9 @@
 # the report. Read-only toward the yards: robots.txt respected, honest
 # YardScout user agent, one page per site plus at most one inventory page.
 # Yards that block us are listed for outreach; nothing works around a block.
+# Dispatch with osm_pending=true for an OSM-only pass over the states the last
+# run could not cover (scraper/coverage_sweep.json osm_pending); repeat until
+# it is empty. No extra schedule is set: the owner decides whether to add one.
 name: Coverage sweep
 
 on:
@@ -17,6 +20,13 @@ on:
         description: "Include OpenStreetMap discovery (off = Ario only)"
         type: boolean
         default: true
+      osm_pending:
+        description: "OSM-only pass: query just the states in osm_pending and merge into the report (no Ario)"
+        type: boolean
+        default: false
+      budget_min:
+        description: "Time budget in minutes (the job times out at 90)"
+        default: "70"
 
 permissions:
   contents: write
@@ -37,8 +47,10 @@ jobs:
       - run: pip install requests beautifulsoup4 rich cryptography
       - name: Sweep
         run: |
-          python scraper/coverage_sweep.py --budget-min 70 --max-sites "${{ github.event.inputs.max_sites || '400' }}" \
-            ${{ github.event.inputs.osm == 'false' && '--no-osm' || '' }}
+          python scraper/coverage_sweep.py --budget-min "${{ github.event.inputs.budget_min || '70' }}" \
+            --max-sites "${{ github.event.inputs.max_sites || '400' }}" \
+            ${{ github.event.inputs.osm == 'false' && '--no-osm' || '' }} \
+            ${{ github.event.inputs.osm_pending == 'true' && '--osm-pending' || '' }}
           { echo "## Coverage sweep"; sed -n '1,/^## /p' scraper/coverage_sweep.md | sed '$d'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Commit the report
         run: |

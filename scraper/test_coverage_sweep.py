@@ -190,35 +190,50 @@ check("osm: deadline in the past skips the remaining states", got2 == [] and "no
 # timeouts, a dead mirror, and the old "3 failed states -> stop" rule).
 import requests as _rq  # noqa: E402
 TO = _rq.exceptions.ReadTimeout("read timed out")
-check("osm: client timeout is longer than the server's [timeout:]",
-      cs.OSM_TIMEOUT > cs.OSM_SERVER_TIMEOUT and f"[timeout:{cs.OSM_SERVER_TIMEOUT}]" in cs.overpass_query("AL"))
-# The exact 2026-11-03 failure: main server times out on the first states,
-# mirrors refuse; later states answer. Every state must still be covered.
-plan = {(m, "AL"): [TO, FakeResp(200, el)], (m, "AK"): [TO, FakeResp(200, el)], (m, "AZ"): [TO, FakeResp(200, el)],
-        (m, "AR"): FakeResp(200, el), (m, "CA"): FakeResp(200, el)}
+q = cs.overpass_query("AL")
+check("osm query: [timeout:] and [maxsize:] set, client waits just past the server",
+      f"[timeout:{cs.OSM_SERVER_TIMEOUT}]" in q and f"[maxsize:{cs.OSM_MAXSIZE}]" in q
+      and cs.OSM_SERVER_TIMEOUT < cs.OSM_TIMEOUT <= cs.OSM_SERVER_TIMEOUT + 60, q[:80])
+check("osm query: indexed tag clauses first, name regex only over that set",
+      all(f'nwr["{kk}"="{vv}"](area.s);' in q for kk, vv in cs.OSM_TAG_CLAUSES)
+      and '->.t;nwr.t["name"~' in q and '(area.s);out' not in q.split("->.t;")[-1]
+      and '"name"~' not in q.split("->.t;")[0], q)
+# The exact 2026-11-03/04 failure: every server fails the first states. The
+# pass must stop after OSM_DROP_SERVER_AFTER states (bounded cost) and leave
+# all of them pending for the next run, not burn the budget.
+plan = {}
 for st in ("AL", "AK", "AZ", "AR", "CA"):
-    plan[(k, st)] = _rq.exceptions.ConnectionError("refused")
-    plan[(pc, st)] = FakeResp(504)
+    plan[(m, st)] = FakeResp(502)
+    plan[(k, st)] = TO
+    plan[(pc, st)] = _rq.exceptions.ConnectionError("refused")
 rep = {}
 fo3 = FakeOverpass(plan)
 got3, err3 = cs.fetch_osm(fo3, states=("AL", "AK", "AZ", "AR", "CA"), pause=0, report=rep, sleep=nosleep)
-check("osm: three failed states in a row no longer stop discovery; retry pass recovers them",
-      sorted(c.state for c in got3) == ["AK", "AL", "AR", "AZ", "CA"] and err3 == "" and rep["pending"] == [],
-      f"{err3} {rep} {[c.state for c in got3]}")
-check("osm: a mirror that keeps refusing is dropped after OSM_DROP_SERVER_AFTER strikes",
-      sum(1 for u, _ in fo3.calls if u == k) == cs.OSM_DROP_SERVER_AFTER, str([u for u, _ in fo3.calls].count(k)))
-check("osm: every request uses the long read timeout, short connect timeout",
-      set(fo3.timeouts) == {(cs.OSM_CONNECT_TIMEOUT, cs.OSM_TIMEOUT)}, str(set(fo3.timeouts)))
-rep9 = {}
-fo9 = FakeOverpass({(u, st): _rq.exceptions.ConnectTimeout("x") for u in cs.OVERPASS_URLS for st in ("AL", "AK", "AZ", "AR")})
-cs.fetch_osm(fo9, states=("AL", "AK", "AZ", "AR"), pause=0, report=rep9, sleep=nosleep)
-check("osm: connect timeouts count as dead-server strikes", len(fo9.calls) == len(cs.OVERPASS_URLS) * cs.OSM_DROP_SERVER_AFTER, str(len(fo9.calls)))
+check("osm: all servers failing -> pass stops after 3 states, all 5 pending, no retry pass",
+      got3 == [] and len(fo3.calls) == 3 * len(cs.OVERPASS_URLS) and rep["pending"] == ["AL", "AK", "AZ", "AR", "CA"],
+      f"{len(fo3.calls)} {rep}")
+check("osm: every request uses the short connect / bounded read timeout",
+      set(fo3.timeouts) == {(cs.OSM_CONNECT_TIMEOUT, cs.OSM_TIMEOUT)} and cs.OSM_TIMEOUT > cs.OSM_SERVER_TIMEOUT,
+      str(set(fo3.timeouts)))
+# A state that fails while others answer is retried at the end and recovered.
+slept.clear()
+fo3b = FakeOverpass({(m, "AL"): [FakeResp(502), FakeResp(200, el)], (k, "AL"): FakeResp(504), (pc, "AL"): TO,
+                     (m, "AK"): FakeResp(200, el), (m, "AZ"): FakeResp(200, el)})
+rep3b = {}
+got3b, err3b = cs.fetch_osm(fo3b, states=("AL", "AK", "AZ"), pause=0, report=rep3b, sleep=nosleep)
+check("osm: failed state retried after the others and recovered",
+      sorted(c.state for c in got3b) == ["AK", "AL", "AZ"] and rep3b["pending"] == [] and err3b == ""
+      and [st for _, st in fo3b.calls][-1] == "AL", f"{err3b} {fo3b.calls}")
+check("osm: 502/504 move to the next server at once (no backoff sleep)", slept == [], str(slept))
 # 429 then 200 on the same server: backoff, no mirror needed.
 slept.clear()
 fo4 = FakeOverpass({(m, "NE"): [FakeResp(429), FakeResp(200, el)]})
 got4, err4 = cs.fetch_osm(fo4, states=("NE",), pause=0, sleep=nosleep)
 check("osm: 429 backs off and retries the same server", len(got4) == 1 and fo4.calls == [(m, "NE"), (m, "NE")]
       and cs.OSM_BACKOFF[0] in slept, f"{fo4.calls} {slept}")
+fo4b = FakeOverpass({(m, "NE"): FakeResp(429), (k, "NE"): FakeResp(200, el)})
+got4b, _ = cs.fetch_osm(fo4b, states=("NE",), pause=0, sleep=nosleep)
+check("osm: 429 twice -> next server", len(got4b) == 1 and fo4b.calls == [(m, "NE"), (m, "NE"), (k, "NE")], str(fo4b.calls))
 # /api/status says wait: the client waits before posting (capped).
 slept.clear()
 fo5 = FakeOverpass({(m, "NE"): FakeResp(200, el)},
@@ -272,6 +287,52 @@ out2, _, notes2 = cs.run(None, known=known, site=FakeSite({}), osm_fetch=lambda 
 check("run: a source that raises becomes a note", out2 == [] and any("needs cryptography" in n for n in notes2), str(notes2))
 md = cs.render_md(out, skipped, notes, "2026-11-02T00:00:00Z")
 check("report: tier A table lists the PT1 yard", "## A." in md and "New U-Pull" in md and "gm_vehicle_search" in md)
+
+# --osm-pending: merge one OSM-only pass into the last full report.
+prev = {"at": "2026-11-04T15:42:08Z", "skipped": {"tracked": 76},
+        "notes": ["OpenStreetMap: Overpass failed for AL, AK, AZ; not queried: CO, TX.", "Website checks capped at 400."],
+        "osm_pending": ["AL", "AK", "TX"],
+        "candidates": [{"name": "Old Ario Yard", "source": "ario", "tier": "E", "lat": 1.0, "lng": 2.0},
+                       {"name": "Dup U-Pull", "source": "osm", "tier": "E", "lat": 30.0, "lng": -97.0, "state": "TX"}]}
+newc = [cs.Candidate(name="Dup U-Pull", lat=30.001, lng=-97.0, source="osm", tier="A", state="TX"),
+        cs.Candidate(name="Fresh U-Pull", lat=33.0, lng=-86.0, source="osm", tier="B", state="AL")]
+mc, msk, mnotes, doc = cs.merge_report(prev, newc, {"tracked": 3}, ["OpenStreetMap: Overpass failed for AK."],
+                                       ["AK"], "2026-11-05T00:00:00Z")
+check("merge: old rows kept, re-found yard replaced, new yard added",
+      sorted((c.name, c.tier) for c in mc) == [("Dup U-Pull", "A"), ("Fresh U-Pull", "B"), ("Old Ario Yard", "E")],
+      str([(c.name, c.tier) for c in mc]))
+check("merge: skip counts add, pending shrinks, old OSM note replaced",
+      msk == {"tracked": 79} and doc["osm_pending"] == ["AK"]
+      and not any("AL, AK, AZ" in n for n in mnotes) and any("2 pending state(s) covered, 1 still pending" in n for n in mnotes)
+      and "Website checks capped at 400." in mnotes, f"{msk} {mnotes}")
+import contextlib, io  # noqa: E402,E401
+with tempfile.TemporaryDirectory() as td:
+    saved = (cs.OUT_MD, cs.OUT_JSON)
+    cs.OUT_MD, cs.OUT_JSON = Path(td) / "s.md", Path(td) / "s.json"
+    cs.OUT_JSON.write_text(_json.dumps({"osm_pending": []}))
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        rc = cs.main(["--osm-pending"])
+    check("--osm-pending with nothing pending: exits 0, writes nothing",
+          rc == 0 and "nothing to do" in buf.getvalue() and not cs.OUT_MD.exists(), buf.getvalue())
+    # pending AL: a fake fetch covers it, the report is merged
+    cs.OUT_JSON.write_text(_json.dumps(prev))
+    real = cs.fetch_osm
+    def fake_fetch(session, states=(), report=None, deadline=None, **kw):
+        report["pending"] = [s for s in states if s != "AL"]
+        return [cs.Candidate(name="Fresh U-Pull", lat=33.0, lng=-86.0, source="osm", tier="E", state="AL",
+                             extra={"note": "no site"})], ""
+    cs.fetch_osm = fake_fetch
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            rc2 = cs.main(["--osm-pending", "--max-sites", "0", "--budget-min", "1"])
+    finally:
+        cs.fetch_osm = real
+    d2 = _json.loads(cs.OUT_JSON.read_text())
+    check("--osm-pending: queries only pending states, merges, shrinks osm_pending",
+          rc2 == 0 and d2["osm_pending"] == ["AK", "TX"] and {c["name"] for c in d2["candidates"]} >= {"Old Ario Yard", "Fresh U-Pull"},
+          f"{d2['osm_pending']} {[c['name'] for c in d2['candidates']]}")
+    cs.OUT_MD, cs.OUT_JSON = saved
 
 print("\n" + ("ALL PASS" if not failures else f"{len(failures)} FAILURES: {failures}"))
 sys.exit(1 if failures else 0)

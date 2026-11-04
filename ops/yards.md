@@ -43,44 +43,47 @@ Auto Salvage and Gaston Towing (no site, self-service unconfirmed), Yank A Part
 Blue & Gold and Prestige so the sweep stops re-listing them.
 `coverage_candidates.md` is the Parts workstream's report and has no yard tiers.
 
-Sweep coverage gap (fixed 2026-11-04, unconfirmed live). On 2026-11-03,
-OSM/Overpass failed for AL, AK and AZ and the other 47 states were never
-queried, so that sweep only checked Ario orgs. Causes, from the run log
-(41682922910) and the code:
-1. The client timed out at 60 s while the query allowed the server 180 s
-   (AK = 2 × 60 s, AZ = 60 s + an instant mirror failure).
-2. The kumi mirror failed immediately.
-3. The rule "3 failed states in a row → stop discovery" then cancelled the
-   other 47 states.
-4. Discovery only got 45% of the budget, counted from the start of the run,
-   and Ario took about 6 minutes of it.
-5. Exceptions were swallowed, so the log said only "failed".
+Sweep coverage gap. On 2026-11-03 OSM covered no state at all (60 s client
+timeout, dead mirror, "3 failed states → stop", Ario eating the discovery
+budget). The first fix (ff72088) made the timeouts long and the retries
+patient. Its run (41852487799, 2026-11-04, 70 min, dispatched by the hub)
+covered only 5 states: AR 2 yards, CA 20. AL, AK and AZ failed on all three
+servers (overpass-api.de 502, kumi and private.coffee read timeouts at 210 s),
+about 10 minutes each. The real problem was the query: a case-insensitive name
+regex over every named object in a state is too heavy for the public servers.
+`osm_pending` now holds the 48 uncovered states, and the next run resumes from
+them.
 
-Fix in `scraper/coverage_sweep.py`:
-- Read timeout of 210 s (past the server's 180 s), connect timeout of 20 s.
-- Ask `/api/status` for a free slot before each query (wait capped at 120 s).
-- Back off 15 s, then 45 s, on 429/504 against the same server.
-- A 200 with a "runtime error" remark counts as a failure, not as an empty
-  state.
-- Added the overpass.private.coffee mirror.
-- A server is dropped only after 3 consecutive connection errors. Slow answers
-  are never dropped.
-- Failed states get one retry pass at the end.
-- Each failure is logged with its reason.
-- Discovery's share of the budget rose to 65%. That leaves about 39 minutes
-  for 50 states after Ario, and at least 24 minutes for site checks.
-- States still uncovered are saved as `osm_pending` in `coverage_sweep.json`,
-  and the next run queries them first, so a short run can't lose the same
-  states twice.
+Second fix (this commit, unconfirmed live):
+- `overpass_query` selects by exact, indexed tags first (`OSM_TAG_CLAUSES`:
+  shop=car_parts/car/car_repair/scrap_yard, industrial=scrap_yard/auto_wrecker,
+  landuse=industrial, amenity=scrap_yard/recycling, craft=car_repair). It runs
+  the name regex only over that set, with `[timeout:90]` and
+  `[maxsize:64MB]`, and the client read timeout is 120 s.
+- Trade-off: a yard mapped with a name and no tag is missed. Compare CA's
+  count with the 20 found by the name-only query.
+- 502/503/504 move to the next server at once. Only 429 gets a same-server
+  retry (after 30 s).
+- Any server failure is a strike, and 3 in a row skip that server for the
+  pass. If every server fails the first states, the pass stops (worst case
+  about 3 states × 3 servers × 2 min) and everything stays pending.
+- The retry pass runs only when some server answered.
+- No geographic tiling: the repo has no reliable state bounding boxes, and the
+  indexed query should make a whole state cheap. If the next run still fails
+  on whole states, add tiling then.
+- New `--osm-pending` mode, also the `osm_pending` dispatch input of
+  coverage-sweep.yml (plus a `budget_min` input). It skips Ario, queries only
+  the pending states with 75% of the budget, checks the new sites, merges into
+  the existing report and shrinks `osm_pending`. Dispatch it repeatedly until
+  the list is empty. With nothing pending it exits without changes.
+- No weekly schedule was added. That is the owner's call: add a cron line to
+  coverage-sweep.yml if wanted.
 
-Tests: `scraper/test_coverage_sweep.py` has 12 new offline cases, including a
-replay of the 2026-11-03 failure. I couldn't measure real Overpass query times
-from the Claude sandbox, because its proxy drops connections to
-overpass-api.de. Whether all 50 states fit in one run is therefore unverified
-until the next sweep runs. **I did not dispatch coverage-sweep.yml.** That's
-left to the owner or the hub (a run takes about 70 min). After it runs, check
-the `osm <ST>` lines in the log and `osm_pending` in the JSON, then review any
-tier A/B rows.
+Tests: `scraper/test_coverage_sweep.py` all pass offline, with mocked cases for
+the query shape, fast failover on 502, the stop when all servers fail, the
+retry pass, 429 handling, the merge, and the `--osm-pending` paths. Live
+Overpass is unreachable from the Claude sandbox, so the speed of the new query
+is untested until a run happens. After that run, review any tier A/B rows.
 
 ## Next
 
