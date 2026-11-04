@@ -29,6 +29,23 @@ directory-only entries.
 | Route 50 U-Pull-It (Mays Landing NJ), U-Pull It Auto Salvage of Paducah (KY) | directory-only, no website |
 
 Outreach drafts: `ops/yard-outreach-drafts.md` (all sent except Harry's).
+No new drafts from the 2026-11-04 sweep review, because no checked yard blocked us.
+
+## 2026-11-04 sweep review
+
+`coverage_sweep.md` (2026-11-03) had 0 tier A, 0 tier B and 0 tier C, so no
+adapters were built and no outreach was needed. I checked every named tier D/E
+yard by hand. Per-yard outcomes are in `scraper/INDEPENDENT_YARDS.md`, under the
+2026-11-04 section. Not added: A-Z U-Pull-It PA (listed closed), TAS Kingsport,
+Salisbury MA and A-1 Metals CA (full-service), Jamm, Jalopy Wizards, Southern
+Auto Salvage and Gaston Towing (no site, self-service unconfirmed), Yank A Part
+(1 row from 2024), and vendor test/demo orgs. I added `ario_slug` to Bevell's,
+Blue & Gold and Prestige so the sweep stops re-listing them.
+`coverage_candidates.md` is the Parts workstream's report and has no yard tiers.
+
+Sweep coverage gap: OSM/Overpass failed or was not queried for 49 states, so
+this sweep only checked Ario orgs. The next monthly run should get OSM through
+before its tiers mean much.
 
 ## Next
 
