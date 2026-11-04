@@ -4487,6 +4487,12 @@ _gap_extend("century", parts=[
     ]),
 ])
 
+# Chevrolet Aveo 2004-2011 (674 cars generic-only). Windows follow the new
+# breaks (2004-06 / 2007-08 / 2009-11). A/C was optional on the base cars.
+_gap_extend("aveo", parts=_per_gen([(2004, 2006), (2007, 2008), (2009, 2011)], [
+    _GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}, _SUNROOF,
+]))
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
@@ -5898,6 +5904,10 @@ GENERATION_BREAKS = {
     "enclave": [2018],
     "impala": [2006, 2014],
     "malibu": [2004, 2008, 2013, 2016],
+    # T200 2004-06; the T250 sedan arrived for 2007 while the hatch stayed
+    # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
+    # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
+    "aveo": [2007, 2009],
     "cruze": [2016],
     "monte carlo": [1995, 2000],
     "trailblazer": [2021],                 # 02-09 SUV vs 21+ crossover revival

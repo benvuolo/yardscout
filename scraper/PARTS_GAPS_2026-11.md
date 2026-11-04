@@ -460,3 +460,25 @@ not confirmed), the 3.1 V6 intake gaskets/manifold (engine).
 
 Result: Century generic-only 704 → 3 (pre-1986). Lots: generic-only 31,081
 (9.3%) → 30,380 (9.1%).
+
+### 16.6 Chevrolet Aveo 2004–2011 (new `GENERATION_BREAKS`: 2007, 2009)
+
+The Aveo had no breaks on record. The T200 ran 2004–06; the T250 sedan
+arrived for 2007 while the hatch stayed T200 through 2008, and the Aveo5 was
+restyled for 2009. Both years are now breaks, so no window mixes T200 and
+T250 cars of one body. This also bounds the existing Aveo rows, e.g. the
+headlight row is now 2004–06 / 2007–08 / 2009–11 instead of 2004–11 (§15
+pass).
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2004–06, 2007–08, 2009–11 | — | Every car. |
+| A/C compressor | same | option | A/C was optional on the base cars. |
+| Sunroof | same | option | |
+
+Left out, no stated basis: tail lights and mirrors (2007–08 sedan and
+hatch lamps are from different generations, and the rows carry no body
+gate that could separate them confidently), Aveo5 hatch-specific rows.
+
+Result: Aveo generic-only 674 → 0. Lots: generic-only 30,380 (9.1%) →
+29,706 (8.9%).

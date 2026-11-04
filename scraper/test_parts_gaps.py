@@ -270,6 +270,12 @@ check("§16 Century 1992/2002: pump in its generation; A/C 'if equipped' 1992, p
       and "Fuel Pump Module (in-tank, test before listing)" not in names(1984, "Buick", "Century", FWD))
 check("§16 Century 2002: mirrors + Limited seat 'if equipped'", "Side Mirrors (pair)" in b02 and b02["Leather Power Driver Seat (Limited)"]["trim_status"] == "unconfirmed")
 
+check("§16 Aveo: pump per window (2005 -> 2004-06, 2008 -> 2007-08, 2010 -> 2009-11); existing headlight row now bounded too",
+      parts(2005, "Chevrolet", "Aveo", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2004–2006"
+      and parts(2008, "Chevrolet", "Aveo", FWD)["Radiator Fan Assembly"]["fits"] == "2007–2008"
+      and parts(2010, "Chevrolet", "Aveo", FWD)["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
+      and parts(2010, "Chevrolet", "Aveo", FWD)["Headlights (clear pair)"]["fits"] == "2009–2011")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

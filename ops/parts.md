@@ -49,7 +49,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 - §16 (owner: "start the next parts block"; in progress): Focus 2000–07
   done (generic-only 35,451 → 33,916, 10.6% → 10.2%); Explorer 1991–2001
   (→ 32,743, 9.8%); Compass 2007–16 (→ 31,832, 9.5%);
-  Rio 2001–17 (→ 31,081, 9.3%); Century 1986–2005 (→ 30,380, 9.1%).
+  Rio 2001–17 (→ 31,081, 9.3%); Century 1986–2005 (→ 30,380, 9.1%);
+  Aveo 2004–11 with new breaks 2007/2009 (→ 29,706, 8.9%).
 
 ## How to measure
 
