@@ -3014,6 +3014,30 @@
           "lng": -104.6576
         }
       ]
+    },
+    {
+      "name": "One Stop Auto Wreckers - You Pull It",
+      "status": "directory-only",
+      "platform": "static brochure site (onestopkfalls.com/You_Pull_It.html); no inventory",
+      "website": "https://www.onestopkfalls.com",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Found by the Geofabrik coverage sweep 2026-11-04 (tier D). Self-service You Pull It yard: up to 1,000 vehicles, 1995 and older, $2 entry, 18+. The site has no vehicle list. Pin is the OSM node."
+      },
+      "locations": [
+        {
+          "name": "One Stop You Pull It - Klamath Falls",
+          "city": "Klamath Falls",
+          "state": "OR",
+          "lat": 42.2484,
+          "lng": -121.7979
+        }
+      ]
     }
   ]
 }
