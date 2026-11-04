@@ -182,13 +182,21 @@ Sweep follow-ups (mine):
 - **Done:** Geofabrik downloads now retry once on a transient network error,
   with a 300 s read timeout (f9838c7). WA and AL stay pending for Monday's
   pass.
-- **Not done:** the sweep's 3 km match radius misses tracked chain yards
-  whose pins are 3–9 km off, which is why they show in tier E: Pull-A-Part
-  Jackson, Memphis, El Paso and Aurora; Pick-n-Pull Portland South; Utah
-  Pic-A-Part Orem; U-Pick-It Flagstaff. Either those pins are city
-  centroids (check each against its address) or matching should allow a
-  same-chain name within about 10 km. The pins are the better fix, because
-  the app shows them.
+- **Fixed (owner-requested, 2026-11-04):** six of the seven chain-yard pins
+  the sweep exposed. Pull-A-Part Jackson, Memphis, El Paso and Aurora were
+  ZIP centroids 3.6–4.6 km off. Utah Pic-A-Part Orem was 3.2 km off and
+  U-Pick-It Flagstaff 8 km off (a Leupp Road centroid). Each was re-pinned
+  from the yard's street address: Pull-A-Part's own Location API, utpap.com
+  and upickitaz.com. Each was checked against a Nominatim or Census geocode
+  and/or the named OSM yard feature on the right road. Pick-n-Pull Portland
+  South was already correct: Pick-n-Pull's feed pin matches 6241 SE 111th
+  Ave exactly. The OSM "Pick-n-Pull" way/318885801 9 km away is a different
+  or stale feature. The app shows the new pins after the next scan
+  rewrites docs/data/junkyards.json.
+- **Not done:** the other 31 `PAP_COORDS` entries are still ZIP centroids
+  and probably off by a few km too. Pull-A-Part's Location API has every
+  street address, so the same re-pin is mechanical (geocode, check against
+  OSM).
 
 ## Next
 

@@ -219,7 +219,10 @@ PAP_SITE = "https://www.pullapart.com"
 PAP_TOKEN_URL = f"{PAP_SITE}/api/internal/gettoken/"
 PAP_INVENTORY_API = "https://inventoryservice.pullapart.com"
 PAP_ENTERPRISE_API = "https://enterpriseservice.pullapart.com"
-# Their location API has no coordinates; these are geocoded from each yard's zip.
+# Their location API has no coordinates; these are geocoded from each yard's zip
+# (zip centroids, often several km off) except where marked "address" — those
+# were re-pinned 2026-11-04 from the yard's street address in the Location API,
+# checked against the named OSM yard feature.
 PAP_COORDS = {
     3: (33.6369, -84.3371),    # Atlanta South, GA 30288
     4: (33.9381, -84.1972),    # Atlanta North, GA 30071
@@ -233,9 +236,9 @@ PAP_COORDS = {
     12: (30.2077, -92.0656),   # Lafayette, LA 70506
     13: (32.3257, -86.3104),   # Montgomery, AL 36105
     14: (29.8725, -90.0673),   # New Orleans West, LA 70058
-    15: (32.2435, -90.2612),   # Jackson, MS 39212
+    15: (32.2296, -90.2197),   # Jackson, MS — address: 4000 I-55 S; OSM way/1167186887 "Pull-A-Part"
     16: (30.4848, -91.0689),   # Baton Rouge, LA 70814
-    17: (35.0514, -89.9265),   # Memphis, TN 38118
+    17: (35.0766, -89.9648),   # Memphis, TN — address: 2955 Farrisview Blvd; OSM way/1558209627
     18: (39.8082, -86.1014),   # Indianapolis, IN 46218
     19: (36.144, -80.2376),    # Winston-Salem, NC 27105
     20: (34.0635, -81.0265),   # Columbia, SC 29203
@@ -243,7 +246,7 @@ PAP_COORDS = {
     24: (40.7598, -81.35),     # Canton, OH 44707
     25: (41.0479, -81.4916),   # Akron, OH 44306
     27: (32.1707, -110.9719),  # Tucson, AZ 85714
-    29: (31.7677, -106.3016),  # El Paso, TX 79936
+    29: (31.8023, -106.2744),  # El Paso, TX — address: 12000 Montana Ave; OSM relation/21425296
     30: (27.7762, -97.4271),   # Corpus Christi, TX 78405
     33: (26.6644, -80.1741),   # West Palm Beach, FL 33411
     34: (28.3932, -81.3622),   # Orlando, FL 32824
@@ -251,7 +254,7 @@ PAP_COORDS = {
     36: (35.0448, -106.6893),  # Albuquerque, NM 87105
     37: (33.4564, -112.1284),  # Phoenix, AZ 85009
     38: (38.7902, -104.8199),  # Colorado Springs, CO 80906
-    39: (39.7378, -104.8152),  # Aurora, CO 80011
+    39: (39.7381, -104.7732),  # Aurora, CO — address: 1370 N Zeno St (OSM still names it U Pull & Pay)
     40: (39.838, -104.9988),   # Denver, CO 80221
     41: (29.6223, -95.26),     # Houston, TX 77075
     42: (40.4598, -79.8224),   # Pittsburgh, PA 15235
@@ -17764,7 +17767,9 @@ YARDCONNECT_SITES: dict[str, dict] = {
         "yards": [
             {"lot": "Flagstaff", "code": "flagstaff",
              "name": "U-Pick-It AZ - Flagstaff", "city": "Flagstaff",
-             "state": "AZ", "lat": 35.2872, "lng": -111.3546},
+             # 7320 Leupp Rd; OSM way/1315970636 "U-Pick-It" (mapped since the
+             # Leupp Road centroid was chosen). Re-pinned 2026-11-04.
+             "state": "AZ", "lat": 35.2435, "lng": -111.4246},
             {"lot": "Prescott Valley", "code": "prescott",
              "name": "U-Pick-It AZ - Prescott Valley", "city": "Prescott Valley",
              "state": "AZ", "lat": 34.5836, "lng": -112.2791},
@@ -23226,7 +23231,7 @@ YARD_COORDS = {
     "Tear-A-Part - Salt Lake City": (40.7608, -111.8910),
     "Tear-A-Part - Ogden": (41.2230, -111.9738),
     "Utah Pic-A-Part - Ogden": (41.2230, -111.9738),
-    "Utah Pic-A-Part - Orem": (40.2969, -111.6946),
+    "Utah Pic-A-Part - Orem": (40.2924, -111.7324),  # 255 S Geneva Rd; OSM way/531732584, Census geocode 130 m (2026-11-04)
 }
 
 
