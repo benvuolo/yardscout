@@ -592,3 +592,44 @@ Maxima, Ranger, Suburban, Traverse, Pathfinder.
 - New checks: no facelift-sensitive row crosses a listed facelift year;
   every table key is a real entry; Focus/Compass spot checks; a mechanical
   row (Compass fuel pump) is not cut.
+
+## 18. Next measured block (2026-11-04, owner: "start the next parts block")
+
+Same basis as §13/§16. Rows stay inside one generation, and appearance rows
+inside one facelift window (§15/§17 pass). Generations, facelifts and the
+per-model fitment questions were researched first. Sources are cited per
+model; "fetched" means the page was read, while "snippet" (weaker) means
+only a search-result summary was available. Before: generic-only 28,344
+(8.5%) of 332,476 cars, no entry 12,301 (3.7%).
+
+| Order | Model | Generic-only cars |
+|---|---|---|
+| 1 | Kia Forte 2010–13 | 582 |
+| 2 | Buick Regal (1988–2019) | 574 |
+| 3 | Hyundai Tucson 2005–23 | 562 |
+| 4 | Kia Sportage 2005–23 | 546 |
+| 5 | Kia Spectra 2001–09 | 545 |
+| 6 | Subaru Legacy 1995–2004, 2013–14 | 528 |
+| 7 | Lincoln MKZ 2007–20 | 507 |
+| 8 | Hyundai Elantra 2001–06 | 498 |
+
+### 18.1 Kia Forte 2010–2013 (TD)
+
+Basis: en.wikipedia.org/wiki/Kia_Forte and consumerguide.com/used/2010-13-kia-forte
+(fetched). No US facelift: 2012 changed only the Koup door handles and 2013
+only wheels and LED DRLs; the 2012–13 restyle seen in search results is
+China-market.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan, tail lights | 2010–13 | — | Every car; the entry had no tail-light row. |
+| A/C compressor | 2010–11 | option | A/C was in the LX Convenience Package for 2010–11 (Consumer Guide). |
+| A/C compressor | 2012–13 | — | Standard from 2012. |
+| Koup tail lights | 2010–13 | body: coupe | A separate part number from the sedan's (Kia parts catalog via kiapartsnow; snippet). Same band as the Altima coupe row. |
+| Sunroof, alloy wheels | 2010–13 | option | Sunroof optional on EX/SX (Consumer Guide). |
+
+Left out, no stated basis: 5-door hatch-specific lamps (no source says they
+differ from the sedan's).
+
+Result: Forte generic-only 582 → 0. Lots: generic-only 28,344 (8.5%) →
+27,762 (8.4%).

@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–17 done)
+# Parts workstream — status (updated 2026-11-04, §13–17 done, §18 in progress)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -57,6 +57,9 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   bumpers, fog/marker lights) are cut at those years: 75 → 152 rows.
   Per-car parts, bands and interchange notes are identical; coverage
   unchanged. A test guards it.
+
+- §18 (owner: "start the next parts block"; in progress): Forte 2010–13
+  done (generic-only 28,344 → 27,762, 8.5% → 8.4%).
 
 ## How to measure
 

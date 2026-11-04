@@ -4523,6 +4523,23 @@ _gap_extend("lucerne", parts=_per_gen([(2006, 2011)], [
     {"name": "17\"/18\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "option": True},
 ]))
 
+# ---- 2026-11 §18: next measured block (PARTS_GAPS §18). Same basis as §13/§16.
+# Kia Forte 2010-2013 (TD; 582 cars generic-only). No US facelift (the
+# 2012-13 restyle was China-only). A/C was optional on the LX for 2010-11
+# and standard from 2012. Koup rear lamps are a separate part from the
+# sedan's (Kia parts catalog). Sunroof was an option on EX/SX.
+_gap_extend("forte", parts=[
+    *_per_gen([(2010, 2013)], [
+        _GAP_PUMP, _GAP_FAN, _TAILS, _SUNROOF,
+        {"name": "Koup Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 60, "high": 150, "cost": 23, "body": ["coupe"]},
+        {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+    ]),
+    *_per_gen([(2010, 2011)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(2012, 2013)], [_GAP_AC]),
+])
+
+# ---- end of §18 block
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},

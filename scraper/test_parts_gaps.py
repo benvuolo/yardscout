@@ -203,7 +203,9 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "rogue", "cr-v", "rav4", "explorer 2011-2019", "wrx", "impreza", "mx-5",
        "4runner 2003-2009", "4runner 2010-2024", "tacoma 2005-2015", "tacoma 2016-2024", "accent", "lesabre", "lacrosse", "soul",
        # §16
-       "explorer 1991-2001", "compass", "kia rio", "century", "aveo", "passat", "lucerne"},
+       "explorer 1991-2001", "compass", "kia rio", "century", "aveo", "passat", "lucerne",
+       # §18
+       "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "elantra"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -314,9 +316,19 @@ check("§17: Focus 2003 lamps fit 2000–2004, Compass 2013 headlights 2011–20
       and parts(2013, "Jeep", "Compass", FWD)["Headlights (clear pair)"]["fits"] == "2011–2016"
       and parts(2008, "Jeep", "Compass", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2007–2016")
 
+# §18
+COUPE_D = {**SEDAN, "bodyClass": "Coupe"}
+t10, t12 = parts(2010, "Kia", "Forte", FWD), parts(2012, "Kia", "Forte", FWD)
+check("§18 Forte: pump/fan/tails 2010-13; A/C 'if equipped' 2010, plain 2012", MECH3 <= set(t10) and MECH3 <= set(t12)
+      and t10["Tail Lights (pair, uncracked)"]["fits"] == "2010–2013" and t10["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
+      and t12["A/C Compressor (clutch spins free)"].get("trim_status") is None)
+check("§18 Forte: Koup lamps VIN-confirmed on a coupe decode, excluded on a sedan; 2015 none",
+      parts(2011, "Kia", "Forte", COUPE_D)["Koup Tail Lights (pair, uncracked)"]["trim_status"] == "vin"
+      and "Koup Tail Lights (pair, uncracked)" not in names(2011, "Kia", "Forte", SEDAN) and not (MECH3 & names(2015, "Kia", "Forte", FWD)))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))
