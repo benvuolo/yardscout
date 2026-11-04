@@ -56,7 +56,10 @@ here, it is outside this workstream's files).
   generation (mostly alternator/starter/climate/window/BCM standard rows,
   mirrors, liftgate and sliding-door motors). Say if they should be
   bounded the same way (PARTS_GAPS §14).
-- `mine_coverage_gaps.py` fetches eBay pages by default (rule 2).
+- `mine_coverage_gaps.py` fetches eBay pages by default (rule 2). The hub
+  added `--no-fetch` to `coverage-mine.yml` on 2026-11-04, so the monthly run
+  no longer fetches. Still to do here: remove the fetch path from the script
+  (or make no-fetch the only mode) and update its docstring.
 
 ## Next
 
