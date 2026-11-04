@@ -4493,6 +4493,22 @@ _gap_extend("aveo", parts=_per_gen([(2004, 2006), (2007, 2008), (2009, 2011)], [
     _GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}, _SUNROOF,
 ]))
 
+# VW Passat 1998-2011 (652 cars generic-only; B5/B5.5 1998-2005, B6
+# 2006-11). 4Motion cars carry a rear final drive (drive gate); Monsoon
+# premium audio was a B5 option.
+_gap_extend("passat", parts=[
+    *_per_gen([(1998, 2005), (2006, 2011)], [
+        *_GAP_MECH,
+        {"name": "4Motion Rear Differential (match part #)", "rarity": "Rare", "low": 150, "high": 400, "cost": 36, "drive": ["awd", "4wd"]},
+        _SUNROOF,
+        {"name": "Leather Power Driver Seat (GLX)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
+        {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+    ]),
+    *_per_gen([(1998, 2005)], [
+        {"name": "Monsoon Amp + Speakers", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 24, "option": True},
+    ]),
+])
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},

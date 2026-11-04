@@ -276,6 +276,13 @@ check("§16 Aveo: pump per window (2005 -> 2004-06, 2008 -> 2007-08, 2010 -> 200
       and parts(2010, "Chevrolet", "Aveo", FWD)["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
       and parts(2010, "Chevrolet", "Aveo", FWD)["Headlights (clear pair)"]["fits"] == "2009–2011")
 
+v03, v08 = parts(2003, "Volkswagen", "Passat", FWD), parts(2008, "Volkswagen", "Passat", AWD)
+check("§16 Passat 2003/2008: mechanical rows per generation; Monsoon 'if equipped' on B5 only", MECH3 <= set(v03) and MECH3 <= set(v08)
+      and v03["A/C Compressor (clutch spins free)"]["fits"] == "1998–2005" and v08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2006–2011"
+      and v03["Monsoon Amp + Speakers"]["trim_status"] == "unconfirmed" and "Monsoon Amp + Speakers" not in v08)
+check("§16 Passat 2008: AWD decode confirms 4Motion diff; FWD decode excludes", v08["4Motion Rear Differential (match part #)"]["trim_status"] == "vin"
+      and "4Motion Rear Differential (match part #)" not in names(2008, "Volkswagen", "Passat", FWD))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

@@ -482,3 +482,20 @@ gate that could separate them confidently), Aveo5 hatch-specific rows.
 
 Result: Aveo generic-only 674 → 0. Lots: generic-only 30,380 (9.1%) →
 29,706 (8.9%).
+
+### 16.7 VW Passat 1998–2011 (B5/B5.5 1998–2005, B6 2006–11)
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1998–05, 2006–11 | — | Every car. |
+| 4Motion rear differential | 1998–05, 2006–11 | drive: awd/4wd | 4Motion cars only; band matches the audited Audi quattro/Haldex rear-diff row; cost is the rear-differential median ($36). |
+| Monsoon amp + speakers | 1998–05 | option | B5 premium-audio option; cost is the amplifier median ($24). |
+| Sunroof, leather power seat (GLX), alloy wheels | 1998–05, 2006–11 | option | |
+
+Left out, no stated basis: tail lights and headlights for 1998–2005 (the
+B5.5 refresh changed them mid-2001, and 2001 is split across both), W8
+parts, Dynaudio on the B6 (offer years not confirmed), coil packs (cheap
+new), the DSG/Tiptronic units (transmissions).
+
+Result: Passat generic-only 652 → 0. Lots: generic-only 29,706 (8.9%) →
+29,054 (8.7%).
