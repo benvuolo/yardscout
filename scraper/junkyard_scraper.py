@@ -12526,9 +12526,27 @@ VPIC_TRANS_FIXES: list[tuple[str, str, int, int, str, str]] = [
 ]
 
 
-def _correct_vpic(dec: dict | None) -> dict | None:
-    """Apply VPIC_TRANS_FIXES; returns a corrected copy (or the input as-is)."""
-    if not isinstance(dec, dict) or not dec.get("transmission"):
+# Trim from the VIN itself, for makes whose model code (VIN positions 4-7
+# on Honda/Acura) names the trim while vPIC returns none. Only patterns the
+# manufacturer's own coding makes unambiguous; each row is (make, model,
+# first year, last year, regex on the 17-char VIN, trim). A match fills an
+# EMPTY vPIC trim with "usable" quality, so trim gates confirm on the right
+# cars and exclude the rest (a base RSX no longer shows Type-S seats as
+# "if equipped"). A trim vPIC did supply is never overwritten.
+VIN_TRIM_PATTERNS: list[tuple[str, str, int, int, str, str]] = [
+    # Acura RSX: DC53 = Type-S, DC54 = base (2002-2006)
+    ("ACURA", "RSX", 2002, 2006, r"^JH4DC53", "Type-S"),
+    ("ACURA", "RSX", 2002, 2006, r"^JH4DC54", "Base"),
+    # (Civic is NOT here: vPIC already returns LX/EX/SI/... for Civics, so
+    # the gates work from the decode. Add makes only where vPIC is blank.)
+]
+_VIN_TRIM_RES = [(mk, md, y0, y1, re.compile(rx, re.I), trim) for mk, md, y0, y1, rx, trim in VIN_TRIM_PATTERNS]
+
+
+def _correct_vpic(dec: dict | None, vin: str = "") -> dict | None:
+    """Apply VPIC_TRANS_FIXES and VIN_TRIM_PATTERNS; returns a corrected copy
+    (or the input as-is)."""
+    if not isinstance(dec, dict):
         return dec
     mk = str(dec.get("make") or "").strip().upper()
     md = str(dec.get("model") or "").strip().upper()
@@ -12536,10 +12554,19 @@ def _correct_vpic(dec: dict | None) -> dict | None:
         yr = int(str(dec.get("modelYear") or "0")[:4])
     except ValueError:
         return dec
-    for f_mk, f_md, y0, y1, wrong, right in VPIC_TRANS_FIXES:
-        if mk == f_mk and md == f_md.upper() and y0 <= yr <= y1 and dec["transmission"] == wrong:
-            return {**dec, "transmission": right, "transmissionFixed": True}
-    return dec
+    out = dec
+    if dec.get("transmission"):
+        for f_mk, f_md, y0, y1, wrong, right in VPIC_TRANS_FIXES:
+            if mk == f_mk and md == f_md.upper() and y0 <= yr <= y1 and dec["transmission"] == wrong:
+                out = {**out, "transmission": right, "transmissionFixed": True}
+                break
+    vin = (vin or "").strip().upper()
+    if vin and not str(dec.get("trim") or "").strip():
+        for f_mk, f_md, y0, y1, rx, trim in _VIN_TRIM_RES:
+            if mk == f_mk and md == f_md and y0 <= yr <= y1 and rx.match(vin):
+                out = {**out, "trim": trim, "trimQuality": "usable", "trimFromVin": True}
+                break
+    return out
 
 
 def _vpic_incremental_queue(
@@ -21979,7 +22006,7 @@ def enrich_vehicles(
             # beyond this run's cap simply match without VIN data until a
             # later run decodes them.
             vin_dec = _VPIC_CACHE.get(vn) if vn else None
-            vin_dec = _correct_vpic(vin_dec)
+            vin_dec = _correct_vpic(vin_dec, vn)
             v["_vpic"] = vin_dec
             _apply_match(v, vin_dec)
     elif decode_vins_profit_top > 0:
@@ -22027,7 +22054,7 @@ def enrich_vehicles(
             vn = _normalize_vin(v.get("vin", ""))
             if vn and allowed_vins is not None and vn in allowed_vins:
                 vin_dec = fetch_vpic_decode(vn)
-            vin_dec = _correct_vpic(vin_dec)
+            vin_dec = _correct_vpic(vin_dec, vn)
             v["_vpic"] = vin_dec
             _apply_match(v, vin_dec)
     elif decode_vins:
@@ -22063,7 +22090,7 @@ def enrich_vehicles(
             vn = _normalize_vin(v.get("vin", ""))
             if vn:
                 vin_dec = fetch_vpic_decode(vn)
-            vin_dec = _correct_vpic(vin_dec)
+            vin_dec = _correct_vpic(vin_dec, vn)
             v["_vpic"] = vin_dec
             _apply_match(v, vin_dec)
     else:
