@@ -2991,6 +2991,29 @@
           "lng": -104.9972
         }
       ]
+    },
+    {
+      "name": "Andersen's U-Pull-It (Alter Trading)",
+      "status": "directory-only",
+      "platform": "andersensales.com redirects to altertrading.com (Angular brochure SPA); no inventory page found",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Found by the Geofabrik coverage sweep 2026-11-04 (tier D). Andersen's Sales and Salvage (Greeley CO) was bought by Alter Trading Corp in Aug 2024. Alter's 2026 job ads for a Greeley U-Pull-It supervisor and lead show the self-service yard still runs. andersensales.com/upi.html now redirects to altertrading.com, which has no robots.txt, no sitemap and no vehicle inventory. Pin is the OSM node. Re-check if Alter publishes a yard inventory."
+      },
+      "locations": [
+        {
+          "name": "Andersen's U-Pull-It - Greeley",
+          "city": "Greeley",
+          "state": "CO",
+          "lat": 40.4231,
+          "lng": -104.6576
+        }
+      ]
     }
   ]
 }
