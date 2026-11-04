@@ -233,3 +233,32 @@ outside the entry.
 
 Result: Corolla 1990–2001 generic-only 983 → 0, and 2002 153 → 0. Lots:
 generic-only 37,502 (11.2%) → 36,366 (10.9%).
+
+### 13.6 Kia Soul 2010–2019 (AM 2010–13, PS 2014–19)
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2010–13, 2014–19 | — | Commodity pulls on every car. |
+| Tail lights (pair) | 2010–13, 2014–19 | — | The entry had none. |
+| Side mirrors (pair) | 2010–13, 2014–19 | — | The entry had none; the row does not claim power mirrors. |
+| Sunroof, alloy wheels | 2010–13 | option | 2014+ keeps its trim-gated panoramic-roof row. |
+
+Left out, no stated basis: the 2010–13 premium audio (speaker-light /
+Infinity package offer years not confirmed). 2020+ not in this block.
+
+Result: Soul generic-only 915 → 0. Lots: generic-only 36,366 (10.9%) →
+35,451 (10.6%).
+
+### 13.7 Block totals and what is next
+
+Before → after (333,460 cars): generic-only **43,010 (12.9%) → 35,451
+(10.6%)**, 7,559 cars moved to model-specific rows; no-entry unchanged at
+12,298 (3.7%). Leftovers in the six models: Accent 2018+ (29), LaCrosse
+2017+ (8), and the pre-entry years (Camry 1990–91, Corolla 1990–92,
+LeSabre pre-1992).
+
+Largest generic-only groups now: Ford Focus 2000–07 (1,535), Explorer
+1st/2nd gen (1,173), Jeep Compass (911), Kia Rio (781), Buick Century
+(704), Chevrolet Aveo (674), VW Passat (652), Buick Lucerne (621), Kia
+Forte (582), Buick Regal (576), Hyundai Tucson (564), Kia Sportage (550),
+Kia Spectra (548), Subaru Legacy (538), Lincoln MKZ (501).

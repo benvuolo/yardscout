@@ -3879,6 +3879,21 @@ _extend_entry("corolla", parts=_per_gen([(1993, 1997), (1998, 2002)], [
     _GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}, _SUNROOF,
 ]))
 
+# Kia Soul (915 cars generic-only, all 2010-13 AM; 2014+ already had the UVO
+# and panoramic-roof rows). The entry had no tail-light or mirror row; the
+# mirror row does not claim power mirrors.
+_extend_entry("soul", parts=[
+    *_per_gen([(2010, 2013), (2014, 2019)], [
+        *_GAP_MECH,
+        _TAILS,
+        {"name": "Side Mirrors (pair)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 15},
+    ]),
+    *_per_gen([(2010, 2013)], [
+        _SUNROOF,
+        {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+    ]),
+])
+
 # --- Feed-spelling aliases: same entry object, different key the feeds use ---
 # ("Town And Country" never contained "town & country"; "Mazda 3" has a space.)
 for _alias, _key in (

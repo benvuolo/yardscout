@@ -175,9 +175,16 @@ check("Corolla 2005: A/C is the plain 2003+ row (one row, not 'if equipped')",
       parts(2005, "Toyota", "Corolla", FWD)["A/C Compressor (clutch spins free)"].get("trim_status") is None)
 check("Corolla 1991: still outside the entry", not names(1991, "Toyota", "Corolla", FWD))
 
+k12, k16 = parts(2012, "Kia", "Soul", FWD), parts(2016, "Kia", "Soul", FWD)
+check("Soul 2012/2016: mechanical rows, tail lights, mirrors in their generation", MECH3 <= set(k12) and MECH3 <= set(k16)
+      and k12["Tail Lights (pair, uncracked)"]["fits"] == "2010–2013" and k16["Side Mirrors (pair)"]["fits"] == "2014–2019")
+check("Soul 2012: sunroof + wheels 'if equipped'; 2016 keeps the panoramic row, not the plain sunroof",
+      k12["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed" and "Panoramic Sunroof Assembly" in k16 and "Sunroof Glass + Motor" not in k16)
+check("Soul 2021: none of the new rows", not (MECH3 & names(2021, "Kia", "Soul", FWD)))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "lesabre", "lacrosse", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))
