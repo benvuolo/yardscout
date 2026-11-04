@@ -37,7 +37,7 @@ jobs:
       - name: Run coverage miner
         # 15 groups x 8 categories at ~2s/request ≈ 4 min when eBay lets us in;
         # seconds when it 403s (fails soft to inventory-side analysis).
-        run: python scraper/mine_coverage_gaps.py --top 15 --categories 8
+        run: python scraper/mine_coverage_gaps.py --top 15 --categories 8 --no-fetch  # CLAUDE.md rule 2: no eBay page fetches
 
       - name: Push candidates branch + open/refresh review PR
         env:
