@@ -1180,3 +1180,30 @@ and hybrid parts (only a very limited number were built).
 
 Result: Tribute generic-only 379 → 0. Lots: generic-only 20,315 (6.1%) →
 19,936 (6.0%).
+
+### 20.3 Chevrolet Uplander 2005–2009
+
+Basis: consumerguide.com/used/2005-08-chevrolet-uplander; en.wikipedia.org/wiki/Chevrolet_Uplander
+(raw; fetched).
+- **Span:** US 2005–08; Canada and Mexico to 2009.
+- **No facelift:** 2006 brought 6-lug wheels, a door logo and a short
+  wheelbase.
+- **A/C:** front A/C standard every year; rear A/C standard on LS/LT
+  trims.
+- **AWD:** 2005–06 only; it was dropped for 2007 ("could not handle the
+  torque of the 3.9 L").
+- **Power sliding doors:** offered every year (passenger side standard on
+  LT, driver side optional).
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2005–09 | — | Every van. |
+| Power sliding door motor | 2005–09 | option | Band kept below the audited minivan rows (Rare, $60–150), conservative. |
+| AWD rear differential / transfer unit | 2005–06 | drive: awd/4wd | |
+
+Left out, no stated basis: wheels (5-lug 2005 vs 6-lug 2006+, so a set
+would need a split not researched), rear-A/C parts (no audited band), the
+third row.
+
+Result: Uplander generic-only 376 → 0. Lots: generic-only 19,936 (6.0%) →
+19,560 (5.9%).

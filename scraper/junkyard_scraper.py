@@ -5900,6 +5900,18 @@ _gap_extend("tribute", parts=_per_gen([(2001, 2006), (2008, 2011)], [
     {"name": "AWD Power Transfer Unit (PTU)", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "drive": ["awd", "4wd"]},
 ]))
 
+# Chevrolet Uplander 2005-2009 (US 2005-08, Canada to 2009; 376 cars
+# generic-only). No facelift. A/C standard; AWD 2005-06 only; power
+# sliding doors offered every year (band kept below the audited minivan
+# rows, conservative).
+_PSD_MOTOR = {"name": "Power Sliding Door Motor", "rarity": "Rare", "low": 60, "high": 150, "cost": 15, "option": True}
+_gap_extend("uplander", parts=[
+    *_per_gen([(2005, 2009)], [*_GAP_MECH, _PSD_MOTOR]),
+    *_per_gen([(2005, 2006)], [
+        {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+    ]),
+])
+
 # ---- end of §20 block
 
 _apply_consensus_evergreens()
