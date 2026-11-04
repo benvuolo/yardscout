@@ -2909,6 +2909,34 @@
           "address": "1325 N. Cedar, Mason, MI 48854"
         }
       ]
+    },
+    {
+      "name": "OKC Pull-A-Part",
+      "status": "adapter-built",
+      "platform": "ASP.NET WebForms home page (ddlMake/ddlModel postback form, server-rendered GridView) - adapter fetch_okcpap_inventory",
+      "website": "http://pullapartokc.com",
+      "inventory_url": "http://pullapartokc.com/",
+      "api": {
+        "endpoint": "http://pullapartokc.com/",
+        "method": "POST",
+        "auth": "none (WebForms VIEWSTATE from the GET)",
+        "format": "html table (Year, Make, Model, Row)",
+        "requests_per_scan": 40,
+        "notes": "Found by the Geofabrik coverage sweep 2026-11-04 (tier B). The yard calls itself 'Pull-A-Part Auto Parts Yard' (1200 S. Santa Fe, Oklahoma City OK 73109, self-service, $3 admission). It is independent of the Pull-A-Part chain, and its display name is 'OKC Pull-A-Part' because docs/app.js keys the chain's pricing and links on the 'pull-a-part' prefix. A POST with a make and any model returns every car of that make; one POST per make. No VIN, stock or arrival date: dateAdded ''. Live at build: 1,025 vehicles (the site's own blurb says 'over 2,000'). robots.txt: none (404)."
+      },
+      "update_freshness": "live (no dates published; departures show as removed rows)",
+      "robots": "none (404)",
+      "tos_flags": "none found",
+      "locations": [
+        {
+          "name": "OKC Pull-A-Part - Oklahoma City",
+          "city": "Oklahoma City",
+          "state": "OK",
+          "lat": 35.4535,
+          "lng": -97.5115,
+          "address": "1200 S. Santa Fe Ave, Oklahoma City, OK 73109"
+        }
+      ]
     }
   ]
 }

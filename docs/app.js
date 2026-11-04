@@ -4122,6 +4122,7 @@ const YARD_INVENTORY_PAGES = [
   [/^route 34 u-pull-m/i, 'https://route34upullm.com/inventory/'],
   [/^sunshine auto salvage/i, 'https://sunshineautosalvage.com/vehicle-inventory/'],
   [/^bevell/i, 'https://bevellspiy.com/vehicle-inventory/'],
+  [/^okc pull-a-part/i, 'http://pullapartokc.com/'],
   [/^kiker'?s u-pull-it/i, 'https://www.kikersupullit.com/inventory'],
   [/^weller self serve/i, 'https://www.wellerselfserve.com/inventory/'],
   [/^cagle'?s u-pull-it/i, 'https://www.caglesupullit.com/inventory.aspx'],

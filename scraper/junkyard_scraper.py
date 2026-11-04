@@ -18426,6 +18426,118 @@ def fetch_bevells_inventory() -> list[dict]:
     return vehicles
 
 
+# OKC Pull-A-Part (pullapartokc.com, "Pull-A-Part Auto Parts Yard", 1200 S.
+# Santa Fe, Oklahoma City) — 2026-11-04, found by the Geofabrik coverage sweep.
+# An INDEPENDENT yard, not the Pull-A-Part chain: the display name must not
+# start with "Pull-A-Part", because docs/app.js keys the chain's pricing and
+# links on that prefix. ASP.NET WebForms home page with ddlMake / ddlModel;
+# a POST with a make and ANY model returns every car of that make as a
+# table (Year, Make, Model, Row) — the model filter applies only when the
+# make is left at "SELECT MAKE". So one POST per make (39) at 2 s, reusing
+# the page's VIEWSTATE. No VIN, stock or arrival date on the site: dateAdded
+# stays "" (never invented) and ids hash row + car + an occurrence counter
+# for identical cars in one row. Any failed make skips the whole yard this
+# scan (a partial lot would read as mass departures; carry-forward keeps the
+# previous rows), as the Ario adapter does. robots.txt: none (404). Pin:
+# Nominatim, exact address (OSM names the parcel "Pull-A-Part Auto Parts Yard").
+OKCPAP_URL = "http://pullapartokc.com/"
+OKCPAP_DELAY_SEC = 2.0
+OKCPAP_YARD = {"name": "OKC Pull-A-Part - Oklahoma City", "city": "Oklahoma City",
+               "state": "OK", "lat": 35.4535, "lng": -97.5115}
+
+
+def _okcpap_form(page: str) -> tuple[dict, list[str], str]:
+    """(hidden fields, makes, a model value) from the search page."""
+    import html as html_mod
+    hidden = {m.group(1): html_mod.unescape(m.group(2)) for m in re.finditer(
+        r'<input[^>]*type="hidden"[^>]*name="([^"]+)"[^>]*value="([^"]*)"', page)}
+
+    def opts(sel_id: str) -> list[str]:
+        m = re.search(rf'<select[^>]*id="{sel_id}"[^>]*>(.*?)</select>', page, re.S)
+        vals = [html_mod.unescape(v) for v in re.findall(r'<option[^>]*value="([^"]*)"', m.group(1))] if m else []
+        return [v for v in vals if v and not v.upper().startswith("SELECT")]
+    models = opts("ddlModel")
+    return hidden, opts("ddlMake"), (models[0] if models else "")
+
+
+def _okcpap_parse(page: str) -> tuple[list[dict], str]:
+    """(rows, problem) from one results page; header-driven like Bevell's."""
+    import html as html_mod
+    for t in re.findall(r"<table[^>]*>(.*?)</table>", page, re.S):
+        trs = re.findall(r"<tr[^>]*>(.*?)</tr>", t, re.S)
+        if not trs:
+            continue
+        heads = [re.sub(r"[^a-z]", "", html_mod.unescape(re.sub(r"<[^>]+>", "", c)).lower())
+                 for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", trs[0], re.S)]
+        if not {"year", "make", "model"} <= set(heads):
+            continue
+        col = {h: i for i, h in enumerate(heads)}
+        rows = []
+        for tr in trs[1:]:
+            cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in re.findall(r"<td[^>]*>(.*?)</td>", tr, re.S)]
+            if len(cells) < len(heads) or not cells[col["year"]].isdigit():
+                continue
+            rows.append({"year": int(cells[col["year"]]), "make": cells[col["make"]],
+                         "model": cells[col["model"]], "row": cells[col["row"]] if "row" in col else ""})
+        return rows, ""
+    return [], "no Year/Make/Model table"
+
+
+def fetch_okcpap_inventory() -> list[dict]:
+    """OKC Pull-A-Part (Oklahoma City): one WebForms POST per make."""
+    import hashlib
+    label = "OKC Pull-A-Part"
+    session = requests.Session()
+    hdrs = {**YARDSCOUT_HEADERS, "Accept": "text/html"}
+    try:
+        r = session.get(OKCPAP_URL, headers=hdrs, timeout=60)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  [{label}] home page fetch failed: {e}", file=sys.stderr)
+        return []
+    hidden, makes, any_model = _okcpap_form(r.text)
+    if not makes or not any_model or "__VIEWSTATE" not in hidden:
+        print(f"  [{label}] search form not found — site layout changed?", file=sys.stderr)
+        return []
+    all_rows: list[dict] = []
+    for mk in makes:
+        time.sleep(OKCPAP_DELAY_SEC)
+        try:
+            rr = session.post(OKCPAP_URL, data={**hidden, "ddlMake": mk, "ddlModel": any_model},
+                              headers=hdrs, timeout=60)
+            rr.raise_for_status()
+        except Exception as e:
+            print(f"  [{label}] {mk}: {e} — skipping the yard this scan (no partial lot)", file=sys.stderr)
+            return []
+        rows, _problem = _okcpap_parse(rr.text)  # a make with no cars renders no table: fine
+        if rows and any(x["make"].upper() != mk.upper() for x in rows):
+            print(f"  [{label}] {mk}: results for another make — form semantics changed? skipping the yard",
+                  file=sys.stderr)
+            return []
+        all_rows.extend(rows)
+    return _okcpap_vehicles(all_rows, hashlib)
+
+
+def _okcpap_vehicles(all_rows: list[dict], hashlib) -> list[dict]:
+    vehicles: list[dict] = []
+    seen: dict[str, int] = {}
+    for x in all_rows:
+        basis = "|".join((x["row"], str(x["year"]), x["make"], x["model"])).lower()
+        n = seen.get(basis, 0)
+        seen[basis] = n + 1
+        vid = "okcpap-" + hashlib.sha1(f"{basis}|{n}".encode()).hexdigest()[:12]
+        vehicles.append({
+            "id": vid, "vin": "", "year": x["year"],
+            "make": _utpap_format_label(x["make"]), "model": _utpap_format_label(x["model"]),
+            "row": x["row"], "dateAdded": "", "_color": "",
+            "_location": OKCPAP_YARD["name"], "_city": OKCPAP_YARD["city"], "_state": OKCPAP_YARD["state"],
+            "_lat": OKCPAP_YARD["lat"], "_lng": OKCPAP_YARD["lng"], "_source": "okcpap",
+        })
+    print(f"  [OKC Pull-A-Part] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
 # Barry's /part-pricing/ table ships a handful of TOOLS-section rows with the
 # PRICE in the description cell (source HTML is literally
 # <td>5.00</td><td>5.00</td><td>Each</td><td>0.00</td> — a data-entry hole on
@@ -21731,6 +21843,7 @@ INDEPENDENT_EXPECTED_SOURCES.update(
     {src: c["label"] for src, c in CRUSH_TABLE_SITES.items()
      if c["yard"] and src not in INDEPENDENT_EXPECTED_SOURCES})
 # 2026-10-28 single-host adapters (Kiker's / Weller / Cagle's block above).
+INDEPENDENT_EXPECTED_SOURCES.update({"okcpap": "OKC Pull-A-Part (Oklahoma City OK)"})  # 2026-11-04
 INDEPENDENT_EXPECTED_SOURCES.update({
     "kikers": "Kiker's U-Pull-It (Pensacola FL)",
     "weller": "Weller Self Serve (Grand Rapids MI)",
@@ -21801,6 +21914,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Route 34 U-Pull-M", fetch_route34_inventory),
     ("Sunshine Auto Salvage", fetch_sunshine_inventory),
     ("Bevell's", fetch_bevells_inventory),  # 2026-11-03, Goldsboro NC (paged Toolset table)
+    ("OKC Pull-A-Part", fetch_okcpap_inventory),  # 2026-11-04, Oklahoma City (WebForms, one POST per make)
     # 2026-10-28 single-host adapters (Kiker's / Weller / Cagle's block).
     # Weller honors a 10 s robots Crawl-delay (~25-30 min), like Wilbert's.
     ("Kiker's U-Pull-It", fetch_kikers_inventory),
