@@ -2937,6 +2937,37 @@
           "address": "1200 S. Santa Fe Ave, Oklahoma City, OK 73109"
         }
       ]
+    },
+    {
+      "name": "Pick A Part of Arizona (mypickapart.com)",
+      "status": "retired",
+      "platform": "WordPress brochure site; /fresh-inventory/ table empty",
+      "website": "https://mypickapart.com",
+      "inventory_url": null,
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Checked 2026-11-04 after the Geofabrik coverage sweep listed the Phoenix and Mesa yards as tier B. The home page banner says 'Closed to the Public. Online and Wholesale Store Opening Soon. We Still Buy Cars'. /fresh-inventory/ has only the table header ('Inventory Updated: 11/17/24', no rows). Not a self-service yard now. Unrelated to Pull-N-Save (adapter-built) despite the nearby pins. Re-check if it reopens to the public."
+      },
+      "locations": [
+        {
+          "name": "Pick A Part - Phoenix",
+          "city": "Phoenix",
+          "state": "AZ",
+          "lat": 33.4063,
+          "lng": -112.1252
+        },
+        {
+          "name": "Pick A Part - Mesa",
+          "city": "Mesa",
+          "state": "AZ",
+          "lat": 33.4124,
+          "lng": -111.8495
+        }
+      ]
     }
   ]
 }
