@@ -3038,6 +3038,30 @@
           "lng": -121.7979
         }
       ]
+    },
+    {
+      "name": "A-1 Metals & Auto Salvage (not self-service)",
+      "status": "retired",
+      "platform": "Ario (autorecycler.io) live feed, slug a1-metals, is_self_service false",
+      "inventory_url": "https://ario.autorecycler.io/yard/a1-metals",
+      "api": {
+        "endpoint": null,
+        "method": null,
+        "auth": null,
+        "format": null,
+        "requests_per_scan": null,
+        "notes": "Sweep tier D on 2026-11-03 and 2026-11-04 (live on Ario, 510 rows). Not added: Ario's own org flag says not self-service, and the directory listings (5795 Stockdale Rd, Paso Robles CA 93446) describe a metals/auto salvage business with no self-service mention. Listed here only so the sweep stops re-listing it. Add it only if the yard itself says it is pull-your-own."
+      },
+      "locations": [
+        {
+          "name": "A-1 Metals & Auto Salvage - Paso Robles",
+          "city": "Paso Robles",
+          "state": "CA",
+          "lat": 35.6855,
+          "lng": -120.6982,
+          "ario_slug": "a1-metals"
+        }
+      ]
     }
   ]
 }
