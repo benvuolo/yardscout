@@ -170,6 +170,7 @@ const ev = (e, extra = {}) => fetch(BASE + '/v1/events', { method: 'POST', heade
   body: JSON.stringify({ e, p: 'ios', ...extra }) });
 await ev('first-visit', { src: 'reddit', cmp: 'r-4runner' }); await ev('first-visit'); await ev('checkout-start');
 await ev('paywall/part-value'); await ev('paywall/part-value'); await ev('paywall/watch-limit'); await ev('checkout/watch-limit'); await ev('purchase/watch-limit');
+await ev('pf/alternator'); await ev('pf/alternator'); await ev('pf/headlights'); await ev('pf-car/honda-civic'); await ev('pf-car/honda-civic'); await ev('pf-car/toyota-4runner');
 r = await dailyRun({ dryRun: true, nowOffsetHours: 24 });
 const u = r.data.usage || {};
 check('usage: yesterday funnel counts', u.funnel?.['first-visit']?.yesterday === 2 && u.funnel?.['first-visit']?.week === 2
@@ -177,6 +178,9 @@ check('usage: yesterday funnel counts', u.funnel?.['first-visit']?.yesterday ===
 check('usage: gates ranked by purchases', JSON.stringify(u.gates) === JSON.stringify([
   { gate: 'watch-limit', paywall: 1, checkout: 1, purchase: 1 }, { gate: 'part-value', paywall: 2, checkout: 0, purchase: 0 }]), JSON.stringify(u.gates));
 check('usage: email lists gates', /Pro sheet by gate[\s\S]*watch-limit\s+1 \/ 1 \/ 1[\s\S]*part-value\s+2 \/ 0 \/ 0/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
+check('usage: most searched parts and cars ranked', JSON.stringify(u.topParts) === JSON.stringify([{ name: 'alternator', n: 2 }, { name: 'headlights', n: 1 }])
+  && JSON.stringify(u.topCars) === JSON.stringify([{ name: 'honda-civic', n: 2 }, { name: 'toyota-4runner', n: 1 }]), JSON.stringify([u.topParts, u.topCars]));
+check('usage: email lists searched parts and cars', /Most searched parts \(7 d\): alternator 2, headlights 1/.test(r.data.email?.text || '') && /Most searched cars \(7 d\): honda-civic 2, toyota-4runner 1/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
 check('usage: tagged source listed', JSON.stringify(u.sources) === JSON.stringify([{ source: 'reddit', n: 1 }]), JSON.stringify(u.sources));
 check('usage: email shows source + checkout taps', /Tagged sources \(first visits, 7 d\): reddit 1/.test(r.data.email?.text || '')
   && /Checkout taps\s+1\s+1/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);

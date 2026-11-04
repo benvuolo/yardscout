@@ -88,3 +88,26 @@ matched only generic rows.
   LED rows), the three mechanical pulls, AWD transfer units on a drive gate,
   Entune/navigation units, and option-flagged sunroofs, leather, wheels,
   roof-rack crossbars, JBL/Bose.
+
+## 12. Enthusiast audit (2026-11-04)
+
+The cars people flip most, reviewed row by row:
+
+- **WRX / Impreza:** a "Subaru Impreza WRX" listing matched both the `impreza`
+  entry (whose interchange rows carry WRX parts "if equipped") and the `wrx`
+  entry, so the hood scoop and intercooler showed twice. The `wrx` entry now
+  owns the "impreza wrx"/"impreza sti" spellings, so those listings match it
+  alone; it gained headlight and tail-light rows so the WRX card isn't poorer
+  than the Impreza one. 1998–2001 2.5RS: gold wheels and hood scoop (trim RS).
+- **Miata:** no headlight row existed before 2006. NA pop-up motors + lamps
+  (1990–97), NB lamps (1999–2005), NC power-hardtop mechanism (option).
+- **4Runner:** 4th/5th gen power rear-window regulator (a known failure),
+  sliding cargo deck and 3rd row (options), Limited X-REAS shocks (trim),
+  2014–19 Entune unit.
+- **Tacoma:** TRD skid plate, TRD Pro grille and colour-matched flares were
+  listed as if every truck had them; now option-flagged. Added deck-rail
+  system (option), 2nd-gen flares (option), 3rd-gen Entune unit.
+- **Cherokee XJ:** had three rows. Added liftgate, uncracked dash bezel and
+  door panels (the plastics everyone hunts), tail lights, 1997–2001
+  composite headlights and fog lights (option), mirrors.
+- Civic Si needed nothing; vPIC supplies its trims and the rows were right.

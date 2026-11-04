@@ -4242,6 +4242,57 @@ _extend_entry("rav4", parts=_gap_rows(2001, 2018, [
     {"name": "Roof Rack Crossbars (pair)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 20, "yr_min": 2001, "yr_max": 2018, "option": True},
     {"name": "AWD Rear Differential / Coupling", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "yr_min": 2001, "yr_max": 2018, "drive": ["awd", "4wd"]},
 ]))
+# ---- 2026-11-04 enthusiast audit (the cars people flip most; see
+# scraper/PARTS_GAPS_2026-11.md §12). Facts only; options flagged.
+# "Subaru Impreza WRX" listings matched BOTH the impreza entry (whose
+# interchange rows carry WRX parts "if equipped") and the wrx entry, so the
+# scoop and intercooler showed twice. The wrx entry now also owns the
+# "impreza wrx"/"impreza sti" spellings; the specificity guard then drops
+# the plain "impreza" match for those listings. Plain "Impreza" listings
+# keep the "if equipped" WRX rows (the yard may not have said).
+UNOBTANIUM_DB["wrx"]["match"] = ["impreza wrx", "impreza sti", "wrx"]
+UNOBTANIUM_DB["mx-5"]["match"] = ["mx-5", "mx5", "miata"]   # every feed says "MX-5 Miata" today; "Miata" alone is cheap insurance
+_extend_entry("wrx", parts=[
+    {"name": "OEM Headlights (clear)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 35, "yr_min": 2002, "yr_max": 2021},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15, "yr_min": 2002, "yr_max": 2021},
+])
+_extend_entry("impreza", parts=[
+    # 1998-2001 2.5RS: the gold wheels and hood scoop are what RS cars get stripped for.
+    {"name": "2.5RS Gold Alloy Wheels (set of 4)", "rarity": "Rare", "low": 200, "high": 450, "cost": 100, "yr_min": 1998, "yr_max": 2001, "trim": ["RS", "2.5RS", "2.5 RS"]},
+    {"name": "2.5RS Hood Scoop", "rarity": "Rare", "low": 60, "high": 150, "cost": 15, "yr_min": 1998, "yr_max": 2001, "trim": ["RS", "2.5RS", "2.5 RS"]},
+])
+_extend_entry("mx-5", parts=[
+    # NA pop-ups and NB fixed lamps had no headlight row at all.
+    {"name": "Pop-up Headlight Motors + Lamps (pair)", "rarity": "Rare", "low": 100, "high": 250, "cost": 30, "yr_min": 1990, "yr_max": 1997},
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 35, "yr_min": 1999, "yr_max": 2005},
+    # NC power retractable hardtop (2007+): the mechanism is the sought part when one fails.
+    {"name": "PRHT Roof Motor / Latch Mechanism", "rarity": "Rare", "low": 150, "high": 350, "cost": 40, "yr_min": 2007, "yr_max": 2015, "option": True},
+])
+_extend_entry("4runner 2003-2009", parts=[
+    {"name": "Power Rear Window Regulator (liftgate glass)", "rarity": "Rare", "low": 80, "high": 200, "cost": 25},
+    {"name": "Sliding Rear Cargo Deck", "rarity": "Rare", "low": 150, "high": 350, "cost": 35, "option": True},
+])
+_extend_entry("4runner 2010-2024", parts=[
+    {"name": "Power Rear Window Regulator (liftgate glass)", "rarity": "Rare", "low": 80, "high": 200, "cost": 25},
+    {"name": "Sliding Rear Cargo Deck", "rarity": "Rare", "low": 150, "high": 350, "cost": 35, "option": True},
+    {"name": "3rd Row Seat", "rarity": "Rare", "low": 120, "high": 300, "cost": 35, "option": True},
+    {"name": "X-REAS Suspension Shocks (Limited, pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 20, "trim": ["Limited"]},
+    {"name": "Entune / Touchscreen Head Unit", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 35, "yr_min": 2014, "yr_max": 2019},
+])
+_extend_entry("tacoma 2005-2015", parts=[
+    {"name": "Fender Flares (color-matched, PreRunner/4x4, set)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "option": True},
+    {"name": "Composite Bed Deck Rail System + Cleats", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 15, "option": True},
+])
+_extend_entry("tacoma 2016-2024", parts=[
+    {"name": "Entune / Touchscreen Head Unit", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 35, "yr_min": 2016, "yr_max": 2023},
+    {"name": "Composite Bed Deck Rail System + Cleats", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 15, "option": True},
+])
+# Option packages that were listed as if every truck had them.
+for _k, _names in (("tacoma 2005-2015", ("TRD Skid Plate",)), ("tacoma 2016-2024", ("TRD Skid Plate", "TRD Pro Grille", "OEM Fender Flares (color-matched)"))):
+    for _p in UNOBTANIUM_DB[_k]["top_parts"]:
+        if _p["name"] in _names:
+            _p["option"] = True
+
 _extend_entry("explorer 2011-2019", parts=_gap_rows(2011, 2019, [
     {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
     {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15, "option": True},
@@ -4341,6 +4392,19 @@ _split_generations("cherokee", display="Jeep Cherokee", make="Jeep", gens=[
         {"name": "Headlights (clear pair)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 18},
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
     ]},
+])
+
+# 2026-11-04 enthusiast audit: XJ rows go on the generation entry (the split
+# above replaces the base entry).
+_extend_entry("cherokee 1984-2001", parts=[
+    # XJ: the plastic cracks and the glass/hatch gets hunted.
+    {"name": "Rear Liftgate (clean, with glass)", "rarity": "Rare", "low": 150, "high": 350, "cost": 40},
+    {"name": "Dash Bezel / Center Stack Trim (uncracked)", "rarity": "Rare", "low": 60, "high": 160, "cost": 10},
+    {"name": "Interior Door Panels (uncracked, set of 4)", "rarity": "Rare", "low": 100, "high": 250, "cost": 40},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
+    {"name": "Headlights (composite, clear)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 20, "yr_min": 1997, "yr_max": 2001},
+    {"name": "Fog Lights + Bezels (pair)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20, "yr_min": 1997, "yr_max": 2001, "option": True},
+    {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
 ])
 
 _split_generations("camaro", display="Chevy Camaro", make="Chevrolet", gens=[

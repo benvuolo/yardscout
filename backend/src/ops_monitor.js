@@ -474,6 +474,8 @@ function usageLines(u, audience) {
   L.push(`  Tagged sources (first visits, 7 d): ${u.sources.length
     ? u.sources.map((s) => `${s.source} ${fmtInt(s.n)}`).join(', ') : 'none (add ?utm_source=… to links you post)'}`);
   if (u.topWatches.length) L.push(`  Most watched: ${u.topWatches.map((w) => `${w.name} ${fmtInt(w.n)}`).join(', ')}`);
+  if (u.topParts && u.topParts.length) L.push(`  Most searched parts (7 d): ${u.topParts.map((x) => `${x.name} ${fmtInt(x.n)}`).join(', ')}`);
+  if (u.topCars && u.topCars.length) L.push(`  Most searched cars (7 d): ${u.topCars.map((x) => `${x.name} ${fmtInt(x.n)}`).join(', ')}`);
   // Which gate opened the sheet, and which gate people bought from (7 d).
   if (u.gates && u.gates.length) {
     L.push('  Pro sheet by gate (7 d): opens / checkout taps / purchases');
@@ -560,7 +562,7 @@ async function loadUsage(env, now) {
   const today = utcDay(now), yesterday = utcDay(now - DAY), weekAgo = utcDay(now - 7 * DAY);
   const iso = (ms) => new Date(ms).toISOString();
   const watchesOk = `watches_json IS NOT NULL AND json_valid(watches_json)`;
-  const [dev, users, webWatches, events, sources, top, gateRows] = (await env.DB.batch([
+  const [dev, users, webWatches, events, sources, top, gateRows, pfRows] = (await env.DB.batch([
     env.DB.prepare(
       `SELECT platform, tier, COUNT(*) AS n,
               SUM(CASE WHEN apns_token IS NOT NULL OR fcm_token IS NOT NULL THEN 1 ELSE 0 END) AS push,
@@ -596,6 +598,12 @@ async function loadUsage(env, now) {
         WHERE day >= ?1 AND day < ?2 AND (event LIKE 'paywall/%' OR event LIKE 'checkout/%' OR event LIKE 'purchase/%')
         GROUP BY event`
     ).bind(weekAgo, today),
+    // What the Parts tab is asked for (pf/<category>, pf-car/<make-model>), 7 d.
+    env.DB.prepare(
+      `SELECT event, SUM(n) AS n FROM events_daily
+        WHERE day >= ?1 AND day < ?2 AND (event LIKE 'pf/%' OR event LIKE 'pf-car/%')
+        GROUP BY event ORDER BY n DESC`
+    ).bind(weekAgo, today),
   ])).map((r) => r.results || []);
   const gates = new Map();
   for (const r of gateRows) {
@@ -603,6 +611,8 @@ async function loadUsage(env, now) {
     if (!gates.has(gate)) gates.set(gate, { gate, paywall: 0, checkout: 0, purchase: 0 });
     gates.get(gate)[kind] += r.n;
   }
+  const topParts = pfRows.filter((r) => String(r.event).startsWith('pf/')).slice(0, 8).map((r) => ({ name: String(r.event).slice(3), n: r.n }));
+  const topCars = pfRows.filter((r) => String(r.event).startsWith('pf-car/')).slice(0, 8).map((r) => ({ name: String(r.event).slice(7), n: r.n }));
   const sum = (rows, k) => rows.reduce((a, r) => a + (r[k] || 0), 0);
   const funnel = {};
   for (const e of events) funnel[e.event] = { yesterday: e.yesterday || 0, week: e.week || 0 };
@@ -626,6 +636,7 @@ async function loadUsage(env, now) {
     funnel,
     sources: sources.map((r) => ({ source: r.source, n: r.n })),
     topWatches: top.map((r) => ({ name: [r.make, r.model].filter(Boolean).join(' ') || 'any', n: r.n })),
+    topParts, topCars,
     gates: [...gates.values()].sort((a, b) => b.purchase - a.purchase || b.checkout - a.checkout || b.paywall - a.paywall).slice(0, 10),
   };
 }
@@ -753,6 +764,8 @@ export function composeDailyHtml(r) {
       ? u.sources.map((x) => `${esc(x.source)} <strong>${fmtInt(x.n)}</strong>`).join(', ')
       : '<span style="color:' + C.dim + ';">none yet — add ?utm_source=… to links you post</span>'}</div>`);
     if (u.topWatches.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most watched:</span> ${u.topWatches.map((w) => `${esc(w.name)} <strong>${fmtInt(w.n)}</strong>`).join(', ')}</div>`);
+    if (u.topParts && u.topParts.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most searched parts (7 d):</span> ${u.topParts.map((x) => `${esc(x.name)} <strong>${fmtInt(x.n)}</strong>`).join(', ')}</div>`);
+    if (u.topCars && u.topCars.length) extras.push(`<div style="font-size:14px;margin:6px 0 2px;"><span style="color:${C.dim};">Most searched cars (7 d):</span> ${u.topCars.map((x) => `${esc(x.name)} <strong>${fmtInt(x.n)}</strong>`).join(', ')}</div>`);
     S.push(hSection('Where people come from', extras.join('')));
   } else {
     S.push(hSection('Usage', hMuted(`Could not load (${esc((u && u.error) || 'unknown')})`)));

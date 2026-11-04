@@ -5614,9 +5614,23 @@ document.getElementById('pf-engine').addEventListener('change', e => {
   }
 });
 
+/* What people search for, as aggregate counters only (events_daily rows
+ * like pf/alternator and pf-car/honda-civic — a part category id and a
+ * make-model slug, never a user id). The daily email ranks them so the
+ * parts table gets curated where the demand is. */
+function pfSearchSignal(s) {
+  try {
+    if (pfCat && pfCat.id) sendEvent('pf/' + String(pfCat.id).toLowerCase().replace(/[^a-z0-9_-]/g, '-').slice(0, 40));
+    if (s && s.make && s.model) {
+      const slug = (s.make + '-' + s.model).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
+      if (slug) sendEvent('pf-car/' + slug);
+    }
+  } catch (e) { /* analytics must never break the app */ }
+}
 function pfRunBrowse(s) {
   const out = document.getElementById('pf-results');
   track('part-browse');
+  pfSearchSignal(s);
   pfSaveState();
   const radius = effectiveRadiusMi();
   const unlocked = isPro();
@@ -5747,6 +5761,7 @@ function pfRunSearch() {
   // the part, no fit claims. Fitment needs all three car fields.
   if (!s.year || !s.make || !s.model) { pfRunBrowse(s); return; }
   track('part-first-search');
+  pfSearchSignal(s);
   pfSaveState();
 
   const radius = effectiveRadiusMi();
