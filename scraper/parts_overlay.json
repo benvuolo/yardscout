@@ -373,6 +373,63 @@
      "rarity": "Rare",
      "source": "agent-research",
      "added": "2026-10-09"
+    },
+    {
+     "name": "Fuel Pump Module (in-tank, test before listing)",
+     "low": 40,
+     "high": 90,
+     "cost": 24,
+     "rarity": "Uncommon",
+     "yr_min": 2007,
+     "yr_max": 2009,
+     "source": "parts-gaps-§20.6",
+     "added": "2026-11-04"
+    },
+    {
+     "name": "A/C Compressor (clutch spins free)",
+     "low": 60,
+     "high": 130,
+     "cost": 40,
+     "rarity": "Uncommon",
+     "yr_min": 2007,
+     "yr_max": 2009,
+     "source": "parts-gaps-§20.6",
+     "added": "2026-11-04"
+    },
+    {
+     "name": "Radiator Fan Assembly",
+     "low": 40,
+     "high": 90,
+     "cost": 16,
+     "rarity": "Uncommon",
+     "yr_min": 2007,
+     "yr_max": 2009,
+     "source": "parts-gaps-§20.6",
+     "added": "2026-11-04"
+    },
+    {
+     "name": "Sunroof Glass + Motor",
+     "low": 60,
+     "high": 140,
+     "cost": 30,
+     "rarity": "Uncommon",
+     "option": true,
+     "yr_min": 2007,
+     "yr_max": 2009,
+     "source": "parts-gaps-§20.6",
+     "added": "2026-11-04"
+    },
+    {
+     "name": "XR 18\" Alloy Wheels (set of 4, straight)",
+     "low": 150,
+     "high": 320,
+     "cost": 100,
+     "rarity": "Uncommon",
+     "trim": ["XR"],
+     "yr_min": 2007,
+     "yr_max": 2009,
+     "source": "parts-gaps-§20.6",
+     "added": "2026-11-04"
     }
    ]
   },

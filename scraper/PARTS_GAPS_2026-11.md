@@ -1270,3 +1270,28 @@ into `lexus es` is a follow-up.
 
 Result: Lexus ES 1992–2006 generic-only 361 → 0. Lots: generic-only 19,196
 (5.8%) → 18,835 (5.7%).
+
+### 20.6 Saturn Aura 2007–2009 (rows in `parts_overlay.json`)
+
+Basis: consumerguide.com/used/2007-09-saturn-aura; en.wikipedia.org/wiki/Saturn_Aura
+(raw; fetched).
+- **Where the rows live:** the Aura entry is created by the overlay merge,
+  so its new rows were added to the overlay's Aura entry (`source:
+  parts-gaps-§20.6`). The overlay carries no drive gate, which is not needed
+  here.
+- **No facelift:** one generation, 2007–09.
+- **Equipment:** A/C standard on all trims. The power sunroof was optional
+  on every trim and never standard (panoramic $1,500 in 2007). The XR had
+  18" machined alloys; the XE had 17" covers.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2007–09 | — | Every car; same bands and costs as `_GAP_MECH`. |
+| Sunroof | 2007–09 | option | |
+| XR 18" alloy wheels | 2007–09 | trim: XR | XR-only wheels. |
+
+Left out, no stated basis: Green Line/Hybrid parts (no audited band), the
+3.6 V6 (engine).
+
+Result: Aura generic-only 353 → 0. Lots: generic-only 18,835 (5.7%) →
+18,482 (5.6%).

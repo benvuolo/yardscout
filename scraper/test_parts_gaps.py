@@ -468,6 +468,12 @@ check("§20 Lexus ES: mech per generation; moonroof 'if equipped' 1998, plain 20
       and e98["Nakamichi Amp + Speakers"]["trim_status"] == "unconfirmed" and "Nakamichi Amp + Speakers" not in e04
       and e98["Headlights (clear, non-hazed)"]["fits"] == "1997–1999")
 
+n08 = parts(2008, "Saturn", "Aura", FWD)
+check("§20 Aura (overlay rows): mech 2007-09; sunroof 'if equipped'; XR wheels listing-confirmed on 'Aura XR'",
+      MECH3 <= set(n08) and n08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2007–2009"
+      and n08["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed"
+      and parts(2008, "Saturn", "Aura XR")['XR 18" Alloy Wheels (set of 4, straight)']["trim_status"] == "listing")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
