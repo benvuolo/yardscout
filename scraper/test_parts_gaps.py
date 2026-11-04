@@ -103,9 +103,28 @@ check("Camry 2010: overlay JBL (2002-14) survives next to the 2015-17 row", part
 check("Camry 2016: JBL row is the 2015-17 one", parts(2016, "Toyota", "Camry", FWD).get("JBL Amp + Speakers", {}).get("fits") == "2015–2017")
 check("Corolla 2010 / Malibu 2011: mechanical rows", "Radiator Fan Assembly" in names(2010, "Toyota", "Corolla", FWD) and "Radiator Fan Assembly" in names(2011, "Chevrolet", "Malibu", FWD))
 
+# 2c. breadth pass: uncovered models get the commuter rows; feed spellings route to their entries
+def disp(year, make, model):
+    return [m.get("display") for m in js.match_vehicle(year, make, model)]
+check("Lincoln MKZ 2012 now has rows (lamps + evergreens)", len(parts(2012, "Lincoln", "MKZ", FWD)) >= 8)
+check("Lincoln LS does not steal Lexus LS", disp(2004, "Lexus", "LS") == ["Lexus LS400 / LS430"] and disp(2003, "Lincoln", "LS") == ["Lincoln LS"])
+check("'Dodge 1500 Pickup' routes to the Ram entry", any("Ram" in d for d in disp(2005, "Dodge", "1500 Pickup")))
+check("Grand Caravan still matches (shared entry kept both keywords)", disp(2010, "Dodge", "Grand Caravan") == ["Dodge Grand Caravan"] and disp(2008, "Chrysler", "Caravan") == ["Dodge Grand Caravan"], str(disp(2010, "Dodge", "Grand Caravan")))
+check("1997 Sentra now matches with lamp rows", "Headlights (clear, non-hazed)" in names(1997, "Nissan", "Sentra", FWD))
+check("'Chevrolet Classic' routes to Malibu", disp(2005, "Chevrolet", "Classic") == ["Chevrolet Malibu"])
+check("'Chevrolet K2500' routes to the C/K entry", any("C/K" in d for d in disp(1995, "Chevrolet", "K2500")))
+check("Saturn SL2 and Mazda 5 spellings match", disp(1999, "Saturn", "SL2") == ["Saturn SL"] and disp(2010, "Mazda", "Mazda5") == ["Mazda Mazda5"] and disp(2010, "Mazda", "Mazda 5") == ["Mazda Mazda5"])
+check("every breadth key exists and carries the evergreens", all(k in js.UNOBTANIUM_DB and any("Alternator" in q["name"] for q in js.UNOBTANIUM_DB[k]["top_parts"]) for k in js._GAP_GENERIC_KEYS))
+check("Rogue 2010: headlights + AWD coupling gated", "Headlights (clear, non-hazed)" in names(2010, "Nissan", "Rogue", FWD) and "AWD Rear Differential / Coupling" not in names(2010, "Nissan", "Rogue", FWD)
+      and parts(2010, "Nissan", "Rogue", AWD)["AWD Rear Differential / Coupling"]["trim_status"] == "vin")
+check("CR-V 2005: compressor + headlights; 2019 keeps LED row only", "A/C Compressor (clutch spins free)" in names(2005, "Honda", "CR-V", FWD) and "Headlights (clear, non-hazed)" in names(2005, "Honda", "CR-V", FWD)
+      and "Headlights (clear, non-hazed)" not in names(2019, "Honda", "CR-V", FWD))
+check("RAV4 2015: Entune row; 2008: none", "Entune / Touchscreen Head Unit" in names(2015, "Toyota", "RAV4", FWD) and "Entune / Touchscreen Head Unit" not in names(2008, "Toyota", "RAV4", FWD))
+check("Explorer 2014 AWD: PTU confirmed; 2008: no PTU row", parts(2014, "Ford", "Explorer", AWD)["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin" and "AWD Power Transfer Unit (PTU)" not in names(2008, "Ford", "Explorer", AWD))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

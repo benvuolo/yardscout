@@ -68,3 +68,23 @@ converter, key fobs (programming), ignition coils (cheap new).
 part whose name already existed in the entry, regardless of years, so a
 new 2011–16 Elantra headlight row silently dropped the 2005–10 one. It now
 skips only when the model-year windows overlap.
+
+## 11. Breadth pass (2026-11-04)
+
+Measured against the lots (334k cars): 9% of cars had no entry at all and 9%
+matched only generic rows.
+
+- **101 mid-volume models with no entry** (80–490 cars each, ~16,500 cars:
+  Lincoln MKZ/MKX/MKS, Uplander, Mazda5, Windstar, Spark, Captiva Sport, Juke,
+  Encore, Park Avenue, Stratus, Trax, Escort, Volvo S40/V70/XC60/C70, Fiat
+  500, Jaguar S-/X-Type/XF/XJ, Infiniti QX60/Q50/EX35/I30 …) get the commuter
+  lamp/mirror rows plus the consensus evergreens (`_GAP_GENERIC_KEYS`).
+  Year ranges are the model's US run; nothing model-specific is claimed.
+- **Feed spellings routed to existing entries:** "Dodge 1500 Pickup"/"D1500"
+  → Ram, "Chevrolet Gmt-400"/K2500/C2500/C10 → C/K, "Chrysler Caravan" →
+  Caravan, "Chevrolet Classic" → Malibu.
+- **Curated** (same basis as the Altima block): Rogue 2008–20, CR-V 2002–16,
+  RAV4 2001–18, Explorer 2011–19 — pre-LED headlight rows (all three had only
+  LED rows), the three mechanical pulls, AWD transfer units on a drive gate,
+  Entune/navigation units, and option-flagged sunroofs, leather, wheels,
+  roof-rack crossbars, JBL/Bose.

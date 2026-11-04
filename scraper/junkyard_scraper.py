@@ -3192,8 +3192,11 @@ _extend_entry("equinox", parts=_gap_rows(2005, 2024, [
     {"name": "18\"/19\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 160, "high": 340, "cost": 100, "yr_min": 2010, "yr_max": 2024, "option": True},
 ]))
 
-# Nissan Sentra (4,130 cars; B16 2007-12, B17 2013-19)
-_extend_entry("sentra", parts=_gap_rows(2007, 2019, [
+# Nissan Sentra (4,130 cars; B16 2007-12, B17 2013-19). Floor lowered to the
+# B14 (1995-1999), which matched nothing: lamp rows for it, evergreens apply.
+_extend_entry("sentra", year_range=(1995, 2024), parts=_gap_rows(2007, 2019, [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 20, "yr_min": 1995, "yr_max": 1999},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1995, "yr_max": 1999},
     {"name": "SR Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 110, "cost": 28, "yr_min": 2013, "yr_max": 2019, "trim": ["SR"]},
     {"name": "SR 17\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2013, "yr_max": 2019, "trim": ["SR"]},
     {"name": "Bose Amp + Speakers (SL)", "rarity": "Uncommon", "low": 50, "high": 120, "cost": 15, "yr_min": 2013, "yr_max": 2019, "option": True},
@@ -4208,6 +4211,48 @@ _split_generations("explorer", display="Ford Explorer", make="Ford", gens=[
     ]},
 ])
 
+# 2026-11 gap curation: the biggest models still matching only generic rows
+# (Rogue 1,800 cars, CR-V 1,300, RAV4 850, Explorer 1,000). Same basis as
+# the Altima block (scraper/PARTS_GAPS_2026-11.md).
+_extend_entry("rogue", parts=_gap_rows(2008, 2020, [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_min": 2008, "yr_max": 2016},  # LED row covers 2017+
+    {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 120, "cost": 15, "yr_min": 2008, "yr_max": 2020, "option": True},
+    {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2008, "yr_max": 2020, "option": True},
+    {"name": "SL Leather Heated Seats (pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2008, "yr_max": 2020, "option": True},
+    {"name": "17\"/18\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2008, "yr_max": 2020, "option": True},
+    {"name": "Roof Rack Crossbars (pair)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 20, "yr_min": 2008, "yr_max": 2020, "option": True},
+    {"name": "AWD Rear Differential / Coupling", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "yr_min": 2008, "yr_max": 2020, "drive": ["awd", "4wd"]},
+]))
+_extend_entry("cr-v", parts=_gap_rows(2002, 2016, [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_min": 2002, "yr_max": 2016},  # LED row covers 2017+
+    {"name": "Sunroof Glass + Motor (EX)", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2002, "yr_max": 2016, "option": True},
+    {"name": "EX-L Leather Heated Seats (pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2005, "yr_max": 2016, "option": True},
+    {"name": "Navigation Head Unit (EX-L w/ Navi)", "rarity": "Rare", "low": 100, "high": 240, "cost": 45, "yr_min": 2007, "yr_max": 2016, "option": True},
+    {"name": "17\" EX Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2007, "yr_max": 2016, "option": True},
+    {"name": "AWD Rear Differential", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "yr_min": 2002, "yr_max": 2016, "drive": ["awd", "4wd"]},
+]))
+_extend_entry("rav4", parts=_gap_rows(2001, 2018, [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_min": 2001, "yr_max": 2018},  # LED row covers 2019+
+    {"name": "Entune / Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 35, "yr_min": 2013, "yr_max": 2018},
+    {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15, "yr_min": 2013, "yr_max": 2018, "option": True},
+    {"name": "JBL Amp + Speakers", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 15, "yr_min": 2006, "yr_max": 2018, "option": True},
+    {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2001, "yr_max": 2018, "option": True},
+    {"name": "Limited Leather Heated Seats (pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2006, "yr_max": 2018, "option": True},
+    {"name": "17\"/18\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2006, "yr_max": 2018, "option": True},
+    {"name": "Roof Rack Crossbars (pair)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 20, "yr_min": 2001, "yr_max": 2018, "option": True},
+    {"name": "AWD Rear Differential / Coupling", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "yr_min": 2001, "yr_max": 2018, "drive": ["awd", "4wd"]},
+]))
+_extend_entry("explorer 2011-2019", parts=_gap_rows(2011, 2019, [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
+    {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15, "option": True},
+    # The 2011+ Explorer's power transfer unit is its best-known failure.
+    {"name": "AWD Power Transfer Unit (PTU)", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+    {"name": "Roof Rack Crossbars (pair)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 20, "option": True},
+    {"name": "Leather Heated Seats (Limited/Sport, pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "option": True},
+    {"name": "20\" Alloy Wheels (Sport/Limited, set of 4)", "rarity": "Uncommon", "low": 200, "high": 420, "cost": 100, "option": True},
+    {"name": "EcoBoost Turbocharger (2.0/2.3, match part #)", "rarity": "Rare", "low": 120, "high": 280, "cost": 60, "option": True},
+]))
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
@@ -4737,6 +4782,557 @@ _EVERGREEN_PARTS: tuple[tuple[dict, tuple[str, ...]], ...] = (
 
 # High-population entries from the 2026-10 national scan (volume-ranked; each
 # dict key named exactly once — gen-split rows listed per generation).
+# ---- 2026-11 breadth pass: 101 mid-volume models (80-490 cars each, ~16,500
+# cars in all) had no entry, so no value line at all. Each gets the commuter
+# lamp/mirror rows plus the consensus evergreens (appended by key below).
+# Year ranges are the model's US run; nothing model-specific is claimed.
+_GAP_GENERIC_KEYS: tuple[str, ...] = (
+    'mkz',
+    'mkx',
+    'mks',
+    'lincoln ls',
+    'aviator',
+    'continental',
+    'uplander',
+    'venture',
+    'lumina',
+    'spark',
+    'captiva sport',
+    'trax',
+    'caprice',
+    'volt',
+    'mazda5',
+    'mazda2',
+    'mpv',
+    'b-series',
+    'mazda 626',
+    'windstar',
+    'freestar',
+    'freestyle',
+    'escort',
+    'thunderbird',
+    'c-max',
+    'montego',
+    'cougar',
+    'juke',
+    'cube',
+    'encore',
+    'park avenue',
+    'rainier',
+    'stratus',
+    'intrepid',
+    'concorde',
+    '300m',
+    'aspen',
+    'volvo s40',
+    'volvo v70',
+    'volvo xc60',
+    'volvo c70',
+    'fiat 500',
+    'alero',
+    'intrigue',
+    'bravada',
+    'cutlass ciera',
+    'torrent',
+    'bonneville',
+    'sunfire',
+    'pontiac g5',
+    'montana',
+    'acura rdx',
+    'acura cl',
+    'renegade',
+    'outlook',
+    'saturn sl',
+    'endeavor',
+    'mirage',
+    'savana',
+    'canyon',
+    'infiniti qx60',
+    'infiniti q50',
+    'infiniti ex35',
+    'infiniti i30',
+    'eldorado',
+    'cadillac xts',
+    'routan',
+    'rabbit',
+    'azera',
+    'veracruz',
+    'rondo',
+    'jaguar s-type',
+    'jaguar x-type',
+    'jaguar xf',
+    'jaguar xj',
+    'suzuki xl-7',
+    'grand vitara',
+    'countryman',
+    'mercedes gl-class',
+    'mercedes clk-class',
+    'insight',
+    'hummer h3',
+    'scion xd',
+    'scion xa',
+    'xv crosstrek',
+    'b9 tribeca',
+    'land rover lr2',
+    'prizm',
+    'tercel',
+)
+UNOBTANIUM_DB.update({
+    'mkz': {"display": 'Lincoln MKZ', "make": 'Lincoln', "year_range": (2007, 2020), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'mkx': {"display": 'Lincoln MKX', "make": 'Lincoln', "year_range": (2007, 2018), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'mks': {"display": 'Lincoln MKS', "make": 'Lincoln', "year_range": (2009, 2016), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'lincoln ls': {"display": 'Lincoln LS', "make": 'Lincoln', "match": ['lincoln ls'], "year_range": (2000, 2006), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'aviator': {"display": 'Lincoln Aviator', "make": 'Lincoln', "year_range": (2003, 2005), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'continental': {"display": 'Lincoln Continental', "make": 'Lincoln', "year_range": (1988, 2002), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'uplander': {"display": 'Chevrolet Uplander', "make": 'Chevrolet', "year_range": (2005, 2009), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'venture': {"display": 'Chevrolet Venture', "make": 'Chevrolet', "year_range": (1997, 2005), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'lumina': {"display": 'Chevrolet Lumina', "make": 'Chevrolet', "year_range": (1990, 2001), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'spark': {"display": 'Chevrolet Spark', "make": 'Chevrolet', "year_range": (2013, 2022), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'captiva sport': {"display": 'Chevrolet Captiva Sport', "make": 'Chevrolet', "year_range": (2012, 2015), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'trax': {"display": 'Chevrolet Trax', "make": 'Chevrolet', "year_range": (2015, 2022), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'caprice': {"display": 'Chevrolet Caprice', "make": 'Chevrolet', "year_range": (1977, 1996), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'volt': {"display": 'Chevrolet Volt', "make": 'Chevrolet', "year_range": (2011, 2019), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'mazda5': {"display": 'Mazda Mazda5', "make": 'Mazda', "match": ['mazda5', 'mazda 5'], "year_range": (2006, 2015), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'mazda2': {"display": 'Mazda Mazda2', "make": 'Mazda', "match": ['mazda2', 'mazda 2'], "year_range": (2011, 2014), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'mpv': {"display": 'Mazda MPV', "make": 'Mazda', "year_range": (1996, 2006), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'b-series': {"display": 'Mazda B-Series', "make": 'Mazda', "match": ['b-series', 'b2300', 'b3000', 'b4000'], "year_range": (1994, 2009), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'mazda 626': {"display": 'Mazda 626', "make": 'Mazda', "match": ['626'], "year_range": (1993, 2002), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'windstar': {"display": 'Ford Windstar', "make": 'Ford', "year_range": (1995, 2003), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'freestar': {"display": 'Ford Freestar', "make": 'Ford', "year_range": (2004, 2007), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'freestyle': {"display": 'Ford Freestyle', "make": 'Ford', "year_range": (2005, 2007), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'escort': {"display": 'Ford Escort', "make": 'Ford', "year_range": (1991, 2003), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'thunderbird': {"display": 'Ford Thunderbird', "make": 'Ford', "year_range": (1983, 2005), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'c-max': {"display": 'Ford C-Max', "make": 'Ford', "match": ['c-max', 'cmax'], "year_range": (2013, 2018), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'montego': {"display": 'Mercury Montego', "make": 'Mercury', "year_range": (2005, 2007), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'cougar': {"display": 'Mercury Cougar', "make": 'Mercury', "year_range": (1989, 2002), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'juke': {"display": 'Nissan Juke', "make": 'Nissan', "year_range": (2011, 2017), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'cube': {"display": 'Nissan Cube', "make": 'Nissan', "year_range": (2009, 2014), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'encore': {"display": 'Buick Encore', "make": 'Buick', "year_range": (2013, 2022), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'park avenue': {"display": 'Buick Park Avenue', "make": 'Buick', "year_range": (1991, 2005), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'rainier': {"display": 'Buick Rainier', "make": 'Buick', "year_range": (2004, 2007), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'stratus': {"display": 'Dodge Stratus', "make": 'Dodge', "year_range": (1995, 2006), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'intrepid': {"display": 'Dodge Intrepid', "make": 'Dodge', "year_range": (1993, 2004), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'concorde': {"display": 'Chrysler Concorde', "make": 'Chrysler', "year_range": (1993, 2004), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    '300m': {"display": 'Chrysler 300M', "make": 'Chrysler', "year_range": (1999, 2004), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'aspen': {"display": 'Chrysler Aspen', "make": 'Chrysler', "year_range": (2007, 2009), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'volvo s40': {"display": 'Volvo S40', "make": 'Volvo', "match": ['s40'], "year_range": (2000, 2011), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'volvo v70': {"display": 'Volvo V70', "make": 'Volvo', "match": ['v70'], "year_range": (1998, 2010), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'volvo xc60': {"display": 'Volvo XC60', "make": 'Volvo', "match": ['xc60'], "year_range": (2010, 2017), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'volvo c70': {"display": 'Volvo C70', "make": 'Volvo', "match": ['c70'], "year_range": (1998, 2013), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'fiat 500': {"display": 'Fiat 500', "make": 'Fiat', "match": ['fiat 500'], "year_range": (2012, 2019), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'alero': {"display": 'Oldsmobile Alero', "make": 'Oldsmobile', "year_range": (1999, 2004), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'intrigue': {"display": 'Oldsmobile Intrigue', "make": 'Oldsmobile', "year_range": (1998, 2002), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'bravada': {"display": 'Oldsmobile Bravada', "make": 'Oldsmobile', "year_range": (1991, 2004), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'cutlass ciera': {"display": 'Oldsmobile Cutlass Ciera', "make": 'Oldsmobile', "year_range": (1986, 1996), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'torrent': {"display": 'Pontiac Torrent', "make": 'Pontiac', "year_range": (2006, 2009), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'bonneville': {"display": 'Pontiac Bonneville', "make": 'Pontiac', "year_range": (1992, 2005), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'sunfire': {"display": 'Pontiac Sunfire', "make": 'Pontiac', "year_range": (1995, 2005), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'pontiac g5': {"display": 'Pontiac G5', "make": 'Pontiac', "match": ['g5'], "year_range": (2007, 2010), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'montana': {"display": 'Pontiac Montana', "make": 'Pontiac', "year_range": (1999, 2009), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'acura rdx': {"display": 'Acura RDX', "make": 'Acura', "match": ['rdx'], "year_range": (2007, 2018), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'acura cl': {"display": 'Acura CL', "make": 'Acura', "match": ['acura cl'], "year_range": (1997, 2003), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'renegade': {"display": 'Jeep Renegade', "make": 'Jeep', "year_range": (2015, 2023), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'outlook': {"display": 'Saturn Outlook', "make": 'Saturn', "year_range": (2007, 2010), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'saturn sl': {"display": 'Saturn SL', "make": 'Saturn', "match": ['saturn sl', 'saturn sl1', 'saturn sl2', 'sl1', 'sl2'], "year_range": (1991, 2002), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'endeavor': {"display": 'Mitsubishi Endeavor', "make": 'Mitsubishi', "year_range": (2004, 2011), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'mirage': {"display": 'Mitsubishi Mirage', "make": 'Mitsubishi', "year_range": (1997, 2024), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'savana': {"display": 'GMC Savana', "make": 'GMC', "year_range": (1996, 2024), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'canyon': {"display": 'GMC Canyon', "make": 'GMC', "year_range": (2004, 2012), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'infiniti qx60': {"display": 'Infiniti QX60', "make": 'Infiniti', "match": ['qx60', 'jx35'], "year_range": (2013, 2020), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'infiniti q50': {"display": 'Infiniti Q50', "make": 'Infiniti', "match": ['q50'], "year_range": (2014, 2020), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'infiniti ex35': {"display": 'Infiniti EX35', "make": 'Infiniti', "match": ['ex35', 'ex37'], "year_range": (2008, 2013), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'infiniti i30': {"display": 'Infiniti I30', "make": 'Infiniti', "match": ['i30', 'i35'], "year_range": (1996, 2004), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'eldorado': {"display": 'Cadillac Eldorado', "make": 'Cadillac', "year_range": (1979, 2002), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'cadillac xts': {"display": 'Cadillac XTS', "make": 'Cadillac', "match": ['xts'], "year_range": (2013, 2019), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'routan': {"display": 'Volkswagen Routan', "make": 'Volkswagen', "year_range": (2009, 2014), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'rabbit': {"display": 'Volkswagen Rabbit', "make": 'Volkswagen', "year_range": (2006, 2009), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'azera': {"display": 'Hyundai Azera', "make": 'Hyundai', "year_range": (2006, 2017), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'veracruz': {"display": 'Hyundai Veracruz', "make": 'Hyundai', "year_range": (2007, 2012), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'rondo': {"display": 'Kia Rondo', "make": 'Kia', "year_range": (2007, 2010), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'jaguar s-type': {"display": 'Jaguar S-Type', "make": 'Jaguar', "match": ['s-type'], "year_range": (2000, 2008), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'jaguar x-type': {"display": 'Jaguar X-Type', "make": 'Jaguar', "match": ['x-type'], "year_range": (2002, 2008), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'jaguar xf': {"display": 'Jaguar XF', "make": 'Jaguar', "match": ['jaguar xf'], "year_range": (2009, 2019), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'jaguar xj': {"display": 'Jaguar XJ', "make": 'Jaguar', "match": ['jaguar xj', 'xj8', 'xjr'], "year_range": (1995, 2019), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'suzuki xl-7': {"display": 'Suzuki XL-7', "make": 'Suzuki', "match": ['xl-7', 'xl7'], "year_range": (2001, 2009), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'grand vitara': {"display": 'Suzuki Grand Vitara', "make": 'Suzuki', "year_range": (1999, 2013), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'countryman': {"display": 'MINI Countryman', "make": 'MINI', "year_range": (2011, 2020), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'mercedes gl-class': {"display": 'Mercedes-Benz GL-Class', "make": 'Mercedes-Benz', "match": ['gl-class', 'gl450', 'gl550', 'gl350'], "year_range": (2007, 2016), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'mercedes clk-class': {"display": 'Mercedes-Benz CLK-Class', "make": 'Mercedes-Benz', "match": ['clk-class', 'clk320', 'clk430', 'clk350', 'clk500'], "year_range": (1998, 2009), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'insight': {"display": 'Honda Insight', "make": 'Honda', "year_range": (2000, 2022), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'hummer h3': {"display": 'Hummer H3', "make": 'Hummer', "match": ['h3'], "year_range": (2006, 2010), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'scion xd': {"display": 'Scion xD', "make": 'Scion', "match": ['xd'], "year_range": (2008, 2014), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'scion xa': {"display": 'Scion xA', "make": 'Scion', "match": ['xa'], "year_range": (2004, 2006), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'xv crosstrek': {"display": 'Subaru XV Crosstrek', "make": 'Subaru', "match": ['xv crosstrek', 'crosstrek'], "year_range": (2013, 2024), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'b9 tribeca': {"display": 'Subaru B9 Tribeca', "make": 'Subaru', "match": ['b9 tribeca', 'tribeca'], "year_range": (2006, 2014), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'land rover lr2': {"display": 'Land Rover LR2', "make": 'Land Rover', "match": ['lr2'], "year_range": (2008, 2015), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'prizm': {"display": 'Geo/Chevrolet Prizm', "make": 'Chevrolet', "year_range": (1990, 2002), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+    'tercel': {"display": 'Toyota Tercel', "make": 'Toyota', "year_range": (1987, 1999), "top_parts": [
+        {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+        {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+        {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+    ]},
+})
+
+# Feed spellings of models that already have entries: route them in.
+for _k in ("ram 1994-2001", "ram 2002-2008", "ram 2009-2018", "ram 2019-2024"):
+    UNOBTANIUM_DB[_k]["match"] = list(UNOBTANIUM_DB[_k].get("match") or ["ram"]) + ["dodge 1500 pickup", "dodge d1500"]
+UNOBTANIUM_DB["c/k"]["match"] = ["c/k", "chevrolet gmt-400", "gmc gmt-400", "chevrolet k2500", "chevrolet c2500", "gmc k2500", "gmc c2500", "chevrolet c10", "chevrolet k10", "chevrolet c20", "chevrolet k20"]
+# "dodge caravan" and "grand caravan" are one entry object: keep both keywords.
+UNOBTANIUM_DB["dodge caravan"]["match"] = ["grand caravan", "dodge caravan", "chrysler caravan"]
+UNOBTANIUM_DB["malibu"]["match"] = ["malibu", "chevrolet classic"]
+
 _EVERGREEN_TARGET_KEYS: tuple[str, ...] = (
     # sedans / hatches
     "acura tl", "altima", "accent", "accord 1990-1997", "accord 1998-2002",
@@ -4767,6 +5363,8 @@ _EVERGREEN_TARGET_KEYS: tuple[str, ...] = (
     "sierra 2019-2024", "silverado 1999-2006", "silverado 2007-2013",
     "silverado 2014-2018", "silverado 2019-2024", "tacoma 1995-2004",
     "tacoma 2005-2015", "tacoma 2016-2024", "titan", "tundra",
+    # 2026-11 breadth pass (mid-volume commuters; see _GAP_GENERIC_KEYS)
+    *_GAP_GENERIC_KEYS,
 )
 
 
