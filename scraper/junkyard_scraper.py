@@ -3802,6 +3802,28 @@ UNOBTANIUM_DB.update({
 _extend_entry("corolla", year_range=(1993, 2024))
 _extend_entry("malibu", year_range=(1997, 2024))
 
+# ---- 2026-11 §13: next block, measured order (generic-only cars on the lots).
+# Same basis as the Altima block; see PARTS_GAPS_2026-11.md §13.
+# Toyota Camry 1992-2001 (XV10 1992-96, XV20 1997-2001; 2,047 cars matched
+# only generic rows). The mechanical pulls are on every car; XLE leather,
+# sunroof and alloys were options. 1990-91 (V20) stays outside the entry.
+#
+# _GEN_MECH_EXCLUDE_RE keeps pump/compressor/motor rows out of the automatic
+# generation split, so these rows are bounded per generation here instead:
+# no new "fits" badge crosses a generation.
+def _per_gen(gens: list[tuple[int, int]], rows: list[dict]) -> list[dict]:
+    return [{**r, "yr_min": lo, "yr_max": hi} for lo, hi in gens for r in rows]
+
+
+_SUNROOF = {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "option": True}
+
+_extend_entry("camry", parts=_per_gen([(1992, 1996), (1997, 2001)], [
+    *_GAP_MECH,
+    _SUNROOF,
+    {"name": "Leather Power Driver Seat (XLE)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
+    {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+]))
+
 # --- Feed-spelling aliases: same entry object, different key the feeds use ---
 # ("Town And Country" never contained "town & country"; "Mazda 3" has a space.)
 for _alias, _key in (

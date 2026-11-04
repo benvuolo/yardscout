@@ -111,3 +111,54 @@ The cars people flip most, reviewed row by row:
   door panels (the plastics everyone hunts), tail lights, 1997–2001
   composite headlights and fog lights (option), mirrors.
 - Civic Si needed nothing; vPIC supplies its trims and the rows were right.
+
+## 13. Measured block (2026-11-04): Camry/Corolla 1990s, Accent, LeSabre, LaCrosse, Soul
+
+**Measurement.** Every distinct year/make/model on the lots (333,460 cars,
+`docs/data/inventory_live.json`) re-matched with the current tables;
+"generic-only" means every matched row is in the miner's generic tier
+(`GENERIC_PART_TOKENS` in `mine_coverage_gaps.py`: lamps, mirrors, window
+regulators/switches and the consensus evergreens). `interchange_coverage.py`
+measures engine-family donors, not this, so the count was taken offline
+with the same rule (the miner's `--no-fetch` analysis; its eBay page fetch
+was not used, see rule 2). Before this block: no entry 12,298 cars (3.7%),
+generic-only 43,010 (12.9%).
+
+| Order | Model (years) | Cars | Generic-only before |
+|---|---|---|---|
+| 1 | Toyota Camry 1990–2001 | 2,271 | 2,047 |
+| 2 | Hyundai Accent | 1,331 | 1,323 |
+| 3 | Buick LeSabre | 1,144 | 1,098 |
+| 4 | Buick LaCrosse | 1,077 | 1,077 |
+| 5 | Toyota Corolla 1990–2001 (+2002) | 1,044 | 983 (+153 for 2002) |
+| 6 | Kia Soul 2010–2013 | 1,673 total | 915 (all 2010–13; 2014+ already curated) |
+
+**Pull costs**, re-checked against the 30 price lists (median of each yard's
+median, regex on the description): fuel pump $25, A/C compressor $40,
+radiator/cooling fan $21, spoiler $26, sunroof $39, alloy wheel $22, tail
+light $21. These are within a few dollars of the §1 figures, so the new rows
+reuse the audited `_GAP_MECH` costs and the existing row templates (sunroof
+$30, leather power seat $40, wheel set $100) unchanged, for consistency.
+
+**Generation bounds.** `_GEN_MECH_EXCLUDE_RE` keeps pump/compressor/motor
+rows out of the automatic generation split, which is why the §2–10
+mechanical rows show spans like "2002–2017". The rows in this block are
+bounded per generation by hand (`_per_gen`), so no new "fits" badge crosses a
+generation. The older spans are left as they are (an owner decision, not
+changed in passing).
+
+### 13.1 Toyota Camry 1992–2001 (XV10 1992–96, XV20 1997–2001)
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1992–96, 1997–01 | — | Same commodity pulls as the 2002–17 rows; every car has them. |
+| Leather power driver seat (XLE) | 1992–96, 1997–01 | option | XLE trim from 1992; not VIN-decodable. |
+| Sunroof glass + motor | 1992–96, 1997–01 | option | Optional on LE/XLE. |
+| Alloy wheels (set) | 1992–96, 1997–01 | option | Band below the 17"/18" row (smaller, older wheels). |
+
+Left out, no stated basis: JBL audio before 2002 (offer years not confirmed),
+coupe (1994–96) and wagon (1992–96) body lamps (exact years not confirmed),
+distributor (ignition; cheap new). 1990–91 (V20) stays outside the entry.
+
+Result: Camry 1990–2001 generic-only 2,047 → 0. Lots: generic-only 43,010
+(12.9%) → 40,963 (12.3%); no-entry unchanged at 12,298 (3.7%).

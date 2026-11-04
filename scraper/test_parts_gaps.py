@@ -122,6 +122,20 @@ check("CR-V 2005: compressor + headlights; 2019 keeps LED row only", "A/C Compre
 check("RAV4 2015: Entune row; 2008: none", "Entune / Touchscreen Head Unit" in names(2015, "Toyota", "RAV4", FWD) and "Entune / Touchscreen Head Unit" not in names(2008, "Toyota", "RAV4", FWD))
 check("Explorer 2014 AWD: PTU confirmed; 2008: no PTU row", parts(2014, "Ford", "Explorer", AWD)["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin" and "AWD Power Transfer Unit (PTU)" not in names(2008, "Ford", "Explorer", AWD))
 
+# 2d. §13 block (measured order)
+MECH3 = {"Fuel Pump Module (in-tank, test before listing)", "A/C Compressor (clutch spins free)", "Radiator Fan Assembly"}
+check("Camry 1992/1997/2001: mechanical rows", all(MECH3 <= names(y, "Toyota", "Camry", FWD) for y in (1992, 1997, 2001)))
+check("Camry 1998: XLE seat, sunroof, alloys are 'if equipped'",
+      all(parts(1998, "Toyota", "Camry", FWD)[n]["trim_status"] == "unconfirmed" for n in ("Leather Power Driver Seat (XLE)", "Sunroof Glass + Motor", "Alloy Wheels (set of 4, straight)")))
+check("Camry 1998: no 2002+ rows (Entune, 17\"/18\" wheels)", not ({"Entune / Touchscreen Head Unit", "17\"/18\" Alloy Wheels (set of 4, straight)"} & names(1998, "Toyota", "Camry", FWD)))
+check("Camry 2004: one fuel pump row, fits 2002+ window", parts(2004, "Toyota", "Camry", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"].startswith("2002"),
+      parts(2004, "Toyota", "Camry", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"])
+check("Camry 1995 / 1999: mechanical rows bounded to their own generation",
+      parts(1995, "Toyota", "Camry", FWD)["A/C Compressor (clutch spins free)"]["fits"] == "1992–1996"
+      and parts(1999, "Toyota", "Camry", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1997–2001"
+      and parts(1999, "Toyota", "Camry", FWD)["Sunroof Glass + Motor"]["fits"] == "1997–2001")
+check("Camry 1991: still outside the entry", not names(1991, "Toyota", "Camry", FWD))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
