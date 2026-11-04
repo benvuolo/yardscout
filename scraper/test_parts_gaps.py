@@ -408,6 +408,11 @@ check("§19 MKX: rows per generation (new 2016 break); PTU gated; THX 'if equipp
       and k13["THX II Amp + Speakers"]["trim_status"] == "unconfirmed" and "Revel Amp + Speakers" not in k13
       and k09["Tail Lights (pair, uncracked)"]["fits"] == "2007–2010" and k13["Headlights (clear, non-hazed)"]["fits"] == "2011–2015")
 
+v06 = parts(2006, "Ford", "Five Hundred", AWD)
+check("§19 Five Hundred: mech 2005-07, AWD decode confirms the rear unit, moonroof 'if equipped'",
+      MECH3 <= set(v06) and v06["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin"
+      and "AWD Rear Differential / Transfer Unit" not in names(2006, "Ford", "Five Hundred", FWD) and v06["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

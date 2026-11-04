@@ -1005,3 +1005,26 @@ pull for this platform here), seats and wheels.
 
 Result: MKX generic-only 413 → 0. Lots: generic-only 22,255 (6.7%) →
 21,842 (6.6%).
+
+### 19.6 Ford Five Hundred 2005–2007
+
+Basis: en.wikipedia.org/wiki/Ford_Five_Hundred; consumerguide.com/used/2005-07-ford-five-hundred
+(fetched).
+- **No facelift:** the only change was a mid-2006 side-molding swap. The
+  2008 Taurus restyle is the renamed car and outside this entry.
+- **A/C:** standard on the SE (CG lists).
+- **AWD:** optional on every trim.
+- **Moonroof:** optional ($895). The sources disagree on SE availability;
+  it is option-flagged either way.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2005–07 | — | Every car. |
+| AWD rear differential / transfer unit | 2005–07 | drive: awd/4wd | Same band as the Equinox row. |
+| Sunroof | 2005–07 | option | |
+
+Left out, no stated basis: the CVT and 6-speed (transmissions), the
+chrome mesh grille option (2007, no audited band).
+
+Result: Five Hundred generic-only 409 → 0. Lots: generic-only 21,842 (6.6%)
+→ 21,433 (6.4%).

@@ -4663,6 +4663,15 @@ _gap_extend("santa fe", parts=[
     *_per_gen([(2002, 2006)], [_SUNROOF]),
 ])
 
+# Ford Five Hundred 2005-2007 (409 cars generic-only). No facelift (a
+# mid-2006 side-molding swap only). A/C standard; AWD optional on every
+# trim; moonroof optional.
+_gap_extend("five hundred", parts=_per_gen([(2005, 2007)], [
+    *_GAP_MECH,
+    {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+    _SUNROOF,
+]))
+
 # ---- end of §19 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
