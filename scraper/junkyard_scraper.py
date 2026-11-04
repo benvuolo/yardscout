@@ -12537,6 +12537,17 @@ VIN_TRIM_PATTERNS: list[tuple[str, str, int, int, str, str]] = [
     # Acura RSX: DC53 = Type-S, DC54 = base (2002-2006)
     ("ACURA", "RSX", 2002, 2006, r"^JH4DC53", "Type-S"),
     ("ACURA", "RSX", 2002, 2006, r"^JH4DC54", "Base"),
+    # Toyota Camry: positions 4-8 name the powertrain, whatever the plant
+    # (4T1/4T4/JTN). 2007-2011: BB46K / BB3EK = hybrid, BE46K (2.4) /
+    # BF3EK (2.5) / BK46K / BK3EK (3.5 V6) = gas. 2012-2017: BD1FK =
+    # hybrid, BF1FK (2.5) / BK1FK (3.5) = gas. vPIC's own partial labels
+    # agree (BD1FK -> "Hybrid", BF3EK -> "Base" where it labels at all).
+    # "Gas" is the trim string for non-hybrids: it only has to not match
+    # the hybrid gate, and it reads honestly on the card.
+    ("TOYOTA", "CAMRY", 2007, 2011, r"^(4T1|4T4|JTN)BB(46K|3EK)", "Hybrid"),
+    ("TOYOTA", "CAMRY", 2007, 2011, r"^(4T1|4T4|JTN)B[EFK](46K|3EK)", "Gas"),
+    ("TOYOTA", "CAMRY", 2012, 2017, r"^(4T1|4T4|JTN)BD1FK", "Hybrid"),
+    ("TOYOTA", "CAMRY", 2012, 2017, r"^(4T1|4T4|JTN)B[FK]1FK", "Gas"),
     # (Civic is NOT here: vPIC already returns LX/EX/SI/... for Civics, so
     # the gates work from the decode. Add makes only where vPIC is blank.)
 ]

@@ -59,7 +59,28 @@ seats = "Type-S Recaro-style Seats (pair)"
 check("RSX Type-S VIN: seats VIN-confirmed", parts(2002, "Acura", "RSX", ts).get(seats, {}).get("trim_status") == "vin", str(parts(2002, "Acura", "RSX", ts).get(seats)))
 check("RSX base VIN: Type-S seats excluded", seats not in parts(2002, "Acura", "RSX", base))
 check("RSX no decode: seats 'if equipped'", parts(2002, "Acura", "RSX", None).get(seats, {}).get("trim_status") == "unconfirmed")
-# Against the real cache: how many RSX / Civic decodes gain a trim, and none lose one.
+# Camry hybrid vs gas from the powertrain code
+cam = {"make": "TOYOTA", "model": "Camry", "modelYear": "2009", "trim": "", "series": "", "trimQuality": "empty", "bodyClass": "Sedan/Saloon", "driveType": "", "transmission": "CVT"}
+check("4T1BB46K 2009 -> Hybrid", js._correct_vpic(cam, "4T1BB46K59U000001")["trim"] == "Hybrid")
+check("JTNBB46K 2008 -> Hybrid (Japan-built)", js._correct_vpic({**cam, "modelYear": "2008"}, "JTNBB46K883000001")["trim"] == "Hybrid")
+check("4T1BE46K 2009 -> Gas", js._correct_vpic(cam, "4T1BE46K79U000001")["trim"] == "Gas")
+check("4T1BF3EK 2011 -> Gas", js._correct_vpic({**cam, "modelYear": "2011"}, "4T1BF3EK5BU000001")["trim"] == "Gas")
+check("4T1BD1FK 2014 -> Hybrid", js._correct_vpic({**cam, "modelYear": "2014"}, "4T1BD1FK2EU000001")["trim"] == "Hybrid")
+check("4T1BK1FK 2013 -> Gas", js._correct_vpic({**cam, "modelYear": "2013"}, "4T1BK1FK6DU000001")["trim"] == "Gas")
+battery = "Hybrid Battery Pack (test modules first)"
+hy = js._correct_vpic(cam, "4T1BB46K59U000001"); gas = js._correct_vpic(cam, "4T1BE46K79U000001")
+check("Camry hybrid VIN: battery pack VIN-confirmed", parts(2009, "Toyota", "Camry", hy).get(battery, {}).get("trim_status") == "vin", str(parts(2009, "Toyota", "Camry", hy).get(battery)))
+check("Camry gas VIN: battery pack excluded", battery not in parts(2009, "Toyota", "Camry", gas))
+check("Camry no decode: battery pack 'if equipped'", parts(2009, "Toyota", "Camry", None).get(battery, {}).get("trim_status") == "unconfirmed")
+# real cache: every BD1FK vPIC labelled "Hybrid" must also be Hybrid by pattern (agreement check)
+agree = disagree = 0
+for vin, dd in cache.items():
+    if isinstance(dd, dict) and dd.get("model") == "Camry" and vin[3:8] == "BD1FK":
+        pat = js._correct_vpic({**dd, "trim": ""}, vin).get("trim")
+        if "ybrid" in str(dd.get("trim") or ""): agree += (pat == "Hybrid"); disagree += (pat != "Hybrid")
+check("real cache: pattern agrees with every vPIC 'Hybrid' label on BD1FK", agree > 50 and disagree == 0, f"{agree} agree, {disagree} disagree")
+
+# Against the real cache: how many RSX / Camry decodes gain a trim, and none lose one.
 gained = collections.Counter(); lost = 0
 for vin, d in cache.items():
     if not isinstance(d, dict): continue
@@ -67,7 +88,7 @@ for vin, d in cache.items():
     if d.get("trim") and o.get("trim") != d.get("trim"): lost += 1
     if not d.get("trim") and o.get("trim"): gained[(d.get("model"), o["trim"])] += 1
 check("real cache: no decode loses its vPIC trim", lost == 0)
-check("real cache: only RSX decodes gain trims (vPIC already trims Civics)", gained[("RSX", "Base")] > 0 and gained[("RSX", "Type-S")] > 0 and all(m == "RSX" for m, _ in gained), str(dict(gained)))
+check("real cache: RSX and Camry decodes gain trims, nothing else", gained[("RSX", "Base")] > 0 and gained[("RSX", "Type-S")] > 0 and gained[("Camry", "Hybrid")] > 300 and gained[("Camry", "Gas")] > 2000 and all(m in ("RSX", "Camry") for m, _ in gained), str(dict(gained)))
 print("gained trims from VIN patterns:", dict(gained))
 
 print("\n" + ("ALL PASS" if not failures else f"{len(failures)} FAILURES: {failures}"))
