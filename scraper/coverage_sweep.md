@@ -13,7 +13,7 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 | E. No website on the map, or unreachable | 48 |
 | Already tracked (skipped) | 76 |
 
-**Notes:** OSM-only pass 2026-11-04T16:04:47Z: 0 pending state(s) covered, 48 still pending. OpenStreetMap: Overpass failed for AL, AK, AZ; not queried: CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY.
+**Notes:** OSM-only pass 2026-11-04T16:52:45Z: 0 pending state(s) covered, 48 still pending. OpenStreetMap: Overpass failed for AL, AK, AZ; not queried: CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY.
 
 ## D. Site found, no online vehicle inventory
 

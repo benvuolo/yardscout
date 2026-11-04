@@ -1,16 +1,13 @@
 {
- "at": "2026-11-04T16:04:47Z",
+ "at": "2026-11-04T16:52:45Z",
  "skipped": {
   "tracked": 76
  },
  "notes": [
-  "OSM-only pass 2026-11-04T16:04:47Z: 0 pending state(s) covered, 48 still pending.",
+  "OSM-only pass 2026-11-04T16:52:45Z: 0 pending state(s) covered, 48 still pending.",
   "OpenStreetMap: Overpass failed for AL, AK, AZ; not queried: CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY."
  ],
  "osm_pending": [
-  "AL",
-  "AK",
-  "AZ",
   "CO",
   "CT",
   "DE",
@@ -55,7 +52,10 @@
   "WA",
   "WV",
   "WI",
-  "WY"
+  "WY",
+  "AL",
+  "AK",
+  "AZ"
  ],
  "candidates": [
   {
