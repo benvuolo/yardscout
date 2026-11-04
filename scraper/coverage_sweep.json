@@ -1,47 +1,13 @@
 {
- "at": "2026-11-04T16:52:45Z",
+ "at": "2026-11-04T17:52:56Z",
  "skipped": {
-  "tracked": 76
+  "tracked": 127
  },
  "notes": [
-  "OSM-only pass 2026-11-04T16:52:45Z: 0 pending state(s) covered, 48 still pending.",
-  "OpenStreetMap: Overpass failed for AL, AK, AZ; not queried: CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY."
+  "OSM-only pass 2026-11-04T17:52:56Z: 34 pending state(s) covered, 14 still pending.",
+  "OpenStreetMap: not queried: SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY, AL, AK, AZ."
  ],
  "osm_pending": [
-  "CO",
-  "CT",
-  "DE",
-  "FL",
-  "GA",
-  "HI",
-  "ID",
-  "IL",
-  "IN",
-  "IA",
-  "KS",
-  "KY",
-  "LA",
-  "ME",
-  "MD",
-  "MA",
-  "MI",
-  "MN",
-  "MS",
-  "MO",
-  "MT",
-  "NE",
-  "NV",
-  "NH",
-  "NJ",
-  "NM",
-  "NY",
-  "NC",
-  "ND",
-  "OH",
-  "OK",
-  "OR",
-  "PA",
-  "RI",
   "SC",
   "SD",
   "TN",
@@ -983,6 +949,358 @@
    "evidence": "no website on the map",
    "known_status": "",
    "extra": {}
+  },
+  {
+   "name": "U Pull & Pay of Aurora",
+   "city": "Aurora",
+   "state": "CO",
+   "lat": 39.738056,
+   "lng": -104.773206,
+   "website": "https://upullandpay.com/aurora/home/",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "HTTP 404",
+   "known_status": "",
+   "extra": {
+    "osm": "node/7982347591"
+   }
+  },
+  {
+   "name": "Littleton U-Pull Automotive Recycling",
+   "city": "Littleton",
+   "state": "CO",
+   "lat": 39.487229,
+   "lng": -104.99723,
+   "website": "http://www.littletonupull.com/",
+   "source": "osm",
+   "tier": "D",
+   "platform": "",
+   "evidence": "site has no inventory link",
+   "known_status": "",
+   "extra": {
+    "osm": "node/8132996010"
+   }
+  },
+  {
+   "name": "Andersen's U-Pull-It",
+   "city": "Greeley",
+   "state": "CO",
+   "lat": 40.42314,
+   "lng": -104.657571,
+   "website": "http://andersensales.com/upi.html",
+   "source": "osm",
+   "tier": "D",
+   "platform": "",
+   "evidence": "site has no inventory link",
+   "known_status": "",
+   "extra": {
+    "osm": "way/241194524"
+   }
+  },
+  {
+   "name": "Littleton U-Pull",
+   "city": "",
+   "state": "CO",
+   "lat": 39.486477,
+   "lng": -104.997488,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/873333964"
+   }
+  },
+  {
+   "name": "Grand Junction Pick-A-Part",
+   "city": "Grand Junction",
+   "state": "CO",
+   "lat": 39.0621,
+   "lng": -108.562353,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1412363776"
+   }
+  },
+  {
+   "name": "U-Pull-It Salvage Yard",
+   "city": "",
+   "state": "IL",
+   "lat": 41.508978,
+   "lng": -87.60761,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/438887579"
+   }
+  },
+  {
+   "name": "U Auto Pull It",
+   "city": "Bossier City",
+   "state": "LA",
+   "lat": 32.531355,
+   "lng": -93.677429,
+   "website": "https://www.uapi.biz/",
+   "source": "osm",
+   "tier": "B",
+   "platform": "custom",
+   "evidence": "inventory link https://uapi.biz/inventory (no recognised platform; check by hand)",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1034343583"
+   }
+  },
+  {
+   "name": "Pick-A-Part Salvage Yard",
+   "city": "Detroit",
+   "state": "MI",
+   "lat": 42.319191,
+   "lng": -83.132817,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/555498231"
+   }
+  },
+  {
+   "name": "U-Pull And Save",
+   "city": "",
+   "state": "MI",
+   "lat": 42.619679,
+   "lng": -84.500512,
+   "website": "https://www.u-pullandsave.com/",
+   "source": "osm",
+   "tier": "B",
+   "platform": "custom",
+   "evidence": "inventory link https://www.u-pullandsave.com/vehicles/15921597 (no recognised platform; check by hand)",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1196831813"
+   }
+  },
+  {
+   "name": "Barrys U Pull It",
+   "city": "",
+   "state": "MS",
+   "lat": 30.404788,
+   "lng": -89.245345,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1163043571"
+   }
+  },
+  {
+   "name": "Pull-A-Part",
+   "city": "",
+   "state": "MS",
+   "lat": 32.229583,
+   "lng": -90.219653,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1167186887"
+   }
+  },
+  {
+   "name": "Vince's U-Pull It Auto Parts And Recycling Center",
+   "city": "",
+   "state": "NY",
+   "lat": 43.17836,
+   "lng": -75.321294,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/363946695"
+   }
+  },
+  {
+   "name": "Pull-A-Part Auto Parts Yard",
+   "city": "",
+   "state": "OK",
+   "lat": 35.452341,
+   "lng": -97.51174,
+   "website": "http://pullapartokc.com",
+   "source": "osm",
+   "tier": "B",
+   "platform": "custom",
+   "evidence": "inventory link http://pullapartokc.com/VehiclesForSale.aspx (no recognised platform; check by hand)",
+   "known_status": "",
+   "extra": {
+    "osm": "way/177381768"
+   }
+  },
+  {
+   "name": "Danny's U Pull It",
+   "city": "Tulsa",
+   "state": "OK",
+   "lat": 36.221156,
+   "lng": -95.87779,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/515377316"
+   }
+  },
+  {
+   "name": "Pick-n-Pull",
+   "city": "",
+   "state": "OR",
+   "lat": 45.418612,
+   "lng": -122.463262,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/318885801"
+   }
+  },
+  {
+   "name": "Pick-A-Part",
+   "city": "Eugene",
+   "state": "OR",
+   "lat": 44.121448,
+   "lng": -123.187202,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/543305324"
+   }
+  },
+  {
+   "name": "You Pull It Auto Wreckers",
+   "city": "Klamath Falls",
+   "state": "OR",
+   "lat": 42.248376,
+   "lng": -121.797926,
+   "website": "https://www.onestopkfalls.com/You_Pull_It.html",
+   "source": "osm",
+   "tier": "D",
+   "platform": "",
+   "evidence": "site has no inventory link",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1309529200"
+   }
+  },
+  {
+   "name": "Hanna's U-Pull It",
+   "city": "Slatington",
+   "state": "PA",
+   "lat": 40.714924,
+   "lng": -75.640698,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "node/7395212976"
+   }
+  },
+  {
+   "name": "Pick-a-Part Home of Junk Yard Barbie",
+   "city": "",
+   "state": "PA",
+   "lat": 40.186227,
+   "lng": -74.783546,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "node/9233842517"
+   }
+  },
+  {
+   "name": "Millerstown Pic-a-Part",
+   "city": "",
+   "state": "PA",
+   "lat": 40.665923,
+   "lng": -79.798699,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "node/12222951601"
+   }
+  },
+  {
+   "name": "Alans Auto Parts & U Pull It Yard",
+   "city": "",
+   "state": "PA",
+   "lat": 40.717914,
+   "lng": -75.639617,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1391005936"
+   }
+  },
+  {
+   "name": "Alans Auto Parts & U Pull It Yard",
+   "city": "",
+   "state": "PA",
+   "lat": 40.715809,
+   "lng": -75.641251,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/1391005938"
+   }
   }
  ]
 }

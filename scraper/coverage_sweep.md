@@ -7,19 +7,30 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 | | Yards |
 |---|---|
 | A. Runs a platform we already parse (cheapest adds) | 0 |
-| B. Has its own online inventory (custom adapter) | 0 |
+| B. Has its own online inventory (custom adapter) | 3 |
 | C. Blocked us or robots.txt says no (outreach) | 0 |
-| D. Site found, no online vehicle inventory | 1 |
-| E. No website on the map, or unreachable | 48 |
-| Already tracked (skipped) | 76 |
+| D. Site found, no online vehicle inventory | 4 |
+| E. No website on the map, or unreachable | 64 |
+| Already tracked (skipped) | 127 |
 
-**Notes:** OSM-only pass 2026-11-04T16:52:45Z: 0 pending state(s) covered, 48 still pending. OpenStreetMap: Overpass failed for AL, AK, AZ; not queried: CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY.
+**Notes:** OSM-only pass 2026-11-04T17:52:56Z: 34 pending state(s) covered, 14 still pending. OpenStreetMap: not queried: SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY, AL, AK, AZ.
+
+## B. Has its own online inventory (custom adapter)
+
+| Yard | Where | Platform | Evidence | Link |
+|---|---|---|---|---|
+| U Auto Pull It | Bossier City, LA | custom | inventory link https://uapi.biz/inventory (no recognised platform; check by hand) | https://www.uapi.biz/ |
+| U-Pull And Save | MI | custom | inventory link https://www.u-pullandsave.com/vehicles/15921597 (no recognised platform; check by hand) | https://www.u-pullandsave.com/ |
+| Pull-A-Part Auto Parts Yard | OK | custom | inventory link http://pullapartokc.com/VehiclesForSale.aspx (no recognised platform; check by hand) | http://pullapartokc.com |
 
 ## D. Site found, no online vehicle inventory
 
 | Yard | Where | Platform | Evidence | Link |
 |---|---|---|---|---|
 | A-1 METALS & AUTO SALVAGE INC | 35.685, -120.698 | Ario (autorecycler.io) | live on Ario (510 rows) but Ario lists it as not self-service | https://ario.autorecycler.io/yard/a1-metals |
+| Andersen's U-Pull-It | Greeley, CO | — | site has no inventory link | http://andersensales.com/upi.html |
+| Littleton U-Pull Automotive Recycling | Littleton, CO | — | site has no inventory link | http://www.littletonupull.com/ |
+| You Pull It Auto Wreckers | Klamath Falls, OR | — | site has no inventory link | https://www.onestopkfalls.com/You_Pull_It.html |
 
 ## E. No website on the map, or unreachable
 
@@ -73,3 +84,19 @@ each add is a reviewed change. Tier C yards go to outreach, never a workaround.
 | YETI USED AUTO PARTS |  | Ario (autorecycler.io) | Ario org exists but not on the live backend | https://ario.autorecycler.io/yard/yeti |
 | Yank A Part |  | Ario (autorecycler.io) | on Ario but stale: 1 rows, newest set-out 2024-04-10 | https://ario.autorecycler.io/yard/yank-a-part |
 | Arkansas Pik-A-Part Auto Salvage | Hartman, AR | — | no website on the map | — |
+| Littleton U-Pull | CO | — | no website on the map | — |
+| U Pull & Pay of Aurora | Aurora, CO | — | HTTP 404 | https://upullandpay.com/aurora/home/ |
+| Grand Junction Pick-A-Part | Grand Junction, CO | — | no website on the map | — |
+| U-Pull-It Salvage Yard | IL | — | no website on the map | — |
+| Pick-A-Part Salvage Yard | Detroit, MI | — | no website on the map | — |
+| Barrys U Pull It | MS | — | no website on the map | — |
+| Pull-A-Part | MS | — | no website on the map | — |
+| Vince's U-Pull It Auto Parts And Recycling Center | NY | — | no website on the map | — |
+| Danny's U Pull It | Tulsa, OK | — | no website on the map | — |
+| Pick-n-Pull | OR | — | no website on the map | — |
+| Pick-A-Part | Eugene, OR | — | no website on the map | — |
+| Alans Auto Parts & U Pull It Yard | PA | — | no website on the map | — |
+| Alans Auto Parts & U Pull It Yard | PA | — | no website on the map | — |
+| Millerstown Pic-a-Part | PA | — | no website on the map | — |
+| Pick-a-Part Home of Junk Yard Barbie | PA | — | no website on the map | — |
+| Hanna's U-Pull It | Slatington, PA | — | no website on the map | — |
