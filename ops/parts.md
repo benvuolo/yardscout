@@ -59,7 +59,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   unchanged. A test guards it.
 
 - §18 (owner: "start the next parts block"; in progress): Forte 2010–13
-  done (generic-only 28,344 → 27,762, 8.5% → 8.4%).
+  done (generic-only 28,344 → 27,762, 8.5% → 8.4%); Regal 1997–2017 with
+  facelift 2014 (→ 27,255, 8.2%).
 
 ## How to measure
 

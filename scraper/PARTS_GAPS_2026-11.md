@@ -633,3 +633,31 @@ differ from the sedan's).
 
 Result: Forte generic-only 582 → 0. Lots: generic-only 28,344 (8.5%) →
 27,762 (8.4%).
+
+### 18.2 Buick Regal 1997–2004 (W-body), 2011–2017 (5th gen)
+
+Basis: en.wikipedia.org/wiki/Buick_Regal; cars.com "2014 Buick Regal: What's
+New" and "2003 Buick Regal: What's New" (fetched).
+- **Facelift 2014 (added to `FACELIFT_BREAKS`):** "New grille styling",
+  "Available xenon high-intensity-discharge headlights and LED daytime
+  running lights", "LED taillights … new elements that extend into the
+  trunklid" (cars.com). The existing Regal lamp rows are now cut at 2014
+  as well.
+- **No W-body facelift found:** 2003 brought "two new body colors". The
+  2003 grille and fascia change belongs to the Century.
+- **AWD:** 2014–17 only, with the 2.0T and 6-speed automatic (Wikipedia).
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1997–04, 2011–17 | — | Every car; A/C as on the W-body Century (§16.5). |
+| Tail lights | 1997–04, 2011–13, 2014–17 | — | The entry had none; cut at the 2014 facelift. |
+| AWD rear differential / transfer unit | 2014–17 | drive: awd/4wd | Same band as the Equinox row. |
+| Leather power driver seat (LS/GS) | 1997–04 | option | |
+| Sunroof, leather heated seats | 2011–17 | option | |
+| Alloy wheels | 1997–04, 2011–17 | option | |
+
+Left out, no stated basis: the GS supercharger (engine), GS-specific seats
+and wheels, and 1988–96 cars (about 70; not researched in this block).
+
+Result: Regal 1997–2017 generic-only 507 → 0 (the remaining 67 are
+1988–96 and 2018–19). Lots: generic-only 27,762 (8.4%) → 27,255 (8.2%).

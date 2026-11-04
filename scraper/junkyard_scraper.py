@@ -4538,6 +4538,27 @@ _gap_extend("forte", parts=[
     *_per_gen([(2012, 2013)], [_GAP_AC]),
 ])
 
+# Buick Regal (574 cars generic-only; W-body 1997-2004, 5th gen 2011-17).
+# No W-body facelift found; the 5th gen's 2014 refresh (grille, HID option,
+# LED tails) is in FACELIFT_BREAKS. AWD was offered 2014-17 only.
+_gap_extend("regal", parts=[
+    *_per_gen([(1997, 2004), (2011, 2017)], [
+        *_GAP_MECH,
+        _TAILS,
+        {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+    ]),
+    *_per_gen([(1997, 2004)], [
+        {"name": "Leather Power Driver Seat (LS/GS)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
+    ]),
+    *_per_gen([(2011, 2017)], [
+        _SUNROOF,
+        {"name": "Leather Heated Seats (pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "option": True},
+    ]),
+    *_per_gen([(2014, 2017)], [
+        {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+    ]),
+])
+
 # ---- end of §18 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
@@ -6129,6 +6150,8 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "impala": [2012],
     "optima": [2014, 2019],
     "mazda3": [2012, 2017],
+    # §18 (cited in PARTS_GAPS §18)
+    "regal": [2014],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

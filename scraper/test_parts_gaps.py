@@ -326,6 +326,13 @@ check("§18 Forte: Koup lamps VIN-confirmed on a coupe decode, excluded on a sed
       parts(2011, "Kia", "Forte", COUPE_D)["Koup Tail Lights (pair, uncracked)"]["trim_status"] == "vin"
       and "Koup Tail Lights (pair, uncracked)" not in names(2011, "Kia", "Forte", SEDAN) and not (MECH3 & names(2015, "Kia", "Forte", FWD)))
 
+g01, g12, g15 = parts(2001, "Buick", "Regal", FWD), parts(2012, "Buick", "Regal", FWD), parts(2015, "Buick", "Regal", AWD)
+check("§18 Regal: mechanical rows per generation; tail lights cut at the 2014 facelift", MECH3 <= set(g01) and MECH3 <= set(g12)
+      and g01["Tail Lights (pair, uncracked)"]["fits"] == "1997–2004" and g12["Tail Lights (pair, uncracked)"]["fits"] == "2011–2013"
+      and g15["Tail Lights (pair, uncracked)"]["fits"] == "2014–2017" and g12["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2011–2017")
+check("§18 Regal: AWD unit 2014-17 only (AWD decode confirms 2015; no row 2012)", g15["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin"
+      and "AWD Rear Differential / Transfer Unit" not in names(2012, "Buick", "Regal", AWD))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
