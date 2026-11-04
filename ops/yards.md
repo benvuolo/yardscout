@@ -43,7 +43,7 @@ Auto Salvage and Gaston Towing (no site, self-service unconfirmed), Yank A Part
 Blue & Gold and Prestige so the sweep stops re-listing them.
 `coverage_candidates.md` is the Parts workstream's report and has no yard tiers.
 
-Sweep coverage gap: OSM/Overpass failed or was not queried for 49 states, so
+Sweep coverage gap: OSM/Overpass failed (AL, AK, AZ) or was not queried (the other 47 states), so
 this sweep only checked Ario orgs. The next monthly run should get OSM through
 before its tiers mean much.
 
