@@ -18990,15 +18990,18 @@ ARIO_CHAINS: dict[str, dict] = {
     "uapi": {
         "label": "UAPI / U-Auto-Pull-It (LA/TX)",
         "yards": [
-            {"slug": "uapi", "code": "nshreveport",
+            # Pins (2026-11-04): addresses from uapi.biz/locations, geocoded
+            # with Nominatim. South Shreveport and Bossier City had been
+            # copies of the North Shreveport pin.
+            {"slug": "uapi", "code": "nshreveport",            # 809 Aero Dr 71107
              "name": "UAPI - North Shreveport", "city": "Shreveport", "state": "LA",
              "lat": 32.5288, "lng": -93.7757},
-            {"slug": "uapi-south-shreveport", "code": "sshreveport",
+            {"slug": "uapi-south-shreveport", "code": "sshreveport",  # 9889 Mansfield Rd 71118
              "name": "UAPI - South Shreveport", "city": "Shreveport", "state": "LA",
-             "lat": 32.5288, "lng": -93.7757},
-            {"slug": "uapi-bossier-city", "code": "bossier",
+             "lat": 32.3782, "lng": -93.8218},
+            {"slug": "uapi-bossier-city", "code": "bossier",   # 4300 E Texas St 71111 (matches the OSM yard pin)
              "name": "UAPI - Bossier City", "city": "Bossier City", "state": "LA",
-             "lat": 32.5288, "lng": -93.7757},
+             "lat": 32.5321, "lng": -93.6775},
             {"slug": "uapi-monroe", "code": "monroe",
              "name": "UAPI - Monroe", "city": "Monroe", "state": "LA",
              "lat": 32.475, "lng": -92.0835},

@@ -1841,25 +1841,28 @@
           "lat": 32.5288,
           "lng": -93.7757,
           "ario_slug": "uapi",
-          "inventory_url": "https://app.autorecycler.io/inventory/uapi"
+          "inventory_url": "https://app.autorecycler.io/inventory/uapi",
+          "address": "809 Aero Dr, Shreveport, LA 71107"
         },
         {
           "name": "UAPI - South Shreveport",
           "city": "Shreveport",
           "state": "LA",
-          "lat": 32.5288,
-          "lng": -93.7757,
+          "lat": 32.3782,
+          "lng": -93.8218,
           "ario_slug": "uapi-south-shreveport",
-          "inventory_url": "https://app.autorecycler.io/inventory/uapi-south-shreveport"
+          "inventory_url": "https://app.autorecycler.io/inventory/uapi-south-shreveport",
+          "address": "9889 Mansfield Rd, Shreveport, LA 71118"
         },
         {
           "name": "UAPI - Bossier City",
           "city": "Bossier City",
           "state": "LA",
-          "lat": 32.5288,
-          "lng": -93.7757,
+          "lat": 32.5321,
+          "lng": -93.6775,
           "ario_slug": "uapi-bossier-city",
-          "inventory_url": "https://app.autorecycler.io/inventory/uapi-bossier-city"
+          "inventory_url": "https://app.autorecycler.io/inventory/uapi-bossier-city",
+          "address": "4300 E Texas St, Bossier City, LA 71111"
         },
         {
           "name": "UAPI - Monroe",
