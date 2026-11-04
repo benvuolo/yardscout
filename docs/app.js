@@ -1973,6 +1973,8 @@ const MODEL_RENAMES_2026_10 = {
     "audiq5": "Q5", "audiq7": "Q7", "audis3": "S3", "audis5": "S5", "auditt": "TT",
   },
   "bmw": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "325i": "325i",
     "525ia": "525i", "530ia": "530i", "bmw128i": "128i", "bmw318i": "318i", "bmw320i": "320i",
     "bmw323i": "323i", "bmw325i": "325i", "bmw328i": "328i", "bmw330i": "330i",
     "bmw335i": "335i", "bmw430i": "430i", "bmw525i": "525i", "bmw528e": "528e",
@@ -1986,9 +1988,13 @@ const MODEL_RENAMES_2026_10 = {
     "rendezvoussrv": "Rendezvous",
   },
   "cadillac": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "allante": "Allante",
     "eldorado": "Eldorado",
   },
   "chevrolet": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "trailblazer": "Trailblazer", "blazers10": "Blazer S10", "ck10": "C/K 10",
     "astrovan": "Astro", "belair": "Bel Air", "blazers10jimmys15": "Blazer S10/Jimmy S15",
     "c10": "C10", "c10pickup": "C10", "c20truck": "C20", "c30pickup": "C30",
     "chevrolet10pickup": "10 Pickup", "chevrolet10van": "10 Van",
@@ -2016,6 +2022,8 @@ const MODEL_RENAMES_2026_10 = {
     "voyagerrs": "Voyager",
   },
   "dodge": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "ram1500": "Ram 1500", "ram2500": "Ram 2500", "ram3500": "Ram 3500", "d50": "D50", "d150": "D150", "d250": "D250", "d350": "D350", "caravangrandcaravan": "Caravan/Grand Caravan",
     "200pu": "200 P.U", "avengerjs": "Avenger", "caliberpm": "Caliber",
     "caravangrandcaravanrs": "Caravan/Grand Caravan", "caravanrs": "Caravan",
     "challengerla": "Challenger", "challengerlc": "Challenger", "chargerlc": "Charger",
@@ -2082,6 +2090,8 @@ const MODEL_RENAMES_2026_10 = {
     "infinitiqx80": "QX80", "qx41999": "QX4",
   },
   "isuzu": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "i290": "i-290",
     "isuzuascender": "Ascender", "isuzui280": "I-280", "isuzupuppickup": "Pup (Pickup)",
     "isuzurodeo": "Rodeo", "isuzutrooper": "Trooper",
   },
@@ -2096,6 +2106,8 @@ const MODEL_RENAMES_2026_10 = {
     "wranglerjk": "Wrangler",
   },
   "kia": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "spectra5": "Spectra5",
     "forte5door": "Forte5", "rio5door": "Rio5", "riocinco": "Rio5",
   },
   "landrover": {
@@ -2105,6 +2117,8 @@ const MODEL_RENAMES_2026_10 = {
     "landroverrangesport": "Range Rover Sport",
   },
   "lexus": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "es250": "ES 250", "es300": "ES 300", "es330": "ES 330", "es350": "ES 350", "gs300": "GS 300", "gs350": "GS 350", "gs400": "GS 400", "gs430": "GS 430", "gs450h": "GS 450h", "is250": "IS 250", "is300": "IS 300", "is350": "IS 350", "ls400": "LS 400", "ls430": "LS 430", "ls460": "LS 460", "rx300": "RX 300", "rx330": "RX 330", "rx350": "RX 350", "rx400h": "RX 400h", "rx450h": "RX 450h", "sc300": "SC 300", "sc400": "SC 400", "sc430": "SC 430", "gx460": "GX 460", "gx470": "GX 470", "lx450": "LX 450", "lx470": "LX 470", "lx570": "LX 570", "ct200h": "CT 200h", "hs250h": "HS 250h", "nx200t": "NX 200t", "nx300h": "NX 300h",
     "es300h": "ES 300h", "is200t": "IS 200t", "lexusct200h": "CT 200h", "lexuses300": "ES 300",
     "lexuses330": "ES 330", "lexuses350": "ES 350", "lexusgs300": "GS 300",
     "lexusgs350": "GS 350", "lexusgs400": "GS 400", "lexusgs430": "GS 430",
@@ -2149,6 +2163,8 @@ const MODEL_RENAMES_2026_10 = {
     "mitsubishipickup": "Pickup", "mitsubishiraider": "Raider", "raidernm": "Raider",
   },
   "nissan": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "xterra": "Xterra",
     "nissanpickup": "Pickup", "nv1500": "NV1500", "nv2500hd": "NV2500 HD", "nv3500": "NV3500",
     "pathfinder19995": "Pathfinder", "pu": "P.U",
   },
@@ -2160,6 +2176,8 @@ const MODEL_RENAMES_2026_10 = {
     "silhouetteapv": "Silhouette",
   },
   "pontiac": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "lemans": "LeMans",
     "azteksrv": "Aztek", "bonnevillegxp": "Bonneville", "bonnevillese": "Bonneville",
     "g3wave": "G3", "grandamgt": "Grand Am", "grandamgt1": "Grand Am", "grandamse": "Grand Am",
     "grandamse1": "Grand Am", "grandprixgt": "Grand Prix", "grandprixgt2": "Grand Prix",
@@ -2185,6 +2203,8 @@ const MODEL_RENAMES_2026_10 = {
     "vuegreenlinehybrid": "VUE Green Line",
   },
   "scion": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "frs": "FR-S",
     "scionia": "iA", "sciontc": "tC", "scionxa": "xA", "scionxb": "xB", "scionxd": "xD",
     "toyotascionxa": "xA", "toyotatc": "tC", "toyotaxb": "xB", "toyotaxd": "xD",
   },
@@ -2205,6 +2225,14 @@ const MODEL_RENAMES_2026_10 = {
     "volvo30series": "30 Series", "volvo40series": "40 Series", "volvo50series": "50 Series",
     "volvo60series": "60 Series", "volvo70series": "70 Series", "volvo740": "740",
     "volvo80series": "80 Series", "volvos60": "S60", "volvoxc60": "XC60", "volvoxc90": "XC90",
+  },
+  "subaru": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "legacyoutback": "Legacy Outback",
+  },
+  "triumph": {
+    // 2026-11-04 collision audit (data-quality workstream)
+    "tr7": "TR7",
   },
 };
 

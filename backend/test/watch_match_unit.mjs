@@ -25,5 +25,25 @@ check("'Toyota / Scion tC' watch still matches a yard filing it under Toyota", w
 check("'Toyota / Scion tC' watch does not match a Toyota Camry", !watchMatches(w('Toyota', 'Scion tC'), car('Toyota', 'Camry')));
 check("a plain Toyota watch does not match Scion", !watchMatches(w('Toyota', '4Runner'), car('Scion', 'tC')));
 
+// 2026-11-04 data-quality merge: watches saved under a pre-merge spelling
+// (D1 rows are never rewritten) must still match the car under its new
+// canonical name, and the canonical watch must still match an old spelling a
+// yard may keep sending.
+for (const [wm, wmod, cm, cmod] of [
+  ['Dodge', 'Ram1500', 'Dodge', 'Ram 1500'], ['Dodge', 'Ram 1500', 'Dodge', 'Ram1500'],
+  ['Dodge', 'D-150', 'Dodge', 'D150'], ['Chevrolet', 'Trail Blazer', 'Chevrolet', 'Trailblazer'],
+  ['Chevrolet', 'TrailBlazer', 'Chevrolet', 'Trailblazer'], ['Chevrolet', 'Blazers10', 'Chevrolet', 'Blazer S10'],
+  ['Chevrolet', 'C/k 10', 'Chevrolet', 'C/K 10'], ['Nissan', 'X-terra', 'Nissan', 'Xterra'],
+  ['BMW', '325-I', 'BMW', '325i'], ['Cadillac', 'Ats', 'Cadillac', 'ATS'], ['Cadillac', "Allante'", 'Cadillac', 'Allante'],
+  ['Kia', 'Spectra 5', 'Kia', 'Spectra5'], ['Subaru', 'Legacy/ Outback', 'Subaru', 'Legacy Outback'],
+  ['Isuzu', 'I-290', 'Isuzu', 'i-290'], ['Scion', 'Fr-S', 'Scion', 'FR-S'], ['Pontiac', 'Le Mans', 'Pontiac', 'LeMans'],
+  ['Triumph', 'TR-7', 'Triumph', 'TR7'], ['Lexus', 'Es300', 'Lexus', 'ES 300'], ['Scion', 'TC', 'Scion', 'tC'],
+]) {
+  check(`old-spelling watch '${wm} ${wmod}' matches car '${cm} ${cmod}'`, watchMatches(w(wm, wmod), car(cm, cmod)));
+}
+check("'Ram 1500' watch does not match a Ram 2500", !watchMatches(w('Dodge', 'Ram 1500'), car('Dodge', 'Ram2500')));
+check("'Trailblazer' watch also matches a Trailblazer EXT (contains, same rule as Silverado)", watchMatches(w('Chevrolet', 'Trailblazer'), car('Chevrolet', 'Trailblazer EXT')));
+check("'Dodge / Ram 1500' watch matches a truck filed under make Ram", watchMatches(w('Dodge', 'Ram 1500'), car('Ram', '1500')));
+
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);

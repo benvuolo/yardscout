@@ -367,6 +367,124 @@ for raw, make, want in [
 check("trailing make strip never empties the model", N("Audi", "Audi") == "Audi")
 check("unknown abbreviation left alone (never guessed)", N("Buick-Sw", "Buick") == "Buick-Sw")
 
+# ---- 2026-11-04 data-quality audit: split spellings in the live inventory --
+# Basis: collision audit of docs/data/inventory_live.json (2,198 distinct
+# make|model pairs, 53 groups whose squashed key collided) plus the 64-day
+# scan history rebuilt from git. Each pair below is a case / space / hyphen
+# spelling of ONE model; no distinct trims or body styles are merged.
+print("2026-11 collision audit:")
+for raw, make, want in [
+    ("Ram1500", "Dodge", "Ram 1500"), ("Ram2500", "Dodge", "Ram 2500"),
+    ("Ram3500", "Dodge", "Ram 3500"), ("RAM Van", "Dodge", "Ram Van"),
+    ("RAM Chassis Cab", "Dodge", "Ram Chassis Cab"), ("RAM", "Dodge", "Ram"),
+    ("D-150", "Dodge", "D150"), ("D-250", "Dodge", "D250"), ("D-50", "Dodge", "D50"),
+    ("COLT", "Dodge", "Colt"), ("Caravan/grand Caravan", "Dodge", "Caravan/Grand Caravan"),
+    ("Trail Blazer", "Chevrolet", "Trailblazer"), ("TrailBlazer", "Chevrolet", "Trailblazer"),
+    ("Blazers10", "Chevrolet", "Blazer S10"), ("C/k 10", "Chevrolet", "C/K 10"),
+    ("1500 ext cab", "Chevrolet", "1500 Ext Cab"),
+    ("X-terra", "Nissan", "Xterra"), ("325-I", "BMW", "325i"),
+    ("Ats", "Cadillac", "ATS"), ("Allante'", "Cadillac", "Allante"),
+    ("300c", "Chrysler", "300C"), ("Rsx", "Acura", "RSX"),
+    ("Gs", "Lexus", "GS"), ("Es", "Lexus", "ES"), ("Rx", "Lexus", "RX"), ("Ls", "Lexus", "LS"),
+    ("Sx4", "Suzuki", "SX4"), ("Fx", "Infiniti", "FX"), ("Xj8", "Jaguar", "XJ8"),
+    ("Ls1", "Saturn", "LS1"), ("Spectra 5", "Kia", "Spectra5"), ("allroad", "Audi", "Allroad"),
+    ("Jetta Sportwagen", "Volkswagen", "Jetta SportWagen"), ("Fr-S", "Scion", "FR-S"),
+    ("Lancer SportBack", "Mitsubishi", "Lancer Sportback"),
+    ("Legacy/ Outback", "Subaru", "Legacy Outback"), ("I-290", "Isuzu", "i-290"),
+    ("Mgb", "MG", "MGB"), ("WAVE", "Pontiac", "Wave"), ("Le Mans", "Pontiac", "LeMans"),
+    ("TR-7", "Triumph", "TR7"), ("Ml", "Mercedes-Benz", "ML"),
+    ("Gti", "Volkswagen", "GTI"), ("Sc2", "Saturn", "SC2"), ("SKY", "Saturn", "Sky"),
+    ("Nx", "Nissan", "NX"), ("635Csi", "BMW", "635CSi"), ("TR-6", "Triumph", "TR6"),
+    ("coronet", "Dodge", "Coronet"), ("W-100", "Dodge", "W100"), ("W-250", "Dodge", "W250"),
+    ("C/k 20", "Chevrolet", "C/K 20"), ("Cj Series", "Jeep", "CJ Series"), ("Xk", "Jaguar", "XK"),
+    ("Towne & country", "Chrysler", "Town & Country"), ("New Yorker (Fwd)", "Chrysler", "New Yorker"),
+    ("Jetta Tdi", "Volkswagen", "Jetta TDI"),
+]:
+    check(f"{make} {raw!r} -> {want!r}", N(raw, make) == want, N(raw, make))
+check("body-style suffixes from one hand-typed yard are NOT merged into the base model (kept separate, 1-row each)",
+      N("F-150 ext cab", "Ford") != "F-150")
+# Historical DB spellings (frozen at first insert, pre-2026-10 tables) that the
+# lifespan writer now runs through the same canon: must land on today's form.
+for raw, make, want in [
+    ("Es300", "Lexus", "ES 300"), ("Rx 330", "Lexus", "RX 330"), ("Is250", "Lexus", "IS 250"),
+    ("TC", "Scion", "tC"), ("XB", "Scion", "xB"), ("Mazda 3", "Mazda", "Mazda3"),
+    ("3-Series", "BMW", "3 Series"), ("328I", "BMW", "328i"), ("Yukon Xl", "GMC", "Yukon XL"),
+    ("Silverado 2500 Hd", "Chevrolet", "Silverado 2500HD"), ("Pt Cruiser", "Chrysler", "PT Cruiser"),
+    ("Lesabre", "Buick", "LeSabre"), ("S10", "Chevrolet", "S-10"), ("Rav4", "Toyota", "RAV4"),
+]:
+    check(f"history {make} {raw!r} -> {want!r}", N(raw, make) == want, N(raw, make))
+# Different marques / different models stay apart (never merged).
+check("Dodge 'Ram 1500' is not moved to make Ram (NHTSA decodes 2011+ trucks as both)",
+      js.normalize_make("Dodge", model="Ram 1500", year=2014) == "Dodge")
+check("'Ram' blob without a decode stays 'Ram' (never guessed to 1500)",
+      R("Ram", "Dodge", None) == "Ram")
+check("Ram 1500 vs Ram 2500 stay separate", N("Ram1500", "Dodge") != N("Ram2500", "Dodge"))
+
+# ---- saved watches keep matching (CLAUDE.md rule 6: watches are never rewritten)
+# A watch stored under an old spelling matches through two paths, neither of
+# which touches the stored watch: (a) the scan's own alert matcher
+# (check_watchlist_alerts) normalizes BOTH the watch terms and the car, then
+# compares by substring; (b) the app (docs/app.js canonicalModel) and the
+# Worker (backend/src/alerts.js canonModelLow) compare raw-substring OR
+# canonical-equal, with a squashed-key mirror table. Every merge above whose
+# old spelling is not a raw substring of the new one therefore needs a mirror
+# entry in both JS files; this test reads those tables and proves it.
+print("saved watches under old spellings:")
+import json as _json
+import re as _re
+
+def _js_table(path, name):
+    src = Path(path).read_text()
+    start = src.index(f"const {name} = {{")
+    end = src.index("\n};", start)
+    body = src[start + len(f"const {name} = "):end + 2]
+    body = _re.sub(r"//[^\n]*", "", body)              # comments
+    body = _re.sub(r",(\s*[}\]])", r"\1", body)          # trailing commas
+    return _json.loads(body)
+
+APP = _js_table(Path(__file__).resolve().parent.parent / "docs" / "app.js", "MODEL_RENAMES_2026_10")
+SRV = _js_table(Path(__file__).resolve().parent.parent / "backend" / "src" / "alerts.js", "MODEL_RENAMES")
+_sq = lambda s: _re.sub(r"[^a-z0-9]", "", s.lower())
+
+def _scan_alert_matches(watch_make, watch_model, car_make, car_model):
+    # mirrors check_watchlist_alerts: normalize both sides, substring compare
+    mk = js.normalize_make(watch_make).lower()
+    md = js.normalize_model(watch_model, watch_make).lower()
+    return (not mk or mk in car_make.lower()) and (not md or md in car_model.lower())
+
+def _js_canon(table, make, model):
+    t = table.get(_sq(make)) or {}
+    return (t.get(_sq(model)) or model).lower()
+
+def _js_matches(table, watch_model, car_make, car_model):
+    raw = watch_model.lower() in car_model.lower()
+    return raw or _js_canon(table, car_make, car_model) == _js_canon(table, car_make, watch_model)
+
+OLD_WATCHES = [
+    ("Dodge", "Ram1500"), ("Dodge", "Ram 1500"), ("Dodge", "RAM Van"), ("Dodge", "D-150"),
+    ("Chevrolet", "Trail Blazer"), ("Chevrolet", "TrailBlazer"), ("Chevrolet", "Blazers10"),
+    ("Chevrolet", "C/k 10"), ("Nissan", "X-terra"), ("BMW", "325-I"), ("Cadillac", "Ats"),
+    ("Cadillac", "Allante'"), ("Chrysler", "300c"), ("Lexus", "Gs"), ("Kia", "Spectra 5"),
+    ("Subaru", "Legacy/ Outback"), ("Isuzu", "I-290"), ("Scion", "Fr-S"), ("Pontiac", "Le Mans"),
+    ("Triumph", "TR-7"), ("Volkswagen", "Jetta Sportwagen"), ("Lexus", "Es300"), ("Lexus", "Rx 330"),
+    ("Scion", "TC"), ("Mazda", "Mazda 3"), ("Toyota", "Rav4"),
+]
+for wmake, wmodel in OLD_WATCHES:
+    cmake = js.normalize_make(wmake, model=wmodel)
+    cmodel = js.normalize_model(wmodel, cmake)      # what the car is called now
+    check(f"scan alert: watch {wmake!r}/{wmodel!r} matches car {cmake!r}/{cmodel!r}",
+          _scan_alert_matches(wmake, wmodel, cmake, cmodel))
+    check(f"app canonicalModel: watch {wmodel!r} matches car {cmodel!r}",
+          _js_matches(APP, wmodel, cmake, cmodel), f"app mirror lacks {_sq(wmodel)} -> {cmodel}")
+    check(f"worker canonModelLow: watch {wmodel!r} matches car {cmodel!r}",
+          _js_matches(SRV, wmodel, cmake, cmodel), f"server mirror lacks {_sq(wmodel)} -> {cmodel}")
+    # and the new-spelling watch keeps matching a yard that still sends the old spelling
+    check(f"app: watch {cmodel!r} matches a raw-feed car {wmodel!r}", _js_matches(APP, cmodel, cmake, wmodel))
+check("app and worker mirror tables agree (same keys, same values modulo case)",
+      all(set(APP.get(m, {})) == set(SRV.get(m, {})) and
+          all(APP[m][k].lower() == SRV[m][k] for k in APP.get(m, {})) for m in set(APP) | set(SRV)),
+      str([m for m in set(APP) | set(SRV) if set(APP.get(m, {})) != set(SRV.get(m, {}))]))
+
 print()
 if failures:
     print(f"{len(failures)} FAILURE(S): {failures}")

@@ -22202,8 +22202,8 @@ _MODEL_CANON = {
 # fleet continuation model), Armada ≠ Pathfinder Armada (official early name),
 # A4 ≠ A4 Quattro. When unsure, keep separate.
 _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
-    "acura": {"cl": "CL", "rl": "RL", "rdx": "RDX"},
-    "audi": {"ttquattro": "TT Quattro"},
+    "acura": {"cl": "CL", "rl": "RL", "rdx": "RDX", "rsx": "RSX"},
+    "audi": {"ttquattro": "TT Quattro", "allroad": "Allroad"},
     "bmw": {
         # 525iA/530iA are 525i/530i automatics (feed + NHTSA use the trans
         # marker); not a distinct model, unlike is/ci/xi body/drive variants.
@@ -22211,7 +22211,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "activehybrid3": "ActiveHybrid 3", "activehybrid5": "ActiveHybrid 5",
         "i3": "i3", "428igrancoupe": "428i Gran Coupe",
         "alpinab7xdrive": "Alpina B7 xDrive",
-        "alpinab7lxdrive": "Alpina B7L xDrive",
+        "alpinab7lxdrive": "Alpina B7L xDrive", "635csi": "635CSi",
     },
     "buick": {
         "lesabre": "LeSabre", "lacrosse": "LaCrosse", "encoregx": "Encore GX",
@@ -22221,7 +22221,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "deville": "DeVille", "coupedeville": "Coupe DeVille",
         "eldorado": "Eldorado",  # catches 'El Dorado'
         "sts": "STS", "xts": "XTS", "ctsv": "CTS-V", "elr": "ELR",
-        "escaladeesv": "Escalade ESV",
+        "escaladeesv": "Escalade ESV", "ats": "ATS", "allante": "Allante",
     },
     "chevrolet": {
         "s10pickup": "S-10", "s10pu": "S-10", "c10": "C10",
@@ -22244,6 +22244,11 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "rv20series": "R/V 20", "gseriesvan": "G-Series",
         "c15c1500pickup": "C1500", "c3500hd": "C3500HD",
         "c20truck": "C20", "c30pickup": "C30",
+        # 2026-11-04 collision audit (live inventory + 64-day history):
+        # case/space variants of one model, keyed so both spellings land here.
+        "trailblazer": "Trailblazer", "blazers10": "Blazer S10",
+        "ck10": "C/K 10", "ck20": "C/K 20", "ck30": "C/K 30",
+        "1500extcab": "1500 Ext Cab",
     },
     "chrysler": {
         # 'TOWN &amp; COUNTRY' unescapes to 'Town & Country' whose squashed
@@ -22254,7 +22259,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         # chains append; the base nameplate is the model. '300 Lh' deliberately
         # NOT merged ('300' didn't exist in the LH era — likely a mislabeled
         # 300M; ambiguous, keep).
-        "300lx": "300", "300clx": "300C", "300m": "300M",
+        "300lx": "300", "300clx": "300C", "300m": "300M", "300c": "300C",
         "200js": "200", "200uf": "200", "200lx": "200",
         "sebringjr": "Sebring", "sebringjs": "Sebring",
         "pacificacs": "Pacifica", "ptcruiserpt": "PT Cruiser",
@@ -22262,6 +22267,8 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "crossfirezh": "Crossfire", "voyagerrs": "Voyager",
         "lhslh": "LHS", "lhs": "LHS",
         "tcbymaserati": "TC By Maserati", "tcmaserati": "TC By Maserati",
+        "townecountry": "Town & Country",   # 'Towne' feed typo
+        "newyorkerfwd": "New Yorker",       # '(Fwd)' is a chain body note
     },
     "dodge": {
         "ram": "Ram",            # display casing for unresolved 'RAM' rows
@@ -22283,6 +22290,15 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "w250pickup": "W250", "w350pickup": "W350",
         "ram1500van": "Ram Van 1500", "ram2500van": "Ram Van 2500",
         "ram3500van": "Ram Van 3500",
+        # 2026-11-04 collision audit: 'Ram1500' (113 live rows, Pull-A-Part)
+        # next to 'Ram 1500'; 'RAM Van' / 'RAM Chassis Cab' casing; 'D-150'.
+        "ram1500": "Ram 1500", "ram2500": "Ram 2500", "ram3500": "Ram 3500",
+        "ramvan": "Ram Van", "ramwagon": "Ram Wagon",
+        "ramchassiscab": "Ram Chassis Cab", "colt": "Colt",
+        "d50": "D50", "d150": "D150", "d250": "D250", "d350": "D350",
+        "w100": "W100", "w150": "W150", "w200": "W200", "w250": "W250",
+        "w350": "W350", "coronet": "Coronet",
+        "caravangrandcaravan": "Caravan/Grand Caravan",
     },
     "ford": {
         "f250sd": "F-250 Super Duty", "f350sd": "F-350 Super Duty",
@@ -22317,12 +22333,12 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
     "hyundai": {"kona": "Kona", "santafexl": "Santa Fe XL"},
     "infiniti": {
         "qx41999": "QX4", "m35h": "M35h", "qx60hybrid": "QX60 Hybrid",
-        "fxseries": "FX Series",
+        "fxseries": "FX Series", "fx": "FX",
     },
-    "isuzu": {"isuzupuppickup": "Pup", "trooperii": "Trooper II"},
+    "isuzu": {"isuzupuppickup": "Pup", "trooperii": "Trooper II", "i290": "i-290"},
     "jaguar": {
         "xf": "XF", "xj": "XJ", "xj6": "XJ6", "xjs": "XJS",
-        "xjsedan": "XJ", "xk8": "XK8",
+        "xjsedan": "XJ", "xk8": "XK8", "xj8": "XJ8", "xk": "XK",
     },
     "jeep": {
         "libertykj": "Liberty", "libertykk": "Liberty",
@@ -22330,11 +22346,11 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "patriotmk": "Patriot", "compassmk": "Compass",
         "commanderxh": "Commander", "commanderxk": "Commander",
         "cherokeekl": "Cherokee", "cherokeexj": "Cherokee",
-        "wranglerjk": "Wrangler", "cj7": "CJ7", "cj5": "CJ5",
+        "wranglerjk": "Wrangler", "cj7": "CJ7", "cj5": "CJ5", "cjseries": "CJ Series",
         "pucomanche": "Comanche", "j10pickup": "J10",
     },
     "kia": {
-        "niro": "Niro", "soulev": "Soul EV",
+        "niro": "Niro", "soulev": "Soul EV", "spectra5": "Spectra5",
         "rio5door": "Rio5", "riocinco": "Rio5", "forte5door": "Forte5",
     },
     "landrover": {
@@ -22344,7 +22360,9 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "discoveryseriesii": "Discovery Series II",
         "lr2": "LR2", "lr3": "LR3", "lr4": "LR4",
     },
-    "lexus": {"ls600hl": "LS 600h L", "scseries": "SC Series"},
+    "lexus": {"ls600hl": "LS 600h L", "scseries": "SC Series",
+              # bare family names (no displacement) — Lexus caps them
+              "es": "ES", "gs": "GS", "rx": "RX", "ls": "LS", "is": "IS"},
     "lincoln": {"ls": "LS", "mks": "MKS", "mkt": "MKT", "mark": "Mark"},
     "mazda": {
         # Bare numbers under make Mazda are unambiguous ('3' is a Mazda3).
@@ -22363,7 +22381,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "mclass": "M-Class", "slkclass": "SLK-Class",
         "mlclass": "M-Class", "claclass": "CLA-Class", "glaclass": "GLA-Class",
         "glcclass": "GLC-Class", "gleclass": "GLE-Class",
-        "clk": "CLK", "slk": "SLK", "cls": "CLS", "sl": "SL", "gl": "GL",
+        "clk": "CLK", "slk": "SLK", "cls": "CLS", "sl": "SL", "gl": "GL", "ml": "ML",
         "cla": "CLA", "gla": "GLA", "glc": "GLC", "gls": "GLS", "slc": "SLC",
         "smartsmart": "Smart",
     },
@@ -22375,12 +22393,13 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
     },
     "mitsubishi": {
         "raidernm": "Raider", "expo": "Expo", "expolrv": "Expo LRV",
-        "imiev": "i-MiEV",
+        "imiev": "i-MiEV", "lancersportback": "Lancer Sportback",
     },
     "nissan": {
         "nv200": "NV200", "nv1500": "NV1500", "nv3500": "NV3500",
         "nv2500hd": "NV2500 HD", "240sx": "240SX", "350z": "350Z",
-        "370z": "370Z", "pathfinder19995": "Pathfinder",
+        "370z": "370Z", "pathfinder19995": "Pathfinder", "xterra": "Xterra",
+        "nx": "NX",
     },
     "oldsmobile": {
         "ciera": "Cutlass Ciera", "culassciera": "Cutlass Ciera",  # feed typo
@@ -22398,7 +22417,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "grandprixse1": "Grand Prix",
         "bonnevillese": "Bonneville", "bonnevillegxp": "Bonneville",
         "sunfirese": "Sunfire", "azteksrv": "Aztek",
-        "g3wave": "G3", "gto": "GTO",
+        "g3wave": "G3", "gto": "GTO", "wave": "Wave", "lemans": "LeMans",
     },
     "ram": {
         "1500pickup": "1500", "2500pickup": "2500", "3500pickup": "3500",
@@ -22413,18 +22432,20 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
     "fiat": {"500l": "500L", "500x": "500X"},
     "merkur": {"xr4ti": "XR4Ti"},
     "saab": {"92x": "9-2X", "97x": "9-7X", "93x": "9-3X"},
+    "mg": {"mgb": "MGB"},
+    "triumph": {"tr7": "TR7", "tr6": "TR6"},
     "saturn": {
         "auraxe": "Aura", "auraxr": "Aura", "astraxe": "Astra",
         "vuegreenlinehybrid": "VUE Green Line",
         "auragreenlinehybrid": "Aura Green Line",
         "l300sedan": "L300", "lw300": "LW300", "lw200": "LW200",
-        "sl1": "SL1",
+        "sl1": "SL1", "ls1": "LS1", "sc2": "SC2", "sky": "Sky",
     },
-    "scion": {"iq": "iQ", "ia": "iA", "im": "iM"},
-    "subaru": {"xvcrosstrek": "XV Crosstrek"},
+    "scion": {"iq": "iQ", "ia": "iA", "im": "iM", "frs": "FR-S"},
+    "subaru": {"xvcrosstrek": "XV Crosstrek", "legacyoutback": "Legacy Outback"},
     "suzuki": {
         "sx4sedan": "SX4 Sport",   # the SX4 Sport IS the sedan body
-        "sx4sport": "SX4 Sport", "grandvitaraxl7": "XL-7",
+        "sx4sport": "SX4 Sport", "grandvitaraxl7": "XL-7", "sx4": "SX4",
     },
     "toyota": {
         "solara": "Camry Solara", "corollamatrix": "Matrix",
@@ -22441,7 +22462,8 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "cc": "CC", "golfgti": "GTI",
         "gli": "Jetta GLI", "jettagli": "Jetta GLI",
         "taos": "Taos", "bus": "Bus",
-        "cabrioletconvertible": "Cabriolet",
+        "cabrioletconvertible": "Cabriolet", "jettasportwagen": "Jetta SportWagen",
+        "gti": "GTI", "jettatdi": "Jetta TDI",
     },
     "volvo": {
         "v70xc": "V70 XC",
@@ -22474,7 +22496,7 @@ _MODEL_STRIP_EXTRA = {
 #   distinct model — it folds into plain 'i'.
 _BMW_SUFFIX_CASE = {"li": "Li", "il": "iL", "ia": "i"}  # rest lowercases
 _BMW_MODEL_RE = re.compile(
-    r"^(\d{3})\s*(li|il|ia|is|ci|xi|ix|si|ti|es|i|d|e)(?:\s+(gt))?(?:\s+(xdrive))?$",
+    r"^(\d{3})\s*-?\s*(li|il|ia|is|ci|xi|ix|si|ti|es|i|d|e)(?:\s+(gt))?(?:\s+(xdrive))?$",
     re.IGNORECASE,
 )
 _FE_SERIES_RE = re.compile(r"^([FE])\s*-?\s*(\d{2,3})$", re.IGNORECASE)
@@ -22622,7 +22644,7 @@ def normalize_model(model: str, make: str = "") -> str:
     punctuation cleanup ('Grand Caravan.'), own-make prefix strip ('BMW 328i'),
     per-make canon table, global canon table, make-scoped pattern rules."""
     m = html.unescape(model or "")
-    m = re.sub(r"\s+", " ", m.strip().lstrip("&/ ")).strip().rstrip(".,")
+    m = re.sub(r"\s+", " ", m.strip().lstrip("&/ ")).strip().rstrip(".,'")
     if not m:
         return m
     make_key = _squash_model_key(make)
@@ -22755,15 +22777,21 @@ def _decode_make_agrees(make: str, dec_make: str) -> bool:
     return bool(a and b) and (a in b or b in a)
 
 
+def _is_model_blob(model: str, make: str) -> bool:
+    """True when the (canonical) model is a registered generic blob that a
+    VIN decode may refine ('3 Series', 'Ram', 'Unknown', bare BMW '328')."""
+    key = _squash_model_key(model)
+    make_key = _make_key(make)
+    return bool(key in _MODEL_BLOBS.get(make_key, ()) or key == "unknown"
+                or (make_key == "bmw" and _BMW_BARE_NUM_RE.match(key)))
+
+
 def resolve_model_blob(model: str, make: str, vin_dec: dict | None) -> str:
     """Concrete model for a registered generic-blob row, from its VIN decode.
     Returns the (already canonical) model unchanged when the row isn't a blob
     or the decode isn't confident."""
     key = _squash_model_key(model)
-    make_key = _make_key(make)
-    is_blob = (key in _MODEL_BLOBS.get(make_key, ()) or key == "unknown"
-               or (make_key == "bmw" and _BMW_BARE_NUM_RE.match(key)))
-    if not is_blob or not vin_dec:
+    if not _is_model_blob(model, make) or not vin_dec:
         return model
     dec_model = (vin_dec.get("model") or "").strip()
     dec_series = (vin_dec.get("series") or "").strip()
@@ -23447,6 +23475,24 @@ def _iso_utc_z() -> str:
 
 
 LIFESPAN_MIN_N = 30  # departures needed before a yard/chain average is trusted
+# Yards whose departure data can't be read as cars leaving (data-quality
+# audit 2026-11-04, db.yard_departure_reliability): a feed that drops gone
+# cars in one flush (>= LIFESPAN_FLUSH_SHARE of the yard's departures in a
+# single scan — Prestige Houston 95%, Pick-n-Pull Dallas South 63%), or a
+# listed yard whose feed has detected no departure for LIFESPAN_STALE_SCANS
+# scans (~6 days). Such a yard ships typical=null and no yard+model figures,
+# is left out of chain/global/model aggregates, and the app shows nothing
+# for it rather than a number. No fallback to the chain or global average:
+# the owner's rule is "nothing rather than a guess".
+LIFESPAN_FLUSH_SHARE = 0.4
+LIFESPAN_STALE_SCANS = 36
+
+
+def _unreliable_lifespan_yards(db_mod) -> dict[str, str]:
+    """{location: reason} for yards failing db.yard_departure_reliability."""
+    rel = db_mod.yard_departure_reliability(
+        flush_share=LIFESPAN_FLUSH_SHARE, stale_scans=LIFESPAN_STALE_SCANS)
+    return {loc: v["reason"] for loc, v in rel.items() if not v["reliable"]}
 
 
 def _yard_lifespan_lookup() -> dict[str, tuple[int, str]]:
@@ -23455,22 +23501,29 @@ def _yard_lifespan_lookup() -> dict[str, tuple[int, str]]:
     vehicles; otherwise fall back to its chain's average, then the global one.
     The basis ("yard" / "chain" / "all") ships to the UI so the copy can say
     which average it's quoting. Empty dict when the history DB is missing or
-    has no usable departures yet — the UI simply shows nothing."""
+    has no usable departures yet — the UI simply shows nothing.
+
+    Yards whose departures are unreliable (see LIFESPAN_FLUSH_SHARE) map to
+    None: no yard figure AND no chain/global fallback, and their rows are
+    left out of the chain and global averages."""
     try:
         try:
             import db as _db
         except ImportError:
             from scraper import db as _db  # pragma: no cover
-        stats = _db.lifespan_stats()
+        unreliable = _unreliable_lifespan_yards(_db)
+        stats = _db.lifespan_stats(exclude=set(unreliable))
     except Exception as e:
         print(f"  [lifespan] history DB unavailable ({e}) — skipping crush-risk data", file=sys.stderr)
         return {}
     g_avg, g_n = stats["global"]
-    out: dict[str, tuple[int, str]] = {}
+    out: dict[str, tuple[int, str] | None] = {}
     # Resolve for every yard the DB knows; the payload builder only reads the
     # ones present in the current scan.
-    known_locs = set(stats["yards"]) | set()
+    known_locs = set(stats["yards"]) | set(unreliable)
     def resolve(loc: str) -> tuple[int, str] | None:
+        if loc in unreliable:
+            return None
         y = stats["yards"].get(loc)
         if y and y[1] >= LIFESPAN_MIN_N:
             return round(y[0]), "yard"
@@ -23483,14 +23536,23 @@ def _yard_lifespan_lookup() -> dict[str, tuple[int, str]]:
         return None
     for loc in known_locs:
         r = resolve(loc)
-        if r:
+        if r or loc in unreliable:
             out[loc] = r
-    n_yard = sum(1 for v in out.values() if v[1] == "yard")
+    n_yard = sum(1 for v in out.values() if v and v[1] == "yard")
     print(
         f"  [lifespan] global avg {round(g_avg, 1)}d over {g_n} departures; "
-        f"{n_yard} yard(s) have their own average (n>={LIFESPAN_MIN_N})",
+        f"{n_yard} yard(s) have their own average (n>={LIFESPAN_MIN_N}); "
+        f"{len(unreliable)} yard(s) excluded as unreliable",
         file=sys.stderr,
     )
+    # Log only the exclusions that suppress a figure the yard would otherwise
+    # publish (n >= LIFESPAN_MIN_N); the full list with reasons ships in
+    # model_lifespan.json.
+    rel = _db.yard_departure_reliability(flush_share=LIFESPAN_FLUSH_SHARE,
+                                         stale_scans=LIFESPAN_STALE_SCANS)
+    for loc, why in sorted(unreliable.items()):
+        if rel.get(loc, {}).get("n", 0) >= LIFESPAN_MIN_N:
+            print(f"  [lifespan] excluded {loc}: {why}", file=sys.stderr)
     out["__global__"] = (round(g_avg), "all") if g_n >= LIFESPAN_MIN_N else None
     out["__chains__"] = {k: (round(a), "chain") for k, (a, n) in stats["chains"].items() if n >= LIFESPAN_MIN_N}
     return out
@@ -23507,7 +23569,7 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
 
     def yard_lifespan(loc: str) -> tuple[int, str] | None:
         if loc in lifespans:
-            return lifespans[loc]
+            return lifespans[loc]   # None for yards excluded as unreliable
         chain = loc.split(" - ")[0].strip()
         if chain in ls_chains:
             return ls_chains[chain]
@@ -23803,6 +23865,40 @@ MODEL_LIFESPAN_MIN_N = 25        # departures before a model's national median c
 YARD_MODEL_LIFESPAN_MIN_N = 15   # ... before a model's median AT ONE YARD counts
 
 
+def _lifespan_canon_factory(db_mod):
+    """Canonicalizer for history rows: (make, model, vin, year) -> (make, model).
+
+    The history DB freezes make/model at a vehicle's first insert, so rows
+    written before a spelling merge keep the old spelling ('FORD'/'Ford',
+    'Es300'/'ES 300', 'Scion|TC'/'tC', 'General Motors|ION') and the lifespan
+    file counted each spelling as its own model (55 split keys on
+    2026-11-04). Every row goes through the same three steps a live scan
+    applies: normalize_make (incl. the General Motors -> division resolution
+    by VIN/model), normalize_model, then resolve_model_blob for generic blobs
+    ('Ram', '3 Series', 'Sierra') using the cached VIN decode — the stated
+    basis for each merge is the scan's own canon tables plus NHTSA's decode;
+    an unresolved blob stays a blob, never guessed."""
+    cache: dict[tuple, tuple[str, str]] = {}
+
+    def canon(make: str, model: str, vin: str = "", year: int = 0) -> tuple[str, str]:
+        k = (make, model, vin, year)
+        hit = cache.get(k)
+        if hit is not None:
+            return hit
+        mk = normalize_make(make or "", model=model or "", vin=vin or "", year=year or 0)
+        md = normalize_model(model or "", mk)
+        if vin and _is_model_blob(md, mk):
+            try:
+                dec = db_mod.vin_decode(vin)
+            except Exception:
+                dec = None
+            md = resolve_model_blob(md, mk, dec)
+        cache[k] = (mk, md)
+        return mk, md
+
+    return canon
+
+
 def _write_model_lifespan_json(scraped_at: str | None) -> None:
     """docs/data/model_lifespan.json — median lot lifespan per model and per
     yard+model from the history DB (db.model_lifespan_stats). The app uses the
@@ -23816,7 +23912,9 @@ def _write_model_lifespan_json(scraped_at: str | None) -> None:
             import db as _db
         except ImportError:
             from scraper import db as _db  # pragma: no cover
-        st = _db.model_lifespan_stats()
+        unreliable = _unreliable_lifespan_yards(_db)
+        st = _db.model_lifespan_stats(normalize=_lifespan_canon_factory(_db),
+                                      exclude=set(unreliable))
     except Exception as e:
         print(f"  [model lifespan] history DB unavailable ({e}) — skipping", file=sys.stderr)
         return
@@ -23835,12 +23933,19 @@ def _write_model_lifespan_json(scraped_at: str | None) -> None:
         ym = st["yards"].get(loc)
         y["typical"] = round(ym[0]) if ym and ym[1] >= LIFESPAN_MIN_N else None
         y["models"] = dict(sorted(y["models"].items()))
+    # Unreliable yards ship explicitly empty (typical null, no models) with
+    # the reason, so the published file documents the decision and the app
+    # shows nothing for them (lifespanFor finds no model, no yard figure).
+    for loc, why in unreliable.items():
+        yards[loc] = {"typical": None, "models": {}, "unreliable": why}
     out = {"scrapedAt": scraped_at, "basis": "median days on the lot for departed cars",
            "minN": {"model": MODEL_LIFESPAN_MIN_N, "yardModel": YARD_MODEL_LIFESPAN_MIN_N},
+           "unreliableRule": {"flushShare": LIFESPAN_FLUSH_SHARE, "staleScans": LIFESPAN_STALE_SCANS},
            "global": round(g_med), "models": dict(sorted(models.items())), "yards": dict(sorted(yards.items()))}
     (DATA_DIR / "model_lifespan.json").write_text(json.dumps(out, separators=(",", ":")))
     print(f"  [model lifespan] {len(models)} models, {sum(len(y['models']) for y in yards.values())} "
-          f"yard+model medians across {len(yards)} yards (global median {round(g_med)} d over {g_n})", file=sys.stderr)
+          f"yard+model medians across {len(yards) - len(unreliable)} yards (global median {round(g_med)} d over {g_n}); "
+          f"{len(unreliable)} yard(s) excluded as unreliable", file=sys.stderr)
 
 
 def _write_yards_added(payload: dict) -> None:

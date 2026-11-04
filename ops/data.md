@@ -6,18 +6,6 @@ lifespan writer `_write_model_lifespan_json` and `db.model_lifespan_stats`,
 `scraper/test_model_lifespan.py`, and the lifespan display in `docs/app.js`
 (`lifespanFor`, "leaves fast here", "Day N of ~X").
 
-## Open issues (from the hub, 2026-11-04)
-
-1. **Split model spellings** in `docs/data/model_lifespan.json`:
-   "Dodge|Ram", "Dodge|RAM", "Dodge|Ram 1500" counted separately;
-   "General Motors|ION" and "General Motors|VUE" should be Saturn. Likely
-   more of the same kind across the inventory.
-2. **Yards with implausibly long lifespans**: Prestige Pull-Your-Part
-   Houston (typical 296 d), San Antonio Pick-N-Pull (233 d), Pick Your Part
-   Wichita (181 d), Wrench-A-Part Belton (180 d), Pick-n-Pull Dallas South
-   (161 d). Likely feeds that keep departed cars listed, so departures are
-   detected late. Global median is 61 d.
-
 ## Rules specific to this work
 
 - Saved watches are never rewritten (CLAUDE.md rule 6). Any normalization
@@ -25,3 +13,120 @@ lifespan writer `_write_model_lifespan_json` and `db.model_lifespan_stats`,
   old and new spellings if needed); add a test for that.
 - Do not invent a lifespan. Where a yard's data is unreliable, the app shows
   nothing rather than a number.
+
+## 2026-11-04 session — both open issues closed
+
+Method note: the CI history DB lives only in the Actions cache (no download
+path), so the 64-day history was rebuilt from the 293 scan commits of
+`docs/data/inventory_live.json` (2026-09-02 → 11-04) with the same semantics
+as `db.record_scan` (292 snapshots used; one, `d80f0fa5`, skipped on a
+transient fetch error). All numbers below are from that rebuild; the CI DB
+will differ slightly. The code change runs against the real DB on the next
+scan, which publishes the real figures.
+
+### 1. Split model spellings — fixed
+
+Measured before (published `model_lifespan.json`, 17:29 scan): 640 model
+keys, of which 54 groups were spellings of one model under one make
+(`FORD|Focus`/`Ford|Focus`, `Lexus|Es300`/`Es 300`/`ES 300`, `Scion|TC`/`tC`,
+`Dodge|RAM`/`Ram`, `MINI|Cooper`/`Mini|Cooper` …) plus 32 `General Motors|…`
+keys (ION, VUE, Malibu, Cruze …). Live inventory: 2,198 make|model pairs,
+53 groups colliding on case/space/hyphen (largest `Dodge|Ram1500` 113 rows
+beside `Ram 1500` 3,579).
+
+Two causes, two fixes:
+
+1. **The history DB freezes make/model at first insert**, so every row
+   written before the 2026-10 make/model merges keeps its old spelling and
+   the writer counted it as its own model. Fix: `db.model_lifespan_stats`
+   takes a `normalize` callback and the writer passes
+   `_lifespan_canon_factory` = the scan's own three steps (`normalize_make`
+   incl. the General Motors → division resolution by VIN/model,
+   `normalize_model`, `resolve_model_blob` by cached NHTSA decode). Basis
+   for each merge is therefore the existing canon tables plus the VIN
+   decode; an unresolved blob stays a blob.
+2. **~70 feed spellings had no canon entry** (`Ram1500`, `Trail Blazer`,
+   `X-terra`, `325-I`, `Ats`, `300c`, `Blazers10`, `C/k 10`, `D-150`,
+   `Allante'`, `Spectra 5`, `Fr-S`, `Le Mans`, bare Lexus `Gs`/`Es`/`Rx`/`Ls`
+   …). Added to `_MODEL_CANON_BY_MAKE` with the audit cited; BMW rule now
+   tolerates a hyphen; trailing apostrophes are stripped. Full list is the
+   "2026-11 collision audit" section of `test_model_normalization.py`.
+
+After (same writer on the rebuilt history): 531 model keys, 0 split groups,
+0 General Motors keys; global median 61 → 60 d. Live inventory after
+`normalize_model`: 0 collision groups except three one-row body-style
+spellings (`F-150 ext cab`/`EXT Cab`) deliberately kept apart.
+
+Deliberately NOT merged (different cars or different marques):
+- `Dodge|Ram 1500` vs `Ram|1500`: marque split follows the feeds' own
+  year boundary (3,476 of 3,579 Dodge-filed are ≤2010; 380 of 398 Ram-filed
+  are 2011+). NHTSA itself decodes the 2011+ Dodge-filed trucks as DODGE
+  (83) and the Ram-filed ones as both RAM (226) and DODGE (131), so there
+  is no clean basis to move them. Watches already match across the two
+  (`watchMatches` MAKE_IN_MODEL rule). Owner call if they want a year split.
+- `Dodge|Ram` (37 departures, no decode) and `Dodge|Ram Pickup` (53) stay
+  as blobs; `Ram` → `Ram 1500` only when the VIN decode says so (that
+  resolved 1,928 → 2,308 Ram 1500 rows).
+
+Saved watches: not touched. Proof added in two places:
+- `test_model_normalization.py` "saved watches under old spellings": for
+  26 old spellings, the scan's alert matcher (normalize both sides +
+  substring) matches the renamed car, and the app's `canonicalModel` and
+  the Worker's `canonModelLow` tables (parsed from `docs/app.js` /
+  `backend/src/alerts.js`) map the old squashed key to the new canonical;
+  also asserts the two JS tables agree.
+- `backend/test/watch_match_unit.mjs` (node, real `watchMatches`): 36 → 58
+  cases incl. `Ram1500`↔`Ram 1500`, `Trail Blazer`↔`Trailblazer`,
+  `Es300`↔`ES 300`, `Allante'`↔`Allante`.
+Mirror entries added to both JS tables (marked "2026-11-04 collision
+audit"); `docs/sw.js` cache bumped to `jh-v141`.
+
+### 2. Implausible yard lifespans — cause found, rule added
+
+Per yard (rebuilt history; "flow" = live count ÷ departures per day, a
+second estimate of lifespan that is immune to bad dates):
+
+| Yard | median | flow | largest single-scan share of departures | verdict |
+|---|---|---|---|---|
+| Prestige Pull-Your-Part - Houston | 296 d | 22 d | 866 of 916 (95%) on 10-28 | **excluded** — the legacy endpoint had been frozen since 07-10 (newest `yard_date`); when the adapter moved to VinPlus the whole old list "departed" in one scan |
+| Pick-n-Pull - Dallas South | 161 d | 124 d | 699 of 1,101 (63%) on 10-28 | **excluded** — the PnP index re-listed 360 cars dated Mar–Jun on 10-21 with no removals, then purged 699 on 10-28 (508 cold-start cars dated Mar–Aug + 184 of the re-listed). Same pattern at Sherwood (60%, excluded) and Little Rock (359 of 737 = 38%, under the line, 121 d stays) |
+| Pick Your Part - Wichita | 180 d | 154 d | 19 of 699 (3%), 48 departure scans | kept — removals continuous, new listings dated 0.1 d before first seen, 21% of listed cars > 120 d old: a genuinely slow yard |
+| Wrench-A-Part - Belton | 180 d | 143 d | 101 of 877 (12%), 35 scans | kept — genuinely slow; Lubbock / Del Valle / San Antonio WAP (120–139 d) look the same |
+| San Antonio Pick-N-Pull (Independent) | 233 d | 208 d | 48 of 241 (20%), 8 scans | kept by the rule, **watch it**: only 13 days of history, 58% of listed cars > 120 d old; cannot yet tell a slow yard from a VinPlus tenant listing old stock |
+
+Rule (`db.yard_departure_reliability`, thresholds `LIFESPAN_FLUSH_SHARE =
+0.4`, `LIFESPAN_STALE_SCANS = 36` in `junkyard_scraper.py`): a yard's
+departure data is unreliable when
+- **flush** — the largest single-scan group holds ≥ 40% of its departures
+  (every span in a flush is "time until the feed caught up"), or
+- **stale** — it is still listed and no departure was detected in the last
+  36 scans (~6 days; Pull-A-Part's weekly removal batches top out at 31).
+
+Effect of an exclusion: `typical` null and no yard+model figures (the entry
+ships as `{"typical": null, "models": {}, "unreliable": "<reason>"}` so the
+file documents it), the yard's rows leave the chain, global and national
+model aggregates, and the inventory payload's `avgLifespanDays`/`basis`
+columns are null with **no chain/global fallback**. The app's `lifespanFor`
+then finds nothing and shows nothing (no display change needed).
+
+Measured effect: 70 of 299 yards with departures excluded (list in the
+JSON; mostly small independents whose feeds remove in batches: Pull-N-Save
+×6, U-Pull-It NE ×4, Chesterfield ×3, U-Pull-R ×3, BYOT ×5, Foss ×6,
+Ryan's, Indy, Des Moines …), 223 yards keep a yard-basis figure, yard+model
+figures 2,401 → 2,154, inventory-payload global average 66.7 d. Tests:
+`test_model_lifespan.py` builds a flush yard and a stale yard and checks
+verdicts, aggregates, the JSON shape and the payload columns.
+
+Caveat on all lifespans: with 64 days of history the medians are mostly
+cold-start cars (long-stayers over-represented), so figures will drift
+down as history grows. Not a per-yard problem; noted for the owner.
+
+### Next
+
+- Read the next scan log for `[lifespan] excluded …` (only yards with
+  ≥ 30 departures are logged) and the `unreliable` entries in
+  `model_lifespan.json`; confirm Prestige and Dallas South show no number.
+- Little Rock (38%) sits just under the flush line; revisit if the PnP
+  index re-lists again.
+- Owner question: year-split Dodge Ram → Ram (2011+)? Not done; no clean
+  basis (see above).

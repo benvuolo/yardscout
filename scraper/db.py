@@ -211,6 +211,22 @@ def store_vin_decodes(decodes: dict, decoded_at: str, replace: bool = False) -> 
     return added
 
 
+def vin_decode(vin: str) -> dict | None:
+    """One cached decode (or None). Cheap PK lookup for callers that need a
+    handful of decodes without loading the whole cache."""
+    if not vin:
+        return None
+    conn = _connect()
+    row = conn.execute("SELECT payload FROM vin_decodes WHERE vin = ?", (vin,)).fetchone()
+    conn.close()
+    if not row:
+        return None
+    try:
+        return json.loads(row[0])
+    except (json.JSONDecodeError, TypeError):
+        return None
+
+
 def vin_decode_count() -> int:
     conn = _connect()
     n = conn.execute("SELECT COUNT(*) FROM vin_decodes").fetchone()[0]
@@ -315,7 +331,61 @@ def export_vin_decodes_gz(path: Path, min_new: int = 20000,
     return True
 
 
-def lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict:
+def yard_departure_reliability(min_days: float = 0.5, max_days: float = 400.0,
+                               flush_share: float = 0.4, stale_scans: int = 36) -> dict:
+    """Per-yard verdict on whether departures can be read as cars leaving.
+
+    Two feed signatures make a yard's lifespans meaningless (data-quality
+    audit of the 64-day history, 2026-11-04):
+      * flush — a feed that keeps gone cars listed and drops them in one go
+        (Prestige Houston's frozen legacy list: 866 of 916 departures in one
+        scan; Pick-n-Pull's index re-listing 360 stale cars at Dallas South on
+        10-21 and purging 699 on 10-28). Every span in the flush is "time until
+        the feed caught up", not time on the lot. Rule: the largest single-scan
+        group of a yard's departures holds >= flush_share of them.
+      * stale — a yard still listed whose feed has detected no departure in
+        the last stale_scans scans (~6 days at 4 h; Pull-A-Part's weekly
+        removal batches top out at 31). The feed has stopped removing cars.
+    Returns {location: {"n": departures counted, "flush_share": float,
+    "scans_since_departure": int, "reliable": bool, "reason": str}}."""
+    conn = _connect()
+    rows = conn.execute(
+        """SELECT location, departed_at,
+                  julianday(departed_at) - julianday(COALESCE(NULLIF(date_added, ''), first_seen))
+           FROM vehicles WHERE departed_at IS NOT NULL AND location != ''"""
+    ).fetchall()
+    last_scan = (conn.execute("SELECT MAX(scraped_at) FROM scans").fetchone() or [None])[0]
+    listed = {loc for (loc,) in conn.execute(
+        "SELECT DISTINCT location FROM vehicles WHERE departed_at IS NULL AND last_seen = ?",
+        (last_scan or "",))} if last_scan else set()
+    scan_times = [r[0] for r in conn.execute("SELECT scraped_at FROM scans ORDER BY scraped_at")]
+    conn.close()
+    by_yard: dict[str, dict[str, int]] = {}
+    for loc, dep, span in rows:
+        if span is None or not (min_days <= span <= max_days):
+            continue
+        d = by_yard.setdefault(loc, {})
+        d[dep] = d.get(dep, 0) + 1
+    import bisect
+    out: dict[str, dict] = {}
+    for loc, deps in by_yard.items():
+        n = sum(deps.values())
+        top = max(deps.values())
+        share = top / n if n else 0.0
+        last_dep = max(deps)
+        since = len(scan_times) - bisect.bisect_right(scan_times, last_dep)
+        reason = ""
+        if share >= flush_share:
+            reason = f"{top} of {n} departures ({round(100 * share)}%) landed in one scan — feed flush, not cars leaving"
+        elif loc in listed and since >= stale_scans:
+            reason = f"no departure detected in the last {since} scans while still listed — feed has stopped removing cars"
+        out[loc] = {"n": n, "flush_share": round(share, 3), "scans_since_departure": since,
+                    "reliable": not reason, "reason": reason}
+    return out
+
+
+def lifespan_stats(min_days: float = 0.5, max_days: float = 400.0,
+                   exclude: set | None = None) -> dict:
     """Average lot lifespan (days) of departed vehicles, grouped three ways:
     per yard, per chain (leading "Chain - City" location prefix), and global.
 
@@ -323,7 +393,10 @@ def lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict:
     first_seen when the feed gave no date). Absurd values are filtered — a
     negative or >400-day lifespan is a data glitch, not a signal. Returns
     {"yards": {loc: (avg, n)}, "chains": {chain: (avg, n)}, "global": (avg, n)}
-    with counts so callers can enforce their own minimum-sample guard."""
+    with counts so callers can enforce their own minimum-sample guard.
+    `exclude` (locations from yard_departure_reliability) are left out of
+    every aggregate — yard, chain and global — so a feed flush at one yard
+    never leaks into its chain's or the national figure."""
     conn = _connect()
     rows = conn.execute(
         """SELECT location,
@@ -335,8 +408,9 @@ def lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict:
     yards: dict[str, list[float]] = {}
     chains: dict[str, list[float]] = {}
     all_spans: list[float] = []
+    exclude = exclude or set()
     for loc, span in rows:
-        if span is None or not (min_days <= span <= max_days):
+        if span is None or not (min_days <= span <= max_days) or loc in exclude:
             continue
         yards.setdefault(loc, []).append(span)
         chain = loc.split(" - ")[0].strip()
@@ -351,7 +425,8 @@ def lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict:
     }
 
 
-def model_lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict:
+def model_lifespan_stats(min_days: float = 0.5, max_days: float = 400.0,
+                         normalize=None, exclude: set | None = None) -> dict:
     """Median lot lifespan (days) of departed vehicles by model, by yard+model,
     and by yard, plus global — the basis for "this model leaves fast here".
 
@@ -359,10 +434,20 @@ def model_lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict
     definition and sanity window as lifespan_stats(). Returns
     {"models": {(make, model): (median, n)},
      "yard_models": {(location, make, model): (median, n)},
-     "yards": {location: (median, n)}, "global": (median, n)}."""
+     "yards": {location: (median, n)}, "global": (median, n)}.
+
+    `normalize(make, model, vin, year) -> (make, model)` is applied to every
+    row before grouping. A vehicle's make/model are frozen at first insert,
+    so rows written before a spelling merge (2026-10: 'FORD'/'Ford', 'Es300'/
+    'ES 300', 'General Motors'/'Saturn') keep the old spelling forever; the
+    caller passes the scraper's current canonicalizer so the stats collapse
+    them (2026-11-04 audit: 55 split model keys in model_lifespan.json, all
+    historical spellings). Rows the callback empties are skipped.
+    `exclude`: locations (yard_departure_reliability verdicts) left out of
+    every aggregate, national model medians included."""
     conn = _connect()
     rows = conn.execute(
-        """SELECT location, make, model,
+        """SELECT location, make, model, vin, year,
                   julianday(departed_at) - julianday(COALESCE(NULLIF(date_added, ''), first_seen))
            FROM vehicles
            WHERE departed_at IS NOT NULL AND location != ''
@@ -373,9 +458,14 @@ def model_lifespan_stats(min_days: float = 0.5, max_days: float = 400.0) -> dict
     yard_models: dict[tuple, list[float]] = {}
     yards: dict[str, list[float]] = {}
     all_spans: list[float] = []
-    for loc, mk, md, span in rows:
-        if span is None or not (min_days <= span <= max_days):
+    exclude = exclude or set()
+    for loc, mk, md, vin, year, span in rows:
+        if span is None or not (min_days <= span <= max_days) or loc in exclude:
             continue
+        if normalize is not None:
+            mk, md = normalize(mk, md, vin or "", year or 0)
+            if not mk or not md:
+                continue
         models.setdefault((mk, md), []).append(span)
         yard_models.setdefault((loc, mk, md), []).append(span)
         yards.setdefault(loc, []).append(span)
