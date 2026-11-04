@@ -5891,6 +5891,15 @@ UNOBTANIUM_DB["chevrolet classic"] = {
 _GAP_BLOCK_IDS.update((id(p), p) for p in UNOBTANIUM_DB["chevrolet classic"]["top_parts"])
 _EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, "chevrolet classic")
 
+# Mazda Tribute (379 cars generic-only; 2001-06, 2008-11; no 2007 US MY).
+# Facelift 2005 in FACELIFT_BREAKS; none found for the 2nd gen. FWD or 4WD
+# in both (the Escape's platform twin: 4WD cars carry a PTU). A/C standard
+# is snippet-only, so option-flagged.
+_gap_extend("tribute", parts=_per_gen([(2001, 2006), (2008, 2011)], [
+    _GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True},
+    {"name": "AWD Power Transfer Unit (PTU)", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "drive": ["awd", "4wd"]},
+]))
+
 # ---- end of §20 block
 
 _apply_consensus_evergreens()
@@ -6353,6 +6362,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "santa fe": [2005],
     "mkx": [2011],
     "volkswagen cc": [2013],
+    "tribute": [2005],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

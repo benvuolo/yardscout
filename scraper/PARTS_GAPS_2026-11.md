@@ -1155,3 +1155,28 @@ from this workstream's own earlier change.
 
 Result: Malibu 1997–2003 generic-only 384 → 0. Lots: generic-only 20,699
 (6.2%) → 20,315 (6.1%).
+
+### 20.2 Mazda Tribute 2001–2006, 2008–2011
+
+Basis: en.wikipedia.org/wiki/Mazda_Tribute (raw); cars.com/research/mazda-tribute-2005;
+fueleconomy.gov model menus (fetched). A/C evidence is snippet only (KBB,
+CarGurus).
+- **Generations:** 2001–06, then 2008–11. There was no 2007 US model year
+  (EPA lists none).
+- **Facelift 2005 (added to `FACELIFT_BREAKS`):** "a different grille and
+  headlamps that were redesigned for 2005", "A new rear fascia features
+  vertical taillights" (cars.com). No 2nd-gen facelift was found (2009 was
+  mechanical only).
+- **Drive:** FWD or 4WD in both generations.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2001–06, 2008–11 | — | Every vehicle. |
+| A/C compressor | same | option | Standard only per snippets. |
+| AWD power transfer unit | same | drive: awd/4wd | Escape platform twin; same band as the Escape PTU row. |
+
+Left out, no stated basis: sunroof, leather and wheels (not researched),
+and hybrid parts (only a very limited number were built).
+
+Result: Tribute generic-only 379 → 0. Lots: generic-only 20,315 (6.1%) →
+19,936 (6.0%).

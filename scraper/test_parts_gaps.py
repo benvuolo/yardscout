@@ -442,6 +442,12 @@ check("§20 Chevrolet Classic 2005: own N-body entry, rows bounded 2004-05, ever
       and "Alternator (spin-test at yard)" in parts(2005, "Chevrolet", "Classic") and "Headlights (clear, non-hazed)" in parts(2005, "Chevrolet", "Classic")
       and "MyLink / Infotainment Screen" not in parts(2005, "Chevrolet", "Classic"), str([m["display"] for m in cl]))
 
+b03, b09 = parts(2003, "Mazda", "Tribute", FOUR), parts(2009, "Mazda", "Tribute", FWD)
+check("§20 Tribute: mech per generation; PTU on 4WD decodes only; tails cut at the 2005 facelift",
+      MECH3 <= set(b03) and b03["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2001–2006"
+      and b09["Radiator Fan Assembly"]["fits"] == "2008–2011" and b03["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin"
+      and "AWD Power Transfer Unit (PTU)" not in b09 and b03["Tail Lights (pair, uncracked)"]["fits"] == "2001–2004")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

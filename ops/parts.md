@@ -78,6 +78,7 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 - §20 (owner: "start the next parts block"; in progress): Malibu 1997–2003
   done (→ 20,315, 6.1%). Fixed: "Chevrolet Classic" 2004–05 (N-body) had
   been routed to the Epsilon Malibu rows in §11; it now has its own entry.
+  Tribute 2001–11 with facelift 2005 (→ 19,936, 6.0%).
 
 ## How to measure
 
