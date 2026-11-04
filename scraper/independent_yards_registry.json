@@ -991,7 +991,7 @@
     {
       "name": "Ewe Pullet (Nordstrom's)",
       "status": "candidate",
-      "platform": "wordpress + iis-pro-upull plugin v1.8 (URG-hosted; same plugin family as Pick-A-Part VA) - server-rendered card deck - RE-CHECKED 2026-11-03: plugin present (upullurgid PP93) but no cards render on /inventory/, /vehicles/ or /vehicle-list/; the vehicle backend still returns nothing. Re-check monthly (coverage sweep).",
+      "platform": "wordpress + iis-pro-upull plugin v1.8 (URG-hosted; same plugin family as Pick-A-Part VA) - server-rendered card deck - RE-CHECKED 2026-11-03 and 2026-11-04 (Geofabrik sweep tier A): plugin present (upullurgid PP93) but no cards render on /inventory/, /vehicles/ or /vehicle-list/; the vehicle backend still returns nothing. Re-check monthly (coverage sweep).",
       "website": "https://ewepullet.com",
       "inventory_url": "https://ewepullet.com/inventory/ANY/ANY/?k=1",
       "api": {
@@ -1000,9 +1000,9 @@
         "auth": "none",
         "format": "html card deck (expected; see notes)",
         "requests_per_scan": "unverified",
-        "notes": "NOT BUILT 2026-10-27: the plugin's inventory backend is erroring. Every inventory URL (/inventory/ANY/ANY/?k=1, &id=PP93, &pagenum=1, make/model paths like /inventory/FORD/ESCAPE/?k=1, with and without the plugin's cookies) renders the empty-results shell ('No Results Found. Try Browsing Our Parts Or Search Again'; zero .car-details-uPull cards) while the control site on the same plugin (pickapartva.com) renders 500 cards; admin-ajax action=getMakesIISupull answers {\"error\":\"api error\"} (the catalog actions getYearsIISupull / ajaxflowupull getAllModelsIISupull still work, so the WordPress side is up and the URG data feed behind it is down). No 403 / challenge - plain requests get HTTP 200 - so nothing to work around; re-probe later. Price list is a PDF (/wp-content/uploads/2026/04/2026carpricelist-1.pdf) plus a PNG, not an HTML table - not wired. robots.txt allow-all with admin-ajax explicitly allowed. Address on the site header: 47989 255th Street, Garretson SD 57030 (NE of Sioux Falls; not Brandon) - would be the FIRST South Dakota coverage. Pin = Garretson place centroid (the rural house number is not in OSM)."
+        "notes": "NOT BUILT 2026-10-27: the plugin's inventory backend is erroring. Every inventory URL (/inventory/ANY/ANY/?k=1, &id=PP93, &pagenum=1, make/model paths like /inventory/FORD/ESCAPE/?k=1, with and without the plugin's cookies) renders the empty-results shell ('No Results Found. Try Browsing Our Parts Or Search Again'; zero .car-details-uPull cards) while the control site on the same plugin (pickapartva.com) renders 500 cards; admin-ajax action=getMakesIISupull answers {\"error\":\"api error\"} (the catalog actions getYearsIISupull / ajaxflowupull getAllModelsIISupull still work, so the WordPress side is up and the URG data feed behind it is down). No 403 / challenge - plain requests get HTTP 200 - so nothing to work around; re-probe later. Price list is a PDF (/wp-content/uploads/2026/04/2026carpricelist-1.pdf) plus a PNG, not an HTML table - not wired. robots.txt allow-all with admin-ajax explicitly allowed. Address on the site header: 47989 255th Street, Garretson SD 57030 (NE of Sioux Falls; not Brandon) - would be the FIRST South Dakota coverage. Pin = Garretson place centroid (the rural house number is not in OSM). 2026-11-04 re-check: /inventory/ANY/ANY/?k=1 (with and without &pagenum=1) still renders 'No Results Found' with zero car-details-uPull cards. /vehicle-list/ shows an unrendered [Product_Table id='1015707' name='VehicleList'] shortcode. No Ario embed. Still candidate."
       },
-      "update_freshness": "unknown (inventory backend down at probe time)",
+      "update_freshness": "unknown (inventory backend still empty 2026-11-04)",
       "robots": "allow all; /wp-admin/admin-ajax.php explicitly allowed",
       "tos_flags": "none found",
       "locations": [
