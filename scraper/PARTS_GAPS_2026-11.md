@@ -687,5 +687,34 @@ cars.com 2005 "What's New", 2014 "What's Changed", 2019 "What's New"
 Left out, no stated basis: sunroof, leather and wheel rows (option
 availability not researched).
 
-Result: Tucson 2005–21 generic-only 548 → 0 (14 cars from 2022–23 remain).
+Result: Tucson 2005–21 generic-only 558 → 0 (4 cars from 2022–23 remain).
 Lots: generic-only 27,255 (8.2%) → 26,697 (8.0%).
+
+### 18.4 Kia Sportage 2005–2022 (KM 2005–10, SL 2011–16, QL 2017–22)
+
+Basis: en.wikipedia.org/wiki/Kia_Sportage; kbb.com/kia/sportage/2009;
+autotrader.ca/research/kia/sportage/2014; carscoops.com 2019/02 "2020 Kia
+Sportage gets refreshed looks" (fetched).
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 2009: "a new grille and headlamp treatment, color keyed front and rear
+    bumpers" (KBB).
+  - 2014: "a new front grille", new HID and LED-tail options (autotrader.ca).
+  - 2020: "redesigned headlights and bumpers" (Wikipedia), "new front and
+    rear fascias" (Carscoops).
+- **Lamp rows re-cut:** the existing tail-light and LED-headlight rows are
+  now cut at those years (e.g. tail lights 2005–08 / 2009–10).
+- **AWD/4WD:** offered on all three generations.
+- **Panoramic sunroof:** an SL EX option (cars.com and others; snippets).
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2005–10, 2011–16, 2017–22 | — | Every car. |
+| A/C compressor | same | option | Standard fitment not confirmed by a source. |
+| AWD rear differential / coupling | same | drive: awd/4wd | |
+| Panoramic sunroof assembly | 2011–16 | option | Same band as the Soul row. |
+
+Left out, no stated basis: KM/QL sunroofs, leather, wheels (not
+researched).
+
+Result: Sportage 2005–22 generic-only 543 → 0 (3 cars from 2023 remain).
+Lots: generic-only 26,697 (8.0%) → 26,154 (7.9%).

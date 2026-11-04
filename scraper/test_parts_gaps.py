@@ -339,6 +339,12 @@ check("§18 Tucson: pump/fan per generation; A/C plain 2006, 'if equipped' 2012;
       and h06["A/C Compressor (clutch spins free)"].get("trim_status") is None and h12["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
       and h06["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in h12)
 
+s07, s13 = parts(2007, "Kia", "Sportage", AWD), parts(2013, "Kia", "Sportage", FWD)
+check("§18 Sportage: pump/fan per generation, AWD coupling gated, SL panoramic roof 'if equipped'; tails cut at the 2009 facelift",
+      MECH3 <= set(s07) and MECH3 <= set(s13) and s07["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2005–2010"
+      and s07["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in s13
+      and s13["Panoramic Sunroof Assembly"]["trim_status"] == "unconfirmed" and s07["Tail Lights (pair, uncracked)"]["fits"] == "2005–2008")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

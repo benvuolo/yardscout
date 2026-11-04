@@ -4569,6 +4569,17 @@ _gap_extend("tucson", parts=[
     *_per_gen([(2010, 2015), (2016, 2021)], [{**_GAP_AC, "option": True}]),
 ])
 
+# Kia Sportage (546 cars generic-only; KM 2005-10, SL 2011-16, QL 2017-22).
+# Facelifts 2009/2014/2020 in FACELIFT_BREAKS. AWD/4WD offered on all
+# three; A/C standard fitment not confirmed (option). The SL's panoramic
+# sunroof was an EX option (same band as the Soul row).
+_gap_extend("sportage", parts=[
+    *_per_gen([(2005, 2010), (2011, 2016), (2017, 2022)], [_GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}, _AWD_COUPLING]),
+    *_per_gen([(2011, 2016)], [
+        {"name": "Panoramic Sunroof Assembly", "rarity": "Rare", "low": 200, "high": 450, "cost": 44, "option": True},
+    ]),
+])
+
 # ---- end of §18 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
@@ -6163,6 +6174,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     # §18 (cited in PARTS_GAPS §18)
     "regal": [2014],
     "tucson": [2009, 2014, 2019],
+    "sportage": [2009, 2014, 2020],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
