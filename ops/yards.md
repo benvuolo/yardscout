@@ -27,6 +27,12 @@ directory-only entries.
 | Young's U-Pull-It (Dudley NC) | directory-only. The site's "inventory" is a full-service part-type search; latest-arrivals shows no cars |
 | Sam's Pull-A-Part (Worcester MA) | directory-only. Linder's recent-arrivals is their full-service stock, not the self-service lot |
 | Route 50 U-Pull-It (Mays Landing NJ), U-Pull It Auto Salvage of Paducah (KY) | directory-only, no website |
+| **OKC Pull-A-Part** (Oklahoma City OK) | **adapter live** (`fetch_okcpap_inventory`): 1,025 cars at build, from one WebForms POST per make. The name avoids the "Pull-A-Part" prefix, which the app keys the national chain on. No dates or VIN on the site. Test: `test_okcpap.py` |
+| UAPI Bossier City / South Shreveport | already tracked. Their pins were copies of North Shreveport's and are now fixed (address geocodes) |
+| Ewe Pullet (SD) | still `candidate`: no cards render on any inventory page (re-checked 2026-11-04) |
+| Wally's U-Pull-It (Oshkosh WI) | `candidate`: the home page shows per-make counts (~800). Its iis-pro-v2 make pages fill by JavaScript, so check in devtools whether the plugin's XHR returns vehicles or parts |
+| Littleton U-Pull (CO), Andersen's U-Pull-It (Greeley CO, now Alter Trading), One Stop You Pull It (Klamath Falls OR), Vince's U-Pull-It (Marcy NY) | directory-only, no online inventory |
+| U-Pull and Save Mason (MI), Pick A Part of Arizona (Phoenix, Mesa), A-1 Metals (CA) | registry `retired` so the sweep skips them: vehicle purchasing only / closed to the public / not self-service |
 
 Outreach drafts: `ops/yard-outreach-drafts.md` (all sent except Harry's).
 No new drafts from the 2026-11-04 sweep review, because no checked yard blocked us.
@@ -146,6 +152,43 @@ the query shape, fast failover on 502, the stop when all servers fail, the
 retry pass, 429 handling, the merge, and the `--osm-pending` paths. Live
 Overpass is unreachable from the Claude sandbox, so the speed of the new query
 is untested until a run happens. After that run, review any tier A/B rows.
+
+## 2026-11-04 review of the Geofabrik sweep (runs 41872828891 + 41881651649)
+
+The Geofabrik source covered 48 of 50 states; WA and AL hit download read
+timeouts. The report had A:1, B:5, D:4. I checked each by hand:
+- **A, Ewe Pullet:** unchanged, no cards. Stays candidate.
+- **B, U Auto Pull It (Bossier City):** already tracked as UAPI. The
+  sweep missed it because our pin was wrong: three UAPI yards shared the
+  North Shreveport pin. Fixed (c58e2a6).
+- **B, U-Pull and Save (MI):** the Mason store. The site says "Vehicle
+  Purchasing Only" and its store has 0 arrivals. Recorded as retired.
+- **B, Pull-A-Part Auto Parts Yard (OKC):** independent, self-service,
+  inventory open on its own site. Adapter built (6e9bcb4).
+- **B, Pick A Part (Phoenix, Mesa):** "Closed to the Public", inventory
+  empty since 11/17/24. Recorded as retired.
+- **D:** Littleton (dead site), Andersen's (Alter Trading, no inventory
+  page) and One Stop Klamath Falls (no inventory) became directory-only.
+  A-1 Metals (not self-service) was recorded as retired.
+- **E, quick pass:** Wally's became a candidate and Vince's directory-only.
+  Danny's U-Pull (Tulsa), Lambert's Pick-a-Part (Powell TN), Grand Junction
+  Pick-A-Part (CO) and the rest have no website, so they stay in tier E.
+  Barry's Pass Christian MS is the second Barry's yard, already inside
+  Barry's blended table (documented in the adapter).
+
+No yard blocked us, so no outreach drafts. No emails were sent.
+
+Sweep follow-ups (mine):
+- **Done:** Geofabrik downloads now retry once on a transient network error,
+  with a 300 s read timeout (f9838c7). WA and AL stay pending for Monday's
+  pass.
+- **Not done:** the sweep's 3 km match radius misses tracked chain yards
+  whose pins are 3–9 km off, which is why they show in tier E: Pull-A-Part
+  Jackson, Memphis, El Paso and Aurora; Pick-n-Pull Portland South; Utah
+  Pic-A-Part Orem; U-Pick-It Flagstaff. Either those pins are city
+  centroids (check each against its address) or matching should allow a
+  same-chain name within about 10 km. The pins are the better fix, because
+  the app shows them.
 
 ## Next
 
