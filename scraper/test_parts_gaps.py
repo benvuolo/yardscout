@@ -454,6 +454,13 @@ check("§20 Uplander: mech 2005-09; AWD unit 2005-06 only; sliding-door motor 'i
       MECH3 <= set(u08) and u06["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in u08
       and u08["Power Sliding Door Motor"]["trim_status"] == "unconfirmed")
 
+d07, d13 = parts(2007, "Mazda", "Mazda5", FWD), parts(2013, "Mazda", "Mazda5", FWD)
+check("§20 Mazda5: rows per generation (new 2012 break); A/C plain gen 1, 'if equipped' gen 2; tails cut at the 2008 facelift",
+      MECH3 <= set(d07) and MECH3 <= set(d13) and d07["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2006–2010"
+      and d13["Radiator Fan Assembly"]["fits"] == "2012–2015" and d07["A/C Compressor (clutch spins free)"].get("trim_status") is None
+      and d13["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and "Sunroof Glass + Motor" not in d13
+      and d07["Tail Lights (pair, uncracked)"]["fits"] == "2006–2007")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

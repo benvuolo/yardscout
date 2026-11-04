@@ -5912,6 +5912,15 @@ _gap_extend("uplander", parts=[
     ]),
 ])
 
+# Mazda5 (364 cars generic-only; 1st gen 2006-10, 2nd gen 2012-15, new
+# GENERATION_BREAKS 2012; facelift 2008). Gen 1: A/C standard, sunroof
+# standard/optional by trim. Gen 2 A/C and sunroof unconfirmed.
+_gap_extend("mazda5", parts=[
+    *_per_gen([(2006, 2010), (2012, 2015)], [_GAP_PUMP, _GAP_FAN]),
+    *_per_gen([(2006, 2010)], [_GAP_AC, _SUNROOF]),
+    *_per_gen([(2012, 2015)], [{**_GAP_AC, "option": True}]),
+])
+
 # ---- end of §20 block
 
 _apply_consensus_evergreens()
@@ -6186,6 +6195,7 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    "mazda5": [2012],                      # 1st gen 2006-10, 2nd gen 2012-15, no 2011 US MY (PARTS_GAPS §20.4)
     "mkx": [2016],                        # 1st gen 2007-15, 2nd gen 2016-18 (PARTS_GAPS §19.5)
     "mkz": [2013],                        # 1st gen 2007-12, 2nd gen 2013-20 (PARTS_GAPS §18.7)
     "cruze": [2016],
@@ -6375,6 +6385,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "mkx": [2011],
     "volkswagen cc": [2013],
     "tribute": [2005],
+    "mazda5": [2008],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

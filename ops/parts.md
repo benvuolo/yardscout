@@ -79,7 +79,7 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   done (→ 20,315, 6.1%). Fixed: "Chevrolet Classic" 2004–05 (N-body) had
   been routed to the Epsilon Malibu rows in §11; it now has its own entry.
   Tribute 2001–11 with facelift 2005 (→ 19,936, 6.0%); Uplander 2005–09
-  (→ 19,560, 5.9%).
+  (→ 19,560, 5.9%); Mazda5 with new break 2012, facelift 2008 (→ 19,196, 5.8%).
 
 ## How to measure
 

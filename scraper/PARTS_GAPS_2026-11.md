@@ -1207,3 +1207,30 @@ third row.
 
 Result: Uplander generic-only 376 → 0. Lots: generic-only 19,936 (6.0%) →
 19,560 (5.9%).
+
+### 20.4 Mazda5 2006–2010, 2012–2015
+
+Basis: consumerguide.com/used/2006-10-mazda-5; cars.com/research/mazda-mazda5;
+fueleconomy.gov; en.wikipedia.org/wiki/Mazda_Premacy (raw; fetched).
+- **New `GENERATION_BREAKS` "mazda5": [2012]:** 1st gen 2006–10, 2nd gen
+  2012–15. There was no 2011 US model year (EPA lists none). The existing
+  Mazda5 lamp and mirror rows are now bounded by generation.
+- **Facelift 2008 (added to `FACELIFT_BREAKS`):** "a new front fascia,
+  grille, headlights, and taillights" (CG). No 2nd-gen facelift was found.
+- **Gen 1:** A/C standard on all trims. Sunroof standard on Touring and
+  optional on Sport for 2006–07; Sport automatic only in 2008; Touring and
+  Grand Touring only for 2009–10.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2006–10, 2012–15 | — | Every car. |
+| A/C compressor | 2006–10 | — | Standard (CG). |
+| A/C compressor | 2012–15 | option | Unconfirmed. |
+| Sunroof | 2006–10 | option | Trim-dependent. |
+
+Left out, no stated basis: the gen-2 sunroof (unconfirmed), and LED rear
+lamps on the 2008+ Touring/Grand Touring (a trim gate on lamps was not
+researched further).
+
+Result: Mazda5 generic-only 364 → 0. Lots: generic-only 19,560 (5.9%) →
+19,196 (5.8%).
