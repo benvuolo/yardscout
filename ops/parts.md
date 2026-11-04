@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13 and §14 done)
+# Parts workstream — status (updated 2026-11-04, §13–15 done)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -39,6 +39,12 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   crossbars, Focus/Equinox mirrors, Malibu BCM) are split per generation by
   `_bound_gap_rows_per_generation` (153 rows). Every car's matched parts
   are unchanged; coverage unchanged (3.7% / 10.6%). Test guards it.
+- §15 (owner: "go on the 776 rows"): every remaining crossing row on a
+  GENERATION_BREAKS model is split per generation by
+  `_bound_rows_per_generation`, which runs after `_apply_platform_families`
+  (running it earlier dropped interchange notes). 776 → 2,346 rows; per-car
+  parts, bands and sharedWith identical; coverage unchanged. Test asserts
+  no row on any GENERATION_BREAKS model crosses a break.
 
 ## How to measure
 
@@ -52,10 +58,8 @@ here, it is outside this workstream's files).
 
 ## Open for the owner
 
-- 776 rows outside the gap blocks still have "fits" spans across a
-  generation (mostly alternator/starter/climate/window/BCM standard rows,
-  mirrors, liftgate and sliding-door motors). Say if they should be
-  bounded the same way (PARTS_GAPS §14).
+- Models without GENERATION_BREAKS entries keep whole-entry spans; adding
+  breaks for more models would let the §15 pass bound them too.
 - `mine_coverage_gaps.py` fetches eBay pages by default (rule 2). The hub
   added `--no-fetch` to `coverage-mine.yml` on 2026-11-04, so the monthly run
   no longer fetches. Still to do here: remove the fetch path from the script

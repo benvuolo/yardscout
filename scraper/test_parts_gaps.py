@@ -96,10 +96,14 @@ check("Escape 2014: turbo is 'if equipped'", parts(2014, "Ford", "Escape", FWD)[
 check("Equinox 2012: tail lights now exist, gen-bounded", parts(2012, "Chevrolet", "Equinox", FWD)["Tail Lights (pair, uncracked)"]["fits"] == "2010–2017")
 check("Sentra 2015 listed as SR: spoiler listing-confirmed", parts(2015, "Nissan", "Sentra SR")["SR Rear Spoiler"]["trim_status"] == "listing")
 check("Elantra 2013: headlights/mirrors/tails now exist", {"Headlights (clear, non-hazed)", "Side Mirrors (power, pair)", "Tail Lights (pair, uncracked)"} <= names(2013, "Hyundai", "Elantra", FWD))
-check("Elantra 2008: still has the 2005-10 overlay lamp rows (merge is window-aware)",
-      parts(2008, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)", {}).get("fits") == "2005–2010", str(parts(2008, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)")))
+# §15: the 2005-10 overlay row is now bounded at the 2007 break (2005-06 / 2007-10).
+check("Elantra 2005 + 2008: still have the 2005-10 overlay lamp rows (merge is window-aware), per generation",
+      parts(2005, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)", {}).get("fits") == "2005–2006"
+      and parts(2008, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)", {}).get("fits") == "2007–2010", str(parts(2008, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)")))
 check("Elantra 2013: lamp row is the 2011-16 one", parts(2013, "Hyundai", "Elantra", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2011–2016")
-check("Camry 2010: overlay JBL (2002-14) survives next to the 2015-17 row", parts(2010, "Toyota", "Camry", FWD).get("JBL Amp + Speakers", {}).get("fits") == "2002–2014", str(parts(2010, "Toyota", "Camry", FWD).get("JBL Amp + Speakers")))
+check("Camry 2010/2013: overlay JBL (2002-14) survives next to the 2015-17 row, per generation",
+      parts(2010, "Toyota", "Camry", FWD).get("JBL Amp + Speakers", {}).get("fits") == "2007–2011"
+      and parts(2013, "Toyota", "Camry", FWD).get("JBL Amp + Speakers", {}).get("fits") == "2012–2014", str(parts(2010, "Toyota", "Camry", FWD).get("JBL Amp + Speakers")))
 check("Camry 2016: JBL row is the 2015-17 one", parts(2016, "Toyota", "Camry", FWD).get("JBL Amp + Speakers", {}).get("fits") == "2015–2017")
 check("Corolla 2010 / Malibu 2011: mechanical rows", "Radiator Fan Assembly" in names(2010, "Toyota", "Corolla", FWD) and "Radiator Fan Assembly" in names(2011, "Chevrolet", "Malibu", FWD))
 
@@ -204,8 +208,24 @@ check("§14: Malibu 2010 compressor fits 2008–2012; Altima 2010 throttle body 
       parts(2010, "Chevrolet", "Malibu", FWD)["A/C Compressor (clutch spins free)"]["fits"] == "2008–2012"
       and parts(2010, "Nissan", "Altima", SEDAN)["Electronic Throttle Body (match part #)"]["fits"] == "2007–2012"
       and parts(2012, "Chevrolet", "Equinox", AWD)["AWD Rear Differential / Transfer Unit"]["fits"] == "2010–2017")
-check("§14: shared non-gap rows untouched (Camry alternator still spans the entry)",
-      parts(2004, "Toyota", "Camry", FWD)["Alternator (spin-test at yard)"]["fits"] == "1992–2024")
+# §15 widened the bound to every row: the shared alternator row is now per generation too.
+check("§15: shared evergreen rows bounded too (Camry 2004 alternator fits 2002–2006)",
+      parts(2004, "Toyota", "Camry", FWD)["Alternator (spin-test at yard)"]["fits"] == "2002–2006")
+crossing_all = []
+_seen = set()
+for _k, _e in js.UNOBTANIUM_DB.items():
+    if id(_e) in _seen:
+        continue
+    _seen.add(id(_e))
+    _lo, _hi = _e["year_range"]
+    for _p in _e["top_parts"]:
+        _a, _b = max(_lo, _p.get("yr_min", _lo)), min(_hi, _p.get("yr_max", _hi))
+        if any(_a < b <= _b for b in _breaks(_k)):
+            crossing_all.append((_k, _p["name"], _a, _b))
+check("§15: no row on any GENERATION_BREAKS model crosses a break", not crossing_all, str(crossing_all[:10]))
+check("§15: interchange notes survive the split (2010 Escape mirrors still share with Tribute/Mariner; 2002 Camry alternator keeps the 1MZ note)",
+      "Tribute" in parts(2010, "Ford", "Escape", FWD)["Side Mirrors (power, pair)"].get("sharedWith", "")
+      and "1MZ" in parts(2002, "Toyota", "Camry", FWD)["Alternator (spin-test at yard)"].get("sharedWith", ""))
 
 # 3. band sanity + lint
 bad = []

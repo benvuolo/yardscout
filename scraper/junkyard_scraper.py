@@ -3025,7 +3025,7 @@ def _extend_entry(key: str, *, year_range: tuple | None = None, parts: list | No
 
 # Rows added by the 2026-11 gap blocks (PARTS_GAPS §1–13) are registered by
 # object id (a tag key would leak into the shipped part sets, which copy
-# every field). _bound_gap_rows_per_generation() splits any of them whose
+# every field). _bound_rows_per_generation() splits any row (these included) whose
 # span crosses a GENERATION_BREAKS break: the splitter skips pump/
 # compressor/motor names, and the part finder reads "fits" as the
 # same-generation donor window, so a crossing span is a false fitment claim.
@@ -6017,13 +6017,16 @@ def _apply_generation_bounds() -> None:
 _apply_generation_bounds()
 
 
-def _bound_gap_rows_per_generation() -> None:
-    """§14: no gap-block row's "fits" span may cross a generation break.
+def _bound_rows_per_generation() -> None:
+    """§14/§15: no row's "fits" span may cross a generation break.
 
-    Runs after _apply_generation_bounds (which leaves pump/compressor/motor
-    rows, and names it does not consider sensitive, unsplit). Each crossing
-    gap-block row is replaced by one copy per generation segment; all other
-    fields carry over. Rows from outside the gap blocks are not touched."""
+    The part finder reads "fits" as the same-generation donor window, so a
+    span across a break is a false fitment claim. _apply_generation_bounds
+    only splits names it considers sensitive and skips pump/compressor/motor
+    names; this pass runs last (after the overlay merge) and splits every
+    remaining crossing row on a GENERATION_BREAKS model into one copy per
+    generation segment. All other fields carry over; nothing is dropped.
+    Gap-block rows (PARTS_GAPS §1–13) are also recorded in _GAP_BLOCK_ROWS."""
     seen: set[int] = set()
     for key, e in list(UNOBTANIUM_DB.items()):
         if id(e) in seen:
@@ -6033,22 +6036,22 @@ def _bound_gap_rows_per_generation() -> None:
         lo, hi = e["year_range"]
         new_parts: list[dict] = []
         for p in e["top_parts"]:
-            if not _is_gap_row(p):
-                new_parts.append(p)
-                continue
+            gap = _is_gap_row(p)
             plo, phi = max(lo, p.get("yr_min", lo)), min(hi, p.get("yr_max", hi))
-            cuts = [b for b in breaks if plo < b <= phi]
+            cuts = [b for b in breaks if plo < b <= phi] if plo <= phi else []
+            if not cuts:
+                new_parts.append(p)
+                if gap:
+                    _GAP_BLOCK_ROWS.append((key, p["name"], plo, phi))
+                continue
             for seg_lo, seg_hi_excl in zip([plo] + cuts, cuts + [phi + 1]):
-                q = dict(p) if cuts else p
-                if cuts:
-                    q["yr_min"], q["yr_max"] = seg_lo, seg_hi_excl - 1
-                    _GAP_BLOCK_IDS[id(q)] = q
+                q = dict(p)
+                q["yr_min"], q["yr_max"] = seg_lo, seg_hi_excl - 1
                 new_parts.append(q)
-                _GAP_BLOCK_ROWS.append((key, p["name"], seg_lo, seg_hi_excl - 1))
+                if gap:
+                    _GAP_BLOCK_IDS[id(q)] = q
+                    _GAP_BLOCK_ROWS.append((key, p["name"], seg_lo, seg_hi_excl - 1))
         e["top_parts"] = new_parts
-
-
-_bound_gap_rows_per_generation()
 
 
 def _merge_parts_overlay() -> None:
@@ -7000,6 +7003,9 @@ def _apply_platform_families() -> list[str]:
 # missing row or silently copying a gated part is a data bug, not a runtime
 # condition.
 _family_problems = _apply_platform_families()
+# Runs after the platform families so they find and annotate the rows they
+# were curated against; each generation piece keeps the row's sharedWith.
+_bound_rows_per_generation()
 if _family_problems:
     raise ValueError(
         "PLATFORM_FAMILIES lint failed:\n  " + "\n  ".join(_family_problems))

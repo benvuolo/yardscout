@@ -307,3 +307,45 @@ blocks. These are mostly the shared standard rows (alternator, starter,
 climate panel, window regulator and switch, control module, mirrors) plus
 some power liftgate/sliding-door motors and tow mirrors. Not changed here:
 owner decision whether those get the same treatment.
+
+## 15. Every row bounded per generation (2026-11-04, owner: "go on the 776 rows")
+
+**Scope.** The 776 rows outside the gap blocks whose "fits" span crossed a
+`GENERATION_BREAKS` break (196 entries): mostly the shared standard rows
+(alternator, starter, climate panel, window regulator and switch, control
+module, mirrors), plus overlay rows (e.g. Elantra 2005–10 lamps across the
+2007 break, Camry JBL 2002–14), liftgate/sliding-door motors, tow mirrors,
+and platform-family rows.
+
+**Change.** `_bound_gap_rows_per_generation` became `_bound_rows_per_generation`.
+It now applies to every row on a `GENERATION_BREAKS` model and runs once,
+right after `_apply_platform_families` (the overlay merge and the platform
+copies are the last steps that add rows). Each crossing row becomes one row
+per generation; bands, costs, gates and `sharedWith` carry over; nothing is
+dropped. The §14 gap-block registry is still recorded.
+
+**Ordering matters, caught in testing.** A first version ran the pass before
+the platform families. The families locate each member's row by name and
+best year overlap, so their interchange note landed on one generation piece
+only. Per-car comparison showed 200 car/part notes lost, e.g. 2008–11 Escape
+mirrors losing "Tribute/Mariner share doors", 2002–03 Camry alternators the
+1MZ note, and the Yukon Autoride note. Running after the families fixed it.
+
+**Checks.**
+- Table: 5,079 → 6,649 rows; the 776 crossing rows became 2,346 pieces with
+  identical fields that exactly cover the original years. No row on a
+  `GENERATION_BREAKS` model crosses a break now.
+- Lots: all 12,740 distinct year/make/model combinations match identical
+  part names, gate statuses and bands, and identical `sharedWith` notes, as
+  before. Only "fits" changed.
+- Coverage unchanged: no entry 12,298 (3.7%), generic-only 35,451 (10.6%).
+- `test_interchange.py`, `test_consensus_parts.py`, `test_vpic_fixes.py` and
+  the other offline scraper tests pass; the platform/trim/generation/engine
+  lints are clean.
+- `test_parts_gaps.py`: three checks asserted the old cross-generation
+  spans (Elantra overlay lamps "2005–2010", Camry JBL "2002–2014", and the
+  §14 "alternator untouched" check). Each now asserts the per-generation
+  span and keeps its intent. New checks: no row on any `GENERATION_BREAKS`
+  model crosses a break, and interchange notes survive the split.
+
+Models not in `GENERATION_BREAKS` are unchanged (no break data to bound by).
