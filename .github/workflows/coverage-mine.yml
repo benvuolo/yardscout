@@ -31,9 +31,6 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install dependencies
-        run: pip install requests beautifulsoup4
-
       - name: Run coverage miner
         # 15 groups x 8 categories at ~2s/request ≈ 4 min when eBay lets us in;
         # seconds when it 403s (fails soft to inventory-side analysis).
