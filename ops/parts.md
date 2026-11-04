@@ -62,7 +62,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   done (generic-only 28,344 → 27,762, 8.5% → 8.4%); Regal 1997–2017 with
   facelift 2014 (→ 27,255, 8.2%); Tucson 2005–21 with facelifts 2009/2014/2019
   (→ 26,697, 8.0%); Sportage 2005–22 with facelifts 2009/2014/2020 (→ 26,154,
-  7.9%); Spectra 2000–03/2005–09 with facelift 2007 (→ 25,644, 7.7%).
+  7.9%); Spectra 2000–03/2005–09 with facelift 2007 (→ 25,644, 7.7%);
+  Legacy 1995–2004/2010–14 with facelifts 2003/2013 (→ 25,116, 7.6%).
 
 ## How to measure
 

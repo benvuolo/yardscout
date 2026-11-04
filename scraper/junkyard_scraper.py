@@ -4592,6 +4592,17 @@ _gap_extend("spectra", parts=[
     ]),
 ])
 
+# Subaru Legacy (528 cars generic-only; 2nd gen 1995-99, 3rd gen 2000-04,
+# 5th gen 2010-14). Facelifts 2003/2013 in FACELIFT_BREAKS. AWD standard
+# 2000-04 and 2010-14; 1995-96 base/L came FWD, so the 1995-99 rear diff is
+# drive-gated. Match the final-drive ratio (the platform notes: 4.11 vs 4.44).
+_REAR_DIFF = {"name": "Rear Differential (match final-drive ratio)", "rarity": "Uncommon", "low": 90, "high": 220, "cost": 36}
+_gap_extend("legacy", parts=[
+    *_per_gen([(1995, 1999), (2000, 2004), (2010, 2014)], [_GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}]),
+    *_per_gen([(1995, 1999)], [{**_REAR_DIFF, "drive": ["awd", "4wd"]}]),
+    *_per_gen([(2000, 2004), (2010, 2014)], [_REAR_DIFF]),
+])
+
 # ---- end of §18 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
@@ -6188,6 +6199,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "tucson": [2009, 2014, 2019],
     "sportage": [2009, 2014, 2020],
     "spectra": [2007],
+    "legacy": [2003, 2013],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

@@ -744,3 +744,33 @@ the 2001 "slight facelift" has no part detail), sunroof, wheels.
 
 Result: Spectra generic-only 545 → 35 (all 2004). Lots: generic-only 26,154
 (7.9%) → 25,644 (7.7%).
+
+### 18.6 Subaru Legacy 1995–2004, 2010–2014
+
+Basis: en.wikipedia.org/wiki/Subaru_Legacy; Consumer Guide used reviews
+1995–99, 2000–04, 2010–14; autoblog.com 2012/04/04 "Subaru tweaks Legacy and
+Outback for 2013" (fetched).
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 2003: "revisions to suspension and front styling" (Consumer Guide); new
+    grille and front fascia (cars.com, snippet).
+  - 2013: "new front-end styling with a redesigned grille, bumper, and
+    headlights" (Consumer Guide).
+- **No facelift found for 1995–99:** "no major change for '98".
+- **AWD:** standard 2000–04 and 2010–14. In 1995 the base and L were FWD,
+  and in 1996 FWD remained only on the L; the whole line was AWD from 1997
+  (Consumer Guide). Wikipedia instead says standard from 1996.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1995–99, 2000–04, 2010–14 | — | Every car. |
+| A/C compressor | same | option | Standard fitment not confirmed by a source. |
+| Rear differential (match final-drive ratio) | 1995–99 | drive: awd/4wd | FWD cars existed in 1995–96. Cost is the rear-diff median ($36); the band is conservative for an open/viscous rear. |
+| Rear differential (match final-drive ratio) | 2000–04, 2010–14 | — | AWD standard. |
+
+Left out, no stated basis: tail lights (sedan vs wagon lamps differ, with
+no body split researched), sunroof, leather, wheels. How the Outback is
+named on US titles in these years is unconfirmed, so no Outback routing
+was changed.
+
+Result: Legacy generic-only 528 → 0. Lots: generic-only 25,644 (7.7%) →
+25,116 (7.6%).

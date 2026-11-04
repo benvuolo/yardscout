@@ -352,6 +352,13 @@ check("§18 Spectra: pump per generation, none for ambiguous 2004; tails cut at 
       and p06["Tail Lights (pair, uncracked)"]["fits"] == "2005–2006" and p08["Hatchback Tail Lights (pair, uncracked)"]["fits"] == "2007–2009"
       and p08["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin")
 
+l97, l02, l13 = parts(1997, "Subaru", "Legacy", AWD), parts(2002, "Subaru", "Legacy", FWD), parts(2013, "Subaru", "Legacy", FWD)
+check("§18 Legacy: pump per generation; rear diff gated 1995-99 (AWD decode confirms), ungated 2000-04/2010-14",
+      l97["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1995–1999" and l02["Radiator Fan Assembly"]["fits"] == "2000–2004"
+      and l97["Rear Differential (match final-drive ratio)"]["trim_status"] == "vin"
+      and "Rear Differential (match final-drive ratio)" not in names(1997, "Subaru", "Legacy", FWD)
+      and l02["Rear Differential (match final-drive ratio)"].get("trim_status") is None and l13["Rear Differential (match final-drive ratio)"]["fits"] == "2010–2014")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
