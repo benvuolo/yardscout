@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–15 done)
+# Parts workstream — status (updated 2026-11-04, §16 in progress)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -45,6 +45,9 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   (running it earlier dropped interchange notes). 776 → 2,346 rows; per-car
   parts, bands and sharedWith identical; coverage unchanged. Test asserts
   no row on any GENERATION_BREAKS model crosses a break.
+
+- §16 (owner: "start the next parts block"; in progress): Focus 2000–07
+  done (generic-only 35,451 → 33,916, 10.6% → 10.2%).
 
 ## How to measure
 

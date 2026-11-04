@@ -4416,6 +4416,19 @@ _gap_extend("explorer 2011-2019", parts=_gap_rows(2011, 2019, [
     {"name": "EcoBoost Turbocharger (2.0/2.3, match part #)", "rarity": "Rare", "low": 120, "high": 280, "cost": 60, "option": True},
 ]))
 
+# ---- 2026-11 §16: next measured block (PARTS_GAPS §16). Same basis as §13.
+# Ford Focus 2000-2007 (C170; 1,535 cars generic-only). The 2005 facelift
+# changed the lamps and the engine (Zetec -> Duratec 2.0), so rows are
+# bounded 2000-04 / 2005-07 (the platform notes say 00-04 housings and HVAC
+# are shared). A/C was optional on the early base cars. SVT 2002-04.
+_gap_extend("focus", parts=[
+    *_per_gen([(2000, 2004), (2005, 2007)], [_GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}, _SUNROOF]),
+    *_per_gen([(2002, 2004)], [
+        {"name": "SVT Front Seats (pair)", "rarity": "Rare", "low": 120, "high": 260, "cost": 60, "trim": ["SVT"]},
+        {"name": "SVT 17\" Alloy Wheels (set of 4, straight)", "rarity": "Rare", "low": 150, "high": 320, "cost": 100, "trim": ["SVT"]},
+    ]),
+])
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},

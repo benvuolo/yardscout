@@ -227,6 +227,17 @@ check("§15: interchange notes survive the split (2010 Escape mirrors still shar
       "Tribute" in parts(2010, "Ford", "Escape", FWD)["Side Mirrors (power, pair)"].get("sharedWith", "")
       and "1MZ" in parts(2002, "Toyota", "Camry", FWD)["Alternator (spin-test at yard)"].get("sharedWith", ""))
 
+
+# 2f. §16 block (measured order)
+f03, f06 = parts(2003, "Ford", "Focus", FWD), parts(2006, "Ford", "Focus", FWD)
+check("§16 Focus 2003/2006: pump, fan in their window; A/C and sunroof 'if equipped'", MECH3 <= set(f03) and MECH3 <= set(f06)
+      and f03["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2000–2004" and f06["Radiator Fan Assembly"]["fits"] == "2005–2007"
+      and f03["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed")
+check("§16 Focus SVT: seats listing-confirmed on 'Focus SVT', 'if equipped' on plain Focus 2003, absent 2006",
+      parts(2003, "Ford", "Focus SVT")["SVT Front Seats (pair)"]["trim_status"] == "listing"
+      and f03["SVT Front Seats (pair)"]["trim_status"] == "unconfirmed" and "SVT Front Seats (pair)" not in f06)
+check("§16 Focus 2010: still the 2008-11 rows, not the 2005-07 ones", parts(2010, "Ford", "Focus", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2008–2011")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

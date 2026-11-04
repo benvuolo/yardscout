@@ -349,3 +349,43 @@ mirrors losing "Tribute/Mariner share doors", 2002–03 Camry alternators the
   model crosses a break, and interchange notes survive the split.
 
 Models not in `GENERATION_BREAKS` are unchanged (no break data to bound by).
+
+## 16. Next measured block (2026-11-04, owner: "start the next parts block")
+
+Same basis and measurement as §13. Every row is bounded to one generation
+(or facelift window where the notes give one), and §15's pass guarantees
+no row crosses a `GENERATION_BREAKS` year. Before: generic-only 35,451
+cars (10.6%), no entry 12,298 (3.7%).
+
+| Order | Model (years) | Generic-only cars |
+|---|---|---|
+| 1 | Ford Focus 2000–07 | 1,535 |
+| 2 | Ford Explorer 1991–2001 | 1,173 |
+| 3 | Jeep Compass 2007–16 | 911 |
+| 4 | Kia Rio 2001–23 | 781 |
+| 5 | Buick Century 1983–2005 | 704 |
+| 6 | Chevrolet Aveo 2004–11 | 674 |
+| 7 | VW Passat 1998–2011 | 652 |
+| 8 | Buick Lucerne 2006–11 | 621 |
+
+New pull-cost medians (30 lists): transfer case $83, shock/strut $13,
+amplifier $24, rear differential $36. The rows below reuse the audited
+templates; these medians are recorded for the categories they touch.
+
+### 16.1 Ford Focus 2000–2007 (C170)
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2000–04, 2005–07 | — | Every car. Split at the 2005 facelift, which also changed the engine (Zetec → Duratec 2.0). |
+| A/C compressor | 2000–04, 2005–07 | option | A/C was optional on the early base cars. |
+| Sunroof | 2000–04, 2005–07 | option | |
+| SVT front seats (pair), SVT 17" wheels | 2002–04 | trim: SVT | SVT Focus run. Seat band matches the audited leather-seat pair rows. |
+
+Windows follow the repo's own Focus platform notes (00–04 housings, HVAC
+and switchgear shared). Left out, no stated basis: ZX3/ZX5 hatch and wagon
+lamps (whether the rear lamps changed in 2005 is not confirmed), Audiophile
+audio. The existing 2000–07 lamp rows were left as they are; they cross the
+2005 facelift, which is not a `GENERATION_BREAKS` year.
+
+Result: Focus 2000–07 generic-only 1,535 → 0. Lots: generic-only 35,451
+(10.6%) → 33,916 (10.2%).
