@@ -4580,6 +4580,18 @@ _gap_extend("sportage", parts=[
     ]),
 ])
 
+# Kia Spectra (545 cars generic-only). Gen 1 (Sephia-based) to early 2004,
+# LD from spring 2004 (sold as a 2004 model) through 2009, so 2004 is
+# ambiguous and gets no rows. LD facelift 2007 in FACELIFT_BREAKS. The
+# Spectra5 hatch (2005-09) has its own rear lamps.
+_gap_extend("spectra", parts=[
+    *_per_gen([(2000, 2003), (2005, 2009)], [_GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}]),
+    *_per_gen([(2005, 2009)], [
+        _TAILS,
+        {"name": "Hatchback Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 55, "high": 140, "cost": 23, "body": ["hatchback"]},
+    ]),
+])
+
 # ---- end of §18 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
@@ -6175,6 +6187,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "regal": [2014],
     "tucson": [2009, 2014, 2019],
     "sportage": [2009, 2014, 2020],
+    "spectra": [2007],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

@@ -345,6 +345,13 @@ check("§18 Sportage: pump/fan per generation, AWD coupling gated, SL panoramic 
       and s07["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in s13
       and s13["Panoramic Sunroof Assembly"]["trim_status"] == "unconfirmed" and s07["Tail Lights (pair, uncracked)"]["fits"] == "2005–2008")
 
+p03, p06, p08 = parts(2003, "Kia", "Spectra", FWD), parts(2006, "Kia", "Spectra", FWD), parts(2008, "Kia", "Spectra", HATCH)
+check("§18 Spectra: pump per generation, none for ambiguous 2004; tails cut at the 2007 facelift; hatch lamps VIN-confirmed",
+      p03["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2000–2003" and p06["Radiator Fan Assembly"]["fits"] == "2005–2009"
+      and "Fuel Pump Module (in-tank, test before listing)" not in names(2004, "Kia", "Spectra", FWD)
+      and p06["Tail Lights (pair, uncracked)"]["fits"] == "2005–2006" and p08["Hatchback Tail Lights (pair, uncracked)"]["fits"] == "2007–2009"
+      and p08["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

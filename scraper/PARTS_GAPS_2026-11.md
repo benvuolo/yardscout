@@ -718,3 +718,29 @@ researched).
 
 Result: Sportage 2005–22 generic-only 543 → 0 (3 cars from 2023 remain).
 Lots: generic-only 26,697 (8.0%) → 26,154 (7.9%).
+
+### 18.5 Kia Spectra 2000–2003, 2005–2009
+
+Basis: en.wikipedia.org/wiki/Kia_Spectra; consumerguide.com/used/2005-09-kia-spectra;
+cars.com "2007 Kia Spectra: What's New" (fetched).
+- **Generations:** gen 1 is Sephia-based and runs to early 2004. The LD
+  went on sale in spring 2004 as a "2004.5", i.e. still a 2004 model, and
+  ran through 2009. With two generations under one model year, 2004 cars
+  get no new rows (35 stay generic-only).
+- **Facelift 2007 (added to `FACELIFT_BREAKS`):** "updated front and rear
+  styling — including the grille, bumper, lights and deck lid"; "the
+  Spectra5 received similar styling changes for 2007" (cars.com).
+- **Spectra5 hatch:** 2005–09 (Consumer Guide).
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2000–03, 2005–09 | — | Every car. |
+| A/C compressor | 2000–03, 2005–09 | option | Standard fitment not confirmed by a source. |
+| Tail lights | 2005–06, 2007–09 | — | The entry had none; cut at the facelift. |
+| Hatchback tail lights | 2005–06, 2007–09 | body: hatchback | Spectra5 rear lamps; same band as the Accent/Rio hatch rows. |
+
+Left out, no stated basis: gen-1 tail lights (sedan vs 5-door differ and
+the 2001 "slight facelift" has no part detail), sunroof, wheels.
+
+Result: Spectra generic-only 545 → 35 (all 2004). Lots: generic-only 26,154
+(7.9%) → 25,644 (7.7%).
