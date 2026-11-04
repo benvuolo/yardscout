@@ -1143,8 +1143,12 @@ Basis: consumerguide.com/used/1997-03-chevrolet-malibu; en.wikipedia.org/wiki/Ch
 **Fix: Chevrolet Classic 2004–05 (87 cars).** Wikipedia lists the N-body
 as "1997–2003 (Chevrolet Malibu) / 2004–2005 (Chevrolet Classic)". The §11
 breadth pass had routed "Chevrolet Classic" to the malibu entry, so those
-cars were shown the 2004–07 Epsilon Malibu's rows: a false fitment claim
-from this workstream's own earlier change.
+cars got the 2004–07 Epsilon Malibu's rows. The part names happened to be
+the same (pump, compressor, fan, lamps, evergreens), but their "fits"
+windows said 2004–07, so the part finder offered Epsilon Malibus as
+same-generation donors: a false fitment claim from this workstream's own
+earlier change. The per-car check (§20.9) confirms no part was lost; only
+those windows changed, to 2004–05.
 - The Classic now has its own entry ("Chevrolet Classic (N-body Malibu)",
   2004–05). It carries copies of the Malibu's lamp and mirror rows, the
   mechanical pulls, the sunroof and spoiler options, and the evergreens,
@@ -1323,3 +1327,43 @@ doors (none found).
 
 Result: Windstar generic-only 347 → 0. Lots: generic-only 18,482 (5.6%) →
 18,135 (5.5%).
+
+### 20.8 GMC Savana 1996–2024
+
+Basis: en.wikipedia.org/wiki/Chevrolet_Express (raw); conceptcarz.com copy
+of the GM 2003 release (fetched); 2010–15 Savana brochures and a fleet order
+sheet (snippet).
+- **Facelift 2003 (added to `FACELIFT_BREAKS`):** "the bodywork forward of
+  the windshield was revised"; "Bolder front-end styling - including grille,
+  bumper, fascia, fenders and hood", "larger, revamped taillamps" (GM). The
+  existing Savana lamp rows are now cut at 2003.
+- **2018 not used:** the 2018 headlamp change is confirmed for the Express
+  but not stated for the Savana, so there is no 2018 cut.
+- **AWD:** 2003–14 (1500 and light-duty 2500, 5.3L).
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module | 1996–2002, 2003–24 | — | Every van; also bounded at the 2003 revision (conservative). |
+| A/C compressor | same | option | A front-A/C delete existed on fleet orders (snippet). |
+
+Left out, no stated basis: a radiator-fan row (engine-driven clutch fan on
+these V8 vans), AWD rows (the transfer case is kept out with gearboxes and
+no other part-level basis was found), rear A/C parts (no audited band).
+
+Result: Savana generic-only 343 → 0. Lots: generic-only 18,135 (5.5%) →
+17,792 (5.4%).
+
+### 20.9 Block totals
+
+Generic-only **20,699 (6.2%) → 17,792 (5.4%)**: 2,907 cars moved. No entry
+unchanged at 12,301 (3.7%).
+- **New `GENERATION_BREAKS`:** mazda5 2012, windstar 1999.
+- **New `FACELIFT_BREAKS`:** malibu 2000; tribute 2005; mazda5 2008; lexus
+  es 1995/2000/2005; windstar 1998/2001; savana 2003.
+- **Fixed:** the Chevrolet Classic now has its own N-body entry (§20.1).
+- **Compared with the commit before §20:** none of the 12,726 distinct
+  year/make/model combinations on the lots lost a part or had an existing
+  part's band or gate status change, including the Classic, whose "fits"
+  windows were what changed. `sharedWith` notes are identical.
+- **Tests:** `test_interchange.py`, `test_consensus_parts.py` and the
+  other offline scraper tests pass.

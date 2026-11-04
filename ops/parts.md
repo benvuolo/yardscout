@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–19 done, §20 in progress)
+# Parts workstream — status (updated 2026-11-04, §13–20 done)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -75,14 +75,16 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 - Breadth-pass entries (mkz, mkx, volkswagen cc …) are created after the
   §16–19 blocks; their rows go just before `_apply_consensus_evergreens()`.
 
-- §20 (owner: "start the next parts block"; in progress): Malibu 1997–2003
-  done (→ 20,315, 6.1%). Fixed: "Chevrolet Classic" 2004–05 (N-body) had
-  been routed to the Epsilon Malibu rows in §11; it now has its own entry.
-  Tribute 2001–11 with facelift 2005 (→ 19,936, 6.0%); Uplander 2005–09
-  (→ 19,560, 5.9%); Mazda5 with new break 2012, facelift 2008 (→ 19,196, 5.8%);
-  Lexus ES 1992–2006 with facelifts 1995/2000/2005 (→ 18,835, 5.7%); Aura
-  2007–09 via the overlay (→ 18,482, 5.6%); Windstar with new break 1999,
-  facelifts 1998/2001 (→ 18,135, 5.5%).
+- §20 (owner: "start the next parts block"): Malibu 1997–2003, Tribute
+  2001–11, Uplander 2005–09, Mazda5, Lexus ES 1992–2006, Aura (overlay),
+  Windstar, Savana, researched with cited sources first. Generic-only
+  20,699 (6.2%) → 17,792 (5.4%). New breaks: Mazda5 2012 and Windstar 1999
+  generations; facelifts for Malibu 2000, Tribute, Mazda5, ES, Windstar,
+  Savana. Fixed the Chevrolet Classic routing (own N-body entry). No car
+  lost or changed an existing part.
+- Overlay-created entries (Aura, es 300 …) take their rows in
+  `parts_overlay.json`; §20 code sits just before
+  `_apply_consensus_evergreens()` so breadth-pass entries exist.
 
 ## How to measure
 
@@ -105,13 +107,14 @@ The generic-only count re-matches every distinct year/make/model in
 
 ## Next
 
-1. Next block by generic-only cars: Chevrolet Malibu (384, the years
-   outside the §2–10 rows), Mazda Tribute (379), Chevrolet Uplander (376),
-   Mazda5 (364), Lexus ES (361), Saturn Aura (353), Ford Windstar (347), GMC
-   Savana (343). Research generations and facelifts with sources first.
-2. Facelifts: research and add `FACELIFT_BREAKS` for the next models by
+1. Next block by generic-only cars: Mercury Mariner (Escape twin) (341), Fiat 500 (336), Chevrolet Spark (331), Nissan Juke (329), Dodge Stratus (322), Ford Mustang (S197) (322), Mercury Sable (Taurus twin) (322), Ford Transit Connect (311).
+   Research generations and facelifts with sources first.
+2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
+   overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
+   into `lexus es` and drop the duplicate (§20.5).
+3. Facelifts: research and add `FACELIFT_BREAKS` for the next models by
    cars (Grand Caravan, Odyssey, Expedition, Town & Country, Silverado, Ram,
    BMW 3, Maxima, Ranger, Suburban, Traverse, Pathfinder). The rule: a cited
    source for every year, and models without one are left out.
-3. When the daily email's "Most searched parts / cars (7 d)" has a week of
+4. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.

@@ -5946,6 +5946,13 @@ _gap_extend("windstar", parts=[
     *_per_gen([(1999, 2003)], [_GAP_AC, _PSD_MOTOR]),
 ])
 
+# GMC Savana 1996-2024 (343 cars generic-only; one generation, facelift 2003
+# in FACELIFT_BREAKS). Mechanical rows are also bounded at the 2003
+# revision (conservative). A front-A/C delete existed on fleet orders, so
+# A/C is option-flagged. No radiator-fan row (engine-driven clutch fan on
+# these V8 vans); no AWD row (the transfer case is kept out with gearboxes).
+_gap_extend("savana", parts=_per_gen([(1996, 2002), (2003, 2024)], [_GAP_PUMP, {**_GAP_AC, "option": True}]))
+
 # ---- end of §20 block
 
 _apply_consensus_evergreens()
@@ -6414,6 +6421,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "mazda5": [2008],
     "lexus es": [1995, 2000, 2005],
     "windstar": [1998, 2001],
+    "savana": [2003],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

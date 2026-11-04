@@ -481,6 +481,12 @@ check("§20 Windstar: rows per generation (new 1999 break); sliding-door motor g
       and s02["A/C Compressor (clutch spins free)"].get("trim_status") is None and "Power Sliding Door Motor" not in s96
       and s02["Power Sliding Door Motor"]["trim_status"] == "unconfirmed" and s02["Tail Lights (pair, uncracked)"]["fits"] == "2001–2003")
 
+g00, g10 = parts(2000, "GMC", "Savana", FWD), parts(2010, "GMC", "Savana", FWD)
+check("§20 Savana: pump bounded at the 2003 revision; A/C 'if equipped'; no electric-fan row; lamps cut at the 2003 facelift",
+      g00["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1996–2002" and g10["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2003–2024"
+      and g10["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and "Radiator Fan Assembly" not in g10
+      and g00["Headlights (clear, non-hazed)"]["fits"] == "1996–2002")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
