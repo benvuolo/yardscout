@@ -263,6 +263,13 @@ check("§16 Rio 2009/2013: pump, fan, tail lights per generation; A/C 'if equipp
 check("§16 Rio 2013 hatch decode: hatch lamps VIN-confirmed; sedan excluded", parts(2013, "Kia", "Rio", HATCH)["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin"
       and "Hatchback Tail Lights (pair, uncracked)" not in names(2013, "Kia", "Rio", SEDAN))
 
+b92, b02 = parts(1992, "Buick", "Century", FWD), parts(2002, "Buick", "Century", FWD)
+check("§16 Century 1992/2002: pump in its generation; A/C 'if equipped' 1992, plain 2002; 1984 none",
+      b92["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1986–1996" and b02["A/C Compressor (clutch spins free)"]["fits"] == "1997–2005"
+      and b92["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and b02["A/C Compressor (clutch spins free)"].get("trim_status") is None
+      and "Fuel Pump Module (in-tank, test before listing)" not in names(1984, "Buick", "Century", FWD))
+check("§16 Century 2002: mirrors + Limited seat 'if equipped'", "Side Mirrors (pair)" in b02 and b02["Leather Power Driver Seat (Limited)"]["trim_status"] == "unconfirmed")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

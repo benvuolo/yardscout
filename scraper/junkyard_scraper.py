@@ -4473,6 +4473,20 @@ _gap_extend("kia rio", parts=[
     ]),
 ])
 
+# Buick Century (704 cars generic-only; A-body 1982-96, W-body 1997-2005).
+# A-body rows start in 1986, when every engine was fuel-injected (early
+# carbureted cars used an engine-mounted mechanical pump). The entry had no
+# mirror row for the W-body.
+_gap_extend("century", parts=[
+    *_per_gen([(1986, 1996)], [_GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}]),
+    *_per_gen([(1997, 2005)], [
+        *_GAP_MECH,
+        {"name": "Side Mirrors (pair)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 15},
+        {"name": "Leather Power Driver Seat (Limited)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
+        {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+    ]),
+])
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},

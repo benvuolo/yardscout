@@ -443,3 +443,20 @@ wheels; 2018+ (YB, 30 cars, not in this block).
 
 Result: Rio generic-only 781 → 30 (all 2018+). Lots: generic-only 31,832
 (9.5%) → 31,081 (9.3%).
+
+### 16.5 Buick Century 1986–2005 (A-body to 1996, W-body 1997–2005)
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1986–96, 1997–05 | — | Every fuel-injected car; the FWD A-body has an electric fan. |
+| A/C compressor | 1986–96 | option | Standard fitment not confirmed on base A-bodies. |
+| A/C compressor | 1997–05 | — | Standard on the W-body. |
+| Side mirrors (pair) | 1997–05 | — | The entry had none. |
+| Leather power driver seat (Limited), alloy wheels | 1997–05 | option | |
+
+Left out, no stated basis: 1982–85 cars (carbureted engines had an
+engine-mounted mechanical pump; 3 cars stay generic-only), sunroof (offer
+not confirmed), the 3.1 V6 intake gaskets/manifold (engine).
+
+Result: Century generic-only 704 → 3 (pre-1986). Lots: generic-only 31,081
+(9.3%) → 30,380 (9.1%).
