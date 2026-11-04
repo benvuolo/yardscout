@@ -474,6 +474,13 @@ check("§20 Aura (overlay rows): mech 2007-09; sunroof 'if equipped'; XR wheels 
       and n08["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed"
       and parts(2008, "Saturn", "Aura XR")['XR 18" Alloy Wheels (set of 4, straight)']["trim_status"] == "listing")
 
+VAN = {**FWD, "bodyClass": "Minivan"}
+s96, s02 = parts(1996, "Ford", "Windstar", VAN), parts(2002, "Ford", "Windstar", VAN)
+check("§20 Windstar: rows per generation (new 1999 break); sliding-door motor gen 2 only; tails cut at the 2001 facelift",
+      MECH3 <= set(s96) and MECH3 <= set(s02) and s96["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1995–1998"
+      and s02["A/C Compressor (clutch spins free)"].get("trim_status") is None and "Power Sliding Door Motor" not in s96
+      and s02["Power Sliding Door Motor"]["trim_status"] == "unconfirmed" and s02["Tail Lights (pair, uncracked)"]["fits"] == "2001–2003")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

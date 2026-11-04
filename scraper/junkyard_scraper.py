@@ -5936,6 +5936,16 @@ _gap_extend("lexus es", parts=[
     ]),
 ])
 
+# Ford Windstar (347 cars generic-only; 1st gen 1995-98, 2nd gen 1999-2003;
+# new GENERATION_BREAKS 1999, facelifts 1998/2001). Gen 2: A/C standard,
+# dual sliders, power sliding doors standard SEL / optional SE. Gen 1 A/C
+# unconfirmed for 1995-96 (option-flagged).
+_gap_extend("windstar", parts=[
+    *_per_gen([(1995, 1998), (1999, 2003)], [_GAP_PUMP, _GAP_FAN]),
+    *_per_gen([(1995, 1998)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(1999, 2003)], [_GAP_AC, _PSD_MOTOR]),
+])
+
 # ---- end of §20 block
 
 _apply_consensus_evergreens()
@@ -6210,6 +6220,7 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    "windstar": [1999],                    # 1st gen 1995-98, 2nd gen 1999-2003 (PARTS_GAPS §20.7)
     "mazda5": [2012],                      # 1st gen 2006-10, 2nd gen 2012-15, no 2011 US MY (PARTS_GAPS §20.4)
     "mkx": [2016],                        # 1st gen 2007-15, 2nd gen 2016-18 (PARTS_GAPS §19.5)
     "mkz": [2013],                        # 1st gen 2007-12, 2nd gen 2013-20 (PARTS_GAPS §18.7)
@@ -6402,6 +6413,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "tribute": [2005],
     "mazda5": [2008],
     "lexus es": [1995, 2000, 2005],
+    "windstar": [1998, 2001],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

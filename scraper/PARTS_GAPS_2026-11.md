@@ -1295,3 +1295,31 @@ Left out, no stated basis: Green Line/Hybrid parts (no audited band), the
 
 Result: Aura generic-only 353 → 0. Lots: generic-only 18,835 (5.7%) →
 18,482 (5.6%).
+
+### 20.7 Ford Windstar 1995–1998, 1999–2003
+
+Basis: consumerguide.com/used/1995-98-ford-windstar and /used/1999-03-ford-windstar;
+en.wikipedia.org/wiki/Ford_Windstar (raw; fetched).
+- **New `GENERATION_BREAKS` "windstar": [1999]:** the existing Windstar lamp
+  and mirror rows are now bounded by generation.
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 1998: "The front fascia underwent a facelift, adopting a trapezoidal
+    grille and redesigned headlamps".
+  - 2001: "Both the nose and tail were slightly restyled" (CG); "Slight
+    cosmetic changes … to front and rear fascias for '01".
+- **Doors:** gen 1 had a right-side slider only. Gen 2 had dual sliders,
+  with power sliding doors standard on the SEL and optional on the SE.
+- **A/C:** standard in gen 2. In gen 1 it is confirmed only for 1997–98.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1995–98, 1999–03 | — | Every van. |
+| A/C compressor | 1995–98 | option | 1995–96 base unconfirmed. |
+| A/C compressor | 1999–03 | — | Standard. |
+| Power sliding door motor | 1999–03 | option | Same conservative band as the Uplander row. |
+
+Left out, no stated basis: rear A/C parts (no audited band), gen-1 power
+doors (none found).
+
+Result: Windstar generic-only 347 → 0. Lots: generic-only 18,482 (5.6%) →
+18,135 (5.5%).

@@ -81,7 +81,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   Tribute 2001–11 with facelift 2005 (→ 19,936, 6.0%); Uplander 2005–09
   (→ 19,560, 5.9%); Mazda5 with new break 2012, facelift 2008 (→ 19,196, 5.8%);
   Lexus ES 1992–2006 with facelifts 1995/2000/2005 (→ 18,835, 5.7%); Aura
-  2007–09 via the overlay (→ 18,482, 5.6%).
+  2007–09 via the overlay (→ 18,482, 5.6%); Windstar with new break 1999,
+  facelifts 1998/2001 (→ 18,135, 5.5%).
 
 ## How to measure
 
