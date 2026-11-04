@@ -167,6 +167,14 @@ check("LaCrosse 2012: AWD decode confirms the rear unit; FWD decode excludes; 20
 check("LaCrosse 2012: Harman Kardon 'if equipped'; 2018: none of the new rows", c12["Harman Kardon Amp + Speakers"]["trim_status"] == "unconfirmed"
       and not (MECH3 & names(2018, "Buick", "LaCrosse", FWD)))
 
+r95, r02 = parts(1995, "Toyota", "Corolla", FWD), parts(2002, "Toyota", "Corolla", FWD)
+check("Corolla 1995/2002: pump + fan in their generation; A/C and sunroof 'if equipped'", MECH3 <= set(r95) and MECH3 <= set(r02)
+      and r95["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1993–1997" and r02["Radiator Fan Assembly"]["fits"] == "1998–2002"
+      and r02["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and r95["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed")
+check("Corolla 2005: A/C is the plain 2003+ row (one row, not 'if equipped')",
+      parts(2005, "Toyota", "Corolla", FWD)["A/C Compressor (clutch spins free)"].get("trim_status") is None)
+check("Corolla 1991: still outside the entry", not names(1991, "Toyota", "Corolla", FWD))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

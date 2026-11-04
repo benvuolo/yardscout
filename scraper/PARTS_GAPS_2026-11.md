@@ -217,3 +217,19 @@ confirmed between 2013 and 2014), halogen lamps for 2010–16 base cars.
 
 Result: LaCrosse generic-only 1,077 → 8 (all 2017+). Lots: generic-only
 38,571 (11.6%) → 37,502 (11.2%).
+
+### 13.5 Toyota Corolla 1993–2002 (E100 1993–97, E110 1998–2002)
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1993–97, 1998–02 | — | Commodity pulls on every car. |
+| A/C compressor | 1993–97, 1998–02 | option | A/C was optional on the base 1990s cars. |
+| Sunroof | 1993–97, 1998–02 | option | |
+
+2002 is included because it is the last E110 year and the 2003+ rows start
+at E120 (153 cars). Left out, no stated basis: alloy wheels (offer by trim
+and year not confirmed), 1993–97 wagon lamps. 1990–92 (E90, 61 cars) stay
+outside the entry.
+
+Result: Corolla 1990–2001 generic-only 983 → 0, and 2002 153 → 0. Lots:
+generic-only 37,502 (11.2%) → 36,366 (10.9%).

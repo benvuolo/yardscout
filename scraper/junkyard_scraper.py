@@ -3872,6 +3872,13 @@ _extend_entry("lacrosse", parts=[
     ]),
 ])
 
+# Toyota Corolla 1993-2002 (E100 1993-97, E110 1998-2002; 983 cars from
+# the 1990s plus 153 2002s matched only generic rows; the 2003+ rows start
+# at E120). A/C was optional on the base 1990s cars.
+_extend_entry("corolla", parts=_per_gen([(1993, 1997), (1998, 2002)], [
+    _GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}, _SUNROOF,
+]))
+
 # --- Feed-spelling aliases: same entry object, different key the feeds use ---
 # ("Town And Country" never contained "town & country"; "Mazda 3" has a space.)
 for _alias, _key in (
