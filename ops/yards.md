@@ -24,8 +24,7 @@ directory-only entries.
 | Harry's | Sucuri; the owner is sending a note via their contact form |
 | Pull-N-Save, Budget, Route 34 | outreach sent 2026-11-02, no reply yet |
 
-Outreach drafts: scratchpad `yard-outreach-emails.md` of the hub session
-(copy into this file if they are needed again).
+Outreach drafts: `ops/yard-outreach-drafts.md` (all sent except Harry's).
 
 ## Next
 
