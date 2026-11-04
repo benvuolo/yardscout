@@ -72,27 +72,47 @@ check("match: same name, punctuation aside, no coords or city", cs.match_known("
 
 
 class FakeResp:
-    def __init__(self, status, payload=None):
-        self.status_code, self._p = status, payload or {}
+    def __init__(self, status, payload=None, text=""):
+        self.status_code, self._p, self.text = status, payload or {}, text
 
     def json(self):
         return self._p
 
 
 class FakeOverpass:
-    def __init__(self, plan):
-        self.plan, self.calls = plan, []
+    """plan[(url, state)] is one response, or a list served in order (the
+    last one repeats); an Exception instance is raised. status[url] is the
+    /api/status text."""
+
+    def __init__(self, plan, status=None):
+        self.plan, self.status, self.calls, self.timeouts = plan, status or {}, [], []
+
+    def get(self, url, timeout=None, headers=None):
+        base = url.rsplit("/", 1)[0] + "/interpreter"
+        t = self.status.get(base)
+        return FakeResp(200, text=t) if t is not None else FakeResp(404)
 
     def post(self, url, data=None, timeout=None, headers=None):
         st = data["data"].split('"US-')[1][:2]
         self.calls.append((url, st))
-        return self.plan.get((url, st), FakeResp(504))
+        self.timeouts.append(timeout)
+        r = self.plan.get((url, st), FakeResp(504))
+        if isinstance(r, list):
+            r = r.pop(0) if len(r) > 1 else r[0]
+        if isinstance(r, Exception):
+            raise r
+        return r
 
 
-m, k = cs.OVERPASS_URLS
+slept = []
+def nosleep(sec):
+    slept.append(sec)
+
+
+m, k, pc = cs.OVERPASS_URLS
 el = {"elements": [{"type": "node", "lat": 41.0, "lon": -96.0, "tags": {"name": "U-Pull-It"}}]}
 fo = FakeOverpass({(m, "NE"): FakeResp(200, el), (k, "IA"): FakeResp(200, el)})
-got, err = cs.fetch_osm(fo, states=("NE", "IA", "KS"), pause=0)
+got, err = cs.fetch_osm(fo, states=("NE", "IA", "KS"), pause=0, sleep=nosleep)
 check("osm: per-state, mirror on failure, failed states named",
       len(got) == 2 and got[0].state == "NE" and got[1].state == "IA" and err == "Overpass failed for KS"
       and (k, "IA") in fo.calls, f"{err} {fo.calls}")
@@ -163,11 +183,87 @@ check("run: time budget stops site checks, report still complete",
       len(out3) == 6 and sum(1 for c in out3 if "time budget" in c.evidence) == 2 and any("Time budget" in n for n in notes3),
       f"{[c.evidence for c in out3]} {notes3}")
 fo2 = FakeOverpass({(m, "NE"): FakeResp(200, el)})
-got2, err2 = cs.fetch_osm(fo2, states=("NE", "IA"), pause=0, deadline=1.0)
+got2, err2 = cs.fetch_osm(fo2, states=("NE", "IA"), pause=0, deadline=1.0, sleep=nosleep)
 check("osm: deadline in the past skips the remaining states", got2 == [] and "not queried: NE, IA" in err2, err2)
-fo3 = FakeOverpass({})
-got3, err3 = cs.fetch_osm(fo3, states=("AL", "AK", "AZ", "AR", "CA"), pause=0)
-check("osm: gives up after 3 straight failed states", len({st for _, st in fo3.calls}) == 3 and "not queried: AR, CA" in err3, err3)
+
+# --- Overpass resilience (2026-11-03 run: every state lost to 60 s client
+# timeouts, a dead mirror, and the old "3 failed states -> stop" rule).
+import requests as _rq  # noqa: E402
+TO = _rq.exceptions.ReadTimeout("read timed out")
+check("osm: client timeout is longer than the server's [timeout:]",
+      cs.OSM_TIMEOUT > cs.OSM_SERVER_TIMEOUT and f"[timeout:{cs.OSM_SERVER_TIMEOUT}]" in cs.overpass_query("AL"))
+# The exact 2026-11-03 failure: main server times out on the first states,
+# mirrors refuse; later states answer. Every state must still be covered.
+plan = {(m, "AL"): [TO, FakeResp(200, el)], (m, "AK"): [TO, FakeResp(200, el)], (m, "AZ"): [TO, FakeResp(200, el)],
+        (m, "AR"): FakeResp(200, el), (m, "CA"): FakeResp(200, el)}
+for st in ("AL", "AK", "AZ", "AR", "CA"):
+    plan[(k, st)] = _rq.exceptions.ConnectionError("refused")
+    plan[(pc, st)] = FakeResp(504)
+rep = {}
+fo3 = FakeOverpass(plan)
+got3, err3 = cs.fetch_osm(fo3, states=("AL", "AK", "AZ", "AR", "CA"), pause=0, report=rep, sleep=nosleep)
+check("osm: three failed states in a row no longer stop discovery; retry pass recovers them",
+      sorted(c.state for c in got3) == ["AK", "AL", "AR", "AZ", "CA"] and err3 == "" and rep["pending"] == [],
+      f"{err3} {rep} {[c.state for c in got3]}")
+check("osm: a mirror that keeps refusing is dropped after OSM_DROP_SERVER_AFTER strikes",
+      sum(1 for u, _ in fo3.calls if u == k) == cs.OSM_DROP_SERVER_AFTER, str([u for u, _ in fo3.calls].count(k)))
+check("osm: every request uses the long read timeout, short connect timeout",
+      set(fo3.timeouts) == {(cs.OSM_CONNECT_TIMEOUT, cs.OSM_TIMEOUT)}, str(set(fo3.timeouts)))
+rep9 = {}
+fo9 = FakeOverpass({(u, st): _rq.exceptions.ConnectTimeout("x") for u in cs.OVERPASS_URLS for st in ("AL", "AK", "AZ", "AR")})
+cs.fetch_osm(fo9, states=("AL", "AK", "AZ", "AR"), pause=0, report=rep9, sleep=nosleep)
+check("osm: connect timeouts count as dead-server strikes", len(fo9.calls) == len(cs.OVERPASS_URLS) * cs.OSM_DROP_SERVER_AFTER, str(len(fo9.calls)))
+# 429 then 200 on the same server: backoff, no mirror needed.
+slept.clear()
+fo4 = FakeOverpass({(m, "NE"): [FakeResp(429), FakeResp(200, el)]})
+got4, err4 = cs.fetch_osm(fo4, states=("NE",), pause=0, sleep=nosleep)
+check("osm: 429 backs off and retries the same server", len(got4) == 1 and fo4.calls == [(m, "NE"), (m, "NE")]
+      and cs.OSM_BACKOFF[0] in slept, f"{fo4.calls} {slept}")
+# /api/status says wait: the client waits before posting (capped).
+slept.clear()
+fo5 = FakeOverpass({(m, "NE"): FakeResp(200, el)},
+                   status={m: "Rate limit: 2\nSlot available after: 2026-11-04T15:00:12Z, in 12 seconds.\n"
+                              "Slot available after: 2026-11-04T15:00:40Z, in 40 seconds.\n"})
+cs.fetch_osm(fo5, states=("NE",), pause=0, sleep=nosleep)
+check("osm: waits for the slot /api/status announces", slept[:1] == [12.0], str(slept))
+slept.clear()
+fo5b = FakeOverpass({(m, "NE"): FakeResp(200, el)}, status={m: "Rate limit: 2\n2 slots available now.\n"})
+cs.fetch_osm(fo5b, states=("NE",), pause=0, sleep=nosleep)
+check("osm: no wait when a slot is free", slept == [], str(slept))
+# 200 with a runtime-error remark is a failure, not an empty state.
+bad = {"elements": [], "remark": "runtime error: Query timed out in \"query\" at line 1 after 181 seconds."}
+fo6 = FakeOverpass({(m, "TX"): FakeResp(200, bad), (k, "TX"): FakeResp(200, el)})
+got6, err6 = cs.fetch_osm(fo6, states=("TX",), pause=0, sleep=nosleep)
+check("osm: runtime-error remark falls through to the mirror", len(got6) == 1 and (k, "TX") in fo6.calls, f"{fo6.calls}")
+# Everything down: stops once all servers are dropped, names the rest pending.
+rep7 = {}
+fo7 = FakeOverpass({(u, st): _rq.exceptions.ConnectionError("refused") for u in cs.OVERPASS_URLS for st in cs.US_STATES})
+got7, err7 = cs.fetch_osm(fo7, states=cs.US_STATES, pause=0, report=rep7, sleep=nosleep)
+check("osm: all servers refusing -> stops early, every state pending",
+      got7 == [] and len(fo7.calls) == len(cs.OVERPASS_URLS) * cs.OSM_DROP_SERVER_AFTER
+      and sorted(rep7["pending"]) == sorted(cs.US_STATES), f"{len(fo7.calls)} {len(rep7['pending'])}")
+# Deadline mid-run: covered states are not pending, the rest are.
+t = [0.0]
+def clk():
+    return t[0]
+class SlowOverpass(FakeOverpass):
+    def post(self, *a, **kw):
+        t[0] += 100
+        return super().post(*a, **kw)
+rep8 = {}
+fo8 = SlowOverpass({(m, st): FakeResp(200, el) for st in ("NE", "IA", "KS")})
+got8, err8 = cs.fetch_osm(fo8, states=("NE", "IA", "KS"), pause=0, deadline=150, report=rep8, clock=clk, sleep=nosleep)
+check("osm: deadline -> covered states kept, rest pending", len(got8) == 2 and rep8["pending"] == ["KS"]
+      and "not queried: KS" in err8, f"{err8} {rep8}")
+# Next run asks the pending states first.
+import tempfile, json as _json  # noqa: E402,E401
+with tempfile.TemporaryDirectory() as td:
+    pj = Path(td) / "sweep.json"
+    pj.write_text(_json.dumps({"osm_pending": ["TX", "CA", "ZZ"]}))
+    order = cs.osm_state_order(pj)
+    check("osm: last run's pending states go first, nothing lost",
+          order[:2] == ["TX", "CA"] and sorted(order) == sorted(cs.US_STATES), str(order[:4]))
+    check("osm: no previous report -> plain order", cs.osm_state_order(Path(td) / "none.json") == list(cs.US_STATES))
 
 
 def boom(_):

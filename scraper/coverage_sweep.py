@@ -44,6 +44,7 @@ Run
 from __future__ import annotations
 
 import argparse
+import functools
 import json
 import math
 import re
@@ -71,13 +72,22 @@ UA = "YardScout/1.12 (+https://yardscout.io)"
 SITE_DELAY_SEC = 1.5
 TIMEOUT = 20
 MATCH_KM = 3.0
-OSM_TIMEOUT = 60          # per Overpass request
-OSM_GIVE_UP_AFTER = 3     # consecutive failed states before discovery stops
+# Overpass. The 2026-11-03 run lost every state: the client gave up at 60 s
+# while the query allowed the server 180 s, the kumi mirror failed at once,
+# and three failed states in a row stopped discovery for the whole run.
+OSM_SERVER_TIMEOUT = 180  # [timeout:] sent to Overpass
+OSM_TIMEOUT = OSM_SERVER_TIMEOUT + 30  # client read timeout: waits past the server's own limit
+OSM_CONNECT_TIMEOUT = 20  # a host that won't even connect is not worth 3.5 min
+OSM_MAX_SLOT_WAIT = 120   # longest wait for a free slot announced by /api/status
+OSM_BACKOFF = (15, 45)    # same-server retries after 429 / 504 (rate limit, busy)
+OSM_DROP_SERVER_AFTER = 3 # consecutive connection errors before a server is dropped for the run
+OSM_SHARE = 0.65          # share of the budget for discovery (Ario + OSM); sites get the rest
 ARIO_MIN_ROWS = 50        # an Ario yard counts as live with this many rows...
 ARIO_FRESH_DAYS = 30      # ...and a set-out within this many days
 US_STATES = ("AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ "
              "NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY").split()
-OVERPASS_URLS = ("https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter")
+OVERPASS_URLS = ("https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter",
+                 "https://overpass.private.coffee/api/interpreter")
 
 # ---------------------------------------------------------------- names
 # Overpass regex (POSIX ERE, case-insensitive). Broad on purpose; the Python
@@ -252,8 +262,8 @@ class Candidate:
 
 def overpass_query(state: str) -> str:
     return (
-        f'[out:json][timeout:180];area["ISO3166-2"="US-{state}"]->.s;'
-        f'nwr["name"~"{OSM_NAME_RE}",i](area.s);out center tags;'
+        f'[out:json][timeout:{OSM_SERVER_TIMEOUT}];area["ISO3166-2"="US-{state}"]->.s;'
+        f'nwr["name"~"{OSM_NAME_RE}",i](area.s);out center tags qt;'
     )
 
 
@@ -279,47 +289,115 @@ def parse_overpass(data: dict) -> list[Candidate]:
     return out
 
 
-def fetch_osm(session, states=US_STATES, pause: float = 3.0, deadline: float | None = None) -> tuple[list[Candidate], str]:
+def _overpass_slot_wait(session, url: str) -> float:
+    """Seconds until /api/status says this client has a free slot (0 when one
+    is free now or the status page can't be read). Overpass hands out a few
+    slots per IP; asking first is how its usage policy wants clients to pace."""
+    try:
+        r = session.get(url.rsplit("/", 1)[0] + "/status", timeout=TIMEOUT, headers={"User-Agent": UA})
+        text = r.text if getattr(r, "status_code", 0) == 200 else ""
+    except Exception:
+        return 0.0
+    if not text or re.search(r"\d+ slots? available now", text):
+        return 0.0
+    waits = [int(n) for n in re.findall(r"in (\d+) seconds?", text)]
+    return float(min(min(waits), OSM_MAX_SLOT_WAIT)) if waits else 0.0
+
+
+def _overpass_once(session, url: str, state: str, sleep) -> tuple[list[Candidate] | None, str, bool]:
+    """One state on one server, with slot waits and backoff on 429/504.
+    Returns (candidates or None, reason, hard) — hard = a connection-level
+    error, the only kind that counts toward dropping the server."""
+    reason = ""
+    for attempt in range(len(OSM_BACKOFF) + 1):
+        wait = _overpass_slot_wait(session, url)
+        if wait:
+            sleep(wait)
+        try:
+            r = session.post(url, data={"data": overpass_query(state)}, timeout=(OSM_CONNECT_TIMEOUT, OSM_TIMEOUT),
+                             headers={"User-Agent": UA})
+        except Exception as e:
+            # A slow answer is not a dead server: only connection-level errors
+            # (refused, reset, DNS, connect timeout) count toward dropping it. Timeouts are left
+            # to the run's deadline.
+            n = type(e).__name__
+            hard = n == "ConnectTimeout" or ("ConnectionError" in n and "Timeout" not in n)
+            return None, f"{type(e).__name__}", hard
+        if r.status_code == 200:
+            try:
+                data = r.json()
+            except ValueError:
+                return None, "200 but not JSON", False
+            remark = str(data.get("remark") or "")
+            if "error" in remark.lower():  # e.g. "runtime error: Query timed out" — not an empty state
+                return None, f"remark: {remark[:80]}", False
+            return parse_overpass(data), "", False
+        reason = f"HTTP {r.status_code}"
+        if r.status_code not in (429, 504) or attempt == len(OSM_BACKOFF):
+            return None, reason, False
+        sleep(OSM_BACKOFF[attempt])
+    return None, reason, False
+
+
+def fetch_osm(session, states=US_STATES, pause: float = 3.0, deadline: float | None = None,
+              report: dict | None = None, clock=time.time, sleep=time.sleep) -> tuple[list[Candidate], str]:
     """One Overpass query per state (a nationwide regex times out), each tried
-    on the main server then a mirror. Stops at `deadline` (epoch seconds);
-    failed or skipped states are named in the note."""
+    on the main server then the mirrors. Failed states get one retry pass at
+    the end. Stops at `deadline` (epoch seconds). Failed and unqueried states
+    are named in the note and put in report["pending"], which main() saves so
+    the next run asks for them first."""
     out: list[Candidate] = []
+    strikes = {u: 0 for u in OVERPASS_URLS}
+    pending = list(states)
     failed: list[str] = []
     skipped: list[str] = []
-    for i, st in enumerate(states):
-        if deadline and time.time() > deadline:
-            skipped = list(states[i:])
-            break
-        got = None
-        for url in OVERPASS_URLS:
-            try:
-                r = session.post(url, data={"data": overpass_query(st)}, timeout=OSM_TIMEOUT, headers={"User-Agent": UA})
-                if r.status_code == 200:
-                    got = parse_overpass(r.json())
-                    break
-                if r.status_code == 429:
-                    time.sleep(30)
-            except Exception:
-                pass
-        if got is None:
-            failed.append(st)
-            if len(failed) >= OSM_GIVE_UP_AFTER and failed[-OSM_GIVE_UP_AFTER:] == list(states[i - OSM_GIVE_UP_AFTER + 1:i + 1]):
-                skipped = list(states[i + 1:])
-                print(f"  osm {st}: failed — Overpass unavailable, stopping discovery", flush=True)
+    for pass_no in (1, 2):
+        failed = []
+        for i, st in enumerate(pending):
+            live = [u for u in OVERPASS_URLS if strikes[u] < OSM_DROP_SERVER_AFTER]
+            if (deadline and clock() > deadline) or not live:
+                skipped = list(pending[i:])
+                if not live:
+                    print("  osm: every Overpass server failed repeatedly, stopping discovery", flush=True)
                 break
-        else:
-            for c in got:
-                c.state = c.state or st
-            out += got
-        print(f"  osm {st}: {'failed' if got is None else len(got)}", flush=True)
-        if pause:
-            time.sleep(pause)
+            got, why = None, []
+            for url in live:
+                got, reason, hard = _overpass_once(session, url, st, sleep)
+                if got is not None:
+                    strikes[url] = 0
+                    break
+                strikes[url] = strikes[url] + 1 if hard else strikes[url]
+                why.append(f"{urlparse(url).netloc} {reason}")
+            if got is None:
+                failed.append(st)
+                print(f"  osm {st}: failed ({'; '.join(why)})", flush=True)
+            else:
+                for c in got:
+                    c.state = c.state or st
+                out += got
+                print(f"  osm {st}: {len(got)}" + (" (retry)" if pass_no == 2 else ""), flush=True)
+            if pause:
+                sleep(pause)
+        if not failed or skipped:
+            break
+        pending = failed
     msg = []
     if failed:
         msg.append(f"Overpass failed for {', '.join(failed)}")
     if skipped:
         msg.append(f"not queried: {', '.join(skipped)}")
+    if report is not None:
+        report["pending"] = failed + skipped
     return out, "; ".join(msg)
+
+
+def osm_state_order(prev_json: Path = OUT_JSON, states=US_STATES) -> list[str]:
+    """States the last run could not cover go first, the rest keep their order."""
+    try:
+        pend = [s for s in json.loads(prev_json.read_text()).get("osm_pending") or [] if s in states]
+    except (OSError, ValueError, AttributeError):
+        pend = []
+    return pend + [s for s in states if s not in pend]
 
 
 def fetch_ario(session) -> tuple[list[Candidate], str]:
@@ -518,7 +596,7 @@ def run(session, use_osm: bool = True, use_ario: bool = True, max_sites: int = 4
         known: list[Known] | None = None, site: Site | None = None,
         osm_fetch=fetch_osm, ario_fetch=fetch_ario, budget_min: float | None = None,
         clock=time.time) -> tuple[list[Candidate], dict, list[str]]:
-    """budget_min: total minutes. Discovery may use 45% of it, website checks
+    """budget_min: total minutes. Discovery may use OSM_SHARE (65%) of it, website checks
     the rest; whatever is left unchecked is listed as such, and the report is
     always written."""
     known = load_known() if known is None else known
@@ -527,7 +605,7 @@ def run(session, use_osm: bool = True, use_ario: bool = True, max_sites: int = 4
     raw: list[Candidate] = []
     t0 = clock()
     end = t0 + budget_min * 60 if budget_min else None
-    osm_end = t0 + budget_min * 60 * 0.45 if budget_min else None
+    osm_end = t0 + budget_min * 60 * OSM_SHARE if budget_min else None
     for on, label, fetch in ((use_ario, "Ario", ario_fetch), (use_osm, "OpenStreetMap", osm_fetch)):
         if not on:
             continue
@@ -577,11 +655,20 @@ def main(argv=None) -> int:
         print("::error::python 'requests' is required")
         return 2
     session = requests.Session()
+    osm_report: dict = {}
+    osm_fetch = functools.partial(fetch_osm, states=osm_state_order(), report=osm_report)
     cands, skipped, notes = run(session, use_osm=not args.no_osm, use_ario=not args.no_ario,
-                                max_sites=args.max_sites, budget_min=args.budget_min)
+                                max_sites=args.max_sites, budget_min=args.budget_min, osm_fetch=osm_fetch)
     when = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     OUT_MD.write_text(render_md(cands, skipped, notes, when))
-    OUT_JSON.write_text(json.dumps({"at": when, "skipped": skipped, "notes": notes,
+    if args.no_osm:  # nothing queried: carry the last run's list forward
+        try:
+            pending = json.loads(OUT_JSON.read_text()).get("osm_pending") or []
+        except (OSError, ValueError):
+            pending = []
+    else:  # absent when fetch_osm raised: then no state was covered
+        pending = osm_report.get("pending", list(US_STATES))
+    OUT_JSON.write_text(json.dumps({"at": when, "skipped": skipped, "notes": notes, "osm_pending": pending,
                                     "candidates": [asdict(c) for c in cands]}, indent=1) + "\n")
     counts = {t: sum(1 for c in cands if c.tier == t) for t in "ABCDE"}
     print(f"coverage sweep: {len(cands)} untracked candidates — " +
