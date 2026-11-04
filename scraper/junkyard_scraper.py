@@ -3022,6 +3022,26 @@ def _extend_entry(key: str, *, year_range: tuple | None = None, parts: list | No
         e["top_parts"].extend(parts)
 
 
+
+# Rows added by the 2026-11 gap blocks (PARTS_GAPS §1–13) are registered by
+# object id (a tag key would leak into the shipped part sets, which copy
+# every field). _bound_gap_rows_per_generation() splits any of them whose
+# span crosses a GENERATION_BREAKS break: the splitter skips pump/
+# compressor/motor names, and the part finder reads "fits" as the
+# same-generation donor window, so a crossing span is a false fitment claim.
+# Holding the row objects keeps their ids from being reused by later dicts.
+_GAP_BLOCK_IDS: dict[int, dict] = {}
+_GAP_BLOCK_ROWS: list[tuple[str, str, int, int]] = []  # (key, name, lo, hi) after bounding
+
+
+def _gap_extend(key: str, *, year_range: tuple | None = None, parts: list | None = None) -> None:
+    _GAP_BLOCK_IDS.update((id(p), p) for p in parts or ())
+    _extend_entry(key, year_range=year_range, parts=parts)
+
+
+def _is_gap_row(p: dict) -> bool:
+    return _GAP_BLOCK_IDS.get(id(p)) is p
+
 # --- Year-range floors lowered to include earlier generations with real markets ---
 _extend_entry("4runner", year_range=(1984, 2024), parts=[
     # 1st/2nd gen (solid-axle era) — the owner's test case, huge enthusiast market
@@ -3097,7 +3117,7 @@ for _k in ("corolla", "altima", "sentra", "malibu", "cruze", "escape", "explorer
 # down at display time, and the live eBay feed (ebay_prices.py) replaces
 # them per part once the keys exist. No engines, transmissions or
 # catalytic converters, as everywhere in this table.
-_extend_entry("altima", parts=[
+_gap_extend("altima", parts=[
     # Mechanical commodity pulls across L31/L32/L33 (2002-2018): the
     # generation pass leaves pump/compressor rows whole, like the starter.
     {"name": "Fuel Pump Module (in-tank, test before listing)", "rarity": "Uncommon", "low": 40, "high": 90, "cost": 24, "yr_min": 2002, "yr_max": 2018},
@@ -3135,7 +3155,7 @@ def _gap_rows(yr_min: int, yr_max: int, extra: list | None = None) -> list[dict]
 
 
 # Toyota Camry (7,600 cars; XV30 2002-06, XV40 2007-11, XV50 2012-17, XV70 2018+)
-_extend_entry("camry", parts=_gap_rows(2002, 2017, [
+_gap_extend("camry", parts=_gap_rows(2002, 2017, [
     {"name": "Entune / Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 35, "yr_min": 2012, "yr_max": 2017},
     {"name": "Entune 3 Touchscreen Head Unit", "rarity": "Rare", "low": 150, "high": 350, "cost": 45, "yr_min": 2018, "yr_max": 2024},
     {"name": "JBL Amp + Speakers", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 15, "yr_min": 2015, "yr_max": 2017, "option": True},  # base row stops at 2014
@@ -3147,7 +3167,7 @@ _extend_entry("camry", parts=_gap_rows(2002, 2017, [
 ]))
 
 # Ford Focus (6,350 cars; 2012-18 is the bulk)
-_extend_entry("focus", parts=_gap_rows(2008, 2018, [
+_gap_extend("focus", parts=_gap_rows(2008, 2018, [
     # DPS6 dual-clutch cars: the transmission control module is the part
     # people hunt for after the settlement years. Electronic module on the
     # gearbox, not the gearbox itself.
@@ -3162,7 +3182,7 @@ _extend_entry("focus", parts=_gap_rows(2008, 2018, [
 ]))
 
 # Chevrolet Malibu (5,760 cars; 2008-12 and 2013-15 are the bulk)
-_extend_entry("malibu", parts=_gap_rows(2004, 2024, [
+_gap_extend("malibu", parts=_gap_rows(2004, 2024, [
     {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2008, "yr_max": 2024, "option": True},
     {"name": "LTZ Leather Heated Seats (pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2008, "yr_max": 2024, "option": True},
     {"name": "17\"/18\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2008, "yr_max": 2024, "option": True},
@@ -3170,7 +3190,7 @@ _extend_entry("malibu", parts=_gap_rows(2004, 2024, [
 ]))
 
 # Ford Escape (4,850 cars; 2013-19 is the bulk)
-_extend_entry("escape", parts=_gap_rows(2001, 2019, [
+_gap_extend("escape", parts=_gap_rows(2001, 2019, [
     # EcoBoost turbos: an engine option the VIN decode can't gate here, so
     # "if equipped". Rear-mounted on the 2.0, front on the 1.6.
     {"name": "EcoBoost Turbocharger (1.6/2.0, match part #)", "rarity": "Rare", "low": 120, "high": 280, "cost": 60, "yr_min": 2013, "yr_max": 2019, "option": True},
@@ -3182,7 +3202,7 @@ _extend_entry("escape", parts=_gap_rows(2001, 2019, [
 ]))
 
 # Chevrolet Equinox (4,140 cars; 2010-17 is the bulk)
-_extend_entry("equinox", parts=_gap_rows(2005, 2024, [
+_gap_extend("equinox", parts=_gap_rows(2005, 2024, [
     {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 2005, "yr_max": 2024},
     {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15, "yr_min": 2005, "yr_max": 2024},
     {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "yr_min": 2010, "yr_max": 2024, "drive": ["awd", "4wd"]},
@@ -3194,7 +3214,7 @@ _extend_entry("equinox", parts=_gap_rows(2005, 2024, [
 
 # Nissan Sentra (4,130 cars; B16 2007-12, B17 2013-19). Floor lowered to the
 # B14 (1995-1999), which matched nothing: lamp rows for it, evergreens apply.
-_extend_entry("sentra", year_range=(1995, 2024), parts=_gap_rows(2007, 2019, [
+_gap_extend("sentra", year_range=(1995, 2024), parts=_gap_rows(2007, 2019, [
     {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 20, "yr_min": 1995, "yr_max": 1999},
     {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1995, "yr_max": 1999},
     {"name": "SR Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 110, "cost": 28, "yr_min": 2013, "yr_max": 2019, "trim": ["SR"]},
@@ -3205,7 +3225,7 @@ _extend_entry("sentra", year_range=(1995, 2024), parts=_gap_rows(2007, 2019, [
 ]))
 
 # Toyota Corolla (3,450 cars; E120/130 2003-08, E140 2009-13, E170 2014-19)
-_extend_entry("corolla", parts=_gap_rows(2003, 2019, [
+_gap_extend("corolla", parts=_gap_rows(2003, 2019, [
     {"name": "S/XSE Rear Spoiler", "rarity": "Uncommon", "low": 50, "high": 110, "cost": 28, "yr_min": 2003, "yr_max": 2019, "option": True},
     {"name": "16\"/17\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 140, "high": 300, "cost": 100, "yr_min": 2009, "yr_max": 2019, "option": True},
     {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2003, "yr_max": 2019, "option": True},
@@ -3213,7 +3233,7 @@ _extend_entry("corolla", parts=_gap_rows(2003, 2019, [
 
 # Hyundai Elantra (3,170 cars; HD 2007-10, MD 2011-16). The overlay's lamp/
 # mirror rows cover 2005-2010; the 2011-16 generation had none.
-_extend_entry("elantra", parts=_gap_rows(2007, 2016, [
+_gap_extend("elantra", parts=_gap_rows(2007, 2016, [
     {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 120, "cost": 20, "yr_min": 2011, "yr_max": 2016},
     {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 12, "yr_min": 2011, "yr_max": 2016},
     {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 15, "yr_min": 2011, "yr_max": 2016},
@@ -3817,7 +3837,7 @@ def _per_gen(gens: list[tuple[int, int]], rows: list[dict]) -> list[dict]:
 
 _SUNROOF = {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "option": True}
 
-_extend_entry("camry", parts=_per_gen([(1992, 1996), (1997, 2001)], [
+_gap_extend("camry", parts=_per_gen([(1992, 1996), (1997, 2001)], [
     *_GAP_MECH,
     _SUNROOF,
     {"name": "Leather Power Driver Seat (XLE)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
@@ -3830,7 +3850,7 @@ _GAP_PUMP, _GAP_AC, _GAP_FAN = _GAP_MECH
 # Hyundai Accent (1,323 cars generic-only; LC 2000-05, MC 2006-11, RB
 # 2012-17). A/C was optional on the base LC/MC cars, standard from 2012.
 # The entry had no tail-light row; hatch lamps differ from the sedan's.
-_extend_entry("accent", parts=[
+_gap_extend("accent", parts=[
     *_per_gen([(2000, 2005), (2006, 2011), (2012, 2017)], [_GAP_PUMP, _GAP_FAN, _TAILS]),
     *_per_gen([(2000, 2005), (2006, 2011)], [{**_GAP_AC, "option": True}]),
     *_per_gen([(2012, 2017)], [_GAP_AC]),
@@ -3843,7 +3863,7 @@ _extend_entry("accent", parts=[
 
 # Buick LeSabre (1,098 cars generic-only; H-body 1992-99 and 2000-05). The
 # entry had no tail-light row; Limited leather and alloys were options.
-_extend_entry("lesabre", parts=[
+_gap_extend("lesabre", parts=[
     *_per_gen([(1992, 1999), (2000, 2005)], [
         *_GAP_MECH,
         {"name": "Leather Power Driver Seat (Limited)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
@@ -3855,7 +3875,7 @@ _extend_entry("lesabre", parts=[
 # Buick LaCrosse (1,077 cars generic-only; W-body 2005-09, Epsilon II
 # 2010-16). The 2005-09 cars had halogen lamps (the entry's lamp row is the
 # 2010+ HID/LED one) and no tail-light row existed. AWD was offered 2010-16.
-_extend_entry("lacrosse", parts=[
+_gap_extend("lacrosse", parts=[
     *_per_gen([(2005, 2009), (2010, 2016)], [
         *_GAP_MECH,
         _TAILS,
@@ -3875,14 +3895,14 @@ _extend_entry("lacrosse", parts=[
 # Toyota Corolla 1993-2002 (E100 1993-97, E110 1998-2002; 983 cars from
 # the 1990s plus 153 2002s matched only generic rows; the 2003+ rows start
 # at E120). A/C was optional on the base 1990s cars.
-_extend_entry("corolla", parts=_per_gen([(1993, 1997), (1998, 2002)], [
+_gap_extend("corolla", parts=_per_gen([(1993, 1997), (1998, 2002)], [
     _GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}, _SUNROOF,
 ]))
 
 # Kia Soul (915 cars generic-only, all 2010-13 AM; 2014+ already had the UVO
 # and panoramic-roof rows). The entry had no tail-light or mirror row; the
 # mirror row does not claim power mirrors.
-_extend_entry("soul", parts=[
+_gap_extend("soul", parts=[
     *_per_gen([(2010, 2013), (2014, 2019)], [
         *_GAP_MECH,
         _TAILS,
@@ -4089,12 +4109,12 @@ _split_generations("civic", display="Honda Civic", make="Honda", gens=[
 # 2026-11 gap curation for the Civic lives here because the split above
 # replaces the base entry: rows go onto the generation entries directly.
 for _k, _lo, _hi in (("civic 2001-2005", 2001, 2005), ("civic 2006-2011", 2006, 2011), ("civic 2012-2015", 2012, 2015)):
-    _extend_entry(_k, parts=_gap_rows(_lo, _hi, [
+    _gap_extend(_k, parts=_gap_rows(_lo, _hi, [
         {"name": "Sunroof Glass + Motor (EX)", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "option": True},
         {"name": "EX/Si Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "option": True},
         {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 15},
     ]))
-_extend_entry("civic 2006-2011", parts=[
+_gap_extend("civic 2006-2011", parts=[
     # 8th-gen only: the navigation head unit was an EX-L/Si option.
     {"name": "Navigation Head Unit (EX-L w/ Navi)", "rarity": "Rare", "low": 100, "high": 240, "cost": 45, "option": True},
 ])
@@ -4306,7 +4326,7 @@ _split_generations("explorer", display="Ford Explorer", make="Ford", gens=[
 # 2026-11 gap curation: the biggest models still matching only generic rows
 # (Rogue 1,800 cars, CR-V 1,300, RAV4 850, Explorer 1,000). Same basis as
 # the Altima block (scraper/PARTS_GAPS_2026-11.md).
-_extend_entry("rogue", parts=_gap_rows(2008, 2020, [
+_gap_extend("rogue", parts=_gap_rows(2008, 2020, [
     {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_min": 2008, "yr_max": 2016},  # LED row covers 2017+
     {"name": "Bose Amp + Speakers", "rarity": "Uncommon", "low": 50, "high": 120, "cost": 15, "yr_min": 2008, "yr_max": 2020, "option": True},
     {"name": "Sunroof Glass + Motor", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2008, "yr_max": 2020, "option": True},
@@ -4315,7 +4335,7 @@ _extend_entry("rogue", parts=_gap_rows(2008, 2020, [
     {"name": "Roof Rack Crossbars (pair)", "rarity": "Uncommon", "low": 40, "high": 100, "cost": 20, "yr_min": 2008, "yr_max": 2020, "option": True},
     {"name": "AWD Rear Differential / Coupling", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "yr_min": 2008, "yr_max": 2020, "drive": ["awd", "4wd"]},
 ]))
-_extend_entry("cr-v", parts=_gap_rows(2002, 2016, [
+_gap_extend("cr-v", parts=_gap_rows(2002, 2016, [
     {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_min": 2002, "yr_max": 2016},  # LED row covers 2017+
     {"name": "Sunroof Glass + Motor (EX)", "rarity": "Uncommon", "low": 60, "high": 140, "cost": 30, "yr_min": 2002, "yr_max": 2016, "option": True},
     {"name": "EX-L Leather Heated Seats (pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "yr_min": 2005, "yr_max": 2016, "option": True},
@@ -4323,7 +4343,7 @@ _extend_entry("cr-v", parts=_gap_rows(2002, 2016, [
     {"name": "17\" EX Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "yr_min": 2007, "yr_max": 2016, "option": True},
     {"name": "AWD Rear Differential", "rarity": "Rare", "low": 90, "high": 200, "cost": 60, "yr_min": 2002, "yr_max": 2016, "drive": ["awd", "4wd"]},
 ]))
-_extend_entry("rav4", parts=_gap_rows(2001, 2018, [
+_gap_extend("rav4", parts=_gap_rows(2001, 2018, [
     {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 45, "high": 130, "cost": 22, "yr_min": 2001, "yr_max": 2018},  # LED row covers 2019+
     {"name": "Entune / Touchscreen Head Unit", "rarity": "Uncommon", "low": 75, "high": 200, "cost": 35, "yr_min": 2013, "yr_max": 2018},
     {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15, "yr_min": 2013, "yr_max": 2018, "option": True},
@@ -4344,38 +4364,38 @@ _extend_entry("rav4", parts=_gap_rows(2001, 2018, [
 # keep the "if equipped" WRX rows (the yard may not have said).
 UNOBTANIUM_DB["wrx"]["match"] = ["impreza wrx", "impreza sti", "wrx"]
 UNOBTANIUM_DB["mx-5"]["match"] = ["mx-5", "mx5", "miata"]   # every feed says "MX-5 Miata" today; "Miata" alone is cheap insurance
-_extend_entry("wrx", parts=[
+_gap_extend("wrx", parts=[
     {"name": "OEM Headlights (clear)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 35, "yr_min": 2002, "yr_max": 2021},
     {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15, "yr_min": 2002, "yr_max": 2021},
 ])
-_extend_entry("impreza", parts=[
+_gap_extend("impreza", parts=[
     # 1998-2001 2.5RS: the gold wheels and hood scoop are what RS cars get stripped for.
     {"name": "2.5RS Gold Alloy Wheels (set of 4)", "rarity": "Rare", "low": 200, "high": 450, "cost": 100, "yr_min": 1998, "yr_max": 2001, "trim": ["RS", "2.5RS", "2.5 RS"]},
     {"name": "2.5RS Hood Scoop", "rarity": "Rare", "low": 60, "high": 150, "cost": 15, "yr_min": 1998, "yr_max": 2001, "trim": ["RS", "2.5RS", "2.5 RS"]},
 ])
-_extend_entry("mx-5", parts=[
+_gap_extend("mx-5", parts=[
     # NA pop-ups and NB fixed lamps had no headlight row at all.
     {"name": "Pop-up Headlight Motors + Lamps (pair)", "rarity": "Rare", "low": 100, "high": 250, "cost": 30, "yr_min": 1990, "yr_max": 1997},
     {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 35, "yr_min": 1999, "yr_max": 2005},
     # NC power retractable hardtop (2007+): the mechanism is the sought part when one fails.
     {"name": "PRHT Roof Motor / Latch Mechanism", "rarity": "Rare", "low": 150, "high": 350, "cost": 40, "yr_min": 2007, "yr_max": 2015, "option": True},
 ])
-_extend_entry("4runner 2003-2009", parts=[
+_gap_extend("4runner 2003-2009", parts=[
     {"name": "Power Rear Window Regulator (liftgate glass)", "rarity": "Rare", "low": 80, "high": 200, "cost": 25},
     {"name": "Sliding Rear Cargo Deck", "rarity": "Rare", "low": 150, "high": 350, "cost": 35, "option": True},
 ])
-_extend_entry("4runner 2010-2024", parts=[
+_gap_extend("4runner 2010-2024", parts=[
     {"name": "Power Rear Window Regulator (liftgate glass)", "rarity": "Rare", "low": 80, "high": 200, "cost": 25},
     {"name": "Sliding Rear Cargo Deck", "rarity": "Rare", "low": 150, "high": 350, "cost": 35, "option": True},
     {"name": "3rd Row Seat", "rarity": "Rare", "low": 120, "high": 300, "cost": 35, "option": True},
     {"name": "X-REAS Suspension Shocks (Limited, pair)", "rarity": "Rare", "low": 150, "high": 350, "cost": 20, "trim": ["Limited"]},
     {"name": "Entune / Touchscreen Head Unit", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 35, "yr_min": 2014, "yr_max": 2019},
 ])
-_extend_entry("tacoma 2005-2015", parts=[
+_gap_extend("tacoma 2005-2015", parts=[
     {"name": "Fender Flares (color-matched, PreRunner/4x4, set)", "rarity": "Rare", "low": 150, "high": 400, "cost": 40, "option": True},
     {"name": "Composite Bed Deck Rail System + Cleats", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 15, "option": True},
 ])
-_extend_entry("tacoma 2016-2024", parts=[
+_gap_extend("tacoma 2016-2024", parts=[
     {"name": "Entune / Touchscreen Head Unit", "rarity": "Uncommon", "low": 100, "high": 250, "cost": 35, "yr_min": 2016, "yr_max": 2023},
     {"name": "Composite Bed Deck Rail System + Cleats", "rarity": "Uncommon", "low": 40, "high": 120, "cost": 15, "option": True},
 ])
@@ -4385,7 +4405,7 @@ for _k, _names in (("tacoma 2005-2015", ("TRD Skid Plate",)), ("tacoma 2016-2024
         if _p["name"] in _names:
             _p["option"] = True
 
-_extend_entry("explorer 2011-2019", parts=_gap_rows(2011, 2019, [
+_gap_extend("explorer 2011-2019", parts=_gap_rows(2011, 2019, [
     {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 25},
     {"name": "Power Liftgate Motor", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 15, "option": True},
     # The 2011+ Explorer's power transfer unit is its best-known failure.
@@ -5989,10 +6009,46 @@ def _apply_generation_bounds() -> None:
                 q = dict(p)
                 q["yr_min"], q["yr_max"] = seg_lo, seg_hi_excl - 1
                 new_parts.append(q)
+                if _is_gap_row(p):  # keep §14 registration on the copies
+                    _GAP_BLOCK_IDS[id(q)] = q
         e["top_parts"] = new_parts
 
 
 _apply_generation_bounds()
+
+
+def _bound_gap_rows_per_generation() -> None:
+    """§14: no gap-block row's "fits" span may cross a generation break.
+
+    Runs after _apply_generation_bounds (which leaves pump/compressor/motor
+    rows, and names it does not consider sensitive, unsplit). Each crossing
+    gap-block row is replaced by one copy per generation segment; all other
+    fields carry over. Rows from outside the gap blocks are not touched."""
+    seen: set[int] = set()
+    for key, e in list(UNOBTANIUM_DB.items()):
+        if id(e) in seen:
+            continue
+        seen.add(id(e))
+        breaks = GENERATION_BREAKS.get(re.sub(r" \d{4}-\d{4}$", "", key), [])
+        lo, hi = e["year_range"]
+        new_parts: list[dict] = []
+        for p in e["top_parts"]:
+            if not _is_gap_row(p):
+                new_parts.append(p)
+                continue
+            plo, phi = max(lo, p.get("yr_min", lo)), min(hi, p.get("yr_max", hi))
+            cuts = [b for b in breaks if plo < b <= phi]
+            for seg_lo, seg_hi_excl in zip([plo] + cuts, cuts + [phi + 1]):
+                q = dict(p) if cuts else p
+                if cuts:
+                    q["yr_min"], q["yr_max"] = seg_lo, seg_hi_excl - 1
+                    _GAP_BLOCK_IDS[id(q)] = q
+                new_parts.append(q)
+                _GAP_BLOCK_ROWS.append((key, p["name"], seg_lo, seg_hi_excl - 1))
+        e["top_parts"] = new_parts
+
+
+_bound_gap_rows_per_generation()
 
 
 def _merge_parts_overlay() -> None:

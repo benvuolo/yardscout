@@ -262,3 +262,48 @@ Largest generic-only groups now: Ford Focus 2000–07 (1,535), Explorer
 (704), Chevrolet Aveo (674), VW Passat (652), Buick Lucerne (621), Kia
 Forte (582), Buick Regal (576), Hyundai Tucson (564), Kia Sportage (550),
 Kia Spectra (548), Subaru Legacy (538), Lincoln MKZ (501).
+
+## 14. Gap-block rows bounded per generation (2026-11-04, owner go-ahead)
+
+**Why.** The part finder (`docs/app.js` ~5926) treats a row's "fits" range
+as the same-generation donor window. `_apply_generation_bounds` skips
+names containing pump/compressor/motor (`_GEN_MECH_EXCLUDE_RE`) and names it
+does not consider sensitive (fans, throttle bodies, AWD units, crossbars),
+so 56 rows from the §1–12 blocks shipped spans across generations (e.g.
+Camry fuel pump "2002–2017", Malibu "2004–2024"). That made a false
+cross-generation fitment claim.
+
+**Change.** Gap-block calls go through `_gap_extend`, which registers each
+row object, holding a reference so ids are not reused. `_bound_gap_rows_per_generation()`
+runs after `_apply_generation_bounds` and splits any registered row that
+crosses a `GENERATION_BREAKS` break (every gap model has breaks; no
+PARTS_GAPS notes were needed). Rows from outside the gap blocks are not
+touched.
+
+**Rows split (56 → 153 per-generation rows):** fuel pump, A/C compressor,
+radiator fan on Altima (with throttle body), Camry, Corolla, CR-V, Elantra,
+Equinox, Escape, Focus, Malibu, RAV4, Rogue, Sentra; sunroof rows on Camry,
+Corolla, CR-V, Elantra, Equinox, Malibu, RAV4, Rogue, Sentra; AWD rear units
+on CR-V, Equinox, RAV4, Rogue; roof-rack crossbars on Escape, RAV4, Rogue;
+side mirrors on Equinox and Focus; Malibu remote-start BCM. Civic, Explorer
+2011–19, the §12 enthusiast rows and the §13 rows already sat inside one
+generation.
+
+**Checks.**
+- Bands, costs and gates are identical on every piece, and the pieces
+  exactly cover the original span.
+- Whole-table diff against the previous commit: only those 56 rows changed.
+- All 12,740 distinct year/make/model combinations on the lots match
+  identical part names, gate statuses and bands before and after; only
+  "fits" moved.
+- Coverage did not drop: no entry 12,298 (3.7%) and generic-only 35,451
+  (10.6%), both unchanged.
+- New tests: no registered row crosses a break; the registry holds only
+  gap-block entries; spot checks on Camry, Malibu, Altima and Equinox; the
+  shared alternator row is untouched.
+
+**Out of scope, still crossing:** 776 rows on 196 entries outside the gap
+blocks. These are mostly the shared standard rows (alternator, starter,
+climate panel, window regulator and switch, control module, mirrors) plus
+some power liftgate/sliding-door motors and tow mirrors. Not changed here:
+owner decision whether those get the same treatment.

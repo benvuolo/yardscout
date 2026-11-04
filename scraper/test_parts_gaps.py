@@ -182,6 +182,31 @@ check("Soul 2012: sunroof + wheels 'if equipped'; 2016 keeps the panoramic row, 
       k12["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed" and "Panoramic Sunroof Assembly" in k16 and "Sunroof Glass + Motor" not in k16)
 check("Soul 2021: none of the new rows", not (MECH3 & names(2021, "Kia", "Soul", FWD)))
 
+
+# 2e. §14: no gap-block row crosses a generation break (the part finder reads
+# "fits" as the same-generation donor window)
+import re as _re
+def _breaks(key):
+    return js.GENERATION_BREAKS.get(_re.sub(r" \d{4}-\d{4}$", "", key), [])
+crossing = [r for r in js._GAP_BLOCK_ROWS if any(r[2] < b <= r[3] for b in _breaks(r[0]))]
+check("§14: no gap-block row on a GENERATION_BREAKS model crosses a break", not crossing, str(crossing[:10]))
+check("§14: registry covers the gap models (Altima, Camry, Malibu, RAV4, Soul ...)",
+      {"altima", "camry", "malibu", "rav4", "soul", "lacrosse"} <= {r[0] for r in js._GAP_BLOCK_ROWS})
+check("§14: only gap-block entries are registered (no id reuse leaks)",
+      {r[0] for r in js._GAP_BLOCK_ROWS} <= {"altima", "camry", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra",
+       "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "rogue", "cr-v", "rav4", "explorer 2011-2019", "wrx", "impreza", "mx-5",
+       "4runner 2003-2009", "4runner 2010-2024", "tacoma 2005-2015", "tacoma 2016-2024", "accent", "lesabre", "lacrosse", "soul"},
+      str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
+c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
+check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
+      c04["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2002–2006" and c15["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2012–2017")
+check("§14: Malibu 2010 compressor fits 2008–2012; Altima 2010 throttle body 2007–2012; Equinox 2012 AWD unit 2010–2017",
+      parts(2010, "Chevrolet", "Malibu", FWD)["A/C Compressor (clutch spins free)"]["fits"] == "2008–2012"
+      and parts(2010, "Nissan", "Altima", SEDAN)["Electronic Throttle Body (match part #)"]["fits"] == "2007–2012"
+      and parts(2012, "Chevrolet", "Equinox", AWD)["AWD Rear Differential / Transfer Unit"]["fits"] == "2010–2017")
+check("§14: shared non-gap rows untouched (Camry alternator still spans the entry)",
+      parts(2004, "Toyota", "Camry", FWD)["Alternator (spin-test at yard)"]["fits"] == "1992–2024")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

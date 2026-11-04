@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13 done)
+# Parts workstream — status (updated 2026-11-04, §13 and §14 done)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -34,6 +34,11 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   35,451 (10.6%); no-entry unchanged 12,298 (3.7%). New rows are bounded
   per generation with `_per_gen` (the splitter skips pump/compressor/motor
   names). Rows without a stated basis were left out and listed per model.
+- §14 (owner go-ahead): the 56 §1–12 gap-block rows whose "fits" crossed a
+  generation (pump, compressor, fan, throttle body, sunroof, AWD units,
+  crossbars, Focus/Equinox mirrors, Malibu BCM) are split per generation by
+  `_bound_gap_rows_per_generation` (153 rows). Every car's matched parts
+  are unchanged; coverage unchanged (3.7% / 10.6%). Test guards it.
 
 ## How to measure
 
@@ -47,9 +52,10 @@ here, it is outside this workstream's files).
 
 ## Open for the owner
 
-- The §2–10 mechanical rows (e.g. Camry fuel pump "fits 2002–2017") span
-  generations because `_GEN_MECH_EXCLUDE_RE` skips them in the split. Left
-  as is; say if they should be bounded per generation like §13.
+- 776 rows outside the gap blocks still have "fits" spans across a
+  generation (mostly alternator/starter/climate/window/BCM standard rows,
+  mirrors, liftgate and sliding-door motors). Say if they should be
+  bounded the same way (PARTS_GAPS §14).
 - `mine_coverage_gaps.py` fetches eBay pages by default (rule 2).
 
 ## Next
