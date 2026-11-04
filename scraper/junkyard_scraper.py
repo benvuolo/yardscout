@@ -5992,6 +5992,18 @@ _gap_extend("fiat 500", parts=[
     *_per_gen([(2014, 2019)], [{**_GAP_AC, "option": True}]),
 ])
 
+# Chevrolet Spark (330 cars generic-only; M300 2013-15, M400 2016-22, new
+# GENERATION_BREAKS 2016; M400 facelift 2019). "Spark EV" (2014-16, EPA) is
+# electric: its own entry has no rows so it shows no card (the specificity
+# guard drops "spark" for it). A/C standard 2013-15 (CG); for the 2016+ LS
+# the sources disagree, so option-flagged.
+UNOBTANIUM_DB["spark ev"] = {"display": "Chevrolet Spark EV (electric)", "make": "Chevrolet", "match": ["spark ev"], "year_range": (2014, 2016), "top_parts": []}
+_gap_extend("spark", parts=[
+    *_per_gen([(2013, 2015), (2016, 2022)], [_GAP_PUMP, _GAP_FAN]),
+    *_per_gen([(2013, 2015)], [_GAP_AC]),
+    *_per_gen([(2016, 2022)], [{**_GAP_AC, "option": True}]),
+])
+
 # ---- end of §21 block
 
 _apply_consensus_evergreens()
@@ -6266,6 +6278,7 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    "spark": [2016],                       # M300 2013-15, M400 2016-22 (PARTS_GAPS §21.3)
     "mariner": [2008],                     # 1st gen 2005-07, 2nd gen 2008-11 (PARTS_GAPS §21.1)
     "windstar": [1999],                    # 1st gen 1995-98, 2nd gen 1999-2003 (PARTS_GAPS §20.7)
     "mazda5": [2012],                      # 1st gen 2006-10, 2nd gen 2012-15, no 2011 US MY (PARTS_GAPS §20.4)
@@ -6462,6 +6475,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "lexus es": [1995, 2000, 2005],
     "windstar": [1998, 2001],
     "savana": [2003],
+    "spark": [2019],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

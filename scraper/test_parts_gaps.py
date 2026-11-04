@@ -510,6 +510,13 @@ check("§21 Fiat 500: pump/fan 2012-19; A/C plain 2012, 'if equipped' 2016; list
       and f12["A/C Compressor (clutch spins free)"].get("trim_status") is None and f16["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
       and js._max_entry_calibrated_high(js.UNOBTANIUM_DB["fiat 500e"]) == 0)
 
+k14, k18 = parts(2014, "Chevrolet", "Spark", FWD), parts(2018, "Chevrolet", "Spark", FWD)
+check("§21 Spark: rows per generation (new 2016 break); A/C plain 2014, 'if equipped' 2018; lamps cut at the 2019 facelift; Spark EV matches nothing",
+      MECH3 <= set(k14) and MECH3 <= set(k18) and k14["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2013–2015"
+      and k18["Radiator Fan Assembly"]["fits"] == "2016–2022" and k14["A/C Compressor (clutch spins free)"].get("trim_status") is None
+      and k18["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and k18["Headlights (clear, non-hazed)"]["fits"] == "2016–2018"
+      and js.match_vehicle(2015, "Chevrolet", "Spark EV") == [])
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

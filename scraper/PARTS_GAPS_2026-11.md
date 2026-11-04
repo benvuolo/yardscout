@@ -1454,3 +1454,36 @@ Result, measured on the same inventory (333,449 cars after a new scan):
 generic-only 17,518 → 17,262; the Fiat 500's own 255 cars → 0. The 500L/500X
 listings (89) stay generic-only by design. No entry 12,357 → 12,359 (the
 two 500e listings).
+
+### 21.3 Chevrolet Spark 2013–2015 (M300), 2016–2022 (M400)
+
+Basis: WP Chevrolet_Spark; consumerguide.com/used/2013-15-chevrolet-spark;
+kbb.com "2019 Chevrolet Spark freshened"; autoguide.com 2018/04 "2019
+Malibu, Cruze, Spark get facelifts"; thetruthaboutcars.com 2016/01;
+fueleconomy.gov model menus (fetched).
+- **New `GENERATION_BREAKS` "spark": [2016]:** the existing Spark lamp and
+  mirror rows are now bounded by generation.
+- **Facelift 2019 (added to `FACELIFT_BREAKS`):** "a mid-cycle facelift …
+  revised exterior styling" (WP); "new grille treatment … fog lights will
+  be more angular … Projector-style headlights … available" (KBB). The US
+  M300 launched already wearing its facelift styling, so it has no cut.
+- **A/C:** "included across the board" for 2013–15 (CG). For the 2016+ US
+  LS the sources disagree (TTAC says standard; an AutoGuide review calls
+  the LS "a car without AC").
+- **Spark EV (2014–16, EPA):** it is electric, so it now has an entry with
+  no rows and its listings show no card. Before, it carried gas-car rows
+  (alternator, starter). The specificity guard drops "spark" for these
+  listings. Three cars move to no-entry.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2013–15, 2016–22 | — | Every gas Spark. |
+| A/C compressor | 2013–15 | — | Standard. |
+| A/C compressor | 2016–22 | option | The sources disagree. |
+
+Left out, no stated basis: sunroof (no source mentions one), Spark EV
+parts (no audited band).
+
+Result (same 333,449-car inventory): generic-only 17,262 (5.2%) → 16,935
+(5.1%); Spark generic-only → 0 except the 3 EVs, which now have no entry
+(no entry 12,359 → 12,362).
