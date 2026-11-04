@@ -180,3 +180,22 @@ were already generation-split. 2018+ (HC, 29 cars) not in this block.
 
 Result: Accent generic-only 1,323 → 29 (all 2018+). Lots: generic-only
 40,963 (12.3%) → 39,669 (11.9%).
+
+### 13.3 Buick LeSabre 1992–2005 (1992–99, 2000–05)
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1992–99, 2000–05 | — | Commodity pulls on every car. |
+| Leather power driver seat (Limited) | 1992–99, 2000–05 | option | Limited trim; not VIN-decodable. |
+| Alloy wheels (set) | 1992–99, 2000–05 | option | |
+| Tail lights (pair) | 2000–05 | — | The entry had none. |
+| Sunroof | 2000–05 | option | |
+
+Left out, no stated basis: 1992–99 tail lights and sunroof (a mid-run
+lamp change could not be confirmed), head-up display (offer years not
+confirmed), upper intake plenum (an engine component, and buyers replace the
+failure-prone OEM part with the revised new one, so a used one has little
+value). Pre-1992 LeSabres (46 cars) stay outside the entry.
+
+Result: LeSabre generic-only 1,098 → 0. Lots: generic-only 39,669 (11.9%)
+→ 38,571 (11.6%).

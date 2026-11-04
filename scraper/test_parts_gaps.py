@@ -149,9 +149,16 @@ check("Accent 2003: no hatch/sunroof/wheel rows; 2019: none of the new rows",
 check("Accent 2010: one row per name", len(js.match_vehicle(2010, "Hyundai", "Accent")) == 1
       and len([p for p in js.match_vehicle(2010, "Hyundai", "Accent")[0]["top_parts"] if p["name"] == "Tail Lights (pair, uncracked)"]) == 1)
 
+l97, l03 = parts(1997, "Buick", "LeSabre", FWD), parts(2003, "Buick", "LeSabre", FWD)
+check("LeSabre 1997/2003: mechanical rows in their generation", MECH3 <= set(l97) and MECH3 <= set(l03)
+      and l97["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1992–1999" and l03["A/C Compressor (clutch spins free)"]["fits"] == "2000–2005")
+check("LeSabre 2003: tail lights + sunroof; 1997: neither", {"Tail Lights (pair, uncracked)", "Sunroof Glass + Motor"} <= set(l03)
+      and not ({"Tail Lights (pair, uncracked)", "Sunroof Glass + Motor"} & set(l97)))
+check("LeSabre: Limited seat and wheels are 'if equipped'", all(l03[n]["trim_status"] == "unconfirmed" for n in ("Leather Power Driver Seat (Limited)", "Alloy Wheels (set of 4, straight)", "Sunroof Glass + Motor")))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "lesabre", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

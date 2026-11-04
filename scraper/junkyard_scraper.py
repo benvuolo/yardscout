@@ -3841,6 +3841,17 @@ _extend_entry("accent", parts=[
     ]),
 ])
 
+# Buick LeSabre (1,098 cars generic-only; H-body 1992-99 and 2000-05). The
+# entry had no tail-light row; Limited leather and alloys were options.
+_extend_entry("lesabre", parts=[
+    *_per_gen([(1992, 1999), (2000, 2005)], [
+        *_GAP_MECH,
+        {"name": "Leather Power Driver Seat (Limited)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
+        {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+    ]),
+    *_per_gen([(2000, 2005)], [_TAILS, _SUNROOF]),
+])
+
 # --- Feed-spelling aliases: same entry object, different key the feeds use ---
 # ("Town And Country" never contained "town & country"; "Mazda 3" has a space.)
 for _alias, _key in (
