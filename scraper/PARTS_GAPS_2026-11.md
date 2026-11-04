@@ -499,3 +499,28 @@ new), the DSG/Tiptronic units (transmissions).
 
 Result: Passat generic-only 652 → 0. Lots: generic-only 29,706 (8.9%) →
 29,054 (8.7%).
+
+### 16.8 Buick Lucerne 2006–2011 (one generation)
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2006–11 | — | Every car. |
+| Tail lights (pair) | 2006–11 | — | The entry had none. |
+| Sunroof, leather heated seats (CXL/CXS), Harman Kardon audio, 17"/18" wheels | 2006–11 | option | |
+
+Left out, no stated basis: CXS Magnetic Ride shocks. The only audited band
+for that category is the CTS-V's ($300–700 a pair), which is not a fair
+anchor for a Lucerne. Also the Northstar V8 (engine).
+
+Result: Lucerne generic-only 621 → 0. Lots: generic-only 29,054 (8.7%) →
+28,433 (8.5%).
+
+### 16.9 Block totals
+
+Generic-only **35,451 (10.6%) → 28,433 (8.5%)**: 7,018 cars moved to
+model-specific rows. No entry unchanged at 12,298 (3.7%). Compared with the
+commit before §16, none of the 12,740 distinct year/make/model combinations
+on the lots lost a part or had an existing part's band or gate status
+change. `test_interchange.py`, `test_consensus_parts.py` and the other
+offline scraper tests pass. Leftovers in these models: Rio 2018+ (30),
+Century pre-1986 (3).

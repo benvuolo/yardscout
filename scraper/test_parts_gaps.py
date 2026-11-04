@@ -283,6 +283,10 @@ check("§16 Passat 2003/2008: mechanical rows per generation; Monsoon 'if equipp
 check("§16 Passat 2008: AWD decode confirms 4Motion diff; FWD decode excludes", v08["4Motion Rear Differential (match part #)"]["trim_status"] == "vin"
       and "4Motion Rear Differential (match part #)" not in names(2008, "Volkswagen", "Passat", FWD))
 
+u07 = parts(2007, "Buick", "Lucerne", FWD)
+check("§16 Lucerne 2007: mechanical rows + tail lights 2006-11; options 'if equipped'", MECH3 <= set(u07)
+      and u07["Tail Lights (pair, uncracked)"]["fits"] == "2006–2011" and u07["Harman Kardon Amp + Speakers"]["trim_status"] == "unconfirmed")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

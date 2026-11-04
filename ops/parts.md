@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §16 in progress)
+# Parts workstream — status (updated 2026-11-04, §13–16 done)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -46,12 +46,11 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   parts, bands and sharedWith identical; coverage unchanged. Test asserts
   no row on any GENERATION_BREAKS model crosses a break.
 
-- §16 (owner: "start the next parts block"; in progress): Focus 2000–07
-  done (generic-only 35,451 → 33,916, 10.6% → 10.2%); Explorer 1991–2001
-  (→ 32,743, 9.8%); Compass 2007–16 (→ 31,832, 9.5%);
-  Rio 2001–17 (→ 31,081, 9.3%); Century 1986–2005 (→ 30,380, 9.1%);
-  Aveo 2004–11 with new breaks 2007/2009 (→ 29,706, 8.9%); Passat 1998–2011
-  (→ 29,054, 8.7%).
+- §16 (owner: "start the next parts block"): Focus 2000–07, Explorer
+  1991–2001, Compass 2007–16, Rio 2001–17, Century 1986–2005, Aveo 2004–11
+  (new GENERATION_BREAKS 2007/2009), Passat 1998–2011, Lucerne 2006–11, done
+  in measured order. Generic-only 35,451 (10.6%) → 28,433 (8.5%); no-entry
+  unchanged 12,298 (3.7%). No car lost or changed an existing part.
 
 ## How to measure
 
@@ -74,9 +73,12 @@ here, it is outside this workstream's files).
 
 ## Next
 
-1. Next block by generic-only cars: Ford Focus 2000–07 (1,535), Explorer
-   1st/2nd gen (1,173), Jeep Compass (911), Kia Rio (781), Buick Century
-   (704), Chevrolet Aveo (674), VW Passat (652), Buick Lucerne (621).
-2. When the daily email's "Most searched parts / cars (7 d)" has a week of
-   data, let it reorder that list.
-3. Re-measure after each model and append to PARTS_GAPS.
+1. Next block by generic-only cars: Kia Forte (582), Buick Regal (576),
+   Hyundai Tucson (564), Kia Sportage (550), Kia Spectra (548), Subaru
+   Legacy (538), Lincoln MKZ (507), Hyundai Elantra (498, the years outside
+   the §2–10 rows).
+2. Facelift windows that are not GENERATION_BREAKS years still let a few
+   lamp rows span a facelift (Focus 2000–07 lamps over 2005, Compass
+   headlights over 2011). Flagged in §16; add facelift breaks if wanted.
+3. When the daily email's "Most searched parts / cars (7 d)" has a week of
+   data, let it reorder the list. Re-measure after each model.

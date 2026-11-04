@@ -4509,6 +4509,17 @@ _gap_extend("passat", parts=[
     ]),
 ])
 
+# Buick Lucerne 2006-2011 (one generation; 621 cars generic-only). The entry
+# had no tail-light row.
+_gap_extend("lucerne", parts=_per_gen([(2006, 2011)], [
+    *_GAP_MECH,
+    _TAILS,
+    _SUNROOF,
+    {"name": "Leather Heated Seats (CXL/CXS, pair)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 60, "option": True},
+    {"name": "Harman Kardon Amp + Speakers", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 30, "option": True},
+    {"name": "17\"/18\" Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 150, "high": 320, "cost": 100, "option": True},
+]))
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
