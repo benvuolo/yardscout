@@ -424,3 +424,22 @@ confirmed), the CVT (transmission). The existing headlight row spans
 
 Result: Compass generic-only 911 → 0. Lots: generic-only 32,743 (9.8%) →
 31,832 (9.5%).
+
+### 16.4 Kia Rio 2001–2017 (DC 2001–05, JB 2006–11, UB 2012–17)
+
+The JB and UB share their platforms with the MC and RB Accent, so the rows
+follow §13.2.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan, tail lights | 2001–05, 2006–11, 2012–17 | — | Every car; the entry had no tail-light row. |
+| A/C compressor | 2001–05, 2006–11 | option | Optional on base cars. |
+| A/C compressor | 2012–17 | — | Standard on the UB. |
+| Hatchback tail lights | 2006–11, 2012–17 | body: hatchback | Rio5 / 5-door lamps differ from the sedan's. |
+| Sunroof, alloy wheels | 2006–11, 2012–17 | option | SX/EX options. |
+
+Left out, no stated basis: 2001–05 Rio Cinco wagon lamps, sunroof and
+wheels; 2018+ (YB, 30 cars, not in this block).
+
+Result: Rio generic-only 781 → 30 (all 2018+). Lots: generic-only 31,832
+(9.5%) → 31,081 (9.3%).

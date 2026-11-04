@@ -4458,6 +4458,21 @@ _gap_extend("compass", parts=[
     ]),
 ])
 
+# Kia Rio (781 cars generic-only; DC 2001-05, JB 2006-11, UB 2012-17). The JB
+# and UB share their platforms with the MC/RB Accent, so the §13.2 structure
+# applies: A/C optional before 2012, hatch lamps body-gated, no tail-light
+# row before.
+_gap_extend("kia rio", parts=[
+    *_per_gen([(2001, 2005), (2006, 2011), (2012, 2017)], [_GAP_PUMP, _GAP_FAN, _TAILS]),
+    *_per_gen([(2001, 2005), (2006, 2011)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(2012, 2017)], [_GAP_AC]),
+    *_per_gen([(2006, 2011), (2012, 2017)], [
+        {"name": "Hatchback Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 55, "high": 140, "cost": 23, "body": ["hatchback"]},
+        _SUNROOF,
+        {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+    ]),
+])
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},

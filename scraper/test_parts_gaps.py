@@ -256,6 +256,13 @@ check("§16 Compass: pump/fan/A-C 2007-16; tail lights split at the 2011 facelif
 check("§16 Compass: AWD decode confirms rear unit, FWD excludes; 2018 none", j09["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin"
       and "AWD Rear Differential / Transfer Unit" not in j14 and not (MECH3 & names(2018, "Jeep", "Compass", FWD)))
 
+k09, k13 = parts(2009, "Kia", "Rio", FWD), parts(2013, "Kia", "Rio", FWD)
+check("§16 Rio 2009/2013: pump, fan, tail lights per generation; A/C 'if equipped' 2009, plain 2013", MECH3 <= set(k09) and MECH3 <= set(k13)
+      and k09["Tail Lights (pair, uncracked)"]["fits"] == "2006–2011" and k13["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2012–2017"
+      and k09["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and k13["A/C Compressor (clutch spins free)"].get("trim_status") is None)
+check("§16 Rio 2013 hatch decode: hatch lamps VIN-confirmed; sedan excluded", parts(2013, "Kia", "Rio", HATCH)["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin"
+      and "Hatchback Tail Lights (pair, uncracked)" not in names(2013, "Kia", "Rio", SEDAN))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
