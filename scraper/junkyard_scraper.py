@@ -3824,6 +3824,23 @@ _extend_entry("camry", parts=_per_gen([(1992, 1996), (1997, 2001)], [
     {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
 ]))
 
+_TAILS = {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15}
+_GAP_PUMP, _GAP_AC, _GAP_FAN = _GAP_MECH
+
+# Hyundai Accent (1,323 cars generic-only; LC 2000-05, MC 2006-11, RB
+# 2012-17). A/C was optional on the base LC/MC cars, standard from 2012.
+# The entry had no tail-light row; hatch lamps differ from the sedan's.
+_extend_entry("accent", parts=[
+    *_per_gen([(2000, 2005), (2006, 2011), (2012, 2017)], [_GAP_PUMP, _GAP_FAN, _TAILS]),
+    *_per_gen([(2000, 2005), (2006, 2011)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(2012, 2017)], [_GAP_AC]),
+    *_per_gen([(2006, 2011), (2012, 2017)], [
+        {"name": "Hatchback Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 55, "high": 140, "cost": 23, "body": ["hatchback"]},
+        _SUNROOF,
+        {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+    ]),
+])
+
 # --- Feed-spelling aliases: same entry object, different key the feeds use ---
 # ("Town And Country" never contained "town & country"; "Mazda 3" has a space.)
 for _alias, _key in (

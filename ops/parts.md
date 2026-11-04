@@ -31,7 +31,7 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 - §13 measured block (in progress, see PARTS_GAPS §13): measured with the
   generic-tier rule offline (`interchange_coverage.py` measures engine
   families, not generic-only). Before: no-entry 3.7%, generic-only 12.9%
-  (43,010 cars). Done: Camry 1992–2001 (→ 12.3%).
+  (43,010 cars). Done: Camry 1992–2001 (→ 12.3%), Accent 2000–17 (→ 11.9%).
 
 ## Next
 

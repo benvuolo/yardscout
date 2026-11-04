@@ -135,10 +135,23 @@ check("Camry 1995 / 1999: mechanical rows bounded to their own generation",
       and parts(1999, "Toyota", "Camry", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1997–2001"
       and parts(1999, "Toyota", "Camry", FWD)["Sunroof Glass + Motor"]["fits"] == "1997–2001")
 check("Camry 1991: still outside the entry", not names(1991, "Toyota", "Camry", FWD))
+a09, a14 = parts(2009, "Hyundai", "Accent", FWD), parts(2014, "Hyundai", "Accent", FWD)
+check("Accent 2009/2014: pump, fan, tail lights in their generation", MECH3 <= set(a09) and MECH3 <= set(a14)
+      and a09["Tail Lights (pair, uncracked)"]["fits"] == "2006–2011" and a14["Radiator Fan Assembly"]["fits"] == "2012–2017")
+check("Accent: A/C 'if equipped' 2006-11, plain 2012-17", a09["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed"
+      and a14["A/C Compressor (clutch spins free)"].get("trim_status") is None)
+check("Accent 2014 hatch decode: hatch lamps VIN-confirmed; sedan decode excludes them",
+      parts(2014, "Hyundai", "Accent", HATCH)["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin"
+      and "Hatchback Tail Lights (pair, uncracked)" not in names(2014, "Hyundai", "Accent", SEDAN))
+check("Accent 2003: no hatch/sunroof/wheel rows; 2019: none of the new rows",
+      not ({"Hatchback Tail Lights (pair, uncracked)", "Sunroof Glass + Motor"} & names(2003, "Hyundai", "Accent", FWD))
+      and not (MECH3 & names(2019, "Hyundai", "Accent", FWD)))
+check("Accent 2010: one row per name", len(js.match_vehicle(2010, "Hyundai", "Accent")) == 1
+      and len([p for p in js.match_vehicle(2010, "Hyundai", "Accent")[0]["top_parts"] if p["name"] == "Tail Lights (pair, uncracked)"]) == 1)
 
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

@@ -162,3 +162,21 @@ distributor (ignition; cheap new). 1990–91 (V20) stays outside the entry.
 
 Result: Camry 1990–2001 generic-only 2,047 → 0. Lots: generic-only 43,010
 (12.9%) → 40,963 (12.3%); no-entry unchanged at 12,298 (3.7%).
+
+### 13.2 Hyundai Accent 2000–2017 (LC 2000–05, MC 2006–11, RB 2012–17)
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2000–05, 2006–11, 2012–17 | — | Commodity pulls on every car. |
+| A/C compressor | 2000–05, 2006–11 | option | A/C was optional on the base LC/MC cars. |
+| A/C compressor | 2012–17 | — | Standard on the RB. |
+| Tail lights (pair) | 2000–05, 2006–11, 2012–17 | — | The entry had no tail-light row. |
+| Hatchback tail lights | 2006–11, 2012–17 | body: hatchback | 3-door (MC) / 5-door (RB) lamps differ from the sedan's; fewer built. Same band as the Focus hatch row. |
+| Sunroof, alloy wheels | 2006–11, 2012–17 | option | SE/premium-package options. |
+
+Left out, no stated basis: LC (2000–05) hatch lamps, sunroof and wheels
+(offer years not confirmed), SE rear spoiler. Headlights and gauge cluster
+were already generation-split. 2018+ (HC, 29 cars) not in this block.
+
+Result: Accent generic-only 1,323 → 29 (all 2018+). Lots: generic-only
+40,963 (12.3%) → 39,669 (11.9%).
