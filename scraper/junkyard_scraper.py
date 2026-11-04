@@ -24289,6 +24289,7 @@ def main():
                 _write_landed_json(payload)
                 _write_junkyards_json(payload)
                 _write_models_json(payload)
+                _write_model_lifespan_json(payload.get("scrapedAt"))
                 _write_yards_added(payload)
                 EXTRAS_FILE.write_text(json.dumps(
                     {"version": 1, "scrapedAt": payload["scrapedAt"],
