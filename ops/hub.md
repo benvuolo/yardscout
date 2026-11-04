@@ -42,3 +42,12 @@ watches are bound to it. It does not build features.
 "Pick and Pull: Junkyard Finder" (BudgetAppsCo, iOS only, $3.99/mo, $24.99/yr,
 5 free searches/day). Our keywords and Play title were retuned 2026-11-02;
 share link yardscout.io/app.
+
+## Workstream sessions open
+
+| Session | Id | Opened | Brief |
+|---|---|---|---|
+| Parts curation | session_016ZzJfMzKVhFWLabqYjTTwd | 2026-11-04 13:17 UTC | Accent, LeSabre/LaCrosse, Soul, 1990s Camry/Corolla |
+| Yards coverage | session_016ZzJfKB8HduBmXqMGt4kB8 | 2026-11-04 13:17 UTC | coverage_sweep tiers A–B: adapters, or outreach drafts for blocked sites |
+
+Not opened: eBay (blocked on keys and Terapeak), Release (needs "ship").
