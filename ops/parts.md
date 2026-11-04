@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–16 done)
+# Parts workstream — status (updated 2026-11-04, §13–16 done, §17 in progress)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -51,6 +51,12 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   (new GENERATION_BREAKS 2007/2009), Passat 1998–2011, Lucerne 2006–11, done
   in measured order. Generic-only 35,451 (10.6%) → 28,433 (8.5%); no-entry
   unchanged 12,298 (3.7%). No car lost or changed an existing part.
+
+- §17 (owner: "go on facelifts"; in progress): `FACELIFT_BREAKS` and
+  `_FACELIFT_SENSITIVE_RE` added; the bounding pass cuts appearance rows
+  (lamps, grille, bumpers, fog/marker lights) at listed facelift years.
+  Table still empty (no output change) while years are verified against
+  sources; each year will be cited in PARTS_GAPS §17.
 
 ## How to measure
 

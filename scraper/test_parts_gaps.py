@@ -287,6 +287,26 @@ u07 = parts(2007, "Buick", "Lucerne", FWD)
 check("§16 Lucerne 2007: mechanical rows + tail lights 2006-11; options 'if equipped'", MECH3 <= set(u07)
       and u07["Tail Lights (pair, uncracked)"]["fits"] == "2006–2011" and u07["Harman Kardon Amp + Speakers"]["trim_status"] == "unconfirmed")
 
+
+# 2g. §17: appearance rows (lamps, grille, bumpers, fog/marker lights) do not
+# cross a listed facelift year; other rows are not cut at facelifts.
+fl_cross, fl_mech_cut = [], []
+_seen = set()
+for _k, _e in js.UNOBTANIUM_DB.items():
+    if id(_e) in _seen:
+        continue
+    _seen.add(id(_e))
+    _fl = js.FACELIFT_BREAKS.get(_re.sub(r" \d{4}-\d{4}$", "", _k), [])
+    _lo, _hi = _e["year_range"]
+    for _p in _e["top_parts"]:
+        _a, _b = max(_lo, _p.get("yr_min", _lo)), min(_hi, _p.get("yr_max", _hi))
+        if js._FACELIFT_SENSITIVE_RE.search(_p["name"]) and any(_a < y <= _b for y in _fl):
+            fl_cross.append((_k, _p["name"], _a, _b))
+check("§17: no facelift-sensitive row crosses a listed facelift year", not fl_cross, str(fl_cross[:10]))
+check("§17: every FACELIFT_BREAKS key is a real entry base and its years fall inside the entry",
+      all(any(_re.sub(r" \d{4}-\d{4}$", "", k) == base and any(e["year_range"][0] < y <= e["year_range"][1] for y in ys)
+              for k, e in js.UNOBTANIUM_DB.items()) for base, ys in js.FACELIFT_BREAKS.items()))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

@@ -6079,6 +6079,17 @@ GENERATION_BREAKS = {
     "scion tc": [2011],
 }
 
+# §17: first US model year of mid-cycle facelifts that restyled the exterior
+# lamps/trim, per model (same keys as GENERATION_BREAKS). Only appearance rows
+# (_FACELIFT_SENSITIVE_RE) are cut at these years; mechanical and interior
+# rows are not. Every year has a cited source in PARTS_GAPS §17; models
+# without a confirmed year are left out and listed there.
+FACELIFT_BREAKS: dict[str, list[int]] = {
+}
+_FACELIFT_SENSITIVE_RE = re.compile(
+    r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
+    r"|marker light|corner light", re.IGNORECASE)
+
 
 def _apply_generation_bounds() -> None:
     """Split interchange-sensitive parts so no fits badge spans a generation.
@@ -6126,7 +6137,8 @@ _apply_generation_bounds()
 
 
 def _bound_rows_per_generation() -> None:
-    """§14/§15: no row's "fits" span may cross a generation break.
+    """§14/§15/§17: no row's "fits" span may cross a generation break, and no
+    appearance row (lamps, grille, bumpers) may cross a FACELIFT_BREAKS year.
 
     The part finder reads "fits" as the same-generation donor window, so a
     span across a break is a false fitment claim. _apply_generation_bounds
@@ -6140,13 +6152,18 @@ def _bound_rows_per_generation() -> None:
         if id(e) in seen:
             continue
         seen.add(id(e))
-        breaks = GENERATION_BREAKS.get(re.sub(r" \d{4}-\d{4}$", "", key), [])
+        base = re.sub(r" \d{4}-\d{4}$", "", key)
+        breaks = GENERATION_BREAKS.get(base, [])
+        facelifts = FACELIFT_BREAKS.get(base, [])
         lo, hi = e["year_range"]
         new_parts: list[dict] = []
         for p in e["top_parts"]:
             gap = _is_gap_row(p)
             plo, phi = max(lo, p.get("yr_min", lo)), min(hi, p.get("yr_max", hi))
-            cuts = [b for b in breaks if plo < b <= phi] if plo <= phi else []
+            row_breaks = breaks
+            if facelifts and _FACELIFT_SENSITIVE_RE.search(p["name"]):
+                row_breaks = sorted(set(breaks) | set(facelifts))  # §17
+            cuts = [b for b in row_breaks if plo < b <= phi] if plo <= phi else []
             if not cuts:
                 new_parts.append(p)
                 if gap:
