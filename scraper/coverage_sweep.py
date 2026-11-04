@@ -527,7 +527,7 @@ def fetch_osm(session, states=US_STATES, pause: float = 3.0, deadline: float | N
 # spaces as hyphens).
 GEOFABRIK_URL = "https://download.geofabrik.de/north-america/us/{slug}-latest.osm.pbf"
 GEOFABRIK_PAUSE_SEC = 5.0
-GEOFABRIK_TIMEOUT = (20, 120)     # connect, per-read
+GEOFABRIK_TIMEOUT = (20, 300)     # connect, per-read (WA/AL hit 120 s read timeouts on 2026-11-04)
 GEOFABRIK_RETRY_SLEEP = 60        # once, after 429/503
 OSMIUM_TIMEOUT = 900              # per osmium call; CA is the largest
 DISK_HEADROOM = 2.5               # need this many times the file size free (pbf + filtered + export)
@@ -597,8 +597,13 @@ def parse_osmium_geojsonseq(text: str) -> list[Candidate]:
     return out
 
 
+_TRANSIENT_DL = ("ReadTimeout", "ConnectionError", "ChunkedEncodingError", "ConnectTimeout", "ProtocolError")
+
+
 def _download(session, url: str, dest: Path, sleep) -> str:
-    """Stream one extract to disk. '' on success, else a reason."""
+    """Stream one extract to disk. '' on success, else a reason. One retry,
+    after GEOFABRIK_RETRY_SLEEP, on 429/503 or a transient network error
+    (read timeout, dropped connection); a partial file is removed first."""
     for attempt in (1, 2):
         try:
             with session.get(url, stream=True, timeout=GEOFABRIK_TIMEOUT, headers={"User-Agent": UA}) as r:
@@ -618,7 +623,13 @@ def _download(session, url: str, dest: Path, sleep) -> str:
                     return f"short read {dest.stat().st_size} of {size}"
                 return ""
         except Exception as e:
-            return type(e).__name__
+            dest.unlink(missing_ok=True)
+            if attempt == 1 and type(e).__name__ in _TRANSIENT_DL:
+                print(f"  osm download {dest.name}: {type(e).__name__}, retrying once in {GEOFABRIK_RETRY_SLEEP:.0f}s",
+                      flush=True)
+                sleep(GEOFABRIK_RETRY_SLEEP)
+                continue
+            return type(e).__name__ + (" (after one retry)" if attempt == 2 else "")
     return "HTTP 429/503 twice"
 
 

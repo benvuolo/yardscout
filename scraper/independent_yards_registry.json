@@ -3075,7 +3075,7 @@
         "auth": null,
         "format": null,
         "requests_per_scan": null,
-        "notes": "Found in the 2026-11-04 Geofabrik sweep tier E (OSM node had no website tag). Self-service yard at 4266 State Road 21, Oshkosh WI 54904. The home page shows per-make counts (Ford 144, Chevrolet 122, Toyota 57 ... about 800 in all), which look like vehicles on the lot. The per-make pages (/used-parts/ACURA/) render nothing server-side: the iis-pro-v2 plugin fills them by JavaScript, the same URG plugin as Young's parts locator. Next step: open a make page in devtools and see whether the plugin's own XHR returns vehicle rows (year/make/model/row) or part rows. Build only if it is vehicles. robots.txt: allow all except wp-admin (admin-ajax allowed)."
+        "notes": "Found in the 2026-11-04 Geofabrik sweep tier E (OSM node had no website tag). Self-service yard at 4266 State Road 21, Oshkosh WI 54904. The home page shows per-make counts (Ford 144, Chevrolet 122, Toyota 57 ... about 800 in all), which look like vehicles on the lot. The per-make pages (/used-parts/ACURA/) render nothing server-side: the iis-pro-v2 plugin fills them by JavaScript, the same URG plugin as Young's parts locator. Next step: open a make page in devtools and see whether the plugin's own XHR returns vehicle rows (year/make/model/row) or part rows. Build only if it is vehicles. robots.txt: allow all except wp-admin (admin-ajax allowed). Pin is the OSM node."
       },
       "locations": [
         {
@@ -3083,7 +3083,7 @@
           "city": "Oshkosh",
           "state": "WI",
           "lat": 44.0349,
-          "lng": -88.6383,
+          "lng": -88.6376,
           "address": "4266 State Road 21, Oshkosh, WI 54904"
         }
       ]

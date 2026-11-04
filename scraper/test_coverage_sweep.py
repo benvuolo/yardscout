@@ -546,6 +546,24 @@ with tempfile.TemporaryDirectory() as td:
         cs.fetch_osm_geofabrik(GeoSession({"texas": StreamResp(200, b"abc", length=10)}), states=("TX",), pause=0,
                                sleep=nosleep, run=FakeOsmium({}), workdir=wd)
     check("geofabrik: short read fails the state", "short read" in sbuf.getvalue(), sbuf.getvalue())
+    # transient download errors: one retry after a pause, partial file removed
+    class HalfStream(StreamResp):
+        def iter_content(self, chunk_size=1):
+            yield b"PART"
+            raise _rq.exceptions.ReadTimeout("read timed out")
+    slept.clear()
+    gs_r = GeoSession({"washington": [HalfStream(200, b"PARTIAL-PBF"), StreamResp(200, b"PBFDATA-WA")],
+                       "alabama": [_rq.exceptions.ConnectionError("reset"), _rq.exceptions.ReadTimeout("x")]})
+    rep_r = {}
+    with contextlib.redirect_stdout(io.StringIO()) as rbuf:
+        cs.fetch_osm_geofabrik(gs_r, states=("WA", "AL"), pause=0, report=rep_r, sleep=nosleep,
+                               run=FakeOsmium({"washington": ""}), workdir=wd)
+    check("geofabrik: read timeout mid-download -> partial removed, one retry succeeds",
+          rep_r["covered"] == ["WA"] and slept.count(cs.GEOFABRIK_RETRY_SLEEP) == 2
+          and [u.split("/us/")[1] for u, _ in gs_r.gets].count("washington-latest.osm.pbf") == 2, f"{rep_r} {slept}")
+    check("geofabrik: two transient failures -> state failed (pending), named in the log",
+          rep_r["pending"] == ["AL"] and "after one retry" in rbuf.getvalue() and list(wd.iterdir()) == [],
+          f"{rep_r} {rbuf.getvalue()}")
     # osmium missing: stop at once, everything pending
     def no_osmium(*a, **k):
         raise FileNotFoundError("osmium")
