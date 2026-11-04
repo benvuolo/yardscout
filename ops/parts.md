@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–16 done, §17 in progress)
+# Parts workstream — status (updated 2026-11-04, §13–17 done)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -52,11 +52,11 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   in measured order. Generic-only 35,451 (10.6%) → 28,433 (8.5%); no-entry
   unchanged 12,298 (3.7%). No car lost or changed an existing part.
 
-- §17 (owner: "go on facelifts"; in progress): `FACELIFT_BREAKS` and
-  `_FACELIFT_SENSITIVE_RE` added; the bounding pass cuts appearance rows
-  (lamps, grille, bumpers, fog/marker lights) at listed facelift years.
-  Table still empty (no output change) while years are verified against
-  sources; each year will be cited in PARTS_GAPS §17.
+- §17 (owner: "go on facelifts"): `FACELIFT_BREAKS` for 24 high-volume
+  models, each year cited in PARTS_GAPS §17. Appearance rows (lamps, grille,
+  bumpers, fog/marker lights) are cut at those years: 75 → 152 rows.
+  Per-car parts, bands and interchange notes are identical; coverage
+  unchanged. A test guards it.
 
 ## How to measure
 
@@ -83,8 +83,9 @@ The generic-only count re-matches every distinct year/make/model in
    Hyundai Tucson (564), Kia Sportage (550), Kia Spectra (548), Subaru
    Legacy (538), Lincoln MKZ (507), Hyundai Elantra (498, the years outside
    the §2–10 rows).
-2. Facelift windows that are not GENERATION_BREAKS years still let a few
-   lamp rows span a facelift (Focus 2000–07 lamps over 2005, Compass
-   headlights over 2011). Flagged in §16; add facelift breaks if wanted.
+2. Facelifts: research and add `FACELIFT_BREAKS` for the next models by
+   cars (Grand Caravan, Odyssey, Expedition, Town & Country, Silverado, Ram,
+   BMW 3, Maxima, Ranger, Suburban, Traverse, Pathfinder). The rule: a cited
+   source for every year, and models without one are left out.
 3. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.

@@ -6085,6 +6085,30 @@ GENERATION_BREAKS = {
 # rows are not. Every year has a cited source in PARTS_GAPS §17; models
 # without a confirmed year are left out and listed there.
 FACELIFT_BREAKS: dict[str, list[int]] = {
+    "altima": [2005, 2010, 2016],
+    "camry": [2000, 2005, 2010, 2015],
+    "focus": [2005, 2015],           # 2008-11 had no facelift
+    "malibu": [2006, 2014, 2019],    # 2008-12 had no facelift
+    "accord": [2006, 2011],
+    "fusion": [2010, 2017, 2019],
+    "escape": [2005, 2017],
+    "f-150": [2013],
+    "cruze": [2015],                 # US; the 2013 facelift was not sold here
+    "sonata": [2014, 2018],
+    "sentra": [2010, 2016],
+    "equinox": [2016],
+    "corolla": [2005, 2011, 2017],
+    "elantra": [2014, 2019],
+    "explorer": [2016, 2018],
+    "taurus": [2013],
+    "jetta": [2015],
+    "versa": [2015],                 # sedan; Note hatch year unconfirmed (cut is conservative)
+    "rogue": [2011, 2017],
+    "civic": [2004, 2009],
+    "compass": [2011],
+    "impala": [2012],
+    "optima": [2014, 2019],
+    "mazda3": [2012, 2017],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

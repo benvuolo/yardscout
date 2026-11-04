@@ -524,3 +524,71 @@ on the lots lost a part or had an existing part's band or gate status
 change. `test_interchange.py`, `test_consensus_parts.py` and the other
 offline scraper tests pass. Leftovers in these models: Rio 2018+ (30),
 Century pre-1986 (3).
+
+## 17. Facelift bounds for appearance rows (2026-11-04, owner: "go on facelifts")
+
+**Rule.** `FACELIFT_BREAKS` lists the first US model year of each mid-cycle
+facelift that restyled the exterior. The §15 pass (run after
+`_apply_platform_families`) cuts appearance rows, those matching
+`_FACELIFT_SENSITIVE_RE` (headlights, tail lights, grille, bumpers,
+fog/marker/corner lights), at those years as well as at the generation
+breaks. Mechanical and interior rows are not cut at facelifts. A cut
+applies to every appearance row on the model even where a source does not
+say that particular lamp changed: splitting only narrows a "fits" window,
+so it cannot create a false fitment claim; leaving a span across a
+facelift could.
+
+**Sources.** Researched 2026-11-04, mostly Wikipedia model pages
+(en.wikipedia.org/wiki/<model page>), corroborated by manufacturer press
+material where noted. Quotes were read through a summarising fetch tool;
+spot-check one against the page before relying on it for fitment.
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Nissan Altima | 2005, 2010, 2016 | L31 "new front grille, all-red taillights"; L32 2010 "new front fascia, hood, and headlights"; L33 2016 "new front and rear bumpers, headlamps, and taillights" (Nissan_Altima) |
+| Toyota Camry | 2000, 2005, 2010, 2015 | XV20 "mid-model upgrade to the front and rear fascias"; XV30 "new headlight and taillight designs, redesigned front bumper"; XV40 "updated front fascia, including grille and bumper"; XV50 near-total reskin (Wikipedia per generation; pressroom.toyota.com 2014 NYIAS reveal) |
+| Ford Focus | 2005, 2015 | C170 "a new front bumper facia", "new tail lamps"; 2015 refresh "thinner and sharper headlights, a new trapezoidal grille". **2008–11: no facelift found.** |
+| Chevrolet Malibu | 2006, 2014, 2019 | 2006 "front fascia removing the chrome bar in favor of a smaller rectangular grille"; 2014 front restyle (Autoblog: headlamps carried over); 2019 "new larger front grille". **2008–12: no facelift.** |
+| Honda Accord | 2006, 2011 | hondanews.com 2006: "new front and rear styling with new bumper fascias, front grille"; 2011 "new front fascias and updated tail lamps" (sedan and coupe) |
+| Ford Fusion | 2010, 2017, 2019 | 2010 "revised front and rear end fascias"; 2017 "new front and rear end styling"; 2019 "updated front and rear styling" |
+| Ford Escape | 2005, 2017 | 2005 "a redesigned front bumper" plus press "new grille and quad headlamps"; 2017 "reshaped LED taillights", new grille |
+| Ford F-150 | 2013 | "a new 2011+ Super Duty–styled grille" (twelfth generation page) |
+| Chevrolet Cruze | 2015 | US 2015 refresh (new front fascia/headlamps). The 2013 facelift was other markets only, so it is not used. |
+| Hyundai Sonata | 2014, 2018 | YF "facelift in late 2013, for the 2014 model year"; LF 2018 "new headlights, tail lights, cascading grille" |
+| Nissan Sentra | 2010, 2016 | B16 2010 "Altima-inspired grille", front bumper; B17 2016 "new front and rear bumpers, lights" |
+| Chevrolet Equinox | 2016 | "a new grille, headlights, wheels, and front fascia, as well as reworked tail lights" |
+| Toyota Corolla | 2005, 2011, 2017 | E120 2005 "revised front bumper and grille"; E140 2011 grille, headlights, bumpers, rear lamps; E170 2017 "new headlight design", "redesigned taillights" |
+| Hyundai Elantra | 2014, 2019 | MD 2014 "new front and rear styling with tinted tail lights"; AD 2019 new headlights and "redesigned tail lights" |
+| Ford Explorer | 2016, 2018 | 2016 "redesigned front fascia, hood, and lower bumper", "restyled LED tail lamps"; 2018 front fascia and fog-light update |
+| Ford Taurus | 2013 | "revised hood, front and rear fascias", "restyled headlamps", LED taillights |
+| VW Jetta | 2015 | A6 2015 updates incl. front and rear styling |
+| Nissan Versa | 2015 | sedan: "redesigned tail lights and larger headlights". The Versa Note's year is unconfirmed; the cut also applies to it, which can only narrow its windows. |
+| Nissan Rogue | 2011, 2017 | S35 2011 "new front fascia and grille"; T32 2017 "restyled headlights and tail lights" |
+| Honda Civic | 2004, 2009 | 7th gen 2004 "new headlights, bumper, and grille"; 8th gen 2009 "front bumper and grille were restyled" |
+| Jeep Compass | 2011 | Stellantis media release: "new fascia, new headlamps and a new grille ... new rear fascia ... new LED taillamps" |
+| Chevrolet Impala | 2012 | "the exterior received a slight refresh"; new grille (cars.com) |
+| Kia Optima | 2014, 2019 | kiamedia.com 2014: "updated front and rear fascias"; 2019 US refresh (secondary press for part detail) |
+| Mazda3 | 2012, 2017 | 2012 "revised grille and air intakes ... rear valance"; 2017 "new front and rear exterior styling" |
+
+**Left out (no confirmed facelift, or not yet researched):** Focus
+2008–11 and Malibu 2008–12 (none found); the Versa Note's own facelift
+year and the Elantra coupe (unconfirmed). Every other `GENERATION_BREAKS`
+model is not researched yet and is left as is. The top remaining by cars:
+Grand Caravan, Odyssey, Expedition, Town & Country, Silverado, Ram, BMW 3,
+Maxima, Ranger, Suburban, Traverse, Pathfinder.
+
+**Checks.**
+- 75 appearance rows became 152 facelift-bounded pieces, with identical
+  fields that exactly cover the original years. No mechanical or interior
+  row was touched.
+- On the current lots (332,883 cars after today's scan), every distinct
+  year/make/model matches identical part names, gate statuses, bands and
+  `sharedWith` notes before and after. Coverage is therefore unchanged:
+  generic-only 28,395 (8.5%), no entry 12,291 (3.7%).
+- `test_interchange.py`, `test_consensus_parts.py` and the other offline
+  scraper tests pass. Two `test_parts_gaps.py` checks asserted spans that
+  crossed a facelift (Equinox tail lights 2010–17, Elantra headlights
+  2011–16); they now assert the facelift-bounded windows.
+- New checks: no facelift-sensitive row crosses a listed facelift year;
+  every table key is a real entry; Focus/Compass spot checks; a mechanical
+  row (Compass fuel pump) is not cut.

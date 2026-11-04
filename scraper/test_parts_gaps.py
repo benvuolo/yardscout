@@ -93,14 +93,16 @@ check("Focus 2013: TCM row; Focus 2010: none", "DCT Transmission Control Module 
 check("Escape 2014 AWD: PTU VIN-confirmed; FWD decode: excluded", parts(2014, "Ford", "Escape", AWD)["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin"
       and "AWD Power Transfer Unit (PTU)" not in names(2014, "Ford", "Escape", FWD))
 check("Escape 2014: turbo is 'if equipped'", parts(2014, "Ford", "Escape", FWD)["EcoBoost Turbocharger (1.6/2.0, match part #)"]["trim_status"] == "unconfirmed")
-check("Equinox 2012: tail lights now exist, gen-bounded", parts(2012, "Chevrolet", "Equinox", FWD)["Tail Lights (pair, uncracked)"]["fits"] == "2010–2017")
+check("Equinox 2012/2016: tail lights exist, bounded at the 2016 facelift (§17)", parts(2012, "Chevrolet", "Equinox", FWD)["Tail Lights (pair, uncracked)"]["fits"] == "2010–2015"
+      and parts(2016, "Chevrolet", "Equinox", FWD)["Tail Lights (pair, uncracked)"]["fits"] == "2016–2017")
 check("Sentra 2015 listed as SR: spoiler listing-confirmed", parts(2015, "Nissan", "Sentra SR")["SR Rear Spoiler"]["trim_status"] == "listing")
 check("Elantra 2013: headlights/mirrors/tails now exist", {"Headlights (clear, non-hazed)", "Side Mirrors (power, pair)", "Tail Lights (pair, uncracked)"} <= names(2013, "Hyundai", "Elantra", FWD))
 # §15: the 2005-10 overlay row is now bounded at the 2007 break (2005-06 / 2007-10).
 check("Elantra 2005 + 2008: still have the 2005-10 overlay lamp rows (merge is window-aware), per generation",
       parts(2005, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)", {}).get("fits") == "2005–2006"
       and parts(2008, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)", {}).get("fits") == "2007–2010", str(parts(2008, "Hyundai", "Elantra", FWD).get("Headlights (clear, non-hazed)")))
-check("Elantra 2013: lamp row is the 2011-16 one", parts(2013, "Hyundai", "Elantra", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2011–2016")
+check("Elantra 2013/2015: lamp row is the 2011-16 one, bounded at the 2014 facelift (§17)", parts(2013, "Hyundai", "Elantra", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2011–2013"
+      and parts(2015, "Hyundai", "Elantra", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2014–2016")
 check("Camry 2010/2013: overlay JBL (2002-14) survives next to the 2015-17 row, per generation",
       parts(2010, "Toyota", "Camry", FWD).get("JBL Amp + Speakers", {}).get("fits") == "2007–2011"
       and parts(2013, "Toyota", "Camry", FWD).get("JBL Amp + Speakers", {}).get("fits") == "2012–2014", str(parts(2010, "Toyota", "Camry", FWD).get("JBL Amp + Speakers")))
@@ -306,6 +308,11 @@ check("§17: no facelift-sensitive row crosses a listed facelift year", not fl_c
 check("§17: every FACELIFT_BREAKS key is a real entry base and its years fall inside the entry",
       all(any(_re.sub(r" \d{4}-\d{4}$", "", k) == base and any(e["year_range"][0] < y <= e["year_range"][1] for y in ys)
               for k, e in js.UNOBTANIUM_DB.items()) for base, ys in js.FACELIFT_BREAKS.items()))
+
+check("§17: Focus 2003 lamps fit 2000–2004, Compass 2013 headlights 2011–2016; Focus 2003 fuel pump not cut (mechanical)",
+      parts(2003, "Ford", "Focus", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2000–2004"
+      and parts(2013, "Jeep", "Compass", FWD)["Headlights (clear pair)"]["fits"] == "2011–2016"
+      and parts(2008, "Jeep", "Compass", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2007–2016")
 
 # 3. band sanity + lint
 bad = []
