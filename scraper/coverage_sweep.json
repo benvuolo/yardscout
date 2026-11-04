@@ -1,10 +1,60 @@
 {
- "at": "2026-11-03T17:27:55Z",
+ "at": "2026-11-04T15:42:08Z",
  "skipped": {
-  "tracked": 55
+  "tracked": 76
  },
  "notes": [
-  "OpenStreetMap: Overpass failed for AL, AK, AZ; not queried: AR, CA, CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY."
+  "OpenStreetMap: Overpass failed for AL, AK, AZ; not queried: CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY."
+ ],
+ "osm_pending": [
+  "AL",
+  "AK",
+  "AZ",
+  "CO",
+  "CT",
+  "DE",
+  "FL",
+  "GA",
+  "HI",
+  "ID",
+  "IL",
+  "IN",
+  "IA",
+  "KS",
+  "KY",
+  "LA",
+  "ME",
+  "MD",
+  "MA",
+  "MI",
+  "MN",
+  "MS",
+  "MO",
+  "MT",
+  "NE",
+  "NV",
+  "NH",
+  "NJ",
+  "NM",
+  "NY",
+  "NC",
+  "ND",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VT",
+  "VA",
+  "WA",
+  "WV",
+  "WI",
+  "WY"
  ],
  "candidates": [
   {
@@ -81,25 +131,6 @@
     "live_rows": 0,
     "newest": "",
     "self_service": false
-   }
-  },
-  {
-   "name": "ARIO AUTO PARTS",
-   "city": "",
-   "state": "",
-   "lat": 30.2535,
-   "lng": -97.7484,
-   "website": "https://ario.autorecycler.io/yard/harolds-auto-parts-u-pull-it",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "on Ario but stale: 610 rows, newest set-out 2026-09-29",
-   "known_status": "",
-   "extra": {
-    "slug": "harolds-auto-parts-u-pull-it",
-    "live_rows": 610,
-    "newest": "2026-09-29",
-    "self_service": true
    }
   },
   {
@@ -416,12 +447,12 @@
    "source": "ario",
    "tier": "D",
    "platform": "Ario (autorecycler.io)",
-   "evidence": "live on Ario (509 rows) but Ario lists it as not self-service",
+   "evidence": "live on Ario (510 rows) but Ario lists it as not self-service",
    "known_status": "",
    "extra": {
     "slug": "a1-metals",
-    "live_rows": 509,
-    "newest": "2026-11-02",
+    "live_rows": 510,
+    "newest": "2026-11-03",
     "self_service": false
    }
   },
@@ -499,25 +530,6 @@
     "live_rows": 0,
     "newest": "",
     "self_service": false
-   }
-  },
-  {
-   "name": "PRESTIGE PULL YOUR PART",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/prestige-pull-your-part",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "prestige-pull-your-part",
-    "live_rows": 0,
-    "newest": "",
-    "self_service": true
    }
   },
   {
@@ -787,25 +799,6 @@
    }
   },
   {
-   "name": "U-PULL IT AUTO SALVAGE OF PADUCAH",
-   "city": "",
-   "state": "",
-   "lat": null,
-   "lng": null,
-   "website": "https://ario.autorecycler.io/yard/asop",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "asop",
-    "live_rows": 0,
-    "newest": "",
-    "self_service": false
-   }
-  },
-  {
    "name": "YETI USED AUTO PARTS",
    "city": "",
    "state": "",
@@ -901,101 +894,6 @@
    }
   },
   {
-   "name": "Blue & Gold Auto Salvage",
-   "city": "",
-   "state": "",
-   "lat": 32.981,
-   "lng": -80.0154,
-   "website": "https://ario.autorecycler.io/yard/blue--gold-auto-salvage-goose-creek-south-carolina",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "blue--gold-auto-salvage-goose-creek-south-carolina",
-    "live_rows": 0,
-    "newest": "",
-    "self_service": true
-   }
-  },
-  {
-   "name": "Young's U-Pull It",
-   "city": "",
-   "state": "",
-   "lat": 35.2826,
-   "lng": -78.0478,
-   "website": "https://ario.autorecycler.io/yard/youngs-u-pull-it-north-carolina",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "youngs-u-pull-it-north-carolina",
-    "live_rows": 0,
-    "newest": "",
-    "self_service": true
-   }
-  },
-  {
-   "name": "Bevell's Pull It Yourself Used Auto Parts",
-   "city": "",
-   "state": "",
-   "lat": 35.3513,
-   "lng": -78.0178,
-   "website": "https://ario.autorecycler.io/yard/goldsboro-north-carolina-bevells-pull-it-yourself-used-auto-parts",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "goldsboro-north-carolina-bevells-pull-it-yourself-used-auto-parts",
-    "live_rows": 0,
-    "newest": "",
-    "self_service": true
-   }
-  },
-  {
-   "name": "Sam's Pull A Part",
-   "city": "",
-   "state": "",
-   "lat": 42.2372,
-   "lng": -71.7832,
-   "website": "https://ario.autorecycler.io/yard/sams-pull-a-part",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "sams-pull-a-part",
-    "live_rows": 0,
-    "newest": "",
-    "self_service": false
-   }
-  },
-  {
-   "name": "New org",
-   "city": "",
-   "state": "",
-   "lat": 39.5165,
-   "lng": -74.6632,
-   "website": "https://ario.autorecycler.io/yard/rt-50-u-pull-it-nj",
-   "source": "ario",
-   "tier": "E",
-   "platform": "Ario (autorecycler.io)",
-   "evidence": "Ario org exists but not on the live backend",
-   "known_status": "",
-   "extra": {
-    "slug": "rt-50-u-pull-it-nj",
-    "live_rows": 0,
-    "newest": "",
-    "self_service": false
-   }
-  },
-  {
    "name": "Jamm Junkyard",
    "city": "",
    "state": "",
@@ -1070,6 +968,20 @@
     "newest": "",
     "self_service": false
    }
+  },
+  {
+   "name": "Arkansas Pik-A-Part Auto Salvage",
+   "city": "Hartman",
+   "state": "AR",
+   "lat": 35.4927556,
+   "lng": -93.5967444,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {}
   }
  ]
 }
