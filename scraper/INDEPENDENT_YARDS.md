@@ -807,3 +807,33 @@ ENTRIES were added for the new yards. Two existing ones were fixed: Memphis
 and Millington had been falling through to the IA/NE "U-Pull-It" link, and
 Buddy's, Marion County, 662, CP's and Genesis had no entry, which made
 `validate()` exit. A regeneration pass will write them into app.js.
+
+## 2026-11-04 — Review of the 2026-11-03 coverage sweep (no adapters built)
+
+The sweep had **0 tier A, 0 tier B, 0 tier C**. That leaves the 1 tier-D row and
+55 tier-E rows. Every tier-E row is an Ario org that is either missing from the
+live backend or stale. OSM did not run for most states, so the sweep returned no
+OSM candidates. Each named, plausibly self-service yard was checked by hand (web
+search plus a polite fetch of the yard's own site and robots.txt). No site
+blocked us, so **no outreach drafts** were written.
+
+| Yard | Finding | Outcome |
+|---|---|---|
+| Harold's Auto Parts U-Pull-It, Briggs TX (Ario `harolds-auto-parts-u-pull-it`) | The yard embeds the Ario feed on its own `/inventory/` page, so it chose this feed. Ario marks it `is_self_service`. The feed has 612 rows, 606 with a row number. Every dated row was set out 2026-09-09..09-25 (one more on 09-29) and nothing since, which looks like a one-time load. The sweep pin is central Austin, but the yard is in Briggs. | registry `candidate`. To wire it, add an ARIO_CHAINS config entry once set-outs newer than 30 days appear |
+| Young's U-Pull-It, Dudley NC | Self-service (own site upull.youngsautocenter.com). "Our Inventory" is an iis-pro-v2 **part-type** search over the full-service stock, and the latest-arrivals pages render no cars. | `directory-only` |
+| Sam's Pull-A-Part, Worcester MA | Run by Linder's, Inc. lindersparts.com/recent-arrivals lists Linder's full-service purchases, not the Sam's lot. | `directory-only` |
+| Route 50 U-Pull-It by Dirkes, Mays Landing NJ | No website (the domains don't resolve or are parked). Directory listings only. | `directory-only` |
+| U-Pull It Auto Salvage of Paducah KY | No website. KY SOS record and directory listings only. | `directory-only` |
+| A-Z U-Pull-It (Shoemakersville PA) | A directory lists it as closed, and atozupullit.com has a mismatched certificate. | not added |
+| TAS Recycling Kingsport TN | The site is scrap-metal and junk-car buying. Its parts search is a full-service locator (used-auto-parts.biz), and there is no Kingsport self-service evidence. | not added |
+| Salisbury Auto Salvage MA | Full-service. http redirects to car-part.com (a parts locator). | not added (out of scope) |
+| Jamm Junkyard FL, Jalopy Wizards SC, Southern Auto Salvage NC, Gaston Towing & Recovery NC | No website found. Nothing confirms self-service beyond Ario's org flag. | not added |
+| A-1 Metals & Auto Salvage CA (tier D) | Live on Ario, but Ario marks it not self-service (full-service dismantler). | not added (out of scope) |
+| Yank A Part | Only 1 Ario row (2024), and yankapart.com is a parked lander. | not added |
+| Remaining Ario orgs (CA wreckers, "Test Auto Parts", "Riteway Demo", "Create Digital Growth Inc.", duplicate orgs, LKQ San Bernadino) | Full-service wreckers, vendor test/demo tenants, or a chain we already cover. | skipped |
+
+Already tracked but re-listed by the sweep: Bevell's, Blue & Gold and Prestige.
+Their registry locations had no `ario_slug`, so the sweep's dedupe missed them.
+Those slugs are now set, and the new entries carry theirs too.
+`scraper/coverage_candidates.md` is the parts-gap miner's report (Parts
+workstream), not a yard list. It has no tiers and was not acted on here.
