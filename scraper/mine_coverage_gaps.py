@@ -1,63 +1,46 @@
 #!/usr/bin/env python3
-"""Self-expanding coverage miner — finds UNOBTANIUM_DB blind spots, gathers
-sold-price evidence, and PROPOSES entries. Zero LLM tokens, fully deterministic.
+"""Coverage miner — finds UNOBTANIUM_DB blind spots and PROPOSES groups to
+curate. Zero LLM tokens, fully deterministic, offline.
 
 Pipeline (monthly via .github/workflows/coverage-mine.yml, or run by hand):
 
-  1. Inventory gap analysis (always works, offline): reads the live inventory
+  1. Inventory gap analysis: reads the live inventory
      (docs/data/inventory_live.json) and ranks (make, model, year-band) groups
      by vehicle count where the match rate is zero OR the matched parts are
      only generic commuter parts (headlights/mirrors/tail lights tier). Known
      enthusiast platforms (static pattern list below) present in inventory
      with thin part sets are flagged and boosted.
-  2. Evidence gathering (best-effort): for the top N groups, politely fetches
-     eBay sold/completed-listing search pages per part-category search term
-     (~1 request / 2s, UA set, responses cached to scraper/.cache/ebay/).
-     Parses sold prices -> median/count per category plus sample titles.
-     eBay's official sold-data API (Marketplace Insights) is gated, so this is
-     public-page HTML parsing: if the markup changes or the network blocks us,
-     the run FAILS SOFT — the report says which groups got no data and the
-     inventory-side analysis still ships.
-  3. Output: scraper/coverage_candidates.md (human review report with entry
-     skeletons) + scraper/coverage_candidates.json (machine-readable).
+  2. Output: scraper/coverage_candidates.md (human review report) +
+     scraper/coverage_candidates.json (machine-readable).
+
+No eBay page fetching. CLAUDE.md rule 2: eBay data comes only through its
+APIs (ebay_prices.py), never from scraped pages (robots.txt disallows /sch/).
+The old sold-listing page fetcher was removed on 2026-11-04. Price evidence
+for curated rows comes from the yard price lists and the eBay API feed.
+`--no-fetch` is still accepted (it is now the only behaviour).
 
 IMPORTANT: this script proposes, it never edits UNOBTANIUM_DB. Curation stays
 a human/agent review step.
 
 Usage:
-  python scraper/mine_coverage_gaps.py                 # top 15 groups, fetch
-  python scraper/mine_coverage_gaps.py --top 10 --categories 5
-  python scraper/mine_coverage_gaps.py --no-fetch      # inventory analysis only
+  python scraper/mine_coverage_gaps.py                 # top 15 groups
+  python scraper/mine_coverage_gaps.py --top 10 --min-count 40
 """
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
-import statistics
 import sys
-import time
-from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 
-try:
-    import requests
-except ImportError:
-    requests = None
-
 ROOT = Path(__file__).resolve().parent.parent
 INVENTORY = ROOT / "docs" / "data" / "inventory_live.json"
-CACHE_DIR = ROOT / "scraper" / ".cache" / "ebay"
 OUT_MD = ROOT / "scraper" / "coverage_candidates.md"
 OUT_JSON = ROOT / "scraper" / "coverage_candidates.json"
 
-UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/128.0 Safari/537.36")
-FETCH_DELAY_SEC = 2.0
-CACHE_MAX_AGE_DAYS = 20  # a monthly schedule always refetches; reruns are free
 
 # Parts whose presence alone doesn't count as real coverage — every commuter
 # car gets these. A group whose matched parts are ALL from this tier is still
@@ -107,24 +90,6 @@ ENTHUSIAST_PLATFORMS: list[tuple[str, str, str, tuple | None]] = [
     ("Golf GTI / R",             "volkswagen", r"\bgti\b|\bgolf r\b", None),
     ("Tacoma (solid resale)",    "toyota",     r"\btacoma\b", None),
     ("22RE Pickup / Hilux",      "toyota",     r"\bpickup\b|\bhilux\b", (1979, 1995)),
-]
-
-# Fixed part-category search terms tried per group (order = priority; a run's
-# --categories cap trims from the end). Deterministic — no model-specific
-# cleverness, the search term is "<year-band mid> <make> <model> <term>".
-PART_CATEGORY_TERMS = [
-    "seats",
-    "tail lights",
-    "headlights",
-    "grille",
-    "gauge cluster",
-    "front bumper",
-    "doors",
-    "engine",
-    "transmission",
-    "center console",
-    "steering wheel",
-    "wheels oem",
 ]
 
 
@@ -218,114 +183,6 @@ def analyze_gaps(min_count: int) -> list[dict]:
     return out
 
 
-# ------------------------------------------------------ eBay sold evidence --
-
-class SoldFetcher:
-    """Polite, cached eBay sold-listings page fetcher. Fails soft: after 3
-    consecutive failures the source is disabled for the rest of the run."""
-
-    def __init__(self, enabled: bool = True, cache_days: int = CACHE_MAX_AGE_DAYS):
-        self.enabled = enabled and requests is not None
-        self.failures = 0
-        self.cache_days = cache_days
-        self.last_fetch = 0.0
-        CACHE_DIR.mkdir(parents=True, exist_ok=True)
-
-    def _cache_path(self, query: str) -> Path:
-        return CACHE_DIR / (hashlib.sha1(query.encode()).hexdigest()[:16] + ".html")
-
-    def fetch(self, query: str) -> str | None:
-        cache = self._cache_path(query)
-        if cache.exists() and (time.time() - cache.stat().st_mtime) < self.cache_days * 86400:
-            return cache.read_text(errors="replace")
-        if not self.enabled or self.failures >= 3:
-            return None
-        wait = FETCH_DELAY_SEC - (time.time() - self.last_fetch)
-        if wait > 0:
-            time.sleep(wait)
-        try:
-            r = requests.get(
-                "https://www.ebay.com/sch/i.html",
-                params={"_nkw": query, "LH_Sold": "1", "LH_Complete": "1", "_ipg": "60"},
-                headers={"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9"},
-                timeout=25,
-            )
-            self.last_fetch = time.time()
-            body = r.text
-            if r.status_code != 200 or "captcha" in body.lower() or "Pardon Our Interruption" in body:
-                self.failures += 1
-                return None
-            self.failures = 0
-            cache.write_text(body)
-            return body
-        except Exception:
-            self.failures += 1
-            return None
-
-
-ITEM_RE = re.compile(
-    r'<(?:li|div)[^>]*class="[^"]*s-(?:item|card)[^"]*"[^>]*>(.*?)</(?:li|div)>',
-    re.S)
-TITLE_RE = re.compile(
-    r'class="[^"]*s-(?:item|card)__title[^"]*"[^>]*>(?:<[^>]+>)*([^<]{10,200})')
-PRICE_RE = re.compile(
-    r'class="[^"]*s-(?:item|card)__price[^"]*"[^>]*>(?:<[^>]+>)*\$([\d,]+)(?:\.\d\d)?')
-
-
-def parse_sold(body: str) -> list[tuple[str, int]]:
-    """(title, sold price) pairs. Tries BeautifulSoup when available, falls
-    back to regex over item blocks. Empty result = markup changed/blocked."""
-    results: list[tuple[str, int]] = []
-    try:
-        from bs4 import BeautifulSoup  # optional dep, present in CI
-        soup = BeautifulSoup(body, "html.parser")
-        for item in soup.select("li.s-item, li.s-card, div.s-item"):
-            t = item.select_one(".s-item__title, .s-card__title")
-            p = item.select_one(".s-item__price, .s-card__price")
-            if not t or not p:
-                continue
-            m = re.search(r"\$([\d,]+)", p.get_text())
-            if not m:
-                continue
-            title = t.get_text(" ", strip=True)
-            if title.lower().startswith("shop on ebay"):
-                continue  # eBay's placeholder first tile
-            results.append((title, int(m.group(1).replace(",", ""))))
-    except ImportError:
-        for block in ITEM_RE.findall(body):
-            tm, pm = TITLE_RE.search(block), PRICE_RE.search(block)
-            if tm and pm:
-                results.append((tm.group(1).strip(), int(pm.group(1).replace(",", ""))))
-    return [(t, v) for t, v in results if 10 <= v <= 20000]
-
-
-def gather_evidence(group: dict, fetcher: SoldFetcher, categories: list[str]) -> dict:
-    b_lo, b_hi = band_years(group["year_band"])
-    mid_year = (b_lo + b_hi) // 2 if b_lo else ""
-    cats = {}
-    for term in categories:
-        query = f"{mid_year} {group['make']} {group['model']} {term}".strip()
-        body = fetcher.fetch(query)
-        if body is None:
-            cats[term] = {"status": "fetch-failed", "query": query}
-            continue
-        sold = parse_sold(body)
-        if not sold:
-            cats[term] = {"status": "no-parse", "query": query}
-            continue
-        prices = sorted(v for _, v in sold)
-        cats[term] = {
-            "status": "ok",
-            "query": query,
-            "count": len(prices),
-            "median": int(statistics.median(prices)),
-            "p25": prices[len(prices) // 4],
-            "p75": prices[(3 * len(prices)) // 4],
-            "sample_titles": [t for t, _ in sold[:4]],
-        }
-    return cats
-
-
 # ----------------------------------------------------------------- output --
 
 def rarity_for(median: int) -> str:
@@ -358,17 +215,15 @@ def skeleton_for(group: dict, evidence: dict) -> dict:
 
 
 def write_outputs(gaps: list[dict], mined: list[dict], top_n: int,
-                  fetch_enabled: bool, out_md: Path, out_json: Path) -> None:
+                  out_md: Path, out_json: Path) -> None:
     today = date.today().isoformat()
-    fetched_ok = sum(1 for m in mined
-                     if any(ev.get("status") == "ok" for ev in m["evidence"].values()))
     lines = [
         "# Coverage Candidates — automated gap mining",
         "",
         f"**Date:** {today}",
         "**Generated by:** `scraper/mine_coverage_gaps.py` (deterministic, zero LLM tokens).",
         f"**Inventory groups analyzed:** {len(gaps)} thin-coverage (make, model, year-band) "
-        f"groups; evidence gathered for the top {len(mined)}.",
+        f"groups; the top {len(mined)} are listed in detail.",
         "",
         "**This report PROPOSES entries — nothing edits `UNOBTANIUM_DB` automatically.** "
         "Review the evidence, spot-check the sample sold titles, then hand-curate the "
@@ -376,13 +231,9 @@ def write_outputs(gaps: list[dict], mined: list[dict], top_n: int,
         "audit discipline: bands calibrated to sold prices, ceiling rule vs. new parts).",
         "",
     ]
-    if not fetch_enabled:
-        lines += ["> eBay fetching was disabled for this run (`--no-fetch` or requests "
-                  "missing) — inventory-side gap ranking only.", ""]
-    elif fetched_ok == 0:
-        lines += ["> **eBay sold-data collection got no usable data this run** (bot-block "
-                  "or markup change — see per-category statuses). The gap ranking below "
-                  "still stands; re-run locally or fix the parser.", ""]
+    lines += ["> Inventory-side gap ranking only. No eBay pages are fetched (CLAUDE.md "
+              "rule 2); price evidence for curated rows comes from the yard price "
+              "lists and the eBay API feed.", ""]
     lines += [
         "## Top coverage gaps (all thin groups, ranked)",
         "",
@@ -393,7 +244,7 @@ def write_outputs(gaps: list[dict], mined: list[dict], top_n: int,
         lines.append(
             f"| {i} | {g['make']} | {g['model']} | {g['year_band']} | {g['vehicle_count']:,} "
             f"| {int(g['match_rate'] * 100)}% | {g['gap_kind']} | {g['enthusiast'] or '—'} |")
-    lines += ["", "## Mined groups — evidence + entry skeletons", ""]
+    lines += ["", "## Top groups", ""]
     for m in mined:
         g = m["group"]
         lines += [
@@ -438,34 +289,28 @@ def write_outputs(gaps: list[dict], mined: list[dict], top_n: int,
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--top", type=int, default=15, help="groups to gather evidence for")
-    ap.add_argument("--categories", type=int, default=8, help="part-category searches per group")
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--top", type=int, default=15, help="groups to list in detail")
     ap.add_argument("--min-count", type=int, default=25, help="min vehicles for a group to rank")
-    ap.add_argument("--no-fetch", action="store_true", help="skip eBay fetches entirely")
     ap.add_argument("--out-md", type=Path, default=OUT_MD)
     ap.add_argument("--out-json", type=Path, default=OUT_JSON)
-    ap.add_argument("--cache-days", type=int, default=CACHE_MAX_AGE_DAYS)
+    # Accepted for older command lines (coverage-mine.yml passes them);
+    # both are no-ops now that the page fetcher is gone.
+    ap.add_argument("--no-fetch", action="store_true", help=argparse.SUPPRESS)
+    ap.add_argument("--categories", type=int, help=argparse.SUPPRESS)
     args = ap.parse_args()
 
     gaps = analyze_gaps(args.min_count)
     print(f"Thin-coverage groups (>= {args.min_count} vehicles): {len(gaps)}")
 
-    fetcher = SoldFetcher(enabled=not args.no_fetch, cache_days=args.cache_days)
-    categories = PART_CATEGORY_TERMS[:max(1, args.categories)]
     mined = []
     for g in gaps[:args.top]:
-        evidence = gather_evidence(g, fetcher, categories) if not args.no_fetch else {}
-        mined.append({"group": g, "evidence": evidence,
-                      "skeleton": skeleton_for(g, evidence)})
-        ok = sum(1 for ev in evidence.values() if ev.get("status") == "ok")
+        mined.append({"group": g, "evidence": {}, "skeleton": skeleton_for(g, {})})
         print(f"  {g['make']} {g['model']} ({g['year_band']}): {g['vehicle_count']:,} vehicles, "
-              f"{g['gap_kind']}, evidence {ok}/{len(categories) if not args.no_fetch else 0} categories")
+              f"{g['gap_kind']}")
 
-    write_outputs(gaps, mined, args.top, not args.no_fetch, args.out_md, args.out_json)
+    write_outputs(gaps, mined, args.top, args.out_md, args.out_json)
     print(f"Wrote {args.out_md} and {args.out_json}")
-    if not args.no_fetch and fetcher.failures >= 3:
-        print("WARNING: eBay fetches disabled after repeated failures — evidence is partial.")
     return 0
 
 

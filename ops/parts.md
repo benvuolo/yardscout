@@ -57,19 +57,19 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 `interchange_coverage.py` measures engine-family donors, not generic-only.
 The generic-only count re-matches every distinct year/make/model in
 `docs/data/inventory_live.json` with `js.match_vehicle` and applies
-`mine_coverage_gaps.is_generic_only` (≈15 s). Use the miner only with
-`--no-fetch`: its default run fetches eBay sold-listing pages, which
-standing rule 2 forbids (flagged for the owner; the script was not changed
-here, it is outside this workstream's files).
+`mine_coverage_gaps.is_generic_only` (≈15 s). The miner is offline-only now
+(no eBay page fetching).
 
 ## Open for the owner
 
 - Models without GENERATION_BREAKS entries keep whole-entry spans; adding
   breaks for more models would let the §15 pass bound them too.
-- `mine_coverage_gaps.py` fetches eBay pages by default (rule 2). The hub
-  added `--no-fetch` to `coverage-mine.yml` on 2026-11-04, so the monthly run
-  no longer fetches. Still to do here: remove the fetch path from the script
-  (or make no-fetch the only mode) and update its docstring.
+- `mine_coverage_gaps.py`: the eBay page fetcher is removed (2026-11-04);
+  the script is offline-only. `--no-fetch` and `--categories` are still
+  accepted as no-ops so `coverage-mine.yml` keeps working. The gap ranking
+  and JSON output are identical to the old `--no-fetch` run. Hub: the
+  workflow's `pip install requests beautifulsoup4` step is no longer needed
+  (workflow file not touched here).
 
 ## Next
 
