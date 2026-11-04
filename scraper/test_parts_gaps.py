@@ -413,6 +413,12 @@ check("§19 Five Hundred: mech 2005-07, AWD decode confirms the rear unit, moonr
       MECH3 <= set(v06) and v06["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin"
       and "AWD Rear Differential / Transfer Unit" not in names(2006, "Ford", "Five Hundred", FWD) and v06["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed")
 
+o02, o08 = parts(2002, "Kia", "Optima", FWD), parts(2008, "Kia", "Optima", FWD)
+check("§19 Optima: mech per generation, none for 2006; tails cut at the MS (2003/04/05) and MG (2009) facelifts",
+      MECH3 <= set(o02) and MECH3 <= set(o08) and o02["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2001–2005"
+      and "Fuel Pump Module (in-tank, test before listing)" not in names(2006, "Kia", "Optima", FWD)
+      and o02["Tail Lights (pair, uncracked)"]["fits"] == "2001–2002" and o08["Tail Lights (pair, uncracked)"]["fits"] == "2007–2008")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

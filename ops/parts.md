@@ -71,7 +71,7 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   7.0%); Sorento 2003–09 with facelift 2007 (→ 22,669, 6.8%);
   Santa Fe 2001–06 with facelift 2005 (→ 22,255, 6.7%); MKX 2007–18 with new
   break 2016 and facelift 2011 (→ 21,842, 6.6%); Five Hundred 2005–07
-  (→ 21,433, 6.4%).
+  (→ 21,433, 6.4%); Optima 2001–05/2007–10 with facelifts (→ 21,095, 6.3%).
 
 ## How to measure
 

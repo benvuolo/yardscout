@@ -1028,3 +1028,35 @@ chrome mesh grille option (2007, no audited band).
 
 Result: Five Hundred generic-only 409 → 0. Lots: generic-only 21,842 (6.6%)
 → 21,433 (6.4%).
+
+### 19.7 Kia Optima 2001–2005 (MS), 2007–2010 (MG)
+
+Basis: en.wikipedia.org/wiki/Kia_Optima; consumerguide.com/used/2001-06-kia-optima
+and /used/2007-10-kia-optima; Kia 2003 release (theautochannel.com
+2002/11/08); cars.com "2005 Kia Optima: What's New"; conceptcarz.com copy of
+the 2009 Kia release (fetched).
+- **2006 is ambiguous:** "Midway through the 2006 model year, Kia issued a
+  redesigned version … as a '2006.5' model" (CG). With both generations
+  sold as 2006 models, 2006 gets no new rows (58 cars stay generic-only).
+- **MS facelift added to `FACELIFT_BREAKS` at 2003, 2004 and 2005:** the
+  sources disagree. CG and the Kia 2003 release give 2003 ("new hood and
+  grille … new tail lights"). cars.com says "A new grille went on 2004
+  models". Wikipedia says "headlamps were restyled for 2004 (2005 model
+  year)". Cutting at all three can only narrow windows.
+- **MG facelift 2009 (added):** "headlamps narrowed", "taillights are
+  narrowed", redesigned rear fascia (Kia release).
+- **A/C:** standard on the LX every year 2001–10.
+- **Sunroof:** never on the LX; standard or optional on SE/EX (MS) and
+  optional on EX/SX packages (MG).
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2001–05, 2007–10 | — | Every car. |
+| Tail lights | 2001–05, 2007–10 (cut at the facelifts) | — | The entry had none. |
+| Sunroof | 2001–05, 2007–10 | option | |
+
+The existing 2001–06 headlight row also crosses the 2006 split. It is now
+cut at 2003/04/05, and its 2005–06 piece is left as is (flagged here).
+
+Result: Optima 2001–10 generic-only 396 → 58 (all 2006). Lots:
+generic-only 21,433 (6.4%) → 21,095 (6.3%).

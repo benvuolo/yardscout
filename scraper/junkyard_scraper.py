@@ -4672,6 +4672,14 @@ _gap_extend("five hundred", parts=_per_gen([(2005, 2007)], [
     _SUNROOF,
 ]))
 
+# Kia Optima 2001-2010 (396 cars generic-only; MS 2001-05, MG 2007-10).
+# 2006 was split between generations ("2006.5"), so it gets no rows. MS
+# restyle years are disputed between sources (2003 / 2004 / 2005), so all
+# three are facelift cuts; MG facelift 2009. A/C standard every year; the
+# sunroof was an EX/SE (MS) and EX/SX package (MG) option. No tail-light
+# row existed.
+_gap_extend("optima", parts=_per_gen([(2001, 2005), (2007, 2010)], [*_GAP_MECH, _TAILS, _SUNROOF]))
+
 # ---- end of §19 block
 
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
@@ -6285,7 +6293,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "civic": [2004, 2009],
     "compass": [2011],
     "impala": [2012],
-    "optima": [2014, 2019],
+    "optima": [2003, 2004, 2005, 2009, 2014, 2019],
     "mazda3": [2012, 2017],
     # §18 (cited in PARTS_GAPS §18)
     "regal": [2014],
