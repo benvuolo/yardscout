@@ -55,6 +55,7 @@ share link yardscout.io/app.
 | Session | Id | Opened | Brief |
 |---|---|---|---|
 | Parts curation | session_016ZzJfMzKVhFWLabqYjTTwd | 2026-11-04 13:17 UTC | Accent, LeSabre/LaCrosse, Soul, 1990s Camry/Corolla |
-| Yards coverage | session_016ZzJfKB8HduBmXqMGt4kB8 | 2026-11-04 13:17 UTC | coverage_sweep tiers A–B: adapters, or outreach drafts for blocked sites |
+| Yards coverage | session_016ZzJfKB8HduBmXqMGt4kB8 | 2026-11-04 13:17 UTC | sweep review done; Geofabrik OSM source live; OKC Pull-A-Part adapter |
+| Data quality | session_016ZzJfL9TNASMsWQaajvZTe | 2026-11-04 18:40 UTC | model-spelling merge; unreliable-yard rule for lifespans |
 
 Not opened: eBay (blocked on keys and Terapeak), Release (needs "ship").
