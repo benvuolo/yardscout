@@ -94,6 +94,48 @@ US_STATES = ("AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI 
 OVERPASS_URLS = ("https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter",
                  "https://overpass.private.coffee/api/interpreter")
 
+# State extents (south, west, north, east), WGS84 degrees, from the US Census
+# Bureau 2023 cartographic boundary file cb_2023_us_state_20m
+# (https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_state_20m.zip),
+# read from each shapefile record's bounding box on 2026-11-04. Alaska's
+# record spans the antimeridian (the western Aleutians); it is clipped at
+# 179.2 W, which drops only uninhabited-for-our-purposes islands west of 180.
+# Overpass is asked per bbox tile instead of area["ISO3166-2"=...]: the area
+# lookup was the common factor in every failed state (2026-11-03/04 runs).
+STATE_BBOX: dict[str, tuple[float, float, float, float]] = {
+    "AK": (51.22, -179.2, 71.353, -129.9), "AL": (30.228, -88.469, 35.008, -84.892), "AR": (33.004, -94.618, 36.5, -89.647),
+    "AZ": (31.332, -114.814, 37.003, -109.045), "CA": (32.534, -124.41, 42.009, -114.139), "CO": (36.992, -109.06, 41.003, -102.042),
+    "CT": (40.985, -73.728, 42.05, -71.789), "DE": (38.451, -75.789, 39.839, -75.049), "FL": (24.498, -87.635, 31.001, -80.032),
+    "GA": (30.361, -85.605, 35.001, -80.843), "HI": (18.917, -160.25, 22.233, -154.814), "IA": (40.378, -96.625, 43.501, -90.141),
+    "ID": (41.989, -117.243, 49.001, -111.044), "IL": (36.982, -91.512, 42.508, -87.499), "IN": (37.768, -88.067, 41.76, -84.786),
+    "KS": (36.993, -102.052, 40.003, -94.592), "KY": (36.498, -89.571, 39.147, -81.968), "LA": (28.934, -94.043, 33.019, -89.014),
+    "MA": (41.238, -73.508, 42.885, -69.928), "MD": (37.917, -79.487, 39.723, -75.049), "ME": (43.06, -71.084, 47.457, -66.95),
+    "MI": (41.696, -90.418, 48.211, -82.416), "MN": (43.5, -97.229, 49.384, -89.489), "MO": (35.996, -95.766, 40.614, -89.099),
+    "MS": (30.181, -91.644, 34.996, -88.098), "MT": (44.38, -116.049, 49.001, -104.039), "NC": (33.851, -84.322, 36.588, -75.459),
+    "ND": (45.935, -104.049, 49.001, -96.555), "NE": (40.0, -104.053, 43.001, -95.308), "NH": (42.697, -72.556, 45.305, -70.704),
+    "NJ": (38.929, -75.559, 41.357, -73.894), "NM": (31.332, -109.05, 37.0, -103.002), "NV": (35.002, -120.005, 42.0, -114.04),
+    "NY": (40.502, -79.762, 45.015, -71.856), "OH": (38.404, -84.82, 41.978, -80.519), "OK": (33.622, -103.003, 37.002, -94.432),
+    "OR": (41.993, -124.552, 46.269, -116.464), "PA": (39.72, -80.52, 42.27, -74.695), "RI": (41.146, -71.863, 42.019, -71.121),
+    "SC": (32.035, -83.353, 35.202, -78.541), "SD": (42.483, -104.058, 45.945, -96.439), "TN": (34.983, -90.309, 36.678, -81.647),
+    "TX": (25.84, -106.636, 36.5, -93.531), "UT": (36.998, -114.053, 42.002, -109.042), "VA": (36.541, -83.675, 39.466, -75.242),
+    "VT": (42.727, -73.437, 45.015, -71.494), "WA": (45.544, -124.726, 49.002, -116.916), "WI": (42.492, -92.888, 47.055, -86.806),
+    "WV": (37.202, -82.626, 40.639, -77.72), "WY": (40.996, -111.057, 45.006, -104.052),
+}
+STATE_NAMES = {
+    "AL": "alabama", "AK": "alaska", "AZ": "arizona", "AR": "arkansas", "CA": "california", "CO": "colorado",
+    "CT": "connecticut", "DE": "delaware", "FL": "florida", "GA": "georgia", "HI": "hawaii", "ID": "idaho",
+    "IL": "illinois", "IN": "indiana", "IA": "iowa", "KS": "kansas", "KY": "kentucky", "LA": "louisiana",
+    "ME": "maine", "MD": "maryland", "MA": "massachusetts", "MI": "michigan", "MN": "minnesota",
+    "MS": "mississippi", "MO": "missouri", "MT": "montana", "NE": "nebraska", "NV": "nevada",
+    "NH": "new hampshire", "NJ": "new jersey", "NM": "new mexico", "NY": "new york", "NC": "north carolina",
+    "ND": "north dakota", "OH": "ohio", "OK": "oklahoma", "OR": "oregon", "PA": "pennsylvania",
+    "RI": "rhode island", "SC": "south carolina", "SD": "south dakota", "TN": "tennessee", "TX": "texas",
+    "UT": "utah", "VT": "vermont", "VA": "virginia", "WA": "washington", "WV": "west virginia",
+    "WI": "wisconsin", "WY": "wyoming",
+}
+OSM_TILE_DEG = 4.0                  # states wider/taller than this are split into tiles
+OSM_TILE_DEG_BY_STATE = {"AK": 8.0} # sparse; 4-degree tiles would be 78 requests
+
 # ---------------------------------------------------------------- names
 # Overpass regex (POSIX ERE, case-insensitive). Broad on purpose; the Python
 # filter below drops farms and other "pick your own" places.
@@ -277,17 +319,40 @@ OSM_TAG_CLAUSES = (
 )
 
 
-def overpass_query(state: str) -> str:
-    # The name filter sits inside every clause, so each statement filters on
-    # the server before anything is collected: a separate ".t then name"
-    # step would first materialise every shop=car / landuse=industrial /
-    # amenity=recycling element in the state (huge for CA/TX).
+def state_tiles(state: str) -> list[tuple[float, float, float, float]]:
+    """The state's Census bbox, split into a grid of tiles no larger than
+    OSM_TILE_DEG (per-state override) on either side."""
+    s_, w, n, e = STATE_BBOX[state]
+    size = OSM_TILE_DEG_BY_STATE.get(state, OSM_TILE_DEG)
+    rows, cols = max(1, math.ceil((n - s_) / size)), max(1, math.ceil((e - w) / size))
+    dy, dx = (n - s_) / rows, (e - w) / cols
+    return [(round(s_ + r * dy, 4), round(w + c * dx, 4), round(s_ + (r + 1) * dy, 4), round(w + (c + 1) * dx, 4))
+            for r in range(rows) for c in range(cols)]
+
+
+def overpass_query(bbox: tuple[float, float, float, float]) -> str:
+    """One bbox tile. The name filter sits inside every clause, so each
+    statement filters on the server before anything is collected."""
     name = f'["name"~"{OSM_NAME_RE}",i]'
-    union = "".join(f'nwr["{k}"="{v}"]{name}(area.s);' for k, v in OSM_TAG_CLAUSES)
+    union = "".join(f'nwr["{k}"="{v}"]{name};' for k, v in OSM_TAG_CLAUSES)
+    s_, w, n, e = bbox
     return (
-        f'[out:json][timeout:{OSM_SERVER_TIMEOUT}][maxsize:{OSM_MAXSIZE}];'
-        f'area["ISO3166-2"="US-{state}"]->.s;({union});out center tags qt;'
+        f'[out:json][timeout:{OSM_SERVER_TIMEOUT}][maxsize:{OSM_MAXSIZE}][bbox:{s_},{w},{n},{e}];'
+        f'({union});out center tags qt;'
     )
+
+
+def _state_of(tags: dict) -> str:
+    """addr:state as a 2-letter code ('' when absent or unrecognised)."""
+    raw = str(tags.get("addr:state") or "").strip()
+    if raw.upper() in STATE_BBOX:
+        return raw.upper()
+    low = raw.lower()
+    return next((k for k, v in STATE_NAMES.items() if v == low), "")
+
+
+def _in_bbox(lat: float, lng: float, bbox: tuple[float, float, float, float]) -> bool:
+    return bbox[0] <= lat <= bbox[2] and bbox[1] <= lng <= bbox[3]
 
 
 def parse_overpass(data: dict) -> list[Candidate]:
@@ -307,8 +372,9 @@ def parse_overpass(data: dict) -> list[Candidate]:
         site = tags.get("website") or tags.get("contact:website") or tags.get("url") or ""
         if site and not site.startswith("http"):
             site = "http://" + site
-        out.append(Candidate(name=name, city=tags.get("addr:city", ""), state=tags.get("addr:state", ""),
-                             lat=lat, lng=lng, website=site, source="osm"))
+        out.append(Candidate(name=name, city=tags.get("addr:city", ""), state=_state_of(tags),
+                             lat=lat, lng=lng, website=site, source="osm",
+                             extra={"osm": f"{el.get('type', '')}/{el.get('id', '')}"}))
     return out
 
 
@@ -327,8 +393,8 @@ def _overpass_slot_wait(session, url: str) -> float:
     return float(min(min(waits), OSM_MAX_SLOT_WAIT)) if waits else 0.0
 
 
-def _overpass_once(session, url: str, state: str, sleep) -> tuple[list[Candidate] | None, str]:
-    """One state on one server. Waits for a slot, retries once after 429;
+def _overpass_once(session, url: str, query: str, sleep) -> tuple[list[Candidate] | None, str]:
+    """One query (one tile) on one server. Waits for a slot, retries once after 429;
     any other failure (5xx, timeout, connection error, error remark) returns
     at once so the caller can try the next server."""
     reason = ""
@@ -337,7 +403,7 @@ def _overpass_once(session, url: str, state: str, sleep) -> tuple[list[Candidate
         if wait:
             sleep(wait)
         try:
-            r = session.post(url, data={"data": overpass_query(state)}, timeout=(OSM_CONNECT_TIMEOUT, OSM_TIMEOUT),
+            r = session.post(url, data={"data": query}, timeout=(OSM_CONNECT_TIMEOUT, OSM_TIMEOUT),
                              headers={"User-Agent": UA})
         except Exception as e:
             return None, type(e).__name__
@@ -359,48 +425,78 @@ def _overpass_once(session, url: str, state: str, sleep) -> tuple[list[Candidate
 
 def fetch_osm(session, states=US_STATES, pause: float = 3.0, deadline: float | None = None,
               report: dict | None = None, clock=time.time, sleep=time.sleep) -> tuple[list[Candidate], str]:
-    """One Overpass query per state, tried on the main server then the
-    mirrors. A server that fails OSM_DROP_SERVER_AFTER times in a row is
-    skipped for the rest of the pass. Failed states get one retry pass (with
-    every server back in) only if some server answered in the first pass.
-    Stops at `deadline`. Failed and unqueried states are named in the note
-    and put in report["pending"], which main() saves for the next run."""
+    """Each state is queried tile by tile (state_tiles), every tile tried on
+    the main server then the mirrors. A state counts as covered only when all
+    its tiles answered. A server that fails OSM_DROP_SERVER_AFTER times in a
+    row is skipped for the rest of the pass. Failed states get one retry pass
+    (every server back in) only if some server answered. Results are de-duped
+    across tiles and states by OSM element id; a result whose addr:state names
+    another state is left to that state. report["pending"] lists unqueried
+    states first and failed ones last, so the next run makes progress on new
+    states instead of hitting the same failures first."""
     out: list[Candidate] = []
+    seen: set[str] = set()
     pending = list(states)
     failed: list[str] = []
     skipped: list[str] = []
+
+    def keep(c: Candidate, st: str) -> bool:
+        oid = (c.extra or {}).get("osm") or f"{_norm(c.name)}/{c.lat}/{c.lng}"
+        if c.state and c.state != st:
+            return False                      # its own state's tiles will claim it
+        if oid in seen:
+            return False
+        if not c.state and c.lat is not None and c.lng is not None:
+            owners = [k for k, b in STATE_BBOX.items() if _in_bbox(c.lat, c.lng, b)]
+            if st not in owners:
+                return False                  # outside this state's bbox (tile edge rounding)
+            c.state = st if owners == [st] else ""  # border overlap: don't guess
+        seen.add(oid)
+        return True
+
     for pass_no in (1, 2):
         strikes = {u: 0 for u in OVERPASS_URLS}
-        failed, answered = [], False
+        failed, answered, stop = [], False, False
         for i, st in enumerate(pending):
-            live = [u for u in OVERPASS_URLS if strikes[u] < OSM_DROP_SERVER_AFTER]
-            if (deadline and clock() > deadline) or not live:
+            if deadline and clock() > deadline:
                 skipped = list(pending[i:])
-                if not live:
+                break
+            got_state: list[Candidate] = []
+            ok, tried = True, False
+            for bbox in state_tiles(st):
+                live = [u for u in OVERPASS_URLS if strikes[u] < OSM_DROP_SERVER_AFTER]
+                if not live or (deadline and clock() > deadline):
+                    ok, stop = False, not live
+                    break
+                tried = True
+                got, why = None, []
+                for url in live:
+                    got, reason = _overpass_once(session, url, overpass_query(bbox), sleep)
+                    if got is not None:
+                        strikes[url] = 0
+                        break
+                    strikes[url] += 1
+                    why.append(f"{urlparse(url).netloc} {reason}")
+                if got is None:
+                    ok = False
+                    print(f"  osm {st} tile {bbox}: failed ({'; '.join(why)})", flush=True)
+                    break
+                answered = True
+                got_state += [c for c in got if keep(c, st)]
+                if pause:
+                    sleep(pause)
+            out += got_state  # partial states keep what they found; the state stays pending
+            if ok:
+                print(f"  osm {st}: {len(got_state)} ({len(state_tiles(st))} tiles)" + (" (retry)" if pass_no == 2 else ""), flush=True)
+            elif tried:
+                failed.append(st)
+            if stop or (not ok and not tried):  # servers gone / deadline before this state began
+                skipped = list(pending[i + (1 if tried else 0):])
+                if stop:
                     print("  osm: every Overpass server failed repeatedly, stopping this pass", flush=True)
                 break
-            got, why = None, []
-            for url in live:
-                got, reason = _overpass_once(session, url, st, sleep)
-                if got is not None:
-                    strikes[url] = 0
-                    break
-                strikes[url] += 1
-                why.append(f"{urlparse(url).netloc} {reason}")
-            if got is None:
-                failed.append(st)
-                print(f"  osm {st}: failed ({'; '.join(why)})", flush=True)
-            else:
-                answered = True
-                for c in got:
-                    c.state = c.state or st
-                out += got
-                print(f"  osm {st}: {len(got)}" + (" (retry)" if pass_no == 2 else ""), flush=True)
-            if pause:
-                sleep(pause)
-        if pass_no == 2 or not failed or not answered or (deadline and clock() > deadline):
+        if pass_no == 2 or not failed or not answered or stop or (deadline and clock() > deadline):
             break
-        # retry the failed states before the never-queried ones
         pending, skipped = failed + skipped, []
     msg = []
     if failed:
@@ -408,9 +504,43 @@ def fetch_osm(session, states=US_STATES, pause: float = 3.0, deadline: float | N
     if skipped:
         msg.append(f"not queried: {', '.join(skipped)}")
     if report is not None:
-        report["pending"] = failed + skipped
+        report["pending"] = skipped + failed
         report["covered"] = [st for st in states if st not in failed + skipped]
     return out, "; ".join(msg)
+
+
+DIAG_QUERY = '[out:json][timeout:25];node["shop"="car_parts"](61.0,-150.5,61.4,-149.5);out 1;'  # Anchorage
+
+
+def diagnose(session, clock=time.time) -> list[dict]:
+    """Per server: GET /api/status and one tiny bbox query, with HTTP code and
+    seconds. Tells 'runner refused or throttled' apart from 'heavy query'.
+    Never raises."""
+    rows = []
+    for url in OVERPASS_URLS:
+        row = {"server": urlparse(url).netloc}
+        for what, call in (("status", lambda: session.get(url.rsplit("/", 1)[0] + "/status", timeout=TIMEOUT,
+                                                          headers={"User-Agent": UA})),
+                           ("query", lambda: session.post(url, data={"data": DIAG_QUERY}, timeout=(OSM_CONNECT_TIMEOUT, 40),
+                                                          headers={"User-Agent": UA}))):
+            t = clock()
+            try:
+                r = call()
+                code, body = r.status_code, (getattr(r, "text", "") or "")
+                if what == "query" and code == 200:
+                    try:
+                        j = r.json()
+                        body = f"{len(j.get('elements') or [])} element(s)" + (f", remark {j['remark'][:60]}" if j.get("remark") else "")
+                    except ValueError:
+                        body = "not JSON"
+                detail = " | ".join(x.strip() for x in str(body).splitlines()[:3] if x.strip())[:160]
+            except Exception as e:
+                code, detail = 0, type(e).__name__
+            row[what] = {"code": code, "sec": round(clock() - t, 1), "detail": detail}
+        rows.append(row)
+        print(f"  diag {row['server']}: status {row['status']['code']} in {row['status']['sec']}s ({row['status']['detail']}); "
+              f"query {row['query']['code']} in {row['query']['sec']}s ({row['query']['detail']})", flush=True)
+    return rows
 
 
 def osm_state_order(prev_json: Path = OUT_JSON, states=US_STATES) -> list[str]:
@@ -695,6 +825,8 @@ def main(argv=None) -> int:
     ap.add_argument("--no-ario", action="store_true")
     ap.add_argument("--max-sites", type=int, default=400)
     ap.add_argument("--budget-min", type=float, default=70, help="total time budget; the report is always written")
+    ap.add_argument("--diagnose", action="store_true",
+                    help="log each Overpass server's /api/status and a tiny query, then exit 0")
     ap.add_argument("--osm-pending", action="store_true",
                     help="OSM-only pass over the states the last run left in osm_pending; merges into the report")
     args = ap.parse_args(argv)
@@ -702,6 +834,12 @@ def main(argv=None) -> int:
         print("::error::python 'requests' is required")
         return 2
     session = requests.Session()
+    if args.diagnose:
+        try:
+            diagnose(session)
+        except Exception as e:  # pragma: no cover - diagnostics never fail the job
+            print(f"  diag: {type(e).__name__}")
+        return 0
     try:
         prev = json.loads(OUT_JSON.read_text())
     except (OSError, ValueError):

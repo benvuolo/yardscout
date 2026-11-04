@@ -47,6 +47,10 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install requests beautifulsoup4 rich cryptography
+      - name: Overpass diagnostics (never fails the job)
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python scraper/coverage_sweep.py --diagnose
       - name: Sweep
         run: |
           python scraper/coverage_sweep.py --budget-min "${{ github.event.inputs.budget_min || '70' }}" \

@@ -93,7 +93,8 @@ class FakeOverpass:
         return FakeResp(200, text=t) if t is not None else FakeResp(404)
 
     def post(self, url, data=None, timeout=None, headers=None):
-        st = data["data"].split('"US-')[1][:2]
+        bb = tuple(float(x) for x in data["data"].split("[bbox:")[1].split("]")[0].split(","))
+        st = next(k for k in cs.US_STATES if bb in cs.state_tiles(k))
         self.calls.append((url, st))
         self.timeouts.append(timeout)
         r = self.plan.get((url, st), FakeResp(504))
@@ -101,6 +102,11 @@ class FakeOverpass:
             r = r.pop(0) if len(r) > 1 else r[0]
         if isinstance(r, Exception):
             raise r
+        if r.status_code == 200 and r._p is el:  # one yard per state, the same OSM id in every tile
+            s_, w, n, e = cs.STATE_BBOX[st]
+            return FakeResp(200, {"elements": [{"type": "node", "id": cs.US_STATES.index(st) + 1,
+                                                "lat": (s_ + n) / 2, "lon": (w + e) / 2,
+                                                "tags": {"name": "U-Pull-It", "addr:state": st}}]})
         return r
 
 
@@ -190,17 +196,90 @@ check("osm: deadline in the past skips the remaining states", got2 == [] and "no
 # timeouts, a dead mirror, and the old "3 failed states -> stop" rule).
 import requests as _rq  # noqa: E402
 TO = _rq.exceptions.ReadTimeout("read timed out")
-q = cs.overpass_query("AL")
+q = cs.overpass_query(cs.state_tiles("AL")[0])
 check("osm query: [timeout:] and [maxsize:] set, client waits just past the server",
       f"[timeout:{cs.OSM_SERVER_TIMEOUT}]" in q and f"[maxsize:{cs.OSM_MAXSIZE}]" in q
       and cs.OSM_SERVER_TIMEOUT < cs.OSM_TIMEOUT <= cs.OSM_SERVER_TIMEOUT + 60, q[:80])
 nf = f'["name"~"{cs.OSM_NAME_RE}",i]'
-clauses = [c for c in q.split("(area.s);") if 'nwr["' in c]
+clauses = [c for c in q.split(";(")[1].split(");out")[0].split(f"{nf};") if c]
 check("osm query: every union clause carries the name filter, no collect-then-filter step",
       len(clauses) == len(cs.OSM_TAG_CLAUSES)
-      and all(f'nwr["{kk}"="{vv}"]{nf}(area.s);' in q for kk, vv in cs.OSM_TAG_CLAUSES)
-      and all(nf in c for c in clauses) and "->.t" not in q and ".t[" not in q
-      and q.endswith(");out center tags qt;"), q)
+      and all(f'nwr["{kk}"="{vv}"]{nf};' in q for kk, vv in cs.OSM_TAG_CLAUSES)
+      and "->.t" not in q and ".t[" not in q and q.endswith(");out center tags qt;"), q)
+check("osm query: bbox tiles, no area lookup", "[bbox:" in q and "area[" not in q and "ISO3166" not in q, q[:120])
+# State bbox table + tiling.
+check("bbox: all 50 states, sane extents", sorted(cs.STATE_BBOX) == sorted(cs.US_STATES)
+      and all(-180 <= w < e <= -60 and 18 <= s_ < n <= 72 for s_, w, n, e in cs.STATE_BBOX.values()),
+      str([k for k, (s_, w, n, e) in cs.STATE_BBOX.items() if not (w < e)]))
+check("bbox: spot checks vs Census extents (RI, TX, AK clipped at the antimeridian)",
+      cs.STATE_BBOX["RI"] == (41.146, -71.863, 42.019, -71.121) and cs.STATE_BBOX["TX"][0] == 25.84
+      and cs.STATE_BBOX["AK"][1] == -179.2 and cs.STATE_BBOX["AK"][3] < -129)
+def _union_ok(st):
+    s_, w, n, e = cs.STATE_BBOX[st]
+    ts = cs.state_tiles(st)
+    lim = cs.OSM_TILE_DEG_BY_STATE.get(st, cs.OSM_TILE_DEG) + 1e-6
+    return (all(t[2] - t[0] <= lim and t[3] - t[1] <= lim for t in ts)
+            and min(t[0] for t in ts) == s_ and min(t[1] for t in ts) == w
+            and abs(max(t[2] for t in ts) - n) < 1e-3 and abs(max(t[3] for t in ts) - e) < 1e-3
+            and abs(sum((t[2] - t[0]) * (t[3] - t[1]) for t in ts) - (n - s_) * (e - w)) < 1e-2)
+check("tiles: every state's tiles cover its bbox exactly, none larger than the tile size",
+      all(_union_ok(st) for st in cs.US_STATES), str([st for st in cs.US_STATES if not _union_ok(st)]))
+check("tiles: small states are one tile, TX/AK split, total stays modest",
+      len(cs.state_tiles("RI")) == 1 and len(cs.state_tiles("TX")) > 1 and len(cs.state_tiles("AK")) <= 24
+      and sum(len(cs.state_tiles(st)) for st in cs.US_STATES) <= 200,
+      str(sum(len(cs.state_tiles(st)) for st in cs.US_STATES)))
+# Results: de-dupe across tiles/states by OSM id; addr:state decides; border overlap -> no guess.
+class TileOverpass(FakeOverpass):
+    def __init__(self, elements):
+        super().__init__({})
+        self.elements = elements
+    def post(self, url, data=None, timeout=None, headers=None):
+        self.calls.append((url, data["data"]))
+        return FakeResp(200, {"elements": self.elements})
+els = [{"type": "way", "id": 7, "center": {"lat": 29.5, "lon": -98.5}, "tags": {"name": "Big U-Pull", "addr:state": "TX"}},
+       {"type": "node", "id": 8, "lat": 33.01, "lon": -94.0, "tags": {"name": "Border U-Pull"}},  # TX/AR/LA bboxes overlap
+       {"type": "node", "id": 9, "lat": 35.0, "lon": -92.0, "tags": {"name": "Arkansas U-Pull", "addr:state": "Arkansas"}}]
+to = TileOverpass(els)
+gt, _ = cs.fetch_osm(to, states=("TX", "AR"), pause=0, sleep=nosleep)
+names = sorted((c.name, c.state) for c in gt)
+check("tiles: each OSM element kept once across all tiles and states",
+      len(gt) == 3 and len({c.extra["osm"] for c in gt}) == 3, str(names))
+check("tiles: addr:state (code or full name) decides the state; border overlap leaves it blank",
+      ("Big U-Pull", "TX") in names and ("Arkansas U-Pull", "AR") in names and ("Border U-Pull", "") in names, str(names))
+check("tiles: one request per tile", len(to.calls) == len(cs.state_tiles("TX")) + len(cs.state_tiles("AR")), str(len(to.calls)))
+# Diagnostics: per server, status + tiny query; never raises.
+class DiagFake:
+    def get(self, url, timeout=None, headers=None):
+        if "kumi" in url:
+            raise _rq.exceptions.ConnectTimeout("x")
+        return FakeResp(200, text="Connected as: 1\nRate limit: 2\n2 slots available now.\n")
+    def post(self, url, data=None, timeout=None, headers=None):
+        if "private" in url:
+            return FakeResp(502, text="<html>502 Bad Gateway</html>")
+        return FakeResp(200, {"elements": [{"type": "node", "id": 1}]})
+import contextlib, io  # noqa: E402,E401
+with contextlib.redirect_stdout(io.StringIO()) as dbuf:
+    drows = cs.diagnose(DiagFake())
+check("diagnose: one row per server with status + query code and time",
+      [r["server"] for r in drows] == [cs.urlparse(u).netloc for u in cs.OVERPASS_URLS]
+      and drows[0]["status"]["code"] == 200 and "1 element" in drows[0]["query"]["detail"]
+      and drows[1]["status"]["code"] == 0 and drows[1]["status"]["detail"] == "ConnectTimeout"
+      and drows[2]["query"]["code"] == 502 and "diag overpass-api.de" in dbuf.getvalue(), str(drows))
+check("diagnose: the tiny query is a bbox query, not an area lookup", "area[" not in cs.DIAG_QUERY and "](61.0," in cs.DIAG_QUERY)
+_real_session = cs.requests.Session
+class _BoomSession:
+    def get(self, *a, **k):
+        raise RuntimeError("no network")
+    post = get
+cs.requests.Session = _BoomSession
+try:
+    with contextlib.redirect_stdout(io.StringIO()) as dbuf2:
+        rc_d = cs.main(["--diagnose"])
+finally:
+    cs.requests.Session = _real_session
+check("--diagnose: exits 0 even when every call raises, logs each server",
+      rc_d == 0 and dbuf2.getvalue().count("diag ") == len(cs.OVERPASS_URLS) and "RuntimeError" in dbuf2.getvalue(),
+      dbuf2.getvalue())
 # The exact 2026-11-03/04 failure: every server fails the first states. The
 # pass must stop after OSM_DROP_SERVER_AFTER states (bounded cost) and leave
 # all of them pending for the next run, not burn the budget.
@@ -212,8 +291,8 @@ for st in ("AL", "AK", "AZ", "AR", "CA"):
 rep = {}
 fo3 = FakeOverpass(plan)
 got3, err3 = cs.fetch_osm(fo3, states=("AL", "AK", "AZ", "AR", "CA"), pause=0, report=rep, sleep=nosleep)
-check("osm: all servers failing -> pass stops after 3 states, all 5 pending, no retry pass",
-      got3 == [] and len(fo3.calls) == 3 * len(cs.OVERPASS_URLS) and rep["pending"] == ["AL", "AK", "AZ", "AR", "CA"],
+check("osm: all servers failing -> pass stops after 3 states; unqueried first, failed last in pending",
+      got3 == [] and len(fo3.calls) == 3 * len(cs.OVERPASS_URLS) and rep["pending"] == ["AR", "CA", "AL", "AK", "AZ"],
       f"{len(fo3.calls)} {rep}")
 check("osm: every request uses the short connect / bounded read timeout",
       set(fo3.timeouts) == {(cs.OSM_CONNECT_TIMEOUT, cs.OSM_TIMEOUT)} and cs.OSM_TIMEOUT > cs.OSM_SERVER_TIMEOUT,
@@ -230,13 +309,13 @@ check("osm: failed state retried after the others and recovered",
 check("osm: 502/504 move to the next server at once (no backoff sleep)", slept == [], str(slept))
 # 429 then 200 on the same server: backoff, no mirror needed.
 slept.clear()
-fo4 = FakeOverpass({(m, "NE"): [FakeResp(429), FakeResp(200, el)]})
-got4, err4 = cs.fetch_osm(fo4, states=("NE",), pause=0, sleep=nosleep)
-check("osm: 429 backs off and retries the same server", len(got4) == 1 and fo4.calls == [(m, "NE"), (m, "NE")]
+fo4 = FakeOverpass({(m, "RI"): [FakeResp(429), FakeResp(200, el)]})
+got4, err4 = cs.fetch_osm(fo4, states=("RI",), pause=0, sleep=nosleep)
+check("osm: 429 backs off and retries the same server", len(got4) == 1 and fo4.calls == [(m, "RI"), (m, "RI")]
       and cs.OSM_BACKOFF[0] in slept, f"{fo4.calls} {slept}")
-fo4b = FakeOverpass({(m, "NE"): FakeResp(429), (k, "NE"): FakeResp(200, el)})
-got4b, _ = cs.fetch_osm(fo4b, states=("NE",), pause=0, sleep=nosleep)
-check("osm: 429 twice -> next server", len(got4b) == 1 and fo4b.calls == [(m, "NE"), (m, "NE"), (k, "NE")], str(fo4b.calls))
+fo4b = FakeOverpass({(m, "RI"): FakeResp(429), (k, "RI"): FakeResp(200, el)})
+got4b, _ = cs.fetch_osm(fo4b, states=("RI",), pause=0, sleep=nosleep)
+check("osm: 429 twice -> next server", len(got4b) == 1 and fo4b.calls == [(m, "RI"), (m, "RI"), (k, "RI")], str(fo4b.calls))
 # /api/status says wait: the client waits before posting (capped).
 slept.clear()
 fo5 = FakeOverpass({(m, "NE"): FakeResp(200, el)},
@@ -269,10 +348,16 @@ class SlowOverpass(FakeOverpass):
         t[0] += 100
         return super().post(*a, **kw)
 rep8 = {}
-fo8 = SlowOverpass({(m, st): FakeResp(200, el) for st in ("NE", "IA", "KS")})
-got8, err8 = cs.fetch_osm(fo8, states=("NE", "IA", "KS"), pause=0, deadline=150, report=rep8, clock=clk, sleep=nosleep)
-check("osm: deadline -> covered states kept, rest pending", len(got8) == 2 and rep8["pending"] == ["KS"]
-      and "not queried: KS" in err8, f"{err8} {rep8}")
+fo8 = SlowOverpass({(m, st): FakeResp(200, el) for st in ("RI", "CT", "DE")})
+got8, err8 = cs.fetch_osm(fo8, states=("RI", "CT", "DE"), pause=0, deadline=150, report=rep8, clock=clk, sleep=nosleep)
+check("osm: deadline -> covered states kept, rest pending", len(got8) == 2 and rep8["pending"] == ["DE"]
+      and "not queried: DE" in err8, f"{err8} {rep8}")
+# A multi-tile state cut off mid-way by the deadline stays pending (partial).
+t[0] = 0.0
+rep8b = {}
+fo8b = SlowOverpass({(m, "TX"): FakeResp(200, el)})
+cs.fetch_osm(fo8b, states=("TX",), pause=0, deadline=150, report=rep8b, clock=clk, sleep=nosleep)
+check("osm: state cut off between tiles stays pending", rep8b["pending"] == ["TX"] and rep8b["covered"] == [], str(rep8b))
 # Next run asks the pending states first.
 import tempfile, json as _json  # noqa: E402,E401
 with tempfile.TemporaryDirectory() as td:

@@ -84,6 +84,33 @@ Second fix (this commit, unconfirmed live):
   `osm_pending` is empty. The monthly full sweep (`43 9 3 * *`) is unchanged
   and shares the concurrency group, so the two never overlap.
 
+Third run (41861399360, osm_pending, on d982e71): covered 0 of 48 states. AL,
+AK and AZ failed on all three servers (overpass-api.de 502 or read timeout,
+both mirrors read timeouts), then the pass stopped as designed after
+17 minutes. Even AK failed with the cheap per-clause query, so query size is
+not the cause. The suspects now are the `area["ISO3166-2"=...]` lookup, or the
+servers refusing or throttling GitHub runner IPs.
+
+Third fix (unconfirmed live):
+- **Diagnostic step:** before the sweep, `coverage-sweep.yml` runs
+  `coverage_sweep.py --diagnose` (continue-on-error, 5 min cap). For each
+  server it logs GET /api/status and a tiny Anchorage bbox query, each with
+  its HTTP code and seconds.
+- **Bbox tiles:** `area[...]` is gone. States come from `STATE_BBOX`, the
+  Census 2023 cartographic boundary extents. Alaska is clipped at 179.2 W, at
+  the antimeridian.
+- **Tiling:** states larger than 4° are tiled (Alaska at 8°), 179 tiles in
+  total. A state counts as covered only when all its tiles answer.
+- **De-duplication:** results are de-duped across tiles and states by OSM
+  element id. A row whose `addr:state` names another state is left to that
+  state. A row with no `addr:state` in an overlap of several state boxes keeps
+  a blank state instead of a guess.
+- **Pending order:** `osm_pending` now lists unqueried states first and
+  failed ones last, so a pass no longer hits the same failing states first
+  every time.
+- **Stop rule:** if the diagnostics show the servers refuse runner IPs
+  outright, the hub takes it to the owner. Nothing will work around it.
+
 Tests: `scraper/test_coverage_sweep.py` all pass offline, with mocked cases for
 the query shape, fast failover on 502, the stop when all servers fail, the
 retry pass, 429 handling, the merge, and the `--osm-pending` paths. Live
