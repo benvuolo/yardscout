@@ -406,3 +406,21 @@ Mach audio (offer years not confirmed), 2-door Sport body parts.
 
 Result: Explorer 1991–2001 generic-only 1,173 → 0. Lots: generic-only
 33,916 (10.2%) → 32,743 (9.8%).
+
+### 16.3 Jeep Compass 2007–2016 (MK49)
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2007–16 | — | One generation; mechanicals carried through the facelift. |
+| A/C compressor | 2007–16 | option | Standard fitment on the base car not confirmed. |
+| AWD rear differential / transfer unit | 2007–16 | drive: awd/4wd | Freedom Drive cars; same band as the Equinox row. |
+| Tail lights, side mirrors (pair) | 2007–10, 2011–16 | — | The entry had neither; split at the 2011 facelift. The mirror row does not claim power mirrors. |
+| Sunroof, leather power seat (Limited), alloy wheels | 2007–16 | option | |
+
+Left out, no stated basis: Boston Acoustics audio (offer by year not
+confirmed), the CVT (transmission). The existing headlight row spans
+2007–16 across the 2011 facelift, which changed the front end. It is not a
+`GENERATION_BREAKS` year, so the row was left as is and is flagged here.
+
+Result: Compass generic-only 911 → 0. Lots: generic-only 32,743 (9.8%) →
+31,832 (9.5%).

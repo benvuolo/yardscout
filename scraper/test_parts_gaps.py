@@ -249,9 +249,16 @@ check("§16 Explorer 1999: 4WD decode confirms the shift motor; RWD decode exclu
       e99["Transfer Case Shift Motor (match part #)"]["trim_status"] == "vin" and "Transfer Case Shift Motor (match part #)" not in names(1999, "Ford", "Explorer", RWD))
 check("§16 Explorer 2004: none of the 1991-2001 rows", "Leather Power Driver Seat (Eddie Bauer/Limited)" not in names(2004, "Ford", "Explorer", FOUR))
 
+j09, j14 = parts(2009, "Jeep", "Compass", AWD), parts(2014, "Jeep", "Compass", FWD)
+check("§16 Compass: pump/fan/A-C 2007-16; tail lights split at the 2011 facelift", MECH3 <= set(j09) and MECH3 <= set(j14)
+      and j14["Radiator Fan Assembly"]["fits"] == "2007–2016" and j09["Tail Lights (pair, uncracked)"]["fits"] == "2007–2010"
+      and j14["Tail Lights (pair, uncracked)"]["fits"] == "2011–2016")
+check("§16 Compass: AWD decode confirms rear unit, FWD excludes; 2018 none", j09["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin"
+      and "AWD Rear Differential / Transfer Unit" not in j14 and not (MECH3 & names(2018, "Jeep", "Compass", FWD)))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

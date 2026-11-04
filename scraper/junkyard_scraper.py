@@ -4441,6 +4441,23 @@ _gap_extend("explorer 1991-2001", parts=_per_gen([(1991, 1994), (1995, 2001)], [
     {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
 ]))
 
+# Jeep Compass 2007-2016 (MK49; 911 cars generic-only). One generation; the
+# 2011 facelift changed the exterior, so lamp and mirror rows split there.
+# Freedom Drive AWD/4x4 has a rear drive unit (drive gate).
+_gap_extend("compass", parts=[
+    *_per_gen([(2007, 2016)], [
+        _GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True},
+        {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+        _SUNROOF,
+        {"name": "Leather Power Driver Seat (Limited)", "rarity": "Uncommon", "low": 90, "high": 200, "cost": 40, "option": True},
+        {"name": "Alloy Wheels (set of 4, straight)", "rarity": "Uncommon", "low": 120, "high": 260, "cost": 100, "option": True},
+    ]),
+    *_per_gen([(2007, 2010), (2011, 2016)], [
+        _TAILS,
+        {"name": "Side Mirrors (pair)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 15},
+    ]),
+])
+
 _split_generations("grand cherokee", display="Jeep Grand Cherokee", make="Jeep", gens=[
     {"label": "ZJ/WJ", "years": (1993, 2004), "parts": [
         {"name": "Transfer Case Shift Motor", "rarity": "Rare", "low": 75, "high": 200, "cost": 10},
