@@ -399,3 +399,70 @@ What a curator must know:
   dashes, product pages with dashes. "3/5/7 Series" have no catalog model.
   Not in evidence_lines: the product page's "Manufacturer's Notes" ("This
   part is discontinued."); template owner may want it.
+
+### Honda + Acura (session_016ZzJfHdymdThBbtJ5HYPnQ, 2026-11-05 01:45 UTC)
+
+- Modules: `sites/hondapartsnow.py`, `sites/acurapartswarehouse.py` (thin), shared
+  rules in `sites/_honda_names.py` (both catalogs print American Honda's part
+  names). Tests: `tests/test_hondapartsnow.py` (29 checks), `tests/test_acurapartswarehouse.py` (18).
+- Template: opt-in `Config` fields `trim_pick`, `trim_col`, `reman_fn` (all None by
+  default). GM and Ford parsed output was compared old vs new on 3 pages per site:
+  identical.
+- Trials (tier A, 2 segments): Honda 81 records (Accord 1998-2002 seed 2002,
+  2003-2005 seed 2003), Acura 153 (TL seeds 2005/2003/2010, MDX seed 2005), 0
+  errors, no refusals. Every record was checked field by field against the cached
+  pages by an independent checker (pn, name, description, Position, Replaces /
+  Replaced By, every fitment row and cell incl. the store rows behind "View More",
+  evidence lines): 234/234 match.
+
+#### Honda family: what a curator must know
+
+- Navigation is per trim catalog (`--4dr_exl_v6_navi-ka_5at`). The crawler reads two
+  per year: base and best-equipped. Both come from one body style (4dr when the year
+  has one), 49-state (KA) and automatic when available. CNG (GX), Alaska/Hawaii,
+  PZEV/SULEV/ULEV and plant sub-builds are skipped. So a 4dr-only pick can miss parts
+  that only the coupe carries, such as coupe headlamps.
+- Fitment columns: "Year Make Model | Body & Trim | Emission & Transmission". Body &
+  Trim goes to `trims` ("4 Door EX-L (PZEV)"); Emission & Transmission goes to `options`
+  ("KA 5AT"). There is no engine column. V6 shows up only in trim names ("4 Door EX-L
+  V6", "4 Door EX-V6"). Honda prints one row per year.
+- Position: Acura product pages and many Honda ones print "Position: Driver Side /
+  Passenger Side / Front Passenger Side", and the record keeps it verbatim. The name
+  always carries side and position too ("R." / "L.", "FR." / "RR."). Some pages print
+  "Driver Side Passenger Side" on a left mirror (76250-S84-A31ZJ). Those records get
+  the flag `position names both sides`, or `position ... contradicts name` when
+  Position and the name's side disagree. Trial records predate the flag.
+- `name` is the list row. `description` is the product page's Part Description
+  ("Turn & Stop Lamp", "Window Switch", "Dash Control Unit"). Classify by `name`.
+- Reman: "(RMD)", "Core Id", or a pn ending in RM. Dropped when a new number is on
+  the same list page, kept otherwise. 2005 MDX power-steering pump: only the reman
+  06561-RDJ-505RM is listed.
+- Coils are "Coil, Plug Hole". The module removes "Plug Hole"/"Plug Top" before the
+  template's COMMON_EXCLUDE (which would drop "plug").
+- Window switch: "Switch Assy., Power Window Master". The 2003-07 Accord prints its
+  driver switch as a bare "Switch Assy." (35754-SDA-306; product page: Window Switch,
+  Driver Side, replaces 35750-SDA-A12). It is kept only from a front door lining
+  diagram and carries `list_flags` for curation.
+- Tail lights: "Taillight Assy.", "Lamp Unit, R./L. (Tail)". The 2003-07 Accord has
+  two per side: 33501 "Turn & Stop Lamp" and 34151 "Tail Lamp" (likely the trunk-lid
+  section; the page doesn't say). Both are kept.
+- Climate control: "Control Assy., Heater / Auto Air Conditioner"; 2009-14 TL splits it
+  into "Switch Assy., L./R. Auto Air Conditioner" (both kept). Rear controls, knobs and
+  the A/C computer are excluded.
+- Honda's "Tailgate" diagram: Ridgeline goes to tailgate, every other model to
+  liftgate.
+- Civic Hybrid (and Accord Hybrid, if added to the worklist) is crawled through the
+  Civic catalog's hybrid trims. Its fitment prints "Civic", so crawl.py's coverage
+  check never marks those years covered.
+- Fitment blocks list sister models: Accord coils also fit Crosstour/Odyssey, Acura
+  alternator 31100-RJA-A02 fits MDX/RL/TL. Model names are as printed.
+
+#### Known gaps (nothing invented)
+
+- 2003-07 Accord climate control is part of the combined radio/HVAC "Module Assy.,
+  Center"; the 2005 TL's is part of its center display module. Neither is filed as
+  climate-control.
+- No single grille assembly in several catalogs (2008 Accord, 2007 Odyssey "Base,
+  FR. Grille", 2005 TL mesh only).
+- 2010 TL has no power-steering-pump diagram. 1997 Accord DX has no starter diagram.
+- Distributor-era ignition (pre-1998 Accord, 2002 Accord DX): no coil diagram.
