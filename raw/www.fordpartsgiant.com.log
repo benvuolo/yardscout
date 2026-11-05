@@ -4,3 +4,18 @@
 01:28:59 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=172 errors=0
 01:36:36 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=269 errors=0
 01:43:40 time budget reached records=359
+01:43:47 start site=www.fordpartsgiant.com segments=112 tiers=['A', 'B']
+01:43:47 seg done tier=A Ford F-150 [1997, 2003] seeds=[2001] records=359 errors=0
+01:43:47 seg done tier=A Ford F-150 [2004, 2008] seeds=[2004] records=359 errors=0
+01:43:47 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=359 errors=0
+01:43:47 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=359 errors=0
+01:43:47 seg done tier=A Ford Edge [2007, 2024] seeds=[2013] records=359 errors=0
+01:49:04 seg done tier=A Ford Fusion [2013, 2016] seeds=[2014] records=426 errors=0
+01:54:32 seg done tier=A Ford Escape [2008, 2012] seeds=[2008] records=492 errors=0
+01:58:40 seg done tier=A Ford Escape [2013, 2016] seeds=[2013] records=541 errors=0
+02:05:29 net-fail product https://www.fordpartsgiant.com/parts/ford-body-assy-carburettor-throttle_1l2z-9e926-db.html: network error after 3 tries: ReadTimeout
+02:06:02 seed A|Ford|Explorer|2002 had network failures; left open for retry
+02:06:02 seg done tier=A Ford Explorer [2002, 2005] seeds=[2002] records=585 errors=1
+02:09:54 seg done tier=A Ford Taurus [2000, 2007] seeds=[2003] records=599 errors=1
+02:13:30 seg done tier=A Ford Expedition [2003, 2006] seeds=[2003] records=634 errors=1
+02:17:06 time budget reached records=654
