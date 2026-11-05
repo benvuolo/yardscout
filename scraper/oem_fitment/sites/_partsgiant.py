@@ -180,6 +180,9 @@ class Config:
     # optional regex: a "Trim & Engine" cell with no "|" whose items all match
     # ENGINE_RE or this is read as engines (Hyundai prints "DOHC - TCI/GDI").
     engine_rx: str | None = None
+    # False when the site's nameless list notes are not positions (BMW prints
+    # "Front panel, control" as a note); then only "Location: ..." counts
+    bare_list_position: bool = True
 
 
 def slug(name: str) -> str:
@@ -364,10 +367,12 @@ def _side(text: str) -> str | None:
     return None
 
 
-def _list_position(info: list[str]) -> str | None:
+def _list_position(info: list[str], bare: bool = True) -> str | None:
     for x in info:
         if LOCATION_RE.match(x):
             return x
+    if not bare:
+        return None
     for x in info:  # nameless entry such as "Right [GTS], [JP5]" (Mopar)
         if ":" not in x.split(" ")[0]:
             m = re.match(r"^(?:Left|Right|LH|RH|Front|Rear)\b(?:[ -](?:Bank|Side|Hand|Front|Rear|Upper|Lower|Inner|Outer)\b)*", x, re.I)
@@ -412,7 +417,7 @@ def parts_on_page(cfg: Config, list_url: str, cat: str) -> list[dict]:
         if r["pn"] in seen:
             continue
         seen.add(r["pn"])
-        pos = _list_position(r["info"])
+        pos = _list_position(r["info"], cfg.bare_list_position)
         if pos:
             _LIST_POSITION[r["pn"]] = (pos, list_url)
         name = r["main"] + (f", {r['remark']}" if r["remark"] else "")

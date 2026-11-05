@@ -22,9 +22,11 @@ ALT = f"{L}/engine_electrical_system/alternator.html"
 STARTER = f"{L}/engine_electrical_system/starter.html"
 MIRROR = f"{L}/vehicle_trim/outside_mirror.html"
 TRUNK = f"{L}/bodywork/single_components_for_trunk_lid.html"
+CLIMATE = f"{L}/heater_and_air_conditioning/air_conditioning_control.html"
 P_ALT = f"{B}/parts/bmw-exchange_generator-12317555926.html"                       # 9 models incl. 528i, X3
 P_MIRROR = f"{B}/parts/bmw-exterior_mirror_without_glass_heated_left-51167268261.html"  # Replaces, side from lr
 P_STARTER = f"{B}/parts/bmw-starter-12417616500.html"                              # 33 rows
+P_CLIMATE = f"{B}/parts/bmw-air_conditioning_control-64119190922.html"             # list note "Front panel, control"
 
 n = 0
 
@@ -73,7 +75,7 @@ ok(not match("trunk-lid", "Left trunk lid hinge") and not match("trunk-lid", "Tr
 ok(("BMW", "3 Series") not in X.MODELS and X.MODELS[("BMW", "328i xDrive")].slugs == "328i_xdrive", "slug map")
 pure = n
 
-if not _pg_cacheonly.have([MODEL, N51, N52, ALT, STARTER, MIRROR, TRUNK, P_ALT, P_MIRROR, P_STARTER]):
+if not _pg_cacheonly.have([MODEL, N51, N52, ALT, STARTER, MIRROR, TRUNK, CLIMATE, P_ALT, P_MIRROR, P_STARTER, P_CLIMATE]):
     print(f"OK {pure} pure checks; cached-page checks skipped")
     sys.exit(0)
 
@@ -107,5 +109,10 @@ ok(m["position"] == "Driver Side" and m["replaces"] == ["51-16-7-202-937"] and m
 ok(m["fitment"][0]["raw"] == "2009-2011 BMW 323i | Sedan(E90)", m["fitment"][0])
 s = X.product(P_STARTER)
 ok(len(s["fitment"]) == 33 and s["fitment"][0]["model"] == "1 Series M", (len(s["fitment"]), s["fitment"][0]))
+
+cl = X.parts_on_page(CLIMATE, "climate-control")
+ok(cl[0]["pn"] == "64-11-9-190-922" and "Front panel, control" in cl[0]["list_info"], cl[0])
+c = X.product(P_CLIMATE)
+ok(c["position"] is None, f"a list note is not a position: {c['position']!r}")
 
 print(f"OK {n} checks ({pure} pure)")

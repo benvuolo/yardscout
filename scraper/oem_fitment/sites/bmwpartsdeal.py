@@ -161,5 +161,6 @@ PARTS = {cat: _rule(cat) for cat in RULES}
 
 # "Submodel" ("Sedan N52 Engine(E90), Wagon(E91)") is kept as fitment[].options
 CFG = T.Config(site=SITE, models=MODELS, subcats=SUBCATS, parts=PARTS, head_fn=head,
-               reman_re=REMAN, option_col=r"option|detail|submodel")
+               reman_re=REMAN, option_col=r"option|detail|submodel",
+               bare_list_position=False)  # list notes such as "Front panel, control" are not sides
 categories_for, parts_on_page, product = T.bind(CFG)
