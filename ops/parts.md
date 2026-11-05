@@ -108,6 +108,9 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   cars); coverage unchanged. Tail-only revisions (Ram 2007) are not cuts.
   Found, not fixed: Dodge "Ram Van"/"Ram Wagon" listings match the Ram
   pickup entry (PARTS_GAPS §23.2).
+  23.3 Ranger 1989/2001/2006, Traverse 2013/2022, Pathfinder 2002/2008/2017
+  (1,665 cars narrowed). Suburban: no confirmed year, left out.
+  Single-component years (grille-only, tail-only) are not cuts.
 
 ## How to measure
 
@@ -137,9 +140,9 @@ The generic-only count re-matches every distinct year/make/model in
 2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
    overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
    into `lexus es` and drop the duplicate (§20.5).
-3. Facelifts (§23, in progress): 23.1–23.2 done (Grand Caravan, Odyssey,
-   Expedition, Town & Country, Silverado/Sierra, Ram, BMW 3, Maxima). Next:
-   Ranger, Suburban, Traverse, Pathfinder; then TrailBlazer, Pilot,
+3. Facelifts (§23, in progress): 23.1–23.3 done (Grand Caravan, Odyssey,
+   Expedition, Town & Country, Silverado/Sierra, Ram, BMW 3, Maxima, Ranger,
+   Traverse, Pathfinder; Suburban none). Next: TrailBlazer, Pilot,
    Tahoe/Yukon, Liberty, Edge, Charger, Dakota, Grand Cherokee. The rule: a
    cited source for every year, and models without one are left out.
 4. When the daily email's "Most searched parts / cars (7 d)" has a week of

@@ -1740,3 +1740,35 @@ generic-only 15,326, no entry 12,360. Tests pass (new §23.2 check).
 (Dodge B-series vans) and "Chevrolet Ram1500" listings match the Ram
 pickup entry, so a 2002–05 Ram Van shows pickup headlights. Silverado/
 Sierra 2500/3500 listings also match the 1500 rows.
+
+### 23.3 Ranger, Suburban, Traverse, Pathfinder
+
+**Single-component rule (from §23.2 on).** The cut is per model and splits
+every appearance row, so a year in which only one item changed (a grille
+alone, tail lights alone) would split all the other lamps' windows with no
+basis. Such years are listed as left out, not added.
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Ford Ranger | 1989, 2001, 2006 | 1989: "a restyled hood and grille, and flush-mounted composite headlamps ... the front bumper was redesigned" (en.wikipedia.org/wiki/Ford_Ranger_(Americas)). 2001: "the front fascia was redesigned with a new grille and headlamps" (Wikipedia); Autoblog 2001 Ranger review "revamped front styling ... new multi-beam reflector lamps". 2006: "The grille was restyled into a '3-slot' configuration ... adding clear-lens headlamps ... redesigned taillamps" (Wikipedia) |
+| Chevrolet Traverse | 2013, 2022 | 2013: "a new grille and front fascia, a redesigned rear liftgate ... reworked Camaro-inspired tail lights" (en.wikipedia.org/wiki/Chevrolet_Traverse); cars.com 2012 NYIAS 2013 Traverse. 2022: "a facelift in 2021 for the 2022 model year ... thin LED headlights and tail lights" (Wikipedia); GM Authority 2021-07 (refresh slipped from MY2021 to 2022) |
+| Nissan Pathfinder | 2002, 2008, 2017 | 2002: "another facelift occurred in 2001 for the 2002 model year ... a revised grille" (en.wikipedia.org/wiki/Nissan_Pathfinder); Consumer Guide 2001–04 "New for 2002 were a restyled grille, body-color bumpers". 2008: cars.com 2007 Chicago show "revised grille and slight changes to the front and back ends"; Wikipedia "The facelifted 2008 Pathfinder debuted at the 2007 Chicago Auto Show". 2017: "an exterior update which includes a new fascia with restyled headlights" (Wikipedia); Nissan US 2017 press kit (new tail lights, search summary) |
+
+**Left out:** Ranger 1995 ("all Rangers adopted a four-hole grille") and
+2004 ("the grille was enlarged"): grille only. Ranger 2019–23: no
+facelift. **Chevrolet Suburban: no year added.** GMT400 1994 is a grille
+plus a high-mount brake light (Edmunds, search excerpt; Wikipedia gives no
+detail); GMT800 2003 front was "not carried over to the SUVs"; GMT900
+2010 raised bumper (single source); K2 2018 LED DRLs only; the T1 refresh
+is MY2025 (out of range). Pathfinder 1999.5: a mid-year change inside
+MY1999, so no first model year can be cut without mislabelling part of
+1999; 2001 (bumper colour and badge only); 2010 R51 (not US); R53 2022–24
+(none in range). The 2008 headlamps and the 2017 tail lights (Platinum
+only per Wikipedia) are not claimed to have changed.
+
+**Checks.** Inventory after the 2026-11-05 scan: 334,595 cars, 12,673
+distinct. 0 cars with any non-`fits` difference. 1,665 cars narrowed
+(Ranger 1,626: headlights 1983–92 → 1983–88/1989–92, 1998–2018 →
+1998–2000/2001–05/2006–18; Traverse 39: LED headlights 2018–21/2022–24).
+Pathfinder has no appearance rows yet. Coverage unchanged: generic-only
+15,400, no entry 12,407. Tests pass (new §23.3 check).

@@ -6548,6 +6548,9 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "ram 3500": [2006, 2013],
     "bmw 3": [2002, 2004, 2009, 2011, 2016, 2023],  # sedan/wagon and coupe/convertible LCIs
     "maxima": [1997, 2002, 2007, 2012, 2019],
+    "ranger": [1989, 2001, 2006],    # grille-only 1995/2004 left out
+    "traverse": [2013, 2022],
+    "pathfinder": [2002, 2008, 2017],  # mid-year 1999.5 left out
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
