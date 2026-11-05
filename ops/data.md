@@ -130,3 +130,16 @@ down as history grows. Not a per-yard problem; noted for the owner.
   index re-lists again.
 - Owner question: year-split Dodge Ram → Ram (2011+)? Not done; no clean
   basis (see above).
+
+## Manual-transmission detection (opened 2026-11-05, hub workflow wf_231e5bc1-597)
+
+Baseline: 4,091 confirmed manuals of 333k cars (4,047 vPIC, 44 listing);
+transmission known for ~49k cars; Ford/Toyota/Nissan ~0 confirmed. VW/Audi/
+BMW/Mercedes VINs do not encode the transmission; build (PR/option) codes are
+not public in bulk. Evidence tracks, each validated against the known-
+transmission cars (>= 99.5% agreement) and adversarially re-checked:
+1. VIN-encoded transmission from manufacturer Part 565 filings (NHTSA MID).
+2. EPA fueleconomy.gov sole-offering: manual-only year/make/model/engine/drive.
+3. Manual-only trims identified from the VIN decode/VIN patterns.
+Work files: scraper/manual_detect/. Integration lands on a worktree branch for
+hub review before merge.
