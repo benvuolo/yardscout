@@ -8,9 +8,9 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 
 | Version | iOS | Android |
 |---|---|---|
-| 1.12.10 | build 26, submitted 2026-11-03, waiting for review | — |
+| 1.12.10 | build 26, live (READY_FOR_SALE) | — |
 | 1.12.11 | — | versionCode 33, Play production, in review |
-| 1.12.12 | build 27, dispatched 2026-11-05 with submit=true (supersedes 1.12.10 in the review queue) | versionCode 34, dispatched 2026-11-05 to production |
+| 1.12.12 | build 27, submitted 2026-11-05 19:42 UTC, WAITING_FOR_REVIEW, auto-release on approval | versionCode 34, Play production, status completed, rollout 100% (Google review pending) |
 
 1.12.11 added the review prompt (`ReviewPlugin.swift` / `ReviewPlugin.java`,
 `maybeAskForReview` in app.js) and the keyword/title retune.
