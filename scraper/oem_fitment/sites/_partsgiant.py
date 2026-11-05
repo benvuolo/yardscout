@@ -59,7 +59,8 @@ parts        {category id: (include, exclude_head[, exclude_full])}.
              exclude does. COMMON_EXCLUDE (bulbs, bolts, clips, brackets,
              gaskets, seals, wiring, labels, trim, ...) always applies to
              "<pncDesc> | <mainDesc>" (or to head_fn(row) when the site
-             sets head_fn). A rule may instead be a function
+             sets head_fn). Optional: engine_rx (more engine-only "Trim & Engine"
+             cells). A rule may instead be a function
              rule(row, text) -> bool (row: pn, group, main, remark, info),
              e.g. Ford matches on the base number inside its part number.
 
@@ -176,6 +177,9 @@ class Config:
     # optional: row -> True for a remanufactured row the site marks its own way
     # (Honda "(RMD)", "Core Id", pn suffix "RM"); OR-ed with REMAN_RE.
     reman_fn: object = None
+    # optional regex: a "Trim & Engine" cell with no "|" whose items all match
+    # ENGINE_RE or this is read as engines (Hyundai prints "DOHC - TCI/GDI").
+    engine_rx: str | None = None
 
 
 def slug(name: str) -> str:
@@ -505,7 +509,8 @@ def product(cfg: Config, product_url: str) -> dict:
             if "|" in te:
                 t, _, e = te.partition("|")
                 trims, engines = _split(t), _split(e)
-            elif te and all(ENGINE_RE.match(x) for x in _split(te)):
+            elif te and all(ENGINE_RE.match(x) or (cfg.engine_rx and re.match(cfg.engine_rx, x, re.I))
+                            for x in _split(te)):
                 trims, engines = [], _split(te)  # "6 Cyl 3.5L": engine only
             else:
                 trims, engines = _split(te), []
