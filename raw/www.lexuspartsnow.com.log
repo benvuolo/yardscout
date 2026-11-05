@@ -418,3 +418,68 @@
 22:28:21 chain-unlinked trunk-lid 1 numbers named by 64401-33430, no catalog link: 64401-33500
 22:28:21 chain-unlinked trunk-lid 1 numbers named by 64401-33470, no catalog link: 64401-33510
 22:28:21 time budget reached records=2022
+22:28:32 start site=www.lexuspartsnow.com mode=worklist tiers=['A', 'B'] records=2022 list_lines=238 year_lines=31 url_index=8355
+22:28:32 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002] records=2022 errors=16
+22:28:32 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=2022 errors=16
+22:28:32 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=2022 errors=16
+22:28:32 seg done tier=A Lexus ES 350 [1997, 2018] seeds=[2007] records=2022 errors=16
+22:28:32 seg done tier=A Lexus ES 330 [2004, 2006] seeds=[2004] records=2022 errors=16
+22:28:32 seg done tier=A Lexus GS 300 [1993, 2006] seeds=[2006] records=2022 errors=16
+22:28:32 seg done tier=A Lexus RX 350 [2004, 2016] seeds=[2007] records=2022 errors=16
+22:28:32 seg done tier=A Lexus RX 330 [2004, 2006] seeds=[2004] records=2022 errors=16
+22:28:32 seg done tier=A Lexus LS 400 [1990, 2005] seeds=[1996] records=2022 errors=16
+22:28:32 seg done tier=A Lexus LS 430 [2001, 2006] seeds=[2001] records=2022 errors=16
+22:28:32 seg done tier=A Lexus IS [2004, 2016] seeds=[2007] records=2022 errors=16
+22:28:32 seg done tier=A Lexus LS 460 [1996, 2016] seeds=[2007] records=2022 errors=16
+22:28:32 seg done tier=A Lexus GS [1998, 2018] seeds=[2006] records=2022 errors=16
+22:28:32 seg done tier=A Lexus ES [1990, 2015] seeds=[2007] records=2022 errors=16
+22:28:32 seg done tier=A Lexus GS 350 [1995, 2015] seeds=[2007] records=2022 errors=16
+22:28:32 seg done tier=A Lexus IS 300 [2001, 2005] seeds=[2001] records=2022 errors=16
+22:28:32 seg done tier=A Lexus RX 400h [2006, 2008] seeds=[2006] records=2022 errors=16
+22:28:32 seg done tier=A Lexus IS 350 [2006, 2014] seeds=[2006] records=2022 errors=16
+22:28:32 seg done tier=A Lexus RX [2004, 2008] seeds=[2005] records=2022 errors=16
+22:28:32 seg done tier=A Lexus RX [1999, 2003] seeds=[2001] records=2022 errors=16
+22:28:32 seg done tier=A Lexus GS 400 [1998, 2002] seeds=[1998] records=2022 errors=16
+22:28:32 seg done tier=A Lexus LS [1990, 2012] seeds=[1998] records=2022 errors=16
+22:28:32 seg done tier=A Lexus SC 400 [1992, 1999] seeds=[1992] records=2022 errors=16
+22:28:32 seg done tier=A Lexus GS 430 [2001, 2006] seeds=[2006] records=2022 errors=16
+22:28:32 seg done tier=A Lexus SC 430 [2002, 2005] seeds=[2002] records=2022 errors=16
+22:28:32 seg done tier=B Lexus ES 300 [1992, 2008] seeds=[2002] records=2022 errors=16
+22:28:32 seg done tier=B Lexus RX 300 [1999, 2008] seeds=[2000] records=2022 errors=16
+22:28:32 seg done tier=B Lexus IS 250 [2006, 2015] seeds=[2007] records=2022 errors=16
+22:28:32 seg done tier=B Lexus ES 350 [1997, 2018] seeds=[2007] records=2022 errors=16
+22:30:57 chain-unlinked radiator 1 numbers named by 16400-20320, no catalog link: 16410-YZZAD
+22:32:41 seg done tier=B Lexus ES 330 [2004, 2006] seeds=[2004] records=2042 errors=16
+22:34:09 chain-unlinked ignition-coils 1 numbers named by 90919-02249, no catalog link: 90919-02259
+22:34:57 chain-unlinked door-front 1 numbers named by 67001-30850, no catalog link: 67001-30841
+22:34:57 chain-unlinked door-front 1 numbers named by 67002-30A20, no catalog link: 67002-30A11
+22:35:21 chain-unlinked door-rear 1 numbers named by 67003-30600, no catalog link: 67003-30620
+22:35:21 chain-unlinked door-rear 1 numbers named by 67004-30600, no catalog link: 67004-30620
+22:35:37 chain-unlinked hood 1 numbers named by 53301-30460, no catalog link: 53301-30450
+22:35:53 chain-unlinked fender 1 numbers named by 53801-30A30, no catalog link: 53801-30A01
+22:35:53 chain-unlinked fender 1 numbers named by 53802-30A10, no catalog link: 53802-3F211
+22:37:37 chain-unlinked grille 1 numbers named by 53111-30870, no catalog link: 53111-30904
+22:38:49 chain-unlinked trunk-lid 1 numbers named by 64401-30B60, no catalog link: 64401-30A80
+22:38:49 chain-unlinked trunk-lid 1 numbers named by 64401-30B80, no catalog link: 64401-30B00
+22:38:49 chain-unlinked trunk-lid 1 numbers named by 64401-30B90, no catalog link: 64401-30B10
+22:38:49 chain-unlinked trunk-lid 1 numbers named by 64401-30B70, no catalog link: 64401-30A90
+22:41:05 chain-unlinked hood 1 numbers named by 53301-30410, no catalog link: 53301-30380
+22:41:21 chain-unlinked fender 1 numbers named by 53801-3F380, no catalog link: 53801-3F290
+22:41:21 chain-unlinked fender 1 numbers named by 53802-3F200, no catalog link: 53802-3F110
+22:46:09 seg done tier=B Lexus GS 300 [1993, 2006] seeds=[2006, 1998, 1995] records=2109 errors=16
+22:55:12 chain-unlinked ignition-coils 1 numbers named by 90919-A2002, no catalog link: 90919-A2013
+22:55:44 chain-unlinked radiator 1 numbers named by 16041-20313, no catalog link: 16041-20314
+22:55:44 chain-unlinked radiator 1 numbers named by 16041-31480, no catalog link: 16041-0P180
+22:55:44 chain-unlinked radiator 1 numbers named by 16041-31490, no catalog link: 16041-0P190
+22:57:12 chain-unlinked door-front 1 numbers named by 67001-48070, no catalog link: 67001-0E020
+22:57:12 chain-unlinked door-front 1 numbers named by 67002-48070, no catalog link: 67002-0E020
+22:58:16 chain-unlinked door-rear 1 numbers named by 67003-48090, no catalog link: 67003-0E020
+22:58:16 chain-unlinked door-rear 1 numbers named by 67004-48090, no catalog link: 67004-0E020
+22:58:56 chain-unlinked hood 1 numbers named by 53301-48060, no catalog link: 53301-0E020
+22:59:44 listed after chain fender 53801-0E010: line 2190 (recrawl_of 2188)
+22:59:44 listed after chain fender 53802-0E010: line 2191 (recrawl_of 2189)
+23:02:32 chain-unlinked grille 1 numbers named by 53101-48071, no catalog link: 53101-48070
+23:04:32 chain-unlinked liftgate 1 numbers named by 67005-48300, no catalog link: 67005-0E080
+23:05:20 chain-unlinked liftgate 1 numbers named by 67005-0E060, no catalog link: 67005-0E061
+23:05:20 chain-unlinked liftgate 2 numbers named by 67005-0E080, no catalog link: 67005-48261, 67005-48301
+23:05:20 time budget reached records=2225
