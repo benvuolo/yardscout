@@ -545,3 +545,72 @@
 10:31:18 seg done tier=A Ford Transit Connect [2010, 2013] seeds=[2010] records=2555 errors=8
 10:39:57 seg done tier=A Ford Fusion [2017, 2018] seeds=[2017] records=2606 errors=8
 10:45:12 time budget reached records=2613
+10:45:22 start site=www.fordpartsgiant.com segments=112 tiers=['A', 'B']
+10:45:22 seg done tier=A Ford F-150 [1997, 2003] seeds=[2001] records=2613 errors=8
+10:45:22 seg done tier=A Ford F-150 [2004, 2008] seeds=[2004] records=2613 errors=8
+10:45:22 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=2613 errors=8
+10:45:22 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=2613 errors=8
+10:45:22 seg done tier=A Ford Edge [2007, 2024] seeds=[2013] records=2613 errors=8
+10:45:22 seg done tier=A Ford Fusion [2013, 2016] seeds=[2014] records=2613 errors=8
+10:45:22 seg done tier=A Ford Escape [2008, 2012] seeds=[2008] records=2613 errors=8
+10:45:22 seg done tier=A Ford Escape [2013, 2016] seeds=[2013] records=2613 errors=8
+10:45:22 seg done tier=A Ford Explorer [2002, 2005] seeds=[2002] records=2613 errors=8
+10:45:22 seg done tier=A Ford Taurus [2000, 2007] seeds=[2003] records=2613 errors=8
+10:45:22 seg done tier=A Ford Expedition [2003, 2006] seeds=[2003] records=2613 errors=8
+10:45:22 seg done tier=A Ford Ranger [1998, 2011] seeds=[2000] records=2613 errors=8
+10:45:22 seg done tier=A Ford Fiesta [1978, 2019] seeds=[2011] records=2613 errors=8
+10:45:22 seg done tier=A Ford Focus [2008, 2011] seeds=[2010] records=2613 errors=8
+10:45:22 seg done tier=A Ford F-150 [2009, 2012] seeds=[2010] records=2613 errors=8
+10:45:22 seg done tier=A Ford Fusion [2006, 2009] seeds=[2008] records=2613 errors=8
+10:45:22 seg done tier=A Ford Focus [2015, 2018] seeds=[2015] records=2613 errors=8
+10:45:22 seg done tier=A Ford Expedition [1997, 2002] seeds=[2000] records=2613 errors=8
+10:45:22 seg done tier=A Ford Explorer [2006, 2010] seeds=[2006] records=2613 errors=8
+10:45:22 seg done tier=A Ford Explorer [1995, 2001] seeds=[1999] records=2613 errors=8
+10:45:22 seg done tier=A Ford Focus [2005, 2007] seeds=[2007] records=2613 errors=8
+10:45:22 seg done tier=A Ford Explorer [2011, 2015] seeds=[2013] records=2613 errors=8
+10:45:22 seg done tier=A Ford Mustang [1999, 2004] seeds=[2000] records=2613 errors=8
+10:45:22 seg done tier=A Mercury Grand Marquis [1998, 2011] seeds=[2000] records=2613 errors=8
+10:45:22 seg done tier=A Ford Expedition [2007, 2017] seeds=[2007] records=2613 errors=8
+10:45:22 seg done tier=A Ford E-250 [1978, 2014] seeds=[2006] records=2613 errors=8
+10:45:22 seg done tier=A Ford E-150 [1969, 2014] seeds=[1999] records=2613 errors=8
+10:45:22 seg done tier=A Ford Escape [2005, 2007] seeds=[2005] records=2613 errors=8
+10:45:22 seg done tier=A Ford Crown Victoria [1998, 2011] seeds=[2008] records=2613 errors=8
+10:45:22 seg done tier=A Ford Focus [2000, 2004] seeds=[2003] records=2613 errors=8
+10:45:22 seg done tier=A Ford Ranger [1993, 1997] seeds=[1997] records=2613 errors=8
+10:45:22 seg done tier=A Ford Mustang [2005, 2009] seeds=[2006] records=2613 errors=8
+10:45:22 seg done tier=A Ford E-350 [1970, 2021] seeds=[2006] records=2613 errors=8
+10:45:22 seg done tier=A Ford F-250 Super Duty [1980, 2024] seeds=[2008] records=2613 errors=8
+10:45:22 seg done tier=A Ford Flex [2009, 2019] seeds=[2009] records=2613 errors=8
+10:45:22 seg done tier=A Ford Escape [2001, 2004] seeds=[2003] records=2613 errors=8
+10:45:22 seg done tier=A Ford F-150 [1992, 1996] seeds=[1995] records=2613 errors=8
+10:45:22 seg done tier=A Ford Explorer Sport Trac [2001, 2017] seeds=[2001] records=2613 errors=8
+10:45:22 seg done tier=A Ford Taurus [2013, 2019] seeds=[2013] records=2613 errors=8
+10:45:22 seg done tier=A Ford Taurus [2010, 2012] seeds=[2011] records=2613 errors=8
+10:45:22 seg done tier=A Ford Five Hundred [2005, 2007] seeds=[2005] records=2613 errors=8
+10:45:22 seg done tier=A Ford F-250 [1962, 1998] seeds=[1997] records=2613 errors=8
+10:45:22 seg done tier=A Lincoln Town Car [2003, 2011] seeds=[2003] records=2613 errors=8
+10:45:22 seg done tier=A Ford F-250 [1999, 2007] seeds=[1999] records=2613 errors=8
+10:45:22 seg done tier=A Ford Escape [2017, 2019] seeds=[2017] records=2613 errors=8
+10:45:22 seg done tier=A Ford F-150 [2013, 2014] seeds=[2013] records=2613 errors=8
+10:45:22 seg done tier=A Mercury Mariner [2005, 2011] seeds=[2008] records=2613 errors=8
+10:45:22 seg done tier=A Lincoln Navigator [2003, 2006] seeds=[2004] records=2613 errors=8
+10:45:22 seg done tier=A Mercury Milan [2006, 2011] seeds=[2010] records=2613 errors=8
+10:45:22 seg done tier=A Ford Mustang [1994, 1998] seeds=[1998] records=2613 errors=8
+10:45:22 seg done tier=A Ford Escort [1983, 2003] seeds=[1998] records=2613 errors=8
+10:45:22 seg done tier=A Ford Ranger [1978, 1992] seeds=[1992] records=2613 errors=8
+10:45:22 seg done tier=A Lincoln Town Car [1998, 2002] seeds=[2000] records=2613 errors=8
+10:45:22 seg done tier=A Lincoln MKX [2007, 2010] seeds=[2007] records=2613 errors=8
+10:45:22 seg done tier=A Ford F-150 [1987, 1991] seeds=[1990] records=2613 errors=8
+10:45:22 seg done tier=A Ford Freestar [2004, 2007] seeds=[2004] records=2613 errors=8
+10:45:22 seg done tier=A Ford Freestyle [2005, 2007] seeds=[2005] records=2613 errors=8
+10:45:22 seg done tier=A Ford F-350 Super Duty [1999, 2021] seeds=[2004] records=2613 errors=8
+10:45:22 seg done tier=A Ford Mustang [2010, 2014] seeds=[2010] records=2613 errors=8
+10:45:22 seg done tier=A Ford Taurus [1996, 1999] seeds=[1999] records=2613 errors=8
+10:45:22 seg done tier=A Ford Transit Connect [2010, 2013] seeds=[2010] records=2613 errors=8
+10:45:22 seg done tier=A Ford Fusion [2017, 2018] seeds=[2017] records=2613 errors=8
+10:45:22 seg done tier=A Lincoln Town Car [1969, 1997] seeds=[1997] records=2613 errors=8
+10:52:35 seg done tier=A Lincoln LS [2000, 2006] seeds=[2005] records=2652 errors=8
+10:57:07 seg done tier=A Ford Windstar [2001, 2003] seeds=[2003] records=2668 errors=8
+11:09:07 seg done tier=A Mercury Sable [2000, 2005] seeds=[2003, 2001] records=2677 errors=8
+11:15:55 seg done tier=A Lincoln MKS [2009, 2016] seeds=[2009] records=2711 errors=8
+11:15:55 time budget reached records=2711
