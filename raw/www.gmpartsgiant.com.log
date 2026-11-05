@@ -5,3 +5,18 @@
 01:41:42 seg done tier=A Chevrolet Equinox [2010, 2015] seeds=[2012] records=212 errors=1
 01:46:18 seg done tier=A Chevrolet Impala [2006, 2011] seeds=[2008] records=260 errors=1
 01:46:18 time budget reached records=260
+01:46:26 start site=www.gmpartsgiant.com segments=206 tiers=['A', 'B']
+01:46:26 seg done tier=A Chevrolet Cruze [1986, 2014] seeds=[2014] records=260 errors=1
+01:46:26 seg done tier=A Chevrolet Silverado 1500 [1999, 2023] seeds=[2000] records=260 errors=1
+01:46:26 seg done tier=A Chevrolet Equinox [2010, 2015] seeds=[2012] records=260 errors=1
+01:46:26 seg done tier=A Chevrolet Impala [2006, 2011] seeds=[2008] records=260 errors=1
+01:50:06 seg done tier=A Chevrolet Malibu [2008, 2012] seeds=[2012] records=296 errors=1
+01:55:42 nav-fail Chevrolet Traverse 2008: ValueError: no 2008 catalog for Chevrolet Traverse (chevrolet-['traverse'])
+01:55:42 seg done tier=A Chevrolet Traverse [2008, 2017] seeds=[2011, 2008] records=331 errors=2
+02:05:27 net-fail list https://www.gmpartsgiant.com/parts-list/2004-chevrolet-trailblazer-2wd/fuel_system_exhaust_emission_system/throttle_body.html: network error after 3 tries: ReadTimeout
+02:06:26 seed A|Chevrolet|Trailblazer|2004 had network failures; left open for retry
+02:06:26 seg done tier=A Chevrolet Trailblazer [2002, 2009] seeds=[2004] records=397 errors=3
+02:09:38 product-fail https://www.gmpartsgiant.com/parts/gm-control-25932036.html: ValueError: no partInfo in store
+02:09:47 product-fail https://www.gmpartsgiant.com/parts/gm-control-25932036.html: ValueError: no partInfo in store
+02:10:50 seg done tier=A GMC Acadia [2007, 2016] seeds=[2012] records=415 errors=5
+02:17:16 time budget reached records=453
