@@ -6073,6 +6073,16 @@ _gap_extend("milan", parts=[
     ]),
 ])
 
+# Buick Encore 2013-2022 (1st gen US; 307 cars generic-only). 2017 facelift
+# in FACELIFT_BREAKS. A/C standard on the base (KBB 2013); AWD available
+# every year (EPA "Encore AWD"); power sunroof optional, not on the base.
+# The Encore GX (EPA 2020-25) is a different vehicle that the "encore"
+# keyword also caught; it gets its own evergreen-only entry (nothing
+# model-specific claimed), so the specificity guard drops "encore" for it.
+UNOBTANIUM_DB["encore gx"] = {"display": "Buick Encore GX", "make": "Buick", "match": ["encore gx"], "year_range": (2020, 2025), "top_parts": []}
+_EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, "encore gx")
+_gap_extend("encore", parts=_per_gen([(2013, 2022)], [*_GAP_MECH, _AWD_COUPLING, _SUNROOF]))
+
 # ---- end of §22 block
 
 _apply_consensus_evergreens()
@@ -6575,6 +6585,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "grand cherokee": [1996, 2004, 2008, 2014, 2017],
     # §22 (PARTS_GAPS §22; cited there)
     "milan": [2010],
+    "encore": [2017],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

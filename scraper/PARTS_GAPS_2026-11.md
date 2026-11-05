@@ -1889,3 +1889,30 @@ consumerguide.com/used/2006-11-mercury-milan; fueleconomy.gov menus
 
 Result (same inventory): generic-only 15,399 (4.6%) → 15,087 (4.5%). Milan
 311 → 0.
+
+### 22.2 Buick Encore 2013–2022, and the Encore GX routing fix
+
+Basis: WP Buick_Encore; cars.com "2017 Buick Encore: What's New";
+blog.consumerguide.com (2017 Encore); kbb.com 2013 Encore review and first
+drive; fueleconomy.gov menus 2019–2025 (fetched).
+- **Facelift 2017 (added to `FACELIFT_BREAKS`):** "revised headlights and
+  bumpers, LED tail lights" (WP); a new grille, and LED headlamps on higher
+  trims (cars.com). The existing Encore lamp rows are now cut at 2017.
+- **A/C:** standard on the base ("The well-equipped base Encore includes …
+  air conditioning", KBB 2013); applied to the generation, as in §18–21.
+- **AWD:** available every year (EPA "Encore AWD").
+- **Sunroof:** "All but the base model can be fitted with … a power sunroof".
+
+**Fix: Encore GX (8 listings).** The GX is a different, larger vehicle; EPA
+lists "Encore GX" separately for 2020–25. The "encore" keyword caught it, so
+it showed the Encore's rows and windows. It now has its own evergreen-only
+entry (2020–25), and the specificity guard drops "encore" for it.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2013–22 | — | Every vehicle. |
+| AWD rear differential / coupling | 2013–22 | drive: awd/4wd | Same band as the Tucson/Juke rows. |
+| Sunroof | 2013–22 | option | |
+
+Result (same inventory): generic-only 15,087 (4.5%) → 14,788 (4.4%). Encore
+→ 0; the 8 GX listings stay generic-only on their own entry by design.

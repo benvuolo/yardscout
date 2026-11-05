@@ -213,7 +213,7 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        # §21
        "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect",
        # §22
-       "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2"},
+       "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2", "encore gx"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -598,6 +598,14 @@ check("§22 Milan: mech 2006-11; AWD unit 2007-11 only (AWD decode confirms 2008
       MECH3 <= set(n08) and n08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2006–2011"
       and n08["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in n06
       and n08["Tail Lights (pair, uncracked)"]["fits"] == "2006–2009")
+
+b14, b19 = parts(2014, "Buick", "Encore", AWD), parts(2019, "Buick", "Encore", FWD)
+check("§22 Encore: mech 2013-22; AWD coupling gated; lamps cut at the 2017 facelift; Encore GX has its own entry",
+      MECH3 <= set(b14) and b14["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2013–2022"
+      and b14["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in b19
+      and b14["Tail Lights (pair, uncracked)"]["fits"] == "2013–2016" and b19["Tail Lights (pair, uncracked)"]["fits"] == "2017–2022"
+      and [m["display"] for m in js.match_vehicle(2021, "Buick", "Encore GX")] == ["Buick Encore GX"]
+      and "Fuel Pump Module (in-tank, test before listing)" not in parts(2021, "Buick", "Encore GX"))
 
 # 3. band sanity + lint
 bad = []
