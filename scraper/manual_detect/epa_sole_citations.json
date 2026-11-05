@@ -1,5 +1,5 @@
 {
- "note": "Independent evidence for the EPA sole-offering rules (epa_sole.py). Each entry matches rules by EPA make, a regex on the EPA baseModel/model names, displacement (null = a model-year-wide rule), optional cylinders and drive, and the model years it speaks to. verdict: supports (counted when nothing disagrees), conflicting (not counted), contradicts (dropped), weak_support (not counted: sale-listing or forum text only). 'via' says how the text was read: sources first read by a sibling worklist are quoted from that worklist's JSON (its rule id is given); sources found in this step were read through WebSearch result text on 2026-11-05 (WebFetch could not reach outside hosts from this session), so they carry the search tool's summary, not a page quote.",
+ "note": "Independent evidence for the EPA sole-offering rules (epa_sole.py). Each entry matches rules by EPA make, a regex on the EPA baseModel/model names, displacement (null = a model-year-wide rule), optional cylinders and drive, and the model years it speaks to. verdict: supports (counted when nothing disagrees), conflicting (not counted), contradicts (dropped), weak_support (not counted: sale-listing or forum text only). 'via' says how the text was read: sources first read by a sibling worklist are quoted from that worklist's JSON (its rule id is given); sources found in this step were read through WebSearch result text on 2026-11-05 (WebFetch could not reach outside hosts from this session), so they carry the search tool's summary, not a page quote. Verification pass 2026-11-05 (epa_sole_verify.py): Liberty 2.4 2003-2005 and Wrangler TJ 2.4 2005-2006 set to 'contradicts', Cougar 2.0 2001-2002 set to 'conflicting'; see each entry's note.",
  "entries": [
   {
    "id": "ford_escape_20_2001_2004",
@@ -56,6 +56,11 @@
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/888d9009-afb5-4eb5-8ee0-f1c57396c0f9",
      "says": "Ford's MY2002 VIN filing cover letter: engine 'B' is the 2.0L Zetec 'used in the Escape and Tribute vehicles' (the same 2.0L/manual powertrain as the Escape).",
      "via": "vin_rules_4.json ford_escape_2001_2004_char8_engine"
+    },
+    {
+     "url": "https://www.autoblog.com/buy/2002-Mazda-Tribute/review/",
+     "says": "Autoblog 2002: the base DX 130-hp four-cylinder is mated to a five-speed manual and 'is not available with an automatic'; Edmunds 2002 says the same.",
+     "via": "WebSearch result text 2026-11-05 (verification)"
     }
    ]
   },
@@ -127,13 +132,25 @@
     2001,
     2002
    ],
-   "verdict": "supports",
-   "note": "MY1999 is outside: EPA 14999 lists a 2.0 Automatic 4-spd for the 1999 Cougar.",
+   "verdict": "conflicting",
+   "note": "DEMOTED by verification: the only text source (Consumer Guide 1999-02, '4-cylinder (manual shift only)') is contradicted by EPA for 1999 (id 14999, 2.0 Automatic 4-spd), and launch/what's-new texts say the I4 came with either transaxle; an enthusiast page says a small number of I4 automatics were built. EPA 2000-2002 list only the manual, but that is not certain for every car. Earlier note: MY1999 is outside: EPA 14999 lists a 2.0 Automatic 4-spd for the 1999 Cougar.",
    "sources": [
     {
      "url": "https://consumerguide.com/used/1999-02-mercury-cougar/",
      "says": "'Cougars came with two distinct engines: a 125-horsepower 4-cylinder (manual shift only), or a 170-horsepower 2.5-liter V6 ...'",
      "via": "vin_rules_4.json mercury_cougar_i4_2001_2002_series_60_char8_3"
+    },
+    {
+     "url": "https://www.machinedesign.com/archive/article/21813099/2001-mercury-cougar-c2",
+     "says": "Cougar description: Zetec 2.0L or Duratec 2.5L 'with either the five-speed MTX75 manual or four-speed CD4E automatic transaxles'.",
+     "via": "vin_rules_4.json mercury_cougar_i4_2001_2002_series_60_char8_3 verification; WebSearch result text 2026-11-05",
+     "verdict": "contradicts"
+    },
+    {
+     "url": "https://www.cars.com/research/mercury-cougar-2000/",
+     "says": "Cars.com '2000 Mercury Cougar: what's new': both engines team with a manual or an automatic.",
+     "via": "vin_rules_4.json verification (search-result text)",
+     "verdict": "contradicts"
     }
    ]
   },
@@ -269,6 +286,11 @@
      "url": "https://ipfs.ssi.eecc.de/ipns/en.wikipedia-on-ipfs.org/wiki/Dodge_Caliber",
      "says": "The SE's 1.8 L 148 hp World I4 is 'attached to a Magna Drivetrain T355 5-speed manual transmission'; the CVT is listed with the 2.0 L and 2.4 L.",
      "via": "vin_rules_6.json dodge_caliber_18_2007_2009_char8_C"
+    },
+    {
+     "url": "https://www.edmunds.com/dodge/caliber/2007/review",
+     "says": "Edmunds 2007: the 1.8-liter 'comes paired to a five-speed manual only'; Cars.com: the CVT brings the 2.0-liter.",
+     "via": "WebSearch result text 2026-11-05 (verification)"
     }
    ]
   },
@@ -320,13 +342,37 @@
     2005,
     2006
    ],
-   "verdict": "supports",
-   "note": "MY2003-2004 2.4L Wranglers had a 4-speed automatic (EPA 19191, 20317).",
+   "verdict": "contradicts",
+   "note": "REFUTED by verification: three text sources say a 42RLE automatic was offered with the 2.4L in 2005-2006; Rockcrawler's reprint of the 2005 press material and Quadratec/DriveClean say 2.4L = six-speed only. A source says an automatic was offered, so the rule is dropped. Earlier note: MY2003-2004 2.4L Wranglers had a 4-speed automatic (EPA 19191, 20317).",
    "sources": [
     {
      "url": "https://www.quadratec.com/jeep_knowledgebase/article-102.htm",
      "says": "Quadratec's 2005-2006 table lists the 2.4L (SE) with a six-speed manual only; DriveClean lists the 2005 and 2006 2.4L only as manual.",
      "via": "vin_rules_6.json jeep_wrangler_tj_24_2005_2006_char8_1"
+    },
+    {
+     "url": "https://www.extremeterrain.com/jeep-wrangler-transmissions-through-the-years.html",
+     "says": "Table lists for the TJ '2.4 I-4 4-Spd 42RLE Auto (2003-2006)'.",
+     "via": "vin_rules_6.json refuted_rules jeep_wrangler_tj_24_2005_2006_char8_1 (search-result text)",
+     "verdict": "contradicts"
+    },
+    {
+     "url": "https://www.autoblog.com/buy/2005-Jeep-Wrangler-SE__2dr_4x4/",
+     "says": "Autoblog 2005 Wrangler: a four-speed automatic 'was available on all models' (SE = the 2.4L trim).",
+     "via": "vin_rules_6.json refuted_rules (search-result text)",
+     "verdict": "contradicts"
+    },
+    {
+     "url": "https://jeepspecs.com/?p=17561",
+     "says": "JeepSpecs 2005 Wrangler: the 2.4L 'available with either a four-speed automatic or a six-speed manual transmission'.",
+     "via": "vin_rules_6.json refuted_rules; WebSearch result text 2026-11-05",
+     "verdict": "contradicts"
+    },
+    {
+     "url": "https://rockcrawler.com/features/newsshorts/04september/jeep_2005_tj_overview.asp",
+     "says": "Rockcrawler 2005 Wrangler overview (press-kit reprint): the 2.4-liter in the SE 'is available with the six-speed manual transmission only'.",
+     "via": "WebSearch result text 2026-11-05",
+     "verdict": "supports"
     }
    ]
   },
@@ -340,13 +386,25 @@
     2003,
     2005
    ],
-   "verdict": "supports",
-   "note": "Cars.com 2004 uses generic wording ('each engine teams with a four-speed-automatic or five-speed-manual'); the Chrysler worklist took Autoblog's explicit statement and EPA over it. Same reading here.",
+   "verdict": "contradicts",
+   "note": "REFUTED by verification: Wikipedia reports fleet 2.4L Liberties with a 4-speed automatic, and Cars.com 2004 says each engine teams with either transmission. Fleet builds carry the same engine code and EPA names, so the decode cannot exclude them. Earlier note: Cars.com 2004 uses generic wording ('each engine teams with a four-speed-automatic or five-speed-manual'); the Chrysler worklist took Autoblog's explicit statement and EPA over it. Same reading here.",
    "sources": [
     {
      "url": "https://www.autoblog.com/buy/2004-Jeep-Liberty/review/",
      "says": "Autoblog 2004: 'The four-cylinder engine is only available with a five-speed manual gearbox'; Autoblog 2002: four-cylinder only with the five-speed manual.",
      "via": "vin_rules_6.json jeep_liberty_24_2003_2005_char8_1"
+    },
+    {
+     "url": "https://wikiwand.com/en/articles/Jeep_Liberty_(KJ)",
+     "says": "Wikipedia 'Jeep Liberty (KJ)' (wikiwand mirror): 'some fleet Liberties used a 2.4L I4 Engine that produced about 150 horsepower with a 4-Speed Automatic Transmission'.",
+     "via": "vin_rules_6.json refuted_rules jeep_liberty_24_2003_2005_char8_1 (search-result text)",
+     "verdict": "contradicts"
+    },
+    {
+     "url": "https://www.cars.com/articles/2004-jeep-liberty-whats-new-1420687138026/",
+     "says": "Cars.com 2004: 'Each engine teams with a four-speed-automatic or five-speed-manual transmission'.",
+     "via": "vin_rules_6.json refuted_rules jeep_liberty_24_2003_2005_char8_1 (search-result text)",
+     "verdict": "contradicts"
     }
    ]
   },
@@ -530,6 +588,11 @@
      "url": "https://www.autoblog.com/buy/2004-Volkswagen-GTI-VR6__2dr_Hatchback/",
      "says": "2004 GTI VR6: the only transmission choice is a six-speed manual.",
      "via": "WebSearch result text 2026-11-05"
+    },
+    {
+     "url": "https://www.theautochannel.com/news/2003/08/11/166713.html",
+     "says": "The Auto Channel 2003 GTI review: the Tiptronic automatic is an option on the 1.8T; the VR6 is priced as the six-speed car.",
+     "via": "WebSearch result text 2026-11-05 (verification)"
     }
    ]
   },

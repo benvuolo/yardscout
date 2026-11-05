@@ -26,14 +26,14 @@
  "summary": {
   "trims": 84,
   "trims_by_status": {
-   "verified": 56,
+   "verified": 55,
    "single_source": 13,
    "covered_by_step2_rule": 14,
-   "sources_conflict": 1
+   "sources_conflict": 2
   },
-  "verified_trims": 56,
-  "verified_trims_with_a_vin_decode_identifier": 56,
-  "verified_trims_matching_any_lot_car": 22,
+  "verified_trims": 55,
+  "verified_trims_with_a_vin_decode_identifier": 55,
+  "verified_trims_matching_any_lot_car": 21,
   "ground_truth_on_verified_trims": {
    "manual": 80,
    "non_manual": 0,
@@ -46,27 +46,29 @@
    "non_manual": 0,
    "precision": 1.0
   },
-  "newly_confirmed_manual_lot_cars": 45,
-  "newly_confirmed_manual_lot_cars_not_already_in_step2": 13,
+  "newly_confirmed_manual_lot_cars": 39,
+  "newly_confirmed_manual_lot_cars_not_already_in_step2": 8,
   "newly_confirmed_by_rule": {
    "acura_integra_gsr_1992_2001": 1,
    "nissan_sentra_se_r_spec_v_2007_2012": 8,
    "ford_shelby_gt500_2007_2014": 1,
-   "ford_taurus_sho_30_1989_1995": 2,
+   "ford_taurus_sho_30_1989_1995": 1,
    "ford_focus_st_2013_2018": 13,
    "ford_fiesta_st_2014_2019": 1,
    "chevrolet_cobalt_ss_supercharged_2005_2007": 3,
    "saturn_ion_red_line_2004_2007": 1,
    "dodge_neon_srt4_2003_2005": 6,
    "dodge_caliber_srt4_2008_2009": 2,
-   "fiat_500_abarth_2012_2014": 2,
-   "hyundai_veloster_n_2019_2020": 1,
-   "vw_new_beetle_turbo_s_2002_2004": 4
+   "fiat_500_abarth_2012_2014": 1,
+   "hyundai_veloster_n_2019_2020": 1
   },
   "listed_not_counted_by_rule": {
    "honda_crx_si_hf_1988_1991": 2,
    "ford_focus_svt_2002_2004": 6,
-   "ford_focus_st_2005_2007": 4
+   "ford_focus_st_2005_2007": 4,
+   "ford_taurus_sho_30_1989_1995": 1,
+   "fiat_500_abarth_2012_2014": 1,
+   "vw_new_beetle_turbo_s_2002_2004": 4
   },
   "published_non_manual_conflicts_on_verified_trims": 0,
   "epa_checks_failed": []
@@ -224,6 +226,20 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {
+     "matched": 4,
+     "no_transmission": 2,
+     "manual": 2
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -369,6 +385,20 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {
+     "matched": 15,
+     "no_transmission": 2,
+     "manual": 13
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -534,6 +564,20 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {
+     "matched": 41,
+     "no_transmission": 10,
+     "manual": 31
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -670,6 +714,20 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {
+     "matched": 17,
+     "no_transmission": 8,
+     "manual": 9
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -791,6 +849,20 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {
+     "matched": 5,
+     "no_transmission": 1,
+     "manual": 4
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -901,6 +973,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -1042,6 +1124,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -1472,6 +1564,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -1603,6 +1705,20 @@
     "no_trans_info": 1,
     "no_trans_info_also_confirmed_by_step2": 1,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Wikipedia re-read: 1992-93 'The GS-R liftback came only with a 5-speed manual'; 1994-2001 'except for the GS-R which was only offered in a 5-speed manual'. Cache: 11 VINs, every one with a transmission is manual. Lot car JH4DB8584 position 7 = 5 (odd = manual under the step-2 Honda rule)."
+    ],
+    "decode_cache_scan": {
+     "matched": 11,
+     "no_transmission": 4,
+     "manual": 7
+    },
+    "newly_confirmed_after_verification": 1
    }
   },
   {
@@ -1706,7 +1822,7 @@
    "market": "US",
    "claim": "manual",
    "counted": true,
-   "notes": "EPA's only 6-speed RSX row is the Type-S; base RSX had a 5-speed manual or 5-speed automatic. vPIC sometimes decodes the 2005-2006 Type-S engine as 2.4L (vPIC error), so the engine is not used.",
+   "notes": "EPA's only 6-speed RSX row is the Type-S; base RSX had a 5-speed manual or 5-speed automatic. vPIC sometimes decodes the 2005-2006 Type-S engine as 2.4L (vPIC error), so the engine is not used. The VIN pattern JH4DC53 also matches base 5-speed-manual RSX; both are manual, so the claim is 'manual' for every match.",
    "identification": [
     {
      "type": "vpic_trim",
@@ -1725,7 +1841,7 @@
       2002,
       2006
      ],
-     "basis": "VIN_TRIM_PATTERNS in junkyard_scraper.py: Honda model code DC53 = RSX Type-S (DC54 = base)"
+     "basis": "Honda VIN: positions 4-6 'DC5' = RSX, position 7 '3' = manual (step-2 honda_vin7_digit rule: odd = manual). JH4DC53 covers every manual RSX: the Type-S (6MT) AND the base 5MT (position 8 = 8, vPIC 5-spd Manual). So it identifies 'manual RSX', not 'Type-S'; the manual claim holds for every match. VIN_TRIM_PATTERNS in junkyard_scraper.py labels JH4DC53 'Type-S', which is wrong for base 5MT cars (flagged to ops/data.md owner)."
     }
    ],
    "identifiable_from_vin_decode": true,
@@ -1858,6 +1974,20 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Refuted the identifier's stated meaning, not the claim: 16 of 41 cached JH4DC53 VINs are base RSX with a 5-speed manual (position 8 = 8). Every JH4DC53 VIN with a vPIC transmission (32) is manual. Basis text corrected; the scraper's VIN_TRIM_PATTERNS label is a data-quality issue for its owner."
+    ],
+    "decode_cache_scan": {
+     "matched": 41,
+     "no_transmission": 9,
+     "manual": 32
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -1978,6 +2108,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -2201,6 +2341,19 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {
+     "matched": 2,
+     "manual": 2
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -2549,6 +2702,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -2659,6 +2822,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -3749,6 +3922,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -3878,6 +4061,12 @@
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/dd09cf01-34f5-409a-aec6-86ade2a245a7",
      "kind": "part565",
      "says": "Nissan North America, 2011-06-01 (ORG6744), MY2012 chart (page image): NISSAN SENTRA B / 6: A = 2.0L, B = 2.5L, C = 2.5L Gasoline (High output)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/3N1CB61E69L642925?format=json",
+     "kind": "vpic",
+     "says": "Live vPIC decodes of lot VINs 3N1CB61E28L731535 (2008), 3N1CB61E69L642925 (2009), 3N1CB6AP8AL678766 (2010), 3N1CB6AP3BL695735 (2011): OtherEngineInfo 'High output' / 'HO', 2.5 L. vPIC's pattern for position 4 'C' therefore covers the MY2008-2010 charts that were not read.",
+     "read": "API JSON read"
     }
    ],
    "epa": [
@@ -3961,6 +4150,23 @@
     "no_trans_info": 8,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 2
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Re-downloaded the MY2007 (W-1252-Y) and MY2012 (W-1612-C, letter 2011-06-01) Nissan Part 565 PDFs and read the page images: Sentra line B, model change 6, position 4 A = 2.0L, B = 2.5L, C = 2.5L Gasoline (High output). Matches the citation.",
+     "Nissan release re-fetched (global.nissannews.com, 200): 'The Spec V model is available only with a close-ratio 6-speed manual transmission.' and 'The Sentra SE-R, equipped exclusively with Nissan's Xtronic CVT'.",
+     "Live vPIC decodes of 2008-2011 3N1CB6 VINs report 'High output'/'HO', closing the unread MY2008-2010 chart gap.",
+     "Decode cache: 16 3N1CB6 VINs, none with a transmission; ground truth: no 3N1CB6 or 3N1BB6 line. No counterexample. Bounded by model change 6 (B17 Sentra from MY2013 is 7) and by the VIN-year check.",
+     "Conflict noted: vin_rules_2.json says the 2007-12 Spec V shares its engine code with the SE-R. The filings refute that for MY2007 and MY2012; that note should be corrected by its owner."
+    ],
+    "decode_cache_scan": {
+     "matched": 16,
+     "no_transmission": 16
+    },
+    "newly_confirmed_after_verification": 8
    }
   },
   {
@@ -4190,6 +4396,12 @@
      "url": "https://www.cars.com/articles/2015-nissan-370z-nismo-gets-new-styling-transmission-1420663015990",
      "kind": "review",
      "says": "2015 370Z NISMO gets a newly available 7-speed automatic."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Nissan_370Z",
+     "kind": "wikipedia",
+     "says": "'The NISMO version was introduced for the 2009 model year ... Transmission choice is limited to a 6-speed manual'.",
+     "read": "raw wikitext read"
     }
    ],
    "epa": [],
@@ -4220,6 +4432,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Wikipedia re-read: NISMO from MY2009 with the 6-speed manual only; the 2015 NISMO adds the 7-speed automatic (outside the years)."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -4321,6 +4543,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -4433,6 +4665,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -4466,7 +4708,7 @@
     {
      "url": "https://en.wikipedia.org/wiki/Ford_Mustang_SVT_Cobra",
      "kind": "wikipedia",
-     "says": "Infobox transmissions: '5-speed Borg-Warner T-5 manual' (1993), 'A Tremec 3550 5-speed manual transmission was standard' (1996-2001), T-56 6-speed (2003-2004); the 1993 Indy pace cars 'were installed with heavy-duty four-speed automatic transmissions'."
+     "says": "Infobox transmissions: 5-speed Borg-Warner T-5 manual (1993), Tremec 3550 5-speed manual (1996-2001), T-56 6-speed (2003-2004). Exception: the three 1994 Indianapolis 500 pace-car convertibles (Roush-modified) 'were installed with heavy-duty four-speed automatic transmissions'."
     },
     {
      "url": "https://stangnet.com/mustang-forums/threads/auto-cobra.441485/",
@@ -4552,6 +4794,19 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Wikipedia re-read. The pace-car exception is 1994 (three Roush-modified convertibles), not 1993; text corrected. Not a retail configuration."
+    ],
+    "decode_cache_scan": {
+     "matched": 2,
+     "no_transmission": 2
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -4583,14 +4838,15 @@
    "identifiable_from_vin_decode": true,
    "evidence": [
     {
-     "url": "https://www.americanmuscle.com/bullitt-mustang-guide.html",
-     "kind": "enthusiast",
-     "says": "Bullitt guide: 'Ford produced three generations of Bullitt Mustangs — the 2001 (265 hp), 2008–2009 (315 hp), and 2019–2020 (480 hp) — each with ... manual-only transmissions.'"
-    },
-    {
      "url": "https://www.insidehook.com/nation/ford-2019-mustang-bullitt-detroit",
      "kind": "review",
      "says": "'Ford Just Unveiled the Mustang Bullitt, a 6-Speed Manual Exclusive' (2019)."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "kind": "epa",
+     "says": "EPA rows 40327 (2019) and 41995 (2020) 'Mustang Bullitt 5.0 Manual 6-spd' are the only Bullitt rows; every 2019-2020 Mustang automatic row is a non-Bullitt model name.",
+     "read": "epa/vehicles.csv read"
     }
    ],
    "epa": [],
@@ -4641,6 +4897,24 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "evidence_removed": [
+    {
+     "url": "https://www.americanmuscle.com/bullitt-mustang-guide.html",
+     "kind": "enthusiast",
+     "says": "Bullitt guide: 'Ford produced three generations of Bullitt Mustangs — the 2001 (265 hp), 2008–2009 (315 hp), and 2019–2020 (480 hp) — each with ... manual-only transmissions.'",
+     "why_removed": "parts retailer / parts catalog: not an allowed evidence source"
+    }
+   ],
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Parts-retailer citation (americanmuscle.com) removed; replaced by EPA 'Mustang Bullitt' rows (manual only)."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -4817,6 +5091,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -4874,9 +5158,16 @@
      "says": "Edmunds 2007 Shelby GT500 review: Tremec six-speed manual; no automatic transmission is available."
     },
     {
-     "url": "https://lmr.com/products/2007-Mustang-Specifications",
-     "kind": "enthusiast",
-     "says": "2007 Mustang specifications: GT500 (coupe and convertible) only with the Tremec TR-6060 six-speed manual."
+     "url": "https://en.wikipedia.org/wiki/Shelby_Mustang",
+     "kind": "wikipedia",
+     "says": "2007 GT500: 'Features include the Tremec TR-6060 6-speed manual transmission'.",
+     "read": "raw wikitext read"
+    },
+    {
+     "url": "https://www.autobytel.com/ford/shelby-gt500/2013/car-buying-guides/10-things-you-need-to-know-about-the-2013-ford-shelby-gt500-115544/",
+     "kind": "review",
+     "says": "2013 GT500 'restricts buyers exclusively to a shift-it-yourself gearbox'; the gearbox was strengthened over 2012.",
+     "read": "web-search result text (page not fetched)"
     }
    ],
    "epa": [
@@ -5002,6 +5293,27 @@
     "no_trans_info": 1,
     "no_trans_info_also_confirmed_by_step2": 1,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "evidence_removed": [
+    {
+     "url": "https://lmr.com/products/2007-Mustang-Specifications",
+     "kind": "enthusiast",
+     "says": "2007 Mustang specifications: GT500 (coupe and convertible) only with the Tremec TR-6060 six-speed manual.",
+     "why_removed": "parts retailer / parts catalog: not an allowed evidence source"
+    }
+   ],
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Parts-retailer citation (lmr.com) removed. Second sources added (Wikipedia 2007 TR-6060; Autobytel 2013). EPA 5.4S/5.8S rows manual only. Lot car 1ZVBP8JZ1E5276064: 2014, 5.8, check digit valid. 2020+ GT500 (DCT) is outside the years and its 5.2 is not matched."
+    ],
+    "decode_cache_scan": {
+     "matched": 1,
+     "no_transmission": 1
+    },
+    "newly_confirmed_after_verification": 1
    }
   },
   {
@@ -5046,6 +5358,12 @@
      "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/1FA6P8JZ*G5?format=json",
      "kind": "vpic",
      "says": "vPIC pattern decode: 2016 Mustang engine code Z = 5.2L, 500 hp, Trim 'Shelby Coupe'."
+    },
+    {
+     "url": "https://www.fordmuscle.com/news/lighter-better-six-speed-manual-the-only-option-for-shelby-gt350",
+     "kind": "enthusiast",
+     "says": "Headline: 'Lighter, Better Six-Speed Manual The Only Option For Shelby GT350' (Tremec TR-3160).",
+     "read": "web-search result text (page not fetched)"
     }
    ],
    "epa": [
@@ -5138,6 +5456,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Second transmission source added (fordmuscle; vPIC decode identifies the engine only)."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -5239,6 +5567,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -5365,6 +5703,20 @@
     "no_trans_info": 2,
     "no_trans_info_also_confirmed_by_step2": 1,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Wikipedia re-read: 5-speed manual; the 1993+ automatic came only with the 3.2 ('A 3.2 L version ... was introduced for the automatic-equipped SHO'). EPA: every 3.0 SHO row 1990-1995 manual, every 3.2 row automatic. Engine condition 3.0 holds.",
+     "Car 1FALP54Y5NA210963 excluded (yard year 1997 vs VIN 1992)."
+    ],
+    "decode_cache_scan": {
+     "matched": 2,
+     "no_transmission": 2
+    },
+    "newly_confirmed_after_verification": 1
    }
   },
   {
@@ -5456,6 +5808,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -5775,6 +6137,19 @@
     "no_trans_info": 13,
     "no_trans_info_also_confirmed_by_step2": 13,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "All 19 cached decodes and all 13 lot cars are 1FADP3L9 (position 8 = 9, 2.0 GTDI); EPA 'Focus ST FWD' / 2.0T rows 2013-2018 are manual only. No ground-truth line. Claim and scope hold; step-2 vin_rules_4 covers the same cars."
+    ],
+    "decode_cache_scan": {
+     "matched": 19,
+     "no_transmission": 19
+    },
+    "newly_confirmed_after_verification": 13
    }
   },
   {
@@ -5897,6 +6272,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -6028,6 +6413,19 @@
     "no_trans_info": 1,
     "no_trans_info_also_confirmed_by_step2": 1,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Wikipedia re-read: 'six-speed manual transmission' for the Mexico-built US ST; EPA 'Fiesta ST FWD' 2014-2019 manual only; lot car 3FADP4GX (position 8 X), check digit valid."
+    ],
+    "decode_cache_scan": {
+     "matched": 4,
+     "no_transmission": 4
+    },
+    "newly_confirmed_after_verification": 1
    }
   },
   {
@@ -6134,6 +6532,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -6203,6 +6611,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -6286,6 +6704,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -6412,6 +6840,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -6515,6 +6953,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -6647,6 +7095,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -6656,7 +7114,7 @@
    "trim": "SS 1LE package (2013-2015); V6/SS 1LE (2017-2018)",
    "years": [
     2013,
-    2018
+    2015
    ],
    "status": "verified",
    "market": "US",
@@ -6670,7 +7128,7 @@
      "model": "Camaro",
      "years": [
       2013,
-      2018
+      2015
      ],
      "trim": "(1SS|2SS|SS|1LT|LT) 1LE"
     }
@@ -6686,6 +7144,12 @@
      "url": "https://en.wikipedia.org/wiki/Chevrolet_Camaro_(sixth_generation)",
      "kind": "wikipedia",
      "says": "'For the 2017 model year, the 1LE Performance Packages returned, tailored for the V6 and V8 powered 6-speed manual-equipped coupé models respectively.'"
+    },
+    {
+     "url": "https://motorweek.org/road_tests/2013_chevrolet_camaro_1le/",
+     "kind": "review",
+     "says": "2013 Camaro 1LE: a package that 'can be added to any Camaro coupe, as long as it's an SS, with manual transmission'.",
+     "read": "web-search result text (page not fetched)"
     }
    ],
    "epa": [],
@@ -6740,6 +7204,20 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "years_before_verification": [
+    2013,
+    2018
+   ],
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept, narrowed",
+    "checked": [
+     "Narrowed to MY2013-2015 (the 2017-2018 claim had one source only; no 1LE in 2016). Second 2013 source added (MotorWeek)."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -6785,6 +7263,12 @@
      "url": "https://en.wikipedia.org/wiki/Chevrolet_Cobalt_SS",
      "kind": "wikipedia",
      "says": "Infobox: '5-speed Saab F35 manual / 5-speed Getrag F23 manual / 4-speed 4T45 (Sport/SS N/A) automatic' (the supercharged LSJ coupe used the F35 manual)."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Chevrolet_Cobalt_SS",
+     "kind": "wikipedia",
+     "says": "'launching as a 205 hp supercharged 2.0 L coupe in late 2004, paired only with the Saab F35 5-speed manual transmission ... Production of the supercharged coupe continued until 2007'.",
+     "read": "raw wikitext read"
     }
    ],
    "epa": [
@@ -6871,6 +7355,19 @@
     "no_trans_info": 3,
     "no_trans_info_also_confirmed_by_step2": 3,
     "no_trans_info_canadian_yard_not_counted": 1
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Wikipedia re-read (quote added). All 5 cached 2.0 Cobalt 2005-07 VINs have position 8 = P (LSJ). The 2.4 SS (automatic available) is excluded by the engine condition."
+    ],
+    "decode_cache_scan": {
+     "matched": 5,
+     "no_transmission": 5
+    },
+    "newly_confirmed_after_verification": 3
    }
   },
   {
@@ -6905,6 +7402,12 @@
      "url": "https://en.wikipedia.org/wiki/Chevrolet_Cobalt_SS",
      "kind": "wikipedia",
      "says": "Infobox: '5-speed Saab F35 manual / 5-speed Getrag F23 manual / 4-speed 4T45 (Sport/SS N/A) automatic' (the automatic only with the naturally aspirated engines)."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Chevrolet_Cobalt_SS",
+     "kind": "wikipedia",
+     "says": "2008 relaunch with the LNF turbo 2.0, 'remaining mated to the F35 5-speed manual transmission'; the 4T45 automatic is listed only for the naturally aspirated cars.",
+     "read": "raw wikitext read"
     }
    ],
    "epa": [
@@ -6991,6 +7494,19 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Wikipedia re-read (quote added). The one cached 2.0 Cobalt 2008-10 VIN (position 8 X) decodes 'Manual/Standard'."
+    ],
+    "decode_cache_scan": {
+     "matched": 1,
+     "manual": 1
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -7040,7 +7556,20 @@
     }
    ],
    "identifiable_from_vin_decode": true,
-   "evidence": [],
+   "evidence": [
+    {
+     "url": "https://www.auto123.com/en/news/2004-saturn-ion-red-line-quad-coupe-road-test/55847/?page=3",
+     "kind": "review",
+     "says": "2004 Ion Red Line road test: 'the standard 5-speed manual transmission (with no option for an automatic by the way)'.",
+     "read": "page text read"
+    },
+    {
+     "url": "https://www.thetruthaboutcars.com/2007/03/saturn-ion-red-line/",
+     "kind": "review",
+     "says": "2007 Ion Red Line review: 'the Red Line's five-speed manual. This close-ratio version of the Saab 9-3's gearbox ...' (no automatic mentioned).",
+     "read": "page text read"
+    }
+   ],
    "epa": [
     {
      "query": {
@@ -7128,6 +7657,19 @@
     "no_trans_info": 1,
     "no_trans_info_also_confirmed_by_step2": 1,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Second source added (auto123 2004: no automatic option; TTAC 2007). Wikipedia: the 2.0 supercharged engine is Red Line only. All 4 cached matches have position 8 = P."
+    ],
+    "decode_cache_scan": {
+     "matched": 4,
+     "no_transmission": 4
+    },
+    "newly_confirmed_after_verification": 1
    }
   },
   {
@@ -7375,6 +7917,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -7506,6 +8058,19 @@
     "no_trans_info": 6,
     "no_trans_info_also_confirmed_by_step2": 6,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Wikipedia infobox re-read: '5-speed NVG T-850 manual'. All 8 cached matches 1B3ES66S (position 8 S, 2.4 turbo)."
+    ],
+    "decode_cache_scan": {
+     "matched": 8,
+     "no_transmission": 8
+    },
+    "newly_confirmed_after_verification": 6
    }
   },
   {
@@ -7624,6 +8189,19 @@
     "no_trans_info": 2,
     "no_trans_info_also_confirmed_by_step2": 2,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Wikipedia re-read: '6-speed Getrag manual' and engine table 'SRT4 || 2008-2009 || ... 6-speed Getrag manual, FWD'. All 3 cached matches 1B3HB68F."
+    ],
+    "decode_cache_scan": {
+     "matched": 3,
+     "no_transmission": 3
+    },
+    "newly_confirmed_after_verification": 2
    }
   },
   {
@@ -7718,6 +8296,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -7727,7 +8315,7 @@
    "trim": "Abarth (1.4 turbo)",
    "years": [
     2012,
-    2014
+    2013
    ],
    "status": "verified",
    "market": "US",
@@ -7741,13 +8329,20 @@
      "model": "500",
      "years": [
       2012,
-      2014
+      2013
      ],
      "trim": "Abarth"
     }
    ],
    "identifiable_from_vin_decode": true,
-   "evidence": [],
+   "evidence": [
+    {
+     "url": "https://www.autoblog.com/2014/06/24/2015-fiat-500-abarth-automatic-targets-broader-appeal/",
+     "kind": "review",
+     "says": "The 2015 model is the first Abarth with an automatic; until then the Abarth was one of the few manual-only cars on the US market.",
+     "read": "web-search result text (page not fetched); autoblog.com returned 403"
+    }
+   ],
    "epa": [
     {
      "query": {
@@ -7827,6 +8422,24 @@
     "no_trans_info": 2,
     "no_trans_info_also_confirmed_by_step2": 2,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "years_before_verification": [
+    2012,
+    2014
+   ],
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept, narrowed",
+    "checked": [
+     "Narrowed to MY2012-2013. Consumer Guide's 2014 500c Abarth test (blog.consumerguide.com, read) says 'A 6-speed automatic is optionally available', against EPA (manual only for 2014) and Autoblog. Sources disagree for 2014, so 2014 is out (listed in not_manual_only).",
+     "Wikipedia re-read: the North-America automatic Abarth is referenced to the 2015 launch article. The 500c Abarth abroad had an automated manual (MTA); US scope only."
+    ],
+    "decode_cache_scan": {
+     "matched": 3,
+     "no_transmission": 3
+    },
+    "newly_confirmed_after_verification": 1
    }
   },
   {
@@ -7995,6 +8608,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -8064,6 +8687,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -8092,7 +8725,14 @@
     }
    ],
    "identifiable_from_vin_decode": true,
-   "evidence": [],
+   "evidence": [
+    {
+     "url": "scraper/manual_detect/vin_rules_3.json",
+     "kind": "sibling",
+     "says": "Step-2 rule hyundai_veloster_n_2019_2020 (verified 2026-11-05): Hyundai Part 565 filings code the Veloster N separately; NRCan lists it M6-only for 2019-2020.",
+     "read": "page text read"
+    }
+   ],
    "epa": [
     {
      "query": {
@@ -8173,6 +8813,19 @@
     "no_trans_info": 1,
     "no_trans_info_also_confirmed_by_step2": 1,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "EPA re-read: 2019-2020 Veloster N manual only, 2021 adds AM-S8. vin_rules_3 (verified) is the second source."
+    ],
+    "decode_cache_scan": {
+     "matched": 2,
+     "no_transmission": 2
+    },
+    "newly_confirmed_after_verification": 1
    }
   },
   {
@@ -8370,6 +9023,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -8470,6 +9133,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -8481,10 +9154,10 @@
     2002,
     2004
    ],
-   "status": "verified",
+   "status": "sources_conflict",
    "market": "US",
    "claim": "manual",
-   "counted": true,
+   "counted": false,
    "notes": "EPA's only 6-speed manual New Beetle rows (2002-2004 1.8T) are the Turbo S; the 150 hp 1.8T had a 5-speed manual or automatic.",
    "identification": [
     {
@@ -8584,6 +9257,24 @@
     "no_trans_info": 4,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "status_before_verification": "verified",
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "downgraded to sources_conflict",
+    "checked": [
+     "machinedesign.com re-read: 'A six-speed manual transmission is standard on the Turbo S and is the only car in the line with this setup' (standard, not only).",
+     "Consumer Guide used 1998-2005 New Beetle (read): engine table '1.8 ... Engine HP 180 ... Avail. Trans. 6-speed manual 6-speed automatic'.",
+     "Edmunds 2002 review not reachable from this session (www.edmunds.com does not resolve); its 'no automatic' text was not confirmed.",
+     "Wikipedia: the Turbo S 'included ... six-speed manual transmission' (does not say only).",
+     "Result: not certain for every car; 4 lot cars no longer counted."
+    ],
+    "decode_cache_scan": {
+     "matched": 8,
+     "no_transmission": 8
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -8677,6 +9368,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -8768,6 +9469,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -8874,6 +9585,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -9102,7 +9823,14 @@
     }
    ],
    "identifiable_from_vin_decode": true,
-   "evidence": [],
+   "evidence": [
+    {
+     "url": "https://en.wikipedia.org/wiki/BMW_M5",
+     "kind": "wikipedia",
+     "says": "E34 infobox transmission: '5-speed manual (1988-1994)', '6-speed manual (1994-1995)'; E39 infobox '6-speed manual' and 'The transmission is the Getrag 420G six-speed manual'. The SMG first appears on the E60 (2006+ in the US).",
+     "read": "raw wikitext read"
+    }
+   ],
    "epa": [
     {
      "query": {
@@ -9190,6 +9918,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Second source added (Wikipedia infoboxes). The US E34 years 1991-1993 and E39 2000-2003 had no automatic; the SMG arrives with the E60."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -9322,6 +10060,19 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {
+     "matched": 1,
+     "manual": 1
+    },
+    "newly_confirmed_after_verification": 0
    }
   },
   {
@@ -9513,6 +10264,16 @@
     "no_trans_info": 0,
     "no_trans_info_also_confirmed_by_step2": 0,
     "no_trans_info_canadian_yard_not_counted": 0
+   },
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (manual_trims verification)",
+    "verdict": "kept",
+    "checked": [
+     "Citations not re-opened in this pass (no lot car depends on this trim today). EPA rows recomputed from epa/vehicles.csv: identical to the builder's. Ground truth scanned for any non-manual line matching the identifiers or naming the trim: none."
+    ],
+    "decode_cache_scan": {},
+    "newly_confirmed_after_verification": 0
    }
   }
  ],
@@ -9837,6 +10598,40 @@
    "epa_ids": [],
    "cites": [
     "https://en.wikipedia.org/wiki/Cadillac_CTS"
+   ]
+  },
+  {
+   "trim": "Fiat 500 / 500c Abarth",
+   "years": [
+    2014,
+    2014
+   ],
+   "why": "Sources disagree: Consumer Guide's 2014 500c Abarth test says a 6-speed automatic was optional; EPA lists only the 5-speed manual for 2014. Not claimed.",
+   "epa_ids": [
+    34333
+   ],
+   "cites": [
+    "https://blog.consumerguide.com/test-drive-2014-fiat-500c-abarth-cabrio/"
+   ]
+  },
+  {
+   "trim": "Volkswagen New Beetle Turbo S",
+   "years": [
+    2002,
+    2004
+   ],
+   "why": "Sources disagree: Consumer Guide's 1998-2005 New Beetle used-car page lists the 180 hp 1.8T with '6-speed manual, 6-speed automatic'; the other reviews say the Turbo S had the 6-speed manual (machinedesign: 'standard', not 'only'); the Edmunds 'no automatic' citation could not be opened (host not reachable). EPA cannot isolate the 180 hp engine.",
+   "epa_ids": [
+    17479,
+    17480,
+    19306,
+    19308,
+    19516,
+    19518
+   ],
+   "cites": [
+    "https://consumerguide.com/used/1998-05-volkswagen-new-beetle/",
+    "https://www.machinedesign.com/archive/article/21813012/2002-vw-new-beetle-turbo-s"
    ]
   }
  ],
@@ -10245,30 +11040,6 @@
    "why_no_trans": "vpic_trans_blank_or_distrusted",
    "also_confirmed_by_step2": true,
    "yard": "Pull-A-Part - Columbia",
-   "rule": "ford_taurus_sho_30_1989_1995",
-   "rule_status": "verified",
-   "counted": true
-  },
-  {
-   "id": "papva-stk126029",
-   "vin": "1FALP54Y5NA210963",
-   "year": 1997,
-   "make": "Ford",
-   "model": "Taurus",
-   "vpic": {
-    "model": "Taurus",
-    "year": "1992",
-    "trim": "SHO",
-    "series": "",
-    "engine": "3.0L 6-cyl",
-    "drive": ""
-   },
-   "identifiers": [
-    "0:vpic_trim"
-   ],
-   "why_no_trans": "vpic_trans_blank_or_distrusted",
-   "also_confirmed_by_step2": false,
-   "yard": "Pick-A-Part VA - Stafford",
    "rule": "ford_taurus_sho_30_1989_1995",
    "rule_status": "verified",
    "counted": true
@@ -10930,30 +11701,6 @@
    "counted": true
   },
   {
-   "id": "vinplus-pnpsa-pnp023463",
-   "vin": "3C3CFFJH5ET202396",
-   "year": 2014,
-   "make": "Fiat",
-   "model": "500 Abarth",
-   "vpic": {
-    "model": "500",
-    "year": "2014",
-    "trim": "Abarth",
-    "series": "",
-    "engine": "1.4L 4-cyl",
-    "drive": "FWD/Front-Wheel Drive"
-   },
-   "identifiers": [
-    "0:vpic_trim"
-   ],
-   "why_no_trans": "vpic_trans_blank_or_distrusted",
-   "also_confirmed_by_step2": true,
-   "yard": "San Antonio Pick-N-Pull (Independent)",
-   "rule": "fiat_500_abarth_2012_2014",
-   "rule_status": "verified",
-   "counted": true
-  },
-  {
    "id": "pap-36-1029126-13",
    "vin": "KMHT36AH5LU007272",
    "year": 2020,
@@ -10974,102 +11721,6 @@
    "also_confirmed_by_step2": true,
    "yard": "Pull-A-Part - Albuquerque",
    "rule": "hyundai_veloster_n_2019_2020",
-   "rule_status": "verified",
-   "counted": true
-  },
-  {
-   "id": "7973174",
-   "vin": "3VWFE21C22M440766",
-   "year": 2002,
-   "make": "Volkswagen",
-   "model": "New Beetle",
-   "vpic": {
-    "model": "Beetle",
-    "year": "2002",
-    "trim": "Turbo S",
-    "series": "",
-    "engine": "1.8L 4-cyl",
-    "drive": ""
-   },
-   "identifiers": [
-    "0:vpic_trim"
-   ],
-   "why_no_trans": "vpic_trans_blank_or_distrusted",
-   "also_confirmed_by_step2": false,
-   "yard": "Pick-n-Pull - Lynnwood",
-   "rule": "vw_new_beetle_turbo_s_2002_2004",
-   "rule_status": "verified",
-   "counted": true
-  },
-  {
-   "id": "7982633",
-   "vin": "3VWFE21C82M431456",
-   "year": 2002,
-   "make": "Volkswagen",
-   "model": "New Beetle",
-   "vpic": {
-    "model": "Beetle",
-    "year": "2002",
-    "trim": "Turbo S",
-    "series": "",
-    "engine": "1.8L 4-cyl",
-    "drive": ""
-   },
-   "identifiers": [
-    "0:vpic_trim"
-   ],
-   "why_no_trans": "vpic_trans_blank_or_distrusted",
-   "also_confirmed_by_step2": false,
-   "yard": "Pick-n-Pull - Stockton",
-   "rule": "vw_new_beetle_turbo_s_2002_2004",
-   "rule_status": "verified",
-   "counted": true
-  },
-  {
-   "id": "nvpap-l133680",
-   "vin": "3VWFE21C93M444363",
-   "year": 2003,
-   "make": "Volkswagen",
-   "model": "Beetle",
-   "vpic": {
-    "model": "Beetle",
-    "year": "2003",
-    "trim": "Turbo S",
-    "series": "",
-    "engine": "1.8L 4-cyl",
-    "drive": ""
-   },
-   "identifiers": [
-    "0:vpic_trim"
-   ],
-   "why_no_trans": "vpic_trans_blank_or_distrusted",
-   "also_confirmed_by_step2": false,
-   "yard": "Nevada Pic-A-Part - Las Vegas",
-   "rule": "vw_new_beetle_turbo_s_2002_2004",
-   "rule_status": "verified",
-   "counted": true
-  },
-  {
-   "id": "youngstownupullit-youngstown-stk058131",
-   "vin": "3VWFE21C42M442891",
-   "year": 2002,
-   "make": "Volkswagen",
-   "model": "New Beetle",
-   "vpic": {
-    "model": "Beetle",
-    "year": "2002",
-    "trim": "Turbo S",
-    "series": "",
-    "engine": "1.8L 4-cyl",
-    "drive": ""
-   },
-   "identifiers": [
-    "0:vpic_trim"
-   ],
-   "why_no_trans": "vpic_trans_blank_or_distrusted",
-   "also_confirmed_by_step2": false,
-   "yard": "Youngstown U-Pull-It",
-   "rule": "vw_new_beetle_turbo_s_2002_2004",
    "rule_status": "verified",
    "counted": true
   }
@@ -11362,7 +12013,200 @@
    "rule": "ford_focus_st_2005_2007",
    "rule_status": "covered_by_step2_rule",
    "counted": false
+  },
+  {
+   "id": "papva-stk126029",
+   "vin": "1FALP54Y5NA210963",
+   "year": 1997,
+   "make": "Ford",
+   "model": "Taurus",
+   "vpic": {
+    "model": "Taurus",
+    "year": "1992",
+    "trim": "SHO",
+    "series": "",
+    "engine": "3.0L 6-cyl",
+    "drive": ""
+   },
+   "identifiers": [
+    "0:vpic_trim"
+   ],
+   "why_no_trans": "vpic_trans_blank_or_distrusted",
+   "also_confirmed_by_step2": false,
+   "yard": "Pick-A-Part VA - Stafford",
+   "rule": "ford_taurus_sho_30_1989_1995",
+   "rule_status": "verified",
+   "counted": false,
+   "excluded_by_verification": "yard lists a 1997 Taurus but VIN position 10 decodes 1992 (check digit valid). A 1997 SHO is an automatic-only V8; the car is not certain, so it is not counted."
+  },
+  {
+   "id": "vinplus-pnpsa-pnp023463",
+   "vin": "3C3CFFJH5ET202396",
+   "year": 2014,
+   "make": "Fiat",
+   "model": "500 Abarth",
+   "vpic": {
+    "model": "500",
+    "year": "2014",
+    "trim": "Abarth",
+    "series": "",
+    "engine": "1.4L 4-cyl",
+    "drive": "FWD/Front-Wheel Drive"
+   },
+   "identifiers": [
+    "0:vpic_trim"
+   ],
+   "why_no_trans": "vpic_trans_blank_or_distrusted",
+   "also_confirmed_by_step2": true,
+   "yard": "San Antonio Pick-N-Pull (Independent)",
+   "rule": "fiat_500_abarth_2012_2014",
+   "rule_status": "verified",
+   "counted": false,
+   "excluded_by_verification": "2014 500c Abarth: MY2014 removed from the rule (Consumer Guide's 2014 500c Abarth test says 'A 6-speed automatic is optionally available'; EPA lists only the manual for 2014). Step-2 vin_rules_6 rule fiat_500_turbo_2012_2014_series_FHJ_char8_H also counts this car; flagged for the hub."
+  },
+  {
+   "id": "7973174",
+   "vin": "3VWFE21C22M440766",
+   "year": 2002,
+   "make": "Volkswagen",
+   "model": "New Beetle",
+   "vpic": {
+    "model": "Beetle",
+    "year": "2002",
+    "trim": "Turbo S",
+    "series": "",
+    "engine": "1.8L 4-cyl",
+    "drive": ""
+   },
+   "identifiers": [
+    "0:vpic_trim"
+   ],
+   "why_no_trans": "vpic_trans_blank_or_distrusted",
+   "also_confirmed_by_step2": false,
+   "yard": "Pick-n-Pull - Lynnwood",
+   "rule": "vw_new_beetle_turbo_s_2002_2004",
+   "rule_status": "sources_conflict",
+   "counted": false,
+   "excluded_by_verification": "rule status is now sources_conflict"
+  },
+  {
+   "id": "7982633",
+   "vin": "3VWFE21C82M431456",
+   "year": 2002,
+   "make": "Volkswagen",
+   "model": "New Beetle",
+   "vpic": {
+    "model": "Beetle",
+    "year": "2002",
+    "trim": "Turbo S",
+    "series": "",
+    "engine": "1.8L 4-cyl",
+    "drive": ""
+   },
+   "identifiers": [
+    "0:vpic_trim"
+   ],
+   "why_no_trans": "vpic_trans_blank_or_distrusted",
+   "also_confirmed_by_step2": false,
+   "yard": "Pick-n-Pull - Stockton",
+   "rule": "vw_new_beetle_turbo_s_2002_2004",
+   "rule_status": "sources_conflict",
+   "counted": false,
+   "excluded_by_verification": "rule status is now sources_conflict"
+  },
+  {
+   "id": "nvpap-l133680",
+   "vin": "3VWFE21C93M444363",
+   "year": 2003,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "vpic": {
+    "model": "Beetle",
+    "year": "2003",
+    "trim": "Turbo S",
+    "series": "",
+    "engine": "1.8L 4-cyl",
+    "drive": ""
+   },
+   "identifiers": [
+    "0:vpic_trim"
+   ],
+   "why_no_trans": "vpic_trans_blank_or_distrusted",
+   "also_confirmed_by_step2": false,
+   "yard": "Nevada Pic-A-Part - Las Vegas",
+   "rule": "vw_new_beetle_turbo_s_2002_2004",
+   "rule_status": "sources_conflict",
+   "counted": false,
+   "excluded_by_verification": "rule status is now sources_conflict"
+  },
+  {
+   "id": "youngstownupullit-youngstown-stk058131",
+   "vin": "3VWFE21C42M442891",
+   "year": 2002,
+   "make": "Volkswagen",
+   "model": "New Beetle",
+   "vpic": {
+    "model": "Beetle",
+    "year": "2002",
+    "trim": "Turbo S",
+    "series": "",
+    "engine": "1.8L 4-cyl",
+    "drive": ""
+   },
+   "identifiers": [
+    "0:vpic_trim"
+   ],
+   "why_no_trans": "vpic_trans_blank_or_distrusted",
+   "also_confirmed_by_step2": false,
+   "yard": "Youngstown U-Pull-It",
+   "rule": "vw_new_beetle_turbo_s_2002_2004",
+   "rule_status": "sources_conflict",
+   "counted": false,
+   "excluded_by_verification": "rule status is now sources_conflict"
   }
  ],
- "published_label_conflicts": []
+ "published_label_conflicts": [],
+ "verification": {
+  "verified_utc": "2026-11-05",
+  "method": "Adversarial re-check: re-read the Part 565 PDFs (page images) and the Nissan release behind the only new VIN rule; re-read Wikipedia wikitext and review pages for every trim that confirms a lot car; recomputed every EPA query from vehicles.csv; scanned all 470k cached decodes (not only those with a transmission) for every identifier and looked at trims/engines/VIN positions of the matches; scanned ground_truth.jsonl for any non-manual line naming one of the trims; compared yard year with VIN year for every counted car; checked VIN check digits; removed parts-retailer citations.",
+  "rules_refuted": 0,
+  "rules_downgraded": [
+   "vw_new_beetle_turbo_s_2002_2004 -> sources_conflict (Consumer Guide lists a 6-speed automatic for the 180 hp 1.8T)"
+  ],
+  "rules_narrowed": [
+   "fiat_500_abarth_2012_2014 -> 2012-2013 (2014 sources conflict)",
+   "chevrolet_camaro_ss_1le_2013_2015 -> 2013-2015 (2017-18 single source)"
+  ],
+  "identifier_basis_corrected": [
+   "acura_rsx_type_s_2002_2006: JH4DC53 = manual RSX (base 5MT and Type-S 6MT), not Type-S"
+  ],
+  "citations_removed": [
+   "americanmuscle.com (Bullitt), lmr.com (GT500): parts retailers"
+  ],
+  "citations_added": [
+   "bmw_m5_e34_1991_1993_e39_2000_2003",
+   "chevrolet_camaro_ss_1le_2013_2015",
+   "chevrolet_cobalt_ss_supercharged_2005_2007",
+   "chevrolet_cobalt_ss_turbo_2008_2010",
+   "fiat_500_abarth_2012_2014",
+   "ford_mustang_bullitt_2019_2020",
+   "ford_shelby_gt350_2015_2020",
+   "ford_shelby_gt500_2007_2014",
+   "hyundai_veloster_n_2019_2020",
+   "nissan_370z_nismo_2009_2014",
+   "nissan_sentra_se_r_spec_v_2007_2012",
+   "saturn_ion_red_line_2004_2007"
+  ],
+  "cars_excluded": {
+   "1FALP54Y5NA210963": "yard lists a 1997 Taurus but VIN position 10 decodes 1992 (check digit valid). A 1997 SHO is an automatic-only V8; the car is not certain, so it is not counted.",
+   "3C3CFFJH5ET202396": "2014 500c Abarth: MY2014 removed from the rule (Consumer Guide's 2014 500c Abarth test says 'A 6-speed automatic is optionally available'; EPA lists only the manual for 2014). Step-2 vin_rules_6 rule fiat_500_turbo_2012_2014_series_FHJ_char8_H also counts this car; flagged for the hub."
+  },
+  "count_change": "newly confirmed manual lot cars 45 -> 39; not already in step 2: 13 -> 8",
+  "for_other_workstreams": [
+   "junkyard_scraper.VIN_TRIM_PATTERNS labels every JH4DC53 RSX 'Type-S'; base 5MT RSX share the prefix (position 8 = 8). Data-quality owner.",
+   "vin_rules_2.json says the 2007-12 Sentra Spec V shares its engine code with the SE-R; Nissan's MY2007/MY2012 filings give it position 4 'C' (2.5L high output).",
+   "vin_rules_6.json fiat_500_turbo_2012_2014_series_FHJ_char8_H counts 3C3CFFJH5ET202396 (2014 500c Abarth), where sources disagree for MY2014."
+  ],
+  "limits": "www.edmunds.com does not resolve from this session and autoblog.com/cars.com return 403; those are cited from web-search result text and marked so. manual_trims.py does not carry these edits: run this script after it."
+ }
 }

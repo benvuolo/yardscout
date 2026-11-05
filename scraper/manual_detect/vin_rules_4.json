@@ -19,7 +19,7 @@
  "answer": {
   "Ford": "NOT ENCODED. No Ford Motor Company Part 565 filing names a transmission: all 249 Ford filings in MID were downloaded (MY1984-2028); the 125 with a text layer mention 'transmission' once, in a cover-letter note about a GVWR code (01-022-N11B-8035), and the scanned filings read as page images (MY1985, 1987, 1993, 2001-2007, 2014) show no transmission position. Characters: 4 restraint (cars) / brake+GVWR (trucks), 5 make designator (cars) + 6-7 line/series/body, or 5-7 line/series/chassis/body (trucks), 8 engine, 10 year, 11 plant. Where an engine or series code belongs to a configuration Ford sold only with a manual, the code decides: Escape 2.0 Zetec (2001, 2002, 2004), SVT Focus (2002-2004), Focus ST sedan (2005-2007), Focus ST (2013-2018), Focus RS (2016-2018), Focus 1.0 EcoBoost (2015 only), Fiesta 1.0 EcoBoost (2014-2017), Fiesta ST (2014-2019), Fusion 1.6 EcoBoost (2014 only), Shelby GT500 (2013-2014), Shelby GT350 (2016-2020), Taurus SHO 3.0 (1993). Everything else (F-Series, Ranger, Explorer, Mustang GT/V6/EcoBoost, Focus/Fiesta base engines, Escape from 2005 ...) cannot be decided from the VIN.",
   "Lincoln": "NOT ENCODED (Ford's scheme, same positions). No Lincoln engine or series code is manual-only: the only Lincoln with a manual in the period, the LS V6 (2000-2002, 5-speed), shares its 3.0L V6 engine code with the automatic LS, so the VIN cannot tell them apart. No Lincoln rule.",
-  "Mercury": "NOT ENCODED (Ford's scheme). One series+engine combination is manual-only: Cougar I4 coupe, series 60 + engine 3, MY2001-2002. Capri XR2 turbo (1991-1994; MY1993 passenger-car engine code 6 = 1.6 EFI-TC) was manual-only per EPA, but no lot car carries it (lot Capris are code Z, the 1.6 DOHC base engine that had an automatic)."
+  "Mercury": "NOT ENCODED (Ford's scheme). No Mercury rule is counted: the Cougar I4 coupe (series 60 + engine 3, MY2001-2002) was demoted to candidate by verification because an I4 automatic existed under the same codes (EPA 1999) and the manual-only text source is wrong about 1999. Capri XR2 turbo (1991-1994) was manual-only per EPA, but no lot car carries it."
  },
  "vin_scheme": {
   "Ford/Lincoln/Mercury": {
@@ -117,19 +117,19 @@
  "summary": {
   "rules": 15,
   "rules_by_status": {
-   "low_sample": 13,
-   "candidate": 2
+   "low_sample": 12,
+   "candidate": 3
   },
-  "newly_confirmed_manual_keep_and_low_sample_rules": 76,
-  "newly_confirmed_manual_candidate_rules_only": 4,
+  "newly_confirmed_manual_keep_and_low_sample_rules": 70,
+  "newly_confirmed_manual_candidate_rules_only": 10,
   "newly_confirmed_manual_by_rule": {
-   "ford_escape_2001_2004_char8_engine": 13,
+   "ford_escape_2001_2004_char8_engine": 14,
    "ford_focus_svt_2002_2004_char8_engine": 8,
    "ford_focus_st_2005_2007_series_P38_char8_Z": 13,
-   "ford_focus_st_2013_2018_series_P3L_char8_9": 15,
+   "ford_focus_st_2013_2018_series_P3L_char8_9": 13,
    "ford_focus_rs_2016_2018_series_P3T_char8_H": 0,
    "ford_focus_10_2015_char8_E": 8,
-   "ford_fiesta_10_2014_2017_char8_E": 9,
+   "ford_fiesta_10_2014_2017_char8_E": 10,
    "ford_fiesta_st_2014_2019_char8_X": 1,
    "ford_fusion_16_2014_char8_R": 1,
    "ford_mustang_gt500_2013_2014_char8_Z": 1,
@@ -140,10 +140,9 @@
    "ford_mustang_bullitt_2019_2020_series_P8K": 0
   },
   "newly_confirmed_manual_by_feed_make": {
-   "Ford": 70,
-   "Mercury": 6
+   "Ford": 70
   },
-  "newly_labelled_non_manual_keep_and_low_sample_rules": 420,
+  "newly_labelled_non_manual_keep_and_low_sample_rules": 414,
   "ground_truth_precision_manual_claims": {
    "checkable": 0,
    "agree": 0,
@@ -171,7 +170,7 @@
     "covered_by_rule": 494,
     "newly_confirmed_manual_counted": 70,
     "newly_confirmed_manual_candidate_rules_only": 4,
-    "newly_labelled_non_manual_counted": 420
+    "newly_labelled_non_manual_counted": 414
    },
    "Lincoln": {
     "cars": 3417,
@@ -186,8 +185,8 @@
     "no_trans_info": 2854,
     "vin17": 2205,
     "covered_by_rule": 6,
-    "newly_confirmed_manual_counted": 6,
-    "newly_confirmed_manual_candidate_rules_only": 0,
+    "newly_confirmed_manual_counted": 0,
+    "newly_confirmed_manual_candidate_rules_only": 6,
     "newly_labelled_non_manual_counted": 0
    }
   },
@@ -211,7 +210,8 @@
     "listing:automatic": 12,
     "vin:other": 1
    }
-  }
+  },
+  "counts_recomputed_on": "2026-11-05 (adversarial verification; inventory_live.json changed since the build, other scan counters are from the build run)"
  },
  "validation_method": "Every lot car with a rule WMI, a 17-character VIN and a valid check digit is classified. The model year comes from VIN character 10 (the listing year only picks the 30-year cycle and must be within 2 years). A rule fires only when the VIN matches its WMI, years and fixed characters and character 8 is in its table for that year; other codes get no claim. Ground truth = scraper/manual_detect/ground_truth.jsonl; uniformCell lines are unlabelled, speeds-only lines excluded, the rest checkable: agree means (truth is manual) == (rule says manual). Ford/Lincoln/Mercury ground truth is almost all vPIC decodes of MY2017+ cars (vPIC gives no Ford transmission before then) plus VIN-less listing lines, so no rule here has a checkable car. Independent checks: (1) epa_rows, the EPA rows for the rule's exact model/engine (row ids, all must be the claimed class); (2) a per-car EPA union check (year/make/model names + vPIC displacement) as in vin_rules_1. Status: candidate (not counted) when the transmission evidence is contradicted or EPA-only; drop when >= 20 checkable and agreement < 0.995; low_sample when < 20 checkable (kept: code meaning from Ford's own filing, manual-only fact from EPA plus an independent text source); keep otherwise. newly_confirmed_manual counts lot cars with no published transmission (vehicle_extras trans empty) that a keep or low_sample rule calls manual.",
  "rules": [
@@ -294,6 +294,11 @@
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), row ids",
      "says": "manual: 2001 id 17121 'Escape 2WD' 2.0L Manual 5-spd, 2001 id 17214 'Escape 4WD' 2.0L Manual 5-spd, 2002 id 18063 'Escape 2WD' 2.0L Manual 5-spd, 2002 id 18166 'Escape 4WD' 2.0L Manual 5-spd, 2003 id 19041 'Escape 2WD' 2.0L Manual 5-spd, 2003 id 19152 'Escape 4WD' 2.0L Manual 5-spd, 2004 id 20171 'Escape 2WD' 2.0L Manual 5-spd; automatic: 2001 id 17122 'Escape 2WD' 3.0L Automatic 4-spd, 2001 id 17215 'Escape 4WD' 3.0L Automatic 4-spd, 2002 id 18064 'Escape 2WD' 3.0L Automatic 4-spd, 2002 id 18167 'Escape 4WD' 3.0L Automatic 4-spd, 2003 id 19042 'Escape 2WD' 3.0L Automatic 4-spd, 2003 id 19153 'Escape 4WD' 3.0L Automatic 4-spd, 2004 id 20172 'Escape 2WD' 3.0L Automatic 4-spd, 2004 id 20280 'Escape 4WD' 3.0L Automatic 4-spd"
+    },
+    {
+     "url": "https://www.cars.com/research/ford-escape-2002",
+     "doc": "cars.com, 2002 Ford Escape research page (read as web-search result text)",
+     "says": "'The base 130-horsepower, 2.0-liter four-cylinder engine teams only with a five-speed-manual shift.'"
     }
    ],
    "evidence_gaps": "MY2003 code B is not ruled: in the MY2003 filing (01-022-N11B-8756) the code letter of the 2.0L row is clipped (B or E). No 2003 Escape with code B is on the lots.",
@@ -448,8 +453,68 @@
     },
     "in_scope_codes_not_in_table": {}
    },
-   "newly_confirmed_manual": 13,
-   "newly_labelled_non_manual": 419
+   "newly_confirmed_manual": 14,
+   "newly_labelled_non_manual": 413,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample)",
+    "citations_reopened": [
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: 2001-2004 Escape 2.0L rows are all Manual 5-spd (17121, 17214, 18063, 18166, 19041, 19152, 20171); 3.0L rows are all Automatic 4-spd (17122, 17215, 18064, 18167, 19042, 19153, 20172, 20280). The first 4-cylinder automatic Escape is MY2005 (2.3L, 21283/21387), outside the rule.",
+     "Independent text (web-search text; cars.com WebFetch blocked by the session network): cars.com 2002 Escape research page \"The base 130-horsepower, 2.0-liter four-cylinder engine teams only with a five-speed-manual shift\" (added as a citation). Edmunds 2003 review quote not re-read.",
+     "Pre-2005 MID filings (scanned) not re-read in this pass; the code letters rest on the builder's reading."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 20 code-B VINs all decode Escape 2.0L 4-cyl (XLS, one 2001 U03 decodes XLT); 482 code-1 VINs all decode 3.0L 6-cyl.",
+    "scope_edges": "MY2003 code B still excluded (clipped letter). The automatic claim covers MY2001-2004 code 1 including 2003 (2003 filing reads 1 = 3.0L V6). One 2001 lot car is U03 (XLT) with code B: unusual trim, but the claim rests on the engine code, which was only ever manual. 4x4 (U9x) 2.0L manuals exist in EPA for 2001-2003. No Canada/Mexico plant variant (all 1FM, Kansas City). Mazda Tribute (4F2) is outside this file.",
+    "changes": "added cars.com 2002 citation; counts recomputed on today's inventory",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 14,
+     "automatic_in_scope_lot_cars": 413,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "B": {
+       "regex": "^(1FM).U[09].B.[124].......",
+       "cached_vins": 20,
+       "vpic_transmission": {
+        "(blank/old schema)": 20
+       },
+       "vpic_model_trim_engine": {
+        "2001 Escape XLS 2.0L 4-cyl": 9,
+        "2002 Escape XLS 2.0L 4-cyl": 5,
+        "2004 Escape XLS 2.0L 4-cyl": 2,
+        "2004 Escape XLS -": 1,
+        "2002 Escape XLS -": 1,
+        "2001 Escape XLS -": 1,
+        "2001 Escape XLT 2.0L 4-cyl": 1
+       },
+       "ground_truth_lines": {}
+      },
+      "1": {
+       "regex": "^(1FM).U[09].1.[124].......",
+       "cached_vins": 482,
+       "vpic_transmission": {
+        "(blank/old schema)": 482
+       },
+       "vpic_model_trim_engine": {
+        "2002 Escape XLT 3.0L 6-cyl": 117,
+        "2004 Escape XLT 3.0L 6-cyl": 87,
+        "2001 Escape XLT 3.0L 6-cyl": 73,
+        "2002 Escape XLT -": 36,
+        "2004 Escape XLS 3.0L 6-cyl": 30,
+        "2004 Escape XLT -": 26,
+        "2001 Escape XLS 3.0L 6-cyl": 25,
+        "2001 Escape XLT -": 23,
+        "2002 Escape XLS 3.0L 6-cyl": 22,
+        "2004 Escape Limited 3.0L 6-cyl": 19,
+        "2004 Escape XLS -": 8,
+        "2001 Escape XLS -": 7
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_focus_svt_2002_2004_char8_engine",
@@ -600,7 +665,43 @@
     }
    },
    "newly_confirmed_manual": 8,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample)",
+    "citations_reopened": [
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: every 2002-2004 Focus 6-spd row is a manual (17549 2.0Z, 18515, 19578); no Focus automatic has 6 speeds in those years. All 2.0L Focus automatics are 4-spd (base 2V/4V Zetec).",
+     "Independent text not re-fetched (ultimatecarpage not reached); the SVT Focus Getrag MT-285 6-speed-only fact is uncontested in every source seen."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 10 code-5 VINs, all ZX3 SVT / ZX5 SVT or blank trim, 2.0L.",
+    "scope_edges": "Code 5 = SVT HP Zetec only (2002-2004 filings). Lot cars include P39 (ZX3 SVT), P30 (2004 ZX5 SVT) and P37+5 (2003 ZX5 SVT, which used the ZX5 series with the SVT engine code) - all SVT engines, so all manual. MY2005+ has no SVT.",
+    "changes": "none",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 8,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "5": {
+       "regex": "^(1FA|3FA).P3.5.[234].......",
+       "cached_vins": 10,
+       "vpic_transmission": {
+        "(blank/old schema)": 10
+       },
+       "vpic_model_trim_engine": {
+        "2003 Focus ZX3 SVT 2.0L 4-cyl": 3,
+        "2003 Focus - 2.0L 4-cyl": 2,
+        "2004 Focus ZX5 SVT 2.0L 4-cyl": 2,
+        "2004 Focus ZX3 SVT -": 1,
+        "2004 Focus ZX3 SVT 2.0L 4-cyl": 1,
+        "2002 Focus ZX3 SVT 2.0L 4-cyl": 1
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_focus_st_2005_2007_series_P38_char8_Z",
@@ -660,6 +761,11 @@
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), row ids",
      "says": "manual: 2005 id 20704 'Focus' 2.3L Manual 5-spd, 2006 id 21809 'Focus' 2.3L Manual 5-spd, 2007 id 22759 'Focus' 2.3L Manual 5-spd"
+    },
+    {
+     "url": "https://www.edmunds.com/ford/focus/2007/review",
+     "doc": "Edmunds, 2007 Ford Focus review (web-search result text)",
+     "says": "A 5-speed manual is standard; a 4-speed automatic is offered on all but the base S hatchback and the ST sedan."
     }
    ],
    "evidence_gaps": "",
@@ -742,7 +848,41 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 13,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample)",
+    "citations_reopened": [
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: every 2005-2007 Focus 2.3L row is Manual 5-spd (20704, 21809, 22759); the 2.3L automatics exist only for 2003-2004 (18516, 18803, 19579, 19914), which the rule excludes.",
+     "Independent text via web search (WebFetch blocked): cars.com 2005 \"is teamed only with a smooth shifting 5-speed manual\"; Newsweek ZX4 ST \"comes only in 5-speed manual\"; Edmunds 2007 Focus: 4-speed automatic \"offered on all but the base S hatchback and the ST sedan\"; Autotrader.ca 2007: the ST uses only the manual. One dealer-data page (Autoblog 2007 ST listing) says manual or automatic; it contradicts EPA and the reviews and is treated as generic option data."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 17 P38+Z VINs, 2005 decode as trim \"ZTS\" (vPIC name mapping; the MY2005 filing names P38 = ST), 2006-2007 as ST; all 2.3L.",
+    "scope_edges": "Keyed on series P38 AND engine Z: the 2.3L PZEV Z in 2003-2004 had automatics and is outside the years. vPIC's 2005 \"ZTS\" trim is a name-mapping artefact, not a different car. Canada: same ST (Autotrader.ca).",
+    "changes": "added Edmunds 2007 citation",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 13,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "Z": {
+       "regex": "^(1FA|3FA).P38Z.[567].......",
+       "cached_vins": 17,
+       "vpic_transmission": {
+        "(blank/old schema)": 17
+       },
+       "vpic_model_trim_engine": {
+        "2005 Focus ZTS 2.3L 4-cyl": 10,
+        "2007 Focus ST 2.3L 4-cyl": 4,
+        "2006 Focus ST 2.3L 4-cyl": 2,
+        "2005 Focus ZTS -": 1
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_focus_st_2013_2018_series_P3L_char8_9",
@@ -905,8 +1045,46 @@
     },
     "in_scope_codes_not_in_table": {}
    },
-   "newly_confirmed_manual": 15,
-   "newly_labelled_non_manual": 0
+   "newly_confirmed_manual": 13,
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample)",
+    "citations_reopened": [
+     "MID filings MY2013 (f334b82e) and MY2015-2020 (1f714e28, c7e812c4, cbb561f5, 490f8b21, 21ccd043, 87906d32) re-downloaded and text-searched: the code rows cited are present as stated; the word \"transmission\" appears in none of them. MY2014 (763285e4, image-only) OCR-read: Fiesta E = 1.0L GTDI, X = 1.6L GTDI; Focus 9 = 2.0L GTDI, P3L = ST; Mustang Z = 5.8L 662 hp, P8J/P8K = Shelby Coupe/Convertible (Fusion R row garbled in OCR).",
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: 2013-2018 Focus 2.0L turbo rows are all Manual 6-spd (32918, 34001, 35965, 36990, 38477, 39611); every Focus automatic in those years is non-turbo."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 24 P3L+9 VINs, all trim ST, 2.0L.",
+    "scope_edges": "WMI 1FA only (Wayne, Michigan). P3L is only the ST hatch; code 9 alone would also hit Fusion/Escape 2.0 GTDI automatics, so the series is required.",
+    "changes": "none",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 13,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "9": {
+       "regex": "^(1FA).P3L9.[DEFGHJ].......",
+       "cached_vins": 24,
+       "vpic_transmission": {
+        "(blank/old schema)": 24
+       },
+       "vpic_model_trim_engine": {
+        "2014 Focus ST 2.0L 4-cyl": 9,
+        "2013 Focus ST 2.0L 4-cyl": 4,
+        "2016 Focus ST 2.0L 4-cyl": 3,
+        "2017 Focus ST -": 2,
+        "2015 Focus ST -": 2,
+        "2015 Focus ST 2.0L 4-cyl": 2,
+        "2014 Focus ST -": 1,
+        "2017 Focus ST 2.0L 4-cyl": 1
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_focus_rs_2016_2018_series_P3T_char8_H",
@@ -1039,7 +1217,34 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample, 0 lot cars)",
+    "citations_reopened": [
+     "MID filings MY2013 (f334b82e) and MY2015-2020 (1f714e28, c7e812c4, cbb561f5, 490f8b21, 21ccd043, 87906d32) re-downloaded and text-searched: the code rows cited are present as stated; the word \"transmission\" appears in none of them. MY2014 (763285e4, image-only) OCR-read: Fiesta E = 1.0L GTDI, X = 1.6L GTDI; Focus 9 = 2.0L GTDI, P3L = ST; Mustang Z = 5.8L 662 hp, P8J/P8K = Shelby Coupe/Convertible (Fusion R row garbled in OCR). MY2016-2018: H = 2.3L GTDI, P3T = FOCUS RS 5 DR HATCH.",
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: only 37298, 38245, 39397, all Manual 6-spd."
+    ],
+    "counterexample_search": "No ground-truth line, cache VIN or lot car matches; nothing can contradict it today.",
+    "scope_edges": "WMI WF0 (Saarlouis); Canadian-market RS also manual only.",
+    "changes": "none",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 0,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "H": {
+       "regex": "^(WF0).P3TH.[GHJ].......",
+       "cached_vins": 0,
+       "vpic_transmission": {},
+       "vpic_model_trim_engine": {},
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_focus_10_2015_char8_E",
@@ -1082,12 +1287,22 @@
     {
      "url": "https://www.edmunds.com/ford/focus/2016/review",
      "doc": "Edmunds 2016 Ford Focus review; Car and Driver item 'previously manual-only Ford Focus 1.0L EcoBoost now available with automatic' (as quoted at https://foreverpontiac.com/forums/topic/8425-car-and-driver-previously-manual-only-ford-focus-10l-ecoboost-now-available-with-automatic/)",
-     "says": "Edmunds: 'for 2016, the Ford Focus returns with ... a six-speed automatic transmission for the available 1.0-liter EcoBoost engine'. Car and Driver: the 1.0L Focus was 'previously available with only a six-speed manual transmission', and the smaller Fiesta 1.0L 'is still manual-only'."
+     "says": "Edmunds: 'for 2016, the Ford Focus returns with ... a six-speed automatic transmission for the available 1.0-liter EcoBoost engine'. (The Car and Driver quote formerly filed here is now its own citation.)"
     },
     {
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), row ids",
      "says": "manual: 2015 id 35961 'Focus FWD' 1.0L Manual 6-spd (SIDI; Stop-Start), 2015 id 35969 'Focus SFE FWD' 1.0L Manual 6-spd (SIDI; Stop-Start)"
+    },
+    {
+     "url": "https://foreverpontiac.com/forums/topic/8425-car-and-driver-previously-manual-only-ford-focus-10l-ecoboost-now-available-with-automatic/",
+     "doc": "Car and Driver article (2016 Focus 1.0L automatic) as reposted on a forum; caranddriver.com not reached",
+     "says": "'Previously available with only a six-speed manual transmission, this diminutive optional EcoBoost engine can now be had with a six-speed automatic'; the Fiesta 1.0L remained manual-only."
+    },
+    {
+     "url": "https://www.wardsauto.com/news/archive-wards-manual-makes-sense-for-1-0l-focus-ford-says/784905/",
+     "doc": "WardsAuto, \"Manual makes sense for 1.0L Focus, Ford says\" (2014, web-search result text)",
+     "says": "Ford is offering the 1.0L Focus only with a 6-speed manual transmission despite U.S. buyers' preference for automatics."
     }
    ],
    "evidence_gaps": "",
@@ -1168,7 +1383,40 @@
     }
    },
    "newly_confirmed_manual": 8,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample)",
+    "citations_reopened": [
+     "MID filings MY2013 (f334b82e) and MY2015-2020 (1f714e28, c7e812c4, cbb561f5, 490f8b21, 21ccd043, 87906d32) re-downloaded and text-searched: the code rows cited are present as stated; the word \"transmission\" appears in none of them. MY2014 (763285e4, image-only) OCR-read: Fiesta E = 1.0L GTDI, X = 1.6L GTDI; Focus 9 = 2.0L GTDI, P3L = ST; Mustang Z = 5.8L 662 hp, P8J/P8K = Shelby Coupe/Convertible (Fusion R row garbled in OCR).",
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: 2015 Focus 1.0L rows 35961 and 35969 are both Manual 6-spd; the automatic first appears in 2016 (36988).",
+     "Citation corrected: the \"previously available with only a six-speed manual\" quote is Car and Driver (read from a forum repost; caranddriver.com not reached), not the Edmunds URL it was filed under; Edmunds 2016 review separately says 2016 added \"a six-speed automatic transmission for the available 1.0-liter EcoBoost engine\". Added WardsAuto: Ford offered the 1.0L Focus \"only with a 6-speed manual transmission\" at the 2015 launch."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 12 VINs (P3F/P3K + E, MY F), all 2015 Focus SE 1.0L. The 2018 code-E Focuses in ground truth are uniformCell vPIC defaults and outside the year.",
+    "scope_edges": "Year boundary is the risk: VIN character 10 = F only; MY2016+ (automatic available) excluded.",
+    "changes": "split the mixed Edmunds/Car and Driver citation; added WardsAuto citation",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 8,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "E": {
+       "regex": "^(1FA).P3.E.F.......",
+       "cached_vins": 12,
+       "vpic_transmission": {
+        "(blank/old schema)": 12
+       },
+       "vpic_model_trim_engine": {
+        "2015 Focus SE 1.0L 3-cyl": 10,
+        "2015 Focus SE -": 2
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_fiesta_10_2014_2017_char8_E",
@@ -1226,12 +1474,17 @@
     {
      "url": "https://www.edmunds.com/ford/focus/2016/review",
      "doc": "Edmunds 2016 Ford Focus review; Car and Driver item 'previously manual-only Ford Focus 1.0L EcoBoost now available with automatic' (as quoted at https://foreverpontiac.com/forums/topic/8425-car-and-driver-previously-manual-only-ford-focus-10l-ecoboost-now-available-with-automatic/)",
-     "says": "Edmunds: 'for 2016, the Ford Focus returns with ... a six-speed automatic transmission for the available 1.0-liter EcoBoost engine'. Car and Driver: the 1.0L Focus was 'previously available with only a six-speed manual transmission', and the smaller Fiesta 1.0L 'is still manual-only'."
+     "says": "Edmunds: 'for 2016, the Ford Focus returns with ... a six-speed automatic transmission for the available 1.0-liter EcoBoost engine'. (The Car and Driver quote formerly filed here is now its own citation.)"
     },
     {
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), row ids",
      "says": "manual: 2014 id 34468 'Fiesta SFE FWD' 1.0L Manual 5-spd (SIDI), 2015 id 35182 'Fiesta SFE FWD' 1.0L Manual 5-spd (SIDI), 2016 id 36718 'Fiesta SFE FWD' 1.0L Manual 5-spd (SIDI), 2017 id 38466 'Fiesta SFE FWD' 1.0L Manual 5-spd (SIDI)"
+    },
+    {
+     "url": "https://foreverpontiac.com/forums/topic/8425-car-and-driver-previously-manual-only-ford-focus-10l-ecoboost-now-available-with-automatic/",
+     "doc": "Car and Driver article (2016) as reposted on a forum",
+     "says": "When the Focus 1.0L gained an automatic for 2016, the smaller Fiesta 1.0L remained manual-only."
     }
    ],
    "evidence_gaps": "",
@@ -1321,8 +1574,46 @@
      "2017:J": 45
     }
    },
-   "newly_confirmed_manual": 9,
-   "newly_labelled_non_manual": 0
+   "newly_confirmed_manual": 10,
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample)",
+    "citations_reopened": [
+     "MID filings MY2013 (f334b82e) and MY2015-2020 (1f714e28, c7e812c4, cbb561f5, 490f8b21, 21ccd043, 87906d32) re-downloaded and text-searched: the code rows cited are present as stated; the word \"transmission\" appears in none of them. MY2014 (763285e4, image-only) OCR-read: Fiesta E = 1.0L GTDI, X = 1.6L GTDI; Focus 9 = 2.0L GTDI, P3L = ST; Mustang Z = 5.8L 662 hp, P8J/P8K = Shelby Coupe/Convertible (Fusion R row garbled in OCR).",
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: every 2014-2017 Fiesta 1.0L row is Manual 5-spd (34468, 35182, 36718, 38466); Fiesta automatics are 1.6L non-turbo (AM6).",
+     "Car and Driver (2016, via forum repost) says the Fiesta 1.0L \"remained manual-only\" when the Focus 1.0 got an automatic; citation re-labelled with the repost URL. No text source for MY2017 specifically; EPA lists only the manual."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 15 VINs, all Fiesta SE 1.0L.",
+    "scope_edges": "MY2018-2019 code E excluded (no EPA row). WMI 3FA (Cuautitlan) only.",
+    "changes": "citation re-labelled",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 10,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "E": {
+       "regex": "^(3FA).P4.E.[EFGH].......",
+       "cached_vins": 15,
+       "vpic_transmission": {
+        "(blank/old schema)": 15
+       },
+       "vpic_model_trim_engine": {
+        "2014 Fiesta SE 1.0L 3-cyl": 5,
+        "2016 Fiesta SE 1.0L 3-cyl": 3,
+        "2015 Fiesta SE 1.0L 3-cyl": 3,
+        "2015 Fiesta SE -": 1,
+        "2016 Fiesta SE -": 1,
+        "2014 Fiesta SE -": 1,
+        "2017 Fiesta SE 1.0L 3-cyl": 1
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_fiesta_st_2014_2019_char8_X",
@@ -1484,7 +1775,40 @@
     }
    },
    "newly_confirmed_manual": 1,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample)",
+    "citations_reopened": [
+     "MID filings MY2013 (f334b82e) and MY2015-2020 (1f714e28, c7e812c4, cbb561f5, 490f8b21, 21ccd043, 87906d32) re-downloaded and text-searched: the code rows cited are present as stated; the word \"transmission\" appears in none of them. MY2014 (763285e4, image-only) OCR-read: Fiesta E = 1.0L GTDI, X = 1.6L GTDI; Focus 9 = 2.0L GTDI, P3L = ST; Mustang Z = 5.8L 662 hp, P8J/P8K = Shelby Coupe/Convertible (Fusion R row garbled in OCR). MY2019 filing lists both P4D and P4G as FIESTA ST, so keying on engine X (not series) is right.",
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: every Fiesta 1.6L turbo row 2014-2019 is Manual 6-spd; every Fiesta automatic is the 1.6L non-turbo."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 5 VINs, all Fiesta ST 1.6L.",
+    "scope_edges": "Code X in the light-truck table means a 1.6L DI TC (Escape/Transit Connect, automatic) - excluded by WMI 3FA + char5 P + char6 4.",
+    "changes": "none",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 1,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "X": {
+       "regex": "^(3FA).P4.X.[EFGHJK].......",
+       "cached_vins": 5,
+       "vpic_transmission": {
+        "(blank/old schema)": 5
+       },
+       "vpic_model_trim_engine": {
+        "2014 Fiesta ST 1.6L 4-cyl": 2,
+        "2016 Fiesta ST 1.6L 4-cyl": 2,
+        "2015 Fiesta ST -": 1
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_fusion_16_2014_char8_R",
@@ -1534,6 +1858,16 @@
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), row ids",
      "says": "manual: 2014 id 34085 'Fusion FWD' 1.6L Manual 6-spd (SIDI)"
+    },
+    {
+     "url": "https://autoblog.com/buy/2014-Ford-Fusion/review/",
+     "doc": "Autoblog, 2014 Ford Fusion review (web-search result text)",
+     "says": "'the 1.5 will be mated exclusively to automatic transmissions while the 1.6 will only be available with a manual gearbox'"
+    },
+    {
+     "url": "https://www.jdpower.com/cars/2014/ford/fusion",
+     "doc": "J.D. Power, 2014 Ford Fusion (web-search result text)",
+     "says": "'For 2014, however, the larger engine will continue to be offered in conjunction with a manual gearbox' (the 1.5L takes the automatic)."
     }
    ],
    "evidence_gaps": "",
@@ -1613,7 +1947,39 @@
     }
    },
    "newly_confirmed_manual": 1,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample, 1 lot car)",
+    "citations_reopened": [
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: 2014 Fusion 1.6L: only 34085 Manual 6-spd; the 2014 automatics are the 1.5L (34084, 34661); 2013 1.6L has both (33084/33085/33280); 2015 has no 1.6L.",
+     "Independent text via web search: Autoblog 2014 review \"the 1.5 will be mated exclusively to automatic transmissions while the 1.6 will only be available with a manual gearbox\"; J.D. Power 2014: \"the larger engine will continue to be offered in conjunction with a manual gearbox\". cars.com URL not reachable from this session.",
+     "Adversarial check on an early-build 2014 1.6L automatic (the 1.5L launched during calendar 2013): none found, and EPA certified no 2014 1.6L automatic, which any such car would have needed."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 2 VINs (P0H + R, MY E), both 2014 Fusion SE 1.6L FWD.",
+    "scope_edges": "MY2013 code R (199 lot cars, both transmissions) excluded by the year character. Both plants (3FA Hermosillo, 1FA Flat Rock) in scope; the Canadian-market 2014 Fusion followed the same 1.5 auto / 1.6 manual split as far as found.",
+    "changes": "added Autoblog / J.D. Power citations",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 1,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "R": {
+       "regex": "^(3FA|1FA).P0.R.E.......",
+       "cached_vins": 2,
+       "vpic_transmission": {
+        "(blank/old schema)": 2
+       },
+       "vpic_model_trim_engine": {
+        "2014 Fusion SE 1.6L 4-cyl": 2
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_mustang_gt500_2013_2014_char8_Z",
@@ -1744,7 +2110,38 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 1,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample, 1 lot car)",
+    "citations_reopened": [
+     "MID filings MY2013 (f334b82e) and MY2015-2020 (1f714e28, c7e812c4, cbb561f5, 490f8b21, 21ccd043, 87906d32) re-downloaded and text-searched: the code rows cited are present as stated; the word \"transmission\" appears in none of them. MY2014 (763285e4, image-only) OCR-read: Fiesta E = 1.0L GTDI, X = 1.6L GTDI; Focus 9 = 2.0L GTDI, P3L = ST; Mustang Z = 5.8L 662 hp, P8J/P8K = Shelby Coupe/Convertible (Fusion R row garbled in OCR).",
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: the only 5.8L Mustang rows are 32391 (2013) and 33408 (2014), both Manual 6-spd."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 1 VIN, 2014 Mustang Shelby Coupe 5.8L.",
+    "scope_edges": "Code Z means the 5.2L GT350 from MY2015; the year character confines the rule to D/E. WMI 1ZV (Flat Rock).",
+    "changes": "none",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 1,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "Z": {
+       "regex": "^(1ZV).P8[JK]Z.[DE].......",
+       "cached_vins": 1,
+       "vpic_transmission": {
+        "(blank/old schema)": 1
+       },
+       "vpic_model_trim_engine": {
+        "2014 Mustang Shelby Coupe 5.8L 8-cyl": 1
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_mustang_gt350_2016_2020_char8_Z",
@@ -1891,7 +2288,34 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample, 0 lot cars)",
+    "citations_reopened": [
+     "MID filings MY2013 (f334b82e) and MY2015-2020 (1f714e28, c7e812c4, cbb561f5, 490f8b21, 21ccd043, 87906d32) re-downloaded and text-searched: the code rows cited are present as stated; the word \"transmission\" appears in none of them. MY2014 (763285e4, image-only) OCR-read: Fiesta E = 1.0L GTDI, X = 1.6L GTDI; Focus 9 = 2.0L GTDI, P3L = ST; Mustang Z = 5.8L 662 hp, P8J/P8K = Shelby Coupe/Convertible (Fusion R row garbled in OCR). MY2020: Z = 5.2L TIVCT 526 hp, J = 5.2L (GT500), P8J = Shelby Coupe, P8S = Shelby GT500.",
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: Shelby GT350 2016-2020 all Manual 6-spd; the only automatic 5.2L is the 2020 GT500 (42139, AM7), which is P8S + J and outside the rule."
+    ],
+    "counterexample_search": "No ground-truth line, cache VIN or lot car matches.",
+    "scope_edges": "MY2015 GT350 (P8J+Z) excluded (no EPA row); P8J+J (if any) excluded by the code.",
+    "changes": "none",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 0,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "Z": {
+       "regex": "^(1FA).P8JZ.[GHJKL].......",
+       "cached_vins": 0,
+       "vpic_transmission": {},
+       "vpic_model_trim_engine": {},
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_taurus_sho_1993_char8",
@@ -2044,15 +2468,57 @@
     }
    },
    "newly_confirmed_manual": 1,
-   "newly_labelled_non_manual": 1
+   "newly_labelled_non_manual": 1,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "kept (low_sample, 1 manual + 1 automatic lot car)",
+    "citations_reopened": [
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: 1993 Taurus SHO 3.0L only 10049 Manual 5-spd; 3.2L only 29005 Automatic 4-spd; same split 1994-1995 (11006/11007, 11957/11958). No non-SHO Taurus has a manual after 1991.",
+     "MY1993 filing (scanned) and Wikipedia not re-read in this pass."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: the one Y VIN decodes Taurus SHO 3.0L, the one P VIN Taurus SHO 3.2L.",
+    "scope_edges": "Codes Y and P are passenger-car engine-table codes used only by the SHO in 1993; the rule is year-confined to P (1993).",
+    "changes": "none",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 1,
+     "automatic_in_scope_lot_cars": 1,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "Y": {
+       "regex": "^(1FA).P..Y.P.......",
+       "cached_vins": 1,
+       "vpic_transmission": {
+        "(blank/old schema)": 1
+       },
+       "vpic_model_trim_engine": {
+        "1993 Taurus SHO 3.0L 6-cyl": 1
+       },
+       "ground_truth_lines": {}
+      },
+      "P": {
+       "regex": "^(1FA).P..P.P.......",
+       "cached_vins": 1,
+       "vpic_transmission": {
+        "(blank/old schema)": 1
+       },
+       "vpic_model_trim_engine": {
+        "1993 Taurus SHO 3.2L 6-cyl": 1
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "mercury_cougar_i4_2001_2002_series_60_char8_3",
    "make": "Mercury",
-   "status": "low_sample",
+   "status": "candidate",
    "basis": "series_code",
-   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the code meaning comes from Ford's own Part 565 VIN filing and the manual-only fact from EPA plus an independent source",
-   "notes": "Engine code 3 alone is NOT enough: the same 2.0 Zetec code is used in the Focus and Escort ZX2, which had automatics. MY1999 is outside the rule (EPA 14999 lists a 2.0 Automatic 4-spd for the 1999 Cougar). MY2000: EPA manual only (15802), but no MY2000 filing was read and no MY2000 I4 Cougar is on the lots.",
+   "status_reason": "not counted: demoted by adversarial verification. An I4 automatic existed under the same series 60 + engine 3 (EPA 14999 for 1999; launch and cars.com 2000 descriptions offer the CD4E with the 2.0L), and the only manual-only text source is wrong about 1999, leaving EPA alone for 2001-2002.",
+   "notes": "Engine code 3 alone is NOT enough: the same 2.0 Zetec code is used in the Focus and Escort ZX2, which had automatics. MY1999 is outside the rule (EPA 14999 lists a 2.0 Automatic 4-spd for the 1999 Cougar). MY2000: EPA manual only (15802), but no MY2000 filing was read and no MY2000 I4 Cougar is on the lots. DEMOTED 2026-11-05: see verified.",
    "claim": "manual",
    "scope": {
     "make": "Mercury",
@@ -2098,6 +2564,21 @@
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), row ids",
      "says": "manual: 2001 id 16652 'Cougar' 2.0L Manual 5-spd, 2002 id 17578 'Cougar' 2.0L Manual 5-spd"
+    },
+    {
+     "url": "https://www.machinedesign.com/archive/article/21818535/1999-mercury-cougar",
+     "doc": "Machine Design, \"1999 Mercury Cougar\" (web-search result text)",
+     "says": "CONTRADICTS (for 1999): 'Consumers have a choice of the Zetec 2.0L four-cylinder or the Duratec 2.5L six-cylinder engines with either the five-speed MTX75 manual or four-speed CD4E automatic transaxles.'"
+    },
+    {
+     "url": "https://www.cars.com/articles/2000-mercury-cougar-whats-new-1420687108183",
+     "doc": "cars.com, '2000 Mercury Cougar: what's new' (web-search result text)",
+     "says": "CONTRADICTS: both engines team with a manual or an automatic transmission."
+    },
+    {
+     "url": "https://pressroom.consumerreports.org/cars/mercury/cougar/2000/overview/",
+     "doc": "Consumer Reports, 2000 Cougar overview (web-search result text)",
+     "says": "'a five-speed manual transmission or a four-speed automatic (which is available only with the V6)'."
     }
    ],
    "evidence_gaps": "",
@@ -2175,7 +2656,41 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 6,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "DEMOTED to candidate (not counted): the manual-only claim is not certain",
+    "citations_reopened": [
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: 1999 Cougar 2.0L has both Manual 5-spd (15000) and Automatic 4-spd (14999); 2000-2002 list only the manual (15802, 16652, 17578).",
+     "Contradicting text (web search): the 1999 launch description (Machine Design) says buyers could choose the Zetec 2.0L or the Duratec 2.5L \"with either the five-speed MTX75 manual or four-speed CD4E automatic transaxles\"; cars.com \"2000 Mercury Cougar: what's new\" says both engines team with a manual or automatic; one enthusiast page says a small number of four-cylinder automatics were built. Consumer Reports' 2000 overview says the automatic is \"available only with the V6\".",
+     "The rule's only independent text source (Consumer Guide 1999-02: \"4-cylinder (manual shift only)\") is contradicted by EPA for 1999, so it cannot carry the 2001-2002 claim by itself. Series 60 = \"Cougar I4 3-Dr. Coupe\" says nothing about the transmission, and the I4 automatic (CD4E) existed with the same series and engine code."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars. vPIC cache: 7 VINs, all Cougar I4 2.0L, no transmission.",
+    "scope_edges": "An I4 automatic was built for 1999 (EPA 14999) under the same series 60 + engine 3; whether any 2001-2002 I4 automatics were built is not settled by a source that is right about 1999. EPA-only for the years in scope = candidate under this file's own bar.",
+    "changes": "status low_sample -> candidate; 6 cars moved from newly_confirmed_manual_cars to candidate_rule_manual_cars",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 6,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "3": {
+       "regex": "^(1ZW).T603.[12].......",
+       "cached_vins": 7,
+       "vpic_transmission": {
+        "(blank/old schema)": 7
+       },
+       "vpic_model_trim_engine": {
+        "2002 Cougar I4 2.0L 4-cyl": 5,
+        "2001 Cougar I4 -": 1,
+        "2001 Cougar I4 2.0L 4-cyl": 1
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_ranger_20_1985_1987_char8_C",
@@ -2321,7 +2836,39 @@
     }
    },
    "newly_confirmed_manual": 4,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "candidate (unchanged, not counted)",
+    "citations_reopened": [
+     "EPA vehicles.csv (local copy) re-queried by make/model/year/displacement without the rule's filters: 1985-1987 Ranger 2.0L rows are manual only, but the Ranger Station C-3 note stands; no new evidence either way."
+    ],
+    "counterexample_search": "Counterexample search: ground_truth.jsonl has no line for any VIN in scope (by id or VIN); every in-scope VIN in the vPIC decode cache (lots + history, check digit valid) has a blank transmission, because vPIC gives Ford no transmission before MY2017; no lot car in scope has a published transmission (0 conflicts). Model-level: the only Ford ground-truth lines for these models/years are VIN-less Ace Jacksonville listing lines (\"Automatic\"), which cannot be tied to a code and are mostly base-engine cars.",
+    "scope_edges": "not counted",
+    "changes": "none",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 4,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "C": {
+       "regex": "^(1FT).R..C.[FGH].......",
+       "cached_vins": 5,
+       "vpic_transmission": {
+        "(blank/old schema)": 5
+       },
+       "vpic_model_trim_engine": {
+        "1986 Ranger - 2.0L 4-cyl": 2,
+        "1987 Ranger - 2.0L 4-cyl": 2,
+        "1985 Ranger - 2.0L 4-cyl": 1
+       },
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   },
   {
    "id": "ford_mustang_bullitt_2019_2020_series_P8K",
@@ -2442,7 +2989,33 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (scratch script; inputs re-read on 2026-11-05)",
+    "result": "candidate (unchanged, not counted, 0 lot cars)",
+    "citations_reopened": [
+     "MID filings MY2013 (f334b82e) and MY2015-2020 (1f714e28, c7e812c4, cbb561f5, 490f8b21, 21ccd043, 87906d32) re-downloaded and text-searched: the code rows cited are present as stated; the word \"transmission\" appears in none of them. MY2014 (763285e4, image-only) OCR-read: Fiesta E = 1.0L GTDI, X = 1.6L GTDI; Focus 9 = 2.0L GTDI, P3L = ST; Mustang Z = 5.8L 662 hp, P8J/P8K = Shelby Coupe/Convertible (Fusion R row garbled in OCR). MY2019/2020: 0 = 5.0L 4V V-8 480 hp, P8K = Bullitt Coupe."
+    ],
+    "counterexample_search": "No ground-truth line, cache VIN or lot car matches.",
+    "scope_edges": "not counted",
+    "changes": "none",
+    "rescan_today": {
+     "manual_in_scope_lot_cars": 0,
+     "automatic_in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "disagree": 0,
+     "vpic_cache": {
+      "0": {
+       "regex": "^(1FA).P8K0.[KL].......",
+       "cached_vins": 0,
+       "vpic_transmission": {},
+       "vpic_model_trim_engine": {},
+       "ground_truth_lines": {}
+      }
+     }
+    }
+   }
   }
  ],
  "newly_confirmed_manual_cars": [
@@ -2469,6 +3042,17 @@
    "yard": "Pick-n-Pull - Fairfield"
   },
   {
+   "id": "7999946",
+   "vin": "1FMYU01B02KC92310",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=B (U01): 2.0L SEFI-Zetec DOHC I-4, 127 hp: sold only with the 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Richmond"
+  },
+  {
    "id": "7999483",
    "vin": "1FADP3L93EL238123",
    "year": 2014,
@@ -2478,6 +3062,17 @@
    "code": "char8=9 (P3L): series P3L = Focus ST 5-Dr Hatch with the 2.0L GTDI I-4 (243-252 hp): 6-speed manual only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - San Jose North"
+  },
+  {
+   "id": "8002672",
+   "vin": "3FADP4BE4EM220927",
+   "year": 2014,
+   "make": "Ford",
+   "model": "Fiesta",
+   "rule": "ford_fiesta_10_2014_2017_char8_E",
+   "code": "char8=E (P4B): 1.0L GTDI I-3 (Fox EcoBoost): 5-speed manual only in the US",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Tacoma"
   },
   {
    "id": "7958261",
@@ -2502,17 +3097,6 @@
    "yard": "Pick-n-Pull - Calgary (52 St)"
   },
   {
-   "id": "7975618",
-   "vin": "1FAFP38Z25W268729",
-   "year": 2005,
-   "make": "Ford",
-   "model": "Focus",
-   "rule": "ford_focus_st_2005_2007_series_P38_char8_Z",
-   "code": "char8=Z (P38): series P38 = Focus ST 4-Dr Sedan with the 2.3L DOHC I-4 151 hp: 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Vancouver"
-  },
-  {
    "id": "7962944",
    "vin": "1FMYU02B14KB18103",
    "year": 2004,
@@ -2522,28 +3106,6 @@
    "code": "char8=B (U02): 2.0L SEFI-Zetec DOHC I-4, 127 hp: sold only with the 5-speed manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Edmonton"
-  },
-  {
-   "id": "7992656",
-   "vin": "1ZWFT603425602848",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Rancho Cordova"
-  },
-  {
-   "id": "7940249",
-   "vin": "1ZWFT603125621261",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Kansas City (Winner Rd)"
   },
   {
    "id": "utpap-ogden-A038114",
@@ -2575,7 +3137,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=B (U01): 2.0L SEFI-Zetec DOHC I-4, 127 hp: sold only with the 5-speed manual",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Pick Your Part - Sun Valley"
   },
   {
@@ -2676,17 +3238,6 @@
    "code": "char8=E (P3F): 1.0L GTDI I-3 (EcoBoost): 6-speed manual only in MY2015 (automatic added for MY2016)",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick Your Part - Greensboro"
-  },
-  {
-   "id": "1168-66320",
-   "vin": "1FADP3L94EL395109",
-   "year": 2014,
-   "make": "Ford",
-   "model": "Focus",
-   "rule": "ford_focus_st_2013_2018_series_P3L_char8_9",
-   "code": "char8=9 (P3L): series P3L = Focus ST 5-Dr Hatch with the 2.0L GTDI I-4 (243-252 hp): 6-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick Your Part - Raleigh"
   },
   {
    "id": "1245-78923",
@@ -2843,17 +3394,6 @@
    "yard": "Pull-A-Part - Pittsburgh"
   },
   {
-   "id": "pap-13-1091583-1",
-   "vin": "1ZWFT603925607141",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-A-Part - Montgomery"
-  },
-  {
    "id": "fenix-203021776",
    "vin": "1FADP3KE0FL246504",
    "year": 2015,
@@ -2909,6 +3449,72 @@
    "yard": "Pull-N-Save - Phoenix South"
   },
   {
+   "id": "pns-stk078375",
+   "vin": "3FAHP39563R159260",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Focus",
+   "rule": "ford_focus_svt_2002_2004_char8_engine",
+   "code": "char8=5 (P39): 2.0L DOHC HP (SVT) Zetec I-4, 170 hp: SVT Focus only, Getrag 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix North"
+  },
+  {
+   "id": "pns-stk026610",
+   "vin": "3FADP4EE5FM123877",
+   "year": 2015,
+   "make": "Ford",
+   "model": "Fiesta",
+   "rule": "ford_fiesta_10_2014_2017_char8_E",
+   "code": "char8=E (P4E): 1.0L GTDI I-3 (Fox EcoBoost): 5-speed manual only in the US",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville"
+  },
+  {
+   "id": "pns-stk026190",
+   "vin": "1FAHP38Z75W106667",
+   "year": 2005,
+   "make": "Ford",
+   "model": "Focus",
+   "rule": "ford_focus_st_2005_2007_series_P38_char8_Z",
+   "code": "char8=Z (P38): series P38 = Focus ST 4-Dr Sedan with the 2.3L DOHC I-4 151 hp: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville"
+  },
+  {
+   "id": "pns-stk025719",
+   "vin": "1FAHP38ZX7W161696",
+   "year": 2007,
+   "make": "Ford",
+   "model": "Focus",
+   "rule": "ford_focus_st_2005_2007_series_P38_char8_Z",
+   "code": "char8=Z (P38): series P38 = Focus ST 4-Dr Sedan with the 2.3L DOHC I-4 151 hp: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville"
+  },
+  {
+   "id": "pns-stk017180",
+   "vin": "3FADP4BE7FM146193",
+   "year": 2015,
+   "make": "Ford",
+   "model": "Fiesta",
+   "rule": "ford_fiesta_10_2014_2017_char8_E",
+   "code": "char8=E (P4B): 1.0L GTDI I-3 (Fox EcoBoost): 5-speed manual only in the US",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Tucson"
+  },
+  {
+   "id": "pns-stk163361",
+   "vin": "1FADP3L92EL451161",
+   "year": 2014,
+   "make": "Ford",
+   "model": "Focus",
+   "rule": "ford_focus_st_2013_2018_series_P3L_char8_9",
+   "code": "char8=9 (P3L): series P3L = Focus ST 5-Dr Hatch with the 2.0L GTDI I-4 (243-252 hp): 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Riverside"
+  },
+  {
    "id": "ipull-fre118298",
    "vin": "1FAHP38Z35W281434",
    "year": 2005,
@@ -2929,17 +3535,6 @@
    "code": "char8=X (P4G): 1.6L GTDI I-4 (197 hp), fitted only to the Fiesta ST: 6-speed manual only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Nevada Pic-A-Part - Las Vegas"
-  },
-  {
-   "id": "vinplus-reno-stk022223",
-   "vin": "1FADP3L93FL346159",
-   "year": 2015,
-   "make": "Ford",
-   "model": "Focus",
-   "rule": "ford_focus_st_2013_2018_series_P3L_char8_9",
-   "code": "char8=9 (P3L): series P3L = Focus ST 5-Dr Hatch with the 2.0L GTDI I-4 (243-252 hp): 6-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pickers - Reno"
   },
   {
    "id": "vinplus-hwy195-stk23884",
@@ -3103,19 +3698,19 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=B (U03): 2.0L SEFI-Zetec DOHC I-4, 127 hp: sold only with the 5-speed manual",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Roberts Parts-U-Pick - Moffett"
   },
   {
-   "id": "upullpocatello-pocatello-stk013289",
-   "vin": "1ZWFT603225612522",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "U Pull Auto Parts - Pocatello"
+   "id": "hhsalvage-amarillo-stk005346",
+   "vin": "1FAFP38Z67W104385",
+   "year": 2007,
+   "make": "Ford",
+   "model": "Focus",
+   "rule": "ford_focus_st_2005_2007_series_P38_char8_Z",
+   "code": "char8=Z (P38): series P38 = Focus ST 4-Dr Sedan with the 2.3L DOHC I-4 151 hp: 5-speed manual only",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "H and H Salvage - Amarillo"
   },
   {
    "id": "milliron-mansfield-up039150",
@@ -3138,17 +3733,6 @@
    "code": "char8=Z (P38): series P38 = Focus ST 4-Dr Sedan with the 2.3L DOHC I-4 151 hp: 5-speed manual only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Colorado Auto & Parts - Englewood"
-  },
-  {
-   "id": "byot-bmt028200",
-   "vin": "1ZWFT603125608882",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "BYOT Auto Parts - Beaumont"
   },
   {
    "id": "wilberts-stk93987",
@@ -3195,17 +3779,6 @@
    "yard": "U-Pull-It Auto Parts - Pasco"
   },
   {
-   "id": "aesop-tulsa-stk030100",
-   "vin": "1ZWFT603015613537",
-   "year": 2001,
-   "make": "Mercury",
-   "model": "Cougar",
-   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "AESOP U-Pull - Tulsa"
-  },
-  {
    "id": "ipullca-edm028640",
    "vin": "1FMYU01B31KB79854",
    "year": 2001,
@@ -3215,72 +3788,6 @@
    "code": "char8=B (U01): 2.0L SEFI-Zetec DOHC I-4, 127 hp: sold only with the 5-speed manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "iPull-uPull - Edmonton"
-  },
-  {
-   "id": "pns-stk078375",
-   "vin": "3FAHP39563R159260",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Focus",
-   "rule": "ford_focus_svt_2002_2004_char8_engine",
-   "code": "char8=5 (P39): 2.0L DOHC HP (SVT) Zetec I-4, 170 hp: SVT Focus only, Getrag 6-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Phoenix North"
-  },
-  {
-   "id": "pns-stk163361",
-   "vin": "1FADP3L92EL451161",
-   "year": 2014,
-   "make": "Ford",
-   "model": "Focus",
-   "rule": "ford_focus_st_2013_2018_series_P3L_char8_9",
-   "code": "char8=9 (P3L): series P3L = Focus ST 5-Dr Hatch with the 2.0L GTDI I-4 (243-252 hp): 6-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Riverside"
-  },
-  {
-   "id": "pns-stk026610",
-   "vin": "3FADP4EE5FM123877",
-   "year": 2015,
-   "make": "Ford",
-   "model": "Fiesta",
-   "rule": "ford_fiesta_10_2014_2017_char8_E",
-   "code": "char8=E (P4E): 1.0L GTDI I-3 (Fox EcoBoost): 5-speed manual only in the US",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Springville"
-  },
-  {
-   "id": "pns-stk026190",
-   "vin": "1FAHP38Z75W106667",
-   "year": 2005,
-   "make": "Ford",
-   "model": "Focus",
-   "rule": "ford_focus_st_2005_2007_series_P38_char8_Z",
-   "code": "char8=Z (P38): series P38 = Focus ST 4-Dr Sedan with the 2.3L DOHC I-4 151 hp: 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Springville"
-  },
-  {
-   "id": "pns-stk025719",
-   "vin": "1FAHP38ZX7W161696",
-   "year": 2007,
-   "make": "Ford",
-   "model": "Focus",
-   "rule": "ford_focus_st_2005_2007_series_P38_char8_Z",
-   "code": "char8=Z (P38): series P38 = Focus ST 4-Dr Sedan with the 2.3L DOHC I-4 151 hp: 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Springville"
-  },
-  {
-   "id": "pns-stk017180",
-   "vin": "3FADP4BE7FM146193",
-   "year": 2015,
-   "make": "Ford",
-   "model": "Fiesta",
-   "rule": "ford_fiesta_10_2014_2017_char8_E",
-   "code": "char8=E (P4B): 1.0L GTDI I-3 (Fox EcoBoost): 5-speed manual only in the US",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Tucson"
   }
  ],
  "candidate_rule_manual_cars": [
@@ -3294,6 +3801,28 @@
    "code": "char8=C (R10): 2.0L I-4 (light truck table): EPA lists only manuals, but an independent source reports C3 automatics with the 2.0",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Arlington"
+  },
+  {
+   "id": "7992656",
+   "vin": "1ZWFT603425602848",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
+   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Rancho Cordova"
+  },
+  {
+   "id": "7940249",
+   "vin": "1ZWFT603125621261",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
+   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Kansas City (Winner Rd)"
   },
   {
    "id": "7878150",
@@ -3318,6 +3847,17 @@
    "yard": "Pull-A-Part - El Paso"
   },
   {
+   "id": "pap-13-1091583-1",
+   "vin": "1ZWFT603925607141",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
+   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Montgomery"
+  },
+  {
    "id": "papva-stk125237",
    "vin": "1FTBR10C6HUA70170",
    "year": 1987,
@@ -3327,6 +3867,39 @@
    "code": "char8=C (R10): 2.0L I-4 (light truck table): EPA lists only manuals, but an independent source reports C3 automatics with the 2.0",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-A-Part VA - Stafford"
+  },
+  {
+   "id": "upullpocatello-pocatello-stk013289",
+   "vin": "1ZWFT603225612522",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
+   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "U Pull Auto Parts - Pocatello"
+  },
+  {
+   "id": "byot-bmt028200",
+   "vin": "1ZWFT603125608882",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
+   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "BYOT Auto Parts - Beaumont"
+  },
+  {
+   "id": "aesop-tulsa-stk030100",
+   "vin": "1ZWFT603015613537",
+   "year": 2001,
+   "make": "Mercury",
+   "model": "Cougar",
+   "rule": "mercury_cougar_i4_2001_2002_series_60_char8_3",
+   "code": "char8=3 (T60): series 60 = Cougar I4 3-Dr Coupe with the 2.0L Zetec DOHC I-4: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "AESOP U-Pull - Tulsa"
   }
  ],
  "newly_labelled_non_manual_cars": [
@@ -3340,6 +3913,28 @@
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Newark"
+  },
+  {
+   "id": "7984041",
+   "vin": "1FMYU931X3KB58012",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Kansas City (12th St) "
+  },
+  {
+   "id": "7991502",
+   "vin": "1FMYU02152KC75864",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Kansas City (12th St) "
   },
   {
    "id": "7975727",
@@ -3481,7 +4076,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Fairfield"
   },
   {
@@ -3492,7 +4087,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Fort Worth"
   },
   {
@@ -3527,17 +4122,6 @@
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Fresno"
-  },
-  {
-   "id": "7927933",
-   "vin": "1FMYU93153KA40594",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Kansas City (Truman Rd)"
   },
   {
    "id": "7957607",
@@ -3584,37 +4168,15 @@
    "yard": "Pick-n-Pull - Lynnwood"
   },
   {
-   "id": "7984683",
-   "vin": "1FMYU03163KB87440",
-   "year": 2003,
+   "id": "7987719",
+   "vin": "1FMYU03154KA55495",
+   "year": 2004,
    "make": "Ford",
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Merced"
-  },
-  {
-   "id": "7940482",
-   "vin": "1FMYU04162KD87862",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Merced"
-  },
-  {
-   "id": "7970066",
-   "vin": "1FMYU03161KC58746",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Merced"
+   "yard": "Pick-n-Pull - Moss Landing"
   },
   {
    "id": "7995294",
@@ -3628,15 +4190,15 @@
    "yard": "Pick-n-Pull - Oakland"
   },
   {
-   "id": "7945072",
-   "vin": "1FMYU04161KA52633",
-   "year": 2001,
+   "id": "7996006",
+   "vin": "1FMYU93103KA69730",
+   "year": 2003,
    "make": "Ford",
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Rancho Cordova"
+   "yard": "Pick-n-Pull - Portland South"
   },
   {
    "id": "7971756",
@@ -3694,8 +4256,19 @@
    "yard": "Pick-n-Pull - Salt Lake City"
   },
   {
-   "id": "7985086",
-   "vin": "1FMCU03121KB28215",
+   "id": "8001134",
+   "vin": "1FMYU02134KA19791",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - San Jose North"
+  },
+  {
+   "id": "7992449",
+   "vin": "1FMYU03151KE72109",
    "year": 2001,
    "make": "Ford",
    "model": "Escape",
@@ -3703,6 +4276,226 @@
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - San Jose North"
+  },
+  {
+   "id": "7993319",
+   "vin": "1FMYU02134KA15188",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Stockton"
+  },
+  {
+   "id": "7954307",
+   "vin": "1FMYU04131KF72577",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Stockton"
+  },
+  {
+   "id": "7995523",
+   "vin": "1FMCU93144DA24404",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Tacoma"
+  },
+  {
+   "id": "7970266",
+   "vin": "1FMYU93153KB76918",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Tacoma"
+  },
+  {
+   "id": "7911919",
+   "vin": "1FMCU94154KA90194",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U94): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Carson City"
+  },
+  {
+   "id": "7959158",
+   "vin": "1FMCU04182KB87866",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Carson City"
+  },
+  {
+   "id": "7911230",
+   "vin": "1FMYU03111KB53743",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Carson City"
+  },
+  {
+   "id": "8002180",
+   "vin": "1FMYU03194KB18081",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
+  },
+  {
+   "id": "7959730",
+   "vin": "1FMYU93104KA64416",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
+  },
+  {
+   "id": "7990988",
+   "vin": "1FMYU93173KA77274",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
+  },
+  {
+   "id": "7999137",
+   "vin": "1FMYU93153KA77211",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Calgary (52 St)"
+  },
+  {
+   "id": "7978138",
+   "vin": "1FMYU02102KA70310",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Tumwater"
+  },
+  {
+   "id": "7975852",
+   "vin": "1FMYU02131KA64452",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Tumwater"
+  },
+  {
+   "id": "7970865",
+   "vin": "1FMCU03132KD82209",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sacramento Mather"
+  },
+  {
+   "id": "7942649",
+   "vin": "1FMCU04171KE99224",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sacramento Mather"
+  },
+  {
+   "id": "7981462",
+   "vin": "1FMYU03171KA36183",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - American Canyon"
+  },
+  {
+   "id": "7984683",
+   "vin": "1FMYU03163KB87440",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Merced"
+  },
+  {
+   "id": "7940482",
+   "vin": "1FMYU04162KD87862",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Merced"
+  },
+  {
+   "id": "7970066",
+   "vin": "1FMYU03161KC58746",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Merced"
+  },
+  {
+   "id": "7945072",
+   "vin": "1FMYU04161KA52633",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Rancho Cordova"
   },
   {
    "id": "7976573",
@@ -3760,28 +4553,6 @@
    "yard": "Pick-n-Pull - Summit"
   },
   {
-   "id": "7995523",
-   "vin": "1FMCU93144DA24404",
-   "year": 2004,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Tacoma"
-  },
-  {
-   "id": "7970266",
-   "vin": "1FMYU93153KB76918",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Tacoma"
-  },
-  {
    "id": "7996221",
    "vin": "1FMYU931X4KA45985",
    "year": 2004,
@@ -3826,116 +4597,6 @@
    "yard": "Pick-n-Pull - Virginia Beach"
   },
   {
-   "id": "7911919",
-   "vin": "1FMCU94154KA90194",
-   "year": 2004,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U94): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Carson City"
-  },
-  {
-   "id": "7959158",
-   "vin": "1FMCU04182KB87866",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Carson City"
-  },
-  {
-   "id": "7911230",
-   "vin": "1FMYU03111KB53743",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Carson City"
-  },
-  {
-   "id": "7959730",
-   "vin": "1FMYU93104KA64416",
-   "year": 2004,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
-  },
-  {
-   "id": "7990988",
-   "vin": "1FMYU93173KA77274",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
-  },
-  {
-   "id": "7984041",
-   "vin": "1FMYU931X3KB58012",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Kansas City (12th St) "
-  },
-  {
-   "id": "7991502",
-   "vin": "1FMYU02152KC75864",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Kansas City (12th St) "
-  },
-  {
-   "id": "7978138",
-   "vin": "1FMYU02102KA70310",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Tumwater"
-  },
-  {
-   "id": "7975852",
-   "vin": "1FMYU02131KA64452",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Tumwater"
-  },
-  {
-   "id": "7981462",
-   "vin": "1FMYU03171KA36183",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - American Canyon"
-  },
-  {
    "id": "7984109",
    "vin": "1FMYU92123KB85741",
    "year": 2003,
@@ -3967,72 +4628,6 @@
    "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Jefferson"
-  },
-  {
-   "id": "7967393",
-   "vin": "1FMYU03133KA43487",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Modesto"
-  },
-  {
-   "id": "7996006",
-   "vin": "1FMYU93103KA69730",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Portland South"
-  },
-  {
-   "id": "7993319",
-   "vin": "1FMYU02134KA15188",
-   "year": 2004,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Stockton"
-  },
-  {
-   "id": "7954307",
-   "vin": "1FMYU04131KF72577",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Stockton"
-  },
-  {
-   "id": "7970865",
-   "vin": "1FMCU03132KD82209",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Sacramento Mather"
-  },
-  {
-   "id": "7942649",
-   "vin": "1FMCU04171KE99224",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Sacramento Mather"
   },
   {
    "id": "7992576",
@@ -4101,17 +4696,6 @@
    "yard": "Pick-n-Pull - Little Rock"
   },
   {
-   "id": "7987719",
-   "vin": "1FMYU03154KA55495",
-   "year": 2004,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Moss Landing"
-  },
-  {
    "id": "7989789",
    "vin": "1FMYU93143KD89407",
    "year": 2003,
@@ -4167,15 +4751,15 @@
    "yard": "Pick-n-Pull - St. Louis"
   },
   {
-   "id": "7900191",
-   "vin": "1FMYU021X2KB88798",
-   "year": 2002,
+   "id": "7927933",
+   "vin": "1FMYU93153KA40594",
+   "year": 2003,
    "make": "Ford",
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Salt Lake City"
+   "yard": "Pick-n-Pull - Kansas City (Truman Rd)"
   },
   {
    "id": "7941123",
@@ -4526,7 +5110,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Pick Your Part - San Bernardino"
   },
   {
@@ -4867,7 +5451,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Pick Your Part - Chicago North"
   },
   {
@@ -4924,17 +5508,6 @@
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick Your Part - East St. Louis"
-  },
-  {
-   "id": "1250-52505",
-   "vin": "1FMYU04111KE56732",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick Your Part - Rockford"
   },
   {
    "id": "1254-52185",
@@ -5245,6 +5818,17 @@
    "yard": "Pick Your Part - Greer"
   },
   {
+   "id": "1217-67106",
+   "vin": "1FMYU03123KA69207",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "Pick Your Part - Chattanooga"
+  },
+  {
    "id": "1217-66507",
    "vin": "1FMYU02154KB22517",
    "year": 2004,
@@ -5351,7 +5935,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Pull-A-Part - Atlanta North"
   },
   {
@@ -5769,7 +6353,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Pull-A-Part - Winston-Salem"
   },
   {
@@ -5927,17 +6511,6 @@
    "yard": "Pull-A-Part - Colorado Springs"
   },
   {
-   "id": "pap-38-1027780-1",
-   "vin": "1FMYU04191KF71207",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-A-Part - Colorado Springs"
-  },
-  {
    "id": "pap-38-1027678-1",
    "vin": "1FMYU93183KA32781",
    "year": 2003,
@@ -6000,17 +6573,6 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U94): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
-   "yard": "Pull-A-Part - Denver"
-  },
-  {
-   "id": "pap-40-1032890-2",
-   "vin": "1FMCU04191KF99812",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pull-A-Part - Denver"
   },
@@ -6257,17 +6819,6 @@
    "yard": "Fenix U-Pull - Binghamton"
   },
   {
-   "id": "fenix-306060784",
-   "vin": "1FMYU03191KB51089",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Fenix U-Pull - Moultrie"
-  },
-  {
    "id": "fenix-204014714",
    "vin": "1FMYU93183KA40637",
    "year": 2003,
@@ -6308,7 +6859,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Harry's U-Pull-It - Hazle Township"
   },
   {
@@ -6411,6 +6962,204 @@
    "yard": "Pull-N-Save - Salt Lake City"
   },
   {
+   "id": "pns-stk072420",
+   "vin": "1FMYU93113KB47772",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Glendale"
+  },
+  {
+   "id": "pns-stk071983",
+   "vin": "1FMCU03124KB11029",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Glendale"
+  },
+  {
+   "id": "pns-stk071742",
+   "vin": "1FMYU01141KB84343",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U01): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Glendale"
+  },
+  {
+   "id": "pns-stk071615",
+   "vin": "1FMYU04102KA49678",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Glendale"
+  },
+  {
+   "id": "pns-stk070988",
+   "vin": "1FMYU03102KD80617",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Glendale"
+  },
+  {
+   "id": "pns-stk071118",
+   "vin": "1FMCU03154DA13987",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Glendale"
+  },
+  {
+   "id": "pns-stk079843",
+   "vin": "1FMCU03172KA39841",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix North"
+  },
+  {
+   "id": "pns-stk079326",
+   "vin": "1FMCU03182KC17000",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix North"
+  },
+  {
+   "id": "pns-stk078835",
+   "vin": "1FMYU93103KD75018",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix North"
+  },
+  {
+   "id": "pns-stk078100",
+   "vin": "1FMCU03192KC10234",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix North"
+  },
+  {
+   "id": "pns-stk045537",
+   "vin": "1FMCU94113KC97292",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U94): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Gilbert"
+  },
+  {
+   "id": "pns-stk026043",
+   "vin": "1FMYU93103KA78962",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville"
+  },
+  {
+   "id": "pns-stk027184",
+   "vin": "1FMYU93193KC68551",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville"
+  },
+  {
+   "id": "pns-stk026725",
+   "vin": "1FMCU92183KD97182",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U92): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville"
+  },
+  {
+   "id": "pns-stk026642",
+   "vin": "1FMCU04112KC84553",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville"
+  },
+  {
+   "id": "pns-stk026052",
+   "vin": "1FMCU04161KE76405",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville"
+  },
+  {
+   "id": "pns-stk025248",
+   "vin": "1FMYU93173KB59716",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville"
+  },
+  {
+   "id": "pns-stk021636",
+   "vin": "1FMYU02124KA69839",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Tucson"
+  },
+  {
    "id": "ipull-fre118640",
    "vin": "1FMYU03144KB52770",
    "year": 2004,
@@ -6440,7 +7189,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U92): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Nevada Pic-A-Part - Henderson"
   },
   {
@@ -6455,13 +7204,13 @@
    "yard": "Nevada Pic-A-Part - Las Vegas"
   },
   {
-   "id": "nvpap-h061877",
-   "vin": "1FMYU93133KE01210",
-   "year": 2003,
+   "id": "nvpap-h062507",
+   "vin": "1FMYU03181KE71360",
+   "year": 2001,
    "make": "Ford",
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Nevada Pic-A-Part - Henderson"
   },
@@ -6506,7 +7255,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "RTP Pick-A-Part - Maiden"
   },
   {
@@ -6519,17 +7268,6 @@
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pickers - Longview"
-  },
-  {
-   "id": "vinplus-texarkana-stk026830",
-   "vin": "1FMYU03133KE07262",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pickers - Texarkana"
   },
   {
    "id": "vinplus-texarkana-stk027015",
@@ -6649,17 +7387,6 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "San Antonio Pick-N-Pull (Independent)"
-  },
-  {
-   "id": "vinplus-pnpsa-pnp024762",
-   "vin": "1FMYU02103KE20276",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "San Antonio Pick-N-Pull (Independent)"
   },
@@ -6884,6 +7611,28 @@
    "yard": "Chesterfield Auto Parts - Fort Lee"
   },
   {
+   "id": "papva-stk124997",
+   "vin": "1FMCU94163KE01937",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U94): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-A-Part VA - Stafford"
+  },
+  {
+   "id": "papva-stk125586",
+   "vin": "1FMYU02191KA71681",
+   "year": 2001,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-A-Part VA - Stafford"
+  },
+  {
    "id": "papva-pap175228",
    "vin": "1FMYU04112KD87610",
    "year": 2002,
@@ -6902,39 +7651,6 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-A-Part VA - Stafford"
-  },
-  {
-   "id": "papva-stk125586",
-   "vin": "1FMYU02191KA71681",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-A-Part VA - Stafford"
-  },
-  {
-   "id": "papva-stk125270",
-   "vin": "1FMYU01131KA14720",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U01): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-A-Part VA - Stafford"
-  },
-  {
-   "id": "papva-stk124997",
-   "vin": "1FMCU94163KE01937",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U94): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-A-Part VA - Stafford"
   },
@@ -7036,17 +7752,6 @@
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "EZ Pull N Pay - Stockbridge"
-  },
-  {
-   "id": "ezpullnpay-warnerrobins-stk012035",
-   "vin": "1FMYU03184KB23188",
-   "year": 2004,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "EZ Pull N Pay - Warner Robins"
   },
   {
    "id": "ezpullnpay-warnerrobins-stk012032",
@@ -7232,7 +7937,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Auto Parts U Pull - Lincolnton"
   },
   {
@@ -7353,7 +8058,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Roberts Parts-U-Pick - Moffett"
   },
   {
@@ -7441,7 +8146,7 @@
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U01): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Parts YoU Pull - Amite"
   },
   {
@@ -7751,205 +8456,20 @@
    "code": "char8=1 (U92): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "iPull-uPull - Edmonton"
-  },
-  {
-   "id": "pns-stk045537",
-   "vin": "1FMCU94113KC97292",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U94): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Gilbert"
-  },
-  {
-   "id": "pns-stk072420",
-   "vin": "1FMYU93113KB47772",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Glendale"
-  },
-  {
-   "id": "pns-stk071983",
-   "vin": "1FMCU03124KB11029",
-   "year": 2004,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Glendale"
-  },
-  {
-   "id": "pns-stk071742",
-   "vin": "1FMYU01141KB84343",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U01): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Glendale"
-  },
-  {
-   "id": "pns-stk071615",
-   "vin": "1FMYU04102KA49678",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Glendale"
-  },
-  {
-   "id": "pns-stk070988",
-   "vin": "1FMYU03102KD80617",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Glendale"
-  },
-  {
-   "id": "pns-stk071118",
-   "vin": "1FMCU03154DA13987",
-   "year": 2004,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Glendale"
-  },
-  {
-   "id": "pns-stk079843",
-   "vin": "1FMCU03172KA39841",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Phoenix North"
-  },
-  {
-   "id": "pns-stk079326",
-   "vin": "1FMCU03182KC17000",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Phoenix North"
-  },
-  {
-   "id": "pns-stk078835",
-   "vin": "1FMYU93103KD75018",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Phoenix North"
-  },
-  {
-   "id": "pns-stk078100",
-   "vin": "1FMCU03192KC10234",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Phoenix North"
-  },
-  {
-   "id": "pns-stk026043",
-   "vin": "1FMYU93103KA78962",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Springville"
-  },
-  {
-   "id": "pns-stk027184",
-   "vin": "1FMYU93193KC68551",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Springville"
-  },
-  {
-   "id": "pns-stk026725",
-   "vin": "1FMCU92183KD97182",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U92): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Springville"
-  },
-  {
-   "id": "pns-stk026642",
-   "vin": "1FMCU04112KC84553",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Springville"
-  },
-  {
-   "id": "pns-stk026052",
-   "vin": "1FMCU04161KE76405",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Springville"
-  },
-  {
-   "id": "pns-stk025248",
-   "vin": "1FMYU93173KB59716",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Springville"
-  },
-  {
-   "id": "pns-stk021636",
-   "vin": "1FMYU02124KA69839",
-   "year": 2004,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Tucson"
   }
  ],
- "published_label_conflicts": []
+ "published_label_conflicts": [],
+ "adversarial_verification": {
+  "on": "2026-11-05",
+  "result": "15 rules: 12 counted (low_sample), 3 candidates (Ranger 2.0 and Bullitt unchanged; Mercury Cougar I4 demoted). None removed outright; none narrowed (every counted rule's scope edges held).",
+  "method": [
+   "Re-queried EPA vehicles.csv for every rule scope without the builder's filters, looking for an automatic in scope.",
+   "Re-downloaded the MY2013-2020 Ford MID filings (text layer) and OCR-read MY2014; pre-2013 scanned filings were not re-read.",
+   "Searched ground_truth.jsonl (by id and VIN) and the full vPIC decode cache (470k VINs) for every rule regex, manual and automatic codes.",
+   "Searched the web for counter-statements (automatic offered) for each configuration. WebFetch could not reach cars.com, autoguide.com, thetruthaboutcars.com (session network), so text was read from web-search result text."
+  ],
+  "ground_truth_checkable": 0,
+  "precision_on_ground_truth": "not measurable (0 checkable cars in any rule scope)",
+  "net_change": "newly confirmed manual 76 -> 70 (Cougar -6; inventory drift: Escape B 13->14, Focus ST 2013-18 15->13, Fiesta 1.0 9->10); newly labelled non-manual 420 -> 414"
+ }
 }

@@ -26,7 +26,7 @@
   "Chevrolet": "ENCODED for specific lines and years only, through the line/series code (positions 4-5; trucks/MPVs 5-6): Cobalt MY2009-2010, HHR MY2008-2011, Camaro MY2010-2024, Corvette MY2010-2019, Cruze MY2011-2019 (and 2016 Cruze Limited), Sonic MY2012-2020, Spark MY2013-2022, SS MY2016-2017. NOT ENCODED for every other Chevrolet line and year (Malibu, Impala, Cavalier, Aveo, Equinox, Silverado, S-10, Colorado, Tahoe ..., Corvette before 2010 and C8, Cobalt 2005-2008, HHR 2006-2007): GM's VIN has no transmission position (4-5 line/series or GVWR/line, 6 body or series, 7 restraint or body, 8 engine). Manual-only engines in uncoded years: Cobalt SS supercharged 2005-2007 (engine P), Metro 1.0 1999-2000 (engine 6).",
   "GMC": "NOT ENCODED. No GMC line/series description in any filing read names a transmission, and no GMC engine code on the lots is manual-only (Sonoma/Canyon 4-cylinders and the full-size trucks had both or automatic only).",
   "Pontiac": "ENCODED through the series code for G5 MY2009-2010, Solstice MY2008-2010 and Vibe MY2009-2010 (MY2008 Vibe is a candidate). NOT ENCODED otherwise (G6, Grand Am, Grand Prix, Sunfire, Firebird, Bonneville, Aztek, Montana, G8 ...; G5 2007-2008; Solstice 2006-2007). Vibe GT 2003-2006 (series SN + engine L, NUMMI filings) is manual-only.",
-  "Saturn": "ENCODED through the series code for S-series and L-series MY2000-2003 (except MY2001 SL), ION MY2003-2007, VUE MY2002-2007 (FWD 4-cylinder only), Sky MY2008-2010. NOT ENCODED for MY1991-1999 S-series (filings list the same letters without a transmission), Aura, Outlook, Relay, Astra, VUE 2008-2010, Sky 2007. ION Red Line 2004-2007 (engine P) is manual-only.",
+  "Saturn": "ENCODED through the series code for S-series and L-series MY2000-2003 (except MY2001 SL and MY2002 SL series ZF), ION MY2003-2007, VUE MY2002-2007 (FWD 4-cylinder only), Sky MY2008-2010. NOT ENCODED for MY1991-1999 S-series (filings list the same letters without a transmission), Aura, Outlook, Relay, Astra, VUE 2008-2010, Sky 2007. ION Red Line 2004-2007 (engine P) is manual-only.",
   "Buick": "NOT ENCODED. No Buick line/series description names a transmission in any filing read (MY1985-2027); no Buick on the lots had a manual-only engine (Regal GS 2012-2013 and Verano Turbo had both, Cascada/Encore automatic).",
   "Cadillac": "ENCODED through the series code for CTS MY2008-2009 (DM/DP manual) and, outside the lots' range, CT4-V / CT5-V Blackwing (MY2022+ 'Manual' series codes). NOT ENCODED for every other Cadillac line and year (CTS 2003-2007 and 2010+, ATS, STS, DTS, DeVille, SRX, Escalade ...). CTS-V 2004-2007 (series DN) was manual-only (EPA).",
   "Oldsmobile": "NOT ENCODED (GM scheme, positions 4-5 line/series with no transmission). No Oldsmobile engine code on the lots is manual-only: the 1990-1993 Calais/Achieva Quad 4 W41 and HO cars are absent from the lots, and Alero/Achieva/Cutlass four-cylinders had both transmissions.",
@@ -43,6 +43,10 @@
   {
    "what": "Saturn SL (ZF) MY2001",
    "why": "MY2001 table says only 'SL' (MY2000 'SL MANUAL', MY2002 'SL Manual'); vPIC decodes all five lot 2001 SLs as manual (uniform cell). Left unlabelled: the filing for that year names no transmission."
+  },
+  {
+   "what": "Saturn SL (ZF) MY2002",
+   "why": "Added by verification 2026-11-05: the Oct-2001 MY2002 issue reads plain 'SL' (no transmission, no ZL code); 'SL Manual' and 'ZL SL Auto' appear only in the Apr-2002 issue from an undated revision missing from MID, so early-MY2002 ZF cars were coded under a definition naming no transmission. Six lot cars; the scraper's uniform-cell drop for them should stay."
   },
   {
    "what": "Chevrolet HHR MY2006-2007",
@@ -80,10 +84,10 @@
    "low_sample": 8,
    "candidate": 3
   },
-  "newly_confirmed_manual_keep_and_low_sample_rules": 47,
+  "newly_confirmed_manual_keep_and_low_sample_rules": 41,
   "newly_confirmed_manual_candidate_rules_only": 18,
   "newly_confirmed_manual_by_rule": {
-   "saturn_s_l_series_2000_2003": 10,
+   "saturn_s_l_series_2000_2003": 4,
    "saturn_ion_series_2003_2007": 10,
    "saturn_vue_series_2002_2007": 6,
    "chevrolet_cobalt_series_2009_2010": 0,
@@ -109,12 +113,12 @@
   },
   "newly_confirmed_manual_by_feed_make": {
    "Chevrolet": 19,
-   "Saturn": 27,
+   "Saturn": 21,
    "Cadillac": 1
   },
   "newly_confirmed_manual_by_reason": {
    "vpic_trans_blank": 29,
-   "vpic_trans_dropped_by_scraper": 12,
+   "vpic_trans_dropped_by_scraper": 6,
    "not_in_cache_backup": 6
   },
   "newly_labelled_non_manual_keep_and_low_sample_rules": 76,
@@ -134,10 +138,10 @@
   "scan": {
    "rule_wmi_vins": 28432,
    "out_of_rule_scope": 19606,
-   "covered": 7640,
+   "covered": 7634,
    "bad_check_digit": 124,
    "in_scope_code_not_in_table": 655,
-   "in_scope_code_names_no_transmission": 403,
+   "in_scope_code_names_no_transmission": 409,
    "vin_year_vs_listing_mismatch": 4
   },
   "make_coverage": {
@@ -172,7 +176,7 @@
     "no_trans_info": 1876,
     "vin17": 2236,
     "covered_by_rule": 891,
-    "newly_confirmed_manual_counted": 27,
+    "newly_confirmed_manual_counted": 21,
     "newly_confirmed_manual_candidate_rules_only": 0,
     "newly_labelled_non_manual_counted": 4
    },
@@ -274,6 +278,20 @@
    "Geo": {
     "listing:automatic": 2
    }
+  },
+  "verification": {
+   "verified_utc": "2026-11-05",
+   "rules_removed": 0,
+   "rules_narrowed": 1,
+   "rules_kept": 22,
+   "narrowed": {
+    "saturn_s_l_series_2000_2003": "MY2002 series ZF no longer claimed (6 cars withdrawn)"
+   },
+   "newly_confirmed_manual_before": 47,
+   "newly_confirmed_manual_after": 41,
+   "method": "Every counted rule's citations re-opened in the downloaded MID files (text layers, OCR and page images); draft-vs-final issues compared; every in-scope lot car on the 2026-11-05T17:18Z inventory with a vPIC transmission re-checked against the rule (7,430 cars incl. uniformCell lines, 0 disagreements); engine/sub-model rules cross-checked against EPA and NRCan (Canadian market); scope edges (model-year boundaries, Canada/Mexico codes, body splits, shared carline letters, feed vs VIN model) examined.",
+   "independent_source_added": "Natural Resources Canada Fuel Consumption Ratings 1995-2014 (open.canada.ca dataset, MY1995-2014 CSV), downloaded 2026-11-05",
+   "limits": "Ground truth for GM VINs is vPIC (partly circular). Web sources were read only as search-result text (WebFetch could not reach cars.com or wikipedia.org from this session)."
   }
  },
  "validation_method": "Every lot car with a rule WMI, a 17-character VIN and a valid check digit is classified. The model year comes from VIN character 10 (the listing year only picks the 30-year cycle and must be within 2 years). A rule fires only when the VIN matches its WMI, years and fixed characters and its code (series characters, or the engine character for engine rules) has a transmission in that YEAR's table; codes whose description names no transmission give no claim, and the next rule in scope is tried. Ground truth = scraper/manual_detect/ground_truth.jsonl; uniformCell lines are unlabelled, speeds-only lines are excluded, the rest are checkable: agree means (truth is manual) == (rule says manual). GM's VIN ground truth is vPIC, which is built from these same filings (partly circular): it checks that the right year table was read, not the filing itself. Independent checks: EPA rows per engine/sub-model rule (every rule year must have rows and all must be the claimed class), and a per-car EPA union check (year, make, feed/vPIC model, vPIC displacement). Status: candidate (not counted) when flagged or when the EPA sole-offering check fails; drop when >= 20 checkable and agreement < 0.995; low_sample when < 20 checkable; keep otherwise. newly_confirmed_manual counts lot cars with no published transmission (vehicle_extras trans empty) that a keep or low_sample rule calls manual.",
@@ -283,7 +301,7 @@
    "make": "Saturn",
    "status": "keep",
    "basis": "series_code",
-   "status_reason": "at least 20 checkable ground-truth cars and agreement >= 0.995",
+   "status_reason": "at least 20 checkable ground-truth cars and agreement >= 0.995; narrowed by verification (MY2002 ZF removed)",
    "notes": "GM's 1991-1999 filings list the same Saturn series letters WITHOUT a transmission (G/H both 'SC / SL1', J/K both 'SL2'), so MY1991-1999 S-series are not ruled even though the letter pairs look like manual/automatic pairs: that would be inference.",
    "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
    "scope": {
@@ -311,7 +329,7 @@
     "manual_codes": {
      "JR": "LS MANUAL (MY2000-2002)",
      "JT": "LS1 MANUAL (MY2000-2001); LS1/LW1 MANUAL (MY2002); L200/LW200 MANUAL (MY2003)",
-     "ZF": "SL MANUAL (MY2000); SL Manual (MY2002)",
+     "ZF": "SL MANUAL (MY2000 only; MY2002 ZF removed by verification, MY2001 never ruled)",
      "ZG": "SL1 MANUAL (MY2000-2002)",
      "ZJ": "SW2 MANUAL, SL2 MANUAL (MY2000-2001); SL2 MANUAL (MY2002)",
      "ZN": "SC1 MANUAL (MY2002)",
@@ -381,7 +399,7 @@
       "JT": "manual",
       "JU": "automatic",
       "JW": null,
-      "ZF": "manual",
+      "ZF": null,
       "ZG": "manual",
       "ZH": "automatic",
       "ZJ": "manual",
@@ -399,7 +417,7 @@
      }
     }
    },
-   "vin_regex_manual": "^(1G8)(JR....[Y12].......|JT....[Y123].......|ZF....[Y2].......|ZG....[Y12].......|ZJ....[Y12].......|ZN1...[Y12].......|ZR....[Y12].......|ZS....2.......)",
+   "vin_regex_manual": "^(1G8)(JR....[Y12].......|JT....[Y123].......|ZF....Y.......|ZG....[Y12].......|ZJ....[Y12].......|ZN1...[Y12].......|ZR....[Y12].......|ZS....2.......)",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/d4f44ce1-7f9e-4f82-9269-66875c1c0cda",
@@ -452,7 +470,7 @@
      "says": "Z E = SC1 coupe, Z F = SC1 coupe, Z G = SC2 coupe / SW1 wagon / SL1 sedan, Z H = SC2 coupe / SW1 wagon / SL1 sedan, Z J = SW2 wagon / SL2 sedan, Z K = SW2 wagon / SL2 sedan; no transmission is named."
     }
    ],
-   "evidence_gaps": "MY2001 ZF ('SL') names no transmission, so 2001 SLs get no claim; MY2000 ZN / ZJ / JU mix body styles and transmissions in one code, resolved by the body-style character (position 6: 1 coupe, 5 sedan, 8 wagon) where the filing ties the transmission to the body; JU wagons (LW1, no transmission named) get no claim.",
+   "evidence_gaps": "MY2001 ZF ('SL') names no transmission, so 2001 SLs get no claim; MY2002 ZF gets no claim either (verification 2026-11-05: the Oct-2001 MY2002 issue reads plain 'SL'; 'SL Manual' and a new 'ZL SL Auto' appear only in the Apr-2002 issue, unmarked, from a revision missing from MID). MY2000 ZN / ZJ / JU mix body styles and transmissions in one code, resolved by the body-style character (position 6: 1 coupe, 5 sedan, 8 wagon) where the filing ties the transmission to the body; JU wagons (LW1, no transmission named) get no claim.",
    "validation": {
     "checkable_ground_truth": 225,
     "agree": 225,
@@ -462,7 +480,7 @@
     "epa_rows": [],
     "epa_sole_offering_holds": null,
     "manual_codes": {
-     "in_scope_lot_cars": 66,
+     "in_scope_lot_cars": 60,
      "checkable_ground_truth": 57,
      "agree": 57,
      "disagree": 0,
@@ -477,11 +495,11 @@
       "conflict": 0,
       "no_epa_match": 37
      },
-     "cars_without_trans_info": 10,
+     "cars_without_trans_info": 4,
      "cars_without_trans_info_by_reason": {
-      "vpic_trans_dropped_by_scraper": 6,
       "vpic_trans_blank": 4
-     }
+     },
+     "note_after_verification": "ZF MY2002 removed: 6 lot cars leave manual scope (5 were uniformCell-excluded ground-truth lines, so checkable counts are unchanged); epa_crosscheck_per_car counts are as generated before the narrowing."
     },
     "automatic_codes": {
      "in_scope_lot_cars": 211,
@@ -534,7 +552,6 @@
      "2002 JS A": 9,
      "2002 JT M": 1,
      "2002 JU A": 25,
-     "2002 ZF M": 6,
      "2002 ZG M": 4,
      "2002 ZH A": 27,
      "2002 ZJ M": 8,
@@ -553,12 +570,27 @@
      "2001:JW: LS2, LW2 (no transmission named)": 7,
      "2001:ZF: SL (no transmission named in MY2001)": 5,
      "2001:JU: JU with body character 8: no transmission named": 4,
-     "2000:JU: JU with body character 8: no transmission named": 1
+     "2000:JU: JU with body character 8: no transmission named": 1,
+     "2002:ZF: SL (Oct-2001 issue: no transmission named)": 6
     },
     "in_scope_codes_not_in_table": {}
    },
-   "newly_confirmed_manual": 10,
-   "newly_labelled_non_manual": 1
+   "newly_confirmed_manual": 4,
+   "newly_labelled_non_manual": 1,
+   "verified": {
+    "verdict": "narrowed",
+    "verified_utc": "2026-11-05",
+    "removed": "MY2002 series ZF ('SL Manual'): 6 newly confirmed manuals withdrawn (1G8ZF52892Z223443, 1G8ZF52802Z211424, 1G8ZF52802Z244407, 1G8ZF52832Z262769, 1G8ZF52802Z145201, 1G8ZF52802Z182233).",
+    "why_removed": "Re-reading the MY2002 issues: Oct-2001 issue 01-022-N11B-8755 page B7 (page image) lists 'Z F SL' and no ZL; the June-2001 issue 8940 also reads 'SL'. The Apr-2002 issue 01-022-N11B-9012 reads 'Z F SL Manual' and 'Z L SL Auto', neither marked '#', and its cover letter lists only 'Model ZS added'. So ZF was split from a no-transmission 'SL' in a revision that is not in MID, on an unknown date, and GM itself defined a base-SL automatic (ZL) that year. Cars built while the Oct-2001 table was in force were coded under a definition that names no transmission: the same reason the rule already gives no claim to MY2001 ZF. Trim sources conflict (CarGurus 2001 overview: every trim except the SL offered the automatic; Cars.com 2001 review and Edmunds 2002 overview: automatic with both engines), and EPA/NRCan do not separate the base SL from the SL1 (both list SOHC 1.9 manual and automatic), so nothing independent makes these cars certain.",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 264 cars (after the narrowing; the 6 MY2002 ZF cars, all vPIC \"Manual\", leave scope), 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "Citations re-opened: 7504 (Dec 1999) and 7868 (Jul 2000) MY2000 text layers read 'Z F SL MANUAL'; the 7504 cover letter changes only ZK (to 'SL2 Auto'), so MY2000 ZF stands. 7505 (MY2001) reads 'Z F SL'. 9012 (MY2002, Apr 2002) Table B2g read line by line: ZG SL1 MANUAL, ZH SL1 AUTO, ZJ SL2 MANUAL, ZK SL2 AUTO, ZN 'SC1 MANUAL,', ZP SC1 AUTO, ZR SC2 MANUAL, '# ZS SL MANUAL SPRING SPECIAL', ZY SC2 AUTO, JR/JS/JT/JU as claimed. 8753 cover letter (ZJ/ZN wagon references removed for MY2002) confirmed.",
+     "ZS (Spring Special) kept: it is new in the Apr-2002 issue (marked '#', the cover letter's only change), so every ZS car was coded under 'SL MANUAL SPRING SPECIAL'; vPIC decodes the series as 'Spring Special' with no transmission.",
+     "MY2000-2001 position-6 split checked on lot VINs: ZN with body 1 (coupe) all SOHC engine 8 and vPIC manual; ZN with body 8 (wagon) DOHC engine 7 and vPIC automatic; JU body 8 wagons get no claim (vPIC calls them automatic, not used).",
+     "Lot ratios are plausible for code-per-transmission (2002: ZG 4 manual vs ZH 26 auto; ZJ 8 vs ZK 16).",
+     "Not added: the Apr-2002 table's 'ZL SL Auto' is missing from the MY2002 table (no lot car carries ZL, so no effect)."
+    ]
+   }
   },
   {
    "id": "saturn_ion_series_2003_2007",
@@ -805,7 +837,18 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 10,
-   "newly_labelled_non_manual": 3
+   "newly_labelled_non_manual": 3,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 404 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "AZ ('ION Level 2 Sedan Manual'), the code behind all 9 MY2004-2005 newly confirmed cars, re-read in every issue: MY2003 8695 text; MY2004 9606 (Apr 2003) and 9604 (Jun 2003) text; MY2005 initial 9605 (text, 'ION Level 2 Sedan Manual'); MY2005 9926 (Jan 2004) OCR 'A Z ION Level 2 Sedan Man (RF2)'; MY2006 11174 and MY2007 11173 page image (Dec 2005, rev. 1; ORG1485 is the same 51-page document) 'A Z ION Level 2 Sedan Man (RF2)'. The RPO codes (RF2 manual vs RF3 auto for Level 2 sedans) are distinct sales codes. No issue gives AZ another meaning.",
+     "vPIC has no pattern for AZ in MY2004-2005 (trim, series and transmission all blank) but decodes MY2006-2007 AZ as Manual on 19 of 19 cars; lot ratio 2004 AJ 25 auto vs AZ 6 manual is plausible.",
+     "MY2007 AM ('ION - Coupe Level 2 - Man (RF6)') read on the Dec-2005 MY2007 page image (the 1 not-in-cache newly confirmed car).",
+     "Level I/II/III 'Base' codes (AH/AU/AX) and Red Line codes (AT/AY) correctly give no series claim."
+    ]
+   }
   },
   {
    "id": "saturn_vue_series_2002_2007",
@@ -1013,7 +1056,17 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 6,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 182 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "Z2 'FWD Manual' / Z3 'FWD Auto' (WMI 5GZ, positions 5-6) read in every 5GZ table from the first one: 8063 (Dec 2000), 8100 (Feb 2001), 8753 and 8940 (Jul 2001), 8755 (Oct 2001), 9012/9013 (May 2002), 9063/9064 (Jun 2002), 9606 (Apr 2003), 9604/9605 (Jul 2003), 9926 OCR (Jan 2004), 11174 OCR and the MY2007 page C8 image (Dec 2005: 'Z 2 Vue FWD Manual, Z 3 Vue FWD Auto'). Z2 never meant anything else, so the 6 MY2002 Z2 cars (scraper's uniform-cell drop) are manual by GM's definition in force for the whole model year.",
+     "Independent: EPA 2002 Vue FWD 2.2 lists 'Manual 5-spd' and 'Automatic (variable gear ratios)'; NRCan 2002-2007 Vue 2.2 lists M5 plus AV (2002-2005) or A4 (2005-2007), so a FWD 4-cylinder manual existed every rule year. MY2007 Z3 includes the Green Line hybrid (engine Z), which NRCan lists as A4 only, so the automatic claim holds.",
+     "Lot pattern fits code-per-transmission: in the CVT years Z2 outnumbers Z3 (2004: 22 vs 7, 2002: 6 vs 0, consistent with CVT cars leaving the fleet early), in the 4-speed-automatic years Z3 dominates (2006: 7 vs 35, 2007: 7 vs 46)."
+    ]
+   }
   },
   {
    "id": "chevrolet_cobalt_series_2009_2010",
@@ -1178,7 +1231,18 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 2
+   "newly_labelled_non_manual": 2,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 452 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "Lot distribution follows the MY2009 split (2009 AK/AL manual 25 cars vs AS/AT automatic 254) and the MY2010 split (AA/AC/AE/AH manual 14 vs AB/AD/AF automatic 212), not the MY2008-style trim codes, so the cars follow the cited tables.",
+     "Canada/Mexico-only codes (2009 AJ Base M/T) name a manual regardless of market, so the market note does not weaken the claim.",
+     "NRCan 2009 Cobalt lists M5 and A4 for the 2.2 and M5 only for the 2.0 turbo (2009 AP 'Sport Coupe w/MAN TRANS'), consistent.",
+     "Page images c2009-1 / c2009L / c2009R were not re-opened in this pass; agreement with vPIC on every decoded car is the check."
+    ]
+   }
   },
   {
    "id": "pontiac_g5_series_2009_2010",
@@ -1324,7 +1388,18 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 46 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "Lot distribution follows the MY2009 split (2009 AK/AL manual 25 cars vs AS/AT automatic 254) and the MY2010 split (AA/AC/AE/AH manual 14 vs AB/AD/AF automatic 212), not the MY2008-style trim codes, so the cars follow the cited tables.",
+     "Canada/Mexico-only codes (2009 AJ Base M/T) name a manual regardless of market, so the market note does not weaken the claim.",
+     "NRCan 2009 Cobalt lists M5 and A4 for the 2.2 and M5 only for the 2.0 turbo (2009 AP 'Sport Coupe w/MAN TRANS'), consistent.",
+     "Page images c2009-1 / c2009L / c2009R were not re-opened in this pass; agreement with vPIC on every decoded car is the check."
+    ]
+   }
   },
   {
    "id": "chevrolet_hhr_series_2008_2011",
@@ -1531,7 +1606,17 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 3
+   "newly_labelled_non_manual": 3,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 447 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "MY2008 codes re-read in the 4th revision (ORG21681 text): A1 'HHR LS 1/2 ton LS w/ auto trans', A2 1LT w/ auto, A3 'HHR LS w/ manual trans', A4 1LT w/ manual, A5 2LT, A6 SS w/ auto, A7 SS w/ manual, A8 LS panel w/auto, A9 LS panel w/ manual, A0 LT panel: identical to the April-2007 issue (ORG3532 OCR), so there is no draft/final conflict for HHR.",
+     "Scope edge examined: 4 of the 8 MY2008 A3 cars carry engine P (2.4L LE5) although the filing says 'LS'; EPA and NRCan list a 2008 HHR 2.4 'Manual 5-spd', so the transmission claim is unaffected (the filing's trim wording is loose). MY2008 production did not keep the MY2007 trim coding (2007 A3 = LT 2.4L, 40 lot cars; 2008 A3 = 8 cars and the 2008 2LT code A5 has 24).",
+     "MY2006-2007 remain unruled (correct: series digits are trims)."
+    ]
+   }
   },
   {
    "id": "cadillac_cts_series_2008_2009",
@@ -1708,7 +1793,15 @@
     }
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 5
+   "newly_labelled_non_manual": 5,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 260 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "MY2008 table re-read in the 4th revision (ORG21681 text, Book D): DM manual RWD, DF/DG/DH/DJ auto, DP manual RWD High Feature V6, DR/DS/DT/DV auto: matches the rule. MY2009 DR means 'CTS RHD' (no claim) and DN 'CTS-V' (no claim): year-bound correctly. STS codes on carline D are not in the table and get no claim."
+    ]
+   }
   },
   {
    "id": "pontiac_solstice_series_2008_2010",
@@ -1870,7 +1963,16 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 5 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "MY2008 re-read in the 4th revision (ORG21681): MB manual, MG 'GXP Turbo Convertible w/ auto trans', MC auto, MF 'GXP Turbo convertible w/ manual trans', MK/MS/MT no transmission: matches the rule (which follows the 4th revision, not the April-2007 issue). MY2009 MG = Turbo M/T is year-bound.",
+     "Low sample (5 cars); status low_sample stands."
+    ]
+   }
   },
   {
    "id": "saturn_sky_series_2008_2010",
@@ -2033,7 +2135,16 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 2 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "MY2008 re-read in the 4th revision (ORG21681): MB manual, MG 'Sky turbo convertible w/ auto trans', MC auto, MF 'Sky Turbo convertible w/ Manual', MJ special edition (no claim); the revision's only Sky change is 'MZ' to 'MJ'. Matches the rule.",
+     "Low sample (2-3 cars); status low_sample stands."
+    ]
+   }
   },
   {
    "id": "pontiac_vibe_series_2009_2010",
@@ -2174,7 +2285,15 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 70 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "All 70 in-scope cars are Pontiac Vibe in the feed and in vPIC; the 2009 AWD code SM ('Vibe AWD A/T') is automatic-only, consistent with EPA (the AWD Vibe had the 4-speed automatic only)."
+    ]
+   }
   },
   {
    "id": "pontiac_vibe_series_2008_candidate",
@@ -2300,7 +2419,14 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 10
+   "newly_labelled_non_manual": 10,
+   "verified": {
+    "verdict": "kept_as_candidate",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "ORG21681 (MY2008 4th revision) reads 'S L (5Y2) Vibe FWD w/ auto trans.' and 'S P Vibe FWD w/ manual trans', as cited. The NUMMI conflict (SL = base in NUMMI's own 2003-2004 filings; no MY2008 NUMMI filing in MID) is real; it stays uncounted."
+    ]
+   }
   },
   {
    "id": "chevrolet_camaro_series_2010_2024",
@@ -2748,7 +2874,16 @@
     }
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 4
+   "newly_labelled_non_manual": 4,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 200 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "Name-collision check: WMI 1G1 carline F is shared with the Bolt EV (2017+, series FW/FX/FY/FZ). None of those letters is in a 2017-2024 Camaro table (2015 FZ = Z/28 predates the Bolt), so no Bolt can receive a Camaro claim; every in-scope car is a Camaro in feed and vPIC.",
+     "Year-bound reuse verified in the tables (2014 FA = 2LS automatic, 2015 FA = LS manual; 2016 has no FG)."
+    ]
+   }
   },
   {
    "id": "chevrolet_corvette_series_2010_2019",
@@ -3183,7 +3318,15 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 2 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "Only 2 lot cars; letters change meaning in MY2013/2014 (2013 YB Preferred manual, 2014 YB Stingray 1LT automatic) and the rule is year-bound. C8 (MY2020+) correctly excluded. Status low_sample stands."
+    ]
+   }
   },
   {
    "id": "chevrolet_cruze_series_2011_2019",
@@ -3579,7 +3722,17 @@
     }
    },
    "newly_confirmed_manual": 5,
-   "newly_labelled_non_manual": 44
+   "newly_labelled_non_manual": 44,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 3788 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car except one listing (pns-stk098425) whose feed says Acura ILX but whose VIN decodes as a 2016 Cruze Limited; its claim is automatic, which matches the published vPIC label, but a consumer of these rules should skip cars whose feed make disagrees with the VIN.",
+     "Draft-vs-final checks: the Dec-2009 MY2011 draft (ORG5552) had PK = 'LTZ (Manual)' and the final (ORG6450) PK = 'Eco (Manual)', manual in both, so the newly confirmed 2011 PK car is manual under either issue; PD is '2LS (US - Manual) / 1LS (Canada - Manual)', manual in both markets. The Jan-2012 MY2013 draft (PF = 1LT automatic) was replaced by ORG7939 (PF = 2LT manual); the lot follows the final (2013 PC 1LT automatic 242 cars, PF 2 cars).",
+     "MY2011 PA (US manual / Canada automatic) correctly gets no claim; vPIC decodes the 4 lot PA cars as automatic, which the rule does not rely on.",
+     "Newly confirmed 2013 PB ('1LS (Manual)') and 2014 PJ ('Eco (Manual)'): vPIC decodes every other lot car with those year/codes as Manual (2013 PB 17, 2014 PJ 7)."
+    ]
+   }
   },
   {
    "id": "chevrolet_sonic_series_2012_2020",
@@ -3877,7 +4030,15 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 9
+   "newly_labelled_non_manual": 9,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 1029 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "Letter swap between MY2016 (JA = LS automatic) and MY2017 (JA = LS manual) is handled year by year; MY2020 table lists automatic codes only, consistent with the manual being dropped."
+    ]
+   }
   },
   {
    "id": "chevrolet_spark_series_2013_2022",
@@ -4174,7 +4335,15 @@
     }
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 5
+   "newly_labelled_non_manual": 5,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 279 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "Spark EV codes (CK/CL) give no claim; WMI KL8 only."
+    ]
+   }
   },
   {
    "id": "chevrolet_ss_series_2016_2017",
@@ -4290,7 +4459,15 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Re-ran the rule's own classify() over the 2026-11-05T17:18Z inventory (newer than the generator's 11:55Z run) and compared every in-scope car that has a vPIC transmission in docs/data/vin_decodes.json.gz, including the uniformCell lines the generator excluded: 0 cars, 0 disagreements. This is partly circular (vPIC is built from GM's filings): it proves the year tables were parsed the way vPIC reads them, not that GM's filing is right. No VIN-bearing listing-text car falls in scope, so there is no independent per-car ground truth. Feed make/model matches the VIN's decoded line for every in-scope car.",
+     "MY2014-2015 (F1 only, manual added for 2015 on the same code) correctly excluded; no lot car in scope, so this rule is untested on the lots."
+    ]
+   }
   },
   {
    "id": "cadillac_cts_v_2004_2007_series_DN",
@@ -4458,7 +4635,16 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 1,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "DN = 'CTS-V' re-read in 9604 (MY2004 text), 9605 (MY2005 initial, text), 9926 (MY2005, OCR 'D N CTS-V'), 11173 (MY2007, OCR 'D N CTS-V') and 11174 (MY2006); DN has no other meaning in those years (DM CTS, DR RHD, DP High Feature V6 from MY2007).",
+     "EPA lists only 'Manual 6-spd' for 2004-2007 CTS-V; independently NRCan lists the 2005-2007 CTS 5.7/6.0 V8 only as M6 (no 2004 V8 row). Grassroots Motorsports quote ('No slushbox was available...') matches.",
+     "The 1 newly confirmed car (1G6DN57U470148982, 2007, engine U = 6.0L LS2) is feed 'CTS-V', vPIC trim 'V'."
+    ]
+   }
   },
   {
    "id": "chevrolet_cobalt_ss_sc_2005_2007_char8_P",
@@ -4631,7 +4817,16 @@
     }
    },
    "newly_confirmed_manual": 4,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Engine code P = 'LSJ 2.0L L4 MFI DOHC SC' re-read in 9604 (text, cover letter 'LSJ code P'), 9605 (MY2005 initial, text), 11174 (MY2006 OCR) and 11173 (MY2007 OCR). GM engine codes are unique per model year across all carlines, so no other Cobalt engine shares P in 2005-2007.",
+     "EPA 2005-2007 Cobalt 2.0 supercharged rows are 'Manual 5-spd' only; NRCan 2005-2007 Cobalt 2.0 rows are M5 only (Canadian market, 1 of the 4 cars is at a Calgary yard).",
+     "All 4 newly confirmed cars are series AP coupes (position 6 = 1), vPIC trim 'Lev4 - Sport Coupe', engine 2.0L. The 2008-2010 turbo (code X, shared with HHR SS / Solstice GXP / Sky Red Line which had automatics) is correctly not used."
+    ]
+   }
   },
   {
    "id": "saturn_ion_redline_2004_2007_char8_P",
@@ -4799,7 +4994,16 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 1,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Engine P = LSJ as above (usage column 'Saturn'); ION Red Line series AY (MY2004 'ION Red Line Coupe', added per the 9604 cover letter) and AT/AY (MY2005-2007) read in the cited issues and the MY2007 page image.",
+     "EPA 2004-2007 Ion 2.0 supercharged: 'Manual 5-spd' only; NRCan 2005-2007 Ion 2.0: M5 only.",
+     "The 1 newly confirmed car (1G8AY11P06Z116392) is series AY 'Coupe Red Line Tuner (HMD)' with engine P."
+    ]
+   }
   },
   {
    "id": "pontiac_vibe_gt_2003_2006_series_SN_char8_L",
@@ -4961,7 +5165,14 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 4,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept_as_candidate",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Not re-litigated: the EPA 2003 'Automatic 4-spd' 2ZZ row (id 18777) is a real conflict; the rule stays an uncounted candidate."
+    ]
+   }
   },
   {
    "id": "chevrolet_metro_10_1999_2000_char8_6",
@@ -5112,7 +5323,16 @@
     }
    },
    "newly_confirmed_manual": 10,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "Engine code 6 = '1.0L L3 TBI SUZUKI (LP2)' re-read in the MY1999 issue 7024 (OCR line '6  1.0L L3 TBI  SUZUKI'), MY2000 7504 and 7868 text ('6 1.OL L3 TBI SUZUKI LP2 Chev, GM Can'); code 2 is the 1.3L. The 1.6L 'code 6' in the same MY1999 file belongs to the truck table (Tracker, WMI 2CN), outside the rule's WMI 2C1 + carline M.",
+     "Canada edge checked: the cars are CAMI-built and 2 of the 10 are at Canadian yards (Windsor, Edmonton). NRCan lists the 1995-2000 Metro and Pontiac Firefly 1.0 only as M5 (the 1.3 has A3 and M5), matching EPA's US rows. A web search turned up a 1995 page that mentions a 1.0L automatic but cites no source; EPA and NRCan list none for 1995-2000, and the 3-speed automatic with the 1.0 belongs to the 1989-1994 generation.",
+     "All 10 newly confirmed cars: WMI 2C1, carline M, engine 6, vPIC 1.0L 3-cyl hatchback, feed 'Metro'."
+    ]
+   }
   },
   {
    "id": "geo_chevrolet_metro_10_1995_1998_char8_6_candidate",
@@ -5267,7 +5487,14 @@
     }
    },
    "newly_confirmed_manual": 14,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "verdict": "kept_as_candidate",
+    "verified_utc": "2026-11-05",
+    "checks": [
+     "NRCan (1995-1998 Geo/Chevrolet Metro and Pontiac Firefly 1.0: M5 only) agrees with EPA on the transmission fact, but the gap is the engine-code mapping (scanned MY1995-1998 engine tables), which this pass did not resolve; it stays an uncounted candidate."
+    ]
+   }
   }
  ],
  "newly_confirmed_manual_cars": [
@@ -5314,39 +5541,6 @@
    "code": "6: 1.0L L3 TBI (Suzuki, LP2): sold only with the 5-speed manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Edmonton"
-  },
-  {
-   "id": "7984058",
-   "vin": "1G8ZF52892Z223443",
-   "year": 2002,
-   "make": "Saturn",
-   "model": "SL",
-   "rule": "saturn_s_l_series_2000_2003",
-   "code": "ZF: SL Manual",
-   "why_no_trans": "vpic_trans_dropped_by_scraper",
-   "yard": "Pick-n-Pull - Sparks"
-  },
-  {
-   "id": "7948721",
-   "vin": "1G8ZF52802Z211424",
-   "year": 2002,
-   "make": "Saturn",
-   "model": "SL",
-   "rule": "saturn_s_l_series_2000_2003",
-   "code": "ZF: SL Manual",
-   "why_no_trans": "vpic_trans_dropped_by_scraper",
-   "yard": "Pick-n-Pull - Windsor"
-  },
-  {
-   "id": "7997292",
-   "vin": "1G8ZF52802Z244407",
-   "year": 2002,
-   "make": "Saturn",
-   "model": "SL",
-   "rule": "saturn_s_l_series_2000_2003",
-   "code": "ZF: SL Manual",
-   "why_no_trans": "vpic_trans_dropped_by_scraper",
-   "yard": "Pick-n-Pull - Jefferson"
   },
   {
    "id": "7956446",
@@ -5413,17 +5607,6 @@
    "code": "AZ: ION Level 2 Sedan Manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick Your Part - Grand Rapids"
-  },
-  {
-   "id": "1746-66634",
-   "vin": "1G8ZF52832Z262769",
-   "year": 2002,
-   "make": "Saturn",
-   "model": "SL",
-   "rule": "saturn_s_l_series_2000_2003",
-   "code": "ZF: SL Manual",
-   "why_no_trans": "vpic_trans_dropped_by_scraper",
-   "yard": "Pick Your Part - Tulsa"
   },
   {
    "id": "1213-67850",
@@ -5536,17 +5719,6 @@
    "yard": "Pull-A-Part - Cincinnati"
   },
   {
-   "id": "pap-37-1021737-1",
-   "vin": "1G8ZF52802Z145201",
-   "year": 2002,
-   "make": "Saturn",
-   "model": "SL",
-   "rule": "saturn_s_l_series_2000_2003",
-   "code": "ZF: SL Manual",
-   "why_no_trans": "vpic_trans_dropped_by_scraper",
-   "yard": "Pull-A-Part - Phoenix"
-  },
-  {
    "id": "pap-38-1028696-1",
    "vin": "5GZCZ23D42S816440",
    "year": 2002,
@@ -5599,17 +5771,6 @@
    "rule": "saturn_ion_series_2003_2007",
    "code": "AZ: ION Level 2 Sedan Manual",
    "why_no_trans": "vpic_trans_blank",
-   "yard": "Nevada Pic-A-Part - Las Vegas"
-  },
-  {
-   "id": "nvpap-l133502",
-   "vin": "1G8ZF52802Z182233",
-   "year": 2002,
-   "make": "Saturn",
-   "model": "SL",
-   "rule": "saturn_s_l_series_2000_2003",
-   "code": "ZF: SL Manual",
-   "why_no_trans": "vpic_trans_dropped_by_scraper",
    "yard": "Nevada Pic-A-Part - Las Vegas"
   },
   {
@@ -6875,7 +7036,8 @@
   {
    "finding": "Two of the scraper's dropped 'uniform manual' cells are true manuals per GM's filings",
    "evidence": "2002 Saturn VUE series 2 is 'FWD Manual' in every MY2002-2007 GM filing (C3g), and 2002 Saturn SL (ZF) is 'SL Manual' in the latest MY2002 issue (01-022-N11B-9012). The 2001 SL (ZF = 'SL' in MY2001) and the 2007 HHR (series = trim) are not confirmed. The series rules here relabel the 2002 VUE and 2002 SL cars as manual from the VIN itself (counted in newly_confirmed_manual).",
-   "suggested_action": "Integration: apply saturn_vue_series_2002_2007 and saturn_s_l_series_2000_2003 ahead of VPIC_TRANS_DEFAULT_CELLS; keep the drops for 2001 SL and 2007 HHR."
+   "suggested_action": "Integration: apply saturn_vue_series_2002_2007 (and the ZS code of saturn_s_l_series_2000_2003) ahead of VPIC_TRANS_DEFAULT_CELLS; keep the drops for 2001 SL, 2002 SL ZF and 2007 HHR.",
+   "verification_note": "Corrected 2026-11-05: only the 2002 VUE (series Z2) cars are shown to be true manuals. 2002 SL series ZF is NOT confirmed: the Oct-2001 MY2002 issue (01-022-N11B-8755, page B7) reads plain 'SL' with no ZL code, and 'SL Manual' / 'ZL SL Auto' appear only in the Apr-2002 issue from an undated revision missing from MID. Keep the scraper's drops for 2001 SL, 2002 SL (ZF) and 2007 HHR; apply saturn_vue_series_2002_2007 ahead of VPIC_TRANS_DEFAULT_CELLS. 2002 SL ZS (Spring Special) is new in the Apr-2002 issue and stays manual."
   },
   {
    "finding": "GM reuses series letters with different transmission meanings from year to year and between draft and final issues",
@@ -9942,5 +10104,80 @@
    "uniformCell": "",
    "yard": "iPull-uPull - Edmonton"
   }
- ]
+ ],
+ "withdrawn_by_verification_cars": [
+  {
+   "id": "7984058",
+   "vin": "1G8ZF52892Z223443",
+   "year": 2002,
+   "make": "Saturn",
+   "model": "SL",
+   "rule": "saturn_s_l_series_2000_2003",
+   "code": "ZF: SL Manual",
+   "why_no_trans": "vpic_trans_dropped_by_scraper",
+   "yard": "Pick-n-Pull - Sparks",
+   "removed_by_verification": "MY2002 ZF: the Oct-2001 MY2002 issue defines ZF as plain 'SL' (no transmission)"
+  },
+  {
+   "id": "7948721",
+   "vin": "1G8ZF52802Z211424",
+   "year": 2002,
+   "make": "Saturn",
+   "model": "SL",
+   "rule": "saturn_s_l_series_2000_2003",
+   "code": "ZF: SL Manual",
+   "why_no_trans": "vpic_trans_dropped_by_scraper",
+   "yard": "Pick-n-Pull - Windsor",
+   "removed_by_verification": "MY2002 ZF: the Oct-2001 MY2002 issue defines ZF as plain 'SL' (no transmission)"
+  },
+  {
+   "id": "7997292",
+   "vin": "1G8ZF52802Z244407",
+   "year": 2002,
+   "make": "Saturn",
+   "model": "SL",
+   "rule": "saturn_s_l_series_2000_2003",
+   "code": "ZF: SL Manual",
+   "why_no_trans": "vpic_trans_dropped_by_scraper",
+   "yard": "Pick-n-Pull - Jefferson",
+   "removed_by_verification": "MY2002 ZF: the Oct-2001 MY2002 issue defines ZF as plain 'SL' (no transmission)"
+  },
+  {
+   "id": "1746-66634",
+   "vin": "1G8ZF52832Z262769",
+   "year": 2002,
+   "make": "Saturn",
+   "model": "SL",
+   "rule": "saturn_s_l_series_2000_2003",
+   "code": "ZF: SL Manual",
+   "why_no_trans": "vpic_trans_dropped_by_scraper",
+   "yard": "Pick Your Part - Tulsa",
+   "removed_by_verification": "MY2002 ZF: the Oct-2001 MY2002 issue defines ZF as plain 'SL' (no transmission)"
+  },
+  {
+   "id": "pap-37-1021737-1",
+   "vin": "1G8ZF52802Z145201",
+   "year": 2002,
+   "make": "Saturn",
+   "model": "SL",
+   "rule": "saturn_s_l_series_2000_2003",
+   "code": "ZF: SL Manual",
+   "why_no_trans": "vpic_trans_dropped_by_scraper",
+   "yard": "Pull-A-Part - Phoenix",
+   "removed_by_verification": "MY2002 ZF: the Oct-2001 MY2002 issue defines ZF as plain 'SL' (no transmission)"
+  },
+  {
+   "id": "nvpap-l133502",
+   "vin": "1G8ZF52802Z182233",
+   "year": 2002,
+   "make": "Saturn",
+   "model": "SL",
+   "rule": "saturn_s_l_series_2000_2003",
+   "code": "ZF: SL Manual",
+   "why_no_trans": "vpic_trans_dropped_by_scraper",
+   "yard": "Nevada Pic-A-Part - Las Vegas",
+   "removed_by_verification": "MY2002 ZF: the Oct-2001 MY2002 issue defines ZF as plain 'SL' (no transmission)"
+  }
+ ],
+ "verification_hub_note": "Hub finding (1) corrected: of the scraper's VPIC_TRANS_DEFAULT_CELLS drops, only MY2002 VUE series Z2 is shown to be true manuals by GM's filings. MY2002 SL series ZF is not certain (the Oct-2001 MY2002 issue reads plain 'SL'; 'SL Manual' and 'ZL SL Auto' come from a later, undated revision), so keep that drop."
 }

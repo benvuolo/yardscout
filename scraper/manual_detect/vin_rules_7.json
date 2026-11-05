@@ -316,7 +316,14 @@
    "in_scope_codes_not_in_table": {},
    "newly_confirmed_manual": 0,
    "newly_labelled_automatic": 0,
-   "no_trans_info_breakdown": {}
+   "no_trans_info_breakdown": {},
+   "verified": {
+    "result": "survives (no change)",
+    "citations_rechecked": "OCR text of the MY1989, 1988-90, 1992, 1993, 1994, 1995, 1996, 1999 and 2001 Saab filings: each lists position 7 'Gearbox' with 5 = 5-speed manual and 8 = 4-speed automatic (6 = 3-speed automatic for the 900 to MY1994), as cited.",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. Ground truth: 23 manual and 47 automatic claims agree, 0 disagree. vPIC cache: 29 manual and 56 automatic claims agree, 0 disagree, 34 blank.",
+    "scope_edges": "The interpolated years with no filing (1991, 1997, 1998, 2000) were checked on their own against vPIC: 1991 2/2 manual and 4/4 automatic, 1997 3/3 and 3/3, 1998 2/2 and 5/5, 2000 1/1 and 10/10 agree. Codes outside the table (e.g. a 5-speed automatic) get no claim. The rule adds 0 lot cars.",
+    "checked_utc": "2026-11-05"
+   }
   },
   {
    "id": "saab_ys3_char7_gearbox_2010_2012",
@@ -412,7 +419,14 @@
    "in_scope_codes_not_in_table": {},
    "newly_confirmed_manual": 0,
    "newly_labelled_automatic": 0,
-   "no_trans_info_breakdown": {}
+   "no_trans_info_breakdown": {},
+   "verified": {
+    "result": "survives (no change)",
+    "citations_rechecked": "MY2010, 2011 and 2012 Saab sheets: 'Pos. 7 Gearbox' A/B/C automatic, M/N manual, as cited.",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. Ground truth: 15 automatic claims agree, 0 disagree. vPIC: 19 automatic agree, 0 disagree. No manual code is on any lot car.",
+    "scope_edges": "WMI YS3 only, so Saab 9-4X (Mexico) and 9-7X (US-built GM) are excluded. The rule adds 0 manuals.",
+    "checked_utc": "2026-11-05"
+   }
   },
   {
    "id": "saab_ys3_char7_gearbox_2002_2009_vpic_only",
@@ -525,7 +539,12 @@
    "in_scope_codes_not_in_table": {},
    "newly_confirmed_manual": 0,
    "newly_labelled_automatic": 0,
-   "no_trans_info_breakdown": {}
+   "no_trans_info_breakdown": {},
+   "verified": {
+    "result": "stays a candidate (not counted); not re-verified beyond the counterexample scan",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. Ground truth: 41 manual and 169 automatic agree, 0 disagree. vPIC: 51 manual and 234 automatic agree. Agreement with vPIC is circular because the meaning comes from vPIC; there is no Saab filing for MY2002-2009 in MID.",
+    "checked_utc": "2026-11-05"
+   }
   },
   {
    "id": "saab_9_2x_jf4_char11_subaru_scheme",
@@ -627,6 +646,11 @@
    "newly_labelled_automatic": 9,
    "no_trans_info_breakdown": {
     "no_trans_info_vpic_trans_blank": 12
+   },
+   "verified": {
+    "result": "stays a candidate (not counted); not re-verified",
+    "counterexamples": "My matcher does not model the JF4 character-11 scheme; no check was run.",
+    "checked_utc": "2026-11-05"
    }
   },
   {
@@ -746,7 +770,14 @@
    "in_scope_codes_not_in_table": {},
    "newly_confirmed_manual": 0,
    "newly_labelled_automatic": 0,
-   "no_trans_info_breakdown": {}
+   "no_trans_info_breakdown": {},
+   "verified": {
+    "result": "survives (no change)",
+    "citations_rechecked": "Cited MY1993-1998 Land Rover breakdowns give '8 Transmission Type: 4 = 4 Speed Automatic, 8 = 5 Speed Manual'. The MY1999 filing lists only 4, which is consistent with the rule stopping at 1998.",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. Ground truth: 27 automatic agree, 0 disagree. vPIC: 30 automatic and 2 manual agree, 0 disagree.",
+    "scope_edges": "Grey-import Defenders and pre-1993 cars are outside the scope. The rule adds 0 manuals.",
+    "checked_utc": "2026-11-05"
+   }
   },
   {
    "id": "volvo_engine_emission_combination_1994_1999",
@@ -1022,6 +1053,13 @@
    "no_trans_info_breakdown": {
     "no_trans_info_vpic_trans_blank": 4,
     "no_trans_info_not_in_cache_backup": 2
+   },
+   "verified": {
+    "result": "survives (no change)",
+    "citations_rechecked": "Rule annotations match the cited filing summaries. 'Man. Only - CDN' codes (L570, L580) are Canada-certified manual-only engine and emissions combinations, so a manual claim stays correct if such a car turns up at a US yard.",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. Ground truth: 1 manual and 71 automatic agree, 0 disagree. vPIC: 2 manual and 92 automatic agree, 0 disagree, in every year from 1994 to 1999.",
+    "scope_edges": "Combinations the filings mark 'Auto. and Man.' get no claim. The rule adds 0 manuals.",
+    "checked_utc": "2026-11-05"
    }
   },
   {
@@ -1187,6 +1225,14 @@
    "newly_labelled_automatic": 3,
    "no_trans_info_breakdown": {
     "no_trans_info_vpic_trans_blank": 15
+   },
+   "verified": {
+    "result": "survives (no change)",
+    "citations_rechecked": "Re-read the OCR of 01-22-N11B-4023, BMW NA serial-number manual (Sept. 1989): heading p-11 'Suffixes explained as follows: A Automatic Transmission' and 'AG CODE ... appears in 4th through 7th digits of VIN'. Each manual and automatic code and its model years in the rule matches tables p-23 to p-35 (MY1981-1990), e.g. 1983 320i AG33 / 320i A AG43, 1985 318i/4 AC74 / AC84, 1987 325ic BB13 / BB23, 1990 525i HC13 / HC23.",
+    "per_car_serial_check": "The manual lists separate serial ranges (VIN 11-17) for each manual and A code. All 12 newly confirmed cars fall inside the manual code's range for their year: WBAAG3301D8389457 (8380496-8391403), WBAAG3307D9006891 (9000000-9011879), WBADK7307E9201233 (9200367-9204999), WBAAK7403E8764982 (8760000-8766735), WBAAK7404E8711420 (8700000-8719999), WBADC7404F0650127 (0650001-0654651), WBAAC7409F0675270 (0675001-0682757), WBAAB540XG9673323 (9670000-9674999), WBAAE5400H1691806 (1691511-1697073), WBABB1305H1929530 (1925001-1930448), WBAHC1313LBC92739 (BC89980-BC93999), WBAHD1319LBF11068 (BF08654-BF19999).",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. Ground truth: 1 manual and 16 automatic agree, 0 disagree. vPIC: 1 manual and 29 automatic agree, 0 disagree, 49 blank.",
+    "scope_edges": "Lot car 1168-66695 (WBAHC1308KBC88356, 1989 525i HC13) is correctly not claimed: its check digit fails (computed 3, VIN has 8), and serial BC88356 is in no 1989 525i range. This is probably a mistyped VIN. The year comes from VIN character 10 and matched the listing year for all 12 cars. Grey-market cars do not carry these US AG codes.",
+    "checked_utc": "2026-11-05"
    }
   },
   {
@@ -1331,6 +1377,15 @@
    "no_trans_info_breakdown": {
     "no_trans_info_vpic_trans_blank": 104,
     "no_trans_info_not_in_cache_backup": 1
+   },
+   "verified": {
+    "result": "survives (no change)",
+    "citations_rechecked": "Rendered 01-022-N11B-9505 (BMW NA MY2003 DMV package) pages 3 and 5 as images. Decipherment: 525i DT33, 525iA DT43, 530i DT53, 530iA DT63, 540i DN53, 540iA DN63, M5 WBS DE93, 525iT DS33, 525iAT DS43, 540iAT DR63. Serial ranges: 525i GF42811-, 530i CE93914-, 540i GF70861-, M5 CF91984- and 525iT GD50426- are Std. only; 525iA, 530iA, 540iA, 525iAT and 540iAT are Auto. only. The MY2001 filing (e147be52) lists the same code pairs, and the MY1999 filing lists DN53 or DN63 for the 540i.",
+    "independent_corroboration": "Only the MY2003 BMW document names the codes. For MY1999-2002 the rule relies on BMW keeping the same type code per model and transmission, the same +1 pattern as the 1981-1990 manual. Independent per-car evidence from third-party listings and decoders: classic.com auction listings titled '540i 6-Speed' for MY2000 WBADN5347YGC95227, WBADN5344YGC93712, WBADN5345YGC93816 and MY2001 WBADN53491GC96837 (https://www.classic.com/veh/2000-bmw-540i-6-speed-wbadn5344ygc93712-4ydy6qp). decodethis.com decodes 2003 WBADT334... as 525i 5-speed manual, and 17vin lists the WBADT534 pattern as a manual 530i for 2001 and 2003. Searches found no DN63, DT43 or DT63 VIN described as a manual. The four MY2000 DN53 lot cars (serials GC95263-GC96014) sit in the same serial band as the 6-speed auction cars.",
+    "per_car_serial_check": "The one MY2003 manual car, WBADT53483CE93949, is at or above the 530i Std. start CE93914. BMW's MY2003 table gives only range starts, and none exists for MY1999-2002.",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. Ground truth: 11 automatic agree, 0 disagree (no manual line is checkable). vPIC: 15 automatic agree, 0 disagree. All 23 manual-code VINs in the cache have a blank vPIC transmission.",
+    "scope_edges": "The 528i (DD/DM) and 540i DE (MY1997-1998) are outside this rule and stay in the candidate rule. The M5 is WBS, a separate rule.",
+    "checked_utc": "2026-11-05"
    }
   },
   {
@@ -1451,6 +1506,11 @@
    "no_trans_info_breakdown": {
     "no_trans_info_vpic_trans_blank": 48,
     "no_trans_info_not_in_cache_backup": 1
+   },
+   "verified": {
+    "result": "stays a candidate (not counted); not re-verified beyond the counterexample scan",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. Ground truth: 33 automatic agree, 0 disagree. vPIC: 38 automatic agree. The 14 manual-code VINs are all blank in vPIC.",
+    "checked_utc": "2026-11-05"
    }
   },
   {
@@ -1584,7 +1644,12 @@
    "in_scope_codes_not_in_table": {},
    "newly_confirmed_manual": 0,
    "newly_labelled_automatic": 0,
-   "no_trans_info_breakdown": {}
+   "no_trans_info_breakdown": {},
+   "verified": {
+    "result": "survives (no change); no lot car",
+    "citations_rechecked": "MY2003 page images: M5 0351 WBS DE93 has a Std. range (CF91984-) and no Auto. range. My own EPA read gives rows 15765, 16599, 17514 and 18483 (M5 2000-2003, 4.9 L), all 'Manual 6-spd'.",
+    "checked_utc": "2026-11-05"
+   }
   },
   {
    "id": "mini_cooper_s_r53_re33_2003_2004",
@@ -1622,6 +1687,11 @@
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f23bd433-2a27-4e23-8242-b2d5f5e9063c",
      "doc": "NHTSA 01-022-N11B-9505, BMW of North America 2003-01-27, 2003 Model Year Information to all State Motor Vehicle Departments (update 03-03): 'Model Codes and VIN Decipherment' and 'Serial Number Ranges (Std./Auto.)', page image",
      "says": "Positions 4-8: 525i 0356 D T 3 3 4; 525iA 0357 D T 4 3 4; 530i 0350 D T 5 3 4; 530iA 0355 D T 6 3 4; 540i 0353 D N 5 3 4; 540iA 0358 D N 6 3 4; M5 0351 (WBS) D E 9 3 4; 525iT 0354 D S 3 3 4; 525iAT 0359 D S 4 3 4; 540iAT 0369 D R 6 3 4. 3 Series (e.g. 325i E V 3 3 4), X5 3.0i (F A 5 3 5), Z4 2.5i (B T 3 3 4), MINI Cooper (R C 3 3 4) and Cooper S (R E 3 3 4) have one code each. Serial ranges: Cooper 0310 Std. TC38579- / Auto. TE13267-; Cooper S 0311 Std. TD57850- with no Auto. range ('*NO TRANSMISSION TYPE FOR MODEL'); M5 0351 Std. only; 525i/530i/540i Std. only, 525iA/530iA/540iA Auto. only."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/ae84a23f-b450-43ee-a7ea-ed4ce5e1f0b3",
+     "doc": "NHTSA 01-022-N11B-10040, BMW of North America 2004-08-11, 2004 Model Year Information - update: 'BMW Model Codes and Serial Number Ranges 2004 Model Year', page image (added by adversarial verification)",
+     "says": "Cooper 0410 Std. TC48643-TC56133 / Auto. TJ52876-TJ63389; Cooper S 0411 Std. TD74170-TD90372 / Auto. '**' ('**NO TRANSMISSION TYPE FOR MODEL')."
     },
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9f5f301a-3e4b-41ae-bd9f-51159333049a",
@@ -1722,6 +1792,14 @@
    "newly_labelled_automatic": 0,
    "no_trans_info_breakdown": {
     "no_trans_info_vpic_trans_blank": 30
+   },
+   "verified": {
+    "result": "survives (no change); one citation added",
+    "citations_rechecked": "Rendered MY2003 page 3 (Cooper S 0311 = WMW RE33, one code) and page 5 (Cooper S 0311 Std. TD57850-, Auto. '**' = 'NO TRANSMISSION TYPE FOR MODEL'). Added: BMW's MY2004 package 01-022-N11B-10040 (2004-08-11) page 2, read as an image: 'Cooper S 0411 Std. TD74170-TD90372, Auto. **'. BMW itself therefore states no automatic for MY2004, so the rule no longer rests on EPA for that year. MY2004 MINI decipherment 01-022-N11B-9571 keeps RE33 for the Cooper S. My own EPA read: 2003 19297 and 2004 19408 are the only Cooper S rows, both 'Manual 6-spd'. The first automatic row is 2005 (21546).",
+    "per_car_serial_check": "All 13 MY2003 lot cars have serials from TD61890 to TD72497, after the TD57850 start and before the MY2004 start TD74170. All 17 MY2004 lot cars have serials from TD75736 to TD88998, inside BMW's MY2004 Std. range TD74170-TD90372.",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. No ground-truth line falls in scope. vPIC: 58 RE33 VINs from 2003-04, all with blank transmission, and all decoded with series 'Cooper S' (so RE33 = Cooper S also matches vPIC's own decode). No VIN shows an automatic.",
+    "scope_edges": "Model year comes from VIN character 10. MY2005 cars built in 2004 (the year automatics arrived) carry '5' and are out of scope. The MY2002 Cooper S is a separate candidate rule: no MY2002 BMW serial table exists in MID, and EPA has no 2002 row.",
+    "checked_utc": "2026-11-05"
    }
   },
   {
@@ -1936,6 +2014,11 @@
    "newly_labelled_automatic": 0,
    "no_trans_info_breakdown": {
     "no_trans_info_vpic_trans_blank": 19
+   },
+   "verified": {
+    "result": "stays a candidate (not counted)",
+    "counterexamples": "vPIC: 25 MY2002 RE33 VINs, all blank transmission. I found no MY2002 serial-range table in MID; the MY2002 MINI decipherments (01-022-N11B-8594/8613) carry no transmission information.",
+    "checked_utc": "2026-11-05"
    }
   },
   {
@@ -2132,6 +2215,13 @@
    "newly_labelled_automatic": 0,
    "no_trans_info_breakdown": {
     "no_trans_info_vpic_trans_blank": 4
+   },
+   "verified": {
+    "result": "survives (no change)",
+    "citations_rechecked": "Rendered ORG4565 page 2 (MY2009): MINI JCW* Hardtop W M W M F 9 3 and JCW* Clubman M M 9 3, '*JCW = John Cooper Works'. Rendered ORG7370 page 3 (MY2012): JCW* Hardtop S V 9 C, Clubman Z G 9 C, Convertible Z P 9 C, Coupe S X 5 C. My own EPA read: every John Cooper Works row for 2009-2012 (Hardtop, Clubman, Convertible, Coupe, Roadster) is 'Manual 6-spd'. The first automatic JCW rows are MY2013 (32880, 32882, 32868, 32900).",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. vPIC: 5 in-scope VINs, all with blank transmission. vPIC's series decode is 'JCW' for MF93 (3), MM93 (1) and SX5C (1), which matches BMW's table.",
+    "scope_edges": "MS93 and the MY2012 JCW Roadster code are not in the table and get no claim. MY2010-2011 JCW (EPA also manual-only) is not ruled and no lot car carries those codes. JCW Countryman starts MY2013 (with automatic) and is outside the years.",
+    "checked_utc": "2026-11-05"
    }
   },
   {
@@ -2340,6 +2430,13 @@
     "no_trans_info_not_in_cache_backup": 5,
     "no_trans_info_vpic_trans_blank": 29,
     "no_trans_info_canadian_yard": 4
+   },
+   "verified": {
+    "result": "survives (no change)",
+    "citations_rechecked": "MY2009 VW breakdown (ORG10547) text: 'Rabbit A C man. trans.; B D auto. trans', GTI E/G man. and F/H auto., Eos, CC as cited, and '** Jetta, Jetta Sportwagen and GLI models are identified by WMI code of 3VW. GTI, and Rabbit models identified by WMI code of WVW'. This supports the rule's WVW-only scope against the Jetta problem in hub_findings.",
+    "counterexamples": "Independent matcher (scratch v7/check.py, not the generator) re-applied the code tables to all 48,996 ground-truth lines and all 470,269 vPIC cache decodes. Ground truth: 78 manual and 473 automatic agree, 0 disagree. vPIC: 108 manual and 624 automatic agree, 0 disagree. Every WVW 1K/AJ VIN of MY2006-2010 in the cache decodes as Rabbit, Golf, GTI or R32 (R32 code K has no claim), never Jetta. The one new car, WVWAB71K39W037609 (2009 Rabbit A, not in the cache backup), matches 7 of 7 other MY2009 A1K VINs that vPIC decodes as manual.",
+    "scope_edges": "The automatic codes for GTI, Golf TDI and Eos 2.0T (F/H/B) cover DSG dual-clutch gearboxes, and 2006 GTI F decodes as blank transmission in vPIC. Read 'automatic' as 'not manual'. That is correct for the Manual badge but is not a torque-converter claim. Canadian-yard cars are listed separately and not counted.",
+    "checked_utc": "2026-11-05"
    }
   }
  ],
@@ -5330,5 +5427,12 @@
    "id": "mercedes_vpic_manual_defaults",
    "finding": "No Mercedes-Benz filing read encodes the transmission, so any vPIC 'manual' on a Mercedes VIN (e.g. the 1999-2000 SLK230 uniform cell, already dropped by VPIC_TRANS_DEFAULT_CELLS) is a model-level default, not VIN evidence. No published Mercedes manual badge remains on the lots."
   }
- ]
+ ],
+ "adversarial_verification": {
+  "checked_utc": "2026-11-05",
+  "result": "0 rules removed, 0 narrowed. 14 rules carry a 'verified' block. Counted rules (3 keep, 7 low_sample) and their 58 newly confirmed manuals are unchanged. The 4 candidates stay uncounted.",
+  "method": "(1) Re-opened each counted rule's cited filing from the local MID copies (OCR or text layer) and rendered the key BMW and MINI pages as images. (2) Wrote an independent matcher that parses each rule's code tables and year ranges, and ran it over all ground-truth lines and all 470,269 vPIC cache decodes: 0 disagreements for every rule, in both directions. (3) Recounted the newly confirmed manuals from inventory_live.json and vehicle_extras.json: 58, the same car ids. The one extra match is the bad-check-digit VIN WBAHC1308KBC88356, which the rule correctly skips. (4) Checked per-car serial numbers against BMW's own serial ranges (12 of 12 1981-1990 cars, 30 of 30 MINI cars, 1 E39). (5) Re-read the EPA vehicles.csv rows for every sole-offering claim. (6) Web searches for third-party per-car corroboration of the E39 MY1999-2002 code carry-over: found classic.com 6-speed listings and decoder results, and no contrary listing.",
+  "changes": "Added a BMW MY2004 serial-range citation to mini_cooper_s_r53_re33_2003_2004. Added the 'verified' blocks and this block. Rule tables, scopes, statuses and counts are unchanged.",
+  "caveat": "vin_rules_7.py does not write these blocks, so rerunning the generator drops them. Ground truth for these makes is vPIC, so agreement there is partly circular. The E39 MY1999-2002 meaning is carried over from BMW's MY2003 table and backed only by third-party listings and decoders, not by a BMW document for those years."
+ }
 }

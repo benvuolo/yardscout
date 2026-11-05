@@ -880,7 +880,12 @@ SATURN_SL = {
            "ZN": _ZN_BODY, "JT": (M, "LS1 MANUAL"), "JU": _JU_BODY},
     2001: {**_S_COMMON, "ZF": (None, "SL (no transmission named in MY2001)"), "ZJ": (M, "SW2 MANUAL, SL2 MANUAL"),
            "ZM": (None, "SW1"), "ZN": _ZN_BODY, "JT": (M, "LS1 MANUAL"), "JU": _JU_BODY},
-    2002: {**_S_COMMON, "ZF": (M, "SL Manual"), "ZJ": (M, "SL2 MANUAL"), "ZN": (M, "SC1 MANUAL"),
+    # Verification 2026-11-05: ZF is NOT ruled for MY2002. The Oct-2001 MY2002 issue (01-022-N11B-8755, page B7)
+    # defines ZF as plain "SL" with no ZL code; the Apr-2002 issue (9012) reads "ZF SL Manual" and adds
+    # "ZL SL Auto" without a '#' mark or a cover-letter line, so the split came in an issue missing from MID and
+    # early-MY2002 ZF cars were coded under a definition naming no transmission (same reason as MY2001).
+    2002: {**_S_COMMON, "ZF": (None, "SL (Oct-2001 issue: no transmission named; 'SL Manual' only from a later, undated revision)"),
+           "ZJ": (M, "SL2 MANUAL"), "ZN": (M, "SC1 MANUAL"),
            "ZS": (M, "SL MANUAL SPRING SPECIAL"), "JT": (M, "LS1/LW1 MANUAL"), "JU": (A, "LS1/LW1 AUTO")},
     2003: {"JT": (M, "L200/LW200 MANUAL"), "JU": (A, "L200/LW200 AUTO"), "JW": (None, "L300, LW300")},
 }
@@ -1008,7 +1013,7 @@ RULES = [
      "models": "Saturn S-series (SL/SL1/SL2 sedan, SC1/SC2 coupe, SW wagon; carline Z) MY2000-2002 and L-series (LS/LS1/LW1/L200/LW200; carline J) MY2000-2003",
      "wmi": ["1G8"], "years": (2000, 2003), "fixed": {4: "ZJ"}, "key": [4, 5], "tables": SATURN_SL,
      "cites": ["s2000", "s2000a", "s2001", "s2002rev", "s2002", "s2002b", "s2003", "s1991", "s1993", "s1999"],
-     "evidence_gaps": "MY2001 ZF ('SL') names no transmission, so 2001 SLs get no claim; MY2000 ZN / ZJ / JU mix body styles and transmissions in one code, resolved by the body-style character (position 6: 1 coupe, 5 sedan, 8 wagon) where the filing ties the transmission to the body; JU wagons (LW1, no transmission named) get no claim.",
+     "evidence_gaps": "MY2001 ZF ('SL') names no transmission, so 2001 SLs get no claim; MY2002 ZF gets no claim either (the Oct-2001 MY2002 issue reads plain 'SL'; 'SL Manual' plus a new 'ZL SL Auto' appear only in the Apr-2002 issue, unmarked, from a revision missing from MID); MY2000 ZN / ZJ / JU mix body styles and transmissions in one code, resolved by the body-style character (position 6: 1 coupe, 5 sedan, 8 wagon) where the filing ties the transmission to the body; JU wagons (LW1, no transmission named) get no claim.",
      "notes": "GM's 1991-1999 filings list the same Saturn series letters WITHOUT a transmission (G/H both 'SC / SL1', J/K both 'SL2'), so MY1991-1999 S-series are not ruled even though the letter pairs look like manual/automatic pairs: that would be inference."},
     {"id": "saturn_ion_series_2003_2007", "make": "Saturn", "basis": "series_code",
      "models": "Saturn ION (carline A) MY2003-2007",
@@ -1167,7 +1172,7 @@ ANSWER = {
     "GMC": "NOT ENCODED. No GMC line/series description in any filing read names a transmission, and no GMC engine code on the lots is manual-only (Sonoma/Canyon 4-cylinders and the full-size trucks had both or automatic only).",
     "Pontiac": ("ENCODED through the series code for G5 MY2009-2010, Solstice MY2008-2010 and Vibe MY2009-2010 (MY2008 Vibe is a candidate). NOT ENCODED otherwise "
                 "(G6, Grand Am, Grand Prix, Sunfire, Firebird, Bonneville, Aztek, Montana, G8 ...; G5 2007-2008; Solstice 2006-2007). Vibe GT 2003-2006 (series SN + engine L, NUMMI filings) is manual-only."),
-    "Saturn": ("ENCODED through the series code for S-series and L-series MY2000-2003 (except MY2001 SL), ION MY2003-2007, VUE MY2002-2007 (FWD 4-cylinder only), Sky MY2008-2010. "
+    "Saturn": ("ENCODED through the series code for S-series and L-series MY2000-2003 (except MY2001 SL and MY2002 SL series ZF), ION MY2003-2007, VUE MY2002-2007 (FWD 4-cylinder only), Sky MY2008-2010. "
                "NOT ENCODED for MY1991-1999 S-series (filings list the same letters without a transmission), Aura, Outlook, Relay, Astra, VUE 2008-2010, Sky 2007. "
                "ION Red Line 2004-2007 (engine P) is manual-only."),
     "Buick": "NOT ENCODED. No Buick line/series description names a transmission in any filing read (MY1985-2027); no Buick on the lots had a manual-only engine (Regal GS 2012-2013 and Verano Turbo had both, Cascada/Encore automatic).",

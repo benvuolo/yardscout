@@ -1,6 +1,6 @@
 {
  "worklist": "epa_sole",
- "generated_utc": "2026-11-05T13:22:40Z",
+ "generated_utc": "2026-11-05T18:03:28Z",
  "generator": "scraper/manual_detect/epa_sole.py",
  "inputs": {
   "epa": {
@@ -9,14 +9,14 @@
    "sha256_zip": "33d32caa0343cdb11c47be631e8a80b7ed7c351ee8503646a4e96485bd67b22f",
    "rows": 50407
   },
-  "inventory_live": "docs/data/inventory_live.json (2026-11-05T11:55:18Z)",
-  "vehicle_extras": "docs/data/vehicle_extras.json (2026-11-05T11:55:18Z; reflects the scraper's VPIC_TRANS_DEFAULT_CELLS drop)",
+  "inventory_live": "docs/data/inventory_live.json (2026-11-05T17:18:14Z)",
+  "vehicle_extras": "docs/data/vehicle_extras.json (2026-11-05T17:18:14Z; reflects the scraper's VPIC_TRANS_DEFAULT_CELLS drop)",
   "vin_decodes": "docs/data/vin_decodes.json.gz (exported 2026-11-05T11:52:27Z, 470269 decodes)",
   "ground_truth": "scraper/manual_detect/ground_truth.jsonl (built 2026-11-05 before the VPIC_TRANS_DEFAULT_CELLS drop; uniformCell=manual lines and lines whose decode the scraper now distrusts are unlabelled)",
   "citations": "scraper/manual_detect/epa_sole_citations.json",
   "sibling_vin_rules": "overlap only, read at run time: vin_rules_0.json, vin_rules_1.json, vin_rules_2.json, vin_rules_3.json, vin_rules_4.json, vin_rules_5.json, vin_rules_6.json, vin_rules_7.json"
  },
- "answer": "EPA lists only manuals for 1548 of 35061 year/make/model/engine/drive/turbo combinations. Placed by each car's own vPIC decode (union of EPA names, decoded engine and drive, with guards), 387 lot cars fall in a manual-only cell; 183 of them have no transmission today and sit in a counted rule (independent source + no ground-truth disagreement), 30 of them not already counted by a VIN-rule worklist. EPA alone is not enough: 1985 Camaro 2.5, 1985 944, 1985 MR2 (one CA row) and 1985-87 Ranger 2.0 are manual-only in EPA although automatics were sold, and the 2002-05 MR2 SMT is filed as a manual. So EPA-only cells stay candidates (143 lot cars without transmission info).",
+ "answer": "EPA lists only manuals for 1548 of 35061 year/make/model/engine/drive/turbo combinations. Placed by each car's own vPIC decode (union of EPA names, decoded engine and drive, with guards), 385 lot cars fall in a manual-only cell; 172 of them have no transmission today and sit in a counted rule (independent source + no ground-truth disagreement), 26 of them not already counted by a VIN-rule worklist. EPA alone is not enough: 1985 Camaro 2.5, 1985 944, 1985 MR2 (one CA row) and 1985-87 Ranger 2.0 are manual-only in EPA although automatics were sold, and the 2002-05 MR2 SMT is filed as a manual. So EPA-only cells stay candidates (153 lot cars without transmission info).",
  "method": "Manual-transmission detection, track 2: the EPA sole-offering table.\n\nFor every (model year, make, model, displacement, cylinders, drive, turbo,\nsupercharger) combination in EPA fueleconomy.gov's vehicles.csv, record\nwhether every EPA entry is a manual, or every entry is NOT a manual\n(automatic, CVT, automated manual / DCT), or both kinds are listed. Then\nplace each lot car in the EPA rows its OWN vPIC decode points to, and claim\na transmission only where every EPA row the car could be is one kind.\n\nReads   scraper/manual_detect/epa/vehicles.csv (raw EPA download, gitignored;\n        https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip)\n        docs/data/inventory_live.json, docs/data/vehicle_extras.json,\n        docs/data/vin_decodes.json.gz\n        scraper/manual_detect/ground_truth.jsonl (validation)\n        scraper/manual_detect/epa_sole_citations.json (independent sources,\n        hand-curated: what each source says about a rule's engine/years)\nWrites  scraper/manual_detect/epa_sole.json\n\nHow a car is placed (all of it must hold, or the car gets no claim):\n  * identity: the car's VIN decode gives make, model and model year; the\n    model year must equal the listing year. EPA rows are the UNION of every\n    row whose model or baseModel answers to the feed model name OR the vPIC\n    model name, under the feed make OR the vPIC make (Geo/Chevrolet,\n    Scion/Toyota). The union matters: 2004 Xterra is 'Xterra 2WD' (manual\n    only) and 'Xterra V6 2WD'; a closest-name match invents manual-only\n    cells. When both names map to EPA rows, the union is used; when the\n    vPIC model maps to nothing and differs from the feed model, the car is\n    skipped (the listing name alone does not identify the car).\n  * engine: the decode's DisplacementL (+/- 0.05 L) and EngineCylinders\n    (when given). No displacement -> no engine-level claim.\n  * drive: the decode's DriveType narrows the rows only when it is a single\n    drive. If the drive changes the answer, the drive must be shown to be\n    VIN-specific (the vPIC make/model/year has more than one drive in the\n    decode cache); otherwise no claim.\n  * turbo / supercharger / fuel: not in the compact decode, so the rows are\n    the union over them (a 2.0 non-turbo and a 2.0 turbo count together).\nGuards (each skips the car, counted by reason):\n  * the VIN fails its check digit (49 CFR 565.15(c));\n  * heavy duty (EPA does not cover > 8,500 lb GVWR): F-250/350, E-250/350,\n    2500/3500/HD/Super Duty in the feed model, vPIC model, series or trim;\n  * engine-default: the decoded engine is not shown to be VIN-specific (one\n    engine across the vPIC make/model/year in the decode cache) while EPA\n    lists more than one engine for the model-year;\n  * neighbour engine: EPA lists another engine within 0.15 L (same\n    cylinders) for the model-year whose rows include the other class, so a\n    rounding difference could move the car;\n  * sibling name: an EPA row of the same year/make/engine/drive outside\n    the union whose name shares a word with the feed or vPIC model, and\n    which is of the other class (catches naming variants the union missed);\n  * incomplete EPA cell: a row with a blank transmission, or every row of\n    the cell is a 'CA model' / '(CAL)' row (the federal car is missing);\n  * automated manual filed as manual (KNOWN_AMT_AS_MANUAL: MR2 Spyder SMT\n    2002-2005); EPA files SMG/F1/e-gear/Cambiocorsa as automatics;\n  * vPIC model names broader than EPA names (EXTRA_EPA_NAMES: vPIC and\n    yards call the 2009+ VW CC 'Passat') add those EPA rows to the union.\nFlag (not a skip): EPA lists the other class for the same names/engine/\ndrive in the year before or after ('epa_adjacent_years_other_class').\nStatus: a manual claim is COUNTED only when an independent editorial or\nreference source (epa_sole_citations.json) says that engine/year was\nmanual-only and nothing disagrees (low_sample), or >= 20 ground-truth cars\nof the combination all agree (keep). EPA-only cells stay candidates: EPA\nlists manual-only cells for cars that had automatics (1985 Camaro 2.5,\n1985 944, 1985-87 Ranger 2.0).\nModel-year-wide claims: when every EPA row of the model-year (all engines,\nall drives) is one class, the decode identity alone places the car; no\nengine is needed.\n\nValidation: ground_truth.jsonl. uniformCell = manual lines are unlabelled\n(vPIC model-level defaults, BASELINE.md section 2); speeds-only lines are\nexcluded; agree means (truth is manual) == (claim is manual). A combination\nwith any disagreement is dropped, and the other years of that rule become\ncandidates. VIN-less listing lines (Ace Jacksonville) are checked against\nmodel-year-wide cells by feed name, the only label independent of vPIC.",
  "status_definitions": {
   "keep": ">= 20 checkable ground-truth cars in the combination and agreement >= 0.995",
@@ -33,26 +33,26 @@
    "unknown": 11
   },
   "epa_manual_only_combinations": 1548,
-  "lot_cars": 334759,
-  "lot_cars_without_trans_info": 286381,
+  "lot_cars": 334287,
+  "lot_cars_without_trans_info": 285933,
   "lot_placement": {
-   "non_manual": 140306,
-   "mixed": 116919,
-   "no_vin": 52337,
-   "heavy_duty": 6631,
-   "unmatched": 4212,
-   "vin_not_in_decode_backup": 3415,
-   "sibling_name": 2924,
-   "no_engine": 1470,
-   "bad_check_digit": 1182,
-   "engine_not_in_epa": 1138,
-   "identity_unverified": 1128,
-   "epa_cell_incomplete": 653,
-   "engine_not_vin_specific": 555,
-   "drive_not_vin_specific": 424,
-   "manual": 387,
+   "non_manual": 139255,
+   "mixed": 116177,
+   "no_vin": 52028,
+   "heavy_duty": 6594,
+   "vin_not_in_decode_backup": 5177,
+   "unmatched": 4192,
+   "sibling_name": 2898,
+   "no_engine": 1462,
+   "bad_check_digit": 1175,
+   "engine_not_in_epa": 1131,
+   "identity_unverified": 1116,
+   "epa_cell_incomplete": 650,
+   "engine_not_vin_specific": 551,
+   "drive_not_vin_specific": 420,
+   "manual": 385,
    "pre_1984": 340,
-   "neighbour_engine": 251,
+   "neighbour_engine": 249,
    "drive_not_in_epa": 234,
    "year_conflict": 167,
    "no_decode_year": 53,
@@ -61,23 +61,23 @@
    "epa_ca_model_rows_only": 1
   },
   "lot_placement_cars_without_trans_info": {
-   "non_manual": 126073,
-   "mixed": 87099,
-   "no_vin": 49782,
-   "heavy_duty": 6595,
-   "unmatched": 3984,
-   "vin_not_in_decode_backup": 3415,
-   "sibling_name": 2579,
-   "no_engine": 1164,
-   "identity_unverified": 1105,
-   "bad_check_digit": 1006,
-   "engine_not_in_epa": 879,
-   "epa_cell_incomplete": 653,
-   "engine_not_vin_specific": 451,
-   "manual": 326,
+   "non_manual": 125130,
+   "mixed": 86554,
+   "no_vin": 49473,
+   "heavy_duty": 6558,
+   "vin_not_in_decode_backup": 4886,
+   "unmatched": 3965,
+   "sibling_name": 2554,
+   "no_engine": 1158,
+   "identity_unverified": 1094,
+   "bad_check_digit": 1000,
+   "engine_not_in_epa": 873,
+   "epa_cell_incomplete": 650,
+   "engine_not_vin_specific": 447,
+   "manual": 325,
    "pre_1984": 315,
-   "drive_not_vin_specific": 264,
-   "neighbour_engine": 234,
+   "drive_not_vin_specific": 262,
+   "neighbour_engine": 232,
    "drive_not_in_epa": 228,
    "year_conflict": 148,
    "no_decode_year": 52,
@@ -85,30 +85,28 @@
    "automated_manual_listed_as_manual": 2,
    "epa_ca_model_rows_only": 1
   },
-  "manual_rules": 65,
+  "manual_rules": 61,
   "manual_rules_by_status": {
-   "low_sample": 28,
-   "candidate": 35,
-   "drop": 2
+   "low_sample": 25,
+   "candidate": 36
   },
   "manual_combinations_by_status": {
-   "candidate": 84,
-   "low_sample": 67,
-   "drop": 4
+   "candidate": 86,
+   "low_sample": 62,
+   "drop": 7
   },
-  "newly_confirmed_manual_counted": 183,
-  "newly_confirmed_manual_counted_also_counted_by_vin_rules": 153,
-  "newly_confirmed_manual_counted_net_new": 30,
+  "newly_confirmed_manual_counted": 172,
+  "newly_confirmed_manual_counted_also_counted_by_vin_rules": 146,
+  "newly_confirmed_manual_counted_net_new": 26,
   "newly_confirmed_manual_counted_by_make": {
    "Ford": 44,
    "Dodge": 35,
-   "Jeep": 27,
+   "Jeep": 23,
    "Chevrolet": 18,
    "Nissan": 16,
-   "Geo": 10,
+   "Geo": 9,
    "Mazda": 8,
    "Isuzu": 7,
-   "Mercury": 6,
    "Kia": 5,
    "Chrysler": 2,
    "Volkswagen": 2,
@@ -123,18 +121,16 @@
    "epa_ford_escape_2.0l_4cyl_anydrive": 14,
    "epa_ford_focus_2.3l_4cyl_anydrive": 12,
    "epa_ford_fiesta_1.0l_3cyl_anydrive": 10,
-   "epa_geo_metro_1.0l_3cyl_anydrive": 10,
+   "epa_geo_metro_1.0l_3cyl_anydrive": 9,
    "epa_nissan_xterra_2.4l_4cyl_anydrive": 8,
    "epa_ford_focus_1.0l_3cyl_anydrive": 7,
    "epa_dodge_neon_srt_4_sx_2.0_2.4l_4cyl_anydrive": 6,
    "epa_isuzu_rodeo_2.6l_4cyl_anydrive": 6,
-   "epa_mercury_cougar_2.0l_4cyl_anydrive": 6,
    "epa_kia_sportage_2.0l_xcyl_4wd": 5,
    "epa_mazda_tribute_2.0l_4cyl_anydrive": 5,
    "epa_nissan_xterra_2.4l_xcyl_anydrive": 5,
    "epa_chevrolet_cobalt_2.0l_4cyl_anydrive": 4,
    "epa_jeep_renegade_1.4l_4cyl_anydrive": 4,
-   "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive": 3,
    "epa_mazda_speed_3_2.3l_xcyl_anydrive": 3,
    "epa_nissan_frontier_2.4l_xcyl_4wd": 3,
    "epa_volkswagen_golf_gti_2.8l_6cyl_anydrive": 2,
@@ -142,13 +138,12 @@
    "epa_cadillac_cts_6.0l_8cyl_anydrive": 1,
    "epa_ford_mustang_5.8l_8cyl_anydrive": 1,
    "epa_isuzu_amigo_all_engines": 1,
-   "epa_jeep_wrangler_tj_2.4l_4cyl_anydrive": 1,
    "epa_saturn_ion_2.0l_4cyl_anydrive": 1
   },
-  "candidate_rule_manual_cars_not_counted": 143,
+  "candidate_rule_manual_cars_not_counted": 153,
   "candidate_rule_manual_cars_by_status": {
-   "candidate": 138,
-   "drop": 5
+   "candidate": 144,
+   "drop": 9
   },
   "ground_truth_placement": {
    "mixed": 29496,
@@ -190,7 +185,7 @@
    "agree": 14100,
    "disagree": 21,
    "agreement": 0.9985,
-   "combinations": 4029,
+   "combinations": 4024,
    "combinations_dropped": 2
   },
   "listing_check_model_year_cells": {
@@ -202,12 +197,13 @@
   "published_labels_contradicting_an_epa_sole_cell": 20,
   "published_labels_contradicting_by_kind": {
    "non_manual_cell_vs_published_manual": 20
-  }
+  },
+  "refuted_rules_removed": 4
  },
  "per_make": {
   "Chevrolet": {
-   "non_manual_claims": 24546,
-   "non_manual_no_trans": 24024,
+   "non_manual_claims": 24319,
+   "non_manual_no_trans": 23809,
    "manual_claims": 47,
    "manual_no_trans_counted": 18,
    "manual_no_trans_candidate": 27,
@@ -220,8 +216,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Ford": {
-   "non_manual_claims": 22724,
-   "non_manual_no_trans": 22391,
+   "non_manual_claims": 22568,
+   "non_manual_no_trans": 22237,
    "manual_claims": 55,
    "manual_no_trans_drop": 4,
    "manual_no_trans_counted": 44,
@@ -231,8 +227,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Dodge": {
-   "non_manual_claims": 12125,
-   "non_manual_no_trans": 12082,
+   "non_manual_claims": 12025,
+   "non_manual_no_trans": 11983,
    "manual_claims": 76,
    "manual_no_trans_counted": 35,
    "manual_no_trans_candidate": 41,
@@ -241,8 +237,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Nissan": {
-   "non_manual_claims": 11133,
-   "non_manual_no_trans": 10651,
+   "non_manual_claims": 11050,
+   "non_manual_no_trans": 10571,
    "manual_claims": 16,
    "manual_no_trans_counted": 16,
    "gt_non_manual_claim_checkable": 477,
@@ -250,8 +246,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Honda": {
-   "non_manual_claims": 6898,
-   "manual_claims": 44,
+   "non_manual_claims": 6849,
+   "manual_claims": 43,
    "non_manual_no_trans": 2,
    "gt_non_manual_claim_checkable": 6845,
    "gt_non_manual_claim_agree": 6845,
@@ -261,8 +257,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Toyota": {
-   "non_manual_claims": 7332,
-   "non_manual_no_trans": 7230,
+   "non_manual_claims": 7292,
+   "non_manual_no_trans": 7190,
    "manual_claims": 3,
    "manual_no_trans_candidate": 3,
    "gt_non_manual_claim_checkable": 99,
@@ -270,8 +266,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Chrysler": {
-   "non_manual_claims": 7033,
-   "non_manual_no_trans": 7009,
+   "non_manual_claims": 6977,
+   "non_manual_no_trans": 6953,
    "manual_claims": 4,
    "manual_no_trans_counted": 2,
    "manual_no_trans_candidate": 2,
@@ -280,8 +276,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "GMC": {
-   "non_manual_claims": 5531,
-   "non_manual_no_trans": 5510,
+   "non_manual_claims": 5479,
+   "non_manual_no_trans": 5459,
    "manual_claims": 3,
    "manual_no_trans_candidate": 3,
    "gt_non_manual_claim_checkable": 19,
@@ -289,15 +285,15 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Buick": {
-   "non_manual_claims": 5439,
-   "non_manual_no_trans": 5305,
+   "non_manual_claims": 5398,
+   "non_manual_no_trans": 5264,
    "gt_non_manual_claim_checkable": 132,
    "gt_non_manual_claim_agree": 132,
    "gt_non_manual_claim_agreement": 1.0
   },
   "Kia": {
-   "non_manual_claims": 3153,
-   "non_manual_no_trans": 2650,
+   "non_manual_claims": 3132,
+   "non_manual_no_trans": 2632,
    "manual_claims": 8,
    "manual_no_trans_counted": 5,
    "manual_no_trans_candidate": 2,
@@ -309,8 +305,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Cadillac": {
-   "non_manual_claims": 3188,
-   "non_manual_no_trans": 3104,
+   "non_manual_claims": 3160,
+   "non_manual_no_trans": 3077,
    "manual_claims": 1,
    "manual_no_trans_counted": 1,
    "gt_non_manual_claim_checkable": 83,
@@ -318,15 +314,15 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Acura": {
-   "non_manual_claims": 2148,
+   "non_manual_claims": 2129,
    "non_manual_no_trans": 2,
    "gt_non_manual_claim_checkable": 2136,
    "gt_non_manual_claim_agree": 2136,
    "gt_non_manual_claim_agreement": 1.0
   },
   "Hyundai": {
-   "non_manual_claims": 3068,
-   "non_manual_no_trans": 2842,
+   "non_manual_claims": 3049,
+   "non_manual_no_trans": 2824,
    "manual_claims": 5,
    "manual_no_trans_candidate": 5,
    "gt_non_manual_claim_checkable": 220,
@@ -334,24 +330,25 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Lincoln": {
-   "non_manual_claims": 2723,
-   "non_manual_no_trans": 2694,
+   "non_manual_claims": 2704,
+   "non_manual_no_trans": 2675,
    "gt_non_manual_claim_checkable": 29,
    "gt_non_manual_claim_agree": 29,
    "gt_non_manual_claim_agreement": 1.0
   },
   "Mercedes-Benz": {
-   "non_manual_claims": 2684,
-   "non_manual_no_trans": 2617,
+   "non_manual_claims": 2674,
+   "non_manual_no_trans": 2608,
    "gt_non_manual_claim_checkable": 66,
    "gt_non_manual_claim_agree": 66,
    "gt_non_manual_claim_agreement": 1.0
   },
   "Jeep": {
-   "non_manual_claims": 2523,
-   "non_manual_no_trans": 2448,
+   "non_manual_claims": 2508,
+   "non_manual_no_trans": 2433,
    "manual_claims": 31,
-   "manual_no_trans_counted": 27,
+   "manual_no_trans_counted": 23,
+   "manual_no_trans_drop": 4,
    "manual_no_trans_candidate": 1,
    "gt_non_manual_claim_checkable": 75,
    "gt_non_manual_claim_agree": 54,
@@ -362,42 +359,42 @@
    "gt_non_manual_claim_agreement": 0.72
   },
   "Lexus": {
-   "non_manual_claims": 2495,
-   "non_manual_no_trans": 2425,
+   "non_manual_claims": 2476,
+   "non_manual_no_trans": 2406,
    "gt_non_manual_claim_checkable": 69,
    "gt_non_manual_claim_agree": 69,
    "gt_non_manual_claim_agreement": 1.0
   },
-  "Infiniti": {
-   "non_manual_claims": 2060,
-   "non_manual_no_trans": 2033,
-   "gt_non_manual_claim_checkable": 25,
-   "gt_non_manual_claim_agree": 25,
-   "gt_non_manual_claim_agreement": 1.0
-  },
   "Pontiac": {
-   "non_manual_claims": 2067,
-   "non_manual_no_trans": 2061,
+   "non_manual_claims": 2052,
+   "non_manual_no_trans": 2046,
    "gt_non_manual_claim_checkable": 7,
    "gt_non_manual_claim_agree": 7,
    "gt_non_manual_claim_agreement": 1.0
   },
+  "Infiniti": {
+   "non_manual_claims": 2039,
+   "non_manual_no_trans": 2014,
+   "gt_non_manual_claim_checkable": 25,
+   "gt_non_manual_claim_agree": 25,
+   "gt_non_manual_claim_agreement": 1.0
+  },
   "Mercury": {
-   "non_manual_claims": 1983,
-   "non_manual_no_trans": 1983,
+   "non_manual_claims": 1973,
+   "non_manual_no_trans": 1973,
    "manual_claims": 6,
-   "manual_no_trans_counted": 6
+   "manual_no_trans_candidate": 6
   },
   "Volvo": {
-   "non_manual_claims": 1219,
-   "non_manual_no_trans": 811,
+   "non_manual_claims": 1207,
+   "non_manual_no_trans": 801,
    "gt_non_manual_claim_checkable": 404,
    "gt_non_manual_claim_agree": 404,
    "gt_non_manual_claim_agreement": 1.0
   },
   "Mazda": {
-   "non_manual_claims": 1167,
-   "non_manual_no_trans": 1136,
+   "non_manual_claims": 1160,
+   "non_manual_no_trans": 1129,
    "manual_claims": 9,
    "manual_no_trans_counted": 8,
    "manual_no_trans_candidate": 1,
@@ -406,8 +403,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Mitsubishi": {
-   "non_manual_claims": 1053,
-   "non_manual_no_trans": 1038,
+   "non_manual_claims": 1047,
+   "non_manual_no_trans": 1032,
    "manual_claims": 2,
    "manual_no_trans_candidate": 2,
    "gt_non_manual_claim_checkable": 16,
@@ -415,8 +412,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Saturn": {
-   "non_manual_claims": 1048,
-   "non_manual_no_trans": 1035,
+   "non_manual_claims": 1042,
+   "non_manual_no_trans": 1029,
    "manual_claims": 1,
    "manual_no_trans_counted": 1,
    "gt_non_manual_claim_checkable": 12,
@@ -424,14 +421,14 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Land Rover": {
-   "non_manual_claims": 699,
+   "non_manual_claims": 696,
    "gt_non_manual_claim_checkable": 694,
    "gt_non_manual_claim_agree": 694,
    "gt_non_manual_claim_agreement": 1.0
   },
   "BMW": {
-   "non_manual_claims": 977,
-   "non_manual_no_trans": 955,
+   "non_manual_claims": 975,
+   "non_manual_no_trans": 953,
    "manual_claims": 4,
    "manual_no_trans_candidate": 3,
    "manual_no_trans_counted": 1,
@@ -440,14 +437,14 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Audi": {
-   "non_manual_claims": 686,
-   "non_manual_no_trans": 508,
+   "non_manual_claims": 684,
+   "non_manual_no_trans": 506,
    "gt_non_manual_claim_checkable": 178,
    "gt_non_manual_claim_agree": 178,
    "gt_non_manual_claim_agreement": 1.0
   },
   "Subaru": {
-   "non_manual_claims": 462,
+   "non_manual_claims": 457,
    "manual_claims": 8,
    "non_manual_no_trans": 1,
    "gt_non_manual_claim_checkable": 459,
@@ -458,8 +455,8 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Volkswagen": {
-   "non_manual_claims": 572,
-   "non_manual_no_trans": 386,
+   "non_manual_claims": 570,
+   "non_manual_no_trans": 385,
    "manual_claims": 6,
    "manual_no_trans_counted": 2,
    "manual_no_trans_candidate": 4,
@@ -468,18 +465,18 @@
    "gt_non_manual_claim_agreement": 1.0
   },
   "Jaguar": {
-   "non_manual_claims": 407,
+   "non_manual_claims": 405,
    "gt_non_manual_claim_checkable": 404,
    "gt_non_manual_claim_agree": 404,
    "gt_non_manual_claim_agreement": 1.0
   },
   "Oldsmobile": {
-   "non_manual_claims": 454,
-   "non_manual_no_trans": 454
+   "non_manual_claims": 453,
+   "non_manual_no_trans": 453
   },
   "Ram": {
-   "non_manual_claims": 241,
-   "non_manual_no_trans": 240,
+   "non_manual_claims": 240,
+   "non_manual_no_trans": 239,
    "gt_non_manual_claim_checkable": 1,
    "gt_non_manual_claim_agree": 1,
    "gt_non_manual_claim_agreement": 1.0
@@ -511,8 +508,8 @@
    "manual_no_trans_candidate": 3
   },
   "Smart": {
-   "non_manual_claims": 58,
-   "non_manual_no_trans": 54
+   "non_manual_claims": 57,
+   "non_manual_no_trans": 53
   },
   "Saab": {
    "non_manual_claims": 36,
@@ -533,10 +530,6 @@
    "non_manual_claims": 12,
    "non_manual_no_trans": 12
   },
-  "Geo": {
-   "manual_claims": 10,
-   "manual_no_trans_counted": 10
-  },
   "Genesis": {
    "non_manual_claims": 9,
    "non_manual_no_trans": 6,
@@ -544,16 +537,20 @@
    "gt_non_manual_claim_agree": 2,
    "gt_non_manual_claim_agreement": 1.0
   },
-  "Tesla": {
-   "non_manual_claims": 6,
-   "non_manual_no_trans": 3,
-   "gt_non_manual_claim_checkable": 3,
-   "gt_non_manual_claim_agree": 3,
-   "gt_non_manual_claim_agreement": 1.0
+  "Geo": {
+   "manual_claims": 9,
+   "manual_no_trans_counted": 9
   },
   "Scion": {
    "non_manual_claims": 7,
    "non_manual_no_trans": 7
+  },
+  "Tesla": {
+   "non_manual_claims": 5,
+   "non_manual_no_trans": 2,
+   "gt_non_manual_claim_checkable": 3,
+   "gt_non_manual_claim_agree": 3,
+   "gt_non_manual_claim_agreement": 1.0
   },
   "Alfa Romeo": {
    "manual_claims": 3,
@@ -704,6 +701,11 @@
        "url": "https://ipfs.ssi.eecc.de/ipns/en.wikipedia-on-ipfs.org/wiki/Dodge_Caliber",
        "says": "The SE's 1.8 L 148 hp World I4 is 'attached to a Magna Drivetrain T355 5-speed manual transmission'; the CVT is listed with the 2.0 L and 2.4 L.",
        "via": "vin_rules_6.json dodge_caliber_18_2007_2009_char8_C"
+      },
+      {
+       "url": "https://www.edmunds.com/dodge/caliber/2007/review",
+       "says": "Edmunds 2007: the 1.8-liter 'comes paired to a five-speed manual only'; Cars.com: the CVT brings the 2.0-liter.",
+       "via": "WebSearch result text 2026-11-05 (verification)"
       }
      ],
      "note": ""
@@ -731,6 +733,48 @@
     "newly_confirmed_manual_counted": 31,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA re-read 2007-2009: the only 1.8 L rows are Manual 5-spd (23528, 24818, 25968); every CVT row is 2.0/2.4.",
+     "New independent text (search-result text): Edmunds 2007 'the 1.8-liter ... paired to a five-speed manual only'; Cars.com: the CVT brings the 2.0 L. CarGurus' trim blurb (SE 'upgraded to the optional CVT' without an engine change) is generic and not tied to the 1.8.",
+     "Decode cache: 1.8 L appears only with VIN 8 = C (lines B28 SE / B48 SXT, FWD); B/A = 2.0, K/F = 2.4. No pattern collision.",
+     "Feed model 'Chrysler Caliber' (2 cars) is a yard naming slip; both VINs decode Dodge Caliber 1.8 (1B3HB28C)."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "CHRYSLER",
+       "DODGE"
+      ],
+      "model_names_normalised": [
+       "caliber",
+       "caliberawd"
+      ],
+      "years": [
+       "2007",
+       "2008",
+       "2009"
+      ],
+      "displacementL": 1.8,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 41,
+     "vpic_cache_transmission_labels": {
+      "blank": 41
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 6
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -937,6 +981,50 @@
     "newly_confirmed_manual_counted": 19,
     "published_manual": 1,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 1987-1995 re-read: every 2.5 L Wrangler row 1987-1993 is Manual 5-spd; the first 2.5 L automatic is 1994 (11513), so 1993 is the right upper edge.",
+     "1987-1988 AMC-format VINs: position 4 = engine (H = 2.5, C = 4.2) and position 5 = transmission; live vPIC decode of 2BCHV81S2JB546027 returns 2.5 L, TransmissionStyle Manual/Standard, 5 speeds (VIN 5 = V). 1989-1993: VIN 8 = E (1989-90) / P (1991-93) = 2.5 L, S/T/M = 4.x L6.",
+     "vin_rules_6 verifier re-read the MY1991 Chrysler filing and found the same; Wikipedia YJ and Extreme Terrain: automatic for the four-cylinder arrived in 1994.",
+     "Brampton (2J4/2BC, Canada) and Toledo (1J4) builds both decode the same way; no counterexample."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "JEEP"
+      ],
+      "model_names_normalised": [
+       "wrangler",
+       "wrangler4wd"
+      ],
+      "years": [
+       "1987",
+       "1988",
+       "1989",
+       "1990",
+       "1991",
+       "1992",
+       "1993"
+      ],
+      "displacementL": 2.5,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 2,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 23,
+     "vpic_cache_transmission_labels": {
+      "blank": 20,
+      "manual": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -1075,6 +1163,46 @@
     "newly_confirmed_manual_counted": 14,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 1995-2001 re-read: every 1.0 L Metro row is Manual 5-spd; the 3-speed automatic is 1.3 L only. EPA 1994 (previous generation) lists a 1.0 L automatic, outside the rule.",
+     "Live vPIC decode of 2C1MR2263W6701472 (1998): 1.0 L 3-cyl hatchback; vPIC notes '6 coded in 8th position twice' (GM's table also gives code 6 to a 1.6 L Toyota engine of another car line, WMI 1Y1/2CN), which cannot apply to WMI 2C1 + carline M. In the cache 1.0 L appears only with VIN 8 = 6 on MR22 hatchbacks; code 2 (1998-2000) and 9 (1995-97) decode 1.3 L.",
+     "vin_rules_5 verifier: NRCan lists the 1995-2000 Metro/Firefly 1.0 only as M5; CAMI (Canada) build covered."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "CHEVROLET",
+       "GEO"
+      ],
+      "model_names_normalised": [
+       "metro"
+      ],
+      "years": [
+       "1998",
+       "1999",
+       "2000"
+      ],
+      "displacementL": 1.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 16,
+     "vpic_cache_transmission_labels": {
+      "blank": 16
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 1
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -1229,6 +1357,47 @@
     "newly_confirmed_manual_counted": 14,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2001-2005 re-read: 2001-2004 2.0 L rows are all Manual 5-spd (2WD and 4WD); the first four-cylinder automatic is the 2005 2.3 L, outside the rule.",
+     "Decode cache: 2.0 L only with VIN 8 = B; code 1 = 3.0 V6 (482 VINs) in every series. One 2001 lot car is U03 (XLT) with code B; live vPIC decode of 1FMYU03B31KB23314 returns XLT, 2.0 L 4-cyl SEFI-ZETEC, check digit valid. The claim follows the engine (2.0 L = manual only), not the trim, so it stands.",
+     "vin_rules_4 verifier: Cars.com 2002 'the 2.0-liter four-cylinder engine teams only with a five-speed-manual shift'."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "FORD"
+      ],
+      "model_names_normalised": [
+       "escape",
+       "escape2wd",
+       "escape4wd"
+      ],
+      "years": [
+       "2001",
+       "2002",
+       "2004"
+      ],
+      "displacementL": 2.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 17,
+     "vpic_cache_transmission_labels": {
+      "blank": 17
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 1
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -1374,6 +1543,45 @@
     "newly_confirmed_manual_counted": 12,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2003-2008 re-read: 2003-2004 2.3 L rows list both transmissions (PZEV), 2005-2007 2.3 L rows are Manual 5-spd only; the 2005-2007 PZEV cars are filed as 2.0 L.",
+     "Decode cache (1,000+ 2005-2007 Focus decodes): 2.3 L appears only on series P38 (ZX4 ST) with VIN 8 = Z; every other series decodes 2.0 L (code N). So a non-ST 2.3 L automatic cannot land in this rule."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "FORD"
+      ],
+      "model_names_normalised": [
+       "focus",
+       "focusstationwagon"
+      ],
+      "years": [
+       "2005",
+       "2006",
+       "2007"
+      ],
+      "displacementL": 2.3,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 16,
+     "vpic_cache_transmission_labels": {
+      "blank": 16
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 6
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -1538,6 +1746,48 @@
     "newly_confirmed_manual_counted": 10,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2014-2017: every 1.0 L Fiesta row is Manual 5-spd; Fiesta automatics are 1.6 L non-turbo.",
+     "Decode cache: 1.0 L only with VIN 8 = E, on both sedan (P4B) and hatch (P4E) SE; vin_rules_4 verifier read Ford's MY2014-2017 filings (E = 1.0 L GTDI)."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "FORD"
+      ],
+      "model_names_normalised": [
+       "fiesta",
+       "fiestafwd",
+       "fiestasfefwd",
+       "fiestastfwd"
+      ],
+      "years": [
+       "2014",
+       "2015",
+       "2016",
+       "2017"
+      ],
+      "displacementL": 1.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 12,
+     "vpic_cache_transmission_labels": {
+      "blank": 12
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 5
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -1570,7 +1820,7 @@
      "Metro"
     ],
     "feed_models_on_lots": {
-     "Geo Metro": 10
+     "Geo Metro": 9
     },
     "model_years": [
      1995,
@@ -1673,11 +1923,49 @@
     "name_conflict_feed_vs_vpic": false
    },
    "lot": {
-    "cars": 10,
-    "cars_without_trans_info": 10,
-    "newly_confirmed_manual_counted": 10,
+    "cars": 9,
+    "cars_without_trans_info": 9,
+    "newly_confirmed_manual_counted": 9,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "Same facts as the Chevrolet Metro rule (EPA 1995-1997 1.0 L Manual 5-spd only; NRCan M5 only; Consumer Guide 1995-2001: automatic only with the 4-cylinder).",
+     "Live vPIC decode of 2C1MR2266S6758873 (1995 Geo Metro LSi): 1.0 L 3-cyl in-line hatchback. The GM worklist keeps MY1995-1998 as VIN-rule candidates because the scanned engine tables are unreadable; this rule rests on vPIC's coded displacement, which is VIN-specific in the cache (code 6 = 1.0, code 9 = 1.3 on the same MR22 hatch line).",
+     "Residual risk named: no MY1995-1997 GM filing was read in this pass."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "CHEVROLET",
+       "GEO"
+      ],
+      "model_names_normalised": [
+       "metro"
+      ],
+      "years": [
+       "1995",
+       "1996",
+       "1997"
+      ],
+      "displacementL": 1.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 14,
+     "vpic_cache_transmission_labels": {
+      "blank": 14
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -1824,6 +2112,47 @@
     "newly_confirmed_manual_counted": 8,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2000-2004: the only 2.4 L Xterra rows are 'Xterra 2WD Manual 5-spd'; every V6 cell lists both.",
+     "Decode cache: 2.4 L only with VIN 4 = D (KA24DE) and VIN 8 = T (2WD); E/M = 3.3 L. vin_rules_2 verifier read Nissan's MY2001/2002 filings and Consumer Guide directly ('teamed only with a 5-speed manual')."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "NISSAN"
+      ],
+      "model_names_normalised": [
+       "xterra",
+       "xterra2wd",
+       "xterrav62wd",
+       "xterrav64wd"
+      ],
+      "years": [
+       "2002",
+       "2003",
+       "2004"
+      ],
+      "displacementL": 2.4,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 11,
+     "vpic_cache_transmission_labels": {
+      "blank": 11
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 4
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -1939,6 +2268,46 @@
     "newly_confirmed_manual_counted": 7,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2015: 1.0 L Focus rows are Manual 6-spd only; 2016 adds the 1.0 L automatic (36988), so the rule stays MY2015 only.",
+     "Decode cache: 1.0 L only with VIN 8 = E; vin_rules_4 verifier read Ford's MY2015 filing."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "FORD"
+      ],
+      "model_names_normalised": [
+       "focus",
+       "focuselectric",
+       "focusfwd",
+       "focusfwdffv",
+       "focussfefwd"
+      ],
+      "years": [
+       "2015"
+      ],
+      "displacementL": 1.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 10,
+     "vpic_cache_transmission_labels": {
+      "blank": 10
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 1
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -2078,6 +2447,44 @@
     "newly_confirmed_manual_counted": 6,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2003-2005: the 2.4 L 'Neon/SRT-4/SX 2.0' rows are Manual 5-spd only; the 2.0 L rows list both.",
+     "Decode cache: 2.4 L only with VIN 8 = S on line ES66/AS66 (SRT-4); every other Neon decodes 2.0 L."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "DODGE"
+      ],
+      "model_names_normalised": [
+       "neon",
+       "neonsrt4",
+       "neonsrt4sx20"
+      ],
+      "years": [
+       "2003",
+       "2004",
+       "2005"
+      ],
+      "displacementL": 2.4,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 8,
+     "vpic_cache_transmission_labels": {
+      "blank": 8
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -2242,128 +2649,48 @@
     "newly_confirmed_manual_counted": 6,
     "published_manual": 0,
     "published_non_manual": 0
-   }
-  },
-  {
-   "id": "epa_mercury_cougar_2.0l_4cyl_anydrive",
-   "claim": "manual",
-   "status": "low_sample",
-   "status_by_year": {
-    "2001": "low_sample",
-    "2002": "low_sample"
    },
-   "status_reason_by_year": {
-    "2001": "fewer than 20 checkable ground-truth cars; counted because an independent editorial/reference source states this engine/year was manual-only",
-    "2002": "fewer than 20 checkable ground-truth cars; counted because an independent editorial/reference source states this engine/year was manual-only"
-   },
-   "years_counted": [
-    2001,
-    2002
-   ],
-   "scope": {
-    "epa_make": [
-     "Mercury"
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 1991-1997: every Rodeo 2.6 L row is 'Rodeo 2WD Manual 5-spd'; automatic rows are V6 only.",
+     "Decode cache: 2.6 L only with VIN 8 = E (4ZE1) on lines G/K (4x2) body 8; vin_rules_1 verifier re-read Isuzu's MY1992/1995/1997 filings. Search (2026-11-05) found no source pairing the 2.6 with an automatic; Consumer Guide 1991-97 and Edmunds 1996 say manual only.",
+     "Scope edge: the 2-door Amigo shares line G and had a 2.6 automatic from 1992, but its vPIC model is Amigo, so it cannot land in this rule."
     ],
-    "epa_base_models": [
-     "Cougar"
-    ],
-    "epa_model_names": [
-     "Cougar"
-    ],
-    "feed_models_on_lots": {
-     "Mercury Cougar": 6
-    },
-    "model_years": [
-     2001,
-     2002
-    ],
-    "engine": {
-     "displacementL": 2.0,
-     "cylinders": 4,
-     "turbo_in_epa_rows": [
-      false
-     ],
-     "supercharger_in_epa_rows": [
-      false
-     ]
-    },
-    "drive": "any (the answer does not depend on drive)",
-    "level": "engine",
-    "conditions": [
-     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
-     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
-     "decoded DisplacementL = 2.0 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
-     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
-    ]
-   },
-   "vin_condition": "none: the rule reads the decoded make/model/year/DisplacementL/EngineCylinders, not a VIN character",
-   "epa_rows": [
-    {
-     "year": 2001,
-     "ids": [
-      16652
-     ],
-     "trany": [
-      "Manual 5-spd"
-     ],
-     "names": [
-      "Cougar"
-     ]
-    },
-    {
-     "year": 2002,
-     "ids": [
-      17578
-     ],
-     "trany": [
-      "Manual 5-spd"
-     ],
-     "names": [
-      "Cougar"
-     ]
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "ISUZU"
+      ],
+      "model_names_normalised": [
+       "rodeo",
+       "rodeo2wd",
+       "rodeo4wd"
+      ],
+      "years": [
+       "1992",
+       "1993",
+       "1995",
+       "1997"
+      ],
+      "displacementL": 2.6,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 6,
+     "vpic_cache_transmission_labels": {
+      "blank": 6
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 1
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
     }
-   ],
-   "epa_adjacent_years_other_class": [],
-   "citations": [
-    {
-     "source_id": "mercury_cougar_20_2001_2002",
-     "verdict": "supports",
-     "years": [
-      2001,
-      2002
-     ],
-     "sources": [
-      {
-       "url": "https://consumerguide.com/used/1999-02-mercury-cougar/",
-       "says": "'Cougars came with two distinct engines: a 125-horsepower 4-cylinder (manual shift only), or a 170-horsepower 2.5-liter V6 ...'",
-       "via": "vin_rules_4.json mercury_cougar_i4_2001_2002_series_60_char8_3"
-      }
-     ],
-     "note": "MY1999 is outside: EPA 14999 lists a 2.0 Automatic 4-spd for the 1999 Cougar."
-    },
-    {
-     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
-     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
-     "says": "2001: ids 16652 Manual 5-spd; 2002: ids 17578 Manual 5-spd"
-    }
-   ],
-   "validation": {
-    "ground_truth_checkable": 0,
-    "agree": 0,
-    "disagree": 0,
-    "agreement": null,
-    "checkable_positives_manual": 0,
-    "uniform_auto_lines": 0,
-    "disagree_examples": [],
-    "listing_contaminated": false,
-    "name_conflict_feed_vs_vpic": false
-   },
-   "lot": {
-    "cars": 6,
-    "cars_without_trans_info": 6,
-    "newly_confirmed_manual_counted": 6,
-    "published_manual": 0,
-    "published_non_manual": 0
    }
   },
   {
@@ -2506,6 +2833,48 @@
     "newly_confirmed_manual_counted": 5,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2005-2010: 'Sportage 4WD 2.0' is Manual 5-spd only every year; the 2.0 2WD rows list both, so the drive gate matters.",
+     "Drive is VIN-specific: Kia's MY2005-2009 filings (read by the vin_rules_3 verifier) give VIN 5 E = 4WD, F = 2WD; live vPIC decode of KNDJE724X67233592 returns 2.0 L, 4WD. NRCan: Canadian Sportage 4X4 2.0 M5 only.",
+     "Conflict checked: a Kia parts catalog lists '2.0 LX 4AT' and '2.0 LX AWD' trims separately, which does not pair the automatic with AWD; parts catalogs are not an allowed source and no review or spec source pairs a 2.0 4WD with an automatic.",
+     "vPIC's MY2008 Kia transmission labels are a default (every 2.0 2WD decodes '5-spd Manual'), so the one agreeing 2008 ground-truth line is weak evidence."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "KIA"
+      ],
+      "model_names_normalised": [
+       "sportage",
+       "sportage2wd",
+       "sportage4wd"
+      ],
+      "years": [
+       "2006",
+       "2007",
+       "2009"
+      ],
+      "displacementL": 2.0,
+      "drive": "4wd"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 7,
+     "vpic_cache_transmission_labels": {
+      "blank": 7
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 3
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -2652,6 +3021,11 @@
        "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/888d9009-afb5-4eb5-8ee0-f1c57396c0f9",
        "says": "Ford's MY2002 VIN filing cover letter: engine 'B' is the 2.0L Zetec 'used in the Escape and Tribute vehicles' (the same 2.0L/manual powertrain as the Escape).",
        "via": "vin_rules_4.json ford_escape_2001_2004_char8_engine"
+      },
+      {
+       "url": "https://www.autoblog.com/buy/2002-Mazda-Tribute/review/",
+       "says": "Autoblog 2002: the base DX 130-hp four-cylinder is mated to a five-speed manual and 'is not available with an automatic'; Edmunds 2002 says the same.",
+       "via": "WebSearch result text 2026-11-05 (verification)"
       }
      ],
      "note": ""
@@ -2679,6 +3053,46 @@
     "newly_confirmed_manual_counted": 5,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2001-2004: every Tribute 2.0 L row (2WD and 4WD) is Manual 5-spd.",
+     "Decode cache: 2.0 L only with VIN 8 = B; code 1 = 3.0 V6. Live vPIC decode of 4F2YU06B51KM32783: 2.0 L YFD, DX, 4WD.",
+     "New independent text (search-result text): Autoblog 2002 'not available with an automatic'; Edmunds 2002; Cars.com 'only a five-speed-manual transmission is available with the four-cylinder'. vincheck.info's 'automatic optional on I4' is an unsourced VIN-report page and contradicts the reviews."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "MAZDA"
+      ],
+      "model_names_normalised": [
+       "tribute",
+       "tribute2wd",
+       "tribute4wd"
+      ],
+      "years": [
+       "2001",
+       "2002",
+       "2003",
+       "2004"
+      ],
+      "displacementL": 2.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 7,
+     "vpic_cache_transmission_labels": {
+      "blank": 7
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -2807,6 +3221,45 @@
     "newly_confirmed_manual_counted": 5,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "Same as the 4-cylinder Xterra rule (MY2000-2001 decodes carry no cylinder count): 2.4 L only with VIN 4 = D, VIN 8 = T; EPA 2.4 L rows Manual 5-spd only."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "NISSAN"
+      ],
+      "model_names_normalised": [
+       "xterra",
+       "xterra2wd",
+       "xterrav62wd",
+       "xterrav64wd"
+      ],
+      "years": [
+       "2000",
+       "2001"
+      ],
+      "displacementL": 2.4,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 7,
+     "vpic_cache_transmission_labels": {
+      "blank": 7
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 3
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -2931,6 +3384,11 @@
        "url": "https://www.autoblog.com/buy/2004-Volkswagen-GTI-VR6__2dr_Hatchback/",
        "says": "2004 GTI VR6: the only transmission choice is a six-speed manual.",
        "via": "WebSearch result text 2026-11-05"
+      },
+      {
+       "url": "https://www.theautochannel.com/news/2003/08/11/166713.html",
+       "says": "The Auto Channel 2003 GTI review: the Tiptronic automatic is an option on the 1.8T; the VR6 is priced as the six-speed car.",
+       "via": "WebSearch result text 2026-11-05 (verification)"
       }
      ],
      "note": "MY2001 (5-speed VR6) has no editorial source in hand: only an EPA-derived fuel table, so 2001 stays EPA-only."
@@ -2958,6 +3416,47 @@
     "newly_confirmed_manual_counted": 2,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2001-2004: the 2.8 L GTI rows are manual only (5-spd 2001, 6-spd 2003-2004); the Jetta VR6 automatics are a different model name.",
+     "Live vPIC decodes of the 2 counted lot VINs (9BWDH61J..., Brazil-built): 2.8 L 6-cyl, emissions group 3VWXV02.8228 / 4VWXV02.8228; the 2004 car decodes model 'Golf', trim GTI.",
+     "New independent text (search-result text): The Auto Channel 2003 GTI review (Tiptronic optional on the 1.8T), Cars.com 2003 trim list (VR6 only as 6-speed manual), Autoblog 2004 (VR6 six-speed only).",
+     "MY2001 (12-valve, 5-speed) stays EPA-only and is not counted."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "VOLKSWAGEN"
+      ],
+      "model_names_normalised": [
+       "golf",
+       "golfgti",
+       "gti"
+      ],
+      "years": [
+       "2003",
+       "2004"
+      ],
+      "displacementL": 2.8,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 4,
+     "vpic_cache_transmission_labels": {
+      "blank": 4
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 1
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -3099,6 +3598,44 @@
     "newly_confirmed_manual_counted": 4,
     "published_manual": 1,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2005-2010: every 2.0 L Cobalt row (supercharged LSJ 2005-07, turbo LNF 2008-10) is a manual; the 2.2/2.4 rows carry the automatics.",
+     "Decode cache: 2.0 L only with VIN 8 = P on coupe line AP; one cached VIN carries vPIC 'Manual/Standard' (agrees)."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "CHEVROLET"
+      ],
+      "model_names_normalised": [
+       "cobalt",
+       "cobaltxfe"
+      ],
+      "years": [
+       "2006",
+       "2007"
+      ],
+      "displacementL": 2.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 5,
+     "vpic_cache_transmission_labels": {
+      "blank": 5
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 1
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -3244,133 +3781,45 @@
     "newly_confirmed_manual_counted": 4,
     "published_manual": 2,
     "published_non_manual": 0
-   }
-  },
-  {
-   "id": "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive",
-   "claim": "manual",
-   "status": "low_sample",
-   "status_by_year": {
-    "2003": "low_sample",
-    "2004": "low_sample"
    },
-   "status_reason_by_year": {
-    "2003": "fewer than 20 checkable ground-truth cars; counted because an independent editorial/reference source states this engine/year was manual-only",
-    "2004": "fewer than 20 checkable ground-truth cars; counted because an independent editorial/reference source states this engine/year was manual-only"
-   },
-   "years_counted": [
-    2003,
-    2004
-   ],
-   "scope": {
-    "epa_make": [
-     "Jeep"
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2015-2018: 1.4 L rows (2WD and 4WD) are Manual 6-spd only; the 2.4 L rows are Automatic 9-spd.",
+     "Decode cache: 1.4 L only with VIN 8 = H/W; 2 cached VINs carry vPIC '6-spd Manual' (agree). FCA's Renegade press release: the 1.4 MultiAir Turbo is paired with the six-speed manual, the 2.4 'exclusively' with the nine-speed automatic. Italy-built (ZAC) for the US market; the DDCT 1.4 is not a US configuration."
     ],
-    "epa_base_models": [
-     "Liberty/Cherokee"
-    ],
-    "epa_model_names": [
-     "Liberty/Cherokee 2WD",
-     "Liberty/Cherokee 4WD"
-    ],
-    "feed_models_on_lots": {
-     "Jeep Liberty": 3
-    },
-    "model_years": [
-     2003,
-     2004
-    ],
-    "engine": {
-     "displacementL": 2.4,
-     "cylinders": 4,
-     "turbo_in_epa_rows": [
-      false
-     ],
-     "supercharger_in_epa_rows": [
-      false
-     ]
-    },
-    "drive": "any (the answer does not depend on drive)",
-    "level": "engine",
-    "conditions": [
-     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
-     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
-     "decoded DisplacementL = 2.4 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
-     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
-    ]
-   },
-   "vin_condition": "none: the rule reads the decoded make/model/year/DisplacementL/EngineCylinders, not a VIN character",
-   "epa_rows": [
-    {
-     "year": 2003,
-     "ids": [
-      19076,
-      19188
-     ],
-     "trany": [
-      "Manual 5-spd"
-     ],
-     "names": [
-      "Liberty/Cherokee 2WD",
-      "Liberty/Cherokee 4WD"
-     ]
-    },
-    {
-     "year": 2004,
-     "ids": [
-      20201,
-      20314
-     ],
-     "trany": [
-      "Manual 5-spd"
-     ],
-     "names": [
-      "Liberty/Cherokee 2WD",
-      "Liberty/Cherokee 4WD"
-     ]
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "JEEP"
+      ],
+      "model_names_normalised": [
+       "renegade",
+       "renegade2wd",
+       "renegade4wd"
+      ],
+      "years": [
+       "2015",
+       "2016",
+       "2018"
+      ],
+      "displacementL": 1.4,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 2,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 8,
+     "vpic_cache_transmission_labels": {
+      "manual": 2,
+      "blank": 6
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
     }
-   ],
-   "epa_adjacent_years_other_class": [],
-   "citations": [
-    {
-     "source_id": "jeep_liberty_24_2003_2005",
-     "verdict": "supports",
-     "years": [
-      2003,
-      2005
-     ],
-     "sources": [
-      {
-       "url": "https://www.autoblog.com/buy/2004-Jeep-Liberty/review/",
-       "says": "Autoblog 2004: 'The four-cylinder engine is only available with a five-speed manual gearbox'; Autoblog 2002: four-cylinder only with the five-speed manual.",
-       "via": "vin_rules_6.json jeep_liberty_24_2003_2005_char8_1"
-      }
-     ],
-     "note": "Cars.com 2004 uses generic wording ('each engine teams with a four-speed-automatic or five-speed-manual'); the Chrysler worklist took Autoblog's explicit statement and EPA over it. Same reading here."
-    },
-    {
-     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
-     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
-     "says": "2003: ids 19076,19188 Manual 5-spd; 2004: ids 20201,20314 Manual 5-spd"
-    }
-   ],
-   "validation": {
-    "ground_truth_checkable": 0,
-    "agree": 0,
-    "disagree": 0,
-    "agreement": null,
-    "checkable_positives_manual": 0,
-    "uniform_auto_lines": 0,
-    "disagree_examples": [],
-    "listing_contaminated": false,
-    "name_conflict_feed_vs_vpic": false
-   },
-   "lot": {
-    "cars": 3,
-    "cars_without_trans_info": 3,
-    "newly_confirmed_manual_counted": 3,
-    "published_manual": 0,
-    "published_non_manual": 0
    }
   },
   {
@@ -3502,6 +3951,48 @@
     "newly_confirmed_manual_counted": 3,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2010-2013: the only 2.3 L Mazda3-family rows are 'Speed 3' Manual 6-spd (2009 '3' 2.3 automatic is the non-turbo Mazda3 s, previous model year).",
+     "Scope edge found: the two 2012 lot cars are JM1BL1L3 (VIN 7 = L, vPIC trim 'Touring/GS'), not BL1H3, so vin_rules_1's Mazdaspeed3 regex misses them. Live vPIC decode of JM1BL1L30C1630210: 2.3 L, EngineModel 'L3T Turbo Federal/Canada', Turbo = Yes; the feed also says Mazdaspeed3. L3T is fitted only to the Mazdaspeed3, which had no automatic (Wikipedia Mazdaspeed3; EPA). The trim string is vPIC's reading of VIN 7 and is not used."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "MAZDA"
+      ],
+      "model_names_normalised": [
+       "3",
+       "3di4door",
+       "3di5door",
+       "mazda3",
+       "mazdaspeed3",
+       "speed3"
+      ],
+      "years": [
+       "2010",
+       "2012"
+      ],
+      "displacementL": 2.3,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 10,
+     "vpic_cache_transmission_labels": {
+      "blank": 10
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 4
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -3610,6 +4101,43 @@
     "newly_confirmed_manual_counted": 3,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 1998-2004: 'Frontier 4WD 2.4' is Manual 5-spd only 1998-2000, then absent.",
+     "Narrowed upstream to MY1998: the vin_rules_2 verifier found a Canadian spec page (auto123) listing an optional automatic for the 1999 4-cylinder 4x4, so EPA's manual-only 1999-2000 cells are not trusted; MY1998 rests on Consumer Guide ('initial 4x4s were manual-shift only').",
+     "Drive is VIN-specific: Nissan's MY1998 filing gives VIN 8 Y = 4WD, S/T = 2WD; live vPIC decode of 1N6DD21Y9WC351130: 2.4 L, 4WD."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "NISSAN"
+      ],
+      "model_names_normalised": [
+       "frontier",
+       "frontier2wd",
+       "frontier4wd"
+      ],
+      "years": [
+       "1998"
+      ],
+      "displacementL": 2.4,
+      "drive": "4wd"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -3725,6 +4253,45 @@
     "newly_confirmed_manual_counted": 1,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2006-2008: the 3.2 L Z4 rows (M Roadster / M Coupe) are Manual 6-spd only; SMG would be filed as an automatic and is absent.",
+     "GoAuto 2006 (search-result text): the M roadster is manual-only, not available with SMG. Decode cache: one 3.2 L Z4 VIN (5UMBT935, trim Z4 M)."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "BMW"
+      ],
+      "model_names_normalised": [
+       "z4",
+       "z430i",
+       "z430si",
+       "z430sicoupe",
+       "z4mcoupe",
+       "z4mroadster"
+      ],
+      "years": [
+       "2006"
+      ],
+      "displacementL": 3.2,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -3833,6 +4400,43 @@
     "newly_confirmed_manual_counted": 1,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2006-2007: the 6.0 L CTS row is Manual 6-spd only (CTS-V, LS2); the 2009+ 6.2 L CTS-V (automatic offered) is a different engine.",
+     "Grassroots Motorsports 2004-2007 CTS-V buyer's guide: T56 six-speed the only choice. Decode cache: 6.0 L only on series DN."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "CADILLAC"
+      ],
+      "model_names_normalised": [
+       "cts",
+       "ctsv"
+      ],
+      "years": [
+       "2007"
+      ],
+      "displacementL": 6.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 3
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -3941,6 +4545,40 @@
     "newly_confirmed_manual_counted": 1,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2013-2014: the 5.8 L Mustang rows are Manual 6-spd only (Shelby GT500). vin_rules_4 verifier read Ford's MY2014 filing (Z = 5.8 L)."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "FORD"
+      ],
+      "model_names_normalised": [
+       "mustang",
+       "mustangconvertible"
+      ],
+      "years": [
+       "2014"
+      ],
+      "displacementL": 5.8,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -4042,114 +4680,42 @@
     "newly_confirmed_manual_counted": 1,
     "published_manual": 0,
     "published_non_manual": 0
-   }
-  },
-  {
-   "id": "epa_jeep_wrangler_tj_2.4l_4cyl_anydrive",
-   "claim": "manual",
-   "status": "low_sample",
-   "status_by_year": {
-    "2005": "low_sample"
    },
-   "status_reason_by_year": {
-    "2005": "fewer than 20 checkable ground-truth cars; counted because an independent editorial/reference source states this engine/year was manual-only"
-   },
-   "years_counted": [
-    2005
-   ],
-   "scope": {
-    "epa_make": [
-     "Jeep"
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 1990 Amigo rows (7335, 7336, 7408: 2.3 and 2.6, 2WD and 4WD) are all Manual 5-spd; 1992 adds an automatic on the RWD 2.6 (Wikipedia Isuzu MU), outside the rule.",
+     "Live vPIC decode of JAACR01E0L9803444: 1990 Amigo 2.6 L 4ZE1, 4WD."
     ],
-    "epa_base_models": [
-     "Wrangler/TJ"
-    ],
-    "epa_model_names": [
-     "Wrangler/TJ 4WD"
-    ],
-    "feed_models_on_lots": {
-     "Jeep Wrangler": 1
-    },
-    "model_years": [
-     2005
-    ],
-    "engine": {
-     "displacementL": 2.4,
-     "cylinders": 4,
-     "turbo_in_epa_rows": [
-      false
-     ],
-     "supercharger_in_epa_rows": [
-      false
-     ]
-    },
-    "drive": "any (the answer does not depend on drive)",
-    "level": "engine",
-    "conditions": [
-     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
-     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
-     "decoded DisplacementL = 2.4 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
-     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
-    ]
-   },
-   "vin_condition": "none: the rule reads the decoded make/model/year/DisplacementL/EngineCylinders, not a VIN character",
-   "epa_rows": [
-    {
-     "year": 2005,
-     "ids": [
-      21423
-     ],
-     "trany": [
-      "Manual 6-spd"
-     ],
-     "names": [
-      "Wrangler/TJ 4WD"
-     ]
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "ISUZU"
+      ],
+      "model_names_normalised": [
+       "amigo",
+       "amigo2wd",
+       "amigo4wd"
+      ],
+      "years": [
+       "1990"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 2,
+     "vpic_cache_transmission_labels": {
+      "blank": 2
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
     }
-   ],
-   "epa_adjacent_years_other_class": [
-    "2004 id 20317 'Wrangler/TJ 4WD' 2.4L Automatic 4-spd"
-   ],
-   "citations": [
-    {
-     "source_id": "jeep_wrangler_tj_24_2005_2006",
-     "verdict": "supports",
-     "years": [
-      2005,
-      2006
-     ],
-     "sources": [
-      {
-       "url": "https://www.quadratec.com/jeep_knowledgebase/article-102.htm",
-       "says": "Quadratec's 2005-2006 table lists the 2.4L (SE) with a six-speed manual only; DriveClean lists the 2005 and 2006 2.4L only as manual.",
-       "via": "vin_rules_6.json jeep_wrangler_tj_24_2005_2006_char8_1"
-      }
-     ],
-     "note": "MY2003-2004 2.4L Wranglers had a 4-speed automatic (EPA 19191, 20317)."
-    },
-    {
-     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
-     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
-     "says": "2005: ids 21423 Manual 6-spd"
-    }
-   ],
-   "validation": {
-    "ground_truth_checkable": 0,
-    "agree": 0,
-    "disagree": 0,
-    "agreement": null,
-    "checkable_positives_manual": 0,
-    "uniform_auto_lines": 0,
-    "disagree_examples": [],
-    "listing_contaminated": false,
-    "name_conflict_feed_vs_vpic": false
-   },
-   "lot": {
-    "cars": 1,
-    "cars_without_trans_info": 1,
-    "newly_confirmed_manual_counted": 1,
-    "published_manual": 0,
-    "published_non_manual": 0
    }
   },
   {
@@ -4256,6 +4822,43 @@
     "newly_confirmed_manual_counted": 1,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "EPA 2004-2007: the 2.0 L Ion rows are Manual 5-spd only (Red Line, supercharged LSJ); 2.2/2.4 rows carry the automatics.",
+     "Decode cache: 2.0 L only with VIN 8 = P on the Red Line coupe line (AY)."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "SATURN"
+      ],
+      "model_names_normalised": [
+       "ion"
+      ],
+      "years": [
+       "2006"
+      ],
+      "displacementL": 2.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "manual": 1,
+      "non_manual": 2
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -4364,6 +4967,41 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 1,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept (counted)",
+    "checks": [
+     "Same facts as the Sportage 2.0 4WD rule (MY2008 decodes carry a cylinder count). The single agreeing ground-truth line comes from vPIC's MY2008 default transmission label and is weak evidence; the rule rests on EPA + Cars.com + NRCan."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "KIA"
+      ],
+      "model_names_normalised": [
+       "sportage",
+       "sportage2wd",
+       "sportage4wd"
+      ],
+      "years": [
+       "2008"
+      ],
+      "displacementL": 2.0,
+      "drive": "4wd"
+     },
+     "ground_truth_vin_lines_in_scope": 1,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "manual": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -4643,6 +5281,56 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "CHRYSLER",
+       "DODGE"
+      ],
+      "model_names_normalised": [
+       "dakota",
+       "dakotacabchassis2wd",
+       "dakotapickup",
+       "dakotapickup2wd",
+       "dakotapickup4wd"
+      ],
+      "years": [
+       "1990",
+       "1991",
+       "1994",
+       "1995",
+       "1996",
+       "1997",
+       "1998",
+       "1999",
+       "2000",
+       "2001",
+       "2002"
+      ],
+      "displacementL": 2.5,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 57,
+     "vpic_cache_transmission_labels": {
+      "blank": 57
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 4
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -4804,6 +5492,46 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "CHEVROLET"
+      ],
+      "model_names_normalised": [
+       "s10",
+       "s10cabchassis2wd",
+       "s10pickup",
+       "s10pickup2wd",
+       "s10pickup4wd"
+      ],
+      "years": [
+       "1989",
+       "1991",
+       "1992",
+       "1993"
+      ],
+      "displacementL": 2.8,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 31,
+     "vpic_cache_transmission_labels": {
+      "blank": 31
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -5000,6 +5728,48 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source; EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "ISUZU"
+      ],
+      "model_names_normalised": [
+       "pickup",
+       "pickup2wd",
+       "pickup2wd1ton",
+       "pickup4wd"
+      ],
+      "years": [
+       "1988",
+       "1989",
+       "1990",
+       "1991",
+       "1992",
+       "1993",
+       "1994"
+      ],
+      "displacementL": 2.3,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 14,
+     "vpic_cache_transmission_labels": {
+      "blank": 14
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -5175,6 +5945,215 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "FORD"
+      ],
+      "model_names_normalised": [
+       "ranger",
+       "rangerpickup2wd",
+       "rangerpickup4wd",
+       "rangerpickupcabchassis"
+      ],
+      "years": [
+       "1986",
+       "1987",
+       "1989",
+       "1990",
+       "1996"
+      ],
+      "displacementL": 2.3,
+      "drive": "4wd"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 9,
+     "vpic_cache_transmission_labels": {
+      "blank": 9
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 1
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
+   }
+  },
+  {
+   "id": "epa_mercury_cougar_2.0l_4cyl_anydrive",
+   "claim": "manual",
+   "status": "candidate",
+   "status_by_year": {
+    "2001": "candidate",
+    "2002": "candidate"
+   },
+   "status_reason_by_year": {
+    "2001": "independent sources conflict",
+    "2002": "independent sources conflict"
+   },
+   "years_counted": [],
+   "scope": {
+    "epa_make": [
+     "Mercury"
+    ],
+    "epa_base_models": [
+     "Cougar"
+    ],
+    "epa_model_names": [
+     "Cougar"
+    ],
+    "feed_models_on_lots": {
+     "Mercury Cougar": 6
+    },
+    "model_years": [
+     2001,
+     2002
+    ],
+    "engine": {
+     "displacementL": 2.0,
+     "cylinders": 4,
+     "turbo_in_epa_rows": [
+      false
+     ],
+     "supercharger_in_epa_rows": [
+      false
+     ]
+    },
+    "drive": "any (the answer does not depend on drive)",
+    "level": "engine",
+    "conditions": [
+     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
+     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
+     "decoded DisplacementL = 2.0 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
+     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
+    ]
+   },
+   "vin_condition": "none: the rule reads the decoded make/model/year/DisplacementL/EngineCylinders, not a VIN character",
+   "epa_rows": [
+    {
+     "year": 2001,
+     "ids": [
+      16652
+     ],
+     "trany": [
+      "Manual 5-spd"
+     ],
+     "names": [
+      "Cougar"
+     ]
+    },
+    {
+     "year": 2002,
+     "ids": [
+      17578
+     ],
+     "trany": [
+      "Manual 5-spd"
+     ],
+     "names": [
+      "Cougar"
+     ]
+    }
+   ],
+   "epa_adjacent_years_other_class": [],
+   "citations": [
+    {
+     "source_id": "mercury_cougar_20_2001_2002",
+     "verdict": "conflicting",
+     "years": [
+      2001,
+      2002
+     ],
+     "sources": [
+      {
+       "url": "https://consumerguide.com/used/1999-02-mercury-cougar/",
+       "says": "'Cougars came with two distinct engines: a 125-horsepower 4-cylinder (manual shift only), or a 170-horsepower 2.5-liter V6 ...'",
+       "via": "vin_rules_4.json mercury_cougar_i4_2001_2002_series_60_char8_3"
+      },
+      {
+       "url": "https://www.machinedesign.com/archive/article/21813099/2001-mercury-cougar-c2",
+       "says": "Cougar description: Zetec 2.0L or Duratec 2.5L 'with either the five-speed MTX75 manual or four-speed CD4E automatic transaxles'.",
+       "via": "vin_rules_4.json mercury_cougar_i4_2001_2002_series_60_char8_3 verification; WebSearch result text 2026-11-05",
+       "verdict": "contradicts"
+      },
+      {
+       "url": "https://www.cars.com/research/mercury-cougar-2000/",
+       "says": "Cars.com '2000 Mercury Cougar: what's new': both engines team with a manual or an automatic.",
+       "via": "vin_rules_4.json verification (search-result text)",
+       "verdict": "contradicts"
+      }
+     ],
+     "note": "DEMOTED by verification: the only text source (Consumer Guide 1999-02, '4-cylinder (manual shift only)') is contradicted by EPA for 1999 (id 14999, 2.0 Automatic 4-spd), and launch/what's-new texts say the I4 came with either transaxle; an enthusiast page says a small number of I4 automatics were built. EPA 2000-2002 list only the manual, but that is not certain for every car. Earlier note: MY1999 is outside: EPA 14999 lists a 2.0 Automatic 4-spd for the 1999 Cougar."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
+     "says": "2001: ids 16652 Manual 5-spd; 2002: ids 17578 Manual 5-spd"
+    }
+   ],
+   "validation": {
+    "ground_truth_checkable": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "uniform_auto_lines": 0,
+    "disagree_examples": [],
+    "listing_contaminated": false,
+    "name_conflict_feed_vs_vpic": false
+   },
+   "lot": {
+    "cars": 6,
+    "cars_without_trans_info": 6,
+    "newly_confirmed_manual_counted": 0,
+    "published_manual": 0,
+    "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "demoted to candidate (not counted)",
+    "checks": [
+     "DEMOTED to candidate in verification (6 lot cars no longer counted). The only text source (Consumer Guide 1999-02, '4-cylinder (manual shift only)') is contradicted by EPA for 1999 (14999: 2.0 Automatic 4-spd).",
+     "Machine Design's Cougar description and Cars.com '2000 Cougar: what's new' say the Zetec 2.0 came with either the MTX75 manual or the CD4E automatic; an enthusiast page says a small number of I4 automatics were built. EPA 2000-2002 list only the manual, but the claim is not certain for every car. vin_rules_4's verifier demoted its matching VIN rule too.",
+     "Decode cache: 2.0 L only with VIN 5-8 = T603 (series 60, Zetec); no counterexample with a label (vPIC gives Ford no transmission before MY2017)."
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "MERCURY"
+      ],
+      "model_names_normalised": [
+       "cougar"
+      ],
+      "years": [
+       "2001",
+       "2002"
+      ],
+      "displacementL": 2.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 6,
+     "vpic_cache_transmission_labels": {
+      "blank": 6
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -5313,6 +6292,45 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "HYUNDAI"
+      ],
+      "model_names_normalised": [
+       "tucson",
+       "tucson2wd",
+       "tucson4wd"
+      ],
+      "years": [
+       "2005",
+       "2006",
+       "2007"
+      ],
+      "displacementL": 2.0,
+      "drive": "awd"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 5,
+     "vpic_cache_transmission_labels": {
+      "blank": 5
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 4
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -5410,6 +6428,41 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "ISUZU"
+      ],
+      "model_names_normalised": [
+       "trooper",
+       "trooperii"
+      ],
+      "years": [
+       "1985",
+       "1986"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 5,
+     "vpic_cache_transmission_labels": {
+      "blank": 5
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -5522,6 +6575,43 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "ALFA",
+       "ALFA ROMEO"
+      ],
+      "model_names_normalised": [
+       "romeospider",
+       "spider",
+       "spiderveloce2000"
+      ],
+      "years": [
+       "1984",
+       "1986"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -5638,6 +6728,43 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "BMW"
+      ],
+      "model_names_normalised": [
+       "318i",
+       "318i318is",
+       "318is",
+       "3series"
+      ],
+      "years": [
+       "1991",
+       "1992"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -5778,6 +6905,44 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "CHEVROLET"
+      ],
+      "model_names_normalised": [
+       "tracker",
+       "tracker2wdconvertible",
+       "tracker2wdhardtop",
+       "tracker4wdconvertible",
+       "tracker4wdhardtop"
+      ],
+      "years": [
+       "1999",
+       "2000"
+      ],
+      "displacementL": 1.6,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -5908,6 +7073,44 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "DODGE"
+      ],
+      "model_names_normalised": [
+       "dakota",
+       "dakotacabchassis2wd",
+       "dakotapickup",
+       "dakotapickup2wd",
+       "dakotapickup4wd"
+      ],
+      "years": [
+       "1987",
+       "1988"
+      ],
+      "displacementL": 2.2,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -6032,6 +7235,44 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "ISUZU"
+      ],
+      "model_names_normalised": [
+       "pickup",
+       "pickup2wd",
+       "pickup2wd1ton",
+       "pickup4wd"
+      ],
+      "years": [
+       "1991",
+       "1993",
+       "1994"
+      ],
+      "displacementL": 2.6,
+      "drive": "4wd"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -6117,6 +7358,41 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "ISUZU"
+      ],
+      "model_names_normalised": [
+       "pickup",
+       "pickup2wd",
+       "pickup4wd"
+      ],
+      "years": [
+       "1995"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -6200,6 +7476,39 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "PORSCHE"
+      ],
+      "model_names_normalised": [
+       "944"
+      ],
+      "years": [
+       "1985"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -6316,6 +7625,42 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "SUZUKI"
+      ],
+      "model_names_normalised": [
+       "samurai",
+       "samuraiconvertible",
+       "samuraihardtop"
+      ],
+      "years": [
+       "1986",
+       "1987"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -6438,6 +7783,42 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "GMC"
+      ],
+      "model_names_normalised": [
+       "sonoma",
+       "sonoma2wd",
+       "sonoma4wd"
+      ],
+      "years": [
+       "1991",
+       "1992"
+      ],
+      "displacementL": 2.8,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -6528,6 +7909,41 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "ISUZU"
+      ],
+      "model_names_normalised": [
+       "hombre",
+       "hombrepickup",
+       "hombrepickup2wd"
+      ],
+      "years": [
+       "1997"
+      ],
+      "displacementL": 2.2,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 2,
+     "vpic_cache_transmission_labels": {
+      "blank": 2
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -6609,6 +8025,41 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "ISUZU"
+      ],
+      "model_names_normalised": [
+       "hombre",
+       "hombrepickup",
+       "hombrepickup2wd"
+      ],
+      "years": [
+       "1996"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 3,
+     "vpic_cache_transmission_labels": {
+      "blank": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -6717,6 +8168,41 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "KIA"
+      ],
+      "model_names_normalised": [
+       "sportage",
+       "sportage2wd",
+       "sportage4wd"
+      ],
+      "years": [
+       "1996"
+      ],
+      "displacementL": 2.0,
+      "drive": "4x2"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 2,
+     "vpic_cache_transmission_labels": {
+      "blank": 2
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -6823,6 +8309,42 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "MITSUBISHI"
+      ],
+      "model_names_normalised": [
+       "monterosport",
+       "monterosport2wd",
+       "monterosport4wd"
+      ],
+      "years": [
+       "1997",
+       "1998"
+      ],
+      "displacementL": 2.4,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 4,
+     "vpic_cache_transmission_labels": {
+      "blank": 4
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -6919,6 +8441,44 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "TOYOTA"
+      ],
+      "model_names_normalised": [
+       "t100",
+       "t1002wd",
+       "t1004wd",
+       "truck2wd",
+       "truck4wd",
+       "truckt100"
+      ],
+      "years": [
+       "1994"
+      ],
+      "displacementL": 2.7,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 2,
+     "vpic_cache_transmission_labels": {
+      "blank": 2
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -7031,6 +8591,43 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "CHEVROLET"
+      ],
+      "model_names_normalised": [
+       "blazer",
+       "blazerv15004wd",
+       "s10blazer",
+       "s10blazer2wd",
+       "s10blazer4wd"
+      ],
+      "years": [
+       "1989"
+      ],
+      "displacementL": 2.8,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -7121,6 +8718,39 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "DODGE"
+      ],
+      "model_names_normalised": [
+       "daytona"
+      ],
+      "years": [
+       "1989"
+      ],
+      "displacementL": 2.2,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -7206,6 +8836,42 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "GMC"
+      ],
+      "model_names_normalised": [
+       "jimmy",
+       "jimmy2wd",
+       "jimmy4wd",
+       "jimmyutility"
+      ],
+      "years": [
+       "2004"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -7315,6 +8981,41 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "JEEP"
+      ],
+      "model_names_normalised": [
+       "cherokee",
+       "cherokee2wd",
+       "cherokee4wd"
+      ],
+      "years": [
+       "1993"
+      ],
+      "displacementL": 2.5,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -7405,6 +9106,39 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "MAZDA"
+      ],
+      "model_names_normalised": [
+       "rx7"
+      ],
+      "years": [
+       "1985"
+      ],
+      "displacementL": 1.3,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -7495,6 +9229,41 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "SUZUKI"
+      ],
+      "model_names_normalised": [
+       "sidekick",
+       "sidekickconvertible4wd",
+       "sidekickhardtop4wd"
+      ],
+      "years": [
+       "1989"
+      ],
+      "displacementL": 1.3,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -7603,6 +9372,41 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: independent sources conflict"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "TOYOTA"
+      ],
+      "model_names_normalised": [
+       "tacoma",
+       "tacoma2wd",
+       "tacoma4wd"
+      ],
+      "years": [
+       "2005"
+      ],
+      "displacementL": 2.7,
+      "drive": "4wd"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -7703,6 +9507,40 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 0,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: a VIN-less listing of this model line (another year) says automatic"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "VOLKSWAGEN"
+      ],
+      "model_names_normalised": [
+       "fox",
+       "foxwagon"
+      ],
+      "years": [
+       "1988"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 0,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "blank": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -7784,6 +9622,39 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 1,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "DAIHATSU"
+      ],
+      "model_names_normalised": [
+       "charade"
+      ],
+      "years": [
+       "1988"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 1,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "manual": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -7827,7 +9698,7 @@
      "Civic Hybrid"
     ],
     "feed_models_on_lots": {
-     "Honda Civic": 32
+     "Honda Civic": 31
     },
     "model_years": [
      2002,
@@ -8008,11 +9879,58 @@
     "name_conflict_feed_vs_vpic": false
    },
    "lot": {
-    "cars": 32,
+    "cars": 31,
     "cars_without_trans_info": 0,
     "newly_confirmed_manual_counted": 0,
-    "published_manual": 32,
+    "published_manual": 31,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "HONDA"
+      ],
+      "model_names_normalised": [
+       "civic",
+       "civiccng",
+       "civichx",
+       "civichybrid"
+      ],
+      "years": [
+       "2002",
+       "2003",
+       "2004",
+       "2005",
+       "2006",
+       "2007",
+       "2008",
+       "2009",
+       "2011"
+      ],
+      "displacementL": 2.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 28,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 44,
+     "vpic_cache_transmission_labels": {
+      "manual": 44
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 38,
+      "manual": 4
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -8143,6 +10061,47 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 9,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "HONDA"
+      ],
+      "model_names_normalised": [
+       "civic",
+       "civichf",
+       "civichybrid",
+       "civicnaturalgas"
+      ],
+      "years": [
+       "2012",
+       "2013",
+       "2014"
+      ],
+      "displacementL": 2.4,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 9,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 9,
+     "vpic_cache_transmission_labels": {
+      "manual": 9
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 5,
+      "manual": 1
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -8225,6 +10184,40 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 3,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "HONDA"
+      ],
+      "model_names_normalised": [
+       "insight"
+      ],
+      "years": [
+       "2000"
+      ],
+      "displacementL": null,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 3,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 4,
+     "vpic_cache_transmission_labels": {
+      "blank": 1,
+      "manual": 3
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-year-wide rule: any non-manual listing here would be a counterexample"
+    }
    }
   },
   {
@@ -8319,6 +10312,40 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 2,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "SAAB"
+      ],
+      "model_names_normalised": [
+       "900",
+       "900convertible"
+      ],
+      "years": [
+       "1995"
+      ],
+      "displacementL": 2.0,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 2,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 2,
+     "vpic_cache_transmission_labels": {
+      "manual": 2
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -8414,6 +10441,44 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 1,
     "published_non_manual": 0
+   },
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source"
+    ],
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "SAAB"
+      ],
+      "model_names_normalised": [
+       "93",
+       "93convertible",
+       "93viggen",
+       "93viggenconvertible"
+      ],
+      "years": [
+       "2002"
+      ],
+      "displacementL": 2.3,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 1,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 1,
+     "vpic_cache_transmission_labels": {
+      "manual": 1
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {
+      "non_manual": 1
+     },
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
+    }
    }
   },
   {
@@ -8553,254 +10618,46 @@
     "newly_confirmed_manual_counted": 0,
     "published_manual": 8,
     "published_non_manual": 0
-   }
-  },
-  {
-   "id": "epa_ford_ranger_2.0l_4cyl_anydrive",
-   "claim": "manual",
-   "status": "drop",
-   "status_by_year": {
-    "1985": "drop",
-    "1986": "drop",
-    "1987": "drop"
    },
-   "status_reason_by_year": {
-    "1985": "an independent source says an automatic was offered",
-    "1986": "an independent source says an automatic was offered",
-    "1987": "an independent source says an automatic was offered"
-   },
-   "years_counted": [],
-   "scope": {
-    "epa_make": [
-     "Ford"
+   "verified": {
+    "on": "2026-11-05",
+    "by": "adversarial verification pass (epa_sole_verify.py)",
+    "verdict": "kept as candidate (not counted)",
+    "checks": [
+     "Not counted before or after this pass; no hand check beyond the computed scans below. Status reason: EPA is the only source; EPA is the only source and EPA lists an automatic for this engine in an adjacent year"
     ],
-    "epa_base_models": [
-     "Ranger"
-    ],
-    "epa_model_names": [
-     "Ranger Pickup 2WD",
-     "Ranger Pickup 4WD",
-     "Ranger Pickup Cab Chassis"
-    ],
-    "feed_models_on_lots": {
-     "Ford Ranger": 4
-    },
-    "model_years": [
-     1985,
-     1986,
-     1987
-    ],
-    "engine": {
-     "displacementL": 2.0,
-     "cylinders": 4,
-     "turbo_in_epa_rows": [
-      false
-     ],
-     "supercharger_in_epa_rows": [
-      false
-     ]
-    },
-    "drive": "any (the answer does not depend on drive)",
-    "level": "engine",
-    "conditions": [
-     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
-     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
-     "decoded DisplacementL = 2.0 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
-     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
-    ]
-   },
-   "vin_condition": "none: the rule reads the decoded make/model/year/DisplacementL/EngineCylinders, not a VIN character",
-   "epa_rows": [
-    {
-     "year": 1985,
-     "ids": [
-      710
-     ],
-     "trany": [
-      "Manual 5-spd"
-     ],
-     "names": [
-      "Ranger Pickup 2WD",
-      "Ranger Pickup 4WD",
-      "Ranger Pickup Cab Chassis"
-     ]
-    },
-    {
-     "year": 1986,
-     "ids": [
-      2364
-     ],
-     "trany": [
-      "Manual 5-spd"
-     ],
-     "names": [
-      "Ranger Pickup 2WD",
-      "Ranger Pickup 4WD",
-      "Ranger Pickup Cab Chassis"
-     ]
-    },
-    {
-     "year": 1987,
-     "ids": [
-      28844
-     ],
-     "trany": [
-      "Manual 5-spd"
-     ],
-     "names": [
-      "Ranger Pickup 2WD",
-      "Ranger Pickup 4WD"
-     ]
+    "computed": {
+     "scope_used": {
+      "makes": [
+       "SUBARU"
+      ],
+      "model_names_normalised": [
+       "impreza",
+       "imprezaawd",
+       "imprezaoutbacksport",
+       "imprezawagonawd",
+       "imprezawagonoutbacksportawd",
+       "imprezawrx"
+      ],
+      "years": [
+       "2012",
+       "2013",
+       "2014"
+      ],
+      "displacementL": 2.5,
+      "drive": "any (the answer does not depend on drive)"
+     },
+     "ground_truth_vin_lines_in_scope": 7,
+     "ground_truth_counterexamples": [],
+     "vpic_cache_in_scope": 9,
+     "vpic_cache_transmission_labels": {
+      "manual": 9
+     },
+     "vpic_cache_counterexamples": [],
+     "vin_pattern_collisions": [],
+     "vinless_listing_lines_same_model_years": {},
+     "vinless_listing_note": "model-level only: listings carry no engine/drive, so an 'Automatic' listing of a model that also had other engines is not a counterexample"
     }
-   ],
-   "epa_adjacent_years_other_class": [],
-   "citations": [
-    {
-     "source_id": "ford_ranger_20_1985_1988",
-     "verdict": "contradicts",
-     "years": [
-      1985,
-      1988
-     ],
-     "sources": [
-      {
-       "url": "https://www.therangerstation.com/tech/ford-ranger-manual-transmissions/",
-       "says": "'1985-1988 - Rangers with NON-overdrive automatic trans (essentially 2.0 carb engine ONLY) will be a C-3', i.e. 2.0L Rangers had an automatic, which EPA does not list.",
-       "via": "vin_rules_4.json ford_ranger_20_1985_1987_char8_C"
-      }
-     ],
-     "note": ""
-    },
-    {
-     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
-     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
-     "says": "1985: ids 710 Manual 5-spd; 1986: ids 2364 Manual 5-spd; 1987: ids 28844 Manual 5-spd"
-    }
-   ],
-   "validation": {
-    "ground_truth_checkable": 0,
-    "agree": 0,
-    "disagree": 0,
-    "agreement": null,
-    "checkable_positives_manual": 0,
-    "uniform_auto_lines": 0,
-    "disagree_examples": [],
-    "listing_contaminated": false,
-    "name_conflict_feed_vs_vpic": false
-   },
-   "lot": {
-    "cars": 4,
-    "cars_without_trans_info": 4,
-    "newly_confirmed_manual_counted": 0,
-    "published_manual": 0,
-    "published_non_manual": 0
-   }
-  },
-  {
-   "id": "epa_chevrolet_camaro_2.5l_4cyl_anydrive",
-   "claim": "manual",
-   "status": "drop",
-   "status_by_year": {
-    "1985": "drop"
-   },
-   "status_reason_by_year": {
-    "1985": "an independent source says an automatic was offered"
-   },
-   "years_counted": [],
-   "scope": {
-    "epa_make": [
-     "Chevrolet"
-    ],
-    "epa_base_models": [
-     "Camaro"
-    ],
-    "epa_model_names": [
-     "Camaro"
-    ],
-    "feed_models_on_lots": {
-     "Chevrolet Camaro": 1
-    },
-    "model_years": [
-     1985
-    ],
-    "engine": {
-     "displacementL": 2.5,
-     "cylinders": 4,
-     "turbo_in_epa_rows": [
-      false
-     ],
-     "supercharger_in_epa_rows": [
-      false
-     ]
-    },
-    "drive": "any (the answer does not depend on drive)",
-    "level": "engine",
-    "conditions": [
-     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
-     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
-     "decoded DisplacementL = 2.5 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
-     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
-    ]
-   },
-   "vin_condition": "none: the rule reads the decoded make/model/year/DisplacementL/EngineCylinders, not a VIN character",
-   "epa_rows": [
-    {
-     "year": 1985,
-     "ids": [
-      62
-     ],
-     "trany": [
-      "Manual 5-spd"
-     ],
-     "names": [
-      "Camaro"
-     ]
-    }
-   ],
-   "epa_adjacent_years_other_class": [
-    "1984 id 26615 'Camaro' 2.5L Automatic 4-spd",
-    "1984 id 27732 'Camaro' 2.5L Automatic 4-spd"
-   ],
-   "citations": [
-    {
-     "source_id": "chevrolet_camaro_25_1985",
-     "verdict": "contradicts",
-     "years": [
-      1982,
-      1986
-     ],
-     "sources": [
-      {
-       "url": "https://jalopnik.com/chevrolets-first-four-cylinder-camaro-was-really-bad-1825128229",
-       "says": "The four-cylinder Camaro had a four-speed manual standard and a three-speed automatic at extra cost; 'in 1984, the transmission choices upgraded to a five-speed manual and four-speed auto'. EPA 1985 lists only Manual 5-spd for the 2.5 (id 62): an EPA gap.",
-       "via": "WebSearch result text 2026-11-05"
-      }
-     ],
-     "note": ""
-    },
-    {
-     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
-     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
-     "says": "1985: ids 62 Manual 5-spd"
-    }
-   ],
-   "validation": {
-    "ground_truth_checkable": 0,
-    "agree": 0,
-    "disagree": 0,
-    "agreement": null,
-    "checkable_positives_manual": 0,
-    "uniform_auto_lines": 0,
-    "disagree_examples": [],
-    "listing_contaminated": false,
-    "name_conflict_feed_vs_vpic": false
-   },
-   "lot": {
-    "cars": 1,
-    "cars_without_trans_info": 1,
-    "newly_confirmed_manual_counted": 0,
-    "published_manual": 0,
-    "published_non_manual": 0
    }
   }
  ],
@@ -9906,7 +11763,7 @@
    "yard": "Pick-n-Pull - Richmond",
    "rule": "epa_ford_escape_2.0l_4cyl_anydrive",
    "status": "low_sample",
-   "also_vin_rule_counted": "",
+   "also_vin_rule_counted": "vin_rules_4.json:ford_escape_2001_2004_char8_engine",
    "also_vin_rule_candidate": ""
   },
   {
@@ -9970,7 +11827,7 @@
    "yard": "Pick-n-Pull - Tacoma",
    "rule": "epa_ford_fiesta_1.0l_3cyl_anydrive",
    "status": "low_sample",
-   "also_vin_rule_counted": "",
+   "also_vin_rule_counted": "vin_rules_4.json:ford_fiesta_10_2014_2017_char8_E",
    "also_vin_rule_candidate": ""
   },
   {
@@ -10438,22 +12295,6 @@
    "also_vin_rule_candidate": "vin_rules_5.json:geo_chevrolet_metro_10_1995_1998_char8_6_candidate"
   },
   {
-   "id": "1746-64901",
-   "vin": "2C1MR2267S6737496",
-   "year": 1995,
-   "make": "Geo",
-   "model": "Metro",
-   "trim": "LSi",
-   "engine": "1.0L 3-cyl",
-   "drive": "",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick Your Part - Tulsa",
-   "rule": "epa_geo_metro_1.0l_3cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "",
-   "also_vin_rule_candidate": "vin_rules_5.json:geo_chevrolet_metro_10_1995_1998_char8_6_candidate"
-  },
-  {
    "id": "7946941",
    "vin": "2C1MR2269S6779653",
    "year": 1995,
@@ -10610,7 +12451,7 @@
    "yard": "Foss U-Pull-It - Jacksonville",
    "rule": "epa_isuzu_rodeo_2.6l_4cyl_anydrive",
    "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_1991_1997_char8",
+   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_lineG_1991_1995_char8",
    "also_vin_rule_candidate": ""
   },
   {
@@ -10626,7 +12467,7 @@
    "yard": "Pull-A-Part - Atlanta South",
    "rule": "epa_isuzu_rodeo_2.6l_4cyl_anydrive",
    "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_1991_1997_char8",
+   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_lineG_1991_1995_char8",
    "also_vin_rule_candidate": ""
   },
   {
@@ -10642,7 +12483,7 @@
    "yard": "RG Pick-a-Part - Anthony",
    "rule": "epa_isuzu_rodeo_2.6l_4cyl_anydrive",
    "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_1991_1997_char8",
+   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_lineG_1991_1995_char8",
    "also_vin_rule_candidate": ""
   },
   {
@@ -10658,7 +12499,7 @@
    "yard": "Pick Your Part - Help Yourself",
    "rule": "epa_isuzu_rodeo_2.6l_4cyl_anydrive",
    "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_1991_1997_char8",
+   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_lineK_1995_1997_char8",
    "also_vin_rule_candidate": ""
   },
   {
@@ -10674,7 +12515,7 @@
    "yard": "BYOT Auto Parts - Waco",
    "rule": "epa_isuzu_rodeo_2.6l_4cyl_anydrive",
    "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_1991_1997_char8",
+   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_lineK_1995_1997_char8",
    "also_vin_rule_candidate": ""
   },
   {
@@ -10690,55 +12531,7 @@
    "yard": "195 Used Auto Parts",
    "rule": "epa_isuzu_rodeo_2.6l_4cyl_anydrive",
    "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_1991_1997_char8",
-   "also_vin_rule_candidate": ""
-  },
-  {
-   "id": "1208-72952",
-   "vin": "1J4FK48163W646549",
-   "year": 2003,
-   "make": "Jeep",
-   "model": "Liberty",
-   "trim": "Sport/Freedom",
-   "engine": "2.4L 4-cyl",
-   "drive": "4x2",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick Your Part - Mount Airy",
-   "rule": "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_6.json:jeep_liberty_24_2003_2005_char8_1",
-   "also_vin_rule_candidate": ""
-  },
-  {
-   "id": "7969622",
-   "vin": "1J4GL48173W608457",
-   "year": 2003,
-   "make": "Jeep",
-   "model": "Liberty",
-   "trim": "Sport/Freedom",
-   "engine": "2.4L 4-cyl",
-   "drive": "4x2",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Modesto",
-   "rule": "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_6.json:jeep_liberty_24_2003_2005_char8_1",
-   "also_vin_rule_candidate": ""
-  },
-  {
-   "id": "STK101791",
-   "vin": "1J4FK48154W319450",
-   "year": 2004,
-   "make": "Jeep",
-   "model": "Liberty",
-   "trim": "Sport",
-   "engine": "2.4L 4-cyl",
-   "drive": "4x2",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Tear-A-Part - Ogden",
-   "rule": "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_6.json:jeep_liberty_24_2003_2005_char8_1",
+   "also_vin_rule_counted": "vin_rules_1.json:isuzu_rodeo_26_4x2_lineK_1995_1997_char8",
    "also_vin_rule_candidate": ""
   },
   {
@@ -11110,22 +12903,6 @@
    "also_vin_rule_candidate": ""
   },
   {
-   "id": "pap-33-1028331-1",
-   "vin": "1J4FA29145P366955",
-   "year": 2005,
-   "make": "Jeep",
-   "model": "Wrangler",
-   "trim": "SE",
-   "engine": "2.4L 4-cyl",
-   "drive": "4WD/4-Wheel Drive/4x4",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-A-Part - West Palm Beach",
-   "rule": "epa_jeep_wrangler_tj_2.4l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_6.json:jeep_wrangler_tj_24_2005_2006_char8_1",
-   "also_vin_rule_candidate": ""
-  },
-  {
    "id": "7923818",
    "vin": "KNDJE724X67233592",
    "year": 2006,
@@ -11334,102 +13111,6 @@
    "also_vin_rule_candidate": ""
   },
   {
-   "id": "aesop-tulsa-stk030100",
-   "vin": "1ZWFT603015613537",
-   "year": 2001,
-   "make": "Mercury",
-   "model": "Cougar",
-   "trim": "I4",
-   "engine": "2.0L 4-cyl",
-   "drive": "",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "AESOP U-Pull - Tulsa",
-   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "also_vin_rule_candidate": ""
-  },
-  {
-   "id": "7940249",
-   "vin": "1ZWFT603125621261",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "trim": "I4",
-   "engine": "2.0L 4-cyl",
-   "drive": "",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Kansas City (Winner Rd)",
-   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "also_vin_rule_candidate": ""
-  },
-  {
-   "id": "7992656",
-   "vin": "1ZWFT603425602848",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "trim": "I4",
-   "engine": "2.0L 4-cyl",
-   "drive": "",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Rancho Cordova",
-   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "also_vin_rule_candidate": ""
-  },
-  {
-   "id": "byot-bmt028200",
-   "vin": "1ZWFT603125608882",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "trim": "I4",
-   "engine": "2.0L 4-cyl",
-   "drive": "",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "BYOT Auto Parts - Beaumont",
-   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "also_vin_rule_candidate": ""
-  },
-  {
-   "id": "pap-13-1091583-1",
-   "vin": "1ZWFT603925607141",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "trim": "I4",
-   "engine": "2.0L 4-cyl",
-   "drive": "",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-A-Part - Montgomery",
-   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "also_vin_rule_candidate": ""
-  },
-  {
-   "id": "upullpocatello-pocatello-stk013289",
-   "vin": "1ZWFT603225612522",
-   "year": 2002,
-   "make": "Mercury",
-   "model": "Cougar",
-   "trim": "I4",
-   "engine": "2.0L 4-cyl",
-   "drive": "",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "U Pull Auto Parts - Pocatello",
-   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
-   "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3",
-   "also_vin_rule_candidate": ""
-  },
-  {
    "id": "7969108",
    "vin": "1N6DD21Y9WC351130",
    "year": 1998,
@@ -11442,7 +13123,7 @@
    "yard": "Pick-n-Pull - Portland South",
    "rule": "epa_nissan_frontier_2.4l_xcyl_4wd",
    "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_2.json:nissan_frontier_ka24de_4wd_1998_2000",
+   "also_vin_rule_counted": "vin_rules_2.json:nissan_frontier_ka24de_4wd_1998",
    "also_vin_rule_candidate": ""
   },
   {
@@ -11458,7 +13139,7 @@
    "yard": "Fenix U-Pull - Binghamton",
    "rule": "epa_nissan_frontier_2.4l_xcyl_4wd",
    "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_2.json:nissan_frontier_ka24de_4wd_1998_2000",
+   "also_vin_rule_counted": "vin_rules_2.json:nissan_frontier_ka24de_4wd_1998",
    "also_vin_rule_candidate": ""
   },
   {
@@ -11474,7 +13155,7 @@
    "yard": "Pull-A-Part - Winston-Salem",
    "rule": "epa_nissan_frontier_2.4l_xcyl_4wd",
    "status": "low_sample",
-   "also_vin_rule_counted": "vin_rules_2.json:nissan_frontier_ka24de_4wd_1998_2000",
+   "also_vin_rule_counted": "vin_rules_2.json:nissan_frontier_ka24de_4wd_1998",
    "also_vin_rule_candidate": ""
   },
   {
@@ -11538,7 +13219,7 @@
    "yard": "Pick Your Part - Fontana",
    "rule": "epa_nissan_xterra_2.4l_xcyl_anydrive",
    "status": "low_sample",
-   "also_vin_rule_counted": "",
+   "also_vin_rule_counted": "vin_rules_2.json:nissan_xterra_ka24de_2000_2004",
    "also_vin_rule_candidate": ""
   },
   {
@@ -13365,7 +15046,7 @@
    "rule": "epa_isuzu_pickup_2.3l_4cyl_anydrive",
    "status": "candidate",
    "also_vin_rule_counted": "",
-   "also_vin_rule_candidate": ""
+   "also_vin_rule_candidate": "vin_rules_1.json:isuzu_4zd1_23_4x2_1988_1995_char8"
   },
   {
    "id": "1163-48494",
@@ -13493,7 +15174,7 @@
    "rule": "epa_isuzu_pickup_2.3l_4cyl_anydrive",
    "status": "candidate",
    "also_vin_rule_counted": "",
-   "also_vin_rule_candidate": ""
+   "also_vin_rule_candidate": "vin_rules_1.json:isuzu_4zd1_23_4x2_1988_1995_char8"
   },
   {
    "id": "vinplus-texarkana-stk027249",
@@ -13720,6 +15401,70 @@
    "also_vin_rule_candidate": "vin_rules_6.json:jeep_cherokee_xj_25_1991_1993_char8_P"
   },
   {
+   "id": "1208-72952",
+   "vin": "1J4FK48163W646549",
+   "year": 2003,
+   "make": "Jeep",
+   "model": "Liberty",
+   "trim": "Sport/Freedom",
+   "engine": "2.4L 4-cyl",
+   "drive": "4x2",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Mount Airy",
+   "rule": "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive",
+   "status": "drop",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": ""
+  },
+  {
+   "id": "7969622",
+   "vin": "1J4GL48173W608457",
+   "year": 2003,
+   "make": "Jeep",
+   "model": "Liberty",
+   "trim": "Sport/Freedom",
+   "engine": "2.4L 4-cyl",
+   "drive": "4x2",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Modesto",
+   "rule": "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive",
+   "status": "drop",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": ""
+  },
+  {
+   "id": "STK101791",
+   "vin": "1J4FK48154W319450",
+   "year": 2004,
+   "make": "Jeep",
+   "model": "Liberty",
+   "trim": "Sport",
+   "engine": "2.4L 4-cyl",
+   "drive": "4x2",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Tear-A-Part - Ogden",
+   "rule": "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive",
+   "status": "drop",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": ""
+  },
+  {
+   "id": "pap-33-1028331-1",
+   "vin": "1J4FA29145P366955",
+   "year": 2005,
+   "make": "Jeep",
+   "model": "Wrangler",
+   "trim": "SE",
+   "engine": "2.4L 4-cyl",
+   "drive": "4WD/4-Wheel Drive/4x4",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - West Palm Beach",
+   "rule": "epa_jeep_wrangler_tj_2.4l_4cyl_anydrive",
+   "status": "drop",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": ""
+  },
+  {
    "id": "1239-98069",
    "vin": "KNDJB7233T5525477",
    "year": 1996,
@@ -13766,6 +15511,102 @@
    "status": "candidate",
    "also_vin_rule_counted": "",
    "also_vin_rule_candidate": ""
+  },
+  {
+   "id": "aesop-tulsa-stk030100",
+   "vin": "1ZWFT603015613537",
+   "year": 2001,
+   "make": "Mercury",
+   "model": "Cougar",
+   "trim": "I4",
+   "engine": "2.0L 4-cyl",
+   "drive": "",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "AESOP U-Pull - Tulsa",
+   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
+   "status": "candidate",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3"
+  },
+  {
+   "id": "7940249",
+   "vin": "1ZWFT603125621261",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "trim": "I4",
+   "engine": "2.0L 4-cyl",
+   "drive": "",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Kansas City (Winner Rd)",
+   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
+   "status": "candidate",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3"
+  },
+  {
+   "id": "7992656",
+   "vin": "1ZWFT603425602848",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "trim": "I4",
+   "engine": "2.0L 4-cyl",
+   "drive": "",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Rancho Cordova",
+   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
+   "status": "candidate",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3"
+  },
+  {
+   "id": "byot-bmt028200",
+   "vin": "1ZWFT603125608882",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "trim": "I4",
+   "engine": "2.0L 4-cyl",
+   "drive": "",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "BYOT Auto Parts - Beaumont",
+   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
+   "status": "candidate",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3"
+  },
+  {
+   "id": "pap-13-1091583-1",
+   "vin": "1ZWFT603925607141",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "trim": "I4",
+   "engine": "2.0L 4-cyl",
+   "drive": "",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Montgomery",
+   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
+   "status": "candidate",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3"
+  },
+  {
+   "id": "upullpocatello-pocatello-stk013289",
+   "vin": "1ZWFT603225612522",
+   "year": 2002,
+   "make": "Mercury",
+   "model": "Cougar",
+   "trim": "I4",
+   "engine": "2.0L 4-cyl",
+   "drive": "",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "U Pull Auto Parts - Pocatello",
+   "rule": "epa_mercury_cougar_2.0l_4cyl_anydrive",
+   "status": "candidate",
+   "also_vin_rule_counted": "",
+   "also_vin_rule_candidate": "vin_rules_4.json:mercury_cougar_i4_2001_2002_series_60_char8_3"
   },
   {
    "id": "7959029",
@@ -41484,5 +43325,458 @@
     ]
    ]
   ]
- }
+ },
+ "refuted_rules": [
+  {
+   "id": "epa_ford_ranger_2.0l_4cyl_anydrive",
+   "previous_status": "drop",
+   "scope": {
+    "epa_make": [
+     "Ford"
+    ],
+    "epa_base_models": [
+     "Ranger"
+    ],
+    "epa_model_names": [
+     "Ranger Pickup 2WD",
+     "Ranger Pickup 4WD",
+     "Ranger Pickup Cab Chassis"
+    ],
+    "feed_models_on_lots": {
+     "Ford Ranger": 4
+    },
+    "model_years": [
+     1985,
+     1986,
+     1987
+    ],
+    "engine": {
+     "displacementL": 2.0,
+     "cylinders": 4,
+     "turbo_in_epa_rows": [
+      false
+     ],
+     "supercharger_in_epa_rows": [
+      false
+     ]
+    },
+    "drive": "any (the answer does not depend on drive)",
+    "level": "engine",
+    "conditions": [
+     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
+     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
+     "decoded DisplacementL = 2.0 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
+     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
+    ]
+   },
+   "epa_rows": [
+    {
+     "year": 1985,
+     "ids": [
+      710
+     ],
+     "trany": [
+      "Manual 5-spd"
+     ],
+     "names": [
+      "Ranger Pickup 2WD",
+      "Ranger Pickup 4WD",
+      "Ranger Pickup Cab Chassis"
+     ]
+    },
+    {
+     "year": 1986,
+     "ids": [
+      2364
+     ],
+     "trany": [
+      "Manual 5-spd"
+     ],
+     "names": [
+      "Ranger Pickup 2WD",
+      "Ranger Pickup 4WD",
+      "Ranger Pickup Cab Chassis"
+     ]
+    },
+    {
+     "year": 1987,
+     "ids": [
+      28844
+     ],
+     "trany": [
+      "Manual 5-spd"
+     ],
+     "names": [
+      "Ranger Pickup 2WD",
+      "Ranger Pickup 4WD"
+     ]
+    }
+   ],
+   "citations": [
+    {
+     "source_id": "ford_ranger_20_1985_1988",
+     "verdict": "contradicts",
+     "years": [
+      1985,
+      1988
+     ],
+     "sources": [
+      {
+       "url": "https://www.therangerstation.com/tech/ford-ranger-manual-transmissions/",
+       "says": "'1985-1988 - Rangers with NON-overdrive automatic trans (essentially 2.0 carb engine ONLY) will be a C-3', i.e. 2.0L Rangers had an automatic, which EPA does not list.",
+       "via": "vin_rules_4.json ford_ranger_20_1985_1987_char8_C"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
+     "says": "1985: ids 710 Manual 5-spd; 1986: ids 2364 Manual 5-spd; 1987: ids 28844 Manual 5-spd"
+    }
+   ],
+   "why": "Already dropped by the builder: The Ranger Station says 1985-1988 2.0 L Rangers had the C3 automatic, which EPA does not list.",
+   "lot_cars_affected_without_trans_info": 4,
+   "removed_on": "2026-11-05"
+  },
+  {
+   "id": "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive",
+   "previous_status": "drop",
+   "scope": {
+    "epa_make": [
+     "Jeep"
+    ],
+    "epa_base_models": [
+     "Liberty/Cherokee"
+    ],
+    "epa_model_names": [
+     "Liberty/Cherokee 2WD",
+     "Liberty/Cherokee 4WD"
+    ],
+    "feed_models_on_lots": {
+     "Jeep Liberty": 3
+    },
+    "model_years": [
+     2003,
+     2004
+    ],
+    "engine": {
+     "displacementL": 2.4,
+     "cylinders": 4,
+     "turbo_in_epa_rows": [
+      false
+     ],
+     "supercharger_in_epa_rows": [
+      false
+     ]
+    },
+    "drive": "any (the answer does not depend on drive)",
+    "level": "engine",
+    "conditions": [
+     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
+     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
+     "decoded DisplacementL = 2.4 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
+     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
+    ]
+   },
+   "epa_rows": [
+    {
+     "year": 2003,
+     "ids": [
+      19076,
+      19188
+     ],
+     "trany": [
+      "Manual 5-spd"
+     ],
+     "names": [
+      "Liberty/Cherokee 2WD",
+      "Liberty/Cherokee 4WD"
+     ]
+    },
+    {
+     "year": 2004,
+     "ids": [
+      20201,
+      20314
+     ],
+     "trany": [
+      "Manual 5-spd"
+     ],
+     "names": [
+      "Liberty/Cherokee 2WD",
+      "Liberty/Cherokee 4WD"
+     ]
+    }
+   ],
+   "citations": [
+    {
+     "source_id": "jeep_liberty_24_2003_2005",
+     "verdict": "contradicts",
+     "years": [
+      2003,
+      2005
+     ],
+     "sources": [
+      {
+       "url": "https://www.autoblog.com/buy/2004-Jeep-Liberty/review/",
+       "says": "Autoblog 2004: 'The four-cylinder engine is only available with a five-speed manual gearbox'; Autoblog 2002: four-cylinder only with the five-speed manual.",
+       "via": "vin_rules_6.json jeep_liberty_24_2003_2005_char8_1"
+      },
+      {
+       "url": "https://wikiwand.com/en/articles/Jeep_Liberty_(KJ)",
+       "says": "Wikipedia 'Jeep Liberty (KJ)' (wikiwand mirror): 'some fleet Liberties used a 2.4L I4 Engine that produced about 150 horsepower with a 4-Speed Automatic Transmission'.",
+       "via": "vin_rules_6.json refuted_rules jeep_liberty_24_2003_2005_char8_1 (search-result text)",
+       "verdict": "contradicts"
+      },
+      {
+       "url": "https://www.cars.com/articles/2004-jeep-liberty-whats-new-1420687138026/",
+       "says": "Cars.com 2004: 'Each engine teams with a four-speed-automatic or five-speed-manual transmission'.",
+       "via": "vin_rules_6.json refuted_rules jeep_liberty_24_2003_2005_char8_1 (search-result text)",
+       "verdict": "contradicts"
+      }
+     ],
+     "note": "REFUTED by verification: Wikipedia reports fleet 2.4L Liberties with a 4-speed automatic, and Cars.com 2004 says each engine teams with either transmission. Fleet builds carry the same engine code and EPA names, so the decode cannot exclude them. Earlier note: Cars.com 2004 uses generic wording ('each engine teams with a four-speed-automatic or five-speed-manual'); the Chrysler worklist took Autoblog's explicit statement and EPA over it. Same reading here."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
+     "says": "2003: ids 19076,19188 Manual 5-spd; 2004: ids 20201,20314 Manual 5-spd"
+    }
+   ],
+   "why": "Refuted in verification: Wikipedia 'Jeep Liberty (KJ)' reports fleet 2.4 L Liberties with a 4-speed automatic and Cars.com 2004 says each engine teams with either transmission. Fleet builds carry the same engine code, so the decode cannot exclude them (vin_rules_6 removed its matching VIN rule for the same reason). 3 lot cars lose the proposed Manual label.",
+   "lot_cars_affected_without_trans_info": 3,
+   "removed_on": "2026-11-05"
+  },
+  {
+   "id": "epa_chevrolet_camaro_2.5l_4cyl_anydrive",
+   "previous_status": "drop",
+   "scope": {
+    "epa_make": [
+     "Chevrolet"
+    ],
+    "epa_base_models": [
+     "Camaro"
+    ],
+    "epa_model_names": [
+     "Camaro"
+    ],
+    "feed_models_on_lots": {
+     "Chevrolet Camaro": 1
+    },
+    "model_years": [
+     1985
+    ],
+    "engine": {
+     "displacementL": 2.5,
+     "cylinders": 4,
+     "turbo_in_epa_rows": [
+      false
+     ],
+     "supercharger_in_epa_rows": [
+      false
+     ]
+    },
+    "drive": "any (the answer does not depend on drive)",
+    "level": "engine",
+    "conditions": [
+     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
+     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
+     "decoded DisplacementL = 2.5 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
+     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
+    ]
+   },
+   "epa_rows": [
+    {
+     "year": 1985,
+     "ids": [
+      62
+     ],
+     "trany": [
+      "Manual 5-spd"
+     ],
+     "names": [
+      "Camaro"
+     ]
+    }
+   ],
+   "citations": [
+    {
+     "source_id": "chevrolet_camaro_25_1985",
+     "verdict": "contradicts",
+     "years": [
+      1982,
+      1986
+     ],
+     "sources": [
+      {
+       "url": "https://jalopnik.com/chevrolets-first-four-cylinder-camaro-was-really-bad-1825128229",
+       "says": "The four-cylinder Camaro had a four-speed manual standard and a three-speed automatic at extra cost; 'in 1984, the transmission choices upgraded to a five-speed manual and four-speed auto'. EPA 1985 lists only Manual 5-spd for the 2.5 (id 62): an EPA gap.",
+       "via": "WebSearch result text 2026-11-05"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
+     "says": "1985: ids 62 Manual 5-spd"
+    }
+   ],
+   "why": "Already dropped by the builder: a source says the 1985 Camaro 2.5 L had an automatic, which EPA does not list.",
+   "lot_cars_affected_without_trans_info": 1,
+   "removed_on": "2026-11-05"
+  },
+  {
+   "id": "epa_jeep_wrangler_tj_2.4l_4cyl_anydrive",
+   "previous_status": "drop",
+   "scope": {
+    "epa_make": [
+     "Jeep"
+    ],
+    "epa_base_models": [
+     "Wrangler/TJ"
+    ],
+    "epa_model_names": [
+     "Wrangler/TJ 4WD"
+    ],
+    "feed_models_on_lots": {
+     "Jeep Wrangler": 1
+    },
+    "model_years": [
+     2005
+    ],
+    "engine": {
+     "displacementL": 2.4,
+     "cylinders": 4,
+     "turbo_in_epa_rows": [
+      false
+     ],
+     "supercharger_in_epa_rows": [
+      false
+     ]
+    },
+    "drive": "any (the answer does not depend on drive)",
+    "level": "engine",
+    "conditions": [
+     "the car's own vPIC decode (cache backup) gives make, model and ModelYear; ModelYear equals the listing year",
+     "EPA rows = union of every row whose model/baseModel answers to the feed model or the vPIC model name, under the feed or vPIC make",
+     "decoded DisplacementL = 2.4 (+/-0.05) and EngineCylinders = 4; every EPA row for that engine is a manual",
+     "not heavy duty; no neighbouring EPA engine (0.15 L) or sibling EPA name of the other class; engine (and drive, when it matters) shown to be VIN-specific in vPIC"
+    ]
+   },
+   "epa_rows": [
+    {
+     "year": 2005,
+     "ids": [
+      21423
+     ],
+     "trany": [
+      "Manual 6-spd"
+     ],
+     "names": [
+      "Wrangler/TJ 4WD"
+     ]
+    }
+   ],
+   "citations": [
+    {
+     "source_id": "jeep_wrangler_tj_24_2005_2006",
+     "verdict": "contradicts",
+     "years": [
+      2005,
+      2006
+     ],
+     "sources": [
+      {
+       "url": "https://www.quadratec.com/jeep_knowledgebase/article-102.htm",
+       "says": "Quadratec's 2005-2006 table lists the 2.4L (SE) with a six-speed manual only; DriveClean lists the 2005 and 2006 2.4L only as manual.",
+       "via": "vin_rules_6.json jeep_wrangler_tj_24_2005_2006_char8_1"
+      },
+      {
+       "url": "https://www.extremeterrain.com/jeep-wrangler-transmissions-through-the-years.html",
+       "says": "Table lists for the TJ '2.4 I-4 4-Spd 42RLE Auto (2003-2006)'.",
+       "via": "vin_rules_6.json refuted_rules jeep_wrangler_tj_24_2005_2006_char8_1 (search-result text)",
+       "verdict": "contradicts"
+      },
+      {
+       "url": "https://www.autoblog.com/buy/2005-Jeep-Wrangler-SE__2dr_4x4/",
+       "says": "Autoblog 2005 Wrangler: a four-speed automatic 'was available on all models' (SE = the 2.4L trim).",
+       "via": "vin_rules_6.json refuted_rules (search-result text)",
+       "verdict": "contradicts"
+      },
+      {
+       "url": "https://jeepspecs.com/?p=17561",
+       "says": "JeepSpecs 2005 Wrangler: the 2.4L 'available with either a four-speed automatic or a six-speed manual transmission'.",
+       "via": "vin_rules_6.json refuted_rules; WebSearch result text 2026-11-05",
+       "verdict": "contradicts"
+      },
+      {
+       "url": "https://rockcrawler.com/features/newsshorts/04september/jeep_2005_tj_overview.asp",
+       "says": "Rockcrawler 2005 Wrangler overview (press-kit reprint): the 2.4-liter in the SE 'is available with the six-speed manual transmission only'.",
+       "via": "WebSearch result text 2026-11-05",
+       "verdict": "supports"
+      }
+     ],
+     "note": "REFUTED by verification: three text sources say a 42RLE automatic was offered with the 2.4L in 2005-2006; Rockcrawler's reprint of the 2005 press material and Quadratec/DriveClean say 2.4L = six-speed only. A source says an automatic was offered, so the rule is dropped. Earlier note: MY2003-2004 2.4L Wranglers had a 4-speed automatic (EPA 19191, 20317)."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa0343...)",
+     "says": "2005: ids 21423 Manual 6-spd"
+    }
+   ],
+   "why": "Refuted in verification: Extreme Terrain ('2.4 I-4 4-Spd 42RLE Auto (2003-2006)'), Autoblog 2005 (automatic 'available on all models') and JeepSpecs 2005 say an automatic was offered with the 2.4 L in 2005-2006. Rockcrawler's press-kit reprint and Quadratec say six-speed only, so the sources conflict and EPA's missing row is not proof. 1 lot car loses the proposed Manual label.",
+   "lot_cars_affected_without_trans_info": 1,
+   "removed_on": "2026-11-05"
+  }
+ ],
+ "verification": {
+  "on": "2026-11-05",
+  "script": "scraper/manual_detect/epa_sole_verify.py (run after epa_sole.py)",
+  "method": [
+   "Re-opened each counted rule's citations (WebFetch could not resolve consumerguide.com or other outside hosts from this session, so text came from WebSearch result text and from sibling worklists that read the pages).",
+   "Searched the web for statements that the other transmission was offered (Caliber 1.8, GTI VR6, Tribute 2.0, Rodeo 2.6, Sportage 2.0 4WD, Cougar 2.0, Wrangler TJ 2.4).",
+   "Re-read every EPA row of each rule's model names for the rule years and the years either side.",
+   "Re-decoded sample lot VINs live with vPIC DecodeVinValues (vpic.nhtsa.dot.gov reachable).",
+   "Scanned ground_truth.jsonl and the vPIC decode cache for in-scope cars with the other transmission and for VIN patterns whose decoded displacement varies (computed per rule, rerun each time).",
+   "Cross-checked the sibling VIN-rule worklists' later verification passes (vin_rules_2/4/5/6), which removed or demoted rules covering the same cars."
+  ],
+  "outcome": {
+   "refuted_and_removed": [
+    "epa_jeep_liberty_cherokee_2.4l_4cyl_anydrive (3 lot cars)",
+    "epa_jeep_wrangler_tj_2.4l_4cyl_anydrive (1 lot car)"
+   ],
+   "previously_dropped_moved_to_refuted_rules": [
+    "epa_ford_ranger_2.0l_4cyl_anydrive",
+    "epa_chevrolet_camaro_2.5l_4cyl_anydrive"
+   ],
+   "demoted_to_candidate": [
+    "epa_mercury_cougar_2.0l_4cyl_anydrive (6 lot cars)"
+   ],
+   "narrowed": "none beyond the above; Frontier stays MY1998 only; scope edges (Mazdaspeed3 2012 BL1L3 codes, Escape 2001 XLT with code B, Metro code-6 collision note) checked and held",
+   "rules_needing_review_from_computed_scans": []
+  },
+  "counted_rules_ground_truth": {
+   "per_counted_combination": {
+    "checkable": 4,
+    "agree": 4,
+    "disagree": 0,
+    "precision": 1.0
+   },
+   "summed_over_counted_rules_all_years": {
+    "checkable": 5,
+    "agree": 5,
+    "disagree": 0
+   },
+   "note": "the per-rule sum includes ground-truth cars in a counted rule's non-counted years"
+  },
+  "not_done": [
+   "consumerguide.com, wikipedia.org and other outside hosts were not reachable with WebFetch; quotes rest on search-result text or on sibling worklists' reads.",
+   "No pre-2005 manufacturer VIN filing was re-read in this pass (sibling verifiers re-read several).",
+   "Candidate rules (not counted) got only the computed scans."
+  ],
+  "inventory_note": "epa_sole.py was re-run on the current inventory before this pass; inventory drift moved one Geo Metro off the lots (10 -> 9)."
+ },
+ "generated_utc_verified": "2026-11-05T18:06:31Z"
 }

@@ -22,7 +22,7 @@
  "answer": {
   "Dodge": "NOT ENCODED on US-market VINs, MY1981 to today. Every Chrysler/DaimlerChrysler/FCA filing read (MY1989-1993, 2001-2009, 2013, 2015-2027 text layers searched) uses 4 restraint (cars) or GVWR+brakes (trucks), 5 line, 6 series, 7 body, 8 engine (FCA 2011+: 5-7 brand/line/series/drive/body, 8 engine). The only transmission character is for export VINs: position 6 carries a transmission letter on 'Europe Only' vehicles (MY1993 car table: A 3-spd auto, B 4-spd auto, C 6-spd manual, M 4-spd manual, N 5-spd manual) and on BUX vehicles with sales code ABB/YAB (MY2006-2009: B 4-spd auto, E 5-spd auto, F/H 6-spd auto, G CVT, N 5-spd manual, C 6-spd manual). No lot car carries such a VIN. Manual-only engine codes ruled: Caliber 1.8L (C, 2007-2009), Caliber SRT4 (F, 2008-2009), Neon SRT-4 (S, 2003-2005). Candidates (not counted): Dakota 2.5L (G 1990-1995, P 1996-2002), Ram HD High Output Cummins (7 in 2001, C in 2002).",
   "Chrysler": "NOT ENCODED (same Chrysler scheme). No Chrysler-brand engine or series code on the lots is manual-only: PT Cruiser GT turbo, Crossfire, Sebring/Stratus coupes and Neon all had both transmissions or no lot car; everything else (300, 200, Town & Country, Pacifica, Sebring sedan, Concorde, LHS) was automatic-only. Lot cars the feed files as 'Chrysler Caliber/Dart' carry Dodge WMIs and fall under the Dodge rules.",
-  "Jeep": "ENCODED for AMC-era VINs, MY1981-1988 (WMI 1JC/1JT/2BC/2CC): position 4 = engine, position 5 = transmission (Jeep Corporation filings 01-22-N11B-1748 and -1794: H 4-spd manual, N 5-spd manual, S 4-spd manual, W 5-spd manual, J automatic column, D automatic floor). NOT ENCODED from MY1989 (Chrysler format) and on FCA Italy Renegades. Engine-code rules: Wrangler YJ 2.5L (E 1989-1990, P 1991-1993), Wrangler TJ 2.4L (1, 2005-2006), Liberty 2.4L (1, 2003-2005), Renegade 1.4 turbo manual / 2.4 automatic (2015-2018). Candidates: AMC letters known only from vPIC (L, M, V manual; A, B, E, R, T, U automatic), Liberty 2.4L 2002 (no EPA row), Cherokee XJ 2.5L 1991-1993 (contradicted).",
+  "Jeep": "ENCODED for AMC-era VINs, MY1981-1988 (WMI 1JC/1JT/2BC/2CC): position 4 = engine, position 5 = transmission (Jeep Corporation filings 01-22-N11B-1748 and -1794: H 4-spd manual, N 5-spd manual, S 4-spd manual, W 5-spd manual, J automatic column, D automatic floor). NOT ENCODED from MY1989 (Chrysler format) and on FCA Italy Renegades. Engine-code rules: Wrangler YJ 2.5L (E 1989-1990, P 1991-1993), Renegade 1.4 turbo manual / 2.4 automatic (2015-2018). Candidates: AMC letters known only from vPIC (L, M, V manual; A, B, E, R, T, U automatic), Liberty 2.4L 2002 (no EPA row), Cherokee XJ 2.5L 1991-1993 (contradicted). Adversarial check 2026-11-05 removed the Wrangler TJ 2.4L 2005-2006 and Liberty 2.4L 2003-2005 rules (automatic reported with the 2.4L: Extreme Terrain/Autoblog/JeepSpecs for the TJ, Wikipedia fleet Liberties for the KJ).",
   "Ram": "NOT ENCODED (FCA scheme; ProMaster City uses the FCA Italy scheme). No Ram-brand engine code is manual-only: the HD 6.7 Cummins and 5.7 had the G56 manual and automatics on the same engine codes; ProMaster/ProMaster City were automatic-only.",
   "Plymouth": "NOT ENCODED (Chrysler scheme). No Plymouth engine code on the lots is manual-only. The 1990 Laser RS Turbo (2 lot cars, EPA manual-only) is a Diamond-Star (Mitsubishi) build whose VIN codes are in Mitsubishi's filings, so it is left to the Mitsubishi worklist.",
   "Fiat": "NOT ENCODED (Chrysler Group/FCA Mexico 3C3 and FCA Italy ZFB schemes). Series/engine rule: Fiat 500 Abarth (series F/J) and 500T Sport (series H) with the 1.4 turbo (H), MY2012-2014. Candidate: 500X 1.4 turbo (contradicted; no lot car). 500L 1.4 turbo had manual, DDCT and automatic on the same code."
@@ -142,20 +142,18 @@
   }
  ],
  "summary": {
-  "rules": 16,
+  "rules": 14,
   "rules_by_status": {
-   "low_sample": 9,
+   "low_sample": 7,
    "candidate": 6,
    "drop": 1
   },
-  "newly_confirmed_manual_keep_and_low_sample_rules": 71,
+  "newly_confirmed_manual_keep_and_low_sample_rules": 66,
   "newly_confirmed_manual_candidate_rules_only": 55,
   "newly_confirmed_manual_by_rule": {
    "jeep_amc_1984_1988_char5_transmission": 0,
    "jeep_amc_1981_1988_char5_vpic_only_codes": 6,
    "jeep_wrangler_yj_25_1989_1993_char8": 17,
-   "jeep_wrangler_tj_24_2005_2006_char8_1": 1,
-   "jeep_liberty_24_2003_2005_char8_1": 4,
    "jeep_liberty_24_2002_char8_1": 3,
    "jeep_cherokee_xj_25_1991_1993_char8_P": 1,
    "jeep_renegade_14t_2015_2018_char8_H_W": 4,
@@ -171,7 +169,7 @@
   "newly_confirmed_manual_by_feed_make": {
    "Dodge": 38,
    "Fiat": 5,
-   "Jeep": 26,
+   "Jeep": 21,
    "Chrysler": 2
   },
   "newly_labelled_non_manual_keep_and_low_sample_rules": 0,
@@ -224,7 +222,7 @@
     "no_trans_info": 9878,
     "vin17": 8248,
     "covered_by_rule": 190,
-    "newly_confirmed_manual_counted": 26,
+    "newly_confirmed_manual_counted": 21,
     "newly_confirmed_manual_candidate_rules_only": 10,
     "newly_labelled_non_manual_counted": 0
    },
@@ -288,6 +286,19 @@
     "listing:automatic": 6,
     "vin:automatic": 3
    }
+  },
+  "adversarial_verification": {
+   "checked_utc": "2026-11-05",
+   "rules_removed": [
+    "jeep_liberty_24_2003_2005_char8_1",
+    "jeep_wrangler_tj_24_2005_2006_char8_1"
+   ],
+   "rules_narrowed": [
+    "fiat_500_turbo_2012_2014_series_FHJ_char8_H"
+   ],
+   "newly_confirmed_manual_before": 71,
+   "newly_confirmed_manual_after": 66,
+   "note": "Hand edit after generation: rerunning vin_rules_6.py will restore the removed rules unless the generator is changed to match."
   }
  },
  "validation_method": "Every lot car with a rule WMI, a 17-character VIN and a valid check digit is classified. The model year comes from VIN character 10 (the listing year only picks the 30-year cycle and must be within 2 years). A rule fires only when the VIN matches its WMI, years and fixed characters and its decision character is in its table for that year; other codes get no claim. Ground truth = scraper/manual_detect/ground_truth.jsonl; uniformCell lines are unlabelled, speeds-only lines are excluded, the rest are checkable: agree means (truth is manual) == (rule says manual). This family's VIN ground truth is almost all vPIC decodes of MY2017+ cars and AMC-era Jeeps (vPIC gives no Chrysler-format transmission before then) plus VIN-less listing lines, so only the AMC rules and the Renegade rule have checkable cars, and those are vPIC-derived (partly circular). Independent checks: (1) epa_rows, the EPA rows for the rule's exact model/engine (row ids; all must be the claimed class and every rule year must have a row); (2) a per-car EPA union check (year, the rule's make, feed/vPIC model names, vPIC displacement). Status: candidate (not counted) when flagged (transmission evidence contradicted, or the code's meaning comes only from vPIC) or when the EPA sole-offering check fails; drop when >= 20 checkable and agreement < 0.995; low_sample when < 20 checkable; keep otherwise. newly_confirmed_manual counts lot cars with no published transmission (vehicle_extras trans empty) that a keep or low_sample rule calls manual.",
@@ -408,7 +419,18 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "survives",
+    "checks": [
+     "Re-read NHTSA 01-22-N11B-1794 page 2 as a page image: 'VIN Char. Pos. 5 Transmission: S 4-Speed Manual - Floor (None), D Automatic - Floor (None), W 5-Speed Manual - Floor (None)' with pos. 6-7 73/74 Cherokee: matches the rule's S/D/W.",
+     "EPA: every AMC-era Cherokee/Comanche engine was sold with both manual and automatic (e.g. 1986 Comanche 2.5L ids 2506-2509, 1988 Comanche 4.0L 4914/4915), so the transmission really is a separate VIN character and not an engine default.",
+     "Ground truth: the 2 in-scope lot cars (1986, 1988 Comanche, code W) are vPIC '5-spd Manual' decodes (agree; vPIC-derived, so not independent). No counterexample in ground_truth.jsonl or the vPIC cache.",
+     "Adds 0 newly confirmed cars (every in-scope car already shows its transmission); kept as documentation of the AMC scheme.",
+     "ground_truth.jsonl and the vPIC cache (vin_decodes.json.gz) searched for every lot VIN matching the rule regex and for VIN-less ground-truth lines of the same model/years/displacement: no line in scope carries an automatic"
+    ]
+   }
   },
   {
    "id": "jeep_amc_1981_1988_char5_vpic_only_codes",
@@ -558,7 +580,14 @@
     }
    },
    "newly_confirmed_manual": 6,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "left as candidate (not counted); not promoted",
+    "checks": [
+     "Not counted toward newly confirmed manuals, so no Manual label depends on it; status re-read and left unchanged. Its evidence_gaps stand as written; nothing found in ground_truth.jsonl or the vPIC cache supports promotion."
+    ]
+   }
   },
   {
    "id": "jeep_wrangler_yj_25_1989_1993_char8",
@@ -726,293 +755,19 @@
     }
    },
    "newly_confirmed_manual": 17,
-   "newly_labelled_non_manual": 0
-  },
-  {
-   "id": "jeep_wrangler_tj_24_2005_2006_char8_1",
-   "make": "Jeep",
-   "status": "low_sample",
-   "basis": "engine_code",
-   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the code meaning comes from the manufacturer's own Part 565 VIN filing and the one-transmission fact from EPA plus an independent source (or, for the AMC rule, the filing names the transmission itself)",
-   "notes": "MY2003-2004 2.4L Wranglers had a 4-speed automatic (EPA 19191, 20317), so those years are not ruled.",
-   "claim": "manual",
-   "scope": {
-    "make": "Jeep",
-    "models": "Jeep Wrangler TJ (line A) with the 2.4L I4, MY2005-2006",
-    "model_years": [
-     2005,
-     2006
-    ],
-    "wmi": [
-     "1J4"
-    ],
-    "conditions": [
-     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
-     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char5 in [A]"
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "survives",
+    "checks": [
+     "Re-read NHTSA 01-22-N11B-3704 (MY1991) MPV/truck page 3 of 3 as a page image: 'P 2.5L 4 cyl gasoline (MPI) 121 HP CMC', 'G 2.5L 4 cyl gasoline (TBI) 99 HP CMC' (Dakota), 'S 4.0L 177 HP'. No transmission column. Matches the citation.",
+     "EPA vehicles.csv searched for every Jeep Wrangler 2.4-2.6L row 1987-1995: 1987-1993 rows are all 'Manual 5-spd' (ids 4081, 5206, 6320, 6321, 7383, 7384, 8490, 9564, 10554); the first 2.5L automatic is 1994 (11513, 'Automatic 3-spd'), so the MY1993 upper bound is right.",
+     "Independent text (search-result text 2026-11-05): Wikipedia YJ ('automatic transmission option for four-cylinder Wranglers came in 1994', powertrain table lists the 2.5L automatic for 1994-1995 only) and Extreme Terrain ('Automatic transmission was introduced in 1994 for 4-cylinder models'). Coverking and 4-the-love-of-jeeps make generic, model-wide '5-speed or 3-speed automatic' statements that do not tie the automatic to the 2.5L before 1994 (the automatic was the 4.2L/4.0L option); not treated as contradictions.",
+     "Scope edges: classify() honours the per-year code tables (E only MY1989-1990, P only MY1991-1993) even though the summary regex is year-agnostic; line Y only (Cherokee XJ 2.5L is lines J/T and is a separate candidate rule); WMI 2J4 (Brampton, 1989-1992) and 1J4 (Toledo, 1993) both covered. No MY1993 truck table in MID, but every 1993 lot car with code P decodes in vPIC as 2.5L.",
+     "Ground truth / vPIC cache: 18 in-scope lot cars, none with any transmission in ground_truth.jsonl or vPIC (vPIC gives no Chrysler-format transmission); no counterexample. Note: the 1987-1988 2.5L YJ lines in ground truth (AMC format, codes L/V) are manual too, consistent.",
+     "ground_truth.jsonl and the vPIC cache (vin_decodes.json.gz) searched for every lot VIN matching the rule regex and for VIN-less ground-truth lines of the same model/years/displacement: no line in scope carries an automatic"
     ]
-   },
-   "vin_condition": {
-    "position": 8,
-    "manual_codes": {
-     "1": "2.4L I4 DOHC PowerTech (ED1): 6-speed manual only (MY2005-2006)"
-    },
-    "automatic_codes": {}
-   },
-   "vin_regex_manual": "^(1J4).A..1.[56].......",
-   "citations": [
-    {
-     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b152bbc1-f1bc-409b-9ac7-f9428f3af538",
-     "doc": "NHTSA 01-022-N11B-8827, DaimlerChrysler Corporation 2002-06-05, 2003 MY VIN decoding tables, 10 pp, read as page image (page 8, issued 4/22/02)",
-     "says": "MPV/truck position 8: 1 = 2.4L I4 CYL Gasoline (DOHC) (ED1); G = 2.4L I4 Gasoline (DOHC 16V H.O.) (EDV); B = 2.4L I4 (DOHC 16V) (EDZ); K = 3.7L V6 (EKG); S = 4.0L I6 (ERH); N = 4.7L V8 (EVA). Body 9 = Open Body {Wrangler/TJ}; 8 = Sport Utility 4 Dr {Durango/Grand Cherokee/Liberty ...}."
-    },
-    {
-     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/a8460bbd-cf69-4762-80cd-17f7f34136a9",
-     "doc": "NHTSA ORG467, DaimlerChrysler 2005-06-20, '2006 MPV's, Truck's, Incomplete Vehicles V.I.N. Coding Guide' revised 20 June 2005, 16 pp, page image",
-     "says": "8th position (page 16): 1 = 2.4L I4 CYL DOHC Gasoline (ED1); B = 2.4L DOHC SMPI (EDZ); G = 2.4L DOHC 16V H.O. Turbo (EDV); 8 = 2.4L Turbo (EDT); 5 = 2.8L I4 Turbo Diesel (ENR); S = 4.0L I6 (ERH); K = 3.7L V6 (EKG). 6th position: 'Sales Code ABB Converts The 6th Position To Transmission Type' for BUX export families."
-    },
-    {
-     "url": "https://www.quadratec.com/jeep_knowledgebase/article-102.htm",
-     "doc": "Quadratec 'Jeep Wrangler 2005-2006 TJ Specifications'; California Air Resources Board DriveClean 2005/2006 Wrangler/TJ 4WD listings (https://driveclean.ca.gov/taxonomy/term/36753); search-result excerpts 2026-11-05",
-     "says": "Quadratec's 2005-2006 table lists the 2.4L (SE) with a six-speed manual only; DriveClean lists the 2005 and 2006 2.4L only as manual (the 4.0L with an automatic) and a 2004 2.4L with a four-speed automatic. JeepSpecs' 2006 guide is ambiguous (no engine pairing)."
-    },
-    {
-     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
-     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29), fetched once 2026-11-05 by the baseline step",
-     "says": "manual: 2005 id 21423 'Wrangler/TJ 4WD' 2.4L Manual 6-spd, 2006 id 22532 'Wrangler/TJ 4WD' 2.4L Manual 6-spd"
-    }
-   ],
-   "evidence_gaps": "The MY2004-2005 truck tables are not in MID; code 1 = 2.4L ED1 in the MY2002, MY2003 and MY2006 tables.",
-   "validation": {
-    "checkable_ground_truth": 0,
-    "agree": 0,
-    "disagree": 0,
-    "agreement": null,
-    "checkable_positives_manual": 0,
-    "epa_rows": [
-     {
-      "claim": "manual",
-      "filter": {
-       "years": [
-        2005,
-        2006
-       ],
-       "model": "^Wrangler",
-       "displ": 2.4
-      },
-      "rows": [
-       "2005 id 21423 'Wrangler/TJ 4WD' 2.4L Manual 6-spd",
-       "2006 id 22532 'Wrangler/TJ 4WD' 2.4L Manual 6-spd"
-      ],
-      "classes": [
-       "manual"
-      ],
-      "sole_offering_holds": true,
-      "years_without_epa_row": []
-     }
-    ],
-    "epa_sole_offering_holds": true,
-    "manual_codes": {
-     "in_scope_lot_cars": 1,
-     "checkable_ground_truth": 0,
-     "agree": 0,
-     "disagree": 0,
-     "agreement": null,
-     "checkable_positives_manual": 0,
-     "uniform_cell_lines_excluded": 0,
-     "uniform_cell_lines_that_would_agree": 0,
-     "ground_truth_speeds_only_excluded": 0,
-     "epa_crosscheck_per_car": {
-      "consistent": 1,
-      "conflict": 0,
-      "no_epa_match": 0
-     },
-     "cars_without_trans_info": 1,
-     "cars_without_trans_info_by_reason": {
-      "vpic_trans_blank": 1
-     }
-    },
-    "automatic_codes": {
-     "in_scope_lot_cars": 0,
-     "checkable_ground_truth": 0,
-     "agree": 0,
-     "disagree": 0,
-     "agreement": null,
-     "checkable_positives_manual": 0,
-     "uniform_cell_lines_excluded": 0,
-     "uniform_cell_lines_that_would_agree": 0,
-     "ground_truth_speeds_only_excluded": 0,
-     "epa_crosscheck_per_car": {
-      "consistent": 0,
-      "conflict": 0,
-      "no_epa_match": 0
-     },
-     "cars_without_trans_info": 0,
-     "cars_without_trans_info_by_reason": {}
-    },
-    "disagree_examples": [],
-    "epa_conflict_examples": [],
-    "codes_seen_on_lots": {
-     "2005 FA291": 1
-    },
-    "in_scope_codes_not_in_table": {
-     "2005:S": 7,
-     "2006:S": 4
-    }
-   },
-   "newly_confirmed_manual": 1,
-   "newly_labelled_non_manual": 0
-  },
-  {
-   "id": "jeep_liberty_24_2003_2005_char8_1",
-   "make": "Jeep",
-   "status": "low_sample",
-   "basis": "engine_code",
-   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the code meaning comes from the manufacturer's own Part 565 VIN filing and the one-transmission fact from EPA plus an independent source (or, for the AMC rule, the filing names the transmission itself)",
-   "notes": "The 3.7L V6 (K) had both transmissions; the 2.8L CRD (5) is not ruled.",
-   "claim": "manual",
-   "scope": {
-    "make": "Jeep",
-    "models": "Jeep Liberty KJ (line K 4x2 / L 4x4) with the 2.4L I4, MY2003-2005",
-    "model_years": [
-     2003,
-     2005
-    ],
-    "wmi": [
-     "1J4",
-     "1J8"
-    ],
-    "conditions": [
-     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
-     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char5 in [KL]"
-    ]
-   },
-   "vin_condition": {
-    "position": 8,
-    "manual_codes": {
-     "1": "2.4L I4 DOHC PowerTech (ED1): manual only (5-speed 2003-2004, 6-speed NSG370 2005) (MY2003-2005)"
-    },
-    "automatic_codes": {}
-   },
-   "vin_regex_manual": "^(1J4|1J8).[KL]..1.[345].......",
-   "citations": [
-    {
-     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/370aa448-296c-4dd0-99f1-c51d6408065f",
-     "doc": "NHTSA 01-022-N11B-8535, DaimlerChrysler Corporation 2001-11-09, 2002 MY MPV/truck VIN decoding guide, 11 pp, read as page image (page 9)",
-     "says": "Position 8: F = 1.6L I4; 9 = 2.0L I4; 1 = 2.4L I4 CYL Gasoline (DOHC) (ED1); B = 2.4L I4 Gasoline (DOHC 16V) (EDZ); P = 2.5L I4 Gasoline (MPI) (EPE); K = 3.7L V6 (EKG); S = 4.0L I6 (ERH); C = 5.9L I6 High Output Turbo Diesel (ETH). Page 3: JEEP (KJ family) Liberty 4x2 / 4x4. No transmission position."
-    },
-    {
-     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b152bbc1-f1bc-409b-9ac7-f9428f3af538",
-     "doc": "NHTSA 01-022-N11B-8827, DaimlerChrysler Corporation 2002-06-05, 2003 MY VIN decoding tables, 10 pp, read as page image (page 8, issued 4/22/02)",
-     "says": "MPV/truck position 8: 1 = 2.4L I4 CYL Gasoline (DOHC) (ED1); G = 2.4L I4 Gasoline (DOHC 16V H.O.) (EDV); B = 2.4L I4 (DOHC 16V) (EDZ); K = 3.7L V6 (EKG); S = 4.0L I6 (ERH); N = 4.7L V8 (EVA). Body 9 = Open Body {Wrangler/TJ}; 8 = Sport Utility 4 Dr {Durango/Grand Cherokee/Liberty ...}."
-    },
-    {
-     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/a8460bbd-cf69-4762-80cd-17f7f34136a9",
-     "doc": "NHTSA ORG467, DaimlerChrysler 2005-06-20, '2006 MPV's, Truck's, Incomplete Vehicles V.I.N. Coding Guide' revised 20 June 2005, 16 pp, page image",
-     "says": "8th position (page 16): 1 = 2.4L I4 CYL DOHC Gasoline (ED1); B = 2.4L DOHC SMPI (EDZ); G = 2.4L DOHC 16V H.O. Turbo (EDV); 8 = 2.4L Turbo (EDT); 5 = 2.8L I4 Turbo Diesel (ENR); S = 4.0L I6 (ERH); K = 3.7L V6 (EKG). 6th position: 'Sales Code ABB Converts The 6th Position To Transmission Type' for BUX export families."
-    },
-    {
-     "url": "https://www.autoblog.com/buy/2004-Jeep-Liberty/review/",
-     "doc": "Autoblog 2002 and 2004 Jeep Liberty reviews (https://www.autoblog.com/buy/2002-Jeep-Liberty/review/); CarGurus 2005 Liberty; Engine Builder 'Rebuilding Liberty: Engine Notes on Jeep's 2.4L I4' (https://www.enginebuildermag.com/2014/02/rebuilding-liberty-engine-notes-jeeps-2-4l-i4-engine/); search-result excerpts 2026-11-05",
-     "says": "Autoblog 2004: 'The four-cylinder engine is only available with a five-speed manual gearbox' (the V6 with manual or 4-speed automatic); Autoblog 2002: four-cylinder only with the five-speed manual; CarGurus 2005: Sport four-cylinder only with a six-speed manual; Engine Builder: NSG370 six-speed from 2005, 2.4L dropped after 2005/2006. Conflicting generic wording: Cars.com 2004 'Each engine teams with a four-speed-automatic or five-speed-manual transmission' (https://www.cars.com/articles/2004-jeep-liberty-whats-new-1420687138026/)."
-    },
-    {
-     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
-     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29), fetched once 2026-11-05 by the baseline step",
-     "says": "manual: 2003 id 19076 'Liberty/Cherokee 2WD' 2.4L Manual 5-spd, 2003 id 19188 'Liberty/Cherokee 4WD' 2.4L Manual 5-spd, 2004 id 20201 'Liberty/Cherokee 2WD' 2.4L Manual 5-spd, 2004 id 20314 'Liberty/Cherokee 4WD' 2.4L Manual 5-spd, 2005 id 21313 'Liberty/Cherokee 2WD' 2.4L Manual 6-spd, 2005 id 21420 'Liberty/Cherokee 4WD' 2.4L Manual 6-spd"
-    }
-   ],
-   "evidence_gaps": "The MY2004-2005 truck tables are not in MID; code 1 = 2.4L ED1 in the MY2002, MY2003 and MY2006 tables. Cars.com's 2004 review uses generic wording ('each engine teams with a four-speed-automatic or five-speed-manual'); EPA and Autoblog's explicit statement are taken over it.",
-   "validation": {
-    "checkable_ground_truth": 0,
-    "agree": 0,
-    "disagree": 0,
-    "agreement": null,
-    "checkable_positives_manual": 0,
-    "epa_rows": [
-     {
-      "claim": "manual",
-      "filter": {
-       "years": [
-        2003,
-        2004,
-        2005
-       ],
-       "model": "Liberty",
-       "displ": 2.4
-      },
-      "rows": [
-       "2003 id 19076 'Liberty/Cherokee 2WD' 2.4L Manual 5-spd",
-       "2003 id 19188 'Liberty/Cherokee 4WD' 2.4L Manual 5-spd",
-       "2004 id 20201 'Liberty/Cherokee 2WD' 2.4L Manual 5-spd",
-       "2004 id 20314 'Liberty/Cherokee 4WD' 2.4L Manual 5-spd",
-       "2005 id 21313 'Liberty/Cherokee 2WD' 2.4L Manual 6-spd",
-       "2005 id 21420 'Liberty/Cherokee 4WD' 2.4L Manual 6-spd"
-      ],
-      "classes": [
-       "manual"
-      ],
-      "sole_offering_holds": true,
-      "years_without_epa_row": []
-     }
-    ],
-    "epa_sole_offering_holds": true,
-    "manual_codes": {
-     "in_scope_lot_cars": 4,
-     "checkable_ground_truth": 0,
-     "agree": 0,
-     "disagree": 0,
-     "agreement": null,
-     "checkable_positives_manual": 0,
-     "uniform_cell_lines_excluded": 0,
-     "uniform_cell_lines_that_would_agree": 0,
-     "ground_truth_speeds_only_excluded": 0,
-     "epa_crosscheck_per_car": {
-      "consistent": 4,
-      "conflict": 0,
-      "no_epa_match": 0
-     },
-     "cars_without_trans_info": 4,
-     "cars_without_trans_info_by_reason": {
-      "vpic_trans_blank": 3,
-      "not_in_cache_backup": 1
-     }
-    },
-    "automatic_codes": {
-     "in_scope_lot_cars": 0,
-     "checkable_ground_truth": 0,
-     "agree": 0,
-     "disagree": 0,
-     "agreement": null,
-     "checkable_positives_manual": 0,
-     "uniform_cell_lines_excluded": 0,
-     "uniform_cell_lines_that_would_agree": 0,
-     "ground_truth_speeds_only_excluded": 0,
-     "epa_crosscheck_per_car": {
-      "consistent": 0,
-      "conflict": 0,
-      "no_epa_match": 0
-     },
-     "cars_without_trans_info": 0,
-     "cars_without_trans_info_by_reason": {}
-    },
-    "disagree_examples": [],
-    "epa_conflict_examples": [],
-    "codes_seen_on_lots": {
-     "2003 FK481": 2,
-     "2003 GL481": 1,
-     "2004 FK481": 1
-    },
-    "in_scope_codes_not_in_table": {
-     "2005:K": 198,
-     "2003:K": 194,
-     "2004:K": 180,
-     "2005:5": 8
-    }
-   },
-   "newly_confirmed_manual": 4,
-   "newly_labelled_non_manual": 0
+   }
   },
   {
    "id": "jeep_liberty_24_2002_char8_1",
@@ -1064,7 +819,7 @@
      "says": "manual: no row"
     }
    ],
-   "evidence_gaps": "EPA lists no 2002 Liberty 2.4L row at all, so the sole-offering check cannot be made for MY2002 (Autoblog's 2002 review says the four-cylinder came only with the five-speed manual).",
+   "evidence_gaps": "EPA lists no 2002 Liberty 2.4L row at all, so the sole-offering check cannot be made for MY2002 (Autoblog's 2002 review says the four-cylinder came only with the five-speed manual). Adversarial check 2026-11-05: Wikipedia 'Jeep Liberty (KJ)' reports fleet Liberties with the 2.4L and a 4-speed automatic, which refuted the MY2003-2005 sibling rule; this candidate must not be promoted on the same evidence.",
    "validation": {
     "checkable_ground_truth": 0,
     "agree": 0,
@@ -1139,7 +894,14 @@
     }
    },
    "newly_confirmed_manual": 3,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "stays candidate (not counted); contradicted by the fleet 2.4L automatic report",
+    "checks": [
+     "Same fleet-automatic objection as the removed MY2003-2005 rule; no 2002 EPA row exists."
+    ]
+   }
   },
   {
    "id": "jeep_cherokee_xj_25_1991_1993_char8_P",
@@ -1281,7 +1043,14 @@
     }
    },
    "newly_confirmed_manual": 1,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "left as candidate (not counted); not promoted",
+    "checks": [
+     "Not counted toward newly confirmed manuals, so no Manual label depends on it; status re-read and left unchanged. Its evidence_gaps stand as written; nothing found in ground_truth.jsonl or the vPIC cache supports promotion."
+    ]
+   }
   },
   {
    "id": "jeep_renegade_14t_2015_2018_char8_H_W",
@@ -1437,7 +1206,18 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 4,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "survives",
+    "checks": [
+     "Text layers of FCA Italy ORG10561 (MY2015) and ORG10937 (MY2016) re-read: position 8 'H 1.4 4 Gasoline Turbo Yes 165', 'T 2.4 No 184', 'W 1.4 Turbo Yes 160'; ORG12773 (MY2017): H 1.4 turbo, B 2.4 non-turbo. Matches the rule (H all years, W 2015-2016).",
+     "EPA vehicles.csv, every Jeep Renegade 1.3-1.5L row 2015-2019: 2015-2018 ids 36124/36125/37055/37059/38182/38184/39776/39780 are all 'Manual 6-spd' turbo; the next 1.x engine is the 2019 1.3L automatic (41303-41306), outside the rule (MY2018 upper bound right).",
+     "Ground truth caution: vPIC decodes MY2018 Renegades by trim, not engine (2018 Sport/Latitude with the 2.4L code B decode '6-spd Manual' in 20 ground-truth lines; Limited/Trailhawk decode '9-spd Automatic'), so the 2 agreeing 2018 code-H lines are not independent evidence. The rule rests on the FCA filing + EPA + Jeep's release ('1.4-liter MultiAir Turbo ... paired with a six-speed manual'; 2.4L 'exclusively with the nine-speed automatic').",
+     "Scope edges: WMI ZAC (Melfi) only; Brazil-built Renegades (other WMI, other engines) are out of scope; MY2019 (char10 K) excluded. No counterexample in ground_truth.jsonl or the vPIC cache.",
+     "ground_truth.jsonl and the vPIC cache (vin_decodes.json.gz) searched for every lot VIN matching the rule regex and for VIN-less ground-truth lines of the same model/years/displacement: no line in scope carries an automatic"
+    ]
+   }
   },
   {
    "id": "jeep_renegade_24_2015_2018_char8_T_B_automatic",
@@ -1714,7 +1494,14 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 90
+   "newly_labelled_non_manual": 90,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "left as drop (not counted); not promoted",
+    "checks": [
+     "Not counted toward newly confirmed manuals, so no Manual label depends on it; status re-read and left unchanged. Its evidence_gaps stand as written; nothing found in ground_truth.jsonl or the vPIC cache supports promotion."
+    ]
+   }
   },
   {
    "id": "fiat_500x_2016_2018_char8_engine",
@@ -1895,7 +1682,14 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 23
+   "newly_labelled_non_manual": 23,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "left as candidate (not counted); not promoted",
+    "checks": [
+     "Not counted toward newly confirmed manuals, so no Manual label depends on it; status re-read and left unchanged. Its evidence_gaps stand as written; nothing found in ground_truth.jsonl or the vPIC cache supports promotion."
+    ]
+   }
   },
   {
    "id": "fiat_500_turbo_2012_2014_series_FHJ_char8_H",
@@ -1918,17 +1712,18 @@
     "conditions": [
      "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
      "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char5 in [F], char6 in [F], char7 in [FHJ]"
+     "fixed characters: char5 in [F], char6 in [F], char7 in [FHJ]",
+     "MY2012 (char10 C): series F or J only (FFH 500T Sport is defined from MY2013; the MY2012 table was not read)"
     ]
    },
    "vin_condition": {
     "position": 8,
     "manual_codes": {
-     "H": "series FFF/FFJ Abarth or FFH 500T Sport with the 1.4L MultiAir Turbo (EAF): 5-speed manual only until the MY2015 automatic (MY2012-2014)"
+     "H": "series FFF/FFJ Abarth or FFH 500T Sport with the 1.4L MultiAir Turbo (EAF): 5-speed manual only until the MY2015 automatic (MY2012-2014) ; MY2012 Abarth series F/J only"
     },
     "automatic_codes": {}
    },
-   "vin_regex_manual": "^(3C3).FF[FHJ]H.[CDE].......",
+   "vin_regex_manual": "^(3C3).FF(?:[FHJ]H.[DE]|[FJ]H.C).......",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/c1ad6936-57db-4d8a-801d-1f9cf92472c4",
@@ -2029,7 +1824,19 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 5,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "survives (narrowed)",
+    "checks": [
+     "Text layer of Chrysler Group ORG7564 (MY2013 car table) re-read: H = 1.4 turbo (EAF), R = 1.4 non-turbo; FFF Abarth hatch, FFJ Abarth convertible, FFH 500T Sport (added 1 Dec 2011, i.e. from MY2013). Dodge Dart also uses H but is line D, excluded by the fixed char5/char6 F.",
+     "EPA vehicles.csv, every Fiat 500 1.3-1.5L row 2012-2016: 2012 '500 Abarth' turbo Manual 5-spd only (32282); 2013 and 2014 '500' and '500 Abarth' turbo rows are Manual 5-spd only (33027, 33028, 34332, 34333); the first turbo automatics are MY2015 (35155, 35158). The non-turbo 500 automatics (31108, 33029, 34549) are engine R, out of scope. 500L (WMI ZFB) out of scope.",
+     "Independent text (search-result text 2026-11-05): Stellantis release id 15515 (April 2014) and PR Newswire: the automatic is new for MY2015 on Abarth and 500 Turbo; production of the 2015 automatic began June 23, 2014; Autotrader.ca: the only MY2015 mechanical change is the new automatic option for Turbo models.",
+     "NARROWED: series H (500T Sport) is defined from MY2013 and the MY2012 table was not read, so MY2012 now requires series F or J (Abarth); vin_regex_manual updated. No lot car is affected (all 5 in-scope cars are MY2013-2014).",
+     "Ground truth / vPIC cache: 5 in-scope lot cars, vPIC trims 500T Sport / Abarth 1.4L, no transmission anywhere; no counterexample.",
+     "ground_truth.jsonl and the vPIC cache (vin_decodes.json.gz) searched for every lot VIN matching the rule regex and for VIN-less ground-truth lines of the same model/years/displacement: no line in scope carries an automatic"
+    ]
+   }
   },
   {
    "id": "dodge_caliber_18_2007_2009_char8_C",
@@ -2176,7 +1983,19 @@
     }
    },
    "newly_confirmed_manual": 32,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "survives",
+    "checks": [
+     "Re-read NHTSA ORG3153 (MY2007 car table) page 10 as a page image: '8th Position: C = 1.8L I4 CYL 16V DOHC Dual VVT Gasoline EBA'; and ORG6105 (MY2009) text layer: 'C = 1.8L 4 CYL Gasoline Non-Turbo EBA', 5th position 'B = Caliber (FWD) (LHD) U.S., Canada, Mexico, BUX'. Other engine letters changed between those tables (B = 2.0L in 2007, 2.4L in 2009), but C = 1.8L in both, so the missing MY2008 table cannot change C.",
+     "EPA vehicles.csv, every Dodge Caliber 1.7-1.9L row 2007-2012: only 2007 23528, 2008 24818, 2009 25968, all 'Manual 5-spd'; no CVT row with the 1.8L (the CVT rows are 2.0L/2.4L).",
+     "Independent text (search-result text 2026-11-05): Wikipedia 'Dodge Caliber' (SE 1.8L 'with a Magna Drivetrain T355 five-speed manual transmission'; CVT with the 2.0L); Guide Auto (Canada) 'a 1.8-litre (148 hp) was paired exclusively with a five-speed manual transmission'; GoAuto (Australia) 1.8 'five-speed manual-only'. No source pairs the 1.8L with the CVT.",
+     "Scope edges: some in-scope lot cars decode as series SXT (vPIC trim) with engine C; the transmission claim depends on the engine, not the trim, so they stay. Two feed rows say 'Chrysler Caliber' but carry Dodge WMI 1B3 and decode as Caliber; name mapping harmless. 1B3 (Belvidere) is the only Caliber WMI.",
+     "Ground truth / vPIC cache: 34 in-scope lot cars, none with a transmission in ground_truth.jsonl or vPIC; no counterexample.",
+     "ground_truth.jsonl and the vPIC cache (vin_decodes.json.gz) searched for every lot VIN matching the rule regex and for VIN-less ground-truth lines of the same model/years/displacement: no line in scope carries an automatic"
+    ]
+   }
   },
   {
    "id": "dodge_caliber_srt4_2008_2009_char8_F",
@@ -2310,7 +2129,18 @@
     "in_scope_codes_not_in_table": {}
    },
    "newly_confirmed_manual": 2,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "survives",
+    "checks": [
+     "MY2007 (page 10 image) and MY2009 (text layer) car tables: F = 2.4L turbo ED4; the other 2.4L turbo code (EDT: E in 2007, 8 in 2009) is the PT Cruiser engine, not used on line B. MY2009 6th position 6 = Caliber SRT4.",
+     "EPA: the only Caliber 2.4L turbo rows are 2008 29576 and 2009 25972, both 'Manual 6-spd'; every Caliber automatic row is the non-turbo 2.4L or 2.0L.",
+     "Independent text: AutoGuide 2008 SRT4 review ('six-speed manual transmission, the only transmission offered for the Caliber SRT4'). Scope MY2008-2009 matches the SRT4's production years.",
+     "Ground truth / vPIC cache: 2 in-scope lot cars (vPIC trim SRT4, 2.4L), no transmission anywhere; no counterexample.",
+     "ground_truth.jsonl and the vPIC cache (vin_decodes.json.gz) searched for every lot VIN matching the rule regex and for VIN-less ground-truth lines of the same model/years/displacement: no line in scope carries an automatic"
+    ]
+   }
   },
   {
    "id": "dodge_neon_srt4_2003_2005_char8_S",
@@ -2456,7 +2286,18 @@
     }
    },
    "newly_confirmed_manual": 6,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "survives",
+    "checks": [
+     "Citations re-checked: MY2003-2005 car tables give S = 2.4L DOHC (High Output) Turbo EDV; MY2005 lists 5th position S for Neon/SX2.0/SRT. EDV in the PT Cruiser GT is under WMI 3C4/3C8 line Y (and car-table PT convertibles use EDT), so the fixed WMI 1B3 + line S excludes it.",
+     "EPA vehicles.csv, every Dodge Neon 2.3-2.5L row 2002-2006: only 18503, 19568, 20696, all 'Manual 5-spd' turbo; no Chrysler-badged Neon 2.4L row.",
+     "Independent text: Wikipedia 'Dodge Neon SRT-4' ('available only with manual transmission', NVG T850).",
+     "Ground truth / vPIC cache: 6 in-scope lot cars, all vPIC trim SRT-4 2.4L, no transmission anywhere; no counterexample.",
+     "ground_truth.jsonl and the vPIC cache (vin_decodes.json.gz) searched for every lot VIN matching the rule regex and for VIN-less ground-truth lines of the same model/years/displacement: no line in scope carries an automatic"
+    ]
+   }
   },
   {
    "id": "dodge_dakota_25_1990_2002_char8",
@@ -2673,7 +2514,14 @@
     }
    },
    "newly_confirmed_manual": 41,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "left as candidate (not counted); not promoted",
+    "checks": [
+     "Not counted toward newly confirmed manuals, so no Manual label depends on it; status re-read and left unchanged. Its evidence_gaps stand as written; nothing found in ground_truth.jsonl or the vPIC cache supports promotion."
+    ]
+   }
   },
   {
    "id": "ram_hd_ho_cummins_2001_2002_char8",
@@ -2825,7 +2673,14 @@
     }
    },
    "newly_confirmed_manual": 4,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "checked_utc": "2026-11-05",
+    "outcome": "left as candidate (not counted); not promoted",
+    "checks": [
+     "Not counted toward newly confirmed manuals, so no Manual label depends on it; status re-read and left unchanged. Its evidence_gaps stand as written; nothing found in ground_truth.jsonl or the vPIC cache supports promotion."
+    ]
+   }
   }
  ],
  "newly_confirmed_manual_cars": [
@@ -2907,17 +2762,6 @@
    "yard": "Pick-n-Pull - Johnston"
   },
   {
-   "id": "7969622",
-   "vin": "1J4GL48173W608457",
-   "year": 2003,
-   "make": "Jeep",
-   "model": "Liberty",
-   "rule": "jeep_liberty_24_2003_2005_char8_1",
-   "code": "char8=1 (GL481): 2.4L I4 DOHC PowerTech (ED1): manual only (5-speed 2003-2004, 6-speed NSG370 2005)",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Modesto"
-  },
-  {
    "id": "7980130",
    "vin": "2J4FY19P0MJ107515",
    "year": 1991,
@@ -2938,17 +2782,6 @@
    "code": "char8=C (HB28C): 1.8L I4 DOHC Dual VVT (EBA): 5-speed manual only (Magna T355)",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Tear-A-Part - Salt Lake City"
-  },
-  {
-   "id": "STK101791",
-   "vin": "1J4FK48154W319450",
-   "year": 2004,
-   "make": "Jeep",
-   "model": "Liberty",
-   "rule": "jeep_liberty_24_2003_2005_char8_1",
-   "code": "char8=1 (FK481): 2.4L I4 DOHC PowerTech (ED1): manual only (5-speed 2003-2004, 6-speed NSG370 2005)",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Tear-A-Part - Ogden"
   },
   {
    "id": "utpap-ogden-A039241",
@@ -3105,17 +2938,6 @@
    "yard": "Pick Your Part - South Bend"
   },
   {
-   "id": "1208-72952",
-   "vin": "1J4FK48163W646549",
-   "year": 2003,
-   "make": "Jeep",
-   "model": "Liberty",
-   "rule": "jeep_liberty_24_2003_2005_char8_1",
-   "code": "char8=1 (FK481): 2.4L I4 DOHC PowerTech (ED1): manual only (5-speed 2003-2004, 6-speed NSG370 2005)",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick Your Part - Mount Airy"
-  },
-  {
    "id": "1348-50734",
    "vin": "ZACCJABH8FPB95612",
    "year": 2015,
@@ -3246,17 +3068,6 @@
    "code": "char8=C (HB48C): 1.8L I4 DOHC Dual VVT (EBA): 5-speed manual only (Magna T355)",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pull-A-Part - Denver"
-  },
-  {
-   "id": "pap-33-1028331-1",
-   "vin": "1J4FA29145P366955",
-   "year": 2005,
-   "make": "Jeep",
-   "model": "Wrangler",
-   "rule": "jeep_wrangler_tj_24_2005_2006_char8_1",
-   "code": "char8=1 (FA291): 2.4L I4 DOHC PowerTech (ED1): 6-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-A-Part - West Palm Beach"
   },
   {
    "id": "pap-33-1028996-1",
@@ -3565,17 +3376,6 @@
    "code": "char8=F (HB68F): 2.4L I4 DOHC Turbo (ED4), Caliber SRT4: 6-speed manual only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Grandpa John's Pick & Pull - Green Bay"
-  },
-  {
-   "id": "upullitwa-pasco-2l2261",
-   "vin": "1J4FK48143W602579",
-   "year": 2003,
-   "make": "Jeep",
-   "model": "Liberty",
-   "rule": "jeep_liberty_24_2003_2005_char8_1",
-   "code": "char8=1 (FK481): 2.4L I4 DOHC PowerTech (ED1): manual only (5-speed 2003-2004, 6-speed NSG370 2005)",
-   "why_no_trans": "not_in_cache_backup",
-   "yard": "U-Pull-It Auto Parts - Pasco"
   },
   {
    "id": "upullitwa-pasco-2l1685",
@@ -5356,6 +5156,142 @@
    ],
    "verdict": "epa_lists_both",
    "yard": "Pull-N-Save - Riverside"
+  }
+ ],
+ "refuted_rules": [
+  {
+   "id": "jeep_wrangler_tj_24_2005_2006_char8_1",
+   "previous_status": "low_sample",
+   "scope": {
+    "make": "Jeep",
+    "models": "Jeep Wrangler TJ (line A) with the 2.4L I4, MY2005-2006",
+    "model_years": [
+     2005,
+     2006
+    ],
+    "wmi": [
+     "1J4"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [A]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "1": "2.4L I4 DOHC PowerTech (ED1): 6-speed manual only (MY2005-2006)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(1J4).A..1.[56].......",
+   "original_citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b152bbc1-f1bc-409b-9ac7-f9428f3af538",
+     "doc": "NHTSA 01-022-N11B-8827, DaimlerChrysler Corporation 2002-06-05, 2003 MY VIN decoding tables, 10 pp, read as page image (page 8, issued 4/22/02)",
+     "says": "MPV/truck position 8: 1 = 2.4L I4 CYL Gasoline (DOHC) (ED1); G = 2.4L I4 Gasoline (DOHC 16V H.O.) (EDV); B = 2.4L I4 (DOHC 16V) (EDZ); K = 3.7L V6 (EKG); S = 4.0L I6 (ERH); N = 4.7L V8 (EVA). Body 9 = Open Body {Wrangler/TJ}; 8 = Sport Utility 4 Dr {Durango/Grand Cherokee/Liberty ...}."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/a8460bbd-cf69-4762-80cd-17f7f34136a9",
+     "doc": "NHTSA ORG467, DaimlerChrysler 2005-06-20, '2006 MPV's, Truck's, Incomplete Vehicles V.I.N. Coding Guide' revised 20 June 2005, 16 pp, page image",
+     "says": "8th position (page 16): 1 = 2.4L I4 CYL DOHC Gasoline (ED1); B = 2.4L DOHC SMPI (EDZ); G = 2.4L DOHC 16V H.O. Turbo (EDV); 8 = 2.4L Turbo (EDT); 5 = 2.8L I4 Turbo Diesel (ENR); S = 4.0L I6 (ERH); K = 3.7L V6 (EKG). 6th position: 'Sales Code ABB Converts The 6th Position To Transmission Type' for BUX export families."
+    },
+    {
+     "url": "https://www.quadratec.com/jeep_knowledgebase/article-102.htm",
+     "doc": "Quadratec 'Jeep Wrangler 2005-2006 TJ Specifications'; California Air Resources Board DriveClean 2005/2006 Wrangler/TJ 4WD listings (https://driveclean.ca.gov/taxonomy/term/36753); search-result excerpts 2026-11-05",
+     "says": "Quadratec's 2005-2006 table lists the 2.4L (SE) with a six-speed manual only; DriveClean lists the 2005 and 2006 2.4L only as manual (the 4.0L with an automatic) and a 2004 2.4L with a four-speed automatic. JeepSpecs' 2006 guide is ambiguous (no engine pairing)."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29), fetched once 2026-11-05 by the baseline step",
+     "says": "manual: 2005 id 21423 'Wrangler/TJ 4WD' 2.4L Manual 6-spd, 2006 id 22532 'Wrangler/TJ 4WD' 2.4L Manual 6-spd"
+    }
+   ],
+   "refuted_by": [
+    {
+     "url": "https://www.extremeterrain.com/jeep-wrangler-transmissions-through-the-years.html",
+     "says": "Extreme Terrain 'Jeep Wrangler transmissions through the years' table (search-result text 2026-11-05) lists for the TJ '2.4 I-4 4-Spd 42RLE Auto (2003-2006)' alongside the NSG370 6-speed manual for 2005-2006, i.e. an automatic with the 2.4L in the rule's years."
+    },
+    {
+     "url": "https://www.autoblog.com/buy/2005-Jeep-Wrangler-SE__2dr_4x4/",
+     "says": "Autoblog 2005 Wrangler (search-result text): a four-speed automatic 'was available on all models' (the SE is the 2.4L trim)."
+    },
+    {
+     "url": "https://jeepspecs.com/?p=17561",
+     "says": "JeepSpecs 2005 Wrangler guide (search-result text): the 2.4L is 'available with either a four-speed automatic or a six-speed manual transmission'."
+    }
+   ],
+   "why": "Three independent text sources say the 42RLE automatic was offered with the 2.4L in 2005-2006; only EPA (no automatic row) and Quadratec/DriveClean support manual-only. A missing EPA row is not proof of absence when explicit sources contradict it, so the rule is not certain for every car. Removed (1 lot car loses its proposed Manual label).",
+   "lot_cars_affected": 1
+  },
+  {
+   "id": "jeep_liberty_24_2003_2005_char8_1",
+   "previous_status": "low_sample",
+   "scope": {
+    "make": "Jeep",
+    "models": "Jeep Liberty KJ (line K 4x2 / L 4x4) with the 2.4L I4, MY2003-2005",
+    "model_years": [
+     2003,
+     2005
+    ],
+    "wmi": [
+     "1J4",
+     "1J8"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [KL]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "1": "2.4L I4 DOHC PowerTech (ED1): manual only (5-speed 2003-2004, 6-speed NSG370 2005) (MY2003-2005)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(1J4|1J8).[KL]..1.[345].......",
+   "original_citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/370aa448-296c-4dd0-99f1-c51d6408065f",
+     "doc": "NHTSA 01-022-N11B-8535, DaimlerChrysler Corporation 2001-11-09, 2002 MY MPV/truck VIN decoding guide, 11 pp, read as page image (page 9)",
+     "says": "Position 8: F = 1.6L I4; 9 = 2.0L I4; 1 = 2.4L I4 CYL Gasoline (DOHC) (ED1); B = 2.4L I4 Gasoline (DOHC 16V) (EDZ); P = 2.5L I4 Gasoline (MPI) (EPE); K = 3.7L V6 (EKG); S = 4.0L I6 (ERH); C = 5.9L I6 High Output Turbo Diesel (ETH). Page 3: JEEP (KJ family) Liberty 4x2 / 4x4. No transmission position."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b152bbc1-f1bc-409b-9ac7-f9428f3af538",
+     "doc": "NHTSA 01-022-N11B-8827, DaimlerChrysler Corporation 2002-06-05, 2003 MY VIN decoding tables, 10 pp, read as page image (page 8, issued 4/22/02)",
+     "says": "MPV/truck position 8: 1 = 2.4L I4 CYL Gasoline (DOHC) (ED1); G = 2.4L I4 Gasoline (DOHC 16V H.O.) (EDV); B = 2.4L I4 (DOHC 16V) (EDZ); K = 3.7L V6 (EKG); S = 4.0L I6 (ERH); N = 4.7L V8 (EVA). Body 9 = Open Body {Wrangler/TJ}; 8 = Sport Utility 4 Dr {Durango/Grand Cherokee/Liberty ...}."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/a8460bbd-cf69-4762-80cd-17f7f34136a9",
+     "doc": "NHTSA ORG467, DaimlerChrysler 2005-06-20, '2006 MPV's, Truck's, Incomplete Vehicles V.I.N. Coding Guide' revised 20 June 2005, 16 pp, page image",
+     "says": "8th position (page 16): 1 = 2.4L I4 CYL DOHC Gasoline (ED1); B = 2.4L DOHC SMPI (EDZ); G = 2.4L DOHC 16V H.O. Turbo (EDV); 8 = 2.4L Turbo (EDT); 5 = 2.8L I4 Turbo Diesel (ENR); S = 4.0L I6 (ERH); K = 3.7L V6 (EKG). 6th position: 'Sales Code ABB Converts The 6th Position To Transmission Type' for BUX export families."
+    },
+    {
+     "url": "https://www.autoblog.com/buy/2004-Jeep-Liberty/review/",
+     "doc": "Autoblog 2002 and 2004 Jeep Liberty reviews (https://www.autoblog.com/buy/2002-Jeep-Liberty/review/); CarGurus 2005 Liberty; Engine Builder 'Rebuilding Liberty: Engine Notes on Jeep's 2.4L I4' (https://www.enginebuildermag.com/2014/02/rebuilding-liberty-engine-notes-jeeps-2-4l-i4-engine/); search-result excerpts 2026-11-05",
+     "says": "Autoblog 2004: 'The four-cylinder engine is only available with a five-speed manual gearbox' (the V6 with manual or 4-speed automatic); Autoblog 2002: four-cylinder only with the five-speed manual; CarGurus 2005: Sport four-cylinder only with a six-speed manual; Engine Builder: NSG370 six-speed from 2005, 2.4L dropped after 2005/2006. Conflicting generic wording: Cars.com 2004 'Each engine teams with a four-speed-automatic or five-speed-manual transmission' (https://www.cars.com/articles/2004-jeep-liberty-whats-new-1420687138026/)."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29), fetched once 2026-11-05 by the baseline step",
+     "says": "manual: 2003 id 19076 'Liberty/Cherokee 2WD' 2.4L Manual 5-spd, 2003 id 19188 'Liberty/Cherokee 4WD' 2.4L Manual 5-spd, 2004 id 20201 'Liberty/Cherokee 2WD' 2.4L Manual 5-spd, 2004 id 20314 'Liberty/Cherokee 4WD' 2.4L Manual 5-spd, 2005 id 21313 'Liberty/Cherokee 2WD' 2.4L Manual 6-spd, 2005 id 21420 'Liberty/Cherokee 4WD' 2.4L Manual 6-spd"
+    }
+   ],
+   "refuted_by": [
+    {
+     "url": "https://wikiwand.com/en/articles/Jeep_Liberty_(KJ)",
+     "says": "Wikipedia 'Jeep Liberty (KJ)' (wikiwand mirror, search-result text 2026-11-05): fleet Liberties mostly used the 3.7L with a 4-speed automatic, but 'some fleet Liberties used a 2.4L I4 Engine that produced about 150 horsepower with a 4-Speed Automatic Transmission'."
+    },
+    {
+     "url": "https://www.cars.com/articles/2004-jeep-liberty-whats-new-1420687138026/",
+     "says": "Cars.com 2004: 'Each engine teams with a four-speed-automatic or five-speed-manual transmission'; Cars.com 2005 research page: six-speed manual or four-speed automatic 'available across the lineup' (already in the rule's evidence_gaps and set aside there)."
+    }
+   ],
+   "why": "A fleet 2.4L + automatic variant is reported by Wikipedia and is consistent with Cars.com's wording, which the rule had dismissed as generic. Fleet builds carry the same engine code 1 and line K/L, so the VIN cannot exclude them; EPA's manual-only rows describe the retail certification, not every build. Not certain for every car: removed (4 lot cars lose their proposed Manual label). The same objection applies to the MY2002 candidate rule.",
+   "lot_cars_affected": 4
   }
  ]
 }
