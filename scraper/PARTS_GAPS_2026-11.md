@@ -2008,3 +2008,29 @@ Left out, no stated basis: a sunroof row, and Release Series parts.
 
 Result (same inventory): generic-only 14,188 (4.2%) → 13,893 (4.2%). xB
 2nd gen 293 → 0.
+
+### 22.6 Hyundai Sonata 1999–2005 (EF)
+
+Basis: WP Hyundai_Sonata; cars.com "2002 Hyundai Sonata: What's New";
+consumerguide.com/used/1999-01-hyundai-sonata and /used/2002-05-hyundai-sonata;
+drivechicago.com 1999 review; fueleconomy.gov menus (fetched).
+- **Facelift 2002 (added to the existing `FACELIFT_BREAKS` "sonata"):** the
+  EF-B revised "the hood/bonnet, grille, headlights … tail-lights and rear
+  license plate location" (WP); "new front and rear sheet metal, lighting
+  and bumpers" (cars.com). The EF had no lamp rows in the entry, so the cut
+  will apply to any future appearance rows.
+- **A/C:** standard every year (CG base lists, cars.com 2002, the 1999
+  review).
+- **Sunroof:** optional on both engine versions, in packages through 2005
+  (not on the 2005 GL 4-cylinder manual).
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1999–2005 | — | Every car. |
+| Sunroof | 1999–2005 | option | |
+
+Left out, no stated basis: EF lamp rows (no lamp rows existed and none were
+added in this pass).
+
+Result (same inventory): generic-only 13,893 (4.2%) → 13,604 (4.1%). Sonata
+EF 290 → 0 (1 listing remains outside these years).

@@ -6115,6 +6115,11 @@ _gap_extend("park avenue", parts=[
 # lists). No sunroof row: no regular factory option (Release Series only).
 _gap_extend("scion xb 2008-2015", parts=_per_gen([(2008, 2015)], [*_GAP_MECH]))
 
+# Hyundai Sonata EF 1999-2005 (290 cars generic-only). 2002 facelift (EF-B:
+# hood, grille, headlights, tail lights, bumpers) added to the existing
+# FACELIFT_BREAKS entry. A/C standard every year; power sunroof optional.
+_gap_extend("sonata", parts=_per_gen([(1999, 2005)], [*_GAP_MECH, _SUNROOF]))
+
 # ---- end of §22 block
 
 _apply_consensus_evergreens()
@@ -6556,7 +6561,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "escape": [2005, 2017],
     "f-150": [2013],
     "cruze": [2015],                 # US; the 2013 facelift was not sold here
-    "sonata": [2014, 2018],
+    "sonata": [2002, 2014, 2018],
     "sentra": [2010, 2016],
     "equinox": [2016],
     "corolla": [2005, 2011, 2017],

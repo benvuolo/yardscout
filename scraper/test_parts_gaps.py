@@ -625,6 +625,12 @@ check("§22 Scion xB 2nd gen: mech 2008-15; lamps cut at the 2011 facelift and 2
       and x09["Headlights (clear pair)"]["fits"] == "2008–2010" and x12["Tail Lights (pair, uncracked)"]["fits"] == "2011–2012"
       and "Sunroof Glass + Motor" not in x09)
 
+y01, y04 = parts(2001, "Hyundai", "Sonata", FWD), parts(2004, "Hyundai", "Sonata", FWD)
+check("§22 Sonata EF: mech 1999-2005 (A/C plain); sunroof 'if equipped'; lamps cut at the 2002 facelift; 2008 untouched",
+      MECH3 <= set(y01) and y01["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1999–2005"
+      and y04["A/C Compressor (clutch spins free)"].get("trim_status") is None and y04["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed"
+      and "Fuel Pump Module (in-tank, test before listing)" not in parts(2008, "Hyundai", "Sonata", FWD))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
