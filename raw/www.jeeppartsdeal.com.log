@@ -1,0 +1,11 @@
+00:50:29 start site=www.jeeppartsdeal.com segments=15 tiers=['A', 'B']
+00:54:50 seg done tier=A Jeep Patriot [2007, 2017] seeds=[2014] records=47 errors=0
+00:58:02 seg done tier=A Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=79 errors=0
+01:01:57 nav-fail Jeep Liberty 2000: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2000-jeep-liberty-parts
+01:01:57 seg done tier=A Jeep Liberty [1998, 2007] seeds=[2005, 2000] records=119 errors=1
+01:05:10 seg done tier=A Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=150 errors=1
+01:09:14 seg done tier=A Jeep Liberty [2008, 2012] seeds=[2008] records=194 errors=1
+01:12:50 seg done tier=A Jeep Compass [2011, 2016] seeds=[2014] records=230 errors=1
+01:18:50 seg done tier=A Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=302 errors=1
+01:25:31 seg done tier=A Jeep Cherokee [2014, 2022] seeds=[2015] records=385 errors=1
+01:25:31 time budget reached records=385
