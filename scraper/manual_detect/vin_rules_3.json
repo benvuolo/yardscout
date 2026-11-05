@@ -126,7 +126,7 @@
     "conditions": [
      "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
      "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char4 in [G]",
+     "fixed characters: char4 in [G], char6 in [4] (Sedan-4DR, the only G70 body in the MY2019-2021 filings)",
      "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
     ]
    },
@@ -142,7 +142,7 @@
     },
     "code_table_source": "manufacturer"
    },
-   "vin_regex_manual": "^(KMT)G2....[KLM].......",
+   "vin_regex_manual": "^(KMT)G24...[KLM].......",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8d45bcde-d30e-4a06-8777-8047db74a582",
@@ -156,7 +156,7 @@
     },
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/77cb1eed-00ff-4c9b-a326-9cdd2f881723",
-     "doc": "MID ORG17605, HATCI letter 2020-02-14, '2021MY Genesis G70'",
+     "doc": "MID ORG17605, HATCI letter 2020-02-10, '2021MY Genesis G70'",
      "says": "5 = 2 '2.0T Sport (MT)', 3 '2.0T Elite, 3.3T Prestige, 3.3T Sport', 4 '2.0T Prestige', 6 '2.0T', 7 '3.3T'; 8 = A 2.0 T-GDI (252HP AT / 255HP MT), E 3.3T; 10 = M."
     },
     {
@@ -178,6 +178,11 @@
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
      "says": "39913 (2019); 41380 (2020); 42495 (2021): G70 RWD 2.0 Manual 6-spd (the only G70 manual rows; AWD and 3.3 rows are Automatic (S8) only); 2022 for contrast: 43926/43927 Automatic (S8) only"
+    },
+    {
+     "url": "https://open.canada.ca/data/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64 (NRCan Fuel Consumption Ratings, MY1995-2014 5-cycle and MY2015-2024 CSVs, downloaded 2026-11-05)",
+     "doc": "Natural Resources Canada fuel consumption ratings",
+     "says": "2019, 2020, 2021 Genesis G70 (RWD) 2.0 L: M6 only; G70 AWD 2.0/3.3: AS8. So a Canadian-market 2.0 RWD G70 of these years is a manual too."
     }
    ],
    "candidate_reason": "",
@@ -290,7 +295,26 @@
     "cars_without_trans_info_by_reason": {},
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 0
+   "newly_confirmed_manual": 0,
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (vin_rules_3 verification)",
+    "verdict": "kept (low_sample)",
+    "checked": [
+     "Re-downloaded the three MID filings (ORG15239 MY2019, ORG16822 MY2020, ORG17605 MY2021) and read the text layer: each lists 4 = G 'GENESIS, G70', 5 = 2 '2.0T Sport (MT)', 6 = 4 'Sedan-4DR', 10 = K/L/M. MY2019-20 code 4 is '... 2.0T Sport (AT)', so the automatic Sport is coded separately. ORG17605's HATCI letter is dated 2020-02-10 (citation corrected from 02-14).",
+     "EPA vehicles.csv re-read: 39913 / 41380 / 42495 'G70 RWD 2.0 Manual 6-spd' are the only manual G70 rows in 2019-2021; none in 2022.",
+     "NRCan (Canada): G70 2.0 RWD is M6-only in 2019-2021, so a Canadian-market car does not break the claim.",
+     "ground_truth.jsonl: the only KMTG line is KMTG34TA7NU096941 (2022, code 3, automatic): out of scope, consistent.",
+     "Inventory scan: no KMTG2 car on the lots; the rule confirms 0 cars today."
+    ],
+    "counter_evidence_searched": [
+     "Searched for a code-2 G70 sold as an automatic or AWD: none found; the AT Sport has its own code (4). Code 2 is reused for '2.5T Prestige RWD' from MY2026, outside the year bound."
+    ],
+    "changes": [
+     "vin_regex_manual narrowed from ^(KMT)G2....[KLM]....... to require char6 = 4 (no count change).",
+     "ORG17605 letter date corrected."
+    ]
+   }
   },
   {
    "id": "hyundai_veloster_n_2019_2020",
@@ -310,8 +334,9 @@
     "conditions": [
      "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
      "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char4 in [T]",
-     "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
+     "fixed characters: char4 in [T], char6 in [6] (Coupe / Hatchback-3DR, the only Veloster N body)",
+     "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)",
+     "US/Canadian-market car (Korean-domestic Veloster N got the 8-speed DCT in April 2020 as a 2020 model; those cars are not sold in North America)"
     ]
    },
    "vin_condition": {
@@ -325,7 +350,7 @@
     },
     "code_table_source": "manufacturer"
    },
-   "vin_regex_manual": "^(KMH)T3....[KL].......",
+   "vin_regex_manual": "^(KMH)T36...[KL].......",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/bb5e5fd1-4a81-419a-8dbc-9f07db2eb7d0",
@@ -356,6 +381,11 @@
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
      "says": "40693 (2019); 41385 (2020): Veloster N 2.0 turbo Manual 6-spd only; 2021 for contrast: 42927 Automatic (AM-S8), 42928 Manual 6-spd"
+    },
+    {
+     "url": "https://open.canada.ca/data/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64 (NRCan Fuel Consumption Ratings, MY1995-2014 5-cycle and MY2015-2024 CSVs, downloaded 2026-11-05)",
+     "doc": "Natural Resources Canada fuel consumption ratings",
+     "says": "2019 and 2020 Hyundai Veloster N 2.0 L: M6 only; 2021 and 2022: AM8 and M6."
     }
    ],
    "candidate_reason": "",
@@ -456,7 +486,27 @@
     },
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 1
+   "newly_confirmed_manual": 1,
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (vin_rules_3 verification)",
+    "verdict": "kept (low_sample)",
+    "checked": [
+     "Re-downloaded ORG16641 (MY2020 Veloster + Veloster N) and ORG15358 (MY2019 Veloster): MY2020 Veloster N is 4 = T, 5 = 3 'Veloster N', 6 = 6, engine 2.0 T-GDI Theta II, 10 = L. Regular Veloster MY2019-2020 uses 5 = F/G/H/J/K, so code 3 is the N alone. ORG18888 (MY2022) keeps code 3 for the N with no DCT split, so MY2021+ is correctly excluded.",
+     "EPA vehicles.csv re-read: 40693 (2019) and 41385 (2020) Veloster N Manual 6-spd only; 2021 adds 42927 Automatic (AM-S8).",
+     "NRCan (Canada): 2019-2020 Veloster N M6 only.",
+     "Hyundai/press: the N DCT was announced for the 2021 North-American model (arrival October 2020; TFLcar 'No Longer Just A Manual', AutoGuide, Motor Authority, Hyundai worldwide newsroom 'Hyundai Unveils the New VELOSTER N with 8-Speed DCT'); search-result excerpts 2026-11-05.",
+     "Lot car KMHT36AH5LU007272 (Pull-A-Part Albuquerque): check digit valid; saved live vPIC decode = 2020 Veloster N, 2.0, T-GDI THETA II. A 2022 KMHT36AH1NU015467 (Orlando) sits outside the year bound, as intended.",
+     "ground_truth.jsonl has no KMHT3 line (no published label to contradict)."
+    ],
+    "counter_evidence_searched": [
+     "Korea-market 2020 Veloster N DCT (April 2020): a domestic-market car, not a US/Canada car; scope condition added. No North-American 2019-2020 DCT found."
+    ],
+    "changes": [
+     "vin_regex_manual narrowed from ^(KMH)T3....[KL]....... to require char6 = 6 (no count change).",
+     "Scope condition for the Korea-market 2020 DCT added."
+    ]
+   }
   },
   {
    "id": "kia_sportage_20_4wd_2005_2009",
@@ -479,7 +529,7 @@
     "conditions": [
      "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
      "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char4 in [J], char5 in [E]",
+     "fixed characters: char4 in [J], char5 in [E], char6 in [7] (4-door SUV)",
      "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
     ]
    },
@@ -495,7 +545,7 @@
     },
     "code_table_source": "manufacturer"
    },
-   "vin_regex_manual": "^(KND)JE..[24].[56789].......",
+   "vin_regex_manual": "^(KND)JE7.[24].[56789].......",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5db7edc1-c870-496f-986c-5961e3f29888",
@@ -516,6 +566,11 @@
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
      "says": "21588 (2005); 22537 (2006); 23814 (2007); 25039 (2008); 25354 (2009): Sportage 4WD 2.0 Manual 5-spd only (the 2.7 4WD rows are Automatic 4-spd; the 2.0 2WD rows list both); 28802 (2010) also Manual 5-spd only, but the MY2010 Sportage guide was not read, so MY2010 is out of scope"
+    },
+    {
+     "url": "https://open.canada.ca/data/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64 (NRCan Fuel Consumption Ratings, MY1995-2014 5-cycle and MY2015-2024 CSVs, downloaded 2026-11-05)",
+     "doc": "Natural Resources Canada fuel consumption ratings",
+     "says": "Kia 'Sportage 4X4' 2.0 L: M5 only in each of 2005, 2006, 2007, 2008 and 2009 (2.7 4X4: A4/AS4); 2WD 'Sportage' 2.0 L lists A4/AS4 and M5. So the Canadian-market Sportage 2.0 4WD was manual-only too."
     }
    ],
    "candidate_reason": "",
@@ -747,7 +802,27 @@
     },
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 5
+   "newly_confirmed_manual": 5,
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (vin_rules_3 verification)",
+    "verdict": "kept (low_sample)",
+    "checked": [
+     "Re-read the Kia MID guides from the cached PDFs: ORG10855 (June 2004, MY2005), ORG10858 (MY2006), ORG10854 (MY2007), ORG10857 (MY2008), ORG10860 (MY2009). Each lists the Sportage (KM): 5 = E 4WD / F 2WD, 6 = 7 4-door SUV, 8 = 2 '2.0L DOHC (Federal)', 3 '2.7L DOHC / V6', 4 '2.0L DOHC (50-State)'. No transmission position.",
+     "EPA vehicles.csv re-read: 21588, 22537, 23814, 25039, 25354 'Sportage 4WD 2.0 Manual 5-spd' are the only 2.0 4WD rows 2005-2009; the 2.0 2WD rows list Automatic 4-spd and Manual 5-spd.",
+     "NRCan (Canada) 2005-2009: 'Sportage 4X4' 2.0 is M5 only, so Canadian-market cars in US yards are covered.",
+     "Ground truth: of the 16 KNDJE lines, 15 are code 3 (2.7 V6) automatics and the only code-4 line (KNDJE724687462225, 2008) is manual. No KNDJE7?2/4 car with an automatic label anywhere.",
+     "Inventory scan: all 6 in-scope US cars still on the lots, check digits valid, saved live vPIC decodes all 2.0 L + 4WD/4x4. A code-2 car at Pick-n-Pull Edmonton (KNDJE722897SR0468) fails the check digit and is at a Canadian yard: not counted.",
+     "Web (search excerpts 2026-11-05): Cars.com 2007/2008/2009 trim lists show '4dr LX 4WD I4 Manual' and no 4WD I4 automatic; the Canadian 2008 brochure says AWD on the four-cylinder only with the manual; AutoGuide 2009 says the 4WD is not offered with the four-cylinder/automatic combination; CarSpecs 2006 'LX 2.0L 4x4 Manual'; 17vin ties the KNDJE724 prefix to the 2.0 MT LX and the 2.0 AT LX to KNDJF724."
+    ],
+    "counter_evidence_searched": [
+     "Open Labor Project lists a '2007/2008 Sportage 2.0L I4 AWD' with an automatic (page not reachable from this session; a cost-of-ownership database with generic trims, contradicted by EPA, NRCan and Kia's Canadian brochure).",
+     "A search excerpt attributes to Autotrader.ca 2009 'four-cylinder all-wheel models use the automatic only' (page not reachable; contradicted by NRCan's 2009 'Sportage 4X4' 2.0 = M5 only and by EPA 25354). Neither is treated as refuting."
+    ],
+    "changes": [
+     "vin_regex_manual narrowed from ^(KND)JE..[24].[56789]....... to require char6 = 7 (no count change)."
+    ]
+   }
   },
   {
    "id": "hyundai_tucson_20_awd_2005_2009",
@@ -806,6 +881,11 @@
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
      "says": "21410 (2005); 22517 (2006); 23795 (2007); 25027 (2008); 25348 (2009): Tucson 4WD 2.0 Manual 5-spd only; 2.7 4WD rows Automatic 4-spd only; 2010 (new 2.4 Tucson) for contrast: 29948 Automatic 6-spd, 29949 Manual 6-spd"
+    },
+    {
+     "url": "https://open.canada.ca/data/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64 (NRCan Fuel Consumption Ratings, MY1995-2014 5-cycle and MY2015-2024 CSVs, downloaded 2026-11-05)",
+     "doc": "Natural Resources Canada fuel consumption ratings",
+     "says": "Tucson 2.0 L is listed only as 'Tucson' / 'Tucson Wagon' (A4/AS4 and M5) with no drive split; only the 2.7 has a 4X4/AWD row. Canada data cannot separate the 2.0 AWD."
     }
    ],
    "candidate_reason": "EPA lists only 'Tucson 4WD 2.0 Manual 5-spd' every year and Jalopnik, Autotrader.ca and Cars.com's 2005 trim list say the 2.0 AWD came only with the manual, but Cars.com's 2007 review says both gearboxes could be had with optional four-wheel drive and Auto123's 2006 GL AWD spec page lists an optional automatic. Not certain enough for a badge.",
@@ -962,7 +1042,21 @@
     },
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 4
+   "newly_confirmed_manual": 4,
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (vin_rules_3 verification)",
+    "verdict": "stays candidate (not counted)",
+    "checked": [
+     "EPA rows re-read: 2.0 4WD Manual 5-spd only, 2005-2009.",
+     "NRCan does not split the 2.0 by drive, so it neither supports nor refutes; the conflicting Canadian Auto123 2006 GL AWD automatic spec page stays unresolved.",
+     "Inventory scan now finds 5 in-scope cars (a 5th, KM8JM72BX6U436657 at Pick-n-Pull Sparks NV, check digit valid, arrived after the generator ran). Ground truth has no KM8J?7?B line."
+    ],
+    "counter_evidence_searched": [
+     "Cars.com 2007 review and Auto123 2006 spec page (automatic with AWD) remain conflicts."
+    ],
+    "changes": []
+   }
   },
   {
    "id": "kia_sportage_2wd_sohc_1995_1996",
@@ -1109,7 +1203,20 @@
     "cars_without_trans_info_by_reason": {},
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 0
+   "newly_confirmed_manual": 0,
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (vin_rules_3 verification)",
+    "verdict": "stays candidate (not counted)",
+    "checked": [
+     "EPA re-read: 12423 (1995) and 13157 (1996) Sportage 2WD 2.0 Manual 5-spd are the only 2WD rows; 1997 adds Automatic 4-spd.",
+     "NRCan has no 1995-96 Sportage rows. No in-scope car on the lots or in ground truth."
+    ],
+    "counter_evidence_searched": [
+     "Carwhere 1996 2WD automatic conflict and the code-3 (DOHC) 2WD cars not in the filing remain."
+    ],
+    "changes": []
+   }
   },
   {
    "id": "hyundai_elantra_16_1993_1995",
@@ -1170,6 +1277,11 @@
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
      "says": "9931 (1993); 10907 (1994); 11858 (1995): Elantra 1.6 Manual 5-spd only; 1.8 rows list both"
+    },
+    {
+     "url": "https://open.canada.ca/data/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64 (NRCan Fuel Consumption Ratings, MY1995-2014 5-cycle and MY2015-2024 CSVs, downloaded 2026-11-05)",
+     "doc": "Natural Resources Canada fuel consumption ratings",
+     "says": "1995 Hyundai Elantra 1.6 L: M5 only (1.8 L: A4 and M5). 1993-94 not in the dataset."
     }
    ],
    "candidate_reason": "EPA and Consumer Guide agree that from 1993 the 1.6 was manual-only, but Carwhere lists a 1993 1.6 automatic; no lot car is in scope.",
@@ -1279,7 +1391,20 @@
     "cars_without_trans_info_by_reason": {},
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 0
+   "newly_confirmed_manual": 0,
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (vin_rules_3 verification)",
+    "verdict": "stays candidate (not counted)",
+    "checked": [
+     "EPA re-read: 9931 (1993), 10907 (1994), 11858 (1995) Elantra 1.6 Manual 5-spd only; 1992 (8888/8889) lists an automatic 1.6, so the MY1993 start bound is right.",
+     "NRCan 1995 Elantra 1.6: M5 only. No in-scope car on the lots or in ground truth."
+    ],
+    "counter_evidence_searched": [
+     "Carwhere 1993 1.6 automatic conflict remains."
+    ],
+    "changes": []
+   }
   },
   {
    "id": "kia_rio_code_L_lx_mt_2014_2016",
@@ -1443,7 +1568,17 @@
     "cars_without_trans_info_by_reason": {},
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 0
+   "newly_confirmed_manual": 0,
+   "verified": {
+    "verified_utc": "2026-11-05",
+    "verifier": "adversarial pass (vin_rules_3 verification)",
+    "verdict": "stays dropped",
+    "checked": [
+     "Drop reason accepted: the code labels are contradicted by real manual LX VINs carrying M. No KNADL car on the lots or in ground truth."
+    ],
+    "counter_evidence_searched": [],
+    "changes": []
+   }
   }
  ],
  "newly_confirmed_manual_cars": [
@@ -2347,5 +2482,17 @@
    }
   ],
   "finding": "Only Kia Rio MY2014 (L '1.6 Manual Trans LX STD', M/N/P '1.6 AT ...') and MY2016 (L 'LX M/T', M 'LX A/T', N 'LX A/T Power Pkg') name a transmission in position 5 (rule kia_rio_code_L_lx_mt_2014_2016, dropped). Where vPIC returns a TransmissionStyle (MY2008, MY2017+), it is the same for every position-5 code of the line (line/engine-level default), apart from the lines listed under of_which_transmission_varies_with_position_5."
+ },
+ "verification": {
+  "verified_utc": "2026-11-05",
+  "method": "Adversarial re-check of every rule: re-downloaded the G70 and Veloster/Veloster N MID filings and re-read the cached Kia MY2005-2009 guides; re-read every EPA cell from epa/vehicles.csv; added Natural Resources Canada fuel-consumption ratings (open.canada.ca) as a second government source covering Canadian-market cars; scanned ground_truth.jsonl and inventory_live.json for every KNDJE7, KMHT3, KMTG and KM8J?7?B VIN; checked VIN check digits and the saved live vPIC decodes; web search for counter-examples (2.0 4WD automatic Sportage, 2019-20 Veloster N DCT, code-2 G70 automatic).",
+  "rules_refuted": 0,
+  "rules_narrowed": [
+   "genesis_g70_20t_sport_mt_2019_2021 (char6 = 4)",
+   "hyundai_veloster_n_2019_2020 (char6 = 6; Korea-market DCT excluded by scope)",
+   "kia_sportage_20_4wd_2005_2009 (char6 = 7)"
+  ],
+  "count_change": "none: 6 newly confirmed manuals (5 Sportage 2.0 4WD, 1 Veloster N) before and after",
+  "limits": "WebFetch could not reach cars.com, edmunds.com, autotrader.ca, kiamedia.com, 17vin.com, openlaborproject.com or xr793.com from this session; web evidence is search-result excerpts. The Sportage and Veloster N cars are also listed by epa_sole.json (same claim); whoever merges the worklists must count each car once."
  }
 }
