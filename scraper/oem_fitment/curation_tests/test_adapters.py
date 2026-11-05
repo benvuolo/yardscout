@@ -38,6 +38,97 @@ r["fitment"][0]["engines"] = ["2.5L L4"]
 check("an engine not printed is caught", "fitment_cell_not_printed" in
       A.evidence_problems(A.to_record("www.toyotapartsnow.com", "toyota", 1, r)))
 
+# review F6: the parsed fields that drive coverage must EQUAL the printed
+# cells (not be substrings of them), the printed header must be the parsed
+# layout's, and printed Replaces / Replaced By / Position must be parsed
+TOYS = "www.toyotapartsnow.com"
+SIEN = {"site": TOYS, "category": "window-regulator", "pn": "69801-08S01", "name": "Window Regulator",
+        "aux_desc": "Regulator Sub-Assembly", "product_url": f"https://{TOYS}/oem/toyota~part~69801-08s01",
+        "list_section": "diagram", "position": "Passenger Side", "replaces": [], "replaced_by": [],
+        "fitment": [{"years": [2004, 2010], "make": "Toyota", "model": "Sienna",
+                     "trims": ["CE", "LE", "Limited", "XLE", "XLE Limited"],
+                     "engines": ["6 Cyl 3.3 L GAS", "6 Cyl 3.5 L GAS"],
+                     "raw": "2004-2010 Toyota Sienna | CE, LE, Limited, XLE, XLE Limited | 6 Cyl 3.3 L GAS, 6 Cyl 3.5 L GAS"}],
+        "evidence_lines": ["Position", "Passenger Side", "Vehicle Fitment", "Year Make Model", "Trim", "Engine",
+                           "2004-2010 Toyota Sienna", "CE, LE, Limited, XLE, XLE Limited",
+                           "6 Cyl 3.3 L GAS, 6 Cyl 3.5 L GAS"], "retrieved": "2026-11-05T01:23:03Z"}
+
+
+def ev_probs(mut=None):
+    o = copy.deepcopy(SIEN)
+    if mut:
+        mut(o)
+    return A.evidence_problems(A.to_record(TOYS, "toyota", 1, o))
+
+
+check("F6 baseline: the Sienna regulator record is consistent", ev_probs() == [], str(ev_probs()))
+
+
+def trim_cell(o):
+    old = "CE, LE, Limited, XLE, XLE Limited"
+    o["fitment"][0]["raw"] = o["fitment"][0]["raw"].replace(old, "CE, XLE, XLE Limited")
+    o["evidence_lines"] = ["CE, XLE, XLE Limited" if x == old else x for x in o["evidence_lines"]]
+
+
+check("F6 printed trim cell 'CE, XLE, XLE Limited' with parsed LE/Limited ('LE' is inside 'XLE'): caught",
+      "fitment_cell_not_printed" in ev_probs(trim_cell), str(ev_probs(trim_cell)))
+
+
+def fourth_col(o):
+    o["fitment"][0]["raw"] += " | With Power Sliding Door"
+    o["evidence_lines"].insert(o["evidence_lines"].index("Engine") + 1, "Important vehicle option details")
+    o["evidence_lines"].append("With Power Sliding Door")
+
+
+check("F6 a 4th printed option column the record does not carry (layout stays 'trim'): caught",
+      {"fitment_cell_count", "fitment_header_not_layout"} <= set(ev_probs(fourth_col)), str(ev_probs(fourth_col)))
+
+
+def solara(o):
+    o["fitment"][0]["model"] = "Camry"
+    o["fitment"][0]["raw"] = o["fitment"][0]["raw"].replace("Toyota Sienna", "Toyota Camry Solara")
+    o["evidence_lines"] = [x.replace("Toyota Sienna", "Toyota Camry Solara") for x in o["evidence_lines"]]
+
+
+check("F6 parsed model 'Camry' on a printed 'Camry Solara' row: caught",
+      "fitment_model_not_printed" in ev_probs(solara), str(ev_probs(solara)))
+
+
+def rb_dropped(o):
+    o["evidence_lines"] = ["Replaced By", "69801-08S50"] + o["evidence_lines"]
+
+
+check("F6 a printed 'Replaced By' number missing from the record: caught",
+      "printed_replaced_by_not_in_record" in ev_probs(rb_dropped), str(ev_probs(rb_dropped)))
+
+
+def rp_dropped(o):
+    o["evidence_lines"] = ["Replaces", "69801-08S00"] + o["evidence_lines"]
+
+
+check("F6 a printed 'Replaces' number missing from the record: caught",
+      "printed_replaces_not_in_record" in ev_probs(rp_dropped))
+check("F6 a printed Position the record lost: caught",
+      "printed_position_not_in_record" in ev_probs(lambda o: o.update(position=None)))
+
+
+def engine_extra(o):
+    o["fitment"][0]["engines"] = ["6 Cyl 3.3 L GAS"]
+
+
+check("F6 parsed engines narrower than the printed engine cell: caught",
+      "fitment_cell_not_printed" in ev_probs(engine_extra))
+check("F6 option layout: the printed option cell must equal other_columns",
+      A.evidence_problems(A.to_record(TOYS, "toyota", 1, toy[0])) == []
+      and "fitment_cell_not_printed" in A.evidence_problems(A.to_record(TOYS, "toyota", 1, {
+          **copy.deepcopy(toy[0]), "fitment": [dict(f, other_columns={"Important vehicle option details": "2AZFE"})
+                                               for f in toy[0]["fitment"]]})))
+pg = copy.deepcopy(nis[0])
+pg["fitment"] = [dict(f, trims=f["trims"][:1]) if f["trims"] else f for f in pg["fitment"]]
+check("F6 PartsGiant: parsed trims narrower than the printed trim cell are caught",
+      any(f["trims"] for f in nis[0]["fitment"])
+      and "fitment_cell_not_printed" in A.evidence_problems(A.to_record("www.nissanpartsdeal.com", "nissan", 1, pg)))
+
 # field mapping
 rec = A.to_record("www.nissanpartsdeal.com", "nissan", 1, nis[0])
 check("PartsGiant 'Replaced By:' info feeds the chain, not the notes",

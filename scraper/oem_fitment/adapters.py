@@ -136,6 +136,9 @@ class FitRow:
     layout: str        # "trim" | "option"
     raw: str
     trims_from_options: bool = False
+    # SimplePart option-layout columns as printed ({header: value}); the
+    # evidence re-check compares them with the printed row (§5.3)
+    other_columns: dict = field(default_factory=dict)
 
     def trim_atoms(self) -> frozenset:
         return frozenset(a for t in self.trims for a in trim_atoms(t))
@@ -327,7 +330,9 @@ def to_record(site: str, ns: str, line: int, o: dict) -> Record:
             rows.append(FitRow(i, int(f["years"][0]), int(f["years"][1]), _clean(f.get("make")),
                                _clean(f.get("model")), list(f.get("trims") or []),
                                list(f.get("engines") or []), [], "option" if other else "trim",
-                               f.get("raw") or ""))
+                               f.get("raw") or "",
+                               other_columns=dict(other) if isinstance(other, dict) else
+                               ({"?": str(other)} if other else {})))
     else:
         name, aux = _clean(o.get("name")), ""
         info = [_clean(x) for x in (o.get("list_info") or []) if _clean(x)]
@@ -520,39 +525,140 @@ def evidence_problems(r: Record) -> list:
                 if not ok:
                     probs.append("fitment_row_not_in_evidence")
                     break
-    # fitment fields consistent with the printed row
+    # fitment fields equal to the printed row, cell by cell (not substrings:
+    # "LE" is inside "XLE", "Toyota Camry" inside "Toyota Camry Solara")
     for f in r.rows:
-        cells = [c.strip() for c in f.raw.split(" | ")]
-        ymm = cells[0] if cells else ""
-        spans = [(int(a), int(b or a)) for a, b in re.findall(r"(\d{4})(?:\s*-\s*(\d{4}))?", ymm.split(f.make)[0])]
-        if (f.lo, f.hi) not in spans or f.lo > f.hi:
-            probs.append("fitment_years_not_printed")
+        why = _row_fields_problem(r.template, f)
+        if why:
+            probs.append(why)
             break
-        if f.make and f.model and f"{f.make} {f.model}" not in ymm:
-            probs.append("fitment_model_not_printed")
-            break
-        rest = " | ".join(cells[1:])
-        if any(t and t not in rest for t in f.trims) or any(e and e not in rest for e in f.engines):
-            probs.append("fitment_cell_not_printed")
-            break
-    # position
+    # the printed header must be the one the parsed layout implies (a 4th
+    # option column the record does not carry changes the layout)
+    if r.template == "simplepart" and r.rows:
+        why = _simplepart_header_problem(ev, r.rows)
+        if why:
+            probs.append(why)
+    # position: the parsed value is printed, and a printed Position is parsed
+    pos_vals = _label_values(ev, "Position")
     if r.position:
-        pos_vals = _label_values(ev, "Position")
         list_lines = [x.split(": ", 1)[1] for x in ev if x.startswith("Parts list ") and ": " in x]
         if r.template == "partsgiant":
             if r.position not in pos_vals and r.position not in list_lines:
                 probs.append("position_not_in_evidence")
         elif r.position not in pos_vals:
             probs.append("position_not_in_evidence")
-    # replaces / replaced_by
+    elif pos_vals and not any(str(x).startswith("position conflict") for x in r.flags):
+        # (a PartsGiant list/product side conflict leaves position empty on
+        # purpose and is flagged, which already makes the record unverified)
+        probs.append("printed_position_not_in_record")
+    # replaces / replaced_by, both ways: every parsed number is printed after
+    # its label, and every number printed after the label is in the record
+    # (a dropped "Replaced By" would hide a successor from closure C5)
     for label, vals in (("Replaces", r.replaces), ("Replaced By", r.replaced_by)):
         printed = " ".join(_label_values(ev, label))
-        pn_printed = {norm(x) for x in re.split(r"[,\s]+", printed) if x}
+        pn_printed = {norm(x) for x in re.split(r"[,\s]+", printed) if norm(x)}
         for v in vals:
             if norm(v) not in pn_printed:
                 probs.append(f"{label.lower().replace(' ', '_')}_not_in_evidence")
                 break
+        if label == "Replaced By" and r.chain_unknown:
+            continue      # "(MultiSupersession)": chain_unknown already blocks (§5.2)
+        parsed = {norm(v) for v in vals}
+        if label == "Replaced By":
+            parsed |= {norm(v) for v in r.list_replaced_by}
+        if pn_printed - parsed:
+            probs.append(f"printed_{label.lower().replace(' ', '_')}_not_in_record")
     return probs
+
+
+def _cell(s) -> str:
+    """A printed cell for comparison: whitespace runs collapsed and the
+    space around list commas normalized ("Technology , Sport" and
+    "Technology, Sport" are one cell). Nothing else is normalized."""
+    return re.sub(r"\s*,\s*", ", ", _clean(s)).strip(" ,")
+
+
+def _joined(items) -> str:
+    return _cell(", ".join(_clean(x) for x in items or []))
+
+
+def _ymm_problem(f: FitRow, ymm: str) -> str | None:
+    """The year/make/model cell must be exactly '<spans> <make> <model>'
+    with (lo, hi) one of the printed spans."""
+    suffix = f" {f.make} {f.model}"
+    if not f.make or not f.model or not ymm.endswith(suffix):
+        return "fitment_model_not_printed"
+    spans = []
+    for part in ymm[: -len(suffix)].split(","):
+        m = re.fullmatch(r"\s*(\d{4})(?:\s*-\s*(\d{4}))?\s*", part)
+        if not m:
+            return "fitment_years_not_printed"
+        spans.append((int(m.group(1)), int(m.group(2) or m.group(1))))
+    if (f.lo, f.hi) not in spans or f.lo > f.hi:
+        return "fitment_years_not_printed"
+    return None
+
+
+def _row_fields_problem(template: str, f: FitRow) -> str | None:
+    cells = [_clean(c) for c in (f.raw or "").split("|")]
+    why = _ymm_problem(f, cells[0] if cells else "")
+    if why:
+        return why
+    if template == "simplepart":
+        # trim layout: Year Make Model | Trim | Engine
+        # option layout: Year Make Model | Engine | <each other column>
+        if f.layout == "trim":
+            if len(cells) != 3:
+                return "fitment_cell_count"
+            if _cell(cells[1]) != _joined(f.trims) or _cell(cells[2]) != _joined(f.engines):
+                return "fitment_cell_not_printed"
+            return None
+        if len(cells) != 2 + len(f.other_columns):
+            return "fitment_cell_count"
+        if _cell(cells[1]) != _joined(f.engines) or f.trims:
+            return "fitment_cell_not_printed"
+        if [_cell(c) for c in cells[2:]] != [_cell(v) for v in f.other_columns.values()]:
+            return "fitment_cell_not_printed"
+        return None
+    # PartsGiant prints the columns its catalog has (trims, engines, the
+    # options column), some empty, some joined by a bare "|": the printed
+    # non-empty cells must be, in order, exactly the parsed non-empty fields.
+    # Where the options column is the trims (option_column_is_trims), the
+    # parsed trims must equal that column.
+    if f.trims_from_options:
+        if _joined(f.trims) != _joined(f.options):
+            return "fitment_cell_not_printed"
+        want = [_joined(f.engines), _joined(f.options)]
+    else:
+        want = [_joined(f.trims), _joined(f.engines), _joined(f.options)]
+    want = [c for c in want if c]
+    got = [_cell(c) for c in cells[1:] if _cell(c)]
+    if got != want:
+        return "fitment_cell_not_printed"
+    return None
+
+
+def _simplepart_header_problem(ev: list, rows: list) -> str | None:
+    """SimplePart prints 'Vehicle Fitment', 'Year Make Model', then the
+    column headers: 'Trim', 'Engine' (trim layout) or 'Engine' and each
+    option column's header (option layout). One table, one header: rows of
+    both layouts in one record cannot both be what the page printed."""
+    heads = set()
+    for f in rows:
+        heads.add(("Trim", "Engine") if f.layout == "trim" else ("Engine",) + tuple(_clean(k) for k in f.other_columns))
+    if len(heads) != 1:
+        return "fitment_layouts_mixed"
+    try:
+        s = ev.index("Vehicle Fitment")
+    except ValueError:
+        return "no_fitment_header"
+    # the header, then directly the first row's Year Make Model cell (an
+    # extra header column the record does not carry sits in between)
+    first = _clean((rows[0].raw or "").split("|")[0])
+    want = ["Year Make Model", *next(iter(heads)), first]
+    if ev[s + 1: s + 1 + len(want)] != want:
+        return "fitment_header_not_layout"
+    return None
 
 
 # --------------------------------------------------------- rule drift matcher
