@@ -33,11 +33,11 @@ from pathlib import Path
 
 import requests
 
-UA = "YardScout-research/1.0 (+https://yardscout.io; OEM fitment lookup, 1 req/4s)"
+UA = "YardScout-research/1.0 (+https://yardscout.io; OEM fitment lookup, 1 req/8s)"
 ROOT = Path(__file__).resolve().parent
 STATE = ROOT / ".state"
 CACHE = ROOT / "cache"
-PER_DOMAIN_GAP = 4.0
+PER_DOMAIN_GAP = 8.0  # 2026-11-05: was 4.0; moparpartsgiant (403) and vwpartsgiant (503) refused at ~3.5 req/s network-wide
 GLOBAL_GAP = 0.5
 TIMEOUT = 40
 

@@ -59,10 +59,11 @@ jobs:
     timeout-minutes: 350
     strategy:
       fail-fast: false
-      # At most 8 sites at once WITHIN one run (about 2 requests/s across the
-      # dealer-catalog network at 4 s per site). Separate manual dispatches are
-      # separate runs and are not capped by this; the 6-hourly scheduled run
-      # is the steady state once the first per-site runs finish.
+      # At most 8 sites at once WITHIN one run: about 1 request/s across the
+      # dealer-catalog network at 8 s per site. Dispatch ONE run for all sites
+      # (never one run per site): separate runs are not capped by this.
+      # 2026-11-05: moparpartsgiant (403) and vwpartsgiant (503) refused when
+      # ~14 separate runs added up to ~3.5 requests/s.
       max-parallel: 8
       matrix:
         site: ${{ fromJSON(needs.plan.outputs.sites) }}
