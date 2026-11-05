@@ -136,7 +136,8 @@ class SimplePart:
                  year_path: str = "/catalog/{year}-{make}-{model}-parts",
                  product_prefixes: tuple[str, ...] = ("/oem/",),
                  category_notes: dict[str, str] | None = None,
-                 product_rules: dict[str, str] | None = None):
+                 product_rules: dict[str, str] | None = None,
+                 slug_checks: bool = False):
         """
         site:           domain
         url_make:       feed make -> make token in catalog URLs ("Scion" -> "scion")
@@ -154,6 +155,11 @@ class SimplePart:
                         for facts the list page does not print (front vs rear
                         door, driver vs passenger switch). The matched text is
                         kept in `product_check`.
+        slug_checks:    also apply the exclusions and the reman test to the product URL's
+                        name slug (/genuine/<make>~<name-slug>~<pn>), for stores whose list
+                        names are loose (mitsubishipartsgiant lists bolt 7812A133 as
+                        "Dehydrator", slug bolt-a-c-condenser; reman M1810A001D as "Starter",
+                        slug remanufactured-starter). Subclasses may also check `slug` in match().
         """
         self.site = site
         self.base = f"https://{site}"
@@ -166,6 +172,7 @@ class SimplePart:
         self.product_prefixes = tuple(product_prefixes)
         self.category_notes = dict(category_notes or {})
         self.product_rules = {k: re.compile(v, re.I) for k, v in (product_rules or {}).items()}
+        self.slug_checks = slug_checks
 
     # ---- navigation
     def slug(self, make: str, model: str, year: int | None = None) -> str:
@@ -222,12 +229,12 @@ class SimplePart:
             return aux
         return main or aux
 
-    def match(self, cat: str, main: str, aux: str) -> bool:
+    def match(self, cat: str, main: str, aux: str, slug: str = "") -> bool:
         inc, exc = self.rules[cat]
         name = self.oem_name(main, aux)
         if not inc.search(name):
             return False
-        for s in (main, aux):
+        for s in (main, aux, slug.replace("-", " ") if self.slug_checks else ""):
             t = QUALIFIER.sub(" ", s or "")
             if GLOBAL_EXCLUDE.search(t) or (exc and exc.search(t)):
                 return False
@@ -252,7 +259,8 @@ class SimplePart:
             if url.rsplit("~", 1)[-1].replace("-", "").lower() != pn.replace("-", "").lower():
                 continue
             main, aux = _clean(r.get("mainDesc")), _clean(r.get("auxiliaryDesc"))
-            if not self.match(cat, main, aux):
+            name_slug = url.split("~")[1] if url.count("~") >= 2 else ""
+            if not self.match(cat, main, aux, name_slug):
                 continue
             notes = _extra(r, "Part Notes")
             rec = found.get(pn)
@@ -267,7 +275,7 @@ class SimplePart:
                 }
             # a number is reman only if every row listing it says so (VW prints
             # one X-number on a "New" row and on a "Remanufactured" row)
-            rec["reman"] = rec["reman"] and (bool(REMAN.search(" ".join([main, aux, notes]))) or bool(re.match(r"^R\d", pn)))
+            rec["reman"] = rec["reman"] and (bool(REMAN.search(" ".join([main, aux, notes, name_slug if self.slug_checks else ""]))) or bool(re.match(r"^R\d", pn)))
             if notes and notes not in rec["list_notes"]:
                 rec["list_notes"].append(notes)
             loc = _extra(r, "Location")
