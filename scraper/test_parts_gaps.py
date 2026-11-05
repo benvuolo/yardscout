@@ -613,6 +613,12 @@ check("§22 Captiva Sport: mech 2012-15; AWD unit 2012 only; 'Captiva' listings 
       and v12["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in v14
       and [m["display"] for m in js.match_vehicle(2013, "Chevrolet", "Captiva")] == ["Chevrolet Captiva Sport"])
 
+a94, a00 = parts(1994, "Buick", "Park Avenue", FWD), parts(2000, "Buick", "Park Avenue", FWD)
+check("§22 Park Avenue: mech per generation (new 1997 break); sunroof gen 2 only; lamps cut at 1993/1995 and 2003/2005",
+      MECH3 <= set(a94) and MECH3 <= set(a00) and a94["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1991–1996"
+      and a00["Radiator Fan Assembly"]["fits"] == "1997–2005" and "Sunroof Glass + Motor" not in a94
+      and a94["Tail Lights (pair, uncracked)"]["fits"] == "1993–1994" and a00["Tail Lights (pair, uncracked)"]["fits"] == "1997–2002")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

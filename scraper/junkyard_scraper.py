@@ -6097,6 +6097,18 @@ _gap_extend("captiva sport", parts=[
     ]),
 ])
 
+# Buick Park Avenue (299 cars generic-only; 1991-96 and 1997-2005, new
+# GENERATION_BREAKS 1997). Appearance cuts at 1993 (grille, tail lamps),
+# 1995 (base grille, fascias; catalog headlamp change), 2003 (Ultra grille)
+# and 2005 (grille, tail lamps, rear fascia) in FACELIFT_BREAKS. A/C
+# standard (1996 base car; CG 2000-01; 2005 brochure). Sunroof optional on
+# the 2nd gen (CG 2000-01, 2005 brochure); 1st-gen availability is
+# snippet-only, so not claimed.
+_gap_extend("park avenue", parts=[
+    *_per_gen([(1991, 1996), (1997, 2005)], [*_GAP_MECH]),
+    *_per_gen([(1997, 2005)], [_SUNROOF]),
+])
+
 # ---- end of §22 block
 
 _apply_consensus_evergreens()
@@ -6371,6 +6383,7 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    "park avenue": [1997],                 # 1st gen 1991-96, 2nd gen 1997-2005 (PARTS_GAPS §22.4)
     "stratus": [2001],                     # JA sedan 1995-2000, JR sedan 2001-06 (+ Mitsubishi-based coupe 2001-05) (PARTS_GAPS §21.6)
     "spark": [2016],                       # M300 2013-15, M400 2016-22 (PARTS_GAPS §21.3)
     "mariner": [2008],                     # 1st gen 2005-07, 2nd gen 2008-11 (PARTS_GAPS §21.1)
@@ -6600,6 +6613,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     # §22 (PARTS_GAPS §22; cited there)
     "milan": [2010],
     "encore": [2017],
+    "park avenue": [1993, 1995, 2003, 2005],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

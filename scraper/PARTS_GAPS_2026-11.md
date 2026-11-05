@@ -1945,3 +1945,42 @@ entry instead of nothing.
 
 Result (same inventory): generic-only 14,788 (4.4%) → 14,487 (4.3%); no
 entry 12,409 → 12,403.
+
+### 22.4 Buick Park Avenue 1991–1996, 1997–2005
+
+Basis: WP Buick_Park_Avenue; consumerguide.com/used/1991-96-buick-park-avenue
+and /used/1997-05-buick-park-avenue; blog.consumerguide.com 2005 review
+flashback; cars.com 2003 "What's New"; 2005 Park Avenue brochure (pdf);
+theautochannel.com 1996 review; GM parts catalog pages (chevypartsdeal.com)
+for lamp part numbers (fetched).
+- **New `GENERATION_BREAKS` "park avenue": [1997]:** the entry had no breaks.
+- **Cuts added to `FACELIFT_BREAKS`:**
+  - 1993: "new grilles and taillights" (CG); tail lamp part numbers change
+    from 1991–92 to 1993–96 (GM catalog).
+  - 1995: "Base cars also got a new grille, bodyside moldings, and fascias"
+    (CG); headlamp part numbers change from 1994 to 1995 (catalog only).
+  - 2003: "Ventiports returned on the Park Avenue Ultra along with a bolder
+    grille" (WP); Ultra only, and the cut is conservative for base cars.
+  - 2005: "revisions to grille and taillamps" (CG); updated rear fascia
+    (WP); tail lamp part numbers change from 1998–2004 to 2005 (catalog).
+  The existing Park Avenue lamp rows are now cut at these years and at
+  1997.
+- **A/C:** standard ("the usual standard comfort items … air conditioning",
+  1996; CG 2000–01 lists dual-zone automatic climate control; 2005
+  brochure).
+- **Sunroof:** optional on the 2nd gen ($1,095 with the Prestige package in
+  2000–01; Prestige/Ultra in 2005). 1st-gen availability is snippet-only.
+- **Ultra vs base tail lamps:** they differ 1991–97 and are shared 1998–2005
+  (GM catalog). The existing generic tail-light row does not separate Ultra
+  in 1991–97; flagged, not changed.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1991–96, 1997–2005 | — | Every car. |
+| Sunroof | 1997–2005 | option | |
+
+Left out, no stated basis: the supercharger (engine), Ultra-specific lamp
+rows, the 1st-gen sunroof.
+
+Result (same inventory): generic-only 14,487 (4.3%) → 14,188 (4.2%). Park
+Avenue 299 → 0.
