@@ -59,6 +59,9 @@ jobs:
     timeout-minutes: 350
     strategy:
       fail-fast: false
+      # Most catalogs belong to one dealer-catalog network: at most 8 sites at
+      # once keeps the network-wide rate near 2 requests/s (4 s per site).
+      max-parallel: 8
       matrix:
         site: ${{ fromJSON(needs.plan.outputs.sites) }}
     concurrency:

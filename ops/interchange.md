@@ -122,3 +122,13 @@ first. Owner approved multi-agent ("ultra") scale.
   toyotapartsdeal, chevypartsdeal (same network, not independent). Terms pages
   are client-rendered, so a human must read them before ALLOWED changes.
   ALLOWED not edited.
+
+- 01:06 UTC: source scout (a9800c4, SOURCES.md) found 7 more catalogs; hub
+  read both template families' sales-policy terms (no automation clause) and
+  allowed them (e50b9b0): vwpartsgiant, mazdapartsnow, bmwpartsdeal,
+  mbpartsgiant, mitsubishipartsgiant, volvopartsgiant, audipartsgiant
+  (conditional). Coverage ceiling 89% -> 98.4% of lot cars. Builders:
+  SimplePart session -> VW, Mazda, Mercedes; session_016ZzJfL2a85N1tgt5nnonXc
+  -> Mitsubishi, Volvo, Audi; Subaru/Lexus session -> + BMW. Second-source
+  catalogs (toyotapartsdeal, chevypartsdeal) not used: same network, load only.
+  Crawl matrix capped at 8 sites at once (network-wide ~2 req/s).
