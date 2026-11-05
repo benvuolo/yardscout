@@ -10,3 +10,14 @@
 02:53:14 seg done tier=A Acura MDX [2007, 2013] seeds=[2007] records=255 errors=0
 03:06:34 seg done tier=A Acura RL [1996, 2012] seeds=[2005, 2000] records=304 errors=0
 03:14:50 time budget reached records=334
+03:14:58 start site=www.acurapartswarehouse.com segments=12 tiers=['A', 'B']
+03:14:58 seg done tier=A Acura TL [1996, 2014] seeds=[2005] records=334 errors=0
+03:14:58 seg done tier=A Acura MDX [2001, 2006] seeds=[2005] records=334 errors=0
+03:14:58 seg done tier=A Acura TSX [2004, 2014] seeds=[2006] records=334 errors=0
+03:14:58 seg done tier=A Acura MDX [2007, 2013] seeds=[2007] records=334 errors=0
+03:14:58 seg done tier=A Acura RL [1996, 2012] seeds=[2005] records=334 errors=0
+03:14:58 seg done tier=A Acura RDX [2007, 2019] seeds=[2007] records=334 errors=0
+03:22:19 seg done tier=A Acura RSX [2002, 2006] seeds=[2002] records=360 errors=0
+03:39:47 nav-fail Acura CL 2000: ValueError: no 2000 catalog for Acura CL (acura-['cl'])
+03:39:47 seg done tier=A Acura CL [1997, 2003] seeds=[2001, 1999, 2000] records=429 errors=1
+03:48:53 time budget reached records=464
