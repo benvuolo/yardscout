@@ -55,3 +55,26 @@
 05:42:10 seg done tier=A Audi Q3 [2015, 2021] seeds=[2016, 2020] records=613 errors=6
 05:56:51 seg done tier=B Audi A4 [1996, 2019] seeds=[2008, 2000, 2018] records=683 errors=6
 06:02:35 time budget reached records=704
+06:02:43 start site=www.audipartsgiant.com segments=14 tiers=['A', 'B']
+06:02:43 seg done tier=A Audi A4 [1996, 2019] seeds=[2008] records=704 errors=6
+06:02:43 seg done tier=A Audi A6 [1997, 2017] seeds=[2008] records=704 errors=6
+06:02:43 seg done tier=A Audi Q5 [2009, 2022] seeds=[2012] records=704 errors=6
+06:02:43 seg done tier=A Audi Q7 [2007, 2017] seeds=[2008] records=704 errors=6
+06:02:43 seg done tier=A Audi A3 [2006, 2019] seeds=[2006] records=704 errors=6
+06:02:43 seg done tier=A Audi A4 Quattro [1997, 2016] seeds=[2009] records=704 errors=6
+06:02:43 seg done tier=A Audi A5 [2009, 2022] seeds=[2010] records=704 errors=6
+06:02:43 seg done tier=A Audi A6 Quattro [2000, 2015] seeds=[2006] records=704 errors=6
+06:02:43 seg done tier=A Audi TT [2000, 2008] seeds=[2001] records=704 errors=6
+06:02:43 seg done tier=A Audi S4 [2000, 2021] seeds=[2005] records=704 errors=6
+06:02:43 seg done tier=A Audi A8 [1997, 2011] seeds=[2006] records=704 errors=6
+06:02:43 seg done tier=A Audi Allroad [2001, 2015] seeds=[2005] records=704 errors=6
+06:02:43 seg done tier=A Audi A5 Quattro [2009, 2012] seeds=[2011] records=704 errors=6
+06:02:43 seg done tier=A Audi Q3 [2015, 2021] seeds=[2016] records=704 errors=6
+06:02:43 seg done tier=B Audi A4 [1996, 2019] seeds=[2008] records=704 errors=6
+06:02:43 seg done tier=B Audi A6 [1997, 2017] seeds=[2008] records=704 errors=6
+06:12:51 seg done tier=B Audi Q5 [2009, 2022] seeds=[2012, 2020] records=761 errors=6
+06:19:55 nav-fail Audi Q7 2016: NavError: HTTP 404 for https://www.audipartsgiant.com/2016-audi-q7-parts
+06:19:55 seg done tier=B Audi Q7 [2007, 2017] seeds=[2008, 2017, 2016] records=794 errors=7
+06:27:31 nav-fail Audi A3 2014: NavError: HTTP 404 for https://www.audipartsgiant.com/2014-audi-a3-parts
+06:27:31 seg done tier=B Audi A3 [2006, 2019] seeds=[2006, 2017, 2014] records=829 errors=8
+06:36:03 time budget reached records=871
