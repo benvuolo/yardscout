@@ -40,11 +40,14 @@ WORKLIST = {"sites": {
     TY: {"segments": [{"make": "Toyota", "model": "Camry", "segment": [2030, 2030], "seed_year": 2030, "cars": 1}]},
     GM: {"segments": [{"make": "Chevrolet", "model": "Malibu", "segment": [2030, 2030], "seed_year": 2030, "cars": 1}]},
     "www.wrapsite.com": {"segments": [{"make": "Toyota", "model": "Camry", "segment": [2030, 2030], "seed_year": 2030}]},
+    "www.mbpartsgiant.com": {"segments": [{"make": "Mercedes-Benz", "model": "C-Class", "segment": [2030, 2030],
+                                           "seed_year": 2030}]},
+    "www.volvopartsgiant.com": {"segments": [{"make": "Volvo", "model": "XC90", "segment": [2030, 2030], "seed_year": 2030}]},
 }}
 
 
 def fresh_pages() -> F.Pages:
-    pages = F.Pages(S.toyota_pages(), S.gm_pages())
+    pages = F.Pages(S.toyota_pages(), S.gm_pages(), S.volvo_pages(), S.mb_pages())
     # one more headlights page on the 2030 year page, answering 404 (list-fail)
     y = f"{S.T}/catalog/{S.TSTEM}-parts"
     pages.pages[y]["html"] = pages.pages[y]["html"].replace(
@@ -114,6 +117,11 @@ with tempfile.TemporaryDirectory() as td:
     fail404 = by_url[f"{L}/headlights-lighting/headlamp-components"]
     check("R1 list-fail line kept with status and error", fail404["status"] == 404 and fail404["rows"] == []
           and "list-fail" in fail404["error"], fail404)
+    check("R1 read flag: true on clean pages, false on the 404", fail404.get("read") is False
+          and all(ln.get("read") is True for ln in lists if ln is not fail404), [(ln["list_url"], ln.get("read")) for ln in lists])
+    check("list-fail page named in progress", [(x["year"], x["cat"], x["list_url"]) for x in prog.get("list_fail", [])]
+          == [(2030, "headlights", f"{L}/headlights-lighting/headlamp-components")], prog.get("list_fail"))
+    check("every listed record's chain was queued and worked", prog.get("chain_pending") == [] and len(prog.get("chain_followed", [])) == 8)
 
     # R2
     check("R2 one year line", len(years) == 1)
@@ -267,6 +275,210 @@ with tempfile.TemporaryDirectory() as td:
           and c[0]["via"] == "replaces:28100-90010-84" and c[0]["via_depth"] == 1 and c[0]["via_link"] == "product_page",
           (prog["chain_retry"], c[:1]))
     check("retried hop continues the chain", "chain-unlinked starter 1 numbers named by 28100-90030, no catalog link: 28100-90040" in (raw / f"{TY}.log").read_text())
+
+
+def flaky(pages: F.Pages, counts: dict) -> None:
+    """Make _simplepart.get raise NetworkError for the next counts[url] fetches of url."""
+    from sites import _simplepart  # noqa: E402
+    real_get = pages.get
+
+    def get(url):
+        if counts.get(url):
+            counts[url] -= 1
+            pages.calls.append(("get", url))
+            raise NetworkError("network error after 3 tries: ReadTimeout")
+        return real_get(url)
+    _simplepart.get = get
+
+
+# .done is not written while a chain hop is owed: the hop is retried at the end
+# of the run, then at the next start, and given up after CHAIN_TRIES attempts
+for fails_, want in ((2, "recovers"), (99, "given up")):
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        (root / "worklist.json").write_text(json.dumps(WORKLIST))
+        pages = fresh_pages()
+        crawl.TIERS = {"A": ["starter"], "B": []}
+        hop = f"{P}~starter~28100-90030"
+        flaky(pages, {hop: fails_})
+        raw = root / "raw"
+        rc1 = run(root, "--site", TY)  # the workflow's invocation: tier all, no --max-segments
+        prog = json.loads((raw / f"{TY}.progress.json").read_text())
+        check(f"[{want}] hop owed after the worklist: exit 10, no .done", rc1 == 10 and not (raw / f"{TY}.done").exists()
+              and [(h["pn"], h.get("tries")) for h in prog["chain_retry"]] == [("28100-90030", 2)], (rc1, prog["chain_retry"]))
+        rc2 = run(root, "--site", TY)
+        prog = json.loads((raw / f"{TY}.progress.json").read_text())
+        got = [r for r in jl(raw / f"{TY}.jsonl") if r["pn"] == "28100-90030"]
+        check(f"[{want}] next slice: .done once nothing is owed", rc2 == 0 and (raw / f"{TY}.done").exists()
+              and prog["chain_retry"] == [] and prog.get("chain_pending") == [], (rc2, prog["chain_retry"]))
+        if want == "recovers":
+            check("[recovers] the hop is recorded", len(got) == 1 and got[0]["via"] == "replaces:28100-90010-84", got)
+        else:
+            check("[given up] counted and logged, never recorded", not got and prog.get("chain_given_up") == 1
+                  and "chain-given-up starter 28100-90030 after 3 network failures" in (raw / f"{TY}.log").read_text()
+                  and pages.gets().count(hop) == 3, (prog.get("chain_given_up"), pages.gets().count(hop)))
+
+# A network streak mid-chain: the root stays queued (chain_pending), so the next
+# slice tries every target, including the ones never reached before the exit
+with tempfile.TemporaryDirectory() as td:
+    root = Path(td)
+    (root / "worklist.json").write_text(json.dumps(WORKLIST))
+    pages = fresh_pages()
+    olds = [f"27060-8{i}000" for i in range(1, 7)]
+    pages.pages[f"{P}~alternator~27060-90010"] = S.sp_product("27060-90010", "Alternator", replaces=", ".join(olds))
+    altp = pages.pages[f"{L}/charging-starting/alternator"]
+    from sites._simplepart import store as sp_store  # noqa: E402
+    st_ = sp_store(altp["html"])
+    st_["partList"]["gpgOnlyPartList"][0] += [S._sp_row(pn, "Alternator Kit", None) for pn in olds]
+    altp["html"] = F.store_html(st_)
+    for pn in olds:
+        pages.pages[f"{P}~alternator-kit~{pn}"] = S.sp_product(pn, "Alternator", replaced_by="27060-90010")
+    flaky(pages, {f"{P}~alternator-kit~{pn}": 1 for pn in olds[:5]})
+    crawl.TIERS = {"A": ["alternator"], "B": []}
+    raw = root / "raw"
+    rc1 = run(root, "--site", TY, "--tier", "A")
+    prog = json.loads((raw / f"{TY}.progress.json").read_text())
+    check("streak mid-chain: exit 11, root still queued, 6th target untried",
+          rc1 == 11 and [e["rec"]["pn"] for e in prog.get("chain_pending", [])][:1] == ["27060-90010"]
+          and f"{P}~alternator-kit~27060-86000" not in pages.gets(), (rc1, prog.get("chain_pending", [])[:1]))
+    rc2 = run(root, "--site", TY, "--tier", "A")
+    prog = json.loads((raw / f"{TY}.progress.json").read_text())
+    chained_ = sorted(r["pn"] for r in jl(raw / f"{TY}.jsonl") if "via" in r and r["pn"] in olds)
+    check("next slice: every target recorded, nothing owed, seed done", rc2 == 0 and chained_ == olds
+          and prog.get("chain_pending") == [] and prog["chain_retry"] == [] and "A|Toyota|Camry|2030" in prog["done"],
+          (rc2, chained_, prog.get("chain_pending"), prog["chain_retry"]))
+
+# --complete follows the chains of records written before R4 existed
+with tempfile.TemporaryDirectory() as td:
+    root = Path(td)
+    (root / "worklist.json").write_text(json.dumps(WORKLIST))
+    pages = fresh_pages()
+    crawl.TIERS = {"A": ["alternator", "starter"], "B": []}
+    raw = root / "raw"
+    old_depth, crawl.CHAIN_DEPTH = crawl.CHAIN_DEPTH, 0  # stands in for main's crawl.py (no R4)
+    run(root, "--site", TY, "--tier", "A")
+    crawl.CHAIN_DEPTH = old_depth
+    pp = raw / f"{TY}.progress.json"
+    prog = json.loads(pp.read_text())
+    for k in ("chain_followed", "chain_seen", "chain_pending", "chain_retry"):
+        prog.pop(k, None)
+    pp.write_text(json.dumps(prog))
+    (raw / f"{TY}.lists.jsonl").unlink()  # main wrote no manifests
+    check("pre-R4 stand-in wrote no chain records", not any("via" in r for r in jl(raw / f"{TY}.jsonl")))
+    wl = root / "c.json"
+    wl.write_text(json.dumps([{"make": "Toyota", "model": "Camry", "year": 2030, "cats": ["alternator", "starter"]}]))
+    rc = run(root, "--site", TY, "--complete", str(wl))
+    recs = jl(raw / f"{TY}.jsonl")
+    prog = json.loads(pp.read_text())
+    ch = {r["pn"]: r for r in recs if "via" in r}
+    check("--complete: chains of 'seen' rows followed", rc == 0 and sorted(ch) == ["27060-89990", "28100-90030"]
+          and prog["chain_records"] == 2, (rc, sorted(ch)))
+    check("--complete: chain records take the root record's seed and list_url",
+          ch.get("27060-89990", {}).get("list_url") == f"{L}/charging-starting/alternator"
+          and ch.get("28100-90030", {}).get("via") == "replaces:28100-90010-84")
+    check("--complete: listed records not written again", sum(1 for r in recs if "via" not in r) == 5)
+
+# F1: a number first reached as a chain member, listed later on another seed,
+# gets its own listed record (own seed, list_url, list fields), pointing at
+# the chain record through recrawl_of
+with tempfile.TemporaryDirectory() as td:
+    root = Path(td)
+    wlx = {"sites": {TY: {"segments": [
+        {"make": "Toyota", "model": "Camry", "segment": [2030, 2030], "seed_year": 2030},
+        {"make": "Toyota", "model": "Camry", "segment": [2031, 2031], "seed_year": 2031}]}}}
+    (root / "worklist.json").write_text(json.dumps(wlx))
+    pages = fresh_pages()
+    L31 = f"{S.T}/parts-list/2031-toyota-camry"
+    pages.pages[f"{S.T}/catalog/2031-toyota-camry-parts"] = F.page(F.store_html(
+        {}, '<a href="/parts-list/2031-toyota-camry/charging-starting/alternator">x</a>', title="2031 Toyota Camry Parts"))
+    pages.pages[f"{L31}/charging-starting/alternator"] = S.sp_list([
+        S._sp_row("27060-89990", "Alternator", "Alternator Assembly, With Regulator", url="/oem/toyota~alternator-kit~27060-89990",
+                  notes="3.5L; Reman Core", location="Front")])
+    crawl.TIERS = {"A": ["alternator"], "B": []}
+    raw = root / "raw"
+    rc = run(root, "--site", TY, "--tier", "A")
+    recs = jl(raw / f"{TY}.jsonl")
+    lines_ = jl(raw / f"{TY}.lists.jsonl")
+    r89 = [(i + 1, r) for i, r in enumerate(recs) if r["pn"] == "27060-89990"]
+    check("chain record first, listed record second", rc == 0 and [("via" in r) for _, r in r89] == [True, False],
+          [(i, r.get("via"), r["seed"]["year"]) for i, r in r89])
+    if len(r89) == 2:
+        (cl, crec_), (_, lrec) = r89
+        check("listed record has its own seed, list_url and list fields",
+              lrec["seed"]["year"] == 2031 and lrec["list_url"] == f"{L31}/charging-starting/alternator"
+              and lrec["name"] == "Alternator" and lrec["list_section"] == "diagram"
+              and lrec["list_notes"] == ["3.5L; Reman Core"] and lrec["list_location"] == ["Front"]
+              and lrec["reman"] is True and lrec["recrawl_of"] == str(cl), lrec)
+        check("chain record unchanged (root's seed)", crec_["seed"]["year"] == 2030 and crec_["name"] is None)
+    l31 = [ln for ln in lines_ if ln["seed"]["year"] == 2031]
+    check("2031 list line: product ok, not seen", [(r["pn"], r["product"]) for r in l31[0]["rows"]] == [("27060-89990", "ok")]
+          if l31 else False, l31)
+    prog = json.loads((raw / f"{TY}.progress.json").read_text())
+    check("counted and logged", prog.get("chain_then_listed") == 1
+          and "listed after chain alternator 27060-89990" in (raw / f"{TY}.log").read_text())
+    check("its product page is read again for the listed record (a fetch.py cache hit within one job)",
+          pages.gets().count(f"{P}~alternator-kit~27060-89990") == 2)
+
+# F3: a list page that answers 200 but does not parse, and a product-rule fetch
+# that fails on a 200 list page: read false, rows not relabelled site_module
+with tempfile.TemporaryDirectory() as td:
+    root = Path(td)
+    (root / "worklist.json").write_text(json.dumps(WORKLIST))
+    pages = fresh_pages()
+    pages.pages[f"{L}/charging-starting/starter"] = F.page("<html><body>Please try again later</body></html>")
+    crawl.TIERS = {"A": ["alternator", "starter"], "B": []}
+    raw = root / "raw"
+    rc = run(root, "--site", TY, "--tier", "A")
+    ls = {ln["cat"]: ln for ln in jl(raw / f"{TY}.lists.jsonl")}
+    s_ = ls.get("starter", {})
+    check("200 error page: line kept, status 200, read false", rc == 0 and s_.get("status") == 200 and s_.get("read") is False
+          and s_.get("rows") == [] and "list-fail: NavError" in s_.get("error", ""), s_)
+    check("200 error page: alternator line still read", ls.get("alternator", {}).get("read") is True)
+    VOS = "www.volvopartsgiant.com"
+    pages.pages[f"{S.V}/genuine/volvo~door-shell~31335410"] = F.page("<html>gone</html>", status=404)
+    crawl.TIERS = {"A": [], "B": ["door-front"]}
+    rc = run(root, "--site", VOS, "--tier", "B")
+    vl = jl(raw / f"{VOS}.lists.jsonl")
+    vr = {r["pn"]: (r["matched"], r["excluded_by"], r["product"]) for r in vl[0]["rows"]} if vl else {}
+    check("product-rule fetch failed: read false, template verdicts kept, no site_module",
+          rc == 0 and vl[0]["status"] == 200 and vl[0].get("read") is False and "list-fail" in vl[0]["error"]
+          and vr == {"31335409": (True, None, "not_attempted"), "31335410": (False, "product_rule_unchecked", None),
+                     "31335411": (False, "rule:slug_miss", None), "31335412": (False, "include_miss", None)}, (vl[:1], vr))
+    check("no record from a failed page", not (raw / f"{VOS}.jsonl").exists() or jl(raw / f"{VOS}.jsonl") == [])
+
+# main's SimplePart "giant" modules (Mercedes badges, Volvo slug-checked) write full manifests
+with tempfile.TemporaryDirectory() as td:
+    root = Path(td)
+    (root / "worklist.json").write_text(json.dumps(WORKLIST))
+    pages = fresh_pages()
+    MBS, VOS = "www.mbpartsgiant.com", "www.volvopartsgiant.com"
+    ML = f"{S.M}/parts-list/2030-mercedes_benz"
+    crawl.TIERS = {"A": ["alternator"], "B": []}
+    rc = run(root, "--site", MBS, "--tier", "A")
+    raw = root / "raw"
+    log = (raw / f"{MBS}.log").read_text()
+    my, ml_ = jl(raw / f"{MBS}.years.jsonl"), jl(raw / f"{MBS}.lists.jsonl")
+    check("MB crawl exits 0, no missing-manifest warning", rc == 0 and "has no year_manifest" not in log, (rc, log[-300:]))
+    check("MB year lines: one per badge read, pages placed", [(x["variant"], x["status"], x["pages"], x.get("error"))
+                                                              for x in my] == [
+        ("c300", 200, {"alternator": [f"{ML}-c300/charging-starting/alternator"]}, None),
+        ("c63_amg", 200, {"alternator": [f"{ML}-c63_amg/charging-starting/alternator"]}, None)]
+        and "pages_unplaced" not in my[0], my)
+    check("MB list lines carry rows", [(x["variant"], len(x["rows"]), x.get("error"), x.get("read")) for x in ml_]
+          == [("c300", 2, None, True), ("c63_amg", 1, None, True)], [(x.get("variant"), x.get("error")) for x in ml_])
+    check("MB the shared number is fetched once, listed on both badges",
+          [r["pn"] for r in jl(raw / f"{MBS}.jsonl")] == ["272-154-00-02"]
+          and [[(r["pn"], r["product"]) for r in x["rows"] if r["matched"]] for x in ml_]
+          == [[("272-154-00-02", "ok")], [("272-154-00-02", "seen")]], [x["rows"] for x in ml_])
+    crawl.TIERS = {"A": [], "B": ["door-front", "door-rear"]}
+    rc = run(root, "--site", VOS, "--tier", "B")
+    vl = jl(raw / f"{VOS}.lists.jsonl")
+    check("Volvo product-rule categories: list lines with rows, no manifest error",
+          rc == 0 and [(x["cat"], len(x["rows"]), x.get("error")) for x in vl] == [("door-front", 4, None), ("door-rear", 4, None)],
+          [(x["cat"], len(x["rows"]), x.get("error")) for x in vl])
+    check("Volvo slug miss in the crawl manifest", {r["pn"]: r["excluded_by"] for r in vl[0]["rows"]}["31335411"] == "rule:slug_miss")
+    check("Volvo door records", [(r["category"], r["pn"]) for r in jl(raw / f"{VOS}.jsonl")]
+          == [("door-front", "31335409"), ("door-rear", "31335410")])
 
 # R3 completion mode
 with tempfile.TemporaryDirectory() as td:

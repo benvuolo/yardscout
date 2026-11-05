@@ -33,7 +33,6 @@ import re
 import sys
 import time
 import traceback
-from collections import deque
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -50,6 +49,8 @@ TIERS = {
 }
 MAX_SEEDS = 3
 CHAIN_DEPTH = 4            # R4: replaces / replaced_by hops from a listed record
+CHAIN_TRIES = 3            # R4: network attempts per hop before it is given up (chain_given_up)
+CHAIN_FIELDS = ("pn", "product_url", "replaces", "replaced_by", "list_replaced_by", "list_info")
 PART_BYTES = 40_000_000    # GitHub warns at 50 MB and refuses 100 MB files
 
 
@@ -227,12 +228,21 @@ def main() -> None:
     prog_p = raw_dir / f"{site}.progress.json"
     logp = raw_dir / f"{site}.log"
     prog = json.loads(prog_p.read_text()) if prog_p.exists() else {"done": [], "records": 0, "errors": 0, "products_seen": []}
-    for k in ("chain_records", "chain_unlinked", "list_lines", "year_lines", "recrawls"):
+    for k in ("chain_records", "chain_unlinked", "chain_failed", "chain_given_up", "chain_then_listed",
+              "list_lines", "year_lines", "recrawls"):
         prog.setdefault(k, 0)
-    prog.setdefault("chain_retry", [])  # R4 hops that hit a network error, retried at the next start
+    prog.setdefault("chain_retry", [])     # R4 hops that hit a network error, retried at the next start
+    prog.setdefault("chain_pending", [])   # R4 records whose chain targets are still to be tried
+    prog.setdefault("chain_followed", [])  # "cat|normpn" of listed records queued for R4
+    prog.setdefault("chain_seen", [])      # "cat|pn" recorded only as chain records (not products_seen)
+    prog.setdefault("list_fail", [])       # list pages that did not parse (read: false), for --complete
     done = set(prog["done"])
-    seen_pn = set(prog["products_seen"])
-    seen_norm = {(k.split("|", 1)[0], norm_pn(k.split("|", 1)[1])) for k in seen_pn if "|" in k}
+    seen_pn = set(prog["products_seen"])   # listed records written ("cat|pn" as listed)
+    chain_seen = set(prog["chain_seen"])
+    chain_followed = set(prog["chain_followed"])
+    chain_norm = {(k.split("|", 1)[0], norm_pn(k.split("|", 1)[1])) for k in chain_seen if "|" in k}
+    unlinked_seen: set[tuple[str, str]] = set()  # chain_unlinked counts each number once per run
+    seen_norm = {(k.split("|", 1)[0], norm_pn(k.split("|", 1)[1])) for k in seen_pn | chain_seen if "|" in k}
 
     def log(msg: str) -> None:
         with open(logp, "a") as fh:
@@ -243,9 +253,17 @@ def main() -> None:
     years = RawFile(raw_dir, f"{site}.years", log)
     # R6: (category, pn) -> line of its newest record
     last_line: dict[tuple[str, str], int] = {}
+    # R4: (category, pn) -> the newest LISTED record's chain fields, so a list
+    # row whose record was written earlier (products_seen, possibly before
+    # chains were followed at all) can still have its chain followed
+    listed_rec: dict[tuple[str, str], dict] = {}
     for n, r in records.rows():
         if r and r.get("category") and r.get("pn"):
             last_line[(r["category"], norm_pn(r["pn"]))] = n
+            if "via" not in r:
+                listed_rec[(r["category"], norm_pn(r["pn"]))] = {
+                    "seed": r.get("seed"), "segment": r.get("segment"), "list_url": r.get("list_url"),
+                    "rec": {k: r[k] for k in CHAIN_FIELDS if r.get(k)}}
     # R4: part number -> product URL, from every list row the catalog printed
     url_index: dict[str, str] = {}
     failed_urls: set[str] = set()  # product pages that failed to parse in this run
@@ -268,6 +286,8 @@ def main() -> None:
     def save() -> None:
         prog["done"] = sorted(done)
         prog["products_seen"] = sorted(seen_pn)
+        prog["chain_seen"] = sorted(chain_seen)
+        prog["chain_followed"] = sorted(chain_followed)
         prog_p.write_text(json.dumps(prog))
 
     def write_record(rec: dict) -> int:
@@ -326,6 +346,11 @@ def main() -> None:
             prog["year_lines"] += 1
 
     def list_line(tier, seed, segment, cat, list_url, parts, pstat, error=None) -> None:
+        """One R1 line. `error` is set when parts_on_page raised (list-fail):
+        the rows are then the template's own re-read, not relabelled (nothing
+        came back from the module to relabel them by), and the line is
+        `read: false`. A line counts as read only when status is 200 and it
+        has no error and no rows_missing."""
         man = None
         if list_fn:
             try:
@@ -340,9 +365,9 @@ def main() -> None:
         for r in rows:
             # what parts_on_page returned is the truth for `matched`: a module
             # wrapper can add rows (Honda's bare "Switch Assy.") or drop them
-            if r.get("pn") in kept and r["pn"] not in tmpl and r.get("excluded_by") != "section_not_read":
+            if error is None and r.get("pn") in kept and r["pn"] not in tmpl and r.get("excluded_by") != "section_not_read":
                 r["matched"], r["excluded_by"], r["matched_by"] = True, None, "site_module"
-            elif r.get("matched") and r.get("pn") not in kept:
+            elif error is None and r.get("matched") and r.get("pn") not in kept:
                 r["matched"], r["excluded_by"] = False, "site_module"
             r["product"] = pstat.get(r.get("pn"), "not_attempted") if r.get("matched") else None
         missing = sorted(kept - {r.get("pn") for r in rows})
@@ -352,99 +377,147 @@ def main() -> None:
             log(f"WARNING manifest rows missing for {missing} on {list_url}")
         if error:
             out["error"] = error if not man.get("error") else f"{error}; {man['error']}"
+        out["read"] = out.get("status") == 200 and not out.get("error") and not out.get("rows_missing")
         lists.append(out)
         prog["list_lines"] += 1
         index_rows(rows, site_base)
 
-    def fetch_chain(cat, seed, segment, list_url, field, tpn, url, how, via_pn, depth, root_pn):
-        """One R4 hop: fetch, write the chain record, return it (None on a
-        failure; a network failure is queued in progress chain_retry)."""
+    def fetch_chain(hop: dict) -> dict | None:
+        """One R4 hop: fetch, write the chain record, return it. None on a
+        failure: a network failure waits in progress chain_retry (up to
+        CHAIN_TRIES attempts, then chain_given_up); a page that does not parse
+        is counted in chain_failed."""
+        url = hop["url"]
         try:
             prod = mod.product(url)
             net["streak"] = 0
         except Refused:
             raise
         except NetworkError as e:
-            prog["chain_retry"].append({"cat": cat, "seed": seed, "segment": segment, "list_url": list_url,
-                                        "field": field, "pn": tpn, "url": url, "how": how, "via_pn": via_pn,
-                                        "depth": depth, "root": root_pn})
+            tries = int(hop.get("tries", 0)) + 1
+            same = (hop["cat"], norm_pn(hop["pn"]))
+            prog["chain_retry"] = [h for h in prog["chain_retry"] if (h["cat"], norm_pn(h["pn"])) != same]
+            if tries >= CHAIN_TRIES:
+                prog["chain_given_up"] += 1
+                log(f"chain-given-up {hop['cat']} {hop['pn']} after {tries} network failures: {url}")
+            else:
+                prog["chain_retry"].append({**hop, "tries": tries})
             net_fail(f"chain product {url}", e)
             return None
         except Exception as e:
             prog["errors"] += 1
+            prog["chain_failed"] += 1
             failed_urls.add(url)
             log(f"chain-product-fail {url}: {type(e).__name__}: {e}")
             return None
-        crec = {"site": site, "category": cat, "seed": seed, "segment": segment, "list_url": list_url,
-                "pn": tpn, "name": None, "product_url": url, **prod,
-                "via": f"{field}:{via_pn}", "via_depth": depth, "via_root": root_pn, "via_link": how}
-        seen_pn.add(f"{cat}|{tpn}")
-        seen_pn.add(f"{cat}|{crec['pn']}")
+        cat, tpn = hop["cat"], hop["pn"]
+        crec = {"site": site, "category": cat, "seed": hop["seed"], "segment": hop["segment"],
+                "list_url": hop["list_url"], "pn": tpn, "name": None, "product_url": url, **prod,
+                "via": f"{hop['field']}:{hop['via_pn']}", "via_depth": hop["depth"], "via_root": hop["root"],
+                "via_link": hop["how"]}
+        # chain-reached, not listed: a list page that matches it later still
+        # writes its own listed record (chain_seen is not products_seen)
+        chain_seen.update({f"{cat}|{tpn}", f"{cat}|{crec['pn']}"})
+        chain_norm.update({(cat, norm_pn(tpn)), (cat, norm_pn(crec["pn"]))})
         seen_norm.update({(cat, norm_pn(tpn)), (cat, norm_pn(crec["pn"]))})
         write_record(crec)
         prog["chain_records"] += 1
         return crec
 
-    def follow_chain(root: dict, cat: str, seed: dict, segment, list_url: str, start: int = 0, root_pn=None) -> None:
-        """R4: fetch the catalog-linked product pages of the root's
-        predecessors and successors, to depth CHAIN_DEPTH. A hop that hits a
-        network error waits in progress chain_retry for the next start."""
-        root_pn = root_pn or root.get("pn")
-        queue = deque([(root, start)])
-        visited = {norm_pn(root.get("pn"))}
-        while queue:
-            rec, depth = queue.popleft()
-            if depth >= CHAIN_DEPTH:
-                continue
-            unlinked: list[str] = []
-            for field, tpn in chain_targets(rec):
-                k = norm_pn(tpn)
-                if k in visited:
-                    continue
-                visited.add(k)
-                if (cat, k) in seen_norm:
-                    continue  # already recorded (as listed or chain record)
-                how, url = None, None
-                if links_fn and rec.get("product_url"):
-                    try:
-                        url = (links_fn(rec["product_url"], [tpn]) or {}).get(tpn)
-                    except Exception as e:
-                        log(f"chain_links failed on {rec['product_url']}: {type(e).__name__}: {e}")
-                    how = "product_page" if url else None
-                if not url and k in url_index:
-                    url, how = url_index[k], "list_row"
-                if not url or not url_names_pn(url, tpn):
-                    prog["chain_unlinked"] += 1
-                    unlinked.append(tpn)
-                    continue
-                if url in failed_urls:
-                    continue  # its product page already failed in this run
-                crec = fetch_chain(cat, seed, segment, list_url, field, tpn, url, how, rec.get("pn"), depth + 1, root_pn)
-                if crec:
-                    queue.append((crec, depth + 1))
-            if unlinked:
-                log(f"chain-unlinked {cat} {len(unlinked)} numbers named by {rec.get('pn')}, no catalog link: "
-                    + ", ".join(unlinked))
+    def queue_chain(rec: dict, cat: str, seed: dict, segment, list_url: str, depth: int, root_pn) -> None:
+        """Persist a record whose chain targets are still to be tried (progress
+        chain_pending). It leaves the queue only after every target was tried,
+        so a slice that stops mid-chain resumes it at the next start."""
+        if depth >= CHAIN_DEPTH:
+            return
+        prog["chain_pending"].append({"cat": cat, "seed": seed, "segment": segment, "list_url": list_url,
+                                      "depth": depth, "root": root_pn,
+                                      "rec": {k: rec[k] for k in CHAIN_FIELDS if rec.get(k)}})
 
-    def retry_chains() -> None:
-        """Chain hops that hit a network error in an earlier slice."""
+    def queue_root(rec: dict, cat: str, seed: dict, segment, list_url: str) -> None:
+        """R4 for a listed record, once per (category, pn) (progress chain_followed)."""
+        k = f"{cat}|{norm_pn(rec.get('pn'))}"
+        if k in chain_followed:
+            return
+        chain_followed.add(k)
+        queue_chain(rec, cat, seed, segment, list_url, 0, rec.get("pn"))
+
+    def chain_step(e: dict) -> None:
+        """Try every predecessor / successor the queued record names: fetch the
+        ones the catalog links (a list row read in this crawl or a link on the
+        record's own product page; URLs are never built), queue what was
+        fetched one level deeper."""
+        rec, cat = e["rec"], e["cat"]
+        unlinked: list[str] = []
+        for field, tpn in chain_targets(rec):
+            k = norm_pn(tpn)
+            if (cat, k) in seen_norm:
+                continue  # already recorded (as listed or chain record)
+            how, url = None, None
+            if links_fn and rec.get("product_url"):
+                try:
+                    url = (links_fn(rec["product_url"], [tpn]) or {}).get(tpn)
+                except Exception as x:
+                    log(f"chain_links failed on {rec['product_url']}: {type(x).__name__}: {x}")
+                how = "product_page" if url else None
+            if not url and k in url_index:
+                url, how = url_index[k], "list_row"
+            if not url or not url_names_pn(url, tpn):
+                if (cat, k) not in unlinked_seen:
+                    unlinked_seen.add((cat, k))
+                    prog["chain_unlinked"] += 1
+                unlinked.append(tpn)
+                continue
+            if url in failed_urls:
+                prog["chain_failed"] += 1  # its product page already failed in this run
+                continue
+            tries = max([int(h.get("tries", 0)) for h in prog["chain_retry"]
+                         if h["cat"] == cat and norm_pn(h["pn"]) == k] or [0])  # attempts so far
+            crec = fetch_chain({"cat": cat, "seed": e["seed"], "segment": e["segment"], "list_url": e["list_url"],
+                                "field": field, "pn": tpn, "url": url, "how": how, "via_pn": rec.get("pn"),
+                                "depth": e["depth"] + 1, "root": e["root"], "tries": tries})
+            if crec:
+                queue_chain(crec, cat, e["seed"], e["segment"], e["list_url"], e["depth"] + 1, e["root"])
+        if unlinked:
+            log(f"chain-unlinked {cat} {len(unlinked)} numbers named by {rec.get('pn')}, no catalog link: "
+                + ", ".join(unlinked))
+
+    def drain_chains(budget: bool = False) -> bool:
+        """Work the chain_pending queue to the end. With budget, stop at the
+        time budget (False: work is left). An exit mid-entry (network streak,
+        Refused) leaves that entry at the head: it is tried again next time."""
+        q = prog["chain_pending"]
+        while q:
+            if budget and deadline and time.time() > deadline:
+                return False
+            chain_step(q[0])
+            q.pop(0)
+        return True
+
+    def retry_chains(budget: bool = True) -> bool:
+        """Chain hops that hit a network error earlier (progress chain_retry).
+        False when the time budget left some untried."""
         pending, prog["chain_retry"] = prog["chain_retry"], []
         for i, h in enumerate(pending):
             if (h["cat"], norm_pn(h["pn"])) in seen_norm:
                 continue
-            if deadline and time.time() > deadline:
+            if budget and deadline and time.time() > deadline:
                 prog["chain_retry"] += pending[i:]
-                return
+                return False
             try:
-                crec = fetch_chain(h["cat"], h["seed"], h["segment"], h["list_url"], h["field"], h["pn"], h["url"],
-                                   h["how"], h["via_pn"], h["depth"], h["root"])
+                crec = fetch_chain(h)
                 if crec:
-                    follow_chain(crec, h["cat"], h["seed"], h["segment"], h["list_url"], h["depth"], h["root"])
+                    queue_chain(crec, h["cat"], h["seed"], h["segment"], h["list_url"], h["depth"], h["root"])
+                    drain_chains()
             except (SystemExit, Refused):
                 prog["chain_retry"] += pending[i + 1:]  # still owed
                 save()
                 raise
             save()
+        return True
+
+    def chains_owed() -> int:
+        return len(prog["chain_pending"]) + len(prog["chain_retry"])
 
     def visit(tier: str, make: str, model: str, year: int, cats: list[str], segment, covered: set | None) -> tuple[bool, bool]:
         """Navigate one vehicle-year, read its list pages, record new parts.
@@ -477,9 +550,16 @@ def main() -> None:
                     net_fail(f"list {list_url}", e)
                     continue  # no manifest line: the seed is retried
                 except Exception as e:
+                    # The seed is still marked done: fetch.py cached this
+                    # response, so a retry in this job would re-read the same
+                    # page. The line says read: false (never counts for C2),
+                    # and progress list_fail names the page for a completion
+                    # row (--complete) in a later run.
                     prog["errors"] += 1
                     log(f"list-fail {list_url}: {type(e).__name__}: {e}")
                     list_line(tier, seed, segment, cat, list_url, [], {}, f"list-fail: {type(e).__name__}: {e}")
+                    prog["list_fail"].append({"tier": tier, **seed, "cat": cat, "list_url": list_url,
+                                              "error": f"{type(e).__name__}: {e}"[:300]})
                     continue
                 pstat: dict[str, str] = {}
                 written: list[dict] = []
@@ -489,6 +569,10 @@ def main() -> None:
                         if pkey in seen_pn:
                             pstat.setdefault(p["pn"], "seen")
                             continue
+                        # a number recorded only as a chain record gets its listed
+                        # record now (own seed, list_url and list fields); R6 then
+                        # points it at the chain record's line (recrawl_of)
+                        chain_first = (cat, norm_pn(p["pn"])) in chain_norm
                         try:
                             prod = mod.product(p["product_url"])
                             net["streak"] = 0
@@ -510,7 +594,10 @@ def main() -> None:
                         rec = {"site": site, "category": cat, "seed": seed,
                                "segment": segment, "list_url": list_url, **p, **prod}
                         seen_norm.add((cat, norm_pn(rec["pn"])))
-                        write_record(rec)
+                        n_line = write_record(rec)
+                        if chain_first:
+                            prog["chain_then_listed"] += 1
+                            log(f"listed after chain {cat} {p['pn']}: line {n_line} (recrawl_of {rec.get('recrawl_of')})")
                         pstat[p["pn"]] = "ok"
                         written.append(rec)
                         if covered is not None:
@@ -522,15 +609,28 @@ def main() -> None:
                     # R1: one line per list page read, written whether or not its
                     # numbers were seen before (R7), also when the run stops here
                     list_line(tier, seed, segment, cat, list_url, parts, pstat)
-                # R4 after the page, so a listed number is recorded with its list row first
+                # R4 after the page, so a listed number is recorded with its list
+                # row first. Every root is queued (persisted) before any hop is
+                # fetched, so a slice that stops here resumes the chains.
                 for rec in written:
-                    follow_chain(rec, cat, seed, segment, list_url)
+                    queue_root(rec, cat, seed, segment, list_url)
+                for p in parts:  # recorded earlier, chain never followed (e.g. before R4 existed)
+                    old_rec = listed_rec.get((cat, norm_pn(p["pn"]))) if pstat.get(p["pn"]) == "seen" else None
+                    if old_rec:
+                        queue_root(old_rec["rec"], cat, old_rec["seed"], old_rec["segment"], old_rec["list_url"])
+                drain_chains()
         return True, seed_net_fail
 
+    finish = False
     try:
-        if prog["chain_retry"]:
-            log(f"retrying {len(prog['chain_retry'])} chain hops left by a network failure")
-            retry_chains()
+        if chains_owed():
+            log(f"chain work left by an earlier slice: {len(prog['chain_pending'])} queued records, "
+                f"{len(prog['chain_retry'])} hops to retry")
+            if not drain_chains(budget=True) or not retry_chains():
+                save()
+                log(f"time budget reached during chain work records={prog['records']}")
+                sys.exit(10)
+            save()
         if a.complete:
             rows = _load_completion(a.complete)
             log(f"completion worklist {a.complete}: {len(rows)} rows")
@@ -586,6 +686,18 @@ def main() -> None:
                     if missing and not seeds:
                         seeds.append(missing[len(missing) // 2])
                 log(f"seg done tier={tier} {make} {model} {seg['segment']} seeds={tried} records={prog['records']} errors={prog['errors']}")
+        if not a.max_segments and a.tier == "all":
+            # .done stops every later run, so chain hops still owed are tried
+            # now; if any remain (network), the next slice tries again
+            if chains_owed():
+                drain_chains(budget=True)
+                retry_chains()
+            if chains_owed():
+                save()
+                log(f"worklist finished but {len(prog['chain_pending'])} queued records and "
+                    f"{len(prog['chain_retry'])} chain hops are still owed; .done not written (exit 10)")
+                sys.exit(10)
+            finish = True
     except Refused as e:
         log(f"STOPPED: {e}")
         save()
@@ -597,9 +709,11 @@ def main() -> None:
         save()
         raise
     save()
-    if not a.max_segments and a.tier == "all":
+    if finish:
         (raw_dir / f"{site}.done").write_text(time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
-    log(f"finished records={prog['records']} errors={prog['errors']}")
+    log(f"finished records={prog['records']} errors={prog['errors']} chain_records={prog['chain_records']} "
+        f"chain_unlinked={prog['chain_unlinked']} chain_failed={prog['chain_failed']} "
+        f"chain_given_up={prog['chain_given_up']}")
 
 
 if __name__ == "__main__":
