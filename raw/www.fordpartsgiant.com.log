@@ -38,3 +38,23 @@
 03:16:15 product-fail https://www.fordpartsgiant.com/parts/ford-mirror-asy-rear-vi_9l3z-17683-ac.html: ValueError: no partInfo in store
 03:24:08 seg done tier=A Ford F-150 [2009, 2012] seeds=[2010] records=866 errors=3
 03:24:08 time budget reached records=866
+03:24:15 start site=www.fordpartsgiant.com segments=112 tiers=['A', 'B']
+03:24:15 seg done tier=A Ford F-150 [1997, 2003] seeds=[2001] records=866 errors=3
+03:24:15 seg done tier=A Ford F-150 [2004, 2008] seeds=[2004] records=866 errors=3
+03:24:15 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=866 errors=3
+03:24:15 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=866 errors=3
+03:24:15 seg done tier=A Ford Edge [2007, 2024] seeds=[2013] records=866 errors=3
+03:24:15 seg done tier=A Ford Fusion [2013, 2016] seeds=[2014] records=866 errors=3
+03:24:15 seg done tier=A Ford Escape [2008, 2012] seeds=[2008] records=866 errors=3
+03:24:15 seg done tier=A Ford Escape [2013, 2016] seeds=[2013] records=866 errors=3
+03:24:15 seg done tier=A Ford Explorer [2002, 2005] seeds=[2002] records=866 errors=3
+03:24:15 seg done tier=A Ford Taurus [2000, 2007] seeds=[2003] records=866 errors=3
+03:24:15 seg done tier=A Ford Expedition [2003, 2006] seeds=[2003] records=866 errors=3
+03:24:15 seg done tier=A Ford Ranger [1998, 2011] seeds=[2000] records=866 errors=3
+03:24:15 seg done tier=A Ford Fiesta [1978, 2019] seeds=[2011] records=866 errors=3
+03:24:15 seg done tier=A Ford Focus [2008, 2011] seeds=[2010] records=866 errors=3
+03:24:15 seg done tier=A Ford F-150 [2009, 2012] seeds=[2010] records=866 errors=3
+03:36:24 seg done tier=A Ford Fusion [2006, 2009] seeds=[2008] records=940 errors=3
+03:47:44 seg done tier=A Ford Focus [2015, 2018] seeds=[2015] records=1012 errors=3
+03:55:57 seg done tier=A Ford Expedition [1997, 2002] seeds=[2000] records=1023 errors=3
+03:55:57 time budget reached records=1023
