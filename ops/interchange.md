@@ -276,3 +276,63 @@ Replaced By, Replaces, every fitment row in order incl. the rows behind
   Content-Signal "ai-train=no": we do not train on it (owner informed).
   Mopar/Nissan/Infiniti session re-tasked as raw-output auditor (AUDIT.md)
   + tier B rule review (proposals to the hub before edits).
+
+### Hyundai + Kia (session_016ZzJfHkeNBsfhhGE3jys2o, 2026-11-05 01:40 UTC)
+
+- Modules on main: `sites/hyundaipartsdeal.py` (ee0f155) and
+  `sites/kiapartsnow.py` (4ddc927), with tests `test_hyundaipartsdeal.py`
+  (38 checks) and `test_kiapartsnow.py` (14). Kia reuses Hyundai's SUBCATS,
+  PARTS, ENGINE_RX and reman_fn (same Hyundai-group part names and PNC codes).
+  Template addition (additive): `Config.engine_rx`. Reman uses the upstream
+  `reman_fn`.
+- Trials (tier A, 2 segments, through fetch.py, no refusals): Hyundai 119
+  records (Sonata 2011-13, 2006-10), Kia 131 (Soul 2010-13, Optima 2011-13),
+  0 errors, 0 flags. Every record was checked field by field against the
+  cached page's visible text (pn, description, position, replaces,
+  replaced-by, every fitment row and cell): 250/250 match. Records were also
+  re-derived after rebasing onto the Honda/BMW template changes: 0 differences.
+  Rules were also checked offline on 2004 Santa Fe and 2007 Sportage names.
+- Not crawled yet: everything beyond the 2 trial segments per site, and all
+  of tier B (tier B rules only checked offline on the 2011 Sonata).
+
+Curator notes
+- Part numbers: Hyundai prints "37300-2G600", Kia "373002G600" (same
+  number). Strip "-" before matching Sonata/Optima, Tucson/Sportage,
+  Elantra/Forte, Santa Fe/Sorento twins. Each catalog lists only its own
+  make (no cross-make rows seen), so twins are found only this way.
+- Reman: list rows never say reman; only the pn suffix does (Hyundai
+  "-RM", Kia "RU"). The product page names it ("Reman Compressor"). Reman rows
+  are dropped when a new number is on the same page. Kia often supersedes a
+  new number to its reman twin ("Replaced By: 373002E300RU"); that is the
+  same part family, not a different part.
+- "Trim & Engine" cells are usually engine-only ("DOHC - TCI/GDI",
+  "2.0L - Theta 2") and go to `engines`. Older catalogs add trims
+  ("High Grade, Middle Grade|DOHC - MPI"), which go to `trims`. The option
+  column is body style ("Sedan - 4Door 5P") in `options`, verbatim, including
+  odd rows (a Forte Koup row lists "Sedan - 4Door 5P").
+- Year spans can be wider than US model years: YF Sonata parts print
+  "2009-2014 Hyundai Sonata". Recorded as printed.
+- Window regulator: on door-module cars (2011+ Sonata/Optima, 2001-06 Santa Fe)
+  the catalog has no separate regulator number. The regulator is sold as
+  "Panel Assy-Front Door Module" / "Panel Assy-Front DR Module" / "Module
+  Panel & Reg Assy-Front Door". Those rows are KEPT under window-regulator,
+  names as printed (unlike Nissan, where modules are excluded because
+  separate regulators exist). Motors are their own rows.
+- Fuel pump: "Fuel Pump & Sender Module Assy" / "Complete-Fuel Pump" (31110)
+  are kept. "Sender Assy-Fuel Pump" (94460) is the level sender and is not
+  kept.
+- Position: the list row's "Location: Driver Side" wins. Kia product pages
+  sometimes print another word for the same part ("Rear Driver Side" on
+  outside mirrors, from "RR View"; "Front" on window motors); both lines are
+  in evidence_lines. Master switches have no list Location, so position is
+  the product page's "Driver Side".
+- Liftgate: SUV/hatch rear doors are "Tail Gate" in these catalogs and are
+  mapped to `liftgate`; no `tailgate` rule (no pickups in the worklist).
+- Variants (max 2 catalogs/year): Hyundai Sonata/Elantra/Accent exclude
+  "korean" market catalogs (Sonata 2005 has new_body_style_korean / _us /
+  old_body_style). Kia Optima 2011-15 crawls korean_made + us_georgia_made
+  (both US-sold); Sorento 2006 prefers old_body_style; Spectra prefers sedan.
+  Rio5 and Forte5 have no catalog of their own and map to rio and forte. The
+  coverage check compares model names, so those segments use all 3 seeds.
+- Electric-steering cars have no P/S pump page (2011 Sonata): no record, not
+  an error.
