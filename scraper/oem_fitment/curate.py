@@ -373,13 +373,31 @@ class Curation:
             on = [lr for lr in rows if lr.matched]
             notes = [n for lr in on for n in lr.notes]
             src = [("location", x) for lr in on for x in lr.locations] + [("slug", lr.list_url) for lr in on]
-            src += [("note", n) for n in notes]     # POSITION note clauses (§5.8)
+            src += [("note", n) for n in self.note_position_texts(notes, T)]     # §5.8
             return bool(on), notes, src, [lr.pointer for lr in on], "manifest"
         recs = [r for r in self.t_seed_records.get((T, cat), []) if r.key == c.key]
         notes = [n for r in recs for n in r.note_texts]
         src = [("location", x) for r in recs for x in r.list_location] + [("slug", r.list_url) for r in recs]
-        src += [("note", n) for n in notes]
+        src += [("note", n) for n in self.note_position_texts(notes, T)]
         return bool(recs), notes, src, [r.pointer for r in recs], "seed"
+
+    def note_position_texts(self, notes, T) -> list:
+        """§5.8: notes feed position resolution through their POSITION
+        clauses only, so a colour ("Lt Gray") is not read as a side. An
+        UNKNOWN clause is passed whole: it may carry a side the lexicon does
+        not know, and a side read there can only add a conflict."""
+        ctx = N.NoteContext(T[2], frozenset(m.lower() for _, m in self.t_sources.get(T, set())),
+                            getattr(self, "ns_models_f", frozenset()))
+        out = []
+        for n in notes:
+            for seg in N.split_note(n):
+                for cl in seg:
+                    c = N.classify_clause(cl, ctx)
+                    if c.cls == "UNKNOWN":
+                        out.append(cl)
+                    else:
+                        out += [a.text for a in c.atoms if a.cls == "POSITION"]
+        return out
 
     # ------------------------------------------------------ 5.7 universes
     def universes(self):
@@ -499,7 +517,9 @@ class Curation:
             if not self.reliable.get(r.site):
                 best = best if best == "ok" else "conditional_engines"
                 continue
-            if not eu or not eu <= f.engine_keys():
+            # an unparsed engine ("?", raw) fails every universe test (§5.5),
+            # even when both sides print the same text
+            if not eu or any(not isinstance(e[0], int) for e in eu) or not eu <= f.engine_keys():
                 best = best if best == "ok" else "conditional_engines"
                 continue
             best = "ok"

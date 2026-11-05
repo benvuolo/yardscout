@@ -387,7 +387,14 @@ def qualifier_phrases(text: str, content_tokens=(), cat: str = "") -> list[str]:
         words = set(re.findall(r"[a-z]+", obj))
         if words and words <= set(t.lower() for t in content_tokens):
             continue
-        if cat == "window-regulator" and re.search(r"\bmotor\b", obj):
+        # "W/Motor", "Without Power Window Motor" name the packaging (§5.8),
+        # but only when the phrase says nothing else: "W/Motor For Models
+        # With Jam Protection" still conditions the car.
+        if cat == "window-regulator" and "motor" in words and words <= _REG_PACKAGING_WORDS:
             continue
         out.append(phrase)
     return out
+
+
+# words a regulator packaging phrase may contain ("w/ power window motor")
+_REG_PACKAGING_WORDS = frozenset({"motor", "power", "window", "regulator", "assy", "assembly", "and"})
