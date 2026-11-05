@@ -6,3 +6,18 @@
 01:15:51 seg done tier=A Toyota Camry [2005, 2006] seeds=[2005] records=274 errors=0
 01:23:03 seg done tier=A Toyota Camry [1997, 1999] seeds=[1999] records=363 errors=0
 01:23:03 time budget reached records=363
+01:23:04 start site=www.toyotapartsnow.com segments=52 tiers=['A', 'B']
+01:23:04 seg done tier=A Toyota Camry [2007, 2009] seeds=[2007] records=363 errors=0
+01:23:04 seg done tier=A Toyota Camry [2002, 2004] seeds=[2002] records=363 errors=0
+01:23:04 seg done tier=A Toyota Prius [2001, 2019] seeds=[2008] records=363 errors=0
+01:23:04 seg done tier=A Toyota Sienna [2004, 2010] seeds=[2004] records=363 errors=0
+01:23:04 seg done tier=A Toyota Camry [2005, 2006] seeds=[2005] records=363 errors=0
+01:23:04 seg done tier=A Toyota Camry [1997, 1999] seeds=[1999] records=363 errors=0
+01:27:27 seg done tier=A Toyota Corolla [1998, 2002] seeds=[2001] records=409 errors=0
+01:30:11 seg done tier=A Toyota Camry [2000, 2001] seeds=[2000] records=431 errors=0
+01:34:15 seg done tier=A Toyota Corolla [2005, 2008] seeds=[2005] records=471 errors=0
+01:39:11 seg done tier=A Scion tC [2005, 2016] seeds=[2006, 2014] records=512 errors=0
+01:43:19 seg done tier=A Toyota Camry [2010, 2011] seeds=[2011] records=556 errors=0
+01:47:27 seg done tier=A Toyota Highlander [2001, 2007] seeds=[2006] records=598 errors=0
+01:52:11 seg done tier=A Toyota Corolla [2009, 2010] seeds=[2010] records=652 errors=0
+01:56:19 time budget reached records=694
