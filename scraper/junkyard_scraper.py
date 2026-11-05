@@ -13856,7 +13856,7 @@ def build_interchange_payload() -> dict:
                 "note": t["engine_note"],
                 "apps": [list(a) for a in t["trim_apps"]],
             })
-    return {
+    payload = {
         "schemaVersion": 2,
         "builtAt": _iso_utc_z_interchange(),
         "categories": cats,
@@ -13868,6 +13868,223 @@ def build_interchange_payload() -> dict:
         "modelGenerations": [[mk, md, [list(w) for w in wins]]
                              for mk, md, wins in MODEL_GENERATIONS],
     }
+    _attach_oem_layer(payload)
+    return payload
+
+
+# ---------------------------------------------------------------------------
+# OEM catalog layer (scraper/oem_fitment/CURATION_SPEC.md §7.3, Phase 1).
+# Curated groups/<ns>.json files ship under NEW keys only (oemGroups, oemVg,
+# oemStatus), which only the new client reads. Old keys (categories,
+# platformGroups, engineFamilies) may only LOSE claims here (§7.6 demotions);
+# _attach_oem_layer checks that (V9) and reverts everything OEM if it ever
+# fails. No groups files -> the payload is exactly what it was before.
+# A namespace file that fails the validator is dropped, never raised: the
+# 4-hourly scan keeps publishing inventory, and oemStatus says why.
+# ---------------------------------------------------------------------------
+OEM_GROUPS_DIR = SCRIPT_DIR / "oem_fitment" / "groups"
+OEM_VALIDATOR = SCRIPT_DIR / "oem_fitment" / "validate.py"
+_OEM_DEMOTE_NOTE = " — OEM catalog numbers differ within this group; verify the part number"
+
+
+def _oem_validator():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("_oem_validate", Path(OEM_VALIDATOR))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _load_oem_layer(now: datetime | None = None) -> dict:
+    """{"docs": {ns: doc}, "status": {ns: "ok <commit8> <n> groups" |
+    "dropped: <reason>"}, "expired": {ns: [ids]}}. Reads groups/*.json
+    (not _report/), validates each with validate.structural, drops groups
+    whose evidence is over 120 days old (build-time expiry)."""
+    out = {"docs": {}, "status": {}, "expired": {}}
+    d = Path(OEM_GROUPS_DIR)
+    files = sorted(p for p in d.glob("*.json")) if d.is_dir() else []
+    if not files:
+        return out
+    try:
+        V = _oem_validator()
+    except Exception as e:  # noqa: BLE001 - the scan must keep publishing
+        for p in files:
+            out["status"][p.stem] = f"dropped: validator unavailable ({type(e).__name__})"
+            print(f"[interchange] oem {p.stem} dropped: validator unavailable: {e}", file=sys.stderr)
+        return out
+    ctx = V.context_from(sys.modules[__name__])
+    now = now or datetime.now(timezone.utc)
+    for p in files:
+        ns = p.stem
+        try:
+            doc = json.loads(p.read_text())
+            if doc.get("ns") != ns:
+                raise ValueError(f"file {p.name} holds namespace {doc.get('ns')!r}")
+            doc, expired = V.expire(doc, now)
+            problems = V.structural(doc, ctx)
+        except Exception as e:  # noqa: BLE001
+            problems, expired = [f"unreadable: {type(e).__name__}: {e}"], []
+        if problems:
+            out["status"][ns] = f"dropped: {problems[0]}"[:300]
+            print(f"[interchange] oem {ns} dropped: {problems[0]}", file=sys.stderr)
+            continue
+        out["docs"][ns] = doc
+        out["expired"][ns] = expired
+        n = len(doc.get("groups") or []) + len(doc.get("vg") or [])
+        out["status"][ns] = f"ok {str((doc.get('raw') or {}).get('commit'))[:8]} {n} groups"
+    return out
+
+
+def _oem_cells(doc: dict) -> dict:
+    """(cat, make lower-cased) -> [((make, model, year), 'sig:<h>' | 'open:<reason>')]."""
+    out: dict = {}
+    for c in doc.get("cells") or []:
+        out.setdefault((c[3], c[0].lower()), []).append(((c[0], c[1], c[2]), c[4]))
+    return out
+
+
+def _oem_member_states(apps, cat: str, cells: dict) -> list:
+    """States of every OEM cell inside a hand group's apps."""
+    out = []
+    for a in apps:
+        for mk in str(a[0]).split("|"):
+            for (cmk, cmd, y), st in cells.get((cat, mk.lower()), ()):
+                if _app_matches(tuple(a[:4]), y, cmk, cmd) and ((cmk, cmd, y), st) not in out:
+                    out.append(((cmk, cmd, y), st))
+    return out
+
+
+def _oem_trigger(states: list, sigs: dict) -> str | None:
+    """§7.6: oem_split when a member is OEM-closed but not eligible because of
+    option_split or conditional_*; oem_disjoint when two members are both
+    eligible with disjoint classes in every slot."""
+    for _t, st in states:
+        if st.startswith("open:option_split") or st.startswith("open:conditional"):
+            return "oem_split"
+    elig = sorted({st[4:] for _t, st in states if st.startswith("sig:")})
+    for i, a in enumerate(elig):
+        for b in elig[i + 1:]:
+            sa = {s: {k for _p, ks in packs for k in ks} for s, packs in sigs.get(a, [])}
+            sb = {s: {k for _p, ks in packs for k in ks} for s, packs in sigs.get(b, [])}
+            common = set(sa) & set(sb)
+            if common and all(not (sa[s] & sb[s]) for s in common):
+                return "oem_disjoint"
+    return None
+
+
+def _oem_contradictions(payload: dict, oem_docs: dict) -> list:
+    """Every hand platform group / vg group the OEM evidence contradicts."""
+    out = []
+    for ns, doc in sorted(oem_docs.items()):
+        cells, sigs = _oem_cells(doc), doc.get("sigs") or {}
+        for g in payload.get("platformGroups") or []:
+            if g.get("tier") != "verified":
+                continue
+            states = _oem_member_states(g["apps"], g["cat"], cells)
+            why = _oem_trigger(states, sigs)
+            if why:
+                out.append({"ns": ns, "kind": "platform", "id": g["id"], "cat": g["cat"], "trigger": why,
+                            "cells": sorted([list(t) for t, _ in states])})
+        for f in payload.get("engineFamilies") or []:
+            for cat, part in (f.get("parts") or {}).items():
+                for gi, grp in enumerate(part.get("vg") or []):
+                    states = _oem_member_states(grp, cat, cells)
+                    why = _oem_trigger(states, sigs)
+                    if why:
+                        out.append({"ns": ns, "kind": "vg", "id": f"{f['id']}/{cat}#{gi}", "family": f["id"],
+                                    "cat": cat, "group": grp, "trigger": why,
+                                    "cells": sorted([list(t) for t, _ in states])})
+    return out
+
+
+def _apply_oem_contradictions(payload: dict, oem: dict) -> list:
+    """§7.6: demote each contradicted hand group in the payload (platform tier
+    -> likely with a caveat; vg group removed) and withhold OEM Verified groups
+    touching the involved cells (they become Likely). Hand data
+    (PLATFORM_FAMILIES, ENGINE_FAMILIES) is never edited."""
+    found = _oem_contradictions(payload, oem["docs"])
+    involved = set()
+    for c in found:
+        involved |= {(c["cat"], tuple(t)) for t in c["cells"]}
+        if c["kind"] == "platform":
+            for g in payload["platformGroups"]:
+                if g["id"] == c["id"] and g["tier"] == "verified":
+                    g["tier"] = "likely"
+                    g["note"] = (g.get("note") or "") + _OEM_DEMOTE_NOTE
+        else:
+            for f in payload["engineFamilies"]:
+                if f["id"] == c["family"]:
+                    part = f["parts"][c["cat"]]
+                    part["vg"] = [x for x in part.get("vg") or [] if x != c["group"]]
+                    if not part["vg"]:
+                        part.pop("vg")
+    for g in payload.get("oemGroups") or []:
+        if g["tier"] == "verified" and any((g["cat"], (a[0], a[1], y)) in involved
+                                           for a in g["apps"] for y in range(a[2], a[3] + 1)):
+            g["tier"] = "likely"
+    return found
+
+
+def _attach_oem_layer(payload: dict) -> None:
+    """Never raises: on any failure the old keys are restored and every
+    namespace is reported dropped in oemStatus."""
+    before = json.loads(json.dumps({k: payload[k] for k in ("categories", "platformGroups", "engineFamilies")}))
+    try:
+        _attach_oem_layer_inner(payload, before)
+    except Exception as e:  # noqa: BLE001 - the scan must keep publishing
+        for k, v in before.items():
+            payload[k] = v
+        st = {ns: f"dropped: OEM layer failed ({type(e).__name__})"
+              for ns in (payload.get("oemStatus") or {})} or {"_all": f"dropped: OEM layer failed ({type(e).__name__})"}
+        payload["oemGroups"], payload["oemVg"], payload["oemStatus"] = [], {}, st
+        print(f"[interchange] oem layer withheld: {type(e).__name__}: {e}", file=sys.stderr)
+
+
+def _attach_oem_layer_inner(payload: dict, before: dict) -> None:
+    oem = _load_oem_layer()
+    if not oem["status"]:
+        return      # no groups files: the payload is unchanged
+    groups, vg = [], {}
+    for ns, doc in sorted(oem["docs"].items()):
+        brand = _OEM_BRANDS.get(ns, ns)
+        for g in list(doc.get("groups") or []) + list(doc.get("likely") or []):
+            groups.append({"id": g["id"], "ns": ns, "cat": g["cat"], "tier": g["tier"],
+                           "label": f"{brand} catalog", "note": g["note"], "apps": g["apps"],
+                           "pn": g["pn"], "src": "oem", **({"cars": g["cars"]} if g.get("cars") else {})})
+        for g in doc.get("vg") or []:
+            vg.setdefault(g["family"], {}).setdefault(g["cat"], []).append(g["spans"])
+    payload["oemGroups"] = groups
+    payload["oemVg"] = vg
+    payload["oemStatus"] = dict(sorted(oem["status"].items()))
+    try:
+        found = _apply_oem_contradictions(payload, oem)
+    except Exception as e:  # noqa: BLE001
+        found = []
+        print(f"[interchange] oem contradictions failed ({e}); OEM layer withheld", file=sys.stderr)
+        payload["oemGroups"], payload["oemVg"] = [], {}
+        payload["oemStatus"] = {ns: "dropped: contradiction check failed" for ns in oem["status"]}
+    for c in found:
+        print(f"[interchange] oem contradiction ({c['trigger']}): {c['kind']} {c['id']} ({c['ns']})",
+              file=sys.stderr)
+        st = payload["oemStatus"].get(c["ns"], "")
+        if st.startswith("ok"):
+            payload["oemStatus"][c["ns"]] = st + f"; contradiction {c['trigger']} {c['id']}"
+    V = _oem_validator()
+    problems = V.old_keys_problems(before, payload)
+    if problems:
+        # never let the OEM layer add a claim to the keys old clients read
+        for k, v in before.items():
+            payload[k] = v
+        payload["oemGroups"], payload["oemVg"] = [], {}
+        payload["oemStatus"] = {ns: f"dropped: {problems[0]}" for ns in oem["status"]}
+        print(f"[interchange] oem layer withheld: {problems[0]}", file=sys.stderr)
+        return
+    for gid in V.size_trim(payload):
+        print(f"[interchange] oem {gid} dropped for size (V11)", file=sys.stderr)
+
+
+_OEM_BRANDS = {"toyota": "Toyota", "mopar": "Mopar", "gm": "GM", "ford": "Ford", "nissan": "Nissan",
+               "honda": "Honda", "hmg": "Hyundai/Kia", "subaru": "Subaru"}
 
 
 def _iso_utc_z_interchange() -> str:
