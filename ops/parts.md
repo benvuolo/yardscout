@@ -136,9 +136,9 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   (GMT800 2003–06, Sierra 2001–06, GMT900 2007–14). 2007 Classic → GMT800
   rows. `gm-gen3-truck`/`gm-gen4-truck` apps and verified groups use
   explicit light-duty spellings (no `Silverado*`/`Sierra*` prefix).
-  1,140 cars changed, all 1500s unchanged. Generic-only 14,788 (4.4%) →
-  15,529 (4.6%) (HD/C/V now show generic rows instead of unsupported
-  1500/pickup rows); no entry 12,402 → 12,364. Open: HD tailgate / tow
+  1,140 cars changed, all 1500s unchanged. Generic-only 13,893 (4.2%) →
+  14,634 (4.4%) after §22.1–22.5 (HD/C/V now show generic rows instead
+  of unsupported 1500/pickup rows); no entry 12,396 → 12,358. Open: HD tailgate / tow
   mirror / K2XX–T1XX HD rows need part-number bases; plain "Silverado" /
   "Sierra" listings can be unnamed HDs (528 cars, unchanged).
 

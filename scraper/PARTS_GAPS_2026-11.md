@@ -1944,7 +1944,7 @@ also show in the app's model picker). Explicit names were used so
 `docs/app.js` (`pfAppMatches`) needs no change.
 
 **Checks.** Every distinct year/make/model on the lots (334,588 cars,
-12,666 distinct; HEAD with §22 vs working tree, same inventory) matched
+12,666 distinct; main with §22 vs this change, same inventory) matched
 with seven decodes (none, sedan FWD, coupe, hatch, SUV AWD, pickup 4WD,
 van RWD). 1,140 cars changed, all in the intended groups, and every
 decode gives the same row changes as no decode:
@@ -1964,10 +1964,11 @@ Engine families: 678 HD/Classic-HD cars left `gm-gen3-truck` /
 2 "Silverado 1500 Ext Cab" lost the app (above).
 Every other car, all 1500s included, is unchanged (matches and families).
 
-Coverage is reported as it falls, not improved: generic-only 14,788
-(4.4%) → 15,529 (4.6%), +741 (Silverado HD 523, Sierra HD 186, C/V 31,
+Coverage is reported as it falls, not improved. Against main after
+§22.1–22.5 (same inventory): generic-only 13,893 (4.2%) → 14,634 (4.4%),
++741 (Silverado HD 523, Sierra HD 186, C/V 31,
 one 1999 Classic: they now show generic rows instead of 1500/pickup rows
-they did not have a basis for). No entry 12,402 → 12,364 (−38, the
+they did not have a basis for). No entry 12,396 → 12,358 (−38, the
 B-vans). Tests: new §23.6 checks in `test_parts_gaps.py` (Ram Van /
 Ram Wagon / B-van / C/V never get a pickup card or pickup rows, any
 decode; HD never gets 1500-only rows; HD headlight windows; Classic rows;
