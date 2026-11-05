@@ -11,6 +11,7 @@ is blocked, what is next). The owner's standing rules are in `/CLAUDE.md`.
 | eBay pricing | `ops/ebay.md` | `ebay_prices.py`, bands, calibration | eBay keys exist, or Terapeak list arrives |
 | Yards | `ops/yards.md` | adapters, coverage sweep, outreach, registry | a reply, a new yard, or the monthly sweep |
 | Data quality | `ops/data.md` | normalization, lifespan data and its display | owner ask |
+| Interchange | `ops/interchange.md` | OEM-fitment crawl, curation, verified interchange | running (hub-orchestrated workflows) |
 | Release | `ops/release.md` | version bump, build, store submission | owner says "ship" |
 
 Brief for a new session (paste as the first message):
