@@ -7,3 +7,8 @@
 02:13:47 seed A|Lexus|IS 250|2007 had network failures; left open for retry
 02:13:47 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=392 errors=3
 02:13:47 time budget reached records=392
+05:25:05 start site=www.lexuspartsnow.com segments=25 tiers=['A', 'B']
+05:25:05 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002] records=392 errors=3
+05:25:05 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=392 errors=3
+05:58:01 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007, 2013] records=590 errors=3
+05:58:01 time budget reached records=590
