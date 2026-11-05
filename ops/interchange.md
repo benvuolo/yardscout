@@ -1013,3 +1013,89 @@ a claim.
 2. Mopar/Subaru: owner asked for "a workaround". No bypass (CLAUDE.md rule 2). Instead: one same-identity retry (`.retried403` on oem-raw; a second refusal is final), Dodge/Chrysler/Ram seeds through jeeppartsdeal (a full Mopar dealer catalog that has not refused us), and a Subaru source scout under the usual robots/terms survey. Euro sites get curation namespaces. Session: session_016ZzJfMapNmKpMbuoJzVupB.
 3. The 41 hand vg groups the §7.6 trigger would withhold (hypothetical closure run): no hand withdrawal; the rule withholds them automatically once cells are OEM-closed. The list goes to ops/parts.md for a basis re-check.
 4. U-Pull-R / Harry's: no captcha work. Harry's scans fine (4,230 cars; their site has served an unchanged list since 2026-11-04, newest car 11-03). U-Pull-R stays "waiting on the yard"; follow-up call/email to jessef@ if no reply by 11-07.
+
+## Interchange session status, 2026-11-05 ~23:30 UTC
+
+Merged to main:
+- **50c9243 jeeppartsdeal v2 (Dodge / Chrysler / Ram).** worklist.json
+  `sites[jeeppartsdeal]` has `version: 2` and 62 Dodge/Chrysler/Ram segments
+  (copied from the moparpartsgiant worklist, same feed segments and seed
+  years; Plymouth left out because this site prints no Plymouth rows). New
+  `markers.py`: a vN worklist finishes as `raw/<site>.vN.done`. The v1
+  `raw/www.jeeppartsdeal.com.done` stays on oem-raw as evidence, the plan
+  step looks for `.v2.done`, and progress.json done keys skip the Jeep
+  seeds. fetch.py, identity, robots, the 8 s gap and the breaker are
+  unchanged. The plan step, dry-run against oem-raw, now lists jeeppartsdeal.
+  - Basis: on oem-raw the site's own product pages print full fitment rows
+    for Dodge (340), Chrysler (113) and Ram (50), with trims and engines. The
+    template's year path is make-parameterised (the toyotapartsnow Scion
+    pages work the same way). **Not confirmed from a cached page:** there is
+    no page cache in this container or on oem-raw, so whether
+    `/catalog/<year>-dodge-<model>-parts` exists is unverified until the
+    first slice runs. A miss is HTTP 404, a redirect or no parts-list links
+    (NavError, recorded in the R2 year manifest). It never counts as a
+    refusal and never creates a record. Check the first slice's
+    `raw/www.jeeppartsdeal.com.log` and `.years.jsonl`. If every Dodge
+    seed misses, the slug guess is wrong, not the source.
+  - Slugs: year splits are taken from the catalog's own printed ranges
+    (Dodge Ram 1500/2500 1994-2010, then make Ram; Ram Van/Wagon 1994-97;
+    Ram 1500 Van 1999-2003). Combined feed names (Caravan/Grand Caravan,
+    Dodge "Ram", "Ram Pickup", "1500 Pickup", D1500) navigate nowhere.
+    `Town & Country` -> `town-country` and Ram `C/V` -> `c-v` are the
+    default slugify and unverified.
+  - Tests: test_crawl_runner (versioned marker; v2 navigates only the new
+    segment and re-fetches no product), test_jeeppartsdeal (+15 pure
+    checks). `tests/run_all.py` 28/28.
+- **390c5fd ops/parts.md**: the 41 hand vg groups for a basis re-check
+  (task 4). Reproduced from toyota + mopar on oem-raw@50ac4a48, every cell
+  assumed closed: 41 vg, 0 platform; splits option_split 240, trim 44,
+  engine 5, plant 1, production 1 (the hub's totals). Main now has 467
+  hand vg groups (the hub counted 468). Nothing withdrawn, parts table not
+  touched.
+- **2d0b9cd namespaces vag (VW + Audi; 06B-903-016-AB is on both
+  catalogs), bmw, mb, mazda, mitsubishi, volvo**, in policy.py and
+  CURATION_SPEC §4. model_map.json gets +281 identity-draft entries (every
+  existing entry unchanged). The mb note brand is "Mercedes" because V5's
+  note charset refuses the hyphen. All 14 `_report/*` were re-curated on
+  oem-raw@ceccc80, plus `coverage-2026-11-05.json`. No `groups/<ns>.json`
+  committed (spec 11.5).
+  - Likely / Verified: bmw 957/0, mb 958/0, vag 704/0, volvo 271/0, mazda 58/0,
+    mitsubishi 32/0; old ones toyota 1506, ford 1033, gm 930, nissan 905,
+    subaru 553, hmg 413, mopar 320, honda 35, all 0 Verified. bmw, mazda,
+    mitsubishi and volvo have no R1/R2 manifests on oem-raw. vag and mb
+    have some (18 year manifests for vag), but no audits and engine cells
+    unaudited, so Likely only.
+  - measure.py: parity 6/6. V11 drops 5,972 Likely groups for size (the
+    payload-size decision is still open, item 2 above). Every §7.6
+    contradiction count is 0. Alternator, starter and engine-assembly
+    "after" are below "before" (121,837 -> 117,601; 225,773 -> 213,637).
+    That is not the OEM layer: the committed docs/data/interchange.json
+    (17:20 scan) predates main's P0.5 hybrid splits (15 hand engine
+    families differ). It settles at the next scan.
+  - Tests: curation_tests 14/14 files (Phase 2 parity SKIP: no OEM-TIER
+    block in app.js), all 19 `scraper/test_*.py` pass.
+  - MINI: no source. bmwpartsdeal is not a MINI catalog (1,746 records, 0
+    MINI fitment rows). SOURCES.md found no allowed MINI catalog
+    (fcpeuro is rejected by its terms; mini*partsgiant/deal/now did not
+    resolve). MINI has 1,004 lot cars.
+  - Open for audit: VAG numbers with an `X` suffix (e.g. 06F-903-023-FX)
+    look like reman exchange units. No reman rule exists for them (policy
+    has Toyota `-84` only). Check before any vag audit.
+
+What the next crawl does: run 12 (scheduled 20:08 UTC, still running) was
+planned before the retry markers (22:46) and before the v2 worklist. The
+next scheduled run (cron :23 every 6 h, so 00:23 UTC; it waits for run 12)
+plans moparpartsgiant and subarupartsdeal (one same-identity retry each:
+a 403 writes `.blocked`, final) and jeeppartsdeal v2 (Dodge/Chrysler/Ram
+only), plus the unfinished ford, gm, hyundai, lexus and vw. max-parallel 6.
+
+Blocked / not done:
+- Task 3 (Subaru source scout) not started: subarupartsdeal's retry has
+  not run yet. Method for when it is needed: SOURCES.md survey (probe.py:
+  robots + home page only; terms read for an anti-automation clause;
+  RFC 9309 robots reading). **A sister site on the same dealer network as
+  subarupartsdeal (SimplePart / PartsGiant family) is excluded:** after a
+  403 from that network, using it would be routing around the refusal. A
+  candidate needs a different operator, and the basis goes here before any
+  fetch.py ALLOWED change.
+- 41 hand groups: waiting on the parts session (ops/parts.md).
