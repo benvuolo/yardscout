@@ -163,3 +163,45 @@
 06:35:57 seg done tier=B Honda Civic [2006, 2008] seeds=[2008] records=1062 errors=0
 06:42:54 seg done tier=B Honda Accord [2008, 2010] seeds=[2008] records=1083 errors=0
 06:42:54 time budget reached records=1083
+06:43:03 start site=www.hondapartsnow.com segments=28 tiers=['A', 'B']
+06:43:03 seg done tier=A Honda Accord [1998, 2002] seeds=[2002] records=1083 errors=0
+06:43:03 seg done tier=A Honda Accord [2003, 2005] seeds=[2003] records=1083 errors=0
+06:43:03 seg done tier=A Honda Odyssey [2005, 2010] seeds=[2007] records=1083 errors=0
+06:43:03 seg done tier=A Honda Civic [2006, 2008] seeds=[2008] records=1083 errors=0
+06:43:03 seg done tier=A Honda Accord [2008, 2010] seeds=[2008] records=1083 errors=0
+06:43:03 seg done tier=A Honda Pilot [2003, 2008] seeds=[2006] records=1083 errors=0
+06:43:03 seg done tier=A Honda Accord [2006, 2007] seeds=[2007] records=1083 errors=0
+06:43:03 seg done tier=A Honda Civic [2001, 2003] seeds=[2002] records=1083 errors=0
+06:43:03 seg done tier=A Honda Civic [2004, 2005] seeds=[2005] records=1083 errors=0
+06:43:03 seg done tier=A Honda Odyssey [1995, 2004] seeds=[2003] records=1083 errors=0
+06:43:03 seg done tier=A Honda Civic [1996, 2000] seeds=[2000] records=1083 errors=0
+06:43:03 seg done tier=A Honda Civic [2009, 2011] seeds=[2009] records=1083 errors=0
+06:43:03 seg done tier=A Honda CR-V [2002, 2006] seeds=[2004] records=1083 errors=0
+06:43:03 seg done tier=A Honda Pilot [2009, 2015] seeds=[2011] records=1083 errors=0
+06:43:03 seg done tier=A Honda Civic [2012, 2015] seeds=[2012] records=1083 errors=0
+06:43:03 seg done tier=A Honda Accord [1994, 1997] seeds=[1997] records=1083 errors=0
+06:43:03 seg done tier=A Honda Accord [2011, 2012] seeds=[2012] records=1083 errors=0
+06:43:03 seg done tier=A Honda CR-V [2007, 2011] seeds=[2007] records=1083 errors=0
+06:43:03 seg done tier=A Honda CR-V [1997, 2001] seeds=[2001] records=1083 errors=0
+06:43:03 seg done tier=A Honda Fit [2007, 2020] seeds=[2008] records=1083 errors=0
+06:43:03 seg done tier=A Honda Odyssey [2011, 2017] seeds=[2011] records=1083 errors=0
+06:43:03 seg done tier=A Honda Element [2003, 2011] seeds=[2003] records=1083 errors=0
+06:43:03 seg done tier=A Honda Accord [2013, 2017] seeds=[2013] records=1083 errors=0
+06:43:03 seg done tier=A Honda Accord [1981, 1993] seeds=[1993] records=1083 errors=0
+06:43:03 seg done tier=A Honda Civic [1978, 1995] seeds=[1995] records=1083 errors=0
+06:43:03 seg done tier=A Honda Ridgeline [2006, 2014] seeds=[2006] records=1083 errors=0
+06:43:03 seg done tier=A Honda Insight [2000, 2021] seeds=[2010] records=1083 errors=0
+06:43:03 seg done tier=A Honda Civic Hybrid [2003, 2010] seeds=[2008] records=1083 errors=0
+06:43:03 seg done tier=B Honda Accord [1998, 2002] seeds=[2002] records=1083 errors=0
+06:43:03 seg done tier=B Honda Accord [2003, 2005] seeds=[2003] records=1083 errors=0
+06:43:03 seg done tier=B Honda Odyssey [2005, 2010] seeds=[2007] records=1083 errors=0
+06:43:03 seg done tier=B Honda Civic [2006, 2008] seeds=[2008] records=1083 errors=0
+06:43:03 seg done tier=B Honda Accord [2008, 2010] seeds=[2008] records=1083 errors=0
+06:47:43 seg done tier=B Honda Pilot [2003, 2008] seeds=[2006] records=1096 errors=0
+06:51:43 seg done tier=B Honda Accord [2006, 2007] seeds=[2007] records=1105 errors=0
+06:55:59 seg done tier=B Honda Civic [2001, 2003] seeds=[2002] records=1116 errors=0
+06:59:27 seg done tier=B Honda Civic [2004, 2005] seeds=[2005] records=1122 errors=0
+07:07:11 seg done tier=B Honda Odyssey [1995, 2004] seeds=[2003, 1997] records=1139 errors=0
+07:11:36 seg done tier=B Honda Civic [1996, 2000] seeds=[2000] records=1154 errors=0
+07:14:31 seg done tier=B Honda Civic [2009, 2011] seeds=[2009] records=1156 errors=0
+07:14:31 time budget reached records=1156
