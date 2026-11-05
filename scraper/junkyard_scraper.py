@@ -6541,6 +6541,13 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "odyssey": [2002, 2008, 2014, 2021],
     "expedition": [1999, 2015, 2022],
     "town & country": [2005, 2011],
+    "silverado": [2003, 2016, 2022],
+    "sierra": [2003, 2016, 2022],
+    "ram": [2006, 2013],             # 1500; 2007 tail-light-only revision left out
+    "ram 2500": [2006, 2013],
+    "ram 3500": [2006, 2013],
+    "bmw 3": [2002, 2004, 2009, 2011, 2016, 2023],  # sedan/wagon and coupe/convertible LCIs
+    "maxima": [1997, 2002, 2007, 2012, 2019],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

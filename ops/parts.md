@@ -102,7 +102,12 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 - §23 (owner: "go on facelifts"; facelift follow-ups, PARTS_GAPS §23):
   23.1 Grand Caravan 1999/2005/2011, Odyssey 2002/2008/2014/2021,
   Expedition 1999/2015/2022, Town & Country 2005/2011, each year cited.
-  Per car: only `fits` narrowed (1,027 Expedition cars); coverage unchanged.
+  23.2 Silverado/Sierra 2003/2016/2022, Ram 1500 and HD 2006/2013, BMW 3
+  2002/2004/2009/2011/2016/2023 (sedan and coupe LCIs), Maxima
+  1997/2002/2007/2012/2019. Per car: only `fits` narrowed (1,027 + 7,537
+  cars); coverage unchanged. Tail-only revisions (Ram 2007) are not cuts.
+  Found, not fixed: Dodge "Ram Van"/"Ram Wagon" listings match the Ram
+  pickup entry (PARTS_GAPS §23.2).
 
 ## How to measure
 
@@ -132,9 +137,9 @@ The generic-only count re-matches every distinct year/make/model in
 2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
    overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
    into `lexus es` and drop the duplicate (§20.5).
-3. Facelifts (§23, in progress): 23.1 done (Grand Caravan, Odyssey,
-   Expedition, Town & Country). Next: Silverado/Sierra, Ram, BMW 3, Maxima;
-   then Ranger, Suburban, Traverse, Pathfinder; then TrailBlazer, Pilot,
+3. Facelifts (§23, in progress): 23.1–23.2 done (Grand Caravan, Odyssey,
+   Expedition, Town & Country, Silverado/Sierra, Ram, BMW 3, Maxima). Next:
+   Ranger, Suburban, Traverse, Pathfinder; then TrailBlazer, Pilot,
    Tahoe/Yukon, Liberty, Edge, Charger, Dakota, Grand Cherokee. The rule: a
    cited source for every year, and models without one are left out.
 4. When the daily email's "Most searched parts / cars (7 d)" has a week of

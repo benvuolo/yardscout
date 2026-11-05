@@ -1703,3 +1703,40 @@ comparison: 0 cars with any non-`fits` difference; 1,027 Expedition cars
 generic-only 15,326 (4.6%), no entry 12,360 (3.7%). `test_parts_gaps.py`
 (new §23.1 check), `test_interchange.py`, `test_consensus_parts.py` and
 `test_vpic_fixes.py` pass.
+
+### 23.2 Silverado / Sierra, Ram 1500 and HD, BMW 3 Series, Maxima
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Chevrolet Silverado | 2003, 2016, 2022 | 2003: "refreshed in 2002 for the 2003 model year" (en.wikipedia.org/wiki/Chevrolet_Silverado); GM press text (theautochannel.com 2002-02-06): "redesigned headlamps, park-turn signals and daytime running lamps". 2016: "a new grille, headlights, and front fascia" (Wikipedia); Autoblog "2016 Chevy Silverado puts on a better face". 2022: "mid-cycle refresh ... new front-end design" (Wikipedia) |
+| GMC Sierra | 2003, 2016, 2022 | 2003: GM press text (theautochannel.com 2002-02-06): "a restyled grille, bumper and fascia"; Wikipedia "slight design changes". 2016: "a new grille, headlights, and front fascia" (en.wikipedia.org/wiki/GMC_Sierra); Automotive Fleet 2016 styling update (LED headlights, fascia, grilles, bumpers, LED tails). 2022: "a new front-end design" (Wikipedia); GM Authority new grille and thinner headlights |
+| Ram 1500 | 2006, 2013 | 2006: "the front fascia was modernized ... a facelift was given to all Ram models" (en.wikipedia.org/wiki/Ram_pickup); Autoblog 2006 Ram 1500 review: new headlamps, fascia, bumper, grille. 2013: "the Ram 1500 received a revised front fascia" (Wikipedia); cars.com 2013 Ram 1500 design deep dive (grille, projector headlamps, LED tails) |
+| Ram 2500 / 3500 | 2006, 2013 | 2006: Wikipedia's "a facelift was given to all Ram models"; Edmunds 2006 Ram 2500 "freshened front-end styling" (search excerpt). 2013: Autoblog 2012-09-27 "a new, taller grille, which necessitated a new hood"; CarBuzz Ram 2013 HD reveal (taller grille, LED lamps on SLT) |
+| BMW 3 Series | 2002, 2004, 2009, 2011, 2016, 2023 | E46 sedan/Touring 2002: "facelift versions of the sedan and Touring were released for the 2002 model year"; E46 coupe/convertible 2004: "released for the 2004 model year" (en.wikipedia.org/wiki/BMW_3_Series_(E46)). E90/E91 2009: "the facelift (LCI) versions of the saloon and estate were released for the 2009 model year" (Wikipedia E90). E92/E93 2011: Carvana 2011 3 Series "new headlights, taillights, hood, grille, bumpers"; BMWBlog 2011 coupe/convertible LCI. F30/F31 2016: "released in 2015 for the 2016 model year ... Revised headlights and tail-lights" (Wikipedia F30). G20 2023: "new front and rear bumpers, new headlights" (Wikipedia G20); Edmunds "refreshed 2023 BMW 3 Series" |
+| Nissan Maxima | 1997, 2002, 2007, 2012, 2019 | 1997: "the Maxima's exterior was refreshed for 1997 ... clear-lens headlights ... redesigned tail-lights" (en.wikipedia.org/wiki/Nissan_Maxima); Nissan 1997 press kit. 2002: "a mild facelift ... larger, revised grille ... revised headlamp design" (Wikipedia); cars.com 2002. 2007: nissannews (Canada) 2007 release "new front grille, hood, bumper and headlights". 2012: "a new grille, taillights" (Wikipedia); Nissan 2012 press kit "new front grille design, new rear combination lights". 2019: AutoGuide 2018-11 (checked): "a larger grille", "Headlamps of the LED variety are also standard", "the taillights and fascia have been reworked"; Nissan US 2019 press kit |
+
+**Body styles (BMW).** The cut is per model, not per body: sedan/wagon
+and coupe/convertible facelift years are both applied. That makes some
+windows narrower than the true one (a 2003 sedan's E46 headlights now read
+2002–2003 where the sedan LCI lamp fits 2002–2005). Narrower is never a
+false claim; a body-aware cut would be needed to widen it again.
+
+**Left out:** Ram 1500 2007 (tail lights "slightly revised" only: the cut
+cannot target one lamp and would make 2006 headlights read "2006–2006"),
+Ram 1999 (Sport trim only), Ram 2025 refresh and Silverado/Sierra/Ram
+2019+ beyond the cited years (out of range); Silverado/Sierra GMT900
+(no facelift found); the Sierra 2003 headlamps are not claimed to have
+changed (grille/bumper/fascia are; the cut is conservative). BMW E36 (no
+facelift found), F34 GT (US year unconfirmed; its rows share the F30 cut),
+G21 and E36 Touring (not US). Maxima: none.
+
+**Checks.** 0 cars with any non-`fits` difference (seven decodes). 7,537
+cars have a narrowed window, by listing make: Chevrolet 2,827 (Silverado
+incl. HD and feed spellings), Dodge 2,558 (Ram), GMC 842, BMW 1,024,
+Nissan 286. Coverage unchanged:
+generic-only 15,326, no entry 12,360. Tests pass (new §23.2 check).
+
+**Found, not fixed (routing, outside this task):** "Ram Van", "Ram Wagon"
+(Dodge B-series vans) and "Chevrolet Ram1500" listings match the Ram
+pickup entry, so a 2002–05 Ram Van shows pickup headlights. Silverado/
+Sierra 2500/3500 listings also match the 1500 rows.

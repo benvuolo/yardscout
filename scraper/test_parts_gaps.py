@@ -560,6 +560,17 @@ check("§23.1 Expedition: headlights cut at the 1999 facelift; minivan/Odyssey k
       and js.FACELIFT_BREAKS["grand caravan"] == [1999, 2005, 2011] and js.FACELIFT_BREAKS["odyssey"] == [2002, 2008, 2014, 2021]
       and js.FACELIFT_BREAKS["town & country"] == [2005, 2011] and js.FACELIFT_BREAKS["expedition"] == [1999, 2015, 2022])
 
+def _fits(y, mk, mo, name):
+    return parts(y, mk, mo)[name]["fits"]
+check("§23.2 Silverado/Sierra/Ram/BMW 3/Maxima: lamp rows cut at the cited facelifts; Ram tail-only 2007 not a cut",
+      _fits(2002, "Chevrolet", "Silverado 1500", "Headlights (clear, non-hazed)") == "1999–2002"
+      and _fits(2016, "Chevrolet", "Silverado 1500", "Headlights (clear, non-hazed)") == "2016–2018"
+      and _fits(2003, "GMC", "Sierra 1500", "Headlights (clear, non-hazed)") == "2003–2006"
+      and _fits(2006, "Dodge", "Ram 1500", "Headlights (clear, non-hazed)") == "2006–2008"
+      and _fits(2003, "BMW", "325i", "OEM Headlight Assembly (E46 halogen/xenon, pair)") == "2002–2003"
+      and _fits(1997, "Nissan", "Maxima", "Headlights (clear pair)") == "1997–1999"
+      and _fits(2019, "Nissan", "Maxima", "OEM LED Headlights") == "2019–2024")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
