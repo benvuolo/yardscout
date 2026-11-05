@@ -92,3 +92,18 @@ Each site module ships `tests/test_<name>.py`, offline, reading cached pages
 through fetch.get (cache hits only), asserting the parser on at least one
 list page and two product pages, including a multi-model or multi-year
 fitment block.
+
+## Curation (CURATION_SPEC.md; offline, no network)
+
+```
+python3 scraper/oem_fitment/curate.py --ns all --raw-ref <oem-raw sha> [--propose-map] [--write-groups --out DIR]
+python3 scraper/oem_fitment/model_map.py merge DIR/_report/<ns>.map-proposals.json ...   # human step, M1-M10 checked
+python3 scraper/oem_fitment/measure.py --groups DIR --reports DIR/_report --parity
+python3 scraper/oem_fitment/curation_tests/run_all.py
+```
+
+Pin `--raw-ref` to a sha: `origin/oem-raw` moves whenever any session
+fetches. Reports land in `groups/_report/` (funnel, refusals, gates,
+completion worklist, map proposals, coverage). `groups/<ns>.json` ships under
+the payload's new keys only, and only after the owner reviews
+`_report/<ns>.md`.
