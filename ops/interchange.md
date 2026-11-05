@@ -654,3 +654,13 @@ What a curator must know (all three are the "giant" SimplePart variant):
 - Being listed on a vehicle's catalog page is not fitment; only the part's
   own fitment rows count (AUDIT.md: Ford DG1Z-10346-E, FJ7Z-10346-A, Mopar
   R5233006).
+- 2026-11-05 12:20 UTC status: 29,242 records on oem-raw. Done (.done):
+  Acura, Audi, BMW, Infiniti, Jeep, Mazda, Mitsubishi, Volvo, DB Electrical.
+  Crawling: Toyota, GM, Ford, Nissan, Kia, Mercedes. Stopped by the breaker
+  (.blocked): Mopar 403 (02:18), VW 503 (02:04), Hyundai 503 (07:40), Lexus
+  503 (07:40), Honda 503 (07:44), Subaru 403 (10:26). Cause of the 07:40
+  cluster: the 07:02 scheduled run overlapped the 02:43 manual run (~14
+  sites at once). Fix e262ace: workflow-level concurrency (one run at a
+  time) and max-parallel 6 (~0.75 req/s). Owner decision pending: whether a
+  503 (service unavailable, clustered across sites) may be retried once
+  after a cool-down at the slower pace; 403s stay stopped.
