@@ -494,3 +494,78 @@
 21:17:42 chain-unlinked tailgate 3 numbers named by 68100-SJC-A91ZZ, no catalog link: 68100-SJC-A01ZZ, 68100-SJC-A90ZZ, 68100-SJC-A00ZZ
 21:17:52 seg done tier=B Honda Ridgeline [2006, 2014] seeds=[2006] records=1439 errors=2
 21:17:52 time budget reached records=1439
+21:18:02 start site=www.hondapartsnow.com mode=worklist tiers=['A', 'B'] records=1439 list_lines=287 year_lines=41 url_index=2793
+21:18:02 seg done tier=A Honda Accord [1998, 2002] seeds=[2002] records=1439 errors=2
+21:18:02 seg done tier=A Honda Accord [2003, 2005] seeds=[2003] records=1439 errors=2
+21:18:02 seg done tier=A Honda Odyssey [2005, 2010] seeds=[2007] records=1439 errors=2
+21:18:02 seg done tier=A Honda Civic [2006, 2008] seeds=[2008] records=1439 errors=2
+21:18:02 seg done tier=A Honda Accord [2008, 2010] seeds=[2008] records=1439 errors=2
+21:18:02 seg done tier=A Honda Pilot [2003, 2008] seeds=[2006] records=1439 errors=2
+21:18:02 seg done tier=A Honda Accord [2006, 2007] seeds=[2007] records=1439 errors=2
+21:18:02 seg done tier=A Honda Civic [2001, 2003] seeds=[2002] records=1439 errors=2
+21:18:02 seg done tier=A Honda Civic [2004, 2005] seeds=[2005] records=1439 errors=2
+21:18:02 seg done tier=A Honda Odyssey [1995, 2004] seeds=[2003] records=1439 errors=2
+21:18:02 seg done tier=A Honda Civic [1996, 2000] seeds=[2000] records=1439 errors=2
+21:18:02 seg done tier=A Honda Civic [2009, 2011] seeds=[2009] records=1439 errors=2
+21:18:02 seg done tier=A Honda CR-V [2002, 2006] seeds=[2004] records=1439 errors=2
+21:18:02 seg done tier=A Honda Pilot [2009, 2015] seeds=[2011] records=1439 errors=2
+21:18:02 seg done tier=A Honda Civic [2012, 2015] seeds=[2012] records=1439 errors=2
+21:18:02 seg done tier=A Honda Accord [1994, 1997] seeds=[1997] records=1439 errors=2
+21:18:02 seg done tier=A Honda Accord [2011, 2012] seeds=[2012] records=1439 errors=2
+21:18:02 seg done tier=A Honda CR-V [2007, 2011] seeds=[2007] records=1439 errors=2
+21:18:02 seg done tier=A Honda CR-V [1997, 2001] seeds=[2001] records=1439 errors=2
+21:18:02 seg done tier=A Honda Fit [2007, 2020] seeds=[2008] records=1439 errors=2
+21:18:02 seg done tier=A Honda Odyssey [2011, 2017] seeds=[2011] records=1439 errors=2
+21:18:02 seg done tier=A Honda Element [2003, 2011] seeds=[2003] records=1439 errors=2
+21:18:02 seg done tier=A Honda Accord [2013, 2017] seeds=[2013] records=1439 errors=2
+21:18:02 seg done tier=A Honda Accord [1981, 1993] seeds=[1993] records=1439 errors=2
+21:18:02 seg done tier=A Honda Civic [1978, 1995] seeds=[1995] records=1439 errors=2
+21:18:02 seg done tier=A Honda Ridgeline [2006, 2014] seeds=[2006] records=1439 errors=2
+21:18:02 seg done tier=A Honda Insight [2000, 2021] seeds=[2010] records=1439 errors=2
+21:18:02 seg done tier=A Honda Civic Hybrid [2003, 2010] seeds=[2008] records=1439 errors=2
+21:18:02 seg done tier=B Honda Accord [1998, 2002] seeds=[2002] records=1439 errors=2
+21:18:02 seg done tier=B Honda Accord [2003, 2005] seeds=[2003] records=1439 errors=2
+21:18:02 seg done tier=B Honda Odyssey [2005, 2010] seeds=[2007] records=1439 errors=2
+21:18:02 seg done tier=B Honda Civic [2006, 2008] seeds=[2008] records=1439 errors=2
+21:18:02 seg done tier=B Honda Accord [2008, 2010] seeds=[2008] records=1439 errors=2
+21:18:02 seg done tier=B Honda Pilot [2003, 2008] seeds=[2006] records=1439 errors=2
+21:18:02 seg done tier=B Honda Accord [2006, 2007] seeds=[2007] records=1439 errors=2
+21:18:02 seg done tier=B Honda Civic [2001, 2003] seeds=[2002] records=1439 errors=2
+21:18:02 seg done tier=B Honda Civic [2004, 2005] seeds=[2005] records=1439 errors=2
+21:18:02 seg done tier=B Honda Odyssey [1995, 2004] seeds=[2003] records=1439 errors=2
+21:18:02 seg done tier=B Honda Civic [1996, 2000] seeds=[2000] records=1439 errors=2
+21:18:02 seg done tier=B Honda Civic [2009, 2011] seeds=[2009] records=1439 errors=2
+21:18:02 seg done tier=B Honda CR-V [2002, 2006] seeds=[2004] records=1439 errors=2
+21:18:02 seg done tier=B Honda Pilot [2009, 2015] seeds=[2011] records=1439 errors=2
+21:18:02 seg done tier=B Honda Civic [2012, 2015] seeds=[2012] records=1439 errors=2
+21:18:02 seg done tier=B Honda Accord [1994, 1997] seeds=[1997] records=1439 errors=2
+21:18:02 seg done tier=B Honda Accord [2011, 2012] seeds=[2012] records=1439 errors=2
+21:18:02 seg done tier=B Honda CR-V [2007, 2011] seeds=[2007] records=1439 errors=2
+21:18:02 seg done tier=B Honda CR-V [1997, 2001] seeds=[2001] records=1439 errors=2
+21:18:02 seg done tier=B Honda Fit [2007, 2020] seeds=[2008] records=1439 errors=2
+21:18:02 seg done tier=B Honda Odyssey [2011, 2017] seeds=[2011] records=1439 errors=2
+21:18:02 seg done tier=B Honda Element [2003, 2011] seeds=[2003] records=1439 errors=2
+21:18:02 seg done tier=B Honda Accord [2013, 2017] seeds=[2013] records=1439 errors=2
+21:18:02 seg done tier=B Honda Accord [1981, 1993] seeds=[1993] records=1439 errors=2
+21:18:02 seg done tier=B Honda Civic [1978, 1995] seeds=[1995] records=1439 errors=2
+21:18:02 seg done tier=B Honda Ridgeline [2006, 2014] seeds=[2006] records=1439 errors=2
+21:18:42 chain-unlinked gauge-cluster 2 numbers named by 78100-TM8-A03, no catalog link: 78100-TM8-A01, 78100-TM8-A02
+21:19:00 chain-unlinked gauge-cluster 2 numbers named by 78100-TM8-A13, no catalog link: 78100-TM8-A12, 78100-TM8-A11
+21:19:30 chain-unlinked radiator 1 numbers named by 19010-RBJ-004, no catalog link: 19010-RBJ-305
+21:23:23 chain-unlinked bumper-rear 1 numbers named by 04715-TM8-A91ZZ, no catalog link: 04715-TM8-A90ZZ
+21:24:18 nav-fail Honda Insight 2008: ValueError: no 2008 catalog for Honda Insight (honda-['insight'])
+21:24:18 seg done tier=B Honda Insight [2000, 2021] seeds=[2010, 2008] records=1457 errors=3
+21:25:54 chain-unlinked door-front 1 numbers named by 67010-SNA-A90ZZ, no catalog link: 67010-SNA-A00ZZ
+21:25:54 chain-unlinked door-front 1 numbers named by 67050-SNA-A90ZZ, no catalog link: 67050-SNA-A00ZZ
+21:26:10 chain-unlinked door-rear 1 numbers named by 67510-SNA-A90ZZ, no catalog link: 67510-SNA-A00ZZ
+21:26:10 chain-unlinked door-rear 1 numbers named by 67550-SNA-A90ZZ, no catalog link: 67550-SNA-A00ZZ
+21:26:26 chain-unlinked hood 4 numbers named by 60100-SNE-A91ZZ, no catalog link: 60100-SNA-A00ZZ, 60100-SNA-A90ZZ, 60100-SNE-A90ZZ, 60100-SNE-A00ZZ
+21:27:14 chain-unlinked bumper-front 1 numbers named by 04711-SNA-A80ZZ, no catalog link: 71101-SNA-A00ZZ
+21:27:22 chain-unlinked bumper-rear 1 numbers named by 04715-SNA-A90ZZ, no catalog link: 71501-SNA-A00ZZ
+21:27:54 chain-unlinked trunk-lid 3 numbers named by 68500-SNH-C90ZZ, no catalog link: 68500-SNC-A80ZZ, 68500-SNH-C10ZZ, 68500-SNC-A10ZZ
+21:28:58 chain-unlinked radiator 2 numbers named by 19010-PZA-A52, no catalog link: 19010-PZA-A51, 19010-PZA-A01
+21:29:22 chain-unlinked hood 2 numbers named by 60100-S5D-A80ZZ, no catalog link: 60100-S5A-A80ZZ, 60100-S5D-A10ZZ
+21:29:40 chain-unlinked bumper-front 1 numbers named by 04711-S5A-A91ZZ, no catalog link: 71101-S5A-A01ZZ
+21:29:40 chain-unlinked bumper-rear 2 numbers named by 04715-S5A-A91ZZ, no catalog link: 04715-S5A-010ZZ, 71501-S5A-010ZZ
+21:30:02 seg done tier=B Honda Civic Hybrid [2003, 2010] seeds=[2008, 2004] records=1465 errors=3
+21:30:02 finished records=1465 errors=3 chain_records=0 chain_unlinked=277 chain_failed=0 chain_given_up=0
