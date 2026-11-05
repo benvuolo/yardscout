@@ -82,3 +82,26 @@
 04:47:50 seg done tier=A Buick Enclave [2008, 2017] seeds=[2011] records=869 errors=7
 04:51:50 seg done tier=A GMC Terrain [2010, 2017] seeds=[2012] records=875 errors=7
 05:02:30 time budget reached records=932
+05:02:40 start site=www.gmpartsgiant.com segments=206 tiers=['A', 'B']
+05:02:40 seg done tier=A Chevrolet Cruze [1986, 2014] seeds=[2014] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Silverado 1500 [1999, 2023] seeds=[2000] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Equinox [2010, 2015] seeds=[2012] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Impala [2006, 2011] seeds=[2008] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Malibu [2008, 2012] seeds=[2012] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Traverse [2008, 2017] seeds=[2011] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Trailblazer [2002, 2009] seeds=[2004] records=932 errors=7
+05:02:40 seg done tier=A GMC Acadia [2007, 2016] seeds=[2012] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Suburban 1500 [1987, 2018] seeds=[2002] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Cobalt [2002, 2010] seeds=[2007] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Tahoe [2000, 2006] seeds=[2002] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Sonic [1982, 2020] seeds=[2013] records=932 errors=7
+05:02:40 seg done tier=A GMC Sierra 1500 [1988, 2020] seeds=[2006] records=932 errors=7
+05:02:40 seg done tier=A Cadillac CTS [2003, 2019] seeds=[2008] records=932 errors=7
+05:02:40 seg done tier=A Pontiac G6 [2004, 2010] seeds=[2008] records=932 errors=7
+05:02:40 seg done tier=A Buick Enclave [2008, 2017] seeds=[2011] records=932 errors=7
+05:02:40 seg done tier=A GMC Terrain [2010, 2017] seeds=[2012] records=932 errors=7
+05:02:40 seg done tier=A Chevrolet Impala [1960, 2005] seeds=[2004] records=932 errors=7
+05:08:40 seg done tier=A Chevrolet HHR [2006, 2011] seeds=[2008] records=955 errors=7
+05:12:40 seg done tier=A Chevrolet Equinox [2005, 2009] seeds=[2005] records=969 errors=7
+05:25:36 seg done tier=A Chevrolet S-10 [1994, 2004] seeds=[2000] records=1009 errors=7
+05:32:48 time budget reached records=1040
