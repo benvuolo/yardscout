@@ -689,21 +689,22 @@
       <a class="btn" id="ent-appstore-link" href="https://apps.apple.com/app/id6817126581" target="_blank" rel="noopener" style="text-decoration:none;">Get YardScout on the App Store</a>
     </div>
     <span class="waitlist-note">$8.99/month through your App Store account &mdash; auto-renews monthly, cancel anytime in iOS Settings. Finding cars stays free here and in the app &mdash; <a href="privacy.html">privacy</a> &middot; <a href="terms.html">terms</a>.</span>
-    <!-- Cross-device unlock: never required to buy or to use Pro where it was
-         bought — only for bringing an existing Pro to this device. -->
-    <div id="ent-redeem" style="margin-top:1rem;padding-top:0.9rem;border-top:1px solid var(--border);">
-      <strong>Already have Pro?</strong>
-      <span class="waitlist-note" style="display:block;margin-top:0.2rem;">Enter the email from your purchase (or the one you linked in the app) and we&rsquo;ll send a 6-digit code that unlocks Pro on this device.</span>
-      <div class="waitlist-row" style="margin-top:0.55rem;">
-        <input type="email" id="ent-email" inputmode="email" autocomplete="email" placeholder="you@email.com">
-        <button type="button" id="ent-send-code" class="btn">Email&nbsp;code</button>
-      </div>
-      <div class="waitlist-row" id="ent-code-row" style="display:none;margin-top:0.55rem;">
-        <input type="text" id="ent-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
-        <button type="button" id="ent-redeem-btn" class="btn btn-primary">Unlock</button>
-      </div>
-      <span id="ent-status" class="account-status" role="status"></span>
+  </div>
+  <!-- Cross-device unlock (web AND native: a comp or web purchase is unlocked
+     in the iPhone/Android app the same way). Never required to buy or to use Pro where it was
+       bought — only for bringing an existing Pro to this device. -->
+  <div id="ent-redeem" style="margin-top:1rem;padding-top:0.9rem;border-top:1px solid var(--border);">
+    <strong>Already have Pro?</strong>
+    <span class="waitlist-note" style="display:block;margin-top:0.2rem;">Enter the email from your purchase (or the one you linked in the app) and we&rsquo;ll send a 6-digit code that unlocks Pro on this device.</span>
+    <div class="waitlist-row" style="margin-top:0.55rem;">
+      <input type="email" id="ent-email" inputmode="email" autocomplete="email" placeholder="you@email.com">
+      <button type="button" id="ent-send-code" class="btn">Email&nbsp;code</button>
     </div>
+    <div class="waitlist-row" id="ent-code-row" style="display:none;margin-top:0.55rem;">
+      <input type="text" id="ent-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
+      <button type="button" id="ent-redeem-btn" class="btn btn-primary">Unlock</button>
+    </div>
+    <span id="ent-status" class="account-status" role="status"></span>
   </div>
   <div id="upgrade-thanks" class="waitlist-thanks" style="display:none;">
     <strong>You&rsquo;re on the list.</strong>

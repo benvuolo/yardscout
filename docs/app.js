@@ -2675,6 +2675,10 @@ function openUpgradeSheet(trigger, carKey) {
   // go through StoreKit IAP when it ships; until then natives see the waitlist.
   const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
   const proState = document.getElementById('upgrade-pro-state');
+  // "Already have Pro?" lives outside #upgrade-form-wrap so native apps show
+  // it too (a comp or web purchase has no App Store receipt to restore).
+  const redeem = document.getElementById('ent-redeem');
+  if (redeem) redeem.style.display = (isPro() || apiMode) ? 'none' : '';
   if (isPro()) {
     // Already Pro: no waitlist, no "launches soon" — just confirmation.
     document.getElementById('upgrade-form-wrap').style.display = 'none';
