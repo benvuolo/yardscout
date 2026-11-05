@@ -315,7 +315,22 @@ def main() -> int:
         "disagree_examples": [], "codes": Counter(), "models": Counter(), "years": Counter(),
         "epa": Counter(), "epa_conflict_examples": [], "feed_make_mismatch": 0,
     })
+    # (VIN model year, chars 4-7) that vPIC decodes to a model on some lot car:
+    # the code is in the data NHTSA built from Honda's filings.
+    documented: set[tuple[int, str]] = set()
+    for row in inv["vehicles"]:
+        vin = (row[fi["vin"]] or "").strip().upper()
+        d = cache.get(vin) if len(vin) == 17 and brand_of(vin) else None
+        if isinstance(d, dict) and d.get("model") and check_digit_ok(vin):
+            try:
+                y = vin_year(vin, int(str(d.get("modelYear") or 0)[:4]) or None)
+            except ValueError:
+                y = None
+            if y:
+                documented.add((y, vin[3:7]))
+
     scan = Counter()
+    newly_cars: list[dict] = []
     for row in inv["vehicles"]:
         vin = (row[fi["vin"]] or "").strip().upper()
         if len(vin) != 17 or not brand_of(vin):
@@ -341,6 +356,15 @@ def main() -> int:
             scan[f"no_rule_{brand_of(vin)}_{'pre1984' if year < 1984 else ('digit' if year < 2010 else 'letter')}"] += 1
             continue
         rid, claim, meaning = hit
+        # A character-7 code whose line/body/transmission prefix (chars 4-7)
+        # NHTSA's vPIC has never decoded to a model for that year is a code
+        # Honda did not file with NHTSA (Canada-market Acura EL / CSX ...).
+        # Honda's construction rule still defines character 7, but no filing
+        # lists that exact code, so those cars get their own low-sample rule.
+        if "_vin7_" in rid and "accord_1997" not in rid:
+            if not ((dec or {}).get("model") or (year, vin[3:7]) in documented):
+                rid = f"honda_acura_vin7_code_not_in_vpic_{claim}"
+                scan["code_not_in_vpic"] += 1
         scan["covered"] += 1
         s = stats[rid]
         s["in_scope_cars"] += 1
@@ -359,6 +383,11 @@ def main() -> int:
             s["no_trans_info"] += 1
             reason = "not_in_cache_backup" if dec is None else ("vpic_trans_blank" if not dec.get("transmission") else "other")
             s["no_trans_info_reason"][reason] += 1
+            if claim == "manual":
+                yd = row[fi["yard"]]
+                newly_cars.append({"id": vid, "vin": vin, "year": year, "make": feed_make, "model": model,
+                                   "rule": rid, "code": meaning, "why_no_trans": reason,
+                                   "yard": inv["yards"][yd][0] if isinstance(yd, int) else ""})
         elif pc in KNOWN and ((pc == "manual") != (claim == "manual")):
             s["published_contradicts_rule"] += 1
             if len(s["published_contradicts_examples"]) < 8:
@@ -449,6 +478,7 @@ def main() -> int:
         "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
         "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
         "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
+        "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*",
     ]
 
     rules = []
@@ -525,6 +555,23 @@ def main() -> int:
             rf"^({hw})(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[{vals}][2-5]",
             "MY1984-1986 Honda Accord, Prelude, Civic (CRX, hatchback, sedan, Wagon, Wagon 4WD, Wagovan): the pre-1987 Honda layout where character 6 is the transmission",
             ["mid_1983_09_12", "mid_1984_06_20", "mid_1985_06_12", "mid_1985_07_11", "mid_1985_11_19"])
+    # Character-7 codes NHTSA's data does not list (Canada-market lines).
+    for claim in ("manual", "automatic"):
+        dvals, lvals = ("1357", "ACEG") if claim == "manual" else ("2468", "BDFH")
+        add(f"honda_acura_vin7_code_not_in_vpic_{claim}", "Honda+Acura", claim, [1986, None], HONDA_WMI | ACURA_WMI,
+            {"position": 7, "values": list(dvals) + list(lvals),
+             "table": {**{k: v[1] for k, v in DIGIT_T7.items() if k in dvals},
+                       **{k: v[1] for k, v in LETTER_T7.items() if k in lvals}},
+             "also_required": "the VIN's vPIC decode has no Model AND no lot car of that model year with the same characters 4-7 decodes to a model, i.e. Honda never filed this code with NHTSA (on the lots: Canada-market Acura EL/CSX and a few Canada-only Civic codes)"},
+            rf"^({hw}|{aw})[A-HJ-NPR-Z0-9]{{3}}[{dvals}{lvals}]",
+            "Honda/Acura VINs (mostly Canada-market cars at Canadian yards) whose model code is not in NHTSA's vPIC data",
+            ["mid_1986_06_27", "mid_1985_11_19", "mid_2009_08_24"],
+            {"caveat": ("Honda's construction-of-VIN pages define character 7 as body type + transmission for every "
+                        "model code, and Honda of Canada Mfg. (2HG/2HH/2HK/2HN) is one of the filers, but no US "
+                        "filing lists these exact Canada-market codes and vPIC returns no decode for them, so no "
+                        "ground truth can check them. Kept as low_sample on the strength of Honda's own scheme; "
+                        "the hub may prefer to hold these.")})
+
     # 1997 Accord carve-out
     for claim, vals in (("manual", "1357"), ("automatic", "2468")):
         rid = f"honda_accord_1997_vin7_{claim}"
@@ -619,6 +666,16 @@ def main() -> int:
     newly = sum(r["newly_confirmed_manual"] for r in rules if r["claim"] == "manual" and r["status"] in ("keep", "keep_low_sample"))
     newly_all = sum(r["newly_confirmed_manual"] for r in rules if r["claim"] == "manual")
 
+    agg = {}
+    for claim in ("manual", "automatic"):
+        rs = [r for r in rules if r["claim"] == claim and r["status"] in ("keep", "keep_low_sample")]
+        ck = sum(r["validation"]["checkable_ground_truth"] for r in rs)
+        ag = sum(r["validation"]["agree"] for r in rs)
+        agg[claim] = {"rules": [r["id"] for r in rs], "checkable": ck, "agree": ag,
+                      "disagree": ck - ag, "agreement": round(ag / ck, 5) if ck else None,
+                      "uniform_cell_lines_excluded": sum(r["validation"]["uniform_cell_lines_excluded"] for r in rs),
+                      "uniform_cell_lines_that_would_agree": sum(r["validation"]["uniform_cell_lines_that_would_agree"] for r in rs)}
+
     out = {
         "worklist": "vin_rules_0",
         "makes": ["Honda", "Acura"],
@@ -643,6 +700,16 @@ def main() -> int:
             "rules": len(rules),
             "newly_confirmed_manual_keep_rules": newly,
             "newly_confirmed_manual_all_rules": newly_all,
+            "newly_confirmed_manual_by_rule": {r["id"]: r["newly_confirmed_manual"] for r in rules if r["claim"] == "manual"},
+            "ground_truth_agreement_keep_rules": agg,
+            "published_manual_labels_contradicted_by_honda_table": {
+                "2007_2008_fit_gd38": fit["GD38_published_manual"],
+                "1997_accord_honda_automatic": acc97.get("honda_automatic__published_manual", 0),
+                "1989_integra_da344": stats["acura_vin7_digit_1986_2009_automatic"]["published_contradicts_rule"],
+            },
+            "published_non_manual_labels_contradicted_by_honda_table": {
+                "1997_accord_honda_manual": acc97.get("honda_manual__published_non_manual", 0),
+            },
         },
         "vin_scheme": {
             "positions": "1-3 WMI; 4-8 Honda 'model code' (4-5 line, 6 line/engine, 7 body + transmission, 8 grade); 9 check digit; 10 model year; 11 plant; 12-17 serial",
@@ -653,6 +720,7 @@ def main() -> int:
         },
         "not_encoded_or_not_ruled": not_encoded,
         "rules": rules,
+        "newly_confirmed_manual_cars": newly_cars,
         "vpic_conflicts": conflicts,
         "validation_method": (
             "For each rule, every lot car in scope is matched by WMI, valid check digit, VIN model year and the "
