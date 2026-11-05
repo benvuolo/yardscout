@@ -1,0 +1,967 @@
+{
+"commit": "f2652c370a1385c8c4d9abbd2bd42d0d44dbcc51",
+"file": "raw/www.toyotapartsnow.com.jsonl",
+"note": "every distinct (seed model, seed year, list_notes string) at oem-raw@f2652c3",
+"notes": [
+[
+"Camry",
+2007,
+"12V 100A"
+],
+[
+"Camry",
+2007,
+"Camry; Japan Built;Japan Build"
+],
+[
+"Camry",
+2007,
+"12V 1.7KW"
+],
+[
+"Camry",
+2007,
+"Japan Built;US Built"
+],
+[
+"Camry",
+2007,
+"2.4L"
+],
+[
+"Camry",
+2007,
+"US Built, 2007-09"
+],
+[
+"Camry",
+2007,
+"2007-09, US Built, Without SE"
+],
+[
+"Camry",
+2007,
+"2007-09, US Built, With SE"
+],
+[
+"Camry",
+2007,
+"Japan Built, With Heated, Gray;Japan Built, Without Heated, Gray;With Heated, Japan Built, Gray;Without Heated, Japan Built, Gray"
+],
+[
+"Camry",
+2007,
+"US Built, Without Heated, Black;US Built, Without Heated, Blue Ribbon;US Built, Without Heated, Gray;US Built, Without Heated, Jasper Pearl;US Built, Without Heated, Red;US Built, Without Heated, Sand;US Built, Without Heated, Titanium;US Built, Without Heated, White;Without Heated, US Built, Black;Without Heated, US Built, Blue Ribbon;Without Heated, US Built, Gray;Without Heated, US Built, Green;Without Heated, US Built, Red;Without Heated, US Built, Sand;Without Heated, US Built, Sky Blue;Without Heated, US Built, Titanium;Without Heated, US Built, White"
+],
+[
+"Camry",
+2007,
+"US Built, With Heated, Black;US Built, With Heated, Blue Ribbon;US Built, With Heated, Gray;US Built, With Heated, Jasper Pearl;US Built, With Heated, Red;US Built, With Heated, Sand;US Built, With Heated, Titanium;US Built, With Heated, White;With Heated, US Built, Black;With Heated, US Built, Blue Ribbon;With Heated, US Built, Gray;With Heated, US Built, Green;With Heated, US Built, Red;With Heated, US Built, Sand;With Heated, US Built, Sky Blue;With Heated, US Built, Titanium;With Heated, US Built, White"
+],
+[
+"Camry",
+2007,
+"Japan Built, With Heated, Black;Japan Built, Without Heated, Black;With Heated, Japan Built, Black;Without Heated, Japan Built, Black"
+],
+[
+"Camry",
+2007,
+"Japan Built, With Heated, White;Japan Built, Without Heated, White;With Heated, Japan Built, White;Without Heated, Japan Built, White"
+],
+[
+"Camry",
+2007,
+"Japan Built, With Heated, Titanium;With Heated, Japan Built, Titanium"
+],
+[
+"Camry",
+2007,
+"Japan Built, Without Heated, Titanium;Without Heated, Japan Built, Titanium"
+],
+[
+"Camry",
+2007,
+"Japan Built, With Heated, Red;Japan Built, Without Heated, Red;With Heated, Japan Built, Red;Without Heated, Japan Built, Red"
+],
+[
+"Camry",
+2007,
+"Japan Built, With Heated, Sand;Japan Built, Without Heated, Sand;With Heated, Japan Built, Sand;Without Heated, Japan Built, Sand"
+],
+[
+"Camry",
+2007,
+"Japan Built, With Heated, Jasper Pearl;Japan Built, Without Heated, Jasper Pearl"
+],
+[
+"Camry",
+2007,
+"With Heated, Japan Built, Green;Without Heated, Japan Built, Green"
+],
+[
+"Camry",
+2007,
+"With Heated, Japan Built, Sky Blue;Without Heated, Japan Built, Sky Blue"
+],
+[
+"Camry",
+2007,
+"Japan Built, With Heated, Blue Ribbon;Japan Built, Without Heated, Blue Ribbon;With Heated, Japan Built, Blue Ribbon;Without Heated, Japan Built, Blue Ribbon"
+],
+[
+"Camry",
+2007,
+"Japan Built, With Heated, Titanium;Japan Built, Without Heated, Titanium;With Heated, Japan Built, Titanium;Without Heated, Japan Built, Titanium"
+],
+[
+"Camry",
+2007,
+"SUPER WHITE 2,040"
+],
+[
+"Camry",
+2007,
+"US Built"
+],
+[
+"Camry",
+2007,
+"Japan Built"
+],
+[
+"Camry",
+2007,
+"Japan Built, With XLE;Japan Built, Without XLE;US Built, With XLE;US Built, Without XLE"
+],
+[
+"Camry",
+2007,
+"Japan Built, Without XLE;US Built, Without XLE"
+],
+[
+"Camry",
+2007,
+"US Built, With XLE"
+],
+[
+"Camry",
+2007,
+"Japan Built, With XLE"
+],
+[
+"Camry",
+2007,
+"Without XLE"
+],
+[
+"Camry",
+2007,
+"With XLE"
+],
+[
+"Camry",
+2007,
+"Federal Emissions, 2.4L, US Built"
+],
+[
+"Camry",
+2007,
+"California Emissions, US Built"
+],
+[
+"Camry",
+2007,
+"California Emissions, Japan Built"
+],
+[
+"Camry",
+2007,
+"Federal Emissions, 2.4L, Japan Built"
+],
+[
+"Camry",
+2007,
+"Camry; 3.5L"
+],
+[
+"Camry",
+2007,
+"Camry Hybrid;Camry; 2.4L"
+],
+[
+"Camry",
+2002,
+"12V 100A"
+],
+[
+"Camry",
+2002,
+"12V 80A"
+],
+[
+"Camry",
+2002,
+"12V 1.6KW"
+],
+[
+"Camry",
+2002,
+"2.4L, US Built"
+],
+[
+"Camry",
+2002,
+"2002-04, LE & XLE"
+],
+[
+"Camry",
+2002,
+"2002-04, SE"
+],
+[
+"Camry",
+2002,
+"Camry; Right; With Solara;Camry; With Solara; Right"
+],
+[
+"Camry",
+2002,
+"Camry; Left; With Solara;Camry; With Solara; Left"
+],
+[
+"Camry",
+2002,
+"2002-04"
+],
+[
+"Camry",
+2002,
+"Japan Built, Manual"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, White"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, Silver"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, Gray"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, Black"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, Red (3P5)"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, Red (3Q3)"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, Beige"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, Green"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, Dark Blue"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power Without Heater, Med Blue"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, White"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, Silver"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, Gray"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, Black"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, Red (3P5)"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, Red (3Q3)"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, Beige"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, Green"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, Dark Blue"
+],
+[
+"Camry",
+2002,
+"Japan Built, Power With Heater, Med Blue"
+],
+[
+"Camry",
+2002,
+"US Built, Manual"
+],
+[
+"Camry",
+2002,
+"US Built, Power Without Heater, Beige;US Built, Power Without Heater, Black;US Built, Power Without Heater, Dark Blue;US Built, Power Without Heater, Gray;US Built, Power Without Heater, Green;US Built, Power Without Heater, Med Blue;US Built, Power Without Heater, Red (3P5);US Built, Power Without Heater, Red (3Q3);US Built, Power Without Heater, Silver;US Built, Power Without Heater, White"
+],
+[
+"Camry",
+2002,
+"US Built, Power With Heater, Beige;US Built, Power With Heater, Black;US Built, Power With Heater, Dark Blue;US Built, Power With Heater, Gray;US Built, Power With Heater, Green;US Built, Power With Heater, Med Blue;US Built, Power With Heater, Red (3P5);US Built, Power With Heater, Red (3Q3);US Built, Power With Heater, Silver;US Built, Power With Heater, White"
+],
+[
+"Camry",
+2002,
+"US Built"
+],
+[
+"Camry",
+2002,
+"Japan Built"
+],
+[
+"Camry",
+2002,
+"Japan Built, LE & SE;Japan Built, XLE"
+],
+[
+"Camry",
+2002,
+"US Built, LE & SE;US Built, XLE"
+],
+[
+"Camry",
+2002,
+"Japan Built, LE & SE"
+],
+[
+"Camry",
+2002,
+"Japan Built, XLE"
+],
+[
+"Camry",
+2002,
+"US Built, LE & SE"
+],
+[
+"Camry",
+2002,
+"US Built, XLE"
+],
+[
+"Camry",
+2002,
+"Camry; With Solara; Right"
+],
+[
+"Camry",
+2002,
+"Camry; With Solara; Left"
+],
+[
+"Camry",
+2002,
+"Japan Built, XLE;US Built, XLE"
+],
+[
+"Camry",
+2002,
+"Japan Built, LE & SE;US Built, LE & SE"
+],
+[
+"Camry",
+2002,
+"Camry; Front; Left; With Solara; Coupe"
+],
+[
+"Camry",
+2002,
+"Camry; Front; Left; With Solara; Convertible"
+],
+[
+"Camry",
+2002,
+"US Built, With Auto A/C Control"
+],
+[
+"Camry",
+2002,
+"Camry; All; Without Atc; Control Panel; With Solara"
+],
+[
+"Camry",
+2002,
+"Camry; 2.4L"
+],
+[
+"Camry",
+2002,
+"Camry; 3.0L; Auto Transmission; Without Solara"
+],
+[
+"Camry",
+2002,
+"Camry; 3.0L; Auto Transmission; With Solara"
+],
+[
+"Camry",
+2002,
+"Camry; 3.0L; Manual Transmission"
+],
+[
+"Camry",
+2002,
+"(L)"
+],
+[
+"Prius",
+2008,
+"Without Auto Level, Without HID"
+],
+[
+"Prius",
+2008,
+"NO PAINT REQ.,USA VALUE PACKAGE"
+],
+[
+"Prius",
+2008,
+"Prius"
+],
+[
+"Prius",
+2018,
+"Without Prime"
+],
+[
+"Prius",
+2018,
+"2016-18, Without Auto High Beam"
+],
+[
+"Prius",
+2018,
+"2016-18, With Auto High Beam"
+],
+[
+"Prius",
+2018,
+"KOREA SPEC&KOREA UPPER PACKAGE KOREA SPEC&PRE-COLLISION SYSTEM-WITHOUT"
+],
+[
+"Prius",
+2018,
+"Without Prime, On Body, 2016-18"
+],
+[
+"Prius",
+2018,
+"Without Signal Lamp"
+],
+[
+"Prius",
+2018,
+"With Signal Lamp, With Blind Spot"
+],
+[
+"Prius",
+2018,
+"With Signal Lamp, Without Blind Spot"
+],
+[
+"Prius",
+2018,
+"Without 11.6\" Display"
+],
+[
+"Prius",
+2018,
+"2016-18"
+],
+[
+"Prius",
+2018,
+"Prius"
+],
+[
+"Sienna",
+2004,
+"12V 150A,TOWING PACKAGE-FOR 3500LBS 12V 150A,TOWING PACKAGE-FOR 3500LBS&WINDSHIELD DEICER-W/WIPER DEICER 12V 150A,WINDSHIELD DEICER-W/WIPER DEICER"
+],
+[
+"Sienna",
+2004,
+"12V 130A"
+],
+[
+"Sienna",
+2004,
+"12V 1.7KW"
+],
+[
+"Sienna",
+2004,
+"Without High Intensity Discharge, 2004-05"
+],
+[
+"Sienna",
+2004,
+"With High Intensity Discharge, 2004-05"
+],
+[
+"Sienna",
+2004,
+"On Side Panel"
+],
+[
+"Sienna",
+2004,
+"Without Heated"
+],
+[
+"Sienna",
+2004,
+"With Heated, Without Auto Dimmer, Without Memory, Beige Mica;With Heated, Without Auto Dimmer, Without Memory, Blue Met.;With Heated, Without Auto Dimmer, Without Memory, Dark Red;With Heated, Without Auto Dimmer, Without Memory, Gray;With Heated, Without Auto Dimmer, Without Memory, Green;With Heated, Without Auto Dimmer, Without Memory, Pearl White;With Heated, Without Auto Dimmer, Without Memory, Silver Mica;With Heated, Without Auto Dimmer, Without Memory, Stratosphere;With Heated, Without Auto Dimmer, Without Memory, White"
+],
+[
+"Sienna",
+2004,
+"With Heated, Without Auto Dimmer, Without Memory, Black"
+],
+[
+"Sienna",
+2004,
+"With Heated, With Auto Dimmer, Blue Mirage;With Heated, With Auto Dimmer, Frost Pearl;With Heated, With Auto Dimmer, Gray;With Heated, With Auto Dimmer, Green;With Heated, With Auto Dimmer, Red;With Heated, With Auto Dimmer, Sand;With Heated, With Auto Dimmer, Silver;With Heated, With Auto Dimmer, Stratosphere;With Heated, With Auto Dimmer, White;With Heated, Without Auto Dimmer, Without Memory, Beige Mica;With Heated, Without Auto Dimmer, Without Memory, Blue Met.;With Heated, Without Auto Dimmer, Without Memory, Dark Red;With Heated, Without Auto Dimmer, Without Memory, Gray;With Heated, Without Auto Dimmer, Without Memory, Green;With Heated, Without Auto Dimmer, Without Memory, Pearl White;With Heated, Without Auto Dimmer, Without Memory, Silver Mica;With Heated, Without Auto Dimmer, Without Memory, Stratosphere;With Heated, Without Auto Dimmer, Without Memory, White"
+],
+[
+"Sienna",
+2004,
+"With Heated, With Auto Dimmer, Blue Mirage;With Heated, With Auto Dimmer, Frost Pearl;With Heated, With Auto Dimmer, Gray;With Heated, With Auto Dimmer, Green;With Heated, With Auto Dimmer, Red;With Heated, With Auto Dimmer, Sand;With Heated, With Auto Dimmer, Silver;With Heated, With Auto Dimmer, Stratosphere;With Heated, With Auto Dimmer, White"
+],
+[
+"Sienna",
+2004,
+"OUTSIDE RR VIEW MIRROR-HEATED(EC),WHITE,056 OUTSIDE RR VIEW MIRROR-HEATED COLOR,WHITE,056 WHITE,056"
+],
+[
+"Sienna",
+2004,
+"OUTSIDE RR VIEW MIRROR-HEATED(EC),DK.BLUE MC.,8Q0"
+],
+[
+"Sienna",
+2004,
+"OUTSIDE RR VIEW MIRROR-HEATED(EC),SILVER M.M.,1D7 OUTSIDE RR VIEW MIRROR-HEATED COLOR,SILVER M.M.,1D7 SILVER M.M.,1D7"
+],
+[
+"Sienna",
+2004,
+"DK. RED M.M.,3Q3 OUTSIDE RR VIEW MIRROR-HEATED(EC),DK. RED M.M.,3Q3 OUTSIDE RR VIEW MIRROR-HEATED COLOR,DK. RED M.M.,3Q3"
+],
+[
+"Sienna",
+2004,
+"BEIGE M. M.,4Q2 OUTSIDE RR VIEW MIRROR-HEATED(EC),BEIGE M. M.,4Q2 OUTSIDE RR VIEW MIRROR-HEATED COLOR,BEIGE M. M.,4Q2"
+],
+[
+"Sienna",
+2004,
+"OUTSIDE RR VIEW MIRROR-HEATED COLOR,SILVER M.M.,1D7 SILVER M.M.,1D7"
+],
+[
+"Sienna",
+2004,
+"DK. RED M.M.,3Q3 OUTSIDE RR VIEW MIRROR-HEATED COLOR,DK. RED M.M.,3Q3"
+],
+[
+"Sienna",
+2004,
+"BEIGE M. M.,4Q2 OUTSIDE RR VIEW MIRROR-HEATED COLOR,BEIGE M. M.,4Q2"
+],
+[
+"Sienna",
+2004,
+"CE PACKAGE CE PACKAGE&SEAT COVER MATERIAL-FABRIC"
+],
+[
+"Sienna",
+2004,
+"Sienna"
+],
+[
+"Camry",
+2005,
+"12V 100A"
+],
+[
+"Camry",
+2005,
+"2005-06, US Built, LE & XLE"
+],
+[
+"Camry",
+2005,
+"2005-06, US Built, SE"
+],
+[
+"Camry",
+2005,
+"2005-06, US Built Only, LE & XLE"
+],
+[
+"Camry",
+2005,
+"2005-06, US Built Only, SE"
+],
+[
+"Camry",
+2005,
+"Japan Built, Power Without Heater, Grayish Green"
+],
+[
+"Camry",
+2005,
+"Japan Built, Power Without Heater, Dark Blue"
+],
+[
+"Camry",
+2005,
+"Japan Built, Power Without Heater, Light Blue"
+],
+[
+"Camry",
+2005,
+"Japan Built, Power With Heater, Grayish Green"
+],
+[
+"Camry",
+2005,
+"Japan Built, Power With Heater, Dark Blue"
+],
+[
+"Camry",
+2005,
+"Japan Built, Power With Heater, Light Blue"
+],
+[
+"Camry",
+2005,
+"20TH ANNIVERSARY(USA),WHITE PEARL CS.,062"
+],
+[
+"Camry",
+2005,
+"Japan Built, LE & SE"
+],
+[
+"Camry",
+2005,
+"US Built, XLE"
+],
+[
+"Camry",
+2005,
+"US Built, With Auto A/C Control, 2.4L"
+],
+[
+"Camry",
+2005,
+"Camry; 3.0L, 3.3L; Japan Built"
+],
+[
+"Camry",
+2005,
+"Camry; 2.4L; All"
+],
+[
+"Camry",
+1999,
+"3.0L;Camry; 3.0L"
+],
+[
+"Camry",
+1999,
+"12V 80A,(J)"
+],
+[
+"Camry",
+1999,
+"12V 80A"
+],
+[
+"Camry",
+1999,
+"12V 80A,(L)"
+],
+[
+"Camry",
+1999,
+"Camry; 1.2 KW; From 4/97"
+],
+[
+"Camry",
+1999,
+"12V 1.4KW,(L)"
+],
+[
+"Camry",
+1999,
+"12V 1.4KW,(J)"
+],
+[
+"Camry",
+1999,
+"1997-99"
+],
+[
+"Camry",
+1999,
+"Camry; Right; With Solara"
+],
+[
+"Camry",
+1999,
+"Camry; Left; With Solara"
+],
+[
+"Camry",
+1999,
+"1997-99 USA Built, 1997-2001 Japan Built, Japan Built;1997-99 USA Built, 1997-2001 Japan Built, US Built, Fki;1997-99 USA Built, 1997-2001 Japan Built, US Built, Nal"
+],
+[
+"Camry",
+1999,
+"1997-99 USA Built, 1997-2001 Japan Built, US Built, Fki"
+],
+[
+"Camry",
+1999,
+"1997-99 USA Built, 1997-2001 Japan Built, Japan Built;1997-99 USA Built, 1997-2001 Japan Built, US Built, Nal"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, White"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, White"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, Gray"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, Black"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, Red"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, Magenta"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, Beige"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, Dark Green"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, Dark Blue"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, Grayish Purpl"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, Japan Built, Frosted Iris"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, Gray"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, Black"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, Red"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, Magenta"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, Beige"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, Dark Green"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, Dark Blue"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, Grayish Purpl"
+],
+[
+"Camry",
+1999,
+"Power With Heat, Japan Built, Frosted Iris"
+],
+[
+"Camry",
+1999,
+"Manual"
+],
+[
+"Camry",
+1999,
+"Power With Heat, US Built, Dark Blue"
+],
+[
+"Camry",
+1999,
+"Power With Heat, US Built, Frosted Iris"
+],
+[
+"Camry",
+1999,
+"Power Without Heat, US Built, Beige;Power Without Heat, US Built, Black;Power Without Heat, US Built, Dark Blue;Power Without Heat, US Built, Frosted Iris;Power Without Heat, US Built, Gray;Power Without Heat, US Built, Grayish Purpl;Power Without Heat, US Built, White"
+],
+[
+"Camry",
+1999,
+"Power With Heat, US Built, Beige;Power With Heat, US Built, Black;Power With Heat, US Built, Gray;Power With Heat, US Built, Grayish Purpl;Power With Heat, US Built, White"
+],
+[
+"Camry",
+1999,
+"Power With Heat, US Built, Beige;Power With Heat, US Built, Black;Power With Heat, US Built, Frosted Iris;Power With Heat, US Built, Gray;Power With Heat, US Built, Grayish Purpl;Power With Heat, US Built, White"
+],
+[
+"Camry",
+1999,
+"DK.GRAY M.M.,1C6"
+],
+[
+"Camry",
+1999,
+"ELECTRIC REMOTE CONTROL W/HEATER,SLVER ME.,1C8 ELECTRIC REMOTE CONTROL MIRROR W/HEATER,SLVER ME.,1C8"
+],
+[
+"Camry",
+1999,
+"ELECTRIC REMOTE CONTROL W/HEATER,BLUE M.M.,8N7 ELECTRIC REMOTE CONTROL MIRROR W/HEATER,BLUE M.M.,8N7"
+],
+[
+"Camry",
+1999,
+"BLUE M.M.,8N7"
+],
+[
+"Camry",
+1999,
+"Power, US Built"
+],
+[
+"Camry",
+1999,
+"Power, Japan Built"
+],
+[
+"Camry",
+1999,
+"Power"
+],
+[
+"Camry",
+1999,
+"Camry; All; Without Atc; Control Panel"
+],
+[
+"Camry",
+1999,
+"Camry; Without Solara; Japan Built"
+],
+[
+"Camry",
+1999,
+"(J)"
+]
+]
+}

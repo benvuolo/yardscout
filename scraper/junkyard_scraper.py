@@ -13884,6 +13884,9 @@ def build_interchange_payload() -> dict:
 # ---------------------------------------------------------------------------
 OEM_GROUPS_DIR = SCRIPT_DIR / "oem_fitment" / "groups"
 OEM_VALIDATOR = SCRIPT_DIR / "oem_fitment" / "validate.py"
+# Tests only: a CATEGORY_STATUS table to validate fixture groups against.
+# None in production, where oem_fitment/policy.py CATEGORY_STATUS rules.
+OEM_STATUS_OVERRIDE = None
 _OEM_DEMOTE_NOTE = " — OEM catalog numbers differ within this group; verify the part number"
 
 
@@ -13912,7 +13915,7 @@ def _load_oem_layer(now: datetime | None = None) -> dict:
             out["status"][p.stem] = f"dropped: validator unavailable ({type(e).__name__})"
             print(f"[interchange] oem {p.stem} dropped: validator unavailable: {e}", file=sys.stderr)
         return out
-    ctx = V.context_from(sys.modules[__name__])
+    ctx = V.context_from(sys.modules[__name__], status_table=OEM_STATUS_OVERRIDE)
     now = now or datetime.now(timezone.utc)
     for p in files:
         ns = p.stem

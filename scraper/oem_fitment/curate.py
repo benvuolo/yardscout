@@ -373,10 +373,12 @@ class Curation:
             on = [lr for lr in rows if lr.matched]
             notes = [n for lr in on for n in lr.notes]
             src = [("location", x) for lr in on for x in lr.locations] + [("slug", lr.list_url) for lr in on]
+            src += [("note", n) for n in notes]     # POSITION note clauses (§5.8)
             return bool(on), notes, src, [lr.pointer for lr in on], "manifest"
         recs = [r for r in self.t_seed_records.get((T, cat), []) if r.key == c.key]
         notes = [n for r in recs for n in r.note_texts]
         src = [("location", x) for r in recs for x in r.list_location] + [("slug", r.list_url) for r in recs]
+        src += [("note", n) for n in notes]
         return bool(recs), notes, src, [r.pointer for r in recs], "seed"
 
     # ------------------------------------------------------ 5.7 universes
@@ -609,7 +611,7 @@ class Curation:
                     tail = sub.split("/")[-1]
                     hit = pages.search(sub) or pages.search(tail) if pages else False
                     if hit and sub not in read_subs and tail not in {s.split("/")[-1] for s in read_subs}:
-                        reasons.append("no_list_manifest")
+                        reasons.append("unread_sibling_page")   # a category page of T was not read
                     elif not hit and re.search(policy.NOUN.get(cat, r"$^"), sub, re.I) \
                             and sub not in (self.sibling_ignore.get(ym.site, {}).get(cat, {})):
                         reasons.append("unread_sibling_page")
@@ -626,6 +628,10 @@ class Curation:
             # C6 manifests fresh
             if any(self.stale(lr.retrieved) for lr in lists) or any(self.stale(y.retrieved) for y in years):
                 reasons.append("stale")
+        # C1: at least one matched pn's own fitment lists the vehicle-year
+        if members and not any(cc is m["klass"] for m in members.values()
+                               for cc, *_ in self.t_rows.get((T, cat), [])):
+            reasons.append("listed_not_fitted_only")
         # C5 chain completeness
         for key, m in members.items():
             for d in self.reach(cat, key, policy.CHAIN_DEPTH) | self.reach(cat, key, policy.CHAIN_DEPTH, down=False):
@@ -653,7 +659,10 @@ class Curation:
             return False
         if lr.excluded_by == "reman_dropped":
             return cat in policy.ENGINE_CATS
-        head = lambda s: re.split(r",", N.QUALIFIER_RE.sub(" ", s or ""), 1)[0].strip()  # noqa: E731
+        # head phrase: the name with every qualifier phrase deleted up to the
+        # next comma ("Mirror Assy, Outer Rear View, W/Turn Signal Lamp" ->
+        # "Mirror Assy, Outer Rear View")
+        head = lambda s: re.sub(r"[\s,;]+$", "", N.QUALIFIER_RE.sub(" ", s or "")).strip()  # noqa: E731
         fake = A.Record(site=lr.site, ns=self.ns, cat=cat, pn=lr.pn, key="", line=lr.line,
                         template=A.template_of(lr.site, {}), name=head(lr.main), aux=head(lr.aux),
                         other_names="", description="", list_url=lr.list_url, section=lr.section, position="",
@@ -754,8 +763,9 @@ class Curation:
             if any(not self.reliable.get(s) for s in sites):
                 reasons.append("engine_cells_unreliable")
         sl = {s: sorted((members[k]["klass"].packaging, k) for k in keys) for s, keys in slots.items()}
-        # funnel order (§10.3): split, conditional, chain member, reman, blocked, gated
-        reasons = sorted(_uniq(reasons), key=lambda r: STAGES.index(_stage_of(r)))
+        # funnel order (§10.3): split, conditional, chain member, reman, blocked, gated;
+        # inside "split": option_split, packaging_*, chain crossings, positions, slots
+        reasons = sorted(_uniq(reasons), key=lambda r: (STAGES.index(_stage_of(r)), _split_rank(r)))
         return reasons, sl
 
     # ------------------------------------------------------------ run
@@ -898,14 +908,15 @@ class Curation:
         for (T, cat), info in sorted(self.cells_info.items()):
             if cat not in policy.ENGINE_CATS:
                 continue
-            if info["closure"]:
-                continue
+            # (a)/(b) are reported for every cell, closed or not
             fams = js.engine_families_for(T[2], T[0], T[1], cat if cat != "ignition-coils" else None)
             if not fams:
                 self.engine_refusals.append({"reason": "family_gap", "t": list(T), "cat": cat})
                 continue
             if len(fams) != 1:
                 self.engine_refusals.append({"reason": "family_ambiguous", "t": list(T), "cat": cat})
+                continue
+            if info["closure"]:
                 continue
             fid, fam, app = fams[0]
             if js._app_flags(app).get("ambig"):
@@ -1094,6 +1105,64 @@ class Curation:
                         "(optimistic upper bound for ranking crawl work; never shipped)", "rows": rows}
 
 
+    # ------------------------------------------- 5.18 Phase 2 (report only)
+    def phase2_cond(self, T, cat, key):
+        """cond(pn, T) as a DNF over translatable atoms, or None. Notes from
+        T's own page; a trim-layout row that lists every universe trim except
+        the hybrid ones adds fuel=gas. Computed, never shipped (§5.18)."""
+        c = self.classes[(key, cat)]
+        on, notes, _src, _p, _how = self.own_page(T, cat, c)
+        ctx = N.NoteContext(T[2], frozenset(m.lower() for _, m in self.t_sources.get(T, set())), self.ns_models_f)
+        dnf = N.cond_dnf(N.classify(notes, ctx))
+        if dnf is None:
+            return None
+        tu = self.trimu.get(T, frozenset())
+        extra = None
+        for cc, r, f, t in self.t_rows.get((T, cat), []):
+            if cc is not c or f.layout != "trim":
+                continue
+            missing = tu - f.trim_atoms()
+            if not missing:
+                extra = {}
+                break
+            if all("hybrid" in a[0] for a in missing):
+                extra = {"fuel": "gas"}
+        if extra is None:
+            return None
+        out = []
+        for d in dnf:
+            if "fuel" in d and extra.get("fuel") and d["fuel"] != extra["fuel"]:
+                continue
+            out.append({**d, **extra})
+        return out
+
+
+def cond_satisfied(dnf, answers: dict) -> bool:
+    """True only when some disjunct's every atom is answered and equal.
+    An unanswered or unknown atom never satisfies (gives Likely)."""
+    if dnf is None:
+        return False
+    return any(all(answers.get(k) is not None and answers.get(k) == v for k, v in d.items()) for d in dnf)
+
+
+def directional_verified(seeker: dict, donor: dict) -> bool:
+    """§2 Phase 2 directional test on two closed cells: seeker / donor are
+    {"slots": {slot: {key: cover}}, "eligible": bool}. The donor must be
+    eligible; for every slot of the seeker, the donor's candidates are a
+    subset of the seeker's cover=yes members, and the donor lists every slot
+    the seeker lists. The seeker need not be one chain."""
+    if not donor.get("eligible") or not seeker.get("closed", True) or not donor.get("closed", True):
+        return False
+    ss, ds = seeker["slots"], donor["slots"]
+    if not set(ds) >= set(ss):
+        return False
+    for slot, mem in ss.items():
+        yes = {k for k, cov in mem.items() if cov == "yes"}
+        if not set(ds[slot]) or not set(ds[slot]) <= yes:
+            return False
+    return True
+
+
 # ------------------------------------------------------------------ helpers
 def _row_maps(f: A.FitRow, t: MM.Target) -> bool:
     """A row maps to a trim-subset target only when its trims meet the subset
@@ -1190,6 +1259,13 @@ def _cond_class(why: str) -> str:
             "fitted_not_listed": "fitted_not_listed", "listed_not_fitted": "listed_not_fitted",
             "qualifier_phrase": "qualifier", "unverified": "unverified", "disputed": "disputed",
             "rule_drift": "rule_drift"}.get(why, why)
+
+
+def _split_rank(reason: str) -> int:
+    for i, p in enumerate(("option_split", "packaging", "chain_crosses_slot", "position", "slot", "no_candidates")):
+        if reason.startswith(p):
+            return i
+    return 9
 
 
 def _stage_of(reason: str) -> str:
