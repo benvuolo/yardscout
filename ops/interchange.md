@@ -534,3 +534,23 @@ Curator notes:
   account's 5-hour usage limit). Hub workflow wf_9b3745bc-31f now builds three
   tracks on branches: Phase 0 guards + hybrid fix, crawler R1/R2/R4/R5/R6,
   offline curation pipeline. Owner questions are in CURATION_SPEC.md §13.
+
+## Hub decisions (curation policy)
+
+- 2026-11-05 T1 (Toyota climate-control sub-assemblies 55901/55902/55903,
+  e.g. 55903-12100 "Temp Control", 55901-12170 "Air Mode Control"): keep them
+  in raw exactly as crawled; curation files them under climate-control with
+  packaging "switch-module", a separate slot from full control assemblies
+  (55900/55910). They can only ever match the same packaging, never a full
+  panel.
+- 2026-11-05 P1 (door modules): classify by what the puller removes. Where a
+  catalog sells the regulator ONLY inside the door module (Hyundai/Kia
+  "Panel Assy-Front/Rear Door Module"), keep it under window-regulator with
+  packaging "door-module", matching only other door-module packages and
+  carrying a note that it is the whole module panel. Where a catalog sells a
+  separate regulator (Nissan), door modules stay excluded. Both rules give
+  one answer: a seeker never gets a module offered as a bare regulator, or
+  the reverse.
+- Being listed on a vehicle's catalog page is not fitment; only the part's
+  own fitment rows count (AUDIT.md: Ford DG1Z-10346-E, FJ7Z-10346-A, Mopar
+  R5233006).
