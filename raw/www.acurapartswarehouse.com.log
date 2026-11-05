@@ -21,3 +21,17 @@
 03:39:47 nav-fail Acura CL 2000: ValueError: no 2000 catalog for Acura CL (acura-['cl'])
 03:39:47 seg done tier=A Acura CL [1997, 2003] seeds=[2001, 1999, 2000] records=429 errors=1
 03:48:53 time budget reached records=464
+03:49:02 start site=www.acurapartswarehouse.com segments=12 tiers=['A', 'B']
+03:49:02 seg done tier=A Acura TL [1996, 2014] seeds=[2005] records=464 errors=1
+03:49:02 seg done tier=A Acura MDX [2001, 2006] seeds=[2005] records=464 errors=1
+03:49:02 seg done tier=A Acura TSX [2004, 2014] seeds=[2006] records=464 errors=1
+03:49:02 seg done tier=A Acura MDX [2007, 2013] seeds=[2007] records=464 errors=1
+03:49:02 seg done tier=A Acura RL [1996, 2012] seeds=[2005] records=464 errors=1
+03:49:02 seg done tier=A Acura RDX [2007, 2019] seeds=[2007] records=464 errors=1
+03:49:02 seg done tier=A Acura RSX [2002, 2006] seeds=[2002] records=464 errors=1
+03:49:02 seg done tier=A Acura CL [1997, 2003] seeds=[2001] records=464 errors=1
+03:49:02 seg done tier=A Acura Integra [1994, 2024] seeds=[1995] records=464 errors=1
+03:56:52 seg done tier=A Acura ILX [2013, 2022] seeds=[2013] records=484 errors=1
+04:07:24 seg done tier=A Acura Legend [1991, 1995] seeds=[1994] records=529 errors=1
+04:16:54 seg done tier=A Acura TLX [2015, 2020] seeds=[2015] records=560 errors=1
+04:21:50 time budget reached records=573
