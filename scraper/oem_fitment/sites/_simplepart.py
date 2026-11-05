@@ -132,7 +132,11 @@ def _extra(row: dict, name: str) -> str:
 
 class SimplePart:
     def __init__(self, site: str, url_make: dict[str, str], model_slugs: dict[tuple[str, str], str],
-                 cat_pages: dict[str, str], rules: dict[str, tuple[str, str]], oem_name_field: str):
+                 cat_pages: dict[str, str], rules: dict[str, tuple[str, str]], oem_name_field: str,
+                 year_path: str = "/catalog/{year}-{make}-{model}-parts",
+                 product_prefixes: tuple[str, ...] = ("/oem/",),
+                 category_notes: dict[str, str] | None = None,
+                 product_rules: dict[str, str] | None = None):
         """
         site:           domain
         url_make:       feed make -> make token in catalog URLs ("Scion" -> "scion")
@@ -140,6 +144,16 @@ class SimplePart:
         cat_pages:      our category -> regex on "<group>/<subcategory>" slugs of the year page
         rules:          our category -> (include regex, exclude regex) on the part's printed names
         oem_name_field: "aux" when auxiliaryDesc holds the OEM name (Toyota), "main" when mainDesc does (Mopar)
+        year_path:      year-page path; parts-list stem is always "<year>-<make>-<model>"
+                        (toyotapartsnow/jeeppartsdeal: /catalog/...; vwpartsgiant & co: /<year>-...-parts)
+        product_prefixes: product path prefixes ("/oem/" or "/genuine/")
+        category_notes: our category -> caveat copied onto every part record of
+                        that category (`category_note`), for curators
+        product_rules:  our category -> regex the product page must match, on
+                        "<description> | <other_names> | Position: <position>",
+                        for facts the list page does not print (front vs rear
+                        door, driver vs passenger switch). The matched text is
+                        kept in `product_check`.
         """
         self.site = site
         self.base = f"https://{site}"
@@ -148,24 +162,47 @@ class SimplePart:
         self.cat_pages = {k: re.compile(v) for k, v in cat_pages.items()}
         self.rules = {k: (re.compile(a, re.I), re.compile(b, re.I) if b else None) for k, (a, b) in rules.items()}
         self.oem_name_field = oem_name_field
+        self.year_path = year_path
+        self.product_prefixes = tuple(product_prefixes)
+        self.category_notes = dict(category_notes or {})
+        self.product_rules = {k: re.compile(v, re.I) for k, v in (product_rules or {}).items()}
 
     # ---- navigation
-    def slug(self, make: str, model: str) -> str:
-        s = self.model_slugs.get((make, model))
-        return s or re.sub(r"[^a-z0-9]+", "-", model.lower()).strip("-")
+    def slug(self, make: str, model: str, year: int | None = None) -> str:
+        """model_slugs values: a slug; a list of (first_year, last_year, slug)
+        when the catalog splits a feed model by year; or None when the feed
+        model does not name one catalog model (navigation then fails)."""
+        if (make, model) in self.model_slugs:
+            s = self.model_slugs[(make, model)]
+            if s is None:
+                raise NavError(f"{make} {model}: no single catalog model for this feed name")
+            if isinstance(s, list):
+                for lo, hi, sl in s:
+                    if year is not None and lo <= year <= hi:
+                        return sl
+                raise NavError(f"{make} {model} {year}: no catalog model for this year")
+            return s
+        return re.sub(r"[^a-z0-9]+", "-", model.lower()).strip("-")
+
+    def stem(self, make: str, model: str, year: int) -> str:
+        return f"{year}-{self.url_make.get(make, make.lower())}-{self.slug(make, model, year)}"
 
     def year_url(self, make: str, model: str, year: int) -> str:
         mk = self.url_make.get(make, make.lower())
-        return f"{self.base}/catalog/{year}-{mk}-{self.slug(make, model)}-parts"
+        return self.base + self.year_path.format(year=year, make=mk, model=self.slug(make, model, year))
 
     def categories_for(self, make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
-        url = self.year_url(make, model, year)
+        return self.categories_for_slug(make, self.slug(make, model, year), year, cats)
+
+    def categories_for_slug(self, make: str, slug: str, year: int, cats: list[str]) -> dict[str, list[str]]:
+        mk = self.url_make.get(make, make.lower())
+        url = self.base + self.year_path.format(year=year, make=mk, model=slug)
         d = get(url)
         if d.get("status") != 200:
             raise NavError(f"HTTP {d.get('status')} for {url}")
         if urllib.parse.urlsplit(d.get("final_url") or url).path != urllib.parse.urlsplit(url).path:
             raise NavError(f"{url} redirected to {d.get('final_url')}")
-        stem = urllib.parse.urlsplit(url).path[len("/catalog/"):-len("-parts")]
+        stem = f"{year}-{mk}-{slug}"
         subs = sorted(set(re.findall(r'href="/parts-list/' + re.escape(stem) + r'/([a-z0-9-]+/[a-z0-9-]+)"', d["html"])))
         if not subs:
             raise NavError(f"no parts-list links on {url}")
@@ -209,7 +246,7 @@ class SimplePart:
         for r, section in rows:
             pn = _clean(r.get("partNumber"))
             url = r.get("url") or ""
-            if not pn or not url.startswith("/oem/"):
+            if not pn or not url.startswith(self.product_prefixes):
                 continue
             # the URL must name the same part number (honest link, not a redirect/ad)
             if url.rsplit("~", 1)[-1].replace("-", "").lower() != pn.replace("-", "").lower():
@@ -226,14 +263,30 @@ class SimplePart:
                     "list_section": section,
                     "list_notes": [], "list_location": [],
                     "list_replaced_by": _clean(r.get("replace")) or None,
-                    "reman": bool(REMAN.search(" ".join([main, aux, notes]))) or bool(re.match(r"^R\d", pn)),
+                    "reman": True,  # AND over this number's rows, below
                 }
+            # a number is reman only if every row listing it says so (VW prints
+            # one X-number on a "New" row and on a "Remanufactured" row)
+            rec["reman"] = rec["reman"] and (bool(REMAN.search(" ".join([main, aux, notes]))) or bool(re.match(r"^R\d", pn)))
             if notes and notes not in rec["list_notes"]:
                 rec["list_notes"].append(notes)
             loc = _extra(r, "Location")
             if loc and loc not in rec["list_location"]:
                 rec["list_location"].append(loc)
         parts = list(found.values())
+        if cat in self.product_rules:
+            kept = []
+            for p in parts:
+                pr = self.product(p["product_url"])
+                text = f"{pr['description']} | {pr['other_names'] or ''} | Position: {pr['position'] or ''}"
+                m = self.product_rules[cat].search(text)
+                if m:
+                    p["product_check"] = f"{m.group(0)!r} in {text!r}"
+                    kept.append(p)
+            parts = kept
+        if cat in self.category_notes:
+            for p in parts:
+                p["category_note"] = self.category_notes[cat]
         # README: drop remanufactured numbers when a new number for the same
         # category is on the page; keep reman when it is the only listing.
         if any(p["reman"] for p in parts) and any(not p["reman"] for p in parts):
@@ -332,7 +385,9 @@ class SimplePart:
         # evidence from there (marked by `fitment_rows_rendered`).
         rows_cells = [[_clean(c) for c in row if _clean(c)] for row in (st.get("fitVehicleList") or [])]
         head = ["Vehicle Fitment"] + headers
-        body = block[len(head):]
+        # compare with whitespace runs collapsed (HTML renders "2020-2022,  2012"
+        # as one space); evidence_lines keep the page text as extracted
+        body = [re.sub(r"\s+", " ", ln) for ln in block[len(head):]]
         flat, rendered = [], 0
         for rc in rows_cells:
             if body[len(flat):len(flat) + len(rc)] != rc:

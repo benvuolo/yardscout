@@ -95,7 +95,12 @@ RULES = {
                  r"handle|bar|striker|latch|cylinder|link|weather|propeller|gas|hinge|glass|motor|wiper|spoiler|lamp|trim|molding|applique|switch|strut|cable|support|module|panel|actuator|lock|bumper|emblem|nameplate|camera|release|check|cover|shield|silencer|insulator|pad|garnish"),
 }
 
-_T = SimplePart(SITE, URL_MAKE, MODEL_SLUGS, CAT_PAGES, RULES, oem_name_field="main")
+NOTES = {
+    "window-switch": "Mopar 'Switch - Window And Door Lock' rows include passenger-door switches; "
+                     "use position to tell the driver switch.",
+}
+
+_T = SimplePart(SITE, URL_MAKE, MODEL_SLUGS, CAT_PAGES, RULES, oem_name_field="main", category_notes=NOTES)
 
 
 def categories_for(make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
