@@ -1,0 +1,1 @@
+one same-identity retry approved by the owner 2026-11-05: the 403 came while scheduled and manual runs overlapped (fixed by the global concurrency lock and 8 s gap); robots and rate unchanged; a second refusal stops the site for good
