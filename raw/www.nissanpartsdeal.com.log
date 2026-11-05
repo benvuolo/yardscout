@@ -6,3 +6,18 @@
 01:36:37 seg done tier=A Nissan Rogue [2011, 2013] seeds=[2013] records=243 errors=0
 01:44:38 seg done tier=A Nissan Xterra [2000, 2015] seeds=[2004, 2010] records=332 errors=0
 01:44:38 time budget reached records=332
+01:44:45 start site=www.nissanpartsdeal.com segments=43 tiers=['A', 'B']
+01:44:45 seg done tier=A Nissan Altima [2013, 2015] seeds=[2013] records=332 errors=0
+01:44:45 seg done tier=A Nissan Altima [2010, 2012] seeds=[2012] records=332 errors=0
+01:44:45 seg done tier=A Nissan Altima [2007, 2009] seeds=[2008] records=332 errors=0
+01:44:45 seg done tier=A Nissan Sentra [2013, 2015] seeds=[2014] records=332 errors=0
+01:44:45 seg done tier=A Nissan Rogue [2011, 2013] seeds=[2013] records=332 errors=0
+01:44:45 seg done tier=A Nissan Xterra [2000, 2015] seeds=[2004] records=332 errors=0
+01:47:33 seg done tier=A Nissan Maxima [2009, 2014] seeds=[2011] records=360 errors=0
+01:53:49 seg done tier=A Nissan Altima [2005, 2006] seeds=[2006] records=439 errors=0
+01:59:09 seg done tier=A Nissan Versa [2007, 2011] seeds=[2009] records=492 errors=0
+02:02:37 seg done tier=A Nissan Murano [2009, 2014] seeds=[2009] records=529 errors=0
+02:05:30 net-fail list https://www.nissanpartsdeal.com/parts-list/2006-nissan-sentra/engine_electrical/alternator.html: network error after 3 tries: ReadTimeout
+02:09:36 product-fail https://www.nissanpartsdeal.com/parts/nissan-chamber-assy-throttle~16119-ae01c.html: ValueError: no partInfo in store
+02:10:00 seed A|Nissan|Sentra|2006 had network failures; left open for retry
+02:19:24 time budget reached records=707
