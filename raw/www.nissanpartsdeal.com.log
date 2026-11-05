@@ -448,3 +448,63 @@
 13:56:34 seg done tier=B Nissan Sentra [1984, 2006] seeds=[2006, 1992, 1987] records=2638 errors=6
 14:03:06 seg done tier=B Nissan Pathfinder [2013, 2020] seeds=[2014] records=2673 errors=6
 14:03:06 time budget reached records=2673
+14:03:16 start site=www.nissanpartsdeal.com segments=43 tiers=['A', 'B']
+14:03:16 seg done tier=A Nissan Altima [2013, 2015] seeds=[2013] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Altima [2010, 2012] seeds=[2012] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Altima [2007, 2009] seeds=[2008] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Sentra [2013, 2015] seeds=[2014] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Rogue [2011, 2013] seeds=[2013] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Xterra [2000, 2015] seeds=[2004] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Maxima [2009, 2014] seeds=[2011] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Altima [2005, 2006] seeds=[2006] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Versa [2007, 2011] seeds=[2009] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Murano [2009, 2014] seeds=[2009] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Sentra [1984, 2006] seeds=[2006] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Pathfinder [2013, 2020] seeds=[2014] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Sentra [2010, 2012] seeds=[2012] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Pathfinder [2005, 2012] seeds=[2006] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Titan [2004, 2016] seeds=[2004] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Murano [1998, 2007] seeds=[2007] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Rogue [2008, 2010] seeds=[2010] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Versa [2012, 2014] seeds=[2012] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Sentra [2007, 2009] seeds=[2008] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Armada [2004, 2015] seeds=[2006] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Altima [2016, 2018] seeds=[2016] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Sentra [2016, 2019] seeds=[2016] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Versa [2015, 2019] seeds=[2015] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Maxima [2004, 2008] seeds=[2004] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Pathfinder [1987, 2004] seeds=[2001] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Altima [2002, 2004] seeds=[2003] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Rogue [2014, 2016] seeds=[2016] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Frontier [1998, 2004] seeds=[2000] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Maxima [2000, 2003] seeds=[2000] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Juke [2011, 2017] seeds=[2011] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Versa Note [2014, 2020] seeds=[2015] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Quest [2004, 2009] seeds=[2007] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Altima [1993, 2001] seeds=[2001] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Frontier [2005, 2020] seeds=[2005] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Maxima [1984, 1999] seeds=[1997] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Quest [2011, 2017] seeds=[2012] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Pickup [1976, 1997] seeds=[1995] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Cube [2009, 2014] seeds=[2009] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Rogue [2017, 2020] seeds=[2017] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Rogue Select [2014, 2015] seeds=[2014] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Quest [1993, 2002] seeds=[2000] records=2673 errors=6
+14:03:16 seg done tier=A Nissan Maxima [2016, 2022] seeds=[2016] records=2673 errors=6
+14:03:16 seg done tier=A Nissan 350Z [2003, 2008] seeds=[2004] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Altima [2013, 2015] seeds=[2013] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Altima [2010, 2012] seeds=[2012] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Altima [2007, 2009] seeds=[2008] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Sentra [2013, 2015] seeds=[2014] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Rogue [2011, 2013] seeds=[2013] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Xterra [2000, 2015] seeds=[2004] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Maxima [2009, 2014] seeds=[2011] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Altima [2005, 2006] seeds=[2006] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Versa [2007, 2011] seeds=[2009] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Murano [2009, 2014] seeds=[2009] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Sentra [1984, 2006] seeds=[2006] records=2673 errors=6
+14:03:16 seg done tier=B Nissan Pathfinder [2013, 2020] seeds=[2014] records=2673 errors=6
+14:10:37 seg done tier=B Nissan Sentra [2010, 2012] seeds=[2012] records=2717 errors=6
+14:16:28 seg done tier=B Nissan Pathfinder [2005, 2012] seeds=[2006] records=2748 errors=6
+14:38:44 seg done tier=B Nissan Titan [2004, 2016] seeds=[2004, 2016] records=2882 errors=6
+14:38:44 time budget reached records=2882
