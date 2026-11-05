@@ -1,4 +1,4 @@
-# Release workstream — status (updated 2026-11-04)
+# Release workstream — status (updated 2026-11-05)
 
 Owns: version bumps and store submissions via `release-ios.yml` and
 `release-android.yml`, `fastlane/metadata/`, release notes.
@@ -10,17 +10,24 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 |---|---|---|
 | 1.12.10 | build 26, submitted 2026-11-03, waiting for review | — |
 | 1.12.11 | — | versionCode 33, Play production, in review |
+| 1.12.12 | build 27, dispatched 2026-11-05 with submit=true (supersedes 1.12.10 in the review queue) | versionCode 34, dispatched 2026-11-05 to production |
 
 1.12.11 added the review prompt (`ReviewPlugin.swift` / `ReviewPlugin.java`,
 `maybeAskForReview` in app.js) and the keyword/title retune.
 
-## Pending for 1.12.12 (web changes already on main; need a native build
-to reach store users who have the old shell cached)
+## In 1.12.12 (owner said "ship" 2026-11-05)
+
+- Native "Already have Pro?" unlock (Owen's iOS report): redeem block shown outside the purchase form.
+- Phase 0 part-finder guards (hybrid splits, VIN-confirmed chip fails closed).
+- Manual badge source labels.
 
 - "Sold on eBay" labels and the sold-prices link.
 - "leaves fast here" lifespan tag and urgency sort.
 - Search-signal events (pf/, pf-car/).
-- sw cache `jh-v139`.
+- sw cache `jh-v144`.
+- Pre-flight: all scraper tests pass, site-proxy redirects ALL PASS, app.js/sw.js syntax OK.
+
+## Next: 1.12.13 when OEM-verified matches can be displayed (§7.4 client).
 
 ## Checklist when the owner says ship
 
