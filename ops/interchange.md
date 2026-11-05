@@ -266,3 +266,13 @@ Replaced By, Replaces, every fitment row in order incl. the rows behind
   (exit 10 = resume, 11 = network pause, 3 = blocked, final). Persist
   `aftermarket/raw/` between slices (like `raw/` on oem-raw).
 - Stopped 2026-11-05 ~01:30 UTC. Waiting on the hub for the Actions job.
+- 01:15-01:20 UTC: GM, Ford, Mopar, Nissan, Infiniti crawling (run
+  41946917524). Aftermarket: DB Electrical crawling (oem-aftermarket-crawl.yml,
+  run 41947368495); Denso (POST to a nonce-protected search endpoint) and TYC
+  (client-side API on another domain) stay out. fetch.py robots fix
+  (1a769a1): urllib.robotparser kept only the first `User-agent: *` group;
+  now an RFC 9309 reading also applies, stricter wins; no allowed site's
+  URL patterns were affected. dbelectrical robots.txt carries Cloudflare
+  Content-Signal "ai-train=no": we do not train on it (owner informed).
+  Mopar/Nissan/Infiniti session re-tasked as raw-output auditor (AUDIT.md)
+  + tier B rule review (proposals to the hub before edits).
