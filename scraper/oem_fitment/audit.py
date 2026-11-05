@@ -74,9 +74,9 @@ _CONV: dict = {}
 
 def site_conventions(site: str) -> dict:
     """Declared per-site conventions (not parsing code) from the site module's
-    CFG: option_column_is_trims, engine_rx, bare_list_position."""
+    CFG: option_column_is_trims, engine_rx, bare_list_position, trim_col, option_col."""
     if site not in _CONV:
-        conv = {"option_trims": False, "engine_rx": None, "bare": True}
+        conv = {"option_trims": False, "engine_rx": None, "bare": True, "trim_col": None, "option_col": r"option|detail"}
         try:
             import importlib
             sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -85,14 +85,17 @@ def site_conventions(site: str) -> dict:
             if cfg is not None:
                 conv = {"option_trims": bool(getattr(cfg, "option_column_is_trims", False)),
                         "engine_rx": getattr(cfg, "engine_rx", None),
-                        "bare": getattr(cfg, "bare_list_position", True)}
+                        "bare": getattr(cfg, "bare_list_position", True),
+                        "trim_col": getattr(cfg, "trim_col", None),
+                        "option_col": getattr(cfg, "option_col", None) or r"option|detail"}
         except Exception as e:  # unknown module: defaults, reported once
             print(f"note: no conventions for {site}: {e}", file=sys.stderr)
         _CONV[site] = conv
     return _CONV[site]
 
 
-def parse_row(cells: list[str], titles: list[str], option_trims: bool = False, engine_rx: str | None = None) -> list[dict]:
+def parse_row(cells: list[str], titles: list[str], option_trims: bool = False, engine_rx: str | None = None,
+              trim_col: str | None = None, option_col: str = r"option|detail") -> list[dict]:
     """Independent parse of one evidence fitment row -> expected fitment dicts."""
     def col(rx):
         for k, t in enumerate(titles):
@@ -102,8 +105,8 @@ def parse_row(cells: list[str], titles: list[str], option_trims: bool = False, e
     c_ymm = col(r"year") or 0
     c_te = col(r"trim\s*&\s*engine")
     c_eng = None if c_te is not None else col(r"engine")
-    c_trim = None if c_te is not None else col(r"^trim")
-    c_opt = col(r"option|detail")
+    c_trim = None if c_te is not None else col(trim_col or r"^trim")
+    c_opt = col(option_col)
     get = lambda c: cells[c].strip() if c is not None and c < len(cells) else ""
     sp = lambda s: [x.strip() for x in s.split(", ") if x.strip()] if s else []
     m = YEARS_RE.match(get(c_ymm))
@@ -180,8 +183,9 @@ def audit_simplepart(r: dict, out) -> None:
             if SP_YMM.match(x):
                 break
             hdr.append(x)
-        body = [x for x in ev[top + 1 + len(hdr):] if x != "View More"]
-        want = [c.strip() for raw in raws for c in raw.split(" | ") if c.strip()]
+        ws = lambda x: re.sub(r"\s+", " ", x).strip()  # rendered HTML may double spaces
+        body = [ws(x) for x in ev[top + 1 + len(hdr):] if x != "View More"]
+        want = [ws(c) for raw in raws for c in raw.split(" | ") if c.strip()]
         if body != want and not differs:
             k = next((i for i, (a, b) in enumerate(zip(body, want)) if a != b), min(len(body), len(want)))
             out["E"].append(f"fitment cells differ from evidence at cell {k}: evidence {body[k:k+2]} vs record {want[k:k+2]}")
@@ -359,9 +363,10 @@ def audit_record(r: dict) -> dict[str, list[str]]:
     expected = []
     if hdr_i is not None:
         titles = [t.strip() for t in ev[hdr_i].split(" | ")]
+        conv = site_conventions(r.get("site", ""))
         rows = ev[hdr_i + 1:]
         for ln in rows:
-            for f in parse_row(ln.split(" | "), titles, site_conventions(r.get("site", ""))["option_trims"], site_conventions(r.get("site", ""))["engine_rx"]):
+            for f in parse_row(ln.split(" | "), titles, **{k: v for k, v in [("option_trims", conv["option_trims"]), ("engine_rx", conv["engine_rx"]), ("trim_col", conv["trim_col"]), ("option_col", conv["option_col"])]}):
                 if "unparsed" in f:
                     out["E"].append(f"unparsed evidence row {ln!r}")
                     continue
