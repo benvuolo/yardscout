@@ -9,3 +9,14 @@
 04:22:00 nav-fail Audi Q7 2016: NavError: HTTP 404 for https://www.audipartsgiant.com/2016-audi-q7-parts
 04:22:00 seg done tier=A Audi Q7 [2007, 2017] seeds=[2008, 2017, 2016] records=299 errors=1
 04:27:52 time budget reached records=328
+04:28:00 start site=www.audipartsgiant.com segments=14 tiers=['A', 'B']
+04:28:00 seg done tier=A Audi A4 [1996, 2019] seeds=[2008] records=328 errors=1
+04:28:00 seg done tier=A Audi A6 [1997, 2017] seeds=[2008] records=328 errors=1
+04:28:00 seg done tier=A Audi Q5 [2009, 2022] seeds=[2012] records=328 errors=1
+04:28:00 seg done tier=A Audi Q7 [2007, 2017] seeds=[2008] records=328 errors=1
+04:28:00 seg done tier=A Audi A3 [2006, 2019] seeds=[2006] records=328 errors=1
+04:40:41 seg done tier=A Audi A4 Quattro [1997, 2016] seeds=[2009, 1999, 2001] records=373 errors=1
+04:45:29 nav-fail Audi A5 2018: NavError: Audi A5 2018: no catalog model for this year
+04:45:29 seg done tier=A Audi A5 [2009, 2022] seeds=[2010, 2018] records=394 errors=2
+04:56:33 seg done tier=A Audi A6 Quattro [2000, 2015] seeds=[2006, 2004, 2014] records=430 errors=2
+05:00:57 time budget reached records=448
