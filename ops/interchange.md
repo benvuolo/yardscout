@@ -466,3 +466,62 @@ What a curator must know:
   FR. Grille", 2005 TL mesh only).
 - 2010 TL has no power-steering-pump diagram. 1997 Accord DX has no starter diagram.
 - Distributor-era ignition (pre-1998 Accord, 2002 Accord DX): no coil diagram.
+
+### Crawler requirements R1-R7 (CURATION_SPEC §3.2; workflow subagent, 2026-11-05 ~03:15 UTC)
+
+On branch `worktree-wf_9b3745bc-31f-2` (not merged, not pushed): 23d37e0,
+519dd0b, 9acadec. Everything is in `scraper/oem_fitment/README.md` ("Site
+module contract", "Raw files"). Once on main, the next scheduled crawl runs
+pick it up.
+
+- R1 `raw/<site>.lists.jsonl`: one line per list page read (not subject to
+  the products_seen dedup, so R7 holds), every partList/gpgOnly row (and
+  PartsGiant Standard Parts rows, `section_not_read`), notes as structured
+  `extra`, `matched` / `excluded_by` / `product`. Re-read from the cache:
+  0 extra requests (tested).
+- R2 `raw/<site>.years.jsonl`: one line per year-catalog page read, every
+  sub slug, title, status, redirect; PartsGiant lines list every offered
+  variant and option catalog, read or not, plus the list pages read from each.
+- R3 completion mode is implemented (`crawl.py --complete <worklist>`), not a
+  stub. The workflow does not call it yet.
+- R4: chains followed to depth 4 only through catalog links: a list row for
+  that number on any page this crawl read (`via_link: "list_row"`), or a link
+  on the referring product page (`"product_page"`). This goes one step past
+  the spec's "gpgOnly rows" by using rows from every page read (URLs are
+  pn-specific product pages; never built). Real product pages (Toyota, GM,
+  Ford) do not link their Replaces / Replaced By numbers, so most chain
+  members stay `chain_unlinked` (2009 Camry mirror 87910-06925 names 14
+  predecessors, none linked). C5 keeps those cells open, as designed.
+- R5a qualifier phrase removal applies to SimplePart (Toyota, Jeep, VW,
+  Mitsubishi) and to the Subaru, Lexus and BMW rules (same `QUALIFIER` copy,
+  now shared). It can only add rows whose include rule already matched.
+- R5b on BOTH templates. PartsGiant part dicts now carry `reman`. Effect:
+  remans next to a superseded number are kept, e.g. Kia pages that supersede
+  a new number to its RU twin now keep the RU row (marked reman).
+- R5c Toyota `-84` is reman (basis in toyotapartsnow.py).
+- R6 `recrawl_of` (string line number) on any record for a (category, pn)
+  already in raw. `.jsonl` files continue in `.2.jsonl` etc. at 40 MB (GitHub
+  limit; real list lines are 10-19 KB, so GM would pass 100 MB); a torn last
+  line is cut at start. The workflow's `raw/<site>.*` copy already covers all
+  of it (checked; header comment updated).
+- Record output check: the old and new code on 30 trimmed real pages
+  (Toyota, GM, Ford; `tests/fixtures/crawler/golden_records_v0.json`) differ
+  only in the two R5 cases (2007 Camry alternator: 4 remans kept beside
+  27060-28320; 1999 Camry starter: 28100-74260-84 kept, 28100-74270-84
+  reman) and the new PartsGiant `reman` key.
+- Live fetches for fixtures: 10 toyotapartsnow pages via fetch.py, 10.5 s apart.
+
+Open, for the hub:
+- Seeds crawled before this lands have no manifests. Backfill with
+  `--complete` rows for the done seeds (cost: year + list pages; products
+  already seen are not re-fetched). Resetting progress also works but
+  re-fetches every product (R6 marks them).
+- Lexus (lexuspartsnow, PartsGiant template) uses Toyota numbering but has no
+  `-84` reman rule; Ford `...RM` numbers ("Ford Retail Spec", 4L3Z-10V346-BBRM)
+  are not flagged reman. Both outside R5c; §5.4 syntax covers neither.
+- The spec's example "Headlamp Unit Assy, W/Auto Leveling" fails Toyota's
+  headlights include rule itself (R5a cannot help); the EPC form "Unit Assy,
+  Headlamp, W/Auto Leveling" is kept now. Whether that wording occurs is for
+  the Toyota builder to check.
+- A seed retried after a list-page network failure writes its manifest lines
+  again (same rows); curators treat any status-200 line as "read".
