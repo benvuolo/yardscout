@@ -535,6 +535,81 @@ Curator notes:
   tracks on branches: Phase 0 guards + hybrid fix, crawler R1/R2/R4/R5/R6,
   offline curation pipeline. Owner questions are in CURATION_SPEC.md §13.
 
+### Mitsubishi, Volvo, Audi (session_016ZzJfL2a85N1tgt5nnonXc, 2026-11-05)
+
+Modules `sites/mitsubishipartsgiant.py` (d4b38a8), `sites/volvopartsgiant.py`
+(fbfddf7), `sites/audipartsgiant.py` (4c57cb7 + side-mirror note), shared subclass
+`sites/_sp_slugrules.py` (SlugCheckedSimplePart), template option
+`slug_checks` (additive, default off). Tests `tests/test_mitsubishipartsgiant.py`
+(46 checks), `tests/test_volvopartsgiant.py` (32), `tests/test_audipartsgiant.py`
+(32); page checks are cache-only and skip in CI.
+
+Trials (tier A, 2 segments). An independent checker re-read each cached page
+(rendered text + embedded store): pn, list name, position, replaces /
+replaced-by, every fitment cell, year spans incl. multi-span cells, evidence
+lines.
+- Mitsubishi (Lancer 2008-17, 2002-07): 47 records, 0 errors, 47/47 match.
+- Volvo (XC90, S60): 100 records, 1 nav miss (the catalog has no 2010 S60
+  page, HTTP 404), 100/100 match.
+- Audi (A4 seeds 2008/2001/2018, A6 seeds 2008/2004/2014): 183 records,
+  0 errors, no refusals (8 s/site pace), 183/183 match.
+
+What a curator must know (all three are the "giant" SimplePart variant):
+- **Strict selection.** List names are site names and they are loose
+  (Mitsubishi lists bolt 7812A133 as "Dehydrator"; Volvo 850 lists a fuel
+  gauge as "Cluster"). A row is kept only when the list name AND the
+  product URL's name slug both name the assembly. Exclusions and the reman
+  test also read the slug.
+- **Reman / exchange.** `reman: true` comes from the list page (notes, name,
+  slug "remanufactured-starter") or the product page's own names
+  (Mitsubishi M984944D "Remanufactured Alternat", Volvo 8251551 "Reman
+  Starter"). Volvo "Alternator, Exchange" gets `exchange_unit: true`. Audi
+  X-suffix numbers are exchange units, but their product pages do not say
+  so; nothing is inferred from the suffix. Their list rows print
+  "Remanufactured", so they drop when a new number is on the same page.
+- **Window switches** never say "master" on any of the three. All
+  front-door "Window Switch" rows are kept; filter on `position` /
+  `list_location`.
+- **Doors.** Mitsubishi and Volvo: door-front / door-rear are decided by the
+  product page's own name ("Panel Assembly, Front Door, Left-Hand"; Volvo
+  "Front Door"), kept in `product_check`. Audi: not crawled; list "Door
+  Shell" and product "Door" never say front or rear.
+- **Lamps.** Mitsubishi and Volvo "Lens & Housing" rows are kept with the
+  assemblies. Their OEM names are "Body, Headlamp" and "Lamp Unit, Tail" (the
+  unit without bulbs/sockets). `name` keeps the printed list name.
+- **Mirrors.** Volvo "Mirror Outside" numbers are mostly paint variants.
+  Older Audi catalogs (2008 A4) sell only mirror parts ("Mirror Housing" =
+  cap, "Motor & Base") and give no record. Newer ones (2012+ A6, 2017+ A4)
+  list "Mirror Assembly", whose Audi name is "Mounting". Those are kept with a
+  `category_note`: whether glass and cap are included is not printed.
+- **Mitsubishi coverage gap.** Multi-trim list pages ("Select your vehicle
+  options") do not always embed every diagram's rows. The 2008 Lancer
+  alternator page has only the components, not the assembly. Missing rows
+  are a coverage gap, never a guess.
+- **Volvo.** "Tail Gate" pages are the wagon/SUV hatch and go to `liftgate`.
+  Trunk lids ("Lid" on the list) are confirmed by the product name "Trunk
+  Lid". "60 Series" (15 cars) names no catalog model, so navigation refuses
+  it. Numbers without fitment rows get fitment [] and `no_fitment_rows`.
+- **Audi navigation.** The catalog files the A8 after 1999 and the 2001-05
+  allroad only as `a8_quattro` / `allroad_quattro`, so those feed years
+  navigate there. Fitment model names stay as printed ("A8 Quattro"). A5
+  navigates only for 2010-14, where the catalog has `a5`. The Audi
+  condition (SOURCES.md) was checked before building: 21/21 list-linked
+  product pages carry fitment in the server HTML. The scout's 3
+  fitment-less samples were reached outside the catalog (one redirects to
+  the home page).
+- **Audi fuel pump.** "Fuel Pump" with slug `fuel-pump` is the engine
+  high-pressure pump (06E-127-025-AB) and is excluded. Only in-tank
+  assembly slugs are kept.
+- **Audi rendered tables** can drop an empty cell (2013-2018 A6 Quattro
+  with no Engine on 06F-133-062-AG) and print double spaces ("2020,  2015-2017").
+  The fitment entry keeps the empty cell (`engines: []`, raw ends "| ").
+- **Cross-make**: none in these catalogs. Cross-model is common (Mitsubishi
+  Lancer/Outlander/Outlander Sport; Volvo P2/P3 platform S60/S80/V70/XC70/XC90;
+  Audi A4/A5/A6/Q3/Q5 2.0T throttle body, A4/A6 starters).
+- Status: all three modules are on main and the trials are checked. Mitsubishi
+  and Volvo are in the hub's capped Actions run. Audi is ready for it.
+
 ## Hub decisions (curation policy)
 
 - 2026-11-05 T1 (Toyota climate-control sub-assemblies 55901/55902/55903,

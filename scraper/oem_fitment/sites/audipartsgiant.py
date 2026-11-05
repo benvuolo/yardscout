@@ -22,9 +22,11 @@ to feed names is curation's job. A5 navigates only where the catalog has "a5"
 Not crawled on purpose:
   * door-front / door-rear: front and rear shells are both "Door Shell" on one list
     page and "Door" on the product page; neither prints front or rear.
-  * side-mirrors: the catalog sells mirror parts ("Mirror Housing" = cap, "Motor &
-    Base", "Adjust Motor"), not an assembly; the rule only takes a printed
-    "Mirror Assembly" / "Outside Mirror", which did not appear in the survey.
+
+Side mirrors: older catalogs (2008 A4) sell only mirror parts ("Mirror Housing" = cap,
+"Motor & Base", "Adjust Motor") and yield no record. Newer ones (2012+ A6, 2017+ A4) list
+"Mirror Assembly" (slug mirror-assembly) whose Audi name is "Mounting"; those are kept
+with a category_note, since the page does not say whether glass and cap are included.
 
 X-suffix numbers (06E-911-023-EX, 8H0-920-951-FX) are Audi exchange units, but the
 product pages do not say so; nothing is inferred from the suffix. A list page that
@@ -149,6 +151,8 @@ SLUG_RULES = {
 }
 
 NOTES = {
+    "side-mirrors": "Audi lists 'Mirror Assembly' whose own name is 'Mounting'; mirror glass and cap "
+                    "are separate numbers and the page does not say whether they are included.",
     "window-switch": "Audi prints 'Window Switch' for driver and passenger front-door switches alike; "
                      "use position to tell the driver switch.",
 }
