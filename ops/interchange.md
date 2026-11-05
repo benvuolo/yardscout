@@ -26,15 +26,25 @@ first. Owner approved multi-agent ("ultra") scale.
 
 1. `scraper/oem_fitment/fetch.py`: allowlist, robots, 4 s/site, 0.5 s global,
    cache, permanent stop on any bot check/403/429/503.
-2. `scraper/oem_fitment/sites/<site>.py`: per-site navigator (written by one
-   agent per site, workflow run wf_7d045075-e05, 2026-11-05).
-3. `scraper/oem_fitment/crawl.py`: background crawl per site, worklist
-   order (cars on lots), tier A categories first, resumable. Raw evidence in
-   `raw/<site>.jsonl`.
+2. `scraper/oem_fitment/sites/`: two shared template parsers
+   (`_partsgiant.py` for the .html catalogs, `_simplepart.py` for Toyota and
+   Jeep) plus a thin module per site.
+3. `.github/workflows/oem-fitment-crawl.yml`: one Actions job per site with a
+   module, `crawl.py` in 30-minute slices, checkpoints committed to the
+   `oem-raw` branch (`raw/<site>.jsonl` etc.). Worklist order (cars on lots),
+   tier A categories first. Runs every 6 h until each site is done.
 4. Next (not started): curation into interchange groups with an
    independent adversarial verification per site, then integration into
    `interchange.json` as verified platform groups and engine-family groups.
 
 ## Status
 
-- 2026-11-05 00:20 UTC: harness committed (8ea96df); navigator workflow running.
+- 2026-11-05 00:05 UTC: harness committed (8ea96df).
+- 00:11 UTC: container restart killed the in-session navigator workflow
+  (wf_7d045075-e05) a few minutes in; nothing lost but cached pages. Moved
+  crawls to GitHub Actions (9203003) and navigator builds to two sessions:
+  - session_016ZzJfK5C7Cm4qZpC4QjSVs: .html template + GM, Ford, Mopar,
+    Nissan, Infiniti
+  - session_016ZzJfHbzhf7ZAm4Xt8ok79: SimplePart template + Toyota, Jeep
+  - pending: Honda, Acura, Hyundai, Kia, Subaru, Lexus on the .html
+    template once it lands.
