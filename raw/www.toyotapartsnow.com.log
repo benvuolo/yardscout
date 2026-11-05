@@ -57,3 +57,27 @@
 08:38:05 seg done tier=A Toyota Camry Solara [1999, 2008] seeds=[2006, 2003, 2007] records=803 errors=0
 08:58:37 seg done tier=A Toyota Camry [1984, 1996] seeds=[1996, 1988] records=894 errors=0
 08:58:37 time budget reached records=894
+08:58:45 start site=www.toyotapartsnow.com segments=52 tiers=['A', 'B']
+08:58:45 seg done tier=A Toyota Camry [2007, 2009] seeds=[2007] records=894 errors=0
+08:58:45 seg done tier=A Toyota Camry [2002, 2004] seeds=[2002] records=894 errors=0
+08:58:45 seg done tier=A Toyota Prius [2001, 2019] seeds=[2008] records=894 errors=0
+08:58:45 seg done tier=A Toyota Sienna [2004, 2010] seeds=[2004] records=894 errors=0
+08:58:45 seg done tier=A Toyota Camry [2005, 2006] seeds=[2005] records=894 errors=0
+08:58:45 seg done tier=A Toyota Camry [1997, 1999] seeds=[1999] records=894 errors=0
+08:58:45 seg done tier=A Toyota Corolla [1998, 2002] seeds=[2001] records=894 errors=0
+08:58:45 seg done tier=A Toyota Camry [2000, 2001] seeds=[2000] records=894 errors=0
+08:58:45 seg done tier=A Toyota Corolla [2005, 2008] seeds=[2005] records=894 errors=0
+08:58:45 seg done tier=A Scion tC [2005, 2016] seeds=[2006] records=894 errors=0
+08:58:45 seg done tier=A Toyota Camry [2010, 2011] seeds=[2011] records=894 errors=0
+08:58:45 seg done tier=A Toyota Highlander [2001, 2007] seeds=[2006] records=894 errors=0
+08:58:45 seg done tier=A Toyota Corolla [2009, 2010] seeds=[2010] records=894 errors=0
+08:58:45 seg done tier=A Scion xB [2004, 2015] seeds=[2006] records=894 errors=0
+08:58:45 seg done tier=A Toyota Avalon [2000, 2004] seeds=[2000] records=894 errors=0
+08:58:45 seg done tier=A Toyota Camry Solara [1999, 2008] seeds=[2006] records=894 errors=0
+08:58:45 seg done tier=A Toyota Camry [1984, 1996] seeds=[1996] records=894 errors=0
+09:03:17 seg done tier=A Toyota Corolla [2003, 2004] seeds=[2003] records=909 errors=0
+09:09:49 seg done tier=A Toyota Sienna [1998, 2003] seeds=[2000] records=938 errors=0
+09:16:21 seg done tier=A Toyota RAV4 [2006, 2012] seeds=[2007] records=970 errors=0
+09:25:01 seg done tier=A Toyota Sequoia [2001, 2007] seeds=[2002] records=1016 errors=0
+09:33:17 seg done tier=A Toyota Avalon [2005, 2012] seeds=[2006] records=1060 errors=0
+09:33:17 time budget reached records=1060
