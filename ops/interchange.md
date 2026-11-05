@@ -466,3 +466,58 @@ What a curator must know:
   FR. Grille", 2005 TL mesh only).
 - 2010 TL has no power-steering-pump diagram. 1997 Accord DX has no starter diagram.
 - Distributor-era ignition (pre-1998 Accord, 2002 Accord DX): no coil diagram.
+
+### SimplePart "giant" variant: VW, Mazda, Mercedes-Benz (session_016ZzJfHbzhf7ZAm4Xt8ok79, 2026-11-05)
+
+Modules: `sites/vwpartsgiant.py`, `sites/mazdapartsnow.py`, `sites/mbpartsgiant.py`,
+all on `_simplepart.py`. These stores use `/<year>-<make>-<model>-parts` year pages
+and `/genuine/` product pages, and print only a short site name per list row. So
+rules are anchored exact names on each category's own pages. Where the list page
+cannot tell, a product-page check decides (`product_rules`, matched text kept in
+`product_check`).
+
+Trials (tier A, 2 segments). Every record was checked field by field against
+the cached page:
+
+| site | records | match | notes |
+|---|---|---|---|
+| vwpartsgiant | 108 | 108/108 | |
+| mazdapartsnow | 128 | 128/128 | |
+| mbpartsgiant | 117 | 117/117 fields | 1 record `evidence_truncated:158` (a 54-row table; fitment complete, evidence capped at 120 lines) |
+
+Curator notes:
+- **Site mislabels caught by product checks.** Mazda L39C-18-881J is listed as
+  "Alternator" but its product page says "Module, Powertrain Control". MB
+  271-155-01-15 is listed as "Alternator (5.5L)" but its product page says
+  "Pulley" and its fitment is the C230 1.8L. Both are now excluded:
+  alternator/starter rows must agree with their product page.
+- **Not crawled, because the page does not print what the category needs:**
+  - VW door shells ("Door Frame Assembly" / "Door Inner"; front vs rear never
+    printed).
+  - MB door shells (even the passenger shell reads "Driver's Door").
+  - MB fuel pump ("Auxiliary Pump" / "Exchange Suction Jet Pump").
+  - MB mirrors ("Mirror Housing" = "Frame").
+  - MB climate control (only generic "Switch Assembly" / "Control Module").
+- **Mazda door shells are crawled.** The product page prints "Body(Right),
+  Rear Door", and that text decides door-front vs door-rear.
+- **Mirrors carry a `category_note`.** VW lists the mirror as "Housing
+  Assembly" / "Mirror Housing" (product "Housing" or "Repair Kit"). Mazda
+  "Mirror Assembly" rows can read "Sub Mirror(Left/Right), Door". Neither page
+  says whether glass and cap are included.
+- **Fuel pumps.** A plain "Fuel Pump" row can be the engine's high-pressure pump
+  (VW 06F-127-025-M, Mazda L3K9-13-35ZC), so only "Fuel Pump Assembly" is taken.
+- **Window switch.** Mazda and MB keep only switches whose product Position is
+  "Driver Side". VW and Jeep keep both sides, with a `category_note` saying so.
+- **Reman.** A number is reman only if every list row for it says so. VW prints
+  06F-903-023-FX on a "New" row and on a "Remanufactured" row. Mazda and MB mark
+  reman only on the product page (`other_names` "Reman Alternator"), so those
+  rows carry `reman: false` from the list page.
+- **Mazda model slugs.** "Mazda3" maps to `3`, CX-9 to `cx_9`. MX-5 Miata is
+  `miata` through 2005 and `mx_5_miata` from 2006. The feed's "B-Series" and
+  "Truck" map to no single catalog model (b2300/b3000/b4000 by engine), so they
+  fail navigation instead of guessing (156 cars).
+- **MB class names are expanded to badges.** A feed class name ("C-Class",
+  "SLK", "300") is crawled through every badge of that class whose model page
+  lists the year. Fitment prints badges ("C300", "C63 AMG"), and the seed model
+  stays the class name. crawl.py's coverage check cannot match class to badge,
+  so these segments use all 3 seeds.
