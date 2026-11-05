@@ -55,3 +55,29 @@
 10:38:30 nav-fail Mercedes-Benz C-Class 1989: NavError: Mercedes-Benz C-Class 1989: no catalog badge page for this year
 10:38:30 seg done tier=A Mercedes-Benz C-Class [1978, 2000] seeds=[1998, 1989] records=477 errors=2
 10:56:11 time budget reached records=515
+10:56:20 start site=www.mbpartsgiant.com segments=50 tiers=['A', 'B']
+10:56:20 seg done tier=A Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=515 errors=2
+10:56:20 seg done tier=A Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=515 errors=2
+11:09:01 nav-fail Mercedes-Benz 300 1972: NavError: Mercedes-Benz 300 1972: no catalog badge page for this year
+11:09:01 seg done tier=A Mercedes-Benz 300 [1960, 1993] seeds=[1992, 1972] records=543 errors=3
+11:09:01 seg done tier=A Mercedes-Benz GL450 [2007, 2015] seeds=[2007, 2012, 2011] records=543 errors=3
+11:10:28 nav-fail Mercedes-Benz ML320 2004: NavError: HTTP 404 for https://www.mbpartsgiant.com/2004-mercedes_benz-ml320-parts
+11:10:28 seg done tier=A Mercedes-Benz ML320 [1998, 2009] seeds=[2000, 2004] records=543 errors=4
+11:12:36 seg done tier=A Mercedes-Benz C240 [2001, 2005] seeds=[2003] records=550 errors=4
+11:24:29 seg done tier=A Mercedes-Benz CLK [1999, 2009] seeds=[2007, 2002, 2005] records=567 errors=4
+11:29:57 time budget reached records=582
