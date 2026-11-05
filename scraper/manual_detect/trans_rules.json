@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_utc": "2026-11-05T18:45:31Z",
+ "generated_utc": "2026-11-05T18:47:14Z",
  "generator": "scraper/manual_detect/compile_trans_rules.py",
  "sources": {
   "vin_rules_0.json": "7994afa25a527b9a",
