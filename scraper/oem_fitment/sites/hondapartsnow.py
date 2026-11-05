@@ -26,3 +26,5 @@ MODELS = {
 
 CFG = H.make_config(T, SITE, MODELS)
 categories_for, parts_on_page, product = H.bind(T, CFG)
+# R1/R2/R4 manifests (README "Site module contract"), re-read from the cache
+year_manifest, list_manifest, chain_links = T.bind_manifests(CFG)

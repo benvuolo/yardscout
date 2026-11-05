@@ -106,7 +106,15 @@ RULES = {
                  r"handle|hinge|cable|lock|latch|glass|weather|stay|cylinder|motor|wiper|spoiler|lamp|trim|molding|garnish|emblem|switch|striker|link|outside|outer|inner|board|cover|pad|finish"),
 }
 
-_T = SimplePart(SITE, URL_MAKE, MODEL_SLUGS, CAT_PAGES, RULES, oem_name_field="aux")
+# Toyota service numbers ending "-84" are remanufactured units (CURATION_SPEC
+# §3.2 R5c). Basis: the catalog's own replace pairs, a new number superseded by
+# its -84 twin: 27060-28320 -> 27060-28321-84 (2007 Camry alternator page),
+# 28100-20020 -> 28100-20020-84; and 28100-74270-84, printed "Starter
+# Assembly" on the 1999 Camry starter page, has product slug
+# "reman-starter-assembly". Without this rule those rows had reman: false.
+REMAN_PN = r"-84$"
+
+_T = SimplePart(SITE, URL_MAKE, MODEL_SLUGS, CAT_PAGES, RULES, oem_name_field="aux", reman_pn=REMAN_PN)
 
 
 def categories_for(make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
@@ -119,3 +127,15 @@ def parts_on_page(list_url: str, cat: str) -> list[dict]:
 
 def product(product_url: str) -> dict:
     return _T.product(product_url)
+
+
+def year_manifest(make: str, model: str, year: int) -> list[dict]:
+    return _T.year_manifest(make, model, year)
+
+
+def list_manifest(list_url: str, cat: str) -> dict:
+    return _T.list_manifest(list_url, cat)
+
+
+def chain_links(product_url: str, pns: list[str]) -> dict[str, str]:
+    return _T.chain_links(product_url, pns)

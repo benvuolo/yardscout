@@ -136,7 +136,9 @@ RULES = {
 # excludes match at a word start ("ring" must not hit "steering")
 RULES = {k: (re.compile(inc, re.I), re.compile(rf"\b(?:{exc})", re.I)) for k, (inc, exc) in RULES.items()}
 # "W/Cap" / "W/O Pulley" / "Less X" qualifiers describe what an assembly includes
-QUALIFIER = re.compile(r"\b(?:w/o|w/|l/|with(?:out)?|less|incl(?:udes|uding)?)\s*[a-z0-9]+", re.I)
+# R5a (CURATION_SPEC §3.2): the whole qualifier phrase, to the next "," or ";",
+# is removed before the exclusion checks (sites/_qualifier.py)
+from sites._qualifier import QUALIFIER  # noqa: E402
 FUEL_SUCTION = re.compile(r"^tube\s+(sub-)?(assy|assembly),?\s*fuel\s+suction", re.I)
 
 
@@ -151,7 +153,8 @@ def head(row: dict) -> str:
 
 def _rule(cat: str):
     inc, exc = RULES[cat]
-    return lambda row, text: bool(inc.search(name_of(row))) and not exc.search(head(row))
+    # include on the OEM name, exclusions on head(); .why gives the manifest reason
+    return T.name_rule(inc, exc, name_of, head)
 
 
 PARTS = {cat: _rule(cat) for cat in RULES}
@@ -160,3 +163,5 @@ PARTS = {cat: _rule(cat) for cat in RULES}
 # ("1MZFE; MCV30L-BEAGKA"), not trims: kept in fitment[].options only
 CFG = T.Config(site=SITE, models=MODELS, subcats=SUBCATS, parts=PARTS, head_fn=head)
 categories_for, parts_on_page, product = T.bind(CFG)
+# R1/R2/R4 manifests (README "Site module contract"), re-read from the cache
+year_manifest, list_manifest, chain_links = T.bind_manifests(CFG)
