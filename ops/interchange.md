@@ -688,8 +688,18 @@ Needs a decision (hub / owner):
 2. **Payload size.** Shipping every Likely group overflows V11. Either lazy
    per-category OEM files (spec 12) or a Likely policy (e.g. only where no
    hand group exists).
-3. Crawler R1/R2 manifests (crawler track) and the spec 11.4 audits
-   (CATEGORY_STATUS) are prerequisites for any Verified group.
+3. Crawler R1/R2 manifests (crawler track) and the spec 11.4 audits are
+   prerequisites for any Verified group. Until branch
+   worktree-wf_9b3745bc-31f-3 (second review) the audit store
+   (CATEGORY_STATUS) sat inside policy.py, which policy_sha256 hashes, so an
+   audit record could never match a doc curated after it and V7 could not
+   pass at all in production; tests got past it only by injecting a status
+   table. The records now live in `scraper/oem_fitment/audits.json`, outside
+   the hash (test_audit_store.py records one, re-curates and ships with no
+   override). The payload loader now also enforces V8 (tree hash) and the
+   model-map V2 check, so a groups file goes stale (namespace dropped) the
+   moment policy.py / notes.py / positions.py / model_map.json change: every
+   policy edit needs a re-curate before the next build ships OEM groups.
 4. Ops alert on `oemStatus` "dropped" belongs to the backend ops workstream
    (`backend/src/ops_monitor.js`, spec 7.3); not filed there yet.
 
@@ -703,6 +713,32 @@ old code, `curation_tests/test_regressions.py`):
   switches 4602785AD and 4602540AF, and the "1 gang" 4602531AD, as Likely
   window switches.
 - The evidence re-check refused doubled spaces, which AUDIT.md accepts.
+
+Second review (21 findings, branch worktree-wf_9b3745bc-31f-3, tests in
+`curation_tests/test_review2.py` and `test_review2_payload.py`, each failing
+on be7a774): closure needs every merged catalog model (Wrangler JK 2018,
+Grand Cherokee WK 2022 now have explicit years), a parsed year page and T's
+own list stems; C4 re-runs the rule on every unmatched row; TrimU_f never
+drops a year-page trim without proof; EngineU takes the year page's engines;
+own-page notes come from every row of the number; a cross-category
+supersession edge keeps blocking; chain records count toward evidence age;
+the evidence re-check is exact (cells, header, both-way replaces, position);
+audits.json (above); payload: OEM vg groups are withheld by a contradicted
+hand vg, the engine-category §7.6 trigger reads family-narrowed
+`engine_cells` and only real conditions (policy.SPLIT_CONDITIONS). On
+oem-raw@50ac4a48 (toyota + mopar, every cell assumed closed, hypothetical)
+the old trigger removed 55 of 468 hand vg groups, firing on evidence gaps
+and on other engines' numbers; the new one removes 41, on option_split 240
+member cells, conditional:trim 44, engine 5, plant 1, production 1. Most of
+those option_splits are two numbers each printed for the family's own
+engine (e.g. 4Runner/Tacoma 1996 alternators 27060-62180 and 27060-75170,
+both rows listing 2.7 and 3.4), which is what §7.6 means. Like every
+§7.6 demotion these fire only on closed cells (none today: no R1/R2
+manifests). A withheld group takes the Likely note, V11 holds as
+written, size_trim is linear, Likely groups and stale files expire, one
+malformed file drops only its namespace, and a file without sigs / cells /
+engine_cells is refused. Not re-run on oem-raw after these fixes: the
+`_report/*.md` files still describe the pre-review curation.
 
 AUDIT.md "Exclude at curation" (LBK13001, 5143152AA) is applied (refusal
 `exclude_at_curation` in the reports). Hub decisions T1 and P1 are applied:
