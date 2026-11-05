@@ -212,6 +212,10 @@ class ListRow:
     line: int
     status: object
     variant: str = ""
+    group: str = ""      # PartsGiant pncDesc (the rule reads it)
+    remark: str = ""     # PartsGiant mainDescAlter
+    error: str = ""      # the page-level "error" the crawler wrote (never ok)
+    link: str = ""       # the row's product link as printed (the rule reads its slug)
 
     @property
     def pointer(self) -> str:
@@ -233,6 +237,7 @@ class YearManifest:
     variants: list
     retrieved: str
     line: int
+    error: str = ""      # the crawler's "error" / nav failure (never ok)
 
     @property
     def pointer(self) -> str:
@@ -427,7 +432,8 @@ def to_list_rows(site: str, line: int, o: dict) -> list:
             replace=_clean(r.get("replace")) or None, matched=bool(r.get("matched")),
             excluded_by=r.get("excluded_by"), product=r.get("product"),
             retrieved=o.get("retrieved") or "", line=line, status=o.get("status"),
-            variant=o.get("variant") or ""))
+            variant=o.get("variant") or "", group=_clean(r.get("group")), remark=_clean(r.get("remark")),
+            error=_clean(o.get("error")), link=_clean(r.get("url"))))
     return out
 
 
@@ -437,7 +443,36 @@ def to_year_manifest(site: str, line: int, o: dict) -> YearManifest:
                         final_url=o.get("final_url") or "", title=o.get("title") or "",
                         subs=list(o.get("subs") or []), trims=list(o.get("trims") or []),
                         engines=list(o.get("engines") or []), variants=list(o.get("variants") or []),
-                        retrieved=o.get("retrieved") or "", line=line)
+                        retrieved=o.get("retrieved") or "", line=line,
+                        error=_clean(o.get("error")) or ("nav failed" if o.get("nav") == "fail" else ""))
+
+
+# ------------------------------------------------------------ catalog URLs
+def year_stem(url: str) -> str:
+    """The catalog stem ('<year>-<make>-<model>[-<variant>]', PartsGiant
+    trim catalogs add '--<trim>') of a year-catalog URL: /catalog/<stem>-parts
+    (toyotapartsnow, jeeppartsdeal), /<stem>-parts (vwpartsgiant & co),
+    /<stem>-parts.html (PartsGiant). '' when the URL is none of these."""
+    import urllib.parse
+    last = urllib.parse.urlsplit(url or "").path.rstrip("/").rsplit("/", 1)[-1]
+    for suf in ("-parts.html", "-parts"):
+        if last.endswith(suf) and len(last) > len(suf):
+            return last[: -len(suf)]
+    return ""
+
+
+def list_stem_sub(url: str) -> tuple[str, str]:
+    """(stem, '<group>/<sub>') of a list URL /parts-list/<stem>/<group>/<sub>[.html];
+    ('', '') when the URL is not a parts-list URL."""
+    import urllib.parse
+    p = urllib.parse.urlsplit(url or "").path.rstrip("/")
+    if not p.startswith("/parts-list/"):
+        return "", ""
+    parts = p[len("/parts-list/"):].split("/", 1)
+    if len(parts) != 2 or not parts[0] or not parts[1]:
+        return "", ""
+    sub = parts[1][: -len(".html")] if parts[1].endswith(".html") else parts[1]
+    return parts[0], sub
 
 
 # ------------------------------------------------------- evidence re-check

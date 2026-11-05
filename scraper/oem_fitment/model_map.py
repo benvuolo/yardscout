@@ -154,7 +154,8 @@ def validate(mm: ModelMap, inv: dict | None, js, namespaces: dict, catalog_years
                 errors.append(f"M8 {mk} {md} {y}: fed by {sorted(cats)} without merge")
                 break
     # M4 match self-test
-    feed_targets = sorted({(t.make, t.model, t.years) for t in targets})
+    # (a target with years beside one without: sort None first, never compare None with a tuple)
+    feed_targets = sorted({(t.make, t.model, t.years) for t in targets}, key=lambda x: (x[0], x[1], x[2] or ()))
     for mk, md, yrs in feed_targets:
         lo, hi = yrs or (1990, 2026)
         for y in sorted({lo, hi}):

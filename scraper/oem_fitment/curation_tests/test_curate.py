@@ -212,6 +212,21 @@ lm2["rows"][1]["aux"] = "Cover, Outer Mirror"
 lm2["rows"][1]["excluded_by"] = "rule:cover"
 cur, doc = run("toyota", toy_raw(r10, lists=[lm2], years=[ym]))
 check("10 an excluded mirror cover is not a suspect", "suspect_variant" not in info(cur, T09, "side-mirrors")["closure"])
+# review F2: whatever the crawler wrote as the reason (url_pn_mismatch, None,
+# '' or a reason this code does not know), an unmatched row whose head
+# phrase passes the site's rule is a suspect; only a re-run that fails clears it
+for excl in ("url_pn_mismatch", None, "", "section_not_read", "brand_new_reason"):
+    lm3 = copy.deepcopy(lm)
+    lm3["rows"][1]["aux"] = "Mirror Assy, Outer Rear View"
+    lm3["rows"][1]["excluded_by"] = excl
+    cur, doc = run("toyota", toy_raw(r10, lists=[lm3], years=[ym]))
+    check(f"10 an unmatched mirror row with excluded_by={excl!r} is a suspect_variant",
+          "suspect_variant" in info(cur, T09, "side-mirrors")["closure"], str(info(cur, T09, "side-mirrors")["closure"]))
+lm4 = copy.deepcopy(lm2)
+lm4["rows"][1]["excluded_by"] = "include_miss"
+cur, doc = run("toyota", toy_raw(r10, lists=[lm4], years=[ym]))
+check("10 an include_miss row whose re-run fails (a mirror cover) is not a suspect",
+      "suspect_variant" not in info(cur, T09, "side-mirrors")["closure"])
 
 # --------------------------------------------------------------- case 11
 alts = [by_pn(jeep, p) for p in ("4801477AA", "4801477AG", "4801323AD", "4801323AK")]

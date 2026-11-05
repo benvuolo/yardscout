@@ -4956,7 +4956,7 @@
    ]
   },
   {
-   "basis": "2022 carryover WK sold beside the new WL; feed 'Grand Cherokee' does not say which (merge)",
+   "basis": "2022 carryover WK sold beside the new WL; feed 'Grand Cherokee' does not say which (merge); years [2022, 2022]: the catalog prints 'Grand Cherokee WK' only for the 2022 carryover (oem-raw@50ac4a48: all 17 'Grand Cherokee WK' fitment rows are 2022), so only Grand Cherokee 2022 must also close on the WK page (review F1)",
    "cat_make": "Jeep",
    "cat_model": "Grand Cherokee WK",
    "ns": "mopar",
@@ -4965,7 +4965,11 @@
      "make": "Jeep",
      "merge": true,
      "model": "Grand Cherokee",
-     "trims": "*"
+     "trims": "*",
+     "years": [
+      2022,
+      2022
+     ]
     }
    ]
   },
@@ -5062,7 +5066,7 @@
    ]
   },
   {
-   "basis": "2018 carryover JK sold beside the JL; feed 'Wrangler' does not say which (merge)",
+   "basis": "2018 carryover JK sold beside the JL; feed 'Wrangler' does not say which (merge); years [2018, 2018]: the catalog prints 'Wrangler JK' only for the 2018 carryover (oem-raw@50ac4a48: every 'Wrangler JK' fitment row is 2018), so only Wrangler 2018 must also close on the JK page (review F1)",
    "cat_make": "Jeep",
    "cat_model": "Wrangler JK",
    "ns": "mopar",
@@ -5071,7 +5075,11 @@
      "make": "Jeep",
      "merge": true,
      "model": "Wrangler",
-     "trims": "*"
+     "trims": "*",
+     "years": [
+      2018,
+      2018
+     ]
     }
    ]
   },

@@ -486,6 +486,10 @@ class Curation:
     def comparable(self, cat, a, b) -> bool:
         return a == b or b in self.reach(cat, a) or a in self.reach(cat, b)
 
+    def chain_keys(self, cat, key) -> set:
+        """Every ancestor and descendant C5 checks (depth CHAIN_DEPTH)."""
+        return self.reach(cat, key, policy.CHAIN_DEPTH) | self.reach(cat, key, policy.CHAIN_DEPTH, down=False)
+
     # --------------------------------------------- 5.10 cover / candidates
     def cover(self, T, cat, c: Klass, engine_set=None, trim_u=None):
         """('yes'|'maybe'|'no', [reasons], own-page info)."""
@@ -588,49 +592,101 @@ class Curation:
         return members
 
     # ------------------------------------------------------ 5.10 closure
+    def required_cvs(self, T) -> list:
+        """Every catalog vehicle the model map feeds into T this year (§6:
+        with a merge mapping, every merged cv must close), whether or not a
+        fitment row happens to name it; plus any cv a row mapped (a subset)."""
+        srcs = {(t.cat_make, t.cat_model) for t in self.mm.sources(self.ns, T[0], T[1], T[2])}
+        return sorted(srcs | self.t_sources.get(T, set()))
+
+    def _longer_models(self, cmk: str, cmd: str) -> list:
+        """Token lists of the namespace's other catalog models of this make
+        whose name contains this one ('Wrangler JK' for 'Wrangler')."""
+        key = (cmk, cmd)
+        cache = self.__dict__.setdefault("_longer_cache", {})
+        if key not in cache:
+            mine = _tokens(cmd)
+            names = {md for (ns, mk, md) in self.mm.by_cat if ns == self.ns and mk == cmk}
+            names |= {k.split("|", 2)[2] for k in self.mm.exclude
+                      if k.count("|") >= 2 and k.split("|", 2)[:2] == [self.ns, cmk]}
+            cache[key] = [_tokens(md) for md in sorted(names)
+                          if md != cmd and len(_tokens(md)) > len(mine) and _has_run(_tokens(md), mine)]
+        return cache[key]
+
+    def _title_cv(self, title: str, cmk: str, cmd: str, year: int) -> bool:
+        """The year page is cv's own page: its title names cv's model and
+        year, and no longer catalog model of the make that contains it
+        ('2018 Jeep Wrangler JK Parts' is not the 'Wrangler' page)."""
+        if not _title_names(title, cmd, year):
+            return False
+        toks = _tokens(title)
+        return not any(_has_run(toks, other) for other in self._longer_models(cmk, cmd))
+
+    def _year_ok(self, ym) -> bool:
+        """C1 for one year manifest: HTTP 200, no crawler error, no redirect,
+        and a sub list that holds at least one category page the site module
+        reads (an empty or foreign sub list means the page did not parse, so
+        'every category page read' would be vacuous: review F3)."""
+        if not _status_ok(ym.status) or ym.error:
+            return False
+        if ym.final_url and ym.final_url.split("?")[0] != ym.year_url.split("?")[0]:
+            return False
+        if not A.year_stem(ym.year_url):
+            return False
+        pages = [rx for rx in A.site_cat_pages(ym.site).values() if rx is not None]
+        return any(rx.search(sub) or rx.search(sub.split("/")[-1]) for sub in ym.subs for rx in pages)
+
     def closure(self, T, cat, members) -> list:
         reasons = []
-        sources = self.t_sources.get(T, set())
         years = self.t_years.get(T, [])
-        t_entries = [t for (cmk, cmd) in sources for t in self.mm.targets(self.ns, cmk, cmd, T[2])
-                     if (t.make, t.model) == (T[0], T[1])]
-        if any(t.ambig for t in t_entries):
+        required = self.required_cvs(T)
+        if any(t.ambig for t in self.mm.sources(self.ns, T[0], T[1], T[2])):
             reasons.append("ambig_target")
-        for cmk, cmd in sorted(sources):
-            ok = [ym for ym in years if _status_ok(ym.status) and _title_names(ym.title, cmd, T[2])]
-            if not years:
-                reasons.append("no_year_manifest")
-                break
-            if not ok:
-                reasons.append("year_manifest_bad")
+        if not years:
+            reasons.append("no_year_manifest")
+        # C1 per required cv: an ok year manifest that is that cv's own page
+        good_by_cv = {}
+        for cmk, cmd in required:
+            named = [ym for ym in years if self._title_cv(ym.title, cmk, cmd, T[2])]
+            okd = [ym for ym in named if _status_ok(ym.status) and not ym.error]
+            if not okd or not all(self._year_ok(ym) for ym in okd):
+                if years:
+                    reasons.append("year_manifest_bad")
+                good_by_cv[(cmk, cmd)] = []
                 continue
-            if any(ym.final_url and ym.final_url.split("?")[0] != ym.year_url.split("?")[0] for ym in ok):
-                reasons.append("year_manifest_bad")
-            for ym in ok:
+            good_by_cv[(cmk, cmd)] = okd
+            for ym in okd:
                 if ym.site not in policy.SIMPLEPART_SITES:
                     read = {y.variant for y in years if y.site == ym.site}
                     if set(ym.variants or []) - read:
                         reasons.append("variant_unread")
-        if not years:
-            if "no_year_manifest" not in reasons:
-                reasons.append("no_year_manifest")
+        good_years = [ym for yms in good_by_cv.values() for ym in yms]
+        good_stems = {(ym.site, A.year_stem(ym.year_url)) for ym in good_years}
         lists = [lr for lr in self.t_list_rows.get((T, cat), [])]
         manifests = {(lr.site, lr.list_url): lr for lr in lists}
         if not lists:
             reasons.append("no_list_manifest")
         else:
-            if any(not _status_ok(lr.status) for lr in manifests.values()):
+            if any(not _status_ok(lr.status) or lr.error for lr in manifests.values()):
                 reasons.append("list_manifest_bad")
-            # C2: every CAT_PAGES sub on the year page has a list manifest; no
-            # unread sibling sub matching NOUN[cat]
-            for ym in years:
+            # a list page is T's only when it hangs off one of T's own ok year
+            # pages (same site and catalog stem): another year's or model's
+            # page never closes T (review F10)
+            if any((lr.site, A.list_stem_sub(lr.list_url)[0]) not in good_stems for lr in manifests.values()):
+                reasons.append("list_manifest_bad")
+            # C2: every CAT_PAGES sub on each year page read for T (every one,
+            # not only the pages C1 accepted) has a list manifest from that
+            # page's own stem; no unread sibling sub matching NOUN[cat]
+            for ym in [y for y in years if _status_ok(y.status) and not y.error]:
                 pages = A.site_cat_pages(ym.site).get(cat)
-                read_subs = {lr.list_url.rstrip("/").split("/parts-list/", 1)[-1].split("/", 1)[-1]
-                             .replace(".html", "") for lr in lists if lr.site == ym.site}
+                stem = A.year_stem(ym.year_url)
+                read_subs = {A.list_stem_sub(lr.list_url)[1] for lr in manifests.values()
+                             if lr.site == ym.site and A.list_stem_sub(lr.list_url)[0] == stem
+                             and _status_ok(lr.status) and not lr.error}
                 for sub in ym.subs:
                     tail = sub.split("/")[-1]
-                    hit = pages.search(sub) or pages.search(tail) if pages else False
-                    if hit and sub not in read_subs and tail not in {s.split("/")[-1] for s in read_subs}:
+                    hit = (pages.search(sub) or pages.search(tail)) if pages else False
+                    if hit and sub not in read_subs:
                         reasons.append("unread_sibling_page")   # a category page of T was not read
                     elif not hit and re.search(policy.NOUN.get(cat, r"$^"), sub, re.I) \
                             and sub not in (self.sibling_ignore.get(ym.site, {}).get(cat, {})):
@@ -648,19 +704,29 @@ class Curation:
             # C6 manifests fresh
             if any(self.stale(lr.retrieved) for lr in lists) or any(self.stale(y.retrieved) for y in years):
                 reasons.append("stale")
-        # C1: at least one matched pn's own fitment lists the vehicle-year
-        if members and not any(cc is m["klass"] for m in members.values()
-                               for cc, *_ in self.t_rows.get((T, cat), [])):
+        # C1: at least one matched pn's own fitment lists the vehicle-year;
+        # per merged cv, a cv whose own pages list matched rows needs one of
+        # them fitted to T through that cv
+        rows = self.t_rows.get((T, cat), [])
+        if members and not any(cc is m["klass"] for m in members.values() for cc, *_ in rows):
             reasons.append("listed_not_fitted_only")
+        for cv, yms in sorted(good_by_cv.items()):
+            stems = {(ym.site, A.year_stem(ym.year_url)) for ym in yms}
+            keys = {policy.pn_key(self.ns, lr.pn) for lr in lists
+                    if lr.matched and (lr.site, A.list_stem_sub(lr.list_url)[0]) in stems}
+            if keys and not any(c.key in keys and (t.cat_make, t.cat_model) == cv for c, r, f, t in rows):
+                reasons.append("listed_not_fitted_only")
         # C5 chain completeness
         for key, m in members.items():
-            for d in self.reach(cat, key, policy.CHAIN_DEPTH) | self.reach(cat, key, policy.CHAIN_DEPTH, down=False):
+            for d in self.chain_keys(cat, key):
                 dc = self.classes.get((d, cat))
                 if dc is None or not dc.verified:
                     reasons.append("uncrawled_chain_member")
+                elif any(self.stale(r.retrieved) for r in dc.records):
+                    reasons.append("stale")         # C6 covers what C5 relied on
             for d in self.reach(cat, key, policy.CHAIN_DEPTH):
                 dc = self.classes.get((d, cat))
-                if dc is not None and not any(cc is dc for cc, *_ in self.t_rows.get((T, cat), [])):
+                if dc is not None and not any(cc is dc for cc, *_ in rows):
                     reasons.append("chain_fitment_inconsistent")
         # C6 records fresh
         if any(self.stale(r.retrieved) for m in members.values() for r in m["klass"].records):
@@ -675,26 +741,36 @@ class Curation:
         return _uniq(reasons)
 
     def _suspect(self, lr: A.ListRow, cat: str) -> bool:
-        if lr.excluded_by in (None, "", "include_miss", "url_pn_mismatch"):
-            return False
+        """C4 for one unmatched row on T's page. Every unmatched row's head
+        phrase is re-run through the site's own rule, whatever the crawler
+        said (include_miss, rule:/global:, url_pn_mismatch, section_not_read,
+        None, '' or a reason this code does not know): a row whose head
+        phrase passes is a candidate T's cell never accounted for, so the
+        cell stays open. Only reman_dropped follows its spec rule (a suspect
+        for engine categories until R5b lands). When the rule cannot be
+        re-run offline, the row is a suspect (fail closed)."""
         if lr.excluded_by == "reman_dropped":
             return cat in policy.ENGINE_CATS
+        key = (lr.site, cat, lr.main, lr.aux, lr.group, lr.remark, lr.link, tuple(lr.notes), tuple(lr.locations))
+        cache = self.__dict__.setdefault("_suspect_cache", {})
+        if key in cache:
+            return cache[key]
         # head phrase: the name with every qualifier phrase deleted up to the
         # next comma ("Mirror Assy, Outer Rear View, W/Turn Signal Lamp" ->
         # "Mirror Assy, Outer Rear View")
         head = lambda s: re.sub(r"[\s,;]+$", "", N.QUALIFIER_RE.sub(" ", s or "")).strip()  # noqa: E731
+        info = [f"Location: {x}" for x in lr.locations] + list(lr.notes)
         fake = A.Record(site=lr.site, ns=self.ns, cat=cat, pn=lr.pn, key="", line=lr.line,
                         template=A.template_of(lr.site, {}), name=head(lr.main), aux=head(lr.aux),
                         other_names="", description="", list_url=lr.list_url, section=lr.section, position="",
                         list_location=[], note_texts=[], replaces=[], replaced_by=[], list_replaced_by=[],
                         chain_unknown=False, reman_flag=False, rows=[], flags=[], evidence_lines=[],
                         rendered=None, total=None, retrieved=lr.retrieved, seed=lr.seed, via=None,
-                        recrawl_of=None, product_url="", raw={"list_group": "", "list_remark": "",
-                                                              "list_info": []})
+                        recrawl_of=None, product_url=lr.link,
+                        raw={"list_group": lr.group, "list_remark": head(lr.remark), "list_info": info})
         m = A.rule_matches(fake)
-        # a head phrase that matches the include rule but was excluded is a
-        # suspect; when the rule cannot be re-run offline, fail closed
-        return m is not False
+        cache[key] = m is not False
+        return cache[key]
 
     # --------------------------------------------------- 5.11 eligibility
     def eligibility(self, T, cat, members, engine_mode=False) -> tuple[list, dict]:
@@ -1205,6 +1281,16 @@ def _status_ok(s) -> bool:
 def _title_names(title: str, cat_model: str, year: int) -> bool:
     t = re.sub(r"[^a-z0-9]", "", (title or "").lower())
     return str(year) in (title or "") and re.sub(r"[^a-z0-9]", "", cat_model.lower()) in t
+
+
+def _tokens(s: str) -> list:
+    return re.findall(r"[a-z0-9]+", (s or "").lower())
+
+
+def _has_run(hay: list, needle: list) -> bool:
+    """needle is a contiguous run of hay (token lists)."""
+    n = len(needle)
+    return n > 0 and any(hay[i:i + n] == needle for i in range(len(hay) - n + 1))
 
 
 def _uniq(xs):
