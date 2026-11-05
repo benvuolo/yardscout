@@ -89,3 +89,30 @@
 05:08:06 seg done tier=A Hyundai Tiburon [2003, 2008] seeds=[2003] records=1130 errors=0
 05:23:35 seg done tier=A Hyundai Accent [1995, 2005] seeds=[2005] records=1216 errors=0
 05:45:11 time budget reached records=1348
+05:45:19 start site=www.hyundaipartsdeal.com segments=35 tiers=['A', 'B']
+05:45:19 seg done tier=A Hyundai Sonata [2011, 2013] seeds=[2011] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Sonata [2006, 2010] seeds=[2009] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Elantra [2011, 2013] seeds=[2013] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Elantra [2007, 2010] seeds=[2010] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Santa Fe [2007, 2012] seeds=[2007] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Accent [2012, 2017] seeds=[2013] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Sonata [2015, 2017] seeds=[2015] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Elantra [2014, 2016] seeds=[2016] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Accent [2006, 2011] seeds=[2009] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Elantra [2004, 2006] seeds=[2005] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Genesis [2009, 2016] seeds=[2013] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Veloster [2012, 2017] seeds=[2013] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Sonata [1997, 2005] seeds=[2004] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Elantra [2017, 2018] seeds=[2017] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Santa Fe [2001, 2004] seeds=[2004] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Tucson [2005, 2008] seeds=[2006] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Sonata [2014, 2014] seeds=[2014] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Elantra [1995, 2003] seeds=[2002] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Tiburon [2003, 2008] seeds=[2003] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Accent [1995, 2005] seeds=[2005] records=1348 errors=0
+05:45:19 seg done tier=A Hyundai Azera [2006, 2017] seeds=[2006] records=1348 errors=0
+05:53:40 seg done tier=A Hyundai Santa Fe [2005, 2006] seeds=[2005, 2006] records=1355 errors=0
+06:03:17 seg done tier=A Hyundai Santa Fe [2013, 2018] seeds=[2013] records=1410 errors=0
+06:10:36 seg done tier=A Hyundai Santa Fe Sport [2013, 2018] seeds=[2013] records=1447 errors=0
+06:16:45 seg done tier=A Hyundai Tucson [2010, 2013] seeds=[2013] records=1478 errors=0
+06:16:45 time budget reached records=1478
