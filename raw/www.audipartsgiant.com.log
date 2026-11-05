@@ -108,3 +108,35 @@
 06:56:29 seg done tier=B Audi TT [2000, 2008] seeds=[2001, 2008, 2007] records=950 errors=12
 07:06:53 seg done tier=B Audi S4 [2000, 2021] seeds=[2005, 2014, 2012] records=996 errors=12
 07:06:53 time budget reached records=996
+07:07:01 start site=www.audipartsgiant.com segments=14 tiers=['A', 'B']
+07:07:01 seg done tier=A Audi A4 [1996, 2019] seeds=[2008] records=996 errors=12
+07:07:01 seg done tier=A Audi A6 [1997, 2017] seeds=[2008] records=996 errors=12
+07:07:01 seg done tier=A Audi Q5 [2009, 2022] seeds=[2012] records=996 errors=12
+07:07:01 seg done tier=A Audi Q7 [2007, 2017] seeds=[2008] records=996 errors=12
+07:07:01 seg done tier=A Audi A3 [2006, 2019] seeds=[2006] records=996 errors=12
+07:07:01 seg done tier=A Audi A4 Quattro [1997, 2016] seeds=[2009] records=996 errors=12
+07:07:01 seg done tier=A Audi A5 [2009, 2022] seeds=[2010] records=996 errors=12
+07:07:01 seg done tier=A Audi A6 Quattro [2000, 2015] seeds=[2006] records=996 errors=12
+07:07:01 seg done tier=A Audi TT [2000, 2008] seeds=[2001] records=996 errors=12
+07:07:01 seg done tier=A Audi S4 [2000, 2021] seeds=[2005] records=996 errors=12
+07:07:01 seg done tier=A Audi A8 [1997, 2011] seeds=[2006] records=996 errors=12
+07:07:01 seg done tier=A Audi Allroad [2001, 2015] seeds=[2005] records=996 errors=12
+07:07:01 seg done tier=A Audi A5 Quattro [2009, 2012] seeds=[2011] records=996 errors=12
+07:07:01 seg done tier=A Audi Q3 [2015, 2021] seeds=[2016] records=996 errors=12
+07:07:01 seg done tier=B Audi A4 [1996, 2019] seeds=[2008] records=996 errors=12
+07:07:01 seg done tier=B Audi A6 [1997, 2017] seeds=[2008] records=996 errors=12
+07:07:01 seg done tier=B Audi Q5 [2009, 2022] seeds=[2012] records=996 errors=12
+07:07:01 seg done tier=B Audi Q7 [2007, 2017] seeds=[2008] records=996 errors=12
+07:07:01 seg done tier=B Audi A3 [2006, 2019] seeds=[2006] records=996 errors=12
+07:07:01 seg done tier=B Audi A4 Quattro [1997, 2016] seeds=[2009] records=996 errors=12
+07:07:01 seg done tier=B Audi A5 [2009, 2022] seeds=[2010] records=996 errors=12
+07:07:01 seg done tier=B Audi A6 Quattro [2000, 2015] seeds=[2006] records=996 errors=12
+07:07:01 seg done tier=B Audi TT [2000, 2008] seeds=[2001] records=996 errors=12
+07:07:01 seg done tier=B Audi S4 [2000, 2021] seeds=[2005] records=996 errors=12
+07:16:53 seg done tier=B Audi A8 [1997, 2011] seeds=[2006, 2004, 2003] records=1041 errors=12
+07:19:41 nav-fail Audi Allroad 2011: NavError: Audi Allroad 2011: no catalog model for this year
+07:19:41 seg done tier=B Audi Allroad [2001, 2015] seeds=[2005, 2011] records=1052 errors=13
+07:21:09 product-fail https://www.audipartsgiant.com/genuine/audi~bumper-cover~8t0807105gru: NavError: no __INITIAL_STORE__ on page
+07:22:21 seg done tier=B Audi A5 Quattro [2009, 2012] seeds=[2011] records=1062 errors=14
+07:29:49 seg done tier=B Audi Q3 [2015, 2021] seeds=[2016, 2020] records=1098 errors=14
+07:29:49 finished records=1098 errors=14
