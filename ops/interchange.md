@@ -521,3 +521,16 @@ Curator notes:
   lists the year. Fitment prints badges ("C300", "C63 AMG"), and the seed model
   stays the class name. crawl.py's coverage check cannot match class to badge,
   so these segments use all 3 seeds.
+- 02:03-02:18 UTC incident: with ~14 separate Actions runs (one per site,
+  4 s per site, ~3.5 req/s across the dealer network), Toyota, Jeep and
+  Mopar timed out at 02:03-02:05, vwpartsgiant answered HTTP 503 (02:04) and
+  moparpartsgiant HTTP 403 (02:18). The breaker stopped both; their .blocked
+  markers on oem-raw stay (no retries without an owner decision). Response
+  (b23fd65): 8 s per site, ONE capped run for all sites (max-parallel 8,
+  ~1 req/s network-wide), all separate runs cancelled (<= 1 slice lost per
+  site), 15-minute cool-down, then a single "all" dispatch. Records on
+  oem-raw at 02:30: 8,084 across 17 files.
+- 02:25 UTC: CURATION_SPEC.md landed (24c031b; build/review stopped on the
+  account's 5-hour usage limit). Hub workflow wf_9b3745bc-31f now builds three
+  tracks on branches: Phase 0 guards + hybrid fix, crawler R1/R2/R4/R5/R6,
+  offline curation pipeline. Owner questions are in CURATION_SPEC.md §13.
