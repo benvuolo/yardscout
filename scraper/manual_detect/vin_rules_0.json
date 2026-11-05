@@ -1,0 +1,1910 @@
+{
+ "worklist": "vin_rules_0",
+ "makes": [
+  "Honda",
+  "Acura"
+ ],
+ "generated_utc": "2026-11-05T01:37Z",
+ "generator": "scraper/manual_detect/vin_rules_0.py",
+ "inputs": {
+  "inventory_live": "docs/data/inventory_live.json",
+  "vehicle_extras": "docs/data/vehicle_extras.json",
+  "vin_decodes": "docs/data/vin_decodes.json.gz",
+  "ground_truth": "scraper/manual_detect/ground_truth.jsonl (uniformCell lines treated as unlabelled)",
+  "epa": "scraper/manual_detect/epa/vehicles.csv"
+ },
+ "answer": {
+  "honda": "VIN encodes it for every model year from 1984 on: character 6 for MY1984-1986, character 7 (odd digit = manual) for MY1987-2009, character 7 (A/C/E/G = manual) for MY2010 on.",
+  "acura": "VIN encodes it for every model year (1986 on): character 7, odd digit = manual for MY1986-2009, A/C/E/G = manual for MY2010 on.",
+  "vpic_already_decodes_it": "vPIC already turns this code into TransmissionStyle for almost every Honda/Acura VIN (Honda 21,026 and Acura 3,534 lot cars have a vPIC transmission), so the rules newly reach only the few cars where vPIC is blank or the VIN is not in the decode cache. Their larger value is correcting vPIC where it contradicts Honda's own table (vpic_conflicts)."
+ },
+ "summary": {
+  "lot_cars_feed_make_honda": 24360,
+  "lot_cars_feed_make_acura": 4098,
+  "scan": {
+   "honda_acura_wmi": 24972,
+   "covered": 24870,
+   "bad_check_digit": 93,
+   "no_rule": 9,
+   "no_rule_Honda_digit": 1,
+   "no_rule_Honda_pre1984": 8
+  },
+  "rules": 12,
+  "newly_confirmed_manual_keep_rules": 61,
+  "newly_confirmed_manual_all_rules": 61
+ },
+ "vin_scheme": {
+  "positions": "1-3 WMI; 4-8 Honda 'model code' (4-5 line, 6 line/engine, 7 body + transmission, 8 grade); 9 check digit; 10 model year; 11 plant; 12-17 serial",
+  "char7_digit_MY1987_2009_Honda_MY1986_2009_Acura": {
+   "1": "2-door, manual",
+   "2": "2-door, automatic",
+   "3": "2-door hatchback / 3-door, manual",
+   "4": "2-door hatchback / 3-door, automatic",
+   "5": "4-door sedan, manual",
+   "6": "4-door sedan, automatic (incl. CVT)",
+   "7": "5-door / wagon / SUV / van, manual",
+   "8": "5-door / wagon / SUV / van, automatic"
+  },
+  "char7_letter_MY2010_on": {
+   "A": "2-door, manual",
+   "B": "2-door, automatic/CVT",
+   "C": "3-door, manual",
+   "D": "3-door, automatic/CVT",
+   "E": "4-door, manual",
+   "F": "4-door, automatic/CVT/DCT",
+   "G": "5-door, manual",
+   "H": "5-door, automatic/CVT"
+  },
+  "char6_MY1984_1986_Honda": {
+   "3": "3-speed automatic",
+   "4": "4-speed manual",
+   "5": "5-speed manual",
+   "6": "5-speed manual + Super Low",
+   "7": "4-speed automatic"
+  },
+  "char7_body_MY1984_1986_Honda": {
+   "2": "2-door sedan",
+   "3": "2-door hatchback or coupe",
+   "4": "4-door sedan",
+   "5": "4-door wagon"
+  }
+ },
+ "not_encoded_or_not_ruled": [
+  "Honda MY1981-1983: not ruled. The earliest Honda filings in NHTSA's MID are from August 1983 (MY1984). vPIC's decodes for the 7 MY1981-83 Hondas on the lots are consistent with the MY1984 layout (character 6 = transmission), but no Honda document for those years was found, so no rule covers them.",
+  "Honda MY1984 Civic hatchback/CRX/sedan (line codes AF, AG, AH, AK): not ruled for 1984. The MY1984 filing in MID covers only Accord, Prelude and Civic Wagon; the Civic hatchback/sedan table for 1984 was not found (1985 and 1986 tables were).",
+  "Honda Passport (1994-2002, WMI 4S6) and Acura SLX (1996-99, WMI JAE) are Isuzu-built and use Isuzu's VIN layout; Honda's character-7 code does not apply and no rule here covers them.",
+  "Honda/Acura VINs whose character 7 is outside the table for the era (e.g. a letter on a 2001-2009 VIN or a digit on a 2010+ VIN) are not ruled; on the lots they are listing-year errors or mis-typed VINs.",
+  "The code says manual vs automatic, not the gear count or the gearbox model; speeds stay with vPIC/EPA. Automatic codes cover CVT and DCT as well (e.g. 2015+ TLX 'F' = 8-speed DCT or 9-speed automatic).",
+  "Cars without a VIN (Honda 2,699, Acura 426 on the lots) cannot be reached by these rules."
+ ],
+ "rules": [
+  {
+   "id": "honda_vin7_digit_1987_2009_manual",
+   "make": "Honda",
+   "claim": "manual",
+   "status": "keep",
+   "scope": {
+    "make": "Honda",
+    "models": "every Honda-brand passenger car, MPV and truck with a Honda WMI (Accord, Civic, CRX, del Sol, Prelude, S2000, Insight, Fit, CR-V, Element, Odyssey, Pilot, Ridgeline ...)",
+    "model_years": [
+     1987,
+     2009
+    ],
+    "wmi": [
+     "19X",
+     "1HG",
+     "2HG",
+     "2HJ",
+     "2HK",
+     "3CZ",
+     "3HG",
+     "5FN",
+     "5FP",
+     "5J6",
+     "5J7",
+     "5KB",
+     "7FA",
+     "JH1",
+     "JHL",
+     "JHM",
+     "SHH",
+     "SHS"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "1",
+     "3",
+     "5",
+     "7"
+    ],
+    "table": {
+     "1": "2-door, manual",
+     "3": "2-door hatchback / 3-door, manual",
+     "5": "4-door sedan, manual",
+     "7": "5-door / wagon / SUV / van, manual"
+    },
+    "exclusion": "MY1997 Accord (characters 4-5 CD or CE) is carved out into honda_accord_1997_vin7_*: vPIC decodes those VINs inverted, so the ground truth cannot validate them"
+   },
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[1357][A-HJ-NPR-Z0-9]{2}[1-9A-HJ-NPR-Y]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
+     "doc": "NHTSA 01-22-N11B-2373, American Honda letter 1986-06-27, 1987 Honda Accord and Prelude",
+     "says": "Character 7 = 'Body type and Transmission representation': 1 = 2-door sedan Manual, 2 = 2-door sedan Automatic, 3 = 2-door hatchback Manual, 4 = 2-door hatchback Automatic, 5 = 4-door sedan Manual, 6 = 4-door sedan Automatic. JHMCA552 = Accord sedan 5M, JHMCA562 = 4A, JHMBA314 = Prelude Si 5M, JHMBA324 = 4A."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/ee50d2f2-0644-4c5b-b967-8df8837e14d6",
+     "doc": "NHTSA 01-22-N11B-2350, American Honda letter 1986-07-18, 1987 Honda Civic (CRX, hatchback, sedan, Wagon, Wagovan)",
+     "says": "Character 7 = body type and transmission: 3 = 2-door hatchback or coupe Manual, 4 = Automatic, 5 = 4-door sedan Manual, 6 = Automatic, 7 = 4-door wagon manual, 8 = 4-door wagon automatic. JHMEC572 Civic Wagon 5M, JHMEC582 4A, JHMEY172 Wagovan 5M."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b8c1ed83-b581-4aaf-b66e-989269918f50",
+     "doc": "NHTSA 01-22-N11B-2440, American Honda letter 1986-08-26, revised 1987 Accord/Prelude adding Civic Wagon Real Time 4WD",
+     "says": "Same character-7 table plus 7 = 4-door wagon Manual; JHMEC672 Civic Wagon Real Time 4WD = 5M+SL."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+     "doc": "NHTSA 01-022-N11B-6178, American Honda letter 1996-07-01, 1997 Honda Civic and Accord, 1997 Acura 3.0CL",
+     "says": "1997 Accord 2nd-section table: CD552/CD551/CD553/CD554/CD550/CD555/CD556 = 4-door sedan 5MT; CD562/CD561/CD563/CD564/CD560/CD565/CD566 = 4-door sedan 4AT; CE663/CE664/CE665/CE667 = V6 sedan 4AT (C27A4); CD71x = coupe 5MT, CD72x = coupe 4AT; CE172 = wagon 5MT, CE182/CE183/CE189 = wagon 4AT. 1997 Civic: EJ65x sedan 5MT, EJ66x sedan 4AT, EJ61x/EJ62x coupe 5MT/4AT, EJ71x/EJ72x HX coupe 5MT/CVT, EJ63x/EJ64x hatchback 5MT/4AT. 1997 3.0CL YA224/YA225 = 2/CPE 4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/260e4159-7c32-4e16-8fc1-b50a6b3aa5ce",
+     "doc": "NHTSA 01-022-N11B-10902, American Honda letter 2005-10-31, 2007 Honda Fit",
+     "says": "2007 Honda Fit model codes: GD374 = 5MT 5DR hatchback, GD384 = 5AT, GD376 = 5MT, GD386 = 5AT (engine L15A1)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 1364,
+    "checkable_ground_truth": 1281,
+    "agree": 1281,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 1281,
+    "uniform_cell_lines_excluded": 35,
+    "uniform_cell_lines_that_would_agree": 35,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_crosscheck": {
+     "consistent": 1360,
+     "no_epa_match": 4
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 0,
+    "published_label_contradicts_examples": [],
+    "cars_without_trans_info": 48,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 22,
+     "not_in_cache_backup": 26
+    },
+    "codes_seen": {
+     "char7=5: 4-door sedan, manual": 681,
+     "char7=1: 2-door, manual": 519,
+     "char7=7: 5-door / wagon / SUV / van, manual": 105,
+     "char7=3: 2-door hatchback / 3-door, manual": 59
+    },
+    "top_models": {
+     "Civic": 819,
+     "Accord": 389,
+     "Fit": 53,
+     "CR-V": 31,
+     "Prelude": 27,
+     "Element": 15,
+     "Civic Del Sol": 11,
+     "Civic Hybrid": 8,
+     "Insight": 4,
+     "CRX": 4,
+     "Accord Wagon": 1,
+     "Civic Wagon": 1
+    },
+    "years_seen": [
+     1987,
+     2009
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 48,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "honda_vin7_digit_1987_2009_automatic",
+   "make": "Honda",
+   "claim": "automatic",
+   "status": "keep",
+   "scope": {
+    "make": "Honda",
+    "models": "every Honda-brand passenger car, MPV and truck with a Honda WMI (Accord, Civic, CRX, del Sol, Prelude, S2000, Insight, Fit, CR-V, Element, Odyssey, Pilot, Ridgeline ...)",
+    "model_years": [
+     1987,
+     2009
+    ],
+    "wmi": [
+     "19X",
+     "1HG",
+     "2HG",
+     "2HJ",
+     "2HK",
+     "3CZ",
+     "3HG",
+     "5FN",
+     "5FP",
+     "5J6",
+     "5J7",
+     "5KB",
+     "7FA",
+     "JH1",
+     "JHL",
+     "JHM",
+     "SHH",
+     "SHS"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "2",
+     "4",
+     "6",
+     "8"
+    ],
+    "table": {
+     "2": "2-door, automatic",
+     "4": "2-door hatchback / 3-door, automatic",
+     "6": "4-door sedan, automatic (incl. CVT)",
+     "8": "5-door / wagon / SUV / van, automatic"
+    },
+    "exclusion": "MY1997 Accord (characters 4-5 CD or CE) is carved out into honda_accord_1997_vin7_*: vPIC decodes those VINs inverted, so the ground truth cannot validate them"
+   },
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[2468][A-HJ-NPR-Z0-9]{2}[1-9A-HJ-NPR-Y]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
+     "doc": "NHTSA 01-22-N11B-2373, American Honda letter 1986-06-27, 1987 Honda Accord and Prelude",
+     "says": "Character 7 = 'Body type and Transmission representation': 1 = 2-door sedan Manual, 2 = 2-door sedan Automatic, 3 = 2-door hatchback Manual, 4 = 2-door hatchback Automatic, 5 = 4-door sedan Manual, 6 = 4-door sedan Automatic. JHMCA552 = Accord sedan 5M, JHMCA562 = 4A, JHMBA314 = Prelude Si 5M, JHMBA324 = 4A."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/ee50d2f2-0644-4c5b-b967-8df8837e14d6",
+     "doc": "NHTSA 01-22-N11B-2350, American Honda letter 1986-07-18, 1987 Honda Civic (CRX, hatchback, sedan, Wagon, Wagovan)",
+     "says": "Character 7 = body type and transmission: 3 = 2-door hatchback or coupe Manual, 4 = Automatic, 5 = 4-door sedan Manual, 6 = Automatic, 7 = 4-door wagon manual, 8 = 4-door wagon automatic. JHMEC572 Civic Wagon 5M, JHMEC582 4A, JHMEY172 Wagovan 5M."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b8c1ed83-b581-4aaf-b66e-989269918f50",
+     "doc": "NHTSA 01-22-N11B-2440, American Honda letter 1986-08-26, revised 1987 Accord/Prelude adding Civic Wagon Real Time 4WD",
+     "says": "Same character-7 table plus 7 = 4-door wagon Manual; JHMEC672 Civic Wagon Real Time 4WD = 5M+SL."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+     "doc": "NHTSA 01-022-N11B-6178, American Honda letter 1996-07-01, 1997 Honda Civic and Accord, 1997 Acura 3.0CL",
+     "says": "1997 Accord 2nd-section table: CD552/CD551/CD553/CD554/CD550/CD555/CD556 = 4-door sedan 5MT; CD562/CD561/CD563/CD564/CD560/CD565/CD566 = 4-door sedan 4AT; CE663/CE664/CE665/CE667 = V6 sedan 4AT (C27A4); CD71x = coupe 5MT, CD72x = coupe 4AT; CE172 = wagon 5MT, CE182/CE183/CE189 = wagon 4AT. 1997 Civic: EJ65x sedan 5MT, EJ66x sedan 4AT, EJ61x/EJ62x coupe 5MT/4AT, EJ71x/EJ72x HX coupe 5MT/CVT, EJ63x/EJ64x hatchback 5MT/4AT. 1997 3.0CL YA224/YA225 = 2/CPE 4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/260e4159-7c32-4e16-8fc1-b50a6b3aa5ce",
+     "doc": "NHTSA 01-022-N11B-10902, American Honda letter 2005-10-31, 2007 Honda Fit",
+     "says": "2007 Honda Fit model codes: GD374 = 5MT 5DR hatchback, GD384 = 5AT, GD376 = 5MT, GD386 = 5AT (engine L15A1)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 16078,
+    "checkable_ground_truth": 11458,
+    "agree": 11456,
+    "disagree": 2,
+    "agreement": 0.99983,
+    "checkable_positives_manual": null,
+    "uniform_cell_lines_excluded": 4408,
+    "uniform_cell_lines_that_would_agree": 4277,
+    "ground_truth_speeds_only_excluded": 2,
+    "disagree_examples": [
+     {
+      "vin": "JHMGD38607S056403",
+      "year": 2007,
+      "model": "Fit",
+      "ground_truth": "5-spd Manual/Standard",
+      "vpic_trim": "",
+      "source": "vin"
+     },
+     {
+      "vin": "JHMGD38638S050581",
+      "year": 2008,
+      "model": "Fit",
+      "ground_truth": "5-spd Manual/Standard",
+      "vpic_trim": "",
+      "source": "vin"
+     }
+    ],
+    "epa_crosscheck": {
+     "consistent": 16073,
+     "no_epa_match": 5
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 133,
+    "published_label_contradicts_examples": [
+     {
+      "vin": "JHMGD38698S063240",
+      "year": 2008,
+      "model": "Fit",
+      "published": "5-spd Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "JHMGD38628S033318",
+      "year": 2008,
+      "model": "Fit",
+      "published": "5-spd Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "JHMGD386X7S022937",
+      "year": 2007,
+      "model": "Fit",
+      "published": "5-spd Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "JHMGD38647S067498",
+      "year": 2007,
+      "model": "Fit",
+      "published": "5-spd Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "JHMGD38408S054733",
+      "year": 2008,
+      "model": "Fit",
+      "published": "5-spd Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "JHMGD38607S016144",
+      "year": 2007,
+      "model": "Fit",
+      "published": "5-spd Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "JHMGD38627S026061",
+      "year": 2007,
+      "model": "Fit",
+      "published": "5-spd Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "JHMGD38697S004039",
+      "year": 2007,
+      "model": "Fit",
+      "published": "5-spd Manual/Standard",
+      "src": "vin"
+     }
+    ],
+    "cars_without_trans_info": 210,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 45,
+     "not_in_cache_backup": 165
+    },
+    "codes_seen": {
+     "char7=6: 4-door sedan, automatic (incl. CVT)": 8396,
+     "char7=8: 5-door / wagon / SUV / van, automatic": 5710,
+     "char7=2: 2-door, automatic": 1948,
+     "char7=4: 2-door hatchback / 3-door, automatic": 24
+    },
+    "top_models": {
+     "Accord": 6115,
+     "Civic": 3938,
+     "Odyssey": 2545,
+     "Pilot": 1382,
+     "CR-V": 1288,
+     "Element": 277,
+     "Fit": 191,
+     "Ridgeline": 173,
+     "Civic Hybrid": 99,
+     "Prelude": 27,
+     "Accord Hybrid": 20,
+     "Civic Del Sol": 9
+    },
+    "years_seen": [
+     1987,
+     2009
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 210
+  },
+  {
+   "id": "honda_vin7_letter_2010_on_manual",
+   "make": "Honda",
+   "claim": "manual",
+   "status": "keep",
+   "scope": {
+    "make": "Honda",
+    "models": "every Honda-brand vehicle with a Honda WMI, MY2010 on (character 7 is a letter from MY2010)",
+    "model_years": [
+     2010,
+     null
+    ],
+    "wmi": [
+     "19X",
+     "1HG",
+     "2HG",
+     "2HJ",
+     "2HK",
+     "3CZ",
+     "3HG",
+     "5FN",
+     "5FP",
+     "5J6",
+     "5J7",
+     "5KB",
+     "7FA",
+     "JH1",
+     "JHL",
+     "JHM",
+     "SHH",
+     "SHS"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "A",
+     "C",
+     "E",
+     "G"
+    ],
+    "table": {
+     "A": "2-door, manual",
+     "C": "3-door, manual",
+     "E": "4-door, manual",
+     "G": "5-door, manual"
+    }
+   },
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[ACEG]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+     "doc": "MID ORG5294, American Honda filing dated 2009-08-24, 2010 Honda/Acura (MDX, TL, Civic, CR-V, Element, Odyssey, Pilot)",
+     "says": "Positions 4-8 'model code' tables, first letter-coded year: FA1E2 Civic DX 5MT 4DR Sedan / FA1F2 5AT; FA5E5 Civic Si 6MT 4DR; FA3F2 Civic Hybrid CVT 4DR; FG1A2 Civic DX 5MT 2DR Coupe / FG1B2 5AT; FG2A5 Civic Si 6MT 2DR; YH2G7 Element 4WD EX 5MT 5DR SUV / YH1H3 5AT; UA9E5 TL SH-AWD 6MT 4DR / UA9F5 5AT; RE3H3 CR-V 5AT 5DR; RL3H2 Odyssey 5AT 5DR VAN; YF4H2 Pilot 5AT 5DR SUV; YD2H2 MDX 6AT 5DR SUV."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f293cffc-27b6-4ce0-9f20-412a4c955188",
+     "doc": "MID ORG5705, American Honda letter 2010-03-10, 2011 Honda CR-Z",
+     "says": "ZF1C4/ZF1C6 = CR-Z 6MT 3DR HatchBack; ZF1D4/ZF1D6 = CR-Z CVT 3DR HatchBack (character 7 C = 3-door manual, D = 3-door automatic/CVT)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
+     "doc": "MID ORG21966, American Honda letter 2023-07-20, 2024 Honda Civic Type R",
+     "says": "FL5G4 = CIVIC HATCHBACK Type R, 6MT, 5DR Hatchback (character 7 G = 5-door manual still in use for MY2024)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 86,
+    "checkable_ground_truth": 82,
+    "agree": 82,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 82,
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_crosscheck": {
+     "consistent": 86
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 0,
+    "published_label_contradicts_examples": [],
+    "cars_without_trans_info": 4,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 3,
+     "not_in_cache_backup": 1
+    },
+    "codes_seen": {
+     "char7=E: 4-door, manual": 36,
+     "char7=G: 5-door, manual": 21,
+     "char7=A: 2-door, manual": 21,
+     "char7=C: 3-door, manual": 8
+    },
+    "top_models": {
+     "Civic": 36,
+     "Accord": 22,
+     "Fit": 20,
+     "CR-Z": 8
+    },
+    "years_seen": [
+     2010,
+     2019
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 4,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "honda_vin7_letter_2010_on_automatic",
+   "make": "Honda",
+   "claim": "automatic",
+   "status": "keep",
+   "scope": {
+    "make": "Honda",
+    "models": "every Honda-brand vehicle with a Honda WMI, MY2010 on (character 7 is a letter from MY2010)",
+    "model_years": [
+     2010,
+     null
+    ],
+    "wmi": [
+     "19X",
+     "1HG",
+     "2HG",
+     "2HJ",
+     "2HK",
+     "3CZ",
+     "3HG",
+     "5FN",
+     "5FP",
+     "5J6",
+     "5J7",
+     "5KB",
+     "7FA",
+     "JH1",
+     "JHL",
+     "JHM",
+     "SHH",
+     "SHS"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "B",
+     "D",
+     "F",
+     "H"
+    ],
+    "table": {
+     "B": "2-door, automatic/CVT",
+     "D": "3-door, automatic/CVT",
+     "F": "4-door, automatic/CVT/DCT",
+     "H": "5-door, automatic/CVT"
+    }
+   },
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[BDFH]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+     "doc": "MID ORG5294, American Honda filing dated 2009-08-24, 2010 Honda/Acura (MDX, TL, Civic, CR-V, Element, Odyssey, Pilot)",
+     "says": "Positions 4-8 'model code' tables, first letter-coded year: FA1E2 Civic DX 5MT 4DR Sedan / FA1F2 5AT; FA5E5 Civic Si 6MT 4DR; FA3F2 Civic Hybrid CVT 4DR; FG1A2 Civic DX 5MT 2DR Coupe / FG1B2 5AT; FG2A5 Civic Si 6MT 2DR; YH2G7 Element 4WD EX 5MT 5DR SUV / YH1H3 5AT; UA9E5 TL SH-AWD 6MT 4DR / UA9F5 5AT; RE3H3 CR-V 5AT 5DR; RL3H2 Odyssey 5AT 5DR VAN; YF4H2 Pilot 5AT 5DR SUV; YD2H2 MDX 6AT 5DR SUV."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f293cffc-27b6-4ce0-9f20-412a4c955188",
+     "doc": "MID ORG5705, American Honda letter 2010-03-10, 2011 Honda CR-Z",
+     "says": "ZF1C4/ZF1C6 = CR-Z 6MT 3DR HatchBack; ZF1D4/ZF1D6 = CR-Z CVT 3DR HatchBack (character 7 C = 3-door manual, D = 3-door automatic/CVT)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
+     "doc": "MID ORG21966, American Honda letter 2023-07-20, 2024 Honda Civic Type R",
+     "says": "FL5G4 = CIVIC HATCHBACK Type R, 6MT, 5DR Hatchback (character 7 G = 5-door manual still in use for MY2024)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 3566,
+    "checkable_ground_truth": 2083,
+    "agree": 2083,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": null,
+    "uniform_cell_lines_excluded": 1446,
+    "uniform_cell_lines_that_would_agree": 1446,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_crosscheck": {
+     "consistent": 3566
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 0,
+    "published_label_contradicts_examples": [],
+    "cars_without_trans_info": 37,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 4,
+     "not_in_cache_backup": 33
+    },
+    "codes_seen": {
+     "char7=F: 4-door, automatic/CVT/DCT": 1682,
+     "char7=H: 5-door, automatic/CVT": 1553,
+     "char7=B: 2-door, automatic/CVT": 314,
+     "char7=D: 3-door, automatic/CVT": 17
+    },
+    "top_models": {
+     "Accord": 1057,
+     "Civic": 905,
+     "Odyssey": 557,
+     "Pilot": 416,
+     "CR-V": 234,
+     "Fit": 121,
+     "Insight": 95,
+     "Crosstour": 46,
+     "Accord Crosstour": 45,
+     "Ridgeline": 29,
+     "HR-V": 23,
+     "CR-Z": 17
+    },
+    "years_seen": [
+     2010,
+     2026
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 37
+  },
+  {
+   "id": "acura_vin7_digit_1986_2009_manual",
+   "make": "Acura",
+   "claim": "manual",
+   "status": "keep",
+   "scope": {
+    "make": "Acura",
+    "models": "every Acura (Integra, Legend, Vigor, CL, TL, RL, RSX, TSX, NSX, MDX, RDX, ZDX ...) with an Acura WMI",
+    "model_years": [
+     1986,
+     2009
+    ],
+    "wmi": [
+     "19U",
+     "19V",
+     "2HH",
+     "2HN",
+     "2HU",
+     "3HD",
+     "5FR",
+     "5FS",
+     "5J0",
+     "5J8",
+     "5KC",
+     "JH4"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "1",
+     "3",
+     "5",
+     "7"
+    ],
+    "table": {
+     "1": "2-door, manual",
+     "3": "2-door hatchback / 3-door, manual",
+     "5": "4-door sedan, manual",
+     "7": "5-door / wagon / SUV / van, manual"
+    }
+   },
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[1357]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+     "doc": "NHTSA 01-22-N11B-2081, American Honda letter 1985-11-19, 1986 Acura Integra (and 1986 Civic Wagovan)",
+     "says": "1986 Acura already uses character 7 = 'Body type and Transmission representation': 3 = 3-door hatchback 5-speed manual, 4 = 3-door hatchback 4-speed automatic, 7 = 5-door hatchback 5-speed manual, 8 = 5-door hatchback 4-speed automatic. Same letter re-issues the 1986 Honda table (character 6 = transmission; VN552 Civic Wagovan 5M)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ac16ebd-6ab7-49b1-ae7d-eee4f41ac222",
+     "doc": "NHTSA 01-22-N11B-3143, American Honda letter 1988-06-10, 1989 Acura Integra",
+     "says": "DA334 = Integra 3-door RS 5M, DA344 = 3-door RS 4A, DA335/DA345 = LS 5M/4A, DA174/DA184 = 5-door RS 5M/4A, DA175/DA185 = 5-door LS 5M/4A."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+     "doc": "NHTSA 01-022-N11B-6178, American Honda letter 1996-07-01, 1997 Honda Civic and Accord, 1997 Acura 3.0CL",
+     "says": "1997 Accord 2nd-section table: CD552/CD551/CD553/CD554/CD550/CD555/CD556 = 4-door sedan 5MT; CD562/CD561/CD563/CD564/CD560/CD565/CD566 = 4-door sedan 4AT; CE663/CE664/CE665/CE667 = V6 sedan 4AT (C27A4); CD71x = coupe 5MT, CD72x = coupe 4AT; CE172 = wagon 5MT, CE182/CE183/CE189 = wagon 4AT. 1997 Civic: EJ65x sedan 5MT, EJ66x sedan 4AT, EJ61x/EJ62x coupe 5MT/4AT, EJ71x/EJ72x HX coupe 5MT/CVT, EJ63x/EJ64x hatchback 5MT/4AT. 1997 3.0CL YA224/YA225 = 2/CPE 4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/836ed5a1-3594-439d-a5dd-cd214c21621b",
+     "doc": "NHTSA 01-022-N11B-8561 (AHCERT-220003), American Honda letter 2002-01-02, 2003 Acura 3.2TL",
+     "says": "UA566/UA567/UA568/UA569 = 3.2TL 4DR Sedan 5AT (character 7 = 6)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 101,
+    "checkable_ground_truth": 93,
+    "agree": 93,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 93,
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_crosscheck": {
+     "consistent": 97,
+     "no_epa_match": 4
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 0,
+    "published_label_contradicts_examples": [],
+    "cars_without_trans_info": 8,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 8
+    },
+    "codes_seen": {
+     "char7=3: 2-door hatchback / 3-door, manual": 48,
+     "char7=5: 4-door sedan, manual": 44,
+     "char7=1: 2-door, manual": 8,
+     "char7=7: 5-door / wagon / SUV / van, manual": 1
+    },
+    "top_models": {
+     "Integra": 28,
+     "RSX": 27,
+     "TSX": 16,
+     "TL": 15,
+     "CL": 8,
+     "Legend": 3,
+     "EL": 2,
+     "CSX": 2
+    },
+    "years_seen": [
+     1986,
+     2009
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 8,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "acura_vin7_digit_1986_2009_automatic",
+   "make": "Acura",
+   "claim": "automatic",
+   "status": "keep",
+   "scope": {
+    "make": "Acura",
+    "models": "every Acura (Integra, Legend, Vigor, CL, TL, RL, RSX, TSX, NSX, MDX, RDX, ZDX ...) with an Acura WMI",
+    "model_years": [
+     1986,
+     2009
+    ],
+    "wmi": [
+     "19U",
+     "19V",
+     "2HH",
+     "2HN",
+     "2HU",
+     "3HD",
+     "5FR",
+     "5FS",
+     "5J0",
+     "5J8",
+     "5KC",
+     "JH4"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "2",
+     "4",
+     "6",
+     "8"
+    ],
+    "table": {
+     "2": "2-door, automatic",
+     "4": "2-door hatchback / 3-door, automatic",
+     "6": "4-door sedan, automatic (incl. CVT)",
+     "8": "5-door / wagon / SUV / van, automatic"
+    }
+   },
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[2468]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+     "doc": "NHTSA 01-22-N11B-2081, American Honda letter 1985-11-19, 1986 Acura Integra (and 1986 Civic Wagovan)",
+     "says": "1986 Acura already uses character 7 = 'Body type and Transmission representation': 3 = 3-door hatchback 5-speed manual, 4 = 3-door hatchback 4-speed automatic, 7 = 5-door hatchback 5-speed manual, 8 = 5-door hatchback 4-speed automatic. Same letter re-issues the 1986 Honda table (character 6 = transmission; VN552 Civic Wagovan 5M)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ac16ebd-6ab7-49b1-ae7d-eee4f41ac222",
+     "doc": "NHTSA 01-22-N11B-3143, American Honda letter 1988-06-10, 1989 Acura Integra",
+     "says": "DA334 = Integra 3-door RS 5M, DA344 = 3-door RS 4A, DA335/DA345 = LS 5M/4A, DA174/DA184 = 5-door RS 5M/4A, DA175/DA185 = 5-door LS 5M/4A."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+     "doc": "NHTSA 01-022-N11B-6178, American Honda letter 1996-07-01, 1997 Honda Civic and Accord, 1997 Acura 3.0CL",
+     "says": "1997 Accord 2nd-section table: CD552/CD551/CD553/CD554/CD550/CD555/CD556 = 4-door sedan 5MT; CD562/CD561/CD563/CD564/CD560/CD565/CD566 = 4-door sedan 4AT; CE663/CE664/CE665/CE667 = V6 sedan 4AT (C27A4); CD71x = coupe 5MT, CD72x = coupe 4AT; CE172 = wagon 5MT, CE182/CE183/CE189 = wagon 4AT. 1997 Civic: EJ65x sedan 5MT, EJ66x sedan 4AT, EJ61x/EJ62x coupe 5MT/4AT, EJ71x/EJ72x HX coupe 5MT/CVT, EJ63x/EJ64x hatchback 5MT/4AT. 1997 3.0CL YA224/YA225 = 2/CPE 4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/836ed5a1-3594-439d-a5dd-cd214c21621b",
+     "doc": "NHTSA 01-022-N11B-8561 (AHCERT-220003), American Honda letter 2002-01-02, 2003 Acura 3.2TL",
+     "says": "UA566/UA567/UA568/UA569 = 3.2TL 4DR Sedan 5AT (character 7 = 6)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 2846,
+    "checkable_ground_truth": 1059,
+    "agree": 1058,
+    "disagree": 1,
+    "agreement": 0.99906,
+    "checkable_positives_manual": null,
+    "uniform_cell_lines_excluded": 1715,
+    "uniform_cell_lines_that_would_agree": 1715,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [
+     {
+      "vin": "JH4DA3448KS017664",
+      "year": 1989,
+      "model": "Integra",
+      "ground_truth": "5-spd Manual/Standard",
+      "vpic_trim": "RS",
+      "source": "vin"
+     }
+    ],
+    "epa_crosscheck": {
+     "consistent": 2825,
+     "no_epa_match": 21
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 1,
+    "published_label_contradicts_examples": [
+     {
+      "vin": "JH4DA3448KS017664",
+      "year": 1989,
+      "model": "Integra",
+      "published": "5-spd Manual/Standard",
+      "src": "vin"
+     }
+    ],
+    "cars_without_trans_info": 72,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 35,
+     "not_in_cache_backup": 37
+    },
+    "codes_seen": {
+     "char7=6: 4-door sedan, automatic (incl. CVT)": 1687,
+     "char7=8: 5-door / wagon / SUV / van, automatic": 932,
+     "char7=4: 2-door hatchback / 3-door, automatic": 116,
+     "char7=2: 2-door, automatic": 111
+    },
+    "top_models": {
+     "TL": 1091,
+     "MDX": 846,
+     "TSX": 336,
+     "RL": 189,
+     "CL": 103,
+     "RDX": 86,
+     "RSX": 84,
+     "Integra": 51,
+     "Legend": 37,
+     "EL": 13,
+     "CSX": 8,
+     "Vigor": 2
+    },
+    "years_seen": [
+     1987,
+     2009
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 72
+  },
+  {
+   "id": "acura_vin7_letter_2010_on_manual",
+   "make": "Acura",
+   "claim": "manual",
+   "status": "keep_low_sample",
+   "scope": {
+    "make": "Acura",
+    "models": "every Acura with an Acura WMI, MY2010 on",
+    "model_years": [
+     2010,
+     null
+    ],
+    "wmi": [
+     "19U",
+     "19V",
+     "2HH",
+     "2HN",
+     "2HU",
+     "3HD",
+     "5FR",
+     "5FS",
+     "5J0",
+     "5J8",
+     "5KC",
+     "JH4"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "A",
+     "C",
+     "E",
+     "G"
+    ],
+    "table": {
+     "A": "2-door, manual",
+     "C": "3-door, manual",
+     "E": "4-door, manual",
+     "G": "5-door, manual"
+    }
+   },
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[ACEG]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+     "doc": "MID ORG5294, American Honda filing dated 2009-08-24, 2010 Honda/Acura (MDX, TL, Civic, CR-V, Element, Odyssey, Pilot)",
+     "says": "Positions 4-8 'model code' tables, first letter-coded year: FA1E2 Civic DX 5MT 4DR Sedan / FA1F2 5AT; FA5E5 Civic Si 6MT 4DR; FA3F2 Civic Hybrid CVT 4DR; FG1A2 Civic DX 5MT 2DR Coupe / FG1B2 5AT; FG2A5 Civic Si 6MT 2DR; YH2G7 Element 4WD EX 5MT 5DR SUV / YH1H3 5AT; UA9E5 TL SH-AWD 6MT 4DR / UA9F5 5AT; RE3H3 CR-V 5AT 5DR; RL3H2 Odyssey 5AT 5DR VAN; YF4H2 Pilot 5AT 5DR SUV; YD2H2 MDX 6AT 5DR SUV."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f293cffc-27b6-4ce0-9f20-412a4c955188",
+     "doc": "MID ORG5705, American Honda letter 2010-03-10, 2011 Honda CR-Z",
+     "says": "ZF1C4/ZF1C6 = CR-Z 6MT 3DR HatchBack; ZF1D4/ZF1D6 = CR-Z CVT 3DR HatchBack (character 7 C = 3-door manual, D = 3-door automatic/CVT)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
+     "doc": "MID ORG21966, American Honda letter 2023-07-20, 2024 Honda Civic Type R",
+     "says": "FL5G4 = CIVIC HATCHBACK Type R, 6MT, 5DR Hatchback (character 7 G = 5-door manual still in use for MY2024)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 1,
+    "checkable_ground_truth": 1,
+    "agree": 1,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 1,
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_crosscheck": {
+     "consistent": 1
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 0,
+    "published_label_contradicts_examples": [],
+    "cars_without_trans_info": 0,
+    "cars_without_trans_info_by_reason": {},
+    "codes_seen": {
+     "char7=E: 4-door, manual": 1
+    },
+    "top_models": {
+     "TL": 1
+    },
+    "years_seen": [
+     2010,
+     2010
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "acura_vin7_letter_2010_on_automatic",
+   "make": "Acura",
+   "claim": "automatic",
+   "status": "keep",
+   "scope": {
+    "make": "Acura",
+    "models": "every Acura with an Acura WMI, MY2010 on",
+    "model_years": [
+     2010,
+     null
+    ],
+    "wmi": [
+     "19U",
+     "19V",
+     "2HH",
+     "2HN",
+     "2HU",
+     "3HD",
+     "5FR",
+     "5FS",
+     "5J0",
+     "5J8",
+     "5KC",
+     "JH4"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "B",
+     "D",
+     "F",
+     "H"
+    ],
+    "table": {
+     "B": "2-door, automatic/CVT",
+     "D": "3-door, automatic/CVT",
+     "F": "4-door, automatic/CVT/DCT",
+     "H": "5-door, automatic/CVT"
+    }
+   },
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[BDFH]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+     "doc": "MID ORG5294, American Honda filing dated 2009-08-24, 2010 Honda/Acura (MDX, TL, Civic, CR-V, Element, Odyssey, Pilot)",
+     "says": "Positions 4-8 'model code' tables, first letter-coded year: FA1E2 Civic DX 5MT 4DR Sedan / FA1F2 5AT; FA5E5 Civic Si 6MT 4DR; FA3F2 Civic Hybrid CVT 4DR; FG1A2 Civic DX 5MT 2DR Coupe / FG1B2 5AT; FG2A5 Civic Si 6MT 2DR; YH2G7 Element 4WD EX 5MT 5DR SUV / YH1H3 5AT; UA9E5 TL SH-AWD 6MT 4DR / UA9F5 5AT; RE3H3 CR-V 5AT 5DR; RL3H2 Odyssey 5AT 5DR VAN; YF4H2 Pilot 5AT 5DR SUV; YD2H2 MDX 6AT 5DR SUV."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f293cffc-27b6-4ce0-9f20-412a4c955188",
+     "doc": "MID ORG5705, American Honda letter 2010-03-10, 2011 Honda CR-Z",
+     "says": "ZF1C4/ZF1C6 = CR-Z 6MT 3DR HatchBack; ZF1D4/ZF1D6 = CR-Z CVT 3DR HatchBack (character 7 C = 3-door manual, D = 3-door automatic/CVT)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
+     "doc": "MID ORG21966, American Honda letter 2023-07-20, 2024 Honda Civic Type R",
+     "says": "FL5G4 = CIVIC HATCHBACK Type R, 6MT, 5DR Hatchback (character 7 G = 5-door manual still in use for MY2024)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 660,
+    "checkable_ground_truth": 120,
+    "agree": 120,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": null,
+    "uniform_cell_lines_excluded": 533,
+    "uniform_cell_lines_that_would_agree": 533,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_crosscheck": {
+     "consistent": 659,
+     "no_epa_match": 1
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 0,
+    "published_label_contradicts_examples": [],
+    "cars_without_trans_info": 7,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 3,
+     "not_in_cache_backup": 4
+    },
+    "codes_seen": {
+     "char7=F: 4-door, automatic/CVT/DCT": 402,
+     "char7=H: 5-door, automatic/CVT": 258
+    },
+    "top_models": {
+     "TL": 181,
+     "MDX": 174,
+     "TSX": 117,
+     "RDX": 76,
+     "ILX": 62,
+     "TLX": 30,
+     "RL": 6,
+     "RLX": 6,
+     "ZDX": 4,
+     "Integra": 3,
+     "CSX": 1
+    },
+    "years_seen": [
+     2010,
+     2024
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 7
+  },
+  {
+   "id": "honda_vin6_1984_1986_manual",
+   "make": "Honda",
+   "claim": "manual",
+   "status": "keep_low_sample",
+   "scope": {
+    "make": "Honda",
+    "models": "MY1984-1986 Honda Accord, Prelude, Civic (CRX, hatchback, sedan, Wagon, Wagon 4WD, Wagovan): the pre-1987 Honda layout where character 6 is the transmission",
+    "model_years": [
+     1984,
+     1986
+    ],
+    "wmi": [
+     "19X",
+     "1HG",
+     "2HG",
+     "2HJ",
+     "2HK",
+     "3CZ",
+     "3HG",
+     "5FN",
+     "5FP",
+     "5J6",
+     "5J7",
+     "5KB",
+     "7FA",
+     "JH1",
+     "JHL",
+     "JHM",
+     "SHH",
+     "SHS"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 6,
+    "values": [
+     "4",
+     "5",
+     "6"
+    ],
+    "table": {
+     "4": "4-speed manual",
+     "5": "5-speed manual",
+     "6": "5-speed manual + Super Low"
+    },
+    "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN) and character 7 is a body code 2-5"
+   },
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[456][2-5]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ec1023d-ef91-47ab-a2e7-9b636dd7885d",
+     "doc": "NHTSA 01-22-N11B-1384, American Honda letter 1983-09-12 (table issued 1983-06-08, rows added 1983-08-08), 1984 Honda Accord, Prelude, Civic Wagon",
+     "says": "Construction of VIN: character 6 = transmission (5 = 5-speed manual, 7 = 4-speed automatic, 3 = 3-speed automatic); character 7 = body type (2 2-door sedan, 3 2-door hatchback, 4 4-door sedan, 5 4-door wagon). Example JHMAD532 = Accord hatchback 5M, JHMAD732 = 4A, JHMAN352 = Civic Wagon 3A."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/99140621-6bb8-4988-9922-bf53e3f0bd32",
+     "doc": "NHTSA 01-22-N11B-1717, American Honda letter 1984-06-20, 1985 Honda Accord, Prelude, Civic (all lines)",
+     "says": "Character 6 = transmission: 3 = 3-speed automatic, 4 = 4-speed manual, 5 = 5-speed manual, 7 = 4-speed automatic; character 7 = body. Civic CRX/hatch/sedan: JHMAF531 CRX HF M5, JHMAF332 CRX L3, JHMAG431 1300 hatch M4, JHMAK343 sedan L3."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/386ede85-a1c2-474d-bccf-88647bd49403",
+     "doc": "NHTSA 01-22-N11B-1906, American Honda letter 1985-06-12, 1986 Honda Civic CRX/hatchback/4-door sedan",
+     "says": "Character 6 = transmission representation: 4 = 4 speed manual, 5 = 5 speed manual, 7 = 4 speed automatic; character 7 = body type (3 = 2-door hatchback or coupe, 4 = 4-door sedan). JHMAK543 sedan M5, JHMAK743 sedan L4."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/66a0a3d1-e263-40e0-9dc2-92f115a9a147",
+     "doc": "NHTSA 01-22-N11B-1989, American Honda letter 1985-07-11, 1986 Honda Accord, Prelude, Civic Wagon, Civic Wagon 4WD",
+     "says": "Character 6 = transmission: 5 = 5-speed manual, 6 = 5-speed manual + Super Low, 7 = 4-speed automatic. JHMBA532 Accord hatchback 5M, JHMBA742 Accord sedan 4A, JHMAR652 Civic Wagon 4WD 5M+SL."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+     "doc": "NHTSA 01-22-N11B-2081, American Honda letter 1985-11-19, 1986 Acura Integra (and 1986 Civic Wagovan)",
+     "says": "1986 Acura already uses character 7 = 'Body type and Transmission representation': 3 = 3-door hatchback 5-speed manual, 4 = 3-door hatchback 4-speed automatic, 7 = 5-door hatchback 5-speed manual, 8 = 5-door hatchback 4-speed automatic. Same letter re-issues the 1986 Honda table (character 6 = transmission; VN552 Civic Wagovan 5M)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 13,
+    "checkable_ground_truth": 7,
+    "agree": 7,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 7,
+    "uniform_cell_lines_excluded": 5,
+    "uniform_cell_lines_that_would_agree": 5,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_crosscheck": {
+     "consistent": 13
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 0,
+    "published_label_contradicts_examples": [],
+    "cars_without_trans_info": 1,
+    "cars_without_trans_info_by_reason": {
+     "not_in_cache_backup": 1
+    },
+    "codes_seen": {
+     "char6=5: 5-speed manual": 11,
+     "char6=4: 4-speed manual": 1,
+     "char6=6: 5-speed manual + Super Low": 1
+    },
+    "top_models": {
+     "Civic": 9,
+     "Accord": 3,
+     "CRX": 1
+    },
+    "years_seen": [
+     1984,
+     1986
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 1,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "honda_vin6_1984_1986_automatic",
+   "make": "Honda",
+   "claim": "automatic",
+   "status": "keep_low_sample",
+   "scope": {
+    "make": "Honda",
+    "models": "MY1984-1986 Honda Accord, Prelude, Civic (CRX, hatchback, sedan, Wagon, Wagon 4WD, Wagovan): the pre-1987 Honda layout where character 6 is the transmission",
+    "model_years": [
+     1984,
+     1986
+    ],
+    "wmi": [
+     "19X",
+     "1HG",
+     "2HG",
+     "2HJ",
+     "2HK",
+     "3CZ",
+     "3HG",
+     "5FN",
+     "5FP",
+     "5J6",
+     "5J7",
+     "5KB",
+     "7FA",
+     "JH1",
+     "JHL",
+     "JHM",
+     "SHH",
+     "SHS"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 6,
+    "values": [
+     "3",
+     "7"
+    ],
+    "table": {
+     "3": "3-speed automatic",
+     "7": "4-speed automatic"
+    },
+    "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN) and character 7 is a body code 2-5"
+   },
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[37][2-5]",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ec1023d-ef91-47ab-a2e7-9b636dd7885d",
+     "doc": "NHTSA 01-22-N11B-1384, American Honda letter 1983-09-12 (table issued 1983-06-08, rows added 1983-08-08), 1984 Honda Accord, Prelude, Civic Wagon",
+     "says": "Construction of VIN: character 6 = transmission (5 = 5-speed manual, 7 = 4-speed automatic, 3 = 3-speed automatic); character 7 = body type (2 2-door sedan, 3 2-door hatchback, 4 4-door sedan, 5 4-door wagon). Example JHMAD532 = Accord hatchback 5M, JHMAD732 = 4A, JHMAN352 = Civic Wagon 3A."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/99140621-6bb8-4988-9922-bf53e3f0bd32",
+     "doc": "NHTSA 01-22-N11B-1717, American Honda letter 1984-06-20, 1985 Honda Accord, Prelude, Civic (all lines)",
+     "says": "Character 6 = transmission: 3 = 3-speed automatic, 4 = 4-speed manual, 5 = 5-speed manual, 7 = 4-speed automatic; character 7 = body. Civic CRX/hatch/sedan: JHMAF531 CRX HF M5, JHMAF332 CRX L3, JHMAG431 1300 hatch M4, JHMAK343 sedan L3."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/386ede85-a1c2-474d-bccf-88647bd49403",
+     "doc": "NHTSA 01-22-N11B-1906, American Honda letter 1985-06-12, 1986 Honda Civic CRX/hatchback/4-door sedan",
+     "says": "Character 6 = transmission representation: 4 = 4 speed manual, 5 = 5 speed manual, 7 = 4 speed automatic; character 7 = body type (3 = 2-door hatchback or coupe, 4 = 4-door sedan). JHMAK543 sedan M5, JHMAK743 sedan L4."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/66a0a3d1-e263-40e0-9dc2-92f115a9a147",
+     "doc": "NHTSA 01-22-N11B-1989, American Honda letter 1985-07-11, 1986 Honda Accord, Prelude, Civic Wagon, Civic Wagon 4WD",
+     "says": "Character 6 = transmission: 5 = 5-speed manual, 6 = 5-speed manual + Super Low, 7 = 4-speed automatic. JHMBA532 Accord hatchback 5M, JHMBA742 Accord sedan 4A, JHMAR652 Civic Wagon 4WD 5M+SL."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+     "doc": "NHTSA 01-22-N11B-2081, American Honda letter 1985-11-19, 1986 Acura Integra (and 1986 Civic Wagovan)",
+     "says": "1986 Acura already uses character 7 = 'Body type and Transmission representation': 3 = 3-door hatchback 5-speed manual, 4 = 3-door hatchback 4-speed automatic, 7 = 5-door hatchback 5-speed manual, 8 = 5-door hatchback 4-speed automatic. Same letter re-issues the 1986 Honda table (character 6 = transmission; VN552 Civic Wagovan 5M)."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 5,
+    "checkable_ground_truth": 5,
+    "agree": 5,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": null,
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_crosscheck": {
+     "consistent": 5
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 0,
+    "published_label_contradicts_examples": [],
+    "cars_without_trans_info": 0,
+    "cars_without_trans_info_by_reason": {},
+    "codes_seen": {
+     "char6=7: 4-speed automatic": 5
+    },
+    "top_models": {
+     "Accord": 4,
+     "Prelude": 1
+    },
+    "years_seen": [
+     1986,
+     1986
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "honda_accord_1997_vin7_manual",
+   "make": "Honda",
+   "claim": "manual",
+   "status": "vpic_conflict_hub_decision",
+   "scope": {
+    "make": "Honda",
+    "models": "MY1997 Honda Accord only",
+    "model_years": [
+     1997,
+     1997
+    ],
+    "wmi": [
+     "19X",
+     "1HG",
+     "2HG",
+     "2HJ",
+     "2HK",
+     "3CZ",
+     "3HG",
+     "5FN",
+     "5FP",
+     "5J6",
+     "5J7",
+     "5KB",
+     "7FA",
+     "JH1",
+     "JHL",
+     "JHM",
+     "SHH",
+     "SHS"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "1",
+     "3",
+     "5",
+     "7"
+    ],
+    "table": {
+     "1": "2-door, manual",
+     "3": "2-door hatchback / 3-door, manual",
+     "5": "4-door sedan, manual",
+     "7": "5-door / wagon / SUV / van, manual"
+    },
+    "also_required": "characters 4-5 = CD or CE (1997 Accord coupe, sedan, V6 sedan, wagon)"
+   },
+   "vin_regex": "^(1HG|JHM)(CD|CE)[A-HJ-NPR-Z0-9][1357][A-HJ-NPR-Z0-9]{2}V",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+     "doc": "NHTSA 01-022-N11B-6178, American Honda letter 1996-07-01, 1997 Honda Civic and Accord, 1997 Acura 3.0CL",
+     "says": "1997 Accord 2nd-section table: CD552/CD551/CD553/CD554/CD550/CD555/CD556 = 4-door sedan 5MT; CD562/CD561/CD563/CD564/CD560/CD565/CD566 = 4-door sedan 4AT; CE663/CE664/CE665/CE667 = V6 sedan 4AT (C27A4); CD71x = coupe 5MT, CD72x = coupe 4AT; CE172 = wagon 5MT, CE182/CE183/CE189 = wagon 4AT. 1997 Civic: EJ65x sedan 5MT, EJ66x sedan 4AT, EJ61x/EJ62x coupe 5MT/4AT, EJ71x/EJ72x HX coupe 5MT/CVT, EJ63x/EJ64x hatchback 5MT/4AT. 1997 3.0CL YA224/YA225 = 2/CPE 4AT."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 13,
+    "checkable_ground_truth": 13,
+    "agree": 3,
+    "disagree": 10,
+    "agreement": 0.23077,
+    "checkable_positives_manual": 3,
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [
+     {
+      "vin": "1HGCD555XVA063418",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "EX",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5554VA076598",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "EX",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5532VA010968",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "LX/LX V-6",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5559VA078895",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "EX",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5560VA252278",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "EX w/Lea",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5535VA086278",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "LX/LX V-6",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5559VA033634",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "EX",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5536VA225575",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "LX/LX V-6",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5534VA009742",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "LX/LX V-6",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5550VA248528",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "EX",
+      "source": "vin"
+     }
+    ],
+    "epa_crosscheck": {
+     "consistent": 13
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 10,
+    "published_label_contradicts_examples": [
+     {
+      "vin": "1HGCD555XVA063418",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Automatic",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5554VA076598",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Automatic",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5532VA010968",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Automatic",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5559VA078895",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Automatic",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5560VA252278",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Automatic",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5535VA086278",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Automatic",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5559VA033634",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Automatic",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5536VA225575",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Automatic",
+      "src": "vin"
+     }
+    ],
+    "cars_without_trans_info": 0,
+    "cars_without_trans_info_by_reason": {},
+    "codes_seen": {
+     "char7=5: 4-door sedan, manual": 10,
+     "char7=1: 2-door, manual": 3
+    },
+    "top_models": {
+     "Accord": 13
+    },
+    "years_seen": [
+     1997,
+     1997
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 0,
+   "vpic_conflict": "vPIC returns the transmission INVERTED for MY1997 Accord sedans: CD553/CD555/CD556 (Honda: 5MT) decode as 'Automatic' and CD560/CD563/CD565/CD566/CD568 and V6 CE664/CE667 (Honda: 4AT) decode as 'Manual/Standard'. The same codes decode correctly for 1994-1996 in the same cache. Independent check: EPA lists only 'Automatic 4-spd' for the 1997 Accord 2.7 V6 (vehicles.csv id 13472), yet vPIC labels every CE664/CE667 V6 on the lots manual. Agreement against ground truth is therefore expected to be near 0 for the sedans; it measures vPIC's error, not the rule. Applying this rule changes existing published labels, so it needs a hub decision.",
+   "epa_citation": {
+    "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+    "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f)",
+    "says": "1997 Honda Accord 2.7L 6-cyl: Automatic 4-spd only (id 13472); 2.2L: Automatic 4-spd and Manual 5-spd (ids 13468-13471)"
+   }
+  },
+  {
+   "id": "honda_accord_1997_vin7_automatic",
+   "make": "Honda",
+   "claim": "automatic",
+   "status": "vpic_conflict_hub_decision",
+   "scope": {
+    "make": "Honda",
+    "models": "MY1997 Honda Accord only",
+    "model_years": [
+     1997,
+     1997
+    ],
+    "wmi": [
+     "19X",
+     "1HG",
+     "2HG",
+     "2HJ",
+     "2HK",
+     "3CZ",
+     "3HG",
+     "5FN",
+     "5FP",
+     "5J6",
+     "5J7",
+     "5KB",
+     "7FA",
+     "JH1",
+     "JHL",
+     "JHM",
+     "SHH",
+     "SHS"
+    ],
+    "conditions": [
+     "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
+     "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
+     "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "values": [
+     "2",
+     "4",
+     "6",
+     "8"
+    ],
+    "table": {
+     "2": "2-door, automatic",
+     "4": "2-door hatchback / 3-door, automatic",
+     "6": "4-door sedan, automatic (incl. CVT)",
+     "8": "5-door / wagon / SUV / van, automatic"
+    },
+    "also_required": "characters 4-5 = CD or CE (1997 Accord coupe, sedan, V6 sedan, wagon)"
+   },
+   "vin_regex": "^(1HG|JHM)(CD|CE)[A-HJ-NPR-Z0-9][2468][A-HJ-NPR-Z0-9]{2}V",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+     "doc": "NHTSA 01-022-N11B-6178, American Honda letter 1996-07-01, 1997 Honda Civic and Accord, 1997 Acura 3.0CL",
+     "says": "1997 Accord 2nd-section table: CD552/CD551/CD553/CD554/CD550/CD555/CD556 = 4-door sedan 5MT; CD562/CD561/CD563/CD564/CD560/CD565/CD566 = 4-door sedan 4AT; CE663/CE664/CE665/CE667 = V6 sedan 4AT (C27A4); CD71x = coupe 5MT, CD72x = coupe 4AT; CE172 = wagon 5MT, CE182/CE183/CE189 = wagon 4AT. 1997 Civic: EJ65x sedan 5MT, EJ66x sedan 4AT, EJ61x/EJ62x coupe 5MT/4AT, EJ71x/EJ72x HX coupe 5MT/CVT, EJ63x/EJ64x hatchback 5MT/4AT. 1997 3.0CL YA224/YA225 = 2/CPE 4AT."
+    }
+   ],
+   "validation": {
+    "in_scope_lot_cars": 137,
+    "checkable_ground_truth": 120,
+    "agree": 6,
+    "disagree": 114,
+    "agreement": 0.05,
+    "checkable_positives_manual": null,
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [
+     {
+      "vin": "1HGCD5608VA139091",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "SE",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5655VA127735",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "EX",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5604VA268557",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "SE",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5638VA262089",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "LX/LX V-6",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD563XVA261641",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "LX/LX V-6",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5651VA099870",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "EX",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5632VA220677",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "LX/LX V-6",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCE6675VA007597",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "EX V-6 w/Lea",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5607VA127093",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "SE",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCE6670VA018815",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "EX V-6 w/Lea",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5655VA038652",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "EX",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5635VA234458",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "LX/LX V-6",
+      "source": "vin"
+     }
+    ],
+    "epa_crosscheck": {
+     "consistent": 137
+    },
+    "epa_conflict_examples": [],
+    "published_label_contradicts_rule": 114,
+    "published_label_contradicts_examples": [
+     {
+      "vin": "1HGCD5608VA139091",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5655VA127735",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5604VA268557",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5638VA262089",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD563XVA261641",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5651VA099870",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCD5632VA220677",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     },
+     {
+      "vin": "1HGCE6675VA007597",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     }
+    ],
+    "cars_without_trans_info": 17,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 15,
+     "not_in_cache_backup": 2
+    },
+    "codes_seen": {
+     "char7=6: 4-door sedan, automatic (incl. CVT)": 116,
+     "char7=2: 2-door, automatic": 15,
+     "char7=8: 5-door / wagon / SUV / van, automatic": 6
+    },
+    "top_models": {
+     "Accord": 135,
+     "Accord Wagon": 2
+    },
+    "years_seen": [
+     1997,
+     1997
+    ],
+    "feed_make_differs_from_wmi_brand": 0
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 17,
+   "vpic_conflict": "vPIC returns the transmission INVERTED for MY1997 Accord sedans: CD553/CD555/CD556 (Honda: 5MT) decode as 'Automatic' and CD560/CD563/CD565/CD566/CD568 and V6 CE664/CE667 (Honda: 4AT) decode as 'Manual/Standard'. The same codes decode correctly for 1994-1996 in the same cache. Independent check: EPA lists only 'Automatic 4-spd' for the 1997 Accord 2.7 V6 (vehicles.csv id 13472), yet vPIC labels every CE664/CE667 V6 on the lots manual. Agreement against ground truth is therefore expected to be near 0 for the sedans; it measures vPIC's error, not the rule. Applying this rule changes existing published labels, so it needs a hub decision.",
+   "epa_citation": {
+    "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+    "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f)",
+    "says": "1997 Honda Accord 2.7L 6-cyl: Automatic 4-spd only (id 13472); 2.2L: Automatic 4-spd and Manual 5-spd (ids 13468-13471)"
+   }
+  }
+ ],
+ "vpic_conflicts": [
+  {
+   "cell": "2007-2008 Honda Fit, VIN characters 4-7 GD38 (GD384, GD386)",
+   "honda_says": "5AT (character 7 = 8, 5-door automatic)",
+   "vpic_says": "5-spd Manual/Standard for every Fit VIN of these years (baseline uniformCell = manual)",
+   "evidence": [
+    "https://vpic.nhtsa.dot.gov/mid/home/displayfile/260e4159-7c32-4e16-8fc1-b50a6b3aa5ce (2007 Fit model codes: GD374/GD376 5MT, GD384/GD386 5AT)",
+    "EPA ids 22860-22862, 24920-24922: Fit 1.5 Automatic 5-spd, Automatic (S5), Manual 5-spd"
+   ],
+   "effect_if_rule_applied": "Manual badge removed from GD38x Fits; GD37x Fits stay Manual, now on VIN evidence",
+   "rule": "honda_vin7_digit_1987_2009_automatic / _manual",
+   "lot_cars": {
+    "GD38_published_manual": 133,
+    "GD37_published_manual": 36
+   }
+  },
+  {
+   "cell": "1997 Honda Accord sedans (CD55x, CD56x, CE66x)",
+   "honda_says": "CD55x = 5MT, CD56x = 4AT, CE66x (V6) = 4AT",
+   "vpic_says": "inverted: CD55x 'Automatic', CD56x and CE66x 'Manual/Standard'",
+   "evidence": [
+    "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+    "EPA id 13472: 1997 Accord 2.7 V6 Automatic 4-spd only"
+   ],
+   "effect_if_rule_applied": "Manual badge removed from 1997 Accord automatics and V6s; added to the true 5MT sedans",
+   "rule": "honda_accord_1997_vin7_manual / _automatic (status vpic_conflict_hub_decision)",
+   "lot_cars": {
+    "honda_manual__published_non_manual": 10,
+    "honda_automatic__published_manual": 114,
+    "honda_automatic__published_non_manual": 6,
+    "honda_manual__published_manual": 3
+   }
+  },
+  {
+   "cell": "1989 Acura Integra, VIN characters 4-7 DA34 (DA344 = 3-door RS)",
+   "honda_says": "DA344 = 4A (4-speed automatic)",
+   "vpic_says": "5-spd Manual/Standard (1 lot car, JH4DA3448KS017664)",
+   "evidence": [
+    "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ac16ebd-6ab7-49b1-ae7d-eee4f41ac222"
+   ],
+   "effect_if_rule_applied": "Manual badge removed from that car",
+   "rule": "acura_vin7_digit_1986_2009_automatic"
+  }
+ ],
+ "validation_method": "For each rule, every lot car in scope is matched by WMI, valid check digit, VIN model year and the character-6/7 value. 'checkable' = its ground_truth.jsonl line has class manual/automatic/cvt/amt/dct and uniformCell is empty (uniform-cell lines are vPIC model-level defaults and are counted separately as unlabelled). Agreement = same manual-vs-not-manual answer. All VIN-bearing ground truth comes from vPIC, which NHTSA builds from these same Honda filings, so agreement is partly circular; the EPA cross-check (does EPA list a transmission of the claimed kind for that year/make/model, narrowed to the vPIC displacement when known) is the independent check. 'newly_confirmed_manual' = in-scope cars whose published extras transmission is empty today."
+}

@@ -69,7 +69,7 @@ ACURA_WMI = {"JH4", "19U", "5J8", "5J0", "5KC", "5FR", "5FS", "19V", "2HH",
 C = {
     "mid_1983_09_12": {
         "url": MID + "5ec1023d-ef91-47ab-a2e7-9b636dd7885d",
-        "doc": "American Honda letter of Aug/Sep 1983 (issued 1983-06-08, added 1983-08-08), 1984 Honda Accord, Prelude, Civic Wagon",
+        "doc": "NHTSA 01-22-N11B-1384, American Honda letter 1983-09-12 (table issued 1983-06-08, rows added 1983-08-08), 1984 Honda Accord, Prelude, Civic Wagon",
         "says": "Construction of VIN: character 6 = transmission (5 = 5-speed manual, 7 = 4-speed automatic, 3 = 3-speed automatic); character 7 = body type (2 2-door sedan, 3 2-door hatchback, 4 4-door sedan, 5 4-door wagon). Example JHMAD532 = Accord hatchback 5M, JHMAD732 = 4A, JHMAN352 = Civic Wagon 3A.",
     },
     "mid_1984_06_20": {
@@ -118,8 +118,8 @@ C = {
         "says": "1997 Accord 2nd-section table: CD552/CD551/CD553/CD554/CD550/CD555/CD556 = 4-door sedan 5MT; CD562/CD561/CD563/CD564/CD560/CD565/CD566 = 4-door sedan 4AT; CE663/CE664/CE665/CE667 = V6 sedan 4AT (C27A4); CD71x = coupe 5MT, CD72x = coupe 4AT; CE172 = wagon 5MT, CE182/CE183/CE189 = wagon 4AT. 1997 Civic: EJ65x sedan 5MT, EJ66x sedan 4AT, EJ61x/EJ62x coupe 5MT/4AT, EJ71x/EJ72x HX coupe 5MT/CVT, EJ63x/EJ64x hatchback 5MT/4AT. 1997 3.0CL YA224/YA225 = 2/CPE 4AT.",
     },
     "mid_2002_01_02": {
-        "url": MID + "836ed5a1-0c7b-4b39-9c80-2ddc7b67c3fd",
-        "doc": "AHCERT-220003, American Honda letter 2002-01-02, 2003 Acura 3.2TL",
+        "url": MID + "836ed5a1-3594-439d-a5dd-cd214c21621b",
+        "doc": "NHTSA 01-022-N11B-8561 (AHCERT-220003), American Honda letter 2002-01-02, 2003 Acura 3.2TL",
         "says": "UA566/UA567/UA568/UA569 = 3.2TL 4DR Sedan 5AT (character 7 = 6).",
     },
     "mid_2005_10_31": {
