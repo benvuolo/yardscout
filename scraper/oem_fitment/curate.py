@@ -1002,25 +1002,29 @@ class Curation:
                 continue
             if not c.verified or "universal_part_suspect" in c.problems:
                 continue
-            fms = self.class_feed_models.get((key, cat), set())
-            if len(fms) < 2:
+            # only vehicle-years where the class is a member of the cell
+            # (cover yes / maybe, §5.16): a record that resolves out of the
+            # category there (Mopar passenger window switch 4602540AF) makes
+            # no claim. A window switch must also resolve to the driver
+            # master slot: an unresolved side may be a passenger or
+            # single-gang switch (4602531AD "1 gang", quantity 2).
+            Ts, whys, slots = [], set(), set()
+            for T in sorted(self.class_Ts.get((key, cat), ())):
+                m = (self.cells_info.get((T, cat)) or {}).get("members", {}).get(key)
+                if not m or m["cover"] not in ("yes", "maybe"):
+                    continue
+                if cat == "window-switch" and (m["slot"].reason or m["slot"].slots != ("DM",)):
+                    continue
+                Ts.append(T)
+                whys |= set(m["why"])
+                slots |= set(m["slot"].slots)
+            if len({(T[0], T[1]) for T in Ts}) < 2:
                 continue        # single-model: the same-model generation loop covers it
-            Ts = sorted(self.class_Ts.get((key, cat), ()))
-            if not Ts:
-                continue
-            whys = set()
-            slots = set()
-            for T in Ts:
-                info = self.cells_info.get((T, cat))
-                m = (info or {}).get("members", {}).get(key)
-                if m:
-                    whys |= set(m["why"])
-                    slots |= set(m["slot"].slots)
             reason, text = _likely_reason(whys)
             pns = sorted(c.pns)
             apps = _runs(Ts)
             slot = "+".join(sorted(slots)) or "C"
-            note = _sanitize(f"{brand} catalog lists #{pns[0]} for both — {text}; verify the number on the part")
+            note = _likely_note(brand, pns[0], text, PACK_TEXT.get(c.packaging, ""))
             out.append({"id": f"oem:{self.ns}:{cat}:{slot}:{_sha1([pns, apps])[:10]}", "cat": cat,
                         "tier": "likely", "kind": "body", "apps": apps, "pn": pns, "reason": reason,
                         "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts)})
@@ -1077,7 +1081,7 @@ class Curation:
                         "cells": len(self.cells_info), "verified_groups": len(doc["groups"]),
                         "vg_groups": len(doc["vg"]), "likely_groups": len(doc["likely"]),
                         "blocked_sites": sorted(self.blocked),
-                        "why_no_verified": _why_none(self)},
+                        "why_no_verified": _why_none(self), "gates": global_gates(self)},
             "funnel_cars": fz(funnel),
             "funnel_cars_hypothetical_if_every_year_closed": {
                 "label": "HYPOTHETICAL: closure (C1-C9) and the audit gate (E5) assumed, current candidate "
@@ -1332,6 +1336,27 @@ def _verified_note(brand: str, pns: list) -> str:
     return _sanitize(f"{brand} catalog: same numbers on every trim and engine for these years ({shown})")
 
 
+# What the number is, for packagings a seeker could mistake for the whole
+# assembly (§5.8; hub decisions P1 door modules and T1 climate switch
+# modules, ops/interchange.md). "reg?" says nothing: the name does not say.
+PACK_TEXT = {"motor": "window motor only", "reg": "regulator without motor", "assy": "regulator with motor",
+             "door-module": "whole door module panel with the regulator",
+             "switch-module": "single switch module, not the full control panel"}
+_LIKELY_TAIL = "; verify the number on the part"
+
+
+def _likely_note(brand: str, pn: str, text: str, pack: str = "") -> str:
+    """'<Brand> catalog lists #<pn> for both — [<packaging>; ]<reason>; verify
+    the number on the part' (§5.16), always within NOTE_MAX_LEN: the reason
+    text is cut, never the template, so V5 cannot refuse the namespace."""
+    head = _sanitize(f"{brand} catalog lists #{pn} for both — ")
+    mid = _sanitize(f"{pack}; {text}" if pack else text)
+    room = policy.NOTE_MAX_LEN - len(head) - len(_LIKELY_TAIL)
+    if len(mid) > room:
+        mid = mid[:max(room - 3, 1)].rstrip(" ,;") + "..."
+    return head + mid + _LIKELY_TAIL
+
+
 def _likely_reason(whys: set) -> tuple[str, str]:
     if "conditional_notes:plant" in whys:
         return "plant", "plant-specific (US / Japan built)"
@@ -1344,11 +1369,33 @@ def _likely_reason(whys: set) -> tuple[str, str]:
     return "conditional", "fits some configurations"
 
 
-def _why_none(cur: Curation) -> str:
+def global_gates(cur: Curation) -> list:
+    """Every namespace-wide reason that stands between this raw and any
+    Verified group (each one alone is enough; §10.3 reports the per-cell
+    first reasons)."""
+    out = []
+    sites = sorted(s for s in cur.nsd["sites"] if s in cur.raw_meta)
     if not cur.list_rows and not cur.years:
-        return ("no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close "
-                "(C1/C2); Verified is impossible by design until the crawler writes them")
-    return "see funnel_cars"
+        out.append("no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close (C1/C2); "
+                   "Verified is impossible by design until the crawler writes them")
+    elif not cur.list_rows:
+        out.append("no R1 list manifests on this raw ref, so no cell can close (C2)")
+    elif not cur.years:
+        out.append("no R2 year manifests on this raw ref, so no cell can close (C1)")
+    if not any(policy.category_status(s, c, cur.status_table) for s in sites for c in (cur.status_table.get(s) or {})):
+        out.append("no (site, category) of this namespace has passed the audit gate (CATEGORY_STATUS has no "
+                   "record; spec 11.4, E5/V7)")
+    unrel = [s for s in sites if not cur.reliable.get(s)]
+    if unrel:
+        out.append(f"engine cells not audited as reliable on {', '.join(unrel)} (E7: no alternator, starter or "
+                   "ignition-coil Verified from them)")
+    if cur.blocked:
+        out.append(f"blocked by the crawl breaker: {', '.join(sorted(cur.blocked))} (their cells never close, C9)")
+    return out
+
+
+def _why_none(cur: Curation) -> str:
+    return "; ".join(global_gates(cur)) or "see funnel_cars"
 
 
 def write_json(path: Path, obj):
@@ -1364,8 +1411,10 @@ def report_md(rep: dict) -> str:
              f"year manifests {s['year_manifests']}, cells {s['cells']}",
              f"- Verified groups {s['verified_groups']}, engine vg groups {s['vg_groups']}, "
              f"Likely groups {s['likely_groups']}",
-             f"- blocked sites: {', '.join(s['blocked_sites']) or 'none'}",
-             f"- why no Verified: {s['why_no_verified']}", "",
+             f"- blocked sites: {', '.join(s['blocked_sites']) or 'none'}", "",
+             "## Gates standing for the whole namespace", ""]
+    lines += [f"- {g}" for g in s.get("gates") or []] or ["- none: see the funnel"]
+    lines += ["",
              "## Funnel (lot cars per category, first open reason)", "",
              "| category | stage | reason | cars |", "|---|---|---|---|"]
     for cat, st in rep["funnel_cars"].items():

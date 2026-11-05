@@ -100,4 +100,45 @@ bad = copy.deepcopy(coil)
 bad["evidence_lines"] = [x.replace("C SRT8", "C  SRT9") for x in bad["evidence_lines"]]
 check("4 a changed trim cell still fails",
       A.evidence_problems(A.to_record("www.jeeppartsdeal.com", "mopar", 769, bad)) != [])
+# ------------------------------------------------------------------ 5
+# Likely groups (§5.16) come only from vehicle-years where the class is a
+# cell member; a window switch must resolve to the driver master slot.
+# Real oem-raw@d1108d0 output had Likely window-switch groups for the
+# passenger switch 4602785AD and for unresolved Mopar switches.
+from _util import JEEP, by_pn  # noqa: E402
+
+jeep = real("jeep_94f03a3.jsonl")
+sw = [by_pn(jeep, p) for p in ("4602785AD", "4602780AD")]
+cur, doc = run("mopar", {f"raw/{JEEP}.jsonl": sw})
+lk = {g["pn"][0]: g for g in doc["likely"] if g["cat"] == "window-switch"}
+check("5 the Front Driver Side switch 4602780AD (several models) ships a Likely DM group",
+      "4602780AD" in lk and ":DM:" in lk["4602780AD"]["id"], str(sorted(lk)))
+check("5 the Front Right passenger switch 4602785AD ships no window-switch group", "4602785AD" not in lk)
+nopos = by_pn(jeep, "4602780AD")
+nopos["position"] = None
+nopos["list_location"] = []
+ev, out, skip_next = nopos["evidence_lines"], [], False
+for x in ev:
+    if skip_next:
+        skip_next = False
+        continue
+    if x == "Position":
+        skip_next = True
+        continue
+    out.append(x)
+nopos["evidence_lines"] = out
+cur, doc = run("mopar", {f"raw/{JEEP}.jsonl": [nopos]})
+check("5 the same switch with no printed side passes the re-check but ships no Likely group",
+      not cur.records[0].problems and not [g for g in doc["likely"] if g["cat"] == "window-switch"],
+      str((cur.records[0].problems, [g["id"] for g in doc["likely"]])))
+
+# ------------------------------------------------------------------ 6
+import validate as V  # noqa: E402
+
+n = C._likely_note("Toyota", "69804-02150", "plant-specific (US / Japan built)", C.PACK_TEXT["door-module"])
+check("6 a door-module Likely note says it is the whole module panel (hub decision P1)",
+      "whole door module panel" in n and V._note_ok(n, "likely", ["69804-02150"]) is None, n)
+long_ = C._likely_note("Hyundai/Kia", "82471-3Q000-ABCDEFGH", "trim-limited " + "x" * 300, C.PACK_TEXT["motor"])
+check("6 an over-long reason is cut, never the template: the note stays valid (V5)",
+      len(long_) <= 160 and V._note_ok(long_, "likely", []) is None, long_)
 done("test_regressions")
