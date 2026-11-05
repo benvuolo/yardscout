@@ -738,6 +738,123 @@ Open, for the hub:
   qualifier phrases, so R5a keeps show as category suspects (count only).
 - A seed left open after a network failure is still orphaned once `.done` is
   written (unchanged from main).
+## Curation pipeline (hub workflow wf_9b3745bc-31f, track 3; branch worktree-wf_9b3745bc-31f-3)
+
+Offline, deterministic: `curate.py` (spec 4-6, 8-10), `adapters.py`,
+`notes.py`, `positions.py`, `policy.py`, `model_map.json` + `model_map.py`,
+`validate.py`, `measure.py`, payload hook `_attach_oem_layer` in
+`build_interchange_payload` (new keys `oemGroups` / `oemVg` / `oemStatus`
+only; no groups files -> payload unchanged; an invalid file drops its
+namespace and says why in `oemStatus`). Tests:
+`python3 scraper/oem_fitment/curation_tests/run_all.py` (12 files, one block
+per spec 9 rule; the Phase 2 node parity prints SKIP: no OEM-TIER block yet).
+
+Run: `curate.py --ns all --raw-ref <sha> [--propose-map] [--write-groups
+--out DIR]`, then `measure.py --groups DIR --reports <_report> --parity`.
+
+Result on oem-raw@50ac4a48 (2026-11-05 13:10 UTC, 25,164 records), reports
+committed in `scraper/oem_fitment/groups/_report/` (no `groups/<ns>.json`
+committed: the first merge per namespace waits for the owner's review of
+`_report/<ns>.md`, spec 11.5):
+
+| ns | Verified | Likely | gates (each alone blocks Verified) |
+|---|---|---|---|
+| toyota | 0 | 1,057 | no R1/R2 manifests; no audit; lexuspartsnow blocked, option layout, engines unaudited |
+| mopar | 0 | 320 | no R1/R2; no audit; moparpartsgiant blocked, trims-in-options unaudited |
+| gm | 0 | 842 | no R1/R2; no audit; options-as-trims unaudited; engines unaudited |
+| ford, nissan, hmg, honda, subaru | 0 | 923 / 843 / 404 / 29 / 553 | no R1/R2; no audit; option column on ~every row; engines unaudited |
+
+- Funnel (lot car x category cells): not closed (no year manifest) 2.96M,
+  no records 1.80M, unmapped 324k, ambig target 79k. With closure assumed
+  (labelled hypothetical, never shipped) the next stops are option_split and
+  packaging_*, as spec 1 predicted. Completion worklists rank only Toyota
+  and Jeep cells, because PartsGiant cells cannot become eligible (item 1
+  below).
+- measure.py (`coverage-2026-11-05.json`): M-car before == after in every
+  category, the old-client view is unchanged (V9). The Likely groups add
+  ~450M cross-model Likely car pairs. V11 drops 2,180 of 4,971 Likely groups
+  to keep interchange.json under 1.3 MB. Body M-car matches spec 10.5
+  (headlights 5,043, third-row 11,685, liftgate 5,001). Engine figures use the
+  seeker's decoded family (alternator 121,971 = 36.4%). Parity: 6/6
+  seeker/view counts equal a car-by-car transcription of pfRunSearch.
+
+Needs a decision (hub / owner):
+1. **Only toyotapartsnow and jeeppartsdeal can ever yield Verified under the
+   spec as written.** Every PartsGiant site prints an option column on
+   (nearly) every fitment row (Ford transmission/drive, Nissan/Infiniti engine
+   codes, HMG body style, Honda/Acura emission + transmission; GM/Mopar/Subaru
+   trims), and spec 5.5 never counts option-layout rows. Also, with
+   ENGINE_CELLS_RELIABLE false (spec 4), every engine test there is maybe, so
+   no PartsGiant record is cover yes in any category. Honda/Acura print no
+   engine column at all. Unlocking any of them needs a per-site spec rule
+   (which option values are not conditions) plus an audit.
+2. **Payload size.** Shipping every Likely group overflows V11. Either lazy
+   per-category OEM files (spec 12) or a Likely policy (e.g. only where no
+   hand group exists).
+3. Crawler R1/R2 manifests (crawler track) and the spec 11.4 audits are
+   prerequisites for any Verified group. Until branch
+   worktree-wf_9b3745bc-31f-3 (second review) the audit store
+   (CATEGORY_STATUS) sat inside policy.py, which policy_sha256 hashes, so an
+   audit record could never match a doc curated after it and V7 could not
+   pass at all in production; tests got past it only by injecting a status
+   table. The records now live in `scraper/oem_fitment/audits.json`, outside
+   the hash (test_audit_store.py records one, re-curates and ships with no
+   override). The payload loader now also enforces V8 (tree hash) and the
+   model-map V2 check, so a groups file goes stale (namespace dropped) the
+   moment policy.py / notes.py / positions.py / model_map.json change: every
+   policy edit needs a re-curate before the next build ships OEM groups.
+4. Ops alert on `oemStatus` "dropped" belongs to the backend ops workstream
+   (`backend/src/ops_monitor.js`, spec 7.3); not filed there yet.
+
+Fixed in review of the earlier commits (each with a test that fails on the
+old code, `curation_tests/test_regressions.py`):
+- An unparsed engine ("?", raw) printed on both sides passed the universe
+  test and could ship Verified.
+- A regulator name "W/Motor <anything>" was exempt from the qualifier check.
+- Colour notes ("Lt Gray") were read as a side.
+- Likely groups were emitted for classes outside the cell: the passenger
+  switches 4602785AD and 4602540AF, and the "1 gang" 4602531AD, as Likely
+  window switches.
+- The evidence re-check refused doubled spaces, which AUDIT.md accepts.
+
+Second review (21 findings, branch worktree-wf_9b3745bc-31f-3, tests in
+`curation_tests/test_review2.py` and `test_review2_payload.py`, each failing
+on be7a774): closure needs every merged catalog model (Wrangler JK 2018,
+Grand Cherokee WK 2022 now have explicit years), a parsed year page and T's
+own list stems; C4 re-runs the rule on every unmatched row; TrimU_f never
+drops a year-page trim without proof; EngineU takes the year page's engines;
+own-page notes come from every row of the number; a cross-category
+supersession edge keeps blocking; chain records count toward evidence age;
+the evidence re-check is exact (cells, header, both-way replaces, position);
+audits.json (above); payload: OEM vg groups are withheld by a contradicted
+hand vg, the engine-category §7.6 trigger reads family-narrowed
+`engine_cells` and only real conditions (policy.SPLIT_CONDITIONS). On
+oem-raw@50ac4a48 (toyota + mopar, every cell assumed closed, hypothetical)
+the old trigger removed 55 of 468 hand vg groups, firing on evidence gaps
+and on other engines' numbers; the new one removes 41, on option_split 240
+member cells, conditional:trim 44, engine 5, plant 1, production 1. Most of
+those option_splits are two numbers each printed for the family's own
+engine (e.g. 4Runner/Tacoma 1996 alternators 27060-62180 and 27060-75170,
+both rows listing 2.7 and 3.4), which is what §7.6 means. Like every
+§7.6 demotion these fire only on closed cells (none today: no R1/R2
+manifests). A withheld group takes the Likely note, V11 holds as
+written, size_trim is linear, Likely groups and stale files expire, one
+malformed file drops only its namespace, and a file without sigs / cells /
+engine_cells is refused. Not re-run on oem-raw after these fixes: the
+`_report/*.md` files still describe the pre-review curation.
+
+AUDIT.md "Exclude at curation" (LBK13001, 5143152AA) is applied (refusal
+`exclude_at_curation` in the reports). Hub decisions T1 and P1 are applied:
+packaging switch-module / door-module, and the Likely notes say so.
+
+Model map: drafted for every namespace with one identity rule
+(`model_map.draft_identity`, merged with `model_map.py merge`; 227 -> 526
+entries). gm/honda/hmg/subaru now map 81-99% of their lot cars. GM
+series-split truck names (Silverado/Sierra/Suburban/Yukon/Express...) are
+`ambig` (Likely only) and their feed sub-models are excluded. Acura ILX is
+unmapped (M6: 3.1% of decodes name another make). VW, Audi, BMW, MB,
+Mazda, Mitsubishi and Volvo have no namespace in spec 4 yet: reported as
+`sites_without_namespace`, no claims.
 
 ## Hub decisions (curation policy)
 

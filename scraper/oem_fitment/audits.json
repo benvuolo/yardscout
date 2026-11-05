@@ -1,0 +1,5 @@
+{
+ "category_status": {},
+ "note": "CURATION_SPEC.md 5.12 / 11.4 audit records: {site: {category: {status: 'confirmed', date, auditor_session, sample_n, errors: 0, policy_sha256, raw_commit}}}. Written only by an audit session that did not write curate.py, by reviewed commit. Not part of policy_sha256 (policy.py says why); a record matches only the policy_sha256 and raw commit it names (V7). Empty: no audit has run yet (2026-11-05).",
+ "schema": 1
+}

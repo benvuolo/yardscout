@@ -1,0 +1,8706 @@
+{
+ "as_of": "2026-11-05T12:52:15Z",
+ "audit_sample": {
+  "closures": [],
+  "note": "no eligible closure or Verified pair to sample",
+  "pairs": []
+ },
+ "contradictions": [],
+ "engine_refusals": [
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Explorer",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Explorer",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Explorer",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Explorer",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    1994
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    1995
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    1996
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Taurus",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Taurus",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Taurus",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Taurus",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Taurus",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Taurus",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Taurus",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Taurus",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2022
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2023
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2024
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Escape",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Escape",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Escape",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Expedition",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Expedition",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Expedition",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Focus",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Focus",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Focus",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Focus",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Focus",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Freestyle",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Freestyle",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Freestyle",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Police Interceptor Sedan",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Taurus X",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Taurus X",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Thunderbird",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Thunderbird",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Thunderbird",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Aviator",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Aviator",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Aviator",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKX",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKX",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKX",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Nautilus",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Nautilus",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Nautilus",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Nautilus",
+    2022
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Nautilus",
+    2023
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Navigator",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Navigator",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Navigator",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Zephyr",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Mercury",
+    "Tracer",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Mercury",
+    "Tracer",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Mercury",
+    "Tracer",
+    1999
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Escape",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Expedition",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Explorer",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Explorer",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Explorer",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Explorer",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "F-150",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Fusion",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Mustang",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ford",
+    "Ranger",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Mariner",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Mercury",
+    "Milan",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "E-450 Super Duty",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Edge",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Escape",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Escape",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Escape",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Expedition",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Expedition",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Expedition",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-250 Super Duty",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-350 Super Duty",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-450 Super Duty",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "F-550 Super Duty",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Fiesta",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Focus",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Freestyle",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Freestyle",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Freestyle",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Police Interceptor Sedan",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Police Interceptor Utility",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Taurus X",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Taurus X",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Thunderbird",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Thunderbird",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Thunderbird",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Thunderbird",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2021
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit Connect",
+    2022
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2021
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2022
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2023
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ford",
+    "Transit",
+    2024
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Aviator",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Aviator",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Aviator",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Blackwood",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Blackwood",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Continental",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKC",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKT",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKX",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKX",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKX",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "MKZ",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Mark LT",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Nautilus",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Navigator",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Navigator",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Navigator",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Lincoln",
+    "Zephyr",
+    2006
+   ]
+  }
+ ],
+ "funnel_cars": {
+  "ac-compressor": {
+   "no_records": {
+    "": 10698
+   },
+   "not_closed": {
+    "ambig_target": 409,
+    "no_year_manifest": 47163
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "alternator": {
+   "no_records": {
+    "": 7322
+   },
+   "not_closed": {
+    "no_year_manifest": 50948
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "climate-control": {
+   "no_records": {
+    "": 24881
+   },
+   "not_closed": {
+    "ambig_target": 166,
+    "no_year_manifest": 33223
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "fuel-pump-module": {
+   "no_records": {
+    "": 26197
+   },
+   "not_closed": {
+    "ambig_target": 89,
+    "no_year_manifest": 31984
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "headlights": {
+   "no_records": {
+    "": 16065
+   },
+   "not_closed": {
+    "ambig_target": 410,
+    "no_year_manifest": 41795
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "power-steering-pump": {
+   "no_records": {
+    "": 32651
+   },
+   "not_closed": {
+    "no_year_manifest": 25619
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "side-mirrors": {
+   "no_records": {
+    "": 9404
+   },
+   "not_closed": {
+    "ambig_target": 454,
+    "no_year_manifest": 48412
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "starter": {
+   "no_records": {
+    "": 18085
+   },
+   "not_closed": {
+    "ambig_target": 17,
+    "no_year_manifest": 40168
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "tail-lights": {
+   "no_records": {
+    "": 14012
+   },
+   "not_closed": {
+    "ambig_target": 458,
+    "no_year_manifest": 43800
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "throttle-body": {
+   "no_records": {
+    "": 27324
+   },
+   "not_closed": {
+    "no_year_manifest": 30946
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "tow-mirrors": {
+   "no_records": {
+    "": 52379
+   },
+   "not_closed": {
+    "ambig_target": 220,
+    "no_year_manifest": 5671
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "window-regulator": {
+   "no_records": {
+    "": 17356
+   },
+   "not_closed": {
+    "ambig_target": 17,
+    "no_year_manifest": 40897
+   },
+   "unmapped": {
+    "": 2247
+   }
+  },
+  "window-switch": {
+   "no_records": {
+    "": 16352
+   },
+   "not_closed": {
+    "ambig_target": 151,
+    "no_year_manifest": 41767
+   },
+   "unmapped": {
+    "": 2247
+   }
+  }
+ },
+ "funnel_cars_hypothetical_if_every_year_closed": {
+  "by_cat": {
+   "ac-compressor": {
+    "conditional": {
+     "conditional:engine": 1121,
+     "conditional:notes_not_own_page": 12732,
+     "conditional:option_layout": 1226
+    },
+    "no_records": {
+     "": 10698
+    },
+    "split": {
+     "option_split": 32493
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "alternator": {
+    "conditional": {
+     "conditional:engine": 266,
+     "conditional:notes_not_own_page": 7263,
+     "conditional:option_layout": 703
+    },
+    "no_records": {
+     "": 7322
+    },
+    "split": {
+     "option_split": 42716
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "climate-control": {
+    "conditional": {
+     "conditional:colour": 186,
+     "conditional:notes_not_own_page": 8169,
+     "conditional:option_layout": 336
+    },
+    "no_records": {
+     "": 24881
+    },
+    "split": {
+     "option_split": 24698
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "fuel-pump-module": {
+    "conditional": {
+     "conditional:notes_not_own_page": 4936,
+     "conditional:option_layout": 1764
+    },
+    "no_records": {
+     "": 26197
+    },
+    "split": {
+     "option_split": 25373
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "headlights": {
+    "conditional": {
+     "conditional:notes_not_own_page": 7605,
+     "conditional:option": 102,
+     "conditional:option_layout": 1364
+    },
+    "no_records": {
+     "": 16065
+    },
+    "split": {
+     "option_split": 32319,
+     "slot_missing": 815
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "power-steering-pump": {
+    "conditional": {
+     "conditional:colour": 366,
+     "conditional:engine": 296,
+     "conditional:notes_not_own_page": 10984,
+     "conditional:option": 163,
+     "conditional:option_layout": 2627
+    },
+    "no_records": {
+     "": 32651
+    },
+    "split": {
+     "option_split": 11183
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "side-mirrors": {
+    "conditional": {
+     "conditional:colour": 117,
+     "conditional:notes_not_own_page": 2218,
+     "conditional:option": 399,
+     "conditional:option_layout": 219
+    },
+    "no_records": {
+     "": 9404
+    },
+    "split": {
+     "option_split": 43860,
+     "slot_missing": 2053
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "starter": {
+    "conditional": {
+     "conditional:notes_not_own_page": 5533,
+     "conditional:option": 163,
+     "conditional:option_layout": 835
+    },
+    "no_records": {
+     "": 18085
+    },
+    "split": {
+     "option_split": 33654
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "tail-lights": {
+    "conditional": {
+     "conditional:notes_not_own_page": 5259,
+     "conditional:option": 2,
+     "conditional:option_layout": 1124
+    },
+    "no_records": {
+     "": 14012
+    },
+    "split": {
+     "option_split": 37384,
+     "slot_missing": 489
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "throttle-body": {
+    "conditional": {
+     "conditional:engine": 57,
+     "conditional:notes_not_own_page": 13675,
+     "conditional:option": 154,
+     "conditional:option_layout": 2771
+    },
+    "no_records": {
+     "": 27324
+    },
+    "split": {
+     "option_split": 14289
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "tow-mirrors": {
+    "no_records": {
+     "": 52379
+    },
+    "split": {
+     "option_split": 2928,
+     "position_conflict": 607,
+     "slot_missing": 2356
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "window-regulator": {
+    "conditional": {
+     "conditional:option_layout": 595
+    },
+    "no_records": {
+     "": 17356
+    },
+    "split": {
+     "packaging_incomplete": 3899,
+     "packaging_split": 13909,
+     "packaging_unstated": 21713,
+     "position_missing": 798
+    },
+    "unmapped": {
+     "": 2247
+    }
+   },
+   "window-switch": {
+    "conditional": {
+     "conditional:colour": 1244,
+     "conditional:notes_not_own_page": 3612,
+     "conditional:option_layout": 1239
+    },
+    "no_records": {
+     "": 16352
+    },
+    "split": {
+     "no_candidates": 3029,
+     "option_split": 20391,
+     "position_missing": 12403
+    },
+    "unmapped": {
+     "": 2247
+    }
+   }
+  },
+  "label": "HYPOTHETICAL: closure (C1-C9) and the audit gate (E5) assumed, current candidate state; ranks crawler work, never shipped"
+ },
+ "input_issues": [],
+ "lint": [],
+ "map_proposals": [
+  {
+   "cat_make": "Ford",
+   "cat_model": "E-550 Super Duty",
+   "feed_cars": 0,
+   "fitment_rows": 12,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "E-550 Super Duty",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "EcoSport",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "EcoSport",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "Ecosport",
+     74
+    ]
+   ]
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "Econoline Super Duty(1996-1999)",
+   "feed_cars": 0,
+   "fitment_rows": 29,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "Econoline Super Duty(1996-1999)",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "F Super Duty",
+   "feed_cars": 0,
+   "fitment_rows": 31,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "F Super Duty",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "F-Super Duty",
+     6
+    ]
+   ]
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "F53",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "F-53",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercury",
+   "cat_model": "Lynx",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "ford",
+   "proposed": {
+    "make": "Mercury",
+    "model": "Lynx",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "model_map_report": {
+  "M10": {
+   "ford": {
+    "cars": 60517,
+    "mapped_cars": 58270,
+    "mapped_share": 0.9629
+   },
+   "gm": {
+    "cars": 78869,
+    "mapped_cars": 63716,
+    "mapped_share": 0.8079
+   },
+   "hmg": {
+    "cars": 21842,
+    "mapped_cars": 21627,
+    "mapped_share": 0.9902
+   },
+   "honda": {
+    "cars": 28559,
+    "mapped_cars": 28151,
+    "mapped_share": 0.9857
+   },
+   "mopar": {
+    "cars": 44184,
+    "mapped_cars": 41841,
+    "mapped_share": 0.947
+   },
+   "nissan": {
+    "cars": 33192,
+    "mapped_cars": 31865,
+    "mapped_share": 0.96
+   },
+   "subaru": {
+    "cars": 5555,
+    "mapped_cars": 5292,
+    "mapped_share": 0.9527
+   },
+   "toyota": {
+    "cars": 26335,
+    "mapped_cars": 25629,
+    "mapped_share": 0.9732
+   }
+  },
+  "M6": {
+   "by_target": {
+    "Acura|CL": {
+     "decoded": 108
+    },
+    "Acura|Integra": {
+     "decoded": 84
+    },
+    "Acura|Legend": {
+     "decoded": 37
+    },
+    "Acura|MDX": {
+     "decoded": 887,
+     "make_mismatch": 2
+    },
+    "Acura|RDX": {
+     "decoded": 122
+    },
+    "Acura|RL": {
+     "decoded": 107
+    },
+    "Acura|RLX": {
+     "decoded": 3
+    },
+    "Acura|RSX": {
+     "decoded": 108
+    },
+    "Acura|TL": {
+     "decoded": 1126,
+     "make_mismatch": 1
+    },
+    "Acura|TLX": {
+     "decoded": 30
+    },
+    "Acura|TSX": {
+     "decoded": 144
+    },
+    "Acura|ZDX": {
+     "decoded": 4
+    },
+    "Buick|Allure": {
+     "decoded": 16
+    },
+    "Buick|Cascada": {
+     "decoded": 2
+    },
+    "Buick|Century": {
+     "decoded": 565
+    },
+    "Buick|Electra": {
+     "decoded": 5
+    },
+    "Buick|Enclave": {
+     "decoded": 952
+    },
+    "Buick|Encore": {
+     "decoded": 252
+    },
+    "Buick|Encore GX": {
+     "decoded": 7
+    },
+    "Buick|Envision": {
+     "decoded": 23
+    },
+    "Buick|Envista": {
+     "decoded": 3
+    },
+    "Buick|LaCrosse": {
+     "decoded": 863
+    },
+    "Buick|LeSabre": {
+     "decoded": 901
+    },
+    "Buick|Lucerne": {
+     "decoded": 496
+    },
+    "Buick|Park Avenue": {
+     "decoded": 54
+    },
+    "Buick|Rainier": {
+     "decoded": 72
+    },
+    "Buick|Reatta": {},
+    "Buick|Regal": {
+     "decoded": 456
+    },
+    "Buick|Rendezvous": {
+     "decoded": 292
+    },
+    "Buick|Riviera": {
+     "decoded": 4
+    },
+    "Buick|Roadmaster": {
+     "decoded": 13
+    },
+    "Buick|Skyhawk": {},
+    "Buick|Skylark": {
+     "decoded": 10
+    },
+    "Buick|Terraza": {
+     "decoded": 36
+    },
+    "Buick|Verano": {
+     "decoded": 345
+    },
+    "Cadillac|ATS": {
+     "decoded": 128
+    },
+    "Cadillac|Allante": {},
+    "Cadillac|Brougham": {
+     "decoded": 5
+    },
+    "Cadillac|CT5": {},
+    "Cadillac|CT6": {
+     "decoded": 2
+    },
+    "Cadillac|CTS": {
+     "decoded": 584
+    },
+    "Cadillac|DTS": {
+     "decoded": 36
+    },
+    "Cadillac|DeVille": {
+     "decoded": 184,
+     "make_mismatch": 1
+    },
+    "Cadillac|ELR": {
+     "decoded": 1
+    },
+    "Cadillac|Eldorado": {
+     "decoded": 28
+    },
+    "Cadillac|Escalade": {
+     "decoded": 482,
+     "hybrid": 6
+    },
+    "Cadillac|Fleetwood": {
+     "decoded": 6
+    },
+    "Cadillac|SRX": {
+     "decoded": 563
+    },
+    "Cadillac|STS": {
+     "decoded": 67
+    },
+    "Cadillac|Seville": {
+     "decoded": 120
+    },
+    "Cadillac|XLR": {},
+    "Cadillac|XT5": {
+     "decoded": 10
+    },
+    "Cadillac|XTS": {
+     "decoded": 71
+    },
+    "Chevrolet|Astro": {
+     "decoded": 410
+    },
+    "Chevrolet|Avalanche": {
+     "decoded": 394
+    },
+    "Chevrolet|Beretta": {
+     "decoded": 5
+    },
+    "Chevrolet|Blazer": {
+     "decoded": 532
+    },
+    "Chevrolet|Bolt EV": {
+     "decoded": 2
+    },
+    "Chevrolet|C10": {
+     "decoded": 26
+    },
+    "Chevrolet|C1500": {
+     "decoded": 254
+    },
+    "Chevrolet|C20": {
+     "decoded": 4
+    },
+    "Chevrolet|C2500": {
+     "decoded": 73,
+     "make_mismatch": 1
+    },
+    "Chevrolet|C30": {
+     "decoded": 3
+    },
+    "Chevrolet|C3500": {
+     "decoded": 41
+    },
+    "Chevrolet|Camaro": {
+     "decoded": 454
+    },
+    "Chevrolet|Caprice": {
+     "decoded": 71
+    },
+    "Chevrolet|Captiva Sport": {
+     "decoded": 248
+    },
+    "Chevrolet|Cavalier": {
+     "decoded": 174
+    },
+    "Chevrolet|Celebrity": {},
+    "Chevrolet|Cobalt": {
+     "decoded": 1218
+    },
+    "Chevrolet|Colorado": {
+     "decoded": 492
+    },
+    "Chevrolet|Corsica": {
+     "decoded": 4
+    },
+    "Chevrolet|Corvette": {
+     "decoded": 12
+    },
+    "Chevrolet|Cruze": {
+     "decoded": 3611
+    },
+    "Chevrolet|Equinox": {
+     "decoded": 3401
+    },
+    "Chevrolet|Express": {
+     "decoded": 1
+    },
+    "Chevrolet|G10": {
+     "decoded": 5
+    },
+    "Chevrolet|G20": {
+     "decoded": 45
+    },
+    "Chevrolet|G30": {
+     "decoded": 8
+    },
+    "Chevrolet|HHR": {
+     "decoded": 766
+    },
+    "Chevrolet|Impala": {
+     "decoded": 3177
+    },
+    "Chevrolet|K10": {
+     "decoded": 1
+    },
+    "Chevrolet|K1500": {
+     "decoded": 274
+    },
+    "Chevrolet|K20": {
+     "decoded": 2
+    },
+    "Chevrolet|K2500": {
+     "decoded": 93
+    },
+    "Chevrolet|K3500": {
+     "decoded": 14
+    },
+    "Chevrolet|Lumina": {
+     "decoded": 49
+    },
+    "Chevrolet|Malibu": {
+     "decoded": 4334,
+     "hybrid": 24
+    },
+    "Chevrolet|Metro": {},
+    "Chevrolet|Monte Carlo": {
+     "decoded": 303
+    },
+    "Chevrolet|Orlando": {
+     "decoded": 12
+    },
+    "Chevrolet|P30": {
+     "decoded": 2
+    },
+    "Chevrolet|R30": {
+     "decoded": 4
+    },
+    "Chevrolet|R3500": {
+     "decoded": 2
+    },
+    "Chevrolet|S-10": {
+     "decoded": 851,
+     "make_mismatch": 3
+    },
+    "Chevrolet|Silverado": {},
+    "Chevrolet|Sonic": {
+     "decoded": 1040
+    },
+    "Chevrolet|Spark": {
+     "decoded": 282
+    },
+    "Chevrolet|Spark EV": {
+     "decoded": 3
+    },
+    "Chevrolet|Sprint": {},
+    "Chevrolet|Suburban": {
+     "decoded": 3
+    },
+    "Chevrolet|Tahoe": {
+     "decoded": 2291,
+     "hybrid": 1
+    },
+    "Chevrolet|Trailblazer": {
+     "decoded": 1621
+    },
+    "Chevrolet|Traverse": {
+     "decoded": 1796
+    },
+    "Chevrolet|Trax": {
+     "decoded": 239
+    },
+    "Chevrolet|Uplander": {
+     "decoded": 295
+    },
+    "Chevrolet|Venture": {
+     "decoded": 188
+    },
+    "Chevrolet|Volt": {
+     "decoded": 84
+    },
+    "Chrysler|200": {
+     "decoded": 1674
+    },
+    "Chrysler|300": {
+     "decoded": 1336
+    },
+    "Chrysler|300M": {
+     "decoded": 68
+    },
+    "Chrysler|Aspen": {
+     "decoded": 138
+    },
+    "Chrysler|Cirrus": {
+     "decoded": 13
+    },
+    "Chrysler|Concorde": {
+     "decoded": 62
+    },
+    "Chrysler|Fifth Avenue": {},
+    "Chrysler|Imperial": {},
+    "Chrysler|LHS": {
+     "decoded": 21
+    },
+    "Chrysler|LeBaron": {
+     "decoded": 21
+    },
+    "Chrysler|New Yorker": {
+     "decoded": 12
+    },
+    "Chrysler|PT Cruiser": {
+     "decoded": 1004
+    },
+    "Chrysler|Pacifica": {
+     "decoded": 411
+    },
+    "Chrysler|Sebring": {
+     "decoded": 803
+    },
+    "Chrysler|TC By Maserati": {
+     "decoded": 3
+    },
+    "Chrysler|Town & Country": {
+     "decoded": 2294
+    },
+    "Chrysler|Voyager": {
+     "decoded": 49
+    },
+    "Dodge|Aries": {
+     "decoded": 1
+    },
+    "Dodge|Avenger": {
+     "decoded": 1150
+    },
+    "Dodge|B150": {
+     "decoded": 2
+    },
+    "Dodge|B1500": {
+     "decoded": 1
+    },
+    "Dodge|B250": {
+     "decoded": 6
+    },
+    "Dodge|B2500": {
+     "decoded": 7
+    },
+    "Dodge|B350": {
+     "decoded": 4
+    },
+    "Dodge|B3500": {
+     "decoded": 7
+    },
+    "Dodge|Caliber": {
+     "decoded": 723
+    },
+    "Dodge|Caravan": {
+     "decoded": 748
+    },
+    "Dodge|Challenger": {
+     "decoded": 147
+    },
+    "Dodge|Charger": {
+     "decoded": 1599
+    },
+    "Dodge|D100": {
+     "decoded": 4
+    },
+    "Dodge|D150": {
+     "decoded": 22
+    },
+    "Dodge|D350": {},
+    "Dodge|Dakota": {
+     "decoded": 1438
+    },
+    "Dodge|Dart": {
+     "decoded": 787
+    },
+    "Dodge|Daytona": {
+     "decoded": 6
+    },
+    "Dodge|Diplomat": {},
+    "Dodge|Durango": {
+     "decoded": 1385
+    },
+    "Dodge|Dynasty": {
+     "decoded": 3
+    },
+    "Dodge|Grand Caravan": {
+     "decoded": 2767
+    },
+    "Dodge|Intrepid": {
+     "decoded": 71
+    },
+    "Dodge|Journey": {
+     "decoded": 1637
+    },
+    "Dodge|Lancer": {},
+    "Dodge|Magnum": {
+     "decoded": 230
+    },
+    "Dodge|Mini Ram": {
+     "decoded": 3
+    },
+    "Dodge|Neon": {
+     "decoded": 272,
+     "make_mismatch": 1
+    },
+    "Dodge|Nitro": {
+     "decoded": 362
+    },
+    "Dodge|Ram 1500": {
+     "decoded": 3559
+    },
+    "Dodge|Ram 2500": {
+     "decoded": 280
+    },
+    "Dodge|Ram 3500": {
+     "decoded": 32
+    },
+    "Dodge|Ram Van": {
+     "decoded": 163
+    },
+    "Dodge|Ram Van 1500": {
+     "decoded": 22
+    },
+    "Dodge|Ram Van 2500": {
+     "decoded": 10
+    },
+    "Dodge|Ram Van 3500": {
+     "decoded": 14
+    },
+    "Dodge|Ram Wagon": {
+     "decoded": 56
+    },
+    "Dodge|Ramcharger": {
+     "decoded": 8
+    },
+    "Dodge|Rampage": {
+     "decoded": 1
+    },
+    "Dodge|Shadow": {
+     "decoded": 3
+    },
+    "Dodge|Spirit": {},
+    "Dodge|Stratus": {
+     "decoded": 241
+    },
+    "Dodge|W100": {
+     "decoded": 1
+    },
+    "Dodge|W150": {
+     "decoded": 5
+    },
+    "Dodge|W250": {
+     "decoded": 1
+    },
+    "Dodge|W350": {
+     "decoded": 2
+    },
+    "Ford|Aerostar": {
+     "decoded": 60
+    },
+    "Ford|Bronco": {
+     "decoded": 35
+    },
+    "Ford|Bronco II": {
+     "decoded": 36
+    },
+    "Ford|C-Max": {
+     "decoded": 79
+    },
+    "Ford|Contour": {
+     "decoded": 53
+    },
+    "Ford|Crown Victoria": {
+     "decoded": 279
+    },
+    "Ford|E-150": {
+     "decoded": 681
+    },
+    "Ford|E-250": {
+     "decoded": 705
+    },
+    "Ford|E-450 Super Duty": {
+     "decoded": 2
+    },
+    "Ford|E-Transit": {},
+    "Ford|Edge": {
+     "decoded": 1621
+    },
+    "Ford|Escape": {
+     "decoded": 4109
+    },
+    "Ford|Escort": {
+     "decoded": 209
+    },
+    "Ford|Excursion": {
+     "decoded": 84
+    },
+    "Ford|Expedition": {
+     "decoded": 2690
+    },
+    "Ford|Explorer": {
+     "decoded": 3782
+    },
+    "Ford|Explorer Sport": {
+     "decoded": 76
+    },
+    "Ford|Explorer Sport Trac": {
+     "decoded": 428
+    },
+    "Ford|F-150": {
+     "decoded": 7749
+    },
+    "Ford|F-250": {
+     "decoded": 676
+    },
+    "Ford|F-250 Super Duty": {
+     "decoded": 508
+    },
+    "Ford|F-350": {
+     "decoded": 223
+    },
+    "Ford|F-350 Super Duty": {
+     "decoded": 211
+    },
+    "Ford|F-450 Super Duty": {
+     "decoded": 25
+    },
+    "Ford|F-550 Super Duty": {
+     "decoded": 11
+    },
+    "Ford|Fiesta": {
+     "decoded": 1026
+    },
+    "Ford|Five Hundred": {
+     "decoded": 325
+    },
+    "Ford|Flex": {
+     "decoded": 476
+    },
+    "Ford|Focus": {
+     "decoded": 5318
+    },
+    "Ford|Freestar": {
+     "decoded": 204
+    },
+    "Ford|Freestyle": {
+     "decoded": 207
+    },
+    "Ford|Fusion": {
+     "decoded": 4216,
+     "hybrid": 160
+    },
+    "Ford|Mustang": {
+     "decoded": 1048
+    },
+    "Ford|Police Interceptor Sedan": {
+     "decoded": 16
+    },
+    "Ford|Police Interceptor Utility": {
+     "decoded": 50
+    },
+    "Ford|Probe": {
+     "decoded": 11
+    },
+    "Ford|Ranger": {
+     "decoded": 1755
+    },
+    "Ford|Taurus": {
+     "decoded": 2257
+    },
+    "Ford|Taurus X": {
+     "decoded": 73
+    },
+    "Ford|Tempo": {
+     "decoded": 13
+    },
+    "Ford|Thunderbird": {
+     "decoded": 86
+    },
+    "Ford|Transit": {
+     "decoded": 15
+    },
+    "Ford|Transit Connect": {
+     "decoded": 261
+    },
+    "Ford|Windstar": {
+     "decoded": 261
+    },
+    "GMC|Acadia": {
+     "decoded": 1464
+    },
+    "GMC|C1500": {
+     "decoded": 58
+    },
+    "GMC|C2500": {
+     "decoded": 9
+    },
+    "GMC|C3500": {
+     "decoded": 4
+    },
+    "GMC|Canyon": {
+     "decoded": 106
+    },
+    "GMC|Envoy": {
+     "decoded": 696
+    },
+    "GMC|G1500": {
+     "decoded": 1
+    },
+    "GMC|G2500": {
+     "decoded": 5
+    },
+    "GMC|Jimmy": {
+     "decoded": 146
+    },
+    "GMC|K1500": {
+     "decoded": 8
+    },
+    "GMC|K2500": {
+     "decoded": 1
+    },
+    "GMC|K3500": {
+     "decoded": 2
+    },
+    "GMC|S-15": {
+     "decoded": 14
+    },
+    "GMC|Safari": {
+     "decoded": 140
+    },
+    "GMC|Savana": {
+     "decoded": 152
+    },
+    "GMC|Sierra": {},
+    "GMC|Sonoma": {
+     "decoded": 195
+    },
+    "GMC|Suburban": {},
+    "GMC|Terrain": {
+     "decoded": 993
+    },
+    "GMC|Yukon": {
+     "decoded": 934,
+     "hybrid": 1
+    },
+    "Honda|Accord": {
+     "decoded": 7706,
+     "hybrid": 44,
+     "make_mismatch": 1
+    },
+    "Honda|Accord Hybrid": {
+     "decoded": 23,
+     "hybrid": 23
+    },
+    "Honda|CR-V": {
+     "decoded": 1558
+    },
+    "Honda|CR-Z": {
+     "decoded": 18
+    },
+    "Honda|CRX": {
+     "decoded": 5
+    },
+    "Honda|Civic": {
+     "decoded": 5651,
+     "hybrid": 301
+    },
+    "Honda|Crosstour": {
+     "decoded": 44
+    },
+    "Honda|Del Sol": {
+     "decoded": 1
+    },
+    "Honda|Element": {
+     "decoded": 303
+    },
+    "Honda|Fit": {
+     "decoded": 177
+    },
+    "Honda|HR-V": {
+     "decoded": 24
+    },
+    "Honda|Insight": {
+     "decoded": 96
+    },
+    "Honda|Odyssey": {
+     "decoded": 3115
+    },
+    "Honda|Pilot": {
+     "decoded": 1788
+    },
+    "Honda|Prelude": {
+     "decoded": 38
+    },
+    "Honda|Ridgeline": {
+     "decoded": 195
+    },
+    "Hummer|H2": {
+     "decoded": 10
+    },
+    "Hummer|H3": {
+     "decoded": 97
+    },
+    "Hyundai|Accent": {
+     "decoded": 1009
+    },
+    "Hyundai|Azera": {
+     "decoded": 126
+    },
+    "Hyundai|Elantra": {
+     "decoded": 2408
+    },
+    "Hyundai|Elantra GT": {
+     "decoded": 96
+    },
+    "Hyundai|Elantra Touring": {
+     "decoded": 44
+    },
+    "Hyundai|Entourage": {
+     "decoded": 44
+    },
+    "Hyundai|Equus": {
+     "decoded": 28
+    },
+    "Hyundai|Excel": {
+     "decoded": 4
+    },
+    "Hyundai|Genesis": {
+     "decoded": 273
+    },
+    "Hyundai|Genesis Coupe": {
+     "decoded": 97
+    },
+    "Hyundai|Kona": {
+     "decoded": 18
+    },
+    "Hyundai|Palisade": {
+     "decoded": 2
+    },
+    "Hyundai|Santa Fe": {
+     "decoded": 1015
+    },
+    "Hyundai|Santa Fe Sport": {
+     "decoded": 101
+    },
+    "Hyundai|Santa Fe XL": {
+     "decoded": 15
+    },
+    "Hyundai|Scoupe": {
+     "decoded": 1
+    },
+    "Hyundai|Sonata": {
+     "decoded": 3349,
+     "hybrid": 35
+    },
+    "Hyundai|Sonata Hybrid": {
+     "decoded": 80,
+     "hybrid": 31
+    },
+    "Hyundai|Tiburon": {
+     "decoded": 87
+    },
+    "Hyundai|Tucson": {
+     "decoded": 466
+    },
+    "Hyundai|Veloster": {
+     "decoded": 257
+    },
+    "Hyundai|Veloster N": {
+     "decoded": 1
+    },
+    "Hyundai|Veracruz": {
+     "decoded": 75
+    },
+    "Hyundai|XG300": {},
+    "Hyundai|XG350": {},
+    "Infiniti|EX35": {
+     "decoded": 70
+    },
+    "Infiniti|EX37": {
+     "decoded": 1
+    },
+    "Infiniti|FX35": {
+     "decoded": 238
+    },
+    "Infiniti|FX37": {
+     "decoded": 7
+    },
+    "Infiniti|FX45": {
+     "decoded": 17
+    },
+    "Infiniti|FX50": {
+     "decoded": 7
+    },
+    "Infiniti|G20": {
+     "decoded": 14
+    },
+    "Infiniti|G25": {
+     "decoded": 24
+    },
+    "Infiniti|G35": {
+     "decoded": 807
+    },
+    "Infiniti|G37": {
+     "decoded": 288
+    },
+    "Infiniti|I30": {
+     "decoded": 14
+    },
+    "Infiniti|I35": {
+     "decoded": 32
+    },
+    "Infiniti|J30": {
+     "decoded": 12
+    },
+    "Infiniti|JX35": {
+     "decoded": 32
+    },
+    "Infiniti|M35": {
+     "decoded": 192
+    },
+    "Infiniti|M35h": {
+     "decoded": 2
+    },
+    "Infiniti|M37": {
+     "decoded": 39
+    },
+    "Infiniti|M45": {
+     "decoded": 39
+    },
+    "Infiniti|M56": {
+     "decoded": 2
+    },
+    "Infiniti|Q40": {
+     "decoded": 7
+    },
+    "Infiniti|Q45": {
+     "decoded": 14
+    },
+    "Infiniti|Q50": {
+     "decoded": 121
+    },
+    "Infiniti|Q60": {
+     "decoded": 8
+    },
+    "Infiniti|Q70": {
+     "decoded": 8
+    },
+    "Infiniti|Q70L": {
+     "decoded": 3
+    },
+    "Infiniti|QX4": {
+     "decoded": 98
+    },
+    "Infiniti|QX50": {
+     "decoded": 24
+    },
+    "Infiniti|QX56": {
+     "decoded": 239
+    },
+    "Infiniti|QX60": {
+     "decoded": 162
+    },
+    "Infiniti|QX70": {
+     "decoded": 12
+    },
+    "Infiniti|QX80": {
+     "decoded": 22
+    },
+    "Jeep|Cherokee": {
+     "decoded": 770
+    },
+    "Jeep|Comanche": {
+     "decoded": 5
+    },
+    "Jeep|Commander": {
+     "decoded": 407
+    },
+    "Jeep|Compass": {
+     "decoded": 854
+    },
+    "Jeep|Grand Cherokee": {
+     "decoded": 2936
+    },
+    "Jeep|Grand Cherokee L": {},
+    "Jeep|Grand Wagoneer": {
+     "decoded": 4
+    },
+    "Jeep|J10": {
+     "decoded": 1
+    },
+    "Jeep|Liberty": {
+     "decoded": 1631
+    },
+    "Jeep|Patriot": {
+     "decoded": 1200,
+     "make_mismatch": 2
+    },
+    "Jeep|Renegade": {
+     "decoded": 152
+    },
+    "Jeep|Wagoneer": {
+     "decoded": 6
+    },
+    "Jeep|Wrangler": {
+     "decoded": 198
+    },
+    "Kia|Amanti": {
+     "decoded": 12
+    },
+    "Kia|Borrego": {
+     "decoded": 53
+    },
+    "Kia|Cadenza": {
+     "decoded": 70
+    },
+    "Kia|Forte": {
+     "decoded": 974
+    },
+    "Kia|Forte Koup": {
+     "decoded": 71
+    },
+    "Kia|K4": {
+     "decoded": 4
+    },
+    "Kia|K5": {
+     "decoded": 8
+    },
+    "Kia|K900": {
+     "decoded": 6
+    },
+    "Kia|Niro": {
+     "decoded": 18
+    },
+    "Kia|Optima": {
+     "decoded": 1853,
+     "hybrid": 8
+    },
+    "Kia|Optima Hybrid": {
+     "decoded": 30,
+     "hybrid": 1
+    },
+    "Kia|Rio": {
+     "decoded": 564
+    },
+    "Kia|Rondo": {
+     "decoded": 139
+    },
+    "Kia|Sedona": {
+     "decoded": 465
+    },
+    "Kia|Seltos": {
+     "decoded": 3
+    },
+    "Kia|Sephia": {
+     "decoded": 16
+    },
+    "Kia|Sorento": {
+     "decoded": 1138
+    },
+    "Kia|Soul": {
+     "decoded": 1420
+    },
+    "Kia|Soul EV": {
+     "decoded": 1
+    },
+    "Kia|Spectra": {
+     "decoded": 365
+    },
+    "Kia|Sportage": {
+     "decoded": 528
+    },
+    "Kia|Stinger": {
+     "decoded": 4
+    },
+    "Kia|Telluride": {
+     "decoded": 5
+    },
+    "Lexus|CT 200h": {
+     "decoded": 8
+    },
+    "Lexus|ES 300": {
+     "decoded": 440
+    },
+    "Lexus|ES 300h": {
+     "decoded": 1
+    },
+    "Lexus|ES 330": {
+     "decoded": 208
+    },
+    "Lexus|ES 350": {
+     "decoded": 229
+    },
+    "Lexus|GS 300": {
+     "decoded": 178
+    },
+    "Lexus|GS 350": {
+     "decoded": 60
+    },
+    "Lexus|GS 400": {
+     "decoded": 23
+    },
+    "Lexus|GS 430": {
+     "decoded": 17
+    },
+    "Lexus|GS 450h": {
+     "decoded": 14
+    },
+    "Lexus|GS 460": {
+     "decoded": 1
+    },
+    "Lexus|GX 470": {
+     "decoded": 11
+    },
+    "Lexus|HS 250h": {
+     "decoded": 9
+    },
+    "Lexus|IS 200t": {
+     "decoded": 1
+    },
+    "Lexus|IS 250": {
+     "decoded": 237
+    },
+    "Lexus|IS 300": {
+     "decoded": 55
+    },
+    "Lexus|IS 350": {
+     "decoded": 37
+    },
+    "Lexus|LS 430": {
+     "decoded": 100
+    },
+    "Lexus|LS 460": {
+     "decoded": 81
+    },
+    "Lexus|RC 350": {},
+    "Lexus|RX 300": {
+     "decoded": 310
+    },
+    "Lexus|RX 330": {
+     "decoded": 119
+    },
+    "Lexus|RX 350": {
+     "decoded": 123
+    },
+    "Lexus|RX 400h": {
+     "decoded": 54
+    },
+    "Lexus|RX 450h": {
+     "decoded": 9
+    },
+    "Lexus|SC 430": {
+     "decoded": 14
+    },
+    "Lincoln|Aviator": {
+     "decoded": 96
+    },
+    "Lincoln|Blackwood": {
+     "decoded": 2
+    },
+    "Lincoln|Continental": {
+     "decoded": 14
+    },
+    "Lincoln|LS": {
+     "decoded": 81
+    },
+    "Lincoln|MKC": {
+     "decoded": 23
+    },
+    "Lincoln|MKS": {
+     "decoded": 163
+    },
+    "Lincoln|MKT": {
+     "decoded": 68
+    },
+    "Lincoln|MKX": {
+     "decoded": 320
+    },
+    "Lincoln|MKZ": {
+     "decoded": 387,
+     "hybrid": 29
+    },
+    "Lincoln|Mark LT": {
+     "decoded": 33
+    },
+    "Lincoln|Mark VII": {
+     "decoded": 12
+    },
+    "Lincoln|Mark VIII": {
+     "decoded": 28
+    },
+    "Lincoln|Nautilus": {
+     "decoded": 2
+    },
+    "Lincoln|Navigator": {
+     "decoded": 550
+    },
+    "Lincoln|Town Car": {
+     "decoded": 691
+    },
+    "Lincoln|Zephyr": {
+     "decoded": 59
+    },
+    "Mercury|Capri": {
+     "decoded": 8
+    },
+    "Mercury|Cougar": {
+     "decoded": 74,
+     "make_mismatch": 1
+    },
+    "Mercury|Grand Marquis": {
+     "decoded": 778
+    },
+    "Mercury|Mariner": {
+     "decoded": 253
+    },
+    "Mercury|Milan": {
+     "decoded": 254,
+     "hybrid": 7
+    },
+    "Mercury|Montego": {
+     "decoded": 80
+    },
+    "Mercury|Monterey": {
+     "decoded": 31
+    },
+    "Mercury|Mountaineer": {
+     "decoded": 333
+    },
+    "Mercury|Mystique": {
+     "decoded": 14
+    },
+    "Mercury|Sable": {
+     "decoded": 237
+    },
+    "Mercury|Topaz": {
+     "decoded": 6
+    },
+    "Mercury|Tracer": {
+     "decoded": 18
+    },
+    "Nissan|200SX": {
+     "decoded": 10
+    },
+    "Nissan|350Z": {
+     "decoded": 91
+    },
+    "Nissan|Altima": {
+     "decoded": 7459,
+     "make_mismatch": 1
+    },
+    "Nissan|Armada": {
+     "decoded": 575
+    },
+    "Nissan|Cube": {
+     "decoded": 109
+    },
+    "Nissan|Frontier": {
+     "decoded": 528
+    },
+    "Nissan|Juke": {
+     "decoded": 281
+    },
+    "Nissan|Kicks": {
+     "decoded": 30
+    },
+    "Nissan|Leaf": {
+     "decoded": 64
+    },
+    "Nissan|Maxima": {
+     "decoded": 1604
+    },
+    "Nissan|Murano": {
+     "decoded": 1543
+    },
+    "Nissan|NV": {
+     "decoded": 4
+    },
+    "Nissan|Pathfinder": {
+     "decoded": 1841
+    },
+    "Nissan|Quest": {
+     "decoded": 500
+    },
+    "Nissan|Rogue": {
+     "decoded": 2089
+    },
+    "Nissan|Sentra": {
+     "decoded": 3529
+    },
+    "Nissan|Stanza": {
+     "decoded": 4
+    },
+    "Nissan|Titan": {
+     "decoded": 650,
+     "make_mismatch": 1
+    },
+    "Nissan|Versa": {
+     "decoded": 1958
+    },
+    "Nissan|Xterra": {
+     "decoded": 936
+    },
+    "Oldsmobile|88": {
+     "decoded": 13
+    },
+    "Oldsmobile|98": {
+     "decoded": 1
+    },
+    "Oldsmobile|Achieva": {
+     "decoded": 6
+    },
+    "Oldsmobile|Alero": {
+     "decoded": 153
+    },
+    "Oldsmobile|Aurora": {},
+    "Oldsmobile|Bravada": {
+     "decoded": 60
+    },
+    "Oldsmobile|Calais": {
+     "decoded": 1
+    },
+    "Oldsmobile|Custom Cruiser": {},
+    "Oldsmobile|Cutlass": {
+     "decoded": 1
+    },
+    "Oldsmobile|Delta 88": {
+     "decoded": 13
+    },
+    "Oldsmobile|Firenza": {},
+    "Oldsmobile|Intrigue": {
+     "decoded": 54
+    },
+    "Oldsmobile|Silhouette": {
+     "decoded": 39
+    },
+    "Oldsmobile|Toronado": {
+     "decoded": 5
+    },
+    "Pontiac|6000": {
+     "decoded": 1
+    },
+    "Pontiac|Aztek": {
+     "decoded": 54
+    },
+    "Pontiac|Bonneville": {
+     "decoded": 138
+    },
+    "Pontiac|Fiero": {
+     "decoded": 15
+    },
+    "Pontiac|Firebird": {
+     "decoded": 100
+    },
+    "Pontiac|G5": {
+     "decoded": 125
+    },
+    "Pontiac|G6": {
+     "decoded": 942
+    },
+    "Pontiac|Grand Am": {
+     "decoded": 385
+    },
+    "Pontiac|Grand Prix": {
+     "decoded": 663
+    },
+    "Pontiac|Montana": {
+     "decoded": 98
+    },
+    "Pontiac|Pursuit": {
+     "decoded": 12
+    },
+    "Pontiac|Solstice": {
+     "decoded": 12
+    },
+    "Pontiac|Sunbird": {
+     "decoded": 14
+    },
+    "Pontiac|Sunfire": {
+     "decoded": 4
+    },
+    "Pontiac|Torrent": {
+     "decoded": 168
+    },
+    "Pontiac|Trans Sport": {
+     "decoded": 15
+    },
+    "Pontiac|Vibe": {
+     "decoded": 348
+    },
+    "Ram|1500": {
+     "decoded": 368
+    },
+    "Ram|1500 Classic": {
+     "decoded": 12
+    },
+    "Ram|2500": {
+     "decoded": 25
+    },
+    "Ram|3500": {
+     "decoded": 1
+    },
+    "Ram|C/V": {
+     "decoded": 23
+    },
+    "Ram|Dakota": {
+     "decoded": 7
+    },
+    "Ram|ProMaster 1500": {
+     "decoded": 22
+    },
+    "Ram|ProMaster 2500": {
+     "decoded": 10
+    },
+    "Ram|ProMaster 3500": {
+     "decoded": 4
+    },
+    "Ram|ProMaster City": {
+     "decoded": 32
+    },
+    "Saturn|Astra": {
+     "decoded": 44
+    },
+    "Saturn|Aura": {
+     "decoded": 310,
+     "hybrid": 3
+    },
+    "Saturn|ION": {
+     "decoded": 418
+    },
+    "Saturn|L100": {},
+    "Saturn|L200": {},
+    "Saturn|L300": {
+     "decoded": 19
+    },
+    "Saturn|LS": {},
+    "Saturn|LS1": {},
+    "Saturn|LW1": {},
+    "Saturn|LW200": {},
+    "Saturn|Outlook": {
+     "decoded": 141
+    },
+    "Saturn|Relay": {
+     "decoded": 19
+    },
+    "Saturn|Sky": {
+     "decoded": 3
+    },
+    "Saturn|VUE": {
+     "decoded": 745,
+     "hybrid": 12
+    },
+    "Scion|iM": {
+     "decoded": 1
+    },
+    "Scion|tC": {
+     "decoded": 608
+    },
+    "Scion|xA": {
+     "decoded": 100
+    },
+    "Scion|xB": {
+     "decoded": 466
+    },
+    "Scion|xD": {
+     "decoded": 103
+    },
+    "Subaru|Baja": {
+     "decoded": 13
+    },
+    "Subaru|Crosstrek": {
+     "decoded": 23
+    },
+    "Subaru|Forester": {
+     "decoded": 1150
+    },
+    "Subaru|Impreza": {
+     "decoded": 814,
+     "make_mismatch": 1
+    },
+    "Subaru|Impreza WRX": {
+     "decoded": 4
+    },
+    "Subaru|Legacy": {
+     "decoded": 862
+    },
+    "Subaru|Outback": {
+     "decoded": 1275
+    },
+    "Subaru|SVX": {
+     "decoded": 2
+    },
+    "Subaru|Tribeca": {
+     "decoded": 57,
+     "make_mismatch": 1
+    },
+    "Subaru|WRX": {
+     "decoded": 8
+    },
+    "Subaru|XV Crosstrek": {
+     "decoded": 89
+    },
+    "Toyota|4Runner": {
+     "decoded": 464
+    },
+    "Toyota|Avalon": {
+     "decoded": 1045,
+     "hybrid": 5
+    },
+    "Toyota|Camry": {
+     "decoded": 6899,
+     "gas": 2235,
+     "hybrid": 241
+    },
+    "Toyota|Camry Hybrid": {
+     "decoded": 96,
+     "hybrid": 96
+    },
+    "Toyota|Camry Solara": {
+     "decoded": 458
+    },
+    "Toyota|Celica": {
+     "decoded": 183
+    },
+    "Toyota|Corolla": {
+     "decoded": 3126
+    },
+    "Toyota|Corolla iM": {
+     "decoded": 2
+    },
+    "Toyota|Cressida": {
+     "decoded": 5
+    },
+    "Toyota|Echo": {
+     "decoded": 122
+    },
+    "Toyota|FJ Cruiser": {
+     "decoded": 4
+    },
+    "Toyota|Highlander": {
+     "decoded": 698,
+     "hybrid": 40
+    },
+    "Toyota|Land Cruiser": {
+     "decoded": 4
+    },
+    "Toyota|MR2": {
+     "decoded": 6
+    },
+    "Toyota|MR2 Spyder": {
+     "decoded": 2
+    },
+    "Toyota|Matrix": {
+     "decoded": 379
+    },
+    "Toyota|Mirai": {
+     "decoded": 5
+    },
+    "Toyota|Paseo": {
+     "decoded": 7
+    },
+    "Toyota|Pickup": {
+     "decoded": 63
+    },
+    "Toyota|Previa": {
+     "decoded": 36
+    },
+    "Toyota|Prius": {
+     "decoded": 1327
+    },
+    "Toyota|Prius C": {
+     "decoded": 56
+    },
+    "Toyota|Prius Plug-In": {
+     "decoded": 6
+    },
+    "Toyota|Prius Prime": {
+     "decoded": 2
+    },
+    "Toyota|Prius V": {
+     "decoded": 45
+    },
+    "Toyota|RAV4": {
+     "decoded": 751,
+     "make_mismatch": 1
+    },
+    "Toyota|Sequoia": {
+     "decoded": 369
+    },
+    "Toyota|Sienna": {
+     "decoded": 1473
+    },
+    "Toyota|Supra": {
+     "decoded": 11
+    },
+    "Toyota|Tacoma": {
+     "decoded": 198
+    },
+    "Toyota|Tercel": {
+     "decoded": 77
+    },
+    "Toyota|Tundra": {
+     "decoded": 409
+    },
+    "Toyota|Van": {
+     "decoded": 8
+    },
+    "Toyota|Venza": {
+     "decoded": 34
+    },
+    "Toyota|Yaris": {
+     "decoded": 346,
+     "make_mismatch": 1
+    }
+   },
+   "note": "vPIC model is not in the published inventory; checked make mismatches and, for hybrid trim subsets, vPIC trim 'Gas'"
+  },
+  "M9_cars_outside_catalog_years": {},
+  "skipped": []
+ },
+ "near_miss_rows": [],
+ "ns": "ford",
+ "open_reasons_cells": {
+  "ambig_target": 108,
+  "no_year_manifest": 5321
+ },
+ "raw": {
+  "commit": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e",
+  "ref": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e",
+  "sites": {
+   "www.fordpartsgiant.com": {
+    "blocked": false,
+    "done": false,
+    "lists": 0,
+    "lists_sha256": null,
+    "records": 2945,
+    "records_sha256": "0d98dad296646a47817ea05f8d99c3969f812f00fa2b4829604d70437ac227a3",
+    "years": 0,
+    "years_sha256": null
+   }
+  }
+ },
+ "refusals": [
+  {
+   "cat": "ac-compressor",
+   "detail": "13 feed models",
+   "evidence": [],
+   "pn": "F7LZ-19703-AA",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1768"
+   ],
+   "pn": "F4TZ19703A",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2339"
+   ],
+   "pn": "E9TZ19703C",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2340"
+   ],
+   "pn": "FOTZ19703G",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "14 feed models",
+   "evidence": [],
+   "pn": "HU2Z-10V346-CDRM",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1021"
+   ],
+   "pn": "YL1Z19980BA",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1288"
+   ],
+   "pn": "F4DZ19980AB",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1294"
+   ],
+   "pn": "YW3Z13008AB",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2397"
+   ],
+   "pn": "E9TZ13008C",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2398"
+   ],
+   "pn": "E9TZ13008D",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2886"
+   ],
+   "pn": "F6SZ13008BJ",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2887"
+   ],
+   "pn": "F6SZ13008AJ",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1457"
+   ],
+   "pn": "E4UZ17682A",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1550"
+   ],
+   "pn": "F57Z17682F",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2518"
+   ],
+   "pn": "XF1Z17682BAA",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2529"
+   ],
+   "pn": "XF1Z17682BAB",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2866"
+   ],
+   "pn": "F1TZ17682G",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2867"
+   ],
+   "pn": "F1TZ17683G",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2908"
+   ],
+   "pn": "F2OY17682A",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2912"
+   ],
+   "pn": "E3TZ17682C",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2930"
+   ],
+   "pn": "ford:4C3Z17683EAA",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2931"
+   ],
+   "pn": "ford:4C3Z17682EAA",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L58"
+   ],
+   "pn": "ford:9L3Z17682AC",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L58"
+   ],
+   "pn": "ford:9L3Z17682AC",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "14 feed models",
+   "evidence": [],
+   "pn": "DL3Z-11002-A",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "14 feed models",
+   "evidence": [],
+   "pn": "HD9Z-11002-B",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2271"
+   ],
+   "pn": "F7ZZ13404CA",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2343"
+   ],
+   "pn": "F1TZ13404C",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2863"
+   ],
+   "pn": "F3TZ13404BCP",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2884"
+   ],
+   "pn": "E4TZ13405C",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2888"
+   ],
+   "pn": "F2SZ13404B",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2889"
+   ],
+   "pn": "F2SZ13405B",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2890"
+   ],
+   "pn": "F7SZ13404AA",
+   "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "13 feed models",
+   "evidence": [],
+   "pn": "9W7Z-9E926-A",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "16 feed models",
+   "evidence": [],
+   "pn": "7T4Z-9E926-FA",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "tow-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2466"
+   ],
+   "pn": "ford:5C3Z17682EAA",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "tow-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2466"
+   ],
+   "pn": "ford:5C3Z17682EAA",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "tow-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2467"
+   ],
+   "pn": "ford:5C3Z17683EAA",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "tow-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L2467"
+   ],
+   "pn": "ford:5C3Z17683EAA",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "tow-mirrors",
+   "evidence": [
+    "www.fordpartsgiant.com:records:L820"
+   ],
+   "pn": "ford:4L3Z17682BA",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "13 feed models",
+   "evidence": [],
+   "pn": "6L2Z-14529-BAA",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "16 feed models",
+   "evidence": [],
+   "pn": "YF1Z-14529-ABA",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "25 feed models",
+   "evidence": [],
+   "pn": "E6DZ-14529-C",
+   "reason": "universal_part_suspect",
+   "t": null
+  }
+ ],
+ "sites_without_namespace": [
+  "www.audipartsgiant.com",
+  "www.bmwpartsdeal.com",
+  "www.mazdapartsnow.com",
+  "www.mbpartsgiant.com",
+  "www.mitsubishipartsgiant.com",
+  "www.volvopartsgiant.com",
+  "www.vwpartsgiant.com"
+ ],
+ "summary": {
+  "blocked_sites": [],
+  "cells": 5429,
+  "classes": 2945,
+  "gates": [
+   "no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close (C1/C2); Verified is impossible by design until the crawler writes them",
+   "no (site, category) of this namespace has passed the audit gate (CATEGORY_STATUS has no record; spec 11.4, E5/V7)",
+   "engine cells not audited as reliable on www.fordpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
+   "www.fordpartsgiant.com: only 1% of its 6473 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
+  ],
+  "likely_groups": 923,
+  "list_rows": 0,
+  "records": 2945,
+  "verified_groups": 0,
+  "vg_groups": 0,
+  "why_no_verified": "no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close (C1/C2); Verified is impossible by design until the crawler writes them; no (site, category) of this namespace has passed the audit gate (CATEGORY_STATUS has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.fordpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.fordpartsgiant.com: only 1% of its 6473 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",
+  "year_manifests": 0
+ },
+ "unknown_note_clauses": {
+  "\"BEFORE 01/17/01\"": 2,
+  "\"From 5/84\"": 2,
+  "\"PADDLE\" swing": 3,
+  "\"PADDLE\" swing-lock": 1,
+  "'Mitsubishi'": 1,
+  "(+) SVT": 4,
+  "(-) SVT": 8,
+  "(-)\"CH\"": 1,
+  "(-)\"CHL\"": 3,
+  "(-)\"DZA\"": 4,
+  "(-)\"GCC\"Gulf Cooperative Countries": 8,
+  "(-)\"Japan\"": 5,
+  "(-)\"KOR\"": 15,
+  "(-)\"LAR\"": 4,
+  "(-)\"MA\"": 4,
+  "(-)\"RA\"": 4,
+  "(-)\"TN\"": 4,
+  "(-)\"TW\"": 3,
+  "(-)\"VN\"": 1,
+  "(-7*)": 1,
+  "(-T*)": 1,
+  "(-W*)": 1,
+  "(CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 340,
+  "(LH)": 1,
+  "(Lightning)": 1,
+  "(NOTE: Contains no servicable internal parts.)": 2,
+  "(NOTE: Contains no servicable parts": 12,
+  "(NOTE: Prior 1997 model year O.E.M. replacement will also require new 10344 pulley)": 3,
+  "(NOTE: contains no servicable parts": 1,
+  "(Note: Contains no servicable parts": 1,
+  "(Reg Cab)": 2,
+  "(Regular Cab, Super Cab) - power": 4,
+  "(Regular Cab, Super Cab) - signal mirror": 4,
+  "(SuperCrew) - power": 4,
+  "(SuperCrew) - signal mirror": 4,
+  "(Supercab)": 2,
+  "1 Port": 2,
+  "1 each": 2,
+  "1.9L CFI": 1,
+  "1/2\" x 7": 2,
+  "1/4\"": 2,
+  "110 amp Reman": 3,
+  "110 amp.": 1,
+  "110 amp. Reman": 2,
+  "110 amp. Reman Service Alternator for 2C2U-10300-B* (note original replacement requires new pulley # F65Z-10344-AA with ID# F65U-10A352-A2A)": 1,
+  "110V Power Convertor": 1,
+  "115 amp. Reamn (same as 130 amp Origianl replacement requires new pulley #F65Z-10344-AA)": 1,
+  "115 amp. Reman (Same as 130 amp, Note: No servicable internal parts.)": 1,
+  "115MM": 1,
+  "120 amp Reman": 2,
+  "120 amp. Reman": 2,
+  "120\" W/B": 2,
+  "130 amp Reman": 9,
+  "130 amp Reman(Original replacement may require new pulley # F65Z-10344-AA)": 1,
+  "130 amp Reman: Includes Pulley and Regulator": 4,
+  "130 amp. Reman": 2,
+  "131\"/3327.4MM Wheelbase": 5,
+  "133\"/3378MM Wheelbase": 2,
+  "13405: RH lamp where wire exits from the left side. 13404: LH lamp where wire exits from the right side.": 2,
+  "13450": 2,
+  "135 Amp Alternator": 2,
+  "139\" W/B": 4,
+  "142\"": 2,
+  "14529 Switch LH Front Door": 2,
+  "14529 Switch RH Front & RR Door Window": 1,
+  "156\" WB": 2,
+  "157\" W/B": 2,
+  "157\"/3989MM Wheelbase": 2,
+  "163\"/4140MM Wheelbase": 4,
+  "19 gal.": 1,
+  "2 Ports": 2,
+  "2-Gang Switch": 1,
+  "2-Terminal": 2,
+  "2.0L SPI": 1,
+  "2.0L SPI only": 1,
+  "2.0L ZETEC": 1,
+  "2.0L Zetec only": 1,
+  "2.3L 4V DOHC EFI I4": 1,
+  "29 gal.": 2,
+  "3 bulb": 2,
+  "3.0L 12V OHC & 24V DOHC": 1,
+  "3.0L 12V OHV": 1,
+  "3.0L 24V DOHC": 1,
+  "3.0L 4V": 1,
+  "4": 2,
+  "4 Cyl 1.6L EcoBoost SCTi -Sigma": 3,
+  "4 Cyl 1.6L PI TC ETHNL": 12,
+  "4 Cyl 2.0L DI TIVCT Petrol": 1,
+  "4 Cyl 2.0L EcoBoost (200PS)": 1,
+  "4 Cyl 2.0L EcoBoost (240PS)": 10,
+  "4 Cyl 2.5L Duratec (110kW/150PS)": 15,
+  "4 Cyl 2.5L Duratec FFV (125kW/170PS)": 20,
+  "4 Cyl 2.5L PFI Gas/Electric": 3,
+  "4 Rib Design": 2,
+  "4 x 2": 2,
+  "4\" x 6\"": 1,
+  "4.2": 1,
+  "4.2L & 4.6L / Pump and sender assy": 2,
+  "4.6": 1,
+  "4.6L SOHC 6G alternator 135 amps": 1,
+  "40 gal.": 1,
+  "40 gal. 70 micron pump element": 1,
+  "4V": 2,
+  "5-Speed Manual Transmission TR3650": 1,
+  "5.4L / Pump and sender assy": 2,
+  "6 3/4' Box Delete": 1,
+  "6 Cyl 3.0L DOHC EFI Modular": 4,
+  "6 Cyl 3.0L OHC Duratec": 4,
+  "6 Cyl 3.5L Cyclone Petrol TIVCT": 5,
+  "6 Cyl 3.5L DOHC T/C": 4,
+  "6 Cyl 3.5L DOHC VCT SMPI": 3,
+  "6 Cyl 3.5L GTDI": 2,
+  "6 Cyl 3.7L DOHC": 13,
+  "6 Cyl 3.7L PFI NA": 4,
+  "6 Cyl 4.0L SOHC EFI": 4,
+  "6 Rib Design": 1,
+  "6-Speed Automatic Transmission 6F Mid-Range": 2,
+  "6-Speed Manual Transmission (T56)": 1,
+  "6-Speed Manual Transmission - B6": 2,
+  "7 Pin": 1,
+  "70 micron pump element": 4,
+  "74": 6,
+  "75 amp Reman": 4,
+  "8 - Terminal Male": 4,
+  "8 Cyl 4.6L Romeo SOHC EFI": 14,
+  "8 Cyl 4.6L SOHC EFI": 2,
+  "8 Cyl 4.6L Windsor SOHC EFI": 2,
+  "8 Cyl 5.0L MOD DOHC SEFI NA": 2,
+  "8 Cyl 5.4L Modular SOHC": 10,
+  "8 Cyl 6.2L OHC NA": 5,
+  "8 Pin": 2,
+  "8' Box Delete": 1,
+  "95 amp Reman": 3,
+  "95 amp Reman (Original replacement may require new pulley # F65Z-10344-AA)": 1,
+  "95 amp. Reman": 1,
+  "A lens": 2,
+  "A/C Face Plate": 1,
+  "A/T / SOHC": 1,
+  "Adaptive Headlamps": 2,
+  "Adjusters": 3,
+  "Aft Axle": 2,
+  "Air Conditioning Control Panel": 1,
+  "All LHD Territories": 10,
+  "Alloy Metallic": 3,
+  "Amber (top)": 4,
+  "And Wire.": 3,
+  "Arabic": 2,
+  "Atlantic Blue- includes lens & body only": 2,
+  "Auxillary Air Conditioning Control": 2,
+  "BEFORE 26-MAR-2002": 1,
+  "BIS W/Radar-BLIS/CAN LED": 1,
+  "BLACK/SILVER": 1,
+  "Ballast": 12,
+  "Base Number: 10346": 50,
+  "Base Number: 11002": 29,
+  "Base Number: 13005": 2,
+  "Base Number: 13006": 1,
+  "Base Number: 13007": 2,
+  "Base Number: 13008": 181,
+  "Base Number: 13008A": 4,
+  "Base Number: 13008B": 3,
+  "Base Number: 13035": 1,
+  "Base Number: 13404": 116,
+  "Base Number: 13404A": 25,
+  "Base Number: 13404B": 19,
+  "Base Number: 13405": 30,
+  "Base Number: 14529": 33,
+  "Base Number: 14529A": 11,
+  "Base Number: 14529B": 1,
+  "Base Number: 14529C": 1,
+  "Base Number: 14553": 10,
+  "Base Number: 14B291A": 1,
+  "Base Number: 14B534": 2,
+  "Base Number: 17682": 346,
+  "Base Number: 17682A": 2,
+  "Base Number: 17682B": 4,
+  "Base Number: 17683": 20,
+  "Base Number: 17K707": 2,
+  "Base Number: 19497": 1,
+  "Base Number: 19703": 40,
+  "Base Number: 19980": 126,
+  "Base Number: 19980A": 10,
+  "Base Number: 19980B": 7,
+  "Base Number: 19V703": 3,
+  "Base Number: 23200": 1,
+  "Base Number: 23201": 3,
+  "Base Number: 23208": 4,
+  "Base Number: 23209": 5,
+  "Base Number: 23394": 5,
+  "Base Number: 23395": 5,
+  "Base Number: 27000": 1,
+  "Base Number: 27001": 2,
+  "Base Number: 27008": 1,
+  "Base Number: 3A674": 33,
+  "Base Number: 4L3Z-17682-CA": 1,
+  "Base Number: 4L3Z-17682-DB": 1,
+  "Base Number: 4L3Z-17683-CA": 1,
+  "Base Number: 4L3Z-17683-DB": 1,
+  "Base Number: 5L8Z-3A696-BA": 1,
+  "Base Number: 7823200": 1,
+  "Base Number: 7823395": 1,
+  "Base Number: 7L3Z-17682-AE": 1,
+  "Base Number: 7L3Z-17682-BB": 1,
+  "Base Number: 7L3Z-17683-AE": 1,
+  "Base Number: 8L3Z-17683-DA": 1,
+  "Base Number: 9275A": 1,
+  "Base Number: 9B357": 1,
+  "Base Number: 9E926": 27,
+  "Base Number: 9H307": 77,
+  "Base Number: 9L3Z-17682-EA": 1,
+  "Base Number: <23200": 40,
+  "Base Number: <23200A": 2,
+  "Base Number: <23200C": 2,
+  "Base Number: <23208": 15,
+  "Base Number: <23394": 72,
+  "Base Number: <27000": 30,
+  "Base Number: AL3Z-13008-AC": 1,
+  "Before Ordering Please Refer To OASIS Message SSM 46126 Or BCM 3847": 11,
+  "Before Ordering Please Refer To SSM 46126": 2,
+  "Black (Mexico only)": 1,
+  "Black (does not include cover, see basic service number 17D743 for cover)": 1,
+  "Black - High Gloss": 10,
+  "Black And Bright Chrome": 3,
+  "Black Moulded": 5,
+  "Black grained finish": 2,
+  "Blue / Green": 1,
+  "Blue illumination": 1,
+  "Blue/Red": 2,
+  "Body and lens": 14,
+  "Body and lens - Red (top) and Clear(bottom)": 2,
+  "Body and lens must order E8AZ 13466 A": 2,
+  "Body and lens-top position back-up lens": 2,
+  "Branded AM/FM/MP3/6 CD In Dash": 1,
+  "Bright Alantic Blue- includes lens & body only": 2,
+  "Bright Amber Clearcoat Metallic - lens & body only": 2,
+  "Bright Chrome": 2,
+  "Brown / Gold": 1,
+  "Bulbs": 3,
+  "CFI": 2,
+  "CONNECTOR": 2,
+  "Callout Name: 10346": 177,
+  "Callout Name: 10346A": 4,
+  "Callout Name: 10346B": 2,
+  "Callout Name: 11002": 77,
+  "Callout Name: 13008": 362,
+  "Callout Name: 13008A": 18,
+  "Callout Name: 13008B": 14,
+  "Callout Name: 13404": 284,
+  "Callout Name: 13404A": 61,
+  "Callout Name: 13404B": 56,
+  "Callout Name: 14529": 26,
+  "Callout Name: 14529A": 21,
+  "Callout Name: 14529B": 6,
+  "Callout Name: 14529C": 2,
+  "Callout Name: 14553": 18,
+  "Callout Name: 14B534": 4,
+  "Callout Name: 17682": 720,
+  "Callout Name: 19703": 115,
+  "Callout Name: 19980": 253,
+  "Callout Name: 19980A": 13,
+  "Callout Name: 19980B": 7,
+  "Callout Name: 19B968": 3,
+  "Callout Name: 3A674": 88,
+  "Callout Name: 9275A": 1,
+  "Callout Name: 9350": 15,
+  "Callout Name: 9B357": 1,
+  "Callout Name: 9E926": 44,
+  "Callout Name: 9H307": 141,
+  "Callout Name: <23200": 84,
+  "Callout Name: <23200A": 2,
+  "Callout Name: <23200C": 2,
+  "Callout Name: <23208": 32,
+  "Callout Name: <23394": 108,
+  "Callout Name: <27000": 62,
+  "Canada": 1,
+  "Carbon Black": 12,
+  "Cargo Van": 2,
+  "Centennial": 2,
+  "Chassis Cab": 1,
+  "Chrome Finish": 27,
+  "Chrome Surround": 8,
+  "Chrome Yellow-includes lens & body only": 2,
+  "Clear (bottom)": 4,
+  "Cobra": 2,
+  "Cobra SVT": 2,
+  "Coil (19D798)": 18,
+  "Complete - Includes Housing": 3,
+  "Complete Assembly": 27,
+  "Complete Assembly Includes A/C Compressor And Clutch": 17,
+  "Complete assembly": 32,
+  "Complete assembly - Grey bezel": 4,
+  "Complete assembly - black bezel": 2,
+  "Complete assembly - w/tamper proof adjuster & axis marks": 2,
+  "Complete assembly / L.H.": 1,
+  "Complete assembly / R.H.": 1,
+  "Complete asssembly includes side marker": 2,
+  "Complete asy": 8,
+  "Complete asy.": 8,
+  "Complete asy. includes parking lamp & I.S. 5318": 3,
+  "Compressor Clutch Kit": 1,
+  "Compressor Only": 23,
+  "Compressor only": 2,
+  "Compressor/clutch kit": 2,
+  "Contains qty. 4 of part # F75Z 13404/5 AC": 2,
+  "Control Assy - Heater": 10,
+  "Control Head - Electronic Automatic Temperature (EATC)": 1,
+  "Coupe - DOHC - A/T": 1,
+  "Coupe - DOHC - M/T": 1,
+  "Covers Or Front Catcher Bracket": 12,
+  "Crash Program part": 3,
+  "Crash part": 1,
+  "D PWR PUD LMP/HTD/MEM/BSM": 1,
+  "D Pwr Puddle Lmp/Ht/Mem/Bsm/Auto Dm": 1,
+  "DOHC": 13,
+  "DOM Steel Drive Shaft": 1,
+  "DUAL POWER MIRRORS": 4,
+  "Dark Green Satin-includes lens & body only": 2,
+  "Decontented Headlamp - Does Not Include Bulbs": 12,
+  "Decontented Headlamp - Please See Illustration": 30,
+  "Does Not Include Motor": 4,
+  "Door Trim Modification Required: Dealer To Cut Out The Door Trim Switch Opening To Fit The New Switch": 1,
+  "Dove Grey": 1,
+  "Driver Heated Seat-Variable Temp": 1,
+  "Driver Man Fold/Power Adjust Mirror": 4,
+  "Driver Power Memory Heat Mirror": 2,
+  "Driver Pwr Fold/Pwr Adjust Mirror": 1,
+  "Driver Pwr Heated Black Ext Mirror": 1,
+  "Drivers Auto Dim/Pwr/Heat/Pud/Mem": 2,
+  "Drivers Door": 1,
+  "Drivers Power Mirror W/Puddle Lamps": 4,
+  "Drivers Pwr Electro Heat/Mem Mirror": 5,
+  "Drivers Pwr Pd Lp/Mem/Htd/Sgnl/Bsm": 1,
+  "Drv Pwr Heated Mirror-Cr Sk Caps": 10,
+  "Drv Pwr Pd Lmp/Htd/Sat Al Sk Cap": 8,
+  "Drv Pwr/Heated/Mem/Puddle Lamp": 2,
+  "Drv Pwr/Htd Ck Mirror W/Puddle Lamp": 8,
+  "Du Pw/Ht/Mem/Pud Lamp/Sig/Ec Mirror": 8,
+  "Dual Mirror Pwr/Htd/Mem/Fold/Lamp": 1,
+  "Dual P/Heat/Signal/Pud Lamp/Blis": 1,
+  "Dual Power Adj/Heat/Bld Spt/Signal": 4,
+  "Dual Power Adjust/Heated/Blind Spot": 2,
+  "Dual Power Adust/Heated Mrrs W/Blis": 4,
+  "Dual Power Fold Htd Signal Mirror's": 1,
+  "Dual Power Heated Exterior Mirrors": 4,
+  "Dual Power Heated Fold Back Mirror": 3,
+  "Dual Power Heated/Appr Lmp/Signal": 2,
+  "Dual Power Mirrors-Manual Fold Back": 2,
+  "Dual Power Signal Mirrors": 1,
+  "Dual Power With Integrated Spotter": 19,
+  "Dual Power/Heat/Mem Electrochromic": 7,
+  "Dual Power/Heated Mirrors Mic": 2,
+  "Dual Power/Heated/App/Mem/Sig/Bsm": 1,
+  "Dual Power/Heated/App/Memory/Signal": 5,
+  "Dual Power/Htd/Fold/Pud Lamp Mirror": 1,
+  "Dual Power/Htd/Memory/Pud Lamp Mir": 2,
+  "Dual Pwr/Heat/Mem/E Chr/Pud Lmp Mr": 5,
+  "Dual Pwr/Heat/Mem/Pud Lmp/Sig Mr": 9,
+  "Dual Pwr/Ht/Fold/Pud Lmp/Sig/Bsm": 8,
+  "Dual Pwr/Htd/Mem/Fld/E'Chr/Pud Lamp": 5,
+  "Dual Pwr/Htd/Mem/Fld/E'Chr/Pud/Chrm": 4,
+  "Dual Sail Mtd Hand Set Mirrors": 4,
+  "Dual Sail Mtd Power Mirrors": 7,
+  "Dual Sail Telesc TT Mirror-Manual": 3,
+  "Dual Zone Auto Temp Control A/C": 17,
+  "E5MY 13466 A": 2,
+  "ED": 1,
+  "EFI": 2,
+  "EFI / Compressor Clutch Kit": 1,
+  "Ebony": 15,
+  "Ebony (smooth texture)": 1,
+  "Ebony - includes lens & body only": 2,
+  "Ebony Black": 4,
+  "Electric Motor": 2,
+  "Electric W/Shield Defrost-Partial": 3,
+  "Electronic Dual Zone ATC A/C": 17,
+  "Ensure Powerfold Mirror Is Synchronized Properly Per The Workshop": 4,
+  "Except Lightning": 2,
+  "Except Limousine": 2,
+  "Excludes Cover": 81,
+  "Ext Mirror Finish - Gloss": 8,
+  "Ext Mirrors Moulded-In Color": 2,
+  "Extended Range Single Fuel Tank": 2,
+  "Exterior Decor - Monochromatic": 6,
+  "Exterior Mirror Finish - Chrome": 15,
+  "FEATURE CONTENT GROUP 7": 1,
+  "FFV-(Ethanol) Fuel": 3,
+  "FROM 11-15-93": 2,
+  "FROM 8-31-98": 2,
+  "FS-10": 1,
+  "FWD": 9,
+  "Fit Note:": 2,
+  "Fit Note: 'Harley Davidson' Version Package": 6,
+  "Fit Note: (+) North American Markets": 22,
+  "Fit Note: (+) SVT": 10,
+  "Fit Note: (+)\"CDN/PR/USA\"": 2,
+  "Fit Note: (-) Middle East Market": 15,
+  "Fit Note: (-) SVT": 12,
+  "Fit Note: (-)\"BO\"": 3,
+  "Fit Note: (-)\"CHN\"": 9,
+  "Fit Note: (-)\"Canada\"": 7,
+  "Fit Note: (-)\"GCC\"Gulf Cooperative Countries": 53,
+  "Fit Note: (-)\"IL\"": 13,
+  "Fit Note: (-)\"Japan\"": 15,
+  "Fit Note: (-)\"KOR\"": 44,
+  "Fit Note: (-)\"TW\"": 1,
+  "Fit Note: 10 Cyl 6.8L": 1,
+  "Fit Note: 110V Power Convertor": 4,
+  "Fit Note: 119\"/3023MM Wheelbase": 6,
+  "Fit Note: 126\"/3200MM Wheelbase": 2,
+  "Fit Note: 131\"/3327.4MM Wheelbase": 3,
+  "Fit Note: 139\"/3531MM Wheelbase": 1,
+  "Fit Note: 145\"/3675MM Wheelbase": 4,
+  "Fit Note: 2.0L": 8,
+  "Fit Note: 2.3L": 1,
+  "Fit Note: 3 Door": 7,
+  "Fit Note: 3.0L": 5,
+  "Fit Note: 3.8L": 2,
+  "Fit Note: 4 Cyl 1.6L TIVCT PFI Sigma": 4,
+  "Fit Note: 4 Cyl 1.9L": 4,
+  "Fit Note: 4 Cyl 2.0L": 11,
+  "Fit Note: 4 Cyl 2.0L Duratec HE": 5,
+  "Fit Note: 4 Cyl 2.3L": 1,
+  "Fit Note: 4 Cyl 2.5L": 2,
+  "Fit Note: 4 Door Sedan": 27,
+  "Fit Note: 4 Door Wagon": 2,
+  "Fit Note: 4.6L": 10,
+  "Fit Note: 5 Door Sedan": 10,
+  "Fit Note: 50 State Emission Requirements": 1,
+  "Fit Note: 54": 6,
+  "Fit Note: 6 Cyl 3.0L": 4,
+  "Fit Note: 6 Cyl 3.0L DOHC EFI Modular": 5,
+  "Fit Note: 6 Cyl 3.5L DOHC VCT SMPI": 13,
+  "Fit Note: 6 Cyl 3.5L GTDI": 1,
+  "Fit Note: 6 Cyl 3.8L": 10,
+  "Fit Note: 6 Cyl 4.0L": 1,
+  "Fit Note: 6 Cyl 4.0L SOHC EFI": 6,
+  "Fit Note: 6 Cyl 4.2L": 2,
+  "Fit Note: 63": 8,
+  "Fit Note: 8 Cyl 4.6L": 14,
+  "Fit Note: 8 Cyl 4.6L Romeo SOHC EFI": 6,
+  "Fit Note: 8 Cyl 5.4L": 8,
+  "Fit Note: 8 Cyl 6.0L": 1,
+  "Fit Note: 81": 1,
+  "Fit Note: 83": 2,
+  "Fit Note: 99": 4,
+  "Fit Note: A/C Refrigerant-HF01234YF": 1,
+  "Fit Note: A/C Refrigerant-R134A": 3,
+  "Fit Note: AM/FM Stereo/6 CD/Navigation System": 9,
+  "Fit Note: AM/FM Stereo/CD/DVD/Nav System": 5,
+  "Fit Note: AM/FM Str/CD/Clk/Navig System": 1,
+  "Fit Note: Adaptive Rd-Following LED Headlamps": 2,
+  "Fit Note: All LHD Territories": 2,
+  "Fit Note: All Non Flex Fuel Capability": 1,
+  "Fit Note: All Radios Less Navigation": 11,
+  "Fit Note: All Second Unit Body": 4,
+  "Fit Note: All Styleside Pick-Up Box": 2,
+  "Fit Note: Alternator - 220A": 2,
+  "Fit Note: Aluminum Drive Shaft": 1,
+  "Fit Note: Appearance Group 1": 6,
+  "Fit Note: BIS W/Radar-BLIS/CAN LED": 1,
+  "Fit Note: Blind Spot Detection 2": 12,
+  "Fit Note: Blue Flame": 2,
+  "Fit Note: Bright Magenta": 2,
+  "Fit Note: Charcoal Black Interior": 1,
+  "Fit Note: Chrome Appearance Package": 4,
+  "Fit Note: Console-Floor-Full W/Chrome": 1,
+  "Fit Note: Coupe": 5,
+  "Fit Note: D Power Puddle Lamp/Htd/Bld Spt Mon": 1,
+  "Fit Note: DTRL Lamp Lit In Pos 0 And Pos": 4,
+  "Fit Note: DU Media MP3/6 Disc CD Changer": 10,
+  "Fit Note: DUAL POWER MIRRORS": 1,
+  "Fit Note: Dark Toreador": 2,
+  "Fit Note: Driftwood Beige": 2,
+  "Fit Note: Driver Heated Seat-Variable Temp": 11,
+  "Fit Note: Driver Man Fold/Power Adjust Mirror": 2,
+  "Fit Note: Driver Power Memory Heat Mirror": 2,
+  "Fit Note: Driver Power Mirror W/O Puddle Lamp": 1,
+  "Fit Note: Driver Pwr Fold/Pwr Adjust Mirror": 1,
+  "Fit Note: Driver Pwr Heated Black Ext Mirror": 2,
+  "Fit Note: Driver Pwr P Lp/Mem/Ht/BSM/LED Sgnl": 1,
+  "Fit Note: Drivers C/K Power Mirror": 2,
+  "Fit Note: Drivers Manual Adjust Flat Mirror": 1,
+  "Fit Note: Drivers Power Fld/Htd W/Puddle Lamp": 11,
+  "Fit Note: Drivers Power Heated Convex Mirror": 6,
+  "Fit Note: Drivers Power Heated T-Tow Mirror": 2,
+  "Fit Note: Drivers Power Mirror W/Puddle Lamps": 4,
+  "Fit Note: Drivers Power P Lp/Mem/Htd/LED/Sgnl": 1,
+  "Fit Note: Drivers Power/Htd/Pud/Mn T-Tow Mir": 13,
+  "Fit Note: Drivers Pwr Electro Heat/Mem Mirror": 2,
+  "Fit Note: Drivers Pwr Heated Exterior Mirror": 2,
+  "Fit Note: Drivers Pwr Mirror \"Arabic Warning\"": 1,
+  "Fit Note: Drivers Pwr/Htd W/Puddle Lamp & BSM": 1,
+  "Fit Note: Drivers S/Arm Power Mir. Flat Glass": 1,
+  "Fit Note: Drivers Sail/Man/Man T-Tow Mirror": 6,
+  "Fit Note: Drv Low Mount Recreation Mirror": 8,
+  "Fit Note: Drv Power/Heat Mirror W/Turn Signal": 1,
+  "Fit Note: Drv Pwr Heated Mir Memory Pwr Fold": 1,
+  "Fit Note: Drv Pwr Htd Mirror \"Arabic Warning\"": 1,
+  "Fit Note: Drv Pwr Mir-Pud Lmp/Mem/Chr Sk Cap": 1,
+  "Fit Note: Drv Pwr Mirr-Pud Lmp/Chrome Sk Cap": 1,
+  "Fit Note: Drv Pwr Pud Lamp/Mem/Htd/Bd Cl Sk C": 1,
+  "Fit Note: Drv Pwr/Heated/Memory/Signal Mirror": 1,
+  "Fit Note: Drv Pwr/Htd Ck Mirror W/Puddle Lamp": 5,
+  "Fit Note: Du Pw/Ht/Mem/Pud Lamp/Sig/Ec Mirror": 5,
+  "Fit Note: Dual Heavy Duty Alternators": 6,
+  "Fit Note: Dual Manual Sgnl Mirror-Body Color": 8,
+  "Fit Note: Dual Mirror Pwr/Htd/Mem/Fold/Lamp": 9,
+  "Fit Note: Dual P/Heat/Signal/Pud Lamp Mirror": 6,
+  "Fit Note: Dual P/Heat/Signal/Pud Lamp/Blis": 3,
+  "Fit Note: Dual Power Adj/Heat/Bld Spt/Signal": 16,
+  "Fit Note: Dual Power Adjust/Heated/Blind Spot": 16,
+  "Fit Note: Dual Power Adjustable Mirrs W/Blis": 4,
+  "Fit Note: Dual Power Fold Htd Signal Mirror's": 2,
+  "Fit Note: Dual Power Heated Exterior Mirrors": 4,
+  "Fit Note: Dual Power Heated Fold Back Mirror": 3,
+  "Fit Note: Dual Power Heated/Appr Lmp/Signal": 2,
+  "Fit Note: Dual Power Htd Signal Mirrors": 6,
+  "Fit Note: Dual Power Mirrors Mic": 2,
+  "Fit Note: Dual Power Mirrors-Manual Fold Back": 12,
+  "Fit Note: Dual Power Signal Mirrors": 2,
+  "Fit Note: Dual Power With Integrated Spotter": 1,
+  "Fit Note: Dual Power/Heated Mirrors Mic": 4,
+  "Fit Note: Dual Power/Heated/App/Mem/Sig/Bsm": 2,
+  "Fit Note: Dual Power/Heated/App/Memory/Signal": 4,
+  "Fit Note: Dual Power/Heated/Memory Mirrors": 1,
+  "Fit Note: Dual Power/Htd/Fold/Pud Lamp Mirror": 9,
+  "Fit Note: Dual Power/Htd/Memory/Pud Lamp Mir": 4,
+  "Fit Note: Dual Pwr/Heat/Mem/E Chr/Pud Lmp Mr": 6,
+  "Fit Note: Dual Pwr/Heat/Mem/Pud Lmp/Sig Mr": 1,
+  "Fit Note: Dual Pwr/Ht/Fold/Pud Lmp/Sig/Bsm": 6,
+  "Fit Note: Dual Pwr/Htd/Fld/E'Chro/Pudd Lamp": 2,
+  "Fit Note: Dual Pwr/Htd/Mem/Fld/E'Chr/Pud Lamp": 3,
+  "Fit Note: Dual Sail Mtd Hand Set Mirrors": 7,
+  "Fit Note: Dual Sail Mtd Power Mirrors": 12,
+  "Fit Note: Dual Sail T'Scp TT Mirrors-Pwr/Htd": 28,
+  "Fit Note: Dual Sail Telesc TT Mirror-Manual": 8,
+  "Fit Note: Dual Sail Telesc TT Power Mirror": 2,
+  "Fit Note: Dual Zone Auto Temp Control A/C": 74,
+  "Fit Note: Dual Zone Automatic Air Cond": 3,
+  "Fit Note: Dual Zone Manual Air Cond": 2,
+  "Fit Note: Ebony Solid C/C": 2,
+  "Fit Note: Electronic AM/FM/Stereo With Clock": 1,
+  "Fit Note: Electronic Dual Zone ATC A/C": 20,
+  "Fit Note: Ext Mirror Finish - Gloss": 11,
+  "Fit Note: Ext Mirrors Moulded-In Color": 2,
+  "Fit Note: Extended Plus Capacity Fuel Tank": 1,
+  "Fit Note: Exterior Decor - Base": 12,
+  "Fit Note: Exterior Decor - Monochromatic": 4,
+  "Fit Note: Exterior Light Pack": 2,
+  "Fit Note: Exterior Mirror Finish - Chrome": 4,
+  "Fit Note: Extra Heavy Duty Alternator": 6,
+  "Fit Note: FFV-(Ethanol) Fuel": 4,
+  "Fit Note: For Hot Climate Zones": 1,
+  "Fit Note: Ford And Mercury Derivative": 1,
+  "Fit Note: Ford Division Derivative": 57,
+  "Fit Note: GWP Less Than 150": 2,
+  "Fit Note: Gas/Electric Hybrid": 2,
+  "Fit Note: HD ATC Air Conditioning": 7,
+  "Fit Note: HEADLAMP BEZEL-BLACK": 10,
+  "Fit Note: HEADLAMP PREP PACK": 8,
+  "Fit Note: Halogen Headlamps - Japan": 2,
+  "Fit Note: Halogen Headlamps Less Adjustment": 4,
+  "Fit Note: Halogen Signature Headlamps": 4,
+  "Fit Note: Headlamp Bezel - Normal": 8,
+  "Fit Note: Headlamps - Halogen": 11,
+  "Fit Note: Headlamps - Unique": 8,
+  "Fit Note: Heater/AC Prep Pack-Deluxe": 1,
+  "Fit Note: Heater/Air Conditioning Prep Pack": 1,
+  "Fit Note: Heavy Duty Alternator": 11,
+  "Fit Note: High Intensity Discharge Headlamp": 30,
+  "Fit Note: Human Machine Interface 1": 5,
+  "Fit Note: Human Machine Interface 3": 4,
+  "Fit Note: Human Machine Interface 4": 2,
+  "Fit Note: Human Machine Interface 5": 8,
+  "Fit Note: Less ABS-Hill Descent Control": 5,
+  "Fit Note: Less Appearance Group": 6,
+  "Fit Note: Less Aux Overhead Heater And A/C": 4,
+  "Fit Note: Less Auxiliary Fuel Ports": 2,
+  "Fit Note: Less Clean Fuel Fleet Vehicle": 4,
+  "Fit Note: Less Evaporative Emissions": 4,
+  "Fit Note: Less Exterior Appearance Pack": 13,
+  "Fit Note: Less Exterior Dress Up Package": 4,
+  "Fit Note: Less Exterior Light Pack": 2,
+  "Fit Note: Less Floor Mounted Console": 1,
+  "Fit Note: Less Front Fog Lamps": 8,
+  "Fit Note: Less Heated Rear Window": 6,
+  "Fit Note: Less Heated Steering Wheel": 1,
+  "Fit Note: Less Heated Windscreen": 4,
+  "Fit Note: Less Lighting Packages": 2,
+  "Fit Note: Less Memory Package": 8,
+  "Fit Note: Less Mirror Glass Etching": 2,
+  "Fit Note: Less Moon Roof": 1,
+  "Fit Note: Less Onboard Vapour Recovery System": 5,
+  "Fit Note: Less Power Convertor": 5,
+  "Fit Note: Less Power Point Plug": 2,
+  "Fit Note: Less Rear Heated Seat": 1,
+  "Fit Note: Less Second Unit Body": 2,
+  "Fit Note: Less Side Marker Lamps": 1,
+  "Fit Note: Less Signal Mirror System": 2,
+  "Fit Note: Less Special Equipment Package": 2,
+  "Fit Note: Less Special Service Vehicles 2": 8,
+  "Fit Note: Less Special Service Vehicles 4": 2,
+  "Fit Note: Less Sport Plus Package": 4,
+  "Fit Note: Less Temp Control Driver Seat": 12,
+  "Fit Note: Lincoln Division Derivative": 20,
+  "Fit Note: Manual Air Conditioning": 34,
+  "Fit Note: Manual Electric Air Conditioning": 3,
+  "Fit Note: Mercury Division Derivative": 22,
+  "Fit Note: Mirror Glass Etching - Arabic": 1,
+  "Fit Note: Mirror Glass Etching - English": 1,
+  "Fit Note: Narrow Frame (Chassis Cab)": 2,
+  "Fit Note: Off-Road Package": 2,
+  "Fit Note: P Pwr Pud Lmp/Htd/Bld Spt Mon": 1,
+  "Fit Note: PASS HAND SET FLAT MIRROR": 1,
+  "Fit Note: PASS REMOTE CONTROL FLAT MIR": 1,
+  "Fit Note: PZEV Evaporative Emission": 4,
+  "Fit Note: Pass Hand Set Sail Mirror - Convex": 8,
+  "Fit Note: Pass Power Mirror \"Arabic Warning\"": 1,
+  "Fit Note: Pass Power Mirror W/O Puddle Lamp": 1,
+  "Fit Note: Pass Power w/Puddle Lamps": 2,
+  "Fit Note: Pass Power/Heat Mirror-Turn Signal": 1,
+  "Fit Note: Pass Pwr Heated Mir Memory Pwr Fold": 1,
+  "Fit Note: Pass Pwr Htd Mirror\"Arabic Warning\"": 1,
+  "Fit Note: Pass Pwr Htd Mirror-Cr Sk Caps": 2,
+  "Fit Note: Pass Pwr Mir Pud Lmp/Chrome Sk Cap": 1,
+  "Fit Note: Pass Pwr Mir-Pud Lmp/Mem/Chr Sk Cap": 1,
+  "Fit Note: Pass Pwr Pudd Lp/Mem/Htd/Bd Cl Sk C": 1,
+  "Fit Note: Pass Pwr/Htd/Mem/Signal Convex Mir": 1,
+  "Fit Note: Passenger Power Mirror": 2,
+  "Fit Note: Passenger Pwr Htd W/Pdl Lmp And BSM": 1,
+  "Fit Note: Passengers Power Aerodynamic Mirror": 6,
+  "Fit Note: Pebble Interior": 1,
+  "Fit Note: Power 4-Wheel Disc Vacuum Boost": 3,
+  "Fit Note: Power Front Windows One Touch Down": 12,
+  "Fit Note: Power Front Windows One Touch Up/Do": 20,
+  "Fit Note: Power Front Wndow-1 Tch Up/Dwn-Pass": 1,
+  "Fit Note: Power Frt Window-1 Tch Dwn-Dr Only": 13,
+  "Fit Note: Power Point Plug-Level 3": 3,
+  "Fit Note: Power Rear Window One Shot Up/Down": 10,
+  "Fit Note: Prem AM/FM Stereo/CD CHG/CLK/MP3": 1,
+  "Fit Note: Psngr Pwr P Lp/Mem/Ht/BSM/LED Sgnl": 1,
+  "Fit Note: Psngr Pwr/P Lp/Mem/Htd/LED Sgnl": 1,
+  "Fit Note: Pwr Fr Window 1 Touch Up/Dwn-Driver": 2,
+  "Fit Note: Rear Auxiliary Air Conditioning": 1,
+  "Fit Note: SE Badge": 6,
+  "Fit Note: ST Badge": 2,
+  "Fit Note: Sable": 6,
+  "Fit Note: Special Service Vehicle BB": 4,
+  "Fit Note: Sport Appearance Pack - 2": 6,
+  "Fit Note: Sport Package": 2,
+  "Fit Note: Sport Plus Package": 4,
+  "Fit Note: Standard Duty Alternator": 1,
+  "Fit Note: Standard Electric Starter Motor": 2,
+  "Fit Note: Starter - Stop/Start System": 1,
+  "Fit Note: Tail lamps - Level 1": 20,
+  "Fit Note: Tail lamps - Level 2": 12,
+  "Fit Note: Tail lamps - Level 3": 2,
+  "Fit Note: Taurus": 32,
+  "Fit Note: Telecsp TT Pwr Htd Lighted": 5,
+  "Fit Note: US MARKETS": 16,
+  "Fit Note: With 4 Wheel Disc Brake Hydro-Boost": 2,
+  "Fit Note: With 49 State/Non Green State Req": 1,
+  "Fit Note: With 6.5' Flareside Box": 3,
+  "Fit Note: With Adaptive Headlamp": 4,
+  "Fit Note: With Adaptive Headlamps Bi Xenon": 2,
+  "Fit Note: With Aero Headlamps": 4,
+  "Fit Note: With Air Conditioning": 6,
+  "Fit Note: With Aluminum Headlamp Bezels": 6,
+  "Fit Note: With Automatic Air Conditioning": 5,
+  "Fit Note: With Aux Overhead Heater And A/C": 6,
+  "Fit Note: With Auxiliary Fuel Ports": 2,
+  "Fit Note: With Black Exterior Mirror": 8,
+  "Fit Note: With Bright Headlamps": 2,
+  "Fit Note: With Clean Fuel Fleet Vehicle": 2,
+  "Fit Note: With Colored Headlamps": 2,
+  "Fit Note: With Complex Reflect B/Out Headlamp": 6,
+  "Fit Note: With Complx Refect Headlamp Design": 6,
+  "Fit Note: With Driver Electric/Heated Mirror": 2,
+  "Fit Note: With Driver Manual Mirror": 9,
+  "Fit Note: With Driver Power Mirror": 1,
+  "Fit Note: With Drivers Heated And Cooled Seat": 2,
+  "Fit Note: With Drivers Heated Seat": 2,
+  "Fit Note: With Drivers Power Mirror": 10,
+  "Fit Note: With Dual Manual Exterior Mirrors": 2,
+  "Fit Note: With Electric Rear Windows": 26,
+  "Fit Note: With Halogen Headlamp": 18,
+  "Fit Note: With Heated Rear Seats": 2,
+  "Fit Note: With Hill Descent Control": 1,
+  "Fit Note: With Lead/Unleaded Fuel": 2,
+  "Fit Note: With Level 2 Headlamps": 4,
+  "Fit Note: With Level 3 Headlamps": 11,
+  "Fit Note: With Manual Front Windows": 19,
+  "Fit Note: With Manual Rear Windows": 12,
+  "Fit Note: With Onboard Vapour Recovery System": 5,
+  "Fit Note: With Passenger Power Mirror": 3,
+  "Fit Note: With Passengers Power Memory Mirror": 1,
+  "Fit Note: With Police Equipment Pack": 1,
+  "Fit Note: With Power Front Windows": 30,
+  "Fit Note: With Power Passenger Mirror": 1,
+  "Fit Note: With Projector Beam Headlamps": 6,
+  "Fit Note: With Single Headlamp": 1,
+  "Fit Note: With Xenon Headlamps - NAS": 2,
+  "Five Button": 1,
+  "Flareside": 2,
+  "Floor Console": 2,
+  "For First Service 3E764 + 3A713 Must Be Updated To April 2011 Design": 1,
+  "For Normal Temperature Zones": 1,
+  "For Unleaded Fuel": 13,
+  "Ford Division Derivative": 20,
+  "Ford Retail Spec": 19,
+  "Four-Wheel Drive": 5,
+  "Four-Wheel Drive (Full Time) (Left Hand Drive)": 8,
+  "Four-Wheel Drive (Part Time) (Left Hand Drive)": 2,
+  "Front LH Door": 7,
+  "Front-Wheel Drive (Left Hand Drive)": 5,
+  "Fuel Pump": 3,
+  "Fuel Pump/Sending Unit": 1,
+  "GT requires wtr. by-pass vlv. kit E8FZ 8251-A": 1,
+  "Gas/Electric Hybrid": 8,
+  "Grained Finish": 2,
+  "Gray / Blue": 3,
+  "Green / Green": 1,
+  "Green Orchid": 2,
+  "HBD": 1,
+  "HBD-BW (Dark Maroon)": 1,
+  "HBD-BX (Dark Green)": 2,
+  "HBD-DA": 1,
+  "HBD-DB": 1,
+  "HBD-EL": 1,
+  "HBD-EN": 1,
+  "HBD-GG": 1,
+  "HBD-GL": 1,
+  "HBD-HT": 1,
+  "HBD-JZ": 1,
+  "HBD-KH": 1,
+  "HBD-KY": 1,
+  "HBD-ND": 1,
+  "HBD-RF": 2,
+  "HBD-RM": 1,
+  "HBD-RN": 1,
+  "HBD-RW": 2,
+  "HEADLAMP ASY.": 2,
+  "HEADLAMP BEZEL-BLACK": 2,
+  "Halogen - SVT": 1,
+  "Halogen - non SVT": 4,
+  "Has No Serviceable Components": 1,
+  "Headlamp Assy": 135,
+  "Headlamp and lens assembly-w/o bulb or socket": 2,
+  "Headlamps - Fixed DSS (LED)": 2,
+  "Headlamps - Unique": 2,
+  "Heated Seats - Drivers/Passengers": 7,
+  "Heated Style Replaced By Non Heated With Instructions": 2,
+  "Heating Ventilation Air Conditioning (HVAC) Module": 31,
+  "Heavy Duty Alternator": 5,
+  "Hi series": 2,
+  "High Intensity Discharge Headlamp": 27,
+  "High Level Aftermarket Spec": 25,
+  "High Level Aftermarket Spec / Non Warranty Repairs": 17,
+  "Housing & panel asy": 1,
+  "Housing - Throttle Plate": 3,
+  "Housing Only": 6,
+  "Human Machine Interface 1": 13,
+  "Human Machine Interface 2": 18,
+  "Human Machine Interface 3": 10,
+  "Human Machine Interface 4": 7,
+  "Human Machine Interface 6": 3,
+  "If Mirror Is Loose/Vibrates/Folds In Wind": 4,
+  "If Using For Police Vehicle": 2,
+  "In Overhead Console": 2,
+  "Includes Air Conditioning Compressor Module (ACCM) That Cannot Be Removed From The Electric A/C Compressor": 2,
+  "Includes Attaching Hardware": 2,
+  "Includes Connector": 1,
+  "Includes Cover": 4,
+  "Includes Heated Rear Window/Air Conditioning Control Buttons": 3,
+  "Includes Knob": 4,
+  "Includes Motor": 35,
+  "Includes PAG Refrigerant Compressor Oil": 1,
+  "Includes Pulley and Regul": 1,
+  "Includes Pulley and Regulator": 11,
+  "Includes Pulley and Regulator (NOTE: Contains no servicable parts": 1,
+  "Includes Regulator": 21,
+  "Includes Turn Signal Lens. Turn Signal Assembly Is Serviced In 17682/3": 5,
+  "Includes bulbs": 2,
+  "Ingot Silver Metallic": 2,
+  "Internal Harness Only Serviced With Lamp Assy": 5,
+  "It Is Built Into The Replaced Pump": 2,
+  "Kentucky plant build": 2,
+  "Keyless Entry/Start - Passive": 1,
+  "Keyless Entry/Start-Ilum Keypad": 1,
+  "Kit - Compressor": 2,
+  "L.H.": 82,
+  "L.H. Rectangular type": 1,
+  "LAMP ASY. (REAR)": 1,
+  "LED Array Is PIA To Tail Lamp Asy": 6,
+  "LED Lamp": 2,
+  "LH (for cover refer to 17D743)": 2,
+  "LH - 3 Pin Connector. (CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines.": 1,
+  "LH - 3 pin connector": 1,
+  "LH - 5 pin connector": 1,
+  "LH - 5 pin connector. (CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 1,
+  "LH - Black": 3,
+  "LH - Black (use as paint-to-match)": 1,
+  "LH - Inner": 1,
+  "LH - Outer": 1,
+  "LH - excludes cover": 1,
+  "LH Man/RH Power Brt Wstn Heat": 6,
+  "Lamp Assy - Rear": 122,
+  "Laser Red - includes lens & body only": 2,
+  "Left Hand Drive": 1,
+  "Lens & Body Only": 5,
+  "Lens & body only": 4,
+  "Lens and Body only": 2,
+  "Lens and body only": 4,
+  "Less ABS-Hill Descent Control": 1,
+  "Less Air Conditioning": 2,
+  "Less Appearance Group": 4,
+  "Less Automated Parking System": 1,
+  "Less Blind Spot Information System": 48,
+  "Less Cover": 8,
+  "Less Electric Starter": 1,
+  "Less Exterior Appearance Pack": 1,
+  "Less Front Parking Aid": 1,
+  "Less Harley Davidson Version": 4,
+  "Less Heated Rear Window": 10,
+  "Less Heated Steering Wheel": 3,
+  "Less Heated Windscreen": 3,
+  "Less Heater/Air Con Prep Pack": 1,
+  "Less Human Machine Interface": 3,
+  "Less Interior Light Group": 17,
+  "Less Mirror Cover": 1,
+  "Less Motor": 6,
+  "Less Plug In Hybrid": 2,
+  "Less Police Equip Pack": 22,
+  "Less Power Convertor": 2,
+  "Less Power Point Plug": 4,
+  "Less Pulley": 38,
+  "Less Radio": 1,
+  "Less Rear Heated Seat": 1,
+  "Less Rear Seat Radio Controls": 1,
+  "Less Seat Temperature Control": 8,
+  "Less Side Marker Lamps": 7,
+  "Less Signal Mirror System": 2,
+  "Less Special Equipment Pkg.": 1,
+  "Less Special Service Vehicles 4": 4,
+  "Less Supplemental Parking Lamps": 4,
+  "Less Temp Control Driver Seat": 61,
+  "Less Temp Control Passenger Seat": 4,
+  "Less Version Packages": 8,
+  "Light Parchment": 1,
+  "Lighting Package Level A": 2,
+  "Lightning only": 2,
+  "Lincoln Division Derivative": 27,
+  "Located In Front Floor Console": 1,
+  "Located in front of floor console": 1,
+  "Located in rear of floor console": 1,
+  "M/T / SOHC": 1,
+  "MIRROR:Passenger manual ASSEMBLY L.H. black": 1,
+  "MIRROR:Swing lock-top mounted-low profile ASSEMBLY R.H.-aero-5\" x 8\"-black": 1,
+  "MK": 1,
+  "Main Control Unit": 4,
+  "Main control located in instrument panel": 1,
+  "Male": 2,
+  "Manual Air Conditioning": 23,
+  "Manual Before Ordering A Replacement Mirror Assembly": 4,
+  "Manual Dual Mirror-Manual Fold Back": 4,
+  "Mauve/Green": 1,
+  "Mauve/Green (replaced by XW7Z-3A674-ABRM)": 1,
+  "Mercury Division Derivative": 47,
+  "Metalic coating on lamp body": 2,
+  "Mexico only": 2,
+  "Mid Version - Car": 2,
+  "Midship": 3,
+  "Mirror Assy": 76,
+  "Mirror Design Does Not Have A Removable/Serviceable Skull Cap": 8,
+  "Mirror Does Not Come With 17D742 Skull Cap. Must Order Separately": 38,
+  "Module - Electronic Automatic Temperature Control (EATC)": 7,
+  "Moisture Purge Module": 1,
+  "Monterrey Grey": 2,
+  "Motor And Attaching Components": 12,
+  "Motor Assy": 43,
+  "Motor Assy - Window Operating": 44,
+  "Motorcraft": 28,
+  "Mounting gasket XW4Z-9276-AA.": 1,
+  "Multiple Switch": 22,
+  "Must Also Order 15A101 (Strobe) If Applicable": 2,
+  "Must Be Obtained Separately If Necessary": 2,
+  "New / 150 AMP": 1,
+  "New Compressor Assembly": 1,
+  "New Compressor Assembly.": 1,
+  "New Loaded Compressor Assembly. Includes Clutch (19D786)": 18,
+  "New loaded compressor assembly. Includes clutch (19D786)": 5,
+  "New loaded compressor assembly. Includes clutch(19D786)": 2,
+  "Non Warranty Repair": 25,
+  "Not For Use On Vehicles Under Warranty": 2,
+  "Not For Warranty Repairs": 1,
+  "Not For Warranty Replacement Use": 19,
+  "Note: Warranty Repairs - Check For Technical Service Publications (SSM, TSB) Prior To Ordering": 3,
+  "O/8500 GVW": 1,
+  "O/8500 GVW - manual": 4,
+  "O/8500 GVW - power": 2,
+  "OHV": 2,
+  "One Piece Design": 6,
+  "Orange / Green": 1,
+  "Orange/Gray": 1,
+  "Original Equipment Manufacture": 1,
+  "Original Equipment Manufacture (OEM)": 1,
+  "Original Equipment Manufacturer": 23,
+  "Oxford White Solid C/C": 2,
+  "P PWR PUD LMP/HTD/MEM/BSM": 1,
+  "P Power Pd Lamp/Ht/Mem/Bsm/Auto Dim": 1,
+  "PUMP ASY.": 1,
+  "PZEV Evaporative Emission": 2,
+  "Pacific Green - includes lens & body only": 2,
+  "Package Quantity: 1": 12,
+  "Paint to match": 82,
+  "Pass Lo-Mount Black Convex Mirror": 8,
+  "Pass Manual Fold/Pwr Adjust Mirror": 13,
+  "Pass Power Fold/Power Adjust Mirror": 2,
+  "Pass Power Heat/Auto Dm/Mem/Pd Lmp": 2,
+  "Pass Power Heated - CK/Puddle Lamp": 13,
+  "Pass Power Heated Black Ext Mirror": 12,
+  "Pass Power Heated Memory Mirror": 3,
+  "Pass Power Heated T-Tow Mirror": 2,
+  "Pass Power Heated w/Puddle Lamps": 2,
+  "Pass Power Mirror \"Arabic Warning\"": 10,
+  "Pass Power w/Puddle Lamps": 6,
+  "Pass Pwr Heated Mir Memory Man Fold": 1,
+  "Pass Pwr Heated W/Puddle Lamp": 3,
+  "Pass Pwr Htd Mirror-Cr Sk Caps": 8,
+  "Pass Pwr/Htd/Mem/Puddle Lamp Mirror": 9,
+  "Pass Pwr/Htd/Pud/Man T-Tow Mirror": 10,
+  "Pass Pwr/Pud Lmp/Body Color": 8,
+  "Pass Sail/Man/Man T-Tow Mirror": 3,
+  "Passenger Power Heated Ext Mirror": 2,
+  "Passenger Pwr Fld/Htd W/Puddle Lamp": 11,
+  "Passengers Power Aerodynamic Mirror": 7,
+  "Police": 5,
+  "Power Front Windows One Touch Down": 14,
+  "Power Front Windows One Touch Up/Do": 5,
+  "Power Front Wndow-1 Tch Up/Dwn-Pass": 1,
+  "Power Mirror/Puddle/Body-Colour SK": 8,
+  "Prem AM/FM Stereo/CD CHG/CLK/MP3": 1,
+  "Primary": 1,
+  "Prime - Paint To Match": 12,
+  "Primed": 8,
+  "Production Date: 01/2000-01/2001": 3,
+  "Production Date: 01/2000-06/2005": 8,
+  "Production Date: 01/2000-07/2000": 1,
+  "Production Date: 01/2001-06/2005": 3,
+  "Production Date: 01/2007-03/2007": 1,
+  "Production Date: 01/2007-03/2008": 1,
+  "Production Date: 01/2007-04/2007": 3,
+  "Production Date: 01/2007-04/2012": 13,
+  "Production Date: 01/2007-06/2007": 1,
+  "Production Date: 01/2007-06/2008": 4,
+  "Production Date: 01/2007-07/2010": 2,
+  "Production Date: 01/2007-11/2007": 3,
+  "Production Date: 01/2007-12/2008": 4,
+  "Production Date: 01/2008-04/2009": 1,
+  "Production Date: 01/2008-07/2008": 1,
+  "Production Date: 01/2010-07/2010": 1,
+  "Production Date: 01/2011-02/2012": 7,
+  "Production Date: 01/2011-07/2011": 1,
+  "Production Date: 01/2011-08/2014": 2,
+  "Production Date: 01/2011-10/2012": 1,
+  "Production Date: 01/2011-11/2016": 1,
+  "Production Date: 01/2011-12/2011": 7,
+  "Production Date: 01/2011-12/2014": 2,
+  "Production Date: 01/2012-07/2012": 2,
+  "Production Date: 01/2015-04/2016": 1,
+  "Production Date: 02/2003-08/2004": 1,
+  "Production Date: 02/2004-08/2004": 1,
+  "Production Date: 02/2004-12/2014": 2,
+  "Production Date: 02/2005-05/2005": 4,
+  "Production Date: 02/2005-10/2005": 1,
+  "Production Date: 02/2006-02/2009": 1,
+  "Production Date: 02/2006-07/2012": 12,
+  "Production Date: 02/2007-02/2010": 1,
+  "Production Date: 02/2007-09/2008": 1,
+  "Production Date: 02/2008-06/2009": 3,
+  "Production Date: 02/2009-02/2009": 1,
+  "Production Date: 02/2009-03/2009": 3,
+  "Production Date: 02/2009-05/2010": 9,
+  "Production Date: 02/2009-06/2009": 4,
+  "Production Date: 02/2009-06/2014": 4,
+  "Production Date: 02/2009-07/2009": 1,
+  "Production Date: 02/2009-07/2012": 19,
+  "Production Date: 02/2010-09/2011": 2,
+  "Production Date: 02/2010-11/2010": 8,
+  "Production Date: 02/2010-11/2011": 2,
+  "Production Date: 02/2010-12/2014": 1,
+  "Production Date: 02/2011-12/2014": 4,
+  "Production Date: 02/2012-01/2014": 2,
+  "Production Date: 02/2012-02/2014": 4,
+  "Production Date: 02/2012-03/2012": 2,
+  "Production Date: 02/2012-03/2013": 4,
+  "Production Date: 02/2012-04/2012": 3,
+  "Production Date: 02/2012-05/2012": 1,
+  "Production Date: 02/2012-05/2015": 4,
+  "Production Date: 02/2012-06/2012": 7,
+  "Production Date: 02/2012-06/2013": 1,
+  "Production Date: 02/2012-07/2012": 3,
+  "Production Date: 02/2012-09/2012": 7,
+  "Production Date: 02/2012-10/2012": 3,
+  "Production Date: 02/2012-11/2012": 1,
+  "Production Date: 02/2012-12/2012": 1,
+  "Production Date: 02/2014-04/2016": 1,
+  "Production Date: 02/2015-04/2016": 4,
+  "Production Date: 02/2015-10/2017": 2,
+  "Production Date: 03/1999-04/2006": 1,
+  "Production Date: 03/2002-02/2003": 1,
+  "Production Date: 03/2002-02/2004": 1,
+  "Production Date: 03/2002-08/2006": 4,
+  "Production Date: 03/2002-12/2002": 2,
+  "Production Date: 03/2005-06/2009": 1,
+  "Production Date: 03/2005-07/2005": 5,
+  "Production Date: 03/2005-10/2005": 1,
+  "Production Date: 03/2005-12/2005": 1,
+  "Production Date: 03/2007-06/2007": 1,
+  "Production Date: 03/2007-07/2012": 4,
+  "Production Date: 03/2007-11/2007": 1,
+  "Production Date: 03/2008-02/2010": 2,
+  "Production Date: 03/2008-04/2012": 1,
+  "Production Date: 03/2008-06/2008": 2,
+  "Production Date: 03/2008-09/2008": 4,
+  "Production Date: 03/2009-05/2010": 1,
+  "Production Date: 03/2009-07/2012": 4,
+  "Production Date: 03/2012-04/2012": 2,
+  "Production Date: 03/2012-05/2012": 1,
+  "Production Date: 03/2016-05/2016": 1,
+  "Production Date: 03/2016-06/2016": 1,
+  "Production Date: 03/2016-07/2016": 1,
+  "Production Date: 03/2016-09/2016": 4,
+  "Production Date: 03/2017-08/2018": 2,
+  "Production Date: 04/2004-08/2005": 2,
+  "Production Date: 04/2004-11/2004": 1,
+  "Production Date: 04/2004-12/2010": 4,
+  "Production Date: 04/2005-07/2005": 1,
+  "Production Date: 04/2005-08/2007": 4,
+  "Production Date: 04/2005-08/2008": 2,
+  "Production Date: 04/2007-02/2010": 1,
+  "Production Date: 04/2007-05/2007": 2,
+  "Production Date: 04/2007-07/2007": 2,
+  "Production Date: 04/2007-08/2010": 2,
+  "Production Date: 04/2007-11/2007": 3,
+  "Production Date: 04/2007-12/2007": 4,
+  "Production Date: 04/2008-06/2008": 2,
+  "Production Date: 04/2009-12/2010": 2,
+  "Production Date: 04/2010-01/2011": 1,
+  "Production Date: 04/2010-01/2013": 1,
+  "Production Date: 04/2010-04/2013": 7,
+  "Production Date: 04/2010-07/2011": 1,
+  "Production Date: 04/2010-12/2011": 3,
+  "Production Date: 04/2012-03/2013": 1,
+  "Production Date: 04/2012-03/2014": 3,
+  "Production Date: 04/2012-03/2016": 4,
+  "Production Date: 04/2012-05/2012": 1,
+  "Production Date: 04/2012-05/2015": 2,
+  "Production Date: 04/2012-06/2013": 2,
+  "Production Date: 04/2012-09/2014": 1,
+  "Production Date: 04/2012-10/2013": 1,
+  "Production Date: 04/2012-11/2013": 4,
+  "Production Date: 04/2012-12/2012": 3,
+  "Production Date: 04/2012-12/2014": 2,
+  "Production Date: 04/2016-03/2017": 2,
+  "Production Date: 04/2016-06/2017": 2,
+  "Production Date: 04/2016-08/2018": 2,
+  "Production Date: 05/2005-07/2005": 2,
+  "Production Date: 05/2005-08/2007": 2,
+  "Production Date: 05/2005-12/2005": 3,
+  "Production Date: 05/2005-12/2007": 3,
+  "Production Date: 05/2007-01/2008": 1,
+  "Production Date: 05/2007-01/2009": 1,
+  "Production Date: 05/2007-02/2008": 1,
+  "Production Date: 05/2007-08/2007": 2,
+  "Production Date: 05/2008-02/2012": 14,
+  "Production Date: 05/2008-03/2009": 1,
+  "Production Date: 05/2008-06/2008": 3,
+  "Production Date: 05/2008-06/2009": 1,
+  "Production Date: 05/2008-08/2008": 1,
+  "Production Date: 05/2008-10/2008": 4,
+  "Production Date: 05/2008-12/2008": 2,
+  "Production Date: 05/2009-08/2009": 1,
+  "Production Date: 05/2010-02/2012": 1,
+  "Production Date: 05/2010-07/2012": 4,
+  "Production Date: 05/2010-09/2013": 1,
+  "Production Date: 05/2010-11/2010": 2,
+  "Production Date: 05/2012-04/2014": 1,
+  "Production Date: 05/2012-11/2013": 2,
+  "Production Date: 05/2012-12/2014": 1,
+  "Production Date: 05/2013-09/2013": 1,
+  "Production Date: 05/2013-12/2014": 1,
+  "Production Date: 05/2015-08/2017": 1,
+  "Production Date: 05/2016-08/2017": 1,
+  "Production Date: 06/2000-10/2005": 4,
+  "Production Date: 06/2003-02/2004": 1,
+  "Production Date: 06/2003-08/2004": 1,
+  "Production Date: 06/2003-10/2003": 3,
+  "Production Date: 06/2003-12/2003": 4,
+  "Production Date: 06/2005-12/2005": 1,
+  "Production Date: 06/2006-07/2007": 2,
+  "Production Date: 06/2006-07/2008": 8,
+  "Production Date: 06/2006-09/2007": 6,
+  "Production Date: 06/2006-12/2007": 1,
+  "Production Date: 06/2007-04/2012": 1,
+  "Production Date: 06/2007-05/2009": 1,
+  "Production Date: 06/2007-08/2008": 1,
+  "Production Date: 06/2007-09/2008": 2,
+  "Production Date: 06/2007-12/2010": 1,
+  "Production Date: 06/2008-06/2009": 1,
+  "Production Date: 06/2008-09/2008": 2,
+  "Production Date: 06/2009-05/2010": 3,
+  "Production Date: 06/2011-04/2012": 1,
+  "Production Date: 06/2012-02/2014": 2,
+  "Production Date: 06/2012-11/2012": 4,
+  "Production Date: 06/2014-03/2015": 1,
+  "Production Date: 06/2014-07/2014": 2,
+  "Production Date: 06/2016-12/2016": 1,
+  "Production Date: 07/2000-06/2005": 1,
+  "Production Date: 07/2001-06/2009": 1,
+  "Production Date: 07/2002-05/2006": 2,
+  "Production Date: 07/2004-02/2010": 4,
+  "Production Date: 07/2004-03/2005": 1,
+  "Production Date: 07/2005-07/2005": 1,
+  "Production Date: 07/2005-08/2007": 4,
+  "Production Date: 07/2005-11/2010": 1,
+  "Production Date: 07/2005-12/2005": 12,
+  "Production Date: 07/2005-12/2010": 24,
+  "Production Date: 07/2007-03/2008": 2,
+  "Production Date: 07/2007-07/2012": 3,
+  "Production Date: 07/2007-08/2008": 6,
+  "Production Date: 07/2009-02/2010": 10,
+  "Production Date: 07/2009-12/2010": 4,
+  "Production Date: 07/2010-01/2012": 1,
+  "Production Date: 07/2010-02/2012": 4,
+  "Production Date: 07/2010-04/2012": 2,
+  "Production Date: 07/2010-07/2010": 1,
+  "Production Date: 07/2010-07/2011": 4,
+  "Production Date: 07/2010-07/2012": 8,
+  "Production Date: 07/2010-12/2014": 8,
+  "Production Date: 07/2011-08/2011": 1,
+  "Production Date: 07/2011-09/2012": 1,
+  "Production Date: 07/2012-12/2012": 1,
+  "Production Date: 07/2013-04/2016": 1,
+  "Production Date: 07/2014-07/2017": 3,
+  "Production Date: 07/2014-08/2017": 1,
+  "Production Date: 08/1999-04/2006": 1,
+  "Production Date: 08/2003-07/2005": 1,
+  "Production Date: 08/2004-05/2005": 1,
+  "Production Date: 08/2004-05/2006": 2,
+  "Production Date: 08/2004-08/2005": 1,
+  "Production Date: 08/2004-08/2014": 4,
+  "Production Date: 08/2004-10/2006": 4,
+  "Production Date: 08/2004-12/2005": 3,
+  "Production Date: 08/2005-02/2009": 6,
+  "Production Date: 08/2005-03/2010": 1,
+  "Production Date: 08/2005-07/2010": 8,
+  "Production Date: 08/2005-07/2012": 4,
+  "Production Date: 08/2005-08/2008": 1,
+  "Production Date: 08/2005-12/2005": 1,
+  "Production Date: 08/2006-06/2017": 6,
+  "Production Date: 08/2006-07/2007": 3,
+  "Production Date: 08/2006-10/2007": 1,
+  "Production Date: 08/2006-12/2006": 2,
+  "Production Date: 08/2007-02/2010": 2,
+  "Production Date: 08/2007-03/2008": 1,
+  "Production Date: 08/2007-06/2008": 1,
+  "Production Date: 08/2007-09/2008": 1,
+  "Production Date: 08/2007-12/2010": 12,
+  "Production Date: 08/2008-02/2010": 6,
+  "Production Date: 08/2008-08/2010": 2,
+  "Production Date: 08/2008-09/2008": 3,
+  "Production Date: 08/2008-11/2010": 14,
+  "Production Date: 08/2009-06/2014": 1,
+  "Production Date: 08/2010-12/2014": 3,
+  "Production Date: 08/2011-02/2012": 1,
+  "Production Date: 08/2011-03/2012": 4,
+  "Production Date: 08/2011-04/2012": 1,
+  "Production Date: 08/2012-02/2014": 1,
+  "Production Date: 08/2012-12/2014": 18,
+  "Production Date: 08/2014-04/2016": 1,
+  "Production Date: 09/2004-06/2006": 4,
+  "Production Date: 09/2004-07/2005": 1,
+  "Production Date: 09/2004-12/2005": 1,
+  "Production Date: 09/2007-01/2011": 4,
+  "Production Date: 09/2007-09/2011": 6,
+  "Production Date: 09/2008-05/2010": 2,
+  "Production Date: 09/2008-06/2009": 2,
+  "Production Date: 09/2009-11/2009": 1,
+  "Production Date: 09/2009-12/2010": 1,
+  "Production Date: 09/2011-12/2014": 4,
+  "Production Date: 09/2012-01/2013": 1,
+  "Production Date: 09/2012-03/2013": 1,
+  "Production Date: 09/2012-04/2014": 2,
+  "Production Date: 09/2013-12/2013": 1,
+  "Production Date: 09/2013-12/2014": 1,
+  "Production Date: 09/2016-10/2018": 4,
+  "Production Date: 10/2003-04/2004": 1,
+  "Production Date: 10/2003-11/2004": 2,
+  "Production Date: 10/2004-06/2007": 1,
+  "Production Date: 10/2005-05/2006": 4,
+  "Production Date: 10/2011-12/2014": 1,
+  "Production Date: 10/2012-04/2014": 1,
+  "Production Date: 10/2012-05/2015": 1,
+  "Production Date: 11/2000-03/2002": 1,
+  "Production Date: 11/2000-12/2010": 20,
+  "Production Date: 11/2006-01/2007": 2,
+  "Production Date: 11/2006-07/2010": 2,
+  "Production Date: 11/2006-08/2007": 2,
+  "Production Date: 11/2006-09/2007": 4,
+  "Production Date: 11/2006-10/2007": 2,
+  "Production Date: 11/2006-12/2014": 2,
+  "Production Date: 11/2007-03/2008": 2,
+  "Production Date: 11/2007-04/2008": 2,
+  "Production Date: 11/2007-04/2012": 1,
+  "Production Date: 11/2007-06/2008": 2,
+  "Production Date: 11/2009-04/2010": 2,
+  "Production Date: 11/2009-07/2010": 3,
+  "Production Date: 11/2009-12/2010": 1,
+  "Production Date: 11/2010-04/2012": 4,
+  "Production Date: 11/2010-05/2013": 2,
+  "Production Date: 11/2010-05/2015": 1,
+  "Production Date: 11/2010-06/2014": 4,
+  "Production Date: 11/2010-10/2012": 1,
+  "Production Date: 11/2010-12/2014": 18,
+  "Production Date: 11/2011-04/2012": 1,
+  "Production Date: 11/2011-12/2014": 4,
+  "Production Date: 11/2012-04/2014": 1,
+  "Production Date: 11/2012-06/2013": 5,
+  "Production Date: 11/2013-06/2015": 2,
+  "Production Date: 12/2002-08/2004": 2,
+  "Production Date: 12/2003-02/2005": 1,
+  "Production Date: 12/2003-03/2005": 1,
+  "Production Date: 12/2003-05/2006": 1,
+  "Production Date: 12/2003-08/2005": 4,
+  "Production Date: 12/2003-11/2004": 1,
+  "Production Date: 12/2005-02/2009": 7,
+  "Production Date: 12/2005-03/2010": 1,
+  "Production Date: 12/2005-05/2006": 3,
+  "Production Date: 12/2005-05/2008": 1,
+  "Production Date: 12/2005-06/2006": 1,
+  "Production Date: 12/2005-06/2007": 1,
+  "Production Date: 12/2005-06/2014": 1,
+  "Production Date: 12/2005-08/2008": 4,
+  "Production Date: 12/2005-11/2008": 1,
+  "Production Date: 12/2005-12/2007": 6,
+  "Production Date: 12/2005-12/2008": 1,
+  "Production Date: 12/2005-12/2010": 8,
+  "Production Date: 12/2006-02/2007": 1,
+  "Production Date: 12/2006-02/2010": 10,
+  "Production Date: 12/2006-04/2007": 1,
+  "Production Date: 12/2006-06/2007": 4,
+  "Production Date: 12/2006-07/2007": 7,
+  "Production Date: 12/2006-08/2007": 4,
+  "Production Date: 12/2006-08/2014": 8,
+  "Production Date: 12/2006-09/2008": 1,
+  "Production Date: 12/2006-12/2007": 2,
+  "Production Date: 12/2007-02/2010": 4,
+  "Production Date: 12/2007-05/2008": 1,
+  "Production Date: 12/2007-06/2009": 3,
+  "Production Date: 12/2008-09/2009": 2,
+  "Production Date: 12/2008-11/2009": 2,
+  "Production Date: 12/2011-05/2012": 1,
+  "Production Date: 12/2012-01/2014": 1,
+  "Production Date: 12/2012-02/2014": 1,
+  "Production Date: 12/2013-06/2014": 1,
+  "Production Date: 12/2014-02/2015": 10,
+  "Production Date: 12/2014-03/2015": 2,
+  "Production Date: 12/2014-03/2018": 1,
+  "Production Date: 12/2014-06/2015": 1,
+  "Production Date: 12/2016-08/2017": 1,
+  "Production Date: From 01/2011": 4,
+  "Production Date: From 01/2013": 1,
+  "Production Date: From 01/2017": 4,
+  "Production Date: From 02/2011": 2,
+  "Production Date: From 02/2012": 2,
+  "Production Date: From 02/2015": 4,
+  "Production Date: From 02/2017": 2,
+  "Production Date: From 03/2012": 2,
+  "Production Date: From 03/2013": 6,
+  "Production Date: From 03/2015": 2,
+  "Production Date: From 03/2016": 12,
+  "Production Date: From 04/2012": 17,
+  "Production Date: From 04/2016": 4,
+  "Production Date: From 05/2010": 1,
+  "Production Date: From 05/2015": 4,
+  "Production Date: From 06/2014": 1,
+  "Production Date: From 06/2015": 1,
+  "Production Date: From 06/2016": 2,
+  "Production Date: From 07/2016": 1,
+  "Production Date: From 07/2017": 3,
+  "Production Date: From 08/2004": 8,
+  "Production Date: From 08/2008": 1,
+  "Production Date: From 08/2012": 13,
+  "Production Date: From 08/2017": 1,
+  "Production Date: From 09/2012": 1,
+  "Production Date: From 10/2008": 2,
+  "Production Date: From 10/2011": 1,
+  "Production Date: From 10/2012": 2,
+  "Production Date: From 11/2008": 2,
+  "Production Date: From 12/2005": 3,
+  "Production Date: From 12/2011": 6,
+  "Production Date: From 12/2012": 5,
+  "Production Date: From 12/2014": 3,
+  "Production Installed": 7,
+  "Pssnger Pwr Pd Lp/Mem/Htd/Sgnl/BSM": 1,
+  "Pulley (19D784) And Oil": 18,
+  "Pump & pulley asy. Tag ID: HBD-JC": 1,
+  "Pump and sender assy": 4,
+  "Pwr Fr Window 1 Touch Up/Dwn-Driver": 1,
+  "R.H.": 86,
+  "R.H. Rectangular type": 1,
+  "RH (for cover refer to 17D742)": 2,
+  "RH - 3 pin connector": 1,
+  "RH - 3 pin connector. (CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 1,
+  "RH - 5 pin connector": 1,
+  "RH - 5 pin connector.(CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 1,
+  "RH - Black": 3,
+  "RH - Inner": 1,
+  "RH - Outer": 1,
+  "RH - excludes cover": 1,
+  "RH/LH": 8,
+  "Rear Auxiliary Air Conditioning": 4,
+  "Rear Corner Pillar": 6,
+  "Rear stop lamp": 3,
+  "Red (middle)": 4,
+  "Red Candy Tint CC": 2,
+  "Red Surround": 4,
+  "Refer to oasis message on": 1,
+  "Refer to oasis message on 4G alternator.)Broadcast code\"BF\"": 1,
+  "Refer to oasis message on 4G alternators)": 1,
+  "Refer to oasis message on 4G alternators.)": 3,
+  "Refer to oasis message on 4G alternators.)PCM Controlled": 2,
+  "Refer to oasis message on 6G alternators)": 1,
+  "Refer to oasis message on 6G alternators.)": 4,
+  "Refer to oasis message on 6G alternators.)PCM Controlled": 2,
+  "Reg Cab - 112\" WB Flex Fuel": 1,
+  "Reg Cab - 118\" WB Flex Fuel": 1,
+  "Reg Cab-U.S./Canada/Base Export": 1,
+  "Regulator - Window - Less Motor": 18,
+  "Regulator Assy": 56,
+  "Regulator Asy - Window": 46,
+  "Reman - 130 amp": 1,
+  "Remanufactured": 2,
+  "Require Quantity: 2": 10,
+  "Require Quantity: 3": 2,
+  "Retail": 7,
+  "Retail reman - 130 amp": 1,
+  "SE Badge": 2,
+  "SEL": 6,
+  "SES Badge": 8,
+  "SES Sport Sales Badge": 2,
+  "SOHC": 7,
+  "SPI": 2,
+  "ST": 2,
+  "SVT": 1,
+  "SVT Lightning": 6,
+  "Sanden SD-709 (comp only)": 1,
+  "Satin Nickel": 2,
+  "Seals Included": 4,
+  "Secondary": 1,
+  "See Basic 17D742": 40,
+  "See Basic 17D743": 41,
+  "Sensor - Ambient Temperature": 1,
+  "Series 10": 4,
+  "Series 20": 6,
+  "Series 25": 8,
+  "Series 5": 8,
+  "Series 50": 6,
+  "Series 55": 6,
+  "Service Fix": 2,
+  "Service Kit": 14,
+  "Service Only": 4,
+  "Service Part May Differ From Production": 1,
+  "Service Starter Assembly": 1,
+  "Service replacement": 2,
+  "Shale Interior": 1,
+  "Shelby Version": 4,
+  "Silver Birch Metallic": 2,
+  "Smooth Finish": 6,
+  "Sockets": 12,
+  "Solid Housing. 17D742 Cover Not Required": 12,
+  "Special Service Vehicle BB": 2,
+  "Special Service Vehicle DB": 6,
+  "Special Service Vehicle DE": 2,
+  "Special Service Vehicles DC": 2,
+  "Special Services Vehicle": 1,
+  "Splash": 1,
+  "Square type": 2,
+  "Standard Duty Alternator": 2,
+  "Starter Motor Assy": 2,
+  "Sterling Gray": 6,
+  "Styleside": 8,
+  "Super Cab-U.S./Canada/Base Export": 1,
+  "SuperCrew / L.H.": 1,
+  "SuperCrew / R.H.": 1,
+  "Supplemental Parking Lamps": 4,
+  "Supplemental Parking Lamps Level 2": 4,
+  "Switch - Power Down Backglass": 1,
+  "Switch - Power Window": 5,
+  "Switch - Power Window RH And LH Front Window Control": 2,
+  "Switch Assy": 2,
+  "TAG ID: HBC-HA": 2,
+  "Tag ID and color: HBD-DD/RED": 1,
+  "Tag ID and color: HBD-DD/RED (being replaced by XF3Z-3A674-AA)": 1,
+  "Tag ID: HBC-JR": 2,
+  "Tag ID: HBC-JS": 2,
+  "Tag ID: HBC-JV": 2,
+  "Tag ID: HBC-JW": 2,
+  "Tag ID: HBC-KC": 2,
+  "Tag ID: HBC-LT": 1,
+  "Tag ID: HBD-AA": 1,
+  "Tag ID: HBD-AN": 2,
+  "Tag ID: HBD-CA": 2,
+  "Tag ID: HBD-DB": 1,
+  "Tag ID: HBD-DF": 1,
+  "Tag ID: HBD-ED": 2,
+  "Tag ID: HBD-GB": 1,
+  "Tag ID: HBD-GM (Dark Green)": 1,
+  "Tag ID: HBD-GN (Dark Maroon)": 1,
+  "Tag ID: HBD-HC": 1,
+  "Tag ID: HBD-HF": 1,
+  "Tail lamps - LED Rear": 2,
+  "Tail lamps - Level 1": 24,
+  "Tail lamps - Level 3": 12,
+  "Tail lamps - Level 5": 4,
+  "Telecsp TT Pwr Htd Lighted": 12,
+  "Temperature Control": 3,
+  "The 90-degree elbow is not serviced separately. It is part of this pump assembly.": 1,
+  "The 9S277 Harness On The Vehicle Is No Longer Required": 2,
+  "The Pressure Transducer Is No Longer Provided With This Assembly": 2,
+  "Truckload Program": 4,
+  "Truckload program": 6,
+  "Truckload program - Quantity of 4 per part ordered": 2,
+  "Truckload program - this part # represents a qty of 4 lamps": 2,
+  "Truckload program - type 14 - LH - Black grained finish": 1,
+  "Tuxedo Black Metallic": 2,
+  "Two Piece": 4,
+  "Two-Wheel Drive": 3,
+  "Type 12 - LH - bright": 1,
+  "Type 12 - LH - paint to match - contains a 10 pin rectangular connector (6 pins used) and a 4 pin round connector (4 pins used). Discard 4 pin round connector if originally not equipped.": 1,
+  "Type 12 - LH - paint to match - contains a 6 pin square connector only (5 pins used). Also includes a jumper harness to create a 10 pin rectangular connector (5 pins used)": 1,
+  "Type 12 - RH - paint to match - contains a 10 pin rectangular connector (6 pins used) and a 4 pin round connector (4 pins used). Discard 4 pin round connector if originally not equipped.": 1,
+  "Type 12 - RH - paint to match - contains a 6 pin square connector only (5 pins used)": 1,
+  "Type 12 - RH or LH - mirror & guard assembly - Argent": 1,
+  "Type 13": 6,
+  "Type 13 - LH": 3,
+  "Type 13 - LH - Black": 1,
+  "Type 13 - LH - Black (Crash Part - please refer to truckload program guidelines on )": 1,
+  "Type 13 - LH - Black - grained finish": 1,
+  "Type 13 - LH - Black grained finish": 2,
+  "Type 13 - LH - paint to match": 7,
+  "Type 13 - RH": 3,
+  "Type 13 - RH - Black": 1,
+  "Type 13 - RH - Black (Crash Part - please refer to truckload program guidelines on )": 1,
+  "Type 13 - RH - Black - grained finish": 1,
+  "Type 13 - RH - Black grained finish": 2,
+  "Type 13 - RH - paint to match": 7,
+  "Type 14 - LH - Black grained finish": 1,
+  "Type 14 - RH - Black grained finish - convex": 1,
+  "Type 14 - RH - Black grained finish - flat": 1,
+  "Type 14 - RH - Black grained finish - flat (Note : CP denotes crash part)": 1,
+  "Type 15 - LH": 1,
+  "Type 15 - LH (Note: Warranty Repairs - Check for Technical Service Publications (SSM, TSB) Prior To Ordering)": 1,
+  "Type 15 - LH (Note: Warranty Repairs - Check for Technical Service Publications (SSM, TSB) Prior To Ordering) (Note : CP denotes crash part)": 1,
+  "Type 15 - LH (Note: Warranty Repairs - Check for Technical Service Publications (SSM, TSB) Prior To Ordering). Glass not serviced seperately.": 1,
+  "Type 15 - LH - paint to match - contains a 10 pin rectangular connector (6 pins used) and a 4 pin round connector (4 pins used). Discard 4 pin round connector if originally not equipped.": 1,
+  "Type 15 - LH - paint to match - contains a 10 pin rectangular connector (8 pins used) and 4 pin round connector (4 pins used). Discard 4 pin round connector if originally not equipped.": 1,
+  "Type 15 - LH - paint to match - contains a 10 pin rectangular connector only (8 pins used)": 1,
+  "Type 15 - LH - paint to match - contains a 6 pin square connector only (5 pins used)": 1,
+  "Type 15 - RH": 1,
+  "Type 15 - RH (Note: Warranty Repairs - Check for Technical Service Publications (SSM, TSB) Prior To Ordering)": 2,
+  "Type 15 - RH (Note: Warranty Repairs - Check for Technical Service Publications (SSM, TSB) Prior To Ordering) (Note: CP denotes crash part)": 1,
+  "Type 15 - RH - paint to match": 2,
+  "Type 15 - RH - paint to match - contains a 10 pin rectangular connector (6 pins used) and a 4 pin round connector (4 pins used). Discard 4 pin round connector if originally not equipped.": 1,
+  "Type 15 - RH - paint to match - contains a 6 pin square connector only (5 pins used)": 1,
+  "Type 16": 4,
+  "Type 16 - LH (for cover refer to 17D742)": 1,
+  "Type 16 - LH (for cover refer to 17D743)": 8,
+  "Type 16 - LH (for cover refer to 17D743) (Note : CP denotes crash part)": 2,
+  "Type 16 - LH (for cover refer to 17D743) (Note: all signal mirrors for 2000/ have memory) Molded-in-color Black": 1,
+  "Type 16 - RH (for cover refer to 17D742)": 9,
+  "Type 16 - RH (for cover refer to 17D742) (Note : CP denotes crash part)": 2,
+  "Type 16 - RH (for cover refer to 17D742) (Note: all signal mirrors for 2000/ have memory) Molded-in-color Black": 1,
+  "Type 17 - LH - Black": 1,
+  "Type 17 - LH - Black (post mount) - flat": 1,
+  "Type 17 - LH - Black (post mount) - flat (Note : CP denotes crash part)": 1,
+  "Type 17 - RH - Black - convex": 1,
+  "Type 17 - RH - Black -(post mount) - convex": 1,
+  "Type 17 - RH - Black -(post mount) - convex (Note : CP denotes crash part)": 1,
+  "Type 18": 3,
+  "Type 18 - LH - Black (grained texture)": 1,
+  "Type 18 - LH - Black (grained texture). (CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 1,
+  "Type 18 - LH - Black - flat": 1,
+  "Type 18 - LH - Black grained finish": 1,
+  "Type 18 - RH - Black (grained texture) - convex": 1,
+  "Type 18 - RH - Black (grained texture) - convex. (CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 1,
+  "Type 18 - RH - Black - convex": 1,
+  "Type 18 - RH - Black grained finish - convex": 1,
+  "Type 18 - RH - Black grained finish - convex (Note : CP denotes crash part)": 1,
+  "Type 22 - LH - Round connector": 1,
+  "Type 22 - LH - Round connector (Note : CP denotes crash part)": 1,
+  "Type 22 - LH - Square connector": 1,
+  "Type 22 - LH - Square connector (Note : CP denotes crash part)": 1,
+  "Type 22 - RH - Round connector": 1,
+  "Type 22 - RH - Round connector (Note : CP denotes crash part)": 1,
+  "Type 22 - RH - Square connector": 1,
+  "Type 22 - RH - Square connector (Note CP denotes crash part)": 1,
+  "Type 24 - LH - Black": 5,
+  "Type 24 - LH - Black with chrome cover": 1,
+  "Type 24 - RH - Black": 3,
+  "Type 24 - RH - Black - convex": 2,
+  "Type 24 - RH - Black with chrome cover-convex": 1,
+  "Type 25 - LH": 1,
+  "Type 25 - RH": 2,
+  "Type 26": 1,
+  "Type 26 - RH - 4\" x 6\" - Black - convex": 1,
+  "Type 7": 1,
+  "Type 7 - RH - Black (does not include cover, see basic service number 17D742 for cover)": 1,
+  "U/8500 GVW": 21,
+  "U/8500 GVW - manual": 1,
+  "U/8500 GVW - power": 3,
+  "U/8500 GVW / 115 amp. Reman (Same as 130 amp, Note: No servicable internal parts.)": 1,
+  "US MARKETS": 7,
+  "USE N808955S301 AND N808956S301 ATTACHING SCREWS": 4,
+  "Ultra White - includes lens & body only": 2,
+  "User Conf DTRL Lit In Auto": 2,
+  "Vermillion - includes lens & body only": 2,
+  "W EFI": 2,
+  "W/ aero headlamps": 4,
+  "W/HEATED GLASS ``BEFORE 11/89\"": 1,
+  "W/O Puddle Light": 1,
+  "W/O puddle light": 1,
+  "W/o pickup box": 2,
+  "W/puddle light": 1,
+  "W709484S300 & YL8Z13A457BA Req'd When Replacing 13404/5 Tail Lamp": 2,
+  "Warranty Eligible": 44,
+  "Western - swing non-lock - high profile": 2,
+  "Western - swing non-lock - high profile / Type 12 - RH - bright": 1,
+  "Wide Frame (Pickup)": 2,
+  "Window Regulator": 2,
+  "Wires Exit LH Side Of Lamp": 2,
+  "Wires Exit RH Side Of Lamp": 2,
+  "With 4 Wheel Disc Brake Hydro-Boost": 3,
+  "With 49 State/Non Green State Req": 6,
+  "With 4x4": 1,
+  "With 6 3/4' Styleside Steel Box": 2,
+  "With 8' Styleside Box-Steel": 2,
+  "With A/C": 1,
+  "With AM/FM CD Player": 1,
+  "With Adaptive Headlamps Bi Xenon": 4,
+  "With Aero Headlamps": 4,
+  "With Aft-Of-Axle Fuel Tank": 2,
+  "With Air Conditioning": 3,
+  "With Aluminum Headlamp Bezels": 2,
+  "With Ambient Lighting-Interior": 14,
+  "With Automatic Air Conditioning": 23,
+  "With Aux Heater Prep Pack": 1,
+  "With Aux Overhead Heater And A/C": 3,
+  "With Auxiliary Air Conditioning": 9,
+  "With Auxiliary Visors": 1,
+  "With Base Lighting Pack": 2,
+  "With Black Exterior Mirror": 30,
+  "With Blind Spot Monitoring": 14,
+  "With Body Coloured Exterior Mirror": 12,
+  "With Bright Headlamps": 8,
+  "With California/Green State Req": 4,
+  "With Chrome Trim": 4,
+  "With Colored Headlamps": 10,
+  "With Compass Module": 1,
+  "With Driver Electric/Heated Mirror": 28,
+  "With Driver Manual Mirror": 1,
+  "With Driver Power Mirror": 16,
+  "With Drivers Electrochro Pwr Mirror": 1,
+  "With Drivers Hand Set Sail Mirror": 11,
+  "With Drivers Heated And Cooled Seat": 19,
+  "With Drivers Heated Seat": 70,
+  "With Drivers Power Mirror": 21,
+  "With Dual Manual Exterior Mirrors": 4,
+  "With Dual Media MP3/CD Radio": 10,
+  "With Electric Slide Sunroof": 1,
+  "With Executive Long Wheelbase Pack": 1,
+  "With Exterior Appearance Pack": 8,
+  "With Five Switches": 2,
+  "With Front Fog Lamps": 8,
+  "With Full Floor Console": 1,
+  "With Gas Engines": 1,
+  "With Halogen Headlamp": 34,
+  "With Halogen Headlamps - NAS": 10,
+  "With Heated Passenger Seat": 6,
+  "With Heated Rear Seats": 1,
+  "With Heated Rear Window": 13,
+  "With Heated Steering Wheel": 3,
+  "With Heated/Cooled Front Seats Only": 5,
+  "With Hill Descent Control": 3,
+  "With Indicator Light": 4,
+  "With Instruction Sheet": 7,
+  "With Integrated Spotter Mirror": 6,
+  "With Level 4 Headlamps": 8,
+  "With Load Leveling Trailer Towing": 1,
+  "With Manual Front Windows": 8,
+  "With Memory Pack": 19,
+  "With Memory Package III": 2,
+  "With Mid-Ship Fuel Tank": 5,
+  "With Navigation System": 3,
+  "With Pass Convex Elec/Heated Mirror": 30,
+  "With Pass Electric/Heated Mirror": 2,
+  "With Passenger Manual Mirror": 9,
+  "With Passenger Power Mirror": 26,
+  "With Police Aux Visibility Lighting": 2,
+  "With Police Equipment Pack": 14,
+  "With Power Front Windows": 1,
+  "With Power Passenger Mirror": 2,
+  "With Power Point Plug": 3,
+  "With Power Point Plug-Level 2": 9,
+  "With Power-Heated-Signal Mirrors": 2,
+  "With Pulley": 15,
+  "With Quad Headlamps": 16,
+  "With Rear Seat Radio Controls": 1,
+  "With Side Marker Lamps": 6,
+  "With Signal Mirror System": 4,
+  "With Single Fuel Tank": 2,
+  "With Sport Appearance Pack": 6,
+  "With Two Switches": 2,
+  "With Xenon Headlamps - NAS": 4,
+  "With aero headlamps": 3,
+  "XLT": 40,
+  "Yellow / Green": 2,
+  "Yellow Blaze 3 Coat": 2,
+  "Zua pump": 1,
+  "also order paint to match 13A537": 2,
+  "and signal": 1,
+  "and turn/park lamps with bulbs": 2,
+  "ass Pwr Pud Lmp/Htd/Sat Al Sk Cap": 8,
+  "ator": 1,
+  "backup lamp #1156": 2,
+  "coil (19D798)": 5,
+  "coil(19D798)": 2,
+  "containing Qty of 4": 2,
+  "contains 4 pcs. RH lamp assy": 2,
+  "contains qty. 4 of part # F37Z13008A": 1,
+  "contains qty. 4 of part # F37Z13404A": 2,
+  "contains qty. 4 of part # F3TZ13404B": 1,
+  "contains qty. 4 of part # F8UZ13008AA": 2,
+  "convex": 2,
+  "cotains 4 pcs.": 1,
+  "dicard jumper if not needed.": 1,
+  "does not include bulbs": 2,
+  "does not include bulbs and sockets": 2,
+  "does not include bulbs or sockets": 2,
+  "electrochromic": 2,
+  "every variation": 1,
+  "except Mexico": 2,
+  "except Police": 2,
+  "except limo": 1,
+  "fixed": 18,
+  "fleet": 3,
+  "green illumination": 1,
+  "headlamp": 2,
+  "housing part of #8A284": 2,
+  "incl. #D7TZ": 2,
+  "incl.lens & body only": 2,
+  "includes bulbs and sockets": 1,
+  "includes housing": 2,
+  "integral A/C": 1,
+  "lens & body only": 2,
+  "limo": 1,
+  "lock": 3,
+  "manual (styled)": 2,
+  "manual fold": 4,
+  "memory and signal": 1,
+  "memory with power fold": 2,
+  "non locking": 1,
+  "paint to match": 1,
+  "pulley (19D784) & oil.": 4,
+  "pulley (19D786) & oil.": 1,
+  "pulley(19D784) & oil.": 2,
+  "refer to 13007 for non-aero headlamps": 2,
+  "see basic 17D742 (Note: Warranty Repairs - Check for Technical Service Publications (SSM, TSB) Prior To Ordering)": 1,
+  "see basic 17D743 (Note: Warranty Repairs - Check for Technical Service Publications (SSM, TSB) Prior To Ordering)": 1,
+  "signal": 2,
+  "signal and memory": 1,
+  "smooth finish": 13,
+  "sockets & wiring - Red & Amber lens with clear backup lens": 2,
+  "sockets or wire harness": 2,
+  "stainless steel mirror head & C loop 96\" trailer": 1,
+  "stop lamp #1157": 2,
+  "swing": 1,
+  "taxi": 3,
+  "trailer tow": 6,
+  "trailer tow with signal": 1,
+  "two way fold": 3,
+  "up body": 1,
+  "up body / R.H.": 1,
+  "up box": 1,
+  "use (2) n808955s301 attaching screws": 2,
+  "use (2) n808955s301 attaching screws - Truckload program - Quantity of 4 per part ordered": 2,
+  "use for paint to match": 1,
+  "use with harness kit F78Z-14K095-BA": 1,
+  "w/ painted grille": 2,
+  "w/Black perimeter": 2,
+  "w/Single Alternator": 1,
+  "w/chrome grille": 1,
+  "w/flareside box": 2,
+  "w/heated glass": 21,
+  "w/integral A/C": 1,
+  "w/liftgate mounted lamp asy.": 2,
+  "w/memory seats and mirrors": 7,
+  "w/o Black perimeter": 2,
+  "w/o Black perimeter - Truckload program - Quantity of 4 per part ordered": 2,
+  "w/o High Intensity Discharge lighting": 2,
+  "w/o bright moulding on door": 1,
+  "w/o bulb shield": 2,
+  "w/o external appearance package": 3,
+  "w/o heated glass": 4,
+  "w/o memory seats and mirrors": 5,
+  "w/o pick": 3,
+  "w/o pick-up box": 1,
+  "w/o puddle light": 2,
+  "w/puddle light": 3,
+  "western": 1,
+  "with Calif. Ems.": 3,
+  "with EVO": 2,
+  "with SVT": 1,
+  "with auxiliary A/C": 2,
+  "with chrome cover": 4,
+  "with chrome cover-convex": 2,
+  "with manual A/C": 1,
+  "with manual glass (telescopic)": 4,
+  "with power glass (telescopic)": 2,
+  "with power/heated glass (telescopic)": 1,
+  "with puddle light": 2,
+  "with qtr. panel mounted lamp asy.": 2,
+  "without Calif. Ems.": 2,
+  "without EVO": 2,
+  "without SVT": 1,
+  "without cover (for cover with light module, refer to 17D743)": 1,
+  "without cover (for cover with light module, refer to 17d742, trailer tow with signal, with power/heated glass (telescopic), two way fold": 1
+ },
+ "unmapped_catalog_models": [
+  {
+   "cat_make": "Ford",
+   "cat_model": "E-350/E-350 Super Duty",
+   "excluded": "feed has no 'E-350/E-350 Super Duty'; feed splits E-350 spellings",
+   "feed": [
+    "Ford",
+    "E-350/E-350 Super Duty"
+   ],
+   "feed_cars": 0,
+   "row_years": 812
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "E-550 Super Duty",
+   "excluded": null,
+   "feed": [
+    "Ford",
+    "E-550 Super Duty"
+   ],
+   "feed_cars": 0,
+   "row_years": 20
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "EcoSport",
+   "excluded": null,
+   "feed": [
+    "Ford",
+    "EcoSport"
+   ],
+   "feed_cars": 0,
+   "row_years": 5
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "Econoline Super Duty(1996-1999)",
+   "excluded": null,
+   "feed": [
+    "Ford",
+    "Econoline Super Duty(1996-1999)"
+   ],
+   "feed_cars": 0,
+   "row_years": 83
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "F Super Duty",
+   "excluded": null,
+   "feed": [
+    "Ford",
+    "F Super Duty"
+   ],
+   "feed_cars": 0,
+   "row_years": 122
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "F53",
+   "excluded": null,
+   "feed": [
+    "Ford",
+    "F-53"
+   ],
+   "feed_cars": 0,
+   "row_years": 10
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "F53 Stripped Chassis",
+   "excluded": "catalog model with no feed cars as 'F53 Stripped Chassis' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Ford",
+    "F53 Stripped Chassis"
+   ],
+   "feed_cars": 0,
+   "row_years": 61
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "Police Responder Hybrid",
+   "excluded": "catalog model with no feed cars as 'Police Responder Hybrid' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Ford",
+    "Police Responder Hybrid"
+   ],
+   "feed_cars": 0,
+   "row_years": 28
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "SSV Plug-In Hybrid",
+   "excluded": "catalog model with no feed cars as 'SSV Plug-In Hybrid' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Ford",
+    "SSV Plug-In Hybrid"
+   ],
+   "feed_cars": 0,
+   "row_years": 28
+  },
+  {
+   "cat_make": "Mercury",
+   "cat_model": "Lynx",
+   "excluded": null,
+   "feed": [
+    "Mercury",
+    "Lynx"
+   ],
+   "feed_cars": 0,
+   "row_years": 4
+  }
+ ],
+ "validator": []
+}

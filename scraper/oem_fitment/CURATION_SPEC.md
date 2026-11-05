@@ -688,6 +688,11 @@ T is closed, and for every slot T's closed pages list:
 
 ### 5.12 Category status (policy.CATEGORY_STATUS)
 
+The audit records live in `audits.json` (loaded as `policy.CATEGORY_STATUS`), never in
+`policy.py`: `policy_sha256` hashes `policy.py`, so a record kept there would change the hash
+it must match (review, 2026-11-05). `audits.json` is not hashed; each record names the
+`policy_sha256` and raw commit it audited (V7), so any policy edit still needs a re-audit.
+
 - Every (site, category) starts `unconfirmed`.
 - It flips to `confirmed` only with an audit record `{date, auditor_session,
   sample_n, errors: 0}` (§11).
@@ -916,7 +921,13 @@ In `scraper/junkyard_scraper.py`:
     `INTERCHANGE_PART_CATEGORIES`, `ENGINE_FAMILIES`, `normalize_make`,
     `normalize_model`, `_squash_model` and `_app_matches`.
   - It drops groups whose `years[].closure.oldest_retrieved` is more than
-    120 days older than now (build-time expiry).
+    120 days older than now (build-time expiry). Likely groups carry their
+    own `oldest_retrieved` and expire the same way; when the file's `as_of`
+    is over 120 days old every group of every tier goes. `oemStatus` counts
+    the expired groups.
+  - V11 is measured on the payload exactly as written (every `oemStatus`
+    edit made, trailing newline included); an `oemVg` family dropped for
+    size is reported under the namespaces that shipped it.
   - A failing namespace file is dropped, never raised. The loader prints
     `[interchange] oem <ns> dropped: <reason>` to stderr and records
     `oemStatus[ns]`.
@@ -976,12 +987,28 @@ For every hand `platformGroups` verified group and every hand vg group G:
 - **`oem_split`.** A member is OEM-closed but not eligible because of
   `option_split` or `conditional_*`.
 
+`conditional_*` here means a real condition: a class in
+`policy.SPLIT_CONDITIONS` (plant, trim, option, engine, emissions,
+production, fuel, trans, body, package, colour, model_other, qualifier).
+Evidence gaps (notes_not_own_page, option_layout, fitted_not_listed,
+listed_not_fitted, trim/engine universes unattested or unparsed, engine
+cells unaudited, a blank trim cell, an UNKNOWN note clause) never trigger.
+A hand vg group reads `engine_cells` ([make, model, year, cat, family,
+state]): the cell narrowed to its own engine family (§5.13: E_f, TrimU_f,
+and a candidate whose every trim-layout row prints only engines outside
+the family is not a candidate). Two engines of the family each printing
+their own numbers is `conditional:engine` (a split); an engine of the
+family with no row is `family_nonuniform` (a gap). A file without `sigs`,
+`cells` and `engine_cells`, or whose cells do not hold every Verified year
+as its own signature, is refused (V1).
+
 Either trigger does three things:
 1. It demotes G for the involved cells in the payload. A platform group's
    tier becomes "likely" and its note gains " — OEM catalog numbers differ
    within this group; verify the part number". A vg group is removed.
-2. It withholds OEM Verified groups touching those cells (they become
-   Likely).
+2. It withholds OEM Verified groups touching those cells: a body group
+   becomes Likely and takes the Likely note template (§5.16), an OEM vg
+   group is removed (vg has no Likely tier). V5 is re-run on what ships.
 3. It writes a contradiction entry to `_report` and to `oemStatus`.
 
 Hand data is never edited automatically. Separately, the A-listed suspect
@@ -1053,6 +1080,9 @@ in `_load_oem_layer` (structural; drop on failure).
   record matches `policy_sha256` and the raw commit.
 - **V8. Determinism.** Ids recompute, lists are sorted, and `policy_sha256`
   matches the tree.
+  The payload loader enforces V8 and V2 (model-map targets, no Verified app on an
+  `ambig` target) too, so a committed file drops its namespace once the policy or the
+  model map changes, until it is re-curated.
 - **V9. Old-key immutability.** Built with and without `groups/`, the old
   keys differ only by demotions (verified → likely, removed vg groups, added
   ambig).

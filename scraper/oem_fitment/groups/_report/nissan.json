@@ -1,0 +1,9364 @@
+{
+ "as_of": "2026-11-05T12:52:18Z",
+ "audit_sample": {
+  "closures": [],
+  "note": "no eligible closure or Verified pair to sample",
+  "pairs": []
+ },
+ "contradictions": [],
+ "engine_refusals": [
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Versa",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX37",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX37",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G20",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G20",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G20",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G20",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G25",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G25",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1993
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1994
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1995
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1996
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M37",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M37",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M37",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M56",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M56",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M56",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q40",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1993
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1994
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1995
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1996
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q60",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q60",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX4",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX4",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX4",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX56",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX56",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX56",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Armada",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    1985
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    1986
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    1987
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    1988
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1993
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1994
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1995
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1996
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1993
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1994
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1995
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1996
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Versa",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX37",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX37",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G25",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G25",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1996
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M35h",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M35h",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M37",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M37",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M37",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M56",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M56",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M56",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q40",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1990
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1991
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1996
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1999
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2000
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q60",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q60",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX4",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX4",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX4",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX56",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX56",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX56",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX60",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX60",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX60",
+    2024
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2024
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2024
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2024
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2025
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Altima",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    1999
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Frontier",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Sentra",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Versa",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Nissan",
+    "Xterra",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX35",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "EX37",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX35",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX37",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX45",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "FX50",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G20",
+    1999
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G20",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G20",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G20",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G25",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "G25",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1994
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1995
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1996
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "J30",
+    1997
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M37",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M37",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M37",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M45",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M56",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M56",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "M56",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q40",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1994
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1995
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1996
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1997
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1998
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    1999
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q45",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q60",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q60",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q60",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q60",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q60",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "Q70L",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX4",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX4",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX4",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX50",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX56",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX56",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX56",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX70",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Infiniti",
+    "QX80",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Armada",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    1985
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    1986
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    1987
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    1988
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Maxima",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Murano",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "NV",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Pathfinder",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1994
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1995
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1996
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1997
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    1998
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Quest",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Sentra",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Sentra",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Sentra",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Sentra",
+    1994
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1994
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1995
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1996
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Nissan",
+    "Stanza",
+    1997
+   ]
+  }
+ ],
+ "funnel_cars": {
+  "ac-compressor": {
+   "no_records": {
+    "": 2980
+   },
+   "not_closed": {
+    "no_year_manifest": 28885
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "alternator": {
+   "no_records": {
+    "": 1158
+   },
+   "not_closed": {
+    "no_year_manifest": 30707
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "bumper-front": {
+   "no_records": {
+    "": 17043
+   },
+   "not_closed": {
+    "no_year_manifest": 14822
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "bumper-rear": {
+   "no_records": {
+    "": 16397
+   },
+   "not_closed": {
+    "no_year_manifest": 15468
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "climate-control": {
+   "no_records": {
+    "": 6455
+   },
+   "not_closed": {
+    "no_year_manifest": 25410
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "door-front": {
+   "no_records": {
+    "": 15358
+   },
+   "not_closed": {
+    "no_year_manifest": 16507
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "door-rear": {
+   "no_records": {
+    "": 16067
+   },
+   "not_closed": {
+    "no_year_manifest": 15798
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "fender": {
+   "no_records": {
+    "": 16807
+   },
+   "not_closed": {
+    "no_year_manifest": 15058
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "fuel-pump-module": {
+   "no_records": {
+    "": 1795
+   },
+   "not_closed": {
+    "no_year_manifest": 30070
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "gauge-cluster": {
+   "no_records": {
+    "": 16806
+   },
+   "not_closed": {
+    "no_year_manifest": 15059
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "grille": {
+   "no_records": {
+    "": 22235
+   },
+   "not_closed": {
+    "no_year_manifest": 9630
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "headlights": {
+   "no_records": {
+    "": 2641
+   },
+   "not_closed": {
+    "no_year_manifest": 29224
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "hood": {
+   "no_records": {
+    "": 16480
+   },
+   "not_closed": {
+    "no_year_manifest": 15385
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "ignition-coils": {
+   "no_records": {
+    "": 6036
+   },
+   "not_closed": {
+    "no_year_manifest": 25829
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "liftgate": {
+   "no_records": {
+    "": 27666
+   },
+   "not_closed": {
+    "no_year_manifest": 4199
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "power-steering-pump": {
+   "no_records": {
+    "": 11067
+   },
+   "not_closed": {
+    "no_year_manifest": 20798
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "radiator": {
+   "no_records": {
+    "": 14083
+   },
+   "not_closed": {
+    "no_year_manifest": 17782
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "side-mirrors": {
+   "no_records": {
+    "": 1209
+   },
+   "not_closed": {
+    "no_year_manifest": 30656
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "starter": {
+   "no_records": {
+    "": 864
+   },
+   "not_closed": {
+    "no_year_manifest": 31001
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "tail-lights": {
+   "no_records": {
+    "": 2499
+   },
+   "not_closed": {
+    "no_year_manifest": 29366
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "throttle-body": {
+   "no_records": {
+    "": 927
+   },
+   "not_closed": {
+    "no_year_manifest": 30938
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "trunk-lid": {
+   "no_records": {
+    "": 20187
+   },
+   "not_closed": {
+    "no_year_manifest": 11678
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "window-regulator": {
+   "no_records": {
+    "": 593
+   },
+   "not_closed": {
+    "no_year_manifest": 31272
+   },
+   "unmapped": {
+    "": 1327
+   }
+  },
+  "window-switch": {
+   "no_records": {
+    "": 1659
+   },
+   "not_closed": {
+    "no_year_manifest": 30206
+   },
+   "unmapped": {
+    "": 1327
+   }
+  }
+ },
+ "funnel_cars_hypothetical_if_every_year_closed": {
+  "by_cat": {
+   "ac-compressor": {
+    "conditional": {
+     "conditional:notes_not_own_page": 7297,
+     "conditional:option": 30,
+     "conditional:option_layout": 863
+    },
+    "no_records": {
+     "": 2980
+    },
+    "split": {
+     "option_split": 20695
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "alternator": {
+    "conditional": {
+     "conditional:notes_not_own_page": 8087,
+     "conditional:option_layout": 2322
+    },
+    "no_records": {
+     "": 1158
+    },
+    "split": {
+     "option_split": 20298
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "bumper-front": {
+    "conditional": {
+     "conditional:notes_not_own_page": 3952,
+     "conditional:option_layout": 551
+    },
+    "no_records": {
+     "": 17043
+    },
+    "split": {
+     "option_split": 10319
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "bumper-rear": {
+    "conditional": {
+     "conditional:notes_not_own_page": 3532,
+     "conditional:option_layout": 570
+    },
+    "no_records": {
+     "": 16397
+    },
+    "split": {
+     "option_split": 11366
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "climate-control": {
+    "conditional": {
+     "conditional:notes_not_own_page": 3271,
+     "conditional:option_layout": 1090
+    },
+    "no_records": {
+     "": 6455
+    },
+    "split": {
+     "option_split": 21049
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "door-front": {
+    "conditional": {
+     "conditional:notes_not_own_page": 6069,
+     "conditional:option_layout": 683
+    },
+    "no_records": {
+     "": 15358
+    },
+    "split": {
+     "option_split": 9755
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "door-rear": {
+    "conditional": {
+     "conditional:notes_not_own_page": 11428,
+     "conditional:option": 903,
+     "conditional:option_layout": 2661
+    },
+    "no_records": {
+     "": 16067
+    },
+    "split": {
+     "option_split": 806
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "fender": {
+    "conditional": {
+     "conditional:notes_not_own_page": 5764,
+     "conditional:option_layout": 1234
+    },
+    "no_records": {
+     "": 16807
+    },
+    "split": {
+     "option_split": 8060
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "fuel-pump-module": {
+    "conditional": {
+     "conditional:notes_not_own_page": 10490,
+     "conditional:option": 3,
+     "conditional:option_layout": 1124
+    },
+    "no_records": {
+     "": 1795
+    },
+    "split": {
+     "option_split": 18453
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "gauge-cluster": {
+    "conditional": {
+     "conditional:notes_not_own_page": 999,
+     "conditional:option": 1
+    },
+    "no_records": {
+     "": 16806
+    },
+    "split": {
+     "option_split": 14059
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "grille": {
+    "conditional": {
+     "conditional:notes_not_own_page": 2402,
+     "conditional:option": 143,
+     "conditional:option_layout": 1037
+    },
+    "no_records": {
+     "": 22235
+    },
+    "split": {
+     "option_split": 6048
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "headlights": {
+    "conditional": {
+     "conditional:notes_not_own_page": 4351,
+     "conditional:option_layout": 1559
+    },
+    "no_records": {
+     "": 2641
+    },
+    "split": {
+     "option_split": 23314
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "hood": {
+    "conditional": {
+     "conditional:notes_not_own_page": 9259,
+     "conditional:option_layout": 2721
+    },
+    "no_records": {
+     "": 16480
+    },
+    "split": {
+     "option_split": 3405
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "ignition-coils": {
+    "conditional": {
+     "conditional:notes_not_own_page": 9563,
+     "conditional:option_layout": 124
+    },
+    "no_records": {
+     "": 6036
+    },
+    "split": {
+     "option_split": 16142
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "liftgate": {
+    "conditional": {
+     "conditional:notes_not_own_page": 482,
+     "conditional:option_layout": 38
+    },
+    "no_records": {
+     "": 27666
+    },
+    "split": {
+     "option_split": 3679
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "power-steering-pump": {
+    "conditional": {
+     "conditional:notes_not_own_page": 6936,
+     "conditional:option": 75,
+     "conditional:option_layout": 1720
+    },
+    "no_records": {
+     "": 11067
+    },
+    "split": {
+     "option_split": 12067
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "radiator": {
+    "conditional": {
+     "conditional:notes_not_own_page": 4469,
+     "conditional:option_layout": 542
+    },
+    "no_records": {
+     "": 14083
+    },
+    "split": {
+     "option_split": 12771
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "side-mirrors": {
+    "conditional": {
+     "conditional:notes_not_own_page": 2232,
+     "conditional:option_layout": 251
+    },
+    "no_records": {
+     "": 1209
+    },
+    "split": {
+     "option_split": 28169,
+     "slot_missing": 4
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "starter": {
+    "conditional": {
+     "conditional:notes_not_own_page": 8048,
+     "conditional:option_layout": 1570
+    },
+    "no_records": {
+     "": 864
+    },
+    "split": {
+     "option_split": 21383
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "tail-lights": {
+    "conditional": {
+     "conditional:notes_not_own_page": 5896,
+     "conditional:option_layout": 1220
+    },
+    "no_records": {
+     "": 2499
+    },
+    "split": {
+     "option_split": 22250
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "throttle-body": {
+    "conditional": {
+     "conditional:notes_not_own_page": 8369,
+     "conditional:option_layout": 748
+    },
+    "no_records": {
+     "": 927
+    },
+    "split": {
+     "option_split": 21821
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "trunk-lid": {
+    "conditional": {
+     "conditional:notes_not_own_page": 158,
+     "conditional:option_layout": 57
+    },
+    "no_records": {
+     "": 20187
+    },
+    "split": {
+     "option_split": 11463
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "window-regulator": {
+    "no_records": {
+     "": 593
+    },
+    "split": {
+     "packaging_unstated": 31272
+    },
+    "unmapped": {
+     "": 1327
+    }
+   },
+   "window-switch": {
+    "no_records": {
+     "": 1659
+    },
+    "split": {
+     "no_candidates": 9,
+     "option_split": 20996,
+     "position_missing": 9201
+    },
+    "unmapped": {
+     "": 1327
+    }
+   }
+  },
+  "label": "HYPOTHETICAL: closure (C1-C9) and the audit gate (E5) assumed, current candidate state; ranks crawler work, never shipped"
+ },
+ "input_issues": [],
+ "lint": [],
+ "map_proposals": [
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Kicks Play",
+   "feed_cars": 0,
+   "fitment_rows": 5,
+   "ns": "nissan",
+   "proposed": {
+    "make": "Nissan",
+    "model": "Kicks Play",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Van",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "nissan",
+   "proposed": {
+    "make": "Nissan",
+    "model": "Van",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "model_map_report": {
+  "M10": {
+   "ford": {
+    "cars": 60517,
+    "mapped_cars": 58270,
+    "mapped_share": 0.9629
+   },
+   "gm": {
+    "cars": 78869,
+    "mapped_cars": 63716,
+    "mapped_share": 0.8079
+   },
+   "hmg": {
+    "cars": 21842,
+    "mapped_cars": 21627,
+    "mapped_share": 0.9902
+   },
+   "honda": {
+    "cars": 28559,
+    "mapped_cars": 28151,
+    "mapped_share": 0.9857
+   },
+   "mopar": {
+    "cars": 44184,
+    "mapped_cars": 41841,
+    "mapped_share": 0.947
+   },
+   "nissan": {
+    "cars": 33192,
+    "mapped_cars": 31865,
+    "mapped_share": 0.96
+   },
+   "subaru": {
+    "cars": 5555,
+    "mapped_cars": 5292,
+    "mapped_share": 0.9527
+   },
+   "toyota": {
+    "cars": 26335,
+    "mapped_cars": 25629,
+    "mapped_share": 0.9732
+   }
+  },
+  "M6": {
+   "by_target": {
+    "Acura|CL": {
+     "decoded": 108
+    },
+    "Acura|Integra": {
+     "decoded": 84
+    },
+    "Acura|Legend": {
+     "decoded": 37
+    },
+    "Acura|MDX": {
+     "decoded": 887,
+     "make_mismatch": 2
+    },
+    "Acura|RDX": {
+     "decoded": 122
+    },
+    "Acura|RL": {
+     "decoded": 107
+    },
+    "Acura|RLX": {
+     "decoded": 3
+    },
+    "Acura|RSX": {
+     "decoded": 108
+    },
+    "Acura|TL": {
+     "decoded": 1126,
+     "make_mismatch": 1
+    },
+    "Acura|TLX": {
+     "decoded": 30
+    },
+    "Acura|TSX": {
+     "decoded": 144
+    },
+    "Acura|ZDX": {
+     "decoded": 4
+    },
+    "Buick|Allure": {
+     "decoded": 16
+    },
+    "Buick|Cascada": {
+     "decoded": 2
+    },
+    "Buick|Century": {
+     "decoded": 565
+    },
+    "Buick|Electra": {
+     "decoded": 5
+    },
+    "Buick|Enclave": {
+     "decoded": 952
+    },
+    "Buick|Encore": {
+     "decoded": 252
+    },
+    "Buick|Encore GX": {
+     "decoded": 7
+    },
+    "Buick|Envision": {
+     "decoded": 23
+    },
+    "Buick|Envista": {
+     "decoded": 3
+    },
+    "Buick|LaCrosse": {
+     "decoded": 863
+    },
+    "Buick|LeSabre": {
+     "decoded": 901
+    },
+    "Buick|Lucerne": {
+     "decoded": 496
+    },
+    "Buick|Park Avenue": {
+     "decoded": 54
+    },
+    "Buick|Rainier": {
+     "decoded": 72
+    },
+    "Buick|Reatta": {},
+    "Buick|Regal": {
+     "decoded": 456
+    },
+    "Buick|Rendezvous": {
+     "decoded": 292
+    },
+    "Buick|Riviera": {
+     "decoded": 4
+    },
+    "Buick|Roadmaster": {
+     "decoded": 13
+    },
+    "Buick|Skyhawk": {},
+    "Buick|Skylark": {
+     "decoded": 10
+    },
+    "Buick|Terraza": {
+     "decoded": 36
+    },
+    "Buick|Verano": {
+     "decoded": 345
+    },
+    "Cadillac|ATS": {
+     "decoded": 128
+    },
+    "Cadillac|Allante": {},
+    "Cadillac|Brougham": {
+     "decoded": 5
+    },
+    "Cadillac|CT5": {},
+    "Cadillac|CT6": {
+     "decoded": 2
+    },
+    "Cadillac|CTS": {
+     "decoded": 584
+    },
+    "Cadillac|DTS": {
+     "decoded": 36
+    },
+    "Cadillac|DeVille": {
+     "decoded": 184,
+     "make_mismatch": 1
+    },
+    "Cadillac|ELR": {
+     "decoded": 1
+    },
+    "Cadillac|Eldorado": {
+     "decoded": 28
+    },
+    "Cadillac|Escalade": {
+     "decoded": 482,
+     "hybrid": 6
+    },
+    "Cadillac|Fleetwood": {
+     "decoded": 6
+    },
+    "Cadillac|SRX": {
+     "decoded": 563
+    },
+    "Cadillac|STS": {
+     "decoded": 67
+    },
+    "Cadillac|Seville": {
+     "decoded": 120
+    },
+    "Cadillac|XLR": {},
+    "Cadillac|XT5": {
+     "decoded": 10
+    },
+    "Cadillac|XTS": {
+     "decoded": 71
+    },
+    "Chevrolet|Astro": {
+     "decoded": 410
+    },
+    "Chevrolet|Avalanche": {
+     "decoded": 394
+    },
+    "Chevrolet|Beretta": {
+     "decoded": 5
+    },
+    "Chevrolet|Blazer": {
+     "decoded": 532
+    },
+    "Chevrolet|Bolt EV": {
+     "decoded": 2
+    },
+    "Chevrolet|C10": {
+     "decoded": 26
+    },
+    "Chevrolet|C1500": {
+     "decoded": 254
+    },
+    "Chevrolet|C20": {
+     "decoded": 4
+    },
+    "Chevrolet|C2500": {
+     "decoded": 73,
+     "make_mismatch": 1
+    },
+    "Chevrolet|C30": {
+     "decoded": 3
+    },
+    "Chevrolet|C3500": {
+     "decoded": 41
+    },
+    "Chevrolet|Camaro": {
+     "decoded": 454
+    },
+    "Chevrolet|Caprice": {
+     "decoded": 71
+    },
+    "Chevrolet|Captiva Sport": {
+     "decoded": 248
+    },
+    "Chevrolet|Cavalier": {
+     "decoded": 174
+    },
+    "Chevrolet|Celebrity": {},
+    "Chevrolet|Cobalt": {
+     "decoded": 1218
+    },
+    "Chevrolet|Colorado": {
+     "decoded": 492
+    },
+    "Chevrolet|Corsica": {
+     "decoded": 4
+    },
+    "Chevrolet|Corvette": {
+     "decoded": 12
+    },
+    "Chevrolet|Cruze": {
+     "decoded": 3611
+    },
+    "Chevrolet|Equinox": {
+     "decoded": 3401
+    },
+    "Chevrolet|Express": {
+     "decoded": 1
+    },
+    "Chevrolet|G10": {
+     "decoded": 5
+    },
+    "Chevrolet|G20": {
+     "decoded": 45
+    },
+    "Chevrolet|G30": {
+     "decoded": 8
+    },
+    "Chevrolet|HHR": {
+     "decoded": 766
+    },
+    "Chevrolet|Impala": {
+     "decoded": 3177
+    },
+    "Chevrolet|K10": {
+     "decoded": 1
+    },
+    "Chevrolet|K1500": {
+     "decoded": 274
+    },
+    "Chevrolet|K20": {
+     "decoded": 2
+    },
+    "Chevrolet|K2500": {
+     "decoded": 93
+    },
+    "Chevrolet|K3500": {
+     "decoded": 14
+    },
+    "Chevrolet|Lumina": {
+     "decoded": 49
+    },
+    "Chevrolet|Malibu": {
+     "decoded": 4334,
+     "hybrid": 24
+    },
+    "Chevrolet|Metro": {},
+    "Chevrolet|Monte Carlo": {
+     "decoded": 303
+    },
+    "Chevrolet|Orlando": {
+     "decoded": 12
+    },
+    "Chevrolet|P30": {
+     "decoded": 2
+    },
+    "Chevrolet|R30": {
+     "decoded": 4
+    },
+    "Chevrolet|R3500": {
+     "decoded": 2
+    },
+    "Chevrolet|S-10": {
+     "decoded": 851,
+     "make_mismatch": 3
+    },
+    "Chevrolet|Silverado": {},
+    "Chevrolet|Sonic": {
+     "decoded": 1040
+    },
+    "Chevrolet|Spark": {
+     "decoded": 282
+    },
+    "Chevrolet|Spark EV": {
+     "decoded": 3
+    },
+    "Chevrolet|Sprint": {},
+    "Chevrolet|Suburban": {
+     "decoded": 3
+    },
+    "Chevrolet|Tahoe": {
+     "decoded": 2291,
+     "hybrid": 1
+    },
+    "Chevrolet|Trailblazer": {
+     "decoded": 1621
+    },
+    "Chevrolet|Traverse": {
+     "decoded": 1796
+    },
+    "Chevrolet|Trax": {
+     "decoded": 239
+    },
+    "Chevrolet|Uplander": {
+     "decoded": 295
+    },
+    "Chevrolet|Venture": {
+     "decoded": 188
+    },
+    "Chevrolet|Volt": {
+     "decoded": 84
+    },
+    "Chrysler|200": {
+     "decoded": 1674
+    },
+    "Chrysler|300": {
+     "decoded": 1336
+    },
+    "Chrysler|300M": {
+     "decoded": 68
+    },
+    "Chrysler|Aspen": {
+     "decoded": 138
+    },
+    "Chrysler|Cirrus": {
+     "decoded": 13
+    },
+    "Chrysler|Concorde": {
+     "decoded": 62
+    },
+    "Chrysler|Fifth Avenue": {},
+    "Chrysler|Imperial": {},
+    "Chrysler|LHS": {
+     "decoded": 21
+    },
+    "Chrysler|LeBaron": {
+     "decoded": 21
+    },
+    "Chrysler|New Yorker": {
+     "decoded": 12
+    },
+    "Chrysler|PT Cruiser": {
+     "decoded": 1004
+    },
+    "Chrysler|Pacifica": {
+     "decoded": 411
+    },
+    "Chrysler|Sebring": {
+     "decoded": 803
+    },
+    "Chrysler|TC By Maserati": {
+     "decoded": 3
+    },
+    "Chrysler|Town & Country": {
+     "decoded": 2294
+    },
+    "Chrysler|Voyager": {
+     "decoded": 49
+    },
+    "Dodge|Aries": {
+     "decoded": 1
+    },
+    "Dodge|Avenger": {
+     "decoded": 1150
+    },
+    "Dodge|B150": {
+     "decoded": 2
+    },
+    "Dodge|B1500": {
+     "decoded": 1
+    },
+    "Dodge|B250": {
+     "decoded": 6
+    },
+    "Dodge|B2500": {
+     "decoded": 7
+    },
+    "Dodge|B350": {
+     "decoded": 4
+    },
+    "Dodge|B3500": {
+     "decoded": 7
+    },
+    "Dodge|Caliber": {
+     "decoded": 723
+    },
+    "Dodge|Caravan": {
+     "decoded": 748
+    },
+    "Dodge|Challenger": {
+     "decoded": 147
+    },
+    "Dodge|Charger": {
+     "decoded": 1599
+    },
+    "Dodge|D100": {
+     "decoded": 4
+    },
+    "Dodge|D150": {
+     "decoded": 22
+    },
+    "Dodge|D350": {},
+    "Dodge|Dakota": {
+     "decoded": 1438
+    },
+    "Dodge|Dart": {
+     "decoded": 787
+    },
+    "Dodge|Daytona": {
+     "decoded": 6
+    },
+    "Dodge|Diplomat": {},
+    "Dodge|Durango": {
+     "decoded": 1385
+    },
+    "Dodge|Dynasty": {
+     "decoded": 3
+    },
+    "Dodge|Grand Caravan": {
+     "decoded": 2767
+    },
+    "Dodge|Intrepid": {
+     "decoded": 71
+    },
+    "Dodge|Journey": {
+     "decoded": 1637
+    },
+    "Dodge|Lancer": {},
+    "Dodge|Magnum": {
+     "decoded": 230
+    },
+    "Dodge|Mini Ram": {
+     "decoded": 3
+    },
+    "Dodge|Neon": {
+     "decoded": 272,
+     "make_mismatch": 1
+    },
+    "Dodge|Nitro": {
+     "decoded": 362
+    },
+    "Dodge|Ram 1500": {
+     "decoded": 3559
+    },
+    "Dodge|Ram 2500": {
+     "decoded": 280
+    },
+    "Dodge|Ram 3500": {
+     "decoded": 32
+    },
+    "Dodge|Ram Van": {
+     "decoded": 163
+    },
+    "Dodge|Ram Van 1500": {
+     "decoded": 22
+    },
+    "Dodge|Ram Van 2500": {
+     "decoded": 10
+    },
+    "Dodge|Ram Van 3500": {
+     "decoded": 14
+    },
+    "Dodge|Ram Wagon": {
+     "decoded": 56
+    },
+    "Dodge|Ramcharger": {
+     "decoded": 8
+    },
+    "Dodge|Rampage": {
+     "decoded": 1
+    },
+    "Dodge|Shadow": {
+     "decoded": 3
+    },
+    "Dodge|Spirit": {},
+    "Dodge|Stratus": {
+     "decoded": 241
+    },
+    "Dodge|W100": {
+     "decoded": 1
+    },
+    "Dodge|W150": {
+     "decoded": 5
+    },
+    "Dodge|W250": {
+     "decoded": 1
+    },
+    "Dodge|W350": {
+     "decoded": 2
+    },
+    "Ford|Aerostar": {
+     "decoded": 60
+    },
+    "Ford|Bronco": {
+     "decoded": 35
+    },
+    "Ford|Bronco II": {
+     "decoded": 36
+    },
+    "Ford|C-Max": {
+     "decoded": 79
+    },
+    "Ford|Contour": {
+     "decoded": 53
+    },
+    "Ford|Crown Victoria": {
+     "decoded": 279
+    },
+    "Ford|E-150": {
+     "decoded": 681
+    },
+    "Ford|E-250": {
+     "decoded": 705
+    },
+    "Ford|E-450 Super Duty": {
+     "decoded": 2
+    },
+    "Ford|E-Transit": {},
+    "Ford|Edge": {
+     "decoded": 1621
+    },
+    "Ford|Escape": {
+     "decoded": 4109
+    },
+    "Ford|Escort": {
+     "decoded": 209
+    },
+    "Ford|Excursion": {
+     "decoded": 84
+    },
+    "Ford|Expedition": {
+     "decoded": 2690
+    },
+    "Ford|Explorer": {
+     "decoded": 3782
+    },
+    "Ford|Explorer Sport": {
+     "decoded": 76
+    },
+    "Ford|Explorer Sport Trac": {
+     "decoded": 428
+    },
+    "Ford|F-150": {
+     "decoded": 7749
+    },
+    "Ford|F-250": {
+     "decoded": 676
+    },
+    "Ford|F-250 Super Duty": {
+     "decoded": 508
+    },
+    "Ford|F-350": {
+     "decoded": 223
+    },
+    "Ford|F-350 Super Duty": {
+     "decoded": 211
+    },
+    "Ford|F-450 Super Duty": {
+     "decoded": 25
+    },
+    "Ford|F-550 Super Duty": {
+     "decoded": 11
+    },
+    "Ford|Fiesta": {
+     "decoded": 1026
+    },
+    "Ford|Five Hundred": {
+     "decoded": 325
+    },
+    "Ford|Flex": {
+     "decoded": 476
+    },
+    "Ford|Focus": {
+     "decoded": 5318
+    },
+    "Ford|Freestar": {
+     "decoded": 204
+    },
+    "Ford|Freestyle": {
+     "decoded": 207
+    },
+    "Ford|Fusion": {
+     "decoded": 4216,
+     "hybrid": 160
+    },
+    "Ford|Mustang": {
+     "decoded": 1048
+    },
+    "Ford|Police Interceptor Sedan": {
+     "decoded": 16
+    },
+    "Ford|Police Interceptor Utility": {
+     "decoded": 50
+    },
+    "Ford|Probe": {
+     "decoded": 11
+    },
+    "Ford|Ranger": {
+     "decoded": 1755
+    },
+    "Ford|Taurus": {
+     "decoded": 2257
+    },
+    "Ford|Taurus X": {
+     "decoded": 73
+    },
+    "Ford|Tempo": {
+     "decoded": 13
+    },
+    "Ford|Thunderbird": {
+     "decoded": 86
+    },
+    "Ford|Transit": {
+     "decoded": 15
+    },
+    "Ford|Transit Connect": {
+     "decoded": 261
+    },
+    "Ford|Windstar": {
+     "decoded": 261
+    },
+    "GMC|Acadia": {
+     "decoded": 1464
+    },
+    "GMC|C1500": {
+     "decoded": 58
+    },
+    "GMC|C2500": {
+     "decoded": 9
+    },
+    "GMC|C3500": {
+     "decoded": 4
+    },
+    "GMC|Canyon": {
+     "decoded": 106
+    },
+    "GMC|Envoy": {
+     "decoded": 696
+    },
+    "GMC|G1500": {
+     "decoded": 1
+    },
+    "GMC|G2500": {
+     "decoded": 5
+    },
+    "GMC|Jimmy": {
+     "decoded": 146
+    },
+    "GMC|K1500": {
+     "decoded": 8
+    },
+    "GMC|K2500": {
+     "decoded": 1
+    },
+    "GMC|K3500": {
+     "decoded": 2
+    },
+    "GMC|S-15": {
+     "decoded": 14
+    },
+    "GMC|Safari": {
+     "decoded": 140
+    },
+    "GMC|Savana": {
+     "decoded": 152
+    },
+    "GMC|Sierra": {},
+    "GMC|Sonoma": {
+     "decoded": 195
+    },
+    "GMC|Suburban": {},
+    "GMC|Terrain": {
+     "decoded": 993
+    },
+    "GMC|Yukon": {
+     "decoded": 934,
+     "hybrid": 1
+    },
+    "Honda|Accord": {
+     "decoded": 7706,
+     "hybrid": 44,
+     "make_mismatch": 1
+    },
+    "Honda|Accord Hybrid": {
+     "decoded": 23,
+     "hybrid": 23
+    },
+    "Honda|CR-V": {
+     "decoded": 1558
+    },
+    "Honda|CR-Z": {
+     "decoded": 18
+    },
+    "Honda|CRX": {
+     "decoded": 5
+    },
+    "Honda|Civic": {
+     "decoded": 5651,
+     "hybrid": 301
+    },
+    "Honda|Crosstour": {
+     "decoded": 44
+    },
+    "Honda|Del Sol": {
+     "decoded": 1
+    },
+    "Honda|Element": {
+     "decoded": 303
+    },
+    "Honda|Fit": {
+     "decoded": 177
+    },
+    "Honda|HR-V": {
+     "decoded": 24
+    },
+    "Honda|Insight": {
+     "decoded": 96
+    },
+    "Honda|Odyssey": {
+     "decoded": 3115
+    },
+    "Honda|Pilot": {
+     "decoded": 1788
+    },
+    "Honda|Prelude": {
+     "decoded": 38
+    },
+    "Honda|Ridgeline": {
+     "decoded": 195
+    },
+    "Hummer|H2": {
+     "decoded": 10
+    },
+    "Hummer|H3": {
+     "decoded": 97
+    },
+    "Hyundai|Accent": {
+     "decoded": 1009
+    },
+    "Hyundai|Azera": {
+     "decoded": 126
+    },
+    "Hyundai|Elantra": {
+     "decoded": 2408
+    },
+    "Hyundai|Elantra GT": {
+     "decoded": 96
+    },
+    "Hyundai|Elantra Touring": {
+     "decoded": 44
+    },
+    "Hyundai|Entourage": {
+     "decoded": 44
+    },
+    "Hyundai|Equus": {
+     "decoded": 28
+    },
+    "Hyundai|Excel": {
+     "decoded": 4
+    },
+    "Hyundai|Genesis": {
+     "decoded": 273
+    },
+    "Hyundai|Genesis Coupe": {
+     "decoded": 97
+    },
+    "Hyundai|Kona": {
+     "decoded": 18
+    },
+    "Hyundai|Palisade": {
+     "decoded": 2
+    },
+    "Hyundai|Santa Fe": {
+     "decoded": 1015
+    },
+    "Hyundai|Santa Fe Sport": {
+     "decoded": 101
+    },
+    "Hyundai|Santa Fe XL": {
+     "decoded": 15
+    },
+    "Hyundai|Scoupe": {
+     "decoded": 1
+    },
+    "Hyundai|Sonata": {
+     "decoded": 3349,
+     "hybrid": 35
+    },
+    "Hyundai|Sonata Hybrid": {
+     "decoded": 80,
+     "hybrid": 31
+    },
+    "Hyundai|Tiburon": {
+     "decoded": 87
+    },
+    "Hyundai|Tucson": {
+     "decoded": 466
+    },
+    "Hyundai|Veloster": {
+     "decoded": 257
+    },
+    "Hyundai|Veloster N": {
+     "decoded": 1
+    },
+    "Hyundai|Veracruz": {
+     "decoded": 75
+    },
+    "Hyundai|XG300": {},
+    "Hyundai|XG350": {},
+    "Infiniti|EX35": {
+     "decoded": 70
+    },
+    "Infiniti|EX37": {
+     "decoded": 1
+    },
+    "Infiniti|FX35": {
+     "decoded": 238
+    },
+    "Infiniti|FX37": {
+     "decoded": 7
+    },
+    "Infiniti|FX45": {
+     "decoded": 17
+    },
+    "Infiniti|FX50": {
+     "decoded": 7
+    },
+    "Infiniti|G20": {
+     "decoded": 14
+    },
+    "Infiniti|G25": {
+     "decoded": 24
+    },
+    "Infiniti|G35": {
+     "decoded": 807
+    },
+    "Infiniti|G37": {
+     "decoded": 288
+    },
+    "Infiniti|I30": {
+     "decoded": 14
+    },
+    "Infiniti|I35": {
+     "decoded": 32
+    },
+    "Infiniti|J30": {
+     "decoded": 12
+    },
+    "Infiniti|JX35": {
+     "decoded": 32
+    },
+    "Infiniti|M35": {
+     "decoded": 192
+    },
+    "Infiniti|M35h": {
+     "decoded": 2
+    },
+    "Infiniti|M37": {
+     "decoded": 39
+    },
+    "Infiniti|M45": {
+     "decoded": 39
+    },
+    "Infiniti|M56": {
+     "decoded": 2
+    },
+    "Infiniti|Q40": {
+     "decoded": 7
+    },
+    "Infiniti|Q45": {
+     "decoded": 14
+    },
+    "Infiniti|Q50": {
+     "decoded": 121
+    },
+    "Infiniti|Q60": {
+     "decoded": 8
+    },
+    "Infiniti|Q70": {
+     "decoded": 8
+    },
+    "Infiniti|Q70L": {
+     "decoded": 3
+    },
+    "Infiniti|QX4": {
+     "decoded": 98
+    },
+    "Infiniti|QX50": {
+     "decoded": 24
+    },
+    "Infiniti|QX56": {
+     "decoded": 239
+    },
+    "Infiniti|QX60": {
+     "decoded": 162
+    },
+    "Infiniti|QX70": {
+     "decoded": 12
+    },
+    "Infiniti|QX80": {
+     "decoded": 22
+    },
+    "Jeep|Cherokee": {
+     "decoded": 770
+    },
+    "Jeep|Comanche": {
+     "decoded": 5
+    },
+    "Jeep|Commander": {
+     "decoded": 407
+    },
+    "Jeep|Compass": {
+     "decoded": 854
+    },
+    "Jeep|Grand Cherokee": {
+     "decoded": 2936
+    },
+    "Jeep|Grand Cherokee L": {},
+    "Jeep|Grand Wagoneer": {
+     "decoded": 4
+    },
+    "Jeep|J10": {
+     "decoded": 1
+    },
+    "Jeep|Liberty": {
+     "decoded": 1631
+    },
+    "Jeep|Patriot": {
+     "decoded": 1200,
+     "make_mismatch": 2
+    },
+    "Jeep|Renegade": {
+     "decoded": 152
+    },
+    "Jeep|Wagoneer": {
+     "decoded": 6
+    },
+    "Jeep|Wrangler": {
+     "decoded": 198
+    },
+    "Kia|Amanti": {
+     "decoded": 12
+    },
+    "Kia|Borrego": {
+     "decoded": 53
+    },
+    "Kia|Cadenza": {
+     "decoded": 70
+    },
+    "Kia|Forte": {
+     "decoded": 974
+    },
+    "Kia|Forte Koup": {
+     "decoded": 71
+    },
+    "Kia|K4": {
+     "decoded": 4
+    },
+    "Kia|K5": {
+     "decoded": 8
+    },
+    "Kia|K900": {
+     "decoded": 6
+    },
+    "Kia|Niro": {
+     "decoded": 18
+    },
+    "Kia|Optima": {
+     "decoded": 1853,
+     "hybrid": 8
+    },
+    "Kia|Optima Hybrid": {
+     "decoded": 30,
+     "hybrid": 1
+    },
+    "Kia|Rio": {
+     "decoded": 564
+    },
+    "Kia|Rondo": {
+     "decoded": 139
+    },
+    "Kia|Sedona": {
+     "decoded": 465
+    },
+    "Kia|Seltos": {
+     "decoded": 3
+    },
+    "Kia|Sephia": {
+     "decoded": 16
+    },
+    "Kia|Sorento": {
+     "decoded": 1138
+    },
+    "Kia|Soul": {
+     "decoded": 1420
+    },
+    "Kia|Soul EV": {
+     "decoded": 1
+    },
+    "Kia|Spectra": {
+     "decoded": 365
+    },
+    "Kia|Sportage": {
+     "decoded": 528
+    },
+    "Kia|Stinger": {
+     "decoded": 4
+    },
+    "Kia|Telluride": {
+     "decoded": 5
+    },
+    "Lexus|CT 200h": {
+     "decoded": 8
+    },
+    "Lexus|ES 300": {
+     "decoded": 440
+    },
+    "Lexus|ES 300h": {
+     "decoded": 1
+    },
+    "Lexus|ES 330": {
+     "decoded": 208
+    },
+    "Lexus|ES 350": {
+     "decoded": 229
+    },
+    "Lexus|GS 300": {
+     "decoded": 178
+    },
+    "Lexus|GS 350": {
+     "decoded": 60
+    },
+    "Lexus|GS 400": {
+     "decoded": 23
+    },
+    "Lexus|GS 430": {
+     "decoded": 17
+    },
+    "Lexus|GS 450h": {
+     "decoded": 14
+    },
+    "Lexus|GS 460": {
+     "decoded": 1
+    },
+    "Lexus|GX 470": {
+     "decoded": 11
+    },
+    "Lexus|HS 250h": {
+     "decoded": 9
+    },
+    "Lexus|IS 200t": {
+     "decoded": 1
+    },
+    "Lexus|IS 250": {
+     "decoded": 237
+    },
+    "Lexus|IS 300": {
+     "decoded": 55
+    },
+    "Lexus|IS 350": {
+     "decoded": 37
+    },
+    "Lexus|LS 430": {
+     "decoded": 100
+    },
+    "Lexus|LS 460": {
+     "decoded": 81
+    },
+    "Lexus|RC 350": {},
+    "Lexus|RX 300": {
+     "decoded": 310
+    },
+    "Lexus|RX 330": {
+     "decoded": 119
+    },
+    "Lexus|RX 350": {
+     "decoded": 123
+    },
+    "Lexus|RX 400h": {
+     "decoded": 54
+    },
+    "Lexus|RX 450h": {
+     "decoded": 9
+    },
+    "Lexus|SC 430": {
+     "decoded": 14
+    },
+    "Lincoln|Aviator": {
+     "decoded": 96
+    },
+    "Lincoln|Blackwood": {
+     "decoded": 2
+    },
+    "Lincoln|Continental": {
+     "decoded": 14
+    },
+    "Lincoln|LS": {
+     "decoded": 81
+    },
+    "Lincoln|MKC": {
+     "decoded": 23
+    },
+    "Lincoln|MKS": {
+     "decoded": 163
+    },
+    "Lincoln|MKT": {
+     "decoded": 68
+    },
+    "Lincoln|MKX": {
+     "decoded": 320
+    },
+    "Lincoln|MKZ": {
+     "decoded": 387,
+     "hybrid": 29
+    },
+    "Lincoln|Mark LT": {
+     "decoded": 33
+    },
+    "Lincoln|Mark VII": {
+     "decoded": 12
+    },
+    "Lincoln|Mark VIII": {
+     "decoded": 28
+    },
+    "Lincoln|Nautilus": {
+     "decoded": 2
+    },
+    "Lincoln|Navigator": {
+     "decoded": 550
+    },
+    "Lincoln|Town Car": {
+     "decoded": 691
+    },
+    "Lincoln|Zephyr": {
+     "decoded": 59
+    },
+    "Mercury|Capri": {
+     "decoded": 8
+    },
+    "Mercury|Cougar": {
+     "decoded": 74,
+     "make_mismatch": 1
+    },
+    "Mercury|Grand Marquis": {
+     "decoded": 778
+    },
+    "Mercury|Mariner": {
+     "decoded": 253
+    },
+    "Mercury|Milan": {
+     "decoded": 254,
+     "hybrid": 7
+    },
+    "Mercury|Montego": {
+     "decoded": 80
+    },
+    "Mercury|Monterey": {
+     "decoded": 31
+    },
+    "Mercury|Mountaineer": {
+     "decoded": 333
+    },
+    "Mercury|Mystique": {
+     "decoded": 14
+    },
+    "Mercury|Sable": {
+     "decoded": 237
+    },
+    "Mercury|Topaz": {
+     "decoded": 6
+    },
+    "Mercury|Tracer": {
+     "decoded": 18
+    },
+    "Nissan|200SX": {
+     "decoded": 10
+    },
+    "Nissan|350Z": {
+     "decoded": 91
+    },
+    "Nissan|Altima": {
+     "decoded": 7459,
+     "make_mismatch": 1
+    },
+    "Nissan|Armada": {
+     "decoded": 575
+    },
+    "Nissan|Cube": {
+     "decoded": 109
+    },
+    "Nissan|Frontier": {
+     "decoded": 528
+    },
+    "Nissan|Juke": {
+     "decoded": 281
+    },
+    "Nissan|Kicks": {
+     "decoded": 30
+    },
+    "Nissan|Leaf": {
+     "decoded": 64
+    },
+    "Nissan|Maxima": {
+     "decoded": 1604
+    },
+    "Nissan|Murano": {
+     "decoded": 1543
+    },
+    "Nissan|NV": {
+     "decoded": 4
+    },
+    "Nissan|Pathfinder": {
+     "decoded": 1841
+    },
+    "Nissan|Quest": {
+     "decoded": 500
+    },
+    "Nissan|Rogue": {
+     "decoded": 2089
+    },
+    "Nissan|Sentra": {
+     "decoded": 3529
+    },
+    "Nissan|Stanza": {
+     "decoded": 4
+    },
+    "Nissan|Titan": {
+     "decoded": 650,
+     "make_mismatch": 1
+    },
+    "Nissan|Versa": {
+     "decoded": 1958
+    },
+    "Nissan|Xterra": {
+     "decoded": 936
+    },
+    "Oldsmobile|88": {
+     "decoded": 13
+    },
+    "Oldsmobile|98": {
+     "decoded": 1
+    },
+    "Oldsmobile|Achieva": {
+     "decoded": 6
+    },
+    "Oldsmobile|Alero": {
+     "decoded": 153
+    },
+    "Oldsmobile|Aurora": {},
+    "Oldsmobile|Bravada": {
+     "decoded": 60
+    },
+    "Oldsmobile|Calais": {
+     "decoded": 1
+    },
+    "Oldsmobile|Custom Cruiser": {},
+    "Oldsmobile|Cutlass": {
+     "decoded": 1
+    },
+    "Oldsmobile|Delta 88": {
+     "decoded": 13
+    },
+    "Oldsmobile|Firenza": {},
+    "Oldsmobile|Intrigue": {
+     "decoded": 54
+    },
+    "Oldsmobile|Silhouette": {
+     "decoded": 39
+    },
+    "Oldsmobile|Toronado": {
+     "decoded": 5
+    },
+    "Pontiac|6000": {
+     "decoded": 1
+    },
+    "Pontiac|Aztek": {
+     "decoded": 54
+    },
+    "Pontiac|Bonneville": {
+     "decoded": 138
+    },
+    "Pontiac|Fiero": {
+     "decoded": 15
+    },
+    "Pontiac|Firebird": {
+     "decoded": 100
+    },
+    "Pontiac|G5": {
+     "decoded": 125
+    },
+    "Pontiac|G6": {
+     "decoded": 942
+    },
+    "Pontiac|Grand Am": {
+     "decoded": 385
+    },
+    "Pontiac|Grand Prix": {
+     "decoded": 663
+    },
+    "Pontiac|Montana": {
+     "decoded": 98
+    },
+    "Pontiac|Pursuit": {
+     "decoded": 12
+    },
+    "Pontiac|Solstice": {
+     "decoded": 12
+    },
+    "Pontiac|Sunbird": {
+     "decoded": 14
+    },
+    "Pontiac|Sunfire": {
+     "decoded": 4
+    },
+    "Pontiac|Torrent": {
+     "decoded": 168
+    },
+    "Pontiac|Trans Sport": {
+     "decoded": 15
+    },
+    "Pontiac|Vibe": {
+     "decoded": 348
+    },
+    "Ram|1500": {
+     "decoded": 368
+    },
+    "Ram|1500 Classic": {
+     "decoded": 12
+    },
+    "Ram|2500": {
+     "decoded": 25
+    },
+    "Ram|3500": {
+     "decoded": 1
+    },
+    "Ram|C/V": {
+     "decoded": 23
+    },
+    "Ram|Dakota": {
+     "decoded": 7
+    },
+    "Ram|ProMaster 1500": {
+     "decoded": 22
+    },
+    "Ram|ProMaster 2500": {
+     "decoded": 10
+    },
+    "Ram|ProMaster 3500": {
+     "decoded": 4
+    },
+    "Ram|ProMaster City": {
+     "decoded": 32
+    },
+    "Saturn|Astra": {
+     "decoded": 44
+    },
+    "Saturn|Aura": {
+     "decoded": 310,
+     "hybrid": 3
+    },
+    "Saturn|ION": {
+     "decoded": 418
+    },
+    "Saturn|L100": {},
+    "Saturn|L200": {},
+    "Saturn|L300": {
+     "decoded": 19
+    },
+    "Saturn|LS": {},
+    "Saturn|LS1": {},
+    "Saturn|LW1": {},
+    "Saturn|LW200": {},
+    "Saturn|Outlook": {
+     "decoded": 141
+    },
+    "Saturn|Relay": {
+     "decoded": 19
+    },
+    "Saturn|Sky": {
+     "decoded": 3
+    },
+    "Saturn|VUE": {
+     "decoded": 745,
+     "hybrid": 12
+    },
+    "Scion|iM": {
+     "decoded": 1
+    },
+    "Scion|tC": {
+     "decoded": 608
+    },
+    "Scion|xA": {
+     "decoded": 100
+    },
+    "Scion|xB": {
+     "decoded": 466
+    },
+    "Scion|xD": {
+     "decoded": 103
+    },
+    "Subaru|Baja": {
+     "decoded": 13
+    },
+    "Subaru|Crosstrek": {
+     "decoded": 23
+    },
+    "Subaru|Forester": {
+     "decoded": 1150
+    },
+    "Subaru|Impreza": {
+     "decoded": 814,
+     "make_mismatch": 1
+    },
+    "Subaru|Impreza WRX": {
+     "decoded": 4
+    },
+    "Subaru|Legacy": {
+     "decoded": 862
+    },
+    "Subaru|Outback": {
+     "decoded": 1275
+    },
+    "Subaru|SVX": {
+     "decoded": 2
+    },
+    "Subaru|Tribeca": {
+     "decoded": 57,
+     "make_mismatch": 1
+    },
+    "Subaru|WRX": {
+     "decoded": 8
+    },
+    "Subaru|XV Crosstrek": {
+     "decoded": 89
+    },
+    "Toyota|4Runner": {
+     "decoded": 464
+    },
+    "Toyota|Avalon": {
+     "decoded": 1045,
+     "hybrid": 5
+    },
+    "Toyota|Camry": {
+     "decoded": 6899,
+     "gas": 2235,
+     "hybrid": 241
+    },
+    "Toyota|Camry Hybrid": {
+     "decoded": 96,
+     "hybrid": 96
+    },
+    "Toyota|Camry Solara": {
+     "decoded": 458
+    },
+    "Toyota|Celica": {
+     "decoded": 183
+    },
+    "Toyota|Corolla": {
+     "decoded": 3126
+    },
+    "Toyota|Corolla iM": {
+     "decoded": 2
+    },
+    "Toyota|Cressida": {
+     "decoded": 5
+    },
+    "Toyota|Echo": {
+     "decoded": 122
+    },
+    "Toyota|FJ Cruiser": {
+     "decoded": 4
+    },
+    "Toyota|Highlander": {
+     "decoded": 698,
+     "hybrid": 40
+    },
+    "Toyota|Land Cruiser": {
+     "decoded": 4
+    },
+    "Toyota|MR2": {
+     "decoded": 6
+    },
+    "Toyota|MR2 Spyder": {
+     "decoded": 2
+    },
+    "Toyota|Matrix": {
+     "decoded": 379
+    },
+    "Toyota|Mirai": {
+     "decoded": 5
+    },
+    "Toyota|Paseo": {
+     "decoded": 7
+    },
+    "Toyota|Pickup": {
+     "decoded": 63
+    },
+    "Toyota|Previa": {
+     "decoded": 36
+    },
+    "Toyota|Prius": {
+     "decoded": 1327
+    },
+    "Toyota|Prius C": {
+     "decoded": 56
+    },
+    "Toyota|Prius Plug-In": {
+     "decoded": 6
+    },
+    "Toyota|Prius Prime": {
+     "decoded": 2
+    },
+    "Toyota|Prius V": {
+     "decoded": 45
+    },
+    "Toyota|RAV4": {
+     "decoded": 751,
+     "make_mismatch": 1
+    },
+    "Toyota|Sequoia": {
+     "decoded": 369
+    },
+    "Toyota|Sienna": {
+     "decoded": 1473
+    },
+    "Toyota|Supra": {
+     "decoded": 11
+    },
+    "Toyota|Tacoma": {
+     "decoded": 198
+    },
+    "Toyota|Tercel": {
+     "decoded": 77
+    },
+    "Toyota|Tundra": {
+     "decoded": 409
+    },
+    "Toyota|Van": {
+     "decoded": 8
+    },
+    "Toyota|Venza": {
+     "decoded": 34
+    },
+    "Toyota|Yaris": {
+     "decoded": 346,
+     "make_mismatch": 1
+    }
+   },
+   "note": "vPIC model is not in the published inventory; checked make mismatches and, for hybrid trim subsets, vPIC trim 'Gas'"
+  },
+  "M9_cars_outside_catalog_years": {},
+  "skipped": []
+ },
+ "near_miss_rows": [],
+ "ns": "nissan",
+ "open_reasons_cells": {
+  "no_year_manifest": 6518
+ },
+ "raw": {
+  "commit": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e",
+  "ref": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e",
+  "sites": {
+   "www.infinitipartsdeal.com": {
+    "blocked": false,
+    "done": true,
+    "lists": 0,
+    "lists_sha256": null,
+    "records": 1775,
+    "records_sha256": "e88035158052704584b652dc844fb888f7a2f447b9c3a2b1b2320fd19d79dba1",
+    "years": 0,
+    "years_sha256": null
+   },
+   "www.nissanpartsdeal.com": {
+    "blocked": false,
+    "done": false,
+    "lists": 0,
+    "lists_sha256": null,
+    "records": 2254,
+    "records_sha256": "5b6fc3bc9dba5209667d83f008705ebf0bd51e283dcbb64198368e84117d6aba",
+    "years": 0,
+    "years_sha256": null
+   }
+  }
+ },
+ "refusals": [
+  {
+   "cat": "ac-compressor",
+   "detail": "15 feed models",
+   "evidence": [],
+   "pn": "92600-1CB0B",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "detail": "16 feed models",
+   "evidence": [],
+   "pn": "92600-1CB2A",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L320",
+    "www.nissanpartsdeal.com:records:L1003"
+   ],
+   "pn": "92600-ZJ00A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L361",
+    "www.nissanpartsdeal.com:records:L716"
+   ],
+   "pn": "92600-1JA1A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L362",
+    "www.nissanpartsdeal.com:records:L717"
+   ],
+   "pn": "92600-9NB0A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L432",
+    "www.nissanpartsdeal.com:records:L1140"
+   ],
+   "pn": "92600-0W010",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L433",
+    "www.nissanpartsdeal.com:records:L1139"
+   ],
+   "pn": "92600-4W000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "ac-compressor",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L593",
+    "www.nissanpartsdeal.com:records:L1369"
+   ],
+   "pn": "92600-2Y010",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "13 feed models",
+   "evidence": [],
+   "pn": "23100-JK01A",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "15 feed models",
+   "evidence": [],
+   "pn": "23100-3FY1A",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1",
+    "www.nissanpartsdeal.com:records:L1964"
+   ],
+   "pn": "23100-CD010",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L316",
+    "www.nissanpartsdeal.com:records:L291"
+   ],
+   "pn": "23100-ZH00B",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L317",
+    "www.nissanpartsdeal.com:records:L795"
+   ],
+   "pn": "23100-EA20A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L318",
+    "www.nissanpartsdeal.com:records:L797"
+   ],
+   "pn": "23100-ZH00A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L356",
+    "www.nissanpartsdeal.com:records:L713"
+   ],
+   "pn": "23100-3JA1A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L426",
+    "www.nissanpartsdeal.com:records:L1131"
+   ],
+   "pn": "23100-3W400",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L427",
+    "www.nissanpartsdeal.com:records:L1134"
+   ],
+   "pn": "23100-0W404",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L478",
+    "www.nissanpartsdeal.com:records:L1366"
+   ],
+   "pn": "23100-2Y900",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L467",
+    "www.nissanpartsdeal.com:records:L1175"
+   ],
+   "pn": "27500-2W601",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L352",
+    "www.nissanpartsdeal.com:records:L1022"
+   ],
+   "pn": "17040-ZE00A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L393",
+    "www.nissanpartsdeal.com:records:L752"
+   ],
+   "pn": "17040-3KA1A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L394",
+    "www.nissanpartsdeal.com:records:L750"
+   ],
+   "pn": "17040-3KA1B",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L395",
+    "www.nissanpartsdeal.com:records:L751"
+   ],
+   "pn": "17040-3KA1C",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L469",
+    "www.nissanpartsdeal.com:records:L1182"
+   ],
+   "pn": "17042-4W000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L470",
+    "www.nissanpartsdeal.com:records:L1181"
+   ],
+   "pn": "17042-1W700",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L523",
+    "www.nissanpartsdeal.com:records:L1399"
+   ],
+   "pn": "17042-2Y900",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L524",
+    "www.nissanpartsdeal.com:records:L1400"
+   ],
+   "pn": "17042-2Y904",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L61",
+    "www.nissanpartsdeal.com:records:L2005"
+   ],
+   "pn": "17040-AC800",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L62",
+    "www.nissanpartsdeal.com:records:L2006"
+   ],
+   "pn": "17040-CD000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L63",
+    "www.nissanpartsdeal.com:records:L2004"
+   ],
+   "pn": "17040-CD010",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "14 feed models",
+   "evidence": [],
+   "pn": "22448-JA00C",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "17 feed models",
+   "evidence": [],
+   "pn": "22448-EY00A",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "20 feed models",
+   "evidence": [],
+   "pn": "22448-JA10C",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "22 feed models",
+   "evidence": [],
+   "pn": "22448-JA11C",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1046",
+    "www.nissanpartsdeal.com:records:L2021"
+   ],
+   "pn": "22448-JA10C",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1047",
+    "www.nissanpartsdeal.com:records:L2082"
+   ],
+   "pn": "22448-JA10A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1222",
+    "www.nissanpartsdeal.com:records:L2019"
+   ],
+   "pn": "22448-JA11C",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1526",
+    "www.nissanpartsdeal.com:records:L2020"
+   ],
+   "pn": "22448-JA00C",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "power-steering-pump",
+   "detail": "15 feed models",
+   "evidence": [],
+   "pn": "49110-JK20A",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "power-steering-pump",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L355",
+    "www.nissanpartsdeal.com:records:L873"
+   ],
+   "pn": "49110-7S000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "power-steering-pump",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L474",
+    "www.nissanpartsdeal.com:records:L1188"
+   ],
+   "pn": "49110-0W000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "power-steering-pump",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L475",
+    "www.nissanpartsdeal.com:records:L1189"
+   ],
+   "pn": "49110-4W000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "power-steering-pump",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L527",
+    "www.nissanpartsdeal.com:records:L1403"
+   ],
+   "pn": "49110-40U15",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "power-steering-pump",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L68",
+    "www.nissanpartsdeal.com:records:L2007"
+   ],
+   "pn": "49110-AM600",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "power-steering-pump",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L69",
+    "www.nissanpartsdeal.com:records:L2008"
+   ],
+   "pn": "49110-AM605",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L329",
+    "www.nissanpartsdeal.com:records:L837"
+   ],
+   "pn": "96302-ZC400",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L331",
+    "www.nissanpartsdeal.com:records:L842"
+   ],
+   "pn": "96301-ZC400",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "13 feed models",
+   "evidence": [],
+   "pn": "23300-EY00D",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "13 feed models",
+   "evidence": [],
+   "pn": "23300-EY00E",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L3",
+    "www.nissanpartsdeal.com:records:L1965"
+   ],
+   "pn": "23300-AM600",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L319",
+    "www.nissanpartsdeal.com:records:L822"
+   ],
+   "pn": "23300-7S000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L357",
+    "www.nissanpartsdeal.com:records:L714"
+   ],
+   "pn": "23300-9HP0A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L358",
+    "www.nissanpartsdeal.com:records:L715"
+   ],
+   "pn": "23300-9HP0B",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L359",
+    "www.nissanpartsdeal.com:records:L5"
+   ],
+   "pn": "23300-JA10C",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L360",
+    "www.nissanpartsdeal.com:records:L6"
+   ],
+   "pn": "23300-JA12A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L428",
+    "www.nissanpartsdeal.com:records:L1135"
+   ],
+   "pn": "23300-4W015",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L429",
+    "www.nissanpartsdeal.com:records:L1138"
+   ],
+   "pn": "23300-0W011",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L430",
+    "www.nissanpartsdeal.com:records:L1136"
+   ],
+   "pn": "23300-4W010",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L431",
+    "www.nissanpartsdeal.com:records:L1137"
+   ],
+   "pn": "23300-4W016",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L479",
+    "www.nissanpartsdeal.com:records:L1367"
+   ],
+   "pn": "23300-2Y900",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "20 feed models",
+   "evidence": [],
+   "pn": "16119-JK20A",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "20 feed models",
+   "evidence": [],
+   "pn": "16119-JK20B",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L219",
+    "www.nissanpartsdeal.com:records:L433"
+   ],
+   "pn": "16119-8J10A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L310",
+    "www.nissanpartsdeal.com:records:L434"
+   ],
+   "pn": "16119-8J10B",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L311",
+    "www.nissanpartsdeal.com:records:L928"
+   ],
+   "pn": "16119-8J10C",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L354",
+    "www.nissanpartsdeal.com:records:L872"
+   ],
+   "pn": "16119-7S000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L396",
+    "www.nissanpartsdeal.com:records:L754"
+   ],
+   "pn": "16119-9HP0A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L397",
+    "www.nissanpartsdeal.com:records:L87"
+   ],
+   "pn": "16119-JA10B",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L471",
+    "www.nissanpartsdeal.com:records:L1184"
+   ],
+   "pn": "16119-4W010",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L472",
+    "www.nissanpartsdeal.com:records:L1185"
+   ],
+   "pn": "16119-4W000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L473",
+    "www.nissanpartsdeal.com:records:L1186"
+   ],
+   "pn": "16118-1W610",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L525",
+    "www.nissanpartsdeal.com:records:L1402"
+   ],
+   "pn": "16119-2Y900",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L526",
+    "www.nissanpartsdeal.com:records:L1401"
+   ],
+   "pn": "16119-4Y900",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L66",
+    "www.nissanpartsdeal.com:records:L1129"
+   ],
+   "pn": "16119-8J101",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L67",
+    "www.nissanpartsdeal.com:records:L432"
+   ],
+   "pn": "16119-8J103",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L111",
+    "www.nissanpartsdeal.com:records:L110"
+   ],
+   "pn": "80731-EH100",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L112",
+    "www.nissanpartsdeal.com:records:L108"
+   ],
+   "pn": "80730-EG000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L253",
+    "www.nissanpartsdeal.com:records:L230"
+   ],
+   "pn": "80731-JM10A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L254",
+    "www.nissanpartsdeal.com:records:L512"
+   ],
+   "pn": "80730-1BA0A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L257",
+    "www.nissanpartsdeal.com:records:L517"
+   ],
+   "pn": "82731-1BA0A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L259",
+    "www.nissanpartsdeal.com:records:L518"
+   ],
+   "pn": "82730-1BA0A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L261",
+    "www.nissanpartsdeal.com:records:L519"
+   ],
+   "pn": "82721-EG000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L262",
+    "www.nissanpartsdeal.com:records:L520"
+   ],
+   "pn": "82720-EG000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L32",
+    "www.nissanpartsdeal.com:records:L1987"
+   ],
+   "pn": "80731-CD000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L33",
+    "www.nissanpartsdeal.com:records:L1986"
+   ],
+   "pn": "80731-CD001",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L334",
+    "www.nissanpartsdeal.com:records:L848"
+   ],
+   "pn": "80731-7S000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L336",
+    "www.nissanpartsdeal.com:records:L849"
+   ],
+   "pn": "80730-7S000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L338",
+    "www.nissanpartsdeal.com:records:L850"
+   ],
+   "pn": "80721-7S000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L339",
+    "www.nissanpartsdeal.com:records:L852"
+   ],
+   "pn": "80720-7S000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L34",
+    "www.nissanpartsdeal.com:records:L1989"
+   ],
+   "pn": "80730-CD001",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L344",
+    "www.nissanpartsdeal.com:records:L1012"
+   ],
+   "pn": "82721-ZC30A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L345",
+    "www.nissanpartsdeal.com:records:L1013"
+   ],
+   "pn": "82720-ZC30A",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L36",
+    "www.nissanpartsdeal.com:records:L1988"
+   ],
+   "pn": "80730-CD000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L379",
+    "www.nissanpartsdeal.com:records:L736"
+   ],
+   "pn": "80731-3KG0B",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L382",
+    "www.nissanpartsdeal.com:records:L738"
+   ],
+   "pn": "80730-3KG0B",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L454",
+    "www.nissanpartsdeal.com:records:L1158"
+   ],
+   "pn": "80731-0W205",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L455",
+    "www.nissanpartsdeal.com:records:L1159"
+   ],
+   "pn": "80731-0W310",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L456",
+    "www.nissanpartsdeal.com:records:L1160"
+   ],
+   "pn": "80730-0W300",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L457",
+    "www.nissanpartsdeal.com:records:L1161"
+   ],
+   "pn": "80730-0W310",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L458",
+    "www.nissanpartsdeal.com:records:L1163"
+   ],
+   "pn": "80721-0W210",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L459",
+    "www.nissanpartsdeal.com:records:L1164"
+   ],
+   "pn": "80720-0W210",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L460",
+    "www.nissanpartsdeal.com:records:L1166"
+   ],
+   "pn": "82731-0W300",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L461",
+    "www.nissanpartsdeal.com:records:L1167"
+   ],
+   "pn": "82730-0W300",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L462",
+    "www.nissanpartsdeal.com:records:L1169"
+   ],
+   "pn": "82721-0W210",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L463",
+    "www.nissanpartsdeal.com:records:L1171"
+   ],
+   "pn": "82720-0W210",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L510",
+    "www.nissanpartsdeal.com:records:L1385"
+   ],
+   "pn": "80731-2Y900",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L512",
+    "www.nissanpartsdeal.com:records:L1387"
+   ],
+   "pn": "80721-2Y000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L514",
+    "www.nissanpartsdeal.com:records:L1389"
+   ],
+   "pn": "80731-89906",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L515",
+    "www.nissanpartsdeal.com:records:L1390"
+   ],
+   "pn": "80730-89906",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L516",
+    "www.nissanpartsdeal.com:records:L1391"
+   ],
+   "pn": "82721-2Y000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L517",
+    "www.nissanpartsdeal.com:records:L1392"
+   ],
+   "pn": "82720-2Y000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L213",
+    "www.nissanpartsdeal.com:records:L1127"
+   ],
+   "pn": "25401-7Y000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L214",
+    "www.nissanpartsdeal.com:records:L1128"
+   ],
+   "pn": "25401-7Y010",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L464",
+    "www.nissanpartsdeal.com:records:L1173"
+   ],
+   "pn": "25401-5W504",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L465",
+    "www.nissanpartsdeal.com:records:L1172"
+   ],
+   "pn": "25401-4W300",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L466",
+    "www.nissanpartsdeal.com:records:L1174"
+   ],
+   "pn": "25401-9V000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L60",
+    "www.nissanpartsdeal.com:records:L2000"
+   ],
+   "pn": "25401-CD010",
+   "reason": "disputed_class",
+   "t": null
+  }
+ ],
+ "sites_without_namespace": [
+  "www.audipartsgiant.com",
+  "www.bmwpartsdeal.com",
+  "www.mazdapartsnow.com",
+  "www.mbpartsgiant.com",
+  "www.mitsubishipartsgiant.com",
+  "www.volvopartsgiant.com",
+  "www.vwpartsgiant.com"
+ ],
+ "summary": {
+  "blocked_sites": [],
+  "cells": 6518,
+  "classes": 3925,
+  "gates": [
+   "no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close (C1/C2); Verified is impossible by design until the crawler writes them",
+   "no (site, category) of this namespace has passed the audit gate (CATEGORY_STATUS has no record; spec 11.4, E5/V7)",
+   "engine cells not audited as reliable on www.infinitipartsdeal.com, www.nissanpartsdeal.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
+   "www.infinitipartsdeal.com: only 0% of its 3381 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",
+   "www.nissanpartsdeal.com: only 0% of its 2820 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
+  ],
+  "likely_groups": 843,
+  "list_rows": 0,
+  "records": 4029,
+  "verified_groups": 0,
+  "vg_groups": 0,
+  "why_no_verified": "no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close (C1/C2); Verified is impossible by design until the crawler writes them; no (site, category) of this namespace has passed the audit gate (CATEGORY_STATUS has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.infinitipartsdeal.com, www.nissanpartsdeal.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.infinitipartsdeal.com: only 0% of its 3381 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5); www.nissanpartsdeal.com: only 0% of its 2820 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",
+  "year_manifests": 0
+ },
+ "unknown_note_clauses": {
+  "#2": 3,
+  "#KH3 BLACK/#KR4 SILVER": 1,
+  "*3ROW. 7P. PREMIUM + *3ROW. 8P": 1,
+  "*3ROW. AWD. LE": 1,
+  "*3ROW. AWD. PREMIUM": 1,
+  "*4S. (25SV + 25SVCONV + 25SL + 35SV + 35SL + 25SL/MR)": 1,
+  "*4S. 35SR": 1,
+  "*4S. 35SV": 4,
+  "*4S. 5. LEATHER": 2,
+  "*4S. BASE": 1,
+  "*4S. FED. SV": 4,
+  "*4S. SR": 2,
+  "*4S. VQ35DE": 3,
+  "*4S. VQ35DE + *4S. (25SR+ 25TECH)": 2,
+  "*4S. VQ35DE + *4S. 25S": 2,
+  "*C. 2WD/STD. SPORT/P + *C. 2WD/4WAS + *C. PREMIUM": 2,
+  "*C. 2WD/STD. SPORT/P + *C. 2WD/4WAS + *C. SPORT": 1,
+  "*C. 2WD/STD. SPORT/P. 7AT + *C. 2WD/4WAS + *C. 6MT": 1,
+  "*C. MT": 2,
+  "*C. SPORT": 3,
+  "*C. TRACK": 1,
+  "*C. TRACK. AT. F5": 1,
+  "*C. TRACK. MT. F6 + *C. SPORT": 1,
+  "*C. VQ35DE": 4,
+  "*CC. SE. AT": 3,
+  "*FED. QR25DE + *VQ35DE": 1,
+  "*FED. S. IRS + *CAL. S. IRS": 1,
+  "*FED. S. SE + *CAL. S. SE": 1,
+  "*HB. FED. 25S": 2,
+  "*J/4S. J/GA16DE. E. J/MT. F5 + *J/GA16DE. J/AT. F3": 1,
+  "*J/C. J/GA16DE + *J/CT. J/GA16DE": 2,
+  "*J/GA16DE. J/AT. F4": 2,
+  "*J/GA16DE. MT. F5": 2,
+  "*J/GA16DE. STD. (J/MT. F5 + J/AT. F4)": 1,
+  "*KC. LE": 3,
+  "*KC. QR25DE + *KC. SE": 1,
+  "*KC. SE": 1,
+  "*KC. VG33E + *CC": 1,
+  "*LWB. LEATHER": 1,
+  "*S. (2WD/STD+ AWD). (SPORT+ SPORT/P) + *S. 2WD/4WAS": 1,
+  "*S. 2WD": 2,
+  "*S. 2WD. LEATHER": 2,
+  "*S. 2WD. TRACK + *S. 4WD + *S. SPORT. AT. F5 + *C. TRACK + *C. SPORT. AT. F5": 1,
+  "*S. 2WD. TRACK. AT. F5 + *S. 4WD + *S. MT. F6": 2,
+  "*S. 2WD. VQ35DE + *S. VK45DE": 1,
+  "*S. LEATHER. MT": 2,
+  "*S. MT. F6": 1,
+  "*S. PREMIUM": 1,
+  "*S. SL + *W. SL": 1,
+  "*S. SPORT": 2,
+  "*S. SPORT/P": 1,
+  "*S. TRACK": 7,
+  "*S. TRACK. AT. F5": 3,
+  "*S. VQ35DE. AT. F5": 1,
+  "*S. VQ37VHR. (UPPER + S. UPPER)": 2,
+  "*SED. S": 2,
+  "*SEDAN. VQ37VHR. SPORTPRE": 1,
+  "*T + *KC": 2,
+  "*T + *KC + *CC": 1,
+  "*T + *KC. 4WD. VG33E + *KC. KA24DE": 1,
+  "*T. (FED. 2WD+ CAL. 2WD). XE. MT + *T. (FED. 4WD+ CAL. 4WD) + *T. AT + *KC": 2,
+  "*T. KA24DE. AT + *KC. KA24DE. XE. AT": 1,
+  "*U/2S + *U/4S. (STD+ XE)": 2,
+  "*U/2S. U/GA16DE + *U/4S": 1,
+  "*U/2S. U/SR20DE": 1,
+  "*U/4S. GXE": 1,
+  "*U/GA16DE. AT. F4": 2,
+  "*U/GA16DE. MT. F5": 2,
+  "*U/GA16DE. STD. U/AT. F4": 1,
+  "*U/GA16DE. STD. U/MT. F4": 1,
+  "*U/GA16DE. STD. U/MT. F5": 1,
+  "*U/GA16DE. U/AT. F4": 2,
+  "*U/GA16DE. U/MT. F5": 2,
+  "*W. AWD. PREMIUM": 4,
+  "*W. FWD. PREMIUM": 1,
+  "*W. GXE": 2,
+  "*W. PREMIUM": 6,
+  "*W. SE": 9,
+  "*W. SL": 8,
+  "*W. VG30E. GL": 3,
+  "*W. VG30E. SL": 1,
+  "*W. VQ35DE": 13,
+  "*W. VQ35HR. PREMIUM + *W. VK50VE": 2,
+  "*WAG. LEATHER": 4,
+  "*WAG. SL": 4,
+  "*WAG. SL/LEMEX": 4,
+  "*WAG. SL/ROOF": 4,
+  ".": 1,
+  "07/2008-04/2009": 2,
+  "08/2012-04/2013": 1,
+  "09/2014-01/2016": 2,
+  "10/2010-11/2010": 2,
+  "12/1998-01/2000": 1,
+  "16MM THICK": 1,
+  "25MM THICK": 1,
+  "2ROW. (S+ SV) + 3ROW": 2,
+  "2ROW. (SV/PREM + SL + SL/PREM)": 2,
+  "2ROW. S + 3ROW. S": 2,
+  "2ROW. SL/PREM": 2,
+  "2ROW. SV + 3ROW. SV": 2,
+  "2WD. VQ40DE. LE + AUTO. VQ40DE + VQ40DE. SE": 1,
+  "2WD/HI. VQ35HR": 1,
+  "2WD/STD. VQ37VHR. (JOURNEY+ PREMIUM) + AWD. VQ37VHR + VQ37VHR. LEATHER": 1,
+  "2WD/STD. VQ37VHR. (SPORT+ SPORT/P). 7AT + 2WD/4WAS. VQ37VHR. 7AT + VQ37VHR. 6MT": 1,
+  "3ROW. 7P. PREMIUM + 3ROW. 8P": 1,
+  "3ROW. AWD. PREMIUM": 1,
+  "3ROW. LE": 1,
+  "3ROW. LE/HIGH": 1,
+  "3ROW. PREMIUM": 1,
+  "4S": 1,
+  "4S. (25SL + 35SL + 35SER)": 3,
+  "4S. (25SV + 25SVCONV + 25SL + 25SVTECH + 25SLTECH)": 1,
+  "4S. (25SV + 25SVCONV + 25SL + 35SV + 35SL + 25SL/MR)": 1,
+  "4S. (35S + 35SV)": 3,
+  "4S. (35SR + 35LE)": 2,
+  "4S. (35SV + 35SL)": 1,
+  "4S. (BASE + 25S)": 2,
+  "4S. (FE + SV + SR + SL)": 1,
+  "4S. (GXE + GLE + SE)": 1,
+  "4S. (S + SV + SL + FE)": 5,
+  "4S. (S + SV + SR + FE)": 2,
+  "4S. (SV + SL)": 1,
+  "4S. 25S": 2,
+  "4S. 35LE": 3,
+  "4S. 35SER": 2,
+  "4S. 35SL": 4,
+  "4S. 35SR": 4,
+  "4S. 35SV": 2,
+  "4S. 4": 4,
+  "4S. 4 + 4S. 5. SL": 2,
+  "4S. 5. LEATHER": 2,
+  "4S. 5. LEATHER. SE + 4S. CLOTH": 2,
+  "4S. BASE + 4S. 25S. CVT/QR25": 1,
+  "4S. BASE. MT + 4S. 25S": 1,
+  "4S. CVT/QR25": 1,
+  "4S. FE": 1,
+  "4S. MRA8DE. SR + 4S. SL": 1,
+  "4S. QR25DE": 9,
+  "4S. QR25DE + 4S. (35SE+ 35SL)": 6,
+  "4S. QR25DE + 4S. 1. 8S": 1,
+  "4S. QR25DE + 4S. 35SE": 1,
+  "4S. QR25DE. MT": 1,
+  "4S. S": 1,
+  "4S. SL": 2,
+  "4S. SR": 1,
+  "4S. VQ35DE": 8,
+  "4S. VQ35DE + 4S. (25S/CONV+ 25SL)": 2,
+  "4WD. STD/FUEL. VK56DE": 1,
+  "5HB. (BASE + UPPER + LUX)": 3,
+  "ALUMINIZED BEZEL": 2,
+  "ASCD & CASSETTE": 1,
+  "AUTO": 1,
+  "AWD. VQ35DE": 1,
+  "BA": 5,
+  "BLACK / BLACK F/OUTSIDE MIRROR-SAIL MOUNT": 2,
+  "BLACK HEATER LESS": 2,
+  "BLACK S": 2,
+  "BLACK/MAROON": 2,
+  "BRICK": 4,
+  "C": 5,
+  "C + CV": 3,
+  "C. (BASE + JOURNEY + SPORT)": 1,
+  "C. (BASIC + TRACK)": 2,
+  "C. 2WD/STD. (JOURNEY+ PREMIUM) + C. AWD + C. BASE": 1,
+  "C. 2WD/STD. JOURNEY + C. (BASE+ SPORT)": 2,
+  "C. 2WD/STD. SPORT/P + C. 2WD/4WAS + C. PREMIUM": 2,
+  "C. 2WD/STD. SPORT/P + C. 2WD/4WAS + C. SPORT": 1,
+  "C. 2WD/STD. SPORT/P. 7AT + C. 2WD/4WAS + C. PREMIUM + C. 6MT": 2,
+  "C. 2WD/STD. SPORT/P. 7AT + C. 2WD/4WAS + C. SPORT + C. 6MT": 1,
+  "C. AWD. JOURNEY": 2,
+  "C. BASE": 2,
+  "C. MT. F6": 2,
+  "C. SPORT": 2,
+  "C. TRACK + C. SPORT. AT. F5": 2,
+  "C. VQ35DE": 5,
+  "C. VQ35DE. AT. F5": 1,
+  "C. VQ35DE. AT. F5 + 4WD. VQ35DE": 1,
+  "CAL. U/GA16DE. (U/MT. F4 + U/MT. F5)": 1,
+  "CAL. U/GA16DE. U/MT. F5": 1,
+  "CC. (LE + OFFROAD)": 3,
+  "CC. LE": 3,
+  "CC. SE": 6,
+  "CC. XE": 1,
+  "CV": 3,
+  "DARK CHROMIUM BEZEL": 2,
+  "EATC": 1,
+  "EGG SHELL (INTERIOR COLOR)": 1,
+  "ELEC": 17,
+  "ELEC / ELEC+MEM": 2,
+  "ELEC / ELEC+MEM+LAMP": 2,
+  "ELEC / USA MAKE / USA MAKE F/OUTSIDE MIRROR-SAIL MOUNT": 2,
+  "ELEC FOLD NO PAINT": 6,
+  "ELEC NO PAINT": 2,
+  "ELEC WHITE": 1,
+  "ELECTRICAL ADJUST": 4,
+  "ELECTRONIC INDICATIN G / F/DIGITAL INDIATION": 2,
+  "ELECTRONIC INDICATING": 1,
+  "ELECTRONIC INDICATING / F/DIGITAL INDICATING": 1,
+  "Exterior Color: #EV4 OLIVE/#CR0 BEIGE": 2,
+  "Exterior Color: #JW0 YELLOWISH GREEN M/#KR3 YELLOWISH SILVER TM": 1,
+  "Exterior Color: #KH3 BLACK S/#KX0 GRAY FM": 1,
+  "Exterior Color: #KH3 BLACK/#KR4 SILVER": 1,
+  "Exterior Color: #KX0 GRAY FM /#CR0 BEIGE": 1,
+  "Exterior Color: #QX1 WHITE 3P/#KR3 YELLOWISH SILVER TM": 1,
+  "Exterior Color: #WK0 WHITE/#CR0 BEIGE": 2,
+  "Exterior Color: A20": 2,
+  "Exterior Color: AZTEC RED": 1,
+  "Exterior Color: BEIGE M": 2,
+  "Exterior Color: BLACK": 1,
+  "Exterior Color: BLACK EMERALD": 4,
+  "Exterior Color: BLUE": 1,
+  "Exterior Color: BLUE DUSK": 2,
+  "Exterior Color: BLUE PM": 2,
+  "Exterior Color: BRILLIANT ALUMINUM": 2,
+  "Exterior Color: BROWN": 1,
+  "Exterior Color: BV6": 1,
+  "Exterior Color: BW9": 4,
+  "Exterior Color: C12": 2,
+  "Exterior Color: CHARCOAL MIST": 4,
+  "Exterior Color: CLOUD WHITE": 2,
+  "Exterior Color: CODE RED": 2,
+  "Exterior Color: CRYSTAL BLUE": 2,
+  "Exterior Color: DARK BLUE P": 1,
+  "Exterior Color: GRAY M (2009/11-)": 2,
+  "Exterior Color: GRAY TPM(NEW TITANIUM)": 2,
+  "Exterior Color: GREENISH SILVER": 1,
+  "Exterior Color: JADED": 2,
+  "Exterior Color: K11": 2,
+  "Exterior Color: LT GOLD RPM": 1,
+  "Exterior Color: MOLTEN SILVER": 2,
+  "Exterior Color: MYSTIC EMERALD": 2,
+  "Exterior Color: NOUVEAU RUBY": 2,
+  "Exterior Color: OPAL BLUE METALLIC": 2,
+  "Exterior Color: POLISHED PEWTER": 2,
+  "Exterior Color: RADIUM": 2,
+  "Exterior Color: RED": 1,
+  "Exterior Color: RED GP": 1,
+  "Exterior Color: RED P": 1,
+  "Exterior Color: SATIN WHITE": 2,
+  "Exterior Color: SEASCAPE": 2,
+  "Exterior Color: SHEER SILVER": 2,
+  "Exterior Color: SILVER": 4,
+  "Exterior Color: SILVER M": 1,
+  "Exterior Color: SONOMA SUNSET": 2,
+  "Exterior Color: SUPER BLACK": 4,
+  "Exterior Color: VELVET BEIGE": 2,
+  "Exterior Color: VIBRANT BLUE": 2,
+  "Exterior Color: WHITE": 1,
+  "Exterior Color: YELLOWISH SILVER TM": 2,
+  "F/#1": 2,
+  "F/#2-#6": 2,
+  "F/AIR CONDITIONER-AUTO": 8,
+  "F/AIR CONDITIONER-SEMI": 1,
+  "F/AIR CONDITIONER-STD TYPE": 12,
+  "F/AIR SPOILER / F/TOURING": 1,
+  "F/ANALOG": 4,
+  "F/ASCD": 4,
+  "F/CC": 1,
+  "F/DIGITAL INDIATION": 1,
+  "F/ELEC CONTROL F/LUXURY": 1,
+  "F/FRONT W/REAR AIRCON": 2,
+  "F/KEYLESS ENTRY+F/POWER WINDOW": 1,
+  "F/LOCAL MAKE-NMMC / F/POWER WINDOW / F/POWER WINDOW W1 TOUCH F/LOCAL MAKE-NMMC": 1,
+  "F/LOW FUEL WARNING": 1,
+  "F/MANUAL AIR CONDITIONER OR HEATER": 2,
+  "F/MULTI-REFLECTOR HEAD LAMP": 4,
+  "F/OUTSIDE MIRROR-SAIL MOUNT": 9,
+  "F/PAINT": 1,
+  "F/PAINT / F/PAINT TOURING PACKAGE": 1,
+  "F/PAINT / NO PAINTING": 2,
+  "F/POWER STEERING": 2,
+  "F/POWER WINDOW": 16,
+  "F/POWER WINDOW W/1 TOUCH": 1,
+  "F/POWER WINDOW W/O 1 TOUCH": 6,
+  "F/REAR HEATER & REAR COOLER": 1,
+  "F/SEL": 2,
+  "F/SERVICE": 1,
+  "F/SPOILER": 1,
+  "F/TCS": 2,
+  "FED. MR20DE": 2,
+  "FED. QR25DE + VQ35DE": 1,
+  "FED. S + CAL. S": 2,
+  "FED. S. (GXE+ GXE/BOSE) + CAL. S. (GXE+ GXE/BOSE)": 2,
+  "FED. S. (GXE+ SE) + CAL. S. (GXE+ SE)": 1,
+  "FED. S. GLE + CAL. S. GLE": 6,
+  "FED. S. HICAS + CAL. S. HICAS": 1,
+  "FED. S. IRS + CAL. S. IRS": 2,
+  "FED. S. SE": 1,
+  "FED. S. XE + CAL. S. XE": 2,
+  "FED. U/GA16DE. (U/MT. F4 + U/MT. F5)": 1,
+  "FED. U/GA16DE. U/MT. F5": 1,
+  "FED. W. GXE + CAL. W. GXE": 8,
+  "FWD. VQ35DE": 3,
+  "GRAY (INTERIOR COLOR)": 1,
+  "GRAY(CLOTH/LTHR)": 3,
+  "HANSHIN": 2,
+  "HANSHIN F/#1": 3,
+  "HANSHIN F/#3-#8": 3,
+  "HANSHIN L/H": 1,
+  "HANSHIN R/H": 1,
+  "HAP": 3,
+  "HB": 2,
+  "HB. (25S + 25SL + 25SL/PRE)": 1,
+  "HB. (25S + 25SV + 25S/SP + 25SV/SP)": 3,
+  "HB. (25S + 25SV + 25SV/PRE)": 2,
+  "HB. (25S + 25SV)": 1,
+  "HB. (25SL/PKG + 25SV/SP)": 1,
+  "HB. (25SV + 25SL/PKG + 25S/SP + 25SV/SP)": 1,
+  "HB. (25SV + 25SL/PKG + 25SV/PRE)": 1,
+  "HB. 25SL/PKG": 2,
+  "HB. 25SL/PL": 1,
+  "HB. 2WD + HB. 4WD. (25S+ 25SL)": 2,
+  "HB. 4WD. (25SL/PRE + 25SL/PL)": 2,
+  "HB. FED": 1,
+  "HITACHI": 47,
+  "HITACHI (110A)": 2,
+  "HITACHI (130A)": 2,
+  "HITACHI P/NO. LR1110-707G / HITACHI P/NO. LR1110-707H": 1,
+  "HITACHI S114-461": 1,
+  "INFINITI": 7,
+  "Interior Color: BEIGE (INTERIOR COLOR)": 1,
+  "Interior Color: BEIGE (INTERIOR COLOR)(FROM JUL.2001 UP TO AUG.2003)": 4,
+  "Interior Color: BEIGE(CLOTH/LTHR)": 5,
+  "Interior Color: BLACK": 10,
+  "Interior Color: BLACK (INTERIOR COLOR)": 1,
+  "Interior Color: BLACK / ECRU": 2,
+  "Interior Color: C": 5,
+  "Interior Color: CHILI (LEATHER)": 3,
+  "Interior Color: D": 5,
+  "Interior Color: ECRU": 2,
+  "Interior Color: GOLD (INTERIOR COLOR)": 1,
+  "Interior Color: GRAY(CLOTH/LTHR)": 2,
+  "Interior Color: HINOKI": 2,
+  "Interior Color: SILVER": 4,
+  "J/4S. GXE": 4,
+  "J/4S. J/GA16DE. (XE + GXE)": 1,
+  "J/GA16DE. (XE + GXE)": 1,
+  "J/GA16DE. J/AT. F4": 2,
+  "J/GA16DE. MT": 2,
+  "J/SR20DE. MT": 1,
+  "JAP MAKE": 2,
+  "JAP MAKE F/AIR CONDITIONER-STD TYPE": 2,
+  "JYOUNAN": 2,
+  "K": 5,
+  "KA24DE": 2,
+  "KA24DE. (GLE + SE)": 1,
+  "KA24DE. SE": 1,
+  "KA24DE. SE. (MT + AT)": 1,
+  "KC. (LE + OFFROAD)": 1,
+  "KC. (LE+ OFFROAD) + CC. OFFROAD": 2,
+  "KC. KA24DE. XE. AT + T. KA24DE": 1,
+  "KC. LE": 1,
+  "KC. LE + CC. LE": 3,
+  "KC. QR25DE + KC. SE": 2,
+  "KC. SE": 1,
+  "KC. VG33E": 1,
+  "KC. VQ40DE": 1,
+  "KH3 BLACK / #CR0 BEIGE": 1,
+  "LEFT BANK": 1,
+  "LESS PAINT": 2,
+  "LESS PAINT / PRIMER": 2,
+  "LESS PAINT HEATER LESS": 2,
+  "LESS PAINT WITH HEATER": 2,
+  "LEVER": 2,
+  "LWB": 3,
+  "LX01": 1,
+  "LX04": 1,
+  "MANUAL FOLD": 6,
+  "MELMAC": 1,
+  "MITSUBISHI": 37,
+  "MITSUBISHI R/H": 1,
+  "MOLDED BLACK": 1,
+  "MR16DDT. NISMO": 2,
+  "MT0": 2,
+  "NEW STYLING": 2,
+  "NO PAINT": 55,
+  "NO PAINTING": 12,
+  "NOT ADOPTED": 1,
+  "NOT ADOPTED YET": 1,
+  "NOT PAINTED": 5,
+  "OHI": 14,
+  "OLD STYLING": 2,
+  "PAINT LESS": 1,
+  "PAINTLESS": 2,
+  "PAINTLESS W/HEATER F/COLD / W/HEATER PAINTLESS F/COLD PACKAGE": 2,
+  "POWR BLACK": 1,
+  "POWR WHITE": 1,
+  "PRIMER": 16,
+  "PRIMER FOR ORIGINAL PARTS": 2,
+  "PRIMER FOR SERVICE ONLY PARTS": 1,
+  "PRIMER FOR SEVICE ONLY PARTS": 1,
+  "Package Quantity: 1": 64,
+  "Production Date: 01/1986-08/1986": 4,
+  "Production Date: 01/1986-12/1986": 1,
+  "Production Date: 01/1991-07/1992": 1,
+  "Production Date: 01/1991-10/1992": 2,
+  "Production Date: 01/1992-01/1993": 2,
+  "Production Date: 01/1992-01/1994": 4,
+  "Production Date: 01/1992-03/1994": 5,
+  "Production Date: 01/1992-04/1994": 1,
+  "Production Date: 01/1992-06/1994": 4,
+  "Production Date: 01/1993-07/1996": 2,
+  "Production Date: 01/1994-03/1996": 2,
+  "Production Date: 01/1994-06/1994": 2,
+  "Production Date: 01/1995-09/1995": 2,
+  "Production Date: 01/1996-06/1998": 1,
+  "Production Date: 01/1998-07/1998": 1,
+  "Production Date: 01/2000-01/2001": 2,
+  "Production Date: 01/2000-06/2000": 3,
+  "Production Date: 01/2000-07/2000": 2,
+  "Production Date: 01/2000-07/2001": 4,
+  "Production Date: 01/2000-07/2002": 9,
+  "Production Date: 01/2000-10/2000": 2,
+  "Production Date: 01/2000-10/2002": 2,
+  "Production Date: 01/2000-12/2000": 2,
+  "Production Date: 01/2001-02/2001": 2,
+  "Production Date: 01/2001-05/2001": 1,
+  "Production Date: 01/2001-07/2001": 6,
+  "Production Date: 01/2001-07/2002": 2,
+  "Production Date: 01/2001-08/2002": 5,
+  "Production Date: 01/2001-10/2002": 2,
+  "Production Date: 01/2001-11/2001": 4,
+  "Production Date: 01/2002-01/2004": 1,
+  "Production Date: 01/2003-01/2004": 1,
+  "Production Date: 01/2003-03/2004": 1,
+  "Production Date: 01/2003-08/2004": 2,
+  "Production Date: 01/2003-09/2004": 1,
+  "Production Date: 01/2004-01/2005": 2,
+  "Production Date: 01/2004-01/2006": 1,
+  "Production Date: 01/2004-08/2005": 7,
+  "Production Date: 01/2005-04/2008": 2,
+  "Production Date: 01/2005-05/2005": 1,
+  "Production Date: 01/2005-06/2005": 1,
+  "Production Date: 01/2005-09/2007": 2,
+  "Production Date: 01/2006-06/2006": 1,
+  "Production Date: 01/2006-08/2006": 1,
+  "Production Date: 01/2007-03/2008": 2,
+  "Production Date: 01/2007-04/2008": 1,
+  "Production Date: 01/2008-04/2008": 2,
+  "Production Date: 01/2008-06/2009": 2,
+  "Production Date: 01/2009-06/2011": 2,
+  "Production Date: 01/2010-02/2011": 1,
+  "Production Date: 01/2010-04/2010": 1,
+  "Production Date: 01/2010-06/2010": 4,
+  "Production Date: 01/2010-06/2012": 1,
+  "Production Date: 01/2010-07/2010": 8,
+  "Production Date: 01/2010-08/2010": 8,
+  "Production Date: 01/2010-08/2011": 1,
+  "Production Date: 01/2010-09/2010": 1,
+  "Production Date: 01/2010-12/2010": 2,
+  "Production Date: 01/2011-05/2011": 1,
+  "Production Date: 01/2011-07/2012": 2,
+  "Production Date: 01/2011-07/2015": 4,
+  "Production Date: 01/2013-05/2014": 1,
+  "Production Date: 01/2013-05/2016": 1,
+  "Production Date: 01/2016-11/2018": 1,
+  "Production Date: 02/1991-10/1992": 1,
+  "Production Date: 02/1993-02/1995": 1,
+  "Production Date: 02/1993-07/1994": 2,
+  "Production Date: 02/1993-07/1995": 2,
+  "Production Date: 02/1994-01/1996": 1,
+  "Production Date: 02/1994-02/1997": 4,
+  "Production Date: 02/1994-07/1996": 1,
+  "Production Date: 02/1996-07/1996": 1,
+  "Production Date: 02/1997-03/1999": 3,
+  "Production Date: 02/2001-05/2004": 2,
+  "Production Date: 02/2001-07/2001": 4,
+  "Production Date: 02/2003-03/2003": 1,
+  "Production Date: 02/2004-08/2005": 1,
+  "Production Date: 02/2005-08/2006": 1,
+  "Production Date: 02/2006-04/2006": 1,
+  "Production Date: 02/2006-04/2007": 2,
+  "Production Date: 02/2006-06/2006": 1,
+  "Production Date: 02/2007-04/2007": 2,
+  "Production Date: 02/2007-04/2008": 1,
+  "Production Date: 02/2007-07/2008": 1,
+  "Production Date: 02/2007-09/2008": 1,
+  "Production Date: 02/2008-07/2009": 1,
+  "Production Date: 02/2008-08/2008": 1,
+  "Production Date: 02/2008-09/2010": 4,
+  "Production Date: 02/2008-11/2009": 2,
+  "Production Date: 02/2009-08/2010": 2,
+  "Production Date: 02/2009-10/2009": 2,
+  "Production Date: 02/2009-12/2009": 1,
+  "Production Date: 02/2010-06/2012": 1,
+  "Production Date: 02/2010-09/2010": 1,
+  "Production Date: 02/2010-12/2012": 1,
+  "Production Date: 02/2011-08/2013": 1,
+  "Production Date: 02/2011-10/2011": 1,
+  "Production Date: 02/2012-03/2013": 1,
+  "Production Date: 02/2012-04/2013": 1,
+  "Production Date: 02/2012-04/2014": 1,
+  "Production Date: 02/2012-05/2013": 1,
+  "Production Date: 02/2012-06/2013": 10,
+  "Production Date: 02/2012-07/2012": 1,
+  "Production Date: 02/2012-08/2012": 1,
+  "Production Date: 02/2012-09/2014": 6,
+  "Production Date: 02/2012-10/2012": 2,
+  "Production Date: 02/2013-08/2014": 7,
+  "Production Date: 02/2014-10/2014": 2,
+  "Production Date: 02/2015-04/2015": 2,
+  "Production Date: 03/1994-04/1994": 3,
+  "Production Date: 03/1995-05/1998": 1,
+  "Production Date: 03/1995-06/1997": 3,
+  "Production Date: 03/1995-06/1998": 7,
+  "Production Date: 03/1995-10/1998": 3,
+  "Production Date: 03/2000-03/2001": 1,
+  "Production Date: 03/2003-06/2003": 2,
+  "Production Date: 03/2003-07/2003": 2,
+  "Production Date: 03/2003-08/2005": 2,
+  "Production Date: 03/2003-09/2003": 2,
+  "Production Date: 03/2005-01/2007": 2,
+  "Production Date: 03/2006-12/2006": 1,
+  "Production Date: 03/2008-03/2010": 1,
+  "Production Date: 03/2008-08/2009": 1,
+  "Production Date: 03/2008-09/2010": 1,
+  "Production Date: 03/2008-11/2010": 2,
+  "Production Date: 03/2010-09/2010": 1,
+  "Production Date: 03/2013-05/2014": 4,
+  "Production Date: 03/2014-08/2018": 3,
+  "Production Date: 03/2014-09/2014": 2,
+  "Production Date: 03/2014-10/2016": 1,
+  "Production Date: 04/1992-01/1995": 2,
+  "Production Date: 04/1992-09/1995": 10,
+  "Production Date: 04/1994-02/1995": 1,
+  "Production Date: 04/1994-06/1994": 4,
+  "Production Date: 04/1995-06/1997": 2,
+  "Production Date: 04/1995-09/1995": 2,
+  "Production Date: 04/1996-09/1997": 1,
+  "Production Date: 04/1999-04/2000": 1,
+  "Production Date: 04/1999-05/2001": 1,
+  "Production Date: 04/1999-06/2000": 3,
+  "Production Date: 04/1999-07/2001": 6,
+  "Production Date: 04/1999-09/1999": 15,
+  "Production Date: 04/1999-12/2000": 1,
+  "Production Date: 04/2000-02/2001": 2,
+  "Production Date: 04/2000-06/2000": 1,
+  "Production Date: 04/2000-07/2001": 2,
+  "Production Date: 04/2003-01/2006": 1,
+  "Production Date: 04/2003-07/2005": 1,
+  "Production Date: 04/2003-08/2005": 3,
+  "Production Date: 04/2006-05/2006": 1,
+  "Production Date: 04/2006-09/2007": 1,
+  "Production Date: 04/2006-12/2006": 1,
+  "Production Date: 04/2007-02/2008": 1,
+  "Production Date: 04/2007-04/2008": 1,
+  "Production Date: 04/2007-05/2009": 2,
+  "Production Date: 04/2007-05/2011": 1,
+  "Production Date: 04/2007-07/2008": 1,
+  "Production Date: 04/2007-08/2007": 1,
+  "Production Date: 04/2007-08/2008": 1,
+  "Production Date: 04/2007-09/2007": 2,
+  "Production Date: 04/2007-10/2008": 1,
+  "Production Date: 04/2007-11/2007": 2,
+  "Production Date: 04/2007-11/2008": 2,
+  "Production Date: 04/2007-12/2007": 2,
+  "Production Date: 04/2007-12/2010": 1,
+  "Production Date: 04/2008-05/2011": 1,
+  "Production Date: 04/2008-08/2009": 2,
+  "Production Date: 04/2008-11/2009": 4,
+  "Production Date: 04/2009-08/2012": 2,
+  "Production Date: 04/2010-01/2011": 1,
+  "Production Date: 04/2010-04/2012": 2,
+  "Production Date: 04/2010-05/2011": 2,
+  "Production Date: 04/2010-07/2011": 1,
+  "Production Date: 04/2010-07/2012": 2,
+  "Production Date: 04/2010-08/2012": 5,
+  "Production Date: 04/2010-09/2011": 1,
+  "Production Date: 04/2010-10/2013": 2,
+  "Production Date: 04/2010-11/2011": 1,
+  "Production Date: 04/2011-10/2014": 1,
+  "Production Date: 04/2012-08/2014": 4,
+  "Production Date: 04/2012-09/2014": 1,
+  "Production Date: 04/2013-03/2014": 2,
+  "Production Date: 04/2013-05/2014": 1,
+  "Production Date: 04/2014-08/2014": 1,
+  "Production Date: 04/2014-08/2018": 1,
+  "Production Date: 04/2014-09/2014": 1,
+  "Production Date: 04/2015-01/2016": 1,
+  "Production Date: 04/2015-05/2016": 4,
+  "Production Date: 04/2015-07/2016": 2,
+  "Production Date: 04/2015-10/2016": 1,
+  "Production Date: 04/2015-12/2015": 2,
+  "Production Date: 05/1994-09/1997": 1,
+  "Production Date: 05/1995-04/1996": 1,
+  "Production Date: 05/1997-12/1998": 1,
+  "Production Date: 05/1998-10/1998": 1,
+  "Production Date: 05/2000-07/2001": 2,
+  "Production Date: 05/2000-11/2000": 1,
+  "Production Date: 05/2001-12/2001": 1,
+  "Production Date: 05/2003-09/2003": 2,
+  "Production Date: 05/2003-11/2005": 1,
+  "Production Date: 05/2004-08/2005": 2,
+  "Production Date: 05/2005-05/2006": 2,
+  "Production Date: 05/2005-08/2006": 1,
+  "Production Date: 05/2006-09/2007": 3,
+  "Production Date: 05/2006-12/2006": 2,
+  "Production Date: 05/2007-09/2009": 2,
+  "Production Date: 05/2008-09/2009": 1,
+  "Production Date: 05/2011-01/2013": 1,
+  "Production Date: 05/2011-07/2011": 2,
+  "Production Date: 05/2012-01/2013": 1,
+  "Production Date: 05/2012-03/2013": 4,
+  "Production Date: 05/2012-06/2012": 1,
+  "Production Date: 05/2012-08/2013": 3,
+  "Production Date: 05/2012-09/2013": 1,
+  "Production Date: 05/2012-12/2012": 3,
+  "Production Date: 05/2013-02/2014": 2,
+  "Production Date: 05/2013-08/2013": 1,
+  "Production Date: 05/2013-10/2014": 2,
+  "Production Date: 05/2014-08/2015": 1,
+  "Production Date: 05/2014-08/2018": 1,
+  "Production Date: 05/2016-11/2017": 2,
+  "Production Date: 05/2016-11/2018": 2,
+  "Production Date: 06/1992-02/1995": 2,
+  "Production Date: 06/1992-07/1994": 2,
+  "Production Date: 06/1992-08/1995": 4,
+  "Production Date: 06/1992-11/1995": 1,
+  "Production Date: 06/1992-12/1994": 1,
+  "Production Date: 06/1996-04/1998": 1,
+  "Production Date: 06/1996-12/1996": 1,
+  "Production Date: 06/1997-05/2000": 1,
+  "Production Date: 06/1997-06/1998": 1,
+  "Production Date: 06/1998-06/2000": 1,
+  "Production Date: 06/1998-10/1998": 7,
+  "Production Date: 06/2000-01/2001": 2,
+  "Production Date: 06/2000-06/2001": 3,
+  "Production Date: 06/2000-07/2000": 1,
+  "Production Date: 06/2000-07/2001": 5,
+  "Production Date: 06/2000-09/2000": 1,
+  "Production Date: 06/2002-02/2003": 2,
+  "Production Date: 06/2002-02/2004": 1,
+  "Production Date: 06/2002-04/2003": 3,
+  "Production Date: 06/2002-07/2003": 4,
+  "Production Date: 06/2002-07/2004": 1,
+  "Production Date: 06/2002-12/2003": 1,
+  "Production Date: 06/2003-11/2003": 2,
+  "Production Date: 06/2005-09/2005": 1,
+  "Production Date: 06/2006-01/2007": 1,
+  "Production Date: 06/2006-02/2007": 1,
+  "Production Date: 06/2007-02/2008": 3,
+  "Production Date: 06/2007-07/2008": 1,
+  "Production Date: 06/2007-07/2009": 2,
+  "Production Date: 06/2007-08/2008": 2,
+  "Production Date: 06/2007-11/2009": 2,
+  "Production Date: 06/2010-04/2012": 2,
+  "Production Date: 06/2010-06/2012": 2,
+  "Production Date: 06/2010-08/2010": 4,
+  "Production Date: 06/2011-02/2012": 2,
+  "Production Date: 06/2011-09/2011": 1,
+  "Production Date: 06/2012-05/2014": 1,
+  "Production Date: 06/2013-01/2016": 10,
+  "Production Date: 06/2013-07/2013": 1,
+  "Production Date: 06/2013-08/2014": 2,
+  "Production Date: 06/2013-09/2014": 2,
+  "Production Date: 06/2013-10/2013": 1,
+  "Production Date: 06/2013-12/2014": 1,
+  "Production Date: 06/2014-12/2015": 2,
+  "Production Date: 07/1984-01/1986": 9,
+  "Production Date: 07/1984-07/1985": 2,
+  "Production Date: 07/1984-11/1985": 1,
+  "Production Date: 07/1985-01/1986": 3,
+  "Production Date: 07/1985-08/1986": 1,
+  "Production Date: 07/1989-09/1990": 2,
+  "Production Date: 07/1992-07/1993": 1,
+  "Production Date: 07/1992-12/1992": 2,
+  "Production Date: 07/1994-02/1996": 1,
+  "Production Date: 07/1994-07/1996": 1,
+  "Production Date: 07/1995-06/1997": 1,
+  "Production Date: 07/1996-01/1998": 2,
+  "Production Date: 07/1996-11/1999": 1,
+  "Production Date: 07/1997-01/2000": 4,
+  "Production Date: 07/1998-11/1999": 2,
+  "Production Date: 07/1999-04/2000": 4,
+  "Production Date: 07/1999-06/2000": 7,
+  "Production Date: 07/1999-10/1999": 4,
+  "Production Date: 07/1999-10/2000": 1,
+  "Production Date: 07/1999-12/2000": 1,
+  "Production Date: 07/2000-08/2000": 3,
+  "Production Date: 07/2001-02/2007": 1,
+  "Production Date: 07/2001-07/2002": 7,
+  "Production Date: 07/2001-08/2002": 1,
+  "Production Date: 07/2001-10/2001": 1,
+  "Production Date: 07/2001-10/2003": 2,
+  "Production Date: 07/2002-01/2005": 1,
+  "Production Date: 07/2002-05/2004": 2,
+  "Production Date: 07/2002-05/2005": 1,
+  "Production Date: 07/2003-01/2004": 2,
+  "Production Date: 07/2003-07/2004": 1,
+  "Production Date: 07/2003-08/2005": 3,
+  "Production Date: 07/2004-06/2006": 1,
+  "Production Date: 07/2004-08/2005": 2,
+  "Production Date: 07/2007-01/2009": 2,
+  "Production Date: 07/2007-08/2007": 4,
+  "Production Date: 07/2007-09/2008": 4,
+  "Production Date: 07/2007-09/2009": 1,
+  "Production Date: 07/2007-11/2009": 1,
+  "Production Date: 07/2008-02/2010": 1,
+  "Production Date: 07/2008-04/2010": 2,
+  "Production Date: 07/2008-07/2009": 2,
+  "Production Date: 07/2008-08/2009": 10,
+  "Production Date: 07/2008-09/2009": 4,
+  "Production Date: 07/2008-12/2009": 1,
+  "Production Date: 07/2009-09/2009": 1,
+  "Production Date: 07/2010-04/2011": 1,
+  "Production Date: 07/2010-10/2010": 8,
+  "Production Date: 07/2011-02/2013": 2,
+  "Production Date: 07/2011-03/2016": 1,
+  "Production Date: 07/2011-08/2012": 2,
+  "Production Date: 07/2011-08/2014": 2,
+  "Production Date: 07/2012-07/2015": 2,
+  "Production Date: 07/2012-10/2012": 1,
+  "Production Date: 07/2012-10/2017": 2,
+  "Production Date: 07/2013-09/2014": 1,
+  "Production Date: 07/2013-12/2015": 2,
+  "Production Date: 07/2015-02/2017": 2,
+  "Production Date: 07/2015-07/2016": 1,
+  "Production Date: 07/2016-03/2017": 1,
+  "Production Date: 07/2016-10/2018": 2,
+  "Production Date: 08/1986-08/1987": 1,
+  "Production Date: 08/1988-07/1989": 1,
+  "Production Date: 08/1990-02/1991": 1,
+  "Production Date: 08/1990-08/1992": 2,
+  "Production Date: 08/1993-10/1995": 1,
+  "Production Date: 08/1998-04/1999": 1,
+  "Production Date: 08/1998-12/2000": 1,
+  "Production Date: 08/1999-03/2000": 1,
+  "Production Date: 08/1999-06/2000": 1,
+  "Production Date: 08/2000-07/2001": 2,
+  "Production Date: 08/2001-01/2002": 1,
+  "Production Date: 08/2001-01/2003": 1,
+  "Production Date: 08/2001-01/2004": 14,
+  "Production Date: 08/2001-05/2003": 2,
+  "Production Date: 08/2001-08/2002": 4,
+  "Production Date: 08/2001-08/2003": 1,
+  "Production Date: 08/2001-09/2003": 1,
+  "Production Date: 08/2001-11/2002": 2,
+  "Production Date: 08/2001-12/2002": 2,
+  "Production Date: 08/2002-03/2003": 4,
+  "Production Date: 08/2002-05/2004": 6,
+  "Production Date: 08/2002-08/2003": 1,
+  "Production Date: 08/2002-08/2004": 8,
+  "Production Date: 08/2002-11/2002": 2,
+  "Production Date: 08/2002-12/2003": 1,
+  "Production Date: 08/2002-12/2005": 3,
+  "Production Date: 08/2003-08/2004": 6,
+  "Production Date: 08/2003-08/2005": 1,
+  "Production Date: 08/2004-01/2005": 2,
+  "Production Date: 08/2004-01/2007": 3,
+  "Production Date: 08/2004-02/2006": 1,
+  "Production Date: 08/2004-02/2007": 4,
+  "Production Date: 08/2004-03/2006": 1,
+  "Production Date: 08/2004-08/2005": 4,
+  "Production Date: 08/2004-08/2006": 6,
+  "Production Date: 08/2004-08/2007": 4,
+  "Production Date: 08/2004-10/2004": 2,
+  "Production Date: 08/2004-11/2005": 9,
+  "Production Date: 08/2004-12/2006": 4,
+  "Production Date: 08/2005-08/2006": 3,
+  "Production Date: 08/2005-10/2007": 2,
+  "Production Date: 08/2005-11/2005": 3,
+  "Production Date: 08/2006-01/2007": 1,
+  "Production Date: 08/2006-01/2008": 2,
+  "Production Date: 08/2006-02/2007": 1,
+  "Production Date: 08/2006-02/2008": 2,
+  "Production Date: 08/2006-04/2007": 13,
+  "Production Date: 08/2006-04/2008": 2,
+  "Production Date: 08/2006-07/2007": 4,
+  "Production Date: 08/2006-08/2007": 1,
+  "Production Date: 08/2006-08/2008": 1,
+  "Production Date: 08/2006-09/2007": 1,
+  "Production Date: 08/2007-02/2009": 2,
+  "Production Date: 08/2007-03/2008": 1,
+  "Production Date: 08/2007-08/2008": 2,
+  "Production Date: 08/2007-08/2009": 4,
+  "Production Date: 08/2007-11/2009": 2,
+  "Production Date: 08/2008-04/2010": 1,
+  "Production Date: 08/2008-09/2009": 1,
+  "Production Date: 08/2008-11/2009": 6,
+  "Production Date: 08/2009-01/2010": 8,
+  "Production Date: 08/2009-02/2010": 1,
+  "Production Date: 08/2009-06/2010": 2,
+  "Production Date: 08/2009-08/2010": 5,
+  "Production Date: 08/2009-08/2011": 5,
+  "Production Date: 08/2009-10/2010": 2,
+  "Production Date: 08/2009-10/2011": 4,
+  "Production Date: 08/2009-11/2011": 2,
+  "Production Date: 08/2009-12/2011": 3,
+  "Production Date: 08/2010-04/2012": 4,
+  "Production Date: 08/2010-08/2011": 1,
+  "Production Date: 08/2010-08/2013": 1,
+  "Production Date: 08/2010-10/2011": 2,
+  "Production Date: 08/2010-11/2010": 1,
+  "Production Date: 08/2011-06/2012": 2,
+  "Production Date: 08/2011-07/2012": 1,
+  "Production Date: 08/2011-08/2013": 3,
+  "Production Date: 08/2012-02/2013": 3,
+  "Production Date: 08/2012-04/2014": 1,
+  "Production Date: 08/2012-06/2013": 1,
+  "Production Date: 08/2012-08/2014": 1,
+  "Production Date: 08/2012-09/2013": 2,
+  "Production Date: 08/2012-09/2014": 1,
+  "Production Date: 08/2013-02/2014": 1,
+  "Production Date: 08/2013-05/2014": 2,
+  "Production Date: 08/2013-09/2014": 1,
+  "Production Date: 08/2014-01/2016": 1,
+  "Production Date: 08/2014-02/2016": 1,
+  "Production Date: 08/2014-10/2017": 2,
+  "Production Date: 08/2015-09/2017": 1,
+  "Production Date: 09/1984-07/1985": 1,
+  "Production Date: 09/1990-01/1991": 1,
+  "Production Date: 09/1993-04/1995": 1,
+  "Production Date: 09/1995-01/1996": 2,
+  "Production Date: 09/1995-06/1996": 1,
+  "Production Date: 09/1995-09/1997": 1,
+  "Production Date: 09/1995-12/1996": 4,
+  "Production Date: 09/1996-01/2000": 4,
+  "Production Date: 09/1996-06/1997": 2,
+  "Production Date: 09/1998-09/2000": 4,
+  "Production Date: 09/1998-11/1998": 1,
+  "Production Date: 09/1999-01/2000": 7,
+  "Production Date: 09/1999-06/2001": 2,
+  "Production Date: 09/1999-11/2000": 1,
+  "Production Date: 09/2000-06/2001": 1,
+  "Production Date: 09/2000-07/2002": 2,
+  "Production Date: 09/2003-01/2004": 5,
+  "Production Date: 09/2004-06/2006": 1,
+  "Production Date: 09/2004-12/2004": 1,
+  "Production Date: 09/2005-02/2007": 4,
+  "Production Date: 09/2005-07/2008": 1,
+  "Production Date: 09/2005-09/2007": 1,
+  "Production Date: 09/2005-10/2006": 1,
+  "Production Date: 09/2006-01/2007": 1,
+  "Production Date: 09/2006-08/2007": 3,
+  "Production Date: 09/2006-09/2008": 1,
+  "Production Date: 09/2007-08/2008": 4,
+  "Production Date: 09/2007-08/2009": 1,
+  "Production Date: 09/2008-09/2009": 6,
+  "Production Date: 09/2009-06/2011": 8,
+  "Production Date: 09/2009-07/2011": 1,
+  "Production Date: 09/2009-08/2010": 1,
+  "Production Date: 09/2009-08/2011": 1,
+  "Production Date: 09/2009-08/2012": 1,
+  "Production Date: 09/2009-10/2011": 2,
+  "Production Date: 09/2009-10/2012": 1,
+  "Production Date: 09/2009-11/2011": 1,
+  "Production Date: 09/2010-02/2011": 1,
+  "Production Date: 09/2010-02/2012": 1,
+  "Production Date: 09/2010-04/2012": 1,
+  "Production Date: 09/2010-06/2012": 1,
+  "Production Date: 09/2010-10/2011": 4,
+  "Production Date: 09/2010-12/2012": 1,
+  "Production Date: 09/2011-04/2012": 4,
+  "Production Date: 09/2011-08/2012": 1,
+  "Production Date: 09/2011-08/2013": 2,
+  "Production Date: 09/2012-04/2013": 1,
+  "Production Date: 09/2012-05/2013": 3,
+  "Production Date: 09/2012-06/2013": 2,
+  "Production Date: 09/2012-06/2014": 2,
+  "Production Date: 09/2012-07/2013": 2,
+  "Production Date: 09/2012-09/2014": 4,
+  "Production Date: 09/2012-10/2013": 4,
+  "Production Date: 09/2012-10/2014": 2,
+  "Production Date: 09/2012-12/2014": 3,
+  "Production Date: 09/2013-06/2016": 2,
+  "Production Date: 09/2013-12/2013": 1,
+  "Production Date: 09/2014-01/2016": 7,
+  "Production Date: 09/2014-02/2015": 3,
+  "Production Date: 09/2014-03/2018": 2,
+  "Production Date: 09/2014-07/2016": 4,
+  "Production Date: 09/2014-12/2014": 2,
+  "Production Date: 09/2016-09/2017": 8,
+  "Production Date: 09/2017-08/2018": 4,
+  "Production Date: 10/1984-07/1985": 1,
+  "Production Date: 10/1984-11/1986": 2,
+  "Production Date: 10/1995-02/1996": 2,
+  "Production Date: 10/1999-01/2000": 4,
+  "Production Date: 10/2000-01/2001": 2,
+  "Production Date: 10/2000-02/2001": 1,
+  "Production Date: 10/2002-12/2005": 2,
+  "Production Date: 10/2003-04/2007": 2,
+  "Production Date: 10/2003-08/2004": 2,
+  "Production Date: 10/2003-10/2004": 4,
+  "Production Date: 10/2004-01/2005": 2,
+  "Production Date: 10/2004-01/2008": 2,
+  "Production Date: 10/2004-04/2007": 7,
+  "Production Date: 10/2004-04/2008": 4,
+  "Production Date: 10/2004-06/2005": 1,
+  "Production Date: 10/2004-08/2006": 6,
+  "Production Date: 10/2004-09/2006": 2,
+  "Production Date: 10/2005-04/2007": 1,
+  "Production Date: 10/2006-01/2008": 2,
+  "Production Date: 10/2006-02/2007": 1,
+  "Production Date: 10/2006-04/2007": 4,
+  "Production Date: 10/2006-04/2008": 2,
+  "Production Date: 10/2006-05/2007": 2,
+  "Production Date: 10/2006-05/2008": 1,
+  "Production Date: 10/2006-06/2007": 3,
+  "Production Date: 10/2006-07/2007": 2,
+  "Production Date: 10/2006-07/2008": 2,
+  "Production Date: 10/2006-09/2007": 2,
+  "Production Date: 10/2007-02/2008": 2,
+  "Production Date: 10/2007-03/2008": 1,
+  "Production Date: 10/2007-04/2009": 2,
+  "Production Date: 10/2007-06/2008": 1,
+  "Production Date: 10/2007-07/2009": 1,
+  "Production Date: 10/2007-08/2009": 7,
+  "Production Date: 10/2007-09/2009": 1,
+  "Production Date: 10/2007-10/2009": 2,
+  "Production Date: 10/2007-11/2008": 3,
+  "Production Date: 10/2007-12/2007": 2,
+  "Production Date: 10/2008-11/2009": 1,
+  "Production Date: 10/2009-08/2010": 2,
+  "Production Date: 10/2009-10/2010": 2,
+  "Production Date: 10/2010-04/2012": 8,
+  "Production Date: 10/2010-11/2010": 2,
+  "Production Date: 10/2011-08/2013": 4,
+  "Production Date: 10/2011-10/2012": 1,
+  "Production Date: 10/2012-06/2013": 1,
+  "Production Date: 10/2013-03/2014": 1,
+  "Production Date: 10/2013-09/2016": 7,
+  "Production Date: 10/2013-12/2015": 4,
+  "Production Date: 10/2014-01/2016": 2,
+  "Production Date: 10/2014-07/2016": 2,
+  "Production Date: 10/2014-11/2015": 1,
+  "Production Date: 10/2014-12/2014": 1,
+  "Production Date: 10/2014-12/2015": 2,
+  "Production Date: 10/2015-09/2016": 1,
+  "Production Date: 10/2015-09/2017": 1,
+  "Production Date: 10/2016-11/2018": 1,
+  "Production Date: 11/1986-07/1987": 1,
+  "Production Date: 11/1990-07/1992": 3,
+  "Production Date: 11/1993-01/1995": 1,
+  "Production Date: 11/1993-04/1995": 2,
+  "Production Date: 11/1993-09/1995": 1,
+  "Production Date: 11/1993-12/1995": 4,
+  "Production Date: 11/1995-04/1996": 1,
+  "Production Date: 11/1995-06/1996": 1,
+  "Production Date: 11/1995-07/1996": 4,
+  "Production Date: 11/1999-05/2000": 2,
+  "Production Date: 11/2000-07/2002": 1,
+  "Production Date: 11/2001-08/2002": 4,
+  "Production Date: 11/2002-03/2003": 2,
+  "Production Date: 11/2002-05/2003": 1,
+  "Production Date: 11/2002-08/2003": 8,
+  "Production Date: 11/2002-08/2004": 3,
+  "Production Date: 11/2002-09/2003": 2,
+  "Production Date: 11/2002-11/2004": 4,
+  "Production Date: 11/2002-11/2005": 6,
+  "Production Date: 11/2003-01/2004": 2,
+  "Production Date: 11/2004-11/2005": 4,
+  "Production Date: 11/2005-02/2006": 1,
+  "Production Date: 11/2005-04/2006": 1,
+  "Production Date: 11/2005-04/2007": 8,
+  "Production Date: 11/2005-08/2006": 6,
+  "Production Date: 11/2008-08/2009": 4,
+  "Production Date: 11/2008-09/2009": 2,
+  "Production Date: 11/2009-06/2010": 1,
+  "Production Date: 11/2009-06/2011": 1,
+  "Production Date: 11/2009-08/2010": 3,
+  "Production Date: 11/2009-09/2010": 8,
+  "Production Date: 11/2010-02/2011": 1,
+  "Production Date: 11/2010-04/2014": 1,
+  "Production Date: 11/2010-06/2012": 1,
+  "Production Date: 11/2010-07/2011": 4,
+  "Production Date: 11/2010-08/2011": 3,
+  "Production Date: 11/2010-09/2011": 2,
+  "Production Date: 11/2011-04/2012": 1,
+  "Production Date: 11/2011-08/2012": 1,
+  "Production Date: 11/2012-08/2014": 1,
+  "Production Date: 11/2012-10/2014": 2,
+  "Production Date: 11/2013-03/2014": 1,
+  "Production Date: 11/2013-10/2017": 4,
+  "Production Date: 12/1992-07/1993": 2,
+  "Production Date: 12/1996-05/1997": 1,
+  "Production Date: 12/1996-06/1998": 1,
+  "Production Date: 12/1998-01/2000": 15,
+  "Production Date: 12/2000-06/2001": 1,
+  "Production Date: 12/2000-07/2001": 3,
+  "Production Date: 12/2002-08/2004": 2,
+  "Production Date: 12/2002-09/2003": 2,
+  "Production Date: 12/2003-08/2005": 2,
+  "Production Date: 12/2004-01/2005": 2,
+  "Production Date: 12/2004-05/2005": 1,
+  "Production Date: 12/2004-05/2006": 1,
+  "Production Date: 12/2004-08/2005": 1,
+  "Production Date: 12/2004-08/2006": 1,
+  "Production Date: 12/2004-09/2005": 1,
+  "Production Date: 12/2004-10/2006": 2,
+  "Production Date: 12/2005-04/2008": 2,
+  "Production Date: 12/2006-04/2007": 2,
+  "Production Date: 12/2006-09/2007": 1,
+  "Production Date: 12/2006-09/2009": 1,
+  "Production Date: 12/2007-07/2008": 2,
+  "Production Date: 12/2007-08/2009": 2,
+  "Production Date: 12/2009-10/2010": 1,
+  "Production Date: 12/2009-12/2012": 1,
+  "Production Date: 12/2010-04/2012": 2,
+  "Production Date: 12/2012-04/2013": 1,
+  "Production Date: 12/2012-05/2014": 3,
+  "Production Date: 12/2013-05/2014": 1,
+  "Production Date: 12/2014-01/2016": 1,
+  "Production Date: 12/2014-07/2016": 1,
+  "Production Date: 12/2014-10/2017": 1,
+  "Production Date: 12/2014-12/2015": 4,
+  "Production Date: 12/2015-09/2016": 2,
+  "Production Date: 12/2015-10/2017": 6,
+  "Production Date: from 01/1986": 11,
+  "Production Date: from 01/1992": 1,
+  "Production Date: from 01/1995": 2,
+  "Production Date: from 01/1996": 2,
+  "Production Date: from 01/1998": 1,
+  "Production Date: from 01/2000": 11,
+  "Production Date: from 01/2001": 5,
+  "Production Date: from 01/2004": 16,
+  "Production Date: from 01/2005": 1,
+  "Production Date: from 01/2007": 3,
+  "Production Date: from 02/1995": 4,
+  "Production Date: from 02/1996": 1,
+  "Production Date: from 02/1997": 1,
+  "Production Date: from 02/2001": 1,
+  "Production Date: from 02/2007": 5,
+  "Production Date: from 02/2017": 2,
+  "Production Date: from 03/1994": 1,
+  "Production Date: from 03/2001": 1,
+  "Production Date: from 03/2017": 1,
+  "Production Date: from 04/1994": 1,
+  "Production Date: from 04/1995": 1,
+  "Production Date: from 04/2003": 15,
+  "Production Date: from 04/2004": 1,
+  "Production Date: from 04/2007": 7,
+  "Production Date: from 04/2008": 5,
+  "Production Date: from 04/2012": 2,
+  "Production Date: from 05/2005": 2,
+  "Production Date: from 06/1994": 8,
+  "Production Date: from 06/1997": 3,
+  "Production Date: from 06/1998": 1,
+  "Production Date: from 06/2000": 1,
+  "Production Date: from 06/2005": 1,
+  "Production Date: from 06/2012": 2,
+  "Production Date: from 07/1985": 2,
+  "Production Date: from 07/1992": 4,
+  "Production Date: from 07/1994": 2,
+  "Production Date: from 07/1995": 2,
+  "Production Date: from 07/1996": 6,
+  "Production Date: from 07/2000": 4,
+  "Production Date: from 07/2001": 19,
+  "Production Date: from 07/2002": 3,
+  "Production Date: from 07/2005": 1,
+  "Production Date: from 07/2009": 2,
+  "Production Date: from 07/2011": 1,
+  "Production Date: from 07/2014": 2,
+  "Production Date: from 07/2015": 8,
+  "Production Date: from 07/2016": 1,
+  "Production Date: from 08/1986": 4,
+  "Production Date: from 08/1992": 1,
+  "Production Date: from 08/1995": 4,
+  "Production Date: from 08/2000": 1,
+  "Production Date: from 08/2002": 1,
+  "Production Date: from 08/2004": 14,
+  "Production Date: from 08/2006": 5,
+  "Production Date: from 08/2007": 2,
+  "Production Date: from 08/2009": 3,
+  "Production Date: from 08/2010": 1,
+  "Production Date: from 08/2012": 1,
+  "Production Date: from 08/2018": 1,
+  "Production Date: from 09/1995": 8,
+  "Production Date: from 09/1997": 1,
+  "Production Date: from 09/2000": 7,
+  "Production Date: from 09/2007": 2,
+  "Production Date: from 09/2008": 1,
+  "Production Date: from 09/2011": 1,
+  "Production Date: from 09/2012": 1,
+  "Production Date: from 09/2013": 2,
+  "Production Date: from 09/2014": 2,
+  "Production Date: from 10/1992": 3,
+  "Production Date: from 10/1995": 1,
+  "Production Date: from 10/1998": 11,
+  "Production Date: from 10/2001": 1,
+  "Production Date: from 10/2003": 2,
+  "Production Date: from 10/2006": 2,
+  "Production Date: from 10/2011": 6,
+  "Production Date: from 11/1998": 1,
+  "Production Date: from 11/1999": 1,
+  "Production Date: from 11/2000": 1,
+  "Production Date: from 11/2005": 3,
+  "Production Date: from 11/2007": 2,
+  "Production Date: from 11/2011": 2,
+  "Production Date: from 12/1994": 1,
+  "Production Date: from 12/1995": 4,
+  "Production Date: from 12/1996": 4,
+  "Production Date: from 12/2006": 6,
+  "Production Date: from 12/2011": 3,
+  "QR25DE": 1,
+  "QR25DE. 25S + VQ35DE. MT": 1,
+  "QR25DE. 6MT": 1,
+  "QR25DE. BASE. MT": 1,
+  "QR25DE. CVT": 1,
+  "QR25DE. CVT/QR25": 1,
+  "QR25DE. MT": 1,
+  "REAR SPOILER": 1,
+  "RED/ORANGE ILLUMINATION": 1,
+  "RH SIDE MOTOR": 1,
+  "RIGHT BANK": 1,
+  "Require Quantity: 02": 13,
+  "Require Quantity: 03": 10,
+  "Require Quantity: 04": 9,
+  "Require Quantity: 05": 2,
+  "Require Quantity: 06": 21,
+  "Require Quantity: 07": 1,
+  "Require Quantity: 08": 8,
+  "S": 12,
+  "S. (2WD/STD+ AWD). (SPORT+ SPORT/P) + S. 2WD/4WAS": 1,
+  "S. (BASE + LEATHER)": 3,
+  "S. (DX + SL)": 2,
+  "S. (LEATHER + JOURNEY + SPORT)": 5,
+  "S. (LEATHER + TOURING + T/L)": 1,
+  "S. (PREMIUM + SPORT/P)": 7,
+  "S. 2WD. (JOURNEY+ SPORT) + S. 2WD/HI. SPORT + S. LEATHER": 2,
+  "S. 2WD. LEATHER + S. AWD": 1,
+  "S. 2WD. TRACK + S. 4WD + S. SPORT. AT. F5": 2,
+  "S. 2WD. VQ35DE. TRACK. AT. F5 + C. VQ35DE. TRACK. AT. F5 + VQ35DE. BASIC + VQ35DE. MT. F6": 1,
+  "S. AWD": 2,
+  "S. AWD. (JOURNEY + SPORT)": 2,
+  "S. GLE": 3,
+  "S. LEATHER. MT": 2,
+  "S. MT. F6": 3,
+  "S. SPORT": 1,
+  "S. T/L": 3,
+  "S. VQ35DE. AT. F5": 1,
+  "SAGE / ECRU": 2,
+  "SED. MR18DE": 2,
+  "SED. MR18DE + SED. BASE": 1,
+  "SED. S": 4,
+  "SED. S + SED. SL. (MT+ AT)": 1,
+  "SED. SL": 6,
+  "SELECT COLOR BLACK": 2,
+  "SELECT NO COLOR": 2,
+  "SIDE MOTOR": 1,
+  "SKULL CAP": 15,
+  "T + KC + CC": 5,
+  "T + KC. 4WD. VG33E + KC. KA24DE": 3,
+  "TURN LAMP": 2,
+  "U/2S": 4,
+  "U/2S + U/4S. (STD+ XE)": 2,
+  "U/2S. (STD + XE)": 2,
+  "U/2S. U/GA16DE": 2,
+  "U/2S. U/SR20DE": 5,
+  "U/2S. U/SR20DE + U/2S. (XE+ SE)": 2,
+  "U/2S. U/SR20DE + U/2S. SE": 4,
+  "U/2S. U/SR20DE + U/2S. XE": 2,
+  "U/4S": 8,
+  "U/4S. (STD + XE)": 9,
+  "U/4S. GXE": 21,
+  "U/GA16DE. (U/AT. F3 + U/AT. F4)": 1,
+  "U/GA16DE. (XE + GXE + SE). U/AT. F4": 1,
+  "U/GA16DE. (XE + GXE + SE). U/MT. F5": 1,
+  "U/GA16DE. (XE + GXE). U/AT. F4": 1,
+  "U/GA16DE. (XE + GXE). U/MT. F5": 1,
+  "U/GA16DE. AT. F3": 2,
+  "U/GA16DE. AT. F4": 2,
+  "U/GA16DE. MT": 2,
+  "U/GA16DE. U/AT. F4": 3,
+  "U/GA16DE. U/MT. F5": 2,
+  "U/SR20DE": 1,
+  "U/SR20DE. AT": 1,
+  "U/SR20DE. MT": 1,
+  "U/SR20DE. U/AT. F4": 1,
+  "U/SR20DE. U/MT. F5": 1,
+  "UNDERCOATED(SILVER)": 5,
+  "USA MAKE": 4,
+  "USA MAKE / USA MAKE F/OUTSIDE MIRROR-SAIL MOUNT": 2,
+  "USA MAKE F/AIR CONDITIONER-STD TYPE": 3,
+  "V + W": 4,
+  "V + W. VQ35DE. XE + W. SE": 1,
+  "V + W. VQ35DE. XE + W. VG33E + W. SE": 1,
+  "VALEO": 2,
+  "VG30DE": 1,
+  "VG30E. MT. F5 + S. VG30E. AT. F4": 1,
+  "VG33E. (XE + SE). AT": 1,
+  "VG33E. (XE + SE). MT": 1,
+  "VG33E. AT": 1,
+  "VK56DE": 1,
+  "VK56VD. LE/HIGH": 1,
+  "VQ35DE": 7,
+  "VQ35DE. 6MT": 1,
+  "VQ35DE. AT. F5": 1,
+  "VQ35DE. CVT/FK": 1,
+  "VQ35DE. CVT/VQ35": 1,
+  "VQ35DE. MT": 1,
+  "VQ35DE. MT. F6": 1,
+  "VQ35DE. SPORT": 1,
+  "VQ35HR": 1,
+  "VQ35HR. (SPORTS + S. UPPER)": 1,
+  "VQ37VHR": 3,
+  "VQ37VHR. (SPORTS + S. UPPER)": 1,
+  "VQ37VHR. (UPPER + S. UPPER)": 1,
+  "VQ37VHR. 6MT": 1,
+  "VQ37VHR. 7AT": 1,
+  "VQ40DE. OFFROAD. 6MT": 1,
+  "VQ40DE. SE + VQ40DE. OFFROAD. 5AT": 1,
+  "VQ40DE. XE": 1,
+  "W": 20,
+  "W. (18S + 18)": 1,
+  "W. (2WD+ P/4WD). LE + W. A/4WD": 1,
+  "W. (BASE + S + SL)": 2,
+  "W. (S + BASECAMP + OFFROAD)": 1,
+  "W. (S + OFFROAD)": 4,
+  "W. (S + SL + SE)": 1,
+  "W. (SE + LE)": 7,
+  "W. (SE + OFFROAD)": 2,
+  "W. (SL + SE)": 1,
+  "W. 18S": 1,
+  "W. 18SL": 2,
+  "W. 2WD": 2,
+  "W. 2WD + W. 4WD. (S+ X)": 2,
+  "W. 2WD + W. 4WD. X": 1,
+  "W. 2WD. LE + W. A/4WD": 3,
+  "W. 2WD. LE + W. AUTO": 1,
+  "W. 2WD. LE + W. AUTO + W. SE-OR": 2,
+  "W. 2WD. SE": 2,
+  "W. 2WD. SE + W. P/4WD + W. VG33E": 2,
+  "W. 4WD": 3,
+  "W. 4WD. S + W. OFFROAD": 1,
+  "W. A/4WD": 1,
+  "W. BASE": 4,
+  "W. GXE": 2,
+  "W. LE": 3,
+  "W. OFFROAD": 2,
+  "W. PLATINUM": 2,
+  "W. PREMIUM": 4,
+  "W. S": 5,
+  "W. SE": 23,
+  "W. SPORT": 2,
+  "W. VG30E": 7,
+  "W. VG33E": 1,
+  "W. VG33E. SE + W. VG33ER": 2,
+  "W. VK45DE": 5,
+  "W. VK50VE": 2,
+  "W. VQ35DE": 8,
+  "W. VQ35HR": 3,
+  "W. VQ35HR + W. VK50VE. PREMIUM": 2,
+  "W. X": 4,
+  "W/ CAM": 3,
+  "W/ SPOILER": 2,
+  "W/HEAT W/O SKULL CAP": 1,
+  "W/O AIR CONDITIONER / WITHOUT AIRCON": 1,
+  "W/O CAM": 3,
+  "W/O SPOILER": 3,
+  "W/O TEMP SENSOR": 1,
+  "WAG": 4,
+  "WAG. (LEUS + LE/ROOF)": 2,
+  "WAG. (S + SL + SL/ROOF)": 2,
+  "WAG. AWD. (S+ SL+ SL/ROOF) + WAG. 2WD": 4,
+  "WAG. AWD. (S+ SL/LEMEX) + WAG. 2WD": 5,
+  "WAG. BASE": 2,
+  "WAG. LE/ROOF": 4,
+  "WAG. LEATHER": 2,
+  "WAG. LEUS": 4,
+  "WHITE ILLUMINATION": 1,
+  "WITH HINGE": 6,
+  "WITHOUT AIRCON": 1,
+  "WK0": 1,
+  "XENON W/O AFS": 6,
+  "YELLOWISH GREEN M": 1,
+  "from 06/1998": 2
+ },
+ "unmapped_catalog_models": [
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Hardbody Pickup (D21)",
+   "excluded": "catalog model with no feed cars as 'Hardbody Pickup (D21)' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Nissan",
+    "Hardbody Pickup (D21)"
+   ],
+   "feed_cars": 0,
+   "row_years": 18
+  },
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Hardbody Pickup (D21U)",
+   "excluded": "catalog model with no feed cars as 'Hardbody Pickup (D21U)' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Nissan",
+    "Hardbody Pickup (D21U)"
+   ],
+   "feed_cars": 0,
+   "row_years": 11
+  },
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Kicks Play",
+   "excluded": null,
+   "feed": [
+    "Nissan",
+    "Kicks Play"
+   ],
+   "feed_cars": 0,
+   "row_years": 5
+  },
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Rogue Sport",
+   "excluded": "feed spelling or sub-model the catalog does not print as its own model (35 cars, under catalog squash 'rogue'); unmapped until a reviewed entry exists",
+   "feed": [
+    "Nissan",
+    "Rogue Sport"
+   ],
+   "feed_cars": 35,
+   "row_years": 6
+  },
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Van",
+   "excluded": null,
+   "feed": [
+    "Nissan",
+    "Van"
+   ],
+   "feed_cars": 0,
+   "row_years": 8
+  },
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Versa Note",
+   "excluded": "feed spelling or sub-model the catalog does not print as its own model (313 cars, under catalog squash 'versa'); unmapped until a reviewed entry exists",
+   "feed": [
+    "Nissan",
+    "Versa Note"
+   ],
+   "feed_cars": 316,
+   "row_years": 204
+  }
+ ],
+ "validator": []
+}

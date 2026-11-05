@@ -1,0 +1,122 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Acura",
+    "cat_model": "ILX",
+    "feed": [
+     "Acura",
+     "ILX"
+    ],
+    "why": "2/64 vPIC decodes name another make (M6 over 2%)"
+   },
+   {
+    "cat_make": "Acura",
+    "cat_model": "ILX Hybrid",
+    "feed": [
+     "Acura",
+     "ILX Hybrid"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Acura",
+    "cat_model": "NSX",
+    "feed": [
+     "Acura",
+     "NSX"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Honda",
+    "cat_model": "Fit EV",
+    "feed": [
+     "Honda",
+     "Fit EV"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Honda",
+    "cat_model": "S2000",
+    "feed": [
+     "Honda",
+     "S2000"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "honda",
+ "proposals": [
+  {
+   "cat_make": "Acura",
+   "cat_model": "ILX",
+   "feed_cars": 71,
+   "fitment_rows": 158,
+   "ns": "honda",
+   "proposed": {
+    "make": "Acura",
+    "model": "ILX",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Acura",
+   "cat_model": "ILX Hybrid",
+   "feed_cars": 0,
+   "fitment_rows": 50,
+   "ns": "honda",
+   "proposed": {
+    "make": "Acura",
+    "model": "ILX Hybrid",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Acura",
+   "cat_model": "NSX",
+   "feed_cars": 0,
+   "fitment_rows": 13,
+   "ns": "honda",
+   "proposed": {
+    "make": "Acura",
+    "model": "NSX",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Honda",
+   "cat_model": "Fit EV",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "honda",
+   "proposed": {
+    "make": "Honda",
+    "model": "Fit EV",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Honda",
+   "cat_model": "S2000",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "honda",
+   "proposed": {
+    "make": "Honda",
+    "model": "S2000",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+}

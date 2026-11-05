@@ -1,0 +1,56 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Subaru",
+    "cat_model": "Impreza STI",
+    "feed": [
+     "Subaru",
+     "Impreza STI"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Subaru",
+    "cat_model": "WRX STI",
+    "feed": [
+     "Subaru",
+     "WRX STI"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "subaru",
+ "proposals": [
+  {
+   "cat_make": "Subaru",
+   "cat_model": "Impreza STI",
+   "feed_cars": 0,
+   "fitment_rows": 139,
+   "ns": "subaru",
+   "proposed": {
+    "make": "Subaru",
+    "model": "Impreza STI",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Subaru",
+   "cat_model": "WRX STI",
+   "feed_cars": 0,
+   "fitment_rows": 12,
+   "ns": "subaru",
+   "proposed": {
+    "make": "Subaru",
+    "model": "WRX STI",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+}

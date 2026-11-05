@@ -1,0 +1,286 @@
+{
+ "draft": {
+  "entries": [
+   {
+    "basis": "catalog prints 'C-HR' (2 fitment rows, oem-raw@50ac4a4); normalize_model canon 'C-HR', 12 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Toyota",
+    "cat_model": "C-HR",
+    "ns": "toyota",
+    "targets": [
+     {
+      "make": "Toyota",
+      "model": "C-HR",
+      "trims": "*"
+     }
+    ]
+   }
+  ],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Lexus",
+    "cat_model": "GS200t",
+    "feed": [
+     "Lexus",
+     "GS 200t"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
+    "cat_model": "IS Turbo",
+    "feed": [
+     "Lexus",
+     "IS Turbo"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
+    "cat_model": "RC Turbo",
+    "feed": [
+     "Lexus",
+     "RC Turbo"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
+    "cat_model": "RC200t",
+    "feed": [
+     "Lexus",
+     "RC 200t"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
+    "cat_model": "RC300",
+    "feed": [
+     "Lexus",
+     "RC 300"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Toyota",
+    "cat_model": "Corolla Cross",
+    "feed": [
+     "Toyota",
+     "Corolla Cross"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Toyota",
+    "cat_model": "Crown",
+    "feed": [
+     "Toyota",
+     "Crown"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Toyota",
+    "cat_model": "Crown Signia",
+    "feed": [
+     "Toyota",
+     "Crown Signia"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Toyota",
+    "cat_model": "Grand Highlander",
+    "feed": [
+     "Toyota",
+     "Grand Highlander"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Toyota",
+    "cat_model": "RAV4 Prime",
+    "feed": [
+     "Toyota",
+     "RAV4 Prime"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Toyota",
+    "cat_model": "T100",
+    "feed": [
+     "Toyota",
+     "T100"
+    ],
+    "why": "feed models ['T100 Pickup'] share the squash key 't100' (M3)"
+   }
+  ]
+ },
+ "ns": "toyota",
+ "proposals": [
+  {
+   "cat_make": "Lexus",
+   "cat_model": "GS200t",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "GS 200t",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
+   "cat_model": "IS Turbo",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "IS Turbo",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
+   "cat_model": "RC Turbo",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "RC Turbo",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
+   "cat_model": "RC200t",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "RC 200t",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
+   "cat_model": "RC300",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "RC 300",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Toyota",
+   "cat_model": "C-HR",
+   "feed_cars": 12,
+   "fitment_rows": 2,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Toyota",
+    "model": "C-HR",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Toyota",
+   "cat_model": "Corolla Cross",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Toyota",
+    "model": "Corolla Cross",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Toyota",
+   "cat_model": "Crown",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Toyota",
+    "model": "Crown",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Toyota",
+   "cat_model": "Crown Signia",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Toyota",
+    "model": "Crown Signia",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Toyota",
+   "cat_model": "Grand Highlander",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Toyota",
+    "model": "Grand Highlander",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Toyota",
+   "cat_model": "RAV4 Prime",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Toyota",
+    "model": "RAV4 Prime",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Toyota",
+   "cat_model": "T100",
+   "feed_cars": 57,
+   "fitment_rows": 12,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Toyota",
+    "model": "T100",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "T100 Pickup",
+     1
+    ]
+   ]
+  }
+ ],
+ "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+}
