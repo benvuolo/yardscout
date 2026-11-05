@@ -182,3 +182,131 @@
 22:00:12 chain-unlinked fuel-pump-module 2 numbers named by 7L6-919-087-F, no catalog link: 7L6-919-087-A, 7L0-919-087-E
 22:00:56 chain-unlinked power-steering-pump 3 numbers named by 7L6-422-154-E, no catalog link: 7L6-422-154, 7L6-422-154-D, 7L6-422-154-B
 22:00:56 time budget reached records=453
+22:01:08 start site=www.vwpartsgiant.com mode=worklist tiers=['A', 'B'] records=453 list_lines=63 year_lines=7 url_index=1472
+22:01:08 seg done tier=A Volkswagen Jetta [2006, 2010] seeds=[2006] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Jetta [2011, 2014] seeds=[2014] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Passat [2012, 2019] seeds=[2013] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Jetta [1999, 2005] seeds=[2003] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen CC [2009, 2016] seeds=[2012] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Tiguan [2009, 2017] seeds=[2012] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen New Beetle [1991, 2010] seeds=[2000] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Beetle [1964, 2019] seeds=[2003] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Passat [2006, 2011] seeds=[2008] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Passat [1986, 2005] seeds=[2003] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Jetta [2015, 2018] seeds=[2015] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Routan [2009, 2014] seeds=[2009] records=453 errors=4
+22:01:08 seg done tier=A Volkswagen Touareg [2004, 2017] seeds=[2004] records=453 errors=4
+22:01:24 chain-unlinked alternator 1 numbers named by 06F-903-023-G, no catalog link: 06F-903-023-B
+22:01:24 chain-unlinked alternator 1 numbers named by 06F-903-023-P, no catalog link: 06F-903-023-N
+22:01:32 chain-unlinked starter 1 numbers named by 02E-911-023-L, no catalog link: 02E-911-023-H
+22:02:20 chain-unlinked headlights 2 numbers named by 1Q0-941-005-D, no catalog link: 1Q0-941-005-C, 1Q0-941-005-B
+22:02:20 chain-unlinked headlights 2 numbers named by 1Q0-941-006-D, no catalog link: 1Q0-941-006-B, 1Q0-941-006-C
+22:02:20 chain-unlinked headlights 1 numbers named by 1Q0-941-753-B, no catalog link: 1Q0-941-753-A
+22:02:20 chain-unlinked headlights 1 numbers named by 1Q0-941-754-B, no catalog link: 1Q0-941-754-A
+22:03:56 chain-unlinked side-mirrors 4 numbers named by 1Q1-857-507-AG-2Z0, no catalog link: 1Q1-857-507-G-2Z0, 1Q1-857-507-G-9B9, 1Q1-857-507-AA-2Z0, 1Q1-857-507-K-9B9
+22:03:56 chain-unlinked side-mirrors 3 numbers named by 1Q1-857-507-AH-2Z0, no catalog link: 1Q1-857-507-AB-2Z0, 1Q1-857-507-L-9B9, 1Q1-857-507-L-2Z0
+22:03:56 chain-unlinked side-mirrors 3 numbers named by 1Q1-857-507-AJ-2Z0, no catalog link: 1Q1-857-507-M-9B9, 1Q1-857-507-J-2Z0, 1Q1-857-507-AC-2Z0
+22:03:56 chain-unlinked side-mirrors 4 numbers named by 1Q1-857-508-AK-2Z0, no catalog link: 1Q1-857-508-G-9B9, 1Q1-857-508-AB-2Z0, 1Q1-857-508-G-2Z0, 1Q1-857-508-K-9B9
+22:03:56 chain-unlinked side-mirrors 4 numbers named by 1Q1-857-508-AM-2Z0, no catalog link: 1Q1-857-508-L-9B9, 1Q1-857-508-L-2Z0, 1Q1-857-508-AD-2Z0, 1Q1-857-508-P-2Z0
+22:03:56 chain-unlinked side-mirrors 3 numbers named by 1Q1-857-508-AN-2Z0, no catalog link: 1Q1-857-508-AE-2Z0, 1Q1-857-508-J-2Z0, 1Q1-857-508-M-9B9
+22:04:36 chain-unlinked climate-control 1 numbers named by 1Q0-907-044-AH-WZU, no catalog link: 1Q0-907-044-AB-WZU
+22:04:36 chain-unlinked climate-control 1 numbers named by 1Q0-907-044-AJ-WZU, no catalog link: 1Q0-907-044-AC-WZU
+22:04:36 chain-unlinked climate-control 2 numbers named by 1Q0-907-044-H-WHS, no catalog link: 1Q0-907-044, 1Q0-907-044-D-WHS
+22:04:36 chain-unlinked climate-control 2 numbers named by 1Q0-907-044-J-WHS, no catalog link: 1Q0-907-044-A, 1Q0-907-044-E-WHS
+22:05:24 chain-unlinked alternator 1 numbers named by 06J-903-023-CX, no catalog link: 06D-903-016-AX
+22:05:50 chain-unlinked ac-compressor 3 numbers named by 1K0-820-808-A, no catalog link: 1K0-820-808-AX, 1K0-820-859-P, 1K0-820-859-H
+22:06:28 chain-unlinked headlights 2 numbers named by 1Q0-941-005-J, no catalog link: 1Q0-941-005-F, 1Q0-941-005-H
+22:06:28 chain-unlinked headlights 2 numbers named by 1Q0-941-006-J, no catalog link: 1Q0-941-006-F, 1Q0-941-006-H
+22:07:08 chain-unlinked tail-lights 3 numbers named by 1Q0-945-093-AC, no catalog link: 1Q0-945-093-S, 1Q0-945-093-J, 1Q0-945-093-N
+22:07:08 chain-unlinked tail-lights 3 numbers named by 1Q0-945-094-AB, no catalog link: 1Q0-945-094-R, 1Q0-945-094-M, 1Q0-945-094-H
+22:07:08 chain-unlinked tail-lights 1 numbers named by 1Q0-945-095-T, no catalog link: 1Q0-945-095-Q
+22:07:08 chain-unlinked tail-lights 1 numbers named by 1Q0-945-096-T, no catalog link: 1Q0-945-096-Q
+22:08:04 chain-unlinked side-mirrors 1 numbers named by 1Q1-857-507-AR-9B9, no catalog link: 1Q1-857-507-AK-9B9
+22:08:04 chain-unlinked side-mirrors 1 numbers named by 1Q1-857-507-AT-9B9, no catalog link: 1Q1-857-507-AM-9B9
+22:08:04 chain-unlinked side-mirrors 2 numbers named by 1Q1-857-507-BD-9B9, no catalog link: 1Q1-857-507-AL-9B9, 1Q1-857-507-AS-9B9
+22:08:04 chain-unlinked side-mirrors 1 numbers named by 1Q1-857-508-BD-9B9, no catalog link: 1Q1-857-508-AP-9B9
+22:08:04 chain-unlinked side-mirrors 1 numbers named by 1Q1-857-508-BG-9B9, no catalog link: 1Q1-857-508-AS-9B9
+22:08:04 chain-unlinked side-mirrors 2 numbers named by 1Q1-857-508-BM-9B9, no catalog link: 1Q1-857-508-AR-9B9, 1Q1-857-508-BF-9B9
+22:08:20 chain-unlinked climate-control 7 numbers named by 5K0-907-044-HB-ZJU, no catalog link: 5K0-907-044-EA-ZJU, 5K0-907-044-ES-ZJU, 5K0-907-044-BD-ZJU, 5K0-907-044-GK-ZJU, 5K0-907-044-AK-ZJU, 5K0-907-044-BT-ZJU, 5K0-907-044-A-ZJU
+22:08:36 seg done tier=A Volkswagen Eos [2007, 2014] seeds=[2008, 2013] records=490 errors=4
+22:09:00 chain-unlinked alternator 1 numbers named by 06F-903-023-HX, no catalog link: 06F-903-023-CX
+22:09:16 chain-unlinked ac-compressor 7 numbers named by 1K0-820-808-G, no catalog link: 1K0-820-808-C, 1K0-820-808-E, 1K0-820-803-R, 1K0-820-859-R, 1K0-820-859-G, 1K0-820-803-K, 1K0-820-803-T
+22:10:05 chain-unlinked tail-lights 1 numbers named by 1K6-945-095-AD, no catalog link: 1K6-945-095-M
+22:10:05 chain-unlinked tail-lights 1 numbers named by 1K6-945-096-AD, no catalog link: 1K6-945-096-M
+22:10:28 chain-unlinked side-mirrors 1 numbers named by 1K1-857-507-DC-9B9, no catalog link: 1K1-857-507-AK-9B9
+22:10:28 chain-unlinked side-mirrors 1 numbers named by 1K1-857-508-CN-9B9, no catalog link: 1K1-857-508-AL-9B9
+22:11:56 chain-unlinked window-regulator 1 numbers named by 1K3-837-461-B, no catalog link: 1K3-837-461-A
+22:11:56 chain-unlinked window-regulator 1 numbers named by 1K3-837-462-B, no catalog link: 1K3-837-462-A
+22:11:56 chain-unlinked window-regulator 1 numbers named by 1K4-837-461-B, no catalog link: 1K4-837-461-A
+22:11:56 chain-unlinked window-regulator 1 numbers named by 1K4-837-462-B, no catalog link: 1K4-837-462-A
+22:11:56 chain-unlinked window-regulator 3 numbers named by 1K0-959-701-L-Z1C, no catalog link: 1K0-959-701-L-A01, 1K0-959-701-L-03B, 1K0-959-701-L-Z01
+22:11:56 chain-unlinked window-regulator 3 numbers named by 1K0-959-701-L-Z1D, no catalog link: 1K0-959-701-L-A02, 1K0-959-701-L-Z02, 1K0-959-701-L-030
+22:11:56 chain-unlinked window-regulator 3 numbers named by 1K0-959-702-L-Z1B, no catalog link: 1K0-959-702-L-A01, 1K0-959-702-L-Z01, 1K0-959-702-L-029
+22:11:56 chain-unlinked window-regulator 3 numbers named by 1K0-959-702-L-Z1C, no catalog link: 1K0-959-702-L-A02, 1K0-959-702-L-Z02, 1K0-959-702-L-001
+22:11:56 chain-unlinked window-regulator 5 numbers named by 5K0-959-701-A-Z1X, no catalog link: 1K0-959-701-N-Z0N, 1K0-959-701-N-Z5Y, 5K0-959-701-A-Z01, 1K0-959-701-AG-Z05, 1K0-959-701-N-Z3C
+22:11:56 chain-unlinked window-regulator 10 numbers named by 5K0-959-702-A-Z0Z, no catalog link: 1K0-959-702-N-Z46, 1K0-959-702-AG-Z29, 1K0-959-702-N-Z0N, 1K0-959-702-N-Z4A, 1K0-959-702-AG-Z05, 1K0-959-702-N-Z0S, 1K0-959-702-AG-Z09, 5K0-959-702-A-Z01, 1K0-959-702-N-Z78, 1K0-959-702-N-Z7C
+22:12:36 chain-unlinked window-regulator 4 numbers named by 5K0-959-703-VW3, no catalog link: 1K0-959-703-K-VW4, 1K0-959-703-K-VW7, 1K0-959-703-AL-VW3, 1K0-959-703-K-VW1
+22:12:36 chain-unlinked window-regulator 4 numbers named by 5K0-959-704-VW3, no catalog link: 1K0-959-704-K-VW4, 1K0-959-704-AL-VW3, 1K0-959-704-K-VW1, 1K0-959-704-K-VW7
+22:12:44 chain-unlinked window-switch 3 numbers named by 1K3-959-857-C-REH, no catalog link: 1K3-959-857-A-REH, 1K3-959-857-B-REH, 1K3-959-857-REH
+22:13:24 nav-fail Volkswagen Rabbit 1991: NavError: HTTP 404 for https://www.vwpartsgiant.com/1991-volkswagen-rabbit-parts
+22:13:24 seg done tier=A Volkswagen Rabbit [1977, 2009] seeds=[2007, 1991] records=513 errors=5
+22:13:48 chain-unlinked alternator 2 numbers named by 038-903-018-PX, no catalog link: 038-903-018-LX, 038-903-018-X
+22:13:48 chain-unlinked alternator 2 numbers named by 038-903-018-QX, no catalog link: 028-903-031-X, 038-903-018-BX
+22:14:04 chain-unlinked starter 4 numbers named by 02A-911-024-EX, no catalog link: 02A-911-024-E, 02A-911-023-S, 02A-911-023-H, 02A-911-023-SX
+22:14:04 chain-unlinked starter 1 numbers named by 068-911-024-F, no catalog link: 068-911-024-G
+22:14:04 chain-unlinked starter 1 numbers named by 09A-911-023-X, no catalog link: 09A-911-023
+22:14:12 chain-unlinked ac-compressor 6 numbers named by 1J0-820-803-N, no catalog link: 1J0-820-803-K, 1J0-820-803-L, 1J0-820-803-NX, 1JE-820-803-A, 1J0-820-803-LX, 1J0-820-803-F
+22:16:52 chain-unlinked window-regulator 1 numbers named by 1J3-837-461-H, no catalog link: 1J3-837-461-F
+22:16:52 chain-unlinked window-regulator 1 numbers named by 1J3-837-462-H, no catalog link: 1J3-837-462-F
+22:16:52 chain-unlinked window-regulator 2 numbers named by 1J4-837-461-H, no catalog link: 1J4-837-461-D, 1J4-837-461-F
+22:16:52 chain-unlinked window-regulator 2 numbers named by 1J4-837-462-H, no catalog link: 1J4-837-462-D, 1J4-837-462-F
+22:16:52 chain-unlinked window-regulator 4 numbers named by 1J4-837-729-BK, no catalog link: 1J4-837-729-BA, 1J4-837-729-AP, 1J4-837-729-BF, 1J4-837-729-N
+22:16:52 chain-unlinked window-regulator 4 numbers named by 1J4-837-730-BL, no catalog link: 1J4-837-730-AP, 1J4-837-730-BA, 1J4-837-730-BF, 1J4-837-730-N
+22:16:52 chain-unlinked window-regulator 1 numbers named by 1C1-959-802-A-017, no catalog link: 1C1-959-802-A-01G
+22:16:52 chain-unlinked window-regulator 2 numbers named by 1J3-837-729-BA, no catalog link: 1J3-837-729-AP, 1J3-837-729-N
+22:17:32 chain-unlinked window-regulator 1 numbers named by 1J4-839-461-F, no catalog link: 1J4-839-461-C
+22:17:32 chain-unlinked window-regulator 1 numbers named by 1J4-839-462-F, no catalog link: 1J4-839-462-C
+22:17:32 chain-unlinked window-regulator 2 numbers named by 1J4-839-729-L, no catalog link: 1J4-839-729-D, 1J4-839-729-J
+22:17:32 chain-unlinked window-regulator 1 numbers named by 1J5-839-729-J, no catalog link: 1J5-839-729-D
+22:17:48 chain-unlinked climate-control 1 numbers named by 3B1-907-044-C, no catalog link: 3B1-907-044-B
+22:18:04 chain-unlinked fuel-pump-module 1 numbers named by 038-130-107-J, no catalog link: 038-130-107-JX
+22:18:04 chain-unlinked fuel-pump-module 1 numbers named by 1J0-919-087-J, no catalog link: 1J0-919-087-H
+22:18:04 chain-unlinked fuel-pump-module 1 numbers named by 038-130-107-KX, no catalog link: 038-130-107-DX
+22:18:20 chain-unlinked throttle-body 1 numbers named by 06A-133-062-BD, no catalog link: 06A-133-062-C
+22:18:20 chain-unlinked throttle-body 1 numbers named by 06A-133-062-Q, no catalog link: 06A-133-062-D
+22:18:28 chain-unlinked power-steering-pump 1 numbers named by 1J0-422-152-A, no catalog link: 1J0-422-154-D
+22:18:28 chain-unlinked power-steering-pump 5 numbers named by 1J0-422-152-M, no catalog link: 1J0-422-152-MX, 1J0-422-154-AX, 1J0-422-154-X, 1J0-422-152-F, 1J0-422-154-JX
+22:18:28 chain-unlinked power-steering-pump 2 numbers named by 1J0-422-154-H, no catalog link: 1J0-422-154-EX, 1J0-422-154-HX
+22:18:28 chain-unlinked power-steering-pump 3 numbers named by 2K0-422-154-A, no catalog link: 1J0-422-154-A, 1J0-422-154-J, 2K0-422-154
+22:18:28 chain-unlinked power-steering-pump 5 numbers named by 6N0-145-157-X, no catalog link: 1J0-422-152-G, 1J0-422-154-B, 1J0-422-154-BX, 1J0-422-152-GX, 6N0-145-157
+22:19:00 chain-unlinked alternator 2 numbers named by 068-903-017-PX, no catalog link: 068-903-018-BX, 068-903-018-B
+22:19:24 chain-unlinked ac-compressor 1 numbers named by 191-820-805, no catalog link: 176-820-804-X
+22:22:12 chain-unlinked throttle-body 1 numbers named by 027-133-063-BH, no catalog link: 027-133-063-BB
+22:23:00 chain-unlinked alternator 1 numbers named by 028-903-025-PX, no catalog link: 028-903-025-P
+22:23:16 chain-unlinked starter 5 numbers named by 020-911-023-FX, no catalog link: 020-911-023-F, 020-911-023-A, 037-911-023, 020-911-023-MX, 020-911-023-N
+22:23:16 chain-unlinked starter 7 numbers named by 020-911-024-AX, no catalog link: 020-911-024-A, 020-911-023-B, 020-911-023-RX, 020-911-024-CX, 020-911-023-PX, 020-911-023-D, 020-911-023-P
+22:24:12 chain-unlinked headlights 1 numbers named by 1HM-941-017-A, no catalog link: 1HM-941-105-A
+22:24:12 chain-unlinked headlights 1 numbers named by 1HM-941-018-A, no catalog link: 1HM-941-106-A
+22:24:44 chain-unlinked tail-lights 1 numbers named by 1EM-945-111-A, no catalog link: 1HM-945-111-C
+22:24:44 chain-unlinked tail-lights 1 numbers named by 1EM-945-112-A, no catalog link: 1HM-945-112-C
+22:25:24 chain-unlinked side-mirrors 1 numbers named by 1H1-857-507-01C, no catalog link: 1HM-857-507-01C
+22:25:24 chain-unlinked side-mirrors 1 numbers named by 1H1-857-508-01C, no catalog link: 1HM-857-508-01C
+22:25:40 chain-unlinked power-steering-pump 2 numbers named by 6K0-422-154, no catalog link: 028-145-157-D, 028-145-157-E
+22:25:40 seg done tier=A Volkswagen Golf [1985, 2005] seeds=[2003, 1990, 1995] records=573 errors=5
+22:25:48 nav-fail Volkswagen Golf 2012: NavError: no parts-list links on https://www.vwpartsgiant.com/2012-volkswagen-golf-parts
+22:25:48 seg done tier=A Volkswagen Golf [2010, 2014] seeds=[2012] records=573 errors=6
+22:27:08 chain-unlinked window-switch 1 numbers named by 1J3-959-857-B, no catalog link: 1J3-959-857
+22:27:32 chain-unlinked climate-control 10 numbers named by 1K0-820-047-JN-WHS, no catalog link: 1K0-820-047-HB-WHS, 1K0-820-047-DP-REH, 1K0-820-047-DF-REH, 1K0-820-047-EF-REH, 1K0-820-047-GK-WHS, 1K0-820-047-FT-WHS, 1K0-820-047-HM-WHS, 1K0-820-047-FH-WHS, 1Q0-820-047-REH, 1K0-820-047-JD-WHS
+22:27:32 chain-unlinked climate-control 4 numbers named by 1K0-907-044-BQ, no catalog link: 1K0-907-044-BC, 1K0-907-044-BL, 1K0-907-044-AJ, 1K0-907-044-BG
+22:29:56 chain-unlinked climate-control 3 numbers named by 1K0-819-047-CH-WHS, no catalog link: 1K0-819-047-AP-REH, 1K0-819-047-BM-WHS, 1K0-819-047-CB-WHS
+22:29:56 chain-unlinked climate-control 3 numbers named by 1K0-819-047-CJ-WHS, no catalog link: 1K0-819-047-CC-WHS, 1K0-819-047-AQ-REH, 1K0-819-047-BN-WHS
+22:29:56 chain-unlinked climate-control 1 numbers named by 1K0-907-044-DD, no catalog link: 1K0-907-044-CP
+22:29:56 chain-unlinked climate-control 1 numbers named by 1K0-907-044-DE, no catalog link: 1K0-907-044-CQ
+22:30:12 seg done tier=A Volkswagen GTI [2006, 2009] seeds=[2007, 2009] records=582 errors=6
+22:30:36 chain-unlinked alternator 3 numbers named by 028-903-018-AX, no catalog link: 021-903-017-AX, 028-903-018-A, 028-903-025-QX
+22:31:00 chain-unlinked ac-compressor 1 numbers named by 1H0-820-803-DX, no catalog link: 1H0-820-803-D
+22:31:48 chain-unlinked side-mirrors 1 numbers named by 1EM-857-508-A-01C, no catalog link: 1EM-857-508-01C
+22:32:20 chain-unlinked climate-control 1 numbers named by 1J0-820-045-E-01C, no catalog link: 1J0-820-045-E
+22:32:36 chain-unlinked fuel-pump-module 1 numbers named by 1HM-919-051-M, no catalog link: 1HM-919-051-J
+22:33:00 seg done tier=A Volkswagen Cabrio [1995, 2002] seeds=[2001] records=592 errors=6
+22:33:00 time budget reached records=592
