@@ -57,6 +57,7 @@ def main() -> None:
     if a.max_segments:
         wl = wl[: a.max_segments]
     tiers = ["A", "B"] if a.tier == "all" else [a.tier]
+    (ROOT / "raw").mkdir(exist_ok=True)
     raw = ROOT / "raw" / f"{site}.jsonl"
     if (ROOT / "raw" / f"{site}.blocked").exists():
         print(f"{site} is blocked: {(ROOT / 'raw' / f'{site}.blocked').read_text().strip()}")

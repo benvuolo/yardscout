@@ -49,7 +49,11 @@ ALLOWED = {
     "www.jeeppartsdeal.com", "www.moparpartsgiant.com",
     "www.fordpartsgiant.com", "www.gmpartsgiant.com",
     "en.wikipedia.org",
+    # aftermarket application catalogs (robots allow, no bot check, 2026-11-05)
+    "www.densoautoparts.com", "www.dbelectrical.com", "www.tycamericas.com",
 }
+# robots.txt Crawl-delay or a gentler pace where a site asks for it
+DOMAIN_GAP = {"www.tycamericas.com": 10.0, "www.subarupartsdeal.com": 5.0}
 CHALLENGE_RE = re.compile(r"Attention Required!|cf-chl|challenge-platform|Just a moment\.\.\.|captcha", re.I)
 
 
@@ -110,6 +114,15 @@ def _robots_ok(url: str) -> bool:
     return rp.can_fetch(UA, url) and rp.can_fetch("*", url)
 
 
+def _robots_delay(netloc: str) -> float:
+    rp = _robots.get(netloc)
+    try:
+        d = rp.crawl_delay("*") if rp else None
+    except Exception:
+        d = None
+    return float(d) if d else 0.0
+
+
 def cache_path(url: str) -> Path:
     u = urllib.parse.urlsplit(url)
     h = hashlib.sha1(url.encode()).hexdigest()
@@ -134,7 +147,7 @@ def get(url: str) -> dict:
     if not _robots_ok(url):
         raise Refused(f"robots.txt disallows {u.path}")
     _locked_wait("global", GLOBAL_GAP)
-    _locked_wait(u.netloc, PER_DOMAIN_GAP)
+    _locked_wait(u.netloc, max(PER_DOMAIN_GAP, DOMAIN_GAP.get(u.netloc, 0.0), _robots_delay(u.netloc)))
     try:
         r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT, allow_redirects=True)
     except requests.RequestException as e:
