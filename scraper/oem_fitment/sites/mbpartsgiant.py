@@ -12,6 +12,9 @@ For those, every badge of the class whose model page lists the year is read
 names the exact badges, so nothing is inferred; the seed model stays the
 feed name.
 
+Manifests (R2): year_manifest reads, from the cache, the same badge year
+pages categories_for fetched, one line per badge (`variant` = badge slug).
+
 Not crawled on purpose (the pages do not print what the category needs):
   * door-front / door-rear: "Door Shell", product "Driver's Door" even for the
     passenger shell; front vs rear not printed.
@@ -25,7 +28,8 @@ from __future__ import annotations
 
 import re
 
-from ._simplepart import NavError, SimplePart, get
+from . import _simplepart as _sp
+from ._simplepart import NavError, SimplePart
 
 SITE = "www.mbpartsgiant.com"
 MK = "mercedes_benz"
@@ -104,17 +108,31 @@ _T = SimplePart(SITE, {"Mercedes-Benz": MK}, {}, CAT_PAGES, RULES, oem_name_fiel
                 product_rules=PRODUCT_RULES)
 
 
-def badges(pattern: str, year: int) -> list[str]:
-    """Badge slugs matching `pattern` whose model page links the year page."""
-    home = get(f"https://{SITE}/")["html"]
+def _badges(pattern: str, year: int, fetch) -> tuple[list[str], list[dict]]:
+    """(badge slugs matching `pattern` whose model page links the year page,
+    [{url, status}] for the home page and every model page of the class read).
+    fetch(url) -> page or None (the cache-only re-read gives None for a page
+    never fetched)."""
+    home_url = f"https://{SITE}/"
+    home = fetch(home_url)
+    pages = [{"url": home_url, "status": home.get("status") if home else None}]
+    if not home:
+        return [], pages
     out = []
-    for sl in sorted(set(re.findall(rf'href="/{MK}-([a-z0-9_]+)-parts"', home))):
+    for sl in sorted(set(re.findall(rf'href="/{MK}-([a-z0-9_]+)-parts"', home.get("html", "")))):
         if not re.search(pattern, sl):
             continue
-        page = get(f"https://{SITE}/{MK}-{sl}-parts")
-        if page.get("status") == 200 and f'href="/{year}-{MK}-{sl}-parts"' in page["html"]:
+        url = f"https://{SITE}/{MK}-{sl}-parts"
+        page = fetch(url)
+        pages.append({"url": url, "status": page.get("status") if page else None})
+        if page and page.get("status") == 200 and f'href="/{year}-{MK}-{sl}-parts"' in page.get("html", ""):
             out.append(sl)
-    return out
+    return out, pages
+
+
+def badges(pattern: str, year: int) -> list[str]:
+    """Badge slugs matching `pattern` whose model page links the year page."""
+    return _badges(pattern, year, _sp.get)[0]
 
 
 def categories_for(make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
@@ -134,3 +152,38 @@ def parts_on_page(list_url: str, cat: str) -> list[dict]:
 
 def product(product_url: str) -> dict:
     return _T.product(product_url)
+
+
+def year_manifest(make: str, model: str, year: int) -> list[dict]:
+    """R2, cache only: one line per badge year page that categories_for read.
+    A feed class name ("C-Class") reads every badge of the class whose model
+    page lists the year, so each line's `variants` lists them all (the badges
+    offered) and `variants_read` the same; `model_pages` names the home and
+    model pages the badge list came from. A plain model reads _slug(model),
+    the page categories_for reads (not the template's hyphen slug)."""
+    if model not in CLASSES:
+        return [_T.year_manifest_slug(make, _slug(model), year)]
+    slugs, pages = _badges(CLASSES[model], year, _sp.cached)
+    if not slugs:
+        line = _T._year_line()
+        line.update(variants=[], variants_read=[], model_pages=pages,
+                    error="not_fetched" if any(p["status"] is None for p in pages)
+                    else "no catalog badge page for this year")
+        return [line]
+    out = []
+    for sl in slugs:
+        line = _T.year_manifest_slug(make, sl, year, variant=sl)
+        line.update(variants=list(slugs), variants_read=list(slugs), model_pages=pages)
+        out.append(line)
+    return out
+
+
+def list_manifest(list_url: str, cat: str) -> dict:
+    out = _T.list_manifest(list_url, cat)
+    stem = out.get("catalog") or ""
+    out["variant"] = stem.split(f"-{MK}-", 1)[1] if f"-{MK}-" in stem else ""  # the badge
+    return out
+
+
+def chain_links(product_url: str, pns: list[str]) -> dict[str, str]:
+    return _T.chain_links(product_url, pns)

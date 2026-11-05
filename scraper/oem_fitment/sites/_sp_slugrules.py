@@ -6,6 +6,9 @@ slug_checks option applies the exclusions and the reman test to the slug as well
 product() also marks units the product page itself calls remanufactured (`reman: true`)
 or an exchange unit (`exchange_unit: true`, Volvo "Alternator, Exchange"); it never
 unmarks what the list page said.
+
+The slug test lives in excluded_by() (manifest reason "rule:slug_miss"), so the
+template's match(), parts_on_page and list_manifest all read it.
 """
 from __future__ import annotations
 
@@ -25,11 +28,18 @@ class SlugCheckedSimplePart(SimplePart):
         if missing:
             raise ValueError(f"rules and slug_rules differ: {sorted(missing)}")
 
-    def match(self, cat: str, main: str, aux: str, slug: str = "") -> bool:
-        return bool(self.slug_rules[cat].search(slug)) and super().match(cat, main, aux, slug)
+    def excluded_by(self, cat: str, main: str, aux: str, slug: str = "") -> str | None:
+        """The template's reason when it has one, else "rule:slug_miss" when the
+        slug does not name the assembly. match() is excluded_by() is None, so
+        parts_on_page and the R1 manifest give one answer."""
+        why = super().excluded_by(cat, main, aux, slug)
+        if why is None and not self.slug_rules[cat].search(slug):
+            return "rule:slug_miss"
+        return why
 
-    def product(self, product_url: str) -> dict:
-        out = super().product(product_url)
+    def product(self, product_url: str, _get=None) -> dict:
+        # _get: the template's cache-only re-read for list_manifest (R1)
+        out = super().product(product_url, _get=_get)
         names = " ".join(filter(None, [out.get("description"), out.get("other_names")]))
         if _sp.REMAN.search(names):
             out["reman"] = True

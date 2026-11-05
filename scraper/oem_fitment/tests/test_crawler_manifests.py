@@ -29,7 +29,7 @@ sys.path.insert(0, str(HERE))
 import _crawler_fixtures as F  # noqa: E402
 import _synthetic_pages as S  # noqa: E402
 
-PAGES = F.Pages(F.real_pages(), S.toyota_pages(), S.gm_pages(), S.ford_split_pages())
+PAGES = F.Pages(F.real_pages(), S.toyota_pages(), S.gm_pages(), S.ford_split_pages(), S.volvo_pages(), S.mb_pages())
 F.install(PAGES)
 
 from sites import _partsgiant as PG  # noqa: E402
@@ -259,6 +259,60 @@ check("R2 PG model page not fetched", nomp[0]["error"] == "no model page" and no
 # ------------------------------------------------------------- PartsGiant R4
 gl = no_gets(gmpartsgiant.chain_links, f"{S.G}/parts/gm-generator-19000002.html", ["19000000", "19000001", "900"])
 check("R4 PG product-page link", gl == {"19000000": f"{S.G}/parts/gm-generator-asm-19000000.html"}, gl)
+
+# ------------------------------------------------- SlugCheckedSimplePart (Volvo, Mitsubishi, Audi)
+from sites import mitsubishipartsgiant, volvopartsgiant  # noqa: E402
+from sites._sp_slugrules import SlugCheckedSimplePart  # noqa: E402
+check("Mitsubishi and Volvo run on SlugCheckedSimplePart",
+      isinstance(mitsubishipartsgiant._T, SlugCheckedSimplePart) and isinstance(volvopartsgiant._T, SlugCheckedSimplePart))
+vt = volvopartsgiant._T
+check("slug miss is an excluded_by reason", vt.excluded_by("door-front", "Door Shell", "", "door-assembly") == "rule:slug_miss"
+      and not vt.match("door-front", "Door Shell", "", "door-assembly")
+      and vt.excluded_by("door-front", "Door Shell", "", "door-shell") is None
+      and vt.excluded_by("alternator", "Alternator", "", "alternator-pulley") == "rule:pulley"
+      and vt.excluded_by("door-front", "Weatherstrip", "", "door-shell") == "include_miss")
+VD = f"{S.V}/parts-list/2030-volvo-xc90/body-hardware/door-components"
+vparts = volvopartsgiant.parts_on_page(VD, "door-front")
+vman = no_gets(volvopartsgiant.list_manifest, VD, "door-front")  # product_rules category: product() re-read via the cache
+vwhy = {r["pn"]: (r["matched"], r["excluded_by"]) for r in vman["rows"]}
+check("Volvo door-front parts (product rule decides front)", [p["pn"] for p in vparts] == ["31335409"]
+      and vparts[0]["product_check"].startswith("'Front Door'"), vparts)
+check("Volvo door-front manifest has every row, no error", "error" not in vman and vwhy == {
+    "31335409": (True, None), "31335410": (False, "product_rule"), "31335411": (False, "rule:slug_miss"),
+    "31335412": (False, "include_miss")}, (vman.get("error"), vwhy))
+vrear = no_gets(volvopartsgiant.list_manifest, VD, "door-rear")
+check("Volvo door-rear manifest", {r["pn"]: r["excluded_by"] for r in vrear["rows"]}["31335410"] is None
+      and {r["pn"] for r in vrear["rows"] if r["matched"]} == {p["pn"] for p in volvopartsgiant.parts_on_page(VD, "door-rear")}
+      == {"31335410"})
+check("SlugChecked product() takes the cache-only reader", volvopartsgiant._T.product(
+    f"{S.V}/genuine/volvo~door-shell~31335409", _get=PAGES.cached)["pn"] == "31335409")
+vy = no_gets(volvopartsgiant.year_manifest, "Volvo", "XC90", 2030)
+check("Volvo year manifest", len(vy) == 1 and vy[0]["status"] == 200 and vy[0]["catalog"] == "2030-volvo-xc90"
+      and vy[0]["subs"] == ["body-hardware/door-components", "charging-starting/alternator"], vy)
+
+# ------------------------------------------------- Mercedes: feed class names read through badges
+from sites import mbpartsgiant  # noqa: E402
+ML = f"{S.M}/parts-list/2030-mercedes_benz"
+mbc = mbpartsgiant.categories_for("Mercedes-Benz", "C-Class", 2030, ["alternator"])
+check("MB C-Class 2030 reads the c300 and c63_amg badges", mbc == {"alternator": [
+    f"{ML}-c300/charging-starting/alternator", f"{ML}-c63_amg/charging-starting/alternator"]}, mbc)
+my = no_gets(mbpartsgiant.year_manifest, "Mercedes-Benz", "C-Class", 2030)
+check("MB year manifest: one line per badge page read", [(x["variant"], x["catalog"], x["status"], x["subs"]) for x in my] == [
+    ("c300", "2030-mercedes_benz-c300", 200, ["charging-starting/alternator"]),
+    ("c63_amg", "2030-mercedes_benz-c63_amg", 200, ["charging-starting/alternator"])]
+    and all(x["variants"] == ["c300", "c63_amg"] == x["variants_read"] and "error" not in x for x in my), my)
+check("MB year manifest names the model pages", [p["url"].rsplit("/", 1)[1] for p in my[0]["model_pages"]]
+      == ["", "mercedes_benz-c230-parts", "mercedes_benz-c300-parts", "mercedes_benz-c63_amg-parts"], my[0]["model_pages"])
+mby = no_gets(mbpartsgiant.year_manifest, "Mercedes-Benz", "C300", 2030)
+check("MB badge model reads its underscore slug page", [(x["catalog"], x["status"]) for x in mby]
+      == [("2030-mercedes_benz-c300", 200)], mby)
+mbn = no_gets(mbpartsgiant.year_manifest, "Mercedes-Benz", "E-Class", 2030)
+check("MB class with no badge for the year", mbn[0]["error"] == "no catalog badge page for this year"
+      and mbn[0]["variants"] == [], mbn)
+mbl = no_gets(mbpartsgiant.list_manifest, f"{ML}-c300/charging-starting/alternator", "alternator")
+check("MB list manifest: rows, badge variant, product rule read from the cache", mbl["variant"] == "c300"
+      and "error" not in mbl and {r["pn"]: r["excluded_by"] for r in mbl["rows"]}
+      == {"272-154-00-02": None, "272-150-00-15": "product_rule"}, mbl)
 
 # ------------------------------------------------------------- contract
 SITES = sorted(p.stem for p in (HERE.parent / "sites").glob("*.py") if not p.stem.startswith("_"))

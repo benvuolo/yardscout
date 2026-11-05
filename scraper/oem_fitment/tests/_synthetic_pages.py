@@ -18,6 +18,11 @@ catalog has (2030), so they never collide with the real fixture pages.
     new_model generator page: a new number and a reman one (reman dropped)
   ford_split_pages(): www.fordpartsgiant.com 2030 Ranger, split into three
     engine catalogs (first and last are read)
+  volvo_pages(): www.volvopartsgiant.com 2030 XC90 (SlugCheckedSimplePart):
+    door-components page, "Door Shell" rows told apart by the product page
+    (product_rules), one whose slug is not a door shell (rule:slug_miss)
+  mb_pages(): www.mbpartsgiant.com, feed class "C-Class" 2030 read through
+    two badges (c300, c63_amg); c230 has no 2030 page, cl500 is not a C badge
 """
 from __future__ import annotations
 
@@ -26,6 +31,8 @@ import html as htmllib
 from _crawler_fixtures import page, store_html
 
 T = "https://www.toyotapartsnow.com"
+V = "https://www.volvopartsgiant.com"
+M = "https://www.mbpartsgiant.com"
 G = "https://www.gmpartsgiant.com"
 F = "https://www.fordpartsgiant.com"
 TSTEM = "2030-toyota-camry"
@@ -48,11 +55,11 @@ def sp_list(diagram: list, other: list | None = None) -> dict:
     return page(store_html({"partList": {"partList": [diagram], "gpgOnlyPartList": [other or []]}}))
 
 
-def sp_product(pn, desc, replaces="", replaced_by="", position=None, rows=None, links=()) -> dict:
+def sp_product(pn, desc, replaces="", replaced_by="", position=None, rows=None, links=(), other=None) -> dict:
     """A SimplePart product page whose rendered text matches its store."""
     rows = rows or [["2030 Toyota Camry", "LE, SE", "4 Cyl 2.5 L GAS"]]
     base = [{"name": "Position", "desc": position}] if position else []
-    info = {"partNumber": pn, "mainDesc": desc, "partDescription": desc, "replaces": replaces,
+    info = {"partNumber": pn, "mainDesc": desc, "partDescription": other or desc, "replaces": replaces,
             "replacedBy": replaced_by, "lr": position or "", "baseInfoList": base}
     st = {"partNumber": {"partInfo": info,
                          "fitVehicleTitleList": [{"text": "Year Make Model"}, {"text": "Trim"}, {"text": "Engine"}],
@@ -218,4 +225,58 @@ def ford_split_pages() -> dict:
             {}, f'<a href="/parts-list/2030-ford-ranger--{t}/electrical/alternator_and_mountings.html">x</a>'
                 f'<a href="/parts-list/2030-ford-ranger--{t}/electrical/starter_motor.html">x</a>',
             title=f"2030 Ford Ranger {t} Parts"))
+    return out
+
+
+def _genuine_row(make_tok, pn, main, slug, aux=None):
+    return {"partNumber": pn, "mainDesc": main, "auxiliaryDesc": aux, "allExtraInfoList": [], "replace": "",
+            "url": f"/genuine/{make_tok}~{slug}~{pn.lower()}"}
+
+
+def volvo_pages() -> dict:
+    stem = "2030-volvo-xc90"
+    subs = ["body-hardware/door-components", "charging-starting/alternator"]
+    year = page(store_html({}, "".join(f'<a href="/parts-list/{stem}/{x}">x</a>' for x in subs),
+                           title="2030 Volvo XC90 Parts - VolvoPartsGiant.com"))
+    L = f"{V}/parts-list/{stem}"
+    doors = sp_list([
+        _genuine_row("volvo", "31335409", "Door Shell", "door-shell"),
+        _genuine_row("volvo", "31335410", "Door Shell", "door-shell"),
+        _genuine_row("volvo", "31335411", "Door Shell", "door-assembly"),
+        _genuine_row("volvo", "31335412", "Weatherstrip", "weatherstrip"),
+    ])
+    alt = sp_list([
+        _genuine_row("volvo", "36001234", "Alternator", "alternator"),
+        _genuine_row("volvo", "36001235", "Alternator", "alternator-pulley"),
+    ])
+    P = f"{V}/genuine/volvo"
+    rows = [["2030 Volvo XC90", "T6", "6 Cyl 3.2L"]]
+    return {
+        f"{V}/2030-volvo-xc90-parts": year,
+        f"{L}/body-hardware/door-components": doors,
+        f"{L}/charging-starting/alternator": alt,
+        f"{P}~door-shell~31335409": sp_product("31335409", "Door Shell, Front", other="Front Door", rows=rows),
+        f"{P}~door-shell~31335410": sp_product("31335410", "Door Shell, Rear", other="Rear Door", rows=rows),
+        f"{P}~alternator~36001234": sp_product("36001234", "Alternator", rows=rows),
+    }
+
+
+def mb_pages() -> dict:
+    mk = "mercedes_benz"
+    home = page(store_html({}, "".join(f'<a href="/{mk}-{b}-parts">x</a>' for b in ("c230", "c300", "c63_amg", "cl500")),
+                           title="Mercedes-Benz Parts"))
+    out = {f"{M}/": home}
+    for b, years in (("c230", [2029]), ("c300", [2030, 2029]), ("c63_amg", [2030]), ("cl500", [2030])):
+        out[f"{M}/{mk}-{b}-parts"] = page(store_html({}, "".join(f'<a href="/{y}-{mk}-{b}-parts">x</a>' for y in years)))
+    P = f"{M}/genuine/mercedes-benz"
+    rows = [["2030 Mercedes-Benz C300", "Base", "6 Cyl 3.0L"], ["2030 Mercedes-Benz C63 AMG", "Base", "8 Cyl 6.2L"]]
+    for b, pns in (("c300", ["272-154-00-02", "272-150-00-15"]), ("c63_amg", ["272-154-00-02"])):
+        stem = f"2030-{mk}-{b}"
+        out[f"{M}/{stem}-parts"] = page(store_html(
+            {}, f'<a href="/parts-list/{stem}/charging-starting/alternator">x</a>',
+            title=f"2030 Mercedes-Benz {b} Parts - MBPartsGiant.com"))
+        out[f"{M}/parts-list/{stem}/charging-starting/alternator"] = sp_list(
+            [_genuine_row("mercedes-benz", pn, "Alternator", "alternator") for pn in pns])
+    out[f"{P}~alternator~272-154-00-02"] = sp_product("272-154-00-02", "Alternator", rows=rows)
+    out[f"{P}~alternator~272-150-00-15"] = sp_product("272-150-00-15", "Pulley", rows=rows[:1])
     return out

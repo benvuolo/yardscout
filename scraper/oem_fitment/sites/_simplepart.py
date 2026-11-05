@@ -266,17 +266,27 @@ class SimplePart:
                 out[cat] = urls
         return out
 
+    @staticmethod
+    def _year_line(variant: str = "") -> dict:
+        return {"variant": variant, "trim": None, "year_url": None, "catalog": None, "status": None,
+                "final_url": None, "redirected": None, "title": None, "subs": [],
+                "variants": [variant], "variants_read": [variant], "retrieved": None}
+
     def year_manifest(self, make: str, model: str, year: int) -> list[dict]:
         """R2: what the year page offers, re-read from the cache. One line;
         SimplePart has one catalog per model-year (variant "")."""
-        line: dict = {"variant": "", "trim": None, "year_url": None, "catalog": None, "status": None,
-                      "final_url": None, "redirected": None, "title": None, "subs": [],
-                      "variants": [""], "variants_read": [""], "retrieved": None}
         try:
             slug = self.slug(make, model, year)
         except NavError as e:
+            line = self._year_line()
             line["error"] = str(e)
             return [line]
+        return [self.year_manifest_slug(make, slug, year)]
+
+    def year_manifest_slug(self, make: str, slug: str, year: int, variant: str = "") -> dict:
+        """The R2 line for the year page of one catalog model slug, the page
+        categories_for_slug(make, slug, year, ...) reads (cache only)."""
+        line = self._year_line(variant)
         mk = self.url_make.get(make, make.lower())
         url = self.base + self.year_path.format(year=year, make=mk, model=slug)
         stem = f"{year}-{mk}-{slug}"
@@ -284,7 +294,7 @@ class SimplePart:
         d = cached(url)
         if d is None:
             line["error"] = "not_fetched"
-            return [line]
+            return line
         final = d.get("final_url") or url
         line.update(status=d.get("status"), final_url=final, retrieved=d.get("retrieved"),
                     redirected=urllib.parse.urlsplit(final).path != urllib.parse.urlsplit(url).path,
@@ -303,7 +313,7 @@ class SimplePart:
             line["error"] = "redirected"
         elif not line["subs"]:
             line["error"] = "no parts-list links"
-        return [line]
+        return line
 
     # ---- list pages
     def oem_name(self, main: str, aux: str) -> str:
