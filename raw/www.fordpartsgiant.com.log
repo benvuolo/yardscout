@@ -82,3 +82,30 @@
 04:24:39 seg done tier=A Ford Focus [2005, 2007] seeds=[2007] records=1166 errors=3
 04:40:55 seg done tier=A Ford Explorer [2011, 2015] seeds=[2013] records=1275 errors=3
 04:40:55 time budget reached records=1275
+04:41:04 start site=www.fordpartsgiant.com segments=112 tiers=['A', 'B']
+04:41:04 seg done tier=A Ford F-150 [1997, 2003] seeds=[2001] records=1275 errors=3
+04:41:04 seg done tier=A Ford F-150 [2004, 2008] seeds=[2004] records=1275 errors=3
+04:41:04 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=1275 errors=3
+04:41:04 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=1275 errors=3
+04:41:04 seg done tier=A Ford Edge [2007, 2024] seeds=[2013] records=1275 errors=3
+04:41:04 seg done tier=A Ford Fusion [2013, 2016] seeds=[2014] records=1275 errors=3
+04:41:04 seg done tier=A Ford Escape [2008, 2012] seeds=[2008] records=1275 errors=3
+04:41:04 seg done tier=A Ford Escape [2013, 2016] seeds=[2013] records=1275 errors=3
+04:41:04 seg done tier=A Ford Explorer [2002, 2005] seeds=[2002] records=1275 errors=3
+04:41:04 seg done tier=A Ford Taurus [2000, 2007] seeds=[2003] records=1275 errors=3
+04:41:04 seg done tier=A Ford Expedition [2003, 2006] seeds=[2003] records=1275 errors=3
+04:41:04 seg done tier=A Ford Ranger [1998, 2011] seeds=[2000] records=1275 errors=3
+04:41:04 seg done tier=A Ford Fiesta [1978, 2019] seeds=[2011] records=1275 errors=3
+04:41:04 seg done tier=A Ford Focus [2008, 2011] seeds=[2010] records=1275 errors=3
+04:41:04 seg done tier=A Ford F-150 [2009, 2012] seeds=[2010] records=1275 errors=3
+04:41:04 seg done tier=A Ford Fusion [2006, 2009] seeds=[2008] records=1275 errors=3
+04:41:04 seg done tier=A Ford Focus [2015, 2018] seeds=[2015] records=1275 errors=3
+04:41:04 seg done tier=A Ford Expedition [1997, 2002] seeds=[2000] records=1275 errors=3
+04:41:04 seg done tier=A Ford Explorer [2006, 2010] seeds=[2006] records=1275 errors=3
+04:41:04 seg done tier=A Ford Explorer [1995, 2001] seeds=[1999] records=1275 errors=3
+04:41:04 seg done tier=A Ford Focus [2005, 2007] seeds=[2007] records=1275 errors=3
+04:41:04 seg done tier=A Ford Explorer [2011, 2015] seeds=[2013] records=1275 errors=3
+04:47:21 seg done tier=A Ford Mustang [1999, 2004] seeds=[2000] records=1290 errors=3
+04:58:57 seg done tier=A Mercury Grand Marquis [1998, 2011] seeds=[2000, 2008] records=1337 errors=3
+05:07:21 seg done tier=A Ford Expedition [2007, 2017] seeds=[2007] records=1383 errors=3
+05:17:37 time budget reached records=1439
