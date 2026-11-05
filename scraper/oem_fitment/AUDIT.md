@@ -77,6 +77,12 @@ is the TSX deck-lid tail lamp "Lamp Unit, L."; 06388-P5A-505RM is a reman
 compressor "(RMD) (INCLUDES CLUTCH & COIL)", kept because the page lists no
 new number). Jeep 912 records (0 E; the only C is 5143152AA, already on the
 exclude list).
+03:18-03:20 checkpoints: BMW 458, GM 554, Honda 384, Infiniti 819 records;
+0 E. The 128 new C hits (BMW 86, GM 42) repeat patterns already read and
+judged correct: BMW headlights that "do not contain" covers or modules,
+mirrors "w/o glass", trunk-lid/side-panel tail lamps, "Drive for window
+lifter"; GM "(INCLUDES n-m)" assemblies, "DOOR LOCK & SIDE WINDOW" switches.
+Real C: 0.
 
 The auditor's first pass on Honda, Acura and BMW reported 100% E. That was
 the auditor: those modules declare `trim_col` ("Body & Trim") and
