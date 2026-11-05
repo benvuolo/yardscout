@@ -243,15 +243,21 @@ class SimplePart:
     # ---- product pages
     @staticmethod
     def parse_ymm(cell: str) -> dict | None:
-        m = re.match(r"^(\d{4})(?:\s*-\s*(\d{4}))?\s+(.+)$", cell)
+        """"2019-2025 Toyota RAV4" -> years [2019, 2025]. The catalog also prints
+        several spans in one cell ("2011-2016, 2007-2008 Scion tC",
+        "2014, 2010-2011, 2008 Jeep Compass"): `spans` keeps them all, in
+        printed order; `years` is the first span."""
+        m = re.match(r"^(\d{4}(?:\s*-\s*\d{4})?(?:\s*,\s*\d{4}(?:\s*-\s*\d{4})?)*)\s+(\D.*)$", cell)
         if not m:
             return None
-        lo = int(m.group(1))
-        hi = int(m.group(2)) if m.group(2) else lo
-        rest = m.group(3).strip()
+        spans = []
+        for part in m.group(1).split(","):
+            ys = [int(y) for y in re.findall(r"\d{4}", part)]
+            spans.append([ys[0], ys[-1]])
+        rest = m.group(2).strip()
         make = next((mk for mk in TWO_WORD_MAKES if rest.startswith(mk + " ")), None) or rest.split(" ", 1)[0]
         model = rest[len(make):].strip()
-        return {"years": [lo, hi], "make": make, "model": model}
+        return {"years": spans[0], "spans": spans, "make": make, "model": model}
 
     def product(self, product_url: str) -> dict:
         d = get(product_url)
@@ -282,14 +288,21 @@ class SimplePart:
             if not ymm:
                 flags.append(f"unparsed_fitment_row:{raw}")
                 continue
-            f = {**ymm,
-                 "trims": split_list(col.get("Trim", "")),
-                 "engines": split_list(col.get("Engine", "")),
-                 "raw": raw}
+            spans = ymm.pop("spans")
+            base = {**ymm,
+                    "trims": split_list(col.get("Trim", "")),
+                    "engines": split_list(col.get("Engine", "")),
+                    "raw": raw}
             other = {h: v for h, v in col.items() if h not in ("Year Make Model", "Trim", "Engine")}
             if other:
-                f["other_columns"] = other  # e.g. "Important vehicle option details"
-            fitment.append(f)
+                base["other_columns"] = other  # e.g. "Important vehicle option details"
+            # one entry per printed year span (contract: years = [lo, hi]); all
+            # entries of a multi-span cell share `raw` and carry `year_spans`
+            for sp in spans:
+                f = {**base, "years": sp}
+                if len(spans) > 1:
+                    f["year_spans"] = spans
+                fitment.append(f)
         if not fitment:
             flags.append("no_fitment_rows")
         unknown = [h for h in headers if h not in ("Year Make Model", "Trim", "Engine", "Important vehicle option details")]
@@ -304,16 +317,35 @@ class SimplePart:
                 i = lines.index(label)
                 evidence += lines[i:i + 2]
         block: list[str] = []
+        view_more = False
         if top < len(lines):
             for ln in lines[top:]:
                 if ln in ("Warning:", "Customer Questions & Expert Answers") and block:
                     break
+                if ln == "View More":
+                    view_more = True
+                    break
                 block.append(ln)
-        # every JSON cell must be printed, in order, in the rendered block
-        expected = ["Vehicle Fitment"] + headers + [_clean(c) for row in (st.get("fitVehicleList") or []) for c in row if _clean(c)]
-        if block != expected:
+        # The rendered table must equal the store's rows, cell for cell. Long
+        # tables render the first rows then "View More"; the rest of the rows
+        # are in the same page's embedded data and are appended to the
+        # evidence from there (marked by `fitment_rows_rendered`).
+        rows_cells = [[_clean(c) for c in row if _clean(c)] for row in (st.get("fitVehicleList") or [])]
+        head = ["Vehicle Fitment"] + headers
+        body = block[len(head):]
+        flat, rendered = [], 0
+        for rc in rows_cells:
+            if body[len(flat):len(flat) + len(rc)] != rc:
+                break
+            flat += rc
+            rendered += 1
+        if block[:len(head)] != head or len(flat) != len(body) or (rendered < len(rows_cells) and not view_more):
             flags.append("fitment_text_differs_from_store")
         evidence += block
+        if rendered < len(rows_cells) and view_more and "fitment_text_differs_from_store" not in flags:
+            evidence.append("View More")
+            evidence += [c for rc in rows_cells[rendered:] for c in rc]
+        fitment_rendered = rendered
         if len(evidence) > EVIDENCE_CAP:
             flags.append(f"evidence_truncated:{len(evidence)}")
             evidence = evidence[:EVIDENCE_CAP]
@@ -327,6 +359,8 @@ class SimplePart:
             "replaced_by": replaced_by,
             "fitment": fitment,
             "evidence_lines": evidence,
+            "fitment_rows_rendered": fitment_rendered,
+            "fitment_rows_total": len(rows_cells),
             "retrieved": d.get("retrieved"),
         }
         if flags:

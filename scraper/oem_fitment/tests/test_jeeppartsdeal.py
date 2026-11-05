@@ -21,6 +21,7 @@ HEAD = f"{B}/parts-list/2014-jeep-patriot/headlights-lighting/headlamps"
 FRONT = f"{B}/parts-list/2014-jeep-patriot/body-hardware/bumper-components-front"
 P_NEW = f"{B}/oem/mopar~alternatr-engine~4801477ag"
 P_OLD = f"{B}/oem/mopar~alternatr-engine~4801477aa"
+P_SPANS = f"{B}/oem/mopar~engine-starter~56041207ae"
 P_HEAD = f"{B}/oem/mopar~drivers-halogen-headlight-replacement~5303843ae"
 
 checks = 0
@@ -45,7 +46,7 @@ ok(not m("ac-compressor", "Compressor - Air Suspension", ""), "air-suspension co
 ok(J._T.year_url("Jeep", "Grand Cherokee", 2004) == f"{B}/catalog/2004-jeep-grand-cherokee-parts", "slug")
 pure = checks
 
-if not _cacheonly.have([YEAR, ALT, HEAD, FRONT, P_NEW, P_OLD, P_HEAD]):
+if not _cacheonly.have([YEAR, ALT, HEAD, FRONT, P_NEW, P_OLD, P_HEAD, P_SPANS]):
     print(f"OK {pure} pure checks; cached-page checks skipped")
     sys.exit(0)
 
@@ -84,5 +85,9 @@ ok("flags" not in p, p.get("flags"))
 p = J.product(P_HEAD)
 ok(p["position"] == "Front Driver Side" and p["replaces"] == ["5303843AA", "5303843AB", "5303843AD", "5303843AC"], p)
 ok("flags" not in p, p.get("flags"))
+
+p = J.product(P_SPANS)  # "2003-2004, 1999-2000 Jeep Grand Cherokee"
+ok([f["years"] for f in p["fitment"]] == [[2003, 2004], [1999, 2000]], p["fitment"])
+ok(p["fitment"][0]["year_spans"] == [[2003, 2004], [1999, 2000]] and "flags" not in p, p.get("flags"))
 
 print(f"OK {checks} checks ({pure} pure, {checks - pure} on cached pages)")

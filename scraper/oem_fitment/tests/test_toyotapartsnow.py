@@ -22,6 +22,7 @@ ALT = f"{B}/parts-list/2009-toyota-camry/charging-starting/alternator"
 TRUNK = f"{B}/parts-list/2009-toyota-camry/body-hardware/trunk-lid-components"
 P_MIRROR = f"{B}/oem/toyota~mirror-assembly-outer-r~87910-06925"
 P_REMAN = f"{B}/oem/toyota~reman-alternator~27060-0h111-84"
+P_VIEWMORE = f"{B}/oem/toyota~motor-assy-power-window-regulator-front-lh~85720-ae010"
 P_SUPERSEDED = f"{B}/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33660-c0"
 
 checks = 0
@@ -37,8 +38,10 @@ def ok(cond, msg):
 # ---- pure parser checks
 ok(_strip_undefined('{"a":undefined,"b":"undefined","c":[undefined]}') == '{"a":null,"b":"undefined","c":[null]}', "undefined")
 ok(split_list("Base (4WD, FWD), Latitude (4WD, FWD), Sport") == ["Base (4WD, FWD)", "Latitude (4WD, FWD)", "Sport"], "split")
-ok(SimplePart.parse_ymm("2019-2025 Toyota RAV4") == {"years": [2019, 2025], "make": "Toyota", "model": "RAV4"}, "ymm span")
-ok(SimplePart.parse_ymm("2009 Scion xB") == {"years": [2009, 2009], "make": "Scion", "model": "xB"}, "ymm single")
+ok(SimplePart.parse_ymm("2019-2025 Toyota RAV4") == {"years": [2019, 2025], "spans": [[2019, 2025]], "make": "Toyota", "model": "RAV4"}, "ymm span")
+ok(SimplePart.parse_ymm("2009 Scion xB") == {"years": [2009, 2009], "spans": [[2009, 2009]], "make": "Scion", "model": "xB"}, "ymm single")
+ok(SimplePart.parse_ymm("2011-2016, 2007-2008 Scion tC")["spans"] == [[2011, 2016], [2007, 2008]], "ymm multi-span")
+ok(SimplePart.parse_ymm("2014, 2010-2011, 2008 Jeep Compass")["spans"] == [[2014, 2014], [2010, 2011], [2008, 2008]], "ymm 3 spans")
 m = T._T.match
 ok(m("side-mirrors", "Mirror Assembly", "Mirror Assembly Outer Rearview"), "mirror assy")
 ok(not m("side-mirrors", "Mirror Glass", "Mirror Outer, Rear View"), "mirror glass excluded")
@@ -52,7 +55,7 @@ ok(T._T.year_url("Toyota", "Camry Solara", 2003) == f"{B}/catalog/2003-toyota-so
 ok(T._T.year_url("Scion", "xB", 2005) == f"{B}/catalog/2005-scion-xb-parts", "scion url")
 pure = checks
 
-if not _cacheonly.have([YEAR, MIRRORS, ALT, TRUNK, P_MIRROR, P_REMAN, P_SUPERSEDED]):
+if not _cacheonly.have([YEAR, MIRRORS, ALT, TRUNK, P_MIRROR, P_REMAN, P_SUPERSEDED, P_VIEWMORE]):
     print(f"OK {pure} pure checks; cached-page checks skipped")
     sys.exit(0)
 
@@ -101,5 +104,12 @@ f = p["fitment"][0]
 ok(f["trims"] == [] and f["engines"] == ["2.4L L4", "2.5L L4", "3.5L V6"], f)
 ok(f["other_columns"] == {"Important vehicle option details": "2ARFE, 2AZFE, 2AZFXE, 2GRFE; ACV40, AHV40, ASV40, GSV40"}, f)
 ok("flags" not in p, p.get("flags"))
+
+p = T.product(P_VIEWMORE)  # 19-row table: 10 rendered, then "View More"; one multi-span row
+ok(p["fitment_rows_rendered"] == 10 and p["fitment_rows_total"] == 19, (p["fitment_rows_rendered"], p["fitment_rows_total"]))
+ok("View More" in p["evidence_lines"] and "flags" not in p, p.get("flags"))
+tc = [f for f in p["fitment"] if f["model"] == "tC"]
+ok([f["years"] for f in tc] == [[2011, 2013], [2007, 2008]] and tc[0]["raw"] == tc[1]["raw"], tc)
+ok(tc[0]["raw"].startswith("2011-2013, 2007-2008 Scion tC | "), tc[0]["raw"])
 
 print(f"OK {checks} checks ({pure} pure, {checks - pure} on cached pages)")
