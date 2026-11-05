@@ -49,6 +49,8 @@ ok(m("side-mirrors", "Mirror Assy., R. Door *B92P* (HEATED) (NIGHTHAWK BLACK PEA
 ok(H.pick_trims(["4dr_rl-ka5at", "4dr_rl_alaska-ka5at", "4dr_rl_hawaii-ka5at"], want_hybrid=False) == ["4dr_rl-ka5at"], "RL regional trims")
 ok(H.pick_trims(["4dr_base-ka5at", "4dr_base_navigation-ka5at", "4dr_sport-ka6mt"], want_hybrid=False)
    == ["4dr_base-ka5at", "4dr_base_navigation-ka5at"], "acura slug form, automatic first")
+ok(m("climate-control", "Switch Assy., L. Auto Air Conditioner *NH716L* (PREMIUM BLACK METALLIC)")
+   and not m("climate-control", "Knob Assy. A, Driver *NH716L* (PREMIUM BLACK METALLIC)"), "2009+ TL split HVAC panel")
 pure = n
 
 if not _pg_cacheonly.have([MODEL, YEAR, BASE, NAVI, REG, TAIL, P_ALT, P_REG]):

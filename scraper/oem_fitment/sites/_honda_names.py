@@ -100,7 +100,7 @@ RULES = {
                          r"switch|handle|channel|run|glass|sash|cable(?!.*regulator)|knob|cover|bracket|bolt|seal|weatherstrip|holder|guide|stopper|garnish|tape|clip|cushion"),
     "window-switch": (r"^switch\s+assy\.?,\s*power\s+window\s+master|^switch\s+assy\.?,\s*.*\bmaster\b.*power\s+window|^power\s+window\s+master\s+switch",
                       r"panel|base|bezel|cover|knob|lamp|bulb|garnish|passenger|sub\b"),
-    "climate-control": (r"^control\s+(assy|unit|sub-assy)\.?,\s*(heater|auto\s+air\s*con(ditioner)?|air\s*con(ditioner)?|a/?c|automatic\s+air)|^switch\s+assy\.?,\s*(heater|auto\s+air\s*con(ditioner)?|air\s*con(ditioner)?)\s+control|^heater\s+control\s+assy|^control\s+assy\.?,\s*(climate|hvac)",
+    "climate-control": (r"^control\s+(assy|unit|sub-assy)\.?,\s*(heater|auto\s+air\s*con(ditioner)?|air\s*con(ditioner)?|a/?c|automatic\s+air)|^switch\s+assy\.?,\s*(heater|auto\s+air\s*con(ditioner)?|air\s*con(ditioner)?)\s+control|^heater\s+control\s+assy|^switch\s+assy\.?,\s*[rl]\.\s*auto\s+air\s+conditioner\b|^control\s+assy\.?,\s*(climate|hvac)",
                         r"rear|panel|knob|cable|lever|lamp|bulb|sensor|motor|servo|button|bezel|garnish|harness|bracket|base|blower|unit,\s*blower|display|cover|wire|switch,\s*sub"),
     "fuel-pump-module": (r"^module\s+(set|assy)\.?,\s*fuel\s+pump|^pump\s+(set|assy|unit)\.?,\s*fuel(?!\s+(pump\s+)?(cover|filter))|^fuel\s+pump(\s+(assy|module|set))?\b|^pump,\s*fuel",
                          r"filter|regulator|gauge|sender|meter|strainer|nut|gasket|seal|ring|relay|resistor|cover|harness|cushion|holder|band|cap|tube|hose|clip|stay|bracket|kit,\s*(filter|seal)|insulator"),
