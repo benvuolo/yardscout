@@ -6,3 +6,12 @@
 01:42:30 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015, 1997] records=336 errors=2
 01:52:58 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=477 errors=2
 01:52:58 time budget reached records=477
+01:53:06 start site=www.moparpartsgiant.com segments=64 tiers=['A', 'B']
+01:53:06 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=477 errors=2
+01:53:06 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=477 errors=2
+01:53:06 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=477 errors=2
+01:53:06 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=477 errors=2
+02:01:43 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=588 errors=2
+02:05:28 net-fail product https://www.moparpartsgiant.com/parts/mopar-compres0r-air-conditioning~55111035aa.html: network error after 3 tries: ReadTimeout
+02:13:57 seed A|Chrysler|300|2006 had network failures; left open for retry
+02:18:02 STOPPED: www.moparpartsgiant.com refused or challenged (HTTP 403); domain stopped for this program
