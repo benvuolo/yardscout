@@ -982,3 +982,175 @@
 20:39:29 chain-unlinked bumper-rear 1 numbers named by 117-880-43-01-9999, no catalog link: 117-885-93-00-9999
 20:39:29 chain-unlinked bumper-rear 1 numbers named by 117-880-45-01-9999, no catalog link: 117-885-94-00-9999
 20:40:24 time budget reached records=1539
+20:40:27 start site=www.mbpartsgiant.com mode=worklist tiers=['A', 'B'] records=1539 list_lines=126 year_lines=14 url_index=1332
+20:40:27 seg done tier=A Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz 300 [1960, 1993] seeds=[1992] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz GL450 [2007, 2015] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz ML320 [1998, 2009] seeds=[2000] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz C240 [2001, 2005] seeds=[2003] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CLK [1999, 2009] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz R-Class [2006, 2012] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz S550 [2007, 2013] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz SLK [1998, 2008] seeds=[2001] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz SLK-Class [1998, 2013] seeds=[1998] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CLK320 [1998, 2005] seeds=[2005] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz S500 [1995, 2006] seeds=[2001] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CLS-Class [2006, 2012] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz C350 [2006, 2015] seeds=[2008] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz GLK350 [2010, 2014] seeds=[2011] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz S430 [2000, 2006] seeds=[2002] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz GLK-Class [2010, 2015] seeds=[2010] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CLA-Class [2014, 2021] seeds=[2014] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CLK430 [1999, 2003] seeds=[2002] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz R350 [2006, 2012] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CLA250 [2014, 2019] seeds=[2014] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz ML500 [2002, 2006] seeds=[2003] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz C320 [2001, 2011] seeds=[2002] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz SL-Class [1992, 2015] seeds=[2003] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CL-Class [1999, 2010] seeds=[2002] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz E500 [2003, 2006] seeds=[2004] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz Sprinter 2500 [2010, 2016] seeds=[2012] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CLK350 [2006, 2009] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz 190 [1964, 1993] seeds=[1991] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz SLK230 [1998, 2003] seeds=[2002] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz 300-Class [1981, 1991] seeds=[1987] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz CLS550 [2007, 2014] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz C280 [1975, 2007] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=A Mercedes-Benz 300E [1986, 1992] seeds=[1988] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz 300 [1960, 1993] seeds=[1992] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz GL450 [2007, 2015] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz ML320 [1998, 2009] seeds=[2000] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz C240 [2001, 2005] seeds=[2003] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz CLK [1999, 2009] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz R-Class [2006, 2012] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz S550 [2007, 2013] seeds=[2007] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz SLK [1998, 2008] seeds=[2001] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz SLK-Class [1998, 2013] seeds=[1998] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz CLK320 [1998, 2005] seeds=[2005] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz S500 [1995, 2006] seeds=[2001] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz CLS-Class [2006, 2012] seeds=[2006] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz C350 [2006, 2015] seeds=[2008] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz GLK350 [2010, 2014] seeds=[2011] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz S430 [2000, 2006] seeds=[2002] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz GLK-Class [2010, 2015] seeds=[2010] records=1539 errors=11
+20:40:27 seg done tier=B Mercedes-Benz CLA-Class [2014, 2021] seeds=[2014] records=1539 errors=11
+20:40:41 chain-unlinked gauge-cluster 1 numbers named by 208-540-41-11, no catalog link: 208-540-41-11-80
+20:40:57 chain-unlinked radiator 1 numbers named by 202-500-78-03, no catalog link: 202-500-78-03-64
+20:41:05 chain-unlinked hood 2 numbers named by 208-880-02-57-28, no catalog link: 208-880-02-57, 208-880-02-57-64
+20:41:28 chain-unlinked bumper-rear 1 numbers named by 6-6-03-6022, no catalog link: 208-885-04-25
+20:41:37 chain-unlinked grille 1 numbers named by 208-880-00-85-9040, no catalog link: 208-880-00-85
+20:41:45 chain-unlinked trunk-lid 1 numbers named by 208-750-02-75-28, no catalog link: 208-750-02-75
+20:41:45 chain-unlinked trunk-lid 2 numbers named by 208-750-05-75-28, no catalog link: 208-750-09-75, 208-750-05-75
+20:44:25 seg done tier=B Mercedes-Benz CLK430 [1999, 2003] seeds=[2002, 2001, 2000] records=1539 errors=11
+20:44:40 chain-unlinked gauge-cluster 3 numbers named by 251-440-11-11, no catalog link: 251-540-80-47, 251-540-17-48, 251-540-97-47
+20:44:40 chain-unlinked gauge-cluster 1 numbers named by 251-540-21-48, no catalog link: 251-540-84-47
+20:44:40 chain-unlinked gauge-cluster 1 numbers named by 251-540-29-48, no catalog link: 251-540-92-47
+20:44:57 chain-unlinked radiator 2 numbers named by 251-500-06-03, no catalog link: 251-500-00-03, 251-500-04-03
+20:45:05 chain-unlinked hood 1 numbers named by 251-880-01-57, no catalog link: 251-880-00-57
+20:45:22 chain-unlinked bumper-front 1 numbers named by 251-885-06-25-9999, no catalog link: 251-885-06-25
+20:45:22 chain-unlinked bumper-front 1 numbers named by 251-885-07-25-9999, no catalog link: 251-885-07-25
+20:45:22 chain-unlinked bumper-front 1 numbers named by 251-885-13-25-9999, no catalog link: 251-885-13-25
+20:45:22 chain-unlinked bumper-front 1 numbers named by 251-885-14-25-9999, no catalog link: 251-885-14-25
+20:45:22 chain-unlinked bumper-front 1 numbers named by 251-885-16-25-9999, no catalog link: 251-885-16-25
+20:45:22 chain-unlinked bumper-front 1 numbers named by 251-885-17-25-9999, no catalog link: 251-885-17-25
+20:45:29 chain-unlinked bumper-rear 1 numbers named by 251-885-00-25-9999, no catalog link: 251-885-00-25
+20:45:29 chain-unlinked bumper-rear 1 numbers named by 251-885-03-25-9999, no catalog link: 251-885-03-25
+20:45:29 chain-unlinked bumper-rear 1 numbers named by 251-885-10-25-9999, no catalog link: 251-885-10-25
+20:45:29 chain-unlinked bumper-rear 1 numbers named by 251-885-19-25-9999, no catalog link: 251-885-19-25
+20:46:01 chain-unlinked gauge-cluster 1 numbers named by 251-440-55-47, no catalog link: 251-900-65-00
+20:46:01 chain-unlinked gauge-cluster 12 numbers named by 251-900-59-00, no catalog link: 251-900-59-00-80, 164-540-70-48, 164-540-99-47, 164-540-56-47, 164-900-82-00, 164-540-32-47, 164-900-78-00, 164-540-40-47, 164-540-88-47, 164-540-48-47, 164-540-55-48, 251-900-23-00
+20:46:01 chain-unlinked gauge-cluster 1 numbers named by 251-900-29-00, no catalog link: 251-900-65-00
+20:46:01 chain-unlinked gauge-cluster 1 numbers named by 251-900-37-00, no catalog link: 251-900-65-00
+20:46:17 chain-unlinked radiator 4 numbers named by 251-500-07-03, no catalog link: 251-500-03-03, 251-500-05-03, 251-500-01-03, 164-500-07-03
+20:47:05 chain-unlinked liftgate 1 numbers named by 251-740-07-05, no catalog link: 251-740-05-05
+20:48:25 seg done tier=B Mercedes-Benz R350 [2006, 2012] seeds=[2006, 2010, 2009] records=1539 errors=11
+20:49:45 seg done tier=B Mercedes-Benz CLA250 [2014, 2019] seeds=[2014, 2017, 2018] records=1539 errors=11
+20:50:17 chain-unlinked radiator 1 numbers named by 163-500-00-03, no catalog link: 163-500-04-04
+20:51:45 chain-unlinked bumper-front 10 numbers named by 163-880-50-70, no catalog link: 163-880-12-70-3567, 163-880-12-70-5366, 163-880-12-70-9744, 163-880-12-70-8486, 163-880-12-70-1693, 163-880-12-70-9189, 163-880-12-70-6272, 163-880-40-70, 163-880-11-70-8486, 163-880-11-70-9189
+20:51:45 chain-unlinked bumper-front 9 numbers named by 163-880-49-70, no catalog link: 163-880-07-70-6272, 163-880-07-70-9040, 163-880-07-70-9744, 163-880-07-70-8486, 163-880-07-70-1693, 163-880-07-70-3567, 163-880-07-70-9189, 163-880-42-70, 163-880-07-70-5366
+20:52:09 chain-unlinked bumper-rear 1 numbers named by 163-880-70-71, no catalog link: 163-880-69-71
+20:52:09 chain-unlinked bumper-rear 1 numbers named by 163-880-72-71, no catalog link: 163-880-71-71
+20:52:09 chain-unlinked bumper-rear 19 numbers named by 163-880-77-71, no catalog link: 163-880-10-71-9744, 163-880-09-71-8486, 163-880-10-71-3567, 163-880-53-71, 163-880-09-71-1693, 163-880-09-71-3567, 163-880-07-71-8486, 163-880-09-71-9189, 163-880-50-71, 163-880-07-71-6272, 163-880-10-71-6272, 163-880-52-71, 163-880-09-71-9040, 163-880-09-71-9744, 163-880-10-71-9189, 163-880-07-71-3567, 163-880-07-71-1693, 163-880-07-71-9189, 163-880-09-71-5366
+20:52:17 chain-unlinked grille 2 numbers named by 6-6-88-0351, no catalog link: 163-880-10-85, 163-880-02-85
+20:52:33 chain-unlinked liftgate 2 numbers named by 163-740-12-05, no catalog link: 163-740-02-05, 163-740-05-05
+20:53:12 chain-unlinked hood 2 numbers named by 164-880-05-57-64, no catalog link: 164-880-05-57, 164-880-00-57
+20:53:22 chain-unlinked fender 1 numbers named by 164-881-01-01-64, no catalog link: 164-881-01-01
+20:53:22 chain-unlinked fender 1 numbers named by 164-881-02-01-64, no catalog link: 164-881-02-01
+20:53:29 chain-unlinked bumper-front 1 numbers named by 164-885-43-25-9999, no catalog link: 164-885-43-25
+20:53:29 chain-unlinked bumper-front 1 numbers named by 164-885-44-25-9999, no catalog link: 164-885-44-25
+20:53:29 chain-unlinked bumper-front 1 numbers named by 164-885-45-25-9999, no catalog link: 164-885-45-25
+20:53:29 chain-unlinked bumper-front 1 numbers named by 164-885-46-25-9999, no catalog link: 164-885-46-25
+20:53:29 chain-unlinked bumper-front 4 numbers named by 164-880-45-04-9999, no catalog link: 164-885-06-25-9999, 164-885-06-25, 164-885-08-25-9999, 164-885-08-25
+20:53:29 chain-unlinked bumper-front 4 numbers named by 164-880-49-04-9999, no catalog link: 164-885-12-25-9999, 164-885-10-25, 164-885-12-25, 164-885-10-25-9999
+20:53:37 chain-unlinked bumper-rear 2 numbers named by 164-880-57-04-9999, no catalog link: 164-885-23-25, 164-885-23-25-9999
+20:53:37 chain-unlinked bumper-rear 2 numbers named by 164-880-58-04-9999, no catalog link: 164-885-42-25-9999, 164-885-42-25
+20:53:37 chain-unlinked bumper-rear 1 numbers named by 164-885-00-25-9999, no catalog link: 164-885-00-25
+20:53:37 chain-unlinked bumper-rear 1 numbers named by 164-885-41-25-9999, no catalog link: 164-885-41-25
+20:53:44 chain-unlinked grille 1 numbers named by 6-6-88-0354, no catalog link: 164-880-08-85-9776
+20:53:52 chain-unlinked liftgate 1 numbers named by 164-740-14-05, no catalog link: 164-740-15-05-64
+20:53:52 chain-unlinked liftgate 1 numbers named by 164-740-15-05, no catalog link: 164-740-15-05-64
+20:53:52 seg done tier=B Mercedes-Benz ML500 [2002, 2006] seeds=[2003, 2006] records=1550 errors=11
+20:54:25 chain-unlinked radiator 3 numbers named by 203-500-05-03, no catalog link: 203-500-03-03, 203-500-10-03-64, 203-500-10-03
+20:54:33 chain-unlinked hood 1 numbers named by 203-880-01-57-28, no catalog link: 203-880-01-57
+20:54:41 chain-unlinked fender 2 numbers named by 203-880-01-18-67, no catalog link: 203-880-01-18, 203-880-07-18
+20:54:41 chain-unlinked fender 3 numbers named by 203-880-02-18-67, no catalog link: 203-880-02-18, 203-880-02-18-05, 203-880-08-18
+20:54:50 chain-unlinked bumper-front 1 numbers named by 203-885-00-25, no catalog link: 203-885-00-25-67
+20:54:50 chain-unlinked bumper-front 1 numbers named by 203-885-14-25, no catalog link: 203-885-14-25-67
+20:54:50 chain-unlinked bumper-front 1 numbers named by 203-885-15-25, no catalog link: 203-885-15-25-67
+20:54:57 chain-unlinked bumper-rear 3 numbers named by 203-885-08-25, no catalog link: 203-885-38-25-9999, 203-885-08-25-67, 203-885-08-25-27
+20:54:57 chain-unlinked bumper-rear 1 numbers named by 203-885-09-25-27, no catalog link: 203-885-09-25
+20:54:57 chain-unlinked bumper-rear 1 numbers named by 203-885-10-25-27, no catalog link: 203-885-10-25
+20:54:57 chain-unlinked bumper-rear 2 numbers named by 203-885-16-25-27, no catalog link: 203-885-16-25, 203-885-39-25-9999
+20:55:05 chain-unlinked grille 3 numbers named by 203-880-01-23-7D11, no catalog link: 203-880-04-83, 203-880-04-83-7D11, 203-880-01-23
+20:55:05 chain-unlinked grille 1 numbers named by 203-880-02-23-7246, no catalog link: 203-880-01-83-7246
+20:55:05 chain-unlinked grille 1 numbers named by 203-880-02-23-9040, no catalog link: 203-880-01-83-9040
+20:55:13 chain-unlinked trunk-lid 3 numbers named by 203-750-06-75-67, no catalog link: 203-750-04-75, 203-750-06-75, 203-750-01-75
+20:55:21 chain-unlinked liftgate 1 numbers named by 203-740-05-05, no catalog link: 203-740-01-05
+20:55:28 nav-fail Mercedes-Benz C320 2007: NavError: HTTP 404 for https://www.mbpartsgiant.com/2007-mercedes_benz-c320-parts
+20:55:28 seg done tier=B Mercedes-Benz C320 [2001, 2011] seeds=[2002, 2007] records=1550 errors=12
+20:57:29 chain-unlinked gauge-cluster 1 numbers named by 230-540-50-48-80, no catalog link: 230-540-50-48
+20:58:17 chain-unlinked radiator 2 numbers named by 230-500-03-03-64, no catalog link: 230-500-03-03, 220-500-23-03
+20:58:41 chain-unlinked radiator 1 numbers named by 220-500-20-03, no catalog link: 220-500-20-03-64
+20:58:57 chain-unlinked hood 2 numbers named by 230-880-03-57, no catalog link: 230-880-00-57, 230-880-03-57-28
+21:00:01 chain-unlinked bumper-front 1 numbers named by 230-885-03-25, no catalog link: 230-880-37-70
+21:00:01 chain-unlinked bumper-front 2 numbers named by 230-885-05-25, no catalog link: 230-880-38-70-9999, 230-880-38-70
+21:01:53 chain-unlinked trunk-lid 1 numbers named by 230-750-06-75, no catalog link: 230-750-06-75-28
+21:02:57 chain-unlinked gauge-cluster 1 numbers named by 230-540-60-11, no catalog link: 230-540-15-47
+21:03:37 chain-unlinked ignition-coils 5 numbers named by 275-150-00-00, no catalog link: 275-150-04-80, 275-150-06-80, 275-150-06-80-80, 000-150-20-80, 000-150-10-80
+21:03:37 chain-unlinked ignition-coils 5 numbers named by 275-150-01-00, no catalog link: 275-150-07-80, 275-150-07-80-80, 275-150-05-80, 000-150-11-80, 000-150-21-80
+21:10:41 chain-unlinked bumper-front 1 numbers named by 230-880-51-70-9999, no catalog link: 230-885-08-25
+21:12:33 seg done tier=B Mercedes-Benz SL-Class [1992, 2015] seeds=[2003, 2004, 2005] records=1577 errors=12
+21:12:33 time budget reached records=1577
