@@ -1,0 +1,11 @@
+01:40:48 start site=www.bmwpartsdeal.com segments=44 tiers=['A', 'B']
+01:47:33 nav-fail BMW 328i 2002: ValueError: no 2002 catalog for BMW 328i (bmw-['328i'])
+01:47:33 seg done tier=A BMW 328i [1995, 2016] seeds=[2011, 2002] records=72 errors=1
+01:50:21 nav-fail BMW 325i 1997: ValueError: no 1997 catalog for BMW 325i (bmw-['325i'])
+01:50:21 seg done tier=A BMW 325i [1988, 2006] seeds=[2006, 1997] records=99 errors=2
+01:54:57 seg done tier=A BMW X5 [2007, 2013] seeds=[2008] records=145 errors=2
+01:57:45 seg done tier=A BMW X3 [2004, 2010] seeds=[2006] records=174 errors=2
+02:01:33 nav-fail BMW 528i 1996: ValueError: no 1996 catalog for BMW 528i (bmw-['528i'])
+02:01:33 seg done tier=A BMW 528i [1979, 2016] seeds=[2008, 1996] records=217 errors=3
+02:11:43 seg done tier=A BMW X5 [2000, 2006] seeds=[2005] records=297 errors=3
+02:11:43 time budget reached records=297
