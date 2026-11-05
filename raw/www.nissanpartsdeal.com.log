@@ -1,0 +1,8 @@
+01:13:05 start site=www.nissanpartsdeal.com segments=43 tiers=['A', 'B']
+01:21:09 seg done tier=A Nissan Altima [2013, 2015] seeds=[2013] records=93 errors=0
+01:24:37 seg done tier=A Nissan Altima [2010, 2012] seeds=[2012] records=118 errors=0
+01:29:21 seg done tier=A Nissan Altima [2007, 2009] seeds=[2008] records=162 errors=0
+01:32:53 seg done tier=A Nissan Sentra [2013, 2015] seeds=[2014] records=201 errors=0
+01:36:37 seg done tier=A Nissan Rogue [2011, 2013] seeds=[2013] records=243 errors=0
+01:44:38 seg done tier=A Nissan Xterra [2000, 2015] seeds=[2004, 2010] records=332 errors=0
+01:44:38 time budget reached records=332
