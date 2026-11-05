@@ -37,23 +37,35 @@ jobs:
     env:
       ENT_ADMIN_SECRET: ${{ secrets.ENT_ADMIN_SECRET }}
     steps:
+      # This repo is public, so its run logs are too. The email is read from
+      # the event file (never interpolated into a command or env header) and
+      # masked before anything can print it; the response is reduced to a
+      # status line.
+      - name: Mask the email
+        run: |
+          set -euo pipefail
+          EMAIL=$(jq -r '.inputs.email // ""' "$GITHUB_EVENT_PATH")
+          test -n "$EMAIL" || { echo "::error::email input missing"; exit 1; }
+          echo "::add-mask::$EMAIL"
+          echo "::add-mask::$(printf '%s' "$EMAIL" | tr '[:upper:]' '[:lower:]')"
+          { echo "IN_EMAIL<<__EOF__"; echo "$EMAIL"; echo "__EOF__"; } >> "$GITHUB_ENV"
       - name: Grant
         run: |
           set -euo pipefail
           test -n "$ENT_ADMIN_SECRET" || { echo "::error::ENT_ADMIN_SECRET secret missing"; exit 1; }
           python3 - <<'PY'
           import json, os, urllib.request
-          body = {"email": os.environ["IN_EMAIL"], "note": os.environ["IN_NOTE"], "revoke": os.environ["IN_REVOKE"] == "true"}
-          if os.environ["IN_MONTHS"].strip(): body["months"] = int(os.environ["IN_MONTHS"])
+          ev = json.load(open(os.environ["GITHUB_EVENT_PATH"]))["inputs"]
+          body = {"email": os.environ["IN_EMAIL"], "note": ev.get("note") or "owner comp",
+                  "revoke": str(ev.get("revoke")).lower() == "true"}
+          months = str(ev.get("months") or "").strip()
+          if months: body["months"] = int(months)
           req = urllib.request.Request("https://yardscout-api.yardscout.workers.dev/v1/admin/ent/grant", data=json.dumps(body).encode(),
                                        headers={"content-type": "application/json", "x-ent-admin": os.environ["ENT_ADMIN_SECRET"], "user-agent": "YardScout-GrantPro/1.0 (+https://yardscout.io; GitHub Actions)"}, method="POST")
           try:
-              with urllib.request.urlopen(req, timeout=30) as r: print(r.read().decode())
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  d = json.loads(r.read().decode())
+                  print(f"ok={d.get('ok')} pro={d.get('pro')} expiresAt={d.get('expiresAt')} source={d.get('source')}")
           except urllib.error.HTTPError as e:
-              print("::error::", e.code, e.read().decode()); raise SystemExit(1)
+              print("::error::grant failed, HTTP", e.code); raise SystemExit(1)
           PY
-        env:
-          IN_EMAIL: ${{ github.event.inputs.email }}
-          IN_MONTHS: ${{ github.event.inputs.months }}
-          IN_NOTE: ${{ github.event.inputs.note }}
-          IN_REVOKE: ${{ github.event.inputs.revoke }}
