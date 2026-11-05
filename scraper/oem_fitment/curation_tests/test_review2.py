@@ -157,4 +157,109 @@ check("F10 2005's list manifests pointing at the 2004 pages never close 2005",
       "list_manifest_bad" in cur.cells_info[(S05, WR)]["closure"] and verified(doc) == [],
       str(cur.cells_info[(S05, WR)]["closure"]))
 
+# ------------------------------------------------------------------ F4
+TC_ENG = ["4 Cyl 2.4 L GAS"]
+STA = confirmed((TOY, "alternator"), policy_sha=PSHA)
+
+
+def tc_files(alt_trims, extra=()):
+    recs = [toyota_record("27060-28S01", "alternator", ("Scion", "tC", 2006), "charging-starting/alternator",
+                          "Alternator", "Alternator Assembly", None, [(2005, 2010, "Scion", "tC", alt_trims, TC_ENG)])]
+    for pn, cat, sub, name, aux in extra:
+        recs.append(toyota_record(pn, cat, ("Scion", "tC", 2006), sub, name, aux, None,
+                                  [(2005, 2010, "Scion", "tC", ["Base"], TC_ENG)]))
+    lists, ys = [], []
+    for y in (2006, 2007):
+        seed = ("Scion", "tC", y)
+        ys.append(year_manifest(TOY, seed, f"{y} Scion tC Parts", ["charging-starting/alternator"], ["Base", "Spec"],
+                                TC_ENG))
+        lists.append(list_manifest(TOY, seed, "alternator", "charging-starting/alternator",
+                                   [("27060-28S01", "Alternator", "Alternator Assembly", [], [], True, None)]))
+    return {f"raw/{TOY}.jsonl": recs, f"raw/{TOY}.lists.jsonl": lists, f"raw/{TOY}.years.jsonl": ys}
+
+
+STARTERS = [(f"28100-28S0{i}", "starter", "charging-starting/starter", "Starter", "Starter Assembly") for i in range(1, 5)]
+cur, doc = run("toyota", tc_files(["Base", "Spec"]), status_table=STA)
+check("F4 control: an alternator listing every year-page trim attaches (vg toyota-2az, tC 2006-2007)",
+      [(g["family"], g["spans"]) for g in doc["vg"]] == [("toyota-2az", [["Scion", "tC", 2006, 2007]])])
+cur, doc = run("toyota", tc_files(["Base"], STARTERS), status_table=STA)
+TC06 = ("Scion", "tC", 2006)
+check("F4 Base-only engine rows never drop the year page's Spec trim: no vg for a Base-only alternator",
+      doc["vg"] == [] and cur._trimu_f(TC06, frozenset({(4, 2.4, "gas")})) == cur.trimu[TC06],
+      str([(g["family"], g["spans"]) for g in doc["vg"]]))
+# the slice still narrows where the evidence ties a trim to another engine
+# alone, with an attested slice (5 records, 3 categories)
+CAM = ("Toyota", "Camry", 2005)
+E24, E30 = "4 Cyl 2.4 L GAS", "6 Cyl 3.0 L GAS"
+recs = []
+for i, cat in enumerate(["alternator", "starter", "headlights", "alternator", "starter"]):
+    nm = {"alternator": "Alternator", "starter": "Starter", "headlights": "Headlamp"}[cat]
+    recs.append(toyota_record(f"9000{i}-24S0{i}", cat, CAM, "x/y", nm, f"{nm} Assembly",
+                              "Driver Side" if cat == "headlights" else None,
+                              [(2005, 2005, "Toyota", "Camry", ["LE", "XLE"], [E24])]))
+recs.append(toyota_record("90009-30S09", "starter", CAM, "x/y", "Starter", "Starter Assembly", None,
+                          [(2005, 2005, "Toyota", "Camry", ["SE"], [E30])]))
+check("F4 fixture: every slicing record is verified", all(not r.problems for r in run("toyota", {
+    f"raw/{TOY}.jsonl": recs})[0].records))
+cur, doc = run("toyota", {f"raw/{TOY}.jsonl": recs, f"raw/{TOY}.years.jsonl": [
+    year_manifest(TOY, CAM, "2005 Toyota Camry Parts", ["charging-starting/alternator"], ["LE", "SE", "XLE"],
+                  [E24, E30])]})
+tf = cur._trimu_f(CAM, frozenset({(4, 2.4, "gas")}))
+check("F4 an attested 2.4 slice drops only SE, seen on 3.0-only rows and never with a 2.4",
+      tf == frozenset({("le", ""), ("xle", "")}) and cur.trimu[CAM] == frozenset({("le", ""), ("se", ""), ("xle", "")}),
+      str(sorted(tf)))
+recs = copy.deepcopy(recs)
+recs[0]["fitment"][0]["trims"] = ["LE", "SE", "XLE"]
+recs[0]["fitment"][0]["raw"] = recs[0]["fitment"][0]["raw"].replace("| LE, XLE |", "| LE, SE, XLE |")
+recs[0]["evidence_lines"] = ["LE, SE, XLE" if x == "LE, XLE" else x for x in recs[0]["evidence_lines"]]
+cur, doc = run("toyota", {f"raw/{TOY}.jsonl": recs, f"raw/{TOY}.years.jsonl": [
+    year_manifest(TOY, CAM, "2005 Toyota Camry Parts", ["charging-starting/alternator"], ["LE", "SE", "XLE"],
+                  [E24, E30])]})
+check("F4 a trim seen once beside a 2.4 is never dropped from the 2.4 slice",
+      cur._trimu_f(CAM, frozenset({(4, 2.4, "gas")})) == cur.trimu[CAM] and all(not r.problems for r in cur.records),
+      str(sorted(cur._trimu_f(CAM, frozenset({(4, 2.4, "gas")})))))
+cur, doc = run("toyota", {f"raw/{TOY}.jsonl": recs[2:], f"raw/{TOY}.years.jsonl": [
+    year_manifest(TOY, CAM, "2005 Toyota Camry Parts", ["charging-starting/alternator"], ["LE", "SE", "XLE"],
+                  [E24, E30])]})
+check("F4 below the attestation threshold (3 records in the 2.4 slice) nothing is sliced",
+      cur._trimu_f(CAM, frozenset({(4, 2.4, "gas")})) == cur.trimu[CAM])
+
+# ------------------------------------------------------------------ F8
+OLDE = "6 Cyl 3.3 L GAS, 6 Cyl 3.5 L GAS"
+f = sienna_fixture()
+for rec in f[f"raw/{TOY}.jsonl"]:
+    for fr in rec["fitment"]:
+        fr["engines"] = ["6 Cyl 3.3 L GAS"]
+        fr["raw"] = fr["raw"].replace(OLDE, "6 Cyl 3.3 L GAS")
+    rec["evidence_lines"] = ["6 Cyl 3.3 L GAS" if x == OLDE else x for x in rec["evidence_lines"]]
+cur, doc = run("toyota", f, status_table=ST)
+check("F8 the year page's 3.5 L is in EngineU although no row prints it",
+      cur.engineu[S04] == frozenset({(6, 3.3, "gas"), (6, 3.5, "gas")}) and cur.engineu_src[S04] == "year_page",
+      str(cur.engineu.get(S04)))
+check("F8 so parts printed for the 3.3 L only are never 'every trim and engine' (no Verified)",
+      verified(doc, WR) == [] and all(m["cover"] == "maybe" for m in cur.cells_info[(S04, WR)]["members"].values()))
+f = sienna_fixture()
+for ym in f[f"raw/{TOY}.years.jsonl"]:
+    ym["engines"] = []
+cur, doc = run("toyota", f, status_table=ST)
+check("F8 without year-page engines a row-derived EngineU needs the TrimU attestation (8 records, 1 category: no)",
+      cur.engineu_src[S04] == "unattested" and verified(doc, WR) == []
+      and all("engines_unattested" in m["why"] for m in cur.cells_info[(S04, WR)]["members"].values()))
+
+# ------------------------------------------------------------------ F9
+f = sienna_fixture()
+for lm in f[f"raw/{TOY}.lists.jsonl"]:
+    if lm["seed"]["year"] == 2005 and lm["list_url"].endswith("front-door-body"):
+        lm["rows"].append({"pn": "69802-08S01", "section": "other", "main": "Regulator Sub-Assy, Front Door Window, LH",
+                           "aux": "", "extra": [{"name": "Part Notes", "desc": "Japan Built"}], "replace": None,
+                           "url": "/oem/toyota~part~69802-08s01", "matched": False, "excluded_by": "include_miss",
+                           "product": None})
+cur, doc = run("toyota", f, status_table=ST)
+m = cur.cells_info[(S05, WR)]["members"]["toyota:6980208S01"]
+check("F9 a second, unmatched row of the same number on T's page carries its note ('Japan Built'): cover maybe",
+      m["cover"] == "maybe" and "conditional_notes:plant" in m["why"] and "Japan Built" in m["page"][1],
+      str(m["why"]))
+check("F9 'on page' stays tied to the matched row", m["page"][0] is True)
+check("F9 and nothing ships Verified", verified(doc, WR) == [])
+
 done("test_review2")

@@ -47,7 +47,7 @@ STAGES = ["unmapped", "no_records", "not_closed", "split", "conditional", "chain
 # cover reasons a closing crawl removes (own-page notes and listing from R1,
 # the year-page trim list from R2); assumed clean ONLY in the optimistic
 # ranking of the completion worklist (§10.4), never for any claim
-OPTIMISTIC_WHY = {"notes_not_own_page", "fitted_not_listed", "trims_unattested"}
+OPTIMISTIC_WHY = {"notes_not_own_page", "fitted_not_listed", "trims_unattested", "engines_unattested"}
 CLOSURE_REASONS = ["no_year_manifest", "year_manifest_bad", "variant_unread", "no_list_manifest",
                    "list_manifest_bad", "unread_sibling_page", "unverified_product", "suspect_variant",
                    "uncrawled_chain_member", "chain_fitment_inconsistent", "stale", "unattested",
@@ -371,7 +371,11 @@ class Curation:
         rows = [lr for lr in self.t_list_rows.get((T, cat), []) if policy.pn_key(self.ns, lr.pn) == c.key]
         if self.t_list_rows.get((T, cat)):
             on = [lr for lr in rows if lr.matched]
-            notes = [n for lr in on for n in lr.notes]
+            # §5.6: T's own manifest rows for that pn, matched or not: a second
+            # row of the same number on T's page ('Japan Built') restricts it
+            # even when the crawler did not match that row (review F9).
+            # 'On page' stays tied to matched rows.
+            notes = [n for lr in rows for n in lr.notes]
             src = [("location", x) for lr in on for x in lr.locations] + [("slug", lr.list_url) for lr in on]
             src += [("note", n) for n in self.note_position_texts(notes, T)]     # §5.8
             return bool(on), notes, src, [lr.pointer for lr in on], "manifest"
@@ -402,6 +406,7 @@ class Curation:
     # ------------------------------------------------------ 5.7 universes
     def universes(self):
         self.trimu, self.trimu_src, self.engineu, self.trimu_by_engine = {}, {}, {}, {}
+        self.engineu_src = {}
         rows_by_T = defaultdict(list)
         for (T, cat), lst in self.t_rows.items():
             for c, r, f, t in lst:
@@ -431,10 +436,24 @@ class Curation:
                 else:
                     self.trimu[T], self.trimu_src[T] = frozenset(atoms), "unattested"
             eng = set()
+            reliable = [(cat, r) for cat, c, r, f, t in good if self.reliable.get(r.site)]
             for cat, c, r, f, t in good:
                 if self.reliable.get(r.site):
                     eng |= f.engine_keys()
+            # review F8: the year page's engine list (R2) is part of EngineU,
+            # so an engine no crawled row prints still has to be covered (an
+            # unparsed one fails every universe test, §5.5). Without it, a
+            # row-derived EngineU must be attested like TrimU (§5.7).
+            ye = [ym for ym in self.t_years.get(T, []) if ym.engines and _status_ok(ym.status) and not ym.error]
+            eng |= {A.engine_key(e) for ym in ye for e in ym.engines}
             self.engineu[T] = frozenset(eng)
+            if ye:
+                self.engineu_src[T] = "year_page"
+            elif len({(r.site, r.line) for _, r in reliable}) >= policy.TRIMU_MIN_RECORDS and \
+                    len({cat for cat, _ in reliable}) >= policy.TRIMU_MIN_CATS and eng:
+                self.engineu_src[T] = "fitment"
+            else:
+                self.engineu_src[T] = "unattested"
 
     # --------------------------------------------------- 5.9 supersession
     def build_graph(self):
@@ -507,6 +526,8 @@ class Curation:
         tu = self.trimu.get(T, frozenset()) if trim_u is None else trim_u
         if self.trimu_src.get(T) == "unattested" and T not in self.o.trimu_force:
             why.append("trims_unattested")
+        if self.engineu_src.get(T, "unattested") == "unattested" and T not in self.o.trimu_force:
+            why.append("engines_unattested")
         eu = self.engineu.get(T, frozenset()) if engine_set is None else engine_set
         best = None
         for r, f, t in rows:
@@ -1063,12 +1084,30 @@ class Curation:
         return vg
 
     def _trimu_f(self, T, ef):
-        rows = [(f, r) for (cat, c, r, f, t) in self.rows_by_T.get(T, [])
-                if f.layout == "trim" and not r.problems and f.engine_keys() and f.engine_keys() <= ef]
-        recs = {(r.site, r.line) for f, r in rows}
-        if len(recs) >= policy.TRIMU_MIN_RECORDS:
-            return frozenset(a for f, r in rows for a in f.trim_atoms())
-        return self.trimu.get(T, frozenset())
+        """§5.7 engine-sliced trims, never wider in claims than TrimU allows
+        (review F4): rows that print engines inside E_f show which trims DO
+        carry the family, but a trim missing from them is not proof it does
+        not. So TrimU_f is TrimU (year page, or attested fitment) minus only
+        the trims the evidence ties to other engines alone: seen on verified
+        trim-layout rows whose engines all lie outside E_f, never on a row
+        that prints an E_f engine, and only when the E_f slice itself is
+        attested like TrimU (>= TRIMU_MIN_RECORDS records from >=
+        TRIMU_MIN_CATS categories). A car whose every engine is in the family
+        has nothing to slice."""
+        tu = self.trimu.get(T, frozenset())
+        eu = self.engineu.get(T, frozenset())
+        if not ef or eu <= ef:
+            return tu
+        good = [(cat, f, r, t) for (cat, c, r, f, t) in self.rows_by_T.get(T, [])
+                if f.layout == "trim" and not r.problems and not f.trims_from_options and f.engine_keys()]
+        inside = [(cat, f, r, t) for cat, f, r, t in good if f.engine_keys() <= ef]
+        recs = {(r.site, r.line) for _, _, r, _ in inside}
+        cats = {cat for cat, *_ in inside}
+        if len(recs) < policy.TRIMU_MIN_RECORDS or len(cats) < policy.TRIMU_MIN_CATS:
+            return tu
+        with_f = {a for _, f, _, _ in good if f.engine_keys() & ef for a in f.trim_atoms()}
+        only_other = {a for _, f, _, _ in good if not (f.engine_keys() & ef) for a in f.trim_atoms()}
+        return frozenset(a for a in tu if not (a in only_other and a not in with_f))
 
     # ------------------------------------------------------- 5.16 likely
     def likely_groups(self, brand):
@@ -1365,7 +1404,8 @@ def _cond_class(why: str) -> str:
     if why.startswith("conditional_notes:"):
         return why.split(":", 1)[1]
     return {"conditional_trims": "trim", "conditional_engines": "engine", "option_layout": "option_layout",
-            "trims_unknown": "trim", "trims_unattested": "trim_unattested", "notes_not_own_page": "notes_not_own_page",
+            "trims_unknown": "trim", "trims_unattested": "trim_unattested", "engines_unattested": "engine_unattested",
+            "notes_not_own_page": "notes_not_own_page",
             "fitted_not_listed": "fitted_not_listed", "listed_not_fitted": "listed_not_fitted",
             "qualifier_phrase": "qualifier", "unverified": "unverified", "disputed": "disputed",
             "rule_drift": "rule_drift"}.get(why, why)
