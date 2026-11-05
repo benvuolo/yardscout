@@ -37,6 +37,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
+import markers  # noqa: E402
 import rawparts  # noqa: E402
 from fetch import NetworkError, Refused  # noqa: E402
 
@@ -214,6 +215,9 @@ def main() -> None:
     tiers = ["A", "B"] if a.tier == "all" else [a.tier]
     raw_dir = ROOT / "raw"
     raw_dir.mkdir(exist_ok=True)
+    wl_all = json.loads((ROOT / "worklist.json").read_text()).get("sites", {})
+    wl_site = wl_all.get(site) or {}
+    done_marker = markers.done_name(site, wl_site)
     if (raw_dir / f"{site}.blocked").exists():
         print(f"{site} is blocked: {(raw_dir / f'{site}.blocked').read_text().strip()}")
         sys.exit(3)
@@ -643,7 +647,7 @@ def main() -> None:
             save()
             log(f"completion finished records={prog['records']} errors={prog['errors']}")
             return
-        wl = json.loads((ROOT / "worklist.json").read_text())["sites"][site]["segments"]
+        wl = wl_site["segments"]
         if a.max_segments:
             wl = wl[: a.max_segments]
         for tier in tiers:
@@ -702,7 +706,7 @@ def main() -> None:
         raise
     save()
     if finish:
-        (raw_dir / f"{site}.done").write_text(time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
+        (raw_dir / done_marker).write_text(time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
     log(f"finished records={prog['records']} errors={prog['errors']} chain_records={prog['chain_records']} "
         f"chain_unlinked={prog['chain_unlinked']} chain_failed={prog['chain_failed']} "
         f"chain_given_up={prog['chain_given_up']}")

@@ -9,7 +9,8 @@
 # <site>.lists.2.jsonl, ...), .progress.json, .log, .done, .blocked and
 # .paused; both cp lines below restore and checkpoint all of them, and
 # ci_audit.py --site reads every records part (rawparts.py). Sites with
-# raw/<site>.done, .blocked or .paused on oem-raw are skipped. Never touches main.
+# their finish marker (raw/<site>.done, or raw/<site>.vN.done for a worklist
+# entry with "version": N; markers.py), .blocked or .paused on oem-raw are skipped. Never touches main.
 name: OEM fitment crawl
 
 on:
@@ -60,7 +61,15 @@ jobs:
           def on_branch(path):
               return subprocess.run(["git", "cat-file", "-e", f"oem-raw:{path}"],
                                     capture_output=True).returncode == 0
-          sites = [s for s in sites if not any(on_branch(f"raw/{s}.{m}") for m in ("done", "blocked", "paused"))]
+          # finish marker per worklist version (markers.py): raising a site's
+          # "version" re-opens it without deleting the earlier .done
+          import sys
+          sys.path.insert(0, "scraper/oem_fitment")
+          import markers
+          wl = json.loads(Path("scraper/oem_fitment/worklist.json").read_text()).get("sites", {})
+          sites = [s for s in sites
+                   if not on_branch("raw/" + markers.done_name(s, wl.get(s)))
+                   and not any(on_branch(f"raw/{s}.{m}") for m in ("blocked", "paused"))]
           print("sites=" + json.dumps(sites))
           PY
           cat "$GITHUB_OUTPUT"

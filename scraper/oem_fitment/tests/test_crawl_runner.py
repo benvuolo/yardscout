@@ -88,6 +88,41 @@ with tempfile.TemporaryDirectory() as td:
     rc = run("--tier", "A")
     check("blocked site refuses to start", rc == 3, str(rc))
 
+# worklist version: a re-opened site finishes with raw/<site>.vN.done and the
+# old .done stays; seeds already done are not fetched again
+import markers  # noqa: E402
+check("marker v1", markers.done_name("s.com", {}) == "s.com.done" and markers.done_name("s.com", {"version": 1}) == "s.com.done")
+check("marker v2", markers.done_name("s.com", {"version": 2}) == "s.com.v2.done")
+with tempfile.TemporaryDirectory() as td:
+    root = Path(td)
+    seg = lambda model: {"make": "Toyota", "model": model, "segment": [2007, 2011], "seed_year": 2009, "cars": 1}
+    wl = {"sites": {"www.fakesite.com": {"segments": [seg("Camry")]}}}
+    (root / "worklist.json").write_text(json.dumps(wl))
+    crawl.ROOT = root
+    crawl.TIERS = {"A": ["alternator"], "B": []}
+    state.update(refuse=False, fail_first=False)
+    sys.argv = ["crawl.py", "--site", "www.fakesite.com"]
+    try:
+        crawl.main()
+    except SystemExit:
+        pass
+    check("v1 pass writes .done", (root / "raw" / "www.fakesite.com.done").exists())
+    calls = state["product_calls"]
+    wl["sites"]["www.fakesite.com"].update(version=2, segments=[seg("Camry"), seg("Corolla")])
+    (root / "worklist.json").write_text(json.dumps(wl))
+    seen = []
+    orig = fake.categories_for
+    fake.categories_for = lambda make, model, year, cats: (seen.append(model), orig(make, model, year, cats))[1]
+    try:
+        crawl.main()
+    except SystemExit:
+        pass
+    fake.categories_for = orig
+    check("v2 navigates only the new segment (Camry seeds stay done)", seen and set(seen) == {"Corolla"}, str(seen))
+    check("v2 writes .v2.done and keeps .done",
+          (root / "raw" / "www.fakesite.com.v2.done").exists() and (root / "raw" / "www.fakesite.com.done").exists())
+    check("v2 fetches no product already recorded", state["product_calls"] == calls, f"{calls} -> {state['product_calls']}")
+
 check("same_model: spacing", crawl.same_model("Mazda 3", "Mazda3", "Mazda"))
 check("same_model: series suffix", crawl.same_model("Silverado", "Silverado 1500", "Chevrolet"))
 check("same_model: hybrid under base", crawl.same_model("Camry", "Camry Hybrid", "Toyota"))

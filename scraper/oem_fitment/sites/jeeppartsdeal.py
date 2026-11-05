@@ -1,4 +1,16 @@
-"""www.jeeppartsdeal.com (SimplePart template, same as toyotapartsnow): Jeep.
+"""www.jeeppartsdeal.com (SimplePart template, same as toyotapartsnow): Jeep,
+and since worklist version 2 (2026-11-05) Dodge, Chrysler and Ram.
+
+Dodge/Chrysler/Ram basis: the site's own product pages print them as full
+fitment rows (on oem-raw@2026-11-05, 959 records: Dodge 340, Chrysler 113,
+Ram 50 rows, with trims and engines), so the catalog is the whole Mopar
+dealer catalog, and the template's year-page path is make-parameterised
+(/catalog/<year>-<make>-<model>-parts, as Toyota/Scion on toyotapartsnow).
+No page cache was available to confirm a Dodge year page before the crawl:
+a wrong guess is a navigation miss (HTTP 404 / redirect / no parts-list
+links -> NavError, written to the R2 year manifest), never a refusal and
+never a record. The year splits below are the year ranges the catalog
+itself prints for each model name.
 
 Mopar list rows print the OEM part name in mainDesc ("Compressor - A/C",
 catalog-only rows "COMPRESSOR Air Conditioning") and a short site name in
@@ -13,8 +25,24 @@ from ._simplepart import SimplePart
 
 SITE = "www.jeeppartsdeal.com"
 
-URL_MAKE = {"Jeep": "jeep"}
-MODEL_SLUGS = {("Jeep", "Grand Cherokee"): "grand-cherokee"}  # others slugify ("Cherokee" -> "cherokee")
+URL_MAKE = {"Jeep": "jeep", "Dodge": "dodge", "Chrysler": "chrysler", "Ram": "ram"}
+# feed (make, model) -> catalog slug; others slugify ("Cherokee" -> "cherokee",
+# "Grand Caravan" -> "grand-caravan"). None: the feed name does not name one
+# catalog model. A year list: only those years have a catalog model of that
+# name under this make (ranges as printed in the catalog's fitment rows).
+MODEL_SLUGS = {
+    ("Jeep", "Grand Cherokee"): "grand-cherokee",
+    # Dodge Ram 1500/2500 1994-2010; 2011+ the catalog files them under make Ram
+    # ("Ram 1500"); before 1994 they are D150/W150 etc. (2WD/4WD: not one model)
+    ("Dodge", "Ram 1500"): [(1994, 2010, "ram-1500")],
+    ("Dodge", "Ram 2500"): [(1994, 2010, "ram-2500")],
+    ("Dodge", "Ram Van"): [(1994, 1997, "ram-van")],          # 1999-2003: Ram 1500/2500/3500 Van
+    ("Dodge", "Ram Van 1500"): [(1999, 2003, "ram-1500-van")],
+    ("Dodge", "Ram Wagon"): [(1994, 1997, "ram-wagon")],
+    ("Dodge", "Ram"): None, ("Dodge", "Ram Pickup"): None, ("Dodge", "1500 Pickup"): None,
+    ("Dodge", "D1500"): None, ("Dodge", "Caravan/Grand Caravan"): None,
+    ("Chrysler", "300C"): "300",  # the catalog prints 300C as Chrysler 300 (trim)
+}
 
 CAT_PAGES = {
     "alternator": r"^charging-starting/alternator$",

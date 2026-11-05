@@ -5,6 +5,7 @@ and are skipped when it is absent.
 Run: python3 scraper/oem_fitment/tests/test_jeeppartsdeal.py"""
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -47,6 +48,33 @@ ok(J._T.year_url("Jeep", "Grand Cherokee", 2004) == f"{B}/catalog/2004-jeep-gran
 # audit 2026-11-05: 5143152AA (2005 Grand Cherokee headlamp-components) is the headlamp boot
 ok(not m("headlights", "Headlamp", "Boot") and m("headlights", "Lamp - Headlamp Parking And Turn", "Headlamp Assembly"),
    "headlamp boot excluded via short name")
+# worklist v2 (2026-11-05): Dodge / Chrysler / Ram on the same catalog
+from sites._simplepart import NavError  # noqa: E402
+ok(J._T.year_url("Dodge", "Grand Caravan", 2010) == f"{B}/catalog/2010-dodge-grand-caravan-parts", "dodge slug")
+ok(J._T.year_url("Chrysler", "PT Cruiser", 2006) == f"{B}/catalog/2006-chrysler-pt-cruiser-parts", "chrysler slug")
+ok(J._T.year_url("Ram", "1500", 2012) == f"{B}/catalog/2012-ram-1500-parts", "ram make 2011+")
+ok(J._T.year_url("Dodge", "Ram 1500", 2002) == f"{B}/catalog/2002-dodge-ram-1500-parts", "dodge ram 1500 1994-2010")
+ok(J._T.year_url("Chrysler", "300C", 2006) == f"{B}/catalog/2006-chrysler-300-parts", "300C is printed as 300")
+
+
+def nav_err(make, model, year):
+    try:
+        J._T.year_url(make, model, year)
+    except NavError:
+        return True
+    return False
+
+
+ok(nav_err("Dodge", "Ram 1500", 2012), "Dodge Ram 1500 2011+ is make Ram: no Dodge page requested")
+ok(nav_err("Dodge", "Ram 1500", 1990), "pre-1994 D150/W150 is not one model")
+ok(nav_err("Dodge", "Caravan/Grand Caravan", 2005), "combined feed name is not one model")
+ok(nav_err("Dodge", "Ram Van", 2001), "1999-2003 vans are 1500/2500/3500")
+_wl = json.loads((Path(__file__).resolve().parent.parent / "worklist.json").read_text())["sites"][J.SITE]
+_mk = {s["make"] for s in _wl["segments"]}
+ok(_wl.get("version") == 2 and _mk == {"Jeep", "Dodge", "Chrysler", "Ram"}, f"worklist v2 makes {_mk}")
+ok(all(s["make"] in J.URL_MAKE for s in _wl["segments"]), "every worklist make has a URL make")
+ok(all(s["site"] == J.SITE for s in _wl["segments"]), "segments name this site")
+ok(_wl["segments"][0]["make"] == "Jeep", "Jeep (v1, done) segments stay first and unchanged")
 pure = checks
 
 if not _cacheonly.have([YEAR, ALT, HEAD, FRONT, P_NEW, P_OLD, P_HEAD, P_SPANS]):

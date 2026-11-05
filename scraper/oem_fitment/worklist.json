@@ -6667,7 +6667,7 @@
    ]
   },
   "www.jeeppartsdeal.com": {
-   "cars": 10053,
+   "cars": 42482,
    "segments": [
     {
      "site": "www.jeeppartsdeal.com",
@@ -6848,8 +6848,754 @@
      "breaks_known": true,
      "cars": 107,
      "seed_year": 1997
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Ram 1500",
+     "segment": [
+      1971,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 3718,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Grand Caravan",
+     "segment": [
+      2008,
+      2024
+     ],
+     "breaks_known": true,
+     "cars": 2187,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "200",
+     "segment": [
+      1979,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 1998,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Journey",
+     "segment": [
+      2009,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 1982,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Town & Country",
+     "segment": [
+      2008,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 1803,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "300",
+     "segment": [
+      1999,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 1565,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Avenger",
+     "segment": [
+      1995,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 1434,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "PT Cruiser",
+     "segment": [
+      2001,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 1284,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Charger",
+     "segment": [
+      1971,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 1160,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Dakota",
+     "segment": [
+      1997,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 1099,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Caravan",
+     "segment": [
+      1984,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 1029,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Town & Country",
+     "segment": [
+      1992,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 1027,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Dart",
+     "segment": [
+      1960,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 996,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Caliber",
+     "segment": [
+      2007,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 922,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Grand Caravan",
+     "segment": [
+      2001,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 858,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Charger",
+     "segment": [
+      2011,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 721,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Durango",
+     "segment": [
+      2004,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 719,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Durango",
+     "segment": [
+      1998,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 664,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Sebring",
+     "segment": [
+      2007,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 529,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Dakota",
+     "segment": [
+      2005,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 454,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Pacifica",
+     "segment": [
+      2004,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 446,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Nitro",
+     "segment": [
+      2007,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 438,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Ram",
+     "model": "1500",
+     "segment": [
+      2009,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 398,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Sebring",
+     "segment": [
+      2001,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 395,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Durango",
+     "segment": [
+      2011,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 346,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Neon",
+     "segment": [
+      2000,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 334,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Ram Pickup",
+     "segment": [
+      1988,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 322,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Stratus",
+     "segment": [
+      1996,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 318,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Dakota",
+     "segment": [
+      1987,
+      1996
+     ],
+     "breaks_known": true,
+     "cars": 286,
+     "seed_year": 1992
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Magnum",
+     "segment": [
+      1978,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 279,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Ram Van",
+     "segment": [
+      1966,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 209,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Grand Caravan",
+     "segment": [
+      1988,
+      2000
+     ],
+     "breaks_known": true,
+     "cars": 182,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Aspen",
+     "segment": [
+      2007,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 160,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Ram 2500",
+     "segment": [
+      1979,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 153,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "1500 Pickup",
+     "segment": [
+      1995,
+      2023
+     ],
+     "breaks_known": false,
+     "cars": 147,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "300C",
+     "segment": [
+      2005,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 145,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Ram 2500",
+     "segment": [
+      2003,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 137,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Challenger",
+     "segment": [
+      2009,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 133,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Intrepid",
+     "segment": [
+      1993,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 125,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Caravan/Grand Caravan",
+     "segment": [
+      1996,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 117,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Concorde",
+     "segment": [
+      1993,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 103,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Sebring",
+     "segment": [
+      1992,
+      2000
+     ],
+     "breaks_known": true,
+     "cars": 102,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "D1500",
+     "segment": [
+      1995,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 100,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Ram",
+     "segment": [
+      2002,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 94,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "300M",
+     "segment": [
+      1999,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 84,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Ram",
+     "segment": [
+      1961,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 82,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Ram Wagon",
+     "segment": [
+      1981,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 72,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Voyager",
+     "segment": [
+      1999,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 58,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Pacifica",
+     "segment": [
+      2017,
+      2022
+     ],
+     "breaks_known": true,
+     "cars": 58,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Caravan",
+     "segment": [
+      1999,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 56,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "Crossfire",
+     "segment": [
+      2004,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 50,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Challenger",
+     "segment": [
+      2015,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 45,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "LeBaron",
+     "segment": [
+      1980,
+      1995
+     ],
+     "breaks_known": false,
+     "cars": 40,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "LHS",
+     "segment": [
+      1994,
+      2001
+     ],
+     "breaks_known": false,
+     "cars": 40,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "D150",
+     "segment": [
+      1964,
+      1998
+     ],
+     "breaks_known": false,
+     "cars": 33,
+     "seed_year": 1985
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Ram",
+     "model": "ProMaster City",
+     "segment": [
+      2015,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 33,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Chrysler",
+     "model": "New Yorker",
+     "segment": [
+      1970,
+      1996
+     ],
+     "breaks_known": false,
+     "cars": 30,
+     "seed_year": 1990
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Ram",
+     "model": "2500",
+     "segment": [
+      2011,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 28,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Ram",
+     "model": "C/V",
+     "segment": [
+      2012,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 28,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Ram",
+     "model": "ProMaster 1500",
+     "segment": [
+      2014,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Ram Van 1500",
+     "segment": [
+      1986,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Dodge",
+     "model": "Sprinter 2500",
+     "segment": [
+      2002,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 24,
+     "seed_year": 2004
     }
-   ]
+   ],
+   "version": 2,
+   "version_note": "2026-11-05 v2: Dodge/Chrysler/Ram segments (copied from the moparpartsgiant worklist, same feed segments and seed years; Plymouth left out: no Plymouth fitment rows on this site). v1 (Jeep only) finished as raw/www.jeeppartsdeal.com.done, kept on oem-raw; v2 finishes as raw/www.jeeppartsdeal.com.v2.done (markers.py). Jeep seeds are skipped through progress.json done keys."
   },
   "www.kiapartsnow.com": {
    "cars": 9530,
