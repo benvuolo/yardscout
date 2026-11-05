@@ -20,8 +20,19 @@ Information Database, MID) say, read filing by filing:
   * Mitsubishi: NO transmission character (MY1992, 1993, 1995, 1998, 2003,
     2018 filings). Character 8 is the engine; the 3000GT VR-4 / Dodge
     Stealth R/T Turbo twin-turbo engine code is manual-only.
-  * Suzuki and Isuzu: NO transmission character in any filing read
-    (Suzuki MY2003, MY2009; Isuzu MY1992, 1997, 2001-2004). No rule.
+  * Isuzu: NO transmission character (MY1992, 1995, 1997, 1998, 2002
+    filings). Character 5 = line + 4x2/4x4, 7 = body, 8 = engine. Ruled:
+    Rodeo 2.6 4x2 (1991-1997) and the 1998 Amigo, both sold only with a
+    manual (EPA + Wikipedia / Edmunds / Consumer Guide). EPA-only candidates:
+    Pickup/Amigo 2.3 4x2, Pickup/Amigo 2.6 4x4, Trooper 2.3.
+  * Suzuki: NO transmission character (MY2003, MY2009 filings). Samurai is
+    an EPA-only candidate model rule.
+
+Rule status: keep / low_sample rules are counted; candidate rules are
+written to the output but their cars are listed separately and NOT counted.
+Each rule carries "basis": transmission_code (the filing names the
+transmission) or engine_code / line_body_code (the filing names an engine or
+model that independent sources say was sold only with a manual).
 
 Every rule is validated against ground_truth.jsonl (uniformCell lines are
 treated as unlabelled), cross-checked against EPA, and counted for the lot
@@ -301,8 +312,26 @@ C = {
                    "NHTSA ORG4192, American Suzuki 2008-06-10, 2009MY SX4, Grand Vitara, XL7, Equator",
                    "SX4: 4 line, 5 series/chassis/restraint, 6 engine, 7 design code, 8 grade. Grand Vitara: 5 series, 6 engine, 7 design code, 8 grade. XL7 (GM CAMI): 6-7 grade, 8 engine. Equator (Nissan-built 5Z6): 4 engine, 5 line, 7 body, 8 GVWR/brake. No transmission field."),
     "is_1992": mid("6fd83e64-2598-4305-9e04-d30d12e814ba",
-                   "NHTSA 01-22-N11B-4240, Isuzu 1991-04-11, VIN for 1992 model year vehicles",
-                   "Table of contents: passenger car = car line and series, body type, restraint system, engine; MPV/light truck = GVWR/brake, line and chassis, series, body type, engine. No transmission table."),
+                   "NHTSA 01-22-N11B-4240, Isuzu Motors 1991-04-11 (issued 1990-10, revised 1991-04), VIN for 1992 model year vehicles (read as page images 2026-11-05)",
+                   "Section C (MPV / light-duty truck): position 4 GVWR/brake, 5 'Line and Chassis Type' (G = Utility 4x2, H = Utility 4x4, L = Conventional Cab 4x2, R = Conventional Cab 4x4, Y = Utility 4x4), 6 model-series, 7 body type (1 = 2-door cab SWB, 7 = utility 2-door SWB, 8 = utility 4-door), 8 'Engine Codes' (E = 4ZE1 2.6L L4, L = 4ZD1 2.3L L4, Z = 3.1L V6 GM, V = 6VD1 3.2L SOHC, W = 6VD1 3.2L DOHC). No transmission table."),
+    "is_1995": mid("c8d1cf75-c8c6-44da-a98f-3ff54437a542",
+                   "NHTSA 01-22-N11B-5634, Isuzu Motors 1994-03-15, VIN for 1995 model year (read as page images 2026-11-05)",
+                   "Position 5 (JAA, JAC, 4S1, 4S2): L = Pickup 4x2, R = Pickup 4x4, H/J = Trooper 4x4, G = Rodeo 4x2, Y = Rodeo 4x4, K = Rodeo 4x2 with airbags, M = Rodeo 4x4 with airbags (4S6 Passport G/Y/K/M). Position 7: 8 = Utility 4-door, 7 = Utility 2-door SWB. Position 8: E = 4ZE1 2.6L, L = 4ZD1 2.3L, Z = 3.1L V6 GM, V/W = 6VD1 3.2L. No transmission table."),
+    "is_1998": mid("89d04d52-a600-4ba0-982d-43aa688f1137",
+                   "NHTSA 01-22-N11B-6340, Isuzu Motors 1997-04-01, VIN for MODEL YEAR 1998 (read as page images 2026-11-05)",
+                   "Position 5 (JAC, 4S2): J = Trooper 4x4, K = Rodeo or Amigo 4x2, M = Rodeo or Amigo 4x4; (4S6) K/M = Passport; (JAE) J = SLX. Position 7: 5 = Utility 2-door LWB, 7 = Utility 2-door SWB, 8 = Utility 4-door. Position 8: D = X22SE 2.2L L4 (Holden), W = 6VD1 3.2L V6, X = 6VE1 3.5L V6. No transmission table."),
+    "wiki_isuzu_mu": {"url": "https://en.wikipedia.org/wiki/Isuzu_MU",
+                      "doc": "Wikipedia, Isuzu MU (raw wikitext fetched 2026-11-05)",
+                      "says": "Amigo 1989: 'The transmission was initially manual only'; '1992: ... the added availability of a four-speed automatic transmission on the RWD version'. Rodeo 1991: 'available with either a 2.6-liter inline-four ... or a 3.1-liter V6 ... An automatic transmission was available for the V6.' Second generation: '1999: The Amigo gains a hardtop version and an optional automatic transmission.'"},
+    "edmunds_rodeo_1996": {"url": "https://www.edmunds.com/isuzu/rodeo/1996/review",
+                           "doc": "Edmunds 1996 Isuzu Rodeo review, and Consumer Guide used 1991-97 Isuzu Rodeo https://consumerguide.com/used/1991-97-isuzu-rodeo/ (seen via web search 2026-11-05; pages not fetched)",
+                           "says": "Edmunds: the 2.6-liter four-cylinder 'powers the two-wheel-drive S edition, which comes only with manual shift'. Consumer Guide (1991-97): the price leader was the 2-wheel-drive S, with a 4-cylinder engine and 5-speed manual."},
+    "is_epa_only": {"url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+                    "doc": "EPA vehicles.csv; web search 2026-11-05 found no manufacturer or editorial text saying these engines were manual-only",
+                    "says": "Row ids quoted in the rule. EPA is the only source for the manual-only claim, so the rule stays a candidate."},
+    "sz_samurai": {"url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+                   "doc": "EPA vehicles.csv (only source for the claim) + Wikipedia Suzuki Jimny (US Samurai 1986-1995, no transmission statement) + vPIC decodes of lot VINs (model Samurai)",
+                   "says": "Every Samurai row 1986-1995 (19 rows, 2871 ... 12499) is Manual 5-spd. The JS4 JC line code is taken from the lot VINs and vPIC, not from a Suzuki filing."},
     "is_1997": mid("5cf7fd0f-5168-4a7e-b720-ea2b6f19b297",
                    "NHTSA 01-22-N11B-6088, Isuzu Motors 1996-04-26, VIN for 1997 model year",
                    "MPV/light truck: 4 GVWR/brake, 5 line/chassis/restraint (J Trooper 4x4, K Rodeo 4x2, M Rodeo 4x4; 4S6 Passport; JAE SLX), 6 series, 7 body, 8 engine, 11 plant. No transmission field."),
@@ -337,6 +366,16 @@ RULES = [
                 "F": (A, "Gunma automatic 4WD", (1985, 1986))},
          models="every Gunma-built Subaru (GL/DL/RX/XT/Brat/Hatchback), MY1985-1986",
          cites=["sub_1986"], epa_ids=[]),
+    dict(id="subaru_fhi_1989_char11", make="Subaru", wmi=FHI, years=(1989, 1989), fixed={}, pos=11,
+         codes={"B": (M, "5MT", (1989, 1989)),
+                "D": (M, "4WD 5MT", (1989, 1989)),
+                "G": (M, "Full time 4WD MT", (1989, 1989)),
+                "4": (M, "4WD 4MT Hatchback", (1989, 1989)),
+                "C": (A, "AT & ECVT", (1989, 1989)),
+                "F": (A, "4WD AT", (1989, 1989)),
+                "H": (A, "Full time 4WD AT", (1989, 1989))},
+         models="every Gunma-built Subaru (Justy, DL/GL/RX, XT/XT6, Loyale line), MY1989. Code E ('4WD, Dual-range') is left out: the 1989 table does not state its transmission",
+         cites=["sub_1989"], epa_ids=[]),
     dict(id="subaru_fhi_1990_1994_char11", make="Subaru", wmi=FHI, years=(1990, 1994), fixed={}, pos=11,
          codes={"B": (M, "Gunma FWD 5-speed manual (MT5)", (1990, 1994)),
                 "D": (M, "Gunma on-demand 4WD / AWD 5-speed manual", (1990, 1994)),
@@ -350,11 +389,13 @@ RULES = [
          cites=["sub_1990", "sub_1991", "sub_1994"], epa_ids=[]),
     dict(id="subaru_fhi_G_H_1995_2026_char11", make="Subaru", wmi=FHI, years=(1995, 2026), fixed={}, pos=11,
          codes={"G": (M, "Gunma (Yajima) full-time AWD 5MT/6MT", (1995, 2026)),
+                "B": (M, "Gunma FWD 5MT (Impreza / Legacy FWD)", (1995, 1996)),
                 "H": (A, "Gunma (Yajima) full-time AWD automatic / CVT", (1995, 2026)),
                 "K": (A, "Gunma FWD 4-speed automatic (SVX L, Legacy/Impreza FWD)", (1995, 1996))},
          models="Gunma-built Impreza, WRX/STI, Forester, Legacy/Outback (Gunma builds), Crosstrek, SVX, MY1995-2026",
-         cites=["sub_2001_forester", "sub_2002", "sub_2003", "sub_2006", "sub_2009_forester", "sub_2009_impreza",
-                "sub_2012", "sub_2014", "sub_2014_b", "sub_2017", "sub_2018", "sub_2022"], epa_ids=[]),
+         cites=["sub_1994", "sub_1996", "sub_1997", "sub_1999", "sub_2001_forester", "sub_2002", "sub_2003",
+                "sub_2004_impreza", "sub_2006", "sub_2009_forester", "sub_2009_impreza",
+                "sub_2012", "sub_2014_forester", "sub_2014", "sub_2014_b", "sub_2017", "sub_2018", "sub_2022"], epa_ids=[]),
     dict(id="subaru_fhi_L_6mt_2006_2014_char11", make="Subaru", wmi=FHI, years=(2006, 2014), fixed={}, pos=11,
          codes={"L": (M, "Gunma full-time AWD 6-speed manual (WRX STI)", (2006, 2014))},
          models="Impreza WRX STI (and other 6MT Gunma builds), MY2006-2014",
@@ -379,14 +420,14 @@ RULES = [
                 "8": (A, "SIA full-time AWD E4AT for Postal Service", (1994, 1994)),
                 "9": (A, "SIA FWD 4-speed automatic", (1990, 1996))},
          models="Lafayette-built Legacy (4S3/4S4), MY1990-1996",
-         cites=["sub_1990", "sub_1994"], epa_ids=[]),
+         cites=["sub_1990", "sub_1994", "sub_1996"], epa_ids=[]),
     dict(id="subaru_sia_1997_2009_char11", make="Subaru", wmi=SIA, years=(1997, 2009), fixed={}, pos=11,
          codes={"6": (M, "SIA full-time AWD 5-speed manual", (1997, 2009)),
                 "7": (A, "SIA full-time AWD 4-speed automatic", (1997, 2009)),
                 "4": (A, "SIA full-time AWD 5-speed automatic", (2005, 2009)),
                 "5": (A, "SIA full-time AWD 4AT sport-shift", (2006, 2006))},
          models="Lafayette-built Legacy, Outback, Baja, B9 Tribeca/Tribeca, MY1997-2009",
-         cites=["sub_2001_legacy", "sub_2002", "sub_2003", "sub_2006"], epa_ids=[]),
+         cites=["sub_1996", "sub_2001_legacy", "sub_2002", "sub_2003", "sub_2006"], epa_ids=[]),
     dict(id="subaru_sia_2010_2026_char11", make="Subaru", wmi=SIA, years=(2010, 2026), fixed={}, pos=11,
          codes={"1": (M, "SIA full-time AWD 6MT (Legacy/Outback) / 5MT (Impreza)", (2010, 2026)),
                 "2": (A, "SIA full-time AWD 5-speed automatic", (2010, 2014)),
@@ -407,7 +448,7 @@ RULES = [
          codes={"3": (M, "13B High Power (2004 code meaning carried to 2005)", (2005, 2005)),
                 "N": (A, "13B Standard Power (2004 code meaning carried to 2005)", (2005, 2005))},
          models="MY2005 Mazda RX-8 (JM1FE17*). CANDIDATE ONLY: no MY2005 Mazda filing was found in MID, and vPIC's 2005-2008 pattern for FE173 says '238 hp for MT; 212 hp for AT'",
-         cites=["mz_2004_rx8", "wiki_rx8", "mz_vpic_rx8", "epa"], epa_ids=["20621 (2005 RX-8 Manual 6-spd)", "20622 (2005 RX-8 Automatic (S4))"]),
+         cites=["mz_2004_rx8", "mz_2006", "mz_2008", "wiki_rx8", "mz_vpic_rx8", "epa"], epa_ids=["20621 (2005 RX-8 Manual 6-spd)", "20622 (2005 RX-8 Automatic (S4))"]),
     dict(id="mazda_rx8_2009_2011_char8_engine_power", make="Mazda", wmi=["JM1"], years=(2009, 2011),
          fixed={4: "F", 5: "E", 6: "1", 7: "7C"}, pos=8,
          codes={"2": (M, "13B High Power, California (232 hp): 6-speed manual only", (2009, 2011)),
@@ -415,19 +456,19 @@ RULES = [
                 "M": (A, "13B Standard Power, California (212 hp): 6-speed automatic only", (2009, 2011)),
                 "P": (A, "13B Standard Power, Federal (212 hp): 6-speed automatic only", (2009, 2011))},
          models="MY2009-2011 Mazda RX-8 (JM1FE17* MY2009, JM1FE1C* MY2009-2011). MY2005-2008 FE173 is NOT ruled: the 6AT also used the High Power code then",
-         cites=["mz_2011", "mz_vpic_rx8", "wiki_rx8", "epa"], epa_ids=["25224/25225 (2009)", "28557/28558 (2010)", "30614/30615 (2011): Manual 6-spd and Automatic (S6) only"]),
+         cites=["mz_2009", "mz_2011", "mz_2008", "mz_vpic_rx8", "wiki_rx8", "epa"], epa_ids=["25224/25225 (2009)", "28557/28558 (2010)", "30614/30615 (2011): Manual 6-spd and Automatic (S6) only"]),
     dict(id="mazda_mazdaspeed3_2007_2009_char8_L3T", make="Mazda", wmi=["JM1"], years=(2007, 2009),
          fixed={4: "B", 5: "K", 6: "13", 7: "4"}, pos=8,
          codes={"L": (M, "L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only", (2007, 2009)),
                 "M": (M, "L3T 2.3L DISI Turbo, California: MAZDASPEED3, 6-speed manual only", (2007, 2009))},
          models="MY2007-2009 MAZDASPEED3 (JM1BK[1|3]4[L|M]; feed may call it Mazda3)",
-         cites=["mz_2007", "mz_vpic_ms", "wiki_ms3", "epa"], epa_ids=["23183 (2007 Mazda 3 2.3 'MAZDA3 T/C' Manual 6-spd; no turbo automatic)", "24387 (2008 Speed 3 Manual 6-spd)", "25503 (2009 Speed 3 Manual 6-spd)"]),
+         cites=["mz_2007", "mz_2008", "mz_2009", "mz_vpic_ms", "wiki_ms3", "epa"], epa_ids=["23183 (2007 Mazda 3 2.3 'MAZDA3 T/C' Manual 6-spd; no turbo automatic)", "24387 (2008 Speed 3 Manual 6-spd)", "25503 (2009 Speed 3 Manual 6-spd)"]),
     dict(id="mazda_mazdaspeed3_2010_2013_char8_L3T", make="Mazda", wmi=["JM1"], years=(2010, 2013),
          fixed={4: "B", 5: "L", 6: "1", 7: "H"}, pos=8,
          codes={"3": (M, "L3T 2.3L Turbo, Federal: MAZDASPEED3, 6-speed manual only", (2010, 2013)),
                 "4": (M, "L3T 2.3L Turbo, California: MAZDASPEED3, 6-speed manual only", (2010, 2013))},
          models="MY2010-2013 MAZDASPEED3 (JM1BL1H3 / BL1H4)",
-         cites=["mz_2011", "mz_vpic_ms", "wiki_ms3", "epa"], epa_ids=["26420 (2010)", "30402 (2011)", "31584 (2012)", "32984 (2013): Speed 3 Manual 6-spd, the only Speed 3 rows"]),
+         cites=["mz_2010_mazda3", "mz_2011", "mz_vpic_ms", "wiki_ms3", "epa"], epa_ids=["26420 (2010)", "30402 (2011)", "31584 (2012)", "32984 (2013): Speed 3 Manual 6-spd, the only Speed 3 rows"]),
     dict(id="mazda_mazdaspeed6_2006_2007_char8_L3T", make="Mazda", wmi=["JM1"], years=(2006, 2007),
          fixed={4: "G", 5: "G"}, pos=8,
          codes={"L": (M, "L3T 2.3L Turbo (274 hp): MAZDASPEED6, 6-speed manual + AWD only", (2006, 2007))},
@@ -438,7 +479,7 @@ RULES = [
          codes={"7": (M, "FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only", (2003, 2003)),
                 "8": (M, "FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal + side air bags: 5-speed manual only", (2003, 2003))},
          models="MY2003 MAZDASPEED Protege (JM1BJ227 / BJ228). The 2001 BJ227 code meant something else and is out of scope",
-         cites=["mz_2003_protege", "mz_vpic_ms", "wiki_msp", "edmunds_msp", "epa"],
+         cites=["mz_2003_protege", "mz_vpic_ms", "wiki_msp", "edmunds_msp", "lot_msp_serials", "epa"],
          epa_ids=["18552 (2003 Protege/Protege 5 2.0 Manual 5-spd, Premium fuel): the ONLY premium-fuel 2003 Protege configuration; the automatics 18551/18554 are regular fuel"]),
 
     # ---------------- Mitsubishi / Dodge: character 8 = engine -----------
@@ -453,14 +494,130 @@ RULES = [
          models="Mitsubishi 3000GT / 3000GT Spyder (JA3) and Dodge Stealth (JB3, to 1996), MY1993-1999",
          cites=["mi_1993", "mi_1995", "mi_1998", "mi_vpic", "epa"],
          epa_ids=["9823 (1993 3000 GT turbo Manual 5-spd)", "10789, 11742, 12641, 13382, 14107, 14890 (1994-1999 3000 GT turbo Manual 6-spd)", "11744, 12643, 13384, 14109 (Spyder turbo Manual 6-spd)", "9734, 10713, 11669, 12581 (Stealth turbo manual)"]),
+    dict(id="mitsubishi_montero_sport_24_4x2_1997_1999_char8", make="Mitsubishi", wmi=["JA4"], years=(1997, 1999),
+         fixed={5: "S"}, pos=8, candidate=True,
+         codes={"G": (M, "2.4L 4-cyl (4G64) in the 4x2 Montero Sport line S: EPA lists only a 5-speed manual", (1997, 1999))},
+         models="MY1997-1999 Mitsubishi Montero Sport ES 4x2 2.4 (JA4 LS21G on the lots). CANDIDATE ONLY: EPA is the only source for manual-only, and the code meaning is from vPIC decodes, not a filing read",
+         cites=["mi_montero_sport", "epa"], epa_ids=["29580 (1997)", "14677 (1998)", "15482 (1999) Montero Sport 2WD 2.4 Manual 5-spd: the only 2.4 rows"]),
+
+    # ---------------- Isuzu (and SIA-built 4S1/4S2): 5 line/chassis, 7 body, 8 engine --
+    dict(id="isuzu_rodeo_26_4x2_1991_1997_char8", make="Isuzu", wmi=["4S2", "JAC"], years=(1991, 1997),
+         fixed={5: "GK", 7: "8"}, pos=8,
+         codes={"E": (M, "4ZE1 2.6L L4 in a Rodeo 4x2 (line G/K, body 8 = utility 4-door): Rodeo S 2WD, 5-speed manual only", (1991, 1997))},
+         models="MY1991-1997 Isuzu Rodeo S 4x2 with the 2.6L four-cylinder (4S2 G58E / K58E). The Honda Passport twin (4S6) uses the same codes but is not ruled here (Honda make, no lot cars)",
+         cites=["is_1992", "is_1995", "is_1997", "wiki_isuzu_mu", "edmunds_rodeo_1996", "epa"],
+         epa_ids=["8452 (1991)", "9522 (1992)", "10518 (1993)", "11469 (1994)", "12429 (1995)", "13168 (1996)", "13895 (1997): Rodeo 2WD 2.6 Manual 5-spd, the only 2.6 Rodeo rows each year"]),
+    dict(id="isuzu_amigo_1998_char7", make="Isuzu", wmi=["4S2", "JAC"], years=(1998, 1998),
+         fixed={5: "KM"}, pos=7,
+         codes={"7": (M, "Amigo (line K/M Rodeo-or-Amigo, body 7 = utility 2-door short wheelbase): every 1998 Amigo was manual (automatic optional from 1999)", (1998, 1998))},
+         models="MY1998 Isuzu Amigo, every engine (2.2 X22SE, 3.2 6VD1) and drive",
+         cites=["is_1998", "wiki_isuzu_mu", "epa"],
+         epa_ids=["14659 (1998 Amigo 2WD 2.2)", "14735 (1998 Amigo 4WD 2.2)", "14736 (1998 Amigo 4WD 3.2): all Manual 5-spd, no automatic row"]),
+    dict(id="isuzu_4zd1_23_4x2_1988_1995_char8", make="Isuzu", wmi=["JAA", "JAC", "4S1"], years=(1988, 1995),
+         fixed={5: "LG"}, pos=8, candidate=True,
+         codes={"L": (M, "4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual", (1988, 1995))},
+         models="MY1988-1995 Isuzu Pickup 4x2 2.3 and Amigo 4x2 2.3. CANDIDATE ONLY: EPA is the only source for manual-only (no Isuzu, editorial or encyclopedia text found)",
+         cites=["is_1992", "is_1995", "is_epa_only", "epa"],
+         epa_ids=["4797, 5934, 7002, 8131, 9218, 10231, 11185, 11186, 12149 (Pickup 2WD 2.3, 1988-1995)", "6276, 7335, 8450, 9519, 10515 (Amigo 2WD 2.3, 1989-1993): all Manual 5-spd"]),
+    dict(id="isuzu_4ze1_26_4x4_pickup_amigo_1989_1995_char8", make="Isuzu", wmi=["JAA", "JAC", "4S1"], years=(1989, 1995),
+         fixed={5: "R"}, pos=8, candidate=True,
+         codes={"E": (M, "4ZE1 2.6L L4 in the 4x4 conventional-cab line R (Pickup 4x4; the 1989-1991 Amigo 4x4 also decodes here): EPA lists only a 5-speed manual", (1989, 1995))},
+         models="MY1989-1995 Isuzu Pickup 4x4 2.6 and early Amigo 4x4 2.6. CANDIDATE ONLY: EPA is the only source; MY1988 is excluded because EPA lists a 4-speed automatic for the 1988 2.6 4WD",
+         cites=["is_1992", "is_1995", "is_epa_only", "wiki_isuzu_mu", "epa"],
+         epa_ids=["6144, 7215, 8338, 9399, 10400, 11354, 12318 (Pickup 4WD 2.6, 1989-1995)", "6349, 7408, 8511, 9584, 10571, 11536 (Amigo 4WD 2.6, 1989-1994): all Manual 5-spd"]),
+    dict(id="isuzu_trooper_23_1986_1987_char8", make="Isuzu", wmi=["JAA", "JAC"], years=(1986, 1987),
+         fixed={5: "H"}, pos=8, candidate=True,
+         codes={"L": (M, "2.3L gasoline L4 in the Trooper (II) 4x4 line H: EPA lists only a 5-speed manual", (1986, 1987))},
+         models="MY1986-1987 Isuzu Trooper / Trooper II 2.3. CANDIDATE ONLY: EPA is the only source and the code meaning is from vPIC decodes (no 1986-87 Isuzu filing read)",
+         cites=["is_epa_only", "epa"], epa_ids=["Trooper 1986 2.3 4WD and 1987 2.3 4WD: Manual 5-spd only (the 2.2 turbo-diesel rows are manual too)"]),
+
+    # ---------------- Suzuki: model code (no transmission field) -------------
+    dict(id="suzuki_samurai_1986_1995_char4_5", make="Suzuki", wmi=["JS3", "JS4"], years=(1986, 1995),
+         fixed={4: "J"}, pos=5, candidate=True,
+         codes={"C": (M, "Samurai line (JS4 JC..): EPA lists only a 5-speed manual for every Samurai 1986-1995", (1986, 1995))},
+         models="MY1986-1995 Suzuki Samurai. CANDIDATE ONLY: EPA is the only source for manual-only and the JC code comes from lot VINs + vPIC, not a Suzuki filing read",
+         cites=["sz_samurai", "epa"], epa_ids=["2871, 2872, 4099, 4100, 5219, 5220, 6367, 6368, 7426, 7427, 8463, 8531, 8532, 9536, 9604, 10527, 10592, 11561, 12499: every Samurai row is Manual 5-spd"]),
 ]
+
+# How the claim is supported. "transmission_code": the manufacturer's own VIN
+# table names the transmission. "engine_code" / "line_body_code": the
+# manufacturer's table names an engine or model, and independent sources
+# (EPA + text) say that engine or model was sold only with a manual.
+RULE_BASIS = {
+    "mazda": "engine_code", "mitsubishi": "engine_code",
+    "isuzu_rodeo": "engine_code", "isuzu_4z": "engine_code", "isuzu_trooper": "engine_code",
+    "isuzu_amigo": "line_body_code", "suzuki": "line_body_code",
+}
+
+RULE_NOTES = {
+    "mazda_rx8_2005_char8_engine_power": "Why only a candidate: no MY2005 Mazda filing is in MID (the next one, ORG322 / 10376, is MY2006 and does not refile the RX-8). vPIC decodes 2005 FE17N as '13B Std' (207 hp) and FE173 as '13B High Power' with OtherEngineInfo '238 hp for MT; 212 hp for AT', a note shared with 2006-2008, when the 6AT did use FE173 (MY2008 filing: '232HP (MT) / 212HP (AT)'). On the lots FE17N appears in 2004-2005 only, which fits the 4AT Standard-Power car being dropped for 2006. Promote it only with a MY2005 Mazda document.",
+    "mazda_rx8_2009_2011_char8_engine_power": "Standard Power vs High Power is the engine output, not the transmission. The manual-only reading rests on Wikipedia ('Automatic versions all had lower output/lower rpm engines'; NA 6MT 232 hp, 6AT 212 hp) and EPA (only Manual 6-spd and Automatic (S6) each year). MY2005-2008 FE173 is NOT ruled: the MY2008 filing gives it '232HP (MT) / 212HP (AT)'.",
+    "mazda_mazdaspeed_protege_2003_char8_FSD170": "The filing's 170 hp FSD (BJ227/BJ228) is the MAZDASPEED Protege (Wikipedia: 170 hp turbocharged, 4,500 built). Lot serials for BJ227 are a separate block (641697-648720) from all other 2003 Proteges (101133-221210). The 2001 BJ227 code (Protege MP3 era) is outside the rule's years.",
+    "isuzu_rodeo_26_4x2_1991_1997_char8": "Codes read from the MY1992, MY1995 and MY1997 Isuzu filings (MY1991, 1993, 1994, 1996 interpolated; the same G/K, 8 and E meanings appear in every table read). The 2.6 Rodeo was 4x2 only (EPA has no 2.6 4WD Rodeo row).",
+    "isuzu_amigo_1998_char7": "Applies to every engine: EPA lists 1998 Amigo 2WD 2.2, 4WD 2.2 and 4WD 3.2, all Manual 5-spd; Wikipedia dates the Amigo's optional automatic to 1999.",
+}
 
 VPIC_ONLY_YEARS = {
     "mitsubishi_3000gt_stealth_twin_turbo_1991_1992_char8": "MY1991 code from vPIC only (the 1991 passenger-car filing was not found; 01-22-N11B-3997 is the 1991 Fuso truck filing)",
-    "mazda_rx8_2009_2011_char8_engine_power": "MY2009-2010 codes from vPIC (the MY2011 filing defines the same four codes)",
-    "mazda_mazdaspeed3_2007_2009_char8_L3T": "MY2008-2009 codes from vPIC (MY2007 filing read)",
-    "mazda_mazdaspeed3_2010_2013_char8_L3T": "MY2010, 2012-2013 codes from vPIC (MY2011 filing read)",
+    "mazda_rx8_2009_2011_char8_engine_power": "MY2010 codes from vPIC (the MY2009 and MY2011 filings define the same four codes, FE17x in 2009 and FE1Cx in 2011)",
+    "mazda_mazdaspeed3_2010_2013_char8_L3T": "MY2012-2013 codes from vPIC (MY2010 and MY2011 filings read)",
+    "isuzu_rodeo_26_4x2_1991_1997_char8": "MY1991, 1993, 1994, 1996 codes interpolated between the MY1992, MY1995 and MY1997 filings",
+    "subaru_fhi_G_H_1995_2026_char11": "Years between filings read (e.g. 1995, 2005, 2007-2008, 2010-2011, 2013, 2015-2016, 2019-2021, 2023-2024, 2026) are interpolated: G = manual / H = automatic in every Gunma table read from MY1990 to MY2025",
 }
+
+ANSWER = {
+    "Subaru": "ENCODED. VIN character 11 is 'plant of manufacture and transmission type' in every Subaru filing read, MY1985-1986, 1989, 1990, 1991, 1994, 1996, 1997, 1999, 2001-2004, 2006, 2009, 2012-2014, 2017, 2018, 2022, 2025. Gunma (JF1/JF2): G = AWD manual, H = AWD automatic/CVT, L = AWD 6MT (2006-2014), 9 = Main Plant manual / 8 = Main Plant CVT or 6AT (2014+); SIA Lafayette (4S3/4S4): 6 = AWD 5MT and 7 = AWD 4AT (1990-2009), 4 = 5AT (2005-2014), 1 = 6MT/5MT, 3 = CVT (2010+). The same character covers the Subaru-built Scion FR-S / Toyota 86 / GR86 (JF1 ZN/ZD). Not ruled: MY1987-1988 (no filing found), MY2013 Gunma codes 1/2 on Impreza / XV Crosstrek (no filing read; vPIC applies the BRZ meanings 6MT/6AT to them).",
+    "Mazda": "NOT ENCODED in any filing read (MY1990, 1995, 2003, 2004, 2006, 2007, 2008, 2009, 2010 Mazda3, 2011, 2021). Characters 4-8 are line, series, body, engine type, restraint; the filings give engine type and horsepower but no transmission column. The first Mazda filing read that names a transmission is the MY2024 CX-90 (character 7), an automatic-only model. Ford-built Mazdas (B-Series 4F4, Tribute 4F2) are coded by Ford, also without transmission. Where Mazda's engine code is an engine sold only with a manual in the US, the engine code decides: MAZDASPEED3 L3T (2007-2013), MAZDASPEED6 L3T (2006-2007), MAZDASPEED Protege FSD 170 hp (2003), RX-8 13B High Power (2004 and 2009-2011; 2005 is a candidate; 2006-2008 is not, because the 6AT also used the High Power code).",
+    "Mitsubishi": "NOT ENCODED in any filing read (MY1992, 1993, 1995, 1998, 2003, 2018). Character 8 is the engine; the only manual-only engine code ruled is the 3.0 twin-turbo (MY1991-1992 C, MY1993-1999 K) of the 3000GT VR-4 / Spyder VR-4 / Dodge Stealth R/T Turbo. Montero Sport 2.4 4x2 (1997-1999) is an EPA-only candidate. Lancer Evolution VIII/IX (2003-2006) were manual-only but no lot car without transmission info carries an Evolution code, so no rule was built.",
+    "Suzuki": "NOT ENCODED in any filing read (MY2003, MY2009). The Samurai (1986-1995) is an EPA-only candidate model rule; nothing else. GM-built Suzukis (Forenza / Reno / Verona KL5, XL7 2007-2009 2S3) and the Nissan-built Equator (5Z6) follow GM / Nissan schemes, also without transmission.",
+    "Isuzu": "NOT ENCODED in any filing read (MY1992, 1995, 1997, 1998, 2002). Character 5 is line + chassis (4x2 / 4x4), 7 body, 8 engine. Ruled where engine + line identify a configuration sold only with a manual: Rodeo 2.6 4x2 (1991-1997) and the 1998 Amigo (every engine). EPA-only candidates: Pickup/Amigo 2.3 4x2 (1988-1995), Pickup/Amigo 2.6 4x4 (1989-1995), Trooper 2.3 (1986-1987). GM-built Isuzus (Hombre 1GG, i-Series 1GG, Ascender 4NU) follow GM's scheme without transmission.",
+}
+
+VIN_SCHEME = {
+    "Subaru": {"position": 11, "name": "Plant of manufacture and transmission type",
+               "tables": "see each subaru_* rule's vin_condition; per-filing quotes in citations"},
+    "Mazda": {"positions": {"4": "line", "5": "series", "6": "body type", "7": "engine type (pre-2021 the 4-8 group is read as one VDS code)", "8": "restraint / engine (varies by era; filings list whole VDS codes)", "11": "plant"},
+              "transmission": "none (MY2024 CX-90 first names one, automatic only)"},
+    "Mitsubishi": {"positions": {"4": "restraint / GVWR", "5": "car line", "6": "series (price class)", "7": "body type", "8": "engine type", "11": "plant"},
+                   "transmission": "none"},
+    "Suzuki": {"positions": {"4": "line", "5": "series / chassis / restraint", "6": "engine type", "7": "design sequence", "8": "body type / grade", "11": "plant"},
+               "transmission": "none"},
+    "Isuzu": {"positions": {"4": "GVWR / brake", "5": "line, chassis (4x2/4x4) and restraint", "6": "series", "7": "body type", "8": "engine", "11": "plant"},
+              "transmission": "none"},
+}
+
+NOT_RULED = [
+    {"make": "Subaru", "scope": "MY1987-1988 Gunma", "why": "no filing found in MID for these years; the 1985-86 and 1989 tables agree, but the codes are not interpolated across a gap with no document"},
+    {"make": "Subaru", "scope": "MY1989 code E ('4WD, Dual-range')", "why": "the 1989 table does not say whether E is manual"},
+    {"make": "Subaru", "scope": "MY2013 Gunma Impreza / XV Crosstrek codes 1 and 2", "why": "no MY2013 Impreza filing read; vPIC decodes them with the BRZ meanings (1 = 6MT, 2 = 6AT) although the Impreza had a 5MT or CVT. Every lot car with these codes already has a vPIC transmission"},
+    {"make": "Subaru", "scope": "SIA codes outside the tables (e.g. 2006 U), FHI L before 2006, SIA 1/9 after 1996", "why": "not defined by a filing read; the rules make no claim for codes outside their tables"},
+    {"make": "Subaru", "scope": "4S1/4S2/4S6 (Isuzu- and Honda-badged SIA builds), 4T1 (SIA-built Toyota Camry)", "why": "those VINs follow Isuzu's or Toyota's scheme, not Subaru's"},
+    {"make": "Mazda", "scope": "every Mazda except the engine codes ruled", "why": "Mazda's VIN has no transmission character; the engines are offered with both transmissions"},
+    {"make": "Mazda", "scope": "RX-8 MY2006-2008 (JM1FE173)", "why": "the MY2008 filing lists FE173 13B High Power as '232HP (MT) / 212HP (AT)': both transmissions"},
+    {"make": "Mazda", "scope": "Mazdaspeed MX-5 (2004-2005), 323 GTX (1988-89), RX-7 Turbo II (1987-88), 626 turbo", "why": "manual-only engines, but no lot car without transmission info carries them (MX-5 NB353 on the lots is the 142 hp base engine); not researched further"},
+    {"make": "Mazda", "scope": "Tribute 2.0 (2001-2004, Ford Zetec, EPA manual only)", "why": "Ford-built (4F2) and no 2.0 Tribute on the lots lacks transmission info"},
+    {"make": "Mitsubishi", "scope": "every Mitsubishi except the 3000GT/Stealth twin turbo", "why": "no transmission character; engines are offered with both"},
+    {"make": "Mitsubishi", "scope": "Lancer Evolution VIII/IX 2003-2006, Galant VR-4 1991-92, 1990 Eclipse/Talon turbo", "why": "manual-only per EPA, but none of the lot cars without transmission info carries these codes (or only 1-2 cars), so no filing was read for them"},
+    {"make": "Mitsubishi", "scope": "Lancer Evolution X (2008-2015)", "why": "GSR was 5MT, MR was the TC-SST dual clutch; the engine code is shared with the TC-SST-only Lancer Ralliart"},
+    {"make": "Suzuki", "scope": "every Suzuki except the Samurai candidate", "why": "no transmission character; Sidekick 1.3 4WD (1989) and X-90 2WD (1996) are EPA manual-only cells with no matching lot cars"},
+    {"make": "Isuzu", "scope": "Hombre (1996-2000), i-Series, Ascender", "why": "GM-built (1GG / 4NU), GM scheme. EPA lists only a manual for the 1996-1997 Hombre 2.2 4x2, but GM's 2.2 engine code is shared with the S-10, which had an automatic"},
+    {"make": "Isuzu", "scope": "Rodeo 2.2 4x2 (1998-2000), Amigo 2.2 4x2 (1999-2000)", "why": "EPA lists only a manual, but no lot car without transmission info falls there (the 2.2 Rodeos on the lots are 2001-2002, when EPA lists an automatic)"},
+]
+
+VALIDATION_METHOD = (
+    "Every lot car with a WMI used by a rule, a 17-character VIN and a valid check digit is classified. The model year comes from "
+    "VIN character 10 (the listing year only picks the 30-year cycle and must be within 2 years). A rule fires only when the VIN "
+    "matches its WMI, years and fixed characters and the code is in its table for that year; other codes get no claim. "
+    "Ground truth = scraper/manual_detect/ground_truth.jsonl. Lines with uniformCell set are treated as unlabelled (counted "
+    "separately as uniform_cell_lines_excluded / _that_would_agree), speeds-only lines are excluded, and the rest are checkable: "
+    "agree means (truth is manual) == (rule says manual). Note that every VIN-bearing truth line comes from vPIC, which NHTSA builds "
+    "from the same Part 565 filings, so agreement is partly circular. The EPA cross-check (year/make/model union, vPIC displacement "
+    "when known) is the independent check: a manual claim is consistent when EPA lists a manual for the car, an automatic claim when "
+    "EPA lists a non-manual. Status: candidate (not counted) when the evidence is short of the bar; drop when >= 20 checkable and "
+    "agreement < 0.995; low_sample when < 20 checkable (kept: the code meaning comes from the manufacturer's own VIN scheme); "
+    "keep otherwise. newly_confirmed_manual counts lot cars with no published transmission (vehicle_extras trans empty) that a "
+    "keep or low_sample rule calls manual."
+)
 
 
 def rule_regex(r: dict) -> str:
@@ -665,12 +822,8 @@ def main() -> int:
                    "code": f"char{r['pos']}={code}: {meaning}", "why_no_trans": why, "yard": yard}
             if claim == M:
                 newly_manual.append(rec)
-                if make in FIVE:
-                    make_cov[make]["newly_confirmed_manual"] += 1
             else:
                 newly_auto.append(rec)
-                if make in FIVE:
-                    make_cov[make]["newly_labelled_non_manual"] += 1
 
     # ---- assemble rules ----
     out_rules = []
@@ -706,10 +859,20 @@ def main() -> int:
                                                           if k.startswith("no_trans_info_")}}
         man_codes = {c: v[1] + f" (MY{v[2][0]}-{v[2][1]})" for c, v in r["codes"].items() if v[0] == M}
         aut_codes = {c: v[1] + f" (MY{v[2][0]}-{v[2][1]})" for c, v in r["codes"].items() if v[0] == A}
+        basis = "transmission_code"
+        for pre, b in RULE_BASIS.items():
+            if rid.startswith(pre):
+                basis = b
         out_rules.append({
             "id": rid,
             "make": r["make"],
             "status": status,
+            "basis": basis,
+            "status_reason": ({"candidate": "not counted: the evidence does not meet the bar (see scope.models and notes)",
+                               "low_sample": f"fewer than {MIN_SAMPLE} checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+                               "keep": f">= {MIN_SAMPLE} checkable cars and agreement >= {MIN_AGREEMENT}",
+                               "drop": f"agreement below {MIN_AGREEMENT}"}[status]),
+            "notes": RULE_NOTES.get(rid, ""),
             "claim": "manual for the manual codes; automatic (not manual) for the automatic codes" if aut_codes else "manual",
             "scope": {"make": r["make"], "models": r["models"], "model_years": list(r["years"]), "wmi": r["wmi"],
                       "conditions": ["VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
@@ -736,6 +899,10 @@ def main() -> int:
     keep_ids = {x["id"] for x in out_rules if x["status"] in ("keep", "low_sample")}
     nm_conf = [c for c in newly_manual if c["rule"] in keep_ids]
     nm_cand = [c for c in newly_manual if c["rule"] not in keep_ids]
+    for mk in FIVE:
+        make_cov[mk]["newly_confirmed_manual_counted"] = sum(1 for c in nm_conf if c["make"] == mk)
+        make_cov[mk]["newly_confirmed_manual_candidate_rules_only"] = sum(1 for c in nm_cand if c["make"] == mk)
+        make_cov[mk]["newly_labelled_non_manual_counted"] = sum(1 for c in newly_auto if c["make"] == mk and c["rule"] in keep_ids)
     man_chk = sum(x["validation"]["manual_codes"]["checkable_ground_truth"] for x in out_rules if x["id"] in keep_ids)
     man_agr = sum(x["validation"]["manual_codes"]["agree"] for x in out_rules if x["id"] in keep_ids)
     aut_chk = sum(x["validation"]["automatic_codes"]["checkable_ground_truth"] for x in out_rules if x["id"] in keep_ids)
@@ -786,3 +953,7 @@ def main() -> int:
     print("scan:", s["scan"])
     print("wrote", OUT)
     return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
