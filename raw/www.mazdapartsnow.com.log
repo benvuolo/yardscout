@@ -165,3 +165,55 @@
 10:59:51 seg done tier=B Mazda Protege [1999, 2003] seeds=[2003] records=1081 errors=7
 11:03:03 seg done tier=B Mazda Tribute [2001, 2004] seeds=[2003] records=1096 errors=7
 11:08:31 time budget reached records=1127
+11:08:39 start site=www.mazdapartsnow.com segments=31 tiers=['A', 'B']
+11:08:39 seg done tier=A Mazda Mazda3 [2001, 2009] seeds=[2008] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda3 [2010, 2011] seeds=[2010] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda6 [2003, 2008] seeds=[2007] records=1127 errors=7
+11:08:39 seg done tier=A Mazda CX-9 [2007, 2015] seeds=[2008] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda3 [2012, 2013] seeds=[2012] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda6 [2009, 2013] seeds=[2009] records=1127 errors=7
+11:08:39 seg done tier=A Mazda CX-7 [2007, 2012] seeds=[2010] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Protege [1999, 2003] seeds=[2003] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Tribute [2001, 2004] seeds=[2003] records=1127 errors=7
+11:08:39 seg done tier=A Mazda MPV [1989, 2006] seeds=[2004] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda5 [2008, 2010] seeds=[2008] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda5 [2012, 2015] seeds=[2012] records=1127 errors=7
+11:08:39 seg done tier=A Mazda B-Series [1986, 2007] seeds=[1996] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Tribute [2005, 2006] seeds=[2005] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda6 [2014, 2021] seeds=[2014] records=1127 errors=7
+11:08:39 seg done tier=A Mazda 626 [1985, 2002] seeds=[2002] records=1127 errors=7
+11:08:39 seg done tier=A Mazda MX-5 Miata [1990, 2019] seeds=[2006] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda3 [2014, 2016] seeds=[2014] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda2 [2011, 2014] seeds=[2011] records=1127 errors=7
+11:08:39 seg done tier=A Mazda CX-5 [2013, 2016] seeds=[2014] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda5 [2006, 2007] seeds=[2007] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Tribute [2008, 2011] seeds=[2008] records=1127 errors=7
+11:08:39 seg done tier=A Mazda RX-8 [2004, 2010] seeds=[2004] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Protege5 [2002, 2003] seeds=[2003] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Protege [1995, 1998] seeds=[1998] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Millenia [1995, 2002] seeds=[2002] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Mazda3 [2017, 2018] seeds=[2017] records=1127 errors=7
+11:08:39 seg done tier=A Mazda B2200 [1988, 1993] seeds=[1991] records=1127 errors=7
+11:08:39 seg done tier=A Mazda B2300 [1994, 2005] seeds=[1997] records=1127 errors=7
+11:08:39 seg done tier=A Mazda Truck [2002, 2004] seeds=[2002] records=1127 errors=7
+11:08:39 seg done tier=A Mazda CX-5 [2017, 2023] seeds=[2017] records=1127 errors=7
+11:08:39 seg done tier=B Mazda Mazda3 [2001, 2009] seeds=[2008] records=1127 errors=7
+11:08:39 seg done tier=B Mazda Mazda3 [2010, 2011] seeds=[2010] records=1127 errors=7
+11:08:39 seg done tier=B Mazda Mazda6 [2003, 2008] seeds=[2007] records=1127 errors=7
+11:08:39 seg done tier=B Mazda CX-9 [2007, 2015] seeds=[2008] records=1127 errors=7
+11:08:39 seg done tier=B Mazda Mazda3 [2012, 2013] seeds=[2012] records=1127 errors=7
+11:08:39 seg done tier=B Mazda Mazda6 [2009, 2013] seeds=[2009] records=1127 errors=7
+11:08:39 seg done tier=B Mazda CX-7 [2007, 2012] seeds=[2010] records=1127 errors=7
+11:08:39 seg done tier=B Mazda Protege [1999, 2003] seeds=[2003] records=1127 errors=7
+11:08:39 seg done tier=B Mazda Tribute [2001, 2004] seeds=[2003] records=1127 errors=7
+11:08:39 seg done tier=B Mazda MPV [1989, 2006] seeds=[2004] records=1127 errors=7
+11:12:48 seg done tier=B Mazda Mazda5 [2008, 2010] seeds=[2008] records=1149 errors=7
+11:16:32 seg done tier=B Mazda Mazda5 [2012, 2015] seeds=[2012] records=1167 errors=7
+11:16:32 nav-fail Mazda B-Series 1996: NavError: Mazda B-Series: no single catalog model for this feed name
+11:16:32 seg done tier=B Mazda B-Series [1986, 2007] seeds=[1996] records=1167 errors=8
+11:18:40 seg done tier=B Mazda Tribute [2005, 2006] seeds=[2005] records=1173 errors=8
+11:22:16 seg done tier=B Mazda Mazda6 [2014, 2021] seeds=[2014] records=1190 errors=8
+11:29:04 seg done tier=B Mazda 626 [1985, 2002] seeds=[2002, 1991, 1994] records=1210 errors=8
+11:36:00 seg done tier=B Mazda MX-5 Miata [1990, 2019] seeds=[2006, 2000, 1999] records=1235 errors=8
+11:40:24 seg done tier=B Mazda Mazda3 [2014, 2016] seeds=[2014] records=1257 errors=8
+11:40:24 time budget reached records=1257
