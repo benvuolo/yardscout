@@ -58,7 +58,11 @@ CHALLENGE_RE = re.compile(r"Attention Required!|cf-chl|challenge-platform|Just a
 
 
 class Refused(Exception):
-    pass
+    """The site or the rules said no. Never retried."""
+
+
+class NetworkError(Exception):
+    """Transient transport failure after retries. The caller may try again later."""
 
 
 def _now() -> str:
@@ -146,12 +150,17 @@ def get(url: str) -> dict:
         raise Refused(f"{u.netloc} stopped earlier: {_breaker(u.netloc).read_text().strip()}")
     if not _robots_ok(url):
         raise Refused(f"robots.txt disallows {u.path}")
-    _locked_wait("global", GLOBAL_GAP)
-    _locked_wait(u.netloc, max(PER_DOMAIN_GAP, DOMAIN_GAP.get(u.netloc, 0.0), _robots_delay(u.netloc)))
-    try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT, allow_redirects=True)
-    except requests.RequestException as e:
-        raise Refused(f"network error: {type(e).__name__}") from e
+    gap = max(PER_DOMAIN_GAP, DOMAIN_GAP.get(u.netloc, 0.0), _robots_delay(u.netloc))
+    for attempt in range(3):
+        _locked_wait("global", GLOBAL_GAP)
+        _locked_wait(u.netloc, gap)
+        try:
+            r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT, allow_redirects=True)
+            break
+        except requests.RequestException as e:
+            if attempt == 2:
+                raise NetworkError(f"network error after 3 tries: {type(e).__name__}") from e
+            time.sleep(15 * (attempt + 1))
     body = r.text
     if r.status_code in (403, 429, 503) or CHALLENGE_RE.search(body[:20000]):
         STATE.mkdir(parents=True, exist_ok=True)
@@ -184,8 +193,8 @@ if __name__ == "__main__":
     a = ap.parse_args()
     try:
         d = get(a.url)
-    except Refused as e:
-        print(json.dumps({"url": a.url, "refused": str(e)}))
+    except (Refused, NetworkError) as e:
+        print(json.dumps({"url": a.url, "refused" if isinstance(e, Refused) else "network_error": str(e)}))
         sys.exit(2)
     out = {k: d[k] for k in ("url", "final_url", "status", "cached", "retrieved", "cache_path") if k in d}
     if a.text:

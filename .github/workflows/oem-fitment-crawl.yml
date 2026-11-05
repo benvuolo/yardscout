@@ -109,6 +109,8 @@ jobs:
             set -e
             tail -2 "raw/$SITE.log" 2>/dev/null || true
             push_raw
+            # 10 = time budget reached, 11 = network-failure streak (pause, retry)
+            if [ "$rc" -eq 11 ]; then sleep 120; continue; fi
             if [ "$rc" -ne 10 ]; then echo "crawl exit $rc after slice $i"; break; fi
           done
           { echo "## $SITE"; echo '```'; tail -5 "raw/$SITE.log" 2>/dev/null; echo '```'; } >> "$GITHUB_STEP_SUMMARY"

@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
-from fetch import Refused  # noqa: E402
+from fetch import NetworkError, Refused  # noqa: E402
 
 TIERS = {
     "A": ["alternator", "starter", "ac-compressor", "headlights", "tail-lights",
@@ -78,6 +78,17 @@ def main() -> None:
         prog_p.write_text(json.dumps(prog))
 
     log(f"start site={site} segments={len(wl)} tiers={tiers}")
+    net = {"streak": 0}
+
+    def net_fail(where: str, e: Exception) -> None:
+        """Transient failure: log, count, and pause the slice on a streak."""
+        prog["errors"] += 1
+        net["streak"] += 1
+        log(f"net-fail {where}: {e}")
+        if net["streak"] >= 5:
+            save()
+            log("5 network failures in a row; pausing this slice (exit 11)")
+            sys.exit(11)
     try:
         for tier in tiers:
             cats = TIERS[tier]
@@ -97,10 +108,15 @@ def main() -> None:
                     key = f"{tier}|{make}|{model}|{year}"
                     if key in done:
                         continue
+                    seed_net_fail = False
                     try:
                         urls = mod.categories_for(make, model, year, cats)
+                        net["streak"] = 0
                     except Refused:
                         raise
+                    except NetworkError as e:
+                        net_fail(f"nav {make} {model} {year}", e)
+                        continue  # not marked done: the next slice retries it
                     except Exception as e:  # navigation miss: log and move on
                         prog["errors"] += 1
                         log(f"nav-fail {make} {model} {year}: {type(e).__name__}: {e}")
@@ -110,8 +126,13 @@ def main() -> None:
                         for list_url in urls.get(cat, []):
                             try:
                                 parts = mod.parts_on_page(list_url, cat)
+                                net["streak"] = 0
                             except Refused:
                                 raise
+                            except NetworkError as e:
+                                seed_net_fail = True
+                                net_fail(f"list {list_url}", e)
+                                continue
                             except Exception as e:
                                 prog["errors"] += 1
                                 log(f"list-fail {list_url}: {type(e).__name__}: {e}")
@@ -122,8 +143,13 @@ def main() -> None:
                                     continue
                                 try:
                                     prod = mod.product(p["product_url"])
+                                    net["streak"] = 0
                                 except Refused:
                                     raise
+                                except NetworkError as e:
+                                    seed_net_fail = True
+                                    net_fail(f"product {p['product_url']}", e)
+                                    continue
                                 except Exception as e:
                                     prog["errors"] += 1
                                     log(f"product-fail {p['product_url']}: {type(e).__name__}: {e}")
@@ -138,7 +164,10 @@ def main() -> None:
                                     if str(f.get("model", "")).lower().replace(" ", "") == model.lower().replace(" ", ""):
                                         lo, hi = f["years"]
                                         covered.update(range(lo, hi + 1))
-                    done.add(key)
+                    if seed_net_fail:
+                        log(f"seed {key} had network failures; left open for retry")
+                    else:
+                        done.add(key)
                     save()
                     missing = sorted((lot_years - covered) - set(tried))
                     if missing and not seeds:
