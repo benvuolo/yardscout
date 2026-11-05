@@ -1,0 +1,7 @@
+01:13:03 start site=www.infinitipartsdeal.com segments=28 tiers=['A', 'B']
+01:24:16 seg done tier=A Infiniti G35 [2003, 2008] seeds=[2004, 2008] records=137 errors=0
+01:28:24 seg done tier=A Infiniti G37 [2008, 2013] seeds=[2009] records=169 errors=0
+01:37:56 seg done tier=A Infiniti FX35 [2003, 2012] seeds=[2005, 2011] records=280 errors=0
+01:41:24 seg done tier=A Infiniti M35 [2006, 2010] seeds=[2006] records=315 errors=0
+01:45:08 seg done tier=A Infiniti QX56 [2004, 2010] seeds=[2008] records=355 errors=0
+01:45:08 time budget reached records=355
