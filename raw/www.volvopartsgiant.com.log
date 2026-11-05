@@ -124,3 +124,46 @@
 11:46:10 seg done tier=B Volvo 240 [1976, 1993] seeds=[1992, 1983] records=839 errors=12
 11:50:50 seg done tier=B Volvo XC70 [2008, 2015] seeds=[2008] records=863 errors=12
 11:50:50 time budget reached records=863
+11:50:59 start site=www.volvopartsgiant.com segments=19 tiers=['A', 'B']
+11:50:59 seg done tier=A Volvo XC90 [2003, 2014] seeds=[2006] records=863 errors=12
+11:50:59 seg done tier=A Volvo S60 [2001, 2018] seeds=[2012] records=863 errors=12
+11:50:59 seg done tier=A Volvo S40 [1992, 2013] seeds=[2006] records=863 errors=12
+11:50:59 seg done tier=A Volvo S80 [1999, 2014] seeds=[2004] records=863 errors=12
+11:50:59 seg done tier=A Volvo V70 [1998, 2010] seeds=[2002] records=863 errors=12
+11:50:59 seg done tier=A Volvo XC60 [2010, 2017] seeds=[2013] records=863 errors=12
+11:50:59 seg done tier=A Volvo XC70 [1998, 2007] seeds=[2004] records=863 errors=12
+11:50:59 seg done tier=A Volvo C70 [1998, 2013] seeds=[2008] records=863 errors=12
+11:50:59 seg done tier=A Volvo S70 [1998, 2000] seeds=[2000] records=863 errors=12
+11:50:59 seg done tier=A Volvo 240 [1976, 1993] seeds=[1992] records=863 errors=12
+11:50:59 seg done tier=A Volvo XC70 [2008, 2015] seeds=[2008] records=863 errors=12
+11:50:59 seg done tier=A Volvo V50 [2002, 2011] seeds=[2005] records=863 errors=12
+11:50:59 seg done tier=A Volvo 850 [1993, 1997] seeds=[1995] records=863 errors=12
+11:50:59 seg done tier=A Volvo C30 [2008, 2013] seeds=[2011] records=863 errors=12
+11:50:59 seg done tier=A Volvo 740 [1986, 1992] seeds=[1991] records=863 errors=12
+11:50:59 seg done tier=A Volvo 960 [1992, 1997] seeds=[1996] records=863 errors=12
+11:50:59 seg done tier=A Volvo 940 [1992, 1995] seeds=[1994] records=863 errors=12
+11:50:59 seg done tier=A Volvo V40 [2000, 2004] seeds=[2004] records=863 errors=12
+11:50:59 seg done tier=A Volvo 60 Series [2001, 2013] seeds=[2012] records=863 errors=12
+11:50:59 seg done tier=B Volvo XC90 [2003, 2014] seeds=[2006] records=863 errors=12
+11:50:59 seg done tier=B Volvo S60 [2001, 2018] seeds=[2012] records=863 errors=12
+11:50:59 seg done tier=B Volvo S40 [1992, 2013] seeds=[2006] records=863 errors=12
+11:50:59 seg done tier=B Volvo S80 [1999, 2014] seeds=[2004] records=863 errors=12
+11:50:59 seg done tier=B Volvo V70 [1998, 2010] seeds=[2002] records=863 errors=12
+11:50:59 seg done tier=B Volvo XC60 [2010, 2017] seeds=[2013] records=863 errors=12
+11:50:59 seg done tier=B Volvo XC70 [1998, 2007] seeds=[2004] records=863 errors=12
+11:50:59 seg done tier=B Volvo C70 [1998, 2013] seeds=[2008] records=863 errors=12
+11:50:59 seg done tier=B Volvo S70 [1998, 2000] seeds=[2000] records=863 errors=12
+11:50:59 seg done tier=B Volvo 240 [1976, 1993] seeds=[1992] records=863 errors=12
+11:50:59 seg done tier=B Volvo XC70 [2008, 2015] seeds=[2008] records=863 errors=12
+11:51:55 product-fail https://www.volvopartsgiant.com/genuine/volvo~bumper-cover-white~39887348: NavError: no __INITIAL_STORE__ on page
+11:54:35 nav-fail Volvo V50 2003: NavError: HTTP 404 for https://www.volvopartsgiant.com/2003-volvo-v50-parts
+11:54:35 seg done tier=B Volvo V50 [2002, 2011] seeds=[2005, 2003] records=880 errors=14
+11:57:07 seg done tier=B Volvo 850 [1993, 1997] seeds=[1995] records=888 errors=14
+12:04:59 seg done tier=B Volvo C30 [2008, 2013] seeds=[2011] records=934 errors=14
+12:06:59 seg done tier=B Volvo 740 [1986, 1992] seeds=[1991] records=938 errors=14
+12:09:07 seg done tier=B Volvo 960 [1992, 1997] seeds=[1996] records=944 errors=14
+12:10:43 seg done tier=B Volvo 940 [1992, 1995] seeds=[1994] records=946 errors=14
+12:14:35 seg done tier=B Volvo V40 [2000, 2004] seeds=[2004] records=964 errors=14
+12:14:35 nav-fail Volvo 60 Series 2012: NavError: Volvo 60 Series: no single catalog model for this feed name
+12:14:35 seg done tier=B Volvo 60 Series [2001, 2013] seeds=[2012] records=964 errors=15
+12:14:35 finished records=964 errors=15
