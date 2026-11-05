@@ -545,3 +545,75 @@
 23:05:28 chain-unlinked bumper-rear 1 numbers named by 86610-25200, no catalog link: 86610-25200-PACK
 23:06:00 chain-unlinked grille 1 numbers named by 86560-25010-CA, no catalog link: 86560-25000-CA
 23:06:16 time budget reached records=2906
+23:06:39 start site=www.hyundaipartsdeal.com mode=worklist tiers=['A', 'B'] records=2906 list_lines=355 year_lines=31 url_index=5197
+23:06:39 seg done tier=A Hyundai Sonata [2011, 2013] seeds=[2011] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Sonata [2006, 2010] seeds=[2009] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Elantra [2011, 2013] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Elantra [2007, 2010] seeds=[2010] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Santa Fe [2007, 2012] seeds=[2007] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Accent [2012, 2017] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Sonata [2015, 2017] seeds=[2015] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Elantra [2014, 2016] seeds=[2016] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Accent [2006, 2011] seeds=[2009] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Elantra [2004, 2006] seeds=[2005] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Genesis [2009, 2016] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Veloster [2012, 2017] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Sonata [1997, 2005] seeds=[2004] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Elantra [2017, 2018] seeds=[2017] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Santa Fe [2001, 2004] seeds=[2004] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Tucson [2005, 2008] seeds=[2006] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Sonata [2014, 2014] seeds=[2014] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Elantra [1995, 2003] seeds=[2002] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Tiburon [2003, 2008] seeds=[2003] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Accent [1995, 2005] seeds=[2005] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Azera [2006, 2017] seeds=[2006] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Santa Fe [2005, 2006] seeds=[2005] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Santa Fe [2013, 2018] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Santa Fe Sport [2013, 2018] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Tucson [2010, 2013] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Elantra GT [2013, 2019] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Genesis Coupe [2010, 2016] seeds=[2010] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Sonata Hybrid [2011, 2017] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Veracruz [2007, 2012] seeds=[2007] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Tucson [2016, 2018] seeds=[2016] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Sonata [2018, 2019] seeds=[2018] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Tucson [2014, 2015] seeds=[2015] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Elantra [2019, 2020] seeds=[2019] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai XG350 [2002, 2005] seeds=[2005] records=2906 errors=0
+23:06:39 seg done tier=A Hyundai Elantra Touring [2009, 2012] seeds=[2012] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Sonata [2011, 2013] seeds=[2011] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Sonata [2006, 2010] seeds=[2009] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Elantra [2011, 2013] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Elantra [2007, 2010] seeds=[2010] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Santa Fe [2007, 2012] seeds=[2007] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Accent [2012, 2017] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Sonata [2015, 2017] seeds=[2015] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Elantra [2014, 2016] seeds=[2016] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Accent [2006, 2011] seeds=[2009] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Elantra [2004, 2006] seeds=[2005] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Genesis [2009, 2016] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Veloster [2012, 2017] seeds=[2013] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Sonata [1997, 2005] seeds=[2004] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Elantra [2017, 2018] seeds=[2017] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Santa Fe [2001, 2004] seeds=[2004] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Tucson [2005, 2008] seeds=[2006] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Sonata [2014, 2014] seeds=[2014] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Elantra [1995, 2003] seeds=[2002] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Tiburon [2003, 2008] seeds=[2003] records=2906 errors=0
+23:06:39 seg done tier=B Hyundai Accent [1995, 2005] seeds=[2005] records=2906 errors=0
+23:13:43 chain-unlinked bumper-front 1 numbers named by 86510-3L202, no catalog link: 86510-3L220
+23:13:43 chain-unlinked bumper-front 1 numbers named by 86510-3L201, no catalog link: 86510-3L220
+23:14:07 chain-unlinked bumper-front 1 numbers named by 86510-3L200, no catalog link: 86510-3L220
+23:19:35 nav-fail Hyundai Azera 2017: ValueError: no 2017 catalog for Hyundai Azera (hyundai-['azera'])
+23:19:35 seg done tier=B Hyundai Azera [2006, 2017] seeds=[2006, 2014, 2017] records=2971 errors=1
+23:22:15 chain-unlinked radiator 1 numbers named by 25310-2B000, no catalog link: 25310-2B701
+23:25:04 chain-unlinked liftgate 1 numbers named by 73700-2B080, no catalog link: 73700-0W510
+23:25:12 seg done tier=B Hyundai Santa Fe [2005, 2006] seeds=[2005, 2006] records=2984 errors=1
+23:28:08 chain-unlinked hood 1 numbers named by 66400-B8000, no catalog link: 66400-4Z000
+23:28:23 chain-unlinked fender 1 numbers named by 66320-B8000, no catalog link: 66320-4Z000
+23:30:15 seg done tier=B Hyundai Santa Fe [2013, 2018] seeds=[2013] records=3012 errors=1
+23:33:27 chain-unlinked door-front 1 numbers named by 76004-4Z000, no catalog link: 76004-2W010
+23:34:07 chain-unlinked door-rear 1 numbers named by 77004-4Z000, no catalog link: 77004-2W000
+23:36:15 chain-unlinked grille 1 numbers named by 86350-4Z110, no catalog link: 86350-2W110
+23:36:47 seg done tier=B Hyundai Santa Fe Sport [2013, 2018] seeds=[2013] records=3050 errors=1
+23:36:47 time budget reached records=3050
