@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-05, §13–21 done, §22 in progress; §23 facelifts in a second session)
+# Parts workstream — status (updated 2026-11-05, §13–21 done, §22 in progress; §23 facelifts and §23.6 routing in a second session)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -126,6 +126,22 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   gen with cuts 2011/2013 (→ 13,893); Sonata EF 1999–2005 with facelift 2002
   (→ 13,604); QX60 with cuts 2016/2019 and "JX" listings routed (→ 13,315).
 
+- §23.6 (hub, accuracy fix, rule 3; PARTS_GAPS §23.6): routing.
+  Ram Van / Ram Wagon / B-vans get their own 1994–97 / 1998–2003 entries
+  (no pickup rows; lamps, mirrors, fuel pump, A/C option, evergreens with
+  power windows option); Ram C/V (cargo Grand Caravan) off the pickup
+  entry (evergreens only). Silverado/Sierra 2500/3500/HD get per-HD-
+  generation entries (1999–2000, 2001–06, 2007–14, 2015–19, 2020–24):
+  evergreens plus headlights only where a GM part number lists the HD
+  (GMT800 2003–06, Sierra 2001–06, GMT900 2007–14). 2007 Classic → GMT800
+  rows. `gm-gen3-truck`/`gm-gen4-truck` apps and verified groups use
+  explicit light-duty spellings (no `Silverado*`/`Sierra*` prefix).
+  1,140 cars changed, all 1500s unchanged. Generic-only 14,788 (4.4%) →
+  15,529 (4.6%) (HD/C/V now show generic rows instead of unsupported
+  1500/pickup rows); no entry 12,402 → 12,364. Open: HD tailgate / tow
+  mirror / K2XX–T1XX HD rows need part-number bases; plain "Silverado" /
+  "Sierra" listings can be unnamed HDs (528 cars, unchanged).
+
 ## How to measure
 
 `interchange_coverage.py` measures engine-family donors, not generic-only.
@@ -160,7 +176,6 @@ The generic-only count re-matches every distinct year/make/model in
    Journey, Chrysler 200 (Journey/200 have no GENERATION_BREAKS; fine for
    FACELIFT_BREAKS). Same rule: a cited source per year; single-component
    years (grille-only, tail-only) and mid-year changes are not cuts.
-   Routing follow-up (§23.2): Dodge "Ram Van"/"Ram Wagon" match the Ram
-   pickup entry.
+   Routing follow-up (§23.2): done in §23.6 (below).
 4. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.

@@ -1843,6 +1843,145 @@ models (Odyssey, Grand Caravan, Town & Country, Pathfinder, Pilot,
 Charger, Dakota, Grand Cherokee) have no appearance rows yet; their breaks
 will bound lamp rows added later.
 
+### 23.6 Routing fixes: Ram Van / Ram Wagon, Silverado / Sierra HD and Classic (2026-11-05)
+
+Accuracy fix under rule 3 ("never invent fitment"), for the routing bugs
+found in §23.2. Code: the `# 2026-11 §23.6` block in `junkyard_scraper.py`
+(right after `_bound_rows_per_generation()`, so the rows are final as
+written) and the engine-family apps of `gm-gen3-truck` / `gm-gen4-truck`.
+
+**Mechanism.** New entries carry longer keywords ("ram van", "silverado
+2500", "sierra classic 2500" …). `match_vehicle`'s specificity guard then
+drops the shorter "ram" / "silverado" / "sierra" keyword, so these
+listings no longer reach the pickup / 1500 entries. Nothing else about
+matching changed.
+
+**1. Dodge Ram Van / Ram Wagon / B-vans.** Every 1994–2003 "Ram Van",
+"Ram Wagon", "Ram Van 1500/2500/3500" listing matched the Ram pickup
+(2nd/3rd gen) and showed the pickup tailgate, the pickup's manual tow
+mirrors, and pickup-window headlights and cluster rows.
+Basis (en.wikipedia.org/wiki/Dodge_Ram_Van): 1994 facelift ("the model
+line's most substantial revision and facelift since 1978"); 1998 third
+generation (longer hood and front fenders, new dashboard, mirrors moved
+to the doors), ended 2003. Every 1994+ engine is a Magnum multiport-injected
+V6/V8. Entries `ram van 1994-1997` and `ram van 1998-2003`
+(`GENERATION_BREAKS["ram van"] = [1998]`):
+
+| Row | Gate | Why |
+|---|---|---|
+| Headlights, Tail Lights | — | Breadth-pass lamp rows (§11 bands), bounded per generation. |
+| Side Mirrors (pair) | — | Does not claim power mirrors (Soul row and band, §13). |
+| Fuel pump module | — | In-tank electric pump on every injected Magnum engine. |
+| A/C compressor | option | Cargo vans were sold without A/C. |
+| Evergreens | window regulator and master switch option | Power windows were not standard on cargo vans. |
+
+Left out: tailgate/bed rows (no bed), radiator fan (engine-driven clutch
+fan, as Savana), anything engine/transmission/converter. Pre-1994 Ram
+Vans have no entry before or after. A "Ram Van" dated 2004+ hits an empty
+suppressor entry. Feed spellings "Dodge Van", "B1500/B2500/B3500",
+"B150/B250/B350", "1500/2500/3500 Van" route here too; those had no entry
+before.
+
+**Ram C/V (found while measuring).** Make Ram, model "C/V" / "Cargo Van" /
+"Caravan" (the cargo Grand Caravan, 2012–15) also matched the Ram pickup
+(4th gen: tailgate, power-fold tow mirrors, Uconnect 8.4). It now gets a
+generic evergreen-only entry for 2012–15 and suppressors elsewhere. Grand
+Caravan rows were not copied (the C/V has no rear seats and no row-level
+basis was checked).
+
+**2. Silverado / Sierra 2500, 2500HD, 3500, 1500HD.** These matched the
+1500 entries, so they took 1500-only rows (tailgates, tow mirrors, running
+boards, LED headlights, MultiPro/Multi-Flex steps, Bose, Denali grille)
+and the 1500 generation windows. The HD generations differ
+(en.wikipedia.org/wiki/Chevrolet_Silverado: GMT400 HD "continued until
+2000, with the new GMT800 Silverado/Sierra HD ... released a year later";
+GMT900 HD through 2014; K2XX HD 2015–19; T1XX HD from 2020), so a 2014 HD
+showed K2XX 1500 rows and a 2019 HD showed T1XX 1500 LED headlights.
+Per HD generation (`silverado hd …`, `sierra hd …`; GENERATION_BREAKS
+2001/2007/2015/2020, FACELIFT_BREAKS 2003):
+
+| HD generation | Rows | Basis |
+|---|---|---|
+| 1999–2000 | evergreens only | A "2500"/"3500" of these years is either the GMT400 carry-over or the GMT800 2500; the listing can't tell. |
+| GMT800 HD 2001–06 | Silverado: headlights 2003–06; Sierra: headlights 2001–02, 2003–06; evergreens | GM 10396912 (chevypartsdeal.com, retrieved 2026-11-05): 2003–07 Silverado 1500, 2007 1500 Classic, 1500 HD, 2500 HD 2003–07, 2007 2500 HD Classic, 3500 2003–06. GM 15850351 (gmpartsgiant.com): 1999–2007 Sierra 1500/2500/3500 incl. Classic, 6.6 diesel and 8.1 among the engines. The Sierra cut at 2003 follows §23.2 (conservative). |
+| GMT900 HD 2007–14 | headlights 2007–14; evergreens | GM 22853027: 2007–13 Silverado 1500, 2007–14 Silverado 2500 HD / 3500 HD. GM 22853029: 2007–13 Sierra 1500, 2007–14 Sierra 2500 HD / 3500 HD. |
+| K2XX HD 2015–19 | evergreens only | Own front end; no catalog basis checked. |
+| T1XX HD 2020–24 | evergreens only | Same. |
+
+Left out, no basis found that the HD shares them: tailgates, manual and
+power-fold tow mirrors, running boards, Bose, Denali grille, LED
+headlights, tailgate steps, camera tailgate. Silverado HD 2001–02
+headlights: GM 16526137 lists 1999–2002 Silverado 1500/2500 (with the
+6.6/8.1 engines) but no 3500, so no row.
+
+**"Classic".** The 2007 "Classic" is the GMT800 carry-over (Wikipedia),
+but "Silverado 1500 Classic" 2007 matched the GMT900 entry (power-fold
+tow mirrors etc.). Entries `silverado classic 2001-2007` /
+`sierra classic 2001-2007` copy the GMT800 1500 rows with the windows
+that ended in 2006 extended to 2007 (headlights: GM 10396912 / 15850351
+list the 2007 Classic; tailgate and manual tow mirrors: the existing
+gmt800-truck / gmt900-truck family notes "incl. 2007 Classic" / "2007
+Classic uses GMT800 mirrors"). 1999–2000 "Classic" (GMT400 carry-over)
+gets evergreens only. HD Classic 2001–07 gets the GMT800 HD rows (2007
+in the headlight window); an HD "Classic" label in other years gets
+evergreens only.
+
+**Engine families.** `gm-gen3-truck` (1999–2007) and `gm-gen4-truck`
+(2007–13) used `("Chevrolet", "Silverado*")` / `("GMC", "Sierra*")`
+prefix apps, as did their verified alternator groups (2003–06, 2007–10).
+The prefix caught every 2500/3500/HD truck. The engine guard already
+kept out 6.6 Duramax and 8.1 decodes, but the HD 6.0 passed, and
+decode-less HD donors and seekers were offered as "likely" (and inside
+the verified 2003–06 group as "verified"). The apps are now explicit
+light-duty spellings: Silverado, Silverado 1500, Sierra, Sierra 1500,
+Sierra Denali 1500 (both families); Silverado/Sierra 1500 Classic,
+Silverado/Sierra Classic, Sierra Classic 1500 for 2007 only, in Gen III
+only (the Classic no longer also asks "Gen IV?"). The verified groups list
+Silverado, Silverado 1500, Sierra, Sierra 1500. Left out on purpose:
+"Sierra Hybrid" (the 2-mode hybrid has no belt alternator; 4 cars lose
+the Gen IV app) and "Silverado 1500 Ext Cab" (2 cars; the spelling would
+also show in the app's model picker). Explicit names were used so
+`docs/app.js` (`pfAppMatches`) needs no change.
+
+**Checks.** Every distinct year/make/model on the lots (334,588 cars,
+12,666 distinct; HEAD with §22 vs working tree, same inventory) matched
+with seven decodes (none, sedan FWD, coupe, hatch, SUV AWD, pickup 4WD,
+van RWD). 1,140 cars changed, all in the intended groups, and every
+decode gives the same row changes as no decode:
+
+| Group | Cars | Before | After |
+|---|---|---|---|
+| Ram Van / Ram Wagon listings | 259 | Ram pickup 2nd/3rd gen: tailgate, manual tow mirrors, headlights, cluster + evergreens | Ram Van entry: lamps, mirrors, fuel pump, A/C (option), evergreens (windows option) |
+| B-van spellings (Dodge Van, B2500 …) | 38 | no entry | Ram Van entry |
+| Ram C/V | 31 | Ram pickup 4th gen (tailgate, power-fold mirrors, Uconnect 8.4) | evergreens only |
+| Silverado HD (2500/2500HD/3500/1500HD/HD Classic) | 523 | Silverado 1500 entry of the year | HD entry: lost tailgate, tow mirrors, running boards, LED headlights, steps; headlights only where cited |
+| Sierra HD | 186 | Sierra 1500 entry | HD entry: also lost Bose, Denali grille, camera tailgate |
+| Silverado / Sierra 1500 Classic | 102 | GMT900 1500 (2007): power-fold mirrors, Denali grille | GMT800 rows (manual tow mirrors, tailgate, headlights 2003–07); the 1 1999–2000 car: evergreens |
+
+Engine families: 678 HD/Classic-HD cars left `gm-gen3-truck` /
+`gm-gen4-truck`; 102 2007 1500 Classics now resolve to Gen III only; one
+1999–2000 GMT400 "Silverado Classic" left Gen III; 4 Sierra Hybrids and
+2 "Silverado 1500 Ext Cab" lost the app (above).
+Every other car, all 1500s included, is unchanged (matches and families).
+
+Coverage is reported as it falls, not improved: generic-only 14,788
+(4.4%) → 15,529 (4.6%), +741 (Silverado HD 523, Sierra HD 186, C/V 31,
+one 1999 Classic: they now show generic rows instead of 1500/pickup rows
+they did not have a basis for). No entry 12,402 → 12,364 (−38, the
+B-vans). Tests: new §23.6 checks in `test_parts_gaps.py` (Ram Van /
+Ram Wagon / B-van / C/V never get a pickup card or pickup rows, any
+decode; HD never gets 1500-only rows; HD headlight windows; Classic rows;
+1500 cards unchanged) and `test_interchange.py` (HD never in the light-duty
+families; 1500 families unchanged; HD donor never verified). All of
+`test_parts_gaps.py`, `test_interchange.py`, `test_consensus_parts.py`,
+`test_vpic_fixes.py`, `test_model_normalization.py` pass.
+
+**Open.** Plain "Silverado" / "Sierra" listings (528 cars) can be HD
+trucks the listing doesn't name; they keep the 1500 rows (a VIN decode
+naming the series could route them later). HD rows for K2XX/T1XX and HD
+tailgates/tow mirrors need catalog part numbers before they're added.
+Pre-1999 C/K "Silverado 2500" listings (~80) have no entry, as before.
+
 ## 22. Next measured block (2026-11-05, owner via hub: "Ensure everything is at speed")
 
 Same basis and method as §18–21 (generations and facelifts researched first;

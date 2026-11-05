@@ -7690,6 +7690,166 @@ if _family_problems:
         "PLATFORM_FAMILIES lint failed:\n  " + "\n  ".join(_family_problems))
 
 
+# ---------------------------------------------------------------------------
+# 2026-11 §23.6 (PARTS_GAPS §23.6): routing fixes, never-invent-fitment.
+#
+# 1. Dodge "Ram Van" / "Ram Wagon" (B-series full-size vans) matched the Ram
+#    PICKUP entry through the bare "ram" keyword and showed pickup tailgates,
+#    pickup headlights and Uconnect screens. They get their own entries; their
+#    longer keywords make match_vehicle's specificity guard drop the pickup.
+# 2. Silverado / Sierra 2500, 2500HD, 3500, 1500HD and "Classic" listings
+#    matched the 1500 entries ("silverado"/"sierra" keyword) and inherited
+#    1500 rows and 1500 generation windows (the HD generations run 2001-07,
+#    2007-14, 2015-19, 2020+, not the 1500's 1999-06/07-13/14-18/19+). HD
+#    trucks now get their own per-HD-generation entries: generic evergreen
+#    rows plus only the rows a GM catalog part number cites for the HD.
+#    "Classic" listings (2007 carry-over GMT800) get the GMT800 rows; the
+#    1999-2000 "Classic"/HD trucks were the GMT400 carry-over and get generic
+#    rows only.
+# Created here, after evergreens, overlay, platform families and the
+# generation/facelift passes, so the rows below are final as written.
+# ---------------------------------------------------------------------------
+def _evergreen_rows(option_names: tuple[str, ...] = ()) -> list[dict]:
+    rows = []
+    for part, _tokens in _EVERGREEN_PARTS:
+        r = dict(part)
+        if r["name"] in option_names:
+            r["option"] = True
+        rows.append(r)
+    return rows
+
+
+def _routing_entry(key: str, display: str, make: str, gen: str,
+                   match: list[str], years: tuple[int, int],
+                   parts: list[dict]) -> None:
+    assert key not in UNOBTANIUM_DB, key
+    UNOBTANIUM_DB[key] = {"display": f"{display} ({gen})" if gen else display,
+                          "make": make, "gen": gen,
+                          "match": list(match), "year_range": years,
+                          "top_parts": parts}
+
+
+# --- 1. Dodge Ram Van / Ram Wagon (B-series) -------------------------------
+# Basis (en.wikipedia.org/wiki/Dodge_Ram_Van): 1994 facelift ("the model
+# line's most substantial revision and facelift since 1978"); 1998 third
+# generation (longer hood and front fenders, new dashboard, mirrors moved to
+# the doors), ended 2003. Every 1994+ engine is a Magnum multiport-injected
+# V6/V8 (3.9/5.2 from 1992), so every van has an in-tank electric pump.
+# A/C, power windows and power mirrors were not standard on cargo vans
+# (option-flagged; the mirror row claims no power mirrors). No radiator-fan
+# row (engine-driven clutch fan), nothing from the pickup entry.
+_RAM_VAN_MATCH = [
+    "ram van", "ram wagon", "dodge van", "dodge b150", "dodge b250",
+    "dodge b350", "dodge b1500", "dodge b2500", "dodge b3500", "dodge b100",
+    "dodge b200", "dodge b300", "dodge 1500 van", "dodge 2500 van",
+    "dodge 3500 van", "dodge 150 van", "dodge 250 van", "dodge 350 van",
+    "dodge 200 van",
+]
+_RAM_VAN_ROWS = [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+    _TAILS,
+    {"name": "Side Mirrors (pair)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 15},
+    _GAP_PUMP,
+    {**_GAP_AC, "option": True},
+]
+for (_lo, _hi), _lbl in (((1994, 1997), "1994–97"), ((1998, 2003), "1998–2003")):
+    _routing_entry(f"ram van {_lo}-{_hi}", "Dodge Ram Van / Ram Wagon", "Dodge", _lbl,
+                   _RAM_VAN_MATCH, (_lo, _hi),
+                   [dict(r) for r in _RAM_VAN_ROWS] + _evergreen_rows(
+                       ("Window Regulator + Motor (front)", "Power Window Master Switch")))
+# A "Ram Van" outside 1994-2003 gets an empty suppressor entry (no rows, no
+# card) so it never falls through to the pickup's bare "ram" keyword.
+_routing_entry("ram van suppress", "Dodge Ram Van / Ram Wagon", "Dodge", "",
+               _RAM_VAN_MATCH, (2004, 2100), [])
+# Ram C/V (feed spellings "C/V", "Cargo Van", "Caravan" under make Ram): the
+# cargo Grand Caravan, sold as a Ram 2012-15 (en.wikipedia.org/wiki/
+# Dodge_Caravan). It also matched the pickup entry. Generic evergreen rows
+# only (no Grand Caravan seat/interior rows: the C/V has no rear seats);
+# other years are suppressed.
+_RAM_CV_MATCH = ["ram c/v", "ram cv", "ram cargo van", "ram caravan"]
+_routing_entry("ram c/v 2012-2015", "Ram C/V (cargo Grand Caravan)", "Ram", "",
+               _RAM_CV_MATCH, (2012, 2015), _evergreen_rows())
+_routing_entry("ram c/v suppress early", "Ram C/V", "Ram", "", _RAM_CV_MATCH, (1900, 2011), [])
+_routing_entry("ram c/v suppress late", "Ram C/V", "Ram", "", _RAM_CV_MATCH, (2016, 2100), [])
+
+# --- 2. Silverado / Sierra HD and Classic ----------------------------------
+# Headlight bases (GM catalog fitment, chevypartsdeal.com / gmpartsgiant.com,
+# retrieved 2026-11-05):
+#   GM 10396912: 2003-07 Silverado 1500, 2007 1500 Classic, 1500 HD
+#     2003/05-06, 2007 1500 HD Classic, 2500 HD 2003-07, 2007 2500 HD
+#     Classic, 3500 2003-06.
+#   GM 22853027: 2007-13 Silverado 1500, 2007-14 Silverado 2500 HD/3500 HD.
+#   GM 15850351: 1999-2007 Sierra 1500/2500/3500 incl. Classic (6.6 diesel
+#     and 8.1 among the listed engines, i.e. HD trucks).
+#   GM 22853029: 2007-13 Sierra 1500, 2007-14 Sierra 2500 HD/3500 HD.
+# Silverado HD 2001-02 headlights: GM 16526137 lists 1999-2002 1500/2500 but
+# no 3500, so no row. No tow-mirror, tailgate, Bose, Denali-grille or LED
+# headlight row: no catalog basis found that the HD shares them. K2XX HD
+# (2015-19) and T1XX HD (2020+) have their own front ends: evergreens only.
+_HL = {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 50, "high": 125, "cost": 20}
+
+
+def _hd_match(line: str) -> list[str]:
+    return [f"{line} 2500", f"{line} 3500", f"{line} 1500hd", f"{line} 1500 hd",
+            f"{line} hd", f"2500 {line}", f"3500 {line}", f"{line} k2500",
+            f"{line} k3500", f"{line} c2500", f"{line} c3500"]
+
+
+def _hd_classic_match(line: str) -> list[str]:
+    return [f"{line} 2500hd classic", f"{line} 2500 hd classic",
+            f"{line} 2500 classic", f"{line} 3500 classic",
+            f"{line} 3500hd classic", f"{line} 1500hd classic",
+            f"{line} 1500 hd classic", f"{line} classic 2500",
+            f"{line} classic 3500", f"{line} classic 1500hd",
+            f"{line} classic 1500 hd", f"{line} hd classic"]
+
+
+for _line, _make, _disp, _hl_gmt800 in (
+        ("silverado", "Chevrolet", "Chevy Silverado HD", [(2003, 2006)]),
+        ("sierra", "GMC", "GMC Sierra HD", [(2001, 2002), (2003, 2006)])):
+    _hd_gens = (
+        ((1999, 2000), "1999–2000 HD (GMT400 carry-over or GMT800)", []),
+        ((2001, 2006), "GMT800 HD", [{**_HL, "yr_min": a, "yr_max": b} for a, b in _hl_gmt800]),
+        ((2007, 2014), "GMT900 HD", [dict(_HL)]),
+        ((2015, 2019), "K2XX HD", []),
+        ((2020, 2024), "T1XX HD", []),
+    )
+    for (_lo, _hi), _lbl, _rows in _hd_gens:
+        _routing_entry(f"{_line} hd {_lo}-{_hi}", _disp, _make, _lbl,
+                       _hd_match(_line), (_lo, _hi), _rows + _evergreen_rows())
+    # 2007 HD Classic = GMT800 HD (2001-07); 2007 catalog fit per the bases.
+    _routing_entry(f"{_line} hd classic 2001-2007", _disp, _make, "GMT800 HD Classic",
+                   _hd_classic_match(_line), (2001, 2007),
+                   [{**_HL, "yr_min": a, "yr_max": 2007 if b == 2006 else b}
+                    for a, b in _hl_gmt800] + _evergreen_rows())
+    # A "Classic" HD label outside 2001-07 (GMT400 carry-over 1999-2000, or
+    # a feed mislabel) gets generic rows only, never the 1500 entry's.
+    for (_lo, _hi), _lbl in (((1999, 2000), "1999–2000 HD Classic (GMT400 carry-over)"),
+                             ((2008, 2024), "HD, \"Classic\" label")):
+        _routing_entry(f"{_line} hd classic {_lo}-{_hi}", _disp, _make, _lbl,
+                       _hd_classic_match(_line), (_lo, _hi), _evergreen_rows())
+    # 1500 Classic: the 2007 carry-over of the GMT800 1500, so the GMT800
+    # 1500 rows apply, windows extended to 2007 where they ended at 2006
+    # (headlights: GM 10396912 / 15850351; tailgate and manual tow mirrors:
+    # the gmt800-truck / gmt900-truck platform-family notes).
+    _cl_rows = []
+    for _p in UNOBTANIUM_DB[f"{_line} 1999-2006"]["top_parts"]:
+        _q = dict(_p)
+        if _q.get("yr_max") == 2006:
+            _q["yr_max"] = 2007
+        _cl_rows.append(_q)
+    _cl_match = [f"{_line} classic", f"{_line} 1500 classic"]
+    _routing_entry(f"{_line} classic 2001-2007", _disp.replace(" HD", "") + " Classic", _make,
+                   "GMT800 Classic", _cl_match, (2001, 2007), _cl_rows)
+    _routing_entry(f"{_line} classic 1999-2000", _disp.replace(" HD", "") + " Classic", _make,
+                   "GMT400 carry-over", _cl_match, (1999, 2000), _evergreen_rows())
+
+for _b in ("silverado hd", "sierra hd"):
+    GENERATION_BREAKS[_b] = [2001, 2007, 2015, 2020]
+    FACELIFT_BREAKS[_b] = [2003]
+GENERATION_BREAKS["ram van"] = [1998]
+
+
 # ===========================================================================
 # TRIM PLATFORM GROUPS — performance trims share BODY parts with their
 # platform siblings even when the engine is trim-unique. An E46 M3's window
@@ -9694,8 +9854,20 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "GM Gen III Vortec truck V8 (4.8/5.3/6.0)",
         "engine": {"liters": [4.8, 5.3, 6.0], "cyl": 8},
         "apps": [
-            ("Chevrolet", "Silverado*", 1999, 2007),
-            ("GMC", "Sierra*", 1999, 2007),
+            # §23.6: explicit light-duty spellings, not the "Silverado*" /
+            # "Sierra*" prefix, which also caught 2500/3500/HD trucks (6.6
+            # Duramax, 8.1, HD 6.0: no basis that they share these parts)
+            # and 1999-2000 GMT400 "Classic" trucks. 2007 Classic = GMT800.
+            ("Chevrolet", "Silverado", 1999, 2007),
+            ("Chevrolet", "Silverado 1500", 1999, 2007),
+            ("Chevrolet", "Silverado 1500 Classic", 2007, 2007),
+            ("Chevrolet", "Silverado Classic", 2007, 2007),
+            ("GMC", "Sierra", 1999, 2007),
+            ("GMC", "Sierra 1500", 1999, 2007),
+            ("GMC", "Sierra 1500 Classic", 2007, 2007),
+            ("GMC", "Sierra Classic", 2007, 2007),
+            ("GMC", "Sierra Classic 1500", 2007, 2007),
+            ("GMC", "Sierra Denali 1500", 1999, 2007),
             ("Chevrolet", "Tahoe", 2000, 2006),
             ("GMC", "Yukon*", 2000, 2006),
             ("Chevrolet", "Suburban*", 2000, 2006),
@@ -9711,8 +9883,14 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "GM Gen IV Vortec truck V8 (4.8/5.3/6.0/6.2)",
         "engine": {"liters": [4.8, 5.3, 6.0, 6.2], "cyl": 8},
         "apps": [
-            ("Chevrolet", "Silverado*", 2007, 2013),
-            ("GMC", "Sierra*", 2007, 2013),
+            # §23.6: light-duty spellings only (see gm-gen3-truck). The 2007
+            # Classic is GMT800 (Gen III family); the 2-mode Hybrid has no
+            # belt alternator, so it is left out.
+            ("Chevrolet", "Silverado", 2007, 2013),
+            ("Chevrolet", "Silverado 1500", 2007, 2013),
+            ("GMC", "Sierra", 2007, 2013),
+            ("GMC", "Sierra 1500", 2007, 2013),
+            ("GMC", "Sierra Denali 1500", 2007, 2013),
             ("Chevrolet", "Tahoe", 2007, 2014),
             ("GMC", "Yukon*", 2007, 2014),
             ("Chevrolet", "Suburban*", 2007, 2014),
@@ -12134,8 +12312,10 @@ _ALT_VERIFIED: dict = {
     },
     "gm-gen3-truck": {
         "evidence": "CarQuest weblink part 8292A (Lester 8292, Delco AD244 145A) application summary + aspwholesale.com table (retrieved 2026-10-22): Silverado/Sierra 2003-2006, Tahoe 2003-2004, Yukon 2003-2006, Suburban 2003-2006, Avalanche 2003-2006, Escalade 2003-2005. Earlier 99-02 trucks use the AD230-era unit — left at likely.",
-        "groups": [[("Chevrolet", "Silverado*", 2003, 2006),
-                    ("GMC", "Sierra*", 2003, 2006),
+        "groups": [[("Chevrolet", "Silverado", 2003, 2006),
+                    ("Chevrolet", "Silverado 1500", 2003, 2006),
+                    ("GMC", "Sierra", 2003, 2006),
+                    ("GMC", "Sierra 1500", 2003, 2006),
                     ("Chevrolet", "Tahoe", 2003, 2004),
                     ("GMC", "Yukon*", 2003, 2006),
                     ("Chevrolet", "Suburban*", 2003, 2006),
@@ -12144,8 +12324,10 @@ _ALT_VERIFIED: dict = {
     },
     "gm-gen4-truck": {
         "evidence": "TYC catalog PDF (wordwideparts.com, retrieved 2026-10-22): 2-08302 (GM 15225927) C/K pickup 4.8/5.3 2005-2010 — clipped to this family's 2007+ window.",
-        "groups": [[("Chevrolet", "Silverado*", 2007, 2010),
-                    ("GMC", "Sierra*", 2007, 2010)]],
+        "groups": [[("Chevrolet", "Silverado", 2007, 2010),
+                    ("Chevrolet", "Silverado 1500", 2007, 2010),
+                    ("GMC", "Sierra", 2007, 2010),
+                    ("GMC", "Sierra 1500", 2007, 2010)]],
     },
     "gm-ecotec24": {
         "evidence": "TYC 2-11459 application table (tycamericas.com, retrieved 2026-10-22; Lester 11459, GM 13512759): Equinox 2.4 2010-2017, Terrain 2.4 2010-2017. Lester 11265 (Valeo, GM 15828450/22762984) application list (am-autoparts.com, retrieved 2026-10-22) includes Saturn Vue 2.4 2008-2010. Cobalt/Malibu/G6-era LE5 uses a different unit — left at likely.",

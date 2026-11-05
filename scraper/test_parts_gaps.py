@@ -15,6 +15,7 @@ cars on the lots, and the body-style gate they introduced.
 Run:  python3 scraper/test_parts_gaps.py
 """
 
+import re
 import sys
 from pathlib import Path
 
@@ -637,6 +638,72 @@ check("§22 QX60: mech + standard moonroof 2013-20; AWD coupling gated; lamps cu
       and i14["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in i18
       and i14["Headlights (clear, non-hazed)"]["fits"] == "2013–2015" and i18["Headlights (clear, non-hazed)"]["fits"] == "2016–2018"
       and [m["display"] for m in js.match_vehicle(2013, "Infiniti", "JX")] == ["Infiniti QX60"])
+
+# §23.6 routing: Ram Van / Ram Wagon never match the pickup; Silverado /
+# Sierra HD never take 1500-only rows; 1500s unchanged.
+def _cards(y, mk, mo, dec=None):
+    return [m["display"] for m in js.match_vehicle(y, mk, mo, vin_decode=dec)]
+_PICKUP4 = {"trim": "", "series": "", "trimQuality": "empty", "bodyClass": "Pickup", "driveType": "4WD/4-Wheel Drive/4x4"}
+_VAN = {"trim": "", "series": "", "trimQuality": "empty", "bodyClass": "Van", "driveType": "RWD/Rear-Wheel Drive"}
+_PICKUP_ONLY = {"Tailgate (clean)", "Tow Mirrors (manual, pair)", "Power-Fold Tow Mirrors (pair)",
+                "Uconnect 8.4 Touchscreen", "12\" Uconnect Touchscreen"}
+_bad = []
+for _y in range(1994, 2004):
+    for _mo in ("Ram Van", "Ram Wagon", "Ram Van 1500", "Ram Van 2500", "Ram Van 3500", "Ram Wagon 3500", "B2500"):
+        for _dec in (None, _PICKUP4, _VAN):
+            _c = _cards(_y, "Dodge", _mo, _dec)
+            _p = set(parts(_y, "Dodge", _mo, _dec))
+            if any("Ram Truck" in c for c in _c) or _p & _PICKUP_ONLY or not any("Ram Van" in c for c in _c):
+                _bad.append((_y, _mo, _c))
+for _y in (2005, 2012):
+    if any("Ram Truck" in c for c in _cards(_y, "Dodge", "Ram Van")):
+        _bad.append((_y, "Ram Van", "suppressor"))
+for _y in (2012, 2014):
+    for _mk, _mo in (("Ram", "C/V"), ("Ram", "Cargo Van"), ("Ram", "Caravan")):
+        if any("Ram Truck" in c for c in _cards(_y, _mk, _mo)):
+            _bad.append((_y, _mo))
+check("§23.6 Ram Van / Ram Wagon / B-van / Ram C/V never match the Ram pickup entry or its rows", not _bad, str(_bad[:5]))
+_rv = js.UNOBTANIUM_DB["ram van 1998-2003"]["top_parts"]
+check("§23.6 Ram Van rows: A/C and power-window rows option-flagged; no tailgate, engine, transmission or converter",
+      all(q.get("option") for q in _rv if q["name"] in ("A/C Compressor (clutch spins free)", "Window Regulator + Motor (front)", "Power Window Master Switch"))
+      and not any(re.search(r"tailgate|engine assembly|transmission\b|catalytic", q["name"], re.I) for q in _rv)
+      and _fits(2000, "Dodge", "Ram Van", "Headlights (clear, non-hazed)") == "1998–2003"
+      and _fits(1995, "Dodge", "Ram Wagon", "Headlights (clear, non-hazed)") == "1994–1997")
+
+_HD_ONLY_1500 = {"Tailgate (straight)", "Tow Mirrors (manual, pair)", "Power-Fold Tow Mirrors (pair)", "Power Fold Tow Mirrors (pair)",
+                 "Power Retractable Running Boards", "OEM LED Headlights", "Multi-Flex Tailgate Steps", "MultiPro Tailgate Steps",
+                 "Bose Amp + Speakers", "Denali Grille / Trim", "Tailgate (w/ camera)"}
+_bad = []
+for _y in range(1999, 2025):
+    for _mk, _mo in (("Chevrolet", "Silverado 2500HD"), ("Chevrolet", "Silverado 2500"), ("Chevrolet", "Silverado 3500"),
+                     ("Chevrolet", "Silverado 3500HD"), ("Chevrolet", "Silverado 1500HD"), ("GMC", "Sierra 2500HD"),
+                     ("GMC", "Sierra 2500"), ("GMC", "Sierra 3500"), ("Chevrolet", "Silverado 2500HD Classic"),
+                     ("GMC", "Sierra Classic 2500HD"), ("Chevrolet", "2500 Silverado Pickup")):
+        for _dec in (None, _PICKUP4):
+            _c = _cards(_y, _mk, _mo, _dec)
+            _p = set(parts(_y, _mk, _mo, _dec))
+            if len(_c) != 1 or "HD" not in _c[0] or _p & _HD_ONLY_1500:
+                _bad.append((_y, _mo, _c, sorted(_p & _HD_ONLY_1500)))
+check("§23.6 Silverado/Sierra 2500/3500/HD get only the HD entry, never 1500-only rows", not _bad, str(_bad[:5]))
+check("§23.6 HD headlight windows follow the cited GM catalog numbers",
+      _fits(2005, "Chevrolet", "Silverado 2500HD", "Headlights (clear, non-hazed)") == "2003–2006"
+      and "Headlights (clear, non-hazed)" not in parts(2002, "Chevrolet", "Silverado 2500HD")
+      and _fits(2002, "GMC", "Sierra 2500HD", "Headlights (clear, non-hazed)") == "2001–2002"
+      and _fits(2014, "Chevrolet", "Silverado 2500HD", "Headlights (clear, non-hazed)") == "2007–2014"
+      and _fits(2007, "Chevrolet", "Silverado 2500HD Classic", "Headlights (clear, non-hazed)") == "2003–2007"
+      and "Headlights (clear, non-hazed)" not in parts(2016, "Chevrolet", "Silverado 2500HD")
+      and "Headlights (clear, non-hazed)" not in parts(2000, "Chevrolet", "Silverado 2500"))
+check("§23.6 2007 Classic 1500 gets GMT800 rows (manual tow mirrors), not GMT900 power-fold mirrors",
+      "Tow Mirrors (manual, pair)" in parts(2007, "Chevrolet", "Silverado 1500 Classic")
+      and "Power-Fold Tow Mirrors (pair)" not in parts(2007, "Chevrolet", "Silverado 1500 Classic")
+      and _fits(2007, "GMC", "Sierra Classic 1500", "Tailgate (straight)") == "2001–2007"
+      and "Tailgate (straight)" not in parts(1999, "GMC", "Sierra Classic"))
+_ld = {(2004, "Chevrolet", "Silverado 1500"): "Chevy Silverado (GMT800)", (2010, "GMC", "Sierra 1500"): "GMC Sierra (Silverado twin) (GMT900)",
+       (2016, "Chevrolet", "Silverado"): "Chevy Silverado (K2XX)", (2021, "GMC", "Sierra"): "GMC Sierra (Silverado twin) (T1XX)",
+       (2007, "Chevrolet", "Silverado 1500"): "Chevy Silverado (GMT900)"}
+check("§23.6 1500s keep their own entry",
+      all(_cards(*k) == [v] for k, v in _ld.items()) and "Power-Fold Tow Mirrors (pair)" in parts(2010, "Chevrolet", "Silverado 1500"),
+      str({k: _cards(*k) for k in _ld}))
 
 # 3. band sanity + lint
 bad = []
