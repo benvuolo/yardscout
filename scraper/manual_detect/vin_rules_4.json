@@ -5,7 +5,7 @@
   "Lincoln",
   "Mercury"
  ],
- "generated_utc": "2026-11-05T03:14:08Z",
+ "generated_utc": "2026-11-05T03:14:56Z",
  "generator": "scraper/manual_detect/vin_rules_4.py",
  "inputs": {
   "inventory_live": "docs/data/inventory_live.json",
@@ -17,7 +17,7 @@
   "web_sources": "independent text sources were read through web-search result text (WebFetch could not reach wikipedia.org / auto123.com from this session); quotes in each citation"
  },
  "answer": {
-  "Ford": "NOT ENCODED. No Ford Motor Company Part 565 filing names a transmission: all 249 Ford filings in MID were downloaded (MY1984-2028); the 125 with a text layer mention 'transmission' once, in a cover-letter note about a GVWR code (01-022-N11B-8035), and the scanned filings read as images (MY1985, 1987, 1993, 2001-2007, 2014) have no transmission position. Characters: 4 restraint (cars) / brake+GVWR (trucks), 5 make designator (cars) + 6-7 line/series/body, or 5-7 line/series/chassis/body (trucks), 8 engine, 10 year, 11 plant. Where an engine or series code belongs to a configuration Ford sold only with a manual, the code decides: Escape 2.0 Zetec (2001, 2002, 2004), SVT Focus (2002-2004), Focus ST sedan (2005-2007), Focus ST (2013-2018), Focus RS (2016-2018), Focus 1.0 EcoBoost (2015 only), Fiesta 1.0 EcoBoost (2014-2017), Fiesta ST (2014-2019), Fusion 1.6 EcoBoost (2014 only), Shelby GT500 (2013-2014), Shelby GT350 (2016-2020), Taurus SHO 3.0 (1993). Everything else (F-Series, Ranger, Explorer, Mustang GT/V6/EcoBoost, Focus/Fiesta base engines, Escape from 2005 ...) cannot be decided from the VIN.",
+  "Ford": "NOT ENCODED. No Ford Motor Company Part 565 filing names a transmission: all 249 Ford filings in MID were downloaded (MY1984-2028); the 125 with a text layer mention 'transmission' once, in a cover-letter note about a GVWR code (01-022-N11B-8035), and the scanned filings read as page images (MY1985, 1987, 1993, 2001-2007, 2014) show no transmission position. Characters: 4 restraint (cars) / brake+GVWR (trucks), 5 make designator (cars) + 6-7 line/series/body, or 5-7 line/series/chassis/body (trucks), 8 engine, 10 year, 11 plant. Where an engine or series code belongs to a configuration Ford sold only with a manual, the code decides: Escape 2.0 Zetec (2001, 2002, 2004), SVT Focus (2002-2004), Focus ST sedan (2005-2007), Focus ST (2013-2018), Focus RS (2016-2018), Focus 1.0 EcoBoost (2015 only), Fiesta 1.0 EcoBoost (2014-2017), Fiesta ST (2014-2019), Fusion 1.6 EcoBoost (2014 only), Shelby GT500 (2013-2014), Shelby GT350 (2016-2020), Taurus SHO 3.0 (1993). Everything else (F-Series, Ranger, Explorer, Mustang GT/V6/EcoBoost, Focus/Fiesta base engines, Escape from 2005 ...) cannot be decided from the VIN.",
   "Lincoln": "NOT ENCODED (Ford's scheme, same positions). No Lincoln engine or series code is manual-only: the only Lincoln with a manual in the period, the LS V6 (2000-2002, 5-speed), shares its 3.0L V6 engine code with the automatic LS, so the VIN cannot tell them apart. No Lincoln rule.",
   "Mercury": "NOT ENCODED (Ford's scheme). One series+engine combination is manual-only: Cougar I4 coupe, series 60 + engine 3, MY2001-2002. Capri XR2 turbo (1991-1994; MY1993 passenger-car engine code 6 = 1.6 EFI-TC) was manual-only per EPA, but no lot car carries it (lot Capris are code Z, the 1.6 DOHC base engine that had an automatic)."
  },
@@ -50,7 +50,7 @@
   },
   {
    "make": "Ford",
-   "scope": "Focus 1.0L EcoBoost MY2016-2018 (code E, 42 lot cars)",
+   "scope": "Focus 1.0L EcoBoost MY2016-2018 (code E, 43 lot cars)",
    "why": "EPA lists Automatic (S6) from 2016 (36988, 38469, 39607). vPIC returns '6-spd Automatic' for every 2018 one (uniformCell auto), which is a model default, not this rule's business"
   },
   {
@@ -156,35 +156,35 @@
   },
   "published_labels_contradicting_a_rule": 0,
   "scan": {
-   "rule_wmi_vins": 39404,
-   "out_of_rule_scope": 37012,
-   "in_scope_code_not_in_table": 1677,
+   "rule_wmi_vins": 39579,
+   "out_of_rule_scope": 37177,
+   "in_scope_code_not_in_table": 1686,
    "covered": 500,
-   "bad_check_digit": 206,
+   "bad_check_digit": 207,
    "vin_year_vs_listing_mismatch": 9
   },
   "make_coverage": {
    "Ford": {
-    "cars": 54106,
-    "no_trans_info": 53345,
-    "vin17": 44431,
+    "cars": 54222,
+    "no_trans_info": 53460,
+    "vin17": 44641,
     "covered_by_rule": 494,
     "newly_confirmed_manual_counted": 70,
     "newly_confirmed_manual_candidate_rules_only": 4,
     "newly_labelled_non_manual_counted": 420
    },
    "Lincoln": {
-    "cars": 3408,
-    "no_trans_info": 3359,
-    "vin17": 2764,
+    "cars": 3417,
+    "no_trans_info": 3368,
+    "vin17": 2776,
     "newly_confirmed_manual_counted": 0,
     "newly_confirmed_manual_candidate_rules_only": 0,
     "newly_labelled_non_manual_counted": 0
    },
    "Mercury": {
-    "cars": 2861,
-    "no_trans_info": 2848,
-    "vin17": 2194,
+    "cars": 2867,
+    "no_trans_info": 2854,
+    "vin17": 2205,
     "covered_by_rule": 6,
     "newly_confirmed_manual_counted": 6,
     "newly_confirmed_manual_candidate_rules_only": 0,
@@ -195,7 +195,7 @@
    "Ford": {
     "vin:automatic:uniformCell": 360,
     "listing:automatic": 327,
-    "vin:automatic": 47,
+    "vin:automatic": 46,
     "vin:cvt:uniformCell": 23,
     "vin:cvt": 2,
     "vin:manual": 1,
@@ -397,22 +397,22 @@
      },
      "cars_without_trans_info": 419,
      "cars_without_trans_info_by_reason": {
-      "vpic_trans_blank": 402,
-      "not_in_cache_backup": 17
+      "vpic_trans_blank": 401,
+      "not_in_cache_backup": 18
      }
     },
     "disagree_examples": [],
     "epa_conflict_examples": [],
     "codes_seen_on_lots": {
-     "2003 YU931": 42,
+     "2003 YU931": 43,
      "2003 YU031": 34,
      "2002 YU031": 32,
      "2002 YU041": 30,
      "2004 YU031": 25,
-     "2001 YU041": 24,
-     "2004 YU931": 22,
+     "2001 YU041": 23,
+     "2004 YU931": 23,
      "2002 CU041": 20,
-     "2001 YU031": 20,
+     "2001 YU031": 19,
      "2004 YU021": 15,
      "2003 YU021": 14,
      "2001 CU041": 13,
@@ -590,12 +590,12 @@
     },
     "in_scope_codes_not_in_table": {
      "2003:3": 86,
-     "2002:3": 64,
+     "2002:3": 65,
      "2004:Z": 46,
      "2003:Z": 36,
+     "2004:3": 35,
      "2003:P": 33,
-     "2004:3": 33,
-     "2002:P": 27,
+     "2002:P": 26,
      "2004:P": 9
     }
    },
@@ -1310,15 +1310,15 @@
      "2014 DP4EE": 3,
      "2015 DP4EE": 2,
      "2017 DP4BE": 1,
-     "2016 DP4BE": 1,
      "2014 DP4BE": 1,
+     "2016 DP4BE": 1,
      "2015 DP4BE": 1
     },
     "in_scope_codes_not_in_table": {
-     "2014:J": 136,
-     "2015:J": 134,
+     "2014:J": 138,
+     "2015:J": 136,
      "2016:J": 90,
-     "2017:J": 44
+     "2017:J": 45
     }
    },
    "newly_confirmed_manual": 9,
@@ -1606,8 +1606,8 @@
      "2014 6P0HR": 1
     },
     "in_scope_codes_not_in_table": {
-     "2014:7": 190,
-     "2014:D": 175,
+     "2014:7": 191,
+     "2014:D": 176,
      "2014:9": 70,
      "2014:U": 49
     }
@@ -2887,6 +2887,28 @@
    "yard": "Fenix U-Pull - Binghamton"
   },
   {
+   "id": "pns-stk098374",
+   "vin": "1ZVBP8JZ1E5276064",
+   "year": 2014,
+   "make": "Ford",
+   "model": "Mustang",
+   "rule": "ford_mustang_gt500_2013_2014_char8_Z",
+   "code": "char8=Z (P8J): Shelby Coupe/Convertible with the 5.8L supercharged V-8 (650-662 hp): TR-6060 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix South"
+  },
+  {
+   "id": "pns-stk097553",
+   "vin": "3FADP4BE4EM140267",
+   "year": 2014,
+   "make": "Ford",
+   "model": "Fiesta",
+   "rule": "ford_fiesta_10_2014_2017_char8_E",
+   "code": "char8=E (P4B): 1.0L GTDI I-3 (Fox EcoBoost): 5-speed manual only in the US",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix South"
+  },
+  {
    "id": "ipull-fre118298",
    "vin": "1FAHP38Z35W281434",
    "year": 2005,
@@ -2896,6 +2918,17 @@
    "code": "char8=Z (P38): series P38 = Focus ST 4-Dr Sedan with the 2.3L DOHC I-4 151 hp: 5-speed manual only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "iPull-uPull - Fresno"
+  },
+  {
+   "id": "nvpap-l133699",
+   "vin": "3FADP4GX6EM123271",
+   "year": 2014,
+   "make": "Ford",
+   "model": "Fiesta",
+   "rule": "ford_fiesta_st_2014_2019_char8_X",
+   "code": "char8=X (P4G): 1.6L GTDI I-4 (197 hp), fitted only to the Fiesta ST: 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Nevada Pic-A-Part - Las Vegas"
   },
   {
    "id": "vinplus-reno-stk022223",
@@ -3184,17 +3217,6 @@
    "yard": "iPull-uPull - Edmonton"
   },
   {
-   "id": "nvpap-l133699",
-   "vin": "3FADP4GX6EM123271",
-   "year": 2014,
-   "make": "Ford",
-   "model": "Fiesta",
-   "rule": "ford_fiesta_st_2014_2019_char8_X",
-   "code": "char8=X (P4G): 1.6L GTDI I-4 (197 hp), fitted only to the Fiesta ST: 6-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Nevada Pic-A-Part - Las Vegas"
-  },
-  {
    "id": "pns-stk078375",
    "vin": "3FAHP39563R159260",
    "year": 2003,
@@ -3204,28 +3226,6 @@
    "code": "char8=5 (P39): 2.0L DOHC HP (SVT) Zetec I-4, 170 hp: SVT Focus only, Getrag 6-speed manual only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pull-N-Save - Phoenix North"
-  },
-  {
-   "id": "pns-stk098374",
-   "vin": "1ZVBP8JZ1E5276064",
-   "year": 2014,
-   "make": "Ford",
-   "model": "Mustang",
-   "rule": "ford_mustang_gt500_2013_2014_char8_Z",
-   "code": "char8=Z (P8J): Shelby Coupe/Convertible with the 5.8L supercharged V-8 (650-662 hp): TR-6060 6-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Phoenix South"
-  },
-  {
-   "id": "pns-stk097553",
-   "vin": "3FADP4BE4EM140267",
-   "year": 2014,
-   "make": "Ford",
-   "model": "Fiesta",
-   "rule": "ford_fiesta_10_2014_2017_char8_E",
-   "code": "char8=E (P4B): 1.0L GTDI I-3 (Fox EcoBoost): 5-speed manual only in the US",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Phoenix South"
   },
   {
    "id": "pns-stk163361",
@@ -4264,6 +4264,28 @@
    "code": "char8=1 (U92): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Calgary (52 St)"
+  },
+  {
+   "id": "STK240988",
+   "vin": "1FMYU041X2KC47474",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Tear-A-Part - Salt Lake City"
+  },
+  {
+   "id": "STK101692",
+   "vin": "1FMCU93193KB54771",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Tear-A-Part - Ogden"
   },
   {
    "id": "utpap-ogden-A039129",
@@ -6345,6 +6367,50 @@
    "yard": "Harry's U-Pull-It - Pennsburg"
   },
   {
+   "id": "pns-stk133784",
+   "vin": "1FMCU04152KA64994",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Salt Lake City"
+  },
+  {
+   "id": "pns-stk133032",
+   "vin": "1FMYU041X2KD87721",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Salt Lake City"
+  },
+  {
+   "id": "pns-stk132937",
+   "vin": "1FMYU04172KD65854",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Salt Lake City"
+  },
+  {
+   "id": "pns-stk131796",
+   "vin": "1FMYU93123KB79842",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Salt Lake City"
+  },
+  {
    "id": "ipull-fre118640",
    "vin": "1FMYU03144KB52770",
    "year": 2004,
@@ -6367,15 +6433,37 @@
    "yard": "iPull-uPull - Stockton"
   },
   {
-   "id": "ipull-fre117947",
-   "vin": "1FMYU04131KE86217",
-   "year": 2001,
+   "id": "nvpap-h065183",
+   "vin": "1FMYU921X3KC64607",
+   "year": 2003,
    "make": "Ford",
    "model": "Escape",
    "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "code": "char8=1 (U92): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "Nevada Pic-A-Part - Henderson"
+  },
+  {
+   "id": "nvpap-l133631",
+   "vin": "1FMYU011X2KC91205",
+   "year": 2002,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U01): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
-   "yard": "iPull-uPull - Fresno"
+   "yard": "Nevada Pic-A-Part - Las Vegas"
+  },
+  {
+   "id": "nvpap-h061877",
+   "vin": "1FMYU93133KE01210",
+   "year": 2003,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Nevada Pic-A-Part - Henderson"
   },
   {
    "id": "vinplus-savannah-000000114651",
@@ -6408,6 +6496,17 @@
    "rule": "ford_escape_2001_2004_char8_engine",
    "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
+   "yard": "RTP Pick-A-Part - Maiden"
+  },
+  {
+   "id": "vinplus-maiden-000000115782",
+   "vin": "1FMYU93104KA15930",
+   "year": 2004,
+   "make": "Ford",
+   "model": "Escape",
+   "rule": "ford_escape_2001_2004_char8_engine",
+   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
+   "why_no_trans": "not_in_cache_backup",
    "yard": "RTP Pick-A-Part - Maiden"
   },
   {
@@ -7654,39 +7753,6 @@
    "yard": "iPull-uPull - Edmonton"
   },
   {
-   "id": "nvpap-h065183",
-   "vin": "1FMYU921X3KC64607",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U92): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "not_in_cache_backup",
-   "yard": "Nevada Pic-A-Part - Henderson"
-  },
-  {
-   "id": "nvpap-h062507",
-   "vin": "1FMYU03181KE71360",
-   "year": 2001,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U03): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Nevada Pic-A-Part - Henderson"
-  },
-  {
-   "id": "nvpap-l133631",
-   "vin": "1FMYU011X2KC91205",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U01): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Nevada Pic-A-Part - Las Vegas"
-  },
-  {
    "id": "pns-stk045537",
    "vin": "1FMCU94113KC97292",
    "year": 2003,
@@ -7808,50 +7874,6 @@
    "yard": "Pull-N-Save - Phoenix North"
   },
   {
-   "id": "pns-stk133784",
-   "vin": "1FMCU04152KA64994",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Salt Lake City"
-  },
-  {
-   "id": "pns-stk133032",
-   "vin": "1FMYU041X2KD87721",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Salt Lake City"
-  },
-  {
-   "id": "pns-stk132937",
-   "vin": "1FMYU04172KD65854",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Salt Lake City"
-  },
-  {
-   "id": "pns-stk131796",
-   "vin": "1FMYU93123KB79842",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Salt Lake City"
-  },
-  {
    "id": "pns-stk026043",
    "vin": "1FMYU93103KA78962",
    "year": 2003,
@@ -7927,28 +7949,6 @@
    "code": "char8=1 (U02): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pull-N-Save - Tucson"
-  },
-  {
-   "id": "STK101692",
-   "vin": "1FMCU93193KB54771",
-   "year": 2003,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U93): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Tear-A-Part - Ogden"
-  },
-  {
-   "id": "STK240988",
-   "vin": "1FMYU041X2KC47474",
-   "year": 2002,
-   "make": "Ford",
-   "model": "Escape",
-   "rule": "ford_escape_2001_2004_char8_engine",
-   "code": "char8=1 (U04): 3.0L SEFI-DOHC Duratec V-6, 201 hp: sold only with the 4-speed automatic",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Tear-A-Part - Salt Lake City"
   }
  ],
  "published_label_conflicts": []
