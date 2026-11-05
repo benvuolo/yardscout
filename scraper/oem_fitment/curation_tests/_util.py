@@ -160,3 +160,51 @@ def list_manifest(site, seed, cat, sub, rows, retrieved=NOW, status=200):
     return {"kind": "list", "site": site, "seed": {"make": mk, "model": md, "year": y}, "variant": "", "cat": cat,
             "list_url": f"https://{site}/parts-list/{stem}/{sub}", "status": status, "retrieved": retrieved,
             "rows": out, "synthetic": True}
+
+
+# ------------------------------------------- the positive control (case 8)
+SIENNA_TRIMS = ["CE", "LE", "Limited", "XLE", "XLE Limited"]
+SIENNA_ENG = ["6 Cyl 3.3 L GAS", "6 Cyl 3.5 L GAS"]
+_SIENNA_SYN = {
+    "FL": [("69802-08S01", "front-door-body", "Driver Side", "reg"),
+           ("85720-08S01", "front-door-body", "Driver Side", "motor")],
+    "FR": [("69801-08S01", "front-door-body", "Passenger Side", "reg"),
+           ("85710-08S01", "front-door-body", "Passenger Side", "motor")],
+    "SR": [("69803-08S01", "sliding-door-body", "Passenger Side", "reg"),
+           ("85710-08S02", "sliding-door-body", "Passenger Side", "motor")],
+}
+_NAMES = {"reg": ("Window Regulator", "Regulator Sub-Assembly"), "motor": ("Motor", "Motor Assembly, Power Window")}
+
+
+def sienna_fixture(years=(2004, 2005), drop_list=None, extra_notes=None, drop_records=(), drop_rows=()):
+    """Real Sienna 2004 sliding-door lines 69804-08010 + 85720-08020 plus
+    synthetic records and closed R1/R2 manifests for every door (all P2,
+    clean notes). extra_notes: {(year, pn): [note]} added to manifest rows;
+    drop_records: pns whose product record is left out; drop_rows:
+    {(year, pn)} manifest rows left out."""
+    toy = real("toyota_f2652c3.jsonl")
+    recs = [by_pn(toy, "69804-08010"), by_pn(toy, "85720-08020")]
+    fit = [(2004, 2010, "Toyota", "Sienna", SIENNA_TRIMS, SIENNA_ENG)]
+    seed0 = ("Toyota", "Sienna", 2004)
+    rows_by_sub = {"front-door-body": [], "sliding-door-body": []}
+    for slot, items in _SIENNA_SYN.items():
+        for pn, sub, side, pack in items:
+            recs.append(toyota_record(pn, "window-regulator", seed0, f"body-hardware/{sub}", _NAMES[pack][0],
+                                      _NAMES[pack][1], side, fit, location=[side]))
+            rows_by_sub[sub].append((pn, _NAMES[pack][0], _NAMES[pack][1], [], [side], True, None))
+    rows_by_sub["sliding-door-body"] += [
+        ("69804-08010", "Window Regulator", "Regulator Sub-Assembly", [], ["Driver Side"], True, None),
+        ("85720-08020", "Motor", "Motor Assembly, Power Window", [], ["Driver Side"], True, None)]
+    recs = [r for r in recs if r["pn"] not in set(drop_records)]
+    subs = ["body-hardware/front-door-body", "body-hardware/sliding-door-body", "body-hardware/outside-mirrors"]
+    lists, ys = [], []
+    for y in years:
+        seed = ("Toyota", "Sienna", y)
+        ys.append(year_manifest(TOY, seed, f"{y} Toyota Sienna Parts", subs, SIENNA_TRIMS, SIENNA_ENG))
+        for sub, rows in rows_by_sub.items():
+            if drop_list == (y, sub):
+                continue
+            rr = [(pn, a, b, list(n) + list((extra_notes or {}).get((y, pn), [])), l, m, e)
+                  for pn, a, b, n, l, m, e in rows if (y, pn) not in set(drop_rows)]
+            lists.append(list_manifest(TOY, seed, "window-regulator", f"body-hardware/{sub}", rr))
+    return {f"raw/{TOY}.jsonl": recs, f"raw/{TOY}.lists.jsonl": lists, f"raw/{TOY}.years.jsonl": ys}

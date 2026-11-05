@@ -14047,6 +14047,11 @@ def _attach_oem_layer_inner(payload: dict, before: dict) -> None:
     oem = _load_oem_layer()
     if not oem["status"]:
         return      # no groups files: the payload is unchanged
+    if not oem["docs"]:
+        # every namespace was dropped: report why, touch nothing else
+        payload["oemGroups"], payload["oemVg"] = [], {}
+        payload["oemStatus"] = dict(sorted(oem["status"].items()))
+        return
     groups, vg = [], {}
     for ns, doc in sorted(oem["docs"].items()):
         brand = _OEM_BRANDS.get(ns, ns)
