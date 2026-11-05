@@ -37,6 +37,9 @@ sys.path.insert(0, str(HERE.parent))
 import junkyard_scraper as js  # noqa: E402  (_correct_vpic, normalize_make)
 
 
+UNIFORM_MIN = 5   # decodes with a known class before a cell can be "uniform"
+
+
 def trans_class(t: str) -> str:
     """Bucket a transmission text. 'manual' matches app.js isConfirmedManual."""
     s = (t or "").strip()
@@ -81,6 +84,36 @@ def main() -> int:
     fi = {f: i for i, f in enumerate(fields)}
     yards = inv["yards"]
     vpic_side = inv.get("vpic") or {}
+
+    # vPIC (make, model, model year) cells over ALL live decoded cars: does
+    # vPIC tell manuals from automatics inside the cell, or does it return
+    # one transmission for every VIN? A cell where every decode says manual
+    # (2008 Elantra 165/165, 2007-08 Fit 166/166, 2002 Neon "6-spd" 32/32)
+    # is a model-level default, not a per-VIN fact, and its labels are
+    # suspect in BOTH directions.
+    cells: dict[tuple[str, str, str], Counter] = defaultdict(Counter)
+    for row in inv["vehicles"]:
+        vin = (row[fi["vin"]] or "").strip().upper()
+        raw = cache.get(vin) if vin else None
+        if not raw or "transmission" not in raw:
+            continue
+        dec = js._correct_vpic(raw, vin)
+        k = (dec.get("make", ""), dec.get("model", ""), dec.get("modelYear", ""))
+        tc = trans_class(dec.get("transmission", ""))
+        cells[k]["manual" if tc == "manual" else ("blank" if tc in ("", "other") else "auto")] += 1
+
+    def uniform(k) -> str:
+        c = cells.get(k)
+        if not c:
+            return ""
+        known = c["manual"] + c["auto"]
+        if known < UNIFORM_MIN:
+            return ""
+        if c["manual"] == known:
+            return "manual"
+        if c["auto"] == known:
+            return "auto"
+        return ""
 
     per_make: dict[str, Counter] = defaultdict(Counter)
     totals = Counter()
@@ -179,6 +212,10 @@ def main() -> int:
             "vpicModel": (dec or {}).get("model", "") if dec else "",
             "vpicYear": (dec or {}).get("modelYear", "") if dec else "",
             "inCache": dec is not None,
+            # "manual"/"auto" when vPIC returns that one class for every
+            # decoded live VIN of this make/model/year (>= UNIFORM_MIN):
+            # a model-level default, not evidence about this car.
+            "uniformCell": uniform((dec.get("make", ""), dec.get("model", ""), dec.get("modelYear", ""))) if dec else "",
             "yard": yard,
         }
         if vin:
@@ -213,6 +250,33 @@ def main() -> int:
             "unknown_no_vin": c["unknown_no_vin"],
         }
 
+    cred = Counter()
+    for d in gt_lines:
+        if d["transClass"] != "manual" or d["source"] != "vin":
+            continue
+        if not d["inCache"]:
+            cred["not_in_cache_backup"] += 1
+            continue
+        c = cells.get((d["vpicMake"], d["vpicModel"], d["vpicYear"]), Counter())
+        if c["auto"] > 0:
+            cred["cell_has_automatics_too"] += 1       # vPIC distinguishes inside the cell
+        elif c["manual"] >= UNIFORM_MIN:
+            cred["uniform_manual_cell"] += 1           # every decode says manual: suspect
+        else:
+            cred["small_cell_no_automatics"] += 1      # < UNIFORM_MIN manuals, no autos
+    suspect = []
+    for (mk, md, yr), c in cells.items():
+        known = c["manual"] + c["auto"]
+        if known >= UNIFORM_MIN and c["manual"] == known:
+            suspect.append({"make": mk, "model": md, "year": yr, "manual": c["manual"],
+                            "blank": c["blank"]})
+    suspect.sort(key=lambda r: -r["manual"])
+    (HERE / "vpic_cells.json").write_text(json.dumps(
+        {"note": "live decoded cars per vPIC make|model|year: manual / auto (any non-manual class) / blank",
+         "uniform_min": UNIFORM_MIN,
+         "cells": {f"{a}|{b}|{c_}": [v["manual"], v["auto"], v["blank"]]
+                   for (a, b, c_), v in sorted(cells.items())}}, separators=(",", ":")) + "\n")
+
     rows = [mk_row(m, c) for m, c in per_make.items()]
     rows.sort(key=lambda r: -r["cars"])
     # Old-schema cache payloads among live VINs: a fresh vPIC decode of the
@@ -235,10 +299,13 @@ def main() -> int:
         "published_vin_trans_vs_cache": dict(extras_vs_cache),
         "listing_vs_vin_where_both": dict(vin_vs_listing),
         "listing_vs_vin_disagreements": vin_vs_listing_disagree[:50],
+        "vpic_manual_credibility": dict(cred),
+        "uniform_manual_cells": suspect,
+        "uniform_auto_cells": sum(1 for k in cells if uniform(k) == "auto"),
         "per_make": rows,
     }
     (HERE / "baseline_summary.json").write_text(json.dumps(summary, indent=1) + "\n")
-    print(json.dumps({k: v for k, v in summary.items() if k not in ("per_make", "listing_vs_vin_disagreements")}, indent=1))
+    print(json.dumps({k: v for k, v in summary.items() if k not in ("per_make", "listing_vs_vin_disagreements", "uniform_manual_cells")}, indent=1))
     return 0
 
 

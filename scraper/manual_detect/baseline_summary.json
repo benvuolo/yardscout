@@ -38,6 +38,134 @@
  },
  "listing_vs_vin_where_both": {},
  "listing_vs_vin_disagreements": [],
+ "vpic_manual_credibility": {
+  "small_cell_no_automatics": 96,
+  "not_in_cache_backup": 105,
+  "cell_has_automatics_too": 2999,
+  "uniform_manual_cell": 847
+ },
+ "uniform_manual_cells": [
+  {
+   "make": "HYUNDAI",
+   "model": "Elantra",
+   "year": "2008",
+   "manual": 165,
+   "blank": 0
+  },
+  {
+   "make": "CHEVROLET",
+   "model": "HHR",
+   "year": "2007",
+   "manual": 120,
+   "blank": 1
+  },
+  {
+   "make": "HYUNDAI",
+   "model": "Sonata",
+   "year": "2008",
+   "manual": 93,
+   "blank": 40
+  },
+  {
+   "make": "HYUNDAI",
+   "model": "Accent",
+   "year": "2008",
+   "manual": 90,
+   "blank": 0
+  },
+  {
+   "make": "HONDA",
+   "model": "Fit",
+   "year": "2008",
+   "manual": 88,
+   "blank": 0
+  },
+  {
+   "make": "HONDA",
+   "model": "Fit",
+   "year": "2007",
+   "manual": 78,
+   "blank": 0
+  },
+  {
+   "make": "KIA",
+   "model": "Spectra",
+   "year": "2008",
+   "manual": 72,
+   "blank": 0
+  },
+  {
+   "make": "KIA",
+   "model": "Rio",
+   "year": "2008",
+   "manual": 41,
+   "blank": 0
+  },
+  {
+   "make": "DODGE",
+   "model": "Neon",
+   "year": "2002",
+   "manual": 32,
+   "blank": 0
+  },
+  {
+   "make": "HYUNDAI",
+   "model": "Tiburon",
+   "year": "2008",
+   "manual": 20,
+   "blank": 11
+  },
+  {
+   "make": "MERCEDES-BENZ",
+   "model": "SLK-Class",
+   "year": "1999",
+   "manual": 14,
+   "blank": 0
+  },
+  {
+   "make": "MERCEDES-BENZ",
+   "model": "SLK-Class",
+   "year": "2000",
+   "manual": 7,
+   "blank": 0
+  },
+  {
+   "make": "JEEP",
+   "model": "Wrangler",
+   "year": "1988",
+   "manual": 6,
+   "blank": 0
+  },
+  {
+   "make": "SATURN",
+   "model": "Vue",
+   "year": "2002",
+   "manual": 6,
+   "blank": 5
+  },
+  {
+   "make": "HONDA",
+   "model": "Civic",
+   "year": "1986",
+   "manual": 5,
+   "blank": 0
+  },
+  {
+   "make": "SATURN",
+   "model": "SL",
+   "year": "2002",
+   "manual": 5,
+   "blank": 4
+  },
+  {
+   "make": "SATURN",
+   "model": "SL",
+   "year": "2001",
+   "manual": 5,
+   "blank": 0
+  }
+ ],
+ "uniform_auto_cells": 450,
  "per_make": [
   {
    "make": "Ford",
