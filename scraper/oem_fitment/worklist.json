@@ -1,6 +1,6 @@
 {
  "built": "2026-11-05",
- "note": "segments = model generation x facelift windows from GENERATION_BREAKS/FACELIFT_BREAKS where known, else one row per model; seed_year = most common year on the lots",
+ "note": "segments = model generation x facelift windows from GENERATION_BREAKS/FACELIFT_BREAKS where known, else one row per model; seed_year = most common year on the lots | 2026-11-05: impossible segment bounds (feed years 0/1901/19xx outliers) clamped to the real years of cars inside the original range",
  "sites": {
   "www.moparpartsgiant.com": {
    "cars": 33521,
@@ -154,7 +154,7 @@
      "make": "Dodge",
      "model": "Dart",
      "segment": [
-      0,
+      1960,
       2016
      ],
      "breaks_known": false,
@@ -382,7 +382,7 @@
      "make": "Dodge",
      "model": "Grand Caravan",
      "segment": [
-      0,
+      1988,
       2000
      ],
      "breaks_known": true,
@@ -562,7 +562,7 @@
      "make": "Dodge",
      "model": "Ram Wagon",
      "segment": [
-      1958,
+      1981,
       2002
      ],
      "breaks_known": false,
@@ -1131,7 +1131,7 @@
      "make": "Ford",
      "model": "Focus",
      "segment": [
-      1901,
+      2000,
       2004
      ],
      "breaks_known": true,
@@ -1275,7 +1275,7 @@
      "make": "Ford",
      "model": "F-250",
      "segment": [
-      1952,
+      1962,
       1998
      ],
      "breaks_known": true,
@@ -1395,7 +1395,7 @@
      "make": "Ford",
      "model": "Ranger",
      "segment": [
-      1959,
+      1978,
       1992
      ],
      "breaks_known": true,
@@ -1527,7 +1527,7 @@
      "make": "Lincoln",
      "model": "Town Car",
      "segment": [
-      1953,
+      1969,
       1997
      ],
      "breaks_known": true,
@@ -1719,7 +1719,7 @@
      "make": "Ford",
      "model": "F-350",
      "segment": [
-      1950,
+      1960,
       1998
      ],
      "breaks_known": true,
@@ -1755,7 +1755,7 @@
      "make": "Ford",
      "model": "F-150",
      "segment": [
-      0,
+      1966,
       1986
      ],
      "breaks_known": true,
@@ -2115,7 +2115,7 @@
      "make": "Ford",
      "model": "F-100",
      "segment": [
-      1952,
+      1961,
       1986
      ],
      "breaks_known": false,
@@ -2336,7 +2336,7 @@
      "make": "Chevrolet",
      "model": "Impala",
      "segment": [
-      1901,
+      1960,
       2005
      ],
      "breaks_known": true,
@@ -2792,7 +2792,7 @@
      "make": "Cadillac",
      "model": "DeVille",
      "segment": [
-      0,
+      1963,
       1999
      ],
      "breaks_known": true,
@@ -3056,7 +3056,7 @@
      "make": "Buick",
      "model": "LeSabre",
      "segment": [
-      0,
+      1963,
       1999
      ],
      "breaks_known": true,
@@ -3800,7 +3800,7 @@
      "make": "Chevrolet",
      "model": "Classic",
      "segment": [
-      1953,
+      1967,
       2005
      ],
      "breaks_known": false,
@@ -4088,7 +4088,7 @@
      "make": "Oldsmobile",
      "model": "Cutlass",
      "segment": [
-      0,
+      1965,
       2007
      ],
      "breaks_known": false,
@@ -4316,7 +4316,7 @@
      "make": "Pontiac",
      "model": "Firebird",
      "segment": [
-      1901,
+      1968,
       1992
      ],
      "breaks_known": true,
@@ -4352,7 +4352,7 @@
      "make": "Buick",
      "model": "Roadmaster",
      "segment": [
-      1936,
+      1991,
       1996
      ],
      "breaks_known": false,
@@ -4568,7 +4568,7 @@
      "make": "Chevrolet",
      "model": "Nova",
      "segment": [
-      1901,
+      1962,
       1988
      ],
      "breaks_known": false,
@@ -5406,7 +5406,7 @@
      "make": "Honda",
      "model": "Accord",
      "segment": [
-      0,
+      1981,
       1993
      ],
      "breaks_known": true,
@@ -5418,7 +5418,7 @@
      "make": "Honda",
      "model": "Civic",
      "segment": [
-      1901,
+      1978,
       1995
      ],
      "breaks_known": true,
@@ -7673,7 +7673,7 @@
      "make": "Subaru",
      "model": "Outback",
      "segment": [
-      0,
+      2000,
       2004
      ],
      "breaks_known": true,
@@ -7745,7 +7745,7 @@
      "make": "Subaru",
      "model": "Forester",
      "segment": [
-      1901,
+      1981,
       2002
      ],
      "breaks_known": true,
@@ -8408,7 +8408,7 @@
      "make": "BMW",
      "model": "328i",
      "segment": [
-      1901,
+      1995,
       2016
      ],
      "breaks_known": false,
@@ -8456,7 +8456,7 @@
      "make": "BMW",
      "model": "528i",
      "segment": [
-      0,
+      1979,
       2016
      ],
      "breaks_known": false,
