@@ -1,3 +1,8 @@
 07:40:36 start site=www.mbpartsgiant.com segments=50 tiers=['A', 'B']
 08:06:12 seg done tier=A Mercedes-Benz C-Class [2008, 2014] seeds=[2008, 2012, 2011] records=73 errors=0
 08:14:33 time budget reached records=102
+08:14:42 start site=www.mbpartsgiant.com segments=50 tiers=['A', 'B']
+08:14:42 seg done tier=A Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=102 errors=0
+08:14:42 seg done tier=A Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=102 errors=0
+08:44:54 seg done tier=A Mercedes-Benz E-Class [2003, 2009] seeds=[2003, 2007, 2006] records=184 errors=0
+08:44:54 time budget reached records=184
