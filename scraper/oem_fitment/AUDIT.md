@@ -70,6 +70,9 @@ hit by hand.
 | mitsubishipartsgiant | 242 | 0 | 7 | 0 | 0 | 0 |
 | dbelectrical (aftermarket) | 630 | 0 | 0 | 0 | 0 | 0 |
 
+Later checkpoints: DB Electrical 02:41 (726 records) and 03:09 (799): 0 E,
+0 C, 0 F. As of 03:12 the dealer-site files are unchanged since ~02:05.
+
 The auditor's first pass on Honda, Acura and BMW reported 100% E. That was
 the auditor: those modules declare `trim_col` ("Body & Trim") and
 `option_col` ("Emission & Transmission", "Submodel"), which it now reads from
