@@ -585,6 +585,11 @@ check("§23.4 TrailBlazer/Liberty/Pilot: lamp rows cut at the cited facelifts; T
       and _fits(2006, "Jeep", "Liberty", "Headlights (clear, non-hazed)") == "2005–2007"
       and js.FACELIFT_BREAKS["pilot"] == [2006, 2012, 2019] and "tahoe" not in js.FACELIFT_BREAKS and "yukon" not in js.FACELIFT_BREAKS)
 
+check("§23.5 Edge/Charger/Dakota/Grand Cherokee: Edge LED headlights cut at the 2019 facelift; tail-only Charger 2009 not a cut",
+      _fits(2017, "Ford", "Edge", "OEM LED Headlights") == "2015–2018" and _fits(2020, "Ford", "Edge", "OEM LED Headlights") == "2019–2024"
+      and js.FACELIFT_BREAKS["charger"] == [2015] and js.FACELIFT_BREAKS["dakota"] == [1991, 2008]
+      and js.FACELIFT_BREAKS["grand cherokee"] == [1996, 2004, 2008, 2014, 2017])
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

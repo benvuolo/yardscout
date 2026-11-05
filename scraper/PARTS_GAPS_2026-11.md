@@ -1803,3 +1803,42 @@ appearance rows yet. Coverage unchanged: generic-only 15,400, no entry
 "2006–2020", running past the GMT360's 2009 end into years with no
 TrailBlazer (the crossover starts 2021). This is harmless (no car has
 those years) and predates §23.
+
+### 23.5 Edge, Charger, Dakota, Grand Cherokee
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Ford Edge | 2011, 2019 | 2011: "Exterior changes include a new front fascia, wheels, and a revised bumper" (en.wikipedia.org/wiki/Ford_Edge); MotorWeek 2011 Edge "a big drop-jaw Ford-truck style grille, more expressive headlamp housings". 2019: "a mid-cycle facelift for the 2019 model year, with a revised front grille" (Wikipedia); cars.com 2019 "new headlights, bumpers and taillights" |
+| Dodge Charger | 2015 | "the most noticeable change coming in the new front grille and rounded LED headlights" (en.wikipedia.org/wiki/Dodge_Charger_(LX/LD)); cars.com 2015 first look "a new grille, headlights, bumper and fog lights" |
+| Dodge Dakota | 1991, 2008 | 1991: "The 1991 model year featured a new grille and hood" (en.wikipedia.org/wiki/Dodge_Dakota, re-checked); Edmunds 1991 "composite headlamps (LE and Sport), new bumper, new grille" (search excerpt). 2008: "unveiled at the 2007 Chicago Auto Show as a 2008 model" (Wikipedia); Stellantis release id=7337 "newly styled hood, grille, front fascia ... and headlamps" |
+| Jeep Grand Cherokee | 1996, 2004, 2008, 2014, 2017 | ZJ 1996: "a mid-cycle restyling, with new front and rear bumpers" (Wikipedia ZJ page; larger grille, revised headlamps). WJ 2004: "revised front grilles and fascias (bumpers) for all models" (Wikipedia WJ). WK 2008: "a minor facelift for 2008 with revised headlights" (Wikipedia; WK page: new grille, fascia, "new tail lamps"). WK2 2014: "new, smaller headlamps, and new tail lamps" (Wikipedia WK2); cars.com 2014 "the headlights slimmer", "taillights have gotten larger". WK2 2017: "All 2017 models received a second facelift" with "reshaped headlights, and a reshaped grille" (Wikipedia WK2) |
+
+**Left out:** Charger 2009 (tail lamps only: single-component rule) and
+2008/2012 (interior; SRT8 badge). Edge 2021 ST-Line/Titanium Elite
+(trim). Dakota 1992 (no change described; Wikipedia's "1991 the only
+model year for a unique front-end" concerns the mid-1991 headlamp
+change-over), 1997–2004 (none; 2000 Quad Cab is a body style), 2006 R/T
+(package). Grand Cherokee 1998 5.9 Limited and 2002 Limited grilles
+(trim only), the 2016 75th Anniversary edition that already wore the 2017
+front (a special edition; its rows read pre-facelift), the 2017 SRT
+fascia (conflicting), WL 2022–24 (none). Single-source years: Grand
+Cherokee 1996, 2004, 2008 and 2017 rest on Wikipedia alone (with the WK
+page corroborating 2008 internally).
+
+**Checks.** Same inventory as §23.3. 0 cars with any non-`fits`
+difference. 120 cars narrowed (Edge LED headlights 2015–18 / 2019–24).
+Charger, Dakota and Grand Cherokee have no appearance rows yet. Coverage
+unchanged: generic-only 15,400, no entry 12,407. Tests pass (new §23.5
+check).
+
+### 23 summary
+
+23 models researched; 21 FACELIFT_BREAKS keys added (Grand Caravan,
+Odyssey, Expedition, Town & Country, Silverado, Sierra, Ram, Ram
+2500, Ram 3500, BMW 3, Maxima, Ranger, Traverse, Pathfinder, TrailBlazer,
+Pilot, Liberty, Edge, Charger, Dakota, Grand Cherokee). No year
+confirmed, so left out: Suburban, Tahoe, Yukon. 13,893 cars had an
+appearance-row window narrowed; none had any other change. Several
+models (Odyssey, Grand Caravan, Town & Country, Pathfinder, Pilot,
+Charger, Dakota, Grand Cherokee) have no appearance rows yet; their breaks
+will bound lamp rows added later.

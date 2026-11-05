@@ -113,6 +113,10 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   Single-component years (grille-only, tail-only) are not cuts.
   23.4 TrailBlazer 2006/2024, Pilot 2006/2012/2019, Liberty 2005 (3,544
   cars narrowed). Tahoe and Yukon: no line-wide year confirmed, left out.
+  23.5 Edge 2011/2019, Charger 2015, Dakota 1991/2008, Grand Cherokee
+  1996/2004/2008/2014/2017 (120 cars narrowed). §23 total: 21 keys, 13,893
+  cars with a narrowed lamp window, no other per-car change, coverage
+  unchanged.
 
 ## How to measure
 
@@ -142,10 +146,13 @@ The generic-only count re-matches every distinct year/make/model in
 2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
    overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
    into `lexus es` and drop the duplicate (§20.5).
-3. Facelifts (§23, in progress): 23.1–23.4 done (Grand Caravan, Odyssey,
-   Expedition, Town & Country, Silverado/Sierra, Ram, BMW 3, Maxima, Ranger,
-   Traverse, Pathfinder, TrailBlazer, Pilot, Liberty; Suburban/Tahoe/Yukon
-   none). Next: Edge, Charger, Dakota, Grand Cherokee. The rule: a
-   cited source for every year, and models without one are left out.
+3. Facelifts: §23 done (21 keys; Suburban/Tahoe/Yukon have no confirmed
+   year). Next by cars: CR-V, Murano, Acadia, Durango, Chrysler 300,
+   Sienna, Outback, C-Class, F-250, Acura TL, Express, Forester, S10,
+   Journey, Chrysler 200 (Journey/200 have no GENERATION_BREAKS; fine for
+   FACELIFT_BREAKS). Same rule: a cited source per year; single-component
+   years (grille-only, tail-only) and mid-year changes are not cuts.
+   Routing follow-up (§23.2): Dodge "Ram Van"/"Ram Wagon" match the Ram
+   pickup entry.
 4. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.
