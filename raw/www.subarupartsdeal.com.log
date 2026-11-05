@@ -7,3 +7,12 @@
 02:08:55 seed A|Subaru|Outback|2003 had network failures; left open for retry
 02:08:55 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=330 errors=1
 02:08:55 time budget reached records=330
+08:20:46 start site=www.subarupartsdeal.com segments=25 tiers=['A', 'B']
+08:20:46 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=330 errors=1
+08:20:46 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=330 errors=1
+08:20:46 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=330 errors=1
+08:20:46 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=330 errors=1
+08:38:54 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003, 2001, 2004] records=423 errors=1
+08:48:11 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=459 errors=1
+08:57:06 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=490 errors=1
+08:57:06 time budget reached records=490
