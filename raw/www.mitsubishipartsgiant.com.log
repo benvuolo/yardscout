@@ -1,0 +1,21 @@
+01:34:19 start site=www.mitsubishipartsgiant.com segments=23 tiers=['A', 'B']
+01:38:12 seg done tier=A Mitsubishi Lancer [2008, 2017] seeds=[2008] records=41 errors=0
+01:39:40 seg done tier=A Mitsubishi Lancer [2002, 2007] seeds=[2002] records=47 errors=0
+01:40:48 seg done tier=A Mitsubishi Eclipse [2000, 2005] seeds=[2003] records=51 errors=0
+01:42:40 seg done tier=A Mitsubishi Eclipse [2006, 2012] seeds=[2007] records=63 errors=0
+01:45:23 nav-fail Mitsubishi Mirage 2003: NavError: HTTP 404 for https://www.mitsubishipartsgiant.com/2003-mitsubishi-mirage-parts
+01:45:23 seg done tier=A Mitsubishi Mirage [1992, 2024] seeds=[2015, 2003] records=87 errors=1
+01:47:43 nav-fail Mitsubishi Endeavor 2009: NavError: HTTP 404 for https://www.mitsubishipartsgiant.com/2009-mitsubishi-endeavor-parts
+01:47:43 seg done tier=A Mitsubishi Endeavor [2004, 2011] seeds=[2004, 2009] records=104 errors=2
+01:50:28 seg done tier=A Mitsubishi Outlander Sport [2011, 2021] seeds=[2015] records=129 errors=2
+01:52:04 nav-fail Mitsubishi Montero Sport 1994: NavError: HTTP 404 for https://www.mitsubishipartsgiant.com/1994-mitsubishi-montero_sport-parts
+01:52:04 seg done tier=A Mitsubishi Montero Sport [1991, 2004] seeds=[2000, 1994] records=137 errors=3
+01:54:28 seg done tier=A Mitsubishi Outlander [2007, 2013] seeds=[2007] records=156 errors=3
+01:57:28 seg done tier=A Mitsubishi Galant [2009, 2012] seeds=[2009] records=184 errors=3
+01:59:24 seg done tier=A Mitsubishi Galant [2004, 2006] seeds=[2004] records=196 errors=3
+02:01:04 seg done tier=A Mitsubishi Outlander [2003, 2006] seeds=[2003] records=206 errors=3
+02:02:20 seg done tier=A Mitsubishi Galant [2002, 2003] seeds=[2003] records=211 errors=3
+02:05:45 net-fail product https://www.mitsubishipartsgiant.com/genuine/mitsubishi~compressor-assembly~7813b090: network error after 3 tries: ReadTimeout
+02:08:31 seed A|Mitsubishi|Outlander|2014 had network failures; left open for retry
+02:08:31 seg done tier=A Mitsubishi Outlander [2014, 2020] seeds=[2014] records=242 errors=4
+02:08:31 time budget reached records=242
