@@ -36,3 +36,22 @@
 10:16:52 nav-fail Mercedes-Benz C230 2001: NavError: HTTP 404 for https://www.mbpartsgiant.com/2001-mercedes_benz-c230-parts
 10:16:52 seg done tier=A Mercedes-Benz C230 [1997, 2007] seeds=[2006, 2001] records=415 errors=1
 10:23:00 time budget reached records=430
+10:23:10 start site=www.mbpartsgiant.com segments=50 tiers=['A', 'B']
+10:23:10 seg done tier=A Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=430 errors=1
+10:23:10 seg done tier=A Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=430 errors=1
+10:25:26 seg done tier=A Mercedes-Benz C250 [2012, 2015] seeds=[2012, 2014, 2015] records=430 errors=1
+10:33:50 seg done tier=A Mercedes-Benz ML350 [2003, 2013] seeds=[2008, 2005, 2013] records=462 errors=1
+10:38:30 nav-fail Mercedes-Benz C-Class 1989: NavError: Mercedes-Benz C-Class 1989: no catalog badge page for this year
+10:38:30 seg done tier=A Mercedes-Benz C-Class [1978, 2000] seeds=[1998, 1989] records=477 errors=2
+10:56:11 time budget reached records=515
