@@ -38,6 +38,28 @@ TIERS = {
 MAX_SEEDS = 3
 
 
+def _squash(s: str, make: str = "") -> str:
+    t = re.sub(r"[^a-z0-9]", "", s.lower())
+    m = re.sub(r"[^a-z0-9]", "", make.lower())
+    return t[len(m):] if m and t.startswith(m) and len(t) > len(m) else t
+
+
+def same_model(printed: str, feed: str, make: str = "") -> bool:
+    """Coverage bookkeeping only (which seed years still need a visit): does
+    the catalog's printed model name stand for our feed's model? Tolerant on
+    spacing, punctuation, a leading make, and a series suffix on either side
+    ("Mazda 3"/"Mazda3", "Silverado"/"Silverado 1500", "Camry"/"Camry
+    Hybrid"). A false match only means fewer extra seed years; it never
+    changes a record."""
+    a, b = _squash(printed, make), _squash(feed, make)
+    if not a or not b:
+        return False
+    if a == b:
+        return True
+    short, long_ = sorted((a, b), key=len)
+    return len(short) >= 3 and long_.startswith(short)
+
+
 def module_for(site: str):
     name = re.sub(r"[^a-z0-9]", "_", site.replace("www.", "").split(".")[0])
     return importlib.import_module(f"sites.{name}")
@@ -161,7 +183,7 @@ def main() -> None:
                                     fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
                                 prog["records"] += 1
                                 for f in prod.get("fitment", []):
-                                    if str(f.get("model", "")).lower().replace(" ", "") == model.lower().replace(" ", ""):
+                                    if same_model(str(f.get("model", "")), model, make):
                                         lo, hi = f["years"]
                                         covered.update(range(lo, hi + 1))
                     if seed_net_fail:

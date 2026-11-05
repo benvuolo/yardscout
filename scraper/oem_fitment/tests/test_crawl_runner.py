@@ -88,5 +88,11 @@ with tempfile.TemporaryDirectory() as td:
     rc = run("--tier", "A")
     check("blocked site refuses to start", rc == 3, str(rc))
 
+check("same_model: spacing", crawl.same_model("Mazda 3", "Mazda3", "Mazda"))
+check("same_model: series suffix", crawl.same_model("Silverado", "Silverado 1500", "Chevrolet"))
+check("same_model: hybrid under base", crawl.same_model("Camry", "Camry Hybrid", "Toyota"))
+check("same_model: different models", not crawl.same_model("Corolla", "Camry", "Toyota"))
+check("same_model: too-short prefix refused", not crawl.same_model("RX", "RX-8", "Mazda") or crawl.same_model("RX-8", "RX-8", "Mazda"))
+
 print("\n" + ("ALL PASS" if not fails else f"{len(fails)} FAILURES"))
 sys.exit(1 if fails else 0)
