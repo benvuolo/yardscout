@@ -336,3 +336,66 @@ Curator notes
   coverage check compares model names, so those segments use all 3 seeds.
 - Electric-steering cars have no P/S pump page (2011 Sonata): no record, not
   an error.
+
+### Subaru, Lexus, BMW navigators (session_016ZzJfJPMiqWBVeGP97xHiL, 2026-11-05)
+
+- Modules on the .html template: `sites/subarupartsdeal.py`,
+  `sites/lexuspartsnow.py`, `sites/bmwpartsdeal.py`; offline tests
+  `tests/test_subarupartsdeal.py` (52 checks), `test_lexuspartsnow.py` (46),
+  `test_bmwpartsdeal.py` (48). lexuspartsnow is the .html template, not
+  SimplePart. Template additions (defaults unchanged): `Config.reman_re`,
+  `Config.option_col`, `Config.bare_list_position`.
+- Trials (tier A, 2 segments), every record checked field by field against
+  the cached pages' rendered text by an independent checker (pn, description,
+  position, replaced-by, replaces, fitment header, each rendered row, and
+  years/make/model/engines/trims/options against raw; it caught 4/4 planted
+  corruptions): Subaru 137/137 (Outback 2011, 2005; 0 errors), Lexus 274/274
+  (ES 300 2002/1999, RX 300 2000; 2 nav-fails = ES 300 2004 and RX 300 2006
+  do not exist), BMW 99/99 (328i 2011, 325i 2006; 2 nav-fails = 328i 1955
+  and 325i 1997, pre-clamp worklist bounds). The BMW check first found 32
+  climate records with position "Front" from a list note ("Front panel,
+  control"); fixed (`bare_list_position=False`) and re-verified.
+- crawl.py dedupes (category, pn) across segments, so a later segment that
+  shares parts with an earlier one shows few records (2006 325i E90 shared
+  every starter/regulator/switch/P/S pump pn with 2011 328i; RX 300 2000
+  shares its starters with ES 300). That is interchange, not a miss.
+
+What a curator must know:
+- Subaru: one catalog per model-year; Legacy and Outback share diagrams and
+  each list row carries "Fitting Vehicle Options" (S / W / OBK body codes,
+  engine 253/255/36D/EJ25#, trim codes) verbatim in `list_info`. The option
+  column holds trims (`option_column_is_trims=True`). Paint variants are
+  separate pns ("Mirror Assembly-Door,Left(BLACK MICA)"; 50 mirror records
+  for 2005 Outback). Tail lamps: up to ~2009 "Lamp Assembly-Rear
+  Combination"; 2010+ only "Lens & Body-Rear Combination Lamp" is listed
+  (the lamp housing; kept, name as printed). "Rear Finisher" liftgate lamps
+  excluded. Fuel module = "Pump Assembly-Fuel"; bare "Pump-Fuel" excluded.
+  Throttle bodies sit on the intake_manifold page (2010+) or throttle_chamber.
+  Some Subaru product pages print fitment the parser keeps as is even when
+  odd (2010-11 Outback "2.5GT" trims on shared Legacy/Outback numbers).
+- Lexus: Toyota EPC names in the list ("Unit Assy, Headlamp, RH" and
+  "Headlamp Assy, RH" are both listed, different pns; both kept). Product
+  pages: mainDesc is an SEO name ("Alternator Compatible"); `description` is
+  the page's Part Description ("ALTERNATOR Assembly"). Fitment "Trim &
+  Engine" holds the engine only; options = engine code; model code
+  ("1MZFE; MCV30L-BEAGKA"). Models print without a space ("ES300").
+  Mirrors are "Mirror Sub-Assy, Outer Rear View" (painted head; kept).
+  "Lens, Rear Combination Lamp" alone is excluded (README lens only), so
+  2002 ES 300 has no tail-light record. No fuel-pump module on ES/RX pages
+  (only "Pump, Fuel" bare pump and "Tube Sub-Assy, Fuel Pump" bracket; both
+  excluded). Open question: 2002 ES 300 "Panel Sub-Assy, Air Conditioner"
+  (55902, has a seat-heater variant) may be the climate head; excluded until
+  someone confirms. Worklist bare series ("IS", "GS", "ES", "RX", "LS") have
+  no catalog model and nav-fail.
+- BMW: year catalogs per submodel (sedan_n52_engine_e90, wagon_e91,
+  n20_engine_f30); sedan variants first, at most 2 per year. Submodel column
+  ("Sedan N52 Engine(E90), Wagon(E91)") is in `fitment[].options`. "Exch."
+  / "Exchange" = BMW reman: dropped when a new pn is on the page (starter),
+  kept when it is the only listing (2011 328i alternator 12-31-7-555-926).
+  Mirrors are sold "w/o glass" (kept). Sedan trunk lids print "Tailgate
+  with/without hole for lock barrel" (trunk-lid page). Both tail lamps (side
+  panel and trunk lid) are tail-lights. E90 fuel page lists only repair kits
+  and senders: no fuel-pump module record. List pages print pns without
+  dashes, product pages with dashes. "3/5/7 Series" have no catalog model.
+  Not in evidence_lines: the product page's "Manufacturer's Notes" ("This
+  part is discontinued."); template owner may want it.
