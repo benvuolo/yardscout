@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-04, §13–20 done, §21 in progress)
+# Parts workstream — status (updated 2026-11-05, §13–21 done)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -86,15 +86,18 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   `parts_overlay.json`; §20 code sits just before
   `_apply_consensus_evergreens()` so breadth-pass entries exist.
 
-- §21 (owner: "start the next parts block"; in progress): Mariner done
-  with new break 2008 (generic-only 17,883 → 17,537, 5.4% → 5.3%, new scan);
-  Fiat 500 (→ 17,262 on the 333,449-car scan) plus a routing fix: 500L/500X
-  get their own evergreen-only entries, the 500e an empty one (no card).
-  Spark with new break 2016 and facelift 2019; Spark EV empty entry
-  (→ 16,935, 5.1%); Juke with facelift 2015 (→ 16,605, 5.0%);
-  Sable with facelifts 1998/2004 (→ 16,280, 4.9%); Stratus with new break
-  2001, facelifts 2003/2004, JR rows sedan-gated (→ 15,958, 4.8%); Mustang
-  S197 with facelift 2013 (→ 15,637, 4.7%).
+- §21 (owner: "start the next parts block"): Mariner, Fiat 500, Spark,
+  Juke, Sable, Stratus, Mustang S197, Transit Connect, researched with cited
+  sources first. Same-inventory generic-only 17,864 (5.4%) → 15,325 (4.6%).
+  New breaks: Mariner 2008, Spark 2016, Stratus 2001 generations;
+  facelifts for Spark, Juke, Sable, Stratus, Mustang 2013, Transit Connect.
+  Fixed routing: Fiat 500L/500X get their own evergreen-only entries; the
+  500e and Spark EV get empty entries (no gas-car rows on EVs). Stratus
+  2001–05 rows are sedan-gated (the coupe is a different car).
+- Empty entries are a supported "suppressor": the specificity guard drops
+  the broader keyword, and an entry with no rows produces no card.
+- Measuring across a mid-block scan: compare HEAD and working tree on the
+  same inventory (a measure script that takes the scraper path).
 
 ## How to measure
 
@@ -117,8 +120,10 @@ The generic-only count re-matches every distinct year/make/model in
 
 ## Next
 
-1. Next block by generic-only cars: Mercury Mariner (Escape twin) (341), Fiat 500 (336), Chevrolet Spark (331), Nissan Juke (329), Dodge Stratus (322), Ford Mustang (S197) (322), Mercury Sable (Taurus twin) (322), Ford Transit Connect (311).
-   Research generations and facelifts with sources first.
+1. Next block by generic-only cars: Mercury Milan (Fusion twin) (311), Buick Encore (307), Chevrolet Captiva Sport (301), Buick Park Avenue (299), Scion xB (2nd gen) (293), Hyundai Sonata (290), Infiniti QX60 (288), Ford Escort (285).
+   Research generations and facelifts with sources first. The Fiat 500L
+   (2014–20) and 500X (2016–23) now have evergreen-only entries; they need
+   their own lamp/mechanical research.
 2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
    overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
    into `lexus es` and drop the duplicate (§20.5).

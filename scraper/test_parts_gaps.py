@@ -545,6 +545,14 @@ check("§21 Mustang S197: pump + A/C per generation; Shaker 'if equipped' 2005-0
       and s05["Shaker 500/1000 Amp + Subwoofer"]["trim_status"] == "unconfirmed" and "Shaker 500/1000 Amp + Subwoofer" not in s12
       and "Radiator Fan Assembly" not in s05 and s12["Headlights (clear, non-hazed)"]["fits"] == "2010–2012")
 
+VAN2 = {**FWD, "bodyClass": "Van"}
+c11, c16, c20 = parts(2011, "Ford", "Transit Connect", VAN2), parts(2016, "Ford", "Transit Connect", VAN2), parts(2020, "Ford", "Transit Connect", VAN2)
+check("§21 Transit Connect: pump/fan per generation; A/C plain 2011 and 2020, 'if equipped' 2016; lamps cut at the 2019 facelift",
+      MECH3 <= set(c11) and MECH3 <= set(c16) and c11["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2010–2013"
+      and c16["Radiator Fan Assembly"]["fits"] == "2014–2023" and c11["A/C Compressor (clutch spins free)"].get("trim_status") is None
+      and c16["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and c20["A/C Compressor (clutch spins free)"].get("trim_status") is None
+      and c16["Headlights (clear pair)"]["fits"] == "2014–2018")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

@@ -1607,3 +1607,49 @@ Left out, no stated basis:
 
 Result (same inventory): generic-only 15,958 (4.8%) → 15,637 (4.7%).
 Mustang 2005–06 → 0.
+
+### 21.8 Ford Transit Connect 2010–2013, 2014–2023
+
+Basis: WP Ford_Transit_Connect; consumerguide.com/used/2010-13-ford-transit-connect;
+cars.com "2019 Ford Transit Connect: What's New"; kbb.com 2019 Transit
+Connect Wagon (fetched); Ford media (snippet).
+- **Facelift 2019 (added to `FACELIFT_BREAKS`):** "Front-end styling changes
+  include a new grille and headlights" (cars.com); "available LED headlights
+  and the company's signature hexagonal grille" (KBB). The existing lamp
+  rows are now cut at 2019. Tail lights are not stated; the cut is
+  conservative.
+- **No US facelift for gen 1:** the US launch coincided with the European
+  refresh.
+- **A/C:** standard on the gen-1 Cargo XL (CG) and the 2019 XL (cars.com).
+  For 2014–18 it rests on a snippet only.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 2010–13, 2014–23 | — | Every van (FWD, transverse). |
+| A/C compressor | 2010–13, 2019–23 | — | Standard. |
+| A/C compressor | 2014–18 | option | Snippet-only. |
+
+Left out, no stated basis: the gen-2 rear liftgate option and rear doors
+(no audited band), wagon-specific parts.
+
+Result (same inventory): generic-only 15,637 (4.7%) → 15,325 (4.6%).
+
+### 21.9 Block totals
+
+Measured on the same 333,449-car inventory with the code before §21
+(93f894e) and after: generic-only **17,864 (5.4%) → 15,325 (4.6%)**, so
+2,539 cars moved. No entry 12,357 → 12,362: the five EV listings (3 Spark
+EV, 2 Fiat 500e) that no longer carry gas-car rows.
+- **New `GENERATION_BREAKS`:** mariner 2008, spark 2016, stratus 2001.
+- **New `FACELIFT_BREAKS`:** spark 2019, juke 2015, sable 1998/2004,
+  stratus 2003/2004, mustang 2013, transit connect 2019.
+- **Routing fixes:** Fiat 500L, 500X and 500e no longer take the Fiat 500
+  entry. 500L and 500X have evergreen-only entries over their EPA runs; the
+  500e and Spark EV have empty entries (no card).
+- **Per-car comparison against 93f894e:** of the 12,648 distinct
+  year/make/model combinations on the lots, only those 12 changed (5 500L,
+  3 500X, 2 500E, 2 Spark EV). No other car lost a part or had an existing
+  part's band or gate status change, and `sharedWith` notes are identical.
+- **Tests:** all offline scraper suites pass, including
+  `test_interchange.py` and `test_consensus_parts.py`, and `--list-parts`
+  runs with the empty entries.

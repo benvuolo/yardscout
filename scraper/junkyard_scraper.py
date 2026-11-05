@@ -6048,6 +6048,16 @@ _gap_extend("mustang 2005-2014", parts=[
     ]),
 ])
 
+# Ford Transit Connect (310 cars generic-only; gen 1 2010-13, gen 2 2014-23;
+# 2019 facelift in FACELIFT_BREAKS). FWD transverse layout. A/C standard on
+# gen 1 (CG, Cargo XL) and on the 2019+ XL (cars.com); 2014-18 snippet-only,
+# so option-flagged.
+_gap_extend("transit connect", parts=[
+    *_per_gen([(2010, 2013), (2014, 2023)], [_GAP_PUMP, _GAP_FAN]),
+    *_per_gen([(2010, 2013), (2019, 2023)], [_GAP_AC]),
+    *_per_gen([(2014, 2018)], [{**_GAP_AC, "option": True}]),
+])
+
 # ---- end of §21 block
 
 _apply_consensus_evergreens()
@@ -6525,6 +6535,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "sable": [1998, 2004],
     "stratus": [2003, 2004],
     "mustang": [2013],
+    "transit connect": [2019],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
