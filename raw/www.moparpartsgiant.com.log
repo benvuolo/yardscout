@@ -1,0 +1,8 @@
+01:13:08 start site=www.moparpartsgiant.com segments=64 tiers=['A', 'B']
+01:18:53 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002, 1990, 1988] records=17 errors=0
+01:28:30 nav-fail Dodge Grand Caravan 2023: ValueError: no 2023 catalog for Dodge Grand Caravan (dodge-['grand_caravan'])
+01:28:30 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010, 2023] records=142 errors=1
+01:42:30 nav-fail Chrysler 200 1997: ValueError: no 1997 catalog for Chrysler 200 (chrysler-['200'])
+01:42:30 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015, 1997] records=336 errors=2
+01:52:58 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=477 errors=2
+01:52:58 time budget reached records=477
