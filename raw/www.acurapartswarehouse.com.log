@@ -1,0 +1,5 @@
+01:42:31 start site=www.acurapartswarehouse.com segments=12 tiers=['A', 'B']
+01:56:07 seg done tier=A Acura TL [1996, 2014] seeds=[2005, 2003, 2010] records=108 errors=0
+02:01:31 seg done tier=A Acura MDX [2001, 2006] seeds=[2005] records=155 errors=0
+02:13:02 seg done tier=A Acura TSX [2004, 2014] seeds=[2006, 2012] records=224 errors=0
+02:13:02 time budget reached records=224
