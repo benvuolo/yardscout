@@ -664,3 +664,15 @@ What a curator must know (all three are the "giant" SimplePart variant):
   time) and max-parallel 6 (~0.75 req/s). Owner decision pending: whether a
   503 (service unavailable, clustered across sites) may be retried once
   after a cool-down at the slower pace; 403s stay stopped.
+- 2026-11-05 14:35 UTC, owner: "do everything you think" (and keep token use
+  lower: 25% of the week used). Hub decisions taken under it:
+  - 503 sites get one retry: .blocked removed and .retried503 added on oem-raw
+    for VW, Hyundai, Lexus, Honda (a2a83bd). A second refusal re-blocks them
+    for good. Mopar and Subaru (403) stay stopped.
+  - CURATION_SPEC §13 answers: (1) option splits stay Likely; (2) plant
+    ("US/Japan built") may be matched to the VIN's first character, but only
+    after its own audit sample passes (Phase 2); (3) vPIC trim may confirm
+    trim-limited rows, Phase 2 with its own audit; (4) donors the catalog
+    contradicts are hidden, with a count shown; (5) no OEM claims in the old
+    keys before store apps ship the P0 guards.
+  - No new multi-agent workflows; the two running ones finish.
