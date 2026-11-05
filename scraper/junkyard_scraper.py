@@ -6083,6 +6083,20 @@ UNOBTANIUM_DB["encore gx"] = {"display": "Buick Encore GX", "make": "Buick", "ma
 _EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, "encore gx")
 _gap_extend("encore", parts=_per_gen([(2013, 2022)], [*_GAP_MECH, _AWD_COUPLING, _SUNROOF]))
 
+# Chevrolet Captiva Sport 2012-2015 (US, fleet-only; 301 cars generic-only).
+# No facelift found. A/C standard and sunroof on up-level trims (2012
+# sources). AWD: confirmed for the 2012 LTZ V6 only (EPA also lists 2013-14
+# AWD, but every editorial source says it was dropped after 2012), so the
+# AWD row is limited to 2012. EPA names this vehicle "Captiva" for 2012-15
+# (the only US Captiva), so "chevrolet captiva" listings route here.
+UNOBTANIUM_DB["captiva sport"]["match"] = ["captiva sport", "chevrolet captiva"]
+_gap_extend("captiva sport", parts=[
+    *_per_gen([(2012, 2015)], [*_GAP_MECH, _SUNROOF]),
+    *_per_gen([(2012, 2012)], [
+        {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+    ]),
+])
+
 # ---- end of §22 block
 
 _apply_consensus_evergreens()

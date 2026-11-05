@@ -607,6 +607,12 @@ check("§22 Encore: mech 2013-22; AWD coupling gated; lamps cut at the 2017 face
       and [m["display"] for m in js.match_vehicle(2021, "Buick", "Encore GX")] == ["Buick Encore GX"]
       and "Fuel Pump Module (in-tank, test before listing)" not in parts(2021, "Buick", "Encore GX"))
 
+v12, v14 = parts(2012, "Chevrolet", "Captiva Sport", AWD), parts(2014, "Chevrolet", "Captiva Sport", AWD)
+check("§22 Captiva Sport: mech 2012-15; AWD unit 2012 only; 'Captiva' listings route here",
+      MECH3 <= set(v14) and v14["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2012–2015"
+      and v12["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in v14
+      and [m["display"] for m in js.match_vehicle(2013, "Chevrolet", "Captiva")] == ["Chevrolet Captiva Sport"])
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

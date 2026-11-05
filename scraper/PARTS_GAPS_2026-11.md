@@ -1916,3 +1916,32 @@ entry (2020–25), and the specificity guard drops "encore" for it.
 
 Result (same inventory): generic-only 15,087 (4.5%) → 14,788 (4.4%). Encore
 → 0; the 8 GX listings stay generic-only on their own entry by design.
+
+### 22.3 Chevrolet Captiva Sport 2012–2015
+
+Basis: WP Opel_Antara; automotive-fleet.com 2012 Captiva Sport; cars.com
+2011 "The Saturn Vue is back as the 2012 Captiva Sport"; blog.consumerguide.com
+(2013); kbb.com 2013/2014; foxnews.com 2014; fueleconomy.gov menus
+2011–2016 (fetched).
+- **Fleet-only** in the US for every year ("cannot be purchased new", CG
+  2013).
+- **No facelift found** (the 2015 model year was abbreviated).
+- **A/C:** standard ("All models will include … air conditioning",
+  cars.com).
+- **Sunroof:** on the LTZ and up-level trims.
+- **AWD:** confirmed for the 2012 LTZ V6. EPA also lists "Captiva AWD" for
+  2013–14, but CG, Wikipedia, cars.com and KBB all say the V6 and AWD were
+  dropped after 2012. The AWD row is therefore limited to 2012.
+
+**Routing:** EPA names this vehicle "Captiva" for 2012–15, the only US
+Captiva, so "Chevrolet Captiva" listings (6, all 2012–15) now match this
+entry instead of nothing.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2012–15 | — | Every vehicle. |
+| Sunroof | 2012–15 | option | Up-level trims. |
+| AWD rear differential / transfer unit | 2012 | drive: awd/4wd | Same band as the Equinox row. |
+
+Result (same inventory): generic-only 14,788 (4.4%) → 14,487 (4.3%); no
+entry 12,409 → 12,403.

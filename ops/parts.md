@@ -120,7 +120,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 
 - §22 (owner via hub: "Ensure everything is at speed"; in progress): Milan
   done with facelift 2010 (generic-only 15,399 → 15,087 on the 334,595-car
-  scan); Encore with facelift 2017 and its own Encore GX entry (→ 14,788).
+  scan); Encore with facelift 2017 and its own Encore GX entry (→ 14,788);
+  Captiva Sport, with "Captiva" listings routed to it (→ 14,487).
 
 ## How to measure
 
