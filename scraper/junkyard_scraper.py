@@ -24853,6 +24853,19 @@ YARD_NO_ARRIVALS_DAYS = 30
 YARD_MISSING_DROP = 30
 
 
+
+# Missing yards whose cause is known and out of our hands. A reason starting
+# "waiting on the yard" is still listed in the daily email but no longer
+# counts as an open issue there (backend/src/ops_monitor.js).
+_UPR = ("waiting on the yard: upullrparts.com puts its vehicle search behind a "
+        "Cloudflare human check (captcha) since ~2026-10-21; owner emailed them "
+        "2026-11-03 asking for an exemption or a daily file")
+KNOWN_MISSING_REASONS: dict[str, str] = {
+    "U-Pull-R Parts - East Bethel": _UPR,
+    "U-Pull-R Parts - Rosemount": _UPR,
+    "U-Pull-R Parts - Toledo": _UPR,
+}
+
 def _update_yard_health(payload: dict) -> None:
     """Per-yard change tracking -> docs/data/yard_health.json (committed by the
     scan workflow along with the rest of docs/data/). Compares each yard's
@@ -24924,6 +24937,8 @@ def _update_yard_health(payload: dict) -> None:
         # yards dropped out on 10-21 and were forgotten 5 days later, so the
         # daily email never said a word).
         reason = p.get("missingReason") or ""
+        if n in KNOWN_MISSING_REASONS:
+            reason = KNOWN_MISSING_REASONS[n]
         if n in RETIRED_YARDS:
             reason = "retired"
         elif n in _RENAMED_YARDS or n in KNOWN_YARD_RENAMES:

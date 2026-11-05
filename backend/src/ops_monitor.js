@@ -949,8 +949,13 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
   // Yards missing from the scan count as an open issue: "All good" while
   // three yards had silently vanished (U-Pull-R, 2026-10) was the failure.
   const conds = ev.conditions.map((c) => ({ id: c.id, title: c.title }));
-  if (yardHealth && yardHealth.missing && yardHealth.missing.length) {
-    const m = yardHealth.missing;
+  // A yard that is gone for a known reason outside our control ("waiting on
+  // the yard: ...") stays listed below but is not an open issue every day.
+  const unexplained = yardHealth && yardHealth.missing
+    ? yardHealth.missing.filter((y) => !String(y.reason || '').startsWith('waiting on the yard'))
+    : [];
+  if (unexplained.length) {
+    const m = unexplained;
     conds.push({ id: 'yards-missing', title: `${m.length} yard${m.length === 1 ? '' : 's'} missing from the scan: ${m.slice(0, 4).map((y) => y.name).join(', ')}${m.length > 4 ? ` +${m.length - 4} more` : ''}` });
   }
   if (yardHealth && yardHealth.chainFrozen && yardHealth.chainFrozen.length) {
