@@ -20,3 +20,14 @@
 02:09:47 product-fail https://www.gmpartsgiant.com/parts/gm-control-25932036.html: ValueError: no partInfo in store
 02:10:50 seg done tier=A GMC Acadia [2007, 2016] seeds=[2012] records=415 errors=5
 02:17:16 time budget reached records=453
+02:44:30 start site=www.gmpartsgiant.com segments=206 tiers=['A', 'B']
+02:44:30 seg done tier=A Chevrolet Cruze [1986, 2014] seeds=[2014] records=453 errors=5
+02:44:30 seg done tier=A Chevrolet Silverado 1500 [1999, 2023] seeds=[2000] records=453 errors=5
+02:44:30 seg done tier=A Chevrolet Equinox [2010, 2015] seeds=[2012] records=453 errors=5
+02:44:30 seg done tier=A Chevrolet Impala [2006, 2011] seeds=[2008] records=453 errors=5
+02:44:30 seg done tier=A Chevrolet Malibu [2008, 2012] seeds=[2012] records=453 errors=5
+02:44:30 seg done tier=A Chevrolet Traverse [2008, 2017] seeds=[2011] records=453 errors=5
+03:10:07 seg done tier=A Chevrolet Trailblazer [2002, 2009] seeds=[2004, 2006, 2003] records=503 errors=5
+03:10:07 seg done tier=A GMC Acadia [2007, 2016] seeds=[2012] records=503 errors=5
+03:10:07 seg done tier=A Chevrolet Suburban 1500 [1987, 2018] seeds=[2002] records=503 errors=5
+03:19:35 time budget reached records=554
