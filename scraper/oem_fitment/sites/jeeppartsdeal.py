@@ -58,7 +58,7 @@ RULES = {
     "side-mirrors": (rf"^mirror{D}(outside|exterior|side\s+view)",
                      r"glass|cover|cap|bezel|switch|motor|actuator|scalp|skull|lamp|housing|inside|kit"),
     "window-regulator": (rf"^regulator\b|^motor{D}(power\s+)?window",
-                         r"handle|switch|channel|run|glass|crank|pressure|fuel|voltage|knob|cable\s+guide"),
+                         r"handle|switch|channel|run|glass|crank|pressure|fuel|voltage|knob|cable\s+guide|cover|gear\b"),
     "window-switch": (rf"^switch{D}(window\s+and\s+door\s+lock|.*\bmaster\b|power\s+window\s+master)",
                       r"bezel|panel|cover|base|knob|lamp|mirror"),
     "climate-control": (rf"^control{D}(a/?c|heater|air\s+cond|climate|temperature|hvac|atc|automatic\s+temp)",

@@ -48,3 +48,56 @@ first. Owner approved multi-agent ("ultra") scale.
   - session_016ZzJfHbzhf7ZAm4Xt8ok79: SimplePart template + Toyota, Jeep
   - pending: Honda, Acura, Hyundai, Kia, Subaru, Lexus on the .html
     template once it lands.
+- 00:55 UTC: SimplePart navigators done (session_016ZzJfHbzhf7ZAm4Xt8ok79):
+  `sites/_simplepart.py`, `sites/toyotapartsnow.py` (Toyota + Scion),
+  `sites/jeeppartsdeal.py` (Jeep; jeeppartsdeal.com is the same template).
+  Tests `tests/test_toyotapartsnow.py` (49 checks) and
+  `tests/test_jeeppartsdeal.py` (33) pass; page checks read the local cache
+  only and skip when it is absent (CI has no cache). Trials (tier A, 2
+  segments): Toyota 163 records, Jeep 79, 0 errors, no refusals; every
+  record was checked field by field against the cached page text (pn,
+  position, replaces, replaced-by, every fitment cell): 242/242 match.
+
+### SimplePart: what a curator must know
+
+- Structured fields come from the page's embedded store
+  (`window.__INITIAL_STORE__`); each is checked against the rendered text.
+  Any disagreement goes to `flags` (`fitment_text_differs_from_store`,
+  `unparsed_fitment_row:...`, `no_fitment_rows`, `pn_differs_from_url:...`,
+  `evidence_truncated:N`). Treat flagged records as unverified.
+- Long fitment tables render 10 rows and then "View More". The rest of the
+  rows are in the same page's store. `evidence_lines` holds the rendered rows,
+  then a literal "View More", then the store rows. `fitment_rows_rendered` /
+  `fitment_rows_total` say where the switch happens.
+- A year cell can carry several spans ("2011-2013, 2007-2008 Scion tC").
+  These are emitted as one fitment entry per span, sharing `raw`, with
+  `year_spans` listing all of them. Spans are never merged.
+- Two table layouts. Current numbers use Year Make Model | Trim | Engine.
+  Superseded or catalog-only numbers use Year Make Model | Engine |
+  Important vehicle option details: `trims` is empty and the third column is
+  kept verbatim in `other_columns`. The two layouts can give different year
+  spans for the same part family (e.g. 4801477AA vs 4801477AG Patriot
+  2007-2015 vs 2007-2017). Record both, do not reconcile.
+- `name` is the list page's OEM-ish name. `description` is the product
+  page's display name, which can be wrong (55111610AC "Compressor - A/C"
+  displays as "Dash Control Unit"). Classify by `name`/`aux_desc`, never by
+  `description`.
+- Reman: an R-number / "Reman" row is dropped only when a new number in the
+  same category is on the same list page. Otherwise it is kept and marked
+  `reman: true` (2009 Camry alternators are reman-only).
+- Position: `position` is the product page's Position line, verbatim. Toyota
+  often prints only "Driver Side", so front vs rear comes from `list_url`
+  (front-door-body / rear-door-body). `list_location` holds the list page's
+  Location values.
+- Jeep window-switch: Mopar names do not say "master". "Switch - Window And
+  Door Lock" rows are kept, and that includes the passenger-door switch
+  (4602785AD, Front Right). Filter on position before calling one a driver
+  master switch. Toyota window-switch is "Master Switch" rows only.
+- WJ Grand Cherokee headlamps are named "Headlamp - Headlamp Parking And
+  Turn" by Mopar. They are the headlamp assemblies and are kept.
+- Fitment blocks list sister vehicles across makes (Dodge/Chrysler on Jeep
+  parts; Scion/Toyota on Toyota). Model names stay as printed ("Solara", not
+  "Camry Solara"). "Camry Hybrid" is crawled through the Camry pages (trim
+  "Hybrid"), so crawl.py's coverage check never marks those years covered.
+- Local trials need `mkdir -p scraper/oem_fitment/raw`: crawl.py does not
+  create it. The Actions workflow does.
