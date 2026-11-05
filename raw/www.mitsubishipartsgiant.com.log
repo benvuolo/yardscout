@@ -19,3 +19,23 @@
 02:08:31 seed A|Mitsubishi|Outlander|2014 had network failures; left open for retry
 02:08:31 seg done tier=A Mitsubishi Outlander [2014, 2020] seeds=[2014] records=242 errors=4
 02:08:31 time budget reached records=242
+07:40:59 start site=www.mitsubishipartsgiant.com segments=23 tiers=['A', 'B']
+07:40:59 seg done tier=A Mitsubishi Lancer [2008, 2017] seeds=[2008] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Lancer [2002, 2007] seeds=[2002] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Eclipse [2000, 2005] seeds=[2003] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Eclipse [2006, 2012] seeds=[2007] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Mirage [1992, 2024] seeds=[2015] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Endeavor [2004, 2011] seeds=[2004] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Outlander Sport [2011, 2021] seeds=[2015] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Montero Sport [1991, 2004] seeds=[2000] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Outlander [2007, 2013] seeds=[2007] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Galant [2009, 2012] seeds=[2009] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Galant [2004, 2006] seeds=[2004] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Outlander [2003, 2006] seeds=[2003] records=242 errors=4
+07:40:59 seg done tier=A Mitsubishi Galant [2002, 2003] seeds=[2003] records=242 errors=4
+07:51:53 seg done tier=A Mitsubishi Outlander [2014, 2020] seeds=[2014, 2018, 2015] records=274 errors=4
+07:56:49 seg done tier=A Mitsubishi Montero [1985, 2006] seeds=[2002, 1994, 1990] records=280 errors=4
+08:02:34 seg done tier=A Mitsubishi Galant [1990, 2001] seeds=[2000, 1994, 1995] records=281 errors=4
+08:05:05 seg done tier=A Mitsubishi Galant [2007, 2008] seeds=[2007] records=283 errors=4
+08:08:25 seg done tier=A Mitsubishi Mirage G4 [2017, 2024] seeds=[2017] records=292 errors=4
+08:11:37 time budget reached records=292
