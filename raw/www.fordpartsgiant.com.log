@@ -19,3 +19,22 @@
 02:09:54 seg done tier=A Ford Taurus [2000, 2007] seeds=[2003] records=599 errors=1
 02:13:30 seg done tier=A Ford Expedition [2003, 2006] seeds=[2003] records=634 errors=1
 02:17:06 time budget reached records=654
+02:44:31 start site=www.fordpartsgiant.com segments=112 tiers=['A', 'B']
+02:44:31 seg done tier=A Ford F-150 [1997, 2003] seeds=[2001] records=654 errors=1
+02:44:31 seg done tier=A Ford F-150 [2004, 2008] seeds=[2004] records=654 errors=1
+02:44:31 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=654 errors=1
+02:44:31 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=654 errors=1
+02:44:31 seg done tier=A Ford Edge [2007, 2024] seeds=[2013] records=654 errors=1
+02:44:31 seg done tier=A Ford Fusion [2013, 2016] seeds=[2014] records=654 errors=1
+02:44:31 seg done tier=A Ford Escape [2008, 2012] seeds=[2008] records=654 errors=1
+02:44:31 seg done tier=A Ford Escape [2013, 2016] seeds=[2013] records=654 errors=1
+02:51:27 seg done tier=A Ford Explorer [2002, 2005] seeds=[2002, 2005] records=670 errors=1
+02:51:27 seg done tier=A Ford Taurus [2000, 2007] seeds=[2003] records=670 errors=1
+02:51:27 seg done tier=A Ford Expedition [2003, 2006] seeds=[2003] records=670 errors=1
+02:51:27 seg done tier=A Ford Ranger [1998, 2011] seeds=[2000] records=670 errors=1
+03:00:07 nav-fail Ford Fiesta 1994: ValueError: no 1994 catalog for Ford Fiesta (ford-['fiesta'])
+03:00:07 seg done tier=A Ford Fiesta [1978, 2019] seeds=[2011, 1994] records=721 errors=2
+03:09:43 seg done tier=A Ford Focus [2008, 2011] seeds=[2010] records=776 errors=2
+03:16:15 product-fail https://www.fordpartsgiant.com/parts/ford-mirror-asy-rear-vi_9l3z-17683-ac.html: ValueError: no partInfo in store
+03:24:08 seg done tier=A Ford F-150 [2009, 2012] seeds=[2010] records=866 errors=3
+03:24:08 time budget reached records=866
