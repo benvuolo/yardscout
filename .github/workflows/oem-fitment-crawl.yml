@@ -3,8 +3,12 @@
 # oem-raw branch, crawls in 30-minute slices through fetch.py (allowlist,
 # robots.txt, 4 s per site, permanent stop on any bot check / 403 / 429 /
 # 503), and commits raw/<site>.* back to oem-raw after every slice, so a
-# killed job loses at most one slice. Sites with raw/<site>.done or
-# raw/<site>.blocked on oem-raw are skipped. Never touches main.
+# killed job loses at most one slice. raw/<site>.* covers the records
+# (<site>.jsonl), the R1/R2 manifests (<site>.lists.jsonl, <site>.years.jsonl;
+# CURATION_SPEC.md §3.2), any size-capped continuation part (<site>.2.jsonl,
+# <site>.lists.2.jsonl, ...), .progress.json, .log, .done and .blocked; both
+# cp lines below restore and checkpoint all of them. Sites with
+# raw/<site>.done or raw/<site>.blocked on oem-raw are skipped. Never touches main.
 name: OEM fitment crawl
 
 on:
