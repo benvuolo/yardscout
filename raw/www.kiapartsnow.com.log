@@ -41,3 +41,23 @@
 05:04:09 seg done tier=A Kia Optima [2016, 2018] seeds=[2016] records=906 errors=1
 05:18:57 seg done tier=A Kia Sorento [2003, 2006] seeds=[2006] records=986 errors=1
 05:18:57 time budget reached records=986
+05:19:06 start site=www.kiapartsnow.com segments=35 tiers=['A', 'B']
+05:19:06 seg done tier=A Kia Soul [2010, 2013] seeds=[2013] records=986 errors=1
+05:19:06 seg done tier=A Kia Optima [2011, 2013] seeds=[2013] records=986 errors=1
+05:19:06 seg done tier=A Kia Soul [2014, 2019] seeds=[2014] records=986 errors=1
+05:19:06 seg done tier=A Kia Rio [2001, 2023] seeds=[2013] records=986 errors=1
+05:19:06 seg done tier=A Kia Sorento [2011, 2015] seeds=[2011] records=986 errors=1
+05:19:06 seg done tier=A Kia Optima [2014, 2015] seeds=[2015] records=986 errors=1
+05:19:06 seg done tier=A Kia Forte [2014, 2018] seeds=[2014] records=986 errors=1
+05:19:06 seg done tier=A Kia Forte [2010, 2013] seeds=[2010] records=986 errors=1
+05:19:06 seg done tier=A Kia Sedona [2006, 2014] seeds=[2006] records=986 errors=1
+05:19:06 seg done tier=A Kia Sportage [1995, 2008] seeds=[2007] records=986 errors=1
+05:19:06 seg done tier=A Kia Spectra [2007, 2009] seeds=[2009] records=986 errors=1
+05:19:06 seg done tier=A Kia Optima [2016, 2018] seeds=[2016] records=986 errors=1
+05:19:06 seg done tier=A Kia Sorento [2003, 2006] seeds=[2006] records=986 errors=1
+05:25:14 seg done tier=A Kia Sorento [2007, 2009] seeds=[2008, 2009, 2007] records=986 errors=1
+05:35:22 seg done tier=A Kia Sorento [2016, 2020] seeds=[2016] records=1046 errors=1
+05:44:10 nav-fail Kia Rondo 2014: ValueError: no 2014 catalog for Kia Rondo (kia-['rondo'])
+05:44:10 seg done tier=A Kia Rondo [2007, 2015] seeds=[2007, 2014] records=1098 errors=2
+05:57:41 seg done tier=A Kia Sedona [2015, 2021] seeds=[2016] records=1173 errors=2
+05:57:41 time budget reached records=1173
