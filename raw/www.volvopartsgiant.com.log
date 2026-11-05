@@ -1,0 +1,7 @@
+08:35:10 start site=www.volvopartsgiant.com segments=19 tiers=['A', 'B']
+08:44:26 seg done tier=A Volvo XC90 [2003, 2014] seeds=[2006] records=33 errors=0
+08:59:06 nav-fail Volvo S60 2010: NavError: HTTP 404 for https://www.volvopartsgiant.com/2010-volvo-s60-parts
+08:59:06 seg done tier=A Volvo S60 [2001, 2018] seeds=[2012, 2004, 2010] records=100 errors=1
+09:04:26 nav-fail Volvo S40 1999: NavError: HTTP 404 for https://www.volvopartsgiant.com/1999-volvo-s40-parts
+09:04:26 seg done tier=A Volvo S40 [1992, 2013] seeds=[2006, 1999] records=123 errors=2
+09:08:26 time budget reached records=136
