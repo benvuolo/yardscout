@@ -910,6 +910,10 @@ _HYB_AMBIG = [
     ("gm-ecotec24", "Chevrolet", "Malibu", 2009, 2011),
     ("gm-ecotec24", "Saturn", "VUE", 2009, None),
     ("gm-ecotec24", "Saturn", "Aura", 2008, None),
+    ("gm-ecotec24", "Buick", "Regal", 2012, 2011),   # eAssist, VIN pos 8 "R"
+    ("gm-ecotec24", "Buick", "Regal", 2013, 2011),
+    ("gm-ecotec-lcv", "Chevrolet", "Malibu", 2013, 2014),  # Malibu Eco (eAssist)
+    ("gm-ecotec-lcv", "Chevrolet", "Impala", 2014, 2015),  # Impala eAssist
     ("hk-theta-gdi", "Hyundai", "Sonata", 2012, 2017),
     ("hk-theta-gdi", "Kia", "Optima", 2013, 2019),
     ("hk-theta2gdi", "Hyundai", "Sonata", 2012, None),
@@ -962,7 +966,10 @@ for fid, mk, md, lo, hi in [("toyota-2az", "Toyota", "Camry", 2002, 2009),
                             ("toyota-2gr", "Toyota", "Highlander", 2008, 2016),
                             ("gm-gen4-truck", "Chevrolet", "Silverado 1500", 2007, 2013),
                             ("nissan-qr25", "Nissan", "Altima", 2002, 2018),
-                            ("hk-theta-gdi", "Kia", "Optima", 2011, 2020)]:
+                            ("hk-theta-gdi", "Kia", "Optima", 2011, 2020),
+                            ("gm-ecotec24", "Buick", "Regal", 2011, 2013),
+                            ("gm-ecotec-lcv", "Chevrolet", "Malibu", 2013, 2015),
+                            ("gm-ecotec-lcv", "Chevrolet", "Impala", 2014, 2015)]:
     if not all(_first_app(EF[fid], y, mk, md) for y in range(lo, hi + 1)):
         _app_union_ok.append(f"{fid} {md}")
 check("P0.5: splits keep every model-year a family app (no coverage hole)",
@@ -1036,14 +1043,64 @@ check("P0.5: decode-less 2012 MKZ (maybe the 2.5 hybrid) starter is Likely",
                   (2012, "Lincoln", "MKZ"), "") == "likely")
 
 # gm-ecotec-lcv: 280-0434 lists the 2013 Malibu 2.0T and 2.5 only, while
-# the span admits the 2.4 eAssist Eco; the alternator list includes the 2.4.
+# the span admits the 2.4 eAssist Eco. 210-0255 also names the 2.4, but the
+# eAssist Eco has a belt motor-generator in place of the alternator, so that
+# row conflicts with the hardware and is withheld: the 2013 Malibu app is
+# ambig, so the (2013-only) alternator group can verify no pair.
 check("P0.5: gm-ecotec-lcv starter group withdrawn (2.4 Eco unpublished)",
       "verified" not in EF["gm-ecotec-lcv"]["parts"]["starter"]
       and not _pl["gm-ecotec-lcv"]["parts"]["starter"].get("vg"))
-check("P0.5: gm-ecotec-lcv alternator group kept (210-0255 lists the 2.4)",
-      bool(_pl["gm-ecotec-lcv"]["parts"]["alternator"].get("vg"))
-      and client_tier("gm-ecotec-lcv", "alternator", (2013, "Chevrolet", "Malibu"),
-                      (2013, "Chevrolet", "Malibu"), "2.4L 4-cyl") == "verified")
+_lcv_alt_ver = [
+    (sy, dy, eng)
+    for sy in range(2013, 2016) for dy in range(2013, 2016)
+    for eng in ("2.0L 4-cyl", "2.4L 4-cyl", "2.5L 4-cyl", "")
+    if client_tier("gm-ecotec-lcv", "alternator", (sy, "Chevrolet", "Malibu"),
+                   (dy, "Chevrolet", "Malibu"), eng) == "verified"]
+check("P0.5 review: no gm-ecotec-lcv alternator pair is Verified (2.4 eAssist row withheld)",
+      not _lcv_alt_ver, str(_lcv_alt_ver[:5]))
+check("P0.5 review: the 2013 Malibu app is ambig and names the Eco",
+      "Malibu Ecos" in js._app_flags(_first_app(EF["gm-ecotec-lcv"], 2013, "Chevrolet", "Malibu")).get("ambig", ""))
+check("P0.5 review: 2013 Malibu Eco (2.4L) alternator donor -> 2013 Malibu is Likely",
+      client_tier("gm-ecotec-lcv", "alternator", (2013, "Chevrolet", "Malibu"),
+                  (2013, "Chevrolet", "Malibu"), "2.4L 4-cyl") == "likely")
+check("P0.5 review: 2013 Malibu 2.5 <-> 2.5 alternator is Likely (seeker may be an Eco)",
+      client_tier("gm-ecotec-lcv", "alternator", (2013, "Chevrolet", "Malibu"),
+                  (2013, "Chevrolet", "Malibu"), "2.5L 4-cyl") == "likely")
+# Engine assembly is Verified on a confirming decode alone, so a 2.4 eAssist
+# donor passed the multi-displacement gate for every gm-ecotec-lcv seeker.
+for _sk in [(2014, "Chevrolet", "Malibu"), (2016, "Chevrolet", "Malibu Limited"),
+            (2015, "Chevrolet", "Impala"), (2013, "Chevrolet", "Malibu")]:
+    check(f"P0.5 review: 2013 Malibu Eco engine-assembly donor -> {_sk[0]} {_sk[2]} is Likely",
+          client_tier("gm-ecotec-lcv", "engine-assembly", _sk,
+                      (2013, "Chevrolet", "Malibu"), "2.4L 4-cyl") == "likely")
+check("P0.5 review: 2014 Impala eAssist (2.4L) engine-assembly donor -> 2015 Malibu is Likely",
+      client_tier("gm-ecotec-lcv", "engine-assembly", (2015, "Chevrolet", "Malibu"),
+                  (2014, "Chevrolet", "Impala"), "2.4L 4-cyl") == "likely")
+check("P0.5 review: decode-less 2013 Malibu (maybe an Eco) no longer rides sole",
+      not js._app_flags(_first_app(EF["gm-ecotec-lcv"], 2013, "Chevrolet", "Malibu")).get("sole")
+      and js._app_flags(_first_app(EF["gm-ecotec-lcv"], 2014, "Chevrolet", "Malibu")).get("sole"))
+# gm-ecotec24 Regal: 2012-13 eAssist (VIN "R") decodes 2.4L with ordinary
+# trims; 5 lot cars showed Verified engine assembly.
+check("P0.5 review: 2013 Regal eAssist (2.4L) engine-assembly donor -> 2012 Equinox is Likely",
+      client_tier("gm-ecotec24", "engine-assembly", (2012, "Chevrolet", "Equinox"),
+                  (2013, "Buick", "Regal"), "2.4L 4-cyl") == "likely")
+check("P0.5 review: 2012 Regal seeker gets no Verified engine assembly (seeker ambig)",
+      client_tier("gm-ecotec24", "engine-assembly", (2012, "Buick", "Regal"),
+                  (2012, "Chevrolet", "Equinox"), "2.4L 4-cyl") == "likely")
+check("P0.5 review: 2011 Regal 2.4 <-> 2012 Equinox engine assembly stays Verified",
+      client_tier("gm-ecotec24", "engine-assembly", (2012, "Chevrolet", "Equinox"),
+                  (2011, "Buick", "Regal"), "2.4L 4-cyl") == "verified")
+check("P0.5 review: gm-ecotec24 Equinox/Terrain alternator group untouched",
+      client_tier("gm-ecotec24", "alternator", (2012, "Chevrolet", "Equinox"),
+                  (2014, "GMC", "Terrain"), "2.4L 4-cyl") == "verified")
+# §23.6 + P0.5 merge: the yard-named 2-mode trucks are out of the family;
+# every base spelling of the hybrid years is capped.
+check("P0.5 merge: yard-named Silverado/Sierra Hybrid are not gm-gen4-truck apps",
+      _first_app(EF["gm-gen4-truck"], 2010, "GMC", "Sierra Hybrid") is None
+      and _first_app(EF["gm-gen4-truck"], 2010, "Chevrolet", "Silverado Hybrid") is None)
+check("P0.5 merge: 2011 Sierra Denali 1500 (6.0L, maybe 2-mode) alternator is Likely",
+      client_tier("gm-gen4-truck", "alternator", (2008, "GMC", "Sierra 1500"),
+                  (2011, "GMC", "Sierra Denali 1500"), "6.0L 8-cyl") == "likely")
 check("P0.5: no ambig app is also sole (payload)",
       not [a for f in _pl.values() for a in f["apps"] if a[4] and a[5]])
 

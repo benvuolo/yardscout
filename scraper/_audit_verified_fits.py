@@ -36,7 +36,9 @@ Hybrid signals (any one flags the car; an audit heuristic, never shipped):
   name  the yard's own model name says so ("Camry Hybrid", "RX 400h")
   vin   the car shares make + VIN positions 4-8 with >= 2 cars whose yard
         name says hybrid (catches Altima/Highlander hybrids whose decode
-        has no trim at all)
+        has no trim at all), or a narrow VIN engine-code rule
+        (HYBRID_VIN_RULES: GM eAssist "R" on 2012-16 Malibu/Regal/LaCrosse/
+        Impala, whose vPIC trims are ordinary)
 
 Usage: python3 scraper/_audit_verified_fits.py [--json out.json]
                                                [--compare before.json]
@@ -89,6 +91,19 @@ HYBRID_RE = re.compile(
 HYBRID_TRIM_RULES: list[tuple[str, str, int, int, re.Pattern]] = [
     # 2013-14 Malibu Eco = the 2.4 eAssist mild hybrid (vPIC "1LT ECO")
     ("Chevrolet", "malibu", 2013, 2014, re.compile(r"\beco\b", re.I)),
+]
+# VIN engine codes that mean "hybrid" on one model line (feed make, model
+# prefix, first year, last year, VIN position 8 = index 7). GM eAssist (2.4
+# LUK mild hybrid) is engine code "R" on the 2012-16 Malibu/Regal/LaCrosse/
+# Impala; vPIC gives those cars ordinary trims ("Premium 1", "Leather") and
+# no yard names them hybrids, so neither the vpic nor the name signal sees
+# them. Other codes on these lines in those years: Malibu A/L/X, Regal K/V/X,
+# LaCrosse 3, Impala 3/L (decode cache, 2026-11-05).
+HYBRID_VIN_RULES: list[tuple[str, str, int, int, str]] = [
+    ("Chevrolet", "malibu", 2012, 2016, "R"),
+    ("Buick", "regal", 2012, 2016, "R"),
+    ("Buick", "lacrosse", 2012, 2016, "R"),
+    ("Chevrolet", "impala", 2012, 2016, "R"),
 ]
 
 # North American VIN model-year character (49 CFR 565.15, position 10):
@@ -182,7 +197,11 @@ def main() -> None:
             srcs.append("vpic")
         if HYBRID_RE.search(md):
             srcs.append("name")
-        if len(vin) == 17 and "name" not in srcs and name_vds.get((mk, vin[3:8]), 0) >= 2:
+        if len(vin) == 17 and "name" not in srcs and (
+                name_vds.get((mk, vin[3:8]), 0) >= 2
+                or any(mk == r_mk and md.lower().startswith(r_md) and lo <= y <= hi
+                       and vin[7] == ch
+                       for r_mk, r_md, lo, hi, ch in HYBRID_VIN_RULES)):
             srcs.append("vin")
         if srcs:
             hyb_src[i] = "+".join(srcs)

@@ -9920,7 +9920,16 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Buick", "Verano", 2012, 2017),
             ("Saturn", "Aura", 2007, 2009,
              {"ambig": "Aura Green Line hybrids also decode as 2.4L 4-cyl and use a belt motor-generator (BAS) for charging and auto-restart — check for GREEN LINE/HYBRID badges"}),
-            ("Buick", "Regal", 2011, 2013),
+            ("Buick", "Regal", 2011, 2011),
+            # 2012-13 Regal eAssist (2.4 LUK mild hybrid, VIN position 8
+            # "R"): 5 lot cars (2012: 2, 2013: 3) decode "2.4L 4-cyl" with
+            # ordinary vPIC trims ("Premium 1", "Leather"), and no yard names
+            # them hybrids (audit (e), HYBRID_VIN_RULES). 2012 also has the
+            # LEA ("K"); 2013 has no "K" Regal on the lots or in the decode
+            # cache. No verified group covers the Regal, so the split costs
+            # only engine-assembly Verified.
+            ("Buick", "Regal", 2012, 2013,
+             {"ambig": "2012–13 Regal eAssist mild hybrids also decode as 2.4L 4-cyl, but their engine parts can differ and a belt motor-generator replaces the alternator — check for an R as the VIN’s 8th character"}),
         ],
         "parts": {
             "alternator": {"note": "Ecotec 2.4 unit — direct-injection (LEA/LUK) era plugs can differ; " + _ALT_NOTE},
@@ -11089,12 +11098,23 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "GM Ecotec Gen3 2.0T/2.4/2.5 I4 (Malibu 8th gen)",
         "engine": {"liters": [2.0, 2.4, 2.5], "cyl": 4},
         "apps": [
-            ("Chevrolet", "Malibu", 2013, 2015, {"sole": True}),
+            # 2013 Malibu Eco = 2.4 LUK eAssist mild hybrid (VIN position 8
+            # "R"): 87 lot cars (86 decode "1LT/2LT ECO", "2.4L 4-cyl"; 1 no
+            # decode) passed the family's 2.4 gate and showed Verified for
+            # alternator and engine assembly (audit (e)). No "R" among the
+            # ~470 decoded 2014-15 Malibus, so 2014-15 keep "sole".
+            ("Chevrolet", "Malibu", 2013, 2013,
+             {"ambig": "2013 Malibu Ecos (eAssist mild hybrid) also decode as 2.4L 4-cyl, but their engine parts can differ and a belt motor-generator replaces the alternator — check for ECO badges or an R as the VIN’s 8th character"}),
+            ("Chevrolet", "Malibu", 2014, 2015, {"sole": True}),
             ("Chevrolet", "Malibu Limited", 2016, 2016, {"sole": True}),
-            ("Chevrolet", "Impala", 2014, 2015),
+            # 2014 Impala eAssist: the decode cache holds a 2014 "R" VIN
+            # decoding "ECO 2SA", "2.4L 4-cyl" (none on the lots today).
+            ("Chevrolet", "Impala", 2014, 2014,
+             {"ambig": "2014 Impala eAssist mild hybrids also decode as 2.4L 4-cyl, but their engine parts can differ and a belt motor-generator replaces the alternator — check for an R as the VIN’s 8th character"}),
+            ("Chevrolet", "Impala", 2015, 2015),
         ],
         "parts": {
-            "alternator": {"note": "2013 Malibu ships one published alternator across 2.0T, 2.4 eAssist and 2.5; 14-15 rows are beyond this catalog edition"},
+            "alternator": {"note": "2013 2.0T/2.5 share one published alternator, but the listing also names the 2.4 eAssist, which uses a motor-generator instead, so 2013 pairs stay Likely; 14-15 rows are beyond this catalog edition — match part number"},
             "starter": {"note": "2013 2.0T/2.5 share one published starter; the 2.4 Eco (eAssist) unit isn't published, so pairs stay Likely — match part number"},
         },
     },
@@ -12859,8 +12879,18 @@ _ALT_VERIFIED: dict = {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0196 (95A) CR-V 2.0 B20B4 1997-1998 unqualified. The 99-01 B20Z2 rows split M/T vs A/T and stay Likely.",
         "groups": [[("Honda", "CR-V", 1997, 1998)]],
     },
+    # gm-ecotec-lcv (P0.5 review, 2026-11-05): 210-0255's 2.4 row conflicts
+    # with the hardware. The only 2.4 in a 2013 US Malibu is the Eco (2.4 LUK
+    # eAssist; all 126 2013 "R" VINs in the decode cache read "1LT/2LT
+    # ECO"), and eAssist mounts a belt motor-generator in place of the
+    # alternator, so the row is a catalog aggregate and is withheld: the
+    # 2013 Malibu app is ambig, and the client (old and new) never verifies
+    # a vg pair when either side's app is ambig. This group spans only the
+    # 2013 Malibu, so it verifies no pair until the app can tell an Eco from
+    # a 2.0T/2.5 on BOTH sides (a seeker's engine is never known). It is
+    # kept as the family's evidence record (2.0T/2.5 share is supported).
     "gm-ecotec-lcv": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0255 (110A) Malibu 2013 — one published unit across the 2.0 turbo, 2.4 and 2.5. 2014-15 alternator rows are beyond this catalog edition.",
+        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0255 (110A) Malibu 2013 — one published unit across the 2.0 turbo, 2.4 and 2.5. 2014-15 alternator rows are beyond this catalog edition. The 2.4 row conflicts with the 2013 Malibu Eco's eAssist motor-generator (no conventional alternator) and is withheld: the 2013 Malibu app is ambig, so this group verifies no pair (2026-11-05).",
         "groups": [[("Chevrolet", "Malibu", 2013, 2013)]],
     },
     "toyota-1nz": {
@@ -13404,7 +13434,9 @@ _STR_VERIFIED: dict = {
     # mild hybrid; 86 lot cars decode "1LT/2LT ECO", "2.4L 4-cyl"). The app
     # cannot split a group by engine, and a seeker's engine is never known,
     # so no 2013 Malibu starter pair can be Verified on this evidence. The
-    # alternator group stays: 210-0255 publishes the 2.4 eAssist too.
+    # alternator group (210-0255) stays only as the evidence record: its 2.4
+    # row is withheld and the 2013 Malibu app is ambig (see the alternator
+    # table), so it verifies no pair either.
     "gm-atlas-i45": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5394 Colorado 2.9 and 3.7 2008-2012; Canyon 3.7 2008-2012 and 2.9 2009-2012 (the Canyon span starts at 2009 because the 2008 2.9 row is not published).",
         "groups": [
