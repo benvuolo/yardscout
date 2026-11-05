@@ -159,21 +159,27 @@ def year_manifest(make: str, model: str, year: int) -> list[dict]:
     A feed class name ("C-Class") reads every badge of the class whose model
     page lists the year, so each line's `variants` lists them all (the badges
     offered) and `variants_read` the same; `model_pages` names the home and
-    model pages the badge list came from. A plain model reads _slug(model),
-    the page categories_for reads (not the template's hyphen slug)."""
+    model pages the badge list came from. When one of those pages was not read
+    (not in the cache, or not HTTP 200) the badge list may be incomplete, so
+    every line carries an error (C1 then fails closed). A plain model reads
+    _slug(model), the page categories_for reads (not the template's hyphen slug)."""
     if model not in CLASSES:
         return [_T.year_manifest_slug(make, _slug(model), year)]
     slugs, pages = _badges(CLASSES[model], year, _sp.cached)
+    unread = [p["url"] for p in pages if p["status"] != 200]
     if not slugs:
         line = _T._year_line()
         line.update(variants=[], variants_read=[], model_pages=pages,
                     error="not_fetched" if any(p["status"] is None for p in pages)
+                    else f"model page not read: {unread[0]}" if unread
                     else "no catalog badge page for this year")
         return [line]
     out = []
     for sl in slugs:
         line = _T.year_manifest_slug(make, sl, year, variant=sl)
         line.update(variants=list(slugs), variants_read=list(slugs), model_pages=pages)
+        if unread and "error" not in line:
+            line["error"] = f"model page not read: {unread[0]}"  # a badge offering the year may be missing
         out.append(line)
     return out
 

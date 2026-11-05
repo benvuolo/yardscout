@@ -309,6 +309,11 @@ check("MB badge model reads its underscore slug page", [(x["catalog"], x["status
 mbn = no_gets(mbpartsgiant.year_manifest, "Mercedes-Benz", "E-Class", 2030)
 check("MB class with no badge for the year", mbn[0]["error"] == "no catalog badge page for this year"
       and mbn[0]["variants"] == [], mbn)
+_c230 = PAGES.pages.pop(f"{S.M}/mercedes_benz-c230-parts")  # a class model page not read: badges may be missing
+mbu = no_gets(mbpartsgiant.year_manifest, "Mercedes-Benz", "C-Class", 2030)
+PAGES.pages[f"{S.M}/mercedes_benz-c230-parts"] = _c230
+check("MB year lines fail closed when a class model page was not read",
+      len(mbu) == 2 and all(x.get("error") == f"model page not read: {S.M}/mercedes_benz-c230-parts" for x in mbu), mbu)
 mbl = no_gets(mbpartsgiant.list_manifest, f"{ML}-c300/charging-starting/alternator", "alternator")
 check("MB list manifest: rows, badge variant, product rule read from the cache", mbl["variant"] == "c300"
       and "error" not in mbl and {r["pn"]: r["excluded_by"] for r in mbl["rows"]}
