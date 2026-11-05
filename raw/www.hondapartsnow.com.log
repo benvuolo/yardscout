@@ -366,3 +366,131 @@
 20:44:03 chain-unlinked trunk-lid 1 numbers named by 68500-T2A-A80ZZ, no catalog link: 68500-T2A-A10ZZ
 20:44:03 seg done tier=B Honda Accord [2013, 2017] seeds=[2013] records=1339 errors=0
 20:44:03 time budget reached records=1339
+20:44:13 start site=www.hondapartsnow.com mode=worklist tiers=['A', 'B'] records=1339 list_lines=146 year_lines=21 url_index=1430
+20:44:13 seg done tier=A Honda Accord [1998, 2002] seeds=[2002] records=1339 errors=0
+20:44:13 seg done tier=A Honda Accord [2003, 2005] seeds=[2003] records=1339 errors=0
+20:44:13 seg done tier=A Honda Odyssey [2005, 2010] seeds=[2007] records=1339 errors=0
+20:44:13 seg done tier=A Honda Civic [2006, 2008] seeds=[2008] records=1339 errors=0
+20:44:13 seg done tier=A Honda Accord [2008, 2010] seeds=[2008] records=1339 errors=0
+20:44:13 seg done tier=A Honda Pilot [2003, 2008] seeds=[2006] records=1339 errors=0
+20:44:13 seg done tier=A Honda Accord [2006, 2007] seeds=[2007] records=1339 errors=0
+20:44:13 seg done tier=A Honda Civic [2001, 2003] seeds=[2002] records=1339 errors=0
+20:44:13 seg done tier=A Honda Civic [2004, 2005] seeds=[2005] records=1339 errors=0
+20:44:13 seg done tier=A Honda Odyssey [1995, 2004] seeds=[2003] records=1339 errors=0
+20:44:13 seg done tier=A Honda Civic [1996, 2000] seeds=[2000] records=1339 errors=0
+20:44:13 seg done tier=A Honda Civic [2009, 2011] seeds=[2009] records=1339 errors=0
+20:44:13 seg done tier=A Honda CR-V [2002, 2006] seeds=[2004] records=1339 errors=0
+20:44:13 seg done tier=A Honda Pilot [2009, 2015] seeds=[2011] records=1339 errors=0
+20:44:13 seg done tier=A Honda Civic [2012, 2015] seeds=[2012] records=1339 errors=0
+20:44:13 seg done tier=A Honda Accord [1994, 1997] seeds=[1997] records=1339 errors=0
+20:44:13 seg done tier=A Honda Accord [2011, 2012] seeds=[2012] records=1339 errors=0
+20:44:13 seg done tier=A Honda CR-V [2007, 2011] seeds=[2007] records=1339 errors=0
+20:44:13 seg done tier=A Honda CR-V [1997, 2001] seeds=[2001] records=1339 errors=0
+20:44:13 seg done tier=A Honda Fit [2007, 2020] seeds=[2008] records=1339 errors=0
+20:44:13 seg done tier=A Honda Odyssey [2011, 2017] seeds=[2011] records=1339 errors=0
+20:44:13 seg done tier=A Honda Element [2003, 2011] seeds=[2003] records=1339 errors=0
+20:44:13 seg done tier=A Honda Accord [2013, 2017] seeds=[2013] records=1339 errors=0
+20:44:13 seg done tier=A Honda Accord [1981, 1993] seeds=[1993] records=1339 errors=0
+20:44:13 seg done tier=A Honda Civic [1978, 1995] seeds=[1995] records=1339 errors=0
+20:44:13 seg done tier=A Honda Ridgeline [2006, 2014] seeds=[2006] records=1339 errors=0
+20:44:13 seg done tier=A Honda Insight [2000, 2021] seeds=[2010] records=1339 errors=0
+20:44:13 seg done tier=A Honda Civic Hybrid [2003, 2010] seeds=[2008] records=1339 errors=0
+20:44:13 seg done tier=B Honda Accord [1998, 2002] seeds=[2002] records=1339 errors=0
+20:44:13 seg done tier=B Honda Accord [2003, 2005] seeds=[2003] records=1339 errors=0
+20:44:13 seg done tier=B Honda Odyssey [2005, 2010] seeds=[2007] records=1339 errors=0
+20:44:13 seg done tier=B Honda Civic [2006, 2008] seeds=[2008] records=1339 errors=0
+20:44:13 seg done tier=B Honda Accord [2008, 2010] seeds=[2008] records=1339 errors=0
+20:44:13 seg done tier=B Honda Pilot [2003, 2008] seeds=[2006] records=1339 errors=0
+20:44:13 seg done tier=B Honda Accord [2006, 2007] seeds=[2007] records=1339 errors=0
+20:44:13 seg done tier=B Honda Civic [2001, 2003] seeds=[2002] records=1339 errors=0
+20:44:13 seg done tier=B Honda Civic [2004, 2005] seeds=[2005] records=1339 errors=0
+20:44:13 seg done tier=B Honda Odyssey [1995, 2004] seeds=[2003] records=1339 errors=0
+20:44:13 seg done tier=B Honda Civic [1996, 2000] seeds=[2000] records=1339 errors=0
+20:44:13 seg done tier=B Honda Civic [2009, 2011] seeds=[2009] records=1339 errors=0
+20:44:13 seg done tier=B Honda CR-V [2002, 2006] seeds=[2004] records=1339 errors=0
+20:44:13 seg done tier=B Honda Pilot [2009, 2015] seeds=[2011] records=1339 errors=0
+20:44:13 seg done tier=B Honda Civic [2012, 2015] seeds=[2012] records=1339 errors=0
+20:44:13 seg done tier=B Honda Accord [1994, 1997] seeds=[1997] records=1339 errors=0
+20:44:13 seg done tier=B Honda Accord [2011, 2012] seeds=[2012] records=1339 errors=0
+20:44:13 seg done tier=B Honda CR-V [2007, 2011] seeds=[2007] records=1339 errors=0
+20:44:13 seg done tier=B Honda CR-V [1997, 2001] seeds=[2001] records=1339 errors=0
+20:44:13 seg done tier=B Honda Fit [2007, 2020] seeds=[2008] records=1339 errors=0
+20:44:13 seg done tier=B Honda Odyssey [2011, 2017] seeds=[2011] records=1339 errors=0
+20:44:13 seg done tier=B Honda Element [2003, 2011] seeds=[2003] records=1339 errors=0
+20:44:13 seg done tier=B Honda Accord [2013, 2017] seeds=[2013] records=1339 errors=0
+20:45:18 chain-unlinked radiator 7 numbers named by 19010-PT1-908, no catalog link: 19010-PT1-013, 19010-PT1-003, 19010-PT1-903, 19010-PT4-G55, 19010-PT4-G57, 19010-PT1-901, 19010-PT1-905
+20:45:34 chain-unlinked radiator 3 numbers named by 19010-PT1-906, no catalog link: 19010-PT4-G56, 19010-PT1-902, 19010-PT1-904
+20:46:14 chain-unlinked door-front 1 numbers named by 67010-SM4-A02ZZ, no catalog link: 67010-SM4-505ZZ
+20:46:14 chain-unlinked door-front 1 numbers named by 67010-SM4-A12ZZ, no catalog link: 67010-SM4-505ZZ
+20:47:27 chain-unlinked bumper-front 1 numbers named by 71101-SM4-A01, no catalog link: 71101-SM4-A01ZZ
+20:47:42 chain-unlinked bumper-front 1 numbers named by 71101-SM4-A80ZZ, no catalog link: 71101-SM4-A10ZZ
+20:48:14 chain-unlinked bumper-rear 1 numbers named by 71501-SM4-962ZZ, no catalog link: 71501-SM4-A11ZZ
+20:49:51 chain-unlinked ignition-coils 1 numbers named by 30500-SA5-033, no catalog link: 30500-SA5-023
+20:50:14 chain-unlinked radiator 1 numbers named by 19010-PD2-673, no catalog link: 19010-PD2-674
+20:50:30 chain-unlinked radiator 2 numbers named by 19010-PD2-903, no catalog link: 19010-PD2-902, 19010-PD2-672
+20:51:10 chain-unlinked door-front 9 numbers named by 75110-SA6-676ZZ, no catalog link: 75110-SA6-672ZZ, 75110-SA6-675ZZ, 75110-SB8-673ZZ, 75110-SA6-673ZZ, 75110-SB8-672ZZ, 75110-SB8-870ZZ, 75110-SB8-670ZZ, 75110-SA6-670ZZ, 75110-SA6-671ZZ
+20:51:10 chain-unlinked door-front 7 numbers named by 75150-SA6-676ZZ, no catalog link: 75150-SA6-672ZZ, 75150-SA6-670ZZ, 75150-SA6-673ZZ, 75150-SA6-675ZZ, 75150-SB8-670ZZ, 75150-SB8-870ZZ, 75150-SA6-671ZZ
+20:51:42 chain-unlinked door-rear 4 numbers named by 76110-SA6-672ZZ, no catalog link: 76110-SA6-671ZZ, 76110-SB8-670ZZ, 76110-SA6-670ZZ, 76110-SB8-671ZZ
+20:51:42 chain-unlinked door-rear 4 numbers named by 76150-SA6-672ZZ, no catalog link: 76150-SA6-670ZZ, 76150-SB8-671ZZ, 76150-SA6-671ZZ, 76150-SB8-670ZZ
+20:52:07 chain-unlinked hood 1 numbers named by 63110-SA5-673ZZ, no catalog link: 63110-SA5-672ZZ
+20:52:46 chain-unlinked bumper-front 1 numbers named by 62511-SA5-661ZZ, no catalog link: 62511-SA5-661
+20:53:03 chain-unlinked bumper-rear 3 numbers named by 84111-SA6-661ZZ, no catalog link: 84111-SA6-660ZZ, 84111-SA6-660, 84011-SA6-660ZZ
+20:53:42 chain-unlinked trunk-lid 2 numbers named by 83100-SA6-672ZZ, no catalog link: 83100-SA6-671ZZ, 83100-SB8-671ZZ
+20:53:42 chain-unlinked trunk-lid 1 numbers named by 85513-SA6-671ZQ, no catalog link: 85513-SA6-671ZC
+20:53:42 chain-unlinked trunk-lid 1 numbers named by 85513-SA6-671ZR, no catalog link: 85513-SA6-671ZC
+20:55:10 chain-unlinked ignition-coils 1 numbers named by 30500-PH1-026, no catalog link: 30500-PH1-016
+20:55:34 chain-unlinked radiator 1 numbers named by 19010-PH4-671, no catalog link: 19010-PH4-305
+20:56:06 chain-unlinked door-front 1 numbers named by 67010-SE3-A00ZZ, no catalog link: 67010-SE3-G00ZZ
+20:56:06 chain-unlinked door-front 1 numbers named by 67050-SE3-A00ZZ, no catalog link: 67050-SE3-G00ZZ
+20:56:38 chain-unlinked door-rear 2 numbers named by 67510-SE3-A00ZZ, no catalog link: 67510-SE3-A10ZZ, 67510-SE3-G00ZZ
+20:56:38 chain-unlinked door-rear 2 numbers named by 67550-SE3-A00ZZ, no catalog link: 67550-SE3-A10ZZ, 67550-SE3-G00ZZ
+20:57:51 chain-unlinked bumper-front 1 numbers named by 71101-SE0-000, no catalog link: 71101-SE4-A00
+20:58:22 chain-unlinked bumper-rear 2 numbers named by 71501-SE5-A00, no catalog link: 71501-SE3-010, 71501-SE3-000
+20:59:52 chain-unlinked trunk-lid 1 numbers named by 68500-SE3-A00ZZ, no catalog link: 68500-SE5-A00ZZ
+20:59:52 chain-unlinked trunk-lid 1 numbers named by 74883-SE3-A01ZA, no catalog link: 74883-SE3-A01ZE
+21:00:06 seg done tier=B Honda Accord [1981, 1993] seeds=[1993, 1985, 1987] records=1388 errors=0
+21:01:19 chain-unlinked radiator 17 numbers named by 19010-P03-505, no catalog link: 19010-P28-A01, 19010-P2K-003, 19010-P2C-901, 19010-P2J-003, 19010-P1Z-A01, 19010-P28-C01, 19010-P2K-013, 19010-P08-013, 19010-P28-A03, 19010-P2C-903, 19010-P08-003, 19010-P2J-013, 19010-P01-003, 19010-P01-013, 19010-P03-901, 19010-P03-903, 19010-P03-305
+21:01:34 chain-unlinked radiator 1 numbers named by 19010-P03-904, no catalog link: 19010-P1Z-A52
+21:01:50 chain-unlinked radiator 1 numbers named by 19010-P28-G52, no catalog link: 19010-P28-G51
+21:02:06 chain-unlinked door-front 3 numbers named by 67050-SR1-A00ZZ, no catalog link: 04675-SR1-A00ZZ, 67050-SR4-A10ZZ, 67050-SR4-A00ZZ
+21:02:46 chain-unlinked door-rear 1 numbers named by 67550-SR1-A00ZZ, no catalog link: 67550-SR1-505ZZ
+21:04:06 chain-unlinked bumper-front 1 numbers named by 71101-SR4-000ZZ, no catalog link: 04711-SR4-000ZZ
+21:04:06 chain-unlinked bumper-front 1 numbers named by 71101-SR4-505ZZ, no catalog link: 71101-SR4-305ZZ
+21:04:06 chain-unlinked bumper-front 1 numbers named by 71101-SR4-K00, no catalog link: 71101-SR4-305ZZ
+21:04:30 chain-unlinked bumper-rear 1 numbers named by 71501-SR4-000ZZ, no catalog link: 04715-SR4-000ZZ
+21:04:46 chain-unlinked trunk-lid 3 numbers named by 68500-SR4-V50ZZ, no catalog link: 68500-SR1-P00ZZ, 68500-SR4-A01ZZ, 68500-SR4-A00ZZ
+21:05:26 chain-unlinked ignition-coils 1 numbers named by 30500-SB3-013, no catalog link: 30500-SB3-003
+21:05:42 chain-unlinked radiator 5 numbers named by 19010-PE1-675, no catalog link: 19010-PE1-665, 19010-PE1-661, 19010-PE1-663, 19010-PE1-673, 19010-PE1-671
+21:05:58 chain-unlinked radiator 1 numbers named by 19010-PE1-676, no catalog link: 19010-PE1-305
+21:06:38 chain-unlinked door-front 2 numbers named by 75110-SB4-661ZZ, no catalog link: 75110-SF7-660ZZ, 75110-SB4-660ZZ
+21:06:38 chain-unlinked door-front 1 numbers named by 75150-SB4-661ZZ, no catalog link: 75150-SF7-660ZZ
+21:07:18 chain-unlinked door-rear 3 numbers named by 76110-SB4-662ZZ, no catalog link: 76110-SB4-660ZZ, 76110-SB4-661ZZ, 76110-SF7-660ZZ
+21:07:18 chain-unlinked door-rear 3 numbers named by 76150-SB4-662ZZ, no catalog link: 76150-SF7-660ZZ, 76150-SB4-661ZZ, 76150-SB4-660ZZ
+21:07:34 chain-unlinked hood 1 numbers named by 63110-SB4-661ZZ, no catalog link: 63110-SB4-660ZZ
+21:07:58 chain-unlinked bumper-front 2 numbers named by 62010-SB4-000, no catalog link: 62511-SB4-960ZZ, 62511-SB4-000
+21:08:06 chain-unlinked bumper-rear 2 numbers named by 84111-SF7-660, no catalog link: 84111-SB4-660, 84111-SB4-660ZZ
+21:08:22 chain-unlinked trunk-lid 1 numbers named by 83110-SB4-740ZZ, no catalog link: 83110-SB4-660ZZ
+21:09:34 chain-unlinked radiator 1 numbers named by 19010-PA6-004, no catalog link: 19010-PA6-906
+21:09:34 chain-unlinked radiator 1 numbers named by 19010-PA6-013, no catalog link: 19010-PA6-906
+21:09:58 chain-unlinked radiator 1 numbers named by 19010-PA6-904, no catalog link: 19010-PA6-906
+21:09:58 chain-unlinked radiator 1 numbers named by 19010-PA6-905, no catalog link: 19010-PA6-906
+21:10:54 chain-unlinked door-rear 1 numbers named by 76110-SA8-671ZZ, no catalog link: 76110-SA8-670ZZ
+21:10:54 chain-unlinked door-rear 1 numbers named by 76150-SA8-671ZZ, no catalog link: 76150-SA8-670ZZ
+21:11:18 chain-unlinked hood 3 numbers named by 06630-SA0-020ZZ, no catalog link: 06630-SA0-660ZZ, 63110-SA0-662ZZ, 63110-SA0-663ZZ
+21:11:50 chain-unlinked bumper-rear 1 numbers named by 84110-SA0-680, no catalog link: 84150-SA0-670
+21:12:06 chain-unlinked grille 1 numbers named by 62301-SA0-944, no catalog link: 62301-SA0-943
+21:12:30 seg done tier=B Honda Civic [1978, 1995] seeds=[1995, 1985, 1983] records=1428 errors=0
+21:13:18 chain-unlinked gauge-cluster 3 numbers named by 78100-SJC-A04, no catalog link: 78100-SJC-A01, 78100-SJC-A03, 78100-SJC-A02
+21:13:34 chain-unlinked gauge-cluster 3 numbers named by 78100-SJC-A14, no catalog link: 78100-SJC-A13, 78100-SJC-A11, 78100-SJC-A12
+21:13:42 chain-unlinked ignition-coils 3 numbers named by 30520-PVJ-A01, no catalog link: 30520-PVF-A01, 30520-PGK-A01, 30520-PVJ-S01
+21:14:07 chain-unlinked radiator 1 numbers named by 19010-RJE-A52, no catalog link: 19010-RJE-A51
+21:14:38 chain-unlinked door-front 2 numbers named by 67010-SJC-A91ZZ, no catalog link: 67010-SJC-A90ZZ, 67010-SJC-A00ZZ
+21:14:38 chain-unlinked door-front 2 numbers named by 67050-SJC-A91ZZ, no catalog link: 67050-SJC-A00ZZ, 67050-SJC-A90ZZ
+21:15:10 chain-unlinked door-rear 2 numbers named by 67510-SJC-A91ZZ, no catalog link: 67510-SJC-A00ZZ, 67510-SJC-A90ZZ
+21:15:10 chain-unlinked door-rear 2 numbers named by 67550-SJC-A91ZZ, no catalog link: 67550-SJC-A00ZZ, 67550-SJC-A90ZZ
+21:15:34 chain-unlinked hood 1 numbers named by 60100-SJC-A90ZZ, no catalog link: 60100-SJC-A00ZZ
+21:17:03 product-fail https://www.hondapartsnow.com/genuine/honda~grille~08f21-sjc-101.html: ValueError: no partInfo in store
+21:17:19 product-fail https://www.hondapartsnow.com/genuine/honda~grille~08f21-sjc-101.html: ValueError: no partInfo in store
+21:17:42 chain-unlinked tailgate 3 numbers named by 68100-SJC-A91ZZ, no catalog link: 68100-SJC-A01ZZ, 68100-SJC-A90ZZ, 68100-SJC-A00ZZ
+21:17:52 seg done tier=B Honda Ridgeline [2006, 2014] seeds=[2006] records=1439 errors=2
+21:17:52 time budget reached records=1439
