@@ -32,3 +32,5 @@ scraper/.out-show-filter/
 
 # Claude Code agent worktrees
 .claude/worktrees/
+scraper/oem_fitment/cache/
+scraper/oem_fitment/.state/

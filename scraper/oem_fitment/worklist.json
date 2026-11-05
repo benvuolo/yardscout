@@ -1,0 +1,8231 @@
+{
+ "built": "2026-11-05",
+ "note": "segments = model generation x facelift windows from GENERATION_BREAKS/FACELIFT_BREAKS where known, else one row per model; seed_year = most common year on the lots",
+ "sites": {
+  "www.moparpartsgiant.com": {
+   "cars": 33521,
+   "segments": [
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Ram 1500",
+     "segment": [
+      1971,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 3718,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Grand Caravan",
+     "segment": [
+      2008,
+      2024
+     ],
+     "breaks_known": true,
+     "cars": 2187,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "200",
+     "segment": [
+      1979,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 1998,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Journey",
+     "segment": [
+      2009,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 1982,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Town & Country",
+     "segment": [
+      2008,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 1803,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "300",
+     "segment": [
+      1999,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 1565,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Avenger",
+     "segment": [
+      1995,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 1434,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "PT Cruiser",
+     "segment": [
+      2001,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 1284,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Charger",
+     "segment": [
+      1971,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 1160,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Dakota",
+     "segment": [
+      1997,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 1099,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Caravan",
+     "segment": [
+      1984,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 1029,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Town & Country",
+     "segment": [
+      1992,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 1027,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Dart",
+     "segment": [
+      0,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 996,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Caliber",
+     "segment": [
+      2007,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 922,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Grand Caravan",
+     "segment": [
+      2001,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 858,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Charger",
+     "segment": [
+      2011,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 721,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Durango",
+     "segment": [
+      2004,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 719,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Durango",
+     "segment": [
+      1998,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 664,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Sebring",
+     "segment": [
+      2007,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 529,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Dakota",
+     "segment": [
+      2005,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 454,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Pacifica",
+     "segment": [
+      2004,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 446,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Nitro",
+     "segment": [
+      2007,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 438,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Ram",
+     "model": "1500",
+     "segment": [
+      2009,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 398,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Sebring",
+     "segment": [
+      2001,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 395,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Durango",
+     "segment": [
+      2011,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 346,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Neon",
+     "segment": [
+      2000,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 334,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Ram Pickup",
+     "segment": [
+      1988,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 322,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Stratus",
+     "segment": [
+      1996,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 318,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Dakota",
+     "segment": [
+      1987,
+      1996
+     ],
+     "breaks_known": true,
+     "cars": 286,
+     "seed_year": 1992
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Magnum",
+     "segment": [
+      1978,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 279,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Ram Van",
+     "segment": [
+      1966,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 209,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Grand Caravan",
+     "segment": [
+      0,
+      2000
+     ],
+     "breaks_known": true,
+     "cars": 182,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Aspen",
+     "segment": [
+      2007,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 160,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Ram 2500",
+     "segment": [
+      1979,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 153,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "1500 Pickup",
+     "segment": [
+      1995,
+      2023
+     ],
+     "breaks_known": false,
+     "cars": 147,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "300C",
+     "segment": [
+      2005,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 145,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Ram 2500",
+     "segment": [
+      2003,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 137,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Challenger",
+     "segment": [
+      2009,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 133,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Intrepid",
+     "segment": [
+      1993,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 125,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Caravan/Grand Caravan",
+     "segment": [
+      1996,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 117,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Concorde",
+     "segment": [
+      1993,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 103,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Sebring",
+     "segment": [
+      1992,
+      2000
+     ],
+     "breaks_known": true,
+     "cars": 102,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "D1500",
+     "segment": [
+      1995,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 100,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Ram",
+     "segment": [
+      2002,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 94,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "300M",
+     "segment": [
+      1999,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 84,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Ram",
+     "segment": [
+      1961,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 82,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Ram Wagon",
+     "segment": [
+      1958,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 72,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Voyager",
+     "segment": [
+      1999,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 58,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Pacifica",
+     "segment": [
+      2017,
+      2022
+     ],
+     "breaks_known": true,
+     "cars": 58,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Caravan",
+     "segment": [
+      1999,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 56,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Plymouth",
+     "model": "Grand Voyager",
+     "segment": [
+      1989,
+      2000
+     ],
+     "breaks_known": false,
+     "cars": 54,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Plymouth",
+     "model": "Voyager",
+     "segment": [
+      1987,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 52,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "Crossfire",
+     "segment": [
+      2004,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 50,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Challenger",
+     "segment": [
+      2015,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 45,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "LeBaron",
+     "segment": [
+      1980,
+      1995
+     ],
+     "breaks_known": false,
+     "cars": 40,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "LHS",
+     "segment": [
+      1994,
+      2001
+     ],
+     "breaks_known": false,
+     "cars": 40,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "D150",
+     "segment": [
+      1964,
+      1998
+     ],
+     "breaks_known": false,
+     "cars": 33,
+     "seed_year": 1985
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Ram",
+     "model": "ProMaster City",
+     "segment": [
+      2015,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 33,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Chrysler",
+     "model": "New Yorker",
+     "segment": [
+      1970,
+      1996
+     ],
+     "breaks_known": false,
+     "cars": 30,
+     "seed_year": 1990
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Ram",
+     "model": "2500",
+     "segment": [
+      2011,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 28,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Ram",
+     "model": "C/V",
+     "segment": [
+      2012,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 28,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Ram",
+     "model": "ProMaster 1500",
+     "segment": [
+      2014,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Ram Van 1500",
+     "segment": [
+      1986,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.moparpartsgiant.com",
+     "make": "Dodge",
+     "model": "Sprinter 2500",
+     "segment": [
+      2002,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 24,
+     "seed_year": 2004
+    }
+   ]
+  },
+  "www.fordpartsgiant.com": {
+   "cars": 60375,
+   "segments": [
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-150",
+     "segment": [
+      1997,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 3482,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-150",
+     "segment": [
+      2004,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 3431,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Focus",
+     "segment": [
+      2012,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 2711,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Fusion",
+     "segment": [
+      2010,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 1978,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Edge",
+     "segment": [
+      2007,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 1892,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Fusion",
+     "segment": [
+      2013,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 1756,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Escape",
+     "segment": [
+      2008,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 1709,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Escape",
+     "segment": [
+      2013,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 1582,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Explorer",
+     "segment": [
+      2002,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 1503,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Taurus",
+     "segment": [
+      2000,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 1369,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Expedition",
+     "segment": [
+      2003,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 1355,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Ranger",
+     "segment": [
+      1998,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 1349,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Fiesta",
+     "segment": [
+      1978,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 1223,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Focus",
+     "segment": [
+      2008,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 1191,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-150",
+     "segment": [
+      2009,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 1047,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Fusion",
+     "segment": [
+      2006,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 1037,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Focus",
+     "segment": [
+      2015,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 1034,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Expedition",
+     "segment": [
+      1997,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 1027,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Explorer",
+     "segment": [
+      2006,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 1012,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Explorer",
+     "segment": [
+      1995,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 903,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Focus",
+     "segment": [
+      2005,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 895,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Explorer",
+     "segment": [
+      2011,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 846,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Mustang",
+     "segment": [
+      1999,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 844,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Grand Marquis",
+     "segment": [
+      1998,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 821,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Expedition",
+     "segment": [
+      2007,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 784,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "E-250",
+     "segment": [
+      1978,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 780,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "E-150",
+     "segment": [
+      1969,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 758,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Escape",
+     "segment": [
+      2005,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 700,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Crown Victoria",
+     "segment": [
+      1998,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 641,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Focus",
+     "segment": [
+      1901,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 637,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Ranger",
+     "segment": [
+      1993,
+      1997
+     ],
+     "breaks_known": true,
+     "cars": 609,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Mustang",
+     "segment": [
+      2005,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 597,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "E-350",
+     "segment": [
+      1970,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 595,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-250 Super Duty",
+     "segment": [
+      1980,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 579,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Flex",
+     "segment": [
+      2009,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 558,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Escape",
+     "segment": [
+      2001,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 549,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-150",
+     "segment": [
+      1992,
+      1996
+     ],
+     "breaks_known": true,
+     "cars": 519,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Explorer Sport Trac",
+     "segment": [
+      2001,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 516,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Taurus",
+     "segment": [
+      2013,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 508,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Taurus",
+     "segment": [
+      2010,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 454,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Five Hundred",
+     "segment": [
+      2005,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 410,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-250",
+     "segment": [
+      1952,
+      1998
+     ],
+     "breaks_known": true,
+     "cars": 409,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "Town Car",
+     "segment": [
+      2003,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 373,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-250",
+     "segment": [
+      1999,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 364,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Escape",
+     "segment": [
+      2017,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 353,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-150",
+     "segment": [
+      2013,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 351,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Mariner",
+     "segment": [
+      2005,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 331,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "Navigator",
+     "segment": [
+      2003,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 326,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Milan",
+     "segment": [
+      2006,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 308,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Mustang",
+     "segment": [
+      1994,
+      1998
+     ],
+     "breaks_known": true,
+     "cars": 296,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Escort",
+     "segment": [
+      1983,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 286,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Ranger",
+     "segment": [
+      1959,
+      1992
+     ],
+     "breaks_known": true,
+     "cars": 276,
+     "seed_year": 1992
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "Town Car",
+     "segment": [
+      1998,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 271,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "MKX",
+     "segment": [
+      2007,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 266,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-150",
+     "segment": [
+      1987,
+      1991
+     ],
+     "breaks_known": true,
+     "cars": 252,
+     "seed_year": 1990
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Freestar",
+     "segment": [
+      2004,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 251,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Freestyle",
+     "segment": [
+      2005,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 250,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-350 Super Duty",
+     "segment": [
+      1999,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 243,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Mustang",
+     "segment": [
+      2010,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 234,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Taurus",
+     "segment": [
+      1996,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 233,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Transit Connect",
+     "segment": [
+      2010,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 229,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Fusion",
+     "segment": [
+      2017,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 228,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "Town Car",
+     "segment": [
+      1953,
+      1997
+     ],
+     "breaks_known": true,
+     "cars": 222,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "LS",
+     "segment": [
+      2000,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 207,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Windstar",
+     "segment": [
+      2001,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 200,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Sable",
+     "segment": [
+      2000,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 196,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "MKS",
+     "segment": [
+      2009,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 195,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Taurus",
+     "segment": [
+      2008,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 191,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Mountaineer",
+     "segment": [
+      2002,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 190,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "MKZ",
+     "segment": [
+      2010,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 182,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "MKZ",
+     "segment": [
+      1996,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 173,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "Navigator",
+     "segment": [
+      2007,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 172,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Grand Marquis",
+     "segment": [
+      1972,
+      1997
+     ],
+     "breaks_known": true,
+     "cars": 170,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "Navigator",
+     "segment": [
+      1998,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 161,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-250",
+     "segment": [
+      2008,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 150,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Explorer",
+     "segment": [
+      1991,
+      1994
+     ],
+     "breaks_known": true,
+     "cars": 148,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Mountaineer",
+     "segment": [
+      2006,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 142,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Fusion Hybrid",
+     "segment": [
+      2010,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 137,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-350",
+     "segment": [
+      1950,
+      1998
+     ],
+     "breaks_known": true,
+     "cars": 137,
+     "seed_year": 1990
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Thunderbird",
+     "segment": [
+      1961,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 135,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "Continental",
+     "segment": [
+      1964,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 134,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-150",
+     "segment": [
+      0,
+      1986
+     ],
+     "breaks_known": true,
+     "cars": 131,
+     "seed_year": 1986
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-350",
+     "segment": [
+      1999,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 130,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "MKX",
+     "segment": [
+      2011,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 129,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Explorer",
+     "segment": [
+      2016,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 123,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Crown Victoria",
+     "segment": [
+      1982,
+      1997
+     ],
+     "breaks_known": true,
+     "cars": 122,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "MKZ",
+     "segment": [
+      2013,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 120,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Escape Hybrid",
+     "segment": [
+      2005,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 118,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Cougar",
+     "segment": [
+      1967,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 118,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "Aviator",
+     "segment": [
+      2003,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 114,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-150",
+     "segment": [
+      2015,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 113,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Expedition EL",
+     "segment": [
+      2007,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 111,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Montego",
+     "segment": [
+      1971,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 110,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Econoline",
+     "segment": [
+      1963,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 107,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Excursion",
+     "segment": [
+      2000,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 103,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-150 Heritage",
+     "segment": [
+      2004,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 99,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "E-350 Super Duty",
+     "segment": [
+      1999,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 98,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Mountaineer",
+     "segment": [
+      1997,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 97,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Taurus X",
+     "segment": [
+      2008,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 96,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Explorer Sport",
+     "segment": [
+      2001,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 92,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "C-Max",
+     "segment": [
+      2013,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 89,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Windstar",
+     "segment": [
+      1999,
+      2000
+     ],
+     "breaks_known": true,
+     "cars": 87,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Transit Connect",
+     "segment": [
+      2014,
+      2022
+     ],
+     "breaks_known": true,
+     "cars": 83,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Fusion",
+     "segment": [
+      2019,
+      2024
+     ],
+     "breaks_known": true,
+     "cars": 83,
+     "seed_year": 2019
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Mercury",
+     "model": "Villager",
+     "segment": [
+      1993,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 80,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Lincoln",
+     "model": "MKT",
+     "segment": [
+      2010,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 77,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Ecosport",
+     "segment": [
+      2018,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 74,
+     "seed_year": 2018
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Aerostar",
+     "segment": [
+      1986,
+      1997
+     ],
+     "breaks_known": false,
+     "cars": 73,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Contour",
+     "segment": [
+      1995,
+      2000
+     ],
+     "breaks_known": false,
+     "cars": 71,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Mustang",
+     "segment": [
+      1965,
+      1993
+     ],
+     "breaks_known": true,
+     "cars": 69,
+     "seed_year": 1989
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "Taurus",
+     "segment": [
+      1992,
+      1995
+     ],
+     "breaks_known": true,
+     "cars": 66,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.fordpartsgiant.com",
+     "make": "Ford",
+     "model": "F-100",
+     "segment": [
+      1952,
+      1986
+     ],
+     "breaks_known": false,
+     "cars": 66,
+     "seed_year": 1981
+    }
+   ]
+  },
+  "www.gmpartsgiant.com": {
+   "cars": 78432,
+   "segments": [
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Cruze",
+     "segment": [
+      1986,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 3398,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Silverado 1500",
+     "segment": [
+      1999,
+      2023
+     ],
+     "breaks_known": false,
+     "cars": 3198,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Equinox",
+     "segment": [
+      2010,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 2731,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Impala",
+     "segment": [
+      2006,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 2603,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "segment": [
+      2008,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 2576,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Traverse",
+     "segment": [
+      2008,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 2092,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Trailblazer",
+     "segment": [
+      2002,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 1972,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Acadia",
+     "segment": [
+      2007,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 1739,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Suburban 1500",
+     "segment": [
+      1987,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 1725,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Cobalt",
+     "segment": [
+      2002,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 1607,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Tahoe",
+     "segment": [
+      2000,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 1559,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Sonic",
+     "segment": [
+      1982,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 1226,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Sierra 1500",
+     "segment": [
+      1988,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 1216,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "CTS",
+     "segment": [
+      2003,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 1190,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "G6",
+     "segment": [
+      2004,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 1184,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Enclave",
+     "segment": [
+      2008,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 1150,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Terrain",
+     "segment": [
+      2010,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 1135,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Impala",
+     "segment": [
+      1901,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 983,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "HHR",
+     "segment": [
+      2006,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 979,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Equinox",
+     "segment": [
+      2005,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 930,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "S-10",
+     "segment": [
+      1994,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 896,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "LeSabre",
+     "segment": [
+      2000,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 874,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Envoy",
+     "segment": [
+      1998,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 856,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Tahoe",
+     "segment": [
+      2007,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 800,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "segment": [
+      2014,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 710,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Grand Prix",
+     "segment": [
+      2004,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 673,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Cavalier",
+     "segment": [
+      1983,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 670,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Century",
+     "segment": [
+      1997,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 643,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Impala",
+     "segment": [
+      2012,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 641,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Lucerne",
+     "segment": [
+      2006,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 623,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Yukon",
+     "segment": [
+      2000,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 618,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Blazer",
+     "segment": [
+      1995,
+      2026
+     ],
+     "breaks_known": true,
+     "cars": 609,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "SRX",
+     "segment": [
+      2010,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 597,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "LaCrosse",
+     "segment": [
+      2010,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 588,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "VUE",
+     "segment": [
+      2002,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 574,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Colorado",
+     "segment": [
+      2004,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 563,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "DeVille",
+     "segment": [
+      2000,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 556,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "ION",
+     "segment": [
+      2003,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 555,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Express 2500",
+     "segment": [
+      1997,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 554,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "segment": [
+      2013,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 546,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Verano",
+     "segment": [
+      2012,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 494,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "LaCrosse",
+     "segment": [
+      2005,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 488,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "segment": [
+      2016,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 474,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Cruze",
+     "segment": [
+      2015,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 469,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Grand Am",
+     "segment": [
+      1999,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 462,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Yukon XL",
+     "segment": [
+      2000,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 447,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Express 1500",
+     "segment": [
+      1980,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 442,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Cruze",
+     "segment": [
+      2016,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 441,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Impala",
+     "segment": [
+      2014,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 428,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Astro",
+     "segment": [
+      1995,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 422,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Vibe",
+     "segment": [
+      2003,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 416,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "segment": [
+      2006,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 407,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Rendezvous",
+     "segment": [
+      2002,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 393,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Uplander",
+     "segment": [
+      2005,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 378,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "DTS",
+     "segment": [
+      2001,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 374,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "DeVille",
+     "segment": [
+      0,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 367,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Monte Carlo",
+     "segment": [
+      2000,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 362,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "Aura",
+     "segment": [
+      2007,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 354,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "segment": [
+      2004,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 351,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Yukon",
+     "segment": [
+      2007,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 351,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "VUE",
+     "segment": [
+      2008,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 346,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "C1500",
+     "segment": [
+      1977,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 345,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Yukon XL 1500",
+     "segment": [
+      2000,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 338,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Silverado 2500",
+     "segment": [
+      1999,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 325,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Spark",
+     "segment": [
+      2013,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 324,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Equinox",
+     "segment": [
+      2016,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 322,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "Escalade",
+     "segment": [
+      2002,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 318,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "K1500",
+     "segment": [
+      1983,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 316,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Avalanche",
+     "segment": [
+      2002,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 313,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Encore",
+     "segment": [
+      2013,
+      2023
+     ],
+     "breaks_known": false,
+     "cars": 308,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "segment": [
+      2000,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 308,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Captiva Sport",
+     "segment": [
+      2012,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 301,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Park Avenue",
+     "segment": [
+      1980,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 300,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Tahoe",
+     "segment": [
+      1995,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 296,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Avalanche 1500",
+     "segment": [
+      2002,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 295,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Express 3500",
+     "segment": [
+      1997,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 291,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "C/K 1500",
+     "segment": [
+      1978,
+      2001
+     ],
+     "breaks_known": false,
+     "cars": 291,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "LeSabre",
+     "segment": [
+      0,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 282,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Grand Prix",
+     "segment": [
+      1964,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 281,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Trax",
+     "segment": [
+      2013,
+      2025
+     ],
+     "breaks_known": false,
+     "cars": 277,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "SRX",
+     "segment": [
+      2004,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 263,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "STS",
+     "segment": [
+      2005,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 242,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Camaro",
+     "segment": [
+      1993,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 239,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Regal",
+     "segment": [
+      2011,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 238,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Silverado",
+     "segment": [
+      1993,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 235,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Trailblazer EXT",
+     "segment": [
+      2002,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 234,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Aveo",
+     "segment": [
+      2009,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 232,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Cruze Limited",
+     "segment": [
+      2016,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 228,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Impala Limited",
+     "segment": [
+      2014,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 228,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Venture",
+     "segment": [
+      1997,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 226,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Camaro",
+     "segment": [
+      2010,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 215,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Torrent",
+     "segment": [
+      2006,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 209,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Sonoma",
+     "segment": [
+      1994,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 208,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Alero",
+     "segment": [
+      1999,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 207,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Envoy Xl",
+     "segment": [
+      2002,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 202,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Lumina",
+     "segment": [
+      1990,
+      2001
+     ],
+     "breaks_known": false,
+     "cars": 199,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Bonneville",
+     "segment": [
+      1968,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 190,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Regal",
+     "segment": [
+      1997,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 184,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "Seville",
+     "segment": [
+      1979,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 182,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "Outlook",
+     "segment": [
+      2007,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 179,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Aveo",
+     "segment": [
+      2007,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 177,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Sunfire",
+     "segment": [
+      1995,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 177,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Avalanche",
+     "segment": [
+      2007,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 174,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "S-10",
+     "segment": [
+      1982,
+      1993
+     ],
+     "breaks_known": true,
+     "cars": 172,
+     "seed_year": 1992
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Jimmy",
+     "segment": [
+      1995,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 167,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "Escalade",
+     "segment": [
+      2007,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 164,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Aveo",
+     "segment": [
+      2004,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 164,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "Eldorado",
+     "segment": [
+      1970,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 159,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Sierra 2500",
+     "segment": [
+      1988,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 156,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "G5",
+     "segment": [
+      2007,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 148,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "ATS",
+     "segment": [
+      1965,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 147,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Safari",
+     "segment": [
+      1995,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 147,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Blazer S10/Jimmy S15",
+     "segment": [
+      1986,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 141,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Yukon",
+     "segment": [
+      1992,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 139,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Equinox",
+     "segment": [
+      2018,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 138,
+     "seed_year": 2018
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu Limited",
+     "segment": [
+      2016,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 136,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Canyon",
+     "segment": [
+      2004,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 134,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Silverado 2500HD",
+     "segment": [
+      2001,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 129,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Sierra",
+     "segment": [
+      1978,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 128,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Montana",
+     "segment": [
+      1999,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 121,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Hummer",
+     "model": "H3",
+     "segment": [
+      2006,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 117,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Silverado",
+     "segment": [
+      2007,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 114,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Yukon Denali",
+     "segment": [
+      2000,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 111,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Aveo5",
+     "segment": [
+      2007,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 110,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Tracker",
+     "segment": [
+      1999,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 110,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Suburban",
+     "segment": [
+      2000,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 110,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Firebird",
+     "segment": [
+      1993,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 109,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "segment": [
+      2019,
+      2025
+     ],
+     "breaks_known": true,
+     "cars": 107,
+     "seed_year": 2020
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Caprice",
+     "segment": [
+      1966,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 105,
+     "seed_year": 1991
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Savana",
+     "segment": [
+      2003,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 104,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Camaro",
+     "segment": [
+      1967,
+      1992
+     ],
+     "breaks_known": true,
+     "cars": 102,
+     "seed_year": 1992
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "K2500",
+     "segment": [
+      1981,
+      2000
+     ],
+     "breaks_known": false,
+     "cars": 102,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "Escalade ESV",
+     "segment": [
+      2003,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 99,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Rainier",
+     "segment": [
+      2004,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 97,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu Maxx",
+     "segment": [
+      2004,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 96,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "segment": [
+      1974,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 94,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Volt",
+     "segment": [
+      2011,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 94,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "C/K 2500",
+     "segment": [
+      1980,
+      2000
+     ],
+     "breaks_known": false,
+     "cars": 94,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Suburban 1500",
+     "segment": [
+      1986,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 94,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Classic",
+     "segment": [
+      1953,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 93,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Bravada",
+     "segment": [
+      1991,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 93,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "SL2",
+     "segment": [
+      1992,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 93,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "SL",
+     "segment": [
+      1993,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 92,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Cutlass Ciera",
+     "segment": [
+      1980,
+      1996
+     ],
+     "breaks_known": false,
+     "cars": 91,
+     "seed_year": 1992
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Intrigue",
+     "segment": [
+      1998,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 90,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "C10",
+     "segment": [
+      1963,
+      1988
+     ],
+     "breaks_known": false,
+     "cars": 88,
+     "seed_year": 1984
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Regal",
+     "segment": [
+      2014,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 87,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "C2500",
+     "segment": [
+      1976,
+      2000
+     ],
+     "breaks_known": false,
+     "cars": 83,
+     "seed_year": 1989
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "XTS",
+     "segment": [
+      2013,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 82,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Eighty-Eight",
+     "segment": [
+      1973,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 81,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Century",
+     "segment": [
+      1960,
+      1996
+     ],
+     "breaks_known": true,
+     "cars": 80,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Prizm",
+     "segment": [
+      1993,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 80,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Savana",
+     "segment": [
+      1972,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 79,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "SL1",
+     "segment": [
+      1993,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 78,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Gmt-400",
+     "segment": [
+      1988,
+      2000
+     ],
+     "breaks_known": false,
+     "cars": 76,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Suburban 2500",
+     "segment": [
+      1985,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 74,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Express",
+     "segment": [
+      2003,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 72,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Cutlass Supreme",
+     "segment": [
+      1968,
+      1997
+     ],
+     "breaks_known": false,
+     "cars": 71,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Aztek",
+     "segment": [
+      2001,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 70,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Astro",
+     "segment": [
+      1981,
+      1994
+     ],
+     "breaks_known": true,
+     "cars": 68,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Savana 2500",
+     "segment": [
+      1999,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 68,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "G20",
+     "segment": [
+      1979,
+      1996
+     ],
+     "breaks_known": false,
+     "cars": 67,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Regal",
+     "segment": [
+      1988,
+      1996
+     ],
+     "breaks_known": true,
+     "cars": 66,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Cutlass",
+     "segment": [
+      0,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 66,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "C1500",
+     "segment": [
+      1965,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 64,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "Escalade",
+     "segment": [
+      1999,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 63,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Savana 1500",
+     "segment": [
+      1996,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 63,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Silverado 1500 Classic",
+     "segment": [
+      2007,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 60,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Sierra 2500HD",
+     "segment": [
+      2001,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 60,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Corvette",
+     "segment": [
+      1984,
+      1996
+     ],
+     "breaks_known": true,
+     "cars": 59,
+     "seed_year": 1984
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Suburban",
+     "segment": [
+      1963,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 58,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Terraza",
+     "segment": [
+      2005,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 57,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Riviera",
+     "segment": [
+      1970,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 54,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Silhouette",
+     "segment": [
+      1995,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 54,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "Astra",
+     "segment": [
+      2008,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 54,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Grand Am",
+     "segment": [
+      1984,
+      1998
+     ],
+     "breaks_known": true,
+     "cars": 53,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Montana SV6",
+     "segment": [
+      1999,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 53,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "S-Series",
+     "segment": [
+      1992,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 52,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "Escalade EXT",
+     "segment": [
+      2002,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 51,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "C3500",
+     "segment": [
+      1981,
+      2000
+     ],
+     "breaks_known": false,
+     "cars": 51,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Monte Carlo",
+     "segment": [
+      1995,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 50,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "G-Series",
+     "segment": [
+      1981,
+      1996
+     ],
+     "breaks_known": false,
+     "cars": 49,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Pontiac",
+     "model": "Firebird",
+     "segment": [
+      1901,
+      1992
+     ],
+     "breaks_known": true,
+     "cars": 49,
+     "seed_year": 1991
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Silverado 3500",
+     "segment": [
+      2001,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 48,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Aurora",
+     "segment": [
+      1995,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 48,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Roadmaster",
+     "segment": [
+      1936,
+      1996
+     ],
+     "breaks_known": false,
+     "cars": 45,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "L-Series",
+     "segment": [
+      2000,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 45,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Oldsmobile",
+     "model": "Ninety-Eight",
+     "segment": [
+      1962,
+      1997
+     ],
+     "breaks_known": false,
+     "cars": 43,
+     "seed_year": 1991
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "S10/S15/Sonoma",
+     "segment": [
+      1983,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 43,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Blazer S10",
+     "segment": [
+      1988,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 43,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "S-10 Blazer",
+     "segment": [
+      1983,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 42,
+     "seed_year": 1993
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "LS1",
+     "segment": [
+      2000,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 41,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "L300",
+     "segment": [
+      2002,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 40,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Caprice Classic",
+     "segment": [
+      1984,
+      1996
+     ],
+     "breaks_known": false,
+     "cars": 39,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Traverse",
+     "segment": [
+      2018,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 39,
+     "seed_year": 2018
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Buick",
+     "model": "Skylark",
+     "segment": [
+      1962,
+      1998
+     ],
+     "breaks_known": false,
+     "cars": 38,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "C1500 Suburban",
+     "segment": [
+      1992,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 38,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Suburban",
+     "segment": [
+      2007,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 38,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "El Camino",
+     "segment": [
+      1966,
+      1987
+     ],
+     "breaks_known": false,
+     "cars": 36,
+     "seed_year": 1978
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Saturn",
+     "model": "LS",
+     "segment": [
+      2000,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 36,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "C/K 3500",
+     "segment": [
+      1983,
+      2000
+     ],
+     "breaks_known": false,
+     "cars": 35,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Metro",
+     "segment": [
+      1996,
+      2001
+     ],
+     "breaks_known": false,
+     "cars": 35,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Cadillac",
+     "model": "Fleetwood",
+     "segment": [
+      1970,
+      1996
+     ],
+     "breaks_known": false,
+     "cars": 34,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "Chevrolet",
+     "model": "Nova",
+     "segment": [
+      1901,
+      1988
+     ],
+     "breaks_known": false,
+     "cars": 34,
+     "seed_year": 1977
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Sierra 3500",
+     "segment": [
+      1988,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 34,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.gmpartsgiant.com",
+     "make": "GMC",
+     "model": "Acadia",
+     "segment": [
+      2017,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 34,
+     "seed_year": 2017
+    }
+   ]
+  },
+  "www.nissanpartsdeal.com": {
+   "cars": 29587,
+   "segments": [
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Altima",
+     "segment": [
+      2013,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 2334,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Altima",
+     "segment": [
+      2010,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 2209,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Altima",
+     "segment": [
+      2007,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 1912,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Sentra",
+     "segment": [
+      2013,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 1220,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Rogue",
+     "segment": [
+      2011,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 1156,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Xterra",
+     "segment": [
+      2000,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 1049,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Maxima",
+     "segment": [
+      2009,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 1039,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Altima",
+     "segment": [
+      2005,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 996,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Versa",
+     "segment": [
+      2007,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 982,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Murano",
+     "segment": [
+      2009,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 971,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Sentra",
+     "segment": [
+      1984,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 855,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Pathfinder",
+     "segment": [
+      2013,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 854,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Sentra",
+     "segment": [
+      2010,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 832,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Pathfinder",
+     "segment": [
+      2005,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 812,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Titan",
+     "segment": [
+      2004,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 750,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Murano",
+     "segment": [
+      1998,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 742,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Rogue",
+     "segment": [
+      2008,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 678,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Versa",
+     "segment": [
+      2012,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 662,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Sentra",
+     "segment": [
+      2007,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 656,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Armada",
+     "segment": [
+      2004,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 646,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Altima",
+     "segment": [
+      2016,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 641,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Sentra",
+     "segment": [
+      2016,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 637,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Versa",
+     "segment": [
+      2015,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 596,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Maxima",
+     "segment": [
+      2004,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 585,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Pathfinder",
+     "segment": [
+      1987,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 516,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Altima",
+     "segment": [
+      2002,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 451,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Rogue",
+     "segment": [
+      2014,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 384,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Frontier",
+     "segment": [
+      1998,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 366,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Maxima",
+     "segment": [
+      2000,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 345,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Juke",
+     "segment": [
+      2011,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 330,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Versa Note",
+     "segment": [
+      2014,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 313,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Quest",
+     "segment": [
+      2004,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 299,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Altima",
+     "segment": [
+      1993,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 285,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Frontier",
+     "segment": [
+      2005,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 269,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Maxima",
+     "segment": [
+      1984,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 207,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Quest",
+     "segment": [
+      2011,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 190,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Pickup",
+     "segment": [
+      1976,
+      1997
+     ],
+     "breaks_known": false,
+     "cars": 188,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Cube",
+     "segment": [
+      2009,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 183,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Rogue",
+     "segment": [
+      2017,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 182,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Rogue Select",
+     "segment": [
+      2014,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 138,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Quest",
+     "segment": [
+      1993,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 108,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "Maxima",
+     "segment": [
+      2016,
+      2022
+     ],
+     "breaks_known": true,
+     "cars": 106,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.nissanpartsdeal.com",
+     "make": "Nissan",
+     "model": "350Z",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 94,
+     "seed_year": 2004
+    }
+   ]
+  },
+  "www.hondapartsnow.com": {
+   "cars": 24360,
+   "segments": [
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Accord",
+     "segment": [
+      1998,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 2257,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Accord",
+     "segment": [
+      2003,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 2170,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Odyssey",
+     "segment": [
+      2005,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 2096,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Civic",
+     "segment": [
+      2006,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 1653,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Accord",
+     "segment": [
+      2008,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 1470,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Pilot",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 1452,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Accord",
+     "segment": [
+      2006,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 1259,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Civic",
+     "segment": [
+      2001,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 1244,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Civic",
+     "segment": [
+      2004,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 1052,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Odyssey",
+     "segment": [
+      1995,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 1051,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Civic",
+     "segment": [
+      1996,
+      2000
+     ],
+     "breaks_known": true,
+     "cars": 839,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Civic",
+     "segment": [
+      2009,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 828,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "CR-V",
+     "segment": [
+      2002,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 721,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Pilot",
+     "segment": [
+      2009,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 603,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Civic",
+     "segment": [
+      2012,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 531,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Accord",
+     "segment": [
+      1994,
+      1997
+     ],
+     "breaks_known": true,
+     "cars": 521,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Accord",
+     "segment": [
+      2011,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 499,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "CR-V",
+     "segment": [
+      2007,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 470,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "CR-V",
+     "segment": [
+      1997,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 469,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Fit",
+     "segment": [
+      2007,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 430,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Odyssey",
+     "segment": [
+      2011,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 391,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Element",
+     "segment": [
+      2003,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 339,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Accord",
+     "segment": [
+      2013,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 338,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Accord",
+     "segment": [
+      0,
+      1993
+     ],
+     "breaks_known": true,
+     "cars": 280,
+     "seed_year": 1993
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Civic",
+     "segment": [
+      1901,
+      1995
+     ],
+     "breaks_known": true,
+     "cars": 235,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Ridgeline",
+     "segment": [
+      2006,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 228,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Insight",
+     "segment": [
+      2000,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 120,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.hondapartsnow.com",
+     "make": "Honda",
+     "model": "Civic Hybrid",
+     "segment": [
+      2003,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 114,
+     "seed_year": 2008
+    }
+   ]
+  },
+  "www.toyotapartsnow.com": {
+   "cars": 23044,
+   "segments": [
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry",
+     "segment": [
+      2007,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 1819,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry",
+     "segment": [
+      2002,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 1742,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Prius",
+     "segment": [
+      2001,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 1517,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Sienna",
+     "segment": [
+      2004,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 1061,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry",
+     "segment": [
+      2005,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 899,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry",
+     "segment": [
+      1997,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 878,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Corolla",
+     "segment": [
+      1998,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 828,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry",
+     "segment": [
+      2000,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 739,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Corolla",
+     "segment": [
+      2005,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 721,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Scion",
+     "model": "tC",
+     "segment": [
+      2005,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 703,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry",
+     "segment": [
+      2010,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 690,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Highlander",
+     "segment": [
+      2001,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 682,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Corolla",
+     "segment": [
+      2009,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 558,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Scion",
+     "model": "xB",
+     "segment": [
+      2004,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 556,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Avalon",
+     "segment": [
+      2000,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 533,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry Solara",
+     "segment": [
+      1999,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 528,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry",
+     "segment": [
+      1984,
+      1996
+     ],
+     "breaks_known": true,
+     "cars": 482,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Corolla",
+     "segment": [
+      2003,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 473,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Sienna",
+     "segment": [
+      1998,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 439,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "RAV4",
+     "segment": [
+      2006,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 424,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Sequoia",
+     "segment": [
+      2001,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 414,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Avalon",
+     "segment": [
+      2005,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 398,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Corolla",
+     "segment": [
+      1970,
+      1997
+     ],
+     "breaks_known": true,
+     "cars": 396,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry",
+     "segment": [
+      2012,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 369,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Yaris",
+     "segment": [
+      2006,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 362,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Matrix",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 358,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Tundra",
+     "segment": [
+      2000,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 348,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "4Runner",
+     "segment": [
+      1996,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 328,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Corolla",
+     "segment": [
+      2011,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 325,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "RAV4",
+     "segment": [
+      2001,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 255,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Avalon",
+     "segment": [
+      1995,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 245,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Corolla",
+     "segment": [
+      2014,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 158,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Sienna",
+     "segment": [
+      2011,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 153,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Echo",
+     "segment": [
+      2000,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 150,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "4Runner",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 150,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Tacoma",
+     "segment": [
+      1995,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 148,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "RAV4",
+     "segment": [
+      1996,
+      2000
+     ],
+     "breaks_known": true,
+     "cars": 135,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Highlander",
+     "segment": [
+      2008,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 134,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Celica",
+     "segment": [
+      2000,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 132,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Scion",
+     "model": "xA",
+     "segment": [
+      2004,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 118,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry",
+     "segment": [
+      2015,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 118,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Scion",
+     "model": "xD",
+     "segment": [
+      2008,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 115,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Tundra",
+     "segment": [
+      2007,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 113,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Camry Hybrid",
+     "segment": [
+      2007,
+      2026
+     ],
+     "breaks_known": false,
+     "cars": 96,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Tercel",
+     "segment": [
+      1980,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 87,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Pickup",
+     "segment": [
+      1965,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 83,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Tacoma",
+     "segment": [
+      2005,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 82,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "4Runner",
+     "segment": [
+      1990,
+      1995
+     ],
+     "breaks_known": true,
+     "cars": 75,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Matrix",
+     "segment": [
+      2009,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 70,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Prius C",
+     "segment": [
+      2012,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 67,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "Corolla",
+     "segment": [
+      2017,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 65,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.toyotapartsnow.com",
+     "make": "Toyota",
+     "model": "T100",
+     "segment": [
+      1993,
+      1998
+     ],
+     "breaks_known": false,
+     "cars": 55,
+     "seed_year": 1995
+    }
+   ]
+  },
+  "www.hyundaipartsdeal.com": {
+   "cars": 12247,
+   "segments": [
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Sonata",
+     "segment": [
+      2011,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 1772,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Sonata",
+     "segment": [
+      2006,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 1095,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Elantra",
+     "segment": [
+      2011,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 992,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Elantra",
+     "segment": [
+      2007,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 732,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Santa Fe",
+     "segment": [
+      2007,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 678,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Accent",
+     "segment": [
+      2012,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 656,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Sonata",
+     "segment": [
+      2015,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 655,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Elantra",
+     "segment": [
+      2014,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 549,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Accent",
+     "segment": [
+      2006,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 477,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Elantra",
+     "segment": [
+      2004,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 337,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Genesis",
+     "segment": [
+      2009,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 309,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Veloster",
+     "segment": [
+      2012,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 298,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Sonata",
+     "segment": [
+      1997,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 291,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Elantra",
+     "segment": [
+      2017,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 286,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Santa Fe",
+     "segment": [
+      2001,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 282,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Tucson",
+     "segment": [
+      2005,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 265,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Sonata",
+     "segment": [
+      2014,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 260,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Elantra",
+     "segment": [
+      1995,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 195,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Tiburon",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 179,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Accent",
+     "segment": [
+      1995,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 164,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Azera",
+     "segment": [
+      2006,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 160,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Santa Fe",
+     "segment": [
+      2005,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 137,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Santa Fe",
+     "segment": [
+      2013,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 132,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Santa Fe Sport",
+     "segment": [
+      2013,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 122,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Tucson",
+     "segment": [
+      2010,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 115,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Elantra GT",
+     "segment": [
+      2013,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 112,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Genesis Coupe",
+     "segment": [
+      2010,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 110,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Sonata Hybrid",
+     "segment": [
+      2011,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 98,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Veracruz",
+     "segment": [
+      2007,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 97,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Tucson",
+     "segment": [
+      2016,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 75,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Sonata",
+     "segment": [
+      2018,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 69,
+     "seed_year": 2018
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Tucson",
+     "segment": [
+      2014,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 63,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Elantra",
+     "segment": [
+      2019,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 62,
+     "seed_year": 2019
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "XG350",
+     "segment": [
+      2002,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 55,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.hyundaipartsdeal.com",
+     "make": "Hyundai",
+     "model": "Elantra Touring",
+     "segment": [
+      2009,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 54,
+     "seed_year": 2012
+    }
+   ]
+  },
+  "www.acurapartswarehouse.com": {
+   "cars": 4098,
+   "segments": [
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "TL",
+     "segment": [
+      1996,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 1459,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "MDX",
+     "segment": [
+      2001,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 670,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "TSX",
+     "segment": [
+      2004,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 527,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "MDX",
+     "segment": [
+      2007,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 456,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "RL",
+     "segment": [
+      1996,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 234,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "RDX",
+     "segment": [
+      2007,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 185,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "RSX",
+     "segment": [
+      2002,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 123,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "CL",
+     "segment": [
+      1997,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 123,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "Integra",
+     "segment": [
+      1994,
+      2024
+     ],
+     "breaks_known": true,
+     "cars": 76,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "ILX",
+     "segment": [
+      2013,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 71,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "Legend",
+     "segment": [
+      1991,
+      1995
+     ],
+     "breaks_known": true,
+     "cars": 33,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.acurapartswarehouse.com",
+     "make": "Acura",
+     "model": "TLX",
+     "segment": [
+      2015,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 30,
+     "seed_year": 2015
+    }
+   ]
+  },
+  "www.jeeppartsdeal.com": {
+   "cars": 10053,
+   "segments": [
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Patriot",
+     "segment": [
+      2007,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 1427,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Grand Cherokee",
+     "segment": [
+      1999,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 1349,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Liberty",
+     "segment": [
+      1998,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 1322,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Grand Cherokee",
+     "segment": [
+      2005,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 1160,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Liberty",
+     "segment": [
+      2008,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 690,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Compass",
+     "segment": [
+      2011,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 646,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Grand Cherokee",
+     "segment": [
+      2011,
+      2021
+     ],
+     "breaks_known": true,
+     "cars": 616,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Cherokee",
+     "segment": [
+      2014,
+      2022
+     ],
+     "breaks_known": true,
+     "cars": 527,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Commander",
+     "segment": [
+      2006,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 514,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Grand Cherokee",
+     "segment": [
+      1993,
+      1998
+     ],
+     "breaks_known": true,
+     "cars": 469,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Cherokee",
+     "segment": [
+      1978,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 436,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Compass",
+     "segment": [
+      2007,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 261,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Renegade",
+     "segment": [
+      2015,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 189,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Compass",
+     "segment": [
+      2017,
+      2024
+     ],
+     "breaks_known": true,
+     "cars": 126,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.jeeppartsdeal.com",
+     "make": "Jeep",
+     "model": "Wrangler",
+     "segment": [
+      1997,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 107,
+     "seed_year": 1997
+    }
+   ]
+  },
+  "www.kiapartsnow.com": {
+   "cars": 9530,
+   "segments": [
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Soul",
+     "segment": [
+      2010,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 916,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Optima",
+     "segment": [
+      2011,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 787,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Soul",
+     "segment": [
+      2014,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 722,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Rio",
+     "segment": [
+      2001,
+      2023
+     ],
+     "breaks_known": false,
+     "cars": 707,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sorento",
+     "segment": [
+      2011,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 703,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Optima",
+     "segment": [
+      2014,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 666,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Forte",
+     "segment": [
+      2014,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 574,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Forte",
+     "segment": [
+      2010,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 505,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sedona",
+     "segment": [
+      2006,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 362,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sportage",
+     "segment": [
+      1995,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 319,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Spectra",
+     "segment": [
+      2007,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 284,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Optima",
+     "segment": [
+      2016,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 280,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sorento",
+     "segment": [
+      2003,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 272,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sorento",
+     "segment": [
+      2007,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 192,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sorento",
+     "segment": [
+      2016,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 188,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Rondo",
+     "segment": [
+      2007,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 160,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sedona",
+     "segment": [
+      2015,
+      2021
+     ],
+     "breaks_known": true,
+     "cars": 151,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Optima",
+     "segment": [
+      2007,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 145,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Spectra",
+     "segment": [
+      2005,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 144,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Optima",
+     "segment": [
+      2009,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 118,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sedona",
+     "segment": [
+      2002,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 107,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sportage",
+     "segment": [
+      2011,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 92,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Spectra",
+     "segment": [
+      2001,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 84,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sportage",
+     "segment": [
+      2014,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 82,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sportage",
+     "segment": [
+      2009,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 80,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Forte Koup",
+     "segment": [
+      2010,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 79,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Cadenza",
+     "segment": [
+      2014,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 76,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Optima",
+     "segment": [
+      2005,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 73,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Rio5",
+     "segment": [
+      2002,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 70,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Forte",
+     "segment": [
+      2019,
+      2024
+     ],
+     "breaks_known": true,
+     "cars": 63,
+     "seed_year": 2019
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Amanti",
+     "segment": [
+      2004,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 62,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Optima",
+     "segment": [
+      2019,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 60,
+     "seed_year": 2019
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Borrego",
+     "segment": [
+      2009,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 59,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Forte5",
+     "segment": [
+      2011,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 49,
+     "seed_year": 2016
+    },
+    {
+     "site": "www.kiapartsnow.com",
+     "make": "Kia",
+     "model": "Sportage",
+     "segment": [
+      2017,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 45,
+     "seed_year": 2017
+    }
+   ]
+  },
+  "www.infinitipartsdeal.com": {
+   "cars": 3383,
+   "segments": [
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "G35",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 872,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "G37",
+     "segment": [
+      2008,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 316,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "FX35",
+     "segment": [
+      2003,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 268,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "M35",
+     "segment": [
+      2006,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 218,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "QX56",
+     "segment": [
+      2004,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 193,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "QX60",
+     "segment": [
+      2014,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 174,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "Q50",
+     "segment": [
+      2014,
+      2020
+     ],
+     "breaks_known": false,
+     "cars": 136,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "QX4",
+     "segment": [
+      1997,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 114,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "JX35",
+     "segment": [
+      2013,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 112,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "I30",
+     "segment": [
+      1996,
+      2001
+     ],
+     "breaks_known": false,
+     "cars": 98,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "EX35",
+     "segment": [
+      2008,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 86,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "QX56",
+     "segment": [
+      2011,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 75,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "I35",
+     "segment": [
+      2002,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 71,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "FX",
+     "segment": [
+      2003,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 57,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "Q45",
+     "segment": [
+      1990,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 54,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "G20",
+     "segment": [
+      1991,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 45,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "M45",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 44,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "M37",
+     "segment": [
+      2011,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 40,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "G Sedan",
+     "segment": [
+      2009,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 37,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "M",
+     "segment": [
+      2006,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 37,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "G37 Sedan",
+     "segment": [
+      2009,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 37,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "G25",
+     "segment": [
+      2011,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 28,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "QX50",
+     "segment": [
+      2014,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 28,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "G37X",
+     "segment": [
+      2009,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 28,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "QX80",
+     "segment": [
+      2014,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 24,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "G35X",
+     "segment": [
+      2007,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 24,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "J30",
+     "segment": [
+      1993,
+      1997
+     ],
+     "breaks_known": false,
+     "cars": 21,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.infinitipartsdeal.com",
+     "make": "Infiniti",
+     "model": "FX45",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 17,
+     "seed_year": 2004
+    }
+   ]
+  },
+  "www.subarupartsdeal.com": {
+   "cars": 5542,
+   "segments": [
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Outback",
+     "segment": [
+      2010,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 554,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Outback",
+     "segment": [
+      2005,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 495,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Forester",
+     "segment": [
+      2009,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 491,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Forester",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 463,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Outback",
+     "segment": [
+      0,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 396,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Impreza",
+     "segment": [
+      2008,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 341,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Impreza",
+     "segment": [
+      2012,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 309,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Legacy",
+     "segment": [
+      2010,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 293,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Legacy",
+     "segment": [
+      2005,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 249,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Impreza",
+     "segment": [
+      2002,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 226,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Forester",
+     "segment": [
+      1901,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 216,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Forester",
+     "segment": [
+      2014,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 212,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Legacy",
+     "segment": [
+      1990,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 173,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Legacy",
+     "segment": [
+      2013,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 135,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Legacy",
+     "segment": [
+      2015,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 116,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "XV Crosstrek",
+     "segment": [
+      2013,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 104,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Legacy",
+     "segment": [
+      2000,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 98,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "B9 Tribeca",
+     "segment": [
+      2006,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 86,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Legacy Wagon",
+     "segment": [
+      1990,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 80,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Legacy",
+     "segment": [
+      2003,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 79,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Outback",
+     "segment": [
+      2015,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 74,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Tribeca",
+     "segment": [
+      2006,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 73,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Impreza",
+     "segment": [
+      1993,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 58,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Impreza Wagon",
+     "segment": [
+      1993,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 45,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.subarupartsdeal.com",
+     "make": "Subaru",
+     "model": "Impreza",
+     "segment": [
+      2017,
+      2022
+     ],
+     "breaks_known": true,
+     "cars": 36,
+     "seed_year": 2017
+    }
+   ]
+  },
+  "www.lexuspartsnow.com": {
+   "cars": 3131,
+   "segments": [
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "ES 300",
+     "segment": [
+      1992,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 502,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "RX 300",
+     "segment": [
+      1999,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 349,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "IS 250",
+     "segment": [
+      2006,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 269,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "ES 350",
+     "segment": [
+      1997,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 259,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "ES 330",
+     "segment": [
+      2004,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 241,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "GS 300",
+     "segment": [
+      1993,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 201,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "RX 350",
+     "segment": [
+      2004,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 135,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "RX 330",
+     "segment": [
+      2004,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 123,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "LS 400",
+     "segment": [
+      1990,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 117,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "LS 430",
+     "segment": [
+      2001,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 109,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "IS",
+     "segment": [
+      2004,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 100,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "LS 460",
+     "segment": [
+      1996,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 86,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "GS",
+     "segment": [
+      1998,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 83,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "ES",
+     "segment": [
+      1990,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 72,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "GS 350",
+     "segment": [
+      1995,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 69,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "IS 300",
+     "segment": [
+      2001,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 57,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "RX 400h",
+     "segment": [
+      2006,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 57,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "IS 350",
+     "segment": [
+      2006,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 41,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "RX",
+     "segment": [
+      2004,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 33,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "RX",
+     "segment": [
+      1999,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 28,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "GS 400",
+     "segment": [
+      1998,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "LS",
+     "segment": [
+      1990,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "SC 400",
+     "segment": [
+      1992,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 19,
+     "seed_year": 1992
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "GS 430",
+     "segment": [
+      2001,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 18,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.lexuspartsnow.com",
+     "make": "Lexus",
+     "model": "SC 430",
+     "segment": [
+      2002,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 16,
+     "seed_year": 2002
+    }
+   ]
+  }
+ }
+}
