@@ -635,6 +635,110 @@ What a curator must know (all three are the "giant" SimplePart variant):
   matched=true). R1/R2 manifests had not reached oem-raw by 03:43; add it
   to audit.py when they do.
 
+### Crawler requirements R1-R7 (CURATION_SPEC §3.2; workflow subagent, 2026-11-05 ~03:15 UTC)
+
+On branch `worktree-wf_9b3745bc-31f-2` (not merged, not pushed): 23d37e0,
+519dd0b, 9acadec. Everything is in `scraper/oem_fitment/README.md` ("Site
+module contract", "Raw files"). Once on main, the next scheduled crawl runs
+pick it up.
+
+- R1 `raw/<site>.lists.jsonl`: one line per list page read (not subject to
+  the products_seen dedup, so R7 holds), every partList/gpgOnly row (and
+  PartsGiant Standard Parts rows, `section_not_read`), notes as structured
+  `extra`, `matched` / `excluded_by` / `product`. Re-read from the cache:
+  0 extra requests (tested).
+- R2 `raw/<site>.years.jsonl`: one line per year-catalog page read, every
+  sub slug, title, status, redirect; PartsGiant lines list every offered
+  variant and option catalog, read or not, plus the list pages read from each.
+- R3 completion mode is implemented (`crawl.py --complete <worklist>`), not a
+  stub. The workflow does not call it yet.
+- R4: chains followed to depth 4 only through catalog links: a list row for
+  that number on any page this crawl read (`via_link: "list_row"`), or a link
+  on the referring product page (`"product_page"`). This goes one step past
+  the spec's "gpgOnly rows" by using rows from every page read (URLs are
+  pn-specific product pages; never built). Real product pages (Toyota, GM,
+  Ford) do not link their Replaces / Replaced By numbers, so most chain
+  members stay `chain_unlinked` (2009 Camry mirror 87910-06925 names 14
+  predecessors, none linked). C5 keeps those cells open, as designed.
+- R5a qualifier phrase removal applies to SimplePart (Toyota, Jeep, VW,
+  Mitsubishi) and to the Subaru, Lexus and BMW rules (same `QUALIFIER` copy,
+  now shared). It can only add rows whose include rule already matched.
+- R5b on BOTH templates. PartsGiant part dicts now carry `reman`. Effect:
+  remans next to a superseded number are kept, e.g. Kia pages that supersede
+  a new number to its RU twin now keep the RU row (marked reman).
+- R5c Toyota `-84` is reman (basis in toyotapartsnow.py).
+- R6 `recrawl_of` (string line number) on any record for a (category, pn)
+  already in raw. `.jsonl` files continue in `.2.jsonl` etc. at 40 MB (GitHub
+  limit; real list lines are 10-19 KB, so GM would pass 100 MB); a torn last
+  line is cut at start. The workflow's `raw/<site>.*` copy already covers all
+  of it (checked; header comment updated).
+- Record output check: the old and new code on 30 trimmed real pages
+  (Toyota, GM, Ford; `tests/fixtures/crawler/golden_records_v0.json`) differ
+  only in the two R5 cases (2007 Camry alternator: 4 remans kept beside
+  27060-28320; 1999 Camry starter: 28100-74260-84 kept, 28100-74270-84
+  reman) and the new PartsGiant `reman` key.
+- Live fetches for fixtures: 10 toyotapartsnow pages via fetch.py, 10.5 s apart.
+
+Open, for the hub:
+- Seeds crawled before this lands have no manifests and no chains. Backfill
+  with `--complete` rows for the done seeds (cost: year + list pages, plus
+  the catalog-linked chain hops of their matched numbers; products already
+  seen are not re-fetched). Resetting progress also works but re-fetches
+  every product (R6 marks them).
+- Lexus (lexuspartsnow, PartsGiant template) uses Toyota numbering but has no
+  `-84` reman rule; Ford `...RM` numbers ("Ford Retail Spec", 4L3Z-10V346-BBRM)
+  are not flagged reman. Both outside R5c; §5.4 syntax covers neither.
+- The spec's example "Headlamp Unit Assy, W/Auto Leveling" fails Toyota's
+  headlights include rule itself (R5a cannot help); the EPC form "Unit Assy,
+  Headlamp, W/Auto Leveling" is kept now. Whether that wording occurs is for
+  the Toyota builder to check.
+- A seed retried after a list-page network failure writes its manifest lines
+  again (same rows). A list line counts as read only when `read` is true
+  (status 200, no `error`, no `rows_missing`); a status-200 line with an
+  error (an error page, a failed product-rule fetch) is `read: false`.
+
+#### Review fixes (workflow subagent, 2026-11-05; same branch, merged with main 793eff6)
+
+Commits 5859af9, 7e6e300, aa8e5f6 and the docs commit after them. Tests:
+`tests/run_all.py` 28/28 files (cached-page checks skipped: no local cache).
+- Merge with main: Mitsubishi keeps main's SlugCheckedSimplePart plus the
+  manifest exports. audipartsgiant, mazdapartsnow, mbpartsgiant and
+  volvopartsgiant now export year_manifest / list_manifest / chain_links
+  (before: every list line from them had `rows: []`; Mercedes is crawling).
+  SlugCheckedSimplePart.product takes `_get`, so product-rule categories
+  (Volvo / Mitsubishi doors, Volvo trunk lid) no longer fail with TypeError
+  in list_manifest; the slug test is `excluded_by: "rule:slug_miss"`.
+  Mercedes year lines are per badge page actually read (C-Class -> c300,
+  c63_amg ...), not the slug of the class name.
+- A number first reached as a chain record is no longer "seen" for list
+  pages: when a later page lists it, its listed record is written with that
+  page's seed / list_url / list fields (`recrawl_of` -> the chain record).
+  Before, the only record was the chain record (name null, no reman flag,
+  another vehicle's seed and list_url).
+- `read` flag on list lines (above); list-fail rows keep the template's
+  verdict (no `site_module` relabel); progress `list_fail` names the pages
+  for a later `--complete` row. Seeds are still marked done on list-fail:
+  fetch.py caches the error page, so an in-job retry re-reads it.
+- R4 chain work is persisted (`chain_pending`) and resumes after exit 11 /
+  Refused; listed rows recorded before R4 get their chains followed when a
+  page lists them again (both modes, incl. `--complete` backfill);
+  `chain_failed` / `chain_given_up` count dropped hops. `.done` is written
+  only when no chain work is owed (exit 10 otherwise; a hop is given up after
+  3 network failures).
+- `rawparts.py` is the one reader for size-capped parts. ci_audit.py (now
+  `--site`, the workflow's call) and audit.py read every records part, so
+  the >0.5% pause gate keeps covering records past 40 MB.
+
+Open, for the hub:
+- The curation adapters (branch `worktree-wf_9b3745bc-31f-3`, `curate.load`)
+  read only `raw/<site>{.jsonl,.lists.jsonl,.years.jsonl}`. They should read
+  through `rawparts.site_rows(raw_dir, site, kind)` and count a list line as
+  read only when `read` is true. Not changed here (other workstream).
+- AUDIT.md "Open for the auditor session": the C heuristic does not strip
+  qualifier phrases, so R5a keeps show as category suspects (count only).
+- A seed left open after a network failure is still orphaned once `.done` is
+  written (unchanged from main).
+
 ## Hub decisions (curation policy)
 
 - 2026-11-05 T1 (Toyota climate-control sub-assemblies 55901/55902/55903,

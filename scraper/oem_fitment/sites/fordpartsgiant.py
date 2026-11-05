@@ -116,15 +116,22 @@ def _rule(cat: str):
     rx = re.compile(r"^(?:\d{2})?(?:%s)$" % BASE[cat], re.I)
 
     def rule(r: dict, text: str) -> bool:
+        return why(r, text) is None
+
+    def why(r: dict, text: str) -> str | None:
+        """None when kept, else the manifest reason (template `.why` hook)."""
         if not rx.match(_base(r["pn"])):
-            return False
-        if NAME_EXCL.search(f"{r['group']} | {r['main']}"):
-            return False
+            return "include_miss"
+        m = NAME_EXCL.search(f"{r['group']} | {r['main']}")
+        if m:
+            return f"rule:{m.group(0).lower()}"
         if cat == "window-switch":
             # driver master switch only: not the passenger/rear single switch
-            if re.search(r"Single|Location: Passenger Side(?!/)|Location: Rear|\bRear\b", text):
-                return False
-        return True
+            m = re.search(r"Single|Location: Passenger Side(?!/)|Location: Rear|\bRear\b", text)
+            if m:
+                return f"rule:{m.group(0).lower()}"
+        return None
+    rule.why = why
     return rule
 
 
@@ -133,3 +140,5 @@ PARTS = {cat: _rule(cat) for cat in BASE}
 CFG = T.Config(site=SITE, models=MODELS, subcats=SUBCATS, subcat_excl=SUBCAT_EXCL, parts=PARTS,
                option_column_is_trims=False)
 categories_for, parts_on_page, product = T.bind(CFG)
+# R1/R2/R4 manifests (README "Site module contract"), re-read from the cache
+year_manifest, list_manifest, chain_links = T.bind_manifests(CFG)

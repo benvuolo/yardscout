@@ -183,3 +183,15 @@ def parts_on_page(list_url: str, cat: str) -> list[dict]:
 
 def product(product_url: str) -> dict:
     return _T.product(product_url)
+
+
+def year_manifest(make: str, model: str, year: int) -> list[dict]:
+    return _T.year_manifest(make, model, year)
+
+
+def list_manifest(list_url: str, cat: str) -> dict:
+    return _T.list_manifest(list_url, cat)
+
+
+def chain_links(product_url: str, pns: list[str]) -> dict[str, str]:
+    return _T.chain_links(product_url, pns)

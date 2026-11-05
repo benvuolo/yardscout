@@ -24,6 +24,17 @@ Template facts (learned through fetch.py, 2026-11-05):
 The structured fields come from the JSON store; evidence_lines come from the
 rendered page text (fetch.text_lines) and every JSON fitment cell is checked
 against that text. Any disagreement is recorded in `flags`, never smoothed over.
+
+Manifests (CURATION_SPEC.md §3.2 R1/R2), read back from the cached fetch with
+cached(), never a new request:
+  * list_manifest(list_url, cat): every row of partList ("diagram") and
+    gpgOnlyPartList ("other") with the template's verdict for `cat`
+    (matched / excluded_by), the row's notes verbatim as `extra`, its
+    `replace` and URL;
+  * year_manifest(make, model, year): the year page's status, final URL,
+    title and every "<group>/<sub>" parts-list slug;
+  * chain_links(product_url, pns): product-page links to those part numbers
+    (R4; replaced numbers are usually not linked, so this is often empty).
 """
 from __future__ import annotations
 
@@ -35,7 +46,10 @@ import urllib.parse
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import fetch  # noqa: E402
 from fetch import get, text_lines  # noqa: E402
+
+from ._qualifier import QUALIFIER, strip_qualifiers  # noqa: E402,F401  (QUALIFIER re-exported)
 
 EVIDENCE_CAP = 120
 TWO_WORD_MAKES = ("Alfa Romeo", "Land Rover", "Aston Martin", "Rolls Royce", "Rolls-Royce")
@@ -45,10 +59,28 @@ GLOBAL_EXCLUDE = re.compile(
     r"\b(bulbs?|sockets?|gaskets?|bolts?|screws?|nuts?|clips?|brackets?|seals?|wires?|wiring|harness|"
     r"labels?|decals?|grommets?|retainers?|washers?|o-rings?|rivets?|studs?|pins?|spacers?|"
     r"plugs?|clamps?|fasteners?|tapes?|stickers?)\b", re.I)
-# "with X" / "w/X" / "less X" / "l/X" qualifiers describe what an assembly
-# includes; strip them before exclusion checks ("Compressor Assy, With Pulley").
-QUALIFIER = re.compile(r"\b(?:w/o|w/|l/|with(?:out)?|less|incl(?:udes|uding)?)\s*[a-z0-9]+", re.I)
+# "with X" / "w/X" / "less X" / "l/X" qualifier phrases describe what an
+# assembly includes; the whole phrase (to the next "," or ";") is removed
+# before the exclusion checks ("Compressor Assy, With Pulley",
+# "Mirror Assy, Outer Rear View, W/Turn Signal Lamp"): sites/_qualifier.py.
 REMAN = re.compile(r"\breman", re.I)
+
+
+def cached(url: str) -> dict | None:
+    """The cached response for url, or None. Never a network request: the
+    manifests re-read pages that navigation and parts_on_page just fetched."""
+    if not fetch.cache_path(url).exists():
+        return None
+    return get(url)
+
+
+def norm_pn(pn: str | None) -> str:
+    return re.sub(r"[^a-z0-9]", "", (pn or "").lower())
+
+
+def _title(html: str) -> str | None:
+    m = re.search(r"<title[^>]*>(.*?)</title>", html or "", re.S | re.I)
+    return _clean(m.group(1)) if m else None
 
 
 class NavError(Exception):
@@ -128,6 +160,12 @@ def _extra(row: dict, name: str) -> str:
     return "; ".join(v for v in vals if v)
 
 
+def _list_stem(list_url: str) -> str | None:
+    """"<year>-<make>-<model>" from /parts-list/<stem>/<group>/<sub>."""
+    parts = urllib.parse.urlsplit(list_url).path.split("/")
+    return parts[2] if len(parts) > 2 and parts[1] == "parts-list" else None
+
+
 # ---------------------------------------------------------------- the template
 
 class SimplePart:
@@ -137,7 +175,8 @@ class SimplePart:
                  product_prefixes: tuple[str, ...] = ("/oem/",),
                  category_notes: dict[str, str] | None = None,
                  product_rules: dict[str, str] | None = None,
-                 slug_checks: bool = False):
+                 slug_checks: bool = False,
+                 reman_pn: str | None = None):
         """
         site:           domain
         url_make:       feed make -> make token in catalog URLs ("Scion" -> "scion")
@@ -159,7 +198,10 @@ class SimplePart:
                         name slug (/genuine/<make>~<name-slug>~<pn>), for stores whose list
                         names are loose (mitsubishipartsgiant lists bolt 7812A133 as
                         "Dehydrator", slug bolt-a-c-condenser; reman M1810A001D as "Starter",
-                        slug remanufactured-starter). Subclasses may also check `slug` in match().
+                        slug remanufactured-starter). Subclasses may also check `slug` in
+                        excluded_by() (match() is excluded_by() is None).
+        reman_pn:       regex on the part number for the make's own reman numbering, OR-ed
+                        with the name test (Toyota "-84": 27060-28320 -> 27060-28321-84)
         """
         self.site = site
         self.base = f"https://{site}"
@@ -173,6 +215,7 @@ class SimplePart:
         self.category_notes = dict(category_notes or {})
         self.product_rules = {k: re.compile(v, re.I) for k, v in (product_rules or {}).items()}
         self.slug_checks = slug_checks
+        self.reman_pn = re.compile(reman_pn, re.I) if reman_pn else None
 
     # ---- navigation
     def slug(self, make: str, model: str, year: int | None = None) -> str:
@@ -223,46 +266,131 @@ class SimplePart:
                 out[cat] = urls
         return out
 
+    @staticmethod
+    def _year_line(variant: str = "") -> dict:
+        return {"variant": variant, "trim": None, "year_url": None, "catalog": None, "status": None,
+                "final_url": None, "redirected": None, "title": None, "subs": [],
+                "variants": [variant], "variants_read": [variant], "retrieved": None}
+
+    def year_manifest(self, make: str, model: str, year: int) -> list[dict]:
+        """R2: what the year page offers, re-read from the cache. One line;
+        SimplePart has one catalog per model-year (variant "")."""
+        try:
+            slug = self.slug(make, model, year)
+        except NavError as e:
+            line = self._year_line()
+            line["error"] = str(e)
+            return [line]
+        return [self.year_manifest_slug(make, slug, year)]
+
+    def year_manifest_slug(self, make: str, slug: str, year: int, variant: str = "") -> dict:
+        """The R2 line for the year page of one catalog model slug, the page
+        categories_for_slug(make, slug, year, ...) reads (cache only)."""
+        line = self._year_line(variant)
+        mk = self.url_make.get(make, make.lower())
+        url = self.base + self.year_path.format(year=year, make=mk, model=slug)
+        stem = f"{year}-{mk}-{slug}"
+        line.update(year_url=url, catalog=stem)
+        d = cached(url)
+        if d is None:
+            line["error"] = "not_fetched"
+            return line
+        final = d.get("final_url") or url
+        line.update(status=d.get("status"), final_url=final, retrieved=d.get("retrieved"),
+                    redirected=urllib.parse.urlsplit(final).path != urllib.parse.urlsplit(url).path,
+                    title=_title(d.get("html", "")))
+        line["subs"] = sorted(set(re.findall(r'href="/parts-list/' + re.escape(stem) + r'/([a-z0-9-]+/[a-z0-9-]+)"',
+                                             d.get("html", ""))))
+        try:
+            vo = store(d.get("html", "")).get("vehicleOption") or {}
+        except (NavError, ValueError):
+            vo = {}
+        if vo.get("optionList") or vo.get("optionNavList"):
+            line["vehicle_options"] = vo  # verbatim: multi-trim years ask the shopper to pick options
+        if line["status"] != 200:
+            line["error"] = f"HTTP {line['status']}"
+        elif line["redirected"]:
+            line["error"] = "redirected"
+        elif not line["subs"]:
+            line["error"] = "no parts-list links"
+        return line
+
     # ---- list pages
     def oem_name(self, main: str, aux: str) -> str:
         if self.oem_name_field == "aux" and aux:
             return aux
         return main or aux
 
-    def match(self, cat: str, main: str, aux: str, slug: str = "") -> bool:
+    def excluded_by(self, cat: str, main: str, aux: str, slug: str = "") -> str | None:
+        """None when the row belongs to `cat`, else why not (manifest
+        `excluded_by`): "include_miss", "global:<word>" (README exclusions)
+        or "rule:<word>" (the category's exclusions). Exclusions read the
+        names with qualifier phrases removed (R5a)."""
         inc, exc = self.rules[cat]
         name = self.oem_name(main, aux)
         if not inc.search(name):
-            return False
+            return "include_miss"
         for s in (main, aux, slug.replace("-", " ") if self.slug_checks else ""):
-            t = QUALIFIER.sub(" ", s or "")
-            if GLOBAL_EXCLUDE.search(t) or (exc and exc.search(t)):
-                return False
-        return True
+            t = strip_qualifiers(s)
+            m = GLOBAL_EXCLUDE.search(t)
+            if m:
+                return f"global:{m.group(0).lower()}"
+            m = exc.search(t) if exc else None
+            if m:
+                return f"rule:{m.group(0).lower()}"
+        return None
 
-    def parts_on_page(self, list_url: str, cat: str) -> list[dict]:
-        if cat not in self.rules:
-            return []
-        d = get(list_url)
-        if d.get("status") != 200:
-            raise NavError(f"HTTP {d.get('status')} for {list_url}")
+    def match(self, cat: str, main: str, aux: str, slug: str = "") -> bool:
+        return self.excluded_by(cat, main, aux, slug) is None
+
+    def is_reman(self, pn: str, main: str, aux: str, notes: str, name_slug: str) -> bool:
+        """One list row says remanufactured: its names or notes say "reman",
+        the number is R-prefixed (Mopar), or the site's reman_pn matches."""
+        return (bool(REMAN.search(" ".join([main, aux, notes, name_slug if self.slug_checks else ""])))
+                or bool(re.match(r"^R\d", pn)) or bool(self.reman_pn and self.reman_pn.search(pn)))
+
+    def _scan(self, d: dict, cat: str, product_fn) -> tuple[list[dict], list[dict]]:
+        """(parts, manifest rows) for one fetched list page. parts is what
+        parts_on_page returns; rows is every partList / gpgOnlyPartList row with
+        the verdict for `cat`. product_fn(url) -> product dict or None (None:
+        the page is not available, the product rule is left unchecked)."""
         pl = store(d["html"]).get("partList") or {}
-        rows = [(r, "diagram") for g in (pl.get("partList") or []) for r in (g or [])]
-        rows += [(r, "other") for g in (pl.get("gpgOnlyPartList") or []) for r in (g or [])]
+        src = [(r, "diagram") for g in (pl.get("partList") or []) for r in (g or [])]
+        src += [(r, "other") for g in (pl.get("gpgOnlyPartList") or []) for r in (g or [])]
         found: dict[str, dict] = {}
-        for r, section in rows:
+        rows: list[dict] = []
+        new_number: set[str] = set()  # pns with a non-reman diagram row and no replace value (R5b)
+        for r, section in src:
             pn = _clean(r.get("partNumber"))
             url = r.get("url") or ""
-            if not pn or not url.startswith(self.product_prefixes):
+            main, aux = _clean(r.get("mainDesc")), _clean(r.get("auxiliaryDesc"))
+            replace = _clean(r.get("replace"))
+            row = {"pn": pn or None, "section": section, "main": main, "aux": aux or None,
+                   "extra": [{"name": _clean(e.get("name")), "desc": _clean(e.get("desc"))}
+                             for e in (r.get("allExtraInfoList") or [])],
+                   "replace": replace or None, "url": url or None,
+                   "reman": False, "matched": False, "excluded_by": None}
+            rows.append(row)
+            if not pn:
+                row["excluded_by"] = "no_pn"
+                continue
+            name_slug = url.split("~")[1] if url.count("~") >= 2 else ""
+            notes = _extra(r, "Part Notes")
+            row_reman = self.is_reman(pn, main, aux, notes, name_slug)
+            row["reman"] = row_reman
+            if not url.startswith(self.product_prefixes):
+                row["excluded_by"] = "no_product_url"
                 continue
             # the URL must name the same part number (honest link, not a redirect/ad)
             if url.rsplit("~", 1)[-1].replace("-", "").lower() != pn.replace("-", "").lower():
+                row["excluded_by"] = "url_pn_mismatch"
                 continue
-            main, aux = _clean(r.get("mainDesc")), _clean(r.get("auxiliaryDesc"))
-            name_slug = url.split("~")[1] if url.count("~") >= 2 else ""
             if not self.match(cat, main, aux, name_slug):
+                row["excluded_by"] = self.excluded_by(cat, main, aux, name_slug) or "rule:site"
                 continue
-            notes = _extra(r, "Part Notes")
+            row["matched"] = True
+            if section == "diagram" and not replace and not row_reman:
+                new_number.add(pn)
             rec = found.get(pn)
             if rec is None:
                 rec = found[pn] = {
@@ -270,36 +398,104 @@ class SimplePart:
                     "product_url": self.base + url,
                     "list_section": section,
                     "list_notes": [], "list_location": [],
-                    "list_replaced_by": _clean(r.get("replace")) or None,
+                    "list_replaced_by": replace or None,
                     "reman": True,  # AND over this number's rows, below
                 }
             # a number is reman only if every row listing it says so (VW prints
             # one X-number on a "New" row and on a "Remanufactured" row)
-            rec["reman"] = rec["reman"] and (bool(REMAN.search(" ".join([main, aux, notes, name_slug if self.slug_checks else ""]))) or bool(re.match(r"^R\d", pn)))
+            rec["reman"] = rec["reman"] and row_reman
             if notes and notes not in rec["list_notes"]:
                 rec["list_notes"].append(notes)
             loc = _extra(r, "Location")
             if loc and loc not in rec["list_location"]:
                 rec["list_location"].append(loc)
+
+        def unmatch(pns: set[str], why: str) -> None:
+            for row in rows:
+                if row["matched"] and row["pn"] in pns:
+                    row["matched"], row["excluded_by"] = False, why
+
         parts = list(found.values())
         if cat in self.product_rules:
             kept = []
             for p in parts:
-                pr = self.product(p["product_url"])
+                pr = product_fn(p["product_url"])
+                if pr is None:
+                    unmatch({p["pn"]}, "product_rule_unchecked")
+                    continue
                 text = f"{pr['description']} | {pr['other_names'] or ''} | Position: {pr['position'] or ''}"
                 m = self.product_rules[cat].search(text)
                 if m:
                     p["product_check"] = f"{m.group(0)!r} in {text!r}"
                     kept.append(p)
+                else:
+                    unmatch({p["pn"]}, "product_rule")
             parts = kept
         if cat in self.category_notes:
             for p in parts:
                 p["category_note"] = self.category_notes[cat]
         # README: drop remanufactured numbers when a new number for the same
         # category is on the page; keep reman when it is the only listing.
-        if any(p["reman"] for p in parts) and any(not p["reman"] for p in parts):
+        # R5b: only a non-reman "diagram" row without a replace value is a new
+        # number. A superseded or catalog-only number ("other" section,
+        # 27060-28320 -> 27060-28321-84) is not, so remans stay next to it.
+        if any(p["pn"] in new_number for p in parts) and any(p["reman"] for p in parts):
+            unmatch({p["pn"] for p in parts if p["reman"]}, "reman_dropped")
             parts = [p for p in parts if not p["reman"]]
-        return parts
+        return parts, rows
+
+    def parts_on_page(self, list_url: str, cat: str) -> list[dict]:
+        if cat not in self.rules:
+            return []
+        d = get(list_url)
+        if d.get("status") != 200:
+            raise NavError(f"HTTP {d.get('status')} for {list_url}")
+        return self._scan(d, cat, self.product)[0]
+
+    def list_manifest(self, list_url: str, cat: str) -> dict:
+        """R1: every row of the list page with the verdict for `cat`, re-read
+        from the cache (no request). `product` per row is filled by crawl.py."""
+        out: dict = {"list_url": list_url, "catalog": _list_stem(list_url), "variant": "", "status": None,
+                     "final_url": None, "retrieved": None, "rows": []}
+        if cat not in self.rules:
+            out["error"] = "no rules for this category"
+            return out
+        d = cached(list_url)
+        if d is None:
+            out["error"] = "not_fetched"
+            return out
+        out.update(status=d.get("status"), final_url=d.get("final_url") or list_url, retrieved=d.get("retrieved"))
+        if d.get("status") != 200:
+            out["error"] = f"HTTP {d.get('status')}"
+            return out
+
+        def cached_product(url: str):
+            try:
+                return self.product(url, _get=cached)
+            except NavError:
+                return None
+        try:
+            out["rows"] = self._scan(d, cat, cached_product)[1]
+        except NavError as e:
+            out["error"] = str(e)
+        return out
+
+    def chain_links(self, product_url: str, pns: list[str]) -> dict[str, str]:
+        """R4: {pn: product URL} for the numbers in `pns` that the product page
+        itself links (/oem/... or /genuine/... hrefs whose last "~" part is the
+        number). Read from the cache; never a constructed slug."""
+        d = cached(product_url)
+        if not d:
+            return {}
+        want = {norm_pn(p): p for p in pns if norm_pn(p)}
+        out: dict[str, str] = {}
+        for href in re.findall(r'href="([^"#?]+)"', d.get("html", "")):
+            if not href.startswith(self.product_prefixes) or href.count("~") < 2:
+                continue
+            k = norm_pn(href.rsplit("~", 1)[-1])
+            if k in want and want[k] not in out:
+                out[want[k]] = self.base + href
+        return out
 
     # ---- product pages
     @staticmethod
@@ -320,8 +516,10 @@ class SimplePart:
         model = rest[len(make):].strip()
         return {"years": spans[0], "spans": spans, "make": make, "model": model}
 
-    def product(self, product_url: str) -> dict:
-        d = get(product_url)
+    def product(self, product_url: str, _get=None) -> dict:
+        d = (_get or get)(product_url)
+        if d is None:
+            raise NavError(f"not in cache: {product_url}")
         if d.get("status") != 200:
             raise NavError(f"HTTP {d.get('status')} for {product_url}")
         st = store(d["html"]).get("partNumber") or {}

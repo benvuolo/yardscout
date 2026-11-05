@@ -23,6 +23,9 @@ Usage (from scraper/oem_fitment):
     git fetch origin oem-raw && git show origin/oem-raw:raw/<site>.jsonl > /tmp/x/<site>.jsonl
     python3 audit.py /tmp/x/*.jsonl            # JSON summary per site
     python3 audit.py --table /tmp/x/*.jsonl    # one markdown row per site + hits
+A records file past crawl.PART_BYTES continues in <site>.2.jsonl, <site>.3.jsonl
+...: copy every raw/<site>*.jsonl; any part given stands for the whole logical
+file (rawparts.py), and .lists / .years manifest files are skipped.
 Findings go to AUDIT.md. Test: tests/test_audit.py (corruption cases).
 """
 from __future__ import annotations
@@ -386,11 +389,29 @@ def audit_record(r: dict) -> dict[str, list[str]]:
     return out
 
 
-def main(paths: list[str], table: bool = False) -> None:
-    summary = {}
+def record_files(paths: list[str]) -> list[list[Path]]:
+    """Group the given paths into logical records files (rawparts.py): any part
+    of raw/<site>.jsonl stands for the whole file, read in part order; the
+    .lists / .years manifest files are skipped (they hold no records)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import rawparts  # noqa: E402
+    out: list[list[Path]] = []
     for p in paths:
-        recs = [json.loads(l) for l in open(p) if l.strip()]
-        site = recs[0]["site"] if recs else p
+        if rawparts.kind_of(Path(p)) != "records":
+            print(f"note: skipping manifest file {p}", file=sys.stderr)
+            continue
+        parts = rawparts.logical_paths(Path(p))
+        if parts and parts not in out:
+            out.append(parts)
+    return out
+
+
+def main(paths: list[str], table: bool = False) -> None:
+    import rawparts  # noqa: E402  (record_files put this directory on sys.path)
+    summary = {}
+    for parts in record_files(paths):
+        recs = [r for _, r in rawparts.rows(parts) if r is not None]
+        site = recs[0]["site"] if recs else str(parts[0])
         for r in recs:  # aftermarket records key on aftermarket_pn
             r.setdefault("pn", r.get("aftermarket_pn"))
         seen = Counter((r.get("category"), r.get("pn")) for r in recs)

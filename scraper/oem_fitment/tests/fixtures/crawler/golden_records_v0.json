@@ -1,0 +1,2230 @@
+{
+ "lists": {
+  "ac-compressor https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "ac-compressor https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "ac-compressor https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [
+   {
+    "list_group": "COMPRESSOR KIT, A/C Compressor",
+    "list_info": [
+     "Fitting Vehicle Options: PL(69)(LUV,C67,C68)"
+    ],
+    "list_remark": "A/C(INCLUDES 2-7)(MATES W/CONNECT 13577519)(W/CONNECTOR @ CONTROL VALVE;VEHICLE W/JUMPER WIRE @ CONTROL VALVE MAY REQUIRE 13585623 TO INCREASE HARNESS LENGTH)",
+    "name": "COMPRESSOR KIT, A/C(INCLUDES 2-7)(MATES W/CONNECT 13577519)(W/CONNECTOR @ CONTROL VALVE;VEHICLE W/JUMPER WIRE @ CONTROL VALVE MAY REQUIRE 13585623 TO INCREASE HARNESS LENGTH)",
+    "pn": "39053419",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-compressor-kit-a-c-39053419.html"
+   },
+   {
+    "list_group": "COMPRESSOR KIT, A/C Compressor",
+    "list_info": [
+     "Fitting Vehicle Options: PJ,PL(69)(LUW,C67,C68), PL(69)(LWE,C67,C68)"
+    ],
+    "list_remark": "A/C(INCLUDES 2-7)(W/CONNECTOR @ CONTROL VALVE;VEHICLE W/JUMPER WIRE @ CONTROL VALVE MAY REQUIRE 13585623 TO INCREASE HARNESS LENGTH)",
+    "name": "COMPRESSOR KIT, A/C(INCLUDES 2-7)(W/CONNECTOR @ CONTROL VALVE;VEHICLE W/JUMPER WIRE @ CONTROL VALVE MAY REQUIRE 13585623 TO INCREASE HARNESS LENGTH)",
+    "pn": "39053423",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-compressor-kit-a-c-39053423.html"
+   },
+   {
+    "list_group": "COMPRESSOR KIT, A/C Compressor",
+    "list_info": [
+     "Fitting Vehicle Options: PL(69)(LUZ)"
+    ],
+    "list_remark": "A/C(INCLUDES 2-7)(MATING CONNECT TO CLUTCH USE 13577519;TO SOLENOID VALVE 19332213)",
+    "name": "COMPRESSOR KIT, A/C(INCLUDES 2-7)(MATING CONNECT TO CLUTCH USE 13577519;TO SOLENOID VALVE 19332213)",
+    "pn": "39053421",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-compressor-kit-a-c-39053421.html"
+   }
+  ],
+  "ac-compressor https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "ac-compressor https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "ac-compressor https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "ac-compressor https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "ac-compressor https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "ac-compressor https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "ac-compressor https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "ac-compressor https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "alternator https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [
+   {
+    "list_group": "ALTERNATOR ASY.",
+    "list_info": [
+     "115 amp. Reman (Same as 130 amp, Note: No servicable internal parts.), U/8500 GVW / 115 amp. Reman (Same as 130 amp, Note: No servicable internal parts.), U/8500 GVW, With 4x4",
+     "Fit Note: 8 Cyl 4.6L, 8 Cyl 5.4L",
+     "Callout Name: 10346",
+     "Replaced By: F7PZ-10346-KARM2"
+    ],
+    "list_remark": "",
+    "name": "Alternator Assy",
+    "pn": "F7PZ-10346-KARM",
+    "product_url": "https://www.fordpartsgiant.com/parts/ford-alternator-assy_f7pz-10346-karm.html"
+   },
+   {
+    "list_group": "ALTERNATOR ASY.",
+    "list_info": [
+     "120 amp. Reman, Lightning only",
+     "Fit Note: 8 Cyl 5.4L",
+     "Callout Name: 10346"
+    ],
+    "list_remark": "",
+    "name": "Alternator Assy",
+    "pn": "XL3Z-10346-AARM",
+    "product_url": "https://www.fordpartsgiant.com/parts/ford-alternator-assy_xl3z-10346-aarm.html"
+   },
+   {
+    "list_group": "ALTERNATOR ASY.",
+    "list_info": [
+     "120 amp. Reman, Lightning only",
+     "Fit Note: 8 Cyl 5.4L",
+     "Callout Name: 10346",
+     "Replaced By: XL3Z-10V346-ADRM"
+    ],
+    "list_remark": "",
+    "name": "Alternator Assy",
+    "pn": "XL3Z-10V346-AARM",
+    "product_url": "https://www.fordpartsgiant.com/parts/ford-alternator-asy_xl3z-10v346-aarm.html"
+   }
+  ],
+  "alternator https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [
+   {
+    "list_group": "Alternator Assy",
+    "list_info": [
+     "110 AMP , Ford Retail Spec , Not For Warranty Repairs",
+     "Fitting Vehicle Options: 8 Cyl 4.6L Romeo SOHC EFI, 8 Cyl 4.6L Windsor SOHC EFI, 8 Cyl 5.4L",
+     "Callout Name: 10346",
+     "Replaced By: 4U2Z-10V346-DTRM"
+    ],
+    "list_remark": "",
+    "name": "Alternator Assy",
+    "pn": "4L3Z-10V346-BBRM",
+    "product_url": "https://www.fordpartsgiant.com/parts/ford-alternator-asy_4l3z-10v346-bbrm.html"
+   },
+   {
+    "list_group": "Alternator Assy",
+    "list_info": [
+     "110 AMP , High Level Aftermarket Spec, Non Warranty Repair",
+     "Fitting Vehicle Options: 8 Cyl 5.4L",
+     "Callout Name: 10346",
+     "Replaced By: G2MZ-10346-DK"
+    ],
+    "list_remark": "",
+    "name": "Alternator Assy",
+    "pn": "G2MZ-10346-CH",
+    "product_url": "https://www.fordpartsgiant.com/parts/ford-alternator-asy_g2mz-10346-ch.html"
+   }
+  ],
+  "alternator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "alternator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [
+   {
+    "list_group": "GENERATOR, Engine Electrical",
+    "list_info": [
+     "Fitting Vehicle Options: PL(69)(LUV)"
+    ],
+    "list_remark": "(INCLUDES 3-5)(CODE AMR,AF7)",
+    "name": "GENERATOR, (INCLUDES 3-5)(CODE AMR,AF7)",
+    "pn": "13597227",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-generator-asm-13597227.html"
+   },
+   {
+    "list_group": "GENERATOR, Engine Electrical",
+    "list_info": [
+     "Fitting Vehicle Options: PL(69)(LWE), PJ,PL(69)(LUW)",
+     "Replaced By: 19432305"
+    ],
+    "list_remark": "(INCLUDES 3-5)(MATING CONNECT USE 13585849)",
+    "name": "GENERATOR, (INCLUDES 3-5)(MATING CONNECT USE 13585849)",
+    "pn": "23247389",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-generator-asm-23247389.html"
+   },
+   {
+    "list_group": "GENERATOR, Engine Electrical",
+    "list_info": [
+     "Fitting Vehicle Options: PL(69)(LUZ)",
+     "Replaced By: 19432306"
+    ],
+    "list_remark": "(INCLUDES 2,3)(A-140A)",
+    "name": "GENERATOR, (INCLUDES 2,3)(A-140A)",
+    "pn": "84178065",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-generator-asm-84178065.html"
+   }
+  ],
+  "alternator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "alternator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "alternator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "alternator https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "alternator https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [
+   {
+    "aux_desc": null,
+    "list_location": [],
+    "list_notes": [
+     "12V 100A"
+    ],
+    "list_replaced_by": "27060-28321-84",
+    "list_section": "other",
+    "name": "Alternator Assy",
+    "pn": "27060-28320",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~alternator-compatible~27060-28320",
+    "reman": false
+   }
+  ],
+  "alternator https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "alternator https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [
+   {
+    "aux_desc": "Reman Alternator",
+    "list_location": [],
+    "list_notes": [
+     "2.4L, US Built;Camry; 2.4L; USA Built"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Alternator",
+    "pn": "27060-0H111-84",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~reman-alternator~27060-0h111-84",
+    "reman": true
+   },
+   {
+    "aux_desc": "Reman Alternator",
+    "list_location": [],
+    "list_notes": [
+     "3.5L, US Built;Camry; 3.5L; USA Built"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Alternator",
+    "pn": "27060-0P141-84",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~reman-alternator~27060-0p141-84",
+    "reman": true
+   },
+   {
+    "aux_desc": "Reman Alternator",
+    "list_location": [],
+    "list_notes": [
+     "2.4L, Japan Built;Camry; 2.4L; Japan Built"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Alternator",
+    "pn": "27060-28321-84",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~reman-alternator~27060-28321-84",
+    "reman": true
+   },
+   {
+    "aux_desc": "Reman Alternator",
+    "list_location": [],
+    "list_notes": [
+     "3.5L, Japan Built;Camry; 3.5L; Japan Built"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Alternator",
+    "pn": "27060-31081-84",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~reman-alternator~27060-31081-84",
+    "reman": true
+   }
+  ],
+  "bumper-front https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "bumper-front https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "bumper-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "bumper-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "bumper-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [
+   {
+    "list_group": "COVER, Capsule/Headlamp Body to Fender",
+    "list_info": [
+     "Location: Driver Side"
+    ],
+    "list_remark": "FRONT FOG LAMP OPENING",
+    "name": "COVER, FRONT FOG LAMP OPENING",
+    "pn": "94831149",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-cover-94831149.html"
+   },
+   {
+    "list_group": "COVER, Capsule/Headlamp Body to Fender",
+    "list_info": [
+     "Location: Passenger Side"
+    ],
+    "list_remark": "FRONT FOG LAMP OPENING",
+    "name": "COVER, FRONT FOG LAMP OPENING",
+    "pn": "94831150",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-cover-94831150.html"
+   }
+  ],
+  "bumper-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "bumper-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "bumper-front https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "bumper-front https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "bumper-front https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "bumper-front https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "bumper-rear https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "bumper-rear https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "bumper-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "bumper-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "bumper-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "bumper-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "bumper-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "bumper-rear https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "bumper-rear https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "bumper-rear https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "bumper-rear https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "climate-control https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "climate-control https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "climate-control https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "climate-control https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "climate-control https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "climate-control https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "climate-control https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "climate-control https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "climate-control https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "climate-control https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "climate-control https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "door-front https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "door-front https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "door-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "door-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "door-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "door-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "door-front https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "door-front https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "door-front https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "door-front https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "door-front https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "door-rear https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "door-rear https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "door-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "door-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "door-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "door-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "door-rear https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "door-rear https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "door-rear https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "door-rear https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "door-rear https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "fender https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "fender https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "fender https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "fender https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "fender https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "fender https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "fender https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "fender https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "fender https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "fender https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "fender https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "fuel-pump-module https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "fuel-pump-module https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "fuel-pump-module https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "fuel-pump-module https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "fuel-pump-module https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "fuel-pump-module https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "fuel-pump-module https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "fuel-pump-module https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "fuel-pump-module https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "fuel-pump-module https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "fuel-pump-module https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "gauge-cluster https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "gauge-cluster https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "gauge-cluster https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "gauge-cluster https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "gauge-cluster https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "gauge-cluster https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "gauge-cluster https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "gauge-cluster https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "gauge-cluster https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "gauge-cluster https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "gauge-cluster https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "grille https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "grille https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "grille https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "grille https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "grille https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "grille https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "grille https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "grille https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "grille https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "grille https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "grille https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "headlights https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "headlights https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "headlights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "headlights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "headlights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [
+   {
+    "list_group": "HEADLAMP, Capsule/Headlamp/Fog Lamp",
+    "list_info": [
+     "Location: Driver Side"
+    ],
+    "list_remark": "(FOR MATING CONNECT USE 13584279)(INCLUDES 4,5,7,8,10-13)",
+    "name": "HEADLAMP, (FOR MATING CONNECT USE 13584279)(INCLUDES 4,5,7,8,10-13)",
+    "pn": "95291963",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-headlamp-95291963.html"
+   },
+   {
+    "list_group": "HEADLAMP, Capsule/Headlamp/Fog Lamp",
+    "list_info": [
+     "Location: Passenger Side"
+    ],
+    "list_remark": "(INCLUDES 4,5,7,8,10-13)",
+    "name": "HEADLAMP, (INCLUDES 4,5,7,8,10-13)",
+    "pn": "95291964",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-headlamp-95291964.html"
+   }
+  ],
+  "headlights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "headlights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "headlights https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "headlights https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "headlights https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "headlights https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "hood https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "hood https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "hood https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "hood https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "hood https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "hood https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "hood https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "hood https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "hood https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "hood https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "hood https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "ignition-coils https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "ignition-coils https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "ignition-coils https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "ignition-coils https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "ignition-coils https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "ignition-coils https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "ignition-coils https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "ignition-coils https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "ignition-coils https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "ignition-coils https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "ignition-coils https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "liftgate https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "liftgate https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "liftgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "liftgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "liftgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "liftgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "liftgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "liftgate https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "liftgate https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "liftgate https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "liftgate https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "power-steering-pump https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "power-steering-pump https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "power-steering-pump https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "power-steering-pump https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "power-steering-pump https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "power-steering-pump https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "power-steering-pump https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "power-steering-pump https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "power-steering-pump https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "power-steering-pump https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "power-steering-pump https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "radiator https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "radiator https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "radiator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "radiator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "radiator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "radiator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "radiator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "radiator https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "radiator https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "radiator https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "radiator https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "side-mirrors https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "side-mirrors https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "side-mirrors https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "side-mirrors https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "side-mirrors https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "side-mirrors https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "side-mirrors https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "side-mirrors https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "side-mirrors https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "side-mirrors https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Gray;Japan Built, Without Heated, Gray;With Heated, Japan Built, Gray;Without Heated, Japan Built, Gray"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-B1",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-b1",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "US Built, Without Heated, Black;US Built, Without Heated, Blue Ribbon;US Built, Without Heated, Gray;US Built, Without Heated, Jasper Pearl;US Built, Without Heated, Red;US Built, Without Heated, Sand;US Built, Without Heated, Silver;US Built, Without Heated, White;Without Heated, US Built, Black;Without Heated, US Built, Blue Ribbon;Without Heated, US Built, Gray;Without Heated, US Built, Green;Without Heated, US Built, Red;Without Heated, US Built, Sand;Without Heated, US Built, Silver;Without Heated, US Built, Sky Blue;Without Heated, US Built, White"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-06925",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~mirror-assembly-outer-r~87910-06925",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Gray;Japan Built, Without Heated, Gray;With Heated, Japan Built, Gray;Without Heated, Japan Built, Gray"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-B1",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-b1",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "US Built, With Heated, Black;US Built, With Heated, Blue Ribbon;US Built, With Heated, Gray;US Built, With Heated, Jasper Pearl;US Built, With Heated, Red;US Built, With Heated, Sand;US Built, With Heated, Silver;US Built, With Heated, White;With Heated, US Built, Black;With Heated, US Built, Blue Ribbon;With Heated, US Built, Gray;With Heated, US Built, Green;With Heated, US Built, Red;With Heated, US Built, Sand;With Heated, US Built, Silver;With Heated, US Built, Sky Blue;With Heated, US Built, White"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-06926",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~mirror-assembly-outer-r~87910-06926",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "US Built, Without Heated, Black;US Built, Without Heated, Blue Ribbon;US Built, Without Heated, Gray;US Built, Without Heated, Jasper Pearl;US Built, Without Heated, Red;US Built, Without Heated, Sand;US Built, Without Heated, Silver;US Built, Without Heated, White;Without Heated, US Built, Black;Without Heated, US Built, Blue Ribbon;Without Heated, US Built, Gray;Without Heated, US Built, Green;Without Heated, US Built, Red;Without Heated, US Built, Sand;Without Heated, US Built, Silver;Without Heated, US Built, Sky Blue;Without Heated, US Built, White"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-06924",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~mirror-assembly-outer-r~87940-06924",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Black;Japan Built, Without Heated, Black;With Heated, Japan Built, Black;Without Heated, Japan Built, Black"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-C0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-c0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, White;Japan Built, Without Heated, White;With Heated, Japan Built, White;Without Heated, Japan Built, White"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-A0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-a0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Silver;Japan Built, Without Heated, Silver;With Heated, Japan Built, Silver;Without Heated, Japan Built, Silver"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-B2",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-b2",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Black;Japan Built, Without Heated, Black;With Heated, Japan Built, Black;Without Heated, Japan Built, Black"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-C0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-c0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Red;Japan Built, Without Heated, Red;With Heated, Japan Built, Red;Without Heated, Japan Built, Red"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-D0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-d0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Sand;Japan Built, Without Heated, Sand;With Heated, Japan Built, Sand;Without Heated, Japan Built, Sand"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-E0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-e0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Jasper Pearl;Japan Built, Without Heated, Jasper Pearl"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-G0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-g0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "With Heated, Japan Built, Green;Without Heated, Japan Built, Green"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-H0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-h0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "With Heated, Japan Built, Sky Blue;Without Heated, Japan Built, Sky Blue"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-J0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-j0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Blue Ribbon;Japan Built, Without Heated, Blue Ribbon;With Heated, Japan Built, Blue Ribbon;Without Heated, Japan Built, Blue Ribbon"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87910-33670-J1",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33670-j1",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "US Built, With Heated, Black;US Built, With Heated, Blue Ribbon;US Built, With Heated, Gray;US Built, With Heated, Jasper Pearl;US Built, With Heated, Red;US Built, With Heated, Sand;US Built, With Heated, Silver;US Built, With Heated, White;With Heated, US Built, Black;With Heated, US Built, Blue Ribbon;With Heated, US Built, Gray;With Heated, US Built, Green;With Heated, US Built, Red;With Heated, US Built, Sand;With Heated, US Built, Silver;With Heated, US Built, Sky Blue;With Heated, US Built, White"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-06925",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~mirror-assembly-outer-r~87940-06925",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, White;Japan Built, Without Heated, White;With Heated, Japan Built, White;Without Heated, Japan Built, White"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-A0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-a0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Silver;Japan Built, Without Heated, Silver;With Heated, Japan Built, Silver;Without Heated, Japan Built, Silver"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-B2",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-b2",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Red;Japan Built, Without Heated, Red;With Heated, Japan Built, Red;Without Heated, Japan Built, Red"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-D0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-d0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Sand;Japan Built, Without Heated, Sand;With Heated, Japan Built, Sand;Without Heated, Japan Built, Sand"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-E0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-e0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Jasper Pearl;Japan Built, Without Heated, Jasper Pearl"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-G0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-g0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "With Heated, Japan Built, Green;Without Heated, Japan Built, Green"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-H0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-h0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "With Heated, Japan Built, Sky Blue;Without Heated, Japan Built, Sky Blue"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-J0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-j0",
+    "reman": false
+   },
+   {
+    "aux_desc": "Mirror Assembly Outer Rearview",
+    "list_location": [
+     "Driver Side"
+    ],
+    "list_notes": [
+     "Japan Built, With Heated, Blue Ribbon;Japan Built, Without Heated, Blue Ribbon;With Heated, Japan Built, Blue Ribbon;Without Heated, Japan Built, Blue Ribbon"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Mirror Assembly",
+    "pn": "87940-33630-J1",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~driver-side-mirror-assembly-outside-rear-view~87940-33630-j1",
+    "reman": false
+   },
+   {
+    "aux_desc": null,
+    "list_location": [
+     "Passenger Side"
+    ],
+    "list_notes": [
+     "BLACK,202"
+    ],
+    "list_replaced_by": "87910-33670-C0",
+    "list_section": "other",
+    "name": "Mirror Assy, Outer Rear View, RH",
+    "pn": "87910-33660-C0",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33660-c0",
+    "reman": false
+   }
+  ],
+  "side-mirrors https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "starter https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "starter https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "starter https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "starter https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "starter https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "starter https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "starter https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [
+   {
+    "list_group": "STARTER, Starter Motor",
+    "list_info": [
+     "Fitting Vehicle Options: PJ,PL(69)(LUW), PL(69)(LWE)"
+    ],
+    "list_remark": "",
+    "name": "STARTER",
+    "pn": "55576980",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-starter-55576980.html"
+   },
+   {
+    "list_group": "STARTER, Starter Motor",
+    "list_info": [
+     "Fitting Vehicle Options: PL(69)(LUV)",
+     "Replaced By: 12745821"
+    ],
+    "list_remark": "",
+    "name": "STARTER",
+    "pn": "25194634",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-starter-asm-25194634.html"
+   },
+   {
+    "list_group": "STARTER, Starter Motor",
+    "list_info": [],
+    "list_remark": "STARTER",
+    "name": "STARTER, Starter Motor, STARTER",
+    "pn": "55585237",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-starter-55585237.html"
+   }
+  ],
+  "starter https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [
+   {
+    "aux_desc": "Starter Assembly",
+    "list_location": [],
+    "list_notes": [
+     "Camry; 1.2 KW; From 4/97"
+    ],
+    "list_replaced_by": null,
+    "list_section": "diagram",
+    "name": "Starter",
+    "pn": "28100-74270-84",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~reman-starter-assembly~28100-74270-84",
+    "reman": false
+   },
+   {
+    "aux_desc": null,
+    "list_location": [],
+    "list_notes": [
+     "12V 1.4KW,(L)"
+    ],
+    "list_replaced_by": "28100-74260-84",
+    "list_section": "other",
+    "name": "Starter Assy",
+    "pn": "28100-03100",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~starter-motor~28100-03100",
+    "reman": false
+   },
+   {
+    "aux_desc": null,
+    "list_location": [],
+    "list_notes": [
+     "12V 1.4KW,(J)"
+    ],
+    "list_replaced_by": "28100-74260-84",
+    "list_section": "other",
+    "name": "Starter Assy",
+    "pn": "28100-74260",
+    "product_url": "https://www.toyotapartsnow.com/oem/toyota~starter-assembly~28100-74260",
+    "reman": false
+   }
+  ],
+  "starter https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "starter https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "starter https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "tail-lights https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "tail-lights https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "tail-lights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "tail-lights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "tail-lights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "tail-lights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [
+   {
+    "list_group": "LAMP, Tail Lamp",
+    "list_info": [
+     "Location: Driver Side"
+    ],
+    "list_remark": "REAR STOP(INCLUDES 2-7)",
+    "name": "LAMP, REAR STOP(INCLUDES 2-7)",
+    "pn": "94540776",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-lamp-asm-rr-body-structure-stop-94540776.html"
+   },
+   {
+    "list_group": "LAMP, Tail Lamp",
+    "list_info": [
+     "Location: Passenger Side"
+    ],
+    "list_remark": "REAR STOP(INCLUDES 2-7)",
+    "name": "LAMP, REAR STOP(INCLUDES 2-7)",
+    "pn": "94540777",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-lamp-asm-rr-body-structure-stop-94540777.html"
+   },
+   {
+    "list_group": "LAMP, Tail Lamp",
+    "list_info": [
+     "Location: Driver Side"
+    ],
+    "list_remark": "REAR COMBINATION(INCLUDES 10-12)(DECKLID SIDE)",
+    "name": "LAMP, REAR COMBINATION(INCLUDES 10-12)(DECKLID SIDE)",
+    "pn": "95389371",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-lamp-95389371.html"
+   },
+   {
+    "list_group": "LAMP, Tail Lamp",
+    "list_info": [
+     "Location: Passenger Side"
+    ],
+    "list_remark": "REAR COMBINATION(INCLUDES 10-12)(DECKLID SIDE)",
+    "name": "LAMP, REAR COMBINATION(INCLUDES 10-12)(DECKLID SIDE)",
+    "pn": "95389372",
+    "product_url": "https://www.gmpartsgiant.com/parts/gm-lamp-95389372.html"
+   }
+  ],
+  "tail-lights https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "tail-lights https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "tail-lights https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "tail-lights https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "tail-lights https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "tailgate https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "tailgate https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "tailgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "tailgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "tailgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "tailgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "tailgate https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "tailgate https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "tailgate https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "tailgate https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "tailgate https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "throttle-body https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "throttle-body https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "throttle-body https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "throttle-body https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "throttle-body https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "throttle-body https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "throttle-body https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "throttle-body https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "throttle-body https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "throttle-body https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "throttle-body https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "trunk-lid https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "trunk-lid https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "trunk-lid https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "trunk-lid https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "trunk-lid https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "trunk-lid https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "trunk-lid https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "trunk-lid https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "trunk-lid https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "trunk-lid https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "trunk-lid https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "window-regulator https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "window-regulator https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "window-regulator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "window-regulator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "window-regulator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "window-regulator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "window-regulator https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "window-regulator https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "window-regulator https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "window-regulator https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "window-regulator https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": [],
+  "window-switch https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--8_cyl_5_4l-4at_4r100/alternator_battery_distributor_starter/alternator.html": [],
+  "window-switch https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html": [],
+  "window-switch https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html": [],
+  "window-switch https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html": [],
+  "window-switch https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html": [],
+  "window-switch https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html": [],
+  "window-switch https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html": [],
+  "window-switch https://www.toyotapartsnow.com/parts-list/1999-toyota-camry/charging-starting/starter": [],
+  "window-switch https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/alternator": [],
+  "window-switch https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors": [],
+  "window-switch https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator": []
+ },
+ "nav": {
+  "Chevrolet Cruze 2014": {
+   "ac-compressor": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_mounting.html"
+   ],
+   "alternator": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/generator_mounting.html"
+   ],
+   "bumper-front": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/frames_springs_shocks_bumpers_fascias/bumper_front.html"
+   ],
+   "bumper-rear": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/frames_springs_shocks_bumpers_fascias/bumper_rear.html"
+   ],
+   "climate-control": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_mounting_air_conditioning_audio_entertainment/a_c_control_system_sensor.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/instrument_panel_electrical.html"
+   ],
+   "door-front": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_moldings_sheet_metal_rear_compartment_hardware_roof_hardware/sheet_metal_body_side_frame_doors.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardware_front.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardware_front_rear_handle_package.html"
+   ],
+   "door-rear": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_moldings_sheet_metal_rear_compartment_hardware_roof_hardware/sheet_metal_body_side_frame_doors.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardware_rear.html"
+   ],
+   "fender": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/front_end_sheet_metal_heater/fender_wheelhouse_front_end.html"
+   ],
+   "fuel-pump-module": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/fuel_system_exhaust_emission_system/fuel_supply_system.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/fuel_system_exhaust_emission_system/fuel_tank.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/fuel_system_exhaust_emission_system/fuel_tank_and_mounting.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/fuel_system_exhaust_emission_system/fuel_tank_filler_pipes_hoses.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/fuel_system_exhaust_emission_system/fuel_tank_vapor_canister.html"
+   ],
+   "gauge-cluster": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/instrument_panel_electrical.html"
+   ],
+   "grille": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/cooling_system_grille_oil_system/grille_radiator.html"
+   ],
+   "headlights": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html"
+   ],
+   "hood": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/front_end_sheet_metal_heater/hood.html"
+   ],
+   "ignition-coils": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/engine/engine_assembly_cylinder_head_related_parts.html"
+   ],
+   "liftgate": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_moldings_sheet_metal_rear_compartment_hardware_roof_hardware/sheet_metal_body_rear_end.html"
+   ],
+   "radiator": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/cooling_system_grille_oil_system/grille_radiator.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/cooling_system_grille_oil_system/hoses_pipes_radiator.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/cooling_system_grille_oil_system/radiator_assembly.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/cooling_system_grille_oil_system/radiator_mounting_related_parts.html"
+   ],
+   "side-mirrors": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/mirror_rear_view.html"
+   ],
+   "starter": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/starter_motor_and_mounting.html"
+   ],
+   "tail-lights": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html"
+   ],
+   "throttle-body": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/fuel_system_exhaust_emission_system/air_intake_system.html"
+   ],
+   "trunk-lid": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_moldings_sheet_metal_rear_compartment_hardware_roof_hardware/rear_compartment_hardware.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/body_moldings_sheet_metal_rear_compartment_hardware_roof_hardware/spoiler_rear_compartment_lid.html"
+   ],
+   "window-regulator": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardware_front.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardware_front_rear_handle_package.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardware_rear.html"
+   ],
+   "window-switch": [
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/interior_trim_front_seat_trim_seat_belts/trim_front_door_driver.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/interior_trim_front_seat_trim_seat_belts/trim_front_door_passenger.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardware_front.html",
+    "https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardware_front_rear_handle_package.html"
+   ]
+  },
+  "Ford F-150 2004": {
+   "ac-compressor": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/air_conditioning_condenser_compressor.html"
+   ],
+   "alternator": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/alternator_and_mountings.html"
+   ],
+   "bumper-front": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/radiator_grille_and_front_bumper.html"
+   ],
+   "bumper-rear": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/rear_bumper.html"
+   ],
+   "climate-control": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/heater_air_conditioning_controls.html"
+   ],
+   "door-front": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/front_doors_hinges_weatherstrips.html"
+   ],
+   "door-rear": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/rear_doors_hinges_weatherstrips.html"
+   ],
+   "fender": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/dash_panel_and_front_fenders.html"
+   ],
+   "fuel-pump-module": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/fuel_tank_filler_door_and_controls.html",
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/engine/fuel_pump_and_sender_unit.html",
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/engine/fuel_tank.html"
+   ],
+   "gauge-cluster": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/instrument_cluster.html"
+   ],
+   "grille": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/radiator_grille_and_front_bumper.html"
+   ],
+   "headlights": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/headlamps_and_front_flasher_lamps.html"
+   ],
+   "hood": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/hood_and_related_parts.html"
+   ],
+   "ignition-coils": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/engine/ignition_coil_and_wires_spark_plugs.html"
+   ],
+   "liftgate": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/pick_up_box_tailgate_and_tonneau.html"
+   ],
+   "power-steering-pump": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/chassis/power_steering_pump_mounting.html",
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/chassis/supply_return_hoses_power_steering.html"
+   ],
+   "radiator": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/engine/radiator_coolant_overflow_container.html"
+   ],
+   "side-mirrors": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/exterior_rear_view_mirror.html"
+   ],
+   "starter": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/engine/starter_motor.html"
+   ],
+   "tail-lights": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/rear_lamps.html"
+   ],
+   "tailgate": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/luggage_compt_tailgate_lock_controls.html",
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/pick_up_box_tailgate_and_tonneau.html"
+   ],
+   "throttle-body": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/engine/throttle_housing.html"
+   ],
+   "window-regulator": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/front_door_glass_window_controls.html",
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/rear_door_glass_and_window_controls.html"
+   ],
+   "window-switch": [
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/front_door_glass_window_controls.html",
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/body_and_paint/rear_door_glass_and_window_controls.html",
+    "https://www.fordpartsgiant.com/parts-list/2004-ford-f_150-f_150_new_style/electrical/switches.html"
+   ]
+  },
+  "Toyota Camry 2009": {
+   "ac-compressor": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/a-c-heating/a-c-compressor",
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/a-c-heating/a-c-condenser-compressor-lines"
+   ],
+   "alternator": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/alternator"
+   ],
+   "bumper-front": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/bumper-components-front"
+   ],
+   "bumper-rear": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/bumper-components-rear"
+   ],
+   "climate-control": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/a-c-heating/a-c-heater-control-units"
+   ],
+   "door-front": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/door-components"
+   ],
+   "door-rear": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/door-components"
+   ],
+   "fender": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/fender-components"
+   ],
+   "fuel-pump-module": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/air-fuel-delivery/fuel-supply",
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/air-fuel-delivery/fuel-system-components"
+   ],
+   "gauge-cluster": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/electrical/gauges",
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/electrical/instruments-gauges"
+   ],
+   "grille": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/grille-components"
+   ],
+   "headlights": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/headlights-lighting/headlamp-components-headlights",
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/headlights-lighting/headlamps"
+   ],
+   "hood": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/hood-components"
+   ],
+   "ignition-coils": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/electrical/ignition-system"
+   ],
+   "power-steering-pump": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/steering/p-s-pump-hoses"
+   ],
+   "radiator": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/belts-cooling/radiator-components"
+   ],
+   "side-mirrors": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/outside-mirrors"
+   ],
+   "starter": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/charging-starting/starter"
+   ],
+   "tail-lights": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/headlights-lighting/combination-lamps"
+   ],
+   "throttle-body": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/air-fuel-delivery/throttle-body"
+   ],
+   "trunk-lid": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/trunk-lid-components"
+   ],
+   "window-regulator": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/front-door-body",
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/body-hardware/rear-door-body"
+   ],
+   "window-switch": [
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/electrical/front-door",
+    "https://www.toyotapartsnow.com/parts-list/2009-toyota-camry/electrical/switches-electrical"
+   ]
+  }
+ },
+ "products": {
+  "https://www.fordpartsgiant.com/parts/ford-alternator-assy_f7pz-10346-karm.html": {
+   "description": "Alternator Assy",
+   "evidence_lines": [
+    "Part Number: F7PZ-10346-KARM",
+    "Part Description: Alternator Assy",
+    "Replaced By: F7PZ-10346-KARM2",
+    "Year Make Model | Engine | Important vehicle option details",
+    "1997-2002 Ford Expedition | 8 Cyl 4.6L, 8 Cyl 5.4L | 4AT 4R100, 4AT 4R70W, 4AT E4OD",
+    "1998-2004 Ford F-150 | 8 Cyl 4.6L, 8 Cyl 5.4L | 4AT, 4AT 4R100, 4AT 4R70W, 5MT",
+    "1998-1999 Lincoln Navigator | 8 Cyl 5.4L | 4AT 4R100, 4AT E4OD"
+   ],
+   "fitment": [
+    {
+     "engines": [
+      "8 Cyl 4.6L",
+      "8 Cyl 5.4L"
+     ],
+     "make": "Ford",
+     "model": "Expedition",
+     "options": [
+      "4AT 4R100",
+      "4AT 4R70W",
+      "4AT E4OD"
+     ],
+     "raw": "1997-2002 Ford Expedition | 8 Cyl 4.6L, 8 Cyl 5.4L | 4AT 4R100, 4AT 4R70W, 4AT E4OD",
+     "trims": [],
+     "years": [
+      1997,
+      2002
+     ]
+    },
+    {
+     "engines": [
+      "8 Cyl 4.6L",
+      "8 Cyl 5.4L"
+     ],
+     "make": "Ford",
+     "model": "F-150",
+     "options": [
+      "4AT",
+      "4AT 4R100",
+      "4AT 4R70W",
+      "5MT"
+     ],
+     "raw": "1998-2004 Ford F-150 | 8 Cyl 4.6L, 8 Cyl 5.4L | 4AT, 4AT 4R100, 4AT 4R70W, 5MT",
+     "trims": [],
+     "years": [
+      1998,
+      2004
+     ]
+    },
+    {
+     "engines": [
+      "8 Cyl 5.4L"
+     ],
+     "make": "Lincoln",
+     "model": "Navigator",
+     "options": [
+      "4AT 4R100",
+      "4AT E4OD"
+     ],
+     "raw": "1998-1999 Lincoln Navigator | 8 Cyl 5.4L | 4AT 4R100, 4AT E4OD",
+     "trims": [],
+     "years": [
+      1998,
+      1999
+     ]
+    }
+   ],
+   "flags": [],
+   "pn": "F7PZ-10346-KARM",
+   "position": null,
+   "replaced_by": "F7PZ-10346-KARM2",
+   "replaces": [],
+   "retrieved": "2026-11-05T00:07:53Z"
+  },
+  "https://www.gmpartsgiant.com/parts/gm-generator-asm-13597227.html": {
+   "description": "Alternator; Generator, Engine Electrical",
+   "evidence_lines": [
+    "Part Number: 13597227",
+    "Part Description: Alternator; Generator, Engine Electrical",
+    "Replaces: 13588290, 13581891, 95939944",
+    "Year Make Model | Engine | Important vehicle option details",
+    "2012-2016 Chevrolet Cruze | 4 Cyl 1.4L | LT / LTZ 4 DOOR NOTCHBACK"
+   ],
+   "fitment": [
+    {
+     "engines": [
+      "4 Cyl 1.4L"
+     ],
+     "make": "Chevrolet",
+     "model": "Cruze",
+     "options": [
+      "LT / LTZ 4 DOOR NOTCHBACK"
+     ],
+     "raw": "2012-2016 Chevrolet Cruze | 4 Cyl 1.4L | LT / LTZ 4 DOOR NOTCHBACK",
+     "trims": [
+      "LT / LTZ 4 DOOR NOTCHBACK"
+     ],
+     "years": [
+      2012,
+      2016
+     ]
+    }
+   ],
+   "flags": [],
+   "pn": "13597227",
+   "position": null,
+   "replaced_by": null,
+   "replaces": [
+    "13588290",
+    "13581891",
+    "95939944"
+   ],
+   "retrieved": "2026-11-05T00:07:25Z"
+  },
+  "https://www.gmpartsgiant.com/parts/gm-headlamp-95291963.html": {
+   "description": "Composite Headlamp; Headlamp, Capsule/Headlamp/Fog Lamp",
+   "evidence_lines": [
+    "Part Number: 95291963",
+    "Part Description: Composite Headlamp; Headlamp, Capsule/Headlamp/Fog Lamp",
+    "Parts list https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_front.html: Location: Driver Side",
+    "Replaces: 95073269, 95918946",
+    "Year Make Model | Engine | Important vehicle option details",
+    "2012-2016 Chevrolet Cruze | 4 Cyl 1.4L, 4 Cyl 1.8L, 4 Cyl 2.0L Diesel | LS 4 DOOR NOTCHBACK, LT / LTZ 4 DOOR NOTCHBACK"
+   ],
+   "fitment": [
+    {
+     "engines": [
+      "4 Cyl 1.4L",
+      "4 Cyl 1.8L",
+      "4 Cyl 2.0L Diesel"
+     ],
+     "make": "Chevrolet",
+     "model": "Cruze",
+     "options": [
+      "LS 4 DOOR NOTCHBACK",
+      "LT / LTZ 4 DOOR NOTCHBACK"
+     ],
+     "raw": "2012-2016 Chevrolet Cruze | 4 Cyl 1.4L, 4 Cyl 1.8L, 4 Cyl 2.0L Diesel | LS 4 DOOR NOTCHBACK, LT / LTZ 4 DOOR NOTCHBACK",
+     "trims": [
+      "LS 4 DOOR NOTCHBACK",
+      "LT / LTZ 4 DOOR NOTCHBACK"
+     ],
+     "years": [
+      2012,
+      2016
+     ]
+    }
+   ],
+   "flags": [],
+   "pn": "95291963",
+   "position": "Location: Driver Side",
+   "replaced_by": null,
+   "replaces": [
+    "95073269",
+    "95918946"
+   ],
+   "retrieved": "2026-11-05T00:09:35Z"
+  },
+  "https://www.gmpartsgiant.com/parts/gm-lamp-95389371.html": {
+   "description": "Backup Lamp Assembly; Lamp, Tail Lamp",
+   "evidence_lines": [
+    "Part Number: 95389371",
+    "Part Description: Backup Lamp Assembly; Lamp, Tail Lamp",
+    "Parts list https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html: Location: Driver Side",
+    "Replaces: 96830498, 95319210",
+    "Year Make Model | Engine | Important vehicle option details",
+    "2011-2016 Chevrolet Cruze | 4 Cyl 1.4L, 4 Cyl 1.8L, 4 Cyl 2.0L Diesel | LS 4 DOOR NOTCHBACK, LT / LTZ 4 DOOR NOTCHBACK, LT 4 DOOR NOTCHBACK"
+   ],
+   "fitment": [
+    {
+     "engines": [
+      "4 Cyl 1.4L",
+      "4 Cyl 1.8L",
+      "4 Cyl 2.0L Diesel"
+     ],
+     "make": "Chevrolet",
+     "model": "Cruze",
+     "options": [
+      "LS 4 DOOR NOTCHBACK",
+      "LT / LTZ 4 DOOR NOTCHBACK",
+      "LT 4 DOOR NOTCHBACK"
+     ],
+     "raw": "2011-2016 Chevrolet Cruze | 4 Cyl 1.4L, 4 Cyl 1.8L, 4 Cyl 2.0L Diesel | LS 4 DOOR NOTCHBACK, LT / LTZ 4 DOOR NOTCHBACK, LT 4 DOOR NOTCHBACK",
+     "trims": [
+      "LS 4 DOOR NOTCHBACK",
+      "LT / LTZ 4 DOOR NOTCHBACK",
+      "LT 4 DOOR NOTCHBACK"
+     ],
+     "years": [
+      2011,
+      2016
+     ]
+    }
+   ],
+   "flags": [],
+   "pn": "95389371",
+   "position": "Location: Driver Side",
+   "replaced_by": null,
+   "replaces": [
+    "96830498",
+    "95319210"
+   ],
+   "retrieved": "2026-11-05T00:09:43Z"
+  },
+  "https://www.gmpartsgiant.com/parts/gm-lamp-asm-rr-body-structure-stop-94540776.html": {
+   "description": "Tail Lamp Assembly; Lamp, Tail Lamp",
+   "evidence_lines": [
+    "Part Number: 94540776",
+    "Part Description: Tail Lamp Assembly; Lamp, Tail Lamp",
+    "Position: Rear",
+    "Parts list https://www.gmpartsgiant.com/parts-list/2014-chevrolet-cruze/starter_generator_ignition_electrical_lamps/lamps_rear.html: Location: Driver Side",
+    "Replaces: 96828250, 95384046, 95144214, 95184934",
+    "Year Make Model | Engine | Important vehicle option details",
+    "2011-2016 Chevrolet Cruze | 4 Cyl 1.4L, 4 Cyl 1.8L, 4 Cyl 2.0L Diesel | LS 4 DOOR NOTCHBACK, LT / LTZ 4 DOOR NOTCHBACK, LT 4 DOOR NOTCHBACK"
+   ],
+   "fitment": [
+    {
+     "engines": [
+      "4 Cyl 1.4L",
+      "4 Cyl 1.8L",
+      "4 Cyl 2.0L Diesel"
+     ],
+     "make": "Chevrolet",
+     "model": "Cruze",
+     "options": [
+      "LS 4 DOOR NOTCHBACK",
+      "LT / LTZ 4 DOOR NOTCHBACK",
+      "LT 4 DOOR NOTCHBACK"
+     ],
+     "raw": "2011-2016 Chevrolet Cruze | 4 Cyl 1.4L, 4 Cyl 1.8L, 4 Cyl 2.0L Diesel | LS 4 DOOR NOTCHBACK, LT / LTZ 4 DOOR NOTCHBACK, LT 4 DOOR NOTCHBACK",
+     "trims": [
+      "LS 4 DOOR NOTCHBACK",
+      "LT / LTZ 4 DOOR NOTCHBACK",
+      "LT 4 DOOR NOTCHBACK"
+     ],
+     "years": [
+      2011,
+      2016
+     ]
+    }
+   ],
+   "flags": [],
+   "pn": "94540776",
+   "position": "Location: Driver Side",
+   "replaced_by": null,
+   "replaces": [
+    "96828250",
+    "95384046",
+    "95144214",
+    "95184934"
+   ],
+   "retrieved": "2026-11-05T00:09:39Z"
+  },
+  "https://www.toyotapartsnow.com/oem/toyota~mirror-assembly-outer-r~87910-06925": {
+   "description": "Mirror Assembly, Rear Outer Passenger Side NO COLOR",
+   "evidence_lines": [
+    "Position",
+    "Rear Outer Passenger Side",
+    "Replaces",
+    "87910-06190-B2, 87910-06190-A0, 87910-06190-C0, 87910-06190-D0, 87910-06190-G1, 87910-06190-J1, 87910-06190-E1, 87910-06190-B1, 87910-06190-B0, 87910-06190-J2, 87910-06190-E0, 87910-06190-H0, 87910-06190-J0, 87910-06190-G0",
+    "Vehicle Fitment",
+    "Year Make Model",
+    "Trim",
+    "Engine",
+    "2007-2011 Toyota Camry",
+    "Base, CE, Hybrid, LE, SE, XLE",
+    "4 Cyl 2.4 L FULL HYBRID EV-GAS (FHEV), 4 Cyl 2.4 L GAS, 4 Cyl 2.5 L GAS, 6 Cyl 3.5 L GAS"
+   ],
+   "fitment": [
+    {
+     "engines": [
+      "4 Cyl 2.4 L FULL HYBRID EV-GAS (FHEV)",
+      "4 Cyl 2.4 L GAS",
+      "4 Cyl 2.5 L GAS",
+      "6 Cyl 3.5 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Camry",
+     "raw": "2007-2011 Toyota Camry | Base, CE, Hybrid, LE, SE, XLE | 4 Cyl 2.4 L FULL HYBRID EV-GAS (FHEV), 4 Cyl 2.4 L GAS, 4 Cyl 2.5 L GAS, 6 Cyl 3.5 L GAS",
+     "trims": [
+      "Base",
+      "CE",
+      "Hybrid",
+      "LE",
+      "SE",
+      "XLE"
+     ],
+     "years": [
+      2007,
+      2011
+     ]
+    }
+   ],
+   "fitment_rows_rendered": 1,
+   "fitment_rows_total": 1,
+   "other_names": "Mirror Assembly, Outer Rear View; Door Mirror, Front Right; Side View Mirror-RH; Side View Mirror; Door Mirror; Mirror",
+   "pn": "87910-06925",
+   "position": "Rear Outer Passenger Side",
+   "replaced_by": [],
+   "replaces": [
+    "87910-06190-B2",
+    "87910-06190-A0",
+    "87910-06190-C0",
+    "87910-06190-D0",
+    "87910-06190-G1",
+    "87910-06190-J1",
+    "87910-06190-E1",
+    "87910-06190-B1",
+    "87910-06190-B0",
+    "87910-06190-J2",
+    "87910-06190-E0",
+    "87910-06190-H0",
+    "87910-06190-J0",
+    "87910-06190-G0"
+   ],
+   "retrieved": "2026-11-05T02:39:32Z"
+  },
+  "https://www.toyotapartsnow.com/oem/toyota~motor-assy-power-window-regulator-front-lh~85720-ae010": {
+   "description": "Window Motor",
+   "evidence_lines": [
+    "Replaces",
+    "85720-35140",
+    "Vehicle Fitment",
+    "Year Make Model",
+    "Trim",
+    "Engine",
+    "2016 Scion iM",
+    "Base",
+    "4 Cyl 1.8 L GAS",
+    "2011-2013, 2007-2008 Scion tC",
+    "Base, Spec",
+    "4 Cyl 2.4 L GAS, 4 Cyl 2.5 L GAS",
+    "2008-2015 Scion xB",
+    "Base",
+    "4 Cyl 2.4 L GAS",
+    "2008-2014 Scion xD",
+    "Base",
+    "4 Cyl 1.8 L GAS",
+    "2003-2009 Toyota 4Runner",
+    "Limited, Sport, SR5",
+    "6 Cyl 4.0 L GAS, 8 Cyl 4.7 L GAS",
+    "2005-2009 Toyota Avalon",
+    "Limited, Touring, XL, XLS",
+    "6 Cyl 3.5 L GAS",
+    "2007-2017 Toyota Camry",
+    "Base, CE, Hybrid, Hybrid LE, Hybrid SE, Hybrid XLE, L, LE, SE, SE Sport, Special Edition, XLE, XSE",
+    "4 Cyl 2.4 L FULL HYBRID EV-GAS (FHEV), 4 Cyl 2.4 L GAS, 4 Cyl 2.5 L FULL HYBRID EV-GAS (FHEV), 4 Cyl 2.5 L GAS, 6 Cyl 3.5 L GAS",
+    "2009-2019 Toyota Corolla",
+    "50th Anniversary Special Edition, Base, L, LE, LE Eco, Le Eco Plus, S, SE, Special Edition, XLE, XRS, XSE",
+    "4 Cyl 1.8 L GAS, 4 Cyl 2.4 L GAS",
+    "2017-2018 Toyota Corolla iM",
+    "Base",
+    "4 Cyl 1.8 L GAS",
+    "2007-2014 Toyota FJ Cruiser",
+    "Base, Trail Teams Special Edition, TRD Special Edition",
+    "6 Cyl 4.0 L GAS",
+    "View More",
+    "2008-2019 Toyota Highlander",
+    "Base, Hybrid, Hybrid LE, Hybrid Limited, Hybrid Limited Platinum, Hybrid XLE, LE, LE Plus, Limited, Limited Platinum, Plus, SE, Sport, XLE",
+    "4 Cyl 2.7 L GAS, 6 Cyl 3.3 L FULL HYBRID EV-GAS (FHEV), 6 Cyl 3.5 L FULL HYBRID EV-GAS (FHEV), 6 Cyl 3.5 L GAS",
+    "2009-2013 Toyota Matrix",
+    "Base, S, XRS",
+    "4 Cyl 1.8 L GAS, 4 Cyl 2.4 L GAS",
+    "2004-2009 Toyota Prius",
+    "Base, Touring",
+    "4 Cyl 1.5 L FULL HYBRID EV-GAS (FHEV)",
+    "2006-2018 Toyota RAV4",
+    "Adventure, Base, Hybrid Limited, Hybrid SE, Hybrid XLE, LE, Limited, Platinum, SE, Sport, XLE",
+    "4 Cyl 2.4 L GAS, 4 Cyl 2.5 L FULL HYBRID EV-GAS (FHEV), 4 Cyl 2.5 L GAS, 6 Cyl 3.5 L GAS",
+    "2008-2022 Toyota Sequoia",
+    "Limited, Nightshade, Platinum, SR5, TRD Pro, TRD Sport",
+    "8 Cyl 4.6 L GAS, 8 Cyl 4.7 L GAS, 8 Cyl 5.7 L FLEX, 8 Cyl 5.7 L GAS",
+    "2004-2010 Toyota Sienna",
+    "CE, LE",
+    "6 Cyl 3.3 L GAS, 6 Cyl 3.5 L GAS",
+    "2005-2015 Toyota Tacoma",
+    "Base, Pre Runner, TRD Pro, X-Runner",
+    "4 Cyl 2.7 L GAS, 6 Cyl 4.0 L GAS",
+    "2004-2021 Toyota Tundra",
+    "1794 Edition, Base, Limited, Nightshade, Platinum, SR, SR5, Trail, TRD Pro",
+    "6 Cyl 3.4 L GAS, 6 Cyl 4.0 L GAS, 8 Cyl 4.6 L GAS, 8 Cyl 4.7 L GAS, 8 Cyl 5.7 L FLEX, 8 Cyl 5.7 L GAS",
+    "2007-2014 Toyota Yaris",
+    "Base, L, LE, S, SE",
+    "4 Cyl 1.5 L GAS"
+   ],
+   "fitment": [
+    {
+     "engines": [
+      "4 Cyl 1.8 L GAS"
+     ],
+     "make": "Scion",
+     "model": "iM",
+     "raw": "2016 Scion iM | Base | 4 Cyl 1.8 L GAS",
+     "trims": [
+      "Base"
+     ],
+     "years": [
+      2016,
+      2016
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.4 L GAS",
+      "4 Cyl 2.5 L GAS"
+     ],
+     "make": "Scion",
+     "model": "tC",
+     "raw": "2011-2013, 2007-2008 Scion tC | Base, Spec | 4 Cyl 2.4 L GAS, 4 Cyl 2.5 L GAS",
+     "trims": [
+      "Base",
+      "Spec"
+     ],
+     "year_spans": [
+      [
+       2011,
+       2013
+      ],
+      [
+       2007,
+       2008
+      ]
+     ],
+     "years": [
+      2011,
+      2013
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.4 L GAS",
+      "4 Cyl 2.5 L GAS"
+     ],
+     "make": "Scion",
+     "model": "tC",
+     "raw": "2011-2013, 2007-2008 Scion tC | Base, Spec | 4 Cyl 2.4 L GAS, 4 Cyl 2.5 L GAS",
+     "trims": [
+      "Base",
+      "Spec"
+     ],
+     "year_spans": [
+      [
+       2011,
+       2013
+      ],
+      [
+       2007,
+       2008
+      ]
+     ],
+     "years": [
+      2007,
+      2008
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.4 L GAS"
+     ],
+     "make": "Scion",
+     "model": "xB",
+     "raw": "2008-2015 Scion xB | Base | 4 Cyl 2.4 L GAS",
+     "trims": [
+      "Base"
+     ],
+     "years": [
+      2008,
+      2015
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 1.8 L GAS"
+     ],
+     "make": "Scion",
+     "model": "xD",
+     "raw": "2008-2014 Scion xD | Base | 4 Cyl 1.8 L GAS",
+     "trims": [
+      "Base"
+     ],
+     "years": [
+      2008,
+      2014
+     ]
+    },
+    {
+     "engines": [
+      "6 Cyl 4.0 L GAS",
+      "8 Cyl 4.7 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "4Runner",
+     "raw": "2003-2009 Toyota 4Runner | Limited, Sport, SR5 | 6 Cyl 4.0 L GAS, 8 Cyl 4.7 L GAS",
+     "trims": [
+      "Limited",
+      "Sport",
+      "SR5"
+     ],
+     "years": [
+      2003,
+      2009
+     ]
+    },
+    {
+     "engines": [
+      "6 Cyl 3.5 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Avalon",
+     "raw": "2005-2009 Toyota Avalon | Limited, Touring, XL, XLS | 6 Cyl 3.5 L GAS",
+     "trims": [
+      "Limited",
+      "Touring",
+      "XL",
+      "XLS"
+     ],
+     "years": [
+      2005,
+      2009
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.4 L FULL HYBRID EV-GAS (FHEV)",
+      "4 Cyl 2.4 L GAS",
+      "4 Cyl 2.5 L FULL HYBRID EV-GAS (FHEV)",
+      "4 Cyl 2.5 L GAS",
+      "6 Cyl 3.5 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Camry",
+     "raw": "2007-2017 Toyota Camry | Base, CE, Hybrid, Hybrid LE, Hybrid SE, Hybrid XLE, L, LE, SE, SE Sport, Special Edition, XLE, XSE | 4 Cyl 2.4 L FULL HYBRID EV-GAS (FHEV), 4 Cyl 2.4 L GAS, 4 Cyl 2.5 L FULL HYBRID EV-GAS (FHEV), 4 Cyl 2.5 L GAS, 6 Cyl 3.5 L GAS",
+     "trims": [
+      "Base",
+      "CE",
+      "Hybrid",
+      "Hybrid LE",
+      "Hybrid SE",
+      "Hybrid XLE",
+      "L",
+      "LE",
+      "SE",
+      "SE Sport",
+      "Special Edition",
+      "XLE",
+      "XSE"
+     ],
+     "years": [
+      2007,
+      2017
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 1.8 L GAS",
+      "4 Cyl 2.4 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Corolla",
+     "raw": "2009-2019 Toyota Corolla | 50th Anniversary Special Edition, Base, L, LE, LE Eco, Le Eco Plus, S, SE, Special Edition, XLE, XRS, XSE | 4 Cyl 1.8 L GAS, 4 Cyl 2.4 L GAS",
+     "trims": [
+      "50th Anniversary Special Edition",
+      "Base",
+      "L",
+      "LE",
+      "LE Eco",
+      "Le Eco Plus",
+      "S",
+      "SE",
+      "Special Edition",
+      "XLE",
+      "XRS",
+      "XSE"
+     ],
+     "years": [
+      2009,
+      2019
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 1.8 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Corolla iM",
+     "raw": "2017-2018 Toyota Corolla iM | Base | 4 Cyl 1.8 L GAS",
+     "trims": [
+      "Base"
+     ],
+     "years": [
+      2017,
+      2018
+     ]
+    },
+    {
+     "engines": [
+      "6 Cyl 4.0 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "FJ Cruiser",
+     "raw": "2007-2014 Toyota FJ Cruiser | Base, Trail Teams Special Edition, TRD Special Edition | 6 Cyl 4.0 L GAS",
+     "trims": [
+      "Base",
+      "Trail Teams Special Edition",
+      "TRD Special Edition"
+     ],
+     "years": [
+      2007,
+      2014
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.7 L GAS",
+      "6 Cyl 3.3 L FULL HYBRID EV-GAS (FHEV)",
+      "6 Cyl 3.5 L FULL HYBRID EV-GAS (FHEV)",
+      "6 Cyl 3.5 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Highlander",
+     "raw": "2008-2019 Toyota Highlander | Base, Hybrid, Hybrid LE, Hybrid Limited, Hybrid Limited Platinum, Hybrid XLE, LE, LE Plus, Limited, Limited Platinum, Plus, SE, Sport, XLE | 4 Cyl 2.7 L GAS, 6 Cyl 3.3 L FULL HYBRID EV-GAS (FHEV), 6 Cyl 3.5 L FULL HYBRID EV-GAS (FHEV), 6 Cyl 3.5 L GAS",
+     "trims": [
+      "Base",
+      "Hybrid",
+      "Hybrid LE",
+      "Hybrid Limited",
+      "Hybrid Limited Platinum",
+      "Hybrid XLE",
+      "LE",
+      "LE Plus",
+      "Limited",
+      "Limited Platinum",
+      "Plus",
+      "SE",
+      "Sport",
+      "XLE"
+     ],
+     "years": [
+      2008,
+      2019
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 1.8 L GAS",
+      "4 Cyl 2.4 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Matrix",
+     "raw": "2009-2013 Toyota Matrix | Base, S, XRS | 4 Cyl 1.8 L GAS, 4 Cyl 2.4 L GAS",
+     "trims": [
+      "Base",
+      "S",
+      "XRS"
+     ],
+     "years": [
+      2009,
+      2013
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 1.5 L FULL HYBRID EV-GAS (FHEV)"
+     ],
+     "make": "Toyota",
+     "model": "Prius",
+     "raw": "2004-2009 Toyota Prius | Base, Touring | 4 Cyl 1.5 L FULL HYBRID EV-GAS (FHEV)",
+     "trims": [
+      "Base",
+      "Touring"
+     ],
+     "years": [
+      2004,
+      2009
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.4 L GAS",
+      "4 Cyl 2.5 L FULL HYBRID EV-GAS (FHEV)",
+      "4 Cyl 2.5 L GAS",
+      "6 Cyl 3.5 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "RAV4",
+     "raw": "2006-2018 Toyota RAV4 | Adventure, Base, Hybrid Limited, Hybrid SE, Hybrid XLE, LE, Limited, Platinum, SE, Sport, XLE | 4 Cyl 2.4 L GAS, 4 Cyl 2.5 L FULL HYBRID EV-GAS (FHEV), 4 Cyl 2.5 L GAS, 6 Cyl 3.5 L GAS",
+     "trims": [
+      "Adventure",
+      "Base",
+      "Hybrid Limited",
+      "Hybrid SE",
+      "Hybrid XLE",
+      "LE",
+      "Limited",
+      "Platinum",
+      "SE",
+      "Sport",
+      "XLE"
+     ],
+     "years": [
+      2006,
+      2018
+     ]
+    },
+    {
+     "engines": [
+      "8 Cyl 4.6 L GAS",
+      "8 Cyl 4.7 L GAS",
+      "8 Cyl 5.7 L FLEX",
+      "8 Cyl 5.7 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Sequoia",
+     "raw": "2008-2022 Toyota Sequoia | Limited, Nightshade, Platinum, SR5, TRD Pro, TRD Sport | 8 Cyl 4.6 L GAS, 8 Cyl 4.7 L GAS, 8 Cyl 5.7 L FLEX, 8 Cyl 5.7 L GAS",
+     "trims": [
+      "Limited",
+      "Nightshade",
+      "Platinum",
+      "SR5",
+      "TRD Pro",
+      "TRD Sport"
+     ],
+     "years": [
+      2008,
+      2022
+     ]
+    },
+    {
+     "engines": [
+      "6 Cyl 3.3 L GAS",
+      "6 Cyl 3.5 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Sienna",
+     "raw": "2004-2010 Toyota Sienna | CE, LE | 6 Cyl 3.3 L GAS, 6 Cyl 3.5 L GAS",
+     "trims": [
+      "CE",
+      "LE"
+     ],
+     "years": [
+      2004,
+      2010
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.7 L GAS",
+      "6 Cyl 4.0 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Tacoma",
+     "raw": "2005-2015 Toyota Tacoma | Base, Pre Runner, TRD Pro, X-Runner | 4 Cyl 2.7 L GAS, 6 Cyl 4.0 L GAS",
+     "trims": [
+      "Base",
+      "Pre Runner",
+      "TRD Pro",
+      "X-Runner"
+     ],
+     "years": [
+      2005,
+      2015
+     ]
+    },
+    {
+     "engines": [
+      "6 Cyl 3.4 L GAS",
+      "6 Cyl 4.0 L GAS",
+      "8 Cyl 4.6 L GAS",
+      "8 Cyl 4.7 L GAS",
+      "8 Cyl 5.7 L FLEX",
+      "8 Cyl 5.7 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Tundra",
+     "raw": "2004-2021 Toyota Tundra | 1794 Edition, Base, Limited, Nightshade, Platinum, SR, SR5, Trail, TRD Pro | 6 Cyl 3.4 L GAS, 6 Cyl 4.0 L GAS, 8 Cyl 4.6 L GAS, 8 Cyl 4.7 L GAS, 8 Cyl 5.7 L FLEX, 8 Cyl 5.7 L GAS",
+     "trims": [
+      "1794 Edition",
+      "Base",
+      "Limited",
+      "Nightshade",
+      "Platinum",
+      "SR",
+      "SR5",
+      "Trail",
+      "TRD Pro"
+     ],
+     "years": [
+      2004,
+      2021
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 1.5 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Yaris",
+     "raw": "2007-2014 Toyota Yaris | Base, L, LE, S, SE | 4 Cyl 1.5 L GAS",
+     "trims": [
+      "Base",
+      "L",
+      "LE",
+      "S",
+      "SE"
+     ],
+     "years": [
+      2007,
+      2014
+     ]
+    }
+   ],
+   "fitment_rows_rendered": 10,
+   "fitment_rows_total": 19,
+   "other_names": "Motor Assembly, Power Window Regulator; Motor, Center Left, Front Left, Rear Left, Rear Right; Door Lock Actuator",
+   "pn": "85720-AE010",
+   "position": null,
+   "replaced_by": [],
+   "replaces": [
+    "85720-35140"
+   ],
+   "retrieved": "2026-11-05T02:39:55Z"
+  },
+  "https://www.toyotapartsnow.com/oem/toyota~passenger-side-mirror-assembly-outside-rear-view~87910-33660-c0": {
+   "description": "Mirror Assembly, Outer Rear View, Passenger Side, Black",
+   "evidence_lines": [
+    "Position",
+    "Passenger Side",
+    "Replaced By",
+    "87910-33670-C0",
+    "Vehicle Fitment",
+    "Year Make Model",
+    "Engine",
+    "Important vehicle option details",
+    "2007-2011 Toyota Camry",
+    "2.4L L4, 2.5L L4, 3.5L V6",
+    "2ARFE, 2AZFE, 2AZFXE, 2GRFE; ACV40, AHV40, ASV40, GSV40"
+   ],
+   "fitment": [
+    {
+     "engines": [
+      "2.4L L4",
+      "2.5L L4",
+      "3.5L V6"
+     ],
+     "make": "Toyota",
+     "model": "Camry",
+     "other_columns": {
+      "Important vehicle option details": "2ARFE, 2AZFE, 2AZFXE, 2GRFE; ACV40, AHV40, ASV40, GSV40"
+     },
+     "raw": "2007-2011 Toyota Camry | 2.4L L4, 2.5L L4, 3.5L V6 | 2ARFE, 2AZFE, 2AZFXE, 2GRFE; ACV40, AHV40, ASV40, GSV40",
+     "trims": [],
+     "years": [
+      2007,
+      2011
+     ]
+    }
+   ],
+   "fitment_rows_rendered": 1,
+   "fitment_rows_total": 1,
+   "other_names": "Mirror Assembly, Outer Rear View",
+   "pn": "87910-33660-C0",
+   "position": "Passenger Side",
+   "replaced_by": [
+    "87910-33670-C0"
+   ],
+   "replaces": [],
+   "retrieved": "2026-11-05T02:40:06Z"
+  },
+  "https://www.toyotapartsnow.com/oem/toyota~reman-alternator~27060-0h111-84": {
+   "description": "Alternator",
+   "evidence_lines": [
+    "Replaces",
+    "27060-0H110, 27060-0H111",
+    "Vehicle Fitment",
+    "Year Make Model",
+    "Trim",
+    "Engine",
+    "2007-2009 Toyota Camry",
+    "Base, CE, LE, SE, XLE",
+    "4 Cyl 2.4 L GAS",
+    "2009-2010 Toyota Corolla",
+    "XRS",
+    "4 Cyl 2.4 L GAS",
+    "2009-2013 Toyota Matrix",
+    "S, XRS",
+    "4 Cyl 2.4 L GAS",
+    "2007-2008 Toyota Solara",
+    "SE, SLE, Sport",
+    "4 Cyl 2.4 L GAS"
+   ],
+   "fitment": [
+    {
+     "engines": [
+      "4 Cyl 2.4 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Camry",
+     "raw": "2007-2009 Toyota Camry | Base, CE, LE, SE, XLE | 4 Cyl 2.4 L GAS",
+     "trims": [
+      "Base",
+      "CE",
+      "LE",
+      "SE",
+      "XLE"
+     ],
+     "years": [
+      2007,
+      2009
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.4 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Corolla",
+     "raw": "2009-2010 Toyota Corolla | XRS | 4 Cyl 2.4 L GAS",
+     "trims": [
+      "XRS"
+     ],
+     "years": [
+      2009,
+      2010
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.4 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Matrix",
+     "raw": "2009-2013 Toyota Matrix | S, XRS | 4 Cyl 2.4 L GAS",
+     "trims": [
+      "S",
+      "XRS"
+     ],
+     "years": [
+      2009,
+      2013
+     ]
+    },
+    {
+     "engines": [
+      "4 Cyl 2.4 L GAS"
+     ],
+     "make": "Toyota",
+     "model": "Solara",
+     "raw": "2007-2008 Toyota Solara | SE, SLE, Sport | 4 Cyl 2.4 L GAS",
+     "trims": [
+      "SE",
+      "SLE",
+      "Sport"
+     ],
+     "years": [
+      2007,
+      2008
+     ]
+    }
+   ],
+   "fitment_rows_rendered": 4,
+   "fitment_rows_total": 4,
+   "other_names": "Reman Alternator",
+   "pn": "27060-0H111-84",
+   "position": null,
+   "replaced_by": [],
+   "replaces": [
+    "27060-0H110",
+    "27060-0H111"
+   ],
+   "retrieved": "2026-11-05T02:39:44Z"
+  }
+ }
+}

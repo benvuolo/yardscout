@@ -94,9 +94,29 @@ By", "Replaces", "Notes", then the fitment header and every fitment row (raw),
 in page order, capped at 120 lines (flags notes a truncation).
 
 parts_on_page adds list-level evidence for the seed vehicle: list_group
-(pncDesc), list_remark (the remark printed after the name) and list_info
+(pncDesc), list_remark (the remark printed after the name), list_info
 (e.g. "Fitting Vehicle Options: Z(LY7)", "Replaced By: 12745819",
-"Location: Driver Side").
+"Location: Driver Side") and reman (the row's text or number says
+remanufactured, by REMAN_RE / reman_re / reman_fn).
+
+Reman rows (R5b, CURATION_SPEC.md §3.2) are dropped only when the page also
+lists a non-reman number for the category whose row has no "replace" value
+(a current new number). A superseded number does not count, so a reman that
+is the only current listing stays, marked reman: true.
+
+Manifests (CURATION_SPEC.md §3.2 R1/R2), re-read from the cache with cached(),
+never a new request; bind_manifests(cfg) gives a site module the three
+functions:
+  * list_manifest(list_url, cat): every row of partList ("diagram"), and of
+    gpgOnlyPartList ("other") and expandPartList ("standard", the hardware
+    block) when the page has them, with the verdict for `cat` (matched /
+    excluded_by); only diagram rows are ever candidates ("section_not_read");
+  * year_manifest(make, model, year): one line per catalog page read (year
+    catalog, and each per-trim / per-engine option catalog read), each with
+    every "<section>/<sub>" parts-list slug, plus every variant the model
+    page offers for the year and every option catalog the page lists, read
+    or not (MAX_CATALOGS caps what is read);
+  * chain_links(product_url, pns): product-page links to those numbers (R4).
 """
 from __future__ import annotations
 
@@ -106,6 +126,7 @@ import re
 import urllib.parse
 from dataclasses import dataclass, field
 
+import fetch
 from fetch import get
 
 MAX_CATALOGS = 2       # catalogs (variants or trims) per model-year
@@ -213,6 +234,37 @@ def _page(url: str) -> dict:
     return d
 
 
+def cached(url: str) -> dict | None:
+    """The cached response for url, or None. Never a network request: the
+    manifests re-read pages that navigation and parts_on_page just fetched."""
+    if not fetch.cache_path(url).exists():
+        return None
+    return get(url)
+
+
+def _title(html: str) -> str | None:
+    m = re.search(r"<title[^>]*>(.*?)</title>", html or "", re.S | re.I)
+    return re.sub(r"\s+", " ", htmllib.unescape(m.group(1))).strip() if m else None
+
+
+def _stem(url: str) -> str:
+    """Catalog stem of a year-catalog URL (/<stem>-parts.html) or a parts-list
+    URL (/parts-list/<stem>/<section>/<sub>.html)."""
+    p = urllib.parse.urlsplit(url).path
+    if p.startswith("/parts-list/"):
+        return p.split("/")[2]
+    return p.lstrip("/")[: -len("-parts.html")] if p.endswith("-parts.html") else p.lstrip("/")
+
+
+def _variant_trim(stem: str) -> tuple[str, str | None]:
+    """("f_150_new_style", None) for "2004-ford-f_150-f_150_new_style";
+    ("", "8_cyl_5_4l-4at_4r100") for "2001-ford-f_150--8_cyl_5_4l-4at_4r100".
+    Make and model slugs never hold "-" (slug() turns it into "_")."""
+    base, sep, trim = stem.partition("--")
+    parts = base.split("-", 3)
+    return (parts[3] if len(parts) == 4 else ""), (trim if sep else None)
+
+
 # ---------------------------------------------------------------- navigation
 
 def _mapping(cfg: Config, make: str, model: str, year: int) -> M:
@@ -227,29 +279,26 @@ def _mapping(cfg: Config, make: str, model: str, year: int) -> M:
     raise ValueError(f"no site mapping for {make} {model} {year}")
 
 
-def year_catalogs(cfg: Config, make: str, model: str, year: int) -> list[tuple[str, str]]:
-    """[(variant, absolute year-catalog url)] for this feed vehicle-year after
-    the variant rules, at most MAX_CATALOGS. Order: variants matching `pref`,
-    then the plain catalog, then the rest in page order."""
+def _model_slugs(cfg: Config, make: str, model: str, year: int) -> tuple[M, str, list[str]]:
     m = _mapping(cfg, make, model, year)
     mk = m.make or slug(make)
-    slugs = m.slugs if isinstance(m.slugs, list) else [m.slugs or slug(model)]
-    cats: list[tuple[str, str]] = []
-    pages_ok = 0
-    for md in slugs:
-        d = get(absolute(cfg.site, f"/{mk}-{md}-parts.html"))
-        if d.get("status") != 200:
-            continue
-        pages_ok += 1
-        pat = re.compile(r'href="(/%d-%s-%s(?:-([a-z0-9_]+))?-parts\.html)"' % (year, re.escape(mk), re.escape(md)))
-        for mm in pat.finditer(d["html"]):
-            c = (mm.group(2) or "", absolute(cfg.site, mm.group(1)))
-            if c not in cats:
-                cats.append(c)
-    if not pages_ok:
-        raise ValueError(f"no model page for {make} {model} ({mk}-{slugs})")
-    if not cats:
-        raise ValueError(f"no {year} catalog for {make} {model} ({mk}-{slugs})")
+    return m, mk, (m.slugs if isinstance(m.slugs, list) else [m.slugs or slug(model)])
+
+
+def _model_page_catalogs(cfg: Config, html: str, year: int, mk: str, md: str) -> list[tuple[str, str]]:
+    """[(variant, absolute url)] of the year's catalogs linked from a model page, page order."""
+    pat = re.compile(r'href="(/%d-%s-%s(?:-([a-z0-9_]+))?-parts\.html)"' % (year, re.escape(mk), re.escape(md)))
+    out: list[tuple[str, str]] = []
+    for mm in pat.finditer(html):
+        c = (mm.group(2) or "", absolute(cfg.site, mm.group(1)))
+        if c not in out:
+            out.append(c)
+    return out
+
+
+def _select_variants(m: M, model: str, cats: list[tuple[str, str]]) -> list[tuple[str, str]]:
+    """The variant rules, ranked (no MAX_CATALOGS cut): variants matching
+    `pref`, then the plain catalog, then the rest in page order."""
     if m.inc:
         cats = [c for c in cats if re.search(m.inc, c[0], re.I)]
     else:
@@ -257,14 +306,59 @@ def year_catalogs(cfg: Config, make: str, model: str, year: int) -> list[tuple[s
             cats = [c for c in cats if not re.search(DEFAULT_VARIANT_EXCLUDE, c[0], re.I)]
     if m.exc:
         cats = [c for c in cats if not re.search(m.exc, c[0], re.I)]
-    if not cats:
-        raise ValueError(f"every {year} catalog excluded for {make} {model}")
+
     def rank(c):
         if m.pref and re.search(m.pref, c[0], re.I):
             return 0
         return 1 if c[0] == "" else 2
-    cats = sorted(cats, key=rank)  # stable: page order within a rank
+    return sorted(cats, key=rank)  # stable: page order within a rank
+
+
+def year_catalogs(cfg: Config, make: str, model: str, year: int) -> list[tuple[str, str]]:
+    """[(variant, absolute year-catalog url)] for this feed vehicle-year after
+    the variant rules, at most MAX_CATALOGS. Order: variants matching `pref`,
+    then the plain catalog, then the rest in page order."""
+    m, mk, slugs = _model_slugs(cfg, make, model, year)
+    cats: list[tuple[str, str]] = []
+    pages_ok = 0
+    for md in slugs:
+        d = get(absolute(cfg.site, f"/{mk}-{md}-parts.html"))
+        if d.get("status") != 200:
+            continue
+        pages_ok += 1
+        for c in _model_page_catalogs(cfg, d["html"], year, mk, md):
+            if c not in cats:
+                cats.append(c)
+    if not pages_ok:
+        raise ValueError(f"no model page for {make} {model} ({mk}-{slugs})")
+    if not cats:
+        raise ValueError(f"no {year} catalog for {make} {model} ({mk}-{slugs})")
+    cats = _select_variants(m, model, cats)
+    if not cats:
+        raise ValueError(f"every {year} catalog excluded for {make} {model}")
     return cats[:MAX_CATALOGS]
+
+
+def _catalog_links(catalog_url: str, html: str) -> tuple[str, list[str], list[str]]:
+    """(base, sorted parts-list paths, option-catalog paths in page order) on a catalog page."""
+    base = urllib.parse.urlsplit(catalog_url).path[: -len("-parts.html")].lstrip("/")
+    L = sorted(set(re.findall(r'href="(/parts-list/%s/[a-z0-9_]+/[a-z0-9_]+\.html)"' % re.escape(base), html)))
+    trims: list[str] = []
+    for u in re.findall(r'href="(/%s--[a-z0-9_-]+-parts\.html)"' % re.escape(base), html):
+        if u not in trims:
+            trims.append(u)
+    return base, L, trims
+
+
+def _pick_trims(cfg: Config, catalog_url: str, base: str, trims: list[str], ctx: tuple | None) -> list[str]:
+    pick = [trims[0]] + ([trims[-1]] if len(trims) > 1 else [])
+    if cfg.trim_pick and ctx:
+        pre = "/%s--" % base
+        slugs = cfg.trim_pick(*ctx, [u[len(pre):-len("-parts.html")] for u in trims])
+        pick = [f"{pre}{t}-parts.html" for t in slugs]
+        if not pick:
+            raise ValueError(f"trim_pick chose no trim on {catalog_url}")
+    return pick
 
 
 def parts_list_links(cfg: Config, catalog_url: str, ctx: tuple | None = None) -> list[str]:
@@ -275,27 +369,89 @@ def parts_list_links(cfg: Config, catalog_url: str, ctx: tuple | None = None) ->
     last option catalogs in page order are used (on trim lists: base and
     best-equipped; on Ford engine lists: smallest and largest engine)."""
     html = _page(catalog_url)["html"]
-    base = urllib.parse.urlsplit(catalog_url).path[: -len("-parts.html")].lstrip("/")
-    L = sorted(set(re.findall(r'href="(/parts-list/%s/[a-z0-9_]+/[a-z0-9_]+\.html)"' % re.escape(base), html)))
+    base, L, trims = _catalog_links(catalog_url, html)
     if L:
         return [absolute(cfg.site, u) for u in L]
-    trims = []
-    for u in re.findall(r'href="(/%s--[a-z0-9_-]+-parts\.html)"' % re.escape(base), html):
-        if u not in trims:
-            trims.append(u)
     if not trims:
         raise ValueError(f"no parts-list or trim links on {catalog_url}")
-    pick = [trims[0]] + ([trims[-1]] if len(trims) > 1 else [])
-    if cfg.trim_pick and ctx:
-        pre = "/%s--" % base
-        slugs = cfg.trim_pick(*ctx, [u[len(pre):-len("-parts.html")] for u in trims])
-        pick = [f"{pre}{t}-parts.html" for t in slugs]
-        if not pick:
-            raise ValueError(f"trim_pick chose no trim on {catalog_url}")
+    pick = _pick_trims(cfg, catalog_url, base, trims, ctx)
     out: list[str] = []
     for t in pick:
         out += parts_list_links(cfg, absolute(cfg.site, t), ctx)
     return out
+
+
+def year_manifest(cfg: Config, make: str, model: str, year: int) -> list[dict]:
+    """R2, re-read from the cache: one line per catalog page navigation read
+    (the variant catalogs chosen, and each option catalog read under them).
+    Every line carries `variants` (all the year's catalogs the model page(s)
+    offer, before the variant rules and MAX_CATALOGS) and `variants_read`; a
+    split page carries `trims` (every option catalog it lists) and
+    `trims_read`. When navigation found no catalog, one line with `error`."""
+    common: dict = {"variants": [], "variants_read": [], "offered": [], "model_pages": []}
+    blank = {"variant": None, "trim": None, "year_url": None, "catalog": None, "status": None, "final_url": None,
+             "redirected": None, "title": None, "subs": [], "retrieved": None}
+    try:
+        m, mk, slugs = _model_slugs(cfg, make, model, year)
+    except ValueError as e:
+        return [{**blank, **common, "error": str(e)}]
+    offered: list[tuple[str, str]] = []
+    for md in slugs:
+        url = absolute(cfg.site, f"/{mk}-{md}-parts.html")
+        d = cached(url)
+        common["model_pages"].append({"url": url, "status": d.get("status") if d else None})
+        if not d or d.get("status") != 200:
+            continue
+        for c in _model_page_catalogs(cfg, d["html"], year, mk, md):
+            if c not in offered:
+                offered.append(c)
+    chosen = _select_variants(m, model, offered)[:MAX_CATALOGS]
+    common["variants"] = [v for v, _ in offered]
+    common["variants_read"] = [v for v, _ in chosen]
+    common["offered"] = [{"variant": v, "url": u, "read": (v, u) in chosen} for v, u in offered]
+    if not chosen:
+        why = ("no model page" if not any(p["status"] == 200 for p in common["model_pages"])
+               else f"no {year} catalog" if not offered else f"every {year} catalog excluded")
+        return [{**blank, **common, "error": why}]
+    lines: list[dict] = []
+
+    def walk(url: str, variant: str, trim: str | None) -> None:
+        line = {**blank, **common, "variant": variant, "trim": trim, "year_url": url, "catalog": _stem(url)}
+        lines.append(line)
+        d = cached(url)
+        if d is None:
+            line["error"] = "not_fetched"
+            return
+        final = d.get("final_url") or url
+        line.update(status=d.get("status"), final_url=final, retrieved=d.get("retrieved"),
+                    redirected=urllib.parse.urlsplit(final).path != urllib.parse.urlsplit(url).path,
+                    title=_title(d.get("html", "")))
+        if d.get("status") != 200:
+            line["error"] = f"HTTP {d.get('status')}"
+            return
+        base, L, trims = _catalog_links(url, d["html"])
+        pre = f"/parts-list/{base}/"
+        line["subs"] = [u[len(pre):-len(".html")] for u in L]
+        if L:
+            return
+        opre = "/%s--" % base
+        line["trims"] = [u[len(opre):-len("-parts.html")] for u in trims]
+        line["trims_read"] = []
+        if not trims:
+            line["error"] = "no parts-list or trim links"
+            return
+        try:
+            pick = _pick_trims(cfg, url, base, trims, (make, model, year))
+        except ValueError as e:
+            line["error"] = str(e)
+            return
+        line["trims_read"] = [u[len(opre):-len("-parts.html")] for u in pick]
+        for t in pick:
+            walk(absolute(cfg.site, t), variant, t[len(opre):-len("-parts.html")])
+
+    for v, u in chosen:
+        walk(u, v, None)
+    return lines
 
 
 def categories_for(cfg: Config, make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
@@ -346,6 +502,7 @@ def list_parts(html: str) -> list[dict]:
                 "remark": _clean(p.get("mainDescAlter")),
                 "info": [_info(x) for x in (p.get("allExtraInfoList") or [])],
                 "url": p.get("url") or "",
+                "replace": _clean(p.get("replace")),  # successor number ("Replaced By"), "" for none
             })
     return rows
 
@@ -381,40 +538,82 @@ def _list_position(info: list[str], bare: bool = True) -> str | None:
     return None
 
 
+def name_rule(inc, exc, name_fn, head_fn):
+    """A callable parts rule for sites whose rules test the OEM name: kept
+    when `inc` matches name_fn(row) and `exc` does not match head_fn(row).
+    `.why(row, text)` gives the manifest reason ("include_miss",
+    "rule:<word>") for a row the rule drops."""
+    def rule(row: dict, text: str) -> bool:
+        return bool(inc.search(name_fn(row))) and not exc.search(head_fn(row))
+
+    def why(row: dict, text: str) -> str | None:
+        if not inc.search(name_fn(row)):
+            return "include_miss"
+        m = exc.search(head_fn(row))
+        return f"rule:{m.group(0).lower()}" if m else None
+    rule.why = why
+    return rule
+
+
+def _verdict(cfg: Config, rule, r: dict) -> tuple[str | None, bool]:
+    """(excluded_by or None, reman) for one parts-list row and category rule."""
+    info = "; ".join(r["info"])
+    text = f"{r['group']} | {r['main']} | {r['remark']} | {info}"
+    reman = (bool(REMAN_RE.search(text)) or bool(cfg.reman_re and re.search(cfg.reman_re, text, re.I))
+             or bool(cfg.reman_fn and cfg.reman_fn(r)))
+    if not r["pn"]:
+        return "no_pn", reman
+    if not r["url"]:
+        return "no_product_url", reman
+    if callable(rule):
+        if not rule(r, text):
+            why = getattr(rule, "why", None)
+            return ((why(r, text) if why else None) or "rule:site"), reman
+    else:
+        inc, exc_head, exc_full = (tuple(rule) + (None, None))[:3]
+        head = cfg.head_fn(r) if cfg.head_fn else f"{r['group']} | {r['main']} | {r['remark'].split('(')[0]}"
+        if not re.search(inc, text, re.I):
+            return "include_miss", reman
+        m = re.search(exc_head, head, re.I) if exc_head else None
+        if m:
+            return f"rule:{m.group(0).lower()}", reman
+        m = re.search(exc_full, text, re.I) if exc_full else None
+        if m:
+            return f"rule:{m.group(0).lower()}", reman
+    m = COMMON_EXCLUDE.search(cfg.head_fn(r) if cfg.head_fn else f"{r['group']} | {r['main']}")
+    if m:
+        return f"global:{m.group(0).lower()}", reman
+    return None, reman
+
+
+def _classify(cfg: Config, rows: list[dict], cat: str) -> list[tuple[dict, bool, str | None]]:
+    """[(row, reman, excluded_by)] in page order for the diagram rows of a
+    list page. A row is kept when excluded_by is None. Reman rows are dropped
+    ("reman_dropped") only when a kept non-reman row has no replace value,
+    i.e. the page lists a current new number for the category (R5b)."""
+    rule = cfg.parts[cat]
+    out = []
+    for r in rows:
+        why, reman = _verdict(cfg, rule, r)
+        out.append([r, reman, why])
+    if any(why is None and not reman and not r.get("replace") for r, reman, why in out):
+        for k in out:
+            if k[2] is None and k[1]:
+                k[2] = "reman_dropped"
+    return [tuple(k) for k in out]
+
+
 def parts_on_page(cfg: Config, list_url: str, cat: str) -> list[dict]:
     """Parts on the page for `cat`. Matching text is
     "<group> | <name> | <remark> | <info; info>"; COMMON_EXCLUDE looks at
     group and name only. Remanufactured/refurbished rows are dropped when the
-    page also has a new part for this category, kept otherwise."""
-    rule = cfg.parts[cat]
+    page also has a current new part for this category (R5b), kept and marked
+    reman otherwise."""
+    cfg.parts[cat]  # KeyError for a category the site has no rule for, as before
     html = _page(list_url)["html"]
-    kept = []
-    for r in list_parts(html):
-        if not r["pn"] or not r["url"]:
-            continue
-        info = "; ".join(r["info"])
-        text = f"{r['group']} | {r['main']} | {r['remark']} | {info}"
-        if callable(rule):
-            if not rule(r, text):
-                continue
-        else:
-            inc, exc_head, exc_full = (tuple(rule) + (None, None))[:3]
-            head = cfg.head_fn(r) if cfg.head_fn else f"{r['group']} | {r['main']} | {r['remark'].split('(')[0]}"
-            if not re.search(inc, text, re.I):
-                continue
-            if exc_head and re.search(exc_head, head, re.I):
-                continue
-            if exc_full and re.search(exc_full, text, re.I):
-                continue
-        if COMMON_EXCLUDE.search(cfg.head_fn(r) if cfg.head_fn else f"{r['group']} | {r['main']}"):
-            continue
-        kept.append((r, bool(REMAN_RE.search(text)) or bool(cfg.reman_re and re.search(cfg.reman_re, text, re.I))
-                     or bool(cfg.reman_fn and cfg.reman_fn(r))))
-    if any(not reman for _, reman in kept):
-        kept = [k for k in kept if not k[1]]
     out, seen = [], set()
-    for r, _ in kept:
-        if r["pn"] in seen:
+    for r, reman, why in _classify(cfg, list_parts(html), cat):
+        if why is not None or r["pn"] in seen:
             continue
         seen.add(r["pn"])
         pos = _list_position(r["info"], cfg.bare_list_position)
@@ -422,7 +621,86 @@ def parts_on_page(cfg: Config, list_url: str, cat: str) -> list[dict]:
             _LIST_POSITION[r["pn"]] = (pos, list_url)
         name = r["main"] + (f", {r['remark']}" if r["remark"] else "")
         out.append({"pn": r["pn"], "name": name, "product_url": absolute(cfg.site, r["url"]),
-                    "list_group": r["group"], "list_remark": r["remark"], "list_info": r["info"]})
+                    "list_group": r["group"], "list_remark": r["remark"], "list_info": r["info"],
+                    "reman": reman})
+    return out
+
+
+def _manifest_row(p: dict, section: str) -> dict:
+    return {"pn": p.get("partNumber") or None, "section": section, "main": _clean(p.get("mainDesc")),
+            "group": _clean(p.get("pncDesc")), "remark": _clean(p.get("mainDescAlter")),
+            "extra": [{"name": _clean(x.get("name")), "desc": _clean(x.get("desc"))}
+                      for x in (p.get("allExtraInfoList") or [])],
+            "replace": _clean(p.get("replace")) or None, "url": p.get("url") or None,
+            "reman": False, "matched": False, "excluded_by": None}
+
+
+def list_manifest(cfg: Config, list_url: str, cat: str) -> dict:
+    """R1: every row of the list page with the verdict for `cat`, re-read
+    from the cache (no request). `product` per row is filled by crawl.py.
+    `main` is mainDesc, `group` pncDesc, `remark` mainDescAlter, `extra` the
+    allExtraInfoList entries verbatim (as cleaned text, {name, desc})."""
+    stem = _stem(list_url)
+    variant, trim = _variant_trim(stem)
+    out: dict = {"list_url": list_url, "catalog": stem, "variant": variant, "trim": trim, "status": None,
+                 "final_url": None, "retrieved": None, "rows": []}
+    if cat not in cfg.parts:
+        out["error"] = "no rules for this category"
+        return out
+    d = cached(list_url)
+    if d is None:
+        out["error"] = "not_fetched"
+        return out
+    out.update(status=d.get("status"), final_url=d.get("final_url") or list_url, retrieved=d.get("retrieved"))
+    if d.get("status") != 200:
+        out["error"] = f"HTTP {d.get('status')}"
+        return out
+    try:
+        pl = store(d["html"])["partList"]
+    except (ValueError, KeyError) as e:
+        out["error"] = f"{type(e).__name__}: {e}"
+        return out
+    diagram = list_parts(d["html"])
+    verdicts = _classify(cfg, diagram, cat)
+    rows = []
+    k = 0
+    for group in pl.get("partList") or []:
+        for p in group:
+            row = _manifest_row(p, "diagram")
+            r, reman, why = verdicts[k]
+            k += 1
+            row["reman"], row["matched"], row["excluded_by"] = reman, why is None, why
+            rows.append(row)
+    for key, section in (("gpgOnlyPartList", "other"), ("expandPartList", "standard")):
+        for group in pl.get(key) or []:
+            for p in (group if isinstance(group, list) else [group]):
+                row = _manifest_row(p, section)
+                row["excluded_by"] = "section_not_read"
+                rows.append(row)
+    out["rows"] = rows
+    return out
+
+
+def chain_links(cfg: Config, product_url: str, pns: list[str]) -> dict[str, str]:
+    """R4: {pn: product URL} for numbers in `pns` that the product page itself
+    links (a product href whose last path segment ends with the number after
+    "-", "_" or "~"). Read from the cache; never a constructed slug."""
+    d = cached(product_url)
+    if not d:
+        return {}
+    out: dict[str, str] = {}
+    hrefs = re.findall(r'href="([^"#?]+\.html)"', d.get("html", ""))
+    for pn in pns:
+        want = (pn or "").strip().lower()
+        if not want:
+            continue
+        for h in hrefs:
+            if not h.startswith(("/parts/", "/genuine/")):
+                continue
+            seg = h.rsplit("/", 1)[-1][: -len(".html")].lower()
+            if seg.endswith(want) and len(seg) > len(want) and seg[-len(want) - 1] in "-_~":
+                out[pn] = absolute(cfg.site, h)
+                break
     return out
 
 
@@ -585,3 +863,11 @@ def bind(cfg: Config):
     return (lambda make, model, year, cats: categories_for(cfg, make, model, year, cats),
             lambda list_url, cat: parts_on_page(cfg, list_url, cat),
             lambda product_url: product(cfg, product_url))
+
+
+def bind_manifests(cfg: Config):
+    """The manifest functions for a site module (README "Site module
+    contract"): year_manifest, list_manifest, chain_links."""
+    return (lambda make, model, year: year_manifest(cfg, make, model, year),
+            lambda list_url, cat: list_manifest(cfg, list_url, cat),
+            lambda product_url, pns: chain_links(cfg, product_url, pns))

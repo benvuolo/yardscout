@@ -209,7 +209,19 @@ def head(row: dict) -> str:
 
 
 def rule(cat: str):
-    return lambda row, _text: matches(cat, row.get("main", ""))
+    def r(row, _text):
+        return matches(cat, row.get("main", ""))
+
+    def why(row, _text):
+        """Manifest reason for a dropped row (template `.why` hook)."""
+        inc, exc = RULES[cat]
+        n = oem_name(row.get("main", ""))
+        if not re.search(inc, n, re.I):
+            return "include_miss"
+        m = re.search(r"\b(?:" + exc + ")", INCLUDES.sub(" ", n), re.I)
+        return f"rule:{m.group(0).lower()}" if m else None
+    r.why = why
+    return r
 
 
 def make_config(T, site: str, models: dict):
