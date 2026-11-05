@@ -1,0 +1,9 @@
+01:32:44 start site=www.subarupartsdeal.com segments=25 tiers=['A', 'B']
+01:38:00 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=49 errors=0
+01:46:25 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=137 errors=0
+01:50:55 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=177 errors=0
+01:55:30 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=219 errors=0
+02:05:38 net-fail product https://www.subarupartsdeal.com/parts/subaru-mirror-assembly-door-right~91031ae30bnn.html: network error after 3 tries: ReadTimeout
+02:08:55 seed A|Subaru|Outback|2003 had network failures; left open for retry
+02:08:55 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=330 errors=1
+02:08:55 time budget reached records=330
