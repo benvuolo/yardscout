@@ -5,7 +5,7 @@
   "Kia",
   "Genesis"
  ],
- "generated_utc": "2026-11-05T03:15Z",
+ "generated_utc": "2026-11-05T03:17Z",
  "generator": "scraper/manual_detect/vin_rules_3.py",
  "inputs": {
   "inventory_live": "docs/data/inventory_live.json",
@@ -20,7 +20,7 @@
   "hyundai": "The VIN does NOT encode the transmission in any model year read (MY1986-88 Excel, MY1986-97 codes, every guide MY1994-2009, MY2010 new lines, MY2015, MY2019-2027 text guides). Positions: 4 line, 5 grade/model series (cars) or model series (SUVs), 6 body type (cars) or drive (SUVs: 1 FWD, 7 AWD), 7 restraint (cars) or GVWR (SUVs), 8 engine. Manual-only cells reachable by line/drive/engine: Veloster N MY2019-2020 (KMHT3, line code). Candidates only: Tucson 2.0 AWD MY2005-2009 (sources conflict), Elantra 1.6 MY1993-1995 (no lot car). Trim-level manuals (Genesis Coupe R-Spec, Veloster Turbo R-Spec) share their code with automatic trims.",
   "kia": "The VIN does NOT encode the transmission (MY1995 filing, MY2001-2009 guides, MY2010 new lines, MY2015, MY2016, MY2017-2027 text guides): 4-5 line/series, 6-7 body type, 8 engine/restraint (cars to MY2009); SUVs 4-5 line/series+drive, 6 body, 7 GVWR, 8 engine. Exception on paper: the Rio MY2014 and revised MY2016 guides name 'Manual Trans'/'M/T' (L) and 'AT'/'A/T' (M/N/P) in position 5, but real manual Rio LX cars carry M, so the wording is not reliable and that rule is dropped. Manual-only cell ruled: Sportage 2.0 4WD MY2005-2009 (J + E with engine 2/4). Candidate: Sportage 2WD 2.0 SOHC MY1995-96.",
   "genesis": "The VIN DOES encode a manual for one car: G70 MY2019-2021, position 5 = 2 '2.0T Sport (MT)' (Genesis filings for MY2019, 2020, 2021). Every other Genesis code (G70 other grades, G80, G90, GV60/70/80) is automatic-only and no manual was offered after MY2021. Genesis Coupe (sold as a Hyundai, KMHH) does not encode it.",
-  "vpic_already_decodes_it": "vPIC returns a transmission for Hyundai/Kia only in MY2008 and MY2017+, and neither comes from a VIN position: the MY2008 values are keyed on the engine character (every 4-cylinder decodes '5-spd Manual', every V6 'Automatic'), and the MY2017+ values are model/engine defaults (for example every 2018 Elantra 2.0 decodes '6-spd Automatic' though a 6MT was offered). So every one of today's 562 Hyundai/Kia VIN-sourced 'confirmed manuals' is a vPIC default, not evidence about the car (hub_findings)."
+  "vpic_already_decodes_it": "vPIC returns a transmission for Hyundai/Kia only in MY2008 and MY2017+, and neither comes from a VIN position: the MY2008 values are keyed on the engine character (every 4-cylinder decodes '5-spd Manual', every V6 'Automatic'), and the MY2017+ values are model/engine defaults (for example every 2018 Elantra 2.0 decodes '6-spd Automatic' though a 6MT was offered). So every one of today's 562 Hyundai/Kia VIN-sourced 'confirmed manuals' is a vPIC default, not evidence about the car (hub_findings). The only code-level vPIC manuals are G70 MY2021 code 2 (right, wrong speed count), Rio MY2014 code L (dropped) and Elantra MY2020 code 0 'Sport' (unsupported; hub_findings.vpic_code_level_manuals_checked)."
  },
  "vin_scheme": {
   "hyundai_passenger_car_1986_1999": "VIN 4 line (& drive), 5 body type, 6 body style & version (1 L, 2 GL, 3 GLS), 7 restraint, 8 engine (01-22-N11B-2196, 01-22-N11B-5639, MY1994-99 guides).",
@@ -243,44 +243,44 @@
      {
       "code": "2",
       "year": 2019,
-      "pattern": "KMTG2****K",
+      "pattern": "KMTG24LA*K",
       "Make": "GENESIS",
-      "Model": "",
-      "Trim": "",
-      "EngineModel": "",
-      "DisplacementL": "",
+      "Model": "G70",
+      "Trim": "2.0T Sport (MT)",
+      "EngineModel": "T-GDI THETA II FR",
+      "DisplacementL": "2.0",
       "DriveType": "",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "6,8"
+      "ErrorCode": "6"
      },
      {
       "code": "2",
       "year": 2020,
-      "pattern": "KMTG2****L",
+      "pattern": "KMTG24LA*L",
       "Make": "GENESIS",
-      "Model": "",
-      "Trim": "",
-      "EngineModel": "",
-      "DisplacementL": "",
+      "Model": "G70",
+      "Trim": "2.0T Sport (MT)",
+      "EngineModel": "T-GDI THETA II FR",
+      "DisplacementL": "2.0",
       "DriveType": "",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "6,8"
+      "ErrorCode": "6"
      },
      {
       "code": "2",
       "year": 2021,
-      "pattern": "KMTG2****M",
+      "pattern": "KMTG24LA*M",
       "Make": "GENESIS",
-      "Model": "",
-      "Trim": "",
-      "EngineModel": "",
-      "DisplacementL": "",
+      "Model": "G70",
+      "Trim": "2.0T Sport (MT)",
+      "EngineModel": "T-GDI THETA II FR",
+      "DisplacementL": "2.0",
       "DriveType": "",
-      "TransmissionStyle": "",
-      "TransmissionSpeeds": "",
-      "ErrorCode": "6,8"
+      "TransmissionStyle": "Manual/Standard",
+      "TransmissionSpeeds": "8",
+      "ErrorCode": "6"
      }
     ],
     "codes_seen_on_lots": {},
@@ -415,30 +415,30 @@
      {
       "code": "3",
       "year": 2019,
-      "pattern": "KMHT3****K",
+      "pattern": "KMHT36AH*K",
       "Make": "HYUNDAI",
       "Model": "Veloster N",
       "Trim": "",
-      "EngineModel": "",
-      "DisplacementL": "",
+      "EngineModel": "T-GDI THETA II",
+      "DisplacementL": "2",
       "DriveType": "",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "3",
       "year": 2020,
-      "pattern": "KMHT3****L",
-      "Make": "",
-      "Model": "",
+      "pattern": "KMHT36AH*L",
+      "Make": "HYUNDAI",
+      "Model": "Veloster N",
       "Trim": "",
-      "EngineModel": "",
-      "DisplacementL": "",
+      "EngineModel": "T-GDI THETA II",
+      "DisplacementL": "2.0",
       "DriveType": "",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "6,8"
+      "ErrorCode": "6"
      }
     ],
     "codes_seen_on_lots": {
@@ -590,7 +590,7 @@
      {
       "code": "2",
       "year": 2005,
-      "pattern": "KNDJE**2*5",
+      "pattern": "KNDJE722*5",
       "Make": "KIA",
       "Model": "Sportage",
       "Trim": "KM Project",
@@ -599,12 +599,12 @@
       "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "2",
       "year": 2006,
-      "pattern": "KNDJE**2*6",
+      "pattern": "KNDJE722*6",
       "Make": "KIA",
       "Model": "Sportage",
       "Trim": "KM",
@@ -613,26 +613,26 @@
       "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "2",
       "year": 2007,
-      "pattern": "KNDJE**2*7",
-      "Make": "",
-      "Model": "",
-      "Trim": "",
+      "pattern": "KNDJE722*7",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
       "EngineModel": "",
-      "DisplacementL": "",
-      "DriveType": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "6,8"
+      "ErrorCode": "6"
      },
      {
       "code": "2",
       "year": 2008,
-      "pattern": "KNDJE**2*8",
+      "pattern": "KNDJE722*8",
       "Make": "KIA",
       "Model": "Sportage",
       "Trim": "KM",
@@ -641,12 +641,12 @@
       "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "Manual/Standard",
       "TransmissionSpeeds": "5",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "2",
       "year": 2009,
-      "pattern": "KNDJE**2*9",
+      "pattern": "KNDJE722*9",
       "Make": "KIA",
       "Model": "Sportage",
       "Trim": "KM",
@@ -655,12 +655,12 @@
       "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "4",
       "year": 2005,
-      "pattern": "KNDJE**4*5",
+      "pattern": "KNDJE724*5",
       "Make": "KIA",
       "Model": "Sportage",
       "Trim": "KM Project",
@@ -669,12 +669,12 @@
       "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "4",
       "year": 2006,
-      "pattern": "KNDJE**4*6",
+      "pattern": "KNDJE724*6",
       "Make": "KIA",
       "Model": "Sportage",
       "Trim": "KM",
@@ -683,26 +683,26 @@
       "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "4",
       "year": 2007,
-      "pattern": "KNDJE**4*7",
-      "Make": "",
-      "Model": "",
-      "Trim": "",
+      "pattern": "KNDJE724*7",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
       "EngineModel": "",
-      "DisplacementL": "",
-      "DriveType": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "6,8"
+      "ErrorCode": "6"
      },
      {
       "code": "4",
       "year": 2008,
-      "pattern": "KNDJE**4*8",
+      "pattern": "KNDJE724*8",
       "Make": "KIA",
       "Model": "Sportage",
       "Trim": "KM",
@@ -711,12 +711,12 @@
       "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "Manual/Standard",
       "TransmissionSpeeds": "5",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "4",
       "year": 2009,
-      "pattern": "KNDJE**4*9",
+      "pattern": "KNDJE724*9",
       "Make": "KIA",
       "Model": "Sportage",
       "Trim": "KM",
@@ -725,7 +725,7 @@
       "DriveType": "4WD/4-Wheel Drive/4x4",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      }
     ],
     "codes_seen_on_lots": {
@@ -877,72 +877,72 @@
      {
       "code": "B",
       "year": 2005,
-      "pattern": "KM8J*7*B*5",
+      "pattern": "KM8JM72B*5",
       "Make": "HYUNDAI",
-      "Model": "",
+      "Model": "Tucson",
       "Trim": "",
       "EngineModel": "",
-      "DisplacementL": "",
+      "DisplacementL": "2.0",
       "DriveType": "AWD/All-Wheel Drive",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "B",
       "year": 2006,
-      "pattern": "KM8J*7*B*6",
+      "pattern": "KM8JM72B*6",
       "Make": "HYUNDAI",
-      "Model": "",
-      "Trim": "",
+      "Model": "Tucson",
+      "Trim": "JM",
       "EngineModel": "",
       "DisplacementL": "2",
       "DriveType": "AWD/All-Wheel Drive",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "B",
       "year": 2007,
-      "pattern": "KM8J*7*B*7",
+      "pattern": "KM8JM72B*7",
       "Make": "HYUNDAI",
-      "Model": "",
-      "Trim": "",
+      "Model": "Tucson",
+      "Trim": "JM",
       "EngineModel": "",
-      "DisplacementL": "",
+      "DisplacementL": "2.0",
       "DriveType": "AWD/All-Wheel Drive",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "B",
       "year": 2008,
-      "pattern": "KM8J*7*B*8",
+      "pattern": "KM8JM72B*8",
       "Make": "HYUNDAI",
-      "Model": "",
+      "Model": "Tucson",
       "Trim": "",
       "EngineModel": "",
-      "DisplacementL": "",
+      "DisplacementL": "2.0",
       "DriveType": "AWD/All-Wheel Drive",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "B",
       "year": 2009,
-      "pattern": "KM8J*7*B*9",
+      "pattern": "KM8JM72B*9",
       "Make": "HYUNDAI",
-      "Model": "",
-      "Trim": "",
+      "Model": "Tucson",
+      "Trim": "JM",
       "EngineModel": "",
-      "DisplacementL": "",
+      "DisplacementL": "2.0",
       "DriveType": "AWD/All-Wheel Drive",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      }
     ],
     "codes_seen_on_lots": {
@@ -1076,30 +1076,30 @@
      {
       "code": "1",
       "year": 1995,
-      "pattern": "KNDJB**1*S",
-      "Make": "",
-      "Model": "",
+      "pattern": "KNDJB721*S",
+      "Make": "KIA",
+      "Model": "Sportage",
       "Trim": "",
       "EngineModel": "",
       "DisplacementL": "2",
       "DriveType": "",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "1",
       "year": 1996,
-      "pattern": "KNDJB**1*T",
-      "Make": "",
-      "Model": "",
+      "pattern": "KNDJB721*T",
+      "Make": "KIA",
+      "Model": "Sportage",
       "Trim": "",
       "EngineModel": "",
       "DisplacementL": "",
-      "DriveType": "",
+      "DriveType": "4x2",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "6,8"
+      "ErrorCode": "4,6,14"
      }
     ],
     "codes_seen_on_lots": {},
@@ -1232,10 +1232,10 @@
      {
       "code": "R",
       "year": 1993,
-      "pattern": "KMHJ***R*P",
+      "pattern": "KMHJF23R*P",
       "Make": "HYUNDAI",
       "Model": "Elantra",
-      "Trim": "",
+      "Trim": "Deluxe (GL)",
       "EngineModel": "",
       "DisplacementL": "1.596000",
       "DriveType": "",
@@ -1246,30 +1246,30 @@
      {
       "code": "R",
       "year": 1994,
-      "pattern": "KMHJ***R*R",
+      "pattern": "KMHJF23R*R",
       "Make": "HYUNDAI",
       "Model": "Elantra",
-      "Trim": "",
+      "Trim": "Deluxe (GL)",
       "EngineModel": "",
       "DisplacementL": "1.596000",
       "DriveType": "",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "4,6,14"
      },
      {
       "code": "R",
       "year": 1995,
-      "pattern": "KMHJ***R*S",
+      "pattern": "KMHJF23R*S",
       "Make": "HYUNDAI",
       "Model": "Elantra",
-      "Trim": "",
+      "Trim": "Deluxe (GL)",
       "EngineModel": "",
       "DisplacementL": "1.596000",
       "DriveType": "",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      }
     ],
     "codes_seen_on_lots": {},
@@ -1410,30 +1410,30 @@
      {
       "code": "L",
       "year": 2014,
-      "pattern": "KNADL****E",
+      "pattern": "KNADL4A3*E",
       "Make": "KIA",
       "Model": "Rio",
       "Trim": "1.6 Manual Trans LX STD",
-      "EngineModel": "",
-      "DisplacementL": "",
+      "EngineModel": "DOHC GAMMA",
+      "DisplacementL": "1.6",
       "DriveType": "",
       "TransmissionStyle": "Manual/Standard",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      },
      {
       "code": "L",
       "year": 2016,
-      "pattern": "KNADL****G",
+      "pattern": "KNADL4A3*G",
       "Make": "KIA",
       "Model": "Rio",
       "Trim": "LX M/T",
-      "EngineModel": "",
-      "DisplacementL": "",
+      "EngineModel": "Gamma",
+      "DisplacementL": "1.6",
       "DriveType": "",
       "TransmissionStyle": "",
       "TransmissionSpeeds": "",
-      "ErrorCode": "5,6,14"
+      "ErrorCode": "6"
      }
     ],
     "codes_seen_on_lots": {},
@@ -1578,7 +1578,7 @@
    "lines": 562,
    "by_vpic_model_year": {
     "2008": 552,
-    "": 10
+    "2008 (VIN not in the cache backup; published label from the CI decode)": 10
    },
    "in_uniform_cells": 481,
    "in_mixed_cells_not_flagged_by_baseline": 81,
@@ -1921,6 +1921,23 @@
    ],
    "hub_decision_needed": "Whether to stop showing the Manual badge for Hyundai/Kia/Genesis vPIC MY2008 'manual' values (integration change in the scraper/app; not made here)."
   },
+  "vpic_code_level_manuals_checked": [
+   {
+    "pattern": "KMTG2 (Genesis G70), MY2021",
+    "vpic": "Manual/Standard, 8 speeds (MY2019-2020: trim '2.0T Sport (MT)' only)",
+    "verdict": "Manual is right (Genesis filing code 2 = '2.0T Sport (MT)'; EPA 42495 Manual 6-spd); the speed count is wrong (6, not 8). Covered by rule genesis_g70_20t_sport_mt_2019_2021."
+   },
+   {
+    "pattern": "KMHD0 (Elantra 'Sport', Korea-built), MY2020",
+    "vpic": "Manual/Standard, 6 speeds for every VIN with position 5 = 0",
+    "verdict": "Not supported: Hyundai's 2020MY Elantra guide (MID ORG16557, 2019-02-06) names code 0 only 'Sport', and EPA's 2020 Elantra 1.6 turbo rows list only Automatic (AM7) (id 41454). A vPIC default; no lot car carries it today, but a future one would get a Manual badge from it."
+   },
+   {
+    "pattern": "Kia Rio KNADL, MY2014",
+    "vpic": "Manual/Standard (trim '1.6 Manual Trans LX STD')",
+    "verdict": "Kia's own table, but real manual Rio LX cars carry M (rule kia_rio_code_L_lx_mt_2014_2016, dropped). No lot car carries L."
+   }
+  ],
   "hk_vpic_automatic_labels_epa_lists_manual": {
    "what": "Hyundai/Kia/Genesis lot cars with a vPIC automatic/CVT label in a year/model/displacement where EPA also lists a manual: these are vPIC defaults, so a later manual rule would show them as false 'disagreements'.",
    "lines": 183,
