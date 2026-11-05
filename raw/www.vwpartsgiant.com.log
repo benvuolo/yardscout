@@ -1,0 +1,12 @@
+01:34:18 start site=www.vwpartsgiant.com segments=28 tiers=['A', 'B']
+01:37:50 seg done tier=A Volkswagen Jetta [2006, 2010] seeds=[2006] records=41 errors=0
+01:43:10 seg done tier=A Volkswagen Jetta [2011, 2014] seeds=[2014] records=108 errors=0
+01:45:50 seg done tier=A Volkswagen Passat [2012, 2019] seeds=[2013] records=135 errors=0
+01:49:42 seg done tier=A Volkswagen Jetta [1999, 2005] seeds=[2003] records=180 errors=0
+01:52:38 seg done tier=A Volkswagen CC [2009, 2016] seeds=[2012] records=212 errors=0
+01:54:54 seg done tier=A Volkswagen Tiguan [2009, 2017] seeds=[2012] records=234 errors=0
+01:58:26 seg done tier=A Volkswagen New Beetle [1991, 2010] seeds=[2000, 2001, 2002] records=254 errors=0
+01:59:26 nav-fail Volkswagen Beetle 1988: NavError: HTTP 404 for https://www.vwpartsgiant.com/1988-volkswagen-beetle-parts
+01:59:26 seg done tier=A Volkswagen Beetle [1964, 2019] seeds=[2003, 1988] records=257 errors=1
+02:04:44 product-fail https://www.vwpartsgiant.com/genuine/volkswagen~window-motor~3c0959704cvw5: NavError: no part number on https://www.vwpartsgiant.com/genuine/volkswagen~window-motor~3c0959704cvw5
+02:04:44 STOPPED: www.vwpartsgiant.com refused or challenged (HTTP 503); domain stopped for this program
