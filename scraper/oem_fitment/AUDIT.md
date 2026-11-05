@@ -331,3 +331,29 @@ don't matter. Spot checks: the 2004 F-150 tailgate page keeps "Tailgate Asy"
 4L3Z-9940700-AA / 4L3Z-8340700-AA and drops cables, liners and
 "Box Assy - Pick Up"; the radiator page keeps "Radiator Assy" 4L3Z-8005-BB.
 Requests used: 6. No change proposed.
+
+## Open for the auditor session (from the crawler workstream, 2026-11-05)
+
+1. **Category heuristic C reads qualifier phrases.** Crawler R5a
+   (`sites/_qualifier.strip_qualifiers`) now removes "W/...", "W/O ...",
+   "L/...", "Less ...", "With ..." phrases up to the next "," or ";" before the
+   exclusion checks, so rows like "Mirror Assy, Outer Rear View, W/Turn
+   Signal Lamp" and "Unit Assy, Headlamp, W/Auto Leveling" are kept. audit.py's
+   junk-word check does not strip them, so every such keep is reported as a
+   category suspect and raises the C count (and `category_suspects` in
+   ci_audit). Reproduced on the synthetic 2030 Camry crawl
+   (`tests/_synthetic_pages.py`): 87910-90010 gives C "side-mirrors: junk word
+   'Lamp' in 'Mirror Assembly | Mirror Assy, Outer Rear View, W/Turn Signal
+   Lamp | | '"; 81110-90010 gives C "headlights: junk word 'Level' in
+   'Headlamp Assembly | Unit Assy, Headlamp, W/Auto Leveling | | '". E is 0
+   for both, and chain records (R4, `via`) audit clean.
+   Proposed fix: apply `strip_qualifiers` to the name fields before the
+   junk-word check, mirroring R5a. CURATION_SPEC §5.10 already keeps such
+   records at cover=maybe ("no qualifier phrase appears in names"), so this
+   changes the audit count only, never a Verified fit.
+2. **ci_audit.py and audit.py now read every records part** (`rawparts.py`):
+   a records file past 40 MB continues in `<site>.2.jsonl`; `ci_audit.py
+   --site S` (the workflow's call) and `ci_audit.py raw/S.jsonl` audit all
+   parts, and audit.py treats any part as the whole file and skips
+   `.lists` / `.years` manifests. The output line gained `parts=N` and, when
+   a line does not parse, `unreadable=N`.

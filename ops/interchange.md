@@ -680,10 +680,11 @@ pick it up.
 - Live fetches for fixtures: 10 toyotapartsnow pages via fetch.py, 10.5 s apart.
 
 Open, for the hub:
-- Seeds crawled before this lands have no manifests. Backfill with
-  `--complete` rows for the done seeds (cost: year + list pages; products
-  already seen are not re-fetched). Resetting progress also works but
-  re-fetches every product (R6 marks them).
+- Seeds crawled before this lands have no manifests and no chains. Backfill
+  with `--complete` rows for the done seeds (cost: year + list pages, plus
+  the catalog-linked chain hops of their matched numbers; products already
+  seen are not re-fetched). Resetting progress also works but re-fetches
+  every product (R6 marks them).
 - Lexus (lexuspartsnow, PartsGiant template) uses Toyota numbering but has no
   `-84` reman rule; Ford `...RM` numbers ("Ford Retail Spec", 4L3Z-10V346-BBRM)
   are not flagged reman. Both outside R5c; §5.4 syntax covers neither.
@@ -692,7 +693,51 @@ Open, for the hub:
   Headlamp, W/Auto Leveling" is kept now. Whether that wording occurs is for
   the Toyota builder to check.
 - A seed retried after a list-page network failure writes its manifest lines
-  again (same rows); curators treat any status-200 line as "read".
+  again (same rows). A list line counts as read only when `read` is true
+  (status 200, no `error`, no `rows_missing`); a status-200 line with an
+  error (an error page, a failed product-rule fetch) is `read: false`.
+
+#### Review fixes (workflow subagent, 2026-11-05; same branch, merged with main 793eff6)
+
+Commits 5859af9, 7e6e300, aa8e5f6 and the docs commit after them. Tests:
+`tests/run_all.py` 28/28 files (cached-page checks skipped: no local cache).
+- Merge with main: Mitsubishi keeps main's SlugCheckedSimplePart plus the
+  manifest exports. audipartsgiant, mazdapartsnow, mbpartsgiant and
+  volvopartsgiant now export year_manifest / list_manifest / chain_links
+  (before: every list line from them had `rows: []`; Mercedes is crawling).
+  SlugCheckedSimplePart.product takes `_get`, so product-rule categories
+  (Volvo / Mitsubishi doors, Volvo trunk lid) no longer fail with TypeError
+  in list_manifest; the slug test is `excluded_by: "rule:slug_miss"`.
+  Mercedes year lines are per badge page actually read (C-Class -> c300,
+  c63_amg ...), not the slug of the class name.
+- A number first reached as a chain record is no longer "seen" for list
+  pages: when a later page lists it, its listed record is written with that
+  page's seed / list_url / list fields (`recrawl_of` -> the chain record).
+  Before, the only record was the chain record (name null, no reman flag,
+  another vehicle's seed and list_url).
+- `read` flag on list lines (above); list-fail rows keep the template's
+  verdict (no `site_module` relabel); progress `list_fail` names the pages
+  for a later `--complete` row. Seeds are still marked done on list-fail:
+  fetch.py caches the error page, so an in-job retry re-reads it.
+- R4 chain work is persisted (`chain_pending`) and resumes after exit 11 /
+  Refused; listed rows recorded before R4 get their chains followed when a
+  page lists them again (both modes, incl. `--complete` backfill);
+  `chain_failed` / `chain_given_up` count dropped hops. `.done` is written
+  only when no chain work is owed (exit 10 otherwise; a hop is given up after
+  3 network failures).
+- `rawparts.py` is the one reader for size-capped parts. ci_audit.py (now
+  `--site`, the workflow's call) and audit.py read every records part, so
+  the >0.5% pause gate keeps covering records past 40 MB.
+
+Open, for the hub:
+- The curation adapters (branch `worktree-wf_9b3745bc-31f-3`, `curate.load`)
+  read only `raw/<site>{.jsonl,.lists.jsonl,.years.jsonl}`. They should read
+  through `rawparts.site_rows(raw_dir, site, kind)` and count a list line as
+  read only when `read` is true. Not changed here (other workstream).
+- AUDIT.md "Open for the auditor session": the C heuristic does not strip
+  qualifier phrases, so R5a keeps show as category suspects (count only).
+- A seed left open after a network failure is still orphaned once `.done` is
+  written (unchanged from main).
 
 ## Hub decisions (curation policy)
 

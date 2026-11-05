@@ -197,6 +197,10 @@ whose candidates have predecessors stays open.
     The `;`/`,` structure matters (§5.6).
   - Implementation: `SimplePart.list_rows(list_url)` and a PartsGiant
     equivalent re-read the cached fetch. No extra request.
+  - As built (README "Raw files"): each line also carries `read` (true only
+    for status 200, no `error`, no `rows_missing`; see C2). Records,
+    manifests and their size-capped continuation parts are read through
+    `rawparts.py`.
 - **R2 — year manifests: `raw/<site>.years.jsonl`.**
   - `{kind:"year", site, seed, variant, year_url, status, final_url, title,
     subs:[every "<group>/<sub>" slug], trims?:[], engines?:[], variants:[all
@@ -633,8 +637,11 @@ a `merge` mapping, every merged cv must close.
   cv. At least one matched pn's fitment lists the cv. For PartsGiant, every
   offered variant or trim catalog has a year manifest.
 - **C2. List pages.**
-  - Every `CAT_PAGES[c]` sub on those pages has a list manifest with status
-    ok.
+  - Every `CAT_PAGES[c]` sub on those pages has a list manifest line that
+    was **read**: `read: true`, which crawl.py sets only for status 200 with
+    no `error` and no `rows_missing`. A line with `error` (list-fail, also
+    on a status-200 error page) or without `read: true` never counts as read,
+    whatever its status: the page is unread and the cell stays open.
   - No other sub matches `policy.NOUN[c]` without having been read
     (`unread_sibling_page`), unless a `SIBLING_IGNORE` entry with a basis
     exempts it.
