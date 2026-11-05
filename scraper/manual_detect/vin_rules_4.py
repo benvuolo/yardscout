@@ -389,7 +389,7 @@ RULE_STATUS_NOTE = {
 ANSWER = {
     "Ford": ("NOT ENCODED. No Ford Motor Company Part 565 filing names a transmission: all 249 Ford filings in MID were downloaded "
              "(MY1984-2028); the 125 with a text layer mention 'transmission' once, in a cover-letter note about a GVWR code "
-             "(01-022-N11B-8035), and the scanned filings read as images (MY1985, 1987, 1993, 2001-2007, 2014) have no "
+             "(01-022-N11B-8035), and the scanned filings read as page images (MY1985, 1987, 1993, 2001-2007, 2014) show no "
              "transmission position. Characters: 4 restraint (cars) / brake+GVWR (trucks), 5 make designator (cars) + 6-7 line/"
              "series/body, or 5-7 line/series/chassis/body (trucks), 8 engine, 10 year, 11 plant. Where an engine or series code "
              "belongs to a configuration Ford sold only with a manual, the code decides: Escape 2.0 Zetec (2001, 2002, 2004), SVT "
@@ -419,7 +419,7 @@ VIN_SCHEME = {
 NOT_RULED = [
     {"make": "Ford", "scope": "every Ford outside the rules (F-Series, Super Duty, Ranger, Explorer, Escape 2005+, Mustang GT/V6/EcoBoost/Mach 1, Focus/Fiesta base engines, Contour, Escort, Probe, Tempo, Taurus non-SHO, vans)", "why": "no transmission character, and the engine/series codes were sold with both transmissions or only with automatics"},
     {"make": "Ford", "scope": "Fusion 1.6L EcoBoost MY2013 (code R, 199 lot cars)", "why": "EPA lists Manual 6-spd and Automatic (S6) for 2013 (33084, 33085, 33280)"},
-    {"make": "Ford", "scope": "Focus 1.0L EcoBoost MY2016-2018 (code E, 42 lot cars)", "why": "EPA lists Automatic (S6) from 2016 (36988, 38469, 39607). vPIC returns '6-spd Automatic' for every 2018 one (uniformCell auto), which is a model default, not this rule's business"},
+    {"make": "Ford", "scope": "Focus 1.0L EcoBoost MY2016-2018 (code E, 43 lot cars)", "why": "EPA lists Automatic (S6) from 2016 (36988, 38469, 39607). vPIC returns '6-spd Automatic' for every 2018 one (uniformCell auto), which is a model default, not this rule's business"},
     {"make": "Ford", "scope": "Escape 2.0 Zetec MY2003 (code B)", "why": "the code letter is clipped in the MY2003 filing scan; no 2003 Escape with code B is on the lots"},
     {"make": "Ford", "scope": "Ranger 2.0L MY1985-1987 (code C, 4 lot cars)", "why": "candidate only: EPA lists manuals only, but The Ranger Station reports C-3 automatics behind the 2.0"},
     {"make": "Ford", "scope": "Probe GT 2.2 turbo MY1989 (code L, 2 lot cars)", "why": "EPA lists only a manual for the 1989 turbo (5550), but its Mazda 626/MX-6 turbo twin had an automatic (EPA 5744) and the Probe got one for 1990 (6679); no independent statement and no MY1989 filing read"},

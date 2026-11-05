@@ -53,7 +53,8 @@ Inputs: docs/data/inventory_live.json, docs/data/vehicle_extras.json,
 Output: scraper/manual_detect/vin_rules_3.json
 
 Run:  python3 -I scraper/manual_detect/vin_rules_3.py            (offline)
-      python3 -I scraper/manual_detect/vin_rules_3.py --fetch    (refresh vin_rules_3_vpic.json first; network)
+      python3 -I scraper/manual_detect/vin_rules_3.py --fetch    (refresh in-scope VIN + pattern decodes in vin_rules_3_vpic.json; network)
+      python3 -I scraper/manual_detect/vin_rules_3.py --sweep    (re-run the position-5 vPIC sweep, ~11k patterns; network)
 """
 
 import csv
