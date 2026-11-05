@@ -12,3 +12,12 @@
 08:45:03 seg done tier=A Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=184 errors=0
 09:12:43 seg done tier=A Mercedes-Benz S-Class [1974, 2015] seeds=[2000, 1994, 1995] records=249 errors=0
 09:18:27 time budget reached records=262
+09:18:35 start site=www.mbpartsgiant.com segments=50 tiers=['A', 'B']
+09:18:35 seg done tier=A Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=262 errors=0
+09:18:35 seg done tier=A Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=262 errors=0
+09:18:35 seg done tier=A Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=262 errors=0
+09:18:35 seg done tier=A Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=262 errors=0
+09:18:35 seg done tier=A Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=262 errors=0
+09:34:52 seg done tier=A Mercedes-Benz E-Class [1994, 2002] seeds=[2001, 1998, 1997] records=307 errors=0
+09:39:41 seg done tier=A Mercedes-Benz C300 [2008, 2022] seeds=[2011, 2016, 2012] records=331 errors=0
+09:52:45 time budget reached records=368
