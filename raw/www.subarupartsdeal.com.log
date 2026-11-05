@@ -44,3 +44,20 @@
 09:44:06 seg done tier=A Subaru Forester [2014, 2018] seeds=[2014] records=746 errors=2
 10:15:47 seg done tier=A Subaru Legacy [1990, 1999] seeds=[1999, 1992] records=944 errors=2
 10:15:47 time budget reached records=944
+10:15:57 start site=www.subarupartsdeal.com segments=25 tiers=['A', 'B']
+10:15:57 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=944 errors=2
+10:15:57 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=944 errors=2
+10:15:57 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=944 errors=2
+10:15:57 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=944 errors=2
+10:15:57 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=944 errors=2
+10:15:57 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=944 errors=2
+10:15:57 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=944 errors=2
+10:15:57 seg done tier=A Subaru Legacy [2010, 2012] seeds=[2011] records=944 errors=2
+10:15:57 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005] records=944 errors=2
+10:15:57 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=944 errors=2
+10:15:57 seg done tier=A Subaru Forester [1981, 2002] seeds=[2001] records=944 errors=2
+10:15:57 seg done tier=A Subaru Forester [2014, 2018] seeds=[2014] records=944 errors=2
+10:15:57 seg done tier=A Subaru Legacy [1990, 1999] seeds=[1999] records=944 errors=2
+10:19:25 seg done tier=A Subaru Legacy [2013, 2014] seeds=[2013] records=958 errors=2
+10:25:49 seg done tier=A Subaru Legacy [2015, 2019] seeds=[2015] records=993 errors=2
+10:26:37 STOPPED: www.subarupartsdeal.com refused or challenged (HTTP 403); domain stopped for this program
