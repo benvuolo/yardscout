@@ -38,15 +38,34 @@ SimplePart: 363/363.
 
 | UTC | site | records | E | C | D | F | mismatch rate |
 |---|---|---|---|---|---|---|---|
-| 01:24 | www.toyotapartsnow.com | 363 | 0 | 0 | 0 | 0 | 0.0% |
+| 01:23 | www.toyotapartsnow.com | 363 | 0 | 0 | 0 | 0 | 0.0% |
+| 01:25 | www.jeeppartsdeal.com | 385 | 0 | 1 | 0 | 0 | 0.26% |
 
-Toyota 01:24: the first heuristic pass raised 21 C hits. All 21 were wrong
+Junk words are read only in the OEM name, the short name (aux_desc) and the
+list-row text. They are not read in the product display name, which carries
+option words ("Headlamp Assembly, Black Bezel"), or in `other_names`, which
+lists retail synonyms ("HVAC ... Blower Control", "Lens&Body"). These
+phrasings were read by hand and are allowed: Mopar "Switch - Window And Door
+Lock" (the documented Jeep convention), "Pump - Power Steering With Pulley",
+"Module Kit Fuel Pump/Level Unit: Pump, Unit, O-Ring", Toyota "Alternator
+Assembly, With Regulator", "Pump Assembly, Fuel With Filter", "Tube Assembly,
+Fuel Suction" (77020-*, the in-tank pump/sender module, short name "Fuel Pump
+Assembly"), "Pump Assembly, L/Pulley".
+
+Toyota 01:23: the first heuristic pass raised 21 C hits. All 21 were wrong
 heuristics, now fixed in the auditor. Toyota names the tail-lamp assembly
 "Lens & Body, Rear Combination Lamp" or "Lens & Housing" (8155x/8156x), and
 the power-steering pump "Pump Assy, Vane" (44310-...). "Body Assembly,
 Throttle W/Throttle Position Sensor" is a throttle body.
 
 ## Findings needing a module change (proposed to the hub, not applied)
+
+0. **Jeep headlights keeps a headlamp boot.** 5143152AA, list
+   `parts-list/2005-jeep-grand-cherokee/headlights-lighting/headlamp-components`.
+   OEM name "Headlamp", short name "Boot", product page "Boot, Front" /
+   "Headlight Bulb Cap, Front". The jeeppartsdeal `headlights` exclude has
+   cover/cap but not boot. Fix: add `boot` to that exclude (the Mopar module
+   already excludes Boot).
 
 Pre-crawl sample: 38 records from a local 2-segment tier A trial on Mopar (10),
 Nissan (13) and Infiniti (15). The trial was stopped at the hub's request
@@ -65,7 +84,7 @@ because Actions is crawling these sites.
 
 ## Tier B rule review (fetch.py; at most 20 requests per site, 10 s apart)
 
-Requests used: Mopar 5, Nissan 12, Infiniti 7. Year pages already in the local
+Requests used: Mopar 5, Nissan 12, Infiniti 7, GM 10, Ford 6. Year pages already in the local
 cache were read for free. Subcategory regexes match only the last URL segment
 (`categories_for` uses `tail`).
 
@@ -116,6 +135,28 @@ Kit-Front Bumper" (4), "Grille Assy-Front" (3), "Hood" (4).
 |---|---|---|---|---|
 | I1 | gauge-cluster | the 2003-2007 G35 cluster rows are named "Meter Assy-Analog" (24820-AC700/701/705/706); the rule keeps nothing on that page | product page 24820-AC700: mainDesc "Meter Assembly", site pdName "Instrument Cluster", fits 2004-2006 Infiniti G35 Sport/Track | add `^Meter Assy-Analog` to `nissanpartsdeal.PARTS["gauge-cluster"]` include (shared). Do not add "Meter Assy-Temperature" (the F/COMPASS gauge) |
 
-### gmpartsgiant.py, fordpartsgiant.py
+### gmpartsgiant.py
 
-Not reviewed yet (next, within the same budget).
+Navigation was checked with the module's own `categories_for` on the 2000
+Silverado 1500, 2012 Equinox and 2008 Impala (the author checked the 2012
+Malibu). Requests used: 10.
+
+| # | category | problem | evidence | proposed fix |
+|---|---|---|---|---|
+| G1 | gauge-cluster | the 2012 Equinox cluster page is `windshield_wiper_mirrors_instrument_panel_console_doors/instrument_panel`, which is not selected; the only page selected is `luggage_carrier` ("gage" matches inside "lugGAGE") | instrument_panel page: the rule keeps "CLUSTER, Instrument Panel Gage" 20907579/80/81/82 once read | SUBCATS gauge-cluster: add `instrument_panel$`; change `gage` to `(^\|_)gage` |
+| G2 | ignition-coils | the 2012 Equinox coils are on `engine/engine_assembly_cylinder_head_related_parts`; nothing is selected | page: "COIL, Ignition Coil" 12632479, 12638824 kept by the rule | SUBCATS ignition-coils: add `cylinder_head_related` |
+| G3 | door-front, door-rear | the 2000 Silverado door pages are `door_hardware_side_front` / `_side_rear`; nothing is selected | page: "DOOR, Front and Rear Side Door" 15017223 kept by the door-front rule | SUBCATS door-front `...\|door_hardware_side_front`, door-rear `...\|door_hardware_side_rear` |
+
+Impala 2008 and Equinox 2012 otherwise select the expected pages (hood,
+fender_wheelhouse_front_end, bumper_front/rear, grille_radiator,
+radiator_assembly, liftgate_hardware, rear_compartment_*). The 2000 Silverado
+tailgate loads 5+ pickup_box pages (efficiency only).
+
+### fordpartsgiant.py
+
+Navigation was checked on the 2004 F-150 and 2008 Escape: every tier B
+category selects its page. Ford rules key on the base part number, so names
+don't matter. Spot checks: the 2004 F-150 tailgate page keeps "Tailgate Asy"
+4L3Z-9940700-AA / 4L3Z-8340700-AA and drops cables, liners and
+"Box Assy - Pick Up"; the radiator page keeps "Radiator Assy" 4L3Z-8005-BB.
+Requests used: 6. No change proposed.
