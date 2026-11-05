@@ -402,3 +402,74 @@
 08:19:44 nav-fail BMW 320i 1997: ValueError: no 1997 catalog for BMW 320i (bmw-['320i'])
 08:19:44 seg done tier=B BMW 320i [1978, 2018] seeds=[2014, 1995, 1997] records=1539 errors=38
 08:24:32 time budget reached records=1555
+08:25:08 start site=www.bmwpartsdeal.com segments=44 tiers=['A', 'B']
+08:25:08 seg done tier=A BMW 328i [1995, 2016] seeds=[2011] records=1555 errors=38
+08:25:08 seg done tier=A BMW 325i [1988, 2006] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=A BMW X5 [2007, 2013] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=A BMW X3 [2004, 2010] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=A BMW 528i [1979, 2016] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=A BMW X5 [2000, 2006] seeds=[2005] records=1555 errors=38
+08:25:08 seg done tier=A BMW 525i [1989, 2007] seeds=[2007] records=1555 errors=38
+08:25:08 seg done tier=A BMW 530i [1994, 2021] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=A BMW 3 Series [1983, 2016] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=A BMW 535i [1985, 2016] seeds=[2011] records=1555 errors=38
+08:25:08 seg done tier=A BMW 330i [2001, 2018] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=A BMW 335i [2007, 2016] seeds=[2007] records=1555 errors=38
+08:25:08 seg done tier=A BMW X3 [2011, 2017] seeds=[2013] records=1555 errors=38
+08:25:08 seg done tier=A BMW 325ci [2000, 2006] seeds=[2002] records=1555 errors=38
+08:25:08 seg done tier=A BMW 750Li [2006, 2015] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=A BMW 320i [1978, 2018] seeds=[2014] records=1555 errors=38
+08:25:08 seg done tier=A BMW X1 [2012, 2015] seeds=[2013] records=1555 errors=38
+08:25:08 seg done tier=A BMW 328xi [2007, 2015] seeds=[2007] records=1555 errors=38
+08:25:08 seg done tier=A BMW 325xi [2001, 2006] seeds=[2002] records=1555 errors=38
+08:25:08 seg done tier=A BMW 323i [1998, 2012] seeds=[2000] records=1555 errors=38
+08:25:08 seg done tier=A BMW 550i [2006, 2016] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=A BMW 5 Series [1985, 2016] seeds=[2007] records=1555 errors=38
+08:25:08 seg done tier=A BMW 328i xDrive [2009, 2015] seeds=[2011] records=1555 errors=38
+08:25:08 seg done tier=A BMW 750i [2000, 2013] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=A BMW 330ci [2001, 2006] seeds=[2001] records=1555 errors=38
+08:25:08 seg done tier=A BMW 745Li [2002, 2005] seeds=[2004] records=1555 errors=38
+08:25:08 seg done tier=A BMW Z3 [1996, 2002] seeds=[2000] records=1555 errors=38
+08:25:08 seg done tier=A BMW 740i [1993, 2016] seeds=[1998] records=1555 errors=38
+08:25:08 seg done tier=A BMW 745i [2002, 2005] seeds=[2003] records=1555 errors=38
+08:25:08 seg done tier=A BMW 540i [1994, 2003] seeds=[2000] records=1555 errors=38
+08:25:08 seg done tier=A BMW 330xi [2001, 2006] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=A BMW 530xi [2006, 2007] seeds=[2007] records=1555 errors=38
+08:25:08 seg done tier=A BMW Z4 [2003, 2008] seeds=[2003] records=1555 errors=38
+08:25:08 seg done tier=A BMW 128i [2008, 2013] seeds=[2010] records=1555 errors=38
+08:25:08 seg done tier=A BMW 740iL [1995, 2001] seeds=[2001] records=1555 errors=38
+08:25:08 seg done tier=A BMW 650i [2006, 2014] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=A BMW 545i [2004, 2005] seeds=[2004] records=1555 errors=38
+08:25:08 seg done tier=A BMW 645ci [2004, 2005] seeds=[2005] records=1555 errors=38
+08:25:08 seg done tier=A BMW 535xi [2008, 2008] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=A BMW 318i [1984, 1998] seeds=[1997] records=1555 errors=38
+08:25:08 seg done tier=A BMW 528xi [2008, 2013] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=A BMW 535i xDrive [2009, 2016] seeds=[2011] records=1555 errors=38
+08:25:08 seg done tier=A BMW 525xi [2006, 2007] seeds=[2007] records=1555 errors=38
+08:25:08 seg done tier=A BMW 7 Series [1983, 2013] seeds=[2004] records=1555 errors=38
+08:25:08 seg done tier=B BMW 328i [1995, 2016] seeds=[2011] records=1555 errors=38
+08:25:08 seg done tier=B BMW 325i [1988, 2006] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=B BMW X5 [2007, 2013] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=B BMW X3 [2004, 2010] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=B BMW 528i [1979, 2016] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=B BMW X5 [2000, 2006] seeds=[2005] records=1555 errors=38
+08:25:08 seg done tier=B BMW 525i [1989, 2007] seeds=[2007] records=1555 errors=38
+08:25:08 seg done tier=B BMW 530i [1994, 2021] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=B BMW 3 Series [1983, 2016] seeds=[2008] records=1555 errors=38
+08:25:08 seg done tier=B BMW 535i [1985, 2016] seeds=[2011] records=1555 errors=38
+08:25:08 seg done tier=B BMW 330i [2001, 2018] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=B BMW 335i [2007, 2016] seeds=[2007] records=1555 errors=38
+08:25:08 seg done tier=B BMW X3 [2011, 2017] seeds=[2013] records=1555 errors=38
+08:25:08 seg done tier=B BMW 325ci [2000, 2006] seeds=[2002] records=1555 errors=38
+08:25:08 seg done tier=B BMW 750Li [2006, 2015] seeds=[2006] records=1555 errors=38
+08:25:08 seg done tier=B BMW 320i [1978, 2018] seeds=[2014] records=1555 errors=38
+08:25:08 seg done tier=B BMW X1 [2012, 2015] seeds=[2013] records=1555 errors=38
+08:28:29 nav-fail BMW 328xi 2012: ValueError: no 2012 catalog for BMW 328xi (bmw-['328xi'])
+08:28:29 seg done tier=B BMW 328xi [2007, 2015] seeds=[2007, 2012] records=1555 errors=39
+08:39:09 seg done tier=B BMW 325xi [2001, 2006] seeds=[2002, 2006] records=1586 errors=39
+08:46:44 nav-fail BMW 323i 2005: ValueError: no 2005 catalog for BMW 323i (bmw-['323i'])
+08:46:44 seg done tier=B BMW 323i [1998, 2012] seeds=[2000, 2006, 2005] records=1588 errors=40
+08:50:36 seg done tier=B BMW 550i [2006, 2016] seeds=[2008, 2013] records=1595 errors=40
+08:50:44 nav-fail BMW 5 Series 2007: ValueError: no 2007 catalog for BMW 5 Series (bmw-['5_series'])
+08:50:44 seg done tier=B BMW 5 Series [1985, 2016] seeds=[2007] records=1595 errors=41
+08:55:26 time budget reached records=1595
