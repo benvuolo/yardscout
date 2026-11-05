@@ -5,9 +5,8 @@ Both sites print American Honda's own part names ("Headlight Assy., R.",
 Learned through fetch.py on 2026-11-05 from the seed-year trim catalogs of
 every worklist segment (two trims each); see ops/interchange.md.
 
-  * diagram (subcategory) paths are "<group>/<sub>", sub often carries an
-    engine or supplier suffix: engine/alternator_denso_l4,
-    electrical_exhaust_heater_fuel/radiator_toyo, interior_bumper/mirror_fixed.
+  * diagram (subcategory) slugs often carry an engine or supplier suffix:
+    alternator_denso_l4, radiator_toyo, mirror_fixed, p_s_pump_bracket.
   * names may start with "[Freight Parts] " (shipping class, not part of the
     OEM name). Rules match on the name with that prefix removed; the record
     keeps the name exactly as printed.
@@ -26,6 +25,7 @@ import re
 FREIGHT = re.compile(r"^\s*\[freight parts\]\s*", re.I)
 REMAN = re.compile(r"\(RMD\)|\bcore id\b|\breman", re.I)
 REMAN_PN = re.compile(r"RM$", re.I)
+INCLUDES = re.compile(r"\((?:includes?|incl\.?|with|w/)[^)]*\)", re.I)
 
 
 def oem_name(name: str) -> str:
@@ -37,40 +37,44 @@ def matches(cat: str, name: str) -> bool:
     start ("ring" must not hit "Steering")."""
     inc, exc = RULES[cat]
     n = oem_name(name)
-    return bool(re.search(inc, n, re.I)) and not re.search(r"\b(?:" + exc + ")", n, re.I)
+    # "(INCLUDES CLUTCH & COIL)" / "(INCLUDES REF #1,2,3)" say what the
+    # assembly contains; they are not part of what it is.
+    bare = INCLUDES.sub(" ", n)
+    return bool(re.search(inc, n, re.I)) and not re.search(r"\b(?:" + exc + ")", bare, re.I)
 
 
 def is_reman(pn: str, name: str) -> bool:
     return bool(REMAN.search(name or "") or REMAN_PN.search(pn or ""))
 
 
-# our category -> regex over "<group>/<sub>" of the trim catalog's diagram links
+# our category -> regex over the diagram (subcategory) slug of the trim
+# catalog's parts-list links (the template drops the section slug)
 CAT_PAGES = {
-    "alternator": r"^engine/alternator(?!_belt|_bracket)(_|$)",
-    "starter": r"^engine/starter_motor",
-    "ac-compressor": r"^body_air_conditioning/a_c_(air_conditioner_)?compressor",
-    "headlights": r"^electrical_exhaust_heater_fuel/headlight",
-    "tail-lights": r"^electrical_exhaust_heater_fuel/taillight",
-    "side-mirrors": r"^interior_bumper/mirrors?(_|$)",
-    "window-regulator": r"^body_air_conditioning/((front|rear|slide)_)?door_(glass|windows?)_(door_)?regulator",
-    "window-switch": r"^(interior_bumper/front_door_lining|interior_bumper/door_lining|electrical_exhaust_heater_fuel/switch)$",
-    "climate-control": r"^electrical_exhaust_heater_fuel/(heater_control(?!_rear|_lever)|auto_air_conditioner_control(?!_rear)|center_module[a-z_]*air_conditioner)",
-    "fuel-pump-module": r"^electrical_exhaust_heater_fuel/(fuel_tank|fuel_pump[a-z_]*)$",
-    "throttle-body": r"^engine/throttle_body",
-    "power-steering-pump": r"^engine/p_s_pump(?!_bracket)(_|$)",
-    "gauge-cluster": r"^electrical_exhaust_heater_fuel/(combination_)?meter(_|$)",
-    "ignition-coils": r"^engine/(ignition_coil|plug_hole_coil|plug_top_coil)",
-    "radiator": r"^electrical_exhaust_heater_fuel/radiator(?!_hose)(_|$)",
-    "door-front": r"^body_air_conditioning/(front_door_panels?|door_panels?)$",
-    "door-rear": r"^body_air_conditioning/(rear_door_panels?|slide_door_panels?)$",
-    "hood": r"^body_air_conditioning/(engine_)?hood$",
-    "fender": r"^body_air_conditioning/(front_)?fenders?$",
-    "bumper-front": r"^interior_bumper/(bumpers?|front_bumper)$",
-    "bumper-rear": r"^interior_bumper/(bumpers?|rear_bumper)$",
-    "grille": r"^interior_bumper/(front_)?grille$",
-    "trunk-lid": r"^body_air_conditioning/trunk_lid$",
-    "tailgate": r"^body_air_conditioning/(tailgate|lower_tailgate)$",
-    "liftgate": r"^body_air_conditioning/tailgate$",
+    "alternator": r"^alternator(?!_belt)(_|$)",   # old catalogs draw the unit on alternator_bracket
+    "starter": r"^starter_motor",
+    "ac-compressor": r"^a_c_(air_conditioner_)?compressor",
+    "headlights": r"^headlight",
+    "tail-lights": r"^taillight",
+    "side-mirrors": r"^mirrors?(_|$)",
+    "window-regulator": r"^((front|rear|slide)_)?door_(glass|windows?)(_door)?(_regulator)?$",
+    "window-switch": r"^((front_)?door_lining|switch)$",
+    "climate-control": r"^(heater_control(?!_rear|_lever)|auto_air_conditioner_control(?!_rear)|center_module[a-z_]*air_conditioner)",
+    "fuel-pump-module": r"^(fuel_tank|fuel_pump[a-z_]*)$",
+    "throttle-body": r"^throttle_body",
+    "power-steering-pump": r"^p_s_pump(_|$)",   # pre-2003 catalogs draw the pump on p_s_pump_bracket
+    "gauge-cluster": r"^(combination_)?meter(_|$)",
+    "ignition-coils": r"^(ignition_coil|plug_hole_coil|plug_top_coil)",
+    "radiator": r"^radiator(?!_hose)(_|$)",
+    "door-front": r"^(front_door_panels?|door_panels?)$",
+    "door-rear": r"^(rear_door_panels?|slide_door_panels?)$",
+    "hood": r"^(engine_)?hood$",
+    "fender": r"^(front_)?fenders?$",
+    "bumper-front": r"^(bumpers?|front_bumper)$",
+    "bumper-rear": r"^(bumpers?|rear_bumper)$",
+    "grille": r"^(front_)?grille$",
+    "trunk-lid": r"^trunk_lid$",
+    "tailgate": r"^(lower_)?tailgate$",
+    "liftgate": r"^tailgate$",
 }
 # Honda calls both a pickup bed gate and an SUV/van/hatch rear hatch "Tailgate".
 # Our categories split them: pickups -> tailgate, everything else -> liftgate.
@@ -87,11 +91,11 @@ RULES = {
                       r"clutch|valve|switch|sensor|hose|pipe|stator|pulley|plate|ring|stay|bracket|coil|relay|oil|bolt|cover|gasket|seal|thermo|kit"),
     "headlights": (rf"^headlight\s+(assy\.|unit)|^(light|lamp)\s+assy\.?,\s*{SIDE}head|^headlight,\s*{SIDE}",
                    r"bracket|bulb|socket|ballast|inverter|igniter|cord|cover|bezel|lens|level|actuator|garnish|cap|module|unit,\s*(hid|control)|washer|cleaner|nut|screw|harness|seal|gasket|ecu|control unit|light unit,|holder"),
-    "tail-lights": (rf"^taillight\s+assy\.|^(light|lamp)\s+(assy\.?|unit),\s*{SIDE}(tail|rr\.?\s*combination)|^taillight,\s*{SIDE}|^light assy\.,\s*{SIDE}rr\.?\s*combination",
+    "tail-lights": (rf"^lamp\s+unit,\s*[rl]\.\s*(tail)?\s*$|^taillight\s+assy\.|^(light|lamp)\s+(assy\.?|unit),\s*{SIDE}(tail|rr\.?\s*combination)|^taillight,\s*{SIDE}|^light assy\.,\s*{SIDE}rr\.?\s*combination",
                     r"bulb|socket|gasket|seal|base|cord|cover|lens\b|reflector|license|garnish|bracket|nut|screw|holder|cushion|harness|inner|trunk lid|lid light|back[- ]?up"),
     "side-mirrors": (rf"^mirror\s+assy\.?,\s*{SIDE}(\(|door|side|$|\w)",
                      r"rearview|room|inside|vanity|glass|cover|cap|housing|actuator|bracket|garnish|base|motor|switch|skull|harness|visor|day/night|interior"),
-    "window-regulator": (r"^regulator(\s+assy\.?)?,.*\bdoor\b|^regulator(\s+assy\.?)?,.*window|^motor(\s+assy\.?)?,.*power window|^motor(\s+assy\.?)?,.*window regulator|^window regulator",
+    "window-regulator": (r"^regulator(\s+assy\.?)?,\s*[rl]\.?\s+(fr|rr)\.?\s*$|^regulator(\s+assy\.?)?,.*\bdoor\b|^regulator(\s+assy\.?)?,.*window|^motor(\s+assy\.?)?,.*power window|^motor(\s+assy\.?)?,.*window regulator|^window regulator",
                          r"switch|handle|channel|run|glass|sash|cable(?!.*regulator)|knob|cover|bracket|bolt|seal|weatherstrip|holder|guide|stopper|garnish|tape|clip|cushion"),
     "window-switch": (r"^switch\s+assy\.?,\s*power\s+window\s+master|^switch\s+assy\.?,\s*.*\bmaster\b.*power\s+window|^power\s+window\s+master\s+switch",
                       r"panel|base|bezel|cover|knob|lamp|bulb|garnish|passenger|sub\b"),
@@ -115,7 +119,7 @@ RULES = {
                   r"skin|lining|hinge|trim|weatherstrip|seal|checker|garnish|molding|sash|stiffener|reinforce|beam|bolt|bracket|switch|roller|rail|motor|cable|actuator|lock|stopper"),
     "hood": (r"^hood,\s*engine|^hood\s+assy\b|^hood(\s*\(|$)",
              r"hinge|lock|latch|wire|cable|lever|insulator|seal|rubber|stay|support|stopper|cushion|emblem|molding|spoiler|scoop|duct|cover|garnish|nozzle|striker|bracket|grommet|opener"),
-    "fender": (rf"^fender,\s*{SIDE}(fr\.?)?(\s*\(|\s*$|\s+fr)|^fender\s+assy\.?,\s*{SIDE}(fr\.?)?(\s*\(dot\)|\s*$)|^fender,\s*{SIDE}$",
+    "fender": (rf"^panel\s+set,\s*{SIDE}fr\.?\s+fender\b|^fender,\s*{SIDE}(fr\.?)?(\s*\(|\s*$|\s+fr)|^fender\s+assy\.?,\s*{SIDE}(fr\.?)?(\s*\(dot\)|\s*$)|^fender,\s*{SIDE}$",
                r"inner|liner|garnish|molding|flare|mud|splash|guard|lining|shield|protector|seal|cover|bracket|stay|brace|extension|emblem|cushion|insulator|clip"),
     "bumper-front": (r"^(face|cover),\s*fr\.?\s+bumper(?!\s+(lower|side|lip|corner|spoiler|garnish|molding))|^bumper\s+(face|cover)\s+assy\.?,\s*fr|^bumper,\s*fr\.?(\s*\(|$)|^face,\s*front\s+bumper",
                      r"beam|spoiler|lip|absorber|garnish|molding|grille|bracket|spacer|stay|reinforce|support|cap|guard|step|skid|plate|license|lower\s+cover|side|corner|retainer|extension|hole\s+cover"),
@@ -190,3 +194,37 @@ def pick_trims(slugs: list[str], want_hybrid: bool | None = None) -> list[str]:
     s = [x for x in s if split_trim(x)[0] == body]
     r = sorted(s, key=lambda x: (_rank(x), len(x), x))
     return [r[0], r[-1]] if len(r) > 1 and r[0] != r[-1] else r[:1]
+
+
+# ---------------------------------------------------------------- template glue
+
+def head(row: dict) -> str:
+    """Text the template's COMMON_EXCLUDE is tested on: the OEM name without
+    the freight prefix, "(INCLUDES ...)" notes, and the coil type words
+    "Plug Hole" / "Plug Top" (Honda's name for coil-on-plug ignition coils,
+    "Coil, Plug Hole"; the word "Plug" is not a spark plug there)."""
+    n = INCLUDES.sub(" ", oem_name(row.get("main", "")))
+    return re.sub(r"\bplug\s+(hole|top)\b", " ", n, flags=re.I)
+
+
+def rule(cat: str):
+    return lambda row, _text: matches(cat, row.get("main", ""))
+
+
+def make_config(T, site: str, models: dict):
+    return T.Config(
+        site=site, models=models, subcats=CAT_PAGES, parts={c: rule(c) for c in RULES},
+        head_fn=head, trim_col=r"body\s*&\s*trim", option_col=r"emission\s*&\s*transmission",
+        reman_fn=lambda r: is_reman(r.get("pn", ""), r.get("main", "")),
+        trim_pick=lambda make, model, year, slugs: pick_trims(slugs, want_hybrid=bool(_HYBRID.search(model))),
+    )
+
+
+def bind(T, cfg):
+    cats_for, parts_on_page, product = T.bind(cfg)
+
+    def categories_for(make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
+        # one "Tailgate" diagram; pickups file it as tailgate, the rest as liftgate
+        drop = "liftgate" if model in PICKUPS else "tailgate"
+        return cats_for(make, model, year, [c for c in cats if c != drop])
+    return categories_for, parts_on_page, product

@@ -166,6 +166,16 @@ class Config:
     # header regex of the column kept as fitment[].options (BMW prints its
     # body/engine variants under "Submodel")
     option_col: str = r"option|detail"
+    # optional (Honda family): (make, model, year, [trim slugs in page order])
+    # -> the trim slugs to read when a year catalog is split per trim
+    # ("4dr_lx-ka_5at"). Default: first and last in page order.
+    trim_pick: object = None
+    # optional: header regex of the column kept as fitment[].trims when it is
+    # not "Trim" (Honda family: "Body & Trim").
+    trim_col: str | None = None
+    # optional: row -> True for a remanufactured row the site marks its own way
+    # (Honda "(RMD)", "Core Id", pn suffix "RM"); OR-ed with REMAN_RE.
+    reman_fn: object = None
 
 
 def slug(name: str) -> str:
@@ -250,7 +260,7 @@ def year_catalogs(cfg: Config, make: str, model: str, year: int) -> list[tuple[s
     return cats[:MAX_CATALOGS]
 
 
-def parts_list_links(cfg: Config, catalog_url: str) -> list[str]:
+def parts_list_links(cfg: Config, catalog_url: str, ctx: tuple | None = None) -> list[str]:
     """Parts-list URLs on a year catalog. When the catalog is split into
     option catalogs (no parts-list links, only /<year>-...--<option>-parts.html
     links: per trim on Honda-family sites, per engine/transmission on Ford,
@@ -269,16 +279,22 @@ def parts_list_links(cfg: Config, catalog_url: str) -> list[str]:
     if not trims:
         raise ValueError(f"no parts-list or trim links on {catalog_url}")
     pick = [trims[0]] + ([trims[-1]] if len(trims) > 1 else [])
+    if cfg.trim_pick and ctx:
+        pre = "/%s--" % base
+        slugs = cfg.trim_pick(*ctx, [u[len(pre):-len("-parts.html")] for u in trims])
+        pick = [f"{pre}{t}-parts.html" for t in slugs]
+        if not pick:
+            raise ValueError(f"trim_pick chose no trim on {catalog_url}")
     out: list[str] = []
     for t in pick:
-        out += parts_list_links(cfg, absolute(cfg.site, t))
+        out += parts_list_links(cfg, absolute(cfg.site, t), ctx)
     return out
 
 
 def categories_for(cfg: Config, make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
     links: list[str] = []
     for _variant, url in year_catalogs(cfg, make, model, year):
-        links += [u for u in parts_list_links(cfg, url) if u not in links]
+        links += [u for u in parts_list_links(cfg, url, (make, model, year)) if u not in links]
     out: dict[str, list[str]] = {}
     for cat in cats:
         rx = cfg.subcats.get(cat)
@@ -383,7 +399,8 @@ def parts_on_page(cfg: Config, list_url: str, cat: str) -> list[dict]:
                 continue
         if COMMON_EXCLUDE.search(cfg.head_fn(r) if cfg.head_fn else f"{r['group']} | {r['main']}"):
             continue
-        kept.append((r, bool(REMAN_RE.search(text)) or bool(cfg.reman_re and re.search(cfg.reman_re, text, re.I))))
+        kept.append((r, bool(REMAN_RE.search(text)) or bool(cfg.reman_re and re.search(cfg.reman_re, text, re.I))
+                     or bool(cfg.reman_fn and cfg.reman_fn(r))))
     if any(not reman for _, reman in kept):
         kept = [k for k in kept if not k[1]]
     out, seen = [], set()
@@ -470,7 +487,7 @@ def product(cfg: Config, product_url: str) -> dict:
     c_ymm = col(r"year") if titles else 0
     c_te = col(r"trim\s*&\s*engine")
     c_eng = None if c_te is not None else col(r"engine")
-    c_trim = None if c_te is not None else col(r"^trim")
+    c_trim = None if c_te is not None else col(cfg.trim_col or r"^trim")
     c_opt = col(cfg.option_col)
     if c_ymm is None:
         raise ValueError(f"unexpected fitment header {titles}")
