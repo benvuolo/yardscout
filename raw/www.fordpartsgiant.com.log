@@ -1,0 +1,6 @@
+01:13:11 start site=www.fordpartsgiant.com segments=112 tiers=['A', 'B']
+01:18:19 seg done tier=A Ford F-150 [1997, 2003] seeds=[2001] records=43 errors=0
+01:23:04 seg done tier=A Ford F-150 [2004, 2008] seeds=[2004] records=97 errors=0
+01:28:59 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=172 errors=0
+01:36:36 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=269 errors=0
+01:43:40 time budget reached records=359
