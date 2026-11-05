@@ -6,3 +6,12 @@
 02:09:16 seed A|Kia|Rio|2019 had network failures; left open for retry
 02:09:16 seg done tier=A Kia Rio [2001, 2023] seeds=[2013, 2009, 2019] records=349 errors=1
 02:09:16 time budget reached records=349
+03:27:11 start site=www.kiapartsnow.com segments=35 tiers=['A', 'B']
+03:27:11 seg done tier=A Kia Soul [2010, 2013] seeds=[2013] records=349 errors=1
+03:27:11 seg done tier=A Kia Optima [2011, 2013] seeds=[2013] records=349 errors=1
+03:27:11 seg done tier=A Kia Soul [2014, 2019] seeds=[2014] records=349 errors=1
+03:27:11 seg done tier=A Kia Rio [2001, 2023] seeds=[2013] records=349 errors=1
+03:39:03 seg done tier=A Kia Sorento [2011, 2015] seeds=[2011] records=420 errors=1
+03:50:56 seg done tier=A Kia Optima [2014, 2015] seeds=[2015] records=469 errors=1
+04:06:16 seg done tier=A Kia Forte [2014, 2018] seeds=[2014] records=568 errors=1
+04:06:16 time budget reached records=568
