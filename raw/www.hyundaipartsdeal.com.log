@@ -47,3 +47,23 @@
 04:18:19 seg done tier=A Hyundai Elantra [2017, 2018] seeds=[2017, 2018] records=879 errors=0
 04:29:23 seg done tier=A Hyundai Santa Fe [2001, 2004] seeds=[2004] records=946 errors=0
 04:29:23 time budget reached records=946
+04:29:32 start site=www.hyundaipartsdeal.com segments=35 tiers=['A', 'B']
+04:29:32 seg done tier=A Hyundai Sonata [2011, 2013] seeds=[2011] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Sonata [2006, 2010] seeds=[2009] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Elantra [2011, 2013] seeds=[2013] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Elantra [2007, 2010] seeds=[2010] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Santa Fe [2007, 2012] seeds=[2007] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Accent [2012, 2017] seeds=[2013] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Sonata [2015, 2017] seeds=[2015] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Elantra [2014, 2016] seeds=[2016] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Accent [2006, 2011] seeds=[2009] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Elantra [2004, 2006] seeds=[2005] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Genesis [2009, 2016] seeds=[2013] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Veloster [2012, 2017] seeds=[2013] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Sonata [1997, 2005] seeds=[2004] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Elantra [2017, 2018] seeds=[2017] records=946 errors=0
+04:29:32 seg done tier=A Hyundai Santa Fe [2001, 2004] seeds=[2004] records=946 errors=0
+04:43:57 seg done tier=A Hyundai Tucson [2005, 2008] seeds=[2006] records=1023 errors=0
+04:45:56 seg done tier=A Hyundai Sonata [2014, 2014] seeds=[2014] records=1023 errors=0
+04:59:49 seg done tier=A Hyundai Elantra [1995, 2003] seeds=[2002, 1999, 2003] records=1084 errors=0
+04:59:49 time budget reached records=1084
