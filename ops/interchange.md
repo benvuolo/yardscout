@@ -1006,3 +1006,10 @@ a claim.
 5. The audit's hybrid signal is a heuristic for finding apps, never shipped;
    vPIC model-level strings ("Base/Hybrid" on every 2011-16 Highlander)
    inflate the counts for those rows.
+
+## Owner decisions 2026-11-05 ~22:40 UTC (hub)
+
+1. Oct 27 grant-pro runs (pre-masking, emails in logs) deleted: runs 40528784800, 40529156919, 40529630960, 40529784249. The Nov 5 runs are on the masked workflow (882cf96).
+2. Mopar/Subaru: owner asked for "a workaround". No bypass (CLAUDE.md rule 2). Instead: one same-identity retry (`.retried403` on oem-raw; a second refusal is final), Dodge/Chrysler/Ram seeds through jeeppartsdeal (a full Mopar dealer catalog that has not refused us), and a Subaru source scout under the usual robots/terms survey. Euro sites get curation namespaces. Session: session_016ZzJfMapNmKpMbuoJzVupB.
+3. The 41 hand vg groups the §7.6 trigger would withhold (hypothetical closure run): no hand withdrawal; the rule withholds them automatically once cells are OEM-closed. The list goes to ops/parts.md for a basis re-check.
+4. U-Pull-R / Harry's: no captcha work. Harry's scans fine (4,230 cars; their site has served an unchanged list since 2026-11-04, newest car 11-03). U-Pull-R stays "waiting on the yard"; follow-up call/email to jessef@ if no reply by 11-07.
