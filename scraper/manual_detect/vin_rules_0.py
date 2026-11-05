@@ -519,7 +519,7 @@ def main() -> int:
             {"position": 7, "values": list(vals),
              "table": {k: v[1] for k, v in DIGIT_T7.items() if k in vals},
              "exclusion": "MY1997 Accord (characters 4-5 CD or CE) is carved out into honda_accord_1997_vin7_*: vPIC decodes those VINs inverted, so the ground truth cannot validate them"},
-            rf"^({hw})[A-HJ-NPR-Z0-9]{{3}}[{vals}][A-HJ-NPR-Z0-9]{{2}}[1-9A-HJ-NPR-Y]",
+            rf"^({hw})[A-HJ-NPR-Z0-9]{{3}}[{vals}][A-HJ-NPR-Z0-9]{{2}}[HJKLMNPRSTVWXY1-9]",
             "every Honda-brand passenger car, MPV and truck with a Honda WMI (Accord, Civic, CRX, del Sol, Prelude, S2000, Insight, Fit, CR-V, Element, Odyssey, Pilot, Ridgeline ...)",
             digit_cites_h)
     # Honda letter era
@@ -527,7 +527,7 @@ def main() -> int:
         add(f"honda_vin7_letter_2010_on_{claim}", "Honda", claim, [2010, None], HONDA_WMI,
             {"position": 7, "values": list(vals),
              "table": {k: v[1] for k, v in LETTER_T7.items() if k in vals}},
-            rf"^({hw})[A-HJ-NPR-Z0-9]{{3}}[{vals}]",
+            rf"^({hw})[A-HJ-NPR-Z0-9]{{3}}[{vals}][A-HJ-NPR-Z0-9]{{2}}[A-HJ-NPR-TV-Y]",
             "every Honda-brand vehicle with a Honda WMI, MY2010 on (character 7 is a letter from MY2010)",
             letter_cites)
     # Acura digit era
@@ -535,7 +535,7 @@ def main() -> int:
         add(f"acura_vin7_digit_1986_2009_{claim}", "Acura", claim, [1986, 2009], ACURA_WMI,
             {"position": 7, "values": list(vals),
              "table": {k: v[1] for k, v in DIGIT_T7.items() if k in vals}},
-            rf"^({aw})[A-HJ-NPR-Z0-9]{{3}}[{vals}]",
+            rf"^({aw})[A-HJ-NPR-Z0-9]{{3}}[{vals}][A-HJ-NPR-Z0-9]{{2}}[GHJKLMNPRSTVWXY1-9]",
             "every Acura (Integra, Legend, Vigor, CL, TL, RL, RSX, TSX, NSX, MDX, RDX, ZDX ...) with an Acura WMI",
             digit_cites_a)
     # Acura letter era
@@ -543,7 +543,7 @@ def main() -> int:
         add(f"acura_vin7_letter_2010_on_{claim}", "Acura", claim, [2010, None], ACURA_WMI,
             {"position": 7, "values": list(vals),
              "table": {k: v[1] for k, v in LETTER_T7.items() if k in vals}},
-            rf"^({aw})[A-HJ-NPR-Z0-9]{{3}}[{vals}]",
+            rf"^({aw})[A-HJ-NPR-Z0-9]{{3}}[{vals}][A-HJ-NPR-Z0-9]{{2}}[A-HJ-NPR-TV-Y]",
             "every Acura with an Acura WMI, MY2010 on",
             letter_cites)
     # Honda MY1984-1986 (character 6)
@@ -552,7 +552,7 @@ def main() -> int:
             {"position": 6, "values": list(vals),
              "table": {k: v[1] for k, v in OLD_T6.items() if k in vals},
              "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN) and character 7 is a body code 2-5"},
-            rf"^({hw})(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[{vals}][2-5]",
+            rf"^({hw})(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[{vals}][2-5][A-HJ-NPR-Z0-9]{{2}}[EFG]",
             "MY1984-1986 Honda Accord, Prelude, Civic (CRX, hatchback, sedan, Wagon, Wagon 4WD, Wagovan): the pre-1987 Honda layout where character 6 is the transmission",
             ["mid_1983_09_12", "mid_1984_06_20", "mid_1985_06_12", "mid_1985_07_11", "mid_1985_11_19"])
     # Character-7 codes NHTSA's data does not list (Canada-market lines).
@@ -563,7 +563,7 @@ def main() -> int:
              "table": {**{k: v[1] for k, v in DIGIT_T7.items() if k in dvals},
                        **{k: v[1] for k, v in LETTER_T7.items() if k in lvals}},
              "also_required": "the VIN's vPIC decode has no Model AND no lot car of that model year with the same characters 4-7 decodes to a model, i.e. Honda never filed this code with NHTSA (on the lots: Canada-market Acura EL/CSX and a few Canada-only Civic codes)"},
-            rf"^({hw}|{aw})[A-HJ-NPR-Z0-9]{{3}}[{dvals}{lvals}]",
+            rf"^({hw}|{aw})[A-HJ-NPR-Z0-9]{{3}}[{dvals}{lvals}][A-HJ-NPR-Z0-9]{{2}}[A-HJ-NPR-TV-Y1-9]",
             "Honda/Acura VINs (mostly Canada-market cars at Canadian yards) whose model code is not in NHTSA's vPIC data",
             ["mid_1986_06_27", "mid_1985_11_19", "mid_2009_08_24"],
             {"caveat": ("Honda's construction-of-VIN pages define character 7 as body type + transmission for every "
@@ -718,6 +718,10 @@ def main() -> int:
             "char6_MY1984_1986_Honda": {k: v[1] for k, v in OLD_T6.items()},
             "char7_body_MY1984_1986_Honda": {"2": "2-door sedan", "3": "2-door hatchback or coupe", "4": "4-door sedan", "5": "4-door wagon"},
         },
+        "vin_regex_note": ("Each rule's vin_regex checks the WMI, the transmission character and the character-10 year code. "
+                           "Character 10 letters repeat every 30 years (A = 1980 or 2010), so the model year is resolved "
+                           "with the listing/vPIC year (scope.model_years); the check digit is verified separately; the "
+                           "'not in vPIC' split and the 1997 Accord carve-out need the extra conditions stated in the rule."),
         "not_encoded_or_not_ruled": not_encoded,
         "rules": rules,
         "newly_confirmed_manual_cars": newly_cars,
