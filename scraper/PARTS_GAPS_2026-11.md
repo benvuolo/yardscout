@@ -2212,3 +2212,83 @@ parts.
 
 Result (same inventory): generic-only 13,604 (4.1%) → 13,315 (4.0%); no
 entry 12,403 → 12,391.
+
+### 22.8 Ford Escort 1991–1996, 1997–2003, and the ZX2
+
+Basis: WP Ford_Escort_(North_America); consumerguide.com/used/1991-96-ford-escort
+and /used/1997-03-ford-escort; Washington Post 1997 review (via cars.com);
+drivechicago.com 1998 ZX2 review; NHTSA vPIC model lists and VIN decodes;
+fueleconomy.gov; RockAuto catalog (1999 and 2002, both engines); Ford
+parts catalog pages (fordpartsdeal.com) for lamp part numbers (fetched).
+- **New `GENERATION_BREAKS` "escort": [1997]:** gen 2 ran 1991–96 (hatch,
+  wagon, sedan from 1992); gen 3 sedan 1997–2002 (fleet-only 2001–02),
+  wagon 1997–99, ZX2 1998–2003.
+- **Appearance cuts added to `FACELIFT_BREAKS`:**
+  - 1992 and 1993: a minor grille change. WP says 1992 ("the grille oval …
+    enlarged") and CG says 1993 ("a slightly restyled grille"); both are
+    cut.
+  - 1999: "minor visual revision to the rear fascia (integrating the reverse
+    lamps into the taillamp units)" (WP); the Ford catalog sedan rear-lamp
+    part number changes between 1998 and 1999.
+  - 2003: the ZX2's "front fascia underwent a revision" (WP).
+  The existing Escort lamp rows are now cut at these years.
+- **A/C:** optional in every generation (CG 1995; the 1997 LX review; the
+  1998 ZX2 review).
+- **Sunroof:** optional on gen 2 (CG); the ZX2 power moonroof was optional.
+
+**ZX2 entry (16 "ZX2" + 5 "Escort ZX2" listings).**
+- **Why a separate entry:** the ZX2 coupe has its own front end and lamps,
+  and NHTSA decodes 1999+ VINs as model "ZX2".
+- **Before:** "ZX2" listings matched nothing, and "Escort ZX2" listings got
+  the sedan's lamp rows.
+- **Now:** the ZX2 has its own entry ("Ford Escort ZX2", 1998–2003) with the
+  pump, fan, A/C (option) and moonroof (option) rows plus the evergreens.
+  RockAuto lists the same A/C compressor, fuel pump and radiator fan for the
+  Zetec (ZX2) and SPI (sedan) engines in 1999 and 2002. This is aftermarket
+  catalog fitment, and 1997–98 and the wagon were not checked.
+- **Not covered:** plain "Escort" listings that decode as coupes (45 on the
+  lots) stay on the Escort entry, because the listing doesn't say ZX2.
+  Flagged.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1991–96, 1997–2003 | — | Every car. |
+| A/C compressor | same | option | Optional every generation. |
+| Sunroof | 1991–96 | option | |
+| ZX2: fuel pump, fan, A/C (option), moonroof (option) | 1998–2003 | — / option | As above, on the ZX2 entry. |
+
+Left out, no stated basis: gen-3 sedan sunroof (not stated), wagon-specific
+lamps (the 1997–99 wagon kept the gen-2 body from the windshield back), and
+lamp rows on the ZX2 entry.
+
+Result (same inventory): generic-only 13,315 (4.0%) → 13,030 (3.9%); no
+entry 12,391 → 12,375.
+
+### 22.9 Block totals, and a hybrid finding for the owner
+
+Same 334,595-car inventory, code before §22 (33bce51) vs after:
+generic-only **15,399 (4.6%) → 13,030 (3.9%)**, so 2,369 cars moved. No entry
+12,409 → 12,375 (34 listings now match: 6 Captiva, 12 JX, 16 ZX2).
+- **New `GENERATION_BREAKS`:** park avenue 1997, escort 1997.
+- **New appearance cuts (`FACELIFT_BREAKS`, "# §22" group or existing
+  keys):** milan 2010; encore 2017; park avenue 1993/1995/2003/2005;
+  scion xb 2011/2013; sonata 2002; infiniti qx60 2016/2019; escort
+  1992/1993/1999/2003.
+- **Routing:** the Encore GX has its own entry; "Captiva", "JX" and "ZX2"
+  listings now match their vehicles.
+- **Per-car comparison:** only 7 of 12,666 combinations changed, all
+  intended (5 Encore GX, 2 "Escort ZX2"). Interchange notes are identical.
+  All offline suites and `--list-parts` pass.
+
+**Hybrid finding (not changed; needs an owner decision).** 802 listings on
+the lots name a hybrid ("Fusion Hybrid", "Escape Hybrid", "Civic Hybrid",
+"Camry Hybrid", "Sonata Hybrid" …). 763 of them show at least one gas-only
+row: the consensus-evergreen alternator and starter (752) and/or the
+gap-block A/C compressor (405). Hybrids of these families typically use a
+high-voltage electric A/C compressor and start/charge through the hybrid
+system, so those rows are likely false fitment on hybrid listings.
+Proposed fix: a negative gate (e.g. `"not_trim": ["hybrid"]`) on the
+alternator, starter and A/C compressor rows that excludes them when the
+listing or VIN decode says hybrid. That needs a small `match_vehicle`
+change and a per-family check of which hybrids keep a conventional part,
+so it is left for the owner's go-ahead.

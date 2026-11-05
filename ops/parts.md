@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-05, §13–21 done, §22 in progress; §23 facelifts and §23.6 routing in a second session)
+# Parts workstream — status (updated 2026-11-05, §13–22 done; §23 facelifts and §23.6 routing in a second session)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -118,13 +118,16 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   cars with a narrowed lamp window, no other per-car change, coverage
   unchanged.
 
-- §22 (owner via hub: "Ensure everything is at speed"; in progress): Milan
-  done with facelift 2010 (generic-only 15,399 → 15,087 on the 334,595-car
-  scan); Encore with facelift 2017 and its own Encore GX entry (→ 14,788);
-  Captiva Sport, with "Captiva" listings routed to it (→ 14,487); Park Avenue
-  with new break 1997 and cuts 1993/1995/2003/2005 (→ 14,188); Scion xB 2nd
-  gen with cuts 2011/2013 (→ 13,893); Sonata EF 1999–2005 with facelift 2002
-  (→ 13,604); QX60 with cuts 2016/2019 and "JX" listings routed (→ 13,315).
+- §22 (owner via hub: "Ensure everything is at speed"): Milan, Encore,
+  Captiva Sport, Park Avenue, Scion xB 2nd gen, Sonata EF, JX35/QX60, Escort,
+  researched with cited sources first. Same-inventory generic-only 15,399
+  (4.6%) → 13,030 (3.9%); no entry 12,409 → 12,375. New breaks: Park Avenue
+  and Escort generations 1997; appearance cuts for Milan, Encore, Park
+  Avenue, xB, Sonata 2002, QX60, Escort. Routing: Encore GX own entry;
+  Captiva, JX and ZX2 listings now match (ZX2 has its own entry).
+- Open for the owner: hybrid listings (763 of 802) show gas-only rows
+  (alternator/starter from the evergreens, gap-block A/C compressor). A
+  negative "not hybrid" gate is proposed in PARTS_GAPS §22.9.
 
 - §23.6 (hub, accuracy fix, rule 3; PARTS_GAPS §23.6): routing.
   Ram Van / Ram Wagon / B-vans get their own 1994–97 / 1998–2003 entries
@@ -163,10 +166,9 @@ The generic-only count re-matches every distinct year/make/model in
 
 ## Next
 
-1. Next block by generic-only cars: Mercury Milan (Fusion twin) (311), Buick Encore (307), Chevrolet Captiva Sport (301), Buick Park Avenue (299), Scion xB (2nd gen) (293), Hyundai Sonata (290), Infiniti QX60 (288), Ford Escort (285).
-   Research generations and facelifts with sources first. The Fiat 500L
-   (2014–20) and 500X (2016–23) now have evergreen-only entries; they need
-   their own lamp/mechanical research.
+1. Next block by generic-only cars: Volvo S40 (276), Saturn SL (267), Chevrolet Trax (266), Chevrolet Sonic (261), Ford Freestar (254), Ford Freestyle (252), Mitsubishi Mirage (233), Chevrolet Venture (226).
+   Research generations and facelifts with sources first. The Fiat 500L/500X
+   and Encore GX have evergreen-only entries awaiting their own research.
 2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
    overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
    into `lexus es` and drop the duplicate (§20.5).

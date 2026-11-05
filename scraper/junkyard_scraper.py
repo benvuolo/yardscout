@@ -6132,6 +6132,24 @@ _gap_extend("infiniti qx60", parts=_per_gen([(2013, 2020)], [
     *_GAP_MECH, _AWD_COUPLING, {k: v for k, v in _SUNROOF.items() if k != "option"},
 ]))
 
+# Ford Escort (285 cars generic-only; 2nd gen 1991-96, 3rd gen 1997-2003,
+# new GENERATION_BREAKS 1997). Appearance cuts at 1992 and 1993 (grille;
+# sources disagree on the year), 1999 (sedan rear lamps) and 2003 (ZX2
+# front fascia) in FACELIFT_BREAKS. A/C optional in every generation;
+# sunroof optional on the 2nd gen.
+# The ZX2 coupe (1998-2003) gets its own entry: its front end and lamps
+# differ from the sedan's, and NHTSA decodes 1999+ VINs as model "ZX2"
+# (16 "ZX2" listings matched nothing). RockAuto lists the same A/C
+# compressor, fuel pump and radiator fan for both engines in 1999 and 2002,
+# so those rows apply to both. Evergreens only beyond that.
+UNOBTANIUM_DB["ford zx2"] = {"display": "Ford Escort ZX2", "make": "Ford", "match": ["ford zx2", "escort zx2"], "year_range": (1998, 2003), "top_parts": []}
+_EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, "ford zx2")
+_gap_extend("escort", parts=[
+    *_per_gen([(1991, 1996), (1997, 2003)], [_GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}]),
+    *_per_gen([(1991, 1996)], [_SUNROOF]),
+])
+_gap_extend("ford zx2", parts=_per_gen([(1998, 2003)], [_GAP_PUMP, _GAP_FAN, {**_GAP_AC, "option": True}, _SUNROOF]))
+
 # ---- end of §22 block
 
 _apply_consensus_evergreens()
@@ -6406,6 +6424,7 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    "escort": [1997],                      # 2nd gen 1991-96, 3rd gen 1997-2003 (PARTS_GAPS §22.8)
     "park avenue": [1997],                 # 1st gen 1991-96, 2nd gen 1997-2005 (PARTS_GAPS §22.4)
     "stratus": [2001],                     # JA sedan 1995-2000, JR sedan 2001-06 (+ Mitsubishi-based coupe 2001-05) (PARTS_GAPS §21.6)
     "spark": [2016],                       # M300 2013-15, M400 2016-22 (PARTS_GAPS §21.3)
@@ -6639,6 +6658,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "park avenue": [1993, 1995, 2003, 2005],
     "scion xb": [2011, 2013],
     "infiniti qx60": [2016, 2019],
+    "escort": [1992, 1993, 1999, 2003],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

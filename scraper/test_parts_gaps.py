@@ -704,6 +704,16 @@ _ld = {(2004, "Chevrolet", "Silverado 1500"): "Chevy Silverado (GMT800)", (2010,
 check("§23.6 1500s keep their own entry",
       all(_cards(*k) == [v] for k, v in _ld.items()) and "Power-Fold Tow Mirrors (pair)" in parts(2010, "Chevrolet", "Silverado 1500"),
       str({k: _cards(*k) for k in _ld}))
+o94, o99 = parts(1994, "Ford", "Escort", FWD), parts(1999, "Ford", "Escort", SEDAN)
+check("§22 Escort: rows per generation (new 1997 break); A/C 'if equipped'; sunroof gen 2 only; tails cut at the 1999 update",
+      MECH3 <= set(o94) and MECH3 <= set(o99) and o94["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1991–1996"
+      and o99["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and "Sunroof Glass + Motor" not in o99
+      and o99["Tail Lights (pair, uncracked)"]["fits"] == "1999–2002")
+check("§22 ZX2: 'ZX2' and 'Escort ZX2' listings get the ZX2 entry (mech + moonroof + evergreens), not the sedan lamps",
+      [m["display"] for m in js.match_vehicle(2001, "Ford", "ZX2")] == ["Ford Escort ZX2"]
+      and [m["display"] for m in js.match_vehicle(2002, "Ford", "Escort ZX2")] == ["Ford Escort ZX2"]
+      and parts(2001, "Ford", "ZX2")["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1998–2003"
+      and "Alternator (spin-test at yard)" in parts(2001, "Ford", "ZX2") and "Tail Lights (pair, uncracked)" not in parts(2001, "Ford", "ZX2"))
 
 # 3. band sanity + lint
 bad = []
