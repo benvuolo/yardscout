@@ -1,16 +1,12 @@
 {
- "at": "2026-11-04T18:21:14Z",
+ "at": "2026-11-05T02:55:51Z",
  "skipped": {
-  "tracked": 154
+  "tracked": 164
  },
  "notes": [
-  "OSM-only pass 2026-11-04T18:21:14Z: 12 pending state(s) covered, 2 still pending.",
-  "OpenStreetMap: Geofabrik/osmium failed for WA, AL."
+  "OSM-only pass 2026-11-05T02:55:51Z: 2 pending state(s) covered, 0 still pending."
  ],
- "osm_pending": [
-  "WA",
-  "AL"
- ],
+ "osm_pending": [],
  "candidates": [
   {
    "name": "P & C AUTO WRECKERS",
@@ -1496,6 +1492,38 @@
    "known_status": "",
    "extra": {
     "osm": "way/1315970636"
+   }
+  },
+  {
+   "name": "U-Pull-We-Pull",
+   "city": "",
+   "state": "WA",
+   "lat": 46.600051,
+   "lng": -120.47963,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "node/14161466631"
+   }
+  },
+  {
+   "name": "Pull-A-Part Used Auto Parts",
+   "city": "",
+   "state": "AL",
+   "lat": 30.714394,
+   "lng": -88.126597,
+   "website": "",
+   "source": "osm",
+   "tier": "E",
+   "platform": "",
+   "evidence": "no website on the map",
+   "known_status": "",
+   "extra": {
+    "osm": "way/360372914"
    }
   }
  ]

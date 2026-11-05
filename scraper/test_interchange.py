@@ -844,6 +844,29 @@ check("mzr starter: Mazda/Escape/Focus units differ — likely",
 check("mzr starter: 2011+ Fusion not on the published list — likely",
       _tiermzr((2012, "Ford", "Fusion"), (2008, "Ford", "Fusion")) == "likely")
 
+# §23.6: "Silverado*"/"Sierra*" prefix apps used to catch HD trucks (6.6
+# Duramax, 8.1, HD 6.0) and 1999-2000 GMT400 "Classic" trucks.
+_fam = lambda y, mk, mo: sorted(f for f, _, _ in js.engine_families_for(y, mk, mo))
+_hd = [(y, mk, mo) for y in (2001, 2005, 2007, 2010, 2013)
+       for mk, mo in (("Chevrolet", "Silverado 2500HD"), ("Chevrolet", "Silverado 2500"),
+                      ("Chevrolet", "Silverado 3500"), ("GMC", "Sierra 2500HD"),
+                      ("GMC", "Sierra 3500"), ("Chevrolet", "Silverado 1500HD"),
+                      ("Chevrolet", "Silverado 2500HD Classic"))]
+check("§23.6 HD Silverado/Sierra never join the light-duty V8 engine families",
+      all(not _fam(*k) for k in _hd), str([(k, _fam(*k)) for k in _hd if _fam(*k)]))
+check("§23.6 1500s keep their families; 2007 Classic is Gen III only",
+      _fam(2004, "Chevrolet", "Silverado 1500") == ["gm-gen3-truck"]
+      and _fam(2010, "GMC", "Sierra 1500") == ["gm-gen4-truck"]
+      and _fam(2005, "GMC", "Sierra") == ["gm-gen3-truck"]
+      and _fam(2007, "Chevrolet", "Silverado 1500 Classic") == ["gm-gen3-truck"]
+      and _fam(2007, "Chevrolet", "Silverado 1500") == ["gm-gen3-truck", "gm-gen4-truck"]
+      and _fam(2000, "Chevrolet", "Silverado Classic") == [])
+check("§23.6 HD donor never verified against a 1500 seeker",
+      _tier("gm-gen3-truck", "alternator", (2005, "Chevrolet", "Silverado 1500"),
+            (2005, "Chevrolet", "Silverado 2500HD")) != "verified"
+      and _tier("gm-gen3-truck", "alternator", (2005, "Chevrolet", "Silverado 1500"),
+                (2004, "GMC", "Sierra 1500")) == "verified")
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILURE(S):", *FAILS, sep="\n  - ")

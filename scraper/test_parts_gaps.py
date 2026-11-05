@@ -15,6 +15,7 @@ cars on the lots, and the body-style gate they introduced.
 Run:  python3 scraper/test_parts_gaps.py
 """
 
+import re
 import sys
 from pathlib import Path
 
@@ -211,7 +212,9 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        # §20
        "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "chevrolet classic",
        # §21
-       "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect"},
+       "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect",
+       # §22
+       "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2", "encore gx"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -553,9 +556,168 @@ check("§21 Transit Connect: pump/fan per generation; A/C plain 2011 and 2020, '
       and c16["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and c20["A/C Compressor (clutch spins free)"].get("trim_status") is None
       and c16["Headlights (clear pair)"]["fits"] == "2014–2018")
 
+# §23 facelift follow-ups: FACELIFT_BREAKS years for further models (cited in PARTS_GAPS §23)
+ex98, ex00 = parts(1998, "Ford", "Expedition"), parts(2000, "Ford", "Expedition")
+check("§23.1 Expedition: headlights cut at the 1999 facelift; minivan/Odyssey keys present",
+      ex98["Headlights (clear, non-hazed)"]["fits"] == "1997–1998" and ex00["Headlights (clear, non-hazed)"]["fits"] == "1999–2002"
+      and js.FACELIFT_BREAKS["grand caravan"] == [1999, 2005, 2011] and js.FACELIFT_BREAKS["odyssey"] == [2002, 2008, 2014, 2021]
+      and js.FACELIFT_BREAKS["town & country"] == [2005, 2011] and js.FACELIFT_BREAKS["expedition"] == [1999, 2015, 2022])
+
+def _fits(y, mk, mo, name):
+    return parts(y, mk, mo)[name]["fits"]
+check("§23.2 Silverado/Sierra/Ram/BMW 3/Maxima: lamp rows cut at the cited facelifts; Ram tail-only 2007 not a cut",
+      _fits(2002, "Chevrolet", "Silverado 1500", "Headlights (clear, non-hazed)") == "1999–2002"
+      and _fits(2016, "Chevrolet", "Silverado 1500", "Headlights (clear, non-hazed)") == "2016–2018"
+      and _fits(2003, "GMC", "Sierra 1500", "Headlights (clear, non-hazed)") == "2003–2006"
+      and _fits(2006, "Dodge", "Ram 1500", "Headlights (clear, non-hazed)") == "2006–2008"
+      and _fits(2003, "BMW", "325i", "OEM Headlight Assembly (E46 halogen/xenon, pair)") == "2002–2003"
+      and _fits(1997, "Nissan", "Maxima", "Headlights (clear pair)") == "1997–1999"
+      and _fits(2019, "Nissan", "Maxima", "OEM LED Headlights") == "2019–2024")
+
+check("§23.3 Ranger/Traverse/Pathfinder: lamp rows cut at the cited facelifts; grille-only years are not cuts",
+      _fits(1990, "Ford", "Ranger", "Headlights (clear, non-hazed)") == "1989–1992"
+      and _fits(1995, "Ford", "Ranger", "Headlights (clear, non-hazed)") == "1993–1997"
+      and _fits(2004, "Ford", "Ranger", "Headlights (clear, non-hazed)") == "2001–2005"
+      and _fits(2020, "Chevrolet", "Traverse", "OEM LED Headlights") == "2018–2021"
+      and js.FACELIFT_BREAKS["pathfinder"] == [2002, 2008, 2017] and "suburban" not in js.FACELIFT_BREAKS)
+
+check("§23.4 TrailBlazer/Liberty/Pilot: lamp rows cut at the cited facelifts; Tahoe/Yukon left out",
+      _fits(2004, "Chevrolet", "Trailblazer", "Headlights (clear, non-hazed)") == "2002–2005"
+      and _fits(2007, "Chevrolet", "Trailblazer", "Headlights (clear, non-hazed)").startswith("2006–")
+      and _fits(2003, "Jeep", "Liberty", "Headlights (clear, non-hazed)") == "2002–2004"
+      and _fits(2006, "Jeep", "Liberty", "Headlights (clear, non-hazed)") == "2005–2007"
+      and js.FACELIFT_BREAKS["pilot"] == [2006, 2012, 2019] and "tahoe" not in js.FACELIFT_BREAKS and "yukon" not in js.FACELIFT_BREAKS)
+
+check("§23.5 Edge/Charger/Dakota/Grand Cherokee: Edge LED headlights cut at the 2019 facelift; tail-only Charger 2009 not a cut",
+      _fits(2017, "Ford", "Edge", "OEM LED Headlights") == "2015–2018" and _fits(2020, "Ford", "Edge", "OEM LED Headlights") == "2019–2024"
+      and js.FACELIFT_BREAKS["charger"] == [2015] and js.FACELIFT_BREAKS["dakota"] == [1991, 2008]
+      and js.FACELIFT_BREAKS["grand cherokee"] == [1996, 2004, 2008, 2014, 2017])
+
+# §22
+n08, n06 = parts(2008, "Mercury", "Milan", AWD), parts(2006, "Mercury", "Milan", AWD)
+check("§22 Milan: mech 2006-11; AWD unit 2007-11 only (AWD decode confirms 2008); lamps cut at the 2010 facelift",
+      MECH3 <= set(n08) and n08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2006–2011"
+      and n08["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in n06
+      and n08["Tail Lights (pair, uncracked)"]["fits"] == "2006–2009")
+
+b14, b19 = parts(2014, "Buick", "Encore", AWD), parts(2019, "Buick", "Encore", FWD)
+check("§22 Encore: mech 2013-22; AWD coupling gated; lamps cut at the 2017 facelift; Encore GX has its own entry",
+      MECH3 <= set(b14) and b14["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2013–2022"
+      and b14["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in b19
+      and b14["Tail Lights (pair, uncracked)"]["fits"] == "2013–2016" and b19["Tail Lights (pair, uncracked)"]["fits"] == "2017–2022"
+      and [m["display"] for m in js.match_vehicle(2021, "Buick", "Encore GX")] == ["Buick Encore GX"]
+      and "Fuel Pump Module (in-tank, test before listing)" not in parts(2021, "Buick", "Encore GX"))
+
+v12, v14 = parts(2012, "Chevrolet", "Captiva Sport", AWD), parts(2014, "Chevrolet", "Captiva Sport", AWD)
+check("§22 Captiva Sport: mech 2012-15; AWD unit 2012 only; 'Captiva' listings route here",
+      MECH3 <= set(v14) and v14["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2012–2015"
+      and v12["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in v14
+      and [m["display"] for m in js.match_vehicle(2013, "Chevrolet", "Captiva")] == ["Chevrolet Captiva Sport"])
+
+a94, a00 = parts(1994, "Buick", "Park Avenue", FWD), parts(2000, "Buick", "Park Avenue", FWD)
+check("§22 Park Avenue: mech per generation (new 1997 break); sunroof gen 2 only; lamps cut at 1993/1995 and 2003/2005",
+      MECH3 <= set(a94) and MECH3 <= set(a00) and a94["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1991–1996"
+      and a00["Radiator Fan Assembly"]["fits"] == "1997–2005" and "Sunroof Glass + Motor" not in a94
+      and a94["Tail Lights (pair, uncracked)"]["fits"] == "1993–1994" and a00["Tail Lights (pair, uncracked)"]["fits"] == "1997–2002")
+
+x09, x12 = parts(2009, "Scion", "xB", FWD), parts(2012, "Scion", "xB", FWD)
+check("§22 Scion xB 2nd gen: mech 2008-15; lamps cut at the 2011 facelift and 2013 update; no sunroof row",
+      MECH3 <= set(x09) and x09["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2008–2015"
+      and x09["Headlights (clear pair)"]["fits"] == "2008–2010" and x12["Tail Lights (pair, uncracked)"]["fits"] == "2011–2012"
+      and "Sunroof Glass + Motor" not in x09)
+
+y01, y04 = parts(2001, "Hyundai", "Sonata", FWD), parts(2004, "Hyundai", "Sonata", FWD)
+check("§22 Sonata EF: mech 1999-2005 (A/C plain); sunroof 'if equipped'; lamps cut at the 2002 facelift; 2008 untouched",
+      MECH3 <= set(y01) and y01["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1999–2005"
+      and y04["A/C Compressor (clutch spins free)"].get("trim_status") is None and y04["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed"
+      and "Fuel Pump Module (in-tank, test before listing)" not in parts(2008, "Hyundai", "Sonata", FWD))
+
+i14, i18 = parts(2014, "Infiniti", "QX60", AWD), parts(2018, "Infiniti", "QX60", FWD)
+check("§22 QX60: mech + standard moonroof 2013-20; AWD coupling gated; lamps cut at 2016 and 2019; 'JX' listings route here",
+      MECH3 <= set(i14) and i14["Sunroof Glass + Motor"].get("trim_status") is None and i14["Sunroof Glass + Motor"]["fits"] == "2013–2020"
+      and i14["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in i18
+      and i14["Headlights (clear, non-hazed)"]["fits"] == "2013–2015" and i18["Headlights (clear, non-hazed)"]["fits"] == "2016–2018"
+      and [m["display"] for m in js.match_vehicle(2013, "Infiniti", "JX")] == ["Infiniti QX60"])
+
+# §23.6 routing: Ram Van / Ram Wagon never match the pickup; Silverado /
+# Sierra HD never take 1500-only rows; 1500s unchanged.
+def _cards(y, mk, mo, dec=None):
+    return [m["display"] for m in js.match_vehicle(y, mk, mo, vin_decode=dec)]
+_PICKUP4 = {"trim": "", "series": "", "trimQuality": "empty", "bodyClass": "Pickup", "driveType": "4WD/4-Wheel Drive/4x4"}
+_VAN = {"trim": "", "series": "", "trimQuality": "empty", "bodyClass": "Van", "driveType": "RWD/Rear-Wheel Drive"}
+_PICKUP_ONLY = {"Tailgate (clean)", "Tow Mirrors (manual, pair)", "Power-Fold Tow Mirrors (pair)",
+                "Uconnect 8.4 Touchscreen", "12\" Uconnect Touchscreen"}
+_bad = []
+for _y in range(1994, 2004):
+    for _mo in ("Ram Van", "Ram Wagon", "Ram Van 1500", "Ram Van 2500", "Ram Van 3500", "Ram Wagon 3500", "B2500"):
+        for _dec in (None, _PICKUP4, _VAN):
+            _c = _cards(_y, "Dodge", _mo, _dec)
+            _p = set(parts(_y, "Dodge", _mo, _dec))
+            if any("Ram Truck" in c for c in _c) or _p & _PICKUP_ONLY or not any("Ram Van" in c for c in _c):
+                _bad.append((_y, _mo, _c))
+for _y in (2005, 2012):
+    if any("Ram Truck" in c for c in _cards(_y, "Dodge", "Ram Van")):
+        _bad.append((_y, "Ram Van", "suppressor"))
+for _y in (2012, 2014):
+    for _mk, _mo in (("Ram", "C/V"), ("Ram", "Cargo Van"), ("Ram", "Caravan")):
+        if any("Ram Truck" in c for c in _cards(_y, _mk, _mo)):
+            _bad.append((_y, _mo))
+check("§23.6 Ram Van / Ram Wagon / B-van / Ram C/V never match the Ram pickup entry or its rows", not _bad, str(_bad[:5]))
+_rv = js.UNOBTANIUM_DB["ram van 1998-2003"]["top_parts"]
+check("§23.6 Ram Van rows: A/C and power-window rows option-flagged; no tailgate, engine, transmission or converter",
+      all(q.get("option") for q in _rv if q["name"] in ("A/C Compressor (clutch spins free)", "Window Regulator + Motor (front)", "Power Window Master Switch"))
+      and not any(re.search(r"tailgate|engine assembly|transmission\b|catalytic", q["name"], re.I) for q in _rv)
+      and _fits(2000, "Dodge", "Ram Van", "Headlights (clear, non-hazed)") == "1998–2003"
+      and _fits(1995, "Dodge", "Ram Wagon", "Headlights (clear, non-hazed)") == "1994–1997")
+
+_HD_ONLY_1500 = {"Tailgate (straight)", "Tow Mirrors (manual, pair)", "Power-Fold Tow Mirrors (pair)", "Power Fold Tow Mirrors (pair)",
+                 "Power Retractable Running Boards", "OEM LED Headlights", "Multi-Flex Tailgate Steps", "MultiPro Tailgate Steps",
+                 "Bose Amp + Speakers", "Denali Grille / Trim", "Tailgate (w/ camera)"}
+_bad = []
+for _y in range(1999, 2025):
+    for _mk, _mo in (("Chevrolet", "Silverado 2500HD"), ("Chevrolet", "Silverado 2500"), ("Chevrolet", "Silverado 3500"),
+                     ("Chevrolet", "Silverado 3500HD"), ("Chevrolet", "Silverado 1500HD"), ("GMC", "Sierra 2500HD"),
+                     ("GMC", "Sierra 2500"), ("GMC", "Sierra 3500"), ("Chevrolet", "Silverado 2500HD Classic"),
+                     ("GMC", "Sierra Classic 2500HD"), ("Chevrolet", "2500 Silverado Pickup")):
+        for _dec in (None, _PICKUP4):
+            _c = _cards(_y, _mk, _mo, _dec)
+            _p = set(parts(_y, _mk, _mo, _dec))
+            if len(_c) != 1 or "HD" not in _c[0] or _p & _HD_ONLY_1500:
+                _bad.append((_y, _mo, _c, sorted(_p & _HD_ONLY_1500)))
+check("§23.6 Silverado/Sierra 2500/3500/HD get only the HD entry, never 1500-only rows", not _bad, str(_bad[:5]))
+check("§23.6 HD headlight windows follow the cited GM catalog numbers",
+      _fits(2005, "Chevrolet", "Silverado 2500HD", "Headlights (clear, non-hazed)") == "2003–2006"
+      and "Headlights (clear, non-hazed)" not in parts(2002, "Chevrolet", "Silverado 2500HD")
+      and _fits(2002, "GMC", "Sierra 2500HD", "Headlights (clear, non-hazed)") == "2001–2002"
+      and _fits(2014, "Chevrolet", "Silverado 2500HD", "Headlights (clear, non-hazed)") == "2007–2014"
+      and _fits(2007, "Chevrolet", "Silverado 2500HD Classic", "Headlights (clear, non-hazed)") == "2003–2007"
+      and "Headlights (clear, non-hazed)" not in parts(2016, "Chevrolet", "Silverado 2500HD")
+      and "Headlights (clear, non-hazed)" not in parts(2000, "Chevrolet", "Silverado 2500"))
+check("§23.6 2007 Classic 1500 gets GMT800 rows (manual tow mirrors), not GMT900 power-fold mirrors",
+      "Tow Mirrors (manual, pair)" in parts(2007, "Chevrolet", "Silverado 1500 Classic")
+      and "Power-Fold Tow Mirrors (pair)" not in parts(2007, "Chevrolet", "Silverado 1500 Classic")
+      and _fits(2007, "GMC", "Sierra Classic 1500", "Tailgate (straight)") == "2001–2007"
+      and "Tailgate (straight)" not in parts(1999, "GMC", "Sierra Classic"))
+_ld = {(2004, "Chevrolet", "Silverado 1500"): "Chevy Silverado (GMT800)", (2010, "GMC", "Sierra 1500"): "GMC Sierra (Silverado twin) (GMT900)",
+       (2016, "Chevrolet", "Silverado"): "Chevy Silverado (K2XX)", (2021, "GMC", "Sierra"): "GMC Sierra (Silverado twin) (T1XX)",
+       (2007, "Chevrolet", "Silverado 1500"): "Chevy Silverado (GMT900)"}
+check("§23.6 1500s keep their own entry",
+      all(_cards(*k) == [v] for k, v in _ld.items()) and "Power-Fold Tow Mirrors (pair)" in parts(2010, "Chevrolet", "Silverado 1500"),
+      str({k: _cards(*k) for k in _ld}))
+o94, o99 = parts(1994, "Ford", "Escort", FWD), parts(1999, "Ford", "Escort", SEDAN)
+check("§22 Escort: rows per generation (new 1997 break); A/C 'if equipped'; sunroof gen 2 only; tails cut at the 1999 update",
+      MECH3 <= set(o94) and MECH3 <= set(o99) and o94["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1991–1996"
+      and o99["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and "Sunroof Glass + Motor" not in o99
+      and o99["Tail Lights (pair, uncracked)"]["fits"] == "1999–2002")
+check("§22 ZX2: 'ZX2' and 'Escort ZX2' listings get the ZX2 entry (mech + moonroof + evergreens), not the sedan lamps",
+      [m["display"] for m in js.match_vehicle(2001, "Ford", "ZX2")] == ["Ford Escort ZX2"]
+      and [m["display"] for m in js.match_vehicle(2002, "Ford", "Escort ZX2")] == ["Ford Escort ZX2"]
+      and parts(2001, "Ford", "ZX2")["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1998–2003"
+      and "Alternator (spin-test at yard)" in parts(2001, "Ford", "ZX2") and "Tail Lights (pair, uncracked)" not in parts(2001, "Ford", "ZX2"))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

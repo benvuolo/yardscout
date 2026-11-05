@@ -1653,3 +1653,642 @@ EV, 2 Fiat 500e) that no longer carry gas-car rows.
 - **Tests:** all offline scraper suites pass, including
   `test_interchange.py` and `test_consensus_parts.py`, and `--list-parts`
   runs with the empty entries.
+
+## 23. Facelift follow-ups (2026-11-05, owner: "go on facelifts")
+
+Same rule and machinery as §17: `FACELIFT_BREAKS` (entries under the
+`# §23` comment) lists the first US model year of each exterior mid-cycle
+facelift; only appearance rows (`_FACELIFT_SENSITIVE_RE`: headlights, tail
+lights, grille, bumpers, fog/marker/corner lights) are cut there. Mechanical
+and interior rows are never cut at a facelift. A cut applies to every
+appearance row on the model even where the source names only some lamps;
+it can only narrow a "fits" window. Every year below has a cited source.
+Quotes were read through a summarising fetch tool (the Expedition 1999
+quote was re-checked against the page). Models without a confirmed year
+are left out and listed. Batches are pushed as §23.1, §23.2, …
+
+**Check method (each batch).** Every distinct year/make/model on the lots
+(333,449 cars, 12,655 distinct, inventory of 2026-11-04 23:03Z) is matched
+before and after with seven decodes (none, sedan FWD, coupe, hatch, SUV AWD,
+pickup 4WD, minivan RWD). Card list, `max_value`, and every part field
+except `fits`/`yr_min`/`yr_max` (name, band, cost, rarity, gate statuses,
+`sharedWith`, sell notes) must be identical; only `fits` may narrow.
+
+### 23.1 Grand Caravan, Odyssey, Expedition, Town & Country
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Dodge Grand Caravan (and the `dodge caravan` alias, same entry) | 1999, 2005, 2011 | 1999: "the 1999 Caravan received new front styling on all trims above SE" (en.wikipedia.org/wiki/Dodge_Caravan); CarGurus 1999: "a front-end redesign on all models". 2005: "Changes for 2005 included a revised grille, new foglight fascia" (Wikipedia); cars.com 2005 Grand Caravan: "A new front fascia ... and new fog lamps". 2011: "new 'double-crosshair' grille" (Wikipedia); cars.com 2011: "new crosshair grille, new headlights and a new front bumper", "taillight revisions" |
+| Honda Odyssey | 2002, 2008, 2014, 2021 | 2002: hondanews.com 2002 exterior update, "a more aggressive new grille", "taillight design now features amber-colored turn signals". 2008: "a redesigned dashboard, grille, and tail lights" (en.wikipedia.org/wiki/Honda_Odyssey_(North_America)); auto123 "a new grille and front bumper". 2014: "twin-bar grille and revised lower front fascia", "LED rear tail light bars" (Wikipedia); cars.com 2014 "new hood, front bumper, grille and fenders". 2021: hondanews.com 2021 release, "LED headlights", "redesigned blackout grille", "redesigned lower front facia and fog light housings" |
+| Ford Expedition | 1999, 2015, 2022 | 1999: "The 1999 model year received a facelift similar to that of the contemporary Ford F-150 ... a new front grille ... a new front bumper that incorporated the fog lamps" (en.wikipedia.org/wiki/Ford_Expedition, re-checked). 2015: "All-new thinner headlamps ... an all-new front bumper" (Wikipedia; EL got the same); cars.com 2015 first look "new head- and taillights". 2022: "mid-cycle refresh ... revised front end styling" (Wikipedia); MotorWeek "standard LED headlamps, updated taillamps" |
+| Chrysler Town & Country | 2005, 2011 | 2005: mid-cycle refresh with "revised exterior styling" (en.wikipedia.org/wiki/Chrysler_Town_%26_Country_(minivan)); cars.com 2005: "Sculpted headlights and a new front fascia that contains round fog lamps". 2011: "restyled exterior ... new fog lights" (Wikipedia); AutoGuide 2011 review "new front grille, bumper and lower fascia", "LED taillights" |
+
+**Left out:** Grand Caravan 1998/2000 (colours, wheels, badges only), the
+2012 logo change and 2014 appearance packages (trim, not facelifts);
+whether the 1999 restyle reached base/SE vans and whether the 2005 fascia
+reached the short-wheelbase Caravan are unconfirmed (the cut is applied to
+the shared entry, which can only narrow windows). Odyssey 2022 (headlamp
+internals only), the 2023 Black Edition (Canada/Mexico), 2025 (out of
+range); Odyssey 2002 headlamps/bumpers and 2021 US tail lights are not
+claimed to have changed. Expedition 2003–06 (no facelift found), 2000 and
+2011 (trim colour/grille changes). Town & Country 2006–07 (no change),
+2013–14 S trim and DRLs, 2016 projector headlamps (an equipment change;
+a fitment check is needed before any headlamp row relies on it).
+
+**Checks.** Of these four, only the Expedition has an appearance row today
+(Headlights 1997–2002, now 1997–1998 and 1999–2002). The other three have no
+appearance rows yet; their breaks bound future lamp rows. Per-car
+comparison: 0 cars with any non-`fits` difference; 1,027 Expedition cars
+(1997–2002) have a narrowed headlight window. Coverage is unchanged:
+generic-only 15,326 (4.6%), no entry 12,360 (3.7%). `test_parts_gaps.py`
+(new §23.1 check), `test_interchange.py`, `test_consensus_parts.py` and
+`test_vpic_fixes.py` pass.
+
+### 23.2 Silverado / Sierra, Ram 1500 and HD, BMW 3 Series, Maxima
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Chevrolet Silverado | 2003, 2016, 2022 | 2003: "refreshed in 2002 for the 2003 model year" (en.wikipedia.org/wiki/Chevrolet_Silverado); GM press text (theautochannel.com 2002-02-06): "redesigned headlamps, park-turn signals and daytime running lamps". 2016: "a new grille, headlights, and front fascia" (Wikipedia); Autoblog "2016 Chevy Silverado puts on a better face". 2022: "mid-cycle refresh ... new front-end design" (Wikipedia) |
+| GMC Sierra | 2003, 2016, 2022 | 2003: GM press text (theautochannel.com 2002-02-06): "a restyled grille, bumper and fascia"; Wikipedia "slight design changes". 2016: "a new grille, headlights, and front fascia" (en.wikipedia.org/wiki/GMC_Sierra); Automotive Fleet 2016 styling update (LED headlights, fascia, grilles, bumpers, LED tails). 2022: "a new front-end design" (Wikipedia); GM Authority new grille and thinner headlights |
+| Ram 1500 | 2006, 2013 | 2006: "the front fascia was modernized ... a facelift was given to all Ram models" (en.wikipedia.org/wiki/Ram_pickup); Autoblog 2006 Ram 1500 review: new headlamps, fascia, bumper, grille. 2013: "the Ram 1500 received a revised front fascia" (Wikipedia); cars.com 2013 Ram 1500 design deep dive (grille, projector headlamps, LED tails) |
+| Ram 2500 / 3500 | 2006, 2013 | 2006: Wikipedia's "a facelift was given to all Ram models"; Edmunds 2006 Ram 2500 "freshened front-end styling" (search excerpt). 2013: Autoblog 2012-09-27 "a new, taller grille, which necessitated a new hood"; CarBuzz Ram 2013 HD reveal (taller grille, LED lamps on SLT) |
+| BMW 3 Series | 2002, 2004, 2009, 2011, 2016, 2023 | E46 sedan/Touring 2002: "facelift versions of the sedan and Touring were released for the 2002 model year"; E46 coupe/convertible 2004: "released for the 2004 model year" (en.wikipedia.org/wiki/BMW_3_Series_(E46)). E90/E91 2009: "the facelift (LCI) versions of the saloon and estate were released for the 2009 model year" (Wikipedia E90). E92/E93 2011: Carvana 2011 3 Series "new headlights, taillights, hood, grille, bumpers"; BMWBlog 2011 coupe/convertible LCI. F30/F31 2016: "released in 2015 for the 2016 model year ... Revised headlights and tail-lights" (Wikipedia F30). G20 2023: "new front and rear bumpers, new headlights" (Wikipedia G20); Edmunds "refreshed 2023 BMW 3 Series" |
+| Nissan Maxima | 1997, 2002, 2007, 2012, 2019 | 1997: "the Maxima's exterior was refreshed for 1997 ... clear-lens headlights ... redesigned tail-lights" (en.wikipedia.org/wiki/Nissan_Maxima); Nissan 1997 press kit. 2002: "a mild facelift ... larger, revised grille ... revised headlamp design" (Wikipedia); cars.com 2002. 2007: nissannews (Canada) 2007 release "new front grille, hood, bumper and headlights". 2012: "a new grille, taillights" (Wikipedia); Nissan 2012 press kit "new front grille design, new rear combination lights". 2019: AutoGuide 2018-11 (checked): "a larger grille", "Headlamps of the LED variety are also standard", "the taillights and fascia have been reworked"; Nissan US 2019 press kit |
+
+**Body styles (BMW).** The cut is per model, not per body: sedan/wagon
+and coupe/convertible facelift years are both applied. That makes some
+windows narrower than the true one (a 2003 sedan's E46 headlights now read
+2002–2003 where the sedan LCI lamp fits 2002–2005). Narrower is never a
+false claim; a body-aware cut would be needed to widen it again.
+
+**Left out:** Ram 1500 2007 (tail lights "slightly revised" only: the cut
+cannot target one lamp and would make 2006 headlights read "2006–2006"),
+Ram 1999 (Sport trim only), Ram 2025 refresh and Silverado/Sierra/Ram
+2019+ beyond the cited years (out of range); Silverado/Sierra GMT900
+(no facelift found); the Sierra 2003 headlamps are not claimed to have
+changed (grille/bumper/fascia are; the cut is conservative). BMW E36 (no
+facelift found), F34 GT (US year unconfirmed; its rows share the F30 cut),
+G21 and E36 Touring (not US). Maxima: none.
+
+**Checks.** 0 cars with any non-`fits` difference (seven decodes). 7,537
+cars have a narrowed window, by listing make: Chevrolet 2,827 (Silverado
+incl. HD and feed spellings), Dodge 2,558 (Ram), GMC 842, BMW 1,024,
+Nissan 286. Coverage unchanged:
+generic-only 15,326, no entry 12,360. Tests pass (new §23.2 check).
+
+**Found, not fixed (routing, outside this task):** "Ram Van", "Ram Wagon"
+(Dodge B-series vans) and "Chevrolet Ram1500" listings match the Ram
+pickup entry, so a 2002–05 Ram Van shows pickup headlights. Silverado/
+Sierra 2500/3500 listings also match the 1500 rows.
+
+### 23.3 Ranger, Suburban, Traverse, Pathfinder
+
+**Single-component rule (from §23.2 on).** The cut is per model and splits
+every appearance row, so a year in which only one item changed (a grille
+alone, tail lights alone) would split all the other lamps' windows with no
+basis. Such years are listed as left out, not added.
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Ford Ranger | 1989, 2001, 2006 | 1989: "a restyled hood and grille, and flush-mounted composite headlamps ... the front bumper was redesigned" (en.wikipedia.org/wiki/Ford_Ranger_(Americas)). 2001: "the front fascia was redesigned with a new grille and headlamps" (Wikipedia); Autoblog 2001 Ranger review "revamped front styling ... new multi-beam reflector lamps". 2006: "The grille was restyled into a '3-slot' configuration ... adding clear-lens headlamps ... redesigned taillamps" (Wikipedia) |
+| Chevrolet Traverse | 2013, 2022 | 2013: "a new grille and front fascia, a redesigned rear liftgate ... reworked Camaro-inspired tail lights" (en.wikipedia.org/wiki/Chevrolet_Traverse); cars.com 2012 NYIAS 2013 Traverse. 2022: "a facelift in 2021 for the 2022 model year ... thin LED headlights and tail lights" (Wikipedia); GM Authority 2021-07 (refresh slipped from MY2021 to 2022) |
+| Nissan Pathfinder | 2002, 2008, 2017 | 2002: "another facelift occurred in 2001 for the 2002 model year ... a revised grille" (en.wikipedia.org/wiki/Nissan_Pathfinder); Consumer Guide 2001–04 "New for 2002 were a restyled grille, body-color bumpers". 2008: cars.com 2007 Chicago show "revised grille and slight changes to the front and back ends"; Wikipedia "The facelifted 2008 Pathfinder debuted at the 2007 Chicago Auto Show". 2017: "an exterior update which includes a new fascia with restyled headlights" (Wikipedia); Nissan US 2017 press kit (new tail lights, search summary) |
+
+**Left out:** Ranger 1995 ("all Rangers adopted a four-hole grille") and
+2004 ("the grille was enlarged"): grille only. Ranger 2019–23: no
+facelift. **Chevrolet Suburban: no year added.** GMT400 1994 is a grille
+plus a high-mount brake light (Edmunds, search excerpt; Wikipedia gives no
+detail); GMT800 2003 front was "not carried over to the SUVs"; GMT900
+2010 raised bumper (single source); K2 2018 LED DRLs only; the T1 refresh
+is MY2025 (out of range). Pathfinder 1999.5: a mid-year change inside
+MY1999, so no first model year can be cut without mislabelling part of
+1999; 2001 (bumper colour and badge only); 2010 R51 (not US); R53 2022–24
+(none in range). The 2008 headlamps and the 2017 tail lights (Platinum
+only per Wikipedia) are not claimed to have changed.
+
+**Checks.** Inventory after the 2026-11-05 scan: 334,595 cars, 12,673
+distinct. 0 cars with any non-`fits` difference. 1,665 cars narrowed
+(Ranger 1,626: headlights 1983–92 → 1983–88/1989–92, 1998–2018 →
+1998–2000/2001–05/2006–18; Traverse 39: LED headlights 2018–21/2022–24).
+Pathfinder has no appearance rows yet. Coverage unchanged: generic-only
+15,400, no entry 12,407. Tests pass (new §23.3 check).
+
+### 23.4 TrailBlazer, Pilot, Tahoe / Yukon, Liberty
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Chevrolet TrailBlazer | 2006, 2024 | 2006: "The TrailBlazer was updated in 2005 for the 2006 model year", "An updated front fascia on all models (except for the base version)" (en.wikipedia.org/wiki/Chevrolet_Trailblazer_(SUV)); Edmunds 2006 "new front and rear fascias for the LT" (search excerpt); go-parts grille guide: 2002–05 and 2006–09 grilles are not interchangeable. 2024: "received a facelift ... for the 2024 model year", "new front fascia", "new LED taillights" (en.wikipedia.org/wiki/Chevrolet_Trailblazer_(crossover)); Carscoops 2023-02 "narrowed daytime running lights and a tighter front fascia" |
+| Honda Pilot | 2006, 2012, 2019 | 2006: hondanews.com 2006 Pilot summary "Revised taillight and headlight designs"; Wikipedia (en.wikipedia.org/wiki/Honda_Pilot) "a new fascia ... halogen projector headlights". 2012: "a redesigned front fascia ... changes to the bumper" (Wikipedia); Honda release reprint (conceptcarz) "three-bar horizontal" grille, "Reconfigured multi-reflector halogen headlights". 2019: "new bumpers, grille, wheels, standard LED headlights, and revised tail lights" (Wikipedia); Carscoops / Repairer Driven News 2019 refresh (search summaries) |
+| Jeep Liberty | 2005 | "In 2005, all models received a minor facelift" (en.wikipedia.org/wiki/Jeep_Liberty); Stellantis media release id=125: "a freshened exterior design with new front fascia, grille, fog lamps" |
+
+**Left out:** **Chevrolet Tahoe and GMC Yukon: no year added.** No
+line-wide restyle is cited inside 1995–2024: the GMT400 grille change is
+MY1994; GMT800 2003 was interior, and the 2004 "black outlined taillights"
+line is uncorroborated; GMT900 2010 raised bumper (single, conflicting
+sources); K2 2018 is LED DRLs on Tahoe and a Denali-only grille on Yukon;
+Yukon Denali 2001 is trim-only; the T1 refresh is MY2025. TrailBlazer:
+the 2006 SS fascias (trim), and the 2005 LT (Autobytel lists a new LT
+fascia for 2005, against Wikipedia/Edmunds 2006; 2006 is used and the
+2005 LT is noted as uncertain). Pilot 2022 (LED headlights standard, no
+restyle), 2023–24 (none in range). Liberty 2005–06 Renegade hood/grille
+(trim), KK 2008–12 (none; 2011 Jet package is an option).
+
+**Checks.** Same inventory as §23.3. 0 cars with any non-`fits`
+difference. 3,544 cars narrowed: TrailBlazer 2,217 (headlights 2002–05 /
+2006–…), Liberty 1,327 (KJ headlights 2002–04 / 2005–07). The Pilot has no
+appearance rows yet. Coverage unchanged: generic-only 15,400, no entry
+12,407. Tests pass (new §23.4 check).
+
+**Found, not fixed:** the TrailBlazer's second-segment rows read
+"2006–2020", running past the GMT360's 2009 end into years with no
+TrailBlazer (the crossover starts 2021). This is harmless (no car has
+those years) and predates §23.
+
+### 23.5 Edge, Charger, Dakota, Grand Cherokee
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Ford Edge | 2011, 2019 | 2011: "Exterior changes include a new front fascia, wheels, and a revised bumper" (en.wikipedia.org/wiki/Ford_Edge); MotorWeek 2011 Edge "a big drop-jaw Ford-truck style grille, more expressive headlamp housings". 2019: "a mid-cycle facelift for the 2019 model year, with a revised front grille" (Wikipedia); cars.com 2019 "new headlights, bumpers and taillights" |
+| Dodge Charger | 2015 | "the most noticeable change coming in the new front grille and rounded LED headlights" (en.wikipedia.org/wiki/Dodge_Charger_(LX/LD)); cars.com 2015 first look "a new grille, headlights, bumper and fog lights" |
+| Dodge Dakota | 1991, 2008 | 1991: "The 1991 model year featured a new grille and hood" (en.wikipedia.org/wiki/Dodge_Dakota, re-checked); Edmunds 1991 "composite headlamps (LE and Sport), new bumper, new grille" (search excerpt). 2008: "unveiled at the 2007 Chicago Auto Show as a 2008 model" (Wikipedia); Stellantis release id=7337 "newly styled hood, grille, front fascia ... and headlamps" |
+| Jeep Grand Cherokee | 1996, 2004, 2008, 2014, 2017 | ZJ 1996: "a mid-cycle restyling, with new front and rear bumpers" (Wikipedia ZJ page; larger grille, revised headlamps). WJ 2004: "revised front grilles and fascias (bumpers) for all models" (Wikipedia WJ). WK 2008: "a minor facelift for 2008 with revised headlights" (Wikipedia; WK page: new grille, fascia, "new tail lamps"). WK2 2014: "new, smaller headlamps, and new tail lamps" (Wikipedia WK2); cars.com 2014 "the headlights slimmer", "taillights have gotten larger". WK2 2017: "All 2017 models received a second facelift" with "reshaped headlights, and a reshaped grille" (Wikipedia WK2) |
+
+**Left out:** Charger 2009 (tail lamps only: single-component rule) and
+2008/2012 (interior; SRT8 badge). Edge 2021 ST-Line/Titanium Elite
+(trim). Dakota 1992 (no change described; Wikipedia's "1991 the only
+model year for a unique front-end" concerns the mid-1991 headlamp
+change-over), 1997–2004 (none; 2000 Quad Cab is a body style), 2006 R/T
+(package). Grand Cherokee 1998 5.9 Limited and 2002 Limited grilles
+(trim only), the 2016 75th Anniversary edition that already wore the 2017
+front (a special edition; its rows read pre-facelift), the 2017 SRT
+fascia (conflicting), WL 2022–24 (none). Single-source years: Grand
+Cherokee 1996, 2004, 2008 and 2017 rest on Wikipedia alone (with the WK
+page corroborating 2008 internally).
+
+**Checks.** Same inventory as §23.3. 0 cars with any non-`fits`
+difference. 120 cars narrowed (Edge LED headlights 2015–18 / 2019–24).
+Charger, Dakota and Grand Cherokee have no appearance rows yet. Coverage
+unchanged: generic-only 15,400, no entry 12,407. Tests pass (new §23.5
+check).
+
+### 23 summary
+
+23 models researched; 21 FACELIFT_BREAKS keys added (Grand Caravan,
+Odyssey, Expedition, Town & Country, Silverado, Sierra, Ram, Ram
+2500, Ram 3500, BMW 3, Maxima, Ranger, Traverse, Pathfinder, TrailBlazer,
+Pilot, Liberty, Edge, Charger, Dakota, Grand Cherokee). No year
+confirmed, so left out: Suburban, Tahoe, Yukon. 13,893 cars had an
+appearance-row window narrowed; none had any other change. Several
+models (Odyssey, Grand Caravan, Town & Country, Pathfinder, Pilot,
+Charger, Dakota, Grand Cherokee) have no appearance rows yet; their breaks
+will bound lamp rows added later.
+
+### 23.6 Routing fixes: Ram Van / Ram Wagon, Silverado / Sierra HD and Classic (2026-11-05)
+
+Accuracy fix under rule 3 ("never invent fitment"), for the routing bugs
+found in §23.2. Code: the `# 2026-11 §23.6` block in `junkyard_scraper.py`
+(right after `_bound_rows_per_generation()`, so the rows are final as
+written) and the engine-family apps of `gm-gen3-truck` / `gm-gen4-truck`.
+
+**Mechanism.** New entries carry longer keywords ("ram van", "silverado
+2500", "sierra classic 2500" …). `match_vehicle`'s specificity guard then
+drops the shorter "ram" / "silverado" / "sierra" keyword, so these
+listings no longer reach the pickup / 1500 entries. Nothing else about
+matching changed.
+
+**1. Dodge Ram Van / Ram Wagon / B-vans.** Every 1994–2003 "Ram Van",
+"Ram Wagon", "Ram Van 1500/2500/3500" listing matched the Ram pickup
+(2nd/3rd gen) and showed the pickup tailgate, the pickup's manual tow
+mirrors, and pickup-window headlights and cluster rows.
+Basis (en.wikipedia.org/wiki/Dodge_Ram_Van): 1994 facelift ("the model
+line's most substantial revision and facelift since 1978"); 1998 third
+generation (longer hood and front fenders, new dashboard, mirrors moved
+to the doors), ended 2003. Every 1994+ engine is a Magnum multiport-injected
+V6/V8. Entries `ram van 1994-1997` and `ram van 1998-2003`
+(`GENERATION_BREAKS["ram van"] = [1998]`):
+
+| Row | Gate | Why |
+|---|---|---|
+| Headlights, Tail Lights | — | Breadth-pass lamp rows (§11 bands), bounded per generation. |
+| Side Mirrors (pair) | — | Does not claim power mirrors (Soul row and band, §13). |
+| Fuel pump module | — | In-tank electric pump on every injected Magnum engine. |
+| A/C compressor | option | Cargo vans were sold without A/C. |
+| Evergreens | window regulator and master switch option | Power windows were not standard on cargo vans. |
+
+Left out: tailgate/bed rows (no bed), radiator fan (engine-driven clutch
+fan, as Savana), anything engine/transmission/converter. Pre-1994 Ram
+Vans have no entry before or after. A "Ram Van" dated 2004+ hits an empty
+suppressor entry. Feed spellings "Dodge Van", "B1500/B2500/B3500",
+"B150/B250/B350", "1500/2500/3500 Van" route here too; those had no entry
+before.
+
+**Ram C/V (found while measuring).** Make Ram, model "C/V" / "Cargo Van" /
+"Caravan" (the cargo Grand Caravan, 2012–15) also matched the Ram pickup
+(4th gen: tailgate, power-fold tow mirrors, Uconnect 8.4). It now gets a
+generic evergreen-only entry for 2012–15 and suppressors elsewhere. Grand
+Caravan rows were not copied (the C/V has no rear seats and no row-level
+basis was checked).
+
+**2. Silverado / Sierra 2500, 2500HD, 3500, 1500HD.** These matched the
+1500 entries, so they took 1500-only rows (tailgates, tow mirrors, running
+boards, LED headlights, MultiPro/Multi-Flex steps, Bose, Denali grille)
+and the 1500 generation windows. The HD generations differ
+(en.wikipedia.org/wiki/Chevrolet_Silverado: GMT400 HD "continued until
+2000, with the new GMT800 Silverado/Sierra HD ... released a year later";
+GMT900 HD through 2014; K2XX HD 2015–19; T1XX HD from 2020), so a 2014 HD
+showed K2XX 1500 rows and a 2019 HD showed T1XX 1500 LED headlights.
+Per HD generation (`silverado hd …`, `sierra hd …`; GENERATION_BREAKS
+2001/2007/2015/2020, FACELIFT_BREAKS 2003):
+
+| HD generation | Rows | Basis |
+|---|---|---|
+| 1999–2000 | evergreens only | A "2500"/"3500" of these years is either the GMT400 carry-over or the GMT800 2500; the listing can't tell. |
+| GMT800 HD 2001–06 | Silverado: headlights 2003–06; Sierra: headlights 2001–02, 2003–06; evergreens | GM 10396912 (chevypartsdeal.com, retrieved 2026-11-05): 2003–07 Silverado 1500, 2007 1500 Classic, 1500 HD, 2500 HD 2003–07, 2007 2500 HD Classic, 3500 2003–06. GM 15850351 (gmpartsgiant.com): 1999–2007 Sierra 1500/2500/3500 incl. Classic, 6.6 diesel and 8.1 among the engines. The Sierra cut at 2003 follows §23.2 (conservative). |
+| GMT900 HD 2007–14 | headlights 2007–14; evergreens | GM 22853027: 2007–13 Silverado 1500, 2007–14 Silverado 2500 HD / 3500 HD. GM 22853029: 2007–13 Sierra 1500, 2007–14 Sierra 2500 HD / 3500 HD. |
+| K2XX HD 2015–19 | evergreens only | Own front end; no catalog basis checked. |
+| T1XX HD 2020–24 | evergreens only | Same. |
+
+Left out, no basis found that the HD shares them: tailgates, manual and
+power-fold tow mirrors, running boards, Bose, Denali grille, LED
+headlights, tailgate steps, camera tailgate. Silverado HD 2001–02
+headlights: GM 16526137 lists 1999–2002 Silverado 1500/2500 (with the
+6.6/8.1 engines) but no 3500, so no row.
+
+**"Classic".** The 2007 "Classic" is the GMT800 carry-over (Wikipedia),
+but "Silverado 1500 Classic" 2007 matched the GMT900 entry (power-fold
+tow mirrors etc.). Entries `silverado classic 2001-2007` /
+`sierra classic 2001-2007` copy the GMT800 1500 rows with the windows
+that ended in 2006 extended to 2007 (headlights: GM 10396912 / 15850351
+list the 2007 Classic; tailgate and manual tow mirrors: the existing
+gmt800-truck / gmt900-truck family notes "incl. 2007 Classic" / "2007
+Classic uses GMT800 mirrors"). 1999–2000 "Classic" (GMT400 carry-over)
+gets evergreens only. HD Classic 2001–07 gets the GMT800 HD rows (2007
+in the headlight window); an HD "Classic" label in other years gets
+evergreens only.
+
+**Engine families.** `gm-gen3-truck` (1999–2007) and `gm-gen4-truck`
+(2007–13) used `("Chevrolet", "Silverado*")` / `("GMC", "Sierra*")`
+prefix apps, as did their verified alternator groups (2003–06, 2007–10).
+The prefix caught every 2500/3500/HD truck. The engine guard already
+kept out 6.6 Duramax and 8.1 decodes, but the HD 6.0 passed, and
+decode-less HD donors and seekers were offered as "likely" (and inside
+the verified 2003–06 group as "verified"). The apps are now explicit
+light-duty spellings: Silverado, Silverado 1500, Sierra, Sierra 1500,
+Sierra Denali 1500 (both families); Silverado/Sierra 1500 Classic,
+Silverado/Sierra Classic, Sierra Classic 1500 for 2007 only, in Gen III
+only (the Classic no longer also asks "Gen IV?"). The verified groups list
+Silverado, Silverado 1500, Sierra, Sierra 1500. Left out on purpose:
+"Sierra Hybrid" (the 2-mode hybrid has no belt alternator; 4 cars lose
+the Gen IV app) and "Silverado 1500 Ext Cab" (2 cars; the spelling would
+also show in the app's model picker). Explicit names were used so
+`docs/app.js` (`pfAppMatches`) needs no change.
+
+**Checks.** Every distinct year/make/model on the lots (334,588 cars,
+12,666 distinct; main with §22 vs this change, same inventory) matched
+with seven decodes (none, sedan FWD, coupe, hatch, SUV AWD, pickup 4WD,
+van RWD). 1,140 cars changed, all in the intended groups, and every
+decode gives the same row changes as no decode:
+
+| Group | Cars | Before | After |
+|---|---|---|---|
+| Ram Van / Ram Wagon listings | 259 | Ram pickup 2nd/3rd gen: tailgate, manual tow mirrors, headlights, cluster + evergreens | Ram Van entry: lamps, mirrors, fuel pump, A/C (option), evergreens (windows option) |
+| B-van spellings (Dodge Van, B2500 …) | 38 | no entry | Ram Van entry |
+| Ram C/V | 31 | Ram pickup 4th gen (tailgate, power-fold mirrors, Uconnect 8.4) | evergreens only |
+| Silverado HD (2500/2500HD/3500/1500HD/HD Classic) | 523 | Silverado 1500 entry of the year | HD entry: lost tailgate, tow mirrors, running boards, LED headlights, steps; headlights only where cited |
+| Sierra HD | 186 | Sierra 1500 entry | HD entry: also lost Bose, Denali grille, camera tailgate |
+| Silverado / Sierra 1500 Classic | 102 | GMT900 1500 (2007): power-fold mirrors, Denali grille | GMT800 rows (manual tow mirrors, tailgate, headlights 2003–07); the 1 1999–2000 car: evergreens |
+
+Engine families: 678 HD/Classic-HD cars left `gm-gen3-truck` /
+`gm-gen4-truck`; 102 2007 1500 Classics now resolve to Gen III only; one
+1999–2000 GMT400 "Silverado Classic" left Gen III; 4 Sierra Hybrids and
+2 "Silverado 1500 Ext Cab" lost the app (above).
+Every other car, all 1500s included, is unchanged (matches and families).
+
+Coverage is reported as it falls, not improved. Against main after
+§22.1–22.5 (same inventory): generic-only 13,893 (4.2%) → 14,634 (4.4%),
++741 (Silverado HD 523, Sierra HD 186, C/V 31,
+one 1999 Classic: they now show generic rows instead of 1500/pickup rows
+they did not have a basis for). No entry 12,396 → 12,358 (−38, the
+B-vans). Tests: new §23.6 checks in `test_parts_gaps.py` (Ram Van /
+Ram Wagon / B-van / C/V never get a pickup card or pickup rows, any
+decode; HD never gets 1500-only rows; HD headlight windows; Classic rows;
+1500 cards unchanged) and `test_interchange.py` (HD never in the light-duty
+families; 1500 families unchanged; HD donor never verified). All of
+`test_parts_gaps.py`, `test_interchange.py`, `test_consensus_parts.py`,
+`test_vpic_fixes.py`, `test_model_normalization.py` pass.
+
+**Open.** Plain "Silverado" / "Sierra" listings (528 cars) can be HD
+trucks the listing doesn't name; they keep the 1500 rows (a VIN decode
+naming the series could route them later). HD rows for K2XX/T1XX and HD
+tailgates/tow mirrors need catalog part numbers before they're added.
+Pre-1999 C/K "Silverado 2500" listings (~80) have no entry, as before.
+
+## 22. Next measured block (2026-11-05, owner via hub: "Ensure everything is at speed")
+
+Same basis and method as §18–21 (generations and facelifts researched first;
+FETCHED/SNIPPET as before). A second Parts session works the facelift
+follow-ups as §23 at the same time (hub's temporary exception to one session
+per workstream). My `FACELIFT_BREAKS` additions sit under a "# §22" comment
+group. Measured on the 334,595-car scan with the code before §22:
+generic-only 15,399 (4.6%), no entry 12,409 (3.7%).
+
+| Order | Model | Generic-only cars |
+|---|---|---|
+| 1 | Mercury Milan 2006–11 | 311 |
+| 2 | Buick Encore 2013–22 | 307 |
+| 3 | Chevrolet Captiva Sport 2012–15 | 301 |
+| 4 | Buick Park Avenue 1991–2005 | 299 |
+| 5 | Scion xB 2008–15 | 293 |
+| 6 | Hyundai Sonata 1999–2005 (EF) | 290 |
+| 7 | Infiniti JX35/QX60 2013–20 | 288 |
+| 8 | Ford Escort 1991–2003 | 285 |
+
+### 22.1 Mercury Milan 2006–2011
+
+Basis: WP Mercury_Milan; cars.com "2010 Mercury Milan: What's New";
+jalopnik.com 2010 Milan (Ford release) and 2010 Fusion/Milan/MKZ design;
+consumerguide.com/used/2006-11-mercury-milan; fueleconomy.gov menus
+(fetched).
+- **Facelift 2010 (added to `FACELIFT_BREAKS`):** "revised tail lamps and an
+  enlarged grille, reshaped headlamps and revised front fascia" (WP);
+  "taillights are narrower and taller" (cars.com). The existing Milan lamp
+  rows are now cut at 2010.
+- **A/C:** standard (CG base lists 2006–11).
+- **AWD:** optional on the 3.0 V6 from 2007 ("Milan AWD" in EPA's menus
+  2007–11).
+- **Sunroof:** optional ($795 in 2006–07, packages from 2008, standard on
+  the 2010–11 Hybrid).
+- **Hybrid:** 2010–11. No "Milan Hybrid" listings are on the lots, and
+  hybrid parts are not curated here.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2006–11 | — | Every car. |
+| Sunroof | 2006–11 | option | |
+| AWD rear differential / transfer unit | 2007–11 | drive: awd/4wd | V6 AWD only; same band as the Five Hundred row. |
+
+Result (same inventory): generic-only 15,399 (4.6%) → 15,087 (4.5%). Milan
+311 → 0.
+
+### 22.2 Buick Encore 2013–2022, and the Encore GX routing fix
+
+Basis: WP Buick_Encore; cars.com "2017 Buick Encore: What's New";
+blog.consumerguide.com (2017 Encore); kbb.com 2013 Encore review and first
+drive; fueleconomy.gov menus 2019–2025 (fetched).
+- **Facelift 2017 (added to `FACELIFT_BREAKS`):** "revised headlights and
+  bumpers, LED tail lights" (WP); a new grille, and LED headlamps on higher
+  trims (cars.com). The existing Encore lamp rows are now cut at 2017.
+- **A/C:** standard on the base ("The well-equipped base Encore includes …
+  air conditioning", KBB 2013); applied to the generation, as in §18–21.
+- **AWD:** available every year (EPA "Encore AWD").
+- **Sunroof:** "All but the base model can be fitted with … a power sunroof".
+
+**Fix: Encore GX (8 listings).** The GX is a different, larger vehicle; EPA
+lists "Encore GX" separately for 2020–25. The "encore" keyword caught it, so
+it showed the Encore's rows and windows. It now has its own evergreen-only
+entry (2020–25), and the specificity guard drops "encore" for it.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2013–22 | — | Every vehicle. |
+| AWD rear differential / coupling | 2013–22 | drive: awd/4wd | Same band as the Tucson/Juke rows. |
+| Sunroof | 2013–22 | option | |
+
+Result (same inventory): generic-only 15,087 (4.5%) → 14,788 (4.4%). Encore
+→ 0; the 8 GX listings stay generic-only on their own entry by design.
+
+### 22.3 Chevrolet Captiva Sport 2012–2015
+
+Basis: WP Opel_Antara; automotive-fleet.com 2012 Captiva Sport; cars.com
+2011 "The Saturn Vue is back as the 2012 Captiva Sport"; blog.consumerguide.com
+(2013); kbb.com 2013/2014; foxnews.com 2014; fueleconomy.gov menus
+2011–2016 (fetched).
+- **Fleet-only** in the US for every year ("cannot be purchased new", CG
+  2013).
+- **No facelift found** (the 2015 model year was abbreviated).
+- **A/C:** standard ("All models will include … air conditioning",
+  cars.com).
+- **Sunroof:** on the LTZ and up-level trims.
+- **AWD:** confirmed for the 2012 LTZ V6. EPA also lists "Captiva AWD" for
+  2013–14, but CG, Wikipedia, cars.com and KBB all say the V6 and AWD were
+  dropped after 2012. The AWD row is therefore limited to 2012.
+
+**Routing:** EPA names this vehicle "Captiva" for 2012–15, the only US
+Captiva, so "Chevrolet Captiva" listings (6, all 2012–15) now match this
+entry instead of nothing.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2012–15 | — | Every vehicle. |
+| Sunroof | 2012–15 | option | Up-level trims. |
+| AWD rear differential / transfer unit | 2012 | drive: awd/4wd | Same band as the Equinox row. |
+
+Result (same inventory): generic-only 14,788 (4.4%) → 14,487 (4.3%); no
+entry 12,409 → 12,403.
+
+### 22.4 Buick Park Avenue 1991–1996, 1997–2005
+
+Basis: WP Buick_Park_Avenue; consumerguide.com/used/1991-96-buick-park-avenue
+and /used/1997-05-buick-park-avenue; blog.consumerguide.com 2005 review
+flashback; cars.com 2003 "What's New"; 2005 Park Avenue brochure (pdf);
+theautochannel.com 1996 review; GM parts catalog pages (chevypartsdeal.com)
+for lamp part numbers (fetched).
+- **New `GENERATION_BREAKS` "park avenue": [1997]:** the entry had no breaks.
+- **Cuts added to `FACELIFT_BREAKS`:**
+  - 1993: "new grilles and taillights" (CG); tail lamp part numbers change
+    from 1991–92 to 1993–96 (GM catalog).
+  - 1995: "Base cars also got a new grille, bodyside moldings, and fascias"
+    (CG); headlamp part numbers change from 1994 to 1995 (catalog only).
+  - 2003: "Ventiports returned on the Park Avenue Ultra along with a bolder
+    grille" (WP); Ultra only, and the cut is conservative for base cars.
+  - 2005: "revisions to grille and taillamps" (CG); updated rear fascia
+    (WP); tail lamp part numbers change from 1998–2004 to 2005 (catalog).
+  The existing Park Avenue lamp rows are now cut at these years and at
+  1997.
+- **A/C:** standard ("the usual standard comfort items … air conditioning",
+  1996; CG 2000–01 lists dual-zone automatic climate control; 2005
+  brochure).
+- **Sunroof:** optional on the 2nd gen ($1,095 with the Prestige package in
+  2000–01; Prestige/Ultra in 2005). 1st-gen availability is snippet-only.
+- **Ultra vs base tail lamps:** they differ 1991–97 and are shared 1998–2005
+  (GM catalog). The existing generic tail-light row does not separate Ultra
+  in 1991–97; flagged, not changed.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1991–96, 1997–2005 | — | Every car. |
+| Sunroof | 1997–2005 | option | |
+
+Left out, no stated basis: the supercharger (engine), Ultra-specific lamp
+rows, the 1st-gen sunroof.
+
+Result (same inventory): generic-only 14,487 (4.3%) → 14,188 (4.2%). Park
+Avenue 299 → 0.
+
+### 22.5 Scion xB 2008–2015 (2nd gen)
+
+Basis: WP Scion_xB; pressroom.toyota.com "Scion announces pricing for
+restyled 2011 xB"; kbb.com 2013 xB update; cars.com "Scion xB lives another
+year"; consumerguide.com/used/2008-14-scion-xb (fetched).
+- **Appearance cuts added to `FACELIFT_BREAKS`:**
+  - 2011: "fresh exterior styling including changes to the front and rear
+    bumpers, grill, headlights and taillights" (Toyota).
+  - 2013: "a mild nose and tail tweak", i.e. a revised front bumper and a
+    gloss-black lower grille insert (KBB).
+  The existing xB lamp rows are now cut at 2011 and 2013.
+- **A/C:** standard (CG base lists 2008–13).
+- **Sunroof:** no regular factory option; only limited Release Series cars
+  had one.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2008–15 | — | Every car. |
+
+Left out, no stated basis: a sunroof row, and Release Series parts.
+
+Result (same inventory): generic-only 14,188 (4.2%) → 13,893 (4.2%). xB
+2nd gen 293 → 0.
+
+### 22.6 Hyundai Sonata 1999–2005 (EF)
+
+Basis: WP Hyundai_Sonata; cars.com "2002 Hyundai Sonata: What's New";
+consumerguide.com/used/1999-01-hyundai-sonata and /used/2002-05-hyundai-sonata;
+drivechicago.com 1999 review; fueleconomy.gov menus (fetched).
+- **Facelift 2002 (added to the existing `FACELIFT_BREAKS` "sonata"):** the
+  EF-B revised "the hood/bonnet, grille, headlights … tail-lights and rear
+  license plate location" (WP); "new front and rear sheet metal, lighting
+  and bumpers" (cars.com). The EF had no lamp rows in the entry, so the cut
+  will apply to any future appearance rows.
+- **A/C:** standard every year (CG base lists, cars.com 2002, the 1999
+  review).
+- **Sunroof:** optional on both engine versions, in packages through 2005
+  (not on the 2005 GL 4-cylinder manual).
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 1999–2005 | — | Every car. |
+| Sunroof | 1999–2005 | option | |
+
+Left out, no stated basis: EF lamp rows (no lamp rows existed and none were
+added in this pass).
+
+Result (same inventory): generic-only 13,893 (4.2%) → 13,604 (4.1%). Sonata
+EF 290 → 0 (1 listing remains outside these years).
+
+### 22.7 Infiniti JX35 / QX60 2013–2020
+
+Basis: WP Infiniti_QX60; cars.com "2016 Infiniti QX60 first look" and
+"2013 Infiniti JX35: What's New"; 2014 Infiniti QX60 factsheet (pdf);
+automotiveworld.com (IIHS headlamp note); fueleconomy.gov menus 2012–2014
+(fetched).
+- **Appearance cuts added to `FACELIFT_BREAKS` "infiniti qx60":**
+  - 2016: "new front and rear fascias with restyled headlights and
+    taillights" (WP); "spindle grille now stretching deeper into the bumper"
+    (cars.com).
+  - 2019: "All 2019 QX60s built before September 2018 have HID headlights",
+    and later builds have LED (IIHS). The switch follows build date, so the
+    model-year cut at 2019 is the conservative boundary; within 2019 the
+    lamp type still varies.
+  The existing QX60 lamp rows are now cut at 2016 and 2019.
+- **Standard equipment:** tri-zone automatic climate control and a power
+  moonroof on every version (2014 factsheet; "Standard power moonroof",
+  cars.com 2013).
+- **AWD:** available every year (EPA).
+- **Hybrid:** 2014–17. There are 2 "QX60 Hybrid" listings; see the
+  hybrid note in §22.9.
+
+**Routing:** "Infiniti JX" listings (12, all 2013) are the JX35, Infiniti's
+only JX (EPA lists JX35 for 2013). They now match this entry instead of
+nothing.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2013–20 | — | Every vehicle. |
+| Sunroof glass + motor | 2013–20 | — | Standard. |
+| AWD rear differential / coupling | 2013–20 | drive: awd/4wd | Same band as the Rogue row (same Nissan platform family). |
+
+Left out, no stated basis: the rear panoramic moonroof (option), hybrid
+parts.
+
+Result (same inventory): generic-only 13,604 (4.1%) → 13,315 (4.0%); no
+entry 12,403 → 12,391.
+
+### 22.8 Ford Escort 1991–1996, 1997–2003, and the ZX2
+
+Basis: WP Ford_Escort_(North_America); consumerguide.com/used/1991-96-ford-escort
+and /used/1997-03-ford-escort; Washington Post 1997 review (via cars.com);
+drivechicago.com 1998 ZX2 review; NHTSA vPIC model lists and VIN decodes;
+fueleconomy.gov; RockAuto catalog (1999 and 2002, both engines); Ford
+parts catalog pages (fordpartsdeal.com) for lamp part numbers (fetched).
+- **New `GENERATION_BREAKS` "escort": [1997]:** gen 2 ran 1991–96 (hatch,
+  wagon, sedan from 1992); gen 3 sedan 1997–2002 (fleet-only 2001–02),
+  wagon 1997–99, ZX2 1998–2003.
+- **Appearance cuts added to `FACELIFT_BREAKS`:**
+  - 1992 and 1993: a minor grille change. WP says 1992 ("the grille oval …
+    enlarged") and CG says 1993 ("a slightly restyled grille"); both are
+    cut.
+  - 1999: "minor visual revision to the rear fascia (integrating the reverse
+    lamps into the taillamp units)" (WP); the Ford catalog sedan rear-lamp
+    part number changes between 1998 and 1999.
+  - 2003: the ZX2's "front fascia underwent a revision" (WP).
+  The existing Escort lamp rows are now cut at these years.
+- **A/C:** optional in every generation (CG 1995; the 1997 LX review; the
+  1998 ZX2 review).
+- **Sunroof:** optional on gen 2 (CG); the ZX2 power moonroof was optional.
+
+**ZX2 entry (16 "ZX2" + 5 "Escort ZX2" listings).**
+- **Why a separate entry:** the ZX2 coupe has its own front end and lamps,
+  and NHTSA decodes 1999+ VINs as model "ZX2".
+- **Before:** "ZX2" listings matched nothing, and "Escort ZX2" listings got
+  the sedan's lamp rows.
+- **Now:** the ZX2 has its own entry ("Ford Escort ZX2", 1998–2003) with the
+  pump, fan, A/C (option) and moonroof (option) rows plus the evergreens.
+  RockAuto lists the same A/C compressor, fuel pump and radiator fan for the
+  Zetec (ZX2) and SPI (sedan) engines in 1999 and 2002. This is aftermarket
+  catalog fitment, and 1997–98 and the wagon were not checked.
+- **Not covered:** plain "Escort" listings that decode as coupes (45 on the
+  lots) stay on the Escort entry, because the listing doesn't say ZX2.
+  Flagged.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, radiator fan | 1991–96, 1997–2003 | — | Every car. |
+| A/C compressor | same | option | Optional every generation. |
+| Sunroof | 1991–96 | option | |
+| ZX2: fuel pump, fan, A/C (option), moonroof (option) | 1998–2003 | — / option | As above, on the ZX2 entry. |
+
+Left out, no stated basis: gen-3 sedan sunroof (not stated), wagon-specific
+lamps (the 1997–99 wagon kept the gen-2 body from the windshield back), and
+lamp rows on the ZX2 entry.
+
+Result (same inventory): generic-only 13,315 (4.0%) → 13,030 (3.9%); no
+entry 12,391 → 12,375.
+
+### 22.9 Block totals, and a hybrid finding for the owner
+
+Same 334,595-car inventory, code before §22 (33bce51) vs after:
+generic-only **15,399 (4.6%) → 13,030 (3.9%)**, so 2,369 cars moved. No entry
+12,409 → 12,375 (34 listings now match: 6 Captiva, 12 JX, 16 ZX2).
+- **New `GENERATION_BREAKS`:** park avenue 1997, escort 1997.
+- **New appearance cuts (`FACELIFT_BREAKS`, "# §22" group or existing
+  keys):** milan 2010; encore 2017; park avenue 1993/1995/2003/2005;
+  scion xb 2011/2013; sonata 2002; infiniti qx60 2016/2019; escort
+  1992/1993/1999/2003.
+- **Routing:** the Encore GX has its own entry; "Captiva", "JX" and "ZX2"
+  listings now match their vehicles.
+- **Per-car comparison:** only 7 of 12,666 combinations changed, all
+  intended (5 Encore GX, 2 "Escort ZX2"). Interchange notes are identical.
+  All offline suites and `--list-parts` pass.
+
+**Hybrid finding (not changed; needs an owner decision).** 802 listings on
+the lots name a hybrid ("Fusion Hybrid", "Escape Hybrid", "Civic Hybrid",
+"Camry Hybrid", "Sonata Hybrid" …). 763 of them show at least one gas-only
+row: the consensus-evergreen alternator and starter (752) and/or the
+gap-block A/C compressor (405). Hybrids of these families typically use a
+high-voltage electric A/C compressor and start/charge through the hybrid
+system, so those rows are likely false fitment on hybrid listings.
+Proposed fix: a negative gate (e.g. `"not_trim": ["hybrid"]`) on the
+alternator, starter and A/C compressor rows that excludes them when the
+listing or VIN decode says hybrid. That needs a small `match_vehicle`
+change and a per-family check of which hybrids keep a conventional part,
+so it is left for the owner's go-ahead.

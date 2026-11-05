@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-05, §13–21 done)
+# Parts workstream — status (updated 2026-11-05, §13–22 done; §23 facelifts and §23.6 routing in a second session)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -99,6 +99,52 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 - Measuring across a mid-block scan: compare HEAD and working tree on the
   same inventory (a measure script that takes the scraper path).
 
+- §23 (owner: "go on facelifts"; facelift follow-ups, PARTS_GAPS §23):
+  23.1 Grand Caravan 1999/2005/2011, Odyssey 2002/2008/2014/2021,
+  Expedition 1999/2015/2022, Town & Country 2005/2011, each year cited.
+  23.2 Silverado/Sierra 2003/2016/2022, Ram 1500 and HD 2006/2013, BMW 3
+  2002/2004/2009/2011/2016/2023 (sedan and coupe LCIs), Maxima
+  1997/2002/2007/2012/2019. Per car: only `fits` narrowed (1,027 + 7,537
+  cars); coverage unchanged. Tail-only revisions (Ram 2007) are not cuts.
+  Found, not fixed: Dodge "Ram Van"/"Ram Wagon" listings match the Ram
+  pickup entry (PARTS_GAPS §23.2).
+  23.3 Ranger 1989/2001/2006, Traverse 2013/2022, Pathfinder 2002/2008/2017
+  (1,665 cars narrowed). Suburban: no confirmed year, left out.
+  Single-component years (grille-only, tail-only) are not cuts.
+  23.4 TrailBlazer 2006/2024, Pilot 2006/2012/2019, Liberty 2005 (3,544
+  cars narrowed). Tahoe and Yukon: no line-wide year confirmed, left out.
+  23.5 Edge 2011/2019, Charger 2015, Dakota 1991/2008, Grand Cherokee
+  1996/2004/2008/2014/2017 (120 cars narrowed). §23 total: 21 keys, 13,893
+  cars with a narrowed lamp window, no other per-car change, coverage
+  unchanged.
+
+- §22 (owner via hub: "Ensure everything is at speed"): Milan, Encore,
+  Captiva Sport, Park Avenue, Scion xB 2nd gen, Sonata EF, JX35/QX60, Escort,
+  researched with cited sources first. Same-inventory generic-only 15,399
+  (4.6%) → 13,030 (3.9%); no entry 12,409 → 12,375. New breaks: Park Avenue
+  and Escort generations 1997; appearance cuts for Milan, Encore, Park
+  Avenue, xB, Sonata 2002, QX60, Escort. Routing: Encore GX own entry;
+  Captiva, JX and ZX2 listings now match (ZX2 has its own entry).
+- Open for the owner: hybrid listings (763 of 802) show gas-only rows
+  (alternator/starter from the evergreens, gap-block A/C compressor). A
+  negative "not hybrid" gate is proposed in PARTS_GAPS §22.9.
+
+- §23.6 (hub, accuracy fix, rule 3; PARTS_GAPS §23.6): routing.
+  Ram Van / Ram Wagon / B-vans get their own 1994–97 / 1998–2003 entries
+  (no pickup rows; lamps, mirrors, fuel pump, A/C option, evergreens with
+  power windows option); Ram C/V (cargo Grand Caravan) off the pickup
+  entry (evergreens only). Silverado/Sierra 2500/3500/HD get per-HD-
+  generation entries (1999–2000, 2001–06, 2007–14, 2015–19, 2020–24):
+  evergreens plus headlights only where a GM part number lists the HD
+  (GMT800 2003–06, Sierra 2001–06, GMT900 2007–14). 2007 Classic → GMT800
+  rows. `gm-gen3-truck`/`gm-gen4-truck` apps and verified groups use
+  explicit light-duty spellings (no `Silverado*`/`Sierra*` prefix).
+  1,140 cars changed, all 1500s unchanged. Generic-only 13,893 (4.2%) →
+  14,634 (4.4%) after §22.1–22.5 (HD/C/V now show generic rows instead
+  of unsupported 1500/pickup rows); no entry 12,396 → 12,358. Open: HD tailgate / tow
+  mirror / K2XX–T1XX HD rows need part-number bases; plain "Silverado" /
+  "Sierra" listings can be unnamed HDs (528 cars, unchanged).
+
 ## How to measure
 
 `interchange_coverage.py` measures engine-family donors, not generic-only.
@@ -120,16 +166,18 @@ The generic-only count re-matches every distinct year/make/model in
 
 ## Next
 
-1. Next block by generic-only cars: Mercury Milan (Fusion twin) (311), Buick Encore (307), Chevrolet Captiva Sport (301), Buick Park Avenue (299), Scion xB (2nd gen) (293), Hyundai Sonata (290), Infiniti QX60 (288), Ford Escort (285).
-   Research generations and facelifts with sources first. The Fiat 500L
-   (2014–20) and 500X (2016–23) now have evergreen-only entries; they need
-   their own lamp/mechanical research.
+1. Next block by generic-only cars: Volvo S40 (276), Saturn SL (267), Chevrolet Trax (266), Chevrolet Sonic (261), Ford Freestar (254), Ford Freestyle (252), Mitsubishi Mirage (233), Chevrolet Venture (226).
+   Research generations and facelifts with sources first. The Fiat 500L/500X
+   and Encore GX have evergreen-only entries awaiting their own research.
 2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
    overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
    into `lexus es` and drop the duplicate (§20.5).
-3. Facelifts: research and add `FACELIFT_BREAKS` for the next models by
-   cars (Grand Caravan, Odyssey, Expedition, Town & Country, Silverado, Ram,
-   BMW 3, Maxima, Ranger, Suburban, Traverse, Pathfinder). The rule: a cited
-   source for every year, and models without one are left out.
+3. Facelifts: §23 done (21 keys; Suburban/Tahoe/Yukon have no confirmed
+   year). Next by cars: CR-V, Murano, Acadia, Durango, Chrysler 300,
+   Sienna, Outback, C-Class, F-250, Acura TL, Express, Forester, S10,
+   Journey, Chrysler 200 (Journey/200 have no GENERATION_BREAKS; fine for
+   FACELIFT_BREAKS). Same rule: a cited source per year; single-component
+   years (grille-only, tail-only) and mid-year changes are not cuts.
+   Routing follow-up (§23.2): done in §23.6 (below).
 4. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.

@@ -1,0 +1,1033 @@
+{
+ "fetched_utc": "2026-11-05T03:16Z",
+ "source": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+ "vins": {
+  "KM8JM72B37U535516": {
+   "Make": "HYUNDAI",
+   "Model": "Tucson",
+   "ModelYear": "2007",
+   "Trim": "JM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "",
+   "DriveType": "AWD/All-Wheel Drive",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  },
+  "KM8JM72B37U574235": {
+   "Make": "HYUNDAI",
+   "Model": "Tucson",
+   "ModelYear": "2007",
+   "Trim": "JM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "",
+   "DriveType": "AWD/All-Wheel Drive",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  },
+  "KM8JM72B46U296623": {
+   "Make": "HYUNDAI",
+   "Model": "Tucson",
+   "ModelYear": "2006",
+   "Trim": "JM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "AWD/All-Wheel Drive",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  },
+  "KM8JM72BX5U236425": {
+   "Make": "HYUNDAI",
+   "Model": "Tucson",
+   "ModelYear": "2005",
+   "Trim": "",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "",
+   "DriveType": "AWD/All-Wheel Drive",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  },
+  "KMHT36AH5LU007272": {
+   "Make": "HYUNDAI",
+   "Model": "Veloster N",
+   "ModelYear": "2020",
+   "Trim": "",
+   "Series": "",
+   "EngineModel": "T-GDI THETA II",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "4",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Coupe",
+   "ErrorCode": "0"
+  },
+  "KNDJE724367201664": {
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2006",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  },
+  "KNDJE724377423980": {
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2007",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  },
+  "KNDJE724687462225": {
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2008",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "4",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "Manual/Standard",
+   "TransmissionSpeeds": "5",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  },
+  "KNDJE724697655749": {
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2009",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  },
+  "KNDJE724967147156": {
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2006",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  },
+  "KNDJE724X67233592": {
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2006",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "0"
+  }
+ },
+ "partial": [
+  {
+   "rule": "genesis_g70_20t_sport_mt_2019_2021",
+   "code": "2",
+   "year": 2019,
+   "pattern": "KMTG24LA*K",
+   "Make": "GENESIS",
+   "Model": "G70",
+   "ModelYear": "2019",
+   "Trim": "2.0T Sport (MT)",
+   "Series": "",
+   "EngineModel": "T-GDI THETA II FR",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "4",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sedan/Saloon",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "genesis_g70_20t_sport_mt_2019_2021",
+   "code": "2",
+   "year": 2020,
+   "pattern": "KMTG24LA*L",
+   "Make": "GENESIS",
+   "Model": "G70",
+   "ModelYear": "2020",
+   "Trim": "2.0T Sport (MT)",
+   "Series": "",
+   "EngineModel": "T-GDI THETA II FR",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "4",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sedan/Saloon",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "genesis_g70_20t_sport_mt_2019_2021",
+   "code": "2",
+   "year": 2021,
+   "pattern": "KMTG24LA*M",
+   "Make": "GENESIS",
+   "Model": "G70",
+   "ModelYear": "2021",
+   "Trim": "2.0T Sport (MT)",
+   "Series": "",
+   "EngineModel": "T-GDI THETA II FR",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "4",
+   "DriveType": "",
+   "TransmissionStyle": "Manual/Standard",
+   "TransmissionSpeeds": "8",
+   "BodyClass": "Sedan/Saloon",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "hyundai_veloster_n_2019_2020",
+   "code": "3",
+   "year": 2019,
+   "pattern": "KMHT36AH*K",
+   "Make": "HYUNDAI",
+   "Model": "Veloster N",
+   "ModelYear": "2019",
+   "Trim": "",
+   "Series": "",
+   "EngineModel": "T-GDI THETA II",
+   "DisplacementL": "2",
+   "EngineCylinders": "4",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Coupe",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "hyundai_veloster_n_2019_2020",
+   "code": "3",
+   "year": 2020,
+   "pattern": "KMHT36AH*L",
+   "Make": "HYUNDAI",
+   "Model": "Veloster N",
+   "ModelYear": "2020",
+   "Trim": "",
+   "Series": "",
+   "EngineModel": "T-GDI THETA II",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "4",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Coupe",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "2",
+   "year": 2005,
+   "pattern": "KNDJE722*5",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2005",
+   "Trim": "KM Project",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "2",
+   "year": 2006,
+   "pattern": "KNDJE722*6",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2006",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "2",
+   "year": 2007,
+   "pattern": "KNDJE722*7",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2007",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "2",
+   "year": 2008,
+   "pattern": "KNDJE722*8",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2008",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "4",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "Manual/Standard",
+   "TransmissionSpeeds": "5",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "2",
+   "year": 2009,
+   "pattern": "KNDJE722*9",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2009",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "4",
+   "year": 2005,
+   "pattern": "KNDJE724*5",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2005",
+   "Trim": "KM Project",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "4",
+   "year": 2006,
+   "pattern": "KNDJE724*6",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2006",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "4",
+   "year": 2007,
+   "pattern": "KNDJE724*7",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2007",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "4",
+   "year": 2008,
+   "pattern": "KNDJE724*8",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2008",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "4",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "Manual/Standard",
+   "TransmissionSpeeds": "5",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "4",
+   "year": 2009,
+   "pattern": "KNDJE724*9",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "2009",
+   "Trim": "KM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "4WD/4-Wheel Drive/4x4",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "hyundai_tucson_20_awd_2005_2009",
+   "code": "B",
+   "year": 2005,
+   "pattern": "KM8JM72B*5",
+   "Make": "HYUNDAI",
+   "Model": "Tucson",
+   "ModelYear": "2005",
+   "Trim": "",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "",
+   "DriveType": "AWD/All-Wheel Drive",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "hyundai_tucson_20_awd_2005_2009",
+   "code": "B",
+   "year": 2006,
+   "pattern": "KM8JM72B*6",
+   "Make": "HYUNDAI",
+   "Model": "Tucson",
+   "ModelYear": "2006",
+   "Trim": "JM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "",
+   "DriveType": "AWD/All-Wheel Drive",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "hyundai_tucson_20_awd_2005_2009",
+   "code": "B",
+   "year": 2007,
+   "pattern": "KM8JM72B*7",
+   "Make": "HYUNDAI",
+   "Model": "Tucson",
+   "ModelYear": "2007",
+   "Trim": "JM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "",
+   "DriveType": "AWD/All-Wheel Drive",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "hyundai_tucson_20_awd_2005_2009",
+   "code": "B",
+   "year": 2008,
+   "pattern": "KM8JM72B*8",
+   "Make": "HYUNDAI",
+   "Model": "Tucson",
+   "ModelYear": "2008",
+   "Trim": "",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "4",
+   "DriveType": "AWD/All-Wheel Drive",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "hyundai_tucson_20_awd_2005_2009",
+   "code": "B",
+   "year": 2009,
+   "pattern": "KM8JM72B*9",
+   "Make": "HYUNDAI",
+   "Model": "Tucson",
+   "ModelYear": "2009",
+   "Trim": "JM",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2.0",
+   "EngineCylinders": "4",
+   "DriveType": "AWD/All-Wheel Drive",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_2wd_sohc_1995_1996",
+   "code": "1",
+   "year": 1995,
+   "pattern": "KNDJB721*S",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "1995",
+   "Trim": "",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "2",
+   "EngineCylinders": "4",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_sportage_2wd_sohc_1995_1996",
+   "code": "1",
+   "year": 1996,
+   "pattern": "KNDJB721*T",
+   "Make": "KIA",
+   "Model": "Sportage",
+   "ModelYear": "1996",
+   "Trim": "",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "",
+   "EngineCylinders": "",
+   "DriveType": "4x2",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]",
+   "ErrorCode": "4,6,14"
+  },
+  {
+   "rule": "hyundai_elantra_16_1993_1995",
+   "code": "R",
+   "year": 1993,
+   "pattern": "KMHJF23R*P",
+   "Make": "HYUNDAI",
+   "Model": "Elantra",
+   "ModelYear": "1993",
+   "Trim": "Deluxe (GL)",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "1.596000",
+   "EngineCylinders": "4",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "",
+   "ErrorCode": "5,6,14"
+  },
+  {
+   "rule": "hyundai_elantra_16_1993_1995",
+   "code": "R",
+   "year": 1994,
+   "pattern": "KMHJF23R*R",
+   "Make": "HYUNDAI",
+   "Model": "Elantra",
+   "ModelYear": "1994",
+   "Trim": "Deluxe (GL)",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "1.596000",
+   "EngineCylinders": "",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "",
+   "ErrorCode": "4,6,14"
+  },
+  {
+   "rule": "hyundai_elantra_16_1993_1995",
+   "code": "R",
+   "year": 1995,
+   "pattern": "KMHJF23R*S",
+   "Make": "HYUNDAI",
+   "Model": "Elantra",
+   "ModelYear": "1995",
+   "Trim": "Deluxe (GL)",
+   "Series": "",
+   "EngineModel": "",
+   "DisplacementL": "1.596000",
+   "EngineCylinders": "",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sedan/Saloon",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_rio_code_L_lx_mt_2014_2016",
+   "code": "L",
+   "year": 2014,
+   "pattern": "KNADL4A3*E",
+   "Make": "KIA",
+   "Model": "Rio",
+   "ModelYear": "2014",
+   "Trim": "1.6 Manual Trans LX STD",
+   "Series": "",
+   "EngineModel": "DOHC GAMMA",
+   "DisplacementL": "1.6",
+   "EngineCylinders": "",
+   "DriveType": "",
+   "TransmissionStyle": "Manual/Standard",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sedan/Saloon",
+   "ErrorCode": "6"
+  },
+  {
+   "rule": "kia_rio_code_L_lx_mt_2014_2016",
+   "code": "L",
+   "year": 2016,
+   "pattern": "KNADL4A3*G",
+   "Make": "KIA",
+   "Model": "Rio",
+   "ModelYear": "2016",
+   "Trim": "LX M/T",
+   "Series": "",
+   "EngineModel": "Gamma",
+   "DisplacementL": "1.6",
+   "EngineCylinders": "4",
+   "DriveType": "",
+   "TransmissionStyle": "",
+   "TransmissionSpeeds": "",
+   "BodyClass": "Sedan/Saloon",
+   "ErrorCode": "6"
+  }
+ ],
+ "sweep": {
+  "method": "For each Hyundai/Kia/Genesis line (WMI + VIN 4) and model year MY2006-2026 that has a lot car, every position-5 character (33) was decoded by vPIC DecodeVINValuesBatch with that line's commonest positions 6-8 and '*' for the check digit (2026-11-05). vPIC's Trim/Series text is its transcription of the filing's model-series names.",
+  "queries": 11385,
+  "codes_vpic_knows": 4417,
+  "codes_whose_model_series_names_a_transmission": [
+   {
+    "year": 2014,
+    "vin_1_5": "KNADL",
+    "model": "Rio",
+    "trim": "1.6 Manual Trans LX STD",
+    "vpic_transmission": "Manual/Standard"
+   },
+   {
+    "year": 2014,
+    "vin_1_5": "KNADM",
+    "model": "Rio",
+    "trim": "1.6 AT LX STD/Power",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2014,
+    "vin_1_5": "KNADN",
+    "model": "Rio",
+    "trim": "1.6 AT EX STD/Conv/Eco",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2014,
+    "vin_1_5": "KNADP",
+    "model": "Rio",
+    "trim": "1.6 AT SX STD / Premium",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2016,
+    "vin_1_5": "KNADL",
+    "model": "Rio",
+    "trim": "LX M/T",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2016,
+    "vin_1_5": "KNADM",
+    "model": "Rio",
+    "trim": "LX A/T",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2016,
+    "vin_1_5": "KNADN",
+    "model": "Rio",
+    "trim": "LX A/T Power Pkg",
+    "vpic_transmission": ""
+   }
+  ],
+  "lines_where_vpic_returns_a_transmission": 90,
+  "of_which_transmission_varies_with_position_5": [
+   {
+    "year": 2014,
+    "vin_1_4": "KNAD",
+    "model": "Rio",
+    "values": {
+     "Manual/Standard": 1,
+     "": 3
+    }
+   },
+   {
+    "year": 2017,
+    "vin_1_4": "KM8J",
+    "model": "Tucson",
+    "values": {
+     "Automatic": 2,
+     "": 1
+    }
+   },
+   {
+    "year": 2017,
+    "vin_1_4": "KNAD",
+    "model": "Rio",
+    "values": {
+     "": 1,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2017,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 31,
+     "Automatic": 1,
+     "Automated Manual Transmission (AMT)": 1
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "5NPD",
+    "model": "Elantra",
+    "values": {
+     "": 3,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "5XYP",
+    "model": "Sorento",
+    "values": {
+     "Automatic": 3,
+     "": 2
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KMHD",
+    "model": "Elantra",
+    "values": {
+     "": 2,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KMHE",
+    "model": "Sonata",
+    "values": {
+     "": 1,
+     "Automatic": 3
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KNAE",
+    "model": "Stinger",
+    "values": {
+     "": 28,
+     "Automatic": 5
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KNAF",
+    "model": "Forte",
+    "values": {
+     "Automatic": 2,
+     "": 1
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KNDC",
+    "model": "Niro",
+    "values": {
+     "": 2,
+     "Automatic": 5
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 31,
+     "Automatic": 1,
+     "Automated Manual Transmission (AMT)": 1
+    }
+   },
+   {
+    "year": 2019,
+    "vin_1_4": "KM8K",
+    "model": "Kona",
+    "values": {
+     "Automatic": 3,
+     "Automated Manual Transmission (AMT)": 2,
+     "": 1
+    }
+   },
+   {
+    "year": 2019,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 31,
+     "Automatic": 1,
+     "Automated Manual Transmission (AMT)": 1
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "5NPD",
+    "model": "Elantra",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 2,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "5NPE",
+    "model": "Sonata",
+    "values": {
+     "": 3,
+     "Automatic": 2
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KM8K",
+    "model": "Kona",
+    "values": {
+     "Automatic": 5,
+     "": 1
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KM8R",
+    "model": "Palisade",
+    "values": {
+     "": 30,
+     "Automatic": 3
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KMHC",
+    "model": "Ioniq",
+    "values": {
+     "": 3,
+     "Automatic": 2
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KMHD",
+    "model": "Elantra",
+    "values": {
+     "Manual/Standard": 1,
+     "Continuously Variable Transmission (CVT)": 2
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KMHH",
+    "model": "Elantra GT",
+    "values": {
+     "Automatic": 1,
+     "": 1
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KMHL",
+    "model": "Sonata",
+    "values": {
+     "": 30,
+     "Automatic": 3
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KNDC",
+    "model": "Niro",
+    "values": {
+     "Automatic": 2,
+     "": 3
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 1,
+     "Continuously Variable Transmission (CVT)": 2,
+     "Automated Manual Transmission (AMT)": 1
+    }
+   },
+   {
+    "year": 2021,
+    "vin_1_4": "5NPL",
+    "model": "Elantra",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 1,
+     "": 4
+    }
+   },
+   {
+    "year": 2021,
+    "vin_1_4": "KMHL",
+    "model": "Elantra",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 1,
+     "": 5
+    }
+   },
+   {
+    "year": 2021,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 2,
+     "Continuously Variable Transmission (CVT)": 2
+    }
+   },
+   {
+    "year": 2022,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 1,
+     "Continuously Variable Transmission (CVT)": 2,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2023,
+    "vin_1_4": "5XXG",
+    "model": "K5",
+    "values": {
+     "Automatic": 3,
+     "Dual-Clutch Transmission (DCT)": 1
+    }
+   },
+   {
+    "year": 2023,
+    "vin_1_4": "KM8K",
+    "model": "Kona",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 2,
+     "Automatic": 1,
+     "": 1
+    }
+   },
+   {
+    "year": 2023,
+    "vin_1_4": "KMHL",
+    "model": "Elantra",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 4,
+     "": 1,
+     "Automatic": 1
+    }
+   }
+  ],
+  "finding": "Only Kia Rio MY2014 (L '1.6 Manual Trans LX STD', M/N/P '1.6 AT ...') and MY2016 (L 'LX M/T', M 'LX A/T', N 'LX A/T Power Pkg') name a transmission in position 5 (rule kia_rio_code_L_lx_mt_2014_2016, dropped). Where vPIC returns a TransmissionStyle (MY2008, MY2017+), it is the same for every position-5 code of the line (line/engine-level default), apart from the lines listed under of_which_transmission_varies_with_position_5."
+ }
+}

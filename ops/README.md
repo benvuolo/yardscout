@@ -18,3 +18,8 @@ Brief for a new session (paste as the first message):
 
 > Read `/CLAUDE.md` and `ops/<file>`. Work only that workstream. Update
 > `ops/<file>` and push before you stop.
+
+Temporary exception (2026-11-05, owner asked for full speed): two Parts
+sessions run at once. The model-block session writes PARTS_GAPS §22 and the
+facelift session §23, each with its own comment group in FACELIFT_BREAKS; both
+pull --rebase and rerun the parts tests before every push.

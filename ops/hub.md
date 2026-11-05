@@ -60,3 +60,17 @@ share link yardscout.io/app.
 | Data quality | session_016ZzJfL9TNASMsWQaajvZTe | 2026-11-04 18:40 UTC | model-spelling merge; unreliable-yard rule for lifespans |
 
 Not opened: eBay (blocked on keys and Terapeak), Release (needs "ship").
+
+### 2026-11-05 02:55 UTC (usage reset; owner: "ensure everything is at speed")
+
+Running: hub workflows wf_231e5bc1-597 (manual-transmission research, resumed
+after the 01:5x usage-limit stop) and wf_9b3745bc-31f (interchange Phase 0 /
+crawler R1-R6 / curation pipeline, each on a branch for hub review); Actions:
+one capped OEM crawl run (41957090873, 8 sites at a time, 8 s per site),
+DB Electrical aftermarket crawl, scan 41949003681 (vPIC default-cell fix),
+coverage sweep osm_pending for WA/AL (41958070374). Sessions: Audi builder
+(session_016ZzJfL2a85N1tgt5nnonXc), checkpoint auditor
+(session_016ZzJfLtcR8MerD7PWDQVoN), Parts next block
+(session_016ZzJfMzKVhFWLabqYjTTwd), Parts facelift follow-ups
+(session_016ZzJfMe6Km3PdbWY99nsXL). Mopar and VW catalogs stopped by the
+breaker (403/503) pending an owner decision on one VW retry.
