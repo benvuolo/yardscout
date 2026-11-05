@@ -1,0 +1,80 @@
+# Aftermarket application-table crawl (scraper/oem_fitment/aftermarket/README.md).
+# Same contract as oem-fitment-crawl.yml: fetch.py politeness (allowlist,
+# robots incl. RFC 9309 reading, 4 s per site, permanent stop on any bot
+# check), 28-minute slices, every slice checkpointed to the oem-raw branch
+# under aftermarket/raw/. Evidence from this track is weaker than the dealer
+# catalogs (OE lists are per product, not per application row) and is only
+# ever used to join to dealer-catalog OEM numbers, never as "verified" alone.
+name: OEM aftermarket crawl
+
+on:
+  workflow_dispatch:
+    inputs:
+      site:
+        description: "Aftermarket site domain"
+        default: "www.dbelectrical.com"
+  schedule:
+    - cron: "53 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oem-aftermarket-crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      SITE: ${{ github.event.inputs.site || 'www.dbelectrical.com' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q requests
+      - name: Restore progress from oem-raw
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          W="$GITHUB_WORKSPACE/../raw-branch"
+          if git fetch -q origin oem-raw; then
+            git worktree add -q --detach "$W" FETCH_HEAD
+          else
+            git worktree add -q --orphan -b oem-raw "$W"
+          fi
+          mkdir -p "$W/aftermarket/raw" scraper/oem_fitment/aftermarket/raw
+          cp "$W"/aftermarket/raw/"$SITE".* scraper/oem_fitment/aftermarket/raw/ 2>/dev/null || true
+          if ls scraper/oem_fitment/aftermarket/raw/"$SITE".done scraper/oem_fitment/aftermarket/raw/"$SITE".blocked 2>/dev/null; then
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
+      - name: Crawl in 28-minute slices, checkpoint after each
+        if: env.SKIP != '1'
+        run: |
+          W="$GITHUB_WORKSPACE/../raw-branch"
+          push_raw() {
+            cp "$GITHUB_WORKSPACE"/scraper/oem_fitment/aftermarket/raw/"$SITE".* "$W/aftermarket/raw/" 2>/dev/null || true
+            ( cd "$W"
+              git add aftermarket/raw
+              if git diff --cached --quiet; then exit 0; fi
+              git commit -q -m "oem-raw: aftermarket $SITE checkpoint $(date -u +%Y-%m-%dT%H:%MZ)"
+              for t in 1 2 3 4 5 6; do
+                git push -q origin HEAD:oem-raw && exit 0
+                git fetch -q origin oem-raw && git rebase -q FETCH_HEAD || git rebase --abort || true
+                sleep $((t * 5))
+              done
+              echo "::error::could not push checkpoint"; exit 1 )
+          }
+          for i in $(seq 1 11); do
+            set +e
+            python3 scraper/oem_fitment/aftermarket/run.py --site "$SITE" --minutes 28
+            rc=$?
+            set -e
+            tail -2 "scraper/oem_fitment/aftermarket/raw/$SITE.log" 2>/dev/null || true
+            push_raw
+            if [ "$rc" -eq 11 ]; then sleep 120; continue; fi
+            if [ "$rc" -ne 10 ]; then echo "exit $rc after slice $i"; break; fi
+          done
+          { echo "## aftermarket $SITE"; echo '```'; tail -5 "scraper/oem_fitment/aftermarket/raw/$SITE.log" 2>/dev/null; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
