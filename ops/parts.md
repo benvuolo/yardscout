@@ -127,8 +127,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   Captiva, JX and ZX2 listings now match (ZX2 has its own entry).
 - §22.10 hybrid gate (owner go 14:28): alternator, starter and belt A/C
   rows dropped on hybrid listings (86 combos, 0 gas cars changed). Cited
-  per-family exceptions (`_HYBRID_KEEPS`) still to add; gm-gen4-truck still
-  catches Yukon/Escalade Hybrid (reported to the hub's Phase 0).
+  exceptions: Civic/Accord Hybrid and Vue Hybrid keep the starter; gm-gen4-truck still
+  catches Yukon/Escalade Hybrid (reported to the hub Phase 0).
 
 - §23.6 (hub, accuracy fix, rule 3; PARTS_GAPS §23.6): routing.
   Ram Van / Ram Wagon / B-vans get their own 1994–97 / 1998–2003 entries

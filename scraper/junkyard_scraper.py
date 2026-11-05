@@ -6672,7 +6672,16 @@ _HYBRID_GAS_ONLY_ROWS = frozenset({
     "Starter (verify part number)",
     "A/C Compressor (clutch spins free)",
 })
-_HYBRID_KEEPS: dict[str, set[str]] = {}
+_HYBRID_KEEPS: dict[tuple[str, str], set[str]] = {
+    # (make, model text contains) -> rows that hybrid keeps. Cited in §22.10.
+    # Honda IMA: "IMA-equipped vehicles also include a conventional starter
+    # motor as a backup" (Wikipedia, Integrated Motor Assist).
+    ("honda", "civic"): {"Starter (verify part number)"},
+    ("honda", "accord"): {"Starter (verify part number)"},
+    # GM BAS 2009 Vue Hybrid: "retains its standard 12-Volt starter"
+    # (greencarreports.com 1021418).
+    ("saturn", "vue"): {"Starter (verify part number)"},
+}
 
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
@@ -14777,7 +14786,8 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
             continue
         low, high = info["year_range"]
         filtered_parts = []
-        hybrid_keeps = _HYBRID_KEEPS.get(keyword, set()) if is_hybrid else set()
+        hybrid_keeps = set().union(*(rows for (mk, sub), rows in _HYBRID_KEEPS.items()
+                                      if make_lower == mk and sub in model_lower)) if is_hybrid else set()
         for p in info["top_parts"]:
             if is_hybrid and p["name"] in _HYBRID_GAS_ONLY_ROWS and p["name"] not in hybrid_keeps:
                 continue

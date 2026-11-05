@@ -724,6 +724,10 @@ check("§22.10 a VIN decode naming Hybrid in the series also drops them",
       not (_G & set(parts(2010, "Toyota", "Camry", {**FWD, "series": "Hybrid"}))))
 check("§22.10 other rows on hybrids are kept (lamps, pump)", "Fuel Pump Module (in-tank, test before listing)" in parts(2010, "Toyota", "Camry Hybrid"))
 
+check("§22.10 cited exception: Civic Hybrid keeps the (backup) starter, not the alternator or belt A/C",
+      "Starter (verify part number)" in parts(2008, "Honda", "Civic Hybrid")
+      and not ({"Alternator (spin-test at yard)", "A/C Compressor (clutch spins free)"} & set(parts(2008, "Honda", "Civic Hybrid"))))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

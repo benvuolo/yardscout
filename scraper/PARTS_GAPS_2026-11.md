@@ -2314,3 +2314,20 @@ electric A/C compressor. Where a family is unconfirmed, the row is removed
 - **Tests:** Camry Hybrid and Fusion Hybrid lose the three rows and keep
   their other rows; their gas twins keep them; a decode with series
   "Hybrid" also drops them. All suites pass.
+
+**§22.10 exceptions (cited, one source per family):**
+
+| Family | Alternator | Starter | Belt A/C | Source |
+|---|---|---|---|---|
+| Toyota HSD (Camry/Highlander, Altima Hybrid) | no | no | no (electric) | WP Hybrid_Synergy_Drive ("replaces … alternator, and starter motor") |
+| Ford full hybrid (Escape/Mariner, Fusion/Milan/MKZ) | no | no | 05–09 Escape belt, later electric | vehicleservicepros.com 2016-01-19 ("no external starter motor"); greencarreports 1022025; fenderbender |
+| Honda IMA (Civic/Accord Hybrid) | no | **yes, backup** | hybrid-specific dual unit | WP Integrated_Motor_Assist ("a conventional starter motor as a backup") |
+| Hyundai/Kia HSG (Sonata/Optima Hybrid) | no (270V HSG) | likely no | no (electric) | Kia Optima Hybrid press kit |
+| GM two-mode (Tahoe/Yukon/Silverado Hybrid) | no | no | no (300V) | machinedesign.com ("Gone are the alternator, starter …") |
+| GM BAS (Vue/Aura/Malibu) | no (36V motor-generator) | **yes (2009 Vue)** | belt-driven | WP BAS_hybrid; greencarreports 1021418 ("retains its standard 12-Volt starter") |
+
+- **Kept rows:** Civic/Accord Hybrid and Vue Hybrid keep the starter row.
+- **Still removed:**
+  - BAS and early Escape belt compressors, because no source says they are
+    the same part as the gas car's;
+  - the Aura/Malibu Hybrid starter, which is inferred rather than stated.
