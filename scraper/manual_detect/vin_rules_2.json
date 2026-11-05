@@ -7,7 +7,7 @@
   "Nissan",
   "Infiniti"
  ],
- "generated_utc": "2026-11-05T14:35Z",
+ "generated_utc": "2026-11-05T14:36Z",
  "generator": "scraper/manual_detect/vin_rules_2.py",
  "inputs": {
   "inventory_live": "docs/data/inventory_live.json",
