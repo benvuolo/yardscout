@@ -15,3 +15,22 @@
 08:19:37 seg done tier=A Mazda Protege [1999, 2003] seeds=[2003] records=312 errors=1
 08:24:17 seg done tier=A Mazda Tribute [2001, 2004] seeds=[2003] records=333 errors=1
 08:24:17 time budget reached records=333
+08:24:25 start site=www.mazdapartsnow.com segments=31 tiers=['A', 'B']
+08:24:25 seg done tier=A Mazda Mazda3 [2001, 2009] seeds=[2008] records=333 errors=1
+08:24:25 seg done tier=A Mazda Mazda3 [2010, 2011] seeds=[2010] records=333 errors=1
+08:24:25 seg done tier=A Mazda Mazda6 [2003, 2008] seeds=[2007] records=333 errors=1
+08:24:25 seg done tier=A Mazda CX-9 [2007, 2015] seeds=[2008] records=333 errors=1
+08:24:25 seg done tier=A Mazda Mazda3 [2012, 2013] seeds=[2012] records=333 errors=1
+08:24:25 seg done tier=A Mazda Mazda6 [2009, 2013] seeds=[2009] records=333 errors=1
+08:24:25 seg done tier=A Mazda CX-7 [2007, 2012] seeds=[2010] records=333 errors=1
+08:24:25 seg done tier=A Mazda Protege [1999, 2003] seeds=[2003] records=333 errors=1
+08:24:25 seg done tier=A Mazda Tribute [2001, 2004] seeds=[2003] records=333 errors=1
+08:33:05 nav-fail Mazda MPV 1999: NavError: HTTP 404 for https://www.mazdapartsnow.com/1999-mazda-mpv-parts
+08:33:05 seg done tier=A Mazda MPV [1989, 2006] seeds=[2004, 1994, 1999] records=371 errors=2
+08:37:38 seg done tier=A Mazda Mazda5 [2008, 2010] seeds=[2008] records=391 errors=2
+08:43:08 seg done tier=A Mazda Mazda5 [2012, 2015] seeds=[2012] records=400 errors=2
+08:43:08 nav-fail Mazda B-Series 1996: NavError: Mazda B-Series: no single catalog model for this feed name
+08:43:08 seg done tier=A Mazda B-Series [1986, 2007] seeds=[1996] records=400 errors=3
+08:46:04 seg done tier=A Mazda Tribute [2005, 2006] seeds=[2005] records=409 errors=3
+08:50:20 seg done tier=A Mazda Mazda6 [2014, 2021] seeds=[2014] records=427 errors=3
+08:55:02 time budget reached records=440
