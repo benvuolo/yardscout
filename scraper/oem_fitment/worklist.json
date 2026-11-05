@@ -8226,6 +8226,2549 @@
      "seed_year": 2002
     }
    ]
+  },
+  "www.audipartsgiant.com": {
+   "cars": 2271,
+   "segments": [
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "A4",
+     "segment": [
+      1996,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 901,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "A6",
+     "segment": [
+      1997,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 272,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "Q5",
+     "segment": [
+      2009,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 218,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "Q7",
+     "segment": [
+      2007,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 191,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "A3",
+     "segment": [
+      2006,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 146,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "A4 Quattro",
+     "segment": [
+      1997,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 106,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "A5",
+     "segment": [
+      2009,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 68,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "A6 Quattro",
+     "segment": [
+      2000,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 66,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "TT",
+     "segment": [
+      2000,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 57,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "S4",
+     "segment": [
+      2000,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 38,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "A8",
+     "segment": [
+      1997,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 34,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "Allroad",
+     "segment": [
+      2001,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 27,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "A5 Quattro",
+     "segment": [
+      2009,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 15,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.audipartsgiant.com",
+     "make": "Audi",
+     "model": "Q3",
+     "segment": [
+      2015,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 15,
+     "seed_year": 2016
+    }
+   ]
+  },
+  "www.bmwpartsdeal.com": {
+   "cars": 5353,
+   "segments": [
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "328i",
+     "segment": [
+      1901,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 885,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "325i",
+     "segment": [
+      1988,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 411,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "X5",
+     "segment": [
+      2007,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 310,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "X3",
+     "segment": [
+      2004,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 309,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "528i",
+     "segment": [
+      0,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 297,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "X5",
+     "segment": [
+      2000,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 283,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "525i",
+     "segment": [
+      1989,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 186,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "530i",
+     "segment": [
+      1994,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 182,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "3 Series",
+     "segment": [
+      1983,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 150,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "535i",
+     "segment": [
+      1985,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 147,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "330i",
+     "segment": [
+      2001,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 146,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "335i",
+     "segment": [
+      2007,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 141,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "X3",
+     "segment": [
+      2011,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 135,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "325ci",
+     "segment": [
+      2000,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 106,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "750Li",
+     "segment": [
+      2006,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 100,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "320i",
+     "segment": [
+      1978,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 90,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "X1",
+     "segment": [
+      2012,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 88,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "328xi",
+     "segment": [
+      2007,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 84,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "325xi",
+     "segment": [
+      2001,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 78,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "323i",
+     "segment": [
+      1998,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 72,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "550i",
+     "segment": [
+      2006,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 59,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "5 Series",
+     "segment": [
+      1985,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 58,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "328i xDrive",
+     "segment": [
+      2009,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 57,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "750i",
+     "segment": [
+      2000,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 56,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "330ci",
+     "segment": [
+      2001,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 56,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "745Li",
+     "segment": [
+      2002,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 50,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "Z3",
+     "segment": [
+      1996,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 42,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "740i",
+     "segment": [
+      1993,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 42,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "745i",
+     "segment": [
+      2002,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 42,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "540i",
+     "segment": [
+      1994,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 40,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "330xi",
+     "segment": [
+      2001,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 40,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "530xi",
+     "segment": [
+      2006,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 33,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "Z4",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 31,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "128i",
+     "segment": [
+      2008,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 29,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "740iL",
+     "segment": [
+      1995,
+      2001
+     ],
+     "breaks_known": false,
+     "cars": 28,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "650i",
+     "segment": [
+      2006,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 26,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "545i",
+     "segment": [
+      2004,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 23,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "645ci",
+     "segment": [
+      2004,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 21,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "535xi",
+     "segment": [
+      2008,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 20,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "318i",
+     "segment": [
+      1984,
+      1998
+     ],
+     "breaks_known": false,
+     "cars": 19,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "528xi",
+     "segment": [
+      2008,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 18,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "535i xDrive",
+     "segment": [
+      2009,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 18,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "525xi",
+     "segment": [
+      2006,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 16,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.bmwpartsdeal.com",
+     "make": "BMW",
+     "model": "7 Series",
+     "segment": [
+      1983,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 16,
+     "seed_year": 2004
+    }
+   ]
+  },
+  "www.mazdapartsnow.com": {
+   "cars": 6231,
+   "segments": [
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda3",
+     "segment": [
+      2001,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 1092,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda3",
+     "segment": [
+      2010,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 609,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda6",
+     "segment": [
+      2003,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 524,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "CX-9",
+     "segment": [
+      2007,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 449,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda3",
+     "segment": [
+      2012,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 410,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda6",
+     "segment": [
+      2009,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 398,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "CX-7",
+     "segment": [
+      2007,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 396,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Protege",
+     "segment": [
+      1999,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 196,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Tribute",
+     "segment": [
+      2001,
+      2004
+     ],
+     "breaks_known": true,
+     "cars": 181,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "MPV",
+     "segment": [
+      1989,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 165,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda5",
+     "segment": [
+      2008,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 147,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda5",
+     "segment": [
+      2012,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 144,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "B-Series",
+     "segment": [
+      1986,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 135,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Tribute",
+     "segment": [
+      2005,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 133,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda6",
+     "segment": [
+      2014,
+      2021
+     ],
+     "breaks_known": true,
+     "cars": 118,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "626",
+     "segment": [
+      1985,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 115,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "MX-5 Miata",
+     "segment": [
+      1990,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 109,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda3",
+     "segment": [
+      2014,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 103,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda2",
+     "segment": [
+      2011,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 84,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "CX-5",
+     "segment": [
+      2013,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 80,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda5",
+     "segment": [
+      2006,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 76,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Tribute",
+     "segment": [
+      2008,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 70,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "RX-8",
+     "segment": [
+      2004,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 66,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Protege5",
+     "segment": [
+      2002,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 55,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Protege",
+     "segment": [
+      1995,
+      1998
+     ],
+     "breaks_known": true,
+     "cars": 36,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Millenia",
+     "segment": [
+      1995,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 32,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Mazda3",
+     "segment": [
+      2017,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 31,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "B2200",
+     "segment": [
+      1988,
+      1993
+     ],
+     "breaks_known": false,
+     "cars": 28,
+     "seed_year": 1991
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "B2300",
+     "segment": [
+      1994,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 27,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "Truck",
+     "segment": [
+      2002,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 21,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mazdapartsnow.com",
+     "make": "Mazda",
+     "model": "CX-5",
+     "segment": [
+      2017,
+      2023
+     ],
+     "breaks_known": true,
+     "cars": 17,
+     "seed_year": 2017
+    }
+   ]
+  },
+  "www.mbpartsgiant.com": {
+   "cars": 4710,
+   "segments": [
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C-Class",
+     "segment": [
+      2008,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 440,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C-Class",
+     "segment": [
+      2001,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 405,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "E-Class",
+     "segment": [
+      2003,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 308,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "S-Class",
+     "segment": [
+      1974,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 264,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "M-Class",
+     "segment": [
+      1995,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 225,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "E-Class",
+     "segment": [
+      1994,
+      2002
+     ],
+     "breaks_known": true,
+     "cars": 221,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C300",
+     "segment": [
+      2008,
+      2022
+     ],
+     "breaks_known": false,
+     "cars": 201,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "M-Class",
+     "segment": [
+      2006,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 147,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "E350",
+     "segment": [
+      2006,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 138,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "E320",
+     "segment": [
+      1995,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 130,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "GL-Class",
+     "segment": [
+      2007,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 123,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C230",
+     "segment": [
+      1997,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 119,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CLK-Class",
+     "segment": [
+      1998,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 105,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C250",
+     "segment": [
+      2012,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 97,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "ML350",
+     "segment": [
+      2003,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 96,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C-Class",
+     "segment": [
+      1978,
+      2000
+     ],
+     "breaks_known": true,
+     "cars": 86,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "E-Class",
+     "segment": [
+      2010,
+      2016
+     ],
+     "breaks_known": true,
+     "cars": 84,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "300",
+     "segment": [
+      1960,
+      1993
+     ],
+     "breaks_known": false,
+     "cars": 70,
+     "seed_year": 1992
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "GL450",
+     "segment": [
+      2007,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 68,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "ML320",
+     "segment": [
+      1998,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 64,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C240",
+     "segment": [
+      2001,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 58,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CLK",
+     "segment": [
+      1999,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 56,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "R-Class",
+     "segment": [
+      2006,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 53,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "S550",
+     "segment": [
+      2007,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 50,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "SLK",
+     "segment": [
+      1998,
+      2008
+     ],
+     "breaks_known": false,
+     "cars": 46,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "SLK-Class",
+     "segment": [
+      1998,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 45,
+     "seed_year": 1998
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CLK320",
+     "segment": [
+      1998,
+      2005
+     ],
+     "breaks_known": false,
+     "cars": 43,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "S500",
+     "segment": [
+      1995,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 41,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CLS-Class",
+     "segment": [
+      2006,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 35,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C350",
+     "segment": [
+      2006,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 35,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "GLK350",
+     "segment": [
+      2010,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 30,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "S430",
+     "segment": [
+      2000,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 29,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "GLK-Class",
+     "segment": [
+      2010,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CLA-Class",
+     "segment": [
+      2014,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CLK430",
+     "segment": [
+      1999,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "R350",
+     "segment": [
+      2006,
+      2012
+     ],
+     "breaks_known": false,
+     "cars": 24,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CLA250",
+     "segment": [
+      2014,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 24,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "ML500",
+     "segment": [
+      2002,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 23,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C320",
+     "segment": [
+      2001,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 22,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "SL-Class",
+     "segment": [
+      1992,
+      2015
+     ],
+     "breaks_known": false,
+     "cars": 21,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CL-Class",
+     "segment": [
+      1999,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 19,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "E500",
+     "segment": [
+      2003,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 19,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "Sprinter 2500",
+     "segment": [
+      2010,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 19,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CLK350",
+     "segment": [
+      2006,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 19,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "190",
+     "segment": [
+      1964,
+      1993
+     ],
+     "breaks_known": false,
+     "cars": 18,
+     "seed_year": 1991
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "SLK230",
+     "segment": [
+      1998,
+      2003
+     ],
+     "breaks_known": false,
+     "cars": 18,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "300-Class",
+     "segment": [
+      1981,
+      1991
+     ],
+     "breaks_known": false,
+     "cars": 18,
+     "seed_year": 1987
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "CLS550",
+     "segment": [
+      2007,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 17,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "C280",
+     "segment": [
+      1975,
+      2007
+     ],
+     "breaks_known": false,
+     "cars": 16,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mbpartsgiant.com",
+     "make": "Mercedes-Benz",
+     "model": "300E",
+     "segment": [
+      1986,
+      1992
+     ],
+     "breaks_known": false,
+     "cars": 16,
+     "seed_year": 1988
+    }
+   ]
+  },
+  "www.mitsubishipartsgiant.com": {
+   "cars": 2970,
+   "segments": [
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Lancer",
+     "segment": [
+      2008,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 391,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Lancer",
+     "segment": [
+      2002,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 226,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Eclipse",
+     "segment": [
+      2000,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 198,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Eclipse",
+     "segment": [
+      2006,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 186,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Mirage",
+     "segment": [
+      1992,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 185,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Endeavor",
+     "segment": [
+      2004,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 185,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Outlander Sport",
+     "segment": [
+      2011,
+      2021
+     ],
+     "breaks_known": false,
+     "cars": 183,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Montero Sport",
+     "segment": [
+      1991,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 182,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Outlander",
+     "segment": [
+      2007,
+      2013
+     ],
+     "breaks_known": true,
+     "cars": 173,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Galant",
+     "segment": [
+      2009,
+      2012
+     ],
+     "breaks_known": true,
+     "cars": 169,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Galant",
+     "segment": [
+      2004,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 109,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Outlander",
+     "segment": [
+      2003,
+      2006
+     ],
+     "breaks_known": true,
+     "cars": 95,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Galant",
+     "segment": [
+      2002,
+      2003
+     ],
+     "breaks_known": true,
+     "cars": 93,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Outlander",
+     "segment": [
+      2014,
+      2020
+     ],
+     "breaks_known": true,
+     "cars": 84,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Montero",
+     "segment": [
+      1985,
+      2006
+     ],
+     "breaks_known": false,
+     "cars": 74,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Galant",
+     "segment": [
+      1990,
+      2001
+     ],
+     "breaks_known": true,
+     "cars": 67,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Galant",
+     "segment": [
+      2007,
+      2008
+     ],
+     "breaks_known": true,
+     "cars": 58,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Mirage G4",
+     "segment": [
+      2017,
+      2024
+     ],
+     "breaks_known": false,
+     "cars": 50,
+     "seed_year": 2017
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Eclipse",
+     "segment": [
+      1995,
+      1999
+     ],
+     "breaks_known": true,
+     "cars": 49,
+     "seed_year": 1999
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Raider",
+     "segment": [
+      2006,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 43,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Diamante",
+     "segment": [
+      1992,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 36,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "3000GT",
+     "segment": [
+      1991,
+      1999
+     ],
+     "breaks_known": false,
+     "cars": 29,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.mitsubishipartsgiant.com",
+     "make": "Mitsubishi",
+     "model": "Mighty Max",
+     "segment": [
+      1985,
+      1995
+     ],
+     "breaks_known": false,
+     "cars": 26,
+     "seed_year": 1992
+    }
+   ]
+  },
+  "www.vwpartsgiant.com": {
+   "cars": 6886,
+   "segments": [
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Jetta",
+     "segment": [
+      2006,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 917,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Jetta",
+     "segment": [
+      2011,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 903,
+     "seed_year": 2014
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Passat",
+     "segment": [
+      2012,
+      2019
+     ],
+     "breaks_known": true,
+     "cars": 748,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Jetta",
+     "segment": [
+      1999,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 548,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "CC",
+     "segment": [
+      2009,
+      2016
+     ],
+     "breaks_known": false,
+     "cars": 397,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Tiguan",
+     "segment": [
+      2009,
+      2017
+     ],
+     "breaks_known": true,
+     "cars": 376,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "New Beetle",
+     "segment": [
+      1991,
+      2010
+     ],
+     "breaks_known": true,
+     "cars": 356,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Beetle",
+     "segment": [
+      1964,
+      2019
+     ],
+     "breaks_known": false,
+     "cars": 356,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Passat",
+     "segment": [
+      2006,
+      2011
+     ],
+     "breaks_known": true,
+     "cars": 342,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Passat",
+     "segment": [
+      1986,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 283,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Jetta",
+     "segment": [
+      2015,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 266,
+     "seed_year": 2015
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Routan",
+     "segment": [
+      2009,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 171,
+     "seed_year": 2009
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Touareg",
+     "segment": [
+      2004,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 158,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Eos",
+     "segment": [
+      2007,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 130,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Rabbit",
+     "segment": [
+      1977,
+      2009
+     ],
+     "breaks_known": false,
+     "cars": 129,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Golf",
+     "segment": [
+      1985,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 124,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Golf",
+     "segment": [
+      2010,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 100,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "GTI",
+     "segment": [
+      2006,
+      2009
+     ],
+     "breaks_known": true,
+     "cars": 61,
+     "seed_year": 2007
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Cabrio",
+     "segment": [
+      1995,
+      2002
+     ],
+     "breaks_known": false,
+     "cars": 46,
+     "seed_year": 2001
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "GTI",
+     "segment": [
+      1996,
+      2005
+     ],
+     "breaks_known": true,
+     "cars": 42,
+     "seed_year": 2003
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "GTI",
+     "segment": [
+      2010,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 41,
+     "seed_year": 2010
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Jetta",
+     "segment": [
+      2019,
+      2024
+     ],
+     "breaks_known": true,
+     "cars": 34,
+     "seed_year": 2019
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Passat Wagon",
+     "segment": [
+      1993,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 31,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Jetta SportWagen",
+     "segment": [
+      2009,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 27,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Jetta",
+     "segment": [
+      1994,
+      1998
+     ],
+     "breaks_known": true,
+     "cars": 25,
+     "seed_year": 1997
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "New Beetle Convertible",
+     "segment": [
+      2003,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 25,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Tiguan",
+     "segment": [
+      2018,
+      2022
+     ],
+     "breaks_known": true,
+     "cars": 24,
+     "seed_year": 2018
+    },
+    {
+     "site": "www.vwpartsgiant.com",
+     "make": "Volkswagen",
+     "model": "Golf",
+     "segment": [
+      2015,
+      2018
+     ],
+     "breaks_known": true,
+     "cars": 20,
+     "seed_year": 2016
+    }
+   ]
+  },
+  "www.volvopartsgiant.com": {
+   "cars": 2460,
+   "segments": [
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "XC90",
+     "segment": [
+      2003,
+      2014
+     ],
+     "breaks_known": true,
+     "cars": 494,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "S60",
+     "segment": [
+      2001,
+      2018
+     ],
+     "breaks_known": false,
+     "cars": 473,
+     "seed_year": 2012
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "S40",
+     "segment": [
+      1992,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 279,
+     "seed_year": 2006
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "S80",
+     "segment": [
+      1999,
+      2014
+     ],
+     "breaks_known": false,
+     "cars": 215,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "V70",
+     "segment": [
+      1998,
+      2010
+     ],
+     "breaks_known": false,
+     "cars": 153,
+     "seed_year": 2002
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "XC60",
+     "segment": [
+      2010,
+      2017
+     ],
+     "breaks_known": false,
+     "cars": 138,
+     "seed_year": 2013
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "XC70",
+     "segment": [
+      1998,
+      2007
+     ],
+     "breaks_known": true,
+     "cars": 102,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "C70",
+     "segment": [
+      1998,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 97,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "S70",
+     "segment": [
+      1998,
+      2000
+     ],
+     "breaks_known": false,
+     "cars": 62,
+     "seed_year": 2000
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "240",
+     "segment": [
+      1976,
+      1993
+     ],
+     "breaks_known": false,
+     "cars": 54,
+     "seed_year": 1992
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "XC70",
+     "segment": [
+      2008,
+      2015
+     ],
+     "breaks_known": true,
+     "cars": 52,
+     "seed_year": 2008
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "V50",
+     "segment": [
+      2002,
+      2011
+     ],
+     "breaks_known": false,
+     "cars": 50,
+     "seed_year": 2005
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "850",
+     "segment": [
+      1993,
+      1997
+     ],
+     "breaks_known": false,
+     "cars": 49,
+     "seed_year": 1995
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "C30",
+     "segment": [
+      2008,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 40,
+     "seed_year": 2011
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "740",
+     "segment": [
+      1986,
+      1992
+     ],
+     "breaks_known": false,
+     "cars": 18,
+     "seed_year": 1991
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "960",
+     "segment": [
+      1992,
+      1997
+     ],
+     "breaks_known": false,
+     "cars": 17,
+     "seed_year": 1996
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "940",
+     "segment": [
+      1992,
+      1995
+     ],
+     "breaks_known": false,
+     "cars": 16,
+     "seed_year": 1994
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "V40",
+     "segment": [
+      2000,
+      2004
+     ],
+     "breaks_known": false,
+     "cars": 15,
+     "seed_year": 2004
+    },
+    {
+     "site": "www.volvopartsgiant.com",
+     "make": "Volvo",
+     "model": "60 Series",
+     "segment": [
+      2001,
+      2013
+     ],
+     "breaks_known": false,
+     "cars": 15,
+     "seed_year": 2012
+    }
+   ]
   }
  }
 }

@@ -49,6 +49,12 @@ ALLOWED = {
     "www.jeeppartsdeal.com", "www.moparpartsgiant.com",
     "www.fordpartsgiant.com", "www.gmpartsgiant.com",
     "en.wikipedia.org",
+    # added 2026-11-05 after the source scout (SOURCES.md) and the hub's
+    # reading of both template families' sales-policy terms: no automation
+    # clause. Audi is conditional on fitment being present (see SOURCES.md).
+    "www.vwpartsgiant.com", "www.mazdapartsnow.com", "www.bmwpartsdeal.com",
+    "www.mbpartsgiant.com", "www.mitsubishipartsgiant.com",
+    "www.volvopartsgiant.com", "www.audipartsgiant.com",
     # aftermarket application catalogs (robots allow, no bot check, 2026-11-05)
     "www.densoautoparts.com", "www.dbelectrical.com", "www.tycamericas.com",
 }
