@@ -4,7 +4,7 @@
   "Honda",
   "Acura"
  ],
- "generated_utc": "2026-11-05T01:40Z",
+ "generated_utc": "2026-11-05T01:41Z",
  "generator": "scraper/manual_detect/vin_rules_0.py",
  "inputs": {
   "inventory_live": "docs/data/inventory_live.json",
@@ -31,7 +31,9 @@
    "no_rule_Honda_pre1984": 8
   },
   "rules": 14,
-  "newly_confirmed_manual_keep_rules": 61,
+  "newly_confirmed_manual_keep_and_low_sample_rules": 61,
+  "newly_confirmed_manual_keep_rules_only": 53,
+  "newly_confirmed_manual_low_sample_rules_only": 8,
   "newly_confirmed_manual_all_rules": 61,
   "newly_confirmed_manual_by_rule": {
    "honda_vin7_digit_1987_2009_manual": 46,
@@ -121,6 +123,7 @@
    "5": "4-door wagon"
   }
  },
+ "vin_regex_note": "Each rule's vin_regex checks the WMI, the transmission character and the character-10 year code. Character 10 letters repeat every 30 years (A = 1980 or 2010), so the model year is resolved with the listing/vPIC year (scope.model_years); the check digit is verified separately; the 'not in vPIC' split and the 1997 Accord carve-out need the extra conditions stated in the rule.",
  "not_encoded_or_not_ruled": [
   "Honda MY1981-1983: not ruled. The earliest Honda filings in NHTSA's MID are from August 1983 (MY1984). vPIC's decodes for the 7 MY1981-83 Hondas on the lots are consistent with the MY1984 layout (character 6 = transmission), but no Honda document for those years was found, so no rule covers them.",
   "Honda MY1984 Civic hatchback/CRX/sedan (line codes AF, AG, AH, AK): not ruled for 1984. The MY1984 filing in MID covers only Accord, Prelude and Civic Wagon; the Civic hatchback/sedan table for 1984 was not found (1985 and 1986 tables were).",
@@ -185,7 +188,7 @@
     },
     "exclusion": "MY1997 Accord (characters 4-5 CD or CE) is carved out into honda_accord_1997_vin7_*: vPIC decodes those VINs inverted, so the ground truth cannot validate them"
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[1357][A-HJ-NPR-Z0-9]{2}[1-9A-HJ-NPR-Y]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[1357][A-HJ-NPR-Z0-9]{2}[HJKLMNPRSTVWXY1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
@@ -320,7 +323,7 @@
     },
     "exclusion": "MY1997 Accord (characters 4-5 CD or CE) is carved out into honda_accord_1997_vin7_*: vPIC decodes those VINs inverted, so the ground truth cannot validate them"
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[2468][A-HJ-NPR-Z0-9]{2}[1-9A-HJ-NPR-Y]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[2468][A-HJ-NPR-Z0-9]{2}[HJKLMNPRSTVWXY1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
@@ -528,7 +531,7 @@
      "G": "5-door, manual"
     }
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[ACEG]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[ACEG][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
@@ -642,7 +645,7 @@
      "H": "5-door, automatic/CVT"
     }
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[BDFH]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)[A-HJ-NPR-Z0-9]{3}[BDFH][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
@@ -759,7 +762,7 @@
      "7": "5-door / wagon / SUV / van, manual"
     }
    },
-   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[1357]",
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[1357][A-HJ-NPR-Z0-9]{2}[GHJKLMNPRSTVWXY1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
@@ -874,7 +877,7 @@
      "8": "5-door / wagon / SUV / van, automatic"
     }
    },
-   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[2468]",
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[2468][A-HJ-NPR-Z0-9]{2}[GHJKLMNPRSTVWXY1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
@@ -1011,7 +1014,7 @@
      "G": "5-door, manual"
     }
    },
-   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[ACEG]",
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[ACEG][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
@@ -1111,7 +1114,7 @@
      "H": "5-door, automatic/CVT"
     }
    },
-   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[BDFH]",
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[BDFH][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
@@ -1229,7 +1232,7 @@
     },
     "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN) and character 7 is a body code 2-5"
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[456][2-5]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[456][2-5][A-HJ-NPR-Z0-9]{2}[EFG]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ec1023d-ef91-47ab-a2e7-9b636dd7885d",
@@ -1348,7 +1351,7 @@
     },
     "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN) and character 7 is a body code 2-5"
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[37][2-5]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[37][2-5][A-HJ-NPR-Z0-9]{2}[EFG]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ec1023d-ef91-47ab-a2e7-9b636dd7885d",
@@ -1486,7 +1489,7 @@
     },
     "also_required": "the VIN's vPIC decode has no Model AND no lot car of that model year with the same characters 4-7 decodes to a model, i.e. Honda never filed this code with NHTSA (on the lots: Canada-market Acura EL/CSX and a few Canada-only Civic codes)"
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS|19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[1357ACEG]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS|19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[1357ACEG][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
@@ -1625,7 +1628,7 @@
     },
     "also_required": "the VIN's vPIC decode has no Model AND no lot car of that model year with the same characters 4-7 decodes to a model, i.e. Honda never filed this code with NHTSA (on the lots: Canada-market Acura EL/CSX and a few Canada-only Civic codes)"
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS|19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[2468BDFH]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS|19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[2468BDFH][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
