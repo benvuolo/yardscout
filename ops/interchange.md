@@ -132,3 +132,47 @@ first. Owner approved multi-agent ("ultra") scale.
   -> Mitsubishi, Volvo, Audi; Subaru/Lexus session -> + BMW. Second-source
   catalogs (toyotapartsdeal, chevypartsdeal) not used: same network, load only.
   Crawl matrix capped at 8 sites at once (network-wide ~2 req/s).
+
+## Aftermarket application-table track (session_016ZzJfJ6BcW6cQfYXpnSYuV, 2026-11-05)
+
+Code: `scraper/oem_fitment/aftermarket/` (README there). Part-driven runner
+`run.py` (separate from crawl.py; fetch.get via `common.get`), site modules,
+`verify_records.py` (re-checks records against cached page text), offline
+tests `tests/test_dbelectrical.py` (38 checks, committed trimmed fixtures +
+cache-only part) and `tests/test_run.py`. `aftermarket/raw/` is git-ignored.
+
+- **www.dbelectrical.com: works.** Alternators + starters
+  (`/alternators/automotive/`, `/starters/automotive/` -> make -> model ->
+  `?page=N`; `/products/*.html`). Each product page: DB item number, specs
+  (amps, pulley, "Fits" free text), Applications List (one row per year:
+  Make | Type | Model | Year | Engine, from two feeds), and "Replaces These
+  Part Numbers" by brand: carmaker OE numbers (FORD, MAZDA, CHRYSLER,
+  VOLKSWAGEN, PORSCHE...), Motorcraft/ACDelco, OE suppliers (Denso,
+  Visteon, Bosch, Mitsubishi Electric), Lester, DENSO First Time Fit, ~20
+  rebuilder brands. Trial: 47 records (32 alternator, 15 starter; incl. 9
+  targeted Mazda/VW/Mitsubishi), 0 fetch errors, no refusals;
+  verify_records: 47/47 match the page text field by field (item number,
+  every spec, every application row in order, every replaces row, OE
+  classification). Cross-make seen: Ford/Mazda/Mercury (400-14103,
+  400-14112, 400-48167 with FORD+MAZDA OE numbers), Dodge/Ram/Mitsubishi
+  (410-52233, CHRYSLER OE + DENSO 428000-3050), VW/Porsche (420-24000).
+- **Caveat for curators: the OE list is product-level**, not per
+  application row. Same DB item = same aftermarket unit, which is weaker
+  than one OEM number (400-14106 lists Explorer/Ranger/Aerostar 4.0 while
+  its Ford OE numbers are Mustang-only 4R3T/6R3T). Use OE numbers to join
+  this track to the dealer-catalog track; never call a pair verified from
+  this track alone. Pulley/plug differences live in `fits_text`.
+- **www.densoautoparts.com: unreachable here.** PDF catalogs withdrawn; the
+  part finder is POST-only `wp-admin/admin-ajax.php` with a WordPress nonce
+  (dpf_opticat_* actions); no GET product/application pages. fetch.get is
+  GET-only. Needs a hub/owner decision (POST + nonce, a search endpoint).
+- **www.tycamericas.com: unreachable here.** D365 Commerce: category pages
+  (`/all/lighting/head-lamps/5637149891.c` etc.) render "Loading..."; the
+  product list comes client-side from the retail-server API on another
+  domain; no product URLs in any server page or sitemap; Download Center
+  has only order/returns forms; search URLs are robots-disallowed.
+- fetch.py note for the hub: `urllib.robotparser` keeps only the first
+  `User-agent: *` group and ignores `*` wildcards. On dbelectrical.com the
+  first `*` group is "Allow: /", so fetch.py alone would allow /search.php.
+  `aftermarket/common.get` re-checks with RFC 9309 semantics; crawl.py
+  sites may want the same check in fetch.py.
