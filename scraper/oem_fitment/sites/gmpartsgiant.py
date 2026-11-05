@@ -103,11 +103,12 @@ SUBCATS = {
     "fuel-pump-module": r"fuel_tank|fuel_supply|fuel_pump|fuel_sender",
     "throttle-body": r"throttle|fuel_injection|air_intake",
     "power-steering-pump": r"steering_pump|power_steering|steering_gear_pump",
-    "gauge-cluster": r"instrument_panel_electrical|instrument_panel_related_parts_electrical|instrument_cluster|cluster|gage|gauge",
-    "ignition-coils": r"ignition|coil|spark",
+    # ^instrument_panel$: 2012 Equinox cluster page; (^|_)gage, not "gage" (it matched lugGAGE_carrier)
+    "gauge-cluster": r"instrument_panel_electrical|instrument_panel_related_parts_electrical|instrument_cluster|cluster|(^|_)gage|gauge|^instrument_panel$",
+    "ignition-coils": r"ignition|coil|spark|cylinder_head_related",  # 2012 Equinox coils: engine_assembly_cylinder_head_related_parts
     "radiator": r"radiator",
-    "door-front": r"door_hardware_front|body_side_frame_doors|front_door|door_front|doors",
-    "door-rear": r"door_hardware_rear|body_side_frame_doors|rear_door|door_rear|doors",
+    "door-front": r"door_hardware_front|door_hardware_side_front|body_side_frame_doors|front_door|door_front|doors",  # 2000 Silverado: door_hardware_side_front
+    "door-rear": r"door_hardware_rear|door_hardware_side_rear|body_side_frame_doors|rear_door|door_rear|doors",
     "hood": r"^hood",
     "fender": r"fender",
     "bumper-front": r"bumper_front|front_bumper|fascia_front|front_fascia",

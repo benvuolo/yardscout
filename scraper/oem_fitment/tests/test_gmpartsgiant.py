@@ -65,6 +65,21 @@ ok(not match("headlights", "LAMP, Capsule/Headlamp/Fog Lamp", "LAMP, Capsule/Hea
 ok(re.search(G.MODELS[("Chevrolet", "Silverado 1500")].inc, "1500_4wd")
    and not re.search(G.MODELS[("Chevrolet", "Silverado 1500")].inc, "1500_classic_4wd")
    and not re.search(G.MODELS[("Chevrolet", "Silverado 1500")].inc, "1500_hd_4wd"), "silverado variants")
+
+def sub(cat, tail):
+    """Does the category select this parts-list page slug (last URL segment)?"""
+    rx, ex = G.SUBCATS.get(cat), G.SUBCAT_EXCL.get(cat)
+    return bool(rx and not T.SUBCAT_COMMON_EXCLUDE.search(tail) and re.search(rx, tail, re.I)
+                and not (ex and re.search(ex, tail, re.I)))
+
+
+# regressions from the 2026-11-05 audit (AUDIT.md G1-G3), slugs seen on the site
+ok(sub("gauge-cluster", "instrument_panel") and not sub("gauge-cluster", "luggage_carrier")
+   and sub("gauge-cluster", "instrument_panel_electrical"), "2012 Equinox cluster page; not luggage_carrier")
+ok(sub("ignition-coils", "engine_assembly_cylinder_head_related_parts") and sub("ignition-coils", "coil_module_ignition"),
+   "2012 Equinox coils on the cylinder head page")
+ok(sub("door-front", "door_hardware_side_front") and sub("door-rear", "door_hardware_side_rear")
+   and not sub("door-front", "door_trim_side_front_driver"), "2000 Silverado door shell pages")
 pure = n
 
 if not _pg_cacheonly.have([MODEL, YEAR, STARTER, DOORS, MIRRORS, LAMPS, P_STARTER, P_GEN, P_HEAD]):

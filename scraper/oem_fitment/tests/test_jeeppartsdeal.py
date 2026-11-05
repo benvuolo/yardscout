@@ -44,6 +44,9 @@ ok(not m("bumper-front", "Absorber - Front Bumper Fascia", "Absorber"), "absorbe
 ok(not m("door-front", "Door - Front Door Outer", "Outer Panel"), "outer skin excluded")
 ok(not m("ac-compressor", "Compressor - Air Suspension", ""), "air-suspension compressor excluded")
 ok(J._T.year_url("Jeep", "Grand Cherokee", 2004) == f"{B}/catalog/2004-jeep-grand-cherokee-parts", "slug")
+# audit 2026-11-05: 5143152AA (2005 Grand Cherokee headlamp-components) is the headlamp boot
+ok(not m("headlights", "Headlamp", "Boot") and m("headlights", "Lamp - Headlamp Parking And Turn", "Headlamp Assembly"),
+   "headlamp boot excluded via short name")
 pure = checks
 
 if not _cacheonly.have([YEAR, ALT, HEAD, FRONT, P_NEW, P_OLD, P_HEAD, P_SPANS]):

@@ -52,7 +52,8 @@ RULES = {
     "ac-compressor": (rf"^compressor{D}(a/?c|air\s+cond)",
                       r"clutch|valve|switch|sensor|hose|line|kit|oil|coil|pulley|relay|suspension|leveling"),
     "headlights": (rf"^headlamp\b|^lamp{D}head",
-                   r"bezel|adjust|level|module|ballast|motor|switch|lens|cover|cap|mount|igniter|washer|wash|protector|filler|shield"),
+                   # boot: 5143152AA "Headlamp" / short name "Boot" (headlight bulb cap), audit 2026-11-05
+                   r"bezel|adjust|level|module|ballast|motor|switch|lens|cover|cap|\bboot\b|mount|igniter|washer|wash|protector|filler|shield"),
     "tail-lights": (rf"^lamp{D}tail|^tail\s*lamp|^tail\s*light",
                     r"bezel|lens|cover|cap|mount|reflector|guard|gasket"),
     "side-mirrors": (rf"^mirror{D}(outside|exterior|side\s+view)",

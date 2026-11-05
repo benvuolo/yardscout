@@ -66,7 +66,7 @@ them by (site, category, pn).
 | site | category | pn | reason |
 |---|---|---|---|
 | www.moparpartsgiant.com | headlights | LBK13001 | light bulb kit ("Light Bulb Kit (Assorted Bulbs and Fuses)"), not a headlamp; rule fixed in the Mopar fixes commit |
-| www.jeeppartsdeal.com | headlights | 5143152AA | headlamp boot / bulb cap ("Boot, Front"), not a headlamp; Jeep rule fix pending the hub's go |
+| www.jeeppartsdeal.com | headlights | 5143152AA | headlamp boot / bulb cap ("Boot, Front"), not a headlamp; rule fixed in the Jeep/GM fixes commit |
 
 ## Applied fixes (hub go 01:28 UTC)
 
@@ -88,16 +88,29 @@ The new pages yield the right parts: DOOR Front 55276054AB/55AB, FENDER
 Front 68143656AA/57AA, COIL Ignition 4606869AA. The 300 sedan decklid page
 gives no liftgate (correct) and still gives DECKLID 5134207AD.
 
+Second batch (hub go 01:36 UTC): Jeep `boot` (0) and GM G1-G3, same
+conditions.
+- GM, before/after on 175 cached selections:
+  - 2012 Equinox gauge-cluster: + instrument_panel, - luggage_carrier.
+  - ignition-coils: + engine_assembly_cylinder_head_related_parts on the
+    Equinox, 2000 Silverado 2wd/4wd and 2008 Impala. On the last two it is
+    an extra fetch; duplicate pns are deduplicated by crawl.py.
+  - 2000 Silverado door-front: + door_hardware_side_front (and its _lh/_rh
+    variants); door-rear: + door_hardware_side_rear.
+  - No part list changed.
+- Jeep: one fetch (2005 Grand Cherokee headlamp-components). Before/after,
+  only 5143152AA drops; the six headlamp assemblies stay.
+- The regression checks fail on the old modules; all tests pass.
+
 ## Findings needing a module change
 
-0. **Jeep headlights keeps a headlamp boot.** 5143152AA, list
+0. **(applied)** **Jeep headlights keeps a headlamp boot.** 5143152AA, list
    `parts-list/2005-jeep-grand-cherokee/headlights-lighting/headlamp-components`.
    OEM name "Headlamp", short name "Boot", product page "Boot, Front" /
    "Headlight Bulb Cap, Front". The jeeppartsdeal `headlights` exclude has
    cover/cap but not boot. Fix: add `boot` to that exclude (the Mopar module
    already excludes Boot).
 
-Pending the hub's go: 0 (Jeep boot), G1-G3 (GM, below).
 
 Pre-crawl sample: 38 records from a local 2-segment tier A trial on Mopar (10),
 Nissan (13) and Infiniti (15). The trial was stopped at the hub's request
@@ -175,9 +188,9 @@ Malibu). Requests used: 10.
 
 | # | category | problem | evidence | proposed fix |
 |---|---|---|---|---|
-| G1 | gauge-cluster | the 2012 Equinox cluster page is `windshield_wiper_mirrors_instrument_panel_console_doors/instrument_panel`, which is not selected; the only page selected is `luggage_carrier` ("gage" matches inside "lugGAGE") | instrument_panel page: the rule keeps "CLUSTER, Instrument Panel Gage" 20907579/80/81/82 once read | SUBCATS gauge-cluster: add `instrument_panel$`; change `gage` to `(^\|_)gage` |
-| G2 | ignition-coils | the 2012 Equinox coils are on `engine/engine_assembly_cylinder_head_related_parts`; nothing is selected | page: "COIL, Ignition Coil" 12632479, 12638824 kept by the rule | SUBCATS ignition-coils: add `cylinder_head_related` |
-| G3 | door-front, door-rear | the 2000 Silverado door pages are `door_hardware_side_front` / `_side_rear`; nothing is selected | page: "DOOR, Front and Rear Side Door" 15017223 kept by the door-front rule | SUBCATS door-front `...\|door_hardware_side_front`, door-rear `...\|door_hardware_side_rear` |
+| G1 (applied) | gauge-cluster | the 2012 Equinox cluster page is `windshield_wiper_mirrors_instrument_panel_console_doors/instrument_panel`, which is not selected; the only page selected is `luggage_carrier` ("gage" matches inside "lugGAGE") | instrument_panel page: the rule keeps "CLUSTER, Instrument Panel Gage" 20907579/80/81/82 once read | SUBCATS gauge-cluster: add `instrument_panel$`; change `gage` to `(^\|_)gage` |
+| G2 (applied) | ignition-coils | the 2012 Equinox coils are on `engine/engine_assembly_cylinder_head_related_parts`; nothing is selected | page: "COIL, Ignition Coil" 12632479, 12638824 kept by the rule | SUBCATS ignition-coils: add `cylinder_head_related` |
+| G3 (applied) | door-front, door-rear | the 2000 Silverado door pages are `door_hardware_side_front` / `_side_rear`; nothing is selected | page: "DOOR, Front and Rear Side Door" 15017223 kept by the door-front rule | SUBCATS door-front `...\|door_hardware_side_front`, door-rear `...\|door_hardware_side_rear` |
 
 Impala 2008 and Equinox 2012 otherwise select the expected pages (hood,
 fender_wheelhouse_front_end, bumper_front/rear, grille_radiator,
