@@ -218,3 +218,48 @@
 05:56:35 seg done tier=B Infiniti QX56 [2011, 2013] seeds=[2012] records=1485 errors=17
 06:00:59 seg done tier=B Infiniti I35 [2002, 2004] seeds=[2002] records=1504 errors=17
 06:00:59 time budget reached records=1504
+06:01:08 start site=www.infinitipartsdeal.com segments=28 tiers=['A', 'B']
+06:01:08 seg done tier=A Infiniti G35 [2003, 2008] seeds=[2004] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti G37 [2008, 2013] seeds=[2009] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti FX35 [2003, 2012] seeds=[2005] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti M35 [2006, 2010] seeds=[2006] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti QX56 [2004, 2010] seeds=[2008] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti QX60 [2014, 2020] seeds=[2014] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti Q50 [2014, 2020] seeds=[2014] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti QX4 [1997, 2003] seeds=[2001] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti JX35 [2013, 2013] seeds=[2013] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti I30 [1996, 2001] seeds=[2000] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti EX35 [2008, 2013] seeds=[2008] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti QX56 [2011, 2013] seeds=[2012] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti I35 [2002, 2004] seeds=[2002] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti FX [2003, 2012] seeds=[2005] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti Q45 [1990, 2005] seeds=[2002] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti G20 [1991, 2008] seeds=[2002] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti M45 [2003, 2008] seeds=[2006] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti M37 [2011, 2013] seeds=[2011] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti G Sedan [2009, 2013] seeds=[2011] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti M [2006, 2012] seeds=[2006] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti G37 Sedan [2009, 2013] seeds=[2013] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti G25 [2011, 2012] seeds=[2011] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti QX50 [2014, 2021] seeds=[2017] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti G37X [2009, 2013] seeds=[2013] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti QX80 [2014, 2017] seeds=[2014] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti G35X [2007, 2008] seeds=[2008] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti J30 [1993, 1997] seeds=[1994] records=1504 errors=17
+06:01:08 seg done tier=A Infiniti FX45 [2003, 2008] seeds=[2004] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti G35 [2003, 2008] seeds=[2004] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti G37 [2008, 2013] seeds=[2009] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti FX35 [2003, 2012] seeds=[2005] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti M35 [2006, 2010] seeds=[2006] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti QX56 [2004, 2010] seeds=[2008] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti QX60 [2014, 2020] seeds=[2014] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti Q50 [2014, 2020] seeds=[2014] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti QX4 [1997, 2003] seeds=[2001] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti JX35 [2013, 2013] seeds=[2013] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti I30 [1996, 2001] seeds=[2000] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti EX35 [2008, 2013] seeds=[2008] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti QX56 [2011, 2013] seeds=[2012] records=1504 errors=17
+06:01:08 seg done tier=B Infiniti I35 [2002, 2004] seeds=[2002] records=1504 errors=17
+06:12:44 seg done tier=B Infiniti FX [2003, 2012] seeds=[2005, 2008, 2009] records=1542 errors=17
+06:26:20 seg done tier=B Infiniti Q45 [1990, 2005] seeds=[2002, 1996, 1999] records=1608 errors=17
+06:31:32 time budget reached records=1635
