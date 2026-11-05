@@ -610,6 +610,31 @@ What a curator must know (all three are the "giant" SimplePart variant):
 - Status: all three modules are on main and the trials are checked. Mitsubishi
   and Volvo are in the hub's capped Actions run. Audi is ready for it.
 
+### Raw-output audit (session_016ZzJfLtcR8MerD7PWDQVoN, 2026-11-05 01:14-03:45 UTC)
+
+- `scraper/oem_fitment/audit.py`: an offline auditor with its own parser. It
+  re-reads each record's evidence_lines (PartsGiant, SimplePart, DB
+  Electrical) and reads only the sites' declared CFG conventions. Run it at
+  each checkpoint: `git show origin/oem-raw:raw/<site>.jsonl > x.jsonl;
+  python3 scraper/oem_fitment/audit.py --table x.jsonl`. Tests:
+  `tests/test_audit.py` (44 checks, single-field corruptions on 4 fixtures).
+  Its category check (C) is a heuristic: read hits by hand. Only E
+  (evidence) is a hard failure. Results and every hand-read pattern are in
+  `scraper/oem_fitment/AUDIT.md`.
+- Result through 03:43: 17 sites, about 11,500 records, 0 evidence
+  mismatches. Two wrong-category records, both on AUDIT.md's "Exclude at
+  curation" list with their rules fixed: LBK13001 (Mopar bulb kit) and
+  5143152AA (Jeep headlamp boot).
+- Rule fixes that came out of the audit and tier B review, hub-approved, in
+  site modules only, each with a regression check:
+  - 695b378: Mopar bulb kit, door shells, fender, coils, deck-lid opening,
+    accessory kits, Magnum liftgate; Infiniti/Nissan G35 "Meter Assy-Analog"
+    cluster.
+  - 3947d2e: GM Equinox cluster and coils, Silverado door shells; Jeep boot.
+- Not done: the manifest check (every pn in a lists/years manifest row with
+  matched=true). R1/R2 manifests had not reached oem-raw by 03:43; add it
+  to audit.py when they do.
+
 ## Hub decisions (curation policy)
 
 - 2026-11-05 T1 (Toyota climate-control sub-assemblies 55901/55902/55903,

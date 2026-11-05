@@ -88,6 +88,7 @@ new C hits are Hyundai fit notes ("O/S RR VIEW MRR LABEL", "SIDE REPEATER
 LAMP", "ANTI-FOG", "W/ OIL-SEPARATOR", "LED(W/BULB T/SIGNAL)"), door
 modules (P1, hub-decided) and Ford AE8Z-9H307-H "Kit" (base 9H307, "Fuel
 Pump/Sending Unit"). Real C: 0.
+DB Electrical 03:37: 1136 records, 0 E/C/F. Dealer files unchanged at 03:43.
 
 The auditor's first pass on Honda, Acura and BMW reported 100% E. That was
 the auditor: those modules declare `trim_col` ("Body & Trim") and
