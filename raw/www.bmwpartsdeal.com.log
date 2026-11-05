@@ -70,3 +70,40 @@
 04:15:23 seg done tier=A BMW 328xi [2007, 2015] seeds=[2007, 2012] records=712 errors=12
 04:28:11 seg done tier=A BMW 325xi [2001, 2006] seeds=[2002, 2006] records=755 errors=12
 04:28:11 time budget reached records=755
+04:28:19 start site=www.bmwpartsdeal.com segments=44 tiers=['A', 'B']
+04:28:19 seg done tier=A BMW 328i [1995, 2016] seeds=[2011] records=755 errors=12
+04:28:19 seg done tier=A BMW 325i [1988, 2006] seeds=[2006] records=755 errors=12
+04:28:19 seg done tier=A BMW X5 [2007, 2013] seeds=[2008] records=755 errors=12
+04:28:19 seg done tier=A BMW X3 [2004, 2010] seeds=[2006] records=755 errors=12
+04:28:19 seg done tier=A BMW 528i [1979, 2016] seeds=[2008] records=755 errors=12
+04:28:19 seg done tier=A BMW X5 [2000, 2006] seeds=[2005] records=755 errors=12
+04:28:19 seg done tier=A BMW 525i [1989, 2007] seeds=[2007] records=755 errors=12
+04:28:19 seg done tier=A BMW 530i [1994, 2021] seeds=[2006] records=755 errors=12
+04:28:19 seg done tier=A BMW 3 Series [1983, 2016] seeds=[2008] records=755 errors=12
+04:28:19 seg done tier=A BMW 535i [1985, 2016] seeds=[2011] records=755 errors=12
+04:28:19 seg done tier=A BMW 330i [2001, 2018] seeds=[2006] records=755 errors=12
+04:28:19 seg done tier=A BMW 335i [2007, 2016] seeds=[2007] records=755 errors=12
+04:28:19 seg done tier=A BMW X3 [2011, 2017] seeds=[2013] records=755 errors=12
+04:28:19 seg done tier=A BMW 325ci [2000, 2006] seeds=[2002] records=755 errors=12
+04:28:19 seg done tier=A BMW 750Li [2006, 2015] seeds=[2006] records=755 errors=12
+04:28:19 seg done tier=A BMW 320i [1978, 2018] seeds=[2014] records=755 errors=12
+04:28:19 seg done tier=A BMW X1 [2012, 2015] seeds=[2013] records=755 errors=12
+04:28:19 seg done tier=A BMW 328xi [2007, 2015] seeds=[2007] records=755 errors=12
+04:28:19 seg done tier=A BMW 325xi [2001, 2006] seeds=[2002] records=755 errors=12
+04:35:23 seg done tier=A BMW 323i [1998, 2012] seeds=[2000, 2006, 2007] records=756 errors=12
+04:43:07 seg done tier=A BMW 550i [2006, 2016] seeds=[2008, 2013, 2014] records=781 errors=12
+04:43:16 nav-fail BMW 5 Series 2007: ValueError: no 2007 catalog for BMW 5 Series (bmw-['5_series'])
+04:43:16 seg done tier=A BMW 5 Series [1985, 2016] seeds=[2007] records=781 errors=13
+04:52:11 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_left-63217251959.html: ValueError: no partInfo in store
+04:52:20 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_right-63217251960.html: ValueError: no partInfo in store
+04:52:27 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_left-63217252779.html: ValueError: no partInfo in store
+04:52:35 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_right-63217252780.html: ValueError: no partInfo in store
+04:52:43 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_left-63217251959.html: ValueError: no partInfo in store
+04:52:43 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_right-63217251960.html: ValueError: no partInfo in store
+04:52:44 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_left-63217252779.html: ValueError: no partInfo in store
+04:52:44 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_right-63217252780.html: ValueError: no partInfo in store
+04:56:03 seg done tier=A BMW 328i xDrive [2009, 2015] seeds=[2011, 2013, 2012] records=792 errors=21
+04:58:12 nav-fail BMW 750i 2005: ValueError: no 2005 catalog for BMW 750i (bmw-['750i'])
+04:58:12 seg done tier=A BMW 750i [2000, 2013] seeds=[2008, 2005] records=794 errors=22
+05:02:36 seg done tier=A BMW 330ci [2001, 2006] seeds=[2001] records=802 errors=22
+05:02:36 time budget reached records=802
