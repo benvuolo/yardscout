@@ -113,3 +113,12 @@ first. Owner approved multi-agent ("ultra") scale.
   "Hybrid"), so crawl.py's coverage check never marks those years covered.
 - Local trials need `mkdir -p scraper/oem_fitment/raw`: crawl.py does not
   create it. The Actions workflow does.
+
+- 01:05 UTC: source survey (session_016ZzJfHmQkMfzb6xBaKcrnG) in
+  `scraper/oem_fitment/SOURCES.md`. Seven same-network catalogs qualify for
+  uncovered makes: vwpartsgiant, mazdapartsnow, bmwpartsdeal, mbpartsgiant,
+  mitsubishipartsgiant, volvopartsgiant, audipartsgiant (conditional). Together
+  they cover 30.9k of the 36.1k uncovered cars. Two second sources:
+  toyotapartsdeal, chevypartsdeal (same network, not independent). Terms pages
+  are client-rendered, so a human must read them before ALLOWED changes.
+  ALLOWED not edited.
