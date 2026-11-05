@@ -454,6 +454,14 @@ check("20 an OEM cell that is merely not closed contradicts nothing (group stays
       h3["tier"] == "verified" and og and og[0]["tier"] == "verified")
 J.OEM_GROUPS_DIR, J.OEM_STATUS_OVERRIDE = J.SCRIPT_DIR / "oem_fitment" / "groups", None
 
+dir_before = J.OEM_GROUPS_DIR
+hp = C.hand_payload(J)
+found = J._oem_contradictions(hp, {"toyota": contradiction_doc("open:option_split")})
+check("20 the curate report finds the same contradiction from a hand-only build (V15 report field)",
+      "oemGroups" not in hp and [c["id"] for c in found] == ["toyota-22re#2"] and found[0]["trigger"] == "oem_split",
+      json.dumps(found)[:200])
+check("20 hand_payload restores the OEM groups directory", J.OEM_GROUPS_DIR == dir_before)
+
 # --------------------------------------------------------------- case 21
 files = sienna_files()
 src_dir = write_raw(files)

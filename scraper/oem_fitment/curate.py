@@ -1443,6 +1443,9 @@ def report_md(rep: dict) -> str:
         for stage, rs in st.items():
             for reason, n in rs.items():
                 lines.append(f"| {cat} | {stage} | {reason or '-'} | {n} |")
+    lines += ["", "## Contradictions with hand-curated groups (spec 7.6)", ""]
+    lines += [f"- {c['trigger']}: {c['kind']} {c['id']} ({c['cat']})" for c in rep.get("contradictions") or []] \
+        or ["- none (a contradiction needs an OEM-closed cell inside a hand group)"]
     lines += ["", "## Refusals by reason", ""]
     for r, n in sorted(Counter(x["reason"] for x in rep["refusals"]).items()):
         lines.append(f"- {r}: {n}")
@@ -1464,6 +1467,20 @@ def cross_ns_collisions(results: dict) -> list:
         for (key, cat) in cur.classes:
             by[key.split(":", 1)[1]].add(ns)
     return sorted([[k, sorted(v)] for k, v in by.items() if len(v) > 1])
+
+
+def hand_payload(js) -> dict | None:
+    """The interchange payload built from hand data only (no OEM groups), for
+    the §7.6 contradiction report."""
+    import tempfile
+    if not hasattr(js, "_oem_contradictions"):
+        return None
+    saved = js.OEM_GROUPS_DIR
+    js.OEM_GROUPS_DIR = Path(tempfile.mkdtemp(prefix="oem_none_"))
+    try:
+        return js.build_interchange_payload()
+    finally:
+        js.OEM_GROUPS_DIR = saved
 
 
 def curate(ns: str, src: A.RawSource, opts: Options):
@@ -1500,6 +1517,7 @@ def main(argv=None) -> int:
         print("model map checks skipped:", ", ".join(mrep["skipped"]), file=sys.stderr)
     src = A.RawSource(ref=a.raw_ref) if a.raw_ref else A.RawSource(raw_dir=a.raw_dir)
     inv_counts = Counter((r[3], r[4], r[2]) for r in inv["vehicles"]) if inv else Counter()
+    hand = hand_payload(js)
     out = Path(a.out)
     results = {}
     no_ns = [s for s in src.sites() if s not in policy.SITE_NS]
@@ -1515,6 +1533,8 @@ def main(argv=None) -> int:
         rep, completion = cur.report(doc, inv_counts)
         rep["model_map_report"] = mrep
         rep["sites_without_namespace"] = no_ns
+        # §7.6, the same test the payload builder runs (it demotes; this reports)
+        rep["contradictions"] = js._oem_contradictions(hand, {ns: doc}) if hand else []
         rep["validator"] = problems
         write_json(out / "_report" / f"{ns}.json", rep)
         (out / "_report" / f"{ns}.md").write_text(report_md(rep))
