@@ -1,0 +1,3280 @@
+{
+ "source": {
+  "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+  "rows": 50407,
+  "columns": 84,
+  "years": [
+   "1984",
+   "2027"
+  ],
+  "rows_per_year": {
+   "1984": 1964,
+   "1985": 1701,
+   "1986": 1210,
+   "1987": 1247,
+   "1988": 1130,
+   "1989": 1153,
+   "1990": 1078,
+   "1991": 1132,
+   "1992": 1121,
+   "1993": 1093,
+   "1994": 982,
+   "1995": 967,
+   "1996": 773,
+   "1997": 762,
+   "1998": 812,
+   "1999": 852,
+   "2000": 840,
+   "2001": 911,
+   "2002": 975,
+   "2003": 1044,
+   "2004": 1122,
+   "2005": 1166,
+   "2006": 1104,
+   "2007": 1126,
+   "2008": 1187,
+   "2009": 1181,
+   "2010": 1106,
+   "2011": 1126,
+   "2012": 1146,
+   "2013": 1180,
+   "2014": 1222,
+   "2015": 1281,
+   "2016": 1264,
+   "2017": 1296,
+   "2018": 1350,
+   "2019": 1347,
+   "2020": 1258,
+   "2021": 1286,
+   "2022": 1321,
+   "2023": 1330,
+   "2024": 1277,
+   "2025": 1273,
+   "2026": 1172,
+   "2027": 539
+  }
+ },
+ "all_columns": [
+  "barrels08",
+  "barrelsA08",
+  "charge120",
+  "charge240",
+  "city08",
+  "city08U",
+  "cityA08",
+  "cityA08U",
+  "cityCD",
+  "cityE",
+  "cityUF",
+  "co2",
+  "co2A",
+  "co2TailpipeAGpm",
+  "co2TailpipeGpm",
+  "comb08",
+  "comb08U",
+  "combA08",
+  "combA08U",
+  "combE",
+  "combinedCD",
+  "combinedUF",
+  "cylinders",
+  "displ",
+  "drive",
+  "engId",
+  "eng_dscr",
+  "feScore",
+  "fuelCost08",
+  "fuelCostA08",
+  "fuelType",
+  "fuelType1",
+  "ghgScore",
+  "ghgScoreA",
+  "highway08",
+  "highway08U",
+  "highwayA08",
+  "highwayA08U",
+  "highwayCD",
+  "highwayE",
+  "highwayUF",
+  "hlv",
+  "hpv",
+  "id",
+  "lv2",
+  "lv4",
+  "make",
+  "model",
+  "mpgData",
+  "phevBlended",
+  "pv2",
+  "pv4",
+  "range",
+  "rangeCity",
+  "rangeCityA",
+  "rangeHwy",
+  "rangeHwyA",
+  "trany",
+  "UCity",
+  "UCityA",
+  "UHighway",
+  "UHighwayA",
+  "VClass",
+  "year",
+  "youSaveSpend",
+  "baseModel",
+  "guzzler",
+  "trans_dscr",
+  "tCharger",
+  "sCharger",
+  "atvType",
+  "fuelType2",
+  "rangeA",
+  "evMotor",
+  "mfrCode",
+  "c240Dscr",
+  "charge240b",
+  "c240bDscr",
+  "createdOn",
+  "modifiedOn",
+  "startStop",
+  "phevCity",
+  "phevHwy",
+  "phevComb"
+ ],
+ "relevant_columns": [
+  "id",
+  "year",
+  "make",
+  "model",
+  "baseModel",
+  "trany",
+  "trans_dscr",
+  "displ",
+  "cylinders",
+  "drive",
+  "eng_dscr",
+  "VClass",
+  "atvType",
+  "fuelType",
+  "fuelType1",
+  "tCharger",
+  "sCharger",
+  "startStop",
+  "mfrCode",
+  "engId",
+  "evMotor",
+  "createdOn",
+  "modifiedOn"
+ ],
+ "vocab": {
+  "trany": {
+   "distinct": 41,
+   "top": [
+    [
+     "Automatic 4-spd",
+     11048
+    ],
+    [
+     "Manual 5-spd",
+     8392
+    ],
+    [
+     "Automatic (S8)",
+     3740
+    ],
+    [
+     "Automatic (S6)",
+     3381
+    ],
+    [
+     "Automatic 3-spd",
+     3151
+    ],
+    [
+     "Manual 6-spd",
+     3147
+    ],
+    [
+     "Automatic 5-spd",
+     2203
+    ],
+    [
+     "Automatic 6-spd",
+     1758
+    ],
+    [
+     "Automatic (A1)",
+     1540
+    ],
+    [
+     "Manual 4-spd",
+     1483
+    ],
+    [
+     "Automatic (variable gear ratios)",
+     1224
+    ],
+    [
+     "Automatic 8-spd",
+     1192
+    ],
+    [
+     "Automatic 9-spd",
+     909
+    ],
+    [
+     "Automatic (AM-S7)",
+     881
+    ],
+    [
+     "Automatic (S5)",
+     848
+    ],
+    [
+     "Automatic (S10)",
+     743
+    ],
+    [
+     "Automatic 7-spd",
+     720
+    ],
+    [
+     "Automatic 10-spd",
+     549
+    ],
+    [
+     "Automatic (S7)",
+     386
+    ],
+    [
+     "Automatic (AV-S6)",
+     381
+    ],
+    [
+     "Automatic (AM-S8)",
+     358
+    ],
+    [
+     "Automatic (S9)",
+     322
+    ],
+    [
+     "Automatic (AM7)",
+     319
+    ],
+    [
+     "Automatic (AM-S6)",
+     248
+    ],
+    [
+     "Automatic (AV-S8)",
+     234
+    ],
+    [
+     "Automatic (S4)",
+     233
+    ],
+    [
+     "Automatic (AV-S7)",
+     224
+    ],
+    [
+     "Manual 7-spd",
+     182
+    ],
+    [
+     "Automatic (AM6)",
+     160
+    ],
+    [
+     "Automatic (A2)",
+     106
+    ],
+    [
+     "Automatic (AM8)",
+     92
+    ],
+    [
+     "Manual 3-spd",
+     77
+    ],
+    [
+     "Automatic (AV-S10)",
+     70
+    ],
+    [
+     "Automatic (AV-S1)",
+     52
+    ],
+    [
+     "Manual 4-spd Doubled",
+     17
+    ],
+    [
+     "Automatic (AM5)",
+     14
+    ],
+    [
+     "",
+     11
+    ],
+    [
+     "Automatic (AM-S9)",
+     6
+    ],
+    [
+     "Automatic (L4)",
+     2
+    ],
+    [
+     "Automatic (L3)",
+     2
+    ],
+    [
+     "Automatic (AM-S10)",
+     2
+    ]
+   ]
+  },
+  "trans_dscr": {
+   "distinct": 53,
+   "top": [
+    [
+     "",
+     35363
+    ],
+    [
+     "CLKUP",
+     7809
+    ],
+    [
+     "SIL",
+     2189
+    ],
+    [
+     "2MODE CLKUP",
+     1235
+    ],
+    [
+     "Creeper",
+     525
+    ],
+    [
+     "3MODE CLKUP",
+     517
+    ],
+    [
+     "EMS 2MODE CLKUP",
+     517
+    ],
+    [
+     "2MODE",
+     448
+    ],
+    [
+     "2MODE 2LKUP",
+     383
+    ],
+    [
+     "EMS",
+     252
+    ],
+    [
+     "3MODE",
+     166
+    ],
+    [
+     "CMODE",
+     150
+    ],
+    [
+     "CMODE CLKUP",
+     130
+    ],
+    [
+     "VMODE CLKUP",
+     105
+    ],
+    [
+     "SIL Creeper",
+     72
+    ],
+    [
+     "2LKUP",
+     63
+    ],
+    [
+     "DC/FW",
+     53
+    ],
+    [
+     "VLKUP",
+     52
+    ],
+    [
+     "EMS CLKUP",
+     50
+    ],
+    [
+     "EMS 2MODE",
+     46
+    ],
+    [
+     "6MODE CLKUP",
+     41
+    ],
+    [
+     "4MODE",
+     35
+    ],
+    [
+     "VMODE VLKUP",
+     26
+    ],
+    [
+     "2MODE 3LKUP",
+     22
+    ],
+    [
+     "2MODE DC/FW",
+     19
+    ],
+    [
+     "CMODE VLKUP",
+     17
+    ],
+    [
+     "3LKUP",
+     15
+    ],
+    [
+     "EMS 3MODE",
+     11
+    ],
+    [
+     "Overdrive",
+     10
+    ],
+    [
+     "2MODE VLKUP",
+     9
+    ],
+    [
+     "Lockup",
+     9
+    ],
+    [
+     "SIL EMS",
+     7
+    ],
+    [
+     "6MODE",
+     6
+    ],
+    [
+     "4MODE CLKUP",
+     6
+    ],
+    [
+     "SIL 3MODE",
+     6
+    ],
+    [
+     "EMS 2MODE CLKU",
+     5
+    ],
+    [
+     "3MODE VLKUP",
+     5
+    ],
+    [
+     "SIL 2MODE CLKUP",
+     5
+    ],
+    [
+     "EMS 3MODE CLKUP",
+     3
+    ],
+    [
+     "Elec Overdrive",
+     3
+    ],
+    [
+     "Mech Overdrive",
+     3
+    ],
+    [
+     "2MODE CLKUP FW",
+     2
+    ],
+    [
+     "3MODE 2LKUP",
+     2
+    ],
+    [
+     "EMS CMODE CLKUP",
+     2
+    ],
+    [
+     "VMODE",
+     2
+    ]
+   ]
+  },
+  "drive": {
+   "distinct": 8,
+   "top": [
+    [
+     "Front-Wheel Drive",
+     15913
+    ],
+    [
+     "Rear-Wheel Drive",
+     15857
+    ],
+    [
+     "All-Wheel Drive",
+     6811
+    ],
+    [
+     "4-Wheel or All-Wheel Drive",
+     6645
+    ],
+    [
+     "4-Wheel Drive",
+     2753
+    ],
+    [
+     "",
+     1186
+    ],
+    [
+     "Part-time 4-Wheel Drive",
+     735
+    ],
+    [
+     "2-Wheel Drive",
+     507
+    ]
+   ]
+  },
+  "VClass": {
+   "distinct": 34,
+   "top": [
+    [
+     "Compact Cars",
+     6649
+    ],
+    [
+     "Midsize Cars",
+     5896
+    ],
+    [
+     "Subcompact Cars",
+     5831
+    ],
+    [
+     "Large Cars",
+     2832
+    ],
+    [
+     "Two Seaters",
+     2533
+    ],
+    [
+     "Standard Pickup Trucks",
+     2354
+    ],
+    [
+     "Small Sport Utility Vehicle 4WD",
+     2318
+    ],
+    [
+     "Standard Sport Utility Vehicle 4WD",
+     2096
+    ],
+    [
+     "Sport Utility Vehicle - 4WD",
+     2078
+    ],
+    [
+     "Small Station Wagons",
+     1796
+    ],
+    [
+     "Standard Pickup Trucks 4WD",
+     1727
+    ],
+    [
+     "Minicompact Cars",
+     1677
+    ],
+    [
+     "Sport Utility Vehicle - 2WD",
+     1627
+    ],
+    [
+     "Standard Pickup Trucks 2WD",
+     1499
+    ],
+    [
+     "Special Purpose Vehicles",
+     1455
+    ],
+    [
+     "Small Sport Utility Vehicle 2WD",
+     1231
+    ],
+    [
+     "Vans",
+     1141
+    ],
+    [
+     "Special Purpose Vehicle 2WD",
+     748
+    ],
+    [
+     "Midsize-Large Station Wagons",
+     656
+    ],
+    [
+     "Standard Sport Utility Vehicle 2WD",
+     642
+    ],
+    [
+     "Midsize Station Wagons",
+     623
+    ],
+    [
+     "Small Pickup Trucks",
+     538
+    ],
+    [
+     "Small Pickup Trucks 2WD",
+     519
+    ],
+    [
+     "Vans, Cargo Type",
+     438
+    ],
+    [
+     "Minivan - 2WD",
+     412
+    ],
+    [
+     "Special Purpose Vehicle 4WD",
+     356
+    ],
+    [
+     "Small Pickup Trucks 4WD",
+     337
+    ],
+    [
+     "Vans, Passenger Type",
+     323
+    ],
+    [
+     "Minivan - 4WD",
+     64
+    ],
+    [
+     "Standard Pickup Trucks/2wd",
+     4
+    ],
+    [
+     "Vans Passenger",
+     2
+    ],
+    [
+     "Special Purpose Vehicles/2wd",
+     2
+    ],
+    [
+     "Special Purpose Vehicles/4wd",
+     2
+    ],
+    [
+     "Special Purpose Vehicle",
+     1
+    ]
+   ]
+  },
+  "atvType": {
+   "distinct": 11,
+   "top": [
+    [
+     "",
+     43547
+    ],
+    [
+     "Hybrid",
+     1899
+    ],
+    [
+     "EV",
+     1608
+    ],
+    [
+     "FFV",
+     1538
+    ],
+    [
+     "Diesel",
+     1246
+    ],
+    [
+     "Plug-in Hybrid",
+     447
+    ],
+    [
+     "CNG",
+     50
+    ],
+    [
+     "FCV",
+     42
+    ],
+    [
+     "Bifuel (CNG)",
+     20
+    ],
+    [
+     "Bifuel (LPG)",
+     8
+    ],
+    [
+     "eFCV",
+     2
+    ]
+   ]
+  },
+  "fuelType": {
+   "distinct": 16,
+   "top": [
+    [
+     "Regular",
+     29816
+    ],
+    [
+     "Premium",
+     15374
+    ],
+    [
+     "Electricity",
+     1608
+    ],
+    [
+     "Gasoline or E85",
+     1410
+    ],
+    [
+     "Diesel",
+     1318
+    ],
+    [
+     "Premium and Electricity",
+     256
+    ],
+    [
+     "Midgrade",
+     174
+    ],
+    [
+     "Regular Gas and Electricity",
+     132
+    ],
+    [
+     "Premium or E85",
+     128
+    ],
+    [
+     "CNG",
+     60
+    ],
+    [
+     "Premium Gas or Electricity",
+     55
+    ],
+    [
+     "Hydrogen",
+     42
+    ],
+    [
+     "Gasoline or natural gas",
+     20
+    ],
+    [
+     "Gasoline or propane",
+     8
+    ],
+    [
+     "Regular Gas or Electricity",
+     4
+    ],
+    [
+     "Electricity and Hydrogen",
+     2
+    ]
+   ]
+  },
+  "tCharger": {
+   "distinct": 2,
+   "top": [
+    [
+     "",
+     38620
+    ],
+    [
+     "T",
+     11787
+    ]
+   ]
+  },
+  "sCharger": {
+   "distinct": 2,
+   "top": [
+    [
+     "",
+     49240
+    ],
+    [
+     "S",
+     1167
+    ]
+   ]
+  },
+  "startStop": {
+   "distinct": 3,
+   "top": [
+    [
+     "",
+     31689
+    ],
+    [
+     "N",
+     9802
+    ],
+    [
+     "Y",
+     8916
+    ]
+   ]
+  },
+  "trany_class": [
+   [
+    "automatic",
+    32833
+   ],
+   [
+    "manual",
+    13298
+   ],
+   [
+    "cvt",
+    2185
+   ],
+   [
+    "amt",
+    2080
+   ],
+   [
+    "unknown",
+    11
+   ]
+  ],
+  "eng_dscr": {
+   "distinct": 629,
+   "top": [
+    [
+     "",
+     18436
+    ],
+    [
+     "SIDI",
+     9473
+    ],
+    [
+     "(FFS)",
+     8827
+    ],
+    [
+     "SIDI & PFI",
+     1249
+    ],
+    [
+     "(FFS) CA model",
+     926
+    ],
+    [
+     "(FFS)      (MPFI)",
+     734
+    ],
+    [
+     "FFV",
+     707
+    ],
+    [
+     "SIDI; Mild Hybrid",
+     687
+    ],
+    [
+     "(FFS,TRBO)",
+     666
+    ],
+    [
+     "(350 V8) (FFS)",
+     411
+    ],
+    [
+     "(GUZZLER)  (FFS)",
+     366
+    ],
+    [
+     "SOHC",
+     354
+    ],
+    [
+     "SIDI; FFV",
+     350
+    ],
+    [
+     "SIDI; PHEV",
+     317
+    ],
+    [
+     "SIDI & PFI; Hybrid",
+     263
+    ],
+    [
+     "(NO-CAT)",
+     238
+    ],
+    [
+     "FLEX-FUEL",
+     198
+    ],
+    [
+     "GUZZLER",
+     195
+    ],
+    [
+     "(FFS)      (SPFI)",
+     194
+    ],
+    [
+     "SIDI; Hybrid",
+     176
+    ],
+    [
+     "(GUZZLER)  (FFS)      (MPFI)",
+     122
+    ],
+    [
+     "(350 V8)",
+     120
+    ],
+    [
+     "SIDI; Stop-Start",
+     119
+    ],
+    [
+     "CA model",
+     113
+    ],
+    [
+     "(350 V8) (FFS)  (MPFI)",
+     106
+    ],
+    [
+     "(GM-CHEV)",
+     102
+    ],
+    [
+     "SIDI & PFI; Mild Hybrid",
+     100
+    ],
+    [
+     "DOHC       (FFS)",
+     96
+    ],
+    [
+     "(DIESEL)",
+     95
+    ],
+    [
+     "Hybrid",
+     92
+    ]
+   ]
+  }
+ },
+ "make_map": [
+  {
+   "feed": "Ford",
+   "epa": "Ford",
+   "cars": 54106
+  },
+  {
+   "feed": "Chevrolet",
+   "epa": "Chevrolet",
+   "cars": 48710
+  },
+  {
+   "feed": "Nissan",
+   "epa": "Nissan",
+   "cars": 29587
+  },
+  {
+   "feed": "Honda",
+   "epa": "Honda",
+   "cars": 24360
+  },
+  {
+   "feed": "Dodge",
+   "epa": "Dodge",
+   "cars": 22484
+  },
+  {
+   "feed": "Toyota",
+   "epa": "Toyota",
+   "cars": 21513
+  },
+  {
+   "feed": "Hyundai",
+   "epa": "Hyundai",
+   "cars": 12247
+  },
+  {
+   "feed": "Chrysler",
+   "epa": "Chrysler",
+   "cars": 10258
+  },
+  {
+   "feed": "Jeep",
+   "epa": "Jeep",
+   "cars": 10053
+  },
+  {
+   "feed": "Kia",
+   "epa": "Kia",
+   "cars": 9530
+  },
+  {
+   "feed": "GMC",
+   "epa": "GMC",
+   "cars": 9260
+  },
+  {
+   "feed": "Buick",
+   "epa": "Buick",
+   "cars": 7238
+  },
+  {
+   "feed": "Volkswagen",
+   "epa": "Volkswagen",
+   "cars": 6886
+  },
+  {
+   "feed": "Mazda",
+   "epa": "Mazda",
+   "cars": 6231
+  },
+  {
+   "feed": "Subaru",
+   "epa": "Subaru",
+   "cars": 5542
+  },
+  {
+   "feed": "BMW",
+   "epa": "BMW",
+   "cars": 5353
+  },
+  {
+   "feed": "Cadillac",
+   "epa": "Cadillac",
+   "cars": 4985
+  },
+  {
+   "feed": "Mercedes-Benz",
+   "epa": "Mercedes-Benz",
+   "cars": 4710
+  },
+  {
+   "feed": "Pontiac",
+   "epa": "Pontiac",
+   "cars": 4393
+  },
+  {
+   "feed": "Acura",
+   "epa": "Acura",
+   "cars": 4098
+  },
+  {
+   "feed": "Lincoln",
+   "epa": "Lincoln",
+   "cars": 3408
+  },
+  {
+   "feed": "Infiniti",
+   "epa": "Infiniti",
+   "cars": 3383
+  },
+  {
+   "feed": "Lexus",
+   "epa": "Lexus",
+   "cars": 3131
+  },
+  {
+   "feed": "Mitsubishi",
+   "epa": "Mitsubishi",
+   "cars": 2970
+  },
+  {
+   "feed": "Mercury",
+   "epa": "Mercury",
+   "cars": 2861
+  },
+  {
+   "feed": "Saturn",
+   "epa": "Saturn",
+   "cars": 2759
+  },
+  {
+   "feed": "Volvo",
+   "epa": "Volvo",
+   "cars": 2460
+  },
+  {
+   "feed": "Audi",
+   "epa": "Audi",
+   "cars": 2271
+  },
+  {
+   "feed": "Scion",
+   "epa": "Scion",
+   "cars": 1531
+  },
+  {
+   "feed": "MINI",
+   "epa": "MINI",
+   "cars": 1004
+  },
+  {
+   "feed": "Oldsmobile",
+   "epa": "Oldsmobile",
+   "cars": 959
+  },
+  {
+   "feed": "Land Rover",
+   "epa": "Land Rover",
+   "cars": 831
+  },
+  {
+   "feed": "Suzuki",
+   "epa": "Suzuki",
+   "cars": 750
+  },
+  {
+   "feed": "Jaguar",
+   "epa": "Jaguar",
+   "cars": 700
+  },
+  {
+   "feed": "Ram",
+   "epa": "Ram",
+   "cars": 559
+  },
+  {
+   "feed": "Isuzu",
+   "epa": "Isuzu",
+   "cars": 495
+  },
+  {
+   "feed": "Saab",
+   "epa": "Saab",
+   "cars": 391
+  },
+  {
+   "feed": "Fiat",
+   "epa": "Fiat",
+   "cars": 367
+  },
+  {
+   "feed": "Plymouth",
+   "epa": "Plymouth",
+   "cars": 220
+  },
+  {
+   "feed": "Porsche",
+   "epa": "Porsche",
+   "cars": 184
+  },
+  {
+   "feed": "Geo",
+   "epa": "Geo",
+   "cars": 182
+  },
+  {
+   "feed": "Hummer",
+   "epa": "Hummer",
+   "cars": 128
+  },
+  {
+   "feed": "Smart",
+   "epa": "smart",
+   "cars": 77
+  },
+  {
+   "feed": "Datsun",
+   "epa": "",
+   "cars": 32
+  },
+  {
+   "feed": "MG",
+   "epa": "",
+   "cars": 21
+  },
+  {
+   "feed": "Other",
+   "epa": "",
+   "cars": 20
+  },
+  {
+   "feed": "AMC",
+   "epa": "American Motors Corporation",
+   "cars": 18
+  },
+  {
+   "feed": "Eagle",
+   "epa": "Eagle",
+   "cars": 17
+  },
+  {
+   "feed": "Atv / Motorcycle",
+   "epa": "",
+   "cars": 17
+  },
+  {
+   "feed": "Maserati",
+   "epa": "Maserati",
+   "cars": 16
+  },
+  {
+   "feed": "Triumph",
+   "epa": "",
+   "cars": 15
+  },
+  {
+   "feed": "Daewoo",
+   "epa": "Daewoo",
+   "cars": 13
+  },
+  {
+   "feed": "Alfa Romeo",
+   "epa": "Alfa Romeo",
+   "cars": 13
+  },
+  {
+   "feed": "Freightliner",
+   "epa": "",
+   "cars": 12
+  },
+  {
+   "feed": "Genesis",
+   "epa": "Genesis",
+   "cars": 10
+  },
+  {
+   "feed": "International",
+   "epa": "",
+   "cars": 9
+  },
+  {
+   "feed": "Tesla",
+   "epa": "Tesla",
+   "cars": 9
+  },
+  {
+   "feed": "Misc",
+   "epa": "",
+   "cars": 9
+  },
+  {
+   "feed": "Trailer",
+   "epa": "",
+   "cars": 7
+  },
+  {
+   "feed": "Studebaker",
+   "epa": "",
+   "cars": 6
+  },
+  {
+   "feed": "Packard",
+   "epa": "",
+   "cars": 6
+  },
+  {
+   "feed": "Merkur",
+   "epa": "Merkur",
+   "cars": 5
+  },
+  {
+   "feed": "Opel",
+   "epa": "",
+   "cars": 4
+  },
+  {
+   "feed": "Daihatsu",
+   "epa": "Daihatsu",
+   "cars": 3
+  },
+  {
+   "feed": "Sprinter (Dodge Or Freightliner)",
+   "epa": "",
+   "cars": 3
+  },
+  {
+   "feed": "Yamaha",
+   "epa": "",
+   "cars": 2
+  },
+  {
+   "feed": "",
+   "epa": "",
+   "cars": 2
+  },
+  {
+   "feed": "Renault",
+   "epa": "Renault",
+   "cars": 1
+  },
+  {
+   "feed": "Peugeot",
+   "epa": "Peugeot",
+   "cars": 1
+  },
+  {
+   "feed": "Lucid",
+   "epa": "Lucid",
+   "cars": 1
+  },
+  {
+   "feed": "Sterling",
+   "epa": "Sterling",
+   "cars": 1
+  },
+  {
+   "feed": "Ducati",
+   "epa": "",
+   "cars": 1
+  },
+  {
+   "feed": "Mitsubishi Fuso",
+   "epa": "",
+   "cars": 1
+  },
+  {
+   "feed": "Qvale",
+   "epa": "Qvale",
+   "cars": 1
+  },
+  {
+   "feed": "Kawasaki",
+   "epa": "",
+   "cars": 1
+  },
+  {
+   "feed": "Vantage",
+   "epa": "",
+   "cars": 1
+  },
+  {
+   "feed": "Austin-America",
+   "epa": "",
+   "cars": 1
+  },
+  {
+   "feed": "Harley-Davidson",
+   "epa": "",
+   "cars": 1
+  },
+  {
+   "feed": "Nash",
+   "epa": "",
+   "cars": 1
+  },
+  {
+   "feed": "Mobility Ventures",
+   "epa": "",
+   "cars": 1
+  },
+  {
+   "feed": "Yugo",
+   "epa": "Yugo",
+   "cars": 1
+  },
+  {
+   "feed": "Rolls-Royce",
+   "epa": "Rolls-Royce",
+   "cars": 1
+  }
+ ],
+ "feed_model_match": {
+  "cars_1984_plus": 331505,
+  "cars_pre_1984": 1944,
+  "by_level": {
+   "exact": 158423,
+   "stripped": 128807,
+   "none": 15662,
+   "baseModel": 12708,
+   "slash": 7905,
+   "alias": 5256,
+   "norm": 1822,
+   "paren": 729,
+   "no_make_year": 193
+  },
+  "matched": 315650,
+  "matched_share": 0.9522
+ },
+ "feed_unmatched_top": [
+  {
+   "make": "Ford",
+   "model": "E-150",
+   "cars": 671
+  },
+  {
+   "make": "Ford",
+   "model": "E-250",
+   "cars": 618
+  },
+  {
+   "make": "Ford",
+   "model": "F-250 Super Duty",
+   "cars": 578
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Express 2500",
+   "cars": 554
+  },
+  {
+   "make": "Ford",
+   "model": "E-350",
+   "cars": 549
+  },
+  {
+   "make": "GMC",
+   "model": "Yukon XL",
+   "cars": 447
+  },
+  {
+   "make": "Ford",
+   "model": "F-250",
+   "cars": 441
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "M-Class",
+   "cars": 378
+  },
+  {
+   "make": "Dodge",
+   "model": "Ram Pickup",
+   "cars": 322
+  },
+  {
+   "make": "Nissan",
+   "model": "Versa Note",
+   "cars": 313
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Captiva Sport",
+   "cars": 301
+  },
+  {
+   "make": "Ford",
+   "model": "F-350",
+   "cars": 301
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Express 3500",
+   "cars": 291
+  },
+  {
+   "make": "Dodge",
+   "model": "Caravan",
+   "cars": 289
+  },
+  {
+   "make": "Chevrolet",
+   "model": "C/K 1500",
+   "cars": 284
+  },
+  {
+   "make": "Ford",
+   "model": "F-350 Super Duty",
+   "cars": 243
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Silverado 2500",
+   "cars": 205
+  },
+  {
+   "make": "Dodge",
+   "model": "Ram",
+   "cars": 188
+  },
+  {
+   "make": "Dodge",
+   "model": "Ram 2500",
+   "cars": 184
+  },
+  {
+   "make": "Nissan",
+   "model": "Pickup",
+   "cars": 177
+  },
+  {
+   "make": "GMC",
+   "model": "Savana",
+   "cars": 167
+  },
+  {
+   "make": "Dodge",
+   "model": "Ram Van",
+   "cars": 164
+  },
+  {
+   "make": "Ram",
+   "model": "1500",
+   "cars": 149
+  },
+  {
+   "make": "Dodge",
+   "model": "1500 Pickup",
+   "cars": 147
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Blazer S10/Jimmy S15",
+   "cars": 141
+  },
+  {
+   "make": "Mazda",
+   "model": "B-Series",
+   "cars": 135
+  },
+  {
+   "make": "GMC",
+   "model": "Yukon Denali",
+   "cars": 111
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Express",
+   "cars": 105
+  },
+  {
+   "make": "Ford",
+   "model": "Expedition EL",
+   "cars": 105
+  },
+  {
+   "make": "Ford",
+   "model": "Excursion",
+   "cars": 103
+  },
+  {
+   "make": "Dodge",
+   "model": "D1500",
+   "cars": 100
+  },
+  {
+   "make": "Ford",
+   "model": "F-150 Heritage",
+   "cars": 99
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Express 1500",
+   "cars": 98
+  },
+  {
+   "make": "Ford",
+   "model": "E-350 Super Duty",
+   "cars": 98
+  },
+  {
+   "make": "Ford",
+   "model": "Econoline",
+   "cars": 97
+  },
+  {
+   "make": "GMC",
+   "model": "Sierra 2500",
+   "cars": 96
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Silverado 2500HD",
+   "cars": 94
+  },
+  {
+   "make": "Chevrolet",
+   "model": "C/K 2500",
+   "cars": 93
+  },
+  {
+   "make": "Saturn",
+   "model": "SL2",
+   "cars": 93
+  },
+  {
+   "make": "Nissan",
+   "model": "Armada",
+   "cars": 86
+  },
+  {
+   "make": "Suzuki",
+   "model": "XL-7",
+   "cars": 79
+  },
+  {
+   "make": "Saturn",
+   "model": "SL1",
+   "cars": 78
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Gmt-400",
+   "cars": 76
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Suburban 2500",
+   "cars": 74
+  },
+  {
+   "make": "Kia",
+   "model": "Rio5",
+   "cars": 70
+  },
+  {
+   "make": "Dodge",
+   "model": "Ram Wagon",
+   "cars": 69
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "GL450",
+   "cars": 68
+  },
+  {
+   "make": "Toyota",
+   "model": "Pickup",
+   "cars": 67
+  },
+  {
+   "make": "Chevrolet",
+   "model": "K2500",
+   "cars": 65
+  },
+  {
+   "make": "Chevrolet",
+   "model": "G20",
+   "cars": 63
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Silverado 1500 Classic",
+   "cars": 60
+  },
+  {
+   "make": "Chrysler",
+   "model": "300C",
+   "cars": 59
+  },
+  {
+   "make": "Suzuki",
+   "model": "SX4 Crossover",
+   "cars": 58
+  },
+  {
+   "make": "GMC",
+   "model": "Savana 2500",
+   "cars": 58
+  },
+  {
+   "make": "Audi",
+   "model": "TT",
+   "cars": 57
+  },
+  {
+   "make": "Infiniti",
+   "model": "FX",
+   "cars": 57
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "C230",
+   "cars": 57
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "CLK",
+   "cars": 56
+  },
+  {
+   "make": "Chrysler",
+   "model": "Caravan",
+   "cars": 56
+  },
+  {
+   "make": "Chevrolet",
+   "model": "C2500",
+   "cars": 54
+  }
+ ],
+ "vpic_model_match": {
+  "cars_1984_plus": 269142,
+  "cars_pre_1984": 329,
+  "by_level": {
+   "exact": 126535,
+   "stripped": 96056,
+   "baseModel": 21728,
+   "none": 17099,
+   "slash": 4165,
+   "alias": 3187,
+   "paren": 148,
+   "norm": 141,
+   "no_make_year": 83
+  },
+  "matched": 251960,
+  "matched_share": 0.9362
+ },
+ "vpic_unmatched_top": [
+  {
+   "make": "Dodge",
+   "model": "Ram",
+   "cars": 3881
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Express",
+   "cars": 1185
+  },
+  {
+   "make": "Chevrolet",
+   "model": "GMT-400",
+   "cars": 1061
+  },
+  {
+   "make": "Ford",
+   "model": "F-250",
+   "cars": 776
+  },
+  {
+   "make": "Gmc",
+   "model": "Yukon XL",
+   "cars": 670
+  },
+  {
+   "make": "Toyota",
+   "model": "Scion tC",
+   "cars": 599
+  },
+  {
+   "make": "Ford",
+   "model": "E-150",
+   "cars": 560
+  },
+  {
+   "make": "Ford",
+   "model": "E-250",
+   "cars": 541
+  },
+  {
+   "make": "Ford",
+   "model": "E-350",
+   "cars": 539
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "M-Class",
+   "cars": 494
+  },
+  {
+   "make": "Toyota",
+   "model": "Scion xB",
+   "cars": 457
+  },
+  {
+   "make": "Ford",
+   "model": "F-350",
+   "cars": 412
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Astro Van",
+   "cars": 395
+  },
+  {
+   "make": "Toyota",
+   "model": "Corolla Matrix",
+   "cars": 365
+  },
+  {
+   "make": "Nissan",
+   "model": "Versa Note",
+   "cars": 302
+  },
+  {
+   "make": "Gmc",
+   "model": "Savana",
+   "cars": 254
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Captiva Sport",
+   "cars": 246
+  },
+  {
+   "make": "Mazda",
+   "model": "B-Series",
+   "cars": 191
+  },
+  {
+   "make": "Nissan",
+   "model": "Pickup",
+   "cars": 172
+  },
+  {
+   "make": "Dodge",
+   "model": "Ram Van",
+   "cars": 165
+  },
+  {
+   "make": "Mini",
+   "model": "Hardtop",
+   "cars": 164
+  },
+  {
+   "make": "Gmc",
+   "model": "Jimmy Utility",
+   "cars": 163
+  },
+  {
+   "make": "Ford",
+   "model": "Expedition MAX",
+   "cars": 135
+  },
+  {
+   "make": "Chevrolet",
+   "model": "G-Series",
+   "cars": 125
+  },
+  {
+   "make": "Saturn",
+   "model": "SL2",
+   "cars": 119
+  },
+  {
+   "make": "Toyota",
+   "model": "Scion xD",
+   "cars": 106
+  },
+  {
+   "make": "Nissan",
+   "model": "Armada",
+   "cars": 105
+  },
+  {
+   "make": "Dodge",
+   "model": "Ram Wagon",
+   "cars": 102
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Malibu Classic",
+   "cars": 101
+  },
+  {
+   "make": "Toyota",
+   "model": "Scion xA",
+   "cars": 96
+  },
+  {
+   "make": "Saturn",
+   "model": "SL1",
+   "cars": 93
+  },
+  {
+   "make": "Ford",
+   "model": "F-150 Heritage",
+   "cars": 90
+  },
+  {
+   "make": "Chrysler",
+   "model": "300C",
+   "cars": 84
+  },
+  {
+   "make": "Ford",
+   "model": "Excursion",
+   "cars": 82
+  },
+  {
+   "make": "Ford",
+   "model": "Transit",
+   "cars": 68
+  },
+  {
+   "make": "Oldsmobile",
+   "model": "Eighty Eight (88)",
+   "cars": 65
+  },
+  {
+   "make": "Mazda",
+   "model": "MX-5",
+   "cars": 63
+  },
+  {
+   "make": "Honda",
+   "model": "",
+   "cars": 56
+  },
+  {
+   "make": "Saturn",
+   "model": "LS1",
+   "cars": 56
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Geo Prizm",
+   "cars": 55
+  },
+  {
+   "make": "Toyota",
+   "model": "Pick-Up",
+   "cars": 53
+  },
+  {
+   "make": "Volvo",
+   "model": "240 Series",
+   "cars": 53
+  },
+  {
+   "make": "Audi",
+   "model": "TT",
+   "cars": 51
+  },
+  {
+   "make": "Subaru",
+   "model": "B9 Tribeca",
+   "cars": 50
+  },
+  {
+   "make": "Lincoln",
+   "model": "Mark",
+   "cars": 48
+  },
+  {
+   "make": "Dodge",
+   "model": "D-Series",
+   "cars": 46
+  },
+  {
+   "make": "Ford",
+   "model": "ZX2",
+   "cars": 46
+  },
+  {
+   "make": "Nissan",
+   "model": "NV",
+   "cars": 44
+  },
+  {
+   "make": "Volkswagen",
+   "model": "Passat",
+   "cars": 43
+  },
+  {
+   "make": "Volvo",
+   "model": "850 Series",
+   "cars": 42
+  },
+  {
+   "make": "Isuzu",
+   "model": "Rodeo/Amigo",
+   "cars": 38
+  },
+  {
+   "make": "Saturn",
+   "model": "SC2",
+   "cars": 37
+  },
+  {
+   "make": "Pontiac",
+   "model": "Montana SV6",
+   "cars": 36
+  },
+  {
+   "make": "Suzuki",
+   "model": "XL7",
+   "cars": 36
+  },
+  {
+   "make": "Acura",
+   "model": "",
+   "cars": 35
+  },
+  {
+   "make": "Ford",
+   "model": "F-450",
+   "cars": 34
+  },
+  {
+   "make": "Nissan",
+   "model": "NV200",
+   "cars": 33
+  },
+  {
+   "make": "Saturn",
+   "model": "SC1",
+   "cars": 31
+  },
+  {
+   "make": "Chevrolet",
+   "model": "C/K Pickup",
+   "cars": 30
+  },
+  {
+   "make": "Gmc",
+   "model": "GMT-400",
+   "cars": 26
+  }
+ ],
+ "name_examples": [
+  {
+   "feed": "Ford | F-150",
+   "cars": 9334,
+   "probe_year": 2005,
+   "level": "stripped",
+   "epa_models": [
+    "F150 Pickup 2WD",
+    "F150 Pickup 4WD"
+   ],
+   "epa_baseModels": [
+    "F150"
+   ]
+  },
+  {
+   "feed": "Nissan | Altima",
+   "cars": 8917,
+   "probe_year": 2009,
+   "level": "exact",
+   "epa_models": [
+    "Altima",
+    "Altima Coupe",
+    "Altima Hybrid"
+   ],
+   "epa_baseModels": [
+    "Altima"
+   ]
+  },
+  {
+   "feed": "Honda | Accord",
+   "cars": 8829,
+   "probe_year": 2004,
+   "level": "exact",
+   "epa_models": [
+    "Accord"
+   ],
+   "epa_baseModels": [
+    "Accord"
+   ]
+  },
+  {
+   "feed": "Toyota | Camry",
+   "cars": 7769,
+   "probe_year": 2004,
+   "level": "exact",
+   "epa_models": [
+    "Camry",
+    "Camry Solara",
+    "Camry Solara Convertible"
+   ],
+   "epa_baseModels": [
+    "Camry"
+   ]
+  },
+  {
+   "feed": "Honda | Civic",
+   "cars": 6496,
+   "probe_year": 2005,
+   "level": "exact",
+   "epa_models": [
+    "Civic",
+    "Civic CNG",
+    "Civic Hybrid"
+   ],
+   "epa_baseModels": [
+    "Civic"
+   ]
+  },
+  {
+   "feed": "Ford | Focus",
+   "cars": 6468,
+   "probe_year": 2009,
+   "level": "stripped",
+   "epa_models": [
+    "Focus FWD"
+   ],
+   "epa_baseModels": [
+    "Focus"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Malibu",
+   "cars": 5573,
+   "probe_year": 2011,
+   "level": "exact",
+   "epa_models": [
+    "Malibu"
+   ],
+   "epa_baseModels": [
+    "Malibu"
+   ]
+  },
+  {
+   "feed": "Ford | Fusion",
+   "cars": 5082,
+   "probe_year": 2014,
+   "level": "stripped",
+   "epa_models": [
+    "Fusion AWD",
+    "Fusion Energi Plug-in Hybrid",
+    "Fusion FWD",
+    "Fusion Hybrid FWD"
+   ],
+   "epa_baseModels": [
+    "Fusion"
+   ]
+  },
+  {
+   "feed": "Ford | Escape",
+   "cars": 4927,
+   "probe_year": 2013,
+   "level": "stripped",
+   "epa_models": [
+    "Escape AWD",
+    "Escape FWD"
+   ],
+   "epa_baseModels": [
+    "Escape"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Impala",
+   "cars": 4655,
+   "probe_year": 2009,
+   "level": "exact",
+   "epa_models": [
+    "Impala"
+   ],
+   "epa_baseModels": [
+    "Impala"
+   ]
+  },
+  {
+   "feed": "Ford | Explorer",
+   "cars": 4587,
+   "probe_year": 2008,
+   "level": "stripped",
+   "epa_models": [
+    "Explorer 2WD",
+    "Explorer 4WD",
+    "Explorer Sport Trac 2WD",
+    "Explorer Sport Trac 4WD"
+   ],
+   "epa_baseModels": [
+    "Explorer"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Cruze",
+   "cars": 4308,
+   "probe_year": 2014,
+   "level": "exact",
+   "epa_models": [
+    "Cruze",
+    "Cruze Eco"
+   ],
+   "epa_baseModels": [
+    "Cruze"
+   ]
+  },
+  {
+   "feed": "Nissan | Sentra",
+   "cars": 4245,
+   "probe_year": 2005,
+   "level": "exact",
+   "epa_models": [
+    "Sentra"
+   ],
+   "epa_baseModels": [
+    "Sentra"
+   ]
+  },
+  {
+   "feed": "Hyundai | Sonata",
+   "cars": 4160,
+   "probe_year": 2012,
+   "level": "exact",
+   "epa_models": [
+    "Sonata",
+    "Sonata Hybrid"
+   ],
+   "epa_baseModels": [
+    "Sonata"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Equinox",
+   "cars": 4121,
+   "probe_year": 2014,
+   "level": "stripped",
+   "epa_models": [
+    "Equinox AWD",
+    "Equinox FWD"
+   ],
+   "epa_baseModels": [
+    "Equinox"
+   ]
+  },
+  {
+   "feed": "Dodge | Ram 1500",
+   "cars": 3718,
+   "probe_year": 2006,
+   "level": "stripped",
+   "epa_models": [
+    "Ram 1500 Pickup 2WD",
+    "Ram 1500 Pickup 4WD"
+   ],
+   "epa_baseModels": [
+    "Ram 1500 Pickup"
+   ]
+  },
+  {
+   "feed": "Jeep | Grand Cherokee",
+   "cars": 3595,
+   "probe_year": 2008,
+   "level": "stripped",
+   "epa_models": [
+    "Grand Cherokee 2WD",
+    "Grand Cherokee 4WD"
+   ],
+   "epa_baseModels": [
+    "Grand Cherokee"
+   ]
+  },
+  {
+   "feed": "Toyota | Corolla",
+   "cars": 3549,
+   "probe_year": 2004,
+   "level": "exact",
+   "epa_models": [
+    "Corolla"
+   ],
+   "epa_baseModels": [
+    "Corolla"
+   ]
+  },
+  {
+   "feed": "Honda | Odyssey",
+   "cars": 3542,
+   "probe_year": 2008,
+   "level": "exact",
+   "epa_models": [
+    "Odyssey"
+   ],
+   "epa_baseModels": [
+    "Odyssey"
+   ]
+  },
+  {
+   "feed": "Dodge | Grand Caravan",
+   "cars": 3227,
+   "probe_year": 2006,
+   "level": "slash",
+   "epa_models": [
+    "Caravan/Grand Caravan 2WD"
+   ],
+   "epa_baseModels": [
+    "Caravan/Grand Caravan"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Silverado 1500",
+   "cars": 3198,
+   "probe_year": 2011,
+   "level": "alias",
+   "epa_models": [
+    "Silverado C15 2WD",
+    "Silverado K15 4WD"
+   ],
+   "epa_baseModels": [
+    "Silverado"
+   ]
+  },
+  {
+   "feed": "Hyundai | Elantra",
+   "cars": 3172,
+   "probe_year": 2011,
+   "level": "exact",
+   "epa_models": [
+    "Elantra",
+    "Elantra Touring"
+   ],
+   "epa_baseModels": [
+    "Elantra"
+   ]
+  },
+  {
+   "feed": "Ford | Expedition",
+   "cars": 3168,
+   "probe_year": 2008,
+   "level": "stripped",
+   "epa_models": [
+    "Expedition 2WD"
+   ],
+   "epa_baseModels": [
+    "Expedition"
+   ]
+  },
+  {
+   "feed": "Ford | Taurus",
+   "cars": 2839,
+   "probe_year": 2003,
+   "level": "exact",
+   "epa_models": [
+    "Taurus",
+    "Taurus Wagon"
+   ],
+   "epa_baseModels": [
+    "Taurus"
+   ]
+  },
+  {
+   "feed": "Chrysler | Town & Country",
+   "cars": 2830,
+   "probe_year": 2005,
+   "level": "slash",
+   "epa_models": [
+    "Voyager/Town and Country 2WD"
+   ],
+   "epa_baseModels": [
+    "Voyager/Town and Country"
+   ]
+  },
+  {
+   "feed": "Volkswagen | Jetta",
+   "cars": 2709,
+   "probe_year": 2005,
+   "level": "exact",
+   "epa_models": [
+    "Jetta",
+    "Jetta Wagon"
+   ],
+   "epa_baseModels": [
+    "Jetta"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Tahoe",
+   "cars": 2681,
+   "probe_year": 2008,
+   "level": "baseModel",
+   "epa_models": [
+    "Tahoe 1500 2WD",
+    "Tahoe 1500 4WD",
+    "Tahoe Hybrid 2WD",
+    "Tahoe Hybrid 4WD"
+   ],
+   "epa_baseModels": [
+    "Tahoe"
+   ]
+  },
+  {
+   "feed": "Nissan | Rogue",
+   "cars": 2407,
+   "probe_year": 2016,
+   "level": "stripped",
+   "epa_models": [
+    "Rogue AWD",
+    "Rogue FWD"
+   ],
+   "epa_baseModels": [
+    "Rogue"
+   ]
+  },
+  {
+   "feed": "Nissan | Versa",
+   "cars": 2285,
+   "probe_year": 2016,
+   "level": "exact",
+   "epa_models": [
+    "Versa"
+   ],
+   "epa_baseModels": [
+    "Versa"
+   ]
+  },
+  {
+   "feed": "Nissan | Maxima",
+   "cars": 2282,
+   "probe_year": 2003,
+   "level": "exact",
+   "epa_models": [
+    "Maxima"
+   ],
+   "epa_baseModels": [
+    "Maxima"
+   ]
+  },
+  {
+   "feed": "Mazda | Mazda3",
+   "cars": 2250,
+   "probe_year": 2012,
+   "level": "alias",
+   "epa_models": [
+    "3",
+    "3 DI 4-Door",
+    "3 DI 5-Door"
+   ],
+   "epa_baseModels": [
+    "3"
+   ]
+  },
+  {
+   "feed": "Ford | Ranger",
+   "cars": 2235,
+   "probe_year": 1998,
+   "level": "stripped",
+   "epa_models": [
+    "Ranger Pickup 2WD",
+    "Ranger Pickup 4WD"
+   ],
+   "epa_baseModels": [
+    "Ranger"
+   ]
+  },
+  {
+   "feed": "Kia | Optima",
+   "cars": 2191,
+   "probe_year": 2011,
+   "level": "exact",
+   "epa_models": [
+    "Optima",
+    "Optima Hybrid"
+   ],
+   "epa_baseModels": [
+    "Optima"
+   ]
+  },
+  {
+   "feed": "Nissan | Pathfinder",
+   "cars": 2182,
+   "probe_year": 2004,
+   "level": "stripped",
+   "epa_models": [
+    "Pathfinder 2WD",
+    "Pathfinder 4WD",
+    "Pathfinder Armada 2WD",
+    "Pathfinder Armada 4WD"
+   ],
+   "epa_baseModels": [
+    "Pathfinder"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Traverse",
+   "cars": 2131,
+   "probe_year": 2016,
+   "level": "stripped",
+   "epa_models": [
+    "Traverse AWD",
+    "Traverse FWD"
+   ],
+   "epa_baseModels": [
+    "Traverse"
+   ]
+  },
+  {
+   "feed": "Ford | Mustang",
+   "cars": 2079,
+   "probe_year": 2003,
+   "level": "exact",
+   "epa_models": [
+    "Mustang"
+   ],
+   "epa_baseModels": [
+    "Mustang"
+   ]
+  },
+  {
+   "feed": "Honda | Pilot",
+   "cars": 2074,
+   "probe_year": 2011,
+   "level": "stripped",
+   "epa_models": [
+    "Pilot 2WD",
+    "Pilot 4WD"
+   ],
+   "epa_baseModels": [
+    "Pilot"
+   ]
+  },
+  {
+   "feed": "Jeep | Liberty",
+   "cars": 2012,
+   "probe_year": 2007,
+   "level": "slash",
+   "epa_models": [
+    "Liberty/Cherokee 2WD",
+    "Liberty/Cherokee 4WD"
+   ],
+   "epa_baseModels": [
+    "Liberty/Cherokee"
+   ]
+  },
+  {
+   "feed": "Chrysler | 200",
+   "cars": 1998,
+   "probe_year": 2015,
+   "level": "exact",
+   "epa_models": [
+    "200",
+    "200 AWD"
+   ],
+   "epa_baseModels": [
+    "200"
+   ]
+  },
+  {
+   "feed": "Dodge | Journey",
+   "cars": 1982,
+   "probe_year": 2015,
+   "level": "stripped",
+   "epa_models": [
+    "Journey AWD",
+    "Journey FWD"
+   ],
+   "epa_baseModels": [
+    "Journey"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Trailblazer",
+   "cars": 1980,
+   "probe_year": 2008,
+   "level": "stripped",
+   "epa_models": [
+    "TrailBlazer 2WD",
+    "TrailBlazer 4WD",
+    "TrailBlazer AWD"
+   ],
+   "epa_baseModels": [
+    "TrailBlazer"
+   ]
+  },
+  {
+   "feed": "Ford | Edge",
+   "cars": 1892,
+   "probe_year": 2015,
+   "level": "stripped",
+   "epa_models": [
+    "Edge AWD",
+    "Edge FWD"
+   ],
+   "epa_baseModels": [
+    "Edge"
+   ]
+  },
+  {
+   "feed": "Dodge | Charger",
+   "cars": 1881,
+   "probe_year": 2014,
+   "level": "exact",
+   "epa_models": [
+    "Charger",
+    "Charger AWD",
+    "Charger SRT8"
+   ],
+   "epa_baseModels": [
+    "Charger"
+   ]
+  },
+  {
+   "feed": "Dodge | Dakota",
+   "cars": 1839,
+   "probe_year": 1999,
+   "level": "stripped",
+   "epa_models": [
+    "Dakota Pickup 2WD",
+    "Dakota Pickup 4WD"
+   ],
+   "epa_baseModels": [
+    "Dakota Pickup"
+   ]
+  },
+  {
+   "feed": "Nissan | Murano",
+   "cars": 1791,
+   "probe_year": 2012,
+   "level": "stripped",
+   "epa_models": [
+    "Murano AWD",
+    "Murano CrossCabriolet",
+    "Murano FWD"
+   ],
+   "epa_baseModels": [
+    "Murano"
+   ]
+  },
+  {
+   "feed": "Honda | CR-V",
+   "cars": 1790,
+   "probe_year": 2009,
+   "level": "stripped",
+   "epa_models": [
+    "CR-V 2WD",
+    "CR-V 4WD"
+   ],
+   "epa_baseModels": [
+    "CR-V"
+   ]
+  },
+  {
+   "feed": "GMC | Acadia",
+   "cars": 1773,
+   "probe_year": 2014,
+   "level": "stripped",
+   "epa_models": [
+    "Acadia AWD",
+    "Acadia FWD"
+   ],
+   "epa_baseModels": [
+    "Acadia"
+   ]
+  },
+  {
+   "feed": "Dodge | Durango",
+   "cars": 1729,
+   "probe_year": 2009,
+   "level": "stripped",
+   "epa_models": [
+    "Durango 2WD",
+    "Durango 4WD",
+    "Durango HEV"
+   ],
+   "epa_baseModels": [
+    "Durango"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Suburban 1500",
+   "cars": 1725,
+   "probe_year": 2003,
+   "level": "stripped",
+   "epa_models": [
+    "Suburban 1500 2WD",
+    "Suburban 1500 4WD",
+    "Suburban 1500 AWD"
+   ],
+   "epa_baseModels": [
+    "Suburban"
+   ]
+  },
+  {
+   "feed": "Kia | Soul",
+   "cars": 1666,
+   "probe_year": 2018,
+   "level": "exact",
+   "epa_models": [
+    "Soul",
+    "Soul Electric"
+   ],
+   "epa_baseModels": [
+    "Soul"
+   ]
+  },
+  {
+   "feed": "Toyota | Sienna",
+   "cars": 1653,
+   "probe_year": 2009,
+   "level": "stripped",
+   "epa_models": [
+    "Sienna 2WD",
+    "Sienna 4WD"
+   ],
+   "epa_baseModels": [
+    "Sienna"
+   ]
+  },
+  {
+   "feed": "Chevrolet | Cobalt",
+   "cars": 1607,
+   "probe_year": 2007,
+   "level": "exact",
+   "epa_models": [
+    "Cobalt"
+   ],
+   "epa_baseModels": [
+    "Cobalt"
+   ]
+  },
+  {
+   "feed": "Chrysler | 300",
+   "cars": 1565,
+   "probe_year": 2010,
+   "level": "stripped",
+   "epa_models": [
+    "300 AWD",
+    "300/SRT-8"
+   ],
+   "epa_baseModels": [
+    "300",
+    "300 SRT8"
+   ]
+  },
+  {
+   "feed": "Subaru | Outback",
+   "cars": 1520,
+   "probe_year": 2010,
+   "level": "stripped",
+   "epa_models": [
+    "Legacy AWD",
+    "Outback Wagon AWD"
+   ],
+   "epa_baseModels": [
+    "Legacy/Outback"
+   ]
+  },
+  {
+   "feed": "Toyota | Prius",
+   "cars": 1517,
+   "probe_year": 2010,
+   "level": "exact",
+   "epa_models": [
+    "Prius"
+   ],
+   "epa_baseModels": [
+    "Prius"
+   ]
+  },
+  {
+   "feed": "Acura | TL",
+   "cars": 1459,
+   "probe_year": 2005,
+   "level": "exact",
+   "epa_models": [
+    "TL"
+   ],
+   "epa_baseModels": [
+    "TL"
+   ]
+  },
+  {
+   "feed": "Dodge | Avenger",
+   "cars": 1434,
+   "probe_year": 2008,
+   "level": "exact",
+   "epa_models": [
+    "Avenger",
+    "Avenger AWD"
+   ],
+   "epa_baseModels": [
+    "Avenger"
+   ]
+  },
+  {
+   "feed": "Jeep | Patriot",
+   "cars": 1427,
+   "probe_year": 2012,
+   "level": "stripped",
+   "epa_models": [
+    "Patriot 2WD",
+    "Patriot 4WD"
+   ],
+   "epa_baseModels": [
+    "Patriot"
+   ]
+  },
+  {
+   "feed": "Subaru | Forester",
+   "cars": 1394,
+   "probe_year": 2008,
+   "level": "stripped",
+   "epa_models": [
+    "Forester AWD"
+   ],
+   "epa_baseModels": [
+    "Forester"
+   ]
+  },
+  {
+   "feed": "Volkswagen | Passat",
+   "cars": 1382,
+   "probe_year": 2008,
+   "level": "exact",
+   "epa_models": [
+    "Passat",
+    "Passat 4motion",
+    "Passat Wagon",
+    "Passat Wagon 4motion"
+   ],
+   "epa_baseModels": [
+    "Passat"
+   ]
+  }
+ ],
+ "sole_offering_size_preview": {
+  "no_manual": 136982,
+  "mixed": 113715,
+  "no_engine": 60340,
+  "engine_not_in_epa": 4216,
+  "unmatched": 15855,
+  "pre_1984": 1944,
+  "manual_only": 397
+ },
+ "sole_offering_preview_by_make": {
+  "Dodge": 72,
+  "Ford": 53,
+  "Chevrolet": 48,
+  "Honda": 44,
+  "Isuzu": 31,
+  "Jeep": 30,
+  "Mazda": 16,
+  "Nissan": 16,
+  "Volkswagen": 16,
+  "Subaru": 11,
+  "Geo": 10,
+  "Kia": 8,
+  "Mercury": 6,
+  "Mitsubishi": 5,
+  "Toyota": 5,
+  "BMW": 4,
+  "Hyundai": 4,
+  "Suzuki": 4,
+  "Saab": 3,
+  "Porsche": 3,
+  "Daihatsu": 2,
+  "Saturn": 2,
+  "GMC": 1,
+  "Cadillac": 1,
+  "Pontiac": 1,
+  "Fiat": 1
+ },
+ "sole_offering_preview_top_cells": [
+  {
+   "cell": "1993 Chevrolet S-10 2.8L/6cyl/4x2",
+   "cars": 10
+  },
+  {
+   "cell": "2008 Dodge Caliber 1.8L/4cyl/fwd",
+   "cars": 10
+  },
+  {
+   "cell": "2007 Dodge Caliber 1.8L/4cyl/fwd",
+   "cars": 10
+  },
+  {
+   "cell": "1998 Dodge Dakota 2.5L/4cyl/4x2",
+   "cars": 10
+  },
+  {
+   "cell": "2005 Ford Focus 2.3L/4cyl",
+   "cars": 8
+  },
+  {
+   "cell": "2009 Dodge Caliber 1.8L/4cyl/fwd",
+   "cars": 8
+  },
+  {
+   "cell": "2015 Ford Focus 1.0L/3cyl",
+   "cars": 7
+  },
+  {
+   "cell": "2012 Honda Civic 2.4L/4cyl",
+   "cars": 7
+  },
+  {
+   "cell": "2000 Chevrolet Metro 1.0L/3cyl",
+   "cars": 6
+  },
+  {
+   "cell": "2008 Honda Civic 2.0L/4cyl",
+   "cars": 6
+  },
+  {
+   "cell": "2006 Honda Civic 2.0L/4cyl",
+   "cars": 6
+  },
+  {
+   "cell": "1992 Chevrolet S-10 2.8L/6cyl/4x2",
+   "cars": 6
+  },
+  {
+   "cell": "1991 Chevrolet S-10 2.8L/6cyl/4x2",
+   "cars": 5
+  },
+  {
+   "cell": "1995 Geo Metro 1.0L/3cyl",
+   "cars": 5
+  },
+  {
+   "cell": "2007 Honda Civic 2.0L/4cyl",
+   "cars": 5
+  },
+  {
+   "cell": "2002 Mercury Cougar 2.0L/4cyl",
+   "cars": 5
+  },
+  {
+   "cell": "2009 Honda Civic 2.0L/4cyl",
+   "cars": 5
+  },
+  {
+   "cell": "1992 Jeep Wrangler 2.5L/4cyl/4wd",
+   "cars": 5
+  },
+  {
+   "cell": "1999 Dodge Dakota 2.5L/4cyl/4x2",
+   "cars": 5
+  },
+  {
+   "cell": "1998 Chevrolet Metro 1.0L/3cyl",
+   "cars": 4
+  },
+  {
+   "cell": "1999 Chevrolet Metro 1.0L/3cyl",
+   "cars": 4
+  },
+  {
+   "cell": "1996 Dodge Dakota 2.5L/4cyl/4x2",
+   "cars": 4
+  },
+  {
+   "cell": "2001 Ford Escape 2.0L/4cyl/4x2",
+   "cars": 4
+  },
+  {
+   "cell": "2003 Honda Civic 2.0L/4cyl",
+   "cars": 4
+  },
+  {
+   "cell": "1991 Jeep Wrangler 2.5L/4cyl/4wd",
+   "cars": 4
+  },
+  {
+   "cell": "1987 Mazda B2000 2.0L/4cyl",
+   "cars": 4
+  },
+  {
+   "cell": "2008 Mazda Mazdaspeed3 2.3L/?cyl",
+   "cars": 4
+  },
+  {
+   "cell": "2004 Nissan Xterra 2.4L/4cyl/4x2",
+   "cars": 4
+  },
+  {
+   "cell": "2014 Ford Fiesta 1.0L/3cyl",
+   "cars": 4
+  },
+  {
+   "cell": "2007 Chevrolet Cobalt 2.0L/4cyl",
+   "cars": 3
+  },
+  {
+   "cell": "2007 Ford Focus 2.3L/4cyl",
+   "cars": 3
+  },
+  {
+   "cell": "2015 Jeep Renegade 1.4L/4cyl/fwd",
+   "cars": 3
+  },
+  {
+   "cell": "2002 Nissan Xterra 2.4L/4cyl/4x2",
+   "cars": 3
+  },
+  {
+   "cell": "1998 Nissan Frontier 2.4L/?cyl/4wd",
+   "cars": 3
+  },
+  {
+   "cell": "2000 Honda Insight 1.0L/3cyl",
+   "cars": 3
+  },
+  {
+   "cell": "1994 Dodge Dakota 2.5L/4cyl/4x2",
+   "cars": 3
+  },
+  {
+   "cell": "1995 Dodge Dakota 2.5L/4cyl/4x2",
+   "cars": 3
+  },
+  {
+   "cell": "2001 Dodge Dakota 2.5L/4cyl/4x2",
+   "cars": 3
+  },
+  {
+   "cell": "2000 Dodge Dakota 2.5L/4cyl/4x2",
+   "cars": 3
+  },
+  {
+   "cell": "1993 Jeep Wrangler 2.5L/4cyl/4wd",
+   "cars": 3
+  },
+  {
+   "cell": "2001 Nissan Xterra 2.4L/?cyl/4x2",
+   "cars": 3
+  },
+  {
+   "cell": "2015 Ford Fiesta 1.0L/3cyl",
+   "cars": 3
+  },
+  {
+   "cell": "1996 Geo Metro 1.0L/3cyl",
+   "cars": 3
+  },
+  {
+   "cell": "2013 Subaru Impreza 2.5L/?cyl/awd",
+   "cars": 3
+  },
+  {
+   "cell": "1996 Volkswagen Passat 1.9L/4cyl",
+   "cars": 3
+  },
+  {
+   "cell": "1997 Volkswagen Passat 1.9L/4cyl",
+   "cars": 3
+  },
+  {
+   "cell": "1997 Dodge Dakota 2.5L/4cyl/4x2",
+   "cars": 3
+  },
+  {
+   "cell": "2004 Ford Escape 2.0L/4cyl/4x2",
+   "cars": 2
+  },
+  {
+   "cell": "1997 Geo Metro 1.0L/3cyl",
+   "cars": 2
+  },
+  {
+   "cell": "2002 Honda Civic 2.0L/4cyl",
+   "cars": 2
+  },
+  {
+   "cell": "1996 Isuzu Hombre 2.2L/4cyl/4x2",
+   "cars": 2
+  },
+  {
+   "cell": "1997 Isuzu Hombre 2.2L/4cyl/4x2",
+   "cars": 2
+  },
+  {
+   "cell": "1998 Isuzu Amigo 2.2L/4cyl/4x2",
+   "cars": 2
+  },
+  {
+   "cell": "1992 Isuzu Pickup 2.3L/4cyl/4x2",
+   "cars": 2
+  },
+  {
+   "cell": "1989 Jeep Wrangler 2.5L/4cyl/4wd",
+   "cars": 2
+  },
+  {
+   "cell": "2003 Jeep Liberty 2.4L/4cyl/4x2",
+   "cars": 2
+  },
+  {
+   "cell": "2006 Kia Sportage 2.0L/?cyl/4wd",
+   "cars": 2
+  },
+  {
+   "cell": "2009 Kia Sportage 2.0L/?cyl/4wd",
+   "cars": 2
+  },
+  {
+   "cell": "1995 Saab 900 2.0L/?cyl",
+   "cars": 2
+  },
+  {
+   "cell": "1998 Volkswagen Golf 2.8L/6cyl",
+   "cars": 2
+  }
+ ],
+ "sole_offering_preview_vs_ground_truth": {
+  "engine_not_in_epa|manual": 61,
+  "engine_not_in_epa|not_manual": 451,
+  "manual_only|manual": 63,
+  "manual_only|not_manual": 4,
+  "mixed|manual": 3637,
+  "mixed|not_manual": 25804,
+  "no_engine|manual": 166,
+  "no_engine|not_manual": 3841,
+  "no_manual|manual": 29,
+  "no_manual|not_manual": 13954,
+  "unmatched|manual": 120,
+  "unmatched|not_manual": 623
+ },
+ "sole_offering_preview_gt_disagreements": [
+  {
+   "cell": "2012 Subaru Impreza Outback Sport 2.5L/?cyl/awd -> Continuously Variable Transmission (CVT)",
+   "cars": 2
+  },
+  {
+   "cell": "2013 Subaru Impreza 2.5L/4cyl/awd -> Continuously Variable Transmission (CVT)",
+   "cars": 1
+  },
+  {
+   "cell": "2013 Subaru Impreza Outback Sport 2.5L/?cyl/awd -> Continuously Variable Transmission (CVT)",
+   "cars": 1
+  }
+ ],
+ "heavy_duty_feed_models": [
+  {
+   "make": "Ford",
+   "model": "F-250",
+   "cars": 926
+  },
+  {
+   "make": "Ford",
+   "model": "E-250",
+   "cars": 780
+  },
+  {
+   "make": "Ford",
+   "model": "E-350",
+   "cars": 595
+  },
+  {
+   "make": "Ford",
+   "model": "F-250 Super Duty",
+   "cars": 579
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Express 2500",
+   "cars": 554
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Silverado 2500",
+   "cars": 325
+  },
+  {
+   "make": "Ford",
+   "model": "F-350",
+   "cars": 323
+  },
+  {
+   "make": "Dodge",
+   "model": "Ram 2500",
+   "cars": 298
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Express 3500",
+   "cars": 291
+  },
+  {
+   "make": "Ford",
+   "model": "F-350 Super Duty",
+   "cars": 243
+  },
+  {
+   "make": "GMC",
+   "model": "Sierra 2500",
+   "cars": 156
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "E350",
+   "cars": 138
+  },
+  {
+   "make": "Ford",
+   "model": "E-350 Super Duty",
+   "cars": 98
+  },
+  {
+   "make": "Chevrolet",
+   "model": "C/K 2500",
+   "cars": 94
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Suburban 2500",
+   "cars": 74
+  },
+  {
+   "make": "GMC",
+   "model": "Savana 2500",
+   "cars": 68
+  },
+  {
+   "make": "Chevrolet",
+   "model": "Silverado 3500",
+   "cars": 48
+  },
+  {
+   "make": "Chevrolet",
+   "model": "C/K 3500",
+   "cars": 35
+  },
+  {
+   "make": "Dodge",
+   "model": "Ram 3500",
+   "cars": 35
+  },
+  {
+   "make": "GMC",
+   "model": "Sierra 3500",
+   "cars": 34
+  },
+  {
+   "make": "Ram",
+   "model": "2500",
+   "cars": 28
+  },
+  {
+   "make": "GMC",
+   "model": "Savana 3500",
+   "cars": 28
+  },
+  {
+   "make": "Ford",
+   "model": "F-450 Super Duty",
+   "cars": 27
+  },
+  {
+   "make": "Dodge",
+   "model": "Sprinter 2500",
+   "cars": 24
+  },
+  {
+   "make": "Mercedes-Benz",
+   "model": "Sprinter 2500",
+   "cars": 19
+  }
+ ],
+ "heavy_duty_cars": 6103
+}
