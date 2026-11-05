@@ -619,6 +619,12 @@ check("§22 Park Avenue: mech per generation (new 1997 break); sunroof gen 2 onl
       and a00["Radiator Fan Assembly"]["fits"] == "1997–2005" and "Sunroof Glass + Motor" not in a94
       and a94["Tail Lights (pair, uncracked)"]["fits"] == "1993–1994" and a00["Tail Lights (pair, uncracked)"]["fits"] == "1997–2002")
 
+x09, x12 = parts(2009, "Scion", "xB", FWD), parts(2012, "Scion", "xB", FWD)
+check("§22 Scion xB 2nd gen: mech 2008-15; lamps cut at the 2011 facelift and 2013 update; no sunroof row",
+      MECH3 <= set(x09) and x09["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2008–2015"
+      and x09["Headlights (clear pair)"]["fits"] == "2008–2010" and x12["Tail Lights (pair, uncracked)"]["fits"] == "2011–2012"
+      and "Sunroof Glass + Motor" not in x09)
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

@@ -1984,3 +1984,27 @@ rows, the 1st-gen sunroof.
 
 Result (same inventory): generic-only 14,487 (4.3%) → 14,188 (4.2%). Park
 Avenue 299 → 0.
+
+### 22.5 Scion xB 2008–2015 (2nd gen)
+
+Basis: WP Scion_xB; pressroom.toyota.com "Scion announces pricing for
+restyled 2011 xB"; kbb.com 2013 xB update; cars.com "Scion xB lives another
+year"; consumerguide.com/used/2008-14-scion-xb (fetched).
+- **Appearance cuts added to `FACELIFT_BREAKS`:**
+  - 2011: "fresh exterior styling including changes to the front and rear
+    bumpers, grill, headlights and taillights" (Toyota).
+  - 2013: "a mild nose and tail tweak", i.e. a revised front bumper and a
+    gloss-black lower grille insert (KBB).
+  The existing xB lamp rows are now cut at 2011 and 2013.
+- **A/C:** standard (CG base lists 2008–13).
+- **Sunroof:** no regular factory option; only limited Release Series cars
+  had one.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2008–15 | — | Every car. |
+
+Left out, no stated basis: a sunroof row, and Release Series parts.
+
+Result (same inventory): generic-only 14,188 (4.2%) → 13,893 (4.2%). xB
+2nd gen 293 → 0.

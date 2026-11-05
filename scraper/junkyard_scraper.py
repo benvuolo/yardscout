@@ -6109,6 +6109,12 @@ _gap_extend("park avenue", parts=[
     *_per_gen([(1997, 2005)], [_SUNROOF]),
 ])
 
+# Scion xB 2nd gen 2008-2015 (293 cars generic-only). Appearance cuts at
+# 2011 (facelift: bumpers, grille, headlights, taillights) and 2013 (front
+# bumper, lower grille insert) in FACELIFT_BREAKS. A/C standard (CG base
+# lists). No sunroof row: no regular factory option (Release Series only).
+_gap_extend("scion xb 2008-2015", parts=_per_gen([(2008, 2015)], [*_GAP_MECH]))
+
 # ---- end of §22 block
 
 _apply_consensus_evergreens()
@@ -6614,6 +6620,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "milan": [2010],
     "encore": [2017],
     "park avenue": [1993, 1995, 2003, 2005],
+    "scion xb": [2011, 2013],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
