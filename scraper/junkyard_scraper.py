@@ -6034,6 +6034,20 @@ _gap_extend("stratus", parts=[
     *_per_gen([(2001, 2006)], [{**r, **_SEDAN_ONLY} for r in (*_GAP_MECH, _SUNROOF)]),
 ])
 
+# Ford Mustang S197 (2005-09 / 2010-14 entry 'mustang 2005-2014'; 320 cars
+# generic-only, all 2005-06). 2013 facelift in FACELIFT_BREAKS (2010 is
+# already a generation break). A/C standard ("All Mustangs came with air
+# conditioning", CG). No radiator-fan row: electric vs clutch fan on this
+# longitudinal car was not confirmed. Shaker 500/1000 audio: an option on
+# the 2005 car per Wikipedia and 2007-09 per CG's lists; option-flagged for
+# 2005-09.
+_gap_extend("mustang 2005-2014", parts=[
+    *_per_gen([(2005, 2009), (2010, 2014)], [_GAP_PUMP, _GAP_AC]),
+    *_per_gen([(2005, 2009)], [
+        {"name": "Shaker 500/1000 Amp + Subwoofer", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 24, "option": True},
+    ]),
+])
+
 # ---- end of §21 block
 
 _apply_consensus_evergreens()
@@ -6510,6 +6524,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "juke": [2015],
     "sable": [1998, 2004],
     "stratus": [2003, 2004],
+    "mustang": [2013],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

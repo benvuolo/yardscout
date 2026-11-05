@@ -1576,3 +1576,34 @@ Left out, no stated basis: coupe-specific rows, and JA sunroofs (offered
 only in some years: 1996, 1998, 2000).
 
 Result (same inventory): generic-only 16,280 (4.9%) → 15,958 (4.8%).
+
+### 21.7 Ford Mustang S197 2005–2009, 2010–2014
+
+Basis: WP Ford_Mustang_(fifth_generation); consumerguide.com/used/2005-14-ford-mustang
+(fetched).
+- **Facelift 2013 (added to `FACELIFT_BREAKS` "mustang"):** "new front fascia
+  featuring a larger grille, standard HiD headlamps and two LED accent
+  strips"; "LED tail lamp clusters" (WP). The 2010 restyle is already a
+  generation break. The existing S197 lamp rows are now cut at 2013. CG
+  also mentions 2011 fascias, which WP does not corroborate, so there is no
+  2011 cut.
+- **2005–06 vs 2007–09:** no lamp or grille change is stated. HID
+  headlamps became available for 2008.
+- **A/C:** "All Mustangs came with air conditioning" (CG).
+- **Shaker 500/1000:** the sources disagree on years. WP lists them as 2005
+  options; CG's equipment lists show them for 2007–09.
+
+| Row | Years (per gen) | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor | 2005–09, 2010–14 | — | Every car. |
+| Shaker 500/1000 amp + subwoofer | 2005–09 | option | Cost is the amplifier median ($24); band as the Harman Kardon rows. |
+
+Left out, no stated basis:
+- a radiator-fan row (electric vs clutch fan not confirmed for this
+  longitudinal car);
+- GT grille/fog-lamp assemblies (no audited band);
+- convertible tops;
+- the 2010+ premium audio.
+
+Result (same inventory): generic-only 15,958 (4.8%) → 15,637 (4.7%).
+Mustang 2005–06 → 0.

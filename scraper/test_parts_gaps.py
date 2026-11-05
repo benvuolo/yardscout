@@ -539,6 +539,12 @@ check("§21 Stratus: JA rows 1995-2000; JR rows sedan-gated (sedan decode confir
       and parts(2003, "Dodge", "Stratus")["Fuel Pump Module (in-tank, test before listing)"]["trim_status"] == "unconfirmed"
       and t03s["Tail Lights (pair, uncracked)"]["fits"] == "2003–2003")
 
+s05, s12 = parts(2005, "Ford", "Mustang", FWD), parts(2012, "Ford", "Mustang", FWD)
+check("§21 Mustang S197: pump + A/C per generation; Shaker 'if equipped' 2005-09; no fan row; lamps cut at the 2013 facelift",
+      s05["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2005–2009" and s12["A/C Compressor (clutch spins free)"]["fits"] == "2010–2014"
+      and s05["Shaker 500/1000 Amp + Subwoofer"]["trim_status"] == "unconfirmed" and "Shaker 500/1000 Amp + Subwoofer" not in s12
+      and "Radiator Fan Assembly" not in s05 and s12["Headlights (clear, non-hazed)"]["fits"] == "2010–2012")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
