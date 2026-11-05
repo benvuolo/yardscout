@@ -13919,6 +13919,25 @@ VPIC_TRANS_FIXES: list[tuple[str, str, int, int, str, str]] = [
 ]
 
 
+# vPIC cells whose transmission is a model-level default, not a fact about
+# each VIN: every decoded car on the lots (>= 5 per cell, 887 cars) comes back
+# "manual", yet EPA lists an automatic for the same year/model (and buyers
+# bought far more automatics). Found by scraper/manual_detect/BASELINE.md
+# (2026-11-05). For these the decoded transmission is dropped, so the app
+# shows no Manual badge (unknown is honest; a wrong "Manual" is not). Cars
+# that really are manual come back only through independent evidence.
+#   (make, model, first year, last year) as vPIC spells them
+VPIC_TRANS_DEFAULT_CELLS: list[tuple[str, str, int, int]] = [
+    ("HYUNDAI", "ELANTRA", 2008, 2008), ("HYUNDAI", "SONATA", 2008, 2008),
+    ("HYUNDAI", "ACCENT", 2008, 2008), ("HYUNDAI", "TIBURON", 2008, 2008),
+    ("CHEVROLET", "HHR", 2007, 2007), ("HONDA", "FIT", 2007, 2008),
+    ("HONDA", "CIVIC", 1986, 1986), ("KIA", "SPECTRA", 2008, 2008),
+    ("KIA", "RIO", 2008, 2008), ("DODGE", "NEON", 2002, 2002),
+    ("MERCEDES-BENZ", "SLK-CLASS", 1999, 2000), ("JEEP", "WRANGLER", 1988, 1988),
+    ("SATURN", "VUE", 2002, 2002), ("SATURN", "SL", 2001, 2002),
+]
+
+
 # Trim from the VIN itself, for makes whose model code (VIN positions 4-7
 # on Honda/Acura) names the trim while vPIC returns none. Only patterns the
 # manufacturer's own coding makes unambiguous; each row is (make, model,
@@ -13959,7 +13978,11 @@ def _correct_vpic(dec: dict | None, vin: str = "") -> dict | None:
     except ValueError:
         return dec
     out = dec
-    if dec.get("transmission"):
+    if dec.get("transmission") and any(
+            mk == c_mk and md == c_md and y0 <= yr <= y1
+            for c_mk, c_md, y0, y1 in VPIC_TRANS_DEFAULT_CELLS):
+        out = {**out, "transmission": "", "transmissionDistrusted": True}
+    if out.get("transmission"):
         for f_mk, f_md, y0, y1, wrong, right in VPIC_TRANS_FIXES:
             if mk == f_mk and md == f_md.upper() and y0 <= yr <= y1 and dec["transmission"] == wrong:
                 out = {**out, "transmission": right, "transmissionFixed": True}

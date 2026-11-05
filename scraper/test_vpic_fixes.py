@@ -35,11 +35,26 @@ for dec, why in (
     check(f"unchanged: {why}", js._correct_vpic(dec) == dec, str(js._correct_vpic(dec)))
 check("None passes through", js._correct_vpic(None) is None)
 
-# Against the real cache: every 2005 LR3 decode is corrected, nothing else changes.
+# Against the real cache: every 2005 LR3 decode is corrected, every decode in a
+# vPIC default cell loses its transmission, and nothing else changes.
 cache = json.load(gzip.open(Path(__file__).resolve().parent.parent / "docs" / "data" / "vin_decodes.json.gz"))
 changed = {vin for vin, d in cache.items() if isinstance(d, dict) and js._correct_vpic(d) != d}
 lr3_2005 = {vin for vin, d in cache.items() if isinstance(d, dict) and d.get("model") == "LR3" and d.get("modelYear") == "2005" and d.get("transmission")}
-check("real cache: exactly the 2005 LR3 decodes change", changed == lr3_2005 and len(changed) > 0, f"{len(changed)} vs {len(lr3_2005)}")
+
+
+def _in_default_cell(d):
+    try:
+        yr = int(str(d.get("modelYear") or "0")[:4])
+    except ValueError:
+        return False
+    mk, md = str(d.get("make") or "").upper(), str(d.get("model") or "").upper()
+    return bool(d.get("transmission")) and any(mk == a and md == b and y0 <= yr <= y1 for a, b, y0, y1 in js.VPIC_TRANS_DEFAULT_CELLS)
+
+
+defaults = {vin for vin, d in cache.items() if isinstance(d, dict) and _in_default_cell(d)}
+check("real cache: exactly the 2005 LR3 decodes and the default cells change", changed == lr3_2005 | defaults and len(lr3_2005) > 0, f"{len(changed)} vs {len(lr3_2005)}+{len(defaults)}")
+check("real cache: default cells only ever drop the transmission", all(js._correct_vpic(cache[v])["transmission"] == "" for v in defaults))
+print(f"  default-cell decodes whose transmission is dropped: {len(defaults)}")
 check("real cache: the reported car is among them", "SALAD25445A319797" in changed)
 
 # VIN-pattern trims
@@ -90,6 +105,21 @@ for vin, d in cache.items():
 check("real cache: no decode loses its vPIC trim", lost == 0)
 check("real cache: RSX and Camry decodes gain trims, nothing else", gained[("RSX", "Base")] > 0 and gained[("RSX", "Type-S")] > 0 and gained[("Camry", "Hybrid")] > 300 and gained[("Camry", "Gas")] > 2000 and all(m in ("RSX", "Camry") for m, _ in gained), str(dict(gained)))
 print("gained trims from VIN patterns:", dict(gained))
+
+
+# vPIC model-level transmission defaults (BASELINE.md 2026-11-05): dropped
+d = js._correct_vpic({"make": "HYUNDAI", "model": "Elantra", "modelYear": "2008", "transmission": "5-spd Manual/Standard", "trim": "GLS"}, "KMHDU46D08U000000")
+check("2008 Elantra vPIC 'manual' default is dropped", d["transmission"] == "" and d.get("transmissionDistrusted") is True, str(d))
+d = js._correct_vpic({"make": "HYUNDAI", "model": "Elantra", "modelYear": "2009", "transmission": "5-spd Manual/Standard"}, "")
+check("2009 Elantra outside the cell keeps its decode", d["transmission"] == "5-spd Manual/Standard", str(d))
+d = js._correct_vpic({"make": "HONDA", "model": "Fit", "modelYear": "2007", "transmission": "5-spd Manual/Standard"}, "")
+check("2007 Fit default dropped", d["transmission"] == "", str(d))
+d = js._correct_vpic({"make": "MERCEDES-BENZ", "model": "SLK-Class", "modelYear": "2000", "transmission": "5-spd Manual/Standard"}, "")
+check("2000 SLK default dropped", d["transmission"] == "", str(d))
+d = js._correct_vpic({"make": "HONDA", "model": "Civic", "modelYear": "2004", "transmission": "5-spd Manual/Standard"}, "")
+check("other Civic years untouched", d["transmission"] == "5-spd Manual/Standard", str(d))
+d = js._correct_vpic({"make": "LAND ROVER", "model": "LR3", "modelYear": "2005", "transmission": "5-spd Automatic"}, "")
+check("LR3 fix still applies", d["transmission"] == "6-spd Automatic", str(d))
 
 print("\n" + ("ALL PASS" if not failures else f"{len(failures)} FAILURES: {failures}"))
 sys.exit(1 if failures else 0)
