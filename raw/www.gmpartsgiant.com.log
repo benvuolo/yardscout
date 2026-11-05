@@ -134,3 +134,37 @@
 06:01:25 seg done tier=A Chevrolet Malibu [2014, 2015] seeds=[2015] records=1122 errors=8
 06:07:09 seg done tier=A Pontiac Grand Prix [2004, 2008] seeds=[2006] records=1143 errors=8
 06:07:09 time budget reached records=1143
+06:07:18 start site=www.gmpartsgiant.com segments=206 tiers=['A', 'B']
+06:07:18 seg done tier=A Chevrolet Cruze [1986, 2014] seeds=[2014] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Silverado 1500 [1999, 2023] seeds=[2000] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Equinox [2010, 2015] seeds=[2012] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Impala [2006, 2011] seeds=[2008] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Malibu [2008, 2012] seeds=[2012] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Traverse [2008, 2017] seeds=[2011] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Trailblazer [2002, 2009] seeds=[2004] records=1143 errors=8
+06:07:18 seg done tier=A GMC Acadia [2007, 2016] seeds=[2012] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Suburban 1500 [1987, 2018] seeds=[2002] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Cobalt [2002, 2010] seeds=[2007] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Tahoe [2000, 2006] seeds=[2002] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Sonic [1982, 2020] seeds=[2013] records=1143 errors=8
+06:07:18 seg done tier=A GMC Sierra 1500 [1988, 2020] seeds=[2006] records=1143 errors=8
+06:07:18 seg done tier=A Cadillac CTS [2003, 2019] seeds=[2008] records=1143 errors=8
+06:07:18 seg done tier=A Pontiac G6 [2004, 2010] seeds=[2008] records=1143 errors=8
+06:07:18 seg done tier=A Buick Enclave [2008, 2017] seeds=[2011] records=1143 errors=8
+06:07:18 seg done tier=A GMC Terrain [2010, 2017] seeds=[2012] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Impala [1960, 2005] seeds=[2004] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet HHR [2006, 2011] seeds=[2008] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Equinox [2005, 2009] seeds=[2005] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet S-10 [1994, 2004] seeds=[2000] records=1143 errors=8
+06:07:18 seg done tier=A Buick LeSabre [2000, 2010] seeds=[2003] records=1143 errors=8
+06:07:18 seg done tier=A GMC Envoy [1998, 2009] seeds=[2003] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Tahoe [2007, 2014] seeds=[2007] records=1143 errors=8
+06:07:18 seg done tier=A Chevrolet Malibu [2014, 2015] seeds=[2015] records=1143 errors=8
+06:07:18 seg done tier=A Pontiac Grand Prix [2004, 2008] seeds=[2006] records=1143 errors=8
+06:17:19 seg done tier=A Chevrolet Cavalier [1983, 2005] seeds=[2003] records=1191 errors=8
+06:23:43 seg done tier=A Buick Century [1997, 2005] seeds=[2003] records=1216 errors=8
+06:27:27 seg done tier=A Chevrolet Impala [2012, 2013] seeds=[2012] records=1225 errors=8
+06:33:43 nav-fail Buick Lucerne 2012: ValueError: no 2012 catalog for Buick Lucerne (buick-['lucerne'])
+06:33:43 seg done tier=A Buick Lucerne [2006, 2012] seeds=[2007, 2012] records=1250 errors=9
+06:45:38 seg done tier=A GMC Yukon [2000, 2006] seeds=[2003] records=1267 errors=9
+06:45:38 time budget reached records=1267
