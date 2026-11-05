@@ -182,6 +182,7 @@ check("sharedWith strings are single-line", not gated_copies, str(gated_copies[:
 import itertools
 import json
 import os
+import re
 import random
 
 EF = js.ENGINE_FAMILIES
@@ -1103,6 +1104,20 @@ check("P0.5 merge: 2011 Sierra Denali 1500 (6.0L, maybe 2-mode) alternator is Li
                   (2011, "GMC", "Sierra Denali 1500"), "6.0L 8-cyl") == "likely")
 check("P0.5: no ambig app is also sole (payload)",
       not [a for f in _pl.values() for a in f["apps"] if a[4] and a[5]])
+# The ambig flag is per app, so its note shows on EVERY engine-kind category
+# (alternator, starter, ignition coils, intake manifold, engine assembly) in
+# the "Your car:" header and on each donor row. A hybrid note must give a
+# reason that holds for all of them, not only the charging/starting one.
+_hyb_note_re = re.compile(r"ybrid|Energi|eAssist|Green Line")
+_eng_cats = [c for c, pc in js.INTERCHANGE_PART_CATEGORIES.items() if pc["kind"] == "engine"]
+_narrow = sorted({a[5] for f in _pl.values() for a in f["apps"]
+                  if a[5] and _hyb_note_re.search(a[5])
+                  and "engine parts can differ" not in a[5]})
+check("P0.5 review: hybrid ambig notes hold for every engine category "
+      f"({', '.join(_eng_cats)})", not _narrow, str(_narrow[:3]))
+check("P0.5 review: every payload family answers those categories (so the note shows on each)",
+      all(set(_eng_cats) <= set(f["parts"]) for f in _pl.values()
+          if any(a[5] and _hyb_note_re.search(a[5]) for a in f["apps"])))
 
 # §23.6: "Silverado*"/"Sierra*" prefix apps used to catch HD trucks (6.6
 # Duramax, 8.1, HD 6.0) and 1999-2000 GMT400 "Classic" trucks.
