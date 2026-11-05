@@ -28,3 +28,19 @@
 09:16:46 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005, 2008] records=583 errors=1
 09:29:02 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=662 errors=1
 09:29:02 time budget reached records=662
+09:29:10 start site=www.subarupartsdeal.com segments=25 tiers=['A', 'B']
+09:29:10 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=662 errors=1
+09:29:10 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=662 errors=1
+09:29:10 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=662 errors=1
+09:29:10 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=662 errors=1
+09:29:10 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=662 errors=1
+09:29:10 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=662 errors=1
+09:29:10 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=662 errors=1
+09:29:10 seg done tier=A Subaru Legacy [2010, 2012] seeds=[2011] records=662 errors=1
+09:29:10 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005] records=662 errors=1
+09:29:10 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=662 errors=1
+09:36:46 nav-fail Subaru Forester 1989: ValueError: no 1989 catalog for Subaru Forester (subaru-['forester'])
+09:36:46 seg done tier=A Subaru Forester [1981, 2002] seeds=[2001, 1989] records=704 errors=2
+09:44:06 seg done tier=A Subaru Forester [2014, 2018] seeds=[2014] records=746 errors=2
+10:15:47 seg done tier=A Subaru Legacy [1990, 1999] seeds=[1999, 1992] records=944 errors=2
+10:15:47 time budget reached records=944
