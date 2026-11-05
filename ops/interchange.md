@@ -254,3 +254,13 @@ Replaced By, Replaces, every fitment row in order incl. the rows behind
   follows per-trim catalogs (first + last trim), takes callable rules
   (rule(row, text)) and a head_fn hook for sites whose group text is an
   illustration label (GM).
+- Full-pass size (listing-only count, 2026-11-05 01:25 UTC): alternators 56
+  make pages + 715 model pages; starters 69 make + 802 model pages. Make-page
+  pagination tops out at 6 pages (72 items) for the biggest makes, so the
+  model pages are what reach the full catalog. Product pages: est. 1-3k per
+  category (de-duplicated by URL). Total est. 3.5k-7.5k requests; observed
+  ~8-10 s per new request (4 s gap + server time), so ~8-20 h, i.e. ~16-40
+  thirty-minute slices. Run: `run.py --site www.dbelectrical.com --minutes 28`
+  (exit 10 = resume, 11 = network pause, 3 = blocked, final). Persist
+  `aftermarket/raw/` between slices (like `raw/` on oem-raw).
+- Stopped 2026-11-05 ~01:30 UTC. Waiting on the hub for the Actions job.
