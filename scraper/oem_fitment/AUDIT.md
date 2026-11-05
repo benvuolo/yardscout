@@ -83,6 +83,11 @@ judged correct: BMW headlights that "do not contain" covers or modules,
 mirrors "w/o glass", trunk-lid/side-panel tail lamps, "Drive for window
 lifter"; GM "(INCLUDES n-m)" assemblies, "DOOR LOCK & SIDE WINDOW" switches.
 Real C: 0.
+03:23-03:26 checkpoints: Hyundai 582, Ford 866, Jeep 959 records; 0 E. The
+new C hits are Hyundai fit notes ("O/S RR VIEW MRR LABEL", "SIDE REPEATER
+LAMP", "ANTI-FOG", "W/ OIL-SEPARATOR", "LED(W/BULB T/SIGNAL)"), door
+modules (P1, hub-decided) and Ford AE8Z-9H307-H "Kit" (base 9H307, "Fuel
+Pump/Sending Unit"). Real C: 0.
 
 The auditor's first pass on Honda, Acura and BMW reported 100% E. That was
 the auditor: those modules declare `trim_col` ("Body & Trim") and
