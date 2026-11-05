@@ -121,7 +121,60 @@ def _robots_ok(url: str) -> bool:
         rp = urllib.robotparser.RobotFileParser()
         rp.parse(body.splitlines())
         _robots[u.netloc] = rp
-    return rp.can_fetch(UA, url) and rp.can_fetch("*", url)
+    # urllib.robotparser keeps only the first "User-agent: *" group and
+    # ignores * / $ wildcards, so it can allow paths a site disallows. Both
+    # readings must allow the URL (the stricter one wins).
+    return rp.can_fetch(UA, url) and rp.can_fetch("*", url) and rfc9309_allows(_robots_body(u.netloc), url)
+
+
+def _robots_body(netloc: str) -> str:
+    cp = CACHE / netloc / "robots.txt"
+    return cp.read_text(errors="ignore") if cp.exists() else ""
+
+
+def _rfc_rules(body: str) -> list[tuple[str, bool]]:
+    """(pattern, allow) from every group naming "*" or our UA token, merged
+    (RFC 9309 section 2.2.1), in file order."""
+    ours = "yardscout-research"
+    rules: list[tuple[str, bool]] = []
+    agents: list[str] = []
+    in_rules = False
+    for line in body.splitlines():
+        line = line.split("#", 1)[0].strip()
+        if ":" not in line:
+            continue
+        k, v = (s.strip() for s in line.split(":", 1))
+        k = k.lower()
+        if k == "user-agent":
+            if in_rules:
+                agents, in_rules = [], False
+            agents.append(v.lower())
+        elif k in ("allow", "disallow"):
+            in_rules = True
+            if v and any(a in ("*", ours) for a in agents):
+                rules.append((v, k == "allow"))
+        else:
+            in_rules = in_rules or bool(agents)
+    return rules
+
+
+def _rfc_match_len(pattern: str, path: str) -> int:
+    rx = "^" + re.escape(pattern).replace(r"\*", ".*")
+    if rx.endswith(r"\$"):
+        rx = rx[:-2] + "$"
+    return len(pattern) if re.match(rx, path) else -1
+
+
+def rfc9309_allows(body: str, url: str) -> bool:
+    """Longest matching rule wins; Allow wins a tie; no match = allowed."""
+    u = urllib.parse.urlsplit(url)
+    path = (u.path or "/") + ("?" + u.query if u.query else "")
+    best, allow = -1, True
+    for pat, is_allow in _rfc_rules(body):
+        n = _rfc_match_len(pat, path)
+        if n > best or (n == best and is_allow):
+            best, allow = n, is_allow
+    return allow
 
 
 def _robots_delay(netloc: str) -> float:
