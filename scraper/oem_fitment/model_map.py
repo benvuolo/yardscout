@@ -94,6 +94,31 @@ def inventory_counts(inv: dict) -> Counter:
     return Counter((r[3], r[4]) for r in inv["vehicles"])
 
 
+# M6: at most this share of a target's cached vPIC decodes may name another make
+M6_MAX_MAKE_MISMATCH = 0.02
+
+
+def vpic_counts(inv: dict) -> dict:
+    """(make, model) -> Counter(decoded, make_mismatch, gas, hybrid) over the
+    published vpic block ([trim, quality, series, drive, mismatch])."""
+    per_t: dict = defaultdict(Counter)
+    vrows = inv["vehicles"]
+    for k, v in (inv.get("vpic") or {}).items():
+        try:
+            r = vrows[int(k)]
+        except (ValueError, IndexError):
+            continue
+        c = per_t[(r[3], r[4])]
+        c["decoded"] += 1
+        if v[4] and re.search(r"decodes as [A-Z][a-z]", v[4]) and not re.search(r"decodes as \d{4}", v[4]):
+            c["make_mismatch"] += 1
+        if (v[0] or "").strip().lower() == "gas":
+            c["gas"] += 1
+        if "hybrid" in (v[0] or "").lower() or "hybrid" in (v[2] or "").lower():
+            c["hybrid"] += 1
+    return per_t
+
+
 def validate(mm: ModelMap, inv: dict | None, js, namespaces: dict, catalog_years: dict | None = None):
     """M1-M10. Returns (errors, warnings, report). `js` is junkyard_scraper
     (normalize_make, normalize_model, _squash_model, _app_matches).
@@ -171,27 +196,14 @@ def validate(mm: ModelMap, inv: dict | None, js, namespaces: dict, catalog_years
                               f"catalog {sorted(hit)} but is neither a target nor excluded")
     # M6 VIN agreement (partial: the published vpic block has no decoded
     # model, only [trim, quality, series, drive, mismatch])
-    vp = inv.get("vpic") or {}
-    per_t = defaultdict(lambda: Counter())
+    per_t = vpic_counts(inv)
     vrows = inv["vehicles"]
-    for k, v in vp.items():
-        try:
-            r = vrows[int(k)]
-        except (ValueError, IndexError):
-            continue
-        per_t[(r[3], r[4])]["decoded"] += 1
-        if v[4] and re.search(r"decodes as [A-Z][a-z]", v[4]) and not re.search(r"decodes as \d{4}", v[4]):
-            per_t[(r[3], r[4])]["make_mismatch"] += 1
-        if (v[0] or "").strip().lower() == "gas":
-            per_t[(r[3], r[4])]["gas"] += 1
-        if "hybrid" in (v[0] or "").lower() or "hybrid" in (v[2] or "").lower():
-            per_t[(r[3], r[4])]["hybrid"] += 1
     m6 = {}
     for t in targets:
         c = per_t.get((t.make, t.model), Counter())
         if c["decoded"]:
             share = c["make_mismatch"] / c["decoded"]
-            if share > 0.02:
+            if share > M6_MAX_MAKE_MISMATCH:
                 errors.append(f"M6 {t.make} {t.model}: {share:.1%} of decodes name another make")
         if t.trims != "*" and any(p.lower().startswith("hybrid") for p in t.trims) and c["decoded"]:
             gas = c["gas"] / c["decoded"]
@@ -225,6 +237,175 @@ def validate(mm: ModelMap, inv: dict | None, js, namespaces: dict, catalog_years
     return errors, warns, report
 
 
+_SERIES_RX = re.compile(r"\b(1500|2500|3500|hd|xl|esv|ext|ld|heavy duty|super duty)\b", re.I)
+_HYBRID_RX = re.compile(r"\bhybrid\b", re.I)
+
+
+def draft_identity(ns: str, catalog_models: Counter, inv: dict | None, js, mm: ModelMap, namespaces: dict,
+                   raw_label: str) -> dict:
+    """A deterministic identity draft for catalog models with no entry yet
+    (§6 proposals; a human merges it with `model_map.py merge`). One rule,
+    the one the committed entries follow:
+
+    - an entry only where normalize_make / normalize_model turn the printed
+      catalog name into a canonical feed (make, model) that has cars on the
+      lots, with trims "*" (the full catalog trim universe applies);
+    - nothing where two catalog names land on one feed model (M8 needs a
+      reviewed `merge`), where another feed model squashes to the same key
+      (M3), or where the feed model is already some entry's target;
+    - every feed model that would then fall under a mapped catalog squash
+      (M5) is excluded with a reason: no claims until a reviewed entry;
+    - a target whose feed name the feed also splits by series (Silverado /
+      Silverado 1500 / 2500HD) gets `ambig`: Likely-only, because the
+      catalog prints one model with the series only in its option column.
+
+    Returns {"entries": [...], "exclude": {...}, "skipped": [...]}. It
+    never edits an existing entry or exclusion."""
+    if inv is None:
+        return {"entries": [], "exclude": {}, "skipped": [{"why": "inventory_live.json absent"}]}
+    makes = set(namespaces[ns]["makes"])
+    counts = inventory_counts(inv)
+    inv_date = str(inv.get("scrapedAt") or "")[:10]
+    feed_by_make: dict = defaultdict(dict)
+    for (mk, md), n in counts.items():
+        feed_by_make[mk][md] = n
+    existing_targets = {(t.ns, t.make, t.model) for ts in mm.by_cat.values() for t in ts}
+    vp = vpic_counts(inv)
+    skipped, by_target = [], defaultdict(list)
+    for (cmk, cmd), nrows in sorted(catalog_models.items()):
+        if cmk not in makes or mm.is_mapped_catalog(ns, cmk, cmd) or mm.excluded(ns, cmk, cmd):
+            continue
+        mk = js.normalize_make(cmk, cmd)
+        md = js.normalize_model(cmd, mk)
+        base = {"cat_make": cmk, "cat_model": cmd, "feed": [mk, md]}
+        if mk not in makes:
+            skipped.append({**base, "why": "normalized make outside the namespace"})
+            continue
+        n = counts.get((mk, md), 0)
+        if n == 0:
+            skipped.append({**base, "why": "no feed car under the canonical name"})
+            continue
+        if js.normalize_make(mk, md) != mk or js.normalize_model(md, mk) != md:
+            skipped.append({**base, "why": "canonical name does not normalize to itself (M1)"})
+            continue
+        sq = js._squash_model(md, mk)
+        clash = sorted(m for m in feed_by_make[mk] if m != md and js._squash_model(m, mk) == sq)
+        if clash:
+            skipped.append({**base, "why": f"feed models {clash} share the squash key {sq!r} (M3)"})
+            continue
+        if (ns, mk, md) in existing_targets:
+            skipped.append({**base, "why": "feed model already fed by another catalog model (merge needs review)"})
+            continue
+        vc = vp.get((mk, md)) or Counter()
+        if vc["decoded"] and vc["make_mismatch"] / vc["decoded"] > M6_MAX_MAKE_MISMATCH:
+            skipped.append({**base, "why": f"{vc['make_mismatch']}/{vc['decoded']} vPIC decodes name another "
+                                           f"make (M6 over {M6_MAX_MAKE_MISMATCH:.0%})"})
+            continue
+        by_target[(mk, md)].append((cmk, cmd, nrows, n))
+    entries = []
+    for (mk, md), lst in sorted(by_target.items()):
+        if len(lst) > 1:
+            for cmk, cmd, _r, _n in lst:
+                skipped.append({"cat_make": cmk, "cat_model": cmd, "feed": [mk, md],
+                                "why": f"{len(lst)} catalog models land on one feed model (M8 needs a reviewed merge)"})
+            continue
+        cmk, cmd, nrows, n = lst[0]
+        entries.append({"ns": ns, "cat_make": cmk, "cat_model": cmd,
+                        "targets": [{"make": mk, "model": md, "trims": "*"}],
+                        "basis": f"catalog prints '{cmd}' ({nrows} fitment rows, {raw_label}); normalize_model "
+                                 f"canon '{md}', {n} feed cars (inventory {inv_date}); identity draft"})
+    # M5: every feed model of the namespace makes under a mapped catalog
+    # squash (any make of the namespace, as validate() checks) is a target
+    # or excluded
+    all_entries = [e for e in mm.doc.get("entries") or [] if e["ns"] == ns] + entries
+    cat_sq = sorted({js._squash_model(e["cat_model"], e["cat_make"]) for e in all_entries} - {""})
+    tset = existing_targets | {(ns, t["make"], t["model"]) for e in entries for t in e["targets"]}
+    exclude, series_of = {}, defaultdict(list)
+    for (mk, md), n in sorted(counts.items()):
+        if mk not in makes or (ns, mk, md) in tset or mm.excluded(ns, mk, md):
+            continue
+        sq = js._squash_model(md, mk)
+        hit = [c for c in cat_sq if sq.startswith(c)]
+        if not hit:
+            continue
+        under = max(hit, key=len)
+        if _HYBRID_RX.search(md):
+            why = (f"hybrid sub-model; how this catalog files hybrids is not reviewed yet ({n} cars, under "
+                   f"catalog squash '{under}'); unmapped until a reviewed entry exists")
+        else:
+            why = (f"feed spelling or sub-model the catalog does not print as its own model ({n} cars, under "
+                   f"catalog squash '{under}'); unmapped until a reviewed entry exists")
+        exclude[f"{ns}|{mk}|{md}"] = why
+        if _SERIES_RX.search(md):
+            series_of[(mk, under)].append(md)
+    for e in entries:
+        t = e["targets"][0]
+        sub = sorted(series_of.get((t["make"], js._squash_model(t["model"], t["make"])), []))
+        if sub:
+            t["ambig"] = (f"feed splits '{t['model']}' by series ({', '.join(sub[:4])}); the catalog prints one "
+                          f"model with the series only in its option column")
+            e["basis"] += "; ambig (Likely only): the feed name is coarser than the series the catalog splits"
+    return {"entries": entries, "exclude": exclude, "skipped": skipped}
+
+
+def merge_draft(doc: dict, drafts: list[dict]) -> tuple[dict, list]:
+    """Add drafted entries and exclusions to a model-map document. Existing
+    entries and exclusions are never changed. Returns (doc, added keys)."""
+    out = json.loads(json.dumps(doc))
+    have = {(e["ns"], e["cat_make"], e["cat_model"]) for e in out["entries"]}
+    added = []
+    for d in drafts:
+        for e in d.get("entries") or []:
+            k = (e["ns"], e["cat_make"], e["cat_model"])
+            if k not in have:
+                out["entries"].append(e)
+                have.add(k)
+                added.append("|".join(k))
+        for k, why in sorted((d.get("exclude") or {}).items()):
+            if k not in out["exclude"]:
+                out["exclude"][k] = why
+                added.append("exclude " + k)
+    out["entries"].sort(key=lambda e: (e["ns"], e["cat_make"], e["cat_model"]))
+    return out, added
+
+
+def dump(doc: dict) -> str:
+    """model_map.json's own layout (indent 1, sorted keys, no ASCII escapes)."""
+    return json.dumps(doc, indent=1, sort_keys=True, ensure_ascii=False)
+
+
+def main(argv=None) -> int:
+    """python3 scraper/oem_fitment/model_map.py merge <map-proposals.json>...
+    Merges the identity drafts that `curate.py --propose-map` wrote, then
+    runs M1-M10; the file is written only when no error stands."""
+    import argparse
+    import sys
+    ap = argparse.ArgumentParser(description=main.__doc__.split("\n")[0])
+    ap.add_argument("cmd", choices=["merge", "check"])
+    ap.add_argument("proposals", nargs="*")
+    ap.add_argument("--map", default=str(MODEL_MAP_PATH))
+    ap.add_argument("--inventory", default=str(INVENTORY_PATH))
+    a = ap.parse_args(argv)
+    sys.path.insert(0, str(HERE))
+    sys.path.insert(0, str(HERE.parent))
+    import junkyard_scraper as js  # noqa: E402
+    import policy  # noqa: E402
+    doc = load(a.map)
+    added = []
+    if a.cmd == "merge":
+        drafts = [json.loads(Path(p).read_text()).get("draft") or {} for p in a.proposals]
+        doc, added = merge_draft(doc, drafts)
+    errs, warns, _rep = validate(ModelMap(doc), load_inventory(a.inventory), js, policy.NAMESPACES)
+    for e in errs:
+        print("ERROR", e, file=sys.stderr)
+    print(f"{len(added)} additions, {len(errs)} errors, {len(warns)} warnings", file=sys.stderr)
+    if errs:
+        return 2
+    if a.cmd == "merge":
+        Path(a.map).write_text(dump(doc))
+    return 0
+
+
 def propose(ns: str, catalog_models: Counter, inv: dict | None, js, mm: ModelMap) -> list[dict]:
     """Proposals for catalog models that have no entry: normalize_make /
     normalize_model plus same-squash-prefix feed neighbours. Humans decide."""
@@ -245,3 +426,7 @@ def propose(ns: str, catalog_models: Counter, inv: dict | None, js, mm: ModelMap
                     "proposed": {"make": mk, "model": md, "trims": "*"},
                     "feed_cars": counts.get((mk, md), 0), "squash_neighbours": neighbours[:10]})
     return out
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

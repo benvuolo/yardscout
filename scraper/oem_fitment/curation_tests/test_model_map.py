@@ -95,4 +95,54 @@ else:
     rc = C.main(["--ns", "toyota", "--raw-dir", tempfile.mkdtemp(), "--model-map", str(p),
                  "--out", tempfile.mkdtemp()])
     check("curate.py refuses to run on a model map error (exit 2)", rc == 2)
+
+# ---------------------------------------------- identity draft (§6 proposals)
+from collections import Counter  # noqa: E402
+
+feed = [("Chevrolet", "Cobalt", 3), ("Chevrolet", "Silverado", 2), ("Chevrolet", "Silverado 1500", 5),
+        ("Chevrolet", "Silverado 2500HD", 1), ("Chevrolet", "Malibu", 4), ("Chevrolet", "Malibu Hybrid", 1),
+        ("Chevrolet", "S-10", 2), ("Chevrolet", "Sonic", 10), ("Toyota", "T100", 2), ("Toyota", "T100 Pickup", 1)]
+rows = []
+for mk, md, n in feed:
+    rows += [[len(rows), "", 2008, mk, md, "", "", 0, 0, 0, 0] for _ in range(n)]
+sonic = [i for i, r in enumerate(rows) if r[4] == "Sonic"]
+syn_inv = {"scrapedAt": "2026-11-05T00:00:00Z", "vehicles": rows,
+           "vpic": {str(sonic[0]): ["LT", "usable", "", "", "VIN decodes as Pontiac G3"]}}
+empty = {"schema": 1, "entries": [], "exclude": {}}
+cat = Counter({("Chevrolet", "Cobalt"): 4, ("Chevrolet", "Silverado"): 9, ("Chevrolet", "Malibu"): 2,
+               ("Chevrolet", "Zzz"): 1, ("Chevrolet", "S10"): 1, ("Chevrolet", "S-10"): 1, ("Chevrolet", "Sonic"): 3})
+dg = MM.draft_identity("gm", cat, syn_inv, J, MM.ModelMap(empty), policy.NAMESPACES, "oem-raw@test")
+ent = {e["cat_model"]: e for e in dg["entries"]}
+why = {s["cat_model"]: s["why"] for s in dg["skipped"]}
+check("draft: an identity entry where the canonical feed model has cars (trims '*', basis names the raw)",
+      ent.get("Cobalt", {}).get("targets") == [{"make": "Chevrolet", "model": "Cobalt", "trims": "*"}]
+      and "oem-raw@test" in ent["Cobalt"]["basis"])
+check("draft: a feed name the feed splits by series is ambig (Likely only)",
+      "ambig" in ent.get("Silverado", {}).get("targets", [{}])[0])
+check("draft: series sub-models under the catalog name are excluded with a reason",
+      "gm|Chevrolet|Silverado 1500" in dg["exclude"] and "gm|Chevrolet|Silverado 2500HD" in dg["exclude"])
+check("draft: a hybrid sub-model under a mapped name is excluded as hybrid",
+      dg["exclude"].get("gm|Chevrolet|Malibu Hybrid", "").startswith("hybrid sub-model"))
+check("draft: no entry without a feed car", "Zzz" not in ent and "no feed car" in why.get("Zzz", ""))
+check("draft: two catalog names on one feed model are left unmapped (M8 needs a reviewed merge)",
+      "S10" not in ent and "S-10" not in ent and "M8" in why.get("S10", "") and "M8" in why.get("S-10", ""))
+check("draft: a target over the M6 make-mismatch share is left unmapped",
+      "Sonic" not in ent and "M6" in why.get("Sonic", ""), why.get("Sonic", ""))
+dt = MM.draft_identity("toyota", Counter({("Toyota", "T100"): 2}), syn_inv, J, MM.ModelMap(empty),
+                       policy.NAMESPACES, "oem-raw@test")
+check("draft: a squash key shared with another feed model is left unmapped (M3)",
+      not dt["entries"] and "M3" in dt["skipped"][0]["why"], str(dt["skipped"]))
+merged, added = MM.merge_draft(empty, [dg])
+e, _, _ = MM.validate(MM.ModelMap(merged), syn_inv, J, policy.NAMESPACES)
+check("draft: the merged draft passes M1-M10 on its inventory", e == [], str(e[:3]))
+held = {"schema": 1, "exclude": {"gm|Chevrolet|Malibu Hybrid": "hand reason"},
+        "entries": [{"ns": "gm", "cat_make": "Chevrolet", "cat_model": "Cobalt", "basis": "hand entry",
+                     "targets": [{"make": "Chevrolet", "model": "Cobalt", "trims": ["ls"]}]}]}
+merged2, _ = MM.merge_draft(held, [MM.draft_identity("gm", cat, syn_inv, J, MM.ModelMap(held), policy.NAMESPACES, "x"),
+                                   dg])
+check("merge never changes an existing entry or exclusion",
+      next(x for x in merged2["entries"] if x["cat_model"] == "Cobalt")["basis"] == "hand entry"
+      and merged2["exclude"]["gm|Chevrolet|Malibu Hybrid"] == "hand reason")
+check("model_map.json keeps its own layout (dump() round-trips the committed file)",
+      MM.dump(MM.load()) == MM.MODEL_MAP_PATH.read_text())
 done("test_model_map")

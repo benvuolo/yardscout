@@ -1454,6 +1454,12 @@ def main(argv=None) -> int:
         write_json(out / "_report" / f"{ns}.json", rep)
         (out / "_report" / f"{ns}.md").write_text(report_md(rep))
         write_json(out / "_report" / f"{ns}.completion.json", completion)
+        if a.propose_map:
+            # §6: proposals for humans; `model_map.py merge` applies the draft
+            label = f"oem-raw@{(src.commit or 'fixtures')[:7]}"
+            write_json(out / "_report" / f"{ns}.map-proposals.json", {
+                "ns": ns, "raw": doc["raw"]["commit"], "proposals": rep["map_proposals"],
+                "draft": MM.draft_identity(ns, cur.cat_models, inv, js, mm, policy.NAMESPACES, label)})
         if problems:
             print(f"[curate] {ns}: validator refused the groups file: {problems[:3]}", file=sys.stderr)
         elif a.write_groups:

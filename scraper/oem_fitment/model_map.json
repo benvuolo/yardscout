@@ -1,6 +1,45 @@
 {
  "entries": [
   {
+   "basis": "catalog prints 'Aerostar' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Aerostar', 75 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Aerostar",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Aerostar",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Bronco' (19 fitment rows, oem-raw@d1108d0); normalize_model canon 'Bronco', 54 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Bronco",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Bronco",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Bronco II' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'Bronco II', 53 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Bronco II",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Bronco II",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'C-Max' (3 fitment rows, oem-raw@94f03a3); normalize_model canon 'C-Max', 89 feed cars (inventory 2026-11-04)",
    "cat_make": "Ford",
    "cat_model": "C-Max",
@@ -9,6 +48,19 @@
     {
      "make": "Ford",
      "model": "C-Max",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Contour' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Contour', 71 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Contour",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Contour",
      "trims": "*"
     }
    ]
@@ -66,6 +118,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'E-Transit' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'E-Transit', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "E-Transit",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "E-Transit",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Edge' (102 fitment rows, oem-raw@94f03a3); normalize_model canon 'Edge', 1892 feed cars (inventory 2026-11-04)",
    "cat_make": "Ford",
    "cat_model": "Edge",
@@ -87,6 +152,19 @@
     {
      "make": "Ford",
      "model": "Escape",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Escort' (35 fitment rows, oem-raw@d1108d0); normalize_model canon 'Escort', 289 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Escort",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Escort",
      "trims": "*"
     }
    ]
@@ -197,6 +275,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'F-350' (33 fitment rows, oem-raw@d1108d0); normalize_model canon 'F-350', 325 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "F-350",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "F-350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'F-350 Super Duty' (11 fitment rows, oem-raw@94f03a3); normalize_model canon 'F-350 Super Duty', 243 feed cars (inventory 2026-11-04)",
    "cat_make": "Ford",
    "cat_model": "F-350 Super Duty",
@@ -249,6 +340,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'Five Hundred' (34 fitment rows, oem-raw@d1108d0); normalize_model canon 'Five Hundred', 409 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Five Hundred",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Five Hundred",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Flex' (3 fitment rows, oem-raw@94f03a3); normalize_model canon 'Flex', 558 feed cars (inventory 2026-11-04)",
    "cat_make": "Ford",
    "cat_model": "Flex",
@@ -275,6 +379,32 @@
    ]
   },
   {
+   "basis": "catalog prints 'Freestar' (28 fitment rows, oem-raw@d1108d0); normalize_model canon 'Freestar', 248 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Freestar",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Freestar",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Freestyle' (34 fitment rows, oem-raw@d1108d0); normalize_model canon 'Freestyle', 255 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Freestyle",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Freestyle",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Fusion' (164 fitment rows, oem-raw@94f03a3); normalize_model canon 'Fusion', 5082 feed cars (inventory 2026-11-04)",
    "cat_make": "Ford",
    "cat_model": "Fusion",
@@ -296,6 +426,45 @@
     {
      "make": "Ford",
      "model": "Mustang",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Police Interceptor Sedan' (27 fitment rows, oem-raw@d1108d0); normalize_model canon 'Police Interceptor Sedan', 16 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Police Interceptor Sedan",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Police Interceptor Sedan",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Police Interceptor Utility' (7 fitment rows, oem-raw@d1108d0); normalize_model canon 'Police Interceptor Utility', 50 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Police Interceptor Utility",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Police Interceptor Utility",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Probe' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Probe', 21 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Probe",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Probe",
      "trims": "*"
     }
    ]
@@ -340,6 +509,46 @@
    ]
   },
   {
+   "basis": "catalog prints 'Tempo' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Tempo', 18 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Tempo",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Tempo",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Thunderbird' (10 fitment rows, oem-raw@d1108d0); normalize_model canon 'Thunderbird', 136 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Thunderbird",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Thunderbird",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Transit' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'Transit', 17 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "Ford",
+   "cat_model": "Transit",
+   "ns": "ford",
+   "targets": [
+    {
+     "ambig": "feed splits 'Transit' by series (Transit-350 HD); the catalog prints one model with the series only in its option column",
+     "make": "Ford",
+     "model": "Transit",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Transit Connect' (5 fitment rows, oem-raw@94f03a3); normalize_model canon 'Transit Connect', 312 feed cars (inventory 2026-11-04)",
    "cat_make": "Ford",
    "cat_model": "Transit Connect",
@@ -348,6 +557,19 @@
     {
      "make": "Ford",
      "model": "Transit Connect",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Windstar' (20 fitment rows, oem-raw@d1108d0); normalize_model canon 'Windstar', 350 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Ford",
+   "cat_model": "Windstar",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Ford",
+     "model": "Windstar",
      "trims": "*"
     }
    ]
@@ -387,6 +609,19 @@
     {
      "make": "Lincoln",
      "model": "Continental",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'LS' (40 fitment rows, oem-raw@d1108d0); normalize_model canon 'LS', 210 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lincoln",
+   "cat_model": "LS",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Lincoln",
+     "model": "LS",
      "trims": "*"
     }
    ]
@@ -470,6 +705,45 @@
    ]
   },
   {
+   "basis": "catalog prints 'Mark VII' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Mark VII', 15 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lincoln",
+   "cat_model": "Mark VII",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Lincoln",
+     "model": "Mark VII",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Mark VIII' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Mark VIII', 30 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lincoln",
+   "cat_model": "Mark VIII",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Lincoln",
+     "model": "Mark VIII",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Nautilus' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'Nautilus', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lincoln",
+   "cat_model": "Nautilus",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Lincoln",
+     "model": "Nautilus",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Navigator' (17 fitment rows, oem-raw@94f03a3); normalize_model canon 'Navigator', 660 feed cars (inventory 2026-11-04)",
    "cat_make": "Lincoln",
    "cat_model": "Navigator",
@@ -504,6 +778,32 @@
     {
      "make": "Lincoln",
      "model": "Zephyr",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Capri' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Capri', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercury",
+   "cat_model": "Capri",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Mercury",
+     "model": "Capri",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cougar' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Cougar', 121 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercury",
+   "cat_model": "Cougar",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Mercury",
+     "model": "Cougar",
      "trims": "*"
     }
    ]
@@ -548,6 +848,32 @@
    ]
   },
   {
+   "basis": "catalog prints 'Montego' (34 fitment rows, oem-raw@d1108d0); normalize_model canon 'Montego', 110 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercury",
+   "cat_model": "Montego",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Mercury",
+     "model": "Montego",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Monterey' (28 fitment rows, oem-raw@d1108d0); normalize_model canon 'Monterey', 46 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercury",
+   "cat_model": "Monterey",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Mercury",
+     "model": "Monterey",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Mountaineer' (37 fitment rows, oem-raw@94f03a3); normalize_model canon 'Mountaineer', 429 feed cars (inventory 2026-11-04)",
    "cat_make": "Mercury",
    "cat_model": "Mountaineer",
@@ -561,6 +887,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'Mystique' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Mystique', 20 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercury",
+   "cat_model": "Mystique",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Mercury",
+     "model": "Mystique",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Sable' (11 fitment rows, oem-raw@94f03a3); normalize_model canon 'Sable', 317 feed cars (inventory 2026-11-04)",
    "cat_make": "Mercury",
    "cat_model": "Sable",
@@ -569,6 +908,3151 @@
     {
      "make": "Mercury",
      "model": "Sable",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Topaz' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Topaz', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercury",
+   "cat_model": "Topaz",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Mercury",
+     "model": "Topaz",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Tracer' (30 fitment rows, oem-raw@d1108d0); normalize_model canon 'Tracer', 27 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercury",
+   "cat_model": "Tracer",
+   "ns": "ford",
+   "targets": [
+    {
+     "make": "Mercury",
+     "model": "Tracer",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Allure' (100 fitment rows, oem-raw@d1108d0); normalize_model canon 'Allure', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Allure",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Allure",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cascada' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Cascada', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Cascada",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Cascada",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Century' (35 fitment rows, oem-raw@d1108d0); normalize_model canon 'Century', 730 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Century",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Century",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Electra' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Electra', 21 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Electra",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Electra",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Enclave' (39 fitment rows, oem-raw@d1108d0); normalize_model canon 'Enclave', 1160 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Enclave",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Enclave",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Encore' (11 fitment rows, oem-raw@d1108d0); normalize_model canon 'Encore', 312 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Encore",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Encore",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Encore GX' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Encore GX', 8 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Encore GX",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Encore GX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Envision' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Envision', 32 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Envision",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Envision",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Envista' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Envista', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Envista",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Envista",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'LaCrosse' (104 fitment rows, oem-raw@d1108d0); normalize_model canon 'LaCrosse', 1085 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "LaCrosse",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "LaCrosse",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Lesabre' (35 fitment rows, oem-raw@d1108d0); normalize_model canon 'LeSabre', 1158 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Lesabre",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "LeSabre",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Lucerne' (29 fitment rows, oem-raw@d1108d0); normalize_model canon 'Lucerne', 626 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Lucerne",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Lucerne",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Park Avenue' (11 fitment rows, oem-raw@d1108d0); normalize_model canon 'Park Avenue', 300 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Park Avenue",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Park Avenue",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Rainier' (57 fitment rows, oem-raw@d1108d0); normalize_model canon 'Rainier', 98 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Rainier",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Rainier",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Reatta' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Reatta', 10 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Reatta",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Reatta",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Regal' (73 fitment rows, oem-raw@d1108d0); normalize_model canon 'Regal', 596 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Regal",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Regal",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Rendezvous' (25 fitment rows, oem-raw@d1108d0); normalize_model canon 'Rendezvous', 396 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Rendezvous",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Rendezvous",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Riviera' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'Riviera', 54 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Riviera",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Riviera",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Roadmaster' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Roadmaster', 44 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Roadmaster",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Roadmaster",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Skyhawk' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Skyhawk', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Skyhawk",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Skyhawk",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Skylark' (4 fitment rows, oem-raw@d1108d0); normalize_model canon 'Skylark', 38 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Skylark",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Skylark",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Terraza' (22 fitment rows, oem-raw@d1108d0); normalize_model canon 'Terraza', 57 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Terraza",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Terraza",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Verano' (40 fitment rows, oem-raw@d1108d0); normalize_model canon 'Verano', 497 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Buick",
+   "cat_model": "Verano",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Buick",
+     "model": "Verano",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ATS' (18 fitment rows, oem-raw@d1108d0); normalize_model canon 'ATS', 148 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "ATS",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "ATS",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Allante' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'Allante', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "Allante",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "Allante",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Brougham' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Brougham', 22 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "Brougham",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "Brougham",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CT5' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'CT5', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "CT5",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "CT5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CT6' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'CT6', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "CT6",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "CT6",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CTS' (163 fitment rows, oem-raw@d1108d0); normalize_model canon 'CTS', 1186 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "CTS",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "CTS",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'DTS' (46 fitment rows, oem-raw@d1108d0); normalize_model canon 'DTS', 373 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "DTS",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "DTS",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Deville' (150 fitment rows, oem-raw@d1108d0); normalize_model canon 'DeVille', 925 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "Deville",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "DeVille",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ELR' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'ELR', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "ELR",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "ELR",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Eldorado' (12 fitment rows, oem-raw@d1108d0); normalize_model canon 'Eldorado', 161 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "Eldorado",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "Eldorado",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Escalade' (218 fitment rows, oem-raw@d1108d0); normalize_model canon 'Escalade', 553 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "Cadillac",
+   "cat_model": "Escalade",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Escalade' by series (Escalade ESV, Escalade EXT); the catalog prints one model with the series only in its option column",
+     "make": "Cadillac",
+     "model": "Escalade",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Fleetwood' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Fleetwood', 35 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "Fleetwood",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "Fleetwood",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SRX' (49 fitment rows, oem-raw@d1108d0); normalize_model canon 'SRX', 870 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "SRX",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "SRX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'STS' (9 fitment rows, oem-raw@d1108d0); normalize_model canon 'STS', 241 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "STS",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "STS",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Seville' (150 fitment rows, oem-raw@d1108d0); normalize_model canon 'Seville', 184 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "Seville",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "Seville",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'XLR' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'XLR', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "XLR",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "XLR",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'XT5' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'XT5', 13 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "XT5",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "XT5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'XTS' (7 fitment rows, oem-raw@d1108d0); normalize_model canon 'XTS', 81 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Cadillac",
+   "cat_model": "XTS",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Cadillac",
+     "model": "XTS",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Astro' (43 fitment rows, oem-raw@d1108d0); normalize_model canon 'Astro', 495 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Astro",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Astro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Avalanche' (144 fitment rows, oem-raw@d1108d0); normalize_model canon 'Avalanche', 481 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "Chevrolet",
+   "cat_model": "Avalanche",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Avalanche' by series (Avalanche 1500, Avalanche 2500); the catalog prints one model with the series only in its option column",
+     "make": "Chevrolet",
+     "model": "Avalanche",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Beretta' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Beretta', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Beretta",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Beretta",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Blazer' (88 fitment rows, oem-raw@d1108d0); normalize_model canon 'Blazer', 668 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Blazer",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Blazer",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Bolt EV' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Bolt EV', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Bolt EV",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Bolt EV",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C10' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'C10', 87 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "C10",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "C10",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C1500' (67 fitment rows, oem-raw@d1108d0); normalize_model canon 'C1500', 351 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "C1500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "C1500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C20' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'C20', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "C20",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "C20",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C2500' (70 fitment rows, oem-raw@d1108d0); normalize_model canon 'C2500', 84 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "C2500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "C2500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C30' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'C30', 10 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "C30",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "C30",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C3500' (70 fitment rows, oem-raw@d1108d0); normalize_model canon 'C3500', 51 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "C3500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "C3500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Camaro' (16 fitment rows, oem-raw@d1108d0); normalize_model canon 'Camaro', 584 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Camaro",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Camaro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Caprice' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Caprice', 107 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Caprice",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Caprice",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Captiva Sport' (20 fitment rows, oem-raw@d1108d0); normalize_model canon 'Captiva Sport', 300 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Captiva Sport",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Captiva Sport",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cavalier' (54 fitment rows, oem-raw@d1108d0); normalize_model canon 'Cavalier', 679 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Cavalier",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Cavalier",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Celebrity' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Celebrity', 11 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Celebrity",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Celebrity",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cobalt' (57 fitment rows, oem-raw@d1108d0); normalize_model canon 'Cobalt', 1615 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Cobalt",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Cobalt",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Colorado' (40 fitment rows, oem-raw@d1108d0); normalize_model canon 'Colorado', 596 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Colorado",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Colorado",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Corsica' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Corsica', 16 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Corsica",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Corsica",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Corvette' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Corvette', 77 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Corvette",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Corvette",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cruze' (103 fitment rows, oem-raw@d1108d0); normalize_model canon 'Cruze', 4313 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Cruze",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Cruze",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Equinox' (66 fitment rows, oem-raw@d1108d0); normalize_model canon 'Equinox', 4148 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Equinox",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Equinox",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Express' (116 fitment rows, oem-raw@d1108d0); normalize_model canon 'Express', 109 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "Chevrolet",
+   "cat_model": "Express",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Express' by series (Express 1500, Express 2500, Express 3500); the catalog prints one model with the series only in its option column",
+     "make": "Chevrolet",
+     "model": "Express",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'G10' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'G10', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "G10",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "G10",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'G20' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'G20', 66 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "G20",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "G20",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'G30' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'G30', 10 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "G30",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "G30",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'HHR' (32 fitment rows, oem-raw@d1108d0); normalize_model canon 'HHR', 988 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "HHR",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "HHR",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Impala' (176 fitment rows, oem-raw@d1108d0); normalize_model canon 'Impala', 4665 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Impala",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Impala",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K10' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'K10', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "K10",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "K10",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K1500' (67 fitment rows, oem-raw@d1108d0); normalize_model canon 'K1500', 312 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "K1500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "K1500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K20' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'K20', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "K20",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "K20",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K2500' (68 fitment rows, oem-raw@d1108d0); normalize_model canon 'K2500', 101 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "K2500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "K2500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K3500' (67 fitment rows, oem-raw@d1108d0); normalize_model canon 'K3500', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "K3500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "K3500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Lumina' (43 fitment rows, oem-raw@d1108d0); normalize_model canon 'Lumina', 200 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Lumina",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Lumina",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Malibu' (194 fitment rows, oem-raw@d1108d0); normalize_model canon 'Malibu', 5576 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Malibu",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Malibu",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Metro' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Metro', 35 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Metro",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Metro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Monte Carlo' (93 fitment rows, oem-raw@d1108d0); normalize_model canon 'Monte Carlo', 443 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Monte Carlo",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Monte Carlo",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Orlando' (10 fitment rows, oem-raw@d1108d0); normalize_model canon 'Orlando', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Orlando",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Orlando",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'P30' (12 fitment rows, oem-raw@d1108d0); normalize_model canon 'P30', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "P30",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "P30",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'R30' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'R30', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "R30",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "R30",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'R3500' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'R3500', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "R3500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "R3500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S10' (58 fitment rows, oem-raw@d1108d0); normalize_model canon 'S-10', 1069 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "Chevrolet",
+   "cat_model": "S10",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'S-10' by series (S10 EXT Cab); the catalog prints one model with the series only in its option column",
+     "make": "Chevrolet",
+     "model": "S-10",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Silverado' (242 fitment rows, oem-raw@d1108d0); normalize_model canon 'Silverado', 365 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "Chevrolet",
+   "cat_model": "Silverado",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Silverado' by series (Silverado 1500, Silverado 1500 Classic, Silverado 1500 Ext Cab, Silverado 1500 Hd Classic); the catalog prints one model with the series only in its option column",
+     "make": "Chevrolet",
+     "model": "Silverado",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sonic' (41 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sonic', 1235 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Sonic",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Sonic",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Spark' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Spark', 328 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Spark",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Spark",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Spark EV' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Spark EV', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Spark EV",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Spark EV",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sprint' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sprint', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Sprint",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Sprint",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Suburban' (331 fitment rows, oem-raw@d1108d0); normalize_model canon 'Suburban', 213 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "Chevrolet",
+   "cat_model": "Suburban",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Suburban' by series (Suburban 1500, Suburban 2500, Suburban Hd); the catalog prints one model with the series only in its option column",
+     "make": "Chevrolet",
+     "model": "Suburban",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Tahoe' (276 fitment rows, oem-raw@d1108d0); normalize_model canon 'Tahoe', 2701 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Tahoe",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Tahoe",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Trailblazer' (122 fitment rows, oem-raw@d1108d0); normalize_model canon 'Trailblazer', 1987 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "Chevrolet",
+   "cat_model": "Trailblazer",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Trailblazer' by series (Trailblazer EXT); the catalog prints one model with the series only in its option column",
+     "make": "Chevrolet",
+     "model": "Trailblazer",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Traverse' (51 fitment rows, oem-raw@d1108d0); normalize_model canon 'Traverse', 2132 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Traverse",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Traverse",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Trax' (10 fitment rows, oem-raw@d1108d0); normalize_model canon 'Trax', 282 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Trax",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Trax",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Uplander' (29 fitment rows, oem-raw@d1108d0); normalize_model canon 'Uplander', 381 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Uplander",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Uplander",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Venture' (9 fitment rows, oem-raw@d1108d0); normalize_model canon 'Venture', 223 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Venture",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Venture",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Volt' (4 fitment rows, oem-raw@d1108d0); normalize_model canon 'Volt', 96 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Chevrolet",
+   "cat_model": "Volt",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Volt",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Acadia' (48 fitment rows, oem-raw@d1108d0); normalize_model canon 'Acadia', 1763 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "Acadia",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "Acadia",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C1500' (68 fitment rows, oem-raw@d1108d0); normalize_model canon 'C1500', 65 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "C1500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "C1500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C2500' (71 fitment rows, oem-raw@d1108d0); normalize_model canon 'C2500', 11 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "C2500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "C2500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C3500' (71 fitment rows, oem-raw@d1108d0); normalize_model canon 'C3500', 6 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "C3500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "C3500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Canyon' (40 fitment rows, oem-raw@d1108d0); normalize_model canon 'Canyon', 134 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "Canyon",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "Canyon",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Envoy' (85 fitment rows, oem-raw@d1108d0); normalize_model canon 'Envoy', 856 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "GMC",
+   "cat_model": "Envoy",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Envoy' by series (Envoy Esv, Envoy Xl, Envoy Xl (Long W.B.)); the catalog prints one model with the series only in its option column",
+     "make": "GMC",
+     "model": "Envoy",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'G1500' (4 fitment rows, oem-raw@d1108d0); normalize_model canon 'G1500', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "G1500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "G1500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'G2500' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'G2500', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "G2500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "G2500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Jimmy' (49 fitment rows, oem-raw@d1108d0); normalize_model canon 'Jimmy', 178 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "Jimmy",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "Jimmy",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K1500' (68 fitment rows, oem-raw@d1108d0); normalize_model canon 'K1500', 11 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "K1500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "K1500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K2500' (69 fitment rows, oem-raw@d1108d0); normalize_model canon 'K2500', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "K2500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "K2500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K3500' (68 fitment rows, oem-raw@d1108d0); normalize_model canon 'K3500', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "K3500",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "K3500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S15' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'S-15', 18 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "S15",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "S-15",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Safari' (43 fitment rows, oem-raw@d1108d0); normalize_model canon 'Safari', 171 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "Safari",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "Safari",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Savana' (115 fitment rows, oem-raw@d1108d0); normalize_model canon 'Savana', 182 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "GMC",
+   "cat_model": "Savana",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Savana' by series (Savana 1500, Savana 2500, Savana 3500); the catalog prints one model with the series only in its option column",
+     "make": "GMC",
+     "model": "Savana",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sierra' (243 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sierra', 167 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "GMC",
+   "cat_model": "Sierra",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Sierra' by series (Sierra 1500, Sierra 1500 Classic, Sierra 2500, Sierra 2500 Hd Classic); the catalog prints one model with the series only in its option column",
+     "make": "GMC",
+     "model": "Sierra",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sonoma' (55 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sonoma', 222 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "Sonoma",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "Sonoma",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Suburban' (65 fitment rows, oem-raw@d1108d0); normalize_model canon 'Suburban', 24 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "GMC",
+   "cat_model": "Suburban",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Suburban' by series (Suburban 1500, Suburban 2500); the catalog prints one model with the series only in its option column",
+     "make": "GMC",
+     "model": "Suburban",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Terrain' (46 fitment rows, oem-raw@d1108d0); normalize_model canon 'Terrain', 1170 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "GMC",
+   "cat_model": "Terrain",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "GMC",
+     "model": "Terrain",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Yukon' (309 fitment rows, oem-raw@d1108d0); normalize_model canon 'Yukon', 1113 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "cat_make": "GMC",
+   "cat_model": "Yukon",
+   "ns": "gm",
+   "targets": [
+    {
+     "ambig": "feed splits 'Yukon' by series (Yukon XL, Yukon XL 1500, Yukon XL 2500, Yukon Xl 1500 Series); the catalog prints one model with the series only in its option column",
+     "make": "GMC",
+     "model": "Yukon",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'H2' (16 fitment rows, oem-raw@d1108d0); normalize_model canon 'H2', 11 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hummer",
+   "cat_model": "H2",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Hummer",
+     "model": "H2",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'H3' (16 fitment rows, oem-raw@d1108d0); normalize_model canon 'H3', 119 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hummer",
+   "cat_model": "H3",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Hummer",
+     "model": "H3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '88' (2 fitment rows, oem-raw@d1108d0); normalize_model canon '88', 15 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "88",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "88",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '98' (2 fitment rows, oem-raw@d1108d0); normalize_model canon '98', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "98",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "98",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Achieva' (10 fitment rows, oem-raw@d1108d0); normalize_model canon 'Achieva', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Achieva",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Achieva",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Alero' (28 fitment rows, oem-raw@d1108d0); normalize_model canon 'Alero', 210 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Alero",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Alero",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Aurora' (14 fitment rows, oem-raw@d1108d0); normalize_model canon 'Aurora', 48 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Aurora",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Aurora",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Bravada' (87 fitment rows, oem-raw@d1108d0); normalize_model canon 'Bravada', 93 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Bravada",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Bravada",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Calais' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Calais', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Calais",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Calais",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Custom Cruiser' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Custom Cruiser', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Custom Cruiser",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Custom Cruiser",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cutlass' (8 fitment rows, oem-raw@d1108d0); normalize_model canon 'Cutlass', 66 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Cutlass",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Cutlass",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Delta 88' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Delta 88', 25 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Delta 88",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Delta 88",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Firenza' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Firenza', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Firenza",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Firenza",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Intrigue' (10 fitment rows, oem-raw@d1108d0); normalize_model canon 'Intrigue', 90 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Intrigue",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Intrigue",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Silhouette' (10 fitment rows, oem-raw@d1108d0); normalize_model canon 'Silhouette', 53 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Silhouette",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Silhouette",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Toronado' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Toronado', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Oldsmobile",
+   "cat_model": "Toronado",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Oldsmobile",
+     "model": "Toronado",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '6000' (1 fitment rows, oem-raw@d1108d0); normalize_model canon '6000', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "6000",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "6000",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Aztek' (10 fitment rows, oem-raw@d1108d0); normalize_model canon 'Aztek', 70 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Aztek",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Aztek",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Bonneville' (20 fitment rows, oem-raw@d1108d0); normalize_model canon 'Bonneville', 192 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Bonneville",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Bonneville",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Fiero' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Fiero', 32 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Fiero",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Fiero",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Firebird' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Firebird', 160 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Firebird",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Firebird",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'G5' (46 fitment rows, oem-raw@d1108d0); normalize_model canon 'G5', 148 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "G5",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "G5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'G6' (56 fitment rows, oem-raw@d1108d0); normalize_model canon 'G6', 1183 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "G6",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "G6",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Grand Am' (45 fitment rows, oem-raw@d1108d0); normalize_model canon 'Grand Am', 516 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Grand Am",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Grand Am",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Grand Prix' (52 fitment rows, oem-raw@d1108d0); normalize_model canon 'Grand Prix', 959 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Grand Prix",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Grand Prix",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Montana' (26 fitment rows, oem-raw@d1108d0); normalize_model canon 'Montana', 122 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Montana",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Montana",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Pursuit' (51 fitment rows, oem-raw@d1108d0); normalize_model canon 'Pursuit', 14 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Pursuit",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Pursuit",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Solstice' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'Solstice', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Solstice",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Solstice",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sunbird' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sunbird', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Sunbird",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Sunbird",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sunfire' (31 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sunfire', 173 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Sunfire",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Sunfire",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Torrent' (10 fitment rows, oem-raw@d1108d0); normalize_model canon 'Torrent', 213 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Torrent",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Torrent",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Trans Sport' (8 fitment rows, oem-raw@d1108d0); normalize_model canon 'Trans Sport', 18 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Trans Sport",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Trans Sport",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Vibe' (58 fitment rows, oem-raw@d1108d0); normalize_model canon 'Vibe', 416 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Pontiac",
+   "cat_model": "Vibe",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Pontiac",
+     "model": "Vibe",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Astra' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Astra', 54 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "Astra",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "Astra",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Aura' (31 fitment rows, oem-raw@d1108d0); normalize_model canon 'Aura', 357 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "Aura",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "Aura",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Ion' (41 fitment rows, oem-raw@d1108d0); normalize_model canon 'ION', 550 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "Ion",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "ION",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'L100' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'L100', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "L100",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "L100",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'L200' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'L200', 33 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "L200",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "L200",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'L300' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'L300', 43 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "L300",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "L300",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'LS' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'LS', 36 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "LS",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "LS",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'LS1' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'LS1', 41 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "LS1",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "LS1",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'LW1' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'LW1', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "LW1",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "LW1",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'LW200' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'LW200', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "LW200",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "LW200",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Outlook' (19 fitment rows, oem-raw@d1108d0); normalize_model canon 'Outlook', 179 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "Outlook",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "Outlook",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Relay' (25 fitment rows, oem-raw@d1108d0); normalize_model canon 'Relay', 26 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "Relay",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "Relay",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sky' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sky', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "Sky",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "Sky",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Vue' (62 fitment rows, oem-raw@d1108d0); normalize_model canon 'VUE', 928 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Saturn",
+   "cat_model": "Vue",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Saturn",
+     "model": "VUE",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Accent' (244 fitment rows, oem-raw@d1108d0); normalize_model canon 'Accent', 1323 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Accent",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Accent",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Azera' (138 fitment rows, oem-raw@d1108d0); normalize_model canon 'Azera', 160 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Azera",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Azera",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Elantra' (351 fitment rows, oem-raw@d1108d0); normalize_model canon 'Elantra', 3174 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Elantra",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Elantra",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Elantra GT' (103 fitment rows, oem-raw@d1108d0); normalize_model canon 'Elantra GT', 111 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Elantra GT",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Elantra GT",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Elantra Touring' (13 fitment rows, oem-raw@d1108d0); normalize_model canon 'Elantra Touring', 56 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Elantra Touring",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Elantra Touring",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Entourage' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'Entourage', 51 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Entourage",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Entourage",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Equus' (8 fitment rows, oem-raw@d1108d0); normalize_model canon 'Equus', 31 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Equus",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Equus",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Excel' (4 fitment rows, oem-raw@d1108d0); normalize_model canon 'Excel', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Excel",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Excel",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Genesis' (143 fitment rows, oem-raw@d1108d0); normalize_model canon 'Genesis', 308 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Genesis",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Genesis",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Genesis Coupe' (39 fitment rows, oem-raw@d1108d0); normalize_model canon 'Genesis Coupe', 110 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Genesis Coupe",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Genesis Coupe",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Kona' (6 fitment rows, oem-raw@d1108d0); normalize_model canon 'Kona', 21 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Kona",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Kona",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Palisade' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Palisade', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Palisade",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Palisade",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Santa Fe' (198 fitment rows, oem-raw@d1108d0); normalize_model canon 'Santa Fe', 1253 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Santa Fe",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Santa Fe",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Santa Fe Sport' (62 fitment rows, oem-raw@d1108d0); normalize_model canon 'Santa Fe Sport', 123 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Santa Fe Sport",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Santa Fe Sport",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Santa Fe XL' (14 fitment rows, oem-raw@d1108d0); normalize_model canon 'Santa Fe XL', 21 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Santa Fe XL",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Santa Fe XL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Scoupe' (4 fitment rows, oem-raw@d1108d0); normalize_model canon 'Scoupe', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Scoupe",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Scoupe",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sonata' (274 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sonata', 4181 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Sonata",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Sonata",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sonata Hybrid' (49 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sonata Hybrid', 97 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Sonata Hybrid",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Sonata Hybrid",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Tiburon' (82 fitment rows, oem-raw@d1108d0); normalize_model canon 'Tiburon', 187 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Tiburon",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Tiburon",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Tucson' (239 fitment rows, oem-raw@d1108d0); normalize_model canon 'Tucson', 553 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Tucson",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Tucson",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Veloster' (67 fitment rows, oem-raw@d1108d0); normalize_model canon 'Veloster', 298 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Veloster",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Veloster",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Veloster N' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Veloster N', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Veloster N",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Veloster N",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Veracruz' (67 fitment rows, oem-raw@d1108d0); normalize_model canon 'Veracruz', 99 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "Veracruz",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "Veracruz",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'XG300' (33 fitment rows, oem-raw@d1108d0); normalize_model canon 'XG300', 6 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "XG300",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "XG300",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'XG350' (33 fitment rows, oem-raw@d1108d0); normalize_model canon 'XG350', 55 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Hyundai",
+   "cat_model": "XG350",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Hyundai",
+     "model": "XG350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Amanti' (57 fitment rows, oem-raw@d1108d0); normalize_model canon 'Amanti', 63 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Amanti",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Amanti",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Borrego' (78 fitment rows, oem-raw@d1108d0); normalize_model canon 'Borrego', 59 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Borrego",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Borrego",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cadenza' (74 fitment rows, oem-raw@d1108d0); normalize_model canon 'Cadenza', 76 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Cadenza",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Cadenza",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Forte' (431 fitment rows, oem-raw@d1108d0); normalize_model canon 'Forte', 1144 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Forte",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Forte",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Forte Koup' (360 fitment rows, oem-raw@d1108d0); normalize_model canon 'Forte Koup', 79 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Forte Koup",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Forte Koup",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K4' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'K4', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "K4",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "K4",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K5' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'K5', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "K5",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "K5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'K900' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'K900', 6 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "K900",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "K900",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Niro' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Niro', 20 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Niro",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Niro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Optima' (524 fitment rows, oem-raw@d1108d0); normalize_model canon 'Optima', 2196 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Optima",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Optima",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Optima Hybrid' (34 fitment rows, oem-raw@d1108d0); normalize_model canon 'Optima Hybrid', 32 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Optima Hybrid",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Optima Hybrid",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Rio' (314 fitment rows, oem-raw@d1108d0); normalize_model canon 'Rio', 709 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Rio",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Rio",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Rondo' (101 fitment rows, oem-raw@d1108d0); normalize_model canon 'Rondo', 165 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Rondo",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Rondo",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sedona' (263 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sedona', 619 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Sedona",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Sedona",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Seltos' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'Seltos', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Seltos",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Seltos",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sephia' (6 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sephia', 30 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Sephia",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Sephia",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sorento' (376 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sorento', 1359 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Sorento",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Sorento",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Soul' (178 fitment rows, oem-raw@d1108d0); normalize_model canon 'Soul', 1666 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Soul",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Soul",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Soul EV' (19 fitment rows, oem-raw@d1108d0); normalize_model canon 'Soul EV', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Soul EV",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Soul EV",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Spectra' (177 fitment rows, oem-raw@d1108d0); normalize_model canon 'Spectra', 510 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Spectra",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Spectra",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sportage' (357 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sportage', 635 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Sportage",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Sportage",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Stinger' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Stinger', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Stinger",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Stinger",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Telluride' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Telluride', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Kia",
+   "cat_model": "Telluride",
+   "ns": "hmg",
+   "targets": [
+    {
+     "make": "Kia",
+     "model": "Telluride",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CL' (203 fitment rows, oem-raw@d1108d0); normalize_model canon 'CL', 121 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "CL",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "CL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Integra' (154 fitment rows, oem-raw@d1108d0); normalize_model canon 'Integra', 98 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "Integra",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "Integra",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Legend' (223 fitment rows, oem-raw@d1108d0); normalize_model canon 'Legend', 46 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "Legend",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "Legend",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'MDX' (437 fitment rows, oem-raw@d1108d0); normalize_model canon 'MDX', 1161 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "MDX",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "MDX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'RDX' (216 fitment rows, oem-raw@d1108d0); normalize_model canon 'RDX', 184 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "RDX",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "RDX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'RL' (350 fitment rows, oem-raw@d1108d0); normalize_model canon 'RL', 234 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "RL",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "RL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'RLX' (14 fitment rows, oem-raw@d1108d0); normalize_model canon 'RLX', 8 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "RLX",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "RLX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'RSX' (107 fitment rows, oem-raw@d1108d0); normalize_model canon 'RSX', 122 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "RSX",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "RSX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'TL' (423 fitment rows, oem-raw@d1108d0); normalize_model canon 'TL', 1468 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "TL",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "TL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'TLX' (191 fitment rows, oem-raw@d1108d0); normalize_model canon 'TLX', 30 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "TLX",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "TLX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'TSX' (413 fitment rows, oem-raw@d1108d0); normalize_model canon 'TSX', 526 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "TSX",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "TSX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ZDX' (13 fitment rows, oem-raw@d1108d0); normalize_model canon 'ZDX', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Acura",
+   "cat_model": "ZDX",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Acura",
+     "model": "ZDX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Accord' (1249 fitment rows, oem-raw@d1108d0); normalize_model canon 'Accord', 8851 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Accord",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Accord",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Accord Hybrid' (75 fitment rows, oem-raw@d1108d0); normalize_model canon 'Accord Hybrid', 25 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Accord Hybrid",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Accord Hybrid",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CR-V' (516 fitment rows, oem-raw@d1108d0); normalize_model canon 'CR-V', 1804 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "CR-V",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "CR-V",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CR-Z' (6 fitment rows, oem-raw@d1108d0); normalize_model canon 'CR-Z', 31 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "CR-Z",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "CR-Z",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CRX' (19 fitment rows, oem-raw@d1108d0); normalize_model canon 'CRX', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "CRX",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "CRX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Civic' (1288 fitment rows, oem-raw@d1108d0); normalize_model canon 'Civic', 6515 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Civic",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Civic",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Crosstour' (54 fitment rows, oem-raw@d1108d0); normalize_model canon 'Crosstour', 52 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Crosstour",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Crosstour",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Del Sol' (35 fitment rows, oem-raw@d1108d0); normalize_model canon 'Del Sol', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Del Sol",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Del Sol",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Element' (120 fitment rows, oem-raw@d1108d0); normalize_model canon 'Element', 338 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Element",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Element",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Fit' (251 fitment rows, oem-raw@d1108d0); normalize_model canon 'Fit', 436 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Fit",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Fit",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'HR-V' (25 fitment rows, oem-raw@d1108d0); normalize_model canon 'HR-V', 28 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "HR-V",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "HR-V",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Insight' (131 fitment rows, oem-raw@d1108d0); normalize_model canon 'Insight', 120 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Insight",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Insight",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Odyssey' (589 fitment rows, oem-raw@d1108d0); normalize_model canon 'Odyssey', 3569 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Odyssey",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Odyssey",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Pilot' (434 fitment rows, oem-raw@d1108d0); normalize_model canon 'Pilot', 2076 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Pilot",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Pilot",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Prelude' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'Prelude', 69 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Prelude",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Prelude",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Ridgeline' (168 fitment rows, oem-raw@d1108d0); normalize_model canon 'Ridgeline', 229 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Honda",
+   "cat_model": "Ridgeline",
+   "ns": "honda",
+   "targets": [
+    {
+     "make": "Honda",
+     "model": "Ridgeline",
      "trims": "*"
     }
    ]
@@ -1800,6 +5284,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'G20' (67 fitment rows, oem-raw@d1108d0); normalize_model canon 'G20', 46 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Infiniti",
+   "cat_model": "G20",
+   "ns": "nissan",
+   "targets": [
+    {
+     "make": "Infiniti",
+     "model": "G20",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'G25' (35 fitment rows, oem-raw@94f03a3); normalize_model canon 'G25', 28 feed cars (inventory 2026-11-04)",
    "cat_make": "Infiniti",
    "cat_model": "G25",
@@ -1860,6 +5357,19 @@
     {
      "make": "Infiniti",
      "model": "I35",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'J30' (60 fitment rows, oem-raw@d1108d0); normalize_model canon 'J30', 21 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Infiniti",
+   "cat_model": "J30",
+   "ns": "nissan",
+   "targets": [
+    {
+     "make": "Infiniti",
+     "model": "J30",
      "trims": "*"
     }
    ]
@@ -2190,6 +5700,32 @@
    ]
   },
   {
+   "basis": "catalog prints 'Kicks' (5 fitment rows, oem-raw@d1108d0); normalize_model canon 'Kicks', 39 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Nissan",
+   "cat_model": "Kicks",
+   "ns": "nissan",
+   "targets": [
+    {
+     "make": "Nissan",
+     "model": "Kicks",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Leaf' (6 fitment rows, oem-raw@d1108d0); normalize_model canon 'Leaf', 83 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Nissan",
+   "cat_model": "Leaf",
+   "ns": "nissan",
+   "targets": [
+    {
+     "make": "Nissan",
+     "model": "Leaf",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Maxima' (51 fitment rows, oem-raw@94f03a3); normalize_model canon 'Maxima', 2282 feed cars (inventory 2026-11-04)",
    "cat_make": "Nissan",
    "cat_model": "Maxima",
@@ -2281,6 +5817,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'Stanza' (56 fitment rows, oem-raw@d1108d0); normalize_model canon 'Stanza', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Nissan",
+   "cat_model": "Stanza",
+   "ns": "nissan",
+   "targets": [
+    {
+     "make": "Nissan",
+     "model": "Stanza",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Titan' (2 fitment rows, oem-raw@94f03a3); normalize_model canon 'Titan', 758 feed cars (inventory 2026-11-04)",
    "cat_make": "Nissan",
    "cat_model": "Titan",
@@ -2320,6 +5869,149 @@
    ]
   },
   {
+   "basis": "catalog prints 'Baja' (141 fitment rows, oem-raw@d1108d0); normalize_model canon 'Baja', 18 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "Baja",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "Baja",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Crosstrek' (10 fitment rows, oem-raw@d1108d0); normalize_model canon 'Crosstrek', 33 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "Crosstrek",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "Crosstrek",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Forester' (177 fitment rows, oem-raw@d1108d0); normalize_model canon 'Forester', 1401 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "Forester",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "Forester",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Impreza' (179 fitment rows, oem-raw@d1108d0); normalize_model canon 'Impreza', 972 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "Impreza",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "Impreza",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Impreza WRX' (142 fitment rows, oem-raw@d1108d0); normalize_model canon 'Impreza WRX', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "Impreza WRX",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "Impreza WRX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Legacy' (688 fitment rows, oem-raw@d1108d0); normalize_model canon 'Legacy', 1147 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "Legacy",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "Legacy",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Outback' (560 fitment rows, oem-raw@d1108d0); normalize_model canon 'Outback', 1525 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "Outback",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "Outback",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SVX' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'SVX', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "SVX",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "SVX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Tribeca' (9 fitment rows, oem-raw@d1108d0); normalize_model canon 'Tribeca', 73 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "Tribeca",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "Tribeca",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'WRX' (12 fitment rows, oem-raw@d1108d0); normalize_model canon 'WRX', 11 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "WRX",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "WRX",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'XV Crosstrek' (30 fitment rows, oem-raw@d1108d0); normalize_model canon 'XV Crosstrek', 105 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Subaru",
+   "cat_model": "XV Crosstrek",
+   "ns": "subaru",
+   "targets": [
+    {
+     "make": "Subaru",
+     "model": "XV Crosstrek",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'CT200h' (2 fitment rows, oem-raw@94f03a3); normalize_model canon 'CT 200h', 9 feed cars (inventory 2026-11-04)",
    "cat_make": "Lexus",
    "cat_model": "CT200h",
@@ -2346,6 +6038,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'ES300h' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'ES 300h', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lexus",
+   "cat_model": "ES300h",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "ES 300h",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'ES330' (55 fitment rows, oem-raw@94f03a3); normalize_model canon 'ES 330', 241 feed cars (inventory 2026-11-04)",
    "cat_make": "Lexus",
    "cat_model": "ES330",
@@ -2354,6 +6059,19 @@
     {
      "make": "Lexus",
      "model": "ES 330",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ES350' (105 fitment rows, oem-raw@d1108d0); normalize_model canon 'ES 350', 262 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lexus",
+   "cat_model": "ES350",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "ES 350",
      "trims": "*"
     }
    ]
@@ -2380,6 +6098,19 @@
     {
      "make": "Lexus",
      "model": "GS 350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'GS400' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'GS 400', 24 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lexus",
+   "cat_model": "GS400",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "GS 400",
      "trims": "*"
     }
    ]
@@ -2450,6 +6181,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'IS200t' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'IS 200t', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lexus",
+   "cat_model": "IS200t",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "IS 200t",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'IS250' (118 fitment rows, oem-raw@94f03a3); normalize_model canon 'IS 250', 269 feed cars (inventory 2026-11-04)",
    "cat_make": "Lexus",
    "cat_model": "IS250",
@@ -2458,6 +6202,19 @@
     {
      "make": "Lexus",
      "model": "IS 250",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'IS300' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'IS 300', 58 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lexus",
+   "cat_model": "IS300",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "IS 300",
      "trims": "*"
     }
    ]
@@ -2476,6 +6233,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'LS430' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'LS 430', 110 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lexus",
+   "cat_model": "LS430",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "LS 430",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'LS460' (2 fitment rows, oem-raw@94f03a3); normalize_model canon 'LS 460', 86 feed cars (inventory 2026-11-04)",
    "cat_make": "Lexus",
    "cat_model": "LS460",
@@ -2484,6 +6254,19 @@
     {
      "make": "Lexus",
      "model": "LS 460",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'RC350' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'RC 350', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lexus",
+   "cat_model": "RC350",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "RC 350",
      "trims": "*"
     }
    ]
@@ -2536,6 +6319,32 @@
     {
      "make": "Lexus",
      "model": "RX 400h",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'RX450h' (260 fitment rows, oem-raw@d1108d0); normalize_model canon 'RX 450h', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lexus",
+   "cat_model": "RX450h",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "RX 450h",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SC430' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'SC 430', 16 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Lexus",
+   "cat_model": "SC430",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "SC 430",
      "trims": "*"
     }
    ]
@@ -2695,6 +6504,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'Cressida' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Cressida', 10 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Toyota",
+   "cat_model": "Cressida",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Toyota",
+     "model": "Cressida",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Echo' (7 fitment rows, oem-raw@94f03a3); normalize_model canon 'Echo', 150 feed cars (inventory 2026-11-04)",
    "cat_make": "Toyota",
    "cat_model": "Echo",
@@ -2747,6 +6569,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'MR2' (4 fitment rows, oem-raw@d1108d0); normalize_model canon 'MR2', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Toyota",
+   "cat_model": "MR2",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Toyota",
+     "model": "MR2",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'MR2 Spyder' (2 fitment rows, oem-raw@94f03a3); normalize_model canon 'MR2 Spyder', 2 feed cars (inventory 2026-11-04)",
    "cat_make": "Toyota",
    "cat_model": "MR2 Spyder",
@@ -2794,6 +6629,32 @@
     {
      "make": "Toyota",
      "model": "Paseo",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Pickup' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Pickup', 85 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Toyota",
+   "cat_model": "Pickup",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Toyota",
+     "model": "Pickup",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Previa' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Previa', 41 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Toyota",
+   "cat_model": "Previa",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Toyota",
+     "model": "Previa",
      "trims": "*"
     }
    ]
@@ -2916,6 +6777,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'Supra' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'Supra', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Toyota",
+   "cat_model": "Supra",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Toyota",
+     "model": "Supra",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Tacoma' (3 fitment rows, oem-raw@94f03a3); normalize_model canon 'Tacoma', 234 feed cars (inventory 2026-11-04)",
    "cat_make": "Toyota",
    "cat_model": "Tacoma",
@@ -2929,6 +6803,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'Tercel' (4 fitment rows, oem-raw@d1108d0); normalize_model canon 'Tercel', 88 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Toyota",
+   "cat_model": "Tercel",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Toyota",
+     "model": "Tercel",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Tundra' (3 fitment rows, oem-raw@94f03a3); normalize_model canon 'Tundra', 471 feed cars (inventory 2026-11-04)",
    "cat_make": "Toyota",
    "cat_model": "Tundra",
@@ -2937,6 +6824,19 @@
     {
      "make": "Toyota",
      "model": "Tundra",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Van' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Van', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Toyota",
+   "cat_model": "Van",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Toyota",
+     "model": "Van",
      "trims": "*"
     }
    ]
@@ -2970,10 +6870,13 @@
  ],
  "exclude": {
   "ford|Ford|Aviator": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'aviator'); unmapped until a reviewed entry exists",
+  "ford|Ford|Bronco Sport": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'bronco'); unmapped until a reviewed entry exists",
   "ford|Ford|C-Max Energi": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash 'cmax'); unmapped until a reviewed entry exists",
   "ford|Ford|C-Max Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (52 cars, under catalog squash 'cmax'); unmapped until a reviewed entry exists",
   "ford|Ford|E-350/E-350 Super Duty": "feed has no 'E-350/E-350 Super Duty'; feed splits E-350 spellings",
   "ford|Ford|Escape Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (118 cars, under catalog squash 'escape'); unmapped until a reviewed entry exists",
+  "ford|Ford|Escort Wagon": "feed spelling or sub-model the catalog does not print as its own model (9 cars, under catalog squash 'escort'); unmapped until a reviewed entry exists",
+  "ford|Ford|Escort ZX2": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'escort'); unmapped until a reviewed entry exists",
   "ford|Ford|Expedition EL": "feed spelling or sub-model the catalog does not print as its own model (111 cars, under catalog squash 'expedition'); unmapped until a reviewed entry exists",
   "ford|Ford|Expedition MAX": "feed spelling or sub-model the catalog does not print as its own model (26 cars, under catalog squash 'expedition'); unmapped until a reviewed entry exists",
   "ford|Ford|F-150 EXT Cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'f150'); unmapped until a reviewed entry exists",
@@ -2982,6 +6885,9 @@
   "ford|Ford|F-150 ext cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'f150'); unmapped until a reviewed entry exists",
   "ford|Ford|F-250 EXT Cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'f250'); unmapped until a reviewed entry exists",
   "ford|Ford|F-250 Hd": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'f250'); unmapped until a reviewed entry exists",
+  "ford|Ford|F-350 Chassis Cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'f350'); unmapped until a reviewed entry exists",
+  "ford|Ford|F-350 Crew Cab": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'f350'); unmapped until a reviewed entry exists",
+  "ford|Ford|F-350 crew cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'f350'); unmapped until a reviewed entry exists",
   "ford|Ford|F53 Stripped Chassis": "catalog model with no feed cars as 'F53 Stripped Chassis' (inventory 2026-11-04); nothing to map",
   "ford|Ford|Flex SEL": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'flex'); unmapped until a reviewed entry exists",
   "ford|Ford|Focus Rs": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'focus'); unmapped until a reviewed entry exists",
@@ -2997,6 +6903,7 @@
   "ford|Ford|MKZ": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash 'mkz'); unmapped until a reviewed entry exists",
   "ford|Ford|Mariner": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'mariner'); unmapped until a reviewed entry exists",
   "ford|Ford|Milan": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'milan'); unmapped until a reviewed entry exists",
+  "ford|Ford|Montego": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'montego'); unmapped until a reviewed entry exists",
   "ford|Ford|Mountaineer": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'mountaineer'); unmapped until a reviewed entry exists",
   "ford|Ford|Mustang GT": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'mustang'); unmapped until a reviewed entry exists",
   "ford|Ford|Navigator": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'navigator'); unmapped until a reviewed entry exists",
@@ -3006,6 +6913,11 @@
   "ford|Ford|SSV Plug-In Hybrid": "catalog model with no feed cars as 'SSV Plug-In Hybrid' (inventory 2026-11-04); nothing to map",
   "ford|Ford|Sable": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash 'sable'); unmapped until a reviewed entry exists",
   "ford|Ford|Taurus Wagon": "feed spelling or sub-model the catalog does not print as its own model (12 cars, under catalog squash 'taurus'); unmapped until a reviewed entry exists",
+  "ford|Ford|Transit Van": "feed spelling or sub-model the catalog does not print as its own model (12 cars, under catalog squash 'transit'); unmapped until a reviewed entry exists",
+  "ford|Ford|Transit-150": "feed spelling or sub-model the catalog does not print as its own model (10 cars, under catalog squash 'transit'); unmapped until a reviewed entry exists",
+  "ford|Ford|Transit-250": "feed spelling or sub-model the catalog does not print as its own model (24 cars, under catalog squash 'transit'); unmapped until a reviewed entry exists",
+  "ford|Ford|Transit-350": "feed spelling or sub-model the catalog does not print as its own model (14 cars, under catalog squash 'transit'); unmapped until a reviewed entry exists",
+  "ford|Ford|Transit-350 HD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'transit'); unmapped until a reviewed entry exists",
   "ford|Ford|Zephyr": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'zephyr'); unmapped until a reviewed entry exists",
   "ford|Lincoln|MKZ Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (18 cars, under catalog squash 'mkz'); unmapped until a reviewed entry exists",
   "ford|Lincoln|Mkt Town Car": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'mkt'); unmapped until a reviewed entry exists",
@@ -3013,7 +6925,167 @@
   "ford|Mercury|Grand Marquis Wagon": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'grandmarquis'); unmapped until a reviewed entry exists",
   "ford|Mercury|Mariner Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (10 cars, under catalog squash 'mariner'); unmapped until a reviewed entry exists",
   "ford|Mercury|Sable Wagon": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'sable'); unmapped until a reviewed entry exists",
+  "ford|Mercury|Tracer Wagon": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'tracer'); unmapped until a reviewed entry exists",
   "ford|Mercury|Zephyr": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'zephyr'); unmapped until a reviewed entry exists",
+  "gm|Buick|Park Avenue (80&Up)": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'parkavenue'); unmapped until a reviewed entry exists",
+  "gm|Buick|Regal GS": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'regal'); unmapped until a reviewed entry exists",
+  "gm|Buick|Regal Sportback": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'regal'); unmapped until a reviewed entry exists",
+  "gm|Buick|Roadmaster (91&Up)": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'roadmaster'); unmapped until a reviewed entry exists",
+  "gm|Buick|Roadmaster Wagon": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'roadmaster'); unmapped until a reviewed entry exists",
+  "gm|Cadillac|CTS Sport Wagon": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'cts'); unmapped until a reviewed entry exists",
+  "gm|Cadillac|CTS-V": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'cts'); unmapped until a reviewed entry exists",
+  "gm|Cadillac|Escalade ESV": "feed spelling or sub-model the catalog does not print as its own model (101 cars, under catalog squash 'escalade'); unmapped until a reviewed entry exists",
+  "gm|Cadillac|Escalade EXT": "feed spelling or sub-model the catalog does not print as its own model (51 cars, under catalog squash 'escalade'); unmapped until a reviewed entry exists",
+  "gm|Cadillac|Escalade Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (2 cars, under catalog squash 'escalade'); unmapped until a reviewed entry exists",
+  "gm|Cadillac|Fleetwood Brougham": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'fleetwood'); unmapped until a reviewed entry exists",
+  "gm|Cadillac|Malibu": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'malibu'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Astro Cargo Van": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'astro'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Astro Passenger": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'astro'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Avalanche 1500": "feed spelling or sub-model the catalog does not print as its own model (297 cars, under catalog squash 'avalanche'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Avalanche 2500": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'avalanche'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|BLAZER-JIMMY (full size)": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'blazer'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Blazer S10": "feed spelling or sub-model the catalog does not print as its own model (44 cars, under catalog squash 'blazer'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Blazer S10/Jimmy S15": "feed spelling or sub-model the catalog does not print as its own model (141 cars, under catalog squash 'blazer'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|C10 Suburban": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'c10'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|C1500 Suburban": "feed spelling or sub-model the catalog does not print as its own model (40 cars, under catalog squash 'c1500'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|C20 Suburban": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'c20'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|C2500 Suburban": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'c2500'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|C3500HD": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'c3500'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Caprice Classic": "feed spelling or sub-model the catalog does not print as its own model (40 cars, under catalog squash 'caprice'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Caprice Classic Or Impala": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'caprice'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Caprice Wagon": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'caprice'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Cavalier Wagon": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'cavalier'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Colorado Quad Cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'colorado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Cruze Limited": "feed spelling or sub-model the catalog does not print as its own model (226 cars, under catalog squash 'cruze'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Custom Cruiser": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'customcruiser'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Express 1500": "feed spelling or sub-model the catalog does not print as its own model (438 cars, under catalog squash 'express'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Express 2500": "feed spelling or sub-model the catalog does not print as its own model (557 cars, under catalog squash 'express'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Express 3500": "feed spelling or sub-model the catalog does not print as its own model (296 cars, under catalog squash 'express'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Express Cargo Van": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'express'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|G1500": "feed spelling or sub-model the catalog does not print as its own model (8 cars, under catalog squash 'g1500'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|G20 Sportvan": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'g20'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|G2500": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash 'g2500'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|G30 Sportvan": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'g30'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|G30 Van": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'g30'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Impala Limited": "feed spelling or sub-model the catalog does not print as its own model (229 cars, under catalog squash 'impala'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|K1500 Suburban": "feed spelling or sub-model the catalog does not print as its own model (22 cars, under catalog squash 'k1500'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|K2500 Suburban": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'k2500'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Lumina APV": "feed spelling or sub-model the catalog does not print as its own model (12 cars, under catalog squash 'lumina'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Malibu Classic": "feed spelling or sub-model the catalog does not print as its own model (33 cars, under catalog squash 'malibu'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Malibu Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (5 cars, under catalog squash 'malibu'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Malibu Limited": "feed spelling or sub-model the catalog does not print as its own model (135 cars, under catalog squash 'malibu'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Malibu Maxx": "feed spelling or sub-model the catalog does not print as its own model (94 cars, under catalog squash 'malibu'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|S-10 Blazer": "feed spelling or sub-model the catalog does not print as its own model (42 cars, under catalog squash 's10'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|S10 EXT Cab": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 's10'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|S10/S15/Sonoma": "feed spelling or sub-model the catalog does not print as its own model (42 cars, under catalog squash 's10'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|S10/S15/Sonoma Pickup": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 's10'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|S10/s15/sonoma Truck": "feed spelling or sub-model the catalog does not print as its own model (17 cars, under catalog squash 's10'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Sierra150": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 1500": "feed spelling or sub-model the catalog does not print as its own model (3217 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 1500 Classic": "feed spelling or sub-model the catalog does not print as its own model (60 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 1500 Ext Cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 1500 Hd Classic": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 1500 ext cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 1500HD": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 2500": "feed spelling or sub-model the catalog does not print as its own model (321 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 2500HD": "feed spelling or sub-model the catalog does not print as its own model (129 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 2500HD Classic": "feed spelling or sub-model the catalog does not print as its own model (8 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 3500": "feed spelling or sub-model the catalog does not print as its own model (48 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado 3500HD": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado Classic": "feed spelling or sub-model the catalog does not print as its own model (21 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado Classic 2500HD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Silverado LD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Sonoma": "feed spelling or sub-model the catalog does not print as its own model (15 cars, under catalog squash 'sonoma'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Suburban 10": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'suburban'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Suburban 1500": "feed spelling or sub-model the catalog does not print as its own model (1737 cars, under catalog squash 'suburban'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Suburban 2500": "feed spelling or sub-model the catalog does not print as its own model (73 cars, under catalog squash 'suburban'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Suburban Hd": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'suburban'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Tahoe Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (4 cars, under catalog squash 'tahoe'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Trail Blazer (129 W.B.)": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'trailblazer'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Trailblazer EXT": "feed spelling or sub-model the catalog does not print as its own model (236 cars, under catalog squash 'trailblazer'); unmapped until a reviewed entry exists",
+  "gm|GMC|Acadia Limited": "feed spelling or sub-model the catalog does not print as its own model (7 cars, under catalog squash 'acadia'); unmapped until a reviewed entry exists",
+  "gm|GMC|Blazer S10/Jimmy S15": "feed spelling or sub-model the catalog does not print as its own model (11 cars, under catalog squash 'blazer'); unmapped until a reviewed entry exists",
+  "gm|GMC|C1500 Suburban": "feed spelling or sub-model the catalog does not print as its own model (8 cars, under catalog squash 'c1500'); unmapped until a reviewed entry exists",
+  "gm|GMC|C2500 Suburban": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'c2500'); unmapped until a reviewed entry exists",
+  "gm|GMC|C3500HD": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'c3500'); unmapped until a reviewed entry exists",
+  "gm|GMC|Envoy (Short W.B.)": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'envoy'); unmapped until a reviewed entry exists",
+  "gm|GMC|Envoy Esv": "feed spelling or sub-model the catalog does not print as its own model (7 cars, under catalog squash 'envoy'); unmapped until a reviewed entry exists",
+  "gm|GMC|Envoy Xl": "feed spelling or sub-model the catalog does not print as its own model (202 cars, under catalog squash 'envoy'); unmapped until a reviewed entry exists",
+  "gm|GMC|Envoy Xl (Long W.B.)": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'envoy'); unmapped until a reviewed entry exists",
+  "gm|GMC|Envoy Xuv": "feed spelling or sub-model the catalog does not print as its own model (25 cars, under catalog squash 'envoy'); unmapped until a reviewed entry exists",
+  "gm|GMC|Envoy Xuv (Long W.B.)": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'envoy'); unmapped until a reviewed entry exists",
+  "gm|GMC|Express25": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'express'); unmapped until a reviewed entry exists",
+  "gm|GMC|G1500 Vandura": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'g1500'); unmapped until a reviewed entry exists",
+  "gm|GMC|G2500 Vandura": "feed spelling or sub-model the catalog does not print as its own model (12 cars, under catalog squash 'g2500'); unmapped until a reviewed entry exists",
+  "gm|GMC|Jimmy Or Envoy": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'jimmy'); unmapped until a reviewed entry exists",
+  "gm|GMC|K1500 Suburban": "feed spelling or sub-model the catalog does not print as its own model (12 cars, under catalog squash 'k1500'); unmapped until a reviewed entry exists",
+  "gm|GMC|K2500 Suburban": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'k2500'); unmapped until a reviewed entry exists",
+  "gm|GMC|S-15 Jimmy": "feed spelling or sub-model the catalog does not print as its own model (22 cars, under catalog squash 's15'); unmapped until a reviewed entry exists",
+  "gm|GMC|S10/S15/Sonoma": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash 's10'); unmapped until a reviewed entry exists",
+  "gm|GMC|S10/S15/Sonoma Pickup": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 's10'); unmapped until a reviewed entry exists",
+  "gm|GMC|Safari Passenger": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'safari'); unmapped until a reviewed entry exists",
+  "gm|GMC|Savana 1500": "feed spelling or sub-model the catalog does not print as its own model (62 cars, under catalog squash 'savana'); unmapped until a reviewed entry exists",
+  "gm|GMC|Savana 2500": "feed spelling or sub-model the catalog does not print as its own model (68 cars, under catalog squash 'savana'); unmapped until a reviewed entry exists",
+  "gm|GMC|Savana 3500": "feed spelling or sub-model the catalog does not print as its own model (28 cars, under catalog squash 'savana'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 1500": "feed spelling or sub-model the catalog does not print as its own model (1219 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 1500 Classic": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 1500HD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 2500": "feed spelling or sub-model the catalog does not print as its own model (156 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 2500 Hd Classic": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 2500HD": "feed spelling or sub-model the catalog does not print as its own model (60 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 2500Hd Classic": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 3500": "feed spelling or sub-model the catalog does not print as its own model (34 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 3500 Pickup": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra 3500HD": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra Classic": "feed spelling or sub-model the catalog does not print as its own model (9 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra Classic 1500": "feed spelling or sub-model the catalog does not print as its own model (10 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra Classic 2500": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra Classic 2500HD": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra Classic 3500": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra Denali 1500": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (4 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra K2500": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Silverado 1500 Pickup": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
+  "gm|GMC|Suburban 1500": "feed spelling or sub-model the catalog does not print as its own model (91 cars, under catalog squash 'suburban'); unmapped until a reviewed entry exists",
+  "gm|GMC|Suburban 2500": "feed spelling or sub-model the catalog does not print as its own model (12 cars, under catalog squash 'suburban'); unmapped until a reviewed entry exists",
+  "gm|GMC|Tahoe": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'tahoe'); unmapped until a reviewed entry exists",
+  "gm|GMC|Yukon Denali": "feed spelling or sub-model the catalog does not print as its own model (111 cars, under catalog squash 'yukon'); unmapped until a reviewed entry exists",
+  "gm|GMC|Yukon Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (2 cars, under catalog squash 'yukon'); unmapped until a reviewed entry exists",
+  "gm|GMC|Yukon XL": "feed spelling or sub-model the catalog does not print as its own model (449 cars, under catalog squash 'yukon'); unmapped until a reviewed entry exists",
+  "gm|GMC|Yukon XL 1500": "feed spelling or sub-model the catalog does not print as its own model (341 cars, under catalog squash 'yukon'); unmapped until a reviewed entry exists",
+  "gm|GMC|Yukon XL 2500": "feed spelling or sub-model the catalog does not print as its own model (8 cars, under catalog squash 'yukon'); unmapped until a reviewed entry exists",
+  "gm|GMC|Yukon Xl 1500 Series": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'yukon'); unmapped until a reviewed entry exists",
+  "gm|Geo|Metro": "feed spelling or sub-model the catalog does not print as its own model (61 cars, under catalog squash 'metro'); unmapped until a reviewed entry exists",
+  "gm|Oldsmobile|Calais Supreme": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'calais'); unmapped until a reviewed entry exists",
+  "gm|Oldsmobile|Cutlass Calais": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'cutlass'); unmapped until a reviewed entry exists",
+  "gm|Oldsmobile|Cutlass Ciera": "feed spelling or sub-model the catalog does not print as its own model (91 cars, under catalog squash 'cutlass'); unmapped until a reviewed entry exists",
+  "gm|Oldsmobile|Cutlass Ciera Wagon": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'cutlass'); unmapped until a reviewed entry exists",
+  "gm|Oldsmobile|Cutlass Supreme": "feed spelling or sub-model the catalog does not print as its own model (70 cars, under catalog squash 'cutlass'); unmapped until a reviewed entry exists",
+  "gm|Oldsmobile|Intrigue Gl": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'intrigue'); unmapped until a reviewed entry exists",
+  "gm|Pontiac|Bonneville Sle": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'bonneville'); unmapped until a reviewed entry exists",
+  "gm|Pontiac|Cavalier": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'cavalier'); unmapped until a reviewed entry exists",
+  "gm|Pontiac|Montana SV6": "feed spelling or sub-model the catalog does not print as its own model (53 cars, under catalog squash 'montana'); unmapped until a reviewed entry exists",
+  "gm|Pontiac|Montana Van": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'montana'); unmapped until a reviewed entry exists",
+  "gm|Pontiac|Safari": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'safari'); unmapped until a reviewed entry exists",
+  "gm|Saturn|Astra Xr": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'astra'); unmapped until a reviewed entry exists",
+  "gm|Saturn|Aura Green Line": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'aura'); unmapped until a reviewed entry exists",
+  "gm|Saturn|L-Series": "feed spelling or sub-model the catalog does not print as its own model (45 cars, under catalog squash 'ls'); unmapped until a reviewed entry exists",
+  "gm|Saturn|LS2": "feed spelling or sub-model the catalog does not print as its own model (11 cars, under catalog squash 'ls'); unmapped until a reviewed entry exists",
+  "gm|Saturn|VUE Green Line": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash 'vue'); unmapped until a reviewed entry exists",
+  "hmg|Genesis|Genesis": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'genesis'); unmapped until a reviewed entry exists",
+  "hmg|Hyundai|Elantra Coupe": "feed spelling or sub-model the catalog does not print as its own model (16 cars, under catalog squash 'elantra'); unmapped until a reviewed entry exists",
+  "hmg|Hyundai|Elantra Wagon": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'elantra'); unmapped until a reviewed entry exists",
+  "hmg|Kia|Forte5": "feed spelling or sub-model the catalog does not print as its own model (48 cars, under catalog squash 'forte'); unmapped until a reviewed entry exists",
+  "hmg|Kia|Rio5": "feed spelling or sub-model the catalog does not print as its own model (72 cars, under catalog squash 'rio'); unmapped until a reviewed entry exists",
+  "hmg|Kia|Spectra5": "feed spelling or sub-model the catalog does not print as its own model (34 cars, under catalog squash 'spectra'); unmapped until a reviewed entry exists",
+  "honda|Honda|Accord Crosstour": "feed spelling or sub-model the catalog does not print as its own model (50 cars, under catalog squash 'accord'); unmapped until a reviewed entry exists",
+  "honda|Honda|Accord Sdn": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'accord'); unmapped until a reviewed entry exists",
+  "honda|Honda|Accord Wagon": "feed spelling or sub-model the catalog does not print as its own model (11 cars, under catalog squash 'accord'); unmapped until a reviewed entry exists",
+  "honda|Honda|Civic Del Sol": "feed spelling or sub-model the catalog does not print as its own model (23 cars, under catalog squash 'civic'); unmapped until a reviewed entry exists",
+  "honda|Honda|Civic Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (111 cars, under catalog squash 'civic'); unmapped until a reviewed entry exists",
+  "honda|Honda|Civic Sdn": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'civic'); unmapped until a reviewed entry exists",
+  "honda|Honda|Civic Wagon": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'civic'); unmapped until a reviewed entry exists",
+  "honda|Honda|Clarity": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'cl'); unmapped until a reviewed entry exists",
   "mopar|Chrysler|200S": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash '200'); unmapped until a reviewed entry exists",
   "mopar|Chrysler|300 Lh": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash '300'); unmapped until a reviewed entry exists",
   "mopar|Chrysler|300C": "feed spelling or sub-model the catalog does not print as its own model (145 cars, under catalog squash '300'); unmapped until a reviewed entry exists",
@@ -3101,6 +7173,11 @@
   "nissan|Nissan|Titan Xd": "feed spelling or sub-model the catalog does not print as its own model (7 cars, under catalog squash 'titan'); unmapped until a reviewed entry exists",
   "nissan|Nissan|Versa Note": "feed spelling or sub-model the catalog does not print as its own model (313 cars, under catalog squash 'versa'); unmapped until a reviewed entry exists",
   "nissan|Nissan|Versa Sedan": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'versa'); unmapped until a reviewed entry exists",
+  "subaru|Subaru|Impreza Outback Sport": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'impreza'); unmapped until a reviewed entry exists",
+  "subaru|Subaru|Impreza Wagon": "feed spelling or sub-model the catalog does not print as its own model (43 cars, under catalog squash 'impreza'); unmapped until a reviewed entry exists",
+  "subaru|Subaru|Impreza/ Outback": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'impreza'); unmapped until a reviewed entry exists",
+  "subaru|Subaru|Legacy Outback": "feed spelling or sub-model the catalog does not print as its own model (10 cars, under catalog squash 'legacy'); unmapped until a reviewed entry exists",
+  "subaru|Subaru|Legacy Wagon": "feed spelling or sub-model the catalog does not print as its own model (81 cars, under catalog squash 'legacy'); unmapped until a reviewed entry exists",
   "toyota|Lexus|ES 300h": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'es300'); unmapped until a reviewed entry exists",
   "toyota|Lexus|IS 250C": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'is250'); unmapped until a reviewed entry exists",
   "toyota|Lexus|IS 350C": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'is350'); unmapped until a reviewed entry exists",
@@ -3116,11 +7193,12 @@
   "toyota|Toyota|Prius AWD-e": "catalog model with no feed cars as 'Prius AWD-e' (inventory 2026-11-04); nothing to map",
   "toyota|Toyota|Prius Awd-E": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'prius'); unmapped until a reviewed entry exists",
   "toyota|Toyota|Rav-4 Sport": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'rav4'); unmapped until a reviewed entry exists",
+  "toyota|Toyota|Tercel Wagon": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'tercel'); unmapped until a reviewed entry exists",
   "toyota|Toyota|Yaris iA": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'yaris'); unmapped until a reviewed entry exists",
   "toyota|Toyota|tC": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'tc'); unmapped until a reviewed entry exists",
   "toyota|Toyota|xB": "feed spelling or sub-model the catalog does not print as its own model (7 cars, under catalog squash 'xb'); unmapped until a reviewed entry exists",
   "toyota|Toyota|xD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'xd'); unmapped until a reviewed entry exists"
  },
- "note": "Hand-curated catalog (ns, make, model) -> feed targets (CURATION_SPEC.md §6). Drafted from curate.py --propose-map on oem-raw@94f03a3 and reviewed 2026-11-05: identity entries only where normalize_model gives an existing feed model; feed variants under a mapped name are excluded (no claims) until someone reviews them. Namespaces gm, honda, hmg, subaru have no entries yet.",
+ "note": "Hand-curated catalog (ns, make, model) -> feed targets (CURATION_SPEC.md §6). Drafted with curate.py --propose-map (identity rule: model_map.draft_identity) on oem-raw@94f03a3 for toyota, mopar, ford, nissan, and on oem-raw@d1108d0 for every namespace (merged with model_map.py merge, reviewed 2026-11-05): an entry only where normalize_model gives an existing feed model; feed variants under a mapped name are excluded (no claims) until someone reviews them; a target whose feed name the feed also splits by series (Silverado / Silverado 1500) is ambig (Likely only); targets failing M3/M6/M8 were left unmapped (see _report/<ns>.map-proposals.json). Hand entries (merge, ambig, trim subsets) carry their own basis.",
  "schema": 1
 }
