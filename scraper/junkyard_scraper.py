@@ -6551,6 +6551,9 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "ranger": [1989, 2001, 2006],    # grille-only 1995/2004 left out
     "traverse": [2013, 2022],
     "pathfinder": [2002, 2008, 2017],  # mid-year 1999.5 left out
+    "trailblazer": [2006, 2024],     # 2006: all but the base trim
+    "pilot": [2006, 2012, 2019],
+    "liberty": [2005],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

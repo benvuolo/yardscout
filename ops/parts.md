@@ -111,6 +111,8 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   23.3 Ranger 1989/2001/2006, Traverse 2013/2022, Pathfinder 2002/2008/2017
   (1,665 cars narrowed). Suburban: no confirmed year, left out.
   Single-component years (grille-only, tail-only) are not cuts.
+  23.4 TrailBlazer 2006/2024, Pilot 2006/2012/2019, Liberty 2005 (3,544
+  cars narrowed). Tahoe and Yukon: no line-wide year confirmed, left out.
 
 ## How to measure
 
@@ -140,10 +142,10 @@ The generic-only count re-matches every distinct year/make/model in
 2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
    overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
    into `lexus es` and drop the duplicate (§20.5).
-3. Facelifts (§23, in progress): 23.1–23.3 done (Grand Caravan, Odyssey,
+3. Facelifts (§23, in progress): 23.1–23.4 done (Grand Caravan, Odyssey,
    Expedition, Town & Country, Silverado/Sierra, Ram, BMW 3, Maxima, Ranger,
-   Traverse, Pathfinder; Suburban none). Next: TrailBlazer, Pilot,
-   Tahoe/Yukon, Liberty, Edge, Charger, Dakota, Grand Cherokee. The rule: a
+   Traverse, Pathfinder, TrailBlazer, Pilot, Liberty; Suburban/Tahoe/Yukon
+   none). Next: Edge, Charger, Dakota, Grand Cherokee. The rule: a
    cited source for every year, and models without one are left out.
 4. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.

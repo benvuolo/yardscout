@@ -1772,3 +1772,34 @@ distinct. 0 cars with any non-`fits` difference. 1,665 cars narrowed
 1998–2000/2001–05/2006–18; Traverse 39: LED headlights 2018–21/2022–24).
 Pathfinder has no appearance rows yet. Coverage unchanged: generic-only
 15,400, no entry 12,407. Tests pass (new §23.3 check).
+
+### 23.4 TrailBlazer, Pilot, Tahoe / Yukon, Liberty
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Chevrolet TrailBlazer | 2006, 2024 | 2006: "The TrailBlazer was updated in 2005 for the 2006 model year", "An updated front fascia on all models (except for the base version)" (en.wikipedia.org/wiki/Chevrolet_Trailblazer_(SUV)); Edmunds 2006 "new front and rear fascias for the LT" (search excerpt); go-parts grille guide: 2002–05 and 2006–09 grilles are not interchangeable. 2024: "received a facelift ... for the 2024 model year", "new front fascia", "new LED taillights" (en.wikipedia.org/wiki/Chevrolet_Trailblazer_(crossover)); Carscoops 2023-02 "narrowed daytime running lights and a tighter front fascia" |
+| Honda Pilot | 2006, 2012, 2019 | 2006: hondanews.com 2006 Pilot summary "Revised taillight and headlight designs"; Wikipedia (en.wikipedia.org/wiki/Honda_Pilot) "a new fascia ... halogen projector headlights". 2012: "a redesigned front fascia ... changes to the bumper" (Wikipedia); Honda release reprint (conceptcarz) "three-bar horizontal" grille, "Reconfigured multi-reflector halogen headlights". 2019: "new bumpers, grille, wheels, standard LED headlights, and revised tail lights" (Wikipedia); Carscoops / Repairer Driven News 2019 refresh (search summaries) |
+| Jeep Liberty | 2005 | "In 2005, all models received a minor facelift" (en.wikipedia.org/wiki/Jeep_Liberty); Stellantis media release id=125: "a freshened exterior design with new front fascia, grille, fog lamps" |
+
+**Left out:** **Chevrolet Tahoe and GMC Yukon: no year added.** No
+line-wide restyle is cited inside 1995–2024: the GMT400 grille change is
+MY1994; GMT800 2003 was interior, and the 2004 "black outlined taillights"
+line is uncorroborated; GMT900 2010 raised bumper (single, conflicting
+sources); K2 2018 is LED DRLs on Tahoe and a Denali-only grille on Yukon;
+Yukon Denali 2001 is trim-only; the T1 refresh is MY2025. TrailBlazer:
+the 2006 SS fascias (trim), and the 2005 LT (Autobytel lists a new LT
+fascia for 2005, against Wikipedia/Edmunds 2006; 2006 is used and the
+2005 LT is noted as uncertain). Pilot 2022 (LED headlights standard, no
+restyle), 2023–24 (none in range). Liberty 2005–06 Renegade hood/grille
+(trim), KK 2008–12 (none; 2011 Jet package is an option).
+
+**Checks.** Same inventory as §23.3. 0 cars with any non-`fits`
+difference. 3,544 cars narrowed: TrailBlazer 2,217 (headlights 2002–05 /
+2006–…), Liberty 1,327 (KJ headlights 2002–04 / 2005–07). The Pilot has no
+appearance rows yet. Coverage unchanged: generic-only 15,400, no entry
+12,407. Tests pass (new §23.4 check).
+
+**Found, not fixed:** the TrailBlazer's second-segment rows read
+"2006–2020", running past the GMT360's 2009 end into years with no
+TrailBlazer (the crossover starts 2021). This is harmless (no car has
+those years) and predates §23.
