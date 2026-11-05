@@ -1653,3 +1653,53 @@ EV, 2 Fiat 500e) that no longer carry gas-car rows.
 - **Tests:** all offline scraper suites pass, including
   `test_interchange.py` and `test_consensus_parts.py`, and `--list-parts`
   runs with the empty entries.
+
+## 23. Facelift follow-ups (2026-11-05, owner: "go on facelifts")
+
+Same rule and machinery as §17: `FACELIFT_BREAKS` (entries under the
+`# §23` comment) lists the first US model year of each exterior mid-cycle
+facelift; only appearance rows (`_FACELIFT_SENSITIVE_RE`: headlights, tail
+lights, grille, bumpers, fog/marker/corner lights) are cut there. Mechanical
+and interior rows are never cut at a facelift. A cut applies to every
+appearance row on the model even where the source names only some lamps;
+it can only narrow a "fits" window. Every year below has a cited source.
+Quotes were read through a summarising fetch tool (the Expedition 1999
+quote was re-checked against the page). Models without a confirmed year
+are left out and listed. Batches are pushed as §23.1, §23.2, …
+
+**Check method (each batch).** Every distinct year/make/model on the lots
+(333,449 cars, 12,655 distinct, inventory of 2026-11-04 23:03Z) is matched
+before and after with seven decodes (none, sedan FWD, coupe, hatch, SUV AWD,
+pickup 4WD, minivan RWD). Card list, `max_value`, and every part field
+except `fits`/`yr_min`/`yr_max` (name, band, cost, rarity, gate statuses,
+`sharedWith`, sell notes) must be identical; only `fits` may narrow.
+
+### 23.1 Grand Caravan, Odyssey, Expedition, Town & Country
+
+| Model | Facelift MY | Basis |
+|---|---|---|
+| Dodge Grand Caravan (and the `dodge caravan` alias, same entry) | 1999, 2005, 2011 | 1999: "the 1999 Caravan received new front styling on all trims above SE" (en.wikipedia.org/wiki/Dodge_Caravan); CarGurus 1999: "a front-end redesign on all models". 2005: "Changes for 2005 included a revised grille, new foglight fascia" (Wikipedia); cars.com 2005 Grand Caravan: "A new front fascia ... and new fog lamps". 2011: "new 'double-crosshair' grille" (Wikipedia); cars.com 2011: "new crosshair grille, new headlights and a new front bumper", "taillight revisions" |
+| Honda Odyssey | 2002, 2008, 2014, 2021 | 2002: hondanews.com 2002 exterior update, "a more aggressive new grille", "taillight design now features amber-colored turn signals". 2008: "a redesigned dashboard, grille, and tail lights" (en.wikipedia.org/wiki/Honda_Odyssey_(North_America)); auto123 "a new grille and front bumper". 2014: "twin-bar grille and revised lower front fascia", "LED rear tail light bars" (Wikipedia); cars.com 2014 "new hood, front bumper, grille and fenders". 2021: hondanews.com 2021 release, "LED headlights", "redesigned blackout grille", "redesigned lower front facia and fog light housings" |
+| Ford Expedition | 1999, 2015, 2022 | 1999: "The 1999 model year received a facelift similar to that of the contemporary Ford F-150 ... a new front grille ... a new front bumper that incorporated the fog lamps" (en.wikipedia.org/wiki/Ford_Expedition, re-checked). 2015: "All-new thinner headlamps ... an all-new front bumper" (Wikipedia; EL got the same); cars.com 2015 first look "new head- and taillights". 2022: "mid-cycle refresh ... revised front end styling" (Wikipedia); MotorWeek "standard LED headlamps, updated taillamps" |
+| Chrysler Town & Country | 2005, 2011 | 2005: mid-cycle refresh with "revised exterior styling" (en.wikipedia.org/wiki/Chrysler_Town_%26_Country_(minivan)); cars.com 2005: "Sculpted headlights and a new front fascia that contains round fog lamps". 2011: "restyled exterior ... new fog lights" (Wikipedia); AutoGuide 2011 review "new front grille, bumper and lower fascia", "LED taillights" |
+
+**Left out:** Grand Caravan 1998/2000 (colours, wheels, badges only), the
+2012 logo change and 2014 appearance packages (trim, not facelifts);
+whether the 1999 restyle reached base/SE vans and whether the 2005 fascia
+reached the short-wheelbase Caravan are unconfirmed (the cut is applied to
+the shared entry, which can only narrow windows). Odyssey 2022 (headlamp
+internals only), the 2023 Black Edition (Canada/Mexico), 2025 (out of
+range); Odyssey 2002 headlamps/bumpers and 2021 US tail lights are not
+claimed to have changed. Expedition 2003–06 (no facelift found), 2000 and
+2011 (trim colour/grille changes). Town & Country 2006–07 (no change),
+2013–14 S trim and DRLs, 2016 projector headlamps (an equipment change;
+a fitment check is needed before any headlamp row relies on it).
+
+**Checks.** Of these four, only the Expedition has an appearance row today
+(Headlights 1997–2002, now 1997–1998 and 1999–2002). The other three have no
+appearance rows yet; their breaks bound future lamp rows. Per-car
+comparison: 0 cars with any non-`fits` difference; 1,027 Expedition cars
+(1997–2002) have a narrowed headlight window. Coverage is unchanged:
+generic-only 15,326 (4.6%), no entry 12,360 (3.7%). `test_parts_gaps.py`
+(new §23.1 check), `test_interchange.py`, `test_consensus_parts.py` and
+`test_vpic_fixes.py` pass.

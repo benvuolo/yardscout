@@ -99,6 +99,11 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 - Measuring across a mid-block scan: compare HEAD and working tree on the
   same inventory (a measure script that takes the scraper path).
 
+- §23 (owner: "go on facelifts"; facelift follow-ups, PARTS_GAPS §23):
+  23.1 Grand Caravan 1999/2005/2011, Odyssey 2002/2008/2014/2021,
+  Expedition 1999/2015/2022, Town & Country 2005/2011, each year cited.
+  Per car: only `fits` narrowed (1,027 Expedition cars); coverage unchanged.
+
 ## How to measure
 
 `interchange_coverage.py` measures engine-family donors, not generic-only.
@@ -127,9 +132,10 @@ The generic-only count re-matches every distinct year/make/model in
 2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
    overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
    into `lexus es` and drop the duplicate (§20.5).
-3. Facelifts: research and add `FACELIFT_BREAKS` for the next models by
-   cars (Grand Caravan, Odyssey, Expedition, Town & Country, Silverado, Ram,
-   BMW 3, Maxima, Ranger, Suburban, Traverse, Pathfinder). The rule: a cited
-   source for every year, and models without one are left out.
+3. Facelifts (§23, in progress): 23.1 done (Grand Caravan, Odyssey,
+   Expedition, Town & Country). Next: Silverado/Sierra, Ram, BMW 3, Maxima;
+   then Ranger, Suburban, Traverse, Pathfinder; then TrailBlazer, Pilot,
+   Tahoe/Yukon, Liberty, Edge, Charger, Dakota, Grand Cherokee. The rule: a
+   cited source for every year, and models without one are left out.
 4. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.

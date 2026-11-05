@@ -553,6 +553,13 @@ check("§21 Transit Connect: pump/fan per generation; A/C plain 2011 and 2020, '
       and c16["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and c20["A/C Compressor (clutch spins free)"].get("trim_status") is None
       and c16["Headlights (clear pair)"]["fits"] == "2014–2018")
 
+# §23 facelift follow-ups: FACELIFT_BREAKS years for further models (cited in PARTS_GAPS §23)
+ex98, ex00 = parts(1998, "Ford", "Expedition"), parts(2000, "Ford", "Expedition")
+check("§23.1 Expedition: headlights cut at the 1999 facelift; minivan/Odyssey keys present",
+      ex98["Headlights (clear, non-hazed)"]["fits"] == "1997–1998" and ex00["Headlights (clear, non-hazed)"]["fits"] == "1999–2002"
+      and js.FACELIFT_BREAKS["grand caravan"] == [1999, 2005, 2011] and js.FACELIFT_BREAKS["odyssey"] == [2002, 2008, 2014, 2021]
+      and js.FACELIFT_BREAKS["town & country"] == [2005, 2011] and js.FACELIFT_BREAKS["expedition"] == [1999, 2015, 2022])
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

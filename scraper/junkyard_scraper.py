@@ -6536,6 +6536,11 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "stratus": [2003, 2004],
     "mustang": [2013],
     "transit connect": [2019],
+    # §23 facelift follow-ups (cited in PARTS_GAPS §23)
+    "grand caravan": [1999, 2005, 2011],  # also the "dodge caravan" alias (same entry)
+    "odyssey": [2002, 2008, 2014, 2021],
+    "expedition": [1999, 2015, 2022],
+    "town & country": [2005, 2011],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
