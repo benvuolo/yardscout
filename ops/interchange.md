@@ -44,7 +44,7 @@ first. Owner approved multi-agent ("ultra") scale.
   (wf_7d045075-e05) a few minutes in; nothing lost but cached pages. Moved
   crawls to GitHub Actions (9203003) and navigator builds to two sessions:
   - session_016ZzJfK5C7Cm4qZpC4QjSVs: .html template + GM, Ford, Mopar,
-    Nissan, Infiniti
+    Nissan, Infiniti (done 01:20 UTC, 4c9a9b2; see "PartsGiant" below)
   - session_016ZzJfHbzhf7ZAm4Xt8ok79: SimplePart template + Toyota, Jeep
   - 00:49 UTC: Toyota + Jeep modules on main (2010da8, dc5c1d3); Actions
     crawl run 41944219436 started for both.
@@ -176,3 +176,81 @@ cache-only part) and `tests/test_run.py`. `aftermarket/raw/` is git-ignored.
   first `*` group is "Allow: /", so fetch.py alone would allow /search.php.
   `aftermarket/common.get` re-checks with RFC 9309 semantics; crawl.py
   sites may want the same check in fetch.py.
+
+## PartsGiant .html template (session_016ZzJfK5C7Cm4qZpC4QjSVs, 2026-11-05)
+
+Built (commit 4c9a9b2): `sites/_partsgiant.py` (template, layout and record
+format documented in its docstring), `gmpartsgiant.py`, `fordpartsgiant.py`,
+`moparpartsgiant.py`, `nissanpartsdeal.py`, `infinitipartsdeal.py` (reuses the
+Nissan rules), offline tests `tests/test_partsgiant_template.py` and
+`tests/test_<site>.py` (pure checks always; page checks cache-only, skipped
+without the local cache), helper `tests/_pg_cacheonly.py`.
+
+Trials (`crawl.py --tier A --max-segments 2`, final code, raw/ not committed):
+GM 176 records (Cruze 2014; Silverado 1500 2000/2012/2011), Ford 97 (F-150
+2001 via engine/transmission catalogs, 2004), Mopar 142 (Ram 1500 2002/1988;
+Grand Caravan 2010), Nissan 118 (Altima 2013, 2012), Infiniti 169 (G35
+2004/2008, G37 2009). 0 product/list errors; nav-fails only for seed years
+the site has no catalog for (Cruze 1998, Grand Caravan 2023). Checked field
+by field against cached page text: 7-8 records per site (pn, description,
+Replaced By, Replaces, every fitment row in order incl. the rows behind
+"View More", year spans, make/model split, position source): all match.
+
+### PartsGiant: what a curator must know
+
+- Fitment comes from the page's `window.__INITIAL_STORE__` (same response)
+  because the rendered table stops at 10 rows; product() refuses a page whose
+  rendered rows are not exactly the first stored rows. evidence_lines hold
+  every stored row as "cell | cell | cell".
+- Year cells can list spans ("2002, 1999-2000 Chevrolet Silverado",
+  "2016-2018, 2009-2014 Nissan Maxima"): one fitment row per span, same raw.
+- Model names are as printed and coarser than our feed: GM trucks print
+  "Silverado"/"Sierra" (1500/2500/3500 only in the option column), Ford
+  "E-350/E-350 Super Duty". crawl.py's coverage check compares names, so GM
+  truck segments spend their extra seeds; harmless, costs time.
+- Column meaning differs by make: `options` is GM trims+body, Mopar trims,
+  Ford transmissions/drive, Nissan/Infiniti engine codes. `trims` = options
+  on GM/Mopar, empty on Ford, the "Trim" half of "Trim & Engine" on Nissan.
+- Engine/trim cells are the site's per-row aggregates and are sometimes
+  wrong: Infiniti 16119-8J103 lists FX45 as "6 Cyl 3.5L"; 23100-JK01A lists
+  2011 G25 as "6 Cyl 3.7L". Treat engines as hints; split engine-specific
+  parts (alternators, starters, throttle bodies) by the list page's
+  "Fitting Vehicle Options" codes, not by these cells.
+- Position: the parts-list row's side wins ("Location: Driver Side", Mopar
+  bare "Right"/"Left", Infiniti "RIGHT BANK" = engine bank), then the
+  product page's own side. Mopar product pages contradict the catalog row
+  (1AN401BGAD: list "Right", product page "Driver Side"/"Door Mirror Left");
+  such records get position None and a "position conflict" flag. GM product
+  pages carry no side at all. The side is the seed vehicle's list row.
+- Reman rows are dropped only when the page says so (Remanufactured,
+  Refurbished, Core Return) and a new number is on the same page. Mopar
+  R-prefixed numbers listed without that text (R5233006) are kept, as are
+  Ford Motorcraft service numbers ("High Level Aftermarket Spec / Non
+  Warranty Repair", G2MZ-...) and Ford crash-part duplicates (-ACP, -PTM
+  suffixes): each is its own number with its own fitment.
+- `replaced_by` is raw: it can be a reman number (Mopar R6027702AC) or
+  Nissan's "(MultiSupersession)" marker, which is not a part number.
+- Window regulators include motor-only rows (README). Nissan door modules
+  that carry the regulator ("Module Assy-Front Door", 2012 Altima front) are
+  NOT included; only rows named Regulator / Motor Assy-Regulator.
+- Window switch: GM rows without a printed side are kept unless they say
+  passenger/rear, so some aux switches appear; names keep "MASTER", "2 BUTTON".
+- Catalog choice: at most 2 catalogs per model-year. Variant maps per module
+  (GM 1500_2wd/4wd, classic/new_style, carryover/new_model; Nissan
+  sedan/coupe; Ford gas/hybrid). Ford splits some years by engine +
+  transmission (/2001-ford-f_150--6_cyl_4_2l-4at_4r100-parts.html): first and
+  last option catalogs are read (smallest and largest engine).
+- Coverage gaps seen: no HVAC control head on 2000 Silverado catalog pages;
+  Plymouth is not on moparpartsgiant (404), Plymouth segments nav-fail;
+  infinitipartsdeal has no G35 sedan catalog for 2003-2006; Nissan "Pickup"
+  maps to hardbody_pickup_d21 (1986-1994 only); Ford F-100 and Chrysler
+  "Caravan" have no site model. Worklist segments that start before the
+  model existed (Cruze 1986, Ram 1500 1971) nav-fail on those seeds.
+- Tier B rules exist for all five sites but only tier A was trial-crawled;
+  tier B rules were checked offline on one vehicle per site (2012 Malibu,
+  2010 Escape, 2010 Grand Caravan, 2012 Altima). Grille rules found no grille
+  on the 2012 Altima pages.
+- For the Honda/Acura/Hyundai/Kia/Subaru/Lexus modules: the template already
+  follows per-trim catalogs (first + last trim), takes callable rules
+  (rule(row, text)) and a head_fn hook for sites whose group text is an
+  illustration label (GM).
