@@ -55,3 +55,34 @@
 01:59:06 seg done tier=B Jeep Liberty [2008, 2012] seeds=[2008] records=711 errors=3
 02:00:59 seg done tier=B Jeep Compass [2011, 2016] seeds=[2014] records=729 errors=3
 02:03:22 STOPPED: network error: ReadTimeout
+02:44:32 start site=www.jeeppartsdeal.com segments=15 tiers=['A', 'B']
+02:44:32 seg done tier=A Jeep Patriot [2007, 2017] seeds=[2014] records=748 errors=3
+02:44:32 seg done tier=A Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=748 errors=3
+02:44:32 seg done tier=A Jeep Liberty [1998, 2007] seeds=[2005] records=748 errors=3
+02:44:32 seg done tier=A Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=748 errors=3
+02:44:32 seg done tier=A Jeep Liberty [2008, 2012] seeds=[2008] records=748 errors=3
+02:44:32 seg done tier=A Jeep Compass [2011, 2016] seeds=[2014] records=748 errors=3
+02:44:32 seg done tier=A Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=748 errors=3
+02:44:32 seg done tier=A Jeep Cherokee [2014, 2022] seeds=[2015] records=748 errors=3
+02:44:32 seg done tier=A Jeep Commander [2006, 2010] seeds=[2006] records=748 errors=3
+02:44:32 seg done tier=A Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=748 errors=3
+02:44:32 seg done tier=A Jeep Cherokee [1978, 2001] seeds=[2000] records=748 errors=3
+02:44:32 seg done tier=A Jeep Compass [2007, 2010] seeds=[2007] records=748 errors=3
+02:44:32 seg done tier=A Jeep Renegade [2015, 2022] seeds=[2017] records=748 errors=3
+02:44:32 seg done tier=A Jeep Compass [2017, 2024] seeds=[2017] records=748 errors=3
+02:44:32 seg done tier=A Jeep Wrangler [1997, 2006] seeds=[1997] records=748 errors=3
+02:44:32 seg done tier=B Jeep Patriot [2007, 2017] seeds=[2014] records=748 errors=3
+02:44:32 seg done tier=B Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=748 errors=3
+02:44:32 seg done tier=B Jeep Liberty [1998, 2007] seeds=[2005] records=748 errors=3
+02:44:32 seg done tier=B Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=748 errors=3
+02:44:32 seg done tier=B Jeep Liberty [2008, 2012] seeds=[2008] records=748 errors=3
+02:44:32 seg done tier=B Jeep Compass [2011, 2016] seeds=[2014] records=748 errors=3
+02:48:16 seg done tier=B Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=764 errors=3
+02:56:32 seg done tier=B Jeep Cherokee [2014, 2022] seeds=[2015] records=814 errors=3
+03:00:08 seg done tier=B Jeep Commander [2006, 2010] seeds=[2006] records=829 errors=3
+03:04:24 seg done tier=B Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=850 errors=3
+03:08:08 nav-fail Jeep Cherokee 1981: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/1981-jeep-cherokee-parts
+03:08:08 seg done tier=B Jeep Cherokee [1978, 2001] seeds=[2000, 1981] records=867 errors=4
+03:11:20 seg done tier=B Jeep Compass [2007, 2010] seeds=[2007] records=880 errors=4
+03:17:12 seg done tier=B Jeep Renegade [2015, 2022] seeds=[2017] records=912 errors=4
+03:17:12 time budget reached records=912
