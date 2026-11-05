@@ -842,7 +842,12 @@ const DATA_CACHE = 'jh-data-v1';
 
 /* ===== PHOTO / SPEC ENRICHMENT (lazy shard) =====
  * data/vehicle_extras.json maps vehicle id ->
- * [photoCode, color, engine, trans, transSrc('listing'|'vin')].
+ * [photoCode, color, engine, trans, transSrc] — transSrc names the evidence
+ * for trans: 'vin' (the VIN decode), 'listing' (the yard's own listing),
+ * 'vin_code' (the maker's VIN coding marks it manual), 'trim' (manual was the
+ * only transmission offered for this trim), 'engine' (the only one offered
+ * with this engine), 'model' (the only one offered for that model-year).
+ * The last four only ever say "Manual" (scraper/trans_evidence.py).
  * It loads in parallel with the inventory and is never on the critical path:
  * cards render photo-less first if it hasn't arrived, then hydrate.
  *
@@ -876,9 +881,12 @@ function photoInfo(code) {
 function extrasFor(v) {
   return (vehicleExtras && vehicleExtras[String(v.id)]) || null;
 }
-/* Confirmed manual transmission — from the VIN decode or the yard's own
- * listing text, carried in the extras shard. Honest rule: only ever true when
- * the data says "Manual"; never inferred, and automatics get no badge at all.
+/* Confirmed manual transmission — from the VIN decode, the yard's own
+ * listing text, or car-specific evidence the scraper checked (the maker's VIN
+ * code, a manual-only trim, the only transmission offered with the engine),
+ * carried in the extras shard. Honest rule: only ever true when the data says
+ * "Manual" for THIS car; never because manuals were common, and when two
+ * sources disagree the scraper records nothing. Automatics get no badge.
  * Most cars have NEITHER signal (vPIC leaves TransmissionStyle blank for most
  * makes, and most yard listings don't say) — those stay unknown, so a real
  * manual that nothing confirms simply won't carry the badge or pass the
@@ -888,14 +896,27 @@ function isConfirmedManual(v) {
   const t = ex && ex[3] ? String(ex[3]) : '';
   return /manual/i.test(t) && !/automated/i.test(t);
 }
-/* Which data source confirmed the transmission: 'listing' (the yard's own
- * feed/table) or 'vin' (the VIN decode) — same vocabulary as parts'
- * trim_status. Older extras shards predate the source column; everything in
- * them came from the VIN decode, so that's the fallback. */
+/* Which data source confirmed the transmission (see the extras shard note
+ * above). Older extras shards predate the source column; everything in them
+ * came from the VIN decode, so that's the fallback. */
+const TRANS_SOURCES = {
+  vin: { short: '', tip: 'Manual transmission, confirmed from this car\u2019s VIN decode' },
+  listing: { short: '', tip: 'Manual transmission, from the yard\u2019s own listing' },
+  vin_code: { short: 'VIN code', tip: 'Manual transmission, confirmed from this car\u2019s VIN: the maker\u2019s VIN coding (filed with NHTSA) marks a manual, or an engine sold only with a manual' },
+  trim: { short: 'only one offered for this trim', tip: 'Manual transmission: it was the only transmission offered for this car\u2019s trim' },
+  engine: { short: 'only one offered with this engine', tip: 'Manual transmission: it was the only transmission offered with this car\u2019s engine that year' },
+  model: { short: 'only one offered that year', tip: 'Manual transmission: it was the only transmission offered for this model that year' },
+};
 function transSource(v) {
   const ex = extrasFor(v);
   if (!ex || !ex[3]) return null;
-  return ex[4] === 'listing' ? 'listing' : 'vin';
+  return Object.prototype.hasOwnProperty.call(TRANS_SOURCES, ex[4]) ? ex[4] : 'vin';
+}
+/* Plain-words source for a confirmed manual: badge tooltip + the short note
+ * shown next to "Manual" in the spec line for checked (not decoded/listed)
+ * evidence, so phone users without hover see it too. */
+function manualSourceInfo(v) {
+  return TRANS_SOURCES[transSource(v) || 'vin'];
 }
 
 /* The whole-country extras file is only fetched on the full-file / API
@@ -3765,7 +3786,9 @@ function renderLive() {
     const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
     const vm = vinMetaHtml(v, unlocked);
     // Line 1 — what the car IS: VIN-decoded trim/drive (Pro) + color/engine/trans.
-    const yardSpecs = ex ? [ex[1], shortEngine(ex[2]), ex[3]].filter(Boolean).map(escapeHtml) : [];
+    const transShown = ex && ex[3] && isConfirmedManual(v) && manualSourceInfo(v).short
+      ? `${ex[3]} (${manualSourceInfo(v).short})` : (ex ? ex[3] : '');
+    const yardSpecs = ex ? [ex[1], shortEngine(ex[2]), transShown].filter(Boolean).map(escapeHtml) : [];
     const specLine = [vm.spec, ...yardSpecs].filter(Boolean).join(' &middot; ');
     // Line 2 — WHEN: set-out date + time on the lot, one line.
     const whenBits = [dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'];
@@ -3779,7 +3802,7 @@ function renderLive() {
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + escapeHtml(v.row) + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
           </div>
           <div class="car-badges">
-            ${isConfirmedManual(v) ? `<span class="badge badge-manual" title="${transSource(v) === 'listing' ? 'Manual transmission, from the yard\u2019s own listing \u2014 never inferred' : 'Manual transmission, confirmed from this car\u2019s VIN decode \u2014 never inferred'}">Manual</span>` : ''}
+            ${isConfirmedManual(v) ? `<span class="badge badge-manual" title="${escapeHtml(manualSourceInfo(v).tip)}" aria-label="${escapeHtml(manualSourceInfo(v).tip)}">Manual</span>` : ''}
             ${statusBadge}
             <button type="button" class="watch-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Watching — tap to stop' : 'Watch this model — get alerted when another shows up'}">${ICON.bell}</button>
             <button type="button" class="share-btn" data-vkey="${escapeHtml(vehicleKey(v))}" title="Share this find">${ICON.share}</button>

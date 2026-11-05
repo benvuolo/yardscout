@@ -4,8 +4,10 @@
 Covers:
   1. _normalize_listing_trans — yard shorthand -> VIN-decode display format,
      with unknowns returning "" (never guessed).
-  2. output_json — transSrc provenance: "listing" beats the vpic fallback,
-     "vin" when only the decode knows, "" when nobody does.
+  2. output_json — transSrc provenance: "listing" when only the listing
+     knows, "vin" when the decode knows (the decode outranks the listing
+     when both agree), "" when nobody does, and "" when the listing and the
+     decode disagree (conflict: nothing recorded, see trans_evidence.py).
   3. compact_inventory_v2 — the extras shard carries [photo, color, engine,
      trans, transSrc] with the trailing-empty trim never stranding transSrc.
   4. App-regex compatibility — every normalized value must behave correctly
@@ -60,7 +62,15 @@ def mk(vid, **kw):
 
 vehicles = [
     mk("t-listing", _trans="5-spd Manual",
+       _vpic={"transmission": "", "trim": "", "series": "",
+              "driveType": "", "trimQuality": "", "bodyClass": "", "engine": "",
+              "modelYear": "", "make": "", "model": ""}),
+    mk("t-conflict", _trans="5-spd Manual",
        _vpic={"transmission": "6-spd Automatic", "trim": "", "series": "",
+              "driveType": "", "trimQuality": "", "bodyClass": "", "engine": "",
+              "modelYear": "", "make": "", "model": ""}),
+    mk("t-agree", _trans="5-spd Manual",
+       _vpic={"transmission": "5-spd Manual/Standard", "trim": "", "series": "",
               "driveType": "", "trimQuality": "", "bodyClass": "", "engine": "",
               "modelYear": "", "make": "", "model": ""}),
     mk("t-vin", _vpic={"transmission": "Manual", "trim": "", "series": "",
@@ -69,9 +79,13 @@ vehicles = [
     mk("t-none"),
 ]
 entries = {e["id"]: e for e in js.output_json(vehicles, only_matches=False)}
-check("listing trans wins over vpic fallback",
+check("listing trans used when the decode has none",
       entries["t-listing"]["trans"] == "5-spd Manual")
 check("listing provenance", entries["t-listing"]["transSrc"] == "listing")
+check("listing vs decode disagree -> nothing recorded",
+      entries["t-conflict"]["trans"] == "" and entries["t-conflict"]["transSrc"] == "")
+check("listing and decode agree -> decode text, vin provenance",
+      entries["t-agree"]["trans"] == "5-spd Manual/Standard" and entries["t-agree"]["transSrc"] == "vin")
 check("vpic fallback trans", entries["t-vin"]["trans"] == "Manual")
 check("vin provenance", entries["t-vin"]["transSrc"] == "vin")
 check("no data -> empty trans", entries["t-none"]["trans"] == "")

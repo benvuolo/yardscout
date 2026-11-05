@@ -24608,6 +24608,76 @@ def _vehicle_coords(v: dict) -> tuple[float | None, float | None]:
     return None, None
 
 
+try:
+    import trans_evidence as _trans_ev
+except ImportError:  # pragma: no cover - imported as scraper.junkyard_scraper
+    from scraper import trans_evidence as _trans_ev
+
+# Per-scan tally of how each car's transmission was resolved (logged by
+# output_json's caller; also read by tests).
+TRANS_RESOLVE_STATS: "collections.Counter" = collections.Counter()
+_TRANS_CLAIMS_CACHE: dict = {}
+
+# Makes of one maker group: a yard calling a Dodge Caliber a "Chrysler
+# Caliber" is a label quirk, not a VIN that belongs to another car.
+_TRANS_MAKE_GROUPS = [
+    {"chrysler", "dodge", "jeep", "ram", "plymouth", "eagle", "srt", "fiat"},
+    {"chevrolet", "gmc", "pontiac", "buick", "oldsmobile", "cadillac", "saturn", "geo", "hummer"},
+    {"ford", "mercury", "lincoln"}, {"toyota", "scion", "lexus"}, {"nissan", "datsun", "infiniti"},
+    {"honda", "acura"}, {"hyundai", "kia", "genesis"}, {"volkswagen", "audi"}, {"bmw", "mini"},
+]
+
+
+def _trans_make_conflict(v: dict, vp: dict | None) -> bool:
+    """True when the VIN's decoded make contradicts the yard's make across
+    maker groups (the VIN may belong to another car, e.g. an "Acura ILX"
+    whose VIN decodes as a Chevrolet Cruze)."""
+    if not vp or not _vpic_mismatch_msg({**v, "year": 0}, vp):
+        return False
+    a = (vp.get("make") or "").strip().lower()
+    b = (v.get("make") or "").strip().lower()
+    return not any(a in g and b in g for g in _TRANS_MAKE_GROUPS)
+
+
+def _resolve_trans(v: dict, vp: dict | None, entry: dict) -> tuple[str, str]:
+    """(trans, transSrc) for one output row; see trans_evidence for the
+    precedence and conflict rules. Rule claims (VIN code, trim, EPA) are
+    skipped when the VIN's decoded make contradicts the yard's make (the VIN
+    may belong to another car), and need no network: they read the VIN, the
+    cached decode and the listing only."""
+    listing = v.get("_trans", "") or ""
+    vpic_t = (vp or {}).get("transmission", "") or ""
+    claims: list[dict] = []
+    make_conflict = _trans_make_conflict(v, vp)
+    if not make_conflict:
+        try:
+            # output_json runs twice per scan (payload + history DB): memoize
+            vpk = tuple((vp or {}).get(k, "") for k in
+                        ("make", "model", "modelYear", "trim", "series", "engine", "driveType"))
+            key = (v.get("vin", "") or "", v.get("year"), entry.get("make", ""),
+                   v.get("model", "") or "", v.get("_state", "") or "", vpk)
+            claims = _TRANS_CLAIMS_CACHE.get(key)
+            if claims is None:
+                if len(_TRANS_CLAIMS_CACHE) > 800_000:
+                    _TRANS_CLAIMS_CACHE.clear()
+                claims = _TRANS_CLAIMS_CACHE[key] = _trans_ev.load_rules().infer(
+                    vin=key[0], listing_year=key[1], make=key[2], model=key[3],
+                    dec=vp, state=key[4])
+        except Exception as e:  # never let evidence rules break a scan
+            TRANS_RESOLVE_STATS["rules_error"] += 1
+            if TRANS_RESOLVE_STATS["rules_error"] == 1:
+                print(f"  [trans] rule evaluation failed ({e}); rule claims skipped", file=sys.stderr)
+            claims = []
+    trans, src, info = _trans_ev.resolve(vpic_t, listing, claims)
+    if info.get("conflict"):
+        TRANS_RESOLVE_STATS["conflict_nothing_recorded"] += 1
+    if src:
+        TRANS_RESOLVE_STATS[f"src_{src}"] += 1
+        if _trans_ev.trans_class(trans) == _trans_ev.MANUAL:
+            TRANS_RESOLVE_STATS[f"manual_{src}"] += 1
+    return trans, src
+
+
 def output_json(vehicles: list[dict], only_matches: bool = True):
     output = []
     for v in vehicles:
@@ -24653,20 +24723,19 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
         entry["photo"] = v.get("_photo", "")
         entry["color"] = v.get("_color", "")
         entry["engine"] = v.get("_engine", "")
-        entry["trans"] = v.get("_trans", "")
-        # Transmission provenance, same vocabulary as parts' trim_status:
-        # "listing" = the yard's own feed/table said so, "vin" = the VIN
-        # decode said so. Shipped so the UI can say which one it's quoting.
-        entry["transSrc"] = "listing" if entry["trans"] else ""
+        # Transmission + provenance (trans_evidence.resolve): the VIN decode
+        # ("vin") > the yard's own listing ("listing") > the maker's VIN code
+        # ("vin_code") > a manual-only trim ("trim") > the only transmission
+        # EPA lists for the engine / model-year ("engine" / "model"). If two
+        # sources disagree, nothing is recorded. Rule claims only ever add
+        # "Manual"; the UI names the source in plain words.
         vp = v.get("_vpic")
-        if isinstance(vp, dict) and vp:
+        vp = vp if isinstance(vp, dict) and vp else None
+        entry["trans"], entry["transSrc"] = _resolve_trans(v, vp, entry)
+        if vp:
             # Chain feeds rarely carry specs; the VIN decode fills them in.
             if not entry["engine"]:
                 entry["engine"] = vp.get("engine", "")
-            if not entry["trans"]:
-                entry["trans"] = vp.get("transmission", "")
-                if entry["trans"]:
-                    entry["transSrc"] = "vin"
             entry["vpicTrim"] = vp.get("trim", "")
             entry["vpicTrimQuality"] = vp.get("trimQuality", "")
             # True when VPIC returned a specific trim string we trust for trim-gated parts (not OEM "all trims" blobs).
@@ -25193,7 +25262,12 @@ def _write_yards_added(payload: dict) -> None:
 
 def build_inventory_json_payload(vehicles: list[dict], only_matches: bool) -> dict:
     """Wrapper written to inventory_live.json: metadata + vehicle rows."""
-    return compact_inventory_v2(output_json(vehicles, only_matches=only_matches))
+    TRANS_RESOLVE_STATS.clear()
+    entries = output_json(vehicles, only_matches=only_matches)
+    if TRANS_RESOLVE_STATS:
+        print("  [trans] " + ", ".join(f"{k}={v}" for k, v in sorted(TRANS_RESOLVE_STATS.items())),
+              file=sys.stderr)
+    return compact_inventory_v2(entries)
 
 
 # --- Stale-keep: never publish a vanished yard -------------------------------

@@ -150,3 +150,21 @@ hub review before merge.
   decoded transmission there (unknown, no badge); 1,193 cached decodes
   affected, nothing else. Live with scan 41949003681. True manuals in those
   cells return only through independent evidence (manual-detection work).
+- 2026-11-05 integration (worktree branch, NOT merged, NOT live): the
+  verified worklists (vin_rules_0..7, manual_trims, epa_sole) compile into
+  `scraper/manual_detect/trans_rules.json`
+  (`python3 -I scraper/manual_detect/compile_trans_rules.py`; rerun after any
+  worklist edit, `test_manual_detect.py` fails on a stale table).
+  `scraper/trans_evidence.py` applies it in `output_json`: precedence vPIC >
+  listing > VIN code > manual-only trim > EPA sole offering; any
+  disagreement records nothing; rule claims only ever add "Manual"
+  (automatic codes only withhold). New transSrc: vin_code, trim, engine,
+  model; app.js names them in plain words (badge tooltip + spec line), sw
+  jh-v144. On the 17:18Z data (cached decodes, no network): confirmed
+  manuals 3,207 -> 3,573 (+476 new, -110 withheld: 109 MY1997 Accords and
+  the 1989 Integra DA344 where Honda's filing contradicts vPIC). Ground
+  truth: manual claims 2,738/2,738, all claims 27,701/27,702.
+  Hub decisions open: (1) the 1997 Accord rule is used conflict-only
+  (CONFLICT_ONLY in compile_trans_rules.py; remove it to keep vPIC's 1997
+  labels); (2) listing-vs-vPIC disagreements now record nothing (was:
+  listing wins); no lot car has both today.
