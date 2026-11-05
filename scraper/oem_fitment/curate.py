@@ -1387,8 +1387,24 @@ def global_gates(cur: Curation) -> list:
                    "record; spec 11.4, E5/V7)")
     unrel = [s for s in sites if not cur.reliable.get(s)]
     if unrel:
-        out.append(f"engine cells not audited as reliable on {', '.join(unrel)} (E7: no alternator, starter or "
-                   "ignition-coil Verified from them)")
+        out.append(f"engine cells not audited as reliable on {', '.join(unrel)}: every engine test there is maybe "
+                   "(spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks "
+                   "engine categories; the completion worklist cannot rank their cells until an audit flips "
+                   "ENGINE_CELLS_RELIABLE")
+    for s in sites:
+        rows = [f for r in cur.records if r.site == s for f in r.rows]
+        if not rows:
+            continue
+        usable = [f for f in rows if f.layout == "trim" and not f.trims_from_options]
+        share = len(usable) / len(rows)
+        if share < 0.1:
+            why = ("its option column holds trims (option_column_is_trims), which count only after a namespace "
+                   "audit (spec 5.2)") if any(f.trims_from_options for f in rows) else \
+                  "it prints an option column, and option-layout rows are never coverage (spec 5.5)"
+            out.append(f"{s}: only {share:.0%} of its {len(rows)} fitment rows can be coverage: {why}")
+        elif usable and sum(1 for f in usable if not f.engines) / len(usable) > 0.9:
+            out.append(f"{s} prints no engine cell on most trim-layout rows: EngineU stays empty, so cover yes is "
+                       "impossible there (spec 5.10) even after an engine audit; needs a spec decision")
     if cur.blocked:
         out.append(f"blocked by the crawl breaker: {', '.join(sorted(cur.blocked))} (their cells never close, C9)")
     return out

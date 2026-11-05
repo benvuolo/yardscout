@@ -141,4 +141,24 @@ check("6 a door-module Likely note says it is the whole module panel (hub decisi
 long_ = C._likely_note("Hyundai/Kia", "82471-3Q000-ABCDEFGH", "trim-limited " + "x" * 300, C.PACK_TEXT["motor"])
 check("6 an over-long reason is cut, never the template: the note stays valid (V5)",
       len(long_) <= 160 and V._note_ok(long_, "likely", []) is None, long_)
+# ------------------------------------------------------------------ 7
+# Reports name every namespace-wide gate (the task: say exactly why).
+cur, doc = run("toyota", sienna_fixture(), status_table=ST)
+check("7 the closed, audited positive control has no namespace gate", C.global_gates(cur) == [],
+      str(C.global_gates(cur)))
+cur, doc = run("toyota", sienna_fixture())
+check("7 without an audit record the gate is named", any("audit gate" in g for g in C.global_gates(cur)))
+cur, doc = run("mopar", {f"raw/{JEEP}.jsonl": [by_pn(jeep, "4602780AD")]})
+g7 = C.global_gates(cur)
+check("7 no manifests and no audit: both named", any("R1 list manifests" in g for g in g7)
+      and any("audit gate" in g for g in g7), str(g7))
+pg = {"site": "www.nissanpartsdeal.com", "category": "alternator", "pn": "23100-JA00A", "name": "Alternator Assy",
+      "seed": {"make": "Nissan", "model": "Altima", "year": 2012}, "evidence_lines": [], "retrieved": "2026-11-05T01:00:00Z",
+      "fitment": [{"years": [2012, 2012], "make": "Nissan", "model": "Altima", "trims": [], "engines": [],
+                   "options": ["QR25DE"], "raw": "2012 Nissan Altima | | QR25DE"}]}
+cur, doc = run("nissan", {"raw/www.nissanpartsdeal.com.jsonl": [pg]})
+g7 = C.global_gates(cur)
+check("7 a PartsGiant site: unreliable engine cells block every category, option-layout rows are named",
+      any("in any category" in g for g in g7) and any("can be coverage" in g and "option column" in g for g in g7),
+      str(g7))
 done("test_regressions")
