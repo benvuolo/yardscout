@@ -12,3 +12,11 @@
 05:25:05 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=392 errors=3
 05:58:01 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007, 2013] records=590 errors=3
 05:58:01 time budget reached records=590
+05:58:10 start site=www.lexuspartsnow.com segments=25 tiers=['A', 'B']
+05:58:10 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002] records=590 errors=3
+05:58:10 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=590 errors=3
+05:58:10 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=590 errors=3
+06:13:38 nav-fail Lexus ES 350 2005: ValueError: no 2005 catalog for Lexus ES 350 (lexus-['es350'])
+06:13:38 seg done tier=A Lexus ES 350 [1997, 2018] seeds=[2007, 2005] records=692 errors=4
+06:23:22 seg done tier=A Lexus ES 330 [2004, 2006] seeds=[2004] records=750 errors=4
+06:33:30 time budget reached records=812
