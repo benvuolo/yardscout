@@ -367,7 +367,7 @@ NOT_RULED = [
     "Toyota Celica All-Trac Turbo ST165 (MY1988-89), Camry All-Trac 2.0 4WD (MY1988 manual-only per EPA), 4Runner 2.4 4WD (MY1984, 1994-95), 22R-TE turbo pickups (MY1985-88), FJ60 Land Cruiser (MY1984-87), GR Corolla (MY2023+), Nissan Pathfinder 2.4 4WD (MY1987-89), 200SX turbo (MY1986), Sentra 4WD wagon (MY1987-88), Stanza 4WD wagon (MY1987), Sentra 1.7 diesel (MY1985-86): EPA lists only manuals, but the filings for those years were not read; no lot car with a matching VIN was found for most of them. Not ruled.",
     "Matrix XRS MY2003 (2T1KY..E): EPA lists both a 4-speed automatic and a 6-speed manual for the 2ZZ-GE that year (Wikipedia agrees), so MY2003 is excluded from the Matrix rule.",
     "Lexus and Infiniti: no engine/drive cell is manual-only in EPA for any year; no rule.",
-    "Cars without a VIN (Toyota 2,468, Lexus 345, Scion 188, Nissan 3,562, Infiniti 323 on the lots) cannot be reached by VIN rules.",
+    "Cars without a 17-character VIN (summary.five_make_coverage.<make>.no_vin) cannot be reached by VIN rules.",
     "Cars at Canadian yards (AB, BC) are scanned but not newly confirmed: the manual-only facts are US-market facts (EPA).",
 ]
 
