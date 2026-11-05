@@ -75,3 +75,28 @@
 04:33:45 seg done tier=A Honda CR-V [1997, 2001] seeds=[2001] records=628 errors=0
 04:56:17 seg done tier=A Honda Fit [2007, 2020] seeds=[2008, 2015, 2012] records=707 errors=0
 04:56:17 time budget reached records=707
+04:56:26 start site=www.hondapartsnow.com segments=28 tiers=['A', 'B']
+04:56:26 seg done tier=A Honda Accord [1998, 2002] seeds=[2002] records=707 errors=0
+04:56:26 seg done tier=A Honda Accord [2003, 2005] seeds=[2003] records=707 errors=0
+04:56:26 seg done tier=A Honda Odyssey [2005, 2010] seeds=[2007] records=707 errors=0
+04:56:26 seg done tier=A Honda Civic [2006, 2008] seeds=[2008] records=707 errors=0
+04:56:26 seg done tier=A Honda Accord [2008, 2010] seeds=[2008] records=707 errors=0
+04:56:26 seg done tier=A Honda Pilot [2003, 2008] seeds=[2006] records=707 errors=0
+04:56:26 seg done tier=A Honda Accord [2006, 2007] seeds=[2007] records=707 errors=0
+04:56:26 seg done tier=A Honda Civic [2001, 2003] seeds=[2002] records=707 errors=0
+04:56:26 seg done tier=A Honda Civic [2004, 2005] seeds=[2005] records=707 errors=0
+04:56:26 seg done tier=A Honda Odyssey [1995, 2004] seeds=[2003] records=707 errors=0
+04:56:26 seg done tier=A Honda Civic [1996, 2000] seeds=[2000] records=707 errors=0
+04:56:26 seg done tier=A Honda Civic [2009, 2011] seeds=[2009] records=707 errors=0
+04:56:26 seg done tier=A Honda CR-V [2002, 2006] seeds=[2004] records=707 errors=0
+04:56:26 seg done tier=A Honda Pilot [2009, 2015] seeds=[2011] records=707 errors=0
+04:56:26 seg done tier=A Honda Civic [2012, 2015] seeds=[2012] records=707 errors=0
+04:56:26 seg done tier=A Honda Accord [1994, 1997] seeds=[1997] records=707 errors=0
+04:56:26 seg done tier=A Honda Accord [2011, 2012] seeds=[2012] records=707 errors=0
+04:56:26 seg done tier=A Honda CR-V [2007, 2011] seeds=[2007] records=707 errors=0
+04:56:26 seg done tier=A Honda CR-V [1997, 2001] seeds=[2001] records=707 errors=0
+04:56:26 seg done tier=A Honda Fit [2007, 2020] seeds=[2008] records=707 errors=0
+05:04:34 seg done tier=A Honda Odyssey [2011, 2017] seeds=[2011] records=736 errors=0
+05:10:58 seg done tier=A Honda Element [2003, 2011] seeds=[2003] records=754 errors=0
+05:20:02 seg done tier=A Honda Accord [2013, 2017] seeds=[2013] records=793 errors=0
+05:29:38 time budget reached records=837
