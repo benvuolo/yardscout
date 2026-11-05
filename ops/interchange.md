@@ -466,3 +466,71 @@ What a curator must know:
   FR. Grille", 2005 TL mesh only).
 - 2010 TL has no power-steering-pump diagram. 1997 Accord DX has no starter diagram.
 - Distributor-era ignition (pre-1998 Accord, 2002 Accord DX): no coil diagram.
+
+## Phase 0 claim removals, CURATION_SPEC §7.2 P0.1-P0.6 (branch worktree-wf_9b3745bc-31f-1, 2026-11-05)
+
+Not merged or pushed; four commits on the branch (audit, data, app, this
+note). Nothing here adds a claim.
+
+- **P0.5 data** (`scraper/junkyard_scraper.py` ENGINE_FAMILIES, own commit).
+  `scraper/_audit_verified_fits.py` gained (e) a vPIC-hybrid column (vPIC
+  decode after `_correct_vpic` / vpic side-table, the yard's model name, or a
+  VIN-pattern sibling of yard-named hybrids) and (f) Verified donors per
+  family, with `--compare before.json`. Every app where hybrids pass the
+  engine gate is split at the hybrid years and flagged ambig; three `sole`
+  flags dropped where a decode-less hybrid of another displacement passed;
+  gm-ecotec-lcv's starter group withdrawn (280-0434 lists 2.0T/2.5, span
+  admits the 2.4 eAssist Eco). Full list and basis:
+  `scraper/interchange_research.md` "Hybrid over-claim fix 2026-11-05".
+  All spec-listed apps confirmed from data; data added toyota-3mz
+  Highlander 06-07, Optima (both Theta families), nissan-qr25 Altima 07-11,
+  the gm-ecotec24 Saturns, Mercury Milan/Mariner + Mazda Tribute,
+  gm-gen4-truck (2-mode), mopar-hemi57 Aspen 09.
+  Verified donors (333,449 cars) before -> after: alternator 124,263 ->
+  117,284; starter 36,902 -> 34,716; engine-assembly 226,129 -> 208,591.
+  Hybrid-flagged Verified donors 756/172/1,312 -> 86/0/86 (Malibu Eco: its
+  alternator is published, kept). Reaches every client when the next
+  scan.yml run rewrites `docs/data/interchange.json` (not regenerated on the
+  branch, to avoid colliding with the scan commits).
+- **P0.1-P0.4 app** (`docs/app.js`): platform tier fails closed; header
+  notes escaped; rowWarn on platform rows; `pfDonorIdentity(v, {oem})` +
+  `pfVinModelYear` + `pfVinValid` (check digit) on platform, vg and
+  engine-assembly Verified rows. 557 lot cars are identity-flagged; 99.5% of
+  17-character lot VINs pass the check digit (1,279 fail, 119 bad chars),
+  which bounds the OEM no-valid-VIN rule. **P0.6** `docs/sw.js` jh-v142. Web
+  on deploy; native only after the owner's "ship".
+- **Tests**: `backend/test/pf_guards_unit.mjs` (node; loads the real
+  pfRunSearch from app.js; 63 checks, 34 fail on the previous app.js) instead
+  of the §9 part_finder_e2e.py additions; `scraper/test_interchange.py` P0.5
+  section (16 checks fail on the previous data). All scraper, oem_fitment,
+  aftermarket and node unit tests pass. Browser e2e: interchange, pf_ux,
+  yaris pass; part_finder has one failure, "m3 alternator: message counts
+  tracked M3 donors", identical on the previous app.js (the lot's only M3 is
+  a 2008, outside the E46 trim apps; the test hard-codes "1 in tracked
+  yards"). browser_e2e.py not run (needs wrangler dev + D1; billing flows).
+
+### For the hub (found, not changed here)
+
+1. **Engine-assembly Verified across displacements.** The client's
+   engine-assembly tier is Verified whenever the donor's decode is any of the
+   family's liters, so a 4.8 GMT900 donor is "Verified" for a 6.2 seeker,
+   a 2.0 for a 2.5 in ford-mzr, the 2.4 Eco for a 2.5 Malibu. The family
+   note says "any donor in this family carries the same long block", which
+   multi-displacement families contradict. Needs a per-displacement rule.
+2. **App-level ambig is blunt.** It caps every engine of the flagged years:
+   hk-theta-gdi alternator Verified donors 2,011 -> 0, ford-fusion-cd4 -> 0,
+   gm-gen4-truck alternator 897 -> 559. Restoring them honestly needs the app
+   to tell hybrids apart per car (the vpic side-table already carries
+   Camry "Hybrid"/"Gas" from VIN_TRIM_PATTERNS; Sonata/Optima/Altima/
+   Highlander hybrids are separable by VIN positions 4-8).
+3. **Yard-named hybrids reach prefix apps** ("Sierra Hybrid" under
+   `Sierra*`, "Yukon Hybrid", "Escalade Hybrid"): now capped at Likely with
+   the note, but they should not be alternator/starter donors at all.
+4. **Known hybrids not seen in the lot data or decode cache** (not acted on):
+   RAV4 Hybrid 2016-18 (toyota-2ar RAV4 15-18 still sole; no RAV4 13+
+   group), Fit EV 2013-14 (honda-l15 Fit sole; starter group 2010-13), Rogue
+   Hybrid 2017-19 (nissan-qr25 Rogue sole), Regal eAssist 2012-13
+   (gm-ecotec24), 2004-07 GM PHT Silverado/Sierra hybrids (gm-gen3-truck).
+5. The audit's hybrid signal is a heuristic for finding apps, never shipped;
+   vPIC model-level strings ("Base/Hybrid" on every 2011-16 Highlander)
+   inflate the counts for those rows.
