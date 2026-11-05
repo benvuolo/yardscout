@@ -47,7 +47,7 @@ jobs:
           def on_branch(path):
               return subprocess.run(["git", "cat-file", "-e", f"oem-raw:{path}"],
                                     capture_output=True).returncode == 0
-          sites = [s for s in sites if not on_branch(f"raw/{s}.done") and not on_branch(f"raw/{s}.blocked")]
+          sites = [s for s in sites if not any(on_branch(f"raw/{s}.{m}") for m in ("done", "blocked", "paused"))]
           print("sites=" + json.dumps(sites))
           PY
           cat "$GITHUB_OUTPUT"
@@ -114,6 +114,18 @@ jobs:
             rc=$?
             set -e
             tail -2 "raw/$SITE.log" 2>/dev/null || true
+            # offline evidence audit of everything crawled so far; a parser
+            # bug (>0.5% mismatches) pauses the site for human review
+            set +e
+            python3 ci_audit.py "raw/$SITE.jsonl" | tee -a "$GITHUB_STEP_SUMMARY"
+            arc=${PIPESTATUS[0]}
+            set -e
+            if [ "$arc" -eq 20 ]; then
+              echo "evidence mismatch above 0.5%: paused for review $(date -u +%FT%TZ)" > "raw/$SITE.paused"
+              push_raw
+              echo "::error::$SITE paused by the evidence audit"
+              break
+            fi
             push_raw
             # 10 = time budget reached, 11 = network-failure streak (pause, retry)
             if [ "$rc" -eq 11 ]; then sleep 120; continue; fi
