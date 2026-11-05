@@ -456,8 +456,13 @@ def _label_values(ev: list, label: str) -> list:
 def evidence_problems(r: Record) -> list:
     """§5.3 evidence re-check, independent of the site parsers: pn, every
     fitment row's cells in order, position, replaces / replaced_by. Returns
-    the list of mismatches (empty = verified)."""
-    ev = [str(x) for x in r.evidence_lines]
+    the list of mismatches (empty = verified).
+
+    Whitespace runs are collapsed on both sides: the SimplePart template
+    collapses them on purpose and pages print doubled spaces ("2023,
+    2012-2014"; AUDIT.md, VW and Jeep 68242286AB). Nothing else is
+    normalized."""
+    ev = [_clean(x) for x in r.evidence_lines]
     probs = []
     norm = lambda s: re.sub(r"[^A-Z0-9]", "", (s or "").upper())  # noqa: E731
     # pn: PartsGiant prints "Part Number:"; SimplePart's evidence starts at the
@@ -473,8 +478,8 @@ def evidence_problems(r: Record) -> list:
     # fitment rows: each distinct raw in order
     raws = []
     for f in r.rows:
-        if not raws or raws[-1] != f.raw:
-            raws.append(f.raw)
+        if not raws or raws[-1] != _clean(f.raw):
+            raws.append(_clean(f.raw))
     if r.template == "partsgiant":
         try:
             start = next(i for i, x in enumerate(ev) if x.startswith("Year Make Model"))

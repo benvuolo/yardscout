@@ -80,5 +80,24 @@ cur, doc = run("toyota", files, status_table=ST)
 m = cur.cells_info[(S04, "window-regulator")]["members"]["toyota:6980108S01"]
 check("3 an UNKNOWN clause ('Lt' alone) is read whole and may add a conflict",
       m["slot"].reason == "position_conflict", f"{m['slot']}")
-del copy
+# ------------------------------------------------------------------ 4
+# Real Jeep coil 68242286AB (oem-raw@d1108d0 line 769): the page prints
+# "2023,  2012-2014, 2007-2010 Chrysler 300" with a doubled space; the
+# template collapses it in `raw`. The re-check collapses whitespace on both
+# sides (as AUDIT.md's auditor does) and nothing else.
+import adapters as A  # noqa: E402
+from _util import real  # noqa: E402
+
+coil = real("jeep_d1108d0.jsonl")[0]
+rec = A.to_record("www.jeeppartsdeal.com", "mopar", 769, coil)
+check("4 real 68242286AB with a doubled space in its evidence passes the re-check",
+      A.evidence_problems(rec) == [], str(A.evidence_problems(rec)))
+bad = copy.deepcopy(coil)
+bad["evidence_lines"] = [x.replace("2023,  2012-2014", "2022,  2012-2014") for x in bad["evidence_lines"]]
+check("4 a changed year in the same line still fails",
+      A.evidence_problems(A.to_record("www.jeeppartsdeal.com", "mopar", 769, bad)) != [])
+bad = copy.deepcopy(coil)
+bad["evidence_lines"] = [x.replace("C SRT8", "C  SRT9") for x in bad["evidence_lines"]]
+check("4 a changed trim cell still fails",
+      A.evidence_problems(A.to_record("www.jeeppartsdeal.com", "mopar", 769, bad)) != [])
 done("test_regressions")
