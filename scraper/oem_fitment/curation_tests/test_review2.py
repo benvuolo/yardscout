@@ -339,4 +339,52 @@ check("F11 curate time: --as-of 11 days later (ancestor 121 days old, so unverif
       {"stale", "uncrawled_chain_member"} & set(cur.cells_info[(S04, WR)]["closure"]) and verified(doc, WR) == [],
       str(cur.cells_info[(S04, WR)]["closure"]))
 
+# ------------------------------------------------------- F7 / F15 (loader)
+import json  # noqa: E402
+import tempfile  # noqa: E402
+from pathlib import Path  # noqa: E402
+
+J = js()
+
+
+def build_with(doc, status):
+    gd = Path(tempfile.mkdtemp(prefix="oem_r2_"))
+    (gd / f"{doc['ns']}.json").write_text(json.dumps(doc))
+    J.OEM_GROUPS_DIR, J.OEM_STATUS_OVERRIDE = gd, status
+    try:
+        return J.build_interchange_payload()
+    finally:
+        J.OEM_GROUPS_DIR, J.OEM_STATUS_OVERRIDE = J.SCRIPT_DIR / "oem_fitment" / "groups", None
+
+
+def retarget(doc, model):
+    d = copy.deepcopy(doc)
+    g = d["groups"][0]
+    g["apps"] = [["Toyota", model, 2004, 2005]]
+    for y in g["years"]:
+        y["t"][1] = model
+    return d
+
+
+p = build_with(base_doc, ST)
+check("F7 control: the positive control ships through the loader with the tree hash and model map enforced",
+      p["oemStatus"]["toyota"].startswith("ok") and any(g["tier"] == "verified" for g in p["oemGroups"]),
+      str(p["oemStatus"]))
+stale = copy.deepcopy(base_doc)
+stale["policy_sha256"] = "0" * 64
+p = build_with(stale, confirmed((TOY, WR), policy_sha="0" * 64))
+check("F7 a file curated under another policy (V8) is dropped at build time, even with a matching audit record",
+      p["oemStatus"]["toyota"].startswith("dropped: V8") and p["oemGroups"] == [], str(p["oemStatus"]))
+for model, why in (("Highlander Hybrid", "excluded by the model map"), ("Siena", "not in the model map")):
+    p = build_with(retarget(base_doc, model), ST)
+    check(f"F15 a Verified app on a target {why} ('{model}') is dropped at build time (V2)",
+          p["oemStatus"]["toyota"].startswith("dropped: V2") and p["oemGroups"] == [], str(p["oemStatus"]))
+tg = V.model_map_targets()
+check("F7 V2 refuses a Verified app on an ambig target and allows it in Likely",
+      "ambig" in (V._app_ok(["Chevrolet", "Avalanche", 2004, 2005], {"Chevrolet"}, 2027, tg, "gm", verified=True) or "")
+      and V._app_ok(["Chevrolet", "Avalanche", 2004, 2005], {"Chevrolet"}, 2027, tg, "gm", verified=False) is None)
+check("F1/V2 a year outside a target's model-map years is refused (Wrangler JK carries only 2018)",
+      V._app_ok(["Jeep", "Wrangler", 2017, 2019], {"Jeep"}, 2027, {("mopar", "Jeep", "Wrangler"): [((2018, 2018), "")]},
+                "mopar") is not None)
+
 done("test_review2")

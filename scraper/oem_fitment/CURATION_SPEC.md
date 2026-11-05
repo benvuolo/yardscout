@@ -681,6 +681,11 @@ T is closed, and for every slot T's closed pages list:
 
 ### 5.12 Category status (policy.CATEGORY_STATUS)
 
+The audit records live in `audits.json` (loaded as `policy.CATEGORY_STATUS`), never in
+`policy.py`: `policy_sha256` hashes `policy.py`, so a record kept there would change the hash
+it must match (review, 2026-11-05). `audits.json` is not hashed; each record names the
+`policy_sha256` and raw commit it audited (V7), so any policy edit still needs a re-audit.
+
 - Every (site, category) starts `unconfirmed`.
 - It flips to `confirmed` only with an audit record `{date, auditor_session,
   sample_n, errors: 0}` (§11).
@@ -1046,6 +1051,9 @@ in `_load_oem_layer` (structural; drop on failure).
   record matches `policy_sha256` and the raw commit.
 - **V8. Determinism.** Ids recompute, lists are sorted, and `policy_sha256`
   matches the tree.
+  The payload loader enforces V8 and V2 (model-map targets, no Verified app on an
+  `ambig` target) too, so a committed file drops its namespace once the policy or the
+  model map changes, until it is re-curated.
 - **V9. Old-key immutability.** Built with and without `groups/`, the old
   keys differ only by demotions (verified → likely, removed vg groups, added
   ambig).

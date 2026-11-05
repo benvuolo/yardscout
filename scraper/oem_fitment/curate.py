@@ -63,11 +63,9 @@ def _sha1(o) -> str:
 
 
 def policy_sha256(model_map_path: Path | None = None) -> str:
-    h = hashlib.sha256()
-    for p in (HERE / "policy.py", HERE / "notes.py", HERE / "positions.py",
-              Path(model_map_path or MM.MODEL_MAP_PATH)):
-        h.update(p.read_bytes())
-    return h.hexdigest()
+    """policy.py + notes.py + positions.py + model_map.json; never the audit
+    store (audits.json), which the payload loader checks the same way."""
+    return policy.tree_sha256(model_map_path or MM.MODEL_MAP_PATH)
 
 
 def _ts(s: str) -> datetime | None:

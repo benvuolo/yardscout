@@ -13885,7 +13885,8 @@ def build_interchange_payload() -> dict:
 OEM_GROUPS_DIR = SCRIPT_DIR / "oem_fitment" / "groups"
 OEM_VALIDATOR = SCRIPT_DIR / "oem_fitment" / "validate.py"
 # Tests only: a CATEGORY_STATUS table to validate fixture groups against.
-# None in production, where oem_fitment/policy.py CATEGORY_STATUS rules.
+# None in production, where the audit store oem_fitment/audits.json rules
+# (loaded as policy.CATEGORY_STATUS; it is not part of policy_sha256).
 OEM_STATUS_OVERRIDE = None
 _OEM_DEMOTE_NOTE = " — OEM catalog numbers differ within this group; verify the part number"
 
@@ -13915,7 +13916,19 @@ def _load_oem_layer(now: datetime | None = None) -> dict:
             out["status"][p.stem] = f"dropped: validator unavailable ({type(e).__name__})"
             print(f"[interchange] oem {p.stem} dropped: validator unavailable: {e}", file=sys.stderr)
         return out
-    ctx = V.context_from(sys.modules[__name__], status_table=OEM_STATUS_OVERRIDE)
+    # V2 (the target is in the validated model map; no Verified claim on an
+    # ambig target) and V8 (the file was curated under this tree's policy:
+    # policy.py, notes.py, positions.py, model_map.json) are enforced here
+    # too, so a committed file stops shipping the moment any of those
+    # tighten, until it is re-curated (review F7 / F15).
+    try:
+        ctx = V.context_from(sys.modules[__name__], status_table=OEM_STATUS_OVERRIDE,
+                             policy_sha=V.tree_policy_sha256(), targets=V.model_map_targets())
+    except Exception as e:  # noqa: BLE001 - the scan must keep publishing
+        for p in files:
+            out["status"][p.stem] = f"dropped: model map or policy unreadable ({type(e).__name__})"
+            print(f"[interchange] oem {p.stem} dropped: model map or policy unreadable: {e}", file=sys.stderr)
+        return out
     now = now or datetime.now(timezone.utc)
     for p in files:
         ns = p.stem

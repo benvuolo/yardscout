@@ -8,12 +8,15 @@ model_map.json) is pinned into every generated groups/<ns>.json
 are re-curated.
 
 Changing a value here can only be done by reviewed commit. Values that would
-let a claim through (CATEGORY_STATUS "confirmed", ENGINE_CELLS_RELIABLE True,
-a SIBLING_IGNORE entry) need the audit record named in their basis.
+let a claim through (an audits.json record, ENGINE_CELLS_RELIABLE True, a
+SIBLING_IGNORE entry) need the audit record named in their basis.
 """
 from __future__ import annotations
 
 import re
+from pathlib import Path as _Path
+
+_HERE = _Path(__file__).resolve().parent
 
 CURATE_VERSION = "1.0"
 SCHEMA = 1
@@ -106,10 +109,50 @@ ENGINE_CELLS_RELIABLE: dict[str, bool] = {
 }
 
 # §5.12: every (site, category) starts unconfirmed; it flips only with an
-# audit record {date, auditor_session, sample_n, errors: 0, policy_sha256,
-# raw_commit} written by a session that did not write curate.py (§11).
-# No audit has run yet (2026-11-05), so this table is empty on purpose.
-CATEGORY_STATUS: dict[str, dict[str, dict]] = {}
+# audit record {status: "confirmed", date, auditor_session, sample_n,
+# errors: 0, policy_sha256, raw_commit} written by a session that did not
+# write curate.py (§11). The records live in audits.json, NOT in this file:
+# policy_sha256 hashes this file, so an audit table kept here would change
+# the very hash its records must match, and no doc curated after a record
+# was written could ever pass V7 (review finding, 2026-11-05). audits.json is
+# not hashed; each record names the policy_sha256 and raw commit it audited,
+# so a policy edit still invalidates every record (V7) until re-audited.
+# No audit has run yet (2026-11-05), so the table is empty on purpose.
+# OEM_AUDITS_PATH (tests only) points at another file with the same layout,
+# so a test can record an audit in a real store without touching this one.
+AUDITS_PATH = _Path(__import__("os").environ.get("OEM_AUDITS_PATH") or (_HERE / "audits.json"))
+
+
+def load_category_status(path=None) -> dict[str, dict[str, dict]]:
+    """{site: {cat: audit record}} from audits.json (missing file: {})."""
+    import json
+    p = _Path(path) if path else AUDITS_PATH
+    if not p.exists():
+        return {}
+    doc = json.loads(p.read_text())
+    tbl = doc.get("category_status") or {}
+    if not isinstance(tbl, dict):
+        raise ValueError(f"{p}: category_status is not an object")
+    return tbl
+
+
+CATEGORY_STATUS: dict[str, dict[str, dict]] = load_category_status()
+
+
+# §4.1 policy_sha256: the curation policy a groups file was curated under.
+# audits.json is deliberately not an input (see CATEGORY_STATUS above).
+POLICY_INPUTS = ("policy.py", "notes.py", "positions.py", "model_map.json")
+
+
+def tree_sha256(model_map_path=None) -> str:
+    """sha256 over policy.py + notes.py + positions.py + model_map.json (the
+    model map may be another file, as curate.py --model-map allows)."""
+    import hashlib
+    h = hashlib.sha256()
+    for name in POLICY_INPUTS:
+        p = _Path(model_map_path) if (name == "model_map.json" and model_map_path) else _HERE / name
+        h.update(p.read_bytes())
+    return h.hexdigest()
 
 
 def category_status(site: str, cat: str, status_table: dict | None = None) -> dict | None:

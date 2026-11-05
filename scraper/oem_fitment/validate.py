@@ -52,11 +52,34 @@ def _ts(s):
         return None
 
 
-def context_from(js, mm=None, status_table=None, policy_sha=None) -> dict:
-    """ctx from junkyard_scraper (or any object with the same names)."""
-    targets = None
-    if mm is not None:
-        targets = {(t.ns, t.make, t.model) for ts in mm.by_cat.values() for t in ts}
+def tree_policy_sha256() -> str:
+    """The policy hash of the checked-out tree, exactly as curate.py writes
+    it into every groups file (policy.tree_sha256: policy.py, notes.py,
+    positions.py, model_map.json; never audits.json)."""
+    return policy.tree_sha256()
+
+
+def model_map_targets(path=None) -> dict:
+    """{(ns, feed make, feed model): [(years or None, ambig)]} from
+    model_map.json, read as plain JSON (no model_map.py import)."""
+    doc = json.loads(Path(path or (_HERE / "model_map.json")).read_text())
+    out: dict = {}
+    for e in doc.get("entries") or []:
+        for t in e.get("targets") or []:
+            out.setdefault((e["ns"], t["make"], t["model"]), []).append(
+                (tuple(t["years"]) if t.get("years") else None, t.get("ambig") or ""))
+    return out
+
+
+def context_from(js, mm=None, status_table=None, policy_sha=None, targets=None) -> dict:
+    """ctx from junkyard_scraper (or any object with the same names). `mm`
+    (a model_map.ModelMap) or `targets` (model_map_targets()) turns on the V2
+    model-map check; `policy_sha` turns on V8."""
+    if targets is None and mm is not None:
+        targets = {}
+        for ts in mm.by_cat.values():
+            for t in ts:
+                targets.setdefault((t.ns, t.make, t.model), []).append((t.years, t.ambig))
     return {"categories": getattr(js, "INTERCHANGE_PART_CATEGORIES", {}),
             "engine_families": getattr(js, "ENGINE_FAMILIES", {}),
             "normalize_make": getattr(js, "normalize_make", None),
@@ -84,7 +107,7 @@ def expire(doc: dict, now: datetime, days: int | None = None) -> tuple[dict, lis
     return out, dropped
 
 
-def _app_ok(app, ns_makes, year_cap, targets, ns) -> str | None:
+def _app_ok(app, ns_makes, year_cap, targets, ns, verified=False) -> str | None:
     if not isinstance(app, list) or len(app) != 4:
         return f"app is not [make, model, lo, hi]: {app!r}"
     mk, md, lo, hi = app
@@ -96,8 +119,17 @@ def _app_ok(app, ns_makes, year_cap, targets, ns) -> str | None:
         return f"app make outside namespace: {app!r}"
     if not (1950 <= lo <= hi <= year_cap):
         return f"app years: {app!r}"
-    if targets is not None and (ns, mk, md) not in targets:
-        return f"app target not in the validated model map: {app!r}"
+    if targets is not None:
+        ents = targets.get((ns, mk, md)) if isinstance(targets, dict) else \
+            ([(None, "")] if (ns, mk, md) in targets else None)
+        if not ents:
+            return f"app target not in the validated model map: {app!r}"
+        for y in range(lo, hi + 1):
+            here = [amb for yrs, amb in ents if yrs is None or yrs[0] <= y <= yrs[1]]
+            if not here:
+                return f"app year {y} outside the model map's years for the target: {app!r}"
+            if verified and any(here):
+                return f"verified app on an ambig model-map target (Likely only, §6): {app!r}"
     return None
 
 
@@ -186,7 +218,7 @@ def structural(doc: dict, ctx: dict) -> list:
                 P.append(f"V2 {gid}: no apps")
                 apps = []
             for app in apps:
-                why = _app_ok(app, makes, year_cap, targets, ns)
+                why = _app_ok(app, makes, year_cap, targets, ns, verified=kind_key != "likely")
                 if why:
                     P.append(f"V2 {gid}: {why}")
             if apps != sorted(apps):
