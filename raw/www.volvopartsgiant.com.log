@@ -5,3 +5,16 @@
 09:04:26 nav-fail Volvo S40 1999: NavError: HTTP 404 for https://www.volvopartsgiant.com/1999-volvo-s40-parts
 09:04:26 seg done tier=A Volvo S40 [1992, 2013] seeds=[2006, 1999] records=123 errors=2
 09:08:26 time budget reached records=136
+09:08:35 start site=www.volvopartsgiant.com segments=19 tiers=['A', 'B']
+09:08:35 seg done tier=A Volvo XC90 [2003, 2014] seeds=[2006] records=136 errors=2
+09:08:35 seg done tier=A Volvo S60 [2001, 2018] seeds=[2012] records=136 errors=2
+09:08:35 seg done tier=A Volvo S40 [1992, 2013] seeds=[2006] records=136 errors=2
+09:08:35 seg done tier=A Volvo S80 [1999, 2014] seeds=[2004] records=136 errors=2
+09:24:43 seg done tier=A Volvo V70 [1998, 2010] seeds=[2002, 2009, 2007] records=207 errors=2
+09:29:07 seg done tier=A Volvo XC60 [2010, 2017] seeds=[2013] records=223 errors=2
+09:31:07 nav-fail Volvo XC70 2001: NavError: HTTP 404 for https://www.volvopartsgiant.com/2001-volvo-xc70-parts
+09:31:07 seg done tier=A Volvo XC70 [1998, 2007] seeds=[2004, 2001] records=226 errors=3
+09:37:32 nav-fail Volvo C70 2005: NavError: HTTP 404 for https://www.volvopartsgiant.com/2005-volvo-c70-parts
+09:37:32 seg done tier=A Volvo C70 [1998, 2013] seeds=[2008, 2002, 2005] records=242 errors=4
+09:40:52 seg done tier=A Volvo S70 [1998, 2000] seeds=[2000] records=250 errors=4
+09:40:52 time budget reached records=250
