@@ -484,14 +484,23 @@ class Curation:
                     self.cyclic |= {(k, cat) for k in comp}
 
     def _edge(self, cat, a, b, known, r):
+        """§5.9: an old -> new edge. A cross-category edge (one end known only
+        in another category) is reported and never joins the two classes,
+        but it is never dropped either (review F5): it stays in this
+        category's graph, where the far end has no class, so C5
+        (uncrawled_chain_member) blocks the in-category end; and it is added
+        to the far end's category too, where it blocks that end the same way.
+        Adding a record can therefore never remove an edge."""
         if a == b:
             return
+        cats = {cat}
         for end in (a, b):
             if end in known and cat not in known[end]:
                 self.refuse("cross_category_supersession", cat=cat, pn=end,
-                            evidence=[r.pointer] if r else None)
-                return
-        self.edges[cat].add((a, b))
+                            evidence=[r.pointer] if r else None, detail=",".join(sorted(known[end])))
+                cats |= known[end]
+        for c in sorted(cats):
+            self.edges[c].add((a, b))
 
     def reach(self, cat, a, depth=None, down=True) -> set:
         nxt = (self.succ if down else self.pred).get(cat, {})
@@ -1007,9 +1016,13 @@ class Curation:
         info = self.cells_info[(T, cat)]
         lists = sorted({lr.pointer for lr in self.t_list_rows.get((T, cat), [])})
         years = sorted({ym.pointer for ym in self.t_years.get(T, [])})
+        # every record closure relied on ages the proof, including the chain
+        # members C5 walked (review F11: build-time expiry reads this stamp)
+        chain = {d for k in info["members"] for d in self.chain_keys(cat, k)}
         stamps = [lr.retrieved for lr in self.t_list_rows.get((T, cat), [])] + \
                  [ym.retrieved for ym in self.t_years.get(T, [])] + \
-                 [r.retrieved for m in info["members"].values() for r in m["klass"].records]
+                 [r.retrieved for m in info["members"].values() for r in m["klass"].records] + \
+                 [r.retrieved for d in sorted(chain) for r in (self.classes.get((d, cat)) or Klass(d, cat, set(), [])).records]
         stamps = sorted(s for s in stamps if _ts(s))
         return {"t": list(T), "cv": sorted([[cmk, cmd, T[2]] for cmk, cmd in self.t_sources.get(T, set())]),
                 "closure": {"year": years[0] if years else None, "years": years, "lists": lists,

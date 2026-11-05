@@ -262,4 +262,81 @@ check("F9 a second, unmatched row of the same number on T's page carries its not
 check("F9 'on page' stays tied to the matched row", m["page"][0] is True)
 check("F9 and nothing ships Verified", verified(doc, WR) == [])
 
+# ------------------------------------------------------------------ F5
+SUCC = "69802-08S50"
+
+
+def xcat_files(succ_cat):
+    f = sienna_fixture()
+    for rec in f[f"raw/{TOY}.jsonl"]:
+        if rec["pn"] == "69802-08S01":
+            rec["replaced_by"] = [SUCC]
+            rec["evidence_lines"] = ["Replaced By", SUCC] + rec["evidence_lines"]
+    if succ_cat:
+        f[f"raw/{TOY}.jsonl"].append(toyota_record(
+            SUCC, succ_cat, S04, "body-hardware/outside-mirrors", "Mirror Assembly", "Mirror Assy, Outer Rear View, LH",
+            "Driver Side", [(2004, 2010, "Toyota", "Sienna", ["CE", "LE", "Limited", "XLE", "XLE Limited"],
+                             ["6 Cyl 3.3 L GAS", "6 Cyl 3.5 L GAS"])], location=["Driver Side"]))
+    return f
+
+
+cur, doc = run("toyota", xcat_files(None), status_table=ST)
+check("F5 control: an uncrawled successor keeps the cell open (uncrawled_chain_member)",
+      "uncrawled_chain_member" in cur.cells_info[(S04, WR)]["closure"] and verified(doc, WR) == [])
+cur, doc = run("toyota", xcat_files("side-mirrors"), status_table=ST)
+check("F5 the successor recorded only as a mirror: reported, and the regulator cell stays open",
+      any(r["reason"] == "cross_category_supersession" for r in cur.refusals)
+      and "uncrawled_chain_member" in cur.cells_info[(S04, WR)]["closure"] and verified(doc, WR) == [],
+      str(cur.cells_info[(S04, WR)]["closure"]))
+check("F5 the edge stays in both categories' graphs (the two classes are never joined)",
+      ("toyota:6980208S01", "toyota:6980208S50") in cur.edges[WR]
+      and ("toyota:6980208S01", "toyota:6980208S50") in cur.edges["side-mirrors"]
+      and ("toyota:6980208S50", WR) not in cur.classes)
+# removing the successor's record with the edge printed on the predecessor
+# (as SimplePart prints 'Replaced By') keeps the cell blocked
+f = sienna_fixture()
+for rec in f[f"raw/{TOY}.jsonl"]:
+    if rec["pn"] == "69802-08S01":
+        rec["replaced_by"] = [SUCC]
+        rec["evidence_lines"] = ["Replaced By", SUCC] + rec["evidence_lines"]
+f[f"raw/{TOY}.jsonl"].append(toyota_record(SUCC, WR, S04, "body-hardware/front-door-body", "Window Regulator",
+                                           "Regulator Sub-Assembly", "Driver Side",
+                                           [(2006, 2010, "Toyota", "Sienna", ["CE", "LE"], ["6 Cyl 3.5 L GAS"])],
+                                           location=["Driver Side"], replaces=["69802-08S01"]))
+cur, doc = run("toyota", f, status_table=ST)
+check("F5 control: a successor that does not list 2004 is chain_fitment_inconsistent",
+      "chain_fitment_inconsistent" in cur.cells_info[(S04, WR)]["closure"])
+f[f"raw/{TOY}.jsonl"] = [r for r in f[f"raw/{TOY}.jsonl"] if r["pn"] != SUCC]
+cur, doc = run("toyota", f, status_table=ST)
+check("F5 removing that successor's record leaves the predecessor's printed edge: still blocked",
+      "uncrawled_chain_member" in cur.cells_info[(S04, WR)]["closure"] and verified(doc, WR) == [])
+
+# ------------------------------------------------------------------ F11
+ANC = "69802-08S00"
+now = datetime.strptime(NOW, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+old = (now - timedelta(days=110)).strftime("%Y-%m-%dT%H:%M:%SZ")
+f = sienna_fixture()
+for rec in f[f"raw/{TOY}.jsonl"]:
+    if rec["pn"] == "69802-08S01":
+        rec["replaces"] = [ANC]
+        rec["evidence_lines"] = ["Replaces", ANC] + rec["evidence_lines"]
+f[f"raw/{TOY}.jsonl"].append(toyota_record(ANC, WR, ("Toyota", "Sienna", 2003), "body-hardware/front-door-body",
+                                           "Window Regulator", "Regulator Sub-Assembly", "Driver Side",
+                                           [(1998, 2003, "Toyota", "Sienna", ["CE", "LE", "XLE"], ["6 Cyl 3.0 L GAS"])],
+                                           location=["Driver Side"], replaced_by=["69802-08S01"], retrieved=old))
+cur, doc = run("toyota", f, status_table=ST)
+g = [x for x in doc["groups"] if x["cat"] == WR]
+check("F11 control: a 110-day-old ancestor (not a member) still lets 2004-2005 ship",
+      [x["apps"] for x in g] == [[["Toyota", "Sienna", 2004, 2005]]])
+check("F11 the proof's oldest_retrieved is the ancestor's stamp",
+      g and {y["closure"]["oldest_retrieved"] for y in g[0]["years"]} == {old})
+kept, dropped = V.expire(doc, now + timedelta(days=30))
+check("F11 build-time expiry 30 days later (ancestor evidence 140 days old) drops the group",
+      kept["groups"] == [] and dropped == [g[0]["id"]] if g else False, str(dropped))
+late = (now + timedelta(days=11)).strftime("%Y-%m-%dT%H:%M:%SZ")
+cur, doc = run("toyota", f, status_table=ST, as_of=late)
+check("F11 curate time: --as-of 11 days later (ancestor 121 days old, so unverified) keeps the cell open",
+      {"stale", "uncrawled_chain_member"} & set(cur.cells_info[(S04, WR)]["closure"]) and verified(doc, WR) == [],
+      str(cur.cells_info[(S04, WR)]["closure"]))
+
 done("test_review2")

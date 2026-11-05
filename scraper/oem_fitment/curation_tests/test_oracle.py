@@ -4,7 +4,10 @@
   oracle that evaluates §2 (Phase 1) straight from the generated catalog;
 - removing any manifest, record or manifest row never adds a Verified pair;
 - adding a candidate that is not in an existing chain never adds one;
-- adding a restricting note clause never adds one.
+- adding a restricting note clause never adds one;
+- adding a record never removes a supersession edge, so a number whose
+  printed successor is known only in another category stays blocked
+  (review F5: a cross-category edge was dropped, unblocking the cell).
 N_CATALOGS can be lowered for a quick run: python3 test_oracle.py 40"""
 import copy
 import random
@@ -86,7 +89,9 @@ def to_raw(w):
         side = "Driver Side" if p["side"] == "L" else "Passenger Side"
         fit = [(lo, hi, "Toyota", md, tr, MODELS[md][1]) for lo, hi, md, tr in p["rows"]]
         recs.append(toyota_record(p["pn"], "headlights", ("Toyota", seed[0], seed[1]), SUB, "Headlamp",
-                                  "Headlamp Assembly", side, fit, location=[side], replaces=p["replaces"]))
+                                  "Headlamp Assembly", side, fit, location=[side], replaces=p["replaces"],
+                                  replaced_by=p.get("replaced_by")))
+    recs += copy.deepcopy(w.get("extra_records") or [])
     by_pn = {p["pn"]: p for p in w["parts"]}
     for T in w["closed"]:
         md, y = T
@@ -147,17 +152,22 @@ def oracle_pairs(w):
     return {(a, b) for a in UNIV for b in UNIV if a != b and sigs[a] is not None and sigs[a] == sigs[b]}
 
 
-def shipped(w):
+def shipped(w, with_cur=False):
     cur, doc = run("toyota", to_raw(w), status_table=ST)
     out = set()
     for g in doc["groups"]:
         ts = [(y["t"][1], y["t"][2]) for y in g["years"]]
         out |= {(a, b) for a in ts for b in ts if a != b}
-    return out
+    return (out, cur) if with_cur else out
+
+
+def edges_of(cur):
+    return {(c, e) for c, es in cur.edges.items() for e in es}
 
 
 rnd = random.Random(20261105)
-unsound, grow_rm, grow_add, grow_note = [], [], [], []
+rnd5 = random.Random(5)
+unsound, grow_rm, grow_add, grow_note, edge_lost, grow_xcat = [], [], [], [], [], []
 nonempty = tot_s = tot_o = 0
 for i in range(N):
     w = gen(rnd)
@@ -202,11 +212,33 @@ for i in range(N):
         w4["notes"][(T, rnd.choice(w4["listed"][T]))] = ["Japan Built"]
         if not shipped(w4) <= s:
             grow_note.append(i)
+    # a printed successor known only in another category (review F5); its own
+    # random stream, so the catalogs above stay the ones this test always ran
+    if i % 2 == 0:
+        w5 = copy.deepcopy(w)
+        p = rnd5.choice(w5["parts"])
+        p["replaced_by"] = ["81888-0X888"]
+        s5, c5 = shipped(w5, with_cur=True)
+        w6 = copy.deepcopy(w5)
+        T = rnd5.choice(UNIV)
+        cat = rnd5.choice(["side-mirrors", "headlights", "tail-lights"])
+        nm = {"side-mirrors": ("Mirror Assembly", "Mirror Assy, Outer Rear View, LH"),
+              "headlights": ("Headlamp", "Headlamp Assembly"), "tail-lights": ("Tail Lamp", "Lamp Assy, Rear Combination")}[cat]
+        w6["extra_records"] = [toyota_record("81888-0X888", cat, ("Toyota", T[0], T[1]), SUB, nm[0], nm[1],
+                                             "Driver Side", [(T[1], T[1], "Toyota", T[0], sorted(MODELS[T[0]][0]),
+                                                              MODELS[T[0]][1])], location=["Driver Side"])]
+        s6, c6 = shipped(w6, with_cur=True)
+        if not edges_of(c5) <= edges_of(c6):
+            edge_lost.append((i, cat))
+        if cat != "headlights" and not s6 <= s5:
+            grow_xcat.append((i, cat))
 
 check(f"soundness: shipped pairs are a subset of the naive oracle's on {N} catalogs", not unsound, str(unsound[:3]))
 check("removing a manifest, record or manifest row never adds a Verified pair", not grow_rm, str(grow_rm[:5]))
 check("adding a candidate outside every chain never adds a Verified pair", not grow_add, str(grow_add[:5]))
 check("adding a restricting note clause never adds a Verified pair", not grow_note, str(grow_note[:5]))
+check("adding a record never removes a supersession edge (any category)", not edge_lost, str(edge_lost[:5]))
+check("a successor recorded only in another category never adds a Verified pair", not grow_xcat, str(grow_xcat[:5]))
 check(f"the property test is not vacuous: catalogs ship Verified groups ({nonempty}/{N})", nonempty >= N // 4,
       str(nonempty))
 print(f"     shipped something on {nonempty}/{N} catalogs; shipped/oracle pairs {tot_s}/{tot_o}")
