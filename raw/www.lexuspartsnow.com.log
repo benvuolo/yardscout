@@ -1,0 +1,9 @@
+01:40:45 start site=www.lexuspartsnow.com segments=25 tiers=['A', 'B']
+01:52:57 nav-fail Lexus ES 300 2004: ValueError: no 2004 catalog for Lexus ES 300 (lexus-['es300'])
+01:52:57 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002, 1999, 2004] records=154 errors=1
+02:01:57 nav-fail Lexus RX 300 2006: ValueError: no 2006 catalog for Lexus RX 300 (lexus-['rx300'])
+02:01:57 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000, 2006] records=274 errors=2
+02:05:31 net-fail product https://www.lexuspartsnow.com/parts/lexus-unit-assy~81170-53270.html: network error after 3 tries: ReadTimeout
+02:13:47 seed A|Lexus|IS 250|2007 had network failures; left open for retry
+02:13:47 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=392 errors=3
+02:13:47 time budget reached records=392
