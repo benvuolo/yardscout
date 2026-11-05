@@ -192,7 +192,7 @@ GM 176 records (Cruze 2014; Silverado 1500 2000/2012/2011), Ford 97 (F-150
 Grand Caravan 2010), Nissan 118 (Altima 2013, 2012), Infiniti 169 (G35
 2004/2008, G37 2009). 0 product/list errors; nav-fails only for seed years
 the site has no catalog for (Cruze 1998, Grand Caravan 2023). Checked field
-by field against cached page text: 7-8 records per site (pn, description,
+by field against cached page text: 7 records per site (pn, description,
 Replaced By, Replaces, every fitment row in order incl. the rows behind
 "View More", year spans, make/model split, position source): all match.
 
