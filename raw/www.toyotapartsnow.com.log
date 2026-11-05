@@ -38,3 +38,22 @@
 01:56:27 seg done tier=A Scion xB [2004, 2015] seeds=[2006] records=694 errors=0
 02:00:24 seg done tier=A Toyota Avalon [2000, 2004] seeds=[2000] records=735 errors=0
 02:03:23 STOPPED: network error: ReadTimeout
+08:25:17 start site=www.toyotapartsnow.com segments=52 tiers=['A', 'B']
+08:25:17 seg done tier=A Toyota Camry [2007, 2009] seeds=[2007] records=757 errors=0
+08:25:17 seg done tier=A Toyota Camry [2002, 2004] seeds=[2002] records=757 errors=0
+08:25:17 seg done tier=A Toyota Prius [2001, 2019] seeds=[2008] records=757 errors=0
+08:25:17 seg done tier=A Toyota Sienna [2004, 2010] seeds=[2004] records=757 errors=0
+08:25:17 seg done tier=A Toyota Camry [2005, 2006] seeds=[2005] records=757 errors=0
+08:25:17 seg done tier=A Toyota Camry [1997, 1999] seeds=[1999] records=757 errors=0
+08:25:17 seg done tier=A Toyota Corolla [1998, 2002] seeds=[2001] records=757 errors=0
+08:25:17 seg done tier=A Toyota Camry [2000, 2001] seeds=[2000] records=757 errors=0
+08:25:17 seg done tier=A Toyota Corolla [2005, 2008] seeds=[2005] records=757 errors=0
+08:25:17 seg done tier=A Scion tC [2005, 2016] seeds=[2006] records=757 errors=0
+08:25:17 seg done tier=A Toyota Camry [2010, 2011] seeds=[2011] records=757 errors=0
+08:25:17 seg done tier=A Toyota Highlander [2001, 2007] seeds=[2006] records=757 errors=0
+08:25:17 seg done tier=A Toyota Corolla [2009, 2010] seeds=[2010] records=757 errors=0
+08:25:17 seg done tier=A Scion xB [2004, 2015] seeds=[2006] records=757 errors=0
+08:25:17 seg done tier=A Toyota Avalon [2000, 2004] seeds=[2000] records=757 errors=0
+08:38:05 seg done tier=A Toyota Camry Solara [1999, 2008] seeds=[2006, 2003, 2007] records=803 errors=0
+08:58:37 seg done tier=A Toyota Camry [1984, 1996] seeds=[1996, 1988] records=894 errors=0
+08:58:37 time budget reached records=894
