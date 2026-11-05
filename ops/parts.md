@@ -146,6 +146,70 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   mirror / K2XX–T1XX HD rows need part-number bases; plain "Silverado" /
   "Sierra" listings can be unnamed HDs (528 cars, unchanged).
 
+## For the parts session: 41 hand vg groups to re-check (from interchange, 2026-11-05)
+
+Hub decision: nothing is hand-withdrawn. CURATION_SPEC §7.6 already withholds
+these groups automatically from the payload once their cells are OEM-closed
+(R1/R2 manifests); today no cell is closed, so nothing changes in the app.
+Please re-check each against its stated basis (`scraper/PARTS_GAPS_2026-11.md`,
+ENGINE_FAMILIES evidence) and decide whether the hand group itself should be
+narrowed. The interchange session does not edit the parts table.
+
+Source: toyota + mopar curation on oem-raw@50ac4a48 with every cell assumed
+closed (hypothetical, never shipped), `_oem_contradictions` on main's hand
+payload (467 hand vg groups; the hub run counted 468). Reproduced
+2026-11-05 by the interchange session: 41 vg groups, 0 platform groups.
+The last column counts member cells by the real split the OEM catalog prints
+there (option_split = two or more numbers for the family's own engine, e.g.
+4Runner/Tacoma 1996 alternators 27060-62180 and 27060-75170, both listing 2.7
+and 3.4; conditional:trim/engine/plant/production = a printed condition).
+Evidence gaps are not counted. Totals: option_split 240, conditional:trim 44,
+conditional:engine 5, conditional:plant 1, conditional:production 1.
+
+| group | apps | split cells |
+|---|---|---|
+| `mopar-pentastar/alternator#0` | Dodge Grand Caravan 2011-2020; Chrysler Town & Country 2011-2016; Chrysler Town And Country 2011-2016; Dodge Journey 2011-2019; Dodge Avenger 2011-2014; Chrysler 200 2011-2014 | option_split 13 |
+| `mopar-pentastar/starter#0` | Dodge Avenger 2011-2014; Dodge Journey 2011-2014 | option_split 3 |
+| `mopar-world24/alternator#0` | Chrysler Sebring 2007-2010; Chrysler 200 2011-2013; Dodge Avenger 2008-2013; Dodge Caliber 2007-2012; Jeep Compass 2007-2017; Jeep Patriot 2007-2017 | option_split 38 |
+| `mopar-world24/starter#0` | Dodge Caliber 2007-2011; Jeep Compass 2008-2011; Jeep Compass 2015-2015; Jeep Patriot 2008-2011; Jeep Patriot 2015-2015; Chrysler Sebring 2007-2010; Dodge Avenger 2008-2010; Dodge Journey 2009-2010; Dodge Journey 2015-2015 | conditional:trim 3, option_split 8 |
+| `mopar-47/alternator#0` | Dodge Durango 2001-2007; Jeep Grand Cherokee 2005-2006; Jeep Commander 2006-2009 | conditional:engine 4, conditional:trim 1, option_split 2 |
+| `mopar-47/alternator#1` | Dodge\|Ram Ram* 2002-2008 | conditional:trim 4, option_split 2 |
+| `mopar-37/alternator#0` | Jeep Liberty 2002-2005; Jeep Grand Cherokee 2005-2006; Jeep Commander 2006-2010 | conditional:trim 1, option_split 7 |
+| `mopar-37/alternator#1` | Dodge\|Ram Ram* 2002-2008 | conditional:trim 4, option_split 2 |
+| `jeep-40/alternator#0` | Jeep Cherokee 1991-1998; Jeep Comanche 1991-1992; Jeep Wrangler 1991-1998; Jeep Grand Cherokee 1993-1998 | conditional:engine 1, conditional:trim 15, option_split 7 |
+| `jeep-40/alternator#1` | Jeep Wrangler 2001-2006 | conditional:trim 2 |
+| `jeep-kl-24/alternator#0` | Jeep Cherokee 2014-2019; Jeep Cherokee Kl 2014-2019 | option_split 5 |
+| `jeep-kl-24/starter#0` | Jeep Cherokee 2014-2018; Jeep Cherokee Kl 2014-2018 | conditional:trim 1, option_split 4 |
+| `jeep-kl-32/alternator#0` | Jeep Cherokee 2014-2014; Jeep Cherokee 2017-2019; Jeep Cherokee Kl 2014-2014; Jeep Cherokee Kl 2017-2019 | option_split 4 |
+| `mopar-magnum/alternator#0` | Dodge\|Ram Ram* 1994-1998; Dodge Dakota 1992-1998; Dodge Durango 1998-1998; Jeep Grand Cherokee 1993-1998 | conditional:trim 4 |
+| `toyota-rz/alternator#0` | Toyota Tacoma 1995-1996; Toyota T100 1994-1996 | option_split 1 |
+| `toyota-rz/alternator#1` | Toyota Tacoma 1997-1999; Toyota T100 1997-1998; Toyota 4Runner 1996-1999 | option_split 5 |
+| `toyota-5vz/alternator#0` | Toyota Tacoma 1995-1996; Toyota Tacoma 1998-1999; Toyota T100 1995-1998; Toyota 4Runner 1998-1998; Toyota Tundra 2000-2000 | option_split 4 |
+| `toyota-5vz/alternator#1` | Toyota 4Runner 1996-1998; Toyota T100 1997-1998; Toyota Tacoma 1997-1999; Toyota Tundra 2000-2002 | option_split 8 |
+| `toyota-5vz/alternator#2` | Toyota 4Runner 1999-2002; Toyota Tacoma 2000-2004; Toyota Tundra 2000-2002 | option_split 3 |
+| `toyota-5vz/alternator#3` | Toyota Tundra 2003-2004 | option_split 2 |
+| `toyota-5s/alternator#0` | Toyota Camry 1997-2001; Toyota Solara 1999-2001; Toyota Camry Solara 1999-2001 | option_split 8 |
+| `toyota-1mz/alternator#0` | Toyota Camry 1997-2001; Lexus ES 300 1997-2001 | option_split 5 |
+| `toyota-3mz/alternator#0` | Lexus ES 330 2004-2006; Lexus RX 330 2004-2006; Toyota Camry 2004-2004; Toyota Highlander 2004-2007 | option_split 5 |
+| `toyota-3mz/alternator#1` | Lexus RX 330 2004-2006; Toyota Sienna 2004-2006 | option_split 3 |
+| `toyota-2gr/alternator#0` | Toyota Camry 2007-2017; Toyota Avalon 2005-2018; Toyota Highlander 2008-2013; Toyota RAV4 2009-2010; Toyota Venza 2009-2015; Lexus ES 350 2007-2018; Lexus RX 350 2007-2009 | option_split 26 |
+| `toyota-2az/alternator#0` | Toyota Camry 2004-2006; Toyota Highlander 2004-2007; Toyota RAV4 2004-2005; Toyota Solara 2004-2008; Toyota Camry Solara 2004-2008; Scion tC 2005-2010; Toyota Scion tC 2005-2010 | option_split 15 |
+| `toyota-2az/alternator#1` | Toyota Camry 2007-2009; Toyota Matrix 2009-2013; Toyota Corolla 2009-2010 | conditional:plant 1, option_split 4 |
+| `toyota-2az/starter#0` | Toyota RAV4 2004-2005 | option_split 2 |
+| `toyota-2az/starter#1` | Toyota RAV4 2006-2008 | conditional:trim 2, option_split 1 |
+| `toyota-2ar/alternator#0` | Scion tC 2011-2016; Toyota Scion tC 2011-2016; Toyota Camry 2012-2015; Toyota RAV4 2009-2012 | conditional:trim 6, option_split 4 |
+| `toyota-1zz/alternator#0` | Toyota Corolla 2003-2008; Toyota Matrix 2003-2008; Pontiac Vibe 2003-2008; Toyota Celica 2000-2005; Toyota MR2 Spyder 2000-2005 | option_split 17 |
+| `toyota-2zr/alternator#0` | Scion xD 2008-2009; Toyota Scion xD 2008-2009; Toyota Corolla 2009-2009 | option_split 1 |
+| `toyota-2uz/alternator#0` | Toyota Tundra 2003-2009; Toyota Sequoia 2003-2009 | option_split 12 |
+| `toyota-1gr/alternator#0` | Toyota Tacoma 2005-2015; Toyota 4Runner 2003-2009; Toyota FJ Cruiser 2007-2010; Toyota Tundra 2006-2010 | option_split 8 |
+| `toyota-4a/alternator#0` | Toyota Corolla 1993-1997 | option_split 5 |
+| `toyota-4a/starter#2` | Toyota Corolla 1997-1997 | option_split 1 |
+| `toyota-3s/alternator#1` | Toyota Celica 1987-1987 | conditional:trim 1 |
+| `toyota-1nz/alternator#3` | Scion xB 2004-2006; Toyota Scion xB 2004-2006 | option_split 3 |
+| `toyota-1nz/alternator#4` | Scion xA 2005-2006; Toyota Scion xA 2005-2006 | conditional:production 1 |
+| `toyota-rav4-1/alternator#0` | Toyota RAV4 1996-1997 | option_split 1 |
+| `toyota-rav4-1/alternator#1` | Toyota RAV4 1998-2000 | option_split 1 |
+
 ## How to measure
 
 `interchange_coverage.py` measures engine-family donors, not generic-only.
