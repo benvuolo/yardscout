@@ -1,6 +1,72 @@
 {
  "draft": {
-  "entries": [],
+  "entries": [
+   {
+    "basis": "catalog prints 'Fairmont' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Fairmont', 4 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Ford",
+    "cat_model": "Fairmont",
+    "ns": "ford",
+    "targets": [
+     {
+      "make": "Ford",
+      "model": "Fairmont",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Granada' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Granada', 2 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Ford",
+    "cat_model": "Granada",
+    "ns": "ford",
+    "targets": [
+     {
+      "make": "Ford",
+      "model": "Granada",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Pinto' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Pinto', 5 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Ford",
+    "cat_model": "Pinto",
+    "ns": "ford",
+    "targets": [
+     {
+      "make": "Ford",
+      "model": "Pinto",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Marquis' (2 fitment rows, oem-raw@ceccc80); normalize_model canon 'Marquis', 30 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Mercury",
+    "cat_model": "Marquis",
+    "ns": "ford",
+    "targets": [
+     {
+      "make": "Mercury",
+      "model": "Marquis",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Villager' (24 fitment rows, oem-raw@ceccc80); normalize_model canon 'Villager', 80 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Mercury",
+    "cat_model": "Villager",
+    "ns": "ford",
+    "targets": [
+     {
+      "make": "Mercury",
+      "model": "Villager",
+      "trims": "*"
+     }
+    ]
+   }
+  ],
   "exclude": {},
   "skipped": [
    {
@@ -50,6 +116,15 @@
    },
    {
     "cat_make": "Mercury",
+    "cat_model": "Bobcat",
+    "feed": [
+     "Mercury",
+     "Bobcat"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercury",
     "cat_model": "Lynx",
     "feed": [
      "Mercury",
@@ -78,7 +153,7 @@
    "cat_make": "Ford",
    "cat_model": "EcoSport",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 57,
    "ns": "ford",
    "proposed": {
     "make": "Ford",
@@ -88,7 +163,7 @@
    "squash_neighbours": [
     [
      "Ecosport",
-     74
+     75
     ]
    ]
   },
@@ -137,6 +212,58 @@
    "squash_neighbours": []
   },
   {
+   "cat_make": "Ford",
+   "cat_model": "Fairmont",
+   "feed_cars": 4,
+   "fitment_rows": 1,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "Fairmont",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "Granada",
+   "feed_cars": 2,
+   "fitment_rows": 1,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "Granada",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "Pinto",
+   "feed_cars": 5,
+   "fitment_rows": 1,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "Pinto",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercury",
+   "cat_model": "Bobcat",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "ford",
+   "proposed": {
+    "make": "Mercury",
+    "model": "Bobcat",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
    "cat_make": "Mercury",
    "cat_model": "Lynx",
    "feed_cars": 0,
@@ -148,7 +275,33 @@
     "trims": "*"
    },
    "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercury",
+   "cat_model": "Marquis",
+   "feed_cars": 30,
+   "fitment_rows": 2,
+   "ns": "ford",
+   "proposed": {
+    "make": "Mercury",
+    "model": "Marquis",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercury",
+   "cat_model": "Villager",
+   "feed_cars": 80,
+   "fitment_rows": 24,
+   "ns": "ford",
+   "proposed": {
+    "make": "Mercury",
+    "model": "Villager",
+    "trims": "*"
+   },
+   "squash_neighbours": []
   }
  ],
- "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
 }

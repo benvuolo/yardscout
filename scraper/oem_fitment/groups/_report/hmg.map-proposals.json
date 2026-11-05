@@ -14,6 +14,33 @@
    },
    {
     "cat_make": "Hyundai",
+    "cat_model": "Genesis G70",
+    "feed": [
+     "Hyundai",
+     "Genesis G70"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Hyundai",
+    "cat_model": "Genesis G80",
+    "feed": [
+     "Hyundai",
+     "Genesis G80"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Hyundai",
+    "cat_model": "Genesis G90",
+    "feed": [
+     "Hyundai",
+     "Genesis G90"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Hyundai",
     "cat_model": "Kona N",
     "feed": [
      "Hyundai",
@@ -65,7 +92,7 @@
    "cat_make": "Hyundai",
    "cat_model": "Elantra N",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "hmg",
    "proposed": {
     "make": "Hyundai",
@@ -76,9 +103,48 @@
   },
   {
    "cat_make": "Hyundai",
-   "cat_model": "Kona N",
+   "cat_model": "Genesis G70",
    "feed_cars": 0,
    "fitment_rows": 1,
+   "ns": "hmg",
+   "proposed": {
+    "make": "Hyundai",
+    "model": "Genesis G70",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Hyundai",
+   "cat_model": "Genesis G80",
+   "feed_cars": 0,
+   "fitment_rows": 12,
+   "ns": "hmg",
+   "proposed": {
+    "make": "Hyundai",
+    "model": "Genesis G80",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Hyundai",
+   "cat_model": "Genesis G90",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "hmg",
+   "proposed": {
+    "make": "Hyundai",
+    "model": "Genesis G90",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Hyundai",
+   "cat_model": "Kona N",
+   "feed_cars": 0,
+   "fitment_rows": 2,
    "ns": "hmg",
    "proposed": {
     "make": "Hyundai",
@@ -140,5 +206,5 @@
    "squash_neighbours": []
   }
  ],
- "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
 }

@@ -2,7 +2,46 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'C-HR' (2 fitment rows, oem-raw@50ac4a4); normalize_model canon 'C-HR', 12 feed cars (inventory 2026-11-05); identity draft",
+    "basis": "catalog prints 'LS400' (71 fitment rows, oem-raw@ceccc80); normalize_model canon 'LS 400', 118 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Lexus",
+    "cat_model": "LS400",
+    "ns": "toyota",
+    "targets": [
+     {
+      "make": "Lexus",
+      "model": "LS 400",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'SC300' (75 fitment rows, oem-raw@ceccc80); normalize_model canon 'SC 300', 10 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Lexus",
+    "cat_model": "SC300",
+    "ns": "toyota",
+    "targets": [
+     {
+      "make": "Lexus",
+      "model": "SC 300",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'SC400' (75 fitment rows, oem-raw@ceccc80); normalize_model canon 'SC 400', 19 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Lexus",
+    "cat_model": "SC400",
+    "ns": "toyota",
+    "targets": [
+     {
+      "make": "Lexus",
+      "model": "SC 400",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'C-HR' (3 fitment rows, oem-raw@ceccc80); normalize_model canon 'C-HR', 12 feed cars (inventory 2026-11-05); identity draft",
     "cat_make": "Toyota",
     "cat_model": "C-HR",
     "ns": "toyota",
@@ -15,7 +54,10 @@
     ]
    }
   ],
-  "exclude": {},
+  "exclude": {
+   "toyota|Lexus|SC 300/400": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash 'sc300'); unmapped until a reviewed entry exists",
+   "toyota|Lexus|Sc 300 & Sc400": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'sc300'); unmapped until a reviewed entry exists"
+  },
   "skipped": [
    {
     "cat_make": "Lexus",
@@ -32,6 +74,15 @@
     "feed": [
      "Lexus",
      "IS Turbo"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
+    "cat_model": "LX570",
+    "feed": [
+     "Lexus",
+     "LX 570"
     ],
     "why": "no feed car under the canonical name"
    },
@@ -91,6 +142,15 @@
    },
    {
     "cat_make": "Toyota",
+    "cat_model": "GR Corolla",
+    "feed": [
+     "Toyota",
+     "GR Corolla"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Toyota",
     "cat_model": "Grand Highlander",
     "feed": [
      "Toyota",
@@ -124,7 +184,7 @@
    "cat_make": "Lexus",
    "cat_model": "GS200t",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 4,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -137,7 +197,7 @@
    "cat_make": "Lexus",
    "cat_model": "IS Turbo",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -148,9 +208,35 @@
   },
   {
    "cat_make": "Lexus",
+   "cat_model": "LS400",
+   "feed_cars": 118,
+   "fitment_rows": 71,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "LS 400",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
+   "cat_model": "LX570",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "LX 570",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
    "cat_model": "RC Turbo",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -163,7 +249,7 @@
    "cat_make": "Lexus",
    "cat_model": "RC200t",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -176,7 +262,7 @@
    "cat_make": "Lexus",
    "cat_model": "RC300",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -186,10 +272,45 @@
    "squash_neighbours": []
   },
   {
+   "cat_make": "Lexus",
+   "cat_model": "SC300",
+   "feed_cars": 10,
+   "fitment_rows": 75,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "SC 300",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "SC 300/400",
+     6
+    ],
+    [
+     "Sc 300 & Sc400",
+     1
+    ]
+   ]
+  },
+  {
+   "cat_make": "Lexus",
+   "cat_model": "SC400",
+   "feed_cars": 19,
+   "fitment_rows": 75,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "SC 400",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
    "cat_make": "Toyota",
    "cat_model": "C-HR",
    "feed_cars": 12,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "toyota",
    "proposed": {
     "make": "Toyota",
@@ -202,7 +323,7 @@
    "cat_make": "Toyota",
    "cat_model": "Corolla Cross",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 5,
    "ns": "toyota",
    "proposed": {
     "make": "Toyota",
@@ -215,7 +336,7 @@
    "cat_make": "Toyota",
    "cat_model": "Crown",
    "feed_cars": 0,
-   "fitment_rows": 3,
+   "fitment_rows": 4,
    "ns": "toyota",
    "proposed": {
     "make": "Toyota",
@@ -228,7 +349,7 @@
    "cat_make": "Toyota",
    "cat_model": "Crown Signia",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "toyota",
    "proposed": {
     "make": "Toyota",
@@ -239,9 +360,22 @@
   },
   {
    "cat_make": "Toyota",
-   "cat_model": "Grand Highlander",
+   "cat_model": "GR Corolla",
    "feed_cars": 0,
    "fitment_rows": 1,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Toyota",
+    "model": "GR Corolla",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Toyota",
+   "cat_model": "Grand Highlander",
+   "feed_cars": 0,
+   "fitment_rows": 2,
    "ns": "toyota",
    "proposed": {
     "make": "Toyota",
@@ -254,7 +388,7 @@
    "cat_make": "Toyota",
    "cat_model": "RAV4 Prime",
    "feed_cars": 0,
-   "fitment_rows": 4,
+   "fitment_rows": 5,
    "ns": "toyota",
    "proposed": {
     "make": "Toyota",
@@ -267,7 +401,7 @@
    "cat_make": "Toyota",
    "cat_model": "T100",
    "feed_cars": 57,
-   "fitment_rows": 12,
+   "fitment_rows": 55,
    "ns": "toyota",
    "proposed": {
     "make": "Toyota",
@@ -282,5 +416,5 @@
    ]
   }
  ],
- "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
 }

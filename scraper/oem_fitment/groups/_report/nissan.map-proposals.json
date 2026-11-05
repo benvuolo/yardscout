@@ -1,6 +1,33 @@
 {
  "draft": {
-  "entries": [],
+  "entries": [
+   {
+    "basis": "catalog prints '300ZX' (1 fitment rows, oem-raw@ceccc80); normalize_model canon '300ZX', 55 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Nissan",
+    "cat_model": "300ZX",
+    "ns": "nissan",
+    "targets": [
+     {
+      "make": "Nissan",
+      "model": "300ZX",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Pulsar NX' (4 fitment rows, oem-raw@ceccc80); normalize_model canon 'Pulsar NX', 3 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Nissan",
+    "cat_model": "Pulsar NX",
+    "ns": "nissan",
+    "targets": [
+     {
+      "make": "Nissan",
+      "model": "Pulsar NX",
+      "trims": "*"
+     }
+    ]
+   }
+  ],
   "exclude": {},
   "skipped": [
    {
@@ -27,6 +54,19 @@
  "proposals": [
   {
    "cat_make": "Nissan",
+   "cat_model": "300ZX",
+   "feed_cars": 55,
+   "fitment_rows": 1,
+   "ns": "nissan",
+   "proposed": {
+    "make": "Nissan",
+    "model": "300ZX",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Nissan",
    "cat_model": "Kicks Play",
    "feed_cars": 0,
    "fitment_rows": 5,
@@ -40,9 +80,22 @@
   },
   {
    "cat_make": "Nissan",
+   "cat_model": "Pulsar NX",
+   "feed_cars": 3,
+   "fitment_rows": 4,
+   "ns": "nissan",
+   "proposed": {
+    "make": "Nissan",
+    "model": "Pulsar NX",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Nissan",
    "cat_model": "Van",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "nissan",
    "proposed": {
     "make": "Nissan",
@@ -52,5 +105,5 @@
    "squash_neighbours": []
   }
  ],
- "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
 }

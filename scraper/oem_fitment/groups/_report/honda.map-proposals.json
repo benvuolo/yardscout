@@ -1,6 +1,20 @@
 {
  "draft": {
-  "entries": [],
+  "entries": [
+   {
+    "basis": "catalog prints 'Passport' (7 fitment rows, oem-raw@ceccc80); normalize_model canon 'Passport', 87 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Honda",
+    "cat_model": "Passport",
+    "ns": "honda",
+    "targets": [
+     {
+      "make": "Honda",
+      "model": "Passport",
+      "trims": "*"
+     }
+    ]
+   }
+  ],
   "exclude": {},
   "skipped": [
    {
@@ -95,11 +109,24 @@
    "cat_make": "Honda",
    "cat_model": "Fit EV",
    "feed_cars": 0,
-   "fitment_rows": 6,
+   "fitment_rows": 8,
    "ns": "honda",
    "proposed": {
     "make": "Honda",
     "model": "Fit EV",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Honda",
+   "cat_model": "Passport",
+   "feed_cars": 87,
+   "fitment_rows": 7,
+   "ns": "honda",
+   "proposed": {
+    "make": "Honda",
+    "model": "Passport",
     "trims": "*"
    },
    "squash_neighbours": []
@@ -118,5 +145,5 @@
    "squash_neighbours": []
   }
  ],
- "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
 }

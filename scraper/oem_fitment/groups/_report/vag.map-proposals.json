@@ -1,0 +1,1154 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Audi",
+    "cat_model": "100 Quattro",
+    "feed": [
+     "Audi",
+     "100 Quattro"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "90",
+    "feed": [
+     "Audi",
+     "90"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "90 Quattro",
+    "feed": [
+     "Audi",
+     "90 Quattro"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "A3 Sportback e-tron",
+    "feed": [
+     "Audi",
+     "A3 Sportback e-tron"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "A4 allroad",
+    "feed": [
+     "Audi",
+     "A4 allroad"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "A5 Sportback",
+    "feed": [
+     "Audi",
+     "A5 Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "A6 allroad",
+    "feed": [
+     "Audi",
+     "A6 allroad"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "A7 Sportback",
+    "feed": [
+     "Audi",
+     "A7 Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "Q4 e-tron",
+    "feed": [
+     "Audi",
+     "Q4 e-tron"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "Q4 e-tron Sportback",
+    "feed": [
+     "Audi",
+     "Q4 e-tron Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "Q5 PHEV",
+    "feed": [
+     "Audi",
+     "Q5 PHEV"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "Q6 e-tron",
+    "feed": [
+     "Audi",
+     "Q6 e-tron"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "Q8",
+    "feed": [
+     "Audi",
+     "Q8"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "Q8 e-tron",
+    "feed": [
+     "Audi",
+     "Q8 e-tron"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "Q8 e-tron Sportback",
+    "feed": [
+     "Audi",
+     "Q8 e-tron Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "R8",
+    "feed": [
+     "Audi",
+     "R8"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS Q8",
+    "feed": [
+     "Audi",
+     "RS Q8"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS e-tron GT",
+    "feed": [
+     "Audi",
+     "RS e-tron GT"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS3",
+    "feed": [
+     "Audi",
+     "RS3"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS4",
+    "feed": [
+     "Audi",
+     "RS4"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS5",
+    "feed": [
+     "Audi",
+     "RS5"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS5 Sportback",
+    "feed": [
+     "Audi",
+     "RS5 Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS6",
+    "feed": [
+     "Audi",
+     "RS6"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS6 Avant",
+    "feed": [
+     "Audi",
+     "RS6 Avant"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS7",
+    "feed": [
+     "Audi",
+     "RS7"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "RS7 Sportback",
+    "feed": [
+     "Audi",
+     "RS7 Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "S5 Sportback",
+    "feed": [
+     "Audi",
+     "S5 Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "S7 Sportback",
+    "feed": [
+     "Audi",
+     "S7 Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "SQ5 Sportback",
+    "feed": [
+     "Audi",
+     "SQ5 Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "SQ6 e-tron",
+    "feed": [
+     "Audi",
+     "SQ6 e-tron"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "SQ7",
+    "feed": [
+     "Audi",
+     "SQ7"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "SQ8",
+    "feed": [
+     "Audi",
+     "SQ8"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "SQ8 e-tron",
+    "feed": [
+     "Audi",
+     "SQ8 e-tron"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "SQ8 e-tron Sportback",
+    "feed": [
+     "Audi",
+     "SQ8 e-tron Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "TT RS Quattro",
+    "feed": [
+     "Audi",
+     "TT RS Quattro"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "TTS Quattro",
+    "feed": [
+     "Audi",
+     "TTS Quattro"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "V8 Quattro",
+    "feed": [
+     "Audi",
+     "V8 Quattro"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "e-tron GT",
+    "feed": [
+     "Audi",
+     "e-tron GT"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "e-tron Quattro",
+    "feed": [
+     "Audi",
+     "e-tron Quattro"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "e-tron S",
+    "feed": [
+     "Audi",
+     "e-tron S"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "e-tron S Sportback",
+    "feed": [
+     "Audi",
+     "e-tron S Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Audi",
+    "cat_model": "e-tron Sportback",
+    "feed": [
+     "Audi",
+     "e-tron Sportback"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "Atlas Cross Sport",
+    "feed": [
+     "Volkswagen",
+     "Atlas Cross Sport"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "Corrado",
+    "feed": [
+     "Volkswagen",
+     "Corrado"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "EuroVan",
+    "feed": [
+     "Volkswagen",
+     "EuroVan"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "Golf R",
+    "feed": [
+     "Volkswagen",
+     "Golf R"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "Golf SportWagen",
+    "feed": [
+     "Volkswagen",
+     "Golf SportWagen"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "Quantum",
+    "feed": [
+     "Volkswagen",
+     "Quantum"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "R32",
+    "feed": [
+     "Volkswagen",
+     "R32"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "Rabbit",
+    "feed": [
+     "Volkswagen",
+     "Rabbit"
+    ],
+    "why": "feed models ['Rabbit Pickup'] share the squash key 'rabbit' (M3)"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "Tiguan Limited",
+    "feed": [
+     "Volkswagen",
+     "Tiguan Limited"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "vag",
+ "proposals": [
+  {
+   "cat_make": "Audi",
+   "cat_model": "100 Quattro",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "100 Quattro",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "90",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "90",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "90 Quattro",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "90 Quattro",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "A3 Sportback e-tron",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "A3 Sportback e-tron",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "A3 Sportback E-Tron",
+     1
+    ]
+   ]
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "A4 allroad",
+   "feed_cars": 0,
+   "fitment_rows": 35,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "A4 allroad",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "A5 Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 17,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "A5 Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "A6 allroad",
+   "feed_cars": 0,
+   "fitment_rows": 5,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "A6 allroad",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "A7 Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 7,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "A7 Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "Q4 e-tron",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "Q4 e-tron",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "Q4 e-tron Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "Q4 e-tron Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "Q5 PHEV",
+   "feed_cars": 0,
+   "fitment_rows": 53,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "Q5 PHEV",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "Q6 e-tron",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "Q6 e-tron",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "Q8",
+   "feed_cars": 0,
+   "fitment_rows": 8,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "Q8",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "Q8 e-tron",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "Q8 e-tron",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "Q8 e-tron Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "Q8 e-tron Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "R8",
+   "feed_cars": 0,
+   "fitment_rows": 7,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "R8",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS Q8",
+   "feed_cars": 0,
+   "fitment_rows": 5,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS Q8",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS e-tron GT",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS e-tron GT",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS3",
+   "feed_cars": 0,
+   "fitment_rows": 12,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS3",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS4",
+   "feed_cars": 0,
+   "fitment_rows": 55,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS4",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS5",
+   "feed_cars": 0,
+   "fitment_rows": 26,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS5",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS5 Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 14,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS5 Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS6",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS6",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS6 Avant",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS6 Avant",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS7",
+   "feed_cars": 0,
+   "fitment_rows": 9,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS7",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "RS7 Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "RS7 Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "S5 Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 11,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "S5 Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "S7 Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "S7 Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "SQ5 Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 22,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "SQ5 Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "SQ6 e-tron",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "SQ6 e-tron",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "SQ7",
+   "feed_cars": 0,
+   "fitment_rows": 18,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "SQ7",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "SQ8",
+   "feed_cars": 0,
+   "fitment_rows": 5,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "SQ8",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "SQ8 e-tron",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "SQ8 e-tron",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "SQ8 e-tron Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "SQ8 e-tron Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "TT RS Quattro",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "TT RS Quattro",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "TTS Quattro",
+   "feed_cars": 0,
+   "fitment_rows": 27,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "TTS Quattro",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "V8 Quattro",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "V8 Quattro",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "e-tron GT",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "e-tron GT",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "e-tron Quattro",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "e-tron Quattro",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "e-tron S",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "e-tron S",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "e-tron S Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "e-tron S Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Audi",
+   "cat_model": "e-tron Sportback",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Audi",
+    "model": "e-tron Sportback",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "Atlas Cross Sport",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "Atlas Cross Sport",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "Corrado",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "Corrado",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "EuroVan",
+   "feed_cars": 0,
+   "fitment_rows": 20,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "EuroVan",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "Eurovan",
+     12
+    ]
+   ]
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "Golf R",
+   "feed_cars": 0,
+   "fitment_rows": 15,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "Golf R",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "Golf SportWagen",
+   "feed_cars": 0,
+   "fitment_rows": 7,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "Golf SportWagen",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "Golf Sportwagen",
+     13
+    ]
+   ]
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "Quantum",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "Quantum",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "R32",
+   "feed_cars": 0,
+   "fitment_rows": 51,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "R32",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "Rabbit",
+   "feed_cars": 128,
+   "fitment_rows": 49,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "Rabbit",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "Rabbit Pickup",
+     2
+    ]
+   ]
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "Tiguan Limited",
+   "feed_cars": 0,
+   "fitment_rows": 27,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "Tiguan Limited",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+}

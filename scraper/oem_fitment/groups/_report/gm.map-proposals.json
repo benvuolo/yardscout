@@ -1,7 +1,104 @@
 {
  "draft": {
-  "entries": [],
-  "exclude": {},
+  "entries": [
+   {
+    "basis": "catalog prints 'Aveo' (43 fitment rows, oem-raw@ceccc80); normalize_model canon 'Aveo', 575 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Chevrolet",
+    "cat_model": "Aveo",
+    "ns": "gm",
+    "targets": [
+     {
+      "make": "Chevrolet",
+      "model": "Aveo",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Citation' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Citation', 4 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Chevrolet",
+    "cat_model": "Citation",
+    "ns": "gm",
+    "targets": [
+     {
+      "make": "Chevrolet",
+      "model": "Citation",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Omega' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Omega', 4 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Oldsmobile",
+    "cat_model": "Omega",
+    "ns": "gm",
+    "targets": [
+     {
+      "make": "Oldsmobile",
+      "model": "Omega",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'G3' (37 fitment rows, oem-raw@ceccc80); normalize_model canon 'G3', 24 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Pontiac",
+    "cat_model": "G3",
+    "ns": "gm",
+    "targets": [
+     {
+      "make": "Pontiac",
+      "model": "G3",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'G8' (2 fitment rows, oem-raw@ceccc80); normalize_model canon 'G8', 26 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Pontiac",
+    "cat_model": "G8",
+    "ns": "gm",
+    "targets": [
+     {
+      "make": "Pontiac",
+      "model": "G8",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'LeMans' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'LeMans', 5 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Pontiac",
+    "cat_model": "LeMans",
+    "ns": "gm",
+    "targets": [
+     {
+      "make": "Pontiac",
+      "model": "LeMans",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Phoenix' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Phoenix', 2 feed cars (inventory 2026-11-05); identity draft",
+    "cat_make": "Pontiac",
+    "cat_model": "Phoenix",
+    "ns": "gm",
+    "targets": [
+     {
+      "make": "Pontiac",
+      "model": "Phoenix",
+      "trims": "*"
+     }
+    ]
+   }
+  ],
+  "exclude": {
+   "gm|Chevrolet|Aveo5": "feed spelling or sub-model the catalog does not print as its own model (113 cars, under catalog squash 'aveo'); unmapped until a reviewed entry exists",
+   "gm|Chevrolet|G3500": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists",
+   "gm|GMC|G3500 Rally": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists",
+   "gm|GMC|G3500 Vandura": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists"
+  },
   "skipped": [
    {
     "cat_make": "Buick",
@@ -99,6 +196,15 @@
     "feed": [
      "Chevrolet",
      "R2500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "SS",
+    "feed": [
+     "Chevrolet",
+     "SS"
     ],
     "why": "no feed car under the canonical name"
    },
@@ -272,7 +378,7 @@
    "cat_make": "Buick",
    "cat_model": "Somerset",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "gm",
    "proposed": {
     "make": "Buick",
@@ -322,6 +428,24 @@
   },
   {
    "cat_make": "Chevrolet",
+   "cat_model": "Aveo",
+   "feed_cars": 575,
+   "fitment_rows": 43,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "Aveo",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "Aveo5",
+     113
+    ]
+   ]
+  },
+  {
+   "cat_make": "Chevrolet",
    "cat_model": "Bolt EUV",
    "feed_cars": 0,
    "fitment_rows": 1,
@@ -348,9 +472,22 @@
   },
   {
    "cat_make": "Chevrolet",
+   "cat_model": "Citation",
+   "feed_cars": 4,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "Citation",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
    "cat_model": "K30",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 3,
    "ns": "gm",
    "proposed": {
     "make": "Chevrolet",
@@ -368,7 +505,7 @@
    "cat_make": "Chevrolet",
    "cat_model": "P20",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 5,
    "ns": "gm",
    "proposed": {
     "make": "Chevrolet",
@@ -381,7 +518,7 @@
    "cat_make": "Chevrolet",
    "cat_model": "R10",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "Chevrolet",
@@ -394,7 +531,7 @@
    "cat_make": "Chevrolet",
    "cat_model": "R20",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "Chevrolet",
@@ -407,11 +544,24 @@
    "cat_make": "Chevrolet",
    "cat_model": "R2500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "Chevrolet",
     "model": "R2500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "SS",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "SS",
     "trims": "*"
    },
    "squash_neighbours": []
@@ -433,7 +583,7 @@
    "cat_make": "Chevrolet",
    "cat_model": "V10",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "Chevrolet",
@@ -455,7 +605,7 @@
    "cat_make": "Chevrolet",
    "cat_model": "V20",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "Chevrolet",
@@ -468,7 +618,7 @@
    "cat_make": "Chevrolet",
    "cat_model": "V30",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "Chevrolet",
@@ -481,7 +631,7 @@
    "cat_make": "Chevrolet",
    "cat_model": "V3500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "Chevrolet",
@@ -494,7 +644,7 @@
    "cat_make": "GMC",
    "cat_model": "G3500",
    "feed_cars": 0,
-   "fitment_rows": 5,
+   "fitment_rows": 22,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -516,7 +666,7 @@
    "cat_make": "GMC",
    "cat_model": "P2500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 5,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -529,7 +679,7 @@
    "cat_make": "GMC",
    "cat_model": "P3500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 6,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -542,7 +692,7 @@
    "cat_make": "GMC",
    "cat_model": "R1500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -555,7 +705,7 @@
    "cat_make": "GMC",
    "cat_model": "R2500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -568,7 +718,7 @@
    "cat_make": "GMC",
    "cat_model": "R3500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -581,7 +731,7 @@
    "cat_make": "GMC",
    "cat_model": "Syclone",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 3,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -594,7 +744,7 @@
    "cat_make": "GMC",
    "cat_model": "Typhoon",
    "feed_cars": 0,
-   "fitment_rows": 3,
+   "fitment_rows": 4,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -607,7 +757,7 @@
    "cat_make": "GMC",
    "cat_model": "V1500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -620,7 +770,7 @@
    "cat_make": "GMC",
    "cat_model": "V2500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -633,7 +783,7 @@
    "cat_make": "GMC",
    "cat_model": "V3500",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 12,
    "ns": "gm",
    "proposed": {
     "make": "GMC",
@@ -656,6 +806,45 @@
    "squash_neighbours": []
   },
   {
+   "cat_make": "Oldsmobile",
+   "cat_model": "Omega",
+   "feed_cars": 4,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Oldsmobile",
+    "model": "Omega",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Pontiac",
+   "cat_model": "G3",
+   "feed_cars": 24,
+   "fitment_rows": 37,
+   "ns": "gm",
+   "proposed": {
+    "make": "Pontiac",
+    "model": "G3",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Pontiac",
+   "cat_model": "G8",
+   "feed_cars": 26,
+   "fitment_rows": 2,
+   "ns": "gm",
+   "proposed": {
+    "make": "Pontiac",
+    "model": "G8",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
    "cat_make": "Pontiac",
    "cat_model": "J2000",
    "feed_cars": 0,
@@ -667,7 +856,33 @@
     "trims": "*"
    },
    "squash_neighbours": []
+  },
+  {
+   "cat_make": "Pontiac",
+   "cat_model": "LeMans",
+   "feed_cars": 5,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Pontiac",
+    "model": "LeMans",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Pontiac",
+   "cat_model": "Phoenix",
+   "feed_cars": 2,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Pontiac",
+    "model": "Phoenix",
+    "trims": "*"
+   },
+   "squash_neighbours": []
   }
  ],
- "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
 }

@@ -1,0 +1,7064 @@
+{
+ "as_of": "2026-11-05T12:14:35Z",
+ "audit_sample": {
+  "closures": [],
+  "note": "no eligible closure or Verified pair to sample",
+  "pairs": []
+ },
+ "contradictions": [],
+ "engine_refusals": [
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "740",
+    1989
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "760",
+    1989
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1993
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1994
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1995
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1996
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "940",
+    1991
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "940",
+    1992
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "940",
+    1993
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1992
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1993
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1995
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1996
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60 Cross Country",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S70",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S70",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S70",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S90",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60 Cross Country",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60 Cross Country",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V90",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1996
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2000
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60 Cross Country",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S90",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S90",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2000
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60 Cross Country",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60 Cross Country",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V90",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V90",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1994
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1995
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "850",
+    1997
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1994
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1995
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1996
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "960",
+    1997
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C30",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    1998
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    1999
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "C70",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S40",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60 Cross Country",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S60",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S70",
+    1998
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S70",
+    1999
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S70",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    1999
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S80",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "S90",
+    1998
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V40",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V50",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60 Cross Country",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60 Cross Country",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V60",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    1998
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    1999
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V70",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "V90",
+    1998
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC60",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC70",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Volvo",
+    "XC90",
+    2014
+   ]
+  }
+ ],
+ "funnel_cars": {
+  "ac-compressor": {
+   "no_records": {
+    "": 377
+   },
+   "not_closed": {
+    "no_year_manifest": 1929
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "alternator": {
+   "no_records": {
+    "": 169
+   },
+   "not_closed": {
+    "no_year_manifest": 2137
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "bumper-front": {
+   "no_records": {
+    "": 847
+   },
+   "not_closed": {
+    "no_year_manifest": 1459
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "bumper-rear": {
+   "no_records": {
+    "": 776
+   },
+   "not_closed": {
+    "no_year_manifest": 1530
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "climate-control": {
+   "no_records": {
+    "": 583
+   },
+   "not_closed": {
+    "no_year_manifest": 1723
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "door-front": {
+   "no_records": {
+    "": 532
+   },
+   "not_closed": {
+    "no_year_manifest": 1774
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "door-rear": {
+   "no_records": {
+    "": 643
+   },
+   "not_closed": {
+    "no_year_manifest": 1663
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "fender": {
+   "no_records": {
+    "": 273
+   },
+   "not_closed": {
+    "no_year_manifest": 2033
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "fuel-pump-module": {
+   "no_records": {
+    "": 87
+   },
+   "not_closed": {
+    "no_year_manifest": 2219
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "gauge-cluster": {
+   "no_records": {
+    "": 1125
+   },
+   "not_closed": {
+    "no_year_manifest": 1181
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "grille": {
+   "no_records": {
+    "": 1368
+   },
+   "not_closed": {
+    "no_year_manifest": 938
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "headlights": {
+   "no_records": {
+    "": 456
+   },
+   "not_closed": {
+    "no_year_manifest": 1850
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "hood": {
+   "no_records": {
+    "": 347
+   },
+   "not_closed": {
+    "no_year_manifest": 1959
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "ignition-coils": {
+   "no_records": {
+    "": 378
+   },
+   "not_closed": {
+    "no_year_manifest": 1928
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "liftgate": {
+   "no_records": {
+    "": 1298
+   },
+   "not_closed": {
+    "no_year_manifest": 1008
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "power-steering-pump": {
+   "no_records": {
+    "": 326
+   },
+   "not_closed": {
+    "no_year_manifest": 1980
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "radiator": {
+   "no_records": {
+    "": 217
+   },
+   "not_closed": {
+    "no_year_manifest": 2089
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "side-mirrors": {
+   "no_records": {
+    "": 953
+   },
+   "not_closed": {
+    "no_year_manifest": 1353
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "starter": {
+   "no_records": {
+    "": 203
+   },
+   "not_closed": {
+    "no_year_manifest": 2103
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "tail-lights": {
+   "no_records": {
+    "": 852
+   },
+   "not_closed": {
+    "no_year_manifest": 1454
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "throttle-body": {
+   "no_records": {
+    "": 281
+   },
+   "not_closed": {
+    "no_year_manifest": 2025
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "trunk-lid": {
+   "no_records": {
+    "": 1301
+   },
+   "not_closed": {
+    "no_year_manifest": 1005
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "window-regulator": {
+   "no_records": {
+    "": 93
+   },
+   "not_closed": {
+    "no_year_manifest": 2213
+   },
+   "unmapped": {
+    "": 155
+   }
+  },
+  "window-switch": {
+   "no_records": {
+    "": 458
+   },
+   "not_closed": {
+    "no_year_manifest": 1848
+   },
+   "unmapped": {
+    "": 155
+   }
+  }
+ },
+ "funnel_cars_hypothetical_if_every_year_closed": {
+  "by_cat": {
+   "ac-compressor": {
+    "conditional": {
+     "conditional:colour": 1,
+     "conditional:qualifier": 1320,
+     "conditional:trim": 3
+    },
+    "no_records": {
+     "": 377
+    },
+    "split": {
+     "option_split": 605
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "alternator": {
+    "conditional": {
+     "conditional:colour": 5,
+     "conditional:engine": 97,
+     "conditional:qualifier": 835
+    },
+    "no_records": {
+     "": 169
+    },
+    "split": {
+     "option_split": 1200
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "bumper-front": {
+    "conditional": {
+     "conditional:colour": 18,
+     "conditional:engine_unattested": 31,
+     "conditional:trim": 3
+    },
+    "no_records": {
+     "": 847
+    },
+    "split": {
+     "option_split": 1407
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "bumper-rear": {
+    "conditional": {
+     "conditional:body": 26,
+     "conditional:engine_unattested": 51,
+     "conditional:trim": 75
+    },
+    "no_records": {
+     "": 776
+    },
+    "split": {
+     "option_split": 1378
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "climate-control": {
+    "conditional": {
+     "conditional:engine_unattested": 181,
+     "conditional:option": 52,
+     "conditional:trim": 301
+    },
+    "no_records": {
+     "": 583
+    },
+    "split": {
+     "option_split": 1189
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "door-front": {
+    "conditional": {
+     "conditional:engine_unattested": 1105,
+     "conditional:trim": 669
+    },
+    "no_records": {
+     "": 532
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "door-rear": {
+    "conditional": {
+     "conditional:engine_unattested": 1015,
+     "conditional:trim": 639
+    },
+    "no_records": {
+     "": 643
+    },
+    "split": {
+     "slot_missing": 9
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "fender": {
+    "conditional": {
+     "conditional:engine_unattested": 1388,
+     "conditional:trim": 509
+    },
+    "no_records": {
+     "": 273
+    },
+    "split": {
+     "option_split": 123,
+     "slot_missing": 13
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "fuel-pump-module": {
+    "conditional": {
+     "conditional:engine_unattested": 252,
+     "conditional:trim": 605
+    },
+    "no_records": {
+     "": 87
+    },
+    "split": {
+     "option_split": 1362
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "gauge-cluster": {
+    "conditional": {
+     "conditional:engine_unattested": 29,
+     "conditional:trim": 483
+    },
+    "no_records": {
+     "": 1125
+    },
+    "split": {
+     "option_split": 669
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "grille": {
+    "conditional": {
+     "conditional:colour": 9,
+     "conditional:engine_unattested": 42,
+     "conditional:trim": 281
+    },
+    "no_records": {
+     "": 1368
+    },
+    "split": {
+     "option_split": 606
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "headlights": {
+    "conditional": {
+     "conditional:engine_unattested": 284,
+     "conditional:option": 63,
+     "conditional:trim": 221
+    },
+    "no_records": {
+     "": 456
+    },
+    "split": {
+     "option_split": 1175,
+     "slot_missing": 107
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "hood": {
+    "conditional": {
+     "conditional:engine_unattested": 1242,
+     "conditional:trim": 695
+    },
+    "no_records": {
+     "": 347
+    },
+    "split": {
+     "option_split": 22
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "ignition-coils": {
+    "conditional": {
+     "conditional:engine_unattested": 466,
+     "conditional:trim": 463
+    },
+    "no_records": {
+     "": 378
+    },
+    "split": {
+     "option_split": 999
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "liftgate": {
+    "conditional": {
+     "conditional:engine_unattested": 617,
+     "conditional:trim": 366
+    },
+    "no_records": {
+     "": 1298
+    },
+    "split": {
+     "option_split": 25
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "power-steering-pump": {
+    "conditional": {
+     "conditional:engine_unattested": 569,
+     "conditional:trim": 966
+    },
+    "no_records": {
+     "": 326
+    },
+    "split": {
+     "option_split": 445
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "radiator": {
+    "conditional": {
+     "conditional:colour": 14,
+     "conditional:engine": 173,
+     "conditional:engine_unattested": 431,
+     "conditional:model_other": 49,
+     "conditional:trans": 22,
+     "conditional:trim": 929
+    },
+    "no_records": {
+     "": 217
+    },
+    "split": {
+     "option_split": 471
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "side-mirrors": {
+    "conditional": {
+     "conditional:engine_unattested": 30
+    },
+    "no_records": {
+     "": 953
+    },
+    "split": {
+     "option_split": 1253,
+     "slot_missing": 70
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "starter": {
+    "conditional": {
+     "conditional:engine_unattested": 538,
+     "conditional:trim": 744
+    },
+    "no_records": {
+     "": 203
+    },
+    "split": {
+     "option_split": 821
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "tail-lights": {
+    "conditional": {
+     "conditional:engine_unattested": 226,
+     "conditional:trim": 667
+    },
+    "no_records": {
+     "": 852
+    },
+    "split": {
+     "option_split": 420,
+     "slot_missing": 141
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "throttle-body": {
+    "conditional": {
+     "conditional:engine": 2,
+     "conditional:engine_unattested": 266,
+     "conditional:trim": 318
+    },
+    "no_records": {
+     "": 281
+    },
+    "split": {
+     "option_split": 1439
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "trunk-lid": {
+    "conditional": {
+     "conditional:engine_unattested": 583,
+     "conditional:trim": 422
+    },
+    "no_records": {
+     "": 1301
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "window-regulator": {
+    "no_records": {
+     "": 93
+    },
+    "split": {
+     "packaging_incomplete": 47,
+     "packaging_unstated": 2166
+    },
+    "unmapped": {
+     "": 155
+    }
+   },
+   "window-switch": {
+    "conditional": {
+     "conditional:model_other": 82,
+     "conditional:trim": 149
+    },
+    "no_records": {
+     "": 458
+    },
+    "split": {
+     "option_split": 768,
+     "position_missing": 849
+    },
+    "unmapped": {
+     "": 155
+    }
+   }
+  },
+  "label": "HYPOTHETICAL: closure (C1-C9) and the audit gate (E5) assumed, current candidate state; ranks crawler work, never shipped"
+ },
+ "input_issues": [],
+ "lint": [],
+ "map_proposals": [
+  {
+   "cat_make": "Volvo",
+   "cat_model": "240",
+   "feed_cars": 53,
+   "fitment_rows": 12,
+   "ns": "volvo",
+   "proposed": {
+    "make": "Volvo",
+    "model": "240",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "240 Wagon",
+     11
+    ]
+   ]
+  },
+  {
+   "cat_make": "Volvo",
+   "cat_model": "242",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "volvo",
+   "proposed": {
+    "make": "Volvo",
+    "model": "242",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "model_map_report": {
+  "M10": {
+   "bmw": {
+    "cars": 5380,
+    "mapped_cars": 5053,
+    "mapped_share": 0.9392
+   },
+   "ford": {
+    "cars": 60409,
+    "mapped_cars": 58154,
+    "mapped_share": 0.9627
+   },
+   "gm": {
+    "cars": 78786,
+    "mapped_cars": 63636,
+    "mapped_share": 0.8077
+   },
+   "hmg": {
+    "cars": 21810,
+    "mapped_cars": 21594,
+    "mapped_share": 0.9901
+   },
+   "honda": {
+    "cars": 28509,
+    "mapped_cars": 28102,
+    "mapped_share": 0.9857
+   },
+   "mazda": {
+    "cars": 6230,
+    "mapped_cars": 5827,
+    "mapped_share": 0.9353
+   },
+   "mb": {
+    "cars": 4741,
+    "mapped_cars": 1667,
+    "mapped_share": 0.3516
+   },
+   "mitsubishi": {
+    "cars": 2994,
+    "mapped_cars": 2892,
+    "mapped_share": 0.9659
+   },
+   "mopar": {
+    "cars": 44115,
+    "mapped_cars": 41778,
+    "mapped_share": 0.947
+   },
+   "nissan": {
+    "cars": 33135,
+    "mapped_cars": 31807,
+    "mapped_share": 0.9599
+   },
+   "subaru": {
+    "cars": 5545,
+    "mapped_cars": 5282,
+    "mapped_share": 0.9526
+   },
+   "toyota": {
+    "cars": 26306,
+    "mapped_cars": 25599,
+    "mapped_share": 0.9731
+   },
+   "vag": {
+    "cars": 9169,
+    "mapped_cars": 8468,
+    "mapped_share": 0.9235
+   },
+   "volvo": {
+    "cars": 2461,
+    "mapped_cars": 2306,
+    "mapped_share": 0.937
+   }
+  },
+  "M6": {
+   "by_target": {
+    "Acura|CL": {
+     "decoded": 105
+    },
+    "Acura|Integra": {
+     "decoded": 84
+    },
+    "Acura|Legend": {
+     "decoded": 37
+    },
+    "Acura|MDX": {
+     "decoded": 895,
+     "make_mismatch": 2
+    },
+    "Acura|RDX": {
+     "decoded": 123
+    },
+    "Acura|RL": {
+     "decoded": 108
+    },
+    "Acura|RLX": {
+     "decoded": 3
+    },
+    "Acura|RSX": {
+     "decoded": 110
+    },
+    "Acura|TL": {
+     "decoded": 1125,
+     "make_mismatch": 1
+    },
+    "Acura|TLX": {
+     "decoded": 31
+    },
+    "Acura|TSX": {
+     "decoded": 143
+    },
+    "Acura|ZDX": {
+     "decoded": 4
+    },
+    "Audi|100": {
+     "decoded": 1
+    },
+    "Audi|A3": {
+     "decoded": 101
+    },
+    "Audi|A3 Quattro": {
+     "decoded": 8
+    },
+    "Audi|A4": {
+     "decoded": 640
+    },
+    "Audi|A4 Quattro": {
+     "decoded": 103
+    },
+    "Audi|A5": {
+     "decoded": 53
+    },
+    "Audi|A5 Quattro": {
+     "decoded": 13
+    },
+    "Audi|A6": {
+     "decoded": 184
+    },
+    "Audi|A6 Quattro": {
+     "decoded": 62
+    },
+    "Audi|A7 Quattro": {
+     "decoded": 9
+    },
+    "Audi|A8": {
+     "decoded": 14
+    },
+    "Audi|A8 Quattro": {
+     "decoded": 8
+    },
+    "Audi|Allroad": {
+     "decoded": 12
+    },
+    "Audi|Allroad Quattro": {
+     "decoded": 11
+    },
+    "Audi|Cabriolet": {},
+    "Audi|Q3": {
+     "decoded": 12
+    },
+    "Audi|Q3 Quattro": {
+     "decoded": 2
+    },
+    "Audi|Q5": {
+     "decoded": 179,
+     "hybrid": 9
+    },
+    "Audi|Q5 Sportback": {},
+    "Audi|Q7": {
+     "decoded": 154
+    },
+    "Audi|S3": {
+     "decoded": 4
+    },
+    "Audi|S4": {
+     "decoded": 17
+    },
+    "Audi|S5": {
+     "decoded": 9
+    },
+    "Audi|S6": {
+     "decoded": 1
+    },
+    "Audi|S7": {
+     "decoded": 1
+    },
+    "Audi|S8": {},
+    "Audi|SQ5": {
+     "decoded": 2
+    },
+    "Audi|TT": {
+     "decoded": 47
+    },
+    "Audi|TT Quattro": {
+     "decoded": 9
+    },
+    "BMW|128i": {
+     "decoded": 28
+    },
+    "BMW|135i": {
+     "decoded": 5
+    },
+    "BMW|228i": {
+     "decoded": 3
+    },
+    "BMW|230i": {},
+    "BMW|318i": {
+     "decoded": 12
+    },
+    "BMW|318is": {
+     "decoded": 5
+    },
+    "BMW|318ti": {
+     "decoded": 3
+    },
+    "BMW|320i": {
+     "decoded": 75
+    },
+    "BMW|320i xDrive": {
+     "decoded": 9
+    },
+    "BMW|323ci": {
+     "decoded": 10
+    },
+    "BMW|323i": {
+     "decoded": 62
+    },
+    "BMW|325ci": {
+     "decoded": 98
+    },
+    "BMW|325i": {
+     "decoded": 350
+    },
+    "BMW|325is": {
+     "decoded": 5
+    },
+    "BMW|325xi": {
+     "decoded": 60
+    },
+    "BMW|328ci": {},
+    "BMW|328d": {
+     "decoded": 2
+    },
+    "BMW|328d xDrive": {
+     "decoded": 2
+    },
+    "BMW|328i": {
+     "decoded": 855
+    },
+    "BMW|328i GT xDrive": {
+     "decoded": 2
+    },
+    "BMW|328i xDrive": {
+     "decoded": 57
+    },
+    "BMW|328is": {
+     "decoded": 1
+    },
+    "BMW|328xi": {
+     "decoded": 74
+    },
+    "BMW|330ci": {
+     "decoded": 53
+    },
+    "BMW|330i": {
+     "decoded": 121
+    },
+    "BMW|330i GT xDrive": {
+     "decoded": 1
+    },
+    "BMW|330xi": {
+     "decoded": 30
+    },
+    "BMW|335d": {
+     "decoded": 2
+    },
+    "BMW|335i": {
+     "decoded": 129
+    },
+    "BMW|335i xDrive": {
+     "decoded": 8
+    },
+    "BMW|335is": {
+     "decoded": 1
+    },
+    "BMW|335xi": {
+     "decoded": 12
+    },
+    "BMW|340i": {},
+    "BMW|428i": {
+     "decoded": 10
+    },
+    "BMW|428i Gran Coupe": {
+     "decoded": 1
+    },
+    "BMW|430i": {
+     "decoded": 3
+    },
+    "BMW|430i xDrive": {
+     "decoded": 1
+    },
+    "BMW|435i": {
+     "decoded": 1
+    },
+    "BMW|525i": {
+     "decoded": 139
+    },
+    "BMW|525xi": {
+     "decoded": 14
+    },
+    "BMW|528i": {
+     "decoded": 260
+    },
+    "BMW|528i xDrive": {
+     "decoded": 12
+    },
+    "BMW|528xi": {
+     "decoded": 19
+    },
+    "BMW|530i": {
+     "decoded": 149
+    },
+    "BMW|530xi": {
+     "decoded": 29
+    },
+    "BMW|535i": {
+     "decoded": 140
+    },
+    "BMW|535i GT": {
+     "decoded": 4
+    },
+    "BMW|535i xDrive": {
+     "decoded": 17
+    },
+    "BMW|535xi": {
+     "decoded": 19
+    },
+    "BMW|540i": {
+     "decoded": 23
+    },
+    "BMW|545i": {
+     "decoded": 21
+    },
+    "BMW|550i": {
+     "decoded": 57
+    },
+    "BMW|550i GT": {
+     "decoded": 7
+    },
+    "BMW|550i GT xDrive": {
+     "decoded": 1
+    },
+    "BMW|550i xDrive": {
+     "decoded": 3
+    },
+    "BMW|640i": {
+     "decoded": 3
+    },
+    "BMW|645ci": {
+     "decoded": 20
+    },
+    "BMW|650i": {
+     "decoded": 25
+    },
+    "BMW|740Li": {
+     "decoded": 4
+    },
+    "BMW|740Li xDrive": {
+     "decoded": 1
+    },
+    "BMW|740i": {
+     "decoded": 37
+    },
+    "BMW|740iL": {
+     "decoded": 29
+    },
+    "BMW|745Li": {
+     "decoded": 35
+    },
+    "BMW|745i": {
+     "decoded": 22
+    },
+    "BMW|750Li": {
+     "decoded": 98,
+     "hybrid": 1
+    },
+    "BMW|750Li xDrive": {
+     "decoded": 2
+    },
+    "BMW|750i": {
+     "decoded": 51
+    },
+    "BMW|750iL": {
+     "decoded": 4
+    },
+    "BMW|760Li": {
+     "decoded": 1
+    },
+    "BMW|760i": {
+     "decoded": 2
+    },
+    "BMW|ActiveHybrid 3": {
+     "decoded": 1,
+     "hybrid": 1
+    },
+    "BMW|ActiveHybrid 5": {
+     "decoded": 2
+    },
+    "BMW|Alpina B7": {},
+    "BMW|Alpina B7 xDrive": {
+     "decoded": 3
+    },
+    "BMW|Alpina B7L": {
+     "decoded": 1
+    },
+    "BMW|Alpina B7L xDrive": {
+     "decoded": 2
+    },
+    "BMW|M235i": {},
+    "BMW|M3": {
+     "decoded": 1
+    },
+    "BMW|M5": {
+     "decoded": 2
+    },
+    "BMW|X1": {
+     "decoded": 88
+    },
+    "BMW|X3": {
+     "decoded": 392
+    },
+    "BMW|X4": {
+     "decoded": 1
+    },
+    "BMW|X5": {
+     "decoded": 533
+    },
+    "BMW|X6": {
+     "decoded": 11
+    },
+    "BMW|Z3": {
+     "decoded": 24
+    },
+    "BMW|Z4": {
+     "decoded": 29
+    },
+    "BMW|i3": {
+     "decoded": 1
+    },
+    "Buick|Allure": {
+     "decoded": 16
+    },
+    "Buick|Cascada": {
+     "decoded": 2
+    },
+    "Buick|Century": {
+     "decoded": 569
+    },
+    "Buick|Electra": {
+     "decoded": 5
+    },
+    "Buick|Enclave": {
+     "decoded": 953
+    },
+    "Buick|Encore": {
+     "decoded": 251
+    },
+    "Buick|Encore GX": {
+     "decoded": 7
+    },
+    "Buick|Envision": {
+     "decoded": 23
+    },
+    "Buick|Envista": {
+     "decoded": 3
+    },
+    "Buick|LaCrosse": {
+     "decoded": 864
+    },
+    "Buick|LeSabre": {
+     "decoded": 905
+    },
+    "Buick|Lucerne": {
+     "decoded": 496
+    },
+    "Buick|Park Avenue": {
+     "decoded": 53
+    },
+    "Buick|Rainier": {
+     "decoded": 72
+    },
+    "Buick|Reatta": {},
+    "Buick|Regal": {
+     "decoded": 470
+    },
+    "Buick|Rendezvous": {
+     "decoded": 290
+    },
+    "Buick|Riviera": {
+     "decoded": 4
+    },
+    "Buick|Roadmaster": {
+     "decoded": 14
+    },
+    "Buick|Skyhawk": {},
+    "Buick|Skylark": {
+     "decoded": 10
+    },
+    "Buick|Terraza": {
+     "decoded": 38
+    },
+    "Buick|Verano": {
+     "decoded": 345
+    },
+    "Cadillac|ATS": {
+     "decoded": 123
+    },
+    "Cadillac|Allante": {},
+    "Cadillac|Brougham": {
+     "decoded": 5
+    },
+    "Cadillac|CT5": {},
+    "Cadillac|CT6": {
+     "decoded": 2
+    },
+    "Cadillac|CTS": {
+     "decoded": 583
+    },
+    "Cadillac|DTS": {
+     "decoded": 37
+    },
+    "Cadillac|DeVille": {
+     "decoded": 182,
+     "make_mismatch": 1
+    },
+    "Cadillac|ELR": {
+     "decoded": 1
+    },
+    "Cadillac|Eldorado": {
+     "decoded": 28
+    },
+    "Cadillac|Escalade": {
+     "decoded": 482,
+     "hybrid": 6
+    },
+    "Cadillac|Fleetwood": {
+     "decoded": 6
+    },
+    "Cadillac|SRX": {
+     "decoded": 563
+    },
+    "Cadillac|STS": {
+     "decoded": 66
+    },
+    "Cadillac|Seville": {
+     "decoded": 119
+    },
+    "Cadillac|XLR": {},
+    "Cadillac|XT5": {
+     "decoded": 11
+    },
+    "Cadillac|XTS": {
+     "decoded": 72
+    },
+    "Chevrolet|Astro": {
+     "decoded": 415
+    },
+    "Chevrolet|Avalanche": {
+     "decoded": 397
+    },
+    "Chevrolet|Beretta": {
+     "decoded": 5
+    },
+    "Chevrolet|Blazer": {
+     "decoded": 530
+    },
+    "Chevrolet|Bolt EV": {
+     "decoded": 2
+    },
+    "Chevrolet|C10": {
+     "decoded": 25
+    },
+    "Chevrolet|C1500": {
+     "decoded": 254
+    },
+    "Chevrolet|C20": {
+     "decoded": 4
+    },
+    "Chevrolet|C2500": {
+     "decoded": 72,
+     "make_mismatch": 1
+    },
+    "Chevrolet|C30": {
+     "decoded": 3
+    },
+    "Chevrolet|C3500": {
+     "decoded": 42
+    },
+    "Chevrolet|Camaro": {
+     "decoded": 453
+    },
+    "Chevrolet|Caprice": {
+     "decoded": 70
+    },
+    "Chevrolet|Captiva Sport": {
+     "decoded": 245
+    },
+    "Chevrolet|Cavalier": {
+     "decoded": 173
+    },
+    "Chevrolet|Celebrity": {},
+    "Chevrolet|Cobalt": {
+     "decoded": 1219
+    },
+    "Chevrolet|Colorado": {
+     "decoded": 491
+    },
+    "Chevrolet|Corsica": {
+     "decoded": 4
+    },
+    "Chevrolet|Corvette": {
+     "decoded": 12
+    },
+    "Chevrolet|Cruze": {
+     "decoded": 3626
+    },
+    "Chevrolet|Equinox": {
+     "decoded": 3378
+    },
+    "Chevrolet|Express": {
+     "decoded": 1
+    },
+    "Chevrolet|G10": {
+     "decoded": 5
+    },
+    "Chevrolet|G20": {
+     "decoded": 45
+    },
+    "Chevrolet|G30": {
+     "decoded": 7
+    },
+    "Chevrolet|HHR": {
+     "decoded": 766
+    },
+    "Chevrolet|Impala": {
+     "decoded": 3186
+    },
+    "Chevrolet|K10": {
+     "decoded": 1
+    },
+    "Chevrolet|K1500": {
+     "decoded": 275
+    },
+    "Chevrolet|K20": {
+     "decoded": 2
+    },
+    "Chevrolet|K2500": {
+     "decoded": 93
+    },
+    "Chevrolet|K3500": {
+     "decoded": 14
+    },
+    "Chevrolet|Lumina": {
+     "decoded": 49
+    },
+    "Chevrolet|Malibu": {
+     "decoded": 4327,
+     "hybrid": 24
+    },
+    "Chevrolet|Metro": {},
+    "Chevrolet|Monte Carlo": {
+     "decoded": 307
+    },
+    "Chevrolet|Orlando": {
+     "decoded": 12
+    },
+    "Chevrolet|P30": {
+     "decoded": 2
+    },
+    "Chevrolet|R30": {
+     "decoded": 4
+    },
+    "Chevrolet|R3500": {
+     "decoded": 2
+    },
+    "Chevrolet|S-10": {
+     "decoded": 854,
+     "make_mismatch": 3
+    },
+    "Chevrolet|Silverado": {},
+    "Chevrolet|Sonic": {
+     "decoded": 1037
+    },
+    "Chevrolet|Spark": {
+     "decoded": 283
+    },
+    "Chevrolet|Spark EV": {
+     "decoded": 3
+    },
+    "Chevrolet|Sprint": {},
+    "Chevrolet|Suburban": {
+     "decoded": 3
+    },
+    "Chevrolet|Tahoe": {
+     "decoded": 2295,
+     "hybrid": 1
+    },
+    "Chevrolet|Trailblazer": {
+     "decoded": 1622
+    },
+    "Chevrolet|Traverse": {
+     "decoded": 1789
+    },
+    "Chevrolet|Trax": {
+     "decoded": 240
+    },
+    "Chevrolet|Uplander": {
+     "decoded": 290
+    },
+    "Chevrolet|Venture": {
+     "decoded": 189
+    },
+    "Chevrolet|Volt": {
+     "decoded": 84
+    },
+    "Chrysler|200": {
+     "decoded": 1673
+    },
+    "Chrysler|300": {
+     "decoded": 1322
+    },
+    "Chrysler|300M": {
+     "decoded": 68
+    },
+    "Chrysler|Aspen": {
+     "decoded": 138
+    },
+    "Chrysler|Cirrus": {
+     "decoded": 13
+    },
+    "Chrysler|Concorde": {
+     "decoded": 63
+    },
+    "Chrysler|Fifth Avenue": {},
+    "Chrysler|Imperial": {},
+    "Chrysler|LHS": {
+     "decoded": 21
+    },
+    "Chrysler|LeBaron": {
+     "decoded": 21
+    },
+    "Chrysler|New Yorker": {
+     "decoded": 12
+    },
+    "Chrysler|PT Cruiser": {
+     "decoded": 1001
+    },
+    "Chrysler|Pacifica": {
+     "decoded": 406
+    },
+    "Chrysler|Sebring": {
+     "decoded": 798
+    },
+    "Chrysler|TC By Maserati": {
+     "decoded": 3
+    },
+    "Chrysler|Town & Country": {
+     "decoded": 2292
+    },
+    "Chrysler|Voyager": {
+     "decoded": 48
+    },
+    "Dodge|Aries": {
+     "decoded": 1
+    },
+    "Dodge|Avenger": {
+     "decoded": 1159
+    },
+    "Dodge|B150": {
+     "decoded": 2
+    },
+    "Dodge|B1500": {
+     "decoded": 1
+    },
+    "Dodge|B250": {
+     "decoded": 6
+    },
+    "Dodge|B2500": {
+     "decoded": 6
+    },
+    "Dodge|B350": {
+     "decoded": 4
+    },
+    "Dodge|B3500": {
+     "decoded": 7
+    },
+    "Dodge|Caliber": {
+     "decoded": 721
+    },
+    "Dodge|Caravan": {
+     "decoded": 749
+    },
+    "Dodge|Challenger": {
+     "decoded": 147
+    },
+    "Dodge|Charger": {
+     "decoded": 1595
+    },
+    "Dodge|D100": {
+     "decoded": 4
+    },
+    "Dodge|D150": {
+     "decoded": 22
+    },
+    "Dodge|D350": {},
+    "Dodge|Dakota": {
+     "decoded": 1435
+    },
+    "Dodge|Dart": {
+     "decoded": 792
+    },
+    "Dodge|Daytona": {
+     "decoded": 6
+    },
+    "Dodge|Diplomat": {},
+    "Dodge|Durango": {
+     "decoded": 1384
+    },
+    "Dodge|Dynasty": {
+     "decoded": 2
+    },
+    "Dodge|Grand Caravan": {
+     "decoded": 2762
+    },
+    "Dodge|Intrepid": {
+     "decoded": 72
+    },
+    "Dodge|Journey": {
+     "decoded": 1633
+    },
+    "Dodge|Lancer": {},
+    "Dodge|Magnum": {
+     "decoded": 228
+    },
+    "Dodge|Mini Ram": {
+     "decoded": 3
+    },
+    "Dodge|Neon": {
+     "decoded": 271,
+     "make_mismatch": 1
+    },
+    "Dodge|Nitro": {
+     "decoded": 363
+    },
+    "Dodge|Ram 1500": {
+     "decoded": 3570
+    },
+    "Dodge|Ram 2500": {
+     "decoded": 281
+    },
+    "Dodge|Ram 3500": {
+     "decoded": 32
+    },
+    "Dodge|Ram Van": {
+     "decoded": 164
+    },
+    "Dodge|Ram Van 1500": {
+     "decoded": 23
+    },
+    "Dodge|Ram Van 2500": {
+     "decoded": 10
+    },
+    "Dodge|Ram Van 3500": {
+     "decoded": 14
+    },
+    "Dodge|Ram Wagon": {
+     "decoded": 56
+    },
+    "Dodge|Ramcharger": {
+     "decoded": 8
+    },
+    "Dodge|Rampage": {
+     "decoded": 1
+    },
+    "Dodge|Shadow": {
+     "decoded": 3
+    },
+    "Dodge|Spirit": {},
+    "Dodge|Stratus": {
+     "decoded": 241
+    },
+    "Dodge|W100": {
+     "decoded": 1
+    },
+    "Dodge|W150": {
+     "decoded": 5
+    },
+    "Dodge|W250": {
+     "decoded": 1
+    },
+    "Dodge|W350": {
+     "decoded": 2
+    },
+    "Ford|Aerostar": {
+     "decoded": 60
+    },
+    "Ford|Bronco": {
+     "decoded": 35
+    },
+    "Ford|Bronco II": {
+     "decoded": 36
+    },
+    "Ford|C-Max": {
+     "decoded": 79
+    },
+    "Ford|Contour": {
+     "decoded": 53
+    },
+    "Ford|Crown Victoria": {
+     "decoded": 277
+    },
+    "Ford|E-150": {
+     "decoded": 679
+    },
+    "Ford|E-250": {
+     "decoded": 697
+    },
+    "Ford|E-450 Super Duty": {
+     "decoded": 2
+    },
+    "Ford|E-Transit": {},
+    "Ford|Edge": {
+     "decoded": 1618
+    },
+    "Ford|Escape": {
+     "decoded": 4105
+    },
+    "Ford|Escort": {
+     "decoded": 209
+    },
+    "Ford|Excursion": {
+     "decoded": 84
+    },
+    "Ford|Expedition": {
+     "decoded": 2693
+    },
+    "Ford|Explorer": {
+     "decoded": 3771
+    },
+    "Ford|Explorer Sport": {
+     "decoded": 77
+    },
+    "Ford|Explorer Sport Trac": {
+     "decoded": 432
+    },
+    "Ford|F-150": {
+     "decoded": 7734
+    },
+    "Ford|F-250": {
+     "decoded": 675
+    },
+    "Ford|F-250 Super Duty": {
+     "decoded": 506
+    },
+    "Ford|F-350": {
+     "decoded": 224
+    },
+    "Ford|F-350 Super Duty": {
+     "decoded": 212
+    },
+    "Ford|F-450 Super Duty": {
+     "decoded": 25
+    },
+    "Ford|F-550 Super Duty": {
+     "decoded": 11
+    },
+    "Ford|Fiesta": {
+     "decoded": 1030
+    },
+    "Ford|Five Hundred": {
+     "decoded": 325
+    },
+    "Ford|Flex": {
+     "decoded": 479
+    },
+    "Ford|Focus": {
+     "decoded": 5311
+    },
+    "Ford|Freestar": {
+     "decoded": 205
+    },
+    "Ford|Freestyle": {
+     "decoded": 207
+    },
+    "Ford|Fusion": {
+     "decoded": 4211,
+     "hybrid": 158
+    },
+    "Ford|Mustang": {
+     "decoded": 1045
+    },
+    "Ford|Police Interceptor Sedan": {
+     "decoded": 16
+    },
+    "Ford|Police Interceptor Utility": {
+     "decoded": 51
+    },
+    "Ford|Probe": {
+     "decoded": 11
+    },
+    "Ford|Ranger": {
+     "decoded": 1754
+    },
+    "Ford|Taurus": {
+     "decoded": 2236
+    },
+    "Ford|Taurus X": {
+     "decoded": 73
+    },
+    "Ford|Tempo": {
+     "decoded": 13
+    },
+    "Ford|Thunderbird": {
+     "decoded": 88
+    },
+    "Ford|Transit": {
+     "decoded": 15
+    },
+    "Ford|Transit Connect": {
+     "decoded": 258
+    },
+    "Ford|Windstar": {
+     "decoded": 260
+    },
+    "GMC|Acadia": {
+     "decoded": 1462
+    },
+    "GMC|C1500": {
+     "decoded": 58
+    },
+    "GMC|C2500": {
+     "decoded": 9
+    },
+    "GMC|C3500": {
+     "decoded": 4
+    },
+    "GMC|Canyon": {
+     "decoded": 106
+    },
+    "GMC|Envoy": {
+     "decoded": 700
+    },
+    "GMC|G1500": {
+     "decoded": 1
+    },
+    "GMC|G2500": {
+     "decoded": 5
+    },
+    "GMC|Jimmy": {
+     "decoded": 148
+    },
+    "GMC|K1500": {
+     "decoded": 9
+    },
+    "GMC|K2500": {
+     "decoded": 1
+    },
+    "GMC|K3500": {
+     "decoded": 2
+    },
+    "GMC|S-15": {
+     "decoded": 15
+    },
+    "GMC|Safari": {
+     "decoded": 139
+    },
+    "GMC|Savana": {
+     "decoded": 152
+    },
+    "GMC|Sierra": {},
+    "GMC|Sonoma": {
+     "decoded": 196
+    },
+    "GMC|Suburban": {},
+    "GMC|Terrain": {
+     "decoded": 993
+    },
+    "GMC|Yukon": {
+     "decoded": 931,
+     "hybrid": 1
+    },
+    "Honda|Accord": {
+     "decoded": 7698,
+     "hybrid": 44,
+     "make_mismatch": 1
+    },
+    "Honda|Accord Hybrid": {
+     "decoded": 23,
+     "hybrid": 23
+    },
+    "Honda|CR-V": {
+     "decoded": 1548
+    },
+    "Honda|CR-Z": {
+     "decoded": 18
+    },
+    "Honda|CRX": {
+     "decoded": 5
+    },
+    "Honda|Civic": {
+     "decoded": 5641,
+     "hybrid": 299
+    },
+    "Honda|Crosstour": {
+     "decoded": 44
+    },
+    "Honda|Del Sol": {
+     "decoded": 1
+    },
+    "Honda|Element": {
+     "decoded": 305
+    },
+    "Honda|Fit": {
+     "decoded": 176
+    },
+    "Honda|HR-V": {
+     "decoded": 24
+    },
+    "Honda|Insight": {
+     "decoded": 96
+    },
+    "Honda|Odyssey": {
+     "decoded": 3105
+    },
+    "Honda|Pilot": {
+     "decoded": 1782
+    },
+    "Honda|Prelude": {
+     "decoded": 39
+    },
+    "Honda|Ridgeline": {
+     "decoded": 196
+    },
+    "Hummer|H2": {
+     "decoded": 9
+    },
+    "Hummer|H3": {
+     "decoded": 98
+    },
+    "Hyundai|Accent": {
+     "decoded": 1009
+    },
+    "Hyundai|Azera": {
+     "decoded": 125
+    },
+    "Hyundai|Elantra": {
+     "decoded": 2408
+    },
+    "Hyundai|Elantra GT": {
+     "decoded": 96
+    },
+    "Hyundai|Elantra Touring": {
+     "decoded": 44
+    },
+    "Hyundai|Entourage": {
+     "decoded": 44
+    },
+    "Hyundai|Equus": {
+     "decoded": 28
+    },
+    "Hyundai|Excel": {
+     "decoded": 4
+    },
+    "Hyundai|Genesis": {
+     "decoded": 273
+    },
+    "Hyundai|Genesis Coupe": {
+     "decoded": 95
+    },
+    "Hyundai|Kona": {
+     "decoded": 18
+    },
+    "Hyundai|Palisade": {
+     "decoded": 2
+    },
+    "Hyundai|Santa Fe": {
+     "decoded": 1017
+    },
+    "Hyundai|Santa Fe Sport": {
+     "decoded": 103
+    },
+    "Hyundai|Santa Fe XL": {
+     "decoded": 15
+    },
+    "Hyundai|Scoupe": {
+     "decoded": 1
+    },
+    "Hyundai|Sonata": {
+     "decoded": 3345,
+     "hybrid": 35
+    },
+    "Hyundai|Sonata Hybrid": {
+     "decoded": 81,
+     "hybrid": 31
+    },
+    "Hyundai|Tiburon": {
+     "decoded": 86
+    },
+    "Hyundai|Tucson": {
+     "decoded": 462
+    },
+    "Hyundai|Veloster": {
+     "decoded": 256
+    },
+    "Hyundai|Veloster N": {
+     "decoded": 1
+    },
+    "Hyundai|Veracruz": {
+     "decoded": 74
+    },
+    "Hyundai|XG300": {},
+    "Hyundai|XG350": {},
+    "Infiniti|EX35": {
+     "decoded": 70
+    },
+    "Infiniti|EX37": {
+     "decoded": 1
+    },
+    "Infiniti|FX35": {
+     "decoded": 239
+    },
+    "Infiniti|FX37": {
+     "decoded": 7
+    },
+    "Infiniti|FX45": {
+     "decoded": 16
+    },
+    "Infiniti|FX50": {
+     "decoded": 7
+    },
+    "Infiniti|G20": {
+     "decoded": 14
+    },
+    "Infiniti|G25": {
+     "decoded": 24
+    },
+    "Infiniti|G35": {
+     "decoded": 806
+    },
+    "Infiniti|G37": {
+     "decoded": 289
+    },
+    "Infiniti|I30": {
+     "decoded": 14
+    },
+    "Infiniti|I35": {
+     "decoded": 32
+    },
+    "Infiniti|J30": {
+     "decoded": 12
+    },
+    "Infiniti|JX35": {
+     "decoded": 33
+    },
+    "Infiniti|M35": {
+     "decoded": 190
+    },
+    "Infiniti|M35h": {
+     "decoded": 2
+    },
+    "Infiniti|M37": {
+     "decoded": 37
+    },
+    "Infiniti|M45": {
+     "decoded": 39
+    },
+    "Infiniti|M56": {
+     "decoded": 2
+    },
+    "Infiniti|Q40": {
+     "decoded": 7
+    },
+    "Infiniti|Q45": {
+     "decoded": 14
+    },
+    "Infiniti|Q50": {
+     "decoded": 119
+    },
+    "Infiniti|Q60": {
+     "decoded": 8
+    },
+    "Infiniti|Q70": {
+     "decoded": 7
+    },
+    "Infiniti|Q70L": {
+     "decoded": 3
+    },
+    "Infiniti|QX4": {
+     "decoded": 96
+    },
+    "Infiniti|QX50": {
+     "decoded": 24
+    },
+    "Infiniti|QX56": {
+     "decoded": 238
+    },
+    "Infiniti|QX60": {
+     "decoded": 163
+    },
+    "Infiniti|QX70": {
+     "decoded": 12
+    },
+    "Infiniti|QX80": {
+     "decoded": 22
+    },
+    "Jeep|Cherokee": {
+     "decoded": 768
+    },
+    "Jeep|Comanche": {
+     "decoded": 5
+    },
+    "Jeep|Commander": {
+     "decoded": 405
+    },
+    "Jeep|Compass": {
+     "decoded": 852
+    },
+    "Jeep|Grand Cherokee": {
+     "decoded": 2930
+    },
+    "Jeep|Grand Cherokee L": {},
+    "Jeep|Grand Wagoneer": {
+     "decoded": 4
+    },
+    "Jeep|J10": {
+     "decoded": 1
+    },
+    "Jeep|Liberty": {
+     "decoded": 1624
+    },
+    "Jeep|Patriot": {
+     "decoded": 1199,
+     "make_mismatch": 2
+    },
+    "Jeep|Renegade": {
+     "decoded": 153
+    },
+    "Jeep|Wagoneer": {
+     "decoded": 6
+    },
+    "Jeep|Wrangler": {
+     "decoded": 203
+    },
+    "Kia|Amanti": {
+     "decoded": 11
+    },
+    "Kia|Borrego": {
+     "decoded": 52
+    },
+    "Kia|Cadenza": {
+     "decoded": 69
+    },
+    "Kia|Forte": {
+     "decoded": 977
+    },
+    "Kia|Forte Koup": {
+     "decoded": 70
+    },
+    "Kia|K4": {
+     "decoded": 4
+    },
+    "Kia|K5": {
+     "decoded": 8
+    },
+    "Kia|K900": {
+     "decoded": 6
+    },
+    "Kia|Niro": {
+     "decoded": 18
+    },
+    "Kia|Optima": {
+     "decoded": 1853,
+     "hybrid": 8
+    },
+    "Kia|Optima Hybrid": {
+     "decoded": 30,
+     "hybrid": 1
+    },
+    "Kia|Rio": {
+     "decoded": 562
+    },
+    "Kia|Rondo": {
+     "decoded": 139
+    },
+    "Kia|Sedona": {
+     "decoded": 464
+    },
+    "Kia|Seltos": {
+     "decoded": 4
+    },
+    "Kia|Sephia": {
+     "decoded": 16
+    },
+    "Kia|Sorento": {
+     "decoded": 1135
+    },
+    "Kia|Soul": {
+     "decoded": 1419
+    },
+    "Kia|Soul EV": {
+     "decoded": 1
+    },
+    "Kia|Spectra": {
+     "decoded": 363
+    },
+    "Kia|Sportage": {
+     "decoded": 525
+    },
+    "Kia|Stinger": {
+     "decoded": 4
+    },
+    "Kia|Telluride": {
+     "decoded": 5
+    },
+    "Lexus|CT 200h": {
+     "decoded": 8
+    },
+    "Lexus|ES 300": {
+     "decoded": 438
+    },
+    "Lexus|ES 300h": {
+     "decoded": 1
+    },
+    "Lexus|ES 330": {
+     "decoded": 207
+    },
+    "Lexus|ES 350": {
+     "decoded": 228
+    },
+    "Lexus|GS 300": {
+     "decoded": 179
+    },
+    "Lexus|GS 350": {
+     "decoded": 62
+    },
+    "Lexus|GS 400": {
+     "decoded": 23
+    },
+    "Lexus|GS 430": {
+     "decoded": 17
+    },
+    "Lexus|GS 450h": {
+     "decoded": 14
+    },
+    "Lexus|GS 460": {
+     "decoded": 1
+    },
+    "Lexus|GX 470": {
+     "decoded": 11
+    },
+    "Lexus|HS 250h": {
+     "decoded": 9
+    },
+    "Lexus|IS 200t": {
+     "decoded": 1
+    },
+    "Lexus|IS 250": {
+     "decoded": 237
+    },
+    "Lexus|IS 300": {
+     "decoded": 54
+    },
+    "Lexus|IS 350": {
+     "decoded": 36
+    },
+    "Lexus|LS 430": {
+     "decoded": 97
+    },
+    "Lexus|LS 460": {
+     "decoded": 81
+    },
+    "Lexus|RC 350": {},
+    "Lexus|RX 300": {
+     "decoded": 307
+    },
+    "Lexus|RX 330": {
+     "decoded": 118
+    },
+    "Lexus|RX 350": {
+     "decoded": 122
+    },
+    "Lexus|RX 400h": {
+     "decoded": 54
+    },
+    "Lexus|RX 450h": {
+     "decoded": 9
+    },
+    "Lexus|SC 430": {
+     "decoded": 14
+    },
+    "Lincoln|Aviator": {
+     "decoded": 95
+    },
+    "Lincoln|Blackwood": {
+     "decoded": 2
+    },
+    "Lincoln|Continental": {
+     "decoded": 14
+    },
+    "Lincoln|LS": {
+     "decoded": 81
+    },
+    "Lincoln|MKC": {
+     "decoded": 23
+    },
+    "Lincoln|MKS": {
+     "decoded": 161
+    },
+    "Lincoln|MKT": {
+     "decoded": 68
+    },
+    "Lincoln|MKX": {
+     "decoded": 318
+    },
+    "Lincoln|MKZ": {
+     "decoded": 386,
+     "hybrid": 29
+    },
+    "Lincoln|Mark LT": {
+     "decoded": 32
+    },
+    "Lincoln|Mark VII": {
+     "decoded": 12
+    },
+    "Lincoln|Mark VIII": {
+     "decoded": 28
+    },
+    "Lincoln|Nautilus": {
+     "decoded": 2
+    },
+    "Lincoln|Navigator": {
+     "decoded": 549
+    },
+    "Lincoln|Town Car": {
+     "decoded": 685
+    },
+    "Lincoln|Zephyr": {
+     "decoded": 59
+    },
+    "Mazda|323": {},
+    "Mazda|626": {
+     "decoded": 85
+    },
+    "Mazda|929": {},
+    "Mazda|B2000": {
+     "decoded": 14
+    },
+    "Mazda|B2500": {
+     "decoded": 4
+    },
+    "Mazda|CX-3": {
+     "decoded": 2
+    },
+    "Mazda|CX-30": {
+     "decoded": 10
+    },
+    "Mazda|CX-5": {
+     "decoded": 75
+    },
+    "Mazda|CX-50": {
+     "decoded": 2
+    },
+    "Mazda|CX-7": {
+     "decoded": 337
+    },
+    "Mazda|CX-9": {
+     "decoded": 393
+    },
+    "Mazda|MPV": {
+     "decoded": 88
+    },
+    "Mazda|MX-3": {
+     "decoded": 2
+    },
+    "Mazda|MX-6": {},
+    "Mazda|Mazda2": {
+     "decoded": 39
+    },
+    "Mazda|Mazda3": {
+     "decoded": 1085
+    },
+    "Mazda|Mazda5": {
+     "decoded": 174
+    },
+    "Mazda|Mazda6": {
+     "decoded": 889
+    },
+    "Mazda|Millenia": {
+     "decoded": 27
+    },
+    "Mazda|Navajo": {
+     "decoded": 5
+    },
+    "Mazda|Protege": {
+     "decoded": 189
+    },
+    "Mazda|Protege5": {
+     "decoded": 50
+    },
+    "Mazda|RX-8": {
+     "decoded": 27
+    },
+    "Mazda|Tribute": {
+     "decoded": 314
+    },
+    "Mercedes-Benz|190D": {},
+    "Mercedes-Benz|190E": {
+     "decoded": 3
+    },
+    "Mercedes-Benz|260E": {
+     "decoded": 2
+    },
+    "Mercedes-Benz|300CE": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|300D": {
+     "decoded": 4
+    },
+    "Mercedes-Benz|300E": {
+     "decoded": 14
+    },
+    "Mercedes-Benz|300SD": {
+     "decoded": 3
+    },
+    "Mercedes-Benz|300SE": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|300SEL": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|300SL": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|300TD": {
+     "decoded": 2
+    },
+    "Mercedes-Benz|400SE": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|420SEL": {
+     "decoded": 4
+    },
+    "Mercedes-Benz|500SL": {
+     "decoded": 3
+    },
+    "Mercedes-Benz|560SEC": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|560SEL": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|C220": {
+     "decoded": 3
+    },
+    "Mercedes-Benz|C230": {
+     "decoded": 114
+    },
+    "Mercedes-Benz|C240": {
+     "decoded": 60
+    },
+    "Mercedes-Benz|C250": {
+     "decoded": 92
+    },
+    "Mercedes-Benz|C280": {
+     "decoded": 15
+    },
+    "Mercedes-Benz|C300": {
+     "decoded": 194
+    },
+    "Mercedes-Benz|C320": {
+     "decoded": 22
+    },
+    "Mercedes-Benz|C350": {
+     "decoded": 33
+    },
+    "Mercedes-Benz|C43 AMG": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|CL500": {
+     "decoded": 12
+    },
+    "Mercedes-Benz|CL55 AMG": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|CL550": {
+     "decoded": 3
+    },
+    "Mercedes-Benz|CL600": {
+     "decoded": 4
+    },
+    "Mercedes-Benz|CLA250": {
+     "decoded": 23
+    },
+    "Mercedes-Benz|CLK320": {
+     "decoded": 43
+    },
+    "Mercedes-Benz|CLK350": {
+     "decoded": 18
+    },
+    "Mercedes-Benz|CLK430": {
+     "decoded": 23
+    },
+    "Mercedes-Benz|CLK500": {
+     "decoded": 8
+    },
+    "Mercedes-Benz|CLK55 AMG": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|CLK550": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|CLS500": {
+     "decoded": 13
+    },
+    "Mercedes-Benz|CLS550": {
+     "decoded": 17
+    },
+    "Mercedes-Benz|E300": {
+     "decoded": 2
+    },
+    "Mercedes-Benz|E320": {
+     "decoded": 129
+    },
+    "Mercedes-Benz|E350": {
+     "decoded": 130
+    },
+    "Mercedes-Benz|E420": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|E430": {
+     "decoded": 6
+    },
+    "Mercedes-Benz|E500": {
+     "decoded": 18
+    },
+    "Mercedes-Benz|E55 AMG": {
+     "decoded": 3
+    },
+    "Mercedes-Benz|E550": {
+     "decoded": 10
+    },
+    "Mercedes-Benz|GL320": {
+     "decoded": 7
+    },
+    "Mercedes-Benz|GL350": {
+     "decoded": 5
+    },
+    "Mercedes-Benz|GL450": {
+     "decoded": 68
+    },
+    "Mercedes-Benz|GL550": {
+     "decoded": 10
+    },
+    "Mercedes-Benz|GLA250": {
+     "decoded": 2
+    },
+    "Mercedes-Benz|GLE350": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|GLK350": {
+     "decoded": 30
+    },
+    "Mercedes-Benz|ML320": {
+     "decoded": 55
+    },
+    "Mercedes-Benz|ML350": {
+     "decoded": 91
+    },
+    "Mercedes-Benz|ML430": {
+     "decoded": 10
+    },
+    "Mercedes-Benz|ML500": {
+     "decoded": 23
+    },
+    "Mercedes-Benz|ML55 AMG": {
+     "decoded": 6
+    },
+    "Mercedes-Benz|ML550": {
+     "decoded": 3
+    },
+    "Mercedes-Benz|Metris": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|R320": {
+     "decoded": 3
+    },
+    "Mercedes-Benz|R350": {
+     "decoded": 22
+    },
+    "Mercedes-Benz|R500": {
+     "decoded": 5
+    },
+    "Mercedes-Benz|S320": {
+     "decoded": 7
+    },
+    "Mercedes-Benz|S350": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|S400": {
+     "decoded": 1,
+     "hybrid": 1
+    },
+    "Mercedes-Benz|S420": {
+     "decoded": 3
+    },
+    "Mercedes-Benz|S430": {
+     "decoded": 29
+    },
+    "Mercedes-Benz|S500": {
+     "decoded": 37
+    },
+    "Mercedes-Benz|S550": {
+     "decoded": 44
+    },
+    "Mercedes-Benz|S600": {
+     "decoded": 5
+    },
+    "Mercedes-Benz|S63 AMG": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|SL320": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|SL500": {
+     "decoded": 11
+    },
+    "Mercedes-Benz|SL550": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|SLK230": {
+     "decoded": 18
+    },
+    "Mercedes-Benz|SLK280": {
+     "decoded": 4
+    },
+    "Mercedes-Benz|SLK300": {
+     "decoded": 1
+    },
+    "Mercedes-Benz|SLK320": {
+     "decoded": 9
+    },
+    "Mercedes-Benz|SLK350": {
+     "decoded": 5
+    },
+    "Mercedes-Benz|Sprinter 3500": {
+     "decoded": 1
+    },
+    "Mercury|Capri": {
+     "decoded": 8
+    },
+    "Mercury|Cougar": {
+     "decoded": 74,
+     "make_mismatch": 1
+    },
+    "Mercury|Grand Marquis": {
+     "decoded": 782
+    },
+    "Mercury|Mariner": {
+     "decoded": 254
+    },
+    "Mercury|Milan": {
+     "decoded": 252,
+     "hybrid": 7
+    },
+    "Mercury|Montego": {
+     "decoded": 81
+    },
+    "Mercury|Monterey": {
+     "decoded": 31
+    },
+    "Mercury|Mountaineer": {
+     "decoded": 332
+    },
+    "Mercury|Mystique": {
+     "decoded": 13
+    },
+    "Mercury|Sable": {
+     "decoded": 237
+    },
+    "Mercury|Topaz": {
+     "decoded": 6
+    },
+    "Mercury|Tracer": {
+     "decoded": 18
+    },
+    "Mitsubishi|3000GT": {
+     "decoded": 14
+    },
+    "Mitsubishi|Diamante": {
+     "decoded": 30
+    },
+    "Mitsubishi|Eclipse": {
+     "decoded": 113
+    },
+    "Mitsubishi|Eclipse Cross": {
+     "decoded": 3
+    },
+    "Mitsubishi|Endeavor": {
+     "decoded": 166
+    },
+    "Mitsubishi|Expo": {
+     "decoded": 2
+    },
+    "Mitsubishi|Galant": {
+     "decoded": 22
+    },
+    "Mitsubishi|Lancer": {
+     "decoded": 272,
+     "make_mismatch": 1
+    },
+    "Mitsubishi|Mighty Max": {
+     "decoded": 19
+    },
+    "Mitsubishi|Mirage": {
+     "decoded": 26
+    },
+    "Mitsubishi|Mirage G4": {
+     "decoded": 18
+    },
+    "Mitsubishi|Montero": {
+     "decoded": 52
+    },
+    "Mitsubishi|Montero Sport": {
+     "decoded": 146
+    },
+    "Mitsubishi|Outlander": {
+     "decoded": 289
+    },
+    "Mitsubishi|Outlander Sport": {
+     "decoded": 154
+    },
+    "Nissan|200SX": {
+     "decoded": 10
+    },
+    "Nissan|350Z": {
+     "decoded": 91
+    },
+    "Nissan|Altima": {
+     "decoded": 7431,
+     "make_mismatch": 1
+    },
+    "Nissan|Armada": {
+     "decoded": 582
+    },
+    "Nissan|Cube": {
+     "decoded": 108
+    },
+    "Nissan|Frontier": {
+     "decoded": 527
+    },
+    "Nissan|Juke": {
+     "decoded": 278
+    },
+    "Nissan|Kicks": {
+     "decoded": 29
+    },
+    "Nissan|Leaf": {
+     "decoded": 65
+    },
+    "Nissan|Maxima": {
+     "decoded": 1597
+    },
+    "Nissan|Murano": {
+     "decoded": 1543
+    },
+    "Nissan|NV": {
+     "decoded": 4
+    },
+    "Nissan|Pathfinder": {
+     "decoded": 1840
+    },
+    "Nissan|Quest": {
+     "decoded": 502
+    },
+    "Nissan|Rogue": {
+     "decoded": 2087
+    },
+    "Nissan|Sentra": {
+     "decoded": 3539
+    },
+    "Nissan|Stanza": {
+     "decoded": 4
+    },
+    "Nissan|Titan": {
+     "decoded": 652,
+     "make_mismatch": 1
+    },
+    "Nissan|Versa": {
+     "decoded": 1953
+    },
+    "Nissan|Xterra": {
+     "decoded": 935
+    },
+    "Oldsmobile|88": {
+     "decoded": 13
+    },
+    "Oldsmobile|98": {
+     "decoded": 1
+    },
+    "Oldsmobile|Achieva": {
+     "decoded": 6
+    },
+    "Oldsmobile|Alero": {
+     "decoded": 155
+    },
+    "Oldsmobile|Aurora": {},
+    "Oldsmobile|Bravada": {
+     "decoded": 60
+    },
+    "Oldsmobile|Calais": {
+     "decoded": 1
+    },
+    "Oldsmobile|Custom Cruiser": {},
+    "Oldsmobile|Cutlass": {
+     "decoded": 1
+    },
+    "Oldsmobile|Delta 88": {
+     "decoded": 13
+    },
+    "Oldsmobile|Firenza": {},
+    "Oldsmobile|Intrigue": {
+     "decoded": 55
+    },
+    "Oldsmobile|Silhouette": {
+     "decoded": 39
+    },
+    "Oldsmobile|Toronado": {
+     "decoded": 5
+    },
+    "Pontiac|6000": {
+     "decoded": 1
+    },
+    "Pontiac|Aztek": {
+     "decoded": 57
+    },
+    "Pontiac|Bonneville": {
+     "decoded": 138
+    },
+    "Pontiac|Fiero": {
+     "decoded": 15
+    },
+    "Pontiac|Firebird": {
+     "decoded": 101
+    },
+    "Pontiac|G5": {
+     "decoded": 125
+    },
+    "Pontiac|G6": {
+     "decoded": 941
+    },
+    "Pontiac|Grand Am": {
+     "decoded": 385
+    },
+    "Pontiac|Grand Prix": {
+     "decoded": 671
+    },
+    "Pontiac|Montana": {
+     "decoded": 99
+    },
+    "Pontiac|Pursuit": {
+     "decoded": 12
+    },
+    "Pontiac|Solstice": {
+     "decoded": 12
+    },
+    "Pontiac|Sunbird": {
+     "decoded": 14
+    },
+    "Pontiac|Sunfire": {
+     "decoded": 4
+    },
+    "Pontiac|Torrent": {
+     "decoded": 167
+    },
+    "Pontiac|Trans Sport": {
+     "decoded": 15
+    },
+    "Pontiac|Vibe": {
+     "decoded": 342
+    },
+    "Ram|1500": {
+     "decoded": 372
+    },
+    "Ram|1500 Classic": {
+     "decoded": 12
+    },
+    "Ram|2500": {
+     "decoded": 24
+    },
+    "Ram|3500": {
+     "decoded": 1
+    },
+    "Ram|C/V": {
+     "decoded": 22
+    },
+    "Ram|Dakota": {
+     "decoded": 7
+    },
+    "Ram|ProMaster 1500": {
+     "decoded": 22
+    },
+    "Ram|ProMaster 2500": {
+     "decoded": 10
+    },
+    "Ram|ProMaster 3500": {
+     "decoded": 4
+    },
+    "Ram|ProMaster City": {
+     "decoded": 31
+    },
+    "Saturn|Astra": {
+     "decoded": 44
+    },
+    "Saturn|Aura": {
+     "decoded": 311,
+     "hybrid": 3
+    },
+    "Saturn|ION": {
+     "decoded": 410
+    },
+    "Saturn|L100": {},
+    "Saturn|L200": {},
+    "Saturn|L300": {
+     "decoded": 19
+    },
+    "Saturn|LS": {},
+    "Saturn|LS1": {},
+    "Saturn|LW1": {},
+    "Saturn|LW200": {},
+    "Saturn|Outlook": {
+     "decoded": 140
+    },
+    "Saturn|Relay": {
+     "decoded": 19
+    },
+    "Saturn|Sky": {
+     "decoded": 4
+    },
+    "Saturn|VUE": {
+     "decoded": 746,
+     "hybrid": 12
+    },
+    "Scion|iM": {
+     "decoded": 1
+    },
+    "Scion|tC": {
+     "decoded": 607
+    },
+    "Scion|xA": {
+     "decoded": 101
+    },
+    "Scion|xB": {
+     "decoded": 469
+    },
+    "Scion|xD": {
+     "decoded": 103
+    },
+    "Subaru|Baja": {
+     "decoded": 13
+    },
+    "Subaru|Crosstrek": {
+     "decoded": 23
+    },
+    "Subaru|Forester": {
+     "decoded": 1154
+    },
+    "Subaru|Impreza": {
+     "decoded": 814,
+     "make_mismatch": 1
+    },
+    "Subaru|Impreza WRX": {
+     "decoded": 4
+    },
+    "Subaru|Legacy": {
+     "decoded": 861
+    },
+    "Subaru|Outback": {
+     "decoded": 1268
+    },
+    "Subaru|SVX": {
+     "decoded": 2
+    },
+    "Subaru|Tribeca": {
+     "decoded": 56,
+     "make_mismatch": 1
+    },
+    "Subaru|WRX": {
+     "decoded": 8
+    },
+    "Subaru|XV Crosstrek": {
+     "decoded": 89
+    },
+    "Toyota|4Runner": {
+     "decoded": 462
+    },
+    "Toyota|Avalon": {
+     "decoded": 1042,
+     "hybrid": 6
+    },
+    "Toyota|Camry": {
+     "decoded": 6885,
+     "gas": 2225,
+     "hybrid": 241
+    },
+    "Toyota|Camry Hybrid": {
+     "decoded": 96,
+     "hybrid": 96
+    },
+    "Toyota|Camry Solara": {
+     "decoded": 460
+    },
+    "Toyota|Celica": {
+     "decoded": 183
+    },
+    "Toyota|Corolla": {
+     "decoded": 3123
+    },
+    "Toyota|Corolla iM": {
+     "decoded": 2
+    },
+    "Toyota|Cressida": {
+     "decoded": 5
+    },
+    "Toyota|Echo": {
+     "decoded": 122
+    },
+    "Toyota|FJ Cruiser": {
+     "decoded": 4
+    },
+    "Toyota|Highlander": {
+     "decoded": 697,
+     "hybrid": 39
+    },
+    "Toyota|Land Cruiser": {
+     "decoded": 4
+    },
+    "Toyota|MR2": {
+     "decoded": 6
+    },
+    "Toyota|MR2 Spyder": {
+     "decoded": 2
+    },
+    "Toyota|Matrix": {
+     "decoded": 379
+    },
+    "Toyota|Mirai": {
+     "decoded": 5
+    },
+    "Toyota|Paseo": {
+     "decoded": 7
+    },
+    "Toyota|Pickup": {
+     "decoded": 63
+    },
+    "Toyota|Previa": {
+     "decoded": 36
+    },
+    "Toyota|Prius": {
+     "decoded": 1329
+    },
+    "Toyota|Prius C": {
+     "decoded": 57
+    },
+    "Toyota|Prius Plug-In": {
+     "decoded": 6
+    },
+    "Toyota|Prius Prime": {
+     "decoded": 2
+    },
+    "Toyota|Prius V": {
+     "decoded": 45
+    },
+    "Toyota|RAV4": {
+     "decoded": 749,
+     "make_mismatch": 1
+    },
+    "Toyota|Sequoia": {
+     "decoded": 369
+    },
+    "Toyota|Sienna": {
+     "decoded": 1476
+    },
+    "Toyota|Supra": {
+     "decoded": 11
+    },
+    "Toyota|Tacoma": {
+     "decoded": 209
+    },
+    "Toyota|Tercel": {
+     "decoded": 76
+    },
+    "Toyota|Tundra": {
+     "decoded": 411
+    },
+    "Toyota|Van": {
+     "decoded": 8
+    },
+    "Toyota|Venza": {
+     "decoded": 35
+    },
+    "Toyota|Yaris": {
+     "decoded": 347,
+     "make_mismatch": 1
+    },
+    "Volkswagen|Arteon": {
+     "decoded": 1
+    },
+    "Volkswagen|Atlas": {
+     "decoded": 13
+    },
+    "Volkswagen|Beetle": {
+     "decoded": 230
+    },
+    "Volkswagen|CC": {
+     "decoded": 335
+    },
+    "Volkswagen|Cabrio": {
+     "decoded": 30
+    },
+    "Volkswagen|Cabriolet": {},
+    "Volkswagen|Eos": {
+     "decoded": 99
+    },
+    "Volkswagen|Fox": {},
+    "Volkswagen|GTI": {
+     "decoded": 31
+    },
+    "Volkswagen|Golf": {
+     "decoded": 121
+    },
+    "Volkswagen|Golf Alltrack": {
+     "decoded": 3
+    },
+    "Volkswagen|Jetta": {
+     "decoded": 2246,
+     "hybrid": 10
+    },
+    "Volkswagen|Passat": {
+     "decoded": 1117
+    },
+    "Volkswagen|Phaeton": {},
+    "Volkswagen|Routan": {
+     "decoded": 144
+    },
+    "Volkswagen|Scirocco": {},
+    "Volkswagen|Tiguan": {
+     "decoded": 179
+    },
+    "Volkswagen|Touareg": {
+     "decoded": 132,
+     "hybrid": 19
+    },
+    "Volkswagen|Transporter": {},
+    "Volkswagen|Vanagon": {
+     "decoded": 8
+    },
+    "Volvo|244": {},
+    "Volvo|245": {},
+    "Volvo|740": {
+     "decoded": 1
+    },
+    "Volvo|760": {},
+    "Volvo|780": {
+     "decoded": 1
+    },
+    "Volvo|850": {
+     "decoded": 20
+    },
+    "Volvo|940": {
+     "decoded": 14
+    },
+    "Volvo|960": {
+     "decoded": 6
+    },
+    "Volvo|C30": {
+     "decoded": 18
+    },
+    "Volvo|C70": {
+     "decoded": 49
+    },
+    "Volvo|S40": {
+     "decoded": 198
+    },
+    "Volvo|S60": {
+     "decoded": 331
+    },
+    "Volvo|S60 Cross Country": {},
+    "Volvo|S70": {
+     "decoded": 2
+    },
+    "Volvo|S80": {
+     "decoded": 119
+    },
+    "Volvo|S90": {
+     "decoded": 1
+    },
+    "Volvo|V40": {},
+    "Volvo|V50": {
+     "decoded": 44
+    },
+    "Volvo|V60": {
+     "decoded": 8
+    },
+    "Volvo|V60 Cross Country": {
+     "decoded": 1
+    },
+    "Volvo|V70": {
+     "decoded": 73
+    },
+    "Volvo|V90": {},
+    "Volvo|XC60": {
+     "decoded": 119
+    },
+    "Volvo|XC70": {
+     "decoded": 143
+    },
+    "Volvo|XC90": {
+     "decoded": 435
+    }
+   },
+   "note": "vPIC model is not in the published inventory; checked make mismatches and, for hybrid trim subsets, vPIC trim 'Gas'"
+  },
+  "M9_cars_outside_catalog_years": {},
+  "skipped": []
+ },
+ "near_miss_rows": [],
+ "ns": "volvo",
+ "open_reasons_cells": {
+  "no_year_manifest": 2606
+ },
+ "raw": {
+  "commit": "ceccc800d7ba22c0291121baabb0a9292eb8f271",
+  "ref": "ceccc800d7ba22c0291121baabb0a9292eb8f271",
+  "sites": {
+   "www.volvopartsgiant.com": {
+    "blocked": false,
+    "done": true,
+    "lists": 0,
+    "lists_sha256": null,
+    "records": 964,
+    "records_sha256": "28b81ba0adf8b794afe226827ba585a7c90ebb8f408f190ca5ea1d4c44720380",
+    "years": 0,
+    "years_sha256": null
+   }
+  }
+ },
+ "refusals": [
+  {
+   "cat": null,
+   "detail": "bumper-front,bumper-rear",
+   "evidence": [],
+   "pn": "volvo:39884062",
+   "reason": "cross_category_pn",
+   "t": null
+  },
+  {
+   "cat": null,
+   "detail": "bumper-front,bumper-rear",
+   "evidence": [],
+   "pn": "volvo:9421811",
+   "reason": "cross_category_pn",
+   "t": null
+  }
+ ],
+ "sites_without_namespace": [
+  "www.fordpartsgiant.com.lists",
+  "www.fordpartsgiant.com.years",
+  "www.gmpartsgiant.com.lists",
+  "www.gmpartsgiant.com.years",
+  "www.hondapartsnow.com.lists",
+  "www.hondapartsnow.com.years",
+  "www.hyundaipartsdeal.com.lists",
+  "www.hyundaipartsdeal.com.years",
+  "www.lexuspartsnow.com.lists",
+  "www.lexuspartsnow.com.years",
+  "www.mbpartsgiant.com.lists",
+  "www.mbpartsgiant.com.years",
+  "www.vwpartsgiant.com.lists",
+  "www.vwpartsgiant.com.years"
+ ],
+ "summary": {
+  "blocked_sites": [],
+  "cells": 2606,
+  "classes": 964,
+  "gates": [
+   "no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close (C1/C2); Verified is impossible by design until the crawler writes them",
+   "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7)",
+   "engine cells not audited as reliable on www.volvopartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE"
+  ],
+  "likely_groups": 271,
+  "list_rows": 0,
+  "records": 964,
+  "verified_groups": 0,
+  "vg_groups": 0,
+  "why_no_verified": "no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close (C1/C2); Verified is impossible by design until the crawler writes them; no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.volvopartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
+  "year_manifests": 0
+ },
+ "unknown_note_clauses": {
+  "140A": 1,
+  "160A": 1,
+  "2.5 & 2.9L": 4,
+  "2001-04 Without S60R": 31,
+  "AWD": 2,
+  "Active Xenon Lamps": 6,
+  "All": 5,
+  "All Models": 1,
+  "Artic Dawn": 5,
+  "Artic Dawn Me": 1,
+  "Ash Gold": 11,
+  "Auto": 1,
+  "B5254s": 1,
+  "Barents Blue": 6,
+  "Bi-Xenon": 2,
+  "Black Saphire": 6,
+  "Black Sapphir": 5,
+  "Black Sapphire": 12,
+  "Black Stone": 13,
+  "Body Color With Headlamp Washer": 10,
+  "Body Color Without Headlamp Washer": 9,
+  "Caspian Blue": 14,
+  "Cassis Pearl": 1,
+  "Celest. Blue": 4,
+  "Cham. Blue": 2,
+  "Chameleon Blue": 2,
+  "Cherry Red": 1,
+  "Classic Red": 8,
+  "Code 241": 1,
+  "Code 250": 1,
+  "Composite With Fog Lamp": 2,
+  "Cosmic White": 7,
+  "Cosmos Blue": 8,
+  "Crystal Green": 2,
+  "Dark Olive": 4,
+  "Dual Bulb": 1,
+  "Electric": 3,
+  "Electric Silver": 21,
+  "Ember Black": 10,
+  "FM Ch# 123287": 2,
+  "FM Ch# 20113": 3,
+  "FM Ch# 22625": 1,
+  "FM Ch# 6455": 1,
+  "Flamenco Red": 8,
+  "From Ch# 102034": 1,
+  "From Ch# 108040": 2,
+  "From Ch# 118001": 2,
+  "From Ch# 184399": 23,
+  "From Ch# 187939": 2,
+  "From Ch# 190000": 22,
+  "From Ch# 256782": 1,
+  "From Ch# 27610": 1,
+  "From Ch# 320804": 2,
+  "From Ch# 44401": 1,
+  "From Ch# 490084": 2,
+  "From Ch# 85643": 1,
+  "From VIN #177773": 1,
+  "Garnet Red": 1,
+  "Halogen Lamps": 7,
+  "Hydraulic": 1,
+  "Ice White": 23,
+  "Icy White": 1,
+  "Java Pearl": 1,
+  "Knobs With Chrome Rings": 2,
+  "Lava Sand": 2,
+  "Lunar Gold": 3,
+  "Magic Blue": 6,
+  "Midnight Blue": 9,
+  "Mistral Green": 16,
+  "Moondust": 6,
+  "Moondust Pear": 1,
+  "Ocean Race": 2,
+  "Olive Pearl": 1,
+  "Orange Flame": 4,
+  "Oyster Grey": 6,
+  "Painted With Lamp Washer": 18,
+  "Painted Without Lamp Washer": 18,
+  "Passion Red": 11,
+  "Polar White": 8,
+  "Primed": 31,
+  "Primer": 3,
+  "Rebel Blue": 4,
+  "Ruby Red": 8,
+  "Safari Green": 6,
+  "Savile Gray": 8,
+  "Saville Gray": 2,
+  "Scarab Green": 8,
+  "Seashell": 10,
+  "Station Wagon": 8,
+  "Steel Fuel Tank": 1,
+  "Stone Black": 5,
+  "To Ch 327999": 1,
+  "To Ch# 102033": 1,
+  "To Ch# 106410": 1,
+  "To Ch# 106999": 2,
+  "To Ch# 108039": 2,
+  "To Ch# 118000": 4,
+  "To Ch# 142797": 2,
+  "To Ch# 170117": 1,
+  "To Ch# 21351": 1,
+  "To Ch# 258815": 1,
+  "To Ch# 403078": 1,
+  "To Ch# 549676": 2,
+  "To Ch# 85642": 1,
+  "Tropic Green": 1,
+  "Type 1": 4,
+  "Unpainted": 2,
+  "Venetian": 5,
+  "Venetian Red": 2,
+  "Virtual Blue": 3,
+  "Wide Angle Glass": 1,
+  "Willow Green": 2,
+  "With 4.4L": 1,
+  "With AC": 2,
+  "With AWD": 2,
+  "With Auto Brake": 2,
+  "With Bi-Xenon Headlamp": 4,
+  "With Collision Warn": 1,
+  "With Collision Warning": 3,
+  "With Electric Climate Control": 2,
+  "With Electronic AC": 2,
+  "With External Filter": 1,
+  "With Folding": 2,
+  "With Headlamp Washer": 32,
+  "With Headlamp Washers": 16,
+  "With Headlamp Wiper With Spoiler": 8,
+  "With Headlamp Wiper Without Spoiler": 8,
+  "With Heated Glass": 1,
+  "With Heated Seats": 3,
+  "With Illumination": 28,
+  "With Lamp Washer": 3,
+  "With Lamp Washer With Fog Lamps": 20,
+  "With Lamp Washer Without Fog Lamps": 20,
+  "With Lamp Washers": 8,
+  "With Metal Gauges": 3,
+  "With Park Assist": 59,
+  "With Park Assist Without Cross Country": 11,
+  "With Parking Assist": 11,
+  "With Phone": 2,
+  "With Power Child Locks": 3,
+  "With Power Fldg": 2,
+  "With Power Folding Mirror": 2,
+  "With Pre-Crash": 1,
+  "With R Design": 2,
+  "With R Design With Headlamp Washer": 8,
+  "With R Design Without Headlamp Washer": 1,
+  "With R Model": 3,
+  "With R-Design": 1,
+  "With Rear Fog Lamp": 2,
+  "With Rectangular Fog Lamps": 4,
+  "With Reverse Sensor": 14,
+  "With S60R": 2,
+  "With Telephone": 4,
+  "With Traction Control": 2,
+  "With Turbo": 12,
+  "With V70R": 1,
+  "With XC": 12,
+  "With Xenon Headlamps": 4,
+  "Without 2.0L": 1,
+  "Without 4.4L": 1,
+  "Without AC": 1,
+  "Without AWD": 2,
+  "Without Active Headlight": 2,
+  "Without Auto Brake": 2,
+  "Without BLIS": 4,
+  "Without BLIS With Folding": 2,
+  "Without BLIS Without Folding": 2,
+  "Without Bi-Xenon Headlamp": 4,
+  "Without Blind Spot Info System": 6,
+  "Without Collision Warn": 2,
+  "Without Collision Warning": 2,
+  "Without Crs Cntry": 1,
+  "Without Directional Beam": 2,
+  "Without Electronic AC": 3,
+  "Without Electronic Climate Control": 2,
+  "Without Exhaust Cut Outs": 2,
+  "Without External Filter": 1,
+  "Without Folding": 9,
+  "Without Folding Mirrors": 1,
+  "Without Headlamp Washer": 31,
+  "Without Headlamp Washers": 17,
+  "Without Headlamp Wiper With Spoiler": 5,
+  "Without Headlamp Wiper Without Spoiler": 6,
+  "Without Heated Seats": 3,
+  "Without Illumination": 10,
+  "Without Inscription": 6,
+  "Without Inscrption": 4,
+  "Without Lamp Washer": 4,
+  "Without Lamp Washer With Fog Lamps": 20,
+  "Without Lamp Washer Without Fog Lamps": 20,
+  "Without Lamp Washers": 9,
+  "Without Metal Gauges": 1,
+  "Without Metal Guages": 2,
+  "Without Park Assist": 61,
+  "Without Park Assist Without Cross Country": 11,
+  "Without Parking Assist": 11,
+  "Without Phone": 2,
+  "Without Power Child Locks": 4,
+  "Without Power Fldg": 2,
+  "Without Power Folding Mirror": 2,
+  "Without Pre-Crash": 1,
+  "Without Premair": 2,
+  "Without R Design": 4,
+  "Without R Design With Headlamp Washer": 10,
+  "Without R Design Without Headlamp Washer": 10,
+  "Without R Model": 2,
+  "Without R-Design": 2,
+  "Without Rear Fog Lamp": 2,
+  "Without Reverse Sensor": 14,
+  "Without S60R": 2,
+  "Without Seat Ventilation": 1,
+  "Without Telephone": 2,
+  "Without Traction Control": 2,
+  "Without Turbo": 14,
+  "Without Upper Molding": 17,
+  "Without V70 R Or XC": 7,
+  "Without V70R": 21,
+  "Without XC": 7,
+  "Without Xenon Headlamps": 1,
+  "Xenon Lamps": 3
+ },
+ "unmapped_catalog_models": [
+  {
+   "cat_make": "Volvo",
+   "cat_model": "240",
+   "excluded": null,
+   "feed": [
+    "Volvo",
+    "240"
+   ],
+   "feed_cars": 53,
+   "row_years": 43
+  },
+  {
+   "cat_make": "Volvo",
+   "cat_model": "242",
+   "excluded": null,
+   "feed": [
+    "Volvo",
+    "242"
+   ],
+   "feed_cars": 0,
+   "row_years": 1
+  }
+ ],
+ "validator": []
+}

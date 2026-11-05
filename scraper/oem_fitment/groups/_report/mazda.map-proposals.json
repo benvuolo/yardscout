@@ -1,0 +1,257 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Mazda",
+    "cat_model": "B2200",
+    "feed": [
+     "Mazda",
+     "B2200"
+    ],
+    "why": "feed models ['B2200 Pickup'] share the squash key 'b2200' (M3)"
+   },
+   {
+    "cat_make": "Mazda",
+    "cat_model": "B2300",
+    "feed": [
+     "Mazda",
+     "B2300"
+    ],
+    "why": "feed models ['B2300 Pickup'] share the squash key 'b2300' (M3)"
+   },
+   {
+    "cat_make": "Mazda",
+    "cat_model": "B2600",
+    "feed": [
+     "Mazda",
+     "B2600"
+    ],
+    "why": "feed models ['B2600 Pickup'] share the squash key 'b2600' (M3)"
+   },
+   {
+    "cat_make": "Mazda",
+    "cat_model": "B3000",
+    "feed": [
+     "Mazda",
+     "B3000"
+    ],
+    "why": "feed models ['B3000 Pickup'] share the squash key 'b3000' (M3)"
+   },
+   {
+    "cat_make": "Mazda",
+    "cat_model": "B4000",
+    "feed": [
+     "Mazda",
+     "B4000"
+    ],
+    "why": "feed models ['B4000 Pickup'] share the squash key 'b4000' (M3)"
+   },
+   {
+    "cat_make": "Mazda",
+    "cat_model": "CX-70",
+    "feed": [
+     "Mazda",
+     "CX-70"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mazda",
+    "cat_model": "CX-90",
+    "feed": [
+     "Mazda",
+     "CX-90"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mazda",
+    "cat_model": "MX-30 EV",
+    "feed": [
+     "Mazda",
+     "MX-30 EV"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mazda",
+    "cat_model": "MX-5 Miata",
+    "feed": [
+     "Mazda",
+     "MX-5 Miata"
+    ],
+    "why": "2 catalog models land on one feed model (M8 needs a reviewed merge)"
+   },
+   {
+    "cat_make": "Mazda",
+    "cat_model": "Miata",
+    "feed": [
+     "Mazda",
+     "MX-5 Miata"
+    ],
+    "why": "2 catalog models land on one feed model (M8 needs a reviewed merge)"
+   }
+  ]
+ },
+ "ns": "mazda",
+ "proposals": [
+  {
+   "cat_make": "Mazda",
+   "cat_model": "B2200",
+   "feed_cars": 30,
+   "fitment_rows": 20,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "B2200",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "B2200 Pickup",
+     1
+    ]
+   ]
+  },
+  {
+   "cat_make": "Mazda",
+   "cat_model": "B2300",
+   "feed_cars": 27,
+   "fitment_rows": 30,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "B2300",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "B2300 Pickup",
+     4
+    ]
+   ]
+  },
+  {
+   "cat_make": "Mazda",
+   "cat_model": "B2600",
+   "feed_cars": 4,
+   "fitment_rows": 16,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "B2600",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "B2600 Pickup",
+     2
+    ]
+   ]
+  },
+  {
+   "cat_make": "Mazda",
+   "cat_model": "B3000",
+   "feed_cars": 18,
+   "fitment_rows": 29,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "B3000",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "B3000 Pickup",
+     2
+    ]
+   ]
+  },
+  {
+   "cat_make": "Mazda",
+   "cat_model": "B4000",
+   "feed_cars": 10,
+   "fitment_rows": 16,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "B4000",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "B4000 Pickup",
+     1
+    ]
+   ]
+  },
+  {
+   "cat_make": "Mazda",
+   "cat_model": "CX-70",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "CX-70",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mazda",
+   "cat_model": "CX-90",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "CX-90",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mazda",
+   "cat_model": "MX-30 EV",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "MX-30 EV",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mazda",
+   "cat_model": "MX-5 Miata",
+   "feed_cars": 109,
+   "fitment_rows": 58,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "MX-5 Miata",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mazda",
+   "cat_model": "Miata",
+   "feed_cars": 109,
+   "fitment_rows": 51,
+   "ns": "mazda",
+   "proposed": {
+    "make": "Mazda",
+    "model": "MX-5 Miata",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+}

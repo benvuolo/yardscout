@@ -1,6 +1,1137 @@
 {
  "entries": [
   {
+   "basis": "catalog prints '128i' (93 fitment rows, oem-raw@ceccc80); normalize_model canon '128i', 29 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "128i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "128i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '135i' (88 fitment rows, oem-raw@ceccc80); normalize_model canon '135i', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "135i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "135i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '228i' (26 fitment rows, oem-raw@ceccc80); normalize_model canon '228i', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "228i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "228i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '230i' (10 fitment rows, oem-raw@ceccc80); normalize_model canon '230i', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "230i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "230i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '318i' (40 fitment rows, oem-raw@ceccc80); normalize_model canon '318i', 19 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "318i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "318i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '318is' (25 fitment rows, oem-raw@ceccc80); normalize_model canon '318is', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "318is",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "318is",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '318ti' (16 fitment rows, oem-raw@ceccc80); normalize_model canon '318ti', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "318ti",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "318ti",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '320i' (233 fitment rows, oem-raw@ceccc80); normalize_model canon '320i', 89 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "320i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "320i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '320i xDrive' (139 fitment rows, oem-raw@ceccc80); normalize_model canon '320i xDrive', 10 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "320i xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "320i xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '323Ci' (84 fitment rows, oem-raw@ceccc80); normalize_model canon '323ci', 10 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "323Ci",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "323ci",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '323i' (222 fitment rows, oem-raw@ceccc80); normalize_model canon '323i', 71 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "323i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "323i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '325Ci' (97 fitment rows, oem-raw@ceccc80); normalize_model canon '325ci', 105 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "325Ci",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "325ci",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '325i' (212 fitment rows, oem-raw@ceccc80); normalize_model canon '325i', 411 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "325i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "325i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '325is' (18 fitment rows, oem-raw@ceccc80); normalize_model canon '325is', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "325is",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "325is",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '325xi' (186 fitment rows, oem-raw@ceccc80); normalize_model canon '325xi', 79 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "325xi",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "325xi",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '328Ci' (67 fitment rows, oem-raw@ceccc80); normalize_model canon '328ci', 6 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "328Ci",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "328ci",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '328d' (59 fitment rows, oem-raw@ceccc80); normalize_model canon '328d', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "328d",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "328d",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '328d xDrive' (59 fitment rows, oem-raw@ceccc80); normalize_model canon '328d xDrive', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "328d xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "328d xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '328i' (432 fitment rows, oem-raw@ceccc80); normalize_model canon '328i', 907 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "328i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "328i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '328i GT xDrive' (91 fitment rows, oem-raw@ceccc80); normalize_model canon '328i GT xDrive', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "328i GT xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "328i GT xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '328i xDrive' (298 fitment rows, oem-raw@ceccc80); normalize_model canon '328i xDrive', 57 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "328i xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "328i xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '328is' (20 fitment rows, oem-raw@ceccc80); normalize_model canon '328is', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "328is",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "328is",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '328xi' (156 fitment rows, oem-raw@ceccc80); normalize_model canon '328xi', 84 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "328xi",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "328xi",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '330Ci' (108 fitment rows, oem-raw@ceccc80); normalize_model canon '330ci', 59 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "330Ci",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "330ci",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '330i' (237 fitment rows, oem-raw@ceccc80); normalize_model canon '330i', 143 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "330i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "330i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '330i GT xDrive' (47 fitment rows, oem-raw@ceccc80); normalize_model canon '330i GT xDrive', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "330i GT xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "330i GT xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '330xi' (165 fitment rows, oem-raw@ceccc80); normalize_model canon '330xi', 40 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "330xi",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "330xi",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '335d' (82 fitment rows, oem-raw@ceccc80); normalize_model canon '335d', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "335d",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "335d",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '335i' (344 fitment rows, oem-raw@ceccc80); normalize_model canon '335i', 138 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "335i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "335i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '335i xDrive' (299 fitment rows, oem-raw@ceccc80); normalize_model canon '335i xDrive', 8 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "335i xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "335i xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '335is' (79 fitment rows, oem-raw@ceccc80); normalize_model canon '335is', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "335is",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "335is",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '335xi' (140 fitment rows, oem-raw@ceccc80); normalize_model canon '335xi', 13 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "335xi",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "335xi",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '340i' (68 fitment rows, oem-raw@ceccc80); normalize_model canon '340i', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "340i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "340i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '428i' (95 fitment rows, oem-raw@ceccc80); normalize_model canon '428i', 13 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "428i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "428i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '428i Gran Coupe' (91 fitment rows, oem-raw@ceccc80); normalize_model canon '428i Gran Coupe', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "428i Gran Coupe",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "428i Gran Coupe",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '430i' (66 fitment rows, oem-raw@ceccc80); normalize_model canon '430i', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "430i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "430i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '430i xDrive' (66 fitment rows, oem-raw@ceccc80); normalize_model canon '430i xDrive', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "430i xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "430i xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '435i' (101 fitment rows, oem-raw@ceccc80); normalize_model canon '435i', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "435i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "435i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '525i' (159 fitment rows, oem-raw@ceccc80); normalize_model canon '525i', 184 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "525i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "525i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '525xi' (70 fitment rows, oem-raw@ceccc80); normalize_model canon '525xi', 15 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "525xi",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "525xi",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '528i' (253 fitment rows, oem-raw@ceccc80); normalize_model canon '528i', 303 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "528i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "528i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '528i xDrive' (174 fitment rows, oem-raw@ceccc80); normalize_model canon '528i xDrive', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "528i xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "528i xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '528xi' (70 fitment rows, oem-raw@ceccc80); normalize_model canon '528xi', 19 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "528xi",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "528xi",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '530i' (143 fitment rows, oem-raw@ceccc80); normalize_model canon '530i', 178 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "530i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "530i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '530xi' (79 fitment rows, oem-raw@ceccc80); normalize_model canon '530xi', 32 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "530xi",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "530xi",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '535i' (185 fitment rows, oem-raw@ceccc80); normalize_model canon '535i', 149 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "535i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "535i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '535i GT' (27 fitment rows, oem-raw@ceccc80); normalize_model canon '535i GT', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "535i GT",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "535i GT",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '535i xDrive' (189 fitment rows, oem-raw@ceccc80); normalize_model canon '535i xDrive', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "535i xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "535i xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '535xi' (80 fitment rows, oem-raw@ceccc80); normalize_model canon '535xi', 20 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "535xi",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "535xi",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '540i' (109 fitment rows, oem-raw@ceccc80); normalize_model canon '540i', 40 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "540i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "540i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '545i' (67 fitment rows, oem-raw@ceccc80); normalize_model canon '545i', 23 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "545i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "545i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '550i' (195 fitment rows, oem-raw@ceccc80); normalize_model canon '550i', 59 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "550i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "550i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '550i GT' (31 fitment rows, oem-raw@ceccc80); normalize_model canon '550i GT', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "550i GT",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "550i GT",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '550i GT xDrive' (29 fitment rows, oem-raw@ceccc80); normalize_model canon '550i GT xDrive', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "550i GT xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "550i GT xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '550i xDrive' (112 fitment rows, oem-raw@ceccc80); normalize_model canon '550i xDrive', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "550i xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "550i xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '640i' (60 fitment rows, oem-raw@ceccc80); normalize_model canon '640i', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "640i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "640i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '645Ci' (67 fitment rows, oem-raw@ceccc80); normalize_model canon '645ci', 21 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "645Ci",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "645ci",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '650i' (126 fitment rows, oem-raw@ceccc80); normalize_model canon '650i', 27 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "650i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "650i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '740Li' (82 fitment rows, oem-raw@ceccc80); normalize_model canon '740Li', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "740Li",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "740Li",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '740Li xDrive' (31 fitment rows, oem-raw@ceccc80); normalize_model canon '740Li xDrive', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "740Li xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "740Li xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '740i' (164 fitment rows, oem-raw@ceccc80); normalize_model canon '740i', 41 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "740i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "740i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '740iL' (53 fitment rows, oem-raw@ceccc80); normalize_model canon '740iL', 29 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "740iL",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "740iL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '745Li' (73 fitment rows, oem-raw@ceccc80); normalize_model canon '745Li', 50 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "745Li",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "745Li",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '745i' (74 fitment rows, oem-raw@ceccc80); normalize_model canon '745i', 42 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "745i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "745i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '750Li' (124 fitment rows, oem-raw@ceccc80); normalize_model canon '750Li', 101 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "750Li",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "750Li",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '750Li xDrive' (82 fitment rows, oem-raw@ceccc80); normalize_model canon '750Li xDrive', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "750Li xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "750Li xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '750i' (124 fitment rows, oem-raw@ceccc80); normalize_model canon '750i', 57 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "750i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "750i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '750iL' (42 fitment rows, oem-raw@ceccc80); normalize_model canon '750iL', 6 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "750iL",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "750iL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '760Li' (151 fitment rows, oem-raw@ceccc80); normalize_model canon '760Li', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "760Li",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "760Li",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '760i' (79 fitment rows, oem-raw@ceccc80); normalize_model canon '760i', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "760i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "760i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ActiveHybrid 3' (111 fitment rows, oem-raw@ceccc80); normalize_model canon 'ActiveHybrid 3', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "ActiveHybrid 3",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "ActiveHybrid 3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ActiveHybrid 5' (86 fitment rows, oem-raw@ceccc80); normalize_model canon 'ActiveHybrid 5', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "ActiveHybrid 5",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "ActiveHybrid 5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Alpina B7' (107 fitment rows, oem-raw@ceccc80); normalize_model canon 'Alpina B7', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "Alpina B7",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "Alpina B7",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Alpina B7 xDrive' (64 fitment rows, oem-raw@ceccc80); normalize_model canon 'Alpina B7 xDrive', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "Alpina B7 xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "Alpina B7 xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Alpina B7L' (68 fitment rows, oem-raw@ceccc80); normalize_model canon 'Alpina B7L', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "Alpina B7L",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "Alpina B7L",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Alpina B7L xDrive' (66 fitment rows, oem-raw@ceccc80); normalize_model canon 'Alpina B7L xDrive', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "Alpina B7L xDrive",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "Alpina B7L xDrive",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'M235i' (28 fitment rows, oem-raw@ceccc80); normalize_model canon 'M235i', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "M235i",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "M235i",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'M3' (233 fitment rows, oem-raw@ceccc80); normalize_model canon 'M3', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "M3",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "M3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'M5' (106 fitment rows, oem-raw@ceccc80); normalize_model canon 'M5', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "M5",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "M5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'X1' (86 fitment rows, oem-raw@ceccc80); normalize_model canon 'X1', 96 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "X1",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "X1",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'X3' (195 fitment rows, oem-raw@ceccc80); normalize_model canon 'X3', 445 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "X3",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "X3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'X4' (55 fitment rows, oem-raw@ceccc80); normalize_model canon 'X4', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "X4",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "X4",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'X5' (213 fitment rows, oem-raw@ceccc80); normalize_model canon 'X5', 608 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "X5",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "X5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'X6' (24 fitment rows, oem-raw@ceccc80); normalize_model canon 'X6', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "X6",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "X6",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Z3' (34 fitment rows, oem-raw@ceccc80); normalize_model canon 'Z3', 42 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "Z3",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "Z3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Z4' (81 fitment rows, oem-raw@ceccc80); normalize_model canon 'Z4', 32 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "Z4",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "Z4",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'i3' (3 fitment rows, oem-raw@ceccc80); normalize_model canon 'i3', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "BMW",
+   "cat_model": "i3",
+   "ns": "bmw",
+   "targets": [
+    {
+     "make": "BMW",
+     "model": "i3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Aerostar' (2 fitment rows, oem-raw@d1108d0); normalize_model canon 'Aerostar', 75 feed cars (inventory 2026-11-05); identity draft",
    "cat_make": "Ford",
    "cat_model": "Aerostar",
@@ -4058,6 +5189,1566 @@
    ]
   },
   {
+   "basis": "catalog prints '2' (38 fitment rows, oem-raw@ceccc80); normalize_model canon 'Mazda2', 83 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "2",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "Mazda2",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '3' (364 fitment rows, oem-raw@ceccc80); normalize_model canon 'Mazda3', 2235 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "3",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "Mazda3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '323' (1 fitment rows, oem-raw@ceccc80); normalize_model canon '323', 8 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "323",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "323",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '5' (107 fitment rows, oem-raw@ceccc80); normalize_model canon 'Mazda5', 370 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "5",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "Mazda5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '6' (209 fitment rows, oem-raw@ceccc80); normalize_model canon 'Mazda6', 1043 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "6",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "Mazda6",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '626' (37 fitment rows, oem-raw@ceccc80); normalize_model canon '626', 113 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "626",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "626",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '929' (1 fitment rows, oem-raw@ceccc80); normalize_model canon '929', 6 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "929",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "929",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'B2000' (11 fitment rows, oem-raw@ceccc80); normalize_model canon 'B2000', 15 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "B2000",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "B2000",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'B2500' (13 fitment rows, oem-raw@ceccc80); normalize_model canon 'B2500', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "B2500",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "B2500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CX-3' (8 fitment rows, oem-raw@ceccc80); normalize_model canon 'CX-3', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "CX-3",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "CX-3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CX-30' (3 fitment rows, oem-raw@ceccc80); normalize_model canon 'CX-30', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "CX-30",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "CX-30",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CX-5' (107 fitment rows, oem-raw@ceccc80); normalize_model canon 'CX-5', 95 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "CX-5",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "CX-5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CX-50' (3 fitment rows, oem-raw@ceccc80); normalize_model canon 'CX-50', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "CX-50",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "CX-50",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CX-7' (44 fitment rows, oem-raw@ceccc80); normalize_model canon 'CX-7', 399 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "CX-7",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "CX-7",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CX-9' (56 fitment rows, oem-raw@ceccc80); normalize_model canon 'CX-9', 464 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "CX-9",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "CX-9",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'MPV' (76 fitment rows, oem-raw@ceccc80); normalize_model canon 'MPV', 167 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "MPV",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "MPV",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'MX-3' (2 fitment rows, oem-raw@ceccc80); normalize_model canon 'MX-3', 6 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "MX-3",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "MX-3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'MX-6' (11 fitment rows, oem-raw@ceccc80); normalize_model canon 'MX-6', 14 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "MX-6",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "MX-6",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Millenia' (53 fitment rows, oem-raw@ceccc80); normalize_model canon 'Millenia', 32 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "Millenia",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "Millenia",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Navajo' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Navajo', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "Navajo",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "Navajo",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Protege' (107 fitment rows, oem-raw@ceccc80); normalize_model canon 'Protege', 242 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "Protege",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "Protege",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Protege5' (65 fitment rows, oem-raw@ceccc80); normalize_model canon 'Protege5', 55 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "Protege5",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "Protege5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'RX-8' (77 fitment rows, oem-raw@ceccc80); normalize_model canon 'RX-8', 65 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "RX-8",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "RX-8",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Tribute' (96 fitment rows, oem-raw@ceccc80); normalize_model canon 'Tribute', 388 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mazda",
+   "cat_model": "Tribute",
+   "ns": "mazda",
+   "targets": [
+    {
+     "make": "Mazda",
+     "model": "Tribute",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '190D' (21 fitment rows, oem-raw@ceccc80); normalize_model canon '190D', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "190D",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "190D",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '190E' (27 fitment rows, oem-raw@ceccc80); normalize_model canon '190E', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "190E",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "190E",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '260E' (21 fitment rows, oem-raw@ceccc80); normalize_model canon '260E', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "260E",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "260E",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '300CE' (30 fitment rows, oem-raw@ceccc80); normalize_model canon '300CE', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300CE",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "300CE",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '300D' (64 fitment rows, oem-raw@ceccc80); normalize_model canon '300D', 8 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300D",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "300D",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '300E' (35 fitment rows, oem-raw@ceccc80); normalize_model canon '300E', 16 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300E",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "300E",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '300SD' (40 fitment rows, oem-raw@ceccc80); normalize_model canon '300SD', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300SD",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "300SD",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '300SE' (47 fitment rows, oem-raw@ceccc80); normalize_model canon '300SE', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300SE",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "300SE",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '300SEL' (20 fitment rows, oem-raw@ceccc80); normalize_model canon '300SEL', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300SEL",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "300SEL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '300SL' (16 fitment rows, oem-raw@ceccc80); normalize_model canon '300SL', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300SL",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "300SL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '300TD' (33 fitment rows, oem-raw@ceccc80); normalize_model canon '300TD', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300TD",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "300TD",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '400SE' (26 fitment rows, oem-raw@ceccc80); normalize_model canon '400SE', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "400SE",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "400SE",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '420SEL' (12 fitment rows, oem-raw@ceccc80); normalize_model canon '420SEL', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "420SEL",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "420SEL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '500SL' (17 fitment rows, oem-raw@ceccc80); normalize_model canon '500SL', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "500SL",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "500SL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '560SEC' (7 fitment rows, oem-raw@ceccc80); normalize_model canon '560SEC', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "560SEC",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "560SEC",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '560SEL' (12 fitment rows, oem-raw@ceccc80); normalize_model canon '560SEL', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "560SEL",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "560SEL",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C220' (14 fitment rows, oem-raw@ceccc80); normalize_model canon 'C220', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C220",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "C220",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C230' (112 fitment rows, oem-raw@ceccc80); normalize_model canon 'C230', 121 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C230",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "C230",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C240' (61 fitment rows, oem-raw@ceccc80); normalize_model canon 'C240', 61 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C240",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "C240",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C250' (74 fitment rows, oem-raw@ceccc80); normalize_model canon 'C250', 99 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C250",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "C250",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C280' (76 fitment rows, oem-raw@ceccc80); normalize_model canon 'C280', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C280",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "C280",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C300' (144 fitment rows, oem-raw@ceccc80); normalize_model canon 'C300', 202 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C300",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "C300",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C320' (82 fitment rows, oem-raw@ceccc80); normalize_model canon 'C320', 22 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C320",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "C320",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C350' (155 fitment rows, oem-raw@ceccc80); normalize_model canon 'C350', 35 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "C350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C43 AMG' (40 fitment rows, oem-raw@ceccc80); normalize_model canon 'C43 AMG', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C43 AMG",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "C43 AMG",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CL500' (64 fitment rows, oem-raw@ceccc80); normalize_model canon 'CL500', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CL500",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CL500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CL55 AMG' (43 fitment rows, oem-raw@ceccc80); normalize_model canon 'CL55 AMG', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CL55 AMG",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CL55 AMG",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CL550' (15 fitment rows, oem-raw@ceccc80); normalize_model canon 'CL550', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CL550",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CL550",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CL600' (59 fitment rows, oem-raw@ceccc80); normalize_model canon 'CL600', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CL600",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CL600",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CLA250' (56 fitment rows, oem-raw@ceccc80); normalize_model canon 'CLA250', 24 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLA250",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CLA250",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CLK320' (77 fitment rows, oem-raw@ceccc80); normalize_model canon 'CLK320', 44 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLK320",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CLK320",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CLK350' (50 fitment rows, oem-raw@ceccc80); normalize_model canon 'CLK350', 19 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLK350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CLK350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CLK430' (32 fitment rows, oem-raw@ceccc80); normalize_model canon 'CLK430', 24 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLK430",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CLK430",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CLK500' (55 fitment rows, oem-raw@ceccc80); normalize_model canon 'CLK500', 8 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLK500",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CLK500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CLK55 AMG' (77 fitment rows, oem-raw@ceccc80); normalize_model canon 'CLK55 AMG', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLK55 AMG",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CLK55 AMG",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CLK550' (41 fitment rows, oem-raw@ceccc80); normalize_model canon 'CLK550', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLK550",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CLK550",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CLS500' (39 fitment rows, oem-raw@ceccc80); normalize_model canon 'CLS500', 14 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLS500",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CLS500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CLS550' (82 fitment rows, oem-raw@ceccc80); normalize_model canon 'CLS550', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLS550",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "CLS550",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'E300' (69 fitment rows, oem-raw@ceccc80); normalize_model canon 'E300', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E300",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "E300",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'E320' (189 fitment rows, oem-raw@ceccc80); normalize_model canon 'E320', 131 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E320",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "E320",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'E350' (265 fitment rows, oem-raw@ceccc80); normalize_model canon 'E350', 141 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "E350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'E420' (58 fitment rows, oem-raw@ceccc80); normalize_model canon 'E420', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E420",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "E420",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'E430' (62 fitment rows, oem-raw@ceccc80); normalize_model canon 'E430', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E430",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "E430",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'E500' (68 fitment rows, oem-raw@ceccc80); normalize_model canon 'E500', 20 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E500",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "E500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'E55 AMG' (108 fitment rows, oem-raw@ceccc80); normalize_model canon 'E55 AMG', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E55 AMG",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "E55 AMG",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'E550' (184 fitment rows, oem-raw@ceccc80); normalize_model canon 'E550', 10 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E550",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "E550",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'GL320' (48 fitment rows, oem-raw@ceccc80); normalize_model canon 'GL320', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GL320",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "GL320",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'GL350' (54 fitment rows, oem-raw@ceccc80); normalize_model canon 'GL350', 6 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GL350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "GL350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'GL450' (69 fitment rows, oem-raw@ceccc80); normalize_model canon 'GL450', 70 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GL450",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "GL450",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'GL550' (55 fitment rows, oem-raw@ceccc80); normalize_model canon 'GL550', 10 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GL550",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "GL550",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'GLA250' (12 fitment rows, oem-raw@ceccc80); normalize_model canon 'GLA250', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLA250",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "GLA250",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'GLE350' (11 fitment rows, oem-raw@ceccc80); normalize_model canon 'GLE350', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLE350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "GLE350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'GLK350' (96 fitment rows, oem-raw@ceccc80); normalize_model canon 'GLK350', 31 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLK350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "GLK350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ML320' (139 fitment rows, oem-raw@ceccc80); normalize_model canon 'ML320', 62 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML320",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "ML320",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ML350' (166 fitment rows, oem-raw@ceccc80); normalize_model canon 'ML350', 96 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "ML350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ML430' (32 fitment rows, oem-raw@ceccc80); normalize_model canon 'ML430', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML430",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "ML430",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ML500' (104 fitment rows, oem-raw@ceccc80); normalize_model canon 'ML500', 24 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML500",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "ML500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ML55 AMG' (52 fitment rows, oem-raw@ceccc80); normalize_model canon 'ML55 AMG', 6 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML55 AMG",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "ML55 AMG",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'ML550' (102 fitment rows, oem-raw@ceccc80); normalize_model canon 'ML550', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML550",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "ML550",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Metris' (5 fitment rows, oem-raw@ceccc80); normalize_model canon 'Metris', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "Metris",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "Metris",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'R320' (60 fitment rows, oem-raw@ceccc80); normalize_model canon 'R320', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "R320",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "R320",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'R350' (87 fitment rows, oem-raw@ceccc80); normalize_model canon 'R350', 24 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "R350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "R350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'R500' (57 fitment rows, oem-raw@ceccc80); normalize_model canon 'R500', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "R500",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "R500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S320' (35 fitment rows, oem-raw@ceccc80); normalize_model canon 'S320', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S320",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "S320",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S350' (75 fitment rows, oem-raw@ceccc80); normalize_model canon 'S350', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "S350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S400' (20 fitment rows, oem-raw@ceccc80); normalize_model canon 'S400', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S400",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "S400",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S420' (37 fitment rows, oem-raw@ceccc80); normalize_model canon 'S420', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S420",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "S420",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S430' (54 fitment rows, oem-raw@ceccc80); normalize_model canon 'S430', 31 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S430",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "S430",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S500' (102 fitment rows, oem-raw@ceccc80); normalize_model canon 'S500', 41 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S500",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "S500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S550' (54 fitment rows, oem-raw@ceccc80); normalize_model canon 'S550', 50 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S550",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "S550",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S600' (142 fitment rows, oem-raw@ceccc80); normalize_model canon 'S600', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S600",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "S600",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S63 AMG' (36 fitment rows, oem-raw@ceccc80); normalize_model canon 'S63 AMG', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S63 AMG",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "S63 AMG",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SL320' (16 fitment rows, oem-raw@ceccc80); normalize_model canon 'SL320', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL320",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "SL320",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SL500' (53 fitment rows, oem-raw@ceccc80); normalize_model canon 'SL500', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL500",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "SL500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SL550' (37 fitment rows, oem-raw@ceccc80); normalize_model canon 'SL550', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL550",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "SL550",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SLK230' (39 fitment rows, oem-raw@ceccc80); normalize_model canon 'SLK230', 18 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLK230",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "SLK230",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SLK280' (27 fitment rows, oem-raw@ceccc80); normalize_model canon 'SLK280', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLK280",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "SLK280",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SLK300' (28 fitment rows, oem-raw@ceccc80); normalize_model canon 'SLK300', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLK300",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "SLK300",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SLK320' (26 fitment rows, oem-raw@ceccc80); normalize_model canon 'SLK320', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLK320",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "SLK320",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SLK350' (45 fitment rows, oem-raw@ceccc80); normalize_model canon 'SLK350', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLK350",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "SLK350",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Sprinter 3500' (41 fitment rows, oem-raw@ceccc80); normalize_model canon 'Sprinter 3500', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "Sprinter 3500",
+   "ns": "mb",
+   "targets": [
+    {
+     "make": "Mercedes-Benz",
+     "model": "Sprinter 3500",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '3000GT' (2 fitment rows, oem-raw@ceccc80); normalize_model canon '3000GT', 28 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "3000GT",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "3000GT",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Diamante' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Diamante', 37 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Diamante",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Diamante",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Eclipse' (27 fitment rows, oem-raw@ceccc80); normalize_model canon 'Eclipse', 443 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Eclipse",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Eclipse",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Eclipse Cross' (5 fitment rows, oem-raw@ceccc80); normalize_model canon 'Eclipse Cross', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Eclipse Cross",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Eclipse Cross",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Endeavor' (37 fitment rows, oem-raw@ceccc80); normalize_model canon 'Endeavor', 191 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Endeavor",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Endeavor",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Expo' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Expo', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Expo",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Expo",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Galant' (82 fitment rows, oem-raw@ceccc80); normalize_model canon 'Galant', 502 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Galant",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Galant",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Lancer' (118 fitment rows, oem-raw@ceccc80); normalize_model canon 'Lancer', 615 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Lancer",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Lancer",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Mighty Max' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Mighty Max', 25 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Mighty Max",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Mighty Max",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Mirage' (83 fitment rows, oem-raw@ceccc80); normalize_model canon 'Mirage', 190 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Mirage",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Mirage",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Mirage G4' (43 fitment rows, oem-raw@ceccc80); normalize_model canon 'Mirage G4', 51 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Mirage G4",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Mirage G4",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Montero' (10 fitment rows, oem-raw@ceccc80); normalize_model canon 'Montero', 76 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Montero",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Montero",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Montero Sport' (15 fitment rows, oem-raw@ceccc80); normalize_model canon 'Montero Sport', 185 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Montero Sport",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Montero Sport",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Outlander' (149 fitment rows, oem-raw@ceccc80); normalize_model canon 'Outlander', 359 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Outlander",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Outlander",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Outlander Sport' (50 fitment rows, oem-raw@ceccc80); normalize_model canon 'Outlander Sport', 184 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Mitsubishi",
+   "cat_model": "Outlander Sport",
+   "ns": "mitsubishi",
+   "targets": [
+    {
+     "make": "Mitsubishi",
+     "model": "Outlander Sport",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints '200' (230 fitment rows, oem-raw@94f03a3); normalize_model canon '200', 1998 feed cars (inventory 2026-11-04)",
    "cat_make": "Chrysler",
    "cat_model": "200",
@@ -6874,9 +9565,980 @@
      "trims": "*"
     }
    ]
+  },
+  {
+   "basis": "catalog prints '100' (3 fitment rows, oem-raw@ceccc80); normalize_model canon '100', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "100",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "100",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A3' (90 fitment rows, oem-raw@ceccc80); normalize_model canon 'A3', 145 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A3",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A3 Quattro' (88 fitment rows, oem-raw@ceccc80); normalize_model canon 'A3 Quattro', 8 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A3 Quattro",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A3 Quattro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A4' (325 fitment rows, oem-raw@ceccc80); normalize_model canon 'A4', 903 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A4",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A4",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A4 Quattro' (354 fitment rows, oem-raw@ceccc80); normalize_model canon 'A4 Quattro', 103 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A4 Quattro",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A4 Quattro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A5' (61 fitment rows, oem-raw@ceccc80); normalize_model canon 'A5', 69 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A5",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A5 Quattro' (92 fitment rows, oem-raw@ceccc80); normalize_model canon 'A5 Quattro', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A5 Quattro",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A5 Quattro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A6' (169 fitment rows, oem-raw@ceccc80); normalize_model canon 'A6', 272 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A6",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A6",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A6 Quattro' (227 fitment rows, oem-raw@ceccc80); normalize_model canon 'A6 Quattro', 65 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A6 Quattro",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A6 Quattro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A7 Quattro' (23 fitment rows, oem-raw@ceccc80); normalize_model canon 'A7 Quattro', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A7 Quattro",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A7 Quattro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A8' (21 fitment rows, oem-raw@ceccc80); normalize_model canon 'A8', 32 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A8",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A8",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'A8 Quattro' (125 fitment rows, oem-raw@ceccc80); normalize_model canon 'A8 Quattro', 13 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "A8 Quattro",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "A8 Quattro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Allroad Quattro' (56 fitment rows, oem-raw@ceccc80); normalize_model canon 'Allroad Quattro', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "Allroad Quattro",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "Allroad Quattro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cabriolet' (6 fitment rows, oem-raw@ceccc80); normalize_model canon 'Cabriolet', 5 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "Cabriolet",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "Cabriolet",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Q3' (95 fitment rows, oem-raw@ceccc80); normalize_model canon 'Q3', 15 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "Q3",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "Q3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Q3 Quattro' (44 fitment rows, oem-raw@ceccc80); normalize_model canon 'Q3 Quattro', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "Q3 Quattro",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "Q3 Quattro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Q5' (146 fitment rows, oem-raw@ceccc80); normalize_model canon 'Q5', 220 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "Q5",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "Q5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Q5 Sportback' (22 fitment rows, oem-raw@ceccc80); normalize_model canon 'Q5 Sportback', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "Q5 Sportback",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "Q5 Sportback",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Q7' (113 fitment rows, oem-raw@ceccc80); normalize_model canon 'Q7', 193 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "Q7",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "Q7",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S3' (29 fitment rows, oem-raw@ceccc80); normalize_model canon 'S3', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "S3",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "S3",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S4' (281 fitment rows, oem-raw@ceccc80); normalize_model canon 'S4', 36 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "S4",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "S4",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S5' (73 fitment rows, oem-raw@ceccc80); normalize_model canon 'S5', 12 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "S5",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "S5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S6' (112 fitment rows, oem-raw@ceccc80); normalize_model canon 'S6', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "S6",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "S6",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S7' (11 fitment rows, oem-raw@ceccc80); normalize_model canon 'S7', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "S7",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "S7",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S8' (69 fitment rows, oem-raw@ceccc80); normalize_model canon 'S8', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "S8",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "S8",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SQ5' (66 fitment rows, oem-raw@ceccc80); normalize_model canon 'SQ5', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "SQ5",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "SQ5",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'TT' (58 fitment rows, oem-raw@ceccc80); normalize_model canon 'TT', 57 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "TT",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "TT",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'TT Quattro' (69 fitment rows, oem-raw@ceccc80); normalize_model canon 'TT Quattro', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "TT Quattro",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "TT Quattro",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'allroad' (25 fitment rows, oem-raw@ceccc80); normalize_model canon 'Allroad', 26 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Audi",
+   "cat_model": "allroad",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Audi",
+     "model": "Allroad",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Arteon' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Arteon', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Arteon",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Arteon",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Atlas' (2 fitment rows, oem-raw@ceccc80); normalize_model canon 'Atlas', 14 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Atlas",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Atlas",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Beetle' (78 fitment rows, oem-raw@ceccc80); normalize_model canon 'Beetle', 358 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Beetle",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Beetle",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'CC' (52 fitment rows, oem-raw@ceccc80); normalize_model canon 'CC', 401 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "CC",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "CC",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cabrio' (28 fitment rows, oem-raw@ceccc80); normalize_model canon 'Cabrio', 45 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Cabrio",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Cabrio",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Cabriolet' (4 fitment rows, oem-raw@ceccc80); normalize_model canon 'Cabriolet', 16 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Cabriolet",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Cabriolet",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Eos' (59 fitment rows, oem-raw@ceccc80); normalize_model canon 'Eos', 130 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Eos",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Eos",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Fox' (3 fitment rows, oem-raw@ceccc80); normalize_model canon 'Fox', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Fox",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Fox",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'GTI' (67 fitment rows, oem-raw@ceccc80); normalize_model canon 'GTI', 150 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "GTI",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "GTI",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Golf' (139 fitment rows, oem-raw@ceccc80); normalize_model canon 'Golf', 245 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Golf",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Golf",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Golf Alltrack' (5 fitment rows, oem-raw@ceccc80); normalize_model canon 'Golf Alltrack', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Golf Alltrack",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Golf Alltrack",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Jetta' (249 fitment rows, oem-raw@ceccc80); normalize_model canon 'Jetta', 2715 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Jetta",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Jetta",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Passat' (177 fitment rows, oem-raw@ceccc80); normalize_model canon 'Passat', 1394 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Passat",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Passat",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Phaeton' (4 fitment rows, oem-raw@ceccc80); normalize_model canon 'Phaeton', 7 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Phaeton",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Phaeton",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Routan' (34 fitment rows, oem-raw@ceccc80); normalize_model canon 'Routan', 171 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Routan",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Routan",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Scirocco' (3 fitment rows, oem-raw@ceccc80); normalize_model canon 'Scirocco', 4 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Scirocco",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Scirocco",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Tiguan' (43 fitment rows, oem-raw@ceccc80); normalize_model canon 'Tiguan', 401 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Tiguan",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Tiguan",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Touareg' (50 fitment rows, oem-raw@ceccc80); normalize_model canon 'Touareg', 159 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Touareg",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Touareg",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Transporter' (1 fitment rows, oem-raw@ceccc80); normalize_model canon 'Transporter', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Transporter",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Transporter",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'Vanagon' (2 fitment rows, oem-raw@ceccc80); normalize_model canon 'Vanagon', 11 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volkswagen",
+   "cat_model": "Vanagon",
+   "ns": "vag",
+   "targets": [
+    {
+     "make": "Volkswagen",
+     "model": "Vanagon",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '244' (7 fitment rows, oem-raw@ceccc80); normalize_model canon '244', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "244",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "244",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '245' (7 fitment rows, oem-raw@ceccc80); normalize_model canon '245', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "245",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "245",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '740' (14 fitment rows, oem-raw@ceccc80); normalize_model canon '740', 17 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "740",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "740",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '760' (9 fitment rows, oem-raw@ceccc80); normalize_model canon '760', 3 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "760",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "760",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '780' (2 fitment rows, oem-raw@ceccc80); normalize_model canon '780', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "780",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "780",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '850' (24 fitment rows, oem-raw@ceccc80); normalize_model canon '850', 47 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "850",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "850",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '940' (25 fitment rows, oem-raw@ceccc80); normalize_model canon '940', 16 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "940",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "940",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints '960' (28 fitment rows, oem-raw@ceccc80); normalize_model canon '960', 18 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "960",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "960",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C30' (70 fitment rows, oem-raw@ceccc80); normalize_model canon 'C30', 40 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "C30",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "C30",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'C70' (93 fitment rows, oem-raw@ceccc80); normalize_model canon 'C70', 98 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "C70",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "C70",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S40' (121 fitment rows, oem-raw@ceccc80); normalize_model canon 'S40', 280 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "S40",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "S40",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S60' (201 fitment rows, oem-raw@ceccc80); normalize_model canon 'S60', 469 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "S60",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "S60",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S60 Cross Country' (26 fitment rows, oem-raw@ceccc80); normalize_model canon 'S60 Cross Country', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "S60 Cross Country",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "S60 Cross Country",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S70' (30 fitment rows, oem-raw@ceccc80); normalize_model canon 'S70', 60 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "S70",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "S70",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S80' (152 fitment rows, oem-raw@ceccc80); normalize_model canon 'S80', 215 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "S80",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "S80",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'S90' (14 fitment rows, oem-raw@ceccc80); normalize_model canon 'S90', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "S90",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "S90",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'V40' (33 fitment rows, oem-raw@ceccc80); normalize_model canon 'V40', 15 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "V40",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "V40",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'V50' (90 fitment rows, oem-raw@ceccc80); normalize_model canon 'V50', 50 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "V50",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "V50",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'V60' (23 fitment rows, oem-raw@ceccc80); normalize_model canon 'V60', 9 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "V60",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "V60",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'V60 Cross Country' (17 fitment rows, oem-raw@ceccc80); normalize_model canon 'V60 Cross Country', 1 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "V60 Cross Country",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "V60 Cross Country",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'V70' (294 fitment rows, oem-raw@ceccc80); normalize_model canon 'V70', 154 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "V70",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "V70",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'V90' (12 fitment rows, oem-raw@ceccc80); normalize_model canon 'V90', 2 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "V90",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "V90",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'XC60' (111 fitment rows, oem-raw@ceccc80); normalize_model canon 'XC60', 140 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "XC60",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "XC60",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'XC70' (191 fitment rows, oem-raw@ceccc80); normalize_model canon 'XC70', 161 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "XC70",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "XC70",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'XC90' (91 fitment rows, oem-raw@ceccc80); normalize_model canon 'XC90', 495 feed cars (inventory 2026-11-05); identity draft",
+   "cat_make": "Volvo",
+   "cat_model": "XC90",
+   "ns": "volvo",
+   "targets": [
+    {
+     "make": "Volvo",
+     "model": "XC90",
+     "trims": "*"
+    }
+   ]
   }
  ],
  "exclude": {
+  "bmw|BMW|318iC": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash '318i'); unmapped until a reviewed entry exists",
+  "bmw|BMW|323iC": "feed spelling or sub-model the catalog does not print as its own model (7 cars, under catalog squash '323i'); unmapped until a reviewed entry exists",
+  "bmw|BMW|325iC": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash '325i'); unmapped until a reviewed entry exists",
+  "bmw|BMW|325ix": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash '325i'); unmapped until a reviewed entry exists",
+  "bmw|BMW|328iC": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash '328i'); unmapped until a reviewed entry exists",
+  "bmw|BMW|640I Gran Coupe": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash '640i'); unmapped until a reviewed entry exists",
+  "bmw|BMW|740I (I&Il)": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash '740i'); unmapped until a reviewed entry exists",
+  "bmw|BMW|750Li, Alpina B7": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash '750li'); unmapped until a reviewed entry exists",
+  "bmw|BMW|750i, Alpina B7": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash '750i'); unmapped until a reviewed entry exists",
   "ford|Ford|Aviator": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'aviator'); unmapped until a reviewed entry exists",
   "ford|Ford|Bronco Sport": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'bronco'); unmapped until a reviewed entry exists",
   "ford|Ford|C-Max Energi": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash 'cmax'); unmapped until a reviewed entry exists",
@@ -7094,6 +10756,14 @@
   "honda|Honda|Civic Sdn": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'civic'); unmapped until a reviewed entry exists",
   "honda|Honda|Civic Wagon": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'civic'); unmapped until a reviewed entry exists",
   "honda|Honda|Clarity": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'cl'); unmapped until a reviewed entry exists",
+  "mazda|Mazda|3 HB": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash '3'); unmapped until a reviewed entry exists",
+  "mazda|Mazda|Mazda6 Sport Wagon": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash '6'); unmapped until a reviewed entry exists",
+  "mazda|Mazda|Tribute Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (1 cars, under catalog squash 'tribute'); unmapped until a reviewed entry exists",
+  "mb|Mercedes-Benz|300Sdl": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash '300sd'); unmapped until a reviewed entry exists",
+  "mitsubishi|Mitsubishi|3000Gt (Vr-4)": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash '3000gt'); unmapped until a reviewed entry exists",
+  "mitsubishi|Mitsubishi|Eclipse Spyder": "feed spelling or sub-model the catalog does not print as its own model (16 cars, under catalog squash 'eclipse'); unmapped until a reviewed entry exists",
+  "mitsubishi|Mitsubishi|Lancer Sportback": "feed spelling or sub-model the catalog does not print as its own model (16 cars, under catalog squash 'lancer'); unmapped until a reviewed entry exists",
+  "mitsubishi|Mitsubishi|Montero (Exc. Sport)": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'montero'); unmapped until a reviewed entry exists",
   "mopar|Chrysler|200S": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash '200'); unmapped until a reviewed entry exists",
   "mopar|Chrysler|300 Lh": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash '300'); unmapped until a reviewed entry exists",
   "mopar|Chrysler|300C": "feed spelling or sub-model the catalog does not print as its own model (145 cars, under catalog squash '300'); unmapped until a reviewed entry exists",
@@ -7205,8 +10875,35 @@
   "toyota|Toyota|Yaris iA": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'yaris'); unmapped until a reviewed entry exists",
   "toyota|Toyota|tC": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'tc'); unmapped until a reviewed entry exists",
   "toyota|Toyota|xB": "feed spelling or sub-model the catalog does not print as its own model (7 cars, under catalog squash 'xb'); unmapped until a reviewed entry exists",
-  "toyota|Toyota|xD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'xd'); unmapped until a reviewed entry exists"
+  "toyota|Toyota|xD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'xd'); unmapped until a reviewed entry exists",
+  "vag|Audi|A3 Sportback E-Tron": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'a3'); unmapped until a reviewed entry exists",
+  "vag|Audi|A3/S3": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'a3'); unmapped until a reviewed entry exists",
+  "vag|Audi|A4 Avant": "feed spelling or sub-model the catalog does not print as its own model (12 cars, under catalog squash 'a4'); unmapped until a reviewed entry exists",
+  "vag|Audi|A6 Avant": "feed spelling or sub-model the catalog does not print as its own model (5 cars, under catalog squash 'a6'); unmapped until a reviewed entry exists",
+  "vag|Audi|A8 L": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'a8'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Beetle (type 1)": "feed spelling or sub-model the catalog does not print as its own model (10 cars, under catalog squash 'beetle'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Golf Except Gti": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'golf'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Golf III": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'golf'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Golf Sportwagen": "feed spelling or sub-model the catalog does not print as its own model (13 cars, under catalog squash 'golf'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Jetta Except Gli": "feed spelling or sub-model the catalog does not print as its own model (14 cars, under catalog squash 'jetta'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Jetta GLI": "feed spelling or sub-model the catalog does not print as its own model (8 cars, under catalog squash 'jetta'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Jetta III": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'jetta'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Jetta Sedan": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'jetta'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Jetta SportWagen": "feed spelling or sub-model the catalog does not print as its own model (27 cars, under catalog squash 'jetta'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Jetta TDI": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'jetta'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Jetta Wagon": "feed spelling or sub-model the catalog does not print as its own model (8 cars, under catalog squash 'jetta'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Passat Wagon": "feed spelling or sub-model the catalog does not print as its own model (31 cars, under catalog squash 'passat'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Touareg 2": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'touareg'); unmapped until a reviewed entry exists",
+  "volvo|Volvo|740 Wagon": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash '740'); unmapped until a reviewed entry exists",
+  "volvo|Volvo|780 Series": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash '780'); unmapped until a reviewed entry exists",
+  "volvo|Volvo|850 Wagon": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash '850'); unmapped until a reviewed entry exists",
+  "volvo|Volvo|940 Wagon": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash '940'); unmapped until a reviewed entry exists",
+  "volvo|Volvo|960 Series 960": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash '960'); unmapped until a reviewed entry exists",
+  "volvo|Volvo|960 Wagon": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash '960'); unmapped until a reviewed entry exists",
+  "volvo|Volvo|S60 L": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 's60'); unmapped until a reviewed entry exists",
+  "volvo|Volvo|S60 R": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 's60'); unmapped until a reviewed entry exists",
+  "volvo|Volvo|V70 XC": "feed spelling or sub-model the catalog does not print as its own model (9 cars, under catalog squash 'v70'); unmapped until a reviewed entry exists"
  },
- "note": "Hand-curated catalog (ns, make, model) -> feed targets (CURATION_SPEC.md §6). Drafted with curate.py --propose-map (identity rule: model_map.draft_identity) on oem-raw@94f03a3 for toyota, mopar, ford, nissan, and on oem-raw@d1108d0 for every namespace (merged with model_map.py merge, reviewed 2026-11-05): an entry only where normalize_model gives an existing feed model; feed variants under a mapped name are excluded (no claims) until someone reviews them; a target whose feed name the feed also splits by series (Silverado / Silverado 1500) is ambig (Likely only); targets failing M3/M6/M8 were left unmapped (see _report/<ns>.map-proposals.json). Hand entries (merge, ambig, trim subsets) carry their own basis.",
+ "note": "Hand-curated catalog (ns, make, model) -> feed targets (CURATION_SPEC.md §6). Drafted with curate.py --propose-map (identity rule: model_map.draft_identity) on oem-raw@94f03a3 for toyota, mopar, ford, nissan, and on oem-raw@d1108d0 for every namespace (merged with model_map.py merge, reviewed 2026-11-05): an entry only where normalize_model gives an existing feed model; feed variants under a mapped name are excluded (no claims) until someone reviews them; a target whose feed name the feed also splits by series (Silverado / Silverado 1500) is ambig (Likely only); targets failing M3/M6/M8 were left unmapped (see _report/<ns>.map-proposals.json). vag, bmw, mb, mazda, mitsubishi, volvo drafted the same way on oem-raw@ceccc80 (2026-11-05, interchange session; identity rule only, no hand entries). Hand entries (merge, ambig, trim subsets) carry their own basis.",
  "schema": 1
 }

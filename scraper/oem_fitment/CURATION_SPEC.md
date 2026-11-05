@@ -270,6 +270,16 @@ Namespaces (`policy.NAMESPACES`) go by numbering system, not make:
 - honda: Honda, Acura.
 - hmg: Hyundai, Kia, Genesis.
 - subaru.
+- vag: Volkswagen, Audi (one numbering system; 06B-903-016-AB is on both
+  catalogs). Sites: vwpartsgiant, audipartsgiant.
+- bmw: BMW. Site: bmwpartsdeal. MINI is not a namespace make: bmwpartsdeal
+  is not a MINI catalog and prints no MINI fitment rows; no allowed MINI
+  catalog is known (SOURCES.md).
+- mb: Mercedes-Benz (note brand "Mercedes"). Site: mbpartsgiant.
+- mazda (mazdapartsnow), mitsubishi (mitsubishipartsgiant), volvo
+  (volvopartsgiant).
+  (2026-11-05: the last six added under the same rules; with no R1/R2
+  manifests or audits for their sites, they yield Likely only.)
 
 Rules:
 - Each site belongs to exactly one namespace.

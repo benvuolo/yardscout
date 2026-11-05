@@ -1,0 +1,1325 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "BMW",
+    "cat_model": "1 Series M",
+    "feed": [
+     "BMW",
+     "1 Series M"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "228i xDrive",
+    "feed": [
+     "BMW",
+     "228i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "230i xDrive",
+    "feed": [
+     "BMW",
+     "230i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "323is",
+    "feed": [
+     "BMW",
+     "323is"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "328i GT",
+    "feed": [
+     "BMW",
+     "328i GT"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "330e",
+    "feed": [
+     "BMW",
+     "330e"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "330i xDrive",
+    "feed": [
+     "BMW",
+     "330i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "335i GT xDrive",
+    "feed": [
+     "BMW",
+     "335i GT xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "340i GT xDrive",
+    "feed": [
+     "BMW",
+     "340i GT xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "340i xDrive",
+    "feed": [
+     "BMW",
+     "340i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "428i xDrive",
+    "feed": [
+     "BMW",
+     "428i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "428i xDrive Gran Coupe",
+    "feed": [
+     "BMW",
+     "428i xDrive Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "430i Gran Coupe",
+    "feed": [
+     "BMW",
+     "430i Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "430i xDrive Gran Coupe",
+    "feed": [
+     "BMW",
+     "430i xDrive Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "435i Gran Coupe",
+    "feed": [
+     "BMW",
+     "435i Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "435i xDrive",
+    "feed": [
+     "BMW",
+     "435i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "435i xDrive Gran Coupe",
+    "feed": [
+     "BMW",
+     "435i xDrive Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "440i",
+    "feed": [
+     "BMW",
+     "440i"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "440i Gran Coupe",
+    "feed": [
+     "BMW",
+     "440i Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "440i xDrive",
+    "feed": [
+     "BMW",
+     "440i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "440i xDrive Gran Coupe",
+    "feed": [
+     "BMW",
+     "440i xDrive Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "525iT",
+    "feed": [
+     "BMW",
+     "525iT"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "535d",
+    "feed": [
+     "BMW",
+     "535d"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "535d xDrive",
+    "feed": [
+     "BMW",
+     "535d xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "535i GT xDrive",
+    "feed": [
+     "BMW",
+     "535i GT xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "640i Gran Coupe",
+    "feed": [
+     "BMW",
+     "640i Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "640i xDrive",
+    "feed": [
+     "BMW",
+     "640i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "640i xDrive Gran Coupe",
+    "feed": [
+     "BMW",
+     "640i xDrive Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "650i Gran Coupe",
+    "feed": [
+     "BMW",
+     "650i Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "650i xDrive",
+    "feed": [
+     "BMW",
+     "650i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "650i xDrive Gran Coupe",
+    "feed": [
+     "BMW",
+     "650i xDrive Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "740Ld xDrive",
+    "feed": [
+     "BMW",
+     "740Ld xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "750i xDrive",
+    "feed": [
+     "BMW",
+     "750i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "840Ci",
+    "feed": [
+     "BMW",
+     "840ci"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "840i",
+    "feed": [
+     "BMW",
+     "840i"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "840i xDrive",
+    "feed": [
+     "BMW",
+     "840i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "850CSi",
+    "feed": [
+     "BMW",
+     "850CSi"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "850Ci",
+    "feed": [
+     "BMW",
+     "850ci"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "ActiveHybrid 7",
+    "feed": [
+     "BMW",
+     "ActiveHybrid 7"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "Alpina B6 xDrive Gran Coupe",
+    "feed": [
+     "BMW",
+     "Alpina B6 xDrive Gran Coupe"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "Alpina V8 Roadster",
+    "feed": [
+     "BMW",
+     "Alpina V8 Roadster"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M2",
+    "feed": [
+     "BMW",
+     "M2"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M235i xDrive",
+    "feed": [
+     "BMW",
+     "M235i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M240i",
+    "feed": [
+     "BMW",
+     "M240i"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M240i xDrive",
+    "feed": [
+     "BMW",
+     "M240i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M4",
+    "feed": [
+     "BMW",
+     "M4"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M550i xDrive",
+    "feed": [
+     "BMW",
+     "M550i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M6",
+    "feed": [
+     "BMW",
+     "M6"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M760i xDrive",
+    "feed": [
+     "BMW",
+     "M760i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M8",
+    "feed": [
+     "BMW",
+     "M8"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "M850i xDrive",
+    "feed": [
+     "BMW",
+     "M850i xDrive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "X5 M",
+    "feed": [
+     "BMW",
+     "X5 M"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "X6 M",
+    "feed": [
+     "BMW",
+     "X6 M"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "X7",
+    "feed": [
+     "BMW",
+     "X7"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "Z3 M",
+    "feed": [
+     "BMW",
+     "Z3 M"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "Z4 M",
+    "feed": [
+     "BMW",
+     "Z4 M"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "Z8",
+    "feed": [
+     "BMW",
+     "Z8"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "i3s",
+    "feed": [
+     "BMW",
+     "i3s"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "BMW",
+    "cat_model": "i8",
+    "feed": [
+     "BMW",
+     "i8"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "bmw",
+ "proposals": [
+  {
+   "cat_make": "BMW",
+   "cat_model": "1 Series M",
+   "feed_cars": 0,
+   "fitment_rows": 45,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "1 Series M",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "228i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 21,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "228i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "230i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 10,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "230i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "323is",
+   "feed_cars": 0,
+   "fitment_rows": 18,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "323is",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "328i GT",
+   "feed_cars": 0,
+   "fitment_rows": 90,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "328i GT",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "328i GT xDrive",
+     2
+    ]
+   ]
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "330e",
+   "feed_cars": 0,
+   "fitment_rows": 52,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "330e",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "330i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 68,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "330i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "335i GT xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 88,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "335i GT xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "340i GT xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 40,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "340i GT xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "340i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 68,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "340i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "428i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 95,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "428i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "428i xDrive Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 81,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "428i xDrive Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "430i Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 62,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "430i Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "430i xDrive Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 62,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "430i xDrive Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "435i Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 92,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "435i Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "435i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 101,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "435i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "435i xDrive Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 86,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "435i xDrive Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "440i",
+   "feed_cars": 0,
+   "fitment_rows": 65,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "440i",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "440i Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 62,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "440i Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "440i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 65,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "440i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "440i xDrive Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 62,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "440i xDrive Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "525iT",
+   "feed_cars": 0,
+   "fitment_rows": 11,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "525iT",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "535d",
+   "feed_cars": 0,
+   "fitment_rows": 31,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "535d",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "535d xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 31,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "535d xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "535i GT xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 26,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "535i GT xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "640i Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 38,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "640i Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "640I Gran Coupe",
+     2
+    ]
+   ]
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "640i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 62,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "640i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "640i xDrive Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 40,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "640i xDrive Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "650i Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 42,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "650i Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "650i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 70,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "650i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "650i xDrive Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 44,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "650i xDrive Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "740Ld xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 11,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "740Ld xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "750i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 80,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "750i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "840Ci",
+   "feed_cars": 0,
+   "fitment_rows": 7,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "840ci",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "840i",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "840i",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "840i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "840i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "850CSi",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "850CSi",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "850Ci",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "850ci",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "ActiveHybrid 7",
+   "feed_cars": 0,
+   "fitment_rows": 26,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "ActiveHybrid 7",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "Alpina B6 xDrive Gran Coupe",
+   "feed_cars": 0,
+   "fitment_rows": 29,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "Alpina B6 xDrive Gran Coupe",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "Alpina V8 Roadster",
+   "feed_cars": 0,
+   "fitment_rows": 5,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "Alpina V8 Roadster",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M2",
+   "feed_cars": 0,
+   "fitment_rows": 12,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M2",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "M235i",
+     1
+    ]
+   ]
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M235i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 22,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M235i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M240i",
+   "feed_cars": 0,
+   "fitment_rows": 11,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M240i",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M240i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 11,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M240i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M4",
+   "feed_cars": 0,
+   "fitment_rows": 9,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M4",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M550i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M550i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M6",
+   "feed_cars": 0,
+   "fitment_rows": 47,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M6",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M760i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M760i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M8",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M8",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "M850i xDrive",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "M850i xDrive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "X5 M",
+   "feed_cars": 0,
+   "fitment_rows": 31,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "X5 M",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "X6 M",
+   "feed_cars": 0,
+   "fitment_rows": 14,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "X6 M",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "X7",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "X7",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "Z3 M",
+   "feed_cars": 0,
+   "fitment_rows": 17,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "Z3 M",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "Z4 M",
+   "feed_cars": 0,
+   "fitment_rows": 19,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "Z4 M",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "Z8",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "Z8",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "i3s",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "i3s",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "BMW",
+   "cat_model": "i8",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "bmw",
+   "proposed": {
+    "make": "BMW",
+    "model": "i8",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+}

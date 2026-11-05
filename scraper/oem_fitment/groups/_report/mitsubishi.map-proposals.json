@@ -1,0 +1,56 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Mitsubishi",
+    "cat_model": "Outlander PHEV",
+    "feed": [
+     "Mitsubishi",
+     "Outlander PHEV"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mitsubishi",
+    "cat_model": "Tredia",
+    "feed": [
+     "Mitsubishi",
+     "Tredia"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "mitsubishi",
+ "proposals": [
+  {
+   "cat_make": "Mitsubishi",
+   "cat_model": "Outlander PHEV",
+   "feed_cars": 0,
+   "fitment_rows": 32,
+   "ns": "mitsubishi",
+   "proposed": {
+    "make": "Mitsubishi",
+    "model": "Outlander PHEV",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mitsubishi",
+   "cat_model": "Tredia",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mitsubishi",
+   "proposed": {
+    "make": "Mitsubishi",
+    "model": "Tredia",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+}

@@ -1,0 +1,61 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Volvo",
+    "cat_model": "240",
+    "feed": [
+     "Volvo",
+     "240"
+    ],
+    "why": "1/17 vPIC decodes name another make (M6 over 2%)"
+   },
+   {
+    "cat_make": "Volvo",
+    "cat_model": "242",
+    "feed": [
+     "Volvo",
+     "242"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "volvo",
+ "proposals": [
+  {
+   "cat_make": "Volvo",
+   "cat_model": "240",
+   "feed_cars": 53,
+   "fitment_rows": 12,
+   "ns": "volvo",
+   "proposed": {
+    "make": "Volvo",
+    "model": "240",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "240 Wagon",
+     11
+    ]
+   ]
+  },
+  {
+   "cat_make": "Volvo",
+   "cat_model": "242",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "volvo",
+   "proposed": {
+    "make": "Volvo",
+    "model": "242",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+}

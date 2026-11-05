@@ -52,11 +52,21 @@ NOTE_BANNED = re.compile(r"fits all|guaranteed|always|100%", re.I)
 
 # --------------------------------------------------------------- namespaces
 # §4: by numbering system, not make. Each site belongs to exactly one
-# namespace. Sites crawled on oem-raw but not listed here (bmwpartsdeal,
-# vwpartsgiant, mitsubishipartsgiant, mazdapartsnow, mbpartsgiant,
-# volvopartsgiant, audipartsgiant) have no namespace in the spec yet: curate.py
-# reports them as `site_without_namespace` and makes no claim from them.
-# The aftermarket track (dbelectrical) is never a namespace (§12).
+# namespace. A crawled site not listed here is reported as
+# `site_without_namespace` and makes no claim. The aftermarket track
+# (dbelectrical) is never a namespace (§12).
+# 2026-11-05 (interchange session): vag, bmw, mb, mazda, mitsubishi, volvo
+# added under the same rules as the others: no audits.json record, no R1/R2
+# manifests on oem-raw for them yet and ENGINE_CELLS_RELIABLE unset, so every
+# group they yield is Likely until those exist (§5.12, §8 V7).
+# - vag: Volkswagen and Audi share one numbering system (alternator
+#   06B-903-016-AB is listed on both catalogs on oem-raw), so one namespace
+#   with both sites, as toyota/lexus and honda/acura.
+# - bmw: BMW only. MINI shares BMW numbering, but bmwpartsdeal is not a MINI
+#   catalog (sites/bmwpartsdeal.py, SOURCES.md) and its 1,746 records print
+#   no MINI fitment row, so MINI is not a namespace make (no source).
+# - mb: the feed's make string is "Mercedes-Benz"; the note brand is "Mercedes"
+#   (validate.NOTE_LIKELY_RE allows letters, "/" and spaces only).
 NAMESPACES: dict[str, dict] = {
     "toyota": {"makes": ["Toyota", "Scion", "Lexus"], "brand": "Toyota",
                "sites": ["www.toyotapartsnow.com", "www.lexuspartsnow.com"]},
@@ -74,6 +84,13 @@ NAMESPACES: dict[str, dict] = {
     "hmg": {"makes": ["Hyundai", "Kia", "Genesis"], "brand": "Hyundai/Kia",
             "sites": ["www.hyundaipartsdeal.com", "www.kiapartsnow.com"]},
     "subaru": {"makes": ["Subaru"], "brand": "Subaru", "sites": ["www.subarupartsdeal.com"]},
+    "vag": {"makes": ["Volkswagen", "Audi"], "brand": "VW/Audi",
+            "sites": ["www.vwpartsgiant.com", "www.audipartsgiant.com"]},
+    "bmw": {"makes": ["BMW"], "brand": "BMW", "sites": ["www.bmwpartsdeal.com"]},
+    "mb": {"makes": ["Mercedes-Benz"], "brand": "Mercedes", "sites": ["www.mbpartsgiant.com"]},
+    "mazda": {"makes": ["Mazda"], "brand": "Mazda", "sites": ["www.mazdapartsnow.com"]},
+    "mitsubishi": {"makes": ["Mitsubishi"], "brand": "Mitsubishi", "sites": ["www.mitsubishipartsgiant.com"]},
+    "volvo": {"makes": ["Volvo"], "brand": "Volvo", "sites": ["www.volvopartsgiant.com"]},
 }
 
 SITE_NS: dict[str, str] = {s: ns for ns, d in NAMESPACES.items() for s in d["sites"]}

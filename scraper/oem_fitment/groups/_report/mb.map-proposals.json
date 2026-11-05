@@ -1,0 +1,2288 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "300CD",
+    "feed": [
+     "Mercedes-Benz",
+     "300CD"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "300SDL",
+    "feed": [
+     "Mercedes-Benz",
+     "300SDL"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "300TE",
+    "feed": [
+     "Mercedes-Benz",
+     "300TE"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "350SD",
+    "feed": [
+     "Mercedes-Benz",
+     "350SD"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "350SDL",
+    "feed": [
+     "Mercedes-Benz",
+     "350SDL"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "380SE",
+    "feed": [
+     "Mercedes-Benz",
+     "380SE"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "400E",
+    "feed": [
+     "Mercedes-Benz",
+     "400E"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "400SEL",
+    "feed": [
+     "Mercedes-Benz",
+     "400SEL"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "500E",
+    "feed": [
+     "Mercedes-Benz",
+     "500E"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "500SEC",
+    "feed": [
+     "Mercedes-Benz",
+     "500SEC"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "500SEL",
+    "feed": [
+     "Mercedes-Benz",
+     "500SEL"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "600SEC",
+    "feed": [
+     "Mercedes-Benz",
+     "600SEC"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "600SEL",
+    "feed": [
+     "Mercedes-Benz",
+     "600SEL"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "600SL",
+    "feed": [
+     "Mercedes-Benz",
+     "600SL"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "AMG GT",
+    "feed": [
+     "Mercedes-Benz",
+     "AMG GT"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "AMG GT 55",
+    "feed": [
+     "Mercedes-Benz",
+     "AMG GT 55"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "AMG GT 63",
+    "feed": [
+     "Mercedes-Benz",
+     "AMG GT 63"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "AMG GT 63 S",
+    "feed": [
+     "Mercedes-Benz",
+     "AMG GT 63 S"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "AMG GT Black Series",
+    "feed": [
+     "Mercedes-Benz",
+     "AMG GT Black Series"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "AMG GT C",
+    "feed": [
+     "Mercedes-Benz",
+     "AMG GT C"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "AMG GT R",
+    "feed": [
+     "Mercedes-Benz",
+     "AMG GT R"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "AMG GT R Pro",
+    "feed": [
+     "Mercedes-Benz",
+     "AMG GT R Pro"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "AMG GT S",
+    "feed": [
+     "Mercedes-Benz",
+     "AMG GT S"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "B Electric Drive",
+    "feed": [
+     "Mercedes-Benz",
+     "B Electric Drive"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "B250e",
+    "feed": [
+     "Mercedes-Benz",
+     "B250e"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "C32 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "C32 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "C350e",
+    "feed": [
+     "Mercedes-Benz",
+     "C350e"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "C400",
+    "feed": [
+     "Mercedes-Benz",
+     "C400"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "C450 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "C450 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "C55 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "C55 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "C63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "C63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "C63 AMG S",
+    "feed": [
+     "Mercedes-Benz",
+     "C63 AMG S"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "C63 AMG S E Performance",
+    "feed": [
+     "Mercedes-Benz",
+     "C63 AMG S E Performance"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "CL63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "CL63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "CL65 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "CL65 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "CLA45 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "CLA45 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "CLA45 AMG S",
+    "feed": [
+     "Mercedes-Benz",
+     "CLA45 AMG S"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "CLK63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "CLK63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "CLS400",
+    "feed": [
+     "Mercedes-Benz",
+     "CLS400"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "CLS55 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "CLS55 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "CLS63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "CLS63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "CLS63 AMG S",
+    "feed": [
+     "Mercedes-Benz",
+     "CLS63 AMG S"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "E250",
+    "feed": [
+     "Mercedes-Benz",
+     "E250"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "E400",
+    "feed": [
+     "Mercedes-Benz",
+     "E400"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "E43 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "E43 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "E450",
+    "feed": [
+     "Mercedes-Benz",
+     "E450"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "E53 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "E53 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "E63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "E63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "E63 AMG S",
+    "feed": [
+     "Mercedes-Benz",
+     "E63 AMG S"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "G500",
+    "feed": [
+     "Mercedes-Benz",
+     "G500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "G55 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "G55 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "G550",
+    "feed": [
+     "Mercedes-Benz",
+     "G550"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "G63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "G63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "G65 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "G65 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GL63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "GL63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLA45 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "GLA45 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLC300",
+    "feed": [
+     "Mercedes-Benz",
+     "GLC300"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLC350e",
+    "feed": [
+     "Mercedes-Benz",
+     "GLC350e"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLC43 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "GLC43 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLC63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "GLC63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLC63 AMG S",
+    "feed": [
+     "Mercedes-Benz",
+     "GLC63 AMG S"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLC63 AMG S E Performance",
+    "feed": [
+     "Mercedes-Benz",
+     "GLC63 AMG S E Performance"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLE300d",
+    "feed": [
+     "Mercedes-Benz",
+     "GLE300d"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLE400",
+    "feed": [
+     "Mercedes-Benz",
+     "GLE400"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLE43 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "GLE43 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLE450 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "GLE450 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLE550e",
+    "feed": [
+     "Mercedes-Benz",
+     "GLE550e"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLE580",
+    "feed": [
+     "Mercedes-Benz",
+     "GLE580"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLE63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "GLE63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLE63 AMG S",
+    "feed": [
+     "Mercedes-Benz",
+     "GLE63 AMG S"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLK250",
+    "feed": [
+     "Mercedes-Benz",
+     "GLK250"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLS350d",
+    "feed": [
+     "Mercedes-Benz",
+     "GLS350d"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLS450",
+    "feed": [
+     "Mercedes-Benz",
+     "GLS450"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLS550",
+    "feed": [
+     "Mercedes-Benz",
+     "GLS550"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLS580",
+    "feed": [
+     "Mercedes-Benz",
+     "GLS580"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "GLS63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "GLS63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "ML250",
+    "feed": [
+     "Mercedes-Benz",
+     "ML250"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "ML400",
+    "feed": [
+     "Mercedes-Benz",
+     "ML400"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "ML450",
+    "feed": [
+     "Mercedes-Benz",
+     "ML450"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "ML63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "ML63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "R63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "R63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "S450",
+    "feed": [
+     "Mercedes-Benz",
+     "S450"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "S55 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "S55 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "S550e",
+    "feed": [
+     "Mercedes-Benz",
+     "S550e"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "S560",
+    "feed": [
+     "Mercedes-Benz",
+     "S560"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "S560e",
+    "feed": [
+     "Mercedes-Benz",
+     "S560e"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "S580",
+    "feed": [
+     "Mercedes-Benz",
+     "S580"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "S65 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "S65 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SL400",
+    "feed": [
+     "Mercedes-Benz",
+     "SL400"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SL43 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "SL43 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SL450",
+    "feed": [
+     "Mercedes-Benz",
+     "SL450"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SL55 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "SL55 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SL600",
+    "feed": [
+     "Mercedes-Benz",
+     "SL600"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SL63 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "SL63 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SL65 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "SL65 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SLC300",
+    "feed": [
+     "Mercedes-Benz",
+     "SLC300"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SLC43 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "SLC43 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SLK250",
+    "feed": [
+     "Mercedes-Benz",
+     "SLK250"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SLK32 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "SLK32 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "SLK55 AMG",
+    "feed": [
+     "Mercedes-Benz",
+     "SLK55 AMG"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "Sprinter 1500",
+    "feed": [
+     "Mercedes-Benz",
+     "Sprinter 1500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "Sprinter 2500",
+    "feed": [
+     "Mercedes-Benz",
+     "Sprinter 2500"
+    ],
+    "why": "1/16 vPIC decodes name another make (M6 over 2%)"
+   },
+   {
+    "cat_make": "Mercedes-Benz",
+    "cat_model": "Sprinter 3500XD",
+    "feed": [
+     "Mercedes-Benz",
+     "Sprinter 3500XD"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "mb",
+ "proposals": [
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300CD",
+   "feed_cars": 0,
+   "fitment_rows": 9,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "300CD",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300SDL",
+   "feed_cars": 0,
+   "fitment_rows": 15,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "300SDL",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "300Sdl",
+     1
+    ]
+   ]
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "300TE",
+   "feed_cars": 0,
+   "fitment_rows": 36,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "300TE",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "350SD",
+   "feed_cars": 0,
+   "fitment_rows": 11,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "350SD",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "350SDL",
+   "feed_cars": 0,
+   "fitment_rows": 11,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "350SDL",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "380SE",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "380SE",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "380SEL",
+     2
+    ]
+   ]
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "400E",
+   "feed_cars": 0,
+   "fitment_rows": 22,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "400E",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "400SEL",
+   "feed_cars": 0,
+   "fitment_rows": 25,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "400SEL",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "500E",
+   "feed_cars": 0,
+   "fitment_rows": 18,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "500E",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "500SEC",
+   "feed_cars": 0,
+   "fitment_rows": 25,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "500SEC",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "500SEL",
+   "feed_cars": 0,
+   "fitment_rows": 33,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "500SEL",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "600SEC",
+   "feed_cars": 0,
+   "fitment_rows": 23,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "600SEC",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "600SEL",
+   "feed_cars": 0,
+   "fitment_rows": 25,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "600SEL",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "600SL",
+   "feed_cars": 0,
+   "fitment_rows": 13,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "600SL",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "AMG GT",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "AMG GT",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "AMG GT 55",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "AMG GT 55",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "AMG GT 63",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "AMG GT 63",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "AMG GT 63 S",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "AMG GT 63 S",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "AMG GT Black Series",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "AMG GT Black Series",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "AMG GT C",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "AMG GT C",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "AMG GT R",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "AMG GT R",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "AMG GT R Pro",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "AMG GT R Pro",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "AMG GT S",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "AMG GT S",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "B Electric Drive",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "B Electric Drive",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "B250e",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "B250e",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C32 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 46,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "C32 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C350e",
+   "feed_cars": 0,
+   "fitment_rows": 37,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "C350e",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C400",
+   "feed_cars": 0,
+   "fitment_rows": 38,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "C400",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C450 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 38,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "C450 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C55 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 41,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "C55 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 114,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "C63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C63 AMG S",
+   "feed_cars": 0,
+   "fitment_rows": 36,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "C63 AMG S",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "C63 AMG S E Performance",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "C63 AMG S E Performance",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CL63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 9,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "CL63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CL65 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 31,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "CL65 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLA45 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 54,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "CLA45 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLA45 AMG S",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "CLA45 AMG S",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLK63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 41,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "CLK63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLS400",
+   "feed_cars": 0,
+   "fitment_rows": 17,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "CLS400",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLS55 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 35,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "CLS55 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLS63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 71,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "CLS63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "CLS63 AMG S",
+   "feed_cars": 0,
+   "fitment_rows": 31,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "CLS63 AMG S",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E250",
+   "feed_cars": 0,
+   "fitment_rows": 50,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "E250",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E400",
+   "feed_cars": 0,
+   "fitment_rows": 115,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "E400",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E43 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 5,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "E43 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E450",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "E450",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E53 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "E53 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 118,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "E63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "E63 AMG S",
+   "feed_cars": 0,
+   "fitment_rows": 50,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "E63 AMG S",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "G500",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "G500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "G55 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 7,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "G55 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "G550",
+   "feed_cars": 0,
+   "fitment_rows": 10,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "G550",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "G63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 5,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "G63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "G65 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "G65 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GL63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 15,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GL63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLA45 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 13,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLA45 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLC300",
+   "feed_cars": 0,
+   "fitment_rows": 13,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLC300",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLC350e",
+   "feed_cars": 0,
+   "fitment_rows": 10,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLC350e",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLC43 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 9,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLC43 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLC63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 8,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLC63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLC63 AMG S",
+   "feed_cars": 0,
+   "fitment_rows": 8,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLC63 AMG S",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLC63 AMG S E Performance",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLC63 AMG S E Performance",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLE300d",
+   "feed_cars": 0,
+   "fitment_rows": 9,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLE300d",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLE400",
+   "feed_cars": 0,
+   "fitment_rows": 14,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLE400",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLE43 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 7,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLE43 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLE450 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLE450 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLE550e",
+   "feed_cars": 0,
+   "fitment_rows": 7,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLE550e",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLE580",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLE580",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLE63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 10,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLE63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLE63 AMG S",
+   "feed_cars": 0,
+   "fitment_rows": 11,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLE63 AMG S",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLK250",
+   "feed_cars": 0,
+   "fitment_rows": 49,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLK250",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLS350d",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLS350d",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLS450",
+   "feed_cars": 0,
+   "fitment_rows": 7,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLS450",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLS550",
+   "feed_cars": 0,
+   "fitment_rows": 9,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLS550",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLS580",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLS580",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "GLS63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 10,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "GLS63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML250",
+   "feed_cars": 0,
+   "fitment_rows": 21,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "ML250",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML400",
+   "feed_cars": 0,
+   "fitment_rows": 21,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "ML400",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML450",
+   "feed_cars": 0,
+   "fitment_rows": 35,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "ML450",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "ML63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 89,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "ML63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "R63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 51,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "R63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S450",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "S450",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S55 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 51,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "S55 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S550e",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "S550e",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S560",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "S560",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S560e",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "S560e",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S580",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "S580",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "S65 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 60,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "S65 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL400",
+   "feed_cars": 0,
+   "fitment_rows": 8,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SL400",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL43 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SL43 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL450",
+   "feed_cars": 0,
+   "fitment_rows": 9,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SL450",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL55 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 33,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SL55 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL600",
+   "feed_cars": 0,
+   "fitment_rows": 52,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SL600",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL63 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 28,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SL63 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SL65 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 46,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SL65 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLC300",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SLC300",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLC43 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SLC43 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLK250",
+   "feed_cars": 0,
+   "fitment_rows": 11,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SLK250",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLK32 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 23,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SLK32 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "SLK55 AMG",
+   "feed_cars": 0,
+   "fitment_rows": 35,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "SLK55 AMG",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "Sprinter 1500",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "Sprinter 1500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "Sprinter 2500",
+   "feed_cars": 19,
+   "fitment_rows": 44,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "Sprinter 2500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercedes-Benz",
+   "cat_model": "Sprinter 3500XD",
+   "feed_cars": 0,
+   "fitment_rows": 7,
+   "ns": "mb",
+   "proposed": {
+    "make": "Mercedes-Benz",
+    "model": "Sprinter 3500XD",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+}
