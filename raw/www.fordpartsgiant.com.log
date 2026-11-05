@@ -1369,3 +1369,208 @@
 21:10:22 chain-unlinked side-mirrors 1 numbers named by F87Z-17682-AAA, no catalog link: F87Z-17682-PAA
 21:10:22 chain-unlinked side-mirrors 1 numbers named by F87Z-17683-AAB, no catalog link: F87Z-17683-PAA
 21:11:48 time budget reached records=3425
+21:12:00 start site=www.fordpartsgiant.com mode=worklist tiers=['A', 'B'] records=3425 list_lines=244 year_lines=22 url_index=2249
+21:12:00 seg done tier=A Ford F-150 [1997, 2003] seeds=[2001] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-150 [2004, 2008] seeds=[2004] records=3425 errors=13
+21:12:00 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=3425 errors=13
+21:12:00 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=3425 errors=13
+21:12:00 seg done tier=A Ford Edge [2007, 2024] seeds=[2013] records=3425 errors=13
+21:12:00 seg done tier=A Ford Fusion [2013, 2016] seeds=[2014] records=3425 errors=13
+21:12:00 seg done tier=A Ford Escape [2008, 2012] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Ford Escape [2013, 2016] seeds=[2013] records=3425 errors=13
+21:12:00 seg done tier=A Ford Explorer [2002, 2005] seeds=[2002] records=3425 errors=13
+21:12:00 seg done tier=A Ford Taurus [2000, 2007] seeds=[2003] records=3425 errors=13
+21:12:00 seg done tier=A Ford Expedition [2003, 2006] seeds=[2003] records=3425 errors=13
+21:12:00 seg done tier=A Ford Ranger [1998, 2011] seeds=[2000] records=3425 errors=13
+21:12:00 seg done tier=A Ford Fiesta [1978, 2019] seeds=[2011] records=3425 errors=13
+21:12:00 seg done tier=A Ford Focus [2008, 2011] seeds=[2010] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-150 [2009, 2012] seeds=[2010] records=3425 errors=13
+21:12:00 seg done tier=A Ford Fusion [2006, 2009] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Ford Focus [2015, 2018] seeds=[2015] records=3425 errors=13
+21:12:00 seg done tier=A Ford Expedition [1997, 2002] seeds=[2000] records=3425 errors=13
+21:12:00 seg done tier=A Ford Explorer [2006, 2010] seeds=[2006] records=3425 errors=13
+21:12:00 seg done tier=A Ford Explorer [1995, 2001] seeds=[1999] records=3425 errors=13
+21:12:00 seg done tier=A Ford Focus [2005, 2007] seeds=[2007] records=3425 errors=13
+21:12:00 seg done tier=A Ford Explorer [2011, 2015] seeds=[2013] records=3425 errors=13
+21:12:00 seg done tier=A Ford Mustang [1999, 2004] seeds=[2000] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Grand Marquis [1998, 2011] seeds=[2000] records=3425 errors=13
+21:12:00 seg done tier=A Ford Expedition [2007, 2017] seeds=[2007] records=3425 errors=13
+21:12:00 seg done tier=A Ford E-250 [1978, 2014] seeds=[2006] records=3425 errors=13
+21:12:00 seg done tier=A Ford E-150 [1969, 2014] seeds=[1999] records=3425 errors=13
+21:12:00 seg done tier=A Ford Escape [2005, 2007] seeds=[2005] records=3425 errors=13
+21:12:00 seg done tier=A Ford Crown Victoria [1998, 2011] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Ford Focus [2000, 2004] seeds=[2003] records=3425 errors=13
+21:12:00 seg done tier=A Ford Ranger [1993, 1997] seeds=[1997] records=3425 errors=13
+21:12:00 seg done tier=A Ford Mustang [2005, 2009] seeds=[2006] records=3425 errors=13
+21:12:00 seg done tier=A Ford E-350 [1970, 2021] seeds=[2006] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-250 Super Duty [1980, 2024] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Ford Flex [2009, 2019] seeds=[2009] records=3425 errors=13
+21:12:00 seg done tier=A Ford Escape [2001, 2004] seeds=[2003] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-150 [1992, 1996] seeds=[1995] records=3425 errors=13
+21:12:00 seg done tier=A Ford Explorer Sport Trac [2001, 2017] seeds=[2001] records=3425 errors=13
+21:12:00 seg done tier=A Ford Taurus [2013, 2019] seeds=[2013] records=3425 errors=13
+21:12:00 seg done tier=A Ford Taurus [2010, 2012] seeds=[2011] records=3425 errors=13
+21:12:00 seg done tier=A Ford Five Hundred [2005, 2007] seeds=[2005] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-250 [1962, 1998] seeds=[1997] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln Town Car [2003, 2011] seeds=[2003] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-250 [1999, 2007] seeds=[1999] records=3425 errors=13
+21:12:00 seg done tier=A Ford Escape [2017, 2019] seeds=[2017] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-150 [2013, 2014] seeds=[2013] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Mariner [2005, 2011] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln Navigator [2003, 2006] seeds=[2004] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Milan [2006, 2011] seeds=[2010] records=3425 errors=13
+21:12:00 seg done tier=A Ford Mustang [1994, 1998] seeds=[1998] records=3425 errors=13
+21:12:00 seg done tier=A Ford Escort [1983, 2003] seeds=[1998] records=3425 errors=13
+21:12:00 seg done tier=A Ford Ranger [1978, 1992] seeds=[1992] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln Town Car [1998, 2002] seeds=[2000] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln MKX [2007, 2010] seeds=[2007] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-150 [1987, 1991] seeds=[1990] records=3425 errors=13
+21:12:00 seg done tier=A Ford Freestar [2004, 2007] seeds=[2004] records=3425 errors=13
+21:12:00 seg done tier=A Ford Freestyle [2005, 2007] seeds=[2005] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-350 Super Duty [1999, 2021] seeds=[2004] records=3425 errors=13
+21:12:00 seg done tier=A Ford Mustang [2010, 2014] seeds=[2010] records=3425 errors=13
+21:12:00 seg done tier=A Ford Taurus [1996, 1999] seeds=[1999] records=3425 errors=13
+21:12:00 seg done tier=A Ford Transit Connect [2010, 2013] seeds=[2010] records=3425 errors=13
+21:12:00 seg done tier=A Ford Fusion [2017, 2018] seeds=[2017] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln Town Car [1969, 1997] seeds=[1997] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln LS [2000, 2006] seeds=[2005] records=3425 errors=13
+21:12:00 seg done tier=A Ford Windstar [2001, 2003] seeds=[2003] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Sable [2000, 2005] seeds=[2003] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln MKS [2009, 2016] seeds=[2009] records=3425 errors=13
+21:12:00 seg done tier=A Ford Taurus [2008, 2009] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Mountaineer [2002, 2005] seeds=[2002] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln MKZ [2010, 2012] seeds=[2012] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln MKZ [1996, 2009] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln Navigator [2007, 2016] seeds=[2007] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Grand Marquis [1972, 1997] seeds=[1997] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln Navigator [1998, 2002] seeds=[2000] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-250 [2008, 2016] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Ford Explorer [1991, 1994] seeds=[1994] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Mountaineer [2006, 2010] seeds=[2007] records=3425 errors=13
+21:12:00 seg done tier=A Ford Fusion Hybrid [2010, 2019] seeds=[2010] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-350 [1960, 1998] seeds=[1990] records=3425 errors=13
+21:12:00 seg done tier=A Ford Thunderbird [1961, 2004] seeds=[1997] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln Continental [1964, 2017] seeds=[2000] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-150 [1966, 1986] seeds=[1986] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-350 [1999, 2007] seeds=[2004] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln MKX [2011, 2015] seeds=[2011] records=3425 errors=13
+21:12:00 seg done tier=A Ford Explorer [2016, 2017] seeds=[2016] records=3425 errors=13
+21:12:00 seg done tier=A Ford Crown Victoria [1982, 1997] seeds=[1997] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln MKZ [2013, 2016] seeds=[2014] records=3425 errors=13
+21:12:00 seg done tier=A Ford Escape Hybrid [2005, 2011] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Cougar [1967, 2002] seeds=[1999] records=3425 errors=13
+21:12:00 seg done tier=A Lincoln Aviator [2003, 2020] seeds=[2004] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-150 [2015, 2020] seeds=[2016] records=3425 errors=13
+21:12:00 seg done tier=A Ford Expedition EL [2007, 2017] seeds=[2008] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Montego [1971, 2007] seeds=[2005] records=3425 errors=13
+21:12:00 seg done tier=A Ford Econoline [1963, 2013] seeds=[2006] records=3425 errors=13
+21:12:00 seg done tier=A Ford Excursion [2000, 2005] seeds=[2000] records=3425 errors=13
+21:12:00 seg done tier=A Ford F-150 Heritage [2004, 2011] seeds=[2004] records=3425 errors=13
+21:12:00 seg done tier=A Ford E-350 Super Duty [1999, 2015] seeds=[2006] records=3425 errors=13
+21:12:00 seg done tier=A Mercury Mountaineer [1997, 2001] seeds=[2000] records=3425 errors=13
+21:12:24 chain-unlinked alternator 1 numbers named by FU2Z-10V346-MRM, no catalog link: FU2Z-10V346-ALRM
+21:12:40 chain-unlinked ac-compressor 1 numbers named by 8G1Z-19703-AA, no catalog link: 9G1Z-19703-B
+21:12:40 chain-unlinked ac-compressor 1 numbers named by AU2Z-19V703-AB, no catalog link: 9G1Z-19703-B
+21:14:40 chain-unlinked window-regulator 1 numbers named by 8F9Z-5423395-A, no catalog link: 7F9Z-7423395-A
+21:14:40 chain-unlinked window-regulator 1 numbers named by 8A4Z-7423208-A, no catalog link: 8F9Z-7423208-A
+21:16:56 chain-unlinked fuel-pump-module 1 numbers named by 8A4Z-9H307-A, no catalog link: 8A4Z-9H307-C
+21:17:28 chain-unlinked power-steering-pump 2 numbers named by 8G1Z-3A674-ARM, no catalog link: 9G1Z-3A674-A, STP-194
+21:17:36 seg done tier=A Ford Taurus X [2008, 2009] seeds=[2008] records=3450 errors=13
+21:18:16 chain-unlinked alternator 1 numbers named by 1L2Z-10346-AB, no catalog link: 4U2Z-10V346-ELRM
+21:18:16 chain-unlinked alternator 1 numbers named by 1L2Z-10V346-ADRM, no catalog link: 4U2Z-10V346-ELRM
+21:18:24 chain-unlinked starter 1 numbers named by G2MZ-11002-AJ, no catalog link: NSA-8446-N
+21:18:24 chain-unlinked starter 1 numbers named by G2MZ-11002-B, no catalog link: NSA-8437-N
+21:18:33 chain-unlinked ac-compressor 1 numbers named by G2MZ-19V703-L, no catalog link: HU2Z-19703-F
+21:19:37 chain-unlinked window-regulator 1 numbers named by F67Z-7823208-AA, no catalog link: 3L2Z-7823208-AA
+21:20:19 chain-unlinked fuel-pump-module 1 numbers named by 2L2Z-9H307-HB, no catalog link: 2L2Z-9H307-HD
+21:20:19 chain-unlinked fuel-pump-module 1 numbers named by XL2Z-9H307-AK, no catalog link: XL2Z-9H307-A
+21:20:32 chain-unlinked throttle-body 1 numbers named by F77Z-9E926-AD, no catalog link: F77Z-9E926-AC
+21:20:40 chain-unlinked power-steering-pump 1 numbers named by F77Z-3A674-EBRM, no catalog link: F77Z-3A674-EARM
+21:20:48 nav-fail Ford Explorer Sport 2009: ValueError: no 2009 catalog for Ford Explorer Sport (ford-['explorer_sport'])
+21:20:48 seg done tier=A Ford Explorer Sport [2001, 2014] seeds=[2001, 2009] records=3457 errors=14
+21:21:20 chain-unlinked ac-compressor 1 numbers named by FV6Z-19703-B, no catalog link: FV6Z-19703-C
+21:24:04 chain-unlinked side-mirrors 1 numbers named by DM5Z-17682-A, no catalog link: DM5Z-17682-H
+21:24:04 chain-unlinked side-mirrors 1 numbers named by DM5Z-17682-B, no catalog link: DM5Z-17682-J
+21:24:04 chain-unlinked side-mirrors 1 numbers named by DM5Z-17683-A, no catalog link: DM5Z-17683-F
+21:24:04 chain-unlinked side-mirrors 1 numbers named by DM5Z-17683-B, no catalog link: DM5Z-17683-E
+21:24:44 chain-unlinked window-regulator 1 numbers named by DM5Z-5823200-C, no catalog link: WLRA-137
+21:24:44 chain-unlinked window-regulator 1 numbers named by DM5Z-5823201-C, no catalog link: WLRA-138
+21:25:24 chain-unlinked window-regulator 1 numbers named by DM5Z-7827000-B, no catalog link: DM5Z-7827000-E
+21:25:24 chain-unlinked window-regulator 1 numbers named by DM5Z-7827000-C, no catalog link: DM5Z-7827000-E
+21:25:24 chain-unlinked window-regulator 1 numbers named by DM5Z-7827001-B, no catalog link: DM5Z-7827001-E
+21:25:24 chain-unlinked window-regulator 1 numbers named by DM5Z-7827001-C, no catalog link: DM5Z-7827001-E
+21:25:24 chain-unlinked window-switch 1 numbers named by CV6Z-14529-A, no catalog link: F1EZ-14529-B
+21:25:32 chain-unlinked window-switch 1 numbers named by CV6Z-14529-F, no catalog link: F1EZ-14529-A
+21:25:56 chain-unlinked climate-control 1 numbers named by DM5Z-19980-B, no catalog link: DM5Z-19980-C
+21:26:28 chain-unlinked fuel-pump-module 1 numbers named by FV6Z-9H307-C, no catalog link: FV6Z-9H307-G
+21:26:28 chain-unlinked fuel-pump-module 1 numbers named by FV6Z-9H307-E, no catalog link: FV6Z-9H307-L
+21:26:28 seg done tier=A Ford C-Max [2013, 2017] seeds=[2013] records=3484 errors=14
+21:27:24 chain-unlinked alternator 1 numbers named by XF2Z-10V346-AARM, no catalog link: 4U2Z-10V346-EARM
+21:27:32 chain-unlinked alternator 1 numbers named by XF2Z-10V346-BARM, no catalog link: 4U2Z-10V346-FDRM
+21:31:00 chain-unlinked fuel-pump-module 1 numbers named by XF2Z-9H307-BA, no catalog link: XF2Z-9H307-BB
+21:32:52 seg done tier=A Ford Windstar [1999, 2000] seeds=[2000] records=3494 errors=14
+21:33:24 chain-unlinked alternator 1 numbers named by CJ5Z-10346-B, no catalog link: CJ5Z-10346-K
+21:33:56 chain-unlinked ac-compressor 1 numbers named by CV6Z-19703-L, no catalog link: YCC-293
+21:34:36 chain-unlinked headlights 1 numbers named by DT1Z-13008-A, no catalog link: DT1Z-13008-Q
+21:34:36 chain-unlinked headlights 1 numbers named by DT1Z-13008-D, no catalog link: DT1Z-13008-N
+21:34:36 chain-unlinked headlights 1 numbers named by DT1Z-13008-C, no catalog link: DT1Z-13008-P
+21:34:36 chain-unlinked headlights 1 numbers named by DT1Z-13008-B, no catalog link: DT1Z-13008-R
+21:35:17 chain-unlinked tail-lights 1 numbers named by DT1Z-13404-A, no catalog link: DT1Z-13404-D
+21:35:17 chain-unlinked tail-lights 1 numbers named by DT1Z-13405-A, no catalog link: DT1Z-13405-D
+21:35:17 chain-unlinked tail-lights 1 numbers named by DT1Z-13404-B, no catalog link: DT1Z-13404-F
+21:35:17 chain-unlinked tail-lights 1 numbers named by DT1Z-13405-B, no catalog link: DT1Z-13405-F
+21:37:01 chain-unlinked side-mirrors 1 numbers named by DT1Z-17682-A, no catalog link: DT1Z-17682-S
+21:37:01 chain-unlinked side-mirrors 1 numbers named by DT1Z-17682-B, no catalog link: DT1Z-17682-T
+21:37:01 chain-unlinked side-mirrors 1 numbers named by DT1Z-17682-D, no catalog link: DT1Z-17682-U
+21:37:01 chain-unlinked side-mirrors 1 numbers named by DT1Z-17682-E, no catalog link: DT1Z-17682-V
+21:37:01 chain-unlinked side-mirrors 1 numbers named by DT1Z-17683-A, no catalog link: DT1Z-17683-S
+21:37:01 chain-unlinked side-mirrors 1 numbers named by DT1Z-17683-B, no catalog link: DT1Z-17683-T
+21:37:01 chain-unlinked side-mirrors 1 numbers named by DT1Z-17683-D, no catalog link: DT1Z-17683-U
+21:37:01 chain-unlinked side-mirrors 1 numbers named by DT1Z-17683-E, no catalog link: DT1Z-17683-V
+21:37:40 chain-unlinked window-regulator 1 numbers named by 6CPZ-9923394-C, no catalog link: WLM-231
+21:37:40 chain-unlinked window-regulator 1 numbers named by 6CPZ-5423395-B, no catalog link: WLM-227
+21:37:40 chain-unlinked window-regulator 1 numbers named by 6CPZ-5423395-D, no catalog link: WLM-229
+21:37:40 chain-unlinked window-regulator 1 numbers named by 6CPZ-9923394-E, no catalog link: WLM-234
+21:38:20 chain-unlinked window-regulator 1 numbers named by DT1Z-1727000-A, no catalog link: DT1Z-1727000-C
+21:38:20 chain-unlinked window-regulator 1 numbers named by DT1Z-1727000-B, no catalog link: DT1Z-1727000-D
+21:38:20 chain-unlinked window-regulator 1 numbers named by DT1Z-1727001-A, no catalog link: DT1Z-1727001-D
+21:38:20 chain-unlinked window-regulator 1 numbers named by DT1Z-1727001-B, no catalog link: DT1Z-1727001-C
+21:38:20 chain-unlinked window-regulator 1 numbers named by 6CPZ-5423395-A, no catalog link: WLM-226
+21:38:20 chain-unlinked window-regulator 1 numbers named by 6CPZ-5423395-C, no catalog link: WLM-228
+21:38:20 chain-unlinked window-regulator 3 numbers named by 6CPZ-9923394-B, no catalog link: 6CPZ-9923394-A, WLM-232, WLM-265
+21:38:20 chain-unlinked window-regulator 1 numbers named by 6CPZ-9923394-D, no catalog link: WLM-233
+21:39:00 chain-unlinked climate-control 1 numbers named by DT1Z-19980-A, no catalog link: DT1Z-19980-Q
+21:39:00 chain-unlinked climate-control 1 numbers named by DT1Z-19980-D, no catalog link: DT1Z-19980-P
+21:39:00 chain-unlinked climate-control 1 numbers named by DT1Z-19980-E, no catalog link: DT1Z-19980-M
+21:39:24 chain-unlinked fuel-pump-module 1 numbers named by DV6Z-9H307-F, no catalog link: DV6Z-9H307-R
+21:39:24 seg done tier=A Ford Transit Connect [2014, 2022] seeds=[2015] records=3530 errors=14
+21:39:48 chain-unlinked alternator 1 numbers named by DS7Z-10346-H, no catalog link: DS7Z-10346-T
+21:39:48 chain-unlinked alternator 1 numbers named by G2GZ-10346-A, no catalog link: GL-8680
+21:39:48 chain-unlinked alternator 1 numbers named by G2GZ-10346-B, no catalog link: G2GZ-10346-H
+21:39:48 chain-unlinked alternator 1 numbers named by G2GZ-10346-C, no catalog link: G2GZ-10346-J
+21:39:48 chain-unlinked alternator 1 numbers named by HS7Z-10346-A, no catalog link: GL-8679
+21:39:48 chain-unlinked alternator 1 numbers named by HU2Z-10V346-AARM, no catalog link: HU2Z-10V346-BYRM
+21:39:56 chain-unlinked starter 1 numbers named by CJ5Z-11002-B, no catalog link: SA-1015
+21:40:36 chain-unlinked ac-compressor 1 numbers named by DS7Z-19703-G, no catalog link: DS7Z-19703-H
+21:40:36 chain-unlinked ac-compressor 1 numbers named by DG9Z-19703-D, no catalog link: YCC-306
+21:40:36 chain-unlinked ac-compressor 1 numbers named by DG9Z-19703-N, no catalog link: DG9Z-19703-AG
+21:40:44 chain-unlinked headlights 1 numbers named by HS7Z-13008-C, no catalog link: HS7Z-13008-AA
+21:40:44 chain-unlinked headlights 1 numbers named by HS7Z-13008-F, no catalog link: HS7Z-13008-AB
+21:41:24 chain-unlinked tail-lights 1 numbers named by KS7Z-13404-D, no catalog link: KS7Z-13404-F
+21:41:24 chain-unlinked tail-lights 1 numbers named by KS7Z-13404-E, no catalog link: KS7Z-13404-G
+21:41:24 chain-unlinked tail-lights 1 numbers named by KS7Z-13405-F, no catalog link: KS7Z-13405-J
+21:41:24 chain-unlinked tail-lights 1 numbers named by KS7Z-13405-G, no catalog link: KS7Z-13405-K
+21:41:24 chain-unlinked tail-lights 1 numbers named by HS7Z-13404-D, no catalog link: HS7Z-13404-J
+21:41:24 chain-unlinked tail-lights 1 numbers named by HS7Z-13405-D, no catalog link: HS7Z-13405-J
+21:43:40 chain-unlinked side-mirrors 1 numbers named by JS7Z-17683-DB, no catalog link: DS7Z-17683-DAPTM
+21:43:40 chain-unlinked side-mirrors 1 numbers named by FS7Z-17683-BB, no catalog link: FS7Z-17683-BC
+21:43:40 chain-unlinked side-mirrors 1 numbers named by FS7Z-17682-BB, no catalog link: FS7Z-17682-BC
+21:43:40 chain-unlinked side-mirrors 1 numbers named by FS7Z-17682-CB, no catalog link: FS7Z-17682-CC
+21:43:48 chain-unlinked window-regulator 1 numbers named by DS7Z-5423208-A, no catalog link: HS7Z-5423208-A
+21:43:48 chain-unlinked window-regulator 1 numbers named by DS7Z-5423209-D, no catalog link: HS7Z-5423209-A
+21:43:56 chain-unlinked window-switch 1 numbers named by DG9Z-14529-CA, no catalog link: DG9Z-14529-CC
+21:44:28 chain-unlinked fuel-pump-module 4 numbers named by DG9Z-9H307-Y, no catalog link: DG9Z-9H307-A, DG9Z-9H307-N, PFS-955, PFS-996
+21:44:28 chain-unlinked fuel-pump-module 4 numbers named by DG9Z-9H307-AC, no catalog link: DG9Z-9H307-X, DG9Z-9H307-K, PFS-1004, PFS-980
+21:44:28 chain-unlinked fuel-pump-module 4 numbers named by DG9Z-9H307-Z, no catalog link: DG9Z-9H307-C, DG9Z-9H307-P, PFS-957, PFS-997
+21:44:28 chain-unlinked fuel-pump-module 1 numbers named by EG9Z-9H307-B, no catalog link: EG9Z-9H307-D
+21:44:28 time budget reached records=3554
