@@ -45,6 +45,95 @@ SimplePart: 363/363.
 | ~01:45 | www.infinitipartsdeal.com | 355 | 0 | 0 | 0 | 0 | 0.0% |
 | ~01:45 | www.dbelectrical.com (aftermarket) | 363 | 0 | 0 | 0 | 0 | 0.0% |
 
+### Checkpoint audit ~02:05 UTC (all sites on oem-raw)
+
+Category hits are a heuristic; "real" is the count left after reading every
+hit by hand.
+
+| site | records | E | C (heuristic) | C real | D | F |
+|---|---|---|---|---|---|---|
+| toyotapartsnow | 757 | 0 | 14 | 0 (2 records + policy question T1) | 0 | 0 |
+| jeeppartsdeal | 748 | 0 | 1 | 1 (5143152AA, exclude list) | 0 | 0 |
+| gmpartsgiant | 453 | 0 | 104 | 0 | 0 | 0 |
+| fordpartsgiant | 654 | 0 | 2 | 0 | 0 | 3 |
+| moparpartsgiant | 759 | 0 | 2 | 1 (LBK13001, exclude list) | 0 | 3 |
+| nissanpartsdeal | 707 | 0 | 0 | 0 | 0 | 0 |
+| infinitipartsdeal | 645 | 0 | 0 | 0 | 0 | 0 |
+| hondapartsnow | 244 | 0 | 0 | 0 | 0 | 0 |
+| acurapartswarehouse | 224 | 0 | 1 | 0 | 0 | 0 |
+| hyundaipartsdeal | 355 | 0 | 99 | 0 (+ policy question P1) | 0 | 0 |
+| kiapartsnow | 349 | 0 | 136 | 0 (+ policy question P1) | 0 | 0 |
+| subarupartsdeal | 330 | 0 | 37 | 0 | 0 | 0 |
+| lexuspartsnow | 392 | 0 | 6 | 0 | 0 | 0 |
+| bmwpartsdeal | 297 | 0 | 134 | 0 | 0 | 0 |
+| vwpartsgiant | 298 | 0 | 14 | 0 | 0 | 0 |
+| mitsubishipartsgiant | 242 | 0 | 7 | 0 | 0 | 0 |
+| dbelectrical (aftermarket) | 630 | 0 | 0 | 0 | 0 | 0 |
+
+Later checkpoints: DB Electrical 02:41 (726 records) and 03:09 (799): 0 E,
+0 C, 0 F. As of 03:12 the dealer-site files are unchanged since ~02:05.
+03:14 checkpoints: Acura 334 records (0 E; 2 C, both correct: 34156-SEC-A51
+is the TSX deck-lid tail lamp "Lamp Unit, L."; 06388-P5A-505RM is a reman
+compressor "(RMD) (INCLUDES CLUTCH & COIL)", kept because the page lists no
+new number). Jeep 912 records (0 E; the only C is 5143152AA, already on the
+exclude list).
+03:18-03:20 checkpoints: BMW 458, GM 554, Honda 384, Infiniti 819 records;
+0 E. The 128 new C hits (BMW 86, GM 42) repeat patterns already read and
+judged correct: BMW headlights that "do not contain" covers or modules,
+mirrors "w/o glass", trunk-lid/side-panel tail lamps, "Drive for window
+lifter"; GM "(INCLUDES n-m)" assemblies, "DOOR LOCK & SIDE WINDOW" switches.
+Real C: 0.
+03:23-03:26 checkpoints: Hyundai 582, Ford 866, Jeep 959 records; 0 E. The
+new C hits are Hyundai fit notes ("O/S RR VIEW MRR LABEL", "SIDE REPEATER
+LAMP", "ANTI-FOG", "W/ OIL-SEPARATOR", "LED(W/BULB T/SIGNAL)"), door
+modules (P1, hub-decided) and Ford AE8Z-9H307-H "Kit" (base 9H307, "Fuel
+Pump/Sending Unit"). Real C: 0.
+DB Electrical 03:37: 1136 records, 0 E/C/F. Dealer files unchanged at 03:43.
+
+The auditor's first pass on Honda, Acura and BMW reported 100% E. That was
+the auditor: those modules declare `trim_col` ("Body & Trim") and
+`option_col` ("Emission & Transmission", "Submodel"), which it now reads from
+CFG. One VW E was a rendered double space ("2020-2022,  2012-2015"); the
+SimplePart template collapses whitespace on purpose, and the auditor now
+does too.
+
+Hits read and found correct: assemblies with their contents spelled out
+(GM "(INCLUDES 2-10)", "W/HARNESS", "W/CHROME CAP"; Kia/Hyundai mirrors with
+"SIDE REPEATER LAMP" and label notes; Subaru mirrors by paint colour; Lexus
+and Kia "level"/levelling headlamps; Subaru "Chamber And Sensor
+Assembly-Throttle"; Toyota "Lens&Body, Rear Combination Lamp" short-named
+"Lens"; Mitsubishi 8301xxxx "Lens & Housing" headlamps; Ford 23394 "Control
+Unit"/"Module" = "Window Operating Motor Assembly"; BMW "Drive for window
+lifter", "Tandem pump", "Rear light in trunk lid / side panel").
+
+Policy questions for the hub (not errors):
+- **T1, Toyota climate-control sub-assemblies.** The rule keeps "Control
+  Sub-Assembly, Heater" (55901/55902/55903) as well as the full control
+  assemblies (55900/55910). On Japan-built cars without climate control the
+  list notes describe single switch modules: 55903-12100 "Temp Control",
+  55901-12170 "Air Mode Control" (name "Temperature Switch"). They are not
+  the whole control head. Curators should keep them apart from the full
+  assemblies. To drop them, the Toyota rule would exclude sub-assemblies
+  whose list note says Temp/Air Mode/Blower Control.
+- **P1, door module panels as window regulators.** Hyundai and Kia keep
+  "Panel Assy-Front/Rear Door Module" (e.g. 82471-3Q000, Sonata), the panel
+  that carries the regulator. The Nissan module drops "Module Assy-Front
+  Door" on purpose. The sites should follow one policy.
+
+Scope notes for curators:
+- BMW sells "Exterior mirror w/o glass" (51-16-7-268-261/-277) and
+  headlights that "do not comprise ignition control unit and Xenon light
+  bulb" (63-12-3-418-395/396). A pulled unit can include more than the part
+  number covers.
+- VW names outside mirrors "Housing Assembly" (1K1-857-507-DH-9B9).
+- F hits are list-page parts whose own fitment omits the seed vehicle.
+  Ford DG1Z-10346-E and FJ7Z-10346-A came from the 2014 Fusion page but list
+  Edge/Taurus/MKC/MKZ only, and HU2Z-10V346-CJRM lists the Fusion but not
+  2014. Mopar R5233006 came from the 1990 D150 starter page but lists only
+  K-car family Chryslers. The other two Mopar F hits are the auditor
+  comparing the feed name "Ram 1500" with the catalog's "D150". Being listed
+  on a vehicle's page is not fitment; only the product page's own rows are.
+
 Ford 01:43: the first pass raised 107 category hits, all heuristic. Ford
 names are generic ("Lamp Assy", "Sender And Pump Assy"), its list info is
 fit notes about contents ("Body and lens", "Includes Clutch (19D786)",

@@ -467,6 +467,204 @@ What a curator must know:
 - 2010 TL has no power-steering-pump diagram. 1997 Accord DX has no starter diagram.
 - Distributor-era ignition (pre-1998 Accord, 2002 Accord DX): no coil diagram.
 
+### SimplePart "giant" variant: VW, Mazda, Mercedes-Benz (session_016ZzJfHbzhf7ZAm4Xt8ok79, 2026-11-05)
+
+Modules: `sites/vwpartsgiant.py`, `sites/mazdapartsnow.py`, `sites/mbpartsgiant.py`,
+all on `_simplepart.py`. These stores use `/<year>-<make>-<model>-parts` year pages
+and `/genuine/` product pages, and print only a short site name per list row. So
+rules are anchored exact names on each category's own pages. Where the list page
+cannot tell, a product-page check decides (`product_rules`, matched text kept in
+`product_check`).
+
+Trials (tier A, 2 segments). Every record was checked field by field against
+the cached page:
+
+| site | records | match | notes |
+|---|---|---|---|
+| vwpartsgiant | 108 | 108/108 | |
+| mazdapartsnow | 128 | 128/128 | |
+| mbpartsgiant | 117 | 117/117 fields | 1 record `evidence_truncated:158` (a 54-row table; fitment complete, evidence capped at 120 lines) |
+
+Curator notes:
+- **Site mislabels caught by product checks.** Mazda L39C-18-881J is listed as
+  "Alternator" but its product page says "Module, Powertrain Control". MB
+  271-155-01-15 is listed as "Alternator (5.5L)" but its product page says
+  "Pulley" and its fitment is the C230 1.8L. Both are now excluded:
+  alternator/starter rows must agree with their product page.
+- **Not crawled, because the page does not print what the category needs:**
+  - VW door shells ("Door Frame Assembly" / "Door Inner"; front vs rear never
+    printed).
+  - MB door shells (even the passenger shell reads "Driver's Door").
+  - MB fuel pump ("Auxiliary Pump" / "Exchange Suction Jet Pump").
+  - MB mirrors ("Mirror Housing" = "Frame").
+  - MB climate control (only generic "Switch Assembly" / "Control Module").
+- **Mazda door shells are crawled.** The product page prints "Body(Right),
+  Rear Door", and that text decides door-front vs door-rear.
+- **Mirrors carry a `category_note`.** VW lists the mirror as "Housing
+  Assembly" / "Mirror Housing" (product "Housing" or "Repair Kit"). Mazda
+  "Mirror Assembly" rows can read "Sub Mirror(Left/Right), Door". Neither page
+  says whether glass and cap are included.
+- **Fuel pumps.** A plain "Fuel Pump" row can be the engine's high-pressure pump
+  (VW 06F-127-025-M, Mazda L3K9-13-35ZC), so only "Fuel Pump Assembly" is taken.
+- **Window switch.** Mazda and MB keep only switches whose product Position is
+  "Driver Side". VW and Jeep keep both sides, with a `category_note` saying so.
+- **Reman.** A number is reman only if every list row for it says so. VW prints
+  06F-903-023-FX on a "New" row and on a "Remanufactured" row. Mazda and MB mark
+  reman only on the product page (`other_names` "Reman Alternator"), so those
+  rows carry `reman: false` from the list page.
+- **Mazda model slugs.** "Mazda3" maps to `3`, CX-9 to `cx_9`. MX-5 Miata is
+  `miata` through 2005 and `mx_5_miata` from 2006. The feed's "B-Series" and
+  "Truck" map to no single catalog model (b2300/b3000/b4000 by engine), so they
+  fail navigation instead of guessing (156 cars).
+- **MB class names are expanded to badges.** A feed class name ("C-Class",
+  "SLK", "300") is crawled through every badge of that class whose model page
+  lists the year. Fitment prints badges ("C300", "C63 AMG"), and the seed model
+  stays the class name. crawl.py's coverage check cannot match class to badge,
+  so these segments use all 3 seeds.
+- 02:03-02:18 UTC incident: with ~14 separate Actions runs (one per site,
+  4 s per site, ~3.5 req/s across the dealer network), Toyota, Jeep and
+  Mopar timed out at 02:03-02:05, vwpartsgiant answered HTTP 503 (02:04) and
+  moparpartsgiant HTTP 403 (02:18). The breaker stopped both; their .blocked
+  markers on oem-raw stay (no retries without an owner decision). Response
+  (b23fd65): 8 s per site, ONE capped run for all sites (max-parallel 8,
+  ~1 req/s network-wide), all separate runs cancelled (<= 1 slice lost per
+  site), 15-minute cool-down, then a single "all" dispatch. Records on
+  oem-raw at 02:30: 8,084 across 17 files.
+- 02:25 UTC: CURATION_SPEC.md landed (24c031b; build/review stopped on the
+  account's 5-hour usage limit). Hub workflow wf_9b3745bc-31f now builds three
+  tracks on branches: Phase 0 guards + hybrid fix, crawler R1/R2/R4/R5/R6,
+  offline curation pipeline. Owner questions are in CURATION_SPEC.md §13.
+
+### Mitsubishi, Volvo, Audi (session_016ZzJfL2a85N1tgt5nnonXc, 2026-11-05)
+
+Modules `sites/mitsubishipartsgiant.py` (d4b38a8), `sites/volvopartsgiant.py`
+(fbfddf7), `sites/audipartsgiant.py` (4c57cb7 + side-mirror note), shared subclass
+`sites/_sp_slugrules.py` (SlugCheckedSimplePart), template option
+`slug_checks` (additive, default off). Tests `tests/test_mitsubishipartsgiant.py`
+(46 checks), `tests/test_volvopartsgiant.py` (32), `tests/test_audipartsgiant.py`
+(32); page checks are cache-only and skip in CI.
+
+Trials (tier A, 2 segments). An independent checker re-read each cached page
+(rendered text + embedded store): pn, list name, position, replaces /
+replaced-by, every fitment cell, year spans incl. multi-span cells, evidence
+lines.
+- Mitsubishi (Lancer 2008-17, 2002-07): 47 records, 0 errors, 47/47 match.
+- Volvo (XC90, S60): 100 records, 1 nav miss (the catalog has no 2010 S60
+  page, HTTP 404), 100/100 match.
+- Audi (A4 seeds 2008/2001/2018, A6 seeds 2008/2004/2014): 183 records,
+  0 errors, no refusals (8 s/site pace), 183/183 match.
+
+What a curator must know (all three are the "giant" SimplePart variant):
+- **Strict selection.** List names are site names and they are loose
+  (Mitsubishi lists bolt 7812A133 as "Dehydrator"; Volvo 850 lists a fuel
+  gauge as "Cluster"). A row is kept only when the list name AND the
+  product URL's name slug both name the assembly. Exclusions and the reman
+  test also read the slug.
+- **Reman / exchange.** `reman: true` comes from the list page (notes, name,
+  slug "remanufactured-starter") or the product page's own names
+  (Mitsubishi M984944D "Remanufactured Alternat", Volvo 8251551 "Reman
+  Starter"). Volvo "Alternator, Exchange" gets `exchange_unit: true`. Audi
+  X-suffix numbers are exchange units, but their product pages do not say
+  so; nothing is inferred from the suffix. Their list rows print
+  "Remanufactured", so they drop when a new number is on the same page.
+- **Window switches** never say "master" on any of the three. All
+  front-door "Window Switch" rows are kept; filter on `position` /
+  `list_location`.
+- **Doors.** Mitsubishi and Volvo: door-front / door-rear are decided by the
+  product page's own name ("Panel Assembly, Front Door, Left-Hand"; Volvo
+  "Front Door"), kept in `product_check`. Audi: not crawled; list "Door
+  Shell" and product "Door" never say front or rear.
+- **Lamps.** Mitsubishi and Volvo "Lens & Housing" rows are kept with the
+  assemblies. Their OEM names are "Body, Headlamp" and "Lamp Unit, Tail" (the
+  unit without bulbs/sockets). `name` keeps the printed list name.
+- **Mirrors.** Volvo "Mirror Outside" numbers are mostly paint variants.
+  Older Audi catalogs (2008 A4) sell only mirror parts ("Mirror Housing" =
+  cap, "Motor & Base") and give no record. Newer ones (2012+ A6, 2017+ A4)
+  list "Mirror Assembly", whose Audi name is "Mounting". Those are kept with a
+  `category_note`: whether glass and cap are included is not printed.
+- **Mitsubishi coverage gap.** Multi-trim list pages ("Select your vehicle
+  options") do not always embed every diagram's rows. The 2008 Lancer
+  alternator page has only the components, not the assembly. Missing rows
+  are a coverage gap, never a guess.
+- **Volvo.** "Tail Gate" pages are the wagon/SUV hatch and go to `liftgate`.
+  Trunk lids ("Lid" on the list) are confirmed by the product name "Trunk
+  Lid". "60 Series" (15 cars) names no catalog model, so navigation refuses
+  it. Numbers without fitment rows get fitment [] and `no_fitment_rows`.
+- **Audi navigation.** The catalog files the A8 after 1999 and the 2001-05
+  allroad only as `a8_quattro` / `allroad_quattro`, so those feed years
+  navigate there. Fitment model names stay as printed ("A8 Quattro"). A5
+  navigates only for 2010-14, where the catalog has `a5`. The Audi
+  condition (SOURCES.md) was checked before building: 21/21 list-linked
+  product pages carry fitment in the server HTML. The scout's 3
+  fitment-less samples were reached outside the catalog (one redirects to
+  the home page).
+- **Audi fuel pump.** "Fuel Pump" with slug `fuel-pump` is the engine
+  high-pressure pump (06E-127-025-AB) and is excluded. Only in-tank
+  assembly slugs are kept.
+- **Audi rendered tables** can drop an empty cell (2013-2018 A6 Quattro
+  with no Engine on 06F-133-062-AG) and print double spaces ("2020,  2015-2017").
+  The fitment entry keeps the empty cell (`engines: []`, raw ends "| ").
+- **Cross-make**: none in these catalogs. Cross-model is common (Mitsubishi
+  Lancer/Outlander/Outlander Sport; Volvo P2/P3 platform S60/S80/V70/XC70/XC90;
+  Audi A4/A5/A6/Q3/Q5 2.0T throttle body, A4/A6 starters).
+- Status: all three modules are on main and the trials are checked. Mitsubishi
+  and Volvo are in the hub's capped Actions run. Audi is ready for it.
+
+### Raw-output audit (session_016ZzJfLtcR8MerD7PWDQVoN, 2026-11-05 01:14-03:45 UTC)
+
+- `scraper/oem_fitment/audit.py`: an offline auditor with its own parser. It
+  re-reads each record's evidence_lines (PartsGiant, SimplePart, DB
+  Electrical) and reads only the sites' declared CFG conventions. Run it at
+  each checkpoint: `git show origin/oem-raw:raw/<site>.jsonl > x.jsonl;
+  python3 scraper/oem_fitment/audit.py --table x.jsonl`. Tests:
+  `tests/test_audit.py` (44 checks, single-field corruptions on 4 fixtures).
+  Its category check (C) is a heuristic: read hits by hand. Only E
+  (evidence) is a hard failure. Results and every hand-read pattern are in
+  `scraper/oem_fitment/AUDIT.md`.
+- Result through 03:43: 17 sites, about 11,500 records, 0 evidence
+  mismatches. Two wrong-category records, both on AUDIT.md's "Exclude at
+  curation" list with their rules fixed: LBK13001 (Mopar bulb kit) and
+  5143152AA (Jeep headlamp boot).
+- Rule fixes that came out of the audit and tier B review, hub-approved, in
+  site modules only, each with a regression check:
+  - 695b378: Mopar bulb kit, door shells, fender, coils, deck-lid opening,
+    accessory kits, Magnum liftgate; Infiniti/Nissan G35 "Meter Assy-Analog"
+    cluster.
+  - 3947d2e: GM Equinox cluster and coils, Silverado door shells; Jeep boot.
+- Not done: the manifest check (every pn in a lists/years manifest row with
+  matched=true). R1/R2 manifests had not reached oem-raw by 03:43; add it
+  to audit.py when they do.
+
+## Hub decisions (curation policy)
+
+- 2026-11-05 T1 (Toyota climate-control sub-assemblies 55901/55902/55903,
+  e.g. 55903-12100 "Temp Control", 55901-12170 "Air Mode Control"): keep them
+  in raw exactly as crawled; curation files them under climate-control with
+  packaging "switch-module", a separate slot from full control assemblies
+  (55900/55910). They can only ever match the same packaging, never a full
+  panel.
+- 2026-11-05 P1 (door modules): classify by what the puller removes. Where a
+  catalog sells the regulator ONLY inside the door module (Hyundai/Kia
+  "Panel Assy-Front/Rear Door Module"), keep it under window-regulator with
+  packaging "door-module", matching only other door-module packages and
+  carrying a note that it is the whole module panel. Where a catalog sells a
+  separate regulator (Nissan), door modules stay excluded. Both rules give
+  one answer: a seeker never gets a module offered as a bare regulator, or
+  the reverse.
+- Being listed on a vehicle's catalog page is not fitment; only the part's
+  own fitment rows count (AUDIT.md: Ford DG1Z-10346-E, FJ7Z-10346-A, Mopar
+  R5233006).
+- 2026-11-05 12:20 UTC status: 29,242 records on oem-raw. Done (.done):
+  Acura, Audi, BMW, Infiniti, Jeep, Mazda, Mitsubishi, Volvo, DB Electrical.
+  Crawling: Toyota, GM, Ford, Nissan, Kia, Mercedes. Stopped by the breaker
+  (.blocked): Mopar 403 (02:18), VW 503 (02:04), Hyundai 503 (07:40), Lexus
+  503 (07:40), Honda 503 (07:44), Subaru 403 (10:26). Cause of the 07:40
+  cluster: the 07:02 scheduled run overlapped the 02:43 manual run (~14
+  sites at once). Fix e262ace: workflow-level concurrency (one run at a
+  time) and max-parallel 6 (~0.75 req/s). Owner decision pending: whether a
+  503 (service unavailable, clustered across sites) may be retried once
+  after a cool-down at the slower pace; 403s stay stopped.
+
 ## Phase 0 claim removals, CURATION_SPEC §7.2 P0.1-P0.6 (branch worktree-wf_9b3745bc-31f-1, 2026-11-05)
 
 Not merged or pushed; four commits on the branch (audit, data, app, this

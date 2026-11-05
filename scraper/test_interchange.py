@@ -915,7 +915,14 @@ _HYB_AMBIG = [
     ("hk-theta2gdi", "Hyundai", "Sonata", 2012, None),
     ("hk-theta2gdi", "Kia", "Optima", 2013, None),
     ("gm-gen4-truck", "Chevrolet", "Silverado 1500", 2010, 2008),
-    ("gm-gen4-truck", "GMC", "Sierra Hybrid", 2009, None),  # prefix app catches the yard name
+    ("gm-gen4-truck", "Chevrolet", "Silverado", 2011, 2007),
+    ("gm-gen4-truck", "GMC", "Sierra", 2009, 2008),
+    ("gm-gen4-truck", "GMC", "Sierra 1500", 2012, 2007),
+    ("gm-gen4-truck", "GMC", "Sierra Denali 1500", 2013, 2008),
+    # §23.6 dropped the "Sierra*" prefix, so the yard name "Sierra Hybrid"
+    # is not a family app at all (no claim): accepted below.
+    ("gm-gen4-truck", "GMC", "Sierra Hybrid", 2009, None),
+    ("gm-gen4-truck", "GMC", "Yukon Hybrid", 2009, None),  # "Yukon*" prefix catches it
     ("gm-gen4-truck", "Chevrolet", "Tahoe", 2009, 2014),
     ("gm-gen4-truck", "GMC", "Yukon", 2010, 2007),
     ("gm-gen4-truck", "Cadillac", "Escalade", 2011, 2008),
@@ -923,8 +930,13 @@ _HYB_AMBIG = [
     ("nissan-qr25", "Nissan", "Altima", 2008, 2005),
 ]
 _no_ambig, _gas_ambig, _bad_note = [], [], []
+# Yard names that are hybrids by name may instead be left out of the
+# family entirely (not a family app = no claim, which is also safe).
+_NAMED_HYBRID_OK_OUT = {("GMC", "Sierra Hybrid")}
 for fid, mk, md, hy, gy in _HYB_AMBIG:
     a = _first_app(EF[fid], hy, mk, md)
+    if a is None and (mk, md) in _NAMED_HYBRID_OK_OUT:
+        continue
     note = js._app_flags(a).get("ambig", "") if a else ""
     if not note:
         _no_ambig.append(f"{fid} {hy} {md}")
@@ -1034,6 +1046,29 @@ check("P0.5: gm-ecotec-lcv alternator group kept (210-0255 lists the 2.4)",
                       (2013, "Chevrolet", "Malibu"), "2.4L 4-cyl") == "verified")
 check("P0.5: no ambig app is also sole (payload)",
       not [a for f in _pl.values() for a in f["apps"] if a[4] and a[5]])
+
+# §23.6: "Silverado*"/"Sierra*" prefix apps used to catch HD trucks (6.6
+# Duramax, 8.1, HD 6.0) and 1999-2000 GMT400 "Classic" trucks.
+_fam = lambda y, mk, mo: sorted(f for f, _, _ in js.engine_families_for(y, mk, mo))
+_hd = [(y, mk, mo) for y in (2001, 2005, 2007, 2010, 2013)
+       for mk, mo in (("Chevrolet", "Silverado 2500HD"), ("Chevrolet", "Silverado 2500"),
+                      ("Chevrolet", "Silverado 3500"), ("GMC", "Sierra 2500HD"),
+                      ("GMC", "Sierra 3500"), ("Chevrolet", "Silverado 1500HD"),
+                      ("Chevrolet", "Silverado 2500HD Classic"))]
+check("§23.6 HD Silverado/Sierra never join the light-duty V8 engine families",
+      all(not _fam(*k) for k in _hd), str([(k, _fam(*k)) for k in _hd if _fam(*k)]))
+check("§23.6 1500s keep their families; 2007 Classic is Gen III only",
+      _fam(2004, "Chevrolet", "Silverado 1500") == ["gm-gen3-truck"]
+      and _fam(2010, "GMC", "Sierra 1500") == ["gm-gen4-truck"]
+      and _fam(2005, "GMC", "Sierra") == ["gm-gen3-truck"]
+      and _fam(2007, "Chevrolet", "Silverado 1500 Classic") == ["gm-gen3-truck"]
+      and _fam(2007, "Chevrolet", "Silverado 1500") == ["gm-gen3-truck", "gm-gen4-truck"]
+      and _fam(2000, "Chevrolet", "Silverado Classic") == [])
+check("§23.6 HD donor never verified against a 1500 seeker",
+      _tier("gm-gen3-truck", "alternator", (2005, "Chevrolet", "Silverado 1500"),
+            (2005, "Chevrolet", "Silverado 2500HD")) != "verified"
+      and _tier("gm-gen3-truck", "alternator", (2005, "Chevrolet", "Silverado 1500"),
+                (2004, "GMC", "Sierra 1500")) == "verified")
 
 print()
 if FAILS:

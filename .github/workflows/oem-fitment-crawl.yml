@@ -19,6 +19,14 @@ on:
 permissions:
   contents: write
 
+# One crawl run at a time, enforced: a scheduled or manual run that starts
+# while another is active waits until it finishes. (2026-11-05: the 07:02
+# scheduled run overlapped the 02:43 manual run, ~14 sites crawled at once,
+# and three catalogs answered HTTP 503 within four minutes.)
+concurrency:
+  group: oem-fitment-crawl-global
+  cancel-in-progress: false
+
 jobs:
   plan:
     runs-on: ubuntu-latest
@@ -47,7 +55,7 @@ jobs:
           def on_branch(path):
               return subprocess.run(["git", "cat-file", "-e", f"oem-raw:{path}"],
                                     capture_output=True).returncode == 0
-          sites = [s for s in sites if not on_branch(f"raw/{s}.done") and not on_branch(f"raw/{s}.blocked")]
+          sites = [s for s in sites if not any(on_branch(f"raw/{s}.{m}") for m in ("done", "blocked", "paused"))]
           print("sites=" + json.dumps(sites))
           PY
           cat "$GITHUB_OUTPUT"
@@ -59,11 +67,12 @@ jobs:
     timeout-minutes: 350
     strategy:
       fail-fast: false
-      # At most 8 sites at once WITHIN one run (about 2 requests/s across the
-      # dealer-catalog network at 4 s per site). Separate manual dispatches are
-      # separate runs and are not capped by this; the 6-hourly scheduled run
-      # is the steady state once the first per-site runs finish.
-      max-parallel: 8
+      # At most 6 sites at once: about 0.75 requests/s across the
+      # dealer-catalog network at 8 s per site. Dispatch ONE run for all sites
+      # (never one run per site): separate runs are not capped by this.
+      # 2026-11-05: moparpartsgiant (403) and vwpartsgiant (503) refused when
+      # ~14 separate runs added up to ~3.5 requests/s.
+      max-parallel: 6
       matrix:
         site: ${{ fromJSON(needs.plan.outputs.sites) }}
     concurrency:
@@ -113,6 +122,18 @@ jobs:
             rc=$?
             set -e
             tail -2 "raw/$SITE.log" 2>/dev/null || true
+            # offline evidence audit of everything crawled so far; a parser
+            # bug (>0.5% mismatches) pauses the site for human review
+            set +e
+            python3 ci_audit.py "raw/$SITE.jsonl" | tee -a "$GITHUB_STEP_SUMMARY"
+            arc=${PIPESTATUS[0]}
+            set -e
+            if [ "$arc" -eq 20 ]; then
+              echo "evidence mismatch above 0.5%: paused for review $(date -u +%FT%TZ)" > "raw/$SITE.paused"
+              push_raw
+              echo "::error::$SITE paused by the evidence audit"
+              break
+            fi
             push_raw
             # 10 = time budget reached, 11 = network-failure streak (pause, retry)
             if [ "$rc" -eq 11 ]; then sleep 120; continue; fi

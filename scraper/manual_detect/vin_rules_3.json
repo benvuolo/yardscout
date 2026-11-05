@@ -1,0 +1,2351 @@
+{
+ "worklist": "vin_rules_3",
+ "makes": [
+  "Hyundai",
+  "Kia",
+  "Genesis"
+ ],
+ "generated_utc": "2026-11-05T03:17Z",
+ "generator": "scraper/manual_detect/vin_rules_3.py",
+ "inputs": {
+  "inventory_live": "docs/data/inventory_live.json",
+  "vehicle_extras": "docs/data/vehicle_extras.json",
+  "vin_decodes": "docs/data/vin_decodes.json.gz",
+  "ground_truth": "scraper/manual_detect/ground_truth.jsonl (uniformCell lines and Hyundai/Kia vPIC default lines treated as unlabelled)",
+  "epa": "scraper/manual_detect/epa/vehicles.csv",
+  "vpic_live": "scraper/manual_detect/vin_rules_3_vpic.json",
+  "mid_filings_read": "NHTSA MID Part 565 files for Hyundai Motor Co / HATCI / Kia / Genesis (589 unique filings listed via the MID search API; 397+ downloaded 2026-11-05 from vpic.nhtsa.dot.gov/mid displayfile). Read: Hyundai MY1986, MY1986-97 codes, every guide MY1994-2009 (text layer), MY2010 new lines, MY2015, MY2019-2022 Veloster/Veloster N; Kia MY1995, MY2001-2009 (text layer), MY2014 Rio, MY2015, MY2016 Rio (original and revised) and the 2016 Kia submission; Genesis G70 MY2019-2027; plus a keyword scan of the 336 text-layer guides filed 2016-2026 (no 'transmission', 'manual' or 'M/T' column or name except G70 '2.0T Sport (MT)' and Soul MY2020 'LX MT, LX AT, ...'). Scanned MY2011-2014 and MY2017-18 guides were checked through vPIC's transcription of their model-series names (vpic_model_series_sweep)."
+ },
+ "answer": {
+  "hyundai": "The VIN does NOT encode the transmission in any model year read (MY1986-88 Excel, MY1986-97 codes, every guide MY1994-2009, MY2010 new lines, MY2015, MY2019-2027 text guides). Positions: 4 line, 5 grade/model series (cars) or model series (SUVs), 6 body type (cars) or drive (SUVs: 1 FWD, 7 AWD), 7 restraint (cars) or GVWR (SUVs), 8 engine. Manual-only cells reachable by line/drive/engine: Veloster N MY2019-2020 (KMHT3, line code). Candidates only: Tucson 2.0 AWD MY2005-2009 (sources conflict), Elantra 1.6 MY1993-1995 (no lot car). Trim-level manuals (Genesis Coupe R-Spec, Veloster Turbo R-Spec) share their code with automatic trims.",
+  "kia": "The VIN does NOT encode the transmission (MY1995 filing, MY2001-2009 guides, MY2010 new lines, MY2015, MY2016, MY2017-2027 text guides): 4-5 line/series, 6-7 body type, 8 engine/restraint (cars to MY2009); SUVs 4-5 line/series+drive, 6 body, 7 GVWR, 8 engine. Exception on paper: the Rio MY2014 and revised MY2016 guides name 'Manual Trans'/'M/T' (L) and 'AT'/'A/T' (M/N/P) in position 5, but real manual Rio LX cars carry M, so the wording is not reliable and that rule is dropped. Manual-only cell ruled: Sportage 2.0 4WD MY2005-2009 (J + E with engine 2/4). Candidate: Sportage 2WD 2.0 SOHC MY1995-96.",
+  "genesis": "The VIN DOES encode a manual for one car: G70 MY2019-2021, position 5 = 2 '2.0T Sport (MT)' (Genesis filings for MY2019, 2020, 2021). Every other Genesis code (G70 other grades, G80, G90, GV60/70/80) is automatic-only and no manual was offered after MY2021. Genesis Coupe (sold as a Hyundai, KMHH) does not encode it.",
+  "vpic_already_decodes_it": "vPIC returns a transmission for Hyundai/Kia only in MY2008 and MY2017+, and neither comes from a VIN position: the MY2008 values are keyed on the engine character (every 4-cylinder decodes '5-spd Manual', every V6 'Automatic'), and the MY2017+ values are model/engine defaults (for example every 2018 Elantra 2.0 decodes '6-spd Automatic' though a 6MT was offered). So every one of today's 562 Hyundai/Kia VIN-sourced 'confirmed manuals' is a vPIC default, not evidence about the car (hub_findings). The only code-level vPIC manuals are G70 MY2021 code 2 (right, wrong speed count), Rio MY2014 code L (dropped) and Elantra MY2020 code 0 'Sport' (unsupported; hub_findings.vpic_code_level_manuals_checked)."
+ },
+ "vin_scheme": {
+  "hyundai_passenger_car_1986_1999": "VIN 4 line (& drive), 5 body type, 6 body style & version (1 L, 2 GL, 3 GLS), 7 restraint, 8 engine (01-22-N11B-2196, 01-22-N11B-5639, MY1994-99 guides).",
+  "hyundai_passenger_car_2000_on": "VIN 4 line, 5 model series (grade, later trim names), 6 body type, 7 restraint, 8 engine (MY2000-2027 guides).",
+  "hyundai_suv": "VIN 4 line, 5 model series, 6 drive / body (1 Wagon FWD, 7 Wagon AWD; from the 2010s 4/D = 4x2/4x4 wagon class), 7 GVWR (later restraint), 8 engine.",
+  "kia_passenger_car_1995_2009": "VIN 4-5 line/series, 6-7 body type, 8 engine + restraint (01-22-N11B-5812, ORG11251 ... ORG10860).",
+  "kia_mpv_suv_1995_2009": "VIN 4-5 line/series (Sportage: A/E 4WD, B/F 2WD), 6 body type, 7 GVWR, 8 engine.",
+  "kia_2010_on": "VIN 4 line, 5 model series (grade/trim), 6 body type (SUVs: wagon class + 4x2/4x4), 7 restraint, 8 engine.",
+  "genesis": "VIN 1-3 KMT (cars) / KMU / 5NM (SUVs), 4 line, 5 model series (trim), 6 body/drive, 7 restraint, 8 engine. G70 MY2019-2021 5 = 2 '2.0T Sport (MT)'.",
+  "transmission_character": "none, in any filing read for these three makes; the only transmission wording sits inside model-series names (G70 code 2 MY2019-2021; Rio L/M/N/P MY2014 and MY2016 revised, contradicted by real VINs; Soul MY2020 code 2 'LX MT, LX AT, ...' shared)."
+ },
+ "not_encoded_or_not_ruled": [
+  "Hyundai, Kia and Genesis VINs carry no transmission character, so for nearly all of these cars (Elantra, Sonata, Accent, Santa Fe, Tucson 2.4, Veloster, Genesis Coupe, Rio, Forte, Optima, Soul, Sportage 2.4 ...) the VIN cannot say manual vs automatic. Those cars need listing text, a build-sheet source, or the owner.",
+  "Kia Rio MY2014 / MY2016 code L ('Manual Trans LX' / 'LX M/T') and M ('AT LX' / 'LX A/T'): dropped, real manual LX cars carry M (rule kia_rio_code_L_lx_mt_2014_2016).",
+  "Hyundai Genesis Coupe R-Spec (2.0T and 3.8, 6MT only) and Veloster Turbo R-Spec (MY2016-2020, 6MT only): their model-series code is shared with automatic trims (Genesis Coupe 5 = T/U are GL/GLS grades; Veloster H = 'Turbo R-Spec, Turbo and Turbo Ultimate'). Not ruled.",
+  "Hyundai Scoupe Turbo (MY1993-95, EPA Manual 5-spd only): engine code N is shared with the non-turbo Scoupe/Accent 1.5 (MY1994-95 guides). Not ruled.",
+  "Kia Sportage 2.0 4WD MY2010 (EPA Manual 5-spd only): new VIN layout (KNDK..) and the MY2010 Sportage guide was not read; no MY2010 2.0 4WD Sportage is on the lots. Not ruled.",
+  "Hyundai Elantra N / Kona N, Kia Forte GT, Veloster N MY2021-22, Genesis G70 3.3T and every other DCT/automatic-only or MT-or-DCT model: no manual-only code. Not ruled.",
+  "Cars without a 17-character VIN (summary.three_make_coverage.<make>.no_vin) cannot be reached by VIN rules.",
+  "Cars at Canadian yards are scanned but not newly confirmed: the manual-only facts are US-market facts (EPA)."
+ ],
+ "summary": {
+  "rules": 7,
+  "rules_by_status": {
+   "low_sample": 3,
+   "candidate": 3,
+   "drop": 1
+  },
+  "newly_confirmed_manual_keep_and_low_sample_rules": 6,
+  "newly_confirmed_manual_candidate_rules_only": 4,
+  "newly_confirmed_manual_by_rule": {
+   "genesis_g70_20t_sport_mt_2019_2021": 0,
+   "hyundai_veloster_n_2019_2020": 1,
+   "kia_sportage_20_4wd_2005_2009": 5,
+   "hyundai_tucson_20_awd_2005_2009": 4,
+   "kia_sportage_2wd_sohc_1995_1996": 0,
+   "hyundai_elantra_16_1993_1995": 0,
+   "kia_rio_code_L_lx_mt_2014_2016": 0
+  },
+  "newly_confirmed_manual_by_feed_make": {
+   "Kia": 5,
+   "Hyundai": 1
+  },
+  "canadian_yard_cars_not_counted": 0,
+  "ground_truth_precision_manual_claims_kept_rules": {
+   "checkable": 0,
+   "agree": 0,
+   "precision": null,
+   "raw_including_vpic_defaults": {
+    "checkable": 1,
+    "agree": 1,
+    "precision": 1.0
+   },
+   "note": "no in-scope car has an independent (non-vPIC-default) ground-truth label"
+  },
+  "published_labels_contradicting_a_rule": 0,
+  "scan": {
+   "rule_wmi_vins": 11482,
+   "bad_check_digit": 52,
+   "covered": 11
+  },
+  "three_make_coverage": {
+   "Hyundai": {
+    "cars": 12266,
+    "no_trans_info": 11752,
+    "vin17": 10519,
+    "no_vin": 1747,
+    "covered_by_rule": 5
+   },
+   "Kia": {
+    "cars": 9548,
+    "no_trans_info": 8762,
+    "vin17": 8191,
+    "no_vin": 1357,
+    "covered_by_rule": 6
+   },
+   "Genesis": {
+    "cars": 10,
+    "no_trans_info": 8,
+    "vin17": 8,
+    "no_vin": 2
+   }
+  }
+ },
+ "validation_method": "For each rule, every lot car is matched by WMI, valid check digit, VIN model year (character 10, listing year picks the 30-year cycle) and the fixed + coded characters. 'checkable' = its ground_truth.jsonl line has class manual/automatic/cvt/amt/dct, uniformCell is empty, and it is not a Hyundai/Kia vPIC engine-default line (source vin and vPIC make Hyundai/Kia/Genesis: no Hyundai/Kia VIN position carries the transmission, so every such vPIC value is a model/engine default; these are counted separately as 'vpic_default_lines'). Agreement = same manual-vs-not-manual answer; 'raw' agreement including the vPIC default lines is reported too. epa_cell = the EPA rows the claim rests on, re-read per model year ('manual_only' rules need EPA to list only manuals every rule year; 'manual_offered' rules need a manual row every year). vpic_check = live vPIC decode of each in-scope VIN (vin_rules_3_vpic.json): displacement / drive / engine model / trim must match the code's meaning. Status: drop when flagged (evidence contradicts the table) or when >= 20 checkable and agreement < 99.5%; candidate when flagged (evidence short of certain); low_sample when < 20 checkable (kept: the code table is the manufacturer's own Part 565 filing, and the manual claim has EPA plus an independent reference); keep otherwise. 'newly_confirmed_manual' = in-scope cars at US yards whose published extras transmission is empty today.",
+ "rules": [
+  {
+   "id": "genesis_g70_20t_sport_mt_2019_2021",
+   "make": "Genesis",
+   "status": "low_sample",
+   "claim": "manual",
+   "scope": {
+    "make": "Genesis",
+    "models": "Genesis G70 2.0T Sport manual (VIN KMTG2*), MY2019-2021",
+    "model_years": [
+     2019,
+     2020,
+     2021
+    ],
+    "wmi": [
+     "KMT"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [G]",
+     "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
+    ]
+   },
+   "vin_condition": {
+    "position": 5,
+    "manual_codes": {
+     "2": "'2.0T Sport (MT)': Genesis's own model-series code for the 6-speed-manual 2.0T Sport RWD (MY2019, 2020, 2021)"
+    },
+    "codes_not_ruled": {
+     "3, 5, 6, 7": "other 2.0T/3.3T grades: 8-speed automatic",
+     "4": "MY2019-2020 '2.0T Prestige, 2.0T Dynamic, 2.0T Sport (AT)'; MY2021 '2.0T Prestige': automatic",
+     "2 in MY2026+": "'2.5T Prestige RWD' (automatic): the year bound is essential"
+    },
+    "code_table_source": "manufacturer"
+   },
+   "vin_regex_manual": "^(KMT)G2....[KLM].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8d45bcde-d30e-4a06-8777-8047db74a582",
+     "doc": "MID ORG15239, HATCI letter 2018-01-12, '2019MY Genesis G70' VIN decoding guide (dated 10-Nov-17)",
+     "says": "K M T, 4 = G 'GENESIS, G70', 5 = 2 '2.0T Sport (MT)', 3 '2.0T Elite, 3.3T Prestige, 3.3T Sport, 3.3T Dynamic Edition, 3.3T Design Edition', 4 '2.0T Prestige, 2.0T Dynamic, 2.0T Sport (AT)', 5 '3.3T Advanced', 6 '2.0T Advanced', 7 '3.3T Elite'; 6 = 4 sedan; 8 = A 2.0L T-GDI Theta II FR, E 3.3L T-GDI Lambda II; 10 = K; 11 = U Ulsan."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/535aa9bb-1fdf-4f65-95f2-58ea14265f79",
+     "doc": "MID ORG16822, HATCI letter 2019-05-13, '2020MY Genesis G70'",
+     "says": "5 = 2 '2.0T Sport (MT)', 3 '2.0T Elite, 3.3T Prestige, 3.3T Sport', 4 '2.0T Prestige, 2.0T Sport (AT)', 5 '3.3T', 6 '2.0T', 7 '3.3T Elite'; 8 = A '2.0L T-GDI Theta II FR (252HP for AT, 255HP for MT)', E 3.3T; 10 = L."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/77cb1eed-00ff-4c9b-a326-9cdd2f881723",
+     "doc": "MID ORG17605, HATCI letter 2020-02-14, '2021MY Genesis G70'",
+     "says": "5 = 2 '2.0T Sport (MT)', 3 '2.0T Elite, 3.3T Prestige, 3.3T Sport', 4 '2.0T Prestige', 6 '2.0T', 7 '3.3T'; 8 = A 2.0 T-GDI (252HP AT / 255HP MT), E 3.3T; 10 = M."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/df3aaf07-1c19-4a7b-92fa-4f77ec8db7d9",
+     "doc": "MID ORG18795 (2022MY G70/GV70, 2021-02-19); also ORG20026 (2023MY), ORG23926 (2026MY, 2025-01-08), ORG24921 (2026MY revised, 2025-10-27)",
+     "says": "MY2022: 5 = 1 '3.3T Launch Edition', 3 '2.0T, 2.0T Prestige', 5 '3.3T ...' (no code 2, no MT). MY2026: 5 = 2 '2.5T Prestige RWD' (automatic), so code 2 means MT only in MY2019-2021."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC live decodes 2026-11-05 (saved in scraper/manual_detect/vin_rules_3_vpic.json: every in-scope lot VIN plus partial-VIN pattern decodes per rule code and model year)",
+     "says": "Engine model / displacement / drive / trim per code and year: see each rule's vpic_check and vpic_partial_pattern_decodes."
+    },
+    {
+     "url": "https://www.edmunds.com/genesis/g70/2021/st-401855582/features-specs",
+     "doc": "Edmunds '2021 Genesis G70 2.0T M/T Sport'; Autotrader 2021 G70 research; The Drive / TFLcar / Carscoops on the manual ending after MY2021; listings KMTG24LA3MU067440 (Passport Auto Group, '6-Speed Manual') and KMTG24LAXMU070819 (2021 2.0T Sport, Capital One / Prime Motors); search-result excerpts, 2026-11-05",
+     "says": "The 2.0T Sport RWD was the dedicated trim for the 6-speed manual; 2021 was the last manual year; MY2019-2020 also sold a 2.0T Sport automatic (filed as code 4). Both 2021 listings with VIN position 5 = 2 are manuals."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
+     "says": "39913 (2019); 41380 (2020); 42495 (2021): G70 RWD 2.0 Manual 6-spd (the only G70 manual rows; AWD and 3.3 rows are Automatic (S8) only); 2022 for contrast: 43926/43927 Automatic (S8) only"
+    }
+   ],
+   "candidate_reason": "",
+   "drop_reason": "",
+   "evidence_gaps": "No G70 with code 2 is on the lots today (G70s on the lots carry 3 or 4), so the rule has no checkable car; it rests on Genesis's three filings, EPA, Edmunds/Autotrader and two 2021 listings whose code-2 VINs are manuals. vPIC already returns 'Manual/Standard' (with a wrong '8' speeds) for MY2021 code 2, and only the trim text for MY2019-2020.",
+   "validation": {
+    "in_scope_lot_cars": 0,
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "raw_including_vpic_defaults": {
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "vpic_default_lines_excluded": 0,
+    "vpic_default_lines_excluded_by_class": {},
+    "uniform_cell_lines_excluded": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_cell": {
+     "filter": {
+      "make": "Genesis",
+      "model": "^G70 RWD$",
+      "displ": "2.0",
+      "drive": "2",
+      "dscr": null
+     },
+     "mode": "manual_offered",
+     "years_meeting_mode": [
+      2019,
+      2020,
+      2021
+     ],
+     "years_failing": {},
+     "all_rule_years_meet_mode": true,
+     "rows": {
+      "2019": [
+       "39912 G70 RWD Automatic (S8)",
+       "39913 G70 RWD Manual 6-spd"
+      ],
+      "2020": [
+       "41379 G70 RWD Automatic (S8)",
+       "41380 G70 RWD Manual 6-spd"
+      ],
+      "2021": [
+       "42494 G70 RWD Automatic (S8)",
+       "42495 G70 RWD Manual 6-spd"
+      ]
+     }
+    },
+    "vpic_check": {
+     "expect": {
+      "engine": "THETA II|^$",
+      "displ": "2.0",
+      "trim": "\\(MT\\)"
+     },
+     "inconsistent_examples": []
+    },
+    "vpic_partial_pattern_decodes": [
+     {
+      "code": "2",
+      "year": 2019,
+      "pattern": "KMTG24LA*K",
+      "Make": "GENESIS",
+      "Model": "G70",
+      "Trim": "2.0T Sport (MT)",
+      "EngineModel": "T-GDI THETA II FR",
+      "DisplacementL": "2.0",
+      "DriveType": "",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "2",
+      "year": 2020,
+      "pattern": "KMTG24LA*L",
+      "Make": "GENESIS",
+      "Model": "G70",
+      "Trim": "2.0T Sport (MT)",
+      "EngineModel": "T-GDI THETA II FR",
+      "DisplacementL": "2.0",
+      "DriveType": "",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "2",
+      "year": 2021,
+      "pattern": "KMTG24LA*M",
+      "Make": "GENESIS",
+      "Model": "G70",
+      "Trim": "2.0T Sport (MT)",
+      "EngineModel": "T-GDI THETA II FR",
+      "DisplacementL": "2.0",
+      "DriveType": "",
+      "TransmissionStyle": "Manual/Standard",
+      "TransmissionSpeeds": "8",
+      "ErrorCode": "6"
+     }
+    ],
+    "codes_seen_on_lots": {},
+    "years_seen_on_lots": {},
+    "models_seen_on_lots": {},
+    "cars_without_trans_info_us_yards": 0,
+    "cars_without_trans_info_by_reason": {},
+    "cars_without_trans_info_canadian_yards_not_counted": 0
+   },
+   "newly_confirmed_manual": 0
+  },
+  {
+   "id": "hyundai_veloster_n_2019_2020",
+   "make": "Hyundai",
+   "status": "low_sample",
+   "claim": "manual",
+   "scope": {
+    "make": "Hyundai",
+    "models": "Hyundai Veloster N (VIN KMHT3*), MY2019-2020",
+    "model_years": [
+     2019,
+     2020
+    ],
+    "wmi": [
+     "KMH"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [T]",
+     "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
+    ]
+   },
+   "vin_condition": {
+    "position": 5,
+    "manual_codes": {
+     "3": "Veloster N (2.0 T-GDI Theta II): 6-speed manual only until the 8-speed wet DCT arrived for MY2021 (MY2019, 2020)"
+    },
+    "codes_not_ruled": {
+     "3 in MY2021-2022": "Veloster N with 6MT or 8-speed DCT",
+     "F/G/H/J/K": "Veloster 2.0 MPI / 1.6 T-GDI grades: 6MT, 6AT or 7DCT"
+    },
+    "code_table_source": "manufacturer"
+   },
+   "vin_regex_manual": "^(KMH)T3....[KL].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/bb5e5fd1-4a81-419a-8dbc-9f07db2eb7d0",
+     "doc": "MID ORG16641, HATCI letter 2019-03-08, '2020MY Hyundai Veloster' and '2020MY Hyundai Veloster N' VIN decoding guides",
+     "says": "Veloster N: K M H, 4 = T 'Hyundai, Veloster N', 5 = 3 'Veloster N', 6 = 6 coupe, 7 = A/D/F/J/L/P/R restraint, 8 = H 'HMC Gasoline 2.0L DOHC T-GDI THETA II (Standard Pack 250 HP, Performance Pack 275 HP)', 10 = L 2020, 11 = U Ulsan. No transmission position."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8260a4f1-0d2f-4a76-9cef-53eb30ea79cd",
+     "doc": "MID ORG15358, HATCI letter 2018-02-12, '2019MY Hyundai Veloster' VIN decoding guide",
+     "says": "Veloster (KMH T): 5 = F L, G 2.0L and 2.0L Premium, H 'Turbo R-Spec, Turbo and Turbo Ultimate', J HGS, K TOP; 6 = 6 coupe; 8 = B 1.6 T-GDI, F 2.0 MPI. The manual-only R-Spec shares code H with automatic trims."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/4611e18e-505e-4f53-87d5-79c385922747",
+     "doc": "MID ORG18888, HATCI letter 2021-03-15, '2022MY Hyundai Veloster N'",
+     "says": "Same codes as MY2020 (T, 3, 6, J, 2.0 T-GDI 275 HP); the DCT car of MY2021-2022 is not separated, so MY2021+ is out of scope."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC live decodes 2026-11-05 (saved in scraper/manual_detect/vin_rules_3_vpic.json: every in-scope lot VIN plus partial-VIN pattern decodes per rule code and model year)",
+     "says": "Engine model / displacement / drive / trim per code and year: see each rule's vpic_check and vpic_partial_pattern_decodes."
+    },
+    {
+     "url": "https://prnewswire.com/news-releases/2021-hyundai-veloster-n-offers-n-eight-speed-wet-dual-clutch-transmission-301101735.html",
+     "doc": "Hyundai Motor America press release '2021 Hyundai Veloster N offers N eight-speed wet dual-clutch transmission' (2020); SlashGear, TFLcar 'No longer just a manual'; search-result excerpts, 2026-11-05",
+     "says": "The 8-speed wet DCT was new for the 2021 Veloster N as an alternative to the standard 6-speed manual; earlier Veloster N (MY2019-2020) were manual-only."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
+     "says": "40693 (2019); 41385 (2020): Veloster N 2.0 turbo Manual 6-spd only; 2021 for contrast: 42927 Automatic (AM-S8), 42928 Manual 6-spd"
+    }
+   ],
+   "candidate_reason": "",
+   "drop_reason": "",
+   "evidence_gaps": "The MY2019 Veloster N guide was not among the MID filings downloaded (the MY2019 Veloster guide ORG15358 covers the regular car only); MY2019 rests on vPIC, which decodes KMHT36AH*K as 'Veloster N', 2.0 T-GDI Theta II.",
+   "validation": {
+    "in_scope_lot_cars": 1,
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "raw_including_vpic_defaults": {
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "vpic_default_lines_excluded": 0,
+    "vpic_default_lines_excluded_by_class": {},
+    "uniform_cell_lines_excluded": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_cell": {
+     "filter": {
+      "make": "Hyundai",
+      "model": "^Veloster N$",
+      "displ": "2.0",
+      "drive": "2",
+      "dscr": null
+     },
+     "mode": "manual_only",
+     "years_meeting_mode": [
+      2019,
+      2020
+     ],
+     "years_failing": {},
+     "all_rule_years_meet_mode": true,
+     "rows": {
+      "2019": [
+       "40693 Veloster N Manual 6-spd"
+      ],
+      "2020": [
+       "41385 Veloster N Manual 6-spd"
+      ]
+     }
+    },
+    "vpic_check": {
+     "consistent": 1,
+     "expect": {
+      "engine": "THETA",
+      "displ": "2.0",
+      "trim": null
+     },
+     "inconsistent_examples": []
+    },
+    "vpic_partial_pattern_decodes": [
+     {
+      "code": "3",
+      "year": 2019,
+      "pattern": "KMHT36AH*K",
+      "Make": "HYUNDAI",
+      "Model": "Veloster N",
+      "Trim": "",
+      "EngineModel": "T-GDI THETA II",
+      "DisplacementL": "2",
+      "DriveType": "",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "3",
+      "year": 2020,
+      "pattern": "KMHT36AH*L",
+      "Make": "HYUNDAI",
+      "Model": "Veloster N",
+      "Trim": "",
+      "EngineModel": "T-GDI THETA II",
+      "DisplacementL": "2.0",
+      "DriveType": "",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     }
+    ],
+    "codes_seen_on_lots": {
+     "char5=3": 1
+    },
+    "years_seen_on_lots": {
+     "2020": 1
+    },
+    "models_seen_on_lots": {
+     "Hyundai Veloster N": 1
+    },
+    "cars_without_trans_info_us_yards": 1,
+    "cars_without_trans_info_by_reason": {
+     "not_in_cache_backup": 1
+    },
+    "cars_without_trans_info_canadian_yards_not_counted": 0
+   },
+   "newly_confirmed_manual": 1
+  },
+  {
+   "id": "kia_sportage_20_4wd_2005_2009",
+   "make": "Kia",
+   "status": "low_sample",
+   "claim": "manual",
+   "scope": {
+    "make": "Kia",
+    "models": "Kia Sportage (KM) 2.0 four-cylinder 4WD (VIN KNDJE7*2 / KNDJE7*4), MY2005-2009",
+    "model_years": [
+     2005,
+     2006,
+     2007,
+     2008,
+     2009
+    ],
+    "wmi": [
+     "KND"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [J], char5 in [E]",
+     "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "2": "2.0L DOHC (Federal) in a Sportage 4WD (line J + E): 5-speed manual only (MY2005, 2006, 2007, 2008, 2009)",
+     "4": "2.0L DOHC (50-State) in a Sportage 4WD (line J + E): 5-speed manual only (MY2005, 2006, 2007, 2008, 2009)"
+    },
+    "codes_not_ruled": {
+     "3": "2.7L V6: 4-speed automatic",
+     "char5=F (2WD) + 2/4": "Sportage 2.0 front-drive: 5MT or 4AT"
+    },
+    "code_table_source": "manufacturer"
+   },
+   "vin_regex_manual": "^(KND)JE..[24].[56789].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5db7edc1-c870-496f-986c-5961e3f29888",
+     "doc": "MID ORG11251 (Kia VIN decoding information 2001-04-27, MY2001-02) and the same-format Kia guides ORG11260 (2002-05-13, MY2002-03), 01-022-N11B-9379 (2002-09-05, MY2003), ORG10863 (2003-08-09), ORG10855 (2004-06-08, MY2004-05), ORG10858 (2005-04-15, MY2006), ORG10854 (2006-04-18, MY2007), ORG10857 (2008MY), ORG10860 (2007-12-10, 2009MY)",
+     "says": "Cars: 4-5 line/series, 6-7 body type, 8 engine/restraint. MPV/SUV: 4-5 line/series (Sportage KM: J + E = 4WD, J + F = 2WD), 6 body type (7 = 4-door SUV), 7 GVWR, 8 engine (Sportage: 2 = 2.0L DOHC Federal, 4 = 2.0L DOHC 50-State, 3 = 2.7L V6; MY2009 also 2 = Borrego 4.6 V8, which never pairs with line J + E). No transmission position; the MY2008 guide has none either, so vPIC's MY2008 Kia transmission values do not come from it."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC live decodes 2026-11-05 (saved in scraper/manual_detect/vin_rules_3_vpic.json: every in-scope lot VIN plus partial-VIN pattern decodes per rule code and model year)",
+     "says": "Engine model / displacement / drive / trim per code and year: see each rule's vpic_check and vpic_partial_pattern_decodes."
+    },
+    {
+     "url": "https://www.cars.com/reviews/our-view-2005-kia-sportage-1420689220097",
+     "doc": "Cars.com 2005 Sportage trims ('4dr LX 4WD I4 Manual'; the only I4 automatic is front-drive), Consumer Guide 2005-10 Sportage pricing (AWD LX 4-cylinder listed only with manual), Autobytel 2005 first drive (Sportmatic automatic on the front-drive LX), Autotrader.ca 2008 ('AWD on the four-cylinder ... only when combined with a manual'), CarGurus 2009 LX 4WD (2.0 'with its five-speed manual'); search-result excerpts, 2026-11-05 (pages not fetched: host not reachable from this session)",
+     "says": "The 2005-2010 Sportage 2.0 four-cylinder with 4WD/AWD came only with the 5-speed manual; the 4-speed automatic was front-drive (or V6) only. No source found that lists a 2.0 4WD automatic."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
+     "says": "21588 (2005); 22537 (2006); 23814 (2007); 25039 (2008); 25354 (2009): Sportage 4WD 2.0 Manual 5-spd only (the 2.7 4WD rows are Automatic 4-spd; the 2.0 2WD rows list both); 28802 (2010) also Manual 5-spd only, but the MY2010 Sportage guide was not read, so MY2010 is out of scope"
+    }
+   ],
+   "candidate_reason": "",
+   "drop_reason": "",
+   "evidence_gaps": "Codes read in the MY2005 (ORG10855), MY2006 (ORG10858), MY2007 (ORG10854), MY2008 (ORG10857) and MY2009 (ORG10860) guides. MY2010 (new VIN layout KNDK..) not read.",
+   "validation": {
+    "in_scope_lot_cars": 6,
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "raw_including_vpic_defaults": {
+     "checkable": 1,
+     "agree": 1,
+     "disagree": 0
+    },
+    "vpic_default_lines_excluded": 1,
+    "vpic_default_lines_excluded_by_class": {
+     "manual": 1
+    },
+    "uniform_cell_lines_excluded": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_cell": {
+     "filter": {
+      "make": "Kia",
+      "model": "^Sportage 4WD$",
+      "displ": "2.0",
+      "drive": "4",
+      "dscr": null
+     },
+     "mode": "manual_only",
+     "years_meeting_mode": [
+      2005,
+      2006,
+      2007,
+      2008,
+      2009
+     ],
+     "years_failing": {},
+     "all_rule_years_meet_mode": true,
+     "rows": {
+      "2005": [
+       "21588 Sportage 4WD Manual 5-spd"
+      ],
+      "2006": [
+       "22537 Sportage 4WD Manual 5-spd"
+      ],
+      "2007": [
+       "23814 Sportage 4WD Manual 5-spd"
+      ],
+      "2008": [
+       "25039 Sportage 4WD Manual 5-spd"
+      ],
+      "2009": [
+       "25354 Sportage 4WD Manual 5-spd"
+      ]
+     }
+    },
+    "vpic_check": {
+     "consistent": 6,
+     "vpic_has_transmission": 1,
+     "expect": {
+      "engine": null,
+      "displ": "2.0",
+      "drive": "4WD|AWD|4x4"
+     },
+     "inconsistent_examples": []
+    },
+    "vpic_partial_pattern_decodes": [
+     {
+      "code": "2",
+      "year": 2005,
+      "pattern": "KNDJE722*5",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM Project",
+      "EngineModel": "",
+      "DisplacementL": "2.0",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "2",
+      "year": 2006,
+      "pattern": "KNDJE722*6",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "2",
+      "year": 2007,
+      "pattern": "KNDJE722*7",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "2",
+      "year": 2008,
+      "pattern": "KNDJE722*8",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "Manual/Standard",
+      "TransmissionSpeeds": "5",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "2",
+      "year": 2009,
+      "pattern": "KNDJE722*9",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "4",
+      "year": 2005,
+      "pattern": "KNDJE724*5",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM Project",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "4",
+      "year": 2006,
+      "pattern": "KNDJE724*6",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "4",
+      "year": 2007,
+      "pattern": "KNDJE724*7",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "4",
+      "year": 2008,
+      "pattern": "KNDJE724*8",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "Manual/Standard",
+      "TransmissionSpeeds": "5",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "4",
+      "year": 2009,
+      "pattern": "KNDJE724*9",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "KM",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "4WD/4-Wheel Drive/4x4",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     }
+    ],
+    "codes_seen_on_lots": {
+     "char8=4": 6
+    },
+    "years_seen_on_lots": {
+     "2006": 3,
+     "2007": 1,
+     "2008": 1,
+     "2009": 1
+    },
+    "models_seen_on_lots": {
+     "Kia Sportage": 6
+    },
+    "cars_without_trans_info_us_yards": 5,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 4,
+     "not_in_cache_backup": 1
+    },
+    "cars_without_trans_info_canadian_yards_not_counted": 0
+   },
+   "newly_confirmed_manual": 5
+  },
+  {
+   "id": "hyundai_tucson_20_awd_2005_2009",
+   "make": "Hyundai",
+   "status": "candidate",
+   "claim": "manual",
+   "scope": {
+    "make": "Hyundai",
+    "models": "Hyundai Tucson (JM) 2.0 AWD (VIN KM8J?7?B), MY2005-2009",
+    "model_years": [
+     2005,
+     2006,
+     2007,
+     2008,
+     2009
+    ],
+    "wmi": [
+     "KM8"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [J], char6 in [7]",
+     "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "B": "2.0L DOHC Beta (JM) with VIN 6 = 7 (Wagon AWD): EPA lists Manual 5-spd only (MY2005, 2006, 2007, 2008, 2009)"
+    },
+    "codes_not_ruled": {
+     "D": "2.7L V6: 4-speed automatic",
+     "char6=1 (FWD) + B": "Tucson 2.0 FWD: 5MT or 4AT"
+    },
+    "code_table_source": "manufacturer"
+   },
+   "vin_regex_manual": "^(KM8)J.7.B.[56789].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/52474028-e5f6-49f0-8f05-e8cba6e4e98a",
+     "doc": "MID ORG10859 (2004MY HMC guide) and the same-format guides ORG10862 (2005MY), ORG10865 (2006MY), ORG10861 (2007MY), ORG10864 (2008MY), ORG10856 (2009MY)",
+     "says": "Cars: 4 line, 5 model & series (grade), 6 body type, 7 restraint, 8 engine. SUV (WMI KM8 / 5NM): 4 line (J Tucson JM, S Santa Fe, N Veracruz), 5 model & series, 6 drive (1 Wagon FWD, 7 Wagon AWD), 7 GVWR, 8 engine. Tucson engine: B = 2.0 DOHC (JM) (MY2005: 'JM 2.0L / SM 2.4L'; MY2007: '2.0 DOHC (JM), 3.5 DOHC (EN)'), D = 2.7 DOHC (JM). MY2008 guide (ORG10864): no transmission position for any model, so vPIC's MY2008 transmission values do not come from it."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC live decodes 2026-11-05 (saved in scraper/manual_detect/vin_rules_3_vpic.json: every in-scope lot VIN plus partial-VIN pattern decodes per rule code and model year)",
+     "says": "Engine model / displacement / drive / trim per code and year: see each rule's vpic_check and vpic_partial_pattern_decodes."
+    },
+    {
+     "url": "https://www.jalopnik.com/2292908/years-hyundai-tucson-manual-transmission-united-states/",
+     "doc": "Jalopnik on Tucson manual years; Autotrader.ca 2006 Tucson; Cars.com 2005 Tucson trims; Consumer Guide 2005-09 Tucson pricing; conflicting: Cars.com 2007 review, Auto123 2006 GL AWD spec page, Edmunds 2009 review; search-result excerpts, 2026-11-05",
+     "says": "Supporting: 'on the GL, AWD required the manual transmission' (Jalopnik); 'the 2.0-litre GL can also be ordered in all-wheel drive, but with a manual transmission only' (Autotrader.ca); Cars.com lists '4dr GL 4WD 2.0L I4 Manual'. Conflicting: Cars.com 2007 says both gearboxes 'can be equipped with front-wheel drive or optional four-wheel drive'; Auto123's 2006 GL AWD spec page lists an optional 4-speed automatic; Edmunds 2009 says AWD only with the V6."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
+     "says": "21410 (2005); 22517 (2006); 23795 (2007); 25027 (2008); 25348 (2009): Tucson 4WD 2.0 Manual 5-spd only; 2.7 4WD rows Automatic 4-spd only; 2010 (new 2.4 Tucson) for contrast: 29948 Automatic 6-spd, 29949 Manual 6-spd"
+    }
+   ],
+   "candidate_reason": "EPA lists only 'Tucson 4WD 2.0 Manual 5-spd' every year and Jalopnik, Autotrader.ca and Cars.com's 2005 trim list say the 2.0 AWD came only with the manual, but Cars.com's 2007 review says both gearboxes could be had with optional four-wheel drive and Auto123's 2006 GL AWD spec page lists an optional automatic. Not certain enough for a badge.",
+   "drop_reason": "",
+   "evidence_gaps": "Codes read in the MY2005-2009 guides (ORG10862, ORG10865, ORG10861, ORG10864, ORG10856).",
+   "validation": {
+    "in_scope_lot_cars": 4,
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "raw_including_vpic_defaults": {
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "vpic_default_lines_excluded": 0,
+    "vpic_default_lines_excluded_by_class": {},
+    "uniform_cell_lines_excluded": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_cell": {
+     "filter": {
+      "make": "Hyundai",
+      "model": "^Tucson 4WD$",
+      "displ": "2.0",
+      "drive": "4",
+      "dscr": null
+     },
+     "mode": "manual_only",
+     "years_meeting_mode": [
+      2005,
+      2006,
+      2007,
+      2008,
+      2009
+     ],
+     "years_failing": {},
+     "all_rule_years_meet_mode": true,
+     "rows": {
+      "2005": [
+       "21410 Tucson 4WD Manual 5-spd"
+      ],
+      "2006": [
+       "22517 Tucson 4WD Manual 5-spd"
+      ],
+      "2007": [
+       "23795 Tucson 4WD Manual 5-spd"
+      ],
+      "2008": [
+       "25027 Tucson 4WD Manual 5-spd"
+      ],
+      "2009": [
+       "25348 Tucson 4WD Manual 5-spd"
+      ]
+     }
+    },
+    "vpic_check": {
+     "consistent": 4,
+     "expect": {
+      "engine": null,
+      "displ": "2.0",
+      "drive": "AWD|4WD|4x4"
+     },
+     "inconsistent_examples": []
+    },
+    "vpic_partial_pattern_decodes": [
+     {
+      "code": "B",
+      "year": 2005,
+      "pattern": "KM8JM72B*5",
+      "Make": "HYUNDAI",
+      "Model": "Tucson",
+      "Trim": "",
+      "EngineModel": "",
+      "DisplacementL": "2.0",
+      "DriveType": "AWD/All-Wheel Drive",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "B",
+      "year": 2006,
+      "pattern": "KM8JM72B*6",
+      "Make": "HYUNDAI",
+      "Model": "Tucson",
+      "Trim": "JM",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "AWD/All-Wheel Drive",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "B",
+      "year": 2007,
+      "pattern": "KM8JM72B*7",
+      "Make": "HYUNDAI",
+      "Model": "Tucson",
+      "Trim": "JM",
+      "EngineModel": "",
+      "DisplacementL": "2.0",
+      "DriveType": "AWD/All-Wheel Drive",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "B",
+      "year": 2008,
+      "pattern": "KM8JM72B*8",
+      "Make": "HYUNDAI",
+      "Model": "Tucson",
+      "Trim": "",
+      "EngineModel": "",
+      "DisplacementL": "2.0",
+      "DriveType": "AWD/All-Wheel Drive",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "B",
+      "year": 2009,
+      "pattern": "KM8JM72B*9",
+      "Make": "HYUNDAI",
+      "Model": "Tucson",
+      "Trim": "JM",
+      "EngineModel": "",
+      "DisplacementL": "2.0",
+      "DriveType": "AWD/All-Wheel Drive",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     }
+    ],
+    "codes_seen_on_lots": {
+     "char8=B": 4
+    },
+    "years_seen_on_lots": {
+     "2005": 1,
+     "2006": 1,
+     "2007": 2
+    },
+    "models_seen_on_lots": {
+     "Hyundai Tucson": 4
+    },
+    "cars_without_trans_info_us_yards": 4,
+    "cars_without_trans_info_by_reason": {
+     "vpic_trans_blank": 4
+    },
+    "cars_without_trans_info_canadian_yards_not_counted": 0
+   },
+   "newly_confirmed_manual": 4
+  },
+  {
+   "id": "kia_sportage_2wd_sohc_1995_1996",
+   "make": "Kia",
+   "status": "candidate",
+   "claim": "manual",
+   "scope": {
+    "make": "Kia",
+    "models": "Kia Sportage 2WD 2.0 SOHC (VIN KNDJB7?1), MY1995-1996",
+    "model_years": [
+     1995,
+     1996
+    ],
+    "wmi": [
+     "KND"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [J], char5 in [B]",
+     "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "1": "2.0 EGI SOHC in the 2WD Sportage (J + B): EPA lists Manual 5-spd only for the 2WD (MY1995, 1996)"
+    },
+    "codes_not_ruled": {
+     "3 (2WD DOHC)": "not in the MY1995-96 filing; the two 1996 2WD lot cars carry it and are not ruled",
+     "A (4WD)": "5MT or 4AT"
+    },
+    "code_table_source": "manufacturer"
+   },
+   "vin_regex_manual": "^(KND)JB..1.[ST].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/c9473710-f4f8-453f-8f77-29327e9184fb",
+     "doc": "NHTSA 01-22-N11B-5812, Kia Motors Corporation letter 1994-09-14, '1995 Model Year VIN Code Information' (model years S 1995, T 1996)",
+     "says": "Cars (Sephia KNAFA12?): 4-5 line/series, 6-7 body type, 8 engine/restraint. MPV (Sportage, KND): 4 J, 5 A = 4WD / B = 2WD, 6-7 body + GVWR (6 2-door, 7 4-door; 2 = 4001-5000 lb), 8 engine (1 = 2.0 EGI SOHC 94 hp, 3 = 2.0 EGI DOHC 120 hp). The 2WD row (J B 7 2 1) lists only the 2.0 SOHC. No transmission position."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC live decodes 2026-11-05 (saved in scraper/manual_detect/vin_rules_3_vpic.json: every in-scope lot VIN plus partial-VIN pattern decodes per rule code and model year)",
+     "says": "Engine model / displacement / drive / trim per code and year: see each rule's vpic_check and vpic_partial_pattern_decodes."
+    },
+    {
+     "url": "https://consumerguide.com/used/1995-02-kia-sportage/",
+     "doc": "Consumer Guide used 1995-2002 Kia Sportage; Retro Cars Wiki; Carwhere 1996 Sportage specs; search-result excerpts, 2026-11-05",
+     "says": "Consumer Guide: 'Only a 5-speed manual transmission was available in the 2WD version'; the 4-speed automatic came to 2WD models for 1997; rear-drive models had the single-cam 94 hp engine. Conflicting: Carwhere lists a 1996 2WD with both a manual and an automatic."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
+     "says": "12423 (1995); 13157 (1996): Sportage 2WD 2.0 Manual 5-spd only; 1997 for contrast: 13882 Automatic 4-spd, 13883 Manual 5-spd"
+    }
+   ],
+   "candidate_reason": "EPA (one 2WD row per year, Manual 5-spd) and Consumer Guide agree, but Carwhere lists a 1996 2WD automatic, and the lot's 1996 2WD cars carry engine code 3 (DOHC), which the MY1995-96 filing does not list for the 2WD, so the code table does not cover every 2WD build.",
+   "drop_reason": "",
+   "evidence_gaps": "MY1995-96 filing read (01-22-N11B-5812).",
+   "validation": {
+    "in_scope_lot_cars": 0,
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "raw_including_vpic_defaults": {
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "vpic_default_lines_excluded": 0,
+    "vpic_default_lines_excluded_by_class": {},
+    "uniform_cell_lines_excluded": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_cell": {
+     "filter": {
+      "make": "Kia",
+      "model": "^Sportage 2WD$",
+      "displ": "2.0",
+      "drive": "2",
+      "dscr": null
+     },
+     "mode": "manual_only",
+     "years_meeting_mode": [
+      1995,
+      1996
+     ],
+     "years_failing": {},
+     "all_rule_years_meet_mode": true,
+     "rows": {
+      "1995": [
+       "12423 Sportage 2WD Manual 5-spd"
+      ],
+      "1996": [
+       "13157 Sportage 2WD Manual 5-spd"
+      ]
+     }
+    },
+    "vpic_check": {
+     "expect": {
+      "engine": null,
+      "displ": "2.0",
+      "drive": "4x2|RWD|2WD|Rear"
+     },
+     "inconsistent_examples": []
+    },
+    "vpic_partial_pattern_decodes": [
+     {
+      "code": "1",
+      "year": 1995,
+      "pattern": "KNDJB721*S",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "",
+      "EngineModel": "",
+      "DisplacementL": "2",
+      "DriveType": "",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "1",
+      "year": 1996,
+      "pattern": "KNDJB721*T",
+      "Make": "KIA",
+      "Model": "Sportage",
+      "Trim": "",
+      "EngineModel": "",
+      "DisplacementL": "",
+      "DriveType": "4x2",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "4,6,14"
+     }
+    ],
+    "codes_seen_on_lots": {},
+    "years_seen_on_lots": {},
+    "models_seen_on_lots": {},
+    "cars_without_trans_info_us_yards": 0,
+    "cars_without_trans_info_by_reason": {},
+    "cars_without_trans_info_canadian_yards_not_counted": 0
+   },
+   "newly_confirmed_manual": 0
+  },
+  {
+   "id": "hyundai_elantra_16_1993_1995",
+   "make": "Hyundai",
+   "status": "candidate",
+   "claim": "manual",
+   "scope": {
+    "make": "Hyundai",
+    "models": "Hyundai Elantra 1.6 (VIN KMHJ???R), MY1993-1995",
+    "model_years": [
+     1993,
+     1994,
+     1995
+    ],
+    "wmi": [
+     "KMH"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [J]",
+     "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "R": "1596 cc Elantra engine: EPA lists Manual 5-spd only from MY1993 (automatics got the 1.8) (MY1993, 1994, 1995)"
+    },
+    "codes_not_ruled": {
+     "M": "1.8 (1795/1836 cc): 5MT or 4AT"
+    },
+    "code_table_source": "manufacturer"
+   },
+   "vin_regex_manual": "^(KMH)J...R.[PRS].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9e4c45a3-5a5b-46bb-8c39-db1b37d55ffd",
+     "doc": "NHTSA 01-22-N11B-5639, Hyundai filing 1994-03-14, 'VIN for Hyundai Elantra, Excel, Scoupe and Sonata' (model years G 1986 - U 1997)",
+     "says": "VIN 4 line & drive (B Sonata 1989-94, C Sonata 1995-, L Excel 1986-89, V Excel and Scoupe 1990-, J Elantra), 5 body type, 6 body style & version (1 L, 2 GL, 3 GLS), 7 restraint (1 active, 2 passive belt), 8 engine (D 1975 cc, F 1997 cc, J 1468 cc, M 1836 cc, N 1495 cc, R 1596 cc, S 2351 cc, T 2972 cc). No transmission position."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/65f03093-b278-434f-8ca8-cb4b609ab02b",
+     "doc": "MID ORG11264 '94MY HMC V.I.N Decoding Guide' and the same-format MY1995-2003 guides ORG11267 (95MY), ORG11268 (96MY), ORG11269 (97MY), ORG11270 (98MY), ORG11271 (99MY), ORG11272/ORG11273 (00MY), ORG11248/ORG11249/ORG11250 (01MY incl. Santa Fe), ORG11257/ORG11259 (02MY), ORG11261 (03MY)",
+     "says": "Passenger car: 1 country, 2 maker, 3 vehicle type, 4 line, 5 body (to MY1999) or model series (MY2000-), 6 series/grade or body type, 7 restraint, 8 engine, 9 check digit, 10 year, 11 plant. MY1994: engine R = ELANTRA (G 1596cc), M = ELANTRA (G 1836cc), N = SCOUPE (G 1495cc, turbo and non-turbo share N). Santa Fe MY2001-02 (WMI KM8): 4 S, 5 model & series A-E, 6 1 wagon FWD / 7 wagon AWD, 7 GVWR, 8 engine (B 2.4, D 2.7, E 3.5). No transmission position in any of them."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC live decodes 2026-11-05 (saved in scraper/manual_detect/vin_rules_3_vpic.json: every in-scope lot VIN plus partial-VIN pattern decodes per rule code and model year)",
+     "says": "Engine model / displacement / drive / trim per code and year: see each rule's vpic_check and vpic_partial_pattern_decodes."
+    },
+    {
+     "url": "https://consumerguide.com/used/1992-95-hyundai-elantra/",
+     "doc": "Consumer Guide used 1992-95 Hyundai Elantra; Carwhere 1993/1995 Elantra specs; search-result excerpts, 2026-11-05",
+     "says": "Consumer Guide: from 1993 the 1.8 went 'on the GLS and all automatic-transmission models. Manual-shift base models stuck with the original 113-horsepower engine' (so 1.6 = manual). Conflicting: Carwhere's 1993 listing shows both engines with manual and automatic."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
+     "says": "9931 (1993); 10907 (1994); 11858 (1995): Elantra 1.6 Manual 5-spd only; 1.8 rows list both"
+    }
+   ],
+   "candidate_reason": "EPA and Consumer Guide agree that from 1993 the 1.6 was manual-only, but Carwhere lists a 1993 1.6 automatic; no lot car is in scope.",
+   "drop_reason": "",
+   "evidence_gaps": "Engine code R read in 01-22-N11B-5639 and the MY1994/1995 guides.",
+   "validation": {
+    "in_scope_lot_cars": 0,
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "raw_including_vpic_defaults": {
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "vpic_default_lines_excluded": 0,
+    "vpic_default_lines_excluded_by_class": {},
+    "uniform_cell_lines_excluded": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_cell": {
+     "filter": {
+      "make": "Hyundai",
+      "model": "^Elantra$",
+      "displ": "1.6",
+      "drive": null,
+      "dscr": null
+     },
+     "mode": "manual_only",
+     "years_meeting_mode": [
+      1993,
+      1994,
+      1995
+     ],
+     "years_failing": {},
+     "all_rule_years_meet_mode": true,
+     "rows": {
+      "1993": [
+       "9931 Elantra Manual 5-spd"
+      ],
+      "1994": [
+       "10907 Elantra Manual 5-spd"
+      ],
+      "1995": [
+       "11858 Elantra Manual 5-spd"
+      ]
+     }
+    },
+    "vpic_check": {
+     "expect": {
+      "engine": null,
+      "displ": "1.6",
+      "drive": null
+     },
+     "inconsistent_examples": []
+    },
+    "vpic_partial_pattern_decodes": [
+     {
+      "code": "R",
+      "year": 1993,
+      "pattern": "KMHJF23R*P",
+      "Make": "HYUNDAI",
+      "Model": "Elantra",
+      "Trim": "Deluxe (GL)",
+      "EngineModel": "",
+      "DisplacementL": "1.596000",
+      "DriveType": "",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "5,6,14"
+     },
+     {
+      "code": "R",
+      "year": 1994,
+      "pattern": "KMHJF23R*R",
+      "Make": "HYUNDAI",
+      "Model": "Elantra",
+      "Trim": "Deluxe (GL)",
+      "EngineModel": "",
+      "DisplacementL": "1.596000",
+      "DriveType": "",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "4,6,14"
+     },
+     {
+      "code": "R",
+      "year": 1995,
+      "pattern": "KMHJF23R*S",
+      "Make": "HYUNDAI",
+      "Model": "Elantra",
+      "Trim": "Deluxe (GL)",
+      "EngineModel": "",
+      "DisplacementL": "1.596000",
+      "DriveType": "",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     }
+    ],
+    "codes_seen_on_lots": {},
+    "years_seen_on_lots": {},
+    "models_seen_on_lots": {},
+    "cars_without_trans_info_us_yards": 0,
+    "cars_without_trans_info_by_reason": {},
+    "cars_without_trans_info_canadian_yards_not_counted": 0
+   },
+   "newly_confirmed_manual": 0
+  },
+  {
+   "id": "kia_rio_code_L_lx_mt_2014_2016",
+   "make": "Kia",
+   "status": "drop",
+   "claim": "manual",
+   "scope": {
+    "make": "Kia",
+    "models": "Kia Rio (UB) MY2014 and MY2016 (VIN KNADL*)",
+    "model_years": [
+     2014,
+     2016
+    ],
+    "wmi": [
+     "KNA"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [D]",
+     "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
+    ]
+   },
+   "vin_condition": {
+    "position": 5,
+    "manual_codes": {
+     "L": "MY2014 '1.6 Manual Trans LX STD', MY2016 (revised guide) 'LX M/T' (MY2014, 2016)"
+    },
+    "codes_not_ruled": {
+     "M": "MY2014 '1.6 AT LX', MY2016 'LX A/T', but real manual LX cars carry M",
+     "L in MY2015": "'L (Low Grade)'"
+    },
+    "code_table_source": "manufacturer"
+   },
+   "vin_regex_manual": "^(KNA)DL....[EG].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0c1cfe54-c9c8-48af-841c-9de408d534cd",
+     "doc": "MID ORG9014, HATCI letter 2013-10-01, '2014 Kia Part 565 VIN Decoding 131001', page 3 '2014MY V.I.N Decoding Guide - Rio (UB 4DR/5DR)'",
+     "says": "KNA D, VIN 5 = L '1.6 Manual Trans LX STD', M '1.6 AT LX STD / Power', N '1.6 AT EX STD / Conv / Eco', P '1.6 AT SX STD / Premium'; 6 = 4/5; 7 = A/F; 8 = 1 1.2 Kappa, 2 1.4 Gamma, 3 1.6 Gamma; 10 = E; 11 = 6 Sohari."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b2968c4c-d1b8-4b1d-9fc9-eb56f3259ce4",
+     "doc": "MID ORG10572, HATCI letter 2015-01-30, '2016MY Kia VIN system decoding submission 150119', page 7 (Rio, dated 2-Feb-15)",
+     "says": "Rio (UB): VIN 5 = L 'LX M/T', M 'LX A/T', N 'LX A/T Power Pkg', P 'EX', R 'EX ECO (ISG)', S 'EX Color Pack (PE4)', T 'SX'; 8 = 3 1.6 Gamma; 10 = G. Other 2016 Kia lines in the same submission (Forte, Forte Koup, K900, Optima Hybrid, Rondo, Sedona, Soul, Soul EV, Sportage) use grade/trim names without a transmission."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b63e2bd2-1085-474c-8424-584ecceeefeb",
+     "doc": "MID ORG10385, HATCI letter 2015-01-06, '2016 Kia Rio NHTSA Part 565 VIN Decoding 150105'",
+     "says": "Rio (UB): VIN 5 = L 'L', M 'GL', N 'GLS,JSL,TAX', P 'HGS', R 'TOP' (grade codes)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/d5a50cf4-4c9e-49d6-90b1-7cd58612b3fb",
+     "doc": "MID ORG9934, HATCI letter 2014-07-11, '2015 Kia Part 565 VIN Decoding' (Soul EV, Sedona, Optima HEV, Rio, Forte, Forte Koup, Soul, Optima, Cadenza, Sportage, Rondo)",
+     "says": "Every line: model series = grade (L, GL, GLS/JSL/TAX, HGS, TOP); Rio MY2015 L = 'L (Low Grade)'. No transmission wording."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC live decodes 2026-11-05 (saved in scraper/manual_detect/vin_rules_3_vpic.json: every in-scope lot VIN plus partial-VIN pattern decodes per rule code and model year)",
+     "says": "Engine model / displacement / drive / trim per code and year: see each rule's vpic_check and vpic_partial_pattern_decodes."
+    },
+    {
+     "url": "https://www.edmunds.com/kia/rio/2016/vin/KNADM4A3XG6667944/",
+     "doc": "Listings found by web search 2026-11-05: 2016 Rio LX manual KNADM4A3XG6667944 (Edmunds); 2014 Rio LX 6-speed manual KNADM5A35E6347367 (fivestarforddallas.com); 2014 Rio manual KNADM4A31E6355377 (bid.cars); 2014 Rio KNADM4A34E6351405 'MANUAL, 6-SPD'; 2016 Rio LX manuals with KNADM4A3 at Volvo Cars Richmond and Huffines. All check digits valid.",
+     "says": "Manual Rio LX cars of MY2014 and MY2016 carry VIN 5 = M, the code Kia's own tables label '1.6 AT LX' (MY2014) and 'LX A/T' (MY2016). No VIN with KNADL was found on the lots or on the web."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
+     "says": "Rio 1.6 lists Automatic 6-spd and Manual 6-spd rows in 2014 and 2016"
+    }
+   ],
+   "candidate_reason": "",
+   "drop_reason": "The manufacturer's own table is contradicted by real VINs: 2014 and 2016 Rio LX cars with a 6-speed manual carry code M, which the same tables label automatic. Kia evidently coded the grade (the original MY2016 guide used L/M/N/P/R = L/GL/GLS/HGS/TOP), so the transmission wording cannot be trusted for L either. No KNADL VIN was found on the lots or on the web.",
+   "evidence_gaps": "Kept in the file as a dropped rule so it is not re-derived later.",
+   "validation": {
+    "in_scope_lot_cars": 0,
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "raw_including_vpic_defaults": {
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "vpic_default_lines_excluded": 0,
+    "vpic_default_lines_excluded_by_class": {},
+    "uniform_cell_lines_excluded": 0,
+    "ground_truth_speeds_only_excluded": 0,
+    "disagree_examples": [],
+    "epa_cell": {
+     "filter": {
+      "make": "Kia",
+      "model": "^Rio$",
+      "displ": "1.6",
+      "drive": null,
+      "dscr": null
+     },
+     "mode": "manual_offered",
+     "years_meeting_mode": [
+      2014,
+      2016
+     ],
+     "years_failing": {},
+     "all_rule_years_meet_mode": true,
+     "rows": {
+      "2014": [
+       "34556 Rio Automatic 6-spd",
+       "34557 Rio Manual 6-spd"
+      ],
+      "2016": [
+       "36067 Rio Automatic (S6)",
+       "36068 Rio Manual 6-spd"
+      ]
+     }
+    },
+    "vpic_check": {
+     "expect": {
+      "engine": null,
+      "displ": "1.6",
+      "drive": null
+     },
+     "inconsistent_examples": []
+    },
+    "vpic_partial_pattern_decodes": [
+     {
+      "code": "L",
+      "year": 2014,
+      "pattern": "KNADL4A3*E",
+      "Make": "KIA",
+      "Model": "Rio",
+      "Trim": "1.6 Manual Trans LX STD",
+      "EngineModel": "DOHC GAMMA",
+      "DisplacementL": "1.6",
+      "DriveType": "",
+      "TransmissionStyle": "Manual/Standard",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     },
+     {
+      "code": "L",
+      "year": 2016,
+      "pattern": "KNADL4A3*G",
+      "Make": "KIA",
+      "Model": "Rio",
+      "Trim": "LX M/T",
+      "EngineModel": "Gamma",
+      "DisplacementL": "1.6",
+      "DriveType": "",
+      "TransmissionStyle": "",
+      "TransmissionSpeeds": "",
+      "ErrorCode": "6"
+     }
+    ],
+    "codes_seen_on_lots": {},
+    "years_seen_on_lots": {},
+    "models_seen_on_lots": {},
+    "cars_without_trans_info_us_yards": 0,
+    "cars_without_trans_info_by_reason": {},
+    "cars_without_trans_info_canadian_yards_not_counted": 0
+   },
+   "newly_confirmed_manual": 0
+  }
+ ],
+ "newly_confirmed_manual_cars": [
+  {
+   "id": "7948493",
+   "vin": "KNDJE724367201664",
+   "year": 2006,
+   "make": "Kia",
+   "model": "Sportage",
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "char8=4: 2.0L DOHC (50-State) in a Sportage 4WD (line J + E): 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Carson City",
+   "state": "NV"
+  },
+  {
+   "id": "7953129",
+   "vin": "KNDJE724377423980",
+   "year": 2007,
+   "make": "Kia",
+   "model": "Sportage",
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "char8=4: 2.0L DOHC (50-State) in a Sportage 4WD (line J + E): 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Dallas South",
+   "state": "TX"
+  },
+  {
+   "id": "7923818",
+   "vin": "KNDJE724X67233592",
+   "year": 2006,
+   "make": "Kia",
+   "model": "Sportage",
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "char8=4: 2.0L DOHC (50-State) in a Sportage 4WD (line J + E): 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Redding",
+   "state": "CA"
+  },
+  {
+   "id": "1168-66939",
+   "vin": "KNDJE724697655749",
+   "year": 2009,
+   "make": "Kia",
+   "model": "Sportage",
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "char8=4: 2.0L DOHC (50-State) in a Sportage 4WD (line J + E): 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Raleigh",
+   "state": "NC"
+  },
+  {
+   "id": "pap-36-1029126-13",
+   "vin": "KMHT36AH5LU007272",
+   "year": 2020,
+   "make": "Hyundai",
+   "model": "Veloster N",
+   "rule": "hyundai_veloster_n_2019_2020",
+   "code": "char5=3: Veloster N (2.0 T-GDI Theta II): 6-speed manual only until the 8-speed wet DCT arrived for MY2021",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "Pull-A-Part - Albuquerque",
+   "state": "NM"
+  },
+  {
+   "id": "pap-4-1160399-4",
+   "vin": "KNDJE724967147156",
+   "year": 2006,
+   "make": "Kia",
+   "model": "Sportage",
+   "rule": "kia_sportage_20_4wd_2005_2009",
+   "code": "char8=4: 2.0L DOHC (50-State) in a Sportage 4WD (line J + E): 5-speed manual only",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "Pull-A-Part - Atlanta North",
+   "state": "GA"
+  }
+ ],
+ "candidate_rule_manual_cars": [
+  {
+   "id": "pap-17-1089315-2",
+   "vin": "KM8JM72B37U535516",
+   "year": 2007,
+   "make": "Hyundai",
+   "model": "Tucson",
+   "rule": "hyundai_tucson_20_awd_2005_2009",
+   "code": "char8=B: 2.0L DOHC Beta (JM) with VIN 6 = 7 (Wagon AWD): EPA lists Manual 5-spd only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Memphis",
+   "state": "TN"
+  },
+  {
+   "id": "harrys-KM8JM72B37U574235",
+   "vin": "KM8JM72B37U574235",
+   "year": 2007,
+   "make": "Hyundai",
+   "model": "Tucson",
+   "rule": "hyundai_tucson_20_awd_2005_2009",
+   "code": "char8=B: 2.0L DOHC Beta (JM) with VIN 6 = 7 (Wagon AWD): EPA lists Manual 5-spd only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Hazle Township",
+   "state": "PA"
+  },
+  {
+   "id": "ipull-pom067879",
+   "vin": "KM8JM72B46U296623",
+   "year": 2006,
+   "make": "Hyundai",
+   "model": "Tucson",
+   "rule": "hyundai_tucson_20_awd_2005_2009",
+   "code": "char8=B: 2.0L DOHC Beta (JM) with VIN 6 = 7 (Wagon AWD): EPA lists Manual 5-spd only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "iPull-uPull - Pomona",
+   "state": "CA"
+  },
+  {
+   "id": "pns-stk027293",
+   "vin": "KM8JM72BX5U236425",
+   "year": 2005,
+   "make": "Hyundai",
+   "model": "Tucson",
+   "rule": "hyundai_tucson_20_awd_2005_2009",
+   "code": "char8=B: 2.0L DOHC Beta (JM) with VIN 6 = 7 (Wagon AWD): EPA lists Manual 5-spd only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Springville",
+   "state": "UT"
+  }
+ ],
+ "canadian_yard_cars": [],
+ "published_label_conflicts": [],
+ "hub_findings": {
+  "hk_vpic_manual_labels": {
+   "what": "Every Hyundai/Kia/Genesis lot car whose published transmission is a vPIC 'manual' (transSrc vin).",
+   "lines": 562,
+   "by_vpic_model_year": {
+    "2008": 552,
+    "2008 (VIN not in the cache backup; published label from the CI decode)": 10
+   },
+   "in_uniform_cells": 481,
+   "in_mixed_cells_not_flagged_by_baseline": 81,
+   "epa_check": {
+    "epa_lists_automatic_too": 561,
+    "epa_manual_only (Sportage 2.0 4WD, agrees with rule kia_sportage_20_4wd_2005_2009)": 1
+   },
+   "finding": "All of them are MY2008 vPIC values keyed on the engine character alone: every MY2008 Hyundai/Kia 4-cylinder (and the Santa Fe 2.7 V6) decodes '5-spd Manual/Standard', every other V6 'Automatic'. Neither the MY2008 Hyundai guide (ORG10864) nor the Kia guide (ORG10857) has a transmission position. The baseline flagged the 17 uniform cells; the 2008 Santa Fe 2.7 (5NMSG.3D) and Sportage 2.0 (KNDJ[EF]724) manuals sit in mixed cells (their V6 siblings decode automatic) and are the same default. Only the Sportage 2.0 4WD (KNDJE724) labels happen to be right (rule kia_sportage_20_4wd_2005_2009); the rest are not evidence about the car.",
+   "cells": [
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Elantra",
+     "vin_prefix": "KMHDU46D",
+     "engine": "2.0L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 159
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Sonata",
+     "vin_prefix": "5NPET46C",
+     "engine": "2.4L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 74
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Accent",
+     "vin_prefix": "KMHCM36C",
+     "engine": "1.6L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 39
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Accent",
+     "vin_prefix": "KMHCN46C",
+     "engine": "1.6L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 36
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Rio",
+     "vin_prefix": "KNADE123",
+     "engine": "1.6L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 34
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Spectra",
+     "vin_prefix": "KNAFE121",
+     "engine": "2.0L 4-cyl",
+     "drive": "",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 34
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Santa Fe",
+     "vin_prefix": "5NMSG13D",
+     "engine": "2.7L 6-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 33
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Sportage",
+     "vin_prefix": "KNDJF724",
+     "engine": "2.0L 4-cyl",
+     "drive": "4x2",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 23
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Sonata",
+     "vin_prefix": "5NPEU46C",
+     "engine": "2.4L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 18
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Tiburon",
+     "vin_prefix": "KMHHM66D",
+     "engine": "2.0L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 18
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Spectra",
+     "vin_prefix": "KNAFE122",
+     "engine": "2.0L 4-cyl",
+     "drive": "",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 18
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Spectra",
+     "vin_prefix": "KNAFE161",
+     "engine": "2.0L 4-cyl",
+     "drive": "",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 14
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Santa Fe",
+     "vin_prefix": "5NMSG73D",
+     "engine": "2.7L 6-cyl",
+     "drive": "AWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 10
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Accent",
+     "vin_prefix": "KMHCN35C",
+     "engine": "1.6L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 7
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Accent",
+     "vin_prefix": "KMHCN36C",
+     "engine": "1.6L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 7
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Rio",
+     "vin_prefix": "KNADE163",
+     "engine": "1.6L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 5
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Spectra",
+     "vin_prefix": "KNAFE162",
+     "engine": "2.0L 4-cyl",
+     "drive": "",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 5
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Elantra",
+     "vin_prefix": "KMHDU45D",
+     "engine": "2.0L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 3
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Elantra",
+     "vin_prefix": "KMHDU46D",
+     "engine": "4cyl 2.0L",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 3
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Santa Fe",
+     "vin_prefix": "5NMSG13D",
+     "engine": "6cyl 2.7L",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 3
+    },
+    {
+     "vpicYear": "",
+     "vpicModel": "",
+     "vin_prefix": "5NMSG13D",
+     "engine": "2.7L 6-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 2
+    },
+    {
+     "vpicYear": "",
+     "vpicModel": "",
+     "vin_prefix": "5NPET46C",
+     "engine": "2.4L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 2
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Tiburon",
+     "vin_prefix": "KMHHM66D",
+     "engine": "4cyl 2.0L",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 2
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Rio",
+     "vin_prefix": "KNADE123",
+     "engine": "4cyl 1.6L",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 2
+    },
+    {
+     "vpicYear": "",
+     "vpicModel": "",
+     "vin_prefix": "KNAFE122",
+     "engine": "2.0L 4-cyl",
+     "drive": "",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 2
+    },
+    {
+     "vpicYear": "",
+     "vpicModel": "",
+     "vin_prefix": "KNDJF724",
+     "engine": "2.0L 4-cyl",
+     "drive": "4x2",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 2
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Accent",
+     "vin_prefix": "KMHCN45C",
+     "engine": "1.6L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 1
+    },
+    {
+     "vpicYear": "",
+     "vpicModel": "",
+     "vin_prefix": "KMHDU46D",
+     "engine": "2.0L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 1
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Sonata",
+     "vin_prefix": "5NPET46C",
+     "engine": "4cyl 2.4L",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 1
+    },
+    {
+     "vpicYear": "",
+     "vpicModel": "",
+     "vin_prefix": "KNADE123",
+     "engine": "1.6L 4-cyl",
+     "drive": "FWD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 1
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Spectra",
+     "vin_prefix": "KNAFE122",
+     "engine": "4cyl 2.0L",
+     "drive": "",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "uniform",
+     "lines": 1
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Sportage",
+     "vin_prefix": "KNDJE724",
+     "engine": "2.0L 4-cyl",
+     "drive": "4WD",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 1
+    },
+    {
+     "vpicYear": "2008",
+     "vpicModel": "Sportage",
+     "vin_prefix": "KNDJF724",
+     "engine": "4cyl 2.0L",
+     "drive": "4x2",
+     "vpic_trans": "5-spd Manual/Standard",
+     "cell": "mixed-cell",
+     "lines": 1
+    }
+   ],
+   "hub_decision_needed": "Whether to stop showing the Manual badge for Hyundai/Kia/Genesis vPIC MY2008 'manual' values (integration change in the scraper/app; not made here)."
+  },
+  "vpic_code_level_manuals_checked": [
+   {
+    "pattern": "KMTG2 (Genesis G70), MY2021",
+    "vpic": "Manual/Standard, 8 speeds (MY2019-2020: trim '2.0T Sport (MT)' only)",
+    "verdict": "Manual is right (Genesis filing code 2 = '2.0T Sport (MT)'; EPA 42495 Manual 6-spd); the speed count is wrong (6, not 8). Covered by rule genesis_g70_20t_sport_mt_2019_2021."
+   },
+   {
+    "pattern": "KMHD0 (Elantra 'Sport', Korea-built), MY2020",
+    "vpic": "Manual/Standard, 6 speeds for every VIN with position 5 = 0",
+    "verdict": "Not supported: Hyundai's 2020MY Elantra guide (MID ORG16557, 2019-02-06) names code 0 only 'Sport', and EPA's 2020 Elantra 1.6 turbo rows list only Automatic (AM7) (id 41454). A vPIC default; no lot car carries it today, but a future one would get a Manual badge from it."
+   },
+   {
+    "pattern": "Kia Rio KNADL, MY2014",
+    "vpic": "Manual/Standard (trim '1.6 Manual Trans LX STD')",
+    "verdict": "Kia's own table, but real manual Rio LX cars carry M (rule kia_rio_code_L_lx_mt_2014_2016, dropped). No lot car carries L."
+   }
+  ],
+  "hk_vpic_automatic_labels_epa_lists_manual": {
+   "what": "Hyundai/Kia/Genesis lot cars with a vPIC automatic/CVT label in a year/model/displacement where EPA also lists a manual: these are vPIC defaults, so a later manual rule would show them as false 'disagreements'.",
+   "lines": 183,
+   "cells": [
+    {
+     "year": 2018,
+     "vpicModel": "Elantra",
+     "displL": 2.0,
+     "vpic_trans": "6-spd Automatic",
+     "lines": 58
+    },
+    {
+     "year": 2008,
+     "vpicModel": "Optima",
+     "displL": 2.4,
+     "vpic_trans": "5-spd Automatic",
+     "lines": 52
+    },
+    {
+     "year": 2018,
+     "vpicModel": "Forte",
+     "displL": 2.0,
+     "vpic_trans": "6-spd Automatic",
+     "lines": 38
+    },
+    {
+     "year": 2020,
+     "vpicModel": "Elantra",
+     "displL": 2.0,
+     "vpic_trans": "Continuously Variable Transmission (CVT)",
+     "lines": 22
+    },
+    {
+     "year": 2023,
+     "vpicModel": "Elantra",
+     "displL": 2.0,
+     "vpic_trans": "Continuously Variable Transmission (CVT)",
+     "lines": 6
+    },
+    {
+     "year": 2022,
+     "vpicModel": "Elantra",
+     "displL": 2.0,
+     "vpic_trans": "Continuously Variable Transmission (CVT)",
+     "lines": 3
+    },
+    {
+     "year": 2017,
+     "vpicModel": "Rio",
+     "displL": 1.6,
+     "vpic_trans": "6-spd Automatic",
+     "lines": 3
+    },
+    {
+     "year": 2020,
+     "vpicModel": "Soul",
+     "displL": 2.0,
+     "vpic_trans": "Continuously Variable Transmission (CVT)",
+     "lines": 1
+    }
+   ]
+  }
+ },
+ "vpic_model_series_sweep": {
+  "method": "For each Hyundai/Kia/Genesis line (WMI + VIN 4) and model year MY2006-2026 that has a lot car, every position-5 character (33) was decoded by vPIC DecodeVINValuesBatch with that line's commonest positions 6-8 and '*' for the check digit (2026-11-05). vPIC's Trim/Series text is its transcription of the filing's model-series names.",
+  "queries": 11385,
+  "codes_vpic_knows": 4417,
+  "codes_whose_model_series_names_a_transmission": [
+   {
+    "year": 2014,
+    "vin_1_5": "KNADL",
+    "model": "Rio",
+    "trim": "1.6 Manual Trans LX STD",
+    "vpic_transmission": "Manual/Standard"
+   },
+   {
+    "year": 2014,
+    "vin_1_5": "KNADM",
+    "model": "Rio",
+    "trim": "1.6 AT LX STD/Power",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2014,
+    "vin_1_5": "KNADN",
+    "model": "Rio",
+    "trim": "1.6 AT EX STD/Conv/Eco",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2014,
+    "vin_1_5": "KNADP",
+    "model": "Rio",
+    "trim": "1.6 AT SX STD / Premium",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2016,
+    "vin_1_5": "KNADL",
+    "model": "Rio",
+    "trim": "LX M/T",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2016,
+    "vin_1_5": "KNADM",
+    "model": "Rio",
+    "trim": "LX A/T",
+    "vpic_transmission": ""
+   },
+   {
+    "year": 2016,
+    "vin_1_5": "KNADN",
+    "model": "Rio",
+    "trim": "LX A/T Power Pkg",
+    "vpic_transmission": ""
+   }
+  ],
+  "lines_where_vpic_returns_a_transmission": 90,
+  "of_which_transmission_varies_with_position_5": [
+   {
+    "year": 2014,
+    "vin_1_4": "KNAD",
+    "model": "Rio",
+    "values": {
+     "Manual/Standard": 1,
+     "": 3
+    }
+   },
+   {
+    "year": 2017,
+    "vin_1_4": "KM8J",
+    "model": "Tucson",
+    "values": {
+     "Automatic": 2,
+     "": 1
+    }
+   },
+   {
+    "year": 2017,
+    "vin_1_4": "KNAD",
+    "model": "Rio",
+    "values": {
+     "": 1,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2017,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 31,
+     "Automatic": 1,
+     "Automated Manual Transmission (AMT)": 1
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "5NPD",
+    "model": "Elantra",
+    "values": {
+     "": 3,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "5XYP",
+    "model": "Sorento",
+    "values": {
+     "Automatic": 3,
+     "": 2
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KMHD",
+    "model": "Elantra",
+    "values": {
+     "": 2,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KMHE",
+    "model": "Sonata",
+    "values": {
+     "": 1,
+     "Automatic": 3
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KNAE",
+    "model": "Stinger",
+    "values": {
+     "": 28,
+     "Automatic": 5
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KNAF",
+    "model": "Forte",
+    "values": {
+     "Automatic": 2,
+     "": 1
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KNDC",
+    "model": "Niro",
+    "values": {
+     "": 2,
+     "Automatic": 5
+    }
+   },
+   {
+    "year": 2018,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 31,
+     "Automatic": 1,
+     "Automated Manual Transmission (AMT)": 1
+    }
+   },
+   {
+    "year": 2019,
+    "vin_1_4": "KM8K",
+    "model": "Kona",
+    "values": {
+     "Automatic": 3,
+     "Automated Manual Transmission (AMT)": 2,
+     "": 1
+    }
+   },
+   {
+    "year": 2019,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 31,
+     "Automatic": 1,
+     "Automated Manual Transmission (AMT)": 1
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "5NPD",
+    "model": "Elantra",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 2,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "5NPE",
+    "model": "Sonata",
+    "values": {
+     "": 3,
+     "Automatic": 2
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KM8K",
+    "model": "Kona",
+    "values": {
+     "Automatic": 5,
+     "": 1
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KM8R",
+    "model": "Palisade",
+    "values": {
+     "": 30,
+     "Automatic": 3
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KMHC",
+    "model": "Ioniq",
+    "values": {
+     "": 3,
+     "Automatic": 2
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KMHD",
+    "model": "Elantra",
+    "values": {
+     "Manual/Standard": 1,
+     "Continuously Variable Transmission (CVT)": 2
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KMHH",
+    "model": "Elantra GT",
+    "values": {
+     "Automatic": 1,
+     "": 1
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KMHL",
+    "model": "Sonata",
+    "values": {
+     "": 30,
+     "Automatic": 3
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KNDC",
+    "model": "Niro",
+    "values": {
+     "Automatic": 2,
+     "": 3
+    }
+   },
+   {
+    "year": 2020,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 1,
+     "Continuously Variable Transmission (CVT)": 2,
+     "Automated Manual Transmission (AMT)": 1
+    }
+   },
+   {
+    "year": 2021,
+    "vin_1_4": "5NPL",
+    "model": "Elantra",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 1,
+     "": 4
+    }
+   },
+   {
+    "year": 2021,
+    "vin_1_4": "KMHL",
+    "model": "Elantra",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 1,
+     "": 5
+    }
+   },
+   {
+    "year": 2021,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 2,
+     "Continuously Variable Transmission (CVT)": 2
+    }
+   },
+   {
+    "year": 2022,
+    "vin_1_4": "KNDJ",
+    "model": "Soul",
+    "values": {
+     "": 1,
+     "Continuously Variable Transmission (CVT)": 2,
+     "Automatic": 1
+    }
+   },
+   {
+    "year": 2023,
+    "vin_1_4": "5XXG",
+    "model": "K5",
+    "values": {
+     "Automatic": 3,
+     "Dual-Clutch Transmission (DCT)": 1
+    }
+   },
+   {
+    "year": 2023,
+    "vin_1_4": "KM8K",
+    "model": "Kona",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 2,
+     "Automatic": 1,
+     "": 1
+    }
+   },
+   {
+    "year": 2023,
+    "vin_1_4": "KMHL",
+    "model": "Elantra",
+    "values": {
+     "Continuously Variable Transmission (CVT)": 4,
+     "": 1,
+     "Automatic": 1
+    }
+   }
+  ],
+  "finding": "Only Kia Rio MY2014 (L '1.6 Manual Trans LX STD', M/N/P '1.6 AT ...') and MY2016 (L 'LX M/T', M 'LX A/T', N 'LX A/T Power Pkg') name a transmission in position 5 (rule kia_rio_code_L_lx_mt_2014_2016, dropped). Where vPIC returns a TransmissionStyle (MY2008, MY2017+), it is the same for every position-5 code of the line (line/engine-level default), apart from the lines listed under of_which_transmission_varies_with_position_5."
+ }
+}

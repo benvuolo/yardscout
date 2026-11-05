@@ -1,0 +1,4497 @@
+{
+ "worklist": "vin_rules_1",
+ "makes": [
+  "Subaru",
+  "Mazda",
+  "Mitsubishi",
+  "Suzuki",
+  "Isuzu"
+ ],
+ "generated_utc": "2026-11-05T02:48:22Z",
+ "generator": "scraper/manual_detect/vin_rules_1.py",
+ "inputs": {
+  "inventory_live": "docs/data/inventory_live.json",
+  "vehicle_extras": "docs/data/vehicle_extras.json",
+  "vin_decodes": "docs/data/vin_decodes.json.gz",
+  "ground_truth": "scraper/manual_detect/ground_truth.jsonl (uniformCell lines treated as unlabelled)",
+  "epa": "scraper/manual_detect/epa/vehicles.csv",
+  "mid_filings_read": "NHTSA MID Part 565 files listed in each rule's citations and in vin_scheme; downloaded 2026-11-05 from vpic.nhtsa.dot.gov/mid (search API + displayfile)"
+ },
+ "answer": {
+  "Subaru": "ENCODED. VIN character 11 is 'plant of manufacture and transmission type' in every Subaru filing read, MY1985-1986, 1989, 1990, 1991, 1994, 1996, 1997, 1999, 2001-2004, 2006, 2009, 2012-2014, 2017, 2018, 2022, 2025. Gunma (JF1/JF2): G = AWD manual, H = AWD automatic/CVT, L = AWD 6MT (2006-2014), 9 = Main Plant manual / 8 = Main Plant CVT or 6AT (2014+); SIA Lafayette (4S3/4S4): 6 = AWD 5MT and 7 = AWD 4AT (1990-2009), 4 = 5AT (2005-2014), 1 = 6MT/5MT, 3 = CVT (2010+). The same character covers the Subaru-built Scion FR-S / Toyota 86 / GR86 (JF1 ZN/ZD). Not ruled: MY1987-1988 (no filing found), MY2013 Gunma codes 1/2 on Impreza / XV Crosstrek (no filing read; vPIC applies the BRZ meanings 6MT/6AT to them).",
+  "Mazda": "NOT ENCODED in any filing read (MY1990, 1995, 2003, 2004, 2006, 2007, 2008, 2009, 2010 Mazda3, 2011, 2021). Characters 4-8 are line, series, body, engine type, restraint; the filings give engine type and horsepower but no transmission column. The first Mazda filing read that names a transmission is the MY2024 CX-90 (character 7), an automatic-only model. Ford-built Mazdas (B-Series 4F4, Tribute 4F2) are coded by Ford, also without transmission. Where Mazda's engine code is an engine sold only with a manual in the US, the engine code decides: MAZDASPEED3 L3T (2007-2013), MAZDASPEED6 L3T (2006-2007), MAZDASPEED Protege FSD 170 hp (2003), RX-8 13B High Power (2004 and 2009-2011; 2005 is a candidate; 2006-2008 is not, because the 6AT also used the High Power code).",
+  "Mitsubishi": "NOT ENCODED in any filing read (MY1992, 1993, 1995, 1998, 2003, 2018). Character 8 is the engine; the only manual-only engine code ruled is the 3.0 twin-turbo (MY1991-1992 C, MY1993-1999 K) of the 3000GT VR-4 / Spyder VR-4 / Dodge Stealth R/T Turbo. Montero Sport 2.4 4x2 (1997-1999) is an EPA-only candidate. Lancer Evolution VIII/IX (2003-2006) were manual-only but no lot car without transmission info carries an Evolution code, so no rule was built.",
+  "Suzuki": "NOT ENCODED in any filing read (MY2003, MY2009). The Samurai (1986-1995) is an EPA-only candidate model rule; nothing else. GM-built Suzukis (Forenza / Reno / Verona KL5, XL7 2007-2009 2S3) and the Nissan-built Equator (5Z6) follow GM / Nissan schemes, also without transmission.",
+  "Isuzu": "NOT ENCODED in any filing read (MY1992, 1995, 1997, 1998, 2002). Character 5 is line + chassis (4x2 / 4x4), 7 body, 8 engine. Ruled where engine + line identify a configuration sold only with a manual: Rodeo 2.6 4x2 (1991-1997) and the 1998 Amigo (every engine). EPA-only candidates: Pickup/Amigo 2.3 4x2 (1988-1995), Pickup/Amigo 2.6 4x4 (1989-1995), Trooper 2.3 (1986-1987). GM-built Isuzus (Hombre 1GG, i-Series 1GG, Ascender 4NU) follow GM's scheme without transmission."
+ },
+ "vin_scheme": {
+  "Subaru": {
+   "position": 11,
+   "name": "Plant of manufacture and transmission type",
+   "tables": "see each subaru_* rule's vin_condition; per-filing quotes in citations"
+  },
+  "Mazda": {
+   "positions": {
+    "4": "line",
+    "5": "series",
+    "6": "body type",
+    "7": "engine type (pre-2021 the 4-8 group is read as one VDS code)",
+    "8": "restraint / engine (varies by era; filings list whole VDS codes)",
+    "11": "plant"
+   },
+   "transmission": "none (MY2024 CX-90 first names one, automatic only)"
+  },
+  "Mitsubishi": {
+   "positions": {
+    "4": "restraint / GVWR",
+    "5": "car line",
+    "6": "series (price class)",
+    "7": "body type",
+    "8": "engine type",
+    "11": "plant"
+   },
+   "transmission": "none"
+  },
+  "Suzuki": {
+   "positions": {
+    "4": "line",
+    "5": "series / chassis / restraint",
+    "6": "engine type",
+    "7": "design sequence",
+    "8": "body type / grade",
+    "11": "plant"
+   },
+   "transmission": "none"
+  },
+  "Isuzu": {
+   "positions": {
+    "4": "GVWR / brake",
+    "5": "line, chassis (4x2/4x4) and restraint",
+    "6": "series",
+    "7": "body type",
+    "8": "engine",
+    "11": "plant"
+   },
+   "transmission": "none"
+  }
+ },
+ "not_encoded_or_not_ruled": [
+  {
+   "make": "Subaru",
+   "scope": "MY1987-1988 Gunma",
+   "why": "no filing found in MID for these years; the 1985-86 and 1989 tables agree, but the codes are not interpolated across a gap with no document"
+  },
+  {
+   "make": "Subaru",
+   "scope": "MY1989 code E ('4WD, Dual-range')",
+   "why": "the 1989 table does not say whether E is manual"
+  },
+  {
+   "make": "Subaru",
+   "scope": "MY2013 Gunma Impreza / XV Crosstrek codes 1 and 2",
+   "why": "no MY2013 Impreza filing read; vPIC decodes them with the BRZ meanings (1 = 6MT, 2 = 6AT) although the Impreza had a 5MT or CVT. Every lot car with these codes already has a vPIC transmission"
+  },
+  {
+   "make": "Subaru",
+   "scope": "SIA codes outside the tables (e.g. 2006 U), FHI L before 2006, SIA 1/9 after 1996",
+   "why": "not defined by a filing read; the rules make no claim for codes outside their tables"
+  },
+  {
+   "make": "Subaru",
+   "scope": "4S1/4S2/4S6 (Isuzu- and Honda-badged SIA builds), 4T1 (SIA-built Toyota Camry)",
+   "why": "those VINs follow Isuzu's or Toyota's scheme, not Subaru's"
+  },
+  {
+   "make": "Mazda",
+   "scope": "every Mazda except the engine codes ruled",
+   "why": "Mazda's VIN has no transmission character; the engines are offered with both transmissions"
+  },
+  {
+   "make": "Mazda",
+   "scope": "RX-8 MY2006-2008 (JM1FE173)",
+   "why": "the MY2008 filing lists FE173 13B High Power as '232HP (MT) / 212HP (AT)': both transmissions"
+  },
+  {
+   "make": "Mazda",
+   "scope": "Mazdaspeed MX-5 (2004-2005), 323 GTX (1988-89), RX-7 Turbo II (1987-88), 626 turbo",
+   "why": "manual-only engines, but no lot car without transmission info carries them (MX-5 NB353 on the lots is the 142 hp base engine); not researched further"
+  },
+  {
+   "make": "Mazda",
+   "scope": "Tribute 2.0 (2001-2004, Ford Zetec, EPA manual only)",
+   "why": "Ford-built (4F2) and no 2.0 Tribute on the lots lacks transmission info"
+  },
+  {
+   "make": "Mitsubishi",
+   "scope": "every Mitsubishi except the 3000GT/Stealth twin turbo",
+   "why": "no transmission character; engines are offered with both"
+  },
+  {
+   "make": "Mitsubishi",
+   "scope": "Lancer Evolution VIII/IX 2003-2006, Galant VR-4 1991-92, 1990 Eclipse/Talon turbo",
+   "why": "manual-only per EPA, but none of the lot cars without transmission info carries these codes (or only 1-2 cars), so no filing was read for them"
+  },
+  {
+   "make": "Mitsubishi",
+   "scope": "Lancer Evolution X (2008-2015)",
+   "why": "GSR was 5MT, MR was the TC-SST dual clutch; the engine code is shared with the TC-SST-only Lancer Ralliart"
+  },
+  {
+   "make": "Suzuki",
+   "scope": "every Suzuki except the Samurai candidate",
+   "why": "no transmission character; Sidekick 1.3 4WD (1989) and X-90 2WD (1996) are EPA manual-only cells with no matching lot cars"
+  },
+  {
+   "make": "Isuzu",
+   "scope": "Hombre (1996-2000), i-Series, Ascender",
+   "why": "GM-built (1GG / 4NU), GM scheme. EPA lists only a manual for the 1996-1997 Hombre 2.2 4x2, but GM's 2.2 engine code is shared with the S-10, which had an automatic"
+  },
+  {
+   "make": "Isuzu",
+   "scope": "Rodeo 2.2 4x2 (1998-2000), Amigo 2.2 4x2 (1999-2000)",
+   "why": "EPA lists only a manual, but no lot car without transmission info falls there (the 2.2 Rodeos on the lots are 2001-2002, when EPA lists an automatic)"
+  }
+ ],
+ "summary": {
+  "rules": 26,
+  "rules_by_status": {
+   "low_sample": 15,
+   "keep": 5,
+   "candidate": 6
+  },
+  "newly_confirmed_manual_keep_and_low_sample_rules": 69,
+  "newly_confirmed_manual_candidate_rules_only": 34,
+  "newly_confirmed_manual_by_rule": {
+   "subaru_fhi_1985_1986_char11": 0,
+   "subaru_fhi_1989_char11": 0,
+   "subaru_fhi_1990_1994_char11": 0,
+   "subaru_fhi_G_H_1995_2026_char11": 8,
+   "subaru_fhi_L_6mt_2006_2014_char11": 0,
+   "subaru_fhi_main_plant_2014_2026_char11": 0,
+   "subaru_fhi_brz_frs_2013_char11": 0,
+   "subaru_sia_1990_1996_char11": 1,
+   "subaru_sia_1997_2009_char11": 1,
+   "subaru_sia_2010_2026_char11": 0,
+   "mazda_rx8_2004_char8_engine_power": 16,
+   "mazda_rx8_2005_char8_engine_power": 7,
+   "mazda_rx8_2009_2011_char8_engine_power": 0,
+   "mazda_mazdaspeed3_2007_2009_char8_L3T": 13,
+   "mazda_mazdaspeed3_2010_2013_char8_L3T": 5,
+   "mazda_mazdaspeed6_2006_2007_char8_L3T": 5,
+   "mazda_mazdaspeed_protege_2003_char8_FSD170": 8,
+   "mitsubishi_3000gt_stealth_twin_turbo_1991_1992_char8": 2,
+   "mitsubishi_3000gt_stealth_twin_turbo_1993_1999_char8": 1,
+   "mitsubishi_montero_sport_24_4x2_1997_1999_char8": 2,
+   "isuzu_rodeo_26_4x2_1991_1997_char8": 6,
+   "isuzu_amigo_1998_char7": 3,
+   "isuzu_4zd1_23_4x2_1988_1995_char8": 14,
+   "isuzu_4ze1_26_4x4_pickup_amigo_1989_1995_char8": 5,
+   "isuzu_trooper_23_1986_1987_char8": 3,
+   "suzuki_samurai_1986_1995_char4_5": 3
+  },
+  "newly_confirmed_manual_by_feed_make": {
+   "Isuzu": 9,
+   "Mazda": 47,
+   "Mitsubishi": 2,
+   "Dodge": 1,
+   "Subaru": 10
+  },
+  "newly_labelled_non_manual_keep_and_low_sample_rules": 148,
+  "ground_truth_precision_manual_claims": {
+   "checkable": 561,
+   "agree": 561,
+   "precision": 1.0
+  },
+  "ground_truth_agreement_automatic_claims": {
+   "checkable": 3467,
+   "agree": 3467,
+   "agreement": 1.0
+  },
+  "published_labels_contradicting_a_rule": 0,
+  "scan": {
+   "rule_wmi_vins": 9259,
+   "in_scope_code_not_in_table": 380,
+   "out_of_rule_scope": 4155,
+   "covered": 4679,
+   "bad_check_digit": 43,
+   "vin_year_vs_listing_mismatch": 2
+  },
+  "five_make_coverage": {
+   "Subaru": {
+    "cars": 5542,
+    "no_trans_info": 1033,
+    "vin17": 4636,
+    "covered_by_rule": 4546,
+    "newly_confirmed_manual_counted": 10,
+    "newly_confirmed_manual_candidate_rules_only": 0,
+    "newly_labelled_non_manual_counted": 136
+   },
+   "Mazda": {
+    "cars": 6231,
+    "no_trans_info": 6102,
+    "vin17": 5328,
+    "covered_by_rule": 72,
+    "newly_confirmed_manual_counted": 47,
+    "newly_confirmed_manual_candidate_rules_only": 7,
+    "newly_labelled_non_manual_counted": 12
+   },
+   "Mitsubishi": {
+    "cars": 2970,
+    "no_trans_info": 2919,
+    "vin17": 2464,
+    "covered_by_rule": 6,
+    "newly_confirmed_manual_counted": 2,
+    "newly_confirmed_manual_candidate_rules_only": 2,
+    "newly_labelled_non_manual_counted": 0
+   },
+   "Suzuki": {
+    "cars": 750,
+    "no_trans_info": 743,
+    "vin17": 615,
+    "covered_by_rule": 3,
+    "newly_confirmed_manual_counted": 0,
+    "newly_confirmed_manual_candidate_rules_only": 3,
+    "newly_labelled_non_manual_counted": 0
+   },
+   "Isuzu": {
+    "cars": 495,
+    "no_trans_info": 491,
+    "vin17": 381,
+    "covered_by_rule": 31,
+    "newly_confirmed_manual_counted": 9,
+    "newly_confirmed_manual_candidate_rules_only": 22,
+    "newly_labelled_non_manual_counted": 0
+   }
+  }
+ },
+ "validation_method": "Every lot car with a WMI used by a rule, a 17-character VIN and a valid check digit is classified. The model year comes from VIN character 10 (the listing year only picks the 30-year cycle and must be within 2 years). A rule fires only when the VIN matches its WMI, years and fixed characters and the code is in its table for that year; other codes get no claim. Ground truth = scraper/manual_detect/ground_truth.jsonl. Lines with uniformCell set are treated as unlabelled (counted separately as uniform_cell_lines_excluded / _that_would_agree), speeds-only lines are excluded, and the rest are checkable: agree means (truth is manual) == (rule says manual). Note that every VIN-bearing truth line comes from vPIC, which NHTSA builds from the same Part 565 filings, so agreement is partly circular. The EPA cross-check (year/make/model union, vPIC displacement when known) is the independent check: a manual claim is consistent when EPA lists a manual for the car, an automatic claim when EPA lists a non-manual. Status: candidate (not counted) when the evidence is short of the bar; drop when >= 20 checkable and agreement < 0.995; low_sample when < 20 checkable (kept: the code meaning comes from the manufacturer's own VIN scheme); keep otherwise. newly_confirmed_manual counts lot cars with no published transmission (vehicle_extras trans empty) that a keep or low_sample rule calls manual.",
+ "rules": [
+  {
+   "id": "subaru_fhi_1985_1986_char11",
+   "make": "Subaru",
+   "status": "low_sample",
+   "basis": "transmission_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Subaru",
+    "models": "every Gunma-built Subaru (GL/DL/RX/XT/Brat/Hatchback), MY1985-1986",
+    "model_years": [
+     1985,
+     1986
+    ],
+    "wmi": [
+     "JF1",
+     "JF2"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "A": "Gunma 4-speed manual (MY1985-1986)",
+     "B": "Gunma 5-speed manual (MY1985-1986)",
+     "D": "Gunma 4WD 4/5-speed manual (MY1985-1986)",
+     "E": "Gunma 4x2 dual-range 4WD 4/5-speed manual (MY1985-1986)"
+    },
+    "automatic_codes": {
+     "C": "Gunma automatic (MY1985-1986)",
+     "F": "Gunma automatic 4WD (MY1985-1986)"
+    }
+   },
+   "vin_regex_manual": "^(JF1|JF2)......[FG][ABDE]......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/446794e0-c365-45d3-bbc0-5bbb8faec9e8",
+     "doc": "NHTSA 01-22-N11B-2097, Subaru of America 1985-10-01/1985-11-06, booklet 'Subaru Vehicle Identification Numbers 1986 Edition' (SOAD-840004), covers MY1985 and MY1986",
+     "says": "Character 11 'Plant of manufacture and transmission type', Gunma: A = 4 spd manual, B = 5 spd manual, C = automatic, D = 4 spd 4WD (81-84) / 5 spd 4WD (85-86), E = 4 spd 4x2 trans/4wd / 5 spd 4x2 trans/4wd (dual range), F = automatic/4wd. Starting-VIN table: e.g. GL Hatchback 5 Speed JF1AF23BX GB100001, Hatchback Automatic JF1AF43BX GC100001."
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 5,
+    "agree": 5,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 3,
+    "manual_codes": {
+     "in_scope_lot_cars": 3,
+     "checkable_ground_truth": 3,
+     "agree": 3,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 3
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 2,
+     "checkable_ground_truth": 2,
+     "agree": 2,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 1,
+      "conflict": 0,
+      "no_epa_match": 1
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=F": 2,
+     "char11=B": 2,
+     "char11=E": 1
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "subaru_fhi_1989_char11",
+   "make": "Subaru",
+   "status": "low_sample",
+   "basis": "transmission_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Subaru",
+    "models": "every Gunma-built Subaru (Justy, DL/GL/RX, XT/XT6, Loyale line), MY1989. Code E ('4WD, Dual-range') is left out: the 1989 table does not state its transmission",
+    "model_years": [
+     1989,
+     1989
+    ],
+    "wmi": [
+     "JF1",
+     "JF2"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "B": "5MT (MY1989-1989)",
+     "D": "4WD 5MT (MY1989-1989)",
+     "G": "Full time 4WD MT (MY1989-1989)",
+     "4": "4WD 4MT Hatchback (MY1989-1989)"
+    },
+    "automatic_codes": {
+     "C": "AT & ECVT (MY1989-1989)",
+     "F": "4WD AT (MY1989-1989)",
+     "H": "Full time 4WD AT (MY1989-1989)"
+    }
+   },
+   "vin_regex_manual": "^(JF1|JF2)......K[BDG4]......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/61a7bf0d-2808-48d2-8251-8d193607514d",
+     "doc": "NHTSA 01-22-N11B-3170, Subaru of America letter dated 1988-09-23 (MID lists 1998-09-23), '1989 Subaru Vehicle Identification Number' (read as page image 2026-11-05)",
+     "says": "Character 11 'Transmission Type': B = 5MT, C = AT & ECVT, D = 4WD 5MT, E = 4WD, Dual-range, F = 4WD AT, G = Full time 4WD MT, H = Full time 4WD AT, 4 = 4WD 4MT Hatchback. Model year K = 1989. Example JF1AN43B4KC400001."
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 1,
+    "agree": 1,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 1,
+    "manual_codes": {
+     "in_scope_lot_cars": 1,
+     "checkable_ground_truth": 1,
+     "agree": 1,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 1,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=B": 1
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "subaru_fhi_1990_1994_char11",
+   "make": "Subaru",
+   "status": "low_sample",
+   "basis": "transmission_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Subaru",
+    "models": "Justy, Loyale, XT/XT6, Legacy, Impreza, SVX built in Gunma (JF1/JF2), MY1990-1994",
+    "model_years": [
+     1990,
+     1994
+    ],
+    "wmi": [
+     "JF1",
+     "JF2"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "B": "Gunma FWD 5-speed manual (MT5) (MY1990-1994)",
+     "D": "Gunma on-demand 4WD / AWD 5-speed manual (MY1990-1994)",
+     "G": "Gunma full-time AWD 5-speed manual (MY1990-1994)"
+    },
+    "automatic_codes": {
+     "C": "Gunma 3-speed automatic or ECVT (Justy) (MY1990-1994)",
+     "F": "Gunma 4WD 3-speed automatic or ECVT (MY1990-1994)",
+     "H": "Gunma full-time AWD 4-speed automatic (4EAT) (MY1990-1994)",
+     "K": "Gunma FWD 4-speed automatic (4EAT) (MY1990-1994)",
+     "P": "Gunma full-time AWD E4AT for Postal Service (MY1994-1994)"
+    }
+   },
+   "vin_regex_manual": "^(JF1|JF2)......[LMNPR][BDG]......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/6c834268-78d8-405f-b7ac-c13348eea91f",
+     "doc": "NHTSA 01-22-N11B-3599, Subaru of America 1989-10-13, '1990 Model Year VIN Schematic'",
+     "says": "Position 11 'Plant of manuf. & trans. type': FHI Gunma / SIA Lafayette / type: B / 1 = MT5; C / 2 = AT3; D / 3 = 4WD MT5; F / 5 = 4WD AT3/ECVT; G / 6 = F4WD MT5; H / 7 = F4WD 4EAT; K / 9 = 4EAT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0dcae545-9204-464e-8db4-dcf2b0d8190e",
+     "doc": "NHTSA 01-22-N11B-3713, Subaru of America 1990-06-08, starting VINs for 1991 Justy, XT, Loyale, Legacy",
+     "says": "Character 11 follows the model's transmission: Justy 3D DL MT5 JF1KA722X MB700001, Justy ECVT ...MC..., Justy OD 4WD MT5 ...MD..., OD 4WD ECVT ...MF...; Legacy sedan L MT5 ...MB..., L 4EAT ...MK..., L F4WD MT5 ...MG..., L F4WD 4EAT ...MH...; Loyale AT3 ...MC..., OD 4WD AT3 ...MF..."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/4b3e22a1-120a-4936-b61b-8da14f61d6ee",
+     "doc": "NHTSA 01-22-N11B-5384, Subaru of America 1993-07-12, VIN schemes for 1994 Justy, Loyale, Impreza, Legacy, SVX",
+     "says": "Character 11 'Plant of manufacture and transmission type'. Justy (FHI): B FWD 5MT, C FWD ECVT, D AWD 5MT, F AWD ECVT. Loyale: B FWD 5MT, C FWD 3AT, D AWD 5MT, F AWD 3AT. Impreza: B FWD 5MT, G full-time AWD 5MT single-range, H full-time AWD E4AT, K FWD E4AT. Legacy SIA/FHI: 1/B 5MT, 6/G full-time AWD 5MT, 7/H full-time AWD E4AT, 9/K E4AT, 8/P full-time AWD E4AT for Postal Service. SVX: H AWD E4AT, K FWD E4AT."
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 10,
+    "agree": 10,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 4,
+    "manual_codes": {
+     "in_scope_lot_cars": 4,
+     "checkable_ground_truth": 4,
+     "agree": 4,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 4,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 6,
+     "checkable_ground_truth": 6,
+     "agree": 6,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 6,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=H": 4,
+     "char11=D": 2,
+     "char11=K": 2,
+     "char11=G": 1,
+     "char11=B": 1
+    },
+    "in_scope_codes_not_in_table": {
+     "1993:P": 1
+    }
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "subaru_fhi_G_H_1995_2026_char11",
+   "make": "Subaru",
+   "status": "keep",
+   "basis": "transmission_code",
+   "status_reason": ">= 20 checkable cars and agreement >= 0.995",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Subaru",
+    "models": "Gunma-built Impreza, WRX/STI, Forester, Legacy/Outback (Gunma builds), Crosstrek, SVX, MY1995-2026",
+    "model_years": [
+     1995,
+     2026
+    ],
+    "wmi": [
+     "JF1",
+     "JF2"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "G": "Gunma (Yajima) full-time AWD 5MT/6MT (MY1995-2026)",
+     "B": "Gunma FWD 5MT (Impreza / Legacy FWD) (MY1995-1996)"
+    },
+    "automatic_codes": {
+     "H": "Gunma (Yajima) full-time AWD automatic / CVT (MY1995-2026)",
+     "K": "Gunma FWD 4-speed automatic (SVX L, Legacy/Impreza FWD) (MY1995-1996)"
+    }
+   },
+   "vin_regex_manual": "^(JF1|JF2)......[STVWXY123456789ABCDEFGHJKLMNPR][GB]......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/4b3e22a1-120a-4936-b61b-8da14f61d6ee",
+     "doc": "NHTSA 01-22-N11B-5384, Subaru of America 1993-07-12, VIN schemes for 1994 Justy, Loyale, Impreza, Legacy, SVX",
+     "says": "Character 11 'Plant of manufacture and transmission type'. Justy (FHI): B FWD 5MT, C FWD ECVT, D AWD 5MT, F AWD ECVT. Loyale: B FWD 5MT, C FWD 3AT, D AWD 5MT, F AWD 3AT. Impreza: B FWD 5MT, G full-time AWD 5MT single-range, H full-time AWD E4AT, K FWD E4AT. Legacy SIA/FHI: 1/B 5MT, 6/G full-time AWD 5MT, 7/H full-time AWD E4AT, 9/K E4AT, 8/P full-time AWD E4AT for Postal Service. SVX: H AWD E4AT, K FWD E4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/d1ff1a13-a4a8-46f1-9027-0523cd2fbe7d",
+     "doc": "NHTSA 01-22-N11B-5909, Subaru of America 1995-05-10, revised VIN schematic for 1996MY Legacy, Impreza, SVX (read as page images 2026-11-05)",
+     "says": "Legacy (SIA, 4S3): 'Plant of manufacture and transmission type' 1 = 5MT, 6 = Fulltime AWD 5MT, 7 = Fulltime AWD 4AT, 9 = 4AT, 8 = Fulltime AWD for Postal; model year T = 1996, V = 1997. Impreza (FHI Gunma, JF1): B = 5MT, G = Fulltime AWD 5MT, H = Fulltime AWD 4AT, K = 4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/39b27c13-9a93-4fa7-9a4d-80330fbcd84f",
+     "doc": "NHTSA 01-22-N11B-6089, Subaru of America 1996-04-15, VIN schematic for 1997MY Legacy, Impreza, SVX (read as page images 2026-11-05)",
+     "says": "Impreza (FHI Gunma): G = Fulltime AWD 5MT, H = Fulltime AWD 4AT; model year V = 1997, W = 1998, X = 1999."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/4d7ecefc-4e64-4b1a-b999-563e5d347341",
+     "doc": "NHTSA 01-22-N11B-6751, Subaru of America 1998-03-20, VIN schemes for 1999MY Legacy, Impreza, Forester (read as page images 2026-11-05)",
+     "says": "Forester (FHI Gunma, JF1SF): 'Plant of manufacture and transmission' G = Full-time AWD 5MT, H = Full-time AWD 4AT; model year X = 1999, Y = 2000, 1 = 2001."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/100d2b73-b2e6-4824-81ed-5064ae016f4e",
+     "doc": "NHTSA 01-22-N11B-7472, Fuji Heavy Industries USA 1999-11-15, 2001 Forester VIN scheme",
+     "says": "Character 11 'Plant of manufacture and transmission': G Full-time AWD 5MT, H Full-time AWD 4AT (text layer is OCR)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0daefd73-3aa2-44ad-9d6a-eaa204f58e38",
+     "doc": "NHTSA 01-022-N11B-8115, Subaru of America 2001-01-15, 2002 Legacy and Forester VIN schemes",
+     "says": "Legacy (SIA): 6 Full-time AWD 5MT, 7 Full-time AWD 4AT. Forester (FHI): G Full-time AWD 5MT, H Full-time AWD 4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/456278b0-4f15-4488-b2ec-dea5be2f0e9f",
+     "doc": "NHTSA 01-022-N11B-9269, Subaru of America 2002-10-18, 2003 Subaru VIN update (Legacy, Baja, Impreza, Forester)",
+     "says": "Position 11 'Plant of manufacturer and transmission type' (SIA 6/7, FHI G/H: AWD 5MT / AWD 4AT)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/a2db76f6-1da9-4c6b-9f40-df82b8b3d47a",
+     "doc": "NHTSA 01-022-N11B-9355, Subaru of America 2002-12-09, VIN scheme for 2004MY Impreza (read as page image 2026-11-05)",
+     "says": "FHI Gunma: G = Full-time AWD 5MT, H = Full-time AWD 4AT; model year 4 = 2004, 5 = 2005, 6 = 2006; trims TS, RS, OUTBACK, WRX, STi."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/63662431-fe07-4d49-a90e-60db7c2b4db3",
+     "doc": "NHTSA ORG225 (filed 2005-02-23), 'Subaru 2006MY VIN Breakdown'",
+     "says": "Digit 11 'Plant of manufacturer and transmission type': SIA 4 = AWD 5AT, SIA 5 = AWD 4AT-SS, SIA 6 / FHI G = AWD 5MT, SIA 7 / FHI H = AWD 4AT, FHI L = AWD 6MT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/21609d02-0d8c-40fe-916f-42eb1d3bdd46",
+     "doc": "NHTSA ORG3853, Fuji Heavy Industries USA 2008-01-17, VIN scheme for 2009MY Forester",
+     "says": "Digit 11 'Plant of manufacture and transmission type' (FHI Gunma): G Full-time AWD 5MT S/R, H Full-time AWD 4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/37b703d5-77f6-4c0e-9201-feda1c4c9d50",
+     "doc": "NHTSA ORG7191, Fuji Heavy Industries USA (MID date 2011-10-03), 'VIN scheme for 2009MY Impreza (second submission)', GR11-055 (read as page image 2026-11-05)",
+     "says": "Digit 11 (FHI Gunma): G Full-time AWD 5MT, H Full-time AWD 4AT, L Full-time AWD 6MT; model year 9 = 2009, A = 2010, B = 2011; trims include WRX and STI."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9c69db94-0fc4-4bea-816d-6a192305240b",
+     "doc": "NHTSA ORG7743, Fuji Heavy Industries USA 2012-05-02, 2012MY Legacy, Outback, Tribeca, Forester, Impreza, Impreza WRX/STI",
+     "says": "Character 11 'Plant of manufacture and transmission type': SIA 1 Full-time AWD 6MT, 2 Full-time AWD 5AT, 3 Full-time AWD CVT, 4 (Tribeca) Full-time AWD 5AT; FHI Yajima G Full-time AWD 5MT, H Full-time AWD 4AT (Forester) / CVT (Impreza), L Full-time AWD 6MT (WRX/STI)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7d6c9023-c08a-4397-a0d4-a58fb77d04d2",
+     "doc": "NHTSA ORG8505, Fuji Heavy Industries 2013-02-11 (MID 2013-02-19), VIN scheme 2014MY Forester (read as page image 2026-11-05)",
+     "says": "Plant of manufacture and transmission type: G = FHI (Yajima Plant, Ota, Gunma) Full-time AWD 6MT, H = FHI (Yajima) Full-time AWD CVT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f4bf0f92-4305-4bc3-8020-2a71dcb73c12",
+     "doc": "NHTSA ORG8624, Fuji Heavy Industries USA 2013-05-06, 2014MY Forester and Legacy/Outback",
+     "says": "Forester: G FHI (Yajima) Full-time AWD 6MT, H Full-time AWD CVT. Legacy/Outback: 1 SIA Full-time AWD 6MT, 2 SIA 5AT, 3 SIA CVT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8c6eeb84-dc82-4b4d-9ff5-0041b92800d5",
+     "doc": "NHTSA ORG9048, Fuji Heavy Industries USA 2013-10-28, 2014MY Tribeca, Impreza, XV Crosstrek, Impreza WRX/STI (+ others)",
+     "says": "Impreza and XV Crosstrek: G FHI Yajima Full-time AWD 5MT, H Yajima CVT, 9 FHI Main Plant Full-time AWD 5MT, 8 Main Plant CVT. WRX/STI: G 5MT, L 6MT. Tribeca: 4 SIA Full-time AWD 5AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/aeb340f8-3175-4e72-81af-51f52eab29a6",
+     "doc": "NHTSA ORG13185, Fuji Heavy Industries USA 2016-09-08, 2017 Subaru and Toyota models (ninth submission; text layer)",
+     "says": "Plant of manufacture and transmission type: WRX/STI 9 Main Plant 6MT, 8 Main Plant CVT; Legacy/Outback 1 SIA 6MT, 3 SIA CVT; Forester G Yajima 6MT, H Yajima CVT; Crosstrek G/9 5MT, H/8 CVT; BRZ and Toyota 86 9 Main Plant 6MT, 8 Main Plant 6AT; Impreza 1 SIA 5MT, 3 SIA CVT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0d16df95-607d-4140-a413-e0095416028d",
+     "doc": "NHTSA ORG15037, Fuji Heavy Industries USA 2017-10-30, 2018 Subaru models (fourth submission; text layer)",
+     "says": "WRX/STI 8 CVT / 9 6MT (Main Plant); Forester and Crosstrek G 6MT / H CVT (Yajima), Crosstrek 8 CVT / 9 6MT (Main Plant); Impreza 1 SIA 5MT / 3 SIA CVT; BRZ and Toyota 86 8 6AT / 9 6MT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/d8020630-0a9a-47fb-a194-9888a072973b",
+     "doc": "NHTSA ORG19703, Subaru Corporation 2021-10-28, 2022MY Subaru and Toyota GR86 (seventh submission; text layer)",
+     "says": "BRZ and Toyota GR86 8 Main Plant 6AT, 9 Main Plant 6MT; WRX 8 CVT, 9 6MT; Crosstrek G 6MT, H CVT, 8 CVT, 9 6MT; Impreza 1 SIA 5MT, 3 SIA CVT; Legacy/Outback/Ascent 3 SIA CVT."
+    }
+   ],
+   "evidence_gaps": "Years between filings read (e.g. 1995, 2005, 2007-2008, 2010-2011, 2013, 2015-2016, 2019-2021, 2023-2024, 2026) are interpolated: G = manual / H = automatic in every Gunma table read from MY1990 to MY2025",
+   "validation": {
+    "checkable_ground_truth": 1914,
+    "agree": 1914,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 327,
+    "manual_codes": {
+     "in_scope_lot_cars": 335,
+     "checkable_ground_truth": 327,
+     "agree": 327,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 334,
+      "conflict": 0,
+      "no_epa_match": 1
+     },
+     "cars_without_trans_info": 8,
+     "cars_without_trans_info_by_reason": {
+      "not_in_cache_backup": 8
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 1662,
+     "checkable_ground_truth": 1587,
+     "agree": 1587,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 34,
+     "uniform_cell_lines_that_would_agree": 34,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 1662,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 41,
+     "cars_without_trans_info_by_reason": {
+      "not_in_cache_backup": 41
+     }
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=H": 1661,
+     "char11=G": 335,
+     "char11=K": 1
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 8,
+   "newly_labelled_non_manual": 41
+  },
+  {
+   "id": "subaru_fhi_L_6mt_2006_2014_char11",
+   "make": "Subaru",
+   "status": "low_sample",
+   "basis": "transmission_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Subaru",
+    "models": "Impreza WRX STI (and other 6MT Gunma builds), MY2006-2014",
+    "model_years": [
+     2006,
+     2014
+    ],
+    "wmi": [
+     "JF1",
+     "JF2"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "L": "Gunma full-time AWD 6-speed manual (WRX STI) (MY2006-2014)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JF1|JF2)......[6789ABCDE]L......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/63662431-fe07-4d49-a90e-60db7c2b4db3",
+     "doc": "NHTSA ORG225 (filed 2005-02-23), 'Subaru 2006MY VIN Breakdown'",
+     "says": "Digit 11 'Plant of manufacturer and transmission type': SIA 4 = AWD 5AT, SIA 5 = AWD 4AT-SS, SIA 6 / FHI G = AWD 5MT, SIA 7 / FHI H = AWD 4AT, FHI L = AWD 6MT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/37b703d5-77f6-4c0e-9201-feda1c4c9d50",
+     "doc": "NHTSA ORG7191, Fuji Heavy Industries USA (MID date 2011-10-03), 'VIN scheme for 2009MY Impreza (second submission)', GR11-055 (read as page image 2026-11-05)",
+     "says": "Digit 11 (FHI Gunma): G Full-time AWD 5MT, H Full-time AWD 4AT, L Full-time AWD 6MT; model year 9 = 2009, A = 2010, B = 2011; trims include WRX and STI."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9c69db94-0fc4-4bea-816d-6a192305240b",
+     "doc": "NHTSA ORG7743, Fuji Heavy Industries USA 2012-05-02, 2012MY Legacy, Outback, Tribeca, Forester, Impreza, Impreza WRX/STI",
+     "says": "Character 11 'Plant of manufacture and transmission type': SIA 1 Full-time AWD 6MT, 2 Full-time AWD 5AT, 3 Full-time AWD CVT, 4 (Tribeca) Full-time AWD 5AT; FHI Yajima G Full-time AWD 5MT, H Full-time AWD 4AT (Forester) / CVT (Impreza), L Full-time AWD 6MT (WRX/STI)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8c6eeb84-dc82-4b4d-9ff5-0041b92800d5",
+     "doc": "NHTSA ORG9048, Fuji Heavy Industries USA 2013-10-28, 2014MY Tribeca, Impreza, XV Crosstrek, Impreza WRX/STI (+ others)",
+     "says": "Impreza and XV Crosstrek: G FHI Yajima Full-time AWD 5MT, H Yajima CVT, 9 FHI Main Plant Full-time AWD 5MT, 8 Main Plant CVT. WRX/STI: G 5MT, L 6MT. Tribeca: 4 SIA Full-time AWD 5AT."
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 1,
+    "agree": 1,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 1,
+    "manual_codes": {
+     "in_scope_lot_cars": 1,
+     "checkable_ground_truth": 1,
+     "agree": 1,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 1,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=L": 1
+    },
+    "in_scope_codes_not_in_table": {
+     "2013:2": 51,
+     "2013:1": 1
+    }
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "subaru_fhi_main_plant_2014_2026_char11",
+   "make": "Subaru",
+   "status": "keep",
+   "basis": "transmission_code",
+   "status_reason": ">= 20 checkable cars and agreement >= 0.995",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Subaru",
+    "models": "Main-Plant builds: Impreza/XV Crosstrek (2014+), WRX/STI, BRZ, Scion FR-S, Toyota 86 / GR86, MY2014-2026",
+    "model_years": [
+     2014,
+     2026
+    ],
+    "wmi": [
+     "JF1",
+     "JF2"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "9": "Gunma Main Plant 5MT/6MT (MY2014-2026)"
+    },
+    "automatic_codes": {
+     "8": "Gunma Main Plant CVT / 6AT (MY2014-2026)"
+    }
+   },
+   "vin_regex_manual": "^(JF1|JF2)......[EFGHJKLMNPRST]9......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8c6eeb84-dc82-4b4d-9ff5-0041b92800d5",
+     "doc": "NHTSA ORG9048, Fuji Heavy Industries USA 2013-10-28, 2014MY Tribeca, Impreza, XV Crosstrek, Impreza WRX/STI (+ others)",
+     "says": "Impreza and XV Crosstrek: G FHI Yajima Full-time AWD 5MT, H Yajima CVT, 9 FHI Main Plant Full-time AWD 5MT, 8 Main Plant CVT. WRX/STI: G 5MT, L 6MT. Tribeca: 4 SIA Full-time AWD 5AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/aeb340f8-3175-4e72-81af-51f52eab29a6",
+     "doc": "NHTSA ORG13185, Fuji Heavy Industries USA 2016-09-08, 2017 Subaru and Toyota models (ninth submission; text layer)",
+     "says": "Plant of manufacture and transmission type: WRX/STI 9 Main Plant 6MT, 8 Main Plant CVT; Legacy/Outback 1 SIA 6MT, 3 SIA CVT; Forester G Yajima 6MT, H Yajima CVT; Crosstrek G/9 5MT, H/8 CVT; BRZ and Toyota 86 9 Main Plant 6MT, 8 Main Plant 6AT; Impreza 1 SIA 5MT, 3 SIA CVT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0d16df95-607d-4140-a413-e0095416028d",
+     "doc": "NHTSA ORG15037, Fuji Heavy Industries USA 2017-10-30, 2018 Subaru models (fourth submission; text layer)",
+     "says": "WRX/STI 8 CVT / 9 6MT (Main Plant); Forester and Crosstrek G 6MT / H CVT (Yajima), Crosstrek 8 CVT / 9 6MT (Main Plant); Impreza 1 SIA 5MT / 3 SIA CVT; BRZ and Toyota 86 8 6AT / 9 6MT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/d8020630-0a9a-47fb-a194-9888a072973b",
+     "doc": "NHTSA ORG19703, Subaru Corporation 2021-10-28, 2022MY Subaru and Toyota GR86 (seventh submission; text layer)",
+     "says": "BRZ and Toyota GR86 8 Main Plant 6AT, 9 Main Plant 6MT; WRX 8 CVT, 9 6MT; Crosstrek G 6MT, H CVT, 8 CVT, 9 6MT; Impreza 1 SIA 5MT, 3 SIA CVT; Legacy/Outback/Ascent 3 SIA CVT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/72bb4585-2803-4a75-a8dd-47b21498cc21",
+     "doc": "NHTSA ORG23706, Subaru Corporation 2024-10-30, 2025MY Subaru and Toyota GR86 (seventh submission; text layer)",
+     "says": "BRZ and GR86 8 6AT / 9 6MT; WRX 8 CVT / 9 6MT; Impreza 8 Main Plant CVT; Crosstrek H/8/3 CVT; Legacy/Outback/Ascent 3 SIA CVT."
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 92,
+    "agree": 92,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 26,
+    "manual_codes": {
+     "in_scope_lot_cars": 26,
+     "checkable_ground_truth": 26,
+     "agree": 26,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 26,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 100,
+     "checkable_ground_truth": 66,
+     "agree": 66,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 29,
+     "uniform_cell_lines_that_would_agree": 29,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 100,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 5,
+     "cars_without_trans_info_by_reason": {
+      "not_in_cache_backup": 5
+     }
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=8": 100,
+     "char11=9": 26
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 5
+  },
+  {
+   "id": "subaru_fhi_brz_frs_2013_char11",
+   "make": "Subaru",
+   "status": "low_sample",
+   "basis": "transmission_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Subaru",
+    "models": "MY2013 Subaru BRZ (JF1ZC) and Scion FR-S (JF1ZN) only; MY2013 Impreza/XV also carry 1/2 but no filing for them was found, so they are not ruled",
+    "model_years": [
+     2013,
+     2013
+    ],
+    "wmi": [
+     "JF1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [Z], char5 in [CN]"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "1": "FHI 6-speed manual (BRZ JF1ZC / Scion FR-S JF1ZN) (MY2013-2013)"
+    },
+    "automatic_codes": {
+     "2": "FHI 6-speed automatic (BRZ / FR-S) (MY2013-2013)"
+    }
+   },
+   "vin_regex_manual": "^(JF1)Z[CN]....D1......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b1bc51b0-ab51-491e-8ba8-d73370380952",
+     "doc": "NHTSA ORG9621, Fuji Heavy Industries USA 2012-01-17, 2013MY Subaru BRZ (JF1ZC) and Toyota Scion FR-S (JF1ZN)",
+     "says": "Character 11 'Plant of manufacture and transmission type': 1 = FHI 6MT, 2 = FHI 6AT (both BRZ and FR-S)."
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 7,
+    "agree": 7,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 2,
+    "manual_codes": {
+     "in_scope_lot_cars": 2,
+     "checkable_ground_truth": 2,
+     "agree": 2,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 2,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 5,
+     "checkable_ground_truth": 5,
+     "agree": 5,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 5,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=2": 5,
+     "char11=1": 2
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "subaru_sia_1990_1996_char11",
+   "make": "Subaru",
+   "status": "keep",
+   "basis": "transmission_code",
+   "status_reason": ">= 20 checkable cars and agreement >= 0.995",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Subaru",
+    "models": "Lafayette-built Legacy (4S3/4S4), MY1990-1996",
+    "model_years": [
+     1990,
+     1996
+    ],
+    "wmi": [
+     "4S3",
+     "4S4"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "1": "SIA FWD 5-speed manual (MY1990-1996)",
+     "3": "SIA 4WD 5-speed manual (1990 table) (MY1990-1990)",
+     "6": "SIA full-time AWD 5-speed manual (MY1990-1996)"
+    },
+    "automatic_codes": {
+     "2": "SIA 3-speed automatic (1990 table) (MY1990-1990)",
+     "5": "SIA 4WD 3-speed automatic (1990 table) (MY1990-1990)",
+     "7": "SIA full-time AWD 4-speed automatic (MY1990-1996)",
+     "8": "SIA full-time AWD E4AT for Postal Service (MY1994-1994)",
+     "9": "SIA FWD 4-speed automatic (MY1990-1996)"
+    }
+   },
+   "vin_regex_manual": "^(4S3|4S4)......[LMNPRST][136]......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/6c834268-78d8-405f-b7ac-c13348eea91f",
+     "doc": "NHTSA 01-22-N11B-3599, Subaru of America 1989-10-13, '1990 Model Year VIN Schematic'",
+     "says": "Position 11 'Plant of manuf. & trans. type': FHI Gunma / SIA Lafayette / type: B / 1 = MT5; C / 2 = AT3; D / 3 = 4WD MT5; F / 5 = 4WD AT3/ECVT; G / 6 = F4WD MT5; H / 7 = F4WD 4EAT; K / 9 = 4EAT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/4b3e22a1-120a-4936-b61b-8da14f61d6ee",
+     "doc": "NHTSA 01-22-N11B-5384, Subaru of America 1993-07-12, VIN schemes for 1994 Justy, Loyale, Impreza, Legacy, SVX",
+     "says": "Character 11 'Plant of manufacture and transmission type'. Justy (FHI): B FWD 5MT, C FWD ECVT, D AWD 5MT, F AWD ECVT. Loyale: B FWD 5MT, C FWD 3AT, D AWD 5MT, F AWD 3AT. Impreza: B FWD 5MT, G full-time AWD 5MT single-range, H full-time AWD E4AT, K FWD E4AT. Legacy SIA/FHI: 1/B 5MT, 6/G full-time AWD 5MT, 7/H full-time AWD E4AT, 9/K E4AT, 8/P full-time AWD E4AT for Postal Service. SVX: H AWD E4AT, K FWD E4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/d1ff1a13-a4a8-46f1-9027-0523cd2fbe7d",
+     "doc": "NHTSA 01-22-N11B-5909, Subaru of America 1995-05-10, revised VIN schematic for 1996MY Legacy, Impreza, SVX (read as page images 2026-11-05)",
+     "says": "Legacy (SIA, 4S3): 'Plant of manufacture and transmission type' 1 = 5MT, 6 = Fulltime AWD 5MT, 7 = Fulltime AWD 4AT, 9 = 4AT, 8 = Fulltime AWD for Postal; model year T = 1996, V = 1997. Impreza (FHI Gunma, JF1): B = 5MT, G = Fulltime AWD 5MT, H = Fulltime AWD 4AT, K = 4AT."
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 45,
+    "agree": 45,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 13,
+    "manual_codes": {
+     "in_scope_lot_cars": 14,
+     "checkable_ground_truth": 13,
+     "agree": 13,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 14,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 1,
+     "cars_without_trans_info_by_reason": {
+      "not_in_cache_backup": 1
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 34,
+     "checkable_ground_truth": 32,
+     "agree": 32,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 34,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 2,
+     "cars_without_trans_info_by_reason": {
+      "not_in_cache_backup": 2
+     }
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=7": 32,
+     "char11=6": 14,
+     "char11=9": 2
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 1,
+   "newly_labelled_non_manual": 2
+  },
+  {
+   "id": "subaru_sia_1997_2009_char11",
+   "make": "Subaru",
+   "status": "keep",
+   "basis": "transmission_code",
+   "status_reason": ">= 20 checkable cars and agreement >= 0.995",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Subaru",
+    "models": "Lafayette-built Legacy, Outback, Baja, B9 Tribeca/Tribeca, MY1997-2009",
+    "model_years": [
+     1997,
+     2009
+    ],
+    "wmi": [
+     "4S3",
+     "4S4"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "6": "SIA full-time AWD 5-speed manual (MY1997-2009)"
+    },
+    "automatic_codes": {
+     "7": "SIA full-time AWD 4-speed automatic (MY1997-2009)",
+     "4": "SIA full-time AWD 5-speed automatic (MY2005-2009)",
+     "5": "SIA full-time AWD 4AT sport-shift (MY2006-2006)"
+    }
+   },
+   "vin_regex_manual": "^(4S3|4S4)......[VWXY123456789]6......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/d1ff1a13-a4a8-46f1-9027-0523cd2fbe7d",
+     "doc": "NHTSA 01-22-N11B-5909, Subaru of America 1995-05-10, revised VIN schematic for 1996MY Legacy, Impreza, SVX (read as page images 2026-11-05)",
+     "says": "Legacy (SIA, 4S3): 'Plant of manufacture and transmission type' 1 = 5MT, 6 = Fulltime AWD 5MT, 7 = Fulltime AWD 4AT, 9 = 4AT, 8 = Fulltime AWD for Postal; model year T = 1996, V = 1997. Impreza (FHI Gunma, JF1): B = 5MT, G = Fulltime AWD 5MT, H = Fulltime AWD 4AT, K = 4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0a4c5b9d-3768-474f-9052-e5ad9f00c1ff",
+     "doc": "NHTSA 01-022-N11B-7829, Subaru of America 2000-05-17, 2001 Legacy VIN scheme",
+     "says": "Character 11 'Plant of manufacture, transmission and postal car': 6 Full-time AWD 5MT, 7 Full-time AWD 4AT (SIA)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0daefd73-3aa2-44ad-9d6a-eaa204f58e38",
+     "doc": "NHTSA 01-022-N11B-8115, Subaru of America 2001-01-15, 2002 Legacy and Forester VIN schemes",
+     "says": "Legacy (SIA): 6 Full-time AWD 5MT, 7 Full-time AWD 4AT. Forester (FHI): G Full-time AWD 5MT, H Full-time AWD 4AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/456278b0-4f15-4488-b2ec-dea5be2f0e9f",
+     "doc": "NHTSA 01-022-N11B-9269, Subaru of America 2002-10-18, 2003 Subaru VIN update (Legacy, Baja, Impreza, Forester)",
+     "says": "Position 11 'Plant of manufacturer and transmission type' (SIA 6/7, FHI G/H: AWD 5MT / AWD 4AT)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/63662431-fe07-4d49-a90e-60db7c2b4db3",
+     "doc": "NHTSA ORG225 (filed 2005-02-23), 'Subaru 2006MY VIN Breakdown'",
+     "says": "Digit 11 'Plant of manufacturer and transmission type': SIA 4 = AWD 5AT, SIA 5 = AWD 4AT-SS, SIA 6 / FHI G = AWD 5MT, SIA 7 / FHI H = AWD 4AT, FHI L = AWD 6MT."
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 1180,
+    "agree": 1180,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 161,
+    "manual_codes": {
+     "in_scope_lot_cars": 162,
+     "checkable_ground_truth": 161,
+     "agree": 161,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 161,
+      "conflict": 0,
+      "no_epa_match": 1
+     },
+     "cars_without_trans_info": 1,
+     "cars_without_trans_info_by_reason": {
+      "not_in_cache_backup": 1
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 1172,
+     "checkable_ground_truth": 1019,
+     "agree": 1019,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 114,
+     "uniform_cell_lines_that_would_agree": 114,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 1165,
+      "conflict": 0,
+      "no_epa_match": 7
+     },
+     "cars_without_trans_info": 39,
+     "cars_without_trans_info_by_reason": {
+      "not_in_cache_backup": 39
+     }
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=7": 952,
+     "char11=4": 220,
+     "char11=6": 162
+    },
+    "in_scope_codes_not_in_table": {
+     "2006:U": 1
+    }
+   },
+   "newly_confirmed_manual": 1,
+   "newly_labelled_non_manual": 39
+  },
+  {
+   "id": "subaru_sia_2010_2026_char11",
+   "make": "Subaru",
+   "status": "keep",
+   "basis": "transmission_code",
+   "status_reason": ">= 20 checkable cars and agreement >= 0.995",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Subaru",
+    "models": "Lafayette-built Legacy, Outback, Tribeca, Impreza (2017+), Crosstrek (2024+), Ascent, Forester (2026), MY2010-2026",
+    "model_years": [
+     2010,
+     2026
+    ],
+    "wmi": [
+     "4S3",
+     "4S4"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "position": 11,
+    "manual_codes": {
+     "1": "SIA full-time AWD 6MT (Legacy/Outback) / 5MT (Impreza) (MY2010-2026)"
+    },
+    "automatic_codes": {
+     "2": "SIA full-time AWD 5-speed automatic (MY2010-2014)",
+     "3": "SIA full-time AWD CVT (MY2010-2026)",
+     "4": "SIA full-time AWD 5-speed automatic (Tribeca) (MY2010-2014)"
+    }
+   },
+   "vin_regex_manual": "^(4S3|4S4)......[ABCDEFGHJKLMNPRST]1......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9c69db94-0fc4-4bea-816d-6a192305240b",
+     "doc": "NHTSA ORG7743, Fuji Heavy Industries USA 2012-05-02, 2012MY Legacy, Outback, Tribeca, Forester, Impreza, Impreza WRX/STI",
+     "says": "Character 11 'Plant of manufacture and transmission type': SIA 1 Full-time AWD 6MT, 2 Full-time AWD 5AT, 3 Full-time AWD CVT, 4 (Tribeca) Full-time AWD 5AT; FHI Yajima G Full-time AWD 5MT, H Full-time AWD 4AT (Forester) / CVT (Impreza), L Full-time AWD 6MT (WRX/STI)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f4bf0f92-4305-4bc3-8020-2a71dcb73c12",
+     "doc": "NHTSA ORG8624, Fuji Heavy Industries USA 2013-05-06, 2014MY Forester and Legacy/Outback",
+     "says": "Forester: G FHI (Yajima) Full-time AWD 6MT, H Full-time AWD CVT. Legacy/Outback: 1 SIA Full-time AWD 6MT, 2 SIA 5AT, 3 SIA CVT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8c6eeb84-dc82-4b4d-9ff5-0041b92800d5",
+     "doc": "NHTSA ORG9048, Fuji Heavy Industries USA 2013-10-28, 2014MY Tribeca, Impreza, XV Crosstrek, Impreza WRX/STI (+ others)",
+     "says": "Impreza and XV Crosstrek: G FHI Yajima Full-time AWD 5MT, H Yajima CVT, 9 FHI Main Plant Full-time AWD 5MT, 8 Main Plant CVT. WRX/STI: G 5MT, L 6MT. Tribeca: 4 SIA Full-time AWD 5AT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/aeb340f8-3175-4e72-81af-51f52eab29a6",
+     "doc": "NHTSA ORG13185, Fuji Heavy Industries USA 2016-09-08, 2017 Subaru and Toyota models (ninth submission; text layer)",
+     "says": "Plant of manufacture and transmission type: WRX/STI 9 Main Plant 6MT, 8 Main Plant CVT; Legacy/Outback 1 SIA 6MT, 3 SIA CVT; Forester G Yajima 6MT, H Yajima CVT; Crosstrek G/9 5MT, H/8 CVT; BRZ and Toyota 86 9 Main Plant 6MT, 8 Main Plant 6AT; Impreza 1 SIA 5MT, 3 SIA CVT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0d16df95-607d-4140-a413-e0095416028d",
+     "doc": "NHTSA ORG15037, Fuji Heavy Industries USA 2017-10-30, 2018 Subaru models (fourth submission; text layer)",
+     "says": "WRX/STI 8 CVT / 9 6MT (Main Plant); Forester and Crosstrek G 6MT / H CVT (Yajima), Crosstrek 8 CVT / 9 6MT (Main Plant); Impreza 1 SIA 5MT / 3 SIA CVT; BRZ and Toyota 86 8 6AT / 9 6MT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/d8020630-0a9a-47fb-a194-9888a072973b",
+     "doc": "NHTSA ORG19703, Subaru Corporation 2021-10-28, 2022MY Subaru and Toyota GR86 (seventh submission; text layer)",
+     "says": "BRZ and Toyota GR86 8 Main Plant 6AT, 9 Main Plant 6MT; WRX 8 CVT, 9 6MT; Crosstrek G 6MT, H CVT, 8 CVT, 9 6MT; Impreza 1 SIA 5MT, 3 SIA CVT; Legacy/Outback/Ascent 3 SIA CVT."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/72bb4585-2803-4a75-a8dd-47b21498cc21",
+     "doc": "NHTSA ORG23706, Subaru Corporation 2024-10-30, 2025MY Subaru and Toyota GR86 (seventh submission; text layer)",
+     "says": "BRZ and GR86 8 6AT / 9 6MT; WRX 8 CVT / 9 6MT; Impreza 8 Main Plant CVT; Crosstrek H/8/3 CVT; Legacy/Outback/Ascent 3 SIA CVT."
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 773,
+    "agree": 773,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_positives_manual": 23,
+    "manual_codes": {
+     "in_scope_lot_cars": 23,
+     "checkable_ground_truth": 23,
+     "agree": 23,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 23,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 1016,
+     "checkable_ground_truth": 750,
+     "agree": 750,
+     "disagree": 0,
+     "agreement": 1.0,
+     "uniform_cell_lines_excluded": 217,
+     "uniform_cell_lines_that_would_agree": 217,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 1015,
+      "conflict": 0,
+      "no_epa_match": 1
+     },
+     "cars_without_trans_info": 49,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 23,
+      "not_in_cache_backup": 26
+     }
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char11=3": 924,
+     "char11=2": 80,
+     "char11=1": 23,
+     "char11=4": 12
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 49
+  },
+  {
+   "id": "mazda_rx8_2004_char8_engine_power",
+   "make": "Mazda",
+   "status": "low_sample",
+   "basis": "engine_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Mazda",
+    "models": "MY2004 Mazda RX-8 (JM1FE17*)",
+    "model_years": [
+     2004,
+     2004
+    ],
+    "wmi": [
+     "JM1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [F], char5 in [E], char6 in [1], char7 in [7]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "3": "13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only (MY2004-2004)"
+    },
+    "automatic_codes": {
+     "N": "13B STD (Standard Power, 4-port, 207 hp filed / 197 hp marketed): North-American RX-8 4-speed automatic only (MY2004-2004)"
+    }
+   },
+   "vin_regex_manual": "^(JM1)FE173.4.......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/839b548e-3c15-467b-a743-a69c17480924",
+     "doc": "NHTSA 01-022-N11B-9546, Mazda Motor Corporation 2003-01-08, 2004MY Mazda RX-8 VIN coding",
+     "says": "JM1 FE17N = RX-8 coupe, engine 13B STD (1.3L) 207 +/- 20.7 hp; JM1 FE173 = RX-8 coupe, engine 13B HP (1.3L) 247 +/- 24.7 hp. No transmission field."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Mazda_RX-8",
+     "doc": "Wikipedia, Mazda RX-8 (wikitext read 2026-11-05)",
+     "says": "Port-option table: 2004-2005 automatic = 4-speed with the 4-port (standard) engine; 6-speed manual = 6-port; the 5-speed manual with the 4-port engine was 'Not sold in North America'. 6-speed automatic 'introduced in the U.S. for the 2006 model year, replacing the 4-speed automatic of 2004-2005', 212 hp; 6-speed manual 232 hp (North America). 'Automatic versions all had lower output/lower rpm engines.'"
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC decodes 2026-11-05 of lot VINs and of VINs built from the filing pattern (check digit recomputed)",
+     "says": "MY2009 JM1FE17[2|4] and MY2010-2011 JM1FE1C[2|4] decode EngineModel '13B ... High Power'; [M|P] decode 'Standard Power'. MY2005-2008 JM1FE173 decodes '13B (1.3L) High Power', OtherEngineInfo 'Engine HP: 238 hp for MT; 212 hp for AT' (so FE173 is NOT manual-only after 2004)."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "19485 (2004 RX-8 Manual 6-spd); 19486 (2004 RX-8 Automatic (S4))"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 16,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 16,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 16,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 16
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 10,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 10,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 10,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 10
+     }
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=3": 16,
+     "char8=N": 10
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 16,
+   "newly_labelled_non_manual": 10
+  },
+  {
+   "id": "mazda_rx8_2005_char8_engine_power",
+   "make": "Mazda",
+   "status": "candidate",
+   "basis": "engine_code",
+   "status_reason": "not counted: the evidence does not meet the bar (see scope.models and notes)",
+   "notes": "Why only a candidate: no MY2005 Mazda filing is in MID (the next one, ORG322 / 10376, is MY2006 and does not refile the RX-8). vPIC decodes 2005 FE17N as '13B Std' (207 hp) and FE173 as '13B High Power' with OtherEngineInfo '238 hp for MT; 212 hp for AT', a note shared with 2006-2008, when the 6AT did use FE173 (MY2008 filing: '232HP (MT) / 212HP (AT)'). On the lots FE17N appears in 2004-2005 only, which fits the 4AT Standard-Power car being dropped for 2006. Promote it only with a MY2005 Mazda document.",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Mazda",
+    "models": "MY2005 Mazda RX-8 (JM1FE17*). CANDIDATE ONLY: no MY2005 Mazda filing was found in MID, and vPIC's 2005-2008 pattern for FE173 says '238 hp for MT; 212 hp for AT'",
+    "model_years": [
+     2005,
+     2005
+    ],
+    "wmi": [
+     "JM1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [F], char5 in [E], char6 in [1], char7 in [7]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "3": "13B High Power (2004 code meaning carried to 2005) (MY2005-2005)"
+    },
+    "automatic_codes": {
+     "N": "13B Standard Power (2004 code meaning carried to 2005) (MY2005-2005)"
+    }
+   },
+   "vin_regex_manual": "^(JM1)FE173.5.......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/839b548e-3c15-467b-a743-a69c17480924",
+     "doc": "NHTSA 01-022-N11B-9546, Mazda Motor Corporation 2003-01-08, 2004MY Mazda RX-8 VIN coding",
+     "says": "JM1 FE17N = RX-8 coupe, engine 13B STD (1.3L) 207 +/- 20.7 hp; JM1 FE173 = RX-8 coupe, engine 13B HP (1.3L) 247 +/- 24.7 hp. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/e24d0e67-d70f-4c46-afda-c715cbfb6237",
+     "doc": "NHTSA ORG322 (MID date 2004-05-14; the letter itself is dated 2005-03-14, ref NH05/03, same document as 01-022-N11B-10376), Mazda 2006MY VIN coding for MX-5, Mazda5, Mazda3, Mazda6 (base and turbo), MPV (read as page images 2026-11-05)",
+     "says": "JM1 GG12L = Mazda 6 sedan, L3T (2.3L Turbo) 274+/-27 hp; every other 2006 Mazda6 is 1YV (AAI Flat Rock; character 8 C = 2.3L I-4, D = 3.0L V-6). Mazda3 JM1 BK: character 8 = 3 L3V (2.3L) General, 4 = L3V California. No transmission field. RX-8 not refiled for 2006."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/af16f4a3-08b1-4ebd-9f3f-9b05f2c41269",
+     "doc": "NHTSA ORG2947, Mazda Motor Corporation 2007-04-03, 2008MY VIN coding (MX-5, RX-8, Mazda3, Mazda5, Mazda6, CX-7, CX-9) (read as page image 2026-11-05)",
+     "says": "JM1 FE173 = RX-8 13B (1.3L) High Power, horse power '232HP (MT) / 212HP (AT)' (so FE173 covers both transmissions in 2006-2008). JM1 BK34L / BK14L = Mazda3 5-door hatchback L3T (2.3L) Turbo Fed., BK34M / BK14M = L3T Turbo Calif., 263HP. No transmission field."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Mazda_RX-8",
+     "doc": "Wikipedia, Mazda RX-8 (wikitext read 2026-11-05)",
+     "says": "Port-option table: 2004-2005 automatic = 4-speed with the 4-port (standard) engine; 6-speed manual = 6-port; the 5-speed manual with the 4-port engine was 'Not sold in North America'. 6-speed automatic 'introduced in the U.S. for the 2006 model year, replacing the 4-speed automatic of 2004-2005', 212 hp; 6-speed manual 232 hp (North America). 'Automatic versions all had lower output/lower rpm engines.'"
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC decodes 2026-11-05 of lot VINs and of VINs built from the filing pattern (check digit recomputed)",
+     "says": "MY2009 JM1FE17[2|4] and MY2010-2011 JM1FE1C[2|4] decode EngineModel '13B ... High Power'; [M|P] decode 'Standard Power'. MY2005-2008 JM1FE173 decodes '13B (1.3L) High Power', OtherEngineInfo 'Engine HP: 238 hp for MT; 212 hp for AT' (so FE173 is NOT manual-only after 2004)."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "20621 (2005 RX-8 Manual 6-spd); 20622 (2005 RX-8 Automatic (S4))"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 7,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 7,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 7,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 7
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 6,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 6,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 6,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 6
+     }
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=3": 7,
+     "char8=N": 6
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 7,
+   "newly_labelled_non_manual": 6
+  },
+  {
+   "id": "mazda_rx8_2009_2011_char8_engine_power",
+   "make": "Mazda",
+   "status": "low_sample",
+   "basis": "engine_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "Standard Power vs High Power is the engine output, not the transmission. The manual-only reading rests on Wikipedia ('Automatic versions all had lower output/lower rpm engines'; NA 6MT 232 hp, 6AT 212 hp) and EPA (only Manual 6-spd and Automatic (S6) each year). MY2005-2008 FE173 is NOT ruled: the MY2008 filing gives it '232HP (MT) / 212HP (AT)'.",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Mazda",
+    "models": "MY2009-2011 Mazda RX-8 (JM1FE17* MY2009, JM1FE1C* MY2009-2011). MY2005-2008 FE173 is NOT ruled: the 6AT also used the High Power code then",
+    "model_years": [
+     2009,
+     2011
+    ],
+    "wmi": [
+     "JM1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [F], char5 in [E], char6 in [1], char7 in [7C]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "2": "13B High Power, California (232 hp): 6-speed manual only (MY2009-2011)",
+     "4": "13B High Power, Federal (232 hp): 6-speed manual only (MY2009-2011)"
+    },
+    "automatic_codes": {
+     "M": "13B Standard Power, California (212 hp): 6-speed automatic only (MY2009-2011)",
+     "P": "13B Standard Power, Federal (212 hp): 6-speed automatic only (MY2009-2011)"
+    }
+   },
+   "vin_regex_manual": "^(JM1)FE1[7C][24].[9AB].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/97b6caf5-5451-42e7-b1bd-d947b6cd3a20",
+     "doc": "NHTSA ORG3973, Mazda Motor Corporation 2008-02-29, 2009MY VIN coding (read as page images 2026-11-05)",
+     "says": "RX-8: JM1 FE17M = 13B California Standard Power, FE172 = California High Power, FE17P = Federal Standard Power, FE174 = Federal High Power. Mazda3: BK34L / BK14L = L3T (2.3L) Turbo Fed., BK34M / BK14M = L3T Turbo Calif. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/534fb246-aca9-475b-9b94-db135237831b",
+     "doc": "NHTSA ORG5728, Mazda Motor Corporation 2010-03-08, 2011MY VIN coding",
+     "says": "RX-8 JM1 FE1CM = 13B California Standard Power, FE1C2 = California High Power, FE1CP = Federal Standard Power, FE1C4 = Federal High Power. Mazda3 JM1 BL1H3 = L3T (2.3L Turbo) Federal, BL1H4 = L3T California (others LFX 2.0 / L5X 2.5 Federal/California). Columns: LINE, SERIES, BODY TYPE, ENGINE TYPE, RESTRAINT. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/af16f4a3-08b1-4ebd-9f3f-9b05f2c41269",
+     "doc": "NHTSA ORG2947, Mazda Motor Corporation 2007-04-03, 2008MY VIN coding (MX-5, RX-8, Mazda3, Mazda5, Mazda6, CX-7, CX-9) (read as page image 2026-11-05)",
+     "says": "JM1 FE173 = RX-8 13B (1.3L) High Power, horse power '232HP (MT) / 212HP (AT)' (so FE173 covers both transmissions in 2006-2008). JM1 BK34L / BK14L = Mazda3 5-door hatchback L3T (2.3L) Turbo Fed., BK34M / BK14M = L3T Turbo Calif., 263HP. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC decodes 2026-11-05 of lot VINs and of VINs built from the filing pattern (check digit recomputed)",
+     "says": "MY2009 JM1FE17[2|4] and MY2010-2011 JM1FE1C[2|4] decode EngineModel '13B ... High Power'; [M|P] decode 'Standard Power'. MY2005-2008 JM1FE173 decodes '13B (1.3L) High Power', OtherEngineInfo 'Engine HP: 238 hp for MT; 212 hp for AT' (so FE173 is NOT manual-only after 2004)."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Mazda_RX-8",
+     "doc": "Wikipedia, Mazda RX-8 (wikitext read 2026-11-05)",
+     "says": "Port-option table: 2004-2005 automatic = 4-speed with the 4-port (standard) engine; 6-speed manual = 6-port; the 5-speed manual with the 4-port engine was 'Not sold in North America'. 6-speed automatic 'introduced in the U.S. for the 2006 model year, replacing the 4-speed automatic of 2004-2005', 212 hp; 6-speed manual 232 hp (North America). 'Automatic versions all had lower output/lower rpm engines.'"
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "25224/25225 (2009); 28557/28558 (2010); 30614/30615 (2011): Manual 6-spd and Automatic (S6) only"
+    }
+   ],
+   "evidence_gaps": "MY2010 codes from vPIC (the MY2009 and MY2011 filings define the same four codes, FE17x in 2009 and FE1Cx in 2011)",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 2,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 2,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 2,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 2
+     }
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=M": 1,
+     "char8=P": 1
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_non_manual": 2
+  },
+  {
+   "id": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "make": "Mazda",
+   "status": "low_sample",
+   "basis": "engine_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Mazda",
+    "models": "MY2007-2009 MAZDASPEED3 (JM1BK[1|3]4[L|M]; feed may call it Mazda3)",
+    "model_years": [
+     2007,
+     2009
+    ],
+    "wmi": [
+     "JM1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [B], char5 in [K], char6 in [13], char7 in [4]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "L": "L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only (MY2007-2009)",
+     "M": "L3T 2.3L DISI Turbo, California: MAZDASPEED3, 6-speed manual only (MY2007-2009)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JM1)BK[13]4[LM].[789].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9833e4a8-e804-47ae-abd4-80d334a4124e",
+     "doc": "NHTSA ORG1842, Mazda Motor Corporation 2006-04-05, 2007MY VIN coding",
+     "says": "JM1 BK14L / BK34L = Mazda3 5-door hatchback, L3T (2.3L) Turbo Fed.; BK14M / BK34M = L3T Turbo Calif.; JM1 GG12L = Mazda6 sedan L3T (2.3L) Turbo; JM1 FE173 = RX-8 13B (1.3L) High Power. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/af16f4a3-08b1-4ebd-9f3f-9b05f2c41269",
+     "doc": "NHTSA ORG2947, Mazda Motor Corporation 2007-04-03, 2008MY VIN coding (MX-5, RX-8, Mazda3, Mazda5, Mazda6, CX-7, CX-9) (read as page image 2026-11-05)",
+     "says": "JM1 FE173 = RX-8 13B (1.3L) High Power, horse power '232HP (MT) / 212HP (AT)' (so FE173 covers both transmissions in 2006-2008). JM1 BK34L / BK14L = Mazda3 5-door hatchback L3T (2.3L) Turbo Fed., BK34M / BK14M = L3T Turbo Calif., 263HP. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/97b6caf5-5451-42e7-b1bd-d947b6cd3a20",
+     "doc": "NHTSA ORG3973, Mazda Motor Corporation 2008-02-29, 2009MY VIN coding (read as page images 2026-11-05)",
+     "says": "RX-8: JM1 FE17M = 13B California Standard Power, FE172 = California High Power, FE17P = Federal Standard Power, FE174 = Federal High Power. Mazda3: BK34L / BK14L = L3T (2.3L) Turbo Fed., BK34M / BK14M = L3T Turbo Calif. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC decodes 2026-11-05 (lot VINs and pattern VINs, check digit recomputed)",
+     "says": "JM1BK[1|3]4[L|M] MY2007-2009 = 'L3T (2.3L) Turbo Federal/California', Turbo=Yes; JM1BL1H[3|4] MY2010-2013 = 'L3T (Turbo) Federal/California', Turbo=Yes (BL1H5-9, F, G, P are non-turbo 2.0/2.5); JM1GG1[2|4]L MY2006-2007 = 'L3T (2.3L) Turbo'; JM1BJ227 MY2003 = FSD, EngineHP 153-187."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Mazdaspeed3",
+     "doc": "Wikipedia, Mazdaspeed3",
+     "says": "Infobox transmission: 6-speed manual (only transmission listed, both generations)."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "23183 (2007 Mazda 3 2.3 'MAZDA3 T/C' Manual 6-spd; no turbo automatic); 24387 (2008 Speed 3 Manual 6-spd); 25503 (2009 Speed 3 Manual 6-spd)"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 13,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 13,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 13,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 13
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=L": 11,
+     "char8=M": 2
+    },
+    "in_scope_codes_not_in_table": {
+     "2008:3": 49,
+     "2007:3": 39,
+     "2008:4": 27,
+     "2007:4": 13,
+     "2009:3": 10,
+     "2009:4": 9,
+     "2009:F": 2
+    }
+   },
+   "newly_confirmed_manual": 13,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "mazda_mazdaspeed3_2010_2013_char8_L3T",
+   "make": "Mazda",
+   "status": "low_sample",
+   "basis": "engine_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Mazda",
+    "models": "MY2010-2013 MAZDASPEED3 (JM1BL1H3 / BL1H4)",
+    "model_years": [
+     2010,
+     2013
+    ],
+    "wmi": [
+     "JM1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [B], char5 in [L], char6 in [1], char7 in [H]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "3": "L3T 2.3L Turbo, Federal: MAZDASPEED3, 6-speed manual only (MY2010-2013)",
+     "4": "L3T 2.3L Turbo, California: MAZDASPEED3, 6-speed manual only (MY2010-2013)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JM1)BL1H[34].[ABCD].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/c8003b0a-3f47-4de7-a680-d19a82e74dc4",
+     "doc": "NHTSA ORG4472, Mazda Motor Corporation (MID 2009-10-17), 2010MY VIN coding for Mazda3 (read as page image 2026-11-05)",
+     "says": "JM1 BL1H3 = Mazda3 5-door hatchback L3T (2.3L Turbo) Federal, BL1H4 = L3T California; BL1HF = LFX 2.0, BL1H5 / BL1H6 = L5X 2.5. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/534fb246-aca9-475b-9b94-db135237831b",
+     "doc": "NHTSA ORG5728, Mazda Motor Corporation 2010-03-08, 2011MY VIN coding",
+     "says": "RX-8 JM1 FE1CM = 13B California Standard Power, FE1C2 = California High Power, FE1CP = Federal Standard Power, FE1C4 = Federal High Power. Mazda3 JM1 BL1H3 = L3T (2.3L Turbo) Federal, BL1H4 = L3T California (others LFX 2.0 / L5X 2.5 Federal/California). Columns: LINE, SERIES, BODY TYPE, ENGINE TYPE, RESTRAINT. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC decodes 2026-11-05 (lot VINs and pattern VINs, check digit recomputed)",
+     "says": "JM1BK[1|3]4[L|M] MY2007-2009 = 'L3T (2.3L) Turbo Federal/California', Turbo=Yes; JM1BL1H[3|4] MY2010-2013 = 'L3T (Turbo) Federal/California', Turbo=Yes (BL1H5-9, F, G, P are non-turbo 2.0/2.5); JM1GG1[2|4]L MY2006-2007 = 'L3T (2.3L) Turbo'; JM1BJ227 MY2003 = FSD, EngineHP 153-187."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Mazdaspeed3",
+     "doc": "Wikipedia, Mazdaspeed3",
+     "says": "Infobox transmission: 6-speed manual (only transmission listed, both generations)."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "26420 (2010); 30402 (2011); 31584 (2012); 32984 (2013): Speed 3 Manual 6-spd, the only Speed 3 rows"
+    }
+   ],
+   "evidence_gaps": "MY2012-2013 codes from vPIC (MY2010 and MY2011 filings read)",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 5,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 5,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 5,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 5
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=3": 3,
+     "char8=4": 2
+    },
+    "in_scope_codes_not_in_table": {
+     "2010:5": 35,
+     "2010:6": 17,
+     "2010:F": 2
+    }
+   },
+   "newly_confirmed_manual": 5,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "mazda_mazdaspeed6_2006_2007_char8_L3T",
+   "make": "Mazda",
+   "status": "low_sample",
+   "basis": "engine_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Mazda",
+    "models": "MY2006-2007 MAZDASPEED6 (JM1GG12L; Japan-built Mazda6 with the L3T engine; every other Mazda6 is 1YV)",
+    "model_years": [
+     2006,
+     2007
+    ],
+    "wmi": [
+     "JM1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [G], char5 in [G]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "L": "L3T 2.3L Turbo (274 hp): MAZDASPEED6, 6-speed manual + AWD only (MY2006-2007)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JM1)GG..L.[67].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/e24d0e67-d70f-4c46-afda-c715cbfb6237",
+     "doc": "NHTSA ORG322 (MID date 2004-05-14; the letter itself is dated 2005-03-14, ref NH05/03, same document as 01-022-N11B-10376), Mazda 2006MY VIN coding for MX-5, Mazda5, Mazda3, Mazda6 (base and turbo), MPV (read as page images 2026-11-05)",
+     "says": "JM1 GG12L = Mazda 6 sedan, L3T (2.3L Turbo) 274+/-27 hp; every other 2006 Mazda6 is 1YV (AAI Flat Rock; character 8 C = 2.3L I-4, D = 3.0L V-6). Mazda3 JM1 BK: character 8 = 3 L3V (2.3L) General, 4 = L3V California. No transmission field. RX-8 not refiled for 2006."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9833e4a8-e804-47ae-abd4-80d334a4124e",
+     "doc": "NHTSA ORG1842, Mazda Motor Corporation 2006-04-05, 2007MY VIN coding",
+     "says": "JM1 BK14L / BK34L = Mazda3 5-door hatchback, L3T (2.3L) Turbo Fed.; BK14M / BK34M = L3T Turbo Calif.; JM1 GG12L = Mazda6 sedan L3T (2.3L) Turbo; JM1 FE173 = RX-8 13B (1.3L) High Power. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC decodes 2026-11-05 (lot VINs and pattern VINs, check digit recomputed)",
+     "says": "JM1BK[1|3]4[L|M] MY2007-2009 = 'L3T (2.3L) Turbo Federal/California', Turbo=Yes; JM1BL1H[3|4] MY2010-2013 = 'L3T (Turbo) Federal/California', Turbo=Yes (BL1H5-9, F, G, P are non-turbo 2.0/2.5); JM1GG1[2|4]L MY2006-2007 = 'L3T (2.3L) Turbo'; JM1BJ227 MY2003 = FSD, EngineHP 153-187."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Mazda6",
+     "doc": "Wikipedia, Mazda6 (Mazdaspeed6 section)",
+     "says": "Mazdaspeed6: turbocharged 2.3 L MZR; 'All markets received a revised front fascia with a raised hood, a 6-speed manual transmission, and all-wheel drive.'"
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "21987 (2006 Mazda 6 2.3 turbo AWD Manual 6-spd); 23261 (2007 'MAZDA6 T/C' AWD Manual 6-spd); no turbo or AWD automatic row"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 5,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 5,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 5,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 5
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=L": 5
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 5,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "mazda_mazdaspeed_protege_2003_char8_FSD170",
+   "make": "Mazda",
+   "status": "low_sample",
+   "basis": "engine_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "The filing's 170 hp FSD (BJ227/BJ228) is the MAZDASPEED Protege (Wikipedia: 170 hp turbocharged, 4,500 built). Lot serials for BJ227 are a separate block (641697-648720) from all other 2003 Proteges (101133-221210). The 2001 BJ227 code (Protege MP3 era) is outside the rule's years.",
+   "claim": "manual",
+   "scope": {
+    "make": "Mazda",
+    "models": "MY2003 MAZDASPEED Protege (JM1BJ227 / BJ228). The 2001 BJ227 code meant something else and is out of scope",
+    "model_years": [
+     2003,
+     2003
+    ],
+    "wmi": [
+     "JM1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [B], char5 in [J], char6 in [2], char7 in [2]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "7": "FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only (MY2003-2003)",
+     "8": "FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal + side air bags: 5-speed manual only (MY2003-2003)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JM1)BJ22[78].3.......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/418ce1b8-2fb6-4209-a798-7ab4860e01be",
+     "doc": "NHTSA 01-022-N11B-9298, Mazda Motor Corporation 2002-06-19, 2003MY VIN coding (adds 'Mazda Protege high power version')",
+     "says": "JM1 BJ225/BJ226 = Protege sedan, FSD 2.0L, 130 hp; BJ227/BJ228 = Protege sedan, FSD 2.0L, 170 hp (the MAZDASPEED Protege); BJ245/BJ246 = Protege5 hatchback 130 hp. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC decodes 2026-11-05 (lot VINs and pattern VINs, check digit recomputed)",
+     "says": "JM1BK[1|3]4[L|M] MY2007-2009 = 'L3T (2.3L) Turbo Federal/California', Turbo=Yes; JM1BL1H[3|4] MY2010-2013 = 'L3T (Turbo) Federal/California', Turbo=Yes (BL1H5-9, F, G, P are non-turbo 2.0/2.5); JM1GG1[2|4]L MY2006-2007 = 'L3T (2.3L) Turbo'; JM1BJ227 MY2003 = FSD, EngineHP 153-187."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Mazda_Familia",
+     "doc": "Wikipedia, Mazda Familia (Mazdaspeed Protege section)",
+     "says": "'In 2003, Mazdaspeed introduced the Mazdaspeed Protege ... 170 hp turbocharged engine'; 4,500 built. (Transmission not stated here; see EPA and Edmunds.)"
+    },
+    {
+     "url": "https://www.edmunds.com/mazda/mazdaspeed-protege/2003/st-100178606/features-specs",
+     "doc": "Edmunds 2003 Mazdaspeed Protege features & specs (seen via web search 2026-11-05; page not fetched); also Cars.com https://www.cars.com/research/mazda-mazdaspeed_protege-2003/specs/109435/",
+     "says": "Edmunds: 5-speed manual, front-wheel drive, limited-slip differential; no automatic listed for the MAZDASPEED Protege. Cars.com: 2.0L turbocharged I-4, 170 hp."
+    },
+    {
+     "url": "docs/data/inventory_live.json",
+     "doc": "YardScout lot VINs, 2026-11-04 scan (supporting evidence, not a source of the claim)",
+     "says": "Every 2003 JM1BJ227 VIN on the lots has a serial in 641697-648720; every 2003 BJ225/BJ226/BJ245/BJ246 serial is 101133-221210. The 170 hp code sits in its own production block, as a 4,500-car special run would."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "18552 (2003 Protege/Protege 5 2.0 Manual 5-spd, Premium fuel): the ONLY premium-fuel 2003 Protege configuration; the automatics 18551/18554 are regular fuel"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 8,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 8,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 8,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 8
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=7": 8
+    },
+    "in_scope_codes_not_in_table": {
+     "2003:5": 32,
+     "2003:6": 5,
+     "2003:2": 1
+    }
+   },
+   "newly_confirmed_manual": 8,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "mitsubishi_3000gt_stealth_twin_turbo_1991_1992_char8",
+   "make": "Mitsubishi",
+   "status": "low_sample",
+   "basis": "engine_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Mitsubishi",
+    "models": "Mitsubishi 3000GT (JA3) and Dodge Stealth (JB3), lines D/E, MY1991-1992",
+    "model_years": [
+     1991,
+     1992
+    ],
+    "wmi": [
+     "JA3",
+     "JB3"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [DE]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "C": "3.0L DOHC MPI twin turbo + intercooler (3000GT VR-4 / Stealth R/T Turbo): 5-speed manual AWD only (MY1991-1992)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JA3|JB3).[DE]..C.[MN].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/6bf5786d-ae22-4ecd-b944-c444c17fa858",
+     "doc": "NHTSA 01-22-N11B-4081, Mitsubishi Motors Corporation 1990-11-26, VIN for 1992 model vehicles",
+     "says": "4th restraint/GVWR, 5th-6th car line + series (D 4-6 / E 7 = Mitsubishi 3000GT / Dodge Stealth), 7th body, 8th engine type: C = 3.0L DOHC MPI T/C I/C (twin turbo), B = 3.0L DOHC, S = 3.0L MPI, U = 2.0L DOHC MPI T/C I/C. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC decodes 2026-11-05 of pattern VINs (check digit recomputed)",
+     "says": "MY1991-1992 JA3/JB3 XE74C (3000GT / Stealth R/T Turbo) Turbo=Yes; MY1993-1999 JA3/JB3 ..N74K Turbo / VR-4 / R/T TURBO, AWD."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "7667 (1991 3000 GT turbo AWD Manual 5-spd); 8764 (1992); 7590 (1991 Stealth turbo AWD Manual 5-spd); 8680 (1992 Stealth)"
+    }
+   ],
+   "evidence_gaps": "MY1991 code from vPIC only (the 1991 passenger-car filing was not found; 01-22-N11B-3997 is the 1991 Fuso truck filing)",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 2,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 2,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 2,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 2
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=C": 2
+    },
+    "in_scope_codes_not_in_table": {
+     "1991:B": 4,
+     "1992:S": 2,
+     "1992:B": 1
+    }
+   },
+   "newly_confirmed_manual": 2,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "mitsubishi_3000gt_stealth_twin_turbo_1993_1999_char8",
+   "make": "Mitsubishi",
+   "status": "low_sample",
+   "basis": "engine_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Mitsubishi",
+    "models": "Mitsubishi 3000GT / 3000GT Spyder (JA3) and Dodge Stealth (JB3, to 1996), MY1993-1999",
+    "model_years": [
+     1993,
+     1999
+    ],
+    "wmi": [
+     "JA3",
+     "JB3"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [MNVW]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "K": "3.0L DOHC MPI 2 turbo + 2 intercooler (3000GT VR-4 / Spyder VR-4 / Stealth R/T Turbo): manual AWD only (5MT 1993, 6MT 1994-99) (MY1993-1999)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JA3|JB3).[MNVW]..K.[PRSTVWX].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9ae7b268-70af-461a-bbf0-57116a463629",
+     "doc": "NHTSA 01-22-N11B-4618, Mitsubishi Motors Corporation 1992-04-23, VIN for 1993 model vehicles (MMC and Diamond-Star)",
+     "says": "5th car line M (series 4-6) / N (series 7) = Mitsubishi 3000GT / Dodge Stealth; 8th engine K = 3.0 DOHC MPI T/C I/C, J = 3.0 DOHC MPI, H = 3.0 MPI. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9f607dc2-5a9a-46e8-930f-91cff3e94876",
+     "doc": "NHTSA 01-22-N11B-5700, Mitsubishi Motors Corporation 1994-06-22, VIN for 1995 model vehicles (MMC and Diamond-Star)",
+     "says": "5th-6th: M (4,5,8) / N (7) = 3000GT / Dodge Stealth, V (6) / W (7) = 3000GT Spyder; 8th engine K = 3.0 DOHC MPI 2 T/C 2 I/C, J = 3.0 DOHC MPI, H = 3.0 MPI. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8010978c-097c-4896-9dbc-76830515b7db",
+     "doc": "NHTSA 01-22-N11B-6347, Mitsubishi Motors Corporation 1997-06-11, 1998MY VIN codes (MMC and MMMA)",
+     "says": "5th car line M/N = 3000GT, V/W = 3000GT Spyder; 8th engine K = 3.0 DOHC MPI 2T/C 2I/C. MMMA (4A3): 4th restraint, 5th line, 6th series, 7th body, 8th engine. No transmission field."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
+     "doc": "NHTSA vPIC decodes 2026-11-05 of pattern VINs (check digit recomputed)",
+     "says": "MY1991-1992 JA3/JB3 XE74C (3000GT / Stealth R/T Turbo) Turbo=Yes; MY1993-1999 JA3/JB3 ..N74K Turbo / VR-4 / R/T TURBO, AWD."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "9823 (1993 3000 GT turbo Manual 5-spd); 10789, 11742, 12641, 13382, 14107, 14890 (1994-1999 3000 GT turbo Manual 6-spd); 11744, 12643, 13384, 14109 (Spyder turbo Manual 6-spd); 9734, 10713, 11669, 12581 (Stealth turbo manual)"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 1,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 1,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 1,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 1
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=K": 1
+    },
+    "in_scope_codes_not_in_table": {
+     "1995:J": 7,
+     "1994:J": 4,
+     "1993:J": 3,
+     "1993:H": 2,
+     "1998:J": 2,
+     "1997:H": 2,
+     "1999:H": 1,
+     "1996:J": 1,
+     "1994:H": 1,
+     "1995:H": 1
+    }
+   },
+   "newly_confirmed_manual": 1,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "mitsubishi_montero_sport_24_4x2_1997_1999_char8",
+   "make": "Mitsubishi",
+   "status": "candidate",
+   "basis": "engine_code",
+   "status_reason": "not counted: the evidence does not meet the bar (see scope.models and notes)",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Mitsubishi",
+    "models": "MY1997-1999 Mitsubishi Montero Sport ES 4x2 2.4 (JA4 LS21G on the lots). CANDIDATE ONLY: EPA is the only source for manual-only, and the code meaning is from vPIC decodes, not a filing read",
+    "model_years": [
+     1997,
+     1999
+    ],
+    "wmi": [
+     "JA4"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [S]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "G": "2.4L 4-cyl (4G64) in the 4x2 Montero Sport line S: EPA lists only a 5-speed manual (MY1997-1999)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JA4).S..G.[VWX].......",
+   "citations": [
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA vehicles.csv (only source for the claim) + vPIC decodes of the lot VINs (2.4L 4-cyl, 4x2)",
+     "says": "29580 (1997), 14677 (1998), 15482 (1999) Montero Sport 2WD 2.4: Manual 5-spd, the only 2.4 rows. No Mitsubishi filing for 1997-1999 was read for the JA4 LS..G code, and no text source confirms the 2.4 was manual-only."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "29580 (1997); 14677 (1998); 15482 (1999) Montero Sport 2WD 2.4 Manual 5-spd: the only 2.4 rows"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 2,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 2,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 2,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 2
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=G": 2
+    },
+    "in_scope_codes_not_in_table": {
+     "1998:P": 7,
+     "1999:H": 5,
+     "1999:R": 3,
+     "1997:P": 1
+    }
+   },
+   "newly_confirmed_manual": 2,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "isuzu_rodeo_26_4x2_1991_1997_char8",
+   "make": "Isuzu",
+   "status": "low_sample",
+   "basis": "engine_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "Codes read from the MY1992, MY1995 and MY1997 Isuzu filings (MY1991, 1993, 1994, 1996 interpolated; the same G/K, 8 and E meanings appear in every table read). The 2.6 Rodeo was 4x2 only (EPA has no 2.6 4WD Rodeo row).",
+   "claim": "manual",
+   "scope": {
+    "make": "Isuzu",
+    "models": "MY1991-1997 Isuzu Rodeo S 4x2 with the 2.6L four-cylinder (4S2 G58E / K58E). The Honda Passport twin (4S6) uses the same codes but is not ruled here (Honda make, no lot cars)",
+    "model_years": [
+     1991,
+     1997
+    ],
+    "wmi": [
+     "4S2",
+     "JAC"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [GK], char7 in [8]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "E": "4ZE1 2.6L L4 in a Rodeo 4x2 (line G/K, body 8 = utility 4-door): Rodeo S 2WD, 5-speed manual only (MY1991-1997)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(4S2|JAC).[GK].8E.[MNPRSTV].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/6fd83e64-2598-4305-9e04-d30d12e814ba",
+     "doc": "NHTSA 01-22-N11B-4240, Isuzu Motors 1991-04-11 (issued 1990-10, revised 1991-04), VIN for 1992 model year vehicles (read as page images 2026-11-05)",
+     "says": "Section C (MPV / light-duty truck): position 4 GVWR/brake, 5 'Line and Chassis Type' (G = Utility 4x2, H = Utility 4x4, L = Conventional Cab 4x2, R = Conventional Cab 4x4, Y = Utility 4x4), 6 model-series, 7 body type (1 = 2-door cab SWB, 7 = utility 2-door SWB, 8 = utility 4-door), 8 'Engine Codes' (E = 4ZE1 2.6L L4, L = 4ZD1 2.3L L4, Z = 3.1L V6 GM, V = 6VD1 3.2L SOHC, W = 6VD1 3.2L DOHC). No transmission table."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/c8d1cf75-c8c6-44da-a98f-3ff54437a542",
+     "doc": "NHTSA 01-22-N11B-5634, Isuzu Motors 1994-03-15, VIN for 1995 model year (read as page images 2026-11-05)",
+     "says": "Position 5 (JAA, JAC, 4S1, 4S2): L = Pickup 4x2, R = Pickup 4x4, H/J = Trooper 4x4, G = Rodeo 4x2, Y = Rodeo 4x4, K = Rodeo 4x2 with airbags, M = Rodeo 4x4 with airbags (4S6 Passport G/Y/K/M). Position 7: 8 = Utility 4-door, 7 = Utility 2-door SWB. Position 8: E = 4ZE1 2.6L, L = 4ZD1 2.3L, Z = 3.1L V6 GM, V/W = 6VD1 3.2L. No transmission table."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5cf7fd0f-5168-4a7e-b720-ea2b6f19b297",
+     "doc": "NHTSA 01-22-N11B-6088, Isuzu Motors 1996-04-26, VIN for 1997 model year",
+     "says": "MPV/light truck: 4 GVWR/brake, 5 line/chassis/restraint (J Trooper 4x4, K Rodeo 4x2, M Rodeo 4x4; 4S6 Passport; JAE SLX), 6 series, 7 body, 8 engine, 11 plant. No transmission field."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Isuzu_MU",
+     "doc": "Wikipedia, Isuzu MU (raw wikitext fetched 2026-11-05)",
+     "says": "Amigo 1989: 'The transmission was initially manual only'; '1992: ... the added availability of a four-speed automatic transmission on the RWD version'. Rodeo 1991: 'available with either a 2.6-liter inline-four ... or a 3.1-liter V6 ... An automatic transmission was available for the V6.' Second generation: '1999: The Amigo gains a hardtop version and an optional automatic transmission.'"
+    },
+    {
+     "url": "https://www.edmunds.com/isuzu/rodeo/1996/review",
+     "doc": "Edmunds 1996 Isuzu Rodeo review, and Consumer Guide used 1991-97 Isuzu Rodeo https://consumerguide.com/used/1991-97-isuzu-rodeo/ (seen via web search 2026-11-05; pages not fetched)",
+     "says": "Edmunds: the 2.6-liter four-cylinder 'powers the two-wheel-drive S edition, which comes only with manual shift'. Consumer Guide (1991-97): the price leader was the 2-wheel-drive S, with a 4-cylinder engine and 5-speed manual."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "8452 (1991); 9522 (1992); 10518 (1993); 11469 (1994); 12429 (1995); 13168 (1996); 13895 (1997): Rodeo 2WD 2.6 Manual 5-spd, the only 2.6 Rodeo rows each year"
+    }
+   ],
+   "evidence_gaps": "MY1991, 1993, 1994, 1996 codes interpolated between the MY1992, MY1995 and MY1997 filings",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 6,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 6,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 6,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 6
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=E": 6
+    },
+    "in_scope_codes_not_in_table": {
+     "1995:V": 5,
+     "1997:V": 4,
+     "1996:V": 2,
+     "1992:Z": 2,
+     "1993:V": 2,
+     "1994:V": 1
+    }
+   },
+   "newly_confirmed_manual": 6,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "isuzu_amigo_1998_char7",
+   "make": "Isuzu",
+   "status": "low_sample",
+   "basis": "line_body_code",
+   "status_reason": "fewer than 20 checkable ground-truth cars; kept because the VIN code meaning comes from the manufacturer's own Part 565 VIN scheme",
+   "notes": "Applies to every engine: EPA lists 1998 Amigo 2WD 2.2, 4WD 2.2 and 4WD 3.2, all Manual 5-spd; Wikipedia dates the Amigo's optional automatic to 1999.",
+   "claim": "manual",
+   "scope": {
+    "make": "Isuzu",
+    "models": "MY1998 Isuzu Amigo, every engine (2.2 X22SE, 3.2 6VD1) and drive",
+    "model_years": [
+     1998,
+     1998
+    ],
+    "wmi": [
+     "4S2",
+     "JAC"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [KM]"
+    ]
+   },
+   "vin_condition": {
+    "position": 7,
+    "manual_codes": {
+     "7": "Amigo (line K/M Rodeo-or-Amigo, body 7 = utility 2-door short wheelbase): every 1998 Amigo was manual (automatic optional from 1999) (MY1998-1998)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(4S2|JAC).[KM].7..W.......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/89d04d52-a600-4ba0-982d-43aa688f1137",
+     "doc": "NHTSA 01-22-N11B-6340, Isuzu Motors 1997-04-01, VIN for MODEL YEAR 1998 (read as page images 2026-11-05)",
+     "says": "Position 5 (JAC, 4S2): J = Trooper 4x4, K = Rodeo or Amigo 4x2, M = Rodeo or Amigo 4x4; (4S6) K/M = Passport; (JAE) J = SLX. Position 7: 5 = Utility 2-door LWB, 7 = Utility 2-door SWB, 8 = Utility 4-door. Position 8: D = X22SE 2.2L L4 (Holden), W = 6VD1 3.2L V6, X = 6VE1 3.5L V6. No transmission table."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Isuzu_MU",
+     "doc": "Wikipedia, Isuzu MU (raw wikitext fetched 2026-11-05)",
+     "says": "Amigo 1989: 'The transmission was initially manual only'; '1992: ... the added availability of a four-speed automatic transmission on the RWD version'. Rodeo 1991: 'available with either a 2.6-liter inline-four ... or a 3.1-liter V6 ... An automatic transmission was available for the V6.' Second generation: '1999: The Amigo gains a hardtop version and an optional automatic transmission.'"
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "14659 (1998 Amigo 2WD 2.2); 14735 (1998 Amigo 4WD 2.2); 14736 (1998 Amigo 4WD 3.2): all Manual 5-spd, no automatic row"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 3,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 2,
+      "conflict": 0,
+      "no_epa_match": 1
+     },
+     "cars_without_trans_info": 3,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 3
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char7=7": 3
+    },
+    "in_scope_codes_not_in_table": {
+     "1998:8": 17
+    }
+   },
+   "newly_confirmed_manual": 3,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "make": "Isuzu",
+   "status": "candidate",
+   "basis": "engine_code",
+   "status_reason": "not counted: the evidence does not meet the bar (see scope.models and notes)",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Isuzu",
+    "models": "MY1988-1995 Isuzu Pickup 4x2 2.3 and Amigo 4x2 2.3. CANDIDATE ONLY: EPA is the only source for manual-only (no Isuzu, editorial or encyclopedia text found)",
+    "model_years": [
+     1988,
+     1995
+    ],
+    "wmi": [
+     "JAA",
+     "JAC",
+     "4S1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [LG]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "L": "4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual (MY1988-1995)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JAA|JAC|4S1).[LG]..L.[JKLMNPRS].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/6fd83e64-2598-4305-9e04-d30d12e814ba",
+     "doc": "NHTSA 01-22-N11B-4240, Isuzu Motors 1991-04-11 (issued 1990-10, revised 1991-04), VIN for 1992 model year vehicles (read as page images 2026-11-05)",
+     "says": "Section C (MPV / light-duty truck): position 4 GVWR/brake, 5 'Line and Chassis Type' (G = Utility 4x2, H = Utility 4x4, L = Conventional Cab 4x2, R = Conventional Cab 4x4, Y = Utility 4x4), 6 model-series, 7 body type (1 = 2-door cab SWB, 7 = utility 2-door SWB, 8 = utility 4-door), 8 'Engine Codes' (E = 4ZE1 2.6L L4, L = 4ZD1 2.3L L4, Z = 3.1L V6 GM, V = 6VD1 3.2L SOHC, W = 6VD1 3.2L DOHC). No transmission table."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/c8d1cf75-c8c6-44da-a98f-3ff54437a542",
+     "doc": "NHTSA 01-22-N11B-5634, Isuzu Motors 1994-03-15, VIN for 1995 model year (read as page images 2026-11-05)",
+     "says": "Position 5 (JAA, JAC, 4S1, 4S2): L = Pickup 4x2, R = Pickup 4x4, H/J = Trooper 4x4, G = Rodeo 4x2, Y = Rodeo 4x4, K = Rodeo 4x2 with airbags, M = Rodeo 4x4 with airbags (4S6 Passport G/Y/K/M). Position 7: 8 = Utility 4-door, 7 = Utility 2-door SWB. Position 8: E = 4ZE1 2.6L, L = 4ZD1 2.3L, Z = 3.1L V6 GM, V/W = 6VD1 3.2L. No transmission table."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA vehicles.csv; web search 2026-11-05 found no manufacturer or editorial text saying these engines were manual-only",
+     "says": "Row ids quoted in the rule. EPA is the only source for the manual-only claim, so the rule stays a candidate."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "4797, 5934, 7002, 8131, 9218, 10231, 11185, 11186, 12149 (Pickup 2WD 2.3, 1988-1995); 6276, 7335, 8450, 9519, 10515 (Amigo 2WD 2.3, 1989-1993): all Manual 5-spd"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 14,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 14,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 14,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 14
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=L": 14
+    },
+    "in_scope_codes_not_in_table": {
+     "1990:E": 1,
+     "1991:E": 1,
+     "1989:E": 1,
+     "1992:E": 1
+    }
+   },
+   "newly_confirmed_manual": 14,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "isuzu_4ze1_26_4x4_pickup_amigo_1989_1995_char8",
+   "make": "Isuzu",
+   "status": "candidate",
+   "basis": "engine_code",
+   "status_reason": "not counted: the evidence does not meet the bar (see scope.models and notes)",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Isuzu",
+    "models": "MY1989-1995 Isuzu Pickup 4x4 2.6 and early Amigo 4x4 2.6. CANDIDATE ONLY: EPA is the only source; MY1988 is excluded because EPA lists a 4-speed automatic for the 1988 2.6 4WD",
+    "model_years": [
+     1989,
+     1995
+    ],
+    "wmi": [
+     "JAA",
+     "JAC",
+     "4S1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [R]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "E": "4ZE1 2.6L L4 in the 4x4 conventional-cab line R (Pickup 4x4; the 1989-1991 Amigo 4x4 also decodes here): EPA lists only a 5-speed manual (MY1989-1995)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JAA|JAC|4S1).R..E.[KLMNPRS].......",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/6fd83e64-2598-4305-9e04-d30d12e814ba",
+     "doc": "NHTSA 01-22-N11B-4240, Isuzu Motors 1991-04-11 (issued 1990-10, revised 1991-04), VIN for 1992 model year vehicles (read as page images 2026-11-05)",
+     "says": "Section C (MPV / light-duty truck): position 4 GVWR/brake, 5 'Line and Chassis Type' (G = Utility 4x2, H = Utility 4x4, L = Conventional Cab 4x2, R = Conventional Cab 4x4, Y = Utility 4x4), 6 model-series, 7 body type (1 = 2-door cab SWB, 7 = utility 2-door SWB, 8 = utility 4-door), 8 'Engine Codes' (E = 4ZE1 2.6L L4, L = 4ZD1 2.3L L4, Z = 3.1L V6 GM, V = 6VD1 3.2L SOHC, W = 6VD1 3.2L DOHC). No transmission table."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/c8d1cf75-c8c6-44da-a98f-3ff54437a542",
+     "doc": "NHTSA 01-22-N11B-5634, Isuzu Motors 1994-03-15, VIN for 1995 model year (read as page images 2026-11-05)",
+     "says": "Position 5 (JAA, JAC, 4S1, 4S2): L = Pickup 4x2, R = Pickup 4x4, H/J = Trooper 4x4, G = Rodeo 4x2, Y = Rodeo 4x4, K = Rodeo 4x2 with airbags, M = Rodeo 4x4 with airbags (4S6 Passport G/Y/K/M). Position 7: 8 = Utility 4-door, 7 = Utility 2-door SWB. Position 8: E = 4ZE1 2.6L, L = 4ZD1 2.3L, Z = 3.1L V6 GM, V/W = 6VD1 3.2L. No transmission table."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA vehicles.csv; web search 2026-11-05 found no manufacturer or editorial text saying these engines were manual-only",
+     "says": "Row ids quoted in the rule. EPA is the only source for the manual-only claim, so the rule stays a candidate."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Isuzu_MU",
+     "doc": "Wikipedia, Isuzu MU (raw wikitext fetched 2026-11-05)",
+     "says": "Amigo 1989: 'The transmission was initially manual only'; '1992: ... the added availability of a four-speed automatic transmission on the RWD version'. Rodeo 1991: 'available with either a 2.6-liter inline-four ... or a 3.1-liter V6 ... An automatic transmission was available for the V6.' Second generation: '1999: The Amigo gains a hardtop version and an optional automatic transmission.'"
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "6144, 7215, 8338, 9399, 10400, 11354, 12318 (Pickup 4WD 2.6, 1989-1995); 6349, 7408, 8511, 9584, 10571, 11536 (Amigo 4WD 2.6, 1989-1994): all Manual 5-spd"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 5,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 5,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 5,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 5
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=E": 5
+    },
+    "in_scope_codes_not_in_table": {
+     "1993:Z": 1
+    }
+   },
+   "newly_confirmed_manual": 5,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "isuzu_trooper_23_1986_1987_char8",
+   "make": "Isuzu",
+   "status": "candidate",
+   "basis": "engine_code",
+   "status_reason": "not counted: the evidence does not meet the bar (see scope.models and notes)",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Isuzu",
+    "models": "MY1986-1987 Isuzu Trooper / Trooper II 2.3. CANDIDATE ONLY: EPA is the only source and the code meaning is from vPIC decodes (no 1986-87 Isuzu filing read)",
+    "model_years": [
+     1986,
+     1987
+    ],
+    "wmi": [
+     "JAA",
+     "JAC"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char5 in [H]"
+    ]
+   },
+   "vin_condition": {
+    "position": 8,
+    "manual_codes": {
+     "L": "2.3L gasoline L4 in the Trooper (II) 4x4 line H: EPA lists only a 5-speed manual (MY1986-1987)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JAA|JAC).H..L.[GH].......",
+   "citations": [
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA vehicles.csv; web search 2026-11-05 found no manufacturer or editorial text saying these engines were manual-only",
+     "says": "Row ids quoted in the rule. EPA is the only source for the manual-only claim, so the rule stays a candidate."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Trooper 1986 2.3 4WD and 1987 2.3 4WD: Manual 5-spd only (the 2.2 turbo-diesel rows are manual too)"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 3,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 2,
+      "conflict": 0,
+      "no_epa_match": 1
+     },
+     "cars_without_trans_info": 3,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 3
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char8=L": 3
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 3,
+   "newly_labelled_non_manual": 0
+  },
+  {
+   "id": "suzuki_samurai_1986_1995_char4_5",
+   "make": "Suzuki",
+   "status": "candidate",
+   "basis": "line_body_code",
+   "status_reason": "not counted: the evidence does not meet the bar (see scope.models and notes)",
+   "notes": "",
+   "claim": "manual",
+   "scope": {
+    "make": "Suzuki",
+    "models": "MY1986-1995 Suzuki Samurai. CANDIDATE ONLY: EPA is the only source for manual-only and the JC code comes from lot VINs + vPIC, not a Suzuki filing read",
+    "model_years": [
+     1986,
+     1995
+    ],
+    "wmi": [
+     "JS3",
+     "JS4"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: char4 in [J]"
+    ]
+   },
+   "vin_condition": {
+    "position": 5,
+    "manual_codes": {
+     "C": "Samurai line (JS4 JC..): EPA lists only a 5-speed manual for every Samurai 1986-1995 (MY1986-1995)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^(JS3|JS4)JC....[GHJKLMNPRS].......",
+   "citations": [
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA vehicles.csv (only source for the claim) + Wikipedia Suzuki Jimny (US Samurai 1986-1995, no transmission statement) + vPIC decodes of lot VINs (model Samurai)",
+     "says": "Every Samurai row 1986-1995 (19 rows, 2871 ... 12499) is Manual 5-spd. The JS4 JC line code is taken from the lot VINs and vPIC, not from a Suzuki filing."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "Row ids quoted in each rule."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), local copy scraper/manual_detect/epa/vehicles.csv",
+     "says": "2871, 2872, 4099, 4100, 5219, 5220, 6367, 6368, 7426, 7427, 8463, 8531, 8532, 9536, 9604, 10527, 10592, 11561, 12499: every Samurai row is Manual 5-spd"
+    }
+   ],
+   "evidence_gaps": "",
+   "validation": {
+    "checkable_ground_truth": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_positives_manual": 0,
+    "manual_codes": {
+     "in_scope_lot_cars": 3,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 3,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 3,
+     "cars_without_trans_info_by_reason": {
+      "vpic_trans_blank": 3
+     }
+    },
+    "automatic_codes": {
+     "in_scope_lot_cars": 0,
+     "checkable_ground_truth": 0,
+     "agree": 0,
+     "disagree": 0,
+     "agreement": null,
+     "uniform_cell_lines_excluded": 0,
+     "uniform_cell_lines_that_would_agree": 0,
+     "ground_truth_speeds_only_excluded": 0,
+     "epa_crosscheck": {
+      "consistent": 0,
+      "conflict": 0,
+      "no_epa_match": 0
+     },
+     "cars_without_trans_info": 0,
+     "cars_without_trans_info_by_reason": {}
+    },
+    "disagree_examples": [],
+    "epa_conflict_examples": [],
+    "codes_seen_on_lots": {
+     "char5=C": 3
+    },
+    "in_scope_codes_not_in_table": {}
+   },
+   "newly_confirmed_manual": 3,
+   "newly_labelled_non_manual": 0
+  }
+ ],
+ "newly_confirmed_manual_cars": [
+  {
+   "id": "7982675",
+   "vin": "4S2CK57D8W4375900",
+   "year": 1998,
+   "make": "Isuzu",
+   "model": "Amigo",
+   "rule": "isuzu_amigo_1998_char7",
+   "code": "char7=7: Amigo (line K/M Rodeo-or-Amigo, body 7 = utility 2-door short wheelbase): every 1998 Amigo was manual (automatic optional from 1999)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Vancouver"
+  },
+  {
+   "id": "7990384",
+   "vin": "JM1GG12L071109263",
+   "year": 2007,
+   "make": "Mazda",
+   "model": "Mazdaspeed6",
+   "rule": "mazda_mazdaspeed6_2006_2007_char8_L3T",
+   "code": "char8=L: L3T 2.3L Turbo (274 hp): MAZDASPEED6, 6-speed manual + AWD only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Portland South"
+  },
+  {
+   "id": "7997482",
+   "vin": "JM1BL1H31A1259922",
+   "year": 2010,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2010_2013_char8_L3T",
+   "code": "char8=3: L3T 2.3L Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Chico"
+  },
+  {
+   "id": "7927339",
+   "vin": "JM1FE173040102485",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Chico"
+  },
+  {
+   "id": "7998014",
+   "vin": "JM1FE173640118593",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Salinas"
+  },
+  {
+   "id": "7935165",
+   "vin": "JM1BL1H42A1332191",
+   "year": 2010,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2010_2013_char8_L3T",
+   "code": "char8=4: L3T 2.3L Turbo, California: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Newark"
+  },
+  {
+   "id": "7985401",
+   "vin": "JM1BJ227630642691",
+   "year": 2003,
+   "make": "Mazda",
+   "model": "Protege",
+   "rule": "mazda_mazdaspeed_protege_2003_char8_FSD170",
+   "code": "char8=7: FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Redding"
+  },
+  {
+   "id": "7985395",
+   "vin": "JM1BJ227030646848",
+   "year": 2003,
+   "make": "Mazda",
+   "model": "Protege",
+   "rule": "mazda_mazdaspeed_protege_2003_char8_FSD170",
+   "code": "char8=7: FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Redding"
+  },
+  {
+   "id": "7963524",
+   "vin": "JM1BK34L381165006",
+   "year": 2008,
+   "make": "Mazda",
+   "model": "Mazdaspeed3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Edmonton"
+  },
+  {
+   "id": "7986144",
+   "vin": "JA3XE74C2NY034543",
+   "year": 1992,
+   "make": "Mitsubishi",
+   "model": "3000GT",
+   "rule": "mitsubishi_3000gt_stealth_twin_turbo_1991_1992_char8",
+   "code": "char8=C: 3.0L DOHC MPI twin turbo + intercooler (3000GT VR-4 / Stealth R/T Turbo): 5-speed manual AWD only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - San Jose North"
+  },
+  {
+   "id": "utpap-ogden-A039306",
+   "vin": "JM1GG12L361107246",
+   "year": 2006,
+   "make": "Mazda",
+   "model": "Mazdaspeed6",
+   "rule": "mazda_mazdaspeed6_2006_2007_char8_L3T",
+   "code": "char8=L: L3T 2.3L Turbo (274 hp): MAZDASPEED6, 6-speed manual + AWD only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Utah Pic-A-Part - Ogden"
+  },
+  {
+   "id": "1264-135932",
+   "vin": "JM1FE173240110037",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Chula Vista"
+  },
+  {
+   "id": "1262-205023",
+   "vin": "4S2CK58E3S4378463",
+   "year": 1995,
+   "make": "Isuzu",
+   "model": "Rodeo",
+   "rule": "isuzu_rodeo_26_4x2_1991_1997_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in a Rodeo 4x2 (line G/K, body 8 = utility 4-door): Rodeo S 2WD, 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Help Yourself"
+  },
+  {
+   "id": "1280-177511",
+   "vin": "JM1BJ227630648720",
+   "year": 2003,
+   "make": "Mazda",
+   "model": "Protege",
+   "rule": "mazda_mazdaspeed_protege_2003_char8_FSD170",
+   "code": "char8=7: FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Ontario"
+  },
+  {
+   "id": "1287-70939",
+   "vin": "JM1FE173840129756",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Victorville"
+  },
+  {
+   "id": "1582-90157",
+   "vin": "JM1BK34M081122753",
+   "year": 2008,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=M: L3T 2.3L DISI Turbo, California: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Blue Island"
+  },
+  {
+   "id": "1586-70948",
+   "vin": "JM1BJ227430642947",
+   "year": 2003,
+   "make": "Mazda",
+   "model": "Protege",
+   "rule": "mazda_mazdaspeed_protege_2003_char8_FSD170",
+   "code": "char8=7: FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - East St. Louis"
+  },
+  {
+   "id": "1212-75635",
+   "vin": "JM1FE173740132132",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Greenville"
+  },
+  {
+   "id": "1234-56256",
+   "vin": "JM1BK34L081178926",
+   "year": 2008,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Austin"
+  },
+  {
+   "id": "pap-16-1080809-1",
+   "vin": "JB3XE74C9MY022004",
+   "year": 1991,
+   "make": "Dodge",
+   "model": "Stealth",
+   "rule": "mitsubishi_3000gt_stealth_twin_turbo_1991_1992_char8",
+   "code": "char8=C: 3.0L DOHC MPI twin turbo + intercooler (3000GT VR-4 / Stealth R/T Turbo): 5-speed manual AWD only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Baton Rouge"
+  },
+  {
+   "id": "pap-3-1192983-2",
+   "vin": "4S2CG58E4P4335078",
+   "year": 1993,
+   "make": "Isuzu",
+   "model": "Rodeo",
+   "rule": "isuzu_rodeo_26_4x2_1991_1997_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in a Rodeo 4x2 (line G/K, body 8 = utility 4-door): Rodeo S 2WD, 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Atlanta South"
+  },
+  {
+   "id": "pap-25-1053702-1",
+   "vin": "4S2CK57D9W4354716",
+   "year": 1998,
+   "make": "Isuzu",
+   "model": "Amigo",
+   "rule": "isuzu_amigo_1998_char7",
+   "code": "char7=7: Amigo (line K/M Rodeo-or-Amigo, body 7 = utility 2-door short wheelbase): every 1998 Amigo was manual (automatic optional from 1999)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Akron"
+  },
+  {
+   "id": "pap-13-1092153-1",
+   "vin": "JM1BJ227230641697",
+   "year": 2003,
+   "make": "Mazda",
+   "model": "Mazdaspeed Protege",
+   "rule": "mazda_mazdaspeed_protege_2003_char8_FSD170",
+   "code": "char8=7: FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Montgomery"
+  },
+  {
+   "id": "pap-19-1079611-5",
+   "vin": "JM1FE173740128033",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Winston-Salem"
+  },
+  {
+   "id": "pap-29-1088441-1",
+   "vin": "JM1BJ227830643034",
+   "year": 2003,
+   "make": "Mazda",
+   "model": "Mazdaspeed Protege",
+   "rule": "mazda_mazdaspeed_protege_2003_char8_FSD170",
+   "code": "char8=7: FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - El Paso"
+  },
+  {
+   "id": "pap-29-1088442-1",
+   "vin": "JM1FE173840115517",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - El Paso"
+  },
+  {
+   "id": "pap-29-1088733-1",
+   "vin": "JM1BK34L271743983",
+   "year": 2007,
+   "make": "Mazda",
+   "model": "Mazdaspeed3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - El Paso"
+  },
+  {
+   "id": "pap-37-1021357-1",
+   "vin": "JM1GG12L061103946",
+   "year": 2006,
+   "make": "Mazda",
+   "model": "Mazdaspeed6",
+   "rule": "mazda_mazdaspeed6_2006_2007_char8_L3T",
+   "code": "char8=L: L3T 2.3L Turbo (274 hp): MAZDASPEED6, 6-speed manual + AWD only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Phoenix"
+  },
+  {
+   "id": "pap-39-1028624-1",
+   "vin": "JM1FE173040123496",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Aurora"
+  },
+  {
+   "id": "pap-41-1031820-1",
+   "vin": "JM1FE173740101527",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Houston"
+  },
+  {
+   "id": "wap-AWAP085426",
+   "vin": "JM1BL1H38A1186693",
+   "year": 2010,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2010_2013_char8_L3T",
+   "code": "char8=3: L3T 2.3L Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Wrench-A-Part - Austin"
+  },
+  {
+   "id": "wap-BWAP079434",
+   "vin": "JM1BK34L191213748",
+   "year": 2009,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Wrench-A-Part - Belton"
+  },
+  {
+   "id": "wap-BWAP078888",
+   "vin": "JM1FE173240140803",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Wrench-A-Part - Belton"
+  },
+  {
+   "id": "harrys-JM1BJ227630642366",
+   "vin": "JM1BJ227630642366",
+   "year": 2003,
+   "make": "Mazda",
+   "model": "Protege",
+   "rule": "mazda_mazdaspeed_protege_2003_char8_FSD170",
+   "code": "char8=7: FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Allentown"
+  },
+  {
+   "id": "harrys-JM1BK34L081850502",
+   "vin": "JM1BK34L081850502",
+   "year": 2008,
+   "make": "Mazda",
+   "model": "Mazdaspeed3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Hazle Township"
+  },
+  {
+   "id": "ipull-pom068298",
+   "vin": "JM1BJ227530647316",
+   "year": 2003,
+   "make": "Mazda",
+   "model": "Protege",
+   "rule": "mazda_mazdaspeed_protege_2003_char8_FSD170",
+   "code": "char8=7: FSD 2.0L 170 hp (MAZDASPEED Protege), D&P frontal air bags: 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "iPull-uPull - Pomona"
+  },
+  {
+   "id": "vinplus-longview-stk023035",
+   "vin": "4S2CK57D2W4347283",
+   "year": 1998,
+   "make": "Isuzu",
+   "model": "Rodeo/Amigo",
+   "rule": "isuzu_amigo_1998_char7",
+   "code": "char7=7: Amigo (line K/M Rodeo-or-Amigo, body 7 = utility 2-door short wheelbase): every 1998 Amigo was manual (automatic optional from 1999)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pickers - Longview"
+  },
+  {
+   "id": "vinplus-pnpsa-pnp024488",
+   "vin": "JM1BK34L481870378",
+   "year": 2008,
+   "make": "Mazda",
+   "model": "Mazdaspeed3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "San Antonio Pick-N-Pull (Independent)"
+  },
+  {
+   "id": "vinplus-pnpsa-pnp024479",
+   "vin": "JM1BL1H35A1232724",
+   "year": 2010,
+   "make": "Mazda",
+   "model": "Mazdaspeed3",
+   "rule": "mazda_mazdaspeed3_2010_2013_char8_L3T",
+   "code": "char8=3: L3T 2.3L Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "San Antonio Pick-N-Pull (Independent)"
+  },
+  {
+   "id": "vinplus-pnpsa-pnp027026",
+   "vin": "JM1GG12L861103435",
+   "year": 2006,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "rule": "mazda_mazdaspeed6_2006_2007_char8_L3T",
+   "code": "char8=L: L3T 2.3L Turbo (274 hp): MAZDASPEED6, 6-speed manual + AWD only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "San Antonio Pick-N-Pull (Independent)"
+  },
+  {
+   "id": "vinplus-hwy195-stk24936",
+   "vin": "4S2CK58E3V4317456",
+   "year": 1997,
+   "make": "Isuzu",
+   "model": "Rodeo",
+   "rule": "isuzu_rodeo_26_4x2_1991_1997_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in a Rodeo 4x2 (line G/K, body 8 = utility 4-door): Rodeo S 2WD, 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "195 Used Auto Parts"
+  },
+  {
+   "id": "vinplus-hwy195-stk23634",
+   "vin": "JM1BK34M681871931",
+   "year": 2008,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=M: L3T 2.3L DISI Turbo, California: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "195 Used Auto Parts"
+  },
+  {
+   "id": "vinplus-pickurpart-pup416",
+   "vin": "JM1FE173440122495",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Ur Part Auto Salvage"
+  },
+  {
+   "id": "gopullit-tal004391",
+   "vin": "JM1BK34L471758887",
+   "year": 2007,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Go Pull-It - Tallahassee"
+  },
+  {
+   "id": "gopullit-tal005212",
+   "vin": "JM1GG12L761102311",
+   "year": 2006,
+   "make": "Mazda",
+   "model": "Mazdaspeed6",
+   "rule": "mazda_mazdaspeed6_2006_2007_char8_L3T",
+   "code": "char8=L: L3T 2.3L Turbo (274 hp): MAZDASPEED6, 6-speed manual + AWD only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Go Pull-It - Tallahassee"
+  },
+  {
+   "id": "papva-pap173604",
+   "vin": "JM1FE173840102198",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-A-Part VA - Fredericksburg"
+  },
+  {
+   "id": "papva-pap173978",
+   "vin": "JM1FE173540123557",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-A-Part VA - Fredericksburg"
+  },
+  {
+   "id": "ezpullnpay-montgomery-stk019309",
+   "vin": "JM1FE173440122111",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Montgomery"
+  },
+  {
+   "id": "foss-jacksonville-stk013697",
+   "vin": "JA3AN74K4TY002008",
+   "year": 1996,
+   "make": "Mitsubishi",
+   "model": "3000GT",
+   "rule": "mitsubishi_3000gt_stealth_twin_turbo_1993_1999_char8",
+   "code": "char8=K: 3.0L DOHC MPI 2 turbo + 2 intercooler (3000GT VR-4 / Spyder VR-4 / Stealth R/T Turbo): manual AWD only (5MT 1993, 6MT 1994-99)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Foss U-Pull-It - Jacksonville"
+  },
+  {
+   "id": "foss-jacksonville-stk013635",
+   "vin": "4S2CG58E4N4348927",
+   "year": 1992,
+   "make": "Isuzu",
+   "model": "Rodeo",
+   "rule": "isuzu_rodeo_26_4x2_1991_1997_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in a Rodeo 4x2 (line G/K, body 8 = utility 4-door): Rodeo S 2WD, 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Foss U-Pull-It - Jacksonville"
+  },
+  {
+   "id": "autopartsupull-lincolnton-lug0513",
+   "vin": "JM1FE173840133435",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Auto Parts U Pull - Lincolnton"
+  },
+  {
+   "id": "samson-losangeles-3165",
+   "vin": "JM1BK34L681171608",
+   "year": 2008,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Samson Auto Salvage"
+  },
+  {
+   "id": "rgpickapart-anthony-stk65022",
+   "vin": "4S2CG58EXP4316857",
+   "year": 1993,
+   "make": "Isuzu",
+   "model": "Rodeo",
+   "rule": "isuzu_rodeo_26_4x2_1991_1997_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in a Rodeo 4x2 (line G/K, body 8 = utility 4-door): Rodeo S 2WD, 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "RG Pick-a-Part - Anthony"
+  },
+  {
+   "id": "robertsupick-moffett-stk017080",
+   "vin": "JM1BK34L881147097",
+   "year": 2008,
+   "make": "Mazda",
+   "model": "Mazdaspeed3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Roberts Parts-U-Pick - Moffett"
+  },
+  {
+   "id": "byot-stk044260",
+   "vin": "4S2CK58E3V4321698",
+   "year": 1997,
+   "make": "Isuzu",
+   "model": "Rodeo",
+   "rule": "isuzu_rodeo_26_4x2_1991_1997_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in a Rodeo 4x2 (line G/K, body 8 = utility 4-door): Rodeo S 2WD, 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "BYOT Auto Parts - Waco"
+  },
+  {
+   "id": "byot-stk043295",
+   "vin": "JM1FE173640103768",
+   "year": 2004,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2004_char8_engine_power",
+   "code": "char8=3: 13B HP (High Power, 6-port, 247 hp filed / 238 hp marketed): North-American RX-8 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "BYOT Auto Parts - Waco"
+  },
+  {
+   "id": "upullitwa-pasco-2l2589",
+   "vin": "JF1GE6A65AG515824",
+   "year": 2010,
+   "make": "Subaru",
+   "model": "Impreza",
+   "rule": "subaru_fhi_G_H_1995_2026_char11",
+   "code": "char11=G: Gunma (Yajima) full-time AWD 5MT/6MT",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Pasco"
+  },
+  {
+   "id": "upullitwa-yakima-1n1778",
+   "vin": "JF1GD29694G501736",
+   "year": 2004,
+   "make": "Subaru",
+   "model": "Impreza",
+   "rule": "subaru_fhi_G_H_1995_2026_char11",
+   "code": "char11=G: Gunma (Yajima) full-time AWD 5MT/6MT",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Yakima"
+  },
+  {
+   "id": "upullitwa-pasco-2l2429",
+   "vin": "JF1GG67505G818203",
+   "year": 2005,
+   "make": "Subaru",
+   "model": "Impreza",
+   "rule": "subaru_fhi_G_H_1995_2026_char11",
+   "code": "char11=G: Gunma (Yajima) full-time AWD 5MT/6MT",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Pasco"
+  },
+  {
+   "id": "upullitwa-pasco-2l2159",
+   "vin": "4S3BK4258T6312409",
+   "year": 1996,
+   "make": "Subaru",
+   "model": "Legacy",
+   "rule": "subaru_sia_1990_1996_char11",
+   "code": "char11=6: SIA full-time AWD 5-speed manual",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Pasco"
+  },
+  {
+   "id": "upullitwa-pasco-2l2040",
+   "vin": "JF1GF4859YG806030",
+   "year": 2000,
+   "make": "Subaru",
+   "model": "Impreza",
+   "rule": "subaru_fhi_G_H_1995_2026_char11",
+   "code": "char11=G: Gunma (Yajima) full-time AWD 5MT/6MT",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Pasco"
+  },
+  {
+   "id": "upullitwa-kennewick-3b0381",
+   "vin": "JF2SHABC2CG454181",
+   "year": 2012,
+   "make": "Subaru",
+   "model": "Forester",
+   "rule": "subaru_fhi_G_H_1995_2026_char11",
+   "code": "char11=G: Gunma (Yajima) full-time AWD 5MT/6MT",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Kennewick"
+  },
+  {
+   "id": "upullitwa-kennewick-3b0212",
+   "vin": "4S3BH665526629096",
+   "year": 2002,
+   "make": "Subaru",
+   "model": "Legacy",
+   "rule": "subaru_sia_1997_2009_char11",
+   "code": "char11=6: SIA full-time AWD 5-speed manual",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Kennewick"
+  },
+  {
+   "id": "upullitwa-pasco-2l0641",
+   "vin": "JF1GE7G65AG501192",
+   "year": 2010,
+   "make": "Subaru",
+   "model": "Impreza",
+   "rule": "subaru_fhi_G_H_1995_2026_char11",
+   "code": "char11=G: Gunma (Yajima) full-time AWD 5MT/6MT",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Pasco"
+  },
+  {
+   "id": "upullitwa-kennewick-3b0027",
+   "vin": "JF1GG29622G816799",
+   "year": 2002,
+   "make": "Subaru",
+   "model": "Impreza",
+   "rule": "subaru_fhi_G_H_1995_2026_char11",
+   "code": "char11=G: Gunma (Yajima) full-time AWD 5MT/6MT",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Kennewick"
+  },
+  {
+   "id": "upullitwa-kennewick-3a1156",
+   "vin": "JF2SH636X9G724336",
+   "year": 2009,
+   "make": "Subaru",
+   "model": "Forester",
+   "rule": "subaru_fhi_G_H_1995_2026_char11",
+   "code": "char11=G: Gunma (Yajima) full-time AWD 5MT/6MT",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Kennewick"
+  },
+  {
+   "id": "pns-stk045579",
+   "vin": "JM1BK34L971716103",
+   "year": 2007,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Gilbert"
+  },
+  {
+   "id": "pns-stk079503",
+   "vin": "JM1BL1H4XA1206242",
+   "year": 2010,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2010_2013_char8_L3T",
+   "code": "char8=4: L3T 2.3L Turbo, California: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix North"
+  },
+  {
+   "id": "pns-stk099114",
+   "vin": "JM1BK34L881114763",
+   "year": 2008,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "rule": "mazda_mazdaspeed3_2007_2009_char8_L3T",
+   "code": "char8=L: L3T 2.3L DISI Turbo, Federal: MAZDASPEED3, 6-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix South"
+  }
+ ],
+ "candidate_rule_manual_cars": [
+  {
+   "id": "7956029",
+   "vin": "JAACH15L5G5412918",
+   "year": 1986,
+   "make": "Isuzu",
+   "model": "Trooper II",
+   "rule": "isuzu_trooper_23_1986_1987_char8",
+   "code": "char8=L: 2.3L gasoline L4 in the Trooper (II) 4x4 line H: EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Redding"
+  },
+  {
+   "id": "7906828",
+   "vin": "JAACR11E1S7206433",
+   "year": 1995,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4ze1_26_4x4_pickup_amigo_1989_1995_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in the 4x4 conventional-cab line R (Pickup 4x4; the 1989-1991 Amigo 4x4 also decodes here): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sparks"
+  },
+  {
+   "id": "7854303",
+   "vin": "4S1CR11E2R4204686",
+   "year": 1994,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4ze1_26_4x4_pickup_amigo_1989_1995_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in the 4x4 conventional-cab line R (Pickup 4x4; the 1989-1991 Amigo 4x4 also decodes here): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sparks"
+  },
+  {
+   "id": "7999417",
+   "vin": "JAACR11E4M7221933",
+   "year": 1991,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4ze1_26_4x4_pickup_amigo_1989_1995_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in the 4x4 conventional-cab line R (Pickup 4x4; the 1989-1991 Amigo 4x4 also decodes here): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sparks"
+  },
+  {
+   "id": "7948692",
+   "vin": "4S1CR11E2P4204183",
+   "year": 1993,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4ze1_26_4x4_pickup_amigo_1989_1995_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in the 4x4 conventional-cab line R (Pickup 4x4; the 1989-1991 Amigo 4x4 also decodes here): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Carson City"
+  },
+  {
+   "id": "7983501",
+   "vin": "JAACH15L0H5401990",
+   "year": 1987,
+   "make": "Isuzu",
+   "model": "Trooper II",
+   "rule": "isuzu_trooper_23_1986_1987_char8",
+   "code": "char8=L: 2.3L gasoline L4 in the Trooper (II) 4x4 line H: EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sherwood"
+  },
+  {
+   "id": "7949694",
+   "vin": "JACCG07L9P9803578",
+   "year": 1993,
+   "make": "Isuzu",
+   "model": "Amigo",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Merced"
+  },
+  {
+   "id": "7876738",
+   "vin": "4S1CL11L6N4217547",
+   "year": 1992,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Jefferson"
+  },
+  {
+   "id": "7990694",
+   "vin": "JM1FE173250151480",
+   "year": 2005,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2005_char8_engine_power",
+   "code": "char8=3: 13B High Power (2004 code meaning carried to 2005)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Lynnwood"
+  },
+  {
+   "id": "7959029",
+   "vin": "JA4LS21G8VP010895",
+   "year": 1997,
+   "make": "Mitsubishi",
+   "model": "Montero Sport",
+   "rule": "mitsubishi_montero_sport_24_4x2_1997_1999_char8",
+   "code": "char8=G: 2.4L 4-cyl (4G64) in the 4x2 Montero Sport line S: EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Rocklin"
+  },
+  {
+   "id": "1260-86641",
+   "vin": "JM1FE173250141869",
+   "year": 2005,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2005_char8_engine_power",
+   "code": "char8=3: 13B High Power (2004 code meaning carried to 2005)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Bakersfield"
+  },
+  {
+   "id": "1230-83266",
+   "vin": "JAACL11LXS7201392",
+   "year": 1995,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Aurora"
+  },
+  {
+   "id": "1163-48494",
+   "vin": "JAACL11L8K7236660",
+   "year": 1989,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Savannah"
+  },
+  {
+   "id": "1168-66259",
+   "vin": "JAACL11LXR7209132",
+   "year": 1994,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Raleigh"
+  },
+  {
+   "id": "1220-56788",
+   "vin": "JAACL11L4R7208977",
+   "year": 1994,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Charleston"
+  },
+  {
+   "id": "pap-3-1194376-1",
+   "vin": "4S1CL11L0P4206353",
+   "year": 1993,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Atlanta South"
+  },
+  {
+   "id": "pap-9-1253594-1",
+   "vin": "JAACL11L0L7204612",
+   "year": 1990,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Augusta"
+  },
+  {
+   "id": "pap-36-1028715-2",
+   "vin": "JAACL11L3J7218601",
+   "year": 1988,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Albuquerque"
+  },
+  {
+   "id": "pap-40-1033737-1",
+   "vin": "4S1CL11L1M4218247",
+   "year": 1991,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Denver"
+  },
+  {
+   "id": "pap-29-1088445-1",
+   "vin": "JM1FE173050150845",
+   "year": 2005,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2005_char8_engine_power",
+   "code": "char8=3: 13B High Power (2004 code meaning carried to 2005)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - El Paso"
+  },
+  {
+   "id": "pap-13-1092156-1",
+   "vin": "JS4JC51C3H4205007",
+   "year": 1987,
+   "make": "Suzuki",
+   "model": "Samurai",
+   "rule": "suzuki_samurai_1986_1995_char4_5",
+   "code": "char5=C: Samurai line (JS4 JC..): EPA lists only a 5-speed manual for every Samurai 1986-1995",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Montgomery"
+  },
+  {
+   "id": "pap-42-1029376-1",
+   "vin": "JS4JC51V4H4129802",
+   "year": 1987,
+   "make": "Suzuki",
+   "model": "Samurai",
+   "rule": "suzuki_samurai_1986_1995_char4_5",
+   "code": "char5=C: Samurai line (JS4 JC..): EPA lists only a 5-speed manual for every Samurai 1986-1995",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Pittsburgh"
+  },
+  {
+   "id": "harrys-JM1FE173850147739",
+   "vin": "JM1FE173850147739",
+   "year": 2005,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2005_char8_engine_power",
+   "code": "char8=3: 13B High Power (2004 code meaning carried to 2005)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Hazle Township"
+  },
+  {
+   "id": "ipull-sac054047",
+   "vin": "JA4LS21GXWP008535",
+   "year": 1998,
+   "make": "Mitsubishi",
+   "model": "Montero Sport",
+   "rule": "mitsubishi_montero_sport_24_4x2_1997_1999_char8",
+   "code": "char8=G: 2.4L 4-cyl (4G64) in the 4x2 Montero Sport line S: EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "iPull-uPull - Sacramento"
+  },
+  {
+   "id": "vinplus-hebron-000000110445",
+   "vin": "JM1FE173250146182",
+   "year": 2005,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2005_char8_engine_power",
+   "code": "char8=3: 13B High Power (2004 code meaning carried to 2005)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Bessler's U Pull & Save - Hebron"
+  },
+  {
+   "id": "vinplus-hebron-000000115633",
+   "vin": "JM1FE173X50147516",
+   "year": 2005,
+   "make": "Mazda",
+   "model": "RX-8",
+   "rule": "mazda_rx8_2005_char8_engine_power",
+   "code": "char8=3: 13B High Power (2004 code meaning carried to 2005)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Bessler's U Pull & Save - Hebron"
+  },
+  {
+   "id": "vinplus-texarkana-stk027249",
+   "vin": "4S1CL11L9N4220376",
+   "year": 1992,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pickers - Texarkana"
+  },
+  {
+   "id": "prestige-pre001321",
+   "vin": "JS4JC51C3G4122501",
+   "year": 1986,
+   "make": "Suzuki",
+   "model": "Samurai",
+   "rule": "suzuki_samurai_1986_1995_char4_5",
+   "code": "char5=C: Samurai line (JS4 JC..): EPA lists only a 5-speed manual for every Samurai 1986-1995",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Prestige Pull-Your-Part - Houston"
+  },
+  {
+   "id": "chesterfield-000000085502",
+   "vin": "JAACL11L6K7233126",
+   "year": 1989,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Chesterfield Auto Parts - Southside"
+  },
+  {
+   "id": "foss-jacksonville-stk013840",
+   "vin": "JAACH15L0G5414768",
+   "year": 1986,
+   "make": "Isuzu",
+   "model": "Trooper II",
+   "rule": "isuzu_trooper_23_1986_1987_char8",
+   "code": "char8=L: 2.3L gasoline L4 in the Trooper (II) 4x4 line H: EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Foss U-Pull-It - Jacksonville"
+  },
+  {
+   "id": "upullpocatello-pocatello-stk013663",
+   "vin": "4S1CL11L8M4207536",
+   "year": 1991,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "U Pull Auto Parts - Pocatello"
+  },
+  {
+   "id": "milliron-mansfield-up038973",
+   "vin": "JAACL11LXS7201621",
+   "year": 1995,
+   "make": "Isuzu",
+   "model": "Pickup",
+   "rule": "isuzu_4zd1_23_4x2_1988_1995_char8",
+   "code": "char8=L: 4ZD1 2.3L L4 in a 4x2 Pickup (line L) or Amigo (line G): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Milliron Auto Parts - Mansfield"
+  },
+  {
+   "id": "coloradoauto-englewood-stk69677",
+   "vin": "JAACR01E0L9803444",
+   "year": 1990,
+   "make": "Isuzu",
+   "model": "Amigo",
+   "rule": "isuzu_4ze1_26_4x4_pickup_amigo_1989_1995_char8",
+   "code": "char8=E: 4ZE1 2.6L L4 in the 4x4 conventional-cab line R (Pickup 4x4; the 1989-1991 Amigo 4x4 also decodes here): EPA lists only a 5-speed manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Colorado Auto & Parts - Englewood"
+  },
+  {
+   "id": "pns-stk038826",
+   "vin": "JM1FE173750142788",
+   "year": 2005,
+   "make": "Mazda",
+   "model": "EL",
+   "rule": "mazda_rx8_2005_char8_engine_power",
+   "code": "char8=3: 13B High Power (2004 code meaning carried to 2005)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Gilbert"
+  }
+ ],
+ "vpic_conflicts": []
+}

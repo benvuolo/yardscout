@@ -34,10 +34,7 @@ without bulbs/sockets). `name` keeps the printed list name so curators can tell 
 """
 from __future__ import annotations
 
-import re
-
-from . import _simplepart as _sp
-from ._simplepart import SimplePart
+from ._sp_slugrules import SlugCheckedSimplePart
 
 SITE = "www.mitsubishipartsgiant.com"
 
@@ -171,18 +168,9 @@ SLUG_RULES = {
 PRODUCT_RULES = {"door-front": r"\bfront\s+door\b", "door-rear": r"\brear\s+door\b"}
 
 
-class _Mitsubishi(SimplePart):
-    def __init__(self):
-        super().__init__(SITE, URL_MAKE, MODEL_SLUGS, CAT_PAGES, RULES, oem_name_field="main",
-                         year_path="/{year}-{make}-{model}-parts", product_prefixes=("/genuine/",),
-                         product_rules=PRODUCT_RULES, slug_checks=True)
-        self.slug_rules = {k: re.compile(v, re.I) for k, v in SLUG_RULES.items()}
-
-    def match(self, cat: str, main: str, aux: str, slug: str = "") -> bool:
-        return bool(self.slug_rules[cat].search(slug)) and super().match(cat, main, aux, slug)
-
-
-_T = _Mitsubishi()
+_T = SlugCheckedSimplePart(SITE, URL_MAKE, MODEL_SLUGS, CAT_PAGES, RULES, oem_name_field="main",
+                           year_path="/{year}-{make}-{model}-parts", product_prefixes=("/genuine/",),
+                           product_rules=PRODUCT_RULES, slug_rules=SLUG_RULES)
 
 
 def categories_for(make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
@@ -194,9 +182,4 @@ def parts_on_page(list_url: str, cat: str) -> list[dict]:
 
 
 def product(product_url: str) -> dict:
-    out = _T.product(product_url)
-    # A reman unit can be named plainly on the list ("Alternator", M984944D) and only the
-    # product page says "Remanufactured Alternat". Mark it; never unmark a list-side reman.
-    if _sp.REMAN.search(" ".join(filter(None, [out.get("description"), out.get("other_names")]))):
-        out["reman"] = True
-    return out
+    return _T.product(product_url)
