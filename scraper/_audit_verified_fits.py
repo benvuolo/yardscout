@@ -10,6 +10,15 @@ kind) over the live inventory to answer:
   (c) Verified vs Likely fraction for the researched engine-kind categories
       (alternator, starter, engine-assembly) and WHY pairs stop at Likely
   (d) model-year distribution of Verified pairs — the 2016+ catalog cliff
+  (e) vPIC-hybrid column (CURATION_SPEC §7.2 P0.5, 2026-11-05): every
+      ENGINE_FAMILIES app that hybrid/EV cars on the lots fall into, and
+      whether they pass the family's engine gate (decode agrees, or no
+      decode on a "sole" app) — those are the over-claims P0.5 removes
+  (f) Verified donors per family and category (a donor car counts when it
+      shows Verified for at least one seeker in the inventory), with the
+      hybrid-flagged share and the P0.4 donor-identity share
+      (pfDonorIdentity: vpicMismatch, or the VIN's model-year character
+      disagrees with the listed year). --compare prints before/after deltas.
 
 Seeker population proxy: the live inventory itself (a car in a yard is as
 good a proxy as any for the cars people drive). Pairs are
@@ -17,7 +26,22 @@ good a proxy as any for the cars people drive). Pairs are
 vehicle counts. Engine-denied donors (decode contradicts the family) are
 EXCLUDED rows in the app, not Likely — reported separately.
 
+Hybrid signals (any one flags the car; an audit heuristic, never shipped):
+  vpic  the VIN decode (after _correct_vpic, so VIN_TRIM_PATTERNS' Camry
+        "Hybrid" applies) or the inventory's vpic side-table says hybrid /
+        HEV / PHEV / Energi / BAS / Green Line / Electric, or a narrow
+        make/model/year trim rule (HYBRID_TRIM_RULES: Malibu "ECO" =
+        eAssist); vPIC's model-level strings ("Base/Hybrid") count too —
+        they mean vPIC itself cannot tell the hybrid from the gas car
+  name  the yard's own model name says so ("Camry Hybrid", "RX 400h")
+  vin   the car shares make + VIN positions 4-8 with >= 2 cars whose yard
+        name says hybrid (catches Altima/Highlander hybrids whose decode
+        has no trim at all), or a narrow VIN engine-code rule
+        (HYBRID_VIN_RULES: GM eAssist "R" on 2012-16 Malibu/Regal/LaCrosse/
+        Impala, whose vPIC trims are ordinary)
+
 Usage: python3 scraper/_audit_verified_fits.py [--json out.json]
+                                               [--compare before.json]
 """
 from __future__ import annotations
 
@@ -59,6 +83,55 @@ def app_matches(app: tuple, year: int, make_lc: str, sq_strip: str, sq_raw: str)
     return am in (sq_strip, sq_raw)
 
 
+HYBRID_RE = re.compile(
+    r"hybrid|\bhev\b|\bphev\b|\bfhev\b|\bmhev\b|energi|plug-?in|e-?assist"
+    r"|\bbas\b|green ?line|electric|e-?tron|\b\d{3}h\b", re.I)
+# Trim words that mean "hybrid" only on one model line (feed make, model
+# prefix, first year, last year, regex on the vPIC trim).
+HYBRID_TRIM_RULES: list[tuple[str, str, int, int, re.Pattern]] = [
+    # 2013-14 Malibu Eco = the 2.4 eAssist mild hybrid (vPIC "1LT ECO")
+    ("Chevrolet", "malibu", 2013, 2014, re.compile(r"\beco\b", re.I)),
+]
+# VIN engine codes that mean "hybrid" on one model line (feed make, model
+# prefix, first year, last year, VIN position 8 = index 7). GM eAssist (2.4
+# LUK mild hybrid) is engine code "R" on the 2012-16 Malibu/Regal/LaCrosse/
+# Impala; vPIC gives those cars ordinary trims ("Premium 1", "Leather") and
+# no yard names them hybrids, so neither the vpic nor the name signal sees
+# them. Other codes on these lines in those years: Malibu A/L/X, Regal K/V/X,
+# LaCrosse 3, Impala 3/L (decode cache, 2026-11-05).
+HYBRID_VIN_RULES: list[tuple[str, str, int, int, str]] = [
+    ("Chevrolet", "malibu", 2012, 2016, "R"),
+    ("Buick", "regal", 2012, 2016, "R"),
+    ("Buick", "lacrosse", 2012, 2016, "R"),
+    ("Chevrolet", "impala", 2012, 2016, "R"),
+]
+
+# North American VIN model-year character (49 CFR 565.15, position 10):
+# a 30-year cycle starting 1980; I, O, Q, U, Z and 0 are never used.
+_VIN_YEAR_CHARS = "ABCDEFGHJKLMNPRSTVWXY123456789"
+
+
+def vin_model_year(vin: str, listed_year: int) -> int | None:
+    """Model year from a 17-character VIN's 10th character, resolving the
+    30-year cycle toward the listed year (ties go to the later year). None
+    when the VIN is not 17 characters or the character is not a year code.
+    Python mirror of docs/app.js pfVinModelYear."""
+    v = re.sub(r"[^A-Z0-9]", "", str(vin or "").upper())
+    if len(v) != 17:
+        return None
+    i = _VIN_YEAR_CHARS.find(v[9])
+    if i < 0:
+        return None
+    base = 1980 + i
+    best = None
+    for k in range(-1, 4):
+        cand = base + 30 * k
+        if best is None or abs(cand - listed_year) < abs(best - listed_year) \
+                or (abs(cand - listed_year) == abs(best - listed_year) and cand > best):
+            best = cand
+    return best
+
+
 def chain_of(yard_name: str) -> str:
     n = yard_name
     if "(Independent)" in n:
@@ -77,6 +150,8 @@ def chain_of(yard_name: str) -> str:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", type=Path)
+    ap.add_argument("--compare", type=Path,
+                    help="an earlier --json output: print per-family Verified donor deltas")
     args = ap.parse_args()
 
     inv = json.loads((DATA / "inventory_live.json").read_text())
@@ -89,7 +164,57 @@ def main() -> None:
                                           ("id", "vin", "year", "make", "model", "yard"))
     vehicles = inv["vehicles"]
     yards = inv["yards"]
+    vpic_side = inv.get("vpic") or {}
     report: dict = {"scrapedAt": inv["scrapedAt"], "totalVehicles": len(vehicles)}
+
+    # ---------------- per-car hybrid signals + P0.4 identity -------------
+    name_vds: collections.Counter = collections.Counter()
+    for v in vehicles:
+        vin = (v[I_VIN] or "").upper()
+        if len(vin) == 17 and HYBRID_RE.search(v[I_MD] or ""):
+            name_vds[(v[I_MK] or "", vin[3:8])] += 1
+    hyb_src: dict[int, str] = {}   # row index -> "vpic+name+vin" (only hybrids)
+    ident_bad: set[int] = set()    # row index -> P0.4 would demote a Verified row
+    for i, v in enumerate(vehicles):
+        vin = (v[I_VIN] or "").upper()
+        y, mk, md = v[I_Y] or 0, v[I_MK] or "", v[I_MD] or ""
+        side = vpic_side.get(str(i)) or []
+        dec = decodes.get(vin) if len(vin) == 17 else None
+        if isinstance(dec, dict):
+            dec = js._correct_vpic(dec, vin)
+        else:
+            dec = None
+        vtext = " ".join(str(x or "") for x in side[:3])
+        if dec:
+            vtext += " " + " ".join(str(dec.get(k) or "") for k in
+                                    ("trim", "series", "model", "engine"))
+        trims = " ".join([str(side[0] if side else ""), str((dec or {}).get("trim") or "")])
+        srcs = []
+        if HYBRID_RE.search(vtext) or any(
+                mk == r_mk and md.lower().startswith(r_md) and lo <= y <= hi
+                and rx.search(trims)
+                for r_mk, r_md, lo, hi, rx in HYBRID_TRIM_RULES):
+            srcs.append("vpic")
+        if HYBRID_RE.search(md):
+            srcs.append("name")
+        if len(vin) == 17 and "name" not in srcs and (
+                name_vds.get((mk, vin[3:8]), 0) >= 2
+                or any(mk == r_mk and md.lower().startswith(r_md) and lo <= y <= hi
+                       and vin[7] == ch
+                       for r_mk, r_md, lo, hi, ch in HYBRID_VIN_RULES)):
+            srcs.append("vin")
+        if srcs:
+            hyb_src[i] = "+".join(srcs)
+        if len(side) > 4 and side[4]:
+            ident_bad.add(i)
+        else:
+            vy = vin_model_year(vin, y)
+            if vy is not None and y and vy != y:
+                ident_bad.add(i)
+    print(f"hybrid/EV-flagged cars: {len(hyb_src):,}; P0.4 identity-flagged "
+          f"(vpicMismatch or VIN year char != listed year): {len(ident_bad):,}")
+    report["hybridFlagged"] = len(hyb_src)
+    report["identityFlagged"] = len(ident_bad)
 
     # ---------------- (a) VIN / decode / engine rates by chain -------------
     chain_stats: dict[str, dict] = collections.defaultdict(
@@ -154,44 +279,48 @@ def main() -> None:
         ymm_counts[(y, mk, md)] += 1
     # engine verdict depends on the family, so store engine liters/cyl per ymm bucket
     eng_buckets: dict[tuple, collections.Counter] = collections.defaultdict(collections.Counter)
-    for v in vehicles:
+    for i, v in enumerate(vehicles):
         y, mk, md = v[I_Y] or 0, v[I_MK] or "", v[I_MD] or ""
         e = ex.get(str(v[I_ID]))
         engine_str = e[2] if e and len(e) > 2 else ""
         is_diesel = bool(engine_str) and "diesel" in engine_str.lower()
         liters, cyl = js._parse_engine_str(engine_str)
-        eng_buckets[(y, mk, md)][(is_diesel, liters, cyl)] += 1
+        eng_buckets[(y, mk, md)][(is_diesel, liters, cyl,
+                                  i in hyb_src, i in ident_bad)] += 1
 
     sq_cache: dict[tuple[str, str], tuple[str, str, str]] = {}
     for (y, mk, md) in ymm_counts:
         if (mk, md) not in sq_cache:
             sq_cache[(mk, md)] = (mk.lower(), squash(md, mk), squash(md))
 
+    def engine_verdict(is_diesel, liters, cyl, spec) -> bool | None:
+        """docs/app.js pfEngineVerdict: True confirms, False denies, None = no data."""
+        if is_diesel:
+            return False
+        if liters is None:
+            return None
+        if not any(abs(liters - want) < 0.05 for want in spec["liters"]):
+            return False
+        want_cyl = spec.get("cyl")
+        if cyl is not None and want_cyl is not None and cyl != want_cyl:
+            return False
+        return True
+
     def verdict_for(key: tuple, fam: dict) -> collections.Counter:
-        """Counter {True/False/None: n} for a ymm bucket against a family."""
+        """Counter {(True/False/None, hybrid, identityBad): n} for a ymm
+        bucket against a family."""
         out: collections.Counter = collections.Counter()
         spec = fam["engine"]
-        for (is_diesel, liters, cyl), n in eng_buckets[key].items():
-            if is_diesel:
-                out[False] += n
-                continue
-            if liters is None:
-                out[None] += n
-                continue
-            if not any(abs(liters - want) < 0.05 for want in spec["liters"]):
-                out[False] += n
-                continue
-            want_cyl = spec.get("cyl")
-            if cyl is not None and want_cyl is not None and cyl != want_cyl:
-                out[False] += n
-                continue
-            out[True] += n
+        for (is_diesel, liters, cyl, hyb, ibad), n in eng_buckets[key].items():
+            out[(engine_verdict(is_diesel, liters, cyl, spec), hyb, ibad)] += n
         return out
 
     CATS = ["alternator", "starter", "engine-assembly"]
     cat_res: dict[str, dict] = {}
+    # fam_ver[fid][cat] = Verified donors / pairs, with hybrid and P0.4 shares
+    fam_ver: dict[str, dict] = collections.defaultdict(dict)
     for cat in CATS:
-        tot_pairs = ver_pairs = 0
+        tot_pairs = ver_pairs = ver_pairs_p04 = 0
         excluded_donors = 0  # engine-denied: not shown at all
         reasons: collections.Counter = collections.Counter()
         ver_by_donor_year: collections.Counter = collections.Counter()
@@ -238,23 +367,26 @@ def main() -> None:
                 ambig = bool(flags.get("ambig"))
                 sole = bool(flags.get("sole"))
                 seekers[(mask, ambig)] += n
-                for verdict, vn in verdict_for(key, fam).items():
+                for (verdict, hyb, ibad), vn in verdict_for(key, fam).items():
                     if verdict is False:
                         donors[("DENIED", key[0])] += vn
                         continue
                     engine_ok = verdict is True or (verdict is None and sole and not ambig)
                     confirmed = verdict is True
-                    donors[(mask, ambig, engine_ok, confirmed, key[0])] += vn
+                    donors[(mask, ambig, engine_ok, confirmed, key[0], hyb, ibad)] += vn
 
-            n_seekers = sum(seekers.values())
+            fv = fam_ver[fid].setdefault(cat, {"donors": 0, "hybridDonors": 0,
+                                               "identityDonors": 0, "pairs": 0,
+                                               "pairsP04": 0})
             for dk, dn in donors.items():
                 if dk[0] == "DENIED":
                     excluded_donors += dn
                     continue
-                dmask, dambig, engine_ok, confirmed, dyear = dk
+                dmask, dambig, engine_ok, confirmed, dyear, dhyb, dibad = dk
                 donors_total += dn
                 if engine_ok:
                     donors_engine_ok += dn
+                donor_ver = False
                 for (smask, sambig), sn in seekers.items():
                     pairs = dn * sn
                     tot_pairs += pairs
@@ -266,6 +398,11 @@ def main() -> None:
                     if is_ver:
                         ver_pairs += pairs
                         ver_by_donor_year[dyear] += pairs
+                        donor_ver = True
+                        fv["pairs"] += pairs
+                        if not dibad:
+                            ver_pairs_p04 += pairs
+                            fv["pairsP04"] += pairs
                         continue
                     likely_by_donor_year[dyear] += pairs
                     # non-exclusive reasons
@@ -284,9 +421,16 @@ def main() -> None:
                             reasons["ambiguity flag (seeker or donor)"] += pairs
                         if engine_ok and not dambig and not sambig and not (dmask & smask):
                             reasons["published list doesn't span the pair (year/model outside group)"] += pairs
+                if donor_ver:
+                    fv["donors"] += dn
+                    if dhyb:
+                        fv["hybridDonors"] += dn
+                    if dibad:
+                        fv["identityDonors"] += dn
 
         cat_res[cat] = {
             "totalPairs": tot_pairs, "verifiedPairs": ver_pairs,
+            "verifiedPairsP04": ver_pairs_p04,
             "verifiedPct": ver_pairs / tot_pairs if tot_pairs else 0,
             "excludedDonors": excluded_donors,
             "donorsTotal": donors_total, "donorsEngineOk": donors_engine_ok,
@@ -297,6 +441,8 @@ def main() -> None:
         print(f"\n(c) {cat}: {tot_pairs:,} seeker×donor pairs in-family; "
               f"Verified {ver_pairs:,} ({ver_pairs / tot_pairs:.1%}), "
               f"Likely {tot_pairs - ver_pairs:,} ({(tot_pairs - ver_pairs) / tot_pairs:.1%})")
+        print(f"    with the P0.4 donor-identity guard: Verified {ver_pairs_p04:,} "
+              f"({ver_pairs_p04 / tot_pairs:.1%})")
         print(f"    donors shown {donors_total:,} (engine-OK {donors_engine_ok:,}); "
               f"engine-denied donors excluded entirely: {excluded_donors:,}")
         print("    why pairs stop at Likely (non-exclusive, share of Likely pairs):")
@@ -328,6 +474,103 @@ def main() -> None:
     report["verifiedPairsByYear"] = dict(vy)
     report["pairsByYearLikely"] = dict(ly)
     report["inventoryByYear"] = dict(inv_years)
+
+    # ---------------- (e) vPIC-hybrid column -------------------------------
+    # Each hybrid/EV-flagged car against every family, attributed to the
+    # FIRST matching app (the client's fam.apps.find). "gate" = passes the
+    # engine gate (decode agrees, or decode silent on a sole app); "exposed"
+    # = gate AND app not ambig AND (the car sits in a verified group of some
+    # part of that family, or its decode confirms the engine, which is what
+    # an engine-assembly Verified needs), i.e. it can show "Verified" today.
+    hyb_apps: dict[tuple, dict] = {}
+    for i, src in hyb_src.items():
+        v = vehicles[i]
+        y, mk, md = v[I_Y] or 0, v[I_MK] or "", v[I_MD] or ""
+        mk_lc, sq_s, sq_r = mk.lower(), squash(md, mk), squash(md)
+        e = ex.get(str(v[I_ID]))
+        engine_str = e[2] if e and len(e) > 2 else ""
+        is_diesel = bool(engine_str) and "diesel" in engine_str.lower()
+        liters, cyl = js._parse_engine_str(engine_str)
+        for fid, fam in js.ENGINE_FAMILIES.items():
+            ai = next((k for k, a in enumerate(fam["apps"])
+                       if app_matches(a, y, mk_lc, sq_s, sq_r)), None)
+            if ai is None:
+                continue
+            app = fam["apps"][ai]
+            flags = js._app_flags(app)
+            verdict = engine_verdict(is_diesel, liters, cyl, fam["engine"])
+            gate = verdict is True or (verdict is None and bool(flags.get("sole"))
+                                       and not flags.get("ambig"))
+            in_vg = any(app_matches(sp, y, mk_lc, sq_s, sq_r)
+                        for p in fam["parts"].values()
+                        for g in ((p.get("verified") or {}).get("groups") or [])
+                        for sp in g)
+            row = hyb_apps.setdefault((fid, ai), {
+                "family": fid, "app": list(app[:4]),
+                "sole": bool(flags.get("sole")), "ambig": bool(flags.get("ambig")),
+                "hybrids": 0, "verdict": collections.Counter(),
+                "gate": 0, "exposed": 0, "sources": collections.Counter(),
+                "years": collections.Counter()})
+            row["hybrids"] += 1
+            row["verdict"][str(verdict)] += 1
+            row["sources"][src] += 1
+            row["years"][y] += 1
+            if gate:
+                row["gate"] += 1
+                # engine-assembly is Verified on a confirming decode alone
+                if not flags.get("ambig") and (in_vg or verdict is True):
+                    row["exposed"] += 1
+    print("\n(e) vPIC-hybrid column: family apps that hybrid/EV cars fall into "
+          "(first matching app), rows where any pass the engine gate")
+    print(f"{'family':18s} {'app':34s} {'flag':5s} {'hyb':>4} {'gate':>4} "
+          f"{'expo':>4}  verdicts / years / sources")
+    for (fid, ai), r in sorted(hyb_apps.items()):
+        if not r["gate"]:
+            continue
+        a = r["app"]
+        flag = "ambig" if r["ambig"] else ("sole" if r["sole"] else "")
+        yrs = sorted(r["years"])
+        print(f"{fid:18s} {a[0] + ' ' + a[1] + f' {a[2]}-{a[3]}':34s} {flag:5s} "
+              f"{r['hybrids']:>4} {r['gate']:>4} {r['exposed']:>4}  "
+              f"{dict(r['verdict'])} {yrs[0]}-{yrs[-1]} {dict(r['sources'])}")
+    report["hybridApps"] = [
+        {**{k: (dict(v) if isinstance(v, collections.Counter) else v)
+            for k, v in r.items()}, "appIndex": ai}
+        for (fid, ai), r in sorted(hyb_apps.items())]
+
+    # ---------------- (f) Verified donors per family -----------------------
+    print("\n(f) Verified donors per family (cars showing Verified for >= 1 "
+          "seeker): all / hybrid-flagged / P0.4 identity-flagged")
+    print(f"{'family':22s} {'category':16s} {'donors':>7} {'hybrid':>7} {'ident':>6}")
+    for fid in sorted(fam_ver):
+        for cat, fv in fam_ver[fid].items():
+            if fv["donors"]:
+                print(f"{fid:22s} {cat:16s} {fv['donors']:>7,} "
+                      f"{fv['hybridDonors']:>7,} {fv['identityDonors']:>6,}")
+    report["verifiedDonors"] = {fid: d for fid, d in fam_ver.items()}
+
+    if args.compare:
+        before = json.loads(args.compare.read_text()).get("verifiedDonors", {})
+        print(f"\nVerified donors, {args.compare} -> now "
+              "(families that changed; donors / hybrid-flagged donors / pairs)")
+        tot_b = collections.Counter()
+        tot_a = collections.Counter()
+        for fid in sorted(set(before) | set(fam_ver)):
+            for cat in CATS:
+                b = (before.get(fid) or {}).get(cat) or {}
+                a = (fam_ver.get(fid) or {}).get(cat) or {}
+                for k in ("donors", "hybridDonors", "pairs"):
+                    tot_b[(cat, k)] += b.get(k, 0)
+                    tot_a[(cat, k)] += a.get(k, 0)
+                if any(b.get(k, 0) != a.get(k, 0) for k in ("donors", "hybridDonors", "pairs")):
+                    print(f"  {fid:22s} {cat:16s} donors {b.get('donors', 0):>6,} -> "
+                          f"{a.get('donors', 0):>6,}   hybrid {b.get('hybridDonors', 0):>4,} -> "
+                          f"{a.get('hybridDonors', 0):>4,}   pairs {b.get('pairs', 0):>12,} -> "
+                          f"{a.get('pairs', 0):>12,}")
+        for cat in CATS:
+            print(f"  TOTAL {cat:16s} donors {tot_b[(cat, 'donors')]:>7,} -> "
+                  f"{tot_a[(cat, 'donors')]:>7,}   hybrid {tot_b[(cat, 'hybridDonors')]:>5,} -> "
+                  f"{tot_a[(cat, 'hybridDonors')]:>5,}")
 
     if args.json:
         args.json.write_text(json.dumps(report, indent=1, default=str))
