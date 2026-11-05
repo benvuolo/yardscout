@@ -160,6 +160,12 @@ class Config:
     # optional: row -> the text exclude_head is tested on (default
     # "<pncDesc> | <mainDesc> | <remark up to its first '('>")
     head_fn: object = None
+    # optional extra pattern (searched like REMAN_RE) for a make's own word
+    # for remanufactured units, e.g. BMW "Exch. alternator" / "Exchange ..."
+    reman_re: object = None
+    # header regex of the column kept as fitment[].options (BMW prints its
+    # body/engine variants under "Submodel")
+    option_col: str = r"option|detail"
 
 
 def slug(name: str) -> str:
@@ -377,7 +383,7 @@ def parts_on_page(cfg: Config, list_url: str, cat: str) -> list[dict]:
                 continue
         if COMMON_EXCLUDE.search(cfg.head_fn(r) if cfg.head_fn else f"{r['group']} | {r['main']}"):
             continue
-        kept.append((r, bool(REMAN_RE.search(text))))
+        kept.append((r, bool(REMAN_RE.search(text)) or bool(cfg.reman_re and re.search(cfg.reman_re, text, re.I))))
     if any(not reman for _, reman in kept):
         kept = [k for k in kept if not k[1]]
     out, seen = [], set()
@@ -465,7 +471,7 @@ def product(cfg: Config, product_url: str) -> dict:
     c_te = col(r"trim\s*&\s*engine")
     c_eng = None if c_te is not None else col(r"engine")
     c_trim = None if c_te is not None else col(r"^trim")
-    c_opt = col(r"option|detail")
+    c_opt = col(cfg.option_col)
     if c_ymm is None:
         raise ValueError(f"unexpected fitment header {titles}")
 
