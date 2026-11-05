@@ -46,8 +46,20 @@ first. Owner approved multi-agent ("ultra") scale.
   - session_016ZzJfK5C7Cm4qZpC4QjSVs: .html template + GM, Ford, Mopar,
     Nissan, Infiniti
   - session_016ZzJfHbzhf7ZAm4Xt8ok79: SimplePart template + Toyota, Jeep
-  - pending: Honda, Acura, Hyundai, Kia, Subaru, Lexus on the .html
-    template once it lands.
+  - 00:49 UTC: Toyota + Jeep modules on main (2010da8, dc5c1d3); Actions
+    crawl run 41944219436 started for both.
+  - 00:51 UTC (owner: maximum breadth this hour), more builder sessions:
+    - session_016ZzJfHdymdThBbtJ5HYPnQ Honda + Acura
+    - session_016ZzJfHkeNBsfhhGE3jys2o Hyundai + Kia
+    - session_016ZzJfJPMiqWBVeGP97xHiL Subaru + Lexus
+    - session_016ZzJfLtcR8MerD7PWDQVoN Mopar + Nissan + Infiniti (the
+      .html session now does GM + Ford only)
+    - session_016ZzJfJ6BcW6cQfYXpnSYuV aftermarket application catalogs
+      (Denso, DB Electrical, TYC) under oem_fitment/aftermarket/
+    - session_016ZzJfHmQkMfzb6xBaKcrnG source scout for uncovered makes
+      (writes oem_fitment/SOURCES.md; probe.py only)
+  - Hub workflow wf_a05aed60-f20: curation + integration spec (two designs,
+    judge), build, adversarial review, fix -> CURATION_SPEC.md, curate.py.
 - 00:55 UTC: SimplePart navigators done (session_016ZzJfHbzhf7ZAm4Xt8ok79):
   `sites/_simplepart.py`, `sites/toyotapartsnow.py` (Toyota + Scion),
   `sites/jeeppartsdeal.py` (Jeep; jeeppartsdeal.com is the same template).
