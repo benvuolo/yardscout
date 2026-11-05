@@ -143,3 +143,10 @@ transmission cars (>= 99.5% agreement) and adversarially re-checked:
 3. Manual-only trims identified from the VIN decode/VIN patterns.
 Work files: scraper/manual_detect/. Integration lands on a worktree branch for
 hub review before merge.
+- 2026-11-05 01:35 UTC: live accuracy fix b55e403. The manual-detection
+  baseline found 14 vPIC cells (17 model-years) where vPIC returns "manual"
+  for every decoded car although EPA lists automatics: 887 lot cars were
+  badged Manual on that basis. `VPIC_TRANS_DEFAULT_CELLS` now drops the
+  decoded transmission there (unknown, no badge); 1,193 cached decodes
+  affected, nothing else. Live with scan 41949003681. True manuals in those
+  cells return only through independent evidence (manual-detection work).
