@@ -62,3 +62,33 @@
 03:30:24 seg done tier=A Infiniti M37 [2011, 2013] seeds=[2011] records=864 errors=3
 03:39:52 seg done tier=A Infiniti G Sedan [2009, 2013] seeds=[2011, 2012, 2010] records=889 errors=3
 03:50:32 time budget reached records=910
+03:50:41 start site=www.infinitipartsdeal.com segments=28 tiers=['A', 'B']
+03:50:41 seg done tier=A Infiniti G35 [2003, 2008] seeds=[2004] records=910 errors=3
+03:50:41 seg done tier=A Infiniti G37 [2008, 2013] seeds=[2009] records=910 errors=3
+03:50:41 seg done tier=A Infiniti FX35 [2003, 2012] seeds=[2005] records=910 errors=3
+03:50:41 seg done tier=A Infiniti M35 [2006, 2010] seeds=[2006] records=910 errors=3
+03:50:41 seg done tier=A Infiniti QX56 [2004, 2010] seeds=[2008] records=910 errors=3
+03:50:41 seg done tier=A Infiniti QX60 [2014, 2020] seeds=[2014] records=910 errors=3
+03:50:41 seg done tier=A Infiniti Q50 [2014, 2020] seeds=[2014] records=910 errors=3
+03:50:41 seg done tier=A Infiniti QX4 [1997, 2003] seeds=[2001] records=910 errors=3
+03:50:41 seg done tier=A Infiniti JX35 [2013, 2013] seeds=[2013] records=910 errors=3
+03:50:41 seg done tier=A Infiniti I30 [1996, 2001] seeds=[2000] records=910 errors=3
+03:50:41 seg done tier=A Infiniti EX35 [2008, 2013] seeds=[2008] records=910 errors=3
+03:50:41 seg done tier=A Infiniti QX56 [2011, 2013] seeds=[2012] records=910 errors=3
+03:50:41 seg done tier=A Infiniti I35 [2002, 2004] seeds=[2002] records=910 errors=3
+03:50:41 seg done tier=A Infiniti FX [2003, 2012] seeds=[2005] records=910 errors=3
+03:50:41 seg done tier=A Infiniti Q45 [1990, 2005] seeds=[2002] records=910 errors=3
+03:50:41 seg done tier=A Infiniti G20 [1991, 2008] seeds=[2002] records=910 errors=3
+03:50:41 seg done tier=A Infiniti M45 [2003, 2008] seeds=[2006] records=910 errors=3
+03:50:41 seg done tier=A Infiniti M37 [2011, 2013] seeds=[2011] records=910 errors=3
+03:50:41 seg done tier=A Infiniti G Sedan [2009, 2013] seeds=[2011] records=910 errors=3
+03:50:41 seg done tier=A Infiniti M [2006, 2012] seeds=[2006] records=910 errors=3
+03:52:49 seg done tier=A Infiniti G37 Sedan [2009, 2013] seeds=[2013] records=912 errors=3
+03:56:57 seg done tier=A Infiniti G25 [2011, 2012] seeds=[2011, 2012] records=912 errors=3
+04:00:57 nav-fail Infiniti QX50 2020: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2020-infiniti-qx50-parts.html
+04:00:57 seg done tier=A Infiniti QX50 [2014, 2021] seeds=[2017, 2020] records=925 errors=4
+04:00:57 seg done tier=A Infiniti G37X [2009, 2013] seeds=[2013, 2011, 2010] records=925 errors=4
+04:06:17 seg done tier=A Infiniti QX80 [2014, 2017] seeds=[2014] records=948 errors=4
+04:10:33 seg done tier=A Infiniti G35X [2007, 2008] seeds=[2008, 2007] records=949 errors=4
+04:18:58 seg done tier=A Infiniti J30 [1993, 1997] seeds=[1994] records=988 errors=4
+04:21:46 time budget reached records=993
