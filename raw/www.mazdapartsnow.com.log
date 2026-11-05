@@ -1,0 +1,6 @@
+07:21:11 start site=www.mazdapartsnow.com segments=31 tiers=['A', 'B']
+07:31:11 nav-fail Mazda Mazda3 2002: NavError: HTTP 404 for https://www.mazdapartsnow.com/2002-mazda-3-parts
+07:31:11 seg done tier=A Mazda Mazda3 [2001, 2009] seeds=[2008, 2002] records=60 errors=1
+07:40:33 seg done tier=A Mazda Mazda3 [2010, 2011] seeds=[2010] records=105 errors=1
+07:52:07 seg done tier=A Mazda Mazda6 [2003, 2008] seeds=[2007] records=177 errors=1
+07:52:07 time budget reached records=177
