@@ -37,6 +37,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
+import rawparts  # noqa: E402
 from fetch import NetworkError, Refused  # noqa: E402
 
 TIERS = {
@@ -133,18 +134,17 @@ def chain_targets(rec: dict) -> list[tuple[str, str]]:
 
 class RawFile:
     """An append-only JSONL file in size-capped parts with global 1-based line
-    numbers: part 1 is raw/<base>.jsonl, part n is raw/<base>.<n>.jsonl."""
+    numbers: part 1 is raw/<base>.jsonl, part n is raw/<base>.<n>.jsonl. The
+    part layout and the reader are rawparts.py's, which every consumer uses."""
 
     def __init__(self, raw_dir: Path, base: str, log=None):
         self.dir, self.base = raw_dir, base
-        self.n = 1
-        while self.path(self.n + 1).exists():
-            self.n += 1
+        self.n = rawparts.part_count(raw_dir, base)
         self._heal(log)
         self.lines = sum(self._count(self.path(i)) for i in range(1, self.n + 1))
 
     def path(self, i: int) -> Path:
-        return self.dir / (f"{self.base}.jsonl" if i == 1 else f"{self.base}.{i}.jsonl")
+        return rawparts.part_path(self.dir, self.base, i)
 
     def paths(self) -> list[Path]:
         return [self.path(i) for i in range(1, self.n + 1) if self.path(i).exists()]
@@ -184,15 +184,7 @@ class RawFile:
 
     def rows(self):
         """(line number, object or None for an unreadable line), all parts in order."""
-        n = 0
-        for p in self.paths():
-            with open(p, encoding="utf-8") as fh:
-                for ln in fh:
-                    n += 1
-                    try:
-                        yield n, json.loads(ln)
-                    except ValueError:
-                        yield n, None
+        return rawparts.rows(self.paths())
 
 
 def _load_completion(path: str) -> list[dict]:

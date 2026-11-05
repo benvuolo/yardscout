@@ -243,6 +243,41 @@ with tempfile.TemporaryDirectory() as td:
     check("R6 pointers are global line numbers", all(logical[int(r["recrawl_of"]) - 1]["pn"] == r["pn"]
                                                      for r in logical[half:]) and all("recrawl_of" in r for r in logical[half:]))
 
+    # every consumer reads all parts: the CI evidence gate and the auditor
+    import contextlib  # noqa: E402
+    import io  # noqa: E402
+
+    import audit  # noqa: E402
+    import ci_audit  # noqa: E402
+    import rawparts  # noqa: E402
+
+    def ci(*argv):
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            code = ci_audit.main(list(argv))
+        return code, buf.getvalue()
+    part1 = len((raw / f"{TY}.jsonl").read_text().splitlines())
+    check("part 1 alone holds fewer records than the logical file", part1 < len(logical), (part1, len(logical)))
+    code, out = ci(str(raw / f"{TY}.jsonl"))
+    check("ci_audit <part 1 path> audits every records part", code == 0
+          and f"parts={len(rec_parts)} records={len(logical)} " in out, out)
+    ci_audit.HERE = root  # --site reads <HERE>/raw
+    code, out = ci("--site", TY)
+    check("ci_audit --site audits every records part", code == 0 and f"records={len(logical)} " in out, out)
+    code, out = ci(str(rec_parts[1]))
+    check("ci_audit on a continuation part reads the whole file", f"records={len(logical)} " in out, out)
+    try:
+        ci(str(raw / f"{TY}.lists.jsonl"))
+        check("ci_audit refuses a manifest file", False)
+    except SystemExit as e:
+        check("ci_audit refuses a manifest file", "manifest" in str(e.code), e.code)
+    with contextlib.redirect_stderr(io.StringIO()):  # "note: skipping manifest file" lines
+        groups = audit.record_files([str(p) for p in sorted(raw.glob("*.jsonl"))])
+    check("audit.py groups the parts of one records file and skips manifests", groups == [rec_parts],
+          [[p.name for p in g] for g in groups])
+    check("rawparts reads lists parts like RawFile", [r for _, r in rawparts.site_rows(raw, TY, ".lists")]
+          == [r for _, r in crawl.RawFile(raw, f"{TY}.lists").rows()])
+
 # R4 chain hop with a network failure: queued in progress, fetched at the next start
 with tempfile.TemporaryDirectory() as td:
     from fetch import NetworkError  # noqa: E402
