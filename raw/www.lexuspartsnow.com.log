@@ -139,3 +139,111 @@
 20:42:27 chain-unlinked window-regulator 1 numbers named by 85710-50110, no catalog link: 85710-50114
 20:42:27 chain-unlinked window-regulator 1 numbers named by 85720-50110, no catalog link: 85720-50114
 20:43:08 time budget reached records=1435
+20:43:17 start site=www.lexuspartsnow.com mode=worklist tiers=['A', 'B'] records=1435 list_lines=64 year_lines=7 url_index=2845
+20:43:17 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002] records=1435 errors=6
+20:43:17 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=1435 errors=6
+20:43:17 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=1435 errors=6
+20:43:17 seg done tier=A Lexus ES 350 [1997, 2018] seeds=[2007] records=1435 errors=6
+20:43:17 seg done tier=A Lexus ES 330 [2004, 2006] seeds=[2004] records=1435 errors=6
+20:43:17 seg done tier=A Lexus GS 300 [1993, 2006] seeds=[2006] records=1435 errors=6
+20:43:17 seg done tier=A Lexus RX 350 [2004, 2016] seeds=[2007] records=1435 errors=6
+20:43:17 seg done tier=A Lexus RX 330 [2004, 2006] seeds=[2004] records=1435 errors=6
+20:43:17 seg done tier=A Lexus LS 400 [1990, 2005] seeds=[1996] records=1435 errors=6
+20:43:17 seg done tier=A Lexus LS 430 [2001, 2006] seeds=[2001] records=1435 errors=6
+20:43:17 seg done tier=A Lexus IS [2004, 2016] seeds=[2007] records=1435 errors=6
+20:43:17 seg done tier=A Lexus LS 460 [1996, 2016] seeds=[2007] records=1435 errors=6
+20:43:18 nav-fail Lexus GS 2006: ValueError: no model page for Lexus GS (lexus-['gs'])
+20:43:18 seg done tier=A Lexus GS [1998, 2018] seeds=[2006] records=1435 errors=7
+20:43:25 nav-fail Lexus ES 2007: ValueError: no model page for Lexus ES (lexus-['es'])
+20:43:25 seg done tier=A Lexus ES [1990, 2015] seeds=[2007] records=1435 errors=8
+20:43:58 chain-unlinked alternator 1 numbers named by 27060-31060, no catalog link: 27060-31062-84
+20:43:58 chain-unlinked alternator 1 numbers named by 27060-31061, no catalog link: 27060-31062-84
+20:43:58 chain-unlinked alternator 1 numbers named by 27060-50340, no catalog link: 27060-50340-84
+20:44:06 chain-unlinked starter 1 numbers named by 28100-31070, no catalog link: 28100-31070-84
+20:44:14 chain-unlinked ac-compressor 1 numbers named by 88320-3A310, no catalog link: 88320-3A310-84
+20:44:14 chain-unlinked ac-compressor 1 numbers named by 88320-3A300, no catalog link: 88320-3A300-84
+20:44:14 chain-unlinked ac-compressor 1 numbers named by 88310-3A540, no catalog link: 88310-3A540-84
+20:44:38 chain-unlinked headlights 1 numbers named by 81070-30B61, no catalog link: 81185-30B60
+20:44:38 chain-unlinked headlights 1 numbers named by 81140-30B50, no catalog link: 81145-30B50
+20:44:38 chain-unlinked headlights 1 numbers named by 81140-30B40, no catalog link: 81145-30B40
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87901-30210-C0, no catalog link: 87901-30260-C0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87901-30210-A0, no catalog link: 87901-30260-A0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87901-30210-B0, no catalog link: 87901-30260-B0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87901-30210-B1, no catalog link: 87901-30260-B1
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87901-30210-B2, no catalog link: 87901-30260-B2
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87901-30210-C1, no catalog link: 87901-30260-C1
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87901-30210-D0, no catalog link: 87901-30260-D0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87901-30210-G0, no catalog link: 87901-30260-G0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87901-30210-J1, no catalog link: 87901-30260-J1
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-A0, no catalog link: 87906-30320-A0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-B0, no catalog link: 87906-30320-B0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-B1, no catalog link: 87906-30320-B1
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-B2, no catalog link: 87906-30320-B2
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-C0, no catalog link: 87906-30320-C0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-C1, no catalog link: 87906-30320-C1
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-D0, no catalog link: 87906-30320-D0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-E0, no catalog link: 87906-30320-E0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-G0, no catalog link: 87906-30320-G0
+20:48:06 chain-unlinked side-mirrors 1 numbers named by 87906-30270-J1, no catalog link: 87906-30320-J1
+20:50:14 chain-unlinked fuel-pump-module 1 numbers named by 77020-30170, no catalog link: 77020-30171
+20:50:14 chain-unlinked fuel-pump-module 1 numbers named by 77020-30290, no catalog link: 77020-30292
+20:50:14 chain-unlinked fuel-pump-module 1 numbers named by 77020-30291, no catalog link: 77020-30292
+20:50:14 chain-unlinked fuel-pump-module 1 numbers named by 77020-30341, no catalog link: 77020-30342
+20:50:38 nav-fail Lexus GS 350 2001: ValueError: no 2001 catalog for Lexus GS 350 (lexus-['gs350'])
+20:50:38 seg done tier=A Lexus GS 350 [1995, 2015] seeds=[2007, 2001] records=1475 errors=9
+20:51:10 chain-unlinked alternator 1 numbers named by 27060-46300, no catalog link: 27060-46300-84
+20:51:26 chain-unlinked starter 1 numbers named by 28100-46220, no catalog link: 28100-46220-84
+20:51:50 chain-unlinked ac-compressor 1 numbers named by 88320-2A051, no catalog link: 88320-2A051-84
+20:51:50 chain-unlinked ac-compressor 1 numbers named by 88320-2A050, no catalog link: 88320-2A051-84
+20:53:03 chain-unlinked headlights 1 numbers named by 81130-53041, no catalog link: 81145-53041
+20:53:03 chain-unlinked headlights 1 numbers named by 81140-53040, no catalog link: 81145-53040
+20:53:03 chain-unlinked headlights 1 numbers named by 81070-53040, no catalog link: 81185-53040
+20:53:03 chain-unlinked headlights 1 numbers named by 81170-53041, no catalog link: 81185-53041
+20:53:26 chain-unlinked tail-lights 1 numbers named by 81550-53031, no catalog link: 81550-53032-B0
+20:53:26 chain-unlinked tail-lights 1 numbers named by 81560-53031, no catalog link: 81560-53032-B0
+21:01:19 chain-unlinked side-mirrors 1 numbers named by 87910-53060-A1, no catalog link: 87910-53060-A2
+21:01:19 chain-unlinked side-mirrors 1 numbers named by 87940-53060-A1, no catalog link: 87940-53060-A2
+21:03:34 seg done tier=A Lexus IS 300 [2001, 2005] seeds=[2001] records=1557 errors=9
+21:04:46 chain-unlinked side-mirrors 1 numbers named by 87940-48241-C0, no catalog link: 87940-48241-C1
+21:05:34 seg done tier=A Lexus RX 400h [2006, 2008] seeds=[2006] records=1560 errors=9
+21:06:14 chain-unlinked ac-compressor 1 numbers named by 88320-3A270, no catalog link: 88320-3A270-84
+21:06:14 chain-unlinked ac-compressor 1 numbers named by 88320-3A280, no catalog link: 88320-3A280-84
+21:06:31 chain-unlinked tail-lights 1 numbers named by 81551-53170, no catalog link: 81553-53170
+21:06:31 chain-unlinked tail-lights 1 numbers named by 81561-53170, no catalog link: 81563-53170
+21:07:26 chain-unlinked fuel-pump-module 1 numbers named by 77020-53080, no catalog link: 77020-53084
+21:07:59 chain-unlinked alternator 1 numbers named by 27060-31062, no catalog link: 27060-31062-84
+21:20:06 chain-unlinked side-mirrors 1 numbers named by 87910-53400-A0, no catalog link: 87910-53401-A0
+21:20:06 chain-unlinked side-mirrors 1 numbers named by 87910-53400-B0, no catalog link: 87910-53401-B0
+21:20:06 chain-unlinked side-mirrors 1 numbers named by 87910-53550-A0, no catalog link: 87910-53551-A0
+21:20:06 chain-unlinked side-mirrors 1 numbers named by 87910-53550-B0, no catalog link: 87910-53551-B0
+21:20:06 chain-unlinked side-mirrors 1 numbers named by 87940-53400-A0, no catalog link: 87940-53401-A0
+21:20:06 chain-unlinked side-mirrors 1 numbers named by 87940-53400-B0, no catalog link: 87940-53401-B0
+21:20:06 chain-unlinked side-mirrors 1 numbers named by 87940-53560-A0, no catalog link: 87940-53561-A0
+21:20:06 chain-unlinked side-mirrors 1 numbers named by 87940-53560-B0, no catalog link: 87940-53561-B0
+21:20:06 chain-unlinked side-mirrors 2 numbers named by 87910-53551-A1, no catalog link: 87910-53411-A1, 87910-53410-A1
+21:20:06 chain-unlinked side-mirrors 2 numbers named by 87910-53551-B1, no catalog link: 87910-53411-B2, 87910-53410-B2
+21:20:06 chain-unlinked side-mirrors 2 numbers named by 87910-53551-C0, no catalog link: 87910-53410-C0, 87910-53411-C0
+21:20:06 chain-unlinked side-mirrors 2 numbers named by 87910-53551-D0, no catalog link: 87910-53411-D0, 87910-53410-D0
+21:20:06 chain-unlinked side-mirrors 2 numbers named by 87940-53561-A1, no catalog link: 87940-53410-A1, 87940-53411-A1
+21:20:06 chain-unlinked side-mirrors 2 numbers named by 87940-53561-B1, no catalog link: 87940-53410-B2, 87940-53411-B2
+21:20:06 chain-unlinked side-mirrors 2 numbers named by 87940-53561-C0, no catalog link: 87940-53410-C0, 87940-53411-C0
+21:20:06 chain-unlinked side-mirrors 2 numbers named by 87940-53561-D0, no catalog link: 87940-53410-D0, 87940-53411-D0
+21:25:18 chain-unlinked side-mirrors 1 numbers named by 87940-53470-B0, no catalog link: 87940-53471-B0
+21:25:18 chain-unlinked side-mirrors 1 numbers named by 87940-53570-B0, no catalog link: 87940-53571-B0
+21:25:18 chain-unlinked side-mirrors 1 numbers named by 87910-53570-B0, no catalog link: 87910-53571-B0
+21:25:18 chain-unlinked side-mirrors 1 numbers named by 87910-53470-B0, no catalog link: 87910-53471-B0
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87940-53571-A0, no catalog link: 87940-53480-A0, 87940-53481-A0
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87940-53571-B1, no catalog link: 87940-53481-B1, 87940-53480-B1
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87940-53571-C0, no catalog link: 87940-53480-C0, 87940-53481-C0
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87940-53571-D0, no catalog link: 87940-53480-D0, 87940-53481-D0
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87940-53571-J1, no catalog link: 87940-53481-J1, 87940-53480-J1
+21:25:18 chain-unlinked side-mirrors 1 numbers named by 87940-53571-J2, no catalog link: 87940-53480-J2
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87910-53571-A0, no catalog link: 87910-53480-A0, 87910-53481-A0
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87910-53571-B1, no catalog link: 87910-53481-B1, 87910-53480-B1
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87910-53571-C0, no catalog link: 87910-53480-C0, 87910-53481-C0
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87910-53571-D0, no catalog link: 87910-53481-D0, 87910-53480-D0
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87910-53571-J1, no catalog link: 87910-53480-J1, 87910-53481-J1
+21:25:18 chain-unlinked side-mirrors 2 numbers named by 87910-53571-J2, no catalog link: 87910-53480-J2, 87910-53481-J2
+21:26:30 chain-unlinked fuel-pump-module 1 numbers named by 77020-53083, no catalog link: 77020-53084
+21:26:54 seg done tier=A Lexus IS 350 [2006, 2014] seeds=[2006, 2012] records=1681 errors=9
+21:26:54 time budget reached records=1681
