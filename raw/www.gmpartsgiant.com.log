@@ -1,0 +1,7 @@
+01:13:13 start site=www.gmpartsgiant.com segments=206 tiers=['A', 'B']
+01:17:58 nav-fail Chevrolet Cruze 1998: ValueError: no 1998 catalog for Chevrolet Cruze (chevrolet-['cruze'])
+01:17:58 seg done tier=A Chevrolet Cruze [1986, 2014] seeds=[2014, 1998] records=49 errors=1
+01:37:38 seg done tier=A Chevrolet Silverado 1500 [1999, 2023] seeds=[2000, 2012, 2011] records=176 errors=1
+01:41:42 seg done tier=A Chevrolet Equinox [2010, 2015] seeds=[2012] records=212 errors=1
+01:46:18 seg done tier=A Chevrolet Impala [2006, 2011] seeds=[2008] records=260 errors=1
+01:46:18 time budget reached records=260
