@@ -26,3 +26,18 @@
 04:20:16 seg done tier=A Kia Forte [2010, 2013] seeds=[2010] records=650 errors=1
 04:33:52 seg done tier=A Kia Sedona [2006, 2014] seeds=[2006] records=727 errors=1
 04:45:52 time budget reached records=800
+04:46:01 start site=www.kiapartsnow.com segments=35 tiers=['A', 'B']
+04:46:01 seg done tier=A Kia Soul [2010, 2013] seeds=[2013] records=800 errors=1
+04:46:01 seg done tier=A Kia Optima [2011, 2013] seeds=[2013] records=800 errors=1
+04:46:01 seg done tier=A Kia Soul [2014, 2019] seeds=[2014] records=800 errors=1
+04:46:01 seg done tier=A Kia Rio [2001, 2023] seeds=[2013] records=800 errors=1
+04:46:01 seg done tier=A Kia Sorento [2011, 2015] seeds=[2011] records=800 errors=1
+04:46:01 seg done tier=A Kia Optima [2014, 2015] seeds=[2015] records=800 errors=1
+04:46:01 seg done tier=A Kia Forte [2014, 2018] seeds=[2014] records=800 errors=1
+04:46:01 seg done tier=A Kia Forte [2010, 2013] seeds=[2010] records=800 errors=1
+04:46:01 seg done tier=A Kia Sedona [2006, 2014] seeds=[2006] records=800 errors=1
+04:46:01 seg done tier=A Kia Sportage [1995, 2008] seeds=[2007] records=800 errors=1
+04:53:13 seg done tier=A Kia Spectra [2007, 2009] seeds=[2009] records=839 errors=1
+05:04:09 seg done tier=A Kia Optima [2016, 2018] seeds=[2016] records=906 errors=1
+05:18:57 seg done tier=A Kia Sorento [2003, 2006] seeds=[2006] records=986 errors=1
+05:18:57 time budget reached records=986
