@@ -5,3 +5,21 @@
 01:41:24 seg done tier=A Infiniti M35 [2006, 2010] seeds=[2006] records=315 errors=0
 01:45:08 seg done tier=A Infiniti QX56 [2004, 2010] seeds=[2008] records=355 errors=0
 01:45:08 time budget reached records=355
+01:45:15 start site=www.infinitipartsdeal.com segments=28 tiers=['A', 'B']
+01:45:15 seg done tier=A Infiniti G35 [2003, 2008] seeds=[2004] records=355 errors=0
+01:45:15 seg done tier=A Infiniti G37 [2008, 2013] seeds=[2009] records=355 errors=0
+01:45:15 seg done tier=A Infiniti FX35 [2003, 2012] seeds=[2005] records=355 errors=0
+01:45:15 seg done tier=A Infiniti M35 [2006, 2010] seeds=[2006] records=355 errors=0
+01:45:15 seg done tier=A Infiniti QX56 [2004, 2010] seeds=[2008] records=355 errors=0
+01:49:00 seg done tier=A Infiniti QX60 [2014, 2020] seeds=[2014] records=397 errors=0
+01:52:00 seg done tier=A Infiniti Q50 [2014, 2020] seeds=[2014] records=425 errors=0
+01:56:24 seg done tier=A Infiniti QX4 [1997, 2003] seeds=[2001] records=475 errors=0
+01:57:32 seg done tier=A Infiniti JX35 [2013, 2013] seeds=[2013] records=477 errors=0
+02:01:56 seg done tier=A Infiniti I30 [1996, 2001] seeds=[2000] records=527 errors=0
+02:05:29 net-fail product https://www.infinitipartsdeal.com/parts/infiniti-lamp-asmy-rh~26010-1ba0a.html: network error after 3 tries: ReadTimeout
+02:08:07 seed A|Infiniti|EX35|2008 had network failures; left open for retry
+02:08:07 nav-fail Infiniti EX35 2013: ValueError: no 2013 catalog for Infiniti EX35 (infiniti-['ex35'])
+02:08:07 seg done tier=A Infiniti EX35 [2008, 2013] seeds=[2008, 2013] records=557 errors=2
+02:11:23 seg done tier=A Infiniti QX56 [2011, 2013] seeds=[2012] records=590 errors=2
+02:13:59 seg done tier=A Infiniti I35 [2002, 2004] seeds=[2002] records=613 errors=2
+02:19:11 time budget reached records=645
