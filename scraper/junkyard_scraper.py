@@ -6060,6 +6060,21 @@ _gap_extend("transit connect", parts=[
 
 # ---- end of §21 block
 
+# ---- 2026-11 §22 (PARTS_GAPS §22).
+# Mercury Milan 2006-2011 (one generation; 311 cars generic-only). 2010
+# facelift in FACELIFT_BREAKS. A/C standard (CG base lists 2006-11); AWD
+# optional on the 3.0 V6 from 2007 (EPA "Milan AWD" 2007-11); sunroof
+# optional (standard on the 2010-11 Hybrid). No "Milan Hybrid" listings on
+# the lots; the hybrid's own parts are not curated here.
+_gap_extend("milan", parts=[
+    *_per_gen([(2006, 2011)], [*_GAP_MECH, _SUNROOF]),
+    *_per_gen([(2007, 2011)], [
+        {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]},
+    ]),
+])
+
+# ---- end of §22 block
+
 _apply_consensus_evergreens()
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
@@ -6558,6 +6573,8 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "charger": [2015],               # 2009 tail-lamp-only revision left out
     "dakota": [1991, 2008],
     "grand cherokee": [1996, 2004, 2008, 2014, 2017],
+    # §22 (PARTS_GAPS §22; cited there)
+    "milan": [2010],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

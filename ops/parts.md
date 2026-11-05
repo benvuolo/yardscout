@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-05, §13–21 done)
+# Parts workstream — status (updated 2026-11-05, §13–21 done, §22 in progress; §23 facelifts in a second session)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -117,6 +117,10 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   1996/2004/2008/2014/2017 (120 cars narrowed). §23 total: 21 keys, 13,893
   cars with a narrowed lamp window, no other per-car change, coverage
   unchanged.
+
+- §22 (owner via hub: "Ensure everything is at speed"; in progress): Milan
+  done with facelift 2010 (generic-only 15,399 → 15,087 on the 334,595-car
+  scan).
 
 ## How to measure
 

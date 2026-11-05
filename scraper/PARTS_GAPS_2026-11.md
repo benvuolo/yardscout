@@ -1842,3 +1842,50 @@ appearance-row window narrowed; none had any other change. Several
 models (Odyssey, Grand Caravan, Town & Country, Pathfinder, Pilot,
 Charger, Dakota, Grand Cherokee) have no appearance rows yet; their breaks
 will bound lamp rows added later.
+
+## 22. Next measured block (2026-11-05, owner via hub: "Ensure everything is at speed")
+
+Same basis and method as §18–21 (generations and facelifts researched first;
+FETCHED/SNIPPET as before). A second Parts session works the facelift
+follow-ups as §23 at the same time (hub's temporary exception to one session
+per workstream). My `FACELIFT_BREAKS` additions sit under a "# §22" comment
+group. Measured on the 334,595-car scan with the code before §22:
+generic-only 15,399 (4.6%), no entry 12,409 (3.7%).
+
+| Order | Model | Generic-only cars |
+|---|---|---|
+| 1 | Mercury Milan 2006–11 | 311 |
+| 2 | Buick Encore 2013–22 | 307 |
+| 3 | Chevrolet Captiva Sport 2012–15 | 301 |
+| 4 | Buick Park Avenue 1991–2005 | 299 |
+| 5 | Scion xB 2008–15 | 293 |
+| 6 | Hyundai Sonata 1999–2005 (EF) | 290 |
+| 7 | Infiniti JX35/QX60 2013–20 | 288 |
+| 8 | Ford Escort 1991–2003 | 285 |
+
+### 22.1 Mercury Milan 2006–2011
+
+Basis: WP Mercury_Milan; cars.com "2010 Mercury Milan: What's New";
+jalopnik.com 2010 Milan (Ford release) and 2010 Fusion/Milan/MKZ design;
+consumerguide.com/used/2006-11-mercury-milan; fueleconomy.gov menus
+(fetched).
+- **Facelift 2010 (added to `FACELIFT_BREAKS`):** "revised tail lamps and an
+  enlarged grille, reshaped headlamps and revised front fascia" (WP);
+  "taillights are narrower and taller" (cars.com). The existing Milan lamp
+  rows are now cut at 2010.
+- **A/C:** standard (CG base lists 2006–11).
+- **AWD:** optional on the 3.0 V6 from 2007 ("Milan AWD" in EPA's menus
+  2007–11).
+- **Sunroof:** optional ($795 in 2006–07, packages from 2008, standard on
+  the 2010–11 Hybrid).
+- **Hybrid:** 2010–11. No "Milan Hybrid" listings are on the lots, and
+  hybrid parts are not curated here.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2006–11 | — | Every car. |
+| Sunroof | 2006–11 | option | |
+| AWD rear differential / transfer unit | 2007–11 | drive: awd/4wd | V6 AWD only; same band as the Five Hundred row. |
+
+Result (same inventory): generic-only 15,399 (4.6%) → 15,087 (4.5%). Milan
+311 → 0.
