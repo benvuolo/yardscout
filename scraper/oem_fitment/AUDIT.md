@@ -58,7 +58,37 @@ heuristics, now fixed in the auditor. Toyota names the tail-lamp assembly
 the power-steering pump "Pump Assy, Vane" (44310-...). "Body Assembly,
 Throttle W/Throttle Position Sensor" is a throttle body.
 
-## Findings needing a module change (proposed to the hub, not applied)
+## Exclude at curation
+
+Records already crawled that a later rule fix drops. The curation layer drops
+them by (site, category, pn).
+
+| site | category | pn | reason |
+|---|---|---|---|
+| www.moparpartsgiant.com | headlights | LBK13001 | light bulb kit ("Light Bulb Kit (Assorted Bulbs and Fuses)"), not a headlamp; rule fixed in the Mopar fixes commit |
+| www.jeeppartsdeal.com | headlights | 5143152AA | headlamp boot / bulb cap ("Boot, Front"), not a headlamp; Jeep rule fix pending the hub's go |
+
+## Applied fixes (hub go 01:28 UTC)
+
+(1), M1-M6 (moparpartsgiant.py) and I1 (nissanpartsdeal.py, shared with
+Infiniti) are applied in the site modules only; no template change. Each has
+a pure regression check in the site's test, and those checks fail on the old
+modules. A before/after parse of every cached year page and list page for
+Mopar (700 selections), Nissan (875) and Infiniti (275) changed only these
+items:
+- parts dropped: LBK13001 (headlights), 5065744AD (trunk-lid), 82211065AD (hood)
+- parts added: 24820-AC700/701/705/706 (G35 gauge-cluster)
+- pages added: 2002 Ram 1500 and 2006 300 door_front_shell_hinges
+  (door-front) and door_rear_shell_hinges (door-rear),
+  spark_plugs_cables_coils (ignition-coils), 2006 300 decklid_liftgate_panel
+  (liftgate), 2015 200 front_fenders_shields and 2010 Grand Caravan
+  front_fender_shields (fender).
+
+The new pages yield the right parts: DOOR Front 55276054AB/55AB, FENDER
+Front 68143656AA/57AA, COIL Ignition 4606869AA. The 300 sedan decklid page
+gives no liftgate (correct) and still gives DECKLID 5134207AD.
+
+## Findings needing a module change
 
 0. **Jeep headlights keeps a headlamp boot.** 5143152AA, list
    `parts-list/2005-jeep-grand-cherokee/headlights-lighting/headlamp-components`.
@@ -67,6 +97,8 @@ Throttle W/Throttle Position Sensor" is a throttle body.
    cover/cap but not boot. Fix: add `boot` to that exclude (the Mopar module
    already excludes Boot).
 
+Pending the hub's go: 0 (Jeep boot), G1-G3 (GM, below).
+
 Pre-crawl sample: 38 records from a local 2-segment tier A trial on Mopar (10),
 Nissan (13) and Infiniti (15). The trial was stopped at the hub's request
 because Actions is crawling these sites.
@@ -74,7 +106,7 @@ because Actions is crawling these sites.
   38/38 match.
 - Against evidence_lines: 0 E.
 
-1. **Mopar headlights keeps a bulb kit.** LBK13001, list
+1. **(applied)** **Mopar headlights keeps a bulb kit.** LBK13001, list
    `parts-list/2002-dodge-ram_1500/electrical/lamps_front.html`. Group "LAMP
    Headlamp Park And Turn", list info "Light Bulb Kit (Assorted Bulbs and
    Fuses)". The Mopar PARTS excludes run on the head
@@ -95,12 +127,12 @@ Caravan, 2015 200, 2012 Journey, 2006 300, 2012 Ram 1500):
 
 | # | category | problem | evidence | proposed fix |
 |---|---|---|---|---|
-| M1 | door-front, door-rear | 2002 Ram 1500 and 2006 300 get no door-shell page: their slugs are `doors_related_parts/door_front_shell_hinges` and `door_rear_shell_hinges`, which `front_door_shell\|door_shell` does not match | 2002 Ram page lists "DOOR Front" Right/Left (55276054AB/55AB) | SUBCATS door-front `...\|door_front_shell`, door-rear `...\|door_rear_shell` |
-| M2 | fender | 2015 200's fender page is `front_fenders_shields`; SUBCAT_EXCL `shield` drops it | page has "FENDER Front" 68143656AA/57AA | drop the fender SUBCAT_EXCL `shield` (COMMON_EXCLUDE and the fender rule already drop SHIELD rows); costs one extra page where a shield-only page exists |
-| M3 | ignition-coils | 2002 Ram 1500 and 2006 300 coil page is `spark_plugs_cables_coils`; `ignition` does not match | 2006 300 page has "COIL Ignition" 4606869AA | SUBCATS ignition-coils `ignition\|coils?$` |
-| M4 | trunk-lid | "PANEL Deck Lid Opening" (5065744AD, 2006 300 `decklid_liftgate_panel`) is kept: it is a rear body panel, not the lid | list row on that page | add `Opening` to trunk-lid excludes |
-| M5 | hood, grille | accessory pages (`mopar_accessories_component_parts/hood`, `/grille_kit`) are read; "HOOD KIT Vehicle" 82211065AD (2012 Ram 1500) is kept as a hood | list row | add `KIT` to the hood and grille excludes (the accessory page carries no factory hood); a path-level exclude for `mopar_accessories_*` would need an additive template option |
-| M6 | liftgate | `decklid_liftgate_panel` (Chrysler 300 / Dodge Magnum layout) is routed only to trunk-lid, so a Magnum liftgate would be missed | slug seen on 2006 300; Magnum not fetched | liftgate SUBCATS `...\|decklid_liftgate` |
+| M1 (applied) | door-front, door-rear | 2002 Ram 1500 and 2006 300 get no door-shell page: their slugs are `doors_related_parts/door_front_shell_hinges` and `door_rear_shell_hinges`, which `front_door_shell\|door_shell` does not match | 2002 Ram page lists "DOOR Front" Right/Left (55276054AB/55AB) | SUBCATS door-front `...\|door_front_shell`, door-rear `...\|door_rear_shell` |
+| M2 (applied) | fender | 2015 200's fender page is `front_fenders_shields`; SUBCAT_EXCL `shield` drops it | page has "FENDER Front" 68143656AA/57AA | drop the fender SUBCAT_EXCL `shield` (COMMON_EXCLUDE and the fender rule already drop SHIELD rows); costs one extra page where a shield-only page exists |
+| M3 (applied) | ignition-coils | 2002 Ram 1500 and 2006 300 coil page is `spark_plugs_cables_coils`; `ignition` does not match | 2006 300 page has "COIL Ignition" 4606869AA | SUBCATS ignition-coils `ignition\|coils?$` |
+| M4 (applied) | trunk-lid | "PANEL Deck Lid Opening" (5065744AD, 2006 300 `decklid_liftgate_panel`) is kept: it is a rear body panel, not the lid | list row on that page | add `Opening` to trunk-lid excludes |
+| M5 (applied) | hood, grille | accessory pages (`mopar_accessories_component_parts/hood`, `/grille_kit`) are read; "HOOD KIT Vehicle" 82211065AD (2012 Ram 1500) is kept as a hood | list row | add `KIT` to the hood and grille excludes (the accessory page carries no factory hood); a path-level exclude for `mopar_accessories_*` would need an additive template option |
+| M6 (applied) | liftgate | `decklid_liftgate_panel` (Chrysler 300 / Dodge Magnum layout) is routed only to trunk-lid, so a Magnum liftgate would be missed | slug seen on 2006 300; Magnum not fetched | liftgate SUBCATS `...\|decklid_liftgate` |
 | - | door-front | 2002 Ram quad-cab "DOOR Front" rows (55275852AC/53AC) have no product link on the list page, so the template skips them (correct: nothing to fetch) | list page | none; note for curators |
 
 The other tier B regexes found the right pages: hood, bumpers (fascia_front/
@@ -133,7 +165,7 @@ Kit-Front Bumper" (4), "Grille Assy-Front" (3), "Hood" (4).
 
 | # | category | problem | evidence | proposed fix |
 |---|---|---|---|---|
-| I1 | gauge-cluster | the 2003-2007 G35 cluster rows are named "Meter Assy-Analog" (24820-AC700/701/705/706); the rule keeps nothing on that page | product page 24820-AC700: mainDesc "Meter Assembly", site pdName "Instrument Cluster", fits 2004-2006 Infiniti G35 Sport/Track | add `^Meter Assy-Analog` to `nissanpartsdeal.PARTS["gauge-cluster"]` include (shared). Do not add "Meter Assy-Temperature" (the F/COMPASS gauge) |
+| I1 (applied) | gauge-cluster | the 2003-2007 G35 cluster rows are named "Meter Assy-Analog" (24820-AC700/701/705/706); the rule keeps nothing on that page | product page 24820-AC700: mainDesc "Meter Assembly", site pdName "Instrument Cluster", fits 2004-2006 Infiniti G35 Sport/Track | add `^Meter Assy-Analog` to `nissanpartsdeal.PARTS["gauge-cluster"]` include (shared). Do not add "Meter Assy-Temperature" (the F/COMPASS gauge) |
 
 ### gmpartsgiant.py
 

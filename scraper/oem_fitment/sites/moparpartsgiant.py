@@ -47,10 +47,10 @@ SUBCATS = {
     "throttle-body": r"throttle",
     "power-steering-pump": r"power_steering_pump|steering_pump",
     "gauge-cluster": r"cluster",
-    "ignition-coils": r"ignition",
+    "ignition-coils": r"ignition|spark_plugs\w*_coils?$",  # 2002 Ram, 2006 300: spark_plugs_cables_coils
     "radiator": r"radiator",
-    "door-front": r"front_door_shell|front_door$|door_shell",
-    "door-rear": r"rear_door_shell|sliding_door_shell|rear_door$|door_shell",
+    "door-front": r"front_door_shell|door_front_shell|front_door$|door_shell",  # door_front_shell_hinges (2002 Ram, 2006 300)
+    "door-rear": r"rear_door_shell|door_rear_shell|sliding_door_shell|rear_door$|door_shell",
     "hood": r"^hood",
     "fender": r"fender$|front_fender",
     "bumper-front": r"fascia_front|bumper_front|front_bumper",
@@ -58,12 +58,13 @@ SUBCATS = {
     "grille": r"grille",
     "trunk-lid": r"deck_?lid|trunk",
     "tailgate": r"tailgate",
-    "liftgate": r"^liftgate$|liftgate_shell|liftgate_related",
+    "liftgate": r"^liftgate$|liftgate_shell|liftgate_related|^decklid_liftgate",  # 300/Magnum decklid_liftgate_panel
 }
 SUBCAT_EXCL = {
     "window-regulator": r"sliding_door_regulator|weatherstrip|trim|wiring|switch|defrost|wiper",
     "side-mirrors": r"lamps_outside_mirror",
-    "fender": r"shield",
+    # no fender page exclude: the 2015 200 fender is on front_fenders_shields;
+    # the part rule and COMMON_EXCLUDE drop the shield rows
     "liftgate": r"weatherstrip|wiring|trim|panels",
     "trunk-lid": r"weatherstrip|wiring|trim",
 }
@@ -73,8 +74,10 @@ PARTS = {
     "alternator": (N.format("GENERATOR|ALTERNATOR"), r"PULLEY|BRACKET|BELT|DECOUPLER|REGULATOR"),
     "starter": (N.format("STARTER"), r"SOLENOID|SHIELD|DRIVE"),
     "ac-compressor": (N.format("COMPRESSOR") + r"[^|]*(A/C|Air Conditioning)", r"CLUTCH|PULLEY|COIL|VALVE|SWITCH"),
-    "headlights": (N.format("LAMP|HEADLAMP") + r"[^|]*\bHead", r"Fog|Bulb|Level|Housing|Bezel|Boot|Ballast|Module|Shield|Socket|Lens|Washer|Adjuster|Switch"),
-    "tail-lights": (N.format("LAMP") + r"[^|]*\bTail", r"Bulb|Socket|License|Center High|CHMSL|Mounted Stop|Back ?Up|Lens|Gasket"),
+    # full-text exclude: bulb kits filed under the lamp's own group (LBK13001 "LAMP Headlamp
+    # Park And Turn", info "Light Bulb Kit (Assorted Bulbs and Fuses)")
+    "headlights": (N.format("LAMP|HEADLAMP") + r"[^|]*\bHead", r"Fog|Bulb|Level|Housing|Bezel|Boot|Ballast|Module|Shield|Socket|Lens|Washer|Adjuster|Switch", r"Bulb Kit|Assorted Bulbs"),
+    "tail-lights": (N.format("LAMP") + r"[^|]*\bTail", r"Bulb|Socket|License|Center High|CHMSL|Mounted Stop|Back ?Up|Lens|Gasket", r"Bulb Kit|Assorted Bulbs"),
     "side-mirrors": (N.format("MIRROR") + r"[^|]*\bOutside", r"Glass|Cap|Cover|Bezel|Motor|Lamp|Gasket|Switch|Flag|Applique"),
     "window-regulator": (N.format("REGULATOR|MOTOR") + r"[^|]*\bWindow", r"Vent|Quarter|Back|Sliding Door(?! Window)|Wiper|Liftgate|Switch"),
     "window-switch": (N.format("SWITCH") + r"[^|]*\bWindow", r"Rear|Vent|Quarter|Lock|Liftgate|Wiper|Defrost", r"^[^|]*\|[^|]*\|[^|]*\|\s*Right\b|Passenger"),
@@ -88,12 +91,14 @@ PARTS = {
     "radiator": (N.format("RADIATOR"), r"Cap|Support|Seal|Shield|Drain|Bracket|Isolator|Hose|Baffle|Bushing|Insulator|Grommet|Closure"),
     "door-front": (N.format("DOOR") + r"[^|]*\bFront", r"Fuel|Filler|Glove|Bin|Storage|Handle|Trim|Ajar|Lock|Hinge|Check|Speaker"),
     "door-rear": (N.format("DOOR") + r"[^|]*\b(Rear|Sliding)", r"Fuel|Filler|Glove|Bin|Storage|Handle|Trim|Ajar|Lock|Hinge|Check|Speaker|Track"),
-    "hood": (N.format("HOOD"), r"Hinge|Latch|Seal|Silencer|Insulator|Prop|Release|Scoop|Lock|Striker|Cable|Strut|Rod|Bumper|Ornament|Vent|Louver|Deflector"),
+    # Kit: accessory "HOOD KIT Vehicle" 82211065AD (mopar_accessories_component_parts/hood)
+    "hood": (N.format("HOOD"), r"Kit|Hinge|Latch|Seal|Silencer|Insulator|Prop|Release|Scoop|Lock|Striker|Cable|Strut|Rod|Bumper|Ornament|Vent|Louver|Deflector"),
     "fender": (N.format("FENDER"), r"Liner|Flare|Shield|Extension|Molding|Brace|Support|Seal|Filler|Vent"),
     "bumper-front": (N.format("FASCIA|BUMPER") + r"[^|]*\bFront", r"Reinforcement|Absorber|Support|Guide|Retainer|Extension|Bezel|Closeout|Applique|Bracket|Isolator|Step|Pad|Shield|Insert|Tow|Valance|Air Dam|Splitter|Lower"),
     "bumper-rear": (N.format("FASCIA|BUMPER") + r"[^|]*\bRear", r"Reinforcement|Absorber|Support|Guide|Retainer|Extension|Bezel|Closeout|Applique|Bracket|Isolator|Step|Pad|Shield|Insert|Tow|Valance|Hitch|Lower"),
-    "grille": (N.format("GRILLE"), r"Fog|Bezel|Speaker|Molding|Emblem|Bracket|Reinforcement|Insert|Screen|Defroster|Cowl|Liftgate"),
-    "trunk-lid": (N.format("DECKLID|DECK LID|LID") + r"|^PANEL[^|]*Deck ?Lid", r"Hinge|Latch|Seal|Lock|Strut|Torsion|Spoiler|Release|Trim|Switch|Cylinder|Light|Lamp|Molding|Applique|Emblem"),
+    "grille": (N.format("GRILLE"), r"Kit|Fog|Bezel|Speaker|Molding|Emblem|Bracket|Reinforcement|Insert|Screen|Defroster|Cowl|Liftgate"),
+    # Opening: "PANEL Deck Lid Opening" 5065744AD is rear body sheet metal, not the lid
+    "trunk-lid": (N.format("DECKLID|DECK LID|LID") + r"|^PANEL[^|]*Deck ?Lid", r"Opening|Hinge|Latch|Seal|Lock|Strut|Torsion|Spoiler|Release|Trim|Switch|Cylinder|Light|Lamp|Molding|Applique|Emblem"),
     "tailgate": (N.format("TAILGATE"), r"Hinge|Latch|Handle|Cable|Lock|Strut|Damper|Seal|Cap|Protector|Rod|Cylinder|Switch|Release|Trim|Applique|Spoiler|Bezel|Camera|Molding"),
     "liftgate": (N.format("LIFTGATE"), r"Hinge|Latch|Handle|Lock|Strut|Prop|Seal|Motor|Switch|Glass|Wiper|Spoiler|Release|Trim|Cylinder|Light|Lamp|Applique|Molding|Actuator|Module|Bumper|Striker|Bezel|Camera|Weatherstrip"),
 }

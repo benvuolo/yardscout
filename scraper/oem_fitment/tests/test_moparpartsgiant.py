@@ -54,6 +54,29 @@ m = T._mapping(P.CFG, "Dodge", "Ram 1500", 2002)
 ok(m.slugs == "ram_1500" and T._mapping(P.CFG, "Dodge", "Ram 1500", 2012).make == "ram"
    and T._mapping(P.CFG, "Dodge", "Ram 1500", 1990).slugs == ["d150", "w150"], "ram by year")
 ok(T._side("Right") == "R" and T._side("Driver Side") == "L" and T._side("Passenger Side/Driver Side") is None, "side")
+
+
+def sub(cat, tail):
+    """Does the category select this parts-list page slug (last URL segment)?"""
+    rx, ex = P.SUBCATS.get(cat), P.SUBCAT_EXCL.get(cat)
+    return bool(rx and not T.SUBCAT_COMMON_EXCLUDE.search(tail) and re.search(rx, tail, re.I)
+                and not (ex and re.search(ex, tail, re.I)))
+
+
+# regressions from the 2026-11-05 audit (AUDIT.md), pages seen on the site
+ok(not match("headlights", "LAMP Headlamp Park And Turn", "Light Bulb Kit (Assorted Bulbs and Fuses)")
+   and not match("tail-lights", "LAMP Tail Stop Turn", "Light Bulb Kit (Assorted Bulbs and Fuses)")
+   and match("tail-lights", "LAMP Tail Stop Turn", "Left"), "LBK13001 bulb kit is not a lamp")
+ok(not match("trunk-lid", "PANEL Deck Lid Opening") and match("trunk-lid", "DECKLID"), "5065744AD deck lid opening panel")
+ok(not match("hood", "HOOD KIT Vehicle") and match("hood", "HOOD") and not match("grille", "GRILLE KIT")
+   and match("grille", "GRILLE Radiator"), "82211065AD accessory hood kit")
+ok(sub("door-front", "door_front_shell_hinges") and sub("door-rear", "door_rear_shell_hinges")
+   and sub("door-front", "front_door_shell_hinges"), "2002 Ram / 2006 300 door shell pages")
+ok(sub("fender", "front_fenders_shields") and sub("fender", "front_fender"), "2015 200 fender page")
+ok(sub("ignition-coils", "spark_plugs_cables_coils") and sub("ignition-coils", "spark_plugs_ignition_coil")
+   and not sub("ignition-coils", "a_c_compressor"), "2006 300 coil page")
+ok(sub("liftgate", "decklid_liftgate_panel") and not sub("liftgate", "switches_doors_decklid_liftgate")
+   and sub("trunk-lid", "decklid_liftgate_panel"), "300/Magnum decklid_liftgate_panel")
 pure = n
 
 if not _pg_cacheonly.have([MODEL, YEAR, MIRRORS, LAMPS, ALT, P_HEAD, P_MIRROR, P_STARTER]):

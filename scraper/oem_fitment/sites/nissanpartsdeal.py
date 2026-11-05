@@ -78,7 +78,9 @@ PARTS = {
                          r"Bracket|Strainer|Filter|Control|Module-Fuel Pump Control|Relay|Gasket|Packing|Seal|Hose|Injection", VA),
     "throttle-body": (r"^(Chamber Assy-Throttle|Throttle Body|Body Assy-Throttle|Throttle Chamber)", r"Gasket|Sensor|Spacer|Cable|Bracket", VA),
     "power-steering-pump": (r"^Pump Assy-Power Steering|^Power Steering Pump|^Pump Assy-Power Steering, Electric", r"Pulley|Reservoir|Tank|Bracket|Connector|Hose|Seal|Gasket", VA),
-    "gauge-cluster": (r"^(Combination Meter Assy|Meter Assy-Combination|Speedometer Assy|Instrument Assy-Combination|Meter Assy-Instrument)",
+    # Meter Assy-Analog: 2003-07 Infiniti G35 cluster (24820-AC700; product page pdName
+    # "Instrument Cluster"). Not Meter Assy-Temperature (the separate compass gauge).
+    "gauge-cluster": (r"^(Combination Meter Assy|Meter Assy-Combination|Speedometer Assy|Instrument Assy-Combination|Meter Assy-Instrument|Meter Assy-Analog)",
                       r"Lens|Finisher|Housing|Cover|Bulb|Socket|Printed|Window", VA),
     "ignition-coils": (r"^(Coil Assy-Ignition|Ignition Coil Assy|Coil-Ignition)", r"Boot|Bracket", VA),
     "radiator": (r"^Radiator Assy|^Radiator\b(?!-)", r"Cap|Support|Mount|Hose|Shroud|Drain|Seal|Baffle|Tank|Bracket|Insulator", VA),

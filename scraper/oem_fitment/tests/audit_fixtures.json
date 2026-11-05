@@ -1,0 +1,580 @@
+{
+ "55077120AB": {
+  "site": "www.moparpartsgiant.com",
+  "category": "headlights",
+  "seed": {
+   "make": "Dodge",
+   "model": "Ram 1500",
+   "year": 2002
+  },
+  "segment": [
+   1971,
+   2018
+  ],
+  "list_url": "https://www.moparpartsgiant.com/parts-list/2002-dodge-ram_1500/electrical/lamps_front.html",
+  "pn": "55077120AB",
+  "name": "LAMP Headlamp Park And Turn",
+  "product_url": "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp-park-and-turn~55077120ab.html",
+  "list_group": "LAMP Headlamp Park And Turn",
+  "list_remark": "",
+  "list_info": [
+   "Right"
+  ],
+  "description": "Headlamp-Headlamp Park And Turn",
+  "position": "Right",
+  "replaces": [],
+  "replaced_by": null,
+  "fitment": [
+   {
+    "years": [
+     2002,
+     2003
+    ],
+    "make": "Dodge",
+    "model": "Ram 1500",
+    "trims": [
+     "Quad Cab 2WD",
+     "Quad Cab 4WD",
+     "Regular Cab 2WD",
+     "Regular Cab 4WD",
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "engines": [
+     "6 Cyl 3.7L",
+     "8 Cyl 4.7L",
+     "8 Cyl 5.7L",
+     "8 Cyl 5.9L"
+    ],
+    "options": [
+     "Quad Cab 2WD",
+     "Quad Cab 4WD",
+     "Regular Cab 2WD",
+     "Regular Cab 4WD",
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "raw": "2002-2003 Dodge Ram 1500 | 6 Cyl 3.7L, 8 Cyl 4.7L, 8 Cyl 5.7L, 8 Cyl 5.9L | Quad Cab 2WD, Quad Cab 4WD, Regular Cab 2WD, Regular Cab 4WD, SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD"
+   },
+   {
+    "years": [
+     2003,
+     2003
+    ],
+    "make": "Dodge",
+    "model": "Ram 2500",
+    "trims": [
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "engines": [
+     "10 Cyl 8.0L",
+     "6 Cyl 5.9L Diesel",
+     "8 Cyl 5.7L"
+    ],
+    "options": [
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "raw": "2003 Dodge Ram 2500 | 10 Cyl 8.0L, 6 Cyl 5.9L Diesel, 8 Cyl 5.7L | SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD"
+   },
+   {
+    "years": [
+     2003,
+     2003
+    ],
+    "make": "Dodge",
+    "model": "Ram 3500",
+    "trims": [
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "engines": [
+     "10 Cyl 8.0L",
+     "6 Cyl 5.9L Diesel",
+     "8 Cyl 5.7L"
+    ],
+    "options": [
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "raw": "2003 Dodge Ram 3500 | 10 Cyl 8.0L, 6 Cyl 5.9L Diesel, 8 Cyl 5.7L | SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD"
+   }
+  ],
+  "evidence_lines": [
+   "Part Number: 55077120AB",
+   "Part Description: Headlamp-Headlamp Park And Turn",
+   "Parts list https://www.moparpartsgiant.com/parts-list/2002-dodge-ram_1500/electrical/lamps_front.html: Right",
+   "Year Make Model | Engine | Important vehicle option details",
+   "2002-2003 Dodge Ram 1500 | 6 Cyl 3.7L, 8 Cyl 4.7L, 8 Cyl 5.7L, 8 Cyl 5.9L | Quad Cab 2WD, Quad Cab 4WD, Regular Cab 2WD, Regular Cab 4WD, SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD",
+   "2003 Dodge Ram 2500 | 10 Cyl 8.0L, 6 Cyl 5.9L Diesel, 8 Cyl 5.7L | SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD",
+   "2003 Dodge Ram 3500 | 10 Cyl 8.0L, 6 Cyl 5.9L Diesel, 8 Cyl 5.7L | SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD"
+  ],
+  "flags": []
+ },
+ "23100-JA11B": {
+  "site": "www.nissanpartsdeal.com",
+  "category": "alternator",
+  "seed": {
+   "make": "Nissan",
+   "model": "Altima",
+   "year": 2013
+  },
+  "segment": [
+   2013,
+   2015
+  ],
+  "list_url": "https://www.nissanpartsdeal.com/parts-list/2013-nissan-altima-sedan/engine_electrical/alternator.html",
+  "pn": "23100-JA11B",
+  "name": "Generator",
+  "product_url": "https://www.nissanpartsdeal.com/parts/nissan-alt-assy~23100-ja11b.html",
+  "list_group": "Generator",
+  "list_remark": "",
+  "list_info": [
+   "Fitting Vehicle Options: VQ35DE",
+   "Replaced By: 2310M-JA11RRW"
+  ],
+  "description": "Alternator Assy ; Generator",
+  "position": null,
+  "replaces": [],
+  "replaced_by": "2310M-JA11RRW",
+  "fitment": [
+   {
+    "years": [
+     2010,
+     2018
+    ],
+    "make": "Nissan",
+    "model": "Altima",
+    "trims": [
+     "S",
+     "SE",
+     "SL",
+     "SR",
+     "SV",
+     "Tech"
+    ],
+    "engines": [
+     "6 Cyl 3.5L"
+    ],
+    "options": [
+     "VQ35DE"
+    ],
+    "raw": "2010-2018 Nissan Altima | S, SE, SL, SR, SV, Tech|6 Cyl 3.5L | VQ35DE"
+   },
+   {
+    "years": [
+     2016,
+     2018
+    ],
+    "make": "Nissan",
+    "model": "Maxima",
+    "trims": [
+     "LE",
+     "Platinum",
+     "Premium",
+     "S",
+     "SL",
+     "Sport",
+     "SR",
+     "SV"
+    ],
+    "engines": [
+     "6 Cyl 3.5L"
+    ],
+    "options": [
+     "VQ35DE"
+    ],
+    "raw": "2016-2018, 2009-2014 Nissan Maxima | LE, Platinum, Premium, S, SL, Sport, SR, SV|6 Cyl 3.5L | VQ35DE"
+   },
+   {
+    "years": [
+     2009,
+     2014
+    ],
+    "make": "Nissan",
+    "model": "Maxima",
+    "trims": [
+     "LE",
+     "Platinum",
+     "Premium",
+     "S",
+     "SL",
+     "Sport",
+     "SR",
+     "SV"
+    ],
+    "engines": [
+     "6 Cyl 3.5L"
+    ],
+    "options": [
+     "VQ35DE"
+    ],
+    "raw": "2016-2018, 2009-2014 Nissan Maxima | LE, Platinum, Premium, S, SL, Sport, SR, SV|6 Cyl 3.5L | VQ35DE"
+   },
+   {
+    "years": [
+     2016,
+     2018
+    ],
+    "make": "Nissan",
+    "model": "Murano",
+    "trims": [
+     "Platinum",
+     "S",
+     "SL",
+     "SV"
+    ],
+    "engines": [
+     "6 Cyl 3.5L"
+    ],
+    "options": [
+     "VQ35DE"
+    ],
+    "raw": "2016-2018 Nissan Murano | Platinum, S, SL, SV|6 Cyl 3.5L | VQ35DE"
+   }
+  ],
+  "evidence_lines": [
+   "Part Number: 23100-JA11B",
+   "Part Description: Alternator Assy ; Generator",
+   "Replaced By: 2310M-JA11RRW",
+   "Year Make Model | Trim & Engine | Important vehicle option details",
+   "2010-2018 Nissan Altima | S, SE, SL, SR, SV, Tech|6 Cyl 3.5L | VQ35DE",
+   "2016-2018, 2009-2014 Nissan Maxima | LE, Platinum, Premium, S, SL, Sport, SR, SV|6 Cyl 3.5L | VQ35DE",
+   "2016-2018 Nissan Murano | Platinum, S, SL, SV|6 Cyl 3.5L | VQ35DE"
+  ],
+  "flags": []
+ },
+ "LBK13001": {
+  "site": "www.moparpartsgiant.com",
+  "category": "headlights",
+  "seed": {
+   "make": "Dodge",
+   "model": "Ram 1500",
+   "year": 2002
+  },
+  "segment": [
+   1971,
+   2018
+  ],
+  "list_url": "https://www.moparpartsgiant.com/parts-list/2002-dodge-ram_1500/electrical/lamps_front.html",
+  "pn": "LBK13001",
+  "name": "LAMP Headlamp Park And Turn",
+  "product_url": "https://www.moparpartsgiant.com/parts/mopar-bulb~lbk13001.html",
+  "list_group": "LAMP Headlamp Park And Turn",
+  "list_remark": "",
+  "list_info": [
+   "Light Bulb Kit (Assorted Bulbs and Fuses)"
+  ],
+  "description": "Lamp Headlamp Park And Turn",
+  "position": null,
+  "replaces": [],
+  "replaced_by": null,
+  "fitment": [
+   {
+    "years": [
+     2002,
+     2003
+    ],
+    "make": "Dodge",
+    "model": "Ram 1500",
+    "trims": [
+     "Quad Cab 2WD",
+     "Quad Cab 4WD",
+     "Regular Cab 2WD",
+     "Regular Cab 4WD",
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "engines": [
+     "6 Cyl 3.7L",
+     "8 Cyl 4.7L",
+     "8 Cyl 5.7L",
+     "8 Cyl 5.9L"
+    ],
+    "options": [
+     "Quad Cab 2WD",
+     "Quad Cab 4WD",
+     "Regular Cab 2WD",
+     "Regular Cab 4WD",
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "raw": "2002-2003 Dodge Ram 1500 | 6 Cyl 3.7L, 8 Cyl 4.7L, 8 Cyl 5.7L, 8 Cyl 5.9L | Quad Cab 2WD, Quad Cab 4WD, Regular Cab 2WD, Regular Cab 4WD, SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD"
+   },
+   {
+    "years": [
+     2003,
+     2003
+    ],
+    "make": "Dodge",
+    "model": "Ram 2500",
+    "trims": [
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "engines": [
+     "10 Cyl 8.0L",
+     "6 Cyl 5.9L Diesel",
+     "8 Cyl 5.7L"
+    ],
+    "options": [
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "raw": "2003 Dodge Ram 2500 | 10 Cyl 8.0L, 6 Cyl 5.9L Diesel, 8 Cyl 5.7L | SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD"
+   },
+   {
+    "years": [
+     2003,
+     2003
+    ],
+    "make": "Dodge",
+    "model": "Ram 3500",
+    "trims": [
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "engines": [
+     "10 Cyl 8.0L",
+     "6 Cyl 5.9L Diesel",
+     "8 Cyl 5.7L"
+    ],
+    "options": [
+     "SLT Quad Cab 2WD",
+     "SLT Quad Cab 4WD",
+     "SLT Regular Cab 2WD",
+     "SLT Regular Cab 4WD",
+     "ST Quad Cab 2WD",
+     "ST Quad Cab 4WD",
+     "ST Regular Cab 2WD",
+     "ST Regular Cab 4WD"
+    ],
+    "raw": "2003 Dodge Ram 3500 | 10 Cyl 8.0L, 6 Cyl 5.9L Diesel, 8 Cyl 5.7L | SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD"
+   }
+  ],
+  "evidence_lines": [
+   "Part Number: LBK13001",
+   "Part Description: Lamp Headlamp Park And Turn",
+   "Year Make Model | Engine | Important vehicle option details",
+   "2002-2003 Dodge Ram 1500 | 6 Cyl 3.7L, 8 Cyl 4.7L, 8 Cyl 5.7L, 8 Cyl 5.9L | Quad Cab 2WD, Quad Cab 4WD, Regular Cab 2WD, Regular Cab 4WD, SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD",
+   "2003 Dodge Ram 2500 | 10 Cyl 8.0L, 6 Cyl 5.9L Diesel, 8 Cyl 5.7L | SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD",
+   "2003 Dodge Ram 3500 | 10 Cyl 8.0L, 6 Cyl 5.9L Diesel, 8 Cyl 5.7L | SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD"
+  ],
+  "flags": []
+ },
+ "28100-20020-84": {
+  "site": "www.toyotapartsnow.com",
+  "category": "starter",
+  "seed": {
+   "make": "Toyota",
+   "model": "Camry",
+   "year": 2007
+  },
+  "segment": [
+   2007,
+   2009
+  ],
+  "list_url": "https://www.toyotapartsnow.com/parts-list/2007-toyota-camry/charging-starting/starter",
+  "pn": "28100-20020-84",
+  "name": "Starter",
+  "aux_desc": "Starter Assembly",
+  "product_url": "https://www.toyotapartsnow.com/oem/toyota~reman-starter~28100-20020-84",
+  "list_section": "diagram",
+  "list_notes": [
+   "Camry; Japan Built;Japan Build"
+  ],
+  "list_location": [],
+  "list_replaced_by": null,
+  "reman": false,
+  "description": "Starter",
+  "other_names": "Starter Assembly; Starter Motor",
+  "position": null,
+  "replaces": [
+   "28100-20020"
+  ],
+  "replaced_by": [],
+  "fitment": [
+   {
+    "years": [
+     2007,
+     2010
+    ],
+    "make": "Scion",
+    "model": "tC",
+    "trims": [
+     "Base",
+     "Spec"
+    ],
+    "engines": [
+     "4 Cyl 2.4 L GAS"
+    ],
+    "raw": "2007-2010 Scion tC | Base, Spec | 4 Cyl 2.4 L GAS"
+   },
+   {
+    "years": [
+     2008,
+     2010
+    ],
+    "make": "Scion",
+    "model": "xB",
+    "trims": [
+     "Base"
+    ],
+    "engines": [
+     "4 Cyl 2.4 L GAS"
+    ],
+    "raw": "2008-2010 Scion xB | Base | 4 Cyl 2.4 L GAS"
+   },
+   {
+    "years": [
+     2004,
+     2009
+    ],
+    "make": "Toyota",
+    "model": "Camry",
+    "trims": [
+     "Base",
+     "CE",
+     "LE",
+     "SE",
+     "XLE"
+    ],
+    "engines": [
+     "4 Cyl 2.4 L GAS",
+     "6 Cyl 3.3 L GAS",
+     "6 Cyl 3.5 L GAS"
+    ],
+    "raw": "2004-2009 Toyota Camry | Base, CE, LE, SE, XLE | 4 Cyl 2.4 L GAS, 6 Cyl 3.3 L GAS, 6 Cyl 3.5 L GAS"
+   },
+   {
+    "years": [
+     2004,
+     2009
+    ],
+    "make": "Toyota",
+    "model": "Highlander",
+    "trims": [
+     "Base",
+     "Limited",
+     "Sport"
+    ],
+    "engines": [
+     "4 Cyl 2.7 L GAS",
+     "6 Cyl 3.3 L GAS",
+     "6 Cyl 3.5 L GAS"
+    ],
+    "raw": "2004-2009 Toyota Highlander | Base, Limited, Sport | 4 Cyl 2.7 L GAS, 6 Cyl 3.3 L GAS, 6 Cyl 3.5 L GAS"
+   },
+   {
+    "years": [
+     2006,
+     2008
+    ],
+    "make": "Toyota",
+    "model": "RAV4",
+    "trims": [
+     "Base",
+     "Limited",
+     "Sport"
+    ],
+    "engines": [
+     "4 Cyl 2.4 L GAS",
+     "6 Cyl 3.5 L GAS"
+    ],
+    "raw": "2006-2008 Toyota RAV4 | Base, Limited, Sport | 4 Cyl 2.4 L GAS, 6 Cyl 3.5 L GAS"
+   }
+  ],
+  "evidence_lines": [
+   "Replaces",
+   "28100-20020",
+   "Vehicle Fitment",
+   "Year Make Model",
+   "Trim",
+   "Engine",
+   "2007-2010 Scion tC",
+   "Base, Spec",
+   "4 Cyl 2.4 L GAS",
+   "2008-2010 Scion xB",
+   "Base",
+   "4 Cyl 2.4 L GAS",
+   "2004-2009 Toyota Camry",
+   "Base, CE, LE, SE, XLE",
+   "4 Cyl 2.4 L GAS, 6 Cyl 3.3 L GAS, 6 Cyl 3.5 L GAS",
+   "2004-2009 Toyota Highlander",
+   "Base, Limited, Sport",
+   "4 Cyl 2.7 L GAS, 6 Cyl 3.3 L GAS, 6 Cyl 3.5 L GAS",
+   "2006-2008 Toyota RAV4",
+   "Base, Limited, Sport",
+   "4 Cyl 2.4 L GAS, 6 Cyl 3.5 L GAS"
+  ],
+  "fitment_rows_rendered": 5,
+  "fitment_rows_total": 5
+ }
+}

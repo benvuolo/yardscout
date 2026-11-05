@@ -51,6 +51,11 @@ ok(match("climate-control", "Controller Assy-Air Conditiner"), "site's spelling 
 ok(match("fuel-pump-module", "Fuel Pump-In Tank"), "in-tank pump")
 ok(not match("ignition-coils", "", "") and not match("alternator", "", "Value Advantage Replacement Part"), "value advantage")
 ok(match("trunk-lid", "Lid-Trunk", "W/ SPOILER,W/O CAM") and not match("trunk-lid", "Bar-Torsion, Trunk Lid LH"), "trunk")
+# audit 2026-11-05: 2003-07 Infiniti G35 cluster is "Meter Assy-Analog" (24820-AC700, pdName
+# "Instrument Cluster"); the compass gauge "Meter Assy-Temperature" is not the cluster
+ok(match("gauge-cluster", "Meter Assy-Analog") and match("gauge-cluster", "Combination Meter Assy-Instrument")
+   and not match("gauge-cluster", "Meter Assy-Temperature", "F/COMPASS")
+   and not match("gauge-cluster", "Housing-Combination Meter, Upper"), "G35 analog cluster")
 pure = n
 
 if not _pg_cacheonly.have([MODEL, SEDAN, COUPE, ALT, MIRRORS, SWITCH, REAR_REG, P_ALT, P_STARTER, P_MOTOR]):

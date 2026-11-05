@@ -33,6 +33,10 @@ def ok(cond, msg):
 
 ok(I.CFG.parts is N.PARTS and I.CFG.subcats is N.SUBCATS, "rules shared with Nissan")
 ok(I.MODELS[("Infiniti", "G37X")].inc == r"^sedan$", "G37X -> sedan catalogs")
+import re  # noqa: E402
+ok(re.search(N.PARTS["gauge-cluster"][0], "Meter Assy-Analog | Meter Assy-Analog |  | ")
+   and not re.search(N.PARTS["gauge-cluster"][0], "Meter Assy-Temperature | Meter Assy-Temperature |  | F/COMPASS"),
+   "2004 G35 coupe cluster 24820-AC700 'Meter Assy-Analog' (audit 2026-11-05)")
 pure = n
 
 if not _pg_cacheonly.have([G35, COUPE05, THR, P_THR, P_ALT]):
