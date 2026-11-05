@@ -34,3 +34,25 @@
 08:46:04 seg done tier=A Mazda Tribute [2005, 2006] seeds=[2005] records=409 errors=3
 08:50:20 seg done tier=A Mazda Mazda6 [2014, 2021] seeds=[2014] records=427 errors=3
 08:55:02 time budget reached records=440
+08:55:10 start site=www.mazdapartsnow.com segments=31 tiers=['A', 'B']
+08:55:10 seg done tier=A Mazda Mazda3 [2001, 2009] seeds=[2008] records=440 errors=3
+08:55:10 seg done tier=A Mazda Mazda3 [2010, 2011] seeds=[2010] records=440 errors=3
+08:55:10 seg done tier=A Mazda Mazda6 [2003, 2008] seeds=[2007] records=440 errors=3
+08:55:10 seg done tier=A Mazda CX-9 [2007, 2015] seeds=[2008] records=440 errors=3
+08:55:10 seg done tier=A Mazda Mazda3 [2012, 2013] seeds=[2012] records=440 errors=3
+08:55:10 seg done tier=A Mazda Mazda6 [2009, 2013] seeds=[2009] records=440 errors=3
+08:55:10 seg done tier=A Mazda CX-7 [2007, 2012] seeds=[2010] records=440 errors=3
+08:55:10 seg done tier=A Mazda Protege [1999, 2003] seeds=[2003] records=440 errors=3
+08:55:10 seg done tier=A Mazda Tribute [2001, 2004] seeds=[2003] records=440 errors=3
+08:55:10 seg done tier=A Mazda MPV [1989, 2006] seeds=[2004] records=440 errors=3
+08:55:10 seg done tier=A Mazda Mazda5 [2008, 2010] seeds=[2008] records=440 errors=3
+08:55:10 seg done tier=A Mazda Mazda5 [2012, 2015] seeds=[2012] records=440 errors=3
+08:55:10 seg done tier=A Mazda B-Series [1986, 2007] seeds=[1996] records=440 errors=3
+08:55:10 seg done tier=A Mazda Tribute [2005, 2006] seeds=[2005] records=440 errors=3
+08:55:10 seg done tier=A Mazda Mazda6 [2014, 2021] seeds=[2014] records=440 errors=3
+08:55:10 seg done tier=A Mazda 626 [1985, 2002] seeds=[2002] records=440 errors=3
+09:09:34 seg done tier=A Mazda MX-5 Miata [1990, 2019] seeds=[2006, 2000, 1999] records=516 errors=3
+09:19:02 seg done tier=A Mazda Mazda3 [2014, 2016] seeds=[2014] records=574 errors=3
+09:23:18 seg done tier=A Mazda Mazda2 [2011, 2014] seeds=[2011] records=593 errors=3
+09:28:06 seg done tier=A Mazda CX-5 [2013, 2016] seeds=[2014] records=617 errors=3
+09:28:06 time budget reached records=617
