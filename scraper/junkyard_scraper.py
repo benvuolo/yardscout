@@ -8406,6 +8406,17 @@ if _gen_problems:
 #     NA vs EcoBoost 3.5) — the decode string cannot tell them apart, so
 #     donors from this app are ALWAYS capped at "likely" and the ambig note
 #     ships verbatim. Accuracy > coverage.
+#   - Hybrids (CURATION_SPEC §7.2 P0.5, 2026-11-05): a hybrid that decodes
+#     with the family's displacement (2007-09 Camry Hybrid = "2.4L 4-cyl")
+#     passes the engine gate, yet most hybrids have no belt alternator or
+#     starter. Every app that `scraper/_audit_verified_fits.py` section (e)
+#     shows hybrid cars falling into is split at the hybrid's model years
+#     and flagged ambig, so those donors (and seekers) cap at "likely". Where
+#     the hybrid decodes to a DIFFERENT displacement (2013+ Avalon Hybrid
+#     2.5 under the 3.5 V6 family) the decode already excludes it, but a
+#     decode-less hybrid passed on "sole", so sole is dropped for those
+#     years instead. Only hybrids seen in the lot data were acted on; the
+#     known-but-unseen ones are listed in ops/interchange.md.
 #
 # Deliberate exclusions (accuracy forced them — see research notes):
 #   - ECM/BCM: calibration/part-number specific even within one model-year.
@@ -8827,7 +8838,11 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Toyota", "Solara", 2004, 2008),
             ("Toyota", "Camry Solara", 2004, 2008),  # feed spelling
             ("Toyota", "Sienna", 2004, 2006, {"sole": True}),
-            ("Toyota", "Highlander", 2004, 2007),
+            ("Toyota", "Highlander", 2004, 2005),
+            # 2006-07 Highlander Hybrid = 3MZ-FE 3.3 + THS: 53 lot cars on
+            # its VIN pattern (DW21A/EW21A) decode "3.3L 6-cyl" (audit (e)).
+            ("Toyota", "Highlander", 2006, 2007,
+             {"ambig": "2006–07 Highlander Hybrids also decode as 3.3L V6 and have no belt alternator or starter — check for HYBRID badges"}),
             ("Lexus", "ES 330", 2004, 2006, {"sole": True}),
             ("Lexus", "RX 330", 2004, 2006, {"sole": True}),
         ],
@@ -8841,9 +8856,17 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [3.5], "cyl": 6},
         "apps": [
             ("Toyota", "Camry", 2007, 2017),
-            ("Toyota", "Avalon", 2005, 2018, {"sole": True}),
+            ("Toyota", "Avalon", 2005, 2012, {"sole": True}),
+            # 2013+ Avalon Hybrid is a 2.5 (decode excludes it), so these
+            # years are not sole: a decode-less hybrid must not pass.
+            ("Toyota", "Avalon", 2013, 2018),
             ("Toyota", "Sienna", 2007, 2016),
-            ("Toyota", "Highlander", 2008, 2016),
+            ("Toyota", "Highlander", 2008, 2010),
+            # 2011+ Highlander Hybrid = 2GR-FXE 3.5: VIN pattern BC3EH/DC3EH
+            # decodes "3.5L 6-cyl", and vPIC's own trim for every 2011-16
+            # Highlander decode reads "Base/Hybrid" (it cannot tell them apart).
+            ("Toyota", "Highlander", 2011, 2016,
+             {"ambig": "2011–16 Highlander Hybrids also decode as 3.5L V6 and have no belt alternator or starter — check for HYBRID badges"}),
             ("Toyota", "RAV4", 2006, 2012),
             ("Toyota", "Venza", 2009, 2015),
             ("Lexus", "ES 350", 2007, 2018, {"sole": True}),
@@ -8858,7 +8881,11 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "Toyota/Scion 2AZ-FE 2.4 I4",
         "engine": {"liters": [2.4], "cyl": 4},
         "apps": [
-            ("Toyota", "Camry", 2002, 2009),
+            ("Toyota", "Camry", 2002, 2006),
+            # 2007-09 Camry Hybrid = 2AZ-FXE: 168 lot cars filed as "Camry"
+            # decode "2.4L 4-cyl" with VIN-pattern trim Hybrid (audit (e)).
+            ("Toyota", "Camry", 2007, 2009,
+             {"ambig": "2007–09 Camry Hybrids also decode as 2.4L 4-cyl and have no belt alternator or starter — check for HYBRID badges"}),
             ("Toyota", "Solara", 2004, 2008),
             ("Toyota", "Camry Solara", 2004, 2008),  # feed spelling
             ("Toyota", "RAV4", 2004, 2008),
@@ -8896,9 +8923,16 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "Toyota/Scion 2AR-FE 2.5 I4",
         "engine": {"liters": [2.5], "cyl": 4},
         "apps": [
-            ("Toyota", "Camry", 2010, 2017),
+            # 2010-11 Camry Hybrid is a 2.4 (decode excludes it); 2012+ is the
+            # 2AR-FXE 2.5: 48 lot cars filed as "Camry" decode "2.5L 4-cyl".
+            ("Toyota", "Camry", 2010, 2011),
+            ("Toyota", "Camry", 2012, 2017,
+             {"ambig": "2012–17 Camry Hybrids also decode as 2.5L 4-cyl and have no belt alternator or starter — check for HYBRID badges"}),
             ("Toyota", "RAV4", 2009, 2012),
-            ("Toyota", "RAV4", 2013, 2018, {"sole": True}),
+            # RAV4 EV (2012-14) decodes "Electric", which the app reads as
+            # no engine data, so these years cannot be sole.
+            ("Toyota", "RAV4", 2013, 2014),
+            ("Toyota", "RAV4", 2015, 2018, {"sole": True}),
             ("Scion", "tC", 2011, 2016, {"sole": True}),
             ("Toyota", "Scion tC", 2011, 2016, {"sole": True}),  # feed alias
         ],
@@ -9080,7 +9114,11 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [3.0], "cyl": 6},
         "apps": [
             ("Honda", "Accord", 1998, 2002),
-            ("Honda", "Accord", 2003, 2007),
+            ("Honda", "Accord", 2003, 2004),
+            # 2005-07 Accord Hybrid (J30A3 + IMA): 38 lot cars filed as
+            # "Accord" decode "3.0L 6-cyl" with vPIC trim Hybrid (audit (e)).
+            ("Honda", "Accord", 2005, 2007,
+             {"ambig": "2005–07 Accord Hybrids also decode as 3.0L V6 but charge and start through Honda's IMA hybrid system — check for HYBRID badges"}),
             ("Acura", "CL", 1997, 1999),
         ],
         "parts": {
@@ -9161,7 +9199,14 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "Nissan QR25DE 2.5 I4",
         "engine": {"liters": [2.5], "cyl": 4},
         "apps": [
-            ("Nissan", "Altima", 2002, 2018),
+            ("Nissan", "Altima", 2002, 2006),
+            # 2007-11 Altima Hybrid (QR25 + Toyota-licensed hybrid drive):
+            # vPIC returns no trim, but 50 lot cars filed as "Altima" carry
+            # the yard-named Altima Hybrids' VIN pattern (CL21E/CL2AP) and
+            # decode "2.5L" (audit (e), vin signal).
+            ("Nissan", "Altima", 2007, 2011,
+             {"ambig": "2007–11 Altima Hybrids also decode as 2.5L and have no belt alternator or starter — check for HYBRID badges"}),
+            ("Nissan", "Altima", 2012, 2018),
             ("Nissan", "Sentra", 2002, 2006),
             ("Nissan", "Rogue", 2008, 2020, {"sole": True}),
             ("Nissan", "Rogue Select", 2014, 2015, {"sole": True}),
@@ -9371,17 +9416,30 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "apps": [
             # Fusion 2.5 carried into the 2013-14 refresh — the 210-0615
             # list spans the 2.5 AND the 2.0T those years (shared unit).
-            ("Ford", "Fusion", 2006, 2014),
-            ("Ford", "Escape", 2005, 2012),
+            # Ford hybrids (2.3/2.5 Atkinson, 2013+ 2.0 hybrid/Energi) decode
+            # to this family's displacements; lot cars filed under the base
+            # names (audit (e)): Fusion 135 (2010-14), Escape 90 (2005-12),
+            # Mariner 11 (2006-09), Milan 6 (2010), Tribute 2 (2008-09).
+            ("Ford", "Fusion", 2006, 2009),
+            ("Ford", "Fusion", 2010, 2014,
+             {"ambig": "Fusion Hybrids (2010–14) and Energis (2013–14) also decode as 2.5L/2.0L 4-cyl and have no belt alternator or starter — check for HYBRID/ENERGI badges"}),
+            ("Ford", "Escape", 2005, 2012,
+             {"ambig": "Escape Hybrids (2005–12) also decode as 2.3L/2.5L 4-cyl and have no belt alternator or starter — check for HYBRID badges"}),
             ("Ford", "Focus", 2005, 2011),
             # Bare "3"/"6" match every feed spelling ("3", "Mazda3",
             # "Mazda 3") via the make-stripped squash; "Mazda3" did not.
             ("Mazda", "3", 2004, 2013),
             ("Mazda", "5", 2006, 2010),
             ("Mazda", "6", 2003, 2013),
-            ("Mercury", "Milan", 2006, 2011),
-            ("Mercury", "Mariner", 2005, 2011),
-            ("Mazda", "Tribute", 2005, 2011),
+            ("Mercury", "Milan", 2006, 2009),
+            ("Mercury", "Milan", 2010, 2011,
+             {"ambig": "2010–11 Milan Hybrids also decode as 2.5L 4-cyl and have no belt alternator or starter — check for HYBRID badges"}),
+            ("Mercury", "Mariner", 2005, 2005),
+            ("Mercury", "Mariner", 2006, 2011,
+             {"ambig": "Mariner Hybrids also decode as 2.3L/2.5L 4-cyl and have no belt alternator or starter — check for HYBRID badges"}),
+            ("Mazda", "Tribute", 2005, 2007),
+            ("Mazda", "Tribute", 2008, 2011,
+             {"ambig": "Tribute Hybrids also decode as 2.3L/2.5L 4-cyl and have no belt alternator or starter — check for HYBRID badges"}),
             ("Ford", "Ranger", 2001, 2011),
         ],
         "parts": {
@@ -9396,8 +9454,12 @@ ENGINE_FAMILIES: dict[str, dict] = {
             # CD4 Fusion: the 2.0 EcoBoost and 2.5 Duratec share one
             # published alternator (210-1102) and starter (280-4241). The
             # 1.5/1.6 EcoBoost cars are ford-fusion-15eb; hybrids/Energi
-            # have no conventional alternator and are out.
-            ("Ford", "Fusion", 2013, 2020),
+            # have no conventional alternator, but they decode "2.0L 4-cyl"
+            # (Energi: "2.0L 4-cyl Electric") and so pass the 2.0 gate: 140
+            # lot cars filed as "Fusion", every year 2013-20 (audit (e)).
+            # The whole app is ambig until the app can tell them apart.
+            ("Ford", "Fusion", 2013, 2020,
+             {"ambig": "Fusion Hybrids and Energis (2013–20) also decode as 2.0L 4-cyl and have no belt alternator or starter — check for HYBRID/ENERGI badges"}),
         ],
         "parts": {
             "alternator": {"note": "2.0T and 2.5 share one published unit; 2014 splits by engine VIN and 17-20 rows are trim-feature-qualified — those pairs stay Likely"},
@@ -9415,7 +9477,10 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "apps": [
             ("Ford", "Edge", 2007, 2015),
             ("Mercury", "Sable", 2008, 2009, {"sole": True}),
-            ("Lincoln", "MKZ", 2007, 2012, {"sole": True}),
+            ("Lincoln", "MKZ", 2007, 2010, {"sole": True}),
+            # 2011-12 MKZ Hybrid is a 2.5 (decode excludes it: 20 lot cars),
+            # so these years are not sole: a decode-less hybrid must not pass.
+            ("Lincoln", "MKZ", 2011, 2012),
             ("Lincoln", "MKS", 2009, 2016,
              {"ambig": "MKS EcoBoost is the 3.5 twin-turbo — same decode string; confirm non-turbo"}),
             ("Lincoln", "MKX", 2007, 2015, {"sole": True}),
@@ -9556,15 +9621,22 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "engine": {"liters": [2.4], "cyl": 4},
         "apps": [
             ("Chevrolet", "Cobalt", 2006, 2010),
-            ("Chevrolet", "Malibu", 2008, 2012),
+            # GM BAS mild hybrids (Malibu Hybrid, Vue/Aura Green Line) are
+            # 2.4s: lot cars filed under the base names decode "2.4L 4-cyl"
+            # (audit (e)): Malibu 11 (2008-10), VUE 13 (2008-09), Aura 3.
+            ("Chevrolet", "Malibu", 2008, 2010,
+             {"ambig": "2008–10 Malibu Hybrids also decode as 2.4L 4-cyl and use a belt motor-generator (BAS) for charging and auto-restart — check for HYBRID badges"}),
+            ("Chevrolet", "Malibu", 2011, 2012),
             ("Chevrolet", "Equinox", 2010, 2017),
             ("Chevrolet", "HHR", 2008, 2011),
             ("GMC", "Terrain", 2010, 2017),
             ("Pontiac", "G6", 2006, 2009),
             ("Chevrolet", "Captiva Sport", 2012, 2015),
-            ("Saturn", "VUE", 2008, 2010),
+            ("Saturn", "VUE", 2008, 2010,
+             {"ambig": "Vue Green Line hybrids also decode as 2.4L 4-cyl and use a belt motor-generator (BAS) for charging and auto-restart — check for GREEN LINE/HYBRID badges"}),
             ("Buick", "Verano", 2012, 2017),
-            ("Saturn", "Aura", 2007, 2009),
+            ("Saturn", "Aura", 2007, 2009,
+             {"ambig": "Aura Green Line hybrids also decode as 2.4L 4-cyl and use a belt motor-generator (BAS) for charging and auto-restart — check for GREEN LINE/HYBRID badges"}),
             ("Buick", "Regal", 2011, 2013),
         ],
         "parts": {
@@ -9608,13 +9680,30 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "GM Gen IV Vortec truck V8 (4.8/5.3/6.0/6.2)",
         "engine": {"liters": [4.8, 5.3, 6.0, 6.2], "cyl": 8},
         "apps": [
-            ("Chevrolet", "Silverado*", 2007, 2013),
-            ("GMC", "Sierra*", 2007, 2013),
-            ("Chevrolet", "Tahoe", 2007, 2014),
-            ("GMC", "Yukon*", 2007, 2014),
+            # 2-mode hybrids (6.0 V8) decode "6.0L 8-cyl" and the prefix
+            # apps also catch yard names like "Sierra Hybrid": 25 lot cars
+            # (audit (e)). The ambig is per app, so it caps every engine of
+            # those years, not only the 6.0 — the price of the app-level flag.
+            ("Chevrolet", "Silverado*", 2007, 2008),
+            ("Chevrolet", "Silverado*", 2009, 2013,
+             {"ambig": "2009–13 Silverado Hybrids (2-mode) also decode as 6.0L V8 and have no belt alternator or starter — check for HYBRID badges"}),
+            ("GMC", "Sierra*", 2007, 2008),
+            ("GMC", "Sierra*", 2009, 2013,
+             {"ambig": "2009–13 Sierra Hybrids (2-mode) also decode as 6.0L V8 and have no belt alternator or starter — check for HYBRID badges"}),
+            ("Chevrolet", "Tahoe", 2007, 2007),
+            ("Chevrolet", "Tahoe", 2008, 2013,
+             {"ambig": "2008–13 Tahoe Hybrids (2-mode) also decode as 6.0L V8 and have no belt alternator or starter — check for HYBRID badges"}),
+            ("Chevrolet", "Tahoe", 2014, 2014),
+            ("GMC", "Yukon*", 2007, 2007),
+            ("GMC", "Yukon*", 2008, 2013,
+             {"ambig": "2008–13 Yukon Hybrids (2-mode) also decode as 6.0L V8 and have no belt alternator or starter — check for HYBRID badges"}),
+            ("GMC", "Yukon*", 2014, 2014),
             ("Chevrolet", "Suburban*", 2007, 2014),
             ("Chevrolet", "Avalanche", 2007, 2013),
-            ("Cadillac", "Escalade*", 2007, 2014),
+            ("Cadillac", "Escalade*", 2007, 2008),
+            ("Cadillac", "Escalade*", 2009, 2013,
+             {"ambig": "2009–13 Escalade Hybrids (2-mode) also decode as 6.0L V8 and have no belt alternator or starter — check for HYBRID badges"}),
+            ("Cadillac", "Escalade*", 2014, 2014),
         ],
         "parts": {
             "alternator": {"note": "GMT900-era unit — match amps & 2-pin plug; the 07 'Classic' body keeps Gen III parts"},
@@ -9887,7 +9976,11 @@ ENGINE_FAMILIES: dict[str, dict] = {
             ("Jeep", "Grand Cherokee", 2005, 2021),
             ("Dodge", "Durango", 2011, 2023),
             ("Jeep", "Commander", 2006, 2009),
-            ("Chrysler", "Aspen", 2007, 2009),
+            ("Chrysler", "Aspen", 2007, 2008),
+            # 2009 Aspen HEV (2-mode, 5.7): vPIC trim "Limited HEV" decodes
+            # "5.7L 8-cyl" (audit (e), 1 lot car).
+            ("Chrysler", "Aspen", 2009, 2009,
+             {"ambig": "2009 Aspen Hybrids (2-mode) also decode as 5.7L V8 and have no belt alternator or starter — check for HYBRID badges"}),
         ],
         "parts": {
             "alternator": {"note": "03–08 vs 09+ Eagle HEMI accessories differ — stay in your window & match part number"},
@@ -9949,8 +10042,17 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "Hyundai/Kia Theta II 2.4 GDI I4",
         "engine": {"liters": [2.4], "cyl": 4},
         "apps": [
-            ("Hyundai", "Sonata", 2011, 2019),
-            ("Kia", "Optima", 2011, 2020),
+            # Sonata/Optima Hybrids (2.4 Theta II MPI + hybrid starter-
+            # generator) decode "2.4L": 101 Sonata (2011-15, VIN EC4A4) and
+            # 122 Optima (2011-17, GM4AD/GN4AD; vPIC decodes some 2017
+            # "Hybrid Base" as 2.4L) lot cars under the base names (audit
+            # (e)). 2016+ Sonata / 2018+ Optima hybrids decode 2.0L (excluded).
+            ("Hyundai", "Sonata", 2011, 2015,
+             {"ambig": "2011–15 Sonata Hybrids also decode as 2.4L and have a hybrid starter-generator in place of the usual alternator — check for HYBRID badges"}),
+            ("Hyundai", "Sonata", 2016, 2019),
+            ("Kia", "Optima", 2011, 2017,
+             {"ambig": "Optima Hybrids (2011–17) can decode as 2.4L too and have a hybrid starter-generator in place of the usual alternator — check for HYBRID badges"}),
+            ("Kia", "Optima", 2018, 2020),
             ("Hyundai", "Santa Fe Sport", 2013, 2018),
             ("Kia", "Sorento", 2011, 2020),
             ("Kia", "Sportage", 2011, 2016),
@@ -10685,7 +10787,7 @@ ENGINE_FAMILIES: dict[str, dict] = {
         ],
         "parts": {
             "alternator": {"note": "2013 Malibu ships one published alternator across 2.0T, 2.4 eAssist and 2.5; 14-15 rows are beyond this catalog edition"},
-            "starter": {"note": "2013 2.0T/2.5 share one published starter"},
+            "starter": {"note": "2013 2.0T/2.5 share one published starter; the 2.4 Eco (eAssist) unit isn't published, so pairs stay Likely — match part number"},
         },
     },
     "gm-malibu-20t": {
@@ -10960,8 +11062,12 @@ ENGINE_FAMILIES: dict[str, dict] = {
         "display": "Hyundai/Kia Theta-II 2.0T/2.4 GDI (Sonata/Optima)",
         "engine": {"liters": [2.0, 2.4], "cyl": 4},
         "apps": [
-            ("Hyundai", "Sonata", 2011, 2014, {"sole": True}),
-            ("Kia", "Optima", 2011, 2015, {"sole": True}),
+            # Not sole: the 2.4 Sonata/Optima Hybrids share these years and
+            # decode "2.4L" (75 Sonata + 107 Optima lot cars, audit (e)).
+            ("Hyundai", "Sonata", 2011, 2014,
+             {"ambig": "2011–14 Sonata Hybrids also decode as 2.4L and have a hybrid starter-generator in place of the usual alternator — check for HYBRID badges"}),
+            ("Kia", "Optima", 2011, 2015,
+             {"ambig": "2011–15 Optima Hybrids also decode as 2.4L and have a hybrid starter-generator in place of the usual alternator — check for HYBRID badges"}),
         ],
         "parts": {
             "alternator": {"note": "one published unit covers Sonata 2014 (both engines) + 2.0T 11-13 and Optima 12-13; Sonata 2.4 11-13 rows aren't published — those pairs stay Likely"},
@@ -12979,10 +13085,14 @@ _STR_VERIFIED: dict = {
             [("Honda", "Fit", 2007, 2008)],
         ],
     },
-    "gm-ecotec-lcv": {
-        "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0434 Malibu 2013 2.0 turbo and 2.5, one published unit, unqualified.",
-        "groups": [[("Chevrolet", "Malibu", 2013, 2013)]],
-    },
+    # gm-ecotec-lcv starter group WITHDRAWN 2026-11-05 (CURATION_SPEC §7.2
+    # P0.5 audit): Denso 280-0434 (retrieved 2026-10-22) lists the 2013
+    # Malibu 2.0 turbo and 2.5 only, but the group span is engine-agnostic
+    # and the family's 2.4 gate admits the 2013 Malibu Eco (2.4 eAssist
+    # mild hybrid; 86 lot cars decode "1LT/2LT ECO", "2.4L 4-cyl"). The app
+    # cannot split a group by engine, and a seeker's engine is never known,
+    # so no 2013 Malibu starter pair can be Verified on this evidence. The
+    # alternator group stays: 210-0255 publishes the 2.4 eAssist too.
     "gm-atlas-i45": {
         "evidence": "Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5394 Colorado 2.9 and 3.7 2008-2012; Canyon 3.7 2008-2012 and 2.9 2009-2012 (the Canyon span starts at 2009 because the 2008 2.9 row is not published).",
         "groups": [

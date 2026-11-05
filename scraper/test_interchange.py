@@ -844,6 +844,197 @@ check("mzr starter: Mazda/Escape/Focus units differ — likely",
 check("mzr starter: 2011+ Fusion not on the published list — likely",
       _tiermzr((2012, "Ford", "Fusion"), (2008, "Ford", "Fusion")) == "likely")
 
+# =========================================================================
+# CURATION_SPEC §7.2 P0.5 (2026-11-05): hybrids that decode to the family's
+# displacement cap at Likely. Fixtures are the apps that
+# _audit_verified_fits.py section (e) found hybrid lot cars falling into.
+# client_tier mirrors docs/app.js pfRunSearch's engine branch over the
+# shipped payload (first matching app, pfEngineVerdict, sole/ambig, vg).
+# =========================================================================
+_pl = {f["id"]: f for f in js.build_interchange_payload()["engineFamilies"]}
+
+
+def _first_app(fam, y, mk, md):
+    return next((a for a in fam["apps"] if js._app_matches(a, y, mk, md)), None)
+
+
+def client_tier(fid, cat, seeker, donor, donor_engine):
+    """'verified' / 'likely' as the app would show the donor row, or None
+    when the app leaves the donor out (not a family app, or decode denies)."""
+    fam = _pl[fid]
+    part = fam["parts"][cat]
+    s_app = _first_app(fam, *seeker)
+    d_app = _first_app(fam, *donor)
+    if s_app is None or d_app is None:
+        return None
+    s_ambig = s_app[5]
+    lit, cyl = js._parse_engine_str(donor_engine)
+    if donor_engine and "diesel" in donor_engine.lower():
+        verdict = False
+    elif lit is None:
+        verdict = None
+    elif not any(abs(lit - w) < 0.05 for w in fam["liters"]):
+        verdict = False
+    elif cyl is not None and fam["cyl"] is not None and cyl != fam["cyl"]:
+        verdict = False
+    else:
+        verdict = True
+    if verdict is False:
+        return None
+    engine_ok = verdict is True or (verdict is None and bool(d_app[4]) and not d_app[5])
+    tier = "likely"
+    if engine_ok and not d_app[5] and not s_ambig and part.get("vg"):
+        for g in part["vg"]:
+            if (any(js._app_matches(sp, *seeker) for sp in g)
+                    and any(js._app_matches(sp, *donor) for sp in g)):
+                tier = "verified"
+                break
+    if cat == "engine-assembly":
+        tier = "verified" if (verdict is True and not d_app[5] and not s_ambig) else "likely"
+    return tier
+
+
+# (family, make, model, hybrid year, gas year outside the hybrid span)
+_HYB_AMBIG = [
+    ("toyota-2az", "Toyota", "Camry", 2008, 2005),
+    ("toyota-2ar", "Toyota", "Camry", 2013, 2011),
+    ("toyota-2gr", "Toyota", "Highlander", 2012, 2009),
+    ("toyota-3mz", "Toyota", "Highlander", 2006, 2005),
+    ("honda-j30", "Honda", "Accord", 2006, 2004),
+    ("ford-mzr", "Ford", "Fusion", 2010, 2008),
+    ("ford-mzr", "Ford", "Escape", 2009, None),
+    ("ford-mzr", "Mercury", "Milan", 2010, 2008),
+    ("ford-mzr", "Mercury", "Mariner", 2008, 2005),
+    ("ford-mzr", "Mazda", "Tribute", 2009, 2006),
+    ("ford-fusion-cd4", "Ford", "Fusion", 2016, None),
+    ("gm-ecotec24", "Chevrolet", "Malibu", 2009, 2011),
+    ("gm-ecotec24", "Saturn", "VUE", 2009, None),
+    ("gm-ecotec24", "Saturn", "Aura", 2008, None),
+    ("hk-theta-gdi", "Hyundai", "Sonata", 2012, 2017),
+    ("hk-theta-gdi", "Kia", "Optima", 2013, 2019),
+    ("hk-theta2gdi", "Hyundai", "Sonata", 2012, None),
+    ("hk-theta2gdi", "Kia", "Optima", 2013, None),
+    ("gm-gen4-truck", "Chevrolet", "Silverado 1500", 2010, 2008),
+    ("gm-gen4-truck", "GMC", "Sierra Hybrid", 2009, None),  # prefix app catches the yard name
+    ("gm-gen4-truck", "Chevrolet", "Tahoe", 2009, 2014),
+    ("gm-gen4-truck", "GMC", "Yukon", 2010, 2007),
+    ("gm-gen4-truck", "Cadillac", "Escalade", 2011, 2008),
+    ("mopar-hemi57", "Chrysler", "Aspen", 2009, 2008),
+    ("nissan-qr25", "Nissan", "Altima", 2008, 2005),
+]
+_no_ambig, _gas_ambig, _bad_note = [], [], []
+for fid, mk, md, hy, gy in _HYB_AMBIG:
+    a = _first_app(EF[fid], hy, mk, md)
+    note = js._app_flags(a).get("ambig", "") if a else ""
+    if not note:
+        _no_ambig.append(f"{fid} {hy} {md}")
+    elif "Hybrid" not in note and "hybrid" not in note or "check for" not in note:
+        _bad_note.append(f"{fid} {hy} {md}: {note}")
+    if gy is not None:
+        g = _first_app(EF[fid], gy, mk, md)
+        if g is None or js._app_flags(g).get("ambig"):
+            _gas_ambig.append(f"{fid} {gy} {md}")
+check("P0.5: every audited hybrid app-year is ambig-flagged", not _no_ambig, str(_no_ambig))
+check("P0.5: hybrid ambig notes name the hybrid and say what to check",
+      not _bad_note, str(_bad_note[:3]))
+check("P0.5: split keeps gas-only years outside the hybrid span un-flagged",
+      not _gas_ambig, str(_gas_ambig))
+check("P0.5: the spec's Camry note ships in the payload",
+      any(a[1] == "Camry" and a[2] == 2007 and a[3] == 2009
+          and "Camry Hybrids also decode as 2.4L" in a[5]
+          and "no belt alternator or starter" in a[5]
+          for a in _pl["toyota-2az"]["apps"]))
+_app_union_ok = []
+for fid, mk, md, lo, hi in [("toyota-2az", "Toyota", "Camry", 2002, 2009),
+                            ("toyota-2ar", "Toyota", "Camry", 2010, 2017),
+                            ("toyota-2gr", "Toyota", "Highlander", 2008, 2016),
+                            ("gm-gen4-truck", "Chevrolet", "Silverado 1500", 2007, 2013),
+                            ("nissan-qr25", "Nissan", "Altima", 2002, 2018),
+                            ("hk-theta-gdi", "Kia", "Optima", 2011, 2020)]:
+    if not all(_first_app(EF[fid], y, mk, md) for y in range(lo, hi + 1)):
+        _app_union_ok.append(f"{fid} {md}")
+check("P0.5: splits keep every model-year a family app (no coverage hole)",
+      not _app_union_ok, str(_app_union_ok))
+
+# The over-claim itself, end to end through the client's tiering.
+check("P0.5: 2008 Camry Hybrid (2.4L decode) donor -> 2009 Corolla is Likely, not Verified",
+      client_tier("toyota-2az", "alternator", (2009, "Toyota", "Corolla"),
+                  (2008, "Toyota", "Camry"), "2.4L 4-cyl") == "likely")
+check("P0.5: 2009 Matrix <-> 2010 Corolla 2AZ alternator stays Verified",
+      client_tier("toyota-2az", "alternator", (2009, "Toyota", "Matrix"),
+                  (2010, "Toyota", "Corolla"), "2.4L 4-cyl") == "verified")
+check("P0.5: 2005 Camry <-> 2006 Highlander 2AZ alternator stays Verified",
+      client_tier("toyota-2az", "alternator", (2005, "Toyota", "Camry"),
+                  (2006, "Toyota", "Highlander"), "2.4L 4-cyl") == "verified")
+check("P0.5: 2013 Camry Hybrid (2.5L) donor -> 2014 Scion tC is Likely",
+      client_tier("toyota-2ar", "alternator", (2014, "Scion", "tC"),
+                  (2013, "Toyota", "Camry"), "2.5L 4-cyl") == "likely")
+check("P0.5: a 2013 Camry seeker gets no Verified 2AR donor (seeker ambig)",
+      client_tier("toyota-2ar", "alternator", (2013, "Toyota", "Camry"),
+                  (2014, "Scion", "tC"), "2.5L 4-cyl") == "likely")
+check("P0.5: 2012 Highlander (3.5L, maybe hybrid) -> 2010 Camry V6 is Likely",
+      client_tier("toyota-2gr", "alternator", (2010, "Toyota", "Camry"),
+                  (2012, "Toyota", "Highlander"), "3.5L 6-cyl") == "likely")
+check("P0.5: 2010 Highlander <-> 2010 Camry V6 2GR alternator stays Verified",
+      client_tier("toyota-2gr", "alternator", (2010, "Toyota", "Camry"),
+                  (2010, "Toyota", "Highlander"), "3.5L 6-cyl") == "verified")
+check("P0.5: 2010 Fusion Hybrid -> 2008 Milan starter is Likely",
+      client_tier("ford-mzr", "starter", (2008, "Mercury", "Milan"),
+                  (2010, "Ford", "Fusion"), "2.5L 4-cyl") == "likely")
+check("P0.5: 2007 Fusion <-> 2008 Milan MZR starter stays Verified",
+      client_tier("ford-mzr", "starter", (2008, "Mercury", "Milan"),
+                  (2007, "Ford", "Fusion"), "2.3L 4-cyl") == "verified")
+check("P0.5: 2010 Silverado (6.0L, maybe 2-mode) alternator is Likely",
+      client_tier("gm-gen4-truck", "alternator", (2008, "Chevrolet", "Silverado 1500"),
+                  (2010, "Chevrolet", "Silverado 1500"), "6.0L 8-cyl") == "likely")
+check("P0.5: 2007 <-> 2008 Silverado gen4 alternator stays Verified",
+      client_tier("gm-gen4-truck", "alternator", (2008, "Chevrolet", "Silverado 1500"),
+                  (2007, "GMC", "Sierra 1500"), "5.3L 8-cyl") == "verified")
+check("P0.5: 2008 Camry Hybrid engine-assembly is Likely (2AZ-FXE != 2AZ-FE)",
+      client_tier("toyota-2az", "engine-assembly", (2005, "Toyota", "Camry"),
+                  (2008, "Toyota", "Camry"), "2.4L 4-cyl") == "likely")
+check("P0.5: 2012 Sonata Hybrid (2.4L) -> 2012 Optima alternator is Likely",
+      client_tier("hk-theta-gdi", "alternator", (2012, "Kia", "Optima"),
+                  (2012, "Hyundai", "Sonata"), "2.4L") == "likely")
+
+# sole means "every US example carried a family engine": wrong where a
+# hybrid/EV of another displacement shares the years, because a decode-less
+# one would then pass. Decoded ones are excluded by displacement.
+for fid, mk, md, y, want_sole in [
+        ("toyota-2gr", "Toyota", "Avalon", 2014, False),
+        ("toyota-2gr", "Toyota", "Avalon", 2010, True),
+        ("toyota-2ar", "Toyota", "RAV4", 2013, False),
+        ("toyota-2ar", "Toyota", "RAV4", 2016, True),
+        ("ford-cyclone", "Lincoln", "MKZ", 2011, False),
+        ("ford-cyclone", "Lincoln", "MKZ", 2009, True)]:
+    a = _first_app(EF[fid], y, mk, md)
+    check(f"P0.5: {fid} {y} {md} sole={want_sole}",
+          a is not None and bool(js._app_flags(a).get("sole")) == want_sole, str(a))
+check("P0.5: decode-less 2014 Avalon donor (maybe the 2.5 hybrid) is Likely",
+      client_tier("toyota-2gr", "alternator", (2010, "Toyota", "Avalon"),
+                  (2014, "Toyota", "Avalon"), "") == "likely")
+check("P0.5: decoded 2014 Avalon Hybrid (2.5L) is left out of the 2GR family",
+      client_tier("toyota-2gr", "alternator", (2010, "Toyota", "Avalon"),
+                  (2014, "Toyota", "Avalon"), "2.5L 4-cyl") is None)
+check("P0.5: decode-less 2010 Avalon still rides sole to Verified",
+      client_tier("toyota-2gr", "alternator", (2008, "Toyota", "Avalon"),
+                  (2010, "Toyota", "Avalon"), "") == "verified")
+check("P0.5: decode-less 2012 MKZ (maybe the 2.5 hybrid) starter is Likely",
+      client_tier("ford-cyclone", "starter", (2011, "Lincoln", "MKZ"),
+                  (2012, "Lincoln", "MKZ"), "") == "likely")
+
+# gm-ecotec-lcv: 280-0434 lists the 2013 Malibu 2.0T and 2.5 only, while
+# the span admits the 2.4 eAssist Eco; the alternator list includes the 2.4.
+check("P0.5: gm-ecotec-lcv starter group withdrawn (2.4 Eco unpublished)",
+      "verified" not in EF["gm-ecotec-lcv"]["parts"]["starter"]
+      and not _pl["gm-ecotec-lcv"]["parts"]["starter"].get("vg"))
+check("P0.5: gm-ecotec-lcv alternator group kept (210-0255 lists the 2.4)",
+      bool(_pl["gm-ecotec-lcv"]["parts"]["alternator"].get("vg"))
+      and client_tier("gm-ecotec-lcv", "alternator", (2013, "Chevrolet", "Malibu"),
+                      (2013, "Chevrolet", "Malibu"), "2.4L 4-cyl") == "verified")
+check("P0.5: no ambig app is also sole (payload)",
+      not [a for f in _pl.values() for a in f["apps"] if a[4] and a[5]])
+
 print()
 if FAILS:
     print(f"{len(FAILS)} FAILURE(S):", *FAILS, sep="\n  - ")
