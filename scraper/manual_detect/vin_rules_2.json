@@ -7,7 +7,7 @@
   "Nissan",
   "Infiniti"
  ],
- "generated_utc": "2026-11-05T02:46Z",
+ "generated_utc": "2026-11-05T14:35Z",
  "generator": "scraper/manual_detect/vin_rules_2.py",
  "inputs": {
   "inventory_live": "docs/data/inventory_live.json",
@@ -22,7 +22,7 @@
   "toyota": "The VIN does NOT encode the transmission in any model year read (MY1991, 2000, 2003, 2004, 2005 filings; same layout for Toyota-built Lexus and Scion). Positions 4-8 carry engine, line, model/series, grade or restraint, body/cab and drive. Manual-only cells reachable by the engine character or pre-2000 grade digit: MR2 Turbo (JT2SW22, MY1991-95), Corolla XRS (2T1BY..E, MY2005-06), Matrix XRS (2T1KY..E, MY2004-06). Candidates only: Celica All-Trac Turbo (JT2ST88, MY1990-93), Tacoma 2.7 4x4 (P/U + X, MY2005-10), T100 2.7 4x2 (MY1994).",
   "lexus": "The VIN does NOT encode the transmission (Lexus shares Toyota's filings: MY1991 LS400/ES250, MY2004 RX330, MY2005 RX330). No Lexus engine was sold manual-only, so no rule.",
   "scion": "The VIN does NOT encode the transmission for Toyota-built Scions (xA, xB, tC, xD, iQ, iM; MY2004 filing). Scion FR-S (WMI JF1) is Subaru-built and IS ruled by Subaru's character 11 in vin_rules_1; Scion iA (WMI 3MY) is Mazda-built (no transmission character). No manual-only Scion engine, so no rule here.",
-  "nissan": "The VIN does NOT encode the transmission in any model year read (MY1985, 1990, 1998, 2001, 2002, 2013, 2025). Position 4 is the engine and position 8 the restraint system (cars) or GVWR/brake/drive (trucks: S/T/X 2WD, Y 4WD). Manual-only cells reachable by engine + drive: Xterra 2.4L (5N1DD28, MY2000-04), Frontier 2.4L 4WD (1N6DD..Y, MY1998-2000). Candidate only: 720/D21 pickup 2.4L 4WD (MY1984-97).",
+  "nissan": "The VIN does NOT encode the transmission in any model year read (MY1985, 1990, 1998, 2001, 2002, 2013, 2025). Position 4 is the engine and position 8 the restraint system (cars) or GVWR/brake/drive (trucks: S/T/X 2WD, Y 4WD). Manual-only cells reachable by engine + drive: Xterra 2.4L (5N1DD28, MY2000-04), Frontier 2.4L 4WD (1N6DD..Y, MY1998 only; MY1999-2000 not ruled, a Canadian spec source lists an automatic). Candidate only: 720/D21 pickup 2.4L 4WD (MY1984-97).",
   "infiniti": "The VIN does NOT encode the transmission (Infiniti is in Nissan's charts: MY1990, 2002, 2013, 2025). No Infiniti engine was sold manual-only (EPA lists an automatic for every Infiniti engine/drive cell), so no rule.",
   "vpic_already_decodes_it": "vPIC leaves TransmissionStyle blank for these VIN patterns, so every in-scope car without a listing transmission is a newly confirmed car. The flip side: ground truth for these makes is almost entirely automatics from listings or vPIC defaults, and no in-scope car has a checkable label, so every kept rule is low_sample and rests on the manufacturer's code table + EPA + an independent reference."
  },
@@ -43,6 +43,7 @@
   "Toyota Celica All-Trac Turbo ST165 (MY1988-89), Camry All-Trac 2.0 4WD (MY1988 manual-only per EPA), 4Runner 2.4 4WD (MY1984, 1994-95), 22R-TE turbo pickups (MY1985-88), FJ60 Land Cruiser (MY1984-87), GR Corolla (MY2023+), Nissan Pathfinder 2.4 4WD (MY1987-89), 200SX turbo (MY1986), Sentra 4WD wagon (MY1987-88), Stanza 4WD wagon (MY1987), Sentra 1.7 diesel (MY1985-86): EPA lists only manuals, but the filings for those years were not read; no lot car with a matching VIN was found for most of them. Not ruled.",
   "Matrix XRS MY2003 (2T1KY..E): EPA lists both a 4-speed automatic and a 6-speed manual for the 2ZZ-GE that year (Wikipedia agrees), so MY2003 is excluded from the Matrix rule.",
   "Lexus and Infiniti: no engine/drive cell is manual-only in EPA for any year; no rule.",
+  "Nissan Frontier 2.4L 4x4 MY1999-2000 (1N6DD..Y, VIN year X/Y): removed from the Frontier rule by the 2026-11-05 verification. EPA and Consumer Guide say manual only, but auto123.com's spec page for the 1999 Frontier 4x4 Regular Cab XE (2.4L 4cyl, Canadian market) lists 'Transmission (Option) 4 speed automatic', and the 1999 ARFC/New Car Test Drive review text does not split the optional automatic by drive. A Canadian-market truck has the same VIN pattern and can reach a US yard, so the claim is not certain for those years. No lot car is affected today (all in-scope trucks are MY1998).",
   "Cars without a 17-character VIN (summary.five_make_coverage.<make>.no_vin) cannot be reached by VIN rules.",
   "Cars at Canadian yards (AB, BC) are scanned but not newly confirmed: the manual-only facts are US-market facts (EPA)."
  ],
@@ -52,7 +53,7 @@
    "low_sample": 5,
    "candidate": 4
   },
-  "newly_confirmed_manual_keep_and_low_sample_rules": 21,
+  "newly_confirmed_manual_keep_and_low_sample_rules": 22,
   "newly_confirmed_manual_candidate_rules_only": 22,
   "newly_confirmed_manual_by_rule": {
    "toyota_mr2_turbo_3sgte_1991_1995": 0,
@@ -61,12 +62,12 @@
    "toyota_celica_alltrac_turbo_1990_1993": 0,
    "toyota_tacoma_2trfe_4wd_2005_2010": 1,
    "toyota_t100_3rzfe_2wd_1994": 2,
-   "nissan_xterra_ka24de_2000_2004": 12,
-   "nissan_frontier_ka24de_4wd_1998_2000": 3,
+   "nissan_xterra_ka24de_2000_2004": 13,
+   "nissan_frontier_ka24de_4wd_1998": 3,
    "nissan_pickup_4cyl_4wd_1984_1997": 19
   },
   "newly_confirmed_manual_by_feed_make": {
-   "Nissan": 15,
+   "Nissan": 16,
    "Toyota": 6
   },
   "canadian_yard_cars_not_counted": 2,
@@ -78,47 +79,53 @@
   },
   "published_labels_contradicting_a_rule": 0,
   "scan": {
-   "rule_wmi_vins": 8001,
-   "covered": 45,
+   "rule_wmi_vins": 8105,
+   "covered": 46,
    "bad_check_digit": 41,
    "vin_year_vs_listing_mismatch": 1
   },
   "five_make_coverage": {
    "Toyota": {
-    "cars": 21513,
-    "no_trans_info": 21148,
-    "vin17": 18852,
-    "no_vin": 2661,
+    "cars": 21650,
+    "no_trans_info": 21279,
+    "vin17": 19010,
+    "no_vin": 2640,
     "covered_by_rule": 10
    },
    "Lexus": {
-    "cars": 3131,
-    "no_trans_info": 3041,
-    "vin17": 2765,
-    "no_vin": 366
+    "cars": 3161,
+    "no_trans_info": 3070,
+    "vin17": 2797,
+    "no_vin": 364
    },
    "Scion": {
-    "cars": 1531,
-    "no_trans_info": 1500,
-    "vin17": 1326,
-    "no_vin": 205
+    "cars": 1524,
+    "no_trans_info": 1492,
+    "vin17": 1323,
+    "no_vin": 201
    },
    "Nissan": {
-    "cars": 29587,
-    "no_trans_info": 28794,
-    "vin17": 25760,
-    "no_vin": 3827,
-    "covered_by_rule": 35
+    "cars": 29774,
+    "no_trans_info": 28975,
+    "vin17": 25999,
+    "no_vin": 3775,
+    "covered_by_rule": 36
    },
    "Infiniti": {
-    "cars": 3383,
-    "no_trans_info": 3333,
-    "vin17": 3036,
-    "no_vin": 347
+    "cars": 3418,
+    "no_trans_info": 3366,
+    "vin17": 3075,
+    "no_vin": 343
    }
   }
  },
  "validation_method": "For each rule, every lot car is matched by WMI, valid check digit, VIN model year (character 10, listing year picks the 30-year cycle) and the fixed + coded characters. 'checkable' = its ground_truth.jsonl line has class manual/automatic/cvt/amt/dct and uniformCell is empty (uniform-cell lines are vPIC model-level defaults, counted separately). Agreement = same manual-vs-not-manual answer. epa_cell = the EPA rows the claim rests on, re-read per model year: 'manual_only_years' must cover the rule's years. vpic_check = live vPIC decode of each in-scope VIN (vin_rules_2_vpic.json): engine model / displacement / drive must match the code's meaning. Status: candidate when flagged (evidence short of certain); drop when >= 20 checkable and agreement < 99.5%; low_sample when < 20 checkable (kept: the code table is the manufacturer's own Part 565 filing or vPIC built from it, and the manual-only fact has EPA plus an independent reference); keep otherwise. 'newly_confirmed_manual' = in-scope cars at US yards whose published extras transmission is empty today.",
+ "adversarial_verification": {
+  "on": "2026-11-05",
+  "method": "A second session tried to refute every rule: re-downloaded and read each cited MID filing page; re-read every EPA row of each model/year (not only the rule's filter); read Wikipedia, Consumer Guide and Toyota Canada pages directly where the first pass had only search excerpts; searched for any published statement of the other transmission; re-decoded all in-scope VINs live with vPIC; scanned ground_truth.jsonl and the vPIC decode cache for every VIN matching each rule regex (per-rule 'rescan', recomputed each run); checked scope edges (year boundaries, drive and cab codes, Canada/Mexico-built variants, feed model names).",
+  "outcome": "No rule refuted outright. Frontier narrowed to MY1998 (a Canadian spec source lists an optional automatic for the 1999 4-cylinder 4x4). Fixed characters tightened on Corolla XRS and Matrix XRS (VIN 6 = 3), Xterra (VIN 8 = S/T, 2WD) and Frontier (VIN 7 = 1/6). Candidates unchanged. Ground truth still has no labelled in-scope car, so precision on ground truth remains unmeasurable (0 of 0).",
+  "not_done": "Wikipedia 'Nissan Xterra' returned HTTP 429 and was not read; edmunds.com, cars.com, kbb.com and thecarconnection.com refuse the session (403) and were not worked around (CLAUDE.md rule 2). The MY2006 TMMC Corolla/Matrix filing was not located; MY2006 rests on vPIC, Wikipedia and the Toyota Canada 2006 spec sheet."
+ },
  "rules": [
   {
    "id": "toyota_mr2_turbo_3sgte_1991_1995",
@@ -167,6 +174,11 @@
      "url": "https://www.slashgear.com/1697726/toyota-sw20-mr2-what-engine-current-price",
      "doc": "SlashGear on the SW20 MR2; CarGurus 1995 MR2; classic.com listing of a 1995 MR2 Turbo VIN JT2SW22N2S0102679; search-result excerpts, 2026-11-05",
      "says": "MR2 Turbo models were equipped exclusively with a five-speed manual (E153); naturally aspirated versions could be had with a four-speed automatic or five-speed manual. US market MY1991-1995. A 1995 MR2 Turbo carries JT2SW22N."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Toyota_MR2",
+     "doc": "Wikipedia 'Toyota MR2', page read directly 2026-11-05",
+     "says": "'US market trim levels: MR2 with a NA 2.2L 5S-FE engine ... offered with a four-speed A/T or five-speed M/T. MR2 Turbo with a turbocharged 2.0L 3S-GTE engine ... offered only with a 5-speed M/T'."
     },
     {
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
@@ -235,7 +247,28 @@
     "cars_without_trans_info_by_reason": {},
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 0
+   "newly_confirmed_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "result": "kept (low_sample, 0 lot cars)",
+    "citations_reopened": [
+     "MID f666efc7 (MY1991 Toyota/Lexus) re-downloaded and read as page images: Attachment II p.3 lists MR2 engine S (3S-GTE, 5S-FE), line W, model 2 (SW20L, SW21L), grade 1/2, body M/N; Note #4 (p.5): 3S-GTE = VDS 1st digit S, 4th digit 2; 5S-FE = S, 1. Matches the rule (VIN 4 S, 5 W, 6 2, 7 2).",
+     "Wikipedia 'Toyota MR2' read directly: US MR2 Turbo 'offered only with a 5-speed M/T'; NA 5S-FE had A/T or M/T.",
+     "EPA rows 7494, 8591, 9665, 10650, 11612 re-read: the only turbo MR2 rows 1991-1995, all Manual 5-spd; the 2.2 rows have Automatic 4-spd."
+    ],
+    "counterexample_search": "No ground-truth line, decode-cache VIN or lot car matches JT2SW22 in 1991-1995, so nothing can contradict it today.",
+    "scope_edges": "Japanese-market SW20 Turbos (also manual only) carry JDM chassis numbers, not 17-character VINs, so they cannot match. 1996+ excluded (US sales ended after MY1995).",
+    "changes": "none",
+    "rescan": {
+     "regex": "^(JT2)SW22..[MNPRS].......",
+     "ground_truth_lines_matching": 0,
+     "ground_truth_by_class": {},
+     "ground_truth_non_manual_examples": [],
+     "vpic_cache_vins_matching": 0,
+     "vpic_cache_with_transmission": {},
+     "published_label_conflicts": 0
+    }
+   }
   },
   {
    "id": "toyota_corolla_xrs_2zzge_2005_2006",
@@ -255,7 +288,7 @@
     "conditions": [
      "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
      "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char4 in [B], char8 in [E]",
+     "fixed characters: char4 in [B], char6 in [3], char8 in [E]",
      "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
     ]
    },
@@ -268,7 +301,7 @@
      "R": "1ZZ-FE 1.8L: 5-speed manual or 4-speed automatic"
     }
    },
-   "vin_regex_manual": "^(2T1)BY..E.[56].......",
+   "vin_regex_manual": "^(2T1)BY3.E.[56].......",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9ffcb615-f3c4-42a8-9a39-399f04795814",
@@ -284,6 +317,11 @@
      "url": "https://www.theautochannel.com/news/2004/10/28/266529.html",
      "doc": "The Auto Channel, '2005 Car Review: Toyota Corolla XRS' (also auto123.com 2004 Corolla XRS preview); search-result excerpts, 2026-11-05",
      "says": "The 130-hp Corollas come with a five-speed manual or four-speed automatic; the XRS (2ZZ-GE, 170 hp) is available only with a six-speed manual gearbox."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Toyota_Corolla_(E120)",
+     "doc": "Wikipedia 'Toyota Corolla (E120)', page read directly 2026-11-05",
+     "says": "'a sporty XRS model (ZZE131), introduced in 2004 between the 2005 and 2006 model years only, featured the high-revving ... 2ZZ-GE engine and 6-speed manual'; 'The close ratio C60 6-speed manual transmission (also found in the Toyota Matrix XRS) was the only transmission available.'; 'The Corolla XRS was on sale in the United States, Canada, and Puerto Rico.'"
     },
     {
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
@@ -350,7 +388,29 @@
     },
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 3
+   "newly_confirmed_manual": 3,
+   "verified": {
+    "on": "2026-11-05",
+    "result": "kept (low_sample); narrowed: VIN 6 must be 3 (series ZZE130L/ZZE131L in the filing); no lot car lost",
+    "citations_reopened": [
+     "MID 9ffcb615 (MY2005 TMMC Corolla/Corolla Matrix/RX330) re-downloaded, chart page read: Corolla 4th B = 4 door sedan 2WD, 5th R = 1ZZ-FE, Y = 2ZZ-GE, 6th 3 = ZZE130L/ZZE131L, 7th 2/0 restraint, 8th E Corolla. No transmission character.",
+     "Wikipedia 'Toyota Corolla (E120)' read directly: XRS (ZZE131) MY2005-2006 only, 2ZZ-GE; 'The close ratio C60 6-speed manual transmission ... was the only transmission available'; sold in the US, Canada and Puerto Rico (so a Canadian-market XRS at a US yard is covered too).",
+     "EPA: every Corolla row 2004-2007 re-read. 2005: 20796 Automatic 4-spd, 20797 Manual 5-spd, 20798 Manual 6-spd 'SPORTS'; 2006: 21881/21882/21883 the same. No other 1.8 Corolla row, so no 2ZZ-GE automatic.",
+     "Live vPIC batch re-decode of the 3 lot VINs (2026-11-05) identical to vin_rules_2_vpic.json: EngineModel 2ZZ-GE, 1.8 L, 4x2, TransmissionStyle blank.",
+     "MY2006 NUMMI Corolla filing (01-022-N11B-10382) lists only engine R = 1ZZ-FE, so 2006 XRS VINs are TMMC (2T1) only, as the rule assumes."
+    ],
+    "scope_edges": "MY2009-10 Corolla XRS (2AZ-FE, 5MT or 5AT) has a different engine code and years, outside the regex. NUMMI (1NX) and Japan-built (JTD) Corollas are not matched (coverage, not precision).",
+    "changes": "fixed VIN 6 = 3",
+    "rescan": {
+     "regex": "^(2T1)BY3.E.[56].......",
+     "ground_truth_lines_matching": 0,
+     "ground_truth_by_class": {},
+     "ground_truth_non_manual_examples": [],
+     "vpic_cache_vins_matching": 7,
+     "vpic_cache_with_transmission": {},
+     "published_label_conflicts": 0
+    }
+   }
   },
   {
    "id": "toyota_matrix_xrs_2zzge_2004_2006",
@@ -370,7 +430,7 @@
     "conditions": [
      "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
      "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char4 in [K], char8 in [E]",
+     "fixed characters: char4 in [K], char6 in [3], char8 in [E]",
      "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
     ]
    },
@@ -384,7 +444,7 @@
      "Y (MY2003)": "2ZZ-GE 1.8L in MY2003: 6-speed manual OR 4-speed automatic (EPA 18789, 18791), so MY2003 is out of scope"
     }
    },
-   "vin_regex_manual": "^(2T1)KY..E.[456].......",
+   "vin_regex_manual": "^(2T1)KY3.E.[456].......",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/09aff477-0478-4482-b0f5-43de01fd5794",
@@ -410,6 +470,16 @@
      "url": "https://en.wikipedia.org/wiki/Toyota_Matrix",
      "doc": "Wikipedia 'Toyota Matrix' (and curbsideclassic.com 'COAL: 2003 Toyota Matrix XRS'); search-result excerpts, 2026-11-05",
      "says": "'With the exception of an available automatic in 2003, a six-speed manual transmission was the only gearbox offered in the XRS'; the XRS automatic was seldom ordered and dropped after 2003."
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Toyota_Matrix",
+     "doc": "Wikipedia 'Toyota Matrix', page read directly 2026-11-05",
+     "says": "Infobox: '4-speed U240E automatic transmission (FWD XRS available in the 2003 only)'. Text: 'With the exception of an available automatic in 2003, a six-speed manual transmission was the only gearbox offered in the XRS.'"
+    },
+    {
+     "url": "https://media.toyota.ca/content/dam/media-toyota/general/specifications/04matrix_specsfeat_e.pdf",
+     "doc": "Toyota Canada 2004, 2005 and 2006 Matrix specification sheets (04matrix_specsfeat_e.pdf, 05matrix_specs_e.pdf, 06matrix_specs_e.pdf; reached from media.toyota.ca/en/specifications/<year>/<year>-matrix-specifications.html), read 2026-11-05",
+     "says": "Columns BASE FWD, XR FWD, XRS FWD, BASE 4WD, XR 4WD. Transmission row: XRS FWD is marked only for '6-Speed, Manual, Close Ratio, Overdrive'; '4-Speed, Automatic, Overdrive, Lock-Up Torque Converter, ECT' is marked for Base/XR FWD and both 4WD columns. Curb-weight and fuel-consumption tables list XRS under Manual only. The XRS engine is the VVTL-i 1.8 (180 hp in 2004)."
     },
     {
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
@@ -480,7 +550,30 @@
     },
     "cars_without_trans_info_canadian_yards_not_counted": 1
    },
-   "newly_confirmed_manual": 3
+   "newly_confirmed_manual": 3,
+   "verified": {
+    "on": "2026-11-05",
+    "result": "kept (low_sample); narrowed: VIN 6 must be 3; no lot car lost",
+    "citations_reopened": [
+     "MID 09aff477 (MY2004) re-downloaded, 'Toyota Corolla, Corolla Matrix & Lexus RX330 (2004 Models)' page read: Matrix 4th K = 5 door hatchback 2WD, L = 4WD; 5th R = 1ZZ-FE, Y = 2ZZ-GE; 6th 3; 7th 2/8 restraint; 8th E. MY2005 filing 9ffcb615: same codes (7th 2/0).",
+     "Wikipedia 'Toyota Matrix' read directly: U240E automatic 'FWD XRS available in the 2003 only'; 'With the exception of an available automatic in 2003, a six-speed manual transmission was the only gearbox offered in the XRS.'",
+     "Toyota Canada 2004, 2005 and 2006 Matrix spec sheets (manufacturer, media.toyota.ca) read: the XRS FWD column is marked only for the 6-speed manual; the 4-speed automatic is marked for Base/XR FWD and 4WD only. TMMC built both markets, so Canadian-market XRS cars are manual too.",
+     "EPA: every Matrix row 2003-2007 re-read. 2003 has 18789 Automatic 4-spd 'SPORTS' (that year stays excluded); 2004/2005/2006 the only 'SPORTS' row is Manual 6-spd (19900, 21032, 22126).",
+     "Live vPIC batch re-decode of the 4 lot VINs identical to the saved decodes (2ZZ-GE, 1.8 L, 4x2)."
+    ],
+    "conflicts_found": "auto123.com's 2004 Matrix XRS spec page says 'Transmission 6 speed automatic'. No 6-speed automatic Matrix existed (Wikipedia lists only 4-speed A246E/U240E/U341F automatics; Toyota Canada marks the XRS 6-speed as manual), so this is a data error, not counterevidence. It is recorded because the same site is the only source contradicting the Frontier rule.",
+    "scope_edges": "MY2003 XRS (automatic offered) stays out by VIN year 3. AWD Matrix (L body) is 1ZZ-FE only and outside the fixed K. The Kelowna BC car stays uncounted (US-yard rule), although the Canadian spec sheet shows it would also be manual.",
+    "changes": "fixed VIN 6 = 3",
+    "rescan": {
+     "regex": "^(2T1)KY3.E.[456].......",
+     "ground_truth_lines_matching": 0,
+     "ground_truth_by_class": {},
+     "ground_truth_non_manual_examples": [],
+     "vpic_cache_vins_matching": 7,
+     "vpic_cache_with_transmission": {},
+     "published_label_conflicts": 0
+    }
+   }
   },
   {
    "id": "toyota_celica_alltrac_turbo_1990_1993",
@@ -595,7 +688,21 @@
     "cars_without_trans_info_by_reason": {},
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 0
+   "newly_confirmed_manual": 0,
+   "verified": {
+    "on": "2026-11-05",
+    "result": "still candidate (not counted, 0 lot cars); not re-researched beyond the checks below",
+    "checked": "MY1991 filing note #3 re-read (3S-GTE = S, 8). EPA rows 6614, 7720, 8810, 9868 re-read: the only 2.0 turbo 4WD Celica rows, Manual 5-spd. No ground-truth or decode-cache VIN matches.",
+    "rescan": {
+     "regex": "^(JT2)ST88..[LMNP].......",
+     "ground_truth_lines_matching": 0,
+     "ground_truth_by_class": {},
+     "ground_truth_non_manual_examples": [],
+     "vpic_cache_vins_matching": 0,
+     "vpic_cache_with_transmission": {},
+     "published_label_conflicts": 0
+    }
+   }
   },
   {
    "id": "toyota_tacoma_2trfe_4wd_2005_2010",
@@ -728,7 +835,21 @@
     },
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 1
+   "newly_confirmed_manual": 1,
+   "verified": {
+    "on": "2026-11-05",
+    "result": "still candidate (not counted)",
+    "checked": "MID MY2006 TMMCA Tacoma chart (01-022-N11B-10382) shows the same 4th/5th-digit codes as MY2005 (P/U 4WD Regular/Xtra Cab, X = 2TR-FE). EPA rows re-read (Manual 5-spd only 2005-2010). The source conflict that keeps it a candidate stands. One lot car, decoded 2TR-FE 4WD by live vPIC.",
+    "rescan": {
+     "regex": "^(5TE|3TM)[PU]X....[56789A].......",
+     "ground_truth_lines_matching": 0,
+     "ground_truth_by_class": {},
+     "ground_truth_non_manual_examples": [],
+     "vpic_cache_vins_matching": 1,
+     "vpic_cache_with_transmission": {},
+     "published_label_conflicts": 0
+    }
+   }
   },
   {
    "id": "toyota_t100_3rzfe_2wd_1994",
@@ -826,7 +947,21 @@
     },
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 2
+   "newly_confirmed_manual": 2,
+   "verified": {
+    "on": "2026-11-05",
+    "result": "still candidate (not counted)",
+    "checked": "EPA 1994 T100 2WD 2.7 row re-read (Manual 5-spd only). Live vPIC re-decode of the 2 lot VINs: 3RZ-FE 2.7 4x2. No filing for MY1994 trucks read.",
+    "rescan": {
+     "regex": "^(JT4)UD1...R.......",
+     "ground_truth_lines_matching": 0,
+     "ground_truth_by_class": {},
+     "ground_truth_non_manual_examples": [],
+     "vpic_cache_vins_matching": 2,
+     "vpic_cache_with_transmission": {},
+     "published_label_conflicts": 0
+    }
+   }
   },
   {
    "id": "nissan_xterra_ka24de_2000_2004",
@@ -835,7 +970,7 @@
    "claim": "manual",
    "scope": {
     "make": "Nissan",
-    "models": "Nissan Xterra (5N1?D28*), MY2000-2004",
+    "models": "Nissan Xterra 2WD (5N1DD28[S/T]*), MY2000-2004",
     "model_years": [
      2000,
      2004
@@ -846,7 +981,7 @@
     "conditions": [
      "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
      "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char5 in [D], char7 in [8]",
+     "fixed characters: char5 in [D], char7 in [8], char8 in [ST]",
      "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
     ]
    },
@@ -860,7 +995,7 @@
      "M": "3.3L supercharged V6: 6MT or 4AT"
     }
    },
-   "vin_regex_manual": "^(5N1)DD.8..[Y1234].......",
+   "vin_regex_manual": "^(5N1)DD.8[ST].[Y1234].......",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/00371e3b-454c-49da-ba8c-aa85eda874cf",
@@ -883,6 +1018,11 @@
      "says": "The base XE's 2.4-liter 143-hp four-cylinder is paired only with a 5-speed manual and is offered only with two-wheel drive; the V6 is available in 2WD or 4WD with manual or automatic."
     },
     {
+     "url": "https://consumerguide.com/used/2000-04-nissan-xterra/",
+     "doc": "Consumer Guide, used 2000-04 Nissan Xterra, page read directly 2026-11-05",
+     "says": "'The Xterra lineup began with a base XE model, with a 4-cylinder engine, manual transmission, and 2-wheel drive.' 'Base XE editions held a 2.4-liter 4-cylinder engine that developed 143 horsepower, teamed only with a 5-speed manual transmission. ... Only 2-wheel drive was available with the base XE'. Every yearly price list gives XE standard equipment as '2.4-liter dohc 4-cylinder engine, 5-speed manual transmission'; the options table marks the automatic 'NA XE 4-cylinder'."
+    },
+    {
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
      "says": "16295 (2000); 17171 (2001); 18114 (2002); 19092 (2003); 20220 (2004): Xterra 2WD 2.4 Manual 5-spd, the only 2.4 Xterra rows (no 4WD 2.4, no automatic 2.4)"
@@ -891,7 +1031,7 @@
    "candidate_reason": "",
    "evidence_gaps": "Engine code read in the MY2002 chart (and the MY2001 chart lists Xterra in the same layout); MY2000, 2001, 2003, 2004 rest on vPIC (5N1DD28T decodes to 2.4L 4x2 for each year; KA24DE named for 2002-2004).",
    "validation": {
-    "in_scope_lot_cars": 12,
+    "in_scope_lot_cars": 13,
     "checkable_ground_truth": 0,
     "agree": 0,
     "disagree": 0,
@@ -936,7 +1076,7 @@
      }
     },
     "vpic_check": {
-     "consistent": 12,
+     "consistent": 13,
      "expect": {
       "engine": "KA24|^$",
       "displ": "2.4"
@@ -944,37 +1084,58 @@
      "inconsistent_examples": []
     },
     "codes_seen_on_lots": {
-     "char4=D": 12
+     "char4=D": 13
     },
     "years_seen_on_lots": {
      "2000": 1,
-     "2001": 3,
+     "2001": 4,
      "2002": 3,
      "2003": 1,
      "2004": 4
     },
     "models_seen_on_lots": {
-     "Nissan Xterra": 12
+     "Nissan Xterra": 13
     },
-    "cars_without_trans_info_us_yards": 12,
+    "cars_without_trans_info_us_yards": 13,
     "cars_without_trans_info_by_reason": {
-     "vpic_trans_blank": 12
+     "vpic_trans_blank": 13
     },
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 12
+   "newly_confirmed_manual": 13,
+   "verified": {
+    "on": "2026-11-05",
+    "result": "kept (low_sample); narrowed: VIN 8 must be a 2WD code (S or T); no lot car lost",
+    "citations_reopened": [
+     "MID 00371e3b (MY2002) p.4 and 1d224522 (MY2001) p.2 re-downloaded and read: Xterra (5N1) line D, position 4 2.4L = D, 3.3L = E, position 7 4-door wagon = 8, position 8 Class C 4-wheel ABS (2WD) S, Class D standard (4WD) Y. The chart prints S for the 2WD Xterra, but real 2WD Xterra VINs carry T (all 538 2WD Xterra VINs MY2000-04 in the decode cache; vPIC decodes T as 4x2). The rule now accepts S or T.",
+     "Consumer Guide used 2000-04 Xterra read directly: base XE 2.4 'teamed only with a 5-speed manual transmission', 'Only 2-wheel drive was available with the base XE'; options table marks the automatic 'NA XE 4-cylinder'.",
+     "EPA: every Xterra row 2000-2005 re-read. The only 2.4 rows are 'Xterra 2WD Manual 5-spd' (16295, 17171, 18114, 19092, 20220); every V6 cell lists both.",
+     "Live vPIC batch re-decode of all lot VINs identical to the saved decodes; the new lot car 5N1DD28T91C594227 (Pick Your Part Fontana, listed after the first build) decodes 2001 Xterra 2.4 L 4x2 and was added to vin_rules_2_vpic.json."
+    ],
+    "scope_edges": "Xterra was built only in Smyrna (5N1). 2005+ Xterra (VQ40, engine code A) is outside the years. A 2.4 code with Y (4WD) would contradict every source, so it is not labelled.",
+    "changes": "fixed VIN 8 in [ST]",
+    "rescan": {
+     "regex": "^(5N1)DD.8[ST].[Y1234].......",
+     "ground_truth_lines_matching": 0,
+     "ground_truth_by_class": {},
+     "ground_truth_non_manual_examples": [],
+     "vpic_cache_vins_matching": 20,
+     "vpic_cache_with_transmission": {},
+     "published_label_conflicts": 0
+    }
+   }
   },
   {
-   "id": "nissan_frontier_ka24de_4wd_1998_2000",
+   "id": "nissan_frontier_ka24de_4wd_1998",
    "make": "Nissan",
    "status": "low_sample",
    "claim": "manual",
    "scope": {
     "make": "Nissan",
-    "models": "Nissan Frontier 2.4L 4x4 Regular/King Cab (1N6DD2?Y), MY1998-2000",
+    "models": "Nissan Frontier 2.4L 4x4 Regular/King Cab (1N6DD2[1/6]Y), MY1998",
     "model_years": [
      1998,
-     2000
+     1998
     ],
     "wmi": [
      "1N6"
@@ -982,21 +1143,22 @@
     "conditions": [
      "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
      "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
-     "fixed characters: char4 in [D], char5 in [D]",
+     "fixed characters: char4 in [D], char5 in [D], char7 in [16]",
      "car is at a US yard (Canadian-market offerings are not covered by the EPA evidence)"
     ]
    },
    "vin_condition": {
     "position": 8,
     "manual_codes": {
-     "Y": "Position 8 Y = Class D Standard (4WD) with position 4 D = 2.4L: 4-cylinder 4x4, 5-speed manual only (MY1998-2000)"
+     "Y": "Position 8 Y = Class D Standard (4WD) with position 4 D = 2.4L: 4-cylinder 4x4, 5-speed manual only (MY1998-1998)"
     },
     "codes_not_ruled": {
      "S/T (2WD)": "2.4L 2WD: 5MT or 4AT",
-     "E + Y": "3.3L V6 4WD: 5MT or 4AT"
+     "E + Y": "3.3L V6 4WD: 5MT or 4AT",
+     "D + Y in MY1999-2000": "2.4L 4x4: US sources and EPA say manual only, but auto123.com's (Canadian) spec page for the 1999 Frontier XE 4x4 Regular Cab lists an optional 4-speed automatic; not certain, so not ruled"
     }
    },
-   "vin_regex_manual": "^(1N6)DD..Y.[WXY].......",
+   "vin_regex_manual": "^(1N6)DD.[16]Y.W.......",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8a102da6-82f2-49d5-84d3-c1434fc90747",
@@ -1019,13 +1181,18 @@
      "says": "All Frontiers offered either a manual or automatic transmission, except for 4-cylinder 4x4s, which were manual-shift only."
     },
     {
+     "url": "https://consumerguide.com/used/1998-04-nissan-frontier/",
+     "doc": "Consumer Guide, used 1998-04 Nissan Frontier, page read directly 2026-11-05",
+     "says": "1998: 'Two-wheel-drive Frontiers came with a 5-speed manual or optional 4-speed automatic transmission, but initial 4x4s were manual-shift only.' 1999: 'All Frontiers offered either a manual or automatic transmission, except for 4-cylinder 4x4s, which were manual-shift only.' 2000 price list: the only 4-cylinder 4WD line is 'XE 4WD King Cab extended cab, 5-Speed'; '4WD adds: ... 5-speed manual transmission'."
+    },
+    {
      "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
      "doc": "EPA fueleconomy.gov vehicles.csv (downloaded 2026-11-05, Last-Modified 2026-09-29)",
-     "says": "14577 (1998); 15365 (1999); 16166 (2000): Frontier 4WD 2.4 Manual 5-spd only; no 4WD 2.4 rows after 2000"
+     "says": "14577 (1998): Frontier 4WD 2.4 Manual 5-spd only (also 15365 1999 and 16166 2000, years no longer in scope; no 4WD 2.4 rows after 2000)"
     }
    ],
    "candidate_reason": "",
-   "evidence_gaps": "Codes read in the MY1998 and MY2002 charts; MY1999-2000 rest on vPIC (1N6DD21Y and 1N6DD26Y decode to 2.4L 4WD).",
+   "evidence_gaps": "Codes read in the MY1998 chart (and the MY2002 chart). Narrowed from MY1998-2000 to MY1998 on 2026-11-05 (see verified).",
    "validation": {
     "in_scope_lot_cars": 3,
     "checkable_ground_truth": 0,
@@ -1045,21 +1212,13 @@
       "dscr": null
      },
      "manual_only_years": [
-      1998,
-      1999,
-      2000
+      1998
      ],
      "years_with_other_classes": {},
      "all_rule_years_manual_only": true,
      "rows": {
       "1998": [
        "14577 Frontier 4WD Manual 5-spd"
-      ],
-      "1999": [
-       "15365 Frontier 4WD Manual 5-spd"
-      ],
-      "2000": [
-       "16166 Frontier 4WD Manual 5-spd"
       ]
      }
     },
@@ -1087,7 +1246,30 @@
     },
     "cars_without_trans_info_canadian_yards_not_counted": 0
    },
-   "newly_confirmed_manual": 3
+   "newly_confirmed_manual": 3,
+   "verified": {
+    "on": "2026-11-05",
+    "previous_id": "nissan_frontier_ka24de_4wd_1998_2000",
+    "result": "kept (low_sample) but NARROWED from MY1998-2000 to MY1998; VIN 7 must be 1 or 6 (Regular or King Cab). All 3 lot cars are MY1998, so the count is unchanged.",
+    "citations_reopened": [
+     "MID 8a102da6 (MY1998) re-downloaded and read: letter p.1 (engine code revised S to D) and truck chart p.4: 2.4L = D, Nissan Frontier Truck = D, Regular Cab 1, King Cab 6, position 8 Class D Standard (4WD) = Y. MY2002 chart (00371e3b p.4) the same.",
+     "Consumer Guide used 1998-04 Frontier read directly: 1998 'initial 4x4s were manual-shift only'; 1999 '... except for 4-cylinder 4x4s, which were manual-shift only'; 2000 price list has only a 5-speed 4-cylinder 4WD line.",
+     "EPA: every Nissan 2.4 truck row 1997-2001 re-read. Frontier 4WD 2.4 is Manual 5-spd only in 1998 (14577), 1999 (15365) and 2000 (16166); the 2WD 2.4 rows list both.",
+     "Live vPIC batch re-decode of the 3 lot VINs identical to the saved decodes (2.4 L, 4WD, TransmissionStyle blank)."
+    ],
+    "conflicts_found": "auto123.com (Canadian market) spec page for the 1999 Nissan Frontier 4x4 Regular Cab XE (2.4L 16V 4cyl dohc) lists 'Transmission 5 speed manual' and 'Transmission (Option) 4 speed automatic'. ARFC / New Car Test Drive 1999 review text (search excerpts) says the 2.4 'powers all two-wheel-drive Frontiers and XE 4x4 models' and that a four-speed automatic is optional, without splitting by drive. auto123's data are error-prone (it lists a 6-speed automatic for the 2004 Matrix XRS), and every US source agrees on manual only, but a published source names an automatic for exactly this configuration in MY1999, and a Canadian-market truck has the same VIN pattern and can reach a US yard. MY1999-2000 are therefore not certain and were removed. No source naming a 1998 4-cylinder 4x4 automatic was found (auto123 has no 1998 page).",
+    "scope_edges": "Crew Cab (VIN 7 = 7) was V6-only, now excluded by the fixed VIN 7. 2001+ 4WD Frontiers were V6-only (no EPA 4WD 2.4 row). Desert Runner is 2WD (S/T) and outside the Y code.",
+    "changes": "years 1998-2000 -> 1998; id renamed; fixed VIN 7 in [16]",
+    "rescan": {
+     "regex": "^(1N6)DD.[16]Y.W.......",
+     "ground_truth_lines_matching": 0,
+     "ground_truth_by_class": {},
+     "ground_truth_non_manual_examples": [],
+     "vpic_cache_vins_matching": 4,
+     "vpic_cache_with_transmission": {},
+     "published_label_conflicts": 0
+    }
+   }
   },
   {
    "id": "nissan_pickup_4cyl_4wd_1984_1997",
@@ -1269,12 +1451,25 @@
     },
     "cars_without_trans_info_us_yards": 19,
     "cars_without_trans_info_by_reason": {
-     "vpic_trans_blank": 18,
-     "not_in_cache_backup": 1
+     "vpic_trans_blank": 19
     },
     "cars_without_trans_info_canadian_yards_not_counted": 1
    },
-   "newly_confirmed_manual": 19
+   "newly_confirmed_manual": 19,
+   "verified": {
+    "on": "2026-11-05",
+    "result": "still candidate (not counted)",
+    "checked": "EPA rows re-read (2.4 4WD truck Manual 5-spd only every year). Wikipedia 'Nissan Hardbody Truck' read directly says only that 'an automatic transmission was an available option' (not split by engine or drive), so manual-only still rests on EPA alone. Live vPIC re-decode of all 20 lot VINs unchanged (Z24/KA24, 2.4 L, 4WD). One lot car carries the feed model name 'Ford F150 Pickup' (make Nissan); the rule keys on the VIN, which decodes to a Nissan Pickup, so the name does not affect it.",
+    "rescan": {
+     "regex": "^(1N6|JN6)[NS]D..Y.[EFGHJKLMNPRSTV].......",
+     "ground_truth_lines_matching": 0,
+     "ground_truth_by_class": {},
+     "ground_truth_non_manual_examples": [],
+     "vpic_cache_vins_matching": 38,
+     "vpic_cache_with_transmission": {},
+     "published_label_conflicts": 0
+    }
+   }
   }
  ],
  "newly_confirmed_manual_cars": [
@@ -1296,7 +1491,7 @@
    "year": 1998,
    "make": "Nissan",
    "model": "Frontier",
-   "rule": "nissan_frontier_ka24de_4wd_1998_2000",
+   "rule": "nissan_frontier_ka24de_4wd_1998",
    "code": "char8=Y: Position 8 Y = Class D Standard (4WD) with position 4 D = 2.4L: 4-cylinder 4x4, 5-speed manual only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Portland South",
@@ -1375,6 +1570,18 @@
    "state": "CA"
   },
   {
+   "id": "1285-47736",
+   "vin": "5N1DD28T91C594227",
+   "year": 2001,
+   "make": "Nissan",
+   "model": "Xterra",
+   "rule": "nissan_xterra_ka24de_2000_2004",
+   "code": "char4=D: 2.4L KA24DE (Xterra XE four-cylinder, 2WD only): 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Fontana",
+   "state": "CA"
+  },
+  {
    "id": "1291-163961",
    "vin": "5N1DD28T44C624965",
    "year": 2004,
@@ -1440,7 +1647,7 @@
    "year": 1998,
    "make": "Nissan",
    "model": "Frontier",
-   "rule": "nissan_frontier_ka24de_4wd_1998_2000",
+   "rule": "nissan_frontier_ka24de_4wd_1998",
    "code": "char8=Y: Position 8 Y = Class D Standard (4WD) with position 4 D = 2.4L: 4-cylinder 4x4, 5-speed manual only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pull-A-Part - Winston-Salem",
@@ -1452,11 +1659,35 @@
    "year": 1998,
    "make": "Nissan",
    "model": "Frontier",
-   "rule": "nissan_frontier_ka24de_4wd_1998_2000",
+   "rule": "nissan_frontier_ka24de_4wd_1998",
    "code": "char8=Y: Position 8 Y = Class D Standard (4WD) with position 4 D = 2.4L: 4-cylinder 4x4, 5-speed manual only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Fenix U-Pull - Binghamton",
    "state": "NY"
+  },
+  {
+   "id": "pns-stk073054",
+   "vin": "5N1DD28T92C530285",
+   "year": 2002,
+   "make": "Nissan",
+   "model": "Xterra",
+   "rule": "nissan_xterra_ka24de_2000_2004",
+   "code": "char4=D: 2.4L KA24DE (Xterra XE four-cylinder, 2WD only): 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Glendale",
+   "state": "AZ"
+  },
+  {
+   "id": "pns-stk022090",
+   "vin": "5N1DD28T94C648503",
+   "year": 2004,
+   "make": "Nissan",
+   "model": "Xterra",
+   "rule": "nissan_xterra_ka24de_2000_2004",
+   "code": "char4=D: 2.4L KA24DE (Xterra XE four-cylinder, 2WD only): 5-speed manual only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Tucson",
+   "state": "AZ"
   },
   {
    "id": "vinplus-louisville-000000115485",
@@ -1505,30 +1736,6 @@
    "why_no_trans": "not_in_cache_backup",
    "yard": "U-Pull-It Auto Parts - Yakima",
    "state": "WA"
-  },
-  {
-   "id": "pns-stk073054",
-   "vin": "5N1DD28T92C530285",
-   "year": 2002,
-   "make": "Nissan",
-   "model": "Xterra",
-   "rule": "nissan_xterra_ka24de_2000_2004",
-   "code": "char4=D: 2.4L KA24DE (Xterra XE four-cylinder, 2WD only): 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Glendale",
-   "state": "AZ"
-  },
-  {
-   "id": "pns-stk022090",
-   "vin": "5N1DD28T94C648503",
-   "year": 2004,
-   "make": "Nissan",
-   "model": "Xterra",
-   "rule": "nissan_xterra_ka24de_2000_2004",
-   "code": "char4=D: 2.4L KA24DE (Xterra XE four-cylinder, 2WD only): 5-speed manual only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Tucson",
-   "state": "AZ"
   }
  ],
  "candidate_rule_manual_cars": [
@@ -1557,30 +1764,6 @@
    "state": "OR"
   },
   {
-   "id": "7842335",
-   "vin": "1N6SD11Y0PC355196",
-   "year": 1993,
-   "make": "Nissan",
-   "model": "Pickup",
-   "rule": "nissan_pickup_4cyl_4wd_1984_1997",
-   "code": "char8=Y: Position 8 Y = standard 4WD with a 2.4L four-cylinder (N = Z24/Z24i, S = KA24E): EPA lists Manual 5-spd only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Rancho Cordova",
-   "state": "CA"
-  },
-  {
-   "id": "7978222",
-   "vin": "1N6SD11Y7SC388723",
-   "year": 1995,
-   "make": "Nissan",
-   "model": "Pickup",
-   "rule": "nissan_pickup_4cyl_4wd_1984_1997",
-   "code": "char8=Y: Position 8 Y = standard 4WD with a 2.4L four-cylinder (N = Z24/Z24i, S = KA24E): EPA lists Manual 5-spd only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Windsor",
-   "state": "CA"
-  },
-  {
    "id": "7982597",
    "vin": "1N6ND11Y9KC355848",
    "year": 1989,
@@ -1602,6 +1785,30 @@
    "code": "char8=Y: Position 8 Y = standard 4WD with a 2.4L four-cylinder (N = Z24/Z24i, S = KA24E): EPA lists Manual 5-spd only",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - San Jose North",
+   "state": "CA"
+  },
+  {
+   "id": "7842335",
+   "vin": "1N6SD11Y0PC355196",
+   "year": 1993,
+   "make": "Nissan",
+   "model": "Pickup",
+   "rule": "nissan_pickup_4cyl_4wd_1984_1997",
+   "code": "char8=Y: Position 8 Y = standard 4WD with a 2.4L four-cylinder (N = Z24/Z24i, S = KA24E): EPA lists Manual 5-spd only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Rancho Cordova",
+   "state": "CA"
+  },
+  {
+   "id": "7978222",
+   "vin": "1N6SD11Y7SC388723",
+   "year": 1995,
+   "make": "Nissan",
+   "model": "Pickup",
+   "rule": "nissan_pickup_4cyl_4wd_1984_1997",
+   "code": "char8=Y: Position 8 Y = standard 4WD with a 2.4L four-cylinder (N = Z24/Z24i, S = KA24E): EPA lists Manual 5-spd only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Windsor",
    "state": "CA"
   },
   {
@@ -1713,6 +1920,18 @@
    "state": "NY"
   },
   {
+   "id": "pns-stk134068",
+   "vin": "1N6SD16Y4SC383648",
+   "year": 1995,
+   "make": "Nissan",
+   "model": "Ford F150 Pickup",
+   "rule": "nissan_pickup_4cyl_4wd_1984_1997",
+   "code": "char8=Y: Position 8 Y = standard 4WD with a 2.4L four-cylinder (N = Z24/Z24i, S = KA24E): EPA lists Manual 5-spd only",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Salt Lake City",
+   "state": "UT"
+  },
+  {
    "id": "ipull-fre115744",
    "vin": "JT4UD10DXR0002804",
    "year": 1994,
@@ -1780,21 +1999,9 @@
    "model": "Pickup",
    "rule": "nissan_pickup_4cyl_4wd_1984_1997",
    "code": "char8=Y: Position 8 Y = standard 4WD with a 2.4L four-cylinder (N = Z24/Z24i, S = KA24E): EPA lists Manual 5-spd only",
-   "why_no_trans": "not_in_cache_backup",
+   "why_no_trans": "vpic_trans_blank",
    "yard": "Auto Parts U Pull - Shelby",
    "state": "NC"
-  },
-  {
-   "id": "pns-stk134068",
-   "vin": "1N6SD16Y4SC383648",
-   "year": 1995,
-   "make": "Nissan",
-   "model": "Ford F150 Pickup",
-   "rule": "nissan_pickup_4cyl_4wd_1984_1997",
-   "code": "char8=Y: Position 8 Y = standard 4WD with a 2.4L four-cylinder (N = Z24/Z24i, S = KA24E): EPA lists Manual 5-spd only",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pull-N-Save - Salt Lake City",
-   "state": "UT"
   }
  ],
  "canadian_yard_cars": [

@@ -1,0 +1,850 @@
+{
+ "note": "Independent evidence for the EPA sole-offering rules (epa_sole.py). Each entry matches rules by EPA make, a regex on the EPA baseModel/model names, displacement (null = a model-year-wide rule), optional cylinders and drive, and the model years it speaks to. verdict: supports (counted when nothing disagrees), conflicting (not counted), contradicts (dropped), weak_support (not counted: sale-listing or forum text only). 'via' says how the text was read: sources first read by a sibling worklist are quoted from that worklist's JSON (its rule id is given); sources found in this step were read through WebSearch result text on 2026-11-05 (WebFetch could not reach outside hosts from this session), so they carry the search tool's summary, not a page quote.",
+ "entries": [
+  {
+   "id": "ford_escape_20_2001_2004",
+   "make": "Ford",
+   "base": "^Escape",
+   "displ": 2.0,
+   "cyl": 4,
+   "years": [
+    2001,
+    2004
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://www.edmunds.com/ford/escape/2003/suv/review",
+     "says": "'Standard on the Escape XLS 2WD is a 2.0-liter inline four-cylinder engine ... It is matched to a five-speed manual transmission.'",
+     "via": "vin_rules_4.json ford_escape_2001_2004_char8_engine"
+    },
+    {
+     "url": "https://www.edmunds.com/ford/escape/2001/comparison-test.html",
+     "says": "The standard four-speed automatic came with the optional 3.0-liter Duratec V6.",
+     "via": "vin_rules_4.json ford_escape_2001_2004_char8_engine"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Ford_Escape",
+     "says": "North America: 2.0 L Zetec with a five-speed manual on the base XLS, V6 with a four-speed automatic.",
+     "via": "vin_rules_4.json ford_escape_2001_2004_char8_engine"
+    }
+   ]
+  },
+  {
+   "id": "mazda_tribute_20_2001_2004",
+   "make": "Mazda",
+   "base": "^Tribute",
+   "displ": 2.0,
+   "cyl": 4,
+   "years": [
+    2001,
+    2004
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://www.cars.com/research/mazda-tribute-2001/trims",
+     "says": "Trim data lists the 2.0L only with the manual (DX) and the 3.0L V6 only with the automatic (DX, LX, ES), 2WD and 4WD.",
+     "via": "WebSearch result text 2026-11-05"
+    },
+    {
+     "url": "https://velocityjournal.com/journal/2001/mazda/968/index.html",
+     "says": "Transmission choices: a 5-speed manual (4-cylinder only) or a 4-speed automatic.",
+     "via": "WebSearch result text 2026-11-05"
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/888d9009-afb5-4eb5-8ee0-f1c57396c0f9",
+     "says": "Ford's MY2002 VIN filing cover letter: engine 'B' is the 2.0L Zetec 'used in the Escape and Tribute vehicles' (the same 2.0L/manual powertrain as the Escape).",
+     "via": "vin_rules_4.json ford_escape_2001_2004_char8_engine"
+    }
+   ]
+  },
+  {
+   "id": "ford_focus_23_st_2005_2007",
+   "make": "Ford",
+   "base": "^Focus",
+   "displ": 2.3,
+   "cyl": 4,
+   "years": [
+    2005,
+    2007
+   ],
+   "verdict": "supports",
+   "note": "MY2003-2004 2.3L PZEV Focus had both transmissions (EPA 18516/18517, 19579/19580); from 2005 the 2.3L went only into the ST.",
+   "sources": [
+    {
+     "url": "https://www.cars.com/research/ford-focus-2005",
+     "says": "The ZX4 ST's 151 hp 2.3-liter 'is teamed only with a smooth shifting 5-speed manual'; the 2.3L Duratec was available only in ST models.",
+     "via": "vin_rules_4.json ford_focus_st_2005_2007_series_P38_char8_Z"
+    }
+   ]
+  },
+  {
+   "id": "ford_focus_10_2015",
+   "make": "Ford",
+   "base": "^Focus",
+   "displ": 1.0,
+   "cyl": 3,
+   "years": [
+    2015,
+    2015
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://www.edmunds.com/ford/focus/2016/review",
+     "says": "Edmunds: for 2016 the Focus adds a six-speed automatic for the 1.0-liter EcoBoost; Car and Driver: the 1.0L Focus was 'previously available with only a six-speed manual transmission'.",
+     "via": "vin_rules_4.json ford_focus_10_2015_char8_E"
+    }
+   ]
+  },
+  {
+   "id": "ford_fiesta_10_2014_2017",
+   "make": "Ford",
+   "base": "^Fiesta",
+   "displ": 1.0,
+   "cyl": 3,
+   "years": [
+    2014,
+    2017
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://www.edmunds.com/ford/focus/2016/review",
+     "says": "Car and Driver (2016): the smaller Fiesta 1.0L 'is still manual-only'.",
+     "via": "vin_rules_4.json ford_fiesta_10_2014_2017_char8_E"
+    }
+   ]
+  },
+  {
+   "id": "mercury_cougar_20_2001_2002",
+   "make": "Mercury",
+   "base": "^Cougar",
+   "displ": 2.0,
+   "cyl": 4,
+   "years": [
+    2001,
+    2002
+   ],
+   "verdict": "supports",
+   "note": "MY1999 is outside: EPA 14999 lists a 2.0 Automatic 4-spd for the 1999 Cougar.",
+   "sources": [
+    {
+     "url": "https://consumerguide.com/used/1999-02-mercury-cougar/",
+     "says": "'Cougars came with two distinct engines: a 125-horsepower 4-cylinder (manual shift only), or a 170-horsepower 2.5-liter V6 ...'",
+     "via": "vin_rules_4.json mercury_cougar_i4_2001_2002_series_60_char8_3"
+    }
+   ]
+  },
+  {
+   "id": "ford_mustang_shelby_gt500_58_2013_2014",
+   "make": "Ford",
+   "base": "^Mustang",
+   "displ": 5.8,
+   "cyl": 8,
+   "years": [
+    2013,
+    2014
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://develop.motorbiscuit.com/5-best-manual-ford-mustang-models-recent-years-v8-fun-factories",
+     "says": "The S197 Shelby GT500 from 2013 or 2014 'offers just one transmission option: a TREMEC TR-6060 six-speed manual unit'.",
+     "via": "vin_rules_4.json ford_mustang_gt500_2013_2014_char8_Z"
+    }
+   ]
+  },
+  {
+   "id": "geo_metro_10_1995_1997",
+   "make": "Geo",
+   "base": "^Metro",
+   "displ": 1.0,
+   "cyl": 3,
+   "years": [
+    1995,
+    1997
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://consumerguide.com/used/1995-01-geochevrolet-metro/",
+     "says": "Consumer Guide, used 1995-2001 Geo/Chevrolet Metro: '5-speed manual gearbox was standard with both engines; 3-speed automatic optional only with the 4 cylinder.'",
+     "via": "vin_rules_5.json chevrolet_metro_10_1999_2000_char8_6 (read there through web-search result text)"
+    }
+   ],
+   "note": "The rule reads vPIC's decoded displacement. In the decode cache vPIC returns 1.0L 3-cyl only for VIN character 8 = '6' and only on hatchbacks (every Metro sedan decodes 1.3L, codes 9/2), which matches GM's MY1999-2000 filings (6 = 1.0L L3 TBI Suzuki, LP2) and the 3-cylinder being hatchback-only. The GM worklist held MY1995-1998 as VIN-rule candidates only because the MY1995-1998 filings' code column is unreadable."
+  },
+  {
+   "id": "chevrolet_metro_10_1998_2000",
+   "make": "Chevrolet",
+   "base": "^Metro",
+   "displ": 1.0,
+   "cyl": 3,
+   "years": [
+    1998,
+    2001
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://consumerguide.com/used/1995-01-geochevrolet-metro/",
+     "says": "Consumer Guide, used 1995-2001 Geo/Chevrolet Metro: '5-speed manual gearbox was standard with both engines; 3-speed automatic optional only with the 4 cylinder.'",
+     "via": "vin_rules_5.json chevrolet_metro_10_1999_2000_char8_6 (read there through web-search result text)"
+    }
+   ],
+   "note": "The rule reads vPIC's decoded displacement. In the decode cache vPIC returns 1.0L 3-cyl only for VIN character 8 = '6' and only on hatchbacks (every Metro sedan decodes 1.3L, codes 9/2), which matches GM's MY1999-2000 filings (6 = 1.0L L3 TBI Suzuki, LP2) and the 3-cylinder being hatchback-only. The GM worklist held MY1995-1998 as VIN-rule candidates only because the MY1995-1998 filings' code column is unreadable."
+  },
+  {
+   "id": "chevrolet_cobalt_ss_supercharged_20_2005_2007",
+   "make": "Chevrolet",
+   "base": "^Cobalt",
+   "displ": 2.0,
+   "cyl": 4,
+   "years": [
+    2005,
+    2007
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/Chevrolet_Cobalt_SS",
+     "says": "The supercharged 2.0L LSJ coupe (2005-2007) was paired only with the Saab-designed F35 5-speed manual; the 2.4L SS had a manual or an automatic.",
+     "via": "vin_rules_5.json chevrolet_cobalt_ss_sc_2005_2007_char8_P"
+    }
+   ]
+  },
+  {
+   "id": "saturn_ion_redline_20_2004_2007",
+   "make": "Saturn",
+   "base": "^Ion",
+   "displ": 2.0,
+   "cyl": 4,
+   "years": [
+    2004,
+    2007
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/Saturn_Ion",
+     "says": "'The Red Line, available only as a quad coupe, uses a supercharged 2.0-litre inline four-cylinder and five-speed manual exclusively.'",
+     "via": "vin_rules_5.json saturn_ion_redline_2004_2007_char8_P"
+    }
+   ]
+  },
+  {
+   "id": "cadillac_cts_v_60_2004_2007",
+   "make": "Cadillac",
+   "base": "^CTS",
+   "displ": 6.0,
+   "cyl": 8,
+   "years": [
+    2004,
+    2007
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://grassrootsmotorsports.com/articles/buyer-guide-2004-2007-cadillac-cts-v",
+     "says": "'No slushbox was available, and the Tremec T56 six-speed was the only choice.'",
+     "via": "vin_rules_5.json cadillac_cts_v_2004_2007_series_DN"
+    }
+   ]
+  },
+  {
+   "id": "dodge_caliber_18_2007_2009",
+   "make": "Dodge",
+   "base": "^Caliber",
+   "displ": 1.8,
+   "cyl": 4,
+   "years": [
+    2007,
+    2009
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://ipfs.ssi.eecc.de/ipns/en.wikipedia-on-ipfs.org/wiki/Dodge_Caliber",
+     "says": "The SE's 1.8 L 148 hp World I4 is 'attached to a Magna Drivetrain T355 5-speed manual transmission'; the CVT is listed with the 2.0 L and 2.4 L.",
+     "via": "vin_rules_6.json dodge_caliber_18_2007_2009_char8_C"
+    }
+   ]
+  },
+  {
+   "id": "dodge_neon_srt4_24_2003_2005",
+   "make": "Dodge",
+   "base": "^Neon",
+   "displ": 2.4,
+   "cyl": 4,
+   "years": [
+    2003,
+    2005
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/Dodge_Neon_SRT-4",
+     "says": "The SRT-4 'is available only with manual transmission' (NVG T850 five-speed, 2003-2005); the 2.4L in the Neon is the SRT-4 turbo.",
+     "via": "vin_rules_6.json dodge_neon_srt4_2003_2005_char8_S"
+    }
+   ]
+  },
+  {
+   "id": "jeep_wrangler_yj_25_1987_1993",
+   "make": "Jeep",
+   "base": "^Wrangler",
+   "displ": 2.5,
+   "cyl": 4,
+   "years": [
+    1987,
+    1993
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/Jeep_Wrangler_(YJ)",
+     "says": "An automatic option for four-cylinder Wranglers arrived in 1994; 'Automatic transmission was introduced in 1994 for 4-cylinder models' (Extreme Terrain); before 1994 the 2.5L used the Aisin AX-5 five-speed.",
+     "via": "vin_rules_6.json jeep_wrangler_yj_25_1989_1993_char8"
+    }
+   ]
+  },
+  {
+   "id": "jeep_wrangler_tj_24_2005_2006",
+   "make": "Jeep",
+   "base": "^Wrangler",
+   "displ": 2.4,
+   "cyl": 4,
+   "years": [
+    2005,
+    2006
+   ],
+   "verdict": "supports",
+   "note": "MY2003-2004 2.4L Wranglers had a 4-speed automatic (EPA 19191, 20317).",
+   "sources": [
+    {
+     "url": "https://www.quadratec.com/jeep_knowledgebase/article-102.htm",
+     "says": "Quadratec's 2005-2006 table lists the 2.4L (SE) with a six-speed manual only; DriveClean lists the 2005 and 2006 2.4L only as manual.",
+     "via": "vin_rules_6.json jeep_wrangler_tj_24_2005_2006_char8_1"
+    }
+   ]
+  },
+  {
+   "id": "jeep_liberty_24_2003_2005",
+   "make": "Jeep",
+   "base": "^Liberty",
+   "displ": 2.4,
+   "cyl": 4,
+   "years": [
+    2003,
+    2005
+   ],
+   "verdict": "supports",
+   "note": "Cars.com 2004 uses generic wording ('each engine teams with a four-speed-automatic or five-speed-manual'); the Chrysler worklist took Autoblog's explicit statement and EPA over it. Same reading here.",
+   "sources": [
+    {
+     "url": "https://www.autoblog.com/buy/2004-Jeep-Liberty/review/",
+     "says": "Autoblog 2004: 'The four-cylinder engine is only available with a five-speed manual gearbox'; Autoblog 2002: four-cylinder only with the five-speed manual.",
+     "via": "vin_rules_6.json jeep_liberty_24_2003_2005_char8_1"
+    }
+   ]
+  },
+  {
+   "id": "jeep_renegade_14t_2015_2018",
+   "make": "Jeep",
+   "base": "^Renegade",
+   "displ": 1.4,
+   "cyl": 4,
+   "years": [
+    2015,
+    2018
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://www.media.stellantisnorthamerica.com/newsrelease.do?id=15531",
+     "says": "'Paired with a six-speed manual transmission, the 1.4-liter MultiAir Turbo four-cylinder engine ...'; the 2.4-liter 'is paired exclusively with the nine-speed automatic transmission'.",
+     "via": "vin_rules_6.json jeep_renegade_14t_2015_2018_char8_H_W"
+    }
+   ]
+  },
+  {
+   "id": "nissan_xterra_24_2000_2004",
+   "make": "Nissan",
+   "base": "^Xterra",
+   "displ": 2.4,
+   "years": [
+    2000,
+    2004
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://www2020.theautochannel.com/news/press/date/19990104/press002061.html",
+     "says": "Nissan's Xterra announcement: the base XE's 2.4-liter four-cylinder 'is paired only with a 5-speed manual' and is offered only with two-wheel drive.",
+     "via": "vin_rules_2.json nissan_xterra_ka24de_2000_2004"
+    }
+   ]
+  },
+  {
+   "id": "nissan_frontier_24_4wd_1998_2000",
+   "make": "Nissan",
+   "base": "^Frontier",
+   "displ": 2.4,
+   "drive": "4wd",
+   "years": [
+    1998,
+    2000
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://consumerguide.com/used/1998-04-nissan-frontier/",
+     "says": "'All Frontiers offered either a manual or automatic transmission, except for 4-cylinder 4x4s, which were manual-shift only.'",
+     "via": "vin_rules_2.json nissan_frontier_ka24de_4wd_1998_2000"
+    }
+   ]
+  },
+  {
+   "id": "kia_sportage_20_4wd_2005_2009",
+   "make": "Kia",
+   "base": "^Sportage",
+   "displ": 2.0,
+   "drive": "4wd",
+   "years": [
+    2005,
+    2009
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://www.cars.com/reviews/our-view-2005-kia-sportage-1420689220097",
+     "says": "The 2005-2010 Sportage 2.0 four-cylinder with 4WD/AWD came only with the 5-speed manual; the 4-speed automatic was front-drive (or V6) only.",
+     "via": "vin_rules_3.json kia_sportage_20_4wd_2005_2009"
+    }
+   ]
+  },
+  {
+   "id": "isuzu_rodeo_26_1991_1997",
+   "make": "Isuzu",
+   "base": "^Rodeo",
+   "displ": 2.6,
+   "years": [
+    1991,
+    1997
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://www.edmunds.com/isuzu/rodeo/1996/review",
+     "says": "The 2.6-liter four-cylinder 'powers the two-wheel-drive S edition, which comes only with manual shift'.",
+     "via": "vin_rules_1.json isuzu_rodeo_26_4x2_1991_1997_char8"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Isuzu_MU",
+     "says": "Rodeo 1991: 2.6-liter inline-four or 3.1-liter V6; 'An automatic transmission was available for the V6.'",
+     "via": "vin_rules_1.json isuzu_rodeo_26_4x2_1991_1997_char8"
+    }
+   ]
+  },
+  {
+   "id": "isuzu_amigo_1989_1991",
+   "make": "Isuzu",
+   "base": "^Amigo",
+   "displ": null,
+   "years": [
+    1989,
+    1991
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/Isuzu_MU",
+     "says": "Amigo 1989: 'The transmission was initially manual only'; '1992: ... the added availability of a four-speed automatic transmission on the RWD version'.",
+     "via": "vin_rules_1.json isuzu_amigo_1998_char7"
+    }
+   ]
+  },
+  {
+   "id": "mazdaspeed3_23_2007_2013",
+   "make": "Mazda",
+   "base": "Speed 3|Mazdaspeed",
+   "displ": 2.3,
+   "years": [
+    2007,
+    2013
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/Mazdaspeed3",
+     "says": "Infobox transmission: 6-speed manual (only transmission listed, both generations).",
+     "via": "vin_rules_1.json mazda_mazdaspeed3_2010_2013_char8_L3T"
+    }
+   ]
+  },
+  {
+   "id": "bmw_z4_m_32_2006_2008",
+   "make": "BMW",
+   "base": "^Z4",
+   "displ": 3.2,
+   "cyl": 6,
+   "years": [
+    2006,
+    2008
+   ],
+   "verdict": "supports",
+   "sources": [
+    {
+     "url": "https://goauto.com.au/amp/bmw/z4/m-roadster/2006-04-19/31542.html",
+     "says": "GoAuto 2006: 'like the forthcoming Z4 M coupe, the manual-only M roadster is not available with SMG as BMW's clutchless manual gearbox is not compatible with the Z4's narrow transmission tunnel.'",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "vw_gti_vr6_28_2002_2004",
+   "make": "Volkswagen",
+   "base": "GTI|Golf",
+   "displ": 2.8,
+   "cyl": 6,
+   "years": [
+    2002,
+    2004
+   ],
+   "verdict": "supports",
+   "note": "MY2001 (5-speed VR6) has no editorial source in hand: only an EPA-derived fuel table, so 2001 stays EPA-only.",
+   "sources": [
+    {
+     "url": "https://www.edmunds.com/volkswagen/gti/2002/st-100075808/features-specs/",
+     "says": "Edmunds lists the 2002 GTI VR6 with a 6-speed manual transmission.",
+     "via": "WebSearch result text 2026-11-05"
+    },
+    {
+     "url": "https://www.cars.com/research/volkswagen-gti-2003/specs/102210",
+     "says": "Cars.com 2003 trim list: the VR6 only as a 6-speed manual; the automatic option was on the 1.8T.",
+     "via": "WebSearch result text 2026-11-05"
+    },
+    {
+     "url": "https://www.autoblog.com/buy/2004-Volkswagen-GTI-VR6__2dr_Hatchback/",
+     "says": "2004 GTI VR6: the only transmission choice is a six-speed manual.",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "vw_fox_1987_1993",
+   "make": "Volkswagen",
+   "base": "^Fox",
+   "displ": null,
+   "years": [
+    1987,
+    1993
+   ],
+   "verdict": "supports",
+   "note": "Ace Pick-A-Part Jacksonville lists a 1989 Fox as 'Automatic' (VIN-less listing). The protocol drops 1989 and holds the other years as candidates even though the editorial source says no automatic existed; the listing is probably wrong (hub to decide).",
+   "sources": [
+    {
+     "url": "https://consumerguide.com/used/1990-93-volkswagen-fox",
+     "says": "'No automatic transmission ever was offered'; 4-speed or 5-speed manual by year and trim.",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "dodge_dakota_25_1990_2002",
+   "make": "Dodge",
+   "base": "^Dakota",
+   "displ": 2.5,
+   "years": [
+    1990,
+    2002
+   ],
+   "verdict": "conflicting",
+   "note": "EPA lists only Manual 5-spd for the 2.5L every year 1990-2002 (and an automatic in 1989). No source found that states the 2.5L was manual-only; the Chrysler worklist reached the same verdict.",
+   "sources": [
+    {
+     "url": "https://www.edmunds.com/dodge/dakota/1997/features-specs.html",
+     "says": "Edmunds lists the 2.5L 2dr Regular Cab only as '2.5L 4cyl ... 5M'.",
+     "via": "vin_rules_6.json dodge_dakota_25_1990_2002_char8"
+    },
+    {
+     "url": "https://www.auto123.com/en/news/1999-2004-dodge-dakota-pre-owned/50186/",
+     "says": "'The Dakota range started with a 2.5 litre four-cylinder ... A five-speed stick or four-speed automatic was available here.' (range-level wording)",
+     "via": "vin_rules_6.json dodge_dakota_25_1990_2002_char8 and WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "chevrolet_s10_28_1989_1993",
+   "make": "Chevrolet",
+   "base": "^S10|^Blazer",
+   "displ": 2.8,
+   "years": [
+    1989,
+    1993
+   ],
+   "verdict": "conflicting",
+   "note": "EPA lists automatics for the 2.8 V6 through 1988 and only Manual 5-spd for 1989-1993 (S10 Pickup 2WD/4WD, S10 Blazer 1989), with the 4.3 V6 taking the automatic. No editorial source found either way; the only explicit statement is a content-farm FAQ.",
+   "sources": [
+    {
+     "url": "https://kevinsautos.com/faq/what-transmission-does-a-1990-s10-have.html",
+     "says": "Says the 1990 S-10 2.8 could be ordered with either a 5-speed manual or a 4-speed automatic (content-farm FAQ, not a reference source).",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "gmc_sonoma_28_1989_1993",
+   "make": "GMC",
+   "base": "^Sonoma|^S15",
+   "displ": 2.8,
+   "years": [
+    1989,
+    1993
+   ],
+   "verdict": "conflicting",
+   "note": "Same powertrain line-up as the S10 2.8 (see chevrolet_s10_28_1989_1993).",
+   "sources": [
+    {
+     "url": "https://kevinsautos.com/faq/what-transmission-does-a-1990-s10-have.html",
+     "says": "S-10 2.8 with either a 5-speed manual or a 4-speed automatic (content-farm FAQ).",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "dodge_dakota_22_1987_1988",
+   "make": "Dodge",
+   "base": "^Dakota",
+   "displ": 2.2,
+   "years": [
+    1987,
+    1988
+   ],
+   "verdict": "conflicting",
+   "sources": [
+    {
+     "url": "https://ipfs.ssi.eecc.de/ipns/en.wikipedia-on-ipfs.org/wiki/Dodge_Dakota",
+     "says": "Search summary: the two engines (2.2 and 3.9) could be had with either a five-speed manual or a three-speed automatic.",
+     "via": "WebSearch result text 2026-11-05"
+    },
+    {
+     "url": "https://www.fortrucksonly.com/truckforum/threads/first-generation-dakota-history-1987-1996.956",
+     "says": "Forum history: 1987 automatic three-speed V6 only; 1988-1991 A-500 four-speed V6 only.",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "chevrolet_tracker_16_1999_2000",
+   "make": "Chevrolet",
+   "base": "^Tracker",
+   "displ": 1.6,
+   "years": [
+    1999,
+    2000
+   ],
+   "verdict": "conflicting",
+   "sources": [
+    {
+     "url": "https://consumerguide.com/used/1999-04-chevrolet-tracker",
+     "says": "1.6-liter four standard in the 1999 convertible; dropped for 2000 (EPA still lists a 2000 1.6).",
+     "via": "WebSearch result text 2026-11-05"
+    },
+    {
+     "url": "https://www.carwhere.com/specs/chevrolet/tracker-convertible/1998",
+     "says": "Lists a 1998 1.6L with a 3-speed automatic.",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "hyundai_tucson_20_awd_2005_2009",
+   "make": "Hyundai",
+   "base": "^Tucson",
+   "displ": 2.0,
+   "drive": "awd",
+   "years": [
+    2005,
+    2009
+   ],
+   "verdict": "conflicting",
+   "sources": [
+    {
+     "url": "https://www.jalopnik.com/2292908/years-hyundai-tucson-manual-transmission-united-states/",
+     "says": "Supporting: 'on the GL, AWD required the manual transmission' (Jalopnik). Conflicting: Cars.com 2007 says both gearboxes come with FWD or optional 4WD; Auto123's 2006 GL AWD spec lists an optional 4-speed automatic.",
+     "via": "vin_rules_3.json hyundai_tucson_20_awd_2005_2009"
+    }
+   ]
+  },
+  {
+   "id": "kia_sportage_20_2wd_1995_1996",
+   "make": "Kia",
+   "base": "^Sportage",
+   "displ": 2.0,
+   "drive": "4x2",
+   "years": [
+    1995,
+    1996
+   ],
+   "verdict": "conflicting",
+   "sources": [
+    {
+     "url": "https://consumerguide.com/used/1995-02-kia-sportage/",
+     "says": "'Only a 5-speed manual transmission was available in the 2WD version' (automatic came to 2WD for 1997). Conflicting: Carwhere lists a 1996 2WD with both.",
+     "via": "vin_rules_3.json kia_sportage_2wd_sohc_1995_1996"
+    }
+   ]
+  },
+  {
+   "id": "toyota_tacoma_27_4wd_2005_2010",
+   "make": "Toyota",
+   "base": "^Tacoma",
+   "displ": 2.7,
+   "drive": "4wd",
+   "years": [
+    2005,
+    2010
+   ],
+   "verdict": "conflicting",
+   "sources": [
+    {
+     "url": "https://www.cars.com/articles/2005-toyota-tacoma-whats-new-1420685445813",
+     "says": "The four-cylinder came with a five-speed manual or four-speed automatic (not split by 2WD/4WD); Canadian sources differ. EPA lists Automatic 4-spd for the 4WD 2.7 from 2006.",
+     "via": "vin_rules_2.json toyota_tacoma_2trfe_4wd_2005_2010"
+    }
+   ]
+  },
+  {
+   "id": "suzuki_samurai_1986_1995",
+   "make": "Suzuki",
+   "base": "^Samurai",
+   "displ": null,
+   "years": [
+    1986,
+    1995
+   ],
+   "verdict": "conflicting",
+   "sources": [
+    {
+     "url": "https://www.jdpower.com/cars/shopping-guides/suzuki-samurai-history-generations-models-differences",
+     "says": "A general guide lists the five-speed manual, a GM TH180 three-speed automatic and a 4L30E automatic for the Samurai line without years; an Israeli catalog lists 1986 automatics for other countries. No source covers US automatic availability for 1986-1987.",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "jeep_cherokee_xj_25_1991_1993",
+   "make": "Jeep",
+   "base": "^Cherokee",
+   "displ": 2.5,
+   "years": [
+    1991,
+    1993
+   ],
+   "verdict": "conflicting",
+   "sources": [
+    {
+     "url": "https://www.thecarspec.net/car-detail/jeep-cherokee-ii-xj-25-i-se-130-hp-automatic-1993",
+     "says": "Spec sites list a 1993 XJ 2.5i automatic; EPA lists only Manual 5-spd for the 2.5L in 1991-1993.",
+     "via": "vin_rules_6.json jeep_cherokee_xj_25_1991_1993_char8_P"
+    }
+   ]
+  },
+  {
+   "id": "bmw_318is_1991_1992",
+   "make": "BMW",
+   "base": "3 Series",
+   "displ": null,
+   "years": [
+    1991,
+    1992
+   ],
+   "verdict": "conflicting",
+   "note": "EPA 1992 '318i/318iS' lists only manuals, but the E36 318i sedan of 1993 lists an automatic; no reference source found for 1991-1992.",
+   "sources": [
+    {
+     "url": "https://www.classic.com/veh/1991-bmw-318is-wbaaf9313mee68616-4ymVwa4/",
+     "says": "A dealer blurb says most 318is examples were sold with an automatic (unsourced); other 1991 listings are 5-speed manuals.",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "alfa_spider_1984_1989",
+   "make": "Alfa Romeo",
+   "base": "Spider",
+   "displ": null,
+   "years": [
+    1984,
+    1989
+   ],
+   "verdict": "weak_support",
+   "sources": [
+    {
+     "url": "https://www.hagerty.com/marketplace/auction/1991-Alfa-Romeo-Spider/ef3fca86-2c1c-4d90-8bf9-68b23e8a059c",
+     "says": "Auction listing text: the Series 4 (1990-93) was the first Spider with an automatic option (3-speed ZF). Sale-listing text only, so not counted.",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "ford_ranger_23_4wd_1985_1996",
+   "make": "Ford",
+   "base": "^Ranger",
+   "displ": 2.3,
+   "drive": "4wd",
+   "years": [
+    1985,
+    1997
+   ],
+   "verdict": "weak_support",
+   "note": "EPA lists only Manual 5-spd for the 4WD 2.3L in every year 1985-1996 (2WD 2.3L had automatics). Only forum posts found.",
+   "sources": [
+    {
+     "url": "https://www.ford-trucks.com/forums/234209-4-cylinder-4x4.html",
+     "says": "Forum posts: Ford offered the 2.3L 4-cylinder with a manual in regular-cab 4WD Rangers into the mid-1990s; such trucks are uncommon. Forum text only, so not counted.",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "chevrolet_camaro_25_1985",
+   "make": "Chevrolet",
+   "base": "^Camaro",
+   "displ": 2.5,
+   "years": [
+    1982,
+    1986
+   ],
+   "verdict": "contradicts",
+   "sources": [
+    {
+     "url": "https://jalopnik.com/chevrolets-first-four-cylinder-camaro-was-really-bad-1825128229",
+     "says": "The four-cylinder Camaro had a four-speed manual standard and a three-speed automatic at extra cost; 'in 1984, the transmission choices upgraded to a five-speed manual and four-speed auto'. EPA 1985 lists only Manual 5-spd for the 2.5 (id 62): an EPA gap.",
+     "via": "WebSearch result text 2026-11-05"
+    }
+   ]
+  },
+  {
+   "id": "ford_ranger_20_1985_1988",
+   "make": "Ford",
+   "base": "^Ranger",
+   "displ": 2.0,
+   "years": [
+    1985,
+    1988
+   ],
+   "verdict": "contradicts",
+   "sources": [
+    {
+     "url": "https://www.therangerstation.com/tech/ford-ranger-manual-transmissions/",
+     "says": "'1985-1988 - Rangers with NON-overdrive automatic trans (essentially 2.0 carb engine ONLY) will be a C-3', i.e. 2.0L Rangers had an automatic, which EPA does not list.",
+     "via": "vin_rules_4.json ford_ranger_20_1985_1987_char8_C"
+    }
+   ]
+  }
+ ]
+}

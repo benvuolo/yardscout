@@ -1,0 +1,5334 @@
+{
+ "worklist": 7,
+ "makes": [
+  "Volkswagen",
+  "Audi",
+  "BMW",
+  "MINI",
+  "Mercedes-Benz",
+  "Volvo",
+  "Saab",
+  "Porsche",
+  "Land Rover"
+ ],
+ "generated_utc": "2026-11-05T13:10Z",
+ "generator": "scraper/manual_detect/vin_rules_7.py",
+ "inputs": {
+  "inventory": "docs/data/inventory_live.json",
+  "extras": "docs/data/vehicle_extras.json",
+  "vin_cache": "docs/data/vin_decodes.json.gz",
+  "ground_truth": "scraper/manual_detect/ground_truth.jsonl",
+  "epa": "scraper/manual_detect/epa/vehicles.csv (present)",
+  "mid_filings_read": "945 Part 565 filings (VW Group incl. Audi 287+59, BMW/MINI 263, Mercedes/Daimler 162, Volvo Car 87, Porsche 84, Land Rover/JLR 268 (LR-relevant subset), Saab 16, FHI 3), filed up to 2021; scanned ones OCR'd"
+ },
+ "answer": {
+  "Volkswagen": "PARTLY ENCODED. Position 4 ('Series') carries the transmission for some lines from MY2006: Rabbit (A/C manual, B/D automatic, 2006-2009), new GTI (E/G manual, F/H automatic, 2006-2010), Eos (A/C manual, B/D/F automatic, 2007-2010), Passat B6 (2006-2008 sedan and wagon, e.g. G/U/K/H/Y/N/W/S manual), CC (N manual, M/H automatic, 2009-2010), Golf (A/C 5MT, M/N 6MT, B/D automatic, 2010); VW keeps this for Golf/GTI in later breakdowns. NOT ENCODED before MY2006 (MY2004-2005 breakdowns: position 4 is a trim such as GL/GLS/GLX) and NOT ENCODED for Jetta, Jetta SportWagen, GLI, New Beetle, Passat NMS (A/B/C = S/SE/SEL), Routan, Touareg, Tiguan in any breakdown read.",
+  "Audi": "NOT ENCODED for MY2005-2009 (Audi VIN breakdowns: position 4 series, 5 engine, 6 restraint, 7-8 model; no transmission column). From the MY2010 breakdown on, the position 4 series table carries a 'Trans' column (A/M) for some series (e.g. MY2018 A4 quattro Premium D = automatic, N = manual). Not ruled here: no lot car without transmission info falls in a manual code of those years.",
+  "BMW": "ENCODED BY MODEL CODE in two eras. MY1981-1990 (E21/E23/E24/E28/E30/E32/E34): BMW of North America's serial-number manual gives the automatic its own AG code (VIN positions 4-7), e.g. 325i/4 AD13 vs 325i A/4 AD23, 525i HC13 vs HC23. E39 5 Series MY1999-2003: 525i DT3x / 525iA DT4x, 530i DT5x / DT6x, 540i DN5x / DN6x, 525iT DS3x / DS4x (BMW MY2003 DMV package). NOT ENCODED for E46 3 Series (1999-2006), E53 X5, E83 X3, Z3/Z4, E60/E90 and later (one code covers both transmissions). E36 (1992-1999), E34 1991-1995, E31, 528i 1997-2000 codes come in pairs, but no BMW document in MID names which is the automatic.",
+  "MINI": "NOT ENCODED: BMW's MY2003 table gives Cooper (RC33) and Cooper S (RE33) one type code each for both transmissions, and later type codes (MF33/MF73, SU3C/SV3C, ZB3C/ZC3C ...) likewise. Manual-only by model: Cooper S RE33 MY2003-2004 (BMW lists no automatic serial range; EPA Manual 6-spd only; automatic from MY2005), MY2002 candidate (no EPA row). John Cooper Works MY2009 (MF93 Hardtop, MM93 Clubman) and MY2012 (SV9C, ZG9C, ZP9C, SX5C) per BMW's MINI decipherment tables, manual-only per EPA (first automatic JCW rows are MY2013).",
+  "Mercedes-Benz": "NOT ENCODED in any filing read (MY1980s-2021). Positions 4-6/4-7 are the model (e.g. WDD WF4J = C300 sedan); the MY2016+ tables give an automatic gear count in the engine description. US manuals (190E 2.3/2.6, C230/C320 Sport, SLK, C300 Sport, SLK250) share their model code with automatics. vPIC's 'manual' for every 1999-2000 SLK230 is a vPIC default (uniformCell), not VIN evidence.",
+  "Volvo": "NOT ENCODED. MY1984-1993: 4 series, 5 restraint, 6-7 engine, 8 body. MY1994-2003 filings annotate engine-version + emissions combinations as Man. Only / Auto Only / both; the only US manual-only combination is the 850 B5254S with emissions code 0 (MY1994-1995, plus Canada-only B5234T/B5234T5 code 0). MY2004 on: engine versions annotated 'Automatic Only' or 'Automatic/Manual', no manual-only version.",
+  "Saab": "ENCODED. Position 7 'Gearbox' in every Saab filing in MID: MY1988-2001 5 = 5-speed manual, 6 = 3-speed automatic (900, to MY1994), 8 = 4-speed automatic; MY2010-2012 M/N = 6-speed manual, A/B = 6-speed automatic, C = 5-speed automatic (MY2010-2011). MID has no Saab filing for MY2002-2009 (vPIC decodes these, codes 5/6/7 manual). Not Saab VINs: 9-7X (GM, 5S3, automatic only) and 9-2X (Subaru, JF4; no filing for JF4).",
+  "Porsche": "NOT ENCODED in any filing read (MY1985-2021: line, body type, restraint system, engine; Cayenne lists a GVWR per transmission but no VIN code).",
+  "Land Rover": "ENCODED MY1993-1998: position 8 'Transmission Type' 4 = 4-speed automatic, 8 = 5-speed manual. MY1999 on: the position lists automatics only (4; Freelander 2 = 5-speed automatic), and every lot car with a VIN already has a vPIC transmission."
+ },
+ "vin_scheme": {
+  "Saab": "YS3: 4 car line, 5 model series/restraint, 6 body, 7 GEARBOX, 8 engine, 10 year, 11 assembly line.",
+  "Land Rover": "SAL (1993-1998): 4-5 model/line, 6 body, 7 engine, 8 TRANSMISSION TYPE, 10 year, 11 plant.",
+  "BMW": "WBA/WBS/4US/5UX/WBX: 4-7 AG (type) code = model identification code; 10 year; 11 plant. Transmission is part of the model code only where BMW split it (see answer).",
+  "MINI": "WMW: 4-7 type code (RC33 Cooper, RE33 Cooper S, ...), one code per model for both transmissions.",
+  "Volkswagen": "4 series (trim; transmission for some lines MY2006+), 5 engine, 6 restraint, 7-8 model, 10 year, 11 plant.",
+  "Audi": "4 series (with a Trans column MY2010+), 5 engine, 6 restraint, 7-8 model, 10 year, 11 plant.",
+  "Volvo": "4 series, 5 body/restraint, 6-7 engine version, 8 emissions (1994-2003) or body (to 1993), 10 year, 11 factory.",
+  "Mercedes-Benz": "4-6/4-7 model (e.g. WF4J C300 sedan), 8 restraint, 10 year, 11 plant.",
+  "Porsche": "4 line/market, 5 body, 6 restraint/engine, 7-8 model type, 10 year, 11 plant."
+ },
+ "not_encoded_or_not_ruled": [
+  {
+   "make": "Mercedes-Benz",
+   "years": "all",
+   "why": "VIN does not encode the transmission; no model code is manual-only on the lots in a way EPA confirms."
+  },
+  {
+   "make": "Porsche",
+   "years": "all",
+   "why": "VIN does not encode the transmission. Manual-only US models (944 Turbo/S2, 911 GT3) are not separable from the model codes filed, or have no lot car."
+  },
+  {
+   "make": "Audi",
+   "years": "2010+",
+   "why": "Position 4 'Trans' column exists from the MY2010 breakdown; vPIC already decodes these and no lot car without transmission info has a manual code, so no rule was written in this pass."
+  },
+  {
+   "make": "Volkswagen",
+   "years": "2011+",
+   "why": "Golf/GTI/Golf R position 4 keeps a transmission split in later breakdowns; vPIC already decodes these. Jetta, Passat NMS, Beetle, Tiguan, Routan, Touareg: not encoded."
+  },
+  {
+   "make": "MINI",
+   "years": "2010-2011 John Cooper Works; 2009 JCW Convertible",
+   "why": "JCW type codes for MY2010-2011 were not transcribed (no lot car carries one). The lot's one MY2009 MS93 (vPIC: no trim) is not in BMW's MY2009 table, so it gets no claim."
+  },
+  {
+   "make": "BMW",
+   "years": "1991-1998 (E36, E34 1991-1995, E31, E32 1991-1994)",
+   "why": "BMW's Part 565 filings list both codes of each pair ('HE13 or HE23') without naming the transmission, and no BMW serial-range manual after 1990 is in MID. vPIC decodes some of them (e.g. CD43, BG23 automatic; BG13 manual)."
+  },
+  {
+   "make": "Volvo",
+   "years": "1996 850 B5254S code 4",
+   "why": "Listed in the same filing both as 'Man. Only' (markets 31, 39) and 'Auto Only' (market 31)."
+  }
+ ],
+ "summary": {
+  "rules": 14,
+  "rules_by_status": {
+   "keep": 3,
+   "low_sample": 7,
+   "candidate": 4
+  },
+  "newly_confirmed_manual_keep_and_low_sample_rules": 58,
+  "newly_confirmed_manual_candidate_rules_only": 31,
+  "newly_confirmed_manual_by_rule": {
+   "saab_ys3_char7_gearbox_1988_2001": 0,
+   "saab_ys3_char7_gearbox_2010_2012": 0,
+   "saab_ys3_char7_gearbox_2002_2009_vpic_only": 0,
+   "saab_9_2x_jf4_char11_subaru_scheme": 3,
+   "landrover_sal_char8_transmission_1993_1998": 0,
+   "volvo_engine_emission_combination_1994_1999": 0,
+   "bmw_ag_code_1981_1990": 12,
+   "bmw_e39_ag_code_1999_2003": 11,
+   "bmw_e39_528i_540i_1997_2000_vpic_only": 9,
+   "bmw_m5_e39_manual_only": 0,
+   "mini_cooper_s_r53_re33_2003_2004": 30,
+   "mini_cooper_s_r53_re33_2002": 19,
+   "mini_john_cooper_works_2009_2012": 4,
+   "vw_wvw_char4_series_transmission_2006_2010": 1
+  },
+  "newly_confirmed_manual_by_feed_make": {
+   "BMW": 23,
+   "MINI": 34,
+   "Volkswagen": 1
+  },
+  "newly_labelled_automatic_keep_and_low_sample_rules": 136,
+  "canadian_yard_cars_not_counted": 4,
+  "ground_truth_precision_manual_claims_kept_rules": {
+   "checkable": 100,
+   "agree": 100,
+   "precision": 1.0
+  },
+  "ground_truth_agreement_all_claims_kept_rules": {
+   "checkable": 661,
+   "agree": 661,
+   "agreement": 1.0
+  },
+  "scan": {
+   "rule_wmi_vins": 8751,
+   "out_of_rule_scope": 6289,
+   "covered": 1270,
+   "in_scope_code_not_in_table": 1153,
+   "bad_check_digit": 37,
+   "vin_year_vs_listing_mismatch": 2
+  },
+  "lot_coverage_by_feed_make": {
+   "Volkswagen": {
+    "cars": 6905,
+    "no_trans_info": 4327,
+    "covered_by_rule": 581
+   },
+   "Audi": {
+    "cars": 2277,
+    "no_trans_info": 1652
+   },
+   "BMW": {
+    "cars": 5388,
+    "no_trans_info": 5233,
+    "covered_by_rule": 230
+   },
+   "MINI": {
+    "cars": 1012,
+    "no_trans_info": 997,
+    "covered_by_rule": 53
+   },
+   "Mercedes-Benz": {
+    "cars": 4736,
+    "no_trans_info": 4624
+   },
+   "Volvo": {
+    "cars": 2476,
+    "no_trans_info": 1788,
+    "covered_by_rule": 79
+   },
+   "Saab": {
+    "cars": 387,
+    "no_trans_info": 86,
+    "covered_by_rule": 300
+   },
+   "Porsche": {
+    "cars": 181,
+    "no_trans_info": 174
+   },
+   "Land Rover": {
+    "cars": 833,
+    "no_trans_info": 115,
+    "covered_by_rule": 27
+   }
+  }
+ },
+ "validation_method": "Every lot car with a rule WMI, a 17-character VIN and a valid check digit is classified. The model year comes from VIN character 10 (the listing year only picks the 30-year cycle and must be within 2 years). A rule fires only when the VIN matches its WMI, years and fixed characters and its decision characters are in its table for that year; other codes get no claim. Ground truth = scraper/manual_detect/ground_truth.jsonl; uniformCell lines are unlabelled (counted separately), speeds-only lines are excluded, the rest are checkable: agree means (truth is manual) == (rule says manual). All VIN-bearing truth comes from vPIC, which NHTSA builds from the same manufacturer data, so agreement is partly circular; the per-car EPA union check (year, make, feed/vPIC model names, vPIC displacement: a manual claim is consistent when EPA lists a manual, an automatic claim when EPA lists a non-manual) and, for sole-offering rules, the EPA rows of the exact model (row ids; every rule year must have rows and all must be the claimed class) are the independent checks. Status: candidate (not counted) when status_flag is set (the code meaning is not the manufacturer's own for those years, or the EPA check cannot run); drop when >= 20 checkable and agreement < 0.995 or an EPA sole-offering check fails; low_sample when < 20 checkable (kept: the code meaning comes from the manufacturer's own VIN document); keep otherwise. newly_confirmed_manual counts lot cars at US yards with no published transmission (vehicle_extras trans empty) that a keep or low_sample rule calls manual; Canadian-yard cars are listed but not counted.",
+ "rules": [
+  {
+   "id": "saab_ys3_char7_gearbox_1988_2001",
+   "make": "Saab",
+   "status": "keep",
+   "status_reason": ">= 20 checkable cars and agreement >= 0.995",
+   "basis": "transmission_code",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Saab",
+    "models": "Saab 900 (classic and NG), 9000, 9-3 (1999-2001), 9-5 (1999-2001)",
+    "model_years": [
+     1988,
+     2001
+    ],
+    "wmi": [
+     "YS3"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "position 7",
+    "manual_codes": {
+     "5": "5-speed manual (MY1988-2001)"
+    },
+    "automatic_codes": {
+     "6": "3-speed automatic (900; listed MY1988-1994) (MY1988-1994)",
+     "8": "4-speed automatic (MY1988-2001)"
+    }
+   },
+   "vin_regex_manual": "^((YS3)...5..[1JKLMNPRSTVWXY].......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/2839b830-8346-4492-9171-cda7753fa370",
+     "doc": "NHTSA 01-22-N11B-3046, Saab-Scania of America 1988-10-12, VIN format and coding for 1989 Saab cars, OCR",
+     "says": "Positions: 4 Product Line (A = Saab 900, C = Saab 9000), 5 Model Series & Restraint, 6 Body Type, 7 - Gearbox: 5 = 5-speed Manual, 6 = 3-speed Automatic, 8 = 4-speed Automatic; 8 Engine Type."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/969940d5-9681-47f0-b32a-cb05e145ca0c",
+     "doc": "NHTSA 01-22-N11B-3986, Saab Cars North America 1990-07-06, 1988-1990 Saab VIN coding format, OCR",
+     "says": "MY1990 and MY1988-1989 sheets: '7 - Gearbox: 5 = 5-Speed Manual, 6 = 3-Speed Automatic (900), 8 = 4-Speed Automatic (9000)'."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9b8abf7b-e2bb-47f9-944a-250582b8d1ea",
+     "doc": "NHTSA 01-22-N11B-4735, Saab Cars USA 1991-06-20, VIN deciphering for MY1992, OCR",
+     "says": "'7 . Gearbox: 5 = 5-Speed Manual, 6 = 3-Speed Automatic (900 only), 8 = 4-Speed Automatic (9000 only)'; model year N = 1992."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/2f075528-8fbc-42b7-bffc-e347344c4674",
+     "doc": "NHTSA 01-22-N11B-5368, Saab Cars USA 1993-11-23, MY1993 VIN coding, OCR",
+     "says": "'7 Gearbox: 5 = 5-Speed Manual, 6 = 3-Speed Automatic (900 only), 8 = 4-Speed Automatic (9000 only)'; P = 1993."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/2add9339-bf48-48bc-a7b7-64c4b4f70983",
+     "doc": "NHTSA 01-22-N11B-5385, Saab Cars USA 1993-11-24, MY1994 VIN coding, OCR",
+     "says": "Car line A = Saab 900 (Convertible only), C = 9000, D = 900 (New Generation); '7 Gearbox: 5 = 5-Speed Manual, 6 = 3-Speed Automatic (900 Convertible only), 8 = 4-Speed Automatic'."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/16dcefa9-31bc-4744-9824-0a3cbc8680c7",
+     "doc": "NHTSA 01-22-N11B-5627, Saab Cars USA 1994-03-08, MY1995 VIN coding, OCR",
+     "says": "'7 Gearbox: 5 = 5-Speed Manual, 8 = 4-Speed Automatic' (C = 9000, D = 900)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/dc176f2d-ba46-494b-bb2c-a0c0786fa7a9",
+     "doc": "NHTSA 01-22-N11B-5866, Saab Cars USA 1995-05-31, MY1996 VIN coding, OCR",
+     "says": "'7 Gearbox: 5 = 5-Speed Manual, 8 = 4-Speed Automatic'; T = 1996."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/59685278-ddfe-4f0c-8b66-6c5313b1baf3",
+     "doc": "NHTSA 01-22-N11B-6702, Saab Cars USA 1998-02-09, 1999 Vehicle Identification Number (service information sheet), OCR",
+     "says": "Car line D = Saab 9-3, E = Saab 9-5; '7 Gearbox: 5 = 5-Speed Manual' (the automatic code is cut off in the scan; the MY2001 sheet below gives 8 = 4-Speed Automatic)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f2d5eaaa-f1d9-4363-91a1-84ef8b89dbf1",
+     "doc": "NHTSA 01-022-N11B-8039, Saab Cars USA 2000-10-13, Saab Model Year 2001 VIN information, text layer",
+     "says": "'Gearbox: 5 = 5-Speed Manual, 8 = 4-Speed Automatic'; car line D = 9-3, E = 9-5; model year 1 = 2001."
+    }
+   ],
+   "notes": "Filings in MID cover MY1988-1990, 1992-1996, 1999 and 2001; every one lists position 7 'Gearbox' with 5 = 5-speed manual. MY1991, 1997-1998 and 2000 have no filing in MID and are included because the filings on both sides are identical for codes 5 and 8.",
+   "epa_rows": [],
+   "validation": {
+    "lot_cars_in_scope": 67,
+    "checkable": 65,
+    "agree": 65,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_ground_truth_manual": 23,
+    "manual_claims": {
+     "in_scope": 24,
+     "checkable": 23,
+     "agree": 23,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 43,
+     "checkable": 42,
+     "agree": 42,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 67,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "1999 8": 12,
+    "2001 8": 11,
+    "2000 8": 8,
+    "1999 5": 5,
+    "1998 8": 4,
+    "1995 5": 3,
+    "1990 5": 3,
+    "1991 5": 2,
+    "1991 8": 2,
+    "1988 5": 2,
+    "1991 6": 2,
+    "1998 5": 2,
+    "1992 5": 2,
+    "2001 5": 2,
+    "1989 5": 1,
+    "1997 5": 1,
+    "1997 8": 1,
+    "1996 8": 1,
+    "1994 8": 1,
+    "1992 6": 1,
+    "2000 5": 1
+   },
+   "in_scope_codes_not_in_table": {},
+   "newly_confirmed_manual": 0,
+   "newly_labelled_automatic": 0,
+   "no_trans_info_breakdown": {}
+  },
+  {
+   "id": "saab_ys3_char7_gearbox_2010_2012",
+   "make": "Saab",
+   "status": "low_sample",
+   "status_reason": "4 checkable cars (< 20); kept because the code meaning comes from the manufacturer's own VIN document",
+   "basis": "transmission_code",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Saab",
+    "models": "Saab 9-3, 9-5 (YS3 builds)",
+    "model_years": [
+     2010,
+     2012
+    ],
+    "wmi": [
+     "YS3"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "position 7",
+    "manual_codes": {
+     "M": "6-speed manual FWD (MY2010-2012)",
+     "N": "6-speed manual AWD (MY2010-2012)"
+    },
+    "automatic_codes": {
+     "A": "6-speed automatic FWD (MY2010-2012)",
+     "B": "6-speed automatic AWD (MY2010-2012)",
+     "C": "5-speed automatic FWD (MY2010-2011)"
+    }
+   },
+   "vin_regex_manual": "^((YS3)...M..[ABC].......|(YS3)...N..[ABC].......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7024b658-09b1-4e31-8585-78498998fff3",
+     "doc": "NHTSA ORG5676, Saab Cars North America 2010-03-04, '2010 Saab 9-3 and 9-5 Vehicle Identification Number', OCR",
+     "says": "'Pos. 7 Gearbox: A 6-speed automatic/Front wheel drive, B 6-speed automatic/All wheel drive, C 5-speed automatic/Front wheel drive, M 6-speed manual/Front wheel drive, N 6-speed manual/All wheel drive'."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0bea485d-6fec-4327-93f9-d7232bddabd1",
+     "doc": "NHTSA ORG5930, Saab Cars North America 2010-07-15, '2011 Saab 9-3 and 9-5 Vehicle Identification Number', OCR",
+     "says": "'Pos. 7 Gearbox: A 6-speed automatic/Front wheel drive, B 6-speed automatic/All wheel drive, C 5-speed automatic/Front wheel drive, M 6-speed manual/Front wheel drive, N 6-speed manual/All wheel drive'; B = 2011."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/be63e5b8-5420-47f5-b4e5-8049e55e4a9b",
+     "doc": "NHTSA ORG7108, Saab Automobile AB 2011-09-14, '2012 Saab 9-3 and 9-5 Vehicle Identification Number (07-20-2011)', OCR",
+     "says": "'Pos. 7 Gearbox: A 6-speed automatic/FWD, B 6-speed automatic/AWD, M 6-speed manual/FWD, N 6-speed manual/AWD'."
+    }
+   ],
+   "notes": "",
+   "epa_rows": [],
+   "validation": {
+    "lot_cars_in_scope": 14,
+    "checkable": 4,
+    "agree": 4,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_ground_truth_manual": 0,
+    "manual_claims": {
+     "in_scope": 0,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 14,
+     "checkable": 4,
+     "agree": 4,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 10,
+    "uniform_cell_lines_that_would_agree": 10,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 14,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "2011 C": 5,
+    "2010 C": 4,
+    "2011 A": 4,
+    "2011 B": 1
+   },
+   "in_scope_codes_not_in_table": {},
+   "newly_confirmed_manual": 0,
+   "newly_labelled_automatic": 0,
+   "no_trans_info_breakdown": {}
+  },
+  {
+   "id": "saab_ys3_char7_gearbox_2002_2009_vpic_only",
+   "make": "Saab",
+   "status": "candidate",
+   "status_reason": "MID holds no Saab filing for MY2002-2009; the code meanings here are vPIC's (code 6 meant a 3-speed automatic in the MY1988-1994 filings), so the table is not the manufacturer's own for these years",
+   "basis": "transmission_code",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Saab",
+    "models": "Saab 9-3 (2003+ Epsilon and 2002 9-3), 9-5",
+    "model_years": [
+     2002,
+     2009
+    ],
+    "wmi": [
+     "YS3"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "position 7",
+    "manual_codes": {
+     "5": "manual (vPIC) (MY2002-2009)",
+     "6": "6-speed manual (vPIC) (MY2002-2009)",
+     "7": "manual (vPIC) (MY2002-2009)"
+    },
+    "automatic_codes": {
+     "1": "automatic (vPIC) (MY2002-2009)",
+     "2": "automatic (vPIC) (MY2002-2009)",
+     "8": "automatic (vPIC) (MY2002-2009)",
+     "9": "automatic (vPIC) (MY2002-2009)"
+    }
+   },
+   "vin_regex_manual": "^((YS3)...5..[23456789].......|(YS3)...6..[23456789].......|(YS3)...7..[23456789].......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f2d5eaaa-f1d9-4363-91a1-84ef8b89dbf1",
+     "doc": "NHTSA 01-022-N11B-8039, Saab Cars USA 2000-10-13, Saab Model Year 2001 VIN information, text layer",
+     "says": "'Gearbox: 5 = 5-Speed Manual, 8 = 4-Speed Automatic'; car line D = 9-3, E = 9-5; model year 1 = 2001."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7024b658-09b1-4e31-8585-78498998fff3",
+     "doc": "NHTSA ORG5676, Saab Cars North America 2010-03-04, '2010 Saab 9-3 and 9-5 Vehicle Identification Number', OCR",
+     "says": "'Pos. 7 Gearbox: A 6-speed automatic/Front wheel drive, B 6-speed automatic/All wheel drive, C 5-speed automatic/Front wheel drive, M 6-speed manual/Front wheel drive, N 6-speed manual/All wheel drive'."
+    }
+   ],
+   "notes": "vPIC decodes every lot YS3 VIN of these years, so the rule adds nothing; it documents the codes.",
+   "epa_rows": [],
+   "validation": {
+    "lot_cars_in_scope": 207,
+    "checkable": 186,
+    "agree": 186,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_ground_truth_manual": 39,
+    "manual_claims": {
+     "in_scope": 39,
+     "checkable": 39,
+     "agree": 39,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 168,
+     "checkable": 147,
+     "agree": 147,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 19,
+    "uniform_cell_lines_that_would_agree": 19,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 207,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "2007 9": 36,
+    "2006 9": 27,
+    "2005 9": 23,
+    "2004 9": 20,
+    "2003 9": 18,
+    "2008 9": 15,
+    "2007 6": 7,
+    "2004 5": 7,
+    "2003 8": 6,
+    "2009 9": 6,
+    "2002 5": 5,
+    "2005 5": 5,
+    "2007 1": 4,
+    "2002 8": 4,
+    "2006 6": 4,
+    "2006 1": 4,
+    "2003 5": 3,
+    "2006 5": 3,
+    "2008 1": 2,
+    "2002 9": 2,
+    "2003 6": 2,
+    "2008 6": 2,
+    "2009 2": 1,
+    "2009 7": 1
+   },
+   "in_scope_codes_not_in_table": {},
+   "newly_confirmed_manual": 0,
+   "newly_labelled_automatic": 0,
+   "no_trans_info_breakdown": {}
+  },
+  {
+   "id": "saab_9_2x_jf4_char11_subaru_scheme",
+   "make": "Saab",
+   "status": "candidate",
+   "status_reason": "no MID filing covers WMI JF4; the meaning is borrowed from Subaru's JF1 scheme, not stated for this WMI",
+   "basis": "transmission_code",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Saab",
+    "models": "Saab 9-2X (Subaru-built Impreza GG wagon, Gunma)",
+    "model_years": [
+     2005,
+     2006
+    ],
+    "wmi": [
+     "JF4"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: position 4 in [G], position 5 in [G]"
+    ]
+   },
+   "vin_condition": {
+    "characters": "position 11",
+    "manual_codes": {
+     "G": "Gunma AWD 5MT (Subaru scheme) (MY2005-2006)"
+    },
+    "automatic_codes": {
+     "H": "Gunma AWD 4AT (Subaru scheme) (MY2005-2006)"
+    }
+   },
+   "vin_regex_manual": "^((JF4)GG....[56]G......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/63662431-fe07-4d49-a90e-60db7c2b4db3",
+     "doc": "NHTSA ORG225, Fuji Heavy Industries USA 2005-02-23, 2006MY Subaru VIN breakdown, OCR",
+     "says": "Lists WMI JF1/4S3/4S4 only (no JF4, no Saab). Digit 11 'Plant of manufacturer and transmission type': FHI G = AWD 5MT, H = AWD 4AT. No MID filing covers the Saab 9-2X (WMI JF4)."
+    }
+   ],
+   "notes": "Positions 4-8 of the 9-2X VINs (GG616 / GG226) follow Subaru's Impreza wagon layout. A Subaru/Saab filing for JF4 would make this a keep rule (3 lot cars, all without transmission info).",
+   "epa_rows": [
+    {
+     "model_regex": "^9-2X",
+     "displ": null,
+     "years": [
+      2005,
+      2006
+     ],
+     "claim": "manual",
+     "check": "sole offering",
+     "rows": [],
+     "classes": [],
+     "missing_years": [
+      2005,
+      2006
+     ],
+     "passes": false
+    }
+   ],
+   "validation": {
+    "lot_cars_in_scope": 12,
+    "checkable": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_ground_truth_manual": 0,
+    "manual_claims": {
+     "in_scope": 3,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 9,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 12,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "2005 H": 6,
+    "2006 H": 3,
+    "2005 G": 3
+   },
+   "in_scope_codes_not_in_table": {},
+   "newly_confirmed_manual": 3,
+   "newly_labelled_automatic": 9,
+   "no_trans_info_breakdown": {
+    "no_trans_info_vpic_trans_blank": 12
+   }
+  },
+  {
+   "id": "landrover_sal_char8_transmission_1993_1998",
+   "make": "Land Rover",
+   "status": "low_sample",
+   "status_reason": "12 checkable cars (< 20); kept because the code meaning comes from the manufacturer's own VIN document",
+   "basis": "transmission_code",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Land Rover",
+    "models": "Range Rover (classic and P38A), Discovery Series I, Defender 90/110 (US)",
+    "model_years": [
+     1993,
+     1998
+    ],
+    "wmi": [
+     "SAL"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "position 8",
+    "manual_codes": {
+     "8": "5-speed manual (MY1993-1998)"
+    },
+    "automatic_codes": {
+     "4": "4-speed automatic (MY1993-1998)"
+    }
+   },
+   "vin_regex_manual": "^((SAL)....8.[PRSTVW].......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/08a8745a-1420-42ec-b4ab-e2c49090ab99",
+     "doc": "NHTSA 01-22-N11B-5389, Land Rover North America 1992-04-24, Range Rover VIN breakdown MY1993, OCR",
+     "says": "'8 Transmission Type: 4 = 4 Speed Automatic Trans, 8* = 5 Speed Manual Trans'; model year P = 1993; plant A = Solihull."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/358abbc7-a12e-4e0c-9aee-404e711d7842",
+     "doc": "NHTSA 01-22-N11B-5284, Land Rover North America 1993-05-26, VIN breakdown MY1994, OCR",
+     "says": "'8 Transmission Type: 4 = 4 Speed Automatic Trans, 8 = 5 Speed Manual Trans'; R = 1994."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9afd275e-8d84-42c2-9009-8a50fc25859f",
+     "doc": "NHTSA 01-22-N11B-5839, Land Rover 1994-10-17, VIN breakdown MY1995, OCR",
+     "says": "'8 Transmission Type: 4 = 4 Speed Automatic Trans, 8 = 5 Speed Manual Trans'; S = 1995."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/49667183-1c42-4f1b-b4e6-393d5bfd69a9",
+     "doc": "NHTSA 01-22-N11B-5983, Land Rover 1995-07-11, VIN breakdown MY1996, OCR",
+     "says": "'8 Transmission Type: 4 = 4 Speed Automatic Trans, 8 = 5 Speed Manual Trans'; T = 1996."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/805d556c-109a-40dc-9ebb-de20b565bc5c",
+     "doc": "NHTSA 01-22-N11B-6164, Land Rover 1996-07-15, VIN breakdown MY1997, OCR",
+     "says": "'8 Transmission Type: 4 = 4 Speed Automatic Trans, 8 = 5 Speed Manual Trans'; V = 1997."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/aeb0d20e-9d0e-4b19-8c8d-f697d70ddfb7",
+     "doc": "NHTSA 01-22-N11B-6343, Land Rover 1997-07-01, VIN breakdown MY1998, OCR",
+     "says": "'8 Transmission Type: 4 = 4 Speed Automatic Trans, 8 = 5 Speed Manual Trans'; W = 1998."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/e20c8300-1583-4301-afa3-52b081d7aa44",
+     "doc": "NHTSA 01-22-N11B-6903, Land Rover 1998-07-22, VIN breakdown MY1999, OCR",
+     "says": "'8 Transmission Type: 4 = 4 Speed Automatic Trans' (no manual code from MY1999)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/aae6a306-4384-4620-8d23-0d944e4231a2",
+     "doc": "NHTSA 01-022-N11B-9576, Land Rover North America 2003-05-30, VIN code MY2004, text layer",
+     "says": "'8 Transmission Type - Discovery and Range Rover: 4 = Automatic Trans; Transmission Type - Freelander: 2 = 5 SP Automatic'."
+    }
+   ],
+   "notes": "MY1999 and later Land Rover filings list automatic codes only at this position (4; Freelander 2 = 5-speed automatic in MY2004); later layouts move the transmission to other positions and list automatics only.",
+   "epa_rows": [],
+   "validation": {
+    "lot_cars_in_scope": 27,
+    "checkable": 12,
+    "agree": 12,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_ground_truth_manual": 0,
+    "manual_claims": {
+     "in_scope": 0,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 27,
+     "checkable": 12,
+     "agree": 12,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 15,
+    "uniform_cell_lines_that_would_agree": 15,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 27,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "1998 4": 11,
+    "1996 4": 6,
+    "1997 4": 6,
+    "1994 4": 2,
+    "1995 4": 2
+   },
+   "in_scope_codes_not_in_table": {},
+   "newly_confirmed_manual": 0,
+   "newly_labelled_automatic": 0,
+   "no_trans_info_breakdown": {}
+  },
+  {
+   "id": "volvo_engine_emission_combination_1994_1999",
+   "make": "Volvo",
+   "status": "keep",
+   "status_reason": ">= 20 checkable cars and agreement >= 0.995",
+   "basis": "engine_code_sole_offering",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Volvo",
+    "models": "850 / S70 / V70 / C70 / 960 / S90 / V90 / S80 (YV1)",
+    "model_years": [
+     1994,
+     1999
+    ],
+    "wmi": [
+     "YV1"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "position 4 (series) + positions 6-7 (engine version) + position 8 (emissions); code written as p4+p6p7p8",
+    "manual_codes": {
+     "L550": "850 B5254S, emissions 0: 'Man. Only' (MY1994-1995)",
+     "L570": "850 B5234T, emissions 0: 'Man. Only - CDN' (MY1995-1996)",
+     "L580": "850 B5234T5, emissions 0: 'Man. Only CDN' (MY1996-1996)"
+    },
+    "automatic_codes": {
+     "L551": "850 B5254S, emissions 1: 'Auto Only' (MY1995-1995)",
+     "L553": "850/S70/V70 B5254S, emissions 3: 'Auto Only' (MY1995-1998)",
+     "L555": "850 B5254S, emissions 5: 'Auto Only' (MY1996-1996)",
+     "L571": "850 B5234T, emissions 1: 'Auto Only' (MY1995-1995)",
+     "L572": "850 B5234T, emissions 2: 'Auto Only' (MY1996-1996)",
+     "L581": "850 B5234T5, emissions 1: 'Auto Only' (MY1995-1995)",
+     "L582": "850 B5234T5, emissions 2: 'Auto Only' (MY1996-1996)",
+     "J831": "940 B230FD: 'Auto Only' (MY1995-1995)",
+     "J861": "940 B230FT: 'Auto Only' (MY1995-1995)",
+     "K931": "960 B6254S: 'Auto Only' (MY1995-1995)",
+     "K961": "960 B6304S: 'Auto Only' (MY1995-1995)",
+     "K960": "960 B6304S2: 'Auto Only' (MY1996-1998)",
+     "L564": "S70/V70 B5254T emissions 4: 'Auto Only' (MY1997-1998)",
+     "L567": "S70/V70 B5254T emissions 7: 'Auto Only' (MY1998-1998)",
+     "L557": "S70/V70 B5254S emissions 7: 'Auto Only' (MY1998-1998)",
+     "L558": "S70/V70 B5254S emissions 8: 'Auto Only' (MY1998-1998)",
+     "L524": "V70R AWD B5234T6: 'Auto Only' (MY1998-1998)",
+     "L56D": "S70/V70 B5254T emissions D: 'Auto Only' (MY1999-1999)",
+     "L62D": "V70 R AWD B5234T8: 'Auto Only' (MY1999-1999)",
+     "T90D": "S80 B6284T6: 'Auto Only' (MY1999-1999)",
+     "T97D": "S80 B6304S: 'Auto Only' (MY1999-1999)"
+    }
+   },
+   "vin_regex_manual": "^((YV1)L.550.[RS].......|(YV1)L.570.[ST].......|(YV1)L.580.T.......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0ad0a668-ee02-4a0f-924a-eef1c0ce81bf",
+     "doc": "NHTSA 01-22-N11B-5240, Volvo Cars of North America 1993-06-22, VIN codes 1994 model year, OCR",
+     "says": "Pos. 4 L = 850 Series; Pos. 6-7 Engine Version with TRANS. column and Pos. 8 emissions: '55 = B5254S (Man.Only) 30/39 0'; '55 = B5254S (Auto 31/39) (Man.31) 1'. Pos. 8 0 = Federal (non Calif) w/o EGR Bosch."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/4daf9234-6f86-46f1-a4d0-7cde6d3c7fbc",
+     "doc": "NHTSA 01-22-N11B-5705, Volvo Cars of North America 1994-07-22, VIN codes 1995 model year, OCR",
+     "says": "Engine version / emissions (Pos. 8) / transmission: 55 B5254S 0 (Man. Only) 30/31*/39; 55 B5254S 1 (Auto Only); 55 B5254S 3 (Auto Only); 57 B5234T 0 (Man. Only-CDN); 57 B5234T 1 (Auto Only); 58 B5234T5 1 (Auto Only); 83 B230FD, 86 B230FT, 93 B6254S, 96 B6304S: 1 (Auto Only)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/66e65503-ec7a-45cd-a044-2a622b9adbdc",
+     "doc": "NHTSA 01-22-N11B-6019, Volvo Cars of North America 1995-11-27, VIN codes 1996 model year (revised), OCR",
+     "says": "51 B5252S 0 (Man/Auto CDN); 55 B5254S 4 (Man. Only) 31,39; 55 B5254S 5 (Auto Only) 30,39; 55 B5254S 4 (Auto Only) 31; 57 B5234T 0 (Man. Only CDN); 57 B5234T 2 (Auto Only); 58 B5234T5 0 (Man. Only CDN); 58 B5234T5 2 (Auto Only); 96 B6304S2 0 (Auto Only). The earlier 7/95 sheet (01-22-N11B-5976) gives 55/1 Auto Only. 55/4 is listed both ways, so it is not ruled."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/ab2a9875-3fe5-47ef-8439-fac4e4ebfcb7",
+     "doc": "NHTSA 01-022-N11B-6213, Volvo 1996-12-20, VIN codes 1997 and 1998 model year, OCR",
+     "says": "53 B5234T3 4 (Auto. and Man.); 55 B5254S 4 (Auto. and Man.); 55 B5254S 3 (Auto. Only); 56 B5254T 4 (Auto. Only); 56 B5254T 0 (V70AWDM Canada); 96 B6304S 0 (Auto. Only)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/ce2aecbd-a016-4e6c-a473-75c7597dfb69",
+     "doc": "NHTSA 01-22-N11B-6353, Volvo 1997-05-15, VIN codes 1998 model year, OCR",
+     "says": "52 B5234T6 4 (V70R-AWD Auto. Only); 53 B5234T3 4/7 (Auto. and Man.); 55 B5254S 4 (Auto. and Man.); 55 B5254S 7, 3, 8 (Auto. Only); 56 B5254T 4, 7 (Auto. Only); 56 B5254T 0 (V70AWDM Canada); 96 B6304S 0 (Auto. Only)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f9fcfea8-ec1d-4ad7-af90-42df973152de",
+     "doc": "NHTSA 01-22-N11B-6928, Volvo 1998-07-28, VIN codes 1999 model year, OCR",
+     "says": "53 B5234T3 D (Auto. and Man.); 55 B5254S A (Auto. and Man.); 56 B5254T D (Auto. Only, incl. AWD); 62 B5234T8 D (V70 R AWD Auto. Only); 90 B6284T6 D and 97 B6304S D (Auto. Only)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/728f683f-71e9-4236-8e23-2fa51733ec9f",
+     "doc": "NHTSA 01-22-N11B-3486, Volvo Cars of North America 1989-06-29, VIN codes MY1990, OCR",
+     "says": "Pos. 4 Vehicle Series, 5 Restraint System, 6-7 Engine Version (69 B280F, 87 B230FT, 88 B230F, 89 B234F), 8 Body Version (2/4/5-door). No transmission position."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/55d4bcb5-f23e-433e-9682-4dc937810e18",
+     "doc": "NHTSA 01-022-N11B-9010, Volvo 2002-05-06, VIN code 2003 model year, text layer",
+     "says": "Engine versions annotated per model: 27/29 S40/V40 Automatic Only; 53 S60/V70 Automatic/Manual; 58, 59, 63, 91, 92 Automatic Only; 61 Automatic/Manual; 62 C70 Automatic/Manual; 64 Automatic Only in CA, NY, MA, VT, ME. Pos. 8 is the emissions code."
+    }
+   ],
+   "notes": "Not a transmission position: the filing annotates which engine-version (positions 6-7) + emissions (position 8) combinations were certified with which transmission. Decision characters = position 4 (series) + positions 6-8. Codes the filings mark 'Auto. and Man.' (e.g. 1994 55/1, 1997-1999 53/4, 55/4, 53/D, 55/A) and the 1996 55/4 (listed both 'Man. Only' and 'Auto Only') get no claim. 1997 code 3 (55/3) is also 'Auto Only'.",
+   "epa_rows": [
+    {
+     "model_regex": "^850",
+     "displ": 2.4,
+     "years": [
+      1994,
+      1995
+     ],
+     "claim": "manual",
+     "check": "manual offered",
+     "rows": [
+      {
+       "id": "11055",
+       "year": "1994",
+       "model": "850",
+       "displ": "2.4",
+       "trany": "Automatic 4-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "11056",
+       "year": "1994",
+       "model": "850",
+       "displ": "2.4",
+       "trany": "Manual 5-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "11161",
+       "year": "1994",
+       "model": "850 Wagon",
+       "displ": "2.4",
+       "trany": "Automatic 4-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "11162",
+       "year": "1994",
+       "model": "850 Wagon",
+       "displ": "2.4",
+       "trany": "Manual 5-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "12009",
+       "year": "1995",
+       "model": "850",
+       "displ": "2.4",
+       "trany": "Automatic 4-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "12010",
+       "year": "1995",
+       "model": "850",
+       "displ": "2.4",
+       "trany": "Manual 5-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "12130",
+       "year": "1995",
+       "model": "850 Wagon",
+       "displ": "2.4",
+       "trany": "Automatic 4-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "12131",
+       "year": "1995",
+       "model": "850 Wagon",
+       "displ": "2.4",
+       "trany": "Manual 5-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "29099",
+       "year": "1995",
+       "model": "850 Wagon",
+       "displ": "2.4",
+       "trany": "Automatic 4-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "29100",
+       "year": "1995",
+       "model": "850 Wagon",
+       "displ": "2.4",
+       "trany": "Manual 5-spd",
+       "drive": "Front-Wheel Drive"
+      }
+     ],
+     "classes": [
+      "automatic",
+      "manual"
+     ],
+     "missing_years": [],
+     "passes": true
+    }
+   ],
+   "validation": {
+    "lot_cars_in_scope": 79,
+    "checkable": 29,
+    "agree": 29,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_ground_truth_manual": 1,
+    "manual_claims": {
+     "in_scope": 1,
+     "checkable": 1,
+     "agree": 1,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 78,
+     "checkable": 28,
+     "agree": 28,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 42,
+    "uniform_cell_lines_that_would_agree": 42,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 78,
+     "conflict": 0,
+     "no_match": 1
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "1998 L557": 9,
+    "1999 L56D": 8,
+    "1998 L564": 8,
+    "1998 K960": 8,
+    "1995 L551": 7,
+    "1996 L572": 6,
+    "1997 K960": 5,
+    "1995 L571": 5,
+    "1998 L567": 4,
+    "1996 K960": 4,
+    "1995 K961": 4,
+    "1999 T90D": 2,
+    "1998 L553": 2,
+    "1999 T97D": 1,
+    "1997 L564": 1,
+    "1996 L582": 1,
+    "1995 J831": 1,
+    "1996 L555": 1,
+    "1995 J861": 1,
+    "1995 L550": 1
+   },
+   "in_scope_codes_not_in_table": {
+    "1999:L55A": 15,
+    "1994:J831": 7,
+    "1996:L554": 6,
+    "1998:L554": 6,
+    "1997:L554": 5,
+    "1994:L552": 4,
+    "1994:L571": 3,
+    "1998:L537": 3,
+    "1999:N56D": 3,
+    "1999:L53D": 3,
+    "1994:J861": 2,
+    "1997:L572": 2,
+    "1996:L510": 1,
+    "1994:J883": 1,
+    "1994:K950": 1,
+    "1996:L551": 1,
+    "1998:N537": 1
+   },
+   "newly_confirmed_manual": 0,
+   "newly_labelled_automatic": 6,
+   "no_trans_info_breakdown": {
+    "no_trans_info_vpic_trans_blank": 4,
+    "no_trans_info_not_in_cache_backup": 2
+   }
+  },
+  {
+   "id": "bmw_ag_code_1981_1990",
+   "make": "BMW",
+   "status": "low_sample",
+   "status_reason": "17 checkable cars (< 20); kept because the code meaning comes from the manufacturer's own VIN document",
+   "basis": "model_code",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "BMW",
+    "models": "E21 320i, E23 733i/735i, E24 633CSi/635CSi/M6, E28 524td/528e/533i/535i/M5, E30 318i/325e/325/325i/325is/325ic/325iX/M3, E32 735i/735iL/750iL, E34 525i/535i",
+    "model_years": [
+     1981,
+     1990
+    ],
+    "wmi": [
+     "WBA",
+     "WBS"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "positions 4-7",
+    "manual_codes": {
+     "AG33": "320i (MY1981-1983)",
+     "EB35": "633CSi (MY1981-1981)",
+     "EB36": "633CSi (MY1982-1982)",
+     "EB74": "633CSi (MY1983-1984)",
+     "FF33": "733i (MY1981-1981)",
+     "FF34": "733i (MY1982-1982)",
+     "FF74": "733i (MY1983-1984)",
+     "DK73": "528e (MY1982-1988)",
+     "DB74": "533i (MY1983-1984)",
+     "AK74": "318i (2-door) (MY1984-1985)",
+     "AC74": "318i/4 (MY1985-1985)",
+     "AB54": "325e / 325 / 325es 2-door (MY1984-1988)",
+     "AE54": "325e / 325 4-door (MY1985-1988)",
+     "DC74": "535i / 535is (MY1985-1988)",
+     "EC74": "635CSi (MY1985-1989)",
+     "FH74": "735i (MY1985-1986)",
+     "AA13": "325is / 325i 2-door (MY1987-1990)",
+     "AD13": "325i/4 (MY1987-1990)",
+     "BB13": "325ic (Cabrio) (MY1987-1990)",
+     "EE14": "M6 (MY1987-1988)",
+     "AB93": "325iX/2 (MY1988-1990)",
+     "AE93": "325iX/4 (MY1988-1990)",
+     "AK03": "M3 (MY1988-1990)",
+     "DC93": "M5 (MY1988-1988)",
+     "GB33": "735i (MY1988-1990)",
+     "HC13": "525i (MY1989-1990)",
+     "HD13": "535i (MY1989-1990)"
+    },
+    "automatic_codes": {
+     "AG43": "320i A (MY1981-1983)",
+     "EB45": "633CSi A (MY1981-1981)",
+     "EB46": "633CSi A (MY1982-1982)",
+     "EB84": "633CSi A (MY1983-1984)",
+     "FF43": "733i A (MY1981-1981)",
+     "FF44": "733i A (MY1982-1982)",
+     "FF84": "733i A (MY1983-1984)",
+     "DK83": "528e A (MY1982-1988)",
+     "DB84": "533i A (MY1983-1984)",
+     "AK84": "318i A (2-door) (MY1984-1985)",
+     "AC84": "318i A/4 (MY1985-1985)",
+     "AB64": "325e A / 325 A / 325es A 2-door (MY1984-1988)",
+     "AE64": "325e A / 325 A 4-door (MY1985-1988)",
+     "DB24": "524td A (MY1985-1986)",
+     "DC84": "535i A / 535is A (MY1985-1988)",
+     "EC84": "635CSi A (MY1985-1989)",
+     "FH84": "735i A (MY1985-1987)",
+     "FG24": "L7 A (MY1986-1987)",
+     "AA23": "325is A / 325i A 2-door (MY1987-1990)",
+     "AD23": "325i A/4 (MY1987-1990)",
+     "BB23": "325ic A (Cabrio) (MY1987-1990)",
+     "AB03": "325iX A/2 (MY1988-1990)",
+     "AE03": "325iX A/4 (MY1988-1990)",
+     "GB43": "735i A (MY1988-1990)",
+     "GC43": "735iL A (MY1988-1990)",
+     "GC83": "750iL A (MY1988-1990)",
+     "HC23": "525i A (MY1989-1990)",
+     "HD23": "535i A (MY1989-1990)"
+    }
+   },
+   "vin_regex_manual": "^((WBA|WBS)AG33..[BCD].......|(WBA|WBS)EB35..B.......|(WBA|WBS)EB36..C.......|(WBA|WBS)EB74..[DE].......|(WBA|WBS)FF33..B.......|(WBA|WBS)FF34..C.......|(WBA|WBS)FF74..[DE].......|(WBA|WBS)DK73..[CDEFGHJ].......|(WBA|WBS)DB74..[DE].......|(WBA|WBS)AK74..[EF].......|(WBA|WBS)AC74..F.......|(WBA|WBS)AB54..[EFGHJ].......|(WBA|WBS)AE54..[FGHJ].......|(WBA|WBS)DC74..[FGHJ].......|(WBA|WBS)EC74..[FGHJK].......|(WBA|WBS)FH74..[FG].......|(WBA|WBS)AA13..[HJKL].......|(WBA|WBS)AD13..[HJKL].......|(WBA|WBS)BB13..[HJKL].......|(WBA|WBS)EE14..[HJ].......|(WBA|WBS)AB93..[JKL].......|(WBA|WBS)AE93..[JKL].......|(WBA|WBS)AK03..[JKL].......|(WBA|WBS)DC93..J.......|(WBA|WBS)GB33..[JKL].......|(WBA|WBS)HC13..[KL].......|(WBA|WBS)HD13..[KL].......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9a7499b9-89c1-446f-a03c-733d9b0458ef",
+     "doc": "NHTSA 01-22-N11B-4023, BMW of North America 1989-09-01, BMW Vehicle Identification Manual (September 1989 update), 'US Serial Number Ranges 1964 through present date', OCR (same pages in 01-22-N11B-3611 and -3811)",
+     "says": "Heading descriptions: 'MODEL ... Suffixes explained as follows: A Automatic Transmission'; 'AG CODE Model identification code, appears in 4th through 7th digits of VIN'. Tables per model year, e.g. 1987: 325is/2 AA13, 325is A/2 AA23, 325i/4 AD13, 325i A/4 AD23, 325ic BB13, 325ic A BB23, 528e DK73, 528e A DK83, 535is/535i DC74, 535is A/535i A DC84; 1989-1990: 525i HC13, 525i A HC23, 535i HD13, 535i A HD23, 735i GB33, 735i A GB43, 735iL A GC43, 750iL A GC83, M3 AK03."
+    }
+   ],
+   "notes": "BMW gave the automatic its own AG (type) code; the manual defines the code as 'Model identification code, appears in 4th through 7th digits of VIN' and the 'A' model suffix as 'Automatic Transmission'. Only codes and model years printed in the manual are used. OCR misreads (e.g. 'AEG4', 'Dc84') were resolved against the page images and the code pattern of the same table.",
+   "epa_rows": [],
+   "validation": {
+    "lot_cars_in_scope": 32,
+    "checkable": 17,
+    "agree": 17,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_ground_truth_manual": 1,
+    "manual_claims": {
+     "in_scope": 13,
+     "checkable": 1,
+     "agree": 1,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 19,
+     "checkable": 16,
+     "agree": 16,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 15,
+     "conflict": 0,
+     "no_match": 17
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "1983 AG33": 2,
+    "1986 AE64": 2,
+    "1984 AK74": 2,
+    "1990 HC23": 2,
+    "1990 GC83": 1,
+    "1985 DC74": 1,
+    "1984 DK73": 1,
+    "1987 AE54": 1,
+    "1990 HC13": 1,
+    "1988 AD23": 1,
+    "1987 BB13": 1,
+    "1987 AB64": 1,
+    "1990 GC43": 1,
+    "1990 HD13": 1,
+    "1990 AD23": 1,
+    "1986 AB54": 1,
+    "1988 DK83": 1,
+    "1987 EC84": 1,
+    "1989 HC23": 1,
+    "1988 DK73": 1,
+    "1986 AB64": 1,
+    "1984 AK84": 1,
+    "1990 HD23": 1,
+    "1986 DK83": 1,
+    "1986 FH84": 1,
+    "1988 AA23": 1,
+    "1985 AC74": 1,
+    "1982 AG43": 1
+   },
+   "in_scope_codes_not_in_table": {
+    "1983:G671": 1
+   },
+   "newly_confirmed_manual": 12,
+   "newly_labelled_automatic": 3,
+   "no_trans_info_breakdown": {
+    "no_trans_info_vpic_trans_blank": 15
+   }
+  },
+  {
+   "id": "bmw_e39_ag_code_1999_2003",
+   "make": "BMW",
+   "status": "low_sample",
+   "status_reason": "0 checkable cars (< 20); kept because the code meaning comes from the manufacturer's own VIN document",
+   "basis": "model_code",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "BMW",
+    "models": "E39 525i, 530i, 540i sedans; 525i and 540i Sport Wagons",
+    "model_years": [
+     1999,
+     2003
+    ],
+    "wmi": [
+     "WBA"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "positions 4-7",
+    "manual_codes": {
+     "DT33": "525i (model code 0356) (MY2001-2003)",
+     "DT53": "530i (0350) (MY2001-2003)",
+     "DS33": "525iT (0354) (MY2001-2003)",
+     "DN53": "540i (0353) (MY1999-2003)"
+    },
+    "automatic_codes": {
+     "DT43": "525iA (0357) (MY2001-2003)",
+     "DT63": "530iA (0355) (MY2001-2003)",
+     "DS43": "525iAT (0359) (MY2001-2003)",
+     "DN63": "540iA (0358) (MY1999-2003)",
+     "DR63": "540iAT (0369) (MY2001-2003)"
+    }
+   },
+   "vin_regex_manual": "^((WBA)DT33..[123].......|(WBA)DT53..[123].......|(WBA)DS33..[123].......|(WBA)DN53..[123XY].......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f23bd433-2a27-4e23-8242-b2d5f5e9063c",
+     "doc": "NHTSA 01-022-N11B-9505, BMW of North America 2003-01-27, 2003 Model Year Information to all State Motor Vehicle Departments (update 03-03): 'Model Codes and VIN Decipherment' and 'Serial Number Ranges (Std./Auto.)', page image",
+     "says": "Positions 4-8: 525i 0356 D T 3 3 4; 525iA 0357 D T 4 3 4; 530i 0350 D T 5 3 4; 530iA 0355 D T 6 3 4; 540i 0353 D N 5 3 4; 540iA 0358 D N 6 3 4; M5 0351 (WBS) D E 9 3 4; 525iT 0354 D S 3 3 4; 525iAT 0359 D S 4 3 4; 540iAT 0369 D R 6 3 4. 3 Series (e.g. 325i E V 3 3 4), X5 3.0i (F A 5 3 5), Z4 2.5i (B T 3 3 4), MINI Cooper (R C 3 3 4) and Cooper S (R E 3 3 4) have one code each. Serial ranges: Cooper 0310 Std. TC38579- / Auto. TE13267-; Cooper S 0311 Std. TD57850- with no Auto. range ('*NO TRANSMISSION TYPE FOR MODEL'); M5 0351 Std. only; 525i/530i/540i Std. only, 525iA/530iA/540iA Auto. only."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/e147be52-0647-4469-9a01-71b7389ec148",
+     "doc": "NHTSA 01-022-N11B-8210, BMW 2000-01-04 (filed by BMW M GmbH / BMW), VIN Decipherments for 2001 model year BMW models, text layer",
+     "says": "Per-model tables list the same E39 code pairs: 525i 'DT33 or DT43', 525i Sport Wagon 'DS33 or DS43', 530i 'DT53 or DT63', 540i 'DN53 or DN63', 540i Sport Wagon 'DR63'. E46 323i 'AV33 or AN37' (no transmission split)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8ab54247-29e8-4159-8591-420242598a7a",
+     "doc": "NHTSA 01-22-N11B-7012, Bayerische Motoren Werke AG 1998-10-26, Decipherment of BMW VINs for the 1999 model year, OCR",
+     "says": "'Table for 540i Sedan - 1999 Model Year': 'DN53 or DN63', Series 540i, 4-Door Sedan, 282 BHP; 'Table for 528i Sedan - 1999': 'DM53 or DM63' (no transmission named)."
+    }
+   ],
+   "notes": "The MY2003 DMV package names each code (525i DT3 / 525iA DT4 ...). The same code pairs are listed for the same models in BMW's MY2001 filing (DT33/DT43, DS33/DS43, DT53/DT63, DN53/DN63) and MY1999 filing (DN53/DN63), so the meaning is applied to those years. 528i (DD/DM, MY1997-2000) and 540i DE53/DE63 (MY1997-1998) are not named in any BMW document in MID: see bmw_e39_528i_540i_1997_2000_vpic_only.",
+   "epa_rows": [],
+   "validation": {
+    "lot_cars_in_scope": 116,
+    "checkable": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_ground_truth_manual": 0,
+    "manual_claims": {
+     "in_scope": 11,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 105,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 11,
+    "uniform_cell_lines_that_would_agree": 11,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 116,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "2003 DT43": 23,
+    "2002 DT43": 17,
+    "2003 DT63": 13,
+    "2002 DT63": 13,
+    "2001 DT43": 11,
+    "2000 DN63": 7,
+    "2001 DT63": 7,
+    "2002 DN63": 5,
+    "2003 DN63": 5,
+    "2000 DN53": 4,
+    "2001 DT33": 2,
+    "2002 DT53": 2,
+    "2001 DN63": 1,
+    "1999 DN63": 1,
+    "2001 DS43": 1,
+    "2001 DN53": 1,
+    "2002 DS43": 1,
+    "2003 DT53": 1,
+    "2002 DT33": 1
+   },
+   "in_scope_codes_not_in_table": {
+    "2001:AV33": 36,
+    "2003:ET37": 27,
+    "2000:AM33": 27,
+    "2002:ET37": 25,
+    "2001:AV53": 21,
+    "2001:FA53": 21,
+    "2002:EU33": 18,
+    "1999:AM33": 17,
+    "2001:GH83": 15,
+    "2003:EV33": 15,
+    "2003:GL63": 15,
+    "2003:AZ33": 15,
+    "2001:FB33": 14,
+    "2002:BS33": 14,
+    "2003:GN63": 13,
+    "2002:EV33": 13,
+    "2000:BR33": 12,
+    "2003:EV53": 12,
+    "2002:EV53": 11,
+    "2001:BS53": 11,
+    "2002:BS53": 10,
+    "2000:AM53": 10,
+    "2000:BM33": 10,
+    "2001:BS33": 10,
+    "2001:BN53": 9
+   },
+   "newly_confirmed_manual": 11,
+   "newly_labelled_automatic": 94,
+   "no_trans_info_breakdown": {
+    "no_trans_info_vpic_trans_blank": 104,
+    "no_trans_info_not_in_cache_backup": 1
+   }
+  },
+  {
+   "id": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "make": "BMW",
+   "status": "candidate",
+   "status_reason": "BMW's own documents in MID list these pairs without naming the transmission; the meaning rests on vPIC (DD63/DE63 decode as Automatic) and on the 5/6 pattern of the MY2003 codes",
+   "basis": "model_code",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "BMW",
+    "models": "E39 528i (DD 1997-1998, DM 1999-2000), 540i (DE 1997-1998)",
+    "model_years": [
+     1997,
+     2000
+    ],
+    "wmi": [
+     "WBA"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "positions 4-7",
+    "manual_codes": {
+     "DD53": "528i (pair partner of DD63) (MY1997-1998)",
+     "DE53": "540i (pair partner of DE63) (MY1997-1998)",
+     "DM53": "528i (pair 5/6 as DT/DN) (MY1999-2000)"
+    },
+    "automatic_codes": {
+     "DD63": "528i automatic (vPIC) (MY1997-1998)",
+     "DE63": "540i automatic (vPIC) (MY1997-1998)",
+     "DM63": "528i (pair 5/6 as DT/DN) (MY1999-2000)"
+    }
+   },
+   "vin_regex_manual": "^((WBA)DD53..[VW].......|(WBA)DE53..[VW].......|(WBA)DM53..[XY].......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/8ab54247-29e8-4159-8591-420242598a7a",
+     "doc": "NHTSA 01-22-N11B-7012, Bayerische Motoren Werke AG 1998-10-26, Decipherment of BMW VINs for the 1999 model year, OCR",
+     "says": "'Table for 540i Sedan - 1999 Model Year': 'DN53 or DN63', Series 540i, 4-Door Sedan, 282 BHP; 'Table for 528i Sedan - 1999': 'DM53 or DM63' (no transmission named)."
+    }
+   ],
+   "notes": "",
+   "epa_rows": [],
+   "validation": {
+    "lot_cars_in_scope": 82,
+    "checkable": 2,
+    "agree": 2,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_ground_truth_manual": 0,
+    "manual_claims": {
+     "in_scope": 9,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 73,
+     "checkable": 2,
+     "agree": 2,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 30,
+    "uniform_cell_lines_that_would_agree": 30,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 82,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "2000 DM63": 29,
+    "1998 DD63": 12,
+    "1997 DD63": 11,
+    "1999 DM63": 11,
+    "1998 DE63": 8,
+    "1998 DD53": 3,
+    "2000 DM53": 2,
+    "1997 DE63": 2,
+    "1999 DM53": 2,
+    "1998 DE53": 1,
+    "1997 DE53": 1
+   },
+   "in_scope_codes_not_in_table": {
+    "1997:CD43": 8,
+    "1998:GF83": 8,
+    "1998:GJ83": 5,
+    "1997:CC03": 4,
+    "1998:CD43": 3,
+    "1997:CC93": 3,
+    "1998:BJ83": 3,
+    "1998:BJ73": 3,
+    "1997:GF83": 3,
+    "1997:GJ83": 3,
+    "1997:BK83": 2,
+    "1997:BK73": 1,
+    "1997:CD33": 1,
+    "1998:BK83": 1,
+    "1998:BG13": 1,
+    "1997:BH73": 1,
+    "1997:CG83": 1,
+    "1997:BG23": 1,
+    "1998:CC93": 1,
+    "1997:BH83": 1,
+    "1997:BG13": 1,
+    "1998:BF83": 1
+   },
+   "newly_confirmed_manual": 9,
+   "newly_labelled_automatic": 40,
+   "no_trans_info_breakdown": {
+    "no_trans_info_vpic_trans_blank": 48,
+    "no_trans_info_not_in_cache_backup": 1
+   }
+  },
+  {
+   "id": "bmw_m5_e39_manual_only",
+   "make": "BMW",
+   "status": "low_sample",
+   "status_reason": "0 checkable cars (< 20); kept because the code meaning comes from the manufacturer's own VIN document",
+   "basis": "model_code_sole_offering",
+   "claim": "manual",
+   "scope": {
+    "make": "BMW",
+    "models": "E39 M5",
+    "model_years": [
+     2000,
+     2003
+    ],
+    "wmi": [
+     "WBS"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "positions 4-7",
+    "manual_codes": {
+     "DE93": "M5 (0351): Std. serial range only (MY2000-2003)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^((WBS)DE93..[123Y].......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f23bd433-2a27-4e23-8242-b2d5f5e9063c",
+     "doc": "NHTSA 01-022-N11B-9505, BMW of North America 2003-01-27, 2003 Model Year Information to all State Motor Vehicle Departments (update 03-03): 'Model Codes and VIN Decipherment' and 'Serial Number Ranges (Std./Auto.)', page image",
+     "says": "Positions 4-8: 525i 0356 D T 3 3 4; 525iA 0357 D T 4 3 4; 530i 0350 D T 5 3 4; 530iA 0355 D T 6 3 4; 540i 0353 D N 5 3 4; 540iA 0358 D N 6 3 4; M5 0351 (WBS) D E 9 3 4; 525iT 0354 D S 3 3 4; 525iAT 0359 D S 4 3 4; 540iAT 0369 D R 6 3 4. 3 Series (e.g. 325i E V 3 3 4), X5 3.0i (F A 5 3 5), Z4 2.5i (B T 3 3 4), MINI Cooper (R C 3 3 4) and Cooper S (R E 3 3 4) have one code each. Serial ranges: Cooper 0310 Std. TC38579- / Auto. TE13267-; Cooper S 0311 Std. TD57850- with no Auto. range ('*NO TRANSMISSION TYPE FOR MODEL'); M5 0351 Std. only; 525i/530i/540i Std. only, 525iA/530iA/540iA Auto. only."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), downloaded 2026-11-05",
+     "says": "One row per certified model/engine/transmission configuration; 'trany' gives the transmission. Row ids are cited per rule."
+    }
+   ],
+   "notes": "BMW lists only a Std. (manual) serial range for M5 0351.",
+   "epa_rows": [
+    {
+     "model_regex": "^M5$",
+     "displ": 4.9,
+     "years": [
+      2000,
+      2001,
+      2002,
+      2003
+     ],
+     "claim": "manual",
+     "check": "sole offering",
+     "rows": [
+      {
+       "id": "15765",
+       "year": "2000",
+       "model": "M5",
+       "displ": "4.9",
+       "trany": "Manual 6-spd",
+       "drive": "Rear-Wheel Drive"
+      },
+      {
+       "id": "16599",
+       "year": "2001",
+       "model": "M5",
+       "displ": "4.9",
+       "trany": "Manual 6-spd",
+       "drive": "Rear-Wheel Drive"
+      },
+      {
+       "id": "17514",
+       "year": "2002",
+       "model": "M5",
+       "displ": "4.9",
+       "trany": "Manual 6-spd",
+       "drive": "Rear-Wheel Drive"
+      },
+      {
+       "id": "18483",
+       "year": "2003",
+       "model": "M5",
+       "displ": "4.9",
+       "trany": "Manual 6-spd",
+       "drive": "Rear-Wheel Drive"
+      }
+     ],
+     "classes": [
+      "manual"
+     ],
+     "missing_years": [],
+     "passes": true
+    }
+   ],
+   "validation": {
+    "lot_cars_in_scope": 0,
+    "checkable": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_ground_truth_manual": 0,
+    "manual_claims": {
+     "in_scope": 0,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 0,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 0,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {},
+   "in_scope_codes_not_in_table": {},
+   "newly_confirmed_manual": 0,
+   "newly_labelled_automatic": 0,
+   "no_trans_info_breakdown": {}
+  },
+  {
+   "id": "mini_cooper_s_r53_re33_2003_2004",
+   "make": "MINI",
+   "status": "low_sample",
+   "status_reason": "0 checkable cars (< 20); kept because the code meaning comes from the manufacturer's own VIN document",
+   "basis": "model_code_sole_offering",
+   "claim": "manual",
+   "scope": {
+    "make": "MINI",
+    "models": "MINI Cooper S hardtop (R53)",
+    "model_years": [
+     2003,
+     2004
+    ],
+    "wmi": [
+     "WMW"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "positions 4-7",
+    "manual_codes": {
+     "RE33": "Cooper S (model code 0311) (MY2003-2004)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^((WMW)RE33..[34].......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f23bd433-2a27-4e23-8242-b2d5f5e9063c",
+     "doc": "NHTSA 01-022-N11B-9505, BMW of North America 2003-01-27, 2003 Model Year Information to all State Motor Vehicle Departments (update 03-03): 'Model Codes and VIN Decipherment' and 'Serial Number Ranges (Std./Auto.)', page image",
+     "says": "Positions 4-8: 525i 0356 D T 3 3 4; 525iA 0357 D T 4 3 4; 530i 0350 D T 5 3 4; 530iA 0355 D T 6 3 4; 540i 0353 D N 5 3 4; 540iA 0358 D N 6 3 4; M5 0351 (WBS) D E 9 3 4; 525iT 0354 D S 3 3 4; 525iAT 0359 D S 4 3 4; 540iAT 0369 D R 6 3 4. 3 Series (e.g. 325i E V 3 3 4), X5 3.0i (F A 5 3 5), Z4 2.5i (B T 3 3 4), MINI Cooper (R C 3 3 4) and Cooper S (R E 3 3 4) have one code each. Serial ranges: Cooper 0310 Std. TC38579- / Auto. TE13267-; Cooper S 0311 Std. TD57850- with no Auto. range ('*NO TRANSMISSION TYPE FOR MODEL'); M5 0351 Std. only; 525i/530i/540i Std. only, 525iA/530iA/540iA Auto. only."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/9f5f301a-3e4b-41ae-bd9f-51159333049a",
+     "doc": "NHTSA 01-022-N11B-9501, BMW 2002-10-30, Complete packet of VIN decipherments for 2003 model year MINI Cooper and Cooper S, text layer",
+     "says": "Cooper S tables keep type RE33 (no transmission split)."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), downloaded 2026-11-05",
+     "says": "One row per certified model/engine/transmission configuration; 'trany' gives the transmission. Row ids are cited per rule."
+    },
+    {
+     "url": "https://www.fastcar.co.uk/tuning-tech-guides/mini-cooper-s-r53-buyers-guide/",
+     "doc": "Fast Car, MINI Cooper S R53 buyer's guide (search result 2026-11-05)",
+     "says": "The six-speed automatic arrived as a new option with the mid-life (LCI) facelift of September 2004 / April 2005."
+    },
+    {
+     "url": "https://reddit.birdcat.cafe/r/MINI/wiki/Buyers-Guide/R50-R53",
+     "doc": "r/MINI buyer's guide R50/R53 (Motoring File based; search result 2026-11-05)",
+     "says": "'in 2005, a conventional 6-speed automatic transmission was available as an option' (for the Cooper S)."
+    }
+   ],
+   "notes": "Type RE33 covers both transmissions from MY2005 (EPA 21546 Automatic (S6)), so the rule stops at MY2004. EPA rows 19297 (2003) and 19408 (2004): Manual 6-spd only.",
+   "epa_rows": [
+    {
+     "model_regex": "^Cooper S$",
+     "displ": 1.6,
+     "years": [
+      2003,
+      2004
+     ],
+     "claim": "manual",
+     "check": "sole offering",
+     "rows": [
+      {
+       "id": "19297",
+       "year": "2003",
+       "model": "Cooper S",
+       "displ": "1.6",
+       "trany": "Manual 6-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "19408",
+       "year": "2004",
+       "model": "Cooper S",
+       "displ": "1.6",
+       "trany": "Manual 6-spd",
+       "drive": "Front-Wheel Drive"
+      }
+     ],
+     "classes": [
+      "manual"
+     ],
+     "missing_years": [],
+     "passes": true
+    }
+   ],
+   "validation": {
+    "lot_cars_in_scope": 30,
+    "checkable": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_ground_truth_manual": 0,
+    "manual_claims": {
+     "in_scope": 30,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 0,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 30,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "2004 RE33": 17,
+    "2003 RE33": 13
+   },
+   "in_scope_codes_not_in_table": {
+    "2003:RC33": 25,
+    "2004:RC33": 19
+   },
+   "newly_confirmed_manual": 30,
+   "newly_labelled_automatic": 0,
+   "no_trans_info_breakdown": {
+    "no_trans_info_vpic_trans_blank": 30
+   }
+  },
+  {
+   "id": "mini_cooper_s_r53_re33_2002",
+   "make": "MINI",
+   "status": "candidate",
+   "status_reason": "EPA's file has no MY2002 Cooper S row, so the EPA sole-offering check cannot run for this year; the manual-only fact rests on a road test (MotorWeek: 'No automatic is available') and on the automatic's 2005 introduction",
+   "basis": "model_code_sole_offering",
+   "claim": "manual",
+   "scope": {
+    "make": "MINI",
+    "models": "MINI Cooper S hardtop (R53), first model year",
+    "model_years": [
+     2002,
+     2002
+    ],
+    "wmi": [
+     "WMW"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "positions 4-7",
+    "manual_codes": {
+     "RE33": "Cooper S (MY2002-2002)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^((WMW)RE33..2.......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d9053bb-9297-47a0-87b5-b83206c9ebd8",
+     "doc": "NHTSA 01-022-N11B-8594, BMW of North America 2002-02-25, VIN Decipherments for 2002 Model Year MINI Models, text layer",
+     "says": "'Table for MINI Cooper S - 2002 Model Year': WMW RE33, Series Cooper S, 2-Door Hatchback, 161 BHP 1.6 liter; model year 2 = 2002; plant Oxford. No transmission named."
+    },
+    {
+     "url": "https://motorweek.org/road_tests/2002_mini_cooper_s_program_2204",
+     "doc": "MotorWeek road test 'Program #2204: 2002 Mini Cooper S' (found 2026-11-05 via web search; quoted from the search result, page not fetched)",
+     "says": "'the S sports a sharp-shifting 6-speed manual transmission. No automatic is available or wanted.'"
+    },
+    {
+     "url": "https://www.fastcar.co.uk/tuning-tech-guides/mini-cooper-s-r53-buyers-guide/",
+     "doc": "Fast Car, MINI Cooper S R53 buyer's guide (search result 2026-11-05)",
+     "says": "The six-speed automatic arrived as a new option with the mid-life (LCI) facelift of September 2004 / April 2005."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f23bd433-2a27-4e23-8242-b2d5f5e9063c",
+     "doc": "NHTSA 01-022-N11B-9505, BMW of North America 2003-01-27, 2003 Model Year Information to all State Motor Vehicle Departments (update 03-03): 'Model Codes and VIN Decipherment' and 'Serial Number Ranges (Std./Auto.)', page image",
+     "says": "Positions 4-8: 525i 0356 D T 3 3 4; 525iA 0357 D T 4 3 4; 530i 0350 D T 5 3 4; 530iA 0355 D T 6 3 4; 540i 0353 D N 5 3 4; 540iA 0358 D N 6 3 4; M5 0351 (WBS) D E 9 3 4; 525iT 0354 D S 3 3 4; 525iAT 0359 D S 4 3 4; 540iAT 0369 D R 6 3 4. 3 Series (e.g. 325i E V 3 3 4), X5 3.0i (F A 5 3 5), Z4 2.5i (B T 3 3 4), MINI Cooper (R C 3 3 4) and Cooper S (R E 3 3 4) have one code each. Serial ranges: Cooper 0310 Std. TC38579- / Auto. TE13267-; Cooper S 0311 Std. TD57850- with no Auto. range ('*NO TRANSMISSION TYPE FOR MODEL'); M5 0351 Std. only; 525i/530i/540i Std. only, 525iA/530iA/540iA Auto. only."
+    }
+   ],
+   "notes": "Strong candidate: same type code and car as MY2003, for which BMW lists no automatic and EPA lists only the manual.",
+   "epa_rows": [
+    {
+     "model_regex": "^Cooper S$",
+     "displ": 1.6,
+     "years": [
+      2002
+     ],
+     "claim": "manual",
+     "check": "sole offering",
+     "rows": [],
+     "classes": [],
+     "missing_years": [
+      2002
+     ],
+     "passes": false
+    }
+   ],
+   "validation": {
+    "lot_cars_in_scope": 19,
+    "checkable": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_ground_truth_manual": 0,
+    "manual_claims": {
+     "in_scope": 19,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 0,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 0,
+     "conflict": 19,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": [
+     {
+      "vin": "WMWRE33402TD52411",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     },
+     {
+      "vin": "WMWRE33412TD52319",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     },
+     {
+      "vin": "WMWRE334X2TD51489",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     },
+     {
+      "vin": "WMWRE33422TD55195",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     },
+     {
+      "vin": "WMWRE33402TD50142",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     },
+     {
+      "vin": "WMWRE33442TD51262",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     },
+     {
+      "vin": "WMWRE33452TD55224",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     },
+     {
+      "vin": "WMWRE33472TD53796",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     },
+     {
+      "vin": "WMWRE33462TD51361",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     },
+     {
+      "vin": "WMWRE33482TD53466",
+      "year": 2002,
+      "make": "MINI",
+      "model": "Cooper",
+      "claim": "manual",
+      "epa_classes": [
+       "cvt"
+      ]
+     }
+    ]
+   },
+   "codes_seen_on_lots": {
+    "2002 RE33": 19
+   },
+   "in_scope_codes_not_in_table": {
+    "2002:RC33": 10
+   },
+   "newly_confirmed_manual": 19,
+   "newly_labelled_automatic": 0,
+   "no_trans_info_breakdown": {
+    "no_trans_info_vpic_trans_blank": 19
+   }
+  },
+  {
+   "id": "mini_john_cooper_works_2009_2012",
+   "make": "MINI",
+   "status": "low_sample",
+   "status_reason": "0 checkable cars (< 20); kept because the code meaning comes from the manufacturer's own VIN document",
+   "basis": "model_code_sole_offering",
+   "claim": "manual",
+   "scope": {
+    "make": "MINI",
+    "models": "MINI John Cooper Works Hardtop, Clubman (2009, 2012), Convertible and Coupe (2012)",
+    "model_years": [
+     2009,
+     2012
+    ],
+    "wmi": [
+     "WMW"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "positions 4-7",
+    "manual_codes": {
+     "MF93": "JCW Hardtop (205 BHP) (MY2009-2009)",
+     "MM93": "JCW Clubman (205 BHP) (MY2009-2009)",
+     "SV9C": "JCW Hardtop (206 BHP) (MY2012-2012)",
+     "ZG9C": "JCW Clubman (206 BHP) (MY2012-2012)",
+     "ZP9C": "JCW Convertible (206 BHP) (MY2012-2012)",
+     "SX5C": "JCW Coupe (206 BHP) (MY2012-2012)"
+    },
+    "automatic_codes": {}
+   },
+   "vin_regex_manual": "^((WMW)MF93..9.......|(WMW)MM93..9.......|(WMW)SV9C..C.......|(WMW)ZG9C..C.......|(WMW)ZP9C..C.......|(WMW)SX5C..C.......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/0d8e9a59-681b-4225-adc6-6b6e5a8d9535",
+     "doc": "NHTSA ORG4565, BMW of North America 2008-12-11, VIN Decipherments for 2009 Model Year MINI models, page image",
+     "says": "MINI MODEL YEAR 2009 decipherment, positions 4-7: Cooper M F 3 3; Cooper S M F 7 3; JCW* Hardtop M F 9 3 (205 BHP); Cooper Clubman M L 3 3; Cooper S Clubman M M 3 3; JCW* Clubman M M 9 3; Cooper Convertible M R 3 3; Cooper S Convertible M S 3 3. '*JCW = John Cooper Works'. No transmission column."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/c3862d77-2eae-4f51-9f90-7a79ce5c5bf0",
+     "doc": "NHTSA ORG7370, BMW of North America 2011-12-01, VIN Decipherments for 2012 Model Year MINI models, page image",
+     "says": "MINI MODEL YEAR 2012 decipherment, positions 4-7: Cooper Hardtop S U 3 C; Cooper S Hardtop S V 3 C; JCW* Hardtop S V 9 C (206 BHP); Clubman Z F 3 C / Z G 3 C / JCW Z G 9 C; Convertible Z N 3 C / Z P 3 C / JCW Z P 9 C; Countryman Z B 3 C / Z C 3 C / All4 Z C 5 C; Coupe S X 1 C / Cooper S Coupe S X 3 C / JCW* Coupe S X 5 C. No transmission column."
+    },
+    {
+     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
+     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f), downloaded 2026-11-05",
+     "says": "One row per certified model/engine/transmission configuration; 'trany' gives the transmission. Row ids are cited per rule."
+    }
+   ],
+   "notes": "Type codes from BMW's MINI MY2009 and MY2012 decipherment tables (page images). MY2010-2011 JCW codes were not transcribed (no lot car carries one); MS93 (MY2009, not in BMW's MY2009 table) gets no claim. EPA: John Cooper Works 25401 (2009), 31645 (2012); JCW Clubman 25417, 31672; JCW Convertible 31646; JCW Coupe 31631, all Manual 6-spd; the first automatic JCW rows are MY2013.",
+   "epa_rows": [
+    {
+     "model_regex": "^John Cooper Works( Clubman| Convertible| Coupe)?$",
+     "displ": 1.6,
+     "years": [
+      2009,
+      2012
+     ],
+     "claim": "manual",
+     "check": "sole offering",
+     "rows": [
+      {
+       "id": "25401",
+       "year": "2009",
+       "model": "John Cooper Works",
+       "displ": "1.6",
+       "trany": "Manual 6-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "25402",
+       "year": "2009",
+       "model": "John Cooper Works Convertible",
+       "displ": "1.6",
+       "trany": "Manual 6-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "25417",
+       "year": "2009",
+       "model": "John Cooper Works Clubman",
+       "displ": "1.6",
+       "trany": "Manual 6-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "31631",
+       "year": "2012",
+       "model": "John Cooper Works Coupe",
+       "displ": "1.6",
+       "trany": "Manual 6-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "31645",
+       "year": "2012",
+       "model": "John Cooper Works",
+       "displ": "1.6",
+       "trany": "Manual 6-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "31646",
+       "year": "2012",
+       "model": "John Cooper Works Convertible",
+       "displ": "1.6",
+       "trany": "Manual 6-spd",
+       "drive": "Front-Wheel Drive"
+      },
+      {
+       "id": "31672",
+       "year": "2012",
+       "model": "John Cooper Works Clubman",
+       "displ": "1.6",
+       "trany": "Manual 6-spd",
+       "drive": "Front-Wheel Drive"
+      }
+     ],
+     "classes": [
+      "manual"
+     ],
+     "missing_years": [],
+     "passes": true
+    }
+   ],
+   "validation": {
+    "lot_cars_in_scope": 4,
+    "checkable": 0,
+    "agree": 0,
+    "disagree": 0,
+    "agreement": null,
+    "checkable_ground_truth_manual": 0,
+    "manual_claims": {
+     "in_scope": 4,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 0,
+     "checkable": 0,
+     "agree": 0,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 4,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "2009 MF93": 3,
+    "2012 SX5C": 1
+   },
+   "in_scope_codes_not_in_table": {
+    "2011:SU3C": 34,
+    "2009:MF33": 34,
+    "2012:SU3C": 32,
+    "2010:MF7C": 23,
+    "2010:MF3C": 21,
+    "2009:MF73": 21,
+    "2011:SV3C": 19,
+    "2012:ZB3C": 19,
+    "2012:ZC3C": 16,
+    "2009:ML33": 15,
+    "2012:ZC5C": 14,
+    "2009:MM33": 13,
+    "2011:ZC5C": 13,
+    "2010:ML3C": 8,
+    "2010:MR3C": 8,
+    "2012:SV3C": 7,
+    "2011:ZC3C": 6,
+    "2010:MM3C": 4,
+    "2010:MS3C": 4,
+    "2011:ZP3C": 4,
+    "2011:ZB3C": 3,
+    "2012:ZF3C": 3,
+    "2012:ZP3C": 3,
+    "2009:MR33": 3,
+    "2011:ZG3C": 3
+   },
+   "newly_confirmed_manual": 4,
+   "newly_labelled_automatic": 0,
+   "no_trans_info_breakdown": {
+    "no_trans_info_vpic_trans_blank": 4
+   }
+  },
+  {
+   "id": "vw_wvw_char4_series_transmission_2006_2010",
+   "make": "Volkswagen",
+   "status": "keep",
+   "status_reason": ">= 20 checkable cars and agreement >= 0.995",
+   "basis": "transmission_code",
+   "claim": "manual for the manual codes; automatic (not manual) for the automatic codes",
+   "scope": {
+    "make": "Volkswagen",
+    "models": "Rabbit, new GTI (Mk5/Mk6), Golf (2010), Eos, Passat B6 sedan and wagon (2006-2008), CC (2009-2010)",
+    "model_years": [
+     2006,
+     2010
+    ],
+    "wmi": [
+     "WVW"
+    ],
+    "conditions": [
+     "VIN is 17 characters with a valid check digit (character 9); VINs that fail it are skipped",
+     "model year from VIN character 10; the listing year only picks the 30-year cycle and must be within 2 years",
+     "fixed characters: none"
+    ]
+   },
+   "vin_condition": {
+    "characters": "position 4 (series) + positions 7-8 (model); code written as p4+p7p8",
+    "manual_codes": {
+     "A1K": "Rabbit 2 dr man. trans. (MY2006-2009)",
+     "C1K": "Rabbit 4 dr man. trans. (MY2006-2009)",
+     "E1K": "GTI 2 dr man. trans. (MY2006-2009)",
+     "G1K": "GTI 4 dr man. trans. (MY2007-2009)",
+     "AAJ": "Golf 2 dr 5 Spd. man. trans. (MY2010-2010)",
+     "CAJ": "Golf 4 dr 5 Spd. man. trans. (MY2010-2010)",
+     "MAJ": "Golf 2 dr 6 Spd. man. trans. (MY2010-2010)",
+     "NAJ": "Golf 4 dr 6 Spd. man. trans. (MY2010-2010)",
+     "EAJ": "GTI 2 dr man. trans. (MY2010-2010)",
+     "GAJ": "GTI 4 dr man. trans. (MY2010-2010)",
+     "A1F": "Eos man. trans. (MY2007-2009)",
+     "C1F": "Eos Sport man. trans. (MY2007-2007)",
+     "AAH": "Eos man. trans. (MY2010-2010)",
+     "G3C": "Passat 2.0T man. trans. (MY2006-2007)",
+     "U3C": "Passat manual (2007) / Turbo man. (2008) (MY2007-2008)",
+     "K3C": "Passat 2.0T man. w/Luxury (MY2007-2007)",
+     "H3C": "Passat 2.0T man. w/Sport (MY2007-2007)",
+     "Y3C": "Passat Wagon man. (2007) / Turbo man. (2008) (MY2007-2008)",
+     "N3C": "Passat Wagon 2.0T man. (MY2007-2007)",
+     "W3C": "Passat Wagon 2.0T man. w/Luxury (MY2007-2007)",
+     "S3C": "Passat Wagon 2.0T man. w/Sport (MY2007-2007)",
+     "NAN": "CC Sport man. trans. (MY2010-2010)",
+     "N3C@2009": "CC Sport man. trans. (MY2009)"
+    },
+    "automatic_codes": {
+     "B1K": "Rabbit 2 dr auto. trans (MY2006-2009)",
+     "D1K": "Rabbit 4 dr auto. trans (MY2006-2009)",
+     "F1K": "GTI 2 dr auto. trans (MY2006-2009)",
+     "H1K": "GTI 4 dr auto. trans (MY2007-2009)",
+     "BAJ": "Golf 2 dr auto. trans (MY2010-2010)",
+     "DAJ": "Golf 4 dr auto. trans (MY2010-2010)",
+     "FAJ": "GTI 2 dr auto. trans (MY2010-2010)",
+     "HAJ": "GTI 4 dr auto. trans (MY2010-2010)",
+     "B1F": "Eos auto. trans (MY2007-2009)",
+     "D1F": "Eos Sport auto. trans (MY2007-2007)",
+     "F1F": "Eos Luxury auto. trans (MY2007-2009)",
+     "BAH": "Eos auto. trans (MY2010-2010)",
+     "FAH": "Eos Lux auto. trans (MY2010-2010)",
+     "A3C": "Passat 2.0T/3.6L auto. trans (2006-07) / Komfort auto. (2008) (MY2006-2008)",
+     "E3C": "Passat auto. trans w/Luxury (2006-07) / Lux auto. (2008) (MY2006-2008)",
+     "J3C": "Passat auto. (2007) / Turbo auto. (2008) (MY2007-2008)",
+     "C3C": "Passat 2.0T/3.6L auto. w/Sport (MY2007-2007)",
+     "X3C": "Passat Wagon auto. (2007) / Turbo auto. (2008) (MY2007-2008)",
+     "L3C": "Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008) (MY2007-2008)",
+     "T3C": "Passat Wagon auto. w/Luxury (2007) / Lux auto. (2008) (MY2007-2008)",
+     "M3C": "CC Sport auto. trans (MY2009-2009)",
+     "MAN": "CC Sport auto. trans (MY2010-2010)",
+     "HAN": "CC Luxury auto. trans (MY2010-2010)",
+     "H3C@2009": "CC Luxury auto. trans (MY2009)"
+    }
+   },
+   "vin_regex_manual": "^((WVW)A..1K.[6789].......|(WVW)C..1K.[6789].......|(WVW)E..1K.[6789].......|(WVW)G..1K.[789].......|(WVW)A..AJ.A.......|(WVW)C..AJ.A.......|(WVW)M..AJ.A.......|(WVW)N..AJ.A.......|(WVW)E..AJ.A.......|(WVW)G..AJ.A.......|(WVW)A..1F.[789].......|(WVW)C..1F.7.......|(WVW)A..AH.A.......|(WVW)G..3C.[67].......|(WVW)U..3C.[78].......|(WVW)K..3C.7.......|(WVW)H..3C.7.......|(WVW)Y..3C.[78].......|(WVW)N..3C.7.......|(WVW)W..3C.7.......|(WVW)S..3C.7.......|(WVW)N..AN.A.......|(WVW)N..3C.9.......)$",
+   "citations": [
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/beedfa70-210b-4945-9347-7b8b29020530",
+     "doc": "NHTSA ORG10541, Volkswagen Group of America 2006-10-11, Volkswagen VIN Breakdown 2006 Model Year (Revision 13), text layer",
+     "says": "Position 4 Series: new GTI 2-dr E = man. trans., F = auto. trans; Rabbit A (2 dr) / C (4 dr) man. trans., B / D auto. trans; Passat A = 2.0T / 3.6L auto. trans, G = 2.0T man. trans., E = 2.0T / 3.6L auto. trans w/Luxury Pkg. Jetta, Golf, New Beetle, Touareg codes are trim/package only. Positions 7-8: 1K Jetta / new GTI / Rabbit, 3C Passat."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/403644c5-8d21-4dc3-a90d-75efe146a3fd",
+     "doc": "NHTSA ORG10543, Volkswagen Group of America (dated 2006-06-23, Revision 7 of 23 Jan 2008), Volkswagen VIN Breakdown 2007 Model Year, text layer",
+     "says": "Position 4: Rabbit A/C man., B/D auto.; GTI E (2 dr) / G (4 dr) man. trans., F / H auto. trans; Eos A man., B auto., C Sport man., D Sport auto., F Luxury auto.; Passat J auto., U manual, A auto., G man., E auto. w/Luxury, K man. w/Luxury, C auto. w/Sport, H man. w/Sport; Passat Wagon X auto., Y man., L auto., N man., T auto. w/Luxury, W man. w/Luxury, S man. w/Sport. Jetta and New Beetle codes are trim only."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/14e196ec-9877-4352-8986-97bfbf7dfb61",
+     "doc": "NHTSA ORG10545, Volkswagen Group of America 2008-01-12, Volkswagen VIN Breakdown 2008 Model Year (Revision 3), text layer",
+     "says": "Position 4: Rabbit A/C man., B/D auto.; GTI E/G man., F/H auto.; Eos A Turbo/Komfort man., B Turbo/Komfort auto., F Lux auto.; Passat J Turbo auto., U Turbo man., A Komfort auto., E Lux auto.; Passat Wagon X Turbo auto., Y Turbo man., L Komfort auto., T Lux auto. Jetta (J/H/R), GLI and New Beetle codes are trim only."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51bbc5e2-e426-45cb-956b-c21cd15d9bdc",
+     "doc": "NHTSA ORG10547, Volkswagen Group of America 2009-02-27, Volkswagen VIN Breakdown 2009 Model Year (Revision 3a), text layer",
+     "says": "Position 4: Rabbit A/C man., B/D auto.; GTI E/G man., F/H auto.; Eos A man., B auto., F Lux auto.; CC M Sport auto., N Sport man., H Luxury auto.; Passat J/X Komfort (no transmission). Jetta, Jetta SportWagen, GLI, New Beetle codes are trim only."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/aa2dd01d-5420-4117-bc9e-777b8f26c016",
+     "doc": "NHTSA ORG10549, Volkswagen Group of America 2010-01-01, Volkswagen VIN Breakdown 2010 Model Year (Revision 2.5), text layer",
+     "says": "Position 4: Golf A (2 dr) / C (4 dr) 5 Spd. man. trans., B / D auto. trans, M / N 6 Spd. man. trans.; GTI E / G man. trans., F / H auto. trans; CC M Sport auto., N Sport man., H Luxury auto.; Eos A Turbo/Komfort man., B auto., F Lux auto. Positions 7-8: AJ Golf/GTI/Jetta, AH Eos, AN CC/Passat. Jetta codes are trim only."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/2e8c2d8a-fd61-4c33-96a7-a47eeeb0f00e",
+     "doc": "NHTSA ORG10532, Volkswagen Group of America 2005-05-18, Volkswagen VIN Breakdown 2004 Model Year (Revision 12), text layer",
+     "says": "Position 4 'Series' is a trim (Golf GL/GLS, Jetta GL/GLS/GLI, New Beetle GL/GLS/GLX/Turbo S, Passat GL/GLS/GLX/W8), 5 engine type, 6 restraint, 7-8 model. No transmission position."
+    }
+   ],
+   "notes": "Decision characters = position 4 + positions 7-8 (model). WMI WVW only (Jetta, Jetta SportWagen and GLI use 3VW and their position 4 is a trim code). Codes the filings describe without a transmission (Passat 3.6L 4Motion, VR6, R32, Komfort 2009) get no claim. CC 2009 N (man.) and H (auto.) share the 3C model code with Passat codes of other years and are handled per year below.",
+   "epa_rows": [],
+   "validation": {
+    "lot_cars_in_scope": 581,
+    "checkable": 534,
+    "agree": 534,
+    "disagree": 0,
+    "agreement": 1.0,
+    "checkable_ground_truth_manual": 75,
+    "manual_claims": {
+     "in_scope": 77,
+     "checkable": 75,
+     "agree": 75,
+     "disagree": 0
+    },
+    "automatic_claims": {
+     "in_scope": 504,
+     "checkable": 459,
+     "agree": 459,
+     "disagree": 0
+    },
+    "uniform_cell_lines_excluded": 0,
+    "uniform_cell_lines_that_would_agree": 0,
+    "speeds_only_excluded": 0,
+    "epa_per_car": {
+     "consistent": 581,
+     "conflict": 0,
+     "no_match": 0
+    },
+    "disagreement_examples": [],
+    "epa_conflict_examples": []
+   },
+   "codes_seen_on_lots": {
+    "2010 MAN": 53,
+    "2006 A3C": 35,
+    "2008 A3C": 26,
+    "2009 H3C": 22,
+    "2009 M3C": 22,
+    "2007 A3C": 19,
+    "2007 L3C": 18,
+    "2007 D1K": 18,
+    "2006 E3C": 18,
+    "2008 B1K": 17,
+    "2009 B1F": 17,
+    "2008 B1F": 14,
+    "2008 F1F": 14,
+    "2008 J3C": 13,
+    "2007 B1K": 13,
+    "2008 L3C": 11,
+    "2008 E3C": 11,
+    "2010 DAJ": 11,
+    "2010 NAN": 10,
+    "2008 D1K": 10,
+    "2007 B1F": 10,
+    "2008 H1K": 9,
+    "2007 A1K": 9,
+    "2007 E3C": 9,
+    "2007 F1F": 8,
+    "2007 T3C": 8,
+    "2010 BAH": 7,
+    "2009 H1K": 7,
+    "2006 F1K": 7,
+    "2009 D1K": 7,
+    "2007 D1F": 7,
+    "2008 A1K": 6,
+    "2007 H1K": 6,
+    "2009 F1F": 6,
+    "2010 HAN": 6,
+    "2007 J3C": 6,
+    "2007 F1K": 6,
+    "2009 B1K": 6,
+    "2010 AAJ": 5,
+    "2009 A1K": 5
+   },
+   "in_scope_codes_not_in_table": {
+    "2009:J3C": 32,
+    "2010:JAN": 25,
+    "2010:XAN": 6,
+    "2010:EAN": 4,
+    "2009:E3C": 4,
+    "2009:X3C": 4,
+    "2006:C3C": 4,
+    "2006:F3C": 3,
+    "2009:G3C": 2,
+    "2010:GAN": 2,
+    "2008:D1F": 1,
+    "2007:D3C": 1,
+    "2007:F3C": 1,
+    "2008:C3C": 1
+   },
+   "newly_confirmed_manual": 1,
+   "newly_labelled_automatic": 33,
+   "no_trans_info_breakdown": {
+    "no_trans_info_not_in_cache_backup": 5,
+    "no_trans_info_vpic_trans_blank": 29,
+    "no_trans_info_canadian_yard": 4
+   }
+  }
+ ],
+ "newly_confirmed_manual_cars": [
+  {
+   "id": "7947685",
+   "vin": "WBAAG3301D8389457",
+   "year": 1983,
+   "make": "BMW",
+   "model": "320i",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "AG33: 320i",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Rancho Cordova"
+  },
+  {
+   "id": "7984134",
+   "vin": "WBADN53451GC96558",
+   "year": 2001,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN53: 540i (0353)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Johnston"
+  },
+  {
+   "id": "7957921",
+   "vin": "WBADT33481GF40794",
+   "year": 2001,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT33: 525i (model code 0356)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sacramento Mather"
+  },
+  {
+   "id": "7984292",
+   "vin": "WBADT53452CE92868",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT53: 530i (0350)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Newark"
+  },
+  {
+   "id": "7969122",
+   "vin": "WBADN5341YGC95711",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN53: 540i (0353)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Windsor"
+  },
+  {
+   "id": "7972557",
+   "vin": "WBADC7404F0650127",
+   "year": 1985,
+   "make": "BMW",
+   "model": "535i",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "DC74: 535i / 535is",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Portland South"
+  },
+  {
+   "id": "7968564",
+   "vin": "WBADK7307E9201233",
+   "year": 1984,
+   "make": "BMW",
+   "model": "528e",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "DK73: 528e",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Portland South"
+  },
+  {
+   "id": "7971739",
+   "vin": "WBAAE5400H1691806",
+   "year": 1987,
+   "make": "BMW",
+   "model": "3 Series",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "AE54: 325e / 325 4-door",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Arlington"
+  },
+  {
+   "id": "7913484",
+   "vin": "WBAHC1313LBC92739",
+   "year": 1990,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "HC13: 525i",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sparks"
+  },
+  {
+   "id": "7865227",
+   "vin": "WBABB1305H1929530",
+   "year": 1987,
+   "make": "BMW",
+   "model": "325iC",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "BB13: 325ic (Cabrio)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sparks"
+  },
+  {
+   "id": "7950680",
+   "vin": "WBADT53402CE93166",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT53: 530i (0350)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Modesto"
+  },
+  {
+   "id": "7948608",
+   "vin": "WMWRE33424TD81363",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Merced"
+  },
+  {
+   "id": "7975161",
+   "vin": "WMWRE33454TD88369",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Stockton"
+  },
+  {
+   "id": "7975318",
+   "vin": "WMWRE33434TD88998",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sacramento Mather"
+  },
+  {
+   "id": "7997133",
+   "vin": "WMWRE33424TD87339",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Kansas City (Truman Rd)"
+  },
+  {
+   "id": "7973515",
+   "vin": "WMWMF93569TF96741",
+   "year": 2009,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_john_cooper_works_2009_2012",
+   "code": "MF93: JCW Hardtop (205 BHP)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Antelope"
+  },
+  {
+   "id": "1265-169292",
+   "vin": "WMWRE33423TD65632",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Anaheim"
+  },
+  {
+   "id": "1281-178976",
+   "vin": "WMWMF93569TF96030",
+   "year": 2009,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_john_cooper_works_2009_2012",
+   "code": "MF93: JCW Hardtop (205 BHP)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Monrovia"
+  },
+  {
+   "id": "1280-177613",
+   "vin": "WMWRE33493TD62646",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Ontario"
+  },
+  {
+   "id": "1284-117815",
+   "vin": "WBAHD1319LBF11068",
+   "year": 1990,
+   "make": "BMW",
+   "model": "535i",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "HD13: 535i",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Rialto"
+  },
+  {
+   "id": "1284-117498",
+   "vin": "WMWRE33473TD66596",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Rialto"
+  },
+  {
+   "id": "1263-270354",
+   "vin": "WBADT33401GF40692",
+   "year": 2001,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT33: 525i (model code 0356)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Sun Valley"
+  },
+  {
+   "id": "1263-269945",
+   "vin": "WBADT53483CE93949",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT53: 530i (0350)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Sun Valley"
+  },
+  {
+   "id": "1163-47858",
+   "vin": "WMWRE33474TD75736",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Savannah"
+  },
+  {
+   "id": "1581-94677",
+   "vin": "WBAAG3307D9006891",
+   "year": 1983,
+   "make": "BMW",
+   "model": "320i",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "AG33: 320i",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Chicago North"
+  },
+  {
+   "id": "1168-66703",
+   "vin": "WBADN5348YGC95401",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN53: 540i (0353)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Raleigh"
+  },
+  {
+   "id": "1253-38549",
+   "vin": "WBAAB540XG9673323",
+   "year": 1986,
+   "make": "BMW",
+   "model": "325es",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "AB54: 325e / 325 / 325es 2-door",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Cincinnati"
+  },
+  {
+   "id": "1220-57824",
+   "vin": "WMWRE33443TD66975",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Charleston"
+  },
+  {
+   "id": "1217-66323",
+   "vin": "WBAAK7403E8764982",
+   "year": 1984,
+   "make": "BMW",
+   "model": "318i",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "AK74: 318i (2-door)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Chattanooga"
+  },
+  {
+   "id": "pap-6-1927471-1",
+   "vin": "WBADN5346YGC96014",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN53: 540i (0353)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Nashville"
+  },
+  {
+   "id": "pap-12-1187203-5",
+   "vin": "WBADN5340YGC95263",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN53: 540i (0353)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Lafayette"
+  },
+  {
+   "id": "pap-3-1196223-1",
+   "vin": "WMWRE33444TD83213",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Atlanta South"
+  },
+  {
+   "id": "pap-8-1295415-1",
+   "vin": "WMWRE33423TD72497",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Louisville"
+  },
+  {
+   "id": "pap-16-1080722-1",
+   "vin": "WMWRE33454TD83348",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Baton Rouge"
+  },
+  {
+   "id": "pap-19-1079540-1",
+   "vin": "WMWRE33433TD72086",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Winston-Salem"
+  },
+  {
+   "id": "pap-34-1018023-1",
+   "vin": "WMWRE334X4TD77853",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Orlando"
+  },
+  {
+   "id": "pap-36-1027760-1",
+   "vin": "WMWRE33444TD79484",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Albuquerque"
+  },
+  {
+   "id": "pap-37-1022056-1",
+   "vin": "WMWRE33483TD66803",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Phoenix"
+  },
+  {
+   "id": "pap-40-1033505-1",
+   "vin": "WMWRE33483TD69457",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Denver"
+  },
+  {
+   "id": "pap-42-1028538-1",
+   "vin": "WMWRE33414TD78888",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Pittsburgh"
+  },
+  {
+   "id": "wap-BWAP080826",
+   "vin": "WMWSX5C5XCT141439",
+   "year": 2012,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_john_cooper_works_2009_2012",
+   "code": "SX5C: JCW Coupe (206 BHP)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Wrench-A-Part - Belton"
+  },
+  {
+   "id": "fenix-306060633",
+   "vin": "WMWRE33414TD83816",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Fenix U-Pull - Moultrie"
+  },
+  {
+   "id": "harrys-WMWRE33443TD61890",
+   "vin": "WMWRE33443TD61890",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Hazle Township"
+  },
+  {
+   "id": "harrys-WMWRE33494TD79531",
+   "vin": "WMWRE33494TD79531",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Hazle Township"
+  },
+  {
+   "id": "pns-stk098606",
+   "vin": "WBAAK7404E8711420",
+   "year": 1984,
+   "make": "BMW",
+   "model": "318i",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "AK74: 318i (2-door)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix South"
+  },
+  {
+   "id": "pns-stk099078",
+   "vin": "WMWRE33483TD63948",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix South"
+  },
+  {
+   "id": "vinplus-louisville-000000112450",
+   "vin": "WMWRE33433TD72363",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Bessler's U Pull & Save - Louisville"
+  },
+  {
+   "id": "vinplus-longview-stk022640",
+   "vin": "WMWRE33413TD65055",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pickers - Longview"
+  },
+  {
+   "id": "budget-stk84491",
+   "vin": "WMWRE33494TD80193",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Budget U-Pull-It - Winter Garden"
+  },
+  {
+   "id": "ezpullnpay-atlanta-stk088367",
+   "vin": "WMWRE33414TD76039",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Atlanta"
+  },
+  {
+   "id": "ezpullnpay-atlanta-stk086635",
+   "vin": "WMWRE33494TD82879",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Atlanta"
+  },
+  {
+   "id": "ezpullnpay-warnerrobins-stk012185",
+   "vin": "WMWMF93509TF96430",
+   "year": 2009,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_john_cooper_works_2009_2012",
+   "code": "MF93: JCW Hardtop (205 BHP)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Warner Robins"
+  },
+  {
+   "id": "foss-winstonsalem-stk030193",
+   "vin": "WMWRE33464TD83214",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Foss U-Pull-It - Winston-Salem"
+  },
+  {
+   "id": "foss-jacksonville-stk013174",
+   "vin": "WBAAC7409F0675270",
+   "year": 1985,
+   "make": "BMW",
+   "model": "3 Series",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "AC74: 318i/4",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Foss U-Pull-It - Jacksonville"
+  },
+  {
+   "id": "autopartsupull-lincolnton-lug0440",
+   "vin": "WBADT33442GF41958",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT33: 525i (model code 0356)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Auto Parts U Pull - Lincolnton"
+  },
+  {
+   "id": "landl-kingsmountain-uh0554",
+   "vin": "WMWRE33433TD62464",
+   "year": 2003,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "L and L U-Pull Auto Parts"
+  },
+  {
+   "id": "rgpickapart-anthony-stk64624",
+   "vin": "WMWRE33404TD77747",
+   "year": 2004,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2003_2004",
+   "code": "RE33: Cooper S (model code 0311)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "RG Pick-a-Part - Anthony"
+  },
+  {
+   "id": "upullitwa-yakima-1n1758",
+   "vin": "WVWAB71K39W037609",
+   "year": 2009,
+   "make": "Volkswagen",
+   "model": "Rabbit",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "A1K: Rabbit 2 dr man. trans.",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Yakima"
+  }
+ ],
+ "candidate_rule_manual_cars": [
+  {
+   "id": "7980024",
+   "vin": "WBADE5324WBV94115",
+   "year": 1998,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "code": "DE53: 540i (pair partner of DE63)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Richmond"
+  },
+  {
+   "id": "7980990",
+   "vin": "WBADM5342YBY19400",
+   "year": 2000,
+   "make": "BMW",
+   "model": "528i",
+   "rule": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "code": "DM53: 528i (pair 5/6 as DT/DN)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sacramento Mather"
+  },
+  {
+   "id": "7947779",
+   "vin": "WBADD5322WBV56630",
+   "year": 1998,
+   "make": "BMW",
+   "model": "528i",
+   "rule": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "code": "DD53: 528i (pair partner of DD63)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Fairfield"
+  },
+  {
+   "id": "7976077",
+   "vin": "WBADE5323VBV92466",
+   "year": 1997,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "code": "DE53: 540i (pair partner of DE63)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Modesto"
+  },
+  {
+   "id": "7952259",
+   "vin": "WMWRE33402TD52411",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Modesto"
+  },
+  {
+   "id": "7902861",
+   "vin": "WMWRE33412TD52319",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Windsor"
+  },
+  {
+   "id": "7979220",
+   "vin": "WMWRE334X2TD51489",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - American Canyon"
+  },
+  {
+   "id": "7920914",
+   "vin": "WMWRE33422TD55195",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Kansas City (Winner Rd)"
+  },
+  {
+   "id": "7965126",
+   "vin": "JF4GG22695G056713",
+   "year": 2005,
+   "make": "Saab",
+   "model": "9-2X",
+   "rule": "saab_9_2x_jf4_char11_subaru_scheme",
+   "code": "G: Gunma AWD 5MT (Subaru scheme)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Redding"
+  },
+  {
+   "id": "utpap-ogden-A039889",
+   "vin": "WMWRE33402TD50142",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Utah Pic-A-Part - Ogden"
+  },
+  {
+   "id": "1265-168435",
+   "vin": "WMWRE33442TD51262",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Anaheim"
+  },
+  {
+   "id": "1285-48459",
+   "vin": "WBADM5343XBY16701",
+   "year": 1999,
+   "make": "BMW",
+   "model": "528i",
+   "rule": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "code": "DM53: 528i (pair 5/6 as DT/DN)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Fontana"
+  },
+  {
+   "id": "1263-271051",
+   "vin": "WMWRE33452TD55224",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Sun Valley"
+  },
+  {
+   "id": "1225-65955",
+   "vin": "WMWRE33472TD53796",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Daytona"
+  },
+  {
+   "id": "1246-35355",
+   "vin": "JF4GG61675G053480",
+   "year": 2005,
+   "make": "Saab",
+   "model": "9-2X",
+   "rule": "saab_9_2x_jf4_char11_subaru_scheme",
+   "code": "G: Gunma AWD 5MT (Subaru scheme)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Wichita"
+  },
+  {
+   "id": "1168-66544",
+   "vin": "JF4GG616X5G056535",
+   "year": 2005,
+   "make": "Saab",
+   "model": "9-2X",
+   "rule": "saab_9_2x_jf4_char11_subaru_scheme",
+   "code": "G: Gunma AWD 5MT (Subaru scheme)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Raleigh"
+  },
+  {
+   "id": "pap-10-1095993-1",
+   "vin": "WMWRE33462TD51361",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Knoxville"
+  },
+  {
+   "id": "pap-29-1089436-1",
+   "vin": "WMWRE33482TD53466",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - El Paso"
+  },
+  {
+   "id": "pap-37-1021676-1",
+   "vin": "WMWRE33462TD53076",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Phoenix"
+  },
+  {
+   "id": "pap-38-1028818-1",
+   "vin": "WMWRE33442TD57434",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Colorado Springs"
+  },
+  {
+   "id": "harrys-WBADD5327WBV53657",
+   "vin": "WBADD5327WBV53657",
+   "year": 1998,
+   "make": "BMW",
+   "model": "528i",
+   "rule": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "code": "DD53: 528i (pair partner of DD63)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Hazle Township"
+  },
+  {
+   "id": "pns-stk100294",
+   "vin": "WBADM5349YBY17546",
+   "year": 2000,
+   "make": "BMW",
+   "model": "528i",
+   "rule": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "code": "DM53: 528i (pair 5/6 as DT/DN)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix South"
+  },
+  {
+   "id": "nvpap-l128885",
+   "vin": "WMWRE33482TD50275",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Nevada Pic-A-Part - Las Vegas"
+  },
+  {
+   "id": "gopullit-tal004728",
+   "vin": "WMWRE33412TD56662",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Go Pull-It - Tallahassee"
+  },
+  {
+   "id": "ryans-stk227328",
+   "vin": "WMWRE33452TD50699",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Ryan's Pick-a-Part - Detroit"
+  },
+  {
+   "id": "ezpullnpay-decatur-stk003190",
+   "vin": "WBADD532XWBV54043",
+   "year": 1998,
+   "make": "BMW",
+   "model": "528i",
+   "rule": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "code": "DD53: 528i (pair partner of DD63)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Decatur"
+  },
+  {
+   "id": "foss-winstonsalem-stk029662",
+   "vin": "WMWRE33402TD54367",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Foss U-Pull-It - Winston-Salem"
+  },
+  {
+   "id": "foss-jacksonville-stk013327",
+   "vin": "WMWRE33482TD50468",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Foss U-Pull-It - Jacksonville"
+  },
+  {
+   "id": "foss-jacksonville-stk013270",
+   "vin": "WMWRE33412TD50554",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Foss U-Pull-It - Jacksonville"
+  },
+  {
+   "id": "aaauto-bradenton-073859",
+   "vin": "WBADM5332XBY15255",
+   "year": 1999,
+   "make": "BMW",
+   "model": "528i",
+   "rule": "bmw_e39_528i_540i_1997_2000_vpic_only",
+   "code": "DM53: 528i (pair 5/6 as DT/DN)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "A & A Auto Recycling"
+  },
+  {
+   "id": "milliron-mansfield-up038780",
+   "vin": "WMWRE33422TD57786",
+   "year": 2002,
+   "make": "MINI",
+   "model": "Cooper",
+   "rule": "mini_cooper_s_r53_re33_2002",
+   "code": "RE33: Cooper S",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Milliron Auto Parts - Mansfield"
+  }
+ ],
+ "newly_labelled_non_manual_cars": [
+  {
+   "id": "7983316",
+   "vin": "WBADT63403CK35623",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Antelope"
+  },
+  {
+   "id": "7986492",
+   "vin": "WBADN63491GM70053",
+   "year": 2001,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Fort Worth"
+  },
+  {
+   "id": "7971348",
+   "vin": "WBADT63473CK43332",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Merced"
+  },
+  {
+   "id": "7952407",
+   "vin": "WBADN633XXGM60020",
+   "year": 1999,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Merced"
+  },
+  {
+   "id": "7978525",
+   "vin": "WBADT63423CK35705",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Rancho Cordova"
+  },
+  {
+   "id": "8001900",
+   "vin": "WBADN63422GM74947",
+   "year": 2002,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Rancho Cordova"
+  },
+  {
+   "id": "7985540",
+   "vin": "WBADT43423G025005",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Richmond"
+  },
+  {
+   "id": "8001859",
+   "vin": "WBADS43461GD85395",
+   "year": 2001,
+   "make": "BMW",
+   "model": "5-Series Sport Wagon",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DS43: 525iAT (0359)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - San Jose North"
+  },
+  {
+   "id": "7982554",
+   "vin": "WBADT43402GZ96471",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Vancouver"
+  },
+  {
+   "id": "7952649",
+   "vin": "WBADT63472CH91350",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Johnston"
+  },
+  {
+   "id": "7943136",
+   "vin": "WBADT43433G026180",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Salinas"
+  },
+  {
+   "id": "7964167",
+   "vin": "WBADT63453CK35925",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sacramento Mather"
+  },
+  {
+   "id": "7954479",
+   "vin": "WBADN63462GN86103",
+   "year": 2002,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sacramento Mather"
+  },
+  {
+   "id": "7989775",
+   "vin": "WBADT43412GZ95037",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Columbus"
+  },
+  {
+   "id": "7985732",
+   "vin": "WBADT634X3CK33099",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Newark"
+  },
+  {
+   "id": "7941815",
+   "vin": "WBAGC831XLDC76806",
+   "year": 1990,
+   "make": "BMW",
+   "model": "750iL",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "GC83: 750iL A",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Newark"
+  },
+  {
+   "id": "7994473",
+   "vin": "WBADT43483G028328",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Redding"
+  },
+  {
+   "id": "7979170",
+   "vin": "WBADT63442CK25062",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Windsor"
+  },
+  {
+   "id": "7951479",
+   "vin": "WBADN63472GN86613",
+   "year": 2002,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Windsor"
+  },
+  {
+   "id": "7946045",
+   "vin": "WBADN63483GS56643",
+   "year": 2003,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Fairfield"
+  },
+  {
+   "id": "7977830",
+   "vin": "WBADN6342YGM65948",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Fairfield"
+  },
+  {
+   "id": "7965505",
+   "vin": "WBADT43483GY98662",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Stockton"
+  },
+  {
+   "id": "7993089",
+   "vin": "WBADS43412GE10351",
+   "year": 2002,
+   "make": "BMW",
+   "model": "5-Series Sport Wagon",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DS43: 525iAT (0359)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Stockton"
+  },
+  {
+   "id": "7961724",
+   "vin": "WBADT63432CH96738",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Stockton"
+  },
+  {
+   "id": "7956818",
+   "vin": "WBADN6340YGM66807",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Sparks"
+  },
+  {
+   "id": "7945513",
+   "vin": "WBADT63462CH97480",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Modesto"
+  },
+  {
+   "id": "7849966",
+   "vin": "WBADT43423G028180",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - St. Louis"
+  },
+  {
+   "id": "7936751",
+   "vin": "WBADT43423G026588",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Tumwater"
+  },
+  {
+   "id": "7992556",
+   "vin": "WVWLK73C87E021147",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat Wagon",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Newark"
+  },
+  {
+   "id": "7945506",
+   "vin": "WVWTK73C37E070093",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat Wagon",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "T3C: Passat Wagon auto. w/Luxury (2007) / Lux auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Fort Worth"
+  },
+  {
+   "id": "7986386",
+   "vin": "WVWFV71K06W140236",
+   "year": 2006,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "F1K: GTI 2 dr auto. trans",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Tumwater"
+  },
+  {
+   "id": "7998669",
+   "vin": "WVWFV71K96W062975",
+   "year": 2006,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "F1K: GTI 2 dr auto. trans",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Salinas"
+  },
+  {
+   "id": "7982716",
+   "vin": "YV1LS5673W1469699",
+   "year": 1998,
+   "make": "Volvo",
+   "model": "S70",
+   "rule": "volvo_engine_emission_combination_1994_1999",
+   "code": "L567: S70/V70 B5254T emissions 7: 'Auto Only'",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Fairfield"
+  },
+  {
+   "id": "utpap-orem-K039928",
+   "vin": "WVWFV71K06W105678",
+   "year": 2006,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "F1K: GTI 2 dr auto. trans",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Utah Pic-A-Part - Orem"
+  },
+  {
+   "id": "1265-168458",
+   "vin": "WBADT63471CF05494",
+   "year": 2001,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Anaheim"
+  },
+  {
+   "id": "1260-85998",
+   "vin": "YV1LW5677W2442472",
+   "year": 1998,
+   "make": "Volvo",
+   "model": "V70",
+   "rule": "volvo_engine_emission_combination_1994_1999",
+   "code": "L567: S70/V70 B5254T emissions 7: 'Auto Only'",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Bakersfield"
+  },
+  {
+   "id": "1260-86005",
+   "vin": "WVWFV71K56W080003",
+   "year": 2006,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "F1K: GTI 2 dr auto. trans",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Bakersfield"
+  },
+  {
+   "id": "1264-136086",
+   "vin": "WBADT63451CF01296",
+   "year": 2001,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Chula Vista"
+  },
+  {
+   "id": "1285-48474",
+   "vin": "WBADT43463G032412",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Fontana"
+  },
+  {
+   "id": "1285-48111",
+   "vin": "WBADT43483G030984",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Fontana"
+  },
+  {
+   "id": "1281-178039",
+   "vin": "WVWFV71K26W086017",
+   "year": 2006,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "F1K: GTI 2 dr auto. trans",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Monrovia"
+  },
+  {
+   "id": "1280-177969",
+   "vin": "WBADT63483CK39161",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Ontario"
+  },
+  {
+   "id": "1280-177399",
+   "vin": "WVWTK73CX7E000543",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "T3C: Passat Wagon auto. w/Luxury (2007) / Lux auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Ontario"
+  },
+  {
+   "id": "1290-114141",
+   "vin": "WBADT43473G026554",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Riverside"
+  },
+  {
+   "id": "1291-164596",
+   "vin": "YV1LS5675W1497309",
+   "year": 1998,
+   "make": "Volvo",
+   "model": "S70",
+   "rule": "volvo_engine_emission_combination_1994_1999",
+   "code": "L567: S70/V70 B5254T emissions 7: 'Auto Only'",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - San Bernardino"
+  },
+  {
+   "id": "1291-163918",
+   "vin": "WBADT63463CK42639",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - San Bernardino"
+  },
+  {
+   "id": "1282-199771",
+   "vin": "WBADN63433GN89591",
+   "year": 2003,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Santa Fe Springs"
+  },
+  {
+   "id": "1282-199395",
+   "vin": "WBADT43452GZ99477",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Santa Fe Springs"
+  },
+  {
+   "id": "1263-271404",
+   "vin": "WBADT63492CH91933",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Sun Valley"
+  },
+  {
+   "id": "1263-270355",
+   "vin": "WVWLK73C37E000643",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Sun Valley"
+  },
+  {
+   "id": "1230-83427",
+   "vin": "WBADT63453CK45564",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Aurora"
+  },
+  {
+   "id": "1190-54237",
+   "vin": "WBADT634X2CH96252",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Clearwater"
+  },
+  {
+   "id": "1225-65556",
+   "vin": "WBADT43443G034210",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Daytona"
+  },
+  {
+   "id": "1189-54135",
+   "vin": "WVWLK73C37E005714",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Largo"
+  },
+  {
+   "id": "1196-104017",
+   "vin": "WBADT63421CF14345",
+   "year": 2001,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - West Palm Beach"
+  },
+  {
+   "id": "1163-48480",
+   "vin": "WBADT43433G034134",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Savannah"
+  },
+  {
+   "id": "1581-94209",
+   "vin": "WBADT63433CK40685",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Chicago North"
+  },
+  {
+   "id": "1581-92659",
+   "vin": "WBADT43433G027409",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Chicago North"
+  },
+  {
+   "id": "1585-80011",
+   "vin": "WVWLK93C87E019488",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Chicago South"
+  },
+  {
+   "id": "1227-41825",
+   "vin": "WVWLK73CX7E001661",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - East NC"
+  },
+  {
+   "id": "1227-40571",
+   "vin": "WBADT43443G026382",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - East NC"
+  },
+  {
+   "id": "1257-46345",
+   "vin": "WBADN63422GM74995",
+   "year": 2002,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Dayton"
+  },
+  {
+   "id": "1245-78149",
+   "vin": "WBADN63453GN88197",
+   "year": 2003,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Oklahoma City"
+  },
+  {
+   "id": "1212-75721",
+   "vin": "WBADT43452GY95037",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Greenville"
+  },
+  {
+   "id": "1213-67650",
+   "vin": "WVWLK73C87E002226",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Greer"
+  },
+  {
+   "id": "1217-66394",
+   "vin": "WBADT43443G031579",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Chattanooga"
+  },
+  {
+   "id": "1215-60120",
+   "vin": "WBADT43452GY96298",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Memphis"
+  },
+  {
+   "id": "1234-56149",
+   "vin": "WBADT63423CK45215",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Austin"
+  },
+  {
+   "id": "1239-98433",
+   "vin": "WBADT63451CF13321",
+   "year": 2001,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Houston SW"
+  },
+  {
+   "id": "pap-3-1194546-14",
+   "vin": "WBADT63463CK32824",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Atlanta South"
+  },
+  {
+   "id": "pap-4-1160158-1",
+   "vin": "WBADT43452GZ95719",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Atlanta North"
+  },
+  {
+   "id": "pap-5-2481432-1",
+   "vin": "WBADT63402CH98964",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Birmingham"
+  },
+  {
+   "id": "pap-6-1927459-11",
+   "vin": "WBADN63492GN86564",
+   "year": 2002,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Nashville"
+  },
+  {
+   "id": "pap-7-1263019-1",
+   "vin": "WBADT43453G023183",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Charlotte"
+  },
+  {
+   "id": "pap-8-1296181-1",
+   "vin": "WBADN6344YGM64395",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Louisville"
+  },
+  {
+   "id": "pap-21-1081322-1",
+   "vin": "WBADT43472GY97582",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Atlanta East"
+  },
+  {
+   "id": "pap-36-1029560-1",
+   "vin": "WBADT43492GZ96338",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Albuquerque"
+  },
+  {
+   "id": "pap-37-1022012-1",
+   "vin": "WBAAK840XE8685640",
+   "year": 1984,
+   "make": "BMW",
+   "model": "318i",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "AK84: 318i A (2-door)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Phoenix"
+  },
+  {
+   "id": "pap-3-1196503-1",
+   "vin": "YV1LS5673W2474122",
+   "year": 1998,
+   "make": "Volvo",
+   "model": "S70",
+   "rule": "volvo_engine_emission_combination_1994_1999",
+   "code": "L567: S70/V70 B5254T emissions 7: 'Auto Only'",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Atlanta South"
+  },
+  {
+   "id": "pap-10-1096009-1",
+   "vin": "WVWLK73C17E009616",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Knoxville"
+  },
+  {
+   "id": "pap-21-1081141-3",
+   "vin": "WVWTK73C77E007255",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "T3C: Passat Wagon auto. w/Luxury (2007) / Lux auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Atlanta East"
+  },
+  {
+   "id": "pap-25-1054149-1",
+   "vin": "WVWLK73C77E005439",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Akron"
+  },
+  {
+   "id": "pap-37-1021204-1",
+   "vin": "WVWLK93C77E046939",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Phoenix"
+  },
+  {
+   "id": "pap-37-1021390-6",
+   "vin": "WVWLK93C07E077160",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Phoenix"
+  },
+  {
+   "id": "pap-39-1028309-2",
+   "vin": "WVWTK73C67E057631",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "T3C: Passat Wagon auto. w/Luxury (2007) / Lux auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-A-Part - Aurora"
+  },
+  {
+   "id": "wap-LWAP007150",
+   "vin": "WBADT63451CF08247",
+   "year": 2001,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Wrench-A-Part - Lubbock"
+  },
+  {
+   "id": "wap-AWAP084759",
+   "vin": "WBADT43493G027043",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Wrench-A-Part - Austin"
+  },
+  {
+   "id": "wap-BWAP080299",
+   "vin": "WBADT63472CH97052",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Wrench-A-Part - Belton"
+  },
+  {
+   "id": "harrys-WBADN6345YGM65667",
+   "vin": "WBADN6345YGM65667",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Allentown"
+  },
+  {
+   "id": "harrys-WVWTK73C47E001929",
+   "vin": "WVWTK73C47E001929",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "T3C: Passat Wagon auto. w/Luxury (2007) / Lux auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Hazle Township"
+  },
+  {
+   "id": "harrys-WVWLK73C17E070769",
+   "vin": "WVWLK73C17E070769",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Harry's U-Pull-It - Hazle Township"
+  },
+  {
+   "id": "pns-stk099356",
+   "vin": "WBADT63402CH99967",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Phoenix South"
+  },
+  {
+   "id": "pns-stk045115",
+   "vin": "WBADT43462GY96357",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Gilbert"
+  },
+  {
+   "id": "pns-stk021434",
+   "vin": "WBADN6349YGM65753",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pull-N-Save - Tucson"
+  },
+  {
+   "id": "ipull-fre118305",
+   "vin": "WBADT43463G025377",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "iPull-uPull - Fresno"
+  },
+  {
+   "id": "ipull-fre118002",
+   "vin": "WBADN6344YGM64722",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "iPull-uPull - Fresno"
+  },
+  {
+   "id": "ipull-fre117976",
+   "vin": "WVWLK73C27E004179",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "iPull-uPull - Fresno"
+  },
+  {
+   "id": "ipull-fre117565",
+   "vin": "WBADT63442CH97493",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "iPull-uPull - Fresno"
+  },
+  {
+   "id": "ipull-sac052000",
+   "vin": "WBADN6349YGM64540",
+   "year": 2000,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "iPull-uPull - Sacramento"
+  },
+  {
+   "id": "nvpap-l133519",
+   "vin": "WBADT43442GY41728",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Nevada Pic-A-Part - Las Vegas"
+  },
+  {
+   "id": "nvpap-h064199",
+   "vin": "WBADT63451CF13626",
+   "year": 2001,
+   "make": "BMW",
+   "model": "X5",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Nevada Pic-A-Part - Henderson"
+  },
+  {
+   "id": "vinplus-maiden-000000111499",
+   "vin": "WBADT43403G033149",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "RTP Pick-A-Part - Maiden"
+  },
+  {
+   "id": "vinplus-joliet-stk077442",
+   "vin": "WBADT43482GZ98422",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Joliet U-Pull-It"
+  },
+  {
+   "id": "vinplus-pnpsa-pnp025532",
+   "vin": "WBADN63483GS56268",
+   "year": 2003,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "San Antonio Pick-N-Pull (Independent)"
+  },
+  {
+   "id": "vinplus-pnpsa-pnp015862",
+   "vin": "WBADT43403G029070",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "San Antonio Pick-N-Pull (Independent)"
+  },
+  {
+   "id": "vinplus-pickurpart-000000001130",
+   "vin": "WVWLK73C67E058827",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Ur Part Auto Salvage"
+  },
+  {
+   "id": "vinplus-pickurpart-pup859",
+   "vin": "WVWLK73C87E016062",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Ur Part Auto Salvage"
+  },
+  {
+   "id": "vinplus-usauto-stk187722",
+   "vin": "WBADT43462GY43299",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "US Auto Supply - Sterling Heights"
+  },
+  {
+   "id": "gopullit-gpi0334242",
+   "vin": "WVWLK73C87E006471",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Go Pull-It - Jacksonville"
+  },
+  {
+   "id": "chesterfield-000000084619",
+   "vin": "WBADT63402CK25916",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Chesterfield Auto Parts - Southside"
+  },
+  {
+   "id": "papva-pap174337",
+   "vin": "WBADT43422GY43901",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-A-Part VA - Fredericksburg"
+  },
+  {
+   "id": "papva-stk124958",
+   "vin": "WVWFV71K26W089466",
+   "year": 2006,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "F1K: GTI 2 dr auto. trans",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-A-Part VA - Stafford"
+  },
+  {
+   "id": "papva-pap124757",
+   "vin": "WVWFV71K26W102250",
+   "year": 2006,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "F1K: GTI 2 dr auto. trans",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-A-Part VA - Fredericksburg"
+  },
+  {
+   "id": "ryans-stk227032",
+   "vin": "WBADN63483GN89585",
+   "year": 2003,
+   "make": "BMW",
+   "model": "540i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DN63: 540iA (0358)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Ryan's Pick-a-Part - Detroit"
+  },
+  {
+   "id": "ryans-stk227521",
+   "vin": "WBADT43453G025578",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Ryan's Pick-a-Part - Detroit"
+  },
+  {
+   "id": "ezpullnpay-atlanta-stk087290",
+   "vin": "WVWLK73C37E007382",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Atlanta"
+  },
+  {
+   "id": "ezpullnpay-stockbridge-stk033133",
+   "vin": "WBADT43452GZ98488",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Stockbridge"
+  },
+  {
+   "id": "ezpullnpay-stockbridge-stk033617",
+   "vin": "WBADT43422GY44689",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Stockbridge"
+  },
+  {
+   "id": "ezpullnpay-warnerrobins-stk012466",
+   "vin": "WBADT63473CK33304",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Warner Robins"
+  },
+  {
+   "id": "ezpullnpay-columbus-stk006364",
+   "vin": "WBADT43492GY97793",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Columbus"
+  },
+  {
+   "id": "ezpullnpay-columbus-stk006250",
+   "vin": "WBADT43413GY99913",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Columbus"
+  },
+  {
+   "id": "ezpullnpay-columbus-stk006661",
+   "vin": "WBADT43462GY96195",
+   "year": 2002,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Columbus"
+  },
+  {
+   "id": "ezpullnpay-columbus-stk005692",
+   "vin": "WBADT63432CK26980",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Columbus"
+  },
+  {
+   "id": "ezpullnpay-montgomery-stk019240",
+   "vin": "WBADT43493G024806",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "EZ Pull N Pay - Montgomery"
+  },
+  {
+   "id": "foss-wilson-stk009736",
+   "vin": "WBAAG4307C8067491",
+   "year": 1982,
+   "make": "BMW",
+   "model": "320i",
+   "rule": "bmw_ag_code_1981_1990",
+   "code": "AG43: 320i A",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Foss U-Pull-It - Wilson"
+  },
+  {
+   "id": "autopartsupull-lincolnton-lug0479",
+   "vin": "WBADT63492CH85761",
+   "year": 2002,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Auto Parts U Pull - Lincolnton"
+  },
+  {
+   "id": "landl-kingsmountain-uh0328",
+   "vin": "WBADT63433CK36653",
+   "year": 2003,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "L and L U-Pull Auto Parts"
+  },
+  {
+   "id": "wilberts-stk93391",
+   "vin": "WVWLK73C67E044880",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Wilbert's U-Pull-It - Rochester"
+  },
+  {
+   "id": "upullitwa-yakima-1n1646",
+   "vin": "WVWDB71KX9W131497",
+   "year": 2009,
+   "make": "Volkswagen",
+   "model": "Rabbit",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "D1K: Rabbit 4 dr auto. trans",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Yakima"
+  },
+  {
+   "id": "upullitwa-kennewick-3b0792",
+   "vin": "WVWML73C49E552706",
+   "year": 2009,
+   "make": "Volkswagen",
+   "model": "CC",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "M3C: CC Sport auto. trans",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Kennewick"
+  },
+  {
+   "id": "upullitwa-yakima-1n1494",
+   "vin": "WVWHV71KX8W246317",
+   "year": 2008,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "H1K: GTI 4 dr auto. trans",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Yakima"
+  },
+  {
+   "id": "upullitwa-yakima-1n1448",
+   "vin": "WVWDB7AJ3AW337143",
+   "year": 2010,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "DAJ: Golf 4 dr auto. trans",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Yakima"
+  },
+  {
+   "id": "upullitwa-yakima-1n1387",
+   "vin": "YV1LZ56D4X2566939",
+   "year": 1999,
+   "make": "Volvo",
+   "model": "70 Series",
+   "rule": "volvo_engine_emission_combination_1994_1999",
+   "code": "L56D: S70/V70 B5254T emissions D: 'Auto Only'",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Yakima"
+  },
+  {
+   "id": "upullitwa-yakima-1n0679",
+   "vin": "WBADT63411CF02669",
+   "year": 2001,
+   "make": "BMW",
+   "model": "530i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT63: 530iA (0355)",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Yakima"
+  },
+  {
+   "id": "upullitwa-yakima-1m0239",
+   "vin": "YV1LS5519S2201497",
+   "year": 1995,
+   "make": "Volvo",
+   "model": "850",
+   "rule": "volvo_engine_emission_combination_1994_1999",
+   "code": "L551: 850 B5254S, emissions 1: 'Auto Only'",
+   "why_no_trans": "not_in_cache_backup",
+   "yard": "U-Pull-It Auto Parts - Yakima"
+  },
+  {
+   "id": "weller-wbadt43443g025622",
+   "vin": "WBADT43443G025622",
+   "year": 2003,
+   "make": "BMW",
+   "model": "525i",
+   "rule": "bmw_e39_ag_code_1999_2003",
+   "code": "DT43: 525iA (0357)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Weller Self Serve - Wyoming"
+  }
+ ],
+ "canadian_yard_cars": [
+  {
+   "id": "7977679",
+   "vin": "WVWLK73C67E052736",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat Wagon",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "L3C: Passat Wagon 2.0T/3.6L auto. (2007) / Komfort auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Calgary (52 St)"
+  },
+  {
+   "id": "7815203",
+   "vin": "WVWTK93CX7E009738",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat Wagon",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "T3C: Passat Wagon auto. w/Luxury (2007) / Lux auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Kelowna"
+  },
+  {
+   "id": "7987104",
+   "vin": "WVWTK73C37E209980",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat Wagon",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "T3C: Passat Wagon auto. w/Luxury (2007) / Lux auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Edmonton"
+  },
+  {
+   "id": "ipullca-edm028056",
+   "vin": "WVWTK93C77E224784",
+   "year": 2007,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "rule": "vw_wvw_char4_series_transmission_2006_2010",
+   "code": "T3C: Passat Wagon auto. w/Luxury (2007) / Lux auto. (2008)",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "iPull-uPull - Edmonton"
+  }
+ ],
+ "published_label_conflicts": [],
+ "hub_findings": [
+  {
+   "id": "vpic_jetta_2006_rabbit_pattern",
+   "finding": "vPIC decodes MY2006 Jetta VINs (WMI 3VW, model 1K) with position 4 A or C as 'Manual/Standard' and D as 'Automatic', and leaves every other Jetta letter blank. That is the Rabbit's scheme (WVW 1K: A/C man. trans., B/D auto. trans). VW's own MY2006 breakdown (ORG10541, Revision 13) lists Jetta position 4 as trims only: A = 2.0T, C = Diesel Special Ed. w/sunroof, D = 2.5 / TDI w/Package 2, and the 2.0T and TDI were sold with both transmissions. The published Manual badges on these cars are therefore not supported by the manufacturer's VIN scheme.",
+   "published_manual_badges": 20,
+   "published_automatic_labels": 24,
+   "suggested_action": "hub decision: treat vPIC transmission for 2006 Jetta (3VW...1K, char 4 A/C/D, model year 6) as a model-level default like VPIC_TRANS_DEFAULT_CELLS (drop the badge) unless an independent source confirms each car",
+   "citation": {
+    "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/beedfa70-210b-4945-9347-7b8b29020530",
+    "doc": "NHTSA ORG10541, Volkswagen Group of America 2006-10-11, Volkswagen VIN Breakdown 2006 Model Year (Revision 13), text layer",
+    "says": "Position 4 Series: new GTI 2-dr E = man. trans., F = auto. trans; Rabbit A (2 dr) / C (4 dr) man. trans., B / D auto. trans; Passat A = 2.0T / 3.6L auto. trans, G = 2.0T man. trans., E = 2.0T / 3.6L auto. trans w/Luxury Pkg. Jetta, Golf, New Beetle, Touareg codes are trim/package only. Positions 7-8: 1K Jetta / new GTI / Rabbit, 3C Passat."
+   },
+   "cars": [
+    {
+     "id": "7941768",
+     "vin": "3VWDF71K26M778165",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick-n-Pull - Fort Worth"
+    },
+    {
+     "id": "7950146",
+     "vin": "3VWCT71K76M849820",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Pick-n-Pull - Fort Worth"
+    },
+    {
+     "id": "7945221",
+     "vin": "3VWDF71K06M669316",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick-n-Pull - Moss Landing"
+    },
+    {
+     "id": "7963602",
+     "vin": "3VWAJ31K06M813778",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "A",
+     "vpic_trim": "",
+     "published_trans": "Manual/Standard",
+     "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
+    },
+    {
+     "id": "7993156",
+     "vin": "3VWDT71K06M626331",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick-n-Pull - Kelowna"
+    },
+    {
+     "id": "7954280",
+     "vin": "3VWCT71K66M852336",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Pick-n-Pull - Redding"
+    },
+    {
+     "id": "7940237",
+     "vin": "3VWDT81K36M728213",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick-n-Pull - Redding"
+    },
+    {
+     "id": "7979116",
+     "vin": "3VWDF31K06M824522",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick-n-Pull - Edmonton"
+    },
+    {
+     "id": "1260-86671",
+     "vin": "3VWDG71K96M633752",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Bakersfield"
+    },
+    {
+     "id": "1260-86589",
+     "vin": "3VWDG71K56M670555",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Bakersfield"
+    },
+    {
+     "id": "1281-174158",
+     "vin": "3VWCT71K86M850863",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Pick Your Part - Monrovia"
+    },
+    {
+     "id": "1282-199116",
+     "vin": "3VWDT71K96M660901",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Santa Fe Springs"
+    },
+    {
+     "id": "1263-270796",
+     "vin": "3VWDT81K36M665193",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Sun Valley"
+    },
+    {
+     "id": "1263-270829",
+     "vin": "3VWDT71K86M052593",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Sun Valley"
+    },
+    {
+     "id": "1209-65924",
+     "vin": "3VWCT71K06M853465",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Pick Your Part - Edgewood"
+    },
+    {
+     "id": "1245-80094",
+     "vin": "3VWDT81K86M017770",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Oklahoma City"
+    },
+    {
+     "id": "1245-79486",
+     "vin": "3VWDF81K76M794769",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Oklahoma City"
+    },
+    {
+     "id": "1245-79591",
+     "vin": "3VWDF71K56M796904",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Oklahoma City"
+    },
+    {
+     "id": "1234-56692",
+     "vin": "3VWDT71K66M021620",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Austin"
+    },
+    {
+     "id": "1239-100677",
+     "vin": "3VWDT81K26M640365",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick Your Part - Houston SW"
+    },
+    {
+     "id": "pap-3-1194848-9",
+     "vin": "3VWCT71K76M852118",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Pull-A-Part - Atlanta South"
+    },
+    {
+     "id": "pap-15-1074708-4",
+     "vin": "3VWDT81K56M801601",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pull-A-Part - Jackson"
+    },
+    {
+     "id": "pap-16-1080269-2",
+     "vin": "3VWDF71K86M703499",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pull-A-Part - Baton Rouge"
+    },
+    {
+     "id": "pap-18-1089991-5",
+     "vin": "3VWDT71K06M014906",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pull-A-Part - Indianapolis"
+    },
+    {
+     "id": "fenix-203021339",
+     "vin": "3VWDT81K86M664511",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Fenix U-Pull - Binghamton"
+    },
+    {
+     "id": "harrys-3VWCT71K96M849267",
+     "vin": "3VWCT71K96M849267",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Harry's U-Pull-It - Allentown"
+    },
+    {
+     "id": "harrys-3VWDG71K56M680034",
+     "vin": "3VWDG71K56M680034",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Harry's U-Pull-It - Hazle Township"
+    },
+    {
+     "id": "pns-stk134880",
+     "vin": "3VWAJ71K76M816619",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "A",
+     "vpic_trim": "",
+     "published_trans": "Manual/Standard",
+     "yard": "Pull-N-Save - Salt Lake City"
+    },
+    {
+     "id": "pns-stk079822",
+     "vin": "3VWDG71K56M655067",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pull-N-Save - Phoenix North"
+    },
+    {
+     "id": "nvpap-l127494",
+     "vin": "3VWCT71K06M851280",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Nevada Pic-A-Part - Las Vegas"
+    },
+    {
+     "id": "nvpap-l131454",
+     "vin": "3VWCT71K36M852567",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Nevada Pic-A-Part - Las Vegas"
+    },
+    {
+     "id": "vinplus-hebron-000000110848",
+     "vin": "3VWCT71KX6M850587",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Bessler's U Pull & Save - Hebron"
+    },
+    {
+     "id": "vinplus-hebron-000000111013",
+     "vin": "3VWCT81K96M056203",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Bessler's U Pull & Save - Hebron"
+    },
+    {
+     "id": "vinplus-joliet-stk076609",
+     "vin": "3VWDF71K36M802358",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Joliet U-Pull-It"
+    },
+    {
+     "id": "vinplus-pnpsa-pnp025841",
+     "vin": "3VWCT81K26M852968",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "San Antonio Pick-N-Pull (Independent)"
+    },
+    {
+     "id": "papva-stk126110",
+     "vin": "3VWDT81K96M658586",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "Pick-A-Part VA - Stafford"
+    },
+    {
+     "id": "ezpullnpay-columbus-stk006575",
+     "vin": "3VWCT71K06M850162",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "EZ Pull N Pay - Columbus"
+    },
+    {
+     "id": "ezpullnpay-decatur-stk002962",
+     "vin": "3VWCT71K86M851351",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "EZ Pull N Pay - Decatur"
+    },
+    {
+     "id": "landl-kingsmountain-uh1066",
+     "vin": "3VWCT71KX6MB49424",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "L and L U-Pull Auto Parts"
+    },
+    {
+     "id": "upullpocatello-pocatello-stk012369",
+     "vin": "3VWCT71K86M849745",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "U Pull Auto Parts - Pocatello"
+    },
+    {
+     "id": "byot-stk044042",
+     "vin": "3VWDT71K86M627758",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "D",
+     "vpic_trim": "2.5 TDI",
+     "published_trans": "Automatic",
+     "yard": "BYOT Auto Parts - Waco"
+    },
+    {
+     "id": "byot-bcs025525",
+     "vin": "3VWCT71K46M847779",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "BYOT Auto Parts - Bryan/College Station"
+    },
+    {
+     "id": "wilberts-bat020314",
+     "vin": "3VWCT71K96M850421",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "C",
+     "vpic_trim": "Diesel Special Ed.",
+     "published_trans": "Manual/Standard",
+     "yard": "Wilbert's U-Pull-It - Bath"
+    },
+    {
+     "id": "ipullca-edm028232",
+     "vin": "3VWAJ31K06M654700",
+     "year": 2006,
+     "model": "Jetta",
+     "char4": "A",
+     "vpic_trim": "",
+     "published_trans": "Manual/Standard",
+     "yard": "iPull-uPull - Edmonton"
+    }
+   ]
+  },
+  {
+   "id": "mercedes_vpic_manual_defaults",
+   "finding": "No Mercedes-Benz filing read encodes the transmission, so any vPIC 'manual' on a Mercedes VIN (e.g. the 1999-2000 SLK230 uniform cell, already dropped by VPIC_TRANS_DEFAULT_CELLS) is a model-level default, not VIN evidence. No published Mercedes manual badge remains on the lots."
+  }
+ ]
+}

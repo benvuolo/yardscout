@@ -4,7 +4,7 @@
   "Honda",
   "Acura"
  ],
- "generated_utc": "2026-11-05T01:41Z",
+ "generated_utc": "2026-11-05T14:15Z",
  "generator": "scraper/manual_detect/vin_rules_0.py",
  "inputs": {
   "inventory_live": "docs/data/inventory_live.json",
@@ -19,29 +19,29 @@
   "vpic_already_decodes_it": "vPIC already turns this code into TransmissionStyle for almost every Honda/Acura VIN (Honda 21,026 and Acura 3,534 lot cars have a vPIC transmission), so the rules newly reach only the few cars where vPIC is blank or the VIN is not in the decode cache. Their larger value is correcting vPIC where it contradicts Honda's own table (vpic_conflicts)."
  },
  "summary": {
-  "lot_cars_feed_make_honda": 24360,
-  "lot_cars_feed_make_acura": 4098,
+  "lot_cars_feed_make_honda": 24446,
+  "lot_cars_feed_make_acura": 4113,
   "scan": {
-   "honda_acura_wmi": 24972,
-   "covered": 24870,
-   "code_not_in_vpic": 36,
-   "bad_check_digit": 93,
+   "honda_acura_wmi": 25105,
+   "covered": 25001,
+   "code_not_in_vpic": 28,
+   "bad_check_digit": 95,
    "no_rule": 9,
-   "no_rule_Honda_digit": 1,
-   "no_rule_Honda_pre1984": 8
+   "no_rule_Honda_pre1984": 8,
+   "no_rule_Honda_digit": 1
   },
   "rules": 14,
-  "newly_confirmed_manual_keep_and_low_sample_rules": 61,
-  "newly_confirmed_manual_keep_rules_only": 53,
-  "newly_confirmed_manual_low_sample_rules_only": 8,
-  "newly_confirmed_manual_all_rules": 61,
+  "newly_confirmed_manual_keep_and_low_sample_rules": 97,
+  "newly_confirmed_manual_keep_rules_only": 91,
+  "newly_confirmed_manual_low_sample_rules_only": 6,
+  "newly_confirmed_manual_all_rules": 100,
   "newly_confirmed_manual_by_rule": {
-   "honda_vin7_digit_1987_2009_manual": 46,
-   "honda_vin7_letter_2010_on_manual": 3,
+   "honda_vin7_digit_1987_2009_manual": 85,
+   "honda_vin7_letter_2010_on_manual": 2,
    "acura_vin7_digit_1986_2009_manual": 4,
    "acura_vin7_letter_2010_on_manual": 0,
-   "honda_vin6_1984_1986_manual": 1,
-   "honda_acura_vin7_code_not_in_vpic_manual": 7,
+   "honda_vin6_1984_1986_manual": 6,
+   "honda_acura_vin7_code_not_in_vpic_manual": 3,
    "honda_accord_1997_vin7_manual": 0
   },
   "ground_truth_agreement_keep_rules": {
@@ -51,15 +51,14 @@
      "honda_vin7_letter_2010_on_manual",
      "acura_vin7_digit_1986_2009_manual",
      "acura_vin7_letter_2010_on_manual",
-     "honda_vin6_1984_1986_manual",
-     "honda_acura_vin7_code_not_in_vpic_manual"
+     "honda_vin6_1984_1986_manual"
     ],
-    "checkable": 1464,
-    "agree": 1464,
+    "checkable": 1443,
+    "agree": 1443,
     "disagree": 0,
     "agreement": 1.0,
-    "uniform_cell_lines_excluded": 40,
-    "uniform_cell_lines_that_would_agree": 40
+    "uniform_cell_lines_excluded": 39,
+    "uniform_cell_lines_that_would_agree": 39
    },
    "automatic": {
     "rules": [
@@ -67,20 +66,19 @@
      "honda_vin7_letter_2010_on_automatic",
      "acura_vin7_digit_1986_2009_automatic",
      "acura_vin7_letter_2010_on_automatic",
-     "honda_vin6_1984_1986_automatic",
-     "honda_acura_vin7_code_not_in_vpic_automatic"
+     "honda_vin6_1984_1986_automatic"
     ],
-    "checkable": 14725,
-    "agree": 14722,
+    "checkable": 14575,
+    "agree": 14572,
     "disagree": 3,
-    "agreement": 0.9998,
-    "uniform_cell_lines_excluded": 8102,
-    "uniform_cell_lines_that_would_agree": 7971
+    "agreement": 0.99979,
+    "uniform_cell_lines_excluded": 8022,
+    "uniform_cell_lines_that_would_agree": 7892
    }
   },
   "published_manual_labels_contradicted_by_honda_table": {
-   "2007_2008_fit_gd38": 133,
-   "1997_accord_honda_automatic": 114,
+   "2007_2008_fit_gd38": 0,
+   "1997_accord_honda_automatic": 110,
    "1989_integra_da344": 1
   },
   "published_non_manual_labels_contradicted_by_honda_table": {
@@ -130,7 +128,8 @@
   "Honda Passport (1994-2002, WMI 4S6) and Acura SLX (1996-99, WMI JAE) are Isuzu-built and use Isuzu's VIN layout; Honda's character-7 code does not apply and no rule here covers them.",
   "Honda/Acura VINs whose character 7 is outside the table for the era (e.g. a letter on a 2001-2009 VIN or a digit on a 2010+ VIN) are not ruled; on the lots they are listing-year errors or mis-typed VINs.",
   "The code says manual vs automatic, not the gear count or the gearbox model; speeds stay with vPIC/EPA. Automatic codes cover CVT and DCT as well (e.g. 2015+ TLX 'F' = 8-speed DCT or 9-speed automatic).",
-  "Cars without a VIN (Honda 2,699, Acura 426 on the lots) cannot be reached by these rules."
+  "Cars without a VIN (Honda 2,699, Acura 426 on the lots) cannot be reached by these rules.",
+  "Held, not ruled (verification 2026-11-05): Canada-only Acura EL (MB4 1997-2000, ES3 2001-05) and CSX (FD5/FD6 2006-11) codes. Their line codes are in no Honda filing and vPIC rejects the VINs, so the character-7 reading is pattern-only (honda_acura_vin7_code_not_in_vpic_*, status hold_code_not_filed)."
  ],
  "rules": [
   {
@@ -169,7 +168,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -217,40 +216,41 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 1362,
-    "checkable_ground_truth": 1281,
-    "agree": 1281,
+    "in_scope_lot_cars": 1368,
+    "checkable_ground_truth": 1260,
+    "agree": 1260,
     "disagree": 0,
     "agreement": 1.0,
-    "checkable_positives_manual": 1281,
-    "uniform_cell_lines_excluded": 35,
-    "uniform_cell_lines_that_would_agree": 35,
+    "checkable_positives_manual": 1260,
+    "uniform_cell_lines_excluded": 34,
+    "uniform_cell_lines_that_would_agree": 34,
     "ground_truth_speeds_only_excluded": 0,
     "disagree_examples": [],
     "epa_crosscheck": {
-     "consistent": 1358,
+     "consistent": 1364,
      "no_epa_match": 4
     },
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 0,
     "published_label_contradicts_examples": [],
-    "cars_without_trans_info": 46,
+    "cars_without_trans_info": 85,
     "cars_without_trans_info_by_reason": {
-     "vpic_trans_blank": 20,
+     "other": 36,
+     "vpic_trans_blank": 23,
      "not_in_cache_backup": 26
     },
     "codes_seen": {
-     "char7=5: 4-door sedan, manual": 681,
-     "char7=1: 2-door, manual": 518,
-     "char7=7: 5-door / wagon / SUV / van, manual": 105,
+     "char7=5: 4-door sedan, manual": 683,
+     "char7=1: 2-door, manual": 523,
+     "char7=7: 5-door / wagon / SUV / van, manual": 104,
      "char7=3: 2-door hatchback / 3-door, manual": 58
     },
     "top_models": {
      "Civic": 818,
-     "Accord": 388,
+     "Accord": 394,
      "Fit": 53,
-     "CR-V": 31,
-     "Prelude": 27,
+     "CR-V": 30,
+     "Prelude": 28,
      "Element": 15,
      "Civic Del Sol": 11,
      "Civic Hybrid": 8,
@@ -265,8 +265,75 @@
     ],
     "feed_make_differs_from_wmi_brand": 0
    },
-   "newly_confirmed_manual": 46,
-   "newly_labelled_non_manual": 0
+   "newly_confirmed_manual": 85,
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
+      "sha256": "482e38323222325d25684a773ad4d14f60bb2298c7d54f883bd753ba19d75ca7",
+      "result": "Confirmed (OCR p.2-3): MY1987 Accord/Prelude construction table, character 7 'Body type and Transmission representation' 1-6 exactly as cited; JHMCA552 5M, JHMCA562 4A, JHMBA314 Si 5M, JHMBA324 Si 4A."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/ee50d2f2-0644-4c5b-b967-8df8837e14d6",
+      "sha256": "7adeb5e0a7adddd49c40c94a05c4681f43b5871da58c3fd5f60df89b244d0254",
+      "result": "Confirmed (OCR p.2-3): MY1987 Civic table, character 7 3/4 = 2-door hatchback or coupe manual/automatic, 5/6 = 4-door sedan, 7/8 = 4-door wagon; JHMEC231 1300 hatchback 4M, JHMEC572 Wagon 5M, JHMEC582 4A, JHMEY172 Wagovan 5M."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b8c1ed83-b581-4aaf-b66e-989269918f50",
+      "sha256": "7adf230ee2416711f46e1e94cb5f7d634cba3bc59988d55335413c45f19f1d09",
+      "result": "Confirmed (OCR p.2-3): revised MY1987 Accord/Prelude table adds 7 = 4-door wagon Manual and JHMEC672 Civic Wagon Real Time 4WD 5M+SL."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+      "sha256": "44e49bfa728ddc0ac464c666dc1877c14e8e90cd35320cd9b75d8a7ee3cf33db",
+      "result": "Confirmed (OCR p.2-12): MY1997 Civic (EJ65x/EJ85x sedan 5MT, EJ66x/EJ86x 4AT, EJ61x/EJ81x coupe 5MT, EJ62x/EJ82x 4AT, EJ71x HX 5MT, EJ72x HX CVT, EJ63x/EJ64x hatchback 5MT/4AT), MY1997 Accord (CD71x coupe 5MT, CD72x 4AT, CD55x sedan 5MT, CD56x 4AT, CE663/664/665/667 V6 sedan 4AT only, CE172 wagon 5MT, CE182/183/189 4AT), MY1997 3.0CL YA224/YA225 4AT. Page 7's header misprints 'Model year: 1996' but the page is the 1997 Accord table (VIN examples carry year code V). This filing no longer prints a generic character-7 table; each 2nd-section code is listed with its own transmission."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/260e4159-7c32-4e16-8fc1-b50a6b3aa5ce",
+      "sha256": "3975958af68e6e22abd89c1d34aab71fc8668cd066b9976aefbbc03978ea93da",
+      "result": "Confirmed (page image p.3, rotated): 2007 HONDA FIT Model Codes GD374 5MT, GD384 5AT, GD376 5MT, GD386 5AT, all 5DR HATCHBACK, L15A1. No separate MY2008 Fit filing was found among the 2006-2007 American Honda submissions in MID (18 cover letters read); MY2008 Fit claims rest on this MY2007 table for the same carry-over codes."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 2404,
+     "of_which_lot": 1368,
+     "of_which_departed": 1036,
+     "vpic_checkable": 1683,
+     "vpic_agree": 1683,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 46,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 2388,
+      "no_epa_match": 16,
+      "consistent_in_single_kind_cell": 49
+     },
+     "single_gearbox_model_facts": {
+      "checked": 62,
+      "agree": 62
+     },
+     "single_gearbox_fact_conflicts": []
+    },
+    "filings_scan": {
+     "filings_read": 43,
+     "manual_codes_agree": 194,
+     "automatic_codes_agree": 213,
+     "mismatches_unreviewed": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots.",
+     "fit_2007_2008": "GD37x = 5MT, GD38x = 5AT per the 2007 Fit filing; vPIC's 'Manual' on every 2007-08 Fit is a model-level default (the scraper now drops it). The 3:1 GD38:GD37 split in the cache is what a mostly-automatic car shows. MY2008 Fits rest on the MY2007 table (same carry-over codes; no MY2008 Fit filing found).",
+     "accord_1997": "1997 Accord (CD/CE) is carved out to honda_accord_1997_vin7_* (vPIC inverted)."
+    },
+    "outcome": "SURVIVES: no counterexample in the filings, the whole decode cache, EPA or the single-gearbox model facts."
+   }
   },
   {
    "id": "honda_vin7_digit_1987_2009_automatic",
@@ -304,7 +371,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -352,14 +419,14 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 16077,
-    "checkable_ground_truth": 11457,
-    "agree": 11455,
+    "in_scope_lot_cars": 16167,
+    "checkable_ground_truth": 11335,
+    "agree": 11333,
     "disagree": 2,
-    "agreement": 0.99983,
+    "agreement": 0.99982,
     "checkable_positives_manual": null,
-    "uniform_cell_lines_excluded": 4408,
-    "uniform_cell_lines_that_would_agree": 4277,
+    "uniform_cell_lines_excluded": 4365,
+    "uniform_cell_lines_that_would_agree": 4235,
     "ground_truth_speeds_only_excluded": 2,
     "disagree_examples": [
      {
@@ -380,93 +447,37 @@
      }
     ],
     "epa_crosscheck": {
-     "consistent": 16073,
+     "consistent": 16163,
      "no_epa_match": 4
     },
     "epa_conflict_examples": [],
-    "published_label_contradicts_rule": 133,
-    "published_label_contradicts_examples": [
-     {
-      "vin": "JHMGD38698S063240",
-      "year": 2008,
-      "model": "Fit",
-      "published": "5-spd Manual/Standard",
-      "src": "vin"
-     },
-     {
-      "vin": "JHMGD38628S033318",
-      "year": 2008,
-      "model": "Fit",
-      "published": "5-spd Manual/Standard",
-      "src": "vin"
-     },
-     {
-      "vin": "JHMGD386X7S022937",
-      "year": 2007,
-      "model": "Fit",
-      "published": "5-spd Manual/Standard",
-      "src": "vin"
-     },
-     {
-      "vin": "JHMGD38647S067498",
-      "year": 2007,
-      "model": "Fit",
-      "published": "5-spd Manual/Standard",
-      "src": "vin"
-     },
-     {
-      "vin": "JHMGD38408S054733",
-      "year": 2008,
-      "model": "Fit",
-      "published": "5-spd Manual/Standard",
-      "src": "vin"
-     },
-     {
-      "vin": "JHMGD38607S016144",
-      "year": 2007,
-      "model": "Fit",
-      "published": "5-spd Manual/Standard",
-      "src": "vin"
-     },
-     {
-      "vin": "JHMGD38627S026061",
-      "year": 2007,
-      "model": "Fit",
-      "published": "5-spd Manual/Standard",
-      "src": "vin"
-     },
-     {
-      "vin": "JHMGD38697S004039",
-      "year": 2007,
-      "model": "Fit",
-      "published": "5-spd Manual/Standard",
-      "src": "vin"
-     }
-    ],
-    "cars_without_trans_info": 210,
+    "published_label_contradicts_rule": 0,
+    "published_label_contradicts_examples": [],
+    "cars_without_trans_info": 343,
     "cars_without_trans_info_by_reason": {
+     "other": 135,
      "vpic_trans_blank": 45,
-     "not_in_cache_backup": 165
+     "not_in_cache_backup": 163
     },
     "codes_seen": {
-     "char7=6: 4-door sedan, automatic (incl. CVT)": 8396,
-     "char7=8: 5-door / wagon / SUV / van, automatic": 5710,
-     "char7=2: 2-door, automatic": 1947,
-     "char7=4: 2-door hatchback / 3-door, automatic": 24
+     "char7=6: 4-door sedan, automatic (incl. CVT)": 8442,
+     "char7=8: 5-door / wagon / SUV / van, automatic": 5743,
+     "char7=2: 2-door, automatic": 1957,
+     "char7=4: 2-door hatchback / 3-door, automatic": 25
     },
     "top_models": {
-     "Accord": 6115,
-     "Civic": 3938,
-     "Odyssey": 2545,
-     "Pilot": 1382,
-     "CR-V": 1288,
-     "Element": 277,
-     "Fit": 191,
-     "Ridgeline": 173,
-     "Civic Hybrid": 99,
-     "Prelude": 27,
-     "Accord Hybrid": 20,
-     "Accord Wagon": 8
+     "Accord": 6142,
+     "Civic": 3966,
+     "Odyssey": 2565,
+     "Pilot": 1381,
+     "CR-V": 1301,
+     "Element": 276,
+     "Fit": 194,
+     "Ridgeline": 172,
+     "Civic Hybrid": 96,
+     "Prelude": 29,
+     "Accord Hybrid": 21,
+     "Civic Del Sol": 9
     },
     "years_seen": [
      1987,
@@ -475,7 +486,77 @@
     "feed_make_differs_from_wmi_brand": 0
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 210
+   "newly_labelled_non_manual": 343,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
+      "sha256": "482e38323222325d25684a773ad4d14f60bb2298c7d54f883bd753ba19d75ca7",
+      "result": "Confirmed (OCR p.2-3): MY1987 Accord/Prelude construction table, character 7 'Body type and Transmission representation' 1-6 exactly as cited; JHMCA552 5M, JHMCA562 4A, JHMBA314 Si 5M, JHMBA324 Si 4A."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/ee50d2f2-0644-4c5b-b967-8df8837e14d6",
+      "sha256": "7adeb5e0a7adddd49c40c94a05c4681f43b5871da58c3fd5f60df89b244d0254",
+      "result": "Confirmed (OCR p.2-3): MY1987 Civic table, character 7 3/4 = 2-door hatchback or coupe manual/automatic, 5/6 = 4-door sedan, 7/8 = 4-door wagon; JHMEC231 1300 hatchback 4M, JHMEC572 Wagon 5M, JHMEC582 4A, JHMEY172 Wagovan 5M."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/b8c1ed83-b581-4aaf-b66e-989269918f50",
+      "sha256": "7adf230ee2416711f46e1e94cb5f7d634cba3bc59988d55335413c45f19f1d09",
+      "result": "Confirmed (OCR p.2-3): revised MY1987 Accord/Prelude table adds 7 = 4-door wagon Manual and JHMEC672 Civic Wagon Real Time 4WD 5M+SL."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+      "sha256": "44e49bfa728ddc0ac464c666dc1877c14e8e90cd35320cd9b75d8a7ee3cf33db",
+      "result": "Confirmed (OCR p.2-12): MY1997 Civic (EJ65x/EJ85x sedan 5MT, EJ66x/EJ86x 4AT, EJ61x/EJ81x coupe 5MT, EJ62x/EJ82x 4AT, EJ71x HX 5MT, EJ72x HX CVT, EJ63x/EJ64x hatchback 5MT/4AT), MY1997 Accord (CD71x coupe 5MT, CD72x 4AT, CD55x sedan 5MT, CD56x 4AT, CE663/664/665/667 V6 sedan 4AT only, CE172 wagon 5MT, CE182/183/189 4AT), MY1997 3.0CL YA224/YA225 4AT. Page 7's header misprints 'Model year: 1996' but the page is the 1997 Accord table (VIN examples carry year code V). This filing no longer prints a generic character-7 table; each 2nd-section code is listed with its own transmission."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/260e4159-7c32-4e16-8fc1-b50a6b3aa5ce",
+      "sha256": "3975958af68e6e22abd89c1d34aab71fc8668cd066b9976aefbbc03978ea93da",
+      "result": "Confirmed (page image p.3, rotated): 2007 HONDA FIT Model Codes GD374 5MT, GD384 5AT, GD376 5MT, GD386 5AT, all 5DR HATCHBACK, L15A1. No separate MY2008 Fit filing was found among the 2006-2007 American Honda submissions in MID (18 cover letters read); MY2008 Fit claims rest on this MY2007 table for the same carry-over codes."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 28968,
+     "of_which_lot": 16155,
+     "of_which_departed": 12813,
+     "vpic_checkable": 21034,
+     "vpic_agree": 21034,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {
+      "2008 FIT GD38 (vPIC default cell)": 83,
+      "2007 FIT GD38 (vPIC default cell)": 82
+     },
+     "vpic_default_cell_vins": 165,
+     "vpic_default_cell_disagree": 165,
+     "epa_whole_cache": {
+      "consistent": 28947,
+      "consistent_in_single_kind_cell": 9348,
+      "no_epa_match": 21
+     },
+     "single_gearbox_model_facts": {
+      "checked": 8137,
+      "agree": 8137
+     },
+     "single_gearbox_fact_conflicts": []
+    },
+    "filings_scan": {
+     "filings_read": 43,
+     "manual_codes_agree": 194,
+     "automatic_codes_agree": 213,
+     "mismatches_unreviewed": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots.",
+     "fit_2007_2008": "GD37x = 5MT, GD38x = 5AT per the 2007 Fit filing; vPIC's 'Manual' on every 2007-08 Fit is a model-level default (the scraper now drops it). The 3:1 GD38:GD37 split in the cache is what a mostly-automatic car shows. MY2008 Fits rest on the MY2007 table (same carry-over codes; no MY2008 Fit filing found).",
+     "accord_1997": "1997 Accord (CD/CE) is carved out to honda_accord_1997_vin7_* (vPIC inverted)."
+    },
+    "outcome": "SURVIVES: no counterexample in the filings, EPA or the single-gearbox model facts; the only vPIC disagreements are vPIC errors that Honda's own filing contradicts or vPIC model-level default cells (2007-08 Fit)."
+   }
   },
   {
    "id": "honda_vin7_letter_2010_on_manual",
@@ -513,7 +594,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -550,7 +631,7 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 85,
+    "in_scope_lot_cars": 84,
     "checkable_ground_truth": 82,
     "agree": 82,
     "disagree": 0,
@@ -561,23 +642,24 @@
     "ground_truth_speeds_only_excluded": 0,
     "disagree_examples": [],
     "epa_crosscheck": {
-     "consistent": 85
+     "consistent": 84
     },
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 0,
     "published_label_contradicts_examples": [],
-    "cars_without_trans_info": 3,
+    "cars_without_trans_info": 2,
     "cars_without_trans_info_by_reason": {
-     "vpic_trans_blank": 3
+     "vpic_trans_blank": 1,
+     "not_in_cache_backup": 1
     },
     "codes_seen": {
-     "char7=E: 4-door, manual": 36,
+     "char7=E: 4-door, manual": 34,
      "char7=G: 5-door, manual": 21,
-     "char7=A: 2-door, manual": 20,
+     "char7=A: 2-door, manual": 21,
      "char7=C: 3-door, manual": 8
     },
     "top_models": {
-     "Civic": 35,
+     "Civic": 34,
      "Accord": 22,
      "Fit": 20,
      "CR-Z": 8
@@ -588,8 +670,63 @@
     ],
     "feed_make_differs_from_wmi_brand": 0
    },
-   "newly_confirmed_manual": 3,
-   "newly_labelled_non_manual": 0
+   "newly_confirmed_manual": 2,
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+      "sha256": "3b776676898cbb3750f45c7b67e553174c8a5a572a7e21aa0c5762745543a0f0",
+      "result": "Confirmed (text layer): MY2010 model-code tables, e.g. FA1E2 Civic DX 5MT / FA1F2 5AT, FA5E5 Si 6MT, FA3F2 Hybrid CVT, FA4F5 GX 5AT, FG1A2/FG1B2 coupe 5MT/5AT, FG2A5 Si 6MT, YH2G7 Element 4WD EX 5MT / YH1H3 5AT, UA9E5 TL SH-AWD 6MT / UA9F5 5AT, RE3H3 CR-V 5AT, RL3H2 Odyssey 5AT, YF4H2 Pilot 5AT, YD2H2 MDX 6AT. The filing defines no generic character-7 table: the A-H pairing is read off the code lists."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f293cffc-27b6-4ce0-9f20-412a4c955188",
+      "sha256": "17da58652d63a772ace580f6cf2a503dfb5fdc00e32a0ad5900ae97c77e5788a",
+      "result": "Confirmed (OCR p.3-4): 2011 CR-Z ZF1C4/ZF1C6 6MT 3DR, ZF1D4/ZF1D6 CVT 3DR; WMI table (p.3) lists every Honda/Acura WMI the rules use (JHM JH4 JHL JH1 1HG 19U 5J6 5J8 5J7 5J0 5KB 5KC 5FN 5FR 5FP 5FS 2HG 2HH 2HK 2HN 2HJ 2HU SHH SHS 3HG 3CZ 19X)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
+      "sha256": "8f3839b6de885f7a0211fdf9318b67e920aaa3f8e5da29d32930669e3ce47f2c",
+      "result": "Confirmed (text layer): 2024MY Civic Hatchback Type R FL5G4 2WD 6MT 5DR Hatchback; WMI table adds 19V (Acura car) and 7FA (Honda MPV, Honda Development & Manufacturing of America)."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 132,
+     "of_which_lot": 84,
+     "of_which_departed": 48,
+     "vpic_checkable": 101,
+     "vpic_agree": 101,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 129,
+      "no_epa_match": 3,
+      "consistent_in_single_kind_cell": 10
+     },
+     "single_gearbox_model_facts": {
+      "checked": 24,
+      "agree": 24
+     },
+     "single_gearbox_fact_conflicts": []
+    },
+    "filings_scan": {
+     "filings_read": 57,
+     "manual_codes_agree": 78,
+     "automatic_codes_agree": 409,
+     "mismatches_unreviewed": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots."
+    },
+    "outcome": "SURVIVES: no counterexample in the filings, the whole decode cache, EPA or the single-gearbox model facts."
+   }
   },
   {
    "id": "honda_vin7_letter_2010_on_automatic",
@@ -627,7 +764,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -664,46 +801,46 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 3563,
-    "checkable_ground_truth": 2083,
-    "agree": 2083,
+    "in_scope_lot_cars": 3589,
+    "checkable_ground_truth": 2069,
+    "agree": 2069,
     "disagree": 0,
     "agreement": 1.0,
     "checkable_positives_manual": null,
-    "uniform_cell_lines_excluded": 1446,
-    "uniform_cell_lines_that_would_agree": 1446,
+    "uniform_cell_lines_excluded": 1437,
+    "uniform_cell_lines_that_would_agree": 1437,
     "ground_truth_speeds_only_excluded": 0,
     "disagree_examples": [],
     "epa_crosscheck": {
-     "consistent": 3563
+     "consistent": 3589
     },
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 0,
     "published_label_contradicts_examples": [],
-    "cars_without_trans_info": 34,
+    "cars_without_trans_info": 36,
     "cars_without_trans_info_by_reason": {
      "vpic_trans_blank": 3,
-     "not_in_cache_backup": 31
+     "not_in_cache_backup": 33
     },
     "codes_seen": {
-     "char7=F: 4-door, automatic/CVT/DCT": 1680,
-     "char7=H: 5-door, automatic/CVT": 1552,
-     "char7=B: 2-door, automatic/CVT": 314,
-     "char7=D: 3-door, automatic/CVT": 17
+     "char7=F: 4-door, automatic/CVT/DCT": 1687,
+     "char7=H: 5-door, automatic/CVT": 1569,
+     "char7=B: 2-door, automatic/CVT": 315,
+     "char7=D: 3-door, automatic/CVT": 18
     },
     "top_models": {
-     "Accord": 1055,
-     "Civic": 905,
-     "Odyssey": 557,
-     "Pilot": 415,
-     "CR-V": 234,
-     "Fit": 121,
+     "Accord": 1060,
+     "Civic": 909,
+     "Odyssey": 567,
+     "Pilot": 419,
+     "CR-V": 236,
+     "Fit": 122,
      "Insight": 95,
-     "Crosstour": 46,
+     "Crosstour": 45,
      "Accord Crosstour": 45,
-     "Ridgeline": 29,
-     "HR-V": 23,
-     "CR-Z": 17
+     "Ridgeline": 28,
+     "HR-V": 24,
+     "CR-Z": 18
     },
     "years_seen": [
      2010,
@@ -712,7 +849,62 @@
     "feed_make_differs_from_wmi_brand": 0
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 34
+   "newly_labelled_non_manual": 36,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+      "sha256": "3b776676898cbb3750f45c7b67e553174c8a5a572a7e21aa0c5762745543a0f0",
+      "result": "Confirmed (text layer): MY2010 model-code tables, e.g. FA1E2 Civic DX 5MT / FA1F2 5AT, FA5E5 Si 6MT, FA3F2 Hybrid CVT, FA4F5 GX 5AT, FG1A2/FG1B2 coupe 5MT/5AT, FG2A5 Si 6MT, YH2G7 Element 4WD EX 5MT / YH1H3 5AT, UA9E5 TL SH-AWD 6MT / UA9F5 5AT, RE3H3 CR-V 5AT, RL3H2 Odyssey 5AT, YF4H2 Pilot 5AT, YD2H2 MDX 6AT. The filing defines no generic character-7 table: the A-H pairing is read off the code lists."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f293cffc-27b6-4ce0-9f20-412a4c955188",
+      "sha256": "17da58652d63a772ace580f6cf2a503dfb5fdc00e32a0ad5900ae97c77e5788a",
+      "result": "Confirmed (OCR p.3-4): 2011 CR-Z ZF1C4/ZF1C6 6MT 3DR, ZF1D4/ZF1D6 CVT 3DR; WMI table (p.3) lists every Honda/Acura WMI the rules use (JHM JH4 JHL JH1 1HG 19U 5J6 5J8 5J7 5J0 5KB 5KC 5FN 5FR 5FP 5FS 2HG 2HH 2HK 2HN 2HJ 2HU SHH SHS 3HG 3CZ 19X)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
+      "sha256": "8f3839b6de885f7a0211fdf9318b67e920aaa3f8e5da29d32930669e3ce47f2c",
+      "result": "Confirmed (text layer): 2024MY Civic Hatchback Type R FL5G4 2WD 6MT 5DR Hatchback; WMI table adds 19V (Acura car) and 7FA (Honda MPV, Honda Development & Manufacturing of America)."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 5888,
+     "of_which_lot": 3586,
+     "of_which_departed": 2302,
+     "vpic_checkable": 4538,
+     "vpic_agree": 4538,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 5883,
+      "consistent_in_single_kind_cell": 2416,
+      "no_epa_match": 5
+     },
+     "single_gearbox_model_facts": {
+      "checked": 2023,
+      "agree": 2023
+     },
+     "single_gearbox_fact_conflicts": []
+    },
+    "filings_scan": {
+     "filings_read": 57,
+     "manual_codes_agree": 78,
+     "automatic_codes_agree": 409,
+     "mismatches_unreviewed": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots."
+    },
+    "outcome": "SURVIVES: no counterexample in the filings, the whole decode cache, EPA or the single-gearbox model facts."
+   }
   },
   {
    "id": "acura_vin7_digit_1986_2009_manual",
@@ -732,7 +924,6 @@
      "2HH",
      "2HN",
      "2HU",
-     "3HD",
      "5FR",
      "5FS",
      "5J0",
@@ -744,7 +935,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -762,7 +953,7 @@
      "7": "5-door / wagon / SUV / van, manual"
     }
    },
-   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[1357][A-HJ-NPR-Z0-9]{2}[GHJKLMNPRSTVWXY1-9]",
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[1357][A-HJ-NPR-Z0-9]{2}[GHJKLMNPRSTVWXY1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
@@ -786,18 +977,18 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 96,
-    "checkable_ground_truth": 92,
-    "agree": 92,
+    "in_scope_lot_cars": 99,
+    "checkable_ground_truth": 93,
+    "agree": 93,
     "disagree": 0,
     "agreement": 1.0,
-    "checkable_positives_manual": 92,
+    "checkable_positives_manual": 93,
     "uniform_cell_lines_excluded": 0,
     "uniform_cell_lines_that_would_agree": 0,
     "ground_truth_speeds_only_excluded": 0,
     "disagree_examples": [],
     "epa_crosscheck": {
-     "consistent": 96
+     "consistent": 99
     },
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 0,
@@ -807,17 +998,17 @@
      "vpic_trans_blank": 4
     },
     "codes_seen": {
-     "char7=3: 2-door hatchback / 3-door, manual": 48,
+     "char7=3: 2-door hatchback / 3-door, manual": 50,
      "char7=5: 4-door sedan, manual": 40,
-     "char7=1: 2-door, manual": 7,
+     "char7=1: 2-door, manual": 8,
      "char7=7: 5-door / wagon / SUV / van, manual": 1
     },
     "top_models": {
-     "Integra": 28,
+     "Integra": 30,
      "RSX": 27,
      "TSX": 16,
      "TL": 15,
-     "CL": 7,
+     "CL": 8,
      "Legend": 3
     },
     "years_seen": [
@@ -827,7 +1018,68 @@
     "feed_make_differs_from_wmi_brand": 0
    },
    "newly_confirmed_manual": 4,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+      "sha256": "0530427c89e5c549d5ca2f43dd67afc8c944fd640887f3e91139b0a1a29e7a3f",
+      "result": "Confirmed (OCR p.2-5): MY1986 Acura Integra character 7 'Body type and Transmission representation' 3/4 = 3-door 5MT/4AT, 7/8 = 5-door 5MT/4AT (DA334 M5, DA344 L4, DA174 M5, DA184 L4); same letter re-issues the 1986 Honda table (5/6/7, AR652 Civic Wagon 4WD 5M+SL, VN552 Wagovan 5M). Covers only the Integra, not the 1986 Legend (Legend codes are checked against vPIC only)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ac16ebd-6ab7-49b1-ae7d-eee4f41ac222",
+      "sha256": "f65b82e1bf3f08bece629604f45e53ed1e77bab36b6f54c4f24a098293827ad7",
+      "result": "Confirmed (OCR p.2-4): MY1989 Integra DA334 RS 5M, DA344 RS 4A, DA335/DA345 LS 5M/4A, DA174/DA184 5-door RS 5M/4A, DA175/DA185 LS. So JH4DA3448KS017664 (vPIC: 5-spd Manual, live check) is a 4AT car and vPIC is wrong."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+      "sha256": "44e49bfa728ddc0ac464c666dc1877c14e8e90cd35320cd9b75d8a7ee3cf33db",
+      "result": "Confirmed (OCR p.2-12): MY1997 Civic (EJ65x/EJ85x sedan 5MT, EJ66x/EJ86x 4AT, EJ61x/EJ81x coupe 5MT, EJ62x/EJ82x 4AT, EJ71x HX 5MT, EJ72x HX CVT, EJ63x/EJ64x hatchback 5MT/4AT), MY1997 Accord (CD71x coupe 5MT, CD72x 4AT, CD55x sedan 5MT, CD56x 4AT, CE663/664/665/667 V6 sedan 4AT only, CE172 wagon 5MT, CE182/183/189 4AT), MY1997 3.0CL YA224/YA225 4AT. Page 7's header misprints 'Model year: 1996' but the page is the 1997 Accord table (VIN examples carry year code V). This filing no longer prints a generic character-7 table; each 2nd-section code is listed with its own transmission."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/836ed5a1-3594-439d-a5dd-cd214c21621b",
+      "sha256": "43e716968ffd910a2a4af93d5e906f31fd6238079a6e2ee26b460310ea618a3c",
+      "result": "Confirmed (page image p.3): 2003 Acura 3.2TL Model Code UA566/UA567/UA568/UA569 = 5AT 4DR Sedan (the PDF's text layer misreads UA as JA). WMI table lists 2HG/2HJ/2HK (Honda of Canada), 3HG (Honda de Mexico), 2HN (Acura MPV, Canada), SHS (UK)."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 199,
+     "of_which_lot": 99,
+     "of_which_departed": 100,
+     "vpic_checkable": 125,
+     "vpic_agree": 125,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 199,
+      "consistent_in_single_kind_cell": 1
+     },
+     "single_gearbox_model_facts": {
+      "checked": 16,
+      "agree": 16
+     },
+     "single_gearbox_fact_conflicts": []
+    },
+    "filings_scan": {
+     "filings_read": 43,
+     "manual_codes_agree": 194,
+     "automatic_codes_agree": 213,
+     "mismatches_unreviewed": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots.",
+     "acura_1986_legend": "The 1986 Acura filing cited covers only the Integra. 1986-87 Legend codes (KA25 5MT, KA26 4AT, KA32 auto) rest on vPIC agreement, not on a filing read here.",
+     "integra_1989_da344": "The one vPIC disagreement (JH4DA3448KS017664) is a vPIC error: the 1989 filing says DA344 = 4A."
+    },
+    "outcome": "SURVIVES: no counterexample in the filings, the whole decode cache, EPA or the single-gearbox model facts."
+   }
   },
   {
    "id": "acura_vin7_digit_1986_2009_automatic",
@@ -847,7 +1099,6 @@
      "2HH",
      "2HN",
      "2HU",
-     "3HD",
      "5FR",
      "5FS",
      "5J0",
@@ -859,7 +1110,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -877,7 +1128,7 @@
      "8": "5-door / wagon / SUV / van, automatic"
     }
    },
-   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[2468][A-HJ-NPR-Z0-9]{2}[GHJKLMNPRSTVWXY1-9]",
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[2468][A-HJ-NPR-Z0-9]{2}[GHJKLMNPRSTVWXY1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
@@ -901,14 +1152,14 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 2824,
-    "checkable_ground_truth": 1058,
-    "agree": 1057,
+    "in_scope_lot_cars": 2844,
+    "checkable_ground_truth": 1047,
+    "agree": 1046,
     "disagree": 1,
-    "agreement": 0.99905,
+    "agreement": 0.99904,
     "checkable_positives_manual": null,
-    "uniform_cell_lines_excluded": 1715,
-    "uniform_cell_lines_that_would_agree": 1715,
+    "uniform_cell_lines_excluded": 1692,
+    "uniform_cell_lines_that_would_agree": 1692,
     "ground_truth_speeds_only_excluded": 0,
     "disagree_examples": [
      {
@@ -921,7 +1172,7 @@
      }
     ],
     "epa_crosscheck": {
-     "consistent": 2824
+     "consistent": 2844
     },
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 1,
@@ -934,28 +1185,28 @@
       "src": "vin"
      }
     ],
-    "cars_without_trans_info": 51,
+    "cars_without_trans_info": 50,
     "cars_without_trans_info_by_reason": {
-     "vpic_trans_blank": 14,
+     "vpic_trans_blank": 13,
      "not_in_cache_backup": 37
     },
     "codes_seen": {
-     "char7=6: 4-door sedan, automatic (incl. CVT)": 1665,
-     "char7=8: 5-door / wagon / SUV / van, automatic": 932,
-     "char7=4: 2-door hatchback / 3-door, automatic": 116,
-     "char7=2: 2-door, automatic": 111
+     "char7=6: 4-door sedan, automatic (incl. CVT)": 1683,
+     "char7=8: 5-door / wagon / SUV / van, automatic": 938,
+     "char7=4: 2-door hatchback / 3-door, automatic": 115,
+     "char7=2: 2-door, automatic": 108
     },
     "top_models": {
-     "TL": 1091,
-     "MDX": 846,
+     "TL": 1104,
+     "MDX": 854,
      "TSX": 336,
-     "RL": 189,
-     "CL": 103,
-     "RDX": 86,
-     "RSX": 84,
-     "Integra": 50,
+     "RL": 190,
+     "CL": 100,
+     "RDX": 84,
+     "RSX": 83,
+     "Integra": 53,
      "Legend": 37,
-     "Vigor": 2
+     "Vigor": 3
     },
     "years_seen": [
      1987,
@@ -964,7 +1215,74 @@
     "feed_make_differs_from_wmi_brand": 0
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 51
+   "newly_labelled_non_manual": 50,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+      "sha256": "0530427c89e5c549d5ca2f43dd67afc8c944fd640887f3e91139b0a1a29e7a3f",
+      "result": "Confirmed (OCR p.2-5): MY1986 Acura Integra character 7 'Body type and Transmission representation' 3/4 = 3-door 5MT/4AT, 7/8 = 5-door 5MT/4AT (DA334 M5, DA344 L4, DA174 M5, DA184 L4); same letter re-issues the 1986 Honda table (5/6/7, AR652 Civic Wagon 4WD 5M+SL, VN552 Wagovan 5M). Covers only the Integra, not the 1986 Legend (Legend codes are checked against vPIC only)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ac16ebd-6ab7-49b1-ae7d-eee4f41ac222",
+      "sha256": "f65b82e1bf3f08bece629604f45e53ed1e77bab36b6f54c4f24a098293827ad7",
+      "result": "Confirmed (OCR p.2-4): MY1989 Integra DA334 RS 5M, DA344 RS 4A, DA335/DA345 LS 5M/4A, DA174/DA184 5-door RS 5M/4A, DA175/DA185 LS. So JH4DA3448KS017664 (vPIC: 5-spd Manual, live check) is a 4AT car and vPIC is wrong."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+      "sha256": "44e49bfa728ddc0ac464c666dc1877c14e8e90cd35320cd9b75d8a7ee3cf33db",
+      "result": "Confirmed (OCR p.2-12): MY1997 Civic (EJ65x/EJ85x sedan 5MT, EJ66x/EJ86x 4AT, EJ61x/EJ81x coupe 5MT, EJ62x/EJ82x 4AT, EJ71x HX 5MT, EJ72x HX CVT, EJ63x/EJ64x hatchback 5MT/4AT), MY1997 Accord (CD71x coupe 5MT, CD72x 4AT, CD55x sedan 5MT, CD56x 4AT, CE663/664/665/667 V6 sedan 4AT only, CE172 wagon 5MT, CE182/183/189 4AT), MY1997 3.0CL YA224/YA225 4AT. Page 7's header misprints 'Model year: 1996' but the page is the 1997 Accord table (VIN examples carry year code V). This filing no longer prints a generic character-7 table; each 2nd-section code is listed with its own transmission."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/836ed5a1-3594-439d-a5dd-cd214c21621b",
+      "sha256": "43e716968ffd910a2a4af93d5e906f31fd6238079a6e2ee26b460310ea618a3c",
+      "result": "Confirmed (page image p.3): 2003 Acura 3.2TL Model Code UA566/UA567/UA568/UA569 = 5AT 4DR Sedan (the PDF's text layer misreads UA as JA). WMI table lists 2HG/2HJ/2HK (Honda of Canada), 3HG (Honda de Mexico), 2HN (Acura MPV, Canada), SHS (UK)."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 5096,
+     "of_which_lot": 2844,
+     "of_which_departed": 2252,
+     "vpic_checkable": 3661,
+     "vpic_agree": 3660,
+     "vpic_disagree": 1,
+     "vpic_disagree_cells": {
+      "1989 INTEGRA DA34": 1
+     },
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 5095,
+      "consistent_in_single_kind_cell": 3102,
+      "no_epa_match": 1
+     },
+     "single_gearbox_model_facts": {
+      "checked": 2711,
+      "agree": 2711
+     },
+     "single_gearbox_fact_conflicts": [],
+     "vpic_disagreements_explained": [
+      "JH4DA3448KS017664: 1989 Integra DA344: the 1989 filing (5ac16ebd) says 4A; vPIC says 5-spd Manual."
+     ]
+    },
+    "filings_scan": {
+     "filings_read": 43,
+     "manual_codes_agree": 194,
+     "automatic_codes_agree": 213,
+     "mismatches_unreviewed": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots.",
+     "acura_1986_legend": "The 1986 Acura filing cited covers only the Integra. 1986-87 Legend codes (KA25 5MT, KA26 4AT, KA32 auto) rest on vPIC agreement, not on a filing read here.",
+     "integra_1989_da344": "The one vPIC disagreement (JH4DA3448KS017664) is a vPIC error: the 1989 filing says DA344 = 4A."
+    },
+    "outcome": "SURVIVES: no counterexample in the filings, EPA or the single-gearbox model facts; the only vPIC disagreements are vPIC errors that Honda's own filing contradicts (vpic_disagreements_explained)."
+   }
   },
   {
    "id": "acura_vin7_letter_2010_on_manual",
@@ -984,7 +1302,6 @@
      "2HH",
      "2HN",
      "2HU",
-     "3HD",
      "5FR",
      "5FS",
      "5J0",
@@ -996,7 +1313,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -1014,7 +1331,7 @@
      "G": "5-door, manual"
     }
    },
-   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[ACEG][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y]",
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[ACEG][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
@@ -1030,6 +1347,11 @@
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
      "doc": "MID ORG21966, American Honda letter 2023-07-20, 2024 Honda Civic Type R",
      "says": "FL5G4 = CIVIC HATCHBACK Type R, 6MT, 5DR Hatchback (character 7 G = 5-door manual still in use for MY2024)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/379f8460-941e-4589-8208-4874e9aaef24",
+     "doc": "MID ORG21374, American Honda letter 2023-01-17 (filed 2023-02-08), 2024 Acura Integra (added in verification 2026-11-05)",
+     "says": "2024MY ACURA INTEGRA Model Codes: DE4H2 INTEGRA / DE4H3 A-SPEC / DE4H6 A-SPEC TECH = CVT 5DR Hatchback; DE4G7 INTEGRA A-SPEC TECH = 6M/T 5DR Hatchback (Acura character 7 G = 5-door manual, H = 5-door automatic/CVT)."
     }
    ],
    "validation": {
@@ -1064,7 +1386,62 @@
     "feed_make_differs_from_wmi_brand": 0
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+      "sha256": "3b776676898cbb3750f45c7b67e553174c8a5a572a7e21aa0c5762745543a0f0",
+      "result": "Confirmed (text layer): MY2010 model-code tables, e.g. FA1E2 Civic DX 5MT / FA1F2 5AT, FA5E5 Si 6MT, FA3F2 Hybrid CVT, FA4F5 GX 5AT, FG1A2/FG1B2 coupe 5MT/5AT, FG2A5 Si 6MT, YH2G7 Element 4WD EX 5MT / YH1H3 5AT, UA9E5 TL SH-AWD 6MT / UA9F5 5AT, RE3H3 CR-V 5AT, RL3H2 Odyssey 5AT, YF4H2 Pilot 5AT, YD2H2 MDX 6AT. The filing defines no generic character-7 table: the A-H pairing is read off the code lists."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f293cffc-27b6-4ce0-9f20-412a4c955188",
+      "sha256": "17da58652d63a772ace580f6cf2a503dfb5fdc00e32a0ad5900ae97c77e5788a",
+      "result": "Confirmed (OCR p.3-4): 2011 CR-Z ZF1C4/ZF1C6 6MT 3DR, ZF1D4/ZF1D6 CVT 3DR; WMI table (p.3) lists every Honda/Acura WMI the rules use (JHM JH4 JHL JH1 1HG 19U 5J6 5J8 5J7 5J0 5KB 5KC 5FN 5FR 5FP 5FS 2HG 2HH 2HK 2HN 2HJ 2HU SHH SHS 3HG 3CZ 19X)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
+      "sha256": "8f3839b6de885f7a0211fdf9318b67e920aaa3f8e5da29d32930669e3ce47f2c",
+      "result": "Confirmed (text layer): 2024MY Civic Hatchback Type R FL5G4 2WD 6MT 5DR Hatchback; WMI table adds 19V (Acura car) and 7FA (Honda MPV, Honda Development & Manufacturing of America)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/379f8460-941e-4589-8208-4874e9aaef24",
+      "sha256": "71c31eed1538f55d8ab7e0330674f30b0f8d7e38252e84e3791c1925f36105b7",
+      "result": "Added in verification (text layer): 2024MY Acura Integra DE4H2/DE4H3/DE4H6 CVT 5DR Hatchback, DE4G7 A-SPEC TECH 6M/T 5DR Hatchback."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 2,
+     "of_which_lot": 1,
+     "of_which_departed": 1,
+     "vpic_checkable": 1,
+     "vpic_agree": 1,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 2
+     },
+     "single_gearbox_model_facts": {},
+     "single_gearbox_fact_conflicts": []
+    },
+    "filings_scan": {
+     "filings_read": 57,
+     "manual_codes_agree": 78,
+     "automatic_codes_agree": 409,
+     "mismatches_unreviewed": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots."
+    },
+    "outcome": "SURVIVES: no counterexample in the filings, the whole decode cache, EPA or the single-gearbox model facts."
+   }
   },
   {
    "id": "acura_vin7_letter_2010_on_automatic",
@@ -1084,7 +1461,6 @@
      "2HH",
      "2HN",
      "2HU",
-     "3HD",
      "5FR",
      "5FS",
      "5J0",
@@ -1096,7 +1472,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -1114,7 +1490,7 @@
      "H": "5-door, automatic/CVT"
     }
    },
-   "vin_regex": "^(19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[BDFH][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y]",
+   "vin_regex": "^(19U|19V|2HH|2HN|2HU|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[BDFH][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
@@ -1130,21 +1506,26 @@
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
      "doc": "MID ORG21966, American Honda letter 2023-07-20, 2024 Honda Civic Type R",
      "says": "FL5G4 = CIVIC HATCHBACK Type R, 6MT, 5DR Hatchback (character 7 G = 5-door manual still in use for MY2024)."
+    },
+    {
+     "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/379f8460-941e-4589-8208-4874e9aaef24",
+     "doc": "MID ORG21374, American Honda letter 2023-01-17 (filed 2023-02-08), 2024 Acura Integra (added in verification 2026-11-05)",
+     "says": "2024MY ACURA INTEGRA Model Codes: DE4H2 INTEGRA / DE4H3 A-SPEC / DE4H6 A-SPEC TECH = CVT 5DR Hatchback; DE4G7 INTEGRA A-SPEC TECH = 6M/T 5DR Hatchback (Acura character 7 G = 5-door manual, H = 5-door automatic/CVT)."
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 658,
-    "checkable_ground_truth": 120,
-    "agree": 120,
+    "in_scope_lot_cars": 656,
+    "checkable_ground_truth": 119,
+    "agree": 119,
     "disagree": 0,
     "agreement": 1.0,
     "checkable_positives_manual": null,
-    "uniform_cell_lines_excluded": 533,
-    "uniform_cell_lines_that_would_agree": 533,
+    "uniform_cell_lines_excluded": 528,
+    "uniform_cell_lines_that_would_agree": 528,
     "ground_truth_speeds_only_excluded": 0,
     "disagree_examples": [],
     "epa_crosscheck": {
-     "consistent": 658
+     "consistent": 656
     },
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 0,
@@ -1155,18 +1536,18 @@
      "not_in_cache_backup": 4
     },
     "codes_seen": {
-     "char7=F: 4-door, automatic/CVT/DCT": 400,
-     "char7=H: 5-door, automatic/CVT": 258
+     "char7=F: 4-door, automatic/CVT/DCT": 396,
+     "char7=H: 5-door, automatic/CVT": 260
     },
     "top_models": {
-     "TL": 181,
-     "MDX": 174,
+     "TL": 178,
+     "MDX": 175,
      "TSX": 116,
-     "RDX": 76,
+     "RDX": 77,
      "ILX": 62,
      "TLX": 30,
-     "RL": 6,
      "RLX": 6,
+     "RL": 5,
      "ZDX": 4,
      "Integra": 3
     },
@@ -1177,7 +1558,66 @@
     "feed_make_differs_from_wmi_brand": 0
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 5
+   "newly_labelled_non_manual": 5,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+      "sha256": "3b776676898cbb3750f45c7b67e553174c8a5a572a7e21aa0c5762745543a0f0",
+      "result": "Confirmed (text layer): MY2010 model-code tables, e.g. FA1E2 Civic DX 5MT / FA1F2 5AT, FA5E5 Si 6MT, FA3F2 Hybrid CVT, FA4F5 GX 5AT, FG1A2/FG1B2 coupe 5MT/5AT, FG2A5 Si 6MT, YH2G7 Element 4WD EX 5MT / YH1H3 5AT, UA9E5 TL SH-AWD 6MT / UA9F5 5AT, RE3H3 CR-V 5AT, RL3H2 Odyssey 5AT, YF4H2 Pilot 5AT, YD2H2 MDX 6AT. The filing defines no generic character-7 table: the A-H pairing is read off the code lists."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/f293cffc-27b6-4ce0-9f20-412a4c955188",
+      "sha256": "17da58652d63a772ace580f6cf2a503dfb5fdc00e32a0ad5900ae97c77e5788a",
+      "result": "Confirmed (OCR p.3-4): 2011 CR-Z ZF1C4/ZF1C6 6MT 3DR, ZF1D4/ZF1D6 CVT 3DR; WMI table (p.3) lists every Honda/Acura WMI the rules use (JHM JH4 JHL JH1 1HG 19U 5J6 5J8 5J7 5J0 5KB 5KC 5FN 5FR 5FP 5FS 2HG 2HH 2HK 2HN 2HJ 2HU SHH SHS 3HG 3CZ 19X)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/51b13a22-cf03-40a9-84d5-3cda0375140f",
+      "sha256": "8f3839b6de885f7a0211fdf9318b67e920aaa3f8e5da29d32930669e3ce47f2c",
+      "result": "Confirmed (text layer): 2024MY Civic Hatchback Type R FL5G4 2WD 6MT 5DR Hatchback; WMI table adds 19V (Acura car) and 7FA (Honda MPV, Honda Development & Manufacturing of America)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/379f8460-941e-4589-8208-4874e9aaef24",
+      "sha256": "71c31eed1538f55d8ab7e0330674f30b0f8d7e38252e84e3791c1925f36105b7",
+      "result": "Added in verification (text layer): 2024MY Acura Integra DE4H2/DE4H3/DE4H6 CVT 5DR Hatchback, DE4G7 A-SPEC TECH 6M/T 5DR Hatchback."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 1066,
+     "of_which_lot": 656,
+     "of_which_departed": 410,
+     "vpic_checkable": 835,
+     "vpic_agree": 835,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 1066,
+      "consistent_in_single_kind_cell": 755
+     },
+     "single_gearbox_model_facts": {
+      "checked": 499,
+      "agree": 499
+     },
+     "single_gearbox_fact_conflicts": []
+    },
+    "filings_scan": {
+     "filings_read": 57,
+     "manual_codes_agree": 78,
+     "automatic_codes_agree": 409,
+     "mismatches_unreviewed": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots."
+    },
+    "outcome": "SURVIVES: no counterexample in the filings, the whole decode cache, EPA or the single-gearbox model facts."
+   }
   },
   {
    "id": "honda_vin6_1984_1986_manual",
@@ -1215,7 +1655,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -1230,7 +1670,7 @@
      "5": "5-speed manual",
      "6": "5-speed manual + Super Low"
     },
-    "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN) and character 7 is a body code 2-5"
+    "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN), character 6 is a value that filing's own construction table defines for that line group (1984 and 1985 Accord/Prelude/Civic Wagon: 3 5 7; 1985 Civic CRX/hatchback/sedan: 3 4 5; 1986 Civic CRX/hatchback/sedan: 4 5 7; 1986 Accord/Prelude/Civic Wagon/4WD/Wagovan: 5 6 7), and character 7 is a body code 2-5. The regex cannot express the per-year value sets; the generator's OLD_T6_ALLOWED does"
    },
    "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[456][2-5][A-HJ-NPR-Z0-9]{2}[EFG]",
    "citations": [
@@ -1277,8 +1717,9 @@
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 0,
     "published_label_contradicts_examples": [],
-    "cars_without_trans_info": 1,
+    "cars_without_trans_info": 6,
     "cars_without_trans_info_by_reason": {
+     "other": 5,
      "not_in_cache_backup": 1
     },
     "codes_seen": {
@@ -1297,8 +1738,89 @@
     ],
     "feed_make_differs_from_wmi_brand": 0
    },
-   "newly_confirmed_manual": 1,
-   "newly_labelled_non_manual": 0
+   "newly_confirmed_manual": 6,
+   "newly_labelled_non_manual": 0,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ec1023d-ef91-47ab-a2e7-9b636dd7885d",
+      "sha256": "f310bcaac30d06f41a889ff9f3deed1ba5a1b34c53c4899abedb6c65f0d26465",
+      "result": "Confirmed (OCR p.2-3): MY1984 Accord/Prelude/Civic Wagon; character 6 'Transmission representation' 5 = 5MT, 7 = 4AT, 3 = 3AT; character 7 body 2/3/4/5; JHMAD532 5M, JHMAD732 4A, JHMAN352 3A. Defines no 4 or 6 (the rule now accepts only 3/5/7 for 1984)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/99140621-6bb8-4988-9922-bf53e3f0bd32",
+      "sha256": "eb337e49dafadb79aad2687765e5081bbf2e7001502c8714b90712b0221bb684",
+      "result": "Confirmed (OCR p.2-5): MY1985 Accord/Prelude/Civic Wagon table (3/5/7) and Civic CRX/hatchback/sedan table (3 = 3AT, 4 = 4MT, 5 = 5MT); JHMAF531 CRX HF M5, JHMAF332 CRX L3, JHMAG431 1300 M4, JHMAK343 L3."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/386ede85-a1c2-474d-bccf-88647bd49403",
+      "sha256": "e7196b4845ddf68b168764d4857f8fa74958422f0f9f365fe158f9ef65664f71",
+      "result": "Confirmed (OCR p.2-3): MY1986 Civic CRX/hatchback/sedan, character 6: 4 = 4MT, 5 = 5MT, 7 = 4AT; JHMAK543 M5, JHMAK743 L4. Defines no 3."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/66a0a3d1-e263-40e0-9dc2-92f115a9a147",
+      "sha256": "e058a40f2f3f0bfbdea3ed2102f8975c9b82703f01b5a8eb9514c34acbe662f8",
+      "result": "Confirmed (OCR p.3-4): MY1986 Accord/Prelude/Civic Wagon/Wagon 4WD, character 6: 5 = 5MT, 6 = 5MT + Super Low, 7 = 4AT."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+      "sha256": "0530427c89e5c549d5ca2f43dd67afc8c944fd640887f3e91139b0a1a29e7a3f",
+      "result": "Confirmed (OCR p.2-5): MY1986 Acura Integra character 7 'Body type and Transmission representation' 3/4 = 3-door 5MT/4AT, 7/8 = 5-door 5MT/4AT (DA334 M5, DA344 L4, DA174 M5, DA184 L4); same letter re-issues the 1986 Honda table (5/6/7, AR652 Civic Wagon 4WD 5M+SL, VN552 Wagovan 5M). Covers only the Integra, not the 1986 Legend (Legend codes are checked against vPIC only)."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 29,
+     "of_which_lot": 13,
+     "of_which_departed": 16,
+     "vpic_checkable": 11,
+     "vpic_agree": 11,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 9,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 29
+     },
+     "single_gearbox_model_facts": {},
+     "single_gearbox_fact_conflicts": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots.",
+     "narrowed": "Character-6 values are now accepted only where that year's own filing defines them for that line group (OLD_T6_ALLOWED). No car in the cache changed bucket; the narrowing closes undefined values such as 4 or 6 on a 1984 VIN or 3 on a 1986 VIN, which the old year-agnostic table would have ruled.",
+     "years": "MY1981-83 and the MY1984 Civic hatchback/CRX/sedan stay unruled (no filing). VN (Wagovan) is ruled for 1986 only."
+    },
+    "hand_check_codes_in_scope": {
+     "1984 AB char6=5 char7=2 vPIC=manual": 1,
+     "1984 AB char6=5 char7=2 vPIC=none": 1,
+     "1984 AD char6=5 char7=3 vPIC=manual": 2,
+     "1984 AD char6=5 char7=4 vPIC=manual": 1,
+     "1984 AD char6=5 char7=4 vPIC=none": 1,
+     "1984 AN char6=5 char7=5 vPIC=manual": 1,
+     "1985 AD char6=5 char7=3 vPIC=none": 2,
+     "1985 AD char6=5 char7=4 vPIC=none": 1,
+     "1985 AF char6=5 char7=3 vPIC=manual": 1,
+     "1985 AF char6=5 char7=3 vPIC=none": 2,
+     "1985 AH char6=5 char7=3 vPIC=manual": 2,
+     "1985 AK char6=5 char7=4 vPIC=manual": 1,
+     "1986 AF char6=5 char7=3 vPIC=manual": 1,
+     "1986 AG char6=4 char7=3 vPIC=manual": 3,
+     "1986 AG char6=5 char7=3 vPIC=manual": 1,
+     "1986 AH char6=5 char7=3 vPIC=manual": 2,
+     "1986 AK char6=5 char7=4 vPIC=manual": 1,
+     "1986 AN char6=5 char7=5 vPIC=none": 1,
+     "1986 AR char6=6 char7=5 vPIC=manual": 1,
+     "1986 AR char6=6 char7=5 vPIC=none": 1,
+     "1986 BA char6=5 char7=3 vPIC=manual": 1,
+     "1986 BA char6=5 char7=4 vPIC=manual": 1
+    },
+    "hand_check_result": "Every (year, line, character 6) above is a value the filing for that year defines for that line group; every vPIC transmission present agrees (1986 Civic vPIC values are a model-level default and are not evidence).",
+    "outcome": "SURVIVES: no counterexample in the filings, the whole decode cache, EPA or the single-gearbox model facts."
+   }
   },
   {
    "id": "honda_vin6_1984_1986_automatic",
@@ -1336,7 +1858,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -1349,7 +1871,7 @@
      "3": "3-speed automatic",
      "7": "4-speed automatic"
     },
-    "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN) and character 7 is a body code 2-5"
+    "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN), character 6 is a value that filing's own construction table defines for that line group (1984 and 1985 Accord/Prelude/Civic Wagon: 3 5 7; 1985 Civic CRX/hatchback/sedan: 3 4 5; 1986 Civic CRX/hatchback/sedan: 4 5 7; 1986 Accord/Prelude/Civic Wagon/4WD/Wagovan: 5 6 7), and character 7 is a body code 2-5. The regex cannot express the per-year value sets; the generator's OLD_T6_ALLOWED does"
    },
    "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS)(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[37][2-5][A-HJ-NPR-Z0-9]{2}[EFG]",
    "citations": [
@@ -1380,7 +1902,7 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 5,
+    "in_scope_lot_cars": 6,
     "checkable_ground_truth": 5,
     "agree": 5,
     "disagree": 0,
@@ -1391,19 +1913,22 @@
     "ground_truth_speeds_only_excluded": 0,
     "disagree_examples": [],
     "epa_crosscheck": {
-     "consistent": 5
+     "consistent": 6
     },
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 0,
     "published_label_contradicts_examples": [],
-    "cars_without_trans_info": 0,
-    "cars_without_trans_info_by_reason": {},
+    "cars_without_trans_info": 1,
+    "cars_without_trans_info_by_reason": {
+     "other": 1
+    },
     "codes_seen": {
-     "char6=7: 4-speed automatic": 5
+     "char6=7: 4-speed automatic": 6
     },
     "top_models": {
      "Accord": 4,
-     "Prelude": 1
+     "Prelude": 1,
+     "Civic": 1
     },
     "years_seen": [
      1986,
@@ -1412,13 +1937,81 @@
     "feed_make_differs_from_wmi_brand": 0
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 0
+   "newly_labelled_non_manual": 1,
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/5ec1023d-ef91-47ab-a2e7-9b636dd7885d",
+      "sha256": "f310bcaac30d06f41a889ff9f3deed1ba5a1b34c53c4899abedb6c65f0d26465",
+      "result": "Confirmed (OCR p.2-3): MY1984 Accord/Prelude/Civic Wagon; character 6 'Transmission representation' 5 = 5MT, 7 = 4AT, 3 = 3AT; character 7 body 2/3/4/5; JHMAD532 5M, JHMAD732 4A, JHMAN352 3A. Defines no 4 or 6 (the rule now accepts only 3/5/7 for 1984)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/99140621-6bb8-4988-9922-bf53e3f0bd32",
+      "sha256": "eb337e49dafadb79aad2687765e5081bbf2e7001502c8714b90712b0221bb684",
+      "result": "Confirmed (OCR p.2-5): MY1985 Accord/Prelude/Civic Wagon table (3/5/7) and Civic CRX/hatchback/sedan table (3 = 3AT, 4 = 4MT, 5 = 5MT); JHMAF531 CRX HF M5, JHMAF332 CRX L3, JHMAG431 1300 M4, JHMAK343 L3."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/386ede85-a1c2-474d-bccf-88647bd49403",
+      "sha256": "e7196b4845ddf68b168764d4857f8fa74958422f0f9f365fe158f9ef65664f71",
+      "result": "Confirmed (OCR p.2-3): MY1986 Civic CRX/hatchback/sedan, character 6: 4 = 4MT, 5 = 5MT, 7 = 4AT; JHMAK543 M5, JHMAK743 L4. Defines no 3."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/66a0a3d1-e263-40e0-9dc2-92f115a9a147",
+      "sha256": "e058a40f2f3f0bfbdea3ed2102f8975c9b82703f01b5a8eb9514c34acbe662f8",
+      "result": "Confirmed (OCR p.3-4): MY1986 Accord/Prelude/Civic Wagon/Wagon 4WD, character 6: 5 = 5MT, 6 = 5MT + Super Low, 7 = 4AT."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+      "sha256": "0530427c89e5c549d5ca2f43dd67afc8c944fd640887f3e91139b0a1a29e7a3f",
+      "result": "Confirmed (OCR p.2-5): MY1986 Acura Integra character 7 'Body type and Transmission representation' 3/4 = 3-door 5MT/4AT, 7/8 = 5-door 5MT/4AT (DA334 M5, DA344 L4, DA174 M5, DA184 L4); same letter re-issues the 1986 Honda table (5/6/7, AR652 Civic Wagon 4WD 5M+SL, VN552 Wagovan 5M). Covers only the Integra, not the 1986 Legend (Legend codes are checked against vPIC only)."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 13,
+     "of_which_lot": 6,
+     "of_which_departed": 7,
+     "vpic_checkable": 9,
+     "vpic_agree": 9,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 1,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 13
+     },
+     "single_gearbox_model_facts": {},
+     "single_gearbox_fact_conflicts": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots.",
+     "narrowed": "Character-6 values are now accepted only where that year's own filing defines them for that line group (OLD_T6_ALLOWED). No car in the cache changed bucket; the narrowing closes undefined values such as 4 or 6 on a 1984 VIN or 3 on a 1986 VIN, which the old year-agnostic table would have ruled.",
+     "years": "MY1981-83 and the MY1984 Civic hatchback/CRX/sedan stay unruled (no filing). VN (Wagovan) is ruled for 1986 only."
+    },
+    "hand_check_codes_in_scope": {
+     "1984 AD char6=7 char7=3 vPIC=none": 1,
+     "1984 AD char6=7 char7=4 vPIC=automatic": 1,
+     "1984 AD char6=7 char7=4 vPIC=none": 1,
+     "1985 AB char6=7 char7=2 vPIC=none": 1,
+     "1985 AD char6=7 char7=3 vPIC=automatic": 1,
+     "1986 AN char6=7 char7=5 vPIC=automatic": 1,
+     "1986 BA char6=7 char7=3 vPIC=automatic": 3,
+     "1986 BA char6=7 char7=4 vPIC=automatic": 3,
+     "1986 BB char6=7 char7=2 vPIC=automatic": 1
+    },
+    "hand_check_result": "Every (year, line, character 6) above is a value the filing for that year defines for that line group; every vPIC transmission present agrees (1986 Civic vPIC values are a model-level default and are not evidence).",
+    "outcome": "SURVIVES: no counterexample in the filings, the whole decode cache, EPA or the single-gearbox model facts."
+   }
   },
   {
    "id": "honda_acura_vin7_code_not_in_vpic_manual",
    "make": "Honda+Acura",
    "claim": "manual",
-   "status": "keep_low_sample",
+   "status": "hold_code_not_filed",
    "scope": {
     "make": "Honda+Acura",
     "models": "Honda/Acura VINs (mostly Canada-market cars at Canadian yards) whose model code is not in NHTSA's vPIC data",
@@ -1438,7 +2031,6 @@
      "2HN",
      "2HU",
      "3CZ",
-     "3HD",
      "3HG",
      "5FN",
      "5FP",
@@ -1462,7 +2054,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -1489,7 +2081,7 @@
     },
     "also_required": "the VIN's vPIC decode has no Model AND no lot car of that model year with the same characters 4-7 decodes to a model, i.e. Honda never filed this code with NHTSA (on the lots: Canada-market Acura EL/CSX and a few Canada-only Civic codes)"
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS|19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[1357ACEG][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y1-9]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS|19U|19V|2HH|2HN|2HU|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[1357ACEG][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
@@ -1508,56 +2100,93 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 8,
-    "checkable_ground_truth": 1,
-    "agree": 1,
+    "in_scope_lot_cars": 3,
+    "checkable_ground_truth": 0,
+    "agree": 0,
     "disagree": 0,
-    "agreement": 1.0,
-    "checkable_positives_manual": 1,
+    "agreement": null,
+    "checkable_positives_manual": 0,
     "uniform_cell_lines_excluded": 0,
     "uniform_cell_lines_that_would_agree": 0,
     "ground_truth_speeds_only_excluded": 0,
     "disagree_examples": [],
     "epa_crosscheck": {
-     "no_epa_match": 4,
-     "consistent": 4
+     "no_epa_match": 3
     },
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 0,
     "published_label_contradicts_examples": [],
-    "cars_without_trans_info": 7,
+    "cars_without_trans_info": 3,
     "cars_without_trans_info_by_reason": {
-     "vpic_trans_blank": 6,
-     "not_in_cache_backup": 1
+     "vpic_trans_blank": 3
     },
     "codes_seen": {
-     "char7=5: 4-door sedan, manual": 4,
-     "char7=1: 2-door, manual": 2,
-     "char7=3: 2-door hatchback / 3-door, manual": 1,
-     "char7=A: 2-door, manual": 1
+     "char7=5: 4-door sedan, manual": 3
     },
     "top_models": {
      "EL": 2,
-     "CSX": 2,
-     "Civic": 2,
-     "Accord": 1,
-     "CL": 1
+     "CSX": 1
     },
     "years_seen": [
-     1997,
-     2011
+     2000,
+     2008
     ],
     "feed_make_differs_from_wmi_brand": 0
    },
-   "newly_confirmed_manual": 7,
+   "newly_confirmed_manual": 3,
    "newly_labelled_non_manual": 0,
-   "caveat": "Honda's construction-of-VIN pages define character 7 as body type + transmission for every model code, and Honda of Canada Mfg. (2HG/2HH/2HK/2HN) is one of the filers, but no US filing lists these exact Canada-market codes and vPIC returns no decode for them, so no ground truth can check them. Kept as low_sample on the strength of Honda's own scheme; the hub may prefer to hold these."
+   "caveat": "Honda's construction-of-VIN pages define character 7 as body type + transmission for every model code, and Honda of Canada Mfg. (2HG/2HH/2HK/2HN) is one of the filers, but no US filing lists these exact Canada-market codes and vPIC returns no decode for them, so no ground truth can check them.",
+   "hold_reason": "Verification 2026-11-05: HELD, not confirmed. Once 'documented' is computed over the whole decode cache, every manual-claimed car left here (lot and departed) is a Canada-only Acura EL (line MB4 1997-2000, ES3 2001-05) or CSX (FD5/FD6 2006-11); the automatic side also holds two odd US VINs (2010 Accord 'CP8F', 2013 TSX 'C42F', probably mistyped VINs that happen to pass the check digit). An EL/CSX line code (characters 4-6) is in no Honda filing and vPIC rejects the VIN today (error 5/14, 'VIN has errors in few positions', checked live for 2HHES35863H001201 and 2HHFD65698H201026). Honda's filings stopped stating a generic character-7 table after the late 1980s (the 1997 and 2003 filings list each 2nd-section code with its own transmission instead), so for these codes the claim rests on the pattern alone. That is strong but it is not evidence about THAT car, which the owner's rule requires. Not refuted: no counterexample exists, because nothing can check these cars.",
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
+      "sha256": "482e38323222325d25684a773ad4d14f60bb2298c7d54f883bd753ba19d75ca7",
+      "result": "Confirmed (OCR p.2-3): MY1987 Accord/Prelude construction table, character 7 'Body type and Transmission representation' 1-6 exactly as cited; JHMCA552 5M, JHMCA562 4A, JHMBA314 Si 5M, JHMBA324 Si 4A."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+      "sha256": "0530427c89e5c549d5ca2f43dd67afc8c944fd640887f3e91139b0a1a29e7a3f",
+      "result": "Confirmed (OCR p.2-5): MY1986 Acura Integra character 7 'Body type and Transmission representation' 3/4 = 3-door 5MT/4AT, 7/8 = 5-door 5MT/4AT (DA334 M5, DA344 L4, DA174 M5, DA184 L4); same letter re-issues the 1986 Honda table (5/6/7, AR652 Civic Wagon 4WD 5M+SL, VN552 Wagovan 5M). Covers only the Integra, not the 1986 Legend (Legend codes are checked against vPIC only)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+      "sha256": "3b776676898cbb3750f45c7b67e553174c8a5a572a7e21aa0c5762745543a0f0",
+      "result": "Confirmed (text layer): MY2010 model-code tables, e.g. FA1E2 Civic DX 5MT / FA1F2 5AT, FA5E5 Si 6MT, FA3F2 Hybrid CVT, FA4F5 GX 5AT, FG1A2/FG1B2 coupe 5MT/5AT, FG2A5 Si 6MT, YH2G7 Element 4WD EX 5MT / YH1H3 5AT, UA9E5 TL SH-AWD 6MT / UA9F5 5AT, RE3H3 CR-V 5AT, RL3H2 Odyssey 5AT, YF4H2 Pilot 5AT, YD2H2 MDX 6AT. The filing defines no generic character-7 table: the A-H pairing is read off the code lists."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 9,
+     "of_which_lot": 3,
+     "of_which_departed": 6,
+     "vpic_checkable": 0,
+     "vpic_agree": 0,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "no_epa_match": 9
+     },
+     "single_gearbox_model_facts": {},
+     "single_gearbox_fact_conflicts": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots."
+    },
+    "outcome": "HELD (status hold_code_not_filed): not refuted, but no filing, vPIC decode or other source covers these exact codes."
+   }
   },
   {
    "id": "honda_acura_vin7_code_not_in_vpic_automatic",
    "make": "Honda+Acura",
    "claim": "automatic",
-   "status": "keep_low_sample",
+   "status": "hold_code_not_filed",
    "scope": {
     "make": "Honda+Acura",
     "models": "Honda/Acura VINs (mostly Canada-market cars at Canadian yards) whose model code is not in NHTSA's vPIC data",
@@ -1577,7 +2206,6 @@
      "2HN",
      "2HU",
      "3CZ",
-     "3HD",
      "3HG",
      "5FN",
      "5FP",
@@ -1601,7 +2229,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -1628,7 +2256,7 @@
     },
     "also_required": "the VIN's vPIC decode has no Model AND no lot car of that model year with the same characters 4-7 decodes to a model, i.e. Honda never filed this code with NHTSA (on the lots: Canada-market Acura EL/CSX and a few Canada-only Civic codes)"
    },
-   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS|19U|19V|2HH|2HN|2HU|3HD|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[2468BDFH][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y1-9]",
+   "vin_regex": "^(19X|1HG|2HG|2HJ|2HK|3CZ|3HG|5FN|5FP|5J6|5J7|5KB|7FA|JH1|JHL|JHM|SHH|SHS|19U|19V|2HH|2HN|2HU|5FR|5FS|5J0|5J8|5KC|JH4)[A-HJ-NPR-Z0-9]{3}[2468BDFH][A-HJ-NPR-Z0-9]{2}[A-HJ-NPR-TV-Y1-9]",
    "citations": [
     {
      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
@@ -1647,11 +2275,11 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 28,
-    "checkable_ground_truth": 2,
-    "agree": 2,
+    "in_scope_lot_cars": 25,
+    "checkable_ground_truth": 0,
+    "agree": 0,
     "disagree": 0,
-    "agreement": 1.0,
+    "agreement": null,
     "checkable_positives_manual": null,
     "uniform_cell_lines_excluded": 0,
     "uniform_cell_lines_that_would_agree": 0,
@@ -1659,40 +2287,80 @@
     "disagree_examples": [],
     "epa_crosscheck": {
      "no_epa_match": 23,
-     "consistent": 5
+     "consistent": 2
     },
     "epa_conflict_examples": [],
     "published_label_contradicts_rule": 0,
     "published_label_contradicts_examples": [],
-    "cars_without_trans_info": 26,
+    "cars_without_trans_info": 25,
     "cars_without_trans_info_by_reason": {
-     "vpic_trans_blank": 24,
-     "not_in_cache_backup": 2
+     "vpic_trans_blank": 25
     },
     "codes_seen": {
      "char7=6: 4-door sedan, automatic (incl. CVT)": 22,
-     "char7=F: 4-door, automatic/CVT/DCT": 4,
-     "char7=2: 2-door, automatic": 1,
-     "char7=H: 5-door, automatic/CVT": 1
+     "char7=F: 4-door, automatic/CVT/DCT": 3
     },
     "top_models": {
-     "EL": 13,
+     "EL": 14,
      "CSX": 9,
-     "Accord": 2,
-     "Civic Del Sol": 1,
-     "Integra": 1,
-     "TSX": 1,
-     "Pilot": 1
+     "Accord": 1,
+     "TSX": 1
     },
     "years_seen": [
-     1994,
-     2017
+     1997,
+     2013
     ],
     "feed_make_differs_from_wmi_brand": 0
    },
    "newly_confirmed_manual": 0,
-   "newly_labelled_non_manual": 26,
-   "caveat": "Honda's construction-of-VIN pages define character 7 as body type + transmission for every model code, and Honda of Canada Mfg. (2HG/2HH/2HK/2HN) is one of the filers, but no US filing lists these exact Canada-market codes and vPIC returns no decode for them, so no ground truth can check them. Kept as low_sample on the strength of Honda's own scheme; the hub may prefer to hold these."
+   "newly_labelled_non_manual": 25,
+   "caveat": "Honda's construction-of-VIN pages define character 7 as body type + transmission for every model code, and Honda of Canada Mfg. (2HG/2HH/2HK/2HN) is one of the filers, but no US filing lists these exact Canada-market codes and vPIC returns no decode for them, so no ground truth can check them.",
+   "hold_reason": "Verification 2026-11-05: HELD, not confirmed. Once 'documented' is computed over the whole decode cache, every manual-claimed car left here (lot and departed) is a Canada-only Acura EL (line MB4 1997-2000, ES3 2001-05) or CSX (FD5/FD6 2006-11); the automatic side also holds two odd US VINs (2010 Accord 'CP8F', 2013 TSX 'C42F', probably mistyped VINs that happen to pass the check digit). An EL/CSX line code (characters 4-6) is in no Honda filing and vPIC rejects the VIN today (error 5/14, 'VIN has errors in few positions', checked live for 2HHES35863H001201 and 2HHFD65698H201026). Honda's filings stopped stating a generic character-7 table after the late 1980s (the 1997 and 2003 filings list each 2nd-section code with its own transmission instead), so for these codes the claim rests on the pattern alone. That is strong but it is not evidence about THAT car, which the owner's rule requires. Not refuted: no counterexample exists, because nothing can check these cars.",
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/1d1d246e-7f53-42d7-92d9-8296b5acb4e9",
+      "sha256": "482e38323222325d25684a773ad4d14f60bb2298c7d54f883bd753ba19d75ca7",
+      "result": "Confirmed (OCR p.2-3): MY1987 Accord/Prelude construction table, character 7 'Body type and Transmission representation' 1-6 exactly as cited; JHMCA552 5M, JHMCA562 4A, JHMBA314 Si 5M, JHMBA324 Si 4A."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/594deacc-cedf-43c3-afc4-b371a3562bca",
+      "sha256": "0530427c89e5c549d5ca2f43dd67afc8c944fd640887f3e91139b0a1a29e7a3f",
+      "result": "Confirmed (OCR p.2-5): MY1986 Acura Integra character 7 'Body type and Transmission representation' 3/4 = 3-door 5MT/4AT, 7/8 = 5-door 5MT/4AT (DA334 M5, DA344 L4, DA174 M5, DA184 L4); same letter re-issues the 1986 Honda table (5/6/7, AR652 Civic Wagon 4WD 5M+SL, VN552 Wagovan 5M). Covers only the Integra, not the 1986 Legend (Legend codes are checked against vPIC only)."
+     },
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/7bdb4344-93a5-4415-ab31-11864e261300",
+      "sha256": "3b776676898cbb3750f45c7b67e553174c8a5a572a7e21aa0c5762745543a0f0",
+      "result": "Confirmed (text layer): MY2010 model-code tables, e.g. FA1E2 Civic DX 5MT / FA1F2 5AT, FA5E5 Si 6MT, FA3F2 Hybrid CVT, FA4F5 GX 5AT, FG1A2/FG1B2 coupe 5MT/5AT, FG2A5 Si 6MT, YH2G7 Element 4WD EX 5MT / YH1H3 5AT, UA9E5 TL SH-AWD 6MT / UA9F5 5AT, RE3H3 CR-V 5AT, RL3H2 Odyssey 5AT, YF4H2 Pilot 5AT, YD2H2 MDX 6AT. The filing defines no generic character-7 table: the A-H pairing is read off the code lists."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 34,
+     "of_which_lot": 25,
+     "of_which_departed": 9,
+     "vpic_checkable": 0,
+     "vpic_agree": 0,
+     "vpic_disagree": 0,
+     "vpic_disagree_cells": {},
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 2,
+      "no_epa_match": 32
+     },
+     "single_gearbox_model_facts": {},
+     "single_gearbox_fact_conflicts": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots."
+    },
+    "outcome": "HELD (status hold_code_not_filed): not refuted, but no filing, vPIC decode or other source covers these exact codes."
+   }
   },
   {
    "id": "honda_accord_1997_vin7_manual",
@@ -1730,7 +2398,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -1759,11 +2427,11 @@
    ],
    "validation": {
     "in_scope_lot_cars": 13,
-    "checkable_ground_truth": 13,
-    "agree": 3,
+    "checkable_ground_truth": 12,
+    "agree": 2,
     "disagree": 10,
-    "agreement": 0.23077,
-    "checkable_positives_manual": 3,
+    "agreement": 0.16667,
+    "checkable_positives_manual": 2,
     "uniform_cell_lines_excluded": 0,
     "uniform_cell_lines_that_would_agree": 0,
     "ground_truth_speeds_only_excluded": 0,
@@ -1825,6 +2493,14 @@
       "source": "vin"
      },
      {
+      "vin": "1HGCD5550VA248528",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Automatic",
+      "vpic_trim": "EX",
+      "source": "vin"
+     },
+     {
       "vin": "1HGCD5536VA225575",
       "year": 1997,
       "model": "Accord",
@@ -1838,14 +2514,6 @@
       "model": "Accord",
       "ground_truth": "Automatic",
       "vpic_trim": "LX/LX V-6",
-      "source": "vin"
-     },
-     {
-      "vin": "1HGCD5550VA248528",
-      "year": 1997,
-      "model": "Accord",
-      "ground_truth": "Automatic",
-      "vpic_trim": "EX",
       "source": "vin"
      }
     ],
@@ -1905,7 +2573,7 @@
       "src": "vin"
      },
      {
-      "vin": "1HGCD5536VA225575",
+      "vin": "1HGCD5550VA248528",
       "year": 1997,
       "model": "Accord",
       "published": "Automatic",
@@ -1916,7 +2584,8 @@
     "cars_without_trans_info_by_reason": {},
     "codes_seen": {
      "char7=5: 4-door sedan, manual": 10,
-     "char7=1: 2-door, manual": 3
+     "char7=1: 2-door, manual": 2,
+     "char7=7: 5-door / wagon / SUV / van, manual": 1
     },
     "top_models": {
      "Accord": 13
@@ -1934,6 +2603,56 @@
     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f)",
     "says": "1997 Honda Accord 2.7L 6-cyl: Automatic 4-spd only (id 13472); 2.2L: Automatic 4-spd and Manual 5-spd (ids 13468-13471)"
+   },
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+      "sha256": "44e49bfa728ddc0ac464c666dc1877c14e8e90cd35320cd9b75d8a7ee3cf33db",
+      "result": "Confirmed (OCR p.2-12): MY1997 Civic (EJ65x/EJ85x sedan 5MT, EJ66x/EJ86x 4AT, EJ61x/EJ81x coupe 5MT, EJ62x/EJ82x 4AT, EJ71x HX 5MT, EJ72x HX CVT, EJ63x/EJ64x hatchback 5MT/4AT), MY1997 Accord (CD71x coupe 5MT, CD72x 4AT, CD55x sedan 5MT, CD56x 4AT, CE663/664/665/667 V6 sedan 4AT only, CE172 wagon 5MT, CE182/183/189 4AT), MY1997 3.0CL YA224/YA225 4AT. Page 7's header misprints 'Model year: 1996' but the page is the 1997 Accord table (VIN examples carry year code V). This filing no longer prints a generic character-7 table; each 2nd-section code is listed with its own transmission."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 28,
+     "of_which_lot": 13,
+     "of_which_departed": 15,
+     "vpic_checkable": 20,
+     "vpic_agree": 4,
+     "vpic_disagree": 16,
+     "vpic_disagree_cells": {
+      "1997 ACCORD CD55": 16
+     },
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 28
+     },
+     "single_gearbox_model_facts": {},
+     "single_gearbox_fact_conflicts": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots."
+    },
+    "cache_1996_vs_1997_by_code": {
+     "1996 CD55 vPIC=5-spd Manual/Standard": 21,
+     "1996 CD56 vPIC=4-spd Automatic": 114,
+     "1996 CD71 vPIC=5-spd Manual/Standard": 6,
+     "1996 CD72 vPIC=4-spd Automatic": 12,
+     "1996 CE18 vPIC=4-spd Automatic": 6,
+     "1996 CE66 vPIC=4-spd Automatic": 9,
+     "1997 CD55 vPIC=Automatic": 16,
+     "1997 CD56 vPIC=Manual/Standard": 120,
+     "1997 CD71 vPIC=Manual/Standard": 3,
+     "1997 CE17 vPIC=Manual/Standard": 1,
+     "1997 CE18 vPIC=Automatic": 7,
+     "1997 CE66 vPIC=Manual/Standard": 19
+    },
+    "outcome": "SUPPORTED, status unchanged (vpic_conflict_hub_decision). Honda's 1997 filing and EPA (V6 automatic only) agree with the rule; vPIC's 1997 sedan pattern is inverted (CD55x 'Automatic', CD56x and V6 CE66x 'Manual/Standard', with no speed count), while 1996 CD55x/CD56x/CE66x and 1997 coupes/wagons decode correctly. Applying it changes published labels, so the hub decides."
    }
   },
   {
@@ -1972,7 +2691,7 @@
      "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
      "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
      "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*"
+     "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)"
     ]
    },
    "vin_condition": {
@@ -2000,11 +2719,11 @@
     }
    ],
    "validation": {
-    "in_scope_lot_cars": 137,
-    "checkable_ground_truth": 120,
+    "in_scope_lot_cars": 133,
+    "checkable_ground_truth": 116,
     "agree": 6,
-    "disagree": 114,
-    "agreement": 0.05,
+    "disagree": 110,
+    "agreement": 0.05172,
     "checkable_positives_manual": null,
     "uniform_cell_lines_excluded": 0,
     "uniform_cell_lines_that_would_agree": 0,
@@ -2035,6 +2754,14 @@
       "source": "vin"
      },
      {
+      "vin": "1HGCD5682VA183724",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "Value Package",
+      "source": "vin"
+     },
+     {
       "vin": "1HGCD5638VA262089",
       "year": 1997,
       "model": "Accord",
@@ -2044,6 +2771,14 @@
      },
      {
       "vin": "1HGCD563XVA261641",
+      "year": 1997,
+      "model": "Accord",
+      "ground_truth": "Manual/Standard",
+      "vpic_trim": "LX/LX V-6",
+      "source": "vin"
+     },
+     {
+      "vin": "1HGCD5632VA020057",
       "year": 1997,
       "model": "Accord",
       "ground_truth": "Manual/Standard",
@@ -2068,22 +2803,6 @@
      },
      {
       "vin": "1HGCE6675VA007597",
-      "year": 1997,
-      "model": "Accord",
-      "ground_truth": "Manual/Standard",
-      "vpic_trim": "EX V-6 w/Lea",
-      "source": "vin"
-     },
-     {
-      "vin": "1HGCD5607VA127093",
-      "year": 1997,
-      "model": "Accord",
-      "ground_truth": "Manual/Standard",
-      "vpic_trim": "SE",
-      "source": "vin"
-     },
-     {
-      "vin": "1HGCE6670VA018815",
       "year": 1997,
       "model": "Accord",
       "ground_truth": "Manual/Standard",
@@ -2108,10 +2827,10 @@
      }
     ],
     "epa_crosscheck": {
-     "consistent": 137
+     "consistent": 133
     },
     "epa_conflict_examples": [],
-    "published_label_contradicts_rule": 114,
+    "published_label_contradicts_rule": 110,
     "published_label_contradicts_examples": [
      {
       "vin": "1HGCD5608VA139091",
@@ -2135,6 +2854,13 @@
       "src": "vin"
      },
      {
+      "vin": "1HGCD5682VA183724",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     },
+     {
       "vin": "1HGCD5638VA262089",
       "year": 1997,
       "model": "Accord",
@@ -2149,21 +2875,14 @@
       "src": "vin"
      },
      {
+      "vin": "1HGCD5632VA020057",
+      "year": 1997,
+      "model": "Accord",
+      "published": "Manual/Standard",
+      "src": "vin"
+     },
+     {
       "vin": "1HGCD5651VA099870",
-      "year": 1997,
-      "model": "Accord",
-      "published": "Manual/Standard",
-      "src": "vin"
-     },
-     {
-      "vin": "1HGCD5632VA220677",
-      "year": 1997,
-      "model": "Accord",
-      "published": "Manual/Standard",
-      "src": "vin"
-     },
-     {
-      "vin": "1HGCE6675VA007597",
       "year": 1997,
       "model": "Accord",
       "published": "Manual/Standard",
@@ -2176,12 +2895,12 @@
      "not_in_cache_backup": 2
     },
     "codes_seen": {
-     "char7=6: 4-door sedan, automatic (incl. CVT)": 116,
+     "char7=6: 4-door sedan, automatic (incl. CVT)": 112,
      "char7=2: 2-door, automatic": 15,
      "char7=8: 5-door / wagon / SUV / van, automatic": 6
     },
     "top_models": {
-     "Accord": 135,
+     "Accord": 131,
      "Accord Wagon": 2
     },
     "years_seen": [
@@ -2197,6 +2916,57 @@
     "url": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv.zip",
     "doc": "EPA fueleconomy.gov vehicles.csv (Last-Modified 2026-09-29, sha256 33d32caa...b22f)",
     "says": "1997 Honda Accord 2.7L 6-cyl: Automatic 4-spd only (id 13472); 2.2L: Automatic 4-spd and Manual 5-spd (ids 13468-13471)"
+   },
+   "verified": {
+    "date": "2026-11-05",
+    "by": "adversarial verification (vin_rules_0_verify.py)",
+    "citations_rechecked": [
+     {
+      "url": "https://vpic.nhtsa.dot.gov/mid/home/displayfile/27ea75b4-8c79-4a9c-9b66-029270dbe9a5",
+      "sha256": "44e49bfa728ddc0ac464c666dc1877c14e8e90cd35320cd9b75d8a7ee3cf33db",
+      "result": "Confirmed (OCR p.2-12): MY1997 Civic (EJ65x/EJ85x sedan 5MT, EJ66x/EJ86x 4AT, EJ61x/EJ81x coupe 5MT, EJ62x/EJ82x 4AT, EJ71x HX 5MT, EJ72x HX CVT, EJ63x/EJ64x hatchback 5MT/4AT), MY1997 Accord (CD71x coupe 5MT, CD72x 4AT, CD55x sedan 5MT, CD56x 4AT, CE663/664/665/667 V6 sedan 4AT only, CE172 wagon 5MT, CE182/183/189 4AT), MY1997 3.0CL YA224/YA225 4AT. Page 7's header misprints 'Model year: 1996' but the page is the 1997 Accord table (VIN examples carry year code V). This filing no longer prints a generic character-7 table; each 2nd-section code is listed with its own transmission."
+     }
+    ],
+    "counterexample_search": {
+     "vins_in_scope_whole_cache": 236,
+     "of_which_lot": 133,
+     "of_which_departed": 103,
+     "vpic_checkable": 146,
+     "vpic_agree": 7,
+     "vpic_disagree": 139,
+     "vpic_disagree_cells": {
+      "1997 ACCORD CD56": 120,
+      "1997 ACCORD CE66": 19
+     },
+     "vpic_default_cell_vins": 0,
+     "vpic_default_cell_disagree": 0,
+     "epa_whole_cache": {
+      "consistent": 236
+     },
+     "single_gearbox_model_facts": {},
+     "single_gearbox_fact_conflicts": []
+    },
+    "scope_edges": {
+     "wmi": "Every WMI in the rules is in Honda's own WMI tables (2003 TL, 2011 CR-Z, 2024 Type R filings). 3HD, which no filing lists and no cached VIN carries, was removed from ACURA_WMI. Isuzu-built Honda Passport 4S6 (75 lot cars) and Acura SLX JAE (3) stay out.",
+     "era_boundary": "Whole cache: 0 VINs resolve to MY2010+ with a digit in character 7 and 0 to MY1987-2009 with a letter; both kinds are left unruled.",
+     "canada_mexico_uk": "Canada- (2HG/2HH/2HJ/2HK/2HN), Mexico- (3HG/3CZ) and UK-built (SHH/SHS) cars use the same model-code tables in the filings (the 1997 filing lists 2HGEJ... rows beside 1HGEJ...). A Canada-market car whose characters 4-7 are a filed code for that year but whose grade (character 8) is Canada-only is accepted; a car whose line code itself is unfiled is held (honda_acura_vin7_code_not_in_vpic_*).",
+     "name_mapping": "The brand comes from the WMI, not the feed make; no feed-make mismatches among Honda/Acura WMIs on the lots."
+    },
+    "cache_1996_vs_1997_by_code": {
+     "1996 CD55 vPIC=5-spd Manual/Standard": 21,
+     "1996 CD56 vPIC=4-spd Automatic": 114,
+     "1996 CD71 vPIC=5-spd Manual/Standard": 6,
+     "1996 CD72 vPIC=4-spd Automatic": 12,
+     "1996 CE18 vPIC=4-spd Automatic": 6,
+     "1996 CE66 vPIC=4-spd Automatic": 9,
+     "1997 CD55 vPIC=Automatic": 16,
+     "1997 CD56 vPIC=Manual/Standard": 120,
+     "1997 CD71 vPIC=Manual/Standard": 3,
+     "1997 CE17 vPIC=Manual/Standard": 1,
+     "1997 CE18 vPIC=Automatic": 7,
+     "1997 CE66 vPIC=Manual/Standard": 19
+    },
+    "outcome": "SUPPORTED, status unchanged (vpic_conflict_hub_decision). Honda's 1997 filing and EPA (V6 automatic only) agree with the rule; vPIC's 1997 sedan pattern is inverted (CD55x 'Automatic', CD56x and V6 CE66x 'Manual/Standard', with no speed count), while 1996 CD55x/CD56x/CE66x and 1997 coupes/wagons decode correctly. Applying it changes published labels, so the hub decides."
    }
   }
  ],
@@ -2257,15 +3027,92 @@
    "yard": "Pick-n-Pull - Chico"
   },
   {
-   "id": "7962947",
-   "vin": "2HHFD55737H201573",
+   "id": "7979037",
+   "vin": "JHMGD374X7S005474",
    "year": 2007,
-   "make": "Acura",
-   "model": "CSX",
-   "rule": "honda_acura_vin7_code_not_in_vpic_manual",
-   "code": "char7=5: 4-door sedan, manual",
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick-n-Pull - Newark"
+  },
+  {
+   "id": "7936890",
+   "vin": "JHMGD37468S063454",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick-n-Pull - Columbus"
+  },
+  {
+   "id": "7996751",
+   "vin": "JHMGD37478S054875",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick-n-Pull - Fairfield"
+  },
+  {
+   "id": "7964763",
+   "vin": "JHMGD37688S010580",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick-n-Pull - Fort Worth"
+  },
+  {
+   "id": "7988829",
+   "vin": "JHMBB1176PC002797",
+   "year": 1993,
+   "make": "Honda",
+   "model": "Prelude",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=1: 2-door, manual",
    "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Edmonton"
+   "yard": "Pick-n-Pull - Fort Worth"
+  },
+  {
+   "id": "7996574",
+   "vin": "JHMGD37638S054941",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick-n-Pull - Rancho Cordova"
+  },
+  {
+   "id": "7993945",
+   "vin": "JHMED8363LS022882",
+   "year": 1990,
+   "make": "Honda",
+   "model": "Civic",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=3: 2-door hatchback / 3-door, manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Stockton"
+  },
+  {
+   "id": "7986572",
+   "vin": "JHMGD37647S804474",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
   },
   {
    "id": "7989422",
@@ -2275,6 +3122,17 @@
    "model": "Civic",
    "rule": "honda_vin7_digit_1987_2009_manual",
    "code": "char7=1: 2-door, manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
+  },
+  {
+   "id": "8000388",
+   "vin": "2HGES15842H907239",
+   "year": 2002,
+   "make": "Honda",
+   "model": "Civic",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=5: 4-door sedan, manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
   },
@@ -2290,6 +3148,17 @@
    "yard": "Pick-n-Pull - Calgary (Barlow Trail)"
   },
   {
+   "id": "7949644",
+   "vin": "JHMGD37468S035301",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick-n-Pull - Windsor"
+  },
+  {
    "id": "7942339",
    "vin": "2HGFA1E49AH024840",
    "year": 2010,
@@ -2298,6 +3167,17 @@
    "rule": "honda_vin7_letter_2010_on_manual",
    "code": "char7=E: 4-door, manual",
    "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick-n-Pull - Kelowna"
+  },
+  {
+   "id": "7921330",
+   "vin": "JHMGD37457S000246",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
    "yard": "Pick-n-Pull - Kelowna"
   },
   {
@@ -2321,17 +3201,6 @@
    "code": "char7=5: 4-door sedan, manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Kelowna"
-  },
-  {
-   "id": "7945356",
-   "vin": "2HGFA1E45AH046592",
-   "year": 2010,
-   "make": "Honda",
-   "model": "Civic",
-   "rule": "honda_vin7_letter_2010_on_manual",
-   "code": "char7=E: 4-door, manual",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Calgary (52 St)"
   },
   {
    "id": "7960176",
@@ -2361,21 +3230,21 @@
    "year": 2004,
    "make": "Honda",
    "model": "Accord",
-   "rule": "honda_acura_vin7_code_not_in_vpic_manual",
+   "rule": "honda_vin7_digit_1987_2009_manual",
    "code": "char7=1: 2-door, manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Calgary (52 St)"
   },
   {
-   "id": "7993945",
-   "vin": "JHMED8363LS022882",
-   "year": 1990,
+   "id": "7982463",
+   "vin": "JHMGD37697S800629",
+   "year": 2007,
    "make": "Honda",
-   "model": "Civic",
+   "model": "Fit",
    "rule": "honda_vin7_digit_1987_2009_manual",
-   "code": "char7=3: 2-door hatchback / 3-door, manual",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Pick-n-Pull - Stockton"
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick-n-Pull - Edmonton"
   },
   {
    "id": "7967390",
@@ -2383,10 +3252,43 @@
    "year": 1999,
    "make": "Honda",
    "model": "Civic",
-   "rule": "honda_acura_vin7_code_not_in_vpic_manual",
+   "rule": "honda_vin7_digit_1987_2009_manual",
    "code": "char7=3: 2-door hatchback / 3-door, manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-n-Pull - Edmonton"
+  },
+  {
+   "id": "7927640",
+   "vin": "JHMAG5324GS802252",
+   "year": 1986,
+   "make": "Honda",
+   "model": "Civic",
+   "rule": "honda_vin6_1984_1986_manual",
+   "code": "char6=5: 5-speed manual",
+   "why_no_trans": "other",
+   "yard": "Pick-n-Pull - Edmonton"
+  },
+  {
+   "id": "1265-168624",
+   "vin": "JHMGD37687S056702",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick Your Part - Anaheim"
+  },
+  {
+   "id": "1260-85648",
+   "vin": "JHMGD37627S035585",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick Your Part - Bakersfield"
   },
   {
    "id": "1285-47785",
@@ -2400,6 +3302,28 @@
    "yard": "Pick Your Part - Fontana"
   },
   {
+   "id": "1291-163556",
+   "vin": "JHMGD37667S032155",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick Your Part - San Bernardino"
+  },
+  {
+   "id": "1291-163594",
+   "vin": "JHMAG4314GS004643",
+   "year": 1986,
+   "make": "Honda",
+   "model": "Civic",
+   "rule": "honda_vin6_1984_1986_manual",
+   "code": "char6=4: 4-speed manual",
+   "why_no_trans": "other",
+   "yard": "Pick Your Part - San Bernardino"
+  },
+  {
    "id": "1282-199095",
    "vin": "JHMED8354LS007881",
    "year": 1990,
@@ -2408,6 +3332,17 @@
    "rule": "honda_vin7_digit_1987_2009_manual",
    "code": "char7=3: 2-door hatchback / 3-door, manual",
    "why_no_trans": "vpic_trans_blank",
+   "yard": "Pick Your Part - Santa Fe Springs"
+  },
+  {
+   "id": "1282-199119",
+   "vin": "JHMGD37638S008848",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
    "yard": "Pick Your Part - Santa Fe Springs"
   },
   {
@@ -2422,6 +3357,72 @@
    "yard": "Pick Your Part - Tampa"
   },
   {
+   "id": "1163-48246",
+   "vin": "JHMGD37458S056494",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick Your Part - Savannah"
+  },
+  {
+   "id": "1250-53312",
+   "vin": "JHMGD37438S072015",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick Your Part - Rockford"
+  },
+  {
+   "id": "1250-52309",
+   "vin": "JHMGD37447S003896",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick Your Part - Rockford"
+  },
+  {
+   "id": "1217-65850",
+   "vin": "JHMGD37687S031962",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick Your Part - Chattanooga"
+  },
+  {
+   "id": "pap-10-1096224-1",
+   "vin": "JHMGD37467S044465",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pull-A-Part - Knoxville"
+  },
+  {
+   "id": "pap-11-1097880-1",
+   "vin": "JHMGD37688S034975",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pull-A-Part - Cleveland West"
+  },
+  {
    "id": "pap-27-1050654-1",
    "vin": "JHMBB1177PC003960",
    "year": 1993,
@@ -2431,6 +3432,28 @@
    "code": "char7=1: 2-door, manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pull-A-Part - Tucson"
+  },
+  {
+   "id": "pap-29-1088774-1",
+   "vin": "JHMAH5333GS012656",
+   "year": 1986,
+   "make": "Honda",
+   "model": "Civic",
+   "rule": "honda_vin6_1984_1986_manual",
+   "code": "char6=5: 5-speed manual",
+   "why_no_trans": "other",
+   "yard": "Pull-A-Part - El Paso"
+  },
+  {
+   "id": "pap-36-1027705-2",
+   "vin": "JHMGD37658S022248",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pull-A-Part - Albuquerque"
   },
   {
    "id": "pap-37-1021870-1",
@@ -2444,6 +3467,28 @@
    "yard": "Pull-A-Part - Phoenix"
   },
   {
+   "id": "pap-38-1027632-7",
+   "vin": "JHMGD37478S060059",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pull-A-Part - Colorado Springs"
+  },
+  {
+   "id": "pap-39-1027595-2",
+   "vin": "JHMGD37637S063959",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pull-A-Part - Aurora"
+  },
+  {
    "id": "wap-AWAP083208",
    "vin": "2HGEJ6519YH904770",
    "year": 2000,
@@ -2453,6 +3498,105 @@
    "code": "char7=5: 4-door sedan, manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Wrench-A-Part - Austin"
+  },
+  {
+   "id": "wap-AWAP084549",
+   "vin": "JHMGD37658S004199",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Wrench-A-Part - Austin"
+  },
+  {
+   "id": "fenix-203021766",
+   "vin": "JHMGD37658S033525",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Fenix U-Pull - Binghamton"
+  },
+  {
+   "id": "fenix-203021882",
+   "vin": "JHMGD37628S028377",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Fenix U-Pull - Binghamton"
+  },
+  {
+   "id": "fenix-204014794",
+   "vin": "JHMGD37677S038630",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Fenix U-Pull - Elmira"
+  },
+  {
+   "id": "nvpap-h064876",
+   "vin": "JHMED9369LS009849",
+   "year": 1990,
+   "make": "Honda",
+   "model": "Civic",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=3: 2-door hatchback / 3-door, manual",
+   "why_no_trans": "vpic_trans_blank",
+   "yard": "Nevada Pic-A-Part - Henderson"
+  },
+  {
+   "id": "vinplus-usauto-stk187647",
+   "vin": "JHMGD37408S004187",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "US Auto Supply - Sterling Heights"
+  },
+  {
+   "id": "gopullit-atl033909",
+   "vin": "JHMGD37628S048127",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Go Pull-It - Atlanta East"
+  },
+  {
+   "id": "gopullit-atl034559",
+   "vin": "JHMGD37658S011024",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Go Pull-It - Atlanta East"
+  },
+  {
+   "id": "gopullit-tal004572",
+   "vin": "JHMGD37407S000901",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Go Pull-It - Tallahassee"
   },
   {
    "id": "chesterfield-000000084947",
@@ -2466,6 +3610,17 @@
    "yard": "Chesterfield Auto Parts - Richmond"
   },
   {
+   "id": "papva-pap171822",
+   "vin": "JHMGD37487S043432",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Pick-A-Part VA - Fredericksburg"
+  },
+  {
    "id": "papva-stk125836",
    "vin": "JHMBA8149PC000110",
    "year": 1993,
@@ -2475,6 +3630,61 @@
    "code": "char7=1: 2-door, manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "Pick-A-Part VA - Stafford"
+  },
+  {
+   "id": "ezpullnpay-decatur-stk003549",
+   "vin": "JHMAF5338GS049692",
+   "year": 1986,
+   "make": "Honda",
+   "model": "CRX",
+   "rule": "honda_vin6_1984_1986_manual",
+   "code": "char6=5: 5-speed manual",
+   "why_no_trans": "other",
+   "yard": "EZ Pull N Pay - Decatur"
+  },
+  {
+   "id": "autopartsupull-shelby-suf03502",
+   "vin": "JHMGD37618S000070",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Auto Parts U Pull - Shelby"
+  },
+  {
+   "id": "upullpocatello-pocatello-stk013585",
+   "vin": "JHMAK5430GS038258",
+   "year": 1986,
+   "make": "Honda",
+   "model": "Civic",
+   "rule": "honda_vin6_1984_1986_manual",
+   "code": "char6=5: 5-speed manual",
+   "why_no_trans": "other",
+   "yard": "U Pull Auto Parts - Pocatello"
+  },
+  {
+   "id": "cashncarry-savannah-stk170560",
+   "vin": "JHMGD37638S069620",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Cash-N-Carry Pull-Your-Part - Savannah"
+  },
+  {
+   "id": "grandpajohns-greenbay-stk013750",
+   "vin": "JHMGD37668S021514",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Grandpa John's Pick & Pull - Green Bay"
   },
   {
    "id": "upullitwa-pasco-2l2706",
@@ -2581,7 +3791,7 @@
    "year": 2011,
    "make": "Honda",
    "model": "Civic",
-   "rule": "honda_acura_vin7_code_not_in_vpic_manual",
+   "rule": "honda_vin7_letter_2010_on_manual",
    "code": "char7=A: 2-door, manual",
    "why_no_trans": "not_in_cache_backup",
    "yard": "U-Pull-It Auto Parts - Pasco"
@@ -2785,6 +3995,17 @@
    "yard": "U-Pull-It Auto Parts - Kennewick"
   },
   {
+   "id": "weller-jhmgd37668s034957",
+   "vin": "JHMGD37668S034957",
+   "year": 2008,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "Weller Self Serve - Wyoming"
+  },
+  {
    "id": "ipullca-edm028975",
    "vin": "2HGFA15429H012119",
    "year": 2009,
@@ -2829,6 +4050,17 @@
    "yard": "iPull-uPull - Edmonton"
   },
   {
+   "id": "ipullca-edm028432",
+   "vin": "JHMGD37627S820298",
+   "year": 2007,
+   "make": "Honda",
+   "model": "Fit",
+   "rule": "honda_vin7_digit_1987_2009_manual",
+   "code": "char7=7: 5-door / wagon / SUV / van, manual",
+   "why_no_trans": "other",
+   "yard": "iPull-uPull - Edmonton"
+  },
+  {
    "id": "ipullca-edm028016",
    "vin": "2HGES15893H905617",
    "year": 2003,
@@ -2838,39 +4070,6 @@
    "code": "char7=5: 4-door sedan, manual",
    "why_no_trans": "vpic_trans_blank",
    "yard": "iPull-uPull - Edmonton"
-  },
-  {
-   "id": "ipullca-edm027934",
-   "vin": "JHMBB61701C801060",
-   "year": 2001,
-   "make": "Honda",
-   "model": "Prelude",
-   "rule": "honda_vin7_digit_1987_2009_manual",
-   "code": "char7=1: 2-door, manual",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "iPull-uPull - Edmonton"
-  },
-  {
-   "id": "ipullca-edm027898",
-   "vin": "2HGFA1E44BH008868",
-   "year": 2011,
-   "make": "Honda",
-   "model": "Civic",
-   "rule": "honda_vin7_letter_2010_on_manual",
-   "code": "char7=E: 4-door, manual",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "iPull-uPull - Edmonton"
-  },
-  {
-   "id": "nvpap-h064876",
-   "vin": "JHMED9369LS009849",
-   "year": 1990,
-   "make": "Honda",
-   "model": "Civic",
-   "rule": "honda_vin7_digit_1987_2009_manual",
-   "code": "char7=3: 2-door hatchback / 3-door, manual",
-   "why_no_trans": "vpic_trans_blank",
-   "yard": "Nevada Pic-A-Part - Henderson"
   }
  ],
  "vpic_conflicts": [
@@ -2883,10 +4082,11 @@
     "EPA ids 22860-22862, 24920-24922: Fit 1.5 Automatic 5-spd, Automatic (S5), Manual 5-spd"
    ],
    "effect_if_rule_applied": "Manual badge removed from GD38x Fits; GD37x Fits stay Manual, now on VIN evidence",
+   "already_handled_in_scraper": "Since commit b55e403 (2026-11-05 01:30 UTC) junkyard_scraper.py VPIC_TRANS_DEFAULT_CELLS drops vPIC's transmission for every 2007-2008 Fit (and 1986 Civic), so the published extras now show no transmission for these cars: the wrong Manual badges are gone, and the GD37x (5MT) Fits count as newly confirmable by honda_vin7_digit_1987_2009_manual.",
    "rule": "honda_vin7_digit_1987_2009_automatic / _manual",
    "lot_cars": {
-    "GD38_published_manual": 133,
-    "GD37_published_manual": 36
+    "GD38_published_manual": 0,
+    "GD37_published_manual": 0
    }
   },
   {
@@ -2900,8 +4100,8 @@
    "effect_if_rule_applied": "Manual badge removed from 1997 Accord automatics and V6s; added to the true 5MT sedans",
    "rule": "honda_accord_1997_vin7_manual / _automatic (status vpic_conflict_hub_decision)",
    "lot_cars": {
+    "honda_automatic__published_manual": 110,
     "honda_manual__published_non_manual": 10,
-    "honda_automatic__published_manual": 114,
     "honda_automatic__published_non_manual": 6,
     "honda_manual__published_manual": 3
    }
@@ -2917,5 +4117,108 @@
    "rule": "acura_vin7_digit_1986_2009_automatic"
   }
  ],
- "validation_method": "For each rule, every lot car in scope is matched by WMI, valid check digit, VIN model year and the character-6/7 value. 'checkable' = its ground_truth.jsonl line has class manual/automatic/cvt/amt/dct and uniformCell is empty (uniform-cell lines are vPIC model-level defaults and are counted separately as unlabelled). Agreement = same manual-vs-not-manual answer. All VIN-bearing ground truth comes from vPIC, which NHTSA builds from these same Honda filings, so agreement is partly circular; the EPA cross-check (does EPA list a transmission of the claimed kind for that year/make/model, narrowed to the vPIC displacement when known) is the independent check. 'newly_confirmed_manual' = in-scope cars whose published extras transmission is empty today."
+ "validation_method": "For each rule, every lot car in scope is matched by WMI, valid check digit, VIN model year and the character-6/7 value. 'checkable' = its ground_truth.jsonl line has class manual/automatic/cvt/amt/dct and uniformCell is empty (uniform-cell lines are vPIC model-level defaults and are counted separately as unlabelled). Agreement = same manual-vs-not-manual answer. All VIN-bearing ground truth comes from vPIC, which NHTSA builds from these same Honda filings, so agreement is partly circular; the EPA cross-check (does EPA list a transmission of the claimed kind for that year/make/model, narrowed to the vPIC displacement when known) is the independent check. 'newly_confirmed_manual' = in-scope cars whose published extras transmission is empty today.",
+ "verification": {
+  "date": "2026-11-05",
+  "script": "scraper/manual_detect/vin_rules_0_verify.py",
+  "changes_made": [
+   "honda_vin6_1984_1986_*: character-6 values narrowed to the ones each year's filing defines for that line group (OLD_T6_ALLOWED).",
+   "'documented' code test now uses the whole decode cache (lot + departed cars), so US-filed codes no other LOT car carried (1999 EJ63, 2004 CM81, 2011 FG1A ...) move from the not-in-vPIC bucket to the main rules.",
+   "honda_acura_vin7_code_not_in_vpic_*: status keep_low_sample -> hold_code_not_filed; the cars left there (Canada-only Acura EL/CSX) are no longer counted as newly confirmed.",
+   "acura_vin7_letter_2010_on_*: added the 2024 Acura Integra filing (DE4G7 6M/T) as a citation; Acura letter-era manual codes were otherwise cited only through the 2010 TL SH-AWD row.",
+   "vpic_conflicts: the 2007-08 Fit entry notes that the scraper already drops vPIC's Fit transmission (commit b55e403), so its 133 wrong Manual badges are gone and the GD37x Fits become newly confirmable."
+  ],
+  "live_vpic_spot_checks": [
+   {
+    "vin": "1HGCD5635VA070158",
+    "honda_code": "CD563 = 1997 Accord LX sedan 4AT",
+    "vpic_now": "1997 Accord, Manual/Standard (no speeds), trim 'LX/LX V-6'"
+   },
+   {
+    "vin": "1HGCE6646VA015018",
+    "honda_code": "CE664 = 1997 Accord LX V6 sedan 4AT (V6 was automatic only, EPA id 13472)",
+    "vpic_now": "Manual/Standard"
+   },
+   {
+    "vin": "1HGCD5532VA275471",
+    "honda_code": "CD553 = 1997 Accord LX sedan 5MT",
+    "vpic_now": "Automatic"
+   },
+   {
+    "vin": "1HGCD5650TA153804",
+    "honda_code": "CD565 (1996) = Accord EX 4AT",
+    "vpic_now": "Automatic 4 (1996 decodes correctly)"
+   },
+   {
+    "vin": "JH4DA3448KS017664",
+    "honda_code": "DA344 = 1989 Integra RS 3-door 4AT",
+    "vpic_now": "Manual/Standard 5"
+   },
+   {
+    "vin": "2HHES35863H001201",
+    "honda_code": "ES3 line not in any filing (Canada-only 2003 Acura EL)",
+    "vpic_now": "error 5/14, no model"
+   },
+   {
+    "vin": "2HHFD65698H201026",
+    "honda_code": "FD6 line not in any filing (Canada-only 2008 Acura CSX)",
+    "vpic_now": "error 5/14, no model"
+   },
+   {
+    "vin": "2HGFG1A64BH500063",
+    "honda_code": "FG1A (2010 filing: FG1A2 Civic DX coupe 5MT)",
+    "vpic_now": "2011 Civic LX, Manual/Standard 5 (a code the lot-only 'documented' test had missed)"
+   }
+  ],
+  "filings_scan_submission_years": [
+   "1987",
+   "1988",
+   "1989",
+   "1993",
+   "1995",
+   "1996",
+   "1997",
+   "1998",
+   "1999",
+   "2000",
+   "2001",
+   "2002",
+   "2003",
+   "2004",
+   "2005",
+   "2006",
+   "2008",
+   "2009",
+   "2010",
+   "2011",
+   "2014",
+   "2016",
+   "2017",
+   "2018",
+   "2019",
+   "2020",
+   "2021",
+   "2022",
+   "2023",
+   "2024",
+   "2025",
+   "2026"
+  ],
+  "filings_scan_totals": {
+   "rows": 894,
+   "agree": 894,
+   "digit_manual_agree": 194,
+   "digit_automatic_agree": 213,
+   "letter_manual_agree": 78,
+   "letter_automatic_agree": 409
+  },
+  "whole_cache_edges": {
+   "bad_check_digit": 134,
+   "no_rule": 18
+  },
+  "not_checkable": [
+   "No VIN-bearing listing-text ground truth exists for Honda/Acura (all 239 listing-sourced Honda/Acura lines have no VIN), so every VIN check other than EPA, the model facts and the filings is against vPIC.",
+   "The filings scan reads OCR of scanned filings; rows the parser cannot read are not counted, so it shows that what was read agrees, not that every code was read."
+  ]
+ }
 }

@@ -33,6 +33,9 @@ Inputs: docs/data/inventory_live.json, docs/data/vehicle_extras.json,
 Output: scraper/manual_detect/vin_rules_0.json
 
 Run:  python3 -I scraper/manual_detect/vin_rules_0.py
+      python3 -I scraper/manual_detect/vin_rules_0_verify.py   (adds the per-rule
+      "verified" blocks and the top-level "verification"; a bare rerun of this
+      script drops them)
 """
 
 import csv
@@ -60,8 +63,10 @@ MID = "https://vpic.nhtsa.dot.gov/mid/home/displayfile/"
 # SLX), whose VINs follow Isuzu's scheme, not Honda's.
 HONDA_WMI = {"JHM", "JHL", "JH1", "1HG", "5J6", "5J7", "5KB", "5FN", "5FP",
              "19X", "7FA", "2HG", "2HK", "2HJ", "3HG", "3CZ", "SHH", "SHS"}
+# (Verification 2026-11-05 removed "3HD": no Honda filing read lists it and
+# no VIN in the decode cache carries it.)
 ACURA_WMI = {"JH4", "19U", "5J8", "5J0", "5KC", "5FR", "5FS", "19V", "2HH",
-             "2HN", "2HU", "3HD"}
+             "2HN", "2HU"}
 
 # ---------------------------------------------------------------------------
 # Citations (all public PDFs in NHTSA's Manufacturer Information Database).
@@ -137,6 +142,11 @@ C = {
         "doc": "MID ORG5705, American Honda letter 2010-03-10, 2011 Honda CR-Z",
         "says": "ZF1C4/ZF1C6 = CR-Z 6MT 3DR HatchBack; ZF1D4/ZF1D6 = CR-Z CVT 3DR HatchBack (character 7 C = 3-door manual, D = 3-door automatic/CVT).",
     },
+    "mid_2023_01_17": {
+        "url": MID + "379f8460-941e-4589-8208-4874e9aaef24",
+        "doc": "MID ORG21374, American Honda letter 2023-01-17 (filed 2023-02-08), 2024 Acura Integra (added in verification 2026-11-05)",
+        "says": "2024MY ACURA INTEGRA Model Codes: DE4H2 INTEGRA / DE4H3 A-SPEC / DE4H6 A-SPEC TECH = CVT 5DR Hatchback; DE4G7 INTEGRA A-SPEC TECH = 6M/T 5DR Hatchback (Acura character 7 G = 5-door manual, H = 5-door automatic/CVT).",
+    },
     "mid_2023_07_21": {
         "url": MID + "51b13a22-cf03-40a9-84d5-3cda0375140f",
         "doc": "MID ORG21966, American Honda letter 2023-07-20, 2024 Honda Civic Type R",
@@ -195,6 +205,22 @@ OLD_LINES = {
     1985: {"AD", "AB", "AN", "AF", "AG", "AH", "AK"},              # mid_1984_06_20
     1986: {"AF", "AG", "AH", "AK", "BA", "AB", "BB", "AN", "AR", "VN"},  # mid_1985_06_12/07_11/11_19
 }
+# Verification 2026-11-05: each filing's construction table defines only some
+# character-6 values, so a value is accepted only for the (year, line) groups
+# whose own filing defines it (e.g. no "4" for a 1984 Accord, no "3" for 1986).
+#   1984 AD/AB/AN (mid_1983_09_12): 3 = 3AT, 5 = 5MT, 7 = 4AT
+#   1985 AD/AB/AN (mid_1984_06_20 p.2-3): 3, 5, 7
+#   1985 AF/AG/AH/AK (mid_1984_06_20 p.4-5): 3 = 3AT, 4 = 4MT, 5 = 5MT
+#   1986 AF/AG/AH/AK (mid_1985_06_12): 4 = 4MT, 5 = 5MT, 7 = 4AT
+#   1986 BA/AB/BB/AN/AR/VN (mid_1985_07_11, mid_1985_11_19): 5, 6 = 5MT + Super Low, 7
+OLD_T6_ALLOWED = {
+    (1984, "AD"): "357", (1984, "AB"): "357", (1984, "AN"): "357",
+    (1985, "AD"): "357", (1985, "AB"): "357", (1985, "AN"): "357",
+    (1985, "AF"): "345", (1985, "AG"): "345", (1985, "AH"): "345", (1985, "AK"): "345",
+    (1986, "AF"): "457", (1986, "AG"): "457", (1986, "AH"): "457", (1986, "AK"): "457",
+    (1986, "BA"): "567", (1986, "AB"): "567", (1986, "BB"): "567", (1986, "AN"): "567",
+    (1986, "AR"): "567", (1986, "VN"): "567",
+}
 OLD_T6 = {"3": ("automatic", "3-speed automatic"), "4": ("manual", "4-speed manual"),
           "5": ("manual", "5-speed manual"), "6": ("manual", "5-speed manual + Super Low"),
           "7": ("automatic", "4-speed automatic")}
@@ -214,7 +240,7 @@ def classify(vin: str, year: int) -> tuple[str, str, str] | None:
     p6, p7 = vin[5], vin[6]
     line = vin[3:5]
     if brand == "Honda" and 1984 <= year <= 1986:
-        if line in OLD_LINES[year] and p6 in OLD_T6 and p7 in "2345":
+        if line in OLD_LINES[year] and p6 in OLD_T6_ALLOWED.get((year, line), "") and p7 in "2345":
             claim, meaning = OLD_T6[p6]
             return (f"honda_vin6_1984_1986_{claim}", claim, f"char6={p6}: {meaning}")
         return None
@@ -315,12 +341,17 @@ def main() -> int:
         "disagree_examples": [], "codes": Counter(), "models": Counter(), "years": Counter(),
         "epa": Counter(), "epa_conflict_examples": [], "feed_make_mismatch": 0,
     })
-    # (VIN model year, chars 4-7) that vPIC decodes to a model on some lot car:
-    # the code is in the data NHTSA built from Honda's filings.
+    # (VIN model year, chars 4-7) that vPIC decodes to a model on some car in
+    # the decode cache: the code is in the data NHTSA built from Honda's
+    # filings. Verification 2026-11-05 widened this from lot cars only to the
+    # whole cache (lot + departed cars): with lot cars only, US-filed codes
+    # (1999 EJ63, 2004 CM81, 2011 FG1A, ...) fell into the not-in-vPIC hold
+    # bucket merely because no other lot car of that year carried them.
     documented: set[tuple[int, str]] = set()
-    for row in inv["vehicles"]:
-        vin = (row[fi["vin"]] or "").strip().upper()
-        d = cache.get(vin) if len(vin) == 17 and brand_of(vin) else None
+    for vin, d in cache.items():
+        vin = (vin or "").strip().upper()
+        if len(vin) != 17 or not brand_of(vin):
+            continue
         if isinstance(d, dict) and d.get("model") and check_digit_ok(vin):
             try:
                 y = vin_year(vin, int(str(d.get("modelYear") or 0)[:4]) or None)
@@ -478,7 +509,7 @@ def main() -> int:
         "VIN is 17 characters and its check digit (character 9) is valid (49 CFR 565.15(c)); VINs that fail it are skipped, not guessed",
         "model year from VIN character 10 (Honda year table in every filing); the listing/vPIC year only picks the 30-year cycle and must be within 2 years",
         "WMI (characters 1-3) is a Honda car/MPV/truck WMI from Honda's filings; motorcycle/ATV WMIs and the Isuzu-built 4S6 Passport / JAE SLX are excluded",
-        "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another lot car of that year with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_*",
+        "character-7 rules: characters 4-7 for that model year are a code NHTSA's vPIC decodes to a model (the VIN's own decode has a Model, or another VIN of that year in the decode cache, lot or departed, with the same characters 4-7 does); codes vPIC does not know go to honda_acura_vin7_code_not_in_vpic_* (held)",
     ]
 
     rules = []
@@ -545,13 +576,17 @@ def main() -> int:
              "table": {k: v[1] for k, v in LETTER_T7.items() if k in vals}},
             rf"^({aw})[A-HJ-NPR-Z0-9]{{3}}[{vals}][A-HJ-NPR-Z0-9]{{2}}[A-HJ-NPR-TV-Y]",
             "every Acura with an Acura WMI, MY2010 on",
-            letter_cites)
+            letter_cites + ["mid_2023_01_17"])
     # Honda MY1984-1986 (character 6)
     for claim, vals in (("manual", "456"), ("automatic", "37")):
         add(f"honda_vin6_1984_1986_{claim}", "Honda", claim, [1984, 1986], HONDA_WMI,
             {"position": 6, "values": list(vals),
              "table": {k: v[1] for k, v in OLD_T6.items() if k in vals},
-             "also_required": "characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; 1986: AF AG AH AK BA AB BB AN AR VN) and character 7 is a body code 2-5"},
+             "also_required": ("characters 4-5 are a line code the filing for that year lists (1984: AD AB AN; 1985: AD AB AN AF AG AH AK; "
+                               "1986: AF AG AH AK BA AB BB AN AR VN), character 6 is a value that filing's own construction table defines "
+                               "for that line group (1984 and 1985 Accord/Prelude/Civic Wagon: 3 5 7; 1985 Civic CRX/hatchback/sedan: 3 4 5; "
+                               "1986 Civic CRX/hatchback/sedan: 4 5 7; 1986 Accord/Prelude/Civic Wagon/4WD/Wagovan: 5 6 7), and character 7 "
+                               "is a body code 2-5. The regex cannot express the per-year value sets; the generator's OLD_T6_ALLOWED does")},
             rf"^({hw})(AD|AB|AN|AF|AG|AH|AK|BA|BB|AR|VN)[{vals}][2-5][A-HJ-NPR-Z0-9]{{2}}[EFG]",
             "MY1984-1986 Honda Accord, Prelude, Civic (CRX, hatchback, sedan, Wagon, Wagon 4WD, Wagovan): the pre-1987 Honda layout where character 6 is the transmission",
             ["mid_1983_09_12", "mid_1984_06_20", "mid_1985_06_12", "mid_1985_07_11", "mid_1985_11_19"])
@@ -566,11 +601,23 @@ def main() -> int:
             rf"^({hw}|{aw})[A-HJ-NPR-Z0-9]{{3}}[{dvals}{lvals}][A-HJ-NPR-Z0-9]{{2}}[A-HJ-NPR-TV-Y1-9]",
             "Honda/Acura VINs (mostly Canada-market cars at Canadian yards) whose model code is not in NHTSA's vPIC data",
             ["mid_1986_06_27", "mid_1985_11_19", "mid_2009_08_24"],
-            {"caveat": ("Honda's construction-of-VIN pages define character 7 as body type + transmission for every "
+            {"status": "hold_code_not_filed",
+             "caveat": ("Honda's construction-of-VIN pages define character 7 as body type + transmission for every "
                         "model code, and Honda of Canada Mfg. (2HG/2HH/2HK/2HN) is one of the filers, but no US "
                         "filing lists these exact Canada-market codes and vPIC returns no decode for them, so no "
-                        "ground truth can check them. Kept as low_sample on the strength of Honda's own scheme; "
-                        "the hub may prefer to hold these.")})
+                        "ground truth can check them."),
+             "hold_reason": ("Verification 2026-11-05: HELD, not confirmed. Once 'documented' is computed over the whole "
+                             "decode cache, every manual-claimed car left here (lot and departed) is a Canada-only Acura "
+                             "EL (line MB4 1997-2000, ES3 2001-05) or CSX (FD5/FD6 2006-11); the automatic side also "
+                             "holds two odd US VINs (2010 Accord 'CP8F', 2013 TSX 'C42F', probably mistyped VINs that "
+                             "happen to pass the check digit). An EL/CSX line code (characters 4-6) is in no Honda filing "
+                             "and vPIC rejects the VIN today (error 5/14, 'VIN has errors in few positions', checked "
+                             "live for 2HHES35863H001201 and 2HHFD65698H201026). Honda's filings stopped stating a "
+                             "generic character-7 table after the late 1980s (the 1997 and 2003 filings list each "
+                             "2nd-section code with its own transmission instead), so for these codes the claim rests "
+                             "on the pattern alone. That is strong but it is not evidence about THAT car, which the "
+                             "owner's rule requires. Not refuted: no counterexample exists, because nothing can check "
+                             "these cars.")})
 
     # 1997 Accord carve-out
     for claim, vals in (("manual", "1357"), ("automatic", "2468")):
@@ -609,6 +656,10 @@ def main() -> int:
             "evidence": [C["mid_2005_10_31"]["url"] + " (2007 Fit model codes: GD374/GD376 5MT, GD384/GD386 5AT)",
                          "EPA ids 22860-22862, 24920-24922: Fit 1.5 Automatic 5-spd, Automatic (S5), Manual 5-spd"],
             "effect_if_rule_applied": "Manual badge removed from GD38x Fits; GD37x Fits stay Manual, now on VIN evidence",
+            "already_handled_in_scraper": ("Since commit b55e403 (2026-11-05 01:30 UTC) junkyard_scraper.py VPIC_TRANS_DEFAULT_CELLS "
+                                           "drops vPIC's transmission for every 2007-2008 Fit (and 1986 Civic), so the published "
+                                           "extras now show no transmission for these cars: the wrong Manual badges are gone, and "
+                                           "the GD37x (5MT) Fits count as newly confirmable by honda_vin7_digit_1987_2009_manual."),
             "rule": "honda_vin7_digit_1987_2009_automatic / _manual",
         },
         {
@@ -659,6 +710,7 @@ def main() -> int:
         "Honda/Acura VINs whose character 7 is outside the table for the era (e.g. a letter on a 2001-2009 VIN or a digit on a 2010+ VIN) are not ruled; on the lots they are listing-year errors or mis-typed VINs.",
         "The code says manual vs automatic, not the gear count or the gearbox model; speeds stay with vPIC/EPA. Automatic codes cover CVT and DCT as well (e.g. 2015+ TLX 'F' = 8-speed DCT or 9-speed automatic).",
         "Cars without a VIN (Honda 2,699, Acura 426 on the lots) cannot be reached by these rules.",
+        "Held, not ruled (verification 2026-11-05): Canada-only Acura EL (MB4 1997-2000, ES3 2001-05) and CSX (FD5/FD6 2006-11) codes. Their line codes are in no Honda filing and vPIC rejects the VINs, so the character-7 reading is pattern-only (honda_acura_vin7_code_not_in_vpic_*, status hold_code_not_filed).",
     ]
 
     honda_on_lots = sum(1 for row in inv["vehicles"] if (row[fi["make"]] or "") == "Honda")
