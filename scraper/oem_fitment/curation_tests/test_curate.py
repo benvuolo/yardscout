@@ -439,7 +439,7 @@ def contradiction_doc(state):
                         "kind": "body", "sig": sig, "apps": [["Toyota", "Pickup", 1990, 1991]], "pn": ["55900-89999"],
                         "note": "Toyota catalog: same numbers on every trim and engine for these years (55900-89999)",
                         "years": years, "cars": 10}],
-            "vg": [], "likely": [], "sigs": {h: sig},
+            "vg": [], "likely": [], "sigs": {h: sig}, "engine_cells": [],
             "cells": [["Toyota", "Pickup", 1990, "climate-control", f"sig:{h}"],
                       ["Toyota", "Pickup", 1991, "climate-control", f"sig:{h}"],
                       ["Toyota", "Pickup", 1992, "climate-control", state]]}

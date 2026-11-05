@@ -52,8 +52,8 @@ check("2 every record still passes the evidence re-check",
       all(not r.problems for r in cur.records), str([(r.pn, r.problems) for r in cur.records if r.problems][:3]))
 check("2 EngineU holds the unparsed key (beside the year page's own engines, review F8)",
       cur.engineu.get(S04) == frozenset({("?", NEW), (6, 3.3, "gas"), (6, 3.5, "gas")}), str(cur.engineu.get(S04)))
-check("2 an unparsed engine key on both sides is conditional_engines, never cover yes",
-      all(m["cover"] == "maybe" and "conditional_engines" in m["why"] for m in I["members"].values()),
+check("2 an unparsed engine key on both sides is never cover yes (engines_unparsed, an evidence gap)",
+      all(m["cover"] == "maybe" and "engines_unparsed" in m["why"] for m in I["members"].values()),
       str([(k, m["why"]) for k, m in I["members"].items()][:2]))
 check("2 no Verified group from an unparsed engine universe",
       not [g for g in doc["groups"] if g["cat"] == "window-regulator"])

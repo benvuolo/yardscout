@@ -187,6 +187,17 @@ DEFAULT_CATEGORY_POLICY = {"slots": ["C"], "axes": [], "required": [["C"]]}
 COLOR_COLLAPSE: dict[str, bool] = {}
 
 ENGINE_CATS = {"alternator", "starter", "ignition-coils"}
+# §7.6 oem_split: the conditional classes that say the catalog's numbers
+# differ by configuration inside a closed cell (a note naming a plant, trim,
+# option, engine, emissions, production date, body, package or colour; a
+# fitment row listing only some trims or engines; a qualifier phrase in the
+# name). Everything else a cell can be conditional on is an evidence gap
+# (notes_not_own_page, fitted_not_listed, listed_not_fitted, option_layout,
+# trim/engine universes unattested or unparsed, engine cells unaudited, a
+# blank trim cell, an UNKNOWN note clause) and never contradicts a hand
+# group (review, 2026-11-05: those gaps removed 55 of 468 hand vg groups).
+SPLIT_CONDITIONS = frozenset({"plant", "trim", "option", "engine", "emissions", "production", "fuel", "trans",
+                              "body", "package", "colour", "model_other", "qualifier"})
 # §7.7: Phase 3 categories (kind "oem", clientMin 3). No groups in Phase 1.
 PHASE3_CATS = {"ac-compressor", "fuel-pump-module", "throttle-body", "power-steering-pump",
                "radiator"}

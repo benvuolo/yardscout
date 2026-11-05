@@ -536,25 +536,44 @@ class Curation:
         if self.engineu_src.get(T, "unattested") == "unattested" and T not in self.o.trimu_force:
             why.append("engines_unattested")
         eu = self.engineu.get(T, frozenset()) if engine_set is None else engine_set
-        best = None
+        # each trim-layout row's outcome; any row that covers the car makes it
+        # 'ok'. Otherwise the reason kept is a real condition when one row
+        # gives one (the row lists only some trims / engines: the catalog
+        # numbers differ by configuration, which §7.6 oem_split reads), else
+        # an evidence gap (blank trim cell, engine cells unaudited, an
+        # unparsed or unattested engine universe), which says nothing about
+        # the numbers differing.
+        outcomes = set()
         for r, f, t in rows:
             if f.layout != "trim" or f.trims_from_options:
                 continue
             if not f.trims:
-                best = best or "trims_unknown"
+                outcomes.add("trims_unknown")
                 continue
             if not tu <= f.trim_atoms():
-                best = best if best in ("ok",) else "conditional_trims"
+                outcomes.add("conditional_trims")
                 continue
             if not self.reliable.get(r.site):
-                best = best if best == "ok" else "conditional_engines"
+                outcomes.add("engines_unreliable")
                 continue
             # an unparsed engine ("?", raw) fails every universe test (§5.5),
             # even when both sides print the same text
-            if not eu or any(not isinstance(e[0], int) for e in eu) or not eu <= f.engine_keys():
-                best = best if best == "ok" else "conditional_engines"
+            if not eu:
+                outcomes.add("engines_unattested")
                 continue
-            best = "ok"
+            if any(not isinstance(e[0], int) for e in eu):
+                outcomes.add("engines_unparsed")
+                continue
+            if not eu <= f.engine_keys():
+                outcomes.add("conditional_engines")
+                continue
+            outcomes.add("ok")
+        best = None
+        for o in ("ok", "conditional_trims", "conditional_engines", "trims_unknown", "engines_unparsed",
+                  "engines_unreliable", "engines_unattested"):
+            if o in outcomes:
+                best = o
+                break
         if rows and best is None:
             why.append("option_layout")
         elif best and best != "ok":
@@ -576,6 +595,7 @@ class Curation:
             why.append("disputed")
         if any("rule_drift" in r.problems for r in c.records):
             why.append("rule_drift")
+        why = _uniq(why)
         return ("yes" if not why else "maybe"), why, (on, notes, possrc, ptrs, how)
 
     def slot_of(self, T, cat, c: Klass, possrc) -> P.Resolution:
@@ -853,7 +873,10 @@ class Curation:
                         if w in ("unverified", "disputed", "rule_drift"):
                             continue      # E3 (unverified_member) reports these
                         cls.add(_cond_class(w))
-                for x in sorted(cls):
+                # real condition classes first (the numbers differ by
+                # configuration), then evidence gaps, so a cell's first reason
+                # names a real split whenever there is one (§7.6)
+                for x in sorted(cls, key=lambda x: (x not in policy.SPLIT_CONDITIONS, x)):
                     reasons.append(f"conditional:{x}")
         # E3
         for key, m in members.items():
@@ -966,8 +989,13 @@ class Curation:
                 sigs[h] = sig
                 groups_by[(cat, h)].append(T)
                 cells.append([T[0], T[1], T[2], cat, f"sig:{h}"])
-            else:
+            elif info["closure"]:
                 cells.append([T[0], T[1], T[2], cat, f"open:{reason}"])
+            else:
+                # a closed cell names a real split first when it has one, so
+                # §7.6 oem_split never reads an evidence gap as a split
+                trig = [r for r in info["elig"] if _split_trigger(r)]
+                cells.append([T[0], T[1], T[2], cat, f"open:{trig[0] if trig else reason}"])
             if hstage == "eligible":
                 hyp_groups[(cat, h)].append(T)
         self.hyp_groups = hyp_groups
@@ -988,6 +1016,8 @@ class Curation:
                            "sig": sigs[h], "apps": apps, "pn": pns, "note": note, "years": years,
                            "cars": sum(self.inv_counts.get(T, 0) for T in Ts)})
         vg = self.engine_groups(groups_by, sigs) if js else []
+        for g in vg:
+            sigs[g["id"].rsplit(":", 1)[-1]] = g["sig"]
         likely = self.likely_groups(brand)
         used = {k for g in groups + vg for s in g["sig"] for _, ks in s[1] for k in ks}
         used |= {k for g in likely for k in g.get("keys", [])}
@@ -1007,6 +1037,8 @@ class Curation:
             "classes": classes, "groups": groups, "vg": vg, "likely": likely,
             "sigs": {h: sigs[h] for h in sorted(sigs)},
             "cells": sorted(cells),
+            # §7.6: per-family states of engine-category cells (never shipped)
+            "engine_cells": sorted(getattr(self, "engine_cells", [])),
         }
         return doc
 
@@ -1029,15 +1061,67 @@ class Curation:
                     " ".join(x for x in a if x) for a in self.trimu.get(T, ()))}}
 
     # ---------------------------------------------- 5.13 engine attachment
+    def _ef(self, T, fam) -> frozenset:
+        """E_f(cv) (§5.13): EngineU keys with the family's cylinder count and
+        liters (within 0.05), regardless of fuel."""
+        return frozenset(e for e in self.engineu.get(T, ()) if _fam_engine(e, fam))
+
+    def engine_cell_state(self, T, cat, info, fam) -> str:
+        """§7.6 per-family state of an engine-category cell: what the hand
+        vg contradiction test reads, never a claim. The generic cell mixes
+        every engine the model-year offers, so a second number that belongs
+        to another family made it option_split and removed correct hand
+        groups (review F13). Here the cell is narrowed to the family (5.13:
+        E_f, TrimU_f), and a candidate whose every fitment row prints only
+        engines outside the family (trim layout, parsed) is not one of its
+        candidates. 'sig:<h>' when that narrowed cell is eligible, else
+        'open:<reason>' with a real split (option_split or a
+        policy.SPLIT_CONDITIONS class) named first when there is one."""
+        if info["closure"]:
+            return f"open:{info['closure'][0]}"
+        ef = self._ef(T, fam)
+        if not ef:
+            return "open:family_gap"
+        rows = self.t_rows.get((T, cat), [])
+        per = []
+        for e in sorted(ef, key=str):
+            mem = self.cell(T, cat, engine_set=frozenset([e]))
+            mem = {k: m for k, m in mem.items()
+                   if any(e in f.engine_keys() for cc, r, f, t in rows if cc is m["klass"] and f.layout == "trim")}
+            per.append(_canon(sorted(mem)))
+        if len(set(per)) != 1:
+            # two engines of the family each with their own printed numbers:
+            # the numbers differ inside the family, a real split (§7.6). An
+            # engine with no row at all is only a gap.
+            if all(x != _canon([]) for x in per):
+                return "open:conditional:engine"
+            return "open:family_nonuniform"
+        members = self.cell(T, cat, engine_set=ef, trim_u=self._trimu_f(T, ef))
+
+        def other_engine_only(m):
+            fr = [f for cc, r, f, t in rows if cc is m["klass"]]
+            return bool(fr) and all(f.layout == "trim" and f.engine_keys()
+                                    and all(isinstance(e[0], int) and not _fam_engine(e, fam) for e in f.engine_keys())
+                                    for f in fr)
+        members = {k: m for k, m in members.items() if not other_engine_only(m)}
+        elig, slots = self.eligibility(T, cat, members)
+        if not elig:
+            return f"sig:{_sha1(self.sig_of(slots))[:10]}"
+        trig = [r for r in elig if _split_trigger(r)]
+        return f"open:{(trig or elig)[0]}"
+
     def engine_groups(self, groups_by, sigs):
         js = self.js
         out = defaultdict(list)
         self.engine_refusals = []
+        self.engine_cells = []
         for (T, cat), info in sorted(self.cells_info.items()):
             if cat not in policy.ENGINE_CATS:
                 continue
             # (a)/(b) are reported for every cell, closed or not
             fams = js.engine_families_for(T[2], T[0], T[1], cat if cat != "ignition-coils" else None)
+            for fid_, fam_, _app in fams:
+                self.engine_cells.append([T[0], T[1], T[2], cat, fid_, self.engine_cell_state(T, cat, info, fam_)])
             if not fams:
                 self.engine_refusals.append({"reason": "family_gap", "t": list(T), "cat": cat})
                 continue
@@ -1050,9 +1134,7 @@ class Curation:
             if js._app_flags(app).get("ambig"):
                 self.engine_refusals.append({"reason": "family_ambig", "t": list(T), "cat": cat})
                 continue
-            ef = frozenset(e for e in self.engineu.get(T, ()) if isinstance(e[0], int)
-                           and e[0] == fam["engine"]["cyl"]
-                           and any(abs(e[1] - L) <= 0.05 for L in fam["engine"]["liters"]))
+            ef = self._ef(T, fam)
             if not ef:
                 self.engine_refusals.append({"reason": "family_gap", "t": list(T), "cat": cat})
                 continue
@@ -1151,9 +1233,13 @@ class Curation:
             apps = _runs(Ts)
             slot = "+".join(sorted(slots)) or "C"
             note = _likely_note(brand, pns[0], text, PACK_TEXT.get(c.packaging, ""))
+            # its own evidence date: build-time expiry drops a Likely group
+            # whose oldest record passes 120 days (review F18)
+            stamps = sorted(r.retrieved for r in c.records if _ts(r.retrieved))
             out.append({"id": f"oem:{self.ns}:{cat}:{slot}:{_sha1([pns, apps])[:10]}", "cat": cat,
                         "tier": "likely", "kind": "body", "apps": apps, "pn": pns, "reason": reason,
-                        "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts)})
+                        "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts),
+                        "oldest_retrieved": stamps[0] if stamps else None})
         return out
 
     # ------------------------------------------------------------ report
@@ -1411,11 +1497,25 @@ def _chain_ids(keys, comparable) -> dict:
     return {k: find(k) for k in keys}
 
 
+def _fam_engine(e, fam) -> bool:
+    return isinstance(e[0], int) and e[0] == fam["engine"]["cyl"] and \
+        any(abs(e[1] - L) <= 0.05 for L in fam["engine"]["liters"])
+
+
+def _split_trigger(reason: str) -> bool:
+    """§7.6 oem_split: option_split, or a conditional class that says the
+    numbers differ by configuration (policy.SPLIT_CONDITIONS)."""
+    return reason == "option_split" or (reason.startswith("conditional:")
+                                        and reason.split(":", 1)[1] in policy.SPLIT_CONDITIONS)
+
+
 def _cond_class(why: str) -> str:
     if why.startswith("conditional_notes:"):
         return why.split(":", 1)[1]
     return {"conditional_trims": "trim", "conditional_engines": "engine", "option_layout": "option_layout",
-            "trims_unknown": "trim", "trims_unattested": "trim_unattested", "engines_unattested": "engine_unattested",
+            "trims_unknown": "trim_unknown", "trims_unattested": "trim_unattested",
+            "engines_unattested": "engine_unattested", "engines_unparsed": "engine_unparsed",
+            "engines_unreliable": "engine_unreliable",
             "notes_not_own_page": "notes_not_own_page",
             "fitted_not_listed": "fitted_not_listed", "listed_not_fitted": "listed_not_fitted",
             "qualifier_phrase": "qualifier", "unverified": "unverified", "disputed": "disputed",
@@ -1520,7 +1620,7 @@ def global_gates(cur: Curation) -> list:
     elif not cur.years:
         out.append("no R2 year manifests on this raw ref, so no cell can close (C1)")
     if not any(policy.category_status(s, c, cur.status_table) for s in sites for c in (cur.status_table.get(s) or {})):
-        out.append("no (site, category) of this namespace has passed the audit gate (CATEGORY_STATUS has no "
+        out.append("no (site, category) of this namespace has passed the audit gate (audits.json has no "
                    "record; spec 11.4, E5/V7)")
     unrel = [s for s in sites if not cur.reliable.get(s)]
     if unrel:

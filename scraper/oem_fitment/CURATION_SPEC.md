@@ -914,7 +914,13 @@ In `scraper/junkyard_scraper.py`:
     `INTERCHANGE_PART_CATEGORIES`, `ENGINE_FAMILIES`, `normalize_make`,
     `normalize_model`, `_squash_model` and `_app_matches`.
   - It drops groups whose `years[].closure.oldest_retrieved` is more than
-    120 days older than now (build-time expiry).
+    120 days older than now (build-time expiry). Likely groups carry their
+    own `oldest_retrieved` and expire the same way; when the file's `as_of`
+    is over 120 days old every group of every tier goes. `oemStatus` counts
+    the expired groups.
+  - V11 is measured on the payload exactly as written (every `oemStatus`
+    edit made, trailing newline included); an `oemVg` family dropped for
+    size is reported under the namespaces that shipped it.
   - A failing namespace file is dropped, never raised. The loader prints
     `[interchange] oem <ns> dropped: <reason>` to stderr and records
     `oemStatus[ns]`.
@@ -974,12 +980,28 @@ For every hand `platformGroups` verified group and every hand vg group G:
 - **`oem_split`.** A member is OEM-closed but not eligible because of
   `option_split` or `conditional_*`.
 
+`conditional_*` here means a real condition: a class in
+`policy.SPLIT_CONDITIONS` (plant, trim, option, engine, emissions,
+production, fuel, trans, body, package, colour, model_other, qualifier).
+Evidence gaps (notes_not_own_page, option_layout, fitted_not_listed,
+listed_not_fitted, trim/engine universes unattested or unparsed, engine
+cells unaudited, a blank trim cell, an UNKNOWN note clause) never trigger.
+A hand vg group reads `engine_cells` ([make, model, year, cat, family,
+state]): the cell narrowed to its own engine family (§5.13: E_f, TrimU_f,
+and a candidate whose every trim-layout row prints only engines outside
+the family is not a candidate). Two engines of the family each printing
+their own numbers is `conditional:engine` (a split); an engine of the
+family with no row is `family_nonuniform` (a gap). A file without `sigs`,
+`cells` and `engine_cells`, or whose cells do not hold every Verified year
+as its own signature, is refused (V1).
+
 Either trigger does three things:
 1. It demotes G for the involved cells in the payload. A platform group's
    tier becomes "likely" and its note gains " — OEM catalog numbers differ
    within this group; verify the part number". A vg group is removed.
-2. It withholds OEM Verified groups touching those cells (they become
-   Likely).
+2. It withholds OEM Verified groups touching those cells: a body group
+   becomes Likely and takes the Likely note template (§5.16), an OEM vg
+   group is removed (vg has no Likely tier). V5 is re-run on what ships.
 3. It writes a contradiction entry to `_report` and to `oemStatus`.
 
 Hand data is never edited automatically. Separately, the A-listed suspect

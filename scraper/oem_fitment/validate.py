@@ -90,16 +90,26 @@ def context_from(js, mm=None, status_table=None, policy_sha=None, targets=None) 
 
 
 def expire(doc: dict, now: datetime, days: int | None = None) -> tuple[dict, list]:
-    """Drop groups whose oldest evidence is more than `days` (default 120)
-    older than `now`. Fails closed: a group without a timestamp is dropped."""
+    """Build-time expiry (decision 8, §7.3): drop every group whose oldest
+    evidence is more than `days` (default 120) older than `now`. Verified
+    groups and vg read each year's proof (closure.oldest_retrieved, which
+    covers the chain records C5 relied on); Likely groups read their own
+    oldest_retrieved; and once the file's as_of is that old, every group of
+    every tier goes (crawls stopped: fail closed). A group without a
+    timestamp is dropped."""
     days = policy.EVIDENCE_MAX_AGE_DAYS if days is None else days
+    old = lambda t: t is None or now - t > timedelta(days=days)  # noqa: E731
     dropped = []
     out = dict(doc)
-    for key in ("groups", "vg"):
+    file_old = old(_ts(doc.get("as_of")))
+    for key in ("groups", "vg", "likely"):
         keep = []
         for g in doc.get(key) or []:
-            stamps = [_ts((y.get("closure") or {}).get("oldest_retrieved")) for y in g.get("years") or []]
-            if not stamps or any(s is None or now - s > timedelta(days=days) for s in stamps):
+            if key == "likely":
+                stamps = [_ts(g.get("oldest_retrieved"))]
+            else:
+                stamps = [_ts((y.get("closure") or {}).get("oldest_retrieved")) for y in g.get("years") or []]
+            if file_old or not stamps or any(old(t) for t in stamps):
                 dropped.append(g.get("id"))
             else:
                 keep.append(g)
@@ -169,12 +179,44 @@ def structural(doc: dict, ctx: dict) -> list:
     fams = ctx.get("engine_families") or {}
     targets = ctx.get("targets")
     classes = doc.get("classes") or {}
-    for key in ("groups", "vg", "likely", "classes", "cells", "raw"):
+    for key in ("groups", "vg", "likely", "classes", "cells", "engine_cells", "sigs", "raw"):
         if key not in doc:
             P.append(f"V1 missing key {key}")
     if not isinstance(doc.get("groups", []), list) or not isinstance(doc.get("vg", []), list) \
             or not isinstance(doc.get("likely", []), list):
         return P + ["V1 groups/vg/likely must be lists"]
+    # V1 the §7.6 contradiction inputs: without sigs and cells the payload
+    # builder could not see a contradiction, so a file that lacks them, or
+    # whose cells do not hold every Verified year as its signature, is
+    # refused (review F21)
+    sigs = doc.get("sigs")
+    cells = doc.get("cells")
+    ecells = doc.get("engine_cells")
+    if not isinstance(sigs, dict) or not isinstance(cells, list) or not isinstance(ecells, list):
+        return P + ["V1 sigs must be an object, cells and engine_cells lists"]
+    cell_state, ecell_state = {}, {}
+    for c in cells:
+        if not (isinstance(c, list) and len(c) == 5 and isinstance(c[4], str)
+                and (c[4].startswith("sig:") or c[4].startswith("open:"))):
+            P.append(f"V1 malformed cell {c!r}"[:200])
+            continue
+        cell_state[(c[0], c[1], c[2], c[3])] = c[4]
+    for c in ecells:
+        if not (isinstance(c, list) and len(c) == 6 and isinstance(c[5], str)
+                and (c[5].startswith("sig:") or c[5].startswith("open:"))):
+            P.append(f"V1 malformed engine cell {c!r}"[:200])
+            continue
+        ecell_state[(c[0], c[1], c[2], c[3], c[4])] = c[5]
+    for st in list(cell_state.values()) + list(ecell_state.values()):
+        if st.startswith("sig:") and st[4:] not in sigs:
+            P.append(f"V1 cell signature {st} not in sigs")
+            break
+    # curate writes a cell for every (T, c) it saw, engine categories too:
+    # a family-narrowed engine cell without its cell means cells were cut
+    for k in ecell_state:
+        if k[:4] not in cell_state:
+            P.append(f"V1 engine cell {list(k)} has no cell")
+            break
     # V8 policy hash
     if ctx.get("policy_sha256") and doc.get("policy_sha256") != ctx["policy_sha256"]:
         P.append("V8 policy_sha256 does not match the tree")
@@ -189,8 +231,20 @@ def structural(doc: dict, ctx: dict) -> list:
     feed_models_by_class: dict = {}
     for kind_key in ("groups", "vg", "likely"):
         for g in doc.get(kind_key) or []:
+            if not isinstance(g, dict):
+                P.append(f"V1 {kind_key} entry is not an object")
+                continue
             gid = g.get("id", "?")
             tier = g.get("tier")
+            # V1 every field the payload builder reads (review F20)
+            cat0 = g.get("cat")
+            if not isinstance(gid, str) or not isinstance(cat0, str) or \
+                    not gid.startswith(f"oem:{ns}:{cat0}:"):
+                P.append(f"V1 {kind_key} id {gid!r} is not oem:{ns}:<cat>:...")
+            if "cars" in g and not isinstance(g["cars"], int):
+                P.append(f"V1 {gid}: cars is not an integer")
+            if kind_key == "vg" and not isinstance(g.get("family"), str):
+                P.append(f"V1 {gid}: no family")
             # V1 tier and kind routing
             if kind_key == "likely":
                 if tier != "likely":
@@ -214,7 +268,7 @@ def structural(doc: dict, ctx: dict) -> list:
                 elif cat not in fam.get("parts", {}) and cat != "ignition-coils":
                     P.append(f"V1 {gid}: family {g.get('family')} has no part {cat!r}")
             apps = g.get("spans") if kind_key == "vg" else g.get("apps")
-            if not apps:
+            if not apps or not isinstance(apps, list):
                 P.append(f"V2 {gid}: no apps")
                 apps = []
             for app in apps:
@@ -224,6 +278,9 @@ def structural(doc: dict, ctx: dict) -> list:
             if apps != sorted(apps):
                 P.append(f"V8 {gid}: apps not sorted")
             pns = g.get("pn") or []
+            if not isinstance(pns, list) or not all(isinstance(x, str) for x in pns):
+                P.append(f"V1 {gid}: pn is not a list of strings")
+                pns = []
             if not pns or pns != sorted(pns):
                 P.append(f"V8 {gid}: pn missing or unsorted")
             why = _note_ok(g.get("note"), tier if tier in ("verified", "likely") else "verified", pns)
@@ -258,6 +315,21 @@ def structural(doc: dict, ctx: dict) -> list:
                 if len(feed) > policy.UNIVERSAL_CAP:
                     P.append(f"V6 {gid}: {len(feed)} feed models (cap {policy.UNIVERSAL_CAP})")
                 continue
+            # V1 every Verified year is in cells (vg: engine_cells for its
+            # family) as this group's own signature
+            h = gid.rsplit(":", 1)[-1] if isinstance(gid, str) else ""
+            if h not in sigs:
+                P.append(f"V1 {gid}: signature {h} not in sigs")
+            for y in g.get("years") or []:
+                t = tuple(y.get("t") or ())
+                if len(t) != 3:
+                    continue
+                st = ecell_state.get(t + (cat0, g.get("family"))) if kind_key == "vg" else cell_state.get(t + (cat0,))
+                if kind_key == "vg" and t + (cat0,) not in cell_state:
+                    P.append(f"V1 {gid}: {list(t)} has no cell")
+                if st != f"sig:{h}":
+                    P.append(f"V1 {gid}: {list(t)} is {st!r} in {'engine_cells' if kind_key == 'vg' else 'cells'}, "
+                             f"not sig:{h}")
             # V4 proof
             years = g.get("years") or []
             vy = [tuple(y.get("t") or ()) for y in years]
@@ -371,30 +443,56 @@ def old_keys_problems(before: dict, after: dict) -> list:
 
 def size_trim(payload: dict, budget: int | None = None) -> list:
     """V11: keep interchange.json within budget. Likely groups go first,
-    lowest value (cars x (cars - 1)) first, then Verified groups. Returns the
-    dropped ids (the payload is edited in place)."""
+    lowest value (cars x (cars - 1)) first, then Verified groups, then whole
+    oemVg families. Returns the dropped ids (the payload is edited in place).
+
+    Linear (review F17): the payload is measured once, each candidate's own
+    serialized length (plus its comma) is subtracted as it is dropped, and
+    the result is measured once more; only if that estimate was short does
+    it fall back to dropping and re-measuring one at a time."""
     budget = policy.PAYLOAD_BYTE_BUDGET if budget is None else budget
+    dumps = lambda o: json.dumps(o, separators=(",", ":"))  # noqa: E731
+    total = len(dumps(payload))
+    if total <= budget:
+        return []
+    groups = payload.get("oemGroups")
+    if groups is None:
+        groups = payload["oemGroups"] = []
+    value = lambda g: ((g.get("cars") or 0) * max((g.get("cars") or 0) - 1, 0), str(g.get("id")))  # noqa: E731
+    order = [g for tier in ("likely", "verified")
+             for g in sorted([x for x in groups if x.get("tier") == tier], key=value)]
+    vgd = payload.get("oemVg") or {}
+    fams = sorted(vgd)
+    plan, i = [], 0
+    for g in order:
+        if total <= budget:
+            break
+        total -= len(dumps(g)) + 1
+        plan.append(("g", g))
+    for fam in fams:
+        if total <= budget:
+            break
+        total -= len(dumps(fam)) + 1 + len(dumps(vgd[fam])) + 1
+        plan.append(("vg", fam))
+    planned = {id(x) for k, x in plan if k == "g"} | {x for k, x in plan if k == "vg"}
+    rest = [("g", g) for g in order if id(g) not in planned] + [("vg", f) for f in fams if f not in planned]
     dropped = []
 
-    def size():
-        return len(json.dumps(payload, separators=(",", ":")))
-    if size() <= budget:
-        return dropped
-    groups = payload.get("oemGroups") or []
-    for tier in ("likely", "verified"):
-        order = sorted([g for g in groups if g.get("tier") == tier],
-                       key=lambda g: ((g.get("cars") or 0) * max((g.get("cars") or 0) - 1, 0), g["id"]))
-        for g in order:
-            if size() <= budget:
-                return dropped
-            groups.remove(g)
-            dropped.append(g["id"])
-    if size() > budget:
-        for fam, cats in list((payload.get("oemVg") or {}).items()):
-            payload["oemVg"].pop(fam)
-            dropped.append(f"oemVg:{fam}")
-            if size() <= budget:
-                break
+    def apply(step):
+        kind, x = step
+        if kind == "g":
+            dropped.append(x["id"])
+            return id(x)
+        payload["oemVg"].pop(x)
+        dropped.append(f"oemVg:{x}")
+        return None
+    gone = {apply(st) for st in plan} - {None}
+    groups[:] = [g for g in groups if id(g) not in gone]
+    while len(dumps(payload)) > budget and i < len(rest):
+        g_id = apply(rest[i])
+        i += 1
+        if g_id is not None:
+            groups[:] = [g for g in groups if id(g) != g_id]
     return dropped
 
 
