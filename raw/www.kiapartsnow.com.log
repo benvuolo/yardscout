@@ -1,0 +1,8 @@
+01:35:48 start site=www.kiapartsnow.com segments=35 tiers=['A', 'B']
+01:40:00 seg done tier=A Kia Soul [2010, 2013] seeds=[2013] records=48 errors=0
+01:47:36 seg done tier=A Kia Optima [2011, 2013] seeds=[2013] records=131 errors=0
+01:52:12 seg done tier=A Kia Soul [2014, 2019] seeds=[2014] records=185 errors=0
+02:05:29 net-fail list https://www.kiapartsnow.com/parts-list/2019-kia-rio/electrical/air_condition_system_cooler_line.html: network error after 3 tries: ReadTimeout
+02:09:16 seed A|Kia|Rio|2019 had network failures; left open for retry
+02:09:16 seg done tier=A Kia Rio [2001, 2023] seeds=[2013, 2009, 2019] records=349 errors=1
+02:09:16 time budget reached records=349
