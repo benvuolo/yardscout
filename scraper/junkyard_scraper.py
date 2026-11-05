@@ -6660,6 +6660,20 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "infiniti qx60": [2016, 2019],
     "escort": [1992, 1993, 1999, 2003],
 }
+# §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
+# the lots generally start and charge through the hybrid system and use a
+# high-voltage electric A/C compressor, so these three rows were false
+# fitment on them. Detected from the listing text or the VIN decode's
+# trim/series. Exceptions (a hybrid family with a sourced conventional part)
+# go in _HYBRID_KEEPS as {entry key: {row names}}; none are cited yet, and
+# where unsure the row is removed (PARTS_GAPS §22.10).
+_HYBRID_GAS_ONLY_ROWS = frozenset({
+    "Alternator (spin-test at yard)",
+    "Starter (verify part number)",
+    "A/C Compressor (clutch spins free)",
+})
+_HYBRID_KEEPS: dict[str, set[str]] = {}
+
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"
     r"|marker light|corner light", re.IGNORECASE)
@@ -14725,6 +14739,8 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
         ser = (vin_decode.get("series") or "").strip().lower()
         if ser:
             vin_tokens += " " + ser
+    # §22.10: hybrid listings never take the gas-only rows.
+    is_hybrid = "hybrid" in model_lower or "hybrid" in vin_tokens
     # Drivetrain and transmission from the VIN decode, for drive-/manual-gated
     # parts. Same honesty trilogy as trim gates: confirmed / excluded only when
     # the decode is definite / "if equipped" otherwise.
@@ -14761,7 +14777,10 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
             continue
         low, high = info["year_range"]
         filtered_parts = []
+        hybrid_keeps = _HYBRID_KEEPS.get(keyword, set()) if is_hybrid else set()
         for p in info["top_parts"]:
+            if is_hybrid and p["name"] in _HYBRID_GAS_ONLY_ROWS and p["name"] not in hybrid_keeps:
+                continue
             if "yr_min" in p and year < p["yr_min"]:
                 continue
             if "yr_max" in p and year > p["yr_max"]:

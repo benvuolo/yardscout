@@ -125,9 +125,10 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   and Escort generations 1997; appearance cuts for Milan, Encore, Park
   Avenue, xB, Sonata 2002, QX60, Escort. Routing: Encore GX own entry;
   Captiva, JX and ZX2 listings now match (ZX2 has its own entry).
-- Open for the owner: hybrid listings (763 of 802) show gas-only rows
-  (alternator/starter from the evergreens, gap-block A/C compressor). A
-  negative "not hybrid" gate is proposed in PARTS_GAPS §22.9.
+- §22.10 hybrid gate (owner go 14:28): alternator, starter and belt A/C
+  rows dropped on hybrid listings (86 combos, 0 gas cars changed). Cited
+  per-family exceptions (`_HYBRID_KEEPS`) still to add; gm-gen4-truck still
+  catches Yukon/Escalade Hybrid (reported to the hub's Phase 0).
 
 - §23.6 (hub, accuracy fix, rule 3; PARTS_GAPS §23.6): routing.
   Ram Van / Ram Wagon / B-vans get their own 1994–97 / 1998–2003 entries

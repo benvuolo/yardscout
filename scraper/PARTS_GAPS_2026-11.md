@@ -2292,3 +2292,25 @@ alternator, starter and A/C compressor rows that excludes them when the
 listing or VIN decode says hybrid. That needs a small `match_vehicle`
 change and a per-family check of which hybrids keep a conventional part,
 so it is left for the owner's go-ahead.
+
+### 22.10 Hybrid gate (owner via hub, 14:28 UTC: "do everything you think")
+
+`match_vehicle` now drops three gas-only rows when the listing text or the
+VIN decode's trim/series says hybrid: the alternator, the starter, and the
+belt A/C compressor (`_HYBRID_GAS_ONLY_ROWS`). Hybrids of the families on the
+lots generally start and charge through the hybrid system and use an
+electric A/C compressor. Where a family is unconfirmed, the row is removed
+(unknown is honest).
+- **Exceptions:** `_HYBRID_KEEPS` would let a family with a cited
+  conventional part keep that row. None are cited yet; the research was
+  interrupted by the usage limit and is resuming.
+- **Effect (334,595-car inventory):** 86 year/make/model combinations
+  changed, all hybrid listings, and no gas car changed. Removed: alternator
+  and starter on 81 combinations, A/C compressor on 42. 0 of 803 hybrid
+  listings still show one of these rows.
+- **ENGINE_FAMILIES (report only, not edited):** `gm-gen4-truck` still
+  catches the GMC Yukon Hybrid and Cadillac Escalade Hybrid (2 cars each).
+  Left for the hub's Phase 0 hybrid splits.
+- **Tests:** Camry Hybrid and Fusion Hybrid lose the three rows and keep
+  their other rows; their gas twins keep them; a decode with series
+  "Hybrid" also drops them. All suites pass.

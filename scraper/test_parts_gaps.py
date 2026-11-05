@@ -715,6 +715,15 @@ check("§22 ZX2: 'ZX2' and 'Escort ZX2' listings get the ZX2 entry (mech + moonr
       and parts(2001, "Ford", "ZX2")["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1998–2003"
       and "Alternator (spin-test at yard)" in parts(2001, "Ford", "ZX2") and "Tail Lights (pair, uncracked)" not in parts(2001, "Ford", "ZX2"))
 
+# §22.10 hybrid gate
+_G = js._HYBRID_GAS_ONLY_ROWS
+check("§22.10 Camry Hybrid and Fusion Hybrid never get the alternator/starter/belt A/C rows; gas twins keep them",
+      not (_G & set(parts(2010, "Toyota", "Camry Hybrid"))) and not (_G & set(parts(2012, "Ford", "Fusion Hybrid")))
+      and _G <= set(parts(2010, "Toyota", "Camry", FWD)) and {"Alternator (spin-test at yard)", "Starter (verify part number)"} <= set(parts(2012, "Ford", "Fusion")))
+check("§22.10 a VIN decode naming Hybrid in the series also drops them",
+      not (_G & set(parts(2010, "Toyota", "Camry", {**FWD, "series": "Hybrid"}))))
+check("§22.10 other rows on hybrids are kept (lamps, pump)", "Fuel Pump Module (in-tank, test before listing)" in parts(2010, "Toyota", "Camry Hybrid"))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
