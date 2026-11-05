@@ -31,3 +31,18 @@
 03:10:07 seg done tier=A GMC Acadia [2007, 2016] seeds=[2012] records=503 errors=5
 03:10:07 seg done tier=A Chevrolet Suburban 1500 [1987, 2018] seeds=[2002] records=503 errors=5
 03:19:35 time budget reached records=554
+03:19:43 start site=www.gmpartsgiant.com segments=206 tiers=['A', 'B']
+03:19:43 seg done tier=A Chevrolet Cruze [1986, 2014] seeds=[2014] records=554 errors=5
+03:19:43 seg done tier=A Chevrolet Silverado 1500 [1999, 2023] seeds=[2000] records=554 errors=5
+03:19:43 seg done tier=A Chevrolet Equinox [2010, 2015] seeds=[2012] records=554 errors=5
+03:19:43 seg done tier=A Chevrolet Impala [2006, 2011] seeds=[2008] records=554 errors=5
+03:19:43 seg done tier=A Chevrolet Malibu [2008, 2012] seeds=[2012] records=554 errors=5
+03:19:43 seg done tier=A Chevrolet Traverse [2008, 2017] seeds=[2011] records=554 errors=5
+03:19:43 seg done tier=A Chevrolet Trailblazer [2002, 2009] seeds=[2004] records=554 errors=5
+03:19:43 seg done tier=A GMC Acadia [2007, 2016] seeds=[2012] records=554 errors=5
+03:19:43 seg done tier=A Chevrolet Suburban 1500 [1987, 2018] seeds=[2002] records=554 errors=5
+03:19:43 seg done tier=A Chevrolet Cobalt [2002, 2010] seeds=[2007] records=554 errors=5
+03:28:32 seg done tier=A Chevrolet Tahoe [2000, 2006] seeds=[2002] records=561 errors=5
+03:39:12 nav-fail Chevrolet Sonic 1997: ValueError: no 1997 catalog for Chevrolet Sonic (chevrolet-['sonic'])
+03:39:12 seg done tier=A Chevrolet Sonic [1982, 2020] seeds=[2013, 1997] records=598 errors=6
+03:55:08 time budget reached records=646
