@@ -8698,8 +8698,12 @@ if _gen_problems:
 #     the hybrid decodes to a DIFFERENT displacement (2013+ Avalon Hybrid
 #     2.5 under the 3.5 V6 family) the decode already excludes it, but a
 #     decode-less hybrid passed on "sole", so sole is dropped for those
-#     years instead. Only hybrids seen in the lot data were acted on; the
-#     known-but-unseen ones are listed in ops/interchange.md.
+#     years instead. Only hybrids seen in the lot data or the decode cache
+#     were acted on (GM eAssist found by VIN position 8 "R", whose vPIC
+#     trims are ordinary); the known-but-unseen ones are listed in
+#     ops/interchange.md. Each note gives the engine-side reason too ("their
+#     engine parts can differ"), since the flag shows on every engine-kind
+#     category, coils and manifolds included.
 #
 # Deliberate exclusions (accuracy forced them — see research notes):
 #   - ECM/BCM: calibration/part-number specific even within one model-year.

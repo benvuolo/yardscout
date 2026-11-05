@@ -434,15 +434,29 @@ cited below.**
 
 - **Engine:** 2.0/2.4/2.5L 4-cyl
 - **Family applications:** Chevrolet Malibu 2013-2015, Chevrolet Malibu Limited 2016-2016, Chevrolet Impala 2014-2015
-- **alternator — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0255 (110A) Malibu 2013 — one published unit across the 2.0 turbo, 2.4 and 2.5. 2014-15 alternator rows are beyond this catalog edition.
-  - Group 1: Chevrolet Malibu 2013-2013
+- **alternator — verified evidence (2.4 row WITHHELD 2026-11-05, P0.5 review):** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 210-0255 (110A) Malibu 2013 — one published unit across the 2.0 turbo, 2.4 and 2.5. 2014-15 alternator rows are beyond this catalog edition.
+  - Group 1: Chevrolet Malibu 2013-2013 — verifies no pair. The only 2.4 in a
+    2013 US Malibu is the Eco (2.4 LUK eAssist; all 126 2013 "R" VINs in the
+    decode cache read "1LT/2LT ECO"), and eAssist mounts a belt
+    motor-generator in place of the alternator, so the 2.4 row is a catalog
+    aggregate that conflicts with the hardware. The 2013 Malibu app is now
+    ambig (eAssist note), and the client never verifies a pair when either
+    side's app is ambig, so 2013 alternator pairs are Likely. The group is
+    kept as the family's evidence record (the 2.0T/2.5 share stands) until
+    the app can tell an Eco from a 2.0T/2.5 on both sides.
 - **starter — verified evidence (WITHDRAWN 2026-11-05, P0.5 hybrid audit):** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-0434 Malibu 2013 2.0 turbo and 2.5, one published unit, unqualified.
   - Group 1 (withdrawn): Chevrolet Malibu 2013-2013. The span admits every
     2013 Malibu the 2.0/2.4/2.5 gate passes, including the 2.4 eAssist Eco
     (86 lot cars decode "1LT/2LT ECO", 2.4L), whose starter 280-0434 does
     not list. A seeker's engine is never known, so no pair can be Verified on
-    this evidence; starter pairs are Likely. The alternator group stays
-    (210-0255 lists the 2.4 too).
+    this evidence; starter pairs are Likely.
+- **Hybrid splits (P0.5 review, 2026-11-05):** Malibu 2013 ambig (Eco
+  eAssist, 87 lot cars incl. 1 without a decode; it was "sole"), 2014-15
+  stay sole (no "R" among ~470 decoded 2014-15 Malibus); Impala 2014 ambig
+  (the decode cache holds a 2014 "R" VIN decoding "ECO 2SA", 2.4L), 2015
+  plain. Before this, the 2.4 eAssist donors showed Verified engine
+  assembly for every family seeker (Malibu 2013-15, Malibu Limited 2016,
+  Impala 2014-15): engine-assembly Verified needs only a confirming decode.
 
 ### gm-ecotec22 — GM Ecotec 2.2 I4 (L61)
 
@@ -463,6 +477,13 @@ cited below.**
   - Group 2: Saturn VUE 2008-2010
 - **starter — verified evidence:** Denso reman catalog (densoautoparts.com, retrieved 2026-10-22): 280-5396 Malibu 2.4 2008-2012, Verano 2.4 2012-2015 and Aura 2.4 2007-2009 — one published unit, unqualified.
   - Group 1: Chevrolet Malibu 2008-2012; Buick Verano 2012-2015; Saturn Aura 2007-2009
+- **Hybrid splits (P0.5, 2026-11-05):** Malibu 2008-10 (BAS Hybrid), VUE
+  2008-10 and Aura 2007-09 (Green Line BAS) ambig; Regal 2012-13 ambig
+  (eAssist, VIN position 8 "R": 5 lot cars with ordinary vPIC trims "Premium
+  1/I" and "Leather" that showed Verified engine assembly; 2012 also has the
+  LEA "K", 2013 has none on the lots or in the decode cache), 2011 plain.
+  No verified group covers the Regal, so its split costs only
+  engine-assembly Verified.
 
 ### gm-fbody-lt1 — GM LT1 5.7 V8 (F-body/C4 Corvette)
 
@@ -2369,39 +2390,60 @@ though it has no belt alternator or starter. The audit's new vPIC-hybrid
 column flags a lot car when the corrected vPIC decode or the vpic side-table
 says hybrid/HEV/Energi/BAS/Green Line/Electric (plus Malibu 2013-14 "ECO" =
 eAssist), when the yard's model name says so, or when its VIN positions 4-8
-match >= 2 yard-named hybrids of the same make. It then lists every family
-app (first match, as the app does) whose hybrids pass the gate.
+match >= 2 yard-named hybrids of the same make, or (added on review) when its
+VIN position 8 is the GM eAssist engine code "R" on a 2012-16 Malibu/Regal/
+LaCrosse/Impala, whose vPIC trims are ordinary ("Premium 1", "Leather") and
+which no yard names hybrids. It then lists every family app (first match, as
+the app does) whose hybrids pass the gate.
 
 Acted on (data on 2026-11-04's 333,449-car scan): toyota-2az Camry 07-09;
 toyota-2ar Camry 12-17; toyota-2gr Highlander 11-16; toyota-3mz Highlander
 06-07; honda-j30 Accord 05-07; ford-mzr Fusion 10-14, Escape 05-12, Milan
 10-11, Mariner 06-11, Tribute 08-11; ford-fusion-cd4 Fusion 13-20;
-gm-ecotec24 Malibu 08-10, VUE 08-10, Aura 07-09; hk-theta-gdi Sonata 11-15,
-Optima 11-17; hk-theta2gdi Sonata 11-14, Optima 11-15; gm-gen4-truck
-Silverado*/Sierra* 09-13, Tahoe/Yukon* 08-13, Escalade* 09-13; mopar-hemi57
-Aspen 09; nissan-qr25 Altima 07-11 — each split at the hybrid years and
-flagged ambig (donors and seekers cap at Likely, note ships verbatim).
+gm-ecotec24 Malibu 08-10, VUE 08-10, Aura 07-09, Regal 12-13 (eAssist);
+gm-ecotec-lcv Malibu 13 (Eco eAssist), Impala 14 (eAssist, decode cache);
+hk-theta-gdi Sonata 11-15, Optima 11-17; hk-theta2gdi Sonata 11-14, Optima
+11-15; gm-gen4-truck (after main's §23.6 light-duty spellings) Silverado,
+Silverado 1500, Sierra, Sierra 1500, Sierra Denali 1500 09-13, Tahoe/Yukon*
+08-13, Escalade* 09-13; mopar-hemi57 Aspen 09; nissan-qr25 Altima 07-11 —
+each split at the hybrid years and flagged ambig (donors and seekers cap at
+Likely, note ships verbatim). The flag shows on every engine-kind category
+(coils, intake manifolds, engine assemblies too), so each note gives the
+engine-side reason as well: "..., but their engine parts can differ and they
+<have no belt alternator or starter | charge and start through IMA | use a
+BAS motor-generator | have a hybrid starter-generator> — check for ...".
 Hybrids that decode to another displacement were already excluded, but a
 decode-less one passed on "sole": sole dropped for toyota-2gr Avalon 13-18,
 toyota-2ar RAV4 13-14 (RAV4 EV decodes "Electric"), ford-cyclone MKZ 11-12.
-gm-ecotec-lcv's starter group withdrawn (see that family). The spec's list
+gm-ecotec-lcv's starter group withdrawn and its alternator group's 2.4 row
+withheld (see that family; Malibu 2013 also dropped "sole"). The spec's list
 was confirmed for every entry; the data added Highlander 06-07 (3mz),
-Optima, Altima, the gm-ecotec24 Saturns, the Mercury/Mazda Ford twins,
-gm-gen4-truck, Aspen and the three sole drops.
+Optima, Altima, the gm-ecotec24 Saturns and Regal, gm-ecotec-lcv, the
+Mercury/Mazda Ford twins, gm-gen4-truck, Aspen and the sole drops.
 
-Verified donors before -> after (cars showing Verified for >= 1 seeker):
-alternator 124,263 -> 117,284, starter 36,902 -> 34,716, engine-assembly
-226,129 -> 208,591; hybrid-flagged Verified donors 756/172/1,312 -> 86/0/86
-(the 86 are 2013 Malibu Ecos: 210-0255 lists the 2.4 eAssist alternator, so
-that group stays). The ambig flag is per app, so gas cars of those years lose
-Verified too (hk-theta-gdi alternator 2,011 -> 0, ford-fusion-cd4 -> 0,
-gm-gen4-truck alternator 897 -> 559). Getting them back needs the app to
-tell hybrids apart per car (VIN pattern or vPIC trim), not a data change.
+Verified donors before -> after (cars showing Verified for >= 1 seeker;
+re-measured after review on the 2026-11-05 11:55 scan, 334,759 cars, main ->
+branch, same audit signal on both sides): alternator 124,707 -> 117,159,
+starter 37,214 -> 35,019, engine-assembly 227,319 -> 209,181; hybrid-flagged
+Verified donors (alternator/starter/engine-assembly) 764/175/1,326 -> 0/0/0.
+(The first pass left 87/0/91: the 2013 Malibu Ecos, Verified for alternator
+AND engine assembly, and 5 Regal eAssists for engine assembly. Engine
+assembly needs no group, only a confirming decode, so the alternator
+listing never bore on those 86/91; the review split both apps.) The ambig
+flag is per app, so gas cars of those years lose Verified too (hk-theta-gdi
+alternator 2,024 -> 0, ford-fusion-cd4 701 -> 0, gm-gen4-truck alternator
+764 -> 459, gm-ecotec-lcv alternator 545 -> 0). Getting them back needs the
+app to tell hybrids apart per car (VIN pattern or vPIC trim), not a data
+change.
 
 Known hybrids NOT seen in the lot data or the decode cache, so not acted on
 (listed in ops/interchange.md for the hub): RAV4 Hybrid 2016-18 (toyota-2ar
 RAV4 15-18 is still sole; no RAV4 2013+ verified group), Fit EV 2013-14
 (honda-l15 Fit is sole and its starter group spans 2010-13), Rogue Hybrid
-2017-19 (nissan-qr25 Rogue sole, no group), Regal eAssist 2012-13
-(gm-ecotec24, no group), 2004-07 GM PHT Silverado/Sierra hybrids
-(gm-gen3-truck).
+2017-19 (nissan-qr25 Rogue sole, no group), 2004-07 GM PHT Silverado/Sierra
+hybrids (gm-gen3-truck). (The first pass also listed "Regal eAssist 2012-13"
+here; that was wrong: 5 are on the lots, decoding 2.4L with ordinary trims,
+and showed Verified engine assembly, which needs no group. Now split.)
+LaCrosse eAssist 2012-16 (59 lot cars) decodes 2.4L under gm-llt36 (3.6
+only, not sole), so the decode already excludes it; Regal 2014+ is in no
+family.
