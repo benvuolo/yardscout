@@ -218,3 +218,57 @@
 06:28:51 seg done tier=A BMW 645ci [2004, 2005] seeds=[2005] records=1130 errors=24
 06:33:39 seg done tier=A BMW 535xi [2008, 2008] seeds=[2008] records=1141 errors=24
 06:39:23 time budget reached records=1149
+06:39:31 start site=www.bmwpartsdeal.com segments=44 tiers=['A', 'B']
+06:39:31 seg done tier=A BMW 328i [1995, 2016] seeds=[2011] records=1149 errors=24
+06:39:31 seg done tier=A BMW 325i [1988, 2006] seeds=[2006] records=1149 errors=24
+06:39:31 seg done tier=A BMW X5 [2007, 2013] seeds=[2008] records=1149 errors=24
+06:39:31 seg done tier=A BMW X3 [2004, 2010] seeds=[2006] records=1149 errors=24
+06:39:31 seg done tier=A BMW 528i [1979, 2016] seeds=[2008] records=1149 errors=24
+06:39:31 seg done tier=A BMW X5 [2000, 2006] seeds=[2005] records=1149 errors=24
+06:39:31 seg done tier=A BMW 525i [1989, 2007] seeds=[2007] records=1149 errors=24
+06:39:31 seg done tier=A BMW 530i [1994, 2021] seeds=[2006] records=1149 errors=24
+06:39:31 seg done tier=A BMW 3 Series [1983, 2016] seeds=[2008] records=1149 errors=24
+06:39:31 seg done tier=A BMW 535i [1985, 2016] seeds=[2011] records=1149 errors=24
+06:39:31 seg done tier=A BMW 330i [2001, 2018] seeds=[2006] records=1149 errors=24
+06:39:31 seg done tier=A BMW 335i [2007, 2016] seeds=[2007] records=1149 errors=24
+06:39:31 seg done tier=A BMW X3 [2011, 2017] seeds=[2013] records=1149 errors=24
+06:39:31 seg done tier=A BMW 325ci [2000, 2006] seeds=[2002] records=1149 errors=24
+06:39:31 seg done tier=A BMW 750Li [2006, 2015] seeds=[2006] records=1149 errors=24
+06:39:31 seg done tier=A BMW 320i [1978, 2018] seeds=[2014] records=1149 errors=24
+06:39:31 seg done tier=A BMW X1 [2012, 2015] seeds=[2013] records=1149 errors=24
+06:39:31 seg done tier=A BMW 328xi [2007, 2015] seeds=[2007] records=1149 errors=24
+06:39:31 seg done tier=A BMW 325xi [2001, 2006] seeds=[2002] records=1149 errors=24
+06:39:31 seg done tier=A BMW 323i [1998, 2012] seeds=[2000] records=1149 errors=24
+06:39:31 seg done tier=A BMW 550i [2006, 2016] seeds=[2008] records=1149 errors=24
+06:39:31 seg done tier=A BMW 5 Series [1985, 2016] seeds=[2007] records=1149 errors=24
+06:39:31 seg done tier=A BMW 328i xDrive [2009, 2015] seeds=[2011] records=1149 errors=24
+06:39:31 seg done tier=A BMW 750i [2000, 2013] seeds=[2008] records=1149 errors=24
+06:39:31 seg done tier=A BMW 330ci [2001, 2006] seeds=[2001] records=1149 errors=24
+06:39:31 seg done tier=A BMW 745Li [2002, 2005] seeds=[2004] records=1149 errors=24
+06:39:31 seg done tier=A BMW Z3 [1996, 2002] seeds=[2000] records=1149 errors=24
+06:39:31 seg done tier=A BMW 740i [1993, 2016] seeds=[1998] records=1149 errors=24
+06:39:31 seg done tier=A BMW 745i [2002, 2005] seeds=[2003] records=1149 errors=24
+06:39:31 seg done tier=A BMW 540i [1994, 2003] seeds=[2000] records=1149 errors=24
+06:39:31 seg done tier=A BMW 330xi [2001, 2006] seeds=[2006] records=1149 errors=24
+06:39:31 seg done tier=A BMW 530xi [2006, 2007] seeds=[2007] records=1149 errors=24
+06:39:31 seg done tier=A BMW Z4 [2003, 2008] seeds=[2003] records=1149 errors=24
+06:39:31 seg done tier=A BMW 128i [2008, 2013] seeds=[2010] records=1149 errors=24
+06:39:31 seg done tier=A BMW 740iL [1995, 2001] seeds=[2001] records=1149 errors=24
+06:39:31 seg done tier=A BMW 650i [2006, 2014] seeds=[2006] records=1149 errors=24
+06:39:31 seg done tier=A BMW 545i [2004, 2005] seeds=[2004] records=1149 errors=24
+06:39:31 seg done tier=A BMW 645ci [2004, 2005] seeds=[2005] records=1149 errors=24
+06:39:31 seg done tier=A BMW 535xi [2008, 2008] seeds=[2008] records=1149 errors=24
+06:39:31 seg done tier=A BMW 318i [1984, 1998] seeds=[1997] records=1149 errors=24
+06:41:16 nav-fail BMW 528xi 2011: ValueError: no 2011 catalog for BMW 528xi (bmw-['528xi'])
+06:41:16 seg done tier=A BMW 528xi [2008, 2013] seeds=[2008, 2011] records=1149 errors=25
+06:49:48 seg done tier=A BMW 535i xDrive [2009, 2016] seeds=[2011, 2010, 2009] records=1153 errors=25
+06:53:08 seg done tier=A BMW 525xi [2006, 2007] seeds=[2007, 2006] records=1153 errors=25
+06:53:16 nav-fail BMW 7 Series 2004: ValueError: no 2004 catalog for BMW 7 Series (bmw-['7_series'])
+06:53:16 seg done tier=A BMW 7 Series [1983, 2013] seeds=[2004] records=1153 errors=26
+07:00:28 nav-fail BMW 328i 2001: ValueError: no 2001 catalog for BMW 328i (bmw-['328i'])
+07:00:28 seg done tier=B BMW 328i [1995, 2016] seeds=[2011, 2001] records=1182 errors=27
+07:03:32 nav-fail BMW 325i 1997: ValueError: no 1997 catalog for BMW 325i (bmw-['325i'])
+07:03:32 seg done tier=B BMW 325i [1988, 2006] seeds=[2006, 1997] records=1192 errors=28
+07:07:40 seg done tier=B BMW X5 [2007, 2013] seeds=[2008] records=1202 errors=28
+07:11:24 seg done tier=B BMW X3 [2004, 2010] seeds=[2006] records=1218 errors=28
+07:11:24 time budget reached records=1218
