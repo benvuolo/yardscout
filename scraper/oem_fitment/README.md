@@ -161,7 +161,10 @@ list_info, reman). Also:
   built. Chain records take the root's category, seed and list_url, have
   `name: null` and no list-level fields; their list rows, if any, are in the
   list manifest of the page that printed them. A number with no link is
-  counted in progress `chain_unlinked` and logged.
+  counted in progress `chain_unlinked` and logged. A hop whose fetch hits a
+  network error waits in progress `chain_retry` and is fetched at the next
+  start (its seed is still marked done: chains do not change what the list
+  pages say).
 - `recrawl_of` (R6): the line number (string, 1-based, across parts) of the
   newest earlier record for the same (category, pn), when one is written
   again (a progress reset or a completion run). The curator uses the newer one.

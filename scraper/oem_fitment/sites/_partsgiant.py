@@ -257,7 +257,7 @@ def _stem(url: str) -> str:
 
 
 def _variant_trim(stem: str) -> tuple[str, str | None]:
-    """("new_style", None) for "2004-ford-f_150-f_150_new_style";
+    """("f_150_new_style", None) for "2004-ford-f_150-f_150_new_style";
     ("", "8_cyl_5_4l-4at_4r100") for "2001-ford-f_150--8_cyl_5_4l-4at_4r100".
     Make and model slugs never hold "-" (slug() turns it into "_")."""
     base, sep, trim = stem.partition("--")

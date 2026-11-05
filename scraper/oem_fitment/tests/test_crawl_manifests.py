@@ -235,6 +235,39 @@ with tempfile.TemporaryDirectory() as td:
     check("R6 pointers are global line numbers", all(logical[int(r["recrawl_of"]) - 1]["pn"] == r["pn"]
                                                      for r in logical[half:]) and all("recrawl_of" in r for r in logical[half:]))
 
+# R4 chain hop with a network failure: queued in progress, fetched at the next start
+with tempfile.TemporaryDirectory() as td:
+    from fetch import NetworkError  # noqa: E402
+    root = Path(td)
+    (root / "worklist.json").write_text(json.dumps(WORKLIST))
+    pages = fresh_pages()
+    crawl.TIERS = {"A": ["starter"], "B": []}
+    flaky = {f"{P}~starter~28100-90030": 1}
+    real_get = pages.get
+
+    def flaky_get(url):
+        if flaky.get(url):
+            flaky[url] -= 1
+            pages.calls.append(("get", url))
+            raise NetworkError("network error after 3 tries: ProxyError")
+        return real_get(url)
+    from sites import _simplepart  # noqa: E402
+    _simplepart.get = flaky_get
+    run(root, "--site", TY, "--tier", "A")
+    raw = root / "raw"
+    prog = json.loads((raw / f"{TY}.progress.json").read_text())
+    pns = [r["pn"] for r in jl(raw / f"{TY}.jsonl")]
+    check("chain hop failure queued, seed still done", len(prog["chain_retry"]) == 1 and "28100-90030" not in pns
+          and "A|Toyota|Camry|2030" in prog["done"], (prog["chain_retry"], pns))
+    run(root, "--site", TY, "--tier", "A")
+    prog = json.loads((raw / f"{TY}.progress.json").read_text())
+    recs = jl(raw / f"{TY}.jsonl")
+    c = [r for r in recs if r["pn"] == "28100-90030"]
+    check("chain hop retried at the next start", prog["chain_retry"] == [] and len(c) == 1
+          and c[0]["via"] == "replaces:28100-90010-84" and c[0]["via_depth"] == 1 and c[0]["via_link"] == "product_page",
+          (prog["chain_retry"], c[:1]))
+    check("retried hop continues the chain", "chain-unlinked starter 1 numbers named by 28100-90030, no catalog link: 28100-90040" in (raw / f"{TY}.log").read_text())
+
 # R3 completion mode
 with tempfile.TemporaryDirectory() as td:
     root = Path(td)
