@@ -16,3 +16,15 @@
 08:48:11 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=459 errors=1
 08:57:06 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=490 errors=1
 08:57:06 time budget reached records=490
+08:57:26 start site=www.subarupartsdeal.com segments=25 tiers=['A', 'B']
+08:57:26 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=490 errors=1
+08:57:26 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=490 errors=1
+08:57:26 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=490 errors=1
+08:57:26 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=490 errors=1
+08:57:26 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=490 errors=1
+08:57:26 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=490 errors=1
+08:57:26 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=490 errors=1
+09:02:46 seg done tier=A Subaru Legacy [2010, 2012] seeds=[2011, 2012] records=504 errors=1
+09:16:46 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005, 2008] records=583 errors=1
+09:29:02 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=662 errors=1
+09:29:02 time budget reached records=662
