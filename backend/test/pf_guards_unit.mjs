@@ -273,5 +273,103 @@ check('pfDonorIdentity: OEM row with a valid matching VIN -> ok', id({ vin: VIN_
     JSON.stringify(r3.rows['2013 Toyota Camry']));
 }
 
+/* ---- Engine browse (pfRunBrowse) and the tier hint (pfVonlyRowHtml) ------
+ * A second context loads the REAL pfRunBrowse and pfVonlyRowHtml (the one
+ * above stubs both). Review 2026-11-05: browse gave hybrids on an ambig app
+ * the green "VIN-confirmed" chip, and the engine-assembly fit search said
+ * "Verified = published catalog fitment data" though no catalog lists engine
+ * assemblies. */
+const browseFns = ['pfRunBrowse', 'pfVonlyRowHtml'].map(fn => {
+  const s = extractFn(fn);
+  check(`app.js has top-level function ${fn}`, !!s);
+  return s || '';
+}).join('\n');
+const prelude2 = prelude
+  .replace(/^function pfRunBrowse\(\).*$/m, '')
+  .replace(/^function pfVonlyRowHtml\(\).*$/m, '')
+  + `function pfRenderBrowseFamPicker() {}
+function partQueryHit() { return false; }
+`;
+const ctx2 = vm.createContext({ console, Promise, Map, Set, Math, String, Number, JSON, Infinity });
+vm.runInContext(prelude2 + code + browseFns, ctx2, { filename: 'app.js-extract-browse' });
+
+function browse(data, inventory, pcat, famId, extras = {}) {
+  Object.assign(ctx2, { interchangeData: data, liveInventory: inventory, pfCat: pcat,
+    pfChosenFam: famId, _pfGenMap: null, __extras: extras, __els: {}, pfVerifiedOnly: false });
+  ctx2.pfRunBrowse({ year: 0, make: '', model: '' });
+  const html = ctx2.__els['pf-results'] ? ctx2.__els['pf-results'].innerHTML : '';
+  const rows = {}, list = [];
+  for (const chunk of html.split('<div class="pf-row-card ').slice(1)) {
+    const name = (chunk.match(/<span class="pf-car-name">([^<]*)<\/span>/) || [])[1] || '';
+    const warn = (chunk.match(/<div class="pf-warn">([\s\S]*?)<\/div>/) || [])[1] || '';
+    const row = { name, chip: chunk.includes('pf-tier-verified'), vinClass: chunk.startsWith('pf-browse pf-vin'), warn };
+    rows[name] = row;
+    list.push(row);
+  }
+  return { html, rows, list };
+}
+{
+  // Real lot VINs: 2007 Camry Hybrids (VIN position 5 "B" = 2AZ-FXE; decode
+  // "2.4L 4-cyl") and 2010 Matrix 2.4s (2T1KE4EE1AC045106, 2T1KE4EE9AC031549).
+  const HYB_A = 'JTNBB46K073026167', HYB_B = 'JTNBB46K673029980';
+  const fam = { id: 'toyota-2az', label: 'Toyota/Scion 2AZ-FE 2.4 I4', liters: [2.4], cyl: 4,
+    apps: [['Toyota', 'Camry', 2002, 2006, 0, ''],
+           ['Toyota', 'Camry', 2007, 2009, 0, '2007–09 Camry Hybrids also decode as 2.4L 4-cyl, but their engine parts can differ and they have no belt alternator or starter — check for HYBRID badges'],
+           ['Toyota', 'Matrix', 2009, 2013, 0, '']],
+    parts: { alternator: { note: 'unit note' } } };
+  const ecat = { id: 'alternator', label: 'Alternator', kind: 'engine', tokens: ['alternator'], priceTokens: ['alternator'] };
+  const inv = [
+    car(1, 2007, 'Toyota', 'Camry', { vin: HYB_A }),
+    car(2, 2007, 'Toyota', 'Camry', { vin: HYB_B }),
+    car(3, 2010, 'Toyota', 'Matrix', { vin: '2T1KE4EE1AC045106' }),           // year char A = 2010
+    car(4, 2011, 'Toyota', 'Matrix', { vin: '2T1KE4EE9AC031549' }),           // VIN says 2010
+    car(5, 2012, 'Toyota', 'Matrix', { vpicMismatch: 'VIN decodes as Corolla (listed Matrix)' }),
+  ];
+  const ex = { 1: ['', '', '2.4L 4-cyl'], 2: ['', '', '2.4L 4-cyl'], 3: ['', '', '2.4L 4-cyl'],
+               4: ['', '', '2.4L 4-cyl'], 5: ['', '', '2.4L 4-cyl'] };
+  const data = base([], { engineFamilies: [fam] });
+  for (const pc of [ecat, { id: 'engine-assembly', label: 'Engine', kind: 'engine', tokens: [], priceTokens: ['engine'], noValue: true }]) {
+    const r = browse(data, inv, pc, 'toyota-2az', ex);
+    const hyb = r.list.filter(x => x.name === '2007 Toyota Camry');
+    check(`browse ${pc.id}: hybrid-year Camry rows (ambig app) get no VIN-confirmed chip`,
+      hyb.length === 2 && hyb.every(x => !x.chip && !x.vinClass), JSON.stringify(r.rows));
+    check(`browse ${pc.id}: those rows keep the ambig warning`,
+      hyb.every(x => x.warn.includes('Camry Hybrids also decode as 2.4L')), JSON.stringify(hyb));
+    check(`browse ${pc.id}: decode-confirmed non-ambig donor with an agreeing VIN keeps the chip`,
+      r.rows['2010 Toyota Matrix']?.chip === true, JSON.stringify(r.rows['2010 Toyota Matrix']));
+    check(`browse ${pc.id}: VIN year char disagrees (P0.4) -> no chip, year warning`,
+      r.rows['2011 Toyota Matrix']?.chip === false && r.rows['2011 Toyota Matrix'].warn.includes('model-year code reads 2010'),
+      JSON.stringify(r.rows['2011 Toyota Matrix']));
+    check(`browse ${pc.id}: vpicMismatch (P0.4) -> no chip, listing warning`,
+      r.rows['2012 Toyota Matrix']?.chip === false && r.rows['2012 Toyota Matrix'].warn.includes('listing doesn’t match the VIN'),
+      JSON.stringify(r.rows['2012 Toyota Matrix']));
+    check(`browse ${pc.id}: the "N VIN-confirmed" count leaves the hybrids and identity-flagged out`,
+      r.html.includes('<strong>1</strong> VIN-confirmed') && r.html.includes('<strong>4</strong> unconfirmed'),
+      (r.html.match(/pf-tier-counts">([\s\S]*?)<\/span>/) || [])[1]);
+  }
+  // Hint copy: engine-assembly Verified is a confirming decode, not a catalog.
+  ctx2.pfVerifiedOnly = false;
+  const hEng = ctx2.pfVonlyRowHtml(1, 1, 'engine'), hFit = ctx2.pfVonlyRowHtml(1, 1, 'fit');
+  check('hint: engine-assembly vocab says VIN decode, not catalog data, and to match displacement',
+    hEng.includes('VIN decode shows an engine in this family') && hEng.includes('match the displacement')
+    && !hEng.includes('published catalog fitment data'), hEng);
+  check('hint: part-number categories keep "published catalog fitment data"',
+    hFit.includes('Verified = published catalog fitment data'), hFit);
+  // ... and pfRunSearch passes the engine vocab for engine assembly only.
+  ctx2.__seeker = { year: 2010, make: 'Toyota', model: 'Matrix' };
+  const famE = { ...fam, parts: { alternator: { note: 'unit note' }, 'engine-assembly': { note: 'family note' } } };
+  for (const [pc, want, notWant] of [
+      [{ id: 'engine-assembly', label: 'Engine', kind: 'engine', tokens: [], priceTokens: ['engine'], noValue: true },
+       'no catalog lists engine assemblies', 'published catalog fitment data'],
+      [ecat, 'published catalog fitment data', 'no catalog lists engine assemblies']]) {
+    Object.assign(ctx2, { interchangeData: base([], { engineFamilies: [famE] }), liveInventory: inv,
+      pfCat: pc, pfChosenFam: null, __extras: ex, __els: {} });
+    ctx2.pfRunSearch();
+    const h = ctx2.__els['pf-results'] ? ctx2.__els['pf-results'].innerHTML : '';
+    check(`fit search ${pc.id}: hint reads "${want}"`, h.includes(want) && !h.includes(notWant),
+      (h.match(/<div class="pf-hint">([\s\S]*?)<\/div>/) || [])[1]);
+  }
+}
+
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);

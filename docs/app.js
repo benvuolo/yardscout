@@ -5638,6 +5638,9 @@ function pfTierChip(tier) {
  * rows the explicit "flip the toggle off" note keeps that state honest. */
 let pfVerifiedOnly = false;
 function pfVonlyRowHtml(nVer, nOther, vocab) {
+  // vocab: 'vin' = engine browse; 'engine' = engine-assembly fit search,
+  // whose Verified is a confirming VIN decode (no catalog lists engine
+  // assemblies); 'fit' = everything else (published part-number lists).
   const verWord = vocab === 'vin' ? 'VIN-confirmed' : 'verified';
   const otherWord = vocab === 'vin' ? 'unconfirmed' : 'likely';
   return `<div class="pf-vonly-row">
@@ -5648,7 +5651,9 @@ function pfVonlyRowHtml(nVer, nOther, vocab) {
     // definition used to live only in a hover tooltip phone users never see.
     + `<div class="pf-hint">${vocab === 'vin'
         ? 'VIN-confirmed = the donor\u2019s VIN decode shows this engine, not a physical inspection &mdash; still check under the hood at the yard.'
-        : 'Verified = published catalog fitment data, not a physical inspection &mdash; match the part number at the yard.'}</div>`
+        : vocab === 'engine'
+          ? 'Verified = the donor\u2019s VIN decode shows an engine in this family (no catalog lists engine assemblies), not a physical inspection &mdash; match the displacement and check under the hood at the yard.'
+          : 'Verified = published catalog fitment data, not a physical inspection &mdash; match the part number at the yard.'}</div>`
     + (nVer === 0
       ? `<div class="pf-vonly-none pf-empty">No ${verWord} donors in range right now &mdash; flip the toggle off to see the ${nOther.toLocaleString()} ${otherWord} one${nOther === 1 ? '' : 's'}.</div>`
       : '');
@@ -5752,8 +5757,17 @@ function pfRunBrowse(s) {
       const warns = [];
       if (!engineOk) warns.push(`engine not confirmed — this ${escapeHtml(v.model)} also came with other engines; check under the hood before pulling`);
       if (app[5]) warns.push(escapeHtml(app[5]));
+      // The VIN-confirmed chip is this view's verified tier, so it fails
+      // closed like the fit search: no chip on an ambig app (P0.5: hybrids
+      // decode to the family's displacement) or for a donor the VIN says is
+      // not the car its listing names (P0.4). The warning still shows.
+      let vinOk = verdict === true && !app[5];
+      if (vinOk) {
+        const id = pfDonorIdentity(v);
+        if (!id.ok) { vinOk = false; warns.push(escapeHtml(id.warn)); }
+      }
       rows.push({ v, d: vehicleDistanceMi(v), warns,
-                  badge: verdict === true
+                  badge: vinOk
                     ? `<span class="pf-tier pf-tier-verified" title="The donor\u2019s VIN decode confirms a ${escapeHtml(fam.label)}.">VIN-confirmed</span>`
                     : '' });
     }
@@ -6049,7 +6063,7 @@ function pfRunSearch() {
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
-    + pfVonlyRowHtml(nVer, rows.length - nVer, 'fit')
+    + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit')
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
     // Header notes carry data strings (ambig notes, group labels/notes):
     // escaped like every row warning (P0.2).
