@@ -61,6 +61,24 @@ for name, mut in MUTATIONS.items():
         mut(m)
         ok(audit.audit_record(m).get("E"), f"mutation {name} not caught on {r['site']} {r['pn']}")
 
+# aftermarket (DB Electrical) records: clean, then single-field corruptions
+DB = FIX["DB:400-52554"]
+ok(not audit.audit_record(DB).get("E"), f"DB fixture should be clean: {dict(audit.audit_record(DB))}")
+DB_MUT = {
+    "app_years": lambda r: r["applications"][0].__setitem__("years", [1999, 1999]),
+    "app_make": lambda r: r["applications"][0].__setitem__("make", "Honda"),
+    "app_model": lambda r: r["applications"][0].__setitem__("model", "X"),
+    "app_engine": lambda r: r["applications"][0].__setitem__("engine", "9.9L"),
+    "app_drop": lambda r: r["applications"].pop(),
+    "replaces": lambda r: r["replaces"][0]["numbers"].append("ZZZ"),
+    "oe_number": lambda r: r["oe_numbers"].append({"brand": "Toyota", "pn": "ZZZ"}),
+    "item": lambda r: r.__setitem__("aftermarket_pn", r["aftermarket_pn"] + "X"),
+}
+for name, mut in DB_MUT.items():
+    m = copy.deepcopy(DB)
+    mut(m)
+    ok(audit.audit_record(m).get("E"), f"DB mutation {name} not caught")
+
 # duplicate detection and rate through main()-style aggregation
 import tempfile  # noqa: E402
 dup = Path(tempfile.mkstemp(suffix=".jsonl")[1])

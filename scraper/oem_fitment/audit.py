@@ -16,6 +16,8 @@ engine_rx, bare_list_position).
   F  fitment suspect    empty fitment without a flag, years outside 1940-2027,
                         seed vehicle-year absent from its own part's fitment
 E and C count toward the mismatch rate; D and F are for curators.
+Record shapes: PartsGiant (sites/_partsgiant.py), SimplePart (sites/_simplepart.py)
+and aftermarket/ DB Electrical (applications, replaces table, specs, item #).
 
 Usage (from scraper/oem_fitment):
     git fetch origin oem-raw && git show origin/oem-raw:raw/<site>.jsonl > /tmp/x/<site>.jsonl
@@ -56,12 +58,12 @@ EXPECT = {  # at least one of these must appear in name/description
     "starter": r"starter",
     "ac-compressor": r"compressor",
     "headlights": r"head\s*lamp|headlight|head light|lamp assy",
-    "tail-lights": r"tail|combination lamp|rear lamp|stop|lens ?& ?(body|housing)",
+    "tail-lights": r"tail|combination lamp|rear lamp|stop|lens ?& ?(body|housing)|^lamp ass(y|embly)\b",
     "side-mirrors": r"mirror",
     "window-regulator": r"regulator|window motor|motor.*window",
     "window-switch": r"switch",
     "climate-control": r"control|controller|a/?c.*heater|climate",
-    "fuel-pump-module": r"fuel pump|pump.*fuel|fuel.*module|module.*fuel|fuel sender",
+    "fuel-pump-module": r"fuel pump|pump.*fuel|fuel.*module|module.*fuel|fuel sender|sender and pump",
     "throttle-body": r"throttle",
     "power-steering-pump": r"power steering|steering pump|pump.*steering|pump assy, vane|pump assembly, vane",
 }
@@ -215,6 +217,69 @@ def audit_simplepart(r: dict, out) -> None:
                 out["E"].append(f"span count wrong for {raw!r}")
 
 
+def audit_dbelectrical(r: dict, out) -> None:
+    """aftermarket/ records (DB Electrical): applications, replaces, specs and
+    item number against the record's own evidence_lines."""
+    ev = r.get("evidence_lines") or []
+    flags = r.get("flags") or []
+    item = next((x[len("Item #: "):] for x in ev if x.startswith("Item #: ")), None)
+    if item != r.get("aftermarket_pn") and not any(f.startswith("item_number_differs") for f in flags):
+        out["E"].append(f"aftermarket_pn {r.get('aftermarket_pn')!r} vs evidence Item # {item!r}")
+    for k, v in (r.get("specs") or {}).items():
+        if "\n" in v:  # multi-line spec cells print joined by " / "
+            v = " / ".join(x.strip() for x in v.split("\n") if x.strip())
+        if f"{k} | {v}" not in ev:
+            out["E"].append(f"spec {k}={v[:40]!r} not in evidence")
+    hdr = next((i for i, x in enumerate(ev) if x.startswith("MAKE | TYPE | MODEL")), None)
+    rep = ev.index("Replaces These Part Numbers") if "Replaces These Part Numbers" in ev else len(ev)
+    rows = ev[hdr + 1:rep] if hdr is not None else []
+    cols = [c.strip() for c in ev[hdr].split(" | ")] if hdr is not None else []
+    unparsed = {f.split(":", 1)[1] for f in flags if f.startswith("unparsed_application_row:")}
+    apps = r.get("applications") or []
+    raws = [a["raw"] for a in apps]
+    if [x for x in rows if x not in unparsed] != raws:
+        out["E"].append(f"applications ({len(raws)}) differ from evidence rows ({len(rows)}, {len(unparsed)} flagged unparsed)")
+    for a in apps:
+        cell = dict(zip(cols, [c.strip() for c in a["raw"].split(" | ")]))
+        y = cell.get("YEAR", "")
+        ym = re.fullmatch(r"(\d{4})(?:\s*-\s*(\d{4}))?", y)
+        if not (ym and a["years"] == [int(ym.group(1)), int(ym.group(2) or ym.group(1))]):
+            out["E"].append(f"years {a['years']} vs printed YEAR {y!r}")
+        for k, f in (("MAKE", "make"), ("TYPE", "type"), ("MODEL", "model"), ("ENGINE", "engine")):
+            if (cell.get(k) or "") != (a.get(f) or ""):
+                out["E"].append(f"{f} {a.get(f)!r} vs printed {cell.get(k)!r}")
+    # spans: every application row inside exactly one span with the same cells
+    for a in apps:
+        hit = [sp for sp in r.get("application_spans") or [] if all(sp.get(k) == a.get(k) for k in ("make", "type", "model", "engine"))
+               and sp["years"][0] <= a["years"][0] <= sp["years"][1]]
+        if len(hit) != 1:
+            out["E"].append(f"application {a['raw']!r} in {len(hit)} spans")
+    # replaces table verbatim, and every classified number comes from it
+    printed = []  # rows in page order; a brand can print on several rows
+    for x in ev[rep + 1:]:
+        if " | " in x:
+            b, _, nums = x.partition(" | ")
+            printed.append((b.strip(), [n.strip() for n in nums.split(",") if n.strip()]))
+    got = [(e["brand"], e["numbers"]) for e in r.get("replaces") or []]
+    if got != printed and not any(f.startswith("unparsed_replaces_row") for f in flags):
+        k = next((i for i, (x, y) in enumerate(zip(got, printed)) if x != y), min(len(got), len(printed)))
+        out["E"].append(f"replaces row {k} differs: record {got[k:k+1]} vs evidence {printed[k:k+1]}")
+    allnums = {(b.upper(), n) for b, ns in got for n in ns}
+    for fld in ("oe_numbers", "oe_service_numbers", "oe_supplier_numbers", "interchange_numbers", "other_numbers", "ambiguous_numbers"):
+        for e in r.get(fld) or []:
+            if (e["brand"].upper(), e["pn"]) not in allnums:
+                out["E"].append(f"{fld} {e['brand']} {e['pn']} not in the replaces table")
+    # category / fitment suspects
+    ut = (r.get("specs") or {}).get("Unit Type", "")
+    if r.get("category") and ut and r["category"].lower() not in ut.lower() and not any(f.startswith("unit_type_not_") for f in flags):
+        out["C"].append(f"Unit Type {ut!r} for category {r['category']} without flag")
+    if not apps and not any(f.startswith("no_application_rows") or f.startswith("unparsed_application_row") for f in flags):
+        out["F"].append("no applications without flag")
+    for a in apps:
+        if not (1940 <= a["years"][0] <= 2027):
+            out["F"].append(f"odd year {a['raw']!r}")
+
+
 def _common_checks(r, out):
     got = r.get("fitment") or []
     # fitment suspects
@@ -238,6 +303,10 @@ def _common_checks(r, out):
     # not in the product display name ("Black Bezel") or other_names (retail synonyms)
     text = " | ".join([r.get("name") or "", r.get("aux_desc") or "",
                        " ; ".join(r.get("list_info") or []), r.get("list_remark") or ""])
+    if r.get("site") == "www.fordpartsgiant.com":
+        # Ford: category comes from the engineering base number; list info is fit
+        # notes describing assembly contents ("Body and lens", "Includes Clutch")
+        text = " | ".join([r.get("name") or "", r.get("aux_desc") or ""])
     text = re.sub(r"(?i)window and door lock|with pulley|l/pulley|pump, unit, o-ring|w/throttle position sensor|with regulator|with filter|lens ?& ?(body|housing)|tube assembly, fuel suction", "", text)
     name_text = " | ".join([r.get("name") or "", r.get("description") or ""])
     if cat in EXPECT and not re.search(EXPECT[cat], name_text, re.I):
@@ -251,6 +320,9 @@ def _common_checks(r, out):
 def audit_record(r: dict) -> dict[str, list[str]]:
     out = defaultdict(list)
     ev = r.get("evidence_lines") or []
+    if "aftermarket_pn" in r:
+        audit_dbelectrical(r, out)
+        return out
     simplepart = "Vehicle Fitment" in ev or not any(x.startswith("Part Number: ") for x in ev)
     if simplepart:
         audit_simplepart(r, out)
@@ -314,6 +386,8 @@ def main(paths: list[str], table: bool = False) -> None:
     for p in paths:
         recs = [json.loads(l) for l in open(p) if l.strip()]
         site = recs[0]["site"] if recs else p
+        for r in recs:  # aftermarket records key on aftermarket_pn
+            r.setdefault("pn", r.get("aftermarket_pn"))
         seen = Counter((r.get("category"), r.get("pn")) for r in recs)
         res = {"records": len(recs), "E": [], "C": [], "D": [], "F": []}
         bad = 0

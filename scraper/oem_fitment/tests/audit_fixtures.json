@@ -576,5 +576,469 @@
   ],
   "fitment_rows_rendered": 5,
   "fitment_rows_total": 5
+ },
+ "DB:400-52554": {
+  "site": "www.dbelectrical.com",
+  "category": "alternator",
+  "aftermarket_pn": "400-52554",
+  "aftermarket_brand": "DB Electrical",
+  "title": "Alternator for Toyota Avalon 12V 100Amp 2000-2004 102211-0650 27060-0A050",
+  "lester": [
+   "13706"
+  ],
+  "oe_numbers": [
+   {
+    "brand": "Toyota",
+    "pn": "27060-0A050"
+   },
+   {
+    "brand": "Toyota",
+    "pn": "27060-0A050-84"
+   }
+  ],
+  "oe_scope": "product",
+  "oe_service_numbers": [],
+  "oe_supplier_numbers": [
+   {
+    "brand": "Denso",
+    "pn": "102211-0650"
+   },
+   {
+    "brand": "Denso",
+    "pn": "210-0404"
+   }
+  ],
+  "interchange_numbers": [
+   {
+    "brand": "Lester",
+    "pn": "13706"
+   }
+  ],
+  "other_numbers": [],
+  "ambiguous_numbers": [],
+  "replaces": [
+   {
+    "brand": "Denso",
+    "numbers": [
+     "102211-0650"
+    ]
+   },
+   {
+    "brand": "Denso",
+    "numbers": [
+     "210-0404"
+    ]
+   },
+   {
+    "brand": "Lester",
+    "numbers": [
+     "13706"
+    ]
+   },
+   {
+    "brand": "Toyota",
+    "numbers": [
+     "27060-0A050"
+    ]
+   },
+   {
+    "brand": "Toyota",
+    "numbers": [
+     "27060-0A050-84"
+    ]
+   }
+  ],
+  "specs": {
+   "Item Condition": "Aftermarket Part",
+   "Unit Type": "Alternator",
+   "Clock": "01:00:00",
+   "AMP": "100",
+   "Fan Type": "Internal",
+   "Pulley Type": "Solid",
+   "Regulator": "Internal",
+   "Rotation": "CW",
+   "Voltage": "12"
+  },
+  "fits_text": "",
+  "applications": [
+   {
+    "years": [
+     1998,
+     1998
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "AVALON",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | AVALON | 1998 | 3.0L"
+   },
+   {
+    "years": [
+     1999,
+     1999
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "AVALON",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | AVALON | 1999 | 3.0L"
+   },
+   {
+    "years": [
+     2000,
+     2000
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Avalon",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Avalon | 2000 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     2000,
+     2000
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "AVALON",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | AVALON | 2000 | 3.0L"
+   },
+   {
+    "years": [
+     2001,
+     2001
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Avalon",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Avalon | 2001 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     2001,
+     2001
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "AVALON",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | AVALON | 2001 | 3.0L"
+   },
+   {
+    "years": [
+     2002,
+     2002
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Avalon",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Avalon | 2002 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     2002,
+     2002
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "AVALON",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | AVALON | 2002 | 3.0L"
+   },
+   {
+    "years": [
+     2003,
+     2003
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Avalon",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Avalon | 2003 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     2003,
+     2003
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "AVALON",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | AVALON | 2003 | 3.0L"
+   },
+   {
+    "years": [
+     2004,
+     2004
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Avalon",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Avalon | 2004 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     2004,
+     2004
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "AVALON",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | AVALON | 2004 | 3.0L"
+   },
+   {
+    "years": [
+     1998,
+     1998
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Sienna",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Sienna | 1998 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     1998,
+     1998
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "SIENNA",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | SIENNA | 1998 | 3.0L"
+   },
+   {
+    "years": [
+     1999,
+     1999
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Sienna",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Sienna | 1999 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     1999,
+     1999
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "SIENNA",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | SIENNA | 1999 | 3.0L"
+   },
+   {
+    "years": [
+     2000,
+     2000
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Sienna",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Sienna | 2000 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     2000,
+     2000
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "SIENNA",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | SIENNA | 2000 | 3.0L"
+   },
+   {
+    "years": [
+     2001,
+     2001
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Sienna",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Sienna | 2001 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     2001,
+     2001
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "SIENNA",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | SIENNA | 2001 | 3.0L"
+   },
+   {
+    "years": [
+     2002,
+     2002
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Sienna",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Sienna | 2002 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     2002,
+     2002
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "SIENNA",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | SIENNA | 2002 | 3.0L"
+   },
+   {
+    "years": [
+     2003,
+     2003
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Sienna",
+    "engine": "2995cc 3.0L V6 1MZFE",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | Sienna | 2003 | 2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     2003,
+     2003
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "SIENNA",
+    "engine": "3.0L",
+    "notes": "",
+    "raw": "Toyota | Auto and Light Truck | SIENNA | 2003 | 3.0L"
+   }
+  ],
+  "application_spans": [
+   {
+    "years": [
+     1998,
+     2004
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "AVALON",
+    "engine": "3.0L"
+   },
+   {
+    "years": [
+     2000,
+     2004
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Avalon",
+    "engine": "2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     1998,
+     2003
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "Sienna",
+    "engine": "2995cc 3.0L V6 1MZFE"
+   },
+   {
+    "years": [
+     1998,
+     2003
+    ],
+    "make": "Toyota",
+    "type": "Auto and Light Truck",
+    "model": "SIENNA",
+    "engine": "3.0L"
+   }
+  ],
+  "multi_make": false,
+  "evidence_lines": [
+   "Alternator for Toyota Avalon 12V 100Amp 2000-2004 102211-0650 27060-0A050",
+   "Item #: 400-52554",
+   "Item Condition | Aftermarket Part",
+   "Unit Type | Alternator",
+   "Clock | 01:00:00",
+   "AMP | 100",
+   "Fan Type | Internal",
+   "Pulley Type | Solid",
+   "Regulator | Internal",
+   "Rotation | CW",
+   "Voltage | 12",
+   "MAKE | TYPE | MODEL | YEAR | ENGINE",
+   "Toyota | Auto and Light Truck | AVALON | 1998 | 3.0L",
+   "Toyota | Auto and Light Truck | AVALON | 1999 | 3.0L",
+   "Toyota | Auto and Light Truck | Avalon | 2000 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | AVALON | 2000 | 3.0L",
+   "Toyota | Auto and Light Truck | Avalon | 2001 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | AVALON | 2001 | 3.0L",
+   "Toyota | Auto and Light Truck | Avalon | 2002 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | AVALON | 2002 | 3.0L",
+   "Toyota | Auto and Light Truck | Avalon | 2003 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | AVALON | 2003 | 3.0L",
+   "Toyota | Auto and Light Truck | Avalon | 2004 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | AVALON | 2004 | 3.0L",
+   "Toyota | Auto and Light Truck | Sienna | 1998 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | SIENNA | 1998 | 3.0L",
+   "Toyota | Auto and Light Truck | Sienna | 1999 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | SIENNA | 1999 | 3.0L",
+   "Toyota | Auto and Light Truck | Sienna | 2000 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | SIENNA | 2000 | 3.0L",
+   "Toyota | Auto and Light Truck | Sienna | 2001 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | SIENNA | 2001 | 3.0L",
+   "Toyota | Auto and Light Truck | Sienna | 2002 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | SIENNA | 2002 | 3.0L",
+   "Toyota | Auto and Light Truck | Sienna | 2003 | 2995cc 3.0L V6 1MZFE",
+   "Toyota | Auto and Light Truck | SIENNA | 2003 | 3.0L",
+   "Replaces These Part Numbers",
+   "Denso | 102211-0650",
+   "Denso | 210-0404",
+   "Lester | 13706",
+   "Toyota | 27060-0A050",
+   "Toyota | 27060-0A050-84"
+  ],
+  "flags": [],
+  "product_url": "https://www.dbelectrical.com/products/alternator-for-toyota-avalon-12v-100amp-2000-2004-102211-0650-27060-0a050.html",
+  "found_on": "https://www.dbelectrical.com/alternators/automotive/toyota/"
  }
 }

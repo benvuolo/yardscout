@@ -40,6 +40,43 @@ SimplePart: 363/363.
 |---|---|---|---|---|---|---|---|
 | 01:23 | www.toyotapartsnow.com | 363 | 0 | 0 | 0 | 0 | 0.0% |
 | 01:25 | www.jeeppartsdeal.com | 385 | 0 | 1 | 0 | 0 | 0.26% |
+| 01:43 | www.fordpartsgiant.com | 359 | 0 | 0 | 0 | 0 | 0.0% |
+| ~01:45 | www.nissanpartsdeal.com | 332 | 0 | 0 | 0 | 0 | 0.0% |
+| ~01:45 | www.infinitipartsdeal.com | 355 | 0 | 0 | 0 | 0 | 0.0% |
+| ~01:45 | www.dbelectrical.com (aftermarket) | 363 | 0 | 0 | 0 | 0 | 0.0% |
+
+Ford 01:43: the first pass raised 107 category hits, all heuristic. Ford
+names are generic ("Lamp Assy", "Sender And Pump Assy"), its list info is
+fit notes about contents ("Body and lens", "Includes Clutch (19D786)",
+"Does Not Include Bulbs Or Ballast"), and the module decides category by
+the engineering base number. The auditor now reads only Ford part names
+for junk words. Curator notes:
+- A/C compressors come both as "Compressor only" (F7LZ-19703-AA,
+  8H6Z-19703-A) and as "New Loaded Compressor Assembly. Includes Clutch,
+  Coil, Pulley" (4L3Z-19V703-AB) under different numbers. Do not merge the
+  two scopes.
+- Fusion/MKZ list "inner" tail lamps (9H6Z-13404-B/-13405-B, "Backup
+  Lamp") separately from the outer lamps; both are 13404/13405.
+
+DB Electrical: its own `verify_records.py` re-reads the HTML cache, which
+stays on the Actions runner, so `audit.py` checks these records offline. It
+checks the item #, every spec line, every application row cell for cell
+(YEAR may print as a span "1999 - 2001"), that each row is in exactly one
+application_span, the replaces table row for row (a brand can print on
+several rows), and that every classified number (oe, service, supplier,
+interchange, other, ambiguous) comes from that table. Curator notes:
+- 7 records carry `unparsed_application_row` (88 rows). 400-52039--003
+  prints the engine in the YEAR column ("DAKOTA | 2.5L(153) L4 | 1997")
+  under a MAKE | TYPE | MODEL | YEAR | ENGINE header. The rest are
+  tractors, forklifts and race cars with year 0 or blank. Leaving them
+  unparsed is correct.
+- The FORD replaces row mixes engineering numbers with short forms printed
+  on the page ("4L3U-BA", "5L7T-CB") and GL-series numbers (GL579, GL622,
+  GL908, Motorcraft service-number shape) printed under FORD, so they land
+  in `oe_numbers`. Do not treat the short forms or GL numbers as Ford
+  engineering numbers when joining to the dealer track.
+- `aftermarket_pn` can carry a variant suffix ("400-52039--003") and is
+  then flagged `item_number_differs` (Item # 400-52039).
 
 Junk words are read only in the OEM name, the short name (aux_desc) and the
 list-row text. They are not read in the product display name, which carries
