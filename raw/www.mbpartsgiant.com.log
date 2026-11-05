@@ -347,3 +347,59 @@
 14:09:58 seg done tier=B Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=859 errors=7
 14:32:30 seg done tier=B Mercedes-Benz C-Class [2001, 2007] seeds=[2005, 2004, 2003] records=909 errors=7
 14:42:38 time budget reached records=937
+14:42:46 start site=www.mbpartsgiant.com segments=50 tiers=['A', 'B']
+14:42:46 seg done tier=A Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz 300 [1960, 1993] seeds=[1992] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz GL450 [2007, 2015] seeds=[2007] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz ML320 [1998, 2009] seeds=[2000] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz C240 [2001, 2005] seeds=[2003] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CLK [1999, 2009] seeds=[2007] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz R-Class [2006, 2012] seeds=[2006] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz S550 [2007, 2013] seeds=[2007] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz SLK [1998, 2008] seeds=[2001] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz SLK-Class [1998, 2013] seeds=[1998] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CLK320 [1998, 2005] seeds=[2005] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz S500 [1995, 2006] seeds=[2001] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CLS-Class [2006, 2012] seeds=[2006] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz C350 [2006, 2015] seeds=[2008] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz GLK350 [2010, 2014] seeds=[2011] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz S430 [2000, 2006] seeds=[2002] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz GLK-Class [2010, 2015] seeds=[2010] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CLA-Class [2014, 2021] seeds=[2014] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CLK430 [1999, 2003] seeds=[2002] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz R350 [2006, 2012] seeds=[2006] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CLA250 [2014, 2019] seeds=[2014] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz ML500 [2002, 2006] seeds=[2003] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz C320 [2001, 2011] seeds=[2002] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz SL-Class [1992, 2015] seeds=[2003] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CL-Class [1999, 2010] seeds=[2002] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz E500 [2003, 2006] seeds=[2004] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz Sprinter 2500 [2010, 2016] seeds=[2012] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CLK350 [2006, 2009] seeds=[2006] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz 190 [1964, 1993] seeds=[1991] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz SLK230 [1998, 2003] seeds=[2002] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz 300-Class [1981, 1991] seeds=[1987] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz CLS550 [2007, 2014] seeds=[2007] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz C280 [1975, 2007] seeds=[2007] records=937 errors=7
+14:42:46 seg done tier=A Mercedes-Benz 300E [1986, 1992] seeds=[1988] records=937 errors=7
+14:42:46 seg done tier=B Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=937 errors=7
+14:42:46 seg done tier=B Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=937 errors=7
+14:42:46 seg done tier=B Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=937 errors=7
+15:05:47 seg done tier=B Mercedes-Benz S-Class [1974, 2015] seeds=[2000, 1994, 1995] records=971 errors=7
+15:16:19 time budget reached records=992
