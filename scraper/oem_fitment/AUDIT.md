@@ -72,6 +72,11 @@ hit by hand.
 
 Later checkpoints: DB Electrical 02:41 (726 records) and 03:09 (799): 0 E,
 0 C, 0 F. As of 03:12 the dealer-site files are unchanged since ~02:05.
+03:14 checkpoints: Acura 334 records (0 E; 2 C, both correct: 34156-SEC-A51
+is the TSX deck-lid tail lamp "Lamp Unit, L."; 06388-P5A-505RM is a reman
+compressor "(RMD) (INCLUDES CLUTCH & COIL)", kept because the page lists no
+new number). Jeep 912 records (0 E; the only C is 5143152AA, already on the
+exclude list).
 
 The auditor's first pass on Honda, Acura and BMW reported 100% E. That was
 the auditor: those modules declare `trim_col` ("Body & Trim") and
