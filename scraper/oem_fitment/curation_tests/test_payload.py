@@ -54,6 +54,9 @@ check("the fixture's Verified body group ships in oemGroups with src 'oem' and t
       and og[0]["apps"] == [["Toyota", "Sienna", 2004, 2005]], json.dumps(og)[:300])
 check("oemStatus says ok with the raw commit and group count", p["oemStatus"].get("toyota", "").startswith("ok fixtures 1 groups"),
       str(p["oemStatus"]))
+check("oemStatus counts both tiers (a file of Likely groups never reads as '0 groups')",
+      p["oemStatus"]["toyota"].startswith(f"ok fixtures {1 + len(doc['likely'])} groups (1 verified, "
+                                          f"{len(doc['likely'])} likely)"), str(p["oemStatus"]))
 check("old keys are byte-identical to a build without OEM (no contradiction here)", canon(p) == canon(base))
 check("categories ids are unchanged", [c["id"] for c in p["categories"]] == [c["id"] for c in base["categories"]])
 check("_report/ is skipped by the loader", "toyota" in p["oemStatus"] and len(p["oemStatus"]) == 1)

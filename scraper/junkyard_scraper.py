@@ -13933,8 +13933,10 @@ def _load_oem_layer(now: datetime | None = None) -> dict:
             continue
         out["docs"][ns] = doc
         out["expired"][ns] = expired
-        n = len(doc.get("groups") or []) + len(doc.get("vg") or [])
-        out["status"][ns] = f"ok {str((doc.get('raw') or {}).get('commit'))[:8]} {n} groups"
+        nv = len(doc.get("groups") or []) + len(doc.get("vg") or [])
+        nl = len(doc.get("likely") or [])
+        out["status"][ns] = (f"ok {str((doc.get('raw') or {}).get('commit'))[:8]} {nv + nl} groups "
+                             f"({nv} verified, {nl} likely)")
     return out
 
 
@@ -14087,8 +14089,17 @@ def _attach_oem_layer_inner(payload: dict, before: dict) -> None:
         payload["oemStatus"] = {ns: f"dropped: {problems[0]}" for ns in oem["status"]}
         print(f"[interchange] oem layer withheld: {problems[0]}", file=sys.stderr)
         return
-    for gid in V.size_trim(payload):
-        print(f"[interchange] oem {gid} dropped for size (V11)", file=sys.stderr)
+    dropped = V.size_trim(payload)
+    by_ns: dict = {}
+    for gid in dropped:
+        ns = gid.split(":")[1] if gid.startswith("oem:") else "_vg"
+        by_ns[ns] = by_ns.get(ns, 0) + 1
+    if dropped:
+        print(f"[interchange] oem: {len(dropped)} groups dropped for size (V11): "
+              + ", ".join(f"{k} {v}" for k, v in sorted(by_ns.items())), file=sys.stderr)
+    for ns, n in by_ns.items():
+        if payload["oemStatus"].get(ns, "").startswith("ok"):
+            payload["oemStatus"][ns] += f"; {n} dropped for size (V11)"
 
 
 _OEM_BRANDS = {"toyota": "Toyota", "mopar": "Mopar", "gm": "GM", "ford": "Ford", "nissan": "Nissan",
