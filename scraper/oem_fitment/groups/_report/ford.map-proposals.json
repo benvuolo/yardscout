@@ -1,0 +1,154 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Ford",
+    "cat_model": "E-550 Super Duty",
+    "feed": [
+     "Ford",
+     "E-550 Super Duty"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Ford",
+    "cat_model": "EcoSport",
+    "feed": [
+     "Ford",
+     "EcoSport"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Ford",
+    "cat_model": "Econoline Super Duty(1996-1999)",
+    "feed": [
+     "Ford",
+     "Econoline Super Duty(1996-1999)"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Ford",
+    "cat_model": "F Super Duty",
+    "feed": [
+     "Ford",
+     "F Super Duty"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Ford",
+    "cat_model": "F53",
+    "feed": [
+     "Ford",
+     "F-53"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Mercury",
+    "cat_model": "Lynx",
+    "feed": [
+     "Mercury",
+     "Lynx"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "ford",
+ "proposals": [
+  {
+   "cat_make": "Ford",
+   "cat_model": "E-550 Super Duty",
+   "feed_cars": 0,
+   "fitment_rows": 12,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "E-550 Super Duty",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "EcoSport",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "EcoSport",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "Ecosport",
+     74
+    ]
+   ]
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "Econoline Super Duty(1996-1999)",
+   "feed_cars": 0,
+   "fitment_rows": 29,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "Econoline Super Duty(1996-1999)",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "F Super Duty",
+   "feed_cars": 0,
+   "fitment_rows": 31,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "F Super Duty",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "F-Super Duty",
+     6
+    ]
+   ]
+  },
+  {
+   "cat_make": "Ford",
+   "cat_model": "F53",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "ford",
+   "proposed": {
+    "make": "Ford",
+    "model": "F-53",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Mercury",
+   "cat_model": "Lynx",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "ford",
+   "proposed": {
+    "make": "Mercury",
+    "model": "Lynx",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+}

@@ -1,0 +1,10257 @@
+{
+ "as_of": "2026-11-05T03:26:17Z",
+ "audit_sample": {
+  "closures": [],
+  "note": "no eligible closure or Verified pair to sample",
+  "pairs": []
+ },
+ "contradictions": [],
+ "engine_refusals": [
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2022
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2023
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Aspen",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2022
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2023
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2022
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2023
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2022
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2023
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2008
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2009
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2010
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2022
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1993
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1994
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1995
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1996
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1999
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2000
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2001
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2002
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2003
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2004
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2005
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2006
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2011
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2022
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2023
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2024
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2007
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B1500",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B1500",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B2500",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B2500",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B3500",
+    1997
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B3500",
+    1998
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Durango",
+    2025
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2022
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Wagoneer",
+    1991
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2012
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2013
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2014
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2015
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2016
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2017
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2018
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2019
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2020
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2021
+   ]
+  },
+  {
+   "cat": "alternator",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Aspen",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Aspen",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Aspen",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Voyager",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Voyager",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Voyager",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Caravan",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Caravan",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Caravan",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Caravan",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Caravan",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Caravan",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Caravan",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2000
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2000
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram Van 1500",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram Van 1500",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram Van 2500",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram Van 2500",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram Van 3500",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram Van 3500",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1996
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1999
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2000
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2003
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2004
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2005
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2009
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2010
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2024
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2011
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2024
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Cirrus",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Cirrus",
+    1996
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Cirrus",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Cirrus",
+    1999
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Cirrus",
+    2000
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "LeBaron",
+    1991
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "LeBaron",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "LeBaron",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Sebring",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Sebring",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Sebring",
+    1999
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Sebring",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Avenger",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Avenger",
+    1996
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Avenger",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Avenger",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Avenger",
+    1999
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2007
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B150",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B150",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B150",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B1500",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B1500",
+    1996
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B1500",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B1500",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B250",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B250",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B250",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B2500",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B2500",
+    1996
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B2500",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B2500",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B350",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B350",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B350",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B3500",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B3500",
+    1996
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B3500",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "B3500",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Caravan",
+    1991
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Caravan",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Caravan",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Caravan",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Caravan",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2008
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dakota",
+    1990
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dakota",
+    1991
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Daytona",
+    1991
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Daytona",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Daytona",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Durango",
+    2025
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dynasty",
+    1991
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dynasty",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dynasty",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ramcharger",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ramcharger",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Shadow",
+    1991
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Shadow",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Shadow",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Shadow",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Spirit",
+    1991
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Spirit",
+    1992
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Spirit",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Spirit",
+    1994
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Spirit",
+    1995
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Stratus",
+    1997
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Stratus",
+    1998
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Stratus",
+    1999
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Stratus",
+    2000
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Stratus",
+    2006
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Cherokee L",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Cherokee L",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Cherokee L",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Cherokee L",
+    2024
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Wagoneer",
+    1993
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Wagoneer",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Wagoneer",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wagoneer",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wagoneer",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wrangler",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wrangler",
+    2022
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wrangler",
+    2023
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wrangler",
+    2024
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "3500",
+    2025
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2012
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2013
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2014
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2015
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2016
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2017
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2018
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2019
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2020
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2021
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2022
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "200",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "300",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Caravan",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Caravan",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Challenger",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Charger",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Dakota",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2001
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2021
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2022
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Durango",
+    2023
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Journey",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 1500",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 2500",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram 3500",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram Van",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram Van",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Dodge",
+    "Ram Wagon",
+    2002
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2021
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    2022
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Commander",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1994
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1995
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1996
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1997
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1998
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    1999
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2000
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2003
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2004
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2005
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2006
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2008
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2009
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2010
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Jeep",
+    "Grand Cherokee",
+    2021
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2021
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2022
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2023
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500 Classic",
+    2024
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2011
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_ambiguous",
+   "t": [
+    "Ram",
+    "1500",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Imperial",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "LeBaron",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "LeBaron",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "New Yorker",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "New Yorker",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Pacifica",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "TC By Maserati",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "TC By Maserati",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Chrysler",
+    "Town & Country",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Aries",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Avenger",
+    2007
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Caravan",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Caravan",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "D150",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "D150",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "D150",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "D150",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "D350",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "D350",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "D350",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "D350",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dakota",
+    1988
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dakota",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dakota",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dakota",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Daytona",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Daytona",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Durango",
+    2025
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dynasty",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Dynasty",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Grand Caravan",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Lancer",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ram Van",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ram Van",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ram Van",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ram Van",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ram Wagon",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ram Wagon",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ram Wagon",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ram Wagon",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ramcharger",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ramcharger",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ramcharger",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Ramcharger",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Shadow",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Shadow",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Spirit",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "Spirit",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W150",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W150",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W150",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W150",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W250",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W250",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W250",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W250",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W350",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W350",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W350",
+    1992
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Dodge",
+    "W350",
+    1993
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    1986
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    1987
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    1988
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Cherokee",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Comanche",
+    1986
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Comanche",
+    1987
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Comanche",
+    1988
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Comanche",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Comanche",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2021
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Compass",
+    2022
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Wagoneer",
+    1987
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Wagoneer",
+    1988
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Wagoneer",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Wagoneer",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Grand Wagoneer",
+    1991
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "J10",
+    1987
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "J10",
+    1988
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Renegade",
+    2021
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wagoneer",
+    1986
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wagoneer",
+    1987
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wagoneer",
+    1988
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wagoneer",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wagoneer",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wrangler",
+    1987
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wrangler",
+    1988
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wrangler",
+    1989
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Jeep",
+    "Wrangler",
+    1990
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2012
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2013
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "C/V",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 1500",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 2500",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2014
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster 3500",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2015
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2016
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2017
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2018
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2019
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2020
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2021
+   ]
+  },
+  {
+   "cat": "starter",
+   "reason": "family_gap",
+   "t": [
+    "Ram",
+    "ProMaster City",
+    2022
+   ]
+  }
+ ],
+ "funnel_cars": {
+  "ac-compressor": {
+   "no_records": {
+    "": 20581
+   },
+   "not_closed": {
+    "no_year_manifest": 21260
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "alternator": {
+   "no_records": {
+    "": 12924
+   },
+   "not_closed": {
+    "no_year_manifest": 28917
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "bumper-front": {
+   "no_records": {
+    "": 35097
+   },
+   "not_closed": {
+    "no_year_manifest": 6744
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "bumper-rear": {
+   "no_records": {
+    "": 33075
+   },
+   "not_closed": {
+    "no_year_manifest": 8766
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "climate-control": {
+   "no_records": {
+    "": 29515
+   },
+   "not_closed": {
+    "no_year_manifest": 12326
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "door-front": {
+   "no_records": {
+    "": 34004
+   },
+   "not_closed": {
+    "no_year_manifest": 7837
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "door-rear": {
+   "no_records": {
+    "": 33578
+   },
+   "not_closed": {
+    "no_year_manifest": 8263
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "fender": {
+   "no_records": {
+    "": 33944
+   },
+   "not_closed": {
+    "no_year_manifest": 7897
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "fuel-pump-module": {
+   "no_records": {
+    "": 21889
+   },
+   "not_closed": {
+    "no_year_manifest": 19952
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "gauge-cluster": {
+   "no_records": {
+    "": 39548
+   },
+   "not_closed": {
+    "no_year_manifest": 2293
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "grille": {
+   "no_records": {
+    "": 36420
+   },
+   "not_closed": {
+    "no_year_manifest": 5421
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "headlights": {
+   "no_records": {
+    "": 27300
+   },
+   "not_closed": {
+    "no_year_manifest": 14541
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "hood": {
+   "no_records": {
+    "": 33613
+   },
+   "not_closed": {
+    "no_year_manifest": 8228
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "ignition-coils": {
+   "no_records": {
+    "": 5052
+   },
+   "not_closed": {
+    "no_year_manifest": 36789
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "liftgate": {
+   "no_records": {
+    "": 34968
+   },
+   "not_closed": {
+    "no_year_manifest": 6873
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "power-steering-pump": {
+   "no_records": {
+    "": 17998
+   },
+   "not_closed": {
+    "no_year_manifest": 23843
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "radiator": {
+   "no_records": {
+    "": 26672
+   },
+   "not_closed": {
+    "no_year_manifest": 15169
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "side-mirrors": {
+   "no_records": {
+    "": 26277
+   },
+   "not_closed": {
+    "no_year_manifest": 15564
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "starter": {
+   "no_records": {
+    "": 10436
+   },
+   "not_closed": {
+    "no_year_manifest": 31405
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "tail-lights": {
+   "no_records": {
+    "": 30908
+   },
+   "not_closed": {
+    "no_year_manifest": 10933
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "throttle-body": {
+   "no_records": {
+    "": 10828
+   },
+   "not_closed": {
+    "no_year_manifest": 31013
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "window-regulator": {
+   "no_records": {
+    "": 23321
+   },
+   "not_closed": {
+    "no_year_manifest": 18520
+   },
+   "unmapped": {
+    "": 2343
+   }
+  },
+  "window-switch": {
+   "no_records": {
+    "": 21906
+   },
+   "not_closed": {
+    "no_year_manifest": 19935
+   },
+   "unmapped": {
+    "": 2343
+   }
+  }
+ },
+ "funnel_cars_hypothetical_if_every_year_closed": {
+  "by_cat": {
+   "ac-compressor": {
+    "conditional": {
+     "conditional:notes_not_own_page": 6451,
+     "conditional:trim": 187,
+     "conditional:unknown": 232
+    },
+    "no_records": {
+     "": 20581
+    },
+    "split": {
+     "option_split": 14390
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "alternator": {
+    "conditional": {
+     "conditional:engine": 270,
+     "conditional:notes_not_own_page": 7678
+    },
+    "no_records": {
+     "": 12924
+    },
+    "split": {
+     "option_split": 20969
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "bumper-front": {
+    "conditional": {
+     "conditional:notes_not_own_page": 387,
+     "conditional:trim": 142
+    },
+    "no_records": {
+     "": 35097
+    },
+    "split": {
+     "option_split": 6215
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "bumper-rear": {
+    "conditional": {
+     "conditional:notes_not_own_page": 921,
+     "conditional:trim": 181
+    },
+    "no_records": {
+     "": 33075
+    },
+    "split": {
+     "option_split": 7664
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "climate-control": {
+    "conditional": {
+     "conditional:notes_not_own_page": 3734,
+     "conditional:trim": 547
+    },
+    "no_records": {
+     "": 29515
+    },
+    "split": {
+     "option_split": 8045
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "door-front": {
+    "conditional": {
+     "conditional:notes_not_own_page": 3643,
+     "conditional:production": 47,
+     "conditional:trim": 1942
+    },
+    "eligible": {
+     "": 348
+    },
+    "no_records": {
+     "": 34004
+    },
+    "split": {
+     "option_split": 1857
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "door-rear": {
+    "conditional": {
+     "conditional:notes_not_own_page": 4188,
+     "conditional:trim": 1437
+    },
+    "eligible": {
+     "": 1061
+    },
+    "no_records": {
+     "": 33578
+    },
+    "split": {
+     "option_split": 1577
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "fender": {
+    "chain_member_conditional": {
+     "chain_member_conditional": 267
+    },
+    "conditional": {
+     "conditional:notes_not_own_page": 3366,
+     "conditional:option_layout": 134,
+     "conditional:trim": 1157
+    },
+    "eligible": {
+     "": 377
+    },
+    "no_records": {
+     "": 33944
+    },
+    "split": {
+     "option_split": 2596
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "fuel-pump-module": {
+    "conditional": {
+     "conditional:notes_not_own_page": 7364,
+     "conditional:trim": 815
+    },
+    "no_records": {
+     "": 21889
+    },
+    "split": {
+     "option_split": 11773
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "gauge-cluster": {
+    "conditional": {
+     "conditional:notes_not_own_page": 299
+    },
+    "no_records": {
+     "": 39548
+    },
+    "split": {
+     "option_split": 1994
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "grille": {
+    "conditional": {
+     "conditional:notes_not_own_page": 1197,
+     "conditional:trim": 122
+    },
+    "eligible": {
+     "": 232
+    },
+    "no_records": {
+     "": 36420
+    },
+    "split": {
+     "option_split": 3870
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "headlights": {
+    "chain_member_conditional": {
+     "chain_member_conditional": 214
+    },
+    "conditional": {
+     "conditional:notes_not_own_page": 7054,
+     "conditional:option": 200,
+     "conditional:option_layout": 722,
+     "conditional:trim": 116,
+     "conditional:unknown": 267
+    },
+    "eligible": {
+     "": 232
+    },
+    "no_records": {
+     "": 27300
+    },
+    "split": {
+     "option_split": 5243,
+     "position_missing": 493
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "hood": {
+    "chain_member_conditional": {
+     "chain_member_conditional": 167
+    },
+    "conditional": {
+     "conditional:notes_not_own_page": 5554,
+     "conditional:option_layout": 200,
+     "conditional:trim": 1422
+    },
+    "eligible": {
+     "": 326
+    },
+    "no_records": {
+     "": 33613
+    },
+    "split": {
+     "option_split": 559
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "ignition-coils": {
+    "conditional": {
+     "conditional:engine": 1632,
+     "conditional:notes_not_own_page": 17277
+    },
+    "eligible": {
+     "": 232
+    },
+    "no_records": {
+     "": 5052
+    },
+    "split": {
+     "option_split": 17648
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "liftgate": {
+    "conditional": {
+     "conditional:notes_not_own_page": 4508,
+     "conditional:trim": 1246
+    },
+    "eligible": {
+     "": 613
+    },
+    "no_records": {
+     "": 34968
+    },
+    "split": {
+     "option_split": 506
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "power-steering-pump": {
+    "conditional": {
+     "conditional:engine": 24,
+     "conditional:notes_not_own_page": 16623,
+     "conditional:trim": 200,
+     "conditional:unknown": 348
+    },
+    "no_records": {
+     "": 17998
+    },
+    "split": {
+     "option_split": 6648
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "radiator": {
+    "conditional": {
+     "conditional:engine": 78,
+     "conditional:notes_not_own_page": 4972
+    },
+    "no_records": {
+     "": 26672
+    },
+    "split": {
+     "option_split": 10119
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "side-mirrors": {
+    "conditional": {
+     "conditional:notes_not_own_page": 382
+    },
+    "no_records": {
+     "": 26277
+    },
+    "split": {
+     "option_split": 15056,
+     "position_missing": 125,
+     "slot_missing": 1
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "starter": {
+    "conditional": {
+     "conditional:engine": 1227,
+     "conditional:notes_not_own_page": 11850
+    },
+    "no_records": {
+     "": 10436
+    },
+    "split": {
+     "option_split": 18328
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "tail-lights": {
+    "conditional": {
+     "conditional:notes_not_own_page": 2849,
+     "conditional:option_layout": 796,
+     "conditional:trim": 815
+    },
+    "eligible": {
+     "": 330
+    },
+    "no_records": {
+     "": 30908
+    },
+    "split": {
+     "option_split": 6143
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "throttle-body": {
+    "chain_member_conditional": {
+     "chain_member_conditional": 232
+    },
+    "conditional": {
+     "conditional:engine": 339,
+     "conditional:notes_not_own_page": 10233
+    },
+    "no_records": {
+     "": 10828
+    },
+    "split": {
+     "option_split": 20209
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "window-regulator": {
+    "no_records": {
+     "": 23321
+    },
+    "split": {
+     "packaging_unstated": 18520
+    },
+    "unmapped": {
+     "": 2343
+    }
+   },
+   "window-switch": {
+    "conditional": {
+     "conditional:notes_not_own_page": 5589,
+     "conditional:option": 122,
+     "conditional:position": 214
+    },
+    "no_records": {
+     "": 21906
+    },
+    "split": {
+     "no_candidates": 427,
+     "option_split": 8620,
+     "position_missing": 4963
+    },
+    "unmapped": {
+     "": 2343
+    }
+   }
+  },
+  "label": "HYPOTHETICAL: closure (C1-C9) and the audit gate (E5) assumed, current candidate state; ranks crawler work, never shipped"
+ },
+ "input_issues": [],
+ "lint": [],
+ "map_proposals": [],
+ "model_map_report": {
+  "M10": {
+   "ford": {
+    "cars": 60517,
+    "mapped_cars": 58270,
+    "mapped_share": 0.9629
+   },
+   "gm": {
+    "cars": 78869,
+    "mapped_cars": 63716,
+    "mapped_share": 0.8079
+   },
+   "hmg": {
+    "cars": 21842,
+    "mapped_cars": 21627,
+    "mapped_share": 0.9902
+   },
+   "honda": {
+    "cars": 28559,
+    "mapped_cars": 28151,
+    "mapped_share": 0.9857
+   },
+   "mopar": {
+    "cars": 44184,
+    "mapped_cars": 41841,
+    "mapped_share": 0.947
+   },
+   "nissan": {
+    "cars": 33192,
+    "mapped_cars": 31865,
+    "mapped_share": 0.96
+   },
+   "subaru": {
+    "cars": 5555,
+    "mapped_cars": 5292,
+    "mapped_share": 0.9527
+   },
+   "toyota": {
+    "cars": 26335,
+    "mapped_cars": 25629,
+    "mapped_share": 0.9732
+   }
+  },
+  "M6": {
+   "by_target": {
+    "Acura|CL": {
+     "decoded": 108
+    },
+    "Acura|Integra": {
+     "decoded": 84
+    },
+    "Acura|Legend": {
+     "decoded": 37
+    },
+    "Acura|MDX": {
+     "decoded": 887,
+     "make_mismatch": 2
+    },
+    "Acura|RDX": {
+     "decoded": 122
+    },
+    "Acura|RL": {
+     "decoded": 107
+    },
+    "Acura|RLX": {
+     "decoded": 3
+    },
+    "Acura|RSX": {
+     "decoded": 108
+    },
+    "Acura|TL": {
+     "decoded": 1126,
+     "make_mismatch": 1
+    },
+    "Acura|TLX": {
+     "decoded": 30
+    },
+    "Acura|TSX": {
+     "decoded": 144
+    },
+    "Acura|ZDX": {
+     "decoded": 4
+    },
+    "Buick|Allure": {
+     "decoded": 16
+    },
+    "Buick|Cascada": {
+     "decoded": 2
+    },
+    "Buick|Century": {
+     "decoded": 565
+    },
+    "Buick|Electra": {
+     "decoded": 5
+    },
+    "Buick|Enclave": {
+     "decoded": 952
+    },
+    "Buick|Encore": {
+     "decoded": 252
+    },
+    "Buick|Encore GX": {
+     "decoded": 7
+    },
+    "Buick|Envision": {
+     "decoded": 23
+    },
+    "Buick|Envista": {
+     "decoded": 3
+    },
+    "Buick|LaCrosse": {
+     "decoded": 863
+    },
+    "Buick|LeSabre": {
+     "decoded": 901
+    },
+    "Buick|Lucerne": {
+     "decoded": 496
+    },
+    "Buick|Park Avenue": {
+     "decoded": 54
+    },
+    "Buick|Rainier": {
+     "decoded": 72
+    },
+    "Buick|Reatta": {},
+    "Buick|Regal": {
+     "decoded": 456
+    },
+    "Buick|Rendezvous": {
+     "decoded": 292
+    },
+    "Buick|Riviera": {
+     "decoded": 4
+    },
+    "Buick|Roadmaster": {
+     "decoded": 13
+    },
+    "Buick|Skyhawk": {},
+    "Buick|Skylark": {
+     "decoded": 10
+    },
+    "Buick|Terraza": {
+     "decoded": 36
+    },
+    "Buick|Verano": {
+     "decoded": 345
+    },
+    "Cadillac|ATS": {
+     "decoded": 128
+    },
+    "Cadillac|Allante": {},
+    "Cadillac|Brougham": {
+     "decoded": 5
+    },
+    "Cadillac|CT5": {},
+    "Cadillac|CT6": {
+     "decoded": 2
+    },
+    "Cadillac|CTS": {
+     "decoded": 584
+    },
+    "Cadillac|DTS": {
+     "decoded": 36
+    },
+    "Cadillac|DeVille": {
+     "decoded": 184,
+     "make_mismatch": 1
+    },
+    "Cadillac|ELR": {
+     "decoded": 1
+    },
+    "Cadillac|Eldorado": {
+     "decoded": 28
+    },
+    "Cadillac|Escalade": {
+     "decoded": 482,
+     "hybrid": 6
+    },
+    "Cadillac|Fleetwood": {
+     "decoded": 6
+    },
+    "Cadillac|SRX": {
+     "decoded": 563
+    },
+    "Cadillac|STS": {
+     "decoded": 67
+    },
+    "Cadillac|Seville": {
+     "decoded": 120
+    },
+    "Cadillac|XLR": {},
+    "Cadillac|XT5": {
+     "decoded": 10
+    },
+    "Cadillac|XTS": {
+     "decoded": 71
+    },
+    "Chevrolet|Astro": {
+     "decoded": 410
+    },
+    "Chevrolet|Avalanche": {
+     "decoded": 394
+    },
+    "Chevrolet|Beretta": {
+     "decoded": 5
+    },
+    "Chevrolet|Blazer": {
+     "decoded": 532
+    },
+    "Chevrolet|Bolt EV": {
+     "decoded": 2
+    },
+    "Chevrolet|C10": {
+     "decoded": 26
+    },
+    "Chevrolet|C1500": {
+     "decoded": 254
+    },
+    "Chevrolet|C20": {
+     "decoded": 4
+    },
+    "Chevrolet|C2500": {
+     "decoded": 73,
+     "make_mismatch": 1
+    },
+    "Chevrolet|C30": {
+     "decoded": 3
+    },
+    "Chevrolet|C3500": {
+     "decoded": 41
+    },
+    "Chevrolet|Camaro": {
+     "decoded": 454
+    },
+    "Chevrolet|Caprice": {
+     "decoded": 71
+    },
+    "Chevrolet|Captiva Sport": {
+     "decoded": 248
+    },
+    "Chevrolet|Cavalier": {
+     "decoded": 174
+    },
+    "Chevrolet|Celebrity": {},
+    "Chevrolet|Cobalt": {
+     "decoded": 1218
+    },
+    "Chevrolet|Colorado": {
+     "decoded": 492
+    },
+    "Chevrolet|Corsica": {
+     "decoded": 4
+    },
+    "Chevrolet|Corvette": {
+     "decoded": 12
+    },
+    "Chevrolet|Cruze": {
+     "decoded": 3611
+    },
+    "Chevrolet|Equinox": {
+     "decoded": 3401
+    },
+    "Chevrolet|Express": {
+     "decoded": 1
+    },
+    "Chevrolet|G10": {
+     "decoded": 5
+    },
+    "Chevrolet|G20": {
+     "decoded": 45
+    },
+    "Chevrolet|G30": {
+     "decoded": 8
+    },
+    "Chevrolet|HHR": {
+     "decoded": 766
+    },
+    "Chevrolet|Impala": {
+     "decoded": 3177
+    },
+    "Chevrolet|K10": {
+     "decoded": 1
+    },
+    "Chevrolet|K1500": {
+     "decoded": 274
+    },
+    "Chevrolet|K20": {
+     "decoded": 2
+    },
+    "Chevrolet|K2500": {
+     "decoded": 93
+    },
+    "Chevrolet|K3500": {
+     "decoded": 14
+    },
+    "Chevrolet|Lumina": {
+     "decoded": 49
+    },
+    "Chevrolet|Malibu": {
+     "decoded": 4334,
+     "hybrid": 24
+    },
+    "Chevrolet|Metro": {},
+    "Chevrolet|Monte Carlo": {
+     "decoded": 303
+    },
+    "Chevrolet|Orlando": {
+     "decoded": 12
+    },
+    "Chevrolet|P30": {
+     "decoded": 2
+    },
+    "Chevrolet|R30": {
+     "decoded": 4
+    },
+    "Chevrolet|R3500": {
+     "decoded": 2
+    },
+    "Chevrolet|S-10": {
+     "decoded": 851,
+     "make_mismatch": 3
+    },
+    "Chevrolet|Silverado": {},
+    "Chevrolet|Sonic": {
+     "decoded": 1040
+    },
+    "Chevrolet|Spark": {
+     "decoded": 282
+    },
+    "Chevrolet|Spark EV": {
+     "decoded": 3
+    },
+    "Chevrolet|Sprint": {},
+    "Chevrolet|Suburban": {
+     "decoded": 3
+    },
+    "Chevrolet|Tahoe": {
+     "decoded": 2291,
+     "hybrid": 1
+    },
+    "Chevrolet|Trailblazer": {
+     "decoded": 1621
+    },
+    "Chevrolet|Traverse": {
+     "decoded": 1796
+    },
+    "Chevrolet|Trax": {
+     "decoded": 239
+    },
+    "Chevrolet|Uplander": {
+     "decoded": 295
+    },
+    "Chevrolet|Venture": {
+     "decoded": 188
+    },
+    "Chevrolet|Volt": {
+     "decoded": 84
+    },
+    "Chrysler|200": {
+     "decoded": 1674
+    },
+    "Chrysler|300": {
+     "decoded": 1336
+    },
+    "Chrysler|300M": {
+     "decoded": 68
+    },
+    "Chrysler|Aspen": {
+     "decoded": 138
+    },
+    "Chrysler|Cirrus": {
+     "decoded": 13
+    },
+    "Chrysler|Concorde": {
+     "decoded": 62
+    },
+    "Chrysler|Fifth Avenue": {},
+    "Chrysler|Imperial": {},
+    "Chrysler|LHS": {
+     "decoded": 21
+    },
+    "Chrysler|LeBaron": {
+     "decoded": 21
+    },
+    "Chrysler|New Yorker": {
+     "decoded": 12
+    },
+    "Chrysler|PT Cruiser": {
+     "decoded": 1004
+    },
+    "Chrysler|Pacifica": {
+     "decoded": 411
+    },
+    "Chrysler|Sebring": {
+     "decoded": 803
+    },
+    "Chrysler|TC By Maserati": {
+     "decoded": 3
+    },
+    "Chrysler|Town & Country": {
+     "decoded": 2294
+    },
+    "Chrysler|Voyager": {
+     "decoded": 49
+    },
+    "Dodge|Aries": {
+     "decoded": 1
+    },
+    "Dodge|Avenger": {
+     "decoded": 1150
+    },
+    "Dodge|B150": {
+     "decoded": 2
+    },
+    "Dodge|B1500": {
+     "decoded": 1
+    },
+    "Dodge|B250": {
+     "decoded": 6
+    },
+    "Dodge|B2500": {
+     "decoded": 7
+    },
+    "Dodge|B350": {
+     "decoded": 4
+    },
+    "Dodge|B3500": {
+     "decoded": 7
+    },
+    "Dodge|Caliber": {
+     "decoded": 723
+    },
+    "Dodge|Caravan": {
+     "decoded": 748
+    },
+    "Dodge|Challenger": {
+     "decoded": 147
+    },
+    "Dodge|Charger": {
+     "decoded": 1599
+    },
+    "Dodge|D100": {
+     "decoded": 4
+    },
+    "Dodge|D150": {
+     "decoded": 22
+    },
+    "Dodge|D350": {},
+    "Dodge|Dakota": {
+     "decoded": 1438
+    },
+    "Dodge|Dart": {
+     "decoded": 787
+    },
+    "Dodge|Daytona": {
+     "decoded": 6
+    },
+    "Dodge|Diplomat": {},
+    "Dodge|Durango": {
+     "decoded": 1385
+    },
+    "Dodge|Dynasty": {
+     "decoded": 3
+    },
+    "Dodge|Grand Caravan": {
+     "decoded": 2767
+    },
+    "Dodge|Intrepid": {
+     "decoded": 71
+    },
+    "Dodge|Journey": {
+     "decoded": 1637
+    },
+    "Dodge|Lancer": {},
+    "Dodge|Magnum": {
+     "decoded": 230
+    },
+    "Dodge|Mini Ram": {
+     "decoded": 3
+    },
+    "Dodge|Neon": {
+     "decoded": 272,
+     "make_mismatch": 1
+    },
+    "Dodge|Nitro": {
+     "decoded": 362
+    },
+    "Dodge|Ram 1500": {
+     "decoded": 3559
+    },
+    "Dodge|Ram 2500": {
+     "decoded": 280
+    },
+    "Dodge|Ram 3500": {
+     "decoded": 32
+    },
+    "Dodge|Ram Van": {
+     "decoded": 163
+    },
+    "Dodge|Ram Van 1500": {
+     "decoded": 22
+    },
+    "Dodge|Ram Van 2500": {
+     "decoded": 10
+    },
+    "Dodge|Ram Van 3500": {
+     "decoded": 14
+    },
+    "Dodge|Ram Wagon": {
+     "decoded": 56
+    },
+    "Dodge|Ramcharger": {
+     "decoded": 8
+    },
+    "Dodge|Rampage": {
+     "decoded": 1
+    },
+    "Dodge|Shadow": {
+     "decoded": 3
+    },
+    "Dodge|Spirit": {},
+    "Dodge|Stratus": {
+     "decoded": 241
+    },
+    "Dodge|W100": {
+     "decoded": 1
+    },
+    "Dodge|W150": {
+     "decoded": 5
+    },
+    "Dodge|W250": {
+     "decoded": 1
+    },
+    "Dodge|W350": {
+     "decoded": 2
+    },
+    "Ford|Aerostar": {
+     "decoded": 60
+    },
+    "Ford|Bronco": {
+     "decoded": 35
+    },
+    "Ford|Bronco II": {
+     "decoded": 36
+    },
+    "Ford|C-Max": {
+     "decoded": 79
+    },
+    "Ford|Contour": {
+     "decoded": 53
+    },
+    "Ford|Crown Victoria": {
+     "decoded": 279
+    },
+    "Ford|E-150": {
+     "decoded": 681
+    },
+    "Ford|E-250": {
+     "decoded": 705
+    },
+    "Ford|E-450 Super Duty": {
+     "decoded": 2
+    },
+    "Ford|E-Transit": {},
+    "Ford|Edge": {
+     "decoded": 1621
+    },
+    "Ford|Escape": {
+     "decoded": 4109
+    },
+    "Ford|Escort": {
+     "decoded": 209
+    },
+    "Ford|Excursion": {
+     "decoded": 84
+    },
+    "Ford|Expedition": {
+     "decoded": 2690
+    },
+    "Ford|Explorer": {
+     "decoded": 3782
+    },
+    "Ford|Explorer Sport": {
+     "decoded": 76
+    },
+    "Ford|Explorer Sport Trac": {
+     "decoded": 428
+    },
+    "Ford|F-150": {
+     "decoded": 7749
+    },
+    "Ford|F-250": {
+     "decoded": 676
+    },
+    "Ford|F-250 Super Duty": {
+     "decoded": 508
+    },
+    "Ford|F-350": {
+     "decoded": 223
+    },
+    "Ford|F-350 Super Duty": {
+     "decoded": 211
+    },
+    "Ford|F-450 Super Duty": {
+     "decoded": 25
+    },
+    "Ford|F-550 Super Duty": {
+     "decoded": 11
+    },
+    "Ford|Fiesta": {
+     "decoded": 1026
+    },
+    "Ford|Five Hundred": {
+     "decoded": 325
+    },
+    "Ford|Flex": {
+     "decoded": 476
+    },
+    "Ford|Focus": {
+     "decoded": 5318
+    },
+    "Ford|Freestar": {
+     "decoded": 204
+    },
+    "Ford|Freestyle": {
+     "decoded": 207
+    },
+    "Ford|Fusion": {
+     "decoded": 4216,
+     "hybrid": 160
+    },
+    "Ford|Mustang": {
+     "decoded": 1048
+    },
+    "Ford|Police Interceptor Sedan": {
+     "decoded": 16
+    },
+    "Ford|Police Interceptor Utility": {
+     "decoded": 50
+    },
+    "Ford|Probe": {
+     "decoded": 11
+    },
+    "Ford|Ranger": {
+     "decoded": 1755
+    },
+    "Ford|Taurus": {
+     "decoded": 2257
+    },
+    "Ford|Taurus X": {
+     "decoded": 73
+    },
+    "Ford|Tempo": {
+     "decoded": 13
+    },
+    "Ford|Thunderbird": {
+     "decoded": 86
+    },
+    "Ford|Transit": {
+     "decoded": 15
+    },
+    "Ford|Transit Connect": {
+     "decoded": 261
+    },
+    "Ford|Windstar": {
+     "decoded": 261
+    },
+    "GMC|Acadia": {
+     "decoded": 1464
+    },
+    "GMC|C1500": {
+     "decoded": 58
+    },
+    "GMC|C2500": {
+     "decoded": 9
+    },
+    "GMC|C3500": {
+     "decoded": 4
+    },
+    "GMC|Canyon": {
+     "decoded": 106
+    },
+    "GMC|Envoy": {
+     "decoded": 696
+    },
+    "GMC|G1500": {
+     "decoded": 1
+    },
+    "GMC|G2500": {
+     "decoded": 5
+    },
+    "GMC|Jimmy": {
+     "decoded": 146
+    },
+    "GMC|K1500": {
+     "decoded": 8
+    },
+    "GMC|K2500": {
+     "decoded": 1
+    },
+    "GMC|K3500": {
+     "decoded": 2
+    },
+    "GMC|S-15": {
+     "decoded": 14
+    },
+    "GMC|Safari": {
+     "decoded": 140
+    },
+    "GMC|Savana": {
+     "decoded": 152
+    },
+    "GMC|Sierra": {},
+    "GMC|Sonoma": {
+     "decoded": 195
+    },
+    "GMC|Suburban": {},
+    "GMC|Terrain": {
+     "decoded": 993
+    },
+    "GMC|Yukon": {
+     "decoded": 934,
+     "hybrid": 1
+    },
+    "Honda|Accord": {
+     "decoded": 7706,
+     "hybrid": 44,
+     "make_mismatch": 1
+    },
+    "Honda|Accord Hybrid": {
+     "decoded": 23,
+     "hybrid": 23
+    },
+    "Honda|CR-V": {
+     "decoded": 1558
+    },
+    "Honda|CR-Z": {
+     "decoded": 18
+    },
+    "Honda|CRX": {
+     "decoded": 5
+    },
+    "Honda|Civic": {
+     "decoded": 5651,
+     "hybrid": 301
+    },
+    "Honda|Crosstour": {
+     "decoded": 44
+    },
+    "Honda|Del Sol": {
+     "decoded": 1
+    },
+    "Honda|Element": {
+     "decoded": 303
+    },
+    "Honda|Fit": {
+     "decoded": 177
+    },
+    "Honda|HR-V": {
+     "decoded": 24
+    },
+    "Honda|Insight": {
+     "decoded": 96
+    },
+    "Honda|Odyssey": {
+     "decoded": 3115
+    },
+    "Honda|Pilot": {
+     "decoded": 1788
+    },
+    "Honda|Prelude": {
+     "decoded": 38
+    },
+    "Honda|Ridgeline": {
+     "decoded": 195
+    },
+    "Hummer|H2": {
+     "decoded": 10
+    },
+    "Hummer|H3": {
+     "decoded": 97
+    },
+    "Hyundai|Accent": {
+     "decoded": 1009
+    },
+    "Hyundai|Azera": {
+     "decoded": 126
+    },
+    "Hyundai|Elantra": {
+     "decoded": 2408
+    },
+    "Hyundai|Elantra GT": {
+     "decoded": 96
+    },
+    "Hyundai|Elantra Touring": {
+     "decoded": 44
+    },
+    "Hyundai|Entourage": {
+     "decoded": 44
+    },
+    "Hyundai|Equus": {
+     "decoded": 28
+    },
+    "Hyundai|Excel": {
+     "decoded": 4
+    },
+    "Hyundai|Genesis": {
+     "decoded": 273
+    },
+    "Hyundai|Genesis Coupe": {
+     "decoded": 97
+    },
+    "Hyundai|Kona": {
+     "decoded": 18
+    },
+    "Hyundai|Palisade": {
+     "decoded": 2
+    },
+    "Hyundai|Santa Fe": {
+     "decoded": 1015
+    },
+    "Hyundai|Santa Fe Sport": {
+     "decoded": 101
+    },
+    "Hyundai|Santa Fe XL": {
+     "decoded": 15
+    },
+    "Hyundai|Scoupe": {
+     "decoded": 1
+    },
+    "Hyundai|Sonata": {
+     "decoded": 3349,
+     "hybrid": 35
+    },
+    "Hyundai|Sonata Hybrid": {
+     "decoded": 80,
+     "hybrid": 31
+    },
+    "Hyundai|Tiburon": {
+     "decoded": 87
+    },
+    "Hyundai|Tucson": {
+     "decoded": 466
+    },
+    "Hyundai|Veloster": {
+     "decoded": 257
+    },
+    "Hyundai|Veloster N": {
+     "decoded": 1
+    },
+    "Hyundai|Veracruz": {
+     "decoded": 75
+    },
+    "Hyundai|XG300": {},
+    "Hyundai|XG350": {},
+    "Infiniti|EX35": {
+     "decoded": 70
+    },
+    "Infiniti|EX37": {
+     "decoded": 1
+    },
+    "Infiniti|FX35": {
+     "decoded": 238
+    },
+    "Infiniti|FX37": {
+     "decoded": 7
+    },
+    "Infiniti|FX45": {
+     "decoded": 17
+    },
+    "Infiniti|FX50": {
+     "decoded": 7
+    },
+    "Infiniti|G20": {
+     "decoded": 14
+    },
+    "Infiniti|G25": {
+     "decoded": 24
+    },
+    "Infiniti|G35": {
+     "decoded": 807
+    },
+    "Infiniti|G37": {
+     "decoded": 288
+    },
+    "Infiniti|I30": {
+     "decoded": 14
+    },
+    "Infiniti|I35": {
+     "decoded": 32
+    },
+    "Infiniti|J30": {
+     "decoded": 12
+    },
+    "Infiniti|JX35": {
+     "decoded": 32
+    },
+    "Infiniti|M35": {
+     "decoded": 192
+    },
+    "Infiniti|M35h": {
+     "decoded": 2
+    },
+    "Infiniti|M37": {
+     "decoded": 39
+    },
+    "Infiniti|M45": {
+     "decoded": 39
+    },
+    "Infiniti|M56": {
+     "decoded": 2
+    },
+    "Infiniti|Q40": {
+     "decoded": 7
+    },
+    "Infiniti|Q45": {
+     "decoded": 14
+    },
+    "Infiniti|Q50": {
+     "decoded": 121
+    },
+    "Infiniti|Q60": {
+     "decoded": 8
+    },
+    "Infiniti|Q70": {
+     "decoded": 8
+    },
+    "Infiniti|Q70L": {
+     "decoded": 3
+    },
+    "Infiniti|QX4": {
+     "decoded": 98
+    },
+    "Infiniti|QX50": {
+     "decoded": 24
+    },
+    "Infiniti|QX56": {
+     "decoded": 239
+    },
+    "Infiniti|QX60": {
+     "decoded": 162
+    },
+    "Infiniti|QX70": {
+     "decoded": 12
+    },
+    "Infiniti|QX80": {
+     "decoded": 22
+    },
+    "Jeep|Cherokee": {
+     "decoded": 770
+    },
+    "Jeep|Comanche": {
+     "decoded": 5
+    },
+    "Jeep|Commander": {
+     "decoded": 407
+    },
+    "Jeep|Compass": {
+     "decoded": 854
+    },
+    "Jeep|Grand Cherokee": {
+     "decoded": 2936
+    },
+    "Jeep|Grand Cherokee L": {},
+    "Jeep|Grand Wagoneer": {
+     "decoded": 4
+    },
+    "Jeep|J10": {
+     "decoded": 1
+    },
+    "Jeep|Liberty": {
+     "decoded": 1631
+    },
+    "Jeep|Patriot": {
+     "decoded": 1200,
+     "make_mismatch": 2
+    },
+    "Jeep|Renegade": {
+     "decoded": 152
+    },
+    "Jeep|Wagoneer": {
+     "decoded": 6
+    },
+    "Jeep|Wrangler": {
+     "decoded": 198
+    },
+    "Kia|Amanti": {
+     "decoded": 12
+    },
+    "Kia|Borrego": {
+     "decoded": 53
+    },
+    "Kia|Cadenza": {
+     "decoded": 70
+    },
+    "Kia|Forte": {
+     "decoded": 974
+    },
+    "Kia|Forte Koup": {
+     "decoded": 71
+    },
+    "Kia|K4": {
+     "decoded": 4
+    },
+    "Kia|K5": {
+     "decoded": 8
+    },
+    "Kia|K900": {
+     "decoded": 6
+    },
+    "Kia|Niro": {
+     "decoded": 18
+    },
+    "Kia|Optima": {
+     "decoded": 1853,
+     "hybrid": 8
+    },
+    "Kia|Optima Hybrid": {
+     "decoded": 30,
+     "hybrid": 1
+    },
+    "Kia|Rio": {
+     "decoded": 564
+    },
+    "Kia|Rondo": {
+     "decoded": 139
+    },
+    "Kia|Sedona": {
+     "decoded": 465
+    },
+    "Kia|Seltos": {
+     "decoded": 3
+    },
+    "Kia|Sephia": {
+     "decoded": 16
+    },
+    "Kia|Sorento": {
+     "decoded": 1138
+    },
+    "Kia|Soul": {
+     "decoded": 1420
+    },
+    "Kia|Soul EV": {
+     "decoded": 1
+    },
+    "Kia|Spectra": {
+     "decoded": 365
+    },
+    "Kia|Sportage": {
+     "decoded": 528
+    },
+    "Kia|Stinger": {
+     "decoded": 4
+    },
+    "Kia|Telluride": {
+     "decoded": 5
+    },
+    "Lexus|CT 200h": {
+     "decoded": 8
+    },
+    "Lexus|ES 300": {
+     "decoded": 440
+    },
+    "Lexus|ES 300h": {
+     "decoded": 1
+    },
+    "Lexus|ES 330": {
+     "decoded": 208
+    },
+    "Lexus|ES 350": {
+     "decoded": 229
+    },
+    "Lexus|GS 300": {
+     "decoded": 178
+    },
+    "Lexus|GS 350": {
+     "decoded": 60
+    },
+    "Lexus|GS 400": {
+     "decoded": 23
+    },
+    "Lexus|GS 430": {
+     "decoded": 17
+    },
+    "Lexus|GS 450h": {
+     "decoded": 14
+    },
+    "Lexus|GS 460": {
+     "decoded": 1
+    },
+    "Lexus|GX 470": {
+     "decoded": 11
+    },
+    "Lexus|HS 250h": {
+     "decoded": 9
+    },
+    "Lexus|IS 200t": {
+     "decoded": 1
+    },
+    "Lexus|IS 250": {
+     "decoded": 237
+    },
+    "Lexus|IS 300": {
+     "decoded": 55
+    },
+    "Lexus|IS 350": {
+     "decoded": 37
+    },
+    "Lexus|LS 430": {
+     "decoded": 100
+    },
+    "Lexus|LS 460": {
+     "decoded": 81
+    },
+    "Lexus|RC 350": {},
+    "Lexus|RX 300": {
+     "decoded": 310
+    },
+    "Lexus|RX 330": {
+     "decoded": 119
+    },
+    "Lexus|RX 350": {
+     "decoded": 123
+    },
+    "Lexus|RX 400h": {
+     "decoded": 54
+    },
+    "Lexus|RX 450h": {
+     "decoded": 9
+    },
+    "Lexus|SC 430": {
+     "decoded": 14
+    },
+    "Lincoln|Aviator": {
+     "decoded": 96
+    },
+    "Lincoln|Blackwood": {
+     "decoded": 2
+    },
+    "Lincoln|Continental": {
+     "decoded": 14
+    },
+    "Lincoln|LS": {
+     "decoded": 81
+    },
+    "Lincoln|MKC": {
+     "decoded": 23
+    },
+    "Lincoln|MKS": {
+     "decoded": 163
+    },
+    "Lincoln|MKT": {
+     "decoded": 68
+    },
+    "Lincoln|MKX": {
+     "decoded": 320
+    },
+    "Lincoln|MKZ": {
+     "decoded": 387,
+     "hybrid": 29
+    },
+    "Lincoln|Mark LT": {
+     "decoded": 33
+    },
+    "Lincoln|Mark VII": {
+     "decoded": 12
+    },
+    "Lincoln|Mark VIII": {
+     "decoded": 28
+    },
+    "Lincoln|Nautilus": {
+     "decoded": 2
+    },
+    "Lincoln|Navigator": {
+     "decoded": 550
+    },
+    "Lincoln|Town Car": {
+     "decoded": 691
+    },
+    "Lincoln|Zephyr": {
+     "decoded": 59
+    },
+    "Mercury|Capri": {
+     "decoded": 8
+    },
+    "Mercury|Cougar": {
+     "decoded": 74,
+     "make_mismatch": 1
+    },
+    "Mercury|Grand Marquis": {
+     "decoded": 778
+    },
+    "Mercury|Mariner": {
+     "decoded": 253
+    },
+    "Mercury|Milan": {
+     "decoded": 254,
+     "hybrid": 7
+    },
+    "Mercury|Montego": {
+     "decoded": 80
+    },
+    "Mercury|Monterey": {
+     "decoded": 31
+    },
+    "Mercury|Mountaineer": {
+     "decoded": 333
+    },
+    "Mercury|Mystique": {
+     "decoded": 14
+    },
+    "Mercury|Sable": {
+     "decoded": 237
+    },
+    "Mercury|Topaz": {
+     "decoded": 6
+    },
+    "Mercury|Tracer": {
+     "decoded": 18
+    },
+    "Nissan|200SX": {
+     "decoded": 10
+    },
+    "Nissan|350Z": {
+     "decoded": 91
+    },
+    "Nissan|Altima": {
+     "decoded": 7459,
+     "make_mismatch": 1
+    },
+    "Nissan|Armada": {
+     "decoded": 575
+    },
+    "Nissan|Cube": {
+     "decoded": 109
+    },
+    "Nissan|Frontier": {
+     "decoded": 528
+    },
+    "Nissan|Juke": {
+     "decoded": 281
+    },
+    "Nissan|Kicks": {
+     "decoded": 30
+    },
+    "Nissan|Leaf": {
+     "decoded": 64
+    },
+    "Nissan|Maxima": {
+     "decoded": 1604
+    },
+    "Nissan|Murano": {
+     "decoded": 1543
+    },
+    "Nissan|NV": {
+     "decoded": 4
+    },
+    "Nissan|Pathfinder": {
+     "decoded": 1841
+    },
+    "Nissan|Quest": {
+     "decoded": 500
+    },
+    "Nissan|Rogue": {
+     "decoded": 2089
+    },
+    "Nissan|Sentra": {
+     "decoded": 3529
+    },
+    "Nissan|Stanza": {
+     "decoded": 4
+    },
+    "Nissan|Titan": {
+     "decoded": 650,
+     "make_mismatch": 1
+    },
+    "Nissan|Versa": {
+     "decoded": 1958
+    },
+    "Nissan|Xterra": {
+     "decoded": 936
+    },
+    "Oldsmobile|88": {
+     "decoded": 13
+    },
+    "Oldsmobile|98": {
+     "decoded": 1
+    },
+    "Oldsmobile|Achieva": {
+     "decoded": 6
+    },
+    "Oldsmobile|Alero": {
+     "decoded": 153
+    },
+    "Oldsmobile|Aurora": {},
+    "Oldsmobile|Bravada": {
+     "decoded": 60
+    },
+    "Oldsmobile|Calais": {
+     "decoded": 1
+    },
+    "Oldsmobile|Custom Cruiser": {},
+    "Oldsmobile|Cutlass": {
+     "decoded": 1
+    },
+    "Oldsmobile|Delta 88": {
+     "decoded": 13
+    },
+    "Oldsmobile|Firenza": {},
+    "Oldsmobile|Intrigue": {
+     "decoded": 54
+    },
+    "Oldsmobile|Silhouette": {
+     "decoded": 39
+    },
+    "Oldsmobile|Toronado": {
+     "decoded": 5
+    },
+    "Pontiac|6000": {
+     "decoded": 1
+    },
+    "Pontiac|Aztek": {
+     "decoded": 54
+    },
+    "Pontiac|Bonneville": {
+     "decoded": 138
+    },
+    "Pontiac|Fiero": {
+     "decoded": 15
+    },
+    "Pontiac|Firebird": {
+     "decoded": 100
+    },
+    "Pontiac|G5": {
+     "decoded": 125
+    },
+    "Pontiac|G6": {
+     "decoded": 942
+    },
+    "Pontiac|Grand Am": {
+     "decoded": 385
+    },
+    "Pontiac|Grand Prix": {
+     "decoded": 663
+    },
+    "Pontiac|Montana": {
+     "decoded": 98
+    },
+    "Pontiac|Pursuit": {
+     "decoded": 12
+    },
+    "Pontiac|Solstice": {
+     "decoded": 12
+    },
+    "Pontiac|Sunbird": {
+     "decoded": 14
+    },
+    "Pontiac|Sunfire": {
+     "decoded": 4
+    },
+    "Pontiac|Torrent": {
+     "decoded": 168
+    },
+    "Pontiac|Trans Sport": {
+     "decoded": 15
+    },
+    "Pontiac|Vibe": {
+     "decoded": 348
+    },
+    "Ram|1500": {
+     "decoded": 368
+    },
+    "Ram|1500 Classic": {
+     "decoded": 12
+    },
+    "Ram|2500": {
+     "decoded": 25
+    },
+    "Ram|3500": {
+     "decoded": 1
+    },
+    "Ram|C/V": {
+     "decoded": 23
+    },
+    "Ram|Dakota": {
+     "decoded": 7
+    },
+    "Ram|ProMaster 1500": {
+     "decoded": 22
+    },
+    "Ram|ProMaster 2500": {
+     "decoded": 10
+    },
+    "Ram|ProMaster 3500": {
+     "decoded": 4
+    },
+    "Ram|ProMaster City": {
+     "decoded": 32
+    },
+    "Saturn|Astra": {
+     "decoded": 44
+    },
+    "Saturn|Aura": {
+     "decoded": 310,
+     "hybrid": 3
+    },
+    "Saturn|ION": {
+     "decoded": 418
+    },
+    "Saturn|L100": {},
+    "Saturn|L200": {},
+    "Saturn|L300": {
+     "decoded": 19
+    },
+    "Saturn|LS": {},
+    "Saturn|LS1": {},
+    "Saturn|LW1": {},
+    "Saturn|LW200": {},
+    "Saturn|Outlook": {
+     "decoded": 141
+    },
+    "Saturn|Relay": {
+     "decoded": 19
+    },
+    "Saturn|Sky": {
+     "decoded": 3
+    },
+    "Saturn|VUE": {
+     "decoded": 745,
+     "hybrid": 12
+    },
+    "Scion|iM": {
+     "decoded": 1
+    },
+    "Scion|tC": {
+     "decoded": 608
+    },
+    "Scion|xA": {
+     "decoded": 100
+    },
+    "Scion|xB": {
+     "decoded": 466
+    },
+    "Scion|xD": {
+     "decoded": 103
+    },
+    "Subaru|Baja": {
+     "decoded": 13
+    },
+    "Subaru|Crosstrek": {
+     "decoded": 23
+    },
+    "Subaru|Forester": {
+     "decoded": 1150
+    },
+    "Subaru|Impreza": {
+     "decoded": 814,
+     "make_mismatch": 1
+    },
+    "Subaru|Impreza WRX": {
+     "decoded": 4
+    },
+    "Subaru|Legacy": {
+     "decoded": 862
+    },
+    "Subaru|Outback": {
+     "decoded": 1275
+    },
+    "Subaru|SVX": {
+     "decoded": 2
+    },
+    "Subaru|Tribeca": {
+     "decoded": 57,
+     "make_mismatch": 1
+    },
+    "Subaru|WRX": {
+     "decoded": 8
+    },
+    "Subaru|XV Crosstrek": {
+     "decoded": 89
+    },
+    "Toyota|4Runner": {
+     "decoded": 464
+    },
+    "Toyota|Avalon": {
+     "decoded": 1045,
+     "hybrid": 5
+    },
+    "Toyota|Camry": {
+     "decoded": 6899,
+     "gas": 2235,
+     "hybrid": 241
+    },
+    "Toyota|Camry Hybrid": {
+     "decoded": 96,
+     "hybrid": 96
+    },
+    "Toyota|Camry Solara": {
+     "decoded": 458
+    },
+    "Toyota|Celica": {
+     "decoded": 183
+    },
+    "Toyota|Corolla": {
+     "decoded": 3126
+    },
+    "Toyota|Corolla iM": {
+     "decoded": 2
+    },
+    "Toyota|Cressida": {
+     "decoded": 5
+    },
+    "Toyota|Echo": {
+     "decoded": 122
+    },
+    "Toyota|FJ Cruiser": {
+     "decoded": 4
+    },
+    "Toyota|Highlander": {
+     "decoded": 698,
+     "hybrid": 40
+    },
+    "Toyota|Land Cruiser": {
+     "decoded": 4
+    },
+    "Toyota|MR2": {
+     "decoded": 6
+    },
+    "Toyota|MR2 Spyder": {
+     "decoded": 2
+    },
+    "Toyota|Matrix": {
+     "decoded": 379
+    },
+    "Toyota|Mirai": {
+     "decoded": 5
+    },
+    "Toyota|Paseo": {
+     "decoded": 7
+    },
+    "Toyota|Pickup": {
+     "decoded": 63
+    },
+    "Toyota|Previa": {
+     "decoded": 36
+    },
+    "Toyota|Prius": {
+     "decoded": 1327
+    },
+    "Toyota|Prius C": {
+     "decoded": 56
+    },
+    "Toyota|Prius Plug-In": {
+     "decoded": 6
+    },
+    "Toyota|Prius Prime": {
+     "decoded": 2
+    },
+    "Toyota|Prius V": {
+     "decoded": 45
+    },
+    "Toyota|RAV4": {
+     "decoded": 751,
+     "make_mismatch": 1
+    },
+    "Toyota|Sequoia": {
+     "decoded": 369
+    },
+    "Toyota|Sienna": {
+     "decoded": 1473
+    },
+    "Toyota|Supra": {
+     "decoded": 11
+    },
+    "Toyota|Tacoma": {
+     "decoded": 198
+    },
+    "Toyota|Tercel": {
+     "decoded": 77
+    },
+    "Toyota|Tundra": {
+     "decoded": 409
+    },
+    "Toyota|Van": {
+     "decoded": 8
+    },
+    "Toyota|Venza": {
+     "decoded": 34
+    },
+    "Toyota|Yaris": {
+     "decoded": 346,
+     "make_mismatch": 1
+    }
+   },
+   "note": "vPIC model is not in the published inventory; checked make mismatches and, for hybrid trim subsets, vPIC trim 'Gas'"
+  },
+  "M9_cars_outside_catalog_years": {},
+  "skipped": []
+ },
+ "near_miss_rows": [],
+ "ns": "mopar",
+ "open_reasons_cells": {
+  "no_year_manifest": 3980
+ },
+ "raw": {
+  "commit": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e",
+  "ref": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e",
+  "sites": {
+   "www.jeeppartsdeal.com": {
+    "blocked": false,
+    "done": true,
+    "lists": 0,
+    "lists_sha256": null,
+    "records": 959,
+    "records_sha256": "9449a87ab94f63aa4164ca66ace70890f19cc9426113644ff05891a8cf96d9aa",
+    "years": 0,
+    "years_sha256": null
+   },
+   "www.moparpartsgiant.com": {
+    "blocked": true,
+    "done": false,
+    "lists": 0,
+    "lists_sha256": null,
+    "records": 759,
+    "records_sha256": "3727e955078bf97b939d9160257a5f3d5efae64af14854c02f981eb9a72d8ed6",
+    "years": 0,
+    "years_sha256": null
+   }
+  }
+ },
+ "refusals": [
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L232",
+    "www.moparpartsgiant.com:records:L713"
+   ],
+   "pn": "4801833AB",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L236",
+    "www.moparpartsgiant.com:records:L712"
+   ],
+   "pn": "4801834AB",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L239",
+    "www.moparpartsgiant.com:records:L711"
+   ],
+   "pn": "4801778AF",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L240",
+    "www.moparpartsgiant.com:records:L714"
+   ],
+   "pn": "4801779AG",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "alternator",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L308",
+    "www.moparpartsgiant.com:records:L144"
+   ],
+   "pn": "56029624AA",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L379",
+    "www.moparpartsgiant.com:records:L332"
+   ],
+   "pn": "68166589AC",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L380",
+    "www.moparpartsgiant.com:records:L334"
+   ],
+   "pn": "68231311AA",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "fuel-pump-module",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L382",
+    "www.moparpartsgiant.com:records:L333"
+   ],
+   "pn": "68187986AB",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "26 feed models",
+   "evidence": [],
+   "pn": "L00H6054",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "headlamp boot / bulb cap ('Boot, Front'), not a headlamp (AUDIT.md)",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L130"
+   ],
+   "pn": "5143152AA",
+   "reason": "exclude_at_curation",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "light bulb kit ('Light Bulb Kit (Assorted Bulbs and Fuses)'), not a headlamp (AUDIT.md)",
+   "evidence": [
+    "www.moparpartsgiant.com:records:L8"
+   ],
+   "pn": "LBK13001",
+   "reason": "exclude_at_curation",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "14 feed models",
+   "evidence": [],
+   "pn": "56028172AC",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "14 feed models",
+   "evidence": [],
+   "pn": "56029129AB",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "17 feed models",
+   "evidence": [],
+   "pn": "5149168AI",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "18 feed models",
+   "evidence": [],
+   "pn": "5149168AJ",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "19 feed models",
+   "evidence": [],
+   "pn": "68238603AA",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "ignition-coils",
+   "detail": "26 feed models",
+   "evidence": [],
+   "pn": "4797293AB",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "power-steering-pump",
+   "detail": "21 feed models",
+   "evidence": [],
+   "pn": "5166226AA",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "22 feed models",
+   "evidence": [],
+   "pn": "R5233006",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L242",
+    "www.moparpartsgiant.com:records:L716"
+   ],
+   "pn": "4801852AB",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L243",
+    "www.moparpartsgiant.com:records:L720"
+   ],
+   "pn": "68080460AA",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L311",
+    "www.moparpartsgiant.com:records:L148"
+   ],
+   "pn": "68084005AA",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "starter",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L5",
+    "www.moparpartsgiant.com:records:L341"
+   ],
+   "pn": "5034555AA",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "18 feed models",
+   "evidence": [],
+   "pn": "5184349AC",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "20 feed models",
+   "evidence": [],
+   "pn": "5184349AF",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L192",
+    "www.moparpartsgiant.com:records:L140"
+   ],
+   "pn": "68031596AA",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L297",
+    "www.moparpartsgiant.com:records:L705"
+   ],
+   "pn": "4591847AC",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L299",
+    "www.moparpartsgiant.com:records:L335"
+   ],
+   "pn": "5184349AC",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "throttle-body",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L76",
+    "www.moparpartsgiant.com:records:L13"
+   ],
+   "pn": "53013163AD",
+   "reason": "disputed_class",
+   "t": null
+  }
+ ],
+ "sites_without_namespace": [
+  "www.audipartsgiant.com",
+  "www.bmwpartsdeal.com",
+  "www.mazdapartsnow.com",
+  "www.mbpartsgiant.com",
+  "www.mitsubishipartsgiant.com",
+  "www.volvopartsgiant.com",
+  "www.vwpartsgiant.com"
+ ],
+ "summary": {
+  "blocked_sites": [
+   "www.moparpartsgiant.com"
+  ],
+  "cells": 3980,
+  "classes": 1700,
+  "gates": [
+   "no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close (C1/C2); Verified is impossible by design until the crawler writes them",
+   "no (site, category) of this namespace has passed the audit gate (CATEGORY_STATUS has no record; spec 11.4, E5/V7)",
+   "engine cells not audited as reliable on www.moparpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
+   "www.moparpartsgiant.com: only 2% of its 1522 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)",
+   "blocked by the crawl breaker: www.moparpartsgiant.com (their cells never close, C9)"
+  ],
+  "likely_groups": 320,
+  "list_rows": 0,
+  "records": 1716,
+  "verified_groups": 0,
+  "vg_groups": 0,
+  "why_no_verified": "no R1 list manifests and no R2 year manifests on this raw ref, so no cell can close (C1/C2); Verified is impossible by design until the crawler writes them; no (site, category) of this namespace has passed the audit gate (CATEGORY_STATUS has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.moparpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.moparpartsgiant.com: only 2% of its 1522 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2); blocked by the crawl breaker: www.moparpartsgiant.com (their cells never close, C9)",
+  "year_manifests": 0
+ },
+ "unknown_note_clauses": {
+  "1 gang [JP5": 1,
+  "1 gang [JP5]": 1,
+  "10 gang [JP5": 2,
+  "10 gang [JSC": 1,
+  "11 gang [JP5": 3,
+  "11 gang [JSC": 1,
+  "120 mph": 4,
+  "120 mph Speedometer": 3,
+  "140 mph": 1,
+  "140 mph Speedometer": 1,
+  "15 Gallon Tank": 1,
+  "15.9 Gallon Tank": 1,
+  "2 PIN": 2,
+  "2.4 & 3.7L": 1,
+  "26 Gallon Tank": 1,
+  "3.7 & 4.7L": 1,
+  "35 Gallon Tank": 1,
+  "5.2 & 5.9L": 1,
+  "5.7 & 6.4L": 1,
+  "6 Pin": 2,
+  "61 - REG CAB 6.5 FT BOX": 1,
+  "62 - REG CAB 8 FT BOX": 1,
+  "7 gang [JPD": 1,
+  "A4]": 6,
+  "ALTERNATOR": 4,
+  "Accent": 1,
+  "Accent Insert": 1,
+  "All": 20,
+  "All Models": 11,
+  "All Wheel Drive [NFD]": 2,
+  "Alternator Only": 1,
+  "Argent": 1,
+  "Auto Down": 2,
+  "B8]": 4,
+  "BE]": 2,
+  "BM]": 2,
+  "Black Bezel": 4,
+  "Black Face": 2,
+  "Black Headlamp Bezel": 2,
+  "Black/Gray": 1,
+  "Blackberry": 4,
+  "Bumper Cover & Components": 17,
+  "Bumper Cover & Trim": 4,
+  "C - CHRYSLER": 46,
+  "Chrome Bezel": 4,
+  "Code K5H": 1,
+  "Code XEA": 1,
+  "Code XEV": 1,
+  "Code: GTB": 4,
+  "Code: GTD": 4,
+  "Code: GTF": 4,
+  "Code: GTM": 4,
+  "Code: GUU": 2,
+  "Code: Gu4 With Blind Spot": 2,
+  "Code: Gu4 Without Blind Spot": 2,
+  "Code: Gu5 With Blind Spot": 2,
+  "Code: Gu5 Without Blind Spot": 2,
+  "D - DODGE": 104,
+  "DE1": 1,
+  "DFF - 4-Speed Automatic Transmission VLP": 1,
+  "DG2 - 6-Speed Automatic Transmission 62TE": 2,
+  "Dark Khaki": 1,
+  "Dark Slate": 1,
+  "Deep Amethyst": 1,
+  "Denso": 1,
+  "Driver Side 4 gang [JPD": 1,
+  "Driver Side 7 gang [JPD": 1,
+  "Dual Fan": 1,
+  "Dual Fan System": 1,
+  "E - DODGE AWD": 88,
+  "EBT": 4,
+  "ED3 - 4 Cyl 2.4L DOHC Dual VVT": 8,
+  "ED6 - 4 Cyl 2.4L MultiAir": 5,
+  "ED8 - 4 Cyl 2.4L PZEV MAir": 5,
+  "EDD - 4 Cyl 2.4L MultiAir With ESS": 2,
+  "EDE - 4 Cyl 2.4L PZEV M-Air With ESS": 3,
+  "EDG": 1,
+  "EE0": 1,
+  "EG0": 5,
+  "EGG - 6 Cyl 3.5L High Output MPI": 1,
+  "EGL - 6 Cyl 3.8L OHV": 12,
+  "EGQ - 6 Cyl 4.0L SOHC": 7,
+  "EGV - 6 Cyl 3.3L OHV": 14,
+  "EGY": 1,
+  "EHD": 4,
+  "EK0": 4,
+  "EM0": 1,
+  "EML - 8 Cyl 5.9L Magnum SMPI": 1,
+  "ENS": 5,
+  "ERB - 6 Cyl 3.6L VVT": 13,
+  "ESF - 8 Cyl 6.1L SRT HEMI SMPI": 1,
+  "ESG - 8 Cyl 6.4L SRT HEMI MDS": 3,
+  "EV0": 5,
+  "EXF": 1,
+  "EXPORT": 2,
+  "EXPORT Mandatory (European Equipment Group)": 2,
+  "EXPORT Mandatory (Middle East Equipment Group)": 2,
+  "EZ0": 3,
+  "EZB - 8 Cyl 5.7L Hemi Multi Displacement": 3,
+  "EZH - 8 Cyl 5.7L HEMI MDS VVT": 6,
+  "Electric": 7,
+  "Electric Folding": 2,
+  "Engine": 2,
+  "Export [BAB]": 1,
+  "Export [HBB]": 1,
+  "F - BRAND AWD": 47,
+  "FM 07/15/2016": 2,
+  "FM 07/16/2016": 2,
+  "Fold Away": 4,
+  "Forest Green": 1,
+  "From 1-14-02": 2,
+  "From 10-6-02": 2,
+  "From 11-25-02": 1,
+  "Front Wheel Drive": 1,
+  "Full Door": 4,
+  "GT3 Code": 2,
+  "GTS": 1,
+  "GTS]": 5,
+  "GU5": 5,
+  "GUL]": 4,
+  "GUL] 11 gang": 1,
+  "GUM": 1,
+  "GUU": 5,
+  "Gloss Black": 3,
+  "Gray [MLC] Without Tow Hooks [XEA]": 1,
+  "Graystone": 1,
+  "Gtm Code": 2,
+  "Gtn Code": 2,
+  "H - HIGHLINE": 6,
+  "Halogen Headlamps": 2,
+  "Heated Foldaway": 2,
+  "High Line": 1,
+  "In Body Color With Memory": 2,
+  "In Body Color Without Memory": 1,
+  "Includes Mounting Bolts": 1,
+  "Inferno Red": 1,
+  "JP5": 2,
+  "JPB": 9,
+  "JPB]": 5,
+  "JPM]": 2,
+  "JPb": 1,
+  "JRA": 5,
+  "JRB": 3,
+  "JRB]": 2,
+  "JSC": 1,
+  "JSC]": 1,
+  "Jeep": 3,
+  "Jeep Green": 1,
+  "K - DODGE": 16,
+  "Khaki": 1,
+  "Kit": 1,
+  "L - LOWLINE": 4,
+  "LEP]": 1,
+  "Left / Left [LB4]": 1,
+  "Left / Left [LBY]": 1,
+  "Left After 05/18/05 without key hole slot": 1,
+  "Left Longitude": 1,
+  "Left Manual Mirrors [GTP]": 1,
+  "Left Power Mirror [GTN]": 1,
+  "Left Up to 05/18/05 with key hole slot": 1,
+  "Left With Sales Code [GT9]": 1,
+  "Left With Sales Code [GTS] and [LEW] Memory Package": 1,
+  "Left With Sales Code [GUM]": 1,
+  "Left With Sales Code [GUU] Without [LEM]": 1,
+  "Left [BS] [GTS": 1,
+  "Left [GTR": 12,
+  "Left [GTS": 10,
+  "Left [GU5": 3,
+  "Left [GU5] Or [GYF] Or [GUN]": 9,
+  "Left [GUU": 1,
+  "Left [GUU] Or [GUP] Or [GTY]": 1,
+  "Left [LB4] [LPG] / Left [LPG]": 1,
+  "Left [LPC] Mandatory (European Equipment Group)": 1,
+  "Light Khaki": 1,
+  "Limited & Jet": 1,
+  "Lmtd Overland": 1,
+  "Low/Medium/Premium Line": 1,
+  "M - MEDIUM": 2,
+  "MIDDLE EAST Mandatory (Middle East Equipment Group)": 2,
+  "MJ": 4,
+  "MJ Series": 3,
+  "Manual Windows": 2,
+  "Modern Blue": 1,
+  "Mopar Coolant - Diesel - 5.0L Bottle": 1,
+  "Mopar Power Steering Fluid Pint": 1,
+  "Moss Green": 1,
+  "New for core return": 2,
+  "North": 2,
+  "Off White": 1,
+  "P - PREMIUM": 20,
+  "P4]": 4,
+  "PK]": 4,
+  "Package Quantity: 1": 4,
+  "Paintable": 1,
+  "Power Fold Away": 16,
+  "Power Multi Function": 16,
+  "Power Windows": 2,
+  "Primary": 3,
+  "Primary [NF4]": 2,
+  "Primary [NFD]": 2,
+  "Primary [NFD] Primary [NFD]": 1,
+  "Primary [NFD] [NFD]": 1,
+  "Primed": 12,
+  "R - RACE": 4,
+  "RH]": 4,
+  "Remanufactured": 1,
+  "Renegade & Arctic": 1,
+  "Require Quantity: 2": 4,
+  "Right (GS3)": 1,
+  "Right / Right [LB4]": 1,
+  "Right / Right [LBY]": 1,
+  "Right After 05/18/05 without key hole slot": 1,
+  "Right Longitude": 1,
+  "Right Manual Mirrors [GTP]": 1,
+  "Right Power Mirror [GTN]": 1,
+  "Right Up to 05/18/05 with key hole slot": 1,
+  "Right With Sales Code [GT9]": 1,
+  "Right With Sales Code [GTS] and [LEW] Memory Package": 1,
+  "Right With Sales Code [GUM]": 1,
+  "Right [GTR": 12,
+  "Right [GTS": 10,
+  "Right [GTS] OR [GTL]": 1,
+  "Right [GU5": 3,
+  "Right [GU5] Or [GYF]": 8,
+  "Right [LB4] [LPG] / Right [LPG]": 1,
+  "Right [LPC] Mandatory (European Equipment Group)": 1,
+  "Rosewood": 1,
+  "S - SPORT": 8,
+  "S2]": 6,
+  "STARTER": 1,
+  "Sales Code [GUK]": 22,
+  "Secondary": 1,
+  "Silver Face": 2,
+  "Silverstone": 1,
+  "Single Fan": 1,
+  "Single Fan System": 1,
+  "Special Ed": 1,
+  "Stone White": 4,
+  "T - TOURING": 10,
+  "TJ Series": 2,
+  "Textured": 4,
+  "Textured Gray": 2,
+  "Textured Taupe": 2,
+  "Tsi": 1,
+  "W1]": 4,
+  "WG]": 4,
+  "With 4WD": 2,
+  "With A/C": 1,
+  "With AC": 8,
+  "With Accent": 4,
+  "With Adaptive Cruise": 1,
+  "With Auto Park": 3,
+  "With Auto Stop-Go": 1,
+  "With Auto Temperature Cntrl": 1,
+  "With Blnd Spot": 2,
+  "With Chrome Accent": 5,
+  "With Chrome Insert": 3,
+  "With Chrome Mesh": 1,
+  "With Clutch": 1,
+  "With Compass & Temperature": 1,
+  "With Dehydrator Attached To Condenser": 1,
+  "With Engine Stop/Start": 1,
+  "With Fender Mount Antenna": 2,
+  "With Flex Fuel": 2,
+  "With Front Park Assist": 2,
+  "With Front Park Sensor": 2,
+  "With Guard": 2,
+  "With Gulf Type Mirror": 1,
+  "With Headlamp Washer": 1,
+  "With Heat (GTS)": 2,
+  "With Heavy Duty Cooling": 3,
+  "With Hitch": 13,
+  "With Hitch Bezel": 2,
+  "With Insert": 4,
+  "With LED Accent": 2,
+  "With Motor": 4,
+  "With Off Road Crawl Ratio": 1,
+  "With One Touch": 2,
+  "With Parallel": 1,
+  "With Park Alert": 2,
+  "With Park Sensor": 4,
+  "With Park Sensors": 11,
+  "With Power Folding Mirrors": 1,
+  "With Power Locks": 3,
+  "With Power Window": 2,
+  "With Prk Alert": 2,
+  "With Rally Trim": 1,
+  "With Rear AC": 2,
+  "With Renegade": 1,
+  "With Roof Antenna": 2,
+  "With Sales Code [GTL]": 18,
+  "With Sales Codes [GTS] and [JSC] and [LEP]": 10,
+  "With Sales Codes [GUL] & [LEP]": 18,
+  "With Silver Accents": 2,
+  "With Stop-Start": 1,
+  "With TOW Hook": 2,
+  "With Tow Hook": 4,
+  "With Tow Hooks": 13,
+  "With Towing": 1,
+  "With Towing & Reverse Sensor": 1,
+  "With Vehicle Info Center": 2,
+  "Without 2.4L": 1,
+  "Without 4WD": 2,
+  "Without AC": 5,
+  "Without Accent": 4,
+  "Without Adaptive Cruise": 2,
+  "Without Auto Park": 7,
+  "Without Auto Temperature Cntrl": 1,
+  "Without Auto Temperature Control": 1,
+  "Without Blind Spt": 2,
+  "Without Blnd Spot": 2,
+  "Without Chrome Accent": 5,
+  "Without Chrome Insert": 3,
+  "Without Chrome Mesh": 1,
+  "Without Compass & Temperature": 1,
+  "Without Dehydrator Attached To Condenser": 1,
+  "Without Dual Zone Contrl": 1,
+  "Without Engine Stop/Start": 1,
+  "Without Fender Mount Antenna": 2,
+  "Without Flex Fuel": 2,
+  "Without Front Park Assist": 2,
+  "Without Front Park Sens": 2,
+  "Without Guard": 2,
+  "Without Headlamp Washer": 1,
+  "Without Heat (GTN)": 2,
+  "Without Heavy Duty Cooling": 3,
+  "Without Hitch": 14,
+  "Without Hitch Bezel": 4,
+  "Without Insert": 2,
+  "Without LED Accent": 2,
+  "Without Memory (GUK)": 2,
+  "Without Multifunction (GUD)": 2,
+  "Without Off Road Crawl Ratio": 1,
+  "Without One Touch": 2,
+  "Without Parallel": 1,
+  "Without Park Alert": 2,
+  "Without Park Sensor": 3,
+  "Without Park Sensors": 7,
+  "Without Parking Sensor": 2,
+  "Without Power Folding Mirrors": 1,
+  "Without Power Locks": 2,
+  "Without Power Window": 2,
+  "Without Prk Alert": 1,
+  "Without Rally Trim": 2,
+  "Without Renegade": 1,
+  "Without Roof Antenna": 2,
+  "Without SRT8": 9,
+  "Without Silver Accents": 1,
+  "Without Silver Bezel": 2,
+  "Without Speed Proportional": 1,
+  "Without Str8": 8,
+  "Without Tow Hook": 6,
+  "Without Tow Hooks": 16,
+  "Without Towing": 1,
+  "Without Towing & Reverse Sensor": 1,
+  "Without Vehicle Info Center": 1,
+  "X - SPECIAL": 8,
+  "XJ": 3,
+  "XJ Series": 7,
+  "XR]": 6,
+  "Y - CHRYSLER": 79,
+  "YG]": 4,
+  "[-BU]": 1,
+  "[-RP]": 1,
+  "[-S2]": 1,
+  "[10 Gang [GUU": 1,
+  "[B7] [MLS+ABE] [GV] [MLS+ABE] [S2] [MLS+ABE] [X8] [MLS+ABE]": 1,
+  "[BAB] New Part For Core Return": 1,
+  "[ED6] / [XBU]": 1,
+  "[ED8] / [NFD]": 1,
+  "[EDE] / [NFD]": 1,
+  "[GU5] Or [GYF]": 1,
+  "[HAA] OR [HAF]": 1,
+  "[HAG+X81+JPM]": 1,
+  "[HAG+X81-JPM]": 1,
+  "[HAG] With [JPM]": 1,
+  "[HAG] Without [JPM]": 1,
+  "[HAH": 2,
+  "[HAH+JPM]": 1,
+  "[HAH-JPM]": 1,
+  "[HAH] Without [JPM]": 1,
+  "[HB8] With clutch and coil": 1,
+  "[JP5": 3,
+  "[JPD": 1,
+  "[JSC": 2,
+  "[LPG] / Left [LPG]": 1,
+  "[LPG] / Right [LPG]": 1,
+  "[MLC+ABE]": 1,
+  "[NA1] Or [NAM] With [NFL]": 1,
+  "[PS2] / Left [GTS]": 1,
+  "[PS2] / Right [GTS]": 1,
+  "]": 1,
+  "magnetti marelli": 2,
+  "with Motor": 1,
+  "without [XBU] / [NBP]": 1,
+  "without [XKN]": 1
+ },
+ "unmapped_catalog_models": [
+  {
+   "cat_make": "Chrysler",
+   "cat_model": "Prowler",
+   "excluded": "catalog model with no feed cars as 'Prowler' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Chrysler",
+    "Prowler"
+   ],
+   "feed_cars": 0,
+   "row_years": 2
+  },
+  {
+   "cat_make": "Dodge",
+   "cat_model": "D250",
+   "excluded": "M3: the feed spells this truck 'D250', 'D-250' and 'D250 Pickup' (one squash key); not mapped until the feed normalizes them",
+   "feed": [
+    "Dodge",
+    "D250"
+   ],
+   "feed_cars": 10,
+   "row_years": 19
+  },
+  {
+   "cat_make": "Dodge",
+   "cat_model": "Omni",
+   "excluded": "catalog model with no feed cars as 'Omni' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Dodge",
+    "Omni"
+   ],
+   "feed_cars": 1,
+   "row_years": 9
+  },
+  {
+   "cat_make": "Dodge",
+   "cat_model": "Ram 4500",
+   "excluded": "catalog model with no feed cars as 'Ram 4500' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Dodge",
+    "Ram 4500"
+   ],
+   "feed_cars": 0,
+   "row_years": 3
+  },
+  {
+   "cat_make": "Dodge",
+   "cat_model": "Ram 5500",
+   "excluded": "catalog model with no feed cars as 'Ram 5500' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Dodge",
+    "Ram 5500"
+   ],
+   "feed_cars": 0,
+   "row_years": 3
+  },
+  {
+   "cat_make": "Dodge",
+   "cat_model": "Viper",
+   "excluded": "catalog model with no feed cars as 'Viper' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Dodge",
+    "Viper"
+   ],
+   "feed_cars": 0,
+   "row_years": 13
+  },
+  {
+   "cat_make": "Jeep",
+   "cat_model": "J20",
+   "excluded": "catalog model with no feed cars as 'J20' (inventory 2026-11-04); nothing to map",
+   "feed": [
+    "Jeep",
+    "J20"
+   ],
+   "feed_cars": 0,
+   "row_years": 7
+  }
+ ],
+ "validator": []
+}

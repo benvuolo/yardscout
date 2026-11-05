@@ -1,0 +1,144 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Hyundai",
+    "cat_model": "Elantra N",
+    "feed": [
+     "Hyundai",
+     "Elantra N"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Hyundai",
+    "cat_model": "Kona N",
+    "feed": [
+     "Hyundai",
+     "Kona N"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Hyundai",
+    "cat_model": "Santa Cruz",
+    "feed": [
+     "Hyundai",
+     "Santa Cruz"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Kia",
+    "cat_model": "Carnival",
+    "feed": [
+     "Kia",
+     "Carnival"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Kia",
+    "cat_model": "Spectra SX",
+    "feed": [
+     "Kia",
+     "Spectra SX"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Kia",
+    "cat_model": "Spectra5 SX",
+    "feed": [
+     "Kia",
+     "Spectra5 SX"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "hmg",
+ "proposals": [
+  {
+   "cat_make": "Hyundai",
+   "cat_model": "Elantra N",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "hmg",
+   "proposed": {
+    "make": "Hyundai",
+    "model": "Elantra N",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Hyundai",
+   "cat_model": "Kona N",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "hmg",
+   "proposed": {
+    "make": "Hyundai",
+    "model": "Kona N",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Hyundai",
+   "cat_model": "Santa Cruz",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "hmg",
+   "proposed": {
+    "make": "Hyundai",
+    "model": "Santa Cruz",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Kia",
+   "cat_model": "Carnival",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "hmg",
+   "proposed": {
+    "make": "Kia",
+    "model": "Carnival",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Kia",
+   "cat_model": "Spectra SX",
+   "feed_cars": 0,
+   "fitment_rows": 50,
+   "ns": "hmg",
+   "proposed": {
+    "make": "Kia",
+    "model": "Spectra SX",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Kia",
+   "cat_model": "Spectra5 SX",
+   "feed_cars": 0,
+   "fitment_rows": 50,
+   "ns": "hmg",
+   "proposed": {
+    "make": "Kia",
+    "model": "Spectra5 SX",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+}

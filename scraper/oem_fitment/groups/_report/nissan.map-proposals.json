@@ -1,0 +1,56 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Nissan",
+    "cat_model": "Kicks Play",
+    "feed": [
+     "Nissan",
+     "Kicks Play"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Nissan",
+    "cat_model": "Van",
+    "feed": [
+     "Nissan",
+     "Van"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "nissan",
+ "proposals": [
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Kicks Play",
+   "feed_cars": 0,
+   "fitment_rows": 5,
+   "ns": "nissan",
+   "proposed": {
+    "make": "Nissan",
+    "model": "Kicks Play",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Nissan",
+   "cat_model": "Van",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "nissan",
+   "proposed": {
+    "make": "Nissan",
+    "model": "Van",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+}

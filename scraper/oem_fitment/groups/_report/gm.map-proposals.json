@@ -1,0 +1,673 @@
+{
+ "draft": {
+  "entries": [],
+  "exclude": {},
+  "skipped": [
+   {
+    "cat_make": "Buick",
+    "cat_model": "Somerset",
+    "feed": [
+     "Buick",
+     "Somerset"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Cadillac",
+    "cat_model": "CT4",
+    "feed": [
+     "Cadillac",
+     "CT4"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Cadillac",
+    "cat_model": "Cimarron",
+    "feed": [
+     "Cadillac",
+     "Cimarron"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Cadillac",
+    "cat_model": "XT6",
+    "feed": [
+     "Cadillac",
+     "XT6"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "Bolt EUV",
+    "feed": [
+     "Chevrolet",
+     "Bolt EUV"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "Cadet",
+    "feed": [
+     "Chevrolet",
+     "Cadet"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "K30",
+    "feed": [
+     "Chevrolet",
+     "K30"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "P20",
+    "feed": [
+     "Chevrolet",
+     "P20"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "R10",
+    "feed": [
+     "Chevrolet",
+     "R10"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "R20",
+    "feed": [
+     "Chevrolet",
+     "R20"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "R2500",
+    "feed": [
+     "Chevrolet",
+     "R2500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "SSR",
+    "feed": [
+     "Chevrolet",
+     "SSR"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "V10",
+    "feed": [
+     "Chevrolet",
+     "V10"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "V20",
+    "feed": [
+     "Chevrolet",
+     "V20"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "V30",
+    "feed": [
+     "Chevrolet",
+     "V30"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chevrolet",
+    "cat_model": "V3500",
+    "feed": [
+     "Chevrolet",
+     "V3500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "G3500",
+    "feed": [
+     "GMC",
+     "G3500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "P2500",
+    "feed": [
+     "GMC",
+     "P2500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "P3500",
+    "feed": [
+     "GMC",
+     "P3500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "R1500",
+    "feed": [
+     "GMC",
+     "R1500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "R2500",
+    "feed": [
+     "GMC",
+     "R2500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "R3500",
+    "feed": [
+     "GMC",
+     "R3500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "Syclone",
+    "feed": [
+     "GMC",
+     "Syclone"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "Typhoon",
+    "feed": [
+     "GMC",
+     "Typhoon"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "V1500",
+    "feed": [
+     "GMC",
+     "V1500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "V2500",
+    "feed": [
+     "GMC",
+     "V2500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "GMC",
+    "cat_model": "V3500",
+    "feed": [
+     "GMC",
+     "V3500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Hummer",
+    "cat_model": "H3T",
+    "feed": [
+     "Hummer",
+     "H3T"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Pontiac",
+    "cat_model": "J2000",
+    "feed": [
+     "Pontiac",
+     "J2000"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
+ },
+ "ns": "gm",
+ "proposals": [
+  {
+   "cat_make": "Buick",
+   "cat_model": "Somerset",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "gm",
+   "proposed": {
+    "make": "Buick",
+    "model": "Somerset",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Cadillac",
+   "cat_model": "CT4",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "gm",
+   "proposed": {
+    "make": "Cadillac",
+    "model": "CT4",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Cadillac",
+   "cat_model": "Cimarron",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Cadillac",
+    "model": "Cimarron",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Cadillac",
+   "cat_model": "XT6",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Cadillac",
+    "model": "XT6",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "Bolt EUV",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "Bolt EUV",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "Cadet",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "Cadet",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "K30",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "K30",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "K-30",
+     1
+    ]
+   ]
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "P20",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "P20",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "R10",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "R10",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "R20",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "R20",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "R2500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "R2500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "SSR",
+   "feed_cars": 0,
+   "fitment_rows": 9,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "SSR",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "V10",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "V10",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "V10 Suburban",
+     1
+    ],
+    [
+     "V10 Blazer",
+     1
+    ]
+   ]
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "V20",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "V20",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "V30",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "V30",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chevrolet",
+   "cat_model": "V3500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Chevrolet",
+    "model": "V3500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "G3500",
+   "feed_cars": 0,
+   "fitment_rows": 5,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "G3500",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "G3500 Vandura",
+     3
+    ],
+    [
+     "G3500 Rally",
+     1
+    ]
+   ]
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "P2500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "P2500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "P3500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "P3500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "R1500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "R1500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "R2500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "R2500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "R3500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "R3500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "Syclone",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "Syclone",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "Typhoon",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "Typhoon",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "V1500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "V1500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "V2500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "V2500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "GMC",
+   "cat_model": "V3500",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "GMC",
+    "model": "V3500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Hummer",
+   "cat_model": "H3T",
+   "feed_cars": 0,
+   "fitment_rows": 12,
+   "ns": "gm",
+   "proposed": {
+    "make": "Hummer",
+    "model": "H3T",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Pontiac",
+   "cat_model": "J2000",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "gm",
+   "proposed": {
+    "make": "Pontiac",
+    "model": "J2000",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "50ac4a48cdc62d02bd819bec33a67d0f07d8a71e"
+}

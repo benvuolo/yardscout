@@ -1,0 +1,1239 @@
+{
+ "as_of": "2026-11-05T12:36:38Z",
+ "note": "R3 input: rows ordered by Verified ordered car pairs gained if the cell closed with its current candidate state and its own pages carried no restricting note (optimistic upper bound for ranking crawl work; never shipped)",
+ "ns": "toyota",
+ "rows": [
+  {
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 163296,
+   "make": "Scion",
+   "model": "xB",
+   "year": 2006
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 155976,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 152490,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 134900,
+   "make": "Scion",
+   "model": "xB",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 127410,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 117876,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 115938,
+   "make": "Toyota",
+   "model": "Sienna",
+   "year": 2006
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 115782,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 1998
+  },
+  {
+   "cats": [
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 84255,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "headlights",
+    "window-switch"
+   ],
+   "gain_pairs": 80301,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "headlights",
+    "window-switch"
+   ],
+   "gain_pairs": 78036,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "headlights",
+    "window-switch"
+   ],
+   "gain_pairs": 77120,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 1998
+  },
+  {
+   "cats": [
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 74480,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "headlights",
+    "window-switch"
+   ],
+   "gain_pairs": 73660,
+   "make": "Toyota",
+   "model": "Sienna",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 71295,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 70004,
+   "make": "Scion",
+   "model": "xB",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "headlights",
+    "window-switch"
+   ],
+   "gain_pairs": 66330,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "headlights",
+    "window-switch"
+   ],
+   "gain_pairs": 57761,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 55622,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 2006
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 52976,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 46200,
+   "make": "Toyota",
+   "model": "Sienna",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 44824,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 43792,
+   "make": "Toyota",
+   "model": "Sienna",
+   "year": 1998
+  },
+  {
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "gain_pairs": 40474,
+   "make": "Toyota",
+   "model": "Tundra",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "gain_pairs": 38752,
+   "make": "Toyota",
+   "model": "Tundra",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 38258,
+   "make": "Toyota",
+   "model": "Sienna",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 37142,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 2008
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights"
+   ],
+   "gain_pairs": 37100,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 1997
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 35266,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "gain_pairs": 34594,
+   "make": "Toyota",
+   "model": "Tundra",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "gain_pairs": 34594,
+   "make": "Toyota",
+   "model": "Tundra",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 32330,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 29202,
+   "make": "Scion",
+   "model": "xA",
+   "year": 2006
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights"
+   ],
+   "gain_pairs": 28035,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 1995
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights"
+   ],
+   "gain_pairs": 28035,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 26838,
+   "make": "Scion",
+   "model": "tC",
+   "year": 2006
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 25998,
+   "make": "Toyota",
+   "model": "Echo",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 23730,
+   "make": "Scion",
+   "model": "tC",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "gain_pairs": 23446,
+   "make": "Scion",
+   "model": "xA",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 22698,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 21862,
+   "make": "Toyota",
+   "model": "Echo",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights"
+   ],
+   "gain_pairs": 20454,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 1994
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 19650,
+   "make": "Toyota",
+   "model": "Echo",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 18352,
+   "make": "Scion",
+   "model": "xA",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 18290,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 18096,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 16665,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2006
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 15562,
+   "make": "Toyota",
+   "model": "Echo",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 14085,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 13348,
+   "make": "Scion",
+   "model": "tC",
+   "year": 2009
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights"
+   ],
+   "gain_pairs": 12474,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 1998
+  },
+  {
+   "cats": [
+    "headlights",
+    "window-switch"
+   ],
+   "gain_pairs": 11832,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 1997
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 10878,
+   "make": "Scion",
+   "model": "tC",
+   "year": 2010
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 9380,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 1993
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 9240,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2008
+  },
+  {
+   "cats": [
+    "headlights",
+    "window-switch"
+   ],
+   "gain_pairs": 9044,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "gain_pairs": 8547,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 1997
+  },
+  {
+   "cats": [
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 8127,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 7920,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 7560,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 1998
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 7068,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 6960,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 6519,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 6150,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "headlights",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 5727,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "headlights",
+    "side-mirrors"
+   ],
+   "gain_pairs": 5452,
+   "make": "Scion",
+   "model": "xD",
+   "year": 2008
+  },
+  {
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "gain_pairs": 4425,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 4200,
+   "make": "Toyota",
+   "model": "Echo",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "headlights",
+    "side-mirrors"
+   ],
+   "gain_pairs": 3528,
+   "make": "Scion",
+   "model": "xD",
+   "year": 2009
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 3173,
+   "make": "Toyota",
+   "model": "Tercel",
+   "year": 1995
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 3173,
+   "make": "Toyota",
+   "model": "Tercel",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 3162,
+   "make": "Toyota",
+   "model": "Echo",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 3009,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 3009,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 2646,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 1997
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 2565,
+   "make": "Toyota",
+   "model": "Tercel",
+   "year": 1997
+  },
+  {
+   "cats": [
+    "alternator",
+    "headlights",
+    "side-mirrors",
+    "starter"
+   ],
+   "gain_pairs": 2530,
+   "make": "Scion",
+   "model": "xD",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "headlights",
+    "side-mirrors"
+   ],
+   "gain_pairs": 2232,
+   "make": "Scion",
+   "model": "xD",
+   "year": 2010
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 2100,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 1995
+  },
+  {
+   "cats": [
+    "headlights",
+    "tail-lights"
+   ],
+   "gain_pairs": 2052,
+   "make": "Toyota",
+   "model": "Celica",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 2002,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "alternator",
+    "headlights",
+    "side-mirrors",
+    "starter"
+   ],
+   "gain_pairs": 1722,
+   "make": "Scion",
+   "model": "xD",
+   "year": 2011
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 1643,
+   "make": "Toyota",
+   "model": "Celica",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "alternator",
+    "side-mirrors",
+    "starter"
+   ],
+   "gain_pairs": 1573,
+   "make": "Scion",
+   "model": "xD",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 1280,
+   "make": "Toyota",
+   "model": "Celica",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 1276,
+   "make": "Toyota",
+   "model": "Prius C",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 1239,
+   "make": "Toyota",
+   "model": "Prius C",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 1020,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2009
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 975,
+   "make": "Toyota",
+   "model": "Prius C",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 880,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2010
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 864,
+   "make": "Toyota",
+   "model": "Celica",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "alternator"
+   ],
+   "gain_pairs": 720,
+   "make": "Toyota",
+   "model": "Yaris",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 675,
+   "make": "Toyota",
+   "model": "Celica",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 639,
+   "make": "Toyota",
+   "model": "Prius C",
+   "year": 2015
+  },
+  {
+   "cats": [
+    "alternator",
+    "side-mirrors",
+    "starter"
+   ],
+   "gain_pairs": 501,
+   "make": "Scion",
+   "model": "xD",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "headlights"
+   ],
+   "gain_pairs": 468,
+   "make": "Toyota",
+   "model": "Celica",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 444,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "alternator"
+   ],
+   "gain_pairs": 405,
+   "make": "Toyota",
+   "model": "Yaris",
+   "year": 2011
+  },
+  {
+   "cats": [
+    "alternator"
+   ],
+   "gain_pairs": 368,
+   "make": "Toyota",
+   "model": "Yaris",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 338,
+   "make": "Toyota",
+   "model": "Venza",
+   "year": 2009
+  },
+  {
+   "cats": [
+    "alternator"
+   ],
+   "gain_pairs": 329,
+   "make": "Toyota",
+   "model": "Yaris",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 290,
+   "make": "Toyota",
+   "model": "Venza",
+   "year": 2010
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 248,
+   "make": "Toyota",
+   "model": "Venza",
+   "year": 2011
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 231,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 156,
+   "make": "Toyota",
+   "model": "Prius C",
+   "year": 2016
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 138,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 108,
+   "make": "Toyota",
+   "model": "Venza",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 88,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 79,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 79,
+   "make": "Toyota",
+   "model": "Prius C",
+   "year": 2017
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 74,
+   "make": "Toyota",
+   "model": "Prius Plug-In",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 74,
+   "make": "Toyota",
+   "model": "Prius Plug-In",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 70,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2011
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 70,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 60,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 60,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 48,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "year": 2015
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 38,
+   "make": "Toyota",
+   "model": "Prius Plug-In",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 24,
+   "make": "Toyota",
+   "model": "Camry",
+   "year": 1986
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 16,
+   "make": "Toyota",
+   "model": "Camry",
+   "year": 1984
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 16,
+   "make": "Toyota",
+   "model": "Camry",
+   "year": 1985
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 9,
+   "make": "Scion",
+   "model": "iM",
+   "year": 2016
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 8,
+   "make": "Toyota",
+   "model": "Corolla iM",
+   "year": 2017
+  },
+  {
+   "cats": [
+    "window-switch"
+   ],
+   "gain_pairs": 5,
+   "make": "Toyota",
+   "model": "Corolla iM",
+   "year": 2018
+  },
+  {
+   "cats": [
+    "starter"
+   ],
+   "gain_pairs": 2,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 2021
+  },
+  {
+   "cats": [
+    "starter"
+   ],
+   "gain_pairs": 2,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 2022
+  },
+  {
+   "cats": [
+    "starter"
+   ],
+   "gain_pairs": 2,
+   "make": "Toyota",
+   "model": "RAV4",
+   "year": 2023
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 1,
+   "make": "Toyota",
+   "model": "Prius Prime",
+   "year": 2018
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 1,
+   "make": "Toyota",
+   "model": "Prius Prime",
+   "year": 2019
+  }
+ ]
+}
