@@ -1872,3 +1872,5 @@
 2026-11-05T04:58:23Z list starter https://www.dbelectrical.com/starters/automotive/genesis/g90/ products=1 children=0 next=n records=1457 new_requests=3312
 2026-11-05T04:58:23Z category done starter records=1457
 2026-11-05T04:58:23Z finished records=1457 errors=0
+2026-11-05T15:00:55Z start site=www.dbelectrical.com cats=['alternator', 'starter'] max_products=0 minutes=28.0
+2026-11-05T15:00:55Z finished records=1457 errors=0
