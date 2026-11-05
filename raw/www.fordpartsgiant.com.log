@@ -1229,3 +1229,143 @@
 20:40:42 chain-unlinked fuel-pump-module 1 numbers named by 5G1Z-9H307-AA, no catalog link: 6G1Z-9H307-A
 20:40:58 chain-unlinked throttle-body 1 numbers named by 5F9Z-9E926-B, no catalog link: 6F9Z-9E926-A
 20:41:14 time budget reached records=3388
+20:41:24 start site=www.fordpartsgiant.com mode=worklist tiers=['A', 'B'] records=3388 list_lines=68 year_lines=5 url_index=1046
+20:41:24 seg done tier=A Ford F-150 [1997, 2003] seeds=[2001] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-150 [2004, 2008] seeds=[2004] records=3388 errors=12
+20:41:24 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=3388 errors=12
+20:41:24 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=3388 errors=12
+20:41:24 seg done tier=A Ford Edge [2007, 2024] seeds=[2013] records=3388 errors=12
+20:41:24 seg done tier=A Ford Fusion [2013, 2016] seeds=[2014] records=3388 errors=12
+20:41:24 seg done tier=A Ford Escape [2008, 2012] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Ford Escape [2013, 2016] seeds=[2013] records=3388 errors=12
+20:41:24 seg done tier=A Ford Explorer [2002, 2005] seeds=[2002] records=3388 errors=12
+20:41:24 seg done tier=A Ford Taurus [2000, 2007] seeds=[2003] records=3388 errors=12
+20:41:24 seg done tier=A Ford Expedition [2003, 2006] seeds=[2003] records=3388 errors=12
+20:41:24 seg done tier=A Ford Ranger [1998, 2011] seeds=[2000] records=3388 errors=12
+20:41:24 seg done tier=A Ford Fiesta [1978, 2019] seeds=[2011] records=3388 errors=12
+20:41:24 seg done tier=A Ford Focus [2008, 2011] seeds=[2010] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-150 [2009, 2012] seeds=[2010] records=3388 errors=12
+20:41:24 seg done tier=A Ford Fusion [2006, 2009] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Ford Focus [2015, 2018] seeds=[2015] records=3388 errors=12
+20:41:24 seg done tier=A Ford Expedition [1997, 2002] seeds=[2000] records=3388 errors=12
+20:41:24 seg done tier=A Ford Explorer [2006, 2010] seeds=[2006] records=3388 errors=12
+20:41:24 seg done tier=A Ford Explorer [1995, 2001] seeds=[1999] records=3388 errors=12
+20:41:24 seg done tier=A Ford Focus [2005, 2007] seeds=[2007] records=3388 errors=12
+20:41:24 seg done tier=A Ford Explorer [2011, 2015] seeds=[2013] records=3388 errors=12
+20:41:24 seg done tier=A Ford Mustang [1999, 2004] seeds=[2000] records=3388 errors=12
+20:41:24 seg done tier=A Mercury Grand Marquis [1998, 2011] seeds=[2000] records=3388 errors=12
+20:41:24 seg done tier=A Ford Expedition [2007, 2017] seeds=[2007] records=3388 errors=12
+20:41:24 seg done tier=A Ford E-250 [1978, 2014] seeds=[2006] records=3388 errors=12
+20:41:24 seg done tier=A Ford E-150 [1969, 2014] seeds=[1999] records=3388 errors=12
+20:41:24 seg done tier=A Ford Escape [2005, 2007] seeds=[2005] records=3388 errors=12
+20:41:24 seg done tier=A Ford Crown Victoria [1998, 2011] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Ford Focus [2000, 2004] seeds=[2003] records=3388 errors=12
+20:41:24 seg done tier=A Ford Ranger [1993, 1997] seeds=[1997] records=3388 errors=12
+20:41:24 seg done tier=A Ford Mustang [2005, 2009] seeds=[2006] records=3388 errors=12
+20:41:24 seg done tier=A Ford E-350 [1970, 2021] seeds=[2006] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-250 Super Duty [1980, 2024] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Ford Flex [2009, 2019] seeds=[2009] records=3388 errors=12
+20:41:24 seg done tier=A Ford Escape [2001, 2004] seeds=[2003] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-150 [1992, 1996] seeds=[1995] records=3388 errors=12
+20:41:24 seg done tier=A Ford Explorer Sport Trac [2001, 2017] seeds=[2001] records=3388 errors=12
+20:41:24 seg done tier=A Ford Taurus [2013, 2019] seeds=[2013] records=3388 errors=12
+20:41:24 seg done tier=A Ford Taurus [2010, 2012] seeds=[2011] records=3388 errors=12
+20:41:24 seg done tier=A Ford Five Hundred [2005, 2007] seeds=[2005] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-250 [1962, 1998] seeds=[1997] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln Town Car [2003, 2011] seeds=[2003] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-250 [1999, 2007] seeds=[1999] records=3388 errors=12
+20:41:24 seg done tier=A Ford Escape [2017, 2019] seeds=[2017] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-150 [2013, 2014] seeds=[2013] records=3388 errors=12
+20:41:24 seg done tier=A Mercury Mariner [2005, 2011] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln Navigator [2003, 2006] seeds=[2004] records=3388 errors=12
+20:41:24 seg done tier=A Mercury Milan [2006, 2011] seeds=[2010] records=3388 errors=12
+20:41:24 seg done tier=A Ford Mustang [1994, 1998] seeds=[1998] records=3388 errors=12
+20:41:24 seg done tier=A Ford Escort [1983, 2003] seeds=[1998] records=3388 errors=12
+20:41:24 seg done tier=A Ford Ranger [1978, 1992] seeds=[1992] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln Town Car [1998, 2002] seeds=[2000] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln MKX [2007, 2010] seeds=[2007] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-150 [1987, 1991] seeds=[1990] records=3388 errors=12
+20:41:24 seg done tier=A Ford Freestar [2004, 2007] seeds=[2004] records=3388 errors=12
+20:41:24 seg done tier=A Ford Freestyle [2005, 2007] seeds=[2005] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-350 Super Duty [1999, 2021] seeds=[2004] records=3388 errors=12
+20:41:24 seg done tier=A Ford Mustang [2010, 2014] seeds=[2010] records=3388 errors=12
+20:41:24 seg done tier=A Ford Taurus [1996, 1999] seeds=[1999] records=3388 errors=12
+20:41:24 seg done tier=A Ford Transit Connect [2010, 2013] seeds=[2010] records=3388 errors=12
+20:41:24 seg done tier=A Ford Fusion [2017, 2018] seeds=[2017] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln Town Car [1969, 1997] seeds=[1997] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln LS [2000, 2006] seeds=[2005] records=3388 errors=12
+20:41:24 seg done tier=A Ford Windstar [2001, 2003] seeds=[2003] records=3388 errors=12
+20:41:24 seg done tier=A Mercury Sable [2000, 2005] seeds=[2003] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln MKS [2009, 2016] seeds=[2009] records=3388 errors=12
+20:41:24 seg done tier=A Ford Taurus [2008, 2009] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Mercury Mountaineer [2002, 2005] seeds=[2002] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln MKZ [2010, 2012] seeds=[2012] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln MKZ [1996, 2009] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln Navigator [2007, 2016] seeds=[2007] records=3388 errors=12
+20:41:24 seg done tier=A Mercury Grand Marquis [1972, 1997] seeds=[1997] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln Navigator [1998, 2002] seeds=[2000] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-250 [2008, 2016] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Ford Explorer [1991, 1994] seeds=[1994] records=3388 errors=12
+20:41:24 seg done tier=A Mercury Mountaineer [2006, 2010] seeds=[2007] records=3388 errors=12
+20:41:24 seg done tier=A Ford Fusion Hybrid [2010, 2019] seeds=[2010] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-350 [1960, 1998] seeds=[1990] records=3388 errors=12
+20:41:24 seg done tier=A Ford Thunderbird [1961, 2004] seeds=[1997] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln Continental [1964, 2017] seeds=[2000] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-150 [1966, 1986] seeds=[1986] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-350 [1999, 2007] seeds=[2004] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln MKX [2011, 2015] seeds=[2011] records=3388 errors=12
+20:41:24 seg done tier=A Ford Explorer [2016, 2017] seeds=[2016] records=3388 errors=12
+20:41:24 seg done tier=A Ford Crown Victoria [1982, 1997] seeds=[1997] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln MKZ [2013, 2016] seeds=[2014] records=3388 errors=12
+20:41:24 seg done tier=A Ford Escape Hybrid [2005, 2011] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Mercury Cougar [1967, 2002] seeds=[1999] records=3388 errors=12
+20:41:24 seg done tier=A Lincoln Aviator [2003, 2020] seeds=[2004] records=3388 errors=12
+20:41:24 seg done tier=A Ford F-150 [2015, 2020] seeds=[2016] records=3388 errors=12
+20:41:24 seg done tier=A Ford Expedition EL [2007, 2017] seeds=[2008] records=3388 errors=12
+20:41:24 seg done tier=A Mercury Montego [1971, 2007] seeds=[2005] records=3388 errors=12
+20:41:48 chain-unlinked alternator 1 numbers named by 6C2Z-10346-DA, no catalog link: 6C2Z-10346-DCRM
+20:41:48 chain-unlinked alternator 1 numbers named by 5C2Z-10346-CA, no catalog link: 6C2Z-10346-CA
+20:41:48 chain-unlinked alternator 3 numbers named by 6C2Z-10346-EARM2, no catalog link: 6C2Z-10346-EARM1, GL-635, GL-635-RM
+20:41:57 chain-unlinked starter 1 numbers named by 3C3Z-11002-AA, no catalog link: 7C2Z-11002-B
+20:42:21 chain-unlinked tail-lights 1 numbers named by 5C2Z-13404-AA, no catalog link: 4C2Z-13404-AA
+20:42:21 chain-unlinked tail-lights 1 numbers named by 5C2Z-13405-AACP, no catalog link: 4C2Z-13405-AA
+20:42:28 chain-unlinked side-mirrors 1 numbers named by 3C2Z-17682-DAA, no catalog link: 7C2Z-17682-DA
+20:42:28 chain-unlinked side-mirrors 1 numbers named by 3C2Z-17683-DAA, no catalog link: 7C2Z-17683-DA
+20:42:28 chain-unlinked side-mirrors 1 numbers named by 2C2Z-17682-AAC, no catalog link: 2C2Z-17682-AAA
+20:42:28 chain-unlinked side-mirrors 1 numbers named by 2C2Z-17683-AAB, no catalog link: 2C2Z-17683-AAA
+20:42:28 chain-unlinked side-mirrors 1 numbers named by 4C2Z-17682-CAA, no catalog link: 7C2Z-17682-CA
+20:42:28 chain-unlinked side-mirrors 1 numbers named by 4C2Z-17683-CAA, no catalog link: 7C2Z-17683-CA
+20:42:36 chain-unlinked window-regulator 1 numbers named by 6C2Z-1523201-BA, no catalog link: 1C2Z-1523201-BA
+20:42:36 chain-unlinked window-regulator 1 numbers named by 1C2Z-1523201-AA, no catalog link: 9C2Z-1523201-A
+20:42:36 chain-unlinked window-regulator 1 numbers named by 1C2Z-1523200-AA, no catalog link: 9C2Z-1523200-A
+20:42:36 chain-unlinked window-regulator 1 numbers named by 6C2Z-1523200-BA, no catalog link: 1C2Z-1523200-BA
+20:43:25 chain-unlinked fuel-pump-module 1 numbers named by 6C2Z-9H307-CA, no catalog link: 4C2Z-9H307-CB
+20:43:25 chain-unlinked fuel-pump-module 1 numbers named by 6C2Z-9H307-BA, no catalog link: 4C2Z-9H307-BB
+20:44:12 chain-unlinked power-steering-pump 1 numbers named by 7C2Z-3A674-BRM, no catalog link: STP-172
+20:50:44 seg done tier=A Ford Econoline [1963, 2013] seeds=[2006, 1988, 1987] records=3390 errors=12
+20:51:24 chain-unlinked alternator 1 numbers named by F6AZ-10346-AARM, no catalog link: F6AZ-10346-AARM2
+20:51:48 chain-unlinked alternator 1 numbers named by F81Z-10V346-EARM, no catalog link: 4U2Z-10V346-FSRM
+20:52:44 chain-unlinked ac-compressor 1 numbers named by 4L3Z-19703-AB, no catalog link: 4L3Z-19703-AC
+20:53:08 chain-unlinked headlights 1 numbers named by XC3Z-13008-AA, no catalog link: 1C3Z-13008-AA
+20:53:08 chain-unlinked headlights 1 numbers named by XC3Z-13008-BA, no catalog link: 1C3Z-13008-BA
+20:55:16 chain-unlinked fuel-pump-module 1 numbers named by 3C7Z-9H307-PA, no catalog link: 3C7Z-9H307-PB
+20:55:16 chain-unlinked fuel-pump-module 1 numbers named by 3C7Z-9H307-NA, no catalog link: 3C7Z-9H307-NB
+20:55:48 seg done tier=A Ford Excursion [2000, 2005] seeds=[2000] records=3397 errors=12
+20:55:56 nav-fail Ford F-150 Heritage 2004: ValueError: no parts-list or trim links on https://www.fordpartsgiant.com/2004-ford-f_150-f_150_heritage_old_style-parts.html
+20:55:56 seg done tier=A Ford F-150 Heritage [2004, 2011] seeds=[2004] records=3397 errors=13
+20:59:08 chain-unlinked alternator 1 numbers named by 7C2Z-10346-AA, no catalog link: 7C2Z-10346-ADRM
+21:00:04 chain-unlinked ac-compressor 1 numbers named by 7C2Z-19703-A, no catalog link: CC2Z-19703-D
+21:00:04 chain-unlinked ac-compressor 1 numbers named by AU2Z-19V703-AG, no catalog link: CC2Z-19703-D
+21:00:04 chain-unlinked ac-compressor 2 numbers named by 8C2Z-19703-CA, no catalog link: YC-2538, YCC-289
+21:00:44 chain-unlinked headlights 1 numbers named by 8C2Z-13008-A, no catalog link: AC2Z-13008-C
+21:00:44 chain-unlinked headlights 1 numbers named by 8C2Z-13008-B, no catalog link: AC2Z-13008-D
+21:00:44 chain-unlinked headlights 1 numbers named by 8C2Z-13008-ACP, no catalog link: AC2Z-13008-CCP
+21:00:44 chain-unlinked headlights 1 numbers named by 8C2Z-13008-BCP, no catalog link: AC2Z-13008-DCP
+21:04:28 listed after chain power-steering-pump 7C2Z-3A674-BRM: line 3422 (recrawl_of 3390)
+21:04:36 chain-unlinked power-steering-pump 1 numbers named by 7C2Z-3A674-C, no catalog link: 7C2Z-3A674-CRM
+21:04:36 chain-unlinked power-steering-pump 1 numbers named by 7C2Z-3A674-BRM, no catalog link: STP-172
+21:07:25 seg done tier=A Ford E-350 Super Duty [1999, 2015] seeds=[2006, 2008, 2007] records=3423 errors=13
+21:08:04 chain-unlinked alternator 1 numbers named by XL2Z-10V346-AARM, no catalog link: 4U2Z-10V346-CYRM
+21:10:22 chain-unlinked side-mirrors 1 numbers named by F87Z-17682-AAA, no catalog link: F87Z-17682-PAA
+21:10:22 chain-unlinked side-mirrors 1 numbers named by F87Z-17683-AAB, no catalog link: F87Z-17683-PAA
+21:11:48 time budget reached records=3425
