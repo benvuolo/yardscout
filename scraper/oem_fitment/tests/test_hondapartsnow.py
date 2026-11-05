@@ -61,6 +61,8 @@ ok(H.pick_trims(["4dr_lx-ka_5at", "4dr_mx_hybrid-ka_cvt", "4dr_mx_hybrid_navi-ka
 ok(H.side_flag("Mirror Assy., L. Door *B92P* (R.C.)", "Driver Side Passenger Side") == "position names both sides: 'Driver Side Passenger Side'"
    and H.side_flag("Regulator Assy., R. FR. Door", "Driver Side") and not H.side_flag("Headlight Unit, R.", "Passenger Side")
    and not H.side_flag("Compressor", None), "side flag")
+ok(H.BARE_SWITCH.match("Switch Assy.") and not H.BARE_SWITCH.match("Switch Assy., Remote Control Mirror")
+   and not H.BARE_SWITCH.match("Switch Assy., Power Window Sub& Door Lock"), "bare switch")
 pure = n
 
 if not _pg_cacheonly.have([MODEL, YEAR, LX, V6, ALT, REG, PS, P_ALT, P_RAD, P_COIL]):

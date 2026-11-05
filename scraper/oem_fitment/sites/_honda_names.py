@@ -25,6 +25,7 @@ import re
 FREIGHT = re.compile(r"^\s*\[freight parts\]\s*", re.I)
 REMAN = re.compile(r"\(RMD\)|\bcore id\b|\breman", re.I)
 REMAN_PN = re.compile(r"RM$", re.I)
+BARE_SWITCH = re.compile(r"^switch\s+assy\.?\s*(\*[^*]+\*.*)?$", re.I)
 INCLUDES = re.compile(r"\((?:includes?|incl\.?|with|w/)[^)]*\)", re.I)
 
 
@@ -221,7 +222,24 @@ def make_config(T, site: str, models: dict):
 
 
 def bind(T, cfg):
-    cats_for, parts_on_page, product = T.bind(cfg)
+    cats_for, parts_on_page_t, product = T.bind(cfg)
+
+    def parts_on_page(list_url: str, cat: str) -> list[dict]:
+        out = parts_on_page_t(list_url, cat)
+        if cat == "window-switch" and re.search(r"/(front_)?door_lining\.html$", list_url):
+            # 2003-2007 Accord prints its driver window switch as a bare
+            # "Switch Assy." (35754-SDA-306; product page: "Window Switch",
+            # Driver Side, replaces 35750-SDA-A12). Kept from the front door
+            # lining diagram only, and flagged for curation.
+            have = {p["pn"] for p in out}
+            for r in T.list_parts(T.get(list_url)["html"]):
+                if r["pn"] and r["url"] and r["pn"] not in have and BARE_SWITCH.match(oem_name(r["main"])):
+                    have.add(r["pn"])
+                    out.append({"pn": r["pn"], "name": r["main"], "product_url": T.absolute(cfg.site, r["url"]),
+                                "list_group": r["group"], "list_remark": r["remark"], "list_info": r["info"],
+                                "list_flags": ["bare name 'Switch Assy.' on the front door lining diagram: "
+                                               "check the product page says a driver window switch"]})
+        return out
 
     def categories_for(make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
         # one "Tailgate" diagram; pickups file it as tailgate, the rest as liftgate
