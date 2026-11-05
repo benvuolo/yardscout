@@ -1,0 +1,114 @@
+# OEM fitment crawl (scraper/oem_fitment/README.md). One job per catalog site
+# that has a module in scraper/oem_fitment/sites/. Each job resumes from the
+# oem-raw branch, crawls in 30-minute slices through fetch.py (allowlist,
+# robots.txt, 4 s per site, permanent stop on any bot check / 403 / 429 /
+# 503), and commits raw/<site>.* back to oem-raw after every slice, so a
+# killed job loses at most one slice. Sites with raw/<site>.done or
+# raw/<site>.blocked on oem-raw are skipped. Never touches main.
+name: OEM fitment crawl
+
+on:
+  workflow_dispatch:
+    inputs:
+      sites:
+        description: "Comma-separated catalog domains, or all"
+        default: "all"
+  schedule:
+    - cron: "23 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      sites: ${{ steps.list.outputs.sites }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: list
+        env:
+          WANT: ${{ github.event.inputs.sites || 'all' }}
+        run: |
+          git fetch -q origin oem-raw:oem-raw 2>/dev/null || true
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os, re, subprocess
+          from pathlib import Path
+          want = os.environ["WANT"].strip()
+          sites = []
+          for f in sorted(Path("scraper/oem_fitment/sites").glob("*.py")):
+              if f.name.startswith("_"):
+                  continue
+              m = re.search(r'^SITE\s*=\s*"([^"]+)"', f.read_text(), re.M)
+              if m:
+                  sites.append(m.group(1))
+          if want != "all":
+              sites = [s for s in sites if s in {x.strip() for x in want.split(",")}]
+          def on_branch(path):
+              return subprocess.run(["git", "cat-file", "-e", f"oem-raw:{path}"],
+                                    capture_output=True).returncode == 0
+          sites = [s for s in sites if not on_branch(f"raw/{s}.done") and not on_branch(f"raw/{s}.blocked")]
+          print("sites=" + json.dumps(sites))
+          PY
+          cat "$GITHUB_OUTPUT"
+
+  crawl:
+    needs: plan
+    if: needs.plan.outputs.sites != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        site: ${{ fromJSON(needs.plan.outputs.sites) }}
+    concurrency:
+      group: oem-crawl-${{ matrix.site }}
+      cancel-in-progress: false
+    env:
+      SITE: ${{ matrix.site }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q requests
+      - name: Restore progress from oem-raw
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          W="$GITHUB_WORKSPACE/../raw-branch"
+          if git fetch -q origin oem-raw; then
+            git worktree add -q --detach "$W" FETCH_HEAD
+          else
+            git worktree add -q --orphan -b oem-raw "$W"
+          fi
+          mkdir -p "$W/raw" scraper/oem_fitment/raw
+          cp "$W"/raw/"$SITE".* scraper/oem_fitment/raw/ 2>/dev/null || true
+          ls -la scraper/oem_fitment/raw/
+      - name: Crawl in 30-minute slices, checkpoint after each
+        run: |
+          W="$GITHUB_WORKSPACE/../raw-branch"
+          push_raw() {
+            cp "$GITHUB_WORKSPACE"/scraper/oem_fitment/raw/"$SITE".* "$W/raw/" 2>/dev/null || true
+            ( cd "$W"
+              git add raw
+              if git diff --cached --quiet; then exit 0; fi
+              git commit -q -m "oem-raw: $SITE checkpoint $(date -u +%Y-%m-%dT%H:%MZ)"
+              for t in 1 2 3 4 5 6; do
+                git push -q origin HEAD:oem-raw && exit 0
+                git fetch -q origin oem-raw && git rebase -q FETCH_HEAD || git rebase --abort || true
+                sleep $((t * 5))
+              done
+              echo "::error::could not push checkpoint"; exit 1 )
+          }
+          cd scraper/oem_fitment
+          for i in $(seq 1 10); do
+            set +e
+            python3 crawl.py --site "$SITE" --minutes 30
+            rc=$?
+            set -e
+            tail -2 "raw/$SITE.log" 2>/dev/null || true
+            push_raw
+            if [ "$rc" -ne 10 ]; then echo "crawl exit $rc after slice $i"; break; fi
+          done
+          { echo "## $SITE"; echo '```'; tail -5 "raw/$SITE.log" 2>/dev/null; echo '```'; } >> "$GITHUB_STEP_SUMMARY"

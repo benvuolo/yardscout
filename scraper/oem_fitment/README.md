@@ -33,8 +33,13 @@ def product(product_url: str) -> dict:
        "fitment": [{"years": [lo, hi], "make": "Toyota", "model": "Camry",
                     "trims": ["LE", "XLE"] or [], "engines": ["4 Cyl 2.5L"] or [],
                     "raw": "<the row text exactly as shown>"}],
+       "evidence_lines": ["<the page's fitment block and Replaces lines, verbatim,
+                          in page order, capped at 120 lines>"],
        "retrieved": "<from fetch.get>"}"""
 ```
+
+`evidence_lines` is what verifiers check the structured fields against, since
+the HTML cache does not leave the machine that crawled it.
 
 Model names in `fitment` stay exactly as the catalog prints them; mapping to
 our feed's names happens later, in curation. Year spans are inclusive.
@@ -55,6 +60,25 @@ Exclude from every category: bulbs, sockets, gaskets, bolts, clips, brackets,
 seals, wiring, labels, mirror glass only, covers/caps only, lens only,
 remanufactured cores when a new number exists (keep "reman" as its own row
 if it is the only listing), and anything not the assembly a puller removes.
+
+## Shared template code
+
+Two catalog templates cover all 13 sites:
+- `sites/_simplepart.py`: toyotapartsnow.com, jeeppartsdeal.com
+  (`/catalog/<year>-<make>-<model>-parts`, `/parts-list/...`, `/oem/<make>~<slug>~<pn>`).
+- `sites/_partsgiant.py`: every `.html` site (gmpartsgiant, fordpartsgiant,
+  moparpartsgiant, nissanpartsdeal, infinitipartsdeal, hondapartsnow,
+  acurapartswarehouse, hyundaipartsdeal, kiapartsnow, subarupartsdeal,
+  lexuspartsnow).
+Per-site modules stay thin: SITE, slug maps, per-make category rules (OEM part
+naming differs by make), then the three contract functions from the template.
+
+## Where crawls run
+
+GitHub Actions (`.github/workflows/oem-fitment-crawl.yml`), one job per site
+with a module, 30-minute checkpoints committed to the `oem-raw` branch
+(`raw/<site>.jsonl`, `.progress.json`, `.log`, `.done`, `.blocked`). Crawl
+locally only for trials (`--max-segments 2`).
 
 ## Raw record (crawl.py writes raw/<site>.jsonl)
 

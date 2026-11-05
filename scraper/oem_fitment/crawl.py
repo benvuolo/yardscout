@@ -48,7 +48,9 @@ def main() -> None:
     ap.add_argument("--site", required=True)
     ap.add_argument("--tier", default="all")
     ap.add_argument("--max-segments", type=int, default=0)
+    ap.add_argument("--minutes", type=float, default=0, help="stop cleanly after this long (checkpointed runs)")
     a = ap.parse_args()
+    deadline = time.time() + a.minutes * 60 if a.minutes else None
     site = a.site
     mod = module_for(site)
     wl = json.loads((ROOT / "worklist.json").read_text())["sites"][site]["segments"]
@@ -56,6 +58,9 @@ def main() -> None:
         wl = wl[: a.max_segments]
     tiers = ["A", "B"] if a.tier == "all" else [a.tier]
     raw = ROOT / "raw" / f"{site}.jsonl"
+    if (ROOT / "raw" / f"{site}.blocked").exists():
+        print(f"{site} is blocked: {(ROOT / 'raw' / f'{site}.blocked').read_text().strip()}")
+        sys.exit(3)
     prog_p = ROOT / "raw" / f"{site}.progress.json"
     logp = ROOT / "raw" / f"{site}.log"
     prog = json.loads(prog_p.read_text()) if prog_p.exists() else {"done": [], "records": 0, "errors": 0, "products_seen": []}
@@ -82,6 +87,10 @@ def main() -> None:
                 seeds = [seg["seed_year"]]
                 tried: list[int] = []
                 while seeds and len(tried) < MAX_SEEDS:
+                    if deadline and time.time() > deadline:
+                        save()
+                        log(f"time budget reached records={prog['records']}")
+                        sys.exit(10)
                     year = seeds.pop(0)
                     tried.append(year)
                     key = f"{tier}|{make}|{model}|{year}"
@@ -137,12 +146,16 @@ def main() -> None:
     except Refused as e:
         log(f"STOPPED: {e}")
         save()
+        if "stopped" in str(e) or "refused or challenged" in str(e) or "robots.txt HTTP" in str(e):
+            (ROOT / "raw" / f"{site}.blocked").write_text(str(e))
         sys.exit(3)
     except Exception:
         log("CRASH: " + traceback.format_exc())
         save()
         raise
     save()
+    if not a.max_segments and a.tier == "all":
+        (ROOT / "raw" / f"{site}.done").write_text(time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
     log(f"finished records={prog['records']} errors={prog['errors']}")
 
 
