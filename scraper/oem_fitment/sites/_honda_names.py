@@ -227,4 +227,35 @@ def bind(T, cfg):
         # one "Tailgate" diagram; pickups file it as tailgate, the rest as liftgate
         drop = "liftgate" if model in PICKUPS else "tailgate"
         return cats_for(make, model, year, [c for c in cats if c != drop])
-    return categories_for, parts_on_page, product
+    def product_checked(product_url: str) -> dict:
+        rec = product(product_url)
+        try:
+            main = (T.store(T.get(product_url)["html"]).get("partNumber") or {}).get("partInfo", {}).get("mainDesc") or ""
+        except Exception:  # the page was just read by product(); a cache hit
+            main = ""
+        f = side_flag(main, rec.get("position"))
+        if f:
+            rec["flags"] = rec.get("flags", []) + [f]
+        return rec
+    return categories_for, parts_on_page, product_checked
+
+
+def side_flag(name: str, position: str | None) -> str | None:
+    """Honda product pages sometimes print a Position naming both sides
+    ("Driver Side Passenger Side" on left mirror 76250-S84-A31ZJ) or the other
+    side. The position stays as printed; the record gets a flag."""
+    if not position:
+        return None
+    drv, pas = bool(re.search(r"\bdriver\b", position, re.I)), bool(re.search(r"\bpassenger\b", position, re.I))
+    if drv and pas:
+        return f"position names both sides: {position!r}"
+    m = re.search(r"(?:,|^)\s*(?:[a-z ]+,\s*)?\b([RL])\.(?:\s|$|,)", name or "")
+    side = m.group(1).upper() if m else None
+    if side is None:  # product-page names spell it out: "Mirror Assembly, Driver Side Door"
+        if re.search(r"\b(driver|left)\b", name or "", re.I) and not re.search(r"\b(passenger|right)\b", name or "", re.I):
+            side = "L"
+        elif re.search(r"\b(passenger|right)\b", name or "", re.I) and not re.search(r"\b(driver|left)\b", name or "", re.I):
+            side = "R"
+    if side == "L" and pas or side == "R" and drv:
+        return f"position {position!r} contradicts name {name!r}"
+    return None

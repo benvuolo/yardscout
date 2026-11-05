@@ -58,6 +58,9 @@ ok(H.pick_trims(["2dr_lx-ka_5at", "4dr_lx-ka_5at", "4dr_lx-kl_5mt", "4dr_exl_v6_
                  "4dr_mx_hybrid-ka_cvt", "4dr_ex_l_pzev-kl_5at"], want_hybrid=False) == ["4dr_lx-ka_5at", "4dr_exl_v6_navi-ka_5at"], "trims")
 ok(H.pick_trims(["4dr_lx-ka_5at", "4dr_mx_hybrid-ka_cvt", "4dr_mx_hybrid_navi-ka_cvt"], want_hybrid=True)
    == ["4dr_mx_hybrid-ka_cvt", "4dr_mx_hybrid_navi-ka_cvt"], "hybrid trims")
+ok(H.side_flag("Mirror Assy., L. Door *B92P* (R.C.)", "Driver Side Passenger Side") == "position names both sides: 'Driver Side Passenger Side'"
+   and H.side_flag("Regulator Assy., R. FR. Door", "Driver Side") and not H.side_flag("Headlight Unit, R.", "Passenger Side")
+   and not H.side_flag("Compressor", None), "side flag")
 pure = n
 
 if not _pg_cacheonly.have([MODEL, YEAR, LX, V6, ALT, REG, PS, P_ALT, P_RAD, P_COIL]):
