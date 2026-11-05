@@ -110,3 +110,51 @@
 09:08:51 seg done tier=B Mitsubishi Outlander [2014, 2020] seeds=[2014] records=433 errors=6
 09:12:03 seg done tier=B Mitsubishi Montero [1985, 2006] seeds=[2002, 1995, 1997] records=434 errors=6
 09:13:31 time budget reached records=435
+09:13:40 start site=www.mitsubishipartsgiant.com segments=23 tiers=['A', 'B']
+09:13:40 seg done tier=A Mitsubishi Lancer [2008, 2017] seeds=[2008] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Lancer [2002, 2007] seeds=[2002] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Eclipse [2000, 2005] seeds=[2003] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Eclipse [2006, 2012] seeds=[2007] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Mirage [1992, 2024] seeds=[2015] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Endeavor [2004, 2011] seeds=[2004] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Outlander Sport [2011, 2021] seeds=[2015] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Montero Sport [1991, 2004] seeds=[2000] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Outlander [2007, 2013] seeds=[2007] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Galant [2009, 2012] seeds=[2009] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Galant [2004, 2006] seeds=[2004] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Outlander [2003, 2006] seeds=[2003] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Galant [2002, 2003] seeds=[2003] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Outlander [2014, 2020] seeds=[2014] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Montero [1985, 2006] seeds=[2002] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Galant [1990, 2001] seeds=[2000] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Galant [2007, 2008] seeds=[2007] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Mirage G4 [2017, 2024] seeds=[2017] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Eclipse [1995, 1999] seeds=[1999] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Raider [2006, 2009] seeds=[2006] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Diamante [1992, 2004] seeds=[2002] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi 3000GT [1991, 1999] seeds=[1995] records=435 errors=6
+09:13:40 seg done tier=A Mitsubishi Mighty Max [1985, 1995] seeds=[1992] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Lancer [2008, 2017] seeds=[2008] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Lancer [2002, 2007] seeds=[2002] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Eclipse [2000, 2005] seeds=[2003] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Eclipse [2006, 2012] seeds=[2007] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Mirage [1992, 2024] seeds=[2015] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Endeavor [2004, 2011] seeds=[2004] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Outlander Sport [2011, 2021] seeds=[2015] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Montero Sport [1991, 2004] seeds=[2000] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Outlander [2007, 2013] seeds=[2007] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Galant [2009, 2012] seeds=[2009] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Galant [2004, 2006] seeds=[2004] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Outlander [2003, 2006] seeds=[2003] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Galant [2002, 2003] seeds=[2003] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Outlander [2014, 2020] seeds=[2014] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Montero [1985, 2006] seeds=[2002] records=435 errors=6
+09:13:40 seg done tier=B Mitsubishi Galant [1990, 2001] seeds=[2000] records=435 errors=6
+09:15:24 seg done tier=B Mitsubishi Galant [2007, 2008] seeds=[2007] records=439 errors=6
+09:18:12 seg done tier=B Mitsubishi Mirage G4 [2017, 2024] seeds=[2017] records=450 errors=6
+09:19:32 seg done tier=B Mitsubishi Eclipse [1995, 1999] seeds=[1999] records=451 errors=6
+09:21:00 seg done tier=B Mitsubishi Raider [2006, 2009] seeds=[2006, 2008, 2009] records=451 errors=6
+09:25:00 seg done tier=B Mitsubishi Diamante [1992, 2004] seeds=[2002, 1998, 1997] records=451 errors=6
+09:26:04 seg done tier=B Mitsubishi 3000GT [1991, 1999] seeds=[1995] records=452 errors=6
+09:28:36 seg done tier=B Mitsubishi Mighty Max [1985, 1995] seeds=[1992, 1990, 1989] records=452 errors=6
+09:28:36 finished records=452 errors=6
