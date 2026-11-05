@@ -5393,6 +5393,61 @@ function pfParseFits(fits) {
   const m = String(fits || '').match(/(\d{4})\s*[–-]\s*(\d{4})/);
   return m ? [parseInt(m[1], 10), parseInt(m[2], 10)] : null;
 }
+/* VIN model-year character (position 10, 49 CFR 565): a 30-year cycle from
+ * 1980 (A=1980/2010 ... Y=2000/2030, 1-9 = 2001-09/2031-39); I, O, Q, U, Z
+ * and 0 are never year codes. The cycle resolves toward the listed year
+ * (ties go to the later year). null = not a 17-character VIN, or no year
+ * code there. Python mirror: scraper/_audit_verified_fits.py vin_model_year. */
+const PF_VIN_YEAR_CHARS = 'ABCDEFGHJKLMNPRSTVWXY123456789';
+function pfVinModelYear(vin, year) {
+  const s = normalizeVinForDedupe(String(vin || ''));
+  if (s.length !== 17) return null;
+  const i = PF_VIN_YEAR_CHARS.indexOf(s[9]);
+  if (i < 0) return null;
+  const y = +year || 0;
+  let best = null;
+  for (let k = -1; k <= 3; k++) {
+    const c = 1980 + i + 30 * k;
+    const dc = Math.abs(c - y), db = best == null ? Infinity : Math.abs(best - y);
+    if (dc < db || (dc === db && c > best)) best = c;
+  }
+  return best;
+}
+/* A VIN that can confirm a model year: 17 characters of the VIN alphabet, a
+ * year code in position 10, and a correct check digit in position 9. */
+const PF_VIN_TRANSLIT = { A: 1, B: 2, C: 3, D: 4, E: 5, F: 6, G: 7, H: 8, J: 1, K: 2, L: 3, M: 4, N: 5, P: 7, R: 9, S: 2, T: 3, U: 4, V: 5, W: 6, X: 7, Y: 8, Z: 9 };
+const PF_VIN_WEIGHTS = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2];
+function pfVinValid(vin) {
+  const s = normalizeVinForDedupe(String(vin || ''));
+  if (!/^[A-HJ-NPR-Z0-9]{17}$/.test(s) || pfVinModelYear(s, 0) == null) return false;
+  let sum = 0;
+  for (let i = 0; i < 17; i++) {
+    const ch = s[i];
+    sum += (/\d/.test(ch) ? +ch : PF_VIN_TRANSLIT[ch]) * PF_VIN_WEIGHTS[i];
+  }
+  const r = sum % 11;
+  return s[8] === (r === 10 ? 'X' : String(r));
+}
+/* CURATION_SPEC §7.2 P0.4 — is the donor the car its listing says? Applies
+ * to every row that would be Verified; {ok:false} demotes it to Likely and
+ * `warn` (plain text; callers escape) says why. A wrong year can put a donor
+ * across a facelift; a vPIC mismatch can mean the lot sign names another
+ * car. opts.oem (OEM catalog rows): no VIN that can confirm the year is
+ * itself a reason, since those groups are per model year. */
+function pfDonorIdentity(v, opts) {
+  if (v.vpicMismatch) {
+    return { ok: false, warn: 'the yard’s listing doesn’t match the VIN — verify' };
+  }
+  const y = +v.year || 0;
+  const vy = y ? pfVinModelYear(v.vin, y) : null;
+  if (vy != null && vy !== y) {
+    return { ok: false, warn: `the VIN’s model-year code reads ${vy}, the yard lists ${y} — verify` };
+  }
+  if (opts && opts.oem && !pfVinValid(v.vin)) {
+    return { ok: false, warn: 'no VIN to confirm the model year' };
+  }
+  return { ok: true, warn: '' };
+}
 function pfPartRow(v, cat) {
   for (const p of v.topParts || []) {
     const nl = p.name.toLowerCase();
@@ -5880,6 +5935,12 @@ function pfRunSearch() {
       if (pfCat.id === 'engine-assembly') {
         tier = (verdict === true && !app[5] && !seekerAmbig) ? 'verified' : 'likely';
       }
+      // P0.4: a Verified row also needs a donor that is the car its listing
+      // says (VIN agrees with the listed year and the vPIC decode).
+      if (tier === 'verified') {
+        const id = pfDonorIdentity(v);
+        if (!id.ok) { tier = 'likely'; warns.push(escapeHtml(id.warn)); }
+      }
       results.set(v.id, { v, d, tier, warns });
     }
   } else {
@@ -5908,6 +5969,9 @@ function pfRunSearch() {
     } else {
       pfRenderEngineChips(null);
     }
+    // Category row caveat (paint code, sensor cutouts…): every donor row of
+    // the category carries it, platform-group rows included (P0.3).
+    const rowWarn = pfCat.rowWarn ? escapeHtml(pfCat.rowWarn) : '';
     if (pfCat.kind === 'body') {
       // Cross-model groups: hand-verified platform families ship tier
       // "verified"; performance-trim platform mappings (M3 -> E46 etc.) are
@@ -5917,7 +5981,9 @@ function pfRunSearch() {
       for (const g of interchangeData.platformGroups) {
         if (g.cat !== pfCat.id) continue;
         if (!g.apps.some(a => pfAppMatches(a, s.year, s.make, s.model))) continue;
-        const gTier = g.tier === 'likely' ? 'likely' : 'verified';
+        // Fails closed (P0.1): only an explicit "verified" ships Verified; a
+        // missing, misspelled or unknown tier renders Likely.
+        const gTier = g.tier === 'verified' ? 'verified' : 'likely';
         groupNotes.push(`${g.label}: ${g.note}`);
         for (const v of liveInventory) {
           if (!g.apps.some(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model))) continue;
@@ -5925,7 +5991,13 @@ function pfRunSearch() {
           if (radius && (d == null || d > radius)) continue;
           const prev = results.get(v.id);
           if (prev && prev.tier === 'verified') continue; // verified wins
-          results.set(v.id, { v, d, tier: gTier, warns: [escapeHtml(g.note)] });
+          const warns = [escapeHtml(g.note), rowWarn].filter(Boolean);
+          let tier = gTier;
+          if (tier === 'verified') {
+            const id = pfDonorIdentity(v);  // P0.4
+            if (!id.ok) { tier = 'likely'; warns.push(escapeHtml(id.warn)); }
+          }
+          results.set(v.id, { v, d, tier, warns });
         }
       }
     }
@@ -5935,7 +6007,6 @@ function pfRunSearch() {
     //     window of the same model. Both are Likely, never Verified.
     const sKey = pfSquashModel(s.model, s.make);
     const sWin = pfGenWindow(s.make, s.model, s.year);
-    const rowWarn = pfCat.rowWarn ? escapeHtml(pfCat.rowWarn) : '';
     for (const v of liveInventory) {
       if (results.has(v.id)) continue;  // verified group row already won
       if (canonicalMake(v.make) !== s.make) continue;
@@ -5980,7 +6051,9 @@ function pfRunSearch() {
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
     + pfVonlyRowHtml(nVer, rows.length - nVer, 'fit')
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
-    + groupNotes.map(n => `<div class="pf-caveat">${n}</div>`).join('')
+    // Header notes carry data strings (ambig notes, group labels/notes):
+    // escaped like every row warning (P0.2).
+    + groupNotes.map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('')
     // Category-level honesty notes always show (spec: engine long-block
     // caveat, unknown mileage, pull logistics, VIN-lock, airbag handling…).
     + (pfCat.notes || []).map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('');
