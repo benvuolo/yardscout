@@ -9,3 +9,26 @@
 01:18:50 seg done tier=A Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=302 errors=1
 01:25:31 seg done tier=A Jeep Cherokee [2014, 2022] seeds=[2015] records=385 errors=1
 01:25:31 time budget reached records=385
+01:25:38 start site=www.jeeppartsdeal.com segments=15 tiers=['A', 'B']
+01:25:38 seg done tier=A Jeep Patriot [2007, 2017] seeds=[2014] records=385 errors=1
+01:25:38 seg done tier=A Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=385 errors=1
+01:25:38 seg done tier=A Jeep Liberty [1998, 2007] seeds=[2005] records=385 errors=1
+01:25:38 seg done tier=A Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=385 errors=1
+01:25:38 seg done tier=A Jeep Liberty [2008, 2012] seeds=[2008] records=385 errors=1
+01:25:38 seg done tier=A Jeep Compass [2011, 2016] seeds=[2014] records=385 errors=1
+01:25:38 seg done tier=A Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=385 errors=1
+01:25:38 seg done tier=A Jeep Cherokee [2014, 2022] seeds=[2015] records=385 errors=1
+01:28:22 seg done tier=A Jeep Commander [2006, 2010] seeds=[2006] records=410 errors=1
+01:30:58 seg done tier=A Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=432 errors=1
+01:33:26 nav-fail Jeep Cherokee 1981: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/1981-jeep-cherokee-parts
+01:33:26 seg done tier=A Jeep Cherokee [1978, 2001] seeds=[2000, 1984, 1981] records=450 errors=2
+01:35:54 seg done tier=A Jeep Compass [2007, 2010] seeds=[2007] records=469 errors=2
+01:39:46 seg done tier=A Jeep Renegade [2015, 2022] seeds=[2017] records=510 errors=2
+01:44:31 seg done tier=A Jeep Compass [2017, 2024] seeds=[2017] records=562 errors=2
+01:46:15 seg done tier=A Jeep Wrangler [1997, 2006] seeds=[1997] records=572 errors=2
+01:49:07 seg done tier=B Jeep Patriot [2007, 2017] seeds=[2014] records=605 errors=2
+01:51:31 seg done tier=B Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=630 errors=2
+01:54:27 nav-fail Jeep Liberty 2000: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2000-jeep-liberty-parts
+01:54:27 seg done tier=B Jeep Liberty [1998, 2007] seeds=[2005, 2000] records=663 errors=3
+01:56:27 seg done tier=B Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=683 errors=3
+01:56:27 time budget reached records=683
