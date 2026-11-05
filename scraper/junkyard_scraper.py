@@ -6120,6 +6120,18 @@ _gap_extend("scion xb 2008-2015", parts=_per_gen([(2008, 2015)], [*_GAP_MECH]))
 # FACELIFT_BREAKS entry. A/C standard every year; power sunroof optional.
 _gap_extend("sonata", parts=_per_gen([(1999, 2005)], [*_GAP_MECH, _SUNROOF]))
 
+# Infiniti JX35 (2013) / QX60 (2014-20), one generation (288 cars
+# generic-only). Appearance cuts at 2016 (facelift: fascias, headlights,
+# taillights, grille) and 2019 (headlamps went HID -> LED by build date in
+# the 2019.5 update, so 2019 is the conservative model-year cut) in
+# FACELIFT_BREAKS. Tri-zone automatic A/C and a power moonroof standard
+# (2013 cars.com; 2014 factsheet); AWD available every year. "Infiniti JX"
+# listings (all 2013) are the JX35, Infiniti's only JX (EPA 2013 menu).
+UNOBTANIUM_DB["infiniti qx60"]["match"] = ["qx60", "jx35", "infiniti jx"]
+_gap_extend("infiniti qx60", parts=_per_gen([(2013, 2020)], [
+    *_GAP_MECH, _AWD_COUPLING, {k: v for k, v in _SUNROOF.items() if k != "option"},
+]))
+
 # ---- end of §22 block
 
 _apply_consensus_evergreens()
@@ -6626,6 +6638,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "encore": [2017],
     "park avenue": [1993, 1995, 2003, 2005],
     "scion xb": [2011, 2013],
+    "infiniti qx60": [2016, 2019],
 }
 _FACELIFT_SENSITIVE_RE = re.compile(
     r"headlight|head lamp|tail ?light|tail ?lamp|grille|bumper|fog light|fog lamp"

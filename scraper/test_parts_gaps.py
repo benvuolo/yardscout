@@ -631,6 +631,13 @@ check("§22 Sonata EF: mech 1999-2005 (A/C plain); sunroof 'if equipped'; lamps 
       and y04["A/C Compressor (clutch spins free)"].get("trim_status") is None and y04["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed"
       and "Fuel Pump Module (in-tank, test before listing)" not in parts(2008, "Hyundai", "Sonata", FWD))
 
+i14, i18 = parts(2014, "Infiniti", "QX60", AWD), parts(2018, "Infiniti", "QX60", FWD)
+check("§22 QX60: mech + standard moonroof 2013-20; AWD coupling gated; lamps cut at 2016 and 2019; 'JX' listings route here",
+      MECH3 <= set(i14) and i14["Sunroof Glass + Motor"].get("trim_status") is None and i14["Sunroof Glass + Motor"]["fits"] == "2013–2020"
+      and i14["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in i18
+      and i14["Headlights (clear, non-hazed)"]["fits"] == "2013–2015" and i18["Headlights (clear, non-hazed)"]["fits"] == "2016–2018"
+      and [m["display"] for m in js.match_vehicle(2013, "Infiniti", "JX")] == ["Infiniti QX60"])
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

@@ -124,7 +124,7 @@ Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
   Captiva Sport, with "Captiva" listings routed to it (→ 14,487); Park Avenue
   with new break 1997 and cuts 1993/1995/2003/2005 (→ 14,188); Scion xB 2nd
   gen with cuts 2011/2013 (→ 13,893); Sonata EF 1999–2005 with facelift 2002
-  (→ 13,604).
+  (→ 13,604); QX60 with cuts 2016/2019 and "JX" listings routed (→ 13,315).
 
 ## How to measure
 

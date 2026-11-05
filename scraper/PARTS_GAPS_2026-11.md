@@ -2034,3 +2034,41 @@ added in this pass).
 
 Result (same inventory): generic-only 13,893 (4.2%) → 13,604 (4.1%). Sonata
 EF 290 → 0 (1 listing remains outside these years).
+
+### 22.7 Infiniti JX35 / QX60 2013–2020
+
+Basis: WP Infiniti_QX60; cars.com "2016 Infiniti QX60 first look" and
+"2013 Infiniti JX35: What's New"; 2014 Infiniti QX60 factsheet (pdf);
+automotiveworld.com (IIHS headlamp note); fueleconomy.gov menus 2012–2014
+(fetched).
+- **Appearance cuts added to `FACELIFT_BREAKS` "infiniti qx60":**
+  - 2016: "new front and rear fascias with restyled headlights and
+    taillights" (WP); "spindle grille now stretching deeper into the bumper"
+    (cars.com).
+  - 2019: "All 2019 QX60s built before September 2018 have HID headlights",
+    and later builds have LED (IIHS). The switch follows build date, so the
+    model-year cut at 2019 is the conservative boundary; within 2019 the
+    lamp type still varies.
+  The existing QX60 lamp rows are now cut at 2016 and 2019.
+- **Standard equipment:** tri-zone automatic climate control and a power
+  moonroof on every version (2014 factsheet; "Standard power moonroof",
+  cars.com 2013).
+- **AWD:** available every year (EPA).
+- **Hybrid:** 2014–17. There are 2 "QX60 Hybrid" listings; see the
+  hybrid note in §22.9.
+
+**Routing:** "Infiniti JX" listings (12, all 2013) are the JX35, Infiniti's
+only JX (EPA lists JX35 for 2013). They now match this entry instead of
+nothing.
+
+| Row | Years | Gate | Why |
+|---|---|---|---|
+| Fuel pump module, A/C compressor, radiator fan | 2013–20 | — | Every vehicle. |
+| Sunroof glass + motor | 2013–20 | — | Standard. |
+| AWD rear differential / coupling | 2013–20 | drive: awd/4wd | Same band as the Rogue row (same Nissan platform family). |
+
+Left out, no stated basis: the rear panoramic moonroof (option), hybrid
+parts.
+
+Result (same inventory): generic-only 13,604 (4.1%) → 13,315 (4.0%); no
+entry 12,403 → 12,391.
