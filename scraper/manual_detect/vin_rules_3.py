@@ -263,7 +263,7 @@ C = {
 M, A = "manual", "automatic"
 
 RULES = [
-    dict(id="genesis_g70_20t_sport_mt_2019_2021", make="Genesis", wmi=["KMT"], years=(2019, 2021),
+    dict(id="genesis_g70_20t_sport_mt_2019_2021", pattern_fill={6: "4", 7: "L", 8: "A"}, make="Genesis", wmi=["KMT"], years=(2019, 2021),
          fixed={4: "G"}, pos=5,
          codes={"2": (M, "'2.0T Sport (MT)': Genesis's own model-series code for the 6-speed-manual 2.0T Sport RWD", [2019, 2020, 2021])},
          not_ruled_codes={"3, 5, 6, 7": "other 2.0T/3.3T grades: 8-speed automatic", "4": "MY2019-2020 '2.0T Prestige, 2.0T Dynamic, 2.0T Sport (AT)'; MY2021 '2.0T Prestige': automatic",
@@ -275,7 +275,7 @@ RULES = [
          epa_ids=["39913 (2019)", "41380 (2020)", "42495 (2021): G70 RWD 2.0 Manual 6-spd (the only G70 manual rows; AWD and 3.3 rows are Automatic (S8) only)", "2022 for contrast: 43926/43927 Automatic (S8) only"],
          vpic_expect=dict(engine=r"THETA II|^$", displ="2.0", trim=r"\(MT\)"),
          evidence_gaps="No G70 with code 2 is on the lots today (G70s on the lots carry 3 or 4), so the rule has no checkable car; it rests on Genesis's three filings, EPA, Edmunds/Autotrader and two 2021 listings whose code-2 VINs are manuals. vPIC already returns 'Manual/Standard' (with a wrong '8' speeds) for MY2021 code 2, and only the trim text for MY2019-2020."),
-    dict(id="hyundai_veloster_n_2019_2020", make="Hyundai", wmi=["KMH"], years=(2019, 2020),
+    dict(id="hyundai_veloster_n_2019_2020", pattern_fill={6: "6", 7: "A", 8: "H"}, make="Hyundai", wmi=["KMH"], years=(2019, 2020),
          fixed={4: "T"}, pos=5,
          codes={"3": (M, "Veloster N (2.0 T-GDI Theta II): 6-speed manual only until the 8-speed wet DCT arrived for MY2021", [2019, 2020])},
          not_ruled_codes={"3 in MY2021-2022": "Veloster N with 6MT or 8-speed DCT", "F/G/H/J/K": "Veloster 2.0 MPI / 1.6 T-GDI grades: 6MT, 6AT or 7DCT"},
@@ -286,7 +286,7 @@ RULES = [
          epa_ids=["40693 (2019)", "41385 (2020): Veloster N 2.0 turbo Manual 6-spd only", "2021 for contrast: 42927 Automatic (AM-S8), 42928 Manual 6-spd"],
          vpic_expect=dict(engine=r"THETA", displ="2.0", trim=None),
          evidence_gaps="The MY2019 Veloster N guide was not among the MID filings downloaded (the MY2019 Veloster guide ORG15358 covers the regular car only); MY2019 rests on vPIC, which decodes KMHT36AH*K as 'Veloster N', 2.0 T-GDI Theta II."),
-    dict(id="kia_sportage_20_4wd_2005_2009", make="Kia", wmi=["KND"], years=(2005, 2009),
+    dict(id="kia_sportage_20_4wd_2005_2009", pattern_fill={6: "7", 7: "2"}, make="Kia", wmi=["KND"], years=(2005, 2009),
          fixed={4: "J", 5: "E"}, pos=8,
          codes={"2": (M, "2.0L DOHC (Federal) in a Sportage 4WD (line J + E): 5-speed manual only", [2005, 2006, 2007, 2008, 2009]),
                 "4": (M, "2.0L DOHC (50-State) in a Sportage 4WD (line J + E): 5-speed manual only", [2005, 2006, 2007, 2008, 2009])},
@@ -298,7 +298,7 @@ RULES = [
          epa_ids=["21588 (2005)", "22537 (2006)", "23814 (2007)", "25039 (2008)", "25354 (2009): Sportage 4WD 2.0 Manual 5-spd only (the 2.7 4WD rows are Automatic 4-spd; the 2.0 2WD rows list both)", "28802 (2010) also Manual 5-spd only, but the MY2010 Sportage guide was not read, so MY2010 is out of scope"],
          vpic_expect=dict(engine=None, displ="2.0", drive=r"4WD|AWD|4x4"),
          evidence_gaps="Codes read in the MY2005 (ORG10855), MY2006 (ORG10858), MY2007 (ORG10854), MY2008 (ORG10857) and MY2009 (ORG10860) guides. MY2010 (new VIN layout KNDK..) not read."),
-    dict(id="hyundai_tucson_20_awd_2005_2009", make="Hyundai", wmi=["KM8"], years=(2005, 2009),
+    dict(id="hyundai_tucson_20_awd_2005_2009", pattern_fill={5: "M", 7: "2"}, make="Hyundai", wmi=["KM8"], years=(2005, 2009),
          fixed={4: "J", 6: "7"}, pos=8, candidate=True,
          codes={"B": (M, "2.0L DOHC Beta (JM) with VIN 6 = 7 (Wagon AWD): EPA lists Manual 5-spd only", [2005, 2006, 2007, 2008, 2009])},
          not_ruled_codes={"D": "2.7L V6: 4-speed automatic", "char6=1 (FWD) + B": "Tucson 2.0 FWD: 5MT or 4AT"},
@@ -310,7 +310,7 @@ RULES = [
          epa_ids=["21410 (2005)", "22517 (2006)", "23795 (2007)", "25027 (2008)", "25348 (2009): Tucson 4WD 2.0 Manual 5-spd only; 2.7 4WD rows Automatic 4-spd only", "2010 (new 2.4 Tucson) for contrast: 29948 Automatic 6-spd, 29949 Manual 6-spd"],
          vpic_expect=dict(engine=None, displ="2.0", drive=r"AWD|4WD|4x4"),
          evidence_gaps="Codes read in the MY2005-2009 guides (ORG10862, ORG10865, ORG10861, ORG10864, ORG10856)."),
-    dict(id="kia_sportage_2wd_sohc_1995_1996", make="Kia", wmi=["KND"], years=(1995, 1996),
+    dict(id="kia_sportage_2wd_sohc_1995_1996", pattern_fill={6: "7", 7: "2"}, make="Kia", wmi=["KND"], years=(1995, 1996),
          fixed={4: "J", 5: "B"}, pos=8, candidate=True,
          codes={"1": (M, "2.0 EGI SOHC in the 2WD Sportage (J + B): EPA lists Manual 5-spd only for the 2WD", [1995, 1996])},
          not_ruled_codes={"3 (2WD DOHC)": "not in the MY1995-96 filing; the two 1996 2WD lot cars carry it and are not ruled", "A (4WD)": "5MT or 4AT"},
@@ -322,7 +322,7 @@ RULES = [
          epa_ids=["12423 (1995)", "13157 (1996): Sportage 2WD 2.0 Manual 5-spd only", "1997 for contrast: 13882 Automatic 4-spd, 13883 Manual 5-spd"],
          vpic_expect=dict(engine=None, displ="2.0", drive=r"4x2|RWD|2WD|Rear"),
          evidence_gaps="MY1995-96 filing read (01-22-N11B-5812)."),
-    dict(id="hyundai_elantra_16_1993_1995", make="Hyundai", wmi=["KMH"], years=(1993, 1995),
+    dict(id="hyundai_elantra_16_1993_1995", pattern_fill={5: "F", 6: "2", 7: "3"}, make="Hyundai", wmi=["KMH"], years=(1993, 1995),
          fixed={4: "J"}, pos=8, candidate=True,
          codes={"R": (M, "1596 cc Elantra engine: EPA lists Manual 5-spd only from MY1993 (automatics got the 1.8)", [1993, 1994, 1995])},
          not_ruled_codes={"M": "1.8 (1795/1836 cc): 5MT or 4AT"},
@@ -334,7 +334,7 @@ RULES = [
          epa_ids=["9931 (1993)", "10907 (1994)", "11858 (1995): Elantra 1.6 Manual 5-spd only; 1.8 rows list both"],
          vpic_expect=dict(engine=None, displ="1.6", drive=None),
          evidence_gaps="Engine code R read in 01-22-N11B-5639 and the MY1994/1995 guides."),
-    dict(id="kia_rio_code_L_lx_mt_2014_2016", make="Kia", wmi=["KNA"], years=(2014, 2016),
+    dict(id="kia_rio_code_L_lx_mt_2014_2016", pattern_fill={6: "4", 7: "A", 8: "3"}, make="Kia", wmi=["KNA"], years=(2014, 2016),
          fixed={4: "D"}, pos=5, drop=True,
          codes={"L": (M, "MY2014 '1.6 Manual Trans LX STD', MY2016 (revised guide) 'LX M/T'", [2014, 2016])},
          not_ruled_codes={"M": "MY2014 '1.6 AT LX', MY2016 'LX A/T', but real manual LX cars carry M", "L in MY2015": "'L (Low Grade)'"},
@@ -478,6 +478,8 @@ def pattern_queries():
                     chars[i] = ch
                 for p, allowed in r["fixed"].items():
                     chars[p - 1] = allowed[0]
+                for p, ch in r.get("pattern_fill", {}).items():   # typical lot values: some lines need them to decode
+                    chars[p - 1] = ch
                 chars[r["pos"] - 1] = code
                 chars[9] = year_char(y)
                 q.append((r["id"], code, y, "".join(chars)))
@@ -793,7 +795,7 @@ def main() -> int:
             epa_auto["epa_cell_not_matched"] += 1
         else:
             epa_auto["epa_" + "_".join(sorted(cls))] += 1
-    vin_years = Counter(g.get("vpicYear") for g in vin_man)
+    vin_years = Counter(g.get("vpicYear") or f"{g.get('year')} (VIN not in the cache backup; published label from the CI decode)" for g in vin_man)
     auto_uncertain = Counter()
     for g in hk_lines:
         if g.get("source") != "vin" or g.get("transClass") not in ("automatic", "cvt"):
