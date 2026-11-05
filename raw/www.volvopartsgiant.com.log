@@ -64,3 +64,28 @@
 10:39:54 seg done tier=B Volvo S60 [2001, 2018] seeds=[2012, 2003, 2010] records=474 errors=8
 10:44:08 product-fail https://www.volvopartsgiant.com/genuine/volvo~bumper-cover-white~39887348: NavError: no __INITIAL_STORE__ on page
 10:48:56 time budget reached records=521
+10:49:05 start site=www.volvopartsgiant.com segments=19 tiers=['A', 'B']
+10:49:05 seg done tier=A Volvo XC90 [2003, 2014] seeds=[2006] records=521 errors=9
+10:49:05 seg done tier=A Volvo S60 [2001, 2018] seeds=[2012] records=521 errors=9
+10:49:05 seg done tier=A Volvo S40 [1992, 2013] seeds=[2006] records=521 errors=9
+10:49:05 seg done tier=A Volvo S80 [1999, 2014] seeds=[2004] records=521 errors=9
+10:49:05 seg done tier=A Volvo V70 [1998, 2010] seeds=[2002] records=521 errors=9
+10:49:05 seg done tier=A Volvo XC60 [2010, 2017] seeds=[2013] records=521 errors=9
+10:49:05 seg done tier=A Volvo XC70 [1998, 2007] seeds=[2004] records=521 errors=9
+10:49:05 seg done tier=A Volvo C70 [1998, 2013] seeds=[2008] records=521 errors=9
+10:49:05 seg done tier=A Volvo S70 [1998, 2000] seeds=[2000] records=521 errors=9
+10:49:05 seg done tier=A Volvo 240 [1976, 1993] seeds=[1992] records=521 errors=9
+10:49:05 seg done tier=A Volvo XC70 [2008, 2015] seeds=[2008] records=521 errors=9
+10:49:05 seg done tier=A Volvo V50 [2002, 2011] seeds=[2005] records=521 errors=9
+10:49:05 seg done tier=A Volvo 850 [1993, 1997] seeds=[1995] records=521 errors=9
+10:49:05 seg done tier=A Volvo C30 [2008, 2013] seeds=[2011] records=521 errors=9
+10:49:05 seg done tier=A Volvo 740 [1986, 1992] seeds=[1991] records=521 errors=9
+10:49:05 seg done tier=A Volvo 960 [1992, 1997] seeds=[1996] records=521 errors=9
+10:49:05 seg done tier=A Volvo 940 [1992, 1995] seeds=[1994] records=521 errors=9
+10:49:05 seg done tier=A Volvo V40 [2000, 2004] seeds=[2004] records=521 errors=9
+10:49:05 seg done tier=A Volvo 60 Series [2001, 2013] seeds=[2012] records=521 errors=9
+10:49:05 seg done tier=B Volvo XC90 [2003, 2014] seeds=[2006] records=521 errors=9
+10:49:05 seg done tier=B Volvo S60 [2001, 2018] seeds=[2012] records=521 errors=9
+10:49:05 seg done tier=B Volvo S40 [1992, 2013] seeds=[2006] records=521 errors=9
+11:01:13 seg done tier=B Volvo S80 [1999, 2014] seeds=[2004, 2011] records=590 errors=9
+11:20:17 time budget reached records=711
