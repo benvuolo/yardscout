@@ -7,8 +7,18 @@ import json
 import tempfile
 from pathlib import Path
 
-from _util import check, done
+from _util import check, done, skip
 import measure as M
+
+# §9 Phase 2 parity: node evaluates the app's OEM-TIER block against
+# measure.py. Phase 2 has no client code yet, so there is nothing to compare.
+_app = (M.REPO / "docs" / "app.js")
+if not _app.exists() or "/* OEM-TIER BEGIN */" not in _app.read_text():
+    skip("Phase 2 parity (spec 9, node vs measure.py)",
+         "docs/app.js has no /* OEM-TIER BEGIN */ block: the Phase 2 client is not written")
+else:
+    check("Phase 2 parity is implemented once the OEM-TIER block exists", False,
+          "docs/app.js now has OEM-TIER: write the node parity test (spec 9)")
 
 # ------------------------------------------------------------- port units
 check("pfSquashModel drops the make and a trailing 'pickup'",
