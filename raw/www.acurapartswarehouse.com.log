@@ -54,3 +54,31 @@
 04:41:06 seg done tier=B Acura MDX [2007, 2013] seeds=[2007] records=627 errors=1
 04:47:39 seg done tier=B Acura RL [1996, 2012] seeds=[2005, 2000] records=646 errors=1
 04:56:43 time budget reached records=671
+04:56:52 start site=www.acurapartswarehouse.com segments=12 tiers=['A', 'B']
+04:56:52 seg done tier=A Acura TL [1996, 2014] seeds=[2005] records=671 errors=1
+04:56:52 seg done tier=A Acura MDX [2001, 2006] seeds=[2005] records=671 errors=1
+04:56:52 seg done tier=A Acura TSX [2004, 2014] seeds=[2006] records=671 errors=1
+04:56:52 seg done tier=A Acura MDX [2007, 2013] seeds=[2007] records=671 errors=1
+04:56:52 seg done tier=A Acura RL [1996, 2012] seeds=[2005] records=671 errors=1
+04:56:52 seg done tier=A Acura RDX [2007, 2019] seeds=[2007] records=671 errors=1
+04:56:52 seg done tier=A Acura RSX [2002, 2006] seeds=[2002] records=671 errors=1
+04:56:52 seg done tier=A Acura CL [1997, 2003] seeds=[2001] records=671 errors=1
+04:56:52 seg done tier=A Acura Integra [1994, 2024] seeds=[1995] records=671 errors=1
+04:56:52 seg done tier=A Acura ILX [2013, 2022] seeds=[2013] records=671 errors=1
+04:56:52 seg done tier=A Acura Legend [1991, 1995] seeds=[1994] records=671 errors=1
+04:56:52 seg done tier=A Acura TLX [2015, 2020] seeds=[2015] records=671 errors=1
+04:56:52 seg done tier=B Acura TL [1996, 2014] seeds=[2005] records=671 errors=1
+04:56:52 seg done tier=B Acura MDX [2001, 2006] seeds=[2005] records=671 errors=1
+04:56:52 seg done tier=B Acura TSX [2004, 2014] seeds=[2006] records=671 errors=1
+04:56:52 seg done tier=B Acura MDX [2007, 2013] seeds=[2007] records=671 errors=1
+04:56:52 seg done tier=B Acura RL [1996, 2012] seeds=[2005] records=671 errors=1
+04:56:52 seg done tier=B Acura RDX [2007, 2019] seeds=[2007] records=671 errors=1
+04:59:56 seg done tier=B Acura RSX [2002, 2006] seeds=[2002] records=679 errors=1
+05:07:08 nav-fail Acura CL 2000: ValueError: no 2000 catalog for Acura CL (acura-['cl'])
+05:07:08 seg done tier=B Acura CL [1997, 2003] seeds=[2001, 1999, 2000] records=698 errors=2
+05:10:28 nav-fail Acura Integra 2013: ValueError: no 2013 catalog for Acura Integra (acura-['integra'])
+05:10:28 seg done tier=B Acura Integra [1994, 2024] seeds=[1995, 2013] records=707 errors=3
+05:15:32 seg done tier=B Acura ILX [2013, 2022] seeds=[2013] records=723 errors=3
+05:19:48 seg done tier=B Acura Legend [1991, 1995] seeds=[1994] records=735 errors=3
+05:24:28 seg done tier=B Acura TLX [2015, 2020] seeds=[2015] records=748 errors=3
+05:24:28 finished records=748 errors=3
