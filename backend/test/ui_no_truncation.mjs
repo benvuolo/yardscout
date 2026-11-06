@@ -63,6 +63,21 @@ if (!BASE) {
   BASE = `http://127.0.0.1:${server.address().port}/`;
 }
 
+/* scraper/photo_sources.json -> the published `photoSources` (enabled
+ * sources with a label and valid patterns), as junkyard_scraper.py's
+ * published_photo_sources() writes it into the data files. */
+function publishedPhotoSources() {
+  const f = JSON.parse(fs.readFileSync(path.join(ROOT, 'scraper/photo_sources.json'), 'utf8'));
+  const out = {};
+  for (const [key, src] of Object.entries(f.sources || {})) {
+    if (!src || src.enabled !== true || typeof src.label !== 'string') continue;
+    const pats = (src.patterns || []).filter(p => p && ['code', 'card', 'large'].every(k => typeof p[k] === 'string'))
+      .map(p => ({ code: p.code, card: p.card, large: p.large }));
+    if (pats.length) out[key] = { label: src.label, host: src.host || '', patterns: pats };
+  }
+  return out;
+}
+
 /* Fixture for the "Likely fits" OEM row: the published interchange.json may
  * not carry the lazy OEM layer yet, so the test adds one (the same shape the
  * pf_guards unit test uses) with long part numbers and notes. */
@@ -499,9 +514,9 @@ try {
     // Chain photo hosts load for real (the photo boxes are measured with
     // their images); everything else stays blocked.
     await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.pypapps\.com|storage\.googleapis\.com|www\.kikersupullit\.com|ik\.imagekit\.io|cdn\.shopify\.com)/, (route) => route.abort());
-    // Published photo switch (fail-closed in the app): the test turns every
-    // known source on, the way the scan will publish it.
-    const PHOTO_ON = { pyp: true, wap: true, kikers: true, weller: true, pasco: true };
+    // Published photo switch (fail-closed in the app): publish the enabled
+    // sources of scraper/photo_sources.json exactly as the scan does.
+    const PHOTO_ON = publishedPhotoSources();
     await page.route(/data\/(inv\/manifest|vehicle_extras)\.json(\?|$)/, async (route) => {
       const res = await route.fetch(); const j = await res.json();
       j.photoSources = PHOTO_ON;

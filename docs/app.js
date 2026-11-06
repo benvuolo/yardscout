@@ -854,74 +854,54 @@ const DATA_CACHE = 'jh-data-v1';
  * The last four only ever say "Manual" (scraper/trans_evidence.py).
  * It loads in parallel with the inventory and is never on the critical path:
  * cards render photo-less first if it hasn't arrived, then hydrate.
- *
- * PHOTO POLICY: a photo renders ONLY when the chain whose car it is hosts the
- * image itself (same-chain, hotlinked — their server serves it, we never
- * download/rehost/proxy). Each chain has a kill switch below so photos can be
- * turned off with one flag if a chain ever objects. Pick-n-Pull photo codes
- * ("r..." — Row52-hosted, Row52-watermarked, a competitor's assets) are never
- * rendered even if present in older data. */
-const PHOTO_SOURCES = {
-  // 2026-11-06 owner decision (ops/hub.md): chain-hosted photos back on, each
-  // chain with its own kill switch. A source renders only when BOTH its flag
-  // here AND the published data's photoSources[key] are true, so turning a
-  // chain off is a data publish, not an app release (fail closed: no published
-  // flag = no photo). Never Pick-n-Pull/Row52 ("r" codes), never
-  // api.yardsmartapp.com (signed URLs expire). Hotlinked from the chain's own
-  // host only: we never download, rehost, proxy or cache them (the service
-  // worker ignores cross-origin requests).
-  pyp: {
-    enabled: true,
-    label: 'Photo: LKQ Pick Your Part',
-    url: id => 'https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_' + id
-      + '_front_left_corner.jpg?quality=70&w=640&h=427&mode=crop&format=webp',
-  },
-  wap: { enabled: true, label: 'Photo: Wrench-A-Part' },
-  kikers: { enabled: true, label: 'Photo: Kiker’s U-Pull-It', host: 'www.kikersupullit.com', path: '/' },
-  weller: { enabled: true, label: 'Photo: Weller Self Serve', host: 'ik.imagekit.io', path: '/rm8xun1iy5t/' },
-  pasco: { enabled: true, label: 'Photo: Pasco EZ Pull It', host: 'cdn.shopify.com', path: '/s/files/1/0731/9250/5650/' },
-};
-let publishedPhotoSources = null;   // photoSources from the inv manifest / extras file
+ * Photo policy: see "Chain photos" below (Sep 2026 policy superseded by the
+ * 2026-11-06 owner decisions, incl. the narrow Pick-n-Pull exception). */
+/* Chain photos (owner decisions 2026-11-06, ops/hub.md): photos load from the
+ * yard's own URL, credited, never downloaded/rehosted/proxied/cached (the
+ * service worker ignores cross-origin requests). WHICH chains render is data,
+ * not code: the scan publishes the enabled sources from
+ * scraper/photo_sources.json as `photoSources` in data/inv/manifest.json and
+ * data/vehicle_extras.json — {key: {label, host, patterns: [{code, card,
+ * large}]}}. A takedown is a data publish (ops/yards.md "Photo takedown").
+ * Fail closed: nothing published -> no photos. A pattern's URLs must be
+ * https on that source's own published host, or the photo is skipped. */
+let publishedPhotoSources = null;
+let _photoRules = [];   // compiled [{key, label, host, rx, card, large}]
 function setPublishedPhotoSources(ps) {
-  if (ps && typeof ps === 'object') publishedPhotoSources = ps;
+  if (!ps || typeof ps !== 'object' || Array.isArray(ps)) return;
+  const rules = [];
+  for (const [key, src] of Object.entries(ps)) {
+    if (!src || typeof src !== 'object' || typeof src.label !== 'string' || typeof src.host !== 'string' || !src.host) continue;
+    for (const pat of Array.isArray(src.patterns) ? src.patterns : []) {
+      if (!pat || typeof pat.code !== 'string' || typeof pat.card !== 'string' || typeof pat.large !== 'string') continue;
+      let rx;
+      try { rx = new RegExp('^(?:' + pat.code + ')$'); } catch (e) { continue; }
+      rules.push({ key, label: src.label, host: src.host.toLowerCase(), rx, card: pat.card, large: pat.large });
+    }
+  }
+  publishedPhotoSources = ps;
+  _photoRules = rules;
 }
-const photoOn = (key) => !!(PHOTO_SOURCES[key] && PHOTO_SOURCES[key].enabled
-  && publishedPhotoSources && publishedPhotoSources[key] === true);
 let vehicleExtras = null;
 
-/* Photo for a car's extras code, or null. {url (card), large (viewer),
- * label (credit), w, h (intrinsic size hint)}. */
+/* Photo for a car's extras code, or null: {url (card), large (viewer),
+ * label (credit), key, w, h (aspect hint for the box)}. */
+const PHOTO_ASPECT = { wapj: [240, 320], weller: [960, 1280] };
 function photoInfo(code) {
-  if (!code || typeof code !== 'string') return null;
-  if (code[0] === 'p' && /^p[\w-]+$/.test(code)) {
-    if (!photoOn('pyp')) return null;
-    const u = PHOTO_SOURCES.pyp.url(code.slice(1));
-    return { url: u, large: u, label: PHOTO_SOURCES.pyp.label, w: 640, h: 427, key: 'pyp' };
+  if (!code || typeof code !== 'string' || code.length > 600) return null;
+  for (const r of _photoRules) {
+    const m = r.rx.exec(code);
+    if (!m) continue;
+    const fill = (t) => t.replace(/\{([1-9])\}/g, (x, i) => m[+i] || '');
+    const urls = [fill(r.card), fill(r.large)];
+    const ok = urls.every(u => {
+      try { const x = new URL(u); return x.protocol === 'https:' && x.hostname.toLowerCase() === r.host; } catch (e) { return false; }
+    });
+    if (!ok) return null;
+    const [w, h] = r.key === 'wap' && /\.j$/.test(code) ? PHOTO_ASPECT.wapj : (PHOTO_ASPECT[r.key] || [4, 3]);
+    return { url: urls[0], large: urls[1], label: r.label, key: r.key, w, h };
   }
-  if (code[0] === 'w' && /\.(j|p)$/.test(code)) {
-    if (!photoOn('wap')) return null;
-    const parts = code.slice(1, -2).split('/');
-    if (parts.length !== 3 || parts.some(x => !/^[\w-]+$/.test(x))) return null;
-    const [y, vin, ms] = parts.map(encodeURIComponent);
-    const b = 'https://storage.googleapis.com/wrench-car-photos/v1%2F' + y + '%2F' + vin + '%2F' + ms;
-    return code.endsWith('.j')
-      ? { url: b + '-front_driver-thumb.jpg', large: b + '-front_driver.jpg', label: PHOTO_SOURCES.wap.label, w: 240, h: 320, key: 'wap' }
-      : { url: b + '.png', large: b + '.png', label: PHOTO_SOURCES.wap.label, w: 320, h: 240, key: 'wap' };
-  }
-  if (code.startsWith('https://')) {
-    let u;
-    try { u = new URL(code); } catch (e) { return null; }
-    for (const key of ['kikers', 'weller', 'pasco']) {
-      const src = PHOTO_SOURCES[key];
-      if (u.protocol === 'https:' && u.hostname === src.host && u.pathname.startsWith(src.path)) {
-        if (!photoOn(key)) return null;
-        const size = key === 'weller' ? [960, 1280] : key === 'kikers' ? [1600, 1200] : [400, 300];
-        return { url: u.href, large: u.href, label: src.label, w: size[0], h: size[1], key };
-      }
-    }
-    return null;   // any other host: never rendered
-  }
-  return null;   // 'r' (Row52) and unknown codes: excluded by policy
+  return null;
 }
 /* The photo box: fixed 4:3, the whole image shown (contain: never cropped,
  * so a chain's watermark is never cut off), a plain placeholder under it, and
