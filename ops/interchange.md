@@ -1291,7 +1291,7 @@ fetch.py, sites/, release workflows, store metadata or other workstreams.
     aftermarket engine/trans gates, the empty state, the V9 byte-identity,
     and JS↔Python parity of engine_agrees/car_trans.
   - New curation_tests/test_lazy_payload.py: 27 checks.
-  - Also passing: curation_tests 16/16 (Phase 2 parity is a SKIP because
+  - Also passing: curation_tests 15/15 (Phase 2 parity is a SKIP because
     app.js has no OEM-TIER block; Phase 2 is not written), all 19
     scraper/test_*.py, oem_fitment/tests 29/29, the aftermarket tests, the
     other node unit tests and node --check.
