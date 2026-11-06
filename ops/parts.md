@@ -295,15 +295,15 @@ The generic-only count re-matches every distinct year/make/model in
 2. Next block by generic-only cars: Volvo S40 (276), Saturn SL (267), Chevrolet Trax (266), Chevrolet Sonic (261), Ford Freestar (254), Ford Freestyle (252), Mitsubishi Mirage (233), Chevrolet Venture (226).
    Research generations and facelifts with sources first. The Fiat 500L/500X
    and Encore GX have evergreen-only entries awaiting their own research.
-2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
+3. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
    overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
    into `lexus es` and drop the duplicate (§20.5).
-3. Facelifts: §23 done (21 keys; Suburban/Tahoe/Yukon have no confirmed
+4. Facelifts: §23 done (21 keys; Suburban/Tahoe/Yukon have no confirmed
    year). Next by cars: CR-V, Murano, Acadia, Durango, Chrysler 300,
    Sienna, Outback, C-Class, F-250, Acura TL, Express, Forester, S10,
    Journey, Chrysler 200 (Journey/200 have no GENERATION_BREAKS; fine for
    FACELIFT_BREAKS). Same rule: a cited source per year; single-component
    years (grille-only, tail-only) and mid-year changes are not cuts.
    Routing follow-up (§23.2): done in §23.6 (below).
-4. When the daily email's "Most searched parts / cars (7 d)" has a week of
+5. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.
