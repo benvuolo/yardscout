@@ -182,7 +182,8 @@ const CHECK_FN = () => {
     // (c) past the viewport edge
     if (tr.right > W + 1 || tr.left < -1) add('offscreen-x', el, text, `${Math.round(tr.left)}..${Math.round(tr.right)} of ${W}`);
     // (d) contrast
-    if (!blurred(el) && !disabled(el)) {
+    // WCAG 1.4.3 exempts logotypes: the stencil wordmark keeps its brand orange.
+    if (!blurred(el) && !disabled(el) && !el.closest('header h1')) {
       const cs = getComputedStyle(el);
       const fg = parse(cs.color); const bg = bgOf(el);
       if (fg && bg) {
@@ -301,15 +302,16 @@ const SCREENS = [
   ['part-finder', async (page) => { await tab(page, 'parts'); }],
   ['part-finder-likely', async (page) => {
     await tab(page, 'parts');
-    await page.evaluate(() => {
-      const sel = (id, v) => { const s = document.getElementById(id); s.value = v; s.dispatchEvent(new Event('change', { bubbles: true })); };
-      sel('pf-year', '2009'); sel('pf-make', 'Toyota'); sel('pf-model', 'Camry');
-      const p = document.getElementById('pf-part'); p.value = 'side mirror'; p.dispatchEvent(new Event('input', { bubbles: true }));
-    });
+    await page.selectOption('#pf-year', '2009');
+    await page.selectOption('#pf-make', 'Toyota');
+    await page.waitForFunction(() => [...document.getElementById('pf-model').options].some(o => o.value === 'Camry'));
+    await page.selectOption('#pf-model', 'Camry');
+    await page.click('#pf-part');
+    await page.fill('#pf-part', 'mirror');
+    await page.waitForSelector('#pf-part-suggest [data-cat="side-mirrors"]');
+    await page.dispatchEvent('#pf-part-suggest [data-cat="side-mirrors"]', 'mousedown');
     await settle(page, 300);
-    await page.evaluate(() => { const s = document.getElementById('pf-part-suggest'); const opt = s && s.querySelector('[data-cat="side-mirrors"], .compare-suggest-item'); if (opt) opt.click(); });
-    await settle(page, 200);
-    await page.evaluate(() => { const s = document.getElementById('pf-part-suggest'); if (s) s.style.display = 'none'; document.getElementById('pf-go').click(); });
+    if (!(await page.evaluate(() => /Likely fits/.test(document.getElementById('pf-results').textContent)))) await page.click('#pf-go');
     await page.waitForFunction(() => /Likely fits/.test(document.getElementById('pf-results').textContent), null, { timeout: 15000 })
       .catch(() => { throw new Error('part finder: no "Likely fits" OEM row rendered (fixture not picked up)'); });
     await page.evaluate(() => { const r = document.querySelector('.pf-row-card.pf-likely'); if (r) r.scrollIntoView({ block: 'center' }); });

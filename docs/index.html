@@ -391,7 +391,7 @@
   <!-- ALERTS TAB -->
   <div id="tab-alerts" class="tab-content">
     <div class="info-box" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-      <div style="flex:1;min-width:250px;">
+      <div style="flex:1 1 15em;min-width:0;">
         <h3 style="margin:0 0 0.25rem;">Vehicle watchlist</h3>
         <p style="margin:0;" id="alerts-intro-copy">Add vehicles you want to track &mdash; watching is free, no signup. Matches light up right here, and in the iOS and Android apps free watches get a <strong>weekly recap push</strong>; <strong>push alerts within hours</strong> of a car hitting the yard are a Pro feature.</p>
       </div>
@@ -408,14 +408,14 @@
         You&rsquo;ll hear about every match; check &ldquo;With parts only&rdquo; to limit alerts to
         cars carrying parts we flag as hard to find.
       </p>
-      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;align-items:flex-end;">
+      <div class="watch-form">
         <div>
           <label for="alert-make">Make</label>
-          <select id="alert-make" style="width:150px;"><option value="">Select make&hellip;</option></select>
+          <select id="alert-make"><option value="">Select make&hellip;</option></select>
         </div>
         <div>
           <label for="alert-model-btn">Models</label>
-          <div class="multi-select" style="width:170px;">
+          <div class="multi-select">
             <button type="button" id="alert-model-btn" class="multi-select-btn" disabled title="Pick a make first">Any model</button>
             <div class="multi-select-panel" id="alert-model-panel" style="display:none;">
               <input type="text" id="alert-model-search" placeholder="Search models&hellip;" autocomplete="off">
@@ -429,15 +429,15 @@
         </div>
         <div>
           <label for="alert-yr-min">Year min</label>
-          <select id="alert-yr-min" style="width:95px;"><option value="">Any</option></select>
+          <select id="alert-yr-min"><option value="">Any</option></select>
         </div>
         <div>
           <label for="alert-yr-max">Year max</label>
-          <select id="alert-yr-max" style="width:95px;"><option value="">Any</option></select>
+          <select id="alert-yr-max"><option value="">Any</option></select>
         </div>
         <div>
           <label for="alert-radius" title="Alerts only fire for arrivals inside this distance of your search zip code">Alert radius</label>
-          <select id="alert-radius" style="width:150px;">
+          <select id="alert-radius">
             <option value="25">Within 25 mi</option>
             <option value="50">Within 50 mi</option>
             <option value="100">Within 100 mi</option>
@@ -446,15 +446,14 @@
           </select>
         </div>
         <div>
-          <label for="alert-match-only" title="Only alert for cars carrying parts we flag as hard to find">With parts only</label>
-          <input type="checkbox" id="alert-match-only" title="Only alert for cars carrying parts we flag as hard to find" style="width:18px;height:18px;margin-top:0.4rem;accent-color:var(--accent);">
+          <label class="check-field" title="Only alert for cars carrying parts we flag as hard to find"><input type="checkbox" id="alert-match-only"> <span>With parts only</span></label>
         </div>
         <!-- Trim / drivetrain filters (Pro). Matched against the VIN decode on
              the client and the server by the same rule — see vpicFilterMatches
              in app.js / vpicMatches in backend/src/alerts.js. -->
         <div>
           <label for="alert-drive" title="Only alert for cars whose VIN decode confirms the drivetrain">Drivetrain <span class="pro-tag">Pro</span></label>
-          <select id="alert-drive" style="width:150px;" disabled>
+          <select id="alert-drive" disabled>
             <option value="">Any</option>
             <option value="4x4">4WD or AWD</option>
             <option value="2wd">2WD</option>
@@ -462,7 +461,7 @@
         </div>
         <div>
           <label for="alert-trim" title="Only alert for cars whose VIN decode names this trim or series. Whole words: LT won't match LTZ. Limited also finds Toyota's 'Luxury' label.">Trim contains <span class="pro-tag">Pro</span></label>
-          <input type="text" id="alert-trim" maxlength="40" placeholder="SR5, Limited, TRD&hellip;" autocomplete="off" style="width:150px;" disabled>
+          <input type="text" id="alert-trim" maxlength="40" placeholder="SR5, Limited, TRD&hellip;" autocomplete="off" disabled>
         </div>
         <button id="alert-add-btn" class="btn btn-primary">Add</button>
       </div>
