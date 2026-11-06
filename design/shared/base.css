@@ -1,0 +1,68 @@
+/* YardScout redesign exploration — shared token layer.
+   Palette is the production palette from docs/styles.css :root, unchanged.
+   What is new: a real type scale, a 4px spacing scale, a radius scale,
+   touch-target and focus tokens. This file is the "step 1" of any
+   implementation path: it can be dropped into production as tokens first. */
+:root {
+  --bg: #F4F2EC; --surface: #FBFAF6; --surface2: #ECE9E0; --surface3: #E2DED3;
+  --border: #D9D5C9; --border-dark: #A8A396;
+  --text: #1C1C1A; --text-dim: #5E5B54;
+  --accent: #B84A0A; --accent-hover: #9C3E08; --brand: #F26B1D;
+  --accent-soft: rgba(242,107,29,.12);
+  --accent2: #3f6c33; --green-soft: rgba(63,108,51,.12);
+  --red: #b03429; --gold: #8a5a10; --gold-soft: rgba(138,90,16,.12);
+  --on-accent: #FFFFFF; --ink-btn: #1C1C1A; --on-ink: #FBFAF6;
+
+  /* Type: one family for UI, one mono for data. 6 steps, 1.25 ratio. */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-display: 'Inter Display', 'Inter', -apple-system, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-stencil: 'Saira Stencil One', 'Inter Display', sans-serif;
+  --t-xs: .75rem; --t-sm: .875rem; --t-md: 1rem; --t-lg: 1.25rem; --t-xl: 1.5625rem; --t-2xl: 1.953rem; --t-3xl: 2.441rem;
+  /* Space: 4px grid */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px;
+  --r-sm: 6px; --r: 10px; --r-lg: 16px; --r-xl: 24px; --r-pill: 999px;
+  --tap: 48px;            /* minimum touch target (>= 44pt HIG, 48dp Material) */
+  --focus: 0 0 0 3px var(--surface), 0 0 0 5px var(--accent);
+  --shadow-sheet: 0 -8px 32px rgba(27,25,19,.18);
+  --shadow-card: 0 1px 0 rgba(27,25,19,.06), 0 1px 3px rgba(27,25,19,.06);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1C1C1A; --surface: #262624; --surface2: #30302D; --surface3: #3A3A36;
+  --border: #3F3F3B; --border-dark: #5E5E58; --text: #F4F2EC; --text-dim: #B3B1AA;
+  --accent: #F26B1D; --accent-hover: #F6843F; --accent-soft: rgba(242,107,29,.16);
+  --accent2: #8dbb7d; --green-soft: rgba(141,187,125,.14); --red: #e06b60; --gold: #d9a64a; --gold-soft: rgba(217,166,74,.14);
+  --on-accent: #1C1C1A; --ink-btn: #F4F2EC; --on-ink: #1C1C1A;
+  --shadow-card: none; color-scheme: dark; }
+  :root:not([data-theme="light"]) .mark { background-image: url(mark-on-dark.svg); } }
+:root[data-theme="dark"] {
+  --bg: #1C1C1A; --surface: #262624; --surface2: #30302D; --surface3: #3A3A36;
+  --border: #3F3F3B; --border-dark: #5E5E58; --text: #F4F2EC; --text-dim: #B3B1AA;
+  --accent: #F26B1D; --accent-hover: #F6843F; --accent-soft: rgba(242,107,29,.16);
+  --accent2: #8dbb7d; --green-soft: rgba(141,187,125,.14); --red: #e06b60; --gold: #d9a64a; --gold-soft: rgba(217,166,74,.14);
+  --on-accent: #1C1C1A; --ink-btn: #F4F2EC; --on-ink: #1C1C1A;
+  --shadow-card: none; color-scheme: dark;
+}
+:root[data-theme="dark"] .mark { background-image: url(mark-on-dark.svg); }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--t-md)/1.5 var(--font-ui); -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: var(--accent); }
+:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-sm); }
+.mono { font-family: var(--font-mono); font-feature-settings: 'zero' 1; }
+.num { font-variant-numeric: tabular-nums; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.ico { width: 1.25em; height: 1.25em; flex: none; vertical-align: -.25em; }
+.mark { display: inline-block; width: 2.6rem; height: 1.55rem; background: url(mark-on-light.svg) center/contain no-repeat; }
+.wordmark { font-family: var(--font-stencil); font-size: 1.35rem; letter-spacing: .02em; line-height: 1; }
+.wordmark b { font-weight: 400; color: var(--brand); }
+:root[data-theme="dark"] .wordmark b { color: var(--brand); }
+
+/* Prototype chrome (hidden in screenshots with ?shot) */
+.proto-nav { position: fixed; top: 0; right: 0; z-index: 99; display: flex; gap: 4px; padding: 6px; background: #1C1C1Acc; border-bottom-left-radius: 10px; font: 600 11px/1 var(--font-mono); }
+.proto-nav a { color: #F4F2EC; text-decoration: none; padding: 6px 8px; border-radius: 6px; }
+.proto-nav a[aria-current] { background: #F26B1D; color: #1C1C1A; }
+.shot .proto-nav { display: none; }
