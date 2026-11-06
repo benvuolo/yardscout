@@ -1205,6 +1205,7 @@ class Curation:
     # ------------------------------------------------------- 5.16 likely
     def likely_groups(self, brand):
         out = []
+        self.likely_own_page_drops = Counter()   # cat -> vehicle-years left out (§5.16 own-page rule)
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
                 continue
@@ -1222,6 +1223,11 @@ class Curation:
                 if not m or m["cover"] not in ("yes", "maybe"):
                     continue
                 if cat == "window-switch" and (m["slot"].reason or m["slot"].slots != ("DM",)):
+                    continue
+                if policy.LIKELY_REQUIRES_OWN_PAGE and not self.own_page(T, cat, c)[0]:
+                    # §5.16 own-page rule: the product page's fitment table
+                    # alone can be a platform rollup
+                    self.likely_own_page_drops[cat] += 1
                     continue
                 Ts.append(T)
                 whys |= set(m["why"])
@@ -1292,6 +1298,8 @@ class Curation:
                         "list_rows": len(self.list_rows), "year_manifests": len(self.years),
                         "cells": len(self.cells_info), "verified_groups": len(doc["groups"]),
                         "vg_groups": len(doc["vg"]), "likely_groups": len(doc["likely"]),
+                        "likely_app_years_without_own_page": dict(sorted(
+                            getattr(self, "likely_own_page_drops", Counter()).items())),
                         "blocked_sites": sorted(self.blocked),
                         "why_no_verified": _why_none(self), "gates": global_gates(self)},
             "funnel_cars": fz(funnel),

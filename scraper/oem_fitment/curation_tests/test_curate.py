@@ -267,8 +267,22 @@ check("12 sister make Dodge Caliber (seen only in Jeep fitment) is not closed",
       "no_year_manifest" in info(cur, CAL, "alternator")["closure"])
 inv = [g for g in doc["groups"] + doc["vg"] for y in g["years"] if y["t"][0] == "Dodge"]
 check("12 Caliber is absent from Verified", inv == [])
-check("12 Caliber is present in Likely (body category)",
-      any(a[:2] == ["Dodge", "Caliber"] for g in doc["likely"] if "5303999ZZ" in g["pn"] for a in g["apps"]))
+# §5.16 own-page rule (2026-11-06): Caliber is known only from the Jeep part's
+# product-page fitment table (a possible platform rollup), so it makes no
+# Likely claim; once a record seeded on Caliber's own page lists the number,
+# Caliber joins.
+check("12 own-page rule: Caliber (product page only) is not in Likely",
+      not any(a[:2] == ["Dodge", "Caliber"] for g in doc["likely"] for a in g["apps"]))
+check("12 own-page rule: the left-out vehicle-years are counted",
+      sum(cur.likely_own_page_drops.values()) > 0, str(dict(cur.likely_own_page_drops)))
+# the crawler records a number once per site; a later page that lists it
+# shows up in the R1 list manifest
+lm_cal = list_manifest(JEEP, CAL, "headlights", "headlights-lighting/headlamps",
+                       [("5303999ZZ", "Headlamp", None, [], ["Driver Side"], True, None)])
+cur, doc = run("mopar", {f"raw/{JEEP}.jsonl": [ag, hl], f"raw/{JEEP}.lists.jsonl": [lm_cal]})
+check("12 own-page rule: Caliber joins once its own page lists the number",
+      any(a[:2] == ["Dodge", "Caliber"] for g in doc["likely"] if "5303999ZZ" in g["pn"] for a in g["apps"]),
+      str([g["apps"] for g in doc["likely"]]))
 
 # --------------------------------------------------------------- case 13
 tr = toyota_record("12345-67890", "headlights", ("Toyota", "Camry", 2007), "headlights-lighting/headlamps", "Headlamp",

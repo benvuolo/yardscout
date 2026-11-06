@@ -40,6 +40,20 @@ TRIMU_MIN_CATS = 3
 CHAIN_DEPTH = 4
 # §5.15: a Verified group spans at least this many feed vehicle-years.
 MIN_GROUP_VEHICLE_YEARS = 2
+# §5.16 own-page rule (2026-11-06, hub accuracy audit): a vehicle-year joins
+# a Likely body group only when its OWN catalog page lists the number
+# (Curation.own_page: a matched R1 manifest row, or for a site without
+# manifests a record seeded on that page). A product page's fitment table
+# alone is not enough: dealer catalogs print platform rollups there
+# (fordpartsgiant AH6Z-8200-ACP, an MKZ grille, lists Fusion/MKZ/Milan
+# 2010-12 with the identical whole-platform engine and transmission union,
+# incl. the 2.5L and manual the MKZ never had). Measured on oem-raw@42683f9:
+# where the app's own list page was crawled it did not list the number for
+# 3-19% of exterior app-years per namespace (mopar 136/733, ford 91/811,
+# hmg 8/71, gm 42/563, subaru 54/856, toyota 34/1193), and 80-95% of
+# app-years had no own-page evidence at all. Engine categories never form
+# Likely groups (body only), so they keep their own rules.
+LIKELY_REQUIRES_OWN_PAGE = True
 # §8 V11: interchange.json budget (raw bytes).
 PAYLOAD_BYTE_BUDGET = 1_300_000
 # §8 V14: churn gate against the committed file.

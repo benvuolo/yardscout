@@ -109,7 +109,11 @@ from _util import JEEP, by_pn  # noqa: E402
 
 jeep = real("jeep_94f03a3.jsonl")
 sw = [by_pn(jeep, p) for p in ("4602785AD", "4602780AD")]
-cur, doc = run("mopar", {f"raw/{JEEP}.jsonl": sw})
+# §5.16 own-page rule: a second model's own page must list the number
+from _util import list_manifest  # noqa: E402
+lm_av = list_manifest(JEEP, ("Dodge", "Avenger", 2010), "window-switch", "body-hardware/front-door",
+                      [("4602780AD", "Switch - Window And Door Lock", "Window Switch", [], ["Front Left"], True, None)])
+cur, doc = run("mopar", {f"raw/{JEEP}.jsonl": sw, f"raw/{JEEP}.lists.jsonl": [lm_av]})
 lk = {g["pn"][0]: g for g in doc["likely"] if g["cat"] == "window-switch"}
 check("5 the Front Driver Side switch 4602780AD (several models) ships a Likely DM group",
       "4602780AD" in lk and ":DM:" in lk["4602780AD"]["id"], str(sorted(lk)))

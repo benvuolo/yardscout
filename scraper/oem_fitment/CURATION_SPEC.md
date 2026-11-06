@@ -762,6 +762,16 @@ heated splits remain. It is deferred.
 
 - **Which classes.** Any class with cover `yes` or `maybe` for at least 2
   distinct feed models emits `{tier: "likely", apps, pn, reason, note}`.
+- **Own-page rule (2026-11-06).** A vehicle-year joins only when its own
+  catalog page lists the number (`own_page`: a matched R1 manifest row, or
+  for a site without manifests a record seeded on that page; the seed
+  vehicle-year always qualifies). The product page's fitment table alone is
+  not enough, because dealer catalogs print platform rollups there (Ford
+  AH6Z-8200-ACP: an MKZ grille listed for Fusion/MKZ/Milan). The class
+  still needs 2 distinct feed models after this filter. Left-out
+  vehicle-years are counted per category in the report
+  (`likely_app_years_without_own_page`); a completion crawl (R3) of their
+  pages brings them back. `policy.LIKELY_REQUIRES_OWN_PAGE`.
 - **Skips and refusals.** Single-model classes are skipped, because the
   same-model generation loop already covers them. Classes over the 12-model
   cap are refused.

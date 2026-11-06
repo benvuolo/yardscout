@@ -289,7 +289,11 @@ cur, doc = run("toyota", {f"raw/{TOY}.jsonl": [toyota_record(
     "87910-0X001", "side-mirrors", ("Toyota", "Camry", 2005), "body-hardware/outside-mirrors", "Mirror Assembly",
     "Mirror Assy, Outer Rear View", "Driver Side",
     [(2004, 2005, "Toyota", "Camry", ["LE"], ["4 Cyl 2.4 L GAS"]), (2004, 2005, "Toyota", "Sienna", ["LE"],
-                                                                     ["6 Cyl 3.3 L GAS"])], location=["Driver Side"])]})
+                                                                     ["6 Cyl 3.3 L GAS"])], location=["Driver Side"])],
+    f"raw/{TOY}.lists.jsonl": [list_manifest(TOY, ("Toyota", "Sienna", 2005), "side-mirrors",   # §5.16 own page
+                                             "body-hardware/outside-mirrors",
+                                             [("87910-0X001", "Mirror Assembly", "Mirror Assy, Outer Rear View",
+                                               [], ["Driver Side"], True, None)])]})
 check("F18 curate writes oldest_retrieved on Likely groups",
       doc["likely"] and all(g.get("oldest_retrieved") for g in doc["likely"]), json.dumps(doc["likely"])[:200])
 
