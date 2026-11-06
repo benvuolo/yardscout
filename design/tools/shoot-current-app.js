@@ -1,0 +1,42 @@
+// Captures the current app (serve docs/ on :8765). Output: audit/. Phone = iPhone 13, desktop = 1280 (pass "desk").
+const {chromium,devices}=require('playwright');
+const W=process.argv[2]==='desk';
+(async()=>{const b=await chromium.launch();
+const c=await b.newContext(W?{viewport:{width:1280,height:860},deviceScaleFactor:1}:{...devices['iPhone 13']});
+const p=await c.newPage(); const pre=W?'audit/d-':'audit/';
+const kill=()=>p.evaluate(()=>{for(const e of document.querySelectorAll('div,aside,section')){const t=e.innerText||'';if(t.startsWith('YardScout is on the App Store')&&getComputedStyle(e).position==='fixed')e.remove();}});
+const shot=async n=>{await kill();await p.screenshot({path:pre+n+'.png'})};
+await p.goto('http://localhost:8765/',{waitUntil:'networkidle',timeout:60000});
+await p.waitForTimeout(1500); await shot('01-first-load');
+await p.fill('#zip-banner-input','95112'); await p.click('#zip-banner-go');
+await p.waitForTimeout(8000);
+const up=await p.$('#upgrade-sheet.open, #upgrade-sheet[open], #upgrade-backdrop.open');
+await p.evaluate(()=>{try{closeUpgradeSheet()}catch(e){}; const b=document.querySelector('#first-run-dismiss'); if(b&&b.offsetParent)b.click();});
+await p.waitForTimeout(600);
+await shot('02-results');
+await p.evaluate(()=>window.scrollTo(0,500)); await p.waitForTimeout(300); await shot('03-results-scrolled');
+// expand first parts details
+await p.evaluate(()=>{const d=document.querySelector('#live-grid details.parts-details');d.open=true;d.closest('.car-card').scrollIntoView();window.scrollBy(0,-120)});
+await p.waitForTimeout(500); await shot('04-car-detail');
+await p.evaluate(()=>window.scrollBy(0,700)); await p.waitForTimeout(300); await shot('04b-car-detail-parts');
+await p.evaluate(()=>{document.querySelector('#live-filter-toggle').click();window.scrollTo(0,0)}); await p.waitForTimeout(500); await shot('05-filters');
+await p.evaluate(()=>{document.querySelector('#live-filter-toggle').click()});
+// parts tab
+await p.click('.tab[data-tab="parts"]'); await p.waitForTimeout(800); await shot('06-part-finder');
+await p.fill('#pf-part','alternator').catch(()=>{}); 
+await p.selectOption('#pf-make',{label:'Honda'}).catch(()=>{});await p.waitForTimeout(300);
+await p.selectOption('#pf-model',{label:'Civic'}).catch(()=>{});
+await p.fill('#pf-year','2008').catch(()=>{}); 
+await p.click('#pf-go').catch(()=>{}); await p.waitForTimeout(3000); await kill();
+await p.evaluate(()=>{const r=document.querySelector('#pf-results');if(r)r.scrollIntoView();window.scrollBy(0,-100)});await shot('07-part-finder-result');
+console.log('PF:',(await p.evaluate(()=>document.querySelector('#pf-status')?.innerText+' | '+document.querySelector('#pf-results')?.innerText.slice(0,600))));
+await p.click('.tab[data-tab="alerts"]'); await p.evaluate(()=>window.scrollTo(0,0)); await p.waitForTimeout(800); await shot('08-alerts');
+await p.evaluate(()=>window.scrollBy(0,800)); await shot('08b-alerts-more');
+await p.click('.tab[data-tab="yards"]'); await p.evaluate(()=>window.scrollTo(0,0)); await p.waitForTimeout(1500); await shot('09-yards');
+await p.evaluate(()=>window.scrollBy(0,600)); await shot('09b-yards-list');
+await p.evaluate(()=>openUpgradeSheet('header-pill')); await p.waitForTimeout(800); await shot('10-pro-sheet');
+await p.evaluate(()=>{const s=document.querySelector('#upgrade-sheet');s.scrollTop=s.scrollHeight}); await p.waitForTimeout(300); await shot('10b-pro-sheet-bottom');
+await p.evaluate(()=>closeUpgradeSheet());
+await p.click('#saved-pill').catch(()=>{}); await p.waitForTimeout(600); await shot('11-saved');
+console.log('upgrade-auto-open:',!!up);
+await b.close();})();

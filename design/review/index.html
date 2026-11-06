@@ -1,0 +1,257 @@
+<title>YardScout Redesign Directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: one reading column for the argument; full-bleed horizontal "phone rails" for the side-by-side screens. */
+:root {
+  --bg: #F4F2EC; --surface: #FBFAF6; --surface2: #ECE9E0; --line: #D9D5C9; --ink: #1C1C1A; --dim: #5E5B54;
+  --accent: #B84A0A; --brand: #F26B1D; --green: #3f6c33; --red: #b03429; --gold: #8a5a10;
+  --f-display: 'Saira Stencil One', 'Inter', system-ui, sans-serif;
+  --f-body: 'Inter', -apple-system, system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1C1C1A; --surface: #262624; --surface2: #30302D; --line: #3F3F3B; --ink: #F4F2EC; --dim: #B3B1AA;
+  --accent: #F26B1D; --green: #8dbb7d; --red: #e06b60; --gold: #d9a64a; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #1C1C1A; --surface: #262624; --surface2: #30302D; --line: #3F3F3B; --ink: #F4F2EC; --dim: #B3B1AA;
+  --accent: #F26B1D; --green: #8dbb7d; --red: #e06b60; --gold: #d9a64a; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--f-body); -webkit-font-smoothing: antialiased;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 48px; }
+.col { max-width: 680px; margin: 0 auto; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+header.top { max-width: 680px; margin: 0 auto; padding-block: 28px 8px; }
+.brandline { display: flex; align-items: center; gap: 10px; font: 400 15px/1 var(--f-display); letter-spacing: .02em; }
+.brandline b { font-weight: 400; color: var(--brand); }
+.brandline svg { width: 40px; height: 24px; }
+h1 { font: 800 clamp(30px, 8vw, 44px)/1.05 var(--f-body); letter-spacing: -.025em; margin: 18px 0 10px; text-wrap: balance; }
+h2 { font: 800 24px/1.15 var(--f-body); letter-spacing: -.015em; margin: 48px 0 12px; text-wrap: balance; }
+h3 { font: 700 17px/1.3 var(--f-body); margin: 24px 0 6px; }
+p { margin: 0 0 12px; max-width: 65ch; }
+.lede { font-size: 18px; color: var(--dim); }
+.eyebrow { font: 700 12px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin: 40px 0 8px; }
+.meta { font: 500 12px/1.5 var(--f-mono); color: var(--dim); }
+
+.verdict { margin: 24px 0 8px; padding: 18px; border: 2px solid var(--ink); border-radius: 12px; background: var(--surface); }
+.verdict .k { font: 700 12px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.verdict p { margin: 8px 0 0; }
+.verdict strong { font-size: 18px; }
+
+/* Directions */
+.dirs { display: grid; gap: 10px; margin-top: 16px; }
+.dir { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.dir .tag { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; background: var(--ink); color: var(--bg); font: 700 18px/1 var(--f-mono); }
+.dir.rec .tag { background: var(--brand); color: #1C1C1A; }
+.dir h3 { margin: 0; }
+.dir p { margin: 4px 0 0; font-size: 15px; color: var(--dim); }
+.dir .pill { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 99px; background: var(--brand); color: #1C1C1A; font: 700 11px/1.5 var(--f-mono); vertical-align: 2px; }
+
+/* Screen compare */
+.tabs { display: flex; gap: 6px; overflow-x: auto; padding: 4px 0 10px; scrollbar-width: none; }
+.tabs button { flex: none; min-height: 44px; padding: 0 16px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 600 15px/1 var(--f-body); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.rail-wrap { margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px))); }
+.rail { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px max(16px, env(safe-area-inset-left, 0px)) 12px; scroll-padding-left: 16px; }
+.shot { flex: none; width: min(64vw, 260px); scroll-snap-align: start; margin: 0; }
+.shot img { display: block; width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--line); background: var(--surface2); }
+.shot figcaption { margin-top: 8px; font: 600 13px/1.35 var(--f-body); }
+.shot figcaption span { display: block; font: 500 12px/1.4 var(--f-body); color: var(--dim); }
+.shot.cur img { border: 2px dashed var(--line); }
+.shot.wide { width: min(88vw, 620px); } .shot.wide img { border-radius: 8px; }
+@media (min-width: 1100px) { .rail { justify-content: center; } }
+.note { font-size: 14px; color: var(--dim); }
+
+/* Audit */
+ol.issues { list-style: none; padding: 0; margin: 12px 0 0; counter-reset: i; }
+ol.issues li { counter-increment: i; display: grid; grid-template-columns: 34px 1fr; gap: 10px; padding: 14px 0; border-top: 1px solid var(--line); }
+ol.issues li::before { content: counter(i); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--surface2); font: 700 13px/1 var(--f-mono); }
+ol.issues li:nth-child(-n+3)::before { background: var(--red); color: #fff; }
+ol.issues b { display: block; }
+ol.issues span { font-size: 15px; color: var(--dim); }
+.two { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 620px) { .two { grid-template-columns: 1fr 1fr; } }
+.box { padding: 14px 16px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); min-width: 0; }
+.box h3 { margin-top: 0; }
+.box ul { margin: 0; padding-left: 18px; font-size: 15px; } .box li { margin: 4px 0; }
+
+/* Effort table */
+.tbl-wrap { overflow-x: auto; margin-top: 12px; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+th { font: 700 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+td:first-child { font-weight: 700; white-space: nowrap; }
+.lvl { display: inline-block; padding: 1px 8px; border-radius: 99px; font: 700 11px/1.6 var(--f-mono); }
+.lvl.lo { background: rgba(63,108,51,.15); color: var(--green); } .lvl.md { background: rgba(138,90,16,.15); color: var(--gold); } .lvl.hi { background: rgba(176,52,41,.13); color: var(--red); }
+
+.steps { list-style: none; padding: 0; margin: 12px 0 0; }
+.steps li { position: relative; padding: 0 0 18px 28px; border-left: 2px solid var(--line); margin-left: 8px; }
+.steps li::before { content: ''; position: absolute; left: -7px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--brand); }
+.steps b { display: block; } .steps span { font-size: 15px; color: var(--dim); }
+.qs li { margin: 8px 0; }
+footer { max-width: 680px; margin: 48px auto 0; padding-top: 16px; border-top: 1px solid var(--line); }
+@media (prefers-reduced-motion: no-preference) { .rail { scroll-behavior: smooth; } }
+</style>
+
+<header class="top">
+  <div class="brandline"><svg viewBox="4 29 122 72" aria-hidden="true"><g fill="currentColor"><circle cx="40" cy="65" r="36"/><circle cx="90" cy="65" r="36"/></g><g fill="#F26B1D"><circle cx="40" cy="65" r="32"/><circle cx="90" cy="65" r="32"/></g><g transform="translate(65 64) scale(0.88) translate(-66.5 -63)"><path d="M16 76 V62 Q16 59 19 59 H35 L46 44.5 Q47 43.5 49 43.5 H79 Q81 43.5 82 44.5 L92 58 L110 60 Q114 60.5 114 63 V76 Q114 79 111 79 H106 A10 10 0 0 0 86 79 H44 A10 10 0 0 0 24 79 H19 Q16 79 16 76 Z" fill="#1C1C1A"/><path d="M49 46.8 H78.3 L88 57.4 H46.6 L44 54.2 Z" fill="#F26B1D"/><g fill="#1C1C1A"><circle cx="34" cy="80" r="8"/><circle cx="96" cy="80" r="8"/></g><g fill="#F26B1D"><circle cx="34" cy="80" r="3.2"/><circle cx="96" cy="80" r="3.2"/></g></g></svg><span>YARD<b>SCOUT</b></span></div>
+  <h1>Three redesign directions, side by side with today’s app</h1>
+  <p class="lede">Same logo, same palette. New type scale, spacing, components and layout. Every screen uses real cars from the Nov 6 scan around zip 95112.</p>
+  <p class="meta">Design exploration · 2026-11-06 · branch design/redesign-2026-11 · nothing shipped</p>
+</header>
+
+<main class="col">
+  <section class="verdict" aria-labelledby="rec">
+    <div class="k" id="rec">Recommendation</div>
+    <p><strong>Build A, Pull Sheet.</strong> Then add B’s “walk by row” yard view as a screen inside it. Keep C’s garage idea for later.</p>
+    <p>A fixes the biggest problems: you can’t find the row number, cards have no clear main button, and the first screen is a wall of text. It also keeps today’s four tabs, so it can ship in small CSS-first steps. B needs a real map library and tiles. C needs a new “garage” record and changes to how alerts are set up. Both are bigger bets.</p>
+  </section>
+
+  <h2>The three ideas</h2>
+  <div class="dirs">
+    <div class="dir rec"><span class="tag">A</span><div><h3>Pull Sheet <span class="pill">Recommended</span></h3><p>Trip-first. The app is the list you carry into the yard. The row number is the biggest thing on every car. Parts are a checklist you tick off. Each screen has one orange button in thumb reach.</p></div></div>
+    <div class="dir"><span class="tag">B</span><div><h3>Lot Map</h3><p>Place-first. You pick a yard before a car, so the map is home and lists slide up over it. Inside a yard, cars are grouped by row in walking order.</p></div></div>
+    <div class="dir"><span class="tag">C</span><div><h3>My Garage</h3><p>Vehicle-first. Save the cars you work on once. Home becomes “6 donors for your Civic”, and alerts are set per car.</p></div></div>
+  </div>
+
+  <h2 id="compare">Screen by screen</h2>
+  <p class="note">Swipe sideways. The first phone is today’s app (dashed border). The car screens are shown in the Pro state so the parts list is visible.</p>
+  <div class="tabs" role="tablist" aria-label="Screen" id="tabs"></div>
+</main>
+<div class="rail-wrap"><div class="rail" id="rail" role="tabpanel" aria-live="polite"></div></div>
+<div class="col"><p class="note" id="screen-note"></p></div>
+
+<main class="col">
+  <h2>Desktop</h2>
+  <p class="note">At 1280px. A uses a three-column list with a preview pane. B puts the map beside a panel. C uses a sidebar and a card grid.</p>
+</main>
+<div class="rail-wrap"><div class="rail" id="desk"></div></div>
+
+<main class="col">
+  <h2>Dark mode and 200% text</h2>
+  <p class="note">Dark mode reuses today’s dark tokens. All text uses rem units, so it scales with iOS text size. At 200%, A stacks the row plate above the car name instead of squeezing it.</p>
+</main>
+<div class="rail-wrap"><div class="rail" id="a11y"></div></div>
+
+<main class="col">
+  <h2>Audit of today’s app</h2>
+  <p>I tested on an iPhone 13 viewport and at 1280px: first load, search by zip, results, a car card, Parts, Alerts, Yards, the Pro sheet and Saved. Here is what makes it look “vibecoded”:</p>
+  <div class="two">
+    <div class="box"><h3>Reads as generated</h3><ul>
+      <li>Too many badge styles: NEW, Row box, “Gets picked over fast” pill, lock link, demand rail, mono stat tiles</li>
+      <li>A coloured left rail on every card, plus a dashed hazard stripe under the header</li>
+      <li>Monospace used for whole sentences (“Set out Nov 5 · Day 2 of ~100 typical”, loading text, the yard tools line)</li>
+      <li>Five button styles: black, grey, orange-outline, orange-tint and underlined links</li>
+      <li>Big stat tiles whose numbers change meaning between tabs, and sometimes all read 0</li>
+      <li>Font sizes from 11 to 28px with no scale, and uneven card padding</li>
+    </ul></div>
+    <div class="box"><h3>Keep these</h3><ul>
+      <li>The logo, the palette, and the existing dark theme</li>
+      <li>Honest copy: “a guide, never a promise”, and “if equipped”</li>
+      <li>The lifespan line (“Day 2 of ~100 typical”). No one else has it. It deserves a visual.</li>
+      <li>Four bottom tabs, VIN copy, links to the yard’s own listing</li>
+      <li>Accurate set-out dates and the 4-hour scan cadence</li>
+    </ul></div>
+  </div>
+
+  <h3>Top 10 problems, ranked by impact on users</h3>
+  <ol class="issues">
+    <li><div><b>The first screen is four messages before a single car</b><span>A coverage paragraph, the zip box, a “How to read this” notice, and an App Store banner that covers the lower half. There is also a Pro link. A new user has to read about 120 words before seeing a car.</span></div></li>
+    <li><div><b>The free car card hides its main value behind blur</b><span>“9 parts to check” opens to a disclaimer and rows of “•••• ••••”. To a new user this looks broken, not premium.</span></div></li>
+    <li><div><b>No clear main action on a car</b><span>About eight things to tap: bell, share, heart, the Pro link, the parts toggle, the yard link, VIN copy. The three icon buttons are about 24px, below the 44pt minimum. Heart (save for the visit) and bell (watch the model) are easy to mix up.</span></div></li>
+    <li><div><b>The row number is hard to find</b><span>In the yard, the row is what you need. Today it is a small box that wraps after the distance (“13 / mi Row 125”).</span></div></li>
+    <li><div><b>The radius and counts don’t agree</b><span>The copy says 250 miles and the filter says 100. Stats show 17,778 “near you”, and the header says “17 yards in your ran…”, cut off. Results start with Newark (13 mi) even though San Jose North is 1 mi away. The sort isn’t shown.</span></div></li>
+    <li><div><b>The header subtitle changes meaning on every tab</b><span>“334,432 cars on row”, then “22,544 new this week”, then “scanned 2h ago”. It’s in uppercase mono and often cut off.</span></div></li>
+    <li><div><b>Alerts start with setup, not with what you’ll get</b><span>First a paragraph and a browser-notification button. Then a long stack of select boxes. Then two dashed empty states and three tiles that all read 0.</span></div></li>
+    <li><div><b>Part finder is a form split from car search</b><span>Seven fields with dropdowns, and you have to pick an exact suggestion (“Pick a part first”). People think “alternator for my Civic”, but Parts and Cars are separate tabs.</span></div></li>
+    <li><div><b>The Pro sheet buries the price and “Already have Pro?”</b><span>There are about 70 words before the plan and seven dense bullets. Restore comes last, after the App Store block.</span></div></li>
+    <li><div><b>Hard to use outdoors</b><span>Light grey 12px mono text, borders as thin as hairlines, and small targets. Field-app guidance says glare washes out low contrast and thin type. Gloves need targets larger than 44pt.</span></div></li>
+  </ol>
+
+  <h2>What changes for users</h2>
+  <div class="two">
+    <div class="box"><h3>In the yard</h3><ul>
+      <li>Row number is the largest thing on each car, so you can read it at arm’s length</li>
+      <li>Parts become a checklist you tick as you pull. “If equipped” parts sit in their own dashed group and add $0, as today.</li>
+      <li>One big orange button (A: “Add to pull sheet”, B: “Directions to row 17”) at the bottom, in thumb reach</li>
+      <li>Every target is 44–52px. No body text below 14px. Mono only for numbers.</li>
+    </ul></div>
+    <div class="box"><h3>Planning at home</h3><ul>
+      <li>One search box for “part or car”. Results answer the question directly: “6 donor cars for your alternator”.</li>
+      <li>The days-on-lot line becomes a small meter: fresh, mid-stay, leaving soon</li>
+      <li>Watches show what is on lots now, not just the criteria</li>
+      <li>The Pro sheet leads with the price and four benefits. Restore is one tap.</li>
+    </ul></div>
+  </div>
+
+  <h2>Effort and risk</h2>
+  <p class="note">app.js is about 490 KB of hand-written JS that renders through template strings, with styles.css at 85 KB. Every direction can start with the same token layer (design/shared/base.css).</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Direction</th><th>Effort</th><th>Risk</th><th>What it touches</th></tr></thead>
+    <tbody>
+      <tr><td>A · Pull Sheet</td><td><span class="lvl md">Medium</span></td><td><span class="lvl lo">Low</span></td><td>styles.css tokens and components. The car-card and parts-row render functions in app.js. Merging the Cars and Parts search entry. The saved list becomes a pull sheet (it already exists as Saved). Same four tabs.</td></tr>
+      <tr><td>B · Lot Map</td><td><span class="lvl hi">High</span></td><td><span class="lvl hi">High</span></td><td>A map library and a tile provider (cost, CSP, offline). A new home. Pins for 300+ yards. Row order assumes yard row numbers are walkable, which varies by yard. Bigger native-shell testing.</td></tr>
+      <tr><td>C · My Garage</td><td><span class="lvl md">Medium–High</span></td><td><span class="lvl md">Medium</span></td><td>A new “garage car” record and onboarding. Backend sync for alerts per garage car. Existing watches must stay untouched (rule 6), so the garage sits beside them, not on top.</td></tr>
+    </tbody></table></div>
+
+  <h3>Suggested path for A, in small releases</h3>
+  <ol class="steps">
+    <li><b>1. Tokens only</b><span>Add the type, spacing, radius and touch-target tokens to styles.css :root. No visual change. Every later step uses them.</span></li>
+    <li><b>2. Base styles</b><span>One button system, Inter for all sentences and mono for numbers only. Remove the card rails and hazard stripe. Raise targets to 44px or more. Changes are CSS only, with the same DOM.</span></li>
+    <li><b>3. Car card</b><span>Rewrite the card template: row plate, lifespan meter, one primary action, overflow menu for share. Bump the sw.js cache name.</span></li>
+    <li><b>4. Car detail and parts checklist</b><span>Pushed screen with a sticky action bar. Keep the “if equipped” group as it is.</span></li>
+    <li><b>5. First run and search</b><span>Zip as a chip in the header. Combined part-or-car search. Remove the notice stack.</span></li>
+    <li><b>6. Watches, Pro sheet, yard view</b><span>Hits shown on watch cards. Shorter Pro sheet. Optionally B’s walk-by-row list for a single yard.</span></li>
+  </ol>
+  <p class="note">Before each step, compare Playwright screenshots of today’s screens with the new ones. The scripts used for this review are on the branch.</p>
+
+  <h2>Questions for you</h2>
+  <ol class="qs">
+    <li>Free tier: today free users see blurred part names. Should free users see part names and have only prices and demand locked? That one change would remove most of the “broken” feeling on the car card.</li>
+    <li>Pull sheet: should A rename “Saved” to “Pull sheet” and group it by yard? Data and storage stay the same.</li>
+    <li>Are you happy to leave the map (B) for a later release? A yard’s own row layout isn’t in our data, so B’s “walk by row” can only sort by row number.</li>
+  </ol>
+
+  <h2>How the directions were grounded</h2>
+  <p class="note">Users are DIY mechanics, flippers and project-car people. They plan at home, then use the app one-handed in sun glare at the yard, sometimes with gloves or greasy hands and weak signal. Principles taken from field-app and saved-search practice, not any app’s visuals:</p>
+  <ul class="note">
+    <li>Primary actions and navigation sit in the bottom thumb zone. Strong borders on controls, so they survive glare. Text at 16px or larger, and no thin grey text (<a href="https://thisisglance.com/learning-centre/how-should-i-design-apps-for-construction-workers">Glance</a>, <a href="https://sympli.io/blog/product_design_for_mobile_workforce">Sympli</a>, <a href="https://blog.apario.net/on-writing-software-for-people-who-work-outside">Apario</a>).</li>
+    <li>Saved searches show what matches now, allow per-search alert controls, and avoid alert fatigue (<a href="https://www.sweetwater.com/used/help/buying/how-do-saved-searches-work">Sweetwater Gear Exchange</a>, <a href="https://intercom.help/perchwell/en/articles/11004069-managing-saved-searches">Perchwell</a>).</li>
+  </ul>
+</main>
+
+<footer class="col meta">
+  Prototypes: design/pull-sheet, design/lot-map, design/my-garage on branch design/redesign-2026-11 (open design/index.html locally). Screenshots: design/screenshots/. Map in B is illustrative. Yard prices show Pick-n-Pull list prices where matched (alternator $42.98 incl. $9.99 core); otherwise the parts table’s typical yard cost.
+</footer>
+
+<script>
+const S = [
+  ['home', 'Home / search'], ['results', 'Results'], ['car', 'Car detail'], ['part', 'Part finder'], ['watches', 'Alerts / watches'], ['pro', 'Pro sheet'],
+];
+const CUR = { home: ['current-phone-home', 'Today'], results: ['current-phone-results', 'Today'], car: ['current-phone-car', 'Today (free: parts blurred)'], part: ['current-phone-part', 'Today (form first)'], watches: ['current-phone-watches', 'Today'], pro: ['current-phone-pro', 'Today'] };
+const NOTES = {
+  home: 'A asks one question with one search box. B opens on the map and this week’s set-outs per yard. C opens on your saved cars.',
+  results: 'A: the row plate leads each car, with a stay meter and one value line. B: one yard, grouped by row. C: donors for your Civic only, with a one-tap “All cars instead”.',
+  car: 'All three put yard and row at the top and keep “if equipped” parts separate. A is a checklist, B a price table, C highlights the parts on your list.',
+  part: 'Each answers in one sentence first: 6 donors, the yard price ($42.98 incl. core), the online range, then donors by yard.',
+  watches: 'Each watch shows how many matching cars are on lots now. Push is clearly labelled Pro. Your existing watches are never rewritten.',
+  pro: 'Price and four plain benefits before anything else. “Already have Pro?” is one tap, not the last thing on the sheet.',
+};
+const DIRS = [['pull-sheet', 'A · Pull Sheet'], ['lot-map', 'B · Lot Map'], ['my-garage', 'C · My Garage']];
+const fig = (src, cap, sub, cls = '') => `<figure class="shot ${cls}"><img src="img/${src}.webp" alt="${cap}${sub ? ' — ' + sub : ''}" loading="lazy" width="560" height="1212"><figcaption>${cap}${sub ? `<span>${sub}</span>` : ''}</figcaption></figure>`;
+const tabs = document.getElementById('tabs'), rail = document.getElementById('rail'), note = document.getElementById('screen-note');
+function show(k) {
+  [...tabs.children].forEach(b => b.setAttribute('aria-selected', b.dataset.k === k));
+  rail.innerHTML = fig(CUR[k][0], CUR[k][1], '', 'cur') + DIRS.map(([d, n]) => fig(`${d}-phone-${k}`, n)).join('') + (k === 'watches' ? fig('pull-sheet-phone-sheet', 'A · Pull sheet', 'Saved cars, grouped by yard') : '') + (k === 'results' ? fig('current-phone-results-scrolled', 'Today, scrolled', 'Badge row, small icons') : '');
+  rail.scrollLeft = 0; note.textContent = NOTES[k];
+  try { localStorage.setItem('ys-review-tab', k); } catch (e) {}
+}
+tabs.innerHTML = S.map(([k, l]) => `<button role="tab" data-k="${k}">${l}</button>`).join('');
+tabs.addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(b.dataset.k); });
+let start = 'home'; try { start = localStorage.getItem('ys-review-tab') || 'home'; } catch (e) {}
+show(S.some(s => s[0] === start) ? start : 'home');
+const dfig = (src, cap) => `<figure class="shot wide"><img src="img/${src}.webp" alt="${cap}" loading="lazy" width="1100" height="739"><figcaption>${cap}</figcaption></figure>`;
+document.getElementById('desk').innerHTML = [['current-desk-results', 'Today · results'], ['pull-sheet-desk-home', 'A · home'], ['pull-sheet-desk-results', 'A · results + preview'], ['lot-map-desk-home', 'B · home'], ['lot-map-desk-results', 'B · yard'], ['my-garage-desk-home', 'C · home'], ['my-garage-desk-results', 'C · donors'], ['current-desk-home', 'Today · first load']].map(([s, c]) => dfig(s, c)).join('');
+document.getElementById('a11y').innerHTML = DIRS.map(([d, n]) => fig(`${d}-phone-car-dark`, n, 'Car, dark')).join('') + DIRS.map(([d, n]) => fig(`${d}-phone-results-zoom`, n, 'Results at 200% text')).join('') + fig('my-garage-phone-home-dark', 'C · My Garage', 'Home, dark');
+</script>
