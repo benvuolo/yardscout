@@ -526,3 +526,113 @@
 23:38:24 chain-unlinked trunk-lid 1 numbers named by 561-827-025-L, no catalog link: 561-827-025-J
 23:38:24 seg done tier=B Volkswagen Passat [2012, 2019] seeds=[2013, 2019] records=878 errors=7
 23:38:24 time budget reached records=878
+23:38:37 start site=www.vwpartsgiant.com mode=worklist tiers=['A', 'B'] records=878 list_lines=349 year_lines=36 url_index=4671
+23:38:37 seg done tier=A Volkswagen Jetta [2006, 2010] seeds=[2006] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Jetta [2011, 2014] seeds=[2014] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Passat [2012, 2019] seeds=[2013] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Jetta [1999, 2005] seeds=[2003] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen CC [2009, 2016] seeds=[2012] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Tiguan [2009, 2017] seeds=[2012] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen New Beetle [1991, 2010] seeds=[2000] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Beetle [1964, 2019] seeds=[2003] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Passat [2006, 2011] seeds=[2008] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Passat [1986, 2005] seeds=[2003] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Jetta [2015, 2018] seeds=[2015] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Routan [2009, 2014] seeds=[2009] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Touareg [2004, 2017] seeds=[2004] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Eos [2007, 2014] seeds=[2008] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Rabbit [1977, 2009] seeds=[2007] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Golf [1985, 2005] seeds=[2003] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Golf [2010, 2014] seeds=[2012] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen GTI [2006, 2009] seeds=[2007] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Cabrio [1995, 2002] seeds=[2001] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen GTI [1996, 2005] seeds=[2003] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen GTI [2010, 2014] seeds=[2010] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Jetta [2019, 2024] seeds=[2019] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Passat Wagon [1993, 2010] seeds=[2004] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Jetta SportWagen [2009, 2013] seeds=[2012] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Jetta [1994, 1998] seeds=[1997] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen New Beetle Convertible [2003, 2010] seeds=[2005] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Tiguan [2018, 2022] seeds=[2018] records=878 errors=7
+23:38:37 seg done tier=A Volkswagen Golf [2015, 2018] seeds=[2016] records=878 errors=7
+23:38:37 seg done tier=B Volkswagen Jetta [2006, 2010] seeds=[2006] records=878 errors=7
+23:38:37 seg done tier=B Volkswagen Jetta [2011, 2014] seeds=[2014] records=878 errors=7
+23:38:37 seg done tier=B Volkswagen Passat [2012, 2019] seeds=[2013] records=878 errors=7
+23:39:33 chain-unlinked gauge-cluster 1 numbers named by 1J5-920-906-J, no catalog link: 1J0-920-906-J
+23:39:33 chain-unlinked gauge-cluster 1 numbers named by 1J5-920-906-N, no catalog link: 1J0-920-906-N
+23:39:33 chain-unlinked gauge-cluster 1 numbers named by 1J5-920-906-K, no catalog link: 1J0-920-906-K
+23:39:33 chain-unlinked gauge-cluster 1 numbers named by 1J5-920-906-Q, no catalog link: 1J0-920-906-L
+23:39:33 chain-unlinked gauge-cluster 2 numbers named by 1J5-920-926-F, no catalog link: 1J0-920-926-F, 1J0-920-926-D
+23:40:13 chain-unlinked ignition-coils 1 numbers named by 06A-905-097-A, no catalog link: 06A-905-097
+23:40:13 chain-unlinked ignition-coils 9 numbers named by 06A-905-115-D, no catalog link: 06B-905-115-R, 06B-905-115-S, 06B-905-115-P, 06B-905-115-J, 06A-905-115-C, 06B-905-115-Q, 06B-905-115-H, 06B-905-115-L, 06B-905-115-G
+23:40:13 chain-unlinked ignition-coils 5 numbers named by 022-905-715-C, no catalog link: 022-905-100-G, 022-905-100-D, 022-905-100-K, 022-905-100-A, 022-905-100-N
+23:40:53 chain-unlinked radiator 3 numbers named by 1J0-121-253-AD, no catalog link: 1J0-121-253-AT, 1J0-121-253-N, 1J0-121-253-P
+23:41:09 chain-unlinked hood 1 numbers named by 1J5-823-031-B, no catalog link: 1J5-823-031-A
+23:41:49 chain-unlinked fender 1 numbers named by 1J5-821-021-B, no catalog link: 1J5-821-021-A
+23:41:49 chain-unlinked fender 1 numbers named by 1J5-821-022-B, no catalog link: 1J5-821-022-A
+23:42:53 chain-unlinked grille 1 numbers named by 1J5-853-651-K-GRU, no catalog link: 1J5-853-651-F-GRU
+23:43:17 chain-unlinked trunk-lid 5 numbers named by 1JM-827-025-D, no catalog link: 1J5-827-025-AB, 1J5-827-025-Q, 1J5-827-025-AA, 1JM-827-025-B, 1J5-827-025-T
+23:43:33 seg done tier=B Volkswagen Jetta [1999, 2005] seeds=[2003] records=905 errors=7
+23:44:05 chain-unlinked gauge-cluster 1 numbers named by 3C8-920-970-T, no catalog link: 3C8-920-970-TX
+23:44:05 chain-unlinked gauge-cluster 1 numbers named by 3C8-920-980-T, no catalog link: 3C8-920-980-TX
+23:44:29 chain-unlinked radiator 3 numbers named by 5K0-121-251-AA, no catalog link: 1K0-121-251-L, 1K0-121-253-L, 5K0-121-251-J
+23:44:45 chain-unlinked hood 1 numbers named by 3C8-823-031-B, no catalog link: 3C8-823-031-A
+23:46:13 chain-unlinked bumper-front 2 numbers named by 3C8-807-217-M-GRU, no catalog link: 3C8-807-217-F-GRU, 3C8-807-217-GRU
+23:46:13 chain-unlinked bumper-front 2 numbers named by 3C8-807-217-N-GRU, no catalog link: 3C8-807-217-G-GRU, 3C8-807-217-A-GRU
+23:46:13 chain-unlinked bumper-front 2 numbers named by 3C8-807-217-R-GRU, no catalog link: 3C8-807-217-D-GRU, 3C8-807-217-K-GRU
+23:46:37 chain-unlinked bumper-rear 2 numbers named by 3C8-807-417-Q-GRU, no catalog link: 3C8-807-417-A-GRU, 3C8-807-417-E-GRU
+23:46:37 chain-unlinked bumper-rear 2 numbers named by 3C8-807-421-F-GRU, no catalog link: 3C8-807-421-C-GRU, 3C8-807-421-A-GRU
+23:47:01 chain-unlinked grille 2 numbers named by 3C8-853-651-P-GRU, no catalog link: 3C8-853-651-K-GRU, 3C8-853-651-M-GRU
+23:47:01 chain-unlinked grille 2 numbers named by 3C8-853-651-Q-GRU, no catalog link: 3C8-853-651-N-GRU, 3C8-853-651-L-GRU
+23:47:17 chain-unlinked trunk-lid 1 numbers named by 3C8-827-025-C, no catalog link: 3C8-827-025-B
+23:47:17 seg done tier=B Volkswagen CC [2009, 2016] seeds=[2012] records=923 errors=7
+23:47:41 chain-unlinked gauge-cluster 1 numbers named by 5N0-920-972-E, no catalog link: 5N0-920-972-EX
+23:48:21 chain-unlinked hood 2 numbers named by 5N0-823-031-D, no catalog link: 5N0-823-031-A, 5N0-823-031
+23:48:45 chain-unlinked fender 1 numbers named by 5N0-821-105-A, no catalog link: 5N0-821-105
+23:48:45 chain-unlinked fender 1 numbers named by 5N0-821-106-A, no catalog link: 5N0-821-106
+23:49:17 chain-unlinked bumper-rear 1 numbers named by 5N0-807-421-G-GRU, no catalog link: 5N0-807-421-K-GRU
+23:49:33 chain-unlinked grille 1 numbers named by 5N0-853-651-J-9B9, no catalog link: 5N0-853-651-H-9B9
+23:49:49 chain-unlinked liftgate 4 numbers named by 5N0-827-025-G, no catalog link: 5N0-827-025-A, 5N0-827-025-B, 5N0-827-025-D, 5N0-827-025-F
+23:49:49 seg done tier=B Volkswagen Tiguan [2009, 2017] seeds=[2012] records=932 errors=7
+23:51:09 chain-unlinked gauge-cluster 1 numbers named by 1C0-920-906-F, no catalog link: 1C0-920-901-F
+23:51:09 chain-unlinked gauge-cluster 1 numbers named by 1C0-920-906-G, no catalog link: 1C0-920-901-G
+23:51:09 chain-unlinked gauge-cluster 1 numbers named by 1C0-920-906-A, no catalog link: 1C0-920-901-A
+23:51:09 chain-unlinked gauge-cluster 1 numbers named by 1C0-920-906-C, no catalog link: 1C0-920-901-C
+23:51:25 chain-unlinked ignition-coils 1 numbers named by 06B-905-115-E, no catalog link: 06B-905-115
+23:51:41 chain-unlinked radiator 1 numbers named by 1C0-121-253-A, no catalog link: 1C0-121-253-C
+23:51:57 chain-unlinked hood 2 numbers named by 1C0-823-031-M, no catalog link: 1C0-823-031-J, 1C0-823-031-F
+23:52:21 chain-unlinked fender 3 numbers named by 1C0-821-105-F-GRU, no catalog link: 1C0-821-105-D-GRU, 1C0-821-103-D-GRU, 1C0-821-105-C-GRU
+23:52:21 chain-unlinked fender 3 numbers named by 1C0-821-106-F-GRU, no catalog link: 1C0-821-106-C-GRU, 1C0-821-104-D-GRU, 1C0-821-106-D-GRU
+23:52:37 chain-unlinked bumper-front 1 numbers named by 1C0-807-221-E-GRU, no catalog link: 1C0-807-221-D-GRU
+23:53:17 chain-unlinked liftgate 4 numbers named by 1C0-827-024-G, no catalog link: 1C0-827-025-M, 1C0-827-025-Q, 1C0-827-024-D, 1C0-827-025-K
+23:53:17 chain-unlinked liftgate 2 numbers named by 1C0-827-025-P, no catalog link: 1C0-827-025-L, 1C0-827-025-J
+23:56:13 chain-unlinked gauge-cluster 1 numbers named by 1C0-920-951, no catalog link: 1C0-920-921
+23:56:13 chain-unlinked gauge-cluster 1 numbers named by 1C0-920-951-A, no catalog link: 1C0-920-921-A
+23:56:13 chain-unlinked gauge-cluster 1 numbers named by 1C0-920-951-C, no catalog link: 1C0-920-921-C
+23:56:13 chain-unlinked gauge-cluster 1 numbers named by 1C0-920-951-F, no catalog link: 1C0-920-921-F
+23:56:13 chain-unlinked gauge-cluster 1 numbers named by 1C0-920-951-G, no catalog link: 1C0-920-921-G
+23:57:25 seg done tier=B Volkswagen New Beetle [1991, 2010] seeds=[2000, 2001, 2002] records=962 errors=7
+23:58:53 chain-unlinked bumper-rear 1 numbers named by 1Y0-807-421-G-GRU, no catalog link: 1Y0-807-421-A-GRU
+23:59:09 chain-unlinked trunk-lid 2 numbers named by 1Y0-827-025-N, no catalog link: 1Y0-827-025-M, 1Y0-827-025-K
+23:59:25 nav-fail Volkswagen Beetle 1988: NavError: HTTP 404 for https://www.vwpartsgiant.com/1988-volkswagen-beetle-parts
+23:59:25 seg done tier=B Volkswagen Beetle [1964, 2019] seeds=[2003, 1988] records=966 errors=8
+23:59:57 chain-unlinked ignition-coils 6 numbers named by 022-905-715, no catalog link: 022-905-100-E, 022-905-100-S, 022-905-100-P, 022-905-100-T, 022-905-100-L, 022-905-100-H
+00:01:25 chain-unlinked bumper-front 1 numbers named by 3C0-807-217-R-GRU, no catalog link: 3C0-807-217-F-GRU
+00:01:25 chain-unlinked bumper-front 1 numbers named by 3C0-807-217-S-GRU, no catalog link: 3C0-807-217-G-GRU
+00:02:05 chain-unlinked bumper-rear 1 numbers named by 3C5-807-417-AK-GRU, no catalog link: 3C5-807-417-J-GRU
+00:02:05 chain-unlinked bumper-rear 1 numbers named by 3C9-807-417-E-GRU, no catalog link: 3C9-807-417-A-GRU
+00:03:01 chain-unlinked trunk-lid 4 numbers named by 3C5-827-025-H, no catalog link: 3C5-827-025-C, 3C5-827-025-B, 3C5-827-025-E, 3C5-827-025-G
+00:03:25 chain-unlinked liftgate 1 numbers named by 3C9-827-025-C, no catalog link: 3C9-827-025
+00:03:25 chain-unlinked liftgate 1 numbers named by 3C9-827-025-N, no catalog link: 3C9-827-025-K
+00:03:25 nav-fail Volkswagen Passat 2011: NavError: HTTP 404 for https://www.vwpartsgiant.com/2011-volkswagen-passat-parts
+00:03:25 seg done tier=B Volkswagen Passat [2006, 2011] seeds=[2008, 2011] records=986 errors=9
+00:03:49 chain-unlinked gauge-cluster 3 numbers named by 3B0-920-929-BX, no catalog link: 3B0-920-926-BX, 3B0-920-925-BX, 3B0-920-927-BX
+00:03:49 chain-unlinked gauge-cluster 1 numbers named by 3B7-920-949-AX, no catalog link: 3B7-920-946-EX
+00:04:13 chain-unlinked ignition-coils 1 numbers named by 078-905-104-A, no catalog link: 078-905-104
+00:05:01 chain-unlinked radiator 1 numbers named by 8D0-121-251-BB, no catalog link: 8D0-121-251-L
+00:05:01 chain-unlinked radiator 1 numbers named by 8D0-121-251-BC, no catalog link: 8D0-121-251-M
+00:06:45 chain-unlinked bumper-rear 1 numbers named by 3B5-807-417-H-GRU, no catalog link: 3B5-807-417-E-GRU
+00:07:09 chain-unlinked grille 1 numbers named by 3B0-853-651-L-3FZ, no catalog link: 3B0-853-651-H-3FZ
+00:07:25 chain-unlinked trunk-lid 2 numbers named by 3B5-827-025-AL, no catalog link: 3B5-827-025-AH, 3B5-827-025-R
+00:07:41 chain-unlinked liftgate 1 numbers named by 3B9-827-025-AR, no catalog link: 3B9-827-025-AM
+00:10:21 time budget reached records=1017
