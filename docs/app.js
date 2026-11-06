@@ -5648,10 +5648,21 @@ function pfMaybeSearch() {
   if (pfCat) pfRunSearch();
 }
 
-function pfTierChip(tier) {
-  return tier === 'verified'
-    ? '<span class="pf-tier pf-tier-verified" title="This part application was cross-checked against public part-number fitment data, and this donor\u2019s engine is confirmed. Still match the part number at the yard.">Verified fit</span>'
-    : '<span class="pf-tier pf-tier-likely" title="Same engine family / same generation, so it very likely fits — but this exact pairing wasn\u2019t individually verified. Verify the part number before driving out.">Likely fit &mdash; verify part #</span>';
+function pfTierChip(tier, src) {
+  // src: undefined = hand-curated data (unchanged wording); 'oem' = the
+  // carmaker's parts catalog; 'aftermarket' = a rebuilder's unit list.
+  if (tier === 'verified') {
+    return src === 'oem'
+      ? '<span class="pf-tier pf-tier-verified" title="Verified = the carmaker\u2019s parts catalog lists the same part number for both cars, for every trim and engine of these years. It is not a physical inspection; match the number at the yard.">Verified fit</span>'
+      : '<span class="pf-tier pf-tier-verified" title="This part application was cross-checked against public part-number fitment data, and this donor\u2019s engine is confirmed. Still match the part number at the yard.">Verified fit</span>';
+  }
+  if (src === 'oem') {
+    return '<span class="pf-tier pf-tier-likely" title="The carmaker\u2019s parts catalog lists one part number for both cars on some configurations, not all of them. Check the part number on the car before you pull it.">Likely fits &mdash; check the part number</span>';
+  }
+  if (src === 'aftermarket') {
+    return '<span class="pf-tier pf-tier-likely" title="An aftermarket rebuilder (not the carmaker) sells one unit listed for both cars. Match the engine, the amperage on the tag and the part number before you pull it.">Likely fits &mdash; check the part number</span>';
+  }
+  return '<span class="pf-tier pf-tier-likely" title="Same engine family / same generation, so it very likely fits — but this exact pairing wasn\u2019t individually verified. Verify the part number before driving out.">Likely fit &mdash; verify part #</span>';
 }
 
 /* 'Verified fits only' (owner request, 2026-10-23): a pure VIEW filter over
@@ -5867,6 +5878,128 @@ function pfRunBrowse(s) {
       : '');
 }
 
+/* ===== OEM CATALOG + AFTERMARKET LAYERS (CURATION_SPEC §7.4, §12) ========
+ * interchange.json carries Verified OEM groups (oemGroups, oemVg) and an
+ * index (oemLazy) of per-category files, docs/data/oem/<cat>.json, holding
+ * the Likely OEM catalog groups and the DB Electrical aftermarket unit groups
+ * (amGroups). A file is fetched the first time its category is searched.
+ * Honesty rules (fail closed):
+ *  - only a main-file oemGroups entry the validator shipped as "verified"
+ *    can render Verified; everything from a lazy file is Likely;
+ *  - aftermarket groups are never Verified, never merged into OEM or hand
+ *    groups, and always name their unit (and amperage);
+ *  - the old keys (platformGroups, engineFamilies) render exactly as before. */
+const PF_OEM_LIKELY_HEAD = 'Catalog part numbers shared on some configurations — verify the number';
+const PF_AM_HEAD = 'Aftermarket match: one replacement unit is listed for your car and these donors. That list is the rebuilder\u2019s, not the carmaker\u2019s — match the engine, the amperage on the tag and the part number.';
+let pfOemLazyData = {};   // cat id -> {oemGroups, amGroups} (loaded or failed-empty)
+let pfOemLazyWait = {};   // cat id -> in-flight Promise
+function pfOemLazyLoad(catId) {
+  const idx = interchangeData && interchangeData.oemLazy;
+  if (!idx || !idx.cats || !idx.cats[catId] || pfOemLazyData[catId]) return null;
+  if (!pfOemLazyWait[catId]) {
+    const path = /^data\/[a-z0-9/]+\/$/.test(idx.path || '') ? idx.path : 'data/oem/';
+    pfOemLazyWait[catId] = fetch(DATA_BASE + path + encodeURIComponent(catId) + '.json')
+      .then(r => (r.ok ? r.json() : null))
+      .catch(() => null)
+      .then(d => {
+        const ok = d && d.cat === catId;
+        // A missing or mismatched file is an empty layer: the hand data
+        // still renders, and we never retry in a loop.
+        pfOemLazyData[catId] = {
+          oemGroups: ok && Array.isArray(d.oemGroups) ? d.oemGroups : [],
+          amGroups: ok && Array.isArray(d.amGroups) ? d.amGroups : [],
+        };
+        delete pfOemLazyWait[catId];
+      });
+  }
+  return pfOemLazyWait[catId];
+}
+/* "Toyota catalog" -> "Toyota factory parts catalog #A, #B +N more" */
+function pfOemSourceText(label, pns) {
+  const brand = String(label || '').replace(/\s*catalog$/i, '') || 'Carmaker';
+  const list = [...new Set(pns || [])];
+  const shown = list.slice(0, 2).map(p => '#' + p).join(', ');
+  return `${brand} factory parts catalog${shown ? ' ' + shown : ''}${list.length > 2 ? ` +${list.length - 2} more` : ''}`;
+}
+/* "DB Electrical 400-24098 (110 A unit)" */
+function pfAmSourceText(g) {
+  const amps = g.amps ? ` (${g.amps} A unit)` : '';
+  const tr = g.trans === 'AT' ? ', automatic only' : g.trans === 'MT' ? ', manual only' : '';
+  return `aftermarket unit: ${g.label || 'aftermarket'} ${g.unit || ''}${amps}${tr}`.replace(/\s+/g, ' ').trim();
+}
+/* Mirrors aftermarket/groups_am.py parse_engine: liters, cylinders, diesel. */
+function pfAmParseEngine(s) {
+  const sl = String(s || '').toLowerCase();
+  const lm = sl.match(/(\d+\.\d+)\s*l\b/) || sl.match(/(\d+\.\d+)l/);
+  const cm = sl.match(/(\d+)[\s-]*cyl/) || sl.match(/\b[vlih](\d{1,2})\b/) || sl.match(/\bw(\d{1,2})\b/);
+  return { l: lm ? parseFloat(lm[1]) : null, cyl: cm ? parseInt(cm[1], 10) : null, diesel: sl.includes('diesel') };
+}
+/* Mirrors groups_am.engine_agrees: true / false when both engines are known,
+ * null when either side has no displacement. */
+function pfAmEngineAgrees(rowEng, carEng) {
+  const r = pfAmParseEngine(rowEng), c = pfAmParseEngine(carEng);
+  if (r.l == null || c.l == null) return null;
+  if (Math.abs(r.l - c.l) >= 0.05) return false;
+  if (r.cyl != null && c.cyl != null && r.cyl !== c.cyl) return false;
+  if (r.diesel !== c.diesel) return false;
+  return true;
+}
+/* Mirrors groups_am.car_trans. */
+function pfAmCarTrans(s) {
+  const sl = String(s || '').toLowerCase();
+  if (sl.includes('manual')) return 'MT';
+  if (sl.includes('automatic') || sl.includes('cvt') || sl.includes('auto')) return 'AT';
+  return null;
+}
+/* Aftermarket donors for the seeker (engine categories only). A group
+ * offers donors when one of its application rows covers the seeker's year,
+ * make and model; when the seeker picked an engine family, only rows whose
+ * engine agrees with it (or prints none) count. A donor joins on a row whose
+ * engine its decode does not contradict. Every row is Likely and names the
+ * unit. Cars already in `results` (hand data) keep their row; they gain the
+ * unit line. Returns the number of groups that matched the seeker. */
+function pfAmRows(s, groups, results, radius, fam) {
+  let hit = 0;
+  for (const g of groups || []) {
+    if (g.cat !== pfCat.id || g.src !== 'aftermarket' || !Array.isArray(g.apps)) continue;
+    let sRows = g.apps.filter(a => pfAppMatches(a, s.year, s.make, s.model));
+    if (fam) {
+      sRows = sRows.filter(a => !pfAmParseEngine(a[4]).l
+        || fam.liters.some(l => pfAmEngineAgrees(a[4], `${l}L ${fam.cyl || ''}-cyl`) !== false));
+    }
+    if (!sRows.length) continue;
+    hit++;
+    const srcLine = escapeHtml(pfAmSourceText(g));
+    const sEngines = [...new Set(sRows.map(a => a[4]).filter(Boolean))];
+    const yours = sEngines.length
+      ? `lists your ${s.year} ${s.model} with the ${sEngines.join(' or ')} — match your engine`
+      : `lists your ${s.year} ${s.model} without an engine — match your engine`;
+    for (const v of liveInventory) {
+      const vm = canonicalMake(v.make);
+      const rows = g.apps.filter(a => pfAppMatches(a, v.year, vm, v.model));
+      if (!rows.length) continue;
+      const ex = extrasFor(v);
+      const eng = ex ? ex[2] : '';
+      const verdicts = rows.map(a => (a[4] ? pfAmEngineAgrees(a[4], eng) : null));
+      if (!verdicts.some(x => x !== false)) continue;  // decode says another engine
+      const tr = pfAmCarTrans(ex ? ex[3] : '');
+      if (g.trans && tr && tr !== g.trans) continue;
+      const d = vehicleDistanceMi(v);
+      if (radius && (d == null || d > radius)) continue;
+      const prev = results.get(v.id);
+      if (prev) {
+        // hand data wins; a Likely hand row also names the unit
+        if (prev.tier !== 'verified' && !prev.warns.includes(srcLine)) prev.warns.push(srcLine);
+        continue;
+      }
+      const warns = [escapeHtml(g.note), escapeHtml(yours)];
+      if (!verdicts.includes(true)) warns.push('engine not confirmed — check under the hood before pulling');
+      if (g.trans && !tr) warns.push(`this unit is for ${g.trans === 'AT' ? 'automatic' : 'manual'}-transmission cars — check the transmission`);
+      results.set(v.id, { v, d, tier: 'likely', src: 'aftermarket', srcLine, warns });
+    }
+  }
+  return hit;
+}
 function pfRunSearch() {
   const out = document.getElementById('pf-results');
   const status = document.getElementById('pf-status');
@@ -5885,6 +6018,11 @@ function pfRunSearch() {
   // Part chosen but no (full) car: BROWSE mode — every nearby car carrying
   // the part, no fit claims. Fitment needs all three car fields.
   if (!s.year || !s.make || !s.model) { pfRunBrowse(s); return; }
+  // Catalog / aftermarket groups for this category live in their own file
+  // (§12 lazy files), fetched the first time the category is searched.
+  const lw = pfOemLazyLoad(pfCat.id);
+  if (lw) { status.textContent = 'Loading catalog matches…'; lw.then(() => pfRunSearch()); return; }
+  const lazy = pfOemLazyData[pfCat.id] || { oemGroups: [], amGroups: [] };
   track('part-first-search');
   pfSearchSignal(s);
   pfSaveState();
@@ -5906,7 +6044,16 @@ function pfRunSearch() {
     const fams = interchangeData.engineFamilies.filter(f =>
       partOk(f) && f.apps.some(a => pfAppMatches(a, s.year, s.make, s.model)));
     pfRenderEngineChips(fams);
-    if (!fams.length) {
+    // Aftermarket unit lists (alternator, starter) can answer a car no
+    // engine family covers (MINI, Land Rover...): Likely rows only.
+    const amOnly = fam0 => {
+      const n = pfAmRows(s, lazy.amGroups, results, radius, fam0);
+      if (n) groupNotes.push(PF_AM_HEAD);
+      return n;
+    };
+    if (!fams.length && amOnly(null)) {
+      famNote = '';
+    } else if (!fams.length) {
       // Performance trims with unique, unpublished engines get a real
       // explanation (and a pointer at the body-part search that DOES work)
       // instead of a bare "no data".
@@ -5924,11 +6071,12 @@ function pfRunSearch() {
       }
       out.innerHTML = `<div class="pf-empty">No interchange data yet for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())}. We only list fits we can stand behind — this car\u2019s engine family isn\u2019t in the verified table yet, so we\u2019d rather show nothing than guess.${pfAskHtml('car')}</div>`;
       return;
-    }
-    if (pfChosenFam === '__none__') {
+    } else if (pfChosenFam === '__none__' && amOnly(null)) {
+      famNote = '';
+    } else if (pfChosenFam === '__none__') {
       out.innerHTML = `<div class="pf-empty">We don\u2019t have interchange data for your engine yet — only the engines listed above are in the verified table. We\u2019d rather show nothing than guess a fit that wastes your drive.${pfAskHtml('engine')}</div>`;
       return;
-    }
+    } else {
     let fam = fams.length === 1 ? fams[0] : fams.find(f => f.id === pfChosenFam);
     if (!fam) {
       out.innerHTML = '<div class="pf-empty">Pick your engine above and we\u2019ll list the donors.</div>';
@@ -5938,6 +6086,10 @@ function pfRunSearch() {
     pfRenderEngineChips(fams);  // repaint active state
     const part = fam.parts[pfCat.id];
     famNote = `${fam.label} — ${part.note}`;
+    // §7.4 engine branch: hand vg groups plus the OEM catalog's (oemVg, main
+    // file only). An OEM vg pair also needs a VIN that confirms the year.
+    const oemVg = ((((interchangeData.oemVg || {})[fam.id]) || {})[pfCat.id]) || [];
+    const vgs = [...(part.vg || []).map(g => [g, false]), ...oemVg.map(g => [g, true])];
     const seekerApp = fam.apps.find(a => pfAppMatches(a, s.year, s.make, s.model));
     const seekerAmbig = seekerApp && seekerApp[5];
     if (seekerAmbig) groupNotes.push('Your car: ' + seekerAmbig);
@@ -5960,12 +6112,14 @@ function pfRunSearch() {
       // part-number application list (a verified group) — a family can span
       // several distinct units, so family membership alone is never enough.
       let tier = 'likely';
-      if (engineOk && !app[5] && !seekerAmbig && part.vg) {
-        for (const g of part.vg) {
+      let viaOem = false;
+      if (engineOk && !app[5] && !seekerAmbig && vgs.length) {
+        for (const [g, oem] of vgs) {
           if (g.some(sp => pfAppMatches(sp, s.year, s.make, s.model))
               && g.some(sp => pfAppMatches(sp, v.year, canonicalMake(v.make), v.model))) {
             tier = 'verified';
-            break;
+            viaOem = oem;
+            if (!oem) break;   // a hand group needs no VIN; prefer it
           }
         }
       }
@@ -5975,14 +6129,18 @@ function pfRunSearch() {
       // donors stay Likely and keep the check-under-the-hood warning.
       if (pfCat.id === 'engine-assembly') {
         tier = (verdict === true && !app[5] && !seekerAmbig) ? 'verified' : 'likely';
+        viaOem = false;
       }
       // P0.4: a Verified row also needs a donor that is the car its listing
       // says (VIN agrees with the listed year and the vPIC decode).
       if (tier === 'verified') {
-        const id = pfDonorIdentity(v);
+        const id = pfDonorIdentity(v, viaOem ? { oem: true } : undefined);
         if (!id.ok) { tier = 'likely'; warns.push(escapeHtml(id.warn)); }
       }
-      results.set(v.id, { v, d, tier, warns });
+      results.set(v.id, { v, d, tier, warns, ...(tier === 'verified' && viaOem ? { src: 'oem' } : {}) });
+    }
+    // Aftermarket donors this family's data didn't list (Likely, unit named).
+    if (pfAmRows(s, lazy.amGroups, results, radius, fam)) groupNotes.push(PF_AM_HEAD);
     }
   } else {
     // Chassis-side kinds (spec §3): body = platform groups + same-model
@@ -6041,6 +6199,51 @@ function pfRunSearch() {
           results.set(v.id, { v, d, tier, warns });
         }
       }
+      // OEM catalog groups (§7.4): Verified only from the main file's
+      // oemGroups with tier "verified" (and a VIN that confirms the donor's
+      // year); every lazy-file group is Likely. Likely groups share ONE
+      // header line per search; each row keeps its group's note and names
+      // the catalog and part numbers.
+      const oemList = [...(interchangeData.oemGroups || []).map(g => [g, false]),
+                       ...(lazy.oemGroups || []).map(g => [g, true])];
+      let oemLikelyHit = false;
+      const oemHits = new Map();   // vehicle id -> {label, pns, note}
+      for (const [g, fromLazy] of oemList) {
+        if (g.cat !== pfCat.id || g.src !== 'oem' || !Array.isArray(g.apps)) continue;
+        if (!g.apps.some(a => pfAppMatches(a, s.year, s.make, s.model))) continue;
+        const gTier = (!fromLazy && g.tier === 'verified') ? 'verified' : 'likely';
+        if (gTier === 'likely') oemLikelyHit = true;
+        else groupNotes.push(`${g.label}: ${g.note}`);
+        for (const v of liveInventory) {
+          if (!g.apps.some(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model))) continue;
+          const d = vehicleDistanceMi(v);
+          if (radius && (d == null || d > radius)) continue;
+          const prev = results.get(v.id);
+          if (prev && prev.tier === 'verified') continue; // verified wins
+          let tier = gTier;
+          const warns = [];
+          if (tier === 'verified') {
+            const id = pfDonorIdentity(v, { oem: true });  // P0.4, OEM rows need a VIN
+            if (!id.ok) { tier = 'likely'; warns.push(escapeHtml(id.warn)); }
+          }
+          const h = oemHits.get(v.id);
+          if (tier === 'likely' && prev && !h) {
+            // a hand Likely row stays; it gains the catalog line
+            oemHits.set(v.id, { label: g.label, pns: [...(g.pn || [])], note: '', keep: true });
+            continue;
+          }
+          if (tier === 'likely' && h) { h.pns.push(...(g.pn || [])); continue; }
+          oemHits.set(v.id, { label: g.label, pns: [...(g.pn || [])], note: g.note, keep: false });
+          results.set(v.id, { v, d, tier, src: 'oem', warns: [...warns, escapeHtml(g.note), rowWarn].filter(Boolean) });
+        }
+      }
+      for (const [vid, h] of oemHits) {
+        const r = results.get(vid);
+        if (!r) continue;
+        const line = escapeHtml(pfOemSourceText(h.label, h.pns));
+        if (h.keep) r.warns.push(line); else r.srcLine = line;
+      }
+      if (oemLikelyHit) groupNotes.push(PF_OEM_LIKELY_HEAD);
     }
     // Same model, same generation. Two honest sources, donor-row first:
     // (1) the donor's own researched part row carries a fits window;
@@ -6126,7 +6329,8 @@ function pfRunSearch() {
       : '';
     const dateLbl = pfDateLabel(v.dateAdded);
     return `<div class="pf-row-card ${r.tier === 'verified' ? 'pf-verified' : 'pf-likely'}">
-      <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${pfTierChip(r.tier)}</div>
+      <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${pfTierChip(r.tier, r.src)}</div>
+      ${r.srcLine ? `<div class="pf-note pf-src">Source: ${r.srcLine}</div>` : ''}
       <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
       <div class="pf-value">${ebayHtml}${priceHtml}${saveHtml}</div>
       ${r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}

@@ -8,10 +8,15 @@
  *   P0.3 platform-group rows carry the category rowWarn
  *   P0.4 pfDonorIdentity: vpicMismatch / VIN model-year char -> Likely;
  *        OEM rows also need a valid VIN
+ *   §7.4 Phase 1 display: OEM catalog groups (oemGroups, oemVg) and the
+ *        §12 lazy per-category files (oemGroups + aftermarket amGroups):
+ *        nothing Verified unless the main file ships it Verified, labels
+ *        name the source, old keys render exactly as before
  * Run: node backend/test/pf_guards_unit.mjs   (APP_JS=<path> to test another
  * copy of app.js, e.g. the previous commit's, to see the checks fail). */
 import fs from 'node:fs';
 import vm from 'node:vm';
+import { execFileSync } from 'node:child_process';
 
 const APP = process.env.APP_JS || new URL('../../docs/app.js', import.meta.url);
 const src = fs.readFileSync(APP, 'utf8');
@@ -42,6 +47,11 @@ const REAL_FNS = ['escapeHtml', 'normalizeVinForDedupe', 'pfSquash', 'pfSquashMo
   'pfParseFits', 'pfPartRow', 'pfTierChip', 'pfEngineQuoteVariants', 'pfRunSearch'];
 const NEW_FNS = ['pfVinModelYear', 'pfVinValid', 'pfDonorIdentity'];
 const NEW_CONSTS = ['PF_VIN_YEAR_CHARS', 'PF_VIN_TRANSLIT', 'PF_VIN_WEIGHTS'];
+// Phase 1 (§7.4 / §12). Absent in an older app.js: stubbed so the P0 checks
+// still run there; the Phase 1 checks then fail, as they should.
+const P1_FNS = ['pfOemLazyLoad', 'pfOemSourceText', 'pfAmSourceText', 'pfAmParseEngine',
+  'pfAmEngineAgrees', 'pfAmCarTrans', 'pfAmRows'];
+const P1_CONSTS = ['PF_OEM_LIKELY_HEAD', 'PF_AM_HEAD'];
 
 let code = '';
 for (const fn of REAL_FNS) {
@@ -61,6 +71,18 @@ for (const fn of NEW_FNS) {
   code += (s || `function ${fn}() { return ${fn === 'pfDonorIdentity' ? "{ ok: true, warn: '' }" : 'null'}; }`) + '\n';
 }
 
+for (const c of P1_CONSTS) {
+  const s = extractConst(c);
+  check(`app.js has const ${c}`, !!s);
+  code += (s || `const ${c} = '';`) + '\n';
+}
+for (const fn of P1_FNS) {
+  const s = extractFn(fn);
+  check(`app.js has top-level function ${fn}`, !!s);
+  if (s) new vm.Script(s);
+  code += (s || `function ${fn}() { return ${fn === 'pfAmRows' ? 0 : 'null'}; }`) + '\n';
+}
+
 /* ---- stubs for everything else pfRunSearch touches ---------------------- */
 const prelude = `
 var __els = {};
@@ -73,6 +95,14 @@ function pfSeeker() { return __seeker; }
 var activeZipCoords = { lat: 40, lng: -111 };
 var interchangeData = null, liveInventory = [], pfCat = null, pfChosenFam = null;
 var _pfGenMap = null, pfVerifiedOnly = false, __extras = {};
+var pfOemLazyData = {}, pfOemLazyWait = {}, DATA_BASE = '', __files = {}, __fetched = [];
+function fetch(url) {
+  __fetched.push(url);
+  const f = __files[url];
+  if (f === 'reject') return Promise.reject(new Error('offline'));
+  return Promise.resolve(f ? { ok: true, json: () => Promise.resolve(JSON.parse(JSON.stringify(f))) }
+                           : { ok: false, json: () => Promise.resolve(null) });
+}
 function loadInterchange() { return Promise.resolve(interchangeData); }
 function ensurePricingFor() { return null; }
 function getYardsView() { return { inRange: [] }; }
@@ -118,17 +148,25 @@ function run(data, inventory, seeker, pcat, extras = {}) {
   ctx._pfGenMap = null;
   ctx.__extras = extras;
   ctx.__els = {};
+  ctx.pfOemLazyData = lazyPreset ? { ...lazyPreset } : {};
+  ctx.pfOemLazyWait = {};
   ctx.pfRunSearch();
-  const html = ctx.__els['pf-results'] ? ctx.__els['pf-results'].innerHTML : '';
+  return parse(ctx);
+}
+let lazyPreset = null;   // {cat: {oemGroups, amGroups}} set before run() = file already loaded
+function parse(c) {
+  const html = c.__els['pf-results'] ? c.__els['pf-results'].innerHTML : '';
   const rows = {};
   for (const chunk of html.split('<div class="pf-row-card ').slice(1)) {
     const tier = chunk.startsWith('pf-verified') ? 'verified' : chunk.startsWith('pf-likely') ? 'likely' : '?';
     const name = (chunk.match(/<span class="pf-car-name">([^<]*)<\/span>/) || [])[1] || '';
     const warn = (chunk.match(/<div class="pf-warn">([\s\S]*?)<\/div>/) || [])[1] || '';
-    rows[name] = { tier, warn };
+    const chip = (chunk.match(/<span class="pf-tier [^"]*" title="([^"]*)">([^<]*(?:&mdash;[^<]*)?)<\/span>/) || []);
+    const src = (chunk.match(/<div class="pf-note pf-src">([\s\S]*?)<\/div>/) || [])[1] || '';
+    rows[name] = { tier, warn, chip: chip[2] || '', tip: chip[1] || '', src };
   }
   const head = html.split('<div class="pf-row-card ')[0];
-  return { html, head, rows };
+  return { html, head, rows, status: c.__els['pf-status'] ? c.__els['pf-status'].textContent : '' };
 }
 
 const base = (groups, extra = {}) => ({ categories: [], engineFamilies: [], platformGroups: groups,
@@ -369,6 +407,197 @@ function browse(data, inventory, pcat, famId, extras = {}) {
     check(`fit search ${pc.id}: hint reads "${want}"`, h.includes(want) && !h.includes(notWant),
       (h.match(/<div class="pf-hint">([\s\S]*?)<\/div>/) || [])[1]);
   }
+}
+
+/* ==== §7.4 Phase 1 display: OEM catalog groups and §12 lazy files ======== */
+const LIKELY_OEM_CHIP = 'Likely fits &mdash; check the part number';
+const noVerifiedText = html => !/Verified fit|>Verified</.test(html);
+const oemG = (over = {}) => ({ id: 'oem:toyota:side-mirrors:L:aa', ns: 'toyota', cat: 'side-mirrors', tier: 'likely',
+  label: 'Toyota catalog', note: 'Toyota catalog lists #87910-06470 for both — fits some configurations; verify the number on the part',
+  apps: [['Toyota', 'Camry', 2007, 2011], ['Toyota', 'Avalon', 2007, 2011]], pn: ['87910-06470'], src: 'oem', ...over });
+const lazyIdx = cats => ({ oemLazy: { schema: 1, path: 'data/oem/', cats } });
+{
+  // (1) lazy file fetched on first search of its category, then rendered
+  const g2 = oemG({ id: 'oem:toyota:side-mirrors:L:bb', pn: ['87940-06470', '87940-06480', '87940-06490'],
+    note: 'Toyota catalog lists #87940-06470 for both — fits some configurations; verify the number on the part' });
+  const file = { schemaVersion: 1, cat: 'side-mirrors', oemGroups: [oemG(), g2], amGroups: [] };
+  ctx.__files = { 'data/oem/side-mirrors.json': file };
+  ctx.__fetched = [];
+  lazyPreset = null;
+  const data = base([], lazyIdx({ 'side-mirrors': { oem: 2, am: 0 } }));
+  let r = run(data, inv1, SEEK, cat());
+  check('lazy: first search shows "Loading catalog matches…" and fetches data/oem/side-mirrors.json',
+    r.status === 'Loading catalog matches…' && ctx.__fetched.join() === 'data/oem/side-mirrors.json', r.status + ' ' + ctx.__fetched);
+  await new Promise(res => setTimeout(res, 0));
+  r = parse(ctx);
+  const row = r.rows['2010 Toyota Avalon'];
+  check('lazy: after the file arrives the search re-runs and lists the catalog donor', !!row, r.html.slice(0, 300));
+  check('OEM Likely row: Likely tier, chip "Likely fits — check the part number"',
+    row && row.tier === 'likely' && row.chip === LIKELY_OEM_CHIP, JSON.stringify(row));
+  check('OEM Likely row: source names the factory catalog and the part numbers (first two, +N more)',
+    row && row.src === 'Source: Toyota factory parts catalog #87910-06470, #87940-06470 +2 more', JSON.stringify(row));
+  check('OEM Likely row: keeps its group note and the category rowWarn',
+    row && row.warn.includes('fits some configurations; verify the number on the part') && row.warn.includes('paint'), JSON.stringify(row));
+  check('OEM Likely: ONE collapsed header line for the search, group notes not repeated in the header',
+    r.head.split('Catalog part numbers shared on some configurations — verify the number').length === 2
+    && !r.head.includes('Toyota catalog lists'), r.head);
+  check('OEM Likely: nothing on the page says Verified', noVerifiedText(r.html), r.html);
+  check('OEM Likely: the chip tooltip says carmaker catalog, some configurations',
+    row && row.tip.includes('carmaker’s parts catalog') && row.tip.includes('some configurations'), row && row.tip);
+  // second search: no refetch
+  ctx.__fetched = [];
+  ctx.__els = {};
+  ctx.pfRunSearch();
+  check('lazy: a loaded category is not fetched again', ctx.__fetched.length === 0 && !!parse(ctx).rows['2010 Toyota Avalon']);
+}
+{
+  // (2) a lazy-file group that claims "verified" still renders Likely (fail closed)
+  lazyPreset = { 'side-mirrors': { oemGroups: [oemG({ tier: 'verified' })], amGroups: [] } };
+  const r2 = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })),
+    [car(1, 2010, 'Toyota', 'Avalon', { vin: VIN_2012 })], SEEK, cat());
+  check('lazy: "verified" in a lazy file -> Likely row, no Verified text',
+    r2.rows['2010 Toyota Avalon']?.tier === 'likely' && noVerifiedText(r2.html), JSON.stringify(r2.rows));
+  lazyPreset = null;
+}
+{
+  // (3) main-file Verified OEM group: Verified only with a VIN that confirms the year
+  const g = oemG({ id: 'oem:toyota:side-mirrors:V:1', tier: 'verified',
+    note: 'Toyota catalog lists #87910-06470 for every trim of both', apps: [['Toyota', 'Camry', 2007, 2012], ['Toyota', 'Avalon', 2007, 2012]] });
+  const inv = [car(1, 2012, 'Toyota', 'Avalon', { vin: VIN_2012 }), car(2, 2011, 'Toyota', 'Avalon')];
+  const r = run(base([], { oemGroups: [g] }), inv, SEEK, cat());
+  const v = r.rows['2012 Toyota Avalon'], n = r.rows['2011 Toyota Avalon'];
+  check('main-file OEM Verified + valid agreeing VIN -> Verified with the OEM tooltip',
+    v?.tier === 'verified' && v.tip.startsWith('Verified = the carmaker’s parts catalog lists the same part number for both cars'), JSON.stringify(v));
+  check('main-file OEM Verified, donor with no VIN -> Likely, "no VIN to confirm the model year"',
+    n?.tier === 'likely' && n.warn.includes('no VIN to confirm the model year'), JSON.stringify(n));
+  check('main-file OEM Verified row names the catalog part number',
+    v?.src === 'Source: Toyota factory parts catalog #87910-06470', JSON.stringify(v));
+}
+{
+  // (4) hand data wins: a Verified platform row stays; a hand Likely row keeps its tier and gains the catalog line
+  lazyPreset = { 'side-mirrors': { oemGroups: [oemG()], amGroups: [] } };
+  const r = run(base([grp('verified')], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv1, SEEK, cat());
+  const row = r.rows['2010 Toyota Avalon'];
+  check('hand Verified platform row wins over an OEM Likely group (tier, chip, warnings unchanged)',
+    row?.tier === 'verified' && row.chip === 'Verified fit' && !row.warn.includes('factory parts catalog') && !row.src, JSON.stringify(row));
+  const r2 = run(base([grp('likely')], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv1, SEEK, cat());
+  const row2 = r2.rows['2010 Toyota Avalon'];
+  check('hand Likely row keeps its chip and gains the catalog line',
+    row2?.tier === 'likely' && row2.chip === 'Likely fit &mdash; verify part #' && row2.warn.includes('Toyota factory parts catalog #87910-06470'),
+    JSON.stringify(row2));
+  lazyPreset = null;
+}
+{
+  // (5) V9 view: with no OEM data, or OEM data for OTHER categories only, the output is byte-identical
+  const inv = [car(1, 2010, 'Toyota', 'Avalon'), car(2, 2008, 'Toyota', 'Camry')];
+  const plain = run(base([grp('verified')]), inv, SEEK, cat()).html;
+  lazyPreset = { 'headlights': { oemGroups: [oemG({ cat: 'headlights' })], amGroups: [] } };
+  const other = run(base([grp('verified')], { oemGroups: [], oemVg: {}, oemStatus: { toyota: 'ok' },
+    ...lazyIdx({ headlights: { oem: 1, am: 0 } }) }), inv, SEEK, cat()).html;
+  check('old-keys view unchanged: OEM data for another category leaves this search byte-identical', plain === other);
+  lazyPreset = null;
+  // the lazy file failing to load: hand data renders, no retry loop
+  ctx.__files = { 'data/oem/side-mirrors.json': 'reject' };
+  ctx.__fetched = [];
+  let r = run(base([grp('verified')], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, SEEK, cat());
+  await new Promise(res => setTimeout(res, 0));
+  r = parse(ctx);
+  check('lazy file fails to load: the hand rows render, fetched once', r.html === plain && ctx.__fetched.length === 1,
+    ctx.__fetched.join());
+  // a file for the wrong category is ignored
+  ctx.__files = { 'data/oem/side-mirrors.json': { cat: 'headlights', oemGroups: [oemG()], amGroups: [] } };
+  run(base([grp('verified')], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, SEEK, cat());
+  await new Promise(res => setTimeout(res, 0));
+  check('lazy file whose cat differs from the request is ignored', parse(ctx).html === plain);
+}
+{
+  // (6) aftermarket unit groups (engine categories): MINI with no engine family
+  const ecat = { id: 'alternator', label: 'Alternator', kind: 'engine', tokens: ['alternator'], priceTokens: ['alternator'] };
+  const amg = (over = {}) => ({ id: 'am:dbe:alternator:400-24098', cat: 'alternator', tier: 'likely', src: 'aftermarket',
+    label: 'DB Electrical', unit: '400-24098', amps: 110,
+    note: 'DB Electrical 400-24098 (110A unit) lists these vehicles; aftermarket application data, not the carmaker\'s catalog. Match the engine and the amperage on the tag.',
+    apps: [['MINI', 'Cooper', 2002, 2008, '1.6L 4-cyl']], ...over });
+  const inv = [car(1, 2005, 'MINI', 'Cooper'), car(2, 2006, 'MINI', 'Cooper'), car(3, 2007, 'MINI', 'Cooper'),
+    car(4, 2004, 'MINI', 'Cooper'), car(5, 2010, 'MINI', 'Cooper')];
+  const ex = { 1: ['', '', '1.6L 4-cyl'], 2: ['', '', '2.0L 4-cyl'], 4: ['', '', '1.6L 4-cyl', 'Manual'], 5: ['', '', '1.6L 4-cyl'] };
+  lazyPreset = { alternator: { oemGroups: [], amGroups: [amg(), amg({ id: 'am:dbe:starter:x', cat: 'starter', unit: '410-1', apps: [['MINI', 'Cooper', 2002, 2010, '1.6L']] })] } };
+  const seek = { year: 2003, make: 'MINI', model: 'Cooper' };
+  const r = run(base([], lazyIdx({ alternator: { oem: 0, am: 1 } })), inv, seek, ecat, ex);
+  const ok = r.rows['2005 MINI Cooper'];
+  check('aftermarket: MINI donor with an agreeing engine is listed Likely with the Likely chip',
+    ok?.tier === 'likely' && ok.chip === LIKELY_OEM_CHIP, JSON.stringify(r.rows) + r.html.slice(0, 300));
+  check('aftermarket: source names the aftermarket unit and its amperage',
+    ok?.src === 'Source: aftermarket unit: DB Electrical 400-24098 (110 A unit)', ok && ok.src);
+  check('aftermarket: row keeps the unit note and says which engine of yours the unit lists',
+    ok?.warn.includes('aftermarket application data, not the carmaker&#39;s catalog') || ok?.warn.includes('not the carmaker'), ok && ok.warn);
+  check('aftermarket: row says the unit lists your engine (1.6L 4-cyl)', ok?.warn.includes('with the 1.6L 4-cyl — match your engine'), ok && ok.warn);
+  check('aftermarket: donor whose decode says another engine (2.0L) is left out', !r.rows['2006 MINI Cooper'], JSON.stringify(r.rows['2006 MINI Cooper']));
+  check('aftermarket: undecoded donor kept with "engine not confirmed"',
+    r.rows['2007 MINI Cooper']?.warn.includes('engine not confirmed'), JSON.stringify(r.rows['2007 MINI Cooper']));
+  check('aftermarket: donor outside the unit\'s years is left out', !r.rows['2010 MINI Cooper']);
+  check('aftermarket: header explains the rebuilder\'s list, not the carmaker\'s',
+    r.head.includes('Aftermarket match:') && r.head.includes('not the carmaker'), r.head);
+  check('aftermarket: nothing on the page says Verified', noVerifiedText(r.html), r.html);
+  check('aftermarket: chip tooltip says aftermarket rebuilder, not the carmaker',
+    ok?.tip.includes('aftermarket rebuilder (not the carmaker)'), ok && ok.tip);
+  check('aftermarket: a starter unit does not answer an alternator search', !r.html.includes('410-1'));
+  // trans gate and a "verified" claim in data
+  lazyPreset = { alternator: { oemGroups: [], amGroups: [amg({ trans: 'AT', tier: 'verified' })] } };
+  const r2 = run(base([], lazyIdx({ alternator: { oem: 0, am: 1 } })), inv, seek, ecat, ex);
+  check('aftermarket: an automatic-only unit leaves out a decoded manual donor', !r2.rows['2004 MINI Cooper'], JSON.stringify(r2.rows['2004 MINI Cooper']));
+  check('aftermarket: unknown transmission kept with a check-the-transmission warning',
+    r2.rows['2005 MINI Cooper']?.warn.includes('automatic-transmission cars'), JSON.stringify(r2.rows['2005 MINI Cooper']));
+  check('aftermarket: an amGroup claiming "verified" still renders Likely',
+    Object.values(r2.rows).length > 0 && Object.values(r2.rows).every(x => x.tier === 'likely') && noVerifiedText(r2.html), JSON.stringify(r2.rows));
+  // (7) a car with neither: the honest empty state stands
+  lazyPreset = { alternator: { oemGroups: [], amGroups: [amg()] } };
+  const r3 = run(base([], lazyIdx({ alternator: { oem: 0, am: 1 } })), inv, { year: 2003, make: 'Geo', model: 'Metro' }, ecat, ex);
+  check('neither layer covers the car: "No interchange data yet" empty state, no rows',
+    r3.html.includes('No interchange data yet') && Object.keys(r3.rows).length === 0, r3.html);
+  // (8) hand engine family present: family rows win, the unit adds donors the family does not list
+  const fam = { id: 'mini-w10', label: 'MINI W10 1.6', liters: [1.6], cyl: 4, apps: [['MINI', 'Cooper', 2002, 2006, 0, '']],
+    parts: { alternator: { note: 'unit note', vg: [[['MINI', 'Cooper', 2002, 2006]]] } } };
+  lazyPreset = { alternator: { oemGroups: [], amGroups: [amg()] } };
+  const r4 = run(base([], { engineFamilies: [fam], ...lazyIdx({ alternator: { oem: 0, am: 1 } }) }), inv, seek, ecat, ex);
+  check('with a hand family: its Verified row stays Verified and gets no aftermarket line',
+    r4.rows['2005 MINI Cooper']?.tier === 'verified' && !r4.rows['2005 MINI Cooper'].warn.includes('aftermarket unit'), JSON.stringify(r4.rows['2005 MINI Cooper']));
+  check('with a hand family: the unit adds the 2007 donor the family does not list, Likely, unit named',
+    r4.rows['2007 MINI Cooper']?.tier === 'likely' && r4.rows['2007 MINI Cooper'].src.includes('DB Electrical 400-24098'), JSON.stringify(r4.rows['2007 MINI Cooper']));
+  lazyPreset = null;
+}
+{
+  // (9) oemVg (engine branch, main file): Verified needs a VIN that confirms the year
+  const fam = { id: 'fam-o', label: 'Test 2.4 I4', liters: [2.4], cyl: 4, apps: [['Toyota', 'Camry', 2004, 2013, 0, '']],
+    parts: { alternator: { note: 'unit note' } } };
+  const ecat = { id: 'alternator', label: 'Alternator', kind: 'engine', tokens: ['alternator'], priceTokens: ['alternator'] };
+  const inv = [car(1, 2013, 'Toyota', 'Camry', { vin: VIN_2013 }), car(2, 2012, 'Toyota', 'Camry')];
+  const extras = { 1: ['', '', '2.4L 4-cyl'], 2: ['', '', '2.4L 4-cyl'] };
+  const r = run(base([], { engineFamilies: [fam], oemVg: { 'fam-o': { alternator: [[['Toyota', 'Camry', 2004, 2013]]] } } }),
+    inv, { year: 2010, make: 'Toyota', model: 'Camry' }, ecat, extras);
+  check('oemVg: donor with a valid agreeing VIN is Verified with the OEM tooltip',
+    r.rows['2013 Toyota Camry']?.tier === 'verified' && r.rows['2013 Toyota Camry'].tip.startsWith('Verified = the carmaker'), JSON.stringify(r.rows));
+  check('oemVg: donor with no VIN -> Likely, "no VIN to confirm the model year"',
+    r.rows['2012 Toyota Camry']?.tier === 'likely' && r.rows['2012 Toyota Camry'].warn.includes('no VIN to confirm'), JSON.stringify(r.rows['2012 Toyota Camry']));
+  const r0 = run(base([], { engineFamilies: [fam] }), inv, { year: 2010, make: 'Toyota', model: 'Camry' }, ecat, extras);
+  check('no vg at all: the same donors stay Likely', Object.values(r0.rows).every(x => x.tier === 'likely'));
+}
+{
+  // (10) JS engine mirror vs the Python original (aftermarket/groups_am.py)
+  const cases = [['1.6L', '1.6L 4-cyl'], ['1.6L 4-cyl', '2.0L 4-cyl'], ['2.0L 4-cyl Diesel', '2.0L 4-cyl'],
+    ['', '1.6L'], ['3.5L V6', '3.5L 6-cyl'], ['3.5L V6', '3.5L 8-cyl'], ['5.7L', ''], ['1.6l 4-cyl', '1.64L'],
+    ['2.2L 4-cyl diesel', '2.2L diesel 4-cyl'], ['4.6L W8', '4.6L 8-cyl'], ['1.8L', '1.85L'], ['1.8L', '1.84L']];
+  const py = JSON.parse(execFileSync('python3', ['-I', '-c', `
+import json, sys
+sys.path.insert(0, ${JSON.stringify(new URL('../../scraper/oem_fitment/aftermarket', import.meta.url).pathname)})
+import groups_am as G
+cases = json.loads(sys.argv[1])
+print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b in cases]
+                 + [G.car_trans(s) for s in ["Manual", "Automatic", "CVT", "6-speed auto", ""]]))
+`, JSON.stringify(cases)]).toString());
+  const js = cases.map(([a, b]) => ctx.pfAmEngineAgrees(a, b))
+    .concat(['Manual', 'Automatic', 'CVT', '6-speed auto', ''].map(x => ctx.pfAmCarTrans(x)));
+  check('pfAmEngineAgrees / pfAmCarTrans agree with groups_am.py on every case', JSON.stringify(js) === JSON.stringify(py),
+    JSON.stringify(js) + ' vs ' + JSON.stringify(py));
 }
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
