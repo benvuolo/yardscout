@@ -1355,3 +1355,90 @@ oemVg). Old native clients ignore oemLazy/amStatus.
   - The parts session's row-name workaround already shows the ADAS caveat.
   - It belongs to the vehicle-card / parts workstream; noted there for
     whoever next ships app.js.
+
+## Hub follow-ups on the aftermarket layer, 2026-11-06 ~07:50 UTC (session_016ZzJfLB9KQDQ64RoN6T9sX)
+
+**1. Year span vs Fits text (c900d09).** `row_outside_fits_years`: where the
+unit's own Fits text gives an explicit year range ("2006-10", "2004-07",
+"2007-ON") on a line naming the row's make AND model, rows outside every such
+range are dropped and counted. Models the Fits text does not name keep their
+rows; for 400-24253, Countryman 2011-16 stays. Dropped: **2,595 rows**
+(sample in the report). Tests: 30/30. Coverage now (lot cars with a Likely
+donor, either / engine-confirmed): MINI 846/528 of 1,011 (unchanged);
+Land Rover 674/600; Suzuki 577/461; Jaguar 332/279; Isuzu 417/326;
+Saab 53/49; Fiat 313/245; Plymouth 137/108; Porsche 119/96; Smart 62/49;
+Geo 0. All makes: 295,112 of 334,293.
+
+**2. Agreement audit (`aftermarket/audit_am.py`,
+`groups/_report/aftermarket-audit.json`).** Basis change, stated plainly:
+on current oem-raw curate.py emits **no alternator/starter Likely or vg
+group in any namespace**. Likely is body-only (§5.16), and vg needs closed
+cells, which no namespace has. So the OEM side is each catalog's raw
+fitment rows: lot key (make, model, year, engine size) → OEM numbers.
+Classes merge replaces / replaced-by / reman links; rows with no single
+engine size are skipped. For lot-key pairs that share a DB unit, with both
+keys in one namespace: agree = OEM classes intersect, contradict =
+disjoint. Reverse check: OEM-joined pairs that DB never puts in one unit.
+To run curate.py at all I added one fail-closed model_map exclusion,
+`ford|Ford|F150 Raptor` (no claims; test_model_map 33/33). No groups/*.json
+committed.
+
+| ns/cat | keys in both | DB pairs | contradict | rate | lot-weighted | same-size pairs | same-size rate | OEM pairs | DB splits | split rate |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| ford/alternator | 363 | 3204 | 1441 | 0.4498 | 0.3962 | 2313 | 0.3065 | 1930 | 167 | 0.0865 |
+| ford/starter | 254 | 2254 | 662 | 0.2937 | 0.3239 | 1802 | 0.1587 | 1830 | 238 | 0.1301 |
+| gm/alternator | 545 | 3775 | 879 | 0.2328 | 0.0438 | 3359 | 0.1801 | 2981 | 85 | 0.0285 |
+| gm/starter | 644 | 13028 | 5164 | 0.3964 | 0.1995 | 11390 | 0.3848 | 8381 | 517 | 0.0617 |
+| hmg/alternator | 91 | 300 | 28 | 0.0933 | 0.1337 | 268 | 0.1045 | 338 | 66 | 0.1953 |
+| hmg/starter | 127 | 679 | 186 | 0.2739 | 0.3348 | 571 | 0.2452 | 539 | 46 | 0.0853 |
+| mazda/alternator | 58 | 136 | 44 | 0.3235 | 0.0942 | 89 | 0.1011 | 92 | 0 | 0.0 |
+| mazda/starter | 82 | 424 | 121 | 0.2854 | 0.1875 | 309 | 0.0194 | 320 | 17 | 0.0531 |
+| mb/alternator | 160 | 1049 | 326 | 0.3108 | 0.1784 | 587 | 0.2504 | 1092 | 369 | 0.3379 |
+| mb/starter | 156 | 2100 | 674 | 0.321 | 0.1489 | 929 | 0.0732 | 2011 | 585 | 0.2909 |
+| mitsubishi/alternator | 2 | 1 | 0 | 0.0 | 0.0 | 1 | 0.0 | 1 | 0 | 0.0 |
+| mitsubishi/starter | 38 | 248 | 0 | 0.0 | 0.0 | 248 | 0.0 | 252 | 4 | 0.0159 |
+| mopar/alternator | 104 | 843 | 37 | 0.0439 | 0.0923 | 817 | 0.0355 | 839 | 33 | 0.0393 |
+| mopar/starter | 271 | 2721 | 108 | 0.0397 | 0.0221 | 2558 | 0.0109 | 2985 | 372 | 0.1246 |
+| nissan/alternator | 285 | 1924 | 547 | 0.2843 | 0.3037 | 1457 | 0.2203 | 1596 | 219 | 0.1372 |
+| nissan/starter | 267 | 1601 | 116 | 0.0725 | 0.0068 | 1556 | 0.0617 | 1821 | 336 | 0.1845 |
+| subaru/alternator | 67 | 574 | 223 | 0.3885 | 0.4243 | 574 | 0.3885 | 353 | 2 | 0.0057 |
+| subaru/starter | 77 | 1100 | 800 | 0.7273 | 0.6196 | 750 | 0.624 | 310 | 10 | 0.0323 |
+| toyota/alternator | 133 | 585 | 189 | 0.3231 | 0.2282 | 552 | 0.3098 | 416 | 20 | 0.0481 |
+| toyota/starter | 181 | 1317 | 445 | 0.3379 | 0.152 | 962 | 0.1216 | 968 | 96 | 0.0992 |
+| vag/alternator | 155 | 2090 | 544 | 0.2603 | 0.1496 | 1870 | 0.1733 | 1924 | 378 | 0.1965 |
+| vag/starter | 197 | 3098 | 732 | 0.2363 | 0.1829 | 2935 | 0.2034 | 2594 | 228 | 0.0879 |
+| volvo/alternator | 32 | 131 | 10 | 0.0763 | 0.0048 | 121 | 0.0 | 125 | 4 | 0.032 |
+| volvo/starter | 18 | 66 | 10 | 0.1515 | 0.0217 | 56 | 0.1607 | 66 | 10 | 0.1515 |
+
+(rate = contradicting / DB-shared pairs; same-size = pairs restricted to equal engine size.)
+
+Worst examples (DB-shared, OEM-disjoint):
+- gm/starter 410-12175: 2,671 pairs, e.g. 2005 Allure 3.8 (89017715) vs
+  1998 LeSabre 3.8 (10465421).
+- ford/alternator 400-14020: 1997 E-150 4.2 vs 1998 Escort 2.0. Also
+  400-16034: Excursion 7.3 vs 6.0 diesel.
+- subaru/starter 410-48231: 2003 Baja 2.5 (23300AA40A) vs 2003 Forester 2.5
+  (23300AA450/460).
+- toyota/alternator 400-52054: ES300 1997 (27060-20070) vs 2001
+  (27060-20120/20160).
+
+Reading:
+- Some contradictions are probably catalog numbers that do interchange but
+  whose link the crawl didn't record. I cannot separate those here.
+- Even so, DB "multi-fit" units clearly span vehicles whose OEM parts
+  differ, sometimes different engines. Same-size pairing cuts the rate a
+  lot for Mazda starter (2%), MB starter (7%) and Ford starter (16%). It
+  does little for GM starter (38%), Subaru (39-62%) and Toyota/Ford
+  alternator (31%).
+- Low everywhere: Mopar (1-4%), Mitsubishi (0%), Nissan starter (6%),
+  Volvo alternator (0%).
+- The gap makes (MINI, Land Rover, Jaguar, Suzuki, Isuzu, Saab...) cannot
+  be audited this way: no OEM catalog.
+
+Recommendation for the owner review:
+- Do not ship DB unit pairs as-is.
+- If shipped at all: same engine size required for every pair, label
+  "aftermarket unit, check the OEM number on the tag", and only after a
+  hand audit (§11.4) of a sample of pairs from the gap makes.
+- Where an OEM catalog exists, the OEM numbers should override a DB pairing
+  they contradict.
