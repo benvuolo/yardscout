@@ -75,6 +75,15 @@ CREATE TABLE IF NOT EXISTS ario_vins (
     vin          TEXT NOT NULL,
     fetched_at   TEXT NOT NULL
 );
+
+-- Pull-N-Save photo checks: their image URL exists for every car and serves a
+-- "no image" placeholder when there is no photo, so each car's URL is checked
+-- once (headers only) and the result kept here: 'photo' or 'none'.
+CREATE TABLE IF NOT EXISTS pns_photo_checks (
+    photo_key    TEXT PRIMARY KEY,   -- "STK134723-1" (the URL's StockId)
+    status       TEXT NOT NULL,      -- 'photo' | 'none'
+    checked_at   TEXT NOT NULL
+);
 """
 
 
@@ -496,3 +505,32 @@ def summary() -> str:
     return (f"{n_all} vehicles tracked ({n_active} currently in yard, "
             f"{n_all - n_active} departed) across {n_scans} scan(s); "
             f"last scan {last[0] if last else 'never'}")
+
+
+def load_pns_photo_checks() -> dict:
+    """{photo_key: (status, checked_at)} for every Pull-N-Save photo check."""
+    conn = _connect()
+    rows = conn.execute("SELECT photo_key, status, checked_at FROM pns_photo_checks").fetchall()
+    conn.close()
+    return {k: (st, at) for k, st, at in rows}
+
+
+def store_pns_photo_checks(results: dict, checked_at: str) -> int:
+    """Upsert {photo_key: 'photo'|'none'}. A 'photo' is never downgraded."""
+    if not results:
+        return 0
+    conn = _connect()
+    cur = conn.cursor()
+    n = 0
+    for key, status in results.items():
+        if not key or status not in ("photo", "none"):
+            continue
+        cur.execute(
+            "INSERT INTO pns_photo_checks (photo_key, status, checked_at) VALUES (?,?,?) "
+            "ON CONFLICT(photo_key) DO UPDATE SET status = excluded.status, "
+            "checked_at = excluded.checked_at WHERE pns_photo_checks.status != 'photo'",
+            (key, status, checked_at))
+        n += cur.rowcount
+    conn.commit()
+    conn.close()
+    return n
