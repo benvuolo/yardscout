@@ -245,6 +245,9 @@ def write_inventory_shards(payload: dict, extras: dict | None, data_dir: Path,
         # Enabled photo sources (scraper/photo_sources.json): the app renders
         # a photo only through one of these — the remote kill switch.
         "photoSources": photo_sources or {},
+        # make -> model strings never offered in a model picker (they stay
+        # searchable); see output_json's noPickModels.
+        "noPickModels": payload.get("noPickModels") or {},
     })
     return {"shards": shard_count, "vehicles": len(vehicles),
             "minShard": min(len(r) for r in rows_by), "maxShard": max(len(r) for r in rows_by),

@@ -480,6 +480,98 @@ for wmake, wmodel in OLD_WATCHES:
           _js_matches(SRV, wmodel, cmake, cmodel), f"server mirror lacks {_sq(wmodel)} -> {cmodel}")
     # and the new-spelling watch keeps matching a yard that still sends the old spelling
     check(f"app: watch {cmodel!r} matches a raw-feed car {wmodel!r}", _js_matches(APP, cmodel, cmake, wmodel))
+# ---- cross-family make in the model (owner report 2026-11-06) ---------------
+# Pull-N-Save / Nevada Pic-A-Part rows: VINs and decodes are the real cached
+# NHTSA answers for these listed cars (docs/data/vin_decodes.json.gz).
+print("cross-family make in the model:")
+FM = js.resolve_foreign_make_model
+def _dec(make, model, series="", drive=""):
+    return {"make": make, "model": model, "series": series, "driveType": drive}
+KNOWN = {"acura": {"rl": "RL", "tl": "TL"}, "bmw": {"550i": "550i", "328i": "328i"},
+         "toyota": {"4runner": "4Runner"}, "chrysler": {"fifthavenue": "Fifth Avenue"}}
+for make, model, dec, want in [
+    # JTEBU5JR0D5116438 — the reported Toyota "Audi A3" is a 2013 4Runner
+    ("Toyota", "Audi A3", _dec("TOYOTA", "4Runner"), ("Toyota", "4Runner", True, "vin")),
+    # WBAVC535X7FZ81105 — Acura "Bmw Rl" decodes as a BMW 328i: the VIN wins
+    ("Acura", "Bmw Rl", _dec("BMW", "328i", "3-Series"), ("BMW", "328i", True, "vin")),
+    ("Acura", "Volvo El", _dec("VOLVO", "V70"), ("Volvo", "V70", True, "vin")),
+    ("Audi", "Volvo S4", _dec("VOLVO", "S40"), ("Volvo", "S40", True, "vin")),
+    ("Audi", "Ford Audi Allroad", _dec("FORD", "F-250"), ("Ford", "F-250", True, "vin")),
+    ("Chrysler", "Audi 4000", _dec("CHRYSLER", "FIFTH AVENUE"), ("Chrysler", "Fifth Avenue", True, "vin")),
+    ("Chrysler", "Mazda 1500 Pickup", _dec("MAZDA", "Mazda6"), ("Mazda", "Mazda6", True, "vin")),
+    ("Dodge", "Audi Cabriolet", _dec("DODGE", "Ram", "DR (1500)"), ("Dodge", "Ram 1500", True, "vin")),
+    # KMHEC4A40FA137265 — filed Alfa Romeo, VIN is a Hyundai Sonata
+    ("Alfa Romeo", "Hyundai Alfa-Romeo 4c", _dec("HYUNDAI", "Sonata"), ("Hyundai", "Sonata", True, "vin")),
+    ("BMW", "Hyundai 550i", _dec("HYUNDAI", "Elantra"), ("Hyundai", "Elantra", True, "vin")),
+    ("Volvo", "Lexus Ls600Hl", _dec("VOLVO", "S60"), ("Volvo", "S60", True, "vin")),
+    # GM twins: VIN confirms the row's make -> untouched; VIN names the twin -> follow it
+    ("GMC", "Chevrolet 1500 Pickup", _dec("GMC", "Sierra", "1/2 Ton"), ("GMC", "Chevrolet 1500 Pickup", True, "twin")),
+    ("Chevrolet", "Gmc Suburban 1500", _dec("GMC", "Suburban", "1/2 Ton Nominal"), ("GMC", "Suburban 1500", True, "vin")),
+    ("GMC", "Chevrolet 1500 Pickup", None, ("GMC", "Chevrolet 1500 Pickup", True, "")),
+    # decode contradicts both makes -> not a basis; no known model -> no pick
+    ("Toyota", "Audi A3", _dec("HONDA", "Civic"), ("Toyota", "Audi A3", False, "nopick")),
+    # multi-model decode ('750i, Alpina B7') is not confident
+    ("BMW", "Alfa-Romeo 4C", _dec("BMW", "750i, Alpina B7"), ("BMW", "Alfa-Romeo 4C", False, "nopick")),
+    # no decode: strip only onto a known model of the row's make
+    ("Acura", "Bmw Rl", None, ("Acura", "RL", True, "strip")),
+    ("BMW", "Hyundai 550i", None, ("BMW", "550i", True, "strip")),
+    ("Toyota", "Audi A3", None, ("Toyota", "Audi A3", False, "nopick")),
+    ("Acura", "Volvo El", None, ("Acura", "Volvo El", False, "nopick")),
+    # real names, never touched
+    ("Dodge", "Mini Ram", None, ("Dodge", "Mini Ram", True, "")),
+    ("Dodge", "Mini Ram", _dec("DODGE", "Mini Ram"), ("Dodge", "Mini Ram", True, "")),
+    ("Dodge", "Ram 1500", None, ("Dodge", "Ram 1500", True, "")),
+    ("Alfa Romeo", "Alfa-Romeo 4c", None, ("Alfa Romeo", "Alfa-Romeo 4c", True, "")),
+    ("Toyota", "4Runner", _dec("TOYOTA", "4Runner"), ("Toyota", "4Runner", True, "")),
+]:
+    got = FM(make, model, dec, KNOWN)
+    check(f"{make} {model!r} dec={dec and dec['make']+' '+dec['model']} -> {want}", got == want, str(got))
+
+# Toyota picker noise: canon folds (stated basis in _MODEL_CANON_BY_MAKE), VIN-only 'EL',
+# Scion filed under Toyota moves by the VIN decode only when the model agrees.
+for model, want in [("Rav-4 Sport", "RAV4"), ("Prius Awd-E", "Prius"), ("T100 Pickup", "T100"),
+                    ("Celica Supra", "Celica Supra"), ("Corona", "Corona"), ("EL", "EL")]:
+    check(f"Toyota {model!r} -> {want!r}", N(model, "Toyota") == want, N(model, "Toyota"))
+check("Toyota 'EL' + VIN 4Runner -> 4Runner", R("EL", "Toyota", _dec("TOYOTA", "4Runner")) == "4Runner")
+check("Toyota 'EL' no decode stays", R("EL", "Toyota", None) == "EL")
+check("Toyota 'tC' + VIN 'Scion tC' -> Scion", js._scion_by_vin("Toyota", "tC", _dec("TOYOTA", "Scion tC")) == "Scion")
+check("Toyota 'xD' + VIN 'Scion xD' -> Scion", js._scion_by_vin("Toyota", "xD", _dec("TOYOTA", "Scion xD")) == "Scion")
+check("Toyota 'tC' + VIN 'Scion xB' stays Toyota", js._scion_by_vin("Toyota", "tC", _dec("TOYOTA", "Scion xB")) is None)
+check("Toyota 'tC' no decode stays Toyota", js._scion_by_vin("Toyota", "tC", None) is None)
+# saved watches under the folded spellings keep matching on the scan's alert path
+for wmodel, cmodel in [("Rav-4 Sport", "RAV4"), ("Prius Awd-E", "Prius"), ("T100 Pickup", "T100")]:
+    check(f"scan alert: watch Toyota/{wmodel!r} matches car {cmodel!r}",
+          _scan_alert_matches("Toyota", wmodel, "Toyota", N(wmodel, "Toyota")))
+
+# end to end through enrich_vehicles: flag reaches the payload, models.json split
+cars = [{"id": i, "vin": "", "year": 2010, "make": "Acura", "model": "RL"} for i in range(3)] + [
+    {"id": 10, "vin": "", "year": 2007, "make": "Acura", "model": "Bmw Rl"},
+    {"id": 11, "vin": "", "year": 2013, "make": "Toyota", "model": "Audi A3"}]
+js.enrich_vehicles(cars)
+by = {c["id"]: c for c in cars}
+check("enrich: Acura 'Bmw Rl' (no decode, RL known x3) -> RL", by[10]["model"] == "RL" and not by[10].get("_noPick"))
+check("enrich: Toyota 'Audi A3' (no decode) keeps text, flagged", by[11]["model"] == "Audi A3" and by[11].get("_noPick"))
+check("enrich: stats count by rule", js.FOREIGN_MAKE_STATS.get("strip") == 1 and js.FOREIGN_MAKE_STATS.get("nopick") == 1,
+      str(js.FOREIGN_MAKE_STATS))
+ents = js.output_json(cars, only_matches=False)
+check("output_json: noPick only on the flagged row", [e["id"] for e in ents if e.get("noPick")] == [11])
+
+import json as _json, tempfile as _tf
+pl = js.compact_inventory_v2(ents)
+check("compact payload: noPickModels lists the flagged pair", pl.get("noPickModels") == {"Toyota": ["Audi A3"]},
+      str(pl.get("noPickModels")))
+_old_dd = js.DATA_DIR
+with _tf.TemporaryDirectory() as td:
+    js.DATA_DIR = Path(td)
+    try:
+        js._write_models_json(pl)
+        mj = _json.loads((Path(td) / "models.json").read_text())
+    finally:
+        js.DATA_DIR = _old_dd
+check("models.json: 'Audi A3' not under makes.Toyota", "Audi A3" not in mj["makes"].get("Toyota", {}), str(mj["makes"]))
+check("models.json: 'Audi A3' under noPick.Toyota", mj["noPick"].get("Toyota") == {"Audi A3": 1}, str(mj.get("noPick")))
+check("models.json: Acura RL counted 4", mj["makes"]["Acura"].get("RL") == 4, str(mj["makes"]))
+
 check("app and worker mirror tables agree (same keys, same values modulo case)",
       all(set(APP.get(m, {})) == set(SRV.get(m, {})) and
           all(APP[m][k].lower() == SRV[m][k] for k in APP.get(m, {})) for m in set(APP) | set(SRV)),
