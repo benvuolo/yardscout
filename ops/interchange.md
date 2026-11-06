@@ -1586,3 +1586,37 @@ Open:
 - Own-page listing still cannot tell a platform-wide diagram from real
   fitment on a site that prints every twin's rows without a division note.
   The spec 11.4 audit sample should check visually distinct twins first.
+
+## Aftermarket shipped for the six approved pairs, 2026-11-06 ~14:50 UTC (session_016ZzJfLB9KQDQ64RoN6T9sX)
+
+- **Approval:** owner decision recorded by the hub in ops/hub.md (7ae3af1).
+  Aftermarket on only for mazda/starter, mitsubishi/starter,
+  mopar/alternator, mopar/starter, nissan/starter, volvo/alternator. Every
+  gap make stays off, including mopar's Plymouth and Fiat.
+- **File:** `groups/aftermarket/dbelectrical.json`, built by
+  `groups_am.py --ship …` (`ship()`; constants `SHIP_PAIRS`,
+  `SHIP_OFF_MAKES`). A refined sub-group ships only if every car's make
+  maps (policy.NAMESPACES) to an approved pair and none is a gap make.
+- **Slimmed:** id, cat, tier, src, label, unit, amps, trans, note (max 485
+  chars), apps, retrieved. 747 groups, 483 KB. Skipped: 4,500 not
+  eligible, 379 gap make, 42 single vehicle-year.
+- **Payload** (`build_interchange_files`): amStatus "ok … 747 groups
+  (likely only)", 0 refused. Lazy files: alternator 190 KB (289 am
+  groups), starter 254 KB (458), both under the 1.3 MB budget.
+- **Application rows by make:**
+  - alternator: Dodge 622, Chrysler 389, Volvo 136, Jeep 73, Ram 9, Eagle 8.
+  - starter: Dodge 550, Nissan 526, Mitsubishi 185, Chrysler 168, Jeep 153,
+    Mazda 111, Infiniti 82, Eagle 38, Ram 21.
+- **Lot cars with a shipped donor:**
+  - alternator: Dodge 11,022, Chrysler 3,821, Jeep 3,783, Volvo 1,632,
+    Ram 181, Eagle 4.
+  - starter: Nissan 20,518, Dodge 19,802, Jeep 9,254, Chrysler 9,233,
+    Mazda 4,647, Infiniti 2,346, Mitsubishi 2,231, Ram 469, Eagle 9.
+- **Tests:** test_groups_am 42/42 (+5 ship checks), test_dbelectrical
+  31/31, curation_tests 15/15 files, oem_fitment tests 29/29, scraper tests
+  19/19, backend/test/pf_guards_unit.mjs all pass.
+- **test_lazy_payload change:** its gate check is split. The aftermarket
+  half now asserts "only dbelectrical.json, only approved pairs, no gap
+  make". The `groups/<ns>.json` half is unchanged, for
+  session_016ZzJfMapNmKpMbuoJzVupB to update with its own commit. I did not
+  touch its files.
