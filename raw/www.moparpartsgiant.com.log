@@ -2597,3 +2597,172 @@
 11:58:18 chain-unlinked bumper-front 1 numbers named by 5073002AB, no catalog link: 5073002AC
 11:58:18 chain-unlinked bumper-front 1 numbers named by 55077103AB, no catalog link: 55077946AB
 12:02:50 time budget reached records=3294
+12:03:02 start site=www.moparpartsgiant.com mode=worklist tiers=['A', 'B'] records=3294 list_lines=1416 year_lines=121 url_index=9125
+12:03:02 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=3294 errors=23
+12:03:02 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Stratus [1996, 2008] seeds=[2006] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Dakota [1987, 1996] seeds=[1992] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Magnum [1978, 2008] seeds=[2005] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Ram Van [1966, 2003] seeds=[1999] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Grand Caravan [1988, 2000] seeds=[2000] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Aspen [2007, 2009] seeds=[2007] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Ram 2500 [1979, 2002] seeds=[2001] records=3294 errors=23
+12:03:02 seg done tier=A Dodge 1500 Pickup [1995, 2023] seeds=[2002] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler 300C [2005, 2018] seeds=[2006] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Ram 2500 [2003, 2009] seeds=[2003] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Challenger [2009, 2014] seeds=[2010] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Intrepid [1993, 2004] seeds=[2004] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Caravan/Grand Caravan [1996, 2008] seeds=[2005] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Concorde [1993, 2004] seeds=[2002] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Sebring [1992, 2000] seeds=[2000] records=3294 errors=23
+12:03:02 seg done tier=A Dodge D1500 [1995, 2015] seeds=[2004] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Ram [2002, 2008] seeds=[2002] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler 300M [1999, 2005] seeds=[2002] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Ram [1961, 2001] seeds=[2001] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Ram Wagon [1981, 2002] seeds=[1994] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Voyager [1999, 2021] seeds=[2003] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Pacifica [2017, 2022] seeds=[2017] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Caravan [1999, 2018] seeds=[2012] records=3294 errors=23
+12:03:02 seg done tier=A Plymouth Grand Voyager [1989, 2000] seeds=[1999] records=3294 errors=23
+12:03:02 seg done tier=A Plymouth Voyager [1987, 2003] seeds=[1998] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler Crossfire [2004, 2008] seeds=[2004] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Challenger [2015, 2023] seeds=[2015] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler LeBaron [1980, 1995] seeds=[1995] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler LHS [1994, 2001] seeds=[2000] records=3294 errors=23
+12:03:02 seg done tier=A Dodge D150 [1964, 1998] seeds=[1985] records=3294 errors=23
+12:03:02 seg done tier=A Ram ProMaster City [2015, 2022] seeds=[2015] records=3294 errors=23
+12:03:02 seg done tier=A Chrysler New Yorker [1970, 1996] seeds=[1990] records=3294 errors=23
+12:03:02 seg done tier=A Ram 2500 [2011, 2024] seeds=[2011] records=3294 errors=23
+12:03:02 seg done tier=A Ram C/V [2012, 2015] seeds=[2013] records=3294 errors=23
+12:03:02 seg done tier=A Ram ProMaster 1500 [2014, 2024] seeds=[2014] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Ram Van 1500 [1986, 2003] seeds=[2001] records=3294 errors=23
+12:03:02 seg done tier=A Dodge Sprinter 2500 [2002, 2008] seeds=[2004] records=3294 errors=23
+12:03:02 seg done tier=B Dodge Ram 1500 [1971, 2018] seeds=[2002] records=3294 errors=23
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172798AC, no catalog link: 5172798AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172799AC, no catalog link: 5172799AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172800AC, no catalog link: 5172800AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172801AC, no catalog link: 5172801AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172804AC, no catalog link: 5172804AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172805AC, no catalog link: 5172805AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172806AC, no catalog link: 5172806AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172813AC, no catalog link: 5172813AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172814AC, no catalog link: 5172814AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 5172815AC, no catalog link: 5172815AG
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 68061623AB, no catalog link: 68061623AF
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 68064106AB, no catalog link: 68064106AF
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 68064107AB, no catalog link: 68064107AF
+12:05:02 chain-unlinked gauge-cluster 1 numbers named by 68065103AB, no catalog link: 68065103AF
+12:05:18 chain-unlinked ignition-coils 1 numbers named by 56032520AE, no catalog link: 56032520AF
+12:06:01 chain-unlinked ignition-coils 1 numbers named by 4606869AB, no catalog link: 4606869AD
+12:06:10 chain-unlinked radiator 1 numbers named by 4677755AD, no catalog link: 4677755AE
+12:06:42 chain-unlinked door-front 1 numbers named by 4894916AB, no catalog link: 4894916AA
+12:06:42 chain-unlinked door-front 1 numbers named by 4894917AB, no catalog link: 4894917AA
+12:07:14 chain-unlinked door-rear 4 numbers named by 5020698AG, no catalog link: 5020698AE, 5020698AC, 5020698AF, 5020698AD
+12:07:14 chain-unlinked door-rear 5 numbers named by 5020699AG, no catalog link: 5020699AC, 5020699AB, 5020699AD, 5020699AF, 5020699AE
+12:07:46 chain-unlinked hood 1 numbers named by 4894793AD, no catalog link: 4894793AH
+12:08:26 chain-unlinked bumper-front 1 numbers named by 1AG01TZZAB, no catalog link: 1AG01TZZAC
+12:08:26 chain-unlinked bumper-front 1 numbers named by 1AG02TZZAA, no catalog link: 1AG02TZZAC
+12:09:22 chain-unlinked bumper-rear 1 numbers named by 68041471AC, no catalog link: 68041471AD
+12:09:22 chain-unlinked bumper-rear 1 numbers named by 68041478AC, no catalog link: 68041478AD
+12:09:22 chain-unlinked bumper-rear 1 numbers named by 68041480AC, no catalog link: 68041480AD
+12:09:22 chain-unlinked bumper-rear 1 numbers named by 68048158AC, no catalog link: 68048158AE
+12:09:22 chain-unlinked bumper-rear 1 numbers named by 68048162AB, no catalog link: 68048162AD
+12:10:02 chain-unlinked liftgate 1 numbers named by 5054266AB, no catalog link: 5054266AD
+12:10:58 chain-unlinked gauge-cluster 3 numbers named by 68376131AB, no catalog link: 68241683AA, 68376131AA, 56054921AA
+12:11:14 chain-unlinked ignition-coils 1 numbers named by 5149168AI, no catalog link: 5149168AJ
+12:11:30 chain-unlinked radiator 3 numbers named by 4677755AE, no catalog link: 4677755AA, 4677755AF, 4677751AA
+12:12:18 chain-unlinked door-front 1 numbers named by 4894916AI, no catalog link: 4894916AK
+12:12:18 chain-unlinked door-front 1 numbers named by 4894917AI, no catalog link: 4894917AK
+12:12:58 chain-unlinked door-rear 1 numbers named by 5020698AO, no catalog link: 5020698AQ
+12:12:58 chain-unlinked door-rear 1 numbers named by 5020699AO, no catalog link: 5020699AQ
+12:13:22 chain-unlinked hood 1 numbers named by 4589880AF, no catalog link: 4589880AG
+12:13:54 chain-unlinked bumper-front 1 numbers named by 68088966AA, no catalog link: 68088966AB
+12:14:18 chain-unlinked bumper-rear 1 numbers named by 68125724AB, no catalog link: 68125724AC
+12:14:18 chain-unlinked bumper-rear 1 numbers named by 68125725AB, no catalog link: 68125725AC
+12:14:50 chain-unlinked grille 1 numbers named by 68100689AC, no catalog link: 68100689AB
+12:15:06 chain-unlinked liftgate 1 numbers named by 68078085AD, no catalog link: 68078085AE
+12:15:06 nav-fail Dodge Grand Caravan 2023: ValueError: no 2023 catalog for Dodge Grand Caravan (dodge-['grand_caravan'])
+12:15:06 seg done tier=B Dodge Grand Caravan [2008, 2024] seeds=[2010, 2019, 2023] records=3344 errors=24
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 56054491AF, no catalog link: 56054491AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 56054492AF, no catalog link: 56054492AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 56054493AF, no catalog link: 56054493AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 56054494AF, no catalog link: 56054494AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 56054630AH, no catalog link: 56054630AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 56054631AH, no catalog link: 56054631AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 56054632AH, no catalog link: 56054632AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 56054634AH, no catalog link: 56054634AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 68105897AF, no catalog link: 68105897AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 68105898AF, no catalog link: 68105898AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 68105899AF, no catalog link: 68105899AL
+12:17:06 chain-unlinked gauge-cluster 1 numbers named by 68105900AF, no catalog link: 68105900AL
+12:17:22 chain-unlinked ignition-coils 1 numbers named by 68242286AA, no catalog link: 68242286AB
+12:17:38 chain-unlinked radiator 1 numbers named by 68197299AA, no catalog link: 68197299AC
+12:18:18 chain-unlinked door-front 1 numbers named by 68248176AB, no catalog link: 68248176AC
+12:18:18 chain-unlinked door-front 1 numbers named by 68248177AB, no catalog link: 68248177AC
+12:18:50 chain-unlinked door-rear 1 numbers named by 68248178AB, no catalog link: 68248178AC
+12:18:50 chain-unlinked door-rear 1 numbers named by 68248179AB, no catalog link: 68248179AC
+12:19:14 chain-unlinked hood 1 numbers named by 68143614AA, no catalog link: 68143614AC
+12:20:10 chain-unlinked bumper-front 1 numbers named by 1WZ18TZZAD, no catalog link: 1WZ18TZZAE
+12:20:10 chain-unlinked bumper-front 1 numbers named by 5NH87TZZAD, no catalog link: 5NH87TZZAC
+12:20:10 chain-unlinked bumper-front 1 numbers named by 5SH88TZZAB, no catalog link: 5SH88TZZAC
+12:20:58 chain-unlinked bumper-rear 1 numbers named by 1UW74TZZAD, no catalog link: 1UW74TZZAE
+12:20:58 chain-unlinked bumper-rear 1 numbers named by 1UW73TZZAD, no catalog link: 1UW73TZZAC
+12:20:58 chain-unlinked bumper-rear 1 numbers named by 5NH88TZZAD, no catalog link: 5NH88TZZAC
+12:20:58 chain-unlinked bumper-rear 1 numbers named by 5NH89TZZAD, no catalog link: 5NH89TZZAE
+12:20:58 chain-unlinked bumper-rear 1 numbers named by 5NH90TZZAD, no catalog link: 5NH90TZZAE
+12:21:54 chain-unlinked grille 1 numbers named by 68202989AB, no catalog link: 68202989AC
+12:21:54 chain-unlinked grille 1 numbers named by 68202988AB, no catalog link: 68202988AC
+12:21:54 chain-unlinked grille 1 numbers named by 68200289AA, no catalog link: 68302663AA
+12:21:54 chain-unlinked grille 1 numbers named by 68110263AA, no catalog link: 68302662AA
+12:22:18 nav-fail Chrysler 200 1999: ValueError: no 1999 catalog for Chrysler 200 (chrysler-['200'])
+12:22:18 seg done tier=B Chrysler 200 [1979, 2022] seeds=[2015, 1999] records=3380 errors=25
+12:22:58 chain-unlinked gauge-cluster 1 numbers named by 56046750AB, no catalog link: 56046750AG
+12:22:58 chain-unlinked gauge-cluster 1 numbers named by 56046751AB, no catalog link: 56046751AG
+12:23:14 chain-unlinked ignition-coils 1 numbers named by 4606824AC, no catalog link: 4606824AB
+12:23:38 chain-unlinked radiator 1 numbers named by 68038238AA, no catalog link: 68038238AB
+12:24:10 chain-unlinked door-front 1 numbers named by 68067470AD, no catalog link: 68067470AI
+12:24:10 chain-unlinked door-front 1 numbers named by 68067471AD, no catalog link: 68067471AI
+12:24:50 chain-unlinked door-rear 1 numbers named by 68067472AB, no catalog link: 68067472AI
+12:24:50 chain-unlinked door-rear 1 numbers named by 68067473AB, no catalog link: 68067473AI
+12:25:14 chain-unlinked hood 1 numbers named by 5076777AE, no catalog link: 5076777AD
+12:25:54 chain-unlinked bumper-front 1 numbers named by 1TX73TZZAC, no catalog link: 5YB55TZZAB
+12:25:54 chain-unlinked bumper-front 1 numbers named by 1SW02TZZAB, no catalog link: 1SW02TZZAC
+12:26:42 chain-unlinked bumper-rear 1 numbers named by 1TY36TZZAA, no catalog link: 1TY36TZZAF
+12:26:42 chain-unlinked bumper-rear 1 numbers named by 1TY37TZZAA, no catalog link: 1TY37TZZAF
+12:26:42 chain-unlinked bumper-rear 1 numbers named by 1SU15TZZAB, no catalog link: 1SU15TZZAD
+12:26:42 chain-unlinked bumper-rear 1 numbers named by 1SU16TZZAB, no catalog link: 1SU16TZZAG
+12:26:42 chain-unlinked bumper-rear 1 numbers named by 68034219AG, no catalog link: 68034219AL
+12:27:22 chain-unlinked grille 1 numbers named by 1SU84SZ0AB, no catalog link: 1SU84SZ0AC
+12:27:22 chain-unlinked grille 1 numbers named by 1VU67TZZAB, no catalog link: 1VU67TZZAC
+12:27:22 chain-unlinked grille 1 numbers named by 55000808AA, no catalog link: 55000808AC
+12:27:22 chain-unlinked grille 1 numbers named by 68079839AA, no catalog link: 68079839AC
+12:27:46 chain-unlinked liftgate 1 numbers named by 1CZ91TZZAH, no catalog link: 1CZ91TZZAI
+12:27:46 chain-unlinked liftgate 1 numbers named by 1RJ85TZZAA, no catalog link: 1RJ85TZZAB
+12:27:46 seg done tier=B Dodge Journey [2009, 2020] seeds=[2012] records=3403 errors=25
+12:31:14 chain-unlinked ignition-coils 1 numbers named by 56032520AC, no catalog link: 56032520AF
+12:32:34 STOPPED: www.moparpartsgiant.com refused or challenged (HTTP 403); domain stopped for this program
