@@ -60,6 +60,14 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
 - Blocker for TestFlight 30: main's data has no photoSources until the next
   scan with the new scraper. Privacy policy should say images load from yards' servers.
 
+### Round 4: Parts tab (2026-11-06 night; owner on TestFlight 30: "the parts tab seems lack luster")
+- Branch head 4239892 (merged main; shell jh-v153). Screenshots only, no build requested yet.
+- Start: your car (remembered) → part by name or 8 tiles → one-line search area → one button.
+  Donors use the app's car card (photo, row plate, chip up front, "Why it fits",
+  pull sheet, Details); Nearest/Newest sort; "Watch for another <model>" via addQuickWatch.
+- Guards unchanged; pf_guards_unit now loads the real donor card. Tests: ui_no_truncation
+  672/672 (28 screens), interchange/pf_ux/yaris pass, part_finder known M3 only.
+
 ## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).
