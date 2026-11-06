@@ -1099,3 +1099,10 @@ Blocked / not done:
   candidate needs a different operator, and the basis goes here before any
   fetch.py ALLOWED change.
 - 41 hand groups: waiting on the parts session (ops/parts.md).
+
+- 2026-11-06 (hub route from parts, d6e059c): `toyota-2az/alternator#1`
+  checked against oem-raw and the lots. The 27060-37041 "Japan Built" split is
+  1.8L (its predecessor 37040 prints ZRE142 only; every 2AZ number prints
+  AZE141; every Japan-built 2009-10 Corolla on the lots decodes 1.8L).
+  No change to ENGINE_FAMILIES or test_interchange P0.5. Evidence is in
+  ops/parts.md under the item.

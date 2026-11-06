@@ -232,6 +232,21 @@ published for all members). Against the OEM splits:
   asserts "2009 Matrix <-> 2010 Corolla 2AZ alternator stays Verified", which
   is interchange-owned. Handed to the hub to route to the interchange
   session.
+  - **Interchange check (2026-11-06): the split is 1.8L only; group left
+    as is, P0.5 test unchanged.** oem-raw (toyotapartsnow, list page
+    `/parts-list/2010-toyota-corolla/charging-starting/alternator`):
+    27060-37041 "Japan Built" is a current-layout row printing every trim
+    (Base, LE, S, XLE, XRS) and both engines, i.e. the model-level list. Its
+    own predecessor 27060-37040 (same page, catalog-only layout, which prints
+    chassis codes) is "1.8L L4 | 2ZRFE; ZRE142" only. Every 2AZ number on the
+    Corolla/Matrix pages names chassis AZE141: 27060-0H111 (Corolla 09-13,
+    Matrix 09-14; also the group's stated basis 27060-0H111-84), 0T041,
+    0T040, 0H110. Lots (inventory_live + vin_decodes, 2026-11-06): 569
+    2009-10 Corollas; all 98 decoded Japan-built (VIN `J…`) cars are 1.8L,
+    and all 5 decoded 2.4L cars are North-American built (VIN `1…`/`2…`).
+    So "Japan Built" separates 1.8L cars, which this group does not contain.
+    Reopen if a Japan-built 2.4L Corolla, or a 37041 row naming AZE141,
+    turns up.
 
 ## How to measure
 
