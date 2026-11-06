@@ -317,6 +317,19 @@ const SCREENS = [
     await page.evaluate(() => { const r = document.querySelector('.pf-row-card.pf-likely'); if (r) r.scrollIntoView({ block: 'center' }); });
   }],
   ['alerts', async (page) => { await tab(page, 'alerts'); }],
+  ['alerts-hits', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      const c = document.querySelector('#live-grid .car-card[data-vkey]');
+      const v = liveInventory.find(x => vehicleKey(x) === c.dataset.vkey);
+      const b = document.createElement('button'); b.dataset.make = v.make; b.dataset.model = v.model;
+      watchFromCard(b);   // the card's own quick-watch path (shows the toast too)
+    });
+    await settle(page, 300);
+    await page.evaluate(() => document.querySelector('.tab[data-tab="alerts"]').click());
+    await settle(page, 600);
+    await page.evaluate(() => { const g = document.getElementById('alert-watchlist'); if (g) g.scrollIntoView(); });
+  }],
   ['pull-sheet', async (page) => {
     await tab(page, 'live');
     const ks = await firstKeys(page, 3);

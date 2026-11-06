@@ -647,6 +647,17 @@
   <p class="prices-footnote">Prices come from each chain&rsquo;s own published price list and are per part category. Entry fees, taxes, core charges (refundable deposits, shown where the chain lists them) and environmental fees vary by yard.</p>
 </div>
 
+<!-- CAR SCREEN (pull-sheet detail): filled by renderCarDetail() in app.js -->
+<div id="car-detail" role="dialog" aria-modal="true" aria-labelledby="car-detail-title" aria-hidden="true">
+  <div class="cd-top">
+    <button type="button" id="car-detail-back" class="cd-back" aria-label="Back to the list"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg><span>Back</span></button>
+  </div>
+  <div class="cd-scroll" id="car-detail-scroll">
+    <div class="cd-body" id="car-detail-body"></div>
+  </div>
+  <div class="cd-actions" id="car-detail-actions"></div>
+</div>
+
 <!-- PRO UPGRADE SHEET (fake door: waitlist only, no payments yet) -->
 <div id="upgrade-backdrop"></div>
 <div id="upgrade-sheet">
