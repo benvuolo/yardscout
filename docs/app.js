@@ -8850,6 +8850,7 @@ async function refreshNativeIapUi() {
       } catch (e) { /* retry */ }
       await new Promise((res) => setTimeout(res, 2500));
     }
+    { const rd = $id('ent-redeem'); if (rd) rd.open = true; }   // the message lives inside the one-tap row
     setMsg($id('ent-status'),
       'Payment received. Activation can take a minute — use "Already have Pro?" with your checkout email if it doesn\u2019t unlock shortly.', true);
   })();

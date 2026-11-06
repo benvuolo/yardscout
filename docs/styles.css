@@ -2720,3 +2720,6 @@ header h1 { flex-wrap: wrap; }
 .price-amt { white-space: normal; text-align: right; }
 select { padding-left: 12px; padding-right: 34px; background-position: right 12px center; }
 .panel, .info-box { padding: var(--s4); }
+.filter-count { color: var(--on-accent); }
+.zip-banner-form input, .waitlist-row input, .compare-input-wrap .search-box { min-width: 0; width: 100%; }
+#car-detail:not(.open) { transform: none; }
